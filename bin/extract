@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+
+$:.unshift File.expand_path(File.join(__dir__, '..', 'lib'))
+require 'combo'
+
+src = ARGV[0]
+dst = ARGV[1]
+
+rom = Combo::Rom.new(src)
+extractor = Combo::Extractor.new(rom)
+extractor.run!(dst)

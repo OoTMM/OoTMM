@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+
+$:.unshift File.expand_path(File.join(__dir__, '..', 'lib'))
+require 'combo'
+
+path_rom = ARGV[0]
+path_root = ARGV[1]
+
+rom = Combo::Rom.new(ARGV[0], true)
+rom.init(1024 * 1024 * 64)
+packer = Combo::Packer.new(rom, path_root)
+packer.run!
