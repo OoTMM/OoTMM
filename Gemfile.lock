@@ -1,0 +1,13 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    yaz0 (0.3.0)
+
+PLATFORMS
+  x64-mingw32
+
+DEPENDENCIES
+  yaz0 (~> 0.3)
+
+BUNDLED WITH
+   2.1.4

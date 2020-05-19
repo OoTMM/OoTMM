@@ -1,4 +1,5 @@
 *.z64
 
+/.bundle
+/vendor
 /build
-/raw
