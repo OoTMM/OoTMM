@@ -28,7 +28,7 @@ end
 
 file_data = JSON.parse(File.read(File.join(ROOT, 'data', 'oot.json'))).freeze
 
-rom = Combo::Rom.new(DST, true)
+rom = Combo::File.new(DST, true)
 rom.init(64 * 1024 * 1024)
 
 paddr_base = 0
@@ -65,6 +65,12 @@ file_data.each do |f|
     paddr_base = 0x0000d390
   end
 end
+
+puts "Adding Majora's Mask"
+rom.load(1024 * 1024 * 32, File.binread(File.join(ROOT, 'roms', 'MM.z64')))
+
+puts "Adding the custom payload"
+rom.load(0x3FC0000, File.binread(File.join(ROOT, 'build', 'payload')))
 
 puts "Fixing dmadata"
 rom.write32(0x7430 + 0x10 * 2 + 0x00, 0x00007430)

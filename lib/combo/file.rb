@@ -1,6 +1,6 @@
 require 'combo/common'
 
-class Combo::Rom
+class Combo::File
   def initialize(path, write=false)
     @file = File.open(path, write ? 'wb+' : 'rb+')
   end
@@ -21,6 +21,10 @@ class Combo::Rom
     @file.write([value].pack('L>'))
   end
 
+  def write32_inplace(value)
+    @file.write([value].pack('L>'))
+  end
+
   def dump(addr, len)
     @file.seek(addr, :SET)
     @file.read(len)
@@ -35,6 +39,14 @@ class Combo::Rom
     sums = checksum()
     write32(0x10, sums[0])
     write32(0x14, sums[1])
+  end
+
+  def seek(addr)
+    @file.seek(addr, :SET)
+  end
+
+  def tell
+    @file.tell
   end
 
   private

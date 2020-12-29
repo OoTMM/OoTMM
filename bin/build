@@ -1,0 +1,35 @@
+#!/usr/bin/env ruby
+
+require 'rubygems'
+require 'bundler/setup'
+$:.unshift File.expand_path(File.join(__dir__, '..', 'lib'))
+
+require 'combo'
+require 'fileutils'
+
+ROOT = File.expand_path(File.join(__dir__, '..'))
+DST = File.join(ROOT, 'build')
+
+Dir.chdir(DST)
+
+# Build the payload
+PAYLOAD_BASE = 0x93FC0000
+CODE_BASE = 0x800110A0
+
+FileUtils.touch 'payload'
+Combo::Patcher.patch("payload") do
+  PAYLOAD_SCENE_CTOR = PAYLOAD_BASE + tell
+  asm(PAYLOAD_SCENE_CTOR) do
+    # Forward the call to the real scene ctor
+    la :at, 0x8009a750
+    jr :at
+    nop
+  end
+end
+
+Combo::Patcher.patch("oot/code") do
+  # Replace calls to the scene constructor with calls
+  # to our payload
+  seek(0x800f13e8 - CODE_BASE)
+  write32(PAYLOAD_SCENE_CTOR)
+end

@@ -2,6 +2,7 @@
 
 require 'rubygems'
 require 'bundler/setup'
+$:.unshift File.expand_path(File.join(__dir__, '..', 'lib'))
 
 require 'json'
 require 'fileutils'

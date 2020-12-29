@@ -1,2 +1,3 @@
 require 'combo/common'
-require 'combo/rom'
+require 'combo/file'
+require 'combo/patcher'
