@@ -20,12 +20,17 @@ class Combo::Assembler
 
   instr :j,    :jtype,   002, [:off]
   instr :jal,  :jtype,   003, [:off]
+  instr :bne,  :itype,   005, [:rs, :rt, :off]
+  instr :andi, :itype,   014, [:rt, :rs, :imm]
   instr :ori,  :itype,   015, [:rt, :rs, :imm]
   instr :xori, :itype,   016, [:rt, :rs, :imm]
   instr :lui,  :itype,   017, [:rt, :imm]
+  instr :lw,   :itype,   043, [:rt, :imm, :rs]
+  instr :sw,   :itype,   053, [:rt, :imm, :rs]
 
   instr :sll,  :special, 000, [:rd, :rt, :sa]
   instr :jr,   :special, 010, [:rs]
+  instr :jalr, :special, 011, [:rd, :rs]
 
   # Pseudo-instructions
   def mov(dst, src)
@@ -78,11 +83,11 @@ class Combo::Assembler
 
     payload = case type
     when :itype
-      (op << 26) | (rs << 21) | (rt << 16) | imm
+      (op << 26) | ((rs & 0x1f) << 21) | ((rt & 0x1f) << 16) | (imm & 0xffff)
     when :jtype
-      (op << 26) | imm
+      (op << 26) | (imm & 0x3ffffff)
     when :special
-      (op) | (sa << 6) | (rd << 11) | (rt << 16) | (rs << 21)
+      (op) | ((sa & 0x1f) << 6) | ((rd & 0x1f) << 11) | ((rt & 0x1f) << 16) | ((rs & 0x1f) << 21)
     end
 
     @file.write32_inplace(payload)

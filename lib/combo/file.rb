@@ -22,7 +22,13 @@ class Combo::File
   end
 
   def write32_inplace(value)
-    @file.write([value].pack('L>'))
+    pos = @file.tell
+    raw = @file.read(4)
+    data = raw.nil? ? nil : raw.unpack('L>')[0]
+    if data != value
+      @file.seek(pos, :SET)
+      @file.write([value].pack('L>'))
+    end
   end
 
   def dump(addr, len)

@@ -67,7 +67,7 @@ file_data.each do |f|
 end
 
 puts "Adding Majora's Mask"
-rom.load(1024 * 1024 * 32, File.binread(File.join(ROOT, 'roms', 'MM.z64')))
+rom.load(1024 * 1024 * 32, File.binread(File.join(ROOT, 'build', 'MM.z64')))
 
 puts "Adding the custom payload"
 rom.load(0x3FC0000, File.binread(File.join(ROOT, 'build', 'payload')))
