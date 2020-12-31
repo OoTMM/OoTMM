@@ -10,13 +10,25 @@ require 'json'
 require 'fileutils'
 require 'yaz0'
 
+GAMES = [
+  {
+    name: 'OoT',
+    base: 0x00000000,
+    dmadata: [0x00007430, 0x0000d390, 0x00007430, 0x00000000]
+  },
+  {
+    name: 'MM',
+    base: 0x02000000,
+    dmadata: [0x0001C110, 0x000222F0, 0x0001C110, 0x00000000]
+  }
+]
+
 ROOT = File.expand_path(File.join(__dir__, '..'))
-SRC = File.join(ROOT, 'build', 'oot')
 DST = File.join(ROOT, 'build', 'OoTMM.z64')
 
 def get_compressed_data(path)
   compressed_path = path + ".yaz0"
-  if FileUtils.uptodate?(compressed_path,[path])
+  if FileUtils.uptodate?(compressed_path, [path])
     return File.binread(compressed_path)
   end
   data = File.binread(path)
@@ -26,57 +38,60 @@ def get_compressed_data(path)
   data
 end
 
-file_data = JSON.parse(File.read(File.join(ROOT, 'data', 'oot.json'))).freeze
-
 rom = Combo::File.new(DST, true)
 rom.init(64 * 1024 * 1024)
 
-paddr_base = 0
+GAMES.each do |game|
+  name = game[:name]
+  base = game[:base]
+  dmadata = game[:dmadata]
 
-file_data.each do |f|
-  index = f["index"]
-  compressed = f["compressed"]
+  file_data = JSON.parse(File.read(File.join(ROOT, 'data', "#{name.downcase}.json"))).freeze
+  src = File.join(ROOT, 'build', name.downcase)
 
-  path = File.join(SRC, f["path"])
-  puts "Packing #{path}"
+  paddr_base = 0
 
-  data = nil
-  if compressed
-    data = get_compressed_data(File.join(SRC, f["path"]))
-  else
-    data = File.binread(path)
+  file_data.each do |f|
+    index = f["index"]
+    compressed = f["compressed"]
+
+    path = File.join(src, f["path"])
+    puts "Packing #{path}"
+
+    data = nil
+    if compressed
+      data = get_compressed_data(File.join(src, f["path"]))
+    else
+      data = File.binread(path)
+    end
+    rom.load(base + paddr_base, data)
+    size = (data.size + 15) & 0xfffffff0
+
+    rom.write32(base + dmadata[0] + 0x10 * index + 0x00, f["vstart"])
+    rom.write32(base + dmadata[0] + 0x10 * index + 0x04, f["vend"])
+    rom.write32(base + dmadata[0] + 0x10 * index + 0x08, paddr_base)
+
+    if compressed
+      rom.write32(base + dmadata[0] + 0x10 * index + 0x0c, paddr_base + size)
+    else
+      rom.write32(base + dmadata[0] + 0x10 * index + 0x0c, 0)
+    end
+
+    paddr_base += size
+    if f["index"] == 1
+      # Skip DMA data
+      paddr_base = dmadata[1]
+    end
   end
-  rom.load(paddr_base, data)
-  size = (data.size + 15) & 0xfffffff0
 
-  rom.write32(0x7430 + 0x10 * index + 0x00, f["vstart"])
-  rom.write32(0x7430 + 0x10 * index + 0x04, f["vend"])
-  rom.write32(0x7430 + 0x10 * index + 0x08, paddr_base)
-
-  if compressed
-    rom.write32(0x7430 + 0x10 * index + 0x0c, paddr_base + size)
-  else
-    rom.write32(0x7430 + 0x10 * index + 0x0c, 0)
-  end
-
-  paddr_base += size
-  if f["index"] == 1
-    # Skip DMA data
-    paddr_base = 0x0000d390
-  end
+  rom.write32(base + dmadata[0] + 0x10 * 2 + 0x00, dmadata[0])
+  rom.write32(base + dmadata[0] + 0x10 * 2 + 0x04, dmadata[1])
+  rom.write32(base + dmadata[0] + 0x10 * 2 + 0x08, dmadata[2])
+  rom.write32(base + dmadata[0] + 0x10 * 2 + 0x0c, dmadata[3])
 end
-
-puts "Adding Majora's Mask"
-rom.load(1024 * 1024 * 32, File.binread(File.join(ROOT, 'build', 'MM.z64')))
 
 puts "Adding the custom payload"
 rom.load(0x3FC0000, File.binread(File.join(ROOT, 'build', 'payload')))
-
-puts "Fixing dmadata"
-rom.write32(0x7430 + 0x10 * 2 + 0x00, 0x00007430)
-rom.write32(0x7430 + 0x10 * 2 + 0x04, 0x0000d390)
-rom.write32(0x7430 + 0x10 * 2 + 0x08, 0x00007430)
-rom.write32(0x7430 + 0x10 * 2 + 0x0c, 0x00000000)
 
 puts "Fixing metadata"
 rom.load(0x20, "OOT+MM COMBO       ")

@@ -84,8 +84,8 @@ Combo::Patcher.patch("oot/code") do
   write32(PAYLOAD_SCENE_CTOR)
 end
 
-Combo::Patcher.patch("MM.z64") do
+Combo::Patcher.patch("mm/boot") do
   # Patch the DMA engine
-  seek(0x80093900 - 0x80080000 + 0x1000)
+  seek(0x80093900 - 0x80080060)
   asm(0) { lui :t7, 0xb200 }
 end
