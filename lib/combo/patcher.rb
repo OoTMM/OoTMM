@@ -1,5 +1,4 @@
 require 'combo/file_buffer'
-require 'combo/assembler'
 
 REGS = [
   :zero, :at,
