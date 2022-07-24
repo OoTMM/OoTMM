@@ -1,6 +1,6 @@
 require 'combo/common'
 
-class Combo::File
+class Combo::FileBuffer
   def initialize(path, write=false)
     @file = File.open(path, write ? 'wb+' : 'rb+')
   end
@@ -45,6 +45,10 @@ class Combo::File
     sums = checksum()
     write32(0x10, sums[0])
     write32(0x14, sums[1])
+  end
+
+  def close
+    @file.close
   end
 
   def seek(addr)

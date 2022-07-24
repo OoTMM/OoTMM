@@ -4,6 +4,7 @@ GEM
     yaz0 (0.3.0)
 
 PLATFORMS
+  ruby
   x64-mingw32
 
 DEPENDENCIES
