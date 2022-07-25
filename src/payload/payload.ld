@@ -1,10 +1,23 @@
 SECTIONS
 {
+  bzero = 0x80002e80;
+  osRecvMesg = 0x80002030;
+  osCreateMesgQueue = 0x80004220;
+  osEPiStartDma = 0x800040c0;
+  osEPiRawReadIo = 0x80005630;
+  osEPiRawWriteIo = 0x80005910;
+
+  PreparePI = 0x80091310;
+  ReadWriteSaveDMA = 0x800913e8;
+
+  __osPiHandle = 0x80006260;
+
   . = 0x80400000;
   .text : {
     *(.text);
     *(.data);
     *(.rodata);
+    *(.bss);
   }
   /DISCARD/ : { *(.*); }
 }
