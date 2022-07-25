@@ -6,6 +6,8 @@ TARGET_OOT_LDSCRIPT := loader_oot.ld
 .PHONY: all
 all: $(TARGET_OOT)
 
+-include $(shell find $(BUILD_DIR) -name '*.d')
+
 $(TARGET_OOT): $(TARGET_OOT_OBJ)
 	@mkdir -p $(dir $@)
 	$(OBJCOPY) -O binary $(TARGET_OOT_OBJ) $@

@@ -8,6 +8,8 @@ TARGET_OOT_LDSCRIPT := payload.ld
 .PHONY: all
 all: $(TARGET_OOT)
 
+-include $(shell find $(BUILD_DIR) -name '*.d')
+
 $(TARGET_OOT): $(TARGET_OOT_ELF)
 	@mkdir -p $(dir $@)
 	$(NM) -f bsd --defined-only $< > $(TARGET_OOT_SYM)
