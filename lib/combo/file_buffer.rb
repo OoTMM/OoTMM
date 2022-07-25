@@ -21,6 +21,11 @@ class Combo::FileBuffer
     @file.write([value].pack('L>'))
   end
 
+  def write8(addr, value)
+    @file.seek(addr, :SET)
+    @file.write([value].pack('C'))
+  end
+
   def write32_inplace(value)
     pos = @file.tell
     raw = @file.read(4)

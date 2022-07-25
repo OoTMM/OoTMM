@@ -1,4 +1,5 @@
 #include <strings.h>
+#include <string.h>
 #include <oot.h>
 
 #define FLASH_BLOCK_SIZE        128

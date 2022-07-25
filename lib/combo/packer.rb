@@ -60,6 +60,9 @@ module Combo::Packer
       rom.write32(base + dmadata[0] + 0x10 * 2 + 0x0c, dmadata[3])
     end
 
+    # Force English, in case of JP rom
+    rom.write8(0x3e, 'E'.ord)
+
     rom.close
   end
 end
