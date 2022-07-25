@@ -31,7 +31,7 @@ class Combo::Patcher
     patch_jump(oot_code(0x800cd3c0), 0x80006600) # Hook InitHeap -> load OoT payload
     @rom.write32(oot_code(0x800f13e8), @sym_oot["comboPatchSceneCtor"])
     patch_lui(mm_ref("boot", 0x80093900 - 0x80080060), :t7, 0xb400) # Rebase MM
-    patch_jump(oot_code(0x80091474), @sym_oot["comboReadWriteFlash"]) # Hook ReadWriteSRAM
+    patch_jump(oot_code(0x80091474), @sym_oot["comboReadWriteFlashHook"]) # Hook ReadWriteSRAM
 
     puts "Fixing metadata"
     @rom.load(0x20, "OOT+MM COMBO       ")

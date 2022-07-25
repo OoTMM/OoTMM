@@ -130,3 +130,8 @@ void comboReadWriteFlash(u32 devAddr, void* dramAddr, u32 size, s32 direction)
     else
         writeFlash(devAddr, dramAddr, size);
 }
+
+void comboReadWriteFlashHook(u32 devAddr, void* dramAddr, u32 size, s32 direction)
+{
+    comboReadWriteFlash(devAddr + 0x20000, dramAddr, size, direction);
+}
