@@ -4,8 +4,16 @@
 
 #include <sys/regdef.h>
 
+#ifdef GAME_OOT
 #define CART_ADDR     0x03fc0000
 #define RAM_ADDR      0x80400000
+#endif
+
+#ifdef GAME_MM
+#define CART_ADDR     0x03fe0000
+#define RAM_ADDR      0x80000000
+#endif
+
 #define PAYLOAD_SIZE  0x00020000
 
 .global _start

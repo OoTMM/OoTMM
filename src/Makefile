@@ -15,3 +15,7 @@ payload:
 .PHONY: loader
 loader:
 	$(MAKE) -C loader
+
+.PHONY: clean
+clean:
+	rm -rf $(BUILD_DIR)/obj $(BUILD_DIR)/ld

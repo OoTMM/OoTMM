@@ -1,0 +1,36 @@
+#ifdef GAME_OOT
+# ifdef LOADER
+#  define BASE_ADDR 0x80006600
+# else
+#  define BASE_ADDR 0x80400000
+# endif
+#endif
+
+#ifdef GAME_MM
+# ifdef LOADER
+#  define BASE_ADDR 0x80000000
+# else
+#  define BASE_ADDR 0x80000000
+# endif
+#endif
+
+SECTIONS
+{
+
+#ifdef GAME_OOT
+# include "link_oot.in"
+#endif
+
+#ifdef GAME_MM
+# include "link_mm.in"
+#endif
+
+  . = BASE_ADDR;
+  .text : {
+    *(.text);
+    *(.data);
+    *(.rodata);
+    *(.bss);
+  }
+  /DISCARD/ : { *(.*); }
+}

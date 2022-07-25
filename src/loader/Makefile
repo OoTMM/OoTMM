@@ -1,17 +1,39 @@
-TARGET_OOT := $(BUILD_DIR)/loader_oot
-TARGET_OOT_SRC := loader_oot.S
-TARGET_OOT_OBJ := $(BUILD_DIR)/obj/loader/loader_oot.o
-TARGET_OOT_LDSCRIPT := loader_oot.ld
+SRC 					:= loader.S
+LDSCRIPT			:= ../link.ld.in
+
+OOT_TARGET 		:= $(BUILD_DIR)/loader_oot
+OOT_OBJ 			:= $(BUILD_DIR)/obj/loader/loader_oot.o
+OOT_LDSCRIPT 	:= $(BUILD_DIR)/ld/loader_oot.ld
+
+MM_TARGET 		:= $(BUILD_DIR)/loader_mm
+MM_OBJ 				:= $(BUILD_DIR)/obj/loader/loader_mm.o
+MM_LDSCRIPT 	:= $(BUILD_DIR)/ld/loader_mm.ld
 
 .PHONY: all
-all: $(TARGET_OOT)
+all: $(OOT_TARGET) $(MM_TARGET)
 
 -include $(shell find $(BUILD_DIR) -name '*.d')
 
-$(TARGET_OOT): $(TARGET_OOT_OBJ)
+$(OOT_TARGET): $(OOT_OBJ)
 	@mkdir -p $(dir $@)
-	$(OBJCOPY) -O binary $(TARGET_OOT_OBJ) $@
+	$(OBJCOPY) -O binary $(OOT_OBJ) $@
 
-$(TARGET_OOT_OBJ): $(TARGET_OOT_SRC) $(TARGET_OOT_LDSCRIPT)
+$(OOT_OBJ): $(SRC) $(OOT_LDSCRIPT)
 	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -o $@ $(TARGET_OOT_SRC) -T $(TARGET_OOT_LDSCRIPT)
+	$(CC) $(CFLAGS) -DGAME_OOT=1 -o $@ $(SRC) -T $(OOT_LDSCRIPT)
+
+$(OOT_LDSCRIPT): $(LDSCRIPT)
+	@mkdir -p $(dir $@)
+	$(CC) -E -P -x c -MMD -DGAME_OOT=1 -DLOADER=1 $< -o $@
+
+$(MM_TARGET): $(MM_OBJ)
+	@mkdir -p $(dir $@)
+	$(OBJCOPY) -O binary $(MM_OBJ) $@
+
+$(MM_OBJ): $(SRC) $(MM_LDSCRIPT)
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -DGAME_MM=1 -o $@ $(SRC) -T $(MM_LDSCRIPT)
+
+$(MM_LDSCRIPT): $(LDSCRIPT)
+	@mkdir -p $(dir $@)
+	$(CC) -E -P -x c -MMD -DGAME_MM=1 -DLOADER=1 $< -o $@
