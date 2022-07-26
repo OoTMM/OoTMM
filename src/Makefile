@@ -1,25 +1,25 @@
-ARCH := mips-elf
-CFLAGS := -EB -ffreestanding -nostdlib -fno-PIC -mabi=32 -mno-shared -mno-abicalls -march=vr4300 -mtune=vr4300 -mfix4300 -G 0 -I $(realpath ../include) -MMD
-CC := $(ARCH)-gcc
-OBJCOPY := $(ARCH)-objcopy
-NM := $(ARCH)-nm
-BUILD_DIR := ../build
+ARCH 		:= mips-elf
+CFLAGS 		:= -EB -ffreestanding -nostdlib -fno-PIC -mabi=32 -mno-shared -mno-abicalls -march=vr4300 -mtune=vr4300 -mfix4300 -G 0 -Os -I $(realpath ../include) -MMD
+CC 			:= $(ARCH)-gcc
+OBJCOPY 	:= $(ARCH)-objcopy
+NM 			:= $(ARCH)-nm
+BUILD_DIR 	:= ../build
 
-LDSCRIPT      := link.ld.in
-SRC 					:= $(shell find common -name '*.c' -o -name '*.S')
+LDSCRIPT		:= link.ld.in
+SRC				:= $(shell find common -name '*.c' -o -name '*.S')
 
-OOT_ELF 			:= $(BUILD_DIR)/oot.elf
+OOT_ELF			:= $(BUILD_DIR)/oot.elf
 OOT_PAYLOAD		:= $(BUILD_DIR)/oot_payload.bin
-OOT_PATCH			:= $(BUILD_DIR)/oot_patch.bin
-OOT_SRC 			:= $(shell find oot -name '*.c' -o -name '*.S') $(SRC)
-OOT_OBJ 			:= $(OOT_SRC:%=$(BUILD_DIR)/obj/oot/%.o)
+OOT_PATCH		:= $(BUILD_DIR)/oot_patch.bin
+OOT_SRC			:= $(shell find oot -name '*.c' -o -name '*.S') $(SRC)
+OOT_OBJ			:= $(OOT_SRC:%=$(BUILD_DIR)/obj/oot/%.o)
 OOT_LDSCRIPT 	:= $(BUILD_DIR)/ld/oot.ld
 
-MM_ELF 				:= $(BUILD_DIR)/mm.elf
+MM_ELF			:= $(BUILD_DIR)/mm.elf
 MM_PAYLOAD		:= $(BUILD_DIR)/mm_payload.bin
-MM_PATCH			:= $(BUILD_DIR)/mm_patch.bin
-MM_SRC 				:= $(shell find mm -name '*.c' -o -name '*.S') $(SRC)
-MM_OBJ 				:= $(MM_SRC:%=$(BUILD_DIR)/obj/mm/%.o)
+MM_PATCH		:= $(BUILD_DIR)/mm_patch.bin
+MM_SRC			:= $(shell find mm -name '*.c' -o -name '*.S') $(SRC)
+MM_OBJ			:= $(MM_SRC:%=$(BUILD_DIR)/obj/mm/%.o)
 MM_LDSCRIPT 	:= $(BUILD_DIR)/ld/mm.ld
 
 .PHONY: all

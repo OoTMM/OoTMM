@@ -8,8 +8,8 @@
 
 #ifdef GAME_MM
 #define CART_ADDR     0x03fe0000
-#define RAM_ADDR      0x80000000
-#define LOADER_ADDR   0x80000000
+#define RAM_ADDR      0x80760000
+#define LOADER_ADDR   0x800982b0
 #endif
 
 #define PAYLOAD_SIZE  0x00020000

@@ -1,19 +1,13 @@
-#ifdef GAME_OOT
-#define BASE_ADDR 0x80400000
-#endif
-
-#ifdef GAME_MM
-#define BASE_ADDR 0x80000000
-#endif
-
 SECTIONS
 {
 
 #ifdef GAME_OOT
+# define BASE_ADDR 0x80400000
 # include "link_oot.in"
 #endif
 
 #ifdef GAME_MM
+# define BASE_ADDR 0x80760000
 # include "link_mm.in"
 #endif
 
