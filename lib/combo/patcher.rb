@@ -27,11 +27,9 @@ class Combo::Patcher
     puts "Adding MM payload"
     @rom.load(0x03fe0000, File.binread(File.join(Combo::PATH_BUILD, 'mm_payload.bin')))
 
-    puts "Adding OoT Patches"
-    apply_patches('OoT')
-
-    puts "Adding MM Patches"
-    apply_patches('MM')
+    Combo::GAMES.each do |game|
+      apply_patches(game)
+    end
 
     puts "Fixing metadata"
     @rom.load(0x20, "OOT+MM COMBO       ")
