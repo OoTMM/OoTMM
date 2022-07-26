@@ -18,6 +18,10 @@ module Combo::Extractor
         vend = f["vend"]
         pstart = f["pstart"]
         pend = f["pend"]
+        dummy = f["dummy"]
+        compressed = f["compressed"]
+
+        next if dummy
 
         vlen = vend - vstart
         if pend.zero?
@@ -29,14 +33,14 @@ module Combo::Extractor
         d = data[pstart, plen]
         p = File.join(dst, path)
         FileUtils.mkdir_p(File.dirname(p))
-        if f["compressed"]
+        if compressed
           puts "Extracting #{p}.yaz0"
           File.binwrite("#{p}.yaz0", d)
           d = Yaz0.decompress(d)
         end
         puts "Extracting #{p}"
         File.binwrite("#{p}", d)
-        if f["compressed"]
+        if compressed
           FileUtils.touch("#{p}.yaz0", nocreate: true)
         end
       end

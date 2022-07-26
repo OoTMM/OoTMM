@@ -3,7 +3,7 @@ require 'combo/file_buffer'
 
 DMA = {
   'OoT' => [0x00007430, 0x0000d390, 0x00007430, 0x00000000],
-  'MM' => [0x0001C110, 0x000222F0, 0x0001C110, 0x00000000],
+  'MM' => [0x0001A500, 0x00020700, 0x0001A500, 0x00000000],
 }
 
 module Combo::Packer
@@ -24,27 +24,38 @@ module Combo::Packer
       file_data.each do |f|
         index = f["index"]
         compressed = false
+        dummy = f["dummy"]
 
         path = File.join(src, f["path"])
         puts "Packing #{path}"
 
-        data = File.binread(path)
-        rom.load(base + paddr_base, data)
-        size = (data.size + 15) & 0xfffffff0
+        unless dummy
+          data = File.binread(path)
+          rom.load(base + paddr_base, data)
+          size = (data.size + 15) & 0xfffffff0
+        end
 
         rom.write32(base + dmadata[0] + 0x10 * index + 0x00, f["vstart"])
         rom.write32(base + dmadata[0] + 0x10 * index + 0x04, f["vend"])
-        rom.write32(base + dmadata[0] + 0x10 * index + 0x08, paddr_base)
 
-        if compressed
-          rom.write32(base + dmadata[0] + 0x10 * index + 0x0c, paddr_base + size)
+        if dummy
+          rom.write32(base + dmadata[0] + 0x10 * index + 0x08, 0xffffffff)
+          rom.write32(base + dmadata[0] + 0x10 * index + 0x0c, 0xffffffff)
         else
-          rom.write32(base + dmadata[0] + 0x10 * index + 0x0c, 0)
+          rom.write32(base + dmadata[0] + 0x10 * index + 0x08, paddr_base)
+
+          if compressed
+            rom.write32(base + dmadata[0] + 0x10 * index + 0x0c, paddr_base + size)
+          else
+            rom.write32(base + dmadata[0] + 0x10 * index + 0x0c, 0)
+          end
         end
 
         offsets[f["path"]] = paddr_base
 
-        paddr_base += size
+        unless dummy
+          paddr_base += size
+        end
         if f["index"] == 1
           # Skip DMA data
           paddr_base = dmadata[1]

@@ -1,17 +1,9 @@
 #ifdef GAME_OOT
-# ifdef LOADER
-#  define BASE_ADDR 0x80006600
-# else
-#  define BASE_ADDR 0x80400000
-# endif
+#define BASE_ADDR 0x80400000
 #endif
 
 #ifdef GAME_MM
-# ifdef LOADER
-#  define BASE_ADDR 0x80000000
-# else
-#  define BASE_ADDR 0x80000000
-# endif
+#define BASE_ADDR 0x80000000
 #endif
 
 SECTIONS
