@@ -64,11 +64,11 @@ class Combo::Patcher
   VRAM = {
     "OoT" => {
       0x80000460..0x80006830 => "boot",
-      0x800110A0..0x80114DD0 => "code",
+      0x800110a0..0x80114dd0 => "code",
     },
     "MM" => {
       0x80080060..0x8009b110 => "boot",
-      0x800a76a0..0x801e3d8f => "code",
+      0x800a5ac0..0x801e3fa0 => "code",
     }
   }
 
