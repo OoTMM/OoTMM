@@ -1,23 +1,20 @@
-.set noreorder
-.set nobopt
-.set noat
-
-#include <sys/regdef.h>
+#include <combo/asm.h>
 
 #ifdef GAME_OOT
 #define CART_ADDR     0x03fc0000
 #define RAM_ADDR      0x80400000
+#define LOADER_ADDR   0x80006600
 #endif
 
 #ifdef GAME_MM
 #define CART_ADDR     0x03fe0000
 #define RAM_ADDR      0x80000000
+#define LOADER_ADDR   0x80000000
 #endif
 
 #define PAYLOAD_SIZE  0x00020000
 
-.global _start
-_start:
+PATCH_START(LOADER_ADDR)
   /* Wait for pending DMAs */
   la   a1, 0xa4600000
 .Lwait1:
@@ -46,3 +43,4 @@ _start:
   /* Return */
   jr   ra
   nop
+PATCH_END

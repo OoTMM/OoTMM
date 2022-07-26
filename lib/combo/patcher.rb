@@ -21,17 +21,17 @@ class Combo::Patcher
     puts "Loading the base ROM"
     @rom.load(0, File.binread(Combo::ROM_BASE))
 
-    puts "Adding OoT loader"
-    @rom.load(0x7200, File.binread(File.join(Combo::PATH_BUILD, 'loader_oot')))
-
     puts "Adding OoT payload"
-    @rom.load(0x03fc0000, File.binread(File.join(Combo::PATH_BUILD, 'payload_oot')))
+    @rom.load(0x03fc0000, File.binread(File.join(Combo::PATH_BUILD, 'oot_payload.bin')))
 
-    puts "Adding patches"
-    patch_jump(oot_code(0x800cd3c0), 0x80006600) # Hook InitHeap -> load OoT payload
-    @rom.write32(oot_code(0x800f13e8), @sym_oot["comboPatchSceneCtor"])
-    patch_lui(mm_ref("boot", 0x80093900 - 0x80080060), :t7, 0xb400) # Rebase MM
-    patch_jump(oot_code(0x80091474), @sym_oot["comboReadWriteFlashHook"]) # Hook ReadWriteSRAM
+    puts "Adding MM payload"
+    @rom.load(0x03fe0000, File.binread(File.join(Combo::PATH_BUILD, 'mm_payload.bin')))
+
+    puts "Adding OoT Patches"
+    apply_patches('OoT')
+
+    puts "Adding MM Patches"
+    apply_patches('MM')
 
     puts "Fixing metadata"
     @rom.load(0x20, "OOT+MM COMBO       ")
@@ -47,30 +47,45 @@ class Combo::Patcher
     @rom = Combo::FileBuffer.new(Combo::ROM_OOTMM, true)
     @rom.init(128 * 1024 * 1024)
 
-    @sym_oot = Combo::Util.parse_syms(File.join(Combo::PATH_BUILD, 'payload_oot.sym')).freeze
-
-    @offets_oot = JSON.parse(File.read(File.join(Combo::PATH_BUILD, 'OoT_offsets.json'))).freeze
+    @offsets = Combo::GAMES.map{|g| [g, JSON.parse(File.read(File.join(Combo::PATH_BUILD, "#{g}_offsets.json")))]}.to_h
   end
 
-  def patch_jump(offset, target)
-    @rom.write32(offset, ((002 << 26) | ((target & 0x3ffffff) >> 2)))
-    @rom.write32(offset + 4, 0)
+  def apply_patches(game)
+    puts "Applying patches for #{game}"
+    File.open(File.join(Combo::PATH_BUILD, "#{game.downcase}_patch.bin"), "rb") do |f|
+      while !f.eof? do
+        addr, len = *f.read(8).unpack('L>L>')
+        data = f.read(len)
+        puts "Patching #{game} at 0x#{addr.to_s(16)}"
+        offset = file_offset_from_addr(game, addr)
+        @rom.load(offset, data)
+      end
+    end
   end
 
-  def patch_lui(offset, reg, value)
-    r = REGS[reg]
-    @rom.write32(offset, (017 << 26) | ((r & 0x1f) << 16) | (value & 0xffff))
-  end
+  VRAM = {
+    "OoT" => {
+      0x80000460..0x80006830 => "boot",
+      0x800110A0..0x80114DD0 => "code",
+    },
+    "MM" => {
+      0x80080060..0x8009b110 => "boot",
+      0x800a76a0..0x801e3d8f => "code",
+    }
+  }
 
-  def oot_ref(file, offset)
-    @offets_oot[file] + offset
-  end
-
-  def mm_ref(file, offset)
-    @offets_oot[file] + offset + 0x04000000
-  end
-
-  def oot_code(vaddr)
-    oot_ref("code", vaddr - 0x800110A0)
+  def file_offset_from_addr(game, addr)
+    table = VRAM[game]
+    table.each do |range, file|
+      if range.include?(addr)
+        offset = addr - range.first
+        base = @offsets[game][file]
+        if game == "MM"
+          base += 0x04000000
+        end
+        return base + offset
+      end
+    end
+    raise "Unknown address 0x#{addr.to_s(16)} for #{game}"
   end
 end

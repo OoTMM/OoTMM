@@ -1,6 +1,5 @@
 require 'combo/common'
 require 'combo/file_buffer'
-require 'combo/util'
 
 DMA = {
   'OoT' => [0x00007430, 0x0000d390, 0x00007430, 0x00000000],

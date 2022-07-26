@@ -32,5 +32,10 @@ SECTIONS
     *(.rodata);
     *(.bss);
   }
+
+  . = 0x80800000;
+  .patch : {
+    *(.patch);
+  }
   /DISCARD/ : { *(.*); }
 }

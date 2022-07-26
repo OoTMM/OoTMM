@@ -1,8 +1,4 @@
-.set noreorder
-.set nobopt
-.set noat
-
-#include <sys/regdef.h>
+#include <combo/asm.h>
 
 .global comboSwitchToMM
 comboSwitchToMM:
@@ -62,3 +58,8 @@ comboPatchSceneCtor:
   la at, 0x8009a750
   jr at
   nop
+
+/* Patch the scene ctor */
+PATCH_START(0x800f13e8)
+  .long comboPatchSceneCtor
+PATCH_END
