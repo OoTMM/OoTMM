@@ -1,8 +1,8 @@
 #include <combo/asm.h>
 
-/* Hook into InitHeap, to load the payload */
-PATCH_START(0x800cd3c0)
-  j 0x80006600
+/* Hook into Main, to load the payload */
+PATCH_START(0x800005ac)
+  jal 0x80006600
   nop
 PATCH_END
 
@@ -10,4 +10,10 @@ PATCH_END
 PATCH_START(0x80091474)
   j comboReadWriteFlashHook
   nop
+PATCH_END
+
+/* DEBUG: Replace rupy object with MM Deku Mask */
+PATCH_START(0x800f9bf0)
+.int 0x05999000
+.int 0x0599ac30
 PATCH_END

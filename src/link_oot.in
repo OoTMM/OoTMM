@@ -9,3 +9,9 @@ PreparePI = 0x80091310;
 ReadWriteSaveDMA = 0x800913e8;
 
 __osPiHandle = 0x80006260;
+
+zDrawGi_O0T1_RecoveryHeart = 0x80058008;
+zDrawGi_O1T0 = 0x80058228;
+zDrawGi_O1T1 = 0x800582c0;
+
+InitDmaManager = 0x80000e6c;
