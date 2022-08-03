@@ -38,3 +38,12 @@ PATCH_END
 PATCH_START(0x8096c568)
   nop
 PATCH_END
+
+/* Force the file chooser to load the save */
+PATCH_START(0x808147a8)
+.int 0x80812e94
+PATCH_END
+
+PATCH_START(0x8081477c)
+.int 0x80812d94
+PATCH_END
