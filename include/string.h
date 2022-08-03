@@ -3,6 +3,6 @@
 
 #include <stdint.h>
 
-void* memcpy(void* dst, void* src, uint32_t size);
+void* memcpy(void* dst, const void* src, uint32_t size);
 
 #endif /* STRING_H */

@@ -28,13 +28,24 @@ MmSavePlayerData;
 
 typedef struct PACKED
 {
-    char data[0x22];
+    u8      buttonItems[4][4];
+    u8      cButtonSlots[4][4];
+    u16     equipment;
 }
 MmItemEquips;
 
 typedef struct PACKED
 {
-    char data[0x88];
+    u8      items[48];
+    s8      ammo[24];
+    u32     upgrades;
+    u32     questItems;
+    u8      dungeonItems[10];
+    s8      dungeonKeys[9];
+    s8      defenseHearts;
+    s8      strayFairies[10];
+    char    dekuPlaygroundPlayerName[3][8];
+    u16     unk;
 }
 MmInventory;
 
