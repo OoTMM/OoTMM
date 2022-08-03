@@ -1,0 +1,2 @@
+bzero = 0x80089630;
+InitDmaManager = 0x80080d0c;

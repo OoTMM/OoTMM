@@ -15,8 +15,12 @@
 #define PAYLOAD_SIZE  0x00020000
 
 PATCH_START(LOADER_ADDR)
-  addiu sp, -0x4
+  addiu sp, -0x14
   sw    ra, 0x0(sp)
+  sw    a0, 0x4(sp)
+  sw    a1, 0x8(sp)
+  sw    a2, 0xc(sp)
+  sw    a3, 0x10(sp)
 
   /* Wait for pending DMAs */
   la   a1, 0xa4600000
@@ -48,17 +52,14 @@ PATCH_START(LOADER_ADDR)
   nop
 
   /* Return */
+  lw    a3,0x10(sp)
+  lw    a2,0xc(sp)
+  lw    a1,0x8(sp)
+  lw    a0,0x4(sp)
   lw    ra,0x0(sp)
-  addiu sp,0x4
+  addiu sp,0x14
 
-#ifdef GAME_OOT
   j InitDmaManager
   nop
-#endif
-
-#ifdef GAME_MM
-  jr ra
-  nop
-#endif
 
 PATCH_END

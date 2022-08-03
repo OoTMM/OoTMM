@@ -1,5 +1,13 @@
 #include <combo/asm.h>
 
+.global comboDisableInterrupts
+comboDisableInterrupts:
+  /* Disable interrupts */
+  la   a1, 0xa4300000
+  ori  a0, zero, 0x0555
+  jr   ra
+   sw  a0, 0x0c(a1)
+
 /* a0: dramAddr */
 /* a1: cartAddr */
 /* a2: size */
@@ -39,8 +47,8 @@ comboDma:
   nop
 
   /* Return */
-  lw   s0,0x0(sp)
-  lw   s1,0x4(sp)
+  lw    s0,0x0(sp)
+  lw    s1,0x4(sp)
   addiu sp,0x8
   jr ra
   nop

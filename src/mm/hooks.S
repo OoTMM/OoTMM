@@ -10,8 +10,8 @@ PATCH_START(0x80174c4c)
   lui t8, 0x8076
 PATCH_END
 
-/* Hook into some init function to load the payload */
-PATCH_START(0x8010c15c)
-  j 0x800982b0
+/* Hook before InitDmaManager to load the payload */
+PATCH_START(0x8008035c)
+  jal 0x800982b0
   nop
 PATCH_END
