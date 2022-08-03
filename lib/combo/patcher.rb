@@ -69,6 +69,7 @@ class Combo::Patcher
     "MM" => {
       0x80080060..0x8009b110 => "boot",
       0x800a5ac0..0x801e3fa0 => "code",
+      0x80800000..0x80800910 => "actors/ovl_title",
     }
   }
 

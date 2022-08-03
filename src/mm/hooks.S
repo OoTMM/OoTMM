@@ -15,3 +15,13 @@ PATCH_START(0x8008035c)
   jal 0x800982b0
   nop
 PATCH_END
+
+/* Skip the N64 logo */
+PATCH_START(0x808006cc)
+  li t9, 1
+PATCH_END
+
+PATCH_START(0x80800134)
+  jr ra
+  nop
+PATCH_END
