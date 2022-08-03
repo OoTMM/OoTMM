@@ -13,10 +13,10 @@ SECTIONS
 
   . = BASE_ADDR;
   .text : {
-    *(.text);
-    *(.data);
-    *(.rodata);
-    *(.bss);
+    *(.text*);
+    *(.data*);
+    *(.rodata*);
+    *(.bss*);
   }
 
   . = 0x80800000;
@@ -25,4 +25,3 @@ SECTIONS
   }
   /DISCARD/ : { *(.*); }
 }
-

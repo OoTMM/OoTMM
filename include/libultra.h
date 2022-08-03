@@ -2,7 +2,7 @@
 #define LIBULTRA_H
 
 #include <stddef.h>
-#include <stdint.h>
+#include <types.h>
 
 #define OS_READ     0
 #define OS_WRITE    1
@@ -11,15 +11,6 @@
 #define OS_MESG_BLOCK     1
 
 #define PHYS_TO_K1(x) ((u32)((x) | 0xa0000000))
-
-typedef int8_t      s8;
-typedef int16_t     s16;
-typedef int32_t     s32;
-typedef int64_t     s64;
-typedef uint8_t     u8;
-typedef uint16_t    u16;
-typedef uint32_t    u32;
-typedef uint64_t    u64;
 
 typedef void* OSMesg;
 

@@ -13,7 +13,7 @@ PATCH_START(0x80091474)
 PATCH_END
 
 /* DEBUG: Replace rupy object with MM Deku Mask */
-PATCH_START(0x800f9bf0)
+/*PATCH_START(0x800f9bf0)
 .int 0x05999000
 .int 0x0599ac30
-PATCH_END
+PATCH_END*/
