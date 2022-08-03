@@ -4,12 +4,14 @@
 #define CART_ADDR     0x03fc0000
 #define RAM_ADDR      0x80400000
 #define LOADER_ADDR   0x80006600
+#define NEXT          InitDmaManager
 #endif
 
 #ifdef GAME_MM
 #define CART_ADDR     0x03fe0000
 #define RAM_ADDR      0x80760000
 #define LOADER_ADDR   0x800982b0
+#define NEXT          0x80174bf0
 #endif
 
 #define PAYLOAD_SIZE  0x00020000
@@ -59,7 +61,7 @@ PATCH_START(LOADER_ADDR)
   lw    ra,0x0(sp)
   addiu sp,0x14
 
-  j InitDmaManager
+  j NEXT
   nop
 
 PATCH_END

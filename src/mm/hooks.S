@@ -10,10 +10,9 @@ PATCH_START(0x80174c4c)
   lui t8, 0x8076
 PATCH_END
 
-/* Hook before InitDmaManager to load the payload */
-PATCH_START(0x8008035c)
+/* Hook in Main to load the payload */
+PATCH_START(0x8008036c)
   jal 0x800982b0
-  nop
 PATCH_END
 
 /* Skip the N64 logo */
@@ -23,5 +22,19 @@ PATCH_END
 
 PATCH_START(0x80800134)
   jr ra
+  nop
+PATCH_END
+
+/* Skip the intro */
+PATCH_START(0x8096b974)
+  li v0, 0xd
+PATCH_END
+
+PATCH_START(0x8096c50c)
+  nop
+PATCH_END
+
+/* Mute the title screen "START" sound */
+PATCH_START(0x8096c568)
   nop
 PATCH_END

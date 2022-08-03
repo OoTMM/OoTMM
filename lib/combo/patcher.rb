@@ -70,6 +70,8 @@ class Combo::Patcher
       0x80080060..0x8009b110 => "boot",
       0x800a5ac0..0x801e3fa0 => "code",
       0x80800000..0x80800910 => "actors/ovl_title",
+      0x80803df0..0x80804010 => "actors/ovl_opening",
+      0x8096b310..0x8096ec40 => "actors/ovl_En_Mag",
     }
   }
 
