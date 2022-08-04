@@ -17,3 +17,4 @@ zDrawGi_O1T1 = 0x800582c0;
 InitDmaManager = 0x80000e6c;
 
 gSaveContextOoT = 0x8011a5d0;
+Play_Init = 0x8009a750;
