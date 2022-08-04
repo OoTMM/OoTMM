@@ -61,3 +61,10 @@ PATCH_END
 PATCH_START(0x8081477c)
 .int 0x80812d94
 PATCH_END
+
+/* Make the file chooser load the correct file index */
+PATCH_START(0x80812da4)
+  lui   t6,%hi(gComboCtx)
+  addiu t6,%lo(gComboCtx)
+  lw    t6,0xc(t6)
+PATCH_END

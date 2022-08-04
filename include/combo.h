@@ -20,7 +20,7 @@ typedef struct PACKED
 }
 ComboContext;
 
-extern ComboContext gComboContext;
+extern ComboContext gComboCtx;
 
 void comboLoadContext(void);
 void comboExportContext(void);
