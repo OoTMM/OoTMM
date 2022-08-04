@@ -1,8 +1,5 @@
 #include <types.h>
 #include <combo.h>
-#include <oot/save.h>
-
-extern OotSaveContext gSaveContext;
 
 void comboSwitchToMM(void)
 {

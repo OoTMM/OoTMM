@@ -5,6 +5,8 @@
 #include <string.h>
 #include <strings.h>
 #include <libultra.h>
+#include <oot/save.h>
+#include <mm/save.h>
 
 /* System */
 typedef void (*EntryPoint)(void)  __attribute__ ((noreturn));
@@ -27,5 +29,17 @@ void comboExportContext(void);
 
 /* Init */
 void comboInitDma(void);
+
+/* Saves */
+extern OotSaveContext gSaveContextOoT;
+extern MmSaveContext gSaveContextMM;
+
+#if GAME_OOT
+# define gSaveContext gSaveContextOoT
+#endif
+
+#if GAME_MM
+# define gSaveContext gSaveContextMM
+#endif
 
 #endif /* COMBO_COMBO_H */

@@ -68,3 +68,8 @@ PATCH_START(0x80812da4)
   addiu t6,%lo(gComboCtx)
   lw    t6,0xc(t6)
 PATCH_END
+
+/* Hook into Play_Init */
+PATCH_START(0x801bd9b8)
+.int hookPlay_Init
+PATCH_END

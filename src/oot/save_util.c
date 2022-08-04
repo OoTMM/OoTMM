@@ -1,9 +1,7 @@
-#include <oot/save.h>
-#include <mm/save.h>
+#include <combo.h>
 #include <string.h>
 #include <strings.h>
 
-extern OotSaveContext gSaveContext;
 MmSaveContext gSaveContextMM;
 
 void comboReadWriteFlash(u32 devAddr, void* dramAddr, u32 size, s32 direction);
