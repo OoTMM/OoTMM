@@ -96,6 +96,7 @@ static const MmInventory kDefaultInventory =
 
 void comboCreateSaveMM(void)
 {
+    uint32_t base;
     MmSaveContext* s = &gSaveContextMM;
     bzero(s, sizeof(*s));
 
@@ -132,5 +133,7 @@ void comboCreateSaveMM(void)
     s->save.checksum = comboComputeChecksum(&s->save, sizeof(s->save));
 
     /* Write the save data to flash */
-    comboReadWriteFlash(0x0, s, sizeof(s->save), 1);
+    base = 0x8000 + 0x4000 * gSaveContext.fileIndex;
+    comboReadWriteFlash(base, s, sizeof(s->save), 1);
+    comboReadWriteFlash(base + 0x2000, s, sizeof(s->save), 1);
 }

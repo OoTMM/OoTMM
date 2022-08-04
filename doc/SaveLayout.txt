@@ -1,0 +1,11 @@
+Save Layout:
+
+0x00000     OoT Save data
+0x08000     MM Save 1 + backup
+0x0c000     MM Save 2 + backup
+0x10000     MM Owl 1
+0x14000     MM Owl 1 backup
+0x18000     MM Owl 2
+0x1c000     MM Owl 2 backup
+0x20000     MM Settings
+0x24000     MM Reserved

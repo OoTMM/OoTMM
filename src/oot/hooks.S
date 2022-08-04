@@ -8,7 +8,7 @@ PATCH_END
 
 /* Hook into ReadWriteSRAM */
 PATCH_START(0x80091474)
-  j comboReadWriteFlashHook
+  j comboReadWriteFlash
   nop
 PATCH_END
 

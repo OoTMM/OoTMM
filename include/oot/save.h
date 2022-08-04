@@ -15,7 +15,8 @@ typedef struct PACKED
     char    newf[6];
     s16     deathCount;
     char    playerName[8];
-    char    data[0x132c];
+    char    data[0x1328];
+    u32     fileIndex;
 }
 OotSaveContext;
 
