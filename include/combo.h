@@ -14,7 +14,7 @@ typedef void (*EntryPoint)(void)  __attribute__ ((noreturn));
 void comboDisableInterrupts(void);
 void comboDma(void* addr, uint32_t cartAddr, uint32_t size);
 
-typedef struct PACKED
+typedef struct PACKED ALIGNED(4)
 {
     char magic[8];
     u32  valid;

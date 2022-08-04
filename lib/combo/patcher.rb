@@ -65,6 +65,7 @@ class Combo::Patcher
     "OoT" => {
       0x80000460..0x80006830 => "boot",
       0x800110a0..0x80114dd0 => "code",
+      0x80800000..0x808009c0 => "ovl_title",
     },
     "MM" => {
       0x80080060..0x8009b110 => "boot",

@@ -3,7 +3,8 @@
 
 #include <stdint.h>
 
-#define PACKED __attribute__((packed))
+#define PACKED      __attribute__((packed))
+#define ALIGNED(x)  __attribute__((aligned(x)))
 
 typedef int8_t      s8;
 typedef int16_t     s16;

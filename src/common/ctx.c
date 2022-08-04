@@ -19,7 +19,7 @@ void comboLoadContext(void)
     {
         gComboCtx.valid = 1;
     }
-    //bzero(&gComboCtxRead, sizeof(gComboCtx));
+    bzero(&gComboCtxRead, sizeof(gComboCtx));
 }
 
 void comboExportContext(void)
