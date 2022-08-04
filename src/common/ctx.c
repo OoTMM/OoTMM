@@ -1,23 +1,28 @@
 #include <combo.h>
 
-ComboContext gComboContext;
+#define MAGIC "OoT+MM<3"
+
+extern ComboContext gComboCtxRead;
+extern ComboContext gComboCtxWrite;
+
+ComboContext gComboCtx;
 
 void comboLoadContext(void)
 {
-    memcpy(&gComboContext, (void*)COMBO_CONTEXT_ADDR, sizeof(gComboContext));
-    if (memcmp(gComboContext.magic, COMBO_CONTEXT_MAGIC, sizeof(gComboContext.magic)) != 0)
+    memcpy(&gComboCtx, &gComboCtxRead, sizeof(gComboCtx));
+    if (memcmp(gComboCtx.magic, MAGIC, sizeof(gComboCtx.magic)) != 0)
     {
-        bzero(&gComboContext, sizeof(gComboContext));
-        memcpy(gComboContext.magic, COMBO_CONTEXT_MAGIC, sizeof(gComboContext.magic));
+        bzero(&gComboCtx, sizeof(gComboCtx));
+        memcpy(gComboCtx.magic, MAGIC, sizeof(gComboCtx.magic));
     }
     else
     {
-        gComboContext.valid = 1;
+        gComboCtx.valid = 1;
     }
-    bzero((void*)COMBO_CONTEXT_ADDR, sizeof(gComboContext));
+    //bzero(&gComboCtxRead, sizeof(gComboCtx));
 }
 
 void comboExportContext(void)
 {
-    memcpy((void*)COMBO_CONTEXT_ADDR, &gComboContext, sizeof(gComboContext));
+    memcpy(&gComboCtxWrite, &gComboCtx, sizeof(gComboCtx));
 }

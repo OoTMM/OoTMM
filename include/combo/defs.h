@@ -1,0 +1,29 @@
+#ifndef COMBO_DEFS_H
+#define COMBO_DEFS_H
+
+#define COMBO_CTX_ADDR_OOT 0x80006584
+#define COMBO_CTX_ADDR_MM  0x80098280
+
+#ifdef GAME_OOT
+# define PAYLOAD_ROM    0x03fc0000
+# define PAYLOAD_RAM    0x80400000
+# define LOADER_ADDR    0x80006600
+# define LOADER_NEXT    InitDmaManager
+
+# define COMBO_CTX_ADDR_READ    COMBO_CTX_ADDR_OOT
+# define COMBO_CTX_ADDR_WRITE   COMBO_CTX_ADDR_MM
+#endif
+
+#ifdef GAME_MM
+# define PAYLOAD_ROM    0x03fe0000
+# define PAYLOAD_RAM    0x80760000
+# define LOADER_ADDR    0x800982b0
+# define LOADER_NEXT    0x80174bf0
+
+# define COMBO_CTX_ADDR_READ    COMBO_CTX_ADDR_MM
+# define COMBO_CTX_ADDR_WRITE   COMBO_CTX_ADDR_OOT
+#endif
+
+#define PAYLOAD_SIZE  0x00020000
+
+#endif /* COMBO_DEFS_H */

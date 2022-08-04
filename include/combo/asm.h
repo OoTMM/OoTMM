@@ -5,6 +5,7 @@
 .set nobopt
 .set noat
 
+#include <combo/defs.h>
 #include <sys/regdef.h>
 
 .macro PATCH_START addr

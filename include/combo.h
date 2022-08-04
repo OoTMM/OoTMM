@@ -12,10 +12,6 @@ typedef void (*EntryPoint)(void)  __attribute__ ((noreturn));
 void comboDisableInterrupts(void);
 void comboDma(void* addr, uint32_t cartAddr, uint32_t size);
 
-/* Context */
-#define COMBO_CONTEXT_MAGIC "OoT+MM<3"
-#define COMBO_CONTEXT_ADDR  0x807fff00
-
 typedef struct PACKED
 {
     char magic[8];

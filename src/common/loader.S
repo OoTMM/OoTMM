@@ -1,21 +1,5 @@
 #include <combo/asm.h>
 
-#ifdef GAME_OOT
-#define CART_ADDR     0x03fc0000
-#define RAM_ADDR      0x80400000
-#define LOADER_ADDR   0x80006600
-#define NEXT          InitDmaManager
-#endif
-
-#ifdef GAME_MM
-#define CART_ADDR     0x03fe0000
-#define RAM_ADDR      0x80760000
-#define LOADER_ADDR   0x800982b0
-#define NEXT          0x80174bf0
-#endif
-
-#define PAYLOAD_SIZE  0x00020000
-
 PATCH_START(LOADER_ADDR)
   addiu sp, -0x14
   sw    ra, 0x0(sp)
@@ -33,9 +17,9 @@ PATCH_START(LOADER_ADDR)
   nop
 
   /* Prepare DMA */
-  li at, (RAM_ADDR & 0x0fffffff)
+  li at, (PAYLOAD_RAM & 0x0fffffff)
   sw at, 0x00(a1)
-  li at, (0x10000000 | CART_ADDR)
+  li at, (0x10000000 | PAYLOAD_ROM)
   sw at, 0x04(a1)
 
   /* Start DMA */
@@ -61,7 +45,7 @@ PATCH_START(LOADER_ADDR)
   lw    ra,0x0(sp)
   addiu sp,0x14
 
-  j NEXT
+  j LOADER_NEXT
   nop
 
 PATCH_END

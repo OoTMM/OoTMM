@@ -1,5 +1,5 @@
 ARCH 		:= mips-elf
-CFLAGS 		:= -EB -ffreestanding -nostdlib -fno-PIC -mabi=32 -mno-shared -mno-abicalls -march=vr4300 -mtune=vr4300 -mfix4300 -G 0 -Os -I $(realpath ../include) -MMD -MP
+CFLAGS 		:= -EB -ffreestanding -nostdlib -fno-PIC -mabi=32 -mno-shared -mno-abicalls -march=vr4300 -mtune=vr4300 -mfix4300 -G 0 -Os -I../include -MMD -MP
 CC 			:= $(ARCH)-gcc
 OBJCOPY 	:= $(ARCH)-objcopy
 NM 			:= $(ARCH)-nm
@@ -49,7 +49,7 @@ $(BUILD_DIR)/obj/oot/%.c.o: %.c
 
 $(OOT_LDSCRIPT): $(LDSCRIPT)
 	@mkdir -p $(dir $@)
-	$(CC) -E -P -x c -MMD -MT $@ -DGAME_OOT=1 $< -o $@
+	$(CC) -I../include -E -P -x c -MMD -MT $@ -DGAME_OOT=1 $< -o $@
 
 $(MM_PAYLOAD): $(MM_ELF)
 	@mkdir -p $(dir $@)
@@ -73,7 +73,7 @@ $(BUILD_DIR)/obj/mm/%.c.o: %.c
 
 $(MM_LDSCRIPT): $(LDSCRIPT)
 	@mkdir -p $(dir $@)
-	$(CC) -E -P -x c -MMD -MT $@ -DGAME_MM=1 $< -o $@
+	$(CC) -I../include -E -P -x c -MMD -MT $@ -DGAME_MM=1 $< -o $@
 
 .PHONY: clean
 clean:
