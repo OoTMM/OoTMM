@@ -34,6 +34,9 @@ void comboInitDma(void);
 extern OotSaveContext gSaveContextOoT;
 extern MmSaveContext gSaveContextMM;
 
+/* Flash */
+void comboReadWriteFlash(u32 devAddr, void* dramAddr, u32 size, s32 direction);
+
 #if GAME_OOT
 # define gSaveContext gSaveContextOoT
 #endif

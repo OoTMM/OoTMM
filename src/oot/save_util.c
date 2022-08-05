@@ -4,8 +4,6 @@
 
 MmSaveContext gSaveContextMM;
 
-void comboReadWriteFlash(u32 devAddr, void* dramAddr, u32 size, s32 direction);
-
 static void copyName(u8* dst, const u8* src)
 {
     u8 c0;
