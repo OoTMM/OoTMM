@@ -5,7 +5,8 @@ require 'combo/dma_data'
 
 module Combo::Decompressor
   METADATA = {
-    oot: {dma_addr: 0x7430, dma_count: 1510}
+    oot: {dma_addr: 0x7430, dma_count: 1510},
+    mm: {dma_addr: 0x1a500, dma_count: 1552},
   }
 
   def self.run(game)
@@ -27,6 +28,7 @@ module Combo::Decompressor
 
         # Copy data
         dma.each do |i, e|
+          next if e.dummy?
           src.seek(e.pstart)
           dst.seek(e.vstart)
           if e.compressed?

@@ -24,6 +24,10 @@ class Combo::DmaData
       raw_pend != 0
     end
 
+    def dummy?
+      pstart == 0xffffffff
+    end
+
     def vstart
       raw_vstart
     end

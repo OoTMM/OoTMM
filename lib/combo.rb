@@ -6,6 +6,7 @@ require 'combo/decompressor'
 module Combo
   def self.run(args)
     Combo::Decompressor.run(:oot)
+    Combo::Decompressor.run(:mm)
     #extract_roms()
     #pack_rom()
     #build_asm()
