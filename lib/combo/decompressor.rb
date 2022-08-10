@@ -12,7 +12,12 @@ module Combo::Decompressor
   def self.run(game)
     meta = METADATA[game]
     dst_dir = File.join(Combo::PATH_BUILD, "roms")
+    stamp = File.join(dst_dir, "#{game}.stamp")
     FileUtils.mkdir_p(dst_dir)
+
+    return if File.exists?(stamp)
+
+    puts "Decompressing #{game}..."
 
     File.open(File.join(Combo::PATH_ROMS, "#{game}.z64"), "rb") do |src|
       # Read and copy the DMA Data
@@ -51,5 +56,6 @@ module Combo::Decompressor
         end
       end
     end
+    FileUtils.touch(stamp)
   end
 end

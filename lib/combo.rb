@@ -5,8 +5,7 @@ require 'combo/decompressor'
 
 module Combo
   def self.run(args)
-    Combo::Decompressor.run(:oot)
-    Combo::Decompressor.run(:mm)
+    Combo::GAMES.each{|g| Combo::Decompressor.run(g)}
     #extract_roms()
     #pack_rom()
     #build_asm()
