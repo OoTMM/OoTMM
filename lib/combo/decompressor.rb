@@ -4,13 +4,8 @@ require 'combo/common'
 require 'combo/dma_data'
 
 module Combo::Decompressor
-  METADATA = {
-    oot: {dma_addr: 0x7430, dma_count: 1510},
-    mm: {dma_addr: 0x1a500, dma_count: 1552},
-  }
-
   def self.run(game)
-    meta = METADATA[game]
+    meta = Combo::METADATA[game]
     dst_dir = File.join(Combo::PATH_BUILD, "roms")
     stamp = File.join(dst_dir, "#{game}.stamp")
     FileUtils.mkdir_p(dst_dir)
@@ -48,12 +43,6 @@ module Combo::Decompressor
         # Write the new DMA data
         dst.seek(meta[:dma_addr])
         dst.write(dma.data)
-
-        # Force english OoT
-        if game == :oot
-          dst.seek(0x3e)
-          dst.write('E')
-        end
       end
     end
     FileUtils.touch(stamp)
