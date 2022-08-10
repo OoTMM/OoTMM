@@ -1,6 +1,6 @@
 module Combo
   ROOT = File.expand_path(File.join(__dir__, '..', '..'))
-  GAMES = %w(OoT MM)
+  GAMES = [:oot, :mm]
   ROM_BASE = File.join(ROOT, 'build', 'base.z64')
   ROM_OOTMM = File.join(ROOT, 'build', 'OoTMM.z64')
 

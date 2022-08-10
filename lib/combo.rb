@@ -1,13 +1,15 @@
 require 'combo/extractor'
 require 'combo/packer'
 require 'combo/patcher'
+require 'combo/decompressor'
 
 module Combo
   def self.run(args)
-    extract_roms()
-    pack_rom()
-    build_asm()
-    patch_rom()
+    Combo::Decompressor.run(:oot)
+    #extract_roms()
+    #pack_rom()
+    #build_asm()
+    #patch_rom()
   end
 
   private
