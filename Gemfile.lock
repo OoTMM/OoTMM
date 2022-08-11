@@ -1,12 +1,14 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    thread (0.2.2)
     yaz0 (0.4.2)
 
 PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  thread
   yaz0 (~> 0.4)
 
 BUNDLED WITH
