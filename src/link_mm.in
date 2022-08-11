@@ -2,3 +2,4 @@ bzero = 0x80089630;
 InitDmaManager = 0x80080d0c;
 Play_Init = 0x8016a2c8;
 gSaveContextMM = 0x801ef670;
+DMARomToRam = 0x80080790;

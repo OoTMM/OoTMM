@@ -1,8 +1,9 @@
 #include <combo/asm.h>
 
-/* Rebase MM */
-PATCH_START(0x80092960)
-  lui t7, (0xb0000000 | MM_BASE) >> 16
+/* Rebase MM's DMA Table */
+PATCH_START(0x80080d14)
+  lui a0, ((0x00020000 | MM_BASE) >> 16)
+  lui t6, ((0x00020000 | MM_BASE) >> 16)
 PATCH_END
 
 /* Rebase MM save */
@@ -51,22 +52,6 @@ PATCH_END
 /* Mute the title screen "START" sound */
 PATCH_START(0x8096c568)
   nop
-PATCH_END
-
-/* Force the file chooser to load the save */
-PATCH_START(0x808147a8)
-.int 0x80812e94
-PATCH_END
-
-PATCH_START(0x8081477c)
-.int 0x80812d94
-PATCH_END
-
-/* Make the file chooser load the correct file index */
-PATCH_START(0x80812da4)
-  lui   t6,%hi(gComboCtx)
-  addiu t6,%lo(gComboCtx)
-  lw    t6,0xc(t6)
 PATCH_END
 
 /* Hook into Play_Init */

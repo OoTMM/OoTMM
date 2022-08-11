@@ -23,6 +23,9 @@ module Combo::Packer
         f.write(data)
       end
 
+      puts "Fixing MM DMA..."
+      fix_mm_dma(f)
+
       puts "Patching the rom header..."
       f.seek(0x20)
       f.write("OOT+MM COMBO       ")
@@ -36,6 +39,23 @@ module Combo::Packer
   end
 
   private
+  def self.fix_mm_dma(f)
+    meta = Combo::METADATA[:mm]
+    f.seek(meta[:dma_addr] | 0x02000000)
+    dma = Combo::DmaData.new(f.read(meta[:dma_count] * 0x10))
+    dma.each do |i, e|
+      next if e.dummy?
+      pstart = e.pstart | 0x02000000
+      pend = 0
+      if e.compressed?
+        pend = e.pend | 0x02000000
+      end
+      dma.write(i, e.vstart, e.vend, pstart, pend)
+    end
+    f.seek(meta[:dma_addr] | 0x02000000)
+    f.write(dma.data)
+  end
+
   def self.fix_checksum(f)
     sum = checksum(f).pack('L>2')
     f.seek(0x10)
