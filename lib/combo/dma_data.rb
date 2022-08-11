@@ -25,7 +25,7 @@ class Combo::DmaData
     end
 
     def dummy?
-      pstart == 0xffffffff
+      pstart == 0xffffffff || pend == 0xffffffff
     end
 
     def vstart
@@ -84,8 +84,14 @@ class Combo::DmaData
     write(i, e.vstart, e.vend, e.vstart, 0)
   end
 
-  def write(i, pstart, pend, vstart, vend)
-    data = [pstart, pend, vstart, vend].pack('L>4')
+  def set_compressed(i, pstart, size)
+    pend = pstart + size
+    e = entry(i)
+    write(i, e.vstart, e.vend, pstart, pend)
+  end
+
+  def write(i, vstart, vend, pstart, pend)
+    data = [vstart, vend, pstart, pend].pack('L>4')
     @buffer[i*0x10,0x10] = data
   end
 end
