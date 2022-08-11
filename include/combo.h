@@ -7,6 +7,7 @@
 #include <libultra.h>
 #include <oot/save.h>
 #include <mm/save.h>
+#include <combo/defs.h>
 
 /* System */
 typedef void (*EntryPoint)(void)  __attribute__ ((noreturn));

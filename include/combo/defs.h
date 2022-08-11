@@ -24,6 +24,7 @@
 # define COMBO_CTX_ADDR_WRITE   COMBO_CTX_ADDR_OOT
 #endif
 
+#define MM_BASE       0x02000000
 #define PAYLOAD_SIZE  0x00020000
 
 #endif /* COMBO_DEFS_H */

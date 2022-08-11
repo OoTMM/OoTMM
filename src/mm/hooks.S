@@ -2,7 +2,7 @@
 
 /* Rebase MM */
 PATCH_START(0x80092960)
-  lui t7, 0xb400
+  lui t7, (0xb0000000 | MM_BASE) >> 16
 PATCH_END
 
 /* Rebase MM save */

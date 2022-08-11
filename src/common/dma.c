@@ -1,7 +1,7 @@
+#include <combo.h>
 #include <stdint.h>
 
 #define MM_VROM_OFFSET  0x04000000
-#define MM_OFFSET       0x04000000
 
 typedef struct
 {
@@ -20,7 +20,7 @@ void comboInitDma(void)
 {
     DmaEntry* e;
     comboDma(kComboDmaData, 0x7430, 0x5e6 * sizeof(DmaEntry));
-    comboDma(kComboDmaData + 0x5e6, 0x1a500 | MM_OFFSET, 0x610 * sizeof(DmaEntry));
+    comboDma(kComboDmaData + 0x5e6, 0x1a500 | MM_BASE, 0x610 * sizeof(DmaEntry));
     for (int i = 0x5e6; i < 0x5e6 + 0x610; ++i)
     {
         e = kComboDmaData + i;
@@ -30,8 +30,8 @@ void comboInitDma(void)
 
         e->vstart |= MM_VROM_OFFSET;
         e->vend |= MM_VROM_OFFSET;
-        e->pstart |= MM_OFFSET;
+        e->pstart |= MM_BASE;
         if (e->pend)
-            e->pend |= MM_OFFSET;
+            e->pend |= MM_BASE;
     }
 }

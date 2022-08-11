@@ -11,9 +11,8 @@ module Combo::Packer
 
     File.open(Combo::ROM_OOTMM, "w+b") do |f|
       puts "Packing the rom..."
-      f.truncate(128 * 1024 * 1024)
+      f.truncate(64 * 1024 * 1024)
       f.write(oot)
-      f.seek(64 * 1024 * 1024)
       f.write(mm)
 
       Combo::GAMES.each do |game|
