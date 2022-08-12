@@ -53,8 +53,3 @@ PATCH_END
 PATCH_START(0x8096c568)
   nop
 PATCH_END
-
-/* Hook into Play_Init */
-PATCH_START(0x801bd9b8)
-.int hookPlay_Init
-PATCH_END

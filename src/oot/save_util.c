@@ -2,8 +2,6 @@
 #include <string.h>
 #include <strings.h>
 
-MmSaveContext gSaveContextMM;
-
 static void copyName(u8* dst, const u8* src)
 {
     u8 c0;
@@ -93,43 +91,42 @@ static const MmInventory kDefaultInventory =
 void comboCreateSaveMM(void)
 {
     uint32_t base;
-    MmSaveContext* s = &gSaveContextMM;
-    bzero(s, sizeof(*s));
+    bzero(&gMmSave, sizeof(MmSave));
 
     /* Create some save data */
-    s->save.entranceIndex = 0xd800;
-    s->save.cutscene = 0;
-    s->save.isFirstCycle = 1;
-    s->save.hasTatl = 1;
-    s->save.playerForm = 4;
-    s->save.time = 0x3fff;
-    s->save.playerData.health = 0x30;
-    s->save.playerData.healthCapacity = 0x30;
-    s->save.playerData.unk_20 = 0xff00;
-    s->save.playerData.unk_24 = 0xff00;
-    s->save.playerData.savedSceneNum = 8;
-    s->save.horseData.scene = 53;
-    s->save.horseData.pos.x = -1420;
-    s->save.horseData.pos.y = 257;
-    s->save.horseData.pos.z = -1285;
-    s->save.horseData.yaw = -0x7554;
+    gMmSave.entranceIndex = 0xd800;
+    gMmSave.cutscene = 0;
+    gMmSave.isFirstCycle = 1;
+    gMmSave.hasTatl = 1;
+    gMmSave.playerForm = 4;
+    gMmSave.time = 0x3fff;
+    gMmSave.playerData.health = 0x30;
+    gMmSave.playerData.healthCapacity = 0x30;
+    gMmSave.playerData.unk_20 = 0xff00;
+    gMmSave.playerData.unk_24 = 0xff00;
+    gMmSave.playerData.savedSceneNum = 8;
+    gMmSave.horseData.scene = 53;
+    gMmSave.horseData.pos.x = -1420;
+    gMmSave.horseData.pos.y = 257;
+    gMmSave.horseData.pos.z = -1285;
+    gMmSave.horseData.yaw = -0x7554;
 
     /* Set the defaults */
-    memcpy(&s->save.itemEquips, &kDefaultItemEquips, sizeof(s->save.itemEquips));
-    memcpy(&s->save.inventory, &kDefaultInventory, sizeof(s->save.inventory));
+    memcpy(&gMmSave.itemEquips, &kDefaultItemEquips, sizeof(gMmSave.itemEquips));
+    memcpy(&gMmSave.inventory, &kDefaultInventory, sizeof(gMmSave.inventory));
 
     /* Set the magic */
-    memcpy(s->save.playerData.newf, "ZELDA3", 6);
+    memcpy(gMmSave.playerData.newf, "ZELDA3", 6);
 
     /* Copy the player name */
-    copyName(s->save.playerData.playerName, gSaveContext.playerName);
+    copyName(gMmSave.playerData.playerName, gSave.playerName);
 
     /* Set the checksum */
-    s->save.checksum = 0;
-    s->save.checksum = comboComputeChecksum(&s->save, sizeof(s->save));
+    gMmSave.checksum = 0;
+    gMmSave.checksum = comboComputeChecksum(&gMmSave, sizeof(gMmSave));
 
     /* Write the save data to flash */
     base = 0x8000 + 0x4000 * gSaveContext.fileIndex;
-    comboReadWriteFlash(base, s, sizeof(s->save), 1);
-    comboReadWriteFlash(base + 0x2000, s, sizeof(s->save), 1);
+    comboReadWriteFlash(base, &gMmSave, sizeof(gMmSave), 1);
+    comboReadWriteFlash(base + 0x2000, &gMmSave, sizeof(gMmSave), 1);
 }

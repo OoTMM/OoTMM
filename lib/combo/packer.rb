@@ -2,14 +2,14 @@ require 'combo/patcher'
 require 'combo/compressor'
 
 module Combo::Packer
-  def self.run()
+  def self.run(opts)
     oot = Combo::Patcher.run(:oot)
     mm = Combo::Patcher.run(:mm)
 
     oot = Combo::Compressor.run(:oot, oot)
     mm = Combo::Compressor.run(:mm, mm)
 
-    File.open(Combo::ROM_OOTMM, "w+b") do |f|
+    File.open(opts.out, "w+b") do |f|
       puts "Packing the rom..."
       f.truncate(64 * 1024 * 1024)
       f.write(oot)

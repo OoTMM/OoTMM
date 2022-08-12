@@ -5,7 +5,7 @@ extern void comboSwitchToOoT(void);
 
 void hookPlay_Init(void* a)
 {
-    if (gSaveContext.save.entranceIndex == 0xc010)
+    if (gSave.entranceIndex == 0xc010)
     {
         comboSwitchToOoT();
         return;

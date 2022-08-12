@@ -16,10 +16,24 @@ typedef struct PACKED
     s16     deathCount;
     char    playerName[8];
     char    data[0x1328];
+}
+OotSave;
+
+typedef struct PACKED
+{
+    OotSave save;
     u32     fileIndex;
 }
 OotSaveContext;
 
-_Static_assert(sizeof(OotSaveContext) == 0x1358, "OotSaveContext size is wrong");
+_Static_assert(sizeof(OotSave) == 0x1354, "OotSave size is wrong");
+
+#if defined(GAME_OOT)
+extern OotSaveContext   gSaveContext;
+# define gOotSave       (gSaveContext.save)
+# define gSave          gOotSave
+#else
+extern OotSave          gOotSave;
+#endif
 
 #endif /* OOT_SAVE_H */

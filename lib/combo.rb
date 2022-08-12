@@ -1,15 +1,14 @@
 require 'combo/packer'
 require 'combo/decompressor'
+require 'combo/options'
 
 module Combo
   def self.run(args)
+    @opts = Options.new(args)
+
     decompress()
     build()
     pack()
-    #extract_roms()
-    #pack_rom()
-    #build_asm()
-    #patch_rom()
   end
 
   def self.decompress()
@@ -23,6 +22,6 @@ module Combo
   end
 
   def self.pack()
-    Combo::Packer.run()
+    Combo::Packer.run(@opts)
   end
 end
