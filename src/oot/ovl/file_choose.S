@@ -34,3 +34,8 @@ PATCH_START(0x80811ab8)
   jal hookDeep_FileChoose_Update
    nop
 PATCH_END
+
+/* Patch the FileChoose_Init function to mute BGM when coming from MM */
+PATCH_START(0x808124a8)
+  jal hook_FileChoose_Init
+PATCH_END
