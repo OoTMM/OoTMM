@@ -10,9 +10,6 @@
 #include <combo/defs.h>
 #include <combo/common/audio.h>
 
-/* System */
-typedef void (*EntryPoint)(void)  __attribute__ ((noreturn));
-
 void comboDisableInterrupts(void);
 void comboDma(void* addr, uint32_t cartAddr, uint32_t size);
 
@@ -32,15 +29,14 @@ void comboExportContext(void);
 /* Init */
 void comboInitDma(void);
 
-/* Saves */
-extern OotSaveContext gSaveContextOoT;
-extern MmSaveContext gSaveContextMM;
-
 /* Flash */
 void comboReadWriteFlash(u32 devAddr, void* dramAddr, u32 size, s32 direction);
 
 /* Save */
 void comboSaveRead(void);
 void comboSaveWrite(void);
+
+/* Switch */
+void comboGameSwitch(void);
 
 #endif /* COMBO_COMBO_H */

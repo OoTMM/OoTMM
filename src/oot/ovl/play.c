@@ -7,7 +7,7 @@ void hookPlay_Init(void* a)
 {
     if ((gSave.entrance & 0xfffc) == 0x0530)
     {
-        comboSwitchToMM();
+        comboGameSwitch();
         return;
     }
 

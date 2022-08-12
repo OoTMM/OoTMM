@@ -7,7 +7,7 @@ void hookPlay_Init(void* a)
 {
     if (gSave.entranceIndex == 0xc010)
     {
-        comboSwitchToOoT();
+        comboGameSwitch();
         return;
     }
 
