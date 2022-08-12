@@ -7,3 +7,13 @@ OotSave gOotSave;
 #if !defined(GAME_MM)
 MmSave gMmSave;
 #endif
+
+void comboSaveRead(void)
+{
+
+}
+
+void comboSaveWrite(void)
+{
+
+}

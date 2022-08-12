@@ -39,4 +39,8 @@ extern MmSaveContext gSaveContextMM;
 /* Flash */
 void comboReadWriteFlash(u32 devAddr, void* dramAddr, u32 size, s32 direction);
 
+/* Save */
+void comboSaveRead(void);
+void comboSaveWrite(void);
+
 #endif /* COMBO_COMBO_H */
