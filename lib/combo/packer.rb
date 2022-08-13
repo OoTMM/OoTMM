@@ -19,6 +19,9 @@ module Combo::Packer
         puts "Packing payload for #{game}..."
         data = File.binread(File.join(Combo::PATH_BUILD, "#{game}_payload.bin"))
         addr = Combo::METADATA[game][:payload_addr]
+        if (data.size > 0x20000)
+          raise "Payload for #{game} is too big"
+        end
         f.seek(addr)
         f.write(data)
       end

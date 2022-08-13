@@ -1,5 +1,8 @@
 #include <combo/asm.h>
 
+/* TODO: Broken hook, this does not work with HOOK_CALL */
+/* Maybe it has something to do with the missing nop? */
+/* Should investigate because possible UB */
 .global hookDeep_En_Mag_Main
 hookDeep_En_Mag_Main:
   /* Prologue */

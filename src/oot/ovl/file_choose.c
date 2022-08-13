@@ -20,3 +20,8 @@ void hook_FileChoose_Init(void)
         PlayMusic(0, 0x57, 0, 7, 1);
     }
 }
+
+void hookAfter_FileChoose_OpenSave(void)
+{
+    comboLoadForeignSave(gSaveContext.fileIndex);
+}

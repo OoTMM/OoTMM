@@ -2,25 +2,7 @@
 
 .global hookDeep_FileChoose_Update
 hookDeep_FileChoose_Update:
-  /* Prologue */
-  addiu sp,-0x14
-  sw    ra,0x10(sp)
-  sw    a0,0x0c(sp)
-  sw    a1,0x08(sp)
-  sw    a2,0x04(sp)
-  sw    a3,0x00(sp)
-
-  /* Apply our changes */
-  jal   hook_FileChoose_Update
-   nop
-
-  /* Restore */
-  lw      a3,0x00(sp)
-  lw      a2,0x04(sp)
-  lw      a1,0x08(sp)
-  lw      a0,0x0c(sp)
-  lw      ra,0x10(sp)
-  addiu   sp,0x14
+  HOOK_CALL(hook_FileChoose_Update)
 
   /* Original code */
   lh  t3,0x4a2e(a2)
@@ -38,4 +20,9 @@ PATCH_END
 /* Patch the FileChoose_Init function to mute BGM when coming from MM */
 PATCH_START(0x808124a8)
   jal hook_FileChoose_Init
+PATCH_END
+
+/* Load foreign save */
+PATCH_START(0x80811368)
+  j hookAfter_FileChoose_OpenSave
 PATCH_END
