@@ -23,5 +23,5 @@ void hook_FileChoose_Init(void)
 
 void hookAfter_FileChoose_OpenSave(void)
 {
-    comboLoadForeignSave(gSaveContext.fileIndex);
+    comboReadForeignSave();
 }

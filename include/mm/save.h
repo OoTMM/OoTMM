@@ -95,17 +95,19 @@ MmSave;
 typedef struct PACKED
 {
     MmSave save;
+    char   unk[0x2c94];
+    u32    fileIndex;
 }
 MmSaveContext;
 
 _Static_assert(sizeof(MmSave) == 0x100c, "MmSave size is wrong");
 
 #if defined(GAME_MM)
-extern MmSaveContext    gSaveContext;
-# define gMmSave        (gSaveContext.save)
-# define gSave          gMmSave
+ALIGNED(16) extern MmSaveContext gSaveContext;
+# define gMmSave    (gSaveContext.save)
+# define gSave      gMmSave
 #else
-extern MmSave           gMmSave;
+ALIGNED(16) extern MmSave gMmSave;
 #endif
 
 #endif /* MM_SAVE_H */

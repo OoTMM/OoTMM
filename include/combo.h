@@ -33,7 +33,9 @@ void comboInitDma(void);
 void comboReadWriteFlash(u32 devAddr, void* dramAddr, u32 size, s32 direction);
 
 /* Save */
-void comboLoadForeignSave(int fileIndex);
+void comboReadForeignSave(void);
+void comboWriteForeignSave(void);
+void comboWriteSave(void);
 
 /* Switch */
 void comboGameSwitch(void);

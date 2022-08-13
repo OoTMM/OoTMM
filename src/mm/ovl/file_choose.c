@@ -11,5 +11,5 @@ void hook_FileChoose_Update(void* fc)
 
 void hookAfter_FileChoose_OpenSave(void)
 {
-    comboLoadForeignSave(gComboCtx.saveIndex);
+    comboReadForeignSave();
 }

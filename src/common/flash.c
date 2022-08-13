@@ -121,6 +121,8 @@ void comboReadWriteFlash(u32 devAddr, void* dramAddr, u32 size, s32 direction)
 {
     OSMesg msg;
 
+    devAddr |= 0x08000000;
+
     osCreateMesgQueue(&sQueue, &msg, 1);
     sMb.hdr.pri = 0;
     sMb.hdr.retQueue = &sQueue;

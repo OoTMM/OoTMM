@@ -17,6 +17,7 @@ void comboGameSwitch(void)
     gComboCtx.saveIndex = gSaveContext.fileIndex;
 #endif
 
+    comboWriteSave();
     comboDisableInterrupts();
     comboDma((void*)FOREIGN_OFF, FOREIGN_CART, 0x100000);
     comboExportContext();

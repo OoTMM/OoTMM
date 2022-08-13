@@ -26,22 +26,6 @@ static void copyName(u8* dst, const u8* src)
     }
 }
 
-static uint16_t comboComputeChecksum(void* data, int len)
-{
-    uint16_t checksum;
-    uint8_t* p;
-
-    checksum = 0;
-    p = (uint8_t*)data;
-    while (len > 0)
-    {
-        checksum += *p;
-        ++p;
-        len--;
-    }
-    return checksum;
-}
-
 static const MmItemEquips kDefaultItemEquips =
 {
     {
@@ -121,12 +105,6 @@ void comboCreateSaveMM(void)
     /* Copy the player name */
     copyName(gMmSave.playerData.playerName, gSave.playerName);
 
-    /* Set the checksum */
-    gMmSave.checksum = 0;
-    gMmSave.checksum = comboComputeChecksum(&gMmSave, sizeof(gMmSave));
-
-    /* Write the save data to flash */
-    base = 0x8000 + 0x4000 * gSaveContext.fileIndex;
-    comboReadWriteFlash(base, &gMmSave, sizeof(gMmSave), 1);
-    comboReadWriteFlash(base + 0x2000, &gMmSave, sizeof(gMmSave), 1);
+    /* Save */
+    comboWriteForeignSave();
 }
