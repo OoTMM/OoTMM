@@ -5,10 +5,17 @@
 #include <string.h>
 #include <strings.h>
 #include <libultra.h>
-#include <oot/save.h>
-#include <mm/save.h>
 #include <combo/defs.h>
 #include <combo/common/audio.h>
+
+/* Both games need the save defs */
+#include <oot/save.h>
+#include <mm/save.h>
+
+#if defined(GAME_OOT)
+# include <oot/actor.h>
+# include <oot/play.h>
+#endif
 
 void comboDisableInterrupts(void);
 void comboDma(void* addr, uint32_t cartAddr, uint32_t size);
@@ -39,5 +46,8 @@ void comboWriteSave(void);
 
 /* Switch */
 void comboGameSwitch(void);
+
+/* Override */
+s32 comboGetChestOverride(u16 scene, u8 id);
 
 #endif /* COMBO_COMBO_H */
