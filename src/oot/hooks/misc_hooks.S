@@ -10,9 +10,11 @@ li t9, 0x0
 PATCH_END
 
 /* Spawn child link at Mask shop */
+#if 0
 PATCH_START(0x800903e0)
   li t4, 0x1d1
 PATCH_END
+#endif
 
 /* Hook save creation to create MM save */
 PATCH_START(0x80090eb0)

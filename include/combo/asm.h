@@ -10,7 +10,15 @@
 
 .macro PATCH_START addr
 .section .patch, "awx"
+.int 0x1
 .int \addr
+.int (1f - 0f)
+0:
+.endm
+
+.macro PATCH_EXPAND16
+.section .patch, "awx"
+.int 0x2
 .int (1f - 0f)
 0:
 .endm

@@ -8,6 +8,7 @@ class Combo::Patcher
       0x800110a0..0x80114dd0 => "code",
       0x80800000..0x808009c0 => "ovl_title",
       0x80803880..0x8081379f => "ovl_file_choose",
+      0x808301c0..0x80856720 => "ovl_player_actor",
       0x80aecdf0..0x80aefd00 => "actors/ovl_En_Mag",
     },
     mm: {
@@ -34,15 +35,49 @@ class Combo::Patcher
   def run()
     File.open(File.join(Combo::PATH_BUILD, "#{@game}_patch.bin"), "rb") do |f|
       while !f.eof? do
-        addr, len = *f.read(8).unpack('L>L>')
-        data = f.read(len)
-        puts "Patching #{@game} at 0x#{addr.to_s(16)}"
-        offset = offset_for_addr(addr)
-        @data[offset, data.size] = data
+        type = f.read(4).unpack('L>').first
+        case type
+        when 0x1
+          patch_vram(f)
+        when 0x2
+          patch_expand16(f)
+        else
+          raise "Unknown patch type #{type}"
+        end
       end
     end
 
     @data
+  end
+
+  def patch_vram(f)
+    addr, len = *f.read(8).unpack('L>L>')
+    data = f.read(len)
+    puts "Patching #{@game} at 0x#{addr.to_s(16)}"
+    offset = offset_for_addr(addr)
+    @data[offset, data.size] = data
+  end
+
+  def patch_expand16(f)
+    count = f.read(4).unpack('L>').first / 4
+    count.times do
+      addr = f.read(4).unpack('L>').first
+      puts "Expanding (16 bits) #{@game} at 0x#{addr.to_s(16)}"
+      offset = offset_for_addr(addr)
+      raw = @data[offset, 4].unpack('L>').first
+      opcode = (raw >> 26) & 0x3f
+      case opcode
+      # Store
+      when 0x28
+        opcode = 0x29
+      when 0x20
+        opcode = 0x21
+      else
+        raise "Unknown opcode #{opcode}"
+      end
+      raw = (raw & 0x3ffffff) | (opcode << 26)
+      @data[offset, 4] = [raw].pack('L>')
+    end
   end
 
   def make_lookup_table()

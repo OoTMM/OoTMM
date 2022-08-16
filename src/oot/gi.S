@@ -1,5 +1,6 @@
 #include <combo/asm.h>
 
+#if 0
 /* Hook into DrawGiList, to use our extended table */
 PATCH_START(0x800570e0)
   lui   t9,%hi(kComboGiHandlers)
@@ -15,3 +16,4 @@ PATCH_END
 PATCH_START(0x80058330)
   addiu t4,%lo(kComboGiHandlers)
 PATCH_END
+#endif
