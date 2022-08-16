@@ -10,10 +10,6 @@ ReadWriteSaveDMA = 0x800913e8;
 
 __osPiHandle = 0x80006260;
 
-zDrawGi_O0T1_RecoveryHeart = 0x80058008;
-zDrawGi_O1T0 = 0x80058228;
-zDrawGi_O1T1 = 0x800582c0;
-
 InitDmaManager = 0x80000e6c;
 
 gSaveContext = 0x8011a5d0;
@@ -21,3 +17,30 @@ Play_Init = 0x8009a750;
 
 PlayMusic = 0x800c6b54;
 SetChestItemInRange = 0x80022bd4;
+
+Shader_Opa0_Xlu1        = 0x800582c0;
+Shader_Opa0_Xlu12       = 0x80058584;
+Shader_Opa0             = 0x80058228;
+Shader_Opa0123          = 0x800587e8;
+Shader_Opa10_Xlu2       = 0x80058470;
+Shader_Opa10_Xlu234     = 0x80058c94;
+Shader_Opa10_Xlu32      = 0x800588cc;
+Shader_Opa10234567      = 0x80058dd8;
+Shader_Xlu01            = 0x800583bc;
+Shader_BlueFire         = 0x80057238;
+Shader_BombchuMask      = 0x80057104;
+Shader_Compass          = 0x80057b34;
+Shader_DekuNut          = 0x80057ef4;
+Shader_Fairy            = 0x800575d0;
+Shader_Fish             = 0x80058120;
+Shader_GiantKnife       = 0x80057dec;
+Shader_GS               = 0x80057918;
+Shader_Heart            = 0x80058008;
+Shader_Medallion        = 0x80057a80;
+Shader_MirrorShield     = 0x800577a8;
+Shader_Poe              = 0x800573dc;
+Shader_Potion           = 0x80057c2c;
+Shader_Rupee            = 0x800589f8;
+Shader_Scale            = 0x80058b34;
+Shader_SoldOut          = 0x8005719c;
+Shader_Spell            = 0x80058698;

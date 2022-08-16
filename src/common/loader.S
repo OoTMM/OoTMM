@@ -34,7 +34,7 @@ PATCH_START(LOADER_ADDR)
   nop
 
   /* Init */
-  jal comboInit
+  jal init
   nop
 
   /* Return */

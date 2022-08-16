@@ -34,6 +34,7 @@ void comboLoadContext(void);
 void comboExportContext(void);
 
 /* Init */
+void comboInit(void);
 void comboInitDma(void);
 void comboInitOverride(void);
 
