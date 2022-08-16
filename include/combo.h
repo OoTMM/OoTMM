@@ -35,6 +35,7 @@ void comboExportContext(void);
 
 /* Init */
 void comboInitDma(void);
+void comboInitOverride(void);
 
 /* Flash */
 void comboReadWriteFlash(u32 devAddr, void* dramAddr, u32 size, s32 direction);

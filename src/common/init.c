@@ -4,4 +4,5 @@ void comboInit(void)
 {
     comboLoadContext();
     comboInitDma();
+    comboInitOverride();
 }

@@ -5,7 +5,7 @@
 #define COMBO_CTX_ADDR_MM  0x80098280
 
 #ifdef GAME_OOT
-# define PAYLOAD_ROM    0x03fc0000
+# define PAYLOAD_ROM    0x03fa0000
 # define PAYLOAD_RAM    0x80400000
 # define LOADER_ADDR    0x80006600
 # define LOADER_NEXT    InitDmaManager
@@ -15,7 +15,7 @@
 #endif
 
 #ifdef GAME_MM
-# define PAYLOAD_ROM    0x03fe0000
+# define PAYLOAD_ROM    0x03fc0000
 # define PAYLOAD_RAM    0x80760000
 # define LOADER_ADDR    0x800982b0
 # define LOADER_NEXT    0x80174bf0

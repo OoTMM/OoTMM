@@ -7,12 +7,14 @@ typedef struct PACKED
 }
 ComboOverride;
 
-#define CHEST_KEY(scene, id) ((scene) | (id << 8))
+#define CHEST_KEY(scene, id) (((scene) << 8) | (id))
 
-static ALIGNED(16) ComboOverride gComboChestOverrides[256] = {
-    { CHEST_KEY(0x0028, 0), 0xa },
-    { 0xffff, 0 }
-};
+static ALIGNED(16) ComboOverride gComboChestOverrides[256];
+
+void comboInitOverride(void)
+{
+    comboDma(&gComboChestOverrides, 0x03fe0000, sizeof(gComboChestOverrides));
+}
 
 s32 comboGetChestOverride(u16 scene, u8 id)
 {

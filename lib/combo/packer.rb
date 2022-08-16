@@ -1,5 +1,6 @@
 require 'combo/patcher'
 require 'combo/compressor'
+require 'combo/randomizer'
 
 module Combo::Packer
   def self.run(opts)
@@ -38,6 +39,9 @@ module Combo::Packer
 
       puts "Fixing the checksum..."
       fix_checksum(f)
+
+      puts "Randomizing..."
+      randomize(f)
     end
   end
 
@@ -96,5 +100,11 @@ module Combo::Packer
     end
 
     [t6 ^ t4 ^ t3, t5 ^ t2 ^ t1]
+  end
+
+  def self.randomize(f)
+    payload = Combo::Randomizer.run()
+    f.seek(0x03fe0000)
+    f.write(payload)
   end
 end
