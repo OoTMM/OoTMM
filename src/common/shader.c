@@ -36,8 +36,8 @@ void Shader_Spell(void*, s16);
 
 const Shader kShaders[256] = {
 #if defined(GAME_OOT)
-# include "shaders_oot.inc"
-# include "shaders_mm.inc"
+# include "data/oot/shaders.inc"
+# include "data/mm/shaders.inc"
 #endif
 };
 

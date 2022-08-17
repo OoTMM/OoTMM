@@ -23,6 +23,22 @@
 0:
 .endm
 
+.macro PATCH_HI16 addr
+.section .patch, "awx"
+.int 0x3
+.int \addr
+.int (1f - 0f)
+0:
+.endm
+
+.macro PATCH_LO16 addr
+.section .patch, "awx"
+.int 0x4
+.int \addr
+.int (1f - 0f)
+0:
+.endm
+
 .macro PATCH_END
 1:
 .previous

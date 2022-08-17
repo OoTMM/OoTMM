@@ -30,8 +30,5 @@ void comboInitDma(void)
 
         e->vstart |= MM_VROM_OFFSET;
         e->vend |= MM_VROM_OFFSET;
-        e->pstart |= MM_BASE;
-        if (e->pend)
-            e->pend |= MM_BASE;
     }
 }

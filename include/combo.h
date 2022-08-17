@@ -7,6 +7,8 @@
 #include <libultra.h>
 #include <combo/defs.h>
 #include <combo/common/audio.h>
+#include <combo/common/object.h>
+#include <combo/common/gi.h>
 
 /* Both games need the save defs */
 #include <oot/save.h>
