@@ -41,6 +41,12 @@ class Combo::Patcher
           patch_vram(f)
         when 0x2
           patch_expand16(f)
+        when 0x3
+          patch_hi16_lo16(f, true)
+        when 0x4
+          patch_hi16_lo16(f, false)
+        when 0x5
+          patch_write32(f)
         else
           raise "Unknown patch type #{type}"
         end
@@ -77,6 +83,41 @@ class Combo::Patcher
       end
       raw = (raw & 0x3ffffff) | (opcode << 26)
       @data[offset, 4] = [raw].pack('L>')
+    end
+  end
+
+  def patch_hi16_lo16(f, upper_half)
+    target, count = *f.read(8).unpack('L>2')
+    count = count / 4
+    target_lo = target & 0xffff
+    target_hi = (target >> 16) & 0xffff
+    value = nil
+    if upper_half
+      value = target_hi
+    else
+      value = target_lo
+    end
+    if target_lo & 0x8000
+      target_hi = target_hi + 1
+    end
+    count.times do
+      addr = f.read(4).unpack('L>').first
+      puts "Reloc (#{upper_half ? "HI" : "LO"}16) #{@game} at 0x#{addr.to_s(16)}"
+      offset = offset_for_addr(addr)
+      raw = @data[offset, 4].unpack('L>').first
+      raw = (raw & 0xffff0000) | value
+      @data[offset, 4] = [raw].pack('L>')
+    end
+  end
+
+  def patch_write32(f)
+    value = f.read(4)
+    count = f.read(4).unpack('L>').first
+    count = count / 4
+    count.times do
+      addr = f.read(4).unpack('L>').first
+      offset = offset_for_addr(addr)
+      @data[offset, 4] = value
     end
   end
 

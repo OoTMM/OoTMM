@@ -39,6 +39,14 @@
 0:
 .endm
 
+.macro PATCH_WRITE32 value
+.section .patch, "awx"
+.int 0x5
+.int \value
+.int (1f - 0f)
+0:
+.endm
+
 .macro PATCH_END
 1:
 .previous
