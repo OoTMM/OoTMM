@@ -2,7 +2,7 @@
 
 const ObjectData kExtraObjectsTable[] = {
 #define X(a, b) { Y(a), Y(b) }
-#define Y(x)    ((x) | 0x040000000)
+#define Y(x)    ((x) | 0x04000000)
 
 #if defined(GAME_OOT)
 # include "data/mm/objects.inc"

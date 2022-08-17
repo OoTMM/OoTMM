@@ -16,9 +16,11 @@
 0:
 .endm
 
-.macro PATCH_EXPAND16
+.macro PATCH_LOAD_STORE bits, unsigned
 .section .patch, "awx"
 .int 0x2
+.short \bits
+.short \unsigned
 .int (1f - 0f)
 0:
 .endm

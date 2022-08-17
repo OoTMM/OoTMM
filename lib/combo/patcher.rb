@@ -40,7 +40,7 @@ class Combo::Patcher
         when 0x1
           patch_vram(f)
         when 0x2
-          patch_expand16(f)
+          patch_load_store(f)
         when 0x3
           patch_hi16_lo16(f, true)
         when 0x4
@@ -64,20 +64,36 @@ class Combo::Patcher
     @data[offset, data.size] = data
   end
 
-  def patch_expand16(f)
+  def patch_load_store(f)
+    bits, unsigned = *f.read(4).unpack('S>2')
     count = f.read(4).unpack('L>').first / 4
+
+    op_load = nil
+    case bits
+    when 8
+      op_load = 0x20
+    when 16
+      op_load = 0x21
+    when 32
+      op_load = 0x23
+    else
+      raise "Unknown load/store size #{bits}"
+    end
+    op_store = op_load | 8
+    if !unsigned.zero?
+      op_load |= 4
+    end
+
     count.times do
       addr = f.read(4).unpack('L>').first
-      puts "Expanding (16 bits) #{@game} at 0x#{addr.to_s(16)}"
       offset = offset_for_addr(addr)
       raw = @data[offset, 4].unpack('L>').first
       opcode = (raw >> 26) & 0x3f
       case opcode
-      # Store
-      when 0x28
-        opcode = 0x29
-      when 0x20
-        opcode = 0x21
+      when 0x20, 0x21, 0x23, 0x24, 0x25, 0x27
+        opcode = op_load
+      when 0x28, 0x29, 0x2b, 0x2c, 0x2d, 0x2f
+        opcode = op_store
       else
         raise "Unknown opcode #{opcode}"
       end

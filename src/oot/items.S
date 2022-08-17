@@ -6,7 +6,7 @@ PATCH_START(0x80022d08)
 PATCH_END
 
 /* Expand link's chest item to 16 bits */
-PATCH_EXPAND16
+PATCH_LOAD_STORE 16, 0
 .int 0x80022cd0
 .int 0x80830450
 .int 0x808312e8
@@ -33,7 +33,7 @@ PATCH_EXPAND16
 PATCH_END
 
 /* Expand link's GI to 16 bits */
-PATCH_EXPAND16
+PATCH_LOAD_STORE 16, 0
 .int 0x8007b438
 .int 0x8007b44c
 .int 0x8007bdfc
@@ -41,6 +41,26 @@ PATCH_EXPAND16
 .int 0x8007bed0
 .int 0x8007bf04
 .int 0x8007bf30
+.int 0x8007bf80
+.int 0x80831318
+.int 0x8083131c
+.int 0x80848b88
+.int 0x8084c040
+.int 0x8084d26c
+.int 0x8084d2d0
+.int 0x8084d2dc
+.int 0x8084d360
+PATCH_END
+
+/* Make link's gi held item unsigned */
+PATCH_LOAD_STORE 8, 1
+.int 0x8007b438
+.int 0x8007b44c
+.int 0x8007bdfc
+.int 0x8007be18
+.int 0x8007bed0
+.int 0x8007bf04
+.int 0x8007bf04
 .int 0x8007bf80
 .int 0x80831318
 .int 0x8083131c
