@@ -42,9 +42,7 @@ class Combo::Patcher
         when 0x2
           patch_load_store(f)
         when 0x3
-          patch_hi16_lo16(f, true)
-        when 0x4
-          patch_hi16_lo16(f, false)
+          patch_rel_hilo(f)
         when 0x5
           patch_write32(f)
         else
@@ -102,25 +100,23 @@ class Combo::Patcher
     end
   end
 
-  def patch_hi16_lo16(f, upper_half)
+  def patch_rel_hilo(f)
     target, count = *f.read(8).unpack('L>2')
     count = count / 4
     target_lo = target & 0xffff
     target_hi = (target >> 16) & 0xffff
-    value = nil
-    if upper_half
-      value = target_hi
-    else
-      value = target_lo
-    end
-    if target_lo & 0x8000
+    if (target_lo & 0x8000) != 0
       target_hi = target_hi + 1
     end
     count.times do
       addr = f.read(4).unpack('L>').first
-      puts "Reloc (#{upper_half ? "HI" : "LO"}16) #{@game} at 0x#{addr.to_s(16)}"
       offset = offset_for_addr(addr)
       raw = @data[offset, 4].unpack('L>').first
+      opcode = (raw >> 26) & 0x3f
+      value = target_lo
+      if opcode == 0x0f
+        value = target_hi
+      end
       raw = (raw & 0xffff0000) | value
       @data[offset, 4] = [raw].pack('L>')
     end

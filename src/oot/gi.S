@@ -8,21 +8,18 @@ PATCH_END
 
 /* Use out extended table */
 /* TODO: Handle dynamic green rupee */
-PATCH_HI16(kExtendedGetItems)
+PATCH_REL_HILO(kExtendedGetItems)
 .int 0x808312ec
-.int 0x808392b8
-.int 0x8083c6d8
-.int 0x8083c80c
-.int 0x8084c0f8
-.int 0x8084d25c
-PATCH_END
-
-PATCH_LO16(kExtendedGetItems)
 .int 0x808312f0
+.int 0x808392b8
 .int 0x808392c8
+.int 0x8083c6d8
 .int 0x8083c6dc
+.int 0x8083c80c
 .int 0x8083c810
+.int 0x8084c0f8
 .int 0x8084c0fc
+.int 0x8084d25c
 .int 0x8084d2a4
 PATCH_END
 
