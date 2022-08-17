@@ -11,8 +11,9 @@ module Combo::Randomizer
     oot_chests.keys.each_with_index do |key, i|
       #value = Random.random_number(0x01..0x7b)
       #value = 4
-      value = 0x178
+      #value = 0x178
       #value = 0x189
+      value = 0x107
       key = key.to_i(16)
       raw = [key, value].pack('S>2')
       data[i * 4,4] = raw
