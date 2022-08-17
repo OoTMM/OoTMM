@@ -6,6 +6,7 @@
 #include <strings.h>
 #include <libultra.h>
 #include <combo/defs.h>
+#include <combo/items.h>
 #include <combo/common/audio.h>
 #include <combo/common/object.h>
 #include <combo/common/gi.h>
