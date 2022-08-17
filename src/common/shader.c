@@ -1,15 +1,9 @@
 #include <combo.h>
 
-typedef struct PACKED ALIGNED(4)
-{
-    void* func;
-    u32   lists[8];
-}
-Shader;
-
 void Shader_Opa0_Xlu1(void*, s16);
 void Shader_Opa0_Xlu12(void*, s16);
 void Shader_Opa0(void*, s16);
+void Shader_Opa01(void*, s16);
 void Shader_Opa0123(void*, s16);
 void Shader_Opa10_Xlu2(void*, s16);
 void Shader_Opa10_Xlu234(void*, s16);

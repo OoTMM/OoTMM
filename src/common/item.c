@@ -2,9 +2,7 @@
 
 #if defined(GAME_OOT)
 # define ITEM_BASE_MM 0x100
-#endif
-
-#if defined(GAME_MM)
+#else
 # define ITEM_BASE_MM 0x0
 #endif
 

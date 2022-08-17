@@ -10,6 +10,7 @@
 #include <combo/common/audio.h>
 #include <combo/common/object.h>
 #include <combo/common/gi.h>
+#include <combo/common/shader.h>
 
 /* Both games need the save defs */
 #include <oot/save.h>

@@ -47,3 +47,6 @@ Shader_Rupee            = 0x800589f8;
 Shader_Scale            = 0x80058b34;
 Shader_SoldOut          = 0x8005719c;
 Shader_Spell            = 0x80058698;
+
+InitListPolyOpa         = 0x8007e298;
+GetMatrixMV             = 0x800ab900;
