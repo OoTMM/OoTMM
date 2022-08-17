@@ -71,3 +71,8 @@ PATCH_LOAD_STORE 8, 1
 .int 0x8084d2dc
 .int 0x8084d360
 PATCH_END
+
+/* Hook into our custom item adding function */
+PATCH_START(0x8084c130)
+  jal comboAddItem
+PATCH_END
