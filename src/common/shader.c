@@ -27,6 +27,7 @@ void Shader_Rupee(void*, s16);
 void Shader_Scale(void*, s16);
 void Shader_SoldOut(void*, s16);
 void Shader_Spell(void*, s16);
+void Shader_MoonTear(void*, s16);
 
 const Shader kShaders[256] = {
 #if defined(GAME_OOT)

@@ -13,7 +13,7 @@ module Combo::Randomizer
       #value = 4
       #value = 0x178
       #value = 0x189
-      value = 0x107
+      value = 0x196
       key = key.to_i(16)
       raw = [key, value].pack('S>2')
       data[i * 4,4] = raw
