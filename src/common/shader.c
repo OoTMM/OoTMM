@@ -35,7 +35,3 @@ const Shader kShaders[256] = {
 # include "data/mm/shaders.inc"
 #endif
 };
-
-void comboInitShaders(void)
-{
-}
