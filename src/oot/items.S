@@ -73,6 +73,15 @@ PATCH_LOAD_STORE 8, 1
 PATCH_END
 
 /* Hook into our custom item adding function */
+PATCH_START(0x8084c11c)
+  sw v1,0x24(sp)
+PATCH_END
+
+PATCH_START(0x8084c128)
+  lw a1,0x24(sp)
+PATCH_END
+
 PATCH_START(0x8084c130)
-  jal comboAddItem
+  jal comboAddItemFromChest
+   nop
 PATCH_END

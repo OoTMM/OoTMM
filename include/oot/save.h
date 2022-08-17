@@ -3,7 +3,7 @@
 
 #include <types.h>
 
-typedef struct PACKED
+typedef struct PACKED ALIGNED(4)
 {
     u32     entrance;
     u32     age;
@@ -15,12 +15,20 @@ typedef struct PACKED
     char    newf[6];
     s16     deathCount;
     char    playerName[8];
-    char    data[0x1326];
+    s16     ddOnlyFlag;
+    s16     healthMax;
+    s16     health;
+    s8      magicSize;
+    s8      magicAmount;
+    u16     rupees;
+    char    unk_36[0x3e];
+    u8      inventory[0x18];
+    char    data[0x12c6];
     u16     checksum;
 }
 OotSave;
 
-typedef struct PACKED
+typedef struct PACKED ALIGNED(4)
 {
     OotSave save;
     u32     fileIndex;
