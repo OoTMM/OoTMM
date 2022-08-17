@@ -7,6 +7,7 @@ PATCH_START(0x80838f6c)
 PATCH_END
 
 /* Use out extended table */
+/* TODO: Handle dynamic green rupee */
 PATCH_HI16(kExtendedGetItems)
 .int 0x808312ec
 .int 0x808392b8
@@ -46,4 +47,7 @@ PATCH_START(0x8083130c)
   nop
 PATCH_END
 
-
+/* Force chest kicks */
+PATCH_START(0x8083c938)
+  li t2,-1
+PATCH_END
