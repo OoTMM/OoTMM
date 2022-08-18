@@ -7,11 +7,17 @@ const GetItem kExtendedGetItems[] = {
 
 #if defined(GAME_OOT)
 # include "data/oot/gi.inc"
+#else
+# include "data/mm/gi.inc"
+#endif
 # undef Y
 # undef Z
 # define Y(x)               ((x) | 0x80)
 # define Z(x)               ((x) | 0x1000)
+#if defined(GAME_OOT)
 # include "data/mm/gi.inc"
+#else
+# include "data/oot/gi.inc"
 #endif
 
 #undef X
