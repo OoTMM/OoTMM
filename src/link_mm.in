@@ -10,3 +10,7 @@ osRecvMesg = 0x80087ed0;
 __osPiHandle = 0x801fd080;
 osEPiRawWriteIo = 0x80093bb0;
 osEPiRawReadIo = 0x800920b0;
+
+gMemorySize = 0x80000318;
+ClearMemoryRange = 0x80080150;
+gDmaDataCount = 0x8009b2bc;

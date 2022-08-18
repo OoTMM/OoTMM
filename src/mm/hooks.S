@@ -26,8 +26,8 @@ PATCH_START(0x80174c4c)
 PATCH_END
 
 /* Hook in Main to load the payload */
-PATCH_START(0x8008036c)
-  jal 0x800982b0
+PATCH_START(0x8008035c)
+  jal LOADER_ADDR
 PATCH_END
 
 /* Skip the N64 logo */

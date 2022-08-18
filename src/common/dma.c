@@ -29,7 +29,9 @@ typedef struct
 }
 DmaEntry;
 
-DmaEntry kComboDmaData[DMA_COUNT + DMA_COUNT_FOREIGN];
+ALIGNED(16) DmaEntry kComboDmaData[DMA_COUNT + DMA_COUNT_FOREIGN + 1];
+
+extern s16 gDmaDataCount;
 
 void comboDma(void* addr, uint32_t cartAddr, uint32_t size);
 
@@ -48,4 +50,8 @@ void comboInitDma(void)
         e->vstart |= VROM_FOREIGN_OFFSET;
         e->vend |= VROM_FOREIGN_OFFSET;
     }
+
+#if defined(GAME_MM)
+    gDmaDataCount = DMA_COUNT + DMA_COUNT_FOREIGN;
+#endif
 }

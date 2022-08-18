@@ -18,7 +18,7 @@
 # define PAYLOAD_ROM    0x03fc0000
 # define PAYLOAD_RAM    0x80760000
 # define LOADER_ADDR    0x800982b0
-# define LOADER_NEXT    0x80174bf0
+# define LOADER_NEXT    InitDmaManager
 
 # define COMBO_CTX_ADDR_READ    COMBO_CTX_ADDR_MM
 # define COMBO_CTX_ADDR_WRITE   COMBO_CTX_ADDR_OOT
