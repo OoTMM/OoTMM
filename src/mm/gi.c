@@ -10,7 +10,7 @@ void hook_LoadObjectGi(void* player, u16 objectId)
 
     if (objectId)
     {
-        *((u8*)player + 0x160) = 1;
+        *((u8*)player + 0x1b8) = 1;
 
         if (objectId & 0x1000)
         {
@@ -25,14 +25,14 @@ void hook_LoadObjectGi(void* player, u16 objectId)
         vromStart = table[objectId].vromStart;
         vromEnd = table[objectId].vromEnd;
 
-        osCreateMesgQueue((OSMesgQueue*)((char*)player + 0x184), (OSMesg*)((char*)player + 0x19c), 1);
+        osCreateMesgQueue((OSMesgQueue*)((char*)player + 0x1dc), (OSMesg*)((char*)player + 0x1f4), 1);
         RequestDma(
-            (char*)player + 0x164,
-            *(void**)((char*)player + 0x1a0),
+            (char*)player + 0x1bc,
+            *(void**)((char*)player + 0x1f8),
             vromStart,
             vromEnd - vromStart,
             0,
-            (char*)player + 0x184,
+            (char*)player + 0x1dc,
             0
         );
     }

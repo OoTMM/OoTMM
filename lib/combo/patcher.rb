@@ -17,6 +17,7 @@ class Combo::Patcher
       0x80800000..0x80800910 => "ovl_title",
       0x80803df0..0x80804010 => "ovl_opening",
       0x80804010..0x80814e80 => "ovl_file_choose",
+      0x8082da90..0x80862af0 => "ovl_player_actor",
       0x8096b310..0x8096ec40 => "actors/ovl_En_Mag",
     }
   }

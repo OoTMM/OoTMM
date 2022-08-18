@@ -14,3 +14,6 @@ osEPiRawReadIo = 0x800920b0;
 gMemorySize = 0x80000318;
 ClearMemoryRange = 0x80080150;
 gDmaDataCount = 0x8009b2bc;
+
+RequestDma = 0x80080c04;
+kObjectsTable = 0x801c2740;
