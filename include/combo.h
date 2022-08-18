@@ -21,6 +21,11 @@
 # include <oot/play.h>
 #endif
 
+#if defined(GAME_MM)
+# include <mm/actor.h>
+# include <mm/play.h>
+#endif
+
 void comboDisableInterrupts(void);
 void comboDma(void* addr, uint32_t cartAddr, uint32_t size);
 

@@ -23,7 +23,7 @@ module Combo::Randomizer
       #value = 0x189
       value = 0x196
       if game == :mm
-        value = 0x10
+        value = 0x42
       end
       key = key.to_i(16)
       raw = [key, value].pack('S>2')

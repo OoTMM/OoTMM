@@ -11,9 +11,10 @@ typedef struct PACKED
     u32     nextGameStateSize;
     char    unk_14[0x87];
     u8      running;
+    char    unk_9c[0x8];
 }
-MmGameState;
+GameState;
 
-_Static_assert(sizeof(MmGameState) == 0x9c, "MmGameState size is wrong");
+_Static_assert(sizeof(GameState) == 0xa4, "MM GameState size is wrong");
 
 #endif
