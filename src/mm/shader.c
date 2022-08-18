@@ -40,10 +40,43 @@ void Shader_Opa10_Xlu234(GameState* gs, s16 index)
 
 void Shader_Medallion(GameState* gs, s16 index)
 {
+    /* Not accurate */
     OPEN_DISPS(gs->gfx);
     gSPDisplayList(POLY_OPA_DISP++, (u32)(&kInitListMedallion));
     gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(gs->gfx), G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(POLY_OPA_DISP++, kShaders[index].lists[0]);
     gSPDisplayList(POLY_OPA_DISP++, kShaders[index].lists[1]);
     CLOSE_DISPS();
+}
+
+void Shader_Spell(GameState* gs, s16 index)
+{
+    /* Not accurate */
+    OPEN_DISPS(gs->gfx);
+    InitListPolyXlu(gs->gfx);
+    gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(gs->gfx), G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPDisplayList(POLY_XLU_DISP++, kShaders[index].lists[0]);
+    gSPDisplayList(POLY_XLU_DISP++, kShaders[index].lists[1]);
+    gSPDisplayList(POLY_XLU_DISP++, kShaders[index].lists[2]);
+    CLOSE_DISPS();
+}
+
+void Shader_Scale(GameState* gs, s16 index)
+{
+
+}
+
+void Shader_MirrorShield(GameState* gs, s16 index)
+{
+
+}
+
+void Shader_SoldOut(GameState* gs, s16 index)
+{
+
+}
+
+void Shader_BlueFire(GameState* gs, s16 index)
+{
+
 }

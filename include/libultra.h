@@ -46,6 +46,7 @@ OSIoMesg;
 
 void osCreateMesgQueue(OSMesgQueue* queue, OSMesg* buffer, s32 count);
 void osRecvMesg(OSMesgQueue* queue, OSMesg* msg, s32 flag);
+void osSendMesg(OSMesgQueue* queue, OSMesg* msg, s32 flag);
 
 void osEPiRawReadIo(void* pihandle, u32 devAddr, u32* data);
 void osEPiRawWriteIo(void* pihandle, u32 devAddr, u32 data);

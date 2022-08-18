@@ -7,6 +7,7 @@ DMARomToRam = 0x80080790;
 osCreateMesgQueue = 0x8008f240;
 osEPiStartDma = 0x8008ee30;
 osRecvMesg = 0x80087ed0;
+osSendMesg = 0x80087b10;
 __osPiHandle = 0x801fd080;
 osEPiRawWriteIo = 0x80093bb0;
 osEPiRawReadIo = 0x800920b0;

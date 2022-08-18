@@ -29,15 +29,6 @@ void Shader_SoldOut(void*, s16);
 void Shader_Spell(void*, s16);
 void Shader_MoonTear(void*, s16);
 
-#if defined(GAME_MM)
-/* Missing shaders */
-# define Shader_Spell           ((void*)0)
-# define Shader_Scale           ((void*)0)
-# define Shader_MirrorShield    ((void*)0)
-# define Shader_SoldOut         ((void*)0)
-# define Shader_BlueFire        ((void*)0)
-#endif
-
 const Shader kShaders[256] = {
 #if defined(GAME_OOT)
 # include "data/oot/shaders.inc"
