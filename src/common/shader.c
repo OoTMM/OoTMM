@@ -31,7 +31,6 @@ void Shader_MoonTear(void*, s16);
 
 #if defined(GAME_MM)
 /* Missing shaders */
-# define Shader_Medallion       ((void*)0)
 # define Shader_Spell           ((void*)0)
 # define Shader_Scale           ((void*)0)
 # define Shader_MirrorShield    ((void*)0)
