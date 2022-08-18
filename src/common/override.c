@@ -1,5 +1,11 @@
 #include <combo.h>
 
+#if defined(GAME_OOT)
+# define CHEST_OVERRIDE_ADDR 0x03fe1000
+#else
+# define CHEST_OVERRIDE_ADDR 0x03fe2000
+#endif
+
 typedef struct PACKED
 {
     u16 key;
@@ -13,7 +19,7 @@ static ALIGNED(16) ComboOverride gComboChestOverrides[256];
 
 void comboInitOverride(void)
 {
-    comboDma(&gComboChestOverrides, 0x03fe0000, sizeof(gComboChestOverrides));
+    comboDma(&gComboChestOverrides, CHEST_OVERRIDE_ADDR, sizeof(gComboChestOverrides));
 }
 
 s32 comboGetChestOverride(u16 scene, u8 id)
