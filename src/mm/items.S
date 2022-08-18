@@ -1,5 +1,10 @@
 #include <combo/asm.h>
 
+/* Use our hook */
+PATCH_START(0x800b8b98)
+  jal hook_SetChestItemInRange
+PATCH_END
+
 /* MM already have 16 bits indices into the GI table */
 /* Make link's gi held item unsigned */
 PATCH_LOAD_STORE 8, 1
