@@ -35,7 +35,6 @@ void Shader_MoonTear(void*, s16);
 # define Shader_Spell           ((void*)0)
 # define Shader_Scale           ((void*)0)
 # define Shader_MirrorShield    ((void*)0)
-# define Shader_Opa10_Xlu2      ((void*)0)
 # define Shader_SoldOut         ((void*)0)
 # define Shader_BlueFire        ((void*)0)
 # define Shader_Opa10_Xlu234    ((void*)0)

@@ -39,3 +39,7 @@ Shader_Poe                  = 0x800ee400;
 Shader_Potion               = 0x800eea48;
 Shader_Rupee                = 0x800efab8;
 Shader_MoonTear             = 0x800ef65c;
+
+InitListPolyOpa = 0x8012c28c;
+InitListPolyXlu = 0x8012c2dc;
+GetMatrixMV     = 0x80181a40;
