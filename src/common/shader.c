@@ -37,7 +37,6 @@ void Shader_MoonTear(void*, s16);
 # define Shader_MirrorShield    ((void*)0)
 # define Shader_SoldOut         ((void*)0)
 # define Shader_BlueFire        ((void*)0)
-# define Shader_Opa10_Xlu234    ((void*)0)
 #endif
 
 const Shader kShaders[256] = {
