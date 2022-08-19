@@ -81,7 +81,17 @@ void Shader_Scale(GameState* gs, s16 index)
 
 void Shader_MirrorShield(GameState* gs, s16 index)
 {
+    s32 fc = gs->frameCount;
 
+    OPEN_DISPS(gs->gfx);
+    InitListPolyOpa(gs->gfx);
+    gSPSegment(POLY_OPA_DISP++, 8, GetSegment(gs->gfx, 0, 0, (fc & 0x7f) << 1, 0x40, 0x40, 1, 0, (fc & 0x7f), 0x20, 0x20));
+    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(gs->gfx), G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPDisplayList(POLY_OPA_DISP++, kShaders[index].lists[0]);
+    InitListPolyXlu(gs->gfx);
+    gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(gs->gfx), G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPDisplayList(POLY_XLU_DISP++, kShaders[index].lists[1]);
+    CLOSE_DISPS();
 }
 
 void Shader_SoldOut(GameState* gs, s16 index)
