@@ -9,11 +9,13 @@
 static void addItemOot(u16 itemId)
 {
     gOotSave.inventory[0] = ITEM_OOT_OCARINA_OF_TIME;
+    gMmSave.inventory.items[0] = ITEM_MM_OCARINA_OF_TIME;
 }
 
 static void addItemMm(u16 itemId)
 {
     gOotSave.inventory[0] = ITEM_OOT_MASK_OF_TRUTH;
+    gMmSave.inventory.items[0] = ITEM_MM_MASK_TRUTH;
 }
 
 int comboAddItem(void* play, u16 itemId)

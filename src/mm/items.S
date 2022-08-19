@@ -33,3 +33,11 @@ PATCH_LOAD_STORE 8, 1
 .int 0x8085a83c
 .int 0x8085b914
 PATCH_END
+
+/* Use our item-inventory handler */
+PATCH_START(0x8084834c)
+  lw v0,0x24(sp)
+  lw a0,0x20(sp)
+  jal comboAddItemFromChest
+   lh a1,0x384(v0)
+PATCH_END
