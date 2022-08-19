@@ -4,6 +4,8 @@ void    InitListPolyOpa(GfxContext* gfx);
 void    InitListPolyXlu(GfxContext* gfx);
 void*   GetMatrixMV(GfxContext* gfx);
 
+u32 GetSegment(GfxContext*, int, int, int, int, int, int, int, int, int, int);
+
 static const u64 kInitListMedallion[] = {
     0xe700000000000000, 0xd7000002ffffffff,
     0xfc11fe23fffff7fb, 0xef082c1000552078,
@@ -40,7 +42,6 @@ void Shader_Opa10_Xlu234(GameState* gs, s16 index)
 
 void Shader_Medallion(GameState* gs, s16 index)
 {
-    /* Not accurate */
     OPEN_DISPS(gs->gfx);
     gSPDisplayList(POLY_OPA_DISP++, (u32)(&kInitListMedallion));
     gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(gs->gfx), G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
@@ -51,9 +52,11 @@ void Shader_Medallion(GameState* gs, s16 index)
 
 void Shader_Spell(GameState* gs, s16 index)
 {
-    /* Not accurate */
+    s32 fc = gs->frameCount;
+
     OPEN_DISPS(gs->gfx);
     InitListPolyXlu(gs->gfx);
+    gSPSegment(POLY_XLU_DISP++, 8, GetSegment(gs->gfx, 0, fc * 2, fc * -6, 0x20, 0x20, 1, fc, fc * -2, 0x20, 0x20));
     gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(gs->gfx), G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(POLY_XLU_DISP++, kShaders[index].lists[0]);
     gSPDisplayList(POLY_XLU_DISP++, kShaders[index].lists[1]);
@@ -63,7 +66,17 @@ void Shader_Spell(GameState* gs, s16 index)
 
 void Shader_Scale(GameState* gs, s16 index)
 {
+    s32 fc = gs->frameCount;
 
+    OPEN_DISPS(gs->gfx);
+    InitListPolyXlu(gs->gfx);
+    gSPSegment(POLY_XLU_DISP++, 8, GetSegment(gs->gfx, 0, fc * 2, fc * -2, 0x40, 0x40, 1, fc * 4, fc * -4, 0x20, 0x20));
+    gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(gs->gfx), G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPDisplayList(POLY_XLU_DISP++, kShaders[index].lists[2]);
+    gSPDisplayList(POLY_XLU_DISP++, kShaders[index].lists[3]);
+    gSPDisplayList(POLY_XLU_DISP++, kShaders[index].lists[1]);
+    gSPDisplayList(POLY_XLU_DISP++, kShaders[index].lists[0]);
+    CLOSE_DISPS();
 }
 
 void Shader_MirrorShield(GameState* gs, s16 index)

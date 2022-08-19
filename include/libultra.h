@@ -63,14 +63,18 @@ extern void* __osPiHandle;
         __dlist[1] = (b);       \
     } while (0)
 
-#define gSPDisplayList(p, dl)   __gfxWrite((p), 0xde000000, (dl))
-#define gSPMatrix(p, m, f)      __gfxWrite((p), (0xda380000 | (f)), ((u32)(m)))
-
 #define G_MTX_NOPUSH        0x00
 #define G_MTX_PUSH          0x01
 #define G_MTX_MUL           0x00
 #define G_MTX_LOAD          0x02
 #define G_MTX_MODELVIEW     0x00
 #define G_MTX_PROJECTION    0x04
+
+#define G_MW_SEGMENT        0x06
+
+#define gMoveWd(p, t, o, v)           __gfxWrite((p), (0xdb000000 | ((t) << 16) | (o)), (v))
+#define gSPSegment(p, seg, base)      gMoveWd((p), G_MW_SEGMENT, (seg) * 4, (base))
+#define gSPDisplayList(p, dl)         __gfxWrite((p), 0xde000000, (dl))
+#define gSPMatrix(p, m, f)            __gfxWrite((p), (0xda380000 | (f)), ((u32)(m)))
 
 #endif /* LIBULTRA_H */

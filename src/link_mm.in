@@ -44,3 +44,4 @@ Shader_MoonTear             = 0x800ef65c;
 InitListPolyOpa = 0x8012c28c;
 InitListPolyXlu = 0x8012c2dc;
 GetMatrixMV     = 0x80181a40;
+GetSegment      = 0x8012cbd0;

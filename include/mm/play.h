@@ -1,7 +1,7 @@
 #ifndef MM_PLAY_H
 #define MM_PLAY_H
 
-#include <mm/game_state.h>
+#include <common/game_state.h>
 
 typedef struct PACKED ALIGNED(4)
 {
