@@ -1,13 +1,7 @@
 #ifndef COMMON_GAME_STATE_H
 #define COMMON_GAME_STATE_H
 
-#if defined (GAME_OOT)
-# include <oot/gfx.h>
-#endif
-
-#if defined (GAME_MM)
-# include <mm/gfx.h>
-#endif
+#include <combo/gfx.h>
 
 typedef struct PACKED
 {

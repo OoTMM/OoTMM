@@ -29,10 +29,6 @@ void Shader_SoldOut(void*, s16);
 void Shader_Spell(void*, s16);
 void Shader_MoonTear(void*, s16);
 
-void    InitListPolyOpa(GfxContext* gfx);
-void    InitListPolyXlu(GfxContext* gfx);
-void*   GetMatrixMV(GfxContext* gfx);
-
 /* Custom Shaders */
 void Shader_CustomNote(GameState* gs, u16 shaderId)
 {
@@ -49,6 +45,7 @@ void Shader_CustomNote(GameState* gs, u16 shaderId)
     g = (c >> 16) & 0xff;
     b = (c >> 8) & 0xff;
     a = (c >> 0) & 0xff;
+
     OPEN_DISPS(gs->gfx);
     InitListPolyXlu(gs->gfx);
     gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(gs->gfx), G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);

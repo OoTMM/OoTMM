@@ -1,9 +1,5 @@
 #include <combo.h>
 
-void    InitListPolyOpa(GfxContext* gfx);
-void    InitListPolyXlu(GfxContext* gfx);
-void*   GetMatrixMV(GfxContext* gfx);
-
 void Shader_Opa01(GameState* gs, u16 shaderId)
 {
     const Shader* shader;

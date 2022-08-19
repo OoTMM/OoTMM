@@ -1,5 +1,5 @@
-#ifndef COMBO_COMMON_GI_H
-#define COMBO_COMMON_GI_H
+#ifndef COMBO_GI_H
+#define COMBO_GI_H
 
 #include <types.h>
 

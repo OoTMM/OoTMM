@@ -1,7 +1,7 @@
 #ifndef OOT_PLAY_H
 #define OOT_PLAY_H
 
-#include <oot/game_state.h>
+#include <combo/game_state.h>
 
 typedef struct PACKED ALIGNED(4)
 {

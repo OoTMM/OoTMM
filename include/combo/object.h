@@ -1,5 +1,5 @@
-#ifndef COMBO_COMMON_OBJECT_H
-#define COMBO_COMMON_OBJECT_H
+#ifndef COMBO_OBJECT_H
+#define COMBO_OBJECT_H
 
 #include <types.h>
 

@@ -1,5 +1,5 @@
-#ifndef COMBO_COMMON_SHADER_H
-#define COMBO_COMMON_SHADER_H
+#ifndef COMBO_SHADER_H
+#define COMBO_SHADER_H
 
 #include <types.h>
 
@@ -12,4 +12,4 @@ Shader;
 
 extern const Shader kShaders[256];
 
-#endif /* COMBO_COMMON_SHADER_H */
+#endif

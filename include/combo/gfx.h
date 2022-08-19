@@ -1,7 +1,5 @@
-#ifndef COMBO_OOT_GFX_H
-#define COMBO_OOT_GFX_H
-
-#include <types.h>
+#ifndef COMBO_GFX_H
+#define COMBO_GFX_H
 
 typedef struct PACKED ALIGNED(4)
 {
@@ -12,19 +10,13 @@ typedef struct PACKED ALIGNED(4)
 }
 DisplayListBuffer;
 
-typedef struct PACKED ALIGNED(4)
-{
-    char                unk_000[0x1b4];
-    DisplayListBuffer   work;
-    char                unk_1c4[0xe4];
-    DisplayListBuffer   overlay;
-    DisplayListBuffer   polyOpa;
-    DisplayListBuffer   polyXlu;
-    char                unk_2d8[0x1c];
-}
-GfxContext;
+#if defined (GAME_OOT)
+# include <combo/oot/gfx.h>
+#endif
 
-_Static_assert(sizeof(GfxContext) == 0x2f4, "GfxContext is not the correct size");
+#if defined (GAME_MM)
+# include <combo/mm/gfx.h>
+#endif
 
 #define OPEN_DISPS(gfx)             \
     {                               \
@@ -40,5 +32,10 @@ _Static_assert(sizeof(GfxContext) == 0x2f4, "GfxContext is not the correct size"
 #define POLY_OPA_DISP   (__gfx->polyOpa.append)
 #define POLY_XLU_DISP   (__gfx->polyXlu.append)
 #define OVERLAY_DISP    (__gfx->overlay.append)
+
+void    InitListPolyOpa(GfxContext* gfx);
+void    InitListPolyXlu(GfxContext* gfx);
+void*   GetMatrixMV(GfxContext* gfx);
+u32     GetSegment(GfxContext* gfx, int, int, int, int, int, int, int, int, int, int);
 
 #endif

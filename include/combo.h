@@ -4,26 +4,28 @@
 #include <types.h>
 #include <string.h>
 #include <strings.h>
+
 #include <libultra.h>
+
+#include <combo/audio.h>
 #include <combo/defs.h>
+#include <combo/gi.h>
 #include <combo/items.h>
-#include <combo/common/audio.h>
-#include <combo/common/object.h>
-#include <combo/common/gi.h>
-#include <combo/common/shader.h>
+#include <combo/object.h>
+#include <combo/shader.h>
 
 /* Both games need the save defs */
-#include <oot/save.h>
-#include <mm/save.h>
+#include <combo/oot/save.h>
+#include <combo/mm/save.h>
 
 #if defined(GAME_OOT)
-# include <oot/actor.h>
-# include <oot/play.h>
+# include <combo/oot/actor.h>
+# include <combo/oot/play.h>
 #endif
 
 #if defined(GAME_MM)
-# include <mm/actor.h>
-# include <mm/play.h>
+# include <combo/mm/actor.h>
+# include <combo/mm/play.h>
 #endif
 
 void comboDisableInterrupts(void);

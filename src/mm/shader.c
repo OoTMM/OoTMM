@@ -1,11 +1,5 @@
 #include <combo.h>
 
-void    InitListPolyOpa(GfxContext* gfx);
-void    InitListPolyXlu(GfxContext* gfx);
-void*   GetMatrixMV(GfxContext* gfx);
-
-u32 GetSegment(GfxContext*, int, int, int, int, int, int, int, int, int, int);
-
 static const u64 kInitListMedallion[] = {
     0xe700000000000000, 0xd7000002ffffffff,
     0xfc11fe23fffff7fb, 0xef082c1000552078,

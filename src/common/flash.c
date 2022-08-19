@@ -1,6 +1,4 @@
-#include <strings.h>
-#include <string.h>
-#include <oot.h>
+#include <combo.h>
 
 #define FLASH_BLOCK_SIZE        128
 #define FLASH_ADDR_STATUS       0x08000000
