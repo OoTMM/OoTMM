@@ -21,9 +21,9 @@ module Combo::Randomizer
       #value = 4
       #value = 0x178
       #value = 0x189
-      value = 0x196
+      value = 0x7e
       if game == :mm
-        value = 0x81
+        value = 0x12b
       end
       key = key.to_i(16)
       raw = [key, value].pack('S>2')

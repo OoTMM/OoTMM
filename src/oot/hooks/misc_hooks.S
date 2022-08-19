@@ -12,8 +12,8 @@ PATCH_END
 /* Spawn child link at Mask shop */
 /* DEBUG: Mido house */
 PATCH_START(0x800903e0)
-  li t4,0x1d1
-  /*li t4,0x433*/
+  /*li t4,0x1d1*/
+  li t4,0x433
 PATCH_END
 
 /* Hook save creation to create MM save */

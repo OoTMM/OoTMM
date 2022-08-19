@@ -149,6 +149,7 @@
 #define ITEM_OOT_DEKU_STICK_UPGRADE2    0x99
 #define ITEM_OOT_DEKU_NUT_UPGRADE       0x9a
 #define ITEM_OOT_DEKU_NUT_UPGRADE2      0x9b
+#define ITEM_OOT_NONE                   0xff
 
 #define ITEM_MM_OCARINA_OF_TIME             0x00
 #define ITEM_MM_HERO_BOW                    0x01

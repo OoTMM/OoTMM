@@ -63,6 +63,8 @@ extern void* __osPiHandle;
         __dlist[1] = (b);       \
     } while (0)
 
+#define __gfxColor(x, b)    ((((u32)(x)) & 0xff) << b)
+
 #define G_MTX_NOPUSH        0x00
 #define G_MTX_PUSH          0x01
 #define G_MTX_MUL           0x00
@@ -72,9 +74,10 @@ extern void* __osPiHandle;
 
 #define G_MW_SEGMENT        0x06
 
-#define gMoveWd(p, t, o, v)           __gfxWrite((p), (0xdb000000 | ((t) << 16) | (o)), (v))
-#define gSPSegment(p, seg, base)      gMoveWd((p), G_MW_SEGMENT, (seg) * 4, (base))
-#define gSPDisplayList(p, dl)         __gfxWrite((p), 0xde000000, (dl))
-#define gSPMatrix(p, m, f)            __gfxWrite((p), (0xda380000 | (f)), ((u32)(m)))
+#define gMoveWd(p, t, o, v)             __gfxWrite((p), (0xdb000000 | ((t) << 16) | (o)), (v))
+#define gSPSegment(p, seg, base)        gMoveWd((p), G_MW_SEGMENT, (seg) * 4, (base))
+#define gSPDisplayList(p, dl)           __gfxWrite((p), 0xde000000, (dl))
+#define gSPMatrix(p, m, f)              __gfxWrite((p), (0xda380000 | (f)), ((u32)(m)))
+#define gDPSetEnvColor(p, r, g, b, a)   __gfxWrite((p), 0xfb000000, __gfxColor(r, 24) | __gfxColor(g, 16) | __gfxColor(b, 8) | __gfxColor(a, 0))
 
 #endif /* LIBULTRA_H */

@@ -29,6 +29,34 @@ void Shader_SoldOut(void*, s16);
 void Shader_Spell(void*, s16);
 void Shader_MoonTear(void*, s16);
 
+void    InitListPolyOpa(GfxContext* gfx);
+void    InitListPolyXlu(GfxContext* gfx);
+void*   GetMatrixMV(GfxContext* gfx);
+
+/* Custom Shaders */
+void Shader_CustomNote(GameState* gs, u16 shaderId)
+{
+    const Shader* shader;
+    u32 c;
+    u8 r;
+    u8 g;
+    u8 b;
+    u8 a;
+
+    shader = &kShaders[shaderId];
+    c = shader->lists[0];
+    r = (c >> 24) & 0xff;
+    g = (c >> 16) & 0xff;
+    b = (c >> 8) & 0xff;
+    a = (c >> 0) & 0xff;
+    OPEN_DISPS(gs->gfx);
+    InitListPolyXlu(gs->gfx);
+    gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(gs->gfx), G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gDPSetEnvColor(POLY_XLU_DISP++, r, g, b, a);
+    gSPDisplayList(POLY_XLU_DISP++, shader->lists[1]);
+    CLOSE_DISPS();
+}
+
 const Shader kShaders[256] = {
 #if defined(GAME_OOT)
 # include "data/oot/shaders.inc"
