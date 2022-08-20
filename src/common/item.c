@@ -10,8 +10,18 @@ void DisplayTextBox(void* play, s16 textId);
 
 static void addItemOot(u16 itemId)
 {
-    gOotSave.inventory[0] = ITEM_OOT_OCARINA_OF_TIME;
-    gMmSave.inventory.items[0] = ITEM_MM_OCARINA_OF_TIME;
+    switch (itemId)
+    {
+    case ITEM_OOT_OCARINA_OF_TIME:
+        gOotSave.inventory[7] = ITEM_OOT_OCARINA_OF_TIME;
+        gComboSave.ootOcarinas |= 0x2;
+        break;
+    case ITEM_OOT_FAIRY_OCARINA:
+        if (gOotSave.inventory[7] == ITEM_OOT_NONE)
+            gOotSave.inventory[7] = ITEM_OOT_FAIRY_OCARINA;
+        gComboSave.ootOcarinas |= 0x1;
+        break;
+    }
 }
 
 static void addItemMm(u16 itemId)

@@ -72,6 +72,16 @@ static const MmInventory kDefaultInventory =
     0
 };
 
+void zeroComboSaveData(void)
+{
+    char buffer[0x800];
+    bzero(buffer, sizeof(buffer));
+    for (int i = 0; i < 8; ++i)
+    {
+        comboReadWriteFlash(0x30000 + 0x800 * i + 0x4000 * gSaveContext.fileIndex, buffer, sizeof(buffer), OS_WRITE);
+    }
+}
+
 void comboCreateSaveMM(void)
 {
     uint32_t base;
@@ -106,7 +116,7 @@ void comboCreateSaveMM(void)
     copyName(gMmSave.playerData.playerName, gSave.playerName);
 
     /* Also zero the combo save */
-    bzero(&gComboSave, sizeof(gComboSave));
+    zeroComboSaveData();
 
     /* Save */
     comboWriteForeignSave();

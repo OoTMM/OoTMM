@@ -33,7 +33,7 @@ s32 comboGetChestOverride(u16 scene, u8 id)
         if (o->key == 0xffff)
             break;
         if (o->key == key)
-            return o->value;
+            return comboProgressiveChestItem(o->value);
     }
     return -1;
 }
