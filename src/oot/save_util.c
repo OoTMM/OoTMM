@@ -105,6 +105,9 @@ void comboCreateSaveMM(void)
     /* Copy the player name */
     copyName(gMmSave.playerData.playerName, gSave.playerName);
 
+    /* Also zero the combo save */
+    bzero(&gComboSave, sizeof(gComboSave));
+
     /* Save */
     comboWriteForeignSave();
 }

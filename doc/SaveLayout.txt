@@ -9,3 +9,6 @@ Save Layout:
 0x1c000     MM Owl 2 backup
 0x20000     MM Settings
 0x24000     MM Reserved
+0x30000     Combo Save 1
+0x34000     Combo Save 2
+0x38000     Combo Save 3

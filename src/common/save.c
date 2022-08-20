@@ -8,6 +8,8 @@ ALIGNED(16) OotSave gOotSave;
 ALIGNED(16) MmSave gMmSave;
 #endif
 
+ALIGNED(16) ComboSave gComboSave;
+
 static u16 computeChecksumOot(void* data, int len)
 {
     u16 checksum;
@@ -69,6 +71,13 @@ static void saveMm(void)
     comboReadWriteFlash(base + 0x2000, &gMmSave, sizeof(gMmSave), OS_WRITE);
 }
 
+static void saveCombo(void)
+{
+    u32 base;
+    base = 0x30000 + 0x4000 * gSaveContext.fileIndex;
+    comboReadWriteFlash(base, &gComboSave, sizeof(gComboSave), OS_WRITE);
+}
+
 void comboReadForeignSave(void)
 {
     u32 fileIndex = gSaveContext.fileIndex;
@@ -80,6 +89,8 @@ void comboReadForeignSave(void)
 #if !defined(GAME_MM)
     comboReadWriteFlash(0x8000 + 0x4000 * fileIndex, &gMmSave, sizeof(gMmSave), OS_READ);
 #endif
+
+    comboReadWriteFlash(0x30000 + 0x4000 * fileIndex, &gComboSave, sizeof(gComboSave), OS_READ);
 }
 
 void comboWriteForeignSave(void)
@@ -91,10 +102,13 @@ void comboWriteForeignSave(void)
 #if !defined(GAME_MM)
     saveMm();
 #endif
+
+    saveCombo();
 }
 
 void comboWriteSave(void)
 {
     saveOot();
     saveMm();
+    saveCombo();
 }

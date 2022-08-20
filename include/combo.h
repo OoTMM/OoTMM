@@ -14,10 +14,7 @@
 #include <combo/object.h>
 #include <combo/shader.h>
 #include <combo/actor_ovl.h>
-
-/* Both games need the save defs */
-#include <combo/oot/save.h>
-#include <combo/mm/save.h>
+#include <combo/save.h>
 
 #if defined(GAME_OOT)
 # include <combo/oot/actor.h>
