@@ -4,6 +4,7 @@ Actor* SpawnActor(void* const_1, GameState_Play* play, s16 actorId, float x, flo
 
 Actor* hookSpawnActor(void* const_1, GameState_Play* play, s16 actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable)
 {
+#if 0
     switch (actorId)
     {
     case 0x0a: /* En_Box */
@@ -18,5 +19,6 @@ Actor* hookSpawnActor(void* const_1, GameState_Play* play, s16 actorId, float x,
         }
         break;
     }
+#endif
     return SpawnActor(const_1, play, actorId, x, y, z, rx, ry, rz, variable);
 }

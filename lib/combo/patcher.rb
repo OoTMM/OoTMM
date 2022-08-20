@@ -10,6 +10,7 @@ class Combo::Patcher
       0x80800000..0x808009c0 => 0xb9da40,   # ovl_title
       0x80803880..0x8081379f => 0xba12c0,   # ovl_file_choose
       0x808301c0..0x80856720 => 0xbcdb70,   # ovl_player_actor
+      0x808137c0..0x8083014f => 0xbb11e0,   # kaleido_scope
     },
     mm: {
       0x80080060..0x8009b110 => 0x1060,   # boot
