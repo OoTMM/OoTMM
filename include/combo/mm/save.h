@@ -57,9 +57,9 @@ MmPermanentSceneFlags;
 
 typedef struct PACKED
 {
-    s16     scene;
-    Vec3s   pos;
-    s16     yaw;
+    s16         scene;
+    Vector3s    pos;
+    s16         yaw;
 }
 MmHorseData;
 

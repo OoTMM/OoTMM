@@ -13,6 +13,7 @@
 #include <combo/items.h>
 #include <combo/object.h>
 #include <combo/shader.h>
+#include <combo/actor_ovl.h>
 
 /* Both games need the save defs */
 #include <combo/oot/save.h>

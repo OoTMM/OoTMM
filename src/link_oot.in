@@ -51,3 +51,7 @@ InitListPolyXlu         = 0x8007e2c0;
 GetMatrixMV             = 0x800ab900;
 
 SpawnActor = 0x80025110;
+gActorOvl = 0x800e8530;
+LoadObject = 0x800812f0;
+GetObject = 0x80081628;
+ActorSetScale = 0x80020f88;

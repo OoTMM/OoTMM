@@ -21,6 +21,14 @@ typedef struct PACKED
     s16 y;
     s16 z;
 }
-Vec3s;
+Vector3s;
+
+typedef struct PACKED
+{
+    float x;
+    float y;
+    float z;
+}
+Vector3f;
 
 #endif /* TYPES_H */
