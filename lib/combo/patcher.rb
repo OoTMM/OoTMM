@@ -43,6 +43,8 @@ class Combo::Patcher
           patch_load_store(f)
         when 0x3
           patch_rel_hilo(f)
+        when 0x4
+          patch_rel_jump(f)
         when 0x5
           patch_write32(f)
         else
@@ -118,6 +120,19 @@ class Combo::Patcher
         value = target_hi
       end
       raw = (raw & 0xffff0000) | value
+      @data[offset, 4] = [raw].pack('L>')
+    end
+  end
+
+  def patch_rel_jump(f)
+    target, count = *f.read(8).unpack('L>2')
+    count = count / 4
+    target = ((target & 0x0fffffff) >> 2)
+    count.times do
+      addr = f.read(4).unpack('L>').first
+      offset = offset_for_addr(addr)
+      raw = @data[offset, 4].unpack('L>').first
+      raw = ((raw & 0xfc000000) | target)
       @data[offset, 4] = [raw].pack('L>')
     end
   end

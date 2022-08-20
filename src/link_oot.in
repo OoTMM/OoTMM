@@ -49,3 +49,5 @@ Shader_Spell            = 0x80058698;
 InitListPolyOpa         = 0x8007e298;
 InitListPolyXlu         = 0x8007e2c0;
 GetMatrixMV             = 0x800ab900;
+
+SpawnActor = 0x80025110;

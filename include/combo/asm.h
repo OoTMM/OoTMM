@@ -33,6 +33,14 @@
 0:
 .endm
 
+.macro PATCH_REL_JUMP addr
+.section .patch, "awx"
+.int 0x4
+.int \addr
+.int (1f - 0f)
+0:
+.endm
+
 .macro PATCH_WRITE32 value
 .section .patch, "awx"
 .int 0x5

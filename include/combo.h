@@ -21,6 +21,7 @@
 #if defined(GAME_OOT)
 # include <combo/oot/actor.h>
 # include <combo/oot/play.h>
+# include <combo/oot/item_etc.h>
 #endif
 
 #if defined(GAME_MM)
