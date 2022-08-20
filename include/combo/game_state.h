@@ -5,15 +5,34 @@
 
 typedef struct PACKED
 {
-    GfxContext*     gfx;
-    char            unk_4[0x4];
-    void*           destroy;
-    void*           nextGameStateInit;
-    u32             nextGameStateSize;
-    char            unk_14[0x87];
-    u8              running;
-    s32             frameCount;
-    char            unk_a0[0x4];
+    u16 buttons;
+    u8  x;
+    u8  y;
+    u16 zero;
+}
+ControllerInputState;
+
+typedef struct PACKED
+{
+    ControllerInputState current;
+    ControllerInputState previous;
+    ControllerInputState pressed;
+    ControllerInputState released;
+}
+ControllerInput;
+
+typedef struct PACKED ALIGNED(4)
+{
+    GfxContext*             gfx;
+    char                    unk_4[0x4];
+    void*                   destroy;
+    void*                   nextGameStateInit;
+    u32                     nextGameStateSize;
+    ControllerInput         input[4];
+    char                    unk_74[0x27];
+    u8                      running;
+    s32                     frameCount;
+    char                    unk_a0[0x4];
 }
 GameState;
 
