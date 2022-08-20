@@ -1,5 +1,7 @@
 #include <combo.h>
 
+void DisplayTextBox(void* play, s16 textId);
+
 #if defined(GAME_OOT)
 # define ITEM_BASE_MM 0x100
 #else
@@ -31,9 +33,12 @@ int comboAddItem(void* play, u16 itemId)
 int comboAddItemFromChest(void* play, s16 chestId)
 {
     u16 itemId;
+    u16 textId;
 
     chestId--;
     itemId = kExtendedGetItems[chestId].item;
     itemId |= (chestId & 0x100);
+
+    comboTextHijackItem(play, itemId);
     return comboAddItem(play, itemId);
 }

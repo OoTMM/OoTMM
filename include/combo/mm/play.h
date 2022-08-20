@@ -7,7 +7,9 @@ typedef struct PACKED ALIGNED(4)
 {
     GameState    gs;
     u16          sceneId;
-    char         unk[0x191b2];
+    char         unk_000a6[0x1624a];
+    char         textBuffer[4]; /* Real size unknown */
+    char         unk_162f4[0x2f64];
 }
 GameState_Play;
 

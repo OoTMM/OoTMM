@@ -1,16 +1,24 @@
 #include <string.h>
 
-void* memcpy(void* dst, const void* src, uint32_t size)
+void* memcpy(void* dst, const void* src, size_t size)
 {
-    for (uint32_t i = 0; i < size; ++i)
+    for (size_t i = 0; i < size; ++i)
         ((char*)dst)[i] = ((char*)src)[i];
     return dst;
 }
 
-int memcmp(const void* a, const void* b, uint32_t length)
+int memcmp(const void* a, const void* b, size_t length)
 {
-    for (uint32_t i = 0; i < length; ++i)
+    for (size_t i = 0; i < length; ++i)
         if (((char*)a)[i] != ((char*)b)[i])
             return ((char*)a)[i] - ((char*)b)[i];
     return 0;
+}
+
+size_t strlen(const char* str)
+{
+    size_t i = 0;
+    while (str[i] != '\0')
+        ++i;
+    return i;
 }

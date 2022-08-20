@@ -63,4 +63,7 @@ void comboGameSwitch(void);
 /* Override */
 s32 comboGetChestOverride(u16 scene, u8 id);
 
+/* Text */
+void comboTextHijackItem(GameState_Play* play, u16 itemId);
+
 #endif /* COMBO_COMBO_H */
