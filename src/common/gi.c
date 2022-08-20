@@ -1,7 +1,7 @@
 #include <combo.h>
 
 const GetItem kExtendedGetItems[] = {
-#define X(a, b, c, d, e)    {a, b, Y(c), d, Z(e)}
+#define X(a, b, c, d, e)    {a, b, Y(c), 8, Z(e)}
 #define Y(x)                x
 #define Z(x)                x
 

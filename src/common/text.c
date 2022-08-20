@@ -1,9 +1,22 @@
 #include <combo.h>
 
-#define C0 "\x05\x44"
-#define C1 "\x05\x41"
-#define C2 "\x05\x45"
-#define C3 "\x05\x46"
+#if defined(GAME_OOT)
+# define FAST "\x08"
+# define C0   "\x05\x44"
+# define C1   "\x05\x41"
+# define C2   "\x05\x45"
+# define C3   "\x05\x46"
+# define CZ   "\x05\x40"
+# define END  "\x02"
+#else
+# define FAST "\x17"
+# define C0   "\x05"
+# define C1   "\x01"
+# define C2   "\x06"
+# define C3   "\x04"
+# define CZ   "\x00"
+# define END  "\xbf"
+#endif
 
 static const char* const kItemNamesOot[] = {
     "a " C0 "Deku Stick",
@@ -164,6 +177,129 @@ static const char* const kItemNamesOot[] = {
     "the " C1 "Second Deku Nut Upgrade",
 };
 
+static const char* const kItemNamesMm[] = {
+    "the " C1 "Ocarina of Time",
+    "the " C1 "Hero's Bow",
+    "the " C1 "Fire Arrow",
+    "the " C1 "Ice Arrow",
+    "the " C1 "Light Arrow",
+    "", /* Fairy Ocarina */
+    "the " C1 "Bombs",
+    "the " C1 "Bombchus",
+    "a " C0 "Deku Stick",
+    "a " C0 "Deku Nut",
+    "a " C0 "Magic Bean",
+    "", /* Fairy Slingshot (JP) */
+    "a " C0 "Powder Keg",
+    "the " C1 "Pictograph Box",
+    "the " C1 "Lens of Truth",
+    "the " C1 "Longshot",
+    "the " C1 "Great Fairy's Sword",
+    "", /* Hookshot */
+    "an " C1 "Empty Bottle",
+    "a " C0 "Red Potion",
+    "a " C0 "Green Potion",
+    "a " C0 "Blue Potion",
+    "a " C0 "Fairy",
+    "the " C1 "Deku Princess",
+    "a bottle of " C0 "Milk",
+    "half a bottle of " C0 "Milk",
+    "a " C0 "Fish",
+    "a " C0 "Bug",
+    "", /* Blue fire */
+    "a " C0 "Poe",
+    "a " C0 "Big Poe",
+    "a bottle of " C0 "Spring Water",
+    "a bottle of " C0 "Hot Spring Water",
+    "a " C1 "Zora Egg",
+    "a bottle of " C1 "Gold Dust",
+    "a " C0 "Magic Mushroom",
+    "a " C1 "Seahorse",
+    "a bottle of " C0 "Chateau Romani",
+    "", /* Hylian Loach */
+    "", /* Drink */
+    "the " C1 "Moon's Tear",
+    "the " C1 "Land Title Deed",
+    "the " C1 "Swamp Title Deed",
+    "the " C1 "Mountain Title Deed",
+    "the " C1 "Ocean Title Deed",
+    "the " C1 "Room Key",
+    "the " C1 "Letter to Mama",
+    "the " C1 "Letter to Kafei",
+    "the " C1 "Pendant of Memories",
+    "", /* Map JP */
+    "the " C1 "Deku Mask",
+    "the " C1 "Goron Mask",
+    "the " C1 "Zora Mask",
+    "the " C1 "Fierce Deity's Mask",
+    "the " C1 "Mask of Truth",
+    "the " C1 "Kafei's Mask",
+    "the " C1 "All Night Mask",
+    "the " C1 "Bunny Hood",
+    "the " C1 "Keaton Mask",
+    "the " C1 "Garo's Mask",
+    C1 "Romani's Mask",
+    "the " C1 "Circus Leader's Mask",
+    "the " C1 "Postman's Hat",
+    "the " C1 "Couple's Mask",
+    "the " C1 "Great Fairy Mask",
+    "the " C1 "Gibdo Mask",
+    "the " C1 "Don Gero's Mask",
+    "the " C1 "Kamaro's Mask",
+    "the " C1 "Captain's Hat",
+    "the " C1 "Stone Mask",
+    "the " C1 "Bremen Mask",
+    "the " C1 "Blast Mask",
+    "the " C1 "Mask of Scents",
+    "the " C1 "Giant's Mask",
+    "", /* Medallion */
+    "", /* Medallion */
+    "", /* Medallion */
+    "the " C1 "Kokiri Sword",
+    "the " C1 "Razor Sword",
+    "the " C1 "Gilded Sword",
+    "", /* Fierce Deity's Sword */
+    "the " C1 "Hero's Shield",
+    "the " C1 "Mirror Shield",
+    "", /* Quiver */
+    "the " C1 "Big Quiver",
+    "the " C1 "Biggest Quiver",
+    "the " C1 "Bomb Bag",
+    "the " C1 "Big Bomb Bag",
+    "the " C1 "Biggest Bomb Bag",
+    "", /* JP items */
+    "",
+    "",
+    "",
+    C3 "Odalwa's Remains",
+    C3 "Goht's Remains",
+    C3 "Gyorg's Remains",
+    C3 "Twinmold's Remains",
+    "the " C2 "Sonata of Awakening",
+    "the " C2 "Goron Lullaby",
+    "the " C2 "New Wave Bossa Nova",
+    "the " C2 "Elegy of Emptiness",
+    "the " C2 "Oath to Order",
+    "", /* JP Song */
+    "the " C2 "Song of Time",
+    "the " C2 "Song of Healing",
+    C2 "Epona's Song",
+    "the " C2 "Song of Soaring",
+    "the " C2 "Song of Storms",
+    "", /* JP Song */
+    "the " C1 "Bomber's Notebook",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "the " C2 "Lullaby Intro",
+    "the " C0 "Big Key",
+    "the " C0 "Compass",
+    "the " C0 "Dungeon Map",
+    "", /* Stray Fairy */
+};
+
 static void appendStr(char** dst, const char* src)
 {
     size_t len = strlen(src);
@@ -174,13 +310,35 @@ static void appendStr(char** dst, const char* src)
 void comboTextHijackItem(GameState_Play* play, u16 itemId)
 {
     char* b;
+    const char* itemName;
 
 #if defined(GAME_MM)
     itemId ^= 0x100;
 #endif
 
+    if (itemId & 0x100)
+    {
+        itemName = kItemNamesMm[itemId & 0xff];
+    }
+    else
+    {
+        itemName = kItemNamesOot[itemId & 0xff];
+    }
+
     b = play->textBuffer;
-    appendStr(&b, "\x08You got ");
-    appendStr(&b, kItemNamesOot[itemId]);
-    appendStr(&b, "\x05\x40!\x02");
+#if defined(GAME_MM)
+    /* MM has a header */
+    memcpy(b, "\x00\x30\xfe\xff\xff\xff\xff\xff\xff\xff\xff", 11);
+    b += 11;
+#endif
+    appendStr(&b, FAST "You got ");
+    appendStr(&b, itemName);
+#if defined(GAME_OOT)
+    appendStr(&b, CZ);
+#else
+    /* strlen doesn't like NUL */
+    memcpy(b, "\x00", 1);
+    b += 1;
+#endif
+    appendStr(&b, "!" END);
 }
