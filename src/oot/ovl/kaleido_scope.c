@@ -10,6 +10,53 @@ u32 popcount(u32 x)
     return x;
 }
 
+static const u8 kTradeAdult[] = {
+    ITEM_OOT_POCKET_EGG,
+    ITEM_OOT_POCKET_CUCCO,
+    ITEM_OOT_COJIRO,
+    ITEM_OOT_ODD_MUSHROOM,
+    ITEM_OOT_ODD_POTION,
+    ITEM_OOT_POACHER_SAW,
+    ITEM_OOT_GORON_SWORD_BROKEN,
+    ITEM_OOT_PRESCRIPTION,
+    ITEM_OOT_EYE_DROPS,
+    ITEM_OOT_CLAIM_CHECK
+};
+
+static void toggleTrade(u8* slot, u32 flags, const u8* table, u32 tableSize)
+{
+    int bitPos;
+    /* We need to get the bit index of the current item */
+
+    bitPos = -1;
+    for (u32 i = 0; i < tableSize; ++i)
+    {
+        if (*slot == table[i])
+        {
+            bitPos = i;
+            break;
+        }
+    }
+    if (bitPos == -1)
+        return;
+    for (;;)
+    {
+        bitPos++;
+        if (bitPos >= tableSize)
+            bitPos = 0;
+        if (flags & (1 << bitPos))
+        {
+            *slot = table[bitPos];
+            break;
+        }
+    }
+}
+
+static void toggleTradeAdult(void)
+{
+    toggleTrade(gSave.inventory + 22, gComboSave.ootTradeAdult, kTradeAdult, sizeof(kTradeAdult));
+}
+
 static void toggleOcarina(void)
 {
     u8* slot;
@@ -40,6 +87,13 @@ static int checkItemToggle(GameState_Play* play)
         ret = 1;
         if (press)
             toggleOcarina();
+    }
+
+    if (p->item_cursor == 22 && (popcount(gComboSave.ootTradeAdult) >= 2))
+    {
+        ret = 1;
+        if (press)
+            toggleTradeAdult();
     }
 
     return ret;

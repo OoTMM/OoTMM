@@ -22,6 +22,10 @@ static void addItemOot(u16 itemId)
         gComboSave.ootOcarinas |= 0x1;
         break;
     }
+
+    /* DEBUG */
+    gOotSave.inventory[22] = ITEM_OOT_POCKET_EGG;
+    gComboSave.ootTradeAdult = 0xffffffff;
 }
 
 static void addItemMm(u16 itemId)
