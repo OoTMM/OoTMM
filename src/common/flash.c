@@ -88,7 +88,9 @@ static s32 writeFlashBlockMisaligned(u32 devAddr, void* dramAddr, u32 size)
     /* Fixup the size */
     maxSize = FLASH_BLOCK_SIZE - offset;
     if (size > maxSize)
+    {
         size = maxSize;
+    }
 
     /* Read the block */
     readFlash(devAddrSeg | blockId * FLASH_BLOCK_SIZE, buffer, FLASH_BLOCK_SIZE);
@@ -97,6 +99,7 @@ static s32 writeFlashBlockMisaligned(u32 devAddr, void* dramAddr, u32 size)
     memcpy(buffer + offset, dramAddr, size);
 
     /* Write the block */
+    osWritebackDCache(buffer, FLASH_BLOCK_SIZE);
     writeFlashBlock(blockId, buffer);
 
     return size;
@@ -108,7 +111,8 @@ static void writeFlash(u32 devAddr, void* dramAddr, u32 size)
     u32 blockId;
 
     osWritebackDCache(dramAddr, size);
-    if (size && (devAddr % FLASH_BLOCK_SIZE) != 0)
+    writeFlashBlockMisaligned(devAddr, dramAddr, size);
+    if (size && ((devAddr % FLASH_BLOCK_SIZE) != 0))
     {
         /* Misaligned write */
         ret = writeFlashBlockMisaligned(devAddr, dramAddr, size);
