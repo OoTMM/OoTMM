@@ -1,5 +1,15 @@
 #include <combo/asm.h>
 
+ItemPreventEmptyEquip:
+  sge at,t1,0xff
+  beqz at,.Lret
+  lbu v0,0x00(s1)
+  li  v0,0xff
+
+.Lret:
+  jr    ra
+   ori   at,zero,9
+
 /* Item Menu - Left Check */
 PATCH_START(0x80819d94)
   nop
@@ -18,6 +28,18 @@ PATCH_END
 /* Item Menu - Top Check */
 PATCH_START(0x8081a180)
   nop
+PATCH_END
+
+/* Item Menu - Disable "To Equip" on empty slots */
+PATCH_START(0x8081a268)
+  jal     ItemPreventEmptyEquip
+   addu   s1,t6,t7
+PATCH_END
+
+/* Item Menu - Disable equipping items on empty slots */
+PATCH_START(0x8081a2f0)
+  jal     ItemPreventEmptyEquip
+   nop
 PATCH_END
 
 deepHook_KaleidoSetCursorColor:
