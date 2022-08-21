@@ -26,6 +26,12 @@ static void addItemOot(u16 itemId)
     /* DEBUG */
     gOotSave.inventory[22] = ITEM_OOT_POCKET_EGG;
     gComboSave.ootTradeAdult = 0xffffffff;
+
+    gOotSave.inventory[23] = ITEM_OOT_WEIRD_EGG;
+    gComboSave.ootTradeChild = 0xffffffff;
+
+    gOotSave.inventory[9] = ITEM_OOT_LONGSHOT;
+    gComboSave.ootHookshots = 0xffffffff;
 }
 
 static void addItemMm(u16 itemId)

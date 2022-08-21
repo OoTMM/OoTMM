@@ -23,6 +23,20 @@ static const u8 kTradeAdult[] = {
     ITEM_OOT_CLAIM_CHECK
 };
 
+static const u8 kTradeChild[] = {
+    ITEM_OOT_WEIRD_EGG,
+    ITEM_OOT_CHICKEN,
+    ITEM_OOT_ZELDA_LETTER,
+    ITEM_OOT_KEATON_MASK,
+    ITEM_OOT_SKULL_MASK,
+    ITEM_OOT_SPOOKY_MASK,
+    ITEM_OOT_BUNNY_HOOD,
+    ITEM_OOT_GORON_MASK,
+    ITEM_OOT_ZORA_MASK,
+    ITEM_OOT_GERUDO_MASK,
+    ITEM_OOT_MASK_OF_TRUTH,
+};
+
 static void toggleTrade(u8* slot, u32 flags, const u8* table, u32 tableSize)
 {
     int bitPos;
@@ -57,6 +71,11 @@ static void toggleTradeAdult(void)
     toggleTrade(gSave.inventory + 22, gComboSave.ootTradeAdult, kTradeAdult, sizeof(kTradeAdult));
 }
 
+static void toggleTradeChild(void)
+{
+    toggleTrade(gSave.inventory + 23, gComboSave.ootTradeChild, kTradeChild, sizeof(kTradeChild));
+}
+
 static void toggleOcarina(void)
 {
     u8* slot;
@@ -69,6 +88,21 @@ static void toggleOcarina(void)
     else
     {
         *slot = ITEM_OOT_FAIRY_OCARINA;
+    }
+}
+
+static void toggleHookshots(void)
+{
+    u8* slot;
+
+    slot = gOotSave.inventory + 9;
+    if (*slot == ITEM_OOT_HOOKSHOT)
+    {
+        *slot = ITEM_OOT_LONGSHOT;
+    }
+    else
+    {
+        *slot = ITEM_OOT_HOOKSHOT;
     }
 }
 
@@ -89,11 +123,25 @@ static int checkItemToggle(GameState_Play* play)
             toggleOcarina();
     }
 
+    if (p->item_cursor == 9 && (popcount(gComboSave.ootHookshots) >= 2))
+    {
+        ret = 1;
+        if (press)
+            toggleHookshots();
+    }
+
     if (p->item_cursor == 22 && (popcount(gComboSave.ootTradeAdult) >= 2))
     {
         ret = 1;
         if (press)
             toggleTradeAdult();
+    }
+
+    if (p->item_cursor == 23 && (popcount(gComboSave.ootTradeChild) >= 2))
+    {
+        ret = 1;
+        if (press)
+            toggleTradeChild();
     }
 
     return ret;
