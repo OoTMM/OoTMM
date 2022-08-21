@@ -33,6 +33,17 @@ PATCH_START(LOADER_ADDR)
   bne  a0, zero, .Lwait2
   nop
 
+  /* Invalidate the caches */
+  li a0, PAYLOAD_RAM
+  li a1, PAYLOAD_SIZE
+  jal osInvalICache
+   nop
+
+  li a0, PAYLOAD_RAM
+  li a1, PAYLOAD_SIZE
+  jal osInvalDCache
+   nop
+
   /* Init */
   jal init
   nop

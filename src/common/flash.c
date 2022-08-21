@@ -27,6 +27,9 @@ static void readFlash(u32 devAddr, void* dramAddr, u32 size)
     sMb.size = size;
     osEPiStartDma(&__osPiHandle, &sMb, OS_READ);
     osRecvMesg(&sQueue, NULL, OS_MESG_BLOCK);
+
+    /* Invalidate cache */
+    osInvalDCache(dramAddr, size);
 }
 
 static void writeFlashBlock(u32 blockId, void* data)
@@ -93,6 +96,7 @@ static void writeFlash(u32 devAddr, void* dramAddr, u32 size)
     s32 ret;
     u32 blockId;
 
+    osWritebackDCache(dramAddr, size);
     if (size && (devAddr % FLASH_BLOCK_SIZE) != 0)
     {
         /* Misaligned write */

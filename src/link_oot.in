@@ -4,6 +4,10 @@ osCreateMesgQueue = 0x80004220;
 osEPiStartDma = 0x800040c0;
 osEPiRawReadIo = 0x80005630;
 osEPiRawWriteIo = 0x80005910;
+osInvalDCache = 0x80004250;
+osInvalICache = 0x800041a0;
+osWritebackDCache = 0x80003440;
+osWritebackDCacheAll = 0x800d5aa0;
 
 __osPiHandle = 0x80006260;
 

@@ -55,3 +55,26 @@ void comboInitDma(void)
     gDmaDataCount = DMA_COUNT + DMA_COUNT_FOREIGN;
 #endif
 }
+
+static void waitForPi(void)
+{
+    u32 status;
+
+    for (;;)
+    {
+        status = IO_READ(PI_STATUS_REG);
+        if ((status & 3) == 0)
+            return;
+    }
+}
+
+void comboDma(void* dramAddr, u32 cartAddr, u32 size)
+{
+    waitForPi();
+    IO_WRITE(PI_DRAM_ADDR_REG, (u32)dramAddr & 0x1fffffff);
+    IO_WRITE(PI_CART_ADDR_REG, cartAddr | 0x10000000);
+    IO_WRITE(PI_WR_LEN_REG, size - 1);
+    waitForPi();
+    osInvalDCache(dramAddr, size);
+    osInvalDCache(dramAddr, size);
+}

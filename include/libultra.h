@@ -52,7 +52,22 @@ void osEPiRawReadIo(void* pihandle, u32 devAddr, u32* data);
 void osEPiRawWriteIo(void* pihandle, u32 devAddr, u32 data);
 s32  osEPiStartDma(void* pihandle, OSIoMesg* mb, s32 direction);
 
+void osInvalICache(void* addr, s32 size);
+void osInvalDCache(void* addr, s32 size);
+void osWritebackDCache(void* addr, s32 size);
+void osWritebackDCacheAll(void);
+
 extern void* __osPiHandle;
+
+/* IO */
+#define IO_READ(io_reg)         (*((const volatile u32*)(io_reg)))
+#define IO_WRITE(io_reg, v)     ((*((volatile u32*)(io_reg))) = (v))
+
+#define PI_DRAM_ADDR_REG        0xa4600000
+#define PI_CART_ADDR_REG        0xa4600004
+#define PI_RD_LEN_REG           0xa4600008
+#define PI_WR_LEN_REG           0xa460000c
+#define PI_STATUS_REG           0xa4600010
 
 /* GFX */
 #define __gfxSetList(x) (__dlist = (u32*)(((u64*)(x))))
