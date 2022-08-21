@@ -144,6 +144,11 @@ static int checkItemToggle(GameState_Play* play)
             toggleTradeChild();
     }
 
+    if (ret && press)
+    {
+        PlaySound(0x4809);
+    }
+
     return ret;
 }
 
