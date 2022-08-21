@@ -29,6 +29,7 @@
 
 void comboDisableInterrupts(void);
 void comboDma(void* addr, uint32_t cartAddr, uint32_t size);
+void comboDma_NoCacheInval(void* addr, uint32_t cartAddr, uint32_t size);
 
 typedef struct PACKED ALIGNED(4)
 {

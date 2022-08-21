@@ -68,13 +68,18 @@ static void waitForPi(void)
     }
 }
 
-void comboDma(void* dramAddr, u32 cartAddr, u32 size)
+void comboDma_NoCacheInval(void* dramAddr, u32 cartAddr, u32 size)
 {
     waitForPi();
     IO_WRITE(PI_DRAM_ADDR_REG, (u32)dramAddr & 0x1fffffff);
     IO_WRITE(PI_CART_ADDR_REG, cartAddr | 0x10000000);
     IO_WRITE(PI_WR_LEN_REG, size - 1);
     waitForPi();
-    osInvalDCache(dramAddr, size);
+}
+
+void comboDma(void* dramAddr, u32 cartAddr, u32 size)
+{
+    comboDma_NoCacheInval(dramAddr, cartAddr, size);
+    osInvalICache(dramAddr, size);
     osInvalDCache(dramAddr, size);
 }

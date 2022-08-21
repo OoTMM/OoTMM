@@ -19,7 +19,9 @@ void comboGameSwitch(void)
 
     comboWriteSave();
     comboDisableInterrupts();
-    comboDma((void*)FOREIGN_OFF, FOREIGN_CART, 0x100000);
+    osInvalICache((void*)FOREIGN_DRAM, 0x100000);
+    osInvalDCache((void*)FOREIGN_DRAM, 0x100000);
+    comboDma_NoCacheInval((void*)FOREIGN_OFF, FOREIGN_CART, 0x100000);
     comboExportContext();
     ((EntryPoint)FOREIGN_DRAM)();
 }
