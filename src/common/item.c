@@ -12,6 +12,11 @@ static void addItemOot(u16 itemId)
 {
     switch (itemId)
     {
+    case ITEM_OOT_BOMB_BAG:
+        gOotSave.inventory[ITS_OOT_BOMBS] = ITEM_OOT_BOMB;
+        gOotSave.ammo[ITS_OOT_BOMBS] = 20;
+        gOotSave.upgrades.bombBag = 1;
+        break;
     case ITEM_OOT_FAIRY_BOW:
         gOotSave.inventory[ITS_OOT_BOW] = ITEM_OOT_FAIRY_BOW;
         gOotSave.ammo[ITS_OOT_BOW] = 30;
@@ -62,6 +67,13 @@ static void addItemOot(u16 itemId)
         break;
     case ITEM_OOT_QUIVER3:
         gOotSave.upgrades.quiver = 3;
+        break;
+    /* Bomb Bag */
+    case ITEM_OOT_BOMB_BAG2:
+        gOotSave.upgrades.bombBag = 2;
+        break;
+    case ITEM_OOT_BOMB_BAG3:
+        gOotSave.upgrades.bombBag = 3;
         break;
     }
 }

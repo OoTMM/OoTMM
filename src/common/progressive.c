@@ -49,6 +49,21 @@ static s32 progressiveSlingshot(void)
     }
 }
 
+static s32 progressiveOotBombBag(void)
+{
+    if (gOotSave.inventory[ITS_OOT_BOMBS] == ITEM_NONE)
+        return GI_OOT_BOMB_BAG;
+    switch (gOotSave.upgrades.bombBag)
+    {
+    case 0:
+        return GI_OOT_BOMB_BAG; /* Redundent */
+    case 1:
+        return GI_OOT_BOMB_BAG2;
+    default:
+        return GI_OOT_BOMB_BAG3;
+    }
+}
+
 s32 comboProgressiveChestItem(s32 gi)
 {
 #if defined(GAME_MM)
@@ -58,13 +73,10 @@ s32 comboProgressiveChestItem(s32 gi)
     switch (gi)
     {
     /* Items */
-    case GI_OOT_FAIRY_OCARINA:
-    case GI_OOT_OCARINA_OF_TIME:
-        /* Ocarina */
-        if (gOotSave.inventory[ITS_OOT_OCARINA] == ITEM_NONE)
-            gi = GI_OOT_FAIRY_OCARINA;
-        else
-            gi = GI_OOT_OCARINA_OF_TIME;
+    case GI_OOT_BOMB_BAG:
+    case GI_OOT_BOMB_BAG2:
+    case GI_OOT_BOMB_BAG3:
+        gi = progressiveOotBombBag();
         break;
     case GI_OOT_FAIRY_BOW:
     case GI_OOT_QUIVER2:
@@ -76,6 +88,13 @@ s32 comboProgressiveChestItem(s32 gi)
     case GI_OOT_BULLET_BAG2:
     case GI_OOT_BULLET_BAG3:
         gi = progressiveSlingshot();
+        break;
+    case GI_OOT_FAIRY_OCARINA:
+    case GI_OOT_OCARINA_OF_TIME:
+        if (gOotSave.inventory[ITS_OOT_OCARINA] == ITEM_NONE)
+            gi = GI_OOT_FAIRY_OCARINA;
+        else
+            gi = GI_OOT_OCARINA_OF_TIME;
         break;
     /* Equipment */
     case GI_OOT_GORON_BRACELET:

@@ -21,7 +21,7 @@
 static const char* const kItemNamesOot[] = {
     "a " C0 "Deku Stick",
     "a " C0 "Deku Nut",
-    "the " C1 "Bombs",
+    "a " C0 "Bomb",
     "the " C1 "Fairy Bow",
     "the " C1 "Fire Arrow",
     C1 "Din's Fire",
@@ -96,7 +96,7 @@ static const char* const kItemNamesOot[] = {
     "", /* Quiver */
     "the " C1 "Big Quiver",
     "the " C1 "Biggest Quiver",
-    "", /* Bomb bag */
+    "the " C1 "Bomb Bag",
     "the " C1 "Big Bomb Bag",
     "the " C1 "Biggest Bomb Bag",
     "the " C1 "Goron's Bracelet",
