@@ -22,20 +22,29 @@ static void addItemOot(u16 itemId)
         gOotSave.ammo[ITS_OOT_BOW] = 30;
         gOotSave.upgrades.quiver = 1;
         break;
-    case ITEM_OOT_OCARINA_OF_TIME:
-        gOotSave.inventory[ITS_OOT_OCARINA] = ITEM_OOT_OCARINA_OF_TIME;
-        gComboSave.ootOcarinas |= 0x2;
+    case ITEM_OOT_FAIRY_SLINGSHOT:
+    case ITEM_OOT_BULLET_BAG:
+        gOotSave.inventory[ITS_OOT_SLINGSHOT] = ITEM_OOT_FAIRY_SLINGSHOT;
+        gOotSave.ammo[ITS_OOT_SLINGSHOT] = 30;
+        gOotSave.upgrades.bulletBag = 1;
         break;
     case ITEM_OOT_FAIRY_OCARINA:
         if (gOotSave.inventory[ITS_OOT_OCARINA] == ITEM_NONE)
             gOotSave.inventory[ITS_OOT_OCARINA] = ITEM_OOT_FAIRY_OCARINA;
         gComboSave.ootOcarinas |= 0x1;
         break;
-    case ITEM_OOT_FAIRY_SLINGSHOT:
-    case ITEM_OOT_BULLET_BAG:
-        gOotSave.inventory[ITS_OOT_SLINGSHOT] = ITEM_OOT_FAIRY_SLINGSHOT;
-        gOotSave.ammo[ITS_OOT_SLINGSHOT] = 30;
-        gOotSave.upgrades.bulletBag = 1;
+    case ITEM_OOT_OCARINA_OF_TIME:
+        gOotSave.inventory[ITS_OOT_OCARINA] = ITEM_OOT_OCARINA_OF_TIME;
+        gComboSave.ootOcarinas |= 0x2;
+        break;
+    case ITEM_OOT_HOOKSHOT:
+        if (gOotSave.inventory[ITS_OOT_HOOKSHOT] == ITEM_NONE)
+            gOotSave.inventory[ITS_OOT_HOOKSHOT] = ITEM_OOT_HOOKSHOT;
+        gComboSave.ootHookshots |= 0x1;
+        break;
+    case ITEM_OOT_LONGSHOT:
+        gOotSave.inventory[ITS_OOT_HOOKSHOT] = ITEM_OOT_LONGSHOT;
+        gComboSave.ootHookshots |= 0x2;
         break;
     /* Strength */
     case ITEM_OOT_GORON_BRACELET:

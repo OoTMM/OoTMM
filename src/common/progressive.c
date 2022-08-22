@@ -3,24 +3,19 @@
 #define DEFAULT_GI_OOT  GI_OOT_RUPEE_BLUE
 #define DEFAULT_GI_MM   GI_MM_RUPEE_BLUE
 
-static s32 progressiveStrength(void)
+static s32 progressiveOotBombBag(void)
 {
-    switch (gOotSave.upgrades.strength)
+    if (gOotSave.inventory[ITS_OOT_BOMBS] == ITEM_NONE)
+        return GI_OOT_BOMB_BAG;
+    switch (gOotSave.upgrades.bombBag)
     {
     case 0:
-        return GI_OOT_GORON_BRACELET;
+        return GI_OOT_BOMB_BAG; /* Redundent */
     case 1:
-        return GI_OOT_SILVER_GAUNTLETS;
+        return GI_OOT_BOMB_BAG2;
     default:
-        return GI_OOT_GOLDEN_GAUNTLETS;
+        return GI_OOT_BOMB_BAG3;
     }
-}
-
-static s32 progressiveDive(void)
-{
-    if (gOotSave.upgrades.dive)
-        return GI_OOT_GOLDEN_SCALE;
-    return GI_OOT_SILVER_SCALE;
 }
 
 static s32 progressiveOotBow(void)
@@ -52,19 +47,38 @@ static s32 progressiveSlingshot(void)
     }
 }
 
-static s32 progressiveOotBombBag(void)
+static s32 progressiveOotOcarina(void)
 {
-    if (gOotSave.inventory[ITS_OOT_BOMBS] == ITEM_NONE)
-        return GI_OOT_BOMB_BAG;
-    switch (gOotSave.upgrades.bombBag)
+    if (gComboSave.ootOcarinas == 0)
+        return GI_OOT_FAIRY_OCARINA;
+    return GI_OOT_OCARINA_OF_TIME;
+}
+
+static s32 progressiveHookshot(void)
+{
+    if (gComboSave.ootHookshots == 0)
+        return GI_OOT_HOOKSHOT;
+    return GI_OOT_LONGSHOT;
+}
+
+static s32 progressiveStrength(void)
+{
+    switch (gOotSave.upgrades.strength)
     {
     case 0:
-        return GI_OOT_BOMB_BAG; /* Redundent */
+        return GI_OOT_GORON_BRACELET;
     case 1:
-        return GI_OOT_BOMB_BAG2;
+        return GI_OOT_SILVER_GAUNTLETS;
     default:
-        return GI_OOT_BOMB_BAG3;
+        return GI_OOT_GOLDEN_GAUNTLETS;
     }
+}
+
+static s32 progressiveDive(void)
+{
+    if (gOotSave.upgrades.dive)
+        return GI_OOT_GOLDEN_SCALE;
+    return GI_OOT_SILVER_SCALE;
 }
 
 static int isItemUnavailableOot(s32 gi)
@@ -112,10 +126,11 @@ static s32 progressiveChestItemOot(s32 gi)
         break;
     case GI_OOT_FAIRY_OCARINA:
     case GI_OOT_OCARINA_OF_TIME:
-        if (gOotSave.inventory[ITS_OOT_OCARINA] == ITEM_NONE)
-            gi = GI_OOT_FAIRY_OCARINA;
-        else
-            gi = GI_OOT_OCARINA_OF_TIME;
+        gi = progressiveOotOcarina();
+        break;
+    case GI_OOT_HOOKSHOT:
+    case GI_OOT_LONGSHOT:
+        gi = progressiveHookshot();
         break;
     /* Equipment */
     case GI_OOT_GORON_BRACELET:
