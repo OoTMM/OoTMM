@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/custom.h>
 
 const ObjectData kExtraObjectsTable[] = {
 #define X(a, b) { Y(a), Y(b) }
@@ -15,3 +16,10 @@ const ObjectData kExtraObjectsTable[] = {
 #undef X
 #undef Y
 };
+
+ObjectData kCustomObjectsTable[CUSTOM_OBJECTS_SIZE];
+
+void comboInitObjects(void)
+{
+    comboDma(kCustomObjectsTable, CUSTOM_OBJECTS_ADDR, CUSTOM_OBJECTS_SIZE * sizeof(ObjectData));
+}

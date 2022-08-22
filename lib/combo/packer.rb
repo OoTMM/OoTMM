@@ -27,6 +27,15 @@ module Combo::Packer
         f.write(data)
       end
 
+      puts "Packing custom data..."
+      custom_data = File.binread(File.join(Combo::PATH_BUILD, "custom.bin"))
+      addr = Combo::METADATA[:custom_addr]
+      if (custom_data.size > 0x20000)
+        raise "Custom data is too big"
+      end
+      f.seek(addr)
+      f.write(custom_data)
+
       puts "Fixing MM DMA..."
       fix_mm_dma(f)
 

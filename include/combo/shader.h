@@ -1,7 +1,7 @@
 #ifndef COMBO_SHADER_H
 #define COMBO_SHADER_H
 
-#include <types.h>
+#include <combo/types.h>
 
 typedef struct PACKED ALIGNED(4)
 {

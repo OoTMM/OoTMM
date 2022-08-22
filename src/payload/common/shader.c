@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/custom.h>
 
 void Shader_Opa0_Xlu1(void*, s16);
 void Shader_Opa0_Xlu12(void*, s16);

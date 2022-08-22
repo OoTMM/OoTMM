@@ -115,7 +115,7 @@
 /* Bullet Bag 3              */ { Shader_Opa10_Xlu234,       { 0x6000b70, 0x6000b10, 0x6000f48, 0x6000b50, 0x6000ff0 }},
 /* Kokiri Sword              */ { Shader_Opa0,               { 0x6000960 }},
 /* GS Token 2                */ { Shader_GS,                 { 0x6004db0, 0x6004eb8 }},
-/* Nothing                   */ {},
+/* Custom: Master Sword      */ { Shader_Opa0,               { CUSTOM_OBJECT_GI_SWORD2_DLIST }},
 /* Nothing                   */ {},
 /* Nothing                   */ {},
 /* Nothing                   */ {},

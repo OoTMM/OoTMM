@@ -1,0 +1,9 @@
+VROM offsets:
+  0x00000000 - Native game
+  0x04000000 - Foreign game
+  0x08000000 - Custom
+
+Objects:
+  0x0000 - Native game
+  0x1000 - Foreign game
+  0x2000 - Custom

@@ -1,7 +1,7 @@
 #ifndef COMBO_GI_H
 #define COMBO_GI_H
 
-#include <types.h>
+#include <combo/types.h>
 
 #define GI_NONE 0x0
 
@@ -143,6 +143,7 @@
 #define GI_OOT_SONG_SUN             0x87
 #define GI_OOT_SONG_TIME            0x88
 #define GI_OOT_SONG_STORMS          0x89
+#define GI_OOT_MASTER_SWORD         0x8a
 
 typedef struct PACKED ALIGNED(2)
 {

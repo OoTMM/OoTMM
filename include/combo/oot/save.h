@@ -1,7 +1,7 @@
 #ifndef OOT_SAVE_H
 #define OOT_SAVE_H
 
-#include <types.h>
+#include <combo/types.h>
 
 typedef struct PACKED ALIGNED(4)
 {
@@ -16,6 +16,15 @@ typedef struct PACKED ALIGNED(4)
     u32  quiver:3;
 }
 OotSaveUpgrades;
+
+typedef struct PACKED ALIGNED(2)
+{
+    u16  boots:4;
+    u16  tunics:4;
+    u16  shields:4;
+    u16  swords:4;
+}
+OotSaveEquipment;
 
 typedef struct PACKED ALIGNED(4)
 {
@@ -39,7 +48,7 @@ typedef struct PACKED ALIGNED(4)
     u8                  inventory[0x18];
     u8                  ammo[0xf];
     u8                  beans;
-    u16                 equipment;
+    OotSaveEquipment    equipment;
     u16                 unk_9e;
     OotSaveUpgrades     upgrades;
     u32                 quest;

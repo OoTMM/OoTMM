@@ -1,7 +1,7 @@
 #ifndef OOT_ACTOR_H
 #define OOT_ACTOR_H
 
-#include <types.h>
+#include <combo/types.h>
 
 typedef struct PACKED ALIGNED(0x4)
 {

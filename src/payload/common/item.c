@@ -46,6 +46,16 @@ static void addItemOot(u16 itemId)
         gOotSave.inventory[ITS_OOT_HOOKSHOT] = ITEM_OOT_LONGSHOT;
         gComboSave.ootHookshots |= 0x2;
         break;
+    /* Equipment */
+    case ITEM_OOT_KOKIRI_SWORD:
+        gOotSave.equipment.swords |= EQ_OOT_SWORD_KOKIRI;
+        break;
+    case ITEM_OOT_MASTER_SWORD:
+        gOotSave.equipment.swords |= EQ_OOT_SWORD_MASTER;
+        break;
+    case ITEM_OOT_GIANT_KNIFE_BS:
+        gOotSave.equipment.swords |= EQ_OOT_SWORD_KNIFE;
+        break;
     /* Strength */
     case ITEM_OOT_GORON_BRACELET:
         gOotSave.upgrades.strength = 1;

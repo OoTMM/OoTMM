@@ -18,7 +18,7 @@ static void flashWait(void)
 
     for (;;)
     {
-        osEPiRawReadIo(__osPiHandle, FLASH_ADDR_STATUS, &status);
+        osEPiReadIo((void*)&__osPiTable, FLASH_ADDR_STATUS, &status);
         if ((status & 1) == 0)
             break;
     }
@@ -29,14 +29,14 @@ static void readFlash(u32 devAddr, void* dramAddr, u32 size)
     OSMesg msg;
 
     /* Set the flash to read mode */
-    osEPiRawWriteIo(&__osPiHandle, FLASH_ADDR_COMMAND, FLASH_CMD_READ);
+    osEPiWriteIo((void*)&__osPiTable, FLASH_ADDR_COMMAND, FLASH_CMD_READ);
     flashWait();
 
     /* Read */
     sMb.dramAddr = dramAddr;
     sMb.devAddr = ((devAddr & 0xff000000) | ((devAddr & 0x00ffffff) >> 1));
     sMb.size = size;
-    osEPiStartDma(&__osPiHandle, &sMb, OS_READ);
+    osEPiStartDma((void*)&__osPiTable, &sMb, OS_READ);
     osRecvMesg(&sQueue, NULL, OS_MESG_BLOCK);
 
     /* Invalidate cache */
@@ -49,22 +49,22 @@ static void writeFlashBlock(u32 blockId, void* data)
     u32 tmp;
 
     /* Set the flash to write mode */
-    osEPiRawWriteIo(&__osPiHandle, FLASH_ADDR_COMMAND, FLASH_CMD_WRITE);
+    osEPiWriteIo((void*)&__osPiTable, FLASH_ADDR_COMMAND, FLASH_CMD_WRITE);
     flashWait();
 
     /* Set the RDRAM pointer via DMA */
     sMb.dramAddr = data;
     sMb.devAddr = FLASH_ADDR_STATUS;
     sMb.size = FLASH_BLOCK_SIZE;
-    osEPiStartDma(&__osPiHandle, &sMb, OS_WRITE);
+    osEPiStartDma((void*)&__osPiTable, &sMb, OS_WRITE);
     osRecvMesg(&sQueue, NULL, OS_MESG_BLOCK);
 
     /* Set the flash block */
-    osEPiRawWriteIo(&__osPiHandle, FLASH_ADDR_COMMAND, FLASH_CMD_ACTIVE(blockId));
+    osEPiWriteIo((void*)&__osPiTable, FLASH_ADDR_COMMAND, FLASH_CMD_ACTIVE(blockId));
     flashWait();
 
     /* Perform the transfer */
-    osEPiRawWriteIo(&__osPiHandle, FLASH_ADDR_COMMAND, FLASH_CMD_TRANSFER);
+    osEPiWriteIo((void*)&__osPiTable, FLASH_ADDR_COMMAND, FLASH_CMD_TRANSFER);
     flashWait();
 }
 

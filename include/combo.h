@@ -1,12 +1,8 @@
 #ifndef COMBO_COMBO_H
 #define COMBO_COMBO_H
 
-#include <types.h>
 #include <string.h>
-#include <strings.h>
-
-#include <libultra.h>
-
+#include <ultra64.h>
 #include <combo/actor_ovl.h>
 #include <combo/audio.h>
 #include <combo/defs.h>
@@ -29,8 +25,8 @@
 #endif
 
 void comboDisableInterrupts(void);
-void comboDma(void* addr, uint32_t cartAddr, uint32_t size);
-void comboDma_NoCacheInval(void* addr, uint32_t cartAddr, uint32_t size);
+void comboDma(void* addr, u32 cartAddr, u32 size);
+void comboDma_NoCacheInval(void* addr, u32 cartAddr, u32 size);
 
 typedef struct PACKED ALIGNED(4)
 {

@@ -61,6 +61,17 @@ static s32 progressiveHookshot(void)
     return GI_OOT_LONGSHOT;
 }
 
+static s32 progressiveOotSword(void)
+{
+    if (!(gOotSave.equipment.swords & EQ_OOT_SWORD_KOKIRI))
+        return GI_OOT_KOKIRI_SWORD;
+    if (!(gOotSave.equipment.swords & EQ_OOT_SWORD_MASTER))
+        return GI_OOT_MASTER_SWORD;
+    if (!(gOotSave.equipment.swords & (EQ_OOT_SWORD_KNIFE | EQ_OOT_SWORD_KNIFE_BROKEN)))
+        return GI_OOT_GIANT_KNIFE;
+    return GI_OOT_SWORD_BIGGORON;
+}
+
 static s32 progressiveStrength(void)
 {
     switch (gOotSave.upgrades.strength)
@@ -140,6 +151,13 @@ static s32 progressiveChestItemOot(s32 gi)
         gi = progressiveHookshot();
         break;
     /* Equipment */
+    case GI_OOT_KOKIRI_SWORD:
+    case GI_OOT_MASTER_SWORD:
+    case GI_OOT_SWORD_BIGGORON:
+    case GI_OOT_GIANT_KNIFE:
+        gi = progressiveOotSword();
+        break;
+    /* Upgrades */
     case GI_OOT_GORON_BRACELET:
     case GI_OOT_SILVER_GAUNTLETS:
     case GI_OOT_GOLDEN_GAUNTLETS:

@@ -1,5 +1,5 @@
 #include <combo.h>
-#include <stdint.h>
+#include <combo/custom.h>
 
 #define OOT_DMA_ADDR    0x7430
 #define OOT_DMA_COUNT   0x5e6
@@ -19,27 +19,29 @@
 #endif
 
 #define VROM_FOREIGN_OFFSET  0x04000000
+#define VROM_CUSTOM_OFFSET   0x08000000
 
 typedef struct
 {
-    uint32_t vstart;
-    uint32_t vend;
-    uint32_t pstart;
-    uint32_t pend;
+    u32 vstart;
+    u32 vend;
+    u32 pstart;
+    u32 pend;
 }
 DmaEntry;
 
-ALIGNED(16) DmaEntry kComboDmaData[DMA_COUNT + DMA_COUNT_FOREIGN + 1];
+ALIGNED(16) DmaEntry kComboDmaData[DMA_COUNT + DMA_COUNT_FOREIGN + CUSTOM_DMA_SIZE + 1];
 
 extern s16 gDmaDataCount;
 
-void comboDma(void* addr, uint32_t cartAddr, uint32_t size);
+void comboDma(void* addr, u32 cartAddr, u32 size);
 
 void comboInitDma(void)
 {
     DmaEntry* e;
     comboDma(kComboDmaData, DMA_ADDR, DMA_COUNT * sizeof(DmaEntry));
     comboDma(kComboDmaData + DMA_COUNT, DMA_ADDR_FOREIGN, DMA_COUNT_FOREIGN * sizeof(DmaEntry));
+    comboDma(kComboDmaData + DMA_COUNT + DMA_COUNT_FOREIGN, CUSTOM_DMA_ADDR, CUSTOM_DMA_SIZE * sizeof(DmaEntry));
     for (int i = DMA_COUNT; i < DMA_COUNT + DMA_COUNT_FOREIGN; ++i)
     {
         e = kComboDmaData + i;
