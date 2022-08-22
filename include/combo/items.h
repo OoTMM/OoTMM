@@ -285,4 +285,30 @@
 
 #define ITEM_NONE   0xff
 
+/* Item slots */
+#define ITS_OOT_STICKS          0x00
+#define ITS_OOT_NUTS            0x01
+#define ITS_OOT_BOMBS           0x02
+#define ITS_OOT_BOW             0x03
+#define ITS_OOT_ARROW_FIRE      0x04
+#define ITS_OOT_SPELL_FIRE      0x05
+#define ITS_OOT_SLINGSHOT       0x06
+#define ITS_OOT_OCARINA         0x07
+#define ITS_OOT_BOMBCHU         0x08
+#define ITS_OOT_HOOKSHOT        0x09
+#define ITS_OOT_ARROW_ICE       0x0a
+#define ITS_OOT_SPELL_WIND      0x0b
+#define ITS_OOT_BOOMEMERANG     0x0c
+#define ITS_OOT_LENS            0x0d
+#define ITS_OOT_BEANS           0x0e
+#define ITS_OOT_HAMMER          0x0f
+#define ITS_OOT_ARROW_LIGHT     0x10
+#define ITS_OOT_SPELL_LOVE      0x11
+#define ITS_OOT_BOTTLE          0x12
+#define ITS_OOT_BOTTLE2         0x13
+#define ITS_OOT_BOTTLE3         0x14
+#define ITS_OOT_BOTTLE4         0x15
+#define ITS_OOT_TRADE_ADULT     0x16
+#define ITS_OOT_TRADE_CHILD     0x17
+
 #endif

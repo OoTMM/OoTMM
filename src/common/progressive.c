@@ -20,6 +20,20 @@ static s32 progressiveDive(void)
     return GI_OOT_SILVER_SCALE;
 }
 
+static s32 progressiveOotBow(void)
+{
+    if (gOotSave.inventory[ITS_OOT_BOW] == ITEM_NONE)
+        return GI_OOT_FAIRY_BOW;
+    switch (gOotSave.upgrades.quiver)
+    {
+    case 0:
+    case 1:
+        return GI_OOT_QUIVER2;
+    default:
+        return GI_OOT_QUIVER3;
+    }
+}
+
 s32 comboProgressiveChestItem(s32 gi)
 {
 #if defined(GAME_MM)
@@ -32,12 +46,16 @@ s32 comboProgressiveChestItem(s32 gi)
     case GI_OOT_FAIRY_OCARINA:
     case GI_OOT_OCARINA_OF_TIME:
         /* Ocarina */
-        if (gOotSave.inventory[7] == ITEM_NONE)
+        if (gOotSave.inventory[ITS_OOT_OCARINA] == ITEM_NONE)
             gi = GI_OOT_FAIRY_OCARINA;
         else
             gi = GI_OOT_OCARINA_OF_TIME;
         break;
-
+    case GI_OOT_FAIRY_BOW:
+    case GI_OOT_QUIVER2:
+    case GI_OOT_QUIVER3:
+        gi = progressiveOotBow();
+        break;
     /* Equipment */
     case GI_OOT_GORON_BRACELET:
     case GI_OOT_SILVER_GAUNTLETS:

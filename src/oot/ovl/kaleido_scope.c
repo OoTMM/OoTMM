@@ -68,19 +68,19 @@ static void toggleTrade(u8* slot, u32 flags, const u8* table, u32 tableSize)
 
 static void toggleTradeAdult(void)
 {
-    toggleTrade(gSave.inventory + 22, gComboSave.ootTradeAdult, kTradeAdult, sizeof(kTradeAdult));
+    toggleTrade(gSave.inventory + ITS_OOT_TRADE_ADULT, gComboSave.ootTradeAdult, kTradeAdult, sizeof(kTradeAdult));
 }
 
 static void toggleTradeChild(void)
 {
-    toggleTrade(gSave.inventory + 23, gComboSave.ootTradeChild, kTradeChild, sizeof(kTradeChild));
+    toggleTrade(gSave.inventory + ITS_OOT_TRADE_CHILD, gComboSave.ootTradeChild, kTradeChild, sizeof(kTradeChild));
 }
 
 static void toggleOcarina(void)
 {
     u8* slot;
 
-    slot = gOotSave.inventory + 7;
+    slot = gOotSave.inventory + ITS_OOT_OCARINA;
     if (*slot == ITEM_OOT_FAIRY_OCARINA)
     {
         *slot = ITEM_OOT_OCARINA_OF_TIME;
@@ -95,7 +95,7 @@ static void toggleHookshots(void)
 {
     u8* slot;
 
-    slot = gOotSave.inventory + 9;
+    slot = gOotSave.inventory + ITS_OOT_HOOKSHOT;
     if (*slot == ITEM_OOT_HOOKSHOT)
     {
         *slot = ITEM_OOT_LONGSHOT;
@@ -116,28 +116,28 @@ static int checkItemToggle(GameState_Play* play)
     ret = 0;
     press = !!(play->gs.input[0].pressed.buttons & 0x20);
 
-    if (p->item_cursor == 7 && (popcount(gComboSave.ootOcarinas) >= 2))
+    if (p->item_cursor == ITS_OOT_OCARINA && (popcount(gComboSave.ootOcarinas) >= 2))
     {
         ret = 1;
         if (press)
             toggleOcarina();
     }
 
-    if (p->item_cursor == 9 && (popcount(gComboSave.ootHookshots) >= 2))
+    if (p->item_cursor == ITS_OOT_HOOKSHOT && (popcount(gComboSave.ootHookshots) >= 2))
     {
         ret = 1;
         if (press)
             toggleHookshots();
     }
 
-    if (p->item_cursor == 22 && (popcount(gComboSave.ootTradeAdult) >= 2))
+    if (p->item_cursor == ITS_OOT_TRADE_ADULT && (popcount(gComboSave.ootTradeAdult) >= 2))
     {
         ret = 1;
         if (press)
             toggleTradeAdult();
     }
 
-    if (p->item_cursor == 23 && (popcount(gComboSave.ootTradeChild) >= 2))
+    if (p->item_cursor == ITS_OOT_TRADE_CHILD && (popcount(gComboSave.ootTradeChild) >= 2))
     {
         ret = 1;
         if (press)
