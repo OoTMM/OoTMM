@@ -17,7 +17,7 @@ static void addItemOot(u16 itemId)
         gComboSave.ootOcarinas |= 0x2;
         break;
     case ITEM_OOT_FAIRY_OCARINA:
-        if (gOotSave.inventory[7] == ITEM_OOT_NONE)
+        if (gOotSave.inventory[7] == ITEM_NONE)
             gOotSave.inventory[7] = ITEM_OOT_FAIRY_OCARINA;
         gComboSave.ootOcarinas |= 0x1;
         break;
@@ -56,7 +56,7 @@ int comboAddItemFromChest(void* play, s16 chestId)
     u16 textId;
 
     chestId--;
-    itemId = kExtendedGetItems[chestId].item;
+    itemId = kExtendedGetItems[chestId].itemId;
     itemId |= (chestId & 0x100);
 
     comboTextHijackItem(play, itemId);

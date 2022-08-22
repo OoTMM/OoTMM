@@ -11,7 +11,7 @@ s32 comboProgressiveChestItem(s32 gi)
     case 0xc:
     case 0x3b:
         /* Ocarina */
-        if (gOotSave.inventory[7] == ITEM_OOT_NONE)
+        if (gOotSave.inventory[7] == ITEM_NONE)
             gi = 0x3b;
         else
             gi = 0xc;
