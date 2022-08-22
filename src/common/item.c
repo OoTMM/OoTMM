@@ -56,7 +56,7 @@ int comboAddItemFromChest(void* play, s16 chestId)
     u16 textId;
 
     chestId--;
-    itemId = kExtendedGetItems[chestId].item;
+    itemId = kExtendedGetItems[chestId].itemId;
     itemId |= (chestId & 0x100);
 
     comboTextHijackItem(play, itemId);

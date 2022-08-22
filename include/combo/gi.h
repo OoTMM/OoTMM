@@ -5,9 +5,9 @@
 
 typedef struct PACKED ALIGNED(2)
 {
-    u8  item;
-    u8  flag;
-    u8  gi;
+    u8  itemId;
+    u8  flags;
+    u8  shaderId;
     u8  textId;
     u16 objectId;
 }
