@@ -21,6 +21,16 @@ static void addItemOot(u16 itemId)
             gOotSave.inventory[7] = ITEM_OOT_FAIRY_OCARINA;
         gComboSave.ootOcarinas |= 0x1;
         break;
+    /* Equipment */
+    case ITEM_OOT_GORON_BRACELET:
+        gOotSave.upgrades.strength = 1;
+        break;
+    case ITEM_OOT_SILVER_GAUNTLETS:
+        gOotSave.upgrades.strength = 2;
+        break;
+    case ITEM_OOT_GOLDEN_GAUNTLETS:
+        gOotSave.upgrades.strength = 3;
+        break;
     }
 
     /* DEBUG */

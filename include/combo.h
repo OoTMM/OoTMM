@@ -7,14 +7,15 @@
 
 #include <libultra.h>
 
+#include <combo/actor_ovl.h>
 #include <combo/audio.h>
 #include <combo/defs.h>
+#include <combo/equipment.h>
 #include <combo/gi.h>
 #include <combo/items.h>
 #include <combo/object.h>
-#include <combo/shader.h>
-#include <combo/actor_ovl.h>
 #include <combo/save.h>
+#include <combo/shader.h>
 
 #if defined(GAME_OOT)
 # include <combo/oot/actor.h>
