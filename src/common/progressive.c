@@ -1,5 +1,8 @@
 #include <combo.h>
 
+#define DEFAULT_GI_OOT  GI_OOT_RUPEE_BLUE
+#define DEFAULT_GI_MM   GI_MM_RUPEE_BLUE
+
 static s32 progressiveStrength(void)
 {
     switch (gOotSave.upgrades.strength)
@@ -64,12 +67,30 @@ static s32 progressiveOotBombBag(void)
     }
 }
 
-s32 comboProgressiveChestItem(s32 gi)
+static int isItemUnavailableOot(s32 gi)
 {
-#if defined(GAME_MM)
-    gi ^= 0x100;
-#endif
+    switch (gi)
+    {
+    case GI_OOT_BOMB:
+    case GI_OOT_BOMBS_5:
+    case GI_OOT_BOMBS_10:
+    case GI_OOT_BOMBS_20:
+    case GI_OOT_BOMBS_30:
+        return gOotSave.upgrades.bombBag == 0;
+    case GI_OOT_ARROWS_5:
+    case GI_OOT_ARROWS_10:
+    case GI_OOT_ARROWS_30:
+        return gOotSave.upgrades.quiver == 0;
+    case GI_OOT_DEKU_SEEDS_5:
+    case GI_OOT_DEKU_SEEDS_30:
+        return gOotSave.upgrades.bulletBag == 0;
+    default:
+        return 0;
+    }
+}
 
+static s32 progressiveChestItemOot(s32 gi)
+{
     switch (gi)
     {
     /* Items */
@@ -108,6 +129,32 @@ s32 comboProgressiveChestItem(s32 gi)
         break;
     default:
         break;
+    }
+
+    if (isItemUnavailableOot(gi))
+        gi = DEFAULT_GI_OOT;
+
+    return gi;
+}
+
+static s32 progressiveChestItemMm(s32 gi)
+{
+    return gi;
+}
+
+s32 comboProgressiveChestItem(s32 gi)
+{
+#if defined(GAME_MM)
+    gi ^= 0x100;
+#endif
+
+    if (gi & 0x100)
+    {
+        gi = 0x100 | progressiveChestItemMm(gi & 0xff);
+    }
+    else
+    {
+        gi = progressiveChestItemOot(gi);
     }
 
 #if defined(GAME_MM)
