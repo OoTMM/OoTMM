@@ -26,6 +26,12 @@ static void addItemOot(u16 itemId)
             gOotSave.inventory[ITS_OOT_OCARINA] = ITEM_OOT_FAIRY_OCARINA;
         gComboSave.ootOcarinas |= 0x1;
         break;
+    case ITEM_OOT_FAIRY_SLINGSHOT:
+    case ITEM_OOT_BULLET_BAG:
+        gOotSave.inventory[ITS_OOT_SLINGSHOT] = ITEM_OOT_FAIRY_SLINGSHOT;
+        gOotSave.ammo[ITS_OOT_SLINGSHOT] = 30;
+        gOotSave.upgrades.bulletBag = 1;
+        break;
     /* Strength */
     case ITEM_OOT_GORON_BRACELET:
         gOotSave.upgrades.strength = 1;
@@ -42,6 +48,13 @@ static void addItemOot(u16 itemId)
         break;
     case ITEM_OOT_GOLDEN_SCALE:
         gOotSave.upgrades.dive = 2;
+        break;
+    /* Bullet Bag */
+    case ITEM_OOT_BULLET_BAG2:
+        gOotSave.upgrades.bulletBag = 2;
+        break;
+    case ITEM_OOT_BULLET_BAG3:
+        gOotSave.upgrades.bulletBag = 3;
         break;
     /* Quiver */
     case ITEM_OOT_QUIVER2:

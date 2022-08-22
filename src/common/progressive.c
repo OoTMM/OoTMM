@@ -34,6 +34,21 @@ static s32 progressiveOotBow(void)
     }
 }
 
+static s32 progressiveSlingshot(void)
+{
+    if (gOotSave.inventory[ITS_OOT_SLINGSHOT] == ITEM_NONE)
+        return GI_OOT_FAIRY_SLINGSHOT;
+    switch (gOotSave.upgrades.bulletBag)
+    {
+    case 0:
+        return GI_OOT_BULLET_BAG; /* Not used */
+    case 1:
+        return GI_OOT_BULLET_BAG2;
+    default:
+        return GI_OOT_BULLET_BAG3;
+    }
+}
+
 s32 comboProgressiveChestItem(s32 gi)
 {
 #if defined(GAME_MM)
@@ -55,6 +70,12 @@ s32 comboProgressiveChestItem(s32 gi)
     case GI_OOT_QUIVER2:
     case GI_OOT_QUIVER3:
         gi = progressiveOotBow();
+        break;
+    case GI_OOT_FAIRY_SLINGSHOT:
+    case GI_OOT_BULLET_BAG:
+    case GI_OOT_BULLET_BAG2:
+    case GI_OOT_BULLET_BAG3:
+        gi = progressiveSlingshot();
         break;
     /* Equipment */
     case GI_OOT_GORON_BRACELET:
