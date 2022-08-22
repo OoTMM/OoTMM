@@ -34,6 +34,7 @@ class Combo::Patcher
   end
 
   def run()
+    puts "Patching #{@game}..."
     File.open(File.join(Combo::PATH_BUILD, "#{@game}_patch.bin"), "rb") do |f|
       while !f.eof? do
         type = f.read(4).unpack('L>').first
@@ -60,7 +61,6 @@ class Combo::Patcher
   def patch_vram(f)
     addr, len = *f.read(8).unpack('L>L>')
     data = f.read(len)
-    puts "Patching #{@game} at 0x#{addr.to_s(16)}"
     offset = offset_for_addr(addr)
     @data[offset, data.size] = data
   end

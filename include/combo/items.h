@@ -149,7 +149,6 @@
 #define ITEM_OOT_DEKU_STICK_UPGRADE2    0x99
 #define ITEM_OOT_DEKU_NUT_UPGRADE       0x9a
 #define ITEM_OOT_DEKU_NUT_UPGRADE2      0x9b
-#define ITEM_OOT_NONE                   0xff
 
 #define ITEM_MM_OCARINA_OF_TIME             0x00
 #define ITEM_MM_HERO_BOW                    0x01
@@ -166,6 +165,7 @@
 #define ITEM_MM_LENS_OF_TRUTH               0x0e
 #define ITEM_MM_LONGSHOT                    0x0f
 #define ITEM_MM_GREAT_FAIRY_SWORD           0x10
+#define ITEM_MM_RED_POTION_WITH_BOTTLE      0x11
 #define ITEM_MM_EMPTY_BOTTLE                0x12
 #define ITEM_MM_RED_POTION                  0x13
 #define ITEM_MM_GREEN_POTION                0x14
@@ -194,6 +194,7 @@
 #define ITEM_MM_LETTER_TO_MAMA              0x2e
 #define ITEM_MM_LETTER_TO_KAFEI             0x2f
 #define ITEM_MM_PENDANT_OF_MEMORIES         0x30
+#define ITEM_MM_MAP_WORLD                   0x31
 #define ITEM_MM_MASK_DEKU                   0x32
 #define ITEM_MM_MASK_GORON                  0x33
 #define ITEM_MM_MASK_ZORA                   0x34
@@ -210,7 +211,7 @@
 #define ITEM_MM_MASK_COUPLE                 0x3f
 #define ITEM_MM_MASK_GREAT_FAIRY            0x40
 #define ITEM_MM_MASK_GIBDO                  0x41
-#define ITEM_MM_MASK_DON GERO               0x42
+#define ITEM_MM_MASK_DON_GERO               0x42
 #define ITEM_MM_MASK_KAMARO                 0x43
 #define ITEM_MM_MASK_CAPTAIN                0x44
 #define ITEM_MM_MASK_STONE                  0x45
@@ -244,10 +245,44 @@
 #define ITEM_MM_SONG_SOARING                0x6a
 #define ITEM_MM_SONG_STORMS                 0x6b
 #define ITEM_MM_BOMBER_NOTEBOOK             0x6d
+#define ITEM_MM_HEART_CONTAINER             0x6f
 #define ITEM_MM_SONG_GORON_HALF             0x73
 #define ITEM_MM_BIG_KEY                     0x74
 #define ITEM_MM_COMPASS                     0x75
 #define ITEM_MM_MAP                         0x76
 #define ITEM_MM_STRAY_FAIRY                 0x77
+#define ITEM_MM_SMALL_KEY                   0x78
+#define ITEM_MM_HEART_PIECE                 0x7b
+#define ITEM_MM_RECOVERY_HEART              0x83
+#define ITEM_MM_RUPEE_GREEN                 0x84
+#define ITEM_MM_RUPEE_BLUE                  0x85
+#define ITEM_MM_RUPEE_RED10                 0x86
+#define ITEM_MM_RUPEE_RED                   0x87
+#define ITEM_MM_RUPEE_PURPLE                0x88
+#define ITEM_MM_RUPEE_SILVER                0x89
+#define ITEM_MM_RUPEE_GOLD                  0x8a
+#define ITEM_MM_DEKU_NUTS_5                 0x8d
+#define ITEM_MM_DEKU_NUTS_10                0x8e
+#define ITEM_MM_BOMBS_5                     0x8f
+#define ITEM_MM_BOMBS_10                    0x90
+#define ITEM_MM_BOMBS_20                    0x91
+#define ITEM_MM_BOMBS_30                    0x92
+#define ITEM_MM_ARROWS_10                   0x93
+#define ITEM_MM_ARROWS_30                   0x94
+#define ITEM_MM_ARROWS_40                   0x95
+#define ITEM_MM_BOMBCHUS_20                 0x97
+#define ITEM_MM_BOMBCHUS_10                 0x98
+#define ITEM_MM_BOMBCHU_ALT                 0x99
+#define ITEM_MM_BOMBCHUS_5                  0x9a
+#define ITEM_MM_DEKU_STICKS_20              0x9b
+#define ITEM_MM_DEKU_STICKS_30              0x9c
+#define ITEM_MM_DEKU_NUTS_30                0x9d
+#define ITEM_MM_DEKU_NUTS_40                0x9e
+#define ITEM_MM_CHATEAU_ROMANI              0x9f
+#define ITEM_MM_MILK                        0xa0
+#define ITEM_MM_GOLD_DUST                   0xa1
+#define ITEM_MM_SEAHORSE                    0xa3
+
+#define ITEM_NONE   0xff
 
 #endif

@@ -17,7 +17,7 @@ static void addItemOot(u16 itemId)
         gComboSave.ootOcarinas |= 0x2;
         break;
     case ITEM_OOT_FAIRY_OCARINA:
-        if (gOotSave.inventory[7] == ITEM_OOT_NONE)
+        if (gOotSave.inventory[7] == ITEM_NONE)
             gOotSave.inventory[7] = ITEM_OOT_FAIRY_OCARINA;
         gComboSave.ootOcarinas |= 0x1;
         break;
