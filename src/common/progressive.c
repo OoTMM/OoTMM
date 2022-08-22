@@ -13,6 +13,13 @@ static s32 progressiveStrength(void)
     }
 }
 
+static s32 progressiveDive(void)
+{
+    if (gOotSave.upgrades.dive)
+        return GI_OOT_GOLDEN_SCALE;
+    return GI_OOT_SILVER_SCALE;
+}
+
 s32 comboProgressiveChestItem(s32 gi)
 {
 #if defined(GAME_MM)
@@ -36,6 +43,10 @@ s32 comboProgressiveChestItem(s32 gi)
     case GI_OOT_SILVER_GAUNTLETS:
     case GI_OOT_GOLDEN_GAUNTLETS:
         gi = progressiveStrength();
+        break;
+    case GI_OOT_SILVER_SCALE:
+    case GI_OOT_GOLDEN_SCALE:
+        gi = progressiveDive();
         break;
     default:
         break;
