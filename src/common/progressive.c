@@ -81,6 +81,13 @@ static s32 progressiveDive(void)
     return GI_OOT_SILVER_SCALE;
 }
 
+static s32 progressiveOotWallet(void)
+{
+    if (gOotSave.upgrades.wallet)
+        return GI_OOT_WALLET3;
+    return GI_OOT_WALLET2;
+}
+
 static int isItemUnavailableOot(s32 gi)
 {
     switch (gi)
@@ -141,6 +148,10 @@ static s32 progressiveChestItemOot(s32 gi)
     case GI_OOT_SILVER_SCALE:
     case GI_OOT_GOLDEN_SCALE:
         gi = progressiveDive();
+        break;
+    case GI_OOT_WALLET2:
+    case GI_OOT_WALLET3:
+        gi = progressiveOotWallet();
         break;
     default:
         break;

@@ -84,6 +84,12 @@ static void addItemOot(u16 itemId)
     case ITEM_OOT_BOMB_BAG3:
         gOotSave.upgrades.bombBag = 3;
         break;
+    case ITEM_OOT_WALLET2:
+        gOotSave.upgrades.wallet = 1;
+        break;
+    case ITEM_OOT_WALLET3:
+        gOotSave.upgrades.wallet = 2;
+        break;
     }
 }
 
