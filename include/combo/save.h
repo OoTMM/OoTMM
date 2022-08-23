@@ -11,6 +11,7 @@ typedef struct PACKED ALIGNED(4)
     u16     ootTradeAdult;
     u8      ootOcarinas;
     u8      ootHookshots;
+    u8      ootShields;
 }
 ComboSave;
 

@@ -72,6 +72,16 @@ static s32 progressiveOotSword(void)
     return GI_OOT_SWORD_BIGGORON;
 }
 
+/* We use an extra field to know which shields we got from shops */
+static s32 progressiveOotShield(void)
+{
+    if (!(gComboSave.ootShields & EQ_OOT_SHIELD_DEKU))
+        return GI_OOT_DEKU_SHIELD;
+    if (!(gComboSave.ootShields & EQ_OOT_SHIELD_HYLIAN))
+        return GI_OOT_HYLIAN_SHIELD;
+    return GI_OOT_MIRROR_SHIELD;
+}
+
 static s32 progressiveStrength(void)
 {
     switch (gOotSave.upgrades.strength)
@@ -156,6 +166,11 @@ static s32 progressiveChestItemOot(s32 gi)
     case GI_OOT_SWORD_BIGGORON:
     case GI_OOT_GIANT_KNIFE:
         gi = progressiveOotSword();
+        break;
+    case GI_OOT_DEKU_SHIELD:
+    case GI_OOT_HYLIAN_SHIELD:
+    case GI_OOT_MIRROR_SHIELD:
+        gi = progressiveOotShield();
         break;
     /* Upgrades */
     case GI_OOT_GORON_BRACELET:

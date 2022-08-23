@@ -21,7 +21,7 @@ module Combo::Randomizer
       #value = 4
       #value = 0x178
       #value = 0x189
-      value = 0x27
+      value = 0x29
       if game == :mm
         value = 0x12d
       end

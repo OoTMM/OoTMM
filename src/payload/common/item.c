@@ -56,6 +56,18 @@ static void addItemOot(u16 itemId)
     case ITEM_OOT_GIANT_KNIFE_BS:
         gOotSave.equipment.swords |= EQ_OOT_SWORD_KNIFE;
         break;
+    case ITEM_OOT_DEKU_SHIELD:
+        gOotSave.equipment.shields |= EQ_OOT_SHIELD_DEKU;
+        gComboSave.ootShields |= EQ_OOT_SHIELD_DEKU;
+        break;
+    case ITEM_OOT_HYLIAN_SHIELD:
+        gOotSave.equipment.shields |= EQ_OOT_SHIELD_HYLIAN;
+        gComboSave.ootShields |= EQ_OOT_SHIELD_HYLIAN;
+        break;
+    case ITEM_OOT_MIRROR_SHIELD:
+        gOotSave.equipment.shields |= EQ_OOT_SHIELD_MIRROR;
+        gComboSave.ootShields |= EQ_OOT_SHIELD_MIRROR;
+        break;
     /* Strength */
     case ITEM_OOT_GORON_BRACELET:
         gOotSave.upgrades.strength = 1;
