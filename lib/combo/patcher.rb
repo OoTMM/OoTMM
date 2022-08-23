@@ -35,6 +35,7 @@ class Combo::Patcher
 
   def run()
     puts "Patching #{@game}..."
+    STDOUT.flush
     File.open(File.join(Combo::PATH_BUILD, "#{@game}_patch.bin"), "rb") do |f|
       while !f.eof? do
         type = f.read(4).unpack('L>').first

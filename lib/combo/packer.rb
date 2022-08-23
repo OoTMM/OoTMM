@@ -14,12 +14,14 @@ module Combo::Packer
     FileUtils.mkpath(Combo::PATH_DIST)
     File.open(File.join(Combo::PATH_DIST, 'OoTMM.z64'), "w+b") do |f|
       puts "Packing the rom..."
+      STDOUT.flush
       f.truncate(64 * 1024 * 1024)
       f.write(oot)
       f.write(mm)
 
       Combo::GAMES.each do |game|
         puts "Packing payload for #{game}..."
+        STDOUT.flush
         data = File.binread(File.join(Combo::PATH_BUILD, "#{game}_payload.bin"))
         addr = Combo::METADATA[game][:payload_addr]
         if (data.size > 0x20000)
@@ -30,6 +32,7 @@ module Combo::Packer
       end
 
       puts "Packing custom data..."
+      STDOUT.flush
       custom_data = File.binread(File.join(Combo::PATH_BUILD, "custom.bin"))
       addr = Combo::METADATA[:custom_addr]
       if (custom_data.size > 0x20000)
@@ -39,9 +42,11 @@ module Combo::Packer
       f.write(custom_data)
 
       puts "Fixing MM DMA..."
+      STDOUT.flush
       fix_mm_dma(f)
 
       puts "Patching the rom header..."
+      STDOUT.flush
       f.seek(0x20)
       f.write("OOT+MM COMBO       ")
 
@@ -49,9 +54,11 @@ module Combo::Packer
       f.write('ZZE')
 
       puts "Fixing the checksum..."
+      STDOUT.flush
       fix_checksum(f)
 
       puts "Randomizing..."
+      STDOUT.flush
       randomize(f)
     end
   end
@@ -75,7 +82,9 @@ module Combo::Packer
   end
 
   def self.fix_checksum(f)
-    sum = checksum(f).pack('L>2')
+    f.seek(0)
+    data = f.read(0x1000000)
+    sum = checksum(data).pack('L>2')
     f.seek(0x10)
     f.write(sum)
   end
@@ -84,14 +93,13 @@ module Combo::Packer
     ((v << b) | (v >> (32 - b))) & 0xffffffff
   end
 
-  def self.checksum(f)
+  def self.checksum(data)
     seed = 0xDF26F436
     t1 = t2 = t3 = t4 = t5 = t6 = seed
 
     (0x100000 / 4).times do |i|
       offset = 0x1000 + i * 4
-      f.seek(offset)
-      d = f.read(4).unpack('L>').first
+      d = data[offset,4].unpack('L>').first
       if ((t6 + d) & 0xffffffff) < t6
         t4 = (t4 + 1) & 0xffffffff
       end
@@ -105,8 +113,7 @@ module Combo::Packer
         t2 = t2 ^ (t6 ^ d)
       end
       offset = 0x750 + ((i * 4) & 0xff)
-      f.seek(offset)
-      x = f.read(4).unpack('L>').first
+      x = data[offset,4].unpack('L>').first
       t1 = (t1 + ((x ^ d))) & 0xffffffff
     end
 
