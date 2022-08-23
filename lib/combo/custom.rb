@@ -51,8 +51,6 @@ class Combo::Custom
         end
 
         add_define(["CUSTOM_OBJECT_ID", name].join('_'), 0x2000 | @objects.size)
-
-        File.binwrite("../test.bin", data)
         append_vrom_object(data)
       end
     end

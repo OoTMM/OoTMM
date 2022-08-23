@@ -1,4 +1,13 @@
-ARCH 		:= mips-elf
+ifneq (, $(shell command -v mips64-ultra-elf-gcc 2>/dev/null))
+ARCH	:= mips64-ultra-elf
+else ifneq (, $(shell command -v mips64-elf-gcc 2>/dev/null))
+ARCH	:= mips64-elf
+else ifneq (, $(shell command -v mips-elf-gcc 2>/dev/null))
+ARCH	:= mips-elf
+else
+$(error "No MIPS toolchain found")
+endif
+
 CFLAGS 		:= -EB -ffreestanding -nostdlib -fno-PIC -mabi=32 -mno-shared -mno-abicalls \
 			   -march=vr4300 -mtune=vr4300 -mfix4300 -G 0 -Os \
 			   -isystem ../third_party/ultralib/include -isystem ../third_party/ultralib/include/gcc -I../include -I../build/include -MMD -MP \

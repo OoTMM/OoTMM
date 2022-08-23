@@ -1,3 +1,4 @@
+require 'fileutils'
 require 'combo/patcher'
 require 'combo/compressor'
 require 'combo/randomizer'
@@ -10,7 +11,8 @@ module Combo::Packer
     oot = Combo::Compressor.run(:oot, oot)
     mm = Combo::Compressor.run(:mm, mm)
 
-    File.open(opts.out, "w+b") do |f|
+    FileUtils.mkpath(Combo::PATH_DIST)
+    File.open(File.join(Combo::PATH_DIST, 'OoTMM.z64'), "w+b") do |f|
       puts "Packing the rom..."
       f.truncate(64 * 1024 * 1024)
       f.write(oot)

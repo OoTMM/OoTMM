@@ -3,3 +3,5 @@
 /.bundle
 /vendor
 /build
+/dist
+/third_party

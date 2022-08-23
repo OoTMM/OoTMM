@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  combo:
+    build: .
+    volumes:
+      - /app/.bundle
+      - /app/build
+      - /app/third_party
+      - /app/vendor
+      - ./bin:/app/bin
+      - ./data:/app/data
+      - ./dist:/app/dist
+      - ./include:/app/include
+      - ./lib:/app/lib
+      - ./roms:/app/roms
+      - ./src:/app/src
+      - ./docker-entrypoint.sh:/app/docker-entrypoint.sh
+      - ./Gemfile:/app/Gemfile
+      - ./Gemfile.lock:/app/Gemfile.lock
+      - ./install-deps.sh:/app/install-deps.sh
