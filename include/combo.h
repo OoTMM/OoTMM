@@ -1,20 +1,17 @@
 #ifndef COMBO_COMBO_H
 #define COMBO_COMBO_H
 
-#include <types.h>
 #include <string.h>
-#include <strings.h>
-
-#include <libultra.h>
-
+#include <ultra64.h>
+#include <combo/actor_ovl.h>
 #include <combo/audio.h>
 #include <combo/defs.h>
+#include <combo/equipment.h>
 #include <combo/gi.h>
 #include <combo/items.h>
 #include <combo/object.h>
-#include <combo/shader.h>
-#include <combo/actor_ovl.h>
 #include <combo/save.h>
+#include <combo/shader.h>
 
 #if defined(GAME_OOT)
 # include <combo/oot/actor.h>
@@ -28,8 +25,8 @@
 #endif
 
 void comboDisableInterrupts(void);
-void comboDma(void* addr, uint32_t cartAddr, uint32_t size);
-void comboDma_NoCacheInval(void* addr, uint32_t cartAddr, uint32_t size);
+void comboDma(void* addr, u32 cartAddr, u32 size);
+void comboDma_NoCacheInval(void* addr, u32 cartAddr, u32 size);
 
 typedef struct PACKED ALIGNED(4)
 {

@@ -6,6 +6,11 @@ PATCH_START(0x80838f6c)
    nop
 PATCH_END
 
+/* Disable silver gauntlets warp */
+PATCH_START(0x8084c22c)
+  li at,0xffff
+PATCH_END
+
 /* Use out extended table */
 /* TODO: Handle dynamic green rupee */
 PATCH_REL_HILO(kExtendedGetItems)

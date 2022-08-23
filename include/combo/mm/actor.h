@@ -1,7 +1,7 @@
 #ifndef MM_ACTOR_H
 #define MM_ACTOR_H
 
-#include <types.h>
+#include <combo/types.h>
 
 typedef struct PACKED ALIGNED(0x4)
 {

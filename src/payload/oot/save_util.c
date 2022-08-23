@@ -1,6 +1,5 @@
 #include <combo.h>
 #include <string.h>
-#include <strings.h>
 
 static void copyName(u8* dst, const u8* src)
 {
@@ -84,7 +83,7 @@ void zeroComboSaveData(void)
 
 void comboCreateSaveMM(void)
 {
-    uint32_t base;
+    u32 base;
     bzero(&gMmSave, sizeof(MmSave));
 
     /* Create some save data */

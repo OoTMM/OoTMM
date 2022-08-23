@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/custom.h>
 
 const GetItem kExtendedGetItems[] = {
 #define X(a, b, c, d, e)    {a, b, Y(c), 8, Z(e)}

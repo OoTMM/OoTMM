@@ -1,14 +1,28 @@
 require 'combo/packer'
 require 'combo/decompressor'
 require 'combo/options'
+require 'combo/custom'
 
 module Combo
   def self.run(args)
+    case args.first
+    when '--generate-custom'
+      run_generate_custom()
+    else
+      run_build(args)
+    end
+  end
+
+  def self.run_build(args)
     @opts = Options.new(args)
 
     decompress()
     build()
     pack()
+  end
+
+  def self.run_generate_custom()
+    Custom.generate()
   end
 
   def self.decompress()

@@ -1,7 +1,7 @@
 #ifndef COMBO_OOT_GFX_H
 #define COMBO_OOT_GFX_H
 
-#include <types.h>
+#include <combo/types.h>
 
 typedef struct PACKED ALIGNED(4)
 {

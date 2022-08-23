@@ -1,7 +1,7 @@
 #ifndef COMBO_ACTOR_OVL_H
 #define COMBO_ACTOR_OVL_H
 
-#include <types.h>
+#include <combo/types.h>
 
 typedef struct PACKED ALIGNED(0x4)
 {

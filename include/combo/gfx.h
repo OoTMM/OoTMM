@@ -1,12 +1,14 @@
 #ifndef COMBO_GFX_H
 #define COMBO_GFX_H
 
+#include <ultra64.h>
+
 typedef struct PACKED ALIGNED(4)
 {
     u32     size;
-    u64*    ptr;
-    u64*    append;
-    u64*    end;
+    Gfx*    ptr;
+    Gfx*    append;
+    Gfx*    end;
 }
 DisplayListBuffer;
 
@@ -21,9 +23,7 @@ DisplayListBuffer;
 #define OPEN_DISPS(gfx)             \
     {                               \
         GfxContext* __gfx = (gfx);  \
-        u32*        __dlist;        \
-        (void)__gfx;                \
-        (void)__dlist;
+        (void)__gfx;
 
 #define CLOSE_DISPS()               \
     }

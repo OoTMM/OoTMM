@@ -12,16 +12,20 @@ void hook_LoadObjectGi(void* player, u16 objectId)
     {
         *((u8*)player + 0x160) = 1;
 
-        if (objectId & 0x1000)
+        if (objectId & 0x2000)
+        {
+            table = kCustomObjectsTable;
+        }
+        else if (objectId & 0x1000)
         {
             table = kExtraObjectsTable;
-            objectId &= 0xfff;
         }
         else
         {
             table = kObjectsTable;
         }
 
+        objectId &= 0xfff;
         vromStart = table[objectId].vromStart;
         vromEnd = table[objectId].vromEnd;
 

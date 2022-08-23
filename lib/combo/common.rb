@@ -14,6 +14,7 @@ module Combo
   DATA_FILES = GAMES.map { |game| [game, JSON.parse(File.read(File.join(Combo::PATH_DATA, "#{game}.json"))).freeze] }.to_h.freeze
 
   METADATA = {
+    custom_addr: 0x03f80000,
     oot: {
       dma_addr: 0x7430,
       dma_count: 1510,

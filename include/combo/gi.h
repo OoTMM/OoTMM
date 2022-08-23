@@ -1,7 +1,7 @@
 #ifndef COMBO_GI_H
 #define COMBO_GI_H
 
-#include <types.h>
+#include <combo/types.h>
 
 #define GI_NONE 0x0
 
@@ -99,11 +99,11 @@
 #define GI_OOT_SPELL_FIRE           0x5c
 #define GI_OOT_SPELL_WIND           0x5d
 #define GI_OOT_SPELL_LOVE           0x5e
-#define GI_OOT_BULLET_BAG2          0x5f
-#define GI_OOT_BULLET_BAG3          0x60
+#define GI_OOT_BULLET_BAG           0x5f
+#define GI_OOT_BULLET_BAG2          0x60
 #define GI_OOT_DEKU_STICKS_5        0x61
 #define GI_OOT_DEKU_STICKS_10       0x62
-#define GI_OOT_DEKU_NUTS_5          0x63
+#define GI_OOT_DEKU_NUTS_5_ALT      0x63
 #define GI_OOT_DEKU_NUTS_10         0x64
 #define GI_OOT_BOMB                 0x65
 #define GI_OOT_BOMBS_10             0x66
@@ -111,7 +111,7 @@
 #define GI_OOT_BOMBS_30             0x68
 #define GI_OOT_DEKU_SEEDS_30        0x69
 #define GI_OOT_BOMBCHUS_5           0x6a
-#define GI_OOT_BOMBCHUS_10          0x6b
+#define GI_OOT_BOMBCHUS_20          0x6b
 #define GI_OOT_FISH                 0x6c
 #define GI_OOT_BUG                  0x6d
 #define GI_OOT_BLUE_FIRE            0x6e
@@ -143,6 +143,7 @@
 #define GI_OOT_SONG_SUN             0x87
 #define GI_OOT_SONG_TIME            0x88
 #define GI_OOT_SONG_STORMS          0x89
+#define GI_OOT_MASTER_SWORD         0x8a
 
 typedef struct PACKED ALIGNED(2)
 {

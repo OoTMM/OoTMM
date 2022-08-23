@@ -7,10 +7,11 @@
 /* Combo-specific save data */
 typedef struct PACKED ALIGNED(4)
 {
-    u32     ootTradeChild;
-    u32     ootTradeAdult;
-    u32     ootOcarinas;
-    u32     ootHookshots;
+    u16     ootTradeChild;
+    u16     ootTradeAdult;
+    u8      ootOcarinas;
+    u8      ootHookshots;
+    u8      ootShields;
 }
 ComboSave;
 
