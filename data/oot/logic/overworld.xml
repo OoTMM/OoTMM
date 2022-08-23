@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<overworld>
+  <scene id="55" name="KF_Main" description="Kokiri Forest">
+    <link to="KF_Mido"/>
+    <link to="KF_LinkHouse"/>
+    <link to="DT_Main"/>
+    <chest id="00" content="SWORD"/>
+  </scene>
+  <scene id="28" name="KF_Mido" description="Mido's House">
+    <chest id="00" content="RUPEE_BLUE"/>
+    <chest id="01" content="RUPEE_BLUE"/>
+    <chest id="02" content="RUPEE_GREEN"/>
+    <chest id="03" content="RECOVERY_HEART"/>
+  </scene>
+  <scene id="34" name="KF_LinkHouse" description="Link's House"/>
+</overworld>

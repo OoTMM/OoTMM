@@ -9,7 +9,7 @@
 #define GI_OOT_DEKU_NUTS_5          0x02
 #define GI_OOT_BOMBCHUS_10          0x03
 #define GI_OOT_FAIRY_BOW            0x04
-#define GI_OOT_FAIRY_SLINGSHOT      0x05
+#define GI_OOT_SLINGSHOT            0x05
 #define GI_OOT_BOOMERANG            0x06
 #define GI_OOT_DEKU_STICKS          0x07
 #define GI_OOT_HOOKSHOT             0x08
@@ -43,7 +43,7 @@
 #define GI_OOT_EYEBALL_FROG         0x24
 #define GI_OOT_EYE_DROPS            0x25
 #define GI_OOT_CLAIM_CHECK          0x26
-#define GI_OOT_KOKIRI_SWORD         0x27
+#define GI_OOT_SWORD_KOKIRI         0x27
 #define GI_OOT_GIANT_KNIFE          0x28
 #define GI_OOT_DEKU_SHIELD          0x29
 #define GI_OOT_HYLIAN_SHIELD        0x2a

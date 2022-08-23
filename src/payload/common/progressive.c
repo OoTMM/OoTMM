@@ -35,7 +35,7 @@ static s32 progressiveOotBow(void)
 static s32 progressiveSlingshot(void)
 {
     if (gOotSave.inventory[ITS_OOT_SLINGSHOT] == ITEM_NONE)
-        return GI_OOT_FAIRY_SLINGSHOT;
+        return GI_OOT_SLINGSHOT;
     switch (gOotSave.upgrades.bulletBag)
     {
     case 0:
@@ -64,7 +64,7 @@ static s32 progressiveHookshot(void)
 static s32 progressiveOotSword(void)
 {
     if (!(gOotSave.equipment.swords & EQ_OOT_SWORD_KOKIRI))
-        return GI_OOT_KOKIRI_SWORD;
+        return GI_OOT_SWORD_KOKIRI;
     if (!(gOotSave.equipment.swords & EQ_OOT_SWORD_MASTER))
         return GI_OOT_MASTER_SWORD;
     if (!(gOotSave.equipment.swords & (EQ_OOT_SWORD_KNIFE | EQ_OOT_SWORD_KNIFE_BROKEN)))
@@ -146,7 +146,7 @@ static s32 progressiveChestItemOot(s32 gi)
     case GI_OOT_QUIVER3:
         gi = progressiveOotBow();
         break;
-    case GI_OOT_FAIRY_SLINGSHOT:
+    case GI_OOT_SLINGSHOT:
     case GI_OOT_BULLET_BAG:
     case GI_OOT_BULLET_BAG2:
     case GI_OOT_BULLET_BAG3:
@@ -161,7 +161,7 @@ static s32 progressiveChestItemOot(s32 gi)
         gi = progressiveHookshot();
         break;
     /* Equipment */
-    case GI_OOT_KOKIRI_SWORD:
+    case GI_OOT_SWORD_KOKIRI:
     case GI_OOT_MASTER_SWORD:
     case GI_OOT_SWORD_BIGGORON:
     case GI_OOT_GIANT_KNIFE:
