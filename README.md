@@ -14,14 +14,16 @@ You need:
 
 ## Build
 
-Copy the original roms in the `roms` folder. They need to be named `OoT.z64` and `MM.z64`, and be in their **native, big endian** order.
+Copy the original roms in the `roms` folder. They need to be named `oot.z64` and `mm.z64`, and be in their **native, big endian** order.
 
 Run this command once to install dependencies:
 
-    bundle install --path=vendor/bundle
+    ./install-deps.sh
+    bundle config path vendor/bundle
+    bundle install
 
 Run this to build the rom:
 
     bin/combo
 
-The output will be `build/OoTMM.z64`.
+The output will be `dist/OoTMM.z64`.

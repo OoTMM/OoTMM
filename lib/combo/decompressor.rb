@@ -1,5 +1,6 @@
 require 'yaz0'
 require 'fileutils'
+require 'digest'
 require 'combo/common'
 require 'combo/dma_data'
 
@@ -15,6 +16,14 @@ module Combo::Decompressor
     puts "Decompressing #{game}..."
 
     File.open(File.join(Combo::PATH_ROMS, "#{game}.z64"), "rb") do |src|
+      # Check the hash of the ROMs
+      hash = Digest::SHA256.hexdigest(src.read)
+      valid_hashes = meta[:sha256]
+
+      unless valid_hashes.include?(hash)
+        raise "Invalid ROM hash for #{game}: #{hash}"
+      end
+
       # Read and copy the DMA Data
       src.seek(meta[:dma_addr])
       dma = Combo::DmaData.new(src.read(meta[:dma_count] * 0x10))
