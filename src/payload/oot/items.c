@@ -1,5 +1,13 @@
 #include <combo.h>
 
+#define CB_PASSIVE 0x00
+#define CB_GETITEM 0xff
+
+int GetItemCollectBehavior(s16 itemId)
+{
+    return CB_GETITEM;
+}
+
 int hook_SetChestItemInRange(Actor* actor, GameState_Play* play, s16 itemId, float a, float b)
 {
     s32 override;
