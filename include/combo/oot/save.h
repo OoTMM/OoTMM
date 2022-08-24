@@ -54,7 +54,11 @@ typedef struct PACKED ALIGNED(4)
     u32                 quest;
     u8                  dungeonItems[0x14];
     u8                  dungeonKeys[0x14];
-    char                data[0x1282];
+    char                unk_0xd0[0xe04];
+    u16                 eventsChk[14];
+    u16                 eventsItem[4];
+    u16                 eventsMisc[30];
+    char                unk_f34[0x41e];
     u16                 checksum;
 }
 OotSave;
