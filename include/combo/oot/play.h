@@ -48,7 +48,7 @@ typedef struct PACKED ALIGNED(4)
 }
 PauseContext;
 
-typedef struct PACKED ALIGNED(4)
+typedef struct PACKED ALIGNED(4) GameState_Play
 {
     GameState       gs;
     u16             sceneId;
@@ -63,5 +63,7 @@ typedef struct PACKED ALIGNED(4)
 GameState_Play;
 
 _Static_assert(sizeof(GameState_Play) == 0x12518, "OoT GameState_Play size is wrong");
+
+int SetChestItemInRange(Actor* actor, GameState_Play* play, s16 itemId, float a, float b);
 
 #endif
