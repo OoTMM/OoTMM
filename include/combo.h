@@ -17,6 +17,7 @@
 # include <combo/oot/actor.h>
 # include <combo/oot/play.h>
 # include <combo/oot/item_etc.h>
+# include <combo/oot/events.h>
 #endif
 
 #if defined(GAME_MM)

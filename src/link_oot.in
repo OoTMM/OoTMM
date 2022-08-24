@@ -61,3 +61,9 @@ GetObject = 0x80081628;
 ActorSetScale = 0x80020f88;
 
 PlaySound6 = 0x800c806c;
+
+IsActorDead = 0x80022bb0;
+ActorDestroy = 0x80020eb4;
+
+GetEventChk = 0x800288b4;
+SetEventChk = 0x800288e0;
