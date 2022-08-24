@@ -16,7 +16,7 @@
 #define GI_OOT_LONGSHOT             0x09
 #define GI_OOT_LENS_OF_TRUTH        0x0a
 #define GI_OOT_ZELDA_LETTER         0x0b
-#define GI_OOT_OCARINA_OF_TIME      0x0c
+#define GI_OOT_OCARINA_TIME         0x0c
 #define GI_OOT_MEGATON_HAMMER       0x0d
 #define GI_OOT_COJIRO               0x0e
 #define GI_OOT_EMPTY_BOTTLE         0x0f
@@ -63,7 +63,7 @@
 #define GI_OOT_GOLDEN_SCALE         0x38
 #define GI_OOT_STONE_OF_AGONY       0x39
 #define GI_OOT_GERUDO_CARD          0x3a
-#define GI_OOT_FAIRY_OCARINA        0x3b
+#define GI_OOT_OCARINA_FAIRY        0x3b
 #define GI_OOT_DEKU_SEEDS_5         0x3c
 #define GI_OOT_HEART_CONTAINER      0x3d
 #define GI_OOT_HEART_PIECE          0x3e

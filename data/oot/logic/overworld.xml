@@ -4,6 +4,7 @@
     <link to="KF_Mido"/>
     <link to="KF_LinkHouse"/>
     <link to="DT_Main"/>
+    <link to="LW_Bridge"/>
     <chest id="00" content="SWORD"/>
   </scene>
   <scene id="28" name="KF_Mido" description="Mido's House">
@@ -13,4 +14,9 @@
     <chest id="03" content="RECOVERY_HEART"/>
   </scene>
   <scene id="34" name="KF_LinkHouse" description="Link's House"/>
+  <scene id="5b">
+    <room name="LW_Bridge">
+      <special id="00" content="OCARINA"/>
+    </room>
+  </scene>
 </overworld>

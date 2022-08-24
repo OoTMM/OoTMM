@@ -22,11 +22,8 @@ void comboInitOverride(void)
     comboDma(&gComboChestOverrides, CHEST_OVERRIDE_ADDR, sizeof(gComboChestOverrides));
 }
 
-s32 comboGetChestOverride(u16 scene, u8 id)
+s32 comboGetOverride(u16 key)
 {
-    u16 key;
-
-    key = CHEST_KEY(scene, id);
     for (int i = 0; i < 256; ++i)
     {
         ComboOverride* o = &gComboChestOverrides[i];
@@ -36,4 +33,14 @@ s32 comboGetChestOverride(u16 scene, u8 id)
             return comboProgressiveChestItem(o->value);
     }
     return -1;
+}
+
+s32 comboGetChestOverride(u16 scene, u8 id)
+{
+    return comboGetOverride(CHEST_KEY(scene, id));
+}
+
+s32 comboGetSpecialOverride(u8 id)
+{
+    return comboGetOverride(CHEST_KEY(0xf0, id));
 }

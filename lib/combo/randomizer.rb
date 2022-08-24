@@ -16,10 +16,10 @@ class Combo::Randomizer
 
     data = ("\xff" * 0x20000).force_encoding('ASCII-8BIT')
 
-    oot_chests = chest_overrides(overrides)
-    mm_chests = random_block(:mm)
-    data[0x1000, oot_chests.length] = oot_chests
-    data[0x2000, mm_chests.length] = mm_chests
+    oot = overrides(overrides)
+    mm = random_block(:mm)
+    data[0x1000, oot.length] = oot
+    data[0x2000, mm.length] = mm
 
     data
   end
@@ -47,6 +47,8 @@ class Combo::Randomizer
     case item
     when :SWORD
       item = :SWORD_KOKIRI
+    when :OCARINA
+      item = :OCARINA_FAIRY
     end
     x = @gi["OOT_#{item}"]
     if x.nil?
@@ -55,15 +57,18 @@ class Combo::Randomizer
     x
   end
 
-  def chest_overrides(overrides)
+  def overrides(overrides)
     data = []
     overrides.each do |override|
       type = override[0]
-      next if type != :chest
       scene_id = override[1]
-      chest_id = override[2]
+      case type
+      when :special
+        scene_id = 0xf0
+      end
+      id = override[2]
       content = override[3]
-      key = (scene_id << 8) | chest_id
+      key = (scene_id << 8) | id
       gi = get_item(content)
       data << [key, gi].pack('S>2')
     end

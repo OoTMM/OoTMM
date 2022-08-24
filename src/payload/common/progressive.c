@@ -50,8 +50,8 @@ static s32 progressiveSlingshot(void)
 static s32 progressiveOotOcarina(void)
 {
     if (gComboSave.ootOcarinas == 0)
-        return GI_OOT_FAIRY_OCARINA;
-    return GI_OOT_OCARINA_OF_TIME;
+        return GI_OOT_OCARINA_FAIRY;
+    return GI_OOT_OCARINA_TIME;
 }
 
 static s32 progressiveHookshot(void)
@@ -152,8 +152,8 @@ static s32 progressiveChestItemOot(s32 gi)
     case GI_OOT_BULLET_BAG3:
         gi = progressiveSlingshot();
         break;
-    case GI_OOT_FAIRY_OCARINA:
-    case GI_OOT_OCARINA_OF_TIME:
+    case GI_OOT_OCARINA_FAIRY:
+    case GI_OOT_OCARINA_TIME:
         gi = progressiveOotOcarina();
         break;
     case GI_OOT_HOOKSHOT:

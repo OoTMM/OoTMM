@@ -48,6 +48,9 @@ class Combo::WorldGraphBuilder
     e.xpath('chest').each do |check|
       parse_check(check, :chest, room)
     end
+    e.xpath('special').each do |check|
+      parse_check(check, :special, room)
+    end
     e.xpath('link').each do |link|
       parse_link(e, room)
     end
