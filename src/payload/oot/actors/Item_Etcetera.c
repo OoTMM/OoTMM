@@ -27,6 +27,13 @@ static void ItemEtcetera_LoadedUpdate(Actor_ItemEtcetera* item, GameState_Play* 
             {
             case 0:
                 SetEventChk(EV_CHK_SARIA_OCARINA);
+                break;
+            case 1:
+                SetEventChk(EV_CHK_ZELDA_LETTER);
+                break;
+            case 2:
+                SetEventChk(EV_CHK_SONG_ZELDA);
+                break;
             }
         }
         ActorDestroy(&item->base);

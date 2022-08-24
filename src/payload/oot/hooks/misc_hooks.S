@@ -13,7 +13,8 @@ PATCH_END
 /* DEBUG: Mido house */
 PATCH_START(0x800903e0)
   /* li t4,0x1d1*/
-  li t4,0x433
+  /*li t4,0x433*/
+  li t4,0x400
 
   /* li t4,0x0004 */
 PATCH_END
