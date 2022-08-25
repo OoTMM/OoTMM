@@ -3,6 +3,22 @@
 extern void Play_Init(void*);
 extern void comboSwitchToMM(void);
 
+static void debugCheat(GameState_Play* play)
+{
+    if (play->gs.input[0].current.buttons & 0x20)
+    {
+        for (int i = 0; i < ITS_OOT_TRADE_ADULT; ++i)
+            gSave.inventory[i] = i;
+        gSave.equipment.swords = 0x7;
+        gSave.equipment.shields = 0x7;
+        gSave.equipment.tunics = 0x7;
+        gSave.equipment.boots = 0x7;
+        gSave.ammo[ITS_OOT_SLINGSHOT] = 50;
+        gSave.upgrades.bulletBag = 3;
+        gSave.upgrades.bombBag = 3;
+    }
+}
+
 static void spawnSpecial(GameState_Play* play, float x, float y, float z, u8 specialId, u16 gi)
 {
     SpawnActor(
@@ -80,6 +96,7 @@ static void skipEntranceCutscene(GameState_Play* play)
 
 void hookPlay_Init(GameState_Play* play)
 {
+    debugCheat(play);
     skipEntranceCutscene(play);
 
     if ((gSave.entrance & 0xfffc) == 0x0530)
