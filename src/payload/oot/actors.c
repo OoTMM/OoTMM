@@ -47,7 +47,8 @@ Actor* hookSpawnActor(void* const_1, GameState_Play* play, s16 actorId, float x,
     case AC_ITEM_B_HEART:
         /* Always use collectible flag 0x1f */
         actorId = AC_ITEM_ETCETERA;
-        variable = (GI_OOT_HEART_CONTAINER2 << 8) | 0x80 | 0x1f;
+        rz = 0x1000 | 0x1f;
+        variable = GI_OOT_HEART_CONTAINER2;
         break;
     }
 
