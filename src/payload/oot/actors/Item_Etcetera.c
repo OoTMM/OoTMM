@@ -4,6 +4,16 @@ s8 LoadObject(void* const_1, s16 objectId);
 s8 GetObject(void* const_1, s16 objectId);
 void ActorSetScale(Actor* actor, float scale);
 
+static int shouldSpawn(Actor_ItemEtcetera* item, GameState_Play* play)
+{
+    if (item->base.variable & 0x80)
+    {
+        if (GetCollectibleFlag(play, item->base.variable & 0x1f))
+            return 0;
+    }
+    return 1;
+}
+
 static void ItemEtcetera_LoadedUpdate(Actor_ItemEtcetera* item, GameState_Play* play)
 {
     u8 flagId;
@@ -57,18 +67,30 @@ void hookItemEtcetera_Init(Actor_ItemEtcetera* item, GameState_Play* play)
 {
     char* ovlBase;
     s16 gi;
-    s16 override;
+    s32 override;
     const GetItem* giItem;
+
+    if (!shouldSpawn(item, play))
+    {
+        ActorDestroy(&item->base);
+        return;
+    }
 
     ovlBase = (char*)(gActorOvl[0x10f].data);
     gi = (item->base.variable >> 8);
+    override = -1;
     if (item->base.variable & 0x40)
     {
         /* Special */
         override = comboGetSpecialOverride(item->base.variable & 0x3f);
-        if (override >= 0)
-            gi = override;
     }
+    else if (item->base.variable & 0x80)
+    {
+        override = comboGetCollectibleOverride(play->sceneId, item->base.variable & 0x1f);
+        /* Collectible */
+    }
+    if (override >= 0)
+        gi = override;
     gi = comboProgressiveChestItem(gi);
 
     giItem = kExtendedGetItems + (gi - 1);

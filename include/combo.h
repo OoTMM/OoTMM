@@ -62,6 +62,7 @@ void comboGameSwitch(void);
 
 /* Override */
 s32 comboGetChestOverride(u16 scene, u8 id);
+s32 comboGetCollectibleOverride(u16 scene, u8 id);
 s32 comboGetSpecialOverride(u8 id);
 s32 comboGetNpcOverride(u8 id);
 

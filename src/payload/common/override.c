@@ -40,6 +40,11 @@ s32 comboGetChestOverride(u16 scene, u8 id)
     return comboGetOverride(CHEST_KEY(scene, id));
 }
 
+s32 comboGetCollectibleOverride(u16 scene, u8 id)
+{
+    return comboGetOverride(CHEST_KEY(scene, (id | 0x20)));
+}
+
 s32 comboGetSpecialOverride(u8 id)
 {
     return comboGetOverride(CHEST_KEY(0xf0, id));

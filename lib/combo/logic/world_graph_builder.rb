@@ -52,22 +52,27 @@ module Combo::Logic
         room.scene_id = scene_id
         room.desc = desc
       end
-      e.xpath('chest').each do |check|
-        parse_check(check, :chest, room)
-      end
-      e.xpath('special').each do |check|
-        parse_check(check, :special, room)
-      end
-      e.xpath('npc').each do |check|
-        parse_check(check, :npc, room)
-      end
+
+      parse_checks(e, 'chest', :chest, room)
+      parse_checks(e, 'special', :special, room)
+      parse_checks(e, 'npc', :npc, room)
+      parse_checks(e, 'collectible', :collectible, room)
+
       e.xpath('link').each do |link|
         parse_link(link, room)
       end
+
       if dungeon
         room.checks.each do |check|
           dungeon.add_check(check)
         end
+      end
+    end
+
+    def parse_checks(e, key, type, room)
+      checks = e.xpath(key)
+      checks.each do |check|
+        parse_check(check, type, room)
       end
     end
 
