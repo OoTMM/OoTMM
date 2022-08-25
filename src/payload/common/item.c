@@ -8,7 +8,8 @@ void DisplayTextBox(void* play, s16 textId);
 # define ITEM_BASE_MM 0x0
 #endif
 
-static void addItemOot(u16 itemId)
+/* Also Bomb Bag 1 */
+static void addItemOotInventory(u16 itemId)
 {
     switch (itemId)
     {
@@ -46,7 +47,31 @@ static void addItemOot(u16 itemId)
         gOotSave.inventory[ITS_OOT_HOOKSHOT] = ITEM_OOT_LONGSHOT;
         gComboSave.ootHookshots |= 0x2;
         break;
-    /* Equipment */
+    }
+}
+
+static void addItemOotChildTrade(u16 itemId)
+{
+    u32 bit;
+
+    switch (itemId)
+    {
+    case ITEM_OOT_ZELDA_LETTER:
+        bit = 0;
+        break;
+    default:
+        return;
+    }
+
+    if (gOotSave.inventory[ITS_OOT_TRADE_CHILD] == ITEM_NONE)
+        gOotSave.inventory[ITS_OOT_TRADE_CHILD] = itemId;
+    gComboSave.ootTradeChild |= (1 << bit);
+}
+
+static void addItemOotEquipment(u16 itemId)
+{
+    switch (itemId)
+    {
     case ITEM_OOT_KOKIRI_SWORD:
         gOotSave.equipment.swords |= EQ_OOT_SWORD_KOKIRI;
         break;
@@ -68,7 +93,13 @@ static void addItemOot(u16 itemId)
         gOotSave.equipment.shields |= EQ_OOT_SHIELD_MIRROR;
         gComboSave.ootShields |= EQ_OOT_SHIELD_MIRROR;
         break;
-    /* Strength */
+    }
+}
+
+static void addItemOotUpgrade(u16 itemId)
+{
+    switch (itemId)
+    {
     case ITEM_OOT_GORON_BRACELET:
         gOotSave.upgrades.strength = 1;
         break;
@@ -78,28 +109,24 @@ static void addItemOot(u16 itemId)
     case ITEM_OOT_GOLDEN_GAUNTLETS:
         gOotSave.upgrades.strength = 3;
         break;
-    /* Dive */
     case ITEM_OOT_SILVER_SCALE:
         gOotSave.upgrades.dive = 1;
         break;
     case ITEM_OOT_GOLDEN_SCALE:
         gOotSave.upgrades.dive = 2;
         break;
-    /* Bullet Bag */
     case ITEM_OOT_BULLET_BAG2:
         gOotSave.upgrades.bulletBag = 2;
         break;
     case ITEM_OOT_BULLET_BAG3:
         gOotSave.upgrades.bulletBag = 3;
         break;
-    /* Quiver */
     case ITEM_OOT_QUIVER2:
         gOotSave.upgrades.quiver = 2;
         break;
     case ITEM_OOT_QUIVER3:
         gOotSave.upgrades.quiver = 3;
         break;
-    /* Bomb Bag */
     case ITEM_OOT_BOMB_BAG2:
         gOotSave.upgrades.bombBag = 2;
         break;
@@ -112,7 +139,13 @@ static void addItemOot(u16 itemId)
     case ITEM_OOT_WALLET3:
         gOotSave.upgrades.wallet = 2;
         break;
-    /* Quest */
+    }
+}
+
+static void addItemOotQuest(u16 itemId)
+{
+    switch (itemId)
+    {
     case ITEM_OOT_GERUDO_CARD:
         gOotSave.quest.gerudoCard = 1;
         break;
@@ -183,6 +216,15 @@ static void addItemOot(u16 itemId)
         gOotSave.quest.medallionForest = 1;
         break;
     }
+}
+
+static void addItemOot(u16 itemId)
+{
+    addItemOotInventory(itemId);
+    addItemOotChildTrade(itemId);
+    addItemOotEquipment(itemId);
+    addItemOotUpgrade(itemId);
+    addItemOotQuest(itemId);
 }
 
 static void addItemMm(u16 itemId)
