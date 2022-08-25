@@ -39,6 +39,11 @@ static void ItemEtcetera_LoadedUpdate(Actor_ItemEtcetera* item, GameState_Play* 
                 break;
             }
         }
+        else if (item->base.variable & 0x80)
+        {
+            /* Collectible */
+            SetCollectibleFlag(play, item->base.variable & 0x1f);
+        }
         ActorDestroy(&item->base);
     }
 }

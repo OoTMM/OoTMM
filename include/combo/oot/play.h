@@ -64,6 +64,7 @@ GameState_Play;
 
 _Static_assert(sizeof(GameState_Play) == 0x12518, "OoT GameState_Play size is wrong");
 
+void SetCollectibleFlag(GameState_Play* play, int flag);
 int SetChestItemInRange(Actor* actor, GameState_Play* play, s16 itemId, float a, float b);
 
 #endif
