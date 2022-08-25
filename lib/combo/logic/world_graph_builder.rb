@@ -58,6 +58,9 @@ module Combo::Logic
       e.xpath('special').each do |check|
         parse_check(check, :special, room)
       end
+      e.xpath('npc').each do |check|
+        parse_check(check, :npc, room)
+      end
       e.xpath('link').each do |link|
         parse_link(link, room)
       end

@@ -1,4 +1,4 @@
 NPC override IDs:
 
-00 Anju - Child
-01 Anju - Adult
+00 Malon, Weird Egg (Chicken)
+01 Anju, Empty Bottle

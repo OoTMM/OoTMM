@@ -185,37 +185,37 @@ static void addItemOotChildTrade(u16 itemId)
 
     switch (itemId)
     {
-    case GI_OOT_WEIRD_EGG:
+    case ITEM_OOT_WEIRD_EGG:
         bit = 0;
         break;
-    case GI_OOT_CHICKEN:
+    case ITEM_OOT_CHICKEN:
         bit = 1;
         break;
-    case GI_OOT_ZELDA_LETTER:
+    case ITEM_OOT_ZELDA_LETTER:
         bit = 2;
         break;
-    case GI_OOT_KEATON_MASK:
+    case ITEM_OOT_KEATON_MASK:
         bit = 3;
         break;
-    case GI_OOT_SKULL_MASK:
+    case ITEM_OOT_SKULL_MASK:
         bit = 4;
         break;
-    case GI_OOT_SPOOKY_MASK:
+    case ITEM_OOT_SPOOKY_MASK:
         bit = 5;
         break;
-    case GI_OOT_BUNNY_HOOD:
+    case ITEM_OOT_BUNNY_HOOD:
         bit = 6;
         break;
-    case GI_OOT_MASK_GORON:
+    case ITEM_OOT_GORON_MASK:
         bit = 7;
         break;
-    case GI_OOT_MASK_ZORA:
+    case ITEM_OOT_ZORA_MASK:
         bit = 8;
         break;
-    case GI_OOT_MASK_GERUDO:
+    case ITEM_OOT_GERUDO_MASK:
         bit = 9;
         break;
-    case GI_OOT_MASK_OF_TRUTH:
+    case ITEM_OOT_MASK_OF_TRUTH:
         bit = 10;
         break;
     default:

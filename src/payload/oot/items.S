@@ -2,7 +2,7 @@
 
 /* Use our little hook */
 PATCH_START(0x80022d08)
-  jal hook_SetChestItemInRange
+  jal comboGetItemInRange
 PATCH_END
 
 /* Patch GetItemCollectBehavior */

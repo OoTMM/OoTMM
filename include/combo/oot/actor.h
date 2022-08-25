@@ -4,6 +4,7 @@
 #include <combo/types.h>
 
 #define AC_EN_BOX           0x0a
+#define AC_EN_MA1           0xe7
 #define AC_ITEM_ETCETERA    0x10f
 
 typedef struct GameState_Play GameState_Play;

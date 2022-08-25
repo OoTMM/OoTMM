@@ -24,14 +24,28 @@ int GetItemCollectBehavior(s16 itemId)
     return CB_GETITEM;
 }
 
-int hook_SetChestItemInRange(Actor* actor, GameState_Play* play, s16 itemId, float a, float b)
+int comboGetItemInRange(Actor* actor, GameState_Play* play, s16 itemId, float a, float b)
 {
+    s16 absItemId;
     s32 override;
-    if (actor->id == 0x0a)
+
+    override = -1;
+    absItemId = itemId > 0 ? itemId : -itemId;
+
+    switch (actor->id)
     {
+    case AC_EN_BOX:
         override = comboGetChestOverride(play->sceneId, actor->variable & 0x1f);
-        if (override >= 0)
-            itemId = (s16)(-override);
+        break;
+    case AC_EN_MA1:
+        absItemId = GI_OOT_CHICKEN;
+        override = comboGetNpcOverride(0x00);
+        break;
     }
+
+    if (override >= 0)
+        absItemId = (s16)(override);
+    absItemId = comboProgressiveChestItem(absItemId);
+    itemId = itemId > 0 ? absItemId : -absItemId;
     return SetChestItemInRange(actor, play, itemId, a, b);
 }

@@ -2,7 +2,7 @@
 
 int SetChestItemInRange(void* actor, void* play, s16 itemId, float a, float b);
 
-int hook_SetChestItemInRange(Actor* actor, GameState_Play* play, s16 itemId, float a, float b)
+int comboGetItemInRange(Actor* actor, GameState_Play* play, s16 itemId, float a, float b)
 {
     s32 override;
     if (actor->id == 0x06)

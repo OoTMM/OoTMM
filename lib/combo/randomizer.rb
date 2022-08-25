@@ -67,6 +67,8 @@ class Combo::Randomizer
       case type
       when :special
         scene_id = 0xf0
+      when :npc
+        scene_id = 0xf1
       end
       id = override[2]
       content = override[3]

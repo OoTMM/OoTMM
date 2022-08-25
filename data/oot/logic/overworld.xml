@@ -28,7 +28,7 @@
     <link to="Hyrule_Castle"/>
   </scene>
   <scene id="5f" name="Hyrule_Castle" desc="Hyrule Castle">
-    <chest id="00" content="CHICKEN"/> <!-- Fake entry to test logic -->
+    <npc id="00" content="CHICKEN" desc="Malon"/>
     <link to="Hyrule_CastleCourtyard" cond="has(CHICKEN)"/>
   </scene>
   <scene id="4a" name="Hyrule_CastleCourtyard" desc="Hyrule Castle Courtyard">

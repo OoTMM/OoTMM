@@ -2,7 +2,7 @@
 
 /* Use our hook */
 PATCH_START(0x800b8b98)
-  jal hook_SetChestItemInRange
+  jal comboGetItemInRange
 PATCH_END
 
 /* MM already have 16 bits indices into the GI table */
