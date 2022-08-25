@@ -49,6 +49,8 @@ class Combo::Randomizer
     case item
     when :SWORD
       item = :SWORD_KOKIRI
+    when :SHIELD
+      item = :DEKU_SHIELD
     when :OCARINA
       item = :OCARINA_FAIRY
     end
