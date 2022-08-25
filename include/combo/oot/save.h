@@ -96,10 +96,14 @@ typedef struct PACKED ALIGNED(4)
 {
     OotSave save;
     u32     fileIndex;
+    char    unk_1358[0x74];
+    s16     rupeesDelta;
+    char    unk_13ce[0x82];
 }
 OotSaveContext;
 
 _Static_assert(sizeof(OotSave) == 0x1354, "OotSave size is wrong");
+_Static_assert(sizeof(OotSaveContext) == 0x1450, "OotSaveContext size is wrong");
 
 #if defined(GAME_OOT)
 ALIGNED(16) extern OotSaveContext gSaveContext;

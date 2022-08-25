@@ -13,6 +13,7 @@ static const u8 kMaxNuts[] = { 0, 20, 30, 40 };
 static const u8 kMaxBombs[] = { 0, 20, 30, 40 };
 static const u8 kMaxArrows[] = { 0, 30, 40, 50 };
 static const u8 kMaxSeeds[] = { 0, 30, 40, 50 };
+static const u16 kMaxRupees[] = { 99, 200, 500 };
 
 static void addOotAmmo(u16 itemId, u8 max, u8 count)
 {
@@ -346,6 +347,42 @@ static void addItemOotQuest(u16 itemId)
     }
 }
 
+static void addItemOotRupee(u16 itemId)
+{
+    u16 count;
+    u16 max;
+
+    switch (itemId)
+    {
+    case ITEM_OOT_RUPEE_GREEN:
+        count = 1;
+        break;
+    case ITEM_OOT_RUPEE_BLUE:
+        count = 5;
+        break;
+    case ITEM_OOT_RUPEE_RED:
+        count = 20;
+        break;
+    case ITEM_OOT_RUPEE_PURPLE:
+        count = 50;
+        break;
+    case ITEM_OOT_RUPEE_HUGE:
+        count = 200;
+        break;
+    default:
+        return;
+    }
+
+#if defined(GAME_OOT)
+    gSaveContext.rupeesDelta += count;
+#else
+    max = kMaxRupees[gOotSave.upgrades.wallet];
+    gOotSave.rupees += count;
+    if (gOotSave.rupees > max)
+        gOotSave.rupees = max;
+#endif
+}
+
 static void addItemOot(u16 itemId)
 {
     addItemOotInventory(itemId);
@@ -353,6 +390,7 @@ static void addItemOot(u16 itemId)
     addItemOotEquipment(itemId);
     addItemOotUpgrade(itemId);
     addItemOotQuest(itemId);
+    addItemOotRupee(itemId);
 }
 
 static void addItemMm(u16 itemId)
