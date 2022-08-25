@@ -104,4 +104,11 @@ void hookPlay_Init(GameState_Play* play)
         if (!GetEventChk(EV_CHK_SONG_ZELDA))
             spawnSpecial(play, -460.f, 84.f, -40.f, 0x02, GI_OOT_SONG_ZELDA);
     }
+
+    /* Sun Song */
+    if (play->sceneId == 0x41)
+    {
+        if (!GetEventChk(EV_CHK_SONG_SUN))
+            spawnSpecial(play, 0.f, 70.f, -1160.f, 0x03, GI_OOT_SONG_SUN);
+    }
 }

@@ -18,11 +18,11 @@ module Combo::Logic
 
   class ExprOr < ExprBinary
     def eval_missing(*args)
-      left_missing = left.missing(*args)
+      left_missing = @left.missing(*args)
       if left_missing.empty?
         []
       else
-        right_missing = right.missing(*args)
+        right_missing = @right.missing(*args)
         if left_missing.size > right_missing.size
           right_missing
         else
@@ -32,9 +32,9 @@ module Combo::Logic
     end
   end
 
-  class ExprAnd < Expr
+  class ExprAnd < ExprBinary
     def eval_missing(*args)
-      [left, right].map{|x| x.missing(*args)}.flatten
+      [@left, @right].map{|x| x.missing(*args)}.flatten
     end
   end
 

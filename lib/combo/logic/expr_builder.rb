@@ -4,8 +4,8 @@ module Combo::Logic
   TOKENS = {
     '(' => :lparen,
     ')' => :rparen,
-    '||' => :or,
-    '&&' => :and,
+    'or' => :or,
+    'and' => :and,
   }
 
   class ExprBuilder

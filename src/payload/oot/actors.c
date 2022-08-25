@@ -12,6 +12,7 @@ static RemovedActor kRemovedActors[] = {
     { 0x4a, 0x0a9 }, /* Zelda Courtyard - Impa */
     { 0x51, AC_EN_OWL }, /* Hyrule Field - Owl */
     { 0x5f, AC_EN_OWL }, /* Hyrule Castle - Owl */
+    { 0x41, 0x12e }, /* Sun Song */
 };
 
 Actor* hookSpawnActor(void* const_1, GameState_Play* play, s16 actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable)

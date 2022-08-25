@@ -34,6 +34,9 @@ static void ItemEtcetera_LoadedUpdate(Actor_ItemEtcetera* item, GameState_Play* 
             case 2:
                 SetEventChk(EV_CHK_SONG_ZELDA);
                 break;
+            case 3:
+                SetEventChk(EV_CHK_SONG_SUN);
+                break;
             }
         }
         ActorDestroy(&item->base);

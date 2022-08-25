@@ -35,6 +35,13 @@
     <special id="01" content="ZELDA_LETTER"/>
     <special id="02" content="SONG_ZELDA"/>
   </scene>
-  <scene id="52" name="Kakriko">
+  <scene id="52" name="Kakariko">
+    <link to="Graveyard"/>
+  </scene>
+  <scene id="53" name="Graveyard">
+    <link to="Graveyard_Royal" cond="has(OCARINA) and has(SONG_ZELDA)"/>
+  </scene>
+  <scene id="41" name="Graveyard_Royal">
+    <special id="03" content="SONG_SUN"/>
   </scene>
 </overworld>

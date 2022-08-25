@@ -6,6 +6,7 @@
 #define EV_CHK_DEKU_TREE_MEET           0x0c
 #define EV_CHK_ZELDA_LETTER             0x40
 #define EV_CHK_SONG_ZELDA               0x59
+#define EV_CHK_SONG_SUN                 0x5a
 #define EV_CHK_SARIA_OCARINA            0xc1
 
 int  GetEventChk(int index);
