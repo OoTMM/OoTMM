@@ -72,4 +72,7 @@ void comboTextHijackItem(GameState_Play* play, u16 itemId);
 /* Progressive */
 s32 comboProgressiveChestItem(s32 gi);
 
+/* Actor */
+void comboSpawnSpecial(GameState_Play* play, float x, float y, float z, u8 specialId, u16 gi);
+
 #endif /* COMBO_COMBO_H */

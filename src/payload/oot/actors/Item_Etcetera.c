@@ -34,7 +34,22 @@ static void ItemEtcetera_LoadedUpdate(Actor_ItemEtcetera* item, GameState_Play* 
         /* Another item might have been collected */
         item->gi = comboProgressiveChestItem(item->gi);
 
-        SetChestItemInRange(&item->base, play, item->gi, 30.f, 50.f);
+        float rangeScale = 1.f;
+
+        if ((item->base.initRot.z & 0xf000) == 0x2000)
+        {
+            /* For quest items, we need a larger radius */
+            switch (item->base.initRot.z & 0xff)
+            {
+            case EV_CHK_STONE_EMERALD:
+            case EV_CHK_STONE_RUBY:
+            case EV_CHK_STONE_SAPPHIRE:
+                rangeScale = 3.25f;
+                break;
+            }
+        }
+
+        SetChestItemInRange(&item->base, play, item->gi, 30.f * rangeScale, 50.f * rangeScale);
     }
     else
     {

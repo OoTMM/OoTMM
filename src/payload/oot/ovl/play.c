@@ -19,18 +19,6 @@ static void debugCheat(GameState_Play* play)
     }
 }
 
-static void spawnSpecial(GameState_Play* play, float x, float y, float z, u8 specialId, u16 gi)
-{
-    SpawnActor(
-        (char*)play + 0x1c24,
-        play,
-        AC_ITEM_ETCETERA,
-        x, y, z,
-        0, 0, 0x2000 | specialId,
-        gi
-    );
-}
-
 static void skipEntranceCutscene(GameState_Play* play)
 {
     switch (gSave.entrance)
@@ -110,19 +98,19 @@ void hookPlay_Init(GameState_Play* play)
     /* Saria's Ocarina Check */
     if (gSave.entrance == 0x05e0 || gSave.entrance == 0x05e1)
     {
-        spawnSpecial(play, -1191.f, -220.f, 1650.f, EV_CHK_SARIA_OCARINA, GI_OOT_OCARINA_FAIRY);
+        comboSpawnSpecial(play, -1191.f, -220.f, 1650.f, EV_CHK_SARIA_OCARINA, GI_OOT_OCARINA_FAIRY);
     }
 
     /* Child Zelda checks */
     if (play->sceneId == 0x4a)
     {
-        spawnSpecial(play, -460.f, 84.f,  40.f, EV_CHK_ZELDA_LETTER, GI_OOT_ZELDA_LETTER);
-        spawnSpecial(play, -460.f, 84.f, -40.f, EV_CHK_SONG_ZELDA, GI_OOT_SONG_ZELDA);
+        comboSpawnSpecial(play, -460.f, 84.f,  40.f, EV_CHK_ZELDA_LETTER, GI_OOT_ZELDA_LETTER);
+        comboSpawnSpecial(play, -460.f, 84.f, -40.f, EV_CHK_SONG_ZELDA, GI_OOT_SONG_ZELDA);
     }
 
     /* Sun Song */
     if (play->sceneId == 0x41)
     {
-        spawnSpecial(play, 0.f, 70.f, -1160.f, EV_CHK_SONG_SUN, GI_OOT_SONG_SUN);
+        comboSpawnSpecial(play, 0.f, 70.f, -1160.f, EV_CHK_SONG_SUN, GI_OOT_SONG_SUN);
     }
 }

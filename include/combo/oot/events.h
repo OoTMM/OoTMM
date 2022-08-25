@@ -9,6 +9,10 @@
 #define EV_CHK_SONG_SUN                 0x5a
 #define EV_CHK_SARIA_OCARINA            0xc1
 
+#define EV_CHK_STONE_EMERALD            0x19
+#define EV_CHK_STONE_RUBY               0x25
+#define EV_CHK_STONE_SAPPHIRE           0x37
+
 int  GetEventChk(int index);
 void SetEventChk(int index);
 
