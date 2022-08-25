@@ -1,5 +1,17 @@
 #include <combo.h>
 
+typedef struct
+{
+    u16 sceneId;
+    u16 actorId;
+}
+RemovedActor;
+
+static RemovedActor kRemovedActors[] = {
+    { 0x4a, 0x1d3 }, /* Zelda Courtyard - Zelda */
+    { 0x4a, 0x0a9 }, /* Zelda Courtyard - Impa */
+};
+
 Actor* hookSpawnActor(void* const_1, GameState_Play* play, s16 actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable)
 {
 #if 0
@@ -18,5 +30,13 @@ Actor* hookSpawnActor(void* const_1, GameState_Play* play, s16 actorId, float x,
         break;
     }
 #endif
+
+    for (size_t i = 0; i < ARRAY_SIZE(kRemovedActors); ++i)
+    {
+        if (kRemovedActors[i].sceneId == play->sceneId && kRemovedActors[i].actorId == actorId)
+        {
+            return NULL;
+        }
+    }
     return SpawnActor(const_1, play, actorId, x, y, z, rx, ry, rz, variable);
 }

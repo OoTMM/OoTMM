@@ -11,6 +11,10 @@ static void ItemEtcetera_LoadedUpdate(Actor_ItemEtcetera* item, GameState_Play* 
     if (!IsActorDead(&item->base))
     {
         item->base.rot2.y += 0x400;
+
+        /* Another item might have been collected */
+        item->gi = comboProgressiveChestItem(item->gi);
+
         SetChestItemInRange(&item->base, play, item->gi, 30.f, 50.f);
     }
     else
@@ -23,6 +27,13 @@ static void ItemEtcetera_LoadedUpdate(Actor_ItemEtcetera* item, GameState_Play* 
             {
             case 0:
                 SetEventChk(EV_CHK_SARIA_OCARINA);
+                break;
+            case 1:
+                SetEventChk(EV_CHK_ZELDA_LETTER);
+                break;
+            case 2:
+                SetEventChk(EV_CHK_SONG_ZELDA);
+                break;
             }
         }
         ActorDestroy(&item->base);
@@ -38,12 +49,21 @@ void hookItemEtcetera_Init(Actor_ItemEtcetera* item, GameState_Play* play)
 {
     char* ovlBase;
     s16 gi;
+    s16 override;
     const GetItem* giItem;
 
     ovlBase = (char*)(gActorOvl[0x10f].data);
     gi = (item->base.variable >> 8);
-    giItem = kExtendedGetItems + (gi - 1);
+    if (item->base.variable & 0x40)
+    {
+        /* Special */
+        override = comboGetSpecialOverride(item->base.variable & 0x3f);
+        if (override >= 0)
+            gi = override;
+    }
+    gi = comboProgressiveChestItem(gi);
 
+    giItem = kExtendedGetItems + (gi - 1);
     item->objIndex = GetObject(play->objTable, giItem->objectId);
     if (item->objIndex < 0)
         item->objIndex = LoadObject(play->objTable, giItem->objectId);

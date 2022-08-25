@@ -3,6 +3,15 @@
 
 #include <combo/types.h>
 
+typedef struct PACKED ALIGNED(2)
+{
+    u16  boots:4;
+    u16  tunics:4;
+    u16  shields:4;
+    u16  swords:4;
+}
+OotSaveEquipment;
+
 typedef struct PACKED ALIGNED(4)
 {
     u32  unused:9;
@@ -17,14 +26,34 @@ typedef struct PACKED ALIGNED(4)
 }
 OotSaveUpgrades;
 
-typedef struct PACKED ALIGNED(2)
+typedef struct PACKED ALIGNED(4)
 {
-    u16  boots:4;
-    u16  tunics:4;
-    u16  shields:4;
-    u16  swords:4;
+    u32  unused:9;
+    u32  gerudoCard:1;
+    u32  agonyStone:1;
+    u32  stoneSapphire:1;
+    u32  stoneRuby:1;
+    u32  stoneEmerald:1;
+    u32  songStorms:1;
+    u32  songTime:1;
+    u32  songSun:1;
+    u32  songSaria:1;
+    u32  songEpona:1;
+    u32  songZelda:1;
+    u32  songTpLight:1;
+    u32  songTpShadow:1;
+    u32  songTpSpirit:1;
+    u32  songTpWater:1;
+    u32  songTpFire:1;
+    u32  songTpForest:1;
+    u32  medallionLight:1;
+    u32  medallionShadow:1;
+    u32  medallionSpirit:1;
+    u32  medallionWater:1;
+    u32  medallionFire:1;
+    u32  medallionForest:1;
 }
-OotSaveEquipment;
+OotSaveQuest;
 
 typedef struct PACKED ALIGNED(4)
 {
@@ -51,7 +80,7 @@ typedef struct PACKED ALIGNED(4)
     OotSaveEquipment    equipment;
     u16                 unk_9e;
     OotSaveUpgrades     upgrades;
-    u32                 quest;
+    OotSaveQuest        quest;
     u8                  dungeonItems[0x14];
     u8                  dungeonKeys[0x14];
     char                unk_0xd0[0xe04];
@@ -67,10 +96,14 @@ typedef struct PACKED ALIGNED(4)
 {
     OotSave save;
     u32     fileIndex;
+    char    unk_1358[0x74];
+    s16     rupeesDelta;
+    char    unk_13ce[0x82];
 }
 OotSaveContext;
 
 _Static_assert(sizeof(OotSave) == 0x1354, "OotSave size is wrong");
+_Static_assert(sizeof(OotSaveContext) == 0x1450, "OotSaveContext size is wrong");
 
 #if defined(GAME_OOT)
 ALIGNED(16) extern OotSaveContext gSaveContext;

@@ -1,6 +1,8 @@
 #ifndef COMBO_COMBO_H
 #define COMBO_COMBO_H
 
+#define ARRAY_SIZE(x) (sizeof(x) / sizeof((x)[0]))
+
 #include <string.h>
 #include <ultra64.h>
 #include <combo/actor_ovl.h>
@@ -60,6 +62,7 @@ void comboGameSwitch(void);
 
 /* Override */
 s32 comboGetChestOverride(u16 scene, u8 id);
+s32 comboGetSpecialOverride(u8 id);
 
 /* Text */
 void comboTextHijackItem(GameState_Play* play, u16 itemId);

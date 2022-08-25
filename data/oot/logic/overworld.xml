@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<overworld>
+  <scene id="55" name="KF_Main" desc="Kokiri Forest">
+    <link to="KF_Mido"/>
+    <link to="KF_LinkHouse"/>
+    <link to="DT_Main"/>
+    <link to="LW_Bridge"/>
+    <chest id="00" content="SWORD"/>
+  </scene>
+  <scene id="28" name="KF_Mido" desc="Mido's House">
+    <chest id="00" content="RUPEE_BLUE"/>
+    <chest id="01" content="RUPEE_BLUE"/>
+    <chest id="02" content="RUPEE_GREEN"/>
+    <chest id="03" content="RECOVERY_HEART"/>
+  </scene>
+  <scene id="34" name="KF_LinkHouse" desc="Link's House"/>
+  <scene id="5b">
+    <room name="LW_Bridge" desc="Lost Woods Bridge">
+      <special id="00" content="OCARINA" desc="Saria"/>
+    </room>
+  </scene>
+  <scene id="51" name="Hyrule_Field" desc="Hyrule Field">
+    <link to="LW_Bridge"/>
+    <link to="Hyrule_Market"/>
+  </scene>
+  <scene id="20" name="Hyrule_Market">
+    <link to="Hyrule_Castle"/>
+  </scene>
+  <scene id="5f" name="Hyrule_Castle" desc="Hyrule Castle">
+    <chest id="00" content="WEIRD_EGG"/> <!-- Fake entry to test logic -->
+    <link to="Hyrule_CastleCourtyard" cond="has(WEIRD_EGG)"/>
+  </scene>
+  <scene id="4a" name="Hyrule_CastleCourtyard" desc="Hyrule Castle Courtyard">
+    <special id="01" content="ZELDA_LETTER"/>
+    <special id="02" content="SONG_ZELDA"/>
+  </scene>
+</overworld>

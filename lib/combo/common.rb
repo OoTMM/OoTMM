@@ -11,7 +11,7 @@ module Combo
   PATH_DIST = File.join(ROOT, 'dist')
 
   # Data
-  DATA_FILES = GAMES.map { |game| [game, JSON.parse(File.read(File.join(Combo::PATH_DATA, "#{game}.json"))).freeze] }.to_h.freeze
+  DATA_FILES = GAMES.map { |game| [game, JSON.parse(File.read(File.join(Combo::PATH_DATA, "#{game}", "files.json"))).freeze] }.to_h.freeze
 
   METADATA = {
     custom_addr: 0x03f80000,

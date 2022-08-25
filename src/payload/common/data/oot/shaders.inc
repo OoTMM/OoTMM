@@ -116,7 +116,7 @@
 /* Kokiri Sword              */ { Shader_Opa0,               { 0x6000960 }},
 /* GS Token 2                */ { Shader_GS,                 { 0x6004db0, 0x6004eb8 }},
 /* Custom: Master Sword      */ { Shader_Opa0,               { CUSTOM_OBJECT_GI_SWORD2_DLIST }},
-/* Nothing                   */ {},
+/* Music Note (Gray)         */ { Shader_CustomNote,         { 0x444444ff, 0x6000ae0 }},
 /* Nothing                   */ {},
 /* Nothing                   */ {},
 /* Nothing                   */ {},

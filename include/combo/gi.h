@@ -9,14 +9,14 @@
 #define GI_OOT_DEKU_NUTS_5          0x02
 #define GI_OOT_BOMBCHUS_10          0x03
 #define GI_OOT_FAIRY_BOW            0x04
-#define GI_OOT_FAIRY_SLINGSHOT      0x05
+#define GI_OOT_SLINGSHOT            0x05
 #define GI_OOT_BOOMERANG            0x06
 #define GI_OOT_DEKU_STICKS          0x07
 #define GI_OOT_HOOKSHOT             0x08
 #define GI_OOT_LONGSHOT             0x09
 #define GI_OOT_LENS_OF_TRUTH        0x0a
 #define GI_OOT_ZELDA_LETTER         0x0b
-#define GI_OOT_OCARINA_OF_TIME      0x0c
+#define GI_OOT_OCARINA_TIME         0x0c
 #define GI_OOT_MEGATON_HAMMER       0x0d
 #define GI_OOT_COJIRO               0x0e
 #define GI_OOT_EMPTY_BOTTLE         0x0f
@@ -43,7 +43,7 @@
 #define GI_OOT_EYEBALL_FROG         0x24
 #define GI_OOT_EYE_DROPS            0x25
 #define GI_OOT_CLAIM_CHECK          0x26
-#define GI_OOT_KOKIRI_SWORD         0x27
+#define GI_OOT_SWORD_KOKIRI         0x27
 #define GI_OOT_GIANT_KNIFE          0x28
 #define GI_OOT_DEKU_SHIELD          0x29
 #define GI_OOT_HYLIAN_SHIELD        0x2a
@@ -63,7 +63,7 @@
 #define GI_OOT_GOLDEN_SCALE         0x38
 #define GI_OOT_STONE_OF_AGONY       0x39
 #define GI_OOT_GERUDO_CARD          0x3a
-#define GI_OOT_FAIRY_OCARINA        0x3b
+#define GI_OOT_OCARINA_FAIRY        0x3b
 #define GI_OOT_DEKU_SEEDS_5         0x3c
 #define GI_OOT_HEART_CONTAINER      0x3d
 #define GI_OOT_HEART_PIECE          0x3e
