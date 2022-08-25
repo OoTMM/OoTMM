@@ -42,6 +42,7 @@
     <link to="Graveyard_Royal" cond="has(OCARINA) and has(SONG_ZELDA)"/>
   </scene>
   <scene id="41" name="Graveyard_Royal">
+    <!-- <chest id="00" content="BOMBS_10"/> Requires fire -->
     <special id="03" content="SONG_SUN"/>
   </scene>
 </overworld>
