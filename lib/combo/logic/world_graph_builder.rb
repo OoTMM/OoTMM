@@ -43,12 +43,14 @@ module Combo::Logic
 
     def parse_room(e, scene_id, dungeon)
       name = e['name']
+      desc = e['desc']
       room = @graph.get_room(name)
       if room.nil?
-        room = WorldGraph::Room.new(name, scene_id)
+        room = WorldGraph::Room.new(name, scene_id, desc)
         @graph.add_room(room)
       else
         room.scene_id = scene_id
+        room.desc = desc
       end
       e.xpath('chest').each do |check|
         parse_check(check, :chest, room)
@@ -68,8 +70,13 @@ module Combo::Logic
 
     def parse_check(e, type, room)
       id = e['id'].to_i(16)
+      cond = e['cond']
+      desc = e['desc']
+      unless cond.nil?
+        cond = @expr_builder.parse(cond)
+      end
       content = e['content'].to_sym
-      check = WorldGraph::Check.new(type, id, content)
+      check = WorldGraph::Check.new(type, id, content, cond, desc)
       room.add_check(check)
     end
 

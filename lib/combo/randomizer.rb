@@ -12,14 +12,16 @@ class Combo::Randomizer
 
   def run()
     # DEBUG
-    overrides = Combo::Logic.run
+    rando = Combo::Logic.run
 
     data = ("\xff" * 0x20000).force_encoding('ASCII-8BIT')
 
-    oot = overrides(overrides)
+    oot = overrides(rando)
     mm = random_block(:mm)
     data[0x1000, oot.length] = oot
     data[0x2000, mm.length] = mm
+
+    write_spoiler(rando)
 
     data
   end
@@ -57,9 +59,9 @@ class Combo::Randomizer
     x
   end
 
-  def overrides(overrides)
+  def overrides(rando)
     data = []
-    overrides.each do |override|
+    rando.data.each do |override|
       type = override[0]
       scene_id = override[1]
       case type
@@ -73,6 +75,10 @@ class Combo::Randomizer
       data << [key, gi].pack('S>2')
     end
     data.join('')
+  end
+
+  def write_spoiler(rando)
+    File.write(File.join(Combo::ROOT, 'dist', 'spoiler.txt'), rando.spoiler)
   end
 
   def self.run

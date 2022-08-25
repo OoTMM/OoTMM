@@ -14,14 +14,16 @@ module Combo::Logic
     end
 
     class Room
-      attr_reader :name, :checks
-      attr_accessor :scene_id, :graph
+      attr_reader :name, :checks, :links
+      attr_accessor :scene_id, :desc, :graph, :reachable
 
-      def initialize(name, scene_id = nil)
+      def initialize(name, scene_id = nil, desc = nil)
         @name = name
         @scene_id = scene_id
+        @desc = desc
         @checks = []
         @links = []
+        @reachable = false
       end
 
       def add_check(check)
@@ -35,16 +37,19 @@ module Combo::Logic
     end
 
     class Check
-      attr_reader :type, :id
-      attr_accessor :room, :dungeon, :fixed, :content
+      attr_reader :type, :id, :cond, :desc
+      attr_accessor :room, :dungeon, :fixed, :content, :reachable
 
-      def initialize(type, id, content)
+      def initialize(type, id, content, cond, desc)
         @type = type
         @id = id
+        @content = content
+        @cond = cond
+        @desc = desc
         @room = nil
         @dungeon = nil
-        @content = content
         @fixed = false
+        @reachable = false
       end
     end
 
