@@ -27,7 +27,8 @@
     <link to="Hyrule_Castle"/>
   </scene>
   <scene id="5f" name="Hyrule_Castle">
-    <link to="Hyrule_CastleCourtyard"/>
+    <chest id="00" content="WEIRD_EGG"/> <!-- Fake entry to test logic -->
+    <link to="Hyrule_CastleCourtyard" cond="has(WEIRD_EGG)"/>
   </scene>
   <scene id="4a" name="Hyrule_CastleCourtyard">
     <special id="01" content="ZELDA_LETTER"/>
