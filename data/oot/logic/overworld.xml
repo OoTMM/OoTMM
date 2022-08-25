@@ -19,11 +19,18 @@
       <special id="00" content="OCARINA"/>
     </room>
   </scene>
-
-  <!--
-  <scene id="4a">
+  <scene id="51" name="Hyrule_Field">
+    <link to="LW_Bridge"/>
+    <link to="Hyrule_Market"/>
+  </scene>
+  <scene id="20" name="Hyrule_Market">
+    <link to="Hyrule_Castle"/>
+  </scene>
+  <scene id="5f" name="Hyrule_Castle">
+    <link to="Hyrule_CastleCourtyard"/>
+  </scene>
+  <scene id="4a" name="Hyrule_CastleCourtyard">
     <special id="01" content="ZELDA_LETTER"/>
     <special id="02" content="SONG_ZELDA"/>
   </scene>
-  -->
 </overworld>
