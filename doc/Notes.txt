@@ -2,3 +2,8 @@ NPC override IDs:
 
 00 Malon, Weird Egg (Chicken)
 01 Anju, Empty Bottle
+
+SPIRITUAL
+Emerald:  1240 10e0
+Ruby:     20a0 1fb0
+Sapphire: 3530 3370

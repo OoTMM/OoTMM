@@ -70,3 +70,6 @@ SetEventChk = 0x800288e0;
 
 SetCollectibleFlag = 0x8002071c;
 GetCollectibleFlag = 0x800206e8;
+
+GetSegment = 0x8007eb84;
+ConvertMatrix = 0x800ab6bc;

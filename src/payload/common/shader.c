@@ -55,6 +55,67 @@ void Shader_CustomNote(GameState* gs, u16 shaderId)
     CLOSE_DISPS();
 }
 
+
+#if defined(GAME_OOT)
+
+void ConvertMatrix(const float* in, u16* out);
+
+static const float kMatrixRot[] = {
+    1.f, 0.f, 0.f, 0.f,
+    0.f, 0.f, 1.f, 0.f,
+    0.f, -1.f, 0.f, 0.f,
+    0.f, 0.f, 0.f, 1.f,
+};
+
+static void* pushMatrix(GfxContext* gfx, const float* mat)
+{
+    void* end = gfx->polyOpa.end;
+    end = (char*)end - 0x40;
+    gfx->polyOpa.end = end;
+
+    ConvertMatrix(mat, end);
+
+    return end;
+}
+
+void Shader_SpiritualStones(GameState* gs, u16 shaderId)
+{
+    u16 mat[0x20];
+
+    const Shader* shader;
+
+    float fc = 0;
+
+    shader = &kShaders[shaderId];
+    OPEN_DISPS(gs->gfx);
+
+    /* Matrix setup */
+    gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(gs->gfx), G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(POLY_XLU_DISP++, pushMatrix(gs->gfx, kMatrixRot), G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+
+    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(gs->gfx), G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(POLY_OPA_DISP++, pushMatrix(gs->gfx, kMatrixRot), G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+
+    gSPSegment(POLY_XLU_DISP++, 9, GetSegment(gs->gfx, 0, fc * 2, fc * -6, 0x20, 0x20, 1, fc, fc * -2, 0x20, 0x20));
+    InitListPolyXlu(gs->gfx);
+    gSPDisplayList(POLY_XLU_DISP++, shader->lists[0]);
+
+    gSPSegment(POLY_OPA_DISP++, 8, GetSegment(gs->gfx, 0, fc * 2, fc * -6, 0x20, 0x20, 1, fc, fc * -2, 0x20, 0x20));
+    InitListPolyOpa(gs->gfx);
+    gSPDisplayList(POLY_OPA_DISP++, shader->lists[1]);
+
+    CLOSE_DISPS();
+}
+
+#else
+
+void Shader_SpiritualStones(GameState* gs, u16 shaderId)
+{
+
+}
+
+#endif
+
 const Shader kShaders[256] = {
 #if defined(GAME_OOT)
 # include "data/oot/shaders.inc"

@@ -37,6 +37,9 @@ s32 comboGetOverride(u16 key)
 
 s32 comboGetChestOverride(u16 scene, u8 id)
 {
+    /* DEBUG */
+    return GI_OOT_STONE_EMERALD;
+
     return comboGetOverride(CHEST_KEY(scene, id));
 }
 
