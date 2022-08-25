@@ -112,6 +112,76 @@ static void addItemOot(u16 itemId)
     case ITEM_OOT_WALLET3:
         gOotSave.upgrades.wallet = 2;
         break;
+    /* Quest */
+    case ITEM_OOT_GERUDO_CARD:
+        gOotSave.quest.gerudoCard = 1;
+        break;
+    case ITEM_OOT_STONE_OF_AGONY:
+        gOotSave.quest.agonyStone = 1;
+        break;
+    case ITEM_OOT_STONE_SAPPHIRE:
+        gOotSave.quest.stoneSapphire = 1;
+        break;
+    case ITEM_OOT_STONE_RUBY:
+        gOotSave.quest.stoneRuby = 1;
+        break;
+    case ITEM_OOT_STONE_EMERALD:
+        gOotSave.quest.stoneEmerald = 1;
+        break;
+    case ITEM_OOT_SONG_STORMS:
+        gOotSave.quest.songStorms = 1;
+        break;
+    case ITEM_OOT_SONG_TIME:
+        gOotSave.quest.songTime = 1;
+        break;
+    case ITEM_OOT_SONG_SUN:
+        gOotSave.quest.songSun = 1;
+        break;
+    case ITEM_OOT_SONG_SARIA:
+        gOotSave.quest.songSaria = 1;
+        break;
+    case ITEM_OOT_SONG_EPONA:
+        gOotSave.quest.songEpona = 1;
+        break;
+    case ITEM_OOT_SONG_ZELDA:
+        gOotSave.quest.songZelda = 1;
+        break;
+    case ITEM_OOT_SONG_TP_LIGHT:
+        gOotSave.quest.songTpLight = 1;
+        break;
+    case ITEM_OOT_SONG_TP_SHADOW:
+        gOotSave.quest.songTpShadow = 1;
+        break;
+    case ITEM_OOT_SONG_TP_SPIRIT:
+        gOotSave.quest.songTpSpirit = 1;
+        break;
+    case ITEM_OOT_SONG_TP_WATER:
+        gOotSave.quest.songTpWater = 1;
+        break;
+    case ITEM_OOT_SONG_TP_FIRE:
+        gOotSave.quest.songTpFire = 1;
+        break;
+    case ITEM_OOT_SONG_TP_FOREST:
+        gOotSave.quest.songTpForest = 1;
+        break;
+    case ITEM_OOT_MEDALLION_LIGHT:
+        gOotSave.quest.medallionLight = 1;
+        break;
+    case ITEM_OOT_MEDALLION_SHADOW:
+        gOotSave.quest.medallionShadow = 1;
+        break;
+    case ITEM_OOT_MEDALLION_SPIRIT:
+        gOotSave.quest.medallionSpirit = 1;
+        break;
+    case ITEM_OOT_MEDALLION_WATER:
+        gOotSave.quest.medallionWater = 1;
+        break;
+    case ITEM_OOT_MEDALLION_FIRE:
+        gOotSave.quest.medallionFire = 1;
+        break;
+    case ITEM_OOT_MEDALLION_FOREST:
+        gOotSave.quest.medallionForest = 1;
+        break;
     }
 }
 
