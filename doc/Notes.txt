@@ -1,0 +1,4 @@
+NPC override IDs:
+
+00 Anju - Child
+01 Anju - Adult

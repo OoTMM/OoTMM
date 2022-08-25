@@ -1,5 +1,7 @@
 #include <combo/asm.h>
 
+#define ENTRANCE 0x138
+
 /* Disable first cutscene */
 PATCH_START(0x800fbf60)
 .int 0x10
@@ -13,10 +15,12 @@ PATCH_END
 /* DEBUG: Mido house */
 PATCH_START(0x800903e0)
   /* li t4,0x1d1*/
-  li t4,0x433
+  /*li t4,0x433*/
   /*li t4,0x400*/
 
   /* li t4,0x0004 */
+
+  li t4,ENTRANCE
 PATCH_END
 
 /* Hook save creation to create MM save */
