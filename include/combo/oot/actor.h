@@ -6,6 +6,7 @@
 #define AC_EN_BOX           0x0a
 #define AC_EN_MA1           0xe7
 #define AC_ITEM_ETCETERA    0x10f
+#define AC_EN_OWL           0x14d
 
 typedef struct GameState_Play GameState_Play;
 
