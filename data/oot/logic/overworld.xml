@@ -19,4 +19,11 @@
       <special id="00" content="OCARINA"/>
     </room>
   </scene>
+
+  <!--
+  <scene id="4a">
+    <special id="01" content="ZELDA_LETTER"/>
+    <special id="02" content="SONG_ZELDA"/>
+  </scene>
+  -->
 </overworld>
