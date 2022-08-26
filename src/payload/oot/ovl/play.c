@@ -98,21 +98,27 @@ void hookPlay_Init(GameState_Play* play)
     Play_Init(play);
 
     /* Saria's Ocarina Check */
-    if (gSave.entrance == 0x05e0 || gSave.entrance == 0x05e1)
+    if (gSave.entrance == 0x05e0 || gSave.entrance == 0x04de)
     {
         comboSpawnSpecial(play, -1191.f, -220.f, 1650.f, EV_CHK_SARIA_OCARINA, GI_OOT_OCARINA_FAIRY);
     }
 
     /* Child Zelda checks */
-    if (play->sceneId == 0x4a)
+    if (play->sceneId == SCE_CASTLE_COURTYARD)
     {
         comboSpawnSpecial(play, -460.f, 84.f,  40.f, EV_CHK_ZELDA_LETTER, GI_OOT_ZELDA_LETTER);
         comboSpawnSpecial(play, -460.f, 84.f, -40.f, EV_CHK_SONG_ZELDA, GI_OOT_SONG_ZELDA);
     }
 
     /* Sun Song */
-    if (play->sceneId == 0x41)
+    if (play->sceneId == SCE_TOMB_ROYAL)
     {
         comboSpawnSpecial(play, 0.f, 70.f, -1160.f, EV_CHK_SONG_SUN, GI_OOT_SONG_SUN);
+    }
+
+    /* Saria's Song */
+    if (play->sceneId == SCE_SACRED_FOREST_MEADOW && gSave.age == AGE_CHILD && GetEventChk(EV_CHK_ZELDA_LETTER))
+    {
+        comboSpawnSpecial(play, 118.f, 489.f, -2941.f, EV_CHK_SONG_SARIA, GI_OOT_SONG_SARIA);
     }
 }

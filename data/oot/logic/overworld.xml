@@ -5,6 +5,7 @@
     <link to="KF_LinkHouse"/>
     <link to="DT_Main"/>
     <link to="LW_Bridge"/>
+    <link to="LW_Main"/>
     <chest id="00" content="SWORD"/>
   </scene>
   <scene id="28" name="KF_Mido" desc="Mido's House">
@@ -18,6 +19,12 @@
     <room name="LW_Bridge" desc="Lost Woods Bridge">
       <special id="c1" content="OCARINA" desc="Saria"/>
     </room>
+    <room name="LW_Main">
+      <link to="SacredMeadow"/>
+    </room>
+  </scene>
+  <scene id="56" name="SacredMeadow">
+    <special id="58" desc="Saria's Song" content="SONG_SARIA"/>
   </scene>
   <scene id="51" name="Hyrule_Field" desc="Hyrule Field">
     <link to="LW_Bridge"/>

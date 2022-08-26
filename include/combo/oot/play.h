@@ -3,6 +3,9 @@
 
 #include <combo/game_state.h>
 
+#define AGE_ADULT 0
+#define AGE_CHILD 1
+
 typedef struct PACKED ALIGNED(4)
 {
     char    unk_0[0x128];
