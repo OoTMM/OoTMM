@@ -52,15 +52,27 @@ module Combo::Logic
     end
 
     def parse_expr_single
-      parse_expr_has()
+      e = parse_expr_has() || parse_expr_reach()
+      if e.nil?
+        raise "Unexpected token #{@next}"
+      end
+      e
     end
 
     def parse_expr_has
-      expect("has")
+      return nil unless accept("has")
       expect(:lparen)
       item = expect(:id)
       expect(:rparen)
       ExprHas.new(item)
+    end
+
+    def parse_expr_reach
+      return nil unless accept("reach")
+      expect(:lparen)
+      name = expect(:id)
+      expect(:rparen)
+      ExprReach.new(name)
     end
 
     def accept(type)

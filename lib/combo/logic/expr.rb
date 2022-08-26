@@ -1,11 +1,35 @@
+require 'set'
+
 module Combo::Logic
   class Expr
-    def eval(*args)
-      eval_missing(*args).empty?
+    class Value
+      attr_accessor :result, :missing
+
+      def initialize(result, opts = {})
+        @result = !!result
+        @missing = Set.new(opts[:missing] || [])
+      end
     end
 
-    def missing(*args)
-      eval_missing(*args).uniq
+    SOLVED_VALUE = Value.new(true)
+
+    def initialize
+      @solved = false
+    end
+
+    def eval(*args)
+      # We want to memoize true exprs
+      if @solved
+        SOLVED_VALUE
+      else
+        value = eval_expr(*args)
+        if value.result
+          @solved = true
+          SOLVED_VALUE
+        else
+          value
+        end
+      end
     end
   end
 
@@ -17,24 +41,28 @@ module Combo::Logic
   end
 
   class ExprOr < ExprBinary
-    def eval_missing(*args)
-      left_missing = @left.missing(*args)
-      if left_missing.empty?
-        []
-      else
-        right_missing = @right.missing(*args)
-        if left_missing.size > right_missing.size
-          right_missing
-        else
-          left_missing
-        end
+    def eval_expr(*args)
+      left = @left.eval(*args)
+      if left.result
+        return SOLVED_VALUE
       end
+      right = @right.eval(*args)
+      if right.result
+        return SOLVED_VALUE
+      end
+      Value.new(false, missing: left.missing | right.missing)
     end
   end
 
   class ExprAnd < ExprBinary
-    def eval_missing(*args)
-      [@left, @right].map{|x| x.missing(*args)}.flatten
+    def eval_expr(*args)
+      left = @left.eval(*args)
+      right = @right.eval(*args)
+      if left.result && right.result
+        SOLVED_VALUE
+      else
+        Value.new(false, missing: left.missing | right.missing)
+      end
     end
   end
 
@@ -43,11 +71,25 @@ module Combo::Logic
       @item = item.to_sym
     end
 
-    def eval_missing(items)
-      if items[@item].nil?
-        [@item]
+    def eval_expr(graph, items)
+      if items[@item]
+        SOLVED_VALUE
       else
-        []
+        Value.new(false, missing: [@item])
+      end
+    end
+  end
+
+  class ExprReach < Expr
+    def initialize(name)
+      @name = name
+    end
+
+    def eval_expr(graph, items)
+      if graph.get_room(@name).reachable
+        SOLVED_VALUE
+      else
+        Value.new(false)
       end
     end
   end

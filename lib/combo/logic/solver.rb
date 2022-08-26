@@ -41,14 +41,14 @@ module Combo::Logic
           next unless room.reachable
           room.links.each do |link|
             next if link.to.reachable
-            if eval_cond(link.cond, @items)
+            if eval_cond(link.cond, @graph, @items)
               link.to.reachable = true
               changed = true
             end
           end
           room.checks.each do |check|
             next if check.reachable
-            if eval_cond(check.cond, @items)
+            if eval_cond(check.cond, @graph, @items)
               check.reachable = true
               changed = true
             end
@@ -92,7 +92,8 @@ module Combo::Logic
 
       conds = unreachable_links.map {|l| l.cond} + unreachable_checks.map {|c| c.cond}
       conds.select! {|c| !c.nil?}
-      missing = conds.map {|c| c.missing(@items)}.flatten.uniq
+
+      missing = conds.map {|c| c.eval(@graph, @items)}.map{|x| x.missing}.reduce(&:|).to_a
       item = missing.shuffle.first
 
       # Find the check giving this item
@@ -181,7 +182,7 @@ module Combo::Logic
       if expr.nil?
         true
       else
-        expr.eval(*args)
+        expr.eval(*args).result
       end
     end
 
