@@ -60,7 +60,11 @@ Actor* hookSpawnActor(void* const_1, GameState_Play* play, s16 actorId, float x,
         switch (play->sceneId)
         {
         case 0x11:
-            comboSpawnSpecial(play, x, y, z, EV_CHK_STONE_EMERALD, GI_OOT_SWORD_KOKIRI);
+            comboSpawnSpecial(play, x, y, z, EV_CHK_STONE_EMERALD, GI_OOT_STONE_EMERALD);
+            SetEventChk(EV_CHK_EMERALD_TREE_DEAD);
+            SetEventChk(EV_CHK_GOHMA);
+            SetEventChk(EV_CHK_TREE_DEAD);
+            SetEventChk(EV_CHK_MIDO_TREE_DEAD);
             break;
         }
         break;
