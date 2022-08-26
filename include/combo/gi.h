@@ -145,6 +145,8 @@
 #define GI_OOT_SONG_STORMS          0x89
 #define GI_OOT_MASTER_SWORD         0x8a
 #define GI_OOT_STONE_EMERALD        0x8b
+#define GI_OOT_STONE_RUBY           0x8c
+#define GI_OOT_STONE_SAPPHIRE       0x8d
 
 typedef struct PACKED ALIGNED(2)
 {

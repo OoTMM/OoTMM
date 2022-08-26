@@ -78,30 +78,75 @@ static void* pushMatrix(GfxContext* gfx, const float* mat)
     return end;
 }
 
+static void* dummySegment(GfxContext* gfx)
+{
+    Gfx* end = gfx->polyOpa.end - 1;
+    gfx->polyOpa.end = end;
+    gSPEndDisplayList(end);
+    return end;
+}
+
 void Shader_SpiritualStones(GameState* gs, u16 shaderId)
 {
-    u16 mat[0x20];
-
+    u8 primRed, primGreen, primBlue;
+    u8 envRed, envGreen, envBlue;
     const Shader* shader;
 
     float fc = 0;
 
     shader = &kShaders[shaderId];
+
+    switch (shader->lists[0] & 0xffff)
+    {
+    case 0x1240:
+        /* Emerald */
+        primRed = 0xff;
+        primGreen = 0xff;
+        primBlue = 0xa0;
+        envRed = 0x00;
+        envGreen = 0xff;
+        envBlue = 0x00;
+        break;
+    case 0x20a0:
+        /* Ruby */
+        primRed = 0xff;
+        primGreen = 0xaa;
+        primBlue = 0xff;
+        envRed = 0xff;
+        envGreen = 0x00;
+        envBlue = 100;
+        break;
+    case 0x3530:
+        /* Sapphire */
+        primRed = 0x32;
+        primGreen = 0xff;
+        primBlue = 0xff;
+        envRed = 0x32;
+        envGreen = 0;
+        envBlue = 0x96;
+        break;
+    }
+
     OPEN_DISPS(gs->gfx);
 
     /* Matrix setup */
     gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(gs->gfx), G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPMatrix(POLY_XLU_DISP++, pushMatrix(gs->gfx, kMatrixRot), G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-
     gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(gs->gfx), G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPMatrix(POLY_OPA_DISP++, pushMatrix(gs->gfx, kMatrixRot), G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
-    gSPSegment(POLY_XLU_DISP++, 9, GetSegment(gs->gfx, 0, fc * 2, fc * -6, 0x20, 0x20, 1, fc, fc * -2, 0x20, 0x20));
+    /* Segment setup */
+    gSPSegment(POLY_XLU_DISP++, 9, dummySegment(gs->gfx));
+    gSPSegment(POLY_OPA_DISP++, 8, dummySegment(gs->gfx));
+
     InitListPolyXlu(gs->gfx);
+    gDPSetPrimColor(POLY_XLU_DISP++, 0x00, 0x80, primRed, primGreen, primBlue, 0xFF);
+    gDPSetEnvColor(POLY_XLU_DISP++, envRed, envGreen, envBlue, 0xFF);
     gSPDisplayList(POLY_XLU_DISP++, shader->lists[0]);
 
-    gSPSegment(POLY_OPA_DISP++, 8, GetSegment(gs->gfx, 0, fc * 2, fc * -6, 0x20, 0x20, 1, fc, fc * -2, 0x20, 0x20));
     InitListPolyOpa(gs->gfx);
+    gDPSetPrimColor(POLY_OPA_DISP++, 0x00, 0x80, 0xff, 0xff, 0xaa, 0xff);
+    gDPSetEnvColor(POLY_OPA_DISP++, 0x96, 0x78, 0x00, 0xFF);
     gSPDisplayList(POLY_OPA_DISP++, shader->lists[1]);
 
     CLOSE_DISPS();
