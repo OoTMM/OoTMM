@@ -131,28 +131,28 @@
 #define GI_OOT_ICE_TRAP             0x7c
 
 /* Custom */
-#define GI_OOT_SONG_TP_FOREST       0x7e
-#define GI_OOT_SONG_TP_FIRE         0x7f
-#define GI_OOT_SONG_TP_WATER        0x80
-#define GI_OOT_SONG_TP_SPIRIT       0x81
-#define GI_OOT_SONG_TP_SHADOW       0x82
-#define GI_OOT_SONG_TP_LIGHT        0x83
-#define GI_OOT_SONG_ZELDA           0x84
-#define GI_OOT_SONG_EPONA           0x85
-#define GI_OOT_SONG_SARIA           0x86
-#define GI_OOT_SONG_SUN             0x87
-#define GI_OOT_SONG_TIME            0x88
-#define GI_OOT_SONG_STORMS          0x89
-#define GI_OOT_MASTER_SWORD         0x8a
-#define GI_OOT_STONE_EMERALD        0x8b
-#define GI_OOT_STONE_RUBY           0x8c
-#define GI_OOT_STONE_SAPPHIRE       0x8d
-#define GI_OOT_MEDALLION_FOREST     0x8e
-#define GI_OOT_MEDALLION_FIRE       0x8f
-#define GI_OOT_MEDALLION_WATER      0x90
-#define GI_OOT_MEDALLION_SPIRIT     0x91
-#define GI_OOT_MEDALLION_SHADOW     0x92
-#define GI_OOT_MEDALLION_LIGHT      0x93
+#define GI_OOT_SONG_TP_FOREST       0x80
+#define GI_OOT_SONG_TP_FIRE         0x81
+#define GI_OOT_SONG_TP_WATER        0x82
+#define GI_OOT_SONG_TP_SPIRIT       0x83
+#define GI_OOT_SONG_TP_SHADOW       0x84
+#define GI_OOT_SONG_TP_LIGHT        0x85
+#define GI_OOT_SONG_ZELDA           0x86
+#define GI_OOT_SONG_EPONA           0x87
+#define GI_OOT_SONG_SARIA           0x88
+#define GI_OOT_SONG_SUN             0x89
+#define GI_OOT_SONG_TIME            0x8a
+#define GI_OOT_SONG_STORMS          0x8b
+#define GI_OOT_MASTER_SWORD         0x8c
+#define GI_OOT_STONE_EMERALD        0x8d
+#define GI_OOT_STONE_RUBY           0x8e
+#define GI_OOT_STONE_SAPPHIRE       0x8f
+#define GI_OOT_MEDALLION_FOREST     0x90
+#define GI_OOT_MEDALLION_FIRE       0x91
+#define GI_OOT_MEDALLION_WATER      0x92
+#define GI_OOT_MEDALLION_SPIRIT     0x93
+#define GI_OOT_MEDALLION_SHADOW     0x94
+#define GI_OOT_MEDALLION_LIGHT      0x95
 
 typedef struct PACKED ALIGNED(2)
 {

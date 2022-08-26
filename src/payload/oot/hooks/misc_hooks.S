@@ -4,6 +4,7 @@
 #define ENTRANCE_HCASTLE  0x138
 #define ENTRANCE_BOSS1    0x40f
 #define ENTRANCE_KAKARIKO    0x195
+#define ENTRANCE_SMEADOW    0x215
 
 /* Disable first cutscene */
 PATCH_START(0x800fbf60)
@@ -23,7 +24,7 @@ PATCH_START(0x800903e0)
 
   /* li t4,0x0004 */
 
-  li t4,ENTRANCE_KAKARIKO
+  li t4,ENTRANCE_SMEADOW
 PATCH_END
 
 /* Hook save creation to create MM save */

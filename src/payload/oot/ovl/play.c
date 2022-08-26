@@ -16,6 +16,8 @@ static void debugCheat(GameState_Play* play)
         gSave.ammo[ITS_OOT_SLINGSHOT] = 50;
         gSave.upgrades.bulletBag = 3;
         gSave.upgrades.bombBag = 3;
+
+        SetEventChk(EV_CHK_ZELDA_LETTER);
     }
 }
 
