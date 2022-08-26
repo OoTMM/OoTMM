@@ -1,8 +1,6 @@
 #include <combo.h>
 
-int SetChestItemInRange(void* actor, void* play, s16 itemId, float a, float b);
-
-int comboGetItemInRange(Actor* actor, GameState_Play* play, s16 itemId, float a, float b)
+int comboGiveItem(Actor* actor, GameState_Play* play, s16 itemId, float a, float b)
 {
     s32 override;
     if (actor->id == 0x06)
@@ -11,5 +9,5 @@ int comboGetItemInRange(Actor* actor, GameState_Play* play, s16 itemId, float a,
         if (override >= 0)
             itemId = (s16)(-override);
     }
-    return SetChestItemInRange(actor, play, itemId, a, b);
+    return GiveItem(actor, play, itemId, a, b);
 }

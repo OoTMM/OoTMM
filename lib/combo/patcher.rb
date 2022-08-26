@@ -38,6 +38,8 @@ class Combo::Patcher
     STDOUT.flush
     File.open(File.join(Combo::PATH_BUILD, "#{@game}_patch.bin"), "rb") do |f|
       while !f.eof? do
+        # Align on 4-byte boundary
+        f.seek((4 - (f.pos % 4)) % 4, IO::SEEK_CUR)
         type = f.read(4).unpack('L>').first
         case type
         when 0x1

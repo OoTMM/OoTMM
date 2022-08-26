@@ -37,6 +37,7 @@
   </scene>
   <scene id="52" name="Kakariko">
     <link to="Graveyard"/>
+    <npc id="01" content="EMPTY_BOTTLE" desc="Anju (Child)"/>
   </scene>
   <scene id="53" name="Graveyard">
     <link to="Graveyard_TombReDead"/>

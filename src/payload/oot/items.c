@@ -24,7 +24,7 @@ int GetItemCollectBehavior(s16 itemId)
     return CB_GETITEM;
 }
 
-int comboGetItemInRange(Actor* actor, GameState_Play* play, s16 itemId, float a, float b)
+int comboGiveItem(Actor* actor, GameState_Play* play, s16 itemId, float a, float b)
 {
     s16 absItemId;
     s32 override;
@@ -41,11 +41,14 @@ int comboGetItemInRange(Actor* actor, GameState_Play* play, s16 itemId, float a,
         absItemId = GI_OOT_CHICKEN;
         override = comboGetNpcOverride(0x00);
         break;
+    case AC_EN_NIW_LADY:
+        if (absItemId == GI_OOT_EMPTY_BOTTLE)
+            override = comboGetNpcOverride(0x01);
     }
 
     if (override >= 0)
         absItemId = (s16)(override);
     absItemId = comboProgressiveChestItem(absItemId);
     itemId = itemId > 0 ? absItemId : -absItemId;
-    return SetChestItemInRange(actor, play, itemId, a, b);
+    return GiveItem(actor, play, itemId, a, b);
 }

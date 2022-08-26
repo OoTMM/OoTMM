@@ -17,7 +17,7 @@ gSaveContext = 0x8011a5d0;
 Play_Init = 0x8009a750;
 
 PlayMusic = 0x800c6b54;
-SetChestItemInRange = 0x80022bd4;
+GiveItem = 0x80022bd4;
 DisplayTextBox = 0x800dc838;
 
 RequestDma = 0x80000d28;
