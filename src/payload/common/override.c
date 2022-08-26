@@ -30,7 +30,7 @@ s32 comboGetOverride(u16 key)
         if (o->key == 0xffff)
             break;
         if (o->key == key)
-            return comboProgressiveChestItem(o->value);
+            return o->value;
     }
     return -1;
 }
@@ -40,7 +40,17 @@ s32 comboGetChestOverride(u16 scene, u8 id)
     return comboGetOverride(CHEST_KEY(scene, id));
 }
 
+s32 comboGetCollectibleOverride(u16 scene, u8 id)
+{
+    return comboGetOverride(CHEST_KEY(scene, (id | 0x20)));
+}
+
 s32 comboGetSpecialOverride(u8 id)
 {
     return comboGetOverride(CHEST_KEY(0xf0, id));
+}
+
+s32 comboGetNpcOverride(u8 id)
+{
+    return comboGetOverride(CHEST_KEY(0xf1, id));
 }

@@ -3,16 +3,20 @@
 extern void Play_Init(void*);
 extern void comboSwitchToMM(void);
 
-static void spawnSpecial(GameState_Play* play, float x, float y, float z, u8 specialId, u16 gi)
+static void debugCheat(GameState_Play* play)
 {
-    SpawnActor(
-        (char*)play + 0x1c24,
-        play,
-        AC_ITEM_ETCETERA,
-        x, y, z,
-        0, 0, 0,
-        (gi << 8) | 0x40 | specialId
-    );
+    if (play->gs.input[0].current.buttons & 0x20)
+    {
+        for (int i = 0; i < ITS_OOT_TRADE_ADULT; ++i)
+            gSave.inventory[i] = i;
+        gSave.equipment.swords = 0x7;
+        gSave.equipment.shields = 0x7;
+        gSave.equipment.tunics = 0x7;
+        gSave.equipment.boots = 0x7;
+        gSave.ammo[ITS_OOT_SLINGSHOT] = 50;
+        gSave.upgrades.bulletBag = 3;
+        gSave.upgrades.bombBag = 3;
+    }
 }
 
 static void skipEntranceCutscene(GameState_Play* play)
@@ -80,6 +84,7 @@ static void skipEntranceCutscene(GameState_Play* play)
 
 void hookPlay_Init(GameState_Play* play)
 {
+    debugCheat(play);
     skipEntranceCutscene(play);
 
     if ((gSave.entrance & 0xfffc) == 0x0530)
@@ -91,17 +96,21 @@ void hookPlay_Init(GameState_Play* play)
     Play_Init(play);
 
     /* Saria's Ocarina Check */
-    if ((gSave.entrance == 0x05e0 || gSave.entrance == 0x05e1) && (GetEventChk(EV_CHK_SARIA_OCARINA) == 0))
+    if (gSave.entrance == 0x05e0 || gSave.entrance == 0x05e1)
     {
-        spawnSpecial(play, -1191.f, -220.f, 1650.f, 0x00, GI_OOT_OCARINA_FAIRY);
+        comboSpawnSpecial(play, -1191.f, -220.f, 1650.f, EV_CHK_SARIA_OCARINA, GI_OOT_OCARINA_FAIRY);
     }
 
     /* Child Zelda checks */
     if (play->sceneId == 0x4a)
     {
-        if (!GetEventChk(EV_CHK_ZELDA_LETTER))
-            spawnSpecial(play, -460.f, 84.f,  40.f, 0x01, GI_OOT_ZELDA_LETTER);
-        if (!GetEventChk(EV_CHK_SONG_ZELDA))
-            spawnSpecial(play, -460.f, 84.f, -40.f, 0x02, GI_OOT_SONG_ZELDA);
+        comboSpawnSpecial(play, -460.f, 84.f,  40.f, EV_CHK_ZELDA_LETTER, GI_OOT_ZELDA_LETTER);
+        comboSpawnSpecial(play, -460.f, 84.f, -40.f, EV_CHK_SONG_ZELDA, GI_OOT_SONG_ZELDA);
+    }
+
+    /* Sun Song */
+    if (play->sceneId == 0x41)
+    {
+        comboSpawnSpecial(play, 0.f, 70.f, -1160.f, EV_CHK_SONG_SUN, GI_OOT_SONG_SUN);
     }
 }

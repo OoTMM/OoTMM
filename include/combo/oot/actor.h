@@ -4,7 +4,11 @@
 #include <combo/types.h>
 
 #define AC_EN_BOX           0x0a
+#define AC_DOOR_WARP1       0x5d
+#define AC_ITEM_B_HEART     0x5f
+#define AC_EN_MA1           0xe7
 #define AC_ITEM_ETCETERA    0x10f
+#define AC_EN_OWL           0x14d
 
 typedef struct GameState_Play GameState_Play;
 
@@ -14,14 +18,16 @@ typedef struct PACKED ALIGNED(0x4)
     u8          type;
     u8          room;
     s32         flags;
-    char        unk[0x14];
+    char        unk[0xc];
+    Vector3s    initRot;
+    char        unk2[0x02];
     u16         variable;
     s8          objTableIndex;
     char        unk3[5];
     Vector3f    position;
-    char        unk2[0x84];
+    char        unk4[0x84];
     Vector3s    rot2;
-    char        unk4[0x82];
+    char        unk5[0x82];
 }
 Actor;
 

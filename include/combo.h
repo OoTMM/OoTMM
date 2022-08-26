@@ -62,12 +62,17 @@ void comboGameSwitch(void);
 
 /* Override */
 s32 comboGetChestOverride(u16 scene, u8 id);
+s32 comboGetCollectibleOverride(u16 scene, u8 id);
 s32 comboGetSpecialOverride(u8 id);
+s32 comboGetNpcOverride(u8 id);
 
 /* Text */
 void comboTextHijackItem(GameState_Play* play, u16 itemId);
 
 /* Progressive */
 s32 comboProgressiveChestItem(s32 gi);
+
+/* Actor */
+void comboSpawnSpecial(GameState_Play* play, float x, float y, float z, u8 specialId, u16 gi);
 
 #endif /* COMBO_COMBO_H */

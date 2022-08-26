@@ -49,6 +49,8 @@ class Combo::Randomizer
     case item
     when :SWORD
       item = :SWORD_KOKIRI
+    when :SHIELD
+      item = :DEKU_SHIELD
     when :OCARINA
       item = :OCARINA_FAIRY
     end
@@ -64,11 +66,15 @@ class Combo::Randomizer
     rando.data.each do |override|
       type = override[0]
       scene_id = override[1]
+      id = override[2]
       case type
       when :special
         scene_id = 0xf0
+      when :npc
+        scene_id = 0xf1
+      when :collectible
+        id |= 0x20
       end
-      id = override[2]
       content = override[3]
       key = (scene_id << 8) | id
       gi = get_item(content)

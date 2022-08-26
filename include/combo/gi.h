@@ -144,6 +144,15 @@
 #define GI_OOT_SONG_TIME            0x88
 #define GI_OOT_SONG_STORMS          0x89
 #define GI_OOT_MASTER_SWORD         0x8a
+#define GI_OOT_STONE_EMERALD        0x8b
+#define GI_OOT_STONE_RUBY           0x8c
+#define GI_OOT_STONE_SAPPHIRE       0x8d
+#define GI_OOT_MEDALLION_FOREST     0x8e
+#define GI_OOT_MEDALLION_FIRE       0x8f
+#define GI_OOT_MEDALLION_WATER      0x90
+#define GI_OOT_MEDALLION_SPIRIT     0x91
+#define GI_OOT_MEDALLION_SHADOW     0x92
+#define GI_OOT_MEDALLION_LIGHT      0x93
 
 typedef struct PACKED ALIGNED(2)
 {
