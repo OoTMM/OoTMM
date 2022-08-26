@@ -25,6 +25,7 @@
   <scene id="11">
     <room name="DT_Boss">
       <collectible id="1f" content="HEART_CONTAINER2"/>
+      <special id="19" content="STONE_EMERALD"/>
     </room>
   </scene>
 </dungeon>

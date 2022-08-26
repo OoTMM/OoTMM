@@ -19,6 +19,9 @@ module Combo::Logic
       # Mark link's house as reachable
       @graph.get_room('KF_LinkHouse').reachable = true
 
+      # Fix the goal items
+      fix_goals()
+
       # We need to make sure that the small keys, compass map and boss keys stay in the same dungeon.
       @graph.dungeons.each {|d| fix_dungeon(d)}
 
@@ -55,11 +58,17 @@ module Combo::Logic
       end
     end
 
+    def fix_goals()
+      checks = @graph.checks.select {|c| goal_item?(c)}
+      shuffle(checks)
+      checks.each {|c| c.fixed = true}
+    end
+
     def fix_dungeon(dungeon)
-      checks = dungeon.checks
+      checks = dungeon.checks.select{|x| !x.fixed}
       shuffle(checks)
       checks.each do |check|
-        if local_to_dungeon?(check)
+        if dungeon_item?(check)
           check.fixed = true
         end
       end
@@ -106,8 +115,22 @@ module Combo::Logic
       @items[item] = true
     end
 
-    def local_to_dungeon?(check)
+    def dungeon_item?(check)
       [:MAP, :COMPASS, :KEY_SMALL, :KEY_BOSS].include?(check.content)
+    end
+
+    def goal_item?(check)
+      %i[
+        STONE_EMERALD
+        STONE_RUBY
+        STONE_SAPPHIRE
+        MEDALLION_FOREST
+        MEDALLION_FIRE
+        MEDALLION_WATER
+        MEDALLION_SPIRIT
+        MEDALLION_SHADOW
+        MEDALLION_LIGHT
+      ].include?(check.content)
     end
 
     def swap(c1, c2)
