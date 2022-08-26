@@ -22,7 +22,7 @@ gDmaDataCount = 0x8009b2bc;
 
 RequestDma = 0x80080c04;
 kObjectsTable = 0x801c2740;
-SetChestItemInRange = 0x800b8a1c;
+GiveItem = 0x800b8a1c;
 
 Shader_Opa0_Xlu1            = 0x800ef0f0;
 Shader_Opa0_Xlu12           = 0x800ef780;

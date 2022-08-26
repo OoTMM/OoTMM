@@ -49,7 +49,7 @@ static void ItemEtcetera_LoadedUpdate(Actor_ItemEtcetera* item, GameState_Play* 
             }
         }
 
-        SetChestItemInRange(&item->base, play, item->gi, 30.f * rangeScale, 50.f * rangeScale);
+        GiveItem(&item->base, play, item->gi, 30.f * rangeScale, 50.f * rangeScale);
     }
     else
     {

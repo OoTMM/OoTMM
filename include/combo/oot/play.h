@@ -66,6 +66,6 @@ _Static_assert(sizeof(GameState_Play) == 0x12518, "OoT GameState_Play size is wr
 
 u32  GetCollectibleFlag(GameState_Play* play, int flag);
 void SetCollectibleFlag(GameState_Play* play, int flag);
-int SetChestItemInRange(Actor* actor, GameState_Play* play, s16 itemId, float a, float b);
+int GiveItem(Actor* actor, GameState_Play* play, s16 itemId, float a, float b);
 
 #endif

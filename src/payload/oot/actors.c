@@ -57,6 +57,7 @@ Actor* hookSpawnActor(void* const_1, GameState_Play* play, s16 actorId, float x,
     switch (actorId)
     {
     case AC_DOOR_WARP1:
+        /* Blue warp */
         switch (play->sceneId)
         {
         case 0x11:
@@ -69,6 +70,7 @@ Actor* hookSpawnActor(void* const_1, GameState_Play* play, s16 actorId, float x,
         }
         break;
     case AC_ITEM_B_HEART:
+        /* Heart container */
         /* Always use collectible flag 0x1f */
         actorId = AC_ITEM_ETCETERA;
         rz = 0x1000 | 0x1f;
