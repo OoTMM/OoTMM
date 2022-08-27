@@ -7,15 +7,24 @@ static void debugCheat(GameState_Play* play)
 {
     if (play->gs.input[0].current.buttons & 0x20)
     {
-        for (int i = 0; i < ITS_OOT_TRADE_ADULT; ++i)
-            gSave.inventory[i] = i;
+        gSave.inventory[ITS_OOT_STICKS] = ITEM_OOT_DEKU_STICK;
+        gSave.inventory[ITS_OOT_NUTS] = ITEM_OOT_DEKU_NUT;
+        gSave.inventory[ITS_OOT_BOMBS] = ITEM_OOT_BOMB;
+        gSave.inventory[ITS_OOT_BOW] = ITEM_OOT_FAIRY_BOW;
+        gSave.inventory[ITS_OOT_ARROW_FIRE] = ITEM_OOT_FIRE_ARROW;
+        gSave.inventory[ITS_OOT_SLINGSHOT] = ITEM_OOT_FAIRY_SLINGSHOT;
+        gSave.inventory[ITS_OOT_OCARINA] = ITEM_OOT_OCARINA_OF_TIME;
         gSave.equipment.swords = 0x7;
         gSave.equipment.shields = 0x7;
         gSave.equipment.tunics = 0x7;
         gSave.equipment.boots = 0x7;
-        gSave.ammo[ITS_OOT_SLINGSHOT] = 50;
         gSave.upgrades.bulletBag = 3;
         gSave.upgrades.bombBag = 3;
+        gSave.ammo[ITS_OOT_SLINGSHOT] = 50;
+        gSave.ammo[ITS_OOT_BOMBS] = 40;
+        gSave.upgrades.bombBag = 3;
+        gSave.quest.songZelda = 1;
+        gSave.quest.songSaria = 1;
     }
 }
 
@@ -96,21 +105,27 @@ void hookPlay_Init(GameState_Play* play)
     Play_Init(play);
 
     /* Saria's Ocarina Check */
-    if (gSave.entrance == 0x05e0 || gSave.entrance == 0x05e1)
+    if (gSave.entrance == 0x05e0 || gSave.entrance == 0x04de)
     {
         comboSpawnSpecial(play, -1191.f, -220.f, 1650.f, EV_CHK_SARIA_OCARINA, GI_OOT_OCARINA_FAIRY);
     }
 
     /* Child Zelda checks */
-    if (play->sceneId == 0x4a)
+    if (play->sceneId == SCE_CASTLE_COURTYARD)
     {
         comboSpawnSpecial(play, -460.f, 84.f,  40.f, EV_CHK_ZELDA_LETTER, GI_OOT_ZELDA_LETTER);
         comboSpawnSpecial(play, -460.f, 84.f, -40.f, EV_CHK_SONG_ZELDA, GI_OOT_SONG_ZELDA);
     }
 
     /* Sun Song */
-    if (play->sceneId == 0x41)
+    if (play->sceneId == SCE_TOMB_ROYAL)
     {
         comboSpawnSpecial(play, 0.f, 70.f, -1160.f, EV_CHK_SONG_SUN, GI_OOT_SONG_SUN);
+    }
+
+    /* Saria's Song */
+    if (play->sceneId == SCE_SACRED_FOREST_MEADOW && gSave.age == AGE_CHILD && GetEventChk(EV_CHK_ZELDA_LETTER))
+    {
+        comboSpawnSpecial(play, 125.f, 500.f, -2970.f, EV_CHK_SONG_SARIA, GI_OOT_SONG_SARIA);
     }
 }

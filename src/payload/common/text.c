@@ -175,6 +175,9 @@ static const char* const kItemNamesOot[] = {
     "the " C1 "Second Deku Stick Upgrade",
     "the " C1 "Deku Nut Upgrade",
     "the " C1 "Second Deku Nut Upgrade",
+    "the " C1 "Magic Upgrade",
+    "the " C1 "Larger Magic Upgrade",
+    "the " C1 "Defense Upgrade",
 };
 
 static const char* const kItemNamesMm[] = {

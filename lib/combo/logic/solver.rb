@@ -41,14 +41,14 @@ module Combo::Logic
           next unless room.reachable
           room.links.each do |link|
             next if link.to.reachable
-            if eval_cond(link.cond, @items)
+            if eval_cond(link.cond, @graph, @items)
               link.to.reachable = true
               changed = true
             end
           end
           room.checks.each do |check|
             next if check.reachable
-            if eval_cond(check.cond, @items)
+            if eval_cond(check.cond, @graph, @items)
               check.reachable = true
               changed = true
             end
@@ -92,11 +92,11 @@ module Combo::Logic
 
       conds = unreachable_links.map {|l| l.cond} + unreachable_checks.map {|c| c.cond}
       conds.select! {|c| !c.nil?}
-      missing = conds.map {|c| c.missing(@items)}.flatten.uniq
-      item = missing.shuffle.first
 
-      # Find the check giving this item
-      check_src = pool.select {|c| c.content == item}.shuffle.first
+      missing = conds.map {|c| c.eval(@graph, @items)}.map{|x| x.missing}.reduce(&:|)
+
+      # Find a check giving a missing item
+      check_src = pool.select {|c| missing.include?(c.content)}.shuffle.first
       check_dst = pool(reachable: true).shuffle.first
 
       # Swap and fix
@@ -104,7 +104,7 @@ module Combo::Logic
       check_dst.fixed = true
 
       # Mark the item as found
-      add_item(item)
+      add_item(check_dst.content)
     end
 
     def fix_all()
@@ -112,6 +112,10 @@ module Combo::Logic
     end
 
     def add_item(item)
+      case item
+      when :BOMBCHUS_5, :BOMBCHUS_10, :BOMBCHUS_20
+        item = :BOMBCHU
+      end
       @items[item] = true
     end
 
@@ -181,7 +185,7 @@ module Combo::Logic
       if expr.nil?
         true
       else
-        expr.eval(*args)
+        expr.eval(*args).result
       end
     end
 

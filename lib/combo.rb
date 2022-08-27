@@ -30,7 +30,7 @@ module Combo
   end
 
   def self.build()
-    unless system("make", "-C", "src", "-j", "32")
+    unless system("make", "-j", "32")
       raise "Failed to build ASM"
     end
   end

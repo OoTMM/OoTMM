@@ -16,6 +16,7 @@
 #include <combo/shader.h>
 
 #if defined(GAME_OOT)
+# include <combo/oot/scene.h>
 # include <combo/oot/actor.h>
 # include <combo/oot/play.h>
 # include <combo/oot/item_etc.h>

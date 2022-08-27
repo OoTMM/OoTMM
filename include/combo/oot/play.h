@@ -3,6 +3,9 @@
 
 #include <combo/game_state.h>
 
+#define AGE_ADULT 0
+#define AGE_CHILD 1
+
 typedef struct PACKED ALIGNED(4)
 {
     char    unk_0[0x128];
@@ -58,7 +61,9 @@ typedef struct PACKED ALIGNED(4) GameState_Play
     PauseContext    pauseCtx;
     char            unk_10a14[0xd90];
     char            objTable[4]; /* Real size unknown */
-    char            unk_117a8[0xd70];
+    char            unk_117a8[0x642];
+    u8              spawnId;
+    char            unk_11deb[0x72d];
 }
 GameState_Play;
 
@@ -66,6 +71,8 @@ _Static_assert(sizeof(GameState_Play) == 0x12518, "OoT GameState_Play size is wr
 
 u32  GetCollectibleFlag(GameState_Play* play, int flag);
 void SetCollectibleFlag(GameState_Play* play, int flag);
+u32  GetTempFlag(GameState_Play* play, int flag);
+
 int GiveItem(Actor* actor, GameState_Play* play, s16 itemId, float a, float b);
 
 #endif

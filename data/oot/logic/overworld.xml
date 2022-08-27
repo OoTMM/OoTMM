@@ -5,6 +5,7 @@
     <link to="KF_LinkHouse"/>
     <link to="DT_Main"/>
     <link to="LW_Bridge"/>
+    <link to="LW_Main"/>
     <chest id="00" content="SWORD"/>
   </scene>
   <scene id="28" name="KF_Mido" desc="Mido's House">
@@ -18,6 +19,12 @@
     <room name="LW_Bridge" desc="Lost Woods Bridge">
       <special id="c1" content="OCARINA" desc="Saria"/>
     </room>
+    <room name="LW_Main">
+      <link to="SacredMeadow"/>
+    </room>
+  </scene>
+  <scene id="56" name="SacredMeadow">
+    <special id="58" desc="Saria's Song" content="SONG_SARIA" cond="reach(Hyrule_CastleCourtyard)"/>
   </scene>
   <scene id="51" name="Hyrule_Field" desc="Hyrule Field">
     <link to="LW_Bridge"/>
@@ -37,15 +44,16 @@
   </scene>
   <scene id="52" name="Kakariko">
     <link to="Graveyard"/>
+    <link to="DeathMountain" cond="has(ZELDA_LETTER)"/>
     <npc id="01" content="EMPTY_BOTTLE" desc="Anju (Child)"/>
   </scene>
   <scene id="53" name="Graveyard">
     <link to="Graveyard_TombReDead"/>
     <link to="Graveyard_TombFairy"/>
-    <link to="Graveyard_TombRoyal" cond="has(OCARINA) and has(SONG_ZELDA) and has(SWORD)"/>
+    <link to="Graveyard_TombRoyal" cond="can_play(SONG_ZELDA) and has(SWORD)"/>
   </scene>
   <scene id="3f" name="Graveyard_TombReDead">
-    <chest id="00" content="HEART_PIECE" cond="has(OCARINA) and has(SONG_SUN)"/>
+    <chest id="00" content="HEART_PIECE" cond="can_play(SONG_SUN)"/>
   </scene>
   <scene id="40" name="Graveyard_TombFairy">
     <chest id="00" content="SHIELD"/>
@@ -53,5 +61,17 @@
   <scene id="41" name="Graveyard_TombRoyal">
     <!-- <chest id="00" content="BOMBS_10"/> Requires fire -->
     <special id="5a" content="SONG_SUN"/>
+  </scene>
+  <scene id="60" name="DeathMountain">
+    <link to="GoronVillage"/>
+    <link to="DC_Main" cond="has_bombflowers and has(SWORD)"/>
+    <link to="GreatFairy_Magic1" cond="can_play(SONG_ZELDA) and has_explosives"/>
+    <chest id="01" content="RUPEE_PURPLE" cond="has_explosives"/>
+  </scene>
+  <scene id="62" name="GoronVillage">
+    <npc id="02" content="STRENGTH" cond="has(OCARINA) and has(SONG_ZELDA) and has(SONG_SARIA)"/>
+  </scene>
+  <scene id="3b" name="GreatFairy_Magic1">
+    <collectible id="00" content="MAGIC_UPGRADE"/>
   </scene>
 </overworld>

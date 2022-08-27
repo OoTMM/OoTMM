@@ -298,6 +298,26 @@ static void addItemOotUpgrade(u16 itemId)
     case ITEM_OOT_WALLET3:
         gOotSave.upgrades.wallet = 2;
         break;
+    case ITEM_OOT_MAGIC_UPGRADE:
+        gOotSave.magicUpgrade = 1;
+#if defined(GAME_OOT)
+        gOotSave.magicSize = 0;
+        gSaveContext.magicTarget = 0x30;
+#else
+        gOotSave.magicSize = 1;
+        gOotSave.magicAmount = 0x30;
+#endif
+        break;
+    case ITEM_OOT_MAGIC_UPGRADE2:
+        gOotSave.magicUpgrade2 = 1;
+#if defined(GAME_OOT)
+        gOotSave.magicSize = 0;
+        gSaveContext.magicTarget = 0x60;
+#else
+        gOotSave.magicSize = 2;
+        gOotSave.magicAmount = 0x60;
+#endif
+        break;
     }
 }
 

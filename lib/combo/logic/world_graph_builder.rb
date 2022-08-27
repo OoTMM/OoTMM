@@ -10,6 +10,7 @@ module Combo::Logic
     def initialize
       @graph = WorldGraph.new
       @expr_builder = ExprBuilder.new
+      @expr_builder.load_macros(File.join(Combo::PATH_DATA, 'logic_macros.json'))
     end
 
     def parse(file)
