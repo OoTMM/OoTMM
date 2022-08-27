@@ -50,10 +50,10 @@
   <scene id="53" name="Graveyard">
     <link to="Graveyard_TombReDead"/>
     <link to="Graveyard_TombFairy"/>
-    <link to="Graveyard_TombRoyal" cond="has(OCARINA) and has(SONG_ZELDA) and has(SWORD)"/>
+    <link to="Graveyard_TombRoyal" cond="can_play(SONG_ZELDA) and has(SWORD)"/>
   </scene>
   <scene id="3f" name="Graveyard_TombReDead">
-    <chest id="00" content="HEART_PIECE" cond="has(OCARINA) and has(SONG_SUN)"/>
+    <chest id="00" content="HEART_PIECE" cond="can_play(SONG_SUN)"/>
   </scene>
   <scene id="40" name="Graveyard_TombFairy">
     <chest id="00" content="SHIELD"/>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dungeon>
+  <scene id="01">
+    <room name="DC_Main">
+    </room>
+  </scene>
+</dungeon>

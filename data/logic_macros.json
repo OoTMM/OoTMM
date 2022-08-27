@@ -1,0 +1,3 @@
+{
+  "can_play(song)": "has(OCARINA) and has(song)"
+}
