@@ -64,6 +64,7 @@
   </scene>
   <scene id="60" name="DeathMountain">
     <link to="GoronVillage"/>
+    <link to="DC_Main" cond="has_bombflowers"/>
   </scene>
   <scene id="62" name="GoronVillage">
     <npc id="02" content="STRENGTH" cond="has(OCARINA) and has(SONG_ZELDA) and has(SONG_SARIA)"/>

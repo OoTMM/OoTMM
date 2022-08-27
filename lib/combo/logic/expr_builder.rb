@@ -22,11 +22,12 @@ module Combo::Logic
     end
 
     class Context
-      attr_accessor :str, :cursor, :scope
+      attr_accessor :str, :cursor, :next, :scope
 
       def initialize(str, scope = {})
         @str = str
         @cursor = 0
+        @next = nil
         @scope = scope
       end
     end
@@ -48,7 +49,6 @@ module Combo::Logic
 
     def parse(str)
       @contexts << Context.new(str)
-      @next = nil
 
       expr = parse_expr()
       expect(:eof)
@@ -90,7 +90,7 @@ module Combo::Logic
     def parse_expr_single
       e = parse_expr_has() || parse_expr_reach() || parse_expr_macro()
       if e.nil?
-        raise "Unexpected token #{@next}"
+        raise "Unexpected token #{@contexts.last.next}"
       end
       e
     end
@@ -118,16 +118,17 @@ module Combo::Logic
       args = []
       if macro.nil?
         # Not a macro, put the token back
-        @next = name
+        @contexts.last.next = name
         return nil
       end
-      expect(:lparen)
-      unless accept(:rparen)
-        loop do
-          arg = expect(:id)
-          args << arg
-          break if accept(:rparen)
-          expect(:comma)
+      if accept(:lparen)
+        unless accept(:rparen)
+          loop do
+            arg = expect(:id)
+            args << arg
+            break if accept(:rparen)
+            expect(:comma)
+          end
         end
       end
       # We have all the args, now evaluate the macro
@@ -143,15 +144,15 @@ module Combo::Logic
     end
 
     def accept(type)
-      if @next.nil?
-        @next = next_token
+      if @contexts.last.next.nil?
+        @contexts.last.next = next_token
       end
-      t = @next
+      t = @contexts.last.next
       if type == :id && t.is_a?(String)
-        @next = nil
+        @contexts.last.next = nil
         return t
       elsif type == t
-        @next = nil
+        @contexts.last.next = nil
         return t
       end
       nil
@@ -160,7 +161,7 @@ module Combo::Logic
     def expect(type)
       t = accept(type)
       if t.nil?
-        raise "Expected #{type} but found #{@next}"
+        raise "Expected #{type} but found #{@contexts.last.next}"
       end
       t
     end

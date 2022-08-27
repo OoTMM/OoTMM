@@ -93,11 +93,10 @@ module Combo::Logic
       conds = unreachable_links.map {|l| l.cond} + unreachable_checks.map {|c| c.cond}
       conds.select! {|c| !c.nil?}
 
-      missing = conds.map {|c| c.eval(@graph, @items)}.map{|x| x.missing}.reduce(&:|).to_a
-      item = missing.shuffle.first
+      missing = conds.map {|c| c.eval(@graph, @items)}.map{|x| x.missing}.reduce(&:|)
 
-      # Find the check giving this item
-      check_src = pool.select {|c| c.content == item}.shuffle.first
+      # Find a check giving a missing item
+      check_src = pool.select {|c| missing.include?(c.content)}.shuffle.first
       check_dst = pool(reachable: true).shuffle.first
 
       # Swap and fix
@@ -105,7 +104,7 @@ module Combo::Logic
       check_dst.fixed = true
 
       # Mark the item as found
-      add_item(item)
+      add_item(check_dst.content)
     end
 
     def fix_all()
