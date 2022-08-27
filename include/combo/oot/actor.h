@@ -6,6 +6,7 @@
 #define AC_EN_BOX           0x0a
 #define AC_DOOR_WARP1       0x5d
 #define AC_ITEM_B_HEART     0x5f
+#define AC_EN_DU            0x98
 #define AC_EN_MA1           0xe7
 #define AC_ITEM_ETCETERA    0x10f
 #define AC_EN_NIW_LADY      0x13c

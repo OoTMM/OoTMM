@@ -2,6 +2,7 @@ NPC override IDs:
 
 00 Malon, Weird Egg (Chicken)
 01 Anju, Empty Bottle
+02 Darunia, Goron Bracelet
 
 SPIRITUAL
 Emerald:  1240 10e0

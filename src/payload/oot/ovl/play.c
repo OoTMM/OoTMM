@@ -7,8 +7,12 @@ static void debugCheat(GameState_Play* play)
 {
     if (play->gs.input[0].current.buttons & 0x20)
     {
-        for (int i = 0; i < ITS_OOT_TRADE_ADULT; ++i)
-            gSave.inventory[i] = i;
+        gSave.inventory[ITS_OOT_STICKS] = ITEM_OOT_DEKU_STICK;
+        gSave.inventory[ITS_OOT_NUTS] = ITEM_OOT_DEKU_NUT;
+        gSave.inventory[ITS_OOT_BOMBS] = ITEM_OOT_BOMB;
+        gSave.inventory[ITS_OOT_BOW] = ITEM_OOT_FAIRY_BOW;
+        gSave.inventory[ITS_OOT_ARROW_FIRE] = ITEM_OOT_FIRE_ARROW;
+        gSave.inventory[ITS_OOT_OCARINA] = ITEM_OOT_OCARINA_OF_TIME;
         gSave.equipment.swords = 0x7;
         gSave.equipment.shields = 0x7;
         gSave.equipment.tunics = 0x7;
@@ -16,8 +20,8 @@ static void debugCheat(GameState_Play* play)
         gSave.ammo[ITS_OOT_SLINGSHOT] = 50;
         gSave.upgrades.bulletBag = 3;
         gSave.upgrades.bombBag = 3;
-
-        SetEventChk(EV_CHK_ZELDA_LETTER);
+        gSave.quest.songZelda = 1;
+        gSave.quest.songSaria = 1;
     }
 }
 
