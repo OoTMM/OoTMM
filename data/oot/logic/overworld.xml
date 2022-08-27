@@ -65,8 +65,13 @@
   <scene id="60" name="DeathMountain">
     <link to="GoronVillage"/>
     <link to="DC_Main" cond="has_bombflowers and has(SWORD)"/>
+    <link to="GreatFairy_Magic1" cond="can_play(SONG_ZELDA) and has_explosives"/>
+    <chest id="01" content="RUPEE_PURPLE" cond="has_explosives"/>
   </scene>
   <scene id="62" name="GoronVillage">
     <npc id="02" content="STRENGTH" cond="has(OCARINA) and has(SONG_ZELDA) and has(SONG_SARIA)"/>
+  </scene>
+  <scene id="3b" name="GreatFairy_Magic1">
+    <collectible id="00" content="MAGIC_UPGRADE"/>
   </scene>
 </overworld>
