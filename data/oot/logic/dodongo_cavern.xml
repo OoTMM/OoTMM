@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dungeon>
   <scene id="01">
-    <room name="DC_Main">
+    <room name="DC_Main" desc="Dodongo Cavern Main">
       <link to="DC_EastCorridor"/>
       <chest id="08" content="MAP"/>
     </room>
@@ -18,36 +18,36 @@
       <link to="DC_Compass"/>
       <link to="DC_Main_Bridge1"/>
     </room>
-    <room name="DC_Compass">
+    <room name="DC_Compass" desc="Dodongo Cavern Compass">
       <chest id="05" content="COMPASS"/>
     </room>
     <room name="DC_Main_Bridge1">
       <link to="DC_Bomb_Part1"/>
     </room>
-    <room name="DC_Bomb_Part1">
+    <room name="DC_Bomb_Part1" desc="Dodongo Cavern Bomb">
       <link to="DC_Miniboss_Top"/>
-      <chest id="06" content="RUPEE_RED"/>
+      <chest id="06" content="RUPEE_RED" desc="Lower Chest"/>
     </room>
     <room name="DC_Miniboss_Top">
       <link to="DC_Bomb_Part2" cond="has(SLINGSHOT)"/>
     </room>
-    <room name="DC_Bomb_Part2">
-      <chest id="04" content="BOMB_BAG"/>
+    <room name="DC_Bomb_Part2" desc="Dodongo Cavern Bomb">
+      <chest id="04" content="BOMB_BAG" desc="Higher Chest"/>
       <link to="DC_Main_Bridge2"/>
     </room>
-    <room name="DC_Main_Bridge2" desc="Dodongo Cavern - Second Bridge">
+    <room name="DC_Main_Bridge2" desc="Dodongo Cavern Bridge">
       <chest id="0a" content="SHIELD" cond="has_explosives"/>
       <link to="DC_PreBoss" cond="has_explosives"/>
     </room>
   </scene>
   <scene id="12">
-    <room name="DC_PreBoss">
+    <room name="DC_PreBoss" desc="Dodongo Cavern Boss">
       <link to="DC_Boss"/>
-      <chest id="00" content="BOMBS_10"/>
+      <chest id="00" content="BOMBS_10" desc="Chest"/>
     </room>
-    <room name="DC_Boss">
-      <collectible id="1f" content="HEART_CONTAINER2"/>
-      <special id="25" content="STONE_RUBY"/>
+    <room name="DC_Boss" desc="Dodongo Cavern Boss">
+      <collectible id="1f" content="HEART_CONTAINER2" desc="HC"/>
+      <special id="25" content="STONE_RUBY" desc="Reward"/>
     </room>
   </scene>
 </dungeon>

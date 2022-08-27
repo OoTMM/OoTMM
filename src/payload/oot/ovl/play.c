@@ -12,13 +12,14 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory[ITS_OOT_BOMBS] = ITEM_OOT_BOMB;
         gSave.inventory[ITS_OOT_BOW] = ITEM_OOT_FAIRY_BOW;
         gSave.inventory[ITS_OOT_ARROW_FIRE] = ITEM_OOT_FIRE_ARROW;
+        gSave.inventory[ITS_OOT_SLINGSHOT] = ITEM_OOT_FAIRY_SLINGSHOT;
         gSave.inventory[ITS_OOT_OCARINA] = ITEM_OOT_OCARINA_OF_TIME;
         gSave.equipment.swords = 0x7;
         gSave.equipment.shields = 0x7;
         gSave.equipment.tunics = 0x7;
         gSave.equipment.boots = 0x7;
-        gSave.ammo[ITS_OOT_SLINGSHOT] = 50;
         gSave.upgrades.bulletBag = 3;
+        gSave.ammo[ITS_OOT_SLINGSHOT] = 50;
         gSave.upgrades.bombBag = 3;
         gSave.quest.songZelda = 1;
         gSave.quest.songSaria = 1;
