@@ -150,6 +150,11 @@
 #define ITEM_OOT_DEKU_NUT_UPGRADE       0x9a
 #define ITEM_OOT_DEKU_NUT_UPGRADE2      0x9b
 
+/* Custom */
+#define ITEM_OOT_MAGIC_UPGRADE          0x9c
+#define ITEM_OOT_MAGIC_UPGRADE2         0x9d
+#define ITEM_OOT_DEFENSE_UPGRADE        0x9e
+
 #define ITEM_MM_OCARINA_OF_TIME             0x00
 #define ITEM_MM_HERO_BOW                    0x01
 #define ITEM_MM_FIRE_ARROW                  0x02

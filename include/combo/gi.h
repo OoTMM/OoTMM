@@ -153,6 +153,9 @@
 #define GI_OOT_MEDALLION_SPIRIT     0x93
 #define GI_OOT_MEDALLION_SHADOW     0x94
 #define GI_OOT_MEDALLION_LIGHT      0x95
+#define GI_OOT_MAGIC_UPGRADE        0x96
+#define GI_OOT_MAGIC_UPGRADE2       0x97
+#define GI_OOT_DEFENSE_UPGRADE      0x98
 
 typedef struct PACKED ALIGNED(2)
 {

@@ -109,6 +109,13 @@ static s32 progressiveOotWallet(void)
     return GI_OOT_WALLET2;
 }
 
+static s32 progressiveOotMagic(void)
+{
+    if (gOotSave.magicUpgrade)
+        return GI_OOT_MAGIC_UPGRADE2;
+    return GI_OOT_MAGIC_UPGRADE;
+}
+
 static int isItemUnavailableOot(s32 gi)
 {
     switch (gi)
@@ -185,6 +192,10 @@ static s32 progressiveChestItemOot(s32 gi)
     case GI_OOT_WALLET2:
     case GI_OOT_WALLET3:
         gi = progressiveOotWallet();
+        break;
+    case GI_OOT_MAGIC_UPGRADE:
+    case GI_OOT_MAGIC_UPGRADE2:
+        gi = progressiveOotMagic();
         break;
     default:
         break;

@@ -38,6 +38,6 @@ _Static_assert(sizeof(Actor) == 0x13c, "OoT Actor size is wrong");
 
 Actor* SpawnActor(void* const_1, GameState_Play* play, s16 actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable);
 void   ActorDestroy(Actor* actor);
-int    IsActorDead(Actor* actor);
+int    HasActorGivenItem(Actor* actor);
 
 #endif /* OOT_ACTOR_H */

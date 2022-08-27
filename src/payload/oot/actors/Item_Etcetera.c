@@ -26,7 +26,7 @@ static void ItemEtcetera_LoadedUpdate(Actor_ItemEtcetera* item, GameState_Play* 
 {
     u8 flagId;
 
-    if (!IsActorDead(&item->base))
+    if (!HasActorGivenItem(&item->base))
     {
         item->base.rot2.z = 0;
         item->base.rot2.y += 0x400;
