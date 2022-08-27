@@ -19,6 +19,7 @@
 
 /* Custom flags that seems unused */
 #define EV_CHK_SONG_SARIA               0x58
+#define EV_ITEM_GORON_BRACELET          0x20
 
 int  GetEventChk(int index);
 void SetEventChk(int index);
