@@ -112,6 +112,10 @@ module Combo::Logic
     end
 
     def add_item(item)
+      case item
+      when :BOMBCHUS_5, :BOMBCHUS_10, :BOMBCHUS_20
+        item = :BOMBCHU
+      end
       @items[item] = true
     end
 
