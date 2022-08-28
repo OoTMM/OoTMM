@@ -43,7 +43,7 @@ module Combo::Logic
     end
 
     def parse_room(e, scene_id, dungeon)
-      name = e['name']
+      name = e['name'].to_sym
       desc = e['desc']
       room = @graph.get_room(name)
       if room.nil?
@@ -90,7 +90,7 @@ module Combo::Logic
     end
 
     def parse_link(e, from)
-      to_name = e['to']
+      to_name = e['to'].to_sym
       cond = e['cond']
       unless cond.nil?
         cond = @expr_builder.parse(cond)

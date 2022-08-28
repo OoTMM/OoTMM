@@ -68,22 +68,26 @@ module Combo::Logic
     end
 
     def parse_expr_or
-      left = parse_expr_and()
-      if accept(:or)
-        right = parse_expr()
-        ExprOr.new(left, right)
+      exprs = [parse_expr_and()]
+      while accept(:or)
+        exprs << parse_expr()
+      end
+      if exprs.size == 1
+        exprs.first
       else
-        left
+        ExprOr.new(exprs)
       end
     end
 
     def parse_expr_and
-      left = parse_expr_single()
-      if accept(:and)
-        right = parse_expr()
-        ExprAnd.new(left, right)
+      exprs = [parse_expr_single()]
+      while accept(:and)
+        exprs << parse_expr()
+      end
+      if exprs.size == 1
+        exprs.first
       else
-        left
+        ExprAnd.new(exprs)
       end
     end
 

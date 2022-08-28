@@ -33,35 +33,37 @@ module Combo::Logic
     end
   end
 
-  class ExprBinary < Expr
-    def initialize(left, right)
-      @left = left
-      @right = right
+  class ExprNary < Expr
+    def initialize(exprs)
+      @exprs = exprs
     end
   end
 
-  class ExprOr < ExprBinary
+  class ExprOr < ExprNary
     def eval_expr(*args)
-      left = @left.eval(*args)
-      if left.result
-        return SOLVED_VALUE
+      missing = Set.new
+      @exprs.each do |expr|
+        value = expr.eval(*args)
+        return SOLVED_VALUE if value.result
+        missing.merge(value.missing)
       end
-      right = @right.eval(*args)
-      if right.result
-        return SOLVED_VALUE
-      end
-      Value.new(false, missing: left.missing | right.missing)
+      Value.new(false, missing: missing)
     end
   end
 
-  class ExprAnd < ExprBinary
+  class ExprAnd < ExprNary
     def eval_expr(*args)
-      left = @left.eval(*args)
-      right = @right.eval(*args)
-      if left.result && right.result
+      missing = Set.new
+      result = true
+      @exprs.each do |expr|
+        value = expr.eval(*args)
+        result = false unless value.result
+        missing.merge(value.missing)
+      end
+      if result
         SOLVED_VALUE
       else
-        Value.new(false, missing: left.missing | right.missing)
+        Value.new(false, missing: missing)
       end
     end
   end
@@ -82,7 +84,7 @@ module Combo::Logic
 
   class ExprReach < Expr
     def initialize(name)
-      @name = name
+      @name = name.to_sym
     end
 
     def eval_expr(graph, items)

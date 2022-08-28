@@ -17,7 +17,7 @@ module Combo::Logic
 
     def run
       # Mark link's house as reachable
-      @graph.get_room('KF_LinkHouse').reachable = true
+      @graph.get_room(:KF_LinkHouse).reachable = true
 
       # Fix the goal items
       fix_goals()
