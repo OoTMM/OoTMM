@@ -10,8 +10,9 @@ endif
 
 CFLAGS 		:= -EB -ffreestanding -nostdlib -fno-PIC -mabi=32 -mno-shared -mno-abicalls \
 			   -march=vr4300 -mtune=vr4300 -mfix4300 -G 0 -Os \
+			   -Werror=implicit-function-declaration -Werror=implicit-int -Wno-missing-braces \
 			   -isystem third_party/ultralib/include -isystem third_party/ultralib/include/gcc -Iinclude -Ibuild/include \
-			   -Ithird_party/ultralib/include -Ithird_party/ultralib/include/gcc -MMD -MP \
+			    -MMD -MP \
 			   -DF3DEX_GBI_2=1
 CC 			:= $(ARCH)-gcc
 OBJCOPY 	:= $(ARCH)-objcopy

@@ -4,6 +4,7 @@
 #define ARRAY_SIZE(x) (sizeof(x) / sizeof((x)[0]))
 
 #include <string.h>
+#include <stdlib.h>
 #include <ultra64.h>
 #include <combo/actor_ovl.h>
 #include <combo/audio.h>
@@ -75,5 +76,12 @@ s32 comboProgressiveChestItem(s32 gi);
 
 /* Actor */
 void comboSpawnSpecial(GameState_Play* play, float x, float y, float z, u8 specialId, u16 gi);
+
+/* Objects */
+void  comboObjectsReset(void);
+void* comboGetObject(u16 objectId);
+
+/* Draw */
+void comboDrawObject(GameState_Play* play, Actor* actor, u16 objectId, u16 shaderId);
 
 #endif /* COMBO_COMBO_H */

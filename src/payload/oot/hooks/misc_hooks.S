@@ -8,6 +8,7 @@
 #define ENTRANCE_GORON        0x14d
 #define ENTRANCE_GF           0x315
 #define ENTRANCE_ZWF          0x1dd
+#define ENTRANCE_ZRI          0x0ea
 
 /* Disable first cutscene */
 PATCH_START(0x800fbf60)

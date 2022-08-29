@@ -1,37 +1,37 @@
 #include <combo.h>
 #include <combo/custom.h>
 
-void Shader_Opa0_Xlu1(void*, s16);
-void Shader_Opa0_Xlu12(void*, s16);
-void Shader_Opa0(void*, s16);
-void Shader_Opa01(void*, s16);
-void Shader_Opa1023(void*, s16);
-void Shader_Opa10_Xlu2(void*, s16);
-void Shader_Opa10_Xlu234(void*, s16);
-void Shader_Opa10_Xlu32(void*, s16);
-void Shader_Opa10234567(void*, s16);
-void Shader_Xlu01(void*, s16);
-void Shader_BlueFire(void*, s16);
-void Shader_BombchuMask(void*, s16);
-void Shader_Compass(void*, s16);
-void Shader_DekuNut(void*, s16);
-void Shader_Fairy(void*, s16);
-void Shader_Fish(void*, s16);
-void Shader_GiantKnife(void*, s16);
-void Shader_GS(void*, s16);
-void Shader_Heart(void*, s16);
-void Shader_Medallion(void*, s16);
-void Shader_MirrorShield(void*, s16);
-void Shader_Poe(void*, s16);
-void Shader_Potion(void*, s16);
-void Shader_Rupee(void*, s16);
-void Shader_Scale(void*, s16);
-void Shader_SoldOut(void*, s16);
-void Shader_Spell(void*, s16);
-void Shader_MoonTear(void*, s16);
+void Shader_Opa0_Xlu1(GameState*, s16);
+void Shader_Opa0_Xlu12(GameState*, s16);
+void Shader_Opa0(GameState*, s16);
+void Shader_Opa01(GameState*, s16);
+void Shader_Opa1023(GameState*, s16);
+void Shader_Opa10_Xlu2(GameState*, s16);
+void Shader_Opa10_Xlu234(GameState*, s16);
+void Shader_Opa10_Xlu32(GameState*, s16);
+void Shader_Opa10234567(GameState*, s16);
+void Shader_Xlu01(GameState*, s16);
+void Shader_BlueFire(GameState*, s16);
+void Shader_BombchuMask(GameState*, s16);
+void Shader_Compass(GameState*, s16);
+void Shader_DekuNut(GameState*, s16);
+void Shader_Fairy(GameState*, s16);
+void Shader_Fish(GameState*, s16);
+void Shader_GiantKnife(GameState*, s16);
+void Shader_GS(GameState*, s16);
+void Shader_Heart(GameState*, s16);
+void Shader_Medallion(GameState*, s16);
+void Shader_MirrorShield(GameState*, s16);
+void Shader_Poe(GameState*, s16);
+void Shader_Potion(GameState*, s16);
+void Shader_Rupee(GameState*, s16);
+void Shader_Scale(GameState*, s16);
+void Shader_SoldOut(GameState*, s16);
+void Shader_Spell(GameState*, s16);
+void Shader_MoonTear(GameState*, s16);
 
 /* Custom Shaders */
-void Shader_CustomNote(GameState* gs, u16 shaderId)
+void Shader_CustomNote(GameState* gs, s16 shaderId)
 {
     const Shader* shader;
     u32 c;
@@ -86,7 +86,7 @@ static void* dummySegment(GfxContext* gfx)
     return end;
 }
 
-void Shader_SpiritualStones(GameState* gs, u16 shaderId)
+void Shader_SpiritualStones(GameState* gs, s16 shaderId)
 {
     u8 primRed, primGreen, primBlue;
     u8 envRed, envGreen, envBlue;
@@ -154,7 +154,7 @@ void Shader_SpiritualStones(GameState* gs, u16 shaderId)
 
 #else
 
-void Shader_SpiritualStones(GameState* gs, u16 shaderId)
+void Shader_SpiritualStones(GameState* gs, s16 shaderId)
 {
 
 }

@@ -1,12 +1,15 @@
 #ifndef COMBO_SHADER_H
 #define COMBO_SHADER_H
 
+#include <combo/game_state.h>
 #include <combo/types.h>
+
+typedef void (*ShaderFunc)(GameState* gs, s16 index);
 
 typedef struct PACKED ALIGNED(4)
 {
-    void* func;
-    u32   lists[8];
+    ShaderFunc  func;
+    u32         lists[8];
 }
 Shader;
 

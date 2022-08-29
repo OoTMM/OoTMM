@@ -1,7 +1,5 @@
 #include <combo.h>
 
-s8 LoadObject(void* const_1, s16 objectId);
-s8 GetObject(void* const_1, s16 objectId);
 void ActorSetScale(Actor* actor, float scale);
 
 static int shouldSpawn(Actor_ItemEtcetera* item, GameState_Play* play)
@@ -22,7 +20,15 @@ static int shouldSpawn(Actor_ItemEtcetera* item, GameState_Play* play)
     return 1;
 }
 
-static void ItemEtcetera_LoadedUpdate(Actor_ItemEtcetera* item, GameState_Play* play)
+static void ItemEtcetera_Draw(Actor_ItemEtcetera* item, GameState_Play* play)
+{
+    const GetItem* gi;
+
+    gi = kExtendedGetItems + item->gi - 1;
+    comboDrawObject(play, &item->base, gi->objectId, gi->shaderId);
+}
+
+static void ItemEtcetera_Update(Actor_ItemEtcetera* item, GameState_Play* play)
 {
     u8 flagId;
 
@@ -107,14 +113,10 @@ void hookItemEtcetera_Init(Actor_ItemEtcetera* item, GameState_Play* play)
     gi = comboProgressiveChestItem(gi);
 
     giItem = kExtendedGetItems + (gi - 1);
-    item->objIndex = GetObject(play->objTable, giItem->objectId);
-    if (item->objIndex < 0)
-        item->objIndex = LoadObject(play->objTable, giItem->objectId);
-    item->shaderId = giItem->shaderId - 1;
+    item->objIndex -1;
     item->gi = gi;
-    item->update = ItemEtcetera_LoadedUpdate;
-    item->draw = (Actor_ItemEtcetera_Func)(ovlBase + 0x650);
-    item->load = (Actor_ItemEtcetera_Func)(ovlBase + 0x19c);
+    item->base.update = ItemEtcetera_Update;
+    item->base.draw = ItemEtcetera_Draw;
     ActorSetScale((Actor*)item, 0.25f);
     item->base.position.y += 15.f;
 }

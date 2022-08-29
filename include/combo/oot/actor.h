@@ -31,7 +31,12 @@ typedef struct PACKED ALIGNED(0x4)
     Vector3f    position;
     char        unk4[0x84];
     Vector3s    rot2;
-    char        unk5[0x82];
+    char        unk5[0x6e];
+    void*       init;
+    void*       fini;
+    void*       update;
+    void*       draw;
+    void*       ovl;
 }
 Actor;
 

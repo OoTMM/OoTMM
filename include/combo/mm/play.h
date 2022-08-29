@@ -3,7 +3,7 @@
 
 #include <combo/game_state.h>
 
-typedef struct PACKED ALIGNED(4)
+typedef struct PACKED ALIGNED(4) GameState_Play
 {
     GameState    gs;
     u16          sceneId;
