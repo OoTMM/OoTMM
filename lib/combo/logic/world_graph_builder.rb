@@ -23,32 +23,36 @@ module Combo::Logic
       if e.name == 'dungeon'
         dungeon = []
       end
+      desc = [e['desc']]
       scenes = e.xpath('scene')
       scenes.each do |scene|
-        parse_scene(scene, dungeon)
+        parse_scene(scene, dungeon, desc)
       end
       if dungeon
         @dungeons << dungeon
       end
     end
 
-    def parse_scene(e, dungeon)
+    def parse_scene(e, dungeon, desc)
       scene_id = e['id'].to_i(16)
       rooms = e.xpath('room')
+      desc = desc + [e['desc']]
       if rooms.empty?
         # Single room scene
         rooms = [e]
       end
       rooms.each do |room|
-        parse_room(room, scene_id, dungeon)
+        parse_room(room, scene_id, dungeon, desc)
       end
     end
 
-    def parse_room(e, scene_id, dungeon)
+    def parse_room(e, scene_id, dungeon, desc)
       name = e['name'].to_sym
-      desc = e['desc']
+      if e.name == 'room'
+        desc = desc + [e['desc']]
+      end
 
-      %i[chest special npm collectible].each {|type| parse_checks(e, type, scene_id, name, desc) }
+      %i[chest special npc collectible].each {|type| parse_checks(e, type, scene_id, name, desc) }
 
       e.xpath('link').each do |link|
         parse_link(link, name)
@@ -59,22 +63,27 @@ module Combo::Logic
       end
     end
 
-    def parse_checks(e, type, scene_id, location, location_desc)
+    def parse_checks(e, type, scene_id, location, desc)
       checks = e.xpath(type.to_s)
       checks.each do |check|
-        parse_check(check, type, scene_id, location, location_desc)
+        parse_check(check, type, scene_id, location, desc)
       end
     end
 
-    def parse_check(e, type, scene_id, location, location_desc)
+    def parse_check(e, type, scene_id, location, desc)
       id = e['id'].to_i(16)
       cond = e['cond']
-      desc = e['desc']
+      desc = desc + [e['desc']]
+      desc = desc.reject(&:nil?)
+      if desc.empty?
+        desc = location.to_s
+      else
+        desc = desc.join(' ')
+      end
       unless cond.nil?
         cond = @expr_builder.parse(cond)
       end
       content = e['content'].to_sym
-      desc = [location_desc, desc].reject(&:nil?).join(' ') || location.to_s
       check = WorldGraph::Check.new(type, id, scene_id, location, content, cond, desc)
       @checks << check
     end
@@ -98,8 +107,6 @@ module Combo::Logic
       Dir[File.join(Combo::PATH_DATA, 'oot', 'logic', '*.xml')].each do |path|
         builder.parse(path)
       end
-      p builder.graph
-      exit 1
       builder.graph
     end
   end

@@ -6,8 +6,6 @@ require 'combo/logic'
 
 module Combo
   def self.run(args)
-    Logic.run
-    exit 1
     case args.first
     when '--generate-custom'
       run_generate_custom()

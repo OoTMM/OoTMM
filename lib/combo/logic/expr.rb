@@ -18,6 +18,15 @@ module Combo::Logic
     end
 
     def eval(*args)
+      eval_impl(*args).result
+    end
+
+    def missing(*args)
+      eval_impl(*args).missing
+    end
+
+    private
+    def eval_impl(*args)
       # We want to memoize true exprs
       if @solved
         SOLVED_VALUE
@@ -43,7 +52,7 @@ module Combo::Logic
     def eval_expr(*args)
       missing = Set.new
       @exprs.each do |expr|
-        value = expr.eval(*args)
+        value = expr.eval_expr(*args)
         return SOLVED_VALUE if value.result
         missing.merge(value.missing)
       end
@@ -56,7 +65,7 @@ module Combo::Logic
       missing = Set.new
       result = true
       @exprs.each do |expr|
-        value = expr.eval(*args)
+        value = expr.eval_expr(*args)
         result = false unless value.result
         missing.merge(value.missing)
       end
@@ -73,8 +82,8 @@ module Combo::Logic
       @item = item.to_sym
     end
 
-    def eval_expr(graph, items)
-      if items[@item]
+    def eval_expr(age, state)
+      if state.items[@item]
         SOLVED_VALUE
       else
         Value.new(false, missing: [@item])
@@ -87,8 +96,8 @@ module Combo::Logic
       @name = name.to_sym
     end
 
-    def eval_expr(graph, items)
-      if graph.get_room(@name).reachable
+    def eval_expr(age, state)
+      if state.reachable_locations[age].include?(@name)
         SOLVED_VALUE
       else
         Value.new(false)

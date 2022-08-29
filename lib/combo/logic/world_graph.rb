@@ -1,6 +1,9 @@
 module Combo::Logic
   class WorldGraph
     class Check
+      attr_reader :type, :id, :scene_id, :location, :cond, :desc
+      attr_accessor :content
+
       def initialize(type, id, scene_id, location, content, cond, desc)
         @type = type
         @id = id
@@ -13,6 +16,8 @@ module Combo::Logic
     end
 
     class Link
+      attr_reader :from, :to, :cond
+
       def initialize(from, to, cond)
         @from = from
         @to = to
