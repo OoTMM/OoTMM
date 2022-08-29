@@ -4,6 +4,7 @@
 #include <combo/types.h>
 
 #define AC_EN_BOX           0x0a
+#define AC_ITEM00           0x15
 #define AC_DOOR_WARP1       0x5d
 #define AC_ITEM_B_HEART     0x5f
 #define AC_EN_DU            0x98
@@ -30,7 +31,12 @@ typedef struct PACKED ALIGNED(0x4)
     Vector3f    position;
     char        unk4[0x84];
     Vector3s    rot2;
-    char        unk5[0x82];
+    char        unk5[0x6e];
+    void*       init;
+    void*       fini;
+    void*       update;
+    void*       draw;
+    void*       ovl;
 }
 Actor;
 

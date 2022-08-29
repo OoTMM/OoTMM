@@ -74,3 +74,9 @@ GetTempFlag = 0x8002049c;
 
 GetSegment = 0x8007eb84;
 ConvertMatrix = 0x800ab6bc;
+
+malloc = 0x80066c10;
+LoadFile = 0x80000df0;
+
+PreDraw1 = 0x80022438;
+PreDraw2 = 0x80022554;

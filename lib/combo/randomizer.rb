@@ -11,7 +11,6 @@ class Combo::Randomizer
   end
 
   def run()
-    # DEBUG
     rando = Combo::Logic.run
 
     data = ("\xff" * 0x20000).force_encoding('ASCII-8BIT')

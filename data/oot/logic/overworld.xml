@@ -30,6 +30,7 @@
     <link to="LW_Bridge"/>
     <link to="Hyrule_Market"/>
     <link to="Kakariko"/>
+    <link to="ZoraRiver_Entrance"/>
   </scene>
   <scene id="20" name="Hyrule_Market">
     <link to="Hyrule_Castle"/>
@@ -73,5 +74,14 @@
   </scene>
   <scene id="3b" name="GreatFairy_Magic1">
     <collectible id="00" content="MAGIC_UPGRADE"/>
+  </scene>
+  <scene id="54" desc="Zora River">
+    <room name="ZoraRiver_Entrance">
+      <link to="ZoraRiver" cond="has_explosives"/>
+    </room>
+    <room name="ZoraRiver">
+      <collectible id="04" content="HEART_PIECE" desc="Pillar"/>
+      <collectible id="0b" content="HEART_PIECE" desc="Waterfall"/>
+    </room>
   </scene>
 </overworld>

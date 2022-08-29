@@ -93,6 +93,7 @@ static void skipEntranceCutscene(GameState_Play* play)
 
 void hookPlay_Init(GameState_Play* play)
 {
+    comboObjectsReset();
     debugCheat(play);
     skipEntranceCutscene(play);
 
