@@ -4,6 +4,7 @@
 #include <combo/types.h>
 
 #define AC_EN_BOX           0x0a
+#define AC_ITEM00           0x15
 #define AC_DOOR_WARP1       0x5d
 #define AC_ITEM_B_HEART     0x5f
 #define AC_EN_DU            0x98

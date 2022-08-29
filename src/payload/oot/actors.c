@@ -12,6 +12,7 @@ static RemovedActor kRemovedActors[] = {
     { SCE_CASTLE_COURTYARD, 0x0a9 }, /* Zelda Courtyard - Impa */
     { SCE_HYRULE_FIELD, AC_EN_OWL }, /* Hyrule Field - Owl */
     { SCE_HYRULE_CASTLE, AC_EN_OWL }, /* Hyrule Castle - Owl */
+    /*{ SCE_ZORA_RIVER, AC_EN_OWL },*/
     { SCE_TOMB_ROYAL, 0x12e }, /* Sun Song */
     { SCE_SACRED_FOREST_MEADOW, AC_EN_SA }, /* Saria in meadow */
 };
@@ -57,6 +58,14 @@ Actor* hookSpawnActor(void* const_1, GameState_Play* play, s16 actorId, float x,
 
     switch (actorId)
     {
+    case AC_ITEM00:
+        if ((variable & 0xff) == 0x06) /* Heart Piece */
+        {
+            actorId = AC_ITEM_ETCETERA;
+            rz = 0x1000 | ((variable >> 8) & 0x3f);
+            variable = GI_OOT_HEART_PIECE;
+        }
+        break;
     case AC_DOOR_WARP1:
         /* Blue warp */
         switch (play->sceneId)
