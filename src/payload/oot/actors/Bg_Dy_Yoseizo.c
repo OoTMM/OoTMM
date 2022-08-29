@@ -16,7 +16,7 @@ void BgDyYoseizo_Update(Actor* actor, GameState_Play* play)
     u16 itemId;
     u32 collected;
 
-    if (GetTempFlag(play, 0x38))
+    if (GetSwitchFlag(play, 0x38))
     {
         index = play->spawnId;
         if (play->sceneId == SCE_GREAT_FAIRY_FOUNTAIN_SPELLS)
