@@ -18,50 +18,51 @@ module Combo::Logic
     end
 
     def eval(*args)
-      # We want to memoize true exprs
-      if @solved
+      eval_impl(*args).result
+    end
+
+    def missing(*args)
+      eval_impl(*args).missing
+    end
+
+    private
+    def eval_impl(*args)
+      # TODO: Memoize again?
+      eval_expr(*args)
+    end
+  end
+
+  class ExprNary < Expr
+    def initialize(exprs)
+      @exprs = exprs
+    end
+  end
+
+  class ExprOr < ExprNary
+    def eval_expr(*args)
+      missing = Set.new
+      @exprs.each do |expr|
+        value = expr.eval_expr(*args)
+        return SOLVED_VALUE if value.result
+        missing.merge(value.missing)
+      end
+      Value.new(false, missing: missing)
+    end
+  end
+
+  class ExprAnd < ExprNary
+    def eval_expr(*args)
+      missing = Set.new
+      result = true
+      @exprs.each do |expr|
+        value = expr.eval_expr(*args)
+        result = false unless value.result
+        missing.merge(value.missing)
+      end
+      if result
         SOLVED_VALUE
       else
-        value = eval_expr(*args)
-        if value.result
-          @solved = true
-          SOLVED_VALUE
-        else
-          value
-        end
-      end
-    end
-  end
-
-  class ExprBinary < Expr
-    def initialize(left, right)
-      @left = left
-      @right = right
-    end
-  end
-
-  class ExprOr < ExprBinary
-    def eval_expr(*args)
-      left = @left.eval(*args)
-      if left.result
-        return SOLVED_VALUE
-      end
-      right = @right.eval(*args)
-      if right.result
-        return SOLVED_VALUE
-      end
-      Value.new(false, missing: left.missing | right.missing)
-    end
-  end
-
-  class ExprAnd < ExprBinary
-    def eval_expr(*args)
-      left = @left.eval(*args)
-      right = @right.eval(*args)
-      if left.result && right.result
-        SOLVED_VALUE
-      else
-        Value.new(false, missing: left.missing | right.missing)
+        Value.new(false, missing: missing)
       end
     end
   end
@@ -71,8 +72,8 @@ module Combo::Logic
       @item = item.to_sym
     end
 
-    def eval_expr(graph, items)
-      if items[@item]
+    def eval_expr(age, state)
+      if state.items[@item]
         SOLVED_VALUE
       else
         Value.new(false, missing: [@item])
@@ -82,11 +83,11 @@ module Combo::Logic
 
   class ExprReach < Expr
     def initialize(name)
-      @name = name
+      @name = name.to_sym
     end
 
-    def eval_expr(graph, items)
-      if graph.get_room(@name).reachable
+    def eval_expr(age, state)
+      if state.reachable_locations[age].include?(@name)
         SOLVED_VALUE
       else
         Value.new(false)

@@ -1,3 +1,9 @@
+require 'set'
+require 'combo/logic/state'
+require 'combo/logic/pathfinder'
+require 'combo/logic/playthrough'
+require 'combo/logic/util'
+
 module Combo::Logic
   class Solver
     class Output
@@ -12,12 +18,21 @@ module Combo::Logic
 
     def initialize(graph)
       @graph = graph
-      @items = {}
+      @state = State.new
+      @pathfinder = Pathfinder.new(@graph, @state)
+      @checks_fixed = Set.new
+      @checks_unfixed = Set.new(@graph.checks)
+      @checks_per_location = Util.make_multihash_set(graph.checks.map {|c| [c.location, c]})
+    end
+
+    def eval_cond(age, cond)
+      return true if cond.nil?
+      cond.eval(age, @state)
     end
 
     def run
       # Mark link's house as reachable
-      @graph.get_room('KF_LinkHouse').reachable = true
+      @pathfinder.mark_reachable(:child, :KF_LinkHouse)
 
       # Fix the goal items
       fix_goals()
@@ -28,48 +43,27 @@ module Combo::Logic
       # Fix required items
       fix_required()
 
-      # Shuddle remaining items
+      # Shuffle remaining items
       fix_all()
 
       export()
     end
 
-    def propagate()
-      loop do
-        changed = false
-        @graph.rooms.each do |room|
-          next unless room.reachable
-          room.links.each do |link|
-            next if link.to.reachable
-            if eval_cond(link.cond, @graph, @items)
-              link.to.reachable = true
-              changed = true
-            end
-          end
-          room.checks.each do |check|
-            next if check.reachable
-            if eval_cond(check.cond, @graph, @items)
-              check.reachable = true
-              changed = true
-            end
-          end
-        end
-        break unless changed
-      end
-    end
-
     def fix_goals()
       checks = @graph.checks.select {|c| goal_item?(c)}
       shuffle(checks)
-      checks.each {|c| c.fixed = true}
+      @checks_fixed.merge(checks)
+      @checks_unfixed.subtract(checks)
     end
 
     def fix_dungeon(dungeon)
-      checks = dungeon.checks.select{|x| !x.fixed}
+      checks = dungeon.map{|x| @checks_per_location[x]}.reject(&:nil?).reduce(&:|)
+      checks.reject! {|c| @checks_fixed.include?(c) }
       shuffle(checks)
       checks.each do |check|
         if dungeon_item?(check)
-          check.fixed = true
+          @checks_fixed.add(check)
+          @checks_unfixed.delete(check)
         end
       end
     end
@@ -77,8 +71,10 @@ module Combo::Logic
     def fix_required()
       loop do
         # Propagate and check if everything is reachable
-        propagate()
-        break if @graph.checks.all? {|c| c.reachable}
+        @pathfinder.propagate()
+
+        #p @checks_unreachable
+        break if @pathfinder.unreachable.empty?
 
         # Everything is not reachable, we need to add a progression item
         fix_new_progression()
@@ -86,37 +82,27 @@ module Combo::Logic
     end
 
     def fix_new_progression()
-      # Find a suitable item
-      unreachable_links = @graph.rooms.map {|r| r.links}.flatten.select {|l| l.to.reachable == false}
-      unreachable_checks = @graph.checks.select {|x| x.reachable == false}
+      missing = []
 
-      conds = unreachable_links.map {|l| l.cond} + unreachable_checks.map {|c| c.cond}
-      conds.select! {|c| !c.nil?}
+      [:child, :adult].each do |age|
+        # Collect missing items for locations
+        cond_locs = @graph.links.reject{|l| @state.reachable_locations[age].include?(l.to) }.map{|l| l.cond}.reject(&:nil?)
+        cond_checks = @pathfinder.unreachable.map{|c| c.cond}.reject(&:nil?)
+        missing << (cond_locs + cond_checks).map{|c| c.missing(age, @state)}.reduce(&:|)
+      end
+      missing = missing.reduce(&:|)
+      check_src = @checks_unfixed.select{|c| missing.include?(c.content) }.to_a.sample
+      check_dst = (@checks_unfixed & @pathfinder.reachable).to_a.sample
+      item = check_src.content
 
-      missing = conds.map {|c| c.eval(@graph, @items)}.map{|x| x.missing}.reduce(&:|)
-
-      # Find a check giving a missing item
-      check_src = pool.select {|c| missing.include?(c.content)}.shuffle.first
-      check_dst = pool(reachable: true).shuffle.first
-
-      # Swap and fix
-      swap(check_src, check_dst)
-      check_dst.fixed = true
-
-      # Mark the item as found
-      add_item(check_dst.content)
+      swap(check_dst, check_src)
+      @checks_fixed.add(check_dst)
+      @checks_unfixed.delete(check_dst)
+      @pathfinder.add_item(item)
     end
 
     def fix_all()
-      shuffle(pool())
-    end
-
-    def add_item(item)
-      case item
-      when :BOMBCHUS_5, :BOMBCHUS_10, :BOMBCHUS_20
-        item = :BOMBCHU
-      end
-      @items[item] = true
+      shuffle(@checks_unfixed)
     end
 
     def dungeon_item?(check)
@@ -153,51 +139,26 @@ module Combo::Logic
 
     def export_data
       @graph.checks.map do |check|
-        [check.type, check.room.scene_id, check.id, check.content]
+        [check.type, check.scene_id, check.id, check.content]
       end
     end
 
     def export_spoiler
       data = []
       @graph.checks.each do |check|
-        data << "%s: %s\n" % [check_nice_name(check), check.content]
+        data << "%s: %s\n" % [check.desc, check.content]
       end
       data.sort!
-      data.join()
-    end
-
-    def check_nice_name(check)
-      desc = check.desc
-      room_desc = check.room.desc
-      if room_desc.nil?
-        room_desc = check.room.name
-      end
-      [room_desc, desc].select{|x| !x.nil?}.join(' - ')
+      log = data.join()
+      playthrough = Playthrough.new(@graph)
+      log += "\n\n" + playthrough.run()
+      log
     end
 
     def export
       data = export_data()
       spoiler = export_spoiler()
       Output.new(data, spoiler)
-    end
-
-    def eval_cond(expr, *args)
-      if expr.nil?
-        true
-      else
-        expr.eval(*args).result
-      end
-    end
-
-    def pool(opts = {})
-      pool = @graph.checks.select{|c| c.fixed == false}
-      if opts[:reachable]
-        pool.select!{|c| c.reachable}
-      end
-      if opts[:unique]
-        pool = pool.uniq{|c| c.content}
-      end
-      pool
     end
 
     def self.run

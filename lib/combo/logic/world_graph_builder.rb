@@ -5,12 +5,12 @@ require 'combo/logic/expr_builder'
 
 module Combo::Logic
   class WorldGraphBuilder
-    attr_reader :graph
-
     def initialize
-      @graph = WorldGraph.new
       @expr_builder = ExprBuilder.new
       @expr_builder.load_macros(File.join(Combo::PATH_DATA, 'logic_macros.json'))
+      @checks = []
+      @links = []
+      @dungeons = []
     end
 
     def parse(file)
@@ -21,89 +21,85 @@ module Combo::Logic
     def parse_root(e)
       dungeon = nil
       if e.name == 'dungeon'
-        dungeon = WorldGraph::Dungeon.new
-        @graph.add_dungeon(dungeon)
+        dungeon = []
       end
+      desc = [e['desc']]
       scenes = e.xpath('scene')
       scenes.each do |scene|
-        parse_scene(scene, dungeon)
+        parse_scene(scene, dungeon, desc)
+      end
+      if dungeon
+        @dungeons << dungeon
       end
     end
 
-    def parse_scene(e, dungeon)
+    def parse_scene(e, dungeon, desc)
       scene_id = e['id'].to_i(16)
       rooms = e.xpath('room')
+      desc = desc + [e['desc']]
       if rooms.empty?
         # Single room scene
         rooms = [e]
       end
       rooms.each do |room|
-        parse_room(room, scene_id, dungeon)
+        parse_room(room, scene_id, dungeon, desc)
       end
     end
 
-    def parse_room(e, scene_id, dungeon)
-      name = e['name']
-      desc = e['desc']
-      room = @graph.get_room(name)
-      if room.nil?
-        room = WorldGraph::Room.new(name, scene_id, desc)
-        @graph.add_room(room)
-      else
-        room.scene_id = scene_id
-        room.desc = desc
+    def parse_room(e, scene_id, dungeon, desc)
+      name = e['name'].to_sym
+      if e.name == 'room'
+        desc = desc + [e['desc']]
       end
 
-      parse_checks(e, 'chest', :chest, room)
-      parse_checks(e, 'special', :special, room)
-      parse_checks(e, 'npc', :npc, room)
-      parse_checks(e, 'collectible', :collectible, room)
+      %i[chest special npc collectible].each {|type| parse_checks(e, type, scene_id, name, desc) }
 
       e.xpath('link').each do |link|
-        parse_link(link, room)
+        parse_link(link, name)
       end
 
       if dungeon
-        room.checks.each do |check|
-          dungeon.add_check(check)
-        end
+        dungeon.push(name)
       end
     end
 
-    def parse_checks(e, key, type, room)
-      checks = e.xpath(key)
+    def parse_checks(e, type, scene_id, location, desc)
+      checks = e.xpath(type.to_s)
       checks.each do |check|
-        parse_check(check, type, room)
+        parse_check(check, type, scene_id, location, desc)
       end
     end
 
-    def parse_check(e, type, room)
+    def parse_check(e, type, scene_id, location, desc)
       id = e['id'].to_i(16)
       cond = e['cond']
-      desc = e['desc']
+      desc = desc + [e['desc']]
+      desc = desc.reject(&:nil?)
+      if desc.empty?
+        desc = location.to_s
+      else
+        desc = desc.join(' ')
+      end
       unless cond.nil?
         cond = @expr_builder.parse(cond)
       end
       content = e['content'].to_sym
-      check = WorldGraph::Check.new(type, id, content, cond, desc)
-      room.add_check(check)
+      check = WorldGraph::Check.new(type, id, scene_id, location, content, cond, desc)
+      @checks << check
     end
 
     def parse_link(e, from)
-      to_name = e['to']
+      to = e['to'].to_sym
       cond = e['cond']
       unless cond.nil?
         cond = @expr_builder.parse(cond)
       end
-      to = @graph.get_room(to_name)
-      if to.nil?
-        to = WorldGraph::Room.new(to_name)
-        @graph.add_room(to)
-      end
-      link = WorldGraph::Link.new(to, cond)
-      from.add_link(link)
-      link_reverse = WorldGraph::Link.new(from, cond)
-      to.add_link(link_reverse)
+      @links << WorldGraph::Link.new(from, to, cond)
+      @links << WorldGraph::Link.new(to, from, cond)
+    end
+
+    def graph
+      WorldGraph.new(@checks, @links, @dungeons)
     end
 
     def self.run
