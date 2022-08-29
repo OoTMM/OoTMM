@@ -2,9 +2,12 @@ require 'combo/packer'
 require 'combo/decompressor'
 require 'combo/options'
 require 'combo/custom'
+require 'combo/logic'
 
 module Combo
   def self.run(args)
+    Logic.run
+    exit 1
     case args.first
     when '--generate-custom'
       run_generate_custom()
