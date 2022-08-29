@@ -27,18 +27,8 @@ module Combo::Logic
 
     private
     def eval_impl(*args)
-      # We want to memoize true exprs
-      if @solved
-        SOLVED_VALUE
-      else
-        value = eval_expr(*args)
-        if value.result
-          @solved = true
-          SOLVED_VALUE
-        else
-          value
-        end
-      end
+      # TODO: Memoize again?
+      eval_expr(*args)
     end
   end
 
