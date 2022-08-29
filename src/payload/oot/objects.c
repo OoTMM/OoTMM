@@ -5,12 +5,11 @@
 static u16   sObjectsIds[OBJECT_COUNT];
 static void* sObjectsAddr[OBJECT_COUNT];
 
-void* comboLoadObject(u16 objectId)
+u32 comboLoadObject(void* buffer, u16 objectId)
 {
     u32 vromStart;
     u32 vromEnd;
     const ObjectData* table;
-    void* buffer;
 
     if (objectId & 0x2000)
     {
@@ -29,9 +28,9 @@ void* comboLoadObject(u16 objectId)
     vromStart = table[objectId].vromStart;
     vromEnd = table[objectId].vromEnd;
 
-    buffer = malloc(vromEnd - vromStart);
-    LoadFile(buffer, vromStart, vromEnd - vromStart);
-    return buffer;
+    if (buffer)
+        LoadFile(buffer, vromStart, vromEnd - vromStart);
+    return vromEnd - vromStart;
 }
 
 void* comboGetObject(u16 objectId)
@@ -51,7 +50,9 @@ void* comboGetObject(u16 objectId)
         /* Free slot */
         if (sObjectsIds[i] == 0)
         {
-            addr = comboLoadObject(objectId);
+            size = comboLoadObject(NULL, objectId);
+            addr = malloc(size);
+            comboLoadObject(addr, objectId);
             sObjectsIds[i] = objectId;
             sObjectsAddr[i] = addr;
             return addr;

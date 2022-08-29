@@ -12,7 +12,7 @@ static RemovedActor kRemovedActors[] = {
     { SCE_CASTLE_COURTYARD, 0x0a9 }, /* Zelda Courtyard - Impa */
     { SCE_HYRULE_FIELD, AC_EN_OWL }, /* Hyrule Field - Owl */
     { SCE_HYRULE_CASTLE, AC_EN_OWL }, /* Hyrule Castle - Owl */
-    /*{ SCE_ZORA_RIVER, AC_EN_OWL },*/
+    { SCE_ZORA_RIVER, AC_EN_OWL },
     { SCE_TOMB_ROYAL, 0x12e }, /* Sun Song */
     { SCE_SACRED_FOREST_MEADOW, AC_EN_SA }, /* Saria in meadow */
 };

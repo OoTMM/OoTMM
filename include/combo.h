@@ -22,6 +22,7 @@
 # include <combo/oot/play.h>
 # include <combo/oot/item_etc.h>
 # include <combo/oot/events.h>
+# include <combo/oot/player.h>
 #endif
 
 #if defined(GAME_MM)
@@ -78,8 +79,9 @@ s32 comboProgressiveChestItem(s32 gi);
 void comboSpawnSpecial(GameState_Play* play, float x, float y, float z, u8 specialId, u16 gi);
 
 /* Objects */
-void  comboObjectsReset(void);
-void* comboGetObject(u16 objectId);
+void    comboObjectsReset(void);
+void*   comboGetObject(u16 objectId);
+u32     comboLoadObject(void* buffer, u16 objectId);
 
 /* Draw */
 void comboDrawObject(GameState_Play* play, Actor* actor, u16 objectId, u16 shaderId);
