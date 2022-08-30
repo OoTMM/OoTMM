@@ -1,7 +1,6 @@
 #include <combo.h>
 
 extern void Play_Init(void*);
-extern void comboSwitchToMM(void);
 
 static void debugCheat(GameState_Play* play)
 {

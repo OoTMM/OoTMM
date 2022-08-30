@@ -28,7 +28,7 @@ PATCH_START(0x800903e0)
 
   /* li t4,0x0004 */
 
-  li t4,ENTRANCE_ZWF
+  li t4,ENTRANCE_MIDO
 PATCH_END
 
 /* Hook save creation to create MM save */

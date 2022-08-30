@@ -23,6 +23,7 @@
 # include <combo/oot/item_etc.h>
 # include <combo/oot/events.h>
 # include <combo/oot/player.h>
+# include <combo/oot/actor_item_custom.h>
 #endif
 
 #if defined(GAME_MM)

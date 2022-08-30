@@ -22,7 +22,7 @@ void comboSpawnSpecial(GameState_Play* play, float x, float y, float z, u8 speci
     SpawnActor(
         (char*)play + 0x1c24,
         play,
-        AC_ITEM_ETCETERA,
+        AC_ITEM_CUSTOM,
         x, y, z,
         0, 0, 0x2000 | specialId,
         gi
@@ -44,7 +44,7 @@ Actor* hookSpawnActor(void* const_1, GameState_Play* play, s16 actorId, float x,
     case AC_ITEM00:
         if ((variable & 0xff) == 0x06) /* Heart Piece */
         {
-            actorId = AC_ITEM_ETCETERA;
+            actorId = AC_ITEM_CUSTOM;
             rz = 0x1000 | ((variable >> 8) & 0x3f);
             variable = GI_OOT_HEART_PIECE;
         }
@@ -68,7 +68,7 @@ Actor* hookSpawnActor(void* const_1, GameState_Play* play, s16 actorId, float x,
     case AC_ITEM_B_HEART:
         /* Heart container */
         /* Always use collectible flag 0x1f */
-        actorId = AC_ITEM_ETCETERA;
+        actorId = AC_ITEM_CUSTOM;
         rz = 0x1000 | 0x1f;
         variable = GI_OOT_HEART_CONTAINER2;
         break;
