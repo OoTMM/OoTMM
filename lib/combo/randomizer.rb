@@ -54,6 +54,8 @@ class Combo::Randomizer
       item = :OCARINA_FAIRY
     when :STRENGTH
       item = :GORON_BRACELET
+    when :SCALE
+      item = :SILVER_SCALE
     end
     x = @gi["OOT_#{item}"]
     if x.nil?

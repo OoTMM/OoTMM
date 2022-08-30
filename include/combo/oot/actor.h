@@ -11,6 +11,7 @@
 #define AC_EN_MA1           0xe7
 #define AC_ITEM_ETCETERA    0x10f
 #define AC_BG_SPOT03_TAKI   0x11f
+#define AC_EN_DIVING_GAME   0x124
 #define AC_EN_NIW_LADY      0x13c
 #define AC_EN_SA            0x146
 #define AC_EN_OWL           0x14d
