@@ -91,11 +91,14 @@ module Combo::Logic
     def parse_link(e, from)
       to = e['to'].to_sym
       cond = e['cond']
+      flags = (e['flags'] || "").split(',').map{|x| x.gsub('-', '_').to_sym }
       unless cond.nil?
         cond = @expr_builder.parse(cond)
       end
       @links << WorldGraph::Link.new(from, to, cond)
-      @links << WorldGraph::Link.new(to, from, cond)
+      unless flags.include?(:one_way)
+        @links << WorldGraph::Link.new(to, from, cond)
+      end
     end
 
     def graph

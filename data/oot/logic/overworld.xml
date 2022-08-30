@@ -80,8 +80,14 @@
       <link to="ZoraRiver" cond="has_explosives"/>
     </room>
     <room name="ZoraRiver">
+      <link to="ZoraFountain" cond="can_play(SONG_ZELDA)" flags="one-way"/>
       <collectible id="04" content="HEART_PIECE" desc="Pillar"/>
       <collectible id="0b" content="HEART_PIECE" desc="Waterfall"/>
     </room>
+  </scene>
+  <scene id="59" name="ZoraFountain" desc="Zora Fountain">
+    <link to="ZoraRiver" flags="one-way"/>
+    <chest id="00" content="HEART_PIECE" desc="Waterfall Chest"/>
+    <npc id="03" content="SCALE" desc="Diving Game"/>
   </scene>
 </overworld>

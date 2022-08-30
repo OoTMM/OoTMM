@@ -44,12 +44,17 @@ int comboGiveItem(Actor* actor, GameState_Play* play, s16 itemId, float a, float
     case AC_EN_NIW_LADY:
         if (absItemId == GI_OOT_EMPTY_BOTTLE)
             override = comboGetNpcOverride(0x01);
+        break;
+    case AC_EN_DIVING_GAME:
+        override = comboGetNpcOverride(0x03);
+        break;
     case AC_EN_DU:
         if (absItemId == GI_OOT_GORON_BRACELET)
         {
             override = comboGetNpcOverride(0x02);
             gSave.eventsItem[(EV_ITEM_GORON_BRACELET & 0xf0) >> 4] |= (1 << (EV_ITEM_GORON_BRACELET & 0xf));
         }
+        break;
     }
 
     if (override >= 0)
