@@ -9,6 +9,7 @@
 #define ENTRANCE_GF           0x315
 #define ENTRANCE_ZWF          0x1dd
 #define ENTRANCE_ZRI          0x0ea
+#define ENTRANCE_HYLIA        0x560
 
 /* Disable first cutscene */
 PATCH_START(0x800fbf60)
@@ -28,7 +29,7 @@ PATCH_START(0x800903e0)
 
   /* li t4,0x0004 */
 
-  li t4,ENTRANCE_MIDO
+  li t4,ENTRANCE_HYLIA
 PATCH_END
 
 /* Hook save creation to create MM save */

@@ -72,6 +72,18 @@ Actor* hookSpawnActor(void* const_1, GameState_Play* play, s16 actorId, float x,
         rz = 0x1000 | 0x1f;
         variable = GI_OOT_HEART_CONTAINER2;
         break;
+    case AC_ITEM_ETCETERA:
+        /* Special item */
+        switch (variable & 0xff)
+        {
+        case 0x1:
+            /* Ruto's letter */
+            actorId = AC_ITEM_CUSTOM;
+            rz = 0x2000 | EV_CHK_RUTO_LETTER;
+            variable = GI_OOT_RUTO_LETTER;
+            break;
+        }
+        break;
     }
 
     return SpawnActor(const_1, play, actorId, x, y, z, rx, ry, rz, variable);
