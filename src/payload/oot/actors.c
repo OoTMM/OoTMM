@@ -13,6 +13,7 @@ static RemovedActor kRemovedActors[] = {
     { SCE_HYRULE_FIELD, AC_EN_OWL }, /* Hyrule Field - Owl */
     { SCE_HYRULE_CASTLE, AC_EN_OWL }, /* Hyrule Castle - Owl */
     { SCE_ZORA_RIVER, AC_EN_OWL },
+    { SCE_LOST_WOODS, AC_EN_OWL },
     { SCE_TOMB_ROYAL, 0x12e }, /* Sun Song */
     { SCE_SACRED_FOREST_MEADOW, AC_EN_SA }, /* Saria in meadow */
 };
@@ -62,6 +63,9 @@ Actor* hookSpawnActor(void* const_1, GameState_Play* play, s16 actorId, float x,
             break;
         case SCE_LAIR_KING_DODONGO:
             comboSpawnSpecial(play, x, y, z, EV_CHK_STONE_RUBY, GI_OOT_STONE_RUBY);
+            break;
+        case SCE_LAIR_BARINADE:
+            comboSpawnSpecial(play, x, y, z, EV_CHK_STONE_SAPPHIRE, GI_OOT_STONE_SAPPHIRE);
             break;
         }
         break;

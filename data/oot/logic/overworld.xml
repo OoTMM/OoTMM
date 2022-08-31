@@ -88,11 +88,15 @@
   </scene>
   <scene id="59" name="ZoraDomain" desc="Zora Domain">
     <link to="ZoraRiver" flags="one-way"/>
+    <link to="ZoraFountain" cond="has(RUTO_LETTER)"/>
     <chest id="00" content="HEART_PIECE" desc="Waterfall Chest"/>
     <npc id="03" content="SCALE" desc="Diving Game"/>
   </scene>
   <scene id="57" name="LakeHylia" desc="Lake Hylia">
     <link to="ZoraDomain" cond="has(SCALE)"/>
     <special id="32" content="RUTO_LETTER" cond="has(SCALE)" desc="Underwater Letter"/>
+  </scene>
+  <scene id="59" name="ZoraFountain">
+    <link to="JabuJabu_Entrance" cond="has_bottle and has_weapon_child"/>
   </scene>
 </overworld>

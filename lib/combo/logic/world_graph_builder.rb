@@ -15,6 +15,9 @@ module Combo::Logic
 
     def parse(file)
       xml = Nokogiri::XML(File.read(file)) { |config| config.noblanks }
+      xml.errors.each do |e|
+        raise "XML error: #{e}"
+      end
       parse_root(xml.root)
     end
 

@@ -303,7 +303,7 @@
 #define ITS_OOT_HOOKSHOT        0x09
 #define ITS_OOT_ARROW_ICE       0x0a
 #define ITS_OOT_SPELL_WIND      0x0b
-#define ITS_OOT_BOOMEMERANG     0x0c
+#define ITS_OOT_BOOMERANG       0x0c
 #define ITS_OOT_LENS            0x0d
 #define ITS_OOT_BEANS           0x0e
 #define ITS_OOT_HAMMER          0x0f
