@@ -71,7 +71,17 @@ module Combo::Logic
     def fix_required()
       loop do
         # Propagate and check if everything is reachable
-        @pathfinder.propagate()
+        loop do
+          new_checks = @pathfinder.propagate()
+          new_checks_fixed = false
+          new_checks.each do |c|
+            if @checks_fixed.include?(c)
+              @pathfinder.add_item(c.content)
+              new_checks_fixed = true
+            end
+          end
+          break unless new_checks_fixed
+        end
 
         #p @checks_unreachable
         break if @pathfinder.unreachable.empty?

@@ -4,5 +4,6 @@
   "has_bombflowers": "has_explosives or has(STRENGTH)",
   "has_bottle": "has(EMPTY_BOTTLE) or (has(RUTO_LETTER) and reach(ZoraDomain))",
   "has_ranged_weapon_child": "has(SLINGSHOT) or has(BOOMERANG)",
-  "has_weapon_child": "has(SWORD) or has_ranged_weapon_child"
+  "has_weapon_child": "has(SWORD) or has_ranged_weapon_child",
+  "has_spiritual_stones": "has(STONE_EMERALD) and has(STONE_RUBY) and has(STONE_SAPPHIRE)"
 }

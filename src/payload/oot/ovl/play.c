@@ -28,6 +28,10 @@ static void debugCheat(GameState_Play* play)
         gSave.upgrades.bombBag = 3;
         gSave.quest.songZelda = 1;
         gSave.quest.songSaria = 1;
+
+        gSave.quest.stoneEmerald = 1;
+        gSave.quest.stoneRuby = 1;
+        gSave.quest.stoneSapphire = 1;
     }
 }
 
@@ -131,5 +135,18 @@ void hookPlay_Init(GameState_Play* play)
     if (play->sceneId == SCE_SACRED_FOREST_MEADOW && gSave.age == AGE_CHILD && GetEventChk(EV_CHK_ZELDA_LETTER))
     {
         comboSpawnSpecial(play, 125.f, 500.f, -2970.f, EV_CHK_SONG_SARIA, GI_OOT_SONG_SARIA);
+    }
+
+    /* Skip Zelda's cutscene when having all the spiritual stones */
+    if (gSave.quest.stoneEmerald && gSave.quest.stoneRuby && gSave.quest.stoneSapphire)
+    {
+        SetEventChk(EV_CHK_ZELDA_FLED);
+        SetEventChk(EV_CHK_ZELDA_FLED_BRIDGE);
+
+        if (play->sceneId == SCE_HYRULE_FIELD && gSave.age == AGE_CHILD)
+        {
+            comboSpawnSpecial(play, 299.f, -136.f, 884.f, EV_CHK_OCARINA_OF_TIME, GI_OOT_OCARINA_TIME);
+            comboSpawnSpecial(play, 499.f, -136.f, 884.f, EV_CHK_SONG_TIME, GI_OOT_SONG_TIME);
+        }
     }
 }

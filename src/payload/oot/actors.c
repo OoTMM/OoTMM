@@ -16,6 +16,7 @@ static RemovedActor kRemovedActors[] = {
     { SCE_LOST_WOODS, AC_EN_OWL },
     { SCE_TOMB_ROYAL, 0x12e }, /* Sun Song */
     { SCE_SACRED_FOREST_MEADOW, AC_EN_SA }, /* Saria in meadow */
+    { SCE_HYRULE_FIELD, AC_ITEM_OCARINA },
 };
 
 void comboSpawnSpecial(GameState_Play* play, float x, float y, float z, u8 specialId, u16 gi)

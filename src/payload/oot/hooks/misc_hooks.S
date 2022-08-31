@@ -12,6 +12,7 @@
 #define ENTRANCE_HYLIA        0x560
 #define ENTRANCE_ZD           0x108
 #define ENTRANCE_BOSS3        0x301
+#define ENTRANCE_HYRULE       0x17d
 
 /* Disable first cutscene */
 PATCH_START(0x800fbf60)
@@ -24,7 +25,7 @@ PATCH_END
 
 /* Spawn child link at a specific entrance */
 PATCH_START(0x800903e0)
-  li t4,ENTRANCE_BOSS3
+  li t4,ENTRANCE_HYRULE
 PATCH_END
 
 /* Hook save creation to create MM save */

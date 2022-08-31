@@ -32,6 +32,8 @@
     <link to="Kakariko"/>
     <link to="ZoraRiver_Entrance"/>
     <link to="LakeHylia"/>
+    <special id="43" content="OCARINA" cond="has_spiritual_stones"/>
+    <special id="a9" content="SONG_TIME" cond="has_spiritual_stones"/>
   </scene>
   <scene id="20" name="Hyrule_Market">
     <link to="Hyrule_Castle"/>

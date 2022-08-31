@@ -13,9 +13,13 @@
 #define EV_CHK_RUTO_LETTER              0x32
 #define EV_CHK_STONE_SAPPHIRE           0x37
 #define EV_CHK_ZELDA_LETTER             0x40
+#define EV_CHK_OCARINA_OF_TIME          0x43
 #define EV_CHK_SONG_ZELDA               0x59
 #define EV_CHK_SONG_SUN                 0x5a
 #define EV_CHK_SONG_STORMS              0x5b
+#define EV_CHK_ZELDA_FLED               0x80
+#define EV_CHK_ZELDA_FLED_BRIDGE        0x82
+#define EV_CHK_SONG_TIME                0xa9
 #define EV_CHK_SARIA_OCARINA            0xc1
 
 /* Custom flags that seems unused */
