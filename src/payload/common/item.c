@@ -80,6 +80,16 @@ static void addItemOotBombchus(u8 count)
     addOotAmmo(ITEM_OOT_BOMBCHU_10, 50, count);
 }
 
+static void addItemOotNewBottle(u16 itemId)
+{
+    for (int i = 0; i < 4; ++i)
+    {
+        if (gOotSave.inventory[ITS_OOT_BOTTLE + i] == ITEM_NONE)
+            gOotSave.inventory[ITS_OOT_BOTTLE + i] = itemId;
+            return;
+    }
+}
+
 /* Also Bomb Bag 1 */
 static void addItemOotInventory(u16 itemId)
 {
@@ -175,6 +185,10 @@ static void addItemOotInventory(u16 itemId)
     case ITEM_OOT_LONGSHOT:
         gOotSave.inventory[ITS_OOT_HOOKSHOT] = ITEM_OOT_LONGSHOT;
         gComboSave.ootHookshots |= 0x2;
+        break;
+    case ITEM_OOT_EMPTY_BOTTLE:
+    case ITEM_OOT_RUTO_LETTER:
+        addItemOotNewBottle(itemId);
         break;
     }
 }

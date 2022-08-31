@@ -13,8 +13,10 @@ static RemovedActor kRemovedActors[] = {
     { SCE_HYRULE_FIELD, AC_EN_OWL }, /* Hyrule Field - Owl */
     { SCE_HYRULE_CASTLE, AC_EN_OWL }, /* Hyrule Castle - Owl */
     { SCE_ZORA_RIVER, AC_EN_OWL },
+    { SCE_LOST_WOODS, AC_EN_OWL },
     { SCE_TOMB_ROYAL, 0x12e }, /* Sun Song */
     { SCE_SACRED_FOREST_MEADOW, AC_EN_SA }, /* Saria in meadow */
+    { SCE_HYRULE_FIELD, AC_ITEM_OCARINA },
 };
 
 void comboSpawnSpecial(GameState_Play* play, float x, float y, float z, u8 specialId, u16 gi)
@@ -63,6 +65,9 @@ Actor* hookSpawnActor(void* const_1, GameState_Play* play, s16 actorId, float x,
         case SCE_LAIR_KING_DODONGO:
             comboSpawnSpecial(play, x, y, z, EV_CHK_STONE_RUBY, GI_OOT_STONE_RUBY);
             break;
+        case SCE_LAIR_BARINADE:
+            comboSpawnSpecial(play, x, y, z, EV_CHK_STONE_SAPPHIRE, GI_OOT_STONE_SAPPHIRE);
+            break;
         }
         break;
     case AC_ITEM_B_HEART:
@@ -71,6 +76,18 @@ Actor* hookSpawnActor(void* const_1, GameState_Play* play, s16 actorId, float x,
         actorId = AC_ITEM_CUSTOM;
         rz = 0x1000 | 0x1f;
         variable = GI_OOT_HEART_CONTAINER2;
+        break;
+    case AC_ITEM_ETCETERA:
+        /* Special item */
+        switch (variable & 0xff)
+        {
+        case 0x1:
+            /* Ruto's letter */
+            actorId = AC_ITEM_CUSTOM;
+            rz = 0x2000 | EV_CHK_RUTO_LETTER;
+            variable = GI_OOT_RUTO_LETTER;
+            break;
+        }
         break;
     }
 

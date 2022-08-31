@@ -103,6 +103,8 @@ static void ItemCustom_Update(Actor_ItemCustom* item, GameState_Play* play)
         case 0x2:
             /* Special */
             SetEventChk(item->flag);
+            if (item->flag == EV_CHK_RUTO_LETTER)
+                SetSwitchFlag(play, 0xb);
             break;
         }
         ActorDestroy(&item->base);

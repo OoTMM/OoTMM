@@ -3,13 +3,14 @@
 
 #include <combo/types.h>
 
-#define AC_ITEM_CUSTOM      0x01
-#define AC_EN_BOX           0x0a
-#define AC_ITEM00           0x15
-#define AC_DOOR_WARP1       0x5d
-#define AC_ITEM_B_HEART     0x5f
-#define AC_EN_DU            0x98
-#define AC_EN_MA1           0xe7
+#define AC_ITEM_CUSTOM      0x001
+#define AC_EN_BOX           0x00a
+#define AC_ITEM00           0x015
+#define AC_DOOR_WARP1       0x05d
+#define AC_ITEM_B_HEART     0x05f
+#define AC_EN_DU            0x098
+#define AC_EN_MA1           0x0e7
+#define AC_ITEM_OCARINA     0x0f1
 #define AC_ITEM_ETCETERA    0x10f
 #define AC_BG_SPOT03_TAKI   0x11f
 #define AC_EN_DIVING_GAME   0x124
