@@ -13,7 +13,7 @@ PATCH_END
 
 /* Disable bounds check on gi */
 PATCH_START(0x8083c6c0)
-  li at,1
+  xori at,v0,0x7e
 PATCH_END
 
 /* Use out extended table */

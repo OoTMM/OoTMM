@@ -10,6 +10,7 @@
 #define ENTRANCE_ZWF          0x1dd
 #define ENTRANCE_ZRI          0x0ea
 #define ENTRANCE_HYLIA        0x560
+#define ENTRANCE_ZD           0x108
 
 /* Disable first cutscene */
 PATCH_START(0x800fbf60)
@@ -20,16 +21,9 @@ PATCH_START(0x80090c58)
 li t9, 0x0
 PATCH_END
 
-/* Spawn child link at Mask shop */
-/* DEBUG: Mido house */
+/* Spawn child link at a specific entrance */
 PATCH_START(0x800903e0)
-  /* li t4,0x1d1*/
-  /*li t4,0x433*/
-  /*li t4,0x400*/
-
-  /* li t4,0x0004 */
-
-  li t4,ENTRANCE_HYLIA
+  li t4,ENTRANCE_MIDO
 PATCH_END
 
 /* Hook save creation to create MM save */

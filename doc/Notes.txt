@@ -1,3 +1,5 @@
+GI 0x7e: Bug, Fish, Fairy, Maybe blue fire?
+
 NPC override IDs:
 
 00 Malon, Weird Egg (Chicken)
