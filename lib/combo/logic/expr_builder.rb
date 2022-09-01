@@ -1,5 +1,6 @@
 require 'json'
 require 'combo/logic/expr'
+require 'combo/logic/util'
 
 module Combo::Logic
   TOKENS = {
@@ -32,7 +33,8 @@ module Combo::Logic
       end
     end
 
-    def initialize
+    def initialize(game)
+      @game = game
       @macros = {}
       @contexts = []
     end
@@ -102,7 +104,7 @@ module Combo::Logic
     def parse_expr_has
       return nil unless accept("has")
       expect(:lparen)
-      item = expect(:id)
+      item = Util.game_id(@game, expect(:id))
       expect(:rparen)
       ExprHas.new(item)
     end

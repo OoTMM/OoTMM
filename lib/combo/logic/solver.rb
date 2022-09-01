@@ -149,7 +149,7 @@ module Combo::Logic
 
     def export_data
       @graph.checks.map do |check|
-        [check.type, check.scene_id, check.id, check.content]
+        [check.game, check.type, check.scene_id, check.id, check.content]
       end
     end
 

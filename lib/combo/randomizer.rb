@@ -6,7 +6,7 @@ class Combo::Randomizer
   def initialize
     gi_header = File.read(File.join(Combo::ROOT, 'include', 'combo', 'gi.h'))
     @gi = gi_header.scan(/^#define\s+GI_([A-Z0-9_]+)\s+(.+)$/).map{ |m|
-      [m[0], Integer(m[1])]
+      [m[0].to_sym, Integer(m[1])]
     }.to_h.freeze
   end
 
@@ -15,8 +15,8 @@ class Combo::Randomizer
 
     data = ("\xff" * 0x20000).force_encoding('ASCII-8BIT')
 
-    oot = overrides(rando)
-    mm = random_block(:mm)
+    oot = overrides(:oot, rando)
+    mm = overrides(:mm, rando)
     data[0x1000, oot.length] = oot
     data[0x2000, mm.length] = mm
 
@@ -44,32 +44,41 @@ class Combo::Randomizer
     data
   end
 
-  def get_item(item)
+  def foreign_item?(game, item)
+    prefix = game.to_s.upcase
+    !item.to_s.start_with?(prefix)
+  end
+
+  def get_item(game, item)
     case item
-    when :SWORD
-      item = :SWORD_KOKIRI
-    when :SHIELD
-      item = :DEKU_SHIELD
-    when :OCARINA
-      item = :OCARINA_FAIRY
-    when :STRENGTH
-      item = :GORON_BRACELET
-    when :SCALE
-      item = :SILVER_SCALE
+    when :OOT_SWORD
+      item = :OOT_SWORD_KOKIRI
+    when :OOT_SHIELD
+      item = :OOT_DEKU_SHIELD
+    when :OOT_OCARINA
+      item = :OOT_OCARINA_FAIRY
+    when :OOT_STRENGTH
+      item = :OOT_GORON_BRACELET
+    when :OOT_SCALE
+      item = :OOT_SILVER_SCALE
     end
-    x = @gi["OOT_#{item}"]
+    x = @gi[item]
     if x.nil?
       raise "Unknown GI item: #{item}"
+    end
+    if foreign_item?(game, item)
+      x |= 0x100
     end
     x
   end
 
-  def overrides(rando)
+  def overrides(game, rando)
     data = []
     rando.data.each do |override|
-      type = override[0]
-      scene_id = override[1]
-      id = override[2]
+      next if override[0] != game
+      type = override[1]
+      scene_id = override[2]
+      id = override[3]
       case type
       when :special
         scene_id = 0xf0
@@ -78,9 +87,9 @@ class Combo::Randomizer
       when :collectible
         id |= 0x20
       end
-      content = override[3]
+      content = override[4]
       key = (scene_id << 8) | id
-      gi = get_item(content)
+      gi = get_item(game, content)
       data << [key, gi].pack('S>2')
     end
     data.join('')

@@ -20,5 +20,9 @@ module Combo::Logic
       end
       h
     end
+
+    def self.game_id(game, id)
+      [game.to_s.upcase, id].join('_').to_sym
+    end
   end
 end
