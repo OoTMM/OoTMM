@@ -25,3 +25,17 @@ const GetItem kExtendedGetItems[] = {
 #undef Y
 #undef Z
 };
+
+void comboLoadObjectGi(Actor_Player* player, u16 objectId)
+{
+    if (objectId)
+    {
+        /* Unsure what this does */
+        /* OoT: *((u8*)player + 0x160) = 1; */
+        /* MM: *((u8*)player + 0x1b8) = 1; */
+
+        osCreateMesgQueue(&player->objMsgQueue, &player->objMsg, 1);
+        comboLoadObject(player->objBuffer, objectId);
+        osSendMesg(&player->objMsgQueue, NULL, OS_MESG_NOBLOCK);
+    }
+}

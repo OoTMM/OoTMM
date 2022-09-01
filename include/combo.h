@@ -30,6 +30,7 @@
 # include <combo/mm/scene.h>
 # include <combo/mm/actor.h>
 # include <combo/mm/play.h>
+# include <combo/mm/player.h>
 #endif
 
 # include <combo/common/api.h>

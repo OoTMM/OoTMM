@@ -55,3 +55,5 @@ PreDraw2 = 0x800b8118;
 
 LoadFile = 0x80080c90;
 malloc = 0x80102c60;
+
+LoadObjectGi = 0x80838830;
