@@ -83,7 +83,6 @@ void zeroComboSaveData(void)
 
 void comboCreateSaveMM(void)
 {
-    u32 base;
     bzero(&gMmSave, sizeof(MmSave));
 
     /* Create some save data */

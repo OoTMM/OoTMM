@@ -10,7 +10,7 @@ endif
 
 CFLAGS 		:= -EB -ffreestanding -nostdlib -fno-PIC -mabi=32 -mno-shared -mno-abicalls \
 			   -march=vr4300 -mtune=vr4300 -mfix4300 -G 0 -Os \
-			   -Werror=implicit-function-declaration -Werror=implicit-int -Wno-missing-braces \
+			   -Wall -Werror=implicit-function-declaration -Werror=implicit-int \
 			   -isystem third_party/ultralib/include -isystem third_party/ultralib/include/gcc -Iinclude -Ibuild/include \
 			    -MMD -MP \
 			   -DF3DEX_GBI_2=1

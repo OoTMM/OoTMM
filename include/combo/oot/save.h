@@ -78,7 +78,7 @@ typedef struct PACKED ALIGNED(4)
     char                    unk_14[0x8];
     char                    newf[6];
     s16                     deathCount;
-    char                    playerName[8];
+    u8                      playerName[8];
     s16                     ddOnlyFlag;
     s16                     healthMax;
     s16                     health;

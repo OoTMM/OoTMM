@@ -26,8 +26,6 @@ static void flashWait(void)
 
 static void readFlash(u32 devAddr, void* dramAddr, u32 size)
 {
-    OSMesg msg;
-
     /* Set the flash to read mode */
     osEPiWriteIo((void*)&__osPiTable, FLASH_ADDR_COMMAND, FLASH_CMD_READ);
     flashWait();
@@ -45,9 +43,6 @@ static void readFlash(u32 devAddr, void* dramAddr, u32 size)
 
 static void writeFlashBlock(u32 blockId, void* data)
 {
-    OSMesg msg;
-    u32 tmp;
-
     /* Set the flash to write mode */
     osEPiWriteIo((void*)&__osPiTable, FLASH_ADDR_COMMAND, FLASH_CMD_WRITE);
     flashWait();

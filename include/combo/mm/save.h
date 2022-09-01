@@ -7,7 +7,7 @@ typedef struct PACKED
 {
     char    newf[6];
     u16     deaths;
-    char    playerName[8];
+    u8      playerName[8];
     s16     healthCapacity;
     s16     health;
     s8      magicLevel;
