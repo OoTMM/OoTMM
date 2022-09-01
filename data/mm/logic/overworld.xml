@@ -1,3 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <overworld>
+  <scene id="6f" name="ClockTown_South">
+    <link to="ClockTown_East"/>
+    <link to="ClockTown_West"/>
+    <link to="ClockTown_North"/>
+    <link to="ClockTown_LaundryPool"/>
+  </scene>
+  <scene id="6c" name="ClockTown_East">
+    <chest id="0a" content="RUPEE_SILVER"/>
+  </scene>
+  <scene id="6d" name="ClockTown_West">
+  </scene>
+  <scene id="6e" name="ClockTown_North">
+  </scene>
+  <scene id="70" name="ClockTown_LaundryPool">
+  </scene>
 </overworld>

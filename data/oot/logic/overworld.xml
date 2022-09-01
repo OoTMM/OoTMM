@@ -37,6 +37,7 @@
   </scene>
   <scene id="20" name="Hyrule_Market">
     <link to="Hyrule_Castle"/>
+    <link to="ClockTown_South"/>
   </scene>
   <scene id="5f" name="Hyrule_Castle" desc="Hyrule Castle">
     <npc id="00" content="CHICKEN" desc="Malon"/>

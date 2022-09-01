@@ -116,20 +116,20 @@ module Combo::Logic
     end
 
     def dungeon_item?(check)
-      [:MAP, :COMPASS, :KEY_SMALL, :KEY_BOSS].include?(check.content)
+      [:OOT_MAP, :OOT_COMPASS, :OOT_KEY_SMALL, :OOT_KEY_BOSS].include?(check.content)
     end
 
     def goal_item?(check)
       %i[
-        STONE_EMERALD
-        STONE_RUBY
-        STONE_SAPPHIRE
-        MEDALLION_FOREST
-        MEDALLION_FIRE
-        MEDALLION_WATER
-        MEDALLION_SPIRIT
-        MEDALLION_SHADOW
-        MEDALLION_LIGHT
+        OOT_STONE_EMERALD
+        OOT_STONE_RUBY
+        OOT_STONE_SAPPHIRE
+        OOT_MEDALLION_FOREST
+        OOT_MEDALLION_FIRE
+        OOT_MEDALLION_WATER
+        OOT_MEDALLION_SPIRIT
+        OOT_MEDALLION_SHADOW
+        OOT_MEDALLION_LIGHT
       ].include?(check.content)
     end
 
