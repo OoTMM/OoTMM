@@ -24,6 +24,8 @@ const ObjectData kExtraObjectsTable[] = {
 
 ObjectData kCustomObjectsTable[CUSTOM_OBJECTS_SIZE];
 
+void comboPatchForeignObject(void* buffer, u16 objectId);
+
 void comboInitObjects(void)
 {
     comboDma(kCustomObjectsTable, CUSTOM_OBJECTS_ADDR, CUSTOM_OBJECTS_SIZE * sizeof(ObjectData));
@@ -34,7 +36,9 @@ u32 comboLoadObject(void* buffer, u16 objectId)
     u32 vromStart;
     u32 vromEnd;
     const ObjectData* table;
+    int isForeignObject;
 
+    isForeignObject = 0;
     if (objectId & 0x2000)
     {
         table = kCustomObjectsTable;
@@ -42,6 +46,7 @@ u32 comboLoadObject(void* buffer, u16 objectId)
     else if (objectId & 0x1000)
     {
         table = kExtraObjectsTable;
+        isForeignObject = 1;
     }
     else
     {
@@ -53,7 +58,11 @@ u32 comboLoadObject(void* buffer, u16 objectId)
     vromEnd = table[objectId].vromEnd;
 
     if (buffer)
+    {
         LoadFile(buffer, vromStart, vromEnd - vromStart);
+        if (isForeignObject)
+            comboPatchForeignObject(buffer, objectId);
+    }
     return vromEnd - vromStart;
 }
 
