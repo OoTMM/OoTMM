@@ -10,6 +10,11 @@ PATCH_START(0x8083c6c0)
   xori at,v0,0x7e
 PATCH_END
 
+/* Disable the blue rupee fallback */
+PATCH_START(0x8083c824)
+  move at,a0
+PATCH_END
+
 /* Use out extended table */
 /* TODO: Handle dynamic green rupee */
 PATCH_REL_HILO(kExtendedGetItems)

@@ -235,6 +235,8 @@
 #define ITEM_MM_BOMB_BAG                    0x56
 #define ITEM_MM_BOMB_BAG2                   0x57
 #define ITEM_MM_BOMB_BAG3                   0x58
+#define ITEM_MM_WALLET2                     0x5a
+#define ITEM_MM_WALLET3                     0x5b
 #define ITEM_MM_REMAINS_ODALWA              0x5d
 #define ITEM_MM_REMAINS_GOHT                0x5e
 #define ITEM_MM_REMAINS_GYORG               0x5f

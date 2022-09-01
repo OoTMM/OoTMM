@@ -14,6 +14,13 @@ extern const ObjectData kObjectsTable[];
 extern const ObjectData kExtraObjectsTable[];
 extern ObjectData kCustomObjectsTable[];
 
+typedef struct
+{
+    u16 objectId;
+    u16 offsets[8];
+}
+ObjectPatch;
+
 #define OBJ_OOT_GI_KEY              0x0aa
 #define OBJ_OOT_GI_JEWEL            0x0ad
 #define OBJ_OOT_GI_MELODY           0x0b6
@@ -57,6 +64,7 @@ extern ObjectData kCustomObjectsTable[];
 #define OBJ_OOT_GI_LONGSWORD        0x0f8
 #define OBJ_OOT_GI_NIWATORI         0x109
 #define OBJ_OOT_GI_BOTTLE_LETTER    0x10b
+#define OBJ_OOT_GI_OCARINA_0        0x10e
 #define OBJ_OOT_GI_BOOTS_2          0x118
 #define OBJ_OOT_GI_SEED             0x119
 #define OBJ_OOT_GI_GLOVES           0x12d
