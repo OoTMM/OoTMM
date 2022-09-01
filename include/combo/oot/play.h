@@ -76,9 +76,4 @@ u32  SetSwitchFlag(GameState_Play* play, int flag);
 
 int GiveItem(Actor* actor, GameState_Play* play, s16 itemId, float a, float b);
 
-void LoadFile(void* dst, u32 vromAddr, u32 size);
-
-void PreDraw1(Actor* actor, GameState_Play* play, int unk);
-void PreDraw2(Actor* actor, GameState_Play* play, int unk);
-
 #endif

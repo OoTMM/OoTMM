@@ -1,11 +1,5 @@
 #include <combo/asm.h>
 
-/* Hook LoadObjectGi */
-PATCH_START(0x80838830)
-  j hook_LoadObjectGi
-   nop
-PATCH_END
-
 /* Use out extended table */
 PATCH_REL_HILO(kExtendedGetItems)
 .int 0x8082ece4
