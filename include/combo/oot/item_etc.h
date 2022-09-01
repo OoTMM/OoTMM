@@ -1,7 +1,7 @@
 #ifndef COMBO_OOT_ITEM_ETC_H
 #define COMBO_OOT_ITEM_ETC_H
 
-#include <combo/oot/actor.h>
+#include <combo/common/actor.h>
 
 typedef struct Actor_ItemEtcetera Actor_ItemEtcetera;
 
@@ -22,4 +22,3 @@ struct PACKED ALIGNED(0x4) Actor_ItemEtcetera
 _Static_assert(sizeof(Actor_ItemEtcetera) == 0x150, "OoT Actor_ItemEtcetera size is wrong");
 
 #endif
-

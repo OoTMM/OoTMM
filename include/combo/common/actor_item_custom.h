@@ -1,7 +1,7 @@
 #ifndef COMBO_OOT_ACTOR_ITEM_CUSTOM_H
 #define COMBO_OOT_ACTOR_ITEM_CUSTOM_H
 
-#include <combo/oot/actor.h>
+#include <combo/common/actor.h>
 
 typedef struct
 {

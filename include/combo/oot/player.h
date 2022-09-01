@@ -2,7 +2,7 @@
 #define COMBO_OOT_PLAYER_H
 
 #include <ultra64.h>
-#include <combo/oot/actor.h>
+#include <combo/common/actor.h>
 
 typedef struct PACKED ALIGNED(4)
 {

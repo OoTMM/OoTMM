@@ -115,38 +115,38 @@ void hookPlay_Init(GameState_Play* play)
     /* Saria's Ocarina Check */
     if (gSave.entrance == 0x05e0 || gSave.entrance == 0x04de)
     {
-        comboSpawnSpecial(play, -1191.f, -220.f, 1650.f, EV_CHK_SARIA_OCARINA, GI_OOT_OCARINA_FAIRY);
+        comboSpawnSpecial(play, -1191.f, -220.f, 1650.f, EV_OOT_CHK_SARIA_OCARINA, GI_OOT_OCARINA_FAIRY);
     }
 
     /* Child Zelda checks */
     if (play->sceneId == SCE_CASTLE_COURTYARD)
     {
-        comboSpawnSpecial(play, -460.f, 84.f,  40.f, EV_CHK_ZELDA_LETTER, GI_OOT_ZELDA_LETTER);
-        comboSpawnSpecial(play, -460.f, 84.f, -40.f, EV_CHK_SONG_ZELDA, GI_OOT_SONG_ZELDA);
+        comboSpawnSpecial(play, -460.f, 84.f,  40.f, EV_OOT_CHK_ZELDA_LETTER, GI_OOT_ZELDA_LETTER);
+        comboSpawnSpecial(play, -460.f, 84.f, -40.f, EV_OOT_CHK_SONG_ZELDA, GI_OOT_SONG_ZELDA);
     }
 
     /* Sun Song */
     if (play->sceneId == SCE_TOMB_ROYAL)
     {
-        comboSpawnSpecial(play, 0.f, 70.f, -1160.f, EV_CHK_SONG_SUN, GI_OOT_SONG_SUN);
+        comboSpawnSpecial(play, 0.f, 70.f, -1160.f, EV_OOT_CHK_SONG_SUN, GI_OOT_SONG_SUN);
     }
 
     /* Saria's Song */
-    if (play->sceneId == SCE_SACRED_FOREST_MEADOW && gSave.age == AGE_CHILD && GetEventChk(EV_CHK_ZELDA_LETTER))
+    if (play->sceneId == SCE_SACRED_FOREST_MEADOW && gSave.age == AGE_CHILD && GetEventChk(EV_OOT_CHK_ZELDA_LETTER))
     {
-        comboSpawnSpecial(play, 125.f, 500.f, -2970.f, EV_CHK_SONG_SARIA, GI_OOT_SONG_SARIA);
+        comboSpawnSpecial(play, 125.f, 500.f, -2970.f, EV_OOT_CHK_SONG_SARIA, GI_OOT_SONG_SARIA);
     }
 
     /* Skip Zelda's cutscene when having all the spiritual stones */
     if (gSave.quest.stoneEmerald && gSave.quest.stoneRuby && gSave.quest.stoneSapphire)
     {
-        SetEventChk(EV_CHK_ZELDA_FLED);
-        SetEventChk(EV_CHK_ZELDA_FLED_BRIDGE);
+        SetEventChk(EV_OOT_CHK_ZELDA_FLED);
+        SetEventChk(EV_OOT_CHK_ZELDA_FLED_BRIDGE);
 
         if (play->sceneId == SCE_HYRULE_FIELD && gSave.age == AGE_CHILD)
         {
-            comboSpawnSpecial(play, 299.f, -136.f, 884.f, EV_CHK_OCARINA_OF_TIME, GI_OOT_OCARINA_TIME);
-            comboSpawnSpecial(play, 499.f, -136.f, 884.f, EV_CHK_SONG_TIME, GI_OOT_SONG_TIME);
+            comboSpawnSpecial(play, 299.f, -136.f, 884.f, EV_OOT_CHK_OCARINA_OF_TIME, GI_OOT_OCARINA_TIME);
+            comboSpawnSpecial(play, 499.f, -136.f, 884.f, EV_OOT_CHK_SONG_TIME, GI_OOT_SONG_TIME);
         }
     }
 }

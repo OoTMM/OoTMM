@@ -15,6 +15,7 @@ GameState_Play;
 
 _Static_assert(sizeof(GameState_Play) == 0x19258, "MM GameState_Play size is wrong");
 
+typedef struct Actor Actor;
 int GiveItem(Actor* actor, GameState_Play* play, s16 itemId, float a, float b);
 
 #endif

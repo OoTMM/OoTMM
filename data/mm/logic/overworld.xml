@@ -5,6 +5,7 @@
     <link to="ClockTown_West"/>
     <link to="ClockTown_North"/>
     <link to="ClockTown_LaundryPool"/>
+    <collectible id="0a" content="HEART_PIECE"/>
   </scene>
   <scene id="6c" name="ClockTown_East">
     <chest id="0a" content="RUPEE_SILVER"/>

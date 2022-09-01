@@ -1,7 +1,5 @@
 #include <combo.h>
 
-void ActorSetScale(Actor* actor, float scale);
-
 static int shouldSpawn(Actor_ItemCustom* item, GameState_Play* play)
 {
     switch (item->type)
@@ -11,11 +9,13 @@ static int shouldSpawn(Actor_ItemCustom* item, GameState_Play* play)
         if (GetCollectibleFlag(play, item->flag))
             return 0;
         break;
+#if defined(GAME_OOT)
     case 0x2:
         /* Special */
         if (GetEventChk(item->flag))
             return 0;
         break;
+#endif
     }
     return 1;
 }
@@ -46,10 +46,12 @@ static void ItemCustom_Init(Actor_ItemCustom* item, GameState_Play* play)
         /* Collectible */
         override = comboGetCollectibleOverride(play->sceneId, item->flag);
         break;
+#if defined(GAME_OOT)
     case 0x2:
         /* Special */
         override = comboGetSpecialOverride(item->flag);
         break;
+#endif
     }
     if (override >= 0)
         item->gi = override;
@@ -81,11 +83,13 @@ static void ItemCustom_Update(Actor_ItemCustom* item, GameState_Play* play)
             /* For quest items, we need a larger radius */
             switch (item->flag & 0xff)
             {
-            case EV_CHK_STONE_EMERALD:
-            case EV_CHK_STONE_RUBY:
-            case EV_CHK_STONE_SAPPHIRE:
+#if defined(GAME_OOT)
+            case EV_OOT_CHK_STONE_EMERALD:
+            case EV_OOT_CHK_STONE_RUBY:
+            case EV_OOT_CHK_STONE_SAPPHIRE:
                 rangeScale = 3.25f;
                 break;
+#endif
             }
         }
 
@@ -99,11 +103,13 @@ static void ItemCustom_Update(Actor_ItemCustom* item, GameState_Play* play)
             /* Collectible */
             SetCollectibleFlag(play, item->flag);
             break;
+#if defined(GAME_OOT)
         case 0x2:
             /* Special */
             SetEventChk(item->flag);
-            if (item->flag == EV_CHK_RUTO_LETTER)
+            if (item->flag == EV_OOT_CHK_RUTO_LETTER)
                 SetSwitchFlag(play, 0xb);
+#endif
             break;
         }
         ActorDestroy(&item->base);

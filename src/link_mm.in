@@ -57,3 +57,12 @@ LoadFile = 0x80080c90;
 malloc = 0x80102c60;
 
 LoadObjectGi = 0x80838830;
+
+ActorSetScale = 0x800b67e0;
+HasActorGivenItem = 0x800b89f8;
+ActorDestroy = 0x800b670c;
+
+SetCollectibleFlag = 0x800b5db0;
+GetCollectibleFlag = 0x800b5d6c;
+
+SpawnActorEx = 0x800bae14;
