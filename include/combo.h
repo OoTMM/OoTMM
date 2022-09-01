@@ -32,6 +32,8 @@
 # include <combo/mm/play.h>
 #endif
 
+# include <combo/common/api.h>
+
 void comboDisableInterrupts(void);
 void comboDma(void* addr, u32 cartAddr, u32 size);
 void comboDma_NoCacheInval(void* addr, u32 cartAddr, u32 size);

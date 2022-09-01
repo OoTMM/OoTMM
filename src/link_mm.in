@@ -52,3 +52,6 @@ GetSegment      = 0x8012cbd0;
 
 PreDraw1 = 0x800b8050;
 PreDraw2 = 0x800b8118;
+
+LoadFile = 0x80080c90;
+malloc = 0x80102c60;
