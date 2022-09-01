@@ -23,7 +23,6 @@
 # include <combo/oot/item_etc.h>
 # include <combo/oot/events.h>
 # include <combo/oot/player.h>
-# include <combo/oot/actor_item_custom.h>
 #endif
 
 #if defined(GAME_MM)
@@ -33,7 +32,9 @@
 # include <combo/mm/player.h>
 #endif
 
-# include <combo/common/api.h>
+#include <combo/common/actor_init.h>
+#include <combo/common/actor_item_custom.h>
+#include <combo/common/api.h>
 
 void comboDisableInterrupts(void);
 void comboDma(void* addr, u32 cartAddr, u32 size);

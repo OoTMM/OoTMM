@@ -20,7 +20,7 @@
 
 typedef struct GameState_Play GameState_Play;
 
-typedef struct PACKED ALIGNED(0x4)
+typedef struct PACKED ALIGNED(0x4) Actor
 {
     u16         id;
     u8          type;
@@ -44,24 +44,7 @@ typedef struct PACKED ALIGNED(0x4)
 }
 Actor;
 
-typedef void (*ActorFunc)(Actor*, GameState_Play*);
-
-typedef struct
-{
-    s16         id;
-    u8          type;
-    s32         flags;
-    s16         objectId;
-    s32         instanceSize;
-    ActorFunc   init;
-    ActorFunc   fini;
-    ActorFunc   update;
-    ActorFunc   draw;
-}
-ActorInit;
-
 _Static_assert(sizeof(Actor) == 0x13c, "OoT Actor size is wrong");
-_Static_assert(sizeof(ActorInit) == 0x20, "OoT ActorInit size is wrong");
 
 Actor* SpawnActor(void* const_1, GameState_Play* play, s16 actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable);
 void   ActorDestroy(Actor* actor);

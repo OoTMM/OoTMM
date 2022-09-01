@@ -3,9 +3,10 @@
 
 #include <combo/types.h>
 
-#define AC_EN_BOX 0x006
+#define AC_EN_BOX       0x006
+#define AC_ITEM_CUSTOM  0x013
 
-typedef struct PACKED ALIGNED(0x4)
+typedef struct PACKED ALIGNED(0x4) Actor
 {
     u16     id;
     u8      type;
