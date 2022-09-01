@@ -18,20 +18,19 @@
 
 #if defined(GAME_OOT)
 # include <combo/oot/scene.h>
-# include <combo/oot/actor.h>
 # include <combo/oot/play.h>
 # include <combo/oot/item_etc.h>
-# include <combo/oot/events.h>
 # include <combo/oot/player.h>
 #endif
 
 #if defined(GAME_MM)
 # include <combo/mm/scene.h>
-# include <combo/mm/actor.h>
 # include <combo/mm/play.h>
 # include <combo/mm/player.h>
 #endif
 
+#include <combo/common/actor.h>
+#include <combo/common/events.h>
 #include <combo/common/actor_init.h>
 #include <combo/common/actor_item_custom.h>
 #include <combo/common/api.h>
@@ -91,5 +90,8 @@ u32     comboLoadObject(void* buffer, u16 objectId);
 
 /* Draw */
 void comboDrawObject(GameState_Play* play, Actor* actor, u16 objectId, u16 shaderId);
+
+/* Event */
+void comboOotSetEventChk(u16 flag);
 
 #endif /* COMBO_COMBO_H */

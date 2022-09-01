@@ -56,17 +56,17 @@ Actor* hookSpawnActor(void* const_1, GameState_Play* play, s16 actorId, float x,
         switch (play->sceneId)
         {
         case SCE_LAIR_GOHMA:
-            comboSpawnSpecial(play, x, y, z, EV_CHK_STONE_EMERALD, GI_OOT_STONE_EMERALD);
-            SetEventChk(EV_CHK_EMERALD_TREE_DEAD);
-            SetEventChk(EV_CHK_GOHMA);
-            SetEventChk(EV_CHK_TREE_DEAD);
-            SetEventChk(EV_CHK_MIDO_TREE_DEAD);
+            comboSpawnSpecial(play, x, y, z, EV_OOT_CHK_STONE_EMERALD, GI_OOT_STONE_EMERALD);
+            SetEventChk(EV_OOT_CHK_EMERALD_TREE_DEAD);
+            SetEventChk(EV_OOT_CHK_GOHMA);
+            SetEventChk(EV_OOT_CHK_TREE_DEAD);
+            SetEventChk(EV_OOT_CHK_MIDO_TREE_DEAD);
             break;
         case SCE_LAIR_KING_DODONGO:
-            comboSpawnSpecial(play, x, y, z, EV_CHK_STONE_RUBY, GI_OOT_STONE_RUBY);
+            comboSpawnSpecial(play, x, y, z, EV_OOT_CHK_STONE_RUBY, GI_OOT_STONE_RUBY);
             break;
         case SCE_LAIR_BARINADE:
-            comboSpawnSpecial(play, x, y, z, EV_CHK_STONE_SAPPHIRE, GI_OOT_STONE_SAPPHIRE);
+            comboSpawnSpecial(play, x, y, z, EV_OOT_CHK_STONE_SAPPHIRE, GI_OOT_STONE_SAPPHIRE);
             break;
         }
         break;
@@ -84,7 +84,7 @@ Actor* hookSpawnActor(void* const_1, GameState_Play* play, s16 actorId, float x,
         case 0x1:
             /* Ruto's letter */
             actorId = AC_ITEM_CUSTOM;
-            rz = 0x2000 | EV_CHK_RUTO_LETTER;
+            rz = 0x2000 | EV_OOT_CHK_RUTO_LETTER;
             variable = GI_OOT_RUTO_LETTER;
             break;
         }

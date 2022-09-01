@@ -1,10 +1,11 @@
 #include <combo.h>
 
 extern void Play_Init(void*);
-extern void comboSwitchToOoT(void);
 
 void hookPlay_Init(void* a)
 {
+    comboObjectsReset();
+
     if (gSave.entranceIndex == 0xc010)
     {
         comboGameSwitch();
