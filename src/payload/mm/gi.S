@@ -45,3 +45,8 @@ PATCH_END
 PATCH_START(0x8083d548)
   li t5,-1
 PATCH_END
+
+/* Remove another bad check */
+PATCH_START 0x8083d274
+  xori at,v0,0xba
+PATCH_END
