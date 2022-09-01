@@ -19,3 +19,4 @@ services:
       - ./Gemfile:/app/Gemfile
       - ./Gemfile.lock:/app/Gemfile.lock
       - ./install-deps.sh:/app/install-deps.sh
+      - ./Makefile:/app/Makefile
