@@ -1,5 +1,8 @@
 #include <combo.h>
 
+void PreDraw1(Actor* actor, GameState_Play* play, int unk);
+void PreDraw2(Actor* actor, GameState_Play* play, int unk);
+
 static void setObjectSegment(GfxContext* gfx, void* buffer)
 {
     OPEN_DISPS(gfx);
