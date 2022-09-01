@@ -85,8 +85,10 @@ static void addItemOotNewBottle(u16 itemId)
     for (int i = 0; i < 4; ++i)
     {
         if (gOotSave.inventory[ITS_OOT_BOTTLE + i] == ITEM_NONE)
+        {
             gOotSave.inventory[ITS_OOT_BOTTLE + i] = itemId;
             return;
+        }
     }
 }
 
@@ -438,6 +440,8 @@ static void addItemOotRupee(u16 itemId)
     }
 
 #if defined(GAME_OOT)
+    (void)max;
+    (void)kMaxRupees;
     gSaveContext.rupeesDelta += count;
 #else
     max = kMaxRupees[gOotSave.upgrades.wallet];

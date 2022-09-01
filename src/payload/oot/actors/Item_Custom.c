@@ -65,7 +65,6 @@ static void ItemCustom_Fini(Actor_ItemCustom* item, GameState_Play* play)
 
 static void ItemCustom_Update(Actor_ItemCustom* item, GameState_Play* play)
 {
-    u8 flagId;
     float rangeScale;
 
     if (!HasActorGivenItem(&item->base))

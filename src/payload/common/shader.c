@@ -92,8 +92,6 @@ void Shader_SpiritualStones(GameState* gs, s16 shaderId)
     u8 envRed, envGreen, envBlue;
     const Shader* shader;
 
-    float fc = 0;
-
     shader = &kShaders[shaderId];
 
     switch (shader->lists[0] & 0xffff)
