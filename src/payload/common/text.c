@@ -369,7 +369,6 @@ void comboTextHijackItem(GameState_Play* play, u16 itemId)
     }
     else
     {
-        /* DEBUG */
         itemName = kItemNamesOot[itemId & 0xff];
     }
 

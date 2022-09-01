@@ -24,9 +24,6 @@ void comboInitOverride(void)
 
 s32 comboGetOverride(u16 key)
 {
-    /* DEBUG */
-    return GI_MM_MASK_TRUTH | 0x100;
-
     for (int i = 0; i < 256; ++i)
     {
         ComboOverride* o = &gComboChestOverrides[i];
