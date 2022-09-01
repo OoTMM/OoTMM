@@ -27,6 +27,7 @@
 #endif
 
 #if defined(GAME_MM)
+# include <combo/mm/scene.h>
 # include <combo/mm/actor.h>
 # include <combo/mm/play.h>
 #endif

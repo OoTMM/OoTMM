@@ -1,10 +1,11 @@
 module Combo::Logic
   class WorldGraph
     class Check
-      attr_reader :type, :id, :scene_id, :location, :cond, :desc
+      attr_reader :game, :type, :id, :scene_id, :location, :cond, :desc
       attr_accessor :content
 
-      def initialize(type, id, scene_id, location, content, cond, desc)
+      def initialize(game, type, id, scene_id, location, content, cond, desc)
+        @game = game
         @type = type
         @id = id
         @scene_id = scene_id

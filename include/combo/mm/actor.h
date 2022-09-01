@@ -3,6 +3,8 @@
 
 #include <combo/types.h>
 
+#define AC_EN_BOX 0x006
+
 typedef struct PACKED ALIGNED(0x4)
 {
     u16     id;

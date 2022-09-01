@@ -301,6 +301,50 @@ static const char* const kItemNamesMm[] = {
     "the " C0 "Compass",
     "the " C0 "Dungeon Map",
     "", /* Stray Fairy */
+    "a " C0 "Small Key",
+    "",
+    "",
+    "a " C0 "Heart Piece",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "a " C0 "Recovery Heart",
+    "a " C0 "Green Rupee",
+    "a " C0 "Blue Rupee",
+    "a " C0 "Red Rupee (10)",
+    "a " C0 "Red Rupee",
+    "a " C0 "Purple Rupee",
+    "a " C0 "Silver Rupee",
+    "a " C0 "Gold Rupee",
+    "",
+    "",
+    C0 "5 Deku Nuts",
+    C0 "10 Deku Nuts",
+    C0 "5 Bombs",
+    C0 "10 Bombs",
+    C0 "20 Bombs",
+    C0 "30 Bombs",
+    C0 "10 Arrows",
+    C0 "30 Arrows",
+    C0 "40 Arrows",
+    "",
+    C0 "20 Bombchus",
+    C0 "10 Bombchus",
+    "a" C0 "Bombchu",
+    C0 "5 Bombchus",
+    C0 "20 Deku Sticks",
+    C0 "30 Deku Sticks",
+    C0 "30 Deku Nuts",
+    C0 "40 Deku Nuts",
+    "",
+    "",
+    "",
+    "",
+    "",
 };
 
 static void appendStr(char** dst, const char* src)
@@ -325,6 +369,7 @@ void comboTextHijackItem(GameState_Play* play, u16 itemId)
     }
     else
     {
+        /* DEBUG */
         itemName = kItemNamesOot[itemId & 0xff];
     }
 

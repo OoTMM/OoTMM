@@ -475,7 +475,6 @@ int comboAddItem(void* play, u16 itemId)
 int comboAddItemFromChest(void* play, s16 chestId)
 {
     u16 itemId;
-    u16 textId;
 
     chestId--;
     itemId = kExtendedGetItems[chestId].itemId;
