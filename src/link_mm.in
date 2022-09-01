@@ -64,3 +64,5 @@ ActorDestroy = 0x800b670c;
 
 SetCollectibleFlag = 0x800b5db0;
 GetCollectibleFlag = 0x800b5d6c;
+
+SpawnActorEx = 0x800bae14;
