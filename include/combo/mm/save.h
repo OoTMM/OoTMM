@@ -3,7 +3,7 @@
 
 #include <combo/types.h>
 
-typedef struct PACKED
+typedef struct
 {
     char    newf[6];
     u16     deaths;
@@ -26,7 +26,7 @@ typedef struct PACKED
 }
 MmSavePlayerData;
 
-typedef struct PACKED
+typedef struct
 {
     u8      buttonItems[4][4];
     u8      cButtonSlots[4][4];
@@ -34,7 +34,7 @@ typedef struct PACKED
 }
 MmItemEquips;
 
-typedef struct PACKED
+typedef struct
 {
     u8      items[48];
     s8      ammo[24];
@@ -45,17 +45,16 @@ typedef struct PACKED
     s8      defenseHearts;
     s8      strayFairies[10];
     char    dekuPlaygroundPlayerName[3][8];
-    u16     unk;
 }
 MmInventory;
 
-typedef struct PACKED
+typedef struct
 {
     char data[0x1c];
 }
 MmPermanentSceneFlags;
 
-typedef struct PACKED
+typedef struct
 {
     s16         scene;
     Vector3s    pos;
@@ -63,7 +62,7 @@ typedef struct PACKED
 }
 MmHorseData;
 
-typedef struct PACKED
+typedef struct
 {
     s32                     entranceIndex;
     u8                      equippedMask;
@@ -83,24 +82,56 @@ typedef struct PACKED
     u8                      isOwlSave;
     MmSavePlayerData        playerData;
     MmItemEquips            itemEquips;
-    char                    unk_06e[0x2];
     MmInventory             inventory;
     MmPermanentSceneFlags   permanentSceneFlags[120];
-    char                    unk_e18[0x1e8];
+    u8                      unk_E18[0x54];
+    u32                     dekuPlaygroundHighScores[3];
+    u32                     pictoFlags0;
+    u32                     pictoFlags1;
+    u32                     unk_E80;
+    u32                     unk_E84;
+    u32                     unk_E88[7];
+    u32                     scenesVisible[7];
+    u32                     skullTokenCount;
+    u32                     unk_EC4;
+    u32                     unk_EC8;
+    u32                     unk_ECC[2];
+    u32                     stolenItems;
+    u32                     unk_DD8;
+    u32                     bankRupees;
+    u32                     unk_EE0;
+    u32                     unk_EE4;
+    u32                     unk_EE8;
+    u32                     horseBackBalloonHighScore;
+    u32                     lotteryCodeGuess;
+    u32                     shootingGalleryHighScores;
+    u8                      weekEventReg[100];
+    u32                     mapsVisited;
+    u32                     mapsVisible;
+    u8                      unk_F64;
+    u8                      unk_F65;
+    u8                      scarecrowSpawnSong[128];
+    s8                      bombersCaughtNum;
+    s8                      bombersCaughtOrder[5];
+    s8                      lotteryCodes[3][3];
+    s8                      spiderHouseMaskOrder[6];
+    s8                      bomberCode[5];
     MmHorseData             horseData;
     u16                     checksum;
 }
 MmSave;
 
-typedef struct PACKED
+typedef struct
 {
     MmSave save;
     char   unk[0x2c94];
     u32    fileIndex;
+    char   unk2[0xc24];
 }
 MmSaveContext;
 
 _Static_assert(sizeof(MmSave) == 0x100c, "MmSave size is wrong");
+_Static_assert(sizeof(MmSaveContext) == 0x48c8, "MmSaveContext size is wrong");
 
 #if defined(GAME_MM)
 ALIGNED(16) extern MmSaveContext gSaveContext;
