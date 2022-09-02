@@ -360,10 +360,10 @@ void comboTextHijackItem(GameState_Play* play, u16 itemId)
     const char* itemName;
 
 #if defined(GAME_MM)
-    itemId ^= 0x100;
+    itemId ^= MASK_FOREIGN_ITEM;
 #endif
 
-    if (itemId & 0x100)
+    if (itemId & MASK_FOREIGN_ITEM)
     {
         itemName = kItemNamesMm[itemId & 0xff];
     }

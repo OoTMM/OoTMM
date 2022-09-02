@@ -13,8 +13,8 @@ const GetItem kExtendedGetItems[] = {
 #endif
 # undef Y
 # undef Z
-# define Y(x)               ((x) | 0x80)
-# define Z(x)               ((x) | 0x1000)
+# define Y(x)               ((x) | MASK_FOREIGN_SHADER)
+# define Z(x)               ((x) | MASK_FOREIGN_OBJECT)
 #if defined(GAME_OOT)
 # include "data/mm/gi.inc"
 #else

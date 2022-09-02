@@ -468,7 +468,7 @@ static void addItemMm(u16 itemId)
 
 int comboAddItem(void* play, u16 itemId)
 {
-    if ((itemId & 0x100) == ITEM_BASE_MM)
+    if ((itemId & MASK_FOREIGN_ITEM) == ITEM_BASE_MM)
         addItemMm(itemId & 0xff);
     else
         addItemOot(itemId & 0xff);
@@ -482,7 +482,8 @@ int comboAddItemFromChest(void* play, s16 chestId)
 
     chestId--;
     itemId = kExtendedGetItems[chestId].itemId;
-    itemId |= (chestId & 0x100);
+    if (chestId & MASK_FOREIGN_GI)
+        itemId |= MASK_FOREIGN_ITEM;
 
     comboTextHijackItem(play, itemId);
     return comboAddItem(play, itemId);

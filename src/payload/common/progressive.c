@@ -215,12 +215,12 @@ static s32 progressiveChestItemMm(s32 gi)
 s32 comboProgressiveChestItem(s32 gi)
 {
 #if defined(GAME_MM)
-    gi ^= 0x100;
+    gi ^= MASK_FOREIGN_GI;
 #endif
 
-    if (gi & 0x100)
+    if (gi & MASK_FOREIGN_GI)
     {
-        gi = 0x100 | progressiveChestItemMm(gi & 0xff);
+        gi = MASK_FOREIGN_GI | progressiveChestItemMm(gi & (MASK_FOREIGN_GI - 1));
     }
     else
     {
@@ -228,7 +228,7 @@ s32 comboProgressiveChestItem(s32 gi)
     }
 
 #if defined(GAME_MM)
-    gi ^= 0x100;
+    gi ^= MASK_FOREIGN_GI;
 #endif
 
     return gi;
