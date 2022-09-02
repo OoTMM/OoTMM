@@ -104,12 +104,6 @@ void hookPlay_Init(GameState_Play* play)
     debugCheat(play);
     skipEntranceCutscene(play);
 
-    if ((gSave.entrance & 0xfffc) == 0x0530)
-    {
-        comboGameSwitch();
-        return;
-    }
-
     Play_Init(play);
 
     /* Saria's Ocarina Check */
@@ -148,5 +142,11 @@ void hookPlay_Init(GameState_Play* play)
             comboSpawnSpecial(play, 299.f, -136.f, 884.f, EV_OOT_CHK_OCARINA_OF_TIME, GI_OOT_OCARINA_TIME);
             comboSpawnSpecial(play, 499.f, -136.f, 884.f, EV_OOT_CHK_SONG_TIME, GI_OOT_SONG_TIME);
         }
+    }
+
+    if ((gSave.entrance & 0xfffc) == 0x0530)
+    {
+        comboGameSwitch();
+        return;
     }
 }
