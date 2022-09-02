@@ -112,6 +112,9 @@ void comboCreateSaveMM(void)
     /* Copy the player name */
     copyName(gMmSave.playerData.playerName, gSave.playerName);
 
+    /* Set some events */
+    MM_SET_EVENT_WEEK(EV_MM_WEEK_FIRST_CYCLE);
+
     /* Also zero the combo save */
     zeroComboSaveData();
 

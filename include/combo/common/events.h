@@ -26,7 +26,11 @@
 #define EV_OOT_CHK_SONG_SARIA               0x58
 #define EV_OOT_ITEM_GORON_BRACELET          0x20
 
+#define EV_MM_WEEK_FIRST_CYCLE              0x1da
+
 int  GetEventChk(int index);
 void SetEventChk(int index);
+
+#define MM_SET_EVENT_WEEK(x)    (gMmSave.weekEventReg[(x) / 8] |= (1 << ((x) % 8)))
 
 #endif
