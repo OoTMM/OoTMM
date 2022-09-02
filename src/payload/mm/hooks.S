@@ -53,3 +53,8 @@ PATCH_END
 PATCH_START(0x8096c568)
   nop
 PATCH_END
+
+/* Disable the first cycle ocarina check */
+PATCH_START 0x8016a4b8
+  li t2,0
+PATCH_END
