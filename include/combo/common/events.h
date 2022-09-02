@@ -26,7 +26,12 @@
 #define EV_OOT_CHK_SONG_SARIA               0x58
 #define EV_OOT_ITEM_GORON_BRACELET          0x20
 
-#define EV_MM_WEEK_FIRST_CYCLE              0x1da
+#define EV_MM_WEEK_ENTERED_TERMINA              0x001
+#define EV_MM_WEEK_ENTERED_CLOCK_TOWN_EAST      0x013
+#define EV_MM_WEEK_ENTERED_CLOCK_TOWN_WEST      0x014
+#define EV_MM_WEEK_ENTERED_CLOCK_TOWN_NORTH     0x015
+#define EV_MM_WEEK_TOWN_GUARDS                  0x065
+#define EV_MM_WEEK_FIRST_CYCLE                  0x1da
 
 int  GetEventChk(int index);
 void SetEventChk(int index);
