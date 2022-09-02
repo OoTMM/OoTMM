@@ -93,5 +93,6 @@ void comboDrawObject(GameState_Play* play, Actor* actor, u16 objectId, u16 shade
 
 /* Event */
 void comboOotSetEventChk(u16 flag);
+void comboMmSetEventWeek(u16 flag);
 
 #endif /* COMBO_COMBO_H */

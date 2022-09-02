@@ -5,15 +5,29 @@
     <link to="ClockTown_West"/>
     <link to="ClockTown_North"/>
     <link to="ClockTown_LaundryPool"/>
+    <link to="TerminaField"/>
     <collectible id="0a" content="HEART_PIECE"/>
   </scene>
   <scene id="6c" name="ClockTown_East">
+    <link to="TerminaField"/>
     <chest id="0a" content="RUPEE_SILVER"/>
   </scene>
   <scene id="6d" name="ClockTown_West">
+    <link to="TerminaField"/>
   </scene>
   <scene id="6e" name="ClockTown_North">
+    <link to="TerminaField"/>
+    <collectible id="0a" content="HEART_PIECE"/>
   </scene>
   <scene id="70" name="ClockTown_LaundryPool">
+  </scene>
+  <scene id="2d" name="TerminaField">
+    <link to="Grotto_TerminaField_SwampGrass"/>
+    <chest id="01" content="RUPEE_RED"/>
+  </scene>
+  <scene id="07">
+    <room name="Grotto_TerminaField_SwampGrass">
+      <chest id="1f" content="RUPEE_RED"/>
+    </room>
   </scene>
 </overworld>

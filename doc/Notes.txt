@@ -11,3 +11,14 @@ SPIRITUAL
 Emerald:  1240 10e0
 Ruby:     20a0 1fb0
 Sapphire: 3530 3370
+
+MM Events RAM: 801f0568
+
+Termina: 0x00 0x02
+West: 0x02 0x10
+North: 0x02 0x20
+East: 0x02 0x08
+
+Grotto Termina var: 3f red rupee flag 1f
+Chest: 0x5081 id 01 content red rupee
+

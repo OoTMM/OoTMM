@@ -68,7 +68,6 @@ static const MmInventory kDefaultInventory =
         { 0x15, 0x12, 0x17, 0x14, 0x3e, 0x3e, 0x3e, 0x3e },
         { 0x15, 0x12, 0x17, 0x14, 0x3e, 0x3e, 0x3e, 0x3e },
     },
-    0
 };
 
 void zeroComboSaveData(void)
@@ -112,6 +111,14 @@ void comboCreateSaveMM(void)
 
     /* Copy the player name */
     copyName(gMmSave.playerData.playerName, gSave.playerName);
+
+    /* Set some events */
+    MM_SET_EVENT_WEEK(EV_MM_WEEK_ENTERED_TERMINA);
+    MM_SET_EVENT_WEEK(EV_MM_WEEK_ENTERED_CLOCK_TOWN_EAST);
+    MM_SET_EVENT_WEEK(EV_MM_WEEK_ENTERED_CLOCK_TOWN_NORTH);
+    MM_SET_EVENT_WEEK(EV_MM_WEEK_ENTERED_CLOCK_TOWN_WEST);
+    MM_SET_EVENT_WEEK(EV_MM_WEEK_TOWN_GUARDS);
+    MM_SET_EVENT_WEEK(EV_MM_WEEK_FIRST_CYCLE);
 
     /* Also zero the combo save */
     zeroComboSaveData();

@@ -9,3 +9,8 @@ void comboOotSetEventChk(u16 flag)
     bits = flag % 16;
     gOotSave.eventsChk[index] |= (1 << bits);
 }
+
+void comboMmSetEventWeek(u16 flag)
+{
+    gMmSave.weekEventReg[flag / 8] |= (1 << (flag % 8));
+}
