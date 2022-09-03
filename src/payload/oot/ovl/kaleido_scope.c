@@ -68,12 +68,12 @@ static void toggleTrade(u8* slot, u32 flags, const u8* table, u32 tableSize)
 
 static void toggleTradeAdult(void)
 {
-    toggleTrade(gSave.inventory + ITS_OOT_TRADE_ADULT, gComboSave.ootTradeAdult, kTradeAdult, sizeof(kTradeAdult));
+    toggleTrade(gSave.inventory + ITS_OOT_TRADE_ADULT, gOotExtraTrade.adult, kTradeAdult, sizeof(kTradeAdult));
 }
 
 static void toggleTradeChild(void)
 {
-    toggleTrade(gSave.inventory + ITS_OOT_TRADE_CHILD, gComboSave.ootTradeChild, kTradeChild, sizeof(kTradeChild));
+    toggleTrade(gSave.inventory + ITS_OOT_TRADE_CHILD, gOotExtraTrade.child, kTradeChild, sizeof(kTradeChild));
 }
 
 static void toggleOcarina(void)
@@ -116,28 +116,28 @@ static int checkItemToggle(GameState_Play* play)
     ret = 0;
     press = !!(play->gs.input[0].pressed.buttons & 0x20);
 
-    if (p->item_cursor == ITS_OOT_OCARINA && (popcount(gComboSave.ootOcarinas) >= 2))
+    if (p->item_cursor == ITS_OOT_OCARINA && (popcount(gOotExtraItems.ocarina) >= 2))
     {
         ret = 1;
         if (press)
             toggleOcarina();
     }
 
-    if (p->item_cursor == ITS_OOT_HOOKSHOT && (popcount(gComboSave.ootHookshots) >= 2))
+    if (p->item_cursor == ITS_OOT_HOOKSHOT && (popcount(gOotExtraItems.hookshot) >= 2))
     {
         ret = 1;
         if (press)
             toggleHookshots();
     }
 
-    if (p->item_cursor == ITS_OOT_TRADE_ADULT && (popcount(gComboSave.ootTradeAdult) >= 2))
+    if (p->item_cursor == ITS_OOT_TRADE_ADULT && (popcount(gOotExtraTrade.adult) >= 2))
     {
         ret = 1;
         if (press)
             toggleTradeAdult();
     }
 
-    if (p->item_cursor == ITS_OOT_TRADE_CHILD && (popcount(gComboSave.ootTradeChild) >= 2))
+    if (p->item_cursor == ITS_OOT_TRADE_CHILD && (popcount(gOotExtraTrade.child) >= 2))
     {
         ret = 1;
         if (press)

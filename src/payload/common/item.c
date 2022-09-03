@@ -164,11 +164,11 @@ static void addItemOotInventory(u16 itemId)
     case ITEM_OOT_FAIRY_OCARINA:
         if (gOotSave.inventory[ITS_OOT_OCARINA] == ITEM_NONE)
             gOotSave.inventory[ITS_OOT_OCARINA] = ITEM_OOT_FAIRY_OCARINA;
-        gComboSave.ootOcarinas |= 0x1;
+        gOotExtraItems.ocarina |= 0x1;
         break;
     case ITEM_OOT_OCARINA_OF_TIME:
         gOotSave.inventory[ITS_OOT_OCARINA] = ITEM_OOT_OCARINA_OF_TIME;
-        gComboSave.ootOcarinas |= 0x2;
+        gOotExtraItems.ocarina |= 0x2;
         break;
     case ITEM_OOT_BOMBCHU_5:
         addItemOotBombchus(5);
@@ -182,11 +182,11 @@ static void addItemOotInventory(u16 itemId)
     case ITEM_OOT_HOOKSHOT:
         if (gOotSave.inventory[ITS_OOT_HOOKSHOT] == ITEM_NONE)
             gOotSave.inventory[ITS_OOT_HOOKSHOT] = ITEM_OOT_HOOKSHOT;
-        gComboSave.ootHookshots |= 0x1;
+        gOotExtraItems.hookshot |= 0x1;
         break;
     case ITEM_OOT_LONGSHOT:
         gOotSave.inventory[ITS_OOT_HOOKSHOT] = ITEM_OOT_LONGSHOT;
-        gComboSave.ootHookshots |= 0x2;
+        gOotExtraItems.hookshot |= 0x2;
         break;
     case ITEM_OOT_EMPTY_BOTTLE:
     case ITEM_OOT_RUTO_LETTER:
@@ -240,7 +240,7 @@ static void addItemOotChildTrade(u16 itemId)
 
     if (gOotSave.inventory[ITS_OOT_TRADE_CHILD] == ITEM_NONE)
         gOotSave.inventory[ITS_OOT_TRADE_CHILD] = itemId;
-    gComboSave.ootTradeChild |= (1 << bit);
+    gOotExtraTrade.child |= (1 << bit);
 }
 
 static void addItemOotEquipment(u16 itemId)
@@ -258,15 +258,15 @@ static void addItemOotEquipment(u16 itemId)
         break;
     case ITEM_OOT_DEKU_SHIELD:
         gOotSave.equipment.shields |= EQ_OOT_SHIELD_DEKU;
-        gComboSave.ootShields |= EQ_OOT_SHIELD_DEKU;
+        gOotExtraItems.shield |= EQ_OOT_SHIELD_DEKU;
         break;
     case ITEM_OOT_HYLIAN_SHIELD:
         gOotSave.equipment.shields |= EQ_OOT_SHIELD_HYLIAN;
-        gComboSave.ootShields |= EQ_OOT_SHIELD_HYLIAN;
+        gOotExtraItems.shield |= EQ_OOT_SHIELD_HYLIAN;
         break;
     case ITEM_OOT_MIRROR_SHIELD:
         gOotSave.equipment.shields |= EQ_OOT_SHIELD_MIRROR;
-        gComboSave.ootShields |= EQ_OOT_SHIELD_MIRROR;
+        gOotExtraItems.shield |= EQ_OOT_SHIELD_MIRROR;
         break;
     }
 }

@@ -388,8 +388,7 @@ void comboTextHijackItem(GameState_Play* play, u16 itemId)
     appendStr(&b, CZ);
 #else
     /* strlen doesn't like NUL */
-    memcpy(b, "\x00", 1);
-    b += 1;
+    *b++ = 0;
 #endif
     appendStr(&b, "!" END);
 }

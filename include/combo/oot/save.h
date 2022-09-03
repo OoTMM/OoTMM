@@ -3,15 +3,19 @@
 
 #include <combo/types.h>
 
-typedef struct PACKED ALIGNED(4)
+typedef union
 {
-    u32 chests;
-    u32 switches;
-    u32 roomClear;
-    u32 collectibles;
-    u32 unused;
-    u32 visitedRooms;
-    u32 visitedFloors;
+    struct
+    {
+        u32 chests;
+        u32 switches;
+        u32 roomClear;
+        u32 collectibles;
+        u32 unused;
+        u32 visitedRooms;
+        u32 visitedFloors;
+    };
+    char raw[0x1c];
 }
 OotPermanentSceneFlags;
 
@@ -133,4 +137,24 @@ ALIGNED(16) extern OotSaveContext gSaveContext;
 ALIGNED(16) extern OotSave gOotSave;
 #endif
 
-#endif /* OOT_SAVE_H */
+/* Custom */
+typedef struct
+{
+    u16 child;
+    u16 adult;
+}
+OotExtraTrade;
+
+typedef struct
+{
+    u8 unused;
+    u8 hookshot;
+    u8 shield;
+    u8 ocarina;
+}
+OotExtraItems;
+
+#define gOotExtraTrade (*((OotExtraTrade*)(gOotSave.perm[0].raw + 0x10)))
+#define gOotExtraItems (*((OotExtraItems*)(gOotSave.perm[1].raw + 0x10)))
+
+#endif
