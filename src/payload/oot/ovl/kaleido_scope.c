@@ -81,13 +81,13 @@ static void toggleOcarina(void)
     u8* slot;
 
     slot = gOotSave.inventory + ITS_OOT_OCARINA;
-    if (*slot == ITEM_OOT_FAIRY_OCARINA)
+    if (*slot == ITEM_OOT_OCARINA_FAIRY)
     {
-        *slot = ITEM_OOT_OCARINA_OF_TIME;
+        *slot = ITEM_OOT_OCARINA_TIME;
     }
     else
     {
-        *slot = ITEM_OOT_FAIRY_OCARINA;
+        *slot = ITEM_OOT_OCARINA_FAIRY;
     }
 }
 

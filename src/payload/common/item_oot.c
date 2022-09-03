@@ -16,7 +16,7 @@ static void addSticks(u8 count)
         gOotSave.upgrades.dekuStick = 1;
 
     max = kMaxSticks[gOotSave.upgrades.dekuStick];
-    addAmmo(ITEM_OOT_DEKU_STICK, max, count);
+    addAmmo(ITEM_OOT_STICK, max, count);
 }
 
 static void addNuts(u8 count)
@@ -27,7 +27,7 @@ static void addNuts(u8 count)
         gOotSave.upgrades.dekuNut = 1;
 
     max = kMaxNuts[gOotSave.upgrades.dekuStick];
-    addAmmo(ITEM_OOT_DEKU_NUT, max, count);
+    addAmmo(ITEM_OOT_NUT, max, count);
 }
 
 static void addBombs(u8 count)
@@ -47,7 +47,7 @@ static void addArrows(u8 count)
     if (gOotSave.upgrades.quiver == 0)
         return;
     max = kMaxArrows[gOotSave.upgrades.quiver];
-    addAmmo(ITEM_OOT_FAIRY_BOW, max, count);
+    addAmmo(ITEM_OOT_BOW, max, count);
 }
 
 static void addSeeds(u8 count)
@@ -57,7 +57,7 @@ static void addSeeds(u8 count)
     if (gOotSave.upgrades.bulletBag == 0)
         return;
     max = kMaxSeeds[gOotSave.upgrades.dekuStick];
-    addAmmo(ITEM_OOT_FAIRY_SLINGSHOT, max, count);
+    addAmmo(ITEM_OOT_SLINGSHOT, max, count);
 }
 
 static void addBombchus(u8 count)
@@ -77,33 +77,48 @@ static void addNewBottle(u16 itemId)
     }
 }
 
-/* Also Bomb Bag 1 */
+static void addBombBag(u8 level)
+{
+    gOotSave.inventory[ITS_OOT_BOMBS] = ITEM_OOT_BOMB;
+    gOotSave.upgrades.bombBag = level;
+    gOotSave.ammo[ITS_OOT_BOMBS] = kMaxBombs[level];
+}
+
+static void addQuiver(u8 level)
+{
+    gOotSave.inventory[ITS_OOT_BOW] = ITEM_OOT_BOW;
+    gOotSave.upgrades.quiver = level;
+    gOotSave.ammo[ITS_OOT_BOW] = kMaxArrows[level];
+}
+
+static void addBulletBag(u8 level)
+{
+    gOotSave.inventory[ITS_OOT_SLINGSHOT] = ITEM_OOT_SLINGSHOT;
+    gOotSave.upgrades.bulletBag = level;
+    gOotSave.ammo[ITS_OOT_SLINGSHOT] = kMaxSeeds[level];
+}
+
 static void addInventory(u16 itemId)
 {
     switch (itemId)
     {
-    case ITEM_OOT_DEKU_STICK:
+    case ITEM_OOT_STICK:
         addSticks(1);
         break;
-    case ITEM_OOT_DEKU_STICKS_5:
+    case ITEM_OOT_STICKS_5:
         addSticks(5);
         break;
-    case ITEM_OOT_DEKU_STICKS_10:
+    case ITEM_OOT_STICKS_10:
         addSticks(10);
         break;
-    case ITEM_OOT_DEKU_NUT:
+    case ITEM_OOT_NUT:
         addNuts(1);
         break;
-    case ITEM_OOT_DEKU_NUTS_5:
+    case ITEM_OOT_NUTS_5:
         addNuts(5);
         break;
-    case ITEM_OOT_DEKU_NUTS_10:
+    case ITEM_OOT_NUTS_10:
         addNuts(10);
-        break;
-    case ITEM_OOT_BOMB_BAG:
-        gOotSave.inventory[ITS_OOT_BOMBS] = ITEM_OOT_BOMB;
-        gOotSave.ammo[ITS_OOT_BOMBS] = 20;
-        gOotSave.upgrades.bombBag = 1;
         break;
     case ITEM_OOT_BOMB:
         addBombs(1);
@@ -120,10 +135,8 @@ static void addInventory(u16 itemId)
     case ITEM_OOT_BOMBS_30:
         addBombs(30);
         break;
-    case ITEM_OOT_FAIRY_BOW:
-        gOotSave.inventory[ITS_OOT_BOW] = ITEM_OOT_FAIRY_BOW;
-        gOotSave.ammo[ITS_OOT_BOW] = 30;
-        gOotSave.upgrades.quiver = 1;
+    case ITEM_OOT_BOW:
+        addQuiver(1);
         break;
     case ITEM_OOT_ARROWS_5:
         addArrows(5);
@@ -134,25 +147,29 @@ static void addInventory(u16 itemId)
     case ITEM_OOT_ARROWS_30:
         addArrows(30);
         break;
-    case ITEM_OOT_FAIRY_SLINGSHOT:
-    case ITEM_OOT_BULLET_BAG:
-        gOotSave.inventory[ITS_OOT_SLINGSHOT] = ITEM_OOT_FAIRY_SLINGSHOT;
-        gOotSave.ammo[ITS_OOT_SLINGSHOT] = 30;
-        gOotSave.upgrades.bulletBag = 1;
+    case ITEM_OOT_ARROW_FIRE:
+        gOotSave.inventory[ITS_OOT_ARROW_FIRE] = ITEM_OOT_ARROW_FIRE;
         break;
-    case ITEM_OOT_DEKU_SEEDS_5:
+    case ITEM_OOT_SPELL_FIRE:
+        gOotSave.inventory[ITS_OOT_SPELL_FIRE] = ITEM_OOT_SPELL_FIRE;
+        break;
+    case ITEM_OOT_SLINGSHOT:
+    case ITEM_OOT_BULLET_BAG:
+        addBulletBag(1);
+        break;
+    case ITEM_OOT_SEEDS_5:
         addSeeds(5);
         break;
-    case ITEM_OOT_DEKU_SEEDS_30:
+    case ITEM_OOT_SEEDS_30:
         addSeeds(30);
         break;
-    case ITEM_OOT_FAIRY_OCARINA:
+    case ITEM_OOT_OCARINA_FAIRY:
         if (gOotSave.inventory[ITS_OOT_OCARINA] == ITEM_NONE)
-            gOotSave.inventory[ITS_OOT_OCARINA] = ITEM_OOT_FAIRY_OCARINA;
+            gOotSave.inventory[ITS_OOT_OCARINA] = ITEM_OOT_OCARINA_FAIRY;
         gOotExtraItems.ocarina |= 0x1;
         break;
-    case ITEM_OOT_OCARINA_OF_TIME:
-        gOotSave.inventory[ITS_OOT_OCARINA] = ITEM_OOT_OCARINA_OF_TIME;
+    case ITEM_OOT_OCARINA_TIME:
+        gOotSave.inventory[ITS_OOT_OCARINA] = ITEM_OOT_OCARINA_TIME;
         gOotExtraItems.ocarina |= 0x2;
         break;
     case ITEM_OOT_BOMBCHU_5:
@@ -173,8 +190,34 @@ static void addInventory(u16 itemId)
         gOotSave.inventory[ITS_OOT_HOOKSHOT] = ITEM_OOT_LONGSHOT;
         gOotExtraItems.hookshot |= 0x2;
         break;
+    case ITEM_OOT_ARROW_ICE:
+        gOotSave.inventory[ITS_OOT_ARROW_ICE] = ITEM_OOT_ARROW_ICE;
+        break;
+    case ITEM_OOT_SPELL_WIND:
+        gOotSave.inventory[ITS_OOT_SPELL_WIND] = ITEM_OOT_SPELL_WIND;
+        break;
+    case ITEM_OOT_BOOMERANG:
+        gOotSave.inventory[ITS_OOT_BOOMERANG] = ITEM_OOT_BOOMERANG;
+        break;
+    case ITEM_OOT_LENS:
+        gOotSave.inventory[ITS_OOT_LENS] = ITEM_OOT_LENS;
+        break;
+    case ITEM_OOT_MAGIC_BEAN:
+        gOotSave.inventory[ITS_OOT_MAGIC_BEAN] = ITEM_OOT_MAGIC_BEAN;
+        gOotSave.ammo[ITS_OOT_MAGIC_BEAN]++;
+        break;
+    case ITEM_OOT_HAMMER:
+        gOotSave.inventory[ITS_OOT_HAMMER] = ITEM_OOT_HAMMER;
+        break;
+    case ITEM_OOT_ARROW_LIGHT:
+        gOotSave.inventory[ITS_OOT_ARROW_LIGHT] = ITEM_OOT_ARROW_LIGHT;
+        break;
+    case ITEM_OOT_SPELL_LOVE:
+        gOotSave.inventory[ITS_OOT_SPELL_LOVE] = ITEM_OOT_SPELL_LOVE;
+        break;
     case ITEM_OOT_EMPTY_BOTTLE:
     case ITEM_OOT_RUTO_LETTER:
+    case ITEM_OOT_MILK_BOTTLE:
         addNewBottle(itemId);
         break;
     }
@@ -276,22 +319,25 @@ static void addUpgrade(u16 itemId)
         gOotSave.upgrades.dive = 2;
         break;
     case ITEM_OOT_BULLET_BAG2:
-        gOotSave.upgrades.bulletBag = 2;
+        addBulletBag(2);
         break;
     case ITEM_OOT_BULLET_BAG3:
-        gOotSave.upgrades.bulletBag = 3;
+        addBulletBag(3);
         break;
     case ITEM_OOT_QUIVER2:
-        gOotSave.upgrades.quiver = 2;
+        addQuiver(2);
         break;
     case ITEM_OOT_QUIVER3:
-        gOotSave.upgrades.quiver = 3;
+        addQuiver(3);
+        break;
+    case ITEM_OOT_BOMB_BAG:
+        addBombBag(1);
         break;
     case ITEM_OOT_BOMB_BAG2:
-        gOotSave.upgrades.bombBag = 2;
+        addBombBag(2);
         break;
     case ITEM_OOT_BOMB_BAG3:
-        gOotSave.upgrades.bombBag = 3;
+        addBombBag(3);
         break;
     case ITEM_OOT_WALLET2:
         gOotSave.upgrades.wallet = 1;

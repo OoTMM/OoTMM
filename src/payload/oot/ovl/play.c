@@ -6,13 +6,13 @@ static void debugCheat(GameState_Play* play)
 {
     if (play->gs.input[0].current.buttons & 0x20)
     {
-        gSave.inventory[ITS_OOT_STICKS] = ITEM_OOT_DEKU_STICK;
-        gSave.inventory[ITS_OOT_NUTS] = ITEM_OOT_DEKU_NUT;
+        gSave.inventory[ITS_OOT_STICKS] = ITEM_OOT_STICK;
+        gSave.inventory[ITS_OOT_NUTS] = ITEM_OOT_NUT;
         gSave.inventory[ITS_OOT_BOMBS] = ITEM_OOT_BOMB;
-        gSave.inventory[ITS_OOT_BOW] = ITEM_OOT_FAIRY_BOW;
-        gSave.inventory[ITS_OOT_ARROW_FIRE] = ITEM_OOT_FIRE_ARROW;
-        gSave.inventory[ITS_OOT_SLINGSHOT] = ITEM_OOT_FAIRY_SLINGSHOT;
-        gSave.inventory[ITS_OOT_OCARINA] = ITEM_OOT_OCARINA_OF_TIME;
+        gSave.inventory[ITS_OOT_BOW] = ITEM_OOT_BOW;
+        gSave.inventory[ITS_OOT_ARROW_FIRE] = ITEM_OOT_ARROW_FIRE;
+        gSave.inventory[ITS_OOT_SLINGSHOT] = ITEM_OOT_SLINGSHOT;
+        gSave.inventory[ITS_OOT_OCARINA] = ITEM_OOT_OCARINA_TIME;
         gSave.inventory[ITS_OOT_BOOMERANG] = ITEM_OOT_BOOMERANG;
         gSave.inventory[ITS_OOT_BOTTLE] = ITEM_OOT_RUTO_LETTER;
         gSave.inventory[ITS_OOT_BOTTLE2] = ITEM_OOT_EMPTY_BOTTLE;
