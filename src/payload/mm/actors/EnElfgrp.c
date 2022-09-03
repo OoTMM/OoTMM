@@ -1,7 +1,7 @@
 #include <combo.h>
 
 static const s16 kGreatFairyRewards[] = {
-    GI_MM_MASK_GREAT_FAIRY,
+    /* GI_MM_MASK_GREAT_FAIRY, */ GI_MM_MAGIC_UPGRADE,
     GI_MM_MAGIC_UPGRADE,
     GI_MM_SPIN_UPGRADE,
     GI_MM_MAGIC_UPGRADE2,

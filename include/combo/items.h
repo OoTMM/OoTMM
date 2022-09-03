@@ -290,6 +290,12 @@
 #define ITEM_MM_GOLD_DUST                   0xa1
 #define ITEM_MM_SEAHORSE                    0xa3
 
+/* Custom */
+#define ITEM_MM_MAGIC_UPGRADE               0xa4
+#define ITEM_MM_MAGIC_UPGRADE2              0xa5
+#define ITEM_MM_DEFENSE_UPGRADE             0xa6
+#define ITEM_MM_SPIN_UPGRADE                0xa7
+
 #define ITEM_NONE   0xff
 
 /* Item slots */

@@ -345,6 +345,10 @@ static const char* const kItemNamesMm[] = {
     "",
     "",
     "",
+    "the " C1 "Magic Upgrade",
+    "the " C1 "Larger Magic Upgrade",
+    "the " C1 "Defense Upgrade",
+    "the " C1 "Spin Attack Upgrade",
 };
 
 static void appendStr(char** dst, const char* src)
