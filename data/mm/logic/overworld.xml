@@ -17,6 +17,7 @@
   </scene>
   <scene id="6e" name="ClockTown_North">
     <link to="TerminaField"/>
+    <link to="FairyFountain_Town"/>
     <collectible id="0a" content="HEART_PIECE"/>
   </scene>
   <scene id="70" name="ClockTown_LaundryPool">
@@ -28,6 +29,12 @@
   <scene id="07">
     <room name="Grotto_TerminaField_SwampGrass">
       <chest id="1f" content="RUPEE_RED"/>
+    </room>
+  </scene>
+  <scene id="26">
+    <room name="FairyFountain_Town" desc="Clock Town Fairy Fountain">
+      <collectible id="00" content="MASK_GREAT_FAIRY" desc="Human"/>
+      <collectible id="01" content="MAGIC_UPGRADE" desc="Non-Human" cond="has(MASK_DEKU) or has(MASK_GORON) or has(MASK_ZORA)"/>
     </room>
   </scene>
 </overworld>
