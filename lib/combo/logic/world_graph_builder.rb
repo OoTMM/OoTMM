@@ -8,7 +8,7 @@ module Combo::Logic
     def initialize
       @expr_builders = Combo::GAMES.map {|game|
         e = ExprBuilder.new(game)
-        e.load_macros(File.join(Combo::PATH_DATA, 'logic_macros.json'))
+        e.load_macros(File.join(Combo::PATH_DATA, game.to_s, 'logic', '_macros.json'))
         [game, e]
       }.to_h
       @checks = []
