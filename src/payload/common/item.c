@@ -461,9 +461,38 @@ static void addItemOot(u16 itemId)
     addItemOotRupee(itemId);
 }
 
+static void addItemMmUpgrade(u16 itemId)
+{
+    switch (itemId)
+    {
+    case ITEM_MM_MAGIC_UPGRADE:
+        gMmSave.playerData.magicAcquired = 1;
+#if defined(GAME_MM)
+        gSave.playerData.magicLevel = 0;
+        gSave.playerData.magic = 0x30;
+        gSaveContext.magicTarget = 0x30;
+#else
+        gMmSave.playerData.magicLevel = 1;
+        gMmSave.playerData.magic = 0x30;
+#endif
+        break;
+    case ITEM_MM_MAGIC_UPGRADE2:
+        gMmSave.playerData.doubleMagic = 1;
+#if defined(GAME_MM)
+        gSave.playerData.magicLevel = 0;
+        gSave.playerData.magic = 0x60;
+        gSaveContext.magicTarget = 0x60;
+#else
+        gMmSave.playerData.magicLevel = 2;
+        gMmSave.playerData.magic = 0x60;
+#endif
+        break;
+    }
+}
+
 static void addItemMm(u16 itemId)
 {
-
+    addItemMmUpgrade(itemId);
 }
 
 int comboAddItem(void* play, u16 itemId)
