@@ -33,7 +33,7 @@ module Combo::Logic
     def run
       # Add some missing items to the pool
       # TODO: Change how this is done
-      add_pool(%i[MM_MASK_DEKU MM_OCARINA_OF_TIME])
+      add_pool(%i[MM_MASK_DEKU MM_OCARINA_OF_TIME MM_SHIELD MM_SWORD])
 
       # Mark link's house as reachable
       @pathfinder.mark_reachable(:child, :KF_LinkHouse)
