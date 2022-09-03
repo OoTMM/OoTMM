@@ -68,6 +68,7 @@ PATCH_START(0x8084c130)
 PATCH_END
 
 /* Replace every call to GiveItem */
+/* TODO: Do we want to keep this? We probably need to patch every item-giving actor anyway */
 PATCH_REL_JUMP comboGiveItem
 .int 0x8001282c
 .int 0x80022d08

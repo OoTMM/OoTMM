@@ -14,7 +14,7 @@ module Combo::Logic
     def run
       loop do
         checks = @pathfinder.propagate()
-        sphere_checks = checks.reject {|c| junk?(c.content) }
+        sphere_checks = checks.select {|c| Util.important_item?(c.content) }
         checks.each {|c| @pathfinder.add_item(c.content) }
         unless sphere_checks.empty?
           @spheres << sphere_checks
@@ -25,23 +25,6 @@ module Combo::Logic
     end
 
     private
-    def junk?(item)
-      %i[
-        RECOVERY_HEART
-        RUPEE_GREEN
-        RUPEE_BLUE
-        RUPEE_RED
-        RUPEE_PURPLE
-        HEART_PIECE
-        HEART_CONTAINER
-        HEART_CONTAINER2
-        MAP
-        COMPASS
-        BOMBS_5
-        BOMBS_10
-      ].include?(item)
-    end
-
     def export()
       data = []
       @spheres.each.with_index do |sphere, i|

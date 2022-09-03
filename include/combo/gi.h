@@ -272,6 +272,12 @@
 #define GI_MM_MAP_GREAT_BAY         0xb8
 #define GI_MM_MAP_STONE_TOWER       0xb9
 
+/* Custom */
+#define GI_MM_MAGIC_UPGRADE         0xbb
+#define GI_MM_MAGIC_UPGRADE2        0xbc
+#define GI_MM_DEFENSE_UPGRADE       0xbd
+#define GI_MM_SPIN_UPGRADE          0xbe
+
 typedef struct PACKED ALIGNED(2)
 {
     u8  itemId;

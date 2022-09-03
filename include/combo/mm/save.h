@@ -50,7 +50,13 @@ MmInventory;
 
 typedef struct
 {
-    char data[0x1c];
+    u32 chest;
+    u32 switch0;
+    u32 switch1;
+    u32 clearedRoom;
+    u32 collectible;
+    u32 clearedFloors;
+    u32 rooms;
 }
 MmPermanentSceneFlags;
 
@@ -126,7 +132,9 @@ typedef struct
     MmSave save;
     char   unk[0x2c94];
     u32    fileIndex;
-    char   unk2[0xc24];
+    char   unk_3ca4[0x28c];
+    u16    magicTarget;
+    char   unk_3f32[0x996];
 }
 MmSaveContext;
 

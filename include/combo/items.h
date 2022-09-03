@@ -207,12 +207,12 @@
 #define ITEM_MM_MASK_TRUTH                  0x36
 #define ITEM_MM_MASK_KAFEI                  0x37
 #define ITEM_MM_MASK_ALL_NIGHT              0x38
-#define ITEM_MM_MASK_BUNNY_HOOD             0x39
+#define ITEM_MM_MASK_BUNNY                  0x39
 #define ITEM_MM_MASK_KEATON                 0x3a
 #define ITEM_MM_MASK_GARO                   0x3b
 #define ITEM_MM_MASK_ROMANI                 0x3c
-#define ITEM_MM_MASK_CIRCUS_LEADER          0x3d
-#define ITEM_MM_MASK_POSTMAN_HAT            0x3e
+#define ITEM_MM_MASK_CIRCUS                 0x3d
+#define ITEM_MM_MASK_POSTMAN                0x3e
 #define ITEM_MM_MASK_COUPLE                 0x3f
 #define ITEM_MM_MASK_GREAT_FAIRY            0x40
 #define ITEM_MM_MASK_GIBDO                  0x41
@@ -290,6 +290,12 @@
 #define ITEM_MM_GOLD_DUST                   0xa1
 #define ITEM_MM_SEAHORSE                    0xa3
 
+/* Custom */
+#define ITEM_MM_MAGIC_UPGRADE               0xa4
+#define ITEM_MM_MAGIC_UPGRADE2              0xa5
+#define ITEM_MM_DEFENSE_UPGRADE             0xa6
+#define ITEM_MM_SPIN_UPGRADE                0xa7
+
 #define ITEM_NONE   0xff
 
 /* Item slots */
@@ -317,5 +323,54 @@
 #define ITS_OOT_BOTTLE4         0x15
 #define ITS_OOT_TRADE_ADULT     0x16
 #define ITS_OOT_TRADE_CHILD     0x17
+
+#define ITS_MM_OCARINA              0x00
+#define ITS_MM_BOW                  0x01
+#define ITS_MM_ARROW_FIRE           0x02
+#define ITS_MM_ARROW_ICE            0x03
+#define ITS_MM_ARROW_LIGHT          0x04
+#define ITS_MM_TRADE                0x05
+#define ITS_MM_BOMBS                0x06
+#define ITS_MM_BOMBCHU              0x07
+#define ITS_MM_STICKS               0x08
+#define ITS_MM_NUTS                 0x09
+#define ITS_MM_BEANS                0x0a
+#define ITS_MM_TRADE2               0x0b
+#define ITS_MM_KEG                  0x0c
+#define ITS_MM_PICTOBOX             0x0d
+#define ITS_MM_LENS                 0x0e
+#define ITS_MM_LONGSHOT             0x0f
+#define ITS_MM_GREAT_FAIRY_SWORD    0x10
+#define ITS_MM_TRADE3               0x11
+#define ITS_MM_BOTTLE               0x12
+#define ITS_MM_BOTTLE2              0x13
+#define ITS_MM_BOTTLE3              0x14
+#define ITS_MM_BOTTLE4              0x15
+#define ITS_MM_BOTTLE5              0x16
+#define ITS_MM_BOTTLE6              0x17
+#define ITS_MM_MASK_POSTMAN         0x18
+#define ITS_MM_MASK_ALL_NIGHT       0x19
+#define ITS_MM_MASK_BLAST           0x1a
+#define ITS_MM_MASK_STONE           0x1b
+#define ITS_MM_MASK_GREAT_FAIRY     0x1c
+#define ITS_MM_MASK_DEKU            0x1d
+#define ITS_MM_MASK_KEATON          0x1e
+#define ITS_MM_MASK_BREMEN          0x1f
+#define ITS_MM_MASK_BUNNY           0x20
+#define ITS_MM_MASK_DON_GERO        0x21
+#define ITS_MM_MASK_SCENTS          0x22
+#define ITS_MM_MASK_GORON           0x23
+#define ITS_MM_MASK_ROMANI          0x24
+#define ITS_MM_MASK_CIRCUS          0x25
+#define ITS_MM_MASK_KAFEI           0x26
+#define ITS_MM_MASK_COUPLE          0x27
+#define ITS_MM_MASK_TRUTH           0x28
+#define ITS_MM_MASK_ZORA            0x29
+#define ITS_MM_MASK_KAMARO          0x2a
+#define ITS_MM_MASK_GIBDO           0x2b
+#define ITS_MM_MASK_GARO            0x2c
+#define ITS_MM_MASK_CAPTAIN         0x2d
+#define ITS_MM_MASK_GIANT           0x2e
+#define ITS_MM_MASK_FIERCE_DEITY    0x2f
 
 #endif

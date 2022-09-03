@@ -49,14 +49,14 @@ static s32 progressiveSlingshot(void)
 
 static s32 progressiveOotOcarina(void)
 {
-    if (gComboSave.ootOcarinas == 0)
+    if (gOotExtraItems.ocarina == 0)
         return GI_OOT_OCARINA_FAIRY;
     return GI_OOT_OCARINA_TIME;
 }
 
 static s32 progressiveHookshot(void)
 {
-    if (gComboSave.ootHookshots == 0)
+    if (gOotExtraItems.hookshot == 0)
         return GI_OOT_HOOKSHOT;
     return GI_OOT_LONGSHOT;
 }
@@ -75,9 +75,9 @@ static s32 progressiveOotSword(void)
 /* We use an extra field to know which shields we got from shops */
 static s32 progressiveOotShield(void)
 {
-    if (!(gComboSave.ootShields & EQ_OOT_SHIELD_DEKU))
+    if (!(gOotExtraItems.shield & EQ_OOT_SHIELD_DEKU))
         return GI_OOT_DEKU_SHIELD;
-    if (!(gComboSave.ootShields & EQ_OOT_SHIELD_HYLIAN))
+    if (!(gOotExtraItems.shield & EQ_OOT_SHIELD_HYLIAN))
         return GI_OOT_HYLIAN_SHIELD;
     return GI_OOT_MIRROR_SHIELD;
 }

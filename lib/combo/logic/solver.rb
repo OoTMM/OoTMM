@@ -31,6 +31,10 @@ module Combo::Logic
     end
 
     def run
+      # Add some missing items to the pool
+      # TODO: Change how this is done
+      add_pool(%i[MM_MASK_DEKU MM_OCARINA_OF_TIME])
+
       # Mark link's house as reachable
       @pathfinder.mark_reachable(:child, :KF_LinkHouse)
 
@@ -49,8 +53,15 @@ module Combo::Logic
       export()
     end
 
+    def add_pool(items)
+      c = @checks_unfixed.select{|x| Util.junk_item?(x.content)}.to_a.sample(items.size)
+      c.each_with_index do |check, i|
+        check.content = items[i]
+      end
+    end
+
     def fix_goals()
-      checks = @graph.checks.select {|c| goal_item?(c)}
+      checks = @graph.checks.select {|c| Util.goal_item?(c.content)}
       shuffle(checks)
       @checks_fixed.merge(checks)
       @checks_unfixed.subtract(checks)
@@ -61,7 +72,7 @@ module Combo::Logic
       checks.reject! {|c| @checks_fixed.include?(c) }
       shuffle(checks)
       checks.each do |check|
-        if dungeon_item?(check)
+        if Util.dungeon_item?(check.content)
           @checks_fixed.add(check)
           @checks_unfixed.delete(check)
         end
@@ -113,24 +124,6 @@ module Combo::Logic
 
     def fix_all()
       shuffle(@checks_unfixed)
-    end
-
-    def dungeon_item?(check)
-      [:OOT_MAP, :OOT_COMPASS, :OOT_KEY_SMALL, :OOT_KEY_BOSS].include?(check.content)
-    end
-
-    def goal_item?(check)
-      %i[
-        OOT_STONE_EMERALD
-        OOT_STONE_RUBY
-        OOT_STONE_SAPPHIRE
-        OOT_MEDALLION_FOREST
-        OOT_MEDALLION_FIRE
-        OOT_MEDALLION_WATER
-        OOT_MEDALLION_SPIRIT
-        OOT_MEDALLION_SHADOW
-        OOT_MEDALLION_LIGHT
-      ].include?(check.content)
     end
 
     def swap(c1, c2)

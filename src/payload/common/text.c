@@ -345,6 +345,10 @@ static const char* const kItemNamesMm[] = {
     "",
     "",
     "",
+    "the " C1 "Magic Upgrade",
+    "the " C1 "Larger Magic Upgrade",
+    "the " C1 "Defense Upgrade",
+    "the " C1 "Spin Attack Upgrade",
 };
 
 static void appendStr(char** dst, const char* src)
@@ -384,8 +388,7 @@ void comboTextHijackItem(GameState_Play* play, u16 itemId)
     appendStr(&b, CZ);
 #else
     /* strlen doesn't like NUL */
-    memcpy(b, "\x00", 1);
-    b += 1;
+    *b++ = 0;
 #endif
     appendStr(&b, "!" END);
 }
