@@ -95,4 +95,16 @@ void comboDrawObject(GameState_Play* play, Actor* actor, u16 objectId, u16 shade
 void comboOotSetEventChk(u16 flag);
 void comboMmSetEventWeek(u16 flag);
 
+/* Item */
+extern const u8 kMaxSticks[];
+extern const u8 kMaxNuts[];
+extern const u8 kMaxBombs[];
+extern const u8 kMaxArrows[];
+extern const u8 kMaxSeeds[];
+extern const u16 kMaxRupees[];
+
+void comboAddItem(u16 itemId);
+void comboAddItemMm(u16 itemId);
+void comboAddItemOot(u16 itemId);
+
 #endif /* COMBO_COMBO_H */
