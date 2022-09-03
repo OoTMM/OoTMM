@@ -98,6 +98,20 @@ static void addBulletBag(u8 level)
     gOotSave.ammo[ITS_OOT_SLINGSHOT] = kMaxSeeds[level];
 }
 
+static void addNutUpgrade(u8 level)
+{
+    gOotSave.inventory[ITS_OOT_NUTS] = ITEM_OOT_NUT;
+    gOotSave.upgrades.dekuNut = level;
+    gOotSave.ammo[ITS_OOT_NUTS] = kMaxNuts[level];
+}
+
+static void addStickUpgrade(u8 level)
+{
+    gOotSave.inventory[ITS_OOT_STICKS] = ITEM_OOT_STICK;
+    gOotSave.upgrades.dekuStick = level;
+    gOotSave.ammo[ITS_OOT_STICKS] = kMaxSticks[level];
+}
+
 static void addInventory(u16 itemId)
 {
     switch (itemId)
@@ -364,6 +378,18 @@ static void addUpgrade(u16 itemId)
         gOotSave.magicSize = 2;
         gOotSave.magicAmount = 0x60;
 #endif
+        break;
+    case ITEM_OOT_NUT_UPGRADE:
+        addNutUpgrade(1);
+        break;
+    case ITEM_OOT_NUT_UPGRADE2:
+        addNutUpgrade(2);
+        break;
+    case ITEM_OOT_STICK_UPGRADE:
+        addStickUpgrade(1);
+        break;
+    case ITEM_OOT_STICK_UPGRADE2:
+        addStickUpgrade(2);
         break;
     }
 }

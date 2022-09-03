@@ -45,6 +45,7 @@ module Combo::Logic
     def self.semi_junk_item?(x)
       %i[
         OOT_HEART_PIECE
+        OOT_HEART_CONTAINER
         OOT_HEART_CONTAINER2
         OOT_RUPEE_HUGE
         MM_HEART_PIECE
