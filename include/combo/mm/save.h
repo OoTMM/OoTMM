@@ -50,7 +50,13 @@ MmInventory;
 
 typedef struct
 {
-    char data[0x1c];
+    u32 chest;
+    u32 switch0;
+    u32 switch1;
+    u32 clearedRoom;
+    u32 collectible;
+    u32 clearedFloors;
+    u32 rooms;
 }
 MmPermanentSceneFlags;
 
