@@ -43,7 +43,7 @@
       <link to="JabuJabu_PostBoss"/>
     </room>
     <room name="JabuJabu_PostBoss">
-      <collectible id="1f" content="HEART_CONTAINER2"/>
+      <collectible id="1f" content="HEART_CONTAINER"/>
       <special id="37" content="STONE_SAPPHIRE"/>
     </room>
   </scene>

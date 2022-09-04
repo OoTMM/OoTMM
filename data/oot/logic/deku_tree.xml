@@ -22,10 +22,10 @@
       <chest id="04" content="RECOVERY_HEART"/>
     </room>
   </scene>
-  <scene id="11">
+  <scene id="11" desc="Deku Tree">
     <room name="DT_Boss">
-      <collectible id="1f" content="HEART_CONTAINER2"/>
-      <special id="19" content="STONE_EMERALD"/>
+      <collectible id="1f" content="HEART_CONTAINER" desc="Boss Container"/>
+      <special id="19" content="STONE_EMERALD" desc="Boss Reward"/>
     </room>
   </scene>
 </dungeon>

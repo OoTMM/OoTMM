@@ -44,7 +44,9 @@ OotSaveUpgrades;
 
 typedef struct PACKED ALIGNED(4)
 {
-    u32  unused:9;
+    u32  heartPieces:4;
+    u32  unused:4;
+    u32  goldToken:1;
     u32  gerudoCard:1;
     u32  agonyStone:1;
     u32  stoneSapphire:1;
@@ -71,6 +73,15 @@ typedef struct PACKED ALIGNED(4)
 }
 OotSaveQuest;
 
+typedef struct
+{
+    u8 unused:5;
+    u8 map:1;
+    u8 compass:1;
+    u8 bossKey:1;
+}
+OotDungeonItems;
+
 typedef struct PACKED ALIGNED(4)
 {
     u32                     entrance;
@@ -93,7 +104,9 @@ typedef struct PACKED ALIGNED(4)
     u8                      magicUpgrade;
     char                    unk_3b[1];
     u8                      magicUpgrade2;
-    char                    unk_3d[0x37];
+    u8                      doubleDefense;
+    u8                      isBiggoronSword;
+    char                    unk_3f[0x35];
     u8                      inventory[0x18];
     u8                      ammo[0xf];
     u8                      beans;
@@ -101,9 +114,10 @@ typedef struct PACKED ALIGNED(4)
     u16                     unk_9e;
     OotSaveUpgrades         upgrades;
     OotSaveQuest            quest;
-    u8                      dungeonItems[0x14];
-    u8                      dungeonKeys[0x14];
-    char                    unk_0xd0[4];
+    OotDungeonItems         dungeonItems[0x14];
+    s8                      dungeonKeys[0x13];
+    u8                      doubleDefenseHearts;
+    u16                     goldTokens;
     OotPermanentSceneFlags  perm[101];
     char                    unk_be0[0x2f4];
     u16                     eventsChk[14];
@@ -122,7 +136,11 @@ typedef struct PACKED ALIGNED(4)
     s16     rupeesDelta;
     char    unk_13ce[0x28];
     s16     magicTarget;
-    char    unk_13f8[0x58];
+    char    unk_13f8[0x0a];
+    u16     sceneId;
+    char    unk_1404[0x20];
+    u16     healthDelta;
+    char    unk_1428[0x28];
 }
 OotSaveContext;
 

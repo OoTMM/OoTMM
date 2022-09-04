@@ -61,6 +61,10 @@ class Combo::Randomizer
       item = :OOT_GORON_BRACELET
     when :OOT_SCALE
       item = :OOT_SILVER_SCALE
+    when :MM_SWORD
+      item = :MM_KOKIRI_SWORD
+    when :MM_SHIELD
+      item = :MM_HYLIAN_SHIELD
     end
     x = @gi[item]
     if x.nil?

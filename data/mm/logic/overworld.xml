@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <overworld>
-  <scene id="6f" name="ClockTown_South">
+  <scene id="6f" name="ClockTown_South" desc="Clock Town South">
     <link to="ClockTown_East"/>
     <link to="ClockTown_West"/>
     <link to="ClockTown_North"/>
     <link to="ClockTown_LaundryPool"/>
     <link to="TerminaField"/>
-    <collectible id="0a" content="HEART_PIECE"/>
+    <collectible id="0a" content="HEART_PIECE" desc="Stairs HP"/>
   </scene>
-  <scene id="6c" name="ClockTown_East">
+  <scene id="6c" name="ClockTown_East" desc="Clock Town East">
     <link to="TerminaField"/>
-    <chest id="0a" content="RUPEE_SILVER"/>
+    <chest id="0a" content="RUPEE_SILVER" desc="Chest"/>
   </scene>
-  <scene id="6d" name="ClockTown_West">
+  <scene id="6d" name="ClockTown_West" desc="Clock Town West">
     <link to="TerminaField"/>
   </scene>
-  <scene id="6e" name="ClockTown_North">
+  <scene id="6e" name="ClockTown_North" desc="Clock Town North">
     <link to="TerminaField"/>
     <link to="FairyFountain_Town"/>
-    <collectible id="0a" content="HEART_PIECE"/>
+    <collectible id="0a" content="HEART_PIECE" desc="Tree HP"/>
   </scene>
-  <scene id="70" name="ClockTown_LaundryPool">
+  <scene id="70" name="ClockTown_LaundryPool" desc="Clock Town Laundry">
   </scene>
-  <scene id="2d" name="TerminaField">
+  <scene id="2d" name="TerminaField" desc="Termina Field">
     <link to="Grotto_TerminaField_SwampGrass"/>
-    <chest id="01" content="RUPEE_RED"/>
+    <chest id="01" content="RUPEE_RED" desc="Swamp Grass Chest"/>
   </scene>
   <scene id="07">
-    <room name="Grotto_TerminaField_SwampGrass">
+    <room name="Grotto_TerminaField_SwampGrass" desc="Termina Field Swamp Grass Grotto">
       <chest id="1f" content="RUPEE_RED"/>
     </room>
   </scene>

@@ -10,33 +10,6 @@ u32 popcount(u32 x)
     return x;
 }
 
-static const u8 kTradeAdult[] = {
-    ITEM_OOT_POCKET_EGG,
-    ITEM_OOT_POCKET_CUCCO,
-    ITEM_OOT_COJIRO,
-    ITEM_OOT_ODD_MUSHROOM,
-    ITEM_OOT_ODD_POTION,
-    ITEM_OOT_POACHER_SAW,
-    ITEM_OOT_GORON_SWORD_BROKEN,
-    ITEM_OOT_PRESCRIPTION,
-    ITEM_OOT_EYE_DROPS,
-    ITEM_OOT_CLAIM_CHECK
-};
-
-static const u8 kTradeChild[] = {
-    ITEM_OOT_WEIRD_EGG,
-    ITEM_OOT_CHICKEN,
-    ITEM_OOT_ZELDA_LETTER,
-    ITEM_OOT_KEATON_MASK,
-    ITEM_OOT_SKULL_MASK,
-    ITEM_OOT_SPOOKY_MASK,
-    ITEM_OOT_BUNNY_HOOD,
-    ITEM_OOT_GORON_MASK,
-    ITEM_OOT_ZORA_MASK,
-    ITEM_OOT_GERUDO_MASK,
-    ITEM_OOT_MASK_OF_TRUTH,
-};
-
 static void toggleTrade(u8* slot, u32 flags, const u8* table, u32 tableSize)
 {
     int bitPos;
@@ -68,12 +41,12 @@ static void toggleTrade(u8* slot, u32 flags, const u8* table, u32 tableSize)
 
 static void toggleTradeAdult(void)
 {
-    toggleTrade(gSave.inventory + ITS_OOT_TRADE_ADULT, gOotExtraTrade.adult, kTradeAdult, sizeof(kTradeAdult));
+    toggleTrade(gSave.inventory + ITS_OOT_TRADE_ADULT, gOotExtraTrade.adult, kOotTradeAdult, 10);
 }
 
 static void toggleTradeChild(void)
 {
-    toggleTrade(gSave.inventory + ITS_OOT_TRADE_CHILD, gOotExtraTrade.child, kTradeChild, sizeof(kTradeChild));
+    toggleTrade(gSave.inventory + ITS_OOT_TRADE_CHILD, gOotExtraTrade.child, kOotTradeChild, 11);
 }
 
 static void toggleOcarina(void)
@@ -81,13 +54,13 @@ static void toggleOcarina(void)
     u8* slot;
 
     slot = gOotSave.inventory + ITS_OOT_OCARINA;
-    if (*slot == ITEM_OOT_FAIRY_OCARINA)
+    if (*slot == ITEM_OOT_OCARINA_FAIRY)
     {
-        *slot = ITEM_OOT_OCARINA_OF_TIME;
+        *slot = ITEM_OOT_OCARINA_TIME;
     }
     else
     {
-        *slot = ITEM_OOT_FAIRY_OCARINA;
+        *slot = ITEM_OOT_OCARINA_FAIRY;
     }
 }
 

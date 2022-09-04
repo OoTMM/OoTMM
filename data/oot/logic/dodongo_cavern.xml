@@ -46,7 +46,7 @@
       <chest id="00" content="BOMBS_10" desc="Chest"/>
     </room>
     <room name="DC_Boss" desc="Boss">
-      <collectible id="1f" content="HEART_CONTAINER2" desc="HC"/>
+      <collectible id="1f" content="HEART_CONTAINER" desc="HC"/>
       <special id="25" content="STONE_RUBY" desc="Reward"/>
     </room>
   </scene>
