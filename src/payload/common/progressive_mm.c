@@ -62,6 +62,17 @@ static s32 progressiveWallet(void)
     }
 }
 
+static s32 progressiveMagic(void)
+{
+    switch (gMmSave.playerData.magicAcquired)
+    {
+    case 0:
+        return GI_MM_MAGIC_UPGRADE;
+    default:
+        return GI_MM_MAGIC_UPGRADE2;
+    }
+}
+
 s32 comboProgressiveMm(s32 gi)
 {
     switch (gi)
@@ -88,6 +99,10 @@ s32 comboProgressiveMm(s32 gi)
     case GI_MM_WALLET2:
     case GI_MM_WALLET3:
         gi = progressiveWallet();
+        break;
+    case GI_MM_MAGIC_UPGRADE:
+    case GI_MM_MAGIC_UPGRADE2:
+        gi = progressiveMagic();
         break;
     }
     return gi;

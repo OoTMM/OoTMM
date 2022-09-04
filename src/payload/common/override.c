@@ -25,7 +25,7 @@ void comboInitOverride(void)
 s32 comboGetOverride(u16 key)
 {
     /* DEBUG */
-    return GI_MM_WALLET2;
+    return GI_MM_MAGIC_UPGRADE;
 
     for (int i = 0; i < 256; ++i)
     {
