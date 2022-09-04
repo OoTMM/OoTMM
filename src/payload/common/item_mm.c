@@ -170,5 +170,38 @@ void comboAddItemMm(u16 itemId)
     case ITEM_MM_WALLET3:
         gMmSave.inventory.upgrades.wallet = 2;
         break;
+    case ITEM_MM_SONG_AWAKENING:
+        gMmSave.inventory.questItems.songAwakening = 1;
+        break;
+    case ITEM_MM_SONG_GORON:
+        gMmSave.inventory.questItems.songLullaby = 1;
+        break;
+    case ITEM_MM_SONG_ZORA:
+        gMmSave.inventory.questItems.songNewWave = 1;
+        break;
+    case ITEM_MM_SOMG_EMPTINESS:
+        gMmSave.inventory.questItems.songEmpty = 1;
+        break;
+    case ITEM_MM_SONG_ORDER:
+        gMmSave.inventory.questItems.songOrder = 1;
+        break;
+    case ITEM_MM_SONG_TIME:
+        gMmSave.inventory.questItems.songTime = 1;
+        break;
+    case ITEM_MM_SONG_HEALING:
+        gMmSave.inventory.questItems.songHealing = 1;
+        break;
+    case ITEM_MM_SONG_EPONA:
+        gMmSave.inventory.questItems.songEpona = 1;
+        break;
+    case ITEM_MM_SONG_SOARING:
+        gMmSave.inventory.questItems.songSoaring = 1;
+        break;
+    case ITEM_MM_SONG_STORMS:
+        gMmSave.inventory.questItems.songStorms = 1;
+        break;
+    case ITEM_MM_SONG_GORON_HALF:
+        gMmSave.inventory.questItems.songLullabyIntro = 1;
+        break;
     }
 }
