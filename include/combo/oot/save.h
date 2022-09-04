@@ -95,7 +95,7 @@ typedef struct PACKED ALIGNED(4)
     u8                      magicUpgrade;
     char                    unk_3b[1];
     u8                      magicUpgrade2;
-    char                    unk_3d[1];
+    u8                      doubleDefense;
     u8                      isBiggoronSword;
     char                    unk_3f[0x35];
     u8                      inventory[0x18];
@@ -106,8 +106,9 @@ typedef struct PACKED ALIGNED(4)
     OotSaveUpgrades         upgrades;
     OotSaveQuest            quest;
     u8                      dungeonItems[0x14];
-    u8                      dungeonKeys[0x14];
-    char                    unk_0xd0[4];
+    u8                      dungeonKeys[0x13];
+    u8                      doubleDefenseHearts;
+    u16                     goldTokens;
     OotPermanentSceneFlags  perm[101];
     char                    unk_be0[0x2f4];
     u16                     eventsChk[14];
@@ -126,7 +127,9 @@ typedef struct PACKED ALIGNED(4)
     s16     rupeesDelta;
     char    unk_13ce[0x28];
     s16     magicTarget;
-    char    unk_13f8[0x58];
+    char    unk_13f8[0x2c];
+    u16     healthDelta;
+    char    unk_1428[0x28];
 }
 OotSaveContext;
 

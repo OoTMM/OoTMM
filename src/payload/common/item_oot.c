@@ -1,5 +1,47 @@
 #include <combo.h>
 
+const u8 kOotTradeAdult[] = {
+    ITEM_OOT_POCKET_EGG,
+    ITEM_OOT_POCKET_CUCCO,
+    ITEM_OOT_COJIRO,
+    ITEM_OOT_ODD_MUSHROOM,
+    ITEM_OOT_ODD_POTION,
+    ITEM_OOT_POACHER_SAW,
+    ITEM_OOT_GORON_SWORD_BROKEN,
+    ITEM_OOT_PRESCRIPTION,
+    ITEM_OOT_EYE_DROPS,
+    ITEM_OOT_CLAIM_CHECK
+};
+
+const u8 kOotTradeChild[] = {
+    ITEM_OOT_WEIRD_EGG,
+    ITEM_OOT_CHICKEN,
+    ITEM_OOT_ZELDA_LETTER,
+    ITEM_OOT_KEATON_MASK,
+    ITEM_OOT_SKULL_MASK,
+    ITEM_OOT_SPOOKY_MASK,
+    ITEM_OOT_BUNNY_HOOD,
+    ITEM_OOT_GORON_MASK,
+    ITEM_OOT_ZORA_MASK,
+    ITEM_OOT_GERUDO_MASK,
+    ITEM_OOT_MASK_OF_TRUTH,
+};
+
+static void addHealth(u8 count)
+{
+    u16 health;
+
+    health = (u16)count * 0x10;
+
+#if defined(GAME_OOT)
+    gSaveContext.healthDelta += health;
+#else
+    gOotSave.health += health;
+    if (gOotSave.health > gOotSave.healthMax)
+        gOotSave.health = gOotSave.healthMax;
+#endif
+}
+
 static void addAmmo(u16 itemId, u8 max, u8 count)
 {
     gOotSave.inventory[itemId] = itemId;
@@ -112,7 +154,43 @@ static void addStickUpgrade(u8 level)
     gOotSave.ammo[ITS_OOT_STICKS] = kMaxSticks[level];
 }
 
-static void addInventory(u16 itemId)
+static void addTradeChild(u8 index)
+{
+    u16 itemId;
+
+    itemId = kOotTradeChild[index];
+    if (gOotSave.inventory[ITS_OOT_TRADE_CHILD] == ITEM_NONE)
+        gOotSave.inventory[ITS_OOT_TRADE_CHILD] = itemId;
+    gOotExtraTrade.child |= (1 << (u16)index);
+}
+
+static void addTradeAdult(u8 index)
+{
+    u16 itemId;
+
+    itemId = kOotTradeAdult[index];
+    if (gOotSave.inventory[ITS_OOT_TRADE_ADULT] == ITEM_NONE)
+        gOotSave.inventory[ITS_OOT_TRADE_ADULT] = itemId;
+    gOotExtraTrade.adult |= (1 << (u16)index);
+}
+
+static void addRupees(u16 count)
+{
+    u16 max;
+
+#if defined(GAME_OOT)
+    (void)max;
+    (void)kMaxRupees;
+    gSaveContext.rupeesDelta += count;
+#else
+    max = kMaxRupees[gOotSave.upgrades.wallet];
+    gOotSave.rupees += count;
+    if (gOotSave.rupees > max)
+        gOotSave.rupees = max;
+#endif
+}
+
+void comboAddItemOot(u16 itemId)
 {
     switch (itemId)
     {
@@ -234,61 +312,6 @@ static void addInventory(u16 itemId)
     case ITEM_OOT_MILK_BOTTLE:
         addNewBottle(itemId);
         break;
-    }
-}
-
-static void addChildTrade(u16 itemId)
-{
-    u32 bit;
-
-    switch (itemId)
-    {
-    case ITEM_OOT_WEIRD_EGG:
-        bit = 0;
-        break;
-    case ITEM_OOT_CHICKEN:
-        bit = 1;
-        break;
-    case ITEM_OOT_ZELDA_LETTER:
-        bit = 2;
-        break;
-    case ITEM_OOT_KEATON_MASK:
-        bit = 3;
-        break;
-    case ITEM_OOT_SKULL_MASK:
-        bit = 4;
-        break;
-    case ITEM_OOT_SPOOKY_MASK:
-        bit = 5;
-        break;
-    case ITEM_OOT_BUNNY_HOOD:
-        bit = 6;
-        break;
-    case ITEM_OOT_GORON_MASK:
-        bit = 7;
-        break;
-    case ITEM_OOT_ZORA_MASK:
-        bit = 8;
-        break;
-    case ITEM_OOT_GERUDO_MASK:
-        bit = 9;
-        break;
-    case ITEM_OOT_MASK_OF_TRUTH:
-        bit = 10;
-        break;
-    default:
-        return;
-    }
-
-    if (gOotSave.inventory[ITS_OOT_TRADE_CHILD] == ITEM_NONE)
-        gOotSave.inventory[ITS_OOT_TRADE_CHILD] = itemId;
-    gOotExtraTrade.child |= (1 << bit);
-}
-
-static void addEquipment(u16 itemId)
-{
-    switch (itemId)
-    {
     case ITEM_OOT_KOKIRI_SWORD:
         gOotSave.equipment.swords |= EQ_OOT_SWORD_KOKIRI;
         break;
@@ -315,13 +338,6 @@ static void addEquipment(u16 itemId)
         gOotSave.equipment.shields |= EQ_OOT_SHIELD_MIRROR;
         gOotExtraItems.shield |= EQ_OOT_SHIELD_MIRROR;
         break;
-    }
-}
-
-static void addUpgrade(u16 itemId)
-{
-    switch (itemId)
-    {
     case ITEM_OOT_GORON_BRACELET:
         gOotSave.upgrades.strength = 1;
         break;
@@ -396,20 +412,26 @@ static void addUpgrade(u16 itemId)
     case ITEM_OOT_STICK_UPGRADE2:
         addStickUpgrade(2);
         break;
-    }
-}
-
-static void addQuest(u16 itemId)
-{
-    switch (itemId)
-    {
+    case ITEM_OOT_DEFENSE_UPGRADE:
+        gOotSave.doubleDefense = 1;
+        gOotSave.doubleDefenseHearts = 20;
+        addHealth(20);
+        break;
     case ITEM_OOT_HEART_PIECE:
     case ITEM_OOT_HEART_PIECE2:
         gOotSave.quest.heartPieces++;
+#if !defined(GAME_OOT)
+        if (gOotSave.quest.heartPieces >= 4)
+        {
+            gOotSave.quest.heartPieces -= 4;
+            gOotSave.healthMax += 0x10;
+        }
+#endif
+        addHealth(20);
         break;
     case ITEM_OOT_HEART_CONTAINER:
         gOotSave.healthMax += 0x10;
-        gOotSave.health += 0x10;
+        addHealth(20);
         break;
     case ITEM_OOT_GERUDO_CARD:
         gOotSave.quest.gerudoCard = 1;
@@ -480,53 +502,86 @@ static void addQuest(u16 itemId)
     case ITEM_OOT_MEDALLION_FOREST:
         gOotSave.quest.medallionForest = 1;
         break;
-    }
-}
-
-static void addRupee(u16 itemId)
-{
-    u16 count;
-    u16 max;
-
-    switch (itemId)
-    {
     case ITEM_OOT_RUPEE_GREEN:
-        count = 1;
+        addRupees(1);
         break;
     case ITEM_OOT_RUPEE_BLUE:
-        count = 5;
+        addRupees(5);
         break;
     case ITEM_OOT_RUPEE_RED:
-        count = 20;
+        addRupees(20);
         break;
     case ITEM_OOT_RUPEE_PURPLE:
-        count = 50;
+        addRupees(50);
         break;
     case ITEM_OOT_RUPEE_HUGE:
-        count = 200;
+        addRupees(200);
         break;
-    default:
-        return;
+    case ITEM_OOT_RECOVERY_HEART:
+        addHealth(1);
+        break;
+    case ITEM_OOT_WEIRD_EGG:
+        addTradeChild(0);
+        break;
+    case ITEM_OOT_CHICKEN:
+        addTradeChild(1);
+        break;
+    case ITEM_OOT_ZELDA_LETTER:
+        addTradeChild(2);
+        break;
+    case ITEM_OOT_KEATON_MASK:
+        addTradeChild(3);
+        break;
+    case ITEM_OOT_SKULL_MASK:
+        addTradeChild(4);
+        break;
+    case ITEM_OOT_SPOOKY_MASK:
+        addTradeChild(5);
+        break;
+    case ITEM_OOT_BUNNY_HOOD:
+        addTradeChild(6);
+        break;
+    case ITEM_OOT_GORON_MASK:
+        addTradeChild(7);
+        break;
+    case ITEM_OOT_ZORA_MASK:
+        addTradeChild(8);
+        break;
+    case ITEM_OOT_GERUDO_MASK:
+        addTradeChild(9);
+        break;
+    case ITEM_OOT_MASK_OF_TRUTH:
+        addTradeChild(10);
+        break;
+    case ITEM_OOT_POCKET_EGG:
+        addTradeAdult(0);
+        break;
+    case ITEM_OOT_POCKET_CUCCO:
+        addTradeAdult(1);
+        break;
+    case ITEM_OOT_COJIRO:
+        addTradeAdult(2);
+        break;
+    case ITEM_OOT_ODD_MUSHROOM:
+        addTradeAdult(3);
+        break;
+    case ITEM_OOT_ODD_POTION:
+        addTradeAdult(4);
+        break;
+    case ITEM_OOT_POACHER_SAW:
+        addTradeAdult(5);
+        break;
+    case ITEM_OOT_GORON_SWORD_BROKEN:
+        addTradeAdult(6);
+        break;
+    case ITEM_OOT_PRESCRIPTION:
+        addTradeAdult(7);
+        break;
+    case ITEM_OOT_EYE_DROPS:
+        addTradeAdult(8);
+        break;
+    case ITEM_OOT_CLAIM_CHECK:
+        addTradeAdult(9);
+        break;
     }
-
-#if defined(GAME_OOT)
-    (void)max;
-    (void)kMaxRupees;
-    gSaveContext.rupeesDelta += count;
-#else
-    max = kMaxRupees[gOotSave.upgrades.wallet];
-    gOotSave.rupees += count;
-    if (gOotSave.rupees > max)
-        gOotSave.rupees = max;
-#endif
-}
-
-void comboAddItemOot(u16 itemId)
-{
-    addInventory(itemId);
-    addChildTrade(itemId);
-    addEquipment(itemId);
-    addUpgrade(itemId);
-    addQuest(itemId);
-    addRupee(itemId);
 }

@@ -102,6 +102,8 @@ extern const u8 kMaxBombs[];
 extern const u8 kMaxArrows[];
 extern const u8 kMaxSeeds[];
 extern const u16 kMaxRupees[];
+extern const u8 kOotTradeChild[];
+extern const u8 kOotTradeAdult[];
 
 void comboAddItem(u16 itemId);
 void comboAddItemMm(u16 itemId);
