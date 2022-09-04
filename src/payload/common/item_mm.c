@@ -76,6 +76,17 @@ static void addSticks(int count)
         gMmSave.inventory.ammo[ITS_MM_STICKS] = max;
 }
 
+static void addBombchus(int count)
+{
+    u16 max;
+
+    max = 40;
+    gMmSave.inventory.items[ITS_MM_BOMBCHU] = ITEM_MM_BOMBCHU;
+    gMmSave.inventory.ammo[ITS_MM_BOMBCHU] += count;
+    if (gMmSave.inventory.ammo[ITS_MM_BOMBCHU] > max)
+        gMmSave.inventory.ammo[ITS_MM_BOMBCHU] = max;
+}
+
 void comboAddItemMm(u16 itemId)
 {
     switch (itemId)
@@ -159,6 +170,19 @@ void comboAddItemMm(u16 itemId)
         break;
     case ITEM_MM_STICKS_30:
         addSticks(30);
+        break;
+    case ITEM_MM_BOMBCHU:
+    case ITEM_MM_BOMBCHU_ALT:
+        addBombchus(1);
+        break;
+    case ITEM_MM_BOMBCHUS_5:
+        addBombchus(5);
+        break;
+    case ITEM_MM_BOMBCHUS_10:
+        addBombchus(10);
+        break;
+    case ITEM_MM_BOMBCHUS_20:
+        addBombchus(20);
         break;
     case ITEM_MM_MASK_POSTMAN:
         gMmSave.inventory.items[ITS_MM_MASK_POSTMAN] = ITEM_MM_MASK_POSTMAN;
