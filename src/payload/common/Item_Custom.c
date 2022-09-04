@@ -55,7 +55,7 @@ static void ItemCustom_Init(Actor_ItemCustom* item, GameState_Play* play)
     }
     if (override >= 0)
         item->gi = override;
-    item->gi = comboProgressiveChestItem(item->gi);
+    item->gi = comboProgressive(item->gi);
 
     ActorSetScale((Actor*)item, 0.25f);
     item->base.position.y += 15.f;
@@ -75,7 +75,7 @@ static void ItemCustom_Update(Actor_ItemCustom* item, GameState_Play* play)
         item->base.rot2.y += 0x400;
 
         /* Another item might have been collected */
-        item->gi = comboProgressiveChestItem(item->gi);
+        item->gi = comboProgressive(item->gi);
 
         rangeScale = 1.f;
         if (item->type == 0x2)

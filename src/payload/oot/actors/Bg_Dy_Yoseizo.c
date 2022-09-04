@@ -25,7 +25,7 @@ void BgDyYoseizo_Update(Actor* actor, GameState_Play* play)
         override = comboGetCollectibleOverride(play->sceneId, play->spawnId);
         if (override > -1)
             itemId = override;
-        itemId = comboProgressiveChestItem(itemId);
+        itemId = comboProgressive(itemId);
 
         /* Collectible flags don't work here for some reason, use unused flags */
         collected = gSave.perm[SCE_GREAT_FAIRY_FOUNTAIN_UPGRADES].unused & (1 << index );

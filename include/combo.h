@@ -78,7 +78,9 @@ s32 comboGetNpcOverride(u8 id);
 void comboTextHijackItem(GameState_Play* play, u16 itemId);
 
 /* Progressive */
-s32 comboProgressiveChestItem(s32 gi);
+s32 comboProgressive(s32 gi);
+s32 comboProgressiveOot(s32 gi);
+s32 comboProgressiveMm(s32 gi);
 
 /* Actor */
 void comboSpawnSpecial(GameState_Play* play, float x, float y, float z, u8 specialId, u16 gi);

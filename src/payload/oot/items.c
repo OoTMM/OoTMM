@@ -59,7 +59,7 @@ int comboGiveItem(Actor* actor, GameState_Play* play, s16 itemId, float a, float
 
     if (override >= 0)
         absItemId = (s16)(override);
-    absItemId = comboProgressiveChestItem(absItemId);
+    absItemId = comboProgressive(absItemId);
     itemId = itemId > 0 ? absItemId : -absItemId;
     return GiveItem(actor, play, itemId, a, b);
 }

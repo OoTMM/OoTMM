@@ -33,6 +33,6 @@ void EnElfgrp_GiveReward(Actor* actor, GameState_Play* play)
     override = comboGetCollectibleOverride(play->sceneId, fairyIndex);
     if (override >= 0)
         gi = override;
-    gi = comboProgressiveChestItem(gi);
+    gi = comboProgressive(gi);
     GiveItem(actor, play, gi, 200.f, 200.f);
 }
