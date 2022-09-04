@@ -36,6 +36,38 @@ void comboAddItemMm(u16 itemId)
 {
     switch (itemId)
     {
+    case ITEM_MM_OCARINA_OF_TIME:
+        gMmSave.inventory.items[ITS_MM_OCARINA] = ITEM_MM_OCARINA_OF_TIME;
+        break;
+    case ITEM_MM_ARROW_FIRE:
+        gMmSave.inventory.items[ITS_MM_ARROW_FIRE] = ITEM_MM_ARROW_FIRE;
+        break;
+    case ITEM_MM_ARROW_ICE:
+        gMmSave.inventory.items[ITS_MM_ARROW_ICE] = ITEM_MM_ARROW_ICE;
+        break;
+    case ITEM_MM_ARROW_LIGHT:
+        gMmSave.inventory.items[ITS_MM_ARROW_LIGHT] = ITEM_MM_ARROW_LIGHT;
+        break;
+    case ITEM_MM_MAGIC_BEAN:
+        gMmSave.inventory.items[ITS_MM_BEANS] = ITEM_MM_MAGIC_BEAN;
+        gMmSave.inventory.ammo[ITS_MM_BEANS]++;
+        break;
+    case ITEM_MM_POWDER_KEG:
+        gMmSave.inventory.items[ITS_MM_KEG] = ITEM_MM_POWDER_KEG;
+        gMmSave.inventory.ammo[ITS_MM_KEG] = 1;
+        break;
+    case ITEM_MM_PICTOGRAPH_BOX:
+        gMmSave.inventory.items[ITS_MM_PICTOBOX] = ITEM_MM_PICTOGRAPH_BOX;
+        break;
+    case ITEM_MM_LENS_OF_TRUTH:
+        gMmSave.inventory.items[ITS_MM_LENS] = ITEM_MM_LENS_OF_TRUTH;
+        break;
+    case ITEM_MM_LONGSHOT:
+        gMmSave.inventory.items[ITS_MM_LONGSHOT] = ITEM_MM_LONGSHOT;
+        break;
+    case ITEM_MM_GREAT_FAIRY_SWORD:
+        gMmSave.inventory.items[ITS_MM_GREAT_FAIRY_SWORD] = ITEM_MM_GREAT_FAIRY_SWORD;
+        break;
     case ITEM_MM_MASK_POSTMAN:
         gMmSave.inventory.items[ITS_MM_MASK_POSTMAN] = ITEM_MM_MASK_POSTMAN;
         break;

@@ -158,9 +158,9 @@
 
 #define ITEM_MM_OCARINA_OF_TIME             0x00
 #define ITEM_MM_BOW                         0x01
-#define ITEM_MM_FIRE_ARROW                  0x02
-#define ITEM_MM_ICE_ARROW                   0x03
-#define ITEM_MM_LIGHT_ARROW                 0x04
+#define ITEM_MM_ARROW_FIRE                  0x02
+#define ITEM_MM_ARROW_ICE                   0x03
+#define ITEM_MM_ARROW_LIGHT                 0x04
 #define ITEM_MM_BOMB                        0x06
 #define ITEM_MM_BOMBCHU                     0x07
 #define ITEM_MM_DEKU_STICK                  0x08
