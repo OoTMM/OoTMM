@@ -73,6 +73,17 @@ static s32 progressiveMagic(void)
     }
 }
 
+static s32 progressiveSongLullaby(void)
+{
+    switch (gMmSave.inventory.questItems.songLullabyIntro)
+    {
+    case 0:
+        return GI_MM_SONG_GORON_HALF;
+    default:
+        return GI_MM_SONG_GORON;
+    }
+}
+
 s32 comboProgressiveMm(s32 gi)
 {
     switch (gi)
@@ -103,6 +114,10 @@ s32 comboProgressiveMm(s32 gi)
     case GI_MM_MAGIC_UPGRADE:
     case GI_MM_MAGIC_UPGRADE2:
         gi = progressiveMagic();
+        break;
+    case GI_MM_SONG_GORON:
+    case GI_MM_SONG_GORON_HALF:
+        gi = progressiveSongLullaby();
         break;
     }
     return gi;
