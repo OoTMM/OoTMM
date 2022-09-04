@@ -10,4 +10,12 @@
 #define EQ_OOT_SHIELD_HYLIAN        0x02
 #define EQ_OOT_SHIELD_MIRROR        0x04
 
+#define EQ_OOT_TUNIC_KOKIRI         0x01
+#define EQ_OOT_TUNIC_GORON          0x02
+#define EQ_OOT_TUNIC_ZORA           0x04
+
+#define EQ_OOT_BOOTS_KOKIRI         0x01
+#define EQ_OOT_BOOTS_IRON           0x02
+#define EQ_OOT_BOOTS_HOVER          0x04
+
 #endif
