@@ -13,6 +13,11 @@ static void addSword(int index)
     gMmSave.itemEquips.sword = index;
 }
 
+static void addShield(int index)
+{
+    gMmSave.itemEquips.shield = index;
+}
+
 void comboAddItemMm(u16 itemId)
 {
     switch (itemId)
@@ -119,6 +124,12 @@ void comboAddItemMm(u16 itemId)
         break;
     case ITEM_MM_SWORD_GILDED:
         addSword(3);
+        break;
+    case ITEM_MM_SHIELD_HERO:
+        addShield(1);
+        break;
+    case ITEM_MM_SHIELD_MIRROR:
+        addShield(2);
         break;
     }
 }
