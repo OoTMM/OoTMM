@@ -254,6 +254,7 @@
 #define ITEM_MM_SONG_STORMS                 0x6b
 #define ITEM_MM_BOMBER_NOTEBOOK             0x6d
 #define ITEM_MM_HEART_CONTAINER             0x6f
+#define ITEM_MM_HEART_PIECE2                0x70
 #define ITEM_MM_SONG_GORON_HALF             0x73
 #define ITEM_MM_BIG_KEY                     0x74
 #define ITEM_MM_COMPASS                     0x75

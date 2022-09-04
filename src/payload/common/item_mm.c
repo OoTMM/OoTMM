@@ -386,5 +386,19 @@ void comboAddItemMm(u16 itemId)
     case ITEM_MM_REMAINS_TWINMOLD:
         gMmSave.inventory.questItems.remainsTwinmold = 1;
         break;
+    case ITEM_MM_HEART_PIECE:
+    case ITEM_MM_HEART_PIECE2:
+        gMmSave.inventory.questItems.heartPieces += 1;
+        if (gMmSave.inventory.questItems.heartPieces == 4)
+        {
+            gMmSave.inventory.questItems.heartPieces = 0;
+            gMmSave.playerData.healthCapacity += 0x10;
+            gMmSave.playerData.health += 0x10;
+        }
+        break;
+    case ITEM_MM_HEART_CONTAINER:
+        gMmSave.playerData.healthCapacity += 0x10;
+        gMmSave.playerData.health += 0x10;
+        break;
     }
 }
