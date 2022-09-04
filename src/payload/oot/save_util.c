@@ -57,7 +57,7 @@ static const MmInventory kDefaultInventory =
         0, 0, 0, 0, 0, 0, 0, 0,
     },
     { 0x12, 0, 0, 0, 0, 0 },
-    0,
+    {},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff},
     0,

@@ -49,15 +49,40 @@ MmUpgrades;
 
 typedef struct
 {
-    u8          items[48];
-    s8          ammo[24];
-    MmUpgrades  upgrades;
-    u32         questItems;
-    u8          dungeonItems[10];
-    s8          dungeonKeys[9];
-    s8          defenseHearts;
-    s8          strayFairies[10];
-    char        dekuPlaygroundPlayerName[3][8];
+    u32 heartPieces:4;
+    u32 unused:9;
+    u32 notebook:1;
+    u32 songGlitch1:1;
+    u32 songStorms:1;
+    u32 songSoaring:1;
+    u32 songEpona:1;
+    u32 songHealing:1;
+    u32 songTime:1;
+    u32 songGlitch2:1;
+    u32 songOrder:1;
+    u32 songEmpty:1;
+    u32 songNewWave:1;
+    u32 songLullaby:1;
+    u32 songAwakening:1;
+    u32 unused2:2;
+    u32 remainsTwinmold:1;
+    u32 remainsGyorg:1;
+    u32 remainsGoht:1;
+    u32 remainsOdolwa:1;
+}
+MmQuestItems;
+
+typedef struct
+{
+    u8              items[48];
+    s8              ammo[24];
+    MmUpgrades      upgrades;
+    MmQuestItems    questItems;
+    u8              dungeonItems[10];
+    s8              dungeonKeys[9];
+    s8              defenseHearts;
+    s8              strayFairies[10];
+    char            dekuPlaygroundPlayerName[3][8];
 }
 MmInventory;
 
