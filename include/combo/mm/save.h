@@ -50,7 +50,9 @@ MmUpgrades;
 typedef struct
 {
     u32 heartPieces:4;
-    u32 unused:9;
+    u32 unused:3;
+    u32 songLullabyIntro:1;
+    u32 unused2:5;
     u32 notebook:1;
     u32 songGlitch1:1;
     u32 songStorms:1;
@@ -64,7 +66,7 @@ typedef struct
     u32 songNewWave:1;
     u32 songLullaby:1;
     u32 songAwakening:1;
-    u32 unused2:2;
+    u32 unused3:2;
     u32 remainsTwinmold:1;
     u32 remainsGyorg:1;
     u32 remainsGoht:1;
