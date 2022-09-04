@@ -25,6 +25,13 @@ static void addBombBag(int index)
     gMmSave.inventory.ammo[ITS_MM_BOMBS] = kMaxBombs[index];
 }
 
+static void addBowQuiver(int index)
+{
+    gMmSave.inventory.items[ITS_MM_BOW] = ITEM_MM_BOW;
+    gMmSave.inventory.upgrades.quiver = index;
+    gMmSave.inventory.ammo[ITS_MM_BOW] = kMaxArrows[index];
+}
+
 void comboAddItemMm(u16 itemId)
 {
     switch (itemId)
@@ -146,6 +153,16 @@ void comboAddItemMm(u16 itemId)
         break;
     case ITEM_MM_BOMB_BAG3:
         addBombBag(3);
+        break;
+    case ITEM_MM_BOW:
+    case ITEM_MM_QUIVER:
+        addBowQuiver(1);
+        break;
+    case ITEM_MM_QUIVER2:
+        addBowQuiver(2);
+        break;
+    case ITEM_MM_QUIVER3:
+        addBowQuiver(3);
         break;
     }
 }

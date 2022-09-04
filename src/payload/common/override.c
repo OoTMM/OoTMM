@@ -25,7 +25,7 @@ void comboInitOverride(void)
 s32 comboGetOverride(u16 key)
 {
     /* DEBUG */
-    return GI_MM_BOMB_BAG;
+    return GI_MM_BOW;
 
     for (int i = 0; i < 256; ++i)
     {

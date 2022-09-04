@@ -27,7 +27,15 @@ static s32 progressiveShield(void)
 
 static s32 progressiveBow(void)
 {
-
+    switch (gMmSave.inventory.upgrades.quiver)
+    {
+    case 0:
+        return GI_MM_BOW;
+    case 1:
+        return GI_MM_QUIVER2;
+    default:
+        return GI_MM_QUIVER3;
+    }
 }
 
 static s32 progressiveBombBag(void)
@@ -60,6 +68,11 @@ s32 comboProgressiveMm(s32 gi)
     case GI_MM_BOMB_BAG2:
     case GI_MM_BOMB_BAG3:
         gi = progressiveBombBag();
+        break;
+    case GI_MM_BOW:
+    case GI_MM_QUIVER2:
+    case GI_MM_QUIVER3:
+        gi = progressiveBow();
         break;
     }
     return gi;

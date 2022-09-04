@@ -157,7 +157,7 @@
 #define ITEM_OOT_SWORD_BIGGORON         0x9f
 
 #define ITEM_MM_OCARINA_OF_TIME             0x00
-#define ITEM_MM_HERO_BOW                    0x01
+#define ITEM_MM_BOW                         0x01
 #define ITEM_MM_FIRE_ARROW                  0x02
 #define ITEM_MM_ICE_ARROW                   0x03
 #define ITEM_MM_LIGHT_ARROW                 0x04
