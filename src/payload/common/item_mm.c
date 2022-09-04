@@ -87,6 +87,20 @@ static void addBombchus(int count)
         gMmSave.inventory.ammo[ITS_MM_BOMBCHU] = max;
 }
 
+static void addNewBottle(u16 itemId)
+{
+    int i;
+
+    for (i = 0; i < 6; i++)
+    {
+        if (gMmSave.inventory.items[ITS_MM_BOTTLE + i] == ITEM_NONE)
+        {
+            gMmSave.inventory.items[ITS_MM_BOTTLE + i] = itemId;
+            break;
+        }
+    }
+}
+
 void comboAddItemMm(u16 itemId)
 {
     switch (itemId)
@@ -122,6 +136,12 @@ void comboAddItemMm(u16 itemId)
         break;
     case ITEM_MM_GREAT_FAIRY_SWORD:
         gMmSave.inventory.items[ITS_MM_GREAT_FAIRY_SWORD] = ITEM_MM_GREAT_FAIRY_SWORD;
+        break;
+    case ITEM_MM_EMPTY_BOTTLE:
+    case ITEM_MM_RED_POTION_WITH_BOTTLE:
+    case ITEM_MM_BOTTLED_GOLD_DUST:
+    case ITEM_MM_BOTTLED_CHATEAU_ROMANI:
+        addNewBottle(itemId);
         break;
     case ITEM_MM_BOMB:
         addBombs(1);
