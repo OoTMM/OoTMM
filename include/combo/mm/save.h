@@ -30,7 +30,8 @@ typedef struct
 {
     u8      buttonItems[4][4];
     u8      cButtonSlots[4][4];
-    u16     equipment;
+    u16     unused:14;
+    u16     sword:2;
 }
 MmItemEquips;
 

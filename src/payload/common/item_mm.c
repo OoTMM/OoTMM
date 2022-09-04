@@ -1,35 +1,19 @@
 #include <combo.h>
 
-static void addUpgrade(u16 itemId)
+static const u16 kSwords[] = {
+    ITEM_NONE,
+    ITEM_MM_SWORD_KOKIRI,
+    ITEM_MM_SWORD_RAZOR,
+    ITEM_MM_SWORD_GILDED,
+};
+
+static void addSword(int index)
 {
-    switch (itemId)
-    {
-    case ITEM_MM_MAGIC_UPGRADE:
-        gMmSave.playerData.magicAcquired = 1;
-#if defined(GAME_MM)
-        gSave.playerData.magicLevel = 0;
-        gSave.playerData.magic = 0x30;
-        gSaveContext.magicTarget = 0x30;
-#else
-        gMmSave.playerData.magicLevel = 1;
-        gMmSave.playerData.magic = 0x30;
-#endif
-        break;
-    case ITEM_MM_MAGIC_UPGRADE2:
-        gMmSave.playerData.doubleMagic = 1;
-#if defined(GAME_MM)
-        gSave.playerData.magicLevel = 0;
-        gSave.playerData.magic = 0x60;
-        gSaveContext.magicTarget = 0x60;
-#else
-        gMmSave.playerData.magicLevel = 2;
-        gMmSave.playerData.magic = 0x60;
-#endif
-        break;
-    }
+    gMmSave.itemEquips.buttonItems[0][0] = kSwords[index];
+    gMmSave.itemEquips.sword = index;
 }
 
-static void addInventory(u16 itemId)
+void comboAddItemMm(u16 itemId)
 {
     switch (itemId)
     {
@@ -105,13 +89,36 @@ static void addInventory(u16 itemId)
     case ITEM_MM_MASK_FIERCE_DEITY:
         gMmSave.inventory.items[ITS_MM_MASK_FIERCE_DEITY] = ITEM_MM_MASK_FIERCE_DEITY;
         break;
-    default:
+    case ITEM_MM_MAGIC_UPGRADE:
+        gMmSave.playerData.magicAcquired = 1;
+#if defined(GAME_MM)
+        gSave.playerData.magicLevel = 0;
+        gSave.playerData.magic = 0x30;
+        gSaveContext.magicTarget = 0x30;
+#else
+        gMmSave.playerData.magicLevel = 1;
+        gMmSave.playerData.magic = 0x30;
+#endif
+        break;
+    case ITEM_MM_MAGIC_UPGRADE2:
+        gMmSave.playerData.doubleMagic = 1;
+#if defined(GAME_MM)
+        gSave.playerData.magicLevel = 0;
+        gSave.playerData.magic = 0x60;
+        gSaveContext.magicTarget = 0x60;
+#else
+        gMmSave.playerData.magicLevel = 2;
+        gMmSave.playerData.magic = 0x60;
+#endif
+        break;
+    case ITEM_MM_SWORD_KOKIRI:
+        addSword(1);
+        break;
+    case ITEM_MM_SWORD_RAZOR:
+        addSword(2);
+        break;
+    case ITEM_MM_SWORD_GILDED:
+        addSword(3);
         break;
     }
-}
-
-void comboAddItemMm(u16 itemId)
-{
-    addInventory(itemId);
-    addUpgrade(itemId);
 }

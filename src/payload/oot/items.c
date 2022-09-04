@@ -26,8 +26,8 @@ int GetItemCollectBehavior(s16 itemId)
 
 int comboGiveItem(Actor* actor, GameState_Play* play, s16 itemId, float a, float b)
 {
-    s16 absItemId;
     s32 override;
+    s16 absItemId;
 
     override = -1;
     absItemId = itemId > 0 ? itemId : -itemId;
