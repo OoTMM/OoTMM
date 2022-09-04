@@ -25,7 +25,7 @@ void comboInitOverride(void)
 s32 comboGetOverride(u16 key)
 {
     /* DEBUG */
-    return GI_MM_SONG_GORON;
+    return GI_MM_DEKU_NUTS_10;
 
     for (int i = 0; i < 256; ++i)
     {
