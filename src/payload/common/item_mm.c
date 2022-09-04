@@ -400,5 +400,10 @@ void comboAddItemMm(u16 itemId)
         gMmSave.playerData.healthCapacity += 0x10;
         gMmSave.playerData.health += 0x10;
         break;
+    case ITEM_MM_RECOVERY_HEART:
+        gMmSave.playerData.health += 0x10;
+        if (gMmSave.playerData.health > gMmSave.playerData.healthCapacity)
+            gMmSave.playerData.health = gMmSave.playerData.healthCapacity;
+        break;
     }
 }
