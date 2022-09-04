@@ -295,8 +295,13 @@ static void addEquipment(u16 itemId)
     case ITEM_OOT_MASTER_SWORD:
         gOotSave.equipment.swords |= EQ_OOT_SWORD_MASTER;
         break;
-    case ITEM_OOT_GIANT_KNIFE_BS:
+    case ITEM_OOT_GIANT_KNIFE:
         gOotSave.equipment.swords |= EQ_OOT_SWORD_KNIFE;
+        break;
+    case ITEM_OOT_SWORD_BIGGORON:
+        gOotSave.equipment.swords |= EQ_OOT_SWORD_KNIFE;
+        gOotSave.equipment.swords &= ~(EQ_OOT_SWORD_KNIFE_BROKEN);
+        gOotSave.isBiggoronSword = 1;
         break;
     case ITEM_OOT_DEKU_SHIELD:
         gOotSave.equipment.shields |= EQ_OOT_SHIELD_DEKU;
@@ -398,6 +403,14 @@ static void addQuest(u16 itemId)
 {
     switch (itemId)
     {
+    case ITEM_OOT_HEART_PIECE:
+    case ITEM_OOT_HEART_PIECE2:
+        gOotSave.quest.heartPieces++;
+        break;
+    case ITEM_OOT_HEART_CONTAINER:
+        gOotSave.healthMax += 0x10;
+        gOotSave.health += 0x10;
+        break;
     case ITEM_OOT_GERUDO_CARD:
         gOotSave.quest.gerudoCard = 1;
         break;

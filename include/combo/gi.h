@@ -123,10 +123,10 @@
 #define GI_OOT_TC_RUPEE_RED         0x74
 #define GI_OOT_TC_RUPEE_PURPLE      0x75
 #define GI_OOT_TC_HEART_PIECE       0x76
-#define GI_OOT_DEKU_STICK_UPGRADE   0x77
-#define GI_OOT_DEKU_STICK_UPGRADE2  0x78
-#define GI_OOT_DEKU_NUT_UPGRADE     0x79
-#define GI_OOT_DEKU_NUT_UPGRADE2    0x7a
+#define GI_OOT_STICK_UPGRADE        0x77
+#define GI_OOT_STICK_UPGRADE2       0x78
+#define GI_OOT_NUT_UPGRADE          0x79
+#define GI_OOT_NUT_UPGRADE2         0x7a
 #define GI_OOT_BULLET_BAG3          0x7b
 #define GI_OOT_ICE_TRAP             0x7c
 

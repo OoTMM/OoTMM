@@ -80,7 +80,7 @@ static const char* const kItemNamesOot[] = {
     "", /* Bow & Light */
     "the " C1 "Kokiri Sword",
     "the " C1 "Master Sword",
-    C1 "Biggoron's Sword", /* Needs check for Giant Knife */
+    "the " C1 "Giant's Knife",
     "the " C1 "Deku Shield",
     "the " C1 "Hylian Shield",
     "the " C1 "Mirror Shield",
@@ -178,6 +178,7 @@ static const char* const kItemNamesOot[] = {
     "the " C1 "Magic Upgrade",
     "the " C1 "Larger Magic Upgrade",
     "the " C1 "Defense Upgrade",
+    C1 "Biggoron's Sword",
 };
 
 static const char* const kItemNamesMm[] = {

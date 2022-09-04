@@ -24,6 +24,9 @@ void comboInitOverride(void)
 
 s32 comboGetOverride(u16 key)
 {
+    /* DEBUG */
+    return GI_OOT_SWORD_KOKIRI;
+
     for (int i = 0; i < 256; ++i)
     {
         ComboOverride* o = &gComboChestOverrides[i];

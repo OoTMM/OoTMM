@@ -44,7 +44,9 @@ OotSaveUpgrades;
 
 typedef struct PACKED ALIGNED(4)
 {
-    u32  unused:9;
+    u32  heartPieces:4;
+    u32  unused:4;
+    u32  goldToken:1;
     u32  gerudoCard:1;
     u32  agonyStone:1;
     u32  stoneSapphire:1;
@@ -93,7 +95,9 @@ typedef struct PACKED ALIGNED(4)
     u8                      magicUpgrade;
     char                    unk_3b[1];
     u8                      magicUpgrade2;
-    char                    unk_3d[0x37];
+    char                    unk_3d[1];
+    u8                      isBiggoronSword;
+    char                    unk_3f[0x35];
     u8                      inventory[0x18];
     u8                      ammo[0xf];
     u8                      beans;

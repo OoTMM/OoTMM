@@ -62,7 +62,7 @@
 #define ITEM_OOT_BOW_ARROW_LIGHT        0x3a
 #define ITEM_OOT_KOKIRI_SWORD           0x3b
 #define ITEM_OOT_MASTER_SWORD           0x3c
-#define ITEM_OOT_GIANT_KNIFE_BS         0x3d
+#define ITEM_OOT_GIANT_KNIFE            0x3d
 #define ITEM_OOT_DEKU_SHIELD            0x3e
 #define ITEM_OOT_HYLIAN_SHIELD          0x3f
 #define ITEM_OOT_MIRROR_SHIELD          0x40
@@ -154,6 +154,7 @@
 #define ITEM_OOT_MAGIC_UPGRADE          0x9c
 #define ITEM_OOT_MAGIC_UPGRADE2         0x9d
 #define ITEM_OOT_DEFENSE_UPGRADE        0x9e
+#define ITEM_OOT_SWORD_BIGGORON         0x9f
 
 #define ITEM_MM_OCARINA_OF_TIME             0x00
 #define ITEM_MM_HERO_BOW                    0x01
