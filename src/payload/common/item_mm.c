@@ -351,5 +351,20 @@ void comboAddItemMm(u16 itemId)
     case ITEM_MM_SONG_GORON_HALF:
         gMmSave.inventory.questItems.songLullabyIntro = 1;
         break;
+    case ITEM_MM_BOMBER_NOTEBOOK:
+        gMmSave.inventory.questItems.notebook = 1;
+        break;
+    case ITEM_MM_REMAINS_ODALWA:
+        gMmSave.inventory.questItems.remainsOdolwa = 1;
+        break;
+    case ITEM_MM_REMAINS_GOHT:
+        gMmSave.inventory.questItems.remainsGoht = 1;
+        break;
+    case ITEM_MM_REMAINS_GYORG:
+        gMmSave.inventory.questItems.remainsGyorg = 1;
+        break;
+    case ITEM_MM_REMAINS_TWINMOLD:
+        gMmSave.inventory.questItems.remainsTwinmold = 1;
+        break;
     }
 }
