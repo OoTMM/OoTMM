@@ -38,15 +38,25 @@ MmItemEquips;
 
 typedef struct
 {
-    u8      items[48];
-    s8      ammo[24];
-    u32     upgrades;
-    u32     questItems;
-    u8      dungeonItems[10];
-    s8      dungeonKeys[9];
-    s8      defenseHearts;
-    s8      strayFairies[10];
-    char    dekuPlaygroundPlayerName[3][8];
+    u32     unused:18;
+    u32     wallet:2;
+    u32     unused2:6;
+    u32     bombBag:3;
+    u32     quiver:3;
+}
+MmUpgrades;
+
+typedef struct
+{
+    u8          items[48];
+    s8          ammo[24];
+    MmUpgrades  upgrades;
+    u32         questItems;
+    u8          dungeonItems[10];
+    s8          dungeonKeys[9];
+    s8          defenseHearts;
+    s8          strayFairies[10];
+    char        dekuPlaygroundPlayerName[3][8];
 }
 MmInventory;
 

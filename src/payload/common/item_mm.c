@@ -18,6 +18,13 @@ static void addShield(int index)
     gMmSave.itemEquips.shield = index;
 }
 
+static void addBombBag(int index)
+{
+    gMmSave.inventory.items[ITS_MM_BOMBS] = ITEM_MM_BOMB;
+    gMmSave.inventory.upgrades.bombBag = index;
+    gMmSave.inventory.ammo[ITS_MM_BOMBS] = kMaxBombs[index];
+}
+
 void comboAddItemMm(u16 itemId)
 {
     switch (itemId)
@@ -130,6 +137,15 @@ void comboAddItemMm(u16 itemId)
         break;
     case ITEM_MM_SHIELD_MIRROR:
         addShield(2);
+        break;
+    case ITEM_MM_BOMB_BAG:
+        addBombBag(1);
+        break;
+    case ITEM_MM_BOMB_BAG2:
+        addBombBag(2);
+        break;
+    case ITEM_MM_BOMB_BAG3:
+        addBombBag(3);
         break;
     }
 }

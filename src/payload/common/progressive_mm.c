@@ -25,6 +25,24 @@ static s32 progressiveShield(void)
     }
 }
 
+static s32 progressiveBow(void)
+{
+
+}
+
+static s32 progressiveBombBag(void)
+{
+    switch (gMmSave.inventory.upgrades.bombBag)
+    {
+    case 0:
+        return GI_MM_BOMB_BAG;
+    case 1:
+        return GI_MM_BOMB_BAG2;
+    default:
+        return GI_MM_BOMB_BAG3;
+    }
+}
+
 s32 comboProgressiveMm(s32 gi)
 {
     switch (gi)
@@ -37,6 +55,11 @@ s32 comboProgressiveMm(s32 gi)
     case GI_MM_HYLIAN_SHIELD:
     case GI_MM_MIRROR_SHIELD:
         gi = progressiveShield();
+        break;
+    case GI_MM_BOMB_BAG:
+    case GI_MM_BOMB_BAG2:
+    case GI_MM_BOMB_BAG3:
+        gi = progressiveBombBag();
         break;
     }
     return gi;
