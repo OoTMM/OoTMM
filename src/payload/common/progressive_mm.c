@@ -51,6 +51,17 @@ static s32 progressiveBombBag(void)
     }
 }
 
+static s32 progressiveWallet(void)
+{
+    switch (gMmSave.inventory.upgrades.wallet)
+    {
+    case 0:
+        return GI_MM_WALLET2;
+    default:
+        return GI_MM_WALLET3;
+    }
+}
+
 s32 comboProgressiveMm(s32 gi)
 {
     switch (gi)
@@ -73,6 +84,10 @@ s32 comboProgressiveMm(s32 gi)
     case GI_MM_QUIVER2:
     case GI_MM_QUIVER3:
         gi = progressiveBow();
+        break;
+    case GI_MM_WALLET2:
+    case GI_MM_WALLET3:
+        gi = progressiveWallet();
         break;
     }
     return gi;

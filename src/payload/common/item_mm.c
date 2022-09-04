@@ -164,5 +164,11 @@ void comboAddItemMm(u16 itemId)
     case ITEM_MM_QUIVER3:
         addBowQuiver(3);
         break;
+    case ITEM_MM_WALLET2:
+        gMmSave.inventory.upgrades.wallet = 1;
+        break;
+    case ITEM_MM_WALLET3:
+        gMmSave.inventory.upgrades.wallet = 2;
+        break;
     }
 }
