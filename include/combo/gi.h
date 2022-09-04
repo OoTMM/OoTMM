@@ -277,6 +277,17 @@
 #define GI_MM_MAGIC_UPGRADE2        0xbc
 #define GI_MM_DEFENSE_UPGRADE       0xbd
 #define GI_MM_SPIN_UPGRADE          0xbe
+#define GI_MM_SONG_AWAKENING        0xbf
+#define GI_MM_SONG_GORON            0xc0
+#define GI_MM_SONG_ZORA             0xc1
+#define GI_MM_SOMG_EMPTINESS        0xc2
+#define GI_MM_SONG_ORDER            0xc3
+#define GI_MM_SONG_TIME             0xc4
+#define GI_MM_SONG_HEALING          0xc5
+#define GI_MM_SONG_EPONA            0xc6
+#define GI_MM_SONG_SOARING          0xc7
+#define GI_MM_SONG_STORMS           0xc8
+#define GI_MM_SONG_GORON_HALF       0xc9
 
 typedef struct PACKED ALIGNED(2)
 {
