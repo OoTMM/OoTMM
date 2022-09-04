@@ -73,6 +73,15 @@ typedef struct PACKED ALIGNED(4)
 }
 OotSaveQuest;
 
+typedef struct
+{
+    u8 unused:5;
+    u8 map:1;
+    u8 compass:1;
+    u8 bossKey:1;
+}
+OotDungeonItems;
+
 typedef struct PACKED ALIGNED(4)
 {
     u32                     entrance;
@@ -105,8 +114,8 @@ typedef struct PACKED ALIGNED(4)
     u16                     unk_9e;
     OotSaveUpgrades         upgrades;
     OotSaveQuest            quest;
-    u8                      dungeonItems[0x14];
-    u8                      dungeonKeys[0x13];
+    OotDungeonItems         dungeonItems[0x14];
+    s8                      dungeonKeys[0x13];
     u8                      doubleDefenseHearts;
     u16                     goldTokens;
     OotPermanentSceneFlags  perm[101];
@@ -127,7 +136,9 @@ typedef struct PACKED ALIGNED(4)
     s16     rupeesDelta;
     char    unk_13ce[0x28];
     s16     magicTarget;
-    char    unk_13f8[0x2c];
+    char    unk_13f8[0x0a];
+    u16     sceneId;
+    char    unk_1404[0x20];
     u16     healthDelta;
     char    unk_1428[0x28];
 }

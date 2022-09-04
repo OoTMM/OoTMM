@@ -27,6 +27,34 @@ const u8 kOotTradeChild[] = {
     ITEM_OOT_MASK_OF_TRUTH,
 };
 
+#if defined(GAME_OOT)
+/* Used for dungeons, to map boss lairs to their main scene */
+static u16 mainScene(u16 sceneId)
+{
+    switch (sceneId)
+    {
+    case SCE_LAIR_GOHMA:
+        return SCE_INSIDE_DEKU_TREE;
+    case SCE_LAIR_KING_DODONGO:
+        return SCE_DODONGO_CAVERN;
+    case SCE_LAIR_BARINADE:
+        return SCE_INSIDE_JABU_JABU;
+    case SCE_LAIR_PHANTOM_GANON:
+        return SCE_TEMPLE_FOREST;
+    case SCE_LAIR_VOLVAGIA:
+        return SCE_TEMPLE_FIRE;
+    case SCE_LAIR_MORPHA:
+        return SCE_TEMPLE_WATER;
+    case SCE_LAIR_TWINROVA:
+        return SCE_TEMPLE_SPIRIT;
+    case SCE_LAIR_BONGO_BONGO:
+        return SCE_TEMPLE_SHADOW;
+    }
+
+    return sceneId;
+}
+#endif
+
 static void addHealth(u8 count)
 {
     u16 health;
@@ -192,6 +220,9 @@ static void addRupees(u16 count)
 
 void comboAddItemOot(u16 itemId)
 {
+    u16 sceneId;
+
+    (void)sceneId;
     switch (itemId)
     {
     case ITEM_OOT_STICK:
@@ -583,5 +614,26 @@ void comboAddItemOot(u16 itemId)
     case ITEM_OOT_CLAIM_CHECK:
         addTradeAdult(9);
         break;
+#if defined(GAME_OOT)
+    case ITEM_OOT_SMALL_KEY:
+        sceneId = mainScene(gSaveContext.sceneId);
+        if (gOotSave.dungeonKeys[sceneId] < 0)
+            gOotSave.dungeonKeys[sceneId] = 1;
+        else
+            gOotSave.dungeonKeys[sceneId]++;
+        break;
+    case ITEM_OOT_MAP:
+        sceneId = mainScene(gSaveContext.sceneId);
+        gOotSave.dungeonItems[sceneId].map = 1;
+        break;
+    case ITEM_OOT_COMPASS:
+        sceneId = mainScene(gSaveContext.sceneId);
+        gOotSave.dungeonItems[sceneId].compass = 1;
+        break;
+    case ITEM_OOT_BIG_KEY:
+        sceneId = mainScene(gSaveContext.sceneId);
+        gOotSave.dungeonItems[sceneId].bossKey = 1;
+        break;
+#endif
     }
 }
