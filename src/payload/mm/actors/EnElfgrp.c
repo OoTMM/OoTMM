@@ -22,7 +22,7 @@ void EnElfgrp_GiveReward(Actor* actor, GameState_Play* play)
     if (HasActorGivenItem(actor))
     {
         SetCollectibleFlag(play, fairyIndex + 1);
-        MM_SET_EVENT_WEEK(EV_MM_WEEK_RESTORED_FAIRY);
+        /* TODO: Probably need an event flag? */
         return;
     }
 

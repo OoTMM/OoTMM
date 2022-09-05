@@ -466,5 +466,8 @@ void comboAddItemMm(u16 itemId)
         gMmSave.inventory.defenseHearts = 20;
         gMmSave.playerData.health = gMmSave.playerData.healthCapacity;
         break;
+    case ITEM_MM_SPIN_UPGRADE:
+        MM_SET_EVENT_WEEK(EV_MM_WEEK_SPIN_UPGRADE);
+        break;
     }
 }
