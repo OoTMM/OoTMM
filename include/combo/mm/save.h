@@ -169,12 +169,17 @@ MmSave;
 
 typedef struct
 {
-    MmSave save;
-    char   unk[0x2c94];
-    u32    fileIndex;
-    char   unk_3ca4[0x28c];
-    u16    magicTarget;
-    char   unk_3f32[0x996];
+    MmSave  save;
+    u8      eventInf[8];
+    u8      unk_1014;
+    u8      unk_1015;
+    u16     jinxTimer;
+    s16     rupeesDelta;
+    char    unk[0x2c86];
+    u32     fileIndex;
+    char    unk_3ca4[0x28c];
+    u16     magicTarget;
+    char    unk_3f32[0x996];
 }
 MmSaveContext;
 

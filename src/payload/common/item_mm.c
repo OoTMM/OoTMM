@@ -101,6 +101,21 @@ static void addNewBottle(u16 itemId)
     }
 }
 
+static void addRupees(s16 count)
+{
+    u16 max;
+
+#if defined(GAME_MM)
+    (void)max;
+    gSaveContext.rupeesDelta += count;
+#else
+    max = kMaxRupees[gMmSave.inventory.upgrades.wallet];
+    gMmSave.playerData.rupees += count;
+    if (gMmSave.playerData.rupees > max)
+        gMmSave.playerData.rupees = max;
+#endif
+}
+
 void comboAddItemMm(u16 itemId)
 {
     switch (itemId)
@@ -404,6 +419,27 @@ void comboAddItemMm(u16 itemId)
         gMmSave.playerData.health += 0x10;
         if (gMmSave.playerData.health > gMmSave.playerData.healthCapacity)
             gMmSave.playerData.health = gMmSave.playerData.healthCapacity;
+        break;
+    case ITEM_MM_RUPEE_GREEN:
+        addRupees(1);
+        break;
+    case ITEM_MM_RUPEE_BLUE:
+        addRupees(5);
+        break;
+    case ITEM_MM_RUPEE_RED10:
+        addRupees(10);
+        break;
+    case ITEM_MM_RUPEE_RED:
+        addRupees(20);
+        break;
+    case ITEM_MM_RUPEE_PURPLE:
+        addRupees(50);
+        break;
+    case ITEM_MM_RUPEE_SILVER:
+        addRupees(100);
+        break;
+    case ITEM_MM_RUPEE_GOLD:
+        addRupees(200);
         break;
     }
 }
