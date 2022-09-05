@@ -461,5 +461,10 @@ void comboAddItemMm(u16 itemId)
         gSave.inventory.dungeonItems[gSaveContext.dungeonId].compass = 1;
         break;
 #endif
+    case ITEM_MM_DEFENSE_UPGRADE:
+        gMmSave.playerData.doubleDefense = 1;
+        gMmSave.inventory.defenseHearts = 20;
+        gMmSave.playerData.health = gMmSave.playerData.healthCapacity;
+        break;
     }
 }
