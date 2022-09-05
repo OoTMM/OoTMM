@@ -39,7 +39,6 @@ static const MmItemEquips kDefaultItemEquips =
         { 0xff, 0xff, 0xff, 0xff },
         { 0xff, 0xff, 0xff, 0xff },
     },
-    0x0,
 };
 
 static const MmInventory kDefaultInventory =
@@ -57,10 +56,10 @@ static const MmInventory kDefaultInventory =
         0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0,
     },
-    0x120000,
-    0,
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff},
+    { 0x12, 0, 0, 0, 0, 0 },
+    {},
+    {},
+    {-1, -1, -1, -1, -1, -1, -1, -1, -1},
     0,
     { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
     {

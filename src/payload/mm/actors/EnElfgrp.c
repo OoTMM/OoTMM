@@ -22,7 +22,7 @@ void EnElfgrp_GiveReward(Actor* actor, GameState_Play* play)
     if (HasActorGivenItem(actor))
     {
         SetCollectibleFlag(play, fairyIndex + 1);
-        MM_SET_EVENT_WEEK(EV_MM_WEEK_RESTORED_FAIRY);
+        /* TODO: Probably need an event flag? */
         return;
     }
 
@@ -33,6 +33,6 @@ void EnElfgrp_GiveReward(Actor* actor, GameState_Play* play)
     override = comboGetCollectibleOverride(play->sceneId, fairyIndex);
     if (override >= 0)
         gi = override;
-    gi = comboProgressiveChestItem(gi);
+    gi = comboProgressive(gi);
     GiveItem(actor, play, gi, 200.f, 200.f);
 }

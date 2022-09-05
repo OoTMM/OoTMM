@@ -369,6 +369,18 @@ void comboAddItemOot(u16 itemId)
         gOotSave.equipment.shields |= EQ_OOT_SHIELD_MIRROR;
         gOotExtraItems.shield |= EQ_OOT_SHIELD_MIRROR;
         break;
+    case ITEM_OOT_GORON_TUNIC:
+        gOotSave.equipment.tunics |= EQ_OOT_TUNIC_GORON;
+        break;
+    case ITEM_OOT_ZORA_TUNIC:
+        gOotSave.equipment.tunics |= EQ_OOT_TUNIC_ZORA;
+        break;
+    case ITEM_OOT_IRON_BOOTS:
+        gOotSave.equipment.boots |= EQ_OOT_BOOTS_IRON;
+        break;
+    case ITEM_OOT_HOVER_BOOTS:
+        gOotSave.equipment.boots |= EQ_OOT_BOOTS_HOVER;
+        break;
     case ITEM_OOT_GORON_BRACELET:
         gOotSave.upgrades.strength = 1;
         break;

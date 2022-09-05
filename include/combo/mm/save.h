@@ -30,21 +30,70 @@ typedef struct
 {
     u8      buttonItems[4][4];
     u8      cButtonSlots[4][4];
-    u16     equipment;
+    u16     unused:10;
+    u16     shield:2;
+    u16     sword:4;
 }
 MmItemEquips;
 
 typedef struct
 {
-    u8      items[48];
-    s8      ammo[24];
-    u32     upgrades;
-    u32     questItems;
-    u8      dungeonItems[10];
-    s8      dungeonKeys[9];
-    s8      defenseHearts;
-    s8      strayFairies[10];
-    char    dekuPlaygroundPlayerName[3][8];
+    u32     unused:16;
+    u32     unused2:2;
+    u32     wallet:2;
+    u32     unused3:6;
+    u32     bombBag:3;
+    u32     quiver:3;
+}
+MmUpgrades;
+
+typedef struct
+{
+    u8 unused:5;
+    u8 map:1;
+    u8 compass:1;
+    u8 bossKey:1;
+}
+MmDungeonItems;
+
+typedef struct
+{
+    u32 heartPieces:4;
+    u32 unused:3;
+    u32 songLullabyIntro:1;
+    u32 unused2:5;
+    u32 notebook:1;
+    u32 songGlitch1:1;
+    u32 songStorms:1;
+    u32 songSoaring:1;
+    u32 songEpona:1;
+    u32 songHealing:1;
+    u32 songTime:1;
+    u32 songGlitch2:1;
+    u32 songOrder:1;
+    u32 songEmpty:1;
+    u32 songNewWave:1;
+    u32 songLullaby:1;
+    u32 songAwakening:1;
+    u32 unused3:2;
+    u32 remainsTwinmold:1;
+    u32 remainsGyorg:1;
+    u32 remainsGoht:1;
+    u32 remainsOdolwa:1;
+}
+MmQuestItems;
+
+typedef struct
+{
+    u8              items[48];
+    s8              ammo[24];
+    MmUpgrades      upgrades;
+    MmQuestItems    questItems;
+    MmDungeonItems  dungeonItems[10];
+    s8              dungeonKeys[9];
+    s8              defenseHearts;
+    s8              strayFairies[10];
+    char            dekuPlaygroundPlayerName[3][8];
 }
 MmInventory;
 
@@ -129,12 +178,19 @@ MmSave;
 
 typedef struct
 {
-    MmSave save;
-    char   unk[0x2c94];
-    u32    fileIndex;
-    char   unk_3ca4[0x28c];
-    u16    magicTarget;
-    char   unk_3f32[0x996];
+    MmSave  save;
+    u8      eventInf[8];
+    u8      unk_1014;
+    u8      unk_1015;
+    u16     jinxTimer;
+    s16     rupeesDelta;
+    char    unk[0x2c86];
+    u32     fileIndex;
+    char    unk_3ca4[0x28c];
+    u16     magicTarget;
+    char    unk_3f32[0x978];
+    u16     dungeonId;
+    u8      maskMaskBit[27];
 }
 MmSaveContext;
 

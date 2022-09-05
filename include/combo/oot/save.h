@@ -19,7 +19,7 @@ typedef union
 }
 OotPermanentSceneFlags;
 
-typedef struct PACKED ALIGNED(2)
+typedef struct
 {
     u16  boots:4;
     u16  tunics:4;
@@ -28,7 +28,7 @@ typedef struct PACKED ALIGNED(2)
 }
 OotSaveEquipment;
 
-typedef struct PACKED ALIGNED(4)
+typedef struct
 {
     u32  unused:9;
     u32  dekuNut:3;
@@ -42,7 +42,7 @@ typedef struct PACKED ALIGNED(4)
 }
 OotSaveUpgrades;
 
-typedef struct PACKED ALIGNED(4)
+typedef struct
 {
     u32  heartPieces:4;
     u32  unused:4;
@@ -82,7 +82,7 @@ typedef struct
 }
 OotDungeonItems;
 
-typedef struct PACKED ALIGNED(4)
+typedef struct
 {
     u32                     entrance;
     u32                     age;
@@ -128,7 +128,7 @@ typedef struct PACKED ALIGNED(4)
 }
 OotSave;
 
-typedef struct PACKED ALIGNED(4)
+typedef struct
 {
     OotSave save;
     u32     fileIndex;

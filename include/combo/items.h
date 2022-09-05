@@ -157,14 +157,14 @@
 #define ITEM_OOT_SWORD_BIGGORON         0x9f
 
 #define ITEM_MM_OCARINA_OF_TIME             0x00
-#define ITEM_MM_HERO_BOW                    0x01
-#define ITEM_MM_FIRE_ARROW                  0x02
-#define ITEM_MM_ICE_ARROW                   0x03
-#define ITEM_MM_LIGHT_ARROW                 0x04
+#define ITEM_MM_BOW                         0x01
+#define ITEM_MM_ARROW_FIRE                  0x02
+#define ITEM_MM_ARROW_ICE                   0x03
+#define ITEM_MM_ARROW_LIGHT                 0x04
 #define ITEM_MM_BOMB                        0x06
 #define ITEM_MM_BOMBCHU                     0x07
-#define ITEM_MM_DEKU_STICK                  0x08
-#define ITEM_MM_DEKU_NUT                    0x09
+#define ITEM_MM_STICK                       0x08
+#define ITEM_MM_NUT                         0x09
 #define ITEM_MM_MAGIC_BEAN                  0x0a
 #define ITEM_MM_POWDER_KEG                  0x0c
 #define ITEM_MM_PICTOGRAPH_BOX              0x0d
@@ -254,6 +254,7 @@
 #define ITEM_MM_SONG_STORMS                 0x6b
 #define ITEM_MM_BOMBER_NOTEBOOK             0x6d
 #define ITEM_MM_HEART_CONTAINER             0x6f
+#define ITEM_MM_HEART_PIECE2                0x70
 #define ITEM_MM_SONG_GORON_HALF             0x73
 #define ITEM_MM_BIG_KEY                     0x74
 #define ITEM_MM_COMPASS                     0x75
@@ -269,8 +270,8 @@
 #define ITEM_MM_RUPEE_PURPLE                0x88
 #define ITEM_MM_RUPEE_SILVER                0x89
 #define ITEM_MM_RUPEE_GOLD                  0x8a
-#define ITEM_MM_DEKU_NUTS_5                 0x8d
-#define ITEM_MM_DEKU_NUTS_10                0x8e
+#define ITEM_MM_NUTS_5                      0x8d
+#define ITEM_MM_NUTS_10                     0x8e
 #define ITEM_MM_BOMBS_5                     0x8f
 #define ITEM_MM_BOMBS_10                    0x90
 #define ITEM_MM_BOMBS_20                    0x91
@@ -282,10 +283,10 @@
 #define ITEM_MM_BOMBCHUS_10                 0x98
 #define ITEM_MM_BOMBCHU_ALT                 0x99
 #define ITEM_MM_BOMBCHUS_5                  0x9a
-#define ITEM_MM_DEKU_STICKS_20              0x9b
-#define ITEM_MM_DEKU_STICKS_30              0x9c
-#define ITEM_MM_DEKU_NUTS_30                0x9d
-#define ITEM_MM_DEKU_NUTS_40                0x9e
+#define ITEM_MM_STICKS_20                   0x9b
+#define ITEM_MM_STICKS_30                   0x9c
+#define ITEM_MM_NUTS_30                     0x9d
+#define ITEM_MM_NUTS_40                     0x9e
 #define ITEM_MM_CHATEAU_ROMANI              0x9f
 #define ITEM_MM_MILK                        0xa0
 #define ITEM_MM_GOLD_DUST                   0xa1
