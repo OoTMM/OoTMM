@@ -278,7 +278,7 @@ static const char* const kItemNamesMm[] = {
     "the " C1 "Biggest Bomb Bag",
     "", /* JP items */
     "the " C1 "Adult Wallet",
-    "the " C1 "Giant's Wallet",
+    "the " C1 "Giant Wallet",
     "",
     C3 "Odalwa's Remains",
     C3 "Goht's Remains",

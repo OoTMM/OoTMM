@@ -8,6 +8,16 @@ int comboGiveItem(Actor* actor, GameState_Play* play, s16 itemId, float a, float
     override = -1;
     absItemId = itemId > 0 ? itemId : -itemId;
 
+    switch (itemId)
+    {
+    case GI_MM_BOTTLED_POTION_RED:
+        override = comboGetNpcOverride(0x00);
+        break;
+    case GI_MM_PICTOGRAPH_BOX:
+        override = comboGetNpcOverride(0x01);
+        break;
+    }
+
     switch (actor->id)
     {
     case AC_EN_BOX:

@@ -24,6 +24,7 @@
   </scene>
   <scene id="2d" name="TerminaField" desc="Termina Field">
     <link to="Grotto_TerminaField_SwampGrass"/>
+    <link to="Road_Swamp"/>
     <chest id="01" content="RUPEE_RED" desc="Swamp Grass Chest"/>
   </scene>
   <scene id="07">
@@ -36,5 +37,18 @@
       <collectible id="00" content="MASK_GREAT_FAIRY" desc="Human"/>
       <collectible id="01" content="MAGIC_UPGRADE" desc="Non-Human" cond="has(MASK_DEKU) or has(MASK_GORON) or has(MASK_ZORA)"/>
     </room>
+  </scene>
+  <scene id="40" name="Road_Swamp">
+    <link to="Swamp"/>
+  </scene>
+  <scene id="45" name="Swamp">
+    <link to="Swamp_PotionShop"/>
+    <link to="Swamp_Tourist"/>
+  </scene>
+  <scene id="0a" name="Swamp_PotionShop">
+    <npc id="00" content="BOTTLED_POTION_RED"/>
+  </scene>
+  <scene id="57" name="Swamp_Tourist">
+    <npc id="01" content="PICTOGRAPH_BOX" cond="can_rescue_koume"/>
   </scene>
 </overworld>

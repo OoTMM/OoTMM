@@ -22,3 +22,7 @@ East: 0x02 0x08
 Grotto Termina var: 3f red rupee flag 1f
 Chest: 0x5081 id 01 content red rupee
 
+MM NPCs:
+
+00 Kotake (Red Potion)
+01 Koume (Picto-box)

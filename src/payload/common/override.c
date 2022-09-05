@@ -24,9 +24,6 @@ void comboInitOverride(void)
 
 s32 comboGetOverride(u16 key)
 {
-    /* DEBUG */
-    return GI_MM_BOTTLED_POTION_RED;
-
     for (int i = 0; i < 256; ++i)
     {
         ComboOverride* o = &gComboChestOverrides[i];

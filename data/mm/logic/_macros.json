@@ -1,3 +1,4 @@
 {
-
+  "has_bottle": "has(EMPTY_BOTTLE) or has(BOTTLED_POTION_RED)",
+  "can_rescue_koume": "has_bottle"
 }

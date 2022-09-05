@@ -1,7 +1,7 @@
 #ifndef COMBO_MM_SCENE_H
 #define COMBO_MM_SCENE_H
 
-#define SCE_SOUTHERN_SWAP_CLEAR                 0x00
+#define SCE_SOUTHERN_SWAMP_CLEAR                0x00
 #define SCE_GROTTOS                             0x07
 #define SCE_CUTSCENE_MAP                        0x08
 #define SCE_POTION_SHOP                         0x0a
@@ -59,7 +59,7 @@
 #define SCE_CUCCO_SHACK                         0x42
 #define SCE_IKANA_GRAVEYARD                     0x43
 #define SCE_LAIR_GOHT                           0x44
-#define SCE_SOUTHERN_SWAP_POISONED              0x45
+#define SCE_SOUTHERN_SWAMP_POISONED             0x45
 #define SCE_WOODFALL                            0x46
 #define SCE_MOON_ZORA                           0x47
 #define SCE_GORON_VILLAGE_SPRING                0x48
