@@ -66,3 +66,4 @@ SetCollectibleFlag = 0x800b5db0;
 GetCollectibleFlag = 0x800b5d6c;
 
 SpawnActorEx = 0x800bae14;
+ConvertMatrix = 0x801817fc;

@@ -55,9 +55,6 @@ void Shader_CustomNote(GameState* gs, s16 shaderId)
     CLOSE_DISPS();
 }
 
-
-#if defined(GAME_OOT)
-
 void ConvertMatrix(const float* in, u16* out);
 
 static const float kMatrixRot[] = {
@@ -149,15 +146,6 @@ void Shader_SpiritualStones(GameState* gs, s16 shaderId)
 
     CLOSE_DISPS();
 }
-
-#else
-
-void Shader_SpiritualStones(GameState* gs, s16 shaderId)
-{
-
-}
-
-#endif
 
 const Shader kShaders[256] = {
 #if defined(GAME_OOT)
