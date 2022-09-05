@@ -49,6 +49,15 @@ MmUpgrades;
 
 typedef struct
 {
+    u8 unused:5;
+    u8 map:1;
+    u8 compass:1;
+    u8 bossKey:1;
+}
+MmDungeonItems;
+
+typedef struct
+{
     u32 heartPieces:4;
     u32 unused:3;
     u32 songLullabyIntro:1;
@@ -80,7 +89,7 @@ typedef struct
     s8              ammo[24];
     MmUpgrades      upgrades;
     MmQuestItems    questItems;
-    u8              dungeonItems[10];
+    MmDungeonItems  dungeonItems[10];
     s8              dungeonKeys[9];
     s8              defenseHearts;
     s8              strayFairies[10];
@@ -179,7 +188,9 @@ typedef struct
     u32     fileIndex;
     char    unk_3ca4[0x28c];
     u16     magicTarget;
-    char    unk_3f32[0x996];
+    char    unk_3f32[0x978];
+    u16     dungeonId;
+    u8      maskMaskBit[27];
 }
 MmSaveContext;
 

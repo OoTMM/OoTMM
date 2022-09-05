@@ -441,5 +441,25 @@ void comboAddItemMm(u16 itemId)
     case ITEM_MM_RUPEE_GOLD:
         addRupees(200);
         break;
+#if defined(GAME_MM)
+    case ITEM_MM_SMALL_KEY:
+    {
+        s8* keys = &gSave.inventory.dungeonKeys[gSaveContext.dungeonId];
+        if (*keys < 0)
+            *keys = 1;
+        else
+            *keys += 1;
+        break;
+    }
+    case ITEM_MM_BIG_KEY:
+        gSave.inventory.dungeonItems[gSaveContext.dungeonId].bossKey = 1;
+        break;
+    case ITEM_MM_MAP:
+        gSave.inventory.dungeonItems[gSaveContext.dungeonId].map = 1;
+        break;
+    case ITEM_MM_COMPASS:
+        gSave.inventory.dungeonItems[gSaveContext.dungeonId].compass = 1;
+        break;
+#endif
     }
 }
