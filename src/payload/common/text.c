@@ -1,22 +1,27 @@
 #include <combo.h>
 
 #if defined(GAME_OOT)
-# define FAST "\x08"
-# define C0   "\x05\x44"
-# define C1   "\x05\x41"
-# define C2   "\x05\x45"
-# define C3   "\x05\x46"
-# define CZ   "\x05\x40"
-# define END  "\x02"
+# define FAST           "\x08"
+# define COLOR_TEAL     "\x05\x44"
+# define COLOR_PINK     "\x05\x45"
+# define COLOR_RED      "\x05\x41"
+# define COLOR_YELLOW   "\x05\x46"
+# define CZ             "\x05\x40"
+# define END            "\x02"
 #else
-# define FAST "\x17"
-# define C0   "\x05"
-# define C1   "\x01"
-# define C2   "\x06"
-# define C3   "\x04"
-# define CZ   "\x00"
-# define END  "\xbf"
+# define FAST           "\x17"
+# define COLOR_TEAL     "\x05"
+# define COLOR_PINK     "\x06"
+# define COLOR_RED      "\x01"
+# define COLOR_YELLOW   "\x04"
+# define CZ             "\x00"
+# define END            "\xbf"
 #endif
+
+#define C0   COLOR_TEAL
+#define C1   COLOR_RED
+#define C2   COLOR_PINK
+#define C3   COLOR_YELLOW
 
 static const char* const kItemNamesOot[] = {
     "a " C0 "Deku Stick",
@@ -359,10 +364,149 @@ static void appendStr(char** dst, const char* src)
     *dst += len;
 }
 
+static int isItemAmbiguousOot(u16 itemId)
+{
+    switch (itemId)
+    {
+    case ITEM_OOT_STICK:
+    case ITEM_OOT_NUT:
+    case ITEM_OOT_BOMB:
+    case ITEM_OOT_BOW:
+    case ITEM_OOT_ARROW_FIRE:
+    case ITEM_OOT_OCARINA_TIME:
+    case ITEM_OOT_BOMBCHU_10:
+    case ITEM_OOT_ARROW_ICE:
+    case ITEM_OOT_LENS:
+    case ITEM_OOT_MAGIC_BEAN:
+    case ITEM_OOT_ARROW_LIGHT:
+    case ITEM_OOT_EMPTY_BOTTLE:
+    case ITEM_OOT_MILK_BOTTLE:
+    case ITEM_OOT_KEATON_MASK:
+    case ITEM_OOT_BUNNY_HOOD:
+    case ITEM_OOT_GORON_MASK:
+    case ITEM_OOT_ZORA_MASK:
+    case ITEM_OOT_MASK_OF_TRUTH:
+    case ITEM_OOT_KOKIRI_SWORD:
+    case ITEM_OOT_HYLIAN_SHIELD:
+    case ITEM_OOT_QUIVER:
+    case ITEM_OOT_QUIVER2:
+    case ITEM_OOT_QUIVER3:
+    case ITEM_OOT_BOMB_BAG:
+    case ITEM_OOT_BOMB_BAG2:
+    case ITEM_OOT_BOMB_BAG3:
+    case ITEM_OOT_WALLET2:
+    case ITEM_OOT_WALLET3:
+    case ITEM_OOT_SONG_EPONA:
+    case ITEM_OOT_SONG_TIME:
+    case ITEM_OOT_SONG_STORMS:
+    case ITEM_OOT_HEART_CONTAINER:
+    case ITEM_OOT_HEART_PIECE:
+    case ITEM_OOT_HEART_PIECE2:
+    case ITEM_OOT_RECOVERY_HEART:
+    case ITEM_OOT_RUPEE_GREEN:
+    case ITEM_OOT_RUPEE_BLUE:
+    case ITEM_OOT_RUPEE_RED:
+    case ITEM_OOT_RUPEE_PURPLE:
+    case ITEM_OOT_RUPEE_HUGE:
+    case ITEM_OOT_STICKS_5:
+    case ITEM_OOT_STICKS_10:
+    case ITEM_OOT_NUTS_5:
+    case ITEM_OOT_NUTS_10:
+    case ITEM_OOT_BOMBS_5:
+    case ITEM_OOT_BOMBS_10:
+    case ITEM_OOT_BOMBS_20:
+    case ITEM_OOT_BOMBS_30:
+    case ITEM_OOT_ARROWS_5:
+    case ITEM_OOT_ARROWS_10:
+    case ITEM_OOT_ARROWS_30:
+    case ITEM_OOT_BOMBCHU_5:
+    case ITEM_OOT_BOMBCHU_20:
+    case ITEM_OOT_MAGIC_UPGRADE:
+    case ITEM_OOT_MAGIC_UPGRADE2:
+    case ITEM_OOT_DEFENSE_UPGRADE:
+        return 1;
+    default:
+        return 0;
+    }
+}
+
+static int isItemAmbiguousMm(u16 itemId)
+{
+    switch (itemId)
+    {
+    case ITEM_MM_OCARINA_OF_TIME:
+    case ITEM_MM_BOW:
+    case ITEM_MM_ARROW_FIRE:
+    case ITEM_MM_ARROW_ICE:
+    case ITEM_MM_ARROW_LIGHT:
+    case ITEM_MM_BOMB:
+    case ITEM_MM_BOMBCHU:
+    case ITEM_MM_STICK:
+    case ITEM_MM_NUT:
+    case ITEM_MM_MAGIC_BEAN:
+    case ITEM_MM_LENS_OF_TRUTH:
+    case ITEM_MM_RED_POTION_WITH_BOTTLE:
+    case ITEM_MM_EMPTY_BOTTLE:
+    case ITEM_MM_MASK_GORON:
+    case ITEM_MM_MASK_ZORA:
+    case ITEM_MM_MASK_TRUTH:
+    case ITEM_MM_MASK_BUNNY:
+    case ITEM_MM_MASK_KEATON:
+    case ITEM_MM_SWORD_KOKIRI:
+    case ITEM_MM_SHIELD_HERO:
+    case ITEM_MM_QUIVER:
+    case ITEM_MM_QUIVER2:
+    case ITEM_MM_QUIVER3:
+    case ITEM_MM_BOMB_BAG:
+    case ITEM_MM_BOMB_BAG2:
+    case ITEM_MM_BOMB_BAG3:
+    case ITEM_MM_WALLET2:
+    case ITEM_MM_WALLET3:
+    case ITEM_MM_SONG_TIME:
+    case ITEM_MM_SONG_EPONA:
+    case ITEM_MM_SONG_STORMS:
+    case ITEM_MM_HEART_CONTAINER:
+    case ITEM_MM_HEART_PIECE:
+    case ITEM_MM_HEART_PIECE2:
+    case ITEM_MM_RECOVERY_HEART:
+    case ITEM_MM_RUPEE_GREEN:
+    case ITEM_MM_RUPEE_BLUE:
+    case ITEM_MM_RUPEE_RED10:
+    case ITEM_MM_RUPEE_RED:
+    case ITEM_MM_RUPEE_PURPLE:
+    case ITEM_MM_RUPEE_SILVER:
+    case ITEM_MM_RUPEE_GOLD:
+    case ITEM_MM_NUTS_5:
+    case ITEM_MM_NUTS_10:
+    case ITEM_MM_BOMBS_5:
+    case ITEM_MM_BOMBS_10:
+    case ITEM_MM_BOMBS_20:
+    case ITEM_MM_BOMBS_30:
+    case ITEM_MM_ARROWS_10:
+    case ITEM_MM_ARROWS_30:
+    case ITEM_MM_ARROWS_40:
+    case ITEM_MM_BOMBCHUS_20:
+    case ITEM_MM_BOMBCHUS_10:
+    case ITEM_MM_BOMBCHU_ALT:
+    case ITEM_MM_BOMBCHUS_5:
+    case ITEM_MM_STICKS_20:
+    case ITEM_MM_STICKS_30:
+    case ITEM_MM_NUTS_30:
+    case ITEM_MM_NUTS_40:
+    case ITEM_MM_MAGIC_UPGRADE:
+    case ITEM_MM_MAGIC_UPGRADE2:
+    case ITEM_MM_DEFENSE_UPGRADE:
+        return 1;
+    default:
+        return 0;
+    }
+}
+
 void comboTextHijackItem(GameState_Play* play, u16 itemId)
 {
     char* b;
     const char* itemName;
+    int ambiguous;
 
 #if defined(GAME_MM)
     itemId ^= MASK_FOREIGN_ITEM;
@@ -371,10 +515,12 @@ void comboTextHijackItem(GameState_Play* play, u16 itemId)
     if (itemId & MASK_FOREIGN_ITEM)
     {
         itemName = kItemNamesMm[itemId & 0xff];
+        ambiguous = isItemAmbiguousMm(itemId & 0xff);
     }
     else
     {
         itemName = kItemNamesOot[itemId & 0xff];
+        ambiguous = isItemAmbiguousOot(itemId & 0xff);
     }
 
     b = play->textBuffer;
@@ -391,5 +537,21 @@ void comboTextHijackItem(GameState_Play* play, u16 itemId)
     /* strlen doesn't like NUL */
     *b++ = 0;
 #endif
-    appendStr(&b, "!" END);
+    appendStr(&b, "!");
+
+    if (ambiguous)
+    {
+        appendStr(&b, " (");
+        if (itemId & MASK_FOREIGN_ITEM)
+        {
+            appendStr(&b, COLOR_PINK "MM");
+            *b++ = 0;
+        }
+        else
+        {
+            appendStr(&b, COLOR_TEAL "OoT" CZ);
+        }
+        appendStr(&b, ")");
+    }
+    appendStr(&b, END);
 }
