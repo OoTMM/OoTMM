@@ -545,12 +545,16 @@ void comboTextHijackItem(GameState_Play* play, u16 itemId)
         if (itemId & MASK_FOREIGN_ITEM)
         {
             appendStr(&b, COLOR_PINK "MM");
-            *b++ = 0;
         }
         else
         {
-            appendStr(&b, COLOR_TEAL "OoT" CZ);
+            appendStr(&b, COLOR_TEAL "OoT");
         }
+#if defined(GAME_MM)
+        *b++ = 0;
+#else
+        appendStr(&b, CZ);
+#endif
         appendStr(&b, ")");
     }
     appendStr(&b, END);
