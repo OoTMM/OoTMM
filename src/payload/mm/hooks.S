@@ -2,10 +2,11 @@
 
 #define ENTRANCE_CLOCKTOWN  0xd800
 #define ENTRANCE_WOODS      0xc200
+#define ENTRANCE_DKING      0x7610
 
 /* DEBUG: MM entrance */
 PATCH_START 0x8014533c
-  li t8,ENTRANCE_WOODS
+  li t8,ENTRANCE_DKING
 PATCH_END
 
 /* Rebase MM's DMA Table */

@@ -44,11 +44,26 @@
   <scene id="45" name="Swamp">
     <link to="Swamp_PotionShop"/>
     <link to="Swamp_Tourist"/>
+    <link to="DekuPalace_Exterior" cond="can_rescue_koume"/>
   </scene>
   <scene id="0a" name="Swamp_PotionShop">
     <npc id="00" content="BOTTLED_POTION_RED"/>
   </scene>
   <scene id="57" name="Swamp_Tourist">
     <npc id="01" content="PICTOGRAPH_BOX" cond="can_rescue_koume"/>
+  </scene>
+  <scene id="2b">
+    <room name="DekuPalace_Exterior">
+      <link to="DekuPalace_ChamberBack" cond="has(MASK_DEKU)"/>
+    </room>
+    <room name="DekuPalace_Interior">
+    </room>
+  </scene>
+  <scene id="3e">
+    <room name="DekuPalace_ChamberFront">
+    </room>
+    <room name="DekuPalace_ChamberBack">
+      <npc id="02" content="SONG_AWAKENING" cond="has(SWORD) and has(MASK_DEKU)"/>
+    </room>
   </scene>
 </overworld>
