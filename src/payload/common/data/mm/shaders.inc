@@ -117,7 +117,7 @@
 /* Pictograph                */ { Shader_Opa0_Xlu1,              { 0x6000ec8, 0x6000bc0 }},
 /* Fierce Deity Mask         */ { Shader_Opa01,                  { 0x6000b90, 0x60009b0 }},
 /* Custom: Remains Odolwa    */ { Shader_BossRemains,            { CUSTOM_OBJECT_GI_REMAINS_ODOLWA_0 } },
-/* Nothing                   */ {},
+/* Custom: Remains Goht      */ { Shader_BossRemains,            { CUSTOM_OBJECT_GI_REMAINS_GOHT_0 } },
 /* Nothing                   */ {},
 /* Nothing                   */ {},
 /* Nothing                   */ {},

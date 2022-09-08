@@ -25,7 +25,7 @@ void comboInitOverride(void)
 s32 comboGetOverride(u16 key)
 {
     /* DEBUG */
-    return GI_MM_REMAINS_ODOLWA;
+    return GI_MM_REMAINS_GOHT;
 
     for (int i = 0; i < 256; ++i)
     {

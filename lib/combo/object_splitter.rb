@@ -38,6 +38,9 @@ module Combo
       patch_list(list)
       @offsets_new << (@buffer.size | 0x06000000)
       @buffer << list
+      while @buffer.size % 0x10 != 0
+        @buffer << "\x00"
+      end
     end
 
     def patch_list(list)
