@@ -64,6 +64,7 @@ module Combo::Logic
         MM_COMPASS
         MM_KEY_SMALL
         MM_KEY_BOSS
+        MM_STRAY_FAIRY
       ].include?(x)
     end
 

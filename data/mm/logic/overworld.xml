@@ -55,6 +55,7 @@
   <scene id="2b">
     <room name="DekuPalace_Exterior">
       <link to="DekuPalace_ChamberBack" cond="has(MASK_DEKU)"/>
+      <link to="Woodfall" cond="has(MASK_DEKU)"/>
     </room>
     <room name="DekuPalace_Interior">
     </room>
@@ -65,5 +66,8 @@
     <room name="DekuPalace_ChamberBack">
       <npc id="02" content="SONG_AWAKENING" cond="has(SWORD) and has(MASK_DEKU)"/>
     </room>
+  </scene>
+  <scene id="46" name="Woodfall">
+    <link to="WoodfallTemple_Entrance" cond="has(MASK_DEKU) and can_play(SONG_AWAKENING) and has(SWORD)"/>
   </scene>
 </overworld>

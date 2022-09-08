@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dungeon>
+  <scene id="1b">
+    <room name="WoodfallTemple_Entrance">
+      <link to="WoodfallTemple_CenterBottom"/>
+      <chest id="18" content="STRAY_FAIRY"/>
+    </room>
+    <room name="WoodfallTemple_CenterBottom">
+      <link to="WoodfallTemple_Maze" flags="locked"/>
+      <link to="WoodfallTemple_WaterBottom"/>
+    </room>
+    <room name="WoodfallTemple_Maze">
+      <link to="WoodfallTemple_Compass"/>
+      <link to="WoodfallTemple_Dark"/>
+    </room>
+    <room name="WoodfallTemple_WaterBottom">
+      <link to="WoodfallTemple_Map"/>
+      <chest id="01" content="SMALL_KEY"/>
+    </room>
+    <room name="WoodfallTemple_Map">
+      <chest id="3e" content="MAP"/>
+    </room>
+    <room name="WoodfallTemple_Compass">
+      <chest id="1c" content="COMPASS"/>
+    </room>
+    <room name="WoodfallTemple_Dark">
+      <link to="WoodfallTemple_Holes"/>
+      <chest id="19" content="STRAY_FAIRY"/>
+    </room>
+    <room name="WoodfallTemple_Holes">
+      <link to="WoodfallTemple_CenterTop"/>
+    </room>
+    <room name="WoodfallTemple_CenterTop">
+      <link to="WoofdallTemple_WaterTop"/>
+      <link to="WoodfallTemple_AntiChamber" cond="has(BOW)"/>
+      <chest id="17" content="STRAY_FAIRY"/>
+    </room>
+    <room name="WoofdallTemple_WaterTop">
+      <link to="WoodfallTemple_Bow"/>
+      <link to="WoodfallTemple_BossKey" cond="has(BOW)"/>
+    </room>
+    <room name="WoodfallTemple_Bow">
+      <chest id="1b" content="BOW"/>
+    </room>
+    <room name="WoodfallTemple_BossKey">
+      <chest id="1e" content="BOSS_KEY"/>
+    </room>
+    <room name="WoodfallTemple_AntiChamber">
+      <link to="WoodfallTemple_Boss" flags="locked-boss"/>
+    </room>
+  </scene>
+  <scene id="1f">
+    <room name="WoodfallTemple_Boss">
+      <link to="WoodfallTemple_PostBoss"/>
+    </room>
+    <room name="WoodfallTemple_PostBoss">
+    </room>
+  </scene>
+</dungeon>

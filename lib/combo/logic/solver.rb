@@ -68,7 +68,7 @@ module Combo::Logic
     end
 
     def fix_dungeon(dungeon)
-      checks = dungeon.map{|x| @checks_per_location[x]}.reject(&:nil?).reduce(&:|)
+      checks = dungeon.map{|x| @checks_per_location[x]}.reject(&:nil?).reduce(&:|) || []
       checks.reject! {|c| @checks_fixed.include?(c) }
       shuffle(checks)
       checks.each do |check|
@@ -114,6 +114,10 @@ module Combo::Logic
       missing = missing.reduce(&:|)
       check_src = @checks_unfixed.select{|c| missing.include?(c.content) }.to_a.sample
       check_dst = (@checks_unfixed & @pathfinder.reachable).to_a.sample
+      if check_src.nil?
+        puts "BAD SEED"
+        puts @pathfinder.unreachable
+      end
       item = check_src.content
 
       swap(check_dst, check_src)
