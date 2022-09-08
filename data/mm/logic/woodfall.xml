@@ -54,6 +54,7 @@
       <link to="WoodfallTemple_PostBoss"/>
     </room>
     <room name="WoodfallTemple_PostBoss">
+      <collectible id="1f" content="HEART_CONTAINER"/>
     </room>
   </scene>
 </dungeon>
