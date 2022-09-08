@@ -1,5 +1,5 @@
 module Combo::Logic
-  class WorldGraph
+  class World
     class Check
       attr_reader :game, :type, :id, :scene_id, :location, :cond, :desc
       attr_accessor :content
@@ -17,12 +17,26 @@ module Combo::Logic
     end
 
     class Link
-      attr_reader :from, :to, :cond
+      attr_reader :from, :to, :cond, :locked, :locked_boss
 
-      def initialize(from, to, cond)
+      def initialize(from, to, cond, flags)
         @from = from
         @to = to
         @cond = cond
+        @locked = flags.include?(:locked)
+        @locked_boss = flags.include?(:locked_boss)
+      end
+    end
+
+    class Dungeon
+      attr_reader :name, :checks, :locations, :required_keys, :before_boss
+
+      def initialize(name, checks, locations, required_keys, before_boss)
+        @name = name
+        @checks = checks
+        @locations = locations
+        @required_keys = required_keys
+        @before_boss = before_boss
       end
     end
 

@@ -15,7 +15,7 @@ module Combo::Logic
       loop do
         checks = @pathfinder.propagate()
         sphere_checks = checks.select {|c| Util.important_item?(c.content) }
-        checks.each {|c| @pathfinder.add_item(c.content) }
+        checks.each {|c| @pathfinder.add_item(c.content, c.location) }
         unless sphere_checks.empty?
           @spheres << sphere_checks
         end

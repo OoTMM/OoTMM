@@ -42,7 +42,7 @@ module Combo::Logic
       fix_goals()
 
       # We need to make sure that the small keys, compass map and boss keys stay in the same dungeon.
-      @graph.dungeons.each {|d| fix_dungeon(d)}
+      @graph.dungeons.values.each {|d| fix_dungeon(d)}
 
       # Fix required items
       fix_required()
@@ -68,7 +68,10 @@ module Combo::Logic
     end
 
     def fix_dungeon(dungeon)
-      checks = dungeon.map{|x| @checks_per_location[x]}.reject(&:nil?).reduce(&:|) || []
+      fix_dungeon_small_keys(dungeon)
+      fix_dungeon_fairies(dungeon)
+      fix_dungeon_boss_key(dungeon)
+      checks = dungeon.checks
       checks.reject! {|c| @checks_fixed.include?(c) }
       shuffle(checks)
       checks.each do |check|
@@ -79,6 +82,41 @@ module Combo::Logic
       end
     end
 
+    def fix_dungeon_small_keys(dungeon)
+      key_count = dungeon.required_keys.values.max
+      key_count.times do |keys|
+        # We need to place a key in one of these locations
+        locs = dungeon.locations.select{|l| dungeon.required_keys[l] <= keys}
+        check_dst = locs.map{|l| @checks_per_location[l].to_a}.flatten.compact.reject{|c| @checks_fixed.include?(c) }.sample
+        check_src = dungeon.checks.select{|c| [:OOT_SMALL_KEY, :MM_SMALL_KEY].include?(c.content) }.reject{|c| @checks_fixed.include?(c) }.sample
+        swap(check_dst, check_src)
+        @checks_fixed.add(check_dst)
+        @checks_unfixed.delete(check_dst)
+      end
+    end
+
+    def fix_dungeon_fairies(dungeon)
+      # Fairies can only go inside chests
+      fairies_count = dungeon.checks.select{|c| c.content == :MM_STRAY_FAIRY }.size
+      fairies_count.times do
+        check_src = dungeon.checks.select{|c| c.content == :MM_STRAY_FAIRY }.reject{|c| @checks_fixed.include?(c) }.sample
+        check_dst = dungeon.checks.select{|c| c.type == :chest }.reject{|c| @checks_fixed.include?(c) }.sample
+        swap(check_dst, check_src)
+        @checks_fixed.add(check_dst)
+        @checks_unfixed.delete(check_dst)
+      end
+    end
+
+    def fix_dungeon_boss_key(dungeon)
+      check_src = dungeon.checks.select{|c| [:OOT_BOSS_KEY, :MM_BOSS_KEY].include?(c.content) }.first
+      return if check_src.nil?
+      locs = dungeon.before_boss
+      check_dst = locs.map{|l| @checks_per_location[l].to_a}.flatten.compact.reject{|c| @checks_fixed.include?(c) }.sample
+      swap(check_dst, check_src)
+      @checks_fixed.add(check_dst)
+      @checks_unfixed.delete(check_dst)
+    end
+
     def fix_required()
       loop do
         # Propagate and check if everything is reachable
@@ -87,7 +125,7 @@ module Combo::Logic
           new_checks_fixed = false
           new_checks.each do |c|
             if @checks_fixed.include?(c)
-              @pathfinder.add_item(c.content)
+              @pathfinder.add_item(c.content, c.location)
               new_checks_fixed = true
             end
           end
@@ -123,7 +161,7 @@ module Combo::Logic
       swap(check_dst, check_src)
       @checks_fixed.add(check_dst)
       @checks_unfixed.delete(check_dst)
-      @pathfinder.add_item(item)
+      @pathfinder.add_item(item, check_dst.location)
     end
 
     def fix_all()

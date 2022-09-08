@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dungeon>
+<dungeon name="WF">
   <scene id="1b">
     <room name="WoodfallTemple_Entrance">
       <link to="WoodfallTemple_CenterBottom"/>

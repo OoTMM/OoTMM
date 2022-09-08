@@ -1,11 +1,11 @@
 require 'combo/logic/solver'
-require 'combo/logic/world_graph_builder'
+require 'combo/logic/world_builder'
 
 module Combo
   module Logic
     def self.run
-      graph = WorldGraphBuilder.run
-      solver = Solver.new(graph)
+      world = WorldBuilder.run
+      solver = Solver.new(world)
       solver.run
     end
   end

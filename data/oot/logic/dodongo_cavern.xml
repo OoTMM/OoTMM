@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dungeon desc="Dodongo Cavern">
+<dungeon name="DC" desc="Dodongo Cavern">
   <scene id="01">
     <room name="DC_Main" desc="Main">
       <link to="DC_EastCorridor"/>
