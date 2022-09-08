@@ -118,7 +118,7 @@
 /* Fierce Deity Mask         */ { Shader_Opa01,                  { 0x6000b90, 0x60009b0 }},
 /* Custom: Remains Odolwa    */ { Shader_BossRemains,            { CUSTOM_OBJECT_GI_REMAINS_ODOLWA_0 } },
 /* Custom: Remains Goht      */ { Shader_BossRemains,            { CUSTOM_OBJECT_GI_REMAINS_GOHT_0 } },
-/* Nothing                   */ {},
+/* Custom: Remains Gyorg     */ { Shader_BossRemains,            { CUSTOM_OBJECT_GI_REMAINS_GYORG_0 } },
 /* Nothing                   */ {},
 /* Nothing                   */ {},
 /* Nothing                   */ {},
