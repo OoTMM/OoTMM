@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dungeon>
+<dungeon name="DT">
   <scene id="00">
     <room name="DT_Main" desc="Deku Tree Main">
       <link to="DT_Slingshot"/>

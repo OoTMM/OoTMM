@@ -57,13 +57,6 @@ void Shader_CustomNote(GameState* gs, s16 shaderId)
 
 void ConvertMatrix(const float* in, u16* out);
 
-static const float kMatrixRot[] = {
-    1.f, 0.f, 0.f, 0.f,
-    0.f, 0.f, 1.f, 0.f,
-    0.f, -1.f, 0.f, 0.f,
-    0.f, 0.f, 0.f, 1.f,
-};
-
 static void* pushMatrix(GfxContext* gfx, const float* mat)
 {
     void* end = gfx->polyOpa.end;
@@ -83,8 +76,35 @@ static void* dummySegment(GfxContext* gfx)
     return end;
 }
 
+void Shader_BossRemains(GameState* gs, s16 shaderId)
+{
+    static const float scale = 0.03f;
+    static const float kMatrixScale[] = {
+        scale, 0.f, 0.f, 0.f,
+        0.f, scale, 0.f, 0.f,
+        0.f, 0.f, scale, 0.f,
+        0.f, 0.f, 0.f,   1.f,
+    };
+    const Shader* shader;
+
+    shader = &kShaders[shaderId];
+    OPEN_DISPS(gs->gfx);
+    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(gs->gfx), G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(POLY_OPA_DISP++, pushMatrix(gs->gfx, kMatrixScale), G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+    InitListPolyOpa(gs->gfx);
+    gSPDisplayList(POLY_OPA_DISP++, shader->lists[0]);
+    CLOSE_DISPS();
+}
+
 void Shader_SpiritualStones(GameState* gs, s16 shaderId)
 {
+    static const float kMatrixRot[] = {
+        1.f, 0.f, 0.f, 0.f,
+        0.f, 0.f, 1.f, 0.f,
+        0.f, -1.f, 0.f, 0.f,
+        0.f, 0.f, 0.f, 1.f,
+    };
+
     u8 primRed, primGreen, primBlue;
     u8 envRed, envGreen, envBlue;
     const Shader* shader;

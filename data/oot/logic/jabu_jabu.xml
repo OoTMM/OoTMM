@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dungeon desc="Jabu-Jabu">
+<dungeon name="JJ" desc="Jabu-Jabu">
   <scene id="02">
     <room name="JabuJabu_Entrance">
       <link to="JabuJabu_VerticalRoom" cond="has_ranged_weapon_child"/>

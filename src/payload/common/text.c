@@ -204,7 +204,7 @@ static const char* const kItemNamesMm[] = {
     "the " C1 "Lens of Truth",
     "the " C1 "Longshot",
     "the " C1 "Great Fairy's Sword",
-    "", /* Hookshot */
+    "a " C1 "bottle of Red Potion",
     "an " C1 "Empty Bottle",
     "a " C0 "Red Potion",
     "a " C0 "Green Potion",
@@ -278,9 +278,9 @@ static const char* const kItemNamesMm[] = {
     "the " C1 "Biggest Bomb Bag",
     "", /* JP items */
     "the " C1 "Adult Wallet",
-    "the " C1 "Giant's Wallet",
+    "the " C1 "Giant Wallet",
     "",
-    C3 "Odalwa's Remains",
+    C3 "Odolwa's Remains",
     C3 "Goht's Remains",
     C3 "Gyorg's Remains",
     C3 "Twinmold's Remains",
@@ -545,12 +545,16 @@ void comboTextHijackItem(GameState_Play* play, u16 itemId)
         if (itemId & MASK_FOREIGN_ITEM)
         {
             appendStr(&b, COLOR_PINK "MM");
-            *b++ = 0;
         }
         else
         {
-            appendStr(&b, COLOR_TEAL "OoT" CZ);
+            appendStr(&b, COLOR_TEAL "OoT");
         }
+#if defined(GAME_MM)
+        *b++ = 0;
+#else
+        appendStr(&b, CZ);
+#endif
         appendStr(&b, ")");
     }
     appendStr(&b, END);

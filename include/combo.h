@@ -111,4 +111,6 @@ void comboAddItem(u16 itemId);
 void comboAddItemMm(u16 itemId);
 void comboAddItemOot(u16 itemId);
 
+int comboGiveItem(Actor* actor, GameState_Play* play, s16 itemId, float a, float b);
+
 #endif /* COMBO_COMBO_H */

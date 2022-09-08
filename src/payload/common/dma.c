@@ -54,7 +54,7 @@ void comboInitDma(void)
     }
 
 #if defined(GAME_MM)
-    gDmaDataCount = DMA_COUNT + DMA_COUNT_FOREIGN;
+    gDmaDataCount = DMA_COUNT + DMA_COUNT_FOREIGN + CUSTOM_DMA_SIZE;
 #endif
 }
 

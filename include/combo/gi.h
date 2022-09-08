@@ -288,6 +288,10 @@
 #define GI_MM_SONG_SOARING          0xc7
 #define GI_MM_SONG_STORMS           0xc8
 #define GI_MM_SONG_GORON_HALF       0xc9
+#define GI_MM_REMAINS_ODOLWA        0xca
+#define GI_MM_REMAINS_GOHT          0xcb
+#define GI_MM_REMAINS_GYORG         0xcc
+#define GI_MM_REMAINS_TWINMOLD      0xcd
 
 typedef struct PACKED ALIGNED(2)
 {

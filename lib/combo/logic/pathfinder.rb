@@ -11,6 +11,8 @@ module Combo::Logic
       @unreachable = Set.new(graph.checks)
       @links_per_location = Util.make_multihash_set(graph.links.map {|l| [l.from, l]})
       @checks_unreachable_per_location = Util.make_multihash_set(graph.checks.map {|c| [c.location, c]})
+      @dungeon_per_loc = graph.dungeons.values.map {|d| d.locations.map {|l| [l, d.name]}}.flatten(1).to_h
+      @required_keys = graph.dungeons.values.map {|d| d.required_keys}.reduce({}, &:merge)
     end
 
     def mark_reachable(age, location)
@@ -25,12 +27,16 @@ module Combo::Logic
       propagate_checks()
     end
 
-    def add_item(item)
-      case item
-      when :BOMBCHUS_5, :BOMBCHUS_10, :BOMBCHUS_20
-        item = :BOMBCHU
+    def add_item(item, loc)
+      dungeon = @dungeon_per_loc[loc]
+      if Util.small_key?(item)
+        @state.keys[dungeon] ||= 0
+        @state.keys[dungeon] += 1
+      elsif Util.boss_key?(item)
+        @state.boss_keys.add(dungeon)
+      else
+        @state.items[item] = true
       end
-      @state.items[item] = true
     end
 
     private
@@ -42,9 +48,22 @@ module Combo::Logic
           links = reachable.map{|loc| @links_per_location[loc].to_a}.flatten
           links.reject! {|l| reachable.include?(l.to) }
           links.select! {|l| l.cond.nil? || l.cond.eval(age, @state) }
-          unless links.empty?
-            changed = true
-            links.each {|l| mark_reachable(age, l.to) }
+          links.each do |l|
+            can_traverse = true
+            if l.locked
+              required_keys = @required_keys[l.to]
+              current_keys = @state.keys[@dungeon_per_loc[l.from]] || 0
+              if required_keys > current_keys
+                can_traverse = false
+              end
+            end
+            if l.locked_boss
+              can_traverse = false if !@state.boss_keys.include?(@dungeon_per_loc[l.from])
+            end
+            if can_traverse
+              mark_reachable(age, l.to)
+              changed = true
+            end
           end
         end
         break unless changed

@@ -24,6 +24,7 @@
 # define AC_EN_BOX          0x006
 # define AC_ITEM00          0x00e
 # define AC_ITEM_CUSTOM     0x013
+# define AC_ITEM_B_HEART    0x03a
 #endif
 
 typedef struct GameState_Play GameState_Play;

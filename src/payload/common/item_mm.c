@@ -153,10 +153,12 @@ void comboAddItemMm(u16 itemId)
         gMmSave.inventory.items[ITS_MM_GREAT_FAIRY_SWORD] = ITEM_MM_GREAT_FAIRY_SWORD;
         break;
     case ITEM_MM_EMPTY_BOTTLE:
-    case ITEM_MM_RED_POTION_WITH_BOTTLE:
     case ITEM_MM_BOTTLED_GOLD_DUST:
     case ITEM_MM_BOTTLED_CHATEAU_ROMANI:
         addNewBottle(itemId);
+        break;
+    case ITEM_MM_RED_POTION_WITH_BOTTLE:
+        addNewBottle(ITEM_MM_RED_POTION);
         break;
     case ITEM_MM_BOMB:
         addBombs(1);
@@ -389,7 +391,7 @@ void comboAddItemMm(u16 itemId)
     case ITEM_MM_BOMBER_NOTEBOOK:
         gMmSave.inventory.questItems.notebook = 1;
         break;
-    case ITEM_MM_REMAINS_ODALWA:
+    case ITEM_MM_REMAINS_ODOLWA:
         gMmSave.inventory.questItems.remainsOdolwa = 1;
         break;
     case ITEM_MM_REMAINS_GOHT:

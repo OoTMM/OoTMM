@@ -58,12 +58,9 @@ module Combo::Logic
       %i[
         OOT_MAP
         OOT_COMPASS
-        OOT_KEY_SMALL
-        OOT_KEY_BOSS
         MM_MAP
         MM_COMPASS
-        MM_KEY_SMALL
-        MM_KEY_BOSS
+        MM_STRAY_FAIRY
       ].include?(x)
     end
 
@@ -81,8 +78,22 @@ module Combo::Logic
       ].include?(x)
     end
 
+    def self.small_key?(x)
+      %i[
+        OOT_SMALL_KEY
+        MM_SMALL_KEY
+      ].include?(x)
+    end
+
+    def self.boss_key?(x)
+      %i[
+        OOT_BOSS_KEY
+        MM_BOSS_KEY
+      ].include?(x)
+    end
+
     def self.important_item?(x)
-      !junk_item?(x) && !semi_junk_item?(x) && !dungeon_item?(x)
+      !junk_item?(x) && !semi_junk_item?(x) && !dungeon_item?(x) && !small_key?(x) && !boss_key?(x)
     end
   end
 end

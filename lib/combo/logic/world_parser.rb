@@ -1,10 +1,10 @@
 require 'nokogiri'
 require 'combo/common'
-require 'combo/logic/world_graph'
+require 'combo/logic/world'
 require 'combo/logic/expr_builder'
 
 module Combo::Logic
-  class WorldGraphBuilder
+  class WorldParser
     def initialize
       @expr_builders = Combo::GAMES.map {|game|
         e = ExprBuilder.new(game)
@@ -13,7 +13,7 @@ module Combo::Logic
       }.to_h
       @checks = []
       @links = []
-      @dungeons = []
+      @dungeons = {}
     end
 
     def parse(game, file)
@@ -28,6 +28,7 @@ module Combo::Logic
       dungeon = nil
       if e.name == 'dungeon'
         dungeon = []
+        dungeon_name = e['name'].to_sym
       end
       desc = [e['desc']]
       scenes = e.xpath('scene')
@@ -35,7 +36,7 @@ module Combo::Logic
         parse_scene(game, scene, dungeon, desc)
       end
       if dungeon
-        @dungeons << dungeon
+        @dungeons[dungeon_name] = dungeon
       end
     end
 
@@ -90,7 +91,7 @@ module Combo::Logic
         cond = @expr_builders[game].parse(cond)
       end
       content = Util.game_id(game, e['content'])
-      check = WorldGraph::Check.new(game, type, id, scene_id, location, content, cond, desc)
+      check = World::Check.new(game, type, id, scene_id, location, content, cond, desc)
       @checks << check
     end
 
@@ -101,24 +102,28 @@ module Combo::Logic
       unless cond.nil?
         cond = @expr_builders[game].parse(cond)
       end
-      @links << WorldGraph::Link.new(from, to, cond)
+      @links << World::Link.new(from, to, cond, flags)
       unless flags.include?(:one_way)
-        @links << WorldGraph::Link.new(to, from, cond)
+        @links << World::Link.new(to, from, cond, flags)
       end
     end
 
-    def graph
-      WorldGraph.new(@checks, @links, @dungeons)
+    def results
+      {
+        checks: @checks,
+        links: @links,
+        dungeons: @dungeons,
+      }
     end
 
     def self.run
-      builder = self.new
+      parser = self.new
       Combo::GAMES.each do |game|
         Dir[File.join(Combo::PATH_DATA, game.to_s, 'logic', '*.xml')].each do |path|
-          builder.parse(game, path)
+          parser.parse(game, path)
         end
       end
-      builder.graph
+      parser.results
     end
   end
 end
