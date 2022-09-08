@@ -7,7 +7,7 @@
 
 /* DEBUG: MM entrance */
 PATCH_START 0x8014533c
-  li t8,ENTRANCE_TEMPLE1
+  li t8,ENTRANCE_CLOCKTOWN
 PATCH_END
 
 /* Rebase MM's DMA Table */

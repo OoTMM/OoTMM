@@ -90,16 +90,16 @@
 /* Moon's Tear               */ { Shader_MoonTear,               { 0x6000d78, 0x6000c80 }}, /* Missing shader in OoT */
 /* Land Title Deed           */ { Shader_Opa01,                  { 0x6000a08, 0x6000968 }},
 /* Deku Mask                 */ { Shader_Opa0_Xlu1,              { 0x6000f20, 0x6000b50 }},
-/* ???                       */ { (void*)0x800efd44,             { 0x6000690, 0x6000690 }}, /* Missing shader in OoT */
+/* Remains - Odolwa          */ { (void*)0x800ef364,             { 0x6000690, 0x6000690 }}, /* Missing shader in OoT */
 /* Powder Keg                */ { Shader_Opa0_Xlu1,              { 0x6000da0, 0x6000bc0 }},
 /* Gold Dust                 */ { Shader_Opa01,                  { 0x6000888, 0x6000880 }},
 /* Gold Dust in a bottle     */ { Shader_Opa0_Xlu1,              { 0x6000d18, 0x60009a0 }},
 /* ???                       */ { Shader_Opa0_Xlu1,              { 0x6000fb8, 0x6000c90 }},
 /* ???                       */ { Shader_Opa0_Xlu1,              { 0x6000d30, 0x60007f0 }},
 /* Seahorse                  */ { (void*)0x800ef364,             { 0x6000f08, 0x6000b20, 0x6000a90, 0x6000a50 }}, /* Missing shader in OoT */
-/* ???                       */ { (void*)0x800efd44,             { 0x6003ad0, 0x6003ad0 }}, /* Missing shader in OoT */
-/* ???                       */ { (void*)0x800efd44,             { 0x6001d80, 0x6001d80 }}, /* Missing shader in OoT */
-/* ???                       */ { (void*)0x800efd44,             { 0x6005020, 0x6005020 }}, /* Missing shader in OoT */
+/* Remains - Goht            */ { (void*)0x800efd44,             { 0x6003ad0, 0x6003ad0 }}, /* Missing shader in OoT */
+/* Remains - Gyorg           */ { (void*)0x800efd44,             { 0x6001d80, 0x6001d80 }}, /* Missing shader in OoT */
+/* Remains - Twinmold        */ { (void*)0x800efd44,             { 0x6005020, 0x6005020 }}, /* Missing shader in OoT */
 /* Razor Sword               */ { Shader_Opa01,                  { 0x6000c08, 0x6000c00 }},
 /* Gilded Sword              */ { Shader_Opa01,                  { 0x60009e8, 0x60009e0 }},
 /* Great Fairy Sword         */ { Shader_Opa0_Xlu1,              { 0x6000ad8, 0x6000940 }},
@@ -116,7 +116,7 @@
 /* Chateau Romani            */ { Shader_Opa0_Xlu1,              { 0x6000e90, 0x6000a50 }},
 /* Pictograph                */ { Shader_Opa0_Xlu1,              { 0x6000ec8, 0x6000bc0 }},
 /* Fierce Deity Mask         */ { Shader_Opa01,                  { 0x6000b90, 0x60009b0 }},
-/* Nothing                   */ {},
+/* Custom: Remains Odolwa    */ { Shader_BossRemains,            { CUSTOM_OBJECT_GI_REMAINS_ODOLWA_0 } },
 /* Nothing                   */ {},
 /* Nothing                   */ {},
 /* Nothing                   */ {},

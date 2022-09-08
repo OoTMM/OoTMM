@@ -391,7 +391,7 @@ void comboAddItemMm(u16 itemId)
     case ITEM_MM_BOMBER_NOTEBOOK:
         gMmSave.inventory.questItems.notebook = 1;
         break;
-    case ITEM_MM_REMAINS_ODALWA:
+    case ITEM_MM_REMAINS_ODOLWA:
         gMmSave.inventory.questItems.remainsOdolwa = 1;
         break;
     case ITEM_MM_REMAINS_GOHT:
