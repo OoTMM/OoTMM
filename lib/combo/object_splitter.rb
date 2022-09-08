@@ -23,7 +23,6 @@ module Combo
       @offsets.each do |offset|
         dlist(offset)
       end
-      File.binwrite("test.zobj", @buffer)
       Object.new(@buffer, @offsets_new)
     end
 

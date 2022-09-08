@@ -119,7 +119,7 @@
 /* Custom: Remains Odolwa    */ { Shader_BossRemains,            { CUSTOM_OBJECT_GI_REMAINS_ODOLWA_0 } },
 /* Custom: Remains Goht      */ { Shader_BossRemains,            { CUSTOM_OBJECT_GI_REMAINS_GOHT_0 } },
 /* Custom: Remains Gyorg     */ { Shader_BossRemains,            { CUSTOM_OBJECT_GI_REMAINS_GYORG_0 } },
-/* Nothing                   */ {},
+/* Custom: Remains Twinmold  */ { Shader_BossRemains,            { CUSTOM_OBJECT_GI_REMAINS_TWINMOLD_0 } },
 /* Nothing                   */ {},
 /* Nothing                   */ {},
 /* Nothing                   */ {},
