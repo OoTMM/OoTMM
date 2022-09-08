@@ -16,12 +16,14 @@ module Combo
       @offsets = offsets
       @buffer = "".force_encoding("ASCII-8BIT")
       @offsets_new = []
+      @shifts = {}
     end
 
     def run()
       @offsets.each do |offset|
         dlist(offset)
       end
+      File.binwrite("test.zobj", @buffer)
       Object.new(@buffer, @offsets_new)
     end
 
@@ -46,16 +48,30 @@ module Combo
         if op == 0x01
           # G_VTX
           count = (data[0] >> 12) & 0xff
-          data[1] = copy_vertices(data[1], count)
+          list[i * 8 + 4,4] = [copy_vertices(data[1], count)].pack("L>")
         elsif op == 0xfd
-          # Texture
-          data[1] = copy_texture(data[1])
+          data2 = list[(i + 1) * 8, 8].unpack("L>2")
+          op2 = data2[0] >> 24
+          if op2 == 0xf5
+            # Texture
+            fmt = (data[0] >> 16) & 0xff
+            bpp = 0
+            case fmt
+            when 0x50
+              bpp = 4
+            when 0x10
+              bpp = 16
+            end
+            data3 = list[(i + 6) * 8, 8].unpack("L>2")
+            w = (((data3[1] >> 12) & 0xfff) / 4) + 1
+            h = (((data3[1] >>  0) & 0xfff) / 4) + 1
+            list[i * 8 + 4,4] = [copy_data(data[1], (h * w * bpp) / 8)].pack("L>")
+          elsif op2 == 0xe8
+            # LuT
+            list[i * 8 + 4,4] = [copy_data(data[1], 32)].pack("L>")
+          end
         end
       end
-    end
-
-    def copy_texture(addr)
-      0x06000000
     end
 
     def copy_vertices(addr, count)
@@ -63,9 +79,14 @@ module Combo
     end
 
     def copy_data(addr, size)
-      new_addr = @buffer.size | 0x06000000
-      @buffer << @object[(addr & 0xffffff), size]
-      new_addr
+      if @shifts[addr]
+        @shifts[addr]
+      else
+        new_addr = @buffer.size | 0x06000000
+        @buffer << @object[(addr & 0xffffff), size]
+        @shifts[addr] = new_addr
+        new_addr
+      end
     end
 
     def self.run(*args)
