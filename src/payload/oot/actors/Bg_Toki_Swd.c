@@ -9,7 +9,7 @@ void BgTokiSwd_Handler(Actor* actor, GameState_Play* play)
         /* Time Travel */
         t = &play->transition;
         t->type = TRANS_NORMAL;
-        t->entrance = 0x0053;
+        t->entrance = 0x02ca;
         t->age = !(gSave.age);
     }
     else
