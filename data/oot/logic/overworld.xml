@@ -38,6 +38,7 @@
   <scene id="20" name="Hyrule_Market">
     <link to="Hyrule_Castle"/>
     <link to="ClockTown_South"/>
+    <link to="TempleOfTime"/>
   </scene>
   <scene id="5f" name="Hyrule_Castle" desc="Hyrule Castle">
     <npc id="00" content="CHICKEN" desc="Malon"/>
@@ -101,5 +102,16 @@
   </scene>
   <scene id="59" name="ZoraFountain">
     <link to="JabuJabu_Entrance" cond="has_bottle and has_weapon_child"/>
+  </scene>
+  <scene id="43" desc="Temple of Time">
+    <room name="TempleOfTime">
+      <link to="TempleOfTime_BehindDoor" cond="can_play(SONG_TIME)"/>
+    </room>
+    <room name="TempleOfTime_BehindDoor">
+      <link to="TIME_TRAVEL" cond="has(SWORD, 2)"/>
+      <collectible id="1f" content="SWORD" cond="is_child" desc="Master Sword"/>
+      <collectible id="1e" content="MEDALLION_LIGHT" cond="is_adult" desc="Medallion"/>
+    </room>
+    <room name="TIME_TRAVEL"><!-- Special room --></room>
   </scene>
 </overworld>

@@ -9,6 +9,7 @@
 # define AC_ITEM00           0x015
 # define AC_DOOR_WARP1       0x05d
 # define AC_ITEM_B_HEART     0x05f
+# define AC_BG_TOKI_SWD      0x06c
 # define AC_EN_DU            0x098
 # define AC_EN_MA1           0x0e7
 # define AC_ITEM_OCARINA     0x0f1
@@ -24,7 +25,9 @@
 # define AC_EN_BOX          0x006
 # define AC_ITEM00          0x00e
 # define AC_ITEM_CUSTOM     0x013
+# define AC_DOOR_WARP1      0x038
 # define AC_ITEM_B_HEART    0x03a
+# define AC_DM_HINA         0x140
 #endif
 
 typedef struct GameState_Play GameState_Play;

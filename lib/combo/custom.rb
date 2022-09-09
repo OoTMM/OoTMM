@@ -6,7 +6,7 @@ require 'combo/object_splitter'
 
 module Combo
   class Custom
-    def self.generate()
+    def self.run()
       self.new.run()
     end
 
@@ -18,15 +18,14 @@ module Combo
     end
 
     def run()
-      add_split_object("GI_REMAINS_ODOLWA",   :mm, "objects/object_bsmask", [0x0690])
-      add_split_object("GI_REMAINS_GOHT",     :mm, "objects/object_bsmask", [0x3ad0])
-      add_split_object("GI_REMAINS_GYORG",    :mm, "objects/object_bsmask", [0x1d80])
-      add_split_object("GI_REMAINS_TWINMOLD", :mm, "objects/object_bsmask", [0x5020])
+      puts "Generating custom objects..."
 
-      custom_object_files = Dir.glob(File.join(Combo::PATH_BUILD, 'obj/objects/**/*.o'))
-      custom_object_files.each do |file|
-        add_custom_object(file)
-      end
+      add_split_object("GI_REMAINS_ODOLWA",   :mm,  "objects/object_bsmask",        [0x0690])
+      add_split_object("GI_REMAINS_GOHT",     :mm,  "objects/object_bsmask",        [0x3ad0])
+      add_split_object("GI_REMAINS_GYORG",    :mm,  "objects/object_bsmask",        [0x1d80])
+      add_split_object("GI_REMAINS_TWINMOLD", :mm,  "objects/object_bsmask",        [0x5020])
+      add_split_object("GI_MASTER_SWORD",     :oot, "objects/object_toki_objects",  [0x1bd0])
+
       write_custom()
     end
 
@@ -43,38 +42,6 @@ module Combo
       object_new = ObjectSplitter.run(object, offsets)
       exports = object_new.offsets.map.with_index{|addr, i| [i, addr]}.to_h
       add_object(name, object_new.data, exports)
-    end
-
-    def add_custom_object(file)
-      File.open(file, 'rb') do |f|
-        Elf::File.open(file) do |elf|
-          cobject_data = elf.load_section(".cobject.data")
-          cobject_name = elf.load_section(".cobject.name")
-
-          f.seek(cobject_data.offset)
-          data = f.read(cobject_data.size)
-
-          f.seek(cobject_name.offset)
-          name = f.read(cobject_name.size).unpack('Z*').first
-
-          cobject_exports_addr = elf.load_section(".cobject.exports_addr")
-          f.seek(cobject_exports_addr.offset)
-          exports_addr = f.read(cobject_exports_addr.size).unpack('L>*')
-
-          cobject_exports_name = elf.load_section(".cobject.exports_name")
-          f.seek(cobject_exports_name.offset)
-          exports_name = f.read(cobject_exports_name.size).split(0.chr)
-
-          exports = {}
-          exports_addr.size.times do |i|
-            addr = exports_addr[i]
-            n = exports_name[i]
-            exports[n] = addr
-          end
-
-          add_object(name, data, exports)
-        end
-      end
     end
 
     def add_object(name, data, exports)
@@ -121,13 +88,25 @@ module Combo
       add_define("CUSTOM_OBJECTS_ADDR", custom_addr_objects)
       add_define("CUSTOM_OBJECTS_SIZE", @objects.size)
 
-      File.open(File.join(Combo::PATH_BUILD, 'include', 'combo', 'custom.h'), "w") do |f|
+      header_data = StringIO.open do |f|
         f.puts("#ifndef COMBO_CUSTOM_H")
         f.puts("#define COMBO_CUSTOM_H")
         f.puts("")
         f.puts(@defines.join("\n"))
         f.puts("")
         f.puts("#endif")
+
+        f.string
+      end
+
+      existing_header_data = nil
+      header_path = File.join(Combo::PATH_BUILD, 'include', 'combo', 'custom.h')
+      if File.exist?(header_path)
+        existing_header_data = File.read(header_path)
+      end
+
+      if header_data != existing_header_data
+        File.write(header_path, header_data)
       end
 
       File.binwrite(File.join(Combo::PATH_BUILD, 'custom.bin'), @buffer.string)

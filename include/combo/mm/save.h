@@ -205,4 +205,6 @@ ALIGNED(16) extern MmSaveContext gSaveContext;
 ALIGNED(16) extern MmSave gMmSave;
 #endif
 
+#define gMmSaveBoss (gMmSave.permanentSceneFlags[1].clearedRoom)
+
 #endif /* MM_SAVE_H */

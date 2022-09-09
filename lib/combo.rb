@@ -6,28 +6,20 @@ require 'combo/logic'
 
 module Combo
   def self.run(args)
-    case args.first
-    when '--generate-custom'
-      run_generate_custom()
-    else
-      run_build(args)
-    end
-  end
-
-  def self.run_build(args)
     @opts = Options.new(args)
 
     decompress()
+    custom()
     build()
     pack()
   end
 
-  def self.run_generate_custom()
-    Custom.generate()
-  end
-
   def self.decompress()
     Combo::GAMES.each{|g| Combo::Decompressor.run(g)}
+  end
+
+  def self.custom()
+    Custom.run()
   end
 
   def self.build()

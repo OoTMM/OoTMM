@@ -28,6 +28,7 @@ static void debugCheat(GameState_Play* play)
         gSave.upgrades.bombBag = 3;
         gSave.quest.songZelda = 1;
         gSave.quest.songSaria = 1;
+        gSave.quest.songTime = 1;
 
         gSave.quest.stoneEmerald = 1;
         gSave.quest.stoneRuby = 1;

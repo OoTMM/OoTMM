@@ -81,7 +81,9 @@ module Combo
     end
 
     def copy_data(addr, size)
-      if @shifts[addr]
+      if (addr >> 24) != 0x06
+        addr
+      elsif @shifts[addr]
         @shifts[addr]
       else
         new_addr = @buffer.size | 0x06000000

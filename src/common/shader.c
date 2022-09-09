@@ -1,6 +1,8 @@
 #include <combo.h>
 #include <combo/custom.h>
 
+#define M_SQRT1_2 0.707106781186547524401
+
 void Shader_Opa0_Xlu1(GameState*, s16);
 void Shader_Opa0_Xlu12(GameState*, s16);
 void Shader_Opa0(GameState*, s16);
@@ -164,6 +166,38 @@ void Shader_SpiritualStones(GameState* gs, s16 shaderId)
     gDPSetEnvColor(POLY_OPA_DISP++, 0x96, 0x78, 0x00, 0xFF);
     gSPDisplayList(POLY_OPA_DISP++, shader->lists[1]);
 
+    CLOSE_DISPS();
+}
+
+void Shader_MasterSword(GameState* gs, s16 shaderId)
+{
+    /* TODO: Pre-multiply the matrices */
+    static const float scale = 0.07f;
+    static const float kMatrixScale[] = {
+        scale, 0.f, 0.f, 0.f,
+        0.f, scale, 0.f, 0.f,
+        0.f, 0.f, scale, 0.f,
+        0.f, 0.f, 0.f,   1.f,
+    };
+
+    static const float kMatrixRot[] = {
+        -M_SQRT1_2, -M_SQRT1_2, 0.f, 0.f,
+        M_SQRT1_2, -M_SQRT1_2, 0.f, 0.f,
+        0.f, 0.f, 1.f, 0.f,
+        0.f, 0.f, 0.f, 1.f,
+    };
+
+    const Shader* shader;
+
+    shader = &kShaders[shaderId];
+
+    OPEN_DISPS(gs->gfx);
+    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(gs->gfx), G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(POLY_OPA_DISP++, pushMatrix(gs->gfx, kMatrixRot), G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+    gSPMatrix(POLY_OPA_DISP++, pushMatrix(gs->gfx, kMatrixScale), G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+    gSPSegment(POLY_OPA_DISP++, 8, dummySegment(gs->gfx));
+    InitListPolyOpa(gs->gfx);
+    gSPDisplayList(POLY_OPA_DISP++, shader->lists[0]);
     CLOSE_DISPS();
 }
 

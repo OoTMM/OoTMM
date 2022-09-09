@@ -94,7 +94,7 @@ module Combo::Logic
     end
 
     def parse_expr_single
-      e = parse_expr_has() || parse_expr_reach() || parse_expr_macro()
+      e = parse_expr_has() || parse_expr_reach() || parse_expr_age() || parse_expr_macro()
       if e.nil?
         raise "Unexpected token #{@contexts.last.next}"
       end
@@ -105,8 +105,12 @@ module Combo::Logic
       return nil unless accept("has")
       expect(:lparen)
       item = Util.game_id(@game, expect(:id))
+      count = 1
+      if accept(:comma)
+        count = expect(:number)
+      end
       expect(:rparen)
-      ExprHas.new(item)
+      ExprHas.new(item, count)
     end
 
     def parse_expr_reach
@@ -115,6 +119,14 @@ module Combo::Logic
       name = expect(:id)
       expect(:rparen)
       ExprReach.new(name)
+    end
+
+    def parse_expr_age
+      return nil unless accept("age")
+      expect(:lparen)
+      age = expect(:id)
+      expect(:rparen)
+      ExprAge.new(age)
     end
 
     def parse_expr_macro
@@ -155,6 +167,9 @@ module Combo::Logic
       end
       t = @contexts.last.next
       if type == :id && t.is_a?(String)
+        @contexts.last.next = nil
+        return t
+      elsif type == :number && t.is_a?(Integer)
         @contexts.last.next = nil
         return t
       elsif type == t
@@ -199,6 +214,12 @@ module Combo::Logic
       if substitution
         id = substitution
       end
+
+      # Check for integer
+      if id =~ /^[0-9]+$/
+        id = id.to_i
+      end
+
       id
     end
 

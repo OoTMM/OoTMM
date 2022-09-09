@@ -84,3 +84,4 @@ PreDraw1 = 0x80022438;
 PreDraw2 = 0x80022554;
 
 LoadObjectGi = 0x80838f6c;
+ActorEnableInteraction = 0x80022d20;
