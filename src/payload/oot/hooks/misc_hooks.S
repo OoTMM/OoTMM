@@ -15,6 +15,7 @@
 #define ENTRANCE_HYRULE       0x17d
 #define ENTRANCE_MARKET       0x1d1
 #define ENTRANCE_DEKUTREE     0x000
+#define ENTRANCE_TOT          0x053
 
 /* Disable first cutscene */
 PATCH_START(0x800fbf60)
@@ -27,7 +28,7 @@ PATCH_END
 
 /* Spawn child link at a specific entrance */
 PATCH_START(0x800903e0)
-  li t4,ENTRANCE_MARKET
+  li t4,ENTRANCE_TOT
 PATCH_END
 
 /* Hook save creation to create MM save */

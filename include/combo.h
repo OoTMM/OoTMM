@@ -84,6 +84,7 @@ s32 comboProgressiveMm(s32 gi);
 
 /* Actor */
 void comboSpawnSpecial(GameState_Play* play, float x, float y, float z, u8 specialId, u16 gi);
+void comboSpawnCollectible(GameState_Play* play, float x, float y, float z, u8 flag, u16 gi);
 
 /* Objects */
 void    comboObjectsReset(void);
