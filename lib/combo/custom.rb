@@ -18,10 +18,11 @@ module Combo
     end
 
     def run()
-      add_split_object("GI_REMAINS_ODOLWA",   :mm, "objects/object_bsmask", [0x0690])
-      add_split_object("GI_REMAINS_GOHT",     :mm, "objects/object_bsmask", [0x3ad0])
-      add_split_object("GI_REMAINS_GYORG",    :mm, "objects/object_bsmask", [0x1d80])
-      add_split_object("GI_REMAINS_TWINMOLD", :mm, "objects/object_bsmask", [0x5020])
+      add_split_object("GI_REMAINS_ODOLWA",   :mm,  "objects/object_bsmask",        [0x0690])
+      add_split_object("GI_REMAINS_GOHT",     :mm,  "objects/object_bsmask",        [0x3ad0])
+      add_split_object("GI_REMAINS_GYORG",    :mm,  "objects/object_bsmask",        [0x1d80])
+      add_split_object("GI_REMAINS_TWINMOLD", :mm,  "objects/object_bsmask",        [0x5020])
+      add_split_object("GI_MASTER_SWORD",     :oot, "objects/object_toki_objects",  [0x1bd0])
 
       custom_object_files = Dir.glob(File.join(Combo::PATH_BUILD, 'obj/objects/**/*.o'))
       custom_object_files.each do |file|

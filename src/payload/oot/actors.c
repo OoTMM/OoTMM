@@ -90,7 +90,7 @@ Actor* hookSpawnActor(void* const_1, GameState_Play* play, s16 actorId, float x,
         variable = GI_OOT_HEART_CONTAINER;
         break;
     case AC_BG_TOKI_SWD:
-        comboSpawnCollectible(play, -1.f, 10.f, 500.f, 0x1f, GI_OOT_MASTER_SWORD);
+        comboSpawnCollectible(play, -1.f, 70.f, 80.f, 0x1f, GI_OOT_MASTER_SWORD);
         break;
     case AC_ITEM_ETCETERA:
         /* Special item */
