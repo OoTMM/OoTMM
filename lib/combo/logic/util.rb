@@ -75,6 +75,10 @@ module Combo::Logic
         OOT_MEDALLION_SPIRIT
         OOT_MEDALLION_SHADOW
         OOT_MEDALLION_LIGHT
+        MM_REMAINS_ODOLWA
+        MM_REMAINS_GOHT
+        MM_REMAINS_GYORG
+        MM_REMAINS_TWINMOLD
       ].include?(x)
     end
 

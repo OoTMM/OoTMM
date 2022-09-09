@@ -65,6 +65,38 @@ static void ItemCustom_Fini(Actor_ItemCustom* item, GameState_Play* play)
 {
 }
 
+static int isBossReward(Actor_ItemCustom* item, GameState_Play* play)
+{
+#if defined(GAME_OOT)
+    if (item->type == 0x2)
+    {
+        switch (item->flag & 0xff)
+        {
+            case EV_OOT_CHK_STONE_EMERALD:
+            case EV_OOT_CHK_STONE_RUBY:
+            case EV_OOT_CHK_STONE_SAPPHIRE:
+                return 1;
+        }
+    }
+#endif
+
+#if defined(GAME_MM)
+    if ((item->flag & 0xff) == 0x1e)
+    {
+        switch (play->sceneId)
+        {
+        case SCE_LAIR_ODOLWA:
+        case SCE_LAIR_GOHT:
+        case SCE_LAIR_GYORG:
+        case SCE_LAIR_TWINMOLD:
+            return 1;
+        }
+    }
+#endif
+
+    return 0;
+}
+
 static void ItemCustom_Update(Actor_ItemCustom* item, GameState_Play* play)
 {
     float rangeScale;
@@ -78,20 +110,8 @@ static void ItemCustom_Update(Actor_ItemCustom* item, GameState_Play* play)
         item->gi = comboProgressive(item->gi);
 
         rangeScale = 1.f;
-        if (item->type == 0x2)
-        {
-            /* For quest items, we need a larger radius */
-            switch (item->flag & 0xff)
-            {
-#if defined(GAME_OOT)
-            case EV_OOT_CHK_STONE_EMERALD:
-            case EV_OOT_CHK_STONE_RUBY:
-            case EV_OOT_CHK_STONE_SAPPHIRE:
-                rangeScale = 3.25f;
-                break;
-#endif
-            }
-        }
+        if (isBossReward(item, play))
+            rangeScale = 3.25f;
 
         GiveItem(&item->base, play, item->gi, 30.f * rangeScale, 50.f * rangeScale);
     }
