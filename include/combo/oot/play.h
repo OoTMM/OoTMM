@@ -1,12 +1,13 @@
 #ifndef OOT_PLAY_H
 #define OOT_PLAY_H
 
+#include <combo/util.h>
 #include <combo/game_state.h>
 
 #define AGE_ADULT 0
 #define AGE_CHILD 1
 
-typedef struct PACKED ALIGNED(4)
+typedef struct PACKED
 {
     char    unk_0[0x128];
     void*   icon_item;
@@ -51,22 +52,45 @@ typedef struct PACKED ALIGNED(4)
 }
 PauseContext;
 
-typedef struct PACKED ALIGNED(4) GameState_Play
+/* Start: 0x11d30 */
+typedef struct PACKED
 {
-    GameState       gs;
-    u16             sceneId;
-    char            unk_000a6[0xfde2];
-    char            textBuffer[4]; /* Real size unknown */
-    char            unk_0fe8c[0x8d4];
-    PauseContext    pauseCtx;
-    char            unk_10a14[0xd90];
-    char            objTable[4]; /* Real size unknown */
-    char            unk_117a8[0x642];
-    u8              spawnId;
-    char            unk_11deb[0x72d];
+    char    unk_000[0xb8];
+    u8      age;
+    char    unk_0b9[0x01];
+    u8      spawnId;
+    char    unk_0bb[0x2a];
+    u8      type;
+    char    unk_0e6[0x04];
+    u16     entrance;
+    char    unk_0ec[0x44];
+}
+TransitionContext;
+
+typedef struct GameState_Play
+{
+    GameState           gs;
+    u16                 sceneId;
+    char                unk_000a6[0xfde2];
+    char                textBuffer[4]; /* Real size unknown */
+    char                unk_0fe8c[0x8d4];
+    PauseContext        pauseCtx;
+    char                unk_10a14[0xd90];
+    char                objTable[4]; /* Real size unknown */
+    char                unk_117a8[0x588];
+    TransitionContext   transition;
+    char                unk_11e60[0x6b8];
 }
 GameState_Play;
 
+#define TRANS_NONE     0x00
+#define TRANS_NORMAL   0x14
+
+ASSERT_OFFSET(GameState_Play, transition, 0x11d30);
+ASSERT_OFFSET(GameState_Play, transition.type, 0x11e15);
+ASSERT_OFFSET(GameState_Play, transition.entrance, 0x11e1a);
+
+_Static_assert(sizeof(TransitionContext) == 0x130, "OoT TransitionContext size is wrong");
 _Static_assert(sizeof(GameState_Play) == 0x12518, "OoT GameState_Play size is wrong");
 
 typedef struct Actor Actor;

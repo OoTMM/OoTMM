@@ -18,11 +18,11 @@ void BgDyYoseizo_Update(Actor* actor, GameState_Play* play)
 
     if (GetSwitchFlag(play, 0x38))
     {
-        index = play->spawnId;
+        index = play->transition.spawnId;
         if (play->sceneId == SCE_GREAT_FAIRY_FOUNTAIN_SPELLS)
             index += 3;
         itemId = kGreatFairyRewards[index];
-        override = comboGetCollectibleOverride(play->sceneId, play->spawnId);
+        override = comboGetCollectibleOverride(play->sceneId, play->transition.spawnId);
         if (override > -1)
             itemId = override;
         itemId = comboProgressive(itemId);
