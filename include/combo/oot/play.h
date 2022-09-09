@@ -63,9 +63,20 @@ typedef struct PACKED
     u8      type;
     char    unk_0e6[0x04];
     u16     entrance;
-    char    unk_0ec[0x44];
+    char    unk_0ec[0x42];
+    u8      gfx;
+    char    unk_12f[0x1];
 }
 TransitionContext;
+
+#define TRANS_TYPE_NONE     0x00
+#define TRANS_TYPE_NORMAL   0x14
+
+#define TRANS_GFX_TRIFORCE          0x01
+#define TRANS_GFX_BLACK             0x02
+#define TRANS_GFX_SANDSTORM_SLOW    0x0e
+#define TRANS_GFX_SANDSTORM_FAST    0x0f
+#define TRANS_GFX_SHORTCUT          0x2c
 
 typedef struct GameState_Play
 {
@@ -82,9 +93,6 @@ typedef struct GameState_Play
     char                unk_11e60[0x6b8];
 }
 GameState_Play;
-
-#define TRANS_NONE     0x00
-#define TRANS_NORMAL   0x14
 
 ASSERT_OFFSET(GameState_Play, transition, 0x11d30);
 ASSERT_OFFSET(GameState_Play, transition.type, 0x11e15);
