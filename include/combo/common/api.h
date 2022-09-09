@@ -12,6 +12,7 @@ Actor*  SpawnActor(void* const_1, GameState_Play* play, s16 actorId, float x, fl
 void    ActorDestroy(Actor* actor);
 int     HasActorGivenItem(Actor* actor);
 void    ActorSetScale(Actor* actor, float scale);
+void    ActorEnableInteraction(Actor* actor, GameState_Play* play);
 
 u32     GetCollectibleFlag(GameState_Play* play, int flag);
 void    SetCollectibleFlag(GameState_Play* play, int flag);
