@@ -4,6 +4,8 @@ Actor* hookSpawnActorEx(void* const_1, GameState_Play* play, s16 actorId, float 
 {
     switch (actorId)
     {
+    case AC_DOOR_WARP1:
+        break;
     case AC_ITEM00:
         if ((variable & 0xff) == 0x06)
         {

@@ -90,7 +90,7 @@
 /* Moon's Tear               */ { Shader_MoonTear,               { 0x6000d78, 0x6000c80 }}, /* Missing shader in OoT */
 /* Land Title Deed           */ { Shader_Opa01,                  { 0x6000a08, 0x6000968 }},
 /* Deku Mask                 */ { Shader_Opa0_Xlu1,              { 0x6000f20, 0x6000b50 }},
-/* Remains - Odolwa          */ { (void*)0x800ef364,             { 0x6000690, 0x6000690 }}, /* Missing shader in OoT */
+/* Remains - Odolwa          */ { (void*)0x800efd44,             { 0x6000690, 0x6000690 }}, /* Missing shader in OoT */
 /* Powder Keg                */ { Shader_Opa0_Xlu1,              { 0x6000da0, 0x6000bc0 }},
 /* Gold Dust                 */ { Shader_Opa01,                  { 0x6000888, 0x6000880 }},
 /* Gold Dust in a bottle     */ { Shader_Opa0_Xlu1,              { 0x6000d18, 0x60009a0 }},
