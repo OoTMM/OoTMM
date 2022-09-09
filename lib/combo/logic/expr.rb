@@ -68,12 +68,13 @@ module Combo::Logic
   end
 
   class ExprHas < Expr
-    def initialize(item)
+    def initialize(item, count)
       @item = item.to_sym
+      @count = count
     end
 
     def eval_expr(age, state)
-      if state.items[@item]
+      if (state.items[@item] || 0) >= @count
         SOLVED_VALUE
       else
         Value.new(false, missing: [@item])
@@ -88,6 +89,20 @@ module Combo::Logic
 
     def eval_expr(age, state)
       if state.reachable_locations[age].include?(@name)
+        SOLVED_VALUE
+      else
+        Value.new(false)
+      end
+    end
+  end
+
+  class ExprAge < Expr
+    def initialize(age)
+      @age = age.to_sym
+    end
+
+    def eval_expr(age, state)
+      if age == @age
         SOLVED_VALUE
       else
         Value.new(false)

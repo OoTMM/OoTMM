@@ -1,4 +1,6 @@
 {
+  "is_child": "age(child)",
+  "is_adult": "age(adult)",
   "can_play(song)": "has(OCARINA) and has(song)",
   "has_explosives": "has(BOMB_BAG) or has(BOMBCHU)",
   "has_bombflowers": "has_explosives or has(STRENGTH)",

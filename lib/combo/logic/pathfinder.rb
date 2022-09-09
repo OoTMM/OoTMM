@@ -35,7 +35,8 @@ module Combo::Logic
       elsif Util.boss_key?(item)
         @state.boss_keys.add(dungeon)
       else
-        @state.items[item] = true
+        @state.items[item] ||= 0
+        @state.items[item] += 1
       end
     end
 
