@@ -102,6 +102,7 @@
     </room>
     <room name="ForestTemple_PostBoss">
       <collectible id="1f" content="HEART_CONTAINER"/>
+      <special id="48" content="MEDALLION_FOREST"/>
     </room>
   </scene>
 </dungeon>
