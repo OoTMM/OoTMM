@@ -54,7 +54,7 @@ module Combo::Logic
     end
 
     def parse_room(game, e, scene_id, dungeon, desc)
-      name = e['name'].to_sym
+      name = Util.game_id(game, e['name'])
       if e.name == 'room'
         desc = desc + [e['desc']]
       end
@@ -96,7 +96,7 @@ module Combo::Logic
     end
 
     def parse_link(game, e, from)
-      to = e['to'].to_sym
+      to = Util.game_id(game, e['to'])
       cond = e['cond']
       flags = (e['flags'] || "").split(',').map{|x| x.gsub('-', '_').to_sym }
       unless cond.nil?

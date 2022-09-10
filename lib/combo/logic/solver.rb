@@ -36,7 +36,7 @@ module Combo::Logic
       add_pool(%i[MM_MASK_DEKU MM_OCARINA_OF_TIME MM_SHIELD MM_SWORD MM_SONG_TIME MM_SONG_HEALING])
 
       # Mark link's house as reachable
-      @pathfinder.mark_reachable(:child, :KF_LinkHouse)
+      @pathfinder.mark_reachable(:child, :OOT_KF_LinkHouse)
 
       # Fix the goal items
       fix_goals()

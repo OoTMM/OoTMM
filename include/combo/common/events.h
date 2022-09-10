@@ -14,6 +14,7 @@
 #define EV_OOT_CHK_STONE_SAPPHIRE           0x37
 #define EV_OOT_CHK_ZELDA_LETTER             0x40
 #define EV_OOT_CHK_OCARINA_OF_TIME          0x43
+#define EV_OOT_CHK_MEDALLION_FOREST         0x48
 #define EV_OOT_CHK_SONG_ZELDA               0x59
 #define EV_OOT_CHK_SONG_SUN                 0x5a
 #define EV_OOT_CHK_SONG_STORMS              0x5b

@@ -75,6 +75,7 @@ static int isBossReward(Actor_ItemCustom* item, GameState_Play* play)
             case EV_OOT_CHK_STONE_EMERALD:
             case EV_OOT_CHK_STONE_RUBY:
             case EV_OOT_CHK_STONE_SAPPHIRE:
+            case EV_OOT_CHK_MEDALLION_FOREST:
                 return 1;
         }
     }

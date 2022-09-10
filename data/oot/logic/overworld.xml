@@ -6,7 +6,7 @@
     <link to="DT_Main"/>
     <link to="LW_Bridge"/>
     <link to="LW_Main"/>
-    <chest id="00" content="SWORD"/>
+    <chest id="00" content="SWORD" cond="is_child"/>
   </scene>
   <scene id="28" name="KF_Mido" desc="Mido's House">
     <chest id="00" content="RUPEE_BLUE"/>
@@ -24,6 +24,7 @@
     </room>
   </scene>
   <scene id="56" name="SacredMeadow">
+    <link to="ForestTemple_Entrance" cond="is_adult and has(HOOKSHOT)"/>
     <special id="58" desc="Saria's Song" content="SONG_SARIA" cond="reach(Hyrule_CastleCourtyard)"/>
   </scene>
   <scene id="51" name="Hyrule_Field" desc="Hyrule Field">
@@ -32,13 +33,13 @@
     <link to="Kakariko"/>
     <link to="ZoraRiver_Entrance"/>
     <link to="LakeHylia"/>
-    <special id="43" content="OCARINA" cond="has_spiritual_stones"/>
-    <special id="a9" content="SONG_TIME" cond="has_spiritual_stones"/>
+    <special id="43" content="OCARINA" cond="has_spiritual_stones" desc="Ocarina"/>
+    <special id="a9" content="SONG_TIME" cond="has_spiritual_stones" desc="Ocarina"/>
   </scene>
   <scene id="20" name="Hyrule_Market">
     <link to="Hyrule_Castle"/>
-    <link to="ClockTown_South"/>
     <link to="TempleOfTime"/>
+    <link to="MM_ClockTown_South" cond="is_child"/>
   </scene>
   <scene id="5f" name="Hyrule_Castle" desc="Hyrule Castle">
     <npc id="00" content="CHICKEN" desc="Malon"/>
@@ -57,6 +58,7 @@
     <link to="Graveyard_TombReDead"/>
     <link to="Graveyard_TombFairy"/>
     <link to="Graveyard_TombRoyal" cond="can_play(SONG_ZELDA) and has(SWORD)"/>
+    <link to="Graveyard_TombDampe" cond="is_adult"/>
   </scene>
   <scene id="3f" name="Graveyard_TombReDead">
     <chest id="00" content="HEART_PIECE" cond="can_play(SONG_SUN)"/>
@@ -75,7 +77,7 @@
     <chest id="01" content="RUPEE_PURPLE" cond="has_explosives"/>
   </scene>
   <scene id="62" name="GoronVillage">
-    <npc id="02" content="STRENGTH" cond="has(OCARINA) and has(SONG_ZELDA) and has(SONG_SARIA)"/>
+    <npc id="02" content="STRENGTH" cond="can_play(SONG_ZELDA) and can_play(SONG_SARIA)"/>
   </scene>
   <scene id="3b" name="GreatFairy_Magic1">
     <collectible id="00" content="MAGIC_UPGRADE"/>
@@ -92,7 +94,7 @@
   </scene>
   <scene id="59" name="ZoraDomain" desc="Zora Domain">
     <link to="ZoraRiver" flags="one-way"/>
-    <link to="ZoraFountain" cond="has(RUTO_LETTER)"/>
+    <link to="ZoraFountain" cond="is_child and has(RUTO_LETTER)"/>
     <chest id="00" content="HEART_PIECE" desc="Waterfall Chest"/>
     <npc id="03" content="SCALE" desc="Diving Game"/>
   </scene>
@@ -113,5 +115,16 @@
       <collectible id="1e" content="MEDALLION_LIGHT" cond="is_adult" desc="Medallion"/>
     </room>
     <room name="TIME_TRAVEL"><!-- Special room --></room>
+  </scene>
+  <scene id="48">
+    <room name="Graveyard_TombDampe">
+      <link to="Windmill_Top" flags="one-way"/>
+      <chest id="00" content="HOOKSHOT"/>
+    </room>
+    <room name="Windmill_Top" desc="Windmill">
+      <collectible id="01" content="HEART_PIECE"/>
+    </room>
+    <room name="Windmill_Bottom">
+    </room>
   </scene>
 </overworld>

@@ -22,7 +22,11 @@ module Combo::Logic
     end
 
     def self.game_id(game, id)
-      [game.to_s.upcase, id].join('_').to_sym
+      if id.start_with?('OOT_') || id.start_with?('MM_')
+        id.to_sym
+      else
+        [game.to_s.upcase, id].join('_').to_sym
+      end
     end
 
     def self.junk_item?(x)
@@ -49,6 +53,8 @@ module Combo::Logic
         OOT_HEART_CONTAINER2
         OOT_RUPEE_HUGE
         MM_HEART_PIECE
+        MM_HEART_CONTAINER
+        MM_HEART_CONTAINER2
         MM_RUPEE_SILVER
         MM_RUPEE_GOLD
     ].include?(x)

@@ -61,6 +61,8 @@ class Combo::Randomizer
       item = :OOT_GORON_BRACELET
     when :OOT_SCALE
       item = :OOT_SILVER_SCALE
+    when :OOT_BOW
+      item = :OOT_FAIRY_BOW
     when :MM_SWORD
       item = :MM_KOKIRI_SWORD
     when :MM_SHIELD
