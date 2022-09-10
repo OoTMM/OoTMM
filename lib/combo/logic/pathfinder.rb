@@ -17,8 +17,8 @@ module Combo::Logic
 
     def mark_reachable(age, location)
       @state.reachable_locations[age].add(location)
-      if location == :TIME_TRAVEL
-        @state.reachable_locations[:adult].add(:TIME_TRAVEL)
+      if location == :OOT_TIME_TRAVEL
+        @state.reachable_locations[:adult].add(:OOT_TIME_TRAVEL)
       end
     end
 

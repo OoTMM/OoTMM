@@ -32,13 +32,13 @@
     <link to="Kakariko"/>
     <link to="ZoraRiver_Entrance"/>
     <link to="LakeHylia"/>
-    <special id="43" content="OCARINA" cond="has_spiritual_stones"/>
-    <special id="a9" content="SONG_TIME" cond="has_spiritual_stones"/>
+    <special id="43" content="OCARINA" cond="has_spiritual_stones" desc="Ocarina"/>
+    <special id="a9" content="SONG_TIME" cond="has_spiritual_stones" desc="Ocarina"/>
   </scene>
   <scene id="20" name="Hyrule_Market">
     <link to="Hyrule_Castle"/>
     <link to="TempleOfTime"/>
-    <link to="ClockTown_South" cond="is_child"/>
+    <link to="MM_ClockTown_South" cond="is_child"/>
   </scene>
   <scene id="5f" name="Hyrule_Castle" desc="Hyrule Castle">
     <npc id="00" content="CHICKEN" desc="Malon"/>

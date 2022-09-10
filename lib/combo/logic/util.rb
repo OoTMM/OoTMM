@@ -22,7 +22,11 @@ module Combo::Logic
     end
 
     def self.game_id(game, id)
-      [game.to_s.upcase, id].join('_').to_sym
+      if id.start_with?('OOT_') || id.start_with?('MM_')
+        id.to_sym
+      else
+        [game.to_s.upcase, id].join('_').to_sym
+      end
     end
 
     def self.junk_item?(x)

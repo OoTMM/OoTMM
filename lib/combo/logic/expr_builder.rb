@@ -116,7 +116,7 @@ module Combo::Logic
     def parse_expr_reach
       return nil unless accept("reach")
       expect(:lparen)
-      name = expect(:id)
+      name = Util.game_id(@game, expect(:id))
       expect(:rparen)
       ExprReach.new(name)
     end

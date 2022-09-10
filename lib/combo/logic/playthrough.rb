@@ -7,7 +7,7 @@ module Combo::Logic
       @graph = graph
       @state = State.new
       @pathfinder = Pathfinder.new(graph, @state)
-      @pathfinder.mark_reachable(:child, :KF_LinkHouse)
+      @pathfinder.mark_reachable(:child, :OOT_KF_LinkHouse)
       @spheres = []
     end
 
