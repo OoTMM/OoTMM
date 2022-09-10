@@ -48,8 +48,8 @@
 #define GI_OOT_DEKU_SHIELD          0x29
 #define GI_OOT_HYLIAN_SHIELD        0x2a
 #define GI_OOT_MIRROR_SHIELD        0x2b
-#define GI_OOT_GORON_TUNIC          0x2c
-#define GI_OOT_ZORA_TUNIC           0x2d
+#define GI_OOT_TUNIC_GORON          0x2c
+#define GI_OOT_TUNIC_ZORA           0x2d
 #define GI_OOT_IRON_BOOTS           0x2e
 #define GI_OOT_HOVER_BOOTS          0x2f
 #define GI_OOT_QUIVER2              0x30

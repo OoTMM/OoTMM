@@ -77,7 +77,8 @@
     <chest id="01" content="RUPEE_PURPLE" cond="has_explosives"/>
   </scene>
   <scene id="62" name="GoronVillage">
-    <npc id="02" content="STRENGTH" cond="can_play(SONG_ZELDA) and can_play(SONG_SARIA)"/>
+    <npc id="02" content="STRENGTH" cond="is_child and can_play(SONG_ZELDA) and can_play(SONG_SARIA)"/>
+    <npc id="04" content="TUNIC_GORON" cond="is_adult and has_explosives"/>
   </scene>
   <scene id="3b" name="GreatFairy_Magic1">
     <collectible id="00" content="MAGIC_UPGRADE"/>

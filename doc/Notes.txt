@@ -6,6 +6,7 @@ NPC override IDs:
 01 Anju, Empty Bottle
 02 Darunia, Goron Bracelet
 03 Zora Diving Game, silver scale
+04 Link the Goron, Goron Tunic
 
 SPIRITUAL
 Emerald:  1240 10e0
