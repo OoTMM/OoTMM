@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dungeon name="Forest" desc="Forest Temple">
+  <scene id="03">
+    <room name="ForestTemple_Entrance">
+      <link to="ForestTemple_EntranceCorridor"/>
+      <chest id="03" content="SMALL_KEY"/>
+    </room>
+    <room name="ForestTemple_EntranceCorridor">
+      <link to="ForestTemple_Main"/>
+    </room>
+    <room name="ForestTemple_Main">
+      <link to="ForestTemple_Corridor_W" flags="locked"/>
+      <link to="ForestTemple_Corridor_N"/>
+      <link to="ForestTemple_Garden_W"/>
+      <link to="ForestTemple_Garden_E" cond="has(BOW)"/>
+    </room>
+    <room name="ForestTemple_Corridor_W">
+      <link to="ForestTemple_VerticalMaze"/>
+    </room>
+    <room name="ForestTemple_VerticalMaze">
+      <link to="ForestTemple_VerticalMaze_Up" cond="has(STRENGTH)"/>
+    </room>
+    <room name="ForestTemple_VerticalMaze_Up">
+      <chest id="04" content="ARROWS_30" cond="has(BOW)"/>
+      <link to="ForestTemple_Twist1" flags="locked"/>
+    </room>
+    <room name="ForestTemple_Corridor_N">
+      <link to="ForestTemple_MiniBoss_Bottom"/>
+    </room>
+    <room name="ForestTemple_MiniBoss_Bottom">
+      <chest id="00" content="SMALL_KEY"/>
+    </room>
+    <room name="ForestTemple_Garden_W">
+      <link to="ForestTemple_Garden_Link_Top"/>
+      <link to="ForestTemple_Garden_Link_Bottom"/>
+    </room>
+    <room name="ForestTemple_Garden_E">
+      <link to="ForestTemple_Garden_Link_Bottom"/>
+      <chest id="05" content="RECOVERY_HEART"/>
+    </room>
+    <room name="ForestTemple_Garden_Link_Top">
+      <link to="ForestTemple_Garden_E" flags="one-way"/>
+      <chest id="01" content="MAP"/>
+    </room>
+    <room name="ForestTemple_Garden_Link_Bottom">
+      <chest id="09" content="SMALL_KEY"/>
+    </room>
+    <room name="ForestTemple_Twist1">
+      <link to="ForestTemple_Twist1_Twisted"/>
+      <link to="ForestTemple_Twist1_Untwisted" cond="has(BOW)"/>
+    </room>
+    <room name="ForestTemple_Twist1_Twisted">
+      <link to="ForestTemple_Poe1" flags="locked"/>
+    </room>
+    <room name="ForestTemple_Twist1_Untwisted">
+      <link to="ForestTemple_Garden_Top"/>
+      <chest id="0e" content="BOSS_KEY"/>
+    </room>
+    <room name="ForestTemple_Poe1">
+      <link to="ForestTemple_MiniBoss_Top"/>
+      <chest id="0d" content="SMALL_KEY" cond="has(BOW)"/>
+    </room>
+    <room name="ForestTemple_MiniBoss_Top">
+      <link to="ForestTemple_Poe2"/>
+      <chest id="0c" content="BOW"/>
+    </room>
+    <room name="ForestTemple_Poe2">
+      <link to="ForestTemple_Twist2_Untwisted" flags="locked"/>
+      <chest id="0f" content="COMPASS" cond="has(BOW)"/>
+    </room>
+    <room name="ForestTemple_Twist2_Untwisted">
+      <link to="ForestTemple_Rotating" flags="locked"/>
+    </room>
+    <room name="ForestTemple_Twist2_Twisted">
+      <link to="ForestTemple_Checkerboard" flags="one-way"/>
+    </room>
+    <room name="ForestTemple_Rotating">
+      <link to="ForestTemple_Twist2_Twisted" cond="has(BOW)"/>
+    </room>
+    <room name="ForestTemple_Checkerboard">
+      <link to="ForestTemple_Poe3"/>
+      <chest id="07" content="ARROWS_10"/>
+    </room>
+    <room name="ForestTemple_Poe3">
+      <!-- Fake but required for key logic -->
+      <link to="ForestTemple_AntiChamber" cond="has(BOW) and reach(ForestTemple_Poe1) and reach(ForestTemple_Poe2) and reach(ForestTemple_Poe3)"/>
+    </room>
+    <room name="ForestTemple_Garden_Top">
+      <link to="ForestTemple_Garden_Top_Room"/>
+    </room>
+    <room name="ForestTemple_Garden_Top_Room">
+      <chest id="02" content="SMALL_KEY"/>
+    </room>
+    <room name="ForestTemple_AntiChamber">
+      <chest id="0b" content="ARROWS_5"/>
+      <link to="ForestTemple_Boss" flags="locked-boss"/>
+    </room>
+  </scene>
+  <scene id="14">
+    <room name="ForestTemple_Boss">
+      <link to="ForestTemple_PostBoss"/>
+    </room>
+    <room name="ForestTemple_PostBoss">
+      <collectible id="1f" content="HEART_CONTAINER"/>
+    </room>
+  </scene>
+</dungeon>

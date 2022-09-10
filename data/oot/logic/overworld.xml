@@ -24,6 +24,7 @@
     </room>
   </scene>
   <scene id="56" name="SacredMeadow">
+    <link to="ForestTemple_Entrance" cond="is_adult and has(HOOKSHOT)"/>
     <special id="58" desc="Saria's Song" content="SONG_SARIA" cond="reach(Hyrule_CastleCourtyard)"/>
   </scene>
   <scene id="51" name="Hyrule_Field" desc="Hyrule Field">
