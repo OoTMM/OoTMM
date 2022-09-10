@@ -13,9 +13,16 @@ module Combo::Logic
 
     def run
       loop do
-        checks = @pathfinder.propagate()
-        sphere_checks = checks.select {|c| Util.important_item?(c.content) }
+        checks = []
+        loop do
+          new_checks = @pathfinder.propagate()
+          keys, non_keys = new_checks.partition {|x| Util.small_key?(x.content) || Util.boss_key?(x.content) }
+          checks += non_keys
+          break if keys.empty?
+          keys.each {|x| @pathfinder.add_item(x.content, x.location) }
+        end
         checks.each {|c| @pathfinder.add_item(c.content, c.location) }
+        sphere_checks = checks.select {|c| Util.important_item?(c.content) }
         unless sphere_checks.empty?
           @spheres << sphere_checks
         end

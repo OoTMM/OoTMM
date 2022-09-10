@@ -49,6 +49,8 @@ module Combo::Logic
         OOT_HEART_CONTAINER2
         OOT_RUPEE_HUGE
         MM_HEART_PIECE
+        MM_HEART_CONTAINER
+        MM_HEART_CONTAINER2
         MM_RUPEE_SILVER
         MM_RUPEE_GOLD
     ].include?(x)
