@@ -54,6 +54,12 @@ class ObjectSplitter {
     this.outOffsets.push(this.outSize | 0x06000000);
     this.outSize += size;
     this.out.push(list);
+    if (this.outSize % 16) {
+      const extraSize = 16 - (this.outSize % 16);
+      const extraBuf = Buffer.alloc(extraSize);
+      this.outSize += extraSize;
+      this.out.push(extraBuf);
+    }
   }
 
   makeObject(): SplitObject {
@@ -77,10 +83,10 @@ class ObjectSplitter {
 
   private copy(addr: number, size: number): number {
     const seg = (addr >>> 24);
-    addr &= 0xffffff;
     if (seg !== 0x06) {
       return addr;
     }
+    addr &= 0xffffff;
     const seenAddr = this.seen.get(addr);
     if (seenAddr !== undefined) {
       return seenAddr;

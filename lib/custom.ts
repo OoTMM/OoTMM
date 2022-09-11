@@ -100,8 +100,7 @@ export const custom = async () => {
   const objects = await Promise.all(ENTRIES.map(x => makeSplitObject(x)));
   const objectDmaBuffer = Buffer.alloc(0x10 * objects.length);
   const objectDma = new DmaData(objectDmaBuffer);
-  const objTableBuffer = Buffer.alloc(0x08 * objects.length);
-  const objTable = new Uint32Array(objTableBuffer);
+  const objTable = Buffer.alloc(0x08 * objects.length);
   let vaddr = 0x08000000;
   let paddr = CUSTOM_ADDR;
   const data: Buffer[] = [];
@@ -113,14 +112,14 @@ export const custom = async () => {
     const physStart = paddr;
     const physEnd = 0;
     objectDma.write(i, { virtStart, virtEnd, physStart, physEnd });
-    objTable[i * 2 + 0] = virtStart;
-    objTable[i * 2 + 1] = virtEnd;
+    objTable.writeUInt32BE(virtStart, i * 8 + 0);
+    objTable.writeUInt32BE(virtEnd, i * 8 + 4);
     data.push(obj.data);
     vaddr = virtEnd;
     paddr += obj.data.byteLength;
     defines.push(define(['CUSTOM_OBJECT_ID', objEntry.name].join('_'), 0x2000 | i));
-    for (let j = 0; j < objEntry.offsets.length; ++j) {
-      const offset = objEntry.offsets[j];
+    for (let j = 0; j < obj.offsets.length; ++j) {
+      const offset = obj.offsets[j];
       defines.push(define(['CUSTOM_OBJECT', objEntry.name, j].join('_'), offset));
     }
   }
@@ -130,7 +129,7 @@ export const custom = async () => {
   paddr += objectDmaBuffer.byteLength;
   defines.push(define('CUSTOM_OBJECTS_ADDR', paddr));
   defines.push(define('CUSTOM_OBJECTS_SIZE', objects.length));
-  data.push(objTableBuffer);
+  data.push(objTable);
   await fs.writeFile(path.resolve(PATH_BUILD, 'custom.bin'), Buffer.concat(data));
   await writeDefines(defines);
 };
