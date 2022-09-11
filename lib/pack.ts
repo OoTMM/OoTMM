@@ -4,6 +4,7 @@ import fs from 'fs/promises';
 import { compressGame } from './compress';
 import { Game, GAMES, PATH_DIST, PATH_BUILD, CONFIG, CUSTOM_ADDR } from './config';
 import { patchGame } from './patch';
+import { DmaData } from './dma';
 
 const combineRoms = async () => {
   const oot = await patchGame('oot');
@@ -30,6 +31,25 @@ const packCustom = async (rom: Buffer) => {
     throw new Error("Custom data too large");
   }
   customData.copy(rom, CUSTOM_ADDR);
+};
+
+const fixDMA = (rom: Buffer) => {
+  console.log("Fixing DMA...");
+  const config = CONFIG['mm'];
+  const mask = 0x02000000;
+  const dmaAddr = config.dmaAddr + mask;
+  const dma = new DmaData(rom.subarray(dmaAddr, dmaAddr + config.dmaCount * 0x10));
+  for (let i = 0; i < dma.count(); ++i) {
+    const entry = dma.read(i);
+    if (entry.physEnd === 0xffffffff) {
+      continue;
+    }
+    entry.physStart = (entry.physStart | mask) >>> 0;
+    if (entry.physEnd) {
+      entry.physEnd = (entry.physEnd | mask) >>> 0;
+    }
+    dma.write(i, entry);
+  }
 };
 
 const fixHeader = (rom: Buffer) => {
@@ -89,6 +109,7 @@ export const pack = async () => {
     await packPayload(rom, g);
   }
   await packCustom(rom);
+  fixDMA(rom);
   fixHeader(rom);
   fixChecksum(rom);
 

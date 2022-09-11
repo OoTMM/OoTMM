@@ -1,15 +1,15 @@
 import fs from 'fs/promises';
 import path from 'path';
+import { Readable } from 'stream';
 import { createYaz0Stream } from 'yaz0';
 
 import { Game, CONFIG, PATH_BUILD } from './config';
 import { DmaData } from './dma';
 
-const compressFiles = async (rom: Buffer, dmaOld: DmaData, dmaNew: DmaData) => {
+const compressFiles = async (rom: Buffer, dmaOld: DmaData) => {
   const promises: Promise<Buffer>[] = [];
-  for (let i = 0; i < dmaNew.count(); ++i) {
+  for (let i = 0; i < dmaOld.count(); ++i) {
     const entryOld = dmaOld.read(i);
-    const entryNew = dmaNew.read(i);
 
     /* Skip dummy files */
     if (entryOld.physEnd === 0xffffffff) {
@@ -25,13 +25,16 @@ const compressFiles = async (rom: Buffer, dmaOld: DmaData, dmaNew: DmaData) => {
 
     /* We need to compress */
     promises.push(new Promise((resolve, reject) => {
-      const stream = createYaz0Stream('compress', { size: entryOld.virtEnd - entryOld.virtStart });
+      const stream = createYaz0Stream('compress', { size: entryOld.virtEnd - entryOld.virtStart, level: 8 });
       const chunks: Buffer[] = [];
       stream.on('data', (chunk) => chunks.push(chunk));
       stream.on('end', () => resolve(Buffer.concat(chunks)));
       stream.on('error', reject);
-      stream.push(rom.subarray(entryOld.virtStart, entryOld.virtEnd));
-      stream.push(null);
+
+      const bufStream = new Readable();
+      bufStream.push(rom.subarray(entryOld.virtStart, entryOld.virtEnd));
+      bufStream.push(null);
+      bufStream.pipe(stream);
     }));
   }
   return Promise.all(promises);
@@ -44,7 +47,7 @@ export const compressGame = async (game: Game, rom: Buffer) => {
   const dmaOld = new DmaData(await fs.readFile(path.resolve(PATH_BUILD, 'roms', `${game}_dma.bin`)));
   const dmaNew = new DmaData(Buffer.from(rom.subarray(conf.dmaAddr, conf.dmaAddr + conf.dmaCount * 16)));
   const newRom = Buffer.alloc(32 * 1024 * 1024);
-  const files = await compressFiles(rom, dmaOld, dmaNew);
+  const files = await compressFiles(rom, dmaOld);
 
   let paddr = 0;
   for (let i = 0; i < dmaNew.count(); ++i) {
@@ -77,5 +80,5 @@ export const compressGame = async (game: Game, rom: Buffer) => {
   /* Copy the DMA table */
   dmaNew.data().copy(newRom, conf.dmaAddr);
 
-  return rom;
+  return newRom;
 };
