@@ -79,6 +79,7 @@
   <scene id="62" name="GoronVillage">
     <npc id="02" content="STRENGTH" cond="is_child and can_play(SONG_ZELDA) and can_play(SONG_SARIA)"/>
     <npc id="04" content="TUNIC_GORON" cond="is_adult and has_explosives"/>
+    <link to="DeathCreater_Shortcut" cond="is_adult and has(TUNIC_GORON)"/>
   </scene>
   <scene id="3b" name="GreatFairy_Magic1">
     <collectible id="00" content="MAGIC_UPGRADE"/>
@@ -126,6 +127,14 @@
       <collectible id="01" content="HEART_PIECE"/>
     </room>
     <room name="Windmill_Bottom">
+    </room>
+  </scene>
+  <scene id="61">
+    <room name="DeathCreater_Shortcut">
+      <link to="DeathCrater_Bottom" cond="has(HOOKSHOT)"/>
+    </room>
+    <room name="DeathCrater_Bottom">
+      <link to="FireTemple_Entrance"/>
     </room>
   </scene>
 </overworld>
