@@ -1,5 +1,8 @@
 import path from 'path';
 
+import DATA_FILES_OOT from '../data/oot/files.json';
+import DATA_FILES_MM from '../data/mm/files.json';
+
 export const GAMES = ['oot', 'mm'] as const;
 export type Game = typeof GAMES[number];
 
@@ -10,6 +13,11 @@ export const PATH_DATA = path.resolve(ROOT, 'data');
 export const PATH_DIST = path.resolve(ROOT, 'dist');
 
 export const CUSTOM_ADDR = 0x03f80000;
+
+export const DATA_FILES = {
+  oot: DATA_FILES_OOT,
+  mm: DATA_FILES_MM,
+};
 
 type GameConfig = {
   sha256: readonly string[];

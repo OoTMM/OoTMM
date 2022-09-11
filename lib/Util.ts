@@ -8,3 +8,16 @@ export const fileExists = async (path: string) => {
     return false;
   }
 }
+
+export const arrayToIndexMap = (arr: string[]) => {
+  const map: {[k: string]: number} = {};
+  for (let i = 0; i < arr.length; ++i) {
+    map[arr[i]] = i;
+  }
+  return map;
+};
+
+export const align = (n: number, alignment: number) => {
+  const missing = (alignment - (n % alignment)) % alignment;
+  return n + missing;
+}
