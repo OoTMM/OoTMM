@@ -4,7 +4,8 @@ import fs from 'fs/promises';
 import { Game, PATH_BUILD, DATA_FILES, CUSTOM_ADDR } from './config';
 import { DmaData } from './dma';
 import { splitObject } from './split';
-import { arrayToIndexMap, fileExists } from './util';
+import { align, arrayToIndexMap, fileExists } from './util';
+import { compressFile } from './compress';
 
 const FILES_TO_INDEX_OOT = arrayToIndexMap(DATA_FILES.oot);
 const FILES_TO_INDEX_MM = arrayToIndexMap(DATA_FILES.mm);
@@ -107,16 +108,21 @@ export const custom = async () => {
   for (let i = 0; i < objects.length; ++i) {
     const obj = objects[i];
     const objEntry = ENTRIES[i];
+    const objCompressed = await compressFile(obj.data);
+    const objCompressedSize = align(objCompressed.byteLength, 0x10);
     const virtStart = vaddr;
     const virtEnd = vaddr + obj.data.byteLength;
     const physStart = paddr;
-    const physEnd = 0;
+    const physEnd = paddr + objCompressedSize;
     objectDma.write(i, { virtStart, virtEnd, physStart, physEnd });
     objTable.writeUInt32BE(virtStart, i * 8 + 0);
     objTable.writeUInt32BE(virtEnd, i * 8 + 4);
-    data.push(obj.data);
+    data.push(objCompressed);
+    if (objCompressed.byteLength !== objCompressedSize) {
+      data.push(Buffer.alloc(objCompressedSize - objCompressed.byteLength));
+    }
     vaddr = virtEnd;
-    paddr += obj.data.byteLength;
+    paddr += objCompressedSize;
     defines.push(define(['CUSTOM_OBJECT_ID', objEntry.name].join('_'), 0x2000 | i));
     for (let j = 0; j < obj.offsets.length; ++j) {
       const offset = obj.offsets[j];
