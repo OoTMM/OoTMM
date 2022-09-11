@@ -3,9 +3,9 @@ import fs from 'fs/promises';
 import path from 'path';
 import { createYaz0Stream } from 'yaz0';
 
-import { DmaData } from './DmaData';
-import { CONFIG, Game, GAMES, PATH_BUILD, PATH_ROMS } from './Config';
-import { fileExists } from './Util';
+import { DmaData } from './dma';
+import { CONFIG, Game, GAMES, PATH_BUILD, PATH_ROMS } from './config';
+import { fileExists } from './util';
 
 export const copyFile = async (src: Buffer, dst: Buffer, compressed: boolean) => {
   let stream = Readable.from(src);

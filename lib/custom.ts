@@ -1,10 +1,10 @@
 import path from 'path';
 import fs from 'fs/promises';
 
-import { Game, PATH_BUILD, DATA_FILES, CUSTOM_ADDR } from './Config';
-import { DmaData, DmaDataRecord } from './DmaData';
-import { SplitObject, splitObject } from './ObjectSplitter';
-import { align, arrayToIndexMap, fileExists } from './Util';
+import { Game, PATH_BUILD, DATA_FILES, CUSTOM_ADDR } from './config';
+import { DmaData } from './dma';
+import { splitObject } from './split';
+import { arrayToIndexMap, fileExists } from './util';
 
 const FILES_TO_INDEX_OOT = arrayToIndexMap(DATA_FILES.oot);
 const FILES_TO_INDEX_MM = arrayToIndexMap(DATA_FILES.mm);

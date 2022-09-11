@@ -1,6 +1,6 @@
 import { spawn } from "child_process";
-import { decompressGames } from "./Decompressor";
-import { custom } from "./Custom";
+import { decompressGames } from "./decompress";
+import { custom } from "./custom";
 
 const build = async () => {
   return new Promise((resolve, reject) => {
