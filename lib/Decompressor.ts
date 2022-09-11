@@ -1,10 +1,11 @@
-import { createYaz0Stream } from 'yaz0';
 import { Readable } from 'stream';
 import fs from 'fs/promises';
 import path from 'path';
+import { createYaz0Stream } from 'yaz0';
 
 import { DmaData } from './DmaData';
 import { CONFIG, Game, GAMES, PATH_BUILD, PATH_ROMS } from './Config';
+import { fileExists } from './Util';
 
 export const copyFile = async (src: Buffer, dst: Buffer, compressed: boolean) => {
   let stream = Readable.from(src);
@@ -19,9 +20,15 @@ export const copyFile = async (src: Buffer, dst: Buffer, compressed: boolean) =>
   return null;
 };
 
-export const decompressGame = async (game: Game, rom: Buffer): Promise<Buffer> => {
+type DecompressedGame = {
+  rom: Buffer,
+  dma: Buffer,
+};
+
+export const decompressGame = async (game: Game, rom: Buffer): Promise<DecompressedGame> => {
   const conf = CONFIG[game];
-  const dma = new DmaData(Buffer.from(rom.subarray(conf.dmaAddr, conf.dmaAddr + conf.dmaCount * 16)));
+  const dmaBuffer = Buffer.from(rom.subarray(conf.dmaAddr, conf.dmaAddr + conf.dmaCount * 16));
+  const dma = new DmaData(Buffer.from(dmaBuffer));
   const out = Buffer.alloc(64 * 1024 * 1024);
   const promises: Promise<null>[] = [];
 
@@ -46,15 +53,23 @@ export const decompressGame = async (game: Game, rom: Buffer): Promise<Buffer> =
 
   dma.data().copy(out, conf.dmaAddr);
 
-  return out;
+  return { rom: out, dma: dmaBuffer };
 };
 
 export const decompressGames = async () => {
-  await fs.mkdir(path.resolve(PATH_BUILD, 'roms'), { recursive: true });
+  const outDir = path.resolve(PATH_BUILD, 'roms');
+  await fs.mkdir(outDir, { recursive: true });
   for (const g of GAMES) {
+    const stampPath = path.resolve(outDir, `${g}.stamp`);
+    if (await fileExists(stampPath))
+      continue;
     console.log("Decompressing " + g + "...");
-    const rom = await fs.readFile(path.resolve(PATH_ROMS, `${g}.z64`));
-    const out = await decompressGame(g, rom);
-    await fs.writeFile(path.resolve(PATH_BUILD, 'roms', `${g}_decompressed.z64`), out);
+    const f = await fs.readFile(path.resolve(PATH_ROMS, `${g}.z64`));
+    const { rom, dma } = await decompressGame(g, f);
+    await Promise.all([
+      fs.writeFile(path.resolve(outDir, `${g}_decompressed.z64`), rom),
+      fs.writeFile(path.resolve(outDir, `${g}_dma.bin`), dma),
+    ]);
+    await fs.writeFile(stampPath, "");
   }
 };
