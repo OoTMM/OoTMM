@@ -3,6 +3,8 @@
     "start": "ts-node ./lib/index.ts"
   },
   "dependencies": {
+    "glob": "^8.0.3",
+    "glob-promise": "^5.0.0",
     "yaz0": "^1.0.0"
   },
   "devDependencies": {

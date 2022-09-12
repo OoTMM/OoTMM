@@ -1,24 +1,20 @@
-[
-  {
-    "name": "SPAWN",
+{
+  "SPAWN": {
     "exits": {
       "Link's House": "true"
     }
   },
-  {
-    "name": "Link's House",
+  "Link's House": {
     "exits": {
       "Kokiri Forest": "true"
     }
   },
-  {
-    "name": "Kokiri Forest",
+  "Kokiri Forest": {
     "exits": {
       "Link's House": "true"
     }
   },
-  {
-    "name": "Mido's House",
+  "Mido's House": {
     "locations": {
       "KF Mido Top Left": "true",
       "KF Mido Top Right": "true",
@@ -29,4 +25,4 @@
       "Kokiri Forest": "true"
     }
   }
-]
+}
