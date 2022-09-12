@@ -1,0 +1,6 @@
+{
+  "KF Mido Top Left":     {"type": "chest", "sceneId": "28", "id": "00", "content": "RUPEE_BLUE"},
+  "KF Mido Top Right":    {"type": "chest", "sceneId": "28", "id": "00", "content": "RUPEE_BLUE"},
+  "KF Mido Bottom Left":  {"type": "chest", "sceneId": "28", "id": "00", "content": "RUPEE_GREEN"},
+  "KF Mido Bottom Right": {"type": "chest", "sceneId": "28", "id": "00", "content": "RECOVERY_HEART"}
+}
