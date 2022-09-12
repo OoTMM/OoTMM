@@ -6,5 +6,6 @@
   "KF Kokiri Sword Chest":  ["chest",   "55", "00", "SWORD"],
   "Malon Egg":              ["npc",     null, "00", "CHICKEN"],
   "Zelda's Letter":         ["special", null, "40", "ZELDA_LETTER"],
-  "Zelda's Song":           ["special", null, "59", "SONG_ZELDA"]
+  "Zelda's Song":           ["special", null, "59", "SONG_ZELDA"],
+  "Lost Woods Bridge":      ["special", null, "c1", "OCARINA"]
 }

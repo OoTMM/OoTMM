@@ -1,5 +1,5 @@
 import { Random } from '../random';
-import { Solver } from './solve';
+import { solve } from './solve';
 import { createWorld } from './world';
 
 export const logic = async () => {
@@ -7,8 +7,7 @@ export const logic = async () => {
   const random = new Random();
   random.seed();
 
-  const solver = new Solver(world, random);
-  const placement = solver.solve();
+  const placement = solve(world, random);
 
   console.log(placement);
 };

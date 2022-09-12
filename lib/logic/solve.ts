@@ -6,6 +6,9 @@ import { World } from './world';
 const ITEMS_REQUIRED = new Set<string>([
   'SWORD',
   'CHICKEN',
+  'OCARINA',
+  'SLINGSHOT',
+  'BOW',
 ]);
 const ITEMS_NICE = new Set<string>([]);
 
@@ -91,7 +94,7 @@ const combinedItems = (items: Items, other: Items) => {
   return combined;
 };
 
-export class Solver {
+class Solver {
   private placement: ItemPlacement = {};
   private items: Items = {};
   private reachable?: Reachable;
@@ -183,4 +186,9 @@ export class Solver {
     });
     return changed;
   }
+}
+
+export const solve = (world: World, random: Random) => {
+  const solver = new Solver(world, random);
+  return solver.solve();
 }

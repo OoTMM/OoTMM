@@ -1,4 +1,5 @@
 {
   "is_child": "age(child)",
-  "is_adult": "age(adult)"
+  "is_adult": "age(adult)",
+  "can_play(x)": "has(OCARINA) && has(x)"
 }

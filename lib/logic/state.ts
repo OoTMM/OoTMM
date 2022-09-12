@@ -6,4 +6,5 @@ export type Age = typeof AGES[number];
 export type State = {
   items: Items;
   age: Age;
+  events: Set<string>,
 };

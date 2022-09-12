@@ -14,6 +14,7 @@ type ExprMap = {
 type WorldRegion = {
   locations: ExprMap;
   exits: ExprMap;
+  events: ExprMap;
 };
 
 type WorldCheck = {
@@ -44,12 +45,13 @@ const loadWorldRegions = async (world: World, exprParser: ExprParser, filename: 
     const region = data[name];
     const locations = mapExprs(exprParser, region.locations || {});
     const exits = mapExprs(exprParser, region.exits || {});
+    const events = mapExprs(exprParser, region.events || {});
 
     if (name === undefined) {
       throw new Error(`Region name is undefined`);
     }
 
-    world.regions[name] = { locations, exits };
+    world.regions[name] = { locations, exits, events };
   }
 };
 

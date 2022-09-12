@@ -7,6 +7,7 @@ export type Reachable = {
     adult: Set<string>;
   },
   locations: Set<string>;
+  events: Set<string>;
 };
 
 const reachableDefault = (): Reachable => ({
@@ -15,6 +16,7 @@ const reachableDefault = (): Reachable => ({
     adult: new Set(['SPAWN']),
   },
   locations: new Set(),
+  events: new Set(),
 });
 
 const reachableDup = (reachable: Reachable): Reachable => ({
@@ -23,6 +25,7 @@ const reachableDup = (reachable: Reachable): Reachable => ({
     adult: new Set(reachable.regions.adult),
   },
   locations: new Set(reachable.locations),
+  events: new Set(reachable.events),
 });
 
 const pathfindRegions = (world: World, items: Items, age: Age, reachable: Reachable) => {
@@ -35,7 +38,7 @@ const pathfindRegions = (world: World, items: Items, age: Age, reachable: Reacha
         continue;
       }
       const expr = exits[exit];
-      if (expr({ items, age })) {
+      if (expr({ items, age, events: reachable.events })) {
         newRegions.add(exit);
       }
     }
@@ -45,6 +48,24 @@ const pathfindRegions = (world: World, items: Items, age: Age, reachable: Reacha
     return true;
   }
   return false;
+};
+
+const pathfindEvents = (world: World, items: Items, age: Age, reachable: Reachable) => {
+  let changed = false;
+  for (const region of reachable.regions[age]) {
+    const events = world.regions[region].events;
+    for (const event in events) {
+      if (reachable.events.has(event)) {
+        continue;
+      }
+      const expr = events[event];
+      if (expr({ items, age, events: reachable.events })) {
+        reachable.events.add(event);
+        changed = true;
+      }
+    }
+  }
+  return changed;
 };
 
 const pathfindLocations = (world: World, items: Items, age: Age, reachable: Reachable) => {
@@ -57,7 +78,7 @@ const pathfindLocations = (world: World, items: Items, age: Age, reachable: Reac
         continue;
       }
       const expr = locations[location];
-      if (expr({ items, age })) {
+      if (expr({ items, age, events: reachable.events })) {
         newLocations.add(location);
       }
     }
@@ -76,11 +97,12 @@ export const pathfind = (world: World, items: Items, reachable?: Reachable) => {
     reachable = reachableDup(reachable);
   }
 
-  /* Reach all regions */
+  /* Reach all regions & events */
   for (;;) {
     let changed = false;
     for (const age of AGES) {
       changed ||= pathfindRegions(world, items, age, reachable);
+      changed ||= pathfindEvents(world, items, age, reachable);
     }
     if (!changed) {
       break;

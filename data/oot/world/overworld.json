@@ -14,7 +14,7 @@
       "Link's House": "true",
       "Mido's House": "true",
       "Kokiri Forest Child": "is_child",
-      "Hyrule Field": "true"
+      "Lost Woods": "true"
     }
   },
   "Mido's House": {
@@ -38,7 +38,7 @@
   },
   "Hyrule Field": {
     "exits": {
-      "Kokiri Forest": "true",
+      "Lost Woods": "true",
       "Market": "true"
     }
   },
@@ -56,6 +56,18 @@
       "Malon Egg": "true",
       "Zelda's Letter": "has(CHICKEN)",
       "Zelda's Song": "has(CHICKEN)"
+    },
+    "events": {
+      "MEET_ZELDA": "has(CHICKEN)"
+    }
+  },
+  "Lost Woods": {
+    "exits": {
+      "Kokiri Forest": "true",
+      "Hyrule Field": "true"
+    },
+    "locations": {
+      "Lost Woods Bridge": "event(MEET_ZELDA)"
     }
   }
 }
