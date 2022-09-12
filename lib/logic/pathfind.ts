@@ -1,7 +1,7 @@
 import { World } from './world';
 import { Age, AGES, Items } from './state';
 
-type Reachable = {
+export type Reachable = {
   regions: {
     child: Set<string>;
     adult: Set<string>;

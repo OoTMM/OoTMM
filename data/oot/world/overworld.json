@@ -12,7 +12,9 @@
   "Kokiri Forest": {
     "exits": {
       "Link's House": "true",
-      "Mido's House": "true"
+      "Mido's House": "true",
+      "Kokiri Forest Child": "is_child",
+      "Hyrule Field": "true"
     }
   },
   "Mido's House": {
@@ -24,6 +26,36 @@
     },
     "exits": {
       "Kokiri Forest": "true"
+    }
+  },
+  "Kokiri Forest Child": {
+    "locations": {
+      "KF Kokiri Sword Chest": "true"
+    },
+    "exits": {
+      "Kokiri Forest": "true"
+    }
+  },
+  "Hyrule Field": {
+    "exits": {
+      "Kokiri Forest": "true",
+      "Market": "true"
+    }
+  },
+  "Market": {
+    "exits": {
+      "Hyrule Field": "true",
+      "Hyrule Castle": "is_child"
+    }
+  },
+  "Hyrule Castle": {
+    "exits": {
+      "Market": "true"
+    },
+    "locations": {
+      "Malon Egg": "true",
+      "Zelda's Letter": "has(CHICKEN)",
+      "Zelda's Song": "has(CHICKEN)"
     }
   }
 }

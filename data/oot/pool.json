@@ -1,6 +1,10 @@
 {
-  "KF Mido Top Left":     ["chest", "28", "00", "RUPEE_BLUE"],
-  "KF Mido Top Right":    ["chest", "28", "00", "RUPEE_BLUE"],
-  "KF Mido Bottom Left":  ["chest", "28", "00", "RUPEE_GREEN"],
-  "KF Mido Bottom Right": ["chest", "28", "00", "RECOVERY_HEART"]
+  "KF Mido Top Left":       ["chest",   "28", "00", "RUPEE_BLUE"],
+  "KF Mido Top Right":      ["chest",   "28", "01", "RUPEE_BLUE"],
+  "KF Mido Bottom Left":    ["chest",   "28", "02", "RUPEE_GREEN"],
+  "KF Mido Bottom Right":   ["chest",   "28", "03", "RECOVERY_HEART"],
+  "KF Kokiri Sword Chest":  ["chest",   "55", "00", "SWORD"],
+  "Malon Egg":              ["npc",     null, "00", "CHICKEN"],
+  "Zelda's Letter":         ["special", null, "40", "ZELDA_LETTER"],
+  "Zelda's Song":           ["special", null, "59", "SONG_ZELDA"]
 }

@@ -1,4 +1,4 @@
-import { Expr, exprTrue, exprFalse, exprAnd, exprOr, exprAge } from './expr';
+import { Expr, exprTrue, exprFalse, exprAnd, exprOr, exprAge, exprHas } from './expr';
 
 const SIMPLE_TOKENS = ['||', '&&', '(', ')', ',', 'true', 'false'] as const;
 
@@ -69,6 +69,21 @@ export class ExprParser {
     return exprAge(age);
   }
 
+  private parseExprHas(): Expr | undefined {
+    if (this.peek('identifier') !== 'has') {
+      return undefined;
+    }
+    this.accept('identifier');
+    this.expect('(');
+    const item = this.expect('identifier');
+    let count = 1;
+    if (this.accept(',')) {
+      count = this.expect('number');
+    }
+    this.expect(')');
+    return exprHas(item, count);
+  }
+
   private parseMacro(): Expr | undefined {
     /* Check for a macro with the given name */
     const name = this.peek('identifier');
@@ -129,7 +144,7 @@ export class ExprParser {
       this.expect(')');
       return expr;
     }
-    return this.parseExprTrue() || this.parseExprFalse() || this.parseExprAge() || this.parseMacro();
+    return this.parseExprTrue() || this.parseExprFalse() || this.parseExprAge() || this.parseExprHas() || this.parseMacro();
   }
 
   private parseExprOr(): Expr | undefined {
