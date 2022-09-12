@@ -1,4 +1,4 @@
-import { Expr, exprTrue, exprFalse, exprAnd, exprOr } from './expr';
+import { Expr, exprTrue, exprFalse, exprAnd, exprOr, exprAge } from './expr';
 
 const SIMPLE_TOKENS = ['||', '&&', '(', ')', ',', 'true', 'false'] as const;
 
@@ -11,21 +11,35 @@ type TokenType = Token['type'];
 type TokenOfType<T> = Extract<Token, { type: T }>;
 type TokenValue<T> = TokenOfType<T> extends { value: infer TT; } ? TT : true;
 
+type ParseContext = {
+  buffer: string;
+  cursor: number;
+  next?: Token;
+  macroValues: {[k: string]: Token};
+};
+
+type Macro = {
+  args: string[];
+  buffer: string;
+};
+
 export class ExprParser {
-  private buffer = "";
-  private cursor = 0;
-  private next?: Token;
+  private ctx: ParseContext[] = [];
+  private macros: {[k: string]: Macro} = {};
+
+  addMacro(name: string, args: string[], buffer: string) {
+    this.macros[name] = { args, buffer };
+  }
 
   parse(input: string) {
-    this.buffer = input;
-    this.cursor = 0;
-    this.next = undefined;
+    this.ctx.push({ buffer: input, cursor: 0, macroValues: {} });
 
     const expr = this.parseExpr();
     if (expr === undefined) {
       throw new Error("Expected expression");
     }
     this.expect('EOF');
+    this.ctx = [];
     return expr;
   }
 
@@ -41,13 +55,81 @@ export class ExprParser {
     }
   }
 
+  private parseExprAge(): Expr | undefined {
+    if (this.peek('identifier') !== 'age') {
+      return undefined;
+    }
+    this.accept('identifier');
+    this.expect('(');
+    const age = this.expect('identifier');
+    if (age !== 'child' && age !== 'adult') {
+      throw new Error(`Expected child or adult at ${this.ctx[0].cursor}`);
+    }
+    this.expect(')');
+    return exprAge(age);
+  }
+
+  private parseMacro(): Expr | undefined {
+    /* Check for a macro with the given name */
+    const name = this.peek('identifier');
+    if (name === undefined) {
+      return undefined;
+    }
+    const macro = this.macros[name];
+    if (macro === undefined) {
+      return undefined;
+    }
+    this.accept('identifier');
+
+    /* We found a match - parse the macro arguments */
+    const args: Token[] = [];
+    if (this.accept('(')) {
+      if (!this.accept(')')) {
+        for (;;) {
+          const arg = this.popNextToken();
+          if (arg.type !== 'number' && arg.type !== 'identifier') {
+            throw new Error(`Expected number or identifier at ${this.ctx[0].cursor}`);
+          }
+          args.push(arg);
+          if (this.accept(')')) {
+            break;
+          }
+          this.expect(',');
+        }
+      }
+    }
+
+    /* Check that the number of arguments matches */
+    if (args.length !== macro.args.length) {
+      throw new Error(`Expected ${macro.args.length} arguments at ${this.ctx[0].cursor}`);
+    }
+
+    /* Zip the arguments */
+    const macroValues: {[k: string]: Token} = {};
+    for (let i = 0; i < macro.args.length; i++) {
+      macroValues[macro.args[i]] = args[i];
+    }
+
+    /* Setup the context */
+    this.ctx.push({ buffer: macro.buffer, cursor: 0, macroValues });
+
+    /* Parse */
+    const expr = this.parseExpr();
+    if (expr === undefined) {
+      throw new Error("Expected expression");
+    }
+    this.expect('EOF');
+    this.ctx.pop();
+    return expr;
+  }
+
   private parseExprSingle(): Expr | undefined {
     if (this.accept('(')) {
       const expr = this.parseExpr();
       this.expect(')');
       return expr;
     }
-    return this.parseExprTrue() || this.parseExprFalse();
+    return this.parseExprTrue() || this.parseExprFalse() || this.parseExprAge() || this.parseMacro();
   }
 
   private parseExprOr(): Expr | undefined {
@@ -60,7 +142,7 @@ export class ExprParser {
     while (this.accept('||')) {
       expr = this.parseExprAnd();
       if (expr === undefined) {
-        throw new Error(`Expected expression after || at ${this.cursor}`);
+        throw new Error(`Expected expression after || at ${this.ctx[0].cursor}`);
       }
       exprs.push(expr);
     }
@@ -81,7 +163,7 @@ export class ExprParser {
     while (this.accept('&&')) {
       expr = this.parseExprSingle();
       if (expr === undefined) {
-        throw new Error(`Expected expression after && at ${this.cursor}`);
+        throw new Error(`Expected expression after && at ${this.ctx[0].cursor}`);
       }
       exprs.push(expr);
     }
@@ -97,78 +179,102 @@ export class ExprParser {
   }
 
   private skipWhitespace() {
+    const ctx = this.ctx[this.ctx.length - 1];
     for (;;) {
-      const c = this.buffer[this.cursor];
+      const c = ctx.buffer[ctx.cursor];
       if (c !== ' ' && c !== '\t' && c !== '\n') {
         break;
       }
-      this.cursor++;
+      ctx.cursor++;
     }
   }
 
   private expect<T extends TokenType>(t: T): TokenValue<T> {
     const token = this.accept(t);
     if (token === undefined) {
-      throw new Error(`Expected token ${t} at ${this.cursor}`);
+      throw new Error(`Expected token ${t} at ${this.ctx[0].cursor}`);
     }
     return token;
   }
 
   private accept<T extends TokenType>(t: T): TokenValue<T> | undefined {
+    const p = this.peek(t);
+    if (p !== undefined) {
+      this.ctx[this.ctx.length - 1].next = undefined;
+      return p;
+    }
+    return undefined;
+  }
+
+  private peek<T extends TokenType>(t: T): TokenValue<T> | undefined {
     const next = this.nextToken();
     if (next.type === t) {
-      this.next = undefined;
       return (next as any).value === undefined ? true : (next as any).value;
     }
     return undefined;
   }
 
+  private popNextToken(): Token {
+    const t = this.nextToken();
+    this.ctx[this.ctx.length - 1].next = undefined;
+    return t;
+  }
+
   private nextToken(): Token {
-    if (!this.next) {
-      this.next = this.parseNextToken();
+    const ctx = this.ctx[this.ctx.length - 1];
+    if (!ctx.next) {
+      ctx.next = this.parseNextToken();
     }
-    return this.next;
+    return ctx.next;
   }
 
   private parseNextToken(): Token {
+    const ctx = this.ctx[this.ctx.length - 1];
+
     /* Skip whitespace */
     this.skipWhitespace();
 
     /* Check for EOF */
-    if (this.cursor >= this.buffer.length) {
+    if (ctx.cursor >= ctx.buffer.length) {
       return { type: 'EOF' };
     }
 
     /* Check for a simple token */
     for (const t of SIMPLE_TOKENS) {
-      const str = this.buffer.substring(this.cursor, this.cursor + t.length);
+      const str = ctx.buffer.substring(ctx.cursor, ctx.cursor + t.length);
       if (str === t) {
-        this.cursor += t.length;
+        ctx.cursor += t.length;
         return { type: t };
       }
     }
 
     /* Check for an identifier */
-    if (/[a-zA-Z_]/.test(this.buffer[this.cursor])) {
-      const start = this.cursor;
-      while (/[a-zA-Z0-9_]/.test(this.buffer[this.cursor])) {
-        this.cursor++;
+    if (/[a-zA-Z_]/.test(ctx.buffer[ctx.cursor] || '')) {
+      const start = ctx.cursor;
+      while (/[a-zA-Z0-9_]/.test(ctx.buffer[ctx.cursor] || '')) {
+        ctx.cursor++;
       }
-      const str = this.buffer.substring(start, this.cursor);
+      const str = ctx.buffer.substring(start, ctx.cursor);
+
+      /* Might be a macro argument */
+      if (str in ctx.macroValues) {
+        return ctx.macroValues[str];
+      }
+
       return { type: 'identifier', value: str };
     }
 
     /* Check for a number */
-    if (/[0-9]/.test(this.buffer[this.cursor])) {
-      const start = this.cursor;
-      while (/[0-9]/.test(this.buffer[this.cursor])) {
-        this.cursor++;
+    if (/[0-9]/.test(ctx.buffer[ctx.cursor] || '')) {
+      const start = ctx.cursor;
+      while (/[0-9]/.test(ctx.buffer[ctx.cursor] || '')) {
+        ctx.cursor++;
       }
-      const str = this.buffer.substring(start, this.cursor);
+      const str = ctx.buffer.substring(start, ctx.cursor);
       return { type: 'number', value: parseInt(str) };
     }
 
     /* Unknown token */
-    throw new Error(`Unknown token at ${this.cursor}`);
+    throw new Error(`Unknown token at ${ctx.cursor}`);
   }
 };

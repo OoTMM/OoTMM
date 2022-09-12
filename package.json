@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "ts-node ./lib/index.ts"
+    "start": "ts-node -T ./lib/index.ts"
   },
   "dependencies": {
     "glob": "^8.0.3",

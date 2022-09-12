@@ -1,0 +1,4 @@
+{
+  "is_child": "age(child)",
+  "is_adult": "age(adult)"
+}

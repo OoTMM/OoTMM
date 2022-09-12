@@ -16,8 +16,16 @@ type WorldRegion = {
   exits: ExprMap;
 };
 
+type WorldCheck = {
+  type: 'chest';
+  sceneId: number;
+  id: number;
+};
+
 export type World = {
   regions: {[k: string]: WorldRegion};
+  checks: {[k: string]: WorldCheck};
+  pool: string[];
 };
 
 const mapExprs = (exprParser: ExprParser, data: any) => {
@@ -28,7 +36,7 @@ const mapExprs = (exprParser: ExprParser, data: any) => {
   return result;
 }
 
-const loadWorldData = async (world: World, exprParser: ExprParser, filename: string) => {
+const loadWorldRegions = async (world: World, exprParser: ExprParser, filename: string) => {
   const text = await fs.readFile(filename, 'utf8');
   const data = JSON.parse(text) as any;
 
@@ -45,14 +53,50 @@ const loadWorldData = async (world: World, exprParser: ExprParser, filename: str
   }
 };
 
+const loadWorldPool = async (world: World, filename: string) => {
+  const text = await fs.readFile(filename, 'utf8');
+  const data = JSON.parse(text) as any;
+  for (const location in data) {
+    const d = data[location];
+    const check = { type: d[0], sceneId: parseInt(d[1], 16), id: parseInt(d[2], 16) } as WorldCheck;
+    const item = d[3];
+    world.checks[location] = check;
+    world.pool.push(item);
+  }
+};
+
+const loadMacros = async (exprParser: ExprParser, filename: string) => {
+  const text = await fs.readFile(filename, 'utf8');
+  const data = JSON.parse(text) as any;
+  for (let name in data) {
+    const buffer = data[name];
+
+    /* Horrible hack */
+    name = name.replace('(', ' ');
+    name = name.replace(')', ' ');
+    name = name.replace(',', ' ');
+
+    const parts = name.split(' ');
+    name = parts[0];
+    const args = parts.slice(1);
+    exprParser.addMacro(name, args, buffer);
+  }
+};
+
 const loadWorldGame = async (world: World, game: Game) => {
+  /* Create the expr parser */
   const exprParser = new ExprParser();
+  await loadMacros(exprParser, path.join(PATH_DATA, game, 'macros.json'));
+
+  /* Load the world */
   const worldFiles = await glob(path.resolve(PATH_DATA, game, 'world', '*.json'));
-  await Promise.all(worldFiles.map(x => loadWorldData(world, exprParser, x)));
+  await Promise.all(worldFiles.map(x => loadWorldRegions(world, exprParser, x)));
+  const poolFile = path.resolve(PATH_DATA, game, 'pool.json');
+  await loadWorldPool(world, poolFile);
 }
 
 export const createWorld = async () => {
-  const world: World = { regions: {} };
+  const world: World = { regions: {}, checks: {}, pool: [] };
   await loadWorldGame(world, 'oot');
   return world;
 };

@@ -17,6 +17,14 @@ const reachableDefault = (): Reachable => ({
   locations: new Set(),
 });
 
+const reachableDup = (reachable: Reachable): Reachable => ({
+  regions: {
+    child: new Set(reachable.regions.child),
+    adult: new Set(reachable.regions.adult),
+  },
+  locations: new Set(reachable.locations),
+});
+
 const pathfindRegions = (world: World, items: Items, age: Age, reachable: Reachable) => {
   const newRegions = new Set<string>();
   const oldRegions = reachable.regions[age];
@@ -64,6 +72,8 @@ const pathfindLocations = (world: World, items: Items, age: Age, reachable: Reac
 export const pathfind = (world: World, items: Items, reachable?: Reachable) => {
   if (reachable === undefined) {
     reachable = reachableDefault();
+  } else {
+    reachable = reachableDup(reachable);
   }
 
   /* Reach all regions */

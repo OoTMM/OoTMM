@@ -1,7 +1,7 @@
 {
   "SPAWN": {
     "exits": {
-      "Link's House": "true"
+      "Link's House": "is_child"
     }
   },
   "Link's House": {
@@ -11,7 +11,8 @@
   },
   "Kokiri Forest": {
     "exits": {
-      "Link's House": "true"
+      "Link's House": "true",
+      "Mido's House": "true"
     }
   },
   "Mido's House": {
