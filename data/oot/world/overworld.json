@@ -96,7 +96,8 @@
       "Graveyard": "true"
     },
     "locations": {
-      "Anju's Bottle": "is_child"
+      "Anju's Bottle": "is_child",
+      "Windmill HP": "is_adult"
     }
   },
   "Graveyard": {
@@ -106,7 +107,8 @@
     "locations": {
       "Graveyard ReDead Tomb": "can_play(SONG_SUN)",
       "Graveyard Royal Tomb": "can_play(SONG_ZELDA) && has(SWORD)",
-      "Graveyard Fairy Tomb": "true"
+      "Graveyard Fairy Tomb": "true",
+      "Graveyard Dampe Tomb Hookshot": "is_adult"
     }
   },
   "Death Mountain": {
