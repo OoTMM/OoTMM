@@ -21,12 +21,14 @@ type WorldCheck = {
   type: 'chest';
   sceneId: number;
   id: number;
+  item: string;
 };
 
 export type World = {
   regions: {[k: string]: WorldRegion};
   checks: {[k: string]: WorldCheck};
   pool: string[];
+  dungeons: {[k: string]: Set<string>};
 };
 
 const mapExprs = (exprParser: ExprParser, data: any) => {
@@ -43,6 +45,7 @@ const loadWorldRegions = async (world: World, exprParser: ExprParser, filename: 
 
   for (const name in data) {
     const region = data[name];
+    const dungeon = region.dungeon;
     const locations = mapExprs(exprParser, region.locations || {});
     const exits = mapExprs(exprParser, region.exits || {});
     const events = mapExprs(exprParser, region.events || {});
@@ -52,6 +55,14 @@ const loadWorldRegions = async (world: World, exprParser: ExprParser, filename: 
     }
 
     world.regions[name] = { locations, exits, events };
+
+    if (dungeon !== undefined) {
+      if (world.dungeons[dungeon] === undefined) {
+        world.dungeons[dungeon] = new Set();
+      }
+      const d = world.dungeons[dungeon];
+      Object.keys(locations).forEach(x => d.add(x));
+    }
   }
 };
 
@@ -60,8 +71,8 @@ const loadWorldPool = async (world: World, filename: string) => {
   const data = JSON.parse(text) as any;
   for (const location in data) {
     const d = data[location];
-    const check = { type: d[0], sceneId: parseInt(d[1], 16), id: parseInt(d[2], 16) } as WorldCheck;
     const item = d[3];
+    const check = { type: d[0], sceneId: parseInt(d[1], 16), id: parseInt(d[2], 16), item } as WorldCheck;
     world.checks[location] = check;
     world.pool.push(item);
   }
@@ -98,7 +109,7 @@ const loadWorldGame = async (world: World, game: Game) => {
 }
 
 export const createWorld = async () => {
-  const world: World = { regions: {}, checks: {}, pool: [] };
+  const world: World = { regions: {}, checks: {}, pool: [], dungeons: {} };
   await loadWorldGame(world, 'oot');
   return world;
 };

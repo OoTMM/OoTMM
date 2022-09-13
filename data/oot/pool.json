@@ -7,5 +7,12 @@
   "Malon Egg":              ["npc",     null, "00", "CHICKEN"],
   "Zelda's Letter":         ["special", null, "40", "ZELDA_LETTER"],
   "Zelda's Song":           ["special", null, "59", "SONG_ZELDA"],
-  "Lost Woods Bridge":      ["special", null, "c1", "OCARINA"]
+  "Lost Woods Bridge":      ["special", null, "c1", "OCARINA"],
+
+  "Deku Tree Map Chest":                ["chest",   "00", "03", "MAP_DEKU_TREE"],
+  "Deku Tree Compass Chest":            ["chest",   "00", "02", "COMPASS_DEKU_TREE"],
+  "Deku Tree Compass Room Side Chest":  ["chest",   "00", "06", "RECOVERY_HEART"],
+  "Deku Tree Slingshot Chest":          ["chest",   "00", "01", "SLINGSHOT"],
+  "Deku Tree Slingshot Side Chest":     ["chest",   "00", "05", "RECOVERY_HEART"],
+  "Deku Tree Basement Chest":           ["chest",   "00", "04", "RECOVERY_HEART"]
 }

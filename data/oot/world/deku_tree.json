@@ -1,0 +1,16 @@
+{
+  "Deku Tree Main": {
+    "dungeon": "DekuTree",
+    "exits": {
+      "Kokiri Forest": "true"
+    },
+    "locations": {
+      "Deku Tree Map Chest": "true",
+      "Deku Tree Compass Chest": "true",
+      "Deku Tree Compass Room Side Chest": "true",
+      "Deku Tree Slingshot Chest": "true",
+      "Deku Tree Slingshot Side Chest": "true",
+      "Deku Tree Basement Chest": "true"
+    }
+  }
+}

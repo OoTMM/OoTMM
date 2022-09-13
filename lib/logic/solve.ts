@@ -3,6 +3,8 @@ import { pathfind, Reachable } from './pathfind';
 import { Items } from './state';
 import { World } from './world';
 
+const ITEMS_DUNGEON = /^(MAP|COMPASS|SMALL_KEY|BOSS_KEY|STRAY_FAIRY)_[A-Z_]+$/;
+
 const ITEMS_REQUIRED = new Set<string>([
   'SWORD',
   'CHICKEN',
@@ -11,6 +13,10 @@ const ITEMS_REQUIRED = new Set<string>([
   'BOW',
 ]);
 const ITEMS_NICE = new Set<string>([]);
+
+const DUNGEON_ENTRANCES = {
+  "DekuTree": "Deku tree Main",
+};
 
 const sample = <T>(random: Random, arr: T[]): T => {
   if (arr.length === 0) {
@@ -34,6 +40,7 @@ const shuffle = <T>(random: Random, arr: T[]): T[] => {
 type ItemPlacement = {[k: string]: string};
 
 type ItemPools = {
+  dungeon: Items,
   required: Items,
   nice: Items,
   junk: Items,
@@ -69,10 +76,12 @@ const removeItem = (items: Items, item: string) => {
 };
 
 const makeItemPools = (world: World) => {
-  const pools: ItemPools = { required: {}, nice: {}, junk: {} };
+  const pools: ItemPools = { dungeon: {}, required: {}, nice: {}, junk: {} };
 
   for (const item of world.pool) {
-    if (ITEMS_REQUIRED.has(item)) {
+    if (ITEMS_DUNGEON.test(item)) {
+      addItem(pools.dungeon, item);
+    } else if (ITEMS_REQUIRED.has(item)) {
       addItem(pools.required, item);
     } else if (ITEMS_NICE.has(item)) {
       addItem(pools.nice, item);
@@ -111,6 +120,11 @@ class Solver {
   solve() {
     const checksCount = Object.keys(this.world.checks).length;
 
+    /* Handle dungeon items */
+    for (const dungeon in this.world.dungeons) {
+      this.fixDungeon(dungeon);
+    }
+
     for (;;) {
       for (;;) {
         this.reachable = pathfind(this.world, this.items, this.reachable);
@@ -132,6 +146,22 @@ class Solver {
     this.fill();
 
     return this.placement;
+  }
+
+  private fixDungeon(dungeon: string) {
+    /* TODO: Small keys */
+    this.fixDungeonMapCompass(dungeon);
+  }
+
+  private fixDungeonMapCompass(dungeon: string) {
+    const locations = shuffle(this.random, Array.from(this.world.dungeons[dungeon]));
+    const items = Array.from(locations)
+      .map(l => this.world.checks[l].item)
+      .filter(x => /^(MAP|COMPASS)_/.test(x));
+    for (let i = 0; i < items.length; i++) {
+      this.placement[locations[i]] = items[i];
+      removeItem(this.pools.dungeon, items[i]);
+    }
   }
 
   private randomAssumed(pool: Items) {
