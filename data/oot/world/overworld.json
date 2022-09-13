@@ -41,7 +41,9 @@
     "exits": {
       "Lost Woods": "true",
       "Market": "true",
-      "Kakariko": "true"
+      "Kakariko": "true",
+      "Zora River": "has_explosives",
+      "Lake Hylia": "true"
     }
   },
   "Market": {
@@ -106,6 +108,10 @@
       "Goron City": "true",
       "Dodongo Cavern Entrance": "has_bombflowers && has(SWORD)",
       "Kakariko": "has(ZELDA_LETTER)"
+    },
+    "locations": {
+      "Death Mountain Chest": "has_explosives",
+      "Great Fairy Magic Upgrade": "has_explosives && can_play(SONG_ZELDA)"
     }
   },
   "Goron City": {
@@ -114,6 +120,45 @@
     },
     "locations": {
       "Darunia": "can_play(SONG_ZELDA) && can_play(SONG_SARIA)"
+    }
+  },
+  "Zora River": {
+    "exits": {
+      "Hyrule Field": "true",
+      "Zora Domain": "can_play(SONG_ZELDA)"
+    },
+    "locations": {
+      "Zora River HP Pillar": "true",
+      "Zora River HP Platform": "true"
+    }
+  },
+  "Zora Domain": {
+    "exits": {
+      "Zora River": "true",
+      "Lake Hylia": "is_child && has(SCALE)",
+      "Zora Fountain": "is_child && event(KING_ZORA_LETTER)"
+    },
+    "events": {
+      "KING_ZORA_LETTER": "is_child && has(RUTO_LETTER)"
+    },
+    "locations": {
+      "Zora Domain Waterfall Chest": "is_child",
+      "Zora Domain Diving Game": "is_child"
+    }
+  },
+  "Lake Hylia": {
+    "exits": {
+      "Hyrule Field": "true",
+      "Zora Domain": "is_child && has(SCALE)"
+    },
+    "locations": {
+      "Lake Hylia Underwater Bottle": "has(SCALE)"
+    }
+  },
+  "Zora Fountain": {
+    "exits": {
+      "Zora Domain": "is_child && event(KING_ZORA_LETTER)",
+      "Jabu-Jabu Entrance": "is_child && has_bottle"
     }
   }
 }

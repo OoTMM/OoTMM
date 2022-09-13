@@ -21,6 +21,7 @@ const ITEMS_REQUIRED = new Set<string>([
   'CHICKEN',
   'OCARINA',
   'SLINGSHOT',
+  'BOOMERANG',
   'BOW',
   'SONG_ZELDA',
   'SONG_SUN',
@@ -32,6 +33,8 @@ const ITEMS_REQUIRED = new Set<string>([
   'RUTO_LETTER',
   'STRENGTH',
   'BOMB_BAG',
+  'SCALE',
+  'EMPTY_BOTTLE',
 ]);
 const ITEMS_NICE = new Set<string>([]);
 

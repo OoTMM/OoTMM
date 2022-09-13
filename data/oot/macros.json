@@ -6,5 +6,7 @@
   "has_bombflowers": "has_explosives || has(STRENGTH)",
   "can_use_slingshot": "is_child && has(SLINGSHOT)",
   "can_use_bow": "is_adult && has(BOW)",
-  "can_hit_triggers_distance": "can_use_slingshot || can_use_bow"
+  "can_hit_triggers_distance": "can_use_slingshot || can_use_bow",
+  "has_bottle": "has(EMPTY_BOTTLE) || event(KING_ZORA_LETTER)",
+  "has_ranged_weapon": "(is_child && (has(SLINGSHOT) || has(BOOMERANG))) || (is_adult && (has(BOW) || has(HOOKSHOT)))"
 }

@@ -1,0 +1,31 @@
+{
+  "Jabu-Jabu Entrance": {
+    "dungeon": "JabuJabu",
+    "exits": {
+      "Zora Fountain": "true",
+      "Jabu-Jabu Main": "has_ranged_weapon"
+    }
+  },
+  "Jabu-Jabu Main": {
+    "dungeon": "JabuJabu",
+    "exits": {
+      "Jabu-Jabu Entrance": "true",
+      "Jabu-Jabu Boss": "has(BOOMERANG)"
+    },
+    "locations": {
+      "Jabu-Jabu Map Chest": "has(BOOMERANG)",
+      "Jabu-Jabu Compass Chest": "true",
+      "Jabu-Jabu Boomerang Chest": "true"
+    }
+  },
+  "Jabu-Jabu Boss": {
+    "dungeon": "JabuJabu",
+    "exits": {
+      "Jabu-Jabu Main": "true"
+    },
+    "locations": {
+      "Jabu-Jabu Boss Container": "true",
+      "Jabu-Jabu Boss": "true"
+    }
+  }
+}
