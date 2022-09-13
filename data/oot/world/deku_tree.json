@@ -20,8 +20,8 @@
       "Deku Tree Main": "true"
     },
     "locations": {
-      "Deku Tree Boss Container": "true",
-      "Deku Tree Boss": "true"
+      "Deku Tree Boss Container": "has(SWORD)",
+      "Deku Tree Boss": "has(SWORD)"
     }
   }
 }

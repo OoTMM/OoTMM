@@ -40,7 +40,8 @@
   "Hyrule Field": {
     "exits": {
       "Lost Woods": "true",
-      "Market": "true"
+      "Market": "true",
+      "Kakariko": "true"
     }
   },
   "Market": {
@@ -65,10 +66,53 @@
   "Lost Woods": {
     "exits": {
       "Kokiri Forest": "true",
-      "Hyrule Field": "true"
+      "Hyrule Field": "true",
+      "Sacred Meadow": "true"
     },
     "locations": {
-      "Lost Woods Bridge": "event(MEET_ZELDA)"
+      "Lost Woods Bridge": "true"
+    }
+  },
+  "Sacred Meadow": {
+    "exits": {
+      "Lost Woods": "true"
+    },
+    "locations": {
+      "Saria's Song": "event(MEET_ZELDA)"
+    }
+  },
+  "Kakariko": {
+    "exits": {
+      "Hyrule Field": "true",
+      "Death Mountain": "has(ZELDA_LETTER)",
+      "Graveyard": "true"
+    },
+    "locations": {
+      "Anju's Bottle": "is_child"
+    }
+  },
+  "Graveyard": {
+    "exits": {
+      "Kakariko": "true"
+    },
+    "locations": {
+      "Graveyard ReDead Tomb": "can_play(SONG_SUN)",
+      "Graveyard Royal Tomb": "can_play(SONG_ZELDA) && has(SWORD)",
+      "Graveyard Fairy Tomb": "true"
+    }
+  },
+  "Death Mountain": {
+    "exits": {
+      "Goron City": "true",
+      "Kakariko": "has(ZELDA_LETTER)"
+    }
+  },
+  "Goron City": {
+    "exits": {
+      "Death Mountain": "true"
+    },
+    "locations": {
+      "Darunia": "can_play(SONG_ZELDA) && can_play(SONG_SARIA)"
     }
   }
 }

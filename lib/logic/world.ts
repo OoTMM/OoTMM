@@ -89,7 +89,7 @@ const loadMacros = async (exprParser: ExprParser, filename: string) => {
     name = name.replace(')', ' ');
     name = name.replace(',', ' ');
 
-    const parts = name.split(' ');
+    const parts = name.split(' ').filter(x => !!x);
     name = parts[0];
     const args = parts.slice(1);
     exprParser.addMacro(name, args, buffer);

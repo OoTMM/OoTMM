@@ -8,6 +8,12 @@
   "Zelda's Letter":         ["special", null, "40", "ZELDA_LETTER"],
   "Zelda's Song":           ["special", null, "59", "SONG_ZELDA"],
   "Lost Woods Bridge":      ["special", null, "c1", "OCARINA"],
+  "Saria's Song":           ["special", null, "58", "SONG_SARIA"],
+  "Anju's Bottle":          ["npc",     null, "01", "EMPTY_BOTTLE"],
+  "Graveyard ReDead Tomb":  ["chest",   "3f", "00", "HEART_PIECE"],
+  "Graveyard Royal Tomb":   ["special", null, "5a", "SONG_SUN"],
+  "Graveyard Fairy Tomb":   ["chest",   "40", "00", "SHIELD"],
+  "Darunia":                ["npc",     null, "02", "STRENGTH"],
 
   "Deku Tree Map Chest":                ["chest",         "00", "03", "MAP_DEKU_TREE"],
   "Deku Tree Compass Chest":            ["chest",         "00", "02", "COMPASS_DEKU_TREE"],

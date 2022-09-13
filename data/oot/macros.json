@@ -1,5 +1,7 @@
 {
   "is_child": "age(child)",
   "is_adult": "age(adult)",
-  "can_play(x)": "has(OCARINA) && has(x)"
+  "can_play(x)": "has(OCARINA) && has(x)",
+  "has_explosives": "has(BOMB_BAG) or has(BOMBCHU)",
+  "has_bombflowers": "has_explosives or has(STRENGTH)"
 }

@@ -22,6 +22,14 @@ const ITEMS_REQUIRED = new Set<string>([
   'OCARINA',
   'SLINGSHOT',
   'BOW',
+  'SONG_ZELDA',
+  'SONG_SUN',
+  'SONG_EPONA',
+  'SONG_TIME',
+  'SONG_STORMS',
+  'SONG_SARIA',
+  'ZELDA_LETTER',
+  'RUTO_LETTER',
 ]);
 const ITEMS_NICE = new Set<string>([]);
 
@@ -86,6 +94,15 @@ const removeItem = (items: Items, item: string) => {
   }
 };
 
+const maxRequired = (pools: ItemPools, item: string, count: number) => {
+  if ((pools.required[item] || 0) <= count) {
+    return;
+  }
+  const extra = pools.required[item] - count;
+  pools.required[item] = count;
+  pools.nice[item] = extra;
+};
+
 const makeItemPools = (world: World) => {
   const pools: ItemPools = { dungeon: {}, required: {}, nice: {}, junk: {} };
 
@@ -100,6 +117,14 @@ const makeItemPools = (world: World) => {
       addItem(pools.junk, item);
     }
   }
+
+  maxRequired(pools, 'SWORD', 2);
+  maxRequired(pools, 'BOMB_BAG', 1);
+  maxRequired(pools, 'BOW', 1);
+  maxRequired(pools, 'SLINGSHOT', 1);
+  maxRequired(pools, 'MAGIC_UPGRADE', 1);
+  maxRequired(pools, 'OCARINA', 1);
+
   return pools;
 };
 
