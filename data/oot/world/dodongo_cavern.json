@@ -1,0 +1,36 @@
+{
+  "Dodongo Cavern Entrance": {
+    "dungeon": "DodongoCavern",
+    "exits": {
+      "Death Mountain": "true",
+      "Dodongo Cavern After Slingshot": "can_hit_triggers_distance"
+    },
+    "locations": {
+      "Dodongo Cavern Map Chest": "true",
+      "Dodongo Cavern Compass Chest": "true",
+      "Dodongo Cavern Bomb Bag Side Chest": "true"
+    }
+  },
+  "Dodongo Cavern After Slingshot": {
+    "dungeon": "DodongoCavern",
+    "exits": {
+      "Dodongo Cavern Entrance": "true",
+      "Dodongo Cavern Boss": "has_explosives"
+    },
+    "locations": {
+      "Dodongo Cavern Bomb Bag Chest": "true",
+      "Dodongo Cavern Bridge Chest": "has_explosives",
+      "Dodongo Cavern Boss Chest": "has_explosives"
+    }
+  },
+  "Dodongo Cavern Boss": {
+    "dungeon": "DodongoCavern",
+    "exits": {
+      "Dodongo Cavern After Slingshot": "true"
+    },
+    "locations": {
+      "Dodongo Cavern Boss Container": "true",
+      "Dodongo Cavern Boss": "true"
+    }
+  }
+}

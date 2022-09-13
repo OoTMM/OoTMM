@@ -104,6 +104,7 @@
   "Death Mountain": {
     "exits": {
       "Goron City": "true",
+      "Dodongo Cavern Entrance": "has_bombflowers && has(SWORD)",
       "Kakariko": "has(ZELDA_LETTER)"
     }
   },

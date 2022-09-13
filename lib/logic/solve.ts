@@ -30,6 +30,8 @@ const ITEMS_REQUIRED = new Set<string>([
   'SONG_SARIA',
   'ZELDA_LETTER',
   'RUTO_LETTER',
+  'STRENGTH',
+  'BOMB_BAG',
 ]);
 const ITEMS_NICE = new Set<string>([]);
 
@@ -188,7 +190,7 @@ class Solver {
   }
 
   private fixRewards() {
-    const rewards: string[] = [];
+    let rewards: string[] = [];
     const locations: string[] = [];
 
     for (const location in this.world.checks) {
@@ -199,7 +201,7 @@ class Solver {
       }
     }
 
-    shuffle(this.random, rewards);
+    rewards = shuffle(this.random, rewards);
     for (let i = 0; i < rewards.length; i++) {
       this.placement[locations[i]] = rewards[i];
       removeItem(this.pools.dungeon, rewards[i]);

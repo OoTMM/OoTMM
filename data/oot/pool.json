@@ -22,5 +22,14 @@
   "Deku Tree Slingshot Side Chest":     ["chest",         "00", "05", "RECOVERY_HEART"],
   "Deku Tree Basement Chest":           ["chest",         "00", "04", "RECOVERY_HEART"],
   "Deku Tree Boss Container":           ["collectible",   "11", "1f", "HEART_CONTAINER"],
-  "Deku Tree Boss":                     ["special",       null, "19", "STONE_EMERALD"]
+  "Deku Tree Boss":                     ["special",       null, "19", "STONE_EMERALD"],
+
+  "Dodongo Cavern Map Chest":            ["chest",        "01", "08", "MAP_DODONGO_CAVERN"],
+  "Dodongo Cavern Compass Chest":        ["chest",        "01", "05", "COMPASS_DODONGO_CAVERN"],
+  "Dodongo Cavern Bomb Bag Side Chest":  ["chest",        "01", "06", "RUPEE_RED"],
+  "Dodongo Cavern Bomb Bag Chest":       ["chest",        "01", "04", "BOMB_BAG"],
+  "Dodongo Cavern Bridge Chest":         ["chest",        "01", "0a", "SHIELD"],
+  "Dodongo Cavern Boss Chest":           ["chest",        "12", "00", "BOMBS_10"],
+  "Dodongo Cavern Boss Container":       ["collectible",  "12", "1f", "HEART_CONTAINER"],
+  "Dodongo Cavern Boss":                 ["special",      null, "25", "STONE_RUBY"]
 }
