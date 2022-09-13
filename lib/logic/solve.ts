@@ -4,6 +4,17 @@ import { Items } from './state';
 import { World } from './world';
 
 const ITEMS_DUNGEON = /^(MAP|COMPASS|SMALL_KEY|BOSS_KEY|STRAY_FAIRY)_[A-Z_]+$/;
+const ITEMS_DUNGEON_REWARDS = new Set([
+  'STONE_EMERALD',
+  'STONE_RUBY',
+  'STONE_SAPPHIRE',
+  'MEDALLION_LIGHT',
+  'MEDALLION_FOREST',
+  'MEDALLION_FIRE',
+  'MEDALLION_WATER',
+  'MEDALLION_SPIRIT',
+  'MEDALLION_SHADOW',
+]);
 
 const ITEMS_REQUIRED = new Set<string>([
   'SWORD',
@@ -79,7 +90,7 @@ const makeItemPools = (world: World) => {
   const pools: ItemPools = { dungeon: {}, required: {}, nice: {}, junk: {} };
 
   for (const item of world.pool) {
-    if (ITEMS_DUNGEON.test(item)) {
+    if (ITEMS_DUNGEON.test(item) || ITEMS_DUNGEON_REWARDS.has(item)) {
       addItem(pools.dungeon, item);
     } else if (ITEMS_REQUIRED.has(item)) {
       addItem(pools.required, item);
@@ -120,6 +131,9 @@ class Solver {
   solve() {
     const checksCount = Object.keys(this.world.checks).length;
 
+    /* Start by placing the required reward items */
+    this.fixRewards();
+
     /* Handle dungeon items */
     for (const dungeon in this.world.dungeons) {
       this.fixDungeon(dungeon);
@@ -148,13 +162,35 @@ class Solver {
     return this.placement;
   }
 
+  private fixRewards() {
+    const rewards: string[] = [];
+    const locations: string[] = [];
+
+    for (const location in this.world.checks) {
+      const item = this.world.checks[location].item;
+      if (ITEMS_DUNGEON_REWARDS.has(item)) {
+        rewards.push(item);
+        locations.push(location);
+      }
+    }
+
+    shuffle(this.random, rewards);
+    for (let i = 0; i < rewards.length; i++) {
+      this.placement[locations[i]] = rewards[i];
+      removeItem(this.pools.dungeon, rewards[i]);
+    }
+  }
+
   private fixDungeon(dungeon: string) {
     /* TODO: Small keys */
     this.fixDungeonMapCompass(dungeon);
   }
 
   private fixDungeonMapCompass(dungeon: string) {
-    const locations = shuffle(this.random, Array.from(this.world.dungeons[dungeon]));
+    const locations = shuffle(
+      this.random,
+      Array.from(this.world.dungeons[dungeon])
+        .filter(x => !this.placement[x]));
     const items = Array.from(locations)
       .map(l => this.world.checks[l].item)
       .filter(x => /^(MAP|COMPASS)_/.test(x));
