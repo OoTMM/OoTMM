@@ -14,7 +14,7 @@
     },
     "locations": {
       "Jabu-Jabu Map Chest": "has(BOOMERANG)",
-      "Jabu-Jabu Compass Chest": "true",
+      "Jabu-Jabu Compass Chest": "has(BOOMERANG)",
       "Jabu-Jabu Boomerang Chest": "true"
     }
   },

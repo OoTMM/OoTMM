@@ -1,7 +1,8 @@
 {
   "SPAWN": {
     "exits": {
-      "Link's House": "is_child"
+      "Link's House": "is_child",
+      "Temple of Time": "is_adult && event(TIME_TRAVEL)"
     }
   },
   "Link's House": {
@@ -44,12 +45,17 @@
       "Kakariko": "true",
       "Zora River": "has_explosives",
       "Lake Hylia": "true"
+    },
+    "locations": {
+      "Hyrule Field Ocarina of Time": "has_spiritual_stones",
+      "Hyrule Field Song of Time": "has_spiritual_stones"
     }
   },
   "Market": {
     "exits": {
       "Hyrule Field": "true",
-      "Hyrule Castle": "is_child"
+      "Hyrule Castle": "is_child",
+      "Temple of Time": "true"
     }
   },
   "Hyrule Castle": {
@@ -159,6 +165,19 @@
     "exits": {
       "Zora Domain": "is_child && event(KING_ZORA_LETTER)",
       "Jabu-Jabu Entrance": "is_child && has_bottle"
+    }
+  },
+  "Temple of Time": {
+    "exits": {
+      "Market": "true"
+    },
+    "events": {
+      "DOOR_OF_TIME_OPEN": "can_play(SONG_TIME)",
+      "TIME_TRAVEL": "event(DOOR_OF_TIME_OPEN) && has(SWORD, 2)"
+    },
+    "locations": {
+      "Temple of Time Master Sword": "is_child && event(DOOR_OF_TIME_OPEN)",
+      "Temple of Time Medallion": "is_adult && event(DOOR_OF_TIME_OPEN)"
     }
   }
 }

@@ -21,6 +21,10 @@
   "Zora Domain Waterfall Chest":    ["chest",         "59", "00", "HEART_PIECE"],
   "Zora Domain Diving Game":        ["npc",           null, "03", "SCALE"],
   "Lake Hylia Underwater Bottle":   ["special",       null, "32", "RUTO_LETTER"],
+  "Hyrule Field Ocarina of Time":   ["special",       null, "43", "OCARINA"],
+  "Hyrule Field Song of Time":      ["special",       null, "a9", "SONG_TIME"],
+  "Temple of Time Master Sword":    ["collectible",   "43", "1f", "SWORD"],
+  "Temple of Time Medallion":       ["collectible",   "43", "1e", "MEDALLION_LIGHT"],
 
   "Deku Tree Map Chest":                ["chest",         "00", "03", "MAP_DT"],
   "Deku Tree Compass Chest":            ["chest",         "00", "02", "COMPASS_DT"],
