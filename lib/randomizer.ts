@@ -46,7 +46,7 @@ const gi = (game: Game, item: string) => {
     item = subst;
   }
 
-  let value = (GI as any)[item] as number | undefined;
+  let value = parseInt((GI as any)[item], 16);
   if (value === undefined) {
     throw new Error(`Unknown item ${item}`);
   }
