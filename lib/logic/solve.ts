@@ -35,6 +35,7 @@ const ITEMS_REQUIRED = new Set<string>([
   'BOMB_BAG',
   'SCALE',
   'EMPTY_BOTTLE',
+  'HOOKSHOT',
 ]);
 const ITEMS_NICE = new Set<string>([]);
 
@@ -212,22 +213,29 @@ class Solver {
   }
 
   private fixDungeon(dungeon: string) {
-    /* TODO: Small keys */
-    this.fixDungeonMapCompass(dungeon);
+    let reachable: Reachable | undefined = undefined;
+    const assumed: Items = {};
+
+    ['SMALL_KEY', 'BOSS_KEY', 'MAP', 'COMPASS'].forEach((baseItem) => {
+      const item = baseItem + '_' + dungeon.toUpperCase();
+      const locations = this.world.dungeons[dungeon];
+      while (this.pools.dungeon[item]) {
+        reachable = this.randomRestricted(this.pools.dungeon, assumed, item, locations, reachable);
+      }
+    });
   }
 
-  private fixDungeonMapCompass(dungeon: string) {
-    const locations = shuffle(
-      this.random,
-      Array.from(this.world.dungeons[dungeon])
-        .filter(x => !this.placement[x]));
-    const items = Array.from(locations)
-      .map(l => this.world.checks[l].item)
-      .filter(x => /^(MAP|COMPASS)_/.test(x));
-    for (let i = 0; i < items.length; i++) {
-      this.placement[locations[i]] = items[i];
-      removeItem(this.pools.dungeon, items[i]);
-    }
+  private randomRestricted(pool: Items, assume: Items, item: string, locations: Set<string>, reachable?: Reachable) {
+    const assumedItems = combinedItems(this.pools.required, assume);
+    const assumedReachable = pathfind(this.world, assumedItems, reachable);
+    const location = sample(this.random, Array.from(locations).filter(x => assumedReachable.locations.has(x)).filter(x => !this.placement[x]));
+
+    this.placement[location] = item;
+
+    removeItem(pool, item);
+    addItem(assume, item);
+
+    return assumedReachable;
   }
 
   private randomAssumed(pool: Items) {

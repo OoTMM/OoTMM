@@ -1,6 +1,6 @@
 {
   "Deku Tree Main": {
-    "dungeon": "DekuTree",
+    "dungeon": "DT",
     "exits": {
       "Kokiri Forest": "true",
       "Deku Tree Boss": "has(SLINGSHOT)"
@@ -15,7 +15,7 @@
     }
   },
   "Deku Tree Boss": {
-    "dungeon": "DekuTree",
+    "dungeon": "DT",
     "exits": {
       "Deku Tree Main": "true"
     },

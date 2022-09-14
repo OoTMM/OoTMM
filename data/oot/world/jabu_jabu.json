@@ -1,13 +1,13 @@
 {
   "Jabu-Jabu Entrance": {
-    "dungeon": "JabuJabu",
+    "dungeon": "JJ",
     "exits": {
       "Zora Fountain": "true",
       "Jabu-Jabu Main": "has_ranged_weapon"
     }
   },
   "Jabu-Jabu Main": {
-    "dungeon": "JabuJabu",
+    "dungeon": "JJ",
     "exits": {
       "Jabu-Jabu Entrance": "true",
       "Jabu-Jabu Boss": "has(BOOMERANG)"
@@ -19,7 +19,7 @@
     }
   },
   "Jabu-Jabu Boss": {
-    "dungeon": "JabuJabu",
+    "dungeon": "JJ",
     "exits": {
       "Jabu-Jabu Main": "true"
     },

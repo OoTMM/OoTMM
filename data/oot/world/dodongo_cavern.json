@@ -1,6 +1,6 @@
 {
   "Dodongo Cavern Entrance": {
-    "dungeon": "DodongoCavern",
+    "dungeon": "DC",
     "exits": {
       "Death Mountain": "true",
       "Dodongo Cavern After Slingshot": "can_hit_triggers_distance"
@@ -12,7 +12,7 @@
     }
   },
   "Dodongo Cavern After Slingshot": {
-    "dungeon": "DodongoCavern",
+    "dungeon": "DC",
     "exits": {
       "Dodongo Cavern Entrance": "true",
       "Dodongo Cavern Boss": "has_explosives"
@@ -24,7 +24,7 @@
     }
   },
   "Dodongo Cavern Boss": {
-    "dungeon": "DodongoCavern",
+    "dungeon": "DC",
     "exits": {
       "Dodongo Cavern After Slingshot": "true"
     },

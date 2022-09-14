@@ -50,5 +50,21 @@
   "Jabu-Jabu Compass Chest":            ["chest",       "02", "04", "COMPASS_JJ"],
   "Jabu-Jabu Boomerang Chest":          ["chest",       "02", "01", "BOOMERANG"],
   "Jabu-Jabu Boss Container":           ["collectible", "13", "1f", "HEART_CONTAINER"],
-  "Jabu-Jabu Boss":                     ["special",     null, "37", "STONE_SAPPHIRE"]
+  "Jabu-Jabu Boss":                     ["special",     null, "37", "STONE_SAPPHIRE"],
+
+  "Forest Temple Tree Small Key":       ["chest",       "03", "03", "SMALL_KEY_FOREST"],
+  "Forest Temple Mini-Boss Key":        ["chest",       "03", "00", "SMALL_KEY_FOREST"],
+  "Forest Temple Map":                  ["chest",       "03", "01", "MAP_FOREST"],
+  "Forest Temple Maze":                 ["chest",       "03", "04", "ARROWS_30"],
+  "Forest Temple Garden":               ["chest",       "03", "05", "RECOVERY_HEART"],
+  "Forest Temple Well":                 ["chest",       "03", "09", "SMALL_KEY_FOREST"],
+  "Forest Temple Poe Key":              ["chest",       "03", "0d", "SMALL_KEY_FOREST"],
+  "Forest Temple Bow":                  ["chest",       "03", "0c", "BOW"],
+  "Forest Temple Compass":              ["chest",       "03", "0f", "COMPASS_FOREST"],
+  "Forest Temple Checkerboard":         ["chest",       "03", "07", "ARROWS_10"],
+  "Forest Temple Boss Key":             ["chest",       "03", "0e", "BOSS_KEY_FOREST"],
+  "Forest Temple Garden Top":           ["chest",       "03", "02", "SMALL_KEY_FOREST"],
+  "Forest Temple Antichamber":          ["chest",       "03", "0b", "ARROWS_5"],
+  "Forest Temple Boss Container":       ["collectible", "14", "1f", "HEART_CONTAINER"],
+  "Forest Temple Boss":                 ["special",     null, "48", "MEDALLION_FOREST"]
 }

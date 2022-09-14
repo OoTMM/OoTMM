@@ -83,7 +83,8 @@
   },
   "Sacred Meadow": {
     "exits": {
-      "Lost Woods": "true"
+      "Lost Woods": "true",
+      "Forest Temple Entrance": "can_hookshot"
     },
     "locations": {
       "Saria's Song": "event(MEET_ZELDA)"
