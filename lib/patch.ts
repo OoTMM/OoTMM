@@ -86,7 +86,7 @@ const patchLoadStore = (game: Game, rom: Buffer, vram: VRamEntry[], patch: Buffe
   }
   op_store = op_load | 0x08;
   if (unsigned) {
-    op_load | 0x04;
+    op_load |= 0x04;
   }
 
   /* Patch the load/store instructions */
