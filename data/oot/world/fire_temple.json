@@ -3,7 +3,8 @@
     "dungeon": "Fire",
     "exits": {
       "Death Mountain Crater Bottom": "true",
-      "Fire Temple After Elevator": "has(SMALL_KEY_FIRE, 3) && (has(BOW) || has(HOOKSHOT) || has_explosives)"
+      "Fire Temple After Elevator": "has(SMALL_KEY_FIRE, 3) && (has(BOW) || has(HOOKSHOT) || has_explosives)",
+      "Fire Temple Boss": "has(BOSS_KEY_FIRE) && event(FIRE_TEMPLE_PILLAR_HAMMER) && has(HAMMER)"
     },
     "locations": {
       "Fire Temple Jail 1 Chest": "true",
@@ -47,6 +48,13 @@
     "locations": {
       "Fire Temple Hammer": "true",
       "Fire Temple Ring Jail": "has(HAMMER)"
+    }
+  },
+  "Fire Temple Boss": {
+    "dungeon": "Fire",
+    "locations": {
+      "Fire Temple Boss Container": "true",
+      "Fire Temple Boss": "true"
     }
   }
 }

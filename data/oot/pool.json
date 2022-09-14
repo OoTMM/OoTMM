@@ -81,5 +81,7 @@
   "Fire Temple Below Maze Chest":       ["chest",       "04", "0b", "SMALL_KEY_FIRE"],
   "Fire Temple Compass":                ["chest",       "04", "07", "COMPASS_FIRE"],
   "Fire Temple Hammer":                 ["chest",       "04", "05", "HAMMER"],
-  "Fire Temple Ring Jail":              ["chest",       "04", "09", "RUPEE_RED"]
+  "Fire Temple Ring Jail":              ["chest",       "04", "09", "RUPEE_RED"],
+  "Fire Temple Boss Container":         ["collectible", "15", "1f", "HEART_CONTAINER"],
+  "Fire Temple Boss":                   ["special",     null, "49", "MEDALLION_FIRE"]
 }
