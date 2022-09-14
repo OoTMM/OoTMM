@@ -1,0 +1,23 @@
+{
+  "Clock Town Platform HP":             ["collectible",   "6f", "0a", "HEART_PIECE"],
+  "Clock Town Tree HP":                 ["collectible",   "6e", "0a", "HEART_PIECE"],
+  "Clock Town Silver Rupee Chest":      ["chest",         "6c", "0a", "RUPEE_SILVER"],
+  "Clock Town Great Fairy":             ["collectible",   "26", "00", "MASK_GREAT_FAIRY"],
+  "Clock Town Great Fairy Alt":         ["collectible",   "26", "01", "MAGIC_UPGRADE"],
+  "Termina Field Tall Grass Chest":     ["chest",         "2d", "01", "RUPEE_RED"],
+  "Termina Field Tall Grass Grotto":    ["chest",         "07", "1f", "RUPEE_RED"],
+  "Swamp Potion Shop":                  ["npc",           null, "00", "BOTTLED_POTION_RED"],
+  "Swamp Pictobox":                     ["npc",           null, "01", "PICTOGRAPH_BOX"],
+  "Deku Palace Song of Awakening":      ["npc",           null, "02", "SONG_AWAKENING"],
+
+  "Woodfall Temple Entrance Chest":     ["chest",         "1b", "18", "STRAY_FAIRY_WF"],
+  "Woodfall Temple Water Chest":        ["chest",         "1b", "01", "SMALL_KEY_WF"],
+  "Woodfall Temple Map":                ["chest",         "1b", "3e", "MAP_WF"],
+  "Woodfall Temple Compass":            ["chest",         "1b", "1c", "COMPASS_WF"],
+  "Woodfall Temple Dark Chest":         ["chest",         "1b", "19", "STRAY_FAIRY_WF"],
+  "Woodfall Temple Center Chest":       ["chest",         "1b", "17", "STRAY_FAIRY_WF"],
+  "Woodfall Temple Bow":                ["chest",         "1b", "1b", "BOW"],
+  "Woodfall Temple Boss Key Chest":     ["chest",         "1b", "1e", "BOSS_KEY_WF"],
+  "Woodfall Temple Boss Container":     ["collectible",   "1f", "1f", "HEART_CONTAINER"],
+  "Woodfall Temple Boss":               ["collectible",   "1f", "1e", "REMAINS_ODOLWA"]
+}

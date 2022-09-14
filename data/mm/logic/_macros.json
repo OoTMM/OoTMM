@@ -1,6 +1,0 @@
-{
-  "has_bottle": "has(EMPTY_BOTTLE) or has(BOTTLED_POTION_RED)",
-  "can_rescue_koume": "has_bottle",
-  "can_get_beans": "has(MASK_DEKU) and has(MAGIC_UPGRADE)",
-  "can_play(song)": "has(OCARINA_OF_TIME) and has(song)"
-}

@@ -18,7 +18,7 @@ static s32 progressiveBombBag(void)
 static s32 progressiveBow(void)
 {
     if (gOotSave.inventory[ITS_OOT_BOW] == ITEM_NONE)
-        return GI_OOT_FAIRY_BOW;
+        return GI_OOT_BOW;
     switch (gOotSave.upgrades.quiver)
     {
     case 0:
@@ -73,10 +73,10 @@ static s32 progressiveSword(void)
 static s32 progressiveShield(void)
 {
     if (!(gOotExtraItems.shield & EQ_OOT_SHIELD_DEKU))
-        return GI_OOT_DEKU_SHIELD;
+        return GI_OOT_SHIELD_DEKU;
     if (!(gOotExtraItems.shield & EQ_OOT_SHIELD_HYLIAN))
-        return GI_OOT_HYLIAN_SHIELD;
-    return GI_OOT_MIRROR_SHIELD;
+        return GI_OOT_SHIELD_HYLIAN;
+    return GI_OOT_SHIELD_MIRROR;
 }
 
 static s32 progressiveStrength(void)
@@ -95,8 +95,8 @@ static s32 progressiveStrength(void)
 static s32 progressiveDive(void)
 {
     if (gOotSave.upgrades.dive)
-        return GI_OOT_GOLDEN_SCALE;
-    return GI_OOT_SILVER_SCALE;
+        return GI_OOT_SCALE_GOLDEN;
+    return GI_OOT_SCALE_SILVER;
 }
 
 static s32 progressiveWallet(void)
@@ -159,7 +159,7 @@ s32 comboProgressiveOot(s32 gi)
     case GI_OOT_BOMB_BAG3:
         gi = progressiveBombBag();
         break;
-    case GI_OOT_FAIRY_BOW:
+    case GI_OOT_BOW:
     case GI_OOT_QUIVER2:
     case GI_OOT_QUIVER3:
         gi = progressiveBow();
@@ -185,9 +185,9 @@ s32 comboProgressiveOot(s32 gi)
     case GI_OOT_GIANT_KNIFE:
         gi = progressiveSword();
         break;
-    case GI_OOT_DEKU_SHIELD:
-    case GI_OOT_HYLIAN_SHIELD:
-    case GI_OOT_MIRROR_SHIELD:
+    case GI_OOT_SHIELD_DEKU:
+    case GI_OOT_SHIELD_HYLIAN:
+    case GI_OOT_SHIELD_MIRROR:
         gi = progressiveShield();
         break;
     /* Upgrades */
@@ -196,8 +196,8 @@ s32 comboProgressiveOot(s32 gi)
     case GI_OOT_GOLDEN_GAUNTLETS:
         gi = progressiveStrength();
         break;
-    case GI_OOT_SILVER_SCALE:
-    case GI_OOT_GOLDEN_SCALE:
+    case GI_OOT_SCALE_SILVER:
+    case GI_OOT_SCALE_GOLDEN:
         gi = progressiveDive();
         break;
     case GI_OOT_WALLET2:

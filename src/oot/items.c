@@ -55,6 +55,13 @@ int comboGiveItem(Actor* actor, GameState_Play* play, s16 itemId, float a, float
             gSave.eventsItem[(EV_OOT_ITEM_GORON_BRACELET & 0xf0) >> 4] |= (1 << (EV_OOT_ITEM_GORON_BRACELET & 0xf));
         }
         break;
+    case AC_EN_GO2:
+        switch (absItemId)
+        {
+        case GI_OOT_TUNIC_GORON:
+            break;
+        }
+        break;
     }
 
     if (override >= 0)

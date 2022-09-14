@@ -1,0 +1,34 @@
+{
+  "Forest Temple Entrance": {
+    "dungeon": "Forest",
+    "exits": {
+      "Sacred Meadow": "true",
+      "Forest Temple Boss": "(has(BOW) || has(HOOKSHOT)) && has(SMALL_KEY_FOREST, 5) && has(BOSS_KEY_FOREST)"
+    },
+    "locations": {
+      "Forest Temple Tree Small Key": "can_hookshot",
+      "Forest Temple Mini-Boss Key": "has(SWORD)",
+      "Forest Temple Map": "true",
+      "Forest Temple Maze": "has(SMALL_KEY_FOREST, 1) && has(STRENGTH) && has(BOW)",
+      "Forest Temple Garden": "can_hookshot",
+      "Forest Temple Well": "true",
+      "Forest Temple Poe Key": "has(SMALL_KEY_FOREST, 3) && has(STRENGTH) && has(BOW)",
+      "Forest Temple Bow": "has(SMALL_KEY_FOREST, 3) && has(STRENGTH)",
+      "Forest Temple Compass": "has(SMALL_KEY_FOREST, 3) && has(STRENGTH) && has(BOW)",
+      "Forest Temple Checkerboard": "has(SMALL_KEY_FOREST, 5) && has(STRENGTH) && has(BOW)",
+      "Forest Temple Boss Key": "has(SMALL_KEY_FOREST, 2) && has(STRENGTH) && has(BOW)",
+      "Forest Temple Garden Top": "has(SMALL_KEY_FOREST, 2) && has(STRENGTH) && has(BOW)",
+      "Forest Temple Antichamber": "has(SMALL_KEY_FOREST, 5)"
+    }
+  },
+  "Forest Temple Boss": {
+    "dungeon": "Forest",
+    "exits": {
+      "Forest Temple Entrance": "true"
+    },
+    "locations": {
+      "Forest Temple Boss": "true",
+      "Forest Temple Boss Container": "true"
+    }
+  }
+}
