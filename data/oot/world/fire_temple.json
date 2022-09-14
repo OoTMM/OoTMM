@@ -1,0 +1,60 @@
+{
+  "Fire Temple Entrance": {
+    "dungeon": "Fire",
+    "exits": {
+      "Death Mountain Crater Bottom": "true",
+      "Fire Temple After Elevator": "has(SMALL_KEY_FIRE, 3) && (has(BOW) || has(HOOKSHOT) || has_explosives)",
+      "Fire Temple Boss": "has(BOSS_KEY_FIRE) && event(FIRE_TEMPLE_PILLAR_HAMMER) && has(HAMMER)"
+    },
+    "locations": {
+      "Fire Temple Jail 1 Chest": "true",
+      "Fire Temple Boss Key Side Chest": "has(HAMMER) && has_explosives && has(HOOKSHOT)",
+      "Fire Temple Boss Key Chest": "has(HAMMER) && has_explosives && has(HOOKSHOT)",
+      "Fire Temple Jail 2 Chest": "has(SMALL_KEY_FIRE, 1)",
+      "Fire Temple Jail 3 Chest": "has(SMALL_KEY_FIRE, 1)"
+    }
+  },
+  "Fire Temple After Elevator": {
+    "dungeon": "Fire",
+    "exits": {
+      "Fire Temple Entrance": "true",
+      "Fire Temple Ring": "has(SMALL_KEY_FIRE, 7) && can_play(SONG_TIME)"
+    },
+    "locations": {
+      "Fire Temple Maze Chest": "true",
+      "Fire Temple Jail 4 Chest": "true",
+      "Fire Temple Map": "has(SMALL_KEY_FIRE, 4) && has(BOW)",
+      "Fire Temple Above Maze Chest": "has(SMALL_KEY_FIRE, 5)",
+      "Fire Temple Below Maze Chest": "has(SMALL_KEY_FIRE, 5) && has_explosives_or_hammer"
+    }
+  },
+  "Fire Temple Ring": {
+    "dungeon": "Fire",
+    "exits": {
+      "Fire Temple After Elevator": "true",
+      "Fire Temple After Miniboss": "has_explosives && has(HOOKSHOT)"
+    },
+    "locations": {
+      "Fire Temple Compass": "true"
+    }
+  },
+  "Fire Temple After Miniboss": {
+    "exits": {
+      "Fire Temple Ring": "true"
+    },
+    "events": {
+      "FIRE_TEMPLE_PILLAR_HAMMER": "has(HAMMER)"
+    },
+    "locations": {
+      "Fire Temple Hammer": "true",
+      "Fire Temple Ring Jail": "has(HAMMER)"
+    }
+  },
+  "Fire Temple Boss": {
+    "dungeon": "Fire",
+    "locations": {
+      "Fire Temple Boss Container": "true",
+      "Fire Temple Boss": "true"
+    }
+  }
+}

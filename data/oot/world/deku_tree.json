@@ -1,0 +1,27 @@
+{
+  "Deku Tree Main": {
+    "dungeon": "DT",
+    "exits": {
+      "Kokiri Forest": "true",
+      "Deku Tree Boss": "has(SLINGSHOT)"
+    },
+    "locations": {
+      "Deku Tree Map Chest": "true",
+      "Deku Tree Compass Chest": "true",
+      "Deku Tree Compass Room Side Chest": "true",
+      "Deku Tree Slingshot Chest": "true",
+      "Deku Tree Slingshot Side Chest": "true",
+      "Deku Tree Basement Chest": "true"
+    }
+  },
+  "Deku Tree Boss": {
+    "dungeon": "DT",
+    "exits": {
+      "Deku Tree Main": "true"
+    },
+    "locations": {
+      "Deku Tree Boss Container": "has(SWORD)",
+      "Deku Tree Boss": "has(SWORD)"
+    }
+  }
+}

@@ -27,3 +27,8 @@ MM NPCs:
 
 00 Kotake (Red Potion)
 01 Koume (Picto-box)
+
+
+
+===== MISSING FROM LOGIC =====
+Tomb Royal: <!-- <chest id="00" content="BOMBS_10"/> Requires fire -->

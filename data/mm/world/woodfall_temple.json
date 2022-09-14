@@ -1,0 +1,35 @@
+{
+  "Woodfall Temple Entrance": {
+    "dungeon": "WF",
+    "exits": {
+      "Woodfall": "true",
+      "Woodfall Temple Maze": "has(MASK_DEKU) && has(SMALL_KEY_WF, 1)"
+    },
+    "locations": {
+      "Woodfall Temple Entrance Chest": "has(MASK_DEKU)",
+      "Woodfall Temple Water Chest": "has(MASK_DEKU)",
+      "Woodfall Temple Map": "has(MASK_DEKU)"
+    }
+  },
+  "Woodfall Temple Maze": {
+    "dungeon": "WF",
+    "exits": {
+      "Woodfall Temple Entrance": "true",
+      "Woodfall Temple Boss": "has(BOW)"
+    },
+    "locations": {
+      "Woodfall Temple Compass": "true",
+      "Woodfall Temple Dark Chest": "has(SWORD)",
+      "Woodfall Temple Center Chest": "true",
+      "Woodfall Temple Bow": "true",
+      "Woodfall Temple Boss Key Chest": "has(BOW)"
+    }
+  },
+  "Woodfall Temple Boss": {
+    "dungeon": "WF",
+    "locations": {
+      "Woodfall Temple Boss Container": "true",
+      "Woodfall Temple Boss": "true"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "is_child": "age(child)",
+  "is_adult": "age(adult)",
+  "can_play(x)": "has(OCARINA) && has(x)",
+  "has_explosives": "has(BOMB_BAG) || has(BOMBCHU)",
+  "has_bombflowers": "has_explosives || has(STRENGTH)",
+  "can_use_slingshot": "is_child && has(SLINGSHOT)",
+  "can_use_bow": "is_adult && has(BOW)",
+  "can_hit_triggers_distance": "can_use_slingshot || can_use_bow",
+  "has_bottle": "has(EMPTY_BOTTLE) || event(KING_ZORA_LETTER)",
+  "has_ranged_weapon": "(is_child && (has(SLINGSHOT) || has(BOOMERANG))) || (is_adult && (has(BOW) || has(HOOKSHOT)))",
+  "has_spiritual_stones": "has(STONE_EMERALD) && has(STONE_RUBY) && has(STONE_SAPPHIRE)",
+  "can_hookshot": "is_adult && has(HOOKSHOT)",
+  "has_explosives_or_hammer": "has_explosives || (is_adult && has(HAMMER))"
+}

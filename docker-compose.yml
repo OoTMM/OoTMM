@@ -4,11 +4,9 @@ services:
   combo:
     build: .
     volumes:
-      - /app/.bundle
       - /app/build
+      - /app/node_modules
       - /app/third_party
-      - /app/vendor
-      - ./bin:/app/bin
       - ./data:/app/data
       - ./dist:/app/dist
       - ./include:/app/include
@@ -16,7 +14,8 @@ services:
       - ./roms:/app/roms
       - ./src:/app/src
       - ./docker-entrypoint.sh:/app/docker-entrypoint.sh
-      - ./Gemfile:/app/Gemfile
-      - ./Gemfile.lock:/app/Gemfile.lock
+      - ./package.json:/app/package.json
+      - ./package-lock.json:/app/package-lock.json
       - ./install-deps.sh:/app/install-deps.sh
       - ./Makefile:/app/Makefile
+      - ./tsconfig.json:/app/tsconfig.json
