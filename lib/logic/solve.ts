@@ -6,7 +6,7 @@ import { Items } from './state';
 import { World } from './world';
 
 const ITEMS_DUNGEON = /^(OOT|MM)_(MAP|COMPASS|SMALL_KEY|BOSS_KEY|STRAY_FAIRY)_[A-Z_]+$/;
-const ITEMS_DUNGEON_REWARDS = new Set([
+export const ITEMS_DUNGEON_REWARDS = new Set([
   'OOT_STONE_EMERALD',
   'OOT_STONE_RUBY',
   'OOT_STONE_SAPPHIRE',
@@ -22,7 +22,7 @@ const ITEMS_DUNGEON_REWARDS = new Set([
   'MM_REMAINS_TWINMOLD',
 ]);
 
-const ITEMS_REQUIRED = new Set<string>([
+export const ITEMS_REQUIRED = new Set<string>([
   'OOT_SWORD',
   'OOT_CHICKEN',
   'OOT_OCARINA',
@@ -90,7 +90,7 @@ const shuffle = <T>(random: Random, arr: T[]): T[] => {
   return copy;
 };
 
-type ItemPlacement = {[k: string]: string};
+export type ItemPlacement = {[k: string]: string};
 
 type ItemPools = {
   dungeon: Items,
@@ -117,7 +117,7 @@ const poolsArray = (pools: ItemPools) => {
   ];
 };
 
-const addItem = (items: Items, item: string) => {
+export const addItem = (items: Items, item: string) => {
   items[item] = (items[item] || 0) + 1;
 };
 
