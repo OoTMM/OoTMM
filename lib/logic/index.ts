@@ -3,7 +3,7 @@ import { solve } from './solve';
 import { createWorld, WorldCheck } from './world';
 import { spoiler } from './spoiler';
 
-type LogicResult = {
+export type LogicResult = {
   items: WorldCheck[];
   log: string;
 };

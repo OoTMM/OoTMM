@@ -5,11 +5,11 @@ static s32 progressiveSword(void)
     switch (gMmSave.itemEquips.sword)
     {
     case 0:
-        return GI_MM_KOKIRI_SWORD;
+        return GI_MM_SWORD_KOKIRI;
     case 1:
-        return GI_MM_RAZOR_SWORD;
+        return GI_MM_SWORD_RAZOR;
     default:
-        return GI_MM_GILDED_SWORD;
+        return GI_MM_SWORD_GILDED;
     }
 }
 
@@ -19,9 +19,9 @@ static s32 progressiveShield(void)
     switch (gMmSave.itemEquips.shield)
     {
     case 0:
-        return GI_MM_HYLIAN_SHIELD;
+        return GI_MM_SHIELD_HYLIAN;
     default:
-        return GI_MM_MIRROR_SHIELD;
+        return GI_MM_SHIELD_MIRROR;
     }
 }
 
@@ -88,13 +88,13 @@ s32 comboProgressiveMm(s32 gi)
 {
     switch (gi)
     {
-    case GI_MM_KOKIRI_SWORD:
-    case GI_MM_RAZOR_SWORD:
-    case GI_MM_GILDED_SWORD:
+    case GI_MM_SWORD_KOKIRI:
+    case GI_MM_SWORD_RAZOR:
+    case GI_MM_SWORD_GILDED:
         gi = progressiveSword();
         break;
-    case GI_MM_HYLIAN_SHIELD:
-    case GI_MM_MIRROR_SHIELD:
+    case GI_MM_SHIELD_HYLIAN:
+    case GI_MM_SHIELD_MIRROR:
         gi = progressiveShield();
         break;
     case GI_MM_BOMB_BAG:
