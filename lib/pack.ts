@@ -5,6 +5,7 @@ import { compressGame } from './compress';
 import { Game, GAMES, PATH_DIST, PATH_BUILD, CONFIG, CUSTOM_ADDR } from './config';
 import { patchGame } from './patch';
 import { DmaData } from './dma';
+import { randomize } from './randomizer';
 
 const combineRoms = async () => {
   const oot = await patchGame('oot');
@@ -112,6 +113,8 @@ export const pack = async () => {
   fixDMA(rom);
   fixHeader(rom);
   fixChecksum(rom);
+  const log = await randomize(rom);
 
+  await fs.writeFile(path.resolve(PATH_DIST, 'spoiler.txt'), log);
   await fs.writeFile(path.resolve(PATH_DIST, 'OoTMM.z64'), rom);
 };

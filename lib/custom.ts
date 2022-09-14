@@ -6,6 +6,7 @@ import { DmaData } from './dma';
 import { splitObject } from './split';
 import { align, arrayToIndexMap, fileExists } from './util';
 import { compressFile } from './compress';
+import { CodeGen } from './codegen';
 
 const FILES_TO_INDEX_OOT = arrayToIndexMap(DATA_FILES.oot);
 const FILES_TO_INDEX_MM = arrayToIndexMap(DATA_FILES.mm);
@@ -75,29 +76,9 @@ const makeSplitObject = async (entry: CustomEntry) => {
   return obj;
 };
 
-const define = (name: string, value: number): string => {
-  return `#define ${name} 0x${value.toString(16)}`;
-}
-
-const writeDefines = async (defines: string[]) => {
-  const outDir = path.resolve(PATH_BUILD, 'include', 'combo');
-  await fs.mkdir(outDir, { recursive: true });
-  const outFilename = path.resolve(outDir, 'custom.h');
-
-  let existingDefineData = null;
-  const defineData = "#ifndef CUSTOM_H\n#define CUSTOM_H\n\n" + defines.join("\n") + "\n\n#endif\n";
-
-  if (await fileExists(outFilename)) {
-    existingDefineData = await fs.readFile(outFilename, 'utf8');
-  };
-  if (existingDefineData !== defineData) {
-    await fs.writeFile(outFilename, defineData);
-  }
-};
-
 export const custom = async () => {
   console.log("Building custom objects...");
-  const defines: string[] = [];
+  const cg = new CodeGen(path.resolve(PATH_BUILD, 'include', 'combo', 'custom.h'), 'CUSTOM_H');
   const objects = await Promise.all(ENTRIES.map(x => makeSplitObject(x)));
   const objectDmaBuffer = Buffer.alloc(0x10 * objects.length);
   const objectDma = new DmaData(objectDmaBuffer);
@@ -123,19 +104,22 @@ export const custom = async () => {
     }
     vaddr = virtEnd;
     paddr += objCompressedSize;
-    defines.push(define(['CUSTOM_OBJECT_ID', objEntry.name].join('_'), 0x2000 | i));
+    cg.define(['CUSTOM_OBJECT_ID', objEntry.name].join('_'), 0x2000 | i);
     for (let j = 0; j < obj.offsets.length; ++j) {
       const offset = obj.offsets[j];
-      defines.push(define(['CUSTOM_OBJECT', objEntry.name, j].join('_'), offset));
+      cg.define(['CUSTOM_OBJECT', objEntry.name, j].join('_'), offset);
     }
   }
-  defines.push(define('CUSTOM_DMA_ADDR', paddr));
-  defines.push(define('CUSTOM_DMA_SIZE', objects.length));
+  cg.define('CUSTOM_DMA_ADDR', paddr);
+  cg.define('CUSTOM_DMA_SIZE', objects.length);
   data.push(objectDmaBuffer);
   paddr += objectDmaBuffer.byteLength;
-  defines.push(define('CUSTOM_OBJECTS_ADDR', paddr));
-  defines.push(define('CUSTOM_OBJECTS_SIZE', objects.length));
+  cg.define('CUSTOM_OBJECTS_ADDR', paddr);
+  cg.define('CUSTOM_OBJECTS_SIZE', objects.length);
   data.push(objTable);
-  await fs.writeFile(path.resolve(PATH_BUILD, 'custom.bin'), Buffer.concat(data));
-  await writeDefines(defines);
+
+  await Promise.all([
+    fs.writeFile(path.resolve(PATH_BUILD, 'custom.bin'), Buffer.concat(data)),
+    cg.emit(),
+  ]);
 };

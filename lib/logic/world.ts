@@ -18,7 +18,7 @@ type WorldRegion = {
   events: ExprMap;
 };
 
-type WorldCheck = {
+export type WorldCheck = {
   game: Game;
   type: 'chest' | 'npc' | 'special' | 'collectible';
   sceneId: number;

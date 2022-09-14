@@ -23,10 +23,4 @@ const run = async () => {
   await pack();
 };
 
-/*
 run();
-*/
-
-import { logic } from './logic';
-
-logic();
