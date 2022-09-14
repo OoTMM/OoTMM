@@ -1,44 +1,46 @@
+import { GAMES } from '../config';
 import { Random } from '../random';
+import { gameId } from '../util';
 import { pathfind, Reachable } from './pathfind';
 import { Items } from './state';
 import { World } from './world';
 
-const ITEMS_DUNGEON = /^(MAP|COMPASS|SMALL_KEY|BOSS_KEY|STRAY_FAIRY)_[A-Z_]+$/;
+const ITEMS_DUNGEON = /^(OOT|MM)_(MAP|COMPASS|SMALL_KEY|BOSS_KEY|STRAY_FAIRY)_[A-Z_]+$/;
 const ITEMS_DUNGEON_REWARDS = new Set([
-  'STONE_EMERALD',
-  'STONE_RUBY',
-  'STONE_SAPPHIRE',
-  'MEDALLION_LIGHT',
-  'MEDALLION_FOREST',
-  'MEDALLION_FIRE',
-  'MEDALLION_WATER',
-  'MEDALLION_SPIRIT',
-  'MEDALLION_SHADOW',
+  'OOT_STONE_EMERALD',
+  'OOT_STONE_RUBY',
+  'OOT_STONE_SAPPHIRE',
+  'OOT_MEDALLION_LIGHT',
+  'OOT_MEDALLION_FOREST',
+  'OOT_MEDALLION_FIRE',
+  'OOT_MEDALLION_WATER',
+  'OOT_MEDALLION_SPIRIT',
+  'OOT_MEDALLION_SHADOW',
 ]);
 
 const ITEMS_REQUIRED = new Set<string>([
-  'SWORD',
-  'CHICKEN',
-  'OCARINA',
-  'SLINGSHOT',
-  'BOOMERANG',
-  'BOW',
-  'SONG_ZELDA',
-  'SONG_SUN',
-  'SONG_EPONA',
-  'SONG_TIME',
-  'SONG_STORMS',
-  'SONG_SARIA',
-  'ZELDA_LETTER',
-  'RUTO_LETTER',
-  'STRENGTH',
-  'BOMB_BAG',
-  'SCALE',
-  'EMPTY_BOTTLE',
-  'HOOKSHOT',
-  'TUNIC_GORON',
-  'TUNIC_ZORA',
-  'HAMMER',
+  'OOT_SWORD',
+  'OOT_CHICKEN',
+  'OOT_OCARINA',
+  'OOT_SLINGSHOT',
+  'OOT_BOOMERANG',
+  'OOT_BOW',
+  'OOT_SONG_ZELDA',
+  'OOT_SONG_SUN',
+  'OOT_SONG_EPONA',
+  'OOT_SONG_TIME',
+  'OOT_SONG_STORMS',
+  'OOT_SONG_SARIA',
+  'OOT_ZELDA_LETTER',
+  'OOT_RUTO_LETTER',
+  'OOT_STRENGTH',
+  'OOT_BOMB_BAG',
+  'OOT_SCALE',
+  'OOT_EMPTY_BOTTLE',
+  'OOT_HOOKSHOT',
+  'OOT_TUNIC_GORON',
+  'OOT_TUNIC_ZORA',
+  'OOT_HAMMER',
 ]);
 const ITEMS_NICE = new Set<string>([]);
 
@@ -127,12 +129,12 @@ const makeItemPools = (world: World) => {
     }
   }
 
-  maxRequired(pools, 'SWORD', 2);
-  maxRequired(pools, 'BOMB_BAG', 1);
-  maxRequired(pools, 'BOW', 1);
-  maxRequired(pools, 'SLINGSHOT', 1);
-  maxRequired(pools, 'MAGIC_UPGRADE', 1);
-  maxRequired(pools, 'OCARINA', 1);
+  maxRequired(pools, 'OOT_SWORD', 2);
+  maxRequired(pools, 'OOT_BOMB_BAG', 1);
+  maxRequired(pools, 'OOT_BOW', 1);
+  maxRequired(pools, 'OOT_SLINGSHOT', 1);
+  maxRequired(pools, 'OOT_MAGIC_UPGRADE', 1);
+  maxRequired(pools, 'OOT_OCARINA', 1);
 
   return pools;
 };
@@ -219,13 +221,15 @@ class Solver {
     let reachable: Reachable | undefined = undefined;
     const assumed: Items = {};
 
-    ['SMALL_KEY', 'BOSS_KEY', 'MAP', 'COMPASS'].forEach((baseItem) => {
-      const item = baseItem + '_' + dungeon.toUpperCase();
-      const locations = this.world.dungeons[dungeon];
-      while (this.pools.dungeon[item]) {
-        reachable = this.randomRestricted(this.pools.dungeon, assumed, item, locations, reachable);
+    for (const game of GAMES) {
+      for (const baseItem of ['SMALL_KEY', 'BOSS_KEY', 'MAP', 'COMPASS']) {
+        const item = gameId(game, baseItem + '_' + dungeon.toUpperCase(), '_');
+        const locations = this.world.dungeons[dungeon];
+        while (this.pools.dungeon[item]) {
+          reachable = this.randomRestricted(this.pools.dungeon, assumed, item, locations, reachable);
+        }
       }
-    });
+    }
   }
 
   private randomRestricted(pool: Items, assume: Items, item: string, locations: Set<string>, reachable?: Reachable) {

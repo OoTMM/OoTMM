@@ -1,3 +1,5 @@
+import { Game } from '../config';
+import { gameId } from '../util';
 import { Expr, exprTrue, exprFalse, exprAnd, exprOr, exprAge, exprHas, exprEvent } from './expr';
 
 const SIMPLE_TOKENS = ['||', '&&', '(', ')', ',', 'true', 'false'] as const;
@@ -26,6 +28,8 @@ type Macro = {
 export class ExprParser {
   private ctx: ParseContext[] = [];
   private macros: {[k: string]: Macro} = {};
+
+  constructor(private game: Game) {}
 
   addMacro(name: string, args: string[], buffer: string) {
     this.macros[name] = { args, buffer };
@@ -75,7 +79,7 @@ export class ExprParser {
     }
     this.accept('identifier');
     this.expect('(');
-    const item = this.expect('identifier');
+    const item = gameId(this.game, this.expect('identifier'), '_');
     let count = 1;
     if (this.accept(',')) {
       count = this.expect('number');

@@ -4,6 +4,7 @@ import glob from 'glob-promise';
 import path from 'path';
 
 import { Game, PATH_DATA } from '../config';
+import { gameId } from '../util';
 import { Expr } from './expr';
 import { ExprParser } from './expr-parser';
 
@@ -66,12 +67,12 @@ const loadWorldRegions = async (world: World, exprParser: ExprParser, filename: 
   }
 };
 
-const loadWorldPool = async (world: World, filename: string) => {
+const loadWorldPool = async (world: World, game: Game, filename: string) => {
   const text = await fs.readFile(filename, 'utf8');
   const data = JSON.parse(text) as any;
   for (const location in data) {
     const d = data[location];
-    const item = d[3];
+    const item = gameId(game, d[3], '_');
     const check = { type: d[0], sceneId: parseInt(d[1], 16), id: parseInt(d[2], 16), item } as WorldCheck;
     world.checks[location] = check;
     world.pool.push(item);
@@ -98,14 +99,14 @@ const loadMacros = async (exprParser: ExprParser, filename: string) => {
 
 const loadWorldGame = async (world: World, game: Game) => {
   /* Create the expr parser */
-  const exprParser = new ExprParser();
+  const exprParser = new ExprParser(game);
   await loadMacros(exprParser, path.join(PATH_DATA, game, 'macros.json'));
 
   /* Load the world */
   const worldFiles = await glob(path.resolve(PATH_DATA, game, 'world', '*.json'));
   await Promise.all(worldFiles.map(x => loadWorldRegions(world, exprParser, x)));
   const poolFile = path.resolve(PATH_DATA, game, 'pool.json');
-  await loadWorldPool(world, poolFile);
+  await loadWorldPool(world, game, poolFile);
 }
 
 export const createWorld = async () => {

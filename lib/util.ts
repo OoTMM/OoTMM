@@ -1,4 +1,5 @@
 import fs from 'fs/promises';
+import { Game } from './config';
 
 export const fileExists = async (path: string) => {
   try {
@@ -20,4 +21,11 @@ export const arrayToIndexMap = (arr: string[]) => {
 export const align = (n: number, alignment: number) => {
   const missing = (alignment - (n % alignment)) % alignment;
   return n + missing;
+}
+
+export const gameId = (game: Game, id: string, char: string) => {
+  if (!char) {
+    char = '_';
+  }
+  return [game.toUpperCase(), id].join(char);
 }
