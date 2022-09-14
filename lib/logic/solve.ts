@@ -16,6 +16,10 @@ const ITEMS_DUNGEON_REWARDS = new Set([
   'OOT_MEDALLION_WATER',
   'OOT_MEDALLION_SPIRIT',
   'OOT_MEDALLION_SHADOW',
+  'MM_REMAINS_ODOLWA',
+  'MM_REMAINS_GOHT',
+  'MM_REMAINS_GYORG',
+  'MM_REMAINS_TWINMOLD',
 ]);
 
 const ITEMS_REQUIRED = new Set<string>([
@@ -41,9 +45,31 @@ const ITEMS_REQUIRED = new Set<string>([
   'OOT_TUNIC_GORON',
   'OOT_TUNIC_ZORA',
   'OOT_HAMMER',
+  'MM_MASK_DEKU',
+  'MM_MASK_GORON',
+  'MM_MASK_ZORA',
+  'MM_BOTTLED_POTION_RED',
+  'MM_MAGIC_UPGRADE',
+  'MM_SONG_TIME',
+  'MM_SONG_AWAKENING',
+  'MM_BOW',
+  'MM_OCARINA',
+  'MM_SWORD',
 ]);
 
-const ITEMS_NICE = new Set<string>([]);
+const ITEMS_JUNK = new Set<string>([
+  'OOT_RUPEE_GREEN',
+  'OOT_RUPEE_BLUE',
+  'OOT_RUPEE_RED',
+  'OOT_RECOVERY_HEART',
+  'OOT_ARROWS_5',
+  'OOT_ARROWS_10',
+  'OOT_ARROWS_30',
+  'MM_RUPEE_GREEN',
+  'MM_RUPEE_BLUE',
+  'MM_RUPEE_RED',
+  'MM_RECOVERY_HEART',
+]);
 
 const sample = <T>(random: Random, arr: T[]): T => {
   if (arr.length === 0) {
@@ -119,10 +145,10 @@ const makeItemPools = (world: World) => {
       addItem(pools.dungeon, item);
     } else if (ITEMS_REQUIRED.has(item)) {
       addItem(pools.required, item);
-    } else if (ITEMS_NICE.has(item)) {
-      addItem(pools.nice, item);
-    } else {
+    } else if (ITEMS_JUNK.has(item)) {
       addItem(pools.junk, item);
+    } else {
+      addItem(pools.nice, item);
     }
   }
 
@@ -162,6 +188,11 @@ class Solver {
   }
 
   solve() {
+    /* Fix the item pool */
+    for (const item of ['MM_MASK_DEKU', 'MM_OCARINA', 'MM_SHIELD', 'MM_SWORD', 'MM_SONG_TIME', 'MM_SONG_HEALING']) {
+      this.insertItem(item);
+    }
+
     const checksCount = Object.keys(this.world.checks).length;
 
     /* Start by placing the required reward items */
@@ -193,6 +224,12 @@ class Solver {
     this.fill();
 
     return this.placement;
+  }
+
+  private insertItem(item: string) {
+    const junkItem = sample(this.random, itemsArray(this.pools.junk));
+    removeItem(this.pools.junk, junkItem);
+    addItem(this.pools.required, item);
   }
 
   private fixRewards() {

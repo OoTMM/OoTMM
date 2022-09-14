@@ -3,7 +3,7 @@ import fs from 'fs/promises';
 import glob from 'glob-promise';
 import path from 'path';
 
-import { Game, PATH_DATA } from '../config';
+import { Game, GAMES, PATH_DATA } from '../config';
 import { gameId } from '../util';
 import { Expr } from './expr';
 import { ExprParser } from './expr-parser';
@@ -36,7 +36,10 @@ export type World = {
 const mapExprs = (exprParser: ExprParser, game: Game, data: any) => {
   const result: ExprMap = {};
   for (const [k, v] of Object.entries(data)) {
-    const name = gameId(game, k, ' ');
+    let name = k;
+    if (!(/^(MM|OOT) /.test(name))) {
+      name = gameId(game, k, ' ');
+    }
     result[name] = exprParser.parse(v as string);
   }
   return result;
@@ -115,7 +118,9 @@ const loadWorldGame = async (world: World, game: Game) => {
 
 export const createWorld = async () => {
   const world: World = { regions: {}, checks: {}, pool: [], dungeons: {} };
-  await loadWorldGame(world, 'oot');
+  for (const g of GAMES) {
+    await loadWorldGame(world, g);
+  }
   return world;
 };
 

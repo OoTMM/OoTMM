@@ -44,7 +44,8 @@
       "Market": "true",
       "Kakariko": "true",
       "Zora River": "has_explosives",
-      "Lake Hylia": "true"
+      "Lake Hylia": "true",
+      "MM Clock Town": "is_child"
     },
     "locations": {
       "Hyrule Field Ocarina of Time": "has_spiritual_stones",
