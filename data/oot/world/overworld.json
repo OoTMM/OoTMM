@@ -125,10 +125,12 @@
   },
   "Goron City": {
     "exits": {
-      "Death Mountain": "true"
+      "Death Mountain": "true",
+      "Death Mountain Crater Bottom": "is_adult"
     },
     "locations": {
-      "Darunia": "can_play(SONG_ZELDA) && can_play(SONG_SARIA)"
+      "Darunia": "can_play(SONG_ZELDA) && can_play(SONG_SARIA)",
+      "Goron City Tunic": "is_adult && has_explosives"
     }
   },
   "Zora River": {
@@ -181,6 +183,17 @@
     "locations": {
       "Temple of Time Master Sword": "is_child && event(DOOR_OF_TIME_OPEN)",
       "Temple of Time Medallion": "is_adult && event(DOOR_OF_TIME_OPEN)"
+    }
+  },
+  "Death Mountain Crater Bottom": {
+    "exits": {
+      "Goron City": "is_adult",
+      "Death Mountain Crater Warp": "is_adult && has(HOOKSHOT)"
+    }
+  },
+  "Death Mountain Crater Warp": {
+    "exits": {
+      "Fire Temple Entrance": "is_adult && has(TUNIC_GORON)"
     }
   }
 }

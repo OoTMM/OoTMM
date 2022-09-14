@@ -27,6 +27,7 @@
   "Temple of Time Medallion":       ["collectible",   "43", "1e", "MEDALLION_LIGHT"],
   "Graveyard Dampe Tomb Hookshot":  ["chest",         "48", "00", "HOOKSHOT"],
   "Windmill HP":                    ["collectible",   "48", "01", "HEART_PIECE"],
+  "Goron City Tunic":               ["npc",           null, "04", "TUNIC_GORON"],
 
   "Deku Tree Map Chest":                ["chest",         "00", "03", "MAP_DT"],
   "Deku Tree Compass Chest":            ["chest",         "00", "02", "COMPASS_DT"],
@@ -66,5 +67,19 @@
   "Forest Temple Garden Top":           ["chest",       "03", "02", "SMALL_KEY_FOREST"],
   "Forest Temple Antichamber":          ["chest",       "03", "0b", "ARROWS_5"],
   "Forest Temple Boss Container":       ["collectible", "14", "1f", "HEART_CONTAINER"],
-  "Forest Temple Boss":                 ["special",     null, "48", "MEDALLION_FOREST"]
+  "Forest Temple Boss":                 ["special",     null, "48", "MEDALLION_FOREST"],
+
+  "Fire Temple Jail 1 Chest":           ["chest",       "04", "01", "SMALL_KEY_FIRE"],
+  "Fire Temple Boss Key Side Chest":    ["chest",       "04", "00", "BOMBS_10"],
+  "Fire Temple Boss Key Chest":         ["chest",       "04", "0c", "BOSS_KEY_FIRE"],
+  "Fire Temple Jail 2 Chest":           ["chest",       "04", "04", "SMALL_KEY_FIRE"],
+  "Fire Temple Jail 3 Chest":           ["chest",       "04", "02", "SMALL_KEY_FIRE"],
+  "Fire Temple Maze Chest":             ["chest",       "04", "03", "SMALL_KEY_FIRE"],
+  "Fire Temple Jail 4 Chest":           ["chest",       "04", "08", "SMALL_KEY_FIRE"],
+  "Fire Temple Map":                    ["chest",       "04", "0a", "MAP_FIRE"],
+  "Fire Temple Above Maze Chest":       ["chest",       "04", "06", "SMALL_KEY_FIRE"],
+  "Fire Temple Below Maze Chest":       ["chest",       "04", "0b", "SMALL_KEY_FIRE"],
+  "Fire Temple Compass":                ["chest",       "04", "07", "COMPASS_FIRE"],
+  "Fire Temple Hammer":                 ["chest",       "04", "05", "HAMMER"],
+  "Fire Temple Ring Jail":              ["chest",       "04", "09", "RUPEE_RED"]
 }

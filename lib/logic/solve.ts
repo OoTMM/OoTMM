@@ -36,6 +36,9 @@ const ITEMS_REQUIRED = new Set<string>([
   'SCALE',
   'EMPTY_BOTTLE',
   'HOOKSHOT',
+  'TUNIC_GORON',
+  'TUNIC_ZORA',
+  'HAMMER',
 ]);
 const ITEMS_NICE = new Set<string>([]);
 
