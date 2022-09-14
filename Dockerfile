@@ -8,12 +8,11 @@ RUN apt-get update \
   && DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends --assume-yes \
     build-essential \
     n64-ultra \
-    ruby \
-    ruby-dev \
+    nodejs \
+    npm \
     git \
-  && gem install bundler \
   && useradd -ms /bin/bash ootmm
 
 WORKDIR /app
 ENTRYPOINT [ "/app/docker-entrypoint.sh" ]
-CMD [ "/app/bin/combo" ]
+CMD [ "/usr/bin/npm", "start" ]

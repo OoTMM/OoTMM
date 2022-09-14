@@ -1,7 +1,5 @@
 *.z64
 
-/.bundle
-/vendor
 /build
 /dist
 /third_party
