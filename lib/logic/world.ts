@@ -19,7 +19,8 @@ type WorldRegion = {
 };
 
 type WorldCheck = {
-  type: 'chest';
+  game: Game;
+  type: 'chest' | 'npc' | 'special' | 'collectible';
   sceneId: number;
   id: number;
   item: string;
@@ -32,24 +33,26 @@ export type World = {
   dungeons: {[k: string]: Set<string>};
 };
 
-const mapExprs = (exprParser: ExprParser, data: any) => {
+const mapExprs = (exprParser: ExprParser, game: Game, data: any) => {
   const result: ExprMap = {};
   for (const [k, v] of Object.entries(data)) {
-    result[k] = exprParser.parse(v as string);
+    const name = gameId(game, k, ' ');
+    result[name] = exprParser.parse(v as string);
   }
   return result;
 }
 
-const loadWorldRegions = async (world: World, exprParser: ExprParser, filename: string) => {
+const loadWorldRegions = async (world: World, game: Game, exprParser: ExprParser, filename: string) => {
   const text = await fs.readFile(filename, 'utf8');
   const data = JSON.parse(text) as any;
 
-  for (const name in data) {
+  for (let name in data) {
     const region = data[name];
+    name = gameId(game, name, ' ');
     const dungeon = region.dungeon;
-    const locations = mapExprs(exprParser, region.locations || {});
-    const exits = mapExprs(exprParser, region.exits || {});
-    const events = mapExprs(exprParser, region.events || {});
+    const locations = mapExprs(exprParser, game, region.locations || {});
+    const exits = mapExprs(exprParser, game, region.exits || {});
+    const events = mapExprs(exprParser, game, region.events || {});
 
     if (name === undefined) {
       throw new Error(`Region name is undefined`);
@@ -72,9 +75,10 @@ const loadWorldPool = async (world: World, game: Game, filename: string) => {
   const data = JSON.parse(text) as any;
   for (const location in data) {
     const d = data[location];
+    const name = gameId(game, location, ' ');
     const item = gameId(game, d[3], '_');
-    const check = { type: d[0], sceneId: parseInt(d[1], 16), id: parseInt(d[2], 16), item } as WorldCheck;
-    world.checks[location] = check;
+    const check = { game, type: d[0], sceneId: parseInt(d[1], 16), id: parseInt(d[2], 16), item } as WorldCheck;
+    world.checks[name] = check;
     world.pool.push(item);
   }
 };
@@ -104,7 +108,7 @@ const loadWorldGame = async (world: World, game: Game) => {
 
   /* Load the world */
   const worldFiles = await glob(path.resolve(PATH_DATA, game, 'world', '*.json'));
-  await Promise.all(worldFiles.map(x => loadWorldRegions(world, exprParser, x)));
+  await Promise.all(worldFiles.map(x => loadWorldRegions(world, game, exprParser, x)));
   const poolFile = path.resolve(PATH_DATA, game, 'pool.json');
   await loadWorldPool(world, game, poolFile);
 }

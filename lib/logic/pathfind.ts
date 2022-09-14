@@ -12,8 +12,8 @@ export type Reachable = {
 
 const reachableDefault = (): Reachable => ({
   regions: {
-    child: new Set(['SPAWN']),
-    adult: new Set(['SPAWN']),
+    child: new Set(['OOT SPAWN']),
+    adult: new Set(['OOT SPAWN']),
   },
   locations: new Set(),
   events: new Set(),

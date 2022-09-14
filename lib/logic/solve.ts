@@ -42,11 +42,8 @@ const ITEMS_REQUIRED = new Set<string>([
   'OOT_TUNIC_ZORA',
   'OOT_HAMMER',
 ]);
-const ITEMS_NICE = new Set<string>([]);
 
-const DUNGEON_ENTRANCES = {
-  "DekuTree": "Deku tree Main",
-};
+const ITEMS_NICE = new Set<string>([]);
 
 const sample = <T>(random: Random, arr: T[]): T => {
   if (arr.length === 0) {
@@ -222,7 +219,7 @@ class Solver {
     const assumed: Items = {};
 
     for (const game of GAMES) {
-      for (const baseItem of ['SMALL_KEY', 'BOSS_KEY', 'MAP', 'COMPASS']) {
+      for (const baseItem of ['SMALL_KEY', 'BOSS_KEY', 'STRAY_FAIRY', 'MAP', 'COMPASS']) {
         const item = gameId(game, baseItem + '_' + dungeon.toUpperCase(), '_');
         const locations = this.world.dungeons[dungeon];
         while (this.pools.dungeon[item]) {
@@ -235,10 +232,15 @@ class Solver {
   private randomRestricted(pool: Items, assume: Items, item: string, locations: Set<string>, reachable?: Reachable) {
     const assumedItems = combinedItems(this.pools.required, assume);
     const assumedReachable = pathfind(this.world, assumedItems, reachable);
-    const location = sample(this.random, Array.from(locations).filter(x => assumedReachable.locations.has(x)).filter(x => !this.placement[x]));
 
+    let validLocations = Array.from(locations).filter(x => assumedReachable.locations.has(x)).filter(x => !this.placement[x]);
+    /* Fairies can only be in chests */
+    if (item === 'MM_STRAY_FAIRY') {
+      validLocations = validLocations.filter(x => this.world.checks[x].type === 'chest');
+    }
+
+    const location = sample(this.random, validLocations);
     this.placement[location] = item;
-
     removeItem(pool, item);
     addItem(assume, item);
 

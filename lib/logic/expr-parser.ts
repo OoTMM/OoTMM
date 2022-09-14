@@ -94,7 +94,7 @@ export class ExprParser {
     }
     this.accept('identifier');
     this.expect('(');
-    const event = this.expect('identifier');
+    const event = gameId(this.game, this.expect('identifier'), ' ');
     this.expect(')');
     return exprEvent(event);
   }
