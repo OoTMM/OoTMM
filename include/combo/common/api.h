@@ -23,4 +23,6 @@ u32     SetSwitchFlag(GameState_Play* play, int flag);
 Actor*  SpawnActorEx(void* const_1, GameState_Play* play, s16 actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable, int, int, int);
 #endif
 
+void DMARomToRam(u32 romAddr, void* dramAddr, u32 size);
+
 #endif

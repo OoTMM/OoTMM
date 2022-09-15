@@ -5,6 +5,7 @@
 .set nobopt
 .set noat
 
+#include <PR/rcp.h>
 #include <combo/defs.h>
 
 /* N64 regdefs don't march ours */
