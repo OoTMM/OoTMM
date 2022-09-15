@@ -44,6 +44,8 @@ export const ITEMS_REQUIRED = new Set<string>([
   'OOT_HOOKSHOT',
   'OOT_TUNIC_GORON',
   'OOT_TUNIC_ZORA',
+  'OOT_BOOTS_IRON',
+  'OOT_BOOTS_HOVER',
   'OOT_HAMMER',
   'MM_MASK_DEKU',
   'MM_MASK_GORON',

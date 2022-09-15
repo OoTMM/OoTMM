@@ -148,7 +148,7 @@
     "exits": {
       "Zora River": "true",
       "Lake Hylia": "is_child && has(SCALE)",
-      "Zora Fountain": "is_child && event(KING_ZORA_LETTER)"
+      "Zora Fountain": "event(KING_ZORA_LETTER)"
     },
     "events": {
       "KING_ZORA_LETTER": "is_child && has(RUTO_LETTER)"
@@ -169,8 +169,9 @@
   },
   "Zora Fountain": {
     "exits": {
-      "Zora Domain": "is_child && event(KING_ZORA_LETTER)",
-      "Jabu-Jabu Entrance": "is_child && has_bottle"
+      "Zora Domain": "event(KING_ZORA_LETTER)",
+      "Jabu-Jabu Entrance": "is_child && has_bottle",
+      "Ice Cavern Entrance": "is_adult"
     }
   },
   "Temple of Time": {

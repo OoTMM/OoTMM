@@ -83,5 +83,10 @@
   "Fire Temple Hammer":                 ["chest",       "04", "05", "HAMMER"],
   "Fire Temple Ring Jail":              ["chest",       "04", "09", "RUPEE_RED"],
   "Fire Temple Boss Container":         ["collectible", "15", "1f", "HEART_CONTAINER"],
-  "Fire Temple Boss":                   ["special",     null, "49", "MEDALLION_FIRE"]
+  "Fire Temple Boss":                   ["special",     null, "49", "MEDALLION_FIRE"],
+
+  "Ice Cavern HP":                      ["collectible", "09", "01", "HEART_PIECE"],
+  "Ice Cavern Iron Boots":              ["chest",       "09", "02", "BOOTS_IRON"],
+  "Ice Cavern Map":                     ["chest",       "09", "00", "MAP_IC"],
+  "Ice Cavern Compass":                 ["chest",       "09", "01", "COMPASS_IC"]
 }
