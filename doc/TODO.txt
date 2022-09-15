@@ -1,0 +1,6 @@
+ - Remove one lock in Fire Temple
+ - NPC: Adult King Zora
+ - Flags for dungeons
+ - MM teleport pads
+ - Malon Flags
+ - Progressive shields & shops

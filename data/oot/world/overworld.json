@@ -155,7 +155,8 @@
     },
     "locations": {
       "Zora Domain Waterfall Chest": "is_child",
-      "Zora Domain Diving Game": "is_child"
+      "Zora Domain Diving Game": "is_child",
+      "Zora Domain Tunic": "is_adult && event(BLUE_FIRE)"
     }
   },
   "Lake Hylia": {

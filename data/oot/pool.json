@@ -20,6 +20,7 @@
   "Zora River HP Platform":         ["collectible",   "54", "0b", "HEART_PIECE"],
   "Zora Domain Waterfall Chest":    ["chest",         "59", "00", "HEART_PIECE"],
   "Zora Domain Diving Game":        ["npc",           null, "03", "SCALE"],
+  "Zora Domain Tunic":              ["npc",           null, "05", "TUNIC_ZORA"],
   "Lake Hylia Underwater Bottle":   ["special",       null, "32", "RUTO_LETTER"],
   "Hyrule Field Ocarina of Time":   ["special",       null, "43", "OCARINA"],
   "Hyrule Field Song of Time":      ["special",       null, "a9", "SONG_TIME"],
