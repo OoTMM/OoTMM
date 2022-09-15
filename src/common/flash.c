@@ -26,16 +26,30 @@ static void flashWait(void)
 
 static void readFlash(u32 devAddr, void* dramAddr, u32 size)
 {
-    /* Set the flash to read mode */
-    osEPiWriteIo((void*)&__osPiTable, FLASH_ADDR_COMMAND, FLASH_CMD_READ);
-    flashWait();
+    u32 readSize;
 
-    /* Read */
-    sMb.dramAddr = dramAddr;
-    sMb.devAddr = ((devAddr & 0xff000000) | ((devAddr & 0x00ffffff) >> 1));
-    sMb.size = size;
-    osEPiStartDma((void*)&__osPiTable, &sMb, OS_READ);
-    osRecvMesg(&sQueue, NULL, OS_MESG_BLOCK);
+    while (size)
+    {
+        readSize = size;
+        if (readSize > 0x2000)
+            readSize = 0x2000;
+
+        /* Set the flash to read mode */
+        osEPiWriteIo((void*)&__osPiTable, FLASH_ADDR_COMMAND, FLASH_CMD_READ);
+        flashWait();
+
+        /* Read */
+        sMb.dramAddr = dramAddr;
+        sMb.devAddr = ((devAddr & 0xff000000) | ((devAddr & 0x00ffffff) >> 1));
+        sMb.size = readSize;
+        osEPiStartDma((void*)&__osPiTable, &sMb, OS_READ);
+        osRecvMesg(&sQueue, NULL, OS_MESG_BLOCK);
+        flashWait();
+
+        dramAddr = (void*)((u32)dramAddr + readSize);
+        devAddr += readSize;
+        size -= readSize;
+    }
 
     /* Invalidate cache */
     osInvalDCache(dramAddr, size);
@@ -53,6 +67,7 @@ static void writeFlashBlock(u32 blockId, void* data)
     sMb.size = FLASH_BLOCK_SIZE;
     osEPiStartDma((void*)&__osPiTable, &sMb, OS_WRITE);
     osRecvMesg(&sQueue, NULL, OS_MESG_BLOCK);
+    flashWait();
 
     /* Set the flash block */
     osEPiWriteIo((void*)&__osPiTable, FLASH_ADDR_COMMAND, FLASH_CMD_ACTIVE(blockId));
