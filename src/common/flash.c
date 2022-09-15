@@ -30,9 +30,9 @@ static void readFlash(u32 devAddr, void* dramAddr, u32 size)
 
     while (size)
     {
-        readSize = size;
-        if (readSize > 0x2000)
-            readSize = 0x2000;
+        readSize = 0x2000;
+        if (readSize > size)
+            readSize = size;
 
         /* Set the flash to read mode */
         osEPiWriteIo((void*)&__osPiTable, FLASH_ADDR_COMMAND, FLASH_CMD_READ);
