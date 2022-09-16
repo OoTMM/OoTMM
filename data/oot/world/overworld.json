@@ -66,7 +66,8 @@
     "locations": {
       "Malon Egg": "true",
       "Zelda's Letter": "has(CHICKEN)",
-      "Zelda's Song": "has(CHICKEN)"
+      "Zelda's Song": "has(CHICKEN)",
+      "Great Fairy Din's Fire": "has_explosives && can_play(SONG_ZELDA)"
     },
     "events": {
       "MEET_ZELDA": "has(CHICKEN)"
@@ -162,7 +163,12 @@
   "Lake Hylia": {
     "exits": {
       "Hyrule Field": "true",
-      "Zora Domain": "is_child && has(SCALE)"
+      "Zora Domain": "is_child && has(SCALE)",
+      "Water Temple Entrance": "is_adult && has(BOOTS_IRON) && has(TUNIC_ZORA) && has(HOOKSHOT)"
+    },
+    "events": {
+      "SCARECROW_CHILD": "is_child && has(OCARINA)",
+      "SCARECROW": "is_adult && event(SCARECROW_CHILD)"
     },
     "locations": {
       "Lake Hylia Underwater Bottle": "has(SCALE)"

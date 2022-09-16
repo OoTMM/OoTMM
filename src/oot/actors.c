@@ -83,6 +83,12 @@ Actor* hookSpawnActor(void* const_1, GameState_Play* play, s16 actorId, float x,
         case SCE_LAIR_PHANTOM_GANON:
             comboSpawnSpecial(play, x, y, z, EV_OOT_CHK_MEDALLION_FOREST, GI_OOT_MEDALLION_FOREST);
             break;
+        case SCE_LAIR_VOLVAGIA:
+            comboSpawnSpecial(play, x, y, z, EV_OOT_CHK_MEDALLION_FIRE, GI_OOT_MEDALLION_FIRE);
+            break;
+        case SCE_LAIR_MORPHA:
+            comboSpawnSpecial(play, x, y, z, EV_OOT_CHK_MEDALLION_WATER, GI_OOT_MEDALLION_WATER);
+            break;
         }
         break;
     case AC_ITEM_B_HEART:

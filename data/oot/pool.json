@@ -15,6 +15,7 @@
   "Graveyard Fairy Tomb":           ["chest",         "40", "00", "SHIELD"],
   "Darunia":                        ["npc",           null, "02", "STRENGTH"],
   "Great Fairy Magic Upgrade":      ["collectible",   "3b", "00", "MAGIC_UPGRADE"],
+  "Great Fairy Din's Fire":         ["collectible",   "3d", "00", "SPELL_FIRE"],
   "Death Mountain Chest":           ["chest",         "60", "01", "RUPEE_PURPLE"],
   "Zora River HP Pillar":           ["collectible",   "54", "04", "HEART_PIECE"],
   "Zora River HP Platform":         ["collectible",   "54", "0b", "HEART_PIECE"],
@@ -89,5 +90,18 @@
   "Ice Cavern HP":                      ["collectible", "09", "01", "HEART_PIECE"],
   "Ice Cavern Iron Boots":              ["chest",       "09", "02", "BOOTS_IRON"],
   "Ice Cavern Map":                     ["chest",       "09", "00", "MAP_IC"],
-  "Ice Cavern Compass":                 ["chest",       "09", "01", "COMPASS_IC"]
+  "Ice Cavern Compass":                 ["chest",       "09", "01", "COMPASS_IC"],
+
+  "Water Temple Under Center":          ["chest",       "05", "06", "SMALL_KEY_WATER"],
+  "Water Temple Compass":               ["chest",       "05", "09", "COMPASS_WATER"],
+  "Water Temple Longshot":              ["chest",       "05", "07", "HOOKSHOT"],
+  "Water Temple Dragon Chest":          ["chest",       "05", "0a", "SMALL_KEY_WATER"],
+  "Water Temple Boss Key Chest":        ["chest",       "05", "05", "BOSS_KEY_WATER"],
+  "Water Temple Bombable Chest":        ["chest",       "05", "00", "SMALL_KEY_WATER"],
+  "Water Temple Shell Chest":           ["chest",       "05", "01", "SMALL_KEY_WATER"],
+  "Water Temple Map":                   ["chest",       "05", "02", "MAP_WATER"],
+  "Water Temple Corridor Chest":        ["chest",       "05", "08", "SMALL_KEY_WATER"],
+  "Water Temple River Chest":           ["chest",       "05", "03", "SMALL_KEY_WATER"],
+  "Water Temple Boss HC":               ["collectible", "16", "1f", "HEART_CONTAINER"],
+  "Water Temple Boss":                  ["special",     null, "4a", "MEDALLION_WATER"]
 }
