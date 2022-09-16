@@ -144,11 +144,19 @@ static void writeFlash(u32 devAddr, void* dramAddr, u32 size)
     }
 }
 
+#if defined(GAME_OOT)
+void InitDom2Addr2(u32 base, u8 type, u8 dom2, u8 lat, u8 pgs, u8 rls, u8 pwd, u32 unk);
+#endif
+
 void comboReadWriteFlash(u32 devAddr, void* dramAddr, u32 size, s32 direction)
 {
     OSMesg msg;
 
     devAddr |= 0x08000000;
+
+#if defined(GAME_OOT)
+    InitDom2Addr2(0x08000000, 0x8, 1, 0x5, 0xf, 0x2, 0xc, 0);
+#endif
 
     osCreateMesgQueue(&sQueue, &msg, 1);
     sMb.hdr.pri = 0;
