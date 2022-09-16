@@ -19,7 +19,7 @@ static ALIGNED(16) ComboOverride gComboChestOverrides[256];
 
 void comboInitOverride(void)
 {
-    comboDma(&gComboChestOverrides, CHEST_OVERRIDE_ADDR, sizeof(gComboChestOverrides));
+    DMARomToRam(CHEST_OVERRIDE_ADDR | PI_DOM1_ADDR2, &gComboChestOverrides, sizeof(gComboChestOverrides));
 }
 
 s32 comboGetOverride(u16 key)

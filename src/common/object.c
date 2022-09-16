@@ -136,7 +136,7 @@ static const ObjectPatch kObjectPatches[] = {
 
 void comboInitObjects(void)
 {
-    comboDma(kCustomObjectsTable, CUSTOM_OBJECTS_ADDR, CUSTOM_OBJECTS_SIZE * sizeof(ObjectData));
+    DMARomToRam(CUSTOM_OBJECTS_ADDR | PI_DOM1_ADDR2, kCustomObjectsTable, CUSTOM_OBJECTS_SIZE * sizeof(ObjectData));
 }
 
 #if defined(GAME_OOT)

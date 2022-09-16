@@ -34,14 +34,12 @@ ALIGNED(16) DmaEntry kComboDmaData[DMA_COUNT + DMA_COUNT_FOREIGN + CUSTOM_DMA_SI
 
 extern s16 gDmaDataCount;
 
-void comboDma(void* addr, u32 cartAddr, u32 size);
-
 void comboInitDma(void)
 {
     DmaEntry* e;
-    comboDma(kComboDmaData, DMA_ADDR, DMA_COUNT * sizeof(DmaEntry));
-    comboDma(kComboDmaData + DMA_COUNT, DMA_ADDR_FOREIGN, DMA_COUNT_FOREIGN * sizeof(DmaEntry));
-    comboDma(kComboDmaData + DMA_COUNT + DMA_COUNT_FOREIGN, CUSTOM_DMA_ADDR, CUSTOM_DMA_SIZE * sizeof(DmaEntry));
+    DMARomToRam(DMA_ADDR | PI_DOM1_ADDR2, kComboDmaData, DMA_COUNT * sizeof(DmaEntry));
+    DMARomToRam(DMA_ADDR_FOREIGN | PI_DOM1_ADDR2, kComboDmaData + DMA_COUNT, DMA_COUNT_FOREIGN * sizeof(DmaEntry));
+    DMARomToRam(CUSTOM_DMA_ADDR | PI_DOM1_ADDR2, kComboDmaData + DMA_COUNT + DMA_COUNT_FOREIGN, CUSTOM_DMA_SIZE * sizeof(DmaEntry));
     for (int i = DMA_COUNT; i < DMA_COUNT + DMA_COUNT_FOREIGN; ++i)
     {
         e = kComboDmaData + i;
@@ -74,7 +72,7 @@ void comboDma_NoCacheInval(void* dramAddr, u32 cartAddr, u32 size)
 {
     waitForPi();
     IO_WRITE(PI_DRAM_ADDR_REG, (u32)dramAddr & 0x1fffffff);
-    IO_WRITE(PI_CART_ADDR_REG, cartAddr | 0x10000000);
+    IO_WRITE(PI_CART_ADDR_REG, cartAddr | PI_DOM1_ADDR2);
     IO_WRITE(PI_WR_LEN_REG, size - 1);
     waitForPi();
 }

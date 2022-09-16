@@ -1,0 +1,35 @@
+{
+  "Water Temple Entrance": {
+    "dungeon": "Water",
+    "exits": {
+      "Lake Hylia": "true",
+      "Water Temple Boss": "has(BOSS_KEY_WATER) && can_longshot"
+    },
+    "events": {
+      "WATER_TEMPLE_LEVEL_MIDDLE": "(can_play(SONG_ZELDA) && has(SMALL_KEY_WATER, 5)) || has_fire",
+      "WATER_TEMPLE_LEVEL_RESET": "can_play(SONG_ZELDA) && (scarecrow_hookshot || has(BOOTS_HOVER) || (has(HOOKSHOT) && has(SMALL_KEY_WATER, 5) && event(WATER_TEMPLE_LEVEL_MIDDLE)))"
+    },
+    "locations": {
+      "Water Temple Map": "event(WATER_TEMPLE_LEVEL_RESET)",
+      "Water Temple Compass": "event(WATER_TEMPLE_LEVEL_MIDDLE) && has(HOOKSHOT)",
+      "Water Temple Shell Chest": "event(WATER_TEMPLE_LEVEL_RESET) && (has(BOW) || has_fire)",
+      "Water Temple Dragon Chest": "event(WATER_TEMPLE_LEVEL_RESET) && has(STRENGTH) && has(HOOKSHOT)",
+      "Water Temple Under Center": "event(WATER_TEMPLE_LEVEL_MIDDLE) && has(HOOKSHOT)",
+      "Water Temple Bombable Chest": "event(WATER_TEMPLE_LEVEL_MIDDLE) && has_explosives",
+      "Water Temple Boss Key Chest": "has(SMALL_KEY_WATER, 6) && has(HOOKSHOT)",
+      "Water Temple Longshot": "has(SMALL_KEY_WATER, 6) && has(HOOKSHOT)",
+      "Water Temple River Chest": "has(SMALL_KEY_WATER, 6) && can_play(SONG_TIME) && has(HOOKSHOT)",
+      "Water Temple Corridor Chest": "can_longshot && has(BOW) && event(WATER_TEMPLE_LEVEL_MIDDLE)"
+    }
+  },
+  "Water Temple Boss": {
+    "dungeon": "Water",
+    "exits": {
+      "Water Temple Entrance": "true"
+    },
+    "locations": {
+      "Water Temple Boss HC": "true",
+      "Water Temple Boss": "true"
+    }
+  }
+}

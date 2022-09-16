@@ -1,41 +1,134 @@
 #include <combo.h>
 
 #define FLASH_BLOCK_SIZE        128
-#define FLASH_ADDR_STATUS       0x08000000
-#define FLASH_ADDR_COMMAND      (FLASH_ADDR_STATUS | 0x10000)
+#define FLASH_CMD_REG           0x10000
+#define FLASH_CMD_CHIP_ERASE    0x3C000000
+#define FLASH_CMD_SECTOR_ERASE  0x4B000000
+#define FLASH_CMD_EXECUTE_ERASE 0x78000000
+#define FLASH_CMD_PROGRAM_PAGE  0xA5000000
+#define FLASH_CMD_PAGE_PROGRAM  0xB4000000
+#define FLASH_CMD_STATUS        0xD2000000
+#define FLASH_CMD_ID            0xE1000000
+#define FLASH_CMD_READ_ARRAY    0xF0000000
 
-#define FLASH_CMD_READ          0xf0000000
-#define FLASH_CMD_WRITE         0xb4000000
-#define FLASH_CMD_ACTIVE(x)     (0xa5000000 | (x))
-#define FLASH_CMD_TRANSFER      0xd2000000
+ALIGNED(8) static OSMesgQueue   sFlashQueue;
+ALIGNED(8) static OSIoMesg      sFlashIoMesg;
+ALIGNED(8) static OSMesg        sFlashMesg[1];
+ALIGNED(8) static OSPiHandle    sFlashHandle;
+ALIGNED(8) static u32           sFlashId[2];
+static int                      sFlashInitialized;
+static int                      sFlashVersion;
 
-static OSMesgQueue  sQueue;
-static OSIoMesg     sMb;
-
-static void flashWait(void)
+static void flashWait(u32 mask)
 {
     u32 status;
 
     for (;;)
     {
-        osEPiReadIo((void*)&__osPiTable, FLASH_ADDR_STATUS, &status);
-        if ((status & 1) == 0)
+        osEPiReadIo(&sFlashHandle, sFlashHandle.baseAddress, &status);
+        if ((status & mask) != mask)
             break;
     }
+    osEPiReadIo(&sFlashHandle, sFlashHandle.baseAddress, &status);
+}
+
+static void flashReadStatus(u8* out)
+{
+    u32 status;
+
+    osEPiWriteIo(&sFlashHandle, sFlashHandle.baseAddress | FLASH_CMD_REG, FLASH_CMD_STATUS);
+    osEPiReadIo(&sFlashHandle, sFlashHandle.baseAddress, &status);
+    osEPiWriteIo(&sFlashHandle, sFlashHandle.baseAddress | FLASH_CMD_REG, FLASH_CMD_STATUS);
+    osEPiReadIo(&sFlashHandle, sFlashHandle.baseAddress, &status);
+
+    *out = status & 0xff;
+}
+
+static void flashClearStatus(void)
+{
+    osEPiWriteIo(&sFlashHandle, sFlashHandle.baseAddress | FLASH_CMD_REG, FLASH_CMD_STATUS);
+    osEPiWriteIo(&sFlashHandle, sFlashHandle.baseAddress, 0);
+}
+
+static void flashReadId(u32* type, u32* maker)
+{
+    u8 tmp;
+
+    flashReadStatus(&tmp);
+
+    // select silicon id read mode
+    osEPiWriteIo(&sFlashHandle, sFlashHandle.baseAddress | FLASH_CMD_REG, FLASH_CMD_ID);
+
+    // read silicon id using DMA
+    sFlashIoMesg.hdr.pri = OS_MESG_PRI_NORMAL;
+    sFlashIoMesg.hdr.retQueue = &sFlashQueue;
+    sFlashIoMesg.dramAddr = sFlashId;
+    sFlashIoMesg.devAddr = 0;
+    sFlashIoMesg.size = 2 * sizeof(u32);
+
+    osInvalDCache(sFlashId, sizeof(sFlashId));
+    osEPiStartDma(&sFlashHandle, &sFlashIoMesg, OS_READ);
+    osRecvMesg(&sFlashQueue, NULL, OS_MESG_BLOCK);
+
+    *type = sFlashId[0];
+    *maker = sFlashId[1];
+}
+
+static void flashInit(void)
+{
+    u32 type;
+    u32 maker;
+
+    osCreateMesgQueue(&sFlashQueue, sFlashMesg, 1);
+
+    sFlashHandle.type = DEVICE_TYPE_FLASH;
+    sFlashHandle.baseAddress = PHYS_TO_K1(FLASH_START_ADDR);
+    sFlashHandle.latency = FLASH_LATENCY;
+    sFlashHandle.pulse = FLASH_PULSE;
+    sFlashHandle.pageSize = FLASH_PAGE_SIZE;
+    sFlashHandle.relDuration = FLASH_REL_DURATION;
+    sFlashHandle.domain = PI_DOMAIN2;
+    sFlashHandle.speed = 0;
+
+    bzero(&sFlashHandle.transferInfo, sizeof(__OSTranxInfo));
+
+    flashReadId(&type, &maker);
+
+    if (maker == FLASH_VERSION_MX_C || maker == FLASH_VERSION_MX_A || maker == FLASH_VERSION_MX_PROTO_A)
+        sFlashVersion = OLD_FLASH;
+    else
+        sFlashVersion = NEW_FLASH;
+
+    sFlashInitialized = 1;
 }
 
 static void readFlash(u32 devAddr, void* dramAddr, u32 size)
 {
-    /* Set the flash to read mode */
-    osEPiWriteIo((void*)&__osPiTable, FLASH_ADDR_COMMAND, FLASH_CMD_READ);
-    flashWait();
+    u32 readSize;
 
-    /* Read */
-    sMb.dramAddr = dramAddr;
-    sMb.devAddr = ((devAddr & 0xff000000) | ((devAddr & 0x00ffffff) >> 1));
-    sMb.size = size;
-    osEPiStartDma((void*)&__osPiTable, &sMb, OS_READ);
-    osRecvMesg(&sQueue, NULL, OS_MESG_BLOCK);
+    /* Writeback cache */
+    osWritebackDCache(dramAddr, size);
+
+    while (size)
+    {
+        readSize = 0x2000;
+        if (readSize > size)
+            readSize = size;
+
+        /* Set the flash to read mode */
+        osEPiWriteIo(&sFlashHandle, sFlashHandle.baseAddress | FLASH_CMD_REG, FLASH_CMD_READ_ARRAY);
+
+        /* Read */
+        sFlashIoMesg.dramAddr = dramAddr;
+        sFlashIoMesg.devAddr = (devAddr & 0x00ffffff) >> (sFlashVersion == OLD_FLASH ? 1 : 0);
+        sFlashIoMesg.size = readSize;
+        osEPiStartDma(&sFlashHandle, &sFlashIoMesg, OS_READ);
+        osRecvMesg(&sFlashQueue, NULL, OS_MESG_BLOCK);
+
+        dramAddr = (void*)((u32)dramAddr + readSize);
+        devAddr += readSize;
+        size -= readSize;
+    }
 
     /* Invalidate cache */
     osInvalDCache(dramAddr, size);
@@ -43,24 +136,20 @@ static void readFlash(u32 devAddr, void* dramAddr, u32 size)
 
 static void writeFlashBlock(u32 blockId, void* data)
 {
-    /* Set the flash to write mode */
-    osEPiWriteIo((void*)&__osPiTable, FLASH_ADDR_COMMAND, FLASH_CMD_WRITE);
-    flashWait();
+    /* Write into the internal flash buffer */
+    osEPiWriteIo(&sFlashHandle, sFlashHandle.baseAddress | FLASH_CMD_REG, FLASH_CMD_PAGE_PROGRAM);
+    sFlashIoMesg.dramAddr = data;
+    sFlashIoMesg.devAddr = 0;
+    sFlashIoMesg.size = FLASH_BLOCK_SIZE;
+    osEPiStartDma(&sFlashHandle, &sFlashIoMesg, OS_WRITE);
+    osRecvMesg(&sFlashQueue, NULL, OS_MESG_BLOCK);
 
-    /* Set the RDRAM pointer via DMA */
-    sMb.dramAddr = data;
-    sMb.devAddr = FLASH_ADDR_STATUS;
-    sMb.size = FLASH_BLOCK_SIZE;
-    osEPiStartDma((void*)&__osPiTable, &sMb, OS_WRITE);
-    osRecvMesg(&sQueue, NULL, OS_MESG_BLOCK);
-
-    /* Set the flash block */
-    osEPiWriteIo((void*)&__osPiTable, FLASH_ADDR_COMMAND, FLASH_CMD_ACTIVE(blockId));
-    flashWait();
-
-    /* Perform the transfer */
-    osEPiWriteIo((void*)&__osPiTable, FLASH_ADDR_COMMAND, FLASH_CMD_TRANSFER);
-    flashWait();
+    /* Commit to flash memory */
+    if (sFlashVersion == NEW_FLASH)
+        osEPiWriteIo(&sFlashHandle, sFlashHandle.baseAddress | FLASH_CMD_REG, FLASH_CMD_PAGE_PROGRAM);
+    osEPiWriteIo(&sFlashHandle, sFlashHandle.baseAddress | FLASH_CMD_REG, FLASH_CMD_PROGRAM_PAGE | blockId);
+    flashWait(0x1);
+    flashClearStatus();
 }
 
 static s32 writeFlashBlockMisaligned(u32 devAddr, void* dramAddr, u32 size)
@@ -106,7 +195,6 @@ static void writeFlash(u32 devAddr, void* dramAddr, u32 size)
     u32 blockId;
 
     osWritebackDCache(dramAddr, size);
-    writeFlashBlockMisaligned(devAddr, dramAddr, size);
     if (size && ((devAddr % FLASH_BLOCK_SIZE) != 0))
     {
         /* Misaligned write */
@@ -131,13 +219,10 @@ static void writeFlash(u32 devAddr, void* dramAddr, u32 size)
 
 void comboReadWriteFlash(u32 devAddr, void* dramAddr, u32 size, s32 direction)
 {
-    OSMesg msg;
-
-    devAddr |= 0x08000000;
-
-    osCreateMesgQueue(&sQueue, &msg, 1);
-    sMb.hdr.pri = 0;
-    sMb.hdr.retQueue = &sQueue;
+    if (!sFlashInitialized)
+    {
+        flashInit();
+    }
 
     if (direction == OS_READ)
         readFlash(devAddr, dramAddr, size);

@@ -11,5 +11,8 @@
   "has_ranged_weapon": "(is_child && (has(SLINGSHOT) || has(BOOMERANG))) || (is_adult && (has(BOW) || has(HOOKSHOT)))",
   "has_spiritual_stones": "has(STONE_EMERALD) && has(STONE_RUBY) && has(STONE_SAPPHIRE)",
   "can_hookshot": "is_adult && has(HOOKSHOT)",
-  "has_explosives_or_hammer": "has_explosives || (is_adult && has(HAMMER))"
+  "can_longshot": "is_adult && has(HOOKSHOT, 2)",
+  "has_explosives_or_hammer": "has_explosives || (is_adult && has(HAMMER))",
+  "scarecrow_hookshot": "is_adult && has(HOOKSHOT) && event(SCARECROW)",
+  "has_fire": "has(MAGIC_UPGRADE) && ((is_adult && has(BOW) && has(ARROW_FIRE)) || (has(SPELL_FIRE)))"
 }

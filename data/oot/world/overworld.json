@@ -66,7 +66,8 @@
     "locations": {
       "Malon Egg": "true",
       "Zelda's Letter": "has(CHICKEN)",
-      "Zelda's Song": "has(CHICKEN)"
+      "Zelda's Song": "has(CHICKEN)",
+      "Great Fairy Din's Fire": "has_explosives && can_play(SONG_ZELDA)"
     },
     "events": {
       "MEET_ZELDA": "has(CHICKEN)"
@@ -148,20 +149,26 @@
     "exits": {
       "Zora River": "true",
       "Lake Hylia": "is_child && has(SCALE)",
-      "Zora Fountain": "is_child && event(KING_ZORA_LETTER)"
+      "Zora Fountain": "event(KING_ZORA_LETTER)"
     },
     "events": {
       "KING_ZORA_LETTER": "is_child && has(RUTO_LETTER)"
     },
     "locations": {
       "Zora Domain Waterfall Chest": "is_child",
-      "Zora Domain Diving Game": "is_child"
+      "Zora Domain Diving Game": "is_child",
+      "Zora Domain Tunic": "is_adult && event(BLUE_FIRE)"
     }
   },
   "Lake Hylia": {
     "exits": {
       "Hyrule Field": "true",
-      "Zora Domain": "is_child && has(SCALE)"
+      "Zora Domain": "is_child && has(SCALE)",
+      "Water Temple Entrance": "is_adult && has(BOOTS_IRON) && has(TUNIC_ZORA) && has(HOOKSHOT)"
+    },
+    "events": {
+      "SCARECROW_CHILD": "is_child && has(OCARINA)",
+      "SCARECROW": "is_adult && event(SCARECROW_CHILD)"
     },
     "locations": {
       "Lake Hylia Underwater Bottle": "has(SCALE)"
@@ -169,8 +176,9 @@
   },
   "Zora Fountain": {
     "exits": {
-      "Zora Domain": "is_child && event(KING_ZORA_LETTER)",
-      "Jabu-Jabu Entrance": "is_child && has_bottle"
+      "Zora Domain": "event(KING_ZORA_LETTER)",
+      "Jabu-Jabu Entrance": "is_child && has_bottle",
+      "Ice Cavern Entrance": "is_adult"
     }
   },
   "Temple of Time": {
