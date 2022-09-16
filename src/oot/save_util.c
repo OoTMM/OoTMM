@@ -69,16 +69,6 @@ static const MmInventory kDefaultInventory =
     },
 };
 
-void zeroComboSaveData(void)
-{
-    char buffer[0x800];
-    bzero(buffer, sizeof(buffer));
-    for (int i = 0; i < 8; ++i)
-    {
-        comboReadWriteFlash(0x30000 + 0x800 * i + 0x4000 * gSaveContext.fileIndex, buffer, sizeof(buffer), OS_WRITE);
-    }
-}
-
 void comboCreateSaveMM(void)
 {
     bzero(&gMmSave, sizeof(MmSave));
@@ -119,9 +109,6 @@ void comboCreateSaveMM(void)
     MM_SET_EVENT_WEEK(EV_MM_WEEK_TOWN_GUARDS);
     MM_SET_EVENT_WEEK(EV_MM_WEEK_FIRST_CYCLE);
     MM_SET_EVENT_WEEK(EV_MM_WEEK_FOREST_WITCH);
-
-    /* Also zero the combo save */
-    zeroComboSaveData();
 
     /* Save */
     comboWriteForeignSave();
