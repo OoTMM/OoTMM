@@ -62,6 +62,12 @@ Actor* hookSpawnActor(void* const_1, GameState_Play* play, s16 actorId, float x,
             rz = 0x1000 | ((variable >> 8) & 0x3f);
             variable = GI_OOT_HEART_PIECE;
         }
+        else if ((variable & 0xff) == 0x11) /* Small Key */
+        {
+            actorId = AC_ITEM_CUSTOM;
+            rz = 0x1000 | ((variable >> 8) & 0x3f);
+            variable = GI_OOT_SMALL_KEY;
+        }
         break;
     case AC_DOOR_WARP1:
         /* Blue warp */
