@@ -29,6 +29,7 @@
   "Temple of Time Medallion":       ["collectible",   "43", "1e", "MEDALLION_LIGHT"],
   "Graveyard Dampe Tomb Hookshot":  ["chest",         "48", "00", "HOOKSHOT"],
   "Windmill HP":                    ["collectible",   "48", "01", "HEART_PIECE"],
+  "Windmill Song of Storms":        ["npc",           null, "05", "SONG_STORMS"],
   "Goron City Tunic":               ["npc",           null, "04", "TUNIC_GORON"],
 
   "Deku Tree Map Chest":                ["chest",         "00", "03", "MAP_DT"],
@@ -103,5 +104,20 @@
   "Water Temple Corridor Chest":        ["chest",       "05", "08", "SMALL_KEY_WATER"],
   "Water Temple River Chest":           ["chest",       "05", "03", "SMALL_KEY_WATER"],
   "Water Temple Boss HC":               ["collectible", "16", "1f", "HEART_CONTAINER"],
-  "Water Temple Boss":                  ["special",     null, "4a", "MEDALLION_WATER"]
+  "Water Temple Boss":                  ["special",     null, "4a", "MEDALLION_WATER"],
+
+  "Bottom of the Well Compass":         ["chest",       "08", "01", "COMPASS_BOTW"],
+  "Bottom of the Well Under Debris":    ["chest",       "08", "02", "BOMBCHUS_10"],
+  "Bottom of the Well Back West":       ["chest",       "08", "04", "NUTS_10"],
+  "Bottom of the Well East":            ["chest",       "08", "05", "SMALL_KEY_BOTW"],
+  "Bottom of the Well Front West":      ["chest",       "08", "08", "SMALL_KEY_BOTW"],
+  "Bottom of the Well Underwater":      ["chest",       "08", "09", "RECOVERY_HEART"],
+  "Bottom of the Well East Cage":       ["chest",       "08", "0c", "RUPEE_BLUE"],
+  "Bottom of the Well Blood Chest":     ["chest",       "08", "0e", "NUTS_10"],
+  "Bottom of the Well Underwater 2":    ["chest",       "08", "10", "BOMBS_10"],
+  "Bottom of the Well Map":             ["chest",       "08", "07", "MAP_BOTW"],
+  "Bottom of the Well Coffin":          ["collectible", "08", "01", "SMALL_KEY_BOTW"],
+  "Bottom of the Well Pits":            ["chest",       "08", "0a", "RUPEE_BLUE"],
+  "Bottom of the Well Lens":            ["chest",       "08", "03", "LENS"],
+  "Bottom of the Well Lens Side Chest": ["chest",       "08", "14", "RUPEE_HUGE"]
 }

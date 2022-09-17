@@ -14,5 +14,6 @@
   "can_longshot": "is_adult && has(HOOKSHOT, 2)",
   "has_explosives_or_hammer": "has_explosives || (is_adult && has(HAMMER))",
   "scarecrow_hookshot": "is_adult && has(HOOKSHOT) && event(SCARECROW)",
-  "has_fire": "has(MAGIC_UPGRADE) && ((is_adult && has(BOW) && has(ARROW_FIRE)) || (has(SPELL_FIRE)))"
+  "has_fire": "has(MAGIC_UPGRADE) && ((is_adult && has(BOW) && has(ARROW_FIRE)) || (has(SPELL_FIRE)))",
+  "has_lens": "has(MAGIC_UPGRADE) && has(LENS)"
 }

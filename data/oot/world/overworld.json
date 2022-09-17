@@ -96,11 +96,13 @@
     "exits": {
       "Hyrule Field": "true",
       "Death Mountain": "has(ZELDA_LETTER)",
-      "Graveyard": "true"
+      "Graveyard": "true",
+      "Bottom of the Well": "is_child && can_play(SONG_STORMS) && has(SWORD)"
     },
     "locations": {
       "Anju's Bottle": "is_child",
-      "Windmill HP": "is_adult"
+      "Windmill HP": "is_adult",
+      "Windmill Song of Storms": "is_adult && has(OCARINA)"
     }
   },
   "Graveyard": {
