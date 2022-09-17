@@ -50,6 +50,7 @@ export const ITEMS_REQUIRED = new Set<string>([
   'OOT_SPELL_FIRE',
   'OOT_MAGIC_UPGRADE',
   'OOT_LENS',
+  'OOT_BOMBCHUS_10',
   'MM_MASK_DEKU',
   'MM_MASK_GORON',
   'MM_MASK_ZORA',
@@ -163,6 +164,7 @@ const makeItemPools = (world: World) => {
   maxRequired(pools, 'OOT_SLINGSHOT', 1);
   maxRequired(pools, 'OOT_MAGIC_UPGRADE', 1);
   maxRequired(pools, 'OOT_OCARINA', 1);
+  maxRequired(pools, 'OOT_BOMBCHUS_10', 1);
 
   return pools;
 };
