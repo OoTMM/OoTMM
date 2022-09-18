@@ -27,6 +27,9 @@
     "exits": {
       "Water Temple Entrance": "true"
     },
+    "events": {
+      "WATER_TEMPLE_CLEARED": "true"
+    },
     "locations": {
       "Water Temple Boss HC": "true",
       "Water Temple Boss": "true"

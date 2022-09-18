@@ -173,7 +173,8 @@
       "SCARECROW": "is_adult && event(SCARECROW_CHILD)"
     },
     "locations": {
-      "Lake Hylia Underwater Bottle": "has(SCALE)"
+      "Lake Hylia Underwater Bottle": "has(SCALE)",
+      "Lake Hylia Fire Arrow": "can_use_bow && (event(WATER_TEMPLE_CLEARED) || (can_longshot && scarecrow_hookshot))"
     }
   },
   "Zora Fountain": {

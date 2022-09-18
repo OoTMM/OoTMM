@@ -120,6 +120,12 @@ Actor* hookSpawnActor(void* const_1, GameState_Play* play, s16 actorId, float x,
             rz = 0x2000 | EV_OOT_CHK_RUTO_LETTER;
             variable = GI_OOT_RUTO_LETTER;
             break;
+        case 0x7:
+            /* Fire Arrow */
+            actorId = AC_ITEM_CUSTOM;
+            rz = 0x2000 | EV_OOT_CHK_ARROW_FIRE;
+            variable = GI_OOT_ARROW_FIRE;
+            break;
         }
         break;
     }

@@ -20,6 +20,27 @@ static int shouldSpawn(Actor_ItemCustom* item, GameState_Play* play)
     return 1;
 }
 
+static void handleFireArrow(Actor_ItemCustom* item, GameState_Play* play)
+{
+#if defined(GAME_OOT)
+    CutsceneContext* c;
+
+    if (item->type == 0x02 && item->flag == EV_OOT_CHK_ARROW_FIRE)
+    {
+        c = &play->cutscene;
+        item->base.modelOffsetY = 50.f;
+
+        if (!c->active || c->unk_28 == NULL || *c->unk_28 == 2)
+        {
+            item->base.gravity = -0.1f;
+            item->base.minVelocityY = -4.0f;
+            ActorSetCollisionCylinder(play, &item->base, 10.f, 10.f, 0, 5);
+            ActorUpdateVelocity(&item->base);
+        }
+    }
+#endif
+}
+
 /* Variables: */
 /* RZ  0xf000: Type */
 /* RZ  0x00ff: Flag */
@@ -101,6 +122,8 @@ static int isBossReward(Actor_ItemCustom* item, GameState_Play* play)
 static void ItemCustom_Update(Actor_ItemCustom* item, GameState_Play* play)
 {
     float rangeScale;
+
+    handleFireArrow(item, play);
 
     if (!HasActorGivenItem(&item->base))
     {
