@@ -2,7 +2,8 @@
   "SPAWN": {
     "exits": {
       "Link's House": "is_child",
-      "Temple of Time": "is_adult && event(TIME_TRAVEL)"
+      "Temple of Time": "is_adult && event(TIME_TRAVEL)",
+      "Graveyard Upper": "can_play(SONG_SHADOW)"
     }
   },
   "Link's House": {
@@ -102,7 +103,8 @@
     "locations": {
       "Anju's Bottle": "is_child",
       "Windmill HP": "is_adult",
-      "Windmill Song of Storms": "is_adult && has(OCARINA)"
+      "Windmill Song of Storms": "is_adult && has(OCARINA)",
+      "Kakariko Song Shadow": "is_adult && has(MEDALLION_FOREST) && has(MEDALLION_FIRE) && has(MEDALLION_WATER)"
     }
   },
   "Graveyard": {
@@ -114,6 +116,11 @@
       "Graveyard Royal Tomb": "can_play(SONG_ZELDA) && has(SWORD)",
       "Graveyard Fairy Tomb": "true",
       "Graveyard Dampe Tomb Hookshot": "is_adult"
+    }
+  },
+  "Graveyard Upper": {
+    "exits": {
+      "Graveyard": "true"
     }
   },
   "Death Mountain": {

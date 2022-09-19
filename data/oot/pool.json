@@ -32,6 +32,7 @@
   "Windmill HP":                    ["collectible",   "48", "01", "HEART_PIECE"],
   "Windmill Song of Storms":        ["npc",           null, "05", "SONG_STORMS"],
   "Goron City Tunic":               ["npc",           null, "04", "TUNIC_GORON"],
+  "Kakariko Song Shadow":           ["special",       null, "54", "SONG_SHADOW"],
 
   "Deku Tree Map Chest":                ["chest",         "00", "03", "MAP_DT"],
   "Deku Tree Compass Chest":            ["chest",         "00", "02", "COMPASS_DT"],

@@ -17,6 +17,10 @@
 #define EV_OOT_CHK_MEDALLION_FOREST         0x48
 #define EV_OOT_CHK_MEDALLION_FIRE           0x49
 #define EV_OOT_CHK_MEDALLION_WATER          0x4a
+#define EV_OOT_CHK_SONG_FOREST              0x50
+#define EV_OOT_CHK_SONG_FIRE                0x51
+#define EV_OOT_CHK_SONG_WATER               0x52
+#define EV_OOT_CHK_SONG_SHADOW              0x54
 #define EV_OOT_CHK_SONG_ZELDA               0x59
 #define EV_OOT_CHK_SONG_SUN                 0x5a
 #define EV_OOT_CHK_SONG_STORMS              0x5b
