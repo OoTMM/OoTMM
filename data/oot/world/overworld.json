@@ -120,7 +120,8 @@
   },
   "Graveyard Upper": {
     "exits": {
-      "Graveyard": "true"
+      "Graveyard": "true",
+      "Shadow Temple Entrance": "is_adult && can_use_din"
     }
   },
   "Death Mountain": {

@@ -16,5 +16,6 @@
   "scarecrow_hookshot": "is_adult && has(HOOKSHOT) && event(SCARECROW)",
   "has_fire": "has(MAGIC_UPGRADE) && ((is_adult && has(BOW) && has(ARROW_FIRE)) || (has(SPELL_FIRE)))",
   "has_lens": "has(MAGIC_UPGRADE) && has(LENS)",
-  "has_bombchus": "has(BOMBCHUS_10) || has(BOMBCHUS_20) || has(BOMBCHUS_5)"
+  "has_bombchus": "has(BOMBCHUS_10) || has(BOMBCHUS_20) || has(BOMBCHUS_5)",
+  "can_use_din": "has(MAGIC_UPGRADE) && has(SPELL_FIRE)"
 }

@@ -121,5 +121,25 @@
   "Bottom of the Well Coffin":          ["collectible", "08", "01", "SMALL_KEY_BOTW"],
   "Bottom of the Well Pits":            ["chest",       "08", "0a", "RUPEE_BLUE"],
   "Bottom of the Well Lens":            ["chest",       "08", "03", "LENS"],
-  "Bottom of the Well Lens Side Chest": ["chest",       "08", "14", "RUPEE_HUGE"]
+  "Bottom of the Well Lens Side Chest": ["chest",       "08", "14", "RUPEE_HUGE"],
+
+  "Shadow Temple Map":                        ["chest",       "07", "01", "MAP_SHADOW"],
+  "Shadow Temple Hover Boots":                ["chest",       "07", "07", "BOOTS_HOVER"],
+  "Shadow Temple Silver Rupees":              ["chest",       "07", "02", "SMALL_KEY_SHADOW"],
+  "Shadow Temple Compass":                    ["chest",       "07", "03", "COMPASS_SHADOW"],
+  "Shadow Temple Falling Spikes Lower":       ["chest",       "07", "05", "ARROWS_10"],
+  "Shadow Temple Falling Spikes Upper 1":     ["chest",       "07", "04", "SMALL_KEY_SHADOW"],
+  "Shadow Temple Falling Spikes Upper 2":     ["chest",       "07", "06", "RUPEE_BLUE"],
+  "Shadow Temple Invisible Spike Room":       ["chest",       "07", "09", "RUPEE_BLUE"],
+  "Shadow Temple Boss Key Room 1":            ["chest",       "07", "0a", "RUPEE_BLUE"],
+  "Shadow Temple Boss Key Room 2":            ["chest",       "07", "0b", "BOSS_KEY_SHADOW"],
+  "Shadow Temple Skull":                      ["collectible", "07", "01", "SMALL_KEY_SHADOW"],
+  "Shadow Temple Spinning Blades Visible":    ["chest",       "07", "0c", "RUPEE_BLUE"],
+  "Shadow Temple Spinning Blades Invisible":  ["chest",       "07", "16", "ARROWS_30"],
+  "Shadow Temple Invisible Floormaster":      ["chest",       "07", "0d", "SMALL_KEY_SHADOW"],
+  "Shadow Temple Wind Room Hint":             ["chest",       "07", "15", "ARROWS_10"],
+  "Shadow Temple After Wind":                 ["chest",       "07", "08", "RUPEE_BLUE"],
+  "Shadow Temple After Wind Invisible":       ["chest",       "07", "14", "SMALL_KEY_SHADOW"],
+  "Shadow Temple Boss HC":                    ["collectible", "18", "1f", "HEART_CONTAINER"],
+  "Shadow Temple Boss":                       ["special",     null, "61", "MEDALLION_SHADOW"]
 }
