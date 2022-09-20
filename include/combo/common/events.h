@@ -27,6 +27,7 @@
 #define EV_OOT_CHK_ZELDA_FLED               0x80
 #define EV_OOT_CHK_ZELDA_FLED_BRIDGE        0x82
 #define EV_OOT_CHK_SONG_TIME                0xa9
+#define EV_OOT_CHK_SONG_SPIRIT              0xac
 #define EV_OOT_CHK_SARIA_OCARINA            0xc1
 
 /* Custom flags that seems unused */

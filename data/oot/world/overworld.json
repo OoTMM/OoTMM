@@ -3,7 +3,8 @@
     "exits": {
       "Link's House": "is_child",
       "Temple of Time": "is_adult && event(TIME_TRAVEL)",
-      "Graveyard Upper": "can_play(SONG_SHADOW)"
+      "Graveyard Upper": "can_play(SONG_SHADOW)",
+      "Desert Colossus": "can_play(SONG_SPIRIT)"
     }
   },
   "Link's House": {
@@ -233,7 +234,22 @@
   "Gerudo Fortress Exterior": {
     "exits": {
       "Gerudo Fortress": "can_hookshot",
-      "Gerudo Valley After Bridge": "true"
+      "Gerudo Valley After Bridge": "true",
+      "Desert": "has(GERUDO_CARD)"
+    }
+  },
+  "Desert": {
+    "exits": {
+      "Gerudo Fortress Exterior": "true",
+      "Desert Colossus": "has_lens && can_hookshot"
+    }
+  },
+  "Desert Colossus": {
+    "exits": {
+      "Spirit Temple Entrance": "true"
+    },
+    "locations": {
+      "Desert Colossus Song Spirit": "true"
     }
   }
 }

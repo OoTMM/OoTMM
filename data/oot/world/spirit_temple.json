@@ -1,0 +1,8 @@
+{
+  "Spirit Temple Entrance": {
+    "dungeon": "Spirit",
+    "exits": {
+      "Desert Colossus": "true"
+    }
+  }
+}
