@@ -55,6 +55,7 @@ export const ITEMS_REQUIRED = new Set<string>([
   'OOT_LENS',
   'OOT_BOMBCHUS_10',
   'OOT_ARROW_FIRE',
+  'OOT_GERUDO_CARD',
   'MM_MASK_DEKU',
   'MM_MASK_GORON',
   'MM_MASK_ZORA',

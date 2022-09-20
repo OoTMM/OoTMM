@@ -46,6 +46,7 @@
       "Kakariko": "true",
       "Zora River": "has_explosives",
       "Lake Hylia": "true",
+      "Gerudo Valley": "true",
       "MM Clock Town": "is_child"
     },
     "locations": {
@@ -214,6 +215,25 @@
   "Death Mountain Crater Warp": {
     "exits": {
       "Fire Temple Entrance": "is_adult && has(TUNIC_GORON)"
+    }
+  },
+  "Gerudo Valley": {
+    "exits": {
+      "Lake Hylia": "true",
+      "Hyrule Field": "true",
+      "Gerudo Valley After Bridge": "can_longshot"
+    }
+  },
+  "Gerudo Valley After Bridge": {
+    "exits": {
+      "Lake Hylia": "true",
+      "Gerudo Fortress Exterior": "true"
+    }
+  },
+  "Gerudo Fortress Exterior": {
+    "exits": {
+      "Gerudo Fortress": "can_hookshot",
+      "Gerudo Valley After Bridge": "true"
     }
   }
 }

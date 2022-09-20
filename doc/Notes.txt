@@ -9,6 +9,7 @@ NPC override IDs:
 04 Link the Goron, Goron Tunic
 05 King Zora, Zora Tunic
 06 Song of Storms
+07 Guerudo Member Card
 
 SPIRITUAL
 Emerald:  1240 10e0

@@ -141,5 +141,11 @@
   "Shadow Temple After Wind":                 ["chest",       "07", "08", "RUPEE_BLUE"],
   "Shadow Temple After Wind Invisible":       ["chest",       "07", "14", "SMALL_KEY_SHADOW"],
   "Shadow Temple Boss HC":                    ["collectible", "18", "1f", "HEART_CONTAINER"],
-  "Shadow Temple Boss":                       ["special",     null, "61", "MEDALLION_SHADOW"]
+  "Shadow Temple Boss":                       ["special",     null, "61", "MEDALLION_SHADOW"],
+
+  "Gerudo Fortress Jail 1":                   ["collectible", "0c", "0c", "SMALL_KEY_GF"],
+  "Gerudo Fortress Jail 2":                   ["collectible", "0c", "0f", "SMALL_KEY_GF"],
+  "Gerudo Fortress Jail 3":                   ["collectible", "0c", "0a", "SMALL_KEY_GF"],
+  "Gerudo Fortress Jail 4":                   ["collectible", "0c", "0e", "SMALL_KEY_GF"],
+  "Gerudo Member Card":                       ["npc",         null, "07", "GERUDO_CARD"]
 }
