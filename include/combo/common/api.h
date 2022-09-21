@@ -13,6 +13,8 @@ void    ActorDestroy(Actor* actor);
 int     HasActorGivenItem(Actor* actor);
 void    ActorSetScale(Actor* actor, float scale);
 void    ActorEnableInteraction(Actor* actor, GameState_Play* play);
+void    ActorSetCollisionCylinder(GameState_Play* play, Actor* actor, float unk_3, float unk_4, float unk_5, u32 unk_6);
+void    ActorUpdateVelocity(Actor* actor);
 
 u32     GetCollectibleFlag(GameState_Play* play, int flag);
 void    SetCollectibleFlag(GameState_Play* play, int flag);

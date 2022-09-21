@@ -1,0 +1,138 @@
+{
+  "Spirit Temple Entrance": {
+    "dungeon": "Spirit",
+    "exits": {
+      "Desert Colossus": "true",
+      "Spirit Temple Child Entrance": "is_child",
+      "Spirit Temple Adult Entrance": "is_adult && has(STRENGTH, 2)"
+    }
+  },
+  "Spirit Temple Child Entrance": {
+    "dungeon": "Spirit",
+    "exits": {
+      "Spirit Temple Entrance": "is_child",
+      "Spirit Temple Child Climb": "is_child && has(SMALL_KEY_SPIRIT, 5)"
+    },
+    "locations": {
+      "Spirit Temple Child First Chest": "can_boomerang",
+      "Spirit Temple Child Second Chest": "can_boomerang"
+    }
+  },
+  "Spirit Temple Child Climb": {
+    "dungeon": "Spirit",
+    "exits": {
+      "Spirit Temple Child Entrance": "is_child && has(SMALL_KEY_SPIRIT, 5)",
+      "Spirit Temple Statue": "has_bombchus"
+    },
+    "locations": {
+      "Spirit Temple Child Climb 1": "has_ranged_weapon",
+      "Spirit Temple Child Climb 2": "has_ranged_weapon"
+    }
+  },
+  "Spirit Temple Child Upper": {
+    "dungeon": "Spirit",
+    "exits": {
+      "Spirit Temple Statue": "true",
+      "Spirit Temple Child Hand": "has(STRENGTH) && has(SMALL_KEY_SPIRIT, 5)"
+    },
+    "locations": {
+      "Spirit Temple Sun Block Room Torches": "is_child || has_fire"
+    }
+  },
+  "Spirit Temple Child Hand": {
+    "dungeon": "Spirit",
+    "exits": {
+      "Spirit Temple Child Upper": "has(SMALL_KEY_SPIRIT, 5)"
+    },
+    "locations": {
+      "Spirit Temple Silver Gauntlets": "true"
+    }
+  },
+  "Spirit Temple Adult Entrance": {
+    "dungeon": "Spirit",
+    "exits": {
+      "Spirit Temple Adult Climb": "has(SMALL_KEY_SPIRIT, 3)"
+    },
+    "locations": {
+      "Spirit Temple Adult Silver Rupees": "true",
+      "Spirit Temple Adult Lullaby": "can_play(SONG_ZELDA) && (can_hookshot || has(BOOTS_HOVER))"
+    }
+  },
+  "Spirit Temple Adult Climb": {
+    "dungeon": "Spirit",
+    "exits": {
+      "Spirit Temple Statue Adult": "has(STRENGTH)"
+    },
+    "locations": {
+      "Spirit Temple Adult Suns on Wall 1": "true",
+      "Spirit Temple Adult Suns on Wall 2": "true"
+    }
+  },
+  "Spirit Temple Statue": {
+    "dungeon": "Spirit",
+    "exits": {
+      "Spirit Temple Statue Adult": "can_hookshot",
+      "Spirit Temple Child Climb": "true",
+      "Spirit Temple Child Upper": "true",
+      "Spirit Temple Boss": "has(BOSS_KEY_SPIRIT) && event(SPIRIT_LIGHT_STATUE) && can_longshot"
+    },
+    "locations": {
+      "Spirit Temple Statue Base": "true"
+    }
+  },
+  "Spirit Temple Statue Adult": {
+    "dungeon": "Spirit",
+    "exits": {
+      "Spirit Temple Statue": "true",
+      "Spirit Temple Adult Upper": "has(SMALL_KEY_SPIRIT, 4)"
+    },
+    "locations": {
+      "Spirit Temple Statue Hands": "has(BOOTS_HOVER) && can_longshot && can_play(SONG_ZELDA)",
+      "Spirit Temple Statue Upper Right": "has(BOOTS_HOVER) && has(HAMMER)"
+    }
+  },
+  "Spirit Temple Adult Upper": {
+    "dungeon": "Spirit",
+    "exits": {
+      "Spirit Temple Adult Upper 2": "has_explosives",
+      "Spirit Temple Adult Climb 2": "has(SMALL_KEY_SPIRIT, 5)"
+    }
+  },
+  "Spirit Temple Adult Upper 2": {
+    "dungeon": "Spirit",
+    "exits": {
+      "Spirit Temple Adult Hand": "true"
+    },
+    "locations": {
+      "Spirit Temple Adult Late Sun on Wall": "has_mirror_shield"
+    }
+  },
+  "Spirit Temple Adult Hand": {
+    "dungeon": "Spirit",
+    "exits": {
+      "Spirit Temple Adult Upper": "true",
+      "Spirit Temple Child Hand": "can_longshot"
+    },
+    "locations": {
+      "Spirit Temple Adult Invisible 1": "has_lens",
+      "Spirit Temple Adult Invisible 2": "has_lens",
+      "Spirit Temple Mirror Shield": "true"
+    }
+  },
+  "Spirit Temple Adult Climb 2": {
+    "dungeon": "Spirit",
+    "events": {
+      "SPIRIT_LIGHT_STATUE": "has_mirror_shield && has_explosives"
+    },
+    "locations": {
+      "Spirit Temple Adult Boss Key Chest": "can_play(SONG_ZELDA)",
+      "Spirit Temple Adult Topmost Sun on Wall": "has_mirror_shield"
+    }
+  },
+  "Spirit Temple Boss": {
+    "locations": {
+      "Spirit Temple Boss HC": "true",
+      "Spirit Temple Boss": "true"
+    }
+  }
+}

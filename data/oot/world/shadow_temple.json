@@ -1,0 +1,73 @@
+{
+  "Shadow Temple Entrance": {
+    "dungeon": "Shadow",
+    "exits": {
+      "Graveyard Upper": "true",
+      "Shadow Temple Pit": "has(BOOTS_HOVER) || has(HOOKSHOT)"
+    }
+  },
+  "Shadow Temple Pit": {
+    "dungeon": "Shadow",
+    "exits": {
+      "Shadow Temple Main": "has(BOOTS_HOVER) && has_lens"
+    },
+    "locations": {
+      "Shadow Temple Map": "has_lens",
+      "Shadow Temple Hover Boots": "has_lens"
+    }
+  },
+  "Shadow Temple Main": {
+    "dungeon": "Shadow",
+    "exits": {
+      "Shadow Temple Open": "has(SMALL_KEY_SHADOW, 1) && has_explosives_or_hammer"
+    },
+    "locations": {
+      "Shadow Temple Silver Rupees": "has(HOOKSHOT)",
+      "Shadow Temple Compass": "true"
+    }
+  },
+  "Shadow Temple Open": {
+    "dungeon": "Shadow",
+    "exits": {
+      "Shadow Temple Wind": "has(SMALL_KEY_SHADOW, 3) && has(HOOKSHOT)"
+    },
+    "locations": {
+      "Shadow Temple Spinning Blades Visible": "true",
+      "Shadow Temple Spinning Blades Invisible": "true",
+      "Shadow Temple Falling Spikes Lower": "has(STRENGTH)",
+      "Shadow Temple Falling Spikes Upper 1": "has(STRENGTH)",
+      "Shadow Temple Falling Spikes Upper 2": "has(STRENGTH)",
+      "Shadow Temple Invisible Spike Room": "has(SMALL_KEY_SHADOW, 2) && has(HOOKSHOT)",
+      "Shadow Temple Skull": "has(SMALL_KEY_SHADOW, 2) && has(HOOKSHOT) && has(BOMB_BAG)"
+    }
+  },
+  "Shadow Temple Wind": {
+    "dungeon": "Shadow",
+    "exits": {
+      "Shadow Temple Boat": "has(SMALL_KEY_SHADOW, 4) && can_play(SONG_ZELDA)"
+    },
+    "locations": {
+      "Shadow Temple Wind Room Hint": "true",
+      "Shadow Temple After Wind": "true",
+      "Shadow Temple After Wind Invisible": "has_explosives"
+    }
+  },
+  "Shadow Temple Boat": {
+    "dungeon": "Shadow",
+    "exits": {
+      "Shadow Temple Boss": "has(SMALL_KEY_SHADOW, 5) && has(BOSS_KEY_SHADOW) && has(BOW)"
+    },
+    "locations": {
+      "Shadow Temple Boss Key Room 1": "can_use_din",
+      "Shadow Temple Boss Key Room 2": "can_use_din",
+      "Shadow Temple Invisible Floormaster": "true"
+    }
+  },
+  "Shadow Temple Boss": {
+    "dungeon": "Shadow",
+    "locations": {
+      "Shadow Temple Boss HC": "true",
+      "Shadow Temple Boss": "true"
+    }
+  }
+}

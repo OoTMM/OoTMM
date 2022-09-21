@@ -8,6 +8,8 @@ NPC override IDs:
 03 Zora Diving Game, silver scale
 04 Link the Goron, Goron Tunic
 05 King Zora, Zora Tunic
+06 Song of Storms
+07 Guerudo Member Card
 
 SPIRITUAL
 Emerald:  1240 10e0
@@ -33,3 +35,6 @@ MM NPCs:
 
 ===== MISSING FROM LOGIC =====
 Tomb Royal: <!-- <chest id="00" content="BOMBS_10"/> Requires fire -->
+
+=== Spirit Temple ===
+Keys before reaching statue: child = 5, adult = 3

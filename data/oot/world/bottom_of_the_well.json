@@ -1,0 +1,24 @@
+{
+  "Bottom of the Well": {
+    "dungeon": "BotW",
+    "exits": {
+      "Kakariko": "true"
+    },
+    "locations": {
+      "Bottom of the Well Compass": "has_lens",
+      "Bottom of the Well Under Debris":  "has_explosives",
+      "Bottom of the Well Back West": "has_explosives && has_lens",
+      "Bottom of the Well East": "has_lens",
+      "Bottom of the Well Front West":  "has_lens",
+      "Bottom of the Well Underwater":  "can_play(SONG_ZELDA)",
+      "Bottom of the Well East Cage": "has(SMALL_KEY_BOTW, 3) && has_lens",
+      "Bottom of the Well Blood Chest": "has_lens",
+      "Bottom of the Well Underwater 2":  "can_play(SONG_ZELDA)",
+      "Bottom of the Well Map": "has_bombflowers",
+      "Bottom of the Well Coffin":  "can_play(SONG_ZELDA)",
+      "Bottom of the Well Pits":  "has(SMALL_KEY_BOTW, 3)",
+      "Bottom of the Well Lens":  "can_play(SONG_ZELDA)",
+      "Bottom of the Well Lens Side Chest": "can_play(SONG_ZELDA) && has_lens"
+    }
+  }
+}

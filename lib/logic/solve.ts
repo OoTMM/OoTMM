@@ -24,6 +24,7 @@ export const ITEMS_DUNGEON_REWARDS = new Set([
 
 export const ITEMS_REQUIRED = new Set<string>([
   'OOT_SWORD',
+  'OOT_SHIELD',
   'OOT_CHICKEN',
   'OOT_OCARINA',
   'OOT_SLINGSHOT',
@@ -35,6 +36,9 @@ export const ITEMS_REQUIRED = new Set<string>([
   'OOT_SONG_TIME',
   'OOT_SONG_STORMS',
   'OOT_SONG_SARIA',
+  'OOT_SONG_SHADOW',
+  'OOT_SONG_FIRE',
+  'OOT_SONG_SPIRIT',
   'OOT_ZELDA_LETTER',
   'OOT_RUTO_LETTER',
   'OOT_STRENGTH',
@@ -49,6 +53,10 @@ export const ITEMS_REQUIRED = new Set<string>([
   'OOT_HAMMER',
   'OOT_SPELL_FIRE',
   'OOT_MAGIC_UPGRADE',
+  'OOT_LENS',
+  'OOT_BOMBCHUS_10',
+  'OOT_ARROW_FIRE',
+  'OOT_GERUDO_CARD',
   'MM_MASK_DEKU',
   'MM_MASK_GORON',
   'MM_MASK_ZORA',
@@ -162,6 +170,7 @@ const makeItemPools = (world: World) => {
   maxRequired(pools, 'OOT_SLINGSHOT', 1);
   maxRequired(pools, 'OOT_MAGIC_UPGRADE', 1);
   maxRequired(pools, 'OOT_OCARINA', 1);
+  maxRequired(pools, 'OOT_BOMBCHUS_10', 1);
 
   return pools;
 };

@@ -7,6 +7,18 @@
 #define AGE_ADULT 0
 #define AGE_CHILD 1
 
+/* Start: 0x1d64 */
+typedef struct PACKED
+{
+    char unk_00[4];
+    u32  next;
+    u8   active;
+    char unk_09[0x1f];
+    u16* unk_28;
+    char unk_2c[0x4];
+}
+CutsceneContext;
+
 typedef struct PACKED
 {
     char    unk_0[0x128];
@@ -82,7 +94,9 @@ typedef struct GameState_Play
 {
     GameState           gs;
     u16                 sceneId;
-    char                unk_000a6[0xfde2];
+    char                unk_000a6[0x1cbe];
+    CutsceneContext     cutscene;
+    char                unk_1d94[0xe0f4];
     char                textBuffer[4]; /* Real size unknown */
     char                unk_0fe8c[0x8d4];
     PauseContext        pauseCtx;
@@ -94,6 +108,7 @@ typedef struct GameState_Play
 }
 GameState_Play;
 
+ASSERT_OFFSET(GameState_Play, cutscene, 0x1d64);
 ASSERT_OFFSET(GameState_Play, transition, 0x11d30);
 ASSERT_OFFSET(GameState_Play, transition.type, 0x11e15);
 ASSERT_OFFSET(GameState_Play, transition.entrance, 0x11e1a);

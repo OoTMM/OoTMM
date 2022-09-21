@@ -56,9 +56,21 @@ typedef struct PACKED ALIGNED(0x4) Actor
 #if defined(GAME_MM)
     u32         unk_mm1;
 #endif
-    char        unk4[0x6a];
+    char        unk_4a[0x06];
+    Vector3f    scale;
+    Vector3f    velocity;
+    float       speedXZ;
+    float       gravity;
+    float       minVelocityY;
+    char        unk_74[0x40];
     Vector3s    rot2;
-    char        unk5[0x6e];
+    char        unk_ba[2];
+    float       modelOffsetY;
+    char        unk_c0[0x58];
+    Actor*      attachedA;
+    Actor*      attachedB;
+    Actor*      prev;
+    Actor*      next;
     void*       init;
     void*       fini;
     void*       update;

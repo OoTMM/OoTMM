@@ -2,7 +2,9 @@
   "SPAWN": {
     "exits": {
       "Link's House": "is_child",
-      "Temple of Time": "is_adult && event(TIME_TRAVEL)"
+      "Temple of Time": "is_adult && event(TIME_TRAVEL)",
+      "Graveyard Upper": "can_play(SONG_SHADOW)",
+      "Desert Colossus": "can_play(SONG_SPIRIT)"
     }
   },
   "Link's House": {
@@ -45,6 +47,7 @@
       "Kakariko": "true",
       "Zora River": "has_explosives",
       "Lake Hylia": "true",
+      "Gerudo Valley": "true",
       "MM Clock Town": "is_child"
     },
     "locations": {
@@ -96,11 +99,14 @@
     "exits": {
       "Hyrule Field": "true",
       "Death Mountain": "has(ZELDA_LETTER)",
-      "Graveyard": "true"
+      "Graveyard": "true",
+      "Bottom of the Well": "is_child && can_play(SONG_STORMS) && has(SWORD)"
     },
     "locations": {
       "Anju's Bottle": "is_child",
-      "Windmill HP": "is_adult"
+      "Windmill HP": "is_adult",
+      "Windmill Song of Storms": "is_adult && has(OCARINA)",
+      "Kakariko Song Shadow": "is_adult && has(MEDALLION_FOREST) && has(MEDALLION_FIRE) && has(MEDALLION_WATER)"
     }
   },
   "Graveyard": {
@@ -112,6 +118,12 @@
       "Graveyard Royal Tomb": "can_play(SONG_ZELDA) && has(SWORD)",
       "Graveyard Fairy Tomb": "true",
       "Graveyard Dampe Tomb Hookshot": "is_adult"
+    }
+  },
+  "Graveyard Upper": {
+    "exits": {
+      "Graveyard": "true",
+      "Shadow Temple Entrance": "is_adult && can_use_din"
     }
   },
   "Death Mountain": {
@@ -171,7 +183,8 @@
       "SCARECROW": "is_adult && event(SCARECROW_CHILD)"
     },
     "locations": {
-      "Lake Hylia Underwater Bottle": "has(SCALE)"
+      "Lake Hylia Underwater Bottle": "has(SCALE)",
+      "Lake Hylia Fire Arrow": "can_use_bow && (event(WATER_TEMPLE_CLEARED) || (can_longshot && scarecrow_hookshot))"
     }
   },
   "Zora Fountain": {
@@ -203,6 +216,40 @@
   "Death Mountain Crater Warp": {
     "exits": {
       "Fire Temple Entrance": "is_adult && has(TUNIC_GORON)"
+    }
+  },
+  "Gerudo Valley": {
+    "exits": {
+      "Lake Hylia": "true",
+      "Hyrule Field": "true",
+      "Gerudo Valley After Bridge": "can_longshot"
+    }
+  },
+  "Gerudo Valley After Bridge": {
+    "exits": {
+      "Lake Hylia": "true",
+      "Gerudo Fortress Exterior": "true"
+    }
+  },
+  "Gerudo Fortress Exterior": {
+    "exits": {
+      "Gerudo Fortress": "can_hookshot",
+      "Gerudo Valley After Bridge": "true",
+      "Desert": "has(GERUDO_CARD)"
+    }
+  },
+  "Desert": {
+    "exits": {
+      "Gerudo Fortress Exterior": "true",
+      "Desert Colossus": "has_lens && can_hookshot"
+    }
+  },
+  "Desert Colossus": {
+    "exits": {
+      "Spirit Temple Entrance": "true"
+    },
+    "locations": {
+      "Desert Colossus Song Spirit": "true"
     }
   }
 }

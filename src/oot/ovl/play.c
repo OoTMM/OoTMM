@@ -22,10 +22,11 @@ static void debugCheat(GameState_Play* play)
         gSave.equipment.boots = 0x7;
         gSave.upgrades.bulletBag = 3;
         gSave.upgrades.bombBag = 3;
+        gSave.upgrades.quiver = 3;
         gSave.upgrades.dive = 2;
         gSave.ammo[ITS_OOT_SLINGSHOT] = 50;
         gSave.ammo[ITS_OOT_BOMBS] = 40;
-        gSave.upgrades.bombBag = 3;
+        gSave.ammo[ITS_OOT_BOW] = 50;
         gSave.quest.songZelda = 1;
         gSave.quest.songSaria = 1;
         gSave.quest.songTime = 1;

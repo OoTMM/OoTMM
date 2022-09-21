@@ -62,6 +62,12 @@ Actor* hookSpawnActor(void* const_1, GameState_Play* play, s16 actorId, float x,
             rz = 0x1000 | ((variable >> 8) & 0x3f);
             variable = GI_OOT_HEART_PIECE;
         }
+        else if ((variable & 0xff) == 0x11) /* Small Key */
+        {
+            actorId = AC_ITEM_CUSTOM;
+            rz = 0x1000 | ((variable >> 8) & 0x3f);
+            variable = GI_OOT_SMALL_KEY;
+        }
         break;
     case AC_DOOR_WARP1:
         /* Blue warp */
@@ -89,6 +95,12 @@ Actor* hookSpawnActor(void* const_1, GameState_Play* play, s16 actorId, float x,
         case SCE_LAIR_MORPHA:
             comboSpawnSpecial(play, x, y, z, EV_OOT_CHK_MEDALLION_WATER, GI_OOT_MEDALLION_WATER);
             break;
+        case SCE_LAIR_BONGO_BONGO:
+            comboSpawnSpecial(play, x, y, z, EV_OOT_CHK_MEDALLION_SHADOW, GI_OOT_MEDALLION_SHADOW);
+            break;
+        case SCE_LAIR_TWINROVA:
+            comboSpawnSpecial(play, x, y, z, EV_OOT_CHK_MEDALLION_SPIRIT, GI_OOT_MEDALLION_SPIRIT);
+            break;
         }
         break;
     case AC_ITEM_B_HEART:
@@ -113,6 +125,12 @@ Actor* hookSpawnActor(void* const_1, GameState_Play* play, s16 actorId, float x,
             actorId = AC_ITEM_CUSTOM;
             rz = 0x2000 | EV_OOT_CHK_RUTO_LETTER;
             variable = GI_OOT_RUTO_LETTER;
+            break;
+        case 0x7:
+            /* Fire Arrow */
+            actorId = AC_ITEM_CUSTOM;
+            rz = 0x2000 | EV_OOT_CHK_ARROW_FIRE;
+            variable = GI_OOT_ARROW_FIRE;
             break;
         }
         break;

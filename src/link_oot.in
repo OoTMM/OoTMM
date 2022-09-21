@@ -67,6 +67,8 @@ PlaySound6 = 0x800c806c;
 
 HasActorGivenItem = 0x80022bb0;
 ActorDestroy = 0x80020eb4;
+ActorUpdateVelocity = 0x8002121c;
+ActorSetCollisionCylinder = 0x80021e6c;
 
 GetEventChk = 0x800288b4;
 SetEventChk = 0x800288e0;

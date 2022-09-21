@@ -16,22 +16,23 @@
 #define ENTRANCE_MARKET       0x1d1
 #define ENTRANCE_DEKUTREE     0x000
 #define ENTRANCE_TOT          0x053
+#define ENTRANCE_LAKE         0x4e6
 
 /* Disable first cutscene */
-PATCH_START(0x800fbf60)
+PATCH_START 0x800fbf60
 .int 0x10
 PATCH_END
 
-PATCH_START(0x80090c58)
+PATCH_START 0x80090c58
 li t9, 0x0
 PATCH_END
 
 /* Spawn child link at a specific entrance */
-PATCH_START(0x800903e0)
+PATCH_START 0x800903e0
   li t4,ENTRANCE_MIDO
 PATCH_END
 
 /* Hook save creation to create MM save */
-PATCH_START(0x80090eb0)
+PATCH_START 0x80090eb0
   j comboCreateSaveMM
 PATCH_END
