@@ -43,7 +43,8 @@
   "Hyrule Field": {
     "exits": {
       "Lost Woods": "true",
-      "Market": "true",
+      "Market": "is_child",
+      "Market Destroyed": "is_adult",
       "Kakariko": "true",
       "Zora River": "has_explosives",
       "Lake Hylia": "true",
@@ -58,8 +59,15 @@
   "Market": {
     "exits": {
       "Hyrule Field": "true",
-      "Hyrule Castle": "is_child",
+      "Hyrule Castle": "true",
       "Temple of Time": "true"
+    }
+  },
+  "Market Destroyed": {
+    "exits": {
+      "Hyrule Field": "true",
+      "Temple of Time": "true",
+      "Ganon Castle Exterior": "true"
     }
   },
   "Hyrule Castle": {
@@ -74,6 +82,12 @@
     },
     "events": {
       "MEET_ZELDA": "has(CHICKEN)"
+    }
+  },
+  "Ganon Castle Exterior": {
+    "exits": {
+      "Market Destroyed": "true",
+      "Ganon Castle Main": "has_medallions"
     }
   },
   "Lost Woods": {
@@ -196,7 +210,8 @@
   },
   "Temple of Time": {
     "exits": {
-      "Market": "true"
+      "Market": "is_child",
+      "Market Destroyed": "is_adult"
     },
     "events": {
       "DOOR_OF_TIME_OPEN": "can_play(SONG_TIME)",
@@ -204,7 +219,8 @@
     },
     "locations": {
       "Temple of Time Master Sword": "is_child && event(DOOR_OF_TIME_OPEN)",
-      "Temple of Time Medallion": "is_adult && event(DOOR_OF_TIME_OPEN)"
+      "Temple of Time Medallion": "is_adult && event(DOOR_OF_TIME_OPEN)",
+      "Temple of Time Light Arrows": "is_adult && has_medallions"
     }
   },
   "Death Mountain Crater Bottom": {
@@ -235,7 +251,8 @@
     "exits": {
       "Gerudo Fortress": "can_hookshot",
       "Gerudo Valley After Bridge": "true",
-      "Desert": "has(GERUDO_CARD)"
+      "Desert": "has(GERUDO_CARD)",
+      "Gerudo Training Grounds Entrance": "has(GERUDO_CARD)"
     }
   },
   "Desert": {

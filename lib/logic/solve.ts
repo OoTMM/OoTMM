@@ -23,40 +23,41 @@ export const ITEMS_DUNGEON_REWARDS = new Set([
 ]);
 
 export const ITEMS_REQUIRED = new Set<string>([
-  'OOT_SWORD',
-  'OOT_SHIELD',
-  'OOT_CHICKEN',
-  'OOT_OCARINA',
-  'OOT_SLINGSHOT',
+  'OOT_ARROW_FIRE',
+  'OOT_ARROW_LIGHT',
+  'OOT_BOMB_BAG',
+  'OOT_BOMBCHUS_10',
   'OOT_BOOMERANG',
+  'OOT_BOOTS_HOVER',
+  'OOT_BOOTS_IRON',
   'OOT_BOW',
-  'OOT_SONG_ZELDA',
-  'OOT_SONG_SUN',
+  'OOT_CHICKEN',
+  'OOT_EMPTY_BOTTLE',
+  'OOT_GERUDO_CARD',
+  'OOT_HAMMER',
+  'OOT_HOOKSHOT',
+  'OOT_LENS',
+  'OOT_MAGIC_UPGRADE',
+  'OOT_OCARINA',
+  'OOT_RUTO_LETTER',
+  'OOT_SCALE',
+  'OOT_SHIELD',
+  'OOT_SLINGSHOT',
   'OOT_SONG_EPONA',
-  'OOT_SONG_TIME',
-  'OOT_SONG_STORMS',
+  'OOT_SONG_FIRE',
   'OOT_SONG_SARIA',
   'OOT_SONG_SHADOW',
-  'OOT_SONG_FIRE',
   'OOT_SONG_SPIRIT',
-  'OOT_ZELDA_LETTER',
-  'OOT_RUTO_LETTER',
+  'OOT_SONG_STORMS',
+  'OOT_SONG_SUN',
+  'OOT_SONG_TIME',
+  'OOT_SONG_ZELDA',
+  'OOT_SPELL_FIRE',
   'OOT_STRENGTH',
-  'OOT_BOMB_BAG',
-  'OOT_SCALE',
-  'OOT_EMPTY_BOTTLE',
-  'OOT_HOOKSHOT',
+  'OOT_SWORD',
   'OOT_TUNIC_GORON',
   'OOT_TUNIC_ZORA',
-  'OOT_BOOTS_IRON',
-  'OOT_BOOTS_HOVER',
-  'OOT_HAMMER',
-  'OOT_SPELL_FIRE',
-  'OOT_MAGIC_UPGRADE',
-  'OOT_LENS',
-  'OOT_BOMBCHUS_10',
-  'OOT_ARROW_FIRE',
-  'OOT_GERUDO_CARD',
+  'OOT_ZELDA_LETTER',
   'MM_MASK_DEKU',
   'MM_MASK_GORON',
   'MM_MASK_ZORA',
@@ -259,7 +260,7 @@ class Solver {
 
     rewards = shuffle(this.random, rewards);
     for (let i = 0; i < rewards.length; i++) {
-      this.placement[locations[i]] = rewards[i];
+      this.place(locations[i], rewards[i]);
       removeItem(this.pools.dungeon, rewards[i]);
     }
   }
@@ -280,17 +281,19 @@ class Solver {
   }
 
   private randomRestricted(pool: Items, assume: Items, item: string, locations: Set<string>, reachable?: Reachable) {
-    const assumedItems = combinedItems(this.pools.required, assume);
+    const rewardsPool: Items = Array.from(ITEMS_DUNGEON_REWARDS).reduce((acc, x) => ({ ...acc, [x]: 1 }), {});
+    const assumedItems = combinedItems(combinedItems(this.pools.required, assume), rewardsPool);
     const assumedReachable = pathfind(this.world, assumedItems, reachable);
 
     let validLocations = Array.from(locations).filter(x => assumedReachable.locations.has(x)).filter(x => !this.placement[x]);
+
     /* Fairies can only be in chests */
     if (item === 'MM_STRAY_FAIRY') {
       validLocations = validLocations.filter(x => this.world.checks[x].type === 'chest');
     }
 
     const location = sample(this.random, validLocations);
-    this.placement[location] = item;
+    this.place(location, item);
     removeItem(pool, item);
     addItem(assume, item);
 
@@ -317,7 +320,7 @@ class Solver {
     const location = sample(this.random, unplacedLocs);
 
     /* Place the selected item at the selected location */
-    this.placement[location] = requiredItem;
+    this.place(location, requiredItem);
   }
 
   private fill() {
@@ -330,7 +333,7 @@ class Solver {
         continue;
       }
       const item = shuffledPool[i++];
-      this.placement[location] = item;
+      this.place(location, item);
     }
     if (i !== shuffledPool.length) {
       throw new Error('Item Count Error');
@@ -348,6 +351,13 @@ class Solver {
       }
     });
     return changed;
+  }
+
+  private place(location: string, item: string) {
+    if (this.world.checks[location] === undefined) {
+      throw new Error('Invalid Location: ' + location);
+    }
+    this.placement[location] = item;
   }
 }
 
