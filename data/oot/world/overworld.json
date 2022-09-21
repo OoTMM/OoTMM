@@ -235,7 +235,8 @@
     "exits": {
       "Gerudo Fortress": "can_hookshot",
       "Gerudo Valley After Bridge": "true",
-      "Desert": "has(GERUDO_CARD)"
+      "Desert": "has(GERUDO_CARD)",
+      "Gerudo Training Grounds Entrance": "has(GERUDO_CARD)"
     }
   },
   "Desert": {

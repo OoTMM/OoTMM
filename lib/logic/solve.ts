@@ -259,7 +259,7 @@ class Solver {
 
     rewards = shuffle(this.random, rewards);
     for (let i = 0; i < rewards.length; i++) {
-      this.placement[locations[i]] = rewards[i];
+      this.place(locations[i], rewards[i]);
       removeItem(this.pools.dungeon, rewards[i]);
     }
   }
@@ -284,13 +284,14 @@ class Solver {
     const assumedReachable = pathfind(this.world, assumedItems, reachable);
 
     let validLocations = Array.from(locations).filter(x => assumedReachable.locations.has(x)).filter(x => !this.placement[x]);
+
     /* Fairies can only be in chests */
     if (item === 'MM_STRAY_FAIRY') {
       validLocations = validLocations.filter(x => this.world.checks[x].type === 'chest');
     }
 
     const location = sample(this.random, validLocations);
-    this.placement[location] = item;
+    this.place(location, item);
     removeItem(pool, item);
     addItem(assume, item);
 
@@ -317,7 +318,7 @@ class Solver {
     const location = sample(this.random, unplacedLocs);
 
     /* Place the selected item at the selected location */
-    this.placement[location] = requiredItem;
+    this.place(location, requiredItem);
   }
 
   private fill() {
@@ -330,7 +331,7 @@ class Solver {
         continue;
       }
       const item = shuffledPool[i++];
-      this.placement[location] = item;
+      this.place(location, item);
     }
     if (i !== shuffledPool.length) {
       throw new Error('Item Count Error');
@@ -348,6 +349,13 @@ class Solver {
       }
     });
     return changed;
+  }
+
+  private place(location: string, item: string) {
+    if (this.world.checks[location] === undefined) {
+      throw new Error('Invalid Location: ' + location);
+    }
+    this.placement[location] = item;
   }
 }
 
