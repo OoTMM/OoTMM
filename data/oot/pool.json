@@ -148,5 +148,27 @@
   "Gerudo Fortress Jail 2":                   ["collectible", "0c", "0f", "SMALL_KEY_GF"],
   "Gerudo Fortress Jail 3":                   ["collectible", "0c", "0a", "SMALL_KEY_GF"],
   "Gerudo Fortress Jail 4":                   ["collectible", "0c", "0e", "SMALL_KEY_GF"],
-  "Gerudo Member Card":                       ["npc",         null, "07", "GERUDO_CARD"]
+  "Gerudo Member Card":                       ["npc",         null, "07", "GERUDO_CARD"],
+
+  "Spirit Temple Child First Chest":          ["chest",       "06", "08", "RUPEE_BLUE"],
+  "Spirit Temple Child Second Chest":         ["chest",       "06", "00", "SMALL_KEY_SPIRIT"],
+  "Spirit Temple Child Climb 1":              ["chest",       "06", "0c", "RUPEE_BLUE"],
+  "Spirit Temple Child Climb 2":              ["chest",       "06", "06", "BOMBCHUS_10"],
+  "Spirit Temple Statue Base":                ["chest",       "06", "03", "MAP_SPIRIT"],
+  "Spirit Temple Statue Hands":               ["chest",       "06", "02", "SMALL_KEY_SPIRIT"],
+  "Spirit Temple Statue Upper Right":         ["chest",       "06", "0f", "RUPEE_BLUE"],
+  "Spirit Temple Sun Block Room Torches":     ["chest",       "06", "01", "SMALL_KEY_SPIRIT"],
+  "Spirit Temple Adult Silver Rupees":        ["chest",       "06", "07", "SMALL_KEY_SPIRIT"],
+  "Spirit Temple Adult Lullaby":              ["chest",       "06", "04", "COMPASS_SPIRIT"],
+  "Spirit Temple Adult Suns on Wall 1":       ["chest",       "06", "0d", "RECOVERY_HEART"],
+  "Spirit Temple Adult Suns on Wall 2":       ["chest",       "06", "0e", "ICE_TRAP"],
+  "Spirit Temple Adult Invisible 1":          ["chest",       "06", "14", "RECOVERY_HEART"],
+  "Spirit Temple Adult Invisible 2":          ["chest",       "06", "15", "RECOVERY_HEART"],
+  "Spirit Temple Adult Late Sun on Wall":     ["chest",       "06", "05", "SMALL_KEY_SPIRIT"],
+  "Spirit Temple Adult Boss Key Chest":       ["chest",       "06", "0a", "BOSS_KEY_SPIRIT"],
+  "Spirit Temple Adult Topmost Sun on Wall":  ["chest",       "06", "12", "BOMBS_20"],
+  "Spirit Temple Silver Gauntlets":           ["chest",       "5c", "0b", "STRENGTH"],
+  "Spirit Temple Mirror Shield":              ["chest",       "5c", "09", "SHIELD"],
+  "Spirit Temple Boss HC":                    ["collectible", "17", "1f", "HEART_CONTAINER"],
+  "Spirit Temple Boss":                       ["special",     null, "c8", "MEDALLION_SPIRIT"]
 }

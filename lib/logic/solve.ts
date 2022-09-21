@@ -24,6 +24,7 @@ export const ITEMS_DUNGEON_REWARDS = new Set([
 
 export const ITEMS_REQUIRED = new Set<string>([
   'OOT_SWORD',
+  'OOT_SHIELD',
   'OOT_CHICKEN',
   'OOT_OCARINA',
   'OOT_SLINGSHOT',

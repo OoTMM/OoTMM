@@ -35,3 +35,6 @@ MM NPCs:
 
 ===== MISSING FROM LOGIC =====
 Tomb Royal: <!-- <chest id="00" content="BOMBS_10"/> Requires fire -->
+
+=== Spirit Temple ===
+Keys before reaching statue: child = 5, adult = 3

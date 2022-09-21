@@ -29,6 +29,7 @@ const u8 kOotTradeChild[] = {
 
 #if defined(GAME_OOT)
 /* Used for dungeons, to map boss lairs to their main scene */
+/* Also, colossus is considered to be in spirit */
 static u16 mainScene(u16 sceneId)
 {
     switch (sceneId)
@@ -46,6 +47,7 @@ static u16 mainScene(u16 sceneId)
     case SCE_LAIR_MORPHA:
         return SCE_TEMPLE_WATER;
     case SCE_LAIR_TWINROVA:
+    case SCE_DESERT_COLOSSUS:
         return SCE_TEMPLE_SPIRIT;
     case SCE_LAIR_BONGO_BONGO:
         return SCE_TEMPLE_SHADOW;
