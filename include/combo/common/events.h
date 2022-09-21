@@ -29,6 +29,7 @@
 #define EV_OOT_CHK_SONG_TIME                0xa9
 #define EV_OOT_CHK_SONG_SPIRIT              0xac
 #define EV_OOT_CHK_SARIA_OCARINA            0xc1
+#define EV_OOT_CHK_LIGHT_ARROW              0xc4
 #define EV_OOT_CHK_MEDALLION_SPIRIT         0xc8
 
 /* Custom flags that seems unused */

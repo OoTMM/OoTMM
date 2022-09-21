@@ -28,6 +28,7 @@
   "Hyrule Field Song of Time":      ["special",       null, "a9", "SONG_TIME"],
   "Temple of Time Master Sword":    ["collectible",   "43", "1f", "SWORD"],
   "Temple of Time Medallion":       ["collectible",   "43", "1e", "MEDALLION_LIGHT"],
+  "Temple of Time Light Arrows":    ["special",       null, "c4", "ARROW_LIGHT"],
   "Graveyard Dampe Tomb Hookshot":  ["chest",         "48", "00", "HOOKSHOT"],
   "Windmill HP":                    ["collectible",   "48", "01", "HEART_PIECE"],
   "Windmill Song of Storms":        ["npc",           null, "05", "SONG_STORMS"],
@@ -193,5 +194,22 @@
   "Gerudo Training Maze Chest 1":                         ["chest",       "0b", "06", "RUPEE_PURPLE"],
   "Gerudo Training Maze Chest 2":                         ["chest",       "0b", "0a", "RUPEE_RED"],
   "Gerudo Training Maze Chest 3":                         ["chest",       "0b", "09", "ARROWS_30"],
-  "Gerudo Training Maze Chest 4":                         ["chest",       "0b", "0c", "ARROW_ICE"]
+  "Gerudo Training Maze Chest 4":                         ["chest",       "0b", "0c", "ARROW_ICE"],
+
+  "Ganon Castle Water Chest 1":                     ["chest",       "0d", "06", "RECOVERY_HEART"],
+  "Ganon Castle Water Chest 2":                     ["chest",       "0d", "07", "ICE_TRAP"],
+  "Ganon Castle Forest Chest":                      ["chest",       "0d", "09", "RUPEE_BLUE"],
+  "Ganon Castle Light Chest Center":                ["chest",       "0d", "10", "SMALL_KEY_GANON"],
+  "Ganon Castle Light Chest Around 1":              ["chest",       "0d", "0a", "ARROWS_30"],
+  "Ganon Castle Light Chest Around 2":              ["chest",       "0d", "0b", "ICE_TRAP"],
+  "Ganon Castle Light Chest Around 3":              ["chest",       "0d", "0c", "RUPEE_BLUE"],
+  "Ganon Castle Light Chest Around 4":              ["chest",       "0d", "0d", "RECOVERY_HEART"],
+  "Ganon Castle Light Chest Around 5":              ["chest",       "0d", "0e", "ICE_TRAP"],
+  "Ganon Castle Light Chest Around 6":              ["chest",       "0d", "0f", "ICE_TRAP"],
+  "Ganon Castle Light Chest Lullaby":               ["chest",       "0d", "11", "SMALL_KEY_GANON"],
+  "Ganon Castle Shadow Chest 1":                    ["chest",       "0d", "08", "RUPEE_BLUE"],
+  "Ganon Castle Shadow Chest 2":                    ["chest",       "0d", "05", "STRENGTH"],
+  "Ganon Castle Spirit Chest 1":                    ["chest",       "0d", "12", "BOMBCHUS_20"],
+  "Ganon Castle Spirit Chest 2":                    ["chest",       "0d", "14", "ARROWS_10"],
+  "Ganon Castle Boss Key":                          ["chest",       "0a", "0b", "BOSS_KEY_GANON"]
 }
