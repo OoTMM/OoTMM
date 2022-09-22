@@ -108,12 +108,12 @@ const loadMacros = async (exprParser: ExprParser, filename: string) => {
 const loadWorldGame = async (world: World, game: Game) => {
   /* Create the expr parser */
   const exprParser = new ExprParser(game);
-  await loadMacros(exprParser, path.join(PATH_DATA, game, 'macros.json'));
+  await loadMacros(exprParser, path.join(PATH_DATA, game, 'macros.yml'));
 
   /* Load the world */
-  const worldFiles = await glob(path.resolve(PATH_DATA, game, 'world', '*.json'));
+  const worldFiles = await glob(path.resolve(PATH_DATA, game, 'world', '*.yml'));
   await Promise.all(worldFiles.map(x => loadWorldRegions(world, game, exprParser, x)));
-  const poolFile = path.resolve(PATH_DATA, game, 'pool.json');
+  const poolFile = path.resolve(PATH_DATA, game, 'pool.yml');
   await loadWorldPool(world, game, poolFile);
 }
 
