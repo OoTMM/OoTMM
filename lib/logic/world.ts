@@ -81,7 +81,7 @@ const loadWorldPool = async (world: World, game: Game, filename: string) => {
     const d = data[location];
     const name = gameId(game, location, ' ');
     const item = gameId(game, d[3], '_');
-    const check = { game, type: d[0], sceneId: parseInt(d[1], 16), id: parseInt(d[2], 16), item } as WorldCheck;
+    const check = { game, type: d[0], sceneId: d[1], id: d[2], item } as WorldCheck;
     world.checks[name] = check;
     world.pool.push(item);
   }
