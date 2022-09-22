@@ -3,11 +3,13 @@ import path from 'path';
 
 import glob from 'glob-promise';
 import YAML from 'yaml';
+import * as CSV from 'csv';
 
 import { Game, GAMES, PATH_DATA } from '../config';
 import { gameId } from '../util';
 import { Expr } from './expr';
 import { ExprParser } from './expr-parser';
+import { createReadStream } from 'fs';
 
 type ExprMap = {
   [k: string]: Expr;
@@ -75,14 +77,18 @@ const loadWorldRegions = async (world: World, game: Game, exprParser: ExprParser
 };
 
 const loadWorldPool = async (world: World, game: Game, filename: string) => {
-  const text = await fs.readFile(filename, 'utf8');
-  const data = YAML.parse(text) as any;
-  for (const location in data) {
-    const d = data[location];
-    const name = gameId(game, location, ' ');
-    const item = gameId(game, d[3], '_');
-    const check = { game, type: d[0], sceneId: d[1], id: d[2], item } as WorldCheck;
-    world.checks[name] = check;
+  const text = createReadStream(filename);
+  const csvParser = CSV.parse({ columns: ['location', 'type', 'sceneId', 'id', 'item'], skip_empty_lines: true, trim: true });
+  text.pipe(csvParser);
+  for await (const record of csvParser) {
+    const location = gameId(game, String(record.location), ' ');
+    const type = String(record.type);
+    const sceneId = Number(record.sceneId);
+    const id = Number(record.id);
+    const item = gameId(game, String(record.item), '_');
+
+    const check = { game, type, sceneId, id, item } as WorldCheck;
+    world.checks[location] = check;
     world.pool.push(item);
   }
 };
@@ -113,7 +119,7 @@ const loadWorldGame = async (world: World, game: Game) => {
   /* Load the world */
   const worldFiles = await glob(path.resolve(PATH_DATA, game, 'world', '*.yml'));
   await Promise.all(worldFiles.map(x => loadWorldRegions(world, game, exprParser, x)));
-  const poolFile = path.resolve(PATH_DATA, game, 'pool.yml');
+  const poolFile = path.resolve(PATH_DATA, game, 'pool.csv');
   await loadWorldPool(world, game, poolFile);
 }
 
