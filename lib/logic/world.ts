@@ -1,7 +1,8 @@
 import fs from 'fs/promises';
+import path from 'path';
 
 import glob from 'glob-promise';
-import path from 'path';
+import YAML from 'yaml';
 
 import { Game, GAMES, PATH_DATA } from '../config';
 import { gameId } from '../util';
@@ -47,7 +48,7 @@ const mapExprs = (exprParser: ExprParser, game: Game, data: any) => {
 
 const loadWorldRegions = async (world: World, game: Game, exprParser: ExprParser, filename: string) => {
   const text = await fs.readFile(filename, 'utf8');
-  const data = JSON.parse(text) as any;
+  const data = YAML.parse(text) as any;
 
   for (let name in data) {
     const region = data[name];
@@ -75,7 +76,7 @@ const loadWorldRegions = async (world: World, game: Game, exprParser: ExprParser
 
 const loadWorldPool = async (world: World, game: Game, filename: string) => {
   const text = await fs.readFile(filename, 'utf8');
-  const data = JSON.parse(text) as any;
+  const data = YAML.parse(text) as any;
   for (const location in data) {
     const d = data[location];
     const name = gameId(game, location, ' ');
@@ -88,7 +89,7 @@ const loadWorldPool = async (world: World, game: Game, filename: string) => {
 
 const loadMacros = async (exprParser: ExprParser, filename: string) => {
   const text = await fs.readFile(filename, 'utf8');
-  const data = JSON.parse(text) as any;
+  const data = YAML.parse(text) as any;
   for (let name in data) {
     const buffer = data[name];
 
