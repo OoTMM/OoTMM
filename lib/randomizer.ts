@@ -1,5 +1,5 @@
 import { logic, LogicResult } from './logic';
-import { DATA_GI } from './data';
+import { DATA_GI, DATA_SCENES } from './data';
 import { Game, GAMES } from "./config";
 
 const OFFSETS = {
@@ -69,12 +69,17 @@ const toU16Buffer = (data: number[]) => {
 };
 
 export const randomizeGame = async (game: Game, logic: LogicResult): Promise<Buffer> => {
+  const scenes = await DATA_SCENES;
   const buf: number[] = [];
   for (const c of logic.items) {
     if (c.game !== game) {
       continue;
     }
-    let { id, sceneId } = c;
+    let { id, scene } = c;
+    if (!scenes.hasOwnProperty(scene)) {
+      throw new Error(`Unknown scene ${scene}`);
+    }
+    let sceneId = scenes[scene];
     switch (c.type) {
     case 'special':
       sceneId = 0xf0;

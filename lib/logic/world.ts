@@ -24,7 +24,7 @@ type WorldRegion = {
 export type WorldCheck = {
   game: Game;
   type: 'chest' | 'npc' | 'special' | 'collectible';
-  sceneId: number;
+  scene: string;
   id: number;
   item: string;
 };
@@ -78,16 +78,16 @@ const loadWorldRegions = async (world: World, game: Game, exprParser: ExprParser
 
 const loadWorldPool = async (world: World, game: Game, filename: string) => {
   const text = createReadStream(filename);
-  const csvParser = CSV.parse({ columns: ['location', 'type', 'sceneId', 'id', 'item'], skip_empty_lines: true, trim: true });
+  const csvParser = CSV.parse({ columns: ['location', 'type', 'scene', 'id', 'item'], skip_empty_lines: true, trim: true });
   text.pipe(csvParser);
   for await (const record of csvParser) {
     const location = gameId(game, String(record.location), ' ');
     const type = String(record.type);
-    const sceneId = Number(record.sceneId);
+    const scene = gameId(game, String(record.scene), '_');
     const id = Number(record.id);
     const item = gameId(game, String(record.item), '_');
 
-    const check = { game, type, sceneId, id, item } as WorldCheck;
+    const check = { game, type, scene, id, item } as WorldCheck;
     world.checks[location] = check;
     world.pool.push(item);
   }

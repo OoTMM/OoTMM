@@ -118,7 +118,7 @@ MM_TREASURE_SHOP:                       0x17
 MM_STONE_TOWER_TEMPLE_INVERTED:         0x18
 MM_CLOCK_TOWER_ROOFTOP:                 0x19
 MM_OPENING:                             0x1a
-MM_WOODFALL_TEMPLE:                     0x1b
+MM_TEMPLE_WOODFALL:                     0x1b
 MM_PATH_MOUNTAIN_VILLAGE:               0x1c
 MM_ANCIENT_CASTLE_IKANA:                0x1d
 MM_DEKU_SCRUB_PLAYGROUND:               0x1e
