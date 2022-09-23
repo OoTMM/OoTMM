@@ -19,7 +19,7 @@ void BgDyYoseizo_Update(Actor* actor, GameState_Play* play)
     if (GetSwitchFlag(play, 0x38))
     {
         index = play->transition.spawnId;
-        if (play->sceneId == SCE_GREAT_FAIRY_FOUNTAIN_SPELLS)
+        if (play->sceneId == SCE_OOT_GREAT_FAIRY_FOUNTAIN_SPELLS)
             index += 3;
         itemId = kGreatFairyRewards[index];
         override = comboGetCollectibleOverride(play->sceneId, play->transition.spawnId);
@@ -28,11 +28,11 @@ void BgDyYoseizo_Update(Actor* actor, GameState_Play* play)
         itemId = comboProgressive(itemId);
 
         /* Collectible flags don't work here for some reason, use unused flags */
-        collected = gSave.perm[SCE_GREAT_FAIRY_FOUNTAIN_UPGRADES].unused & (1 << index );
+        collected = gSave.perm[SCE_OOT_GREAT_FAIRY_FOUNTAIN_UPGRADES].unused & (1 << index );
         if (!HasActorGivenItem(actor) && !collected)
         {
             GiveItem(actor, play, itemId, 400.f, 400.f);
-            gSave.perm[SCE_GREAT_FAIRY_FOUNTAIN_UPGRADES].unused |= (1 << index);
+            gSave.perm[SCE_OOT_GREAT_FAIRY_FOUNTAIN_UPGRADES].unused |= (1 << index);
         }
         else
         {

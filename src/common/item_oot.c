@@ -34,23 +34,23 @@ static u16 mainScene(u16 sceneId)
 {
     switch (sceneId)
     {
-    case SCE_LAIR_GOHMA:
-        return SCE_INSIDE_DEKU_TREE;
-    case SCE_LAIR_KING_DODONGO:
-        return SCE_DODONGO_CAVERN;
-    case SCE_LAIR_BARINADE:
-        return SCE_INSIDE_JABU_JABU;
-    case SCE_LAIR_PHANTOM_GANON:
-        return SCE_TEMPLE_FOREST;
-    case SCE_LAIR_VOLVAGIA:
-        return SCE_TEMPLE_FIRE;
-    case SCE_LAIR_MORPHA:
-        return SCE_TEMPLE_WATER;
-    case SCE_LAIR_TWINROVA:
-    case SCE_DESERT_COLOSSUS:
-        return SCE_TEMPLE_SPIRIT;
-    case SCE_LAIR_BONGO_BONGO:
-        return SCE_TEMPLE_SHADOW;
+    case SCE_OOT_LAIR_GOHMA:
+        return SCE_OOT_INSIDE_DEKU_TREE;
+    case SCE_OOT_LAIR_KING_DODONGO:
+        return SCE_OOT_DODONGO_CAVERN;
+    case SCE_OOT_LAIR_BARINADE:
+        return SCE_OOT_INSIDE_JABU_JABU;
+    case SCE_OOT_LAIR_PHANTOM_GANON:
+        return SCE_OOT_TEMPLE_FOREST;
+    case SCE_OOT_LAIR_VOLVAGIA:
+        return SCE_OOT_TEMPLE_FIRE;
+    case SCE_OOT_LAIR_MORPHA:
+        return SCE_OOT_TEMPLE_WATER;
+    case SCE_OOT_LAIR_TWINROVA:
+    case SCE_OOT_DESERT_COLOSSUS:
+        return SCE_OOT_TEMPLE_SPIRIT;
+    case SCE_OOT_LAIR_BONGO_BONGO:
+        return SCE_OOT_TEMPLE_SHADOW;
     }
 
     return sceneId;

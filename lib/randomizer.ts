@@ -1,5 +1,5 @@
 import { logic, LogicResult } from './logic';
-import { GI } from './data';
+import { DATA_GI } from './data';
 import { Game, GAMES } from "./config";
 
 const OFFSETS = {
@@ -47,7 +47,7 @@ const gi = async (game: Game, item: string) => {
     item = subst;
   }
 
-  const data = await GI;
+  const data = await DATA_GI;
   if (!data.hasOwnProperty(item)) {
     throw new Error(`Unknown item ${item}`);
   }
