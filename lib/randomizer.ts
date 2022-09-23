@@ -1,5 +1,5 @@
-import { logic, LogicResult } from "./logic";
-import GI from '../data/gi.json';
+import { logic, LogicResult } from './logic';
+import { GI } from './data';
 import { Game, GAMES } from "./config";
 
 const OFFSETS = {
@@ -19,7 +19,7 @@ const SUBSTITUTIONS: {[k: string]: string} = {
   MM_OCARINA: "MM_OCARINA_OF_TIME",
 };
 
-const gi = (game: Game, item: string) => {
+const gi = async (game: Game, item: string) => {
   /* Dungeon Items */
   /* TODO: Refactor this horror */
   if (/^OOT_MAP/.test(item)) {
@@ -47,10 +47,11 @@ const gi = (game: Game, item: string) => {
     item = subst;
   }
 
-  let value = parseInt((GI as any)[item], 16);
-  if (value === undefined) {
+  const data = await GI;
+  if (!data.hasOwnProperty(item)) {
     throw new Error(`Unknown item ${item}`);
   }
+  let value = data[item];
 
   if ((/^OOT_/.test(item) && game === 'mm') || (/^MM_/.test(item) && game === 'oot')) {
     value |= 0x100;
@@ -67,7 +68,7 @@ const toU16Buffer = (data: number[]) => {
   return buf;
 };
 
-export const randomizeGame = (game: Game, logic: LogicResult): Buffer => {
+export const randomizeGame = async (game: Game, logic: LogicResult): Promise<Buffer> => {
   const buf: number[] = [];
   for (const c of logic.items) {
     if (c.game !== game) {
@@ -86,7 +87,7 @@ export const randomizeGame = (game: Game, logic: LogicResult): Buffer => {
       break;
     }
     const key = (sceneId << 8) | id;
-    const item = gi(game, c.item);
+    const item = await gi(game, c.item);
     buf.push(key, item);
   }
   return toU16Buffer(buf);
@@ -97,7 +98,7 @@ export const randomize = async (rom: Buffer) => {
   const res = await logic();
   const buffer = Buffer.alloc(0x20000, 0xff);
   for (const g of GAMES) {
-    const gameBuffer = randomizeGame(g, res);
+    const gameBuffer = await randomizeGame(g, res);
     gameBuffer.copy(buffer, OFFSETS[g]);
   }
   buffer.copy(rom, 0x03fe0000);

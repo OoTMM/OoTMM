@@ -32,8 +32,8 @@ Graveyard Dampe Tomb Hookshot,  chest,         0x48, 0x00, HOOKSHOT
 Windmill HP,                    collectible,   0x48, 0x01, HEART_PIECE
 Windmill Song of Storms,        npc,           0x48, 0x05, SONG_STORMS
 Goron City Tunic,               npc,           0x62, 0x04, TUNIC_GORON
-Kakariko Song Shadow,           special,       0x52, 0x54, SONG_SHADOW
-Desert Colossus Song Spirit,    special,       0x5c, 0xac, SONG_SPIRIT
+Kakariko Song Shadow,           special,       0x52, 0x54, SONG_TP_SHADOW
+Desert Colossus Song Spirit,    special,       0x5c, 0xac, SONG_TP_SPIRIT
 
 Deku Tree Map Chest,                chest,         0x00, 0x03, MAP_DT
 Deku Tree Compass Chest,            chest,         0x00, 0x02, COMPASS_DT
