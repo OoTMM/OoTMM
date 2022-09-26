@@ -17,16 +17,15 @@
 #include <combo/object.h>
 #include <combo/save.h>
 #include <combo/shader.h>
+#include <combo/scenes.h>
 
 #if defined(GAME_OOT)
-# include <combo/oot/scene.h>
 # include <combo/oot/play.h>
 # include <combo/oot/item_etc.h>
 # include <combo/oot/player.h>
 #endif
 
 #if defined(GAME_MM)
-# include <combo/mm/scene.h>
 # include <combo/mm/play.h>
 # include <combo/mm/player.h>
 #endif

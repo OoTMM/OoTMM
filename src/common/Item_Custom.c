@@ -111,10 +111,10 @@ static int isBossReward(Actor_ItemCustom* item, GameState_Play* play)
     {
         switch (play->sceneId)
         {
-        case SCE_LAIR_ODOLWA:
-        case SCE_LAIR_GOHT:
-        case SCE_LAIR_GYORG:
-        case SCE_LAIR_TWINMOLD:
+        case SCE_MM_LAIR_ODOLWA:
+        case SCE_MM_LAIR_GOHT:
+        case SCE_MM_LAIR_GYORG:
+        case SCE_MM_LAIR_TWINMOLD:
             return 1;
         }
     }

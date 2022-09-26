@@ -12,7 +12,7 @@ Actor* hookSpawnActorEx(void* const_1, GameState_Play* play, s16 actorId, float 
     case AC_DOOR_WARP1:
         switch (play->sceneId)
         {
-        case SCE_LAIR_ODOLWA:
+        case SCE_MM_LAIR_ODOLWA:
             spawnBossReward(const_1, play, GI_MM_REMAINS_ODOLWA, x, y, z);
             break;
         }

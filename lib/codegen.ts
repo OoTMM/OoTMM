@@ -1,6 +1,7 @@
 import fs from 'fs/promises';
-import path, { join } from 'path';
-import { PATH_BUILD, PATH_DATA } from './config';
+import path from 'path';
+import { PATH_BUILD } from './config';
+import { DATA_GI, DATA_SCENES } from './data';
 
 import { fileExists } from './util';
 
@@ -29,18 +30,27 @@ export class CodeGen {
 };
 
 const codegenGI = async () => {
-  const text = await fs.readFile(path.resolve(PATH_DATA, 'gi.json'), 'utf8');
-  const data = JSON.parse(text) as any;
+  const data = await DATA_GI;
   const cg = new CodeGen(path.resolve(PATH_BUILD, 'include', 'combo', 'gi_data.h'), 'GENERATED_GI_DATA_H');
   for (const [k, v] of Object.entries(data)) {
-    const name = "GI_" + k;
-    const value = parseInt(v as string, 16);
-    cg.define(name, value);
+    cg.define("GI_" + k, v);
+  }
+  await cg.emit();
+};
+
+const codegenScenes = async () => {
+  const data = await DATA_SCENES;
+  const cg = new CodeGen(path.resolve(PATH_BUILD, 'include', 'combo', 'scenes.h'), 'GENERATED_SCENES_H');
+  for (const [k, v] of Object.entries(data)) {
+    cg.define("SCE_" + k, v);
   }
   await cg.emit();
 };
 
 export const codegen = async () => {
   console.log("Codegen...");
-  await codegenGI();
+  return Promise.all([
+    codegenGI(),
+    codegenScenes(),
+  ]);
 };

@@ -3,8 +3,10 @@
     "start": "ts-node -T ./lib/index.ts"
   },
   "dependencies": {
+    "csv": "^6.2.0",
     "glob": "^8.0.3",
     "glob-promise": "^5.0.0",
+    "yaml": "^2.1.1",
     "yaz0": "^1.0.0"
   },
   "devDependencies": {
