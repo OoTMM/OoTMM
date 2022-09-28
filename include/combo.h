@@ -28,6 +28,7 @@
 #if defined(GAME_MM)
 # include <combo/mm/play.h>
 # include <combo/mm/player.h>
+# include <combo/mm/actor_engirla.h>
 #endif
 
 #include <combo/common/actor.h>
@@ -94,6 +95,7 @@ u32     comboLoadObject(void* buffer, u16 objectId);
 
 /* Draw */
 void comboDrawObject(GameState_Play* play, Actor* actor, u16 objectId, u16 shaderId);
+void comboDrawGI(GameState_Play* play, Actor* actor, int gi);
 
 /* Event */
 void comboOotSetEventChk(u16 flag);

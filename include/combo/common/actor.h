@@ -23,6 +23,7 @@
 #endif
 
 #if defined(GAME_MM)
+# define AC_EN_GIRLA        0x002
 # define AC_EN_BOX          0x006
 # define AC_ITEM00          0x00e
 # define AC_ITEM_CUSTOM     0x013

@@ -21,3 +21,11 @@ void comboDrawObject(GameState_Play* play, Actor* actor, u16 objectId, u16 shade
     PreDraw2(actor, play, 0);
     kShaders[shaderId - 1].func(&play->gs, shaderId - 1);
 }
+
+void comboDrawGI(GameState_Play* play, Actor* actor, int gi)
+{
+    const GetItem* giEntry;
+
+    giEntry = kExtendedGetItems + gi;
+    comboDrawObject(play, actor, giEntry->objectId, giEntry->shaderId);
+}

@@ -57,8 +57,6 @@ void Shader_CustomNote(GameState* gs, s16 shaderId)
     CLOSE_DISPS();
 }
 
-void ConvertMatrix(const float* in, u16* out);
-
 static void* pushMatrix(GfxContext* gfx, const float* mat)
 {
     void* end = gfx->polyOpa.end;
