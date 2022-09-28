@@ -78,7 +78,7 @@ const loadWorldRegions = async (world: World, game: Game, exprParser: ExprParser
 
 const loadWorldPool = async (world: World, game: Game, filename: string) => {
   const text = createReadStream(filename);
-  const csvParser = CSV.parse({ columns: ['location', 'type', 'scene', 'id', 'item'], skip_empty_lines: true, trim: true });
+  const csvParser = CSV.parse({ columns: true, skip_empty_lines: true, trim: true });
   text.pipe(csvParser);
   for await (const record of csvParser) {
     const location = gameId(game, String(record.location), ' ');

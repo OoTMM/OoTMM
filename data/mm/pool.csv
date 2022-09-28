@@ -1,3 +1,5 @@
+location,                           type,           scene,                id,   item
+
 Clock Town Platform HP,             collectible,    CLOCK_TOWN_SOUTH,     0x0a, HEART_PIECE
 Clock Town Tree HP,                 collectible,    CLOCK_TOWN_NORTH,     0x0a, HEART_PIECE
 Clock Town Silver Rupee Chest,      chest,          CLOCK_TOWN_EAST,      0x0a, RUPEE_SILVER

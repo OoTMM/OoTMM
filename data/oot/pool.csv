@@ -1,3 +1,5 @@
+location,                       type,          scene,                 id,   item
+
 KF Mido Top Left,               chest,         KOKIRI_MIDO,           0x00, RUPEE_BLUE
 KF Mido Top Right,              chest,         KOKIRI_MIDO,           0x01, RUPEE_BLUE
 KF Mido Bottom Left,            chest,         KOKIRI_MIDO,           0x02, RUPEE_GREEN
