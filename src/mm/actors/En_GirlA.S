@@ -1,6 +1,28 @@
 #include <combo/asm.h>
 
+EnGirlA_PostHandler_Trampoline:
+  /* girlA is in s0 */
+  move a0,s0
+
+  /* play is on the stack */
+  lw a1,0x34(sp)
+
+  /* Replaced code */
+  lw    s0,0x18(sp)
+  addiu sp,0x30
+
+  /* Call our code */
+  j EnGirlA_PostHandler
+   nop
+
+/* Use our own draw func */
 PATCH_START 0x808649c8
   j EnGirlA_Draw
+   nop
+PATCH_END
+
+/* Hook after EnGirlA_Handler */
+PATCH_START 0x808648e8
+  j EnGirlA_PostHandler_Trampoline
    nop
 PATCH_END

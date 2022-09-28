@@ -5,6 +5,7 @@ Clock Town Tree HP,                 collectible,    CLOCK_TOWN_NORTH,     0x0a, 
 Clock Town Silver Rupee Chest,      chest,          CLOCK_TOWN_EAST,      0x0a, RUPEE_SILVER
 Clock Town Great Fairy,             collectible,    FAIRY_FOUNTAIN,       0x00, MASK_GREAT_FAIRY
 Clock Town Great Fairy Alt,         collectible,    FAIRY_FOUNTAIN,       0x01, MAGIC_UPGRADE
+Bomb Shop Bomb Bag,                 npc,            BOMB_SHOP,            0x02, BOMB_BAG
 Termina Field Tall Grass Chest,     chest,          TERMINA_FIELD,        0x01, RUPEE_RED
 Termina Field Tall Grass Grotto,    chest,          GROTTOS,              0x1f, RUPEE_RED
 Swamp Potion Shop,                  npc,            POTION_SHOP,          0x00, BOTTLED_POTION_RED

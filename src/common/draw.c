@@ -26,6 +26,6 @@ void comboDrawGI(GameState_Play* play, Actor* actor, int gi)
 {
     const GetItem* giEntry;
 
-    giEntry = kExtendedGetItems + gi;
+    giEntry = kExtendedGetItems + gi - 1;
     comboDrawObject(play, actor, giEntry->objectId, giEntry->shaderId);
 }
