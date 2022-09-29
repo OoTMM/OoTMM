@@ -8,7 +8,8 @@
 typedef struct
 {
     Actor   base;
-    char    unk_144[0x58];
+    char    unk_144[0x54];
+    u16     messageId2;
     s32     gi;
     char    unk_1a0[0x10];
     u16     angle;

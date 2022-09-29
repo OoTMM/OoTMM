@@ -30,4 +30,7 @@ void DMARomToRam(u32 romAddr, void* dramAddr, u32 size);
 void ConvertMatrix(const float* in, u16* out);
 void MatrixRotation(u16 angle, int unk_1);
 
+void DisplayTextBox(GameState_Play* play, u16 textId);
+void DisplayTextBox2(GameState_Play* play, u16 textId);
+
 #endif

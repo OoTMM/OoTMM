@@ -79,6 +79,7 @@ s32 comboGetNpcOverride(u8 id);
 
 /* Text */
 void comboTextHijackItem(GameState_Play* play, u16 itemId);
+void comboTextHijackItemShopConfirm(GameState_Play* play, u16 itemId, s16 price);
 
 /* Progressive */
 s32 comboProgressive(s32 gi);
@@ -102,6 +103,9 @@ void comboDrawGI(GameState_Play* play, Actor* actor, int gi);
 void comboOotSetEventChk(u16 flag);
 void comboMmSetEventWeek(u16 flag);
 
+/* GI */
+u16 comboItemFromGI(s32 gi);
+
 /* Item */
 extern const u8 kMaxSticks[];
 extern const u8 kMaxNuts[];
@@ -121,5 +125,8 @@ int comboGiveItem(Actor* actor, GameState_Play* play, s16 itemId, float a, float
 #if defined(GAME_MM)
 void comboAfterBuy(Actor_EnGirlA* girlA, GameState_Play* play);
 #endif
+
+/* libc */
+int toupper(int c);
 
 #endif /* COMBO_COMBO_H */

@@ -32,6 +32,12 @@ void EnGirlA_PostHandler(Actor_EnGirlA* girlA, GameState_Play* play)
     }
 }
 
+void EnGirlA_DisplayTextBoxConfirm(GameState_Play* play, Actor_EnGirlA* girlA)
+{
+    DisplayTextBox2(play, girlA->messageId2);
+    comboTextHijackItemShopConfirm(play, comboItemFromGI(girlA->gi), 10);
+}
+
 void comboAfterBuy(Actor_EnGirlA* girlA, GameState_Play* play)
 {
     int soldOut;
