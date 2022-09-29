@@ -23,3 +23,8 @@ void EnGirlA_PostHandler(Actor_EnGirlA* girlA, GameState_Play* play)
         girlA->gi = comboProgressive(override);
     }
 }
+
+void comboAfterBuy(Actor_EnGirlA* girlA, GameState_Play* play)
+{
+    girlA->gi = GI_MM_BOMBS_10;
+}

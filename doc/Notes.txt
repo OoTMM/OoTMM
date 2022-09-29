@@ -30,6 +30,8 @@ MM NPCs:
 
 00 Kotake (Red Potion)
 01 Koume (Picto-box)
+02 Bomb Shop Bag
+03 Bomb Shop Big Bag
 
 
 

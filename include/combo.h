@@ -29,6 +29,7 @@
 # include <combo/mm/play.h>
 # include <combo/mm/player.h>
 # include <combo/mm/actor_engirla.h>
+# include <combo/mm/actor_ensob1.h>
 #endif
 
 #include <combo/common/actor.h>
@@ -116,5 +117,9 @@ void comboAddItemMm(u16 itemId);
 void comboAddItemOot(u16 itemId);
 
 int comboGiveItem(Actor* actor, GameState_Play* play, s16 itemId, float a, float b);
+
+#if defined(GAME_MM)
+void comboAfterBuy(Actor_EnGirlA* girlA, GameState_Play* play);
+#endif
 
 #endif /* COMBO_COMBO_H */
