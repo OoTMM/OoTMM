@@ -2,7 +2,8 @@
 
 void EnGirlA_Draw(Actor_EnGirlA* girlA, GameState_Play* play)
 {
-    MatrixRotation(girlA->angle, 1);
+    if (girlA->gi != GI_MM_SOLD_OUT)
+        MatrixRotation(girlA->angle, 1);
     comboDrawGI(play, &girlA->base, girlA->gi);
 }
 
@@ -26,5 +27,5 @@ void EnGirlA_PostHandler(Actor_EnGirlA* girlA, GameState_Play* play)
 
 void comboAfterBuy(Actor_EnGirlA* girlA, GameState_Play* play)
 {
-    girlA->gi = GI_MM_BOMBS_10;
+    girlA->gi = GI_MM_SOLD_OUT;
 }
