@@ -32,10 +32,16 @@ void EnGirlA_PostHandler(Actor_EnGirlA* girlA, GameState_Play* play)
     }
 }
 
+void comboShopDisplayTextBox(GameState_Play* play, Actor_EnGirlA* girlA, int price)
+{
+    DisplayTextBox2(play, girlA->base.messageId);
+    comboTextHijackItemShop(play, comboItemFromGI(girlA->gi), price, 0);
+}
+
 void comboShopDisplayTextBoxConfirm(GameState_Play* play, Actor_EnGirlA* girlA, int price)
 {
     DisplayTextBox2(play, girlA->messageId2);
-    comboTextHijackItemShopConfirm(play, comboItemFromGI(girlA->gi), price);
+    comboTextHijackItemShop(play, comboItemFromGI(girlA->gi), price, 1);
 }
 
 void comboAfterBuy(Actor_EnGirlA* girlA, GameState_Play* play)

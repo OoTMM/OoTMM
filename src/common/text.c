@@ -12,7 +12,7 @@
 # define CHOICE2        "\x1b"
 # define CHOICE3        "\x1c"
 # define NL             "\x01"
-# define ITEM_VALUE     ""
+# define NOCLOSE        "\x0a"
 #else
 # define FAST           "\x17"
 # define CZ             "\x00"
@@ -25,7 +25,7 @@
 # define CHOICE2        "\xc2"
 # define CHOICE3        "\xc3"
 # define NL             "\x11"
-# define ITEM_VALUE     "\xde"
+# define NOCLOSE        "\x1a"
 #endif
 
 #define C0   COLOR_TEAL
@@ -628,7 +628,7 @@ void comboTextHijackItem(GameState_Play* play, u16 itemId)
     appendStr(&b, END);
 }
 
-void comboTextHijackItemShopConfirm(GameState_Play* play, u16 itemId, s16 price)
+void comboTextHijackItemShop(GameState_Play* play, u16 itemId, s16 price, int confirm)
 {
     char* b;
 
@@ -638,7 +638,15 @@ void comboTextHijackItemShopConfirm(GameState_Play* play, u16 itemId, s16 price)
     appendStr(&b, NL COLOR_RED);
     appendNum(&b, price);
     appendStr(&b, " Rupees");
-    appendStr(&b, NL CHOICE2 COLOR_GREEN);
-    appendStr(&b, "Buy" NL);
-    appendStr(&b, "No thanks" END);
+    if (confirm)
+    {
+        appendStr(&b, NL CHOICE2 COLOR_GREEN);
+        appendStr(&b, "Buy" NL);
+        appendStr(&b, "No thanks");
+    }
+    else
+    {
+        appendStr(&b, NL NL NOCLOSE);
+    }
+    appendStr(&b, END);
 }

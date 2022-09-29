@@ -25,6 +25,12 @@ void EnSob1_AfterBuy(Actor_EnSob1* sob1, GameState_Play* play)
     }
 }
 
+void EnSob1_DisplayTextBox(GameState_Play* play, Actor_EnGirlA* girlA)
+{
+    comboShopDisplayTextBox(play, girlA, itemPrice(girlA));
+}
+
+
 void EnSob1_DisplayTextBoxConfirm(GameState_Play* play, Actor_EnGirlA* girlA)
 {
     comboShopDisplayTextBoxConfirm(play, girlA, itemPrice(girlA));

@@ -18,7 +18,18 @@ PATCH_START 0x80a0eaec
    nop
 PATCH_END
 
-/* Override the textbox */
+/* Override the first textbox */
+PATCH_START 0x80a0e18c
+  jal EnSob1_DisplayTextBox
+   move a1,t2
+PATCH_END
+
+PATCH_START 0x80a0e3fc
+  jal EnSob1_DisplayTextBox
+   move a1,t5
+PATCH_END
+
+/* Override the second textbox */
 PATCH_START 0x80a0e2d4
   jal EnSob1_DisplayTextBoxConfirm
    move a1,t6

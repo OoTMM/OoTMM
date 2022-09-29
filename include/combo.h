@@ -79,7 +79,7 @@ s32 comboGetNpcOverride(u8 id);
 
 /* Text */
 void comboTextHijackItem(GameState_Play* play, u16 itemId);
-void comboTextHijackItemShopConfirm(GameState_Play* play, u16 itemId, s16 price);
+void comboTextHijackItemShop(GameState_Play* play, u16 itemId, s16 price, int confirm);
 
 /* Progressive */
 s32 comboProgressive(s32 gi);
@@ -124,6 +124,7 @@ int comboGiveItem(Actor* actor, GameState_Play* play, s16 itemId, float a, float
 
 #if defined(GAME_MM)
 void comboAfterBuy(Actor_EnGirlA* girlA, GameState_Play* play);
+void comboShopDisplayTextBox(GameState_Play* play, Actor_EnGirlA* girlA, int price);
 void comboShopDisplayTextBoxConfirm(GameState_Play* play, Actor_EnGirlA* girlA, int price);
 #endif
 
