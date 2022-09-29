@@ -634,6 +634,13 @@ void comboTextHijackItemShop(GameState_Play* play, u16 itemId, s16 price, int co
 
     b = play->textBuffer;
     appendShopHeader(&b, price);
+
+    if (itemId == ITEM_NONE)
+    {
+        appendStr(&b, "SOLD OUT" NOCLOSE END);
+
+    }
+
     appendItemName(&b, itemId, 1);
     appendStr(&b, NL COLOR_RED);
     appendNum(&b, price);
