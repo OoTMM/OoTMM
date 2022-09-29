@@ -43,7 +43,7 @@ static const char* const kItemNamesOot[] = {
     "the " C1 "Fairy Slingshot",
     "the " C1 "Fairy Ocarina",
     "the " C1 "Ocarina of Time",
-    C0 "10 Bombchus",
+    C0 "10 Bombchu",
     "the " C1 "Hookshot",
     "the " C1 "Longshot",
     "the " C1 "Ice Arrow",
@@ -184,8 +184,8 @@ static const char* const kItemNamesOot[] = {
     C0 "10 Arrows",
     C0 "30 Arrows",
     C0 "30 Deku Seeds",
-    C0 "5 Bombchus",
-    C0 "20 Bombchus",
+    C0 "5 Bombchu",
+    C0 "20 Bombchu",
     "the " C1 "Deku Stick Upgrade",
     "the " C1 "Second Deku Stick Upgrade",
     "the " C1 "Deku Nut Upgrade",
@@ -204,7 +204,7 @@ static const char* const kItemNamesMm[] = {
     "the " C1 "Light Arrow",
     "", /* Fairy Ocarina */
     "the " C1 "Bombs",
-    "the " C1 "Bombchus",
+    "the " C1 "Bombchu",
     "a " C0 "Deku Stick",
     "a " C0 "Deku Nut",
     "a " C0 "Magic Bean",
@@ -348,10 +348,10 @@ static const char* const kItemNamesMm[] = {
     C0 "30 Arrows",
     C0 "40 Arrows",
     "",
-    C0 "20 Bombchus",
-    C0 "10 Bombchus",
+    C0 "20 Bombchu",
+    C0 "10 Bombchu",
     "a" C0 "Bombchu",
-    C0 "5 Bombchus",
+    C0 "5 Bombchu",
     C0 "20 Deku Sticks",
     C0 "30 Deku Sticks",
     C0 "30 Deku Nuts",
@@ -635,10 +635,10 @@ void comboTextHijackItemShopConfirm(GameState_Play* play, u16 itemId, s16 price)
     b = play->textBuffer;
     appendShopHeader(&b, price);
     appendItemName(&b, itemId, 1);
-    appendStr(&b, ": ");
+    appendStr(&b, NL COLOR_RED);
     appendNum(&b, price);
     appendStr(&b, " Rupees");
-    appendStr(&b, NL NL CHOICE2 COLOR_GREEN);
+    appendStr(&b, NL CHOICE2 COLOR_GREEN);
     appendStr(&b, "Buy" NL);
     appendStr(&b, "No thanks" END);
 }

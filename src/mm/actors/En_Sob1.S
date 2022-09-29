@@ -20,6 +20,6 @@ PATCH_END
 
 /* Override the textbox */
 PATCH_START 0x80a0e2d4
-  jal EnGirlA_DisplayTextBoxConfirm
+  jal EnSob1_DisplayTextBoxConfirm
    move a1,t6
 PATCH_END
