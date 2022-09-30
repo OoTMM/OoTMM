@@ -35,6 +35,10 @@ void EnGirlA_PostHandler(Actor_EnGirlA* girlA, GameState_Play* play)
 void comboShopDisplayTextBox(GameState_Play* play, Actor_EnGirlA* girlA, int price)
 {
     DisplayTextBox2(play, girlA->base.messageId);
+    if (girlA->gi == GI_MM_SOLD_OUT)
+    {
+        girlA->disabled = 1;
+    }
     comboTextHijackItemShop(play, comboItemFromGI(girlA->gi), price, 0);
 }
 
