@@ -41,7 +41,7 @@
   exits:
     "Mountain Village Path": "can_break_boulders"
     "Goron Village Path": "true"
-    "Goron Shrine": "can_use_lens"
+    "Goron Graveyard": "can_use_lens"
 "Goron Village Path":
   exits:
     "Mountain Village": "true"
@@ -50,8 +50,11 @@
   exits:
     "Goron Village Path": "true"
     "Lone Peak Shrine": "true"
+    "Goron Shrine": "true"
   events:
     GORON_SPIRIT: "can_use_lens"
+  locations:
+    "Goron Elder": "has(MASK_GORON) && has(OCARINA) && event(GORON_GRAVEYARD_HOT_WATER)"
 "Lone Peak Shrine":
   exits:
     "Goron Village": "can_use_lens"
@@ -59,10 +62,15 @@
     "Lone Peak Shrine Lens Chest": "true"
     "Lone Peak Shrine Boulder Chest": "can_break_boulders"
     "Lone Peak Shrine Invisible Chest": "can_use_lens"
-"Goron Shrine":
+"Goron Graveyard":
   exits:
     "Mountain Village": "true"
   locations:
-    "Goron Shrine Mask": "can_play(SONG_HEALING) && event(GORON_SPIRIT)"
+    "Goron Graveyard Mask": "can_play(SONG_HEALING) && event(GORON_SPIRIT)"
   events:
-    GORON_SHRINE_HOT_WATER: "has_bottle && has(MASK_GORON)"
+    GORON_GRAVEYARD_HOT_WATER: "has_bottle && has(MASK_GORON)"
+"Goron Shrine":
+  exits:
+    "Goron Village": "true"
+  locations:
+    "Goron Baby": "has(MASK_GORON) && can_play(SONG_GORON_HALF)"
