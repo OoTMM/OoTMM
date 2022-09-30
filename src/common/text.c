@@ -2,20 +2,30 @@
 
 #if defined(GAME_OOT)
 # define FAST           "\x08"
+# define CZ             "\x05\x40"
+# define COLOR_RED      "\x05\x41"
+# define COLOR_GREEN    "\x05\x42"
 # define COLOR_TEAL     "\x05\x44"
 # define COLOR_PINK     "\x05\x45"
-# define COLOR_RED      "\x05\x41"
 # define COLOR_YELLOW   "\x05\x46"
-# define CZ             "\x05\x40"
 # define END            "\x02"
+# define CHOICE2        "\x1b"
+# define CHOICE3        "\x1c"
+# define NL             "\x01"
+# define NOCLOSE        "\x0a"
 #else
 # define FAST           "\x17"
+# define CZ             "\x00"
+# define COLOR_RED      "\x01"
+# define COLOR_GREEN    "\x02"
+# define COLOR_YELLOW   "\x04"
 # define COLOR_TEAL     "\x05"
 # define COLOR_PINK     "\x06"
-# define COLOR_RED      "\x01"
-# define COLOR_YELLOW   "\x04"
-# define CZ             "\x00"
 # define END            "\xbf"
+# define CHOICE2        "\xc2"
+# define CHOICE3        "\xc3"
+# define NL             "\x11"
+# define NOCLOSE        "\x1a"
 #endif
 
 #define C0   COLOR_TEAL
@@ -33,7 +43,7 @@ static const char* const kItemNamesOot[] = {
     "the " C1 "Fairy Slingshot",
     "the " C1 "Fairy Ocarina",
     "the " C1 "Ocarina of Time",
-    C0 "10 Bombchus",
+    C0 "10 Bombchu",
     "the " C1 "Hookshot",
     "the " C1 "Longshot",
     "the " C1 "Ice Arrow",
@@ -174,8 +184,8 @@ static const char* const kItemNamesOot[] = {
     C0 "10 Arrows",
     C0 "30 Arrows",
     C0 "30 Deku Seeds",
-    C0 "5 Bombchus",
-    C0 "20 Bombchus",
+    C0 "5 Bombchu",
+    C0 "20 Bombchu",
     "the " C1 "Deku Stick Upgrade",
     "the " C1 "Second Deku Stick Upgrade",
     "the " C1 "Deku Nut Upgrade",
@@ -194,7 +204,7 @@ static const char* const kItemNamesMm[] = {
     "the " C1 "Light Arrow",
     "", /* Fairy Ocarina */
     "the " C1 "Bombs",
-    "the " C1 "Bombchus",
+    "the " C1 "Bombchu",
     "a " C0 "Deku Stick",
     "a " C0 "Deku Nut",
     "a " C0 "Magic Bean",
@@ -338,10 +348,10 @@ static const char* const kItemNamesMm[] = {
     C0 "30 Arrows",
     C0 "40 Arrows",
     "",
-    C0 "20 Bombchus",
-    C0 "10 Bombchus",
+    C0 "20 Bombchu",
+    C0 "10 Bombchu",
     "a" C0 "Bombchu",
-    C0 "5 Bombchus",
+    C0 "5 Bombchu",
     C0 "20 Deku Sticks",
     C0 "30 Deku Sticks",
     C0 "30 Deku Nuts",
@@ -502,9 +512,67 @@ static int isItemAmbiguousMm(u16 itemId)
     }
 }
 
-void comboTextHijackItem(GameState_Play* play, u16 itemId)
+static void appendHeader(char** b)
 {
-    char* b;
+#if defined(GAME_MM)
+    /* MM has a header */
+    memcpy(*b, "\x00\x30\xfe\xff\xff\xff\xff\xff\xff\xff\xff", 11);
+    *b += 11;
+#endif
+    appendStr(b, FAST);
+}
+
+static void appendShopHeader(char** b, s16 price)
+{
+#if defined(GAME_MM)
+    memcpy((*b) + 5, &price, 2);
+    *b += 11;
+#endif
+    appendStr(b, FAST);
+}
+
+static void appendClearColor(char** b)
+{
+#if defined(GAME_OOT)
+    appendStr(b, CZ);
+#else
+    /* strlen doesn't like NUL */
+    **b = 0;
+    *b += 1;
+#endif
+}
+
+static void appendNum(char** b, int num)
+{
+    int denum;
+    int started;
+    int div;
+
+    denum = 1000000000;
+    started = 0;
+    while (denum)
+    {
+        div = num / denum;
+        num = num - div * denum;
+        if (div)
+            started = 1;
+        if (started)
+        {
+            **b = '0' + div;
+            *b += 1;
+        }
+        denum /= 10;
+    }
+    if (!started)
+    {
+        **b = '0';
+        *b += 1;
+    }
+}
+
+static void appendItemName(char** b, u16 itemId, int capitalize)
+{
+    char* start;
     const char* itemName;
     int ambiguous;
 
@@ -523,39 +591,69 @@ void comboTextHijackItem(GameState_Play* play, u16 itemId)
         ambiguous = isItemAmbiguousOot(itemId & 0xff);
     }
 
-    b = play->textBuffer;
-#if defined(GAME_MM)
-    /* MM has a header */
-    memcpy(b, "\x00\x30\xfe\xff\xff\xff\xff\xff\xff\xff\xff", 11);
-    b += 11;
-#endif
-    appendStr(&b, FAST "You got ");
-    appendStr(&b, itemName);
-#if defined(GAME_OOT)
-    appendStr(&b, CZ);
-#else
-    /* strlen doesn't like NUL */
-    *b++ = 0;
-#endif
-    appendStr(&b, "!");
+    start = *b;
+    appendStr(b, itemName);
+    appendClearColor(b);
 
     if (ambiguous)
     {
-        appendStr(&b, " (");
+        appendStr(b, " (");
         if (itemId & MASK_FOREIGN_ITEM)
         {
-            appendStr(&b, COLOR_PINK "MM");
+            appendStr(b, COLOR_PINK "MM");
         }
         else
         {
-            appendStr(&b, COLOR_TEAL "OoT");
+            appendStr(b, COLOR_TEAL "OoT");
         }
-#if defined(GAME_MM)
-        *b++ = 0;
-#else
-        appendStr(&b, CZ);
-#endif
-        appendStr(&b, ")");
+        appendClearColor(b);
+        appendStr(b, ")");
+    }
+
+    if (capitalize)
+    {
+        start[0] = toupper(start[0]);
+    }
+}
+
+void comboTextHijackItem(GameState_Play* play, u16 itemId)
+{
+    char* b;
+
+    b = play->textBuffer;
+    appendHeader(&b);
+    appendStr(&b, "You got ");
+    appendItemName(&b, itemId, 0);
+    appendStr(&b, "!");
+    appendStr(&b, END);
+}
+
+void comboTextHijackItemShop(GameState_Play* play, u16 itemId, s16 price, int confirm)
+{
+    char* b;
+
+    b = play->textBuffer;
+    appendShopHeader(&b, price);
+
+    if (itemId == ITEM_NONE)
+    {
+        appendStr(&b, "SOLD OUT" NOCLOSE END);
+
+    }
+
+    appendItemName(&b, itemId, 1);
+    appendStr(&b, NL COLOR_RED);
+    appendNum(&b, price);
+    appendStr(&b, " Rupees");
+    if (confirm)
+    {
+        appendStr(&b, NL CHOICE2 COLOR_GREEN);
+        appendStr(&b, "Buy" NL);
+        appendStr(&b, "No thanks");
+    }
+    else
+    {
+        appendStr(&b, NL NL NOCLOSE);
     }
     appendStr(&b, END);
 }

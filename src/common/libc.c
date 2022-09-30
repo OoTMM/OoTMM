@@ -1,5 +1,15 @@
 #include <string.h>
 
+int toupper(int c)
+{
+    if (c >= 'a' && c <= 'z')
+    {
+        c -= 'a';
+        c += 'A';
+    }
+    return c;
+}
+
 void* memcpy(void* dst, const void* src, size_t size)
 {
     for (size_t i = 0; i < size; ++i)

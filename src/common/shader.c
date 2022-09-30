@@ -33,6 +33,18 @@ void Shader_Spell(GameState*, s16);
 void Shader_MoonTear(GameState*, s16);
 
 /* Custom Shaders */
+void Shader_Xlu0(GameState* gs, s16 shaderId)
+{
+    const Shader* shader;
+
+    shader = &kShaders[shaderId];
+    OPEN_DISPS(gs->gfx);
+    InitListPolyXlu(gs->gfx);
+    gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(gs->gfx), G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPDisplayList(POLY_XLU_DISP++, shader->lists[0]);
+    CLOSE_DISPS();
+}
+
 void Shader_CustomNote(GameState* gs, s16 shaderId)
 {
     const Shader* shader;
@@ -56,8 +68,6 @@ void Shader_CustomNote(GameState* gs, s16 shaderId)
     gSPDisplayList(POLY_XLU_DISP++, shader->lists[1]);
     CLOSE_DISPS();
 }
-
-void ConvertMatrix(const float* in, u16* out);
 
 static void* pushMatrix(GfxContext* gfx, const float* mat)
 {

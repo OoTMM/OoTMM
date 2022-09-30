@@ -17,18 +17,19 @@
 #include <combo/object.h>
 #include <combo/save.h>
 #include <combo/shader.h>
+#include <combo/scenes.h>
 
 #if defined(GAME_OOT)
-# include <combo/oot/scene.h>
 # include <combo/oot/play.h>
 # include <combo/oot/item_etc.h>
 # include <combo/oot/player.h>
 #endif
 
 #if defined(GAME_MM)
-# include <combo/mm/scene.h>
 # include <combo/mm/play.h>
 # include <combo/mm/player.h>
+# include <combo/mm/actor_engirla.h>
+# include <combo/mm/actor_ensob1.h>
 #endif
 
 #include <combo/common/actor.h>
@@ -78,6 +79,7 @@ s32 comboGetNpcOverride(u8 id);
 
 /* Text */
 void comboTextHijackItem(GameState_Play* play, u16 itemId);
+void comboTextHijackItemShop(GameState_Play* play, u16 itemId, s16 price, int confirm);
 
 /* Progressive */
 s32 comboProgressive(s32 gi);
@@ -95,10 +97,14 @@ u32     comboLoadObject(void* buffer, u16 objectId);
 
 /* Draw */
 void comboDrawObject(GameState_Play* play, Actor* actor, u16 objectId, u16 shaderId);
+void comboDrawGI(GameState_Play* play, Actor* actor, int gi);
 
 /* Event */
 void comboOotSetEventChk(u16 flag);
 void comboMmSetEventWeek(u16 flag);
+
+/* GI */
+u16 comboItemFromGI(s32 gi);
 
 /* Item */
 extern const u8 kMaxSticks[];
@@ -115,5 +121,14 @@ void comboAddItemMm(u16 itemId);
 void comboAddItemOot(u16 itemId);
 
 int comboGiveItem(Actor* actor, GameState_Play* play, s16 itemId, float a, float b);
+
+#if defined(GAME_MM)
+void comboAfterBuy(Actor_EnGirlA* girlA, GameState_Play* play);
+void comboShopDisplayTextBox(GameState_Play* play, Actor_EnGirlA* girlA, int price);
+void comboShopDisplayTextBoxConfirm(GameState_Play* play, Actor_EnGirlA* girlA, int price);
+#endif
+
+/* libc */
+int toupper(int c);
 
 #endif /* COMBO_COMBO_H */

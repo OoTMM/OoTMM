@@ -3,8 +3,8 @@
     "exits": {
       "Link's House": "is_child",
       "Temple of Time": "is_adult && event(TIME_TRAVEL)",
-      "Graveyard Upper": "can_play(SONG_SHADOW)",
-      "Desert Colossus": "can_play(SONG_SPIRIT)"
+      "Graveyard Upper": "can_play(SONG_TP_SHADOW)",
+      "Desert Colossus": "can_play(SONG_TP_SPIRIT)"
     }
   },
   "Link's House": {

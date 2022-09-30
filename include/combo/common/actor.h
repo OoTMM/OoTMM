@@ -23,6 +23,7 @@
 #endif
 
 #if defined(GAME_MM)
+# define AC_EN_GIRLA        0x002
 # define AC_EN_BOX          0x006
 # define AC_ITEM00          0x00e
 # define AC_ITEM_CUSTOM     0x013
@@ -66,7 +67,9 @@ typedef struct PACKED ALIGNED(0x4) Actor
     Vector3s    rot2;
     char        unk_ba[2];
     float       modelOffsetY;
-    char        unk_c0[0x58];
+    char        unk_c0[0x4e];
+    u16         messageId;
+    char        unk_110[0x8];
     Actor*      attachedA;
     Actor*      attachedB;
     Actor*      prev;

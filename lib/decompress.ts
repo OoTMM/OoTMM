@@ -1,6 +1,7 @@
 import { Readable } from 'stream';
 import fs from 'fs/promises';
 import path from 'path';
+import crypto from 'crypto';
 import { createYaz0Stream } from 'yaz0';
 
 import { DmaData } from './dma';
@@ -25,7 +26,16 @@ type DecompressedGame = {
   dma: Buffer,
 };
 
+const checkGameHash = (game: Game, rom: Buffer) => {
+  const h = crypto.createHash('sha256').update(rom).digest('hex');
+  const hashes = CONFIG[game].sha256;
+  if (!hashes.includes(h)) {
+    throw new Error(`Bad hash for ${game}, got ${h}`);
+  }
+};
+
 export const decompressGame = async (game: Game, rom: Buffer): Promise<DecompressedGame> => {
+  checkGameHash(game, rom);
   const conf = CONFIG[game];
   const dmaBuffer = Buffer.from(rom.subarray(conf.dmaAddr, conf.dmaAddr + conf.dmaCount * 16));
   const dma = new DmaData(Buffer.from(dmaBuffer));

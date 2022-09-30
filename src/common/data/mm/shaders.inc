@@ -120,7 +120,7 @@
 /* Custom: Remains Goht      */ { Shader_BossRemains,            { CUSTOM_OBJECT_GI_REMAINS_GOHT_0 } },
 /* Custom: Remains Gyorg     */ { Shader_BossRemains,            { CUSTOM_OBJECT_GI_REMAINS_GYORG_0 } },
 /* Custom: Remains Twinmold  */ { Shader_BossRemains,            { CUSTOM_OBJECT_GI_REMAINS_TWINMOLD_0 } },
-/* Nothing                   */ {},
+/* Custom: SOLD OUT          */ { Shader_Xlu0,                   { 0x6000440 } },
 /* Nothing                   */ {},
 /* Nothing                   */ {},
 /* Nothing                   */ {},

@@ -26,6 +26,16 @@ const GetItem kExtendedGetItems[] = {
 #undef Z
 };
 
+u16 comboItemFromGI(s32 gi)
+{
+    u16 itemId;
+
+    itemId = kExtendedGetItems[gi - 1].itemId;
+    if (gi & MASK_FOREIGN_GI)
+        itemId |= MASK_FOREIGN_ITEM;
+    return itemId;
+}
+
 void comboLoadObjectGi(Actor_Player* player, u16 objectId)
 {
     if (objectId)

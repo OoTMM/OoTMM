@@ -1,0 +1,56 @@
+#include <combo/asm.h>
+
+EnSob1_AfterBuy_Trampoline:
+  lw a0,0x20(sp)
+  lw a1,0x24(sp)
+
+  /* Replaced code */
+  j EnSob1_AfterBuy
+   addiu sp,0x20
+
+/* Don't detach the actor yet */
+PATCH_START 0x80a0eaa8
+  nop
+PATCH_END
+
+PATCH_START 0x80a0eaec
+  j EnSob1_AfterBuy_Trampoline
+   nop
+PATCH_END
+
+/* Override the first textbox */
+PATCH_START 0x80a0d238
+  jal EnSob1_DisplayTextBox
+   move a1,t2
+PATCH_END
+
+PATCH_START 0x80a0e18c
+  jal EnSob1_DisplayTextBox
+   move a1,t2
+PATCH_END
+
+PATCH_START 0x80a0e3fc
+  jal EnSob1_DisplayTextBox
+   move a1,t5
+PATCH_END
+
+PATCH_START 0x80a0e950
+  jal EnSob1_DisplayTextBox
+   move a1,t1
+PATCH_END
+
+PATCH_START 0x80a0e9c8
+  jal EnSob1_DisplayTextBox
+   move a1,t0
+PATCH_END
+
+PATCH_START 0x80a0ea68
+  jal EnSob1_DisplayTextBox
+   move a1,t4
+PATCH_END
+
+/* Override the second textbox */
+PATCH_START 0x80a0e2d4
+  jal EnSob1_DisplayTextBoxConfirm
+   move a1,t6
+PATCH_END

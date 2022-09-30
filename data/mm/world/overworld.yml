@@ -1,0 +1,34 @@
+"Clock Town":
+  exits:
+    "Termina Field": "true"
+  locations:
+    "Clock Town Platform HP": "true"
+    "Clock Town Tree HP": "true"
+    "Clock Town Silver Rupee Chest": "true"
+    "Clock Town Great Fairy": "true"
+    "Clock Town Great Fairy Alt": "has(MASK_DEKU) || has(MASK_GORON) || has(MASK_ZORA)"
+    "Bomb Shop Bomb Bag": "true"
+"Termina Field":
+  exits:
+    "Clock Town": "true"
+    "Swamp": "true"
+  locations:
+    "Termina Field Tall Grass Chest": "true"
+    "Termina Field Tall Grass Grotto": "true"
+"Swamp":
+  exits:
+    "Termina Field": "true"
+    "Deku Palace": "can_rescue_koume"
+  locations:
+    "Swamp Potion Shop": "true"
+    "Swamp Pictobox": "can_rescue_koume"
+"Deku Palace":
+  exits:
+    "Swamp": "can_rescue_koume"
+    "Woodfall": "has(MASK_DEKU)"
+  locations:
+    "Deku Palace Song of Awakening": "has(SWORD) && has(MASK_DEKU) && has(OCARINA)"
+"Woodfall":
+  exits:
+    "Deku Palace": "true"
+    "Woodfall Temple Entrance": "has(MASK_DEKU) && can_play(SONG_AWAKENING) && has(SWORD)"
