@@ -18,7 +18,7 @@ void EnGirlA_PostHandler(Actor_EnGirlA* girlA, GameState_Play* play)
     {
     /* Bomb Shop: Bomb Bag */
     case 0x17:
-        override = comboGetNpcOverride(0x02);
+        override = comboGetNpcOverride(0x03);
         soldOut = GetCollectibleFlag(play, 0x1f);
         break;
     }

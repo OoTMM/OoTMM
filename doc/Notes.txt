@@ -30,8 +30,9 @@ MM NPCs:
 
 00 Kotake (Red Potion)
 01 Koume (Picto-box)
-02 Bomb Shop Bag
-03 Bomb Shop Big Bag
+02 Song of Awakening
+03 Bomb Shop Bag
+04 Bomb Shop Big Bag
 
 
 
