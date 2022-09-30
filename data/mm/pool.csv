@@ -14,6 +14,7 @@ Deku Palace Song of Awakening,      npc,            DEKU_KING_CHAMBER,    0x02, 
 Lone Peak Shrine Lens Chest,        chest,          GROTTOS,              0x01, LENS
 Lone Peak Shrine Boulder Chest,     chest,          GROTTOS,              0x06, RUPEE_RED
 Lone Peak Shrine Invisible Chest,   chest,          GROTTOS,              0x03, RUPEE_PURPLE
+Goron Shrine Mask,                  npc,            GORON_SHRINE,         0x05, MASK_GORON
 
 Woodfall Temple Entrance Chest,     chest,          TEMPLE_WOODFALL,  0x18, STRAY_FAIRY_WF
 Woodfall Temple Water Chest,        chest,          TEMPLE_WOODFALL,  0x01, SMALL_KEY_WF

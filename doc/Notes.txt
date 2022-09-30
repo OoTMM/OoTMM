@@ -33,6 +33,7 @@ MM NPCs:
 02 Song of Awakening
 03 Bomb Shop Bag
 04 Bomb Shop Big Bag
+05 Goron Mask
 
 
 

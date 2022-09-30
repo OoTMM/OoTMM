@@ -65,6 +65,7 @@ export const ITEMS_REQUIRED = new Set<string>([
   'MM_MAGIC_UPGRADE',
   'MM_SONG_TIME',
   'MM_SONG_AWAKENING',
+  'MM_SONG_HEALING',
   'MM_BOW',
   'MM_OCARINA',
   'MM_SWORD',
