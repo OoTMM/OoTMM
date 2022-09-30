@@ -59,5 +59,7 @@ void comboAfterBuy(Actor_EnGirlA* girlA, GameState_Play* play)
     }
 
     if (soldOut)
+    {
         girlA->gi = GI_MM_SOLD_OUT;
+    }
 }
