@@ -68,6 +68,8 @@ export const ITEMS_REQUIRED = new Set<string>([
   'MM_BOW',
   'MM_OCARINA',
   'MM_SWORD',
+  'MM_BOMB_BAG',
+  'MM_LENS'
 ]);
 
 const ITEMS_JUNK = new Set<string>([

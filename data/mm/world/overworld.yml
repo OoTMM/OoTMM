@@ -12,6 +12,7 @@
   exits:
     "Clock Town": "true"
     "Swamp": "true"
+    "Mountain Village Path": "has(BOW)"
   locations:
     "Termina Field Tall Grass Chest": "true"
     "Termina Field Tall Grass Grotto": "true"
@@ -32,3 +33,26 @@
   exits:
     "Deku Palace": "true"
     "Woodfall Temple Entrance": "has(MASK_DEKU) && can_play(SONG_AWAKENING) && has(SWORD)"
+"Mountain Village Path":
+  exits:
+    "Termina Field": "has(BOW)"
+    "Mountain Village": "can_break_boulders"
+"Mountain Village":
+  exits:
+    "Mountain Village Path": "can_break_boulders"
+    "Goron Village Path": "true"
+"Goron Village Path":
+  exits:
+    "Mountain Village": "true"
+    "Goron Village": "true"
+"Goron Village":
+  exits:
+    "Goron Village Path": "true"
+    "Lone Peak Shrine": "true"
+"Lone Peak Shrine":
+  exits:
+    "Goron Village": "can_use_lens"
+  locations:
+    "Lone Peak Shrine Lens Chest": "true"
+    "Lone Peak Shrine Boulder Chest": "can_break_boulders"
+    "Lone Peak Shrine Invisible Chest": "can_use_lens"

@@ -11,6 +11,9 @@ Termina Field Tall Grass Grotto,    chest,          GROTTOS,              0x1f, 
 Swamp Potion Shop,                  npc,            POTION_SHOP,          0x00, BOTTLED_POTION_RED
 Swamp Pictobox,                     npc,            TOURIST_INFORMATION,  0x01, PICTOGRAPH_BOX
 Deku Palace Song of Awakening,      npc,            DEKU_KING_CHAMBER,    0x02, SONG_AWAKENING
+Lone Peak Shrine Lens Chest,        chest,          GROTTOS,              0x01, LENS
+Lone Peak Shrine Boulder Chest,     chest,          GROTTOS,              0x06, RUPEE_RED
+Lone Peak Shrine Invisible Chest,   chest,          GROTTOS,              0x03, RUPEE_PURPLE
 
 Woodfall Temple Entrance Chest,     chest,          TEMPLE_WOODFALL,  0x18, STRAY_FAIRY_WF
 Woodfall Temple Water Chest,        chest,          TEMPLE_WOODFALL,  0x01, SMALL_KEY_WF

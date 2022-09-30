@@ -2,3 +2,5 @@
 "can_rescue_koume": "has_bottle"
 "can_get_beans": "has(MASK_DEKU) && has(MAGIC_UPGRADE)"
 "can_play(song)": "has(OCARINA) && has(song)"
+"can_break_boulders": "has(BOMB_BAG) || has(MASK_GORON)"
+"can_use_lens": "has(MAGIC_UPGRADE) && has(LENS)"
