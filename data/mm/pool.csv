@@ -20,7 +20,7 @@ Goron Baby,                         npc,            GORON_SHRINE,               
 
 Woodfall Temple Entrance Chest,     chest,          TEMPLE_WOODFALL,  0x18, STRAY_FAIRY_WF
 Woodfall Temple Water Chest,        chest,          TEMPLE_WOODFALL,  0x01, SMALL_KEY_WF
-Woodfall Temple Map,                chest,          TEMPLE_WOODFALL,  0x3e, MAP_WF
+Woodfall Temple Map,                chest,          TEMPLE_WOODFALL,  0x1d, MAP_WF
 Woodfall Temple Compass,            chest,          TEMPLE_WOODFALL,  0x1c, COMPASS_WF
 Woodfall Temple Dark Chest,         chest,          TEMPLE_WOODFALL,  0x19, STRAY_FAIRY_WF
 Woodfall Temple Center Chest,       chest,          TEMPLE_WOODFALL,  0x17, STRAY_FAIRY_WF
@@ -28,3 +28,20 @@ Woodfall Temple Bow,                chest,          TEMPLE_WOODFALL,  0x1b, BOW
 Woodfall Temple Boss Key Chest,     chest,          TEMPLE_WOODFALL,  0x1e, BOSS_KEY_WF
 Woodfall Temple Boss Container,     collectible,    LAIR_ODOLWA,      0x1f, HEART_CONTAINER
 Woodfall Temple Boss,               collectible,    LAIR_ODOLWA,      0x1e, REMAINS_ODOLWA
+
+Snowhead Temple Compass Room Ledge,       chest,          TEMPLE_SNOWHEAD, 0x19, STRAY_FAIRY_SH
+Snowhead Temple Compass,                  chest,          TEMPLE_SNOWHEAD, 0x1c, COMPASS_SH
+Snowhead Temple Bridge Room,              chest,          TEMPLE_SNOWHEAD, 0x01, SMALL_KEY_SH
+Snowhead Temple Block Room,               chest,          TEMPLE_SNOWHEAD, 0x03, SMALL_KEY_SH
+Snowhead Temple Block Room Ledge,         chest,          TEMPLE_SNOWHEAD, 0x15, STRAY_FAIRY_SH
+Snowhead Temple Central Room Bottom,      chest,          TEMPLE_SNOWHEAD, 0x14, STRAY_FAIRY_SH
+Snowhead Temple Boss Key,                 chest,          TEMPLE_SNOWHEAD, 0x1e, BOSS_KEY_SH
+Snowhead Temple Central Room Alcove,      chest,          TEMPLE_SNOWHEAD, 0x17, STRAY_FAIRY_SH
+Snowhead Temple Pillars Room,             chest,          TEMPLE_SNOWHEAD, 0x18, STRAY_FAIRY_SH
+Snowhead Temple Fire Arrow,               chest,          TEMPLE_SNOWHEAD, 0x1b, ARROW_FIRE
+Snowhead Temple Icicle Room Alcove,       chest,          TEMPLE_SNOWHEAD, 0x16, STRAY_FAIRY_SH
+Snowhead Temple Icicle Room,              chest,          TEMPLE_SNOWHEAD, 0x04, SMALL_KEY_SH
+Snowhead Temple Map,                      chest,          TEMPLE_SNOWHEAD, 0x1d, MAP_SH
+Snowhead Temple Map Alcove,               chest,          TEMPLE_SNOWHEAD, 0x13, STRAY_FAIRY_SH
+Snowhead Temple Boss HC,                  collectible,    LAIR_GOHT,       0x1f, HEART_CONTAINER
+Snowhead Temple Boss,                     collectible,    LAIR_GOHT,       0x1e, REMAINS_GOHT

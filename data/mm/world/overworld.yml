@@ -42,6 +42,7 @@
     "Mountain Village Path": "can_break_boulders"
     "Goron Village Path": "true"
     "Goron Graveyard": "can_use_lens"
+    "Snowhead": "has(OCARINA) && has(SONG_GORON_HALF, 2) && has(MASK_GORON) && can_use_lens"
 "Goron Village Path":
   exits:
     "Mountain Village": "true"
@@ -74,3 +75,7 @@
     "Goron Village": "true"
   locations:
     "Goron Baby": "has(MASK_GORON) && can_play(SONG_GORON_HALF)"
+"Snowhead":
+  exits:
+    "Mountain Village": "true"
+    "Snowhead Temple Entrance": "has(MASK_GORON)"

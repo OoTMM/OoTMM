@@ -71,7 +71,8 @@ export const ITEMS_REQUIRED = new Set<string>([
   'MM_OCARINA',
   'MM_SWORD',
   'MM_BOMB_BAG',
-  'MM_LENS'
+  'MM_LENS',
+  'MM_ARROW_FIRE',
 ]);
 
 const ITEMS_JUNK = new Set<string>([
