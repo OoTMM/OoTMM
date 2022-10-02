@@ -67,6 +67,7 @@ export const ITEMS_REQUIRED = new Set<string>([
   'MM_SONG_TIME',
   'MM_SONG_AWAKENING',
   'MM_SONG_HEALING',
+  'MM_SONG_EPONA',
   'MM_SONG_GORON_HALF',
   'MM_BOW',
   'MM_OCARINA',
@@ -74,6 +75,7 @@ export const ITEMS_REQUIRED = new Set<string>([
   'MM_BOMB_BAG',
   'MM_LENS',
   'MM_ARROW_FIRE',
+  'MM_POWDER_KEG',
 ]);
 
 const ITEMS_JUNK = new Set<string>([

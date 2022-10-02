@@ -13,6 +13,7 @@
     "Clock Town": "true"
     "Swamp": "true"
     "Mountain Village Path": "has(BOW)"
+    "Milk Road": "true"
   locations:
     "Termina Field Tall Grass Chest": "true"
     "Termina Field Tall Grass Grotto": "true"
@@ -80,3 +81,14 @@
   exits:
     "Mountain Village": "true"
     "Snowhead Temple Entrance": "has(MASK_GORON)"
+"Milk Road":
+  exits:
+    "Romani Ranch": "true"
+    "Termina Field": "true"
+"Romani Ranch":
+  exits:
+    "Milk Road": "true"
+  events:
+    EPONA: "can_use_keg && can_play(SONG_EPONA)"
+  locations:
+    "Romani Ranch Epona Song": "can_use_keg && has(OCARINA)"

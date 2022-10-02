@@ -18,6 +18,7 @@ Goron Graveyard Mask,               npc,            GORON_GRAVEYARD,            
 Goron Elder,                        npc,            PATH_GORON_VILLAGE_WINTER,          0x06, SONG_GORON_HALF
 Goron Baby,                         npc,            GORON_SHRINE,                       0x07, SONG_GORON_HALF
 Goron Powder Keg,                   npc,            GORON_VILLAGE_WINTER,               0x08, POWDER_KEG
+Romani Ranch Epona Song,            npc,            ROMANI_RANCH,                       0x09, SONG_EPONA
 
 Woodfall Temple Entrance Chest,     chest,          TEMPLE_WOODFALL,  0x18, STRAY_FAIRY_WF
 Woodfall Temple Water Chest,        chest,          TEMPLE_WOODFALL,  0x01, SMALL_KEY_WF

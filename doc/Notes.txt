@@ -37,7 +37,7 @@ MM NPCs:
 06 Goron Elder
 07 Goron Baby
 08 Goron Powder Keg
-
+09 Epona's Song
 
 ===== MISSING FROM LOGIC =====
 Tomb Royal: <!-- <chest id="00" content="BOMBS_10"/> Requires fire -->
