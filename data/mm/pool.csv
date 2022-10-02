@@ -17,6 +17,7 @@ Lone Peak Shrine Invisible Chest,   chest,          GROTTOS,                    
 Goron Graveyard Mask,               npc,            GORON_GRAVEYARD,                    0x05, MASK_GORON
 Goron Elder,                        npc,            PATH_GORON_VILLAGE_WINTER,          0x06, SONG_GORON_HALF
 Goron Baby,                         npc,            GORON_SHRINE,                       0x07, SONG_GORON_HALF
+Goron Powder Keg,                   npc,            GORON_VILLAGE_WINTER,               0x08, POWDER_KEG
 
 Woodfall Temple Entrance Chest,     chest,          TEMPLE_WOODFALL,  0x18, STRAY_FAIRY_WF
 Woodfall Temple Water Chest,        chest,          TEMPLE_WOODFALL,  0x01, SMALL_KEY_WF

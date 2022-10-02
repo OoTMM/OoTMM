@@ -56,6 +56,7 @@
     GORON_SPIRIT: "can_use_lens"
   locations:
     "Goron Elder": "has(MASK_GORON) && has(OCARINA) && event(GORON_GRAVEYARD_HOT_WATER)"
+    "Goron Powder Keg": "(event(SPRING) || can_use_fire_arrows) && has(MASK_GORON)"
 "Lone Peak Shrine":
   exits:
     "Goron Village": "can_use_lens"

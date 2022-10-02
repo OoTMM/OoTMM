@@ -116,6 +116,8 @@
     "Snowhead Temple Central Room Alcove": "true"
 "Snowhead Temple Boss":
   dungeon: SH
+  events:
+    SPRING: "true"
   locations:
     "Snowhead Temple Boss HC": "true"
     "Snowhead Temple Boss": "true"

@@ -36,6 +36,7 @@ MM NPCs:
 05 Goron Mask
 06 Goron Elder
 07 Goron Baby
+08 Goron Powder Keg
 
 
 ===== MISSING FROM LOGIC =====
