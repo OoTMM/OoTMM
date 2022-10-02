@@ -1,7 +1,8 @@
 import { Random } from '../random';
-import { solve } from './solve';
+import { ItemPlacement, solve } from './solve';
 import { createWorld, WorldCheck } from './world';
 import { spoiler } from './spoiler';
+import { LogicSeedError } from './error';
 
 export type LogicResult = {
   items: WorldCheck[];
@@ -13,7 +14,23 @@ export const logic = async (): Promise<LogicResult> => {
   const random = new Random();
   random.seed();
 
-  const placement = solve(world, random);
+  let placement: ItemPlacement = {};
+  let error: Error | null = null;
+  for (let i = 0; i < 20; ++i) {
+    try {
+      error = null;
+      placement = solve(world, random);
+      break;
+    } catch (e) {
+      if (!(e instanceof LogicSeedError)) {
+        throw e;
+      }
+      error = e;
+    }
+  }
+  if (error) {
+    throw error;
+  }
   const log = spoiler(world, placement);
 
   const items: WorldCheck[] = [];
