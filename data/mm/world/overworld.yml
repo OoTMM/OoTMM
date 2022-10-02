@@ -14,6 +14,7 @@
     "Swamp": "true"
     "Mountain Village Path": "has(BOW)"
     "Milk Road": "true"
+    "Great Bay Coast": "event(EPONA)"
   locations:
     "Termina Field Tall Grass Chest": "true"
     "Termina Field Tall Grass Grotto": "true"
@@ -92,3 +93,8 @@
     EPONA: "can_use_keg && can_play(SONG_EPONA)"
   locations:
     "Romani Ranch Epona Song": "can_use_keg && has(OCARINA)"
+"Great Bay Coast":
+  exits:
+    "Termina Field": "event(EPONA)"
+  locations:
+    "Great Bay Coast Zora Mask": "can_play(SONG_HEALING)"
