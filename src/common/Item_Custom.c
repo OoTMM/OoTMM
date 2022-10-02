@@ -129,7 +129,7 @@ static void ItemCustom_Update(Actor_ItemCustom* item, GameState_Play* play)
 
     handleFireArrow(item, play);
 
-    if (!HasActorGivenItem(&item->base))
+    if (!Actor_HasParent(&item->base))
     {
         item->base.rot2.z = 0;
         item->base.rot2.y += 0x400;

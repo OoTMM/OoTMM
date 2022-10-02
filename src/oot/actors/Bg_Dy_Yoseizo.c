@@ -29,7 +29,7 @@ void BgDyYoseizo_Update(Actor* actor, GameState_Play* play)
 
         /* Collectible flags don't work here for some reason, use unused flags */
         collected = gSave.perm[SCE_OOT_GREAT_FAIRY_FOUNTAIN_UPGRADES].unused & (1 << index );
-        if (!HasActorGivenItem(actor) && !collected)
+        if (!Actor_HasParent(actor) && !collected)
         {
             GiveItem(actor, play, itemId, 400.f, 400.f);
             gSave.perm[SCE_OOT_GREAT_FAIRY_FOUNTAIN_UPGRADES].unused |= (1 << index);

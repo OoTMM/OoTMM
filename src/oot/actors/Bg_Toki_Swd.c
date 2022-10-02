@@ -4,7 +4,7 @@ void BgTokiSwd_Handler(Actor* actor, GameState_Play* play)
 {
     TransitionContext* t;
 
-    if (HasActorGivenItem(actor))
+    if (Actor_HasParent(actor))
     {
         /* Time Travel */
         t = &play->transition;

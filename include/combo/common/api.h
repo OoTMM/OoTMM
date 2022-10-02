@@ -10,7 +10,7 @@ void    LoadFile(void* dst, u32 vromAddr, u32 size);
 
 Actor*  SpawnActor(void* const_1, GameState_Play* play, s16 actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable);
 void    ActorDestroy(Actor* actor);
-int     HasActorGivenItem(Actor* actor);
+int     Actor_HasParent(Actor* actor);
 void    ActorSetScale(Actor* actor, float scale);
 void    ActorEnableInteraction(Actor* actor, GameState_Play* play);
 void    ActorSetCollisionCylinder(GameState_Play* play, Actor* actor, float unk_3, float unk_4, float unk_5, u32 unk_6);

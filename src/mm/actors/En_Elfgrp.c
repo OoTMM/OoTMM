@@ -19,7 +19,7 @@ void EnElfgrp_GiveReward(Actor* actor, GameState_Play* play)
     if (fairyIndex == 1 && gMmSave.playerForm == 0x04)
         fairyIndex = 0;
 
-    if (HasActorGivenItem(actor))
+    if (Actor_HasParent(actor))
     {
         SetCollectibleFlag(play, fairyIndex + 1);
         /* TODO: Probably need an event flag? */
