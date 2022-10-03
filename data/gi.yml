@@ -200,7 +200,7 @@ MM_BOSS_KEY:              0x3d
 MM_MAP:                   0x3e
 MM_COMPASS:               0x3f
 MM_LONGSHOT:              0x41
-MM_LENS_OF_TRUTH:         0x42
+MM_LENS:                  0x42
 MM_PICTOGRAPH_BOX:        0x43
 MM_OCARINA_OF_TIME:       0x4c
 MM_BOMBER_NOTEBOOK:       0x50

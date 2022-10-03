@@ -1,0 +1,123 @@
+"Snowhead Temple Entrance":
+  dungeon: SH
+  exits:
+    "Snowhead": "true"
+    "Snowhead Temple Main": "has(MASK_GORON)"
+"Snowhead Temple Main":
+  dungeon: SH
+  exits:
+    "Snowhead Temple Entrance": "true"
+    "Snowhead Temple Compass Room": "has(SMALL_KEY_SH, 3)"
+    "Snowhead Temple Bridge": "true"
+"Snowhead Temple Bridge":
+  dungeon: SH
+  exits:
+    "Snowhead Temple Main": "true"
+    "Snowhead Temple Map Room": "true"
+    "Snowhead Temple Center Level 1": "true"
+  locations:
+    "Snowhead Temple Bridge Room": "can_use_fire_arrows"
+"Snowhead Temple Map Room":
+  dungeon: SH
+  exits:
+    "Snowhead Temple Bridge": "true"
+    "Snowhead Temple Map Room Upper": "can_use_fire_arrows"
+  locations:
+    "Snowhead Temple Map": "true"
+"Snowhead Temple Map Room Upper":
+  dungeon: SH
+  exits:
+    "Snowhead Temple Map Room": "true"
+    "Snowhead Temple Center Level 3": "true"
+  locations:
+    "Snowhead Temple Map Alcove": "can_use_lens"
+"Snowhead Temple Center Level 1":
+  dungeon: SH
+  exits:
+    "Snowhead Temple Bridge": "true"
+    "Snowhead Temple Center Level 0": "true"
+    "Snowhead Temple Blocks Room": "true"
+    "Snowhead Temple Pillars Room": "can_use_fire_arrows"
+"Snowhead Temple Pillars Room":
+  dungeon: SH
+  exits:
+    "Snowhead Temple Center Level 1": "can_use_fire_arrows"
+  events:
+    SNOWHEAD_RAISE_PILLAR: "true"
+  locations:
+    "Snowhead Temple Pillars Room": "true"
+"Snowhead Temple Center Level 0":
+  dungeon: SH
+  exits:
+    "Snowhead Temple Center Level 1": "true"
+  locations:
+    "Snowhead Temple Central Room Bottom": "true"
+"Snowhead Temple Blocks Room":
+  dungeon: SH
+  exits:
+    "Snowhead Temple Center Level 1": "true"
+  locations:
+    "Snowhead Temple Block Room": "true"
+"Snowhead Temple Compass Room":
+  dungeon: SH
+  exits:
+    "Snowhead Temple Main": "has(SMALL_KEY_SH, 3)"
+    "Snowhead Temple Icicles": "has_explosives"
+  locations:
+    "Snowhead Temple Compass": "true"
+    "Snowhead Temple Compass Room Ledge": "can_use_fire_arrows"
+    "Snowhead Temple Block Room Ledge": "can_use_fire_arrows"
+"Snowhead Temple Icicles":
+  dungeon: SH
+  exits:
+    "Snowhead Temple Compass Room": "has_explosives"
+    "Snowhead Temple Dual Switches": "has(SMALL_KEY_SH, 3)"
+  locations:
+    "Snowhead Temple Icicle Room Alcove": "has(BOW) && can_use_lens"
+    "Snowhead Temple Icicle Room": "has(BOW) && can_break_boulders"
+"Snowhead Temple Dual Switches":
+  dungeon: SH
+  exits:
+    "Snowhead Temple Icicles": "has(SMALL_KEY_SH, 3)"
+    "Snowhead Temple Center Level 2": "true"
+"Snowhead Temple Center Level 2":
+  dungeon: SH
+  exits:
+    "Snowhead Temple Dual Switches": "true"
+    "Snowhead Temple Fire Arrow": "true"
+"Snowhead Temple Fire Arrow":
+  dungeon: SH
+  exits:
+    "Snowhead Temple Center Level 2": "true"
+  locations:
+    "Snowhead Temple Fire Arrow": "true"
+"Snowhead Temple Center Level 3":
+  dungeon: SH
+  exits:
+    "Snowhead Temple Map Room Upper": "true"
+    "Snowhead Snow Room": "has(SMALL_KEY_SH, 3)"
+"Snowhead Snow Room":
+  dungeon: SH
+  exits:
+    "Snowhead Temple Center Level 3": "has(SMALL_KEY_SH, 3)"
+    "Snowhead Temple Dinofol Room": "true"
+"Snowhead Temple Dinofol Room":
+  dungeon: SH
+  exits:
+    "Snowhead Snow Room": "true"
+    "Snowhead Temple Center Level 4": "event(SNOWHEAD_RAISE_PILLAR)"
+"Snowhead Temple Center Level 4":
+  dungeon: SH
+  exits:
+    "Snowhead Temple Dinofol Room": "true"
+    "Snowhead Temple Boss": "has(BOSS_KEY_SH)"
+  locations:
+    "Snowhead Temple Boss Key": "true"
+    "Snowhead Temple Central Room Alcove": "true"
+"Snowhead Temple Boss":
+  dungeon: SH
+  events:
+    SPRING: "true"
+  locations:
+    "Snowhead Temple Boss HC": "true"
+    "Snowhead Temple Boss": "true"

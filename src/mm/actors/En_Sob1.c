@@ -18,7 +18,7 @@ static int itemPrice(Actor_EnGirlA* girlA)
 
 void EnSob1_AfterBuy(Actor_EnSob1* sob1, GameState_Play* play)
 {
-    if (HasActorGivenItem(&sob1->base))
+    if (Actor_HasParent(&sob1->base))
     {
         comboAfterBuy(sob1->items[sob1->itemIndex], play);
         sob1->base.attachedA = NULL;

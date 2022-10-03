@@ -12,6 +12,9 @@
   exits:
     "Clock Town": "true"
     "Swamp": "true"
+    "Mountain Village Path": "has(BOW)"
+    "Milk Road": "true"
+    "Great Bay Coast": "event(EPONA)"
   locations:
     "Termina Field Tall Grass Chest": "true"
     "Termina Field Tall Grass Grotto": "true"
@@ -32,3 +35,66 @@
   exits:
     "Deku Palace": "true"
     "Woodfall Temple Entrance": "has(MASK_DEKU) && can_play(SONG_AWAKENING) && has(SWORD)"
+"Mountain Village Path":
+  exits:
+    "Termina Field": "has(BOW)"
+    "Mountain Village": "can_break_boulders"
+"Mountain Village":
+  exits:
+    "Mountain Village Path": "can_break_boulders"
+    "Goron Village Path": "true"
+    "Goron Graveyard": "can_use_lens"
+    "Snowhead": "has(OCARINA) && has(SONG_GORON_HALF, 2) && has(MASK_GORON) && can_use_lens"
+"Goron Village Path":
+  exits:
+    "Mountain Village": "true"
+    "Goron Village": "true"
+"Goron Village":
+  exits:
+    "Goron Village Path": "true"
+    "Lone Peak Shrine": "true"
+    "Goron Shrine": "true"
+  events:
+    GORON_SPIRIT: "can_use_lens"
+  locations:
+    "Goron Elder": "has(MASK_GORON) && has(OCARINA) && event(GORON_GRAVEYARD_HOT_WATER)"
+    "Goron Powder Keg": "(event(SPRING) || can_use_fire_arrows) && has(MASK_GORON)"
+"Lone Peak Shrine":
+  exits:
+    "Goron Village": "can_use_lens"
+  locations:
+    "Lone Peak Shrine Lens Chest": "true"
+    "Lone Peak Shrine Boulder Chest": "can_break_boulders"
+    "Lone Peak Shrine Invisible Chest": "can_use_lens"
+"Goron Graveyard":
+  exits:
+    "Mountain Village": "true"
+  locations:
+    "Goron Graveyard Mask": "can_play(SONG_HEALING) && event(GORON_SPIRIT)"
+  events:
+    GORON_GRAVEYARD_HOT_WATER: "has_bottle && has(MASK_GORON)"
+"Goron Shrine":
+  exits:
+    "Goron Village": "true"
+  locations:
+    "Goron Baby": "has(MASK_GORON) && can_play(SONG_GORON_HALF)"
+"Snowhead":
+  exits:
+    "Mountain Village": "true"
+    "Snowhead Temple Entrance": "has(MASK_GORON)"
+"Milk Road":
+  exits:
+    "Romani Ranch": "true"
+    "Termina Field": "true"
+"Romani Ranch":
+  exits:
+    "Milk Road": "true"
+  events:
+    EPONA: "can_use_keg && can_play(SONG_EPONA)"
+  locations:
+    "Romani Ranch Epona Song": "can_use_keg && has(OCARINA)"
+"Great Bay Coast":
+  exits:
+    "Termina Field": "event(EPONA)"
+  locations:
+    "Great Bay Coast Zora Mask": "can_play(SONG_HEALING)"

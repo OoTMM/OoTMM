@@ -4,6 +4,7 @@ import { gameId } from '../util';
 import { pathfind, Reachable } from './pathfind';
 import { Items } from './state';
 import { World } from './world';
+import { LogicSeedError } from './error';
 
 const ITEMS_DUNGEON = /^(OOT|MM)_(MAP|COMPASS|SMALL_KEY|BOSS_KEY|STRAY_FAIRY)_[A-Z_]+$/;
 export const ITEMS_DUNGEON_REWARDS = new Set([
@@ -65,9 +66,16 @@ export const ITEMS_REQUIRED = new Set<string>([
   'MM_MAGIC_UPGRADE',
   'MM_SONG_TIME',
   'MM_SONG_AWAKENING',
+  'MM_SONG_HEALING',
+  'MM_SONG_EPONA',
+  'MM_SONG_GORON_HALF',
   'MM_BOW',
   'MM_OCARINA',
   'MM_SWORD',
+  'MM_BOMB_BAG',
+  'MM_LENS',
+  'MM_ARROW_FIRE',
+  'MM_POWDER_KEG',
 ]);
 
 const ITEMS_JUNK = new Set<string>([
@@ -315,6 +323,11 @@ class Solver {
 
     /* Get all assumed reachable locations that have not been placed */
     const unplacedLocs = Array.from(assumedReachable).filter(location => !this.placement[location]);
+
+    /* If there is nowhere to place an item, raise an error */
+    if (unplacedLocs.length === 0) {
+      throw new LogicSeedError(`No reachable locations for item ${requiredItem}`);
+    }
 
     /* Select a random location from the assumed reachable locations */
     const location = sample(this.random, unplacedLocs);

@@ -1,20 +1,29 @@
-location,                           type,           scene,                id,   item
+location,                           type,           scene,                              id,   item
 
-Clock Town Platform HP,             collectible,    CLOCK_TOWN_SOUTH,     0x0a, HEART_PIECE
-Clock Town Tree HP,                 collectible,    CLOCK_TOWN_NORTH,     0x0a, HEART_PIECE
-Clock Town Silver Rupee Chest,      chest,          CLOCK_TOWN_EAST,      0x0a, RUPEE_SILVER
-Clock Town Great Fairy,             collectible,    FAIRY_FOUNTAIN,       0x00, MASK_GREAT_FAIRY
-Clock Town Great Fairy Alt,         collectible,    FAIRY_FOUNTAIN,       0x01, MAGIC_UPGRADE
-Bomb Shop Bomb Bag,                 npc,            BOMB_SHOP,            0x03, BOMB_BAG
-Termina Field Tall Grass Chest,     chest,          TERMINA_FIELD,        0x01, RUPEE_RED
-Termina Field Tall Grass Grotto,    chest,          GROTTOS,              0x1f, RUPEE_RED
-Swamp Potion Shop,                  npc,            POTION_SHOP,          0x00, BOTTLED_POTION_RED
-Swamp Pictobox,                     npc,            TOURIST_INFORMATION,  0x01, PICTOGRAPH_BOX
-Deku Palace Song of Awakening,      npc,            DEKU_KING_CHAMBER,    0x02, SONG_AWAKENING
+Clock Town Platform HP,             collectible,    CLOCK_TOWN_SOUTH,                   0x0a, HEART_PIECE
+Clock Town Tree HP,                 collectible,    CLOCK_TOWN_NORTH,                   0x0a, HEART_PIECE
+Clock Town Silver Rupee Chest,      chest,          CLOCK_TOWN_EAST,                    0x0a, RUPEE_SILVER
+Clock Town Great Fairy,             collectible,    FAIRY_FOUNTAIN,                     0x00, MASK_GREAT_FAIRY
+Clock Town Great Fairy Alt,         collectible,    FAIRY_FOUNTAIN,                     0x01, MAGIC_UPGRADE
+Bomb Shop Bomb Bag,                 npc,            BOMB_SHOP,                          0x03, BOMB_BAG
+Termina Field Tall Grass Chest,     chest,          TERMINA_FIELD,                      0x01, RUPEE_RED
+Termina Field Tall Grass Grotto,    chest,          GROTTOS,                            0x1f, RUPEE_RED
+Swamp Potion Shop,                  npc,            POTION_SHOP,                        0x00, BOTTLED_POTION_RED
+Swamp Pictobox,                     npc,            TOURIST_INFORMATION,                0x01, PICTOGRAPH_BOX
+Deku Palace Song of Awakening,      npc,            DEKU_KING_CHAMBER,                  0x02, SONG_AWAKENING
+Lone Peak Shrine Lens Chest,        chest,          GROTTOS,                            0x01, LENS
+Lone Peak Shrine Boulder Chest,     chest,          GROTTOS,                            0x06, RUPEE_RED
+Lone Peak Shrine Invisible Chest,   chest,          GROTTOS,                            0x03, RUPEE_PURPLE
+Goron Graveyard Mask,               npc,            GORON_GRAVEYARD,                    0x05, MASK_GORON
+Goron Elder,                        npc,            PATH_GORON_VILLAGE_WINTER,          0x06, SONG_GORON_HALF
+Goron Baby,                         npc,            GORON_SHRINE,                       0x07, SONG_GORON_HALF
+Goron Powder Keg,                   npc,            GORON_VILLAGE_WINTER,               0x08, POWDER_KEG
+Romani Ranch Epona Song,            npc,            ROMANI_RANCH,                       0x09, SONG_EPONA
+Great Bay Coast Zora Mask,          npc,            GREAT_BAY_COAST,                    0x0a, MASK_ZORA
 
 Woodfall Temple Entrance Chest,     chest,          TEMPLE_WOODFALL,  0x18, STRAY_FAIRY_WF
 Woodfall Temple Water Chest,        chest,          TEMPLE_WOODFALL,  0x01, SMALL_KEY_WF
-Woodfall Temple Map,                chest,          TEMPLE_WOODFALL,  0x3e, MAP_WF
+Woodfall Temple Map,                chest,          TEMPLE_WOODFALL,  0x1d, MAP_WF
 Woodfall Temple Compass,            chest,          TEMPLE_WOODFALL,  0x1c, COMPASS_WF
 Woodfall Temple Dark Chest,         chest,          TEMPLE_WOODFALL,  0x19, STRAY_FAIRY_WF
 Woodfall Temple Center Chest,       chest,          TEMPLE_WOODFALL,  0x17, STRAY_FAIRY_WF
@@ -22,3 +31,20 @@ Woodfall Temple Bow,                chest,          TEMPLE_WOODFALL,  0x1b, BOW
 Woodfall Temple Boss Key Chest,     chest,          TEMPLE_WOODFALL,  0x1e, BOSS_KEY_WF
 Woodfall Temple Boss Container,     collectible,    LAIR_ODOLWA,      0x1f, HEART_CONTAINER
 Woodfall Temple Boss,               collectible,    LAIR_ODOLWA,      0x1e, REMAINS_ODOLWA
+
+Snowhead Temple Compass Room Ledge,       chest,          TEMPLE_SNOWHEAD, 0x19, STRAY_FAIRY_SH
+Snowhead Temple Compass,                  chest,          TEMPLE_SNOWHEAD, 0x1c, COMPASS_SH
+Snowhead Temple Bridge Room,              chest,          TEMPLE_SNOWHEAD, 0x01, SMALL_KEY_SH
+Snowhead Temple Block Room,               chest,          TEMPLE_SNOWHEAD, 0x03, SMALL_KEY_SH
+Snowhead Temple Block Room Ledge,         chest,          TEMPLE_SNOWHEAD, 0x15, STRAY_FAIRY_SH
+Snowhead Temple Central Room Bottom,      chest,          TEMPLE_SNOWHEAD, 0x14, STRAY_FAIRY_SH
+Snowhead Temple Boss Key,                 chest,          TEMPLE_SNOWHEAD, 0x1e, BOSS_KEY_SH
+Snowhead Temple Central Room Alcove,      chest,          TEMPLE_SNOWHEAD, 0x17, STRAY_FAIRY_SH
+Snowhead Temple Pillars Room,             chest,          TEMPLE_SNOWHEAD, 0x18, STRAY_FAIRY_SH
+Snowhead Temple Fire Arrow,               chest,          TEMPLE_SNOWHEAD, 0x1b, ARROW_FIRE
+Snowhead Temple Icicle Room Alcove,       chest,          TEMPLE_SNOWHEAD, 0x16, STRAY_FAIRY_SH
+Snowhead Temple Icicle Room,              chest,          TEMPLE_SNOWHEAD, 0x04, SMALL_KEY_SH
+Snowhead Temple Map,                      chest,          TEMPLE_SNOWHEAD, 0x1d, MAP_SH
+Snowhead Temple Map Alcove,               chest,          TEMPLE_SNOWHEAD, 0x13, STRAY_FAIRY_SH
+Snowhead Temple Boss HC,                  collectible,    LAIR_GOHT,       0x1f, HEART_CONTAINER
+Snowhead Temple Boss,                     collectible,    LAIR_GOHT,       0x1e, REMAINS_GOHT
