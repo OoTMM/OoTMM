@@ -7,7 +7,7 @@
     "glob": "^8.0.3",
     "glob-promise": "^5.0.0",
     "yaml": "^2.1.1",
-    "yaz0": "^1.0.0"
+    "yaz0": "^1.0.1"
   },
   "devDependencies": {
     "@types/node": "^18.7.13",
