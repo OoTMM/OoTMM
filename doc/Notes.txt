@@ -38,6 +38,8 @@ MM NPCs:
 07 Goron Baby
 08 Goron Powder Keg
 09 Epona's Song
+0a Pinnacle Rock HP
+0b Zora Song
 
 ===== MISSING FROM LOGIC =====
 Tomb Royal: <!-- <chest id="00" content="BOMBS_10"/> Requires fire -->
