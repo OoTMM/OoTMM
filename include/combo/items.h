@@ -169,7 +169,7 @@
 #define ITEM_MM_POWDER_KEG                  0x0c
 #define ITEM_MM_PICTOGRAPH_BOX              0x0d
 #define ITEM_MM_LENS_OF_TRUTH               0x0e
-#define ITEM_MM_LONGSHOT                    0x0f
+#define ITEM_MM_HOOKSHOT                    0x0f
 #define ITEM_MM_GREAT_FAIRY_SWORD           0x10
 #define ITEM_MM_RED_POTION_WITH_BOTTLE      0x11
 #define ITEM_MM_EMPTY_BOTTLE                0x12
@@ -341,7 +341,7 @@
 #define ITS_MM_KEG                  0x0c
 #define ITS_MM_PICTOBOX             0x0d
 #define ITS_MM_LENS                 0x0e
-#define ITS_MM_LONGSHOT             0x0f
+#define ITS_MM_HOOKSHOT             0x0f
 #define ITS_MM_GREAT_FAIRY_SWORD    0x10
 #define ITS_MM_TRADE3               0x11
 #define ITS_MM_BOTTLE               0x12

@@ -96,5 +96,6 @@
 "Great Bay Coast":
   exits:
     "Termina Field": "event(EPONA)"
+    "Pirate Fortress Exterior": "has(MASK_ZORA)"
   locations:
     "Great Bay Coast Zora Mask": "can_play(SONG_HEALING)"

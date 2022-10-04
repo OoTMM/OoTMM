@@ -111,7 +111,7 @@ MM_RANCH_HOUSE_BARN:                    0x10
 MM_HONEY_DARLING:                       0x11
 MM_MAYOR_HOUSE:                         0x12
 MM_IKANA_CANYON:                        0x13
-MM_PIRATE_FORTRESS:                     0x14
+MM_PIRATE_FORTRESS_EXTERIOR:            0x14
 MM_MILK_BAR:                            0x15
 MM_STONE_TOWER_TEMPLE:                  0x16
 MM_TREASURE_SHOP:                       0x17
@@ -148,7 +148,7 @@ MM_LAIR_TWINMOLD:                       0x36
 MM_GREAT_BAY_COAST:                     0x37
 MM_ZORA_CAPE:                           0x38
 MM_LOTTERY:	                            0x39
-MM_PIRATE_FORTRESS_EXTERIOR:            0x3b
+MM_PIRATE_FORTRESS_ENTRANCE:            0x3b
 MM_FISHERMAN_HUT:	                      0x3c
 MM_GORON_SHOP:                          0x3d
 MM_DEKU_KING_CHAMBER:                   0x3e
