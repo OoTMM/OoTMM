@@ -167,3 +167,15 @@
 "Ikana Canyon":
   exits:
     "Ikana Valley": "true"
+    "Ikana Spring Water Cave": "true"
+    "Music Box House": "event(IKANA_CURSE_LIFTED)"
+"Ikana Spring Water Cave":
+  exits:
+    "Ikana Canyon": "true"
+  events:
+    IKANA_CURSE_LIFTED: "can_play(SONG_STORMS)"
+"Music Box House":
+  exits:
+    "Ikana Canyon": "true"
+  locations:
+    "Music Box House Gibdo Mask": "can_play(SONG_HEALING)"
