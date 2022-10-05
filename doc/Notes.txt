@@ -30,6 +30,7 @@ MM NPCs:
 0e Song of Storms
 0f Gibdo Mask
 10 Mask of Scents
+11 Song Emptiness
 
 ===== MISSING FROM LOGIC =====
 Tomb Royal: <!-- <chest id="00" content="BOMBS_10"/> Requires fire -->

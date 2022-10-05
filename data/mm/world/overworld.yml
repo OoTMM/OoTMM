@@ -182,7 +182,8 @@
     "Ikana Valley": "true"
     "Ikana Spring Water Cave": "true"
     "Music Box House": "event(IKANA_CURSE_LIFTED)"
-    "Beneath The Well Entrance": "true"
+    "Beneath the Well Entrance": "true"
+    "Ancient Castle of Ikana Exterior": "has_mirror_shield"
 "Ikana Spring Water Cave":
   exits:
     "Ikana Canyon": "true"

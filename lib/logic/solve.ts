@@ -78,6 +78,7 @@ export const ITEMS_REQUIRED = new Set<string>([
   'MM_BOW',
   'MM_OCARINA',
   'MM_SWORD',
+  'MM_SHIELD',
   'MM_BOMB_BAG',
   'MM_LENS',
   'MM_ARROW_FIRE',

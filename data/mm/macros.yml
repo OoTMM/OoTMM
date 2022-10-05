@@ -9,3 +9,4 @@
 "can_use_ice_arrows": "has(MAGIC_UPGRADE) && has(BOW) && has(ARROW_ICE)"
 "can_use_light_arrows": "has(MAGIC_UPGRADE) && has(BOW) && has(ARROW_LIGHT)"
 "can_use_keg": "has(MASK_GORON) && has(POWDER_KEG)"
+"has_mirror_shield": "has(SHIELD, 2)"

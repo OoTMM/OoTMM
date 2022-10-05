@@ -87,6 +87,9 @@ Great Bay Temple Entrance Chest,                  chest,          TEMPLE_GREAT_B
 Great Bay Temple Boss HC,                         collectible,    LAIR_GYORG,       0x1f, HEART_CONTAINER
 Great Bay Temple Boss,                            collectible,    LAIR_GYORG,       0x1e, REMAINS_GYORG
 
-Beneath The Well Skulltulla Chest,                chest,          BENEATH_THE_WELL, 0x01, RUPEE_PURPLE
-Beneath The Well Keese Chest,                     chest,          BENEATH_THE_WELL, 0x02, RUPEE_PURPLE
-Beneath The Well Mirror Shield,                   chest,          BENEATH_THE_WELL, 0x1b, SHIELD
+Beneath the Well Skulltulla Chest,                chest,          BENEATH_THE_WELL, 0x01, RUPEE_PURPLE
+Beneath the Well Keese Chest,                     chest,          BENEATH_THE_WELL, 0x02, RUPEE_PURPLE
+Beneath the Well Mirror Shield,                   chest,          BENEATH_THE_WELL, 0x1b, SHIELD
+
+Ancient Castle of Ikana HP,                       collectible,    CASTLE_IKANA, 0x0a, HEART_PIECE
+Ancient Castle of Ikana Song Emptiness,           npc,            LAIR_IKANA,   0x11, SONG_EMPTINESS
