@@ -162,7 +162,7 @@ MM_SOUTHERN_SWAMP_POISONED:             0x45
 MM_WOODFALL:                            0x46
 MM_MOON_ZORA:                           0x47
 MM_GORON_VILLAGE_SPRING:                0x48
-MM_GREAT_BAY_TEMPLE:                    0x49
+MM_TEMPLE_GREAT_BAY:                    0x49
 MM_WATERFALL_RAPIDS:                    0x4a
 MM_BENEATH_THE_WELL:                    0x4b
 MM_ZORA_HALL_ROOMS:                     0x4c

@@ -18,6 +18,9 @@ Actor* hookSpawnActorEx(void* const_1, GameState_Play* play, s16 actorId, float 
         case SCE_MM_LAIR_GOHT:
             spawnBossReward(const_1, play, GI_MM_REMAINS_GOHT, x, y, z);
             break;
+        case SCE_MM_LAIR_GYORG:
+            spawnBossReward(const_1, play, GI_MM_REMAINS_GYORG, x, y, z);
+            break;
         }
         break;
     case AC_ITEM00:

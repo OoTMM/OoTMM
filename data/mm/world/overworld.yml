@@ -100,6 +100,7 @@
     "Pirate Fortress Exterior": "has(MASK_ZORA)"
     "Pinnacle Rock": "has(MASK_ZORA) && event(SEAHORSE)"
     "Laboratory": "true"
+    "Zora Cape": "true"
   locations:
     "Great Bay Coast Zora Mask": "can_play(SONG_HEALING)"
 "Fisher's Hut":
@@ -121,3 +122,15 @@
     "Great Bay Coast": "true"
   locations:
     "Laboratory Zora Song": "event(ZORA_EGGS_PIRATE) && event(ZORA_EGGS_PINNACLE_ROCK)"
+"Zora Cape":
+  exits:
+    "Great Bay Coast": "true"
+    "Zora Hall": "has(MASK_ZORA)"
+"Zora Hall":
+  exits:
+    "Zora Cape": "true"
+    "Zora Cape Peninsula": "true"
+"Zora Cape Peninsula":
+  exits:
+    "Zora Hall": "true"
+    "Great Bay Temple Entrance": "has(MASK_ZORA) && has(HOOKSHOT) && can_play(SONG_ZORA)"
