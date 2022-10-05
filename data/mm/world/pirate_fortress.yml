@@ -1,0 +1,35 @@
+"Pirate Fortress Entrance":
+  exits:
+    "Pirate Fortress Interior Water Tunnel": "has(MASK_ZORA) && has(MASK_GORON)"
+    "Pirate Fortress Exterior": "has(HOOKSHOT)"
+  events:
+    PHOTO_GERUDO: "has(PICTOGRAPH_BOX)"
+  locations:
+    "Pirate Fortress Entrance Chest 1": "has(MASK_ZORA)"
+    "Pirate Fortress Entrance Chest 2": "has(MASK_ZORA)"
+    "Pirate Fortress Entrance Chest 3": "has(MASK_ZORA)"
+"Pirate Fortress Interior Water Tunnel":
+  exits:
+    "Pirate Fortress Exterior": "true"
+  locations:
+    "Pirate Fortress Interior Water Chest 1": "true"
+    "Pirate Fortress Interior Water Chest 2": "true"
+    "Pirate Fortress Interior Water Chest 3": "true"
+    "Pirate Fortress Interior HP": "has(MASK_GORON) || (has_explosives && has(MASK_BUNNY))"
+"Pirate Fortress Exterior":
+  exits:
+    "Pirate Fortress Entrance": "true"
+    "Pirate Fortress Interior Hookshot Room": "has(BOW)"
+    "Pirate Fortress Interior Other Rooms": "has(HOOKSHOT)"
+  events:
+    ZORA_EGGS_PIRATE: "has(HOOKSHOT) && has(MASK_ZORA) && has_bottle"
+  locations:
+    "Pirate Fortress Exterior Lower Chest": "true"
+    "Pirate Fortress Exterior Upper Chest": "has(HOOKSHOT)"
+"Pirate Fortress Interior Hookshot Room":
+  locations:
+    "Pirate Fortress Interior Hookshot": "true"
+"Pirate Fortress Interior Other Rooms":
+  locations:
+    "Pirate Fortress Interior Aquarium": "has(MASK_ZORA)"
+    "Pirate Fortress Interior Silver Rupee Chest": "true"

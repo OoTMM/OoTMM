@@ -6,4 +6,6 @@
 "can_use_lens": "has(MAGIC_UPGRADE) && has(LENS)"
 "has_explosives": "has(BOMB_BAG) || has(MASK_BLAST)"
 "can_use_fire_arrows": "has(MAGIC_UPGRADE) && has(BOW) && has(ARROW_FIRE)"
+"can_use_ice_arrows": "has(MAGIC_UPGRADE) && has(BOW) && has(ARROW_ICE)"
+"can_use_light_arrows": "has(MAGIC_UPGRADE) && has(BOW) && has(ARROW_LIGHT)"
 "can_use_keg": "has(MASK_GORON) && has(POWDER_KEG)"

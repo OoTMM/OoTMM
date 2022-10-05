@@ -146,8 +146,8 @@ void comboAddItemMm(u16 itemId)
     case ITEM_MM_LENS_OF_TRUTH:
         gMmSave.inventory.items[ITS_MM_LENS] = ITEM_MM_LENS_OF_TRUTH;
         break;
-    case ITEM_MM_LONGSHOT:
-        gMmSave.inventory.items[ITS_MM_LONGSHOT] = ITEM_MM_LONGSHOT;
+    case ITEM_MM_HOOKSHOT:
+        gMmSave.inventory.items[ITS_MM_HOOKSHOT] = ITEM_MM_HOOKSHOT;
         break;
     case ITEM_MM_GREAT_FAIRY_SWORD:
         gMmSave.inventory.items[ITS_MM_GREAT_FAIRY_SWORD] = ITEM_MM_GREAT_FAIRY_SWORD;

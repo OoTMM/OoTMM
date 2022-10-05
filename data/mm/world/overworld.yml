@@ -95,6 +95,42 @@
     "Romani Ranch Epona Song": "can_use_keg && has(OCARINA)"
 "Great Bay Coast":
   exits:
+    "Fisher's Hut": "true"
     "Termina Field": "event(EPONA)"
+    "Pirate Fortress Exterior": "has(MASK_ZORA)"
+    "Pinnacle Rock": "has(MASK_ZORA) && event(SEAHORSE)"
+    "Laboratory": "true"
+    "Zora Cape": "true"
   locations:
     "Great Bay Coast Zora Mask": "can_play(SONG_HEALING)"
+"Fisher's Hut":
+  exits:
+    "Great Bay Coast": "true"
+  events:
+    SEAHORSE: "event(PHOTO_GERUDO) && has_bottle"
+"Pinnacle Rock":
+  exits:
+    "Great Bay Coast": "true"
+  events:
+    ZORA_EGGS_PINNACLE_ROCK: "has(MASK_ZORA) && has_bottle"
+  locations:
+    "Pinnacle Rock Chest 1": "has(MASK_ZORA)"
+    "Pinnacle Rock Chest 2": "has(MASK_ZORA)"
+    "Pinnacle Rock HP": "has(MASK_ZORA) && event(SEAHORSE)"
+"Laboratory":
+  exits:
+    "Great Bay Coast": "true"
+  locations:
+    "Laboratory Zora Song": "event(ZORA_EGGS_PIRATE) && event(ZORA_EGGS_PINNACLE_ROCK)"
+"Zora Cape":
+  exits:
+    "Great Bay Coast": "true"
+    "Zora Hall": "has(MASK_ZORA)"
+"Zora Hall":
+  exits:
+    "Zora Cape": "true"
+    "Zora Cape Peninsula": "true"
+"Zora Cape Peninsula":
+  exits:
+    "Zora Hall": "true"
+    "Great Bay Temple Entrance": "has(MASK_ZORA) && has(HOOKSHOT) && can_play(SONG_ZORA)"
