@@ -4,3 +4,4 @@
  - MM teleport pads
  - Malon Flags
  - Progressive shields & shops
+ - Stone Temple Tower & Inverted override IDs

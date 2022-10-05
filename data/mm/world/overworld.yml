@@ -38,6 +38,8 @@
     "Swamp": "can_rescue_koume"
     "Woodfall": "has(MASK_DEKU)"
     "Deku Shrine": "has(MASK_DEKU) && event(DEKU_PRINCESS)"
+  events:
+    MAGIC_BEANS: "has(MASK_DEKU)"
   locations:
     "Deku Palace Song of Awakening": "has(SWORD) && has(MASK_DEKU) && has(OCARINA)"
 "Woodfall":
@@ -184,6 +186,7 @@
     "Music Box House": "event(IKANA_CURSE_LIFTED)"
     "Beneath the Well Entrance": "true"
     "Ancient Castle of Ikana Exterior": "has_mirror_shield"
+    "Stone Tower": "true"
 "Ikana Spring Water Cave":
   exits:
     "Ikana Canyon": "true"
@@ -194,3 +197,11 @@
     "Ikana Canyon": "true"
   locations:
     "Music Box House Gibdo Mask": "can_play(SONG_HEALING)"
+"Stone Tower":
+  exits:
+    "Ikana Canyon": "true"
+    "Stone Tower Top": "can_use_elegy3 && has(HOOKSHOT)" # Probably overkill
+"Stone Tower Top":
+  exits:
+    "Stone Tower": "true"
+    "Stone Tower Temple Entrance": "can_use_elegy3"

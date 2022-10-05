@@ -113,9 +113,9 @@ MM_MAYOR_HOUSE:                         0x12
 MM_IKANA_CANYON:                        0x13
 MM_PIRATE_FORTRESS_EXTERIOR:            0x14
 MM_MILK_BAR:                            0x15
-MM_STONE_TOWER_TEMPLE:                  0x16
+MM_TEMPLE_STONE_TOWER:                  0x16
 MM_TREASURE_SHOP:                       0x17
-MM_STONE_TOWER_TEMPLE_INVERTED:         0x18
+MM_TEMPLE_STONE_TOWER_INVERTED:         0x18
 MM_CLOCK_TOWER_ROOFTOP:                 0x19
 MM_OPENING:                             0x1a
 MM_TEMPLE_WOODFALL:                     0x1b
