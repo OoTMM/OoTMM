@@ -1,5 +1,3 @@
-GI 0x7e: Bug, Fish, Fairy, Maybe blue fire?
-
 NPC override IDs:
 
 00 Malon, Weird Egg (Chicken)
@@ -11,20 +9,7 @@ NPC override IDs:
 06 Song of Storms
 07 Guerudo Member Card
 
-SPIRITUAL
-Emerald:  1240 10e0
-Ruby:     20a0 1fb0
-Sapphire: 3530 3370
-
 MM Events RAM: 801f0568
-
-Termina: 0x00 0x02
-West: 0x02 0x10
-North: 0x02 0x20
-East: 0x02 0x08
-
-Grotto Termina var: 3f red rupee flag 1f
-Chest: 0x5081 id 01 content red rupee
 
 MM NPCs:
 
@@ -44,6 +29,7 @@ MM NPCs:
 0d Garo Mask
 0e Song of Storms
 0f Gibdo Mask
+10 Mask of Scents
 
 ===== MISSING FROM LOGIC =====
 Tomb Royal: <!-- <chest id="00" content="BOMBS_10"/> Requires fire -->

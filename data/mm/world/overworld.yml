@@ -23,19 +23,32 @@
   exits:
     "Termina Field": "true"
     "Deku Palace": "can_rescue_koume"
+    "Swamp Potion Shop": "true"
+  locations:
+    "Swamp Pictobox": "can_rescue_koume"
+"Swamp Potion Shop":
+  exits:
+    "Swamp": "true"
+  events:
+    BLUE_POTION: "has_bottle && has(MASK_SCENTS)"
   locations:
     "Swamp Potion Shop": "true"
-    "Swamp Pictobox": "can_rescue_koume"
 "Deku Palace":
   exits:
     "Swamp": "can_rescue_koume"
     "Woodfall": "has(MASK_DEKU)"
+    "Deku Shrine": "has(MASK_DEKU) && event(DEKU_PRINCESS)"
   locations:
     "Deku Palace Song of Awakening": "has(SWORD) && has(MASK_DEKU) && has(OCARINA)"
 "Woodfall":
   exits:
     "Deku Palace": "true"
     "Woodfall Temple Entrance": "has(MASK_DEKU) && can_play(SONG_AWAKENING) && has(SWORD)"
+"Deku Shrine":
+  exits:
+    "Deku Palace": "true"
+  locations:
+    "Deku Shrine Mask of Scents": "has(MASK_DEKU) && has(BOW)"
 "Mountain Village Path":
   exits:
     "Termina Field": "has(BOW)"
@@ -169,6 +182,7 @@
     "Ikana Valley": "true"
     "Ikana Spring Water Cave": "true"
     "Music Box House": "event(IKANA_CURSE_LIFTED)"
+    "Beneath The Well Entrance": "true"
 "Ikana Spring Water Cave":
   exits:
     "Ikana Canyon": "true"

@@ -1,0 +1,16 @@
+"Beneath The Well Entrance":
+  exits:
+    "Ikana Canyon": "true"
+    "Beneath The Well North Section": "has(MASK_GIBDO) && event(BLUE_POTION)"
+    "Beneath The Well East Section": "has(MASK_GIBDO)"
+"Beneath The Well North Section":
+  locations:
+    "Beneath The Well Keese Chest": "true"
+"Beneath The Well East Section":
+  locations:
+    "Beneath The Well Skulltulla Chest": "has_bottle"
+  exits:
+    "Beneath The Well End": "has(MASK_GIBDO) && has(BOMB_BAG)"
+"Beneath The Well End":
+  locations:
+    "Beneath The Well Mirror Shield": "true"

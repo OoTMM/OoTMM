@@ -11,6 +11,7 @@ Termina Field Tall Grass Grotto,              chest,          GROTTOS,          
 Swamp Potion Shop,                            npc,            POTION_SHOP,                        0x00, BOTTLED_POTION_RED
 Swamp Pictobox,                               npc,            TOURIST_INFORMATION,                0x01, PICTOGRAPH_BOX
 Deku Palace Song of Awakening,                npc,            DEKU_KING_CHAMBER,                  0x02, SONG_AWAKENING
+Deku Shrine Mask of Scents,                   npc,            DEKU_SHRINE,                        0x10, MASK_SCENTS
 Lone Peak Shrine Lens Chest,                  chest,          GROTTOS,                            0x01, LENS
 Lone Peak Shrine Boulder Chest,               chest,          GROTTOS,                            0x06, RUPEE_RED
 Lone Peak Shrine Invisible Chest,             chest,          GROTTOS,                            0x03, RUPEE_PURPLE
@@ -85,3 +86,7 @@ Great Bay Temple Green Pipe 3 Chest,              chest,          TEMPLE_GREAT_B
 Great Bay Temple Entrance Chest,                  chest,          TEMPLE_GREAT_BAY, 0x18, STRAY_FAIRY_GB
 Great Bay Temple Boss HC,                         collectible,    LAIR_GYORG,       0x1f, HEART_CONTAINER
 Great Bay Temple Boss,                            collectible,    LAIR_GYORG,       0x1e, REMAINS_GYORG
+
+Beneath The Well Skulltulla Chest,                chest,          BENEATH_THE_WELL, 0x01, RUPEE_PURPLE
+Beneath The Well Keese Chest,                     chest,          BENEATH_THE_WELL, 0x02, RUPEE_PURPLE
+Beneath The Well Mirror Shield,                   chest,          BENEATH_THE_WELL, 0x1b, SHIELD
