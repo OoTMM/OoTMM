@@ -40,6 +40,8 @@ MM NPCs:
 09 Epona's Song
 0a Pinnacle Rock HP
 0b Zora Song
+0c Stone Mask
+0d Garo Mask
 
 ===== MISSING FROM LOGIC =====
 Tomb Royal: <!-- <chest id="00" content="BOMBS_10"/> Requires fire -->

@@ -15,6 +15,7 @@
     "Mountain Village Path": "has(BOW)"
     "Milk Road": "true"
     "Great Bay Coast": "event(EPONA)"
+    "Road to Ikana": "event(EPONA)"
   locations:
     "Termina Field Tall Grass Chest": "true"
     "Termina Field Tall Grass Grotto": "true"
@@ -86,6 +87,7 @@
   exits:
     "Romani Ranch": "true"
     "Termina Field": "true"
+    "Gorman Track": "event(EPONA)"
 "Romani Ranch":
   exits:
     "Milk Road": "true"
@@ -134,3 +136,13 @@
   exits:
     "Zora Hall": "true"
     "Great Bay Temple Entrance": "has(MASK_ZORA) && has(HOOKSHOT) && can_play(SONG_ZORA)"
+"Gorman Track":
+  exits:
+    "Milk Road": "event(EPONA)"
+  locations:
+    "Gorman Track Garo Mask": "true"
+"Road to Ikana":
+  exits:
+    "Termina Field": "event(EPONA)"
+  locations:
+    "Road to Ikana Stone Mask": "can_use_lens && has_bottle"

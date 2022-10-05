@@ -24,6 +24,8 @@ Pinnacle Rock Chest 1,              chest,          PINNACLE_ROCK,              
 Pinnacle Rock Chest 2,              chest,          PINNACLE_ROCK,                      0x02, RUPEE_RED
 Pinnacle Rock HP,                   npc,            PINNACLE_ROCK,                      0x0a, HEART_PIECE
 Laboratory Zora Song,               npc,            LABORATORY,                         0x0b, SONG_ZORA
+Road to Ikana Stone Mask,           npc,            ROAD_IKANA,                         0x0c, MASK_STONE
+Gorman Track Garo Mask,             npc,            GORMAN_TRACK,                       0x0d, MASK_GARO
 
 Woodfall Temple Entrance Chest,     chest,          TEMPLE_WOODFALL,  0x18, STRAY_FAIRY_WF
 Woodfall Temple Water Chest,        chest,          TEMPLE_WOODFALL,  0x01, SMALL_KEY_WF
