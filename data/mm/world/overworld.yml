@@ -144,5 +144,26 @@
 "Road to Ikana":
   exits:
     "Termina Field": "event(EPONA)"
+    "Ikana Valley": "(has(MASK_GARO) || has(MASK_GIBDO)) && has(HOOKSHOT)"
+    "Ikana Graveyard": "true"
   locations:
     "Road to Ikana Stone Mask": "can_use_lens && has_bottle"
+"Ikana Graveyard":
+  exits:
+    "Road to Ikana": "true"
+    "Beneath The Graveyard Night 1": "has(MASK_CAPTAIN)"
+  locations:
+    "Ikana Graveyard Captain Mask": "can_play(SONG_AWAKENING)"
+"Beneath The Graveyard Night 1":
+  exits:
+    "Ikana Graveyard": "true"
+  locations:
+    "Beneath The Graveyard Chest": "true"
+    "Beneath The Graveyard Song of Storms": "true"
+"Ikana Valley":
+  exits:
+    "Road to Ikana": "true"
+    "Ikana Canyon": "can_use_ice_arrows && has(HOOKSHOT)"
+"Ikana Canyon":
+  exits:
+    "Ikana Valley": "true"

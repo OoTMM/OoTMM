@@ -42,6 +42,7 @@ MM NPCs:
 0b Zora Song
 0c Stone Mask
 0d Garo Mask
+0e Song of Storms
 
 ===== MISSING FROM LOGIC =====
 Tomb Royal: <!-- <chest id="00" content="BOMBS_10"/> Requires fire -->
