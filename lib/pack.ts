@@ -6,18 +6,19 @@ import { Game, GAMES, PATH_DIST, PATH_BUILD, CONFIG, CUSTOM_ADDR } from './confi
 import { patchGame } from './patch';
 import { DmaData } from './dma';
 import { randomize } from './randomizer';
+import { Options } from './options';
 
-const combineRoms = async () => {
-  const oot = await patchGame('oot');
-  const mm = await patchGame('mm');
+const combineRoms = async (opts: Options) => {
+  const oot = await patchGame(opts, 'oot');
+  const mm = await patchGame(opts, 'mm');
   const compressedOot = await compressGame('oot', oot);
   const compressedMm = await compressGame('mm', mm);
   return Buffer.concat([compressedOot, compressedMm]);
 };
 
-const packPayload = async (rom: Buffer, game: Game) => {
+const packPayload = async (opts: Options, rom: Buffer, game: Game) => {
   console.log("Packing payload for " + game + "...");
-  const payload = await fs.readFile(path.resolve(PATH_BUILD, game + '_payload.bin'));
+  const payload = await fs.readFile(path.resolve(PATH_BUILD, opts.debug ? 'Debug' : 'Release', game + '_payload.bin'));
   if (payload.length > 0x20000) {
     throw new Error("Payload too large");
   }
@@ -102,12 +103,12 @@ const fixChecksum = (rom: Buffer) => {
   rom.writeUInt32BE(c2, 0x14);
 };
 
-export const pack = async () => {
-  const rom = await combineRoms();
+export const pack = async (opts: Options) => {
+  const rom = await combineRoms(opts);
   fs.mkdir(PATH_DIST, { recursive: true });
 
   for (const g of GAMES) {
-    await packPayload(rom, g);
+    await packPayload(opts, rom, g);
   }
   await packCustom(rom);
   fixDMA(rom);

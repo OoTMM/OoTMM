@@ -2,6 +2,7 @@ import fs from 'fs/promises';
 import path from 'path';
 
 import { Game, PATH_BUILD, CONFIG } from "./config";
+import { Options } from './options';
 
 type VRamEntry = {
   vstart: number;
@@ -189,10 +190,10 @@ const patchWrite32 = (game: Game, rom: Buffer, vram: VRamEntry[], patch: Buffer,
   return cursor;
 };
 
-export const patchGame = async (game: Game) => {
+export const patchGame = async (opts: Options, game: Game) => {
   console.log("Patching " + game + "...");
   const rom = await fs.readFile(path.resolve(PATH_BUILD, 'roms', `${game}_decompressed.z64`));
-  const patch = await fs.readFile(path.resolve(PATH_BUILD, `${game}_patch.bin`));
+  const patch = await fs.readFile(path.resolve(PATH_BUILD, opts.debug ? 'Debug' : 'Release', `${game}_patch.bin`));
   const vram = makeVRamTable(game, rom);
   let cursor = 0;
   for (;;) {
