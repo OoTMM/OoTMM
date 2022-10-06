@@ -121,3 +121,10 @@ Stone Tower Temple Inverted Boss Key,                   chest,          TEMPLE_S
 Stone Tower Temple Inverted Giant Mask,                 chest,          TEMPLE_STONE_TOWER_INVERTED,  0x1a, MASK_GIANT
 Stone Tower Boss HC,                                    collectible,    LAIR_TWINMOLD,                0x1f, HEART_CONTAINER
 Stone Tower Boss,                                       collectible,    LAIR_TWINMOLD,                0x1e, REMAINS_TWINMOLD
+
+Moon Trial Deku HP,           collectible,  MOON_DEKU,   0x01, HEART_PIECE
+Moon Trial Goron HP,          collectible,  MOON_GORON,  0x01, HEART_PIECE
+Moon Trial Zora HP,           collectible,  MOON_ZORA,   0x01, HEART_PIECE
+Moon Trial Link Chest 1,      chest,        MOON_LINK,   0x01, ARROWS_30
+Moon Trial Link Chest 2,      chest,        MOON_LINK,   0x02, BOMBCHUS_10
+Moon Trial Link HP,           collectible,  MOON_LINK,   0x01, HEART_PIECE

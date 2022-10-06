@@ -1,0 +1,36 @@
+"Moon":
+  exits:
+    "Moon Trial Deku":  "masks(1)"
+    "Moon Trial Goron": "masks(2)"
+    "Moon Trial Zora":  "masks(3)"
+    "Moon Trial Link":  "masks(4)"
+  # TODO: Add Fierce Deity Check here once all 20 masks are in the pool
+"Moon Trial Deku":
+  events:
+    MOON_TRIAL_DEKU: "has(MASK_DEKU)"
+  locations:
+    "Moon Trial Deku HP": "has(MASK_DEKU)"
+"Moon Trial Goron":
+  events:
+    MOON_TRIAL_GORON: "has(MASK_GORON) && has(MAGIC_UPGRADE)"
+  locations:
+    "Moon Trial Goron HP": "has(MASK_GORON) && has(MAGIC_UPGRADE)"
+"Moon Trial Zora":
+  events:
+    MOON_TRIAL_ZORA: "has(MASK_ZORA)"
+  locations:
+    "Moon Trial Zora HP": "has(MASK_ZORA)"
+"Moon Trial Link":
+  exits:
+    "Moon Trial Link 2": "has(HOOKSHOT)"
+"Moon Trial Link 2":
+  exits:
+    "Moon Trial Link 3": "has_bombchu && has(BOW)"
+  locations:
+    "Moon Trial Link Chest 1": "true"
+    "Moon Trial Link Chest 2": "true"
+"Moon Trial Link 3":
+  events:
+    MOON_TRIAL_LINK: "has_bombchu && can_use_fire_arrows"
+  locations:
+    "Moon Trial Link HP": "true"
