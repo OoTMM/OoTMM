@@ -1,6 +1,7 @@
 "Clock Town":
   exits:
     "Termina Field": "true"
+    "Clock Tower Rooftop": "true"
   locations:
     "Clock Town Platform HP": "true"
     "Clock Town Tree HP": "true"
@@ -210,3 +211,6 @@
   exits:
     "Stone Tower Temple Inverted Entrance": "true"
     "Stone Tower Top": "can_use_light_arrows"
+"Clock Tower Rooftop":
+  exits:
+    "Moon": "can_play(SONG_ORDER) && has(REMAINS_ODOLWA) && has(REMAINS_GOHT) && has(REMAINS_GYORG) && has(REMAINS_TWINMOLD)"

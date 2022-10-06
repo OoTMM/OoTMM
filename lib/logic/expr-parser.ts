@@ -1,6 +1,6 @@
 import { Game } from '../config';
 import { gameId } from '../util';
-import { Expr, exprTrue, exprFalse, exprAnd, exprOr, exprAge, exprHas, exprEvent } from './expr';
+import { Expr, exprTrue, exprFalse, exprAnd, exprOr, exprAge, exprHas, exprEvent, exprMasks } from './expr';
 
 const SIMPLE_TOKENS = ['||', '&&', '(', ')', ',', 'true', 'false'] as const;
 
@@ -99,6 +99,17 @@ export class ExprParser {
     return exprEvent(event);
   }
 
+  private parseExprMasks(): Expr | undefined {
+    if (this.peek('identifier') !== 'masks') {
+      return undefined;
+    }
+    this.accept('identifier');
+    this.expect('(');
+    const count = this.expect('number');
+    this.expect(')');
+    return exprMasks(count);
+  }
+
   private parseMacro(): Expr | undefined {
     /* Check for a macro with the given name */
     const name = this.peek('identifier');
@@ -164,6 +175,7 @@ export class ExprParser {
       || this.parseExprAge()
       || this.parseExprHas()
       || this.parseExprEvent()
+      || this.parseExprMasks()
       || this.parseMacro();
   }
 
