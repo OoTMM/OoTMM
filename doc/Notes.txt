@@ -31,6 +31,7 @@ MM NPCs:
 0f Gibdo Mask
 10 Mask of Scents
 11 Song Emptiness
+12 Oath to Order
 
 ===== MISSING FROM LOGIC =====
 Tomb Royal: <!-- <chest id="00" content="BOMBS_10"/> Requires fire -->
@@ -90,3 +91,13 @@ Bomb shop: [17, 19, 1a]
 
 Bomb Shop normal bomb bag: 17
 Bomb Shop big bomb bag: 18
+
+== MM Bean Checks ==
+Deku Palace Song
+Deku Palace Bean Chest
+Inverted Stone Tower Chests
+Great Bay HP
+Doggy Racetrack Chest
+Stump Chest
+Monument Room Lower Wall Skulltula
+Gold Room Ceiling Skulltula

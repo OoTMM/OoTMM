@@ -76,6 +76,7 @@ export const ITEMS_REQUIRED = new Set<string>([
   'MM_SONG_ZORA',
   'MM_SONG_STORMS',
   'MM_SONG_EMPTINESS',
+  'MM_SONG_ORDER',
   'MM_BOW',
   'MM_OCARINA',
   'MM_SWORD',

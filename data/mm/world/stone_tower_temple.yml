@@ -16,7 +16,7 @@
   exits:
     "Stone Tower Temple West": "true"
     "Stone Tower Temple Under West Garden": "true"
-    "Stone Tower Temple Center": "has(SMALL_KEY_ST, 1)"
+    "Stone Tower Temple Center": "has(SMALL_KEY_ST, 4)"
   events:
     STONE_TOWER_WEST_GARDEN_LIGHT: "has_explosives"
 "Stone Tower Temple Under West Garden":
@@ -30,7 +30,7 @@
 "Stone Tower Temple Center":
   dungeon: ST
   exits:
-    "Stone Tower Temple West Garden": "has(SMALL_KEY_ST, 1)"
+    "Stone Tower Temple West Garden": "has(SMALL_KEY_ST, 4)"
     "Stone Tower Temple Water Room": "has(MASK_ZORA)"
   locations:
     "Stone Tower Temple Center Across Water Chest": "has(MASK_ZORA)"
@@ -39,7 +39,7 @@
   dungeon: ST
   exits:
     "Stone Tower Temple Center": "has(MASK_ZORA)"
-    "Stone Tower Temple Mirrors Room": "has(SMALL_KEY_ST, 1)"
+    "Stone Tower Temple Mirrors Room": "has(SMALL_KEY_ST, 4)"
   events:
     STONE_TOWER_WATER_CHEST_SWITCH: "has(MASK_ZORA)"
   locations:
@@ -48,7 +48,7 @@
 "Stone Tower Temple Mirrors Room":
   dungeon: ST
   exits:
-    "Stone Tower Temple Water Room": "has(SMALL_KEY_ST, 1)"
+    "Stone Tower Temple Water Room": "has(SMALL_KEY_ST, 4)"
     "Stone Tower Temple Wind Room": "has_mirror_shield"
   locations:
     "Stone Tower Temple Mirrors Room Center Chest": "has(MASK_GORON) && has_mirror_shield"
@@ -87,7 +87,7 @@
   dungeon: ST
   exits:
     "Stone Tower Temple Inverted Entrance": "true"
-    "Stone Tower Temple Inverted Rotating Room": "has(MASK_DEKU) && has(SMALL_KEY_ST, 1)"
+    "Stone Tower Temple Inverted Rotating Room": "has(MASK_DEKU) && has(SMALL_KEY_ST, 4)"
   events:
     STONE_TOWER_WATER_CHEST_SUN: "can_use_light_arrows"
   locations:
@@ -126,7 +126,7 @@
   events:
     STONE_TOWER_ENTRANCE_CHEST_SWITCH: "true"
   exits:
-    "Stone Tower Temple Inverted Bridge": "has(SMALL_KEY_ST, 1) && has(HOOKSHOT)"
+    "Stone Tower Temple Inverted Bridge": "has(SMALL_KEY_ST, 4) && has(HOOKSHOT)"
 "Stone Tower Temple Inverted Bridge":
   dungeon: ST
   locations:
@@ -148,3 +148,4 @@
   locations:
     "Stone Tower Boss HC": "true"
     "Stone Tower Boss": "true"
+    "Oath to Order": "true"
