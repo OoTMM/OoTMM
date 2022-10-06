@@ -17,7 +17,7 @@ static void debugCheat(GameState_Play* play)
 void hookPlay_Init(GameState_Play* play)
 {
     comboObjectsReset();
-    debugCheat(play);
+    //debugCheat(play);
 
     Play_Init(play);
 
