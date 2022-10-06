@@ -1,0 +1,34 @@
+"Ancient Castle of Ikana Exterior":
+  exits:
+    "Beneath the Well End": "has_mirror_shield"
+    "Ancient Castle of Ikana Entrance": "true"
+"Ancient Castle of Ikana Entrance":
+  exits:
+    "Ancient Castle of Ikana Exterior": "true"
+    "Ikana Canyon": "has_mirror_shield"
+    "Ancient Castle of Ikana Interior North": "can_use_fire_arrows"
+    "Ancient Castle of Ikana Interior South": "can_use_fire_arrows"
+    "Ancient Castle of Ikana Boss": "has_mirror_shield && event(IKANA_CASTLE_LIGHT2)"
+"Ancient Castle of Ikana Interior North":
+  exits:
+    "Ancient Castle of Ikana Interior North 2": "has(MASK_DEKU)"
+"Ancient Castle of Ikana Interior North 2":
+  exits:
+    "Ancient Castle of Ikana Roof Exterior": "can_use_lens"
+"Ancient Castle of Ikana Roof Exterior":
+  events:
+    IKANA_CASTLE_LIGHT: "has(MASK_DEKU)"
+  locations:
+    "Ancient Castle of Ikana HP": "has(BOW) && has(MASK_DEKU)"
+"Ancient Castle of Ikana Interior South":
+  exits:
+    "Ancient Castle of Ikana Roof Interior": "has_mirror_shield && event(IKANA_CASTLE_LIGHT)"
+"Ancient Castle of Ikana Roof Interior":
+  events:
+    IKANA_CASTLE_LIGHT2: "has(MASK_GORON) && has(POWDER_KEG)"
+"Ancient Castle of Ikana Boss":
+  exits:
+    "Ancient Castle of Ikana After Boss": "has_mirror_shield && can_use_fire_arrows"
+"Ancient Castle of Ikana After Boss":
+  locations:
+    "Ancient Castle of Ikana Song Emptiness": "true"

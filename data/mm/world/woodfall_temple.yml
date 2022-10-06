@@ -20,6 +20,12 @@
     "Woodfall Temple Boss Key Chest": "has(BOW)"
 "Woodfall Temple Boss":
   dungeon: "WF"
+  exits:
+    "Woodfall Temple After Boss": "true"
+"Woodfall Temple After Boss":
+  events:
+    DEKU_PRINCESS: "has_bottle"
   locations:
     "Woodfall Temple Boss Container": "true"
     "Woodfall Temple Boss": "true"
+    "Oath to Order": "true"

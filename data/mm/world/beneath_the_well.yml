@@ -1,0 +1,18 @@
+"Beneath the Well Entrance":
+  exits:
+    "Ikana Canyon": "true"
+    "Beneath the Well North Section": "has(MASK_GIBDO) && event(BLUE_POTION)"
+    "Beneath the Well East Section": "has(MASK_GIBDO) && event(MAGIC_BEANS)"
+"Beneath the Well North Section":
+  locations:
+    "Beneath the Well Keese Chest": "true"
+"Beneath the Well East Section":
+  locations:
+    "Beneath the Well Skulltulla Chest": "has_bottle"
+  exits:
+    "Beneath the Well End": "has(MASK_GIBDO) && has(BOMB_BAG)"
+"Beneath the Well End":
+  exits:
+    "Ancient Castle of Ikana Exterior": "has_mirror_shield"
+  locations:
+    "Beneath the Well Mirror Shield": "true"
