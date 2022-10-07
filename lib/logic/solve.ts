@@ -105,6 +105,23 @@ const ITEMS_JUNK = new Set<string>([
   'MM_RECOVERY_HEART',
 ]);
 
+const EXTRA_ITEMS = [
+  'OOT_MASK_SKULL',
+  'OOT_MASK_SPOOKY',
+  'OOT_MASK_KEATON',
+  'OOT_MASK_BUNNY',
+  'OOT_MASK_TRUTH',
+  'OOT_MASK_GORON',
+  'OOT_MASK_ZORA',
+  'OOT_MASK_GERUDO',
+  'MM_MASK_DEKU',
+  'MM_OCARINA',
+  'MM_SHIELD',
+  'MM_SWORD',
+  'MM_SONG_TIME',
+  'MM_SONG_HEALING',
+];
+
 const sample = <T>(random: Random, arr: T[]): T => {
   if (arr.length === 0) {
     throw new Error('Empty Array');
@@ -224,7 +241,7 @@ class Solver {
 
   solve() {
     /* Fix the item pool */
-    for (const item of ['MM_MASK_DEKU', 'MM_OCARINA', 'MM_SHIELD', 'MM_SWORD', 'MM_SONG_TIME', 'MM_SONG_HEALING']) {
+    for (const item of EXTRA_ITEMS) {
       this.insertItem(item);
     }
 
