@@ -1,272 +1,194 @@
-{
-  "SPAWN": {
-    "exits": {
-      "Link's House": "is_child",
-      "Temple of Time": "is_adult && event(TIME_TRAVEL)",
-      "Graveyard Upper": "can_play(SONG_TP_SHADOW)",
-      "Desert Colossus": "can_play(SONG_TP_SPIRIT)"
-    }
-  },
-  "Link's House": {
-    "exits": {
-      "Kokiri Forest": "true"
-    }
-  },
-  "Kokiri Forest": {
-    "exits": {
-      "Link's House": "true",
-      "Mido's House": "true",
-      "Kokiri Forest Child": "is_child",
-      "Lost Woods": "true",
-      "Deku Tree Main": "true"
-    }
-  },
-  "Mido's House": {
-    "locations": {
-      "KF Mido Top Left": "true",
-      "KF Mido Top Right": "true",
-      "KF Mido Bottom Left": "true",
-      "KF Mido Bottom Right": "true"
-    },
-    "exits": {
-      "Kokiri Forest": "true"
-    }
-  },
-  "Kokiri Forest Child": {
-    "locations": {
-      "KF Kokiri Sword Chest": "true"
-    },
-    "exits": {
-      "Kokiri Forest": "true"
-    }
-  },
-  "Hyrule Field": {
-    "exits": {
-      "Lost Woods": "true",
-      "Market": "is_child",
-      "Market Destroyed": "is_adult",
-      "Kakariko": "true",
-      "Zora River": "has_explosives",
-      "Lake Hylia": "true",
-      "Gerudo Valley": "true",
-      "MM Clock Town": "is_child"
-    },
-    "locations": {
-      "Hyrule Field Ocarina of Time": "has_spiritual_stones",
-      "Hyrule Field Song of Time": "has_spiritual_stones"
-    }
-  },
-  "Market": {
-    "exits": {
-      "Hyrule Field": "true",
-      "Hyrule Castle": "true",
-      "Temple of Time": "true"
-    }
-  },
-  "Market Destroyed": {
-    "exits": {
-      "Hyrule Field": "true",
-      "Temple of Time": "true",
-      "Ganon Castle Exterior": "true"
-    }
-  },
-  "Hyrule Castle": {
-    "exits": {
-      "Market": "true"
-    },
-    "locations": {
-      "Malon Egg": "true",
-      "Zelda's Letter": "has(CHICKEN)",
-      "Zelda's Song": "has(CHICKEN)",
-      "Great Fairy Din's Fire": "has_explosives && can_play(SONG_ZELDA)"
-    },
-    "events": {
-      "MEET_ZELDA": "has(CHICKEN)"
-    }
-  },
-  "Ganon Castle Exterior": {
-    "exits": {
-      "Market Destroyed": "true",
-      "Ganon Castle Main": "has_medallions"
-    }
-  },
-  "Lost Woods": {
-    "exits": {
-      "Kokiri Forest": "true",
-      "Hyrule Field": "true",
-      "Sacred Meadow": "true"
-    },
-    "locations": {
-      "Lost Woods Bridge": "true"
-    }
-  },
-  "Sacred Meadow": {
-    "exits": {
-      "Lost Woods": "true",
-      "Forest Temple Entrance": "can_hookshot"
-    },
-    "locations": {
-      "Saria's Song": "event(MEET_ZELDA)"
-    }
-  },
-  "Kakariko": {
-    "exits": {
-      "Hyrule Field": "true",
-      "Death Mountain": "has(ZELDA_LETTER)",
-      "Graveyard": "true",
-      "Bottom of the Well": "is_child && can_play(SONG_STORMS) && has(SWORD)"
-    },
-    "locations": {
-      "Anju's Bottle": "is_child",
-      "Windmill HP": "is_adult",
-      "Windmill Song of Storms": "is_adult && has(OCARINA)",
-      "Kakariko Song Shadow": "is_adult && has(MEDALLION_FOREST) && has(MEDALLION_FIRE) && has(MEDALLION_WATER)"
-    }
-  },
-  "Graveyard": {
-    "exits": {
-      "Kakariko": "true"
-    },
-    "locations": {
-      "Graveyard ReDead Tomb": "can_play(SONG_SUN)",
-      "Graveyard Royal Tomb": "can_play(SONG_ZELDA) && has(SWORD)",
-      "Graveyard Fairy Tomb": "true",
-      "Graveyard Dampe Tomb Hookshot": "is_adult"
-    }
-  },
-  "Graveyard Upper": {
-    "exits": {
-      "Graveyard": "true",
-      "Shadow Temple Entrance": "is_adult && can_use_din"
-    }
-  },
-  "Death Mountain": {
-    "exits": {
-      "Goron City": "true",
-      "Dodongo Cavern Entrance": "has_bombflowers && has(SWORD)",
-      "Kakariko": "has(ZELDA_LETTER)"
-    },
-    "locations": {
-      "Death Mountain Chest": "has_explosives",
-      "Great Fairy Magic Upgrade": "has_explosives && can_play(SONG_ZELDA)"
-    }
-  },
-  "Goron City": {
-    "exits": {
-      "Death Mountain": "true",
-      "Death Mountain Crater Bottom": "is_adult"
-    },
-    "locations": {
-      "Darunia": "can_play(SONG_ZELDA) && can_play(SONG_SARIA)",
-      "Goron City Tunic": "is_adult && has_explosives"
-    }
-  },
-  "Zora River": {
-    "exits": {
-      "Hyrule Field": "true",
-      "Zora Domain": "can_play(SONG_ZELDA)"
-    },
-    "locations": {
-      "Zora River HP Pillar": "true",
-      "Zora River HP Platform": "true"
-    }
-  },
-  "Zora Domain": {
-    "exits": {
-      "Zora River": "true",
-      "Lake Hylia": "is_child && has(SCALE)",
-      "Zora Fountain": "event(KING_ZORA_LETTER)"
-    },
-    "events": {
-      "KING_ZORA_LETTER": "is_child && has(RUTO_LETTER)"
-    },
-    "locations": {
-      "Zora Domain Waterfall Chest": "is_child",
-      "Zora Domain Diving Game": "is_child",
-      "Zora Domain Tunic": "is_adult && event(BLUE_FIRE)"
-    }
-  },
-  "Lake Hylia": {
-    "exits": {
-      "Hyrule Field": "true",
-      "Zora Domain": "is_child && has(SCALE)",
-      "Water Temple Entrance": "is_adult && has(BOOTS_IRON) && has(TUNIC_ZORA) && has(HOOKSHOT)"
-    },
-    "events": {
-      "SCARECROW_CHILD": "is_child && has(OCARINA)",
-      "SCARECROW": "is_adult && event(SCARECROW_CHILD)"
-    },
-    "locations": {
-      "Lake Hylia Underwater Bottle": "has(SCALE)",
-      "Lake Hylia Fire Arrow": "can_use_bow && (event(WATER_TEMPLE_CLEARED) || (can_longshot && scarecrow_hookshot))"
-    }
-  },
-  "Zora Fountain": {
-    "exits": {
-      "Zora Domain": "event(KING_ZORA_LETTER)",
-      "Jabu-Jabu Entrance": "is_child && has_bottle",
-      "Ice Cavern Entrance": "is_adult"
-    }
-  },
-  "Temple of Time": {
-    "exits": {
-      "Market": "is_child",
-      "Market Destroyed": "is_adult"
-    },
-    "events": {
-      "DOOR_OF_TIME_OPEN": "can_play(SONG_TIME)",
-      "TIME_TRAVEL": "event(DOOR_OF_TIME_OPEN) && has(SWORD, 2)"
-    },
-    "locations": {
-      "Temple of Time Master Sword": "is_child && event(DOOR_OF_TIME_OPEN)",
-      "Temple of Time Medallion": "is_adult && event(DOOR_OF_TIME_OPEN)",
-      "Temple of Time Light Arrows": "is_adult && has_medallions"
-    }
-  },
-  "Death Mountain Crater Bottom": {
-    "exits": {
-      "Goron City": "is_adult",
-      "Death Mountain Crater Warp": "is_adult && has(HOOKSHOT)"
-    }
-  },
-  "Death Mountain Crater Warp": {
-    "exits": {
-      "Fire Temple Entrance": "is_adult && has(TUNIC_GORON)"
-    }
-  },
-  "Gerudo Valley": {
-    "exits": {
-      "Lake Hylia": "true",
-      "Hyrule Field": "true",
-      "Gerudo Valley After Bridge": "can_longshot"
-    }
-  },
-  "Gerudo Valley After Bridge": {
-    "exits": {
-      "Lake Hylia": "true",
-      "Gerudo Fortress Exterior": "true"
-    }
-  },
-  "Gerudo Fortress Exterior": {
-    "exits": {
-      "Gerudo Fortress": "can_hookshot",
-      "Gerudo Valley After Bridge": "true",
-      "Desert": "has(GERUDO_CARD)",
-      "Gerudo Training Grounds Entrance": "has(GERUDO_CARD)"
-    }
-  },
-  "Desert": {
-    "exits": {
-      "Gerudo Fortress Exterior": "true",
-      "Desert Colossus": "has_lens && can_hookshot"
-    }
-  },
-  "Desert Colossus": {
-    "exits": {
-      "Spirit Temple Entrance": "true"
-    },
-    "locations": {
-      "Desert Colossus Song Spirit": "true"
-    }
-  }
-}
+"SPAWN":
+  exits:
+    "Link's House": "is_child"
+    "Temple of Time": "is_adult && event(TIME_TRAVEL)"
+    "Graveyard Upper": "can_play(SONG_TP_SHADOW)"
+    "Desert Colossus": "can_play(SONG_TP_SPIRIT)"
+"Link's House":
+  exits:
+    "Kokiri Forest": "true"
+"Kokiri Forest":
+  exits:
+    "Link's House": "true"
+    "Mido's House": "true"
+    "Kokiri Forest Child": "is_child"
+    "Lost Woods": "true"
+    "Deku Tree Main": "true"
+"Mido's House":
+  exits:
+    "Kokiri Forest": "true"
+  locations:
+    "KF Mido Top Left": "true"
+    "KF Mido Top Right": "true"
+    "KF Mido Bottom Left": "true"
+    "KF Mido Bottom Right": "true"
+"Kokiri Forest Child":
+  exits:
+    "Kokiri Forest": "true"
+  locations:
+    "KF Kokiri Sword Chest": "true"
+"Hyrule Field":
+  exits:
+    "Lost Woods": "true"
+    "Market": "is_child"
+    "Market Destroyed": "is_adult"
+    "Kakariko": "true"
+    "Zora River": "has_explosives"
+    "Lake Hylia": "true"
+    "Gerudo Valley": "true"
+    "MM Clock Town": "is_child"
+  locations:
+    "Hyrule Field Ocarina of Time": "has_spiritual_stones"
+    "Hyrule Field Song of Time": "has_spiritual_stones"
+"Market":
+  exits:
+    "Hyrule Field": "true"
+    "Hyrule Castle": "true"
+    "Temple of Time": "true"
+"Market Destroyed":
+  exits:
+    "Hyrule Field": "true"
+    "Temple of Time": "true"
+    "Ganon Castle Exterior": "true"
+"Hyrule Castle":
+  exits:
+    "Market": "true"
+  locations:
+    "Malon Egg": "true"
+    "Zelda's Letter": "has(CHICKEN)"
+    "Zelda's Song": "has(CHICKEN)"
+    "Great Fairy Din's Fire": "has_explosives && can_play(SONG_ZELDA)"
+  events:
+    MEET_ZELDA: "has(CHICKEN)"
+"Ganon Castle Exterior":
+  exits:
+    "Market Destroyed": "true"
+    "Ganon Castle Main": "has_medallions"
+"Lost Woods":
+  exits:
+    "Kokiri Forest": "true"
+    "Hyrule Field": "true"
+    "Sacred Meadow": "true"
+  locations:
+    "Lost Woods Bridge": "true"
+"Sacred Meadow":
+  exits:
+    "Lost Woods": "true"
+    "Forest Temple Entrance": "can_hookshot"
+  locations:
+    "Saria's Song": "event(MEET_ZELDA)"
+"Kakariko":
+  exits:
+    "Hyrule Field": "true"
+    "Death Mountain": "has(ZELDA_LETTER)"
+    "Graveyard": "true"
+    "Bottom of the Well": "is_child && can_play(SONG_STORMS) && has(SWORD)"
+  locations:
+    "Anju's Bottle": "is_child"
+    "Windmill HP": "is_adult"
+    "Windmill Song of Storms": "is_adult && has(OCARINA)"
+    "Kakariko Song Shadow": "is_adult && has(MEDALLION_FOREST) && has(MEDALLION_FIRE) && has(MEDALLION_WATER)"
+"Graveyard":
+  exits:
+    "Kakariko": "true"
+  locations:
+    "Graveyard ReDead Tomb": "can_play(SONG_SUN)"
+    "Graveyard Royal Tomb": "can_play(SONG_ZELDA) && has(SWORD)"
+    "Graveyard Fairy Tomb": "true"
+    "Graveyard Dampe Tomb Hookshot": "is_adult"
+"Graveyard Upper":
+  exits:
+    "Graveyard": "true"
+    "Shadow Temple Entrance": "is_adult && can_use_din"
+"Death Mountain":
+  exits:
+    "Goron City": "true"
+    "Dodongo Cavern Entrance": "has_bombflowers && has(SWORD)"
+    "Kakariko": "has(ZELDA_LETTER)"
+  locations:
+    "Death Mountain Chest": "has_explosives"
+    "Great Fairy Magic Upgrade": "has_explosives && can_play(SONG_ZELDA)"
+"Goron City":
+  exits:
+    "Death Mountain": "true"
+    "Death Mountain Crater Bottom": "is_adult"
+  locations:
+    "Darunia": "can_play(SONG_ZELDA) && can_play(SONG_SARIA)"
+    "Goron City Tunic": "is_adult && has_explosives"
+"Zora River":
+  exits:
+    "Hyrule Field": "true"
+    "Zora Domain": "can_play(SONG_ZELDA)"
+  locations:
+    "Zora River HP Pillar": "true"
+    "Zora River HP Platform": "true"
+"Zora Domain":
+  exits:
+    "Zora River": "true"
+    "Lake Hylia": "is_child && has(SCALE)"
+    "Zora Fountain": "event(KING_ZORA_LETTER)"
+  events:
+    KING_ZORA_LETTER: "is_child && has(RUTO_LETTER)"
+  locations:
+    "Zora Domain Waterfall Chest": "is_child"
+    "Zora Domain Diving Game": "is_child"
+    "Zora Domain Tunic": "is_adult && event(BLUE_FIRE)"
+"Lake Hylia":
+  exits:
+    "Hyrule Field": "true"
+    "Zora Domain": "is_child && has(SCALE)"
+    "Water Temple Entrance": "is_adult && has(BOOTS_IRON) && has(TUNIC_ZORA) && has(HOOKSHOT)"
+  events:
+    SCARECROW_CHILD: "is_child && has(OCARINA)"
+    SCARECROW: "is_adult && event(SCARECROW_CHILD)"
+  locations:
+    "Lake Hylia Underwater Bottle": "has(SCALE)"
+    "Lake Hylia Fire Arrow": "can_use_bow && (event(WATER_TEMPLE_CLEARED) || (can_longshot && scarecrow_hookshot))"
+"Zora Fountain":
+  exits:
+    "Zora Domain": "event(KING_ZORA_LETTER)"
+    "Jabu-Jabu Entrance": "is_child && has_bottle"
+    "Ice Cavern Entrance": "is_adult"
+"Temple of Time":
+  exits:
+    "Market": "is_child"
+    "Market Destroyed": "is_adult"
+  events:
+    DOOR_OF_TIME_OPEN: "can_play(SONG_TIME)"
+    TIME_TRAVEL: "event(DOOR_OF_TIME_OPEN) && has(SWORD, 2)"
+  locations:
+    "Temple of Time Master Sword": "is_child && event(DOOR_OF_TIME_OPEN)"
+    "Temple of Time Medallion": "is_adult && event(DOOR_OF_TIME_OPEN)"
+    "Temple of Time Light Arrows": "is_adult && has_medallions"
+"Death Mountain Crater Bottom":
+  exits:
+    "Goron City": "is_adult"
+    "Death Mountain Crater Warp": "is_adult && has(HOOKSHOT)"
+"Death Mountain Crater Warp":
+  exits:
+    "Fire Temple Entrance": "is_adult && has(TUNIC_GORON)"
+"Gerudo Valley":
+  exits:
+    "Lake Hylia": "true"
+    "Hyrule Field": "true"
+    "Gerudo Valley After Bridge": "can_longshot"
+"Gerudo Valley After Bridge":
+  exits:
+    "Lake Hylia": "true"
+    "Gerudo Fortress Exterior": "true"
+"Gerudo Fortress Exterior":
+  exits:
+    "Gerudo Fortress": "can_hookshot"
+    "Gerudo Valley After Bridge": "true"
+    "Desert": "has(GERUDO_CARD)"
+    "Gerudo Training Grounds Entrance": "has(GERUDO_CARD)"
+"Desert":
+  exits:
+    "Gerudo Fortress Exterior": "true"
+    "Desert Colossus": "has_lens && can_hookshot"
+"Desert Colossus":
+  exits:
+    "Spirit Temple Entrance": "true"
+  locations:
+    "Desert Colossus Song Spirit": "true"
+

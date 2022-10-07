@@ -8,6 +8,7 @@ NPC override IDs:
 05 King Zora, Zora Tunic
 06 Song of Storms
 07 Guerudo Member Card
+08 Lost Woods Target
 
 MM Events RAM: 801f0568
 
