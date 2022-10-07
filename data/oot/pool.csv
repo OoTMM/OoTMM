@@ -9,6 +9,7 @@ Malon Egg,                      npc,           HYRULE_CASTLE,         0x00, CHIC
 Zelda's Letter,                 special,       CASTLE_COURTYARD,      0x40, ZELDA_LETTER
 Zelda's Song,                   special,       CASTLE_COURTYARD,      0x59, SONG_ZELDA
 Lost Woods Bridge,              special,       LOST_WOODS,            0xc1, OCARINA
+Lost Woods Target,              npc,           LOST_WOODS,            0x08, SLINGSHOT
 Saria's Song,                   special,       SACRED_FOREST_MEADOW,  0x58, SONG_SARIA
 Anju's Bottle,                  npc,           KAKARIKO_VILLAGE,      0x01, EMPTY_BOTTLE
 Kakariko Song Shadow,           special,       KAKARIKO_VILLAGE,      0x54, SONG_TP_SHADOW

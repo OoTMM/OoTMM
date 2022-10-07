@@ -71,6 +71,7 @@
     "Sacred Meadow": "true"
   locations:
     "Lost Woods Bridge": "true"
+    "Lost Woods Target": "can_use_slingshot"
 "Sacred Meadow":
   exits:
     "Lost Woods": "true"

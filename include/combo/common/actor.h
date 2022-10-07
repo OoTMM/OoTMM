@@ -19,6 +19,7 @@
 # define AC_EN_NIW_LADY     0x13c
 # define AC_EN_SA           0x146
 # define AC_EN_OWL          0x14d
+# define AC_EN_EX_ITEM      0x168
 # define AC_EN_GO2          0x1ae
 #endif
 
