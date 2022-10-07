@@ -63,9 +63,9 @@
 #define ITEM_OOT_KOKIRI_SWORD           0x3b
 #define ITEM_OOT_MASTER_SWORD           0x3c
 #define ITEM_OOT_GIANT_KNIFE            0x3d
-#define ITEM_OOT_DEKU_SHIELD            0x3e
-#define ITEM_OOT_HYLIAN_SHIELD          0x3f
-#define ITEM_OOT_MIRROR_SHIELD          0x40
+#define ITEM_OOT_SHIELD_DEKU            0x3e
+#define ITEM_OOT_SHIELD_HYLIAN          0x3f
+#define ITEM_OOT_SHIELD_MIRROR          0x40
 #define ITEM_OOT_KOKIRI_TUNIC           0x41
 #define ITEM_OOT_GORON_TUNIC            0x42
 #define ITEM_OOT_ZORA_TUNIC             0x43
@@ -155,6 +155,8 @@
 #define ITEM_OOT_MAGIC_UPGRADE2         0x9d
 #define ITEM_OOT_DEFENSE_UPGRADE        0x9e
 #define ITEM_OOT_SWORD_BIGGORON         0x9f
+#define ITEM_OOT_SHOP_SHIELD_DEKU       0xa0
+#define ITEM_OOT_SHOP_SHIELD_HYLIAN     0xa1
 
 #define ITEM_MM_OCARINA_OF_TIME             0x00
 #define ITEM_MM_BOW                         0x01
