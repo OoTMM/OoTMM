@@ -1,4 +1,4 @@
-#include <combo/asm.h>
+#include <combo.h>
 
 /* Use out own SpawnActorEx */
 PATCH_REL_JUMP(hookSpawnActorEx)

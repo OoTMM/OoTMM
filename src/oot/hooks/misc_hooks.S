@@ -1,4 +1,4 @@
-#include <combo/asm.h>
+#include <combo.h>
 
 #define ENTRANCE_MIDO         0x433
 #define ENTRANCE_HCASTLE      0x138

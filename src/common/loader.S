@@ -1,4 +1,4 @@
-#include <combo/asm.h>
+#include <combo.h>
 
 PATCH_START(LOADER_ADDR)
   addiu sp, -0x14

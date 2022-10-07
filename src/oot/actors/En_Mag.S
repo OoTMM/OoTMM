@@ -1,4 +1,4 @@
-#include <combo/asm.h>
+#include <combo.h>
 
 /* TODO: Broken hook, this does not work with HOOK_CALL */
 /* Maybe it has something to do with the missing nop? */

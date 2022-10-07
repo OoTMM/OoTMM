@@ -1,4 +1,4 @@
-#include <combo/asm.h>
+#include <combo.h>
 
 /* Rebase MM audio */
 PATCH_START(0x80190e5c)

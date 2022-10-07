@@ -1,4 +1,4 @@
-#include <combo/asm.h>
+#include <combo.h>
 
 /* Disable kokiri kid at forest */
 PATCH_START 0x80ad41cc

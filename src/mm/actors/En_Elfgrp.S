@@ -1,4 +1,4 @@
-#include <combo/asm.h>
+#include <combo.h>
 
 /* Skip all cutscenes and use GI */
 PATCH_START 0x80a3a398

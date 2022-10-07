@@ -1,4 +1,4 @@
-#include <combo/asm.h>
+#include <combo.h>
 
 /* Disable the cutscene itself */
 PATCH_START 0x80953e80

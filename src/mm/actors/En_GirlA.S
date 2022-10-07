@@ -1,4 +1,4 @@
-#include <combo/asm.h>
+#include <combo.h>
 
 EnGirlA_PostHandler_Trampoline:
   /* girlA is in s0 */

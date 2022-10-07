@@ -1,4 +1,4 @@
-#include <combo/asm.h>
+#include <combo.h>
 
 #define ENTRANCE_CLOCKTOWN  0xd800
 #define ENTRANCE_WOODS      0xc200

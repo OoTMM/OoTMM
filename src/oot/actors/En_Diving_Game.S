@@ -1,4 +1,4 @@
-#include <combo/asm.h>
+#include <combo.h>
 
 /* Randomize the given item */
 PATCH_START 0x80a7f0f0

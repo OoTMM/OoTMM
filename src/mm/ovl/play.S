@@ -1,4 +1,4 @@
-#include <combo/asm.h>
+#include <combo.h>
 
 /* Hook into Play_Init */
 PATCH_START(0x801bd9b8)

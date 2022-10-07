@@ -1,4 +1,4 @@
-#include <combo/asm.h>
+#include <combo.h>
 
 /* Hook into Main, to load the payload */
 PATCH_START(0x800005ac)

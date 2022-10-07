@@ -1,4 +1,4 @@
-#include <combo/asm.h>
+#include <combo.h>
 
 /* Relocations for kShaders */
 PATCH_REL_HILO(kShaders)

@@ -1,4 +1,4 @@
-#include <combo/asm.h>
+#include <combo.h>
 
 /* Use our own item collect behavior */
 PATCH_START 0x801143cc

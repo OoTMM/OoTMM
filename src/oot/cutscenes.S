@@ -1,4 +1,4 @@
-#include <combo/asm.h>
+#include <combo.h>
 
 /* Disable the saria LW cutscene */
 PATCH_START(0x80056e80)

@@ -1,4 +1,4 @@
-#include <combo/asm.h>
+#include <combo.h>
 
 .global comboDisableInterrupts
 comboDisableInterrupts:

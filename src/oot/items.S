@@ -1,4 +1,4 @@
-#include <combo/asm.h>
+#include <combo.h>
 
 /* Patch GetItemCollectBehavior */
 PATCH_START(0x80071420)
