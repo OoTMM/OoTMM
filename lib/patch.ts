@@ -190,6 +190,17 @@ const patchWrite32 = (game: Game, rom: Buffer, vram: VRamEntry[], patch: Buffer,
   return cursor;
 };
 
+const patchFunc = (game: Game, rom: Buffer, vram: VRamEntry[], patch: Buffer, cursor: number) => {
+  const addr = patch.readUInt32BE(cursor + 0x00);
+  const func = patch.readUInt32BE(cursor + 0x04);
+  cursor += 0x08;
+
+  const paddr = virtualToPhysical(vram, addr);
+  rom.writeUInt32BE((0x08000000 | (((func >>> 2) & 0x03ffffff) >>> 0)) >>> 0, paddr);
+  rom.writeUInt32BE(0x0, paddr + 4);
+  return cursor;
+};
+
 export const patchGame = async (opts: Options, game: Game) => {
   console.log("Patching " + game + "...");
   const rom = await fs.readFile(path.resolve(PATH_BUILD, 'roms', `${game}_decompressed.z64`));
@@ -222,6 +233,9 @@ export const patchGame = async (opts: Options, game: Game) => {
       break;
     case 0x05:
       cursor = patchWrite32(game, rom, vram, patch, cursor);
+      break;
+    case 0x06:
+      cursor = patchFunc(game, rom, vram, patch, cursor);
       break;
     default:
       throw new Error("Invalid patch type: " + type);

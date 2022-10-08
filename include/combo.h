@@ -17,6 +17,7 @@
 # include <combo/save.h>
 # include <combo/shader.h>
 # include <combo/scenes.h>
+# include <combo/patch.h>
 
 # if defined(GAME_OOT)
 #  include <combo/oot/play.h>
