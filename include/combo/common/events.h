@@ -9,6 +9,7 @@
 #define EV_OOT_CHK_TREE_DEAD                0x17
 #define EV_OOT_CHK_STONE_EMERALD            0x19
 #define EV_OOT_CHK_MIDO_TREE_DEAD           0x1c
+#define EV_OOT_CHK_BOMBCHU_BOWLING          0x22
 #define EV_OOT_CHK_STONE_RUBY               0x25
 #define EV_OOT_CHK_RUTO_LETTER              0x32
 #define EV_OOT_CHK_STONE_SAPPHIRE           0x37
