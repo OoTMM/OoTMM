@@ -29,43 +29,36 @@ int GetItemCollectBehavior(s16 itemId)
 
 int comboGiveItem(Actor* actor, GameState_Play* play, s16 itemId, float a, float b)
 {
-    s32 override;
-    s16 absItemId;
-
-    override = -1;
-    absItemId = itemId > 0 ? itemId : -itemId;
-
     switch (actor->id)
     {
     case AC_EN_BOX:
-        override = comboGetChestOverride(play->sceneId, actor->variable & 0x1f);
+        itemId = comboOverrideChest(play->sceneId, actor->variable & 0x1f, (actor->variable >> 5) & 0xff);
         break;
     case AC_EN_MA1:
-        absItemId = GI_OOT_CHICKEN;
-        override = comboGetNpcOverride(0x00);
+        itemId = comboOverrideNpc(0x00, GI_OOT_CHICKEN);
         break;
     case AC_EN_NIW_LADY:
-        if (absItemId == GI_OOT_EMPTY_BOTTLE)
-            override = comboGetNpcOverride(0x01);
+        if (itemId == GI_OOT_EMPTY_BOTTLE)
+            itemId = comboOverrideNpc(0x01, GI_OOT_EMPTY_BOTTLE);
         break;
     case AC_EN_DIVING_GAME:
-        override = comboGetNpcOverride(0x03);
+        itemId = comboOverrideNpc(0x03, GI_OOT_SCALE_SILVER);
         break;
     case AC_EN_DU:
-        if (absItemId == GI_OOT_GORON_BRACELET)
+        if (itemId == GI_OOT_GORON_BRACELET)
         {
-            override = comboGetNpcOverride(0x02);
+            itemId = comboOverrideNpc(0x02, GI_OOT_GORON_BRACELET);
             gSave.eventsItem[(EV_OOT_ITEM_GORON_BRACELET & 0xf0) >> 4] |= (1 << (EV_OOT_ITEM_GORON_BRACELET & 0xf));
         }
         break;
     case AC_EN_BOM_BOWL_PIT:
-        absItemId = EnExItem_RewardByIndex(*(u16*)((char*)actor + 0x14a));
+        itemId = EnExItem_RewardByIndex(*(u16*)((char*)actor + 0x14a));
         break;
     case AC_EN_EX_ITEM:
-        absItemId = EnExItem_Reward(actor);
+        itemId = EnExItem_Reward(actor);
         break;
     case AC_EN_GO2:
-        switch (absItemId)
+        switch (itemId)
         {
         case GI_OOT_TUNIC_GORON:
             break;
@@ -73,9 +66,5 @@ int comboGiveItem(Actor* actor, GameState_Play* play, s16 itemId, float a, float
         break;
     }
 
-    if (override >= 0)
-        absItemId = (s16)(override);
-    absItemId = comboProgressive(absItemId);
-    itemId = itemId > 0 ? absItemId : -absItemId;
     return GiveItem(actor, play, itemId, a, b);
 }

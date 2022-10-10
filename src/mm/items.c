@@ -26,37 +26,25 @@ int GetItemCollectBehavior(s16 itemId)
 
 int comboGiveItem(Actor* actor, GameState_Play* play, s16 itemId, float a, float b)
 {
-    s32 override;
-    u16 absItemId;
-
-    override = -1;
-    absItemId = itemId > 0 ? itemId : -itemId;
-
     switch (itemId)
     {
     case GI_MM_BOTTLED_POTION_RED:
-        override = comboGetNpcOverride(0x00);
+        itemId = comboOverrideNpc(0x00, GI_MM_BOTTLED_POTION_RED);
         break;
     case GI_MM_PICTOGRAPH_BOX:
-        override = comboGetNpcOverride(0x01);
+        itemId = comboOverrideNpc(0x01, GI_MM_PICTOGRAPH_BOX);
         break;
     case GI_MM_SONG_AWAKENING:
-        override = comboGetNpcOverride(0x02);
+        itemId = comboOverrideNpc(0x02, GI_MM_SONG_AWAKENING);
         break;
     }
 
     switch (actor->id)
     {
     case AC_EN_BOX:
-        override = comboGetChestOverride(play->sceneId, actor->variable & 0x1f);
+        itemId = comboOverrideChest(play->sceneId, actor->variable & 0x1f, (actor->variable >> 5) & 0xff);
         break;
     }
-
-    if (override >= 0)
-        absItemId = (u16)override;
-    absItemId = comboProgressive(absItemId);
-
-    itemId = itemId > 0 ? absItemId : -absItemId;
 
     return GiveItem(actor, play, itemId, a, b);
 }

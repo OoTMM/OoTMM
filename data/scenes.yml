@@ -203,3 +203,5 @@ MM_CLOCK_TOWN_NORTH:                    0x6e
 MM_CLOCK_TOWN_SOUTH:                    0x6f
 MM_LAUNDRY_POOL:                        0x70
 
+SPECIAL: 0xf0
+NPC:     0xf1

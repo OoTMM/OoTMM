@@ -3,7 +3,6 @@
 s16 EnExItem_RewardByIndex(int index)
 {
     s16 gi;
-    s32 override;
     s32 npc;
 
     npc = -1;
@@ -47,11 +46,8 @@ s16 EnExItem_RewardByIndex(int index)
     }
     if (npc >= 0)
     {
-        override = comboGetNpcOverride(npc);
-        if (override >= 0)
-            gi = (u16)override;
+        gi = comboOverrideNpc(npc, gi);
     }
-    gi = comboProgressive(gi);
     return gi;
 }
 

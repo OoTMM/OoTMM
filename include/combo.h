@@ -78,10 +78,10 @@ void comboWriteSave(void);
 void comboGameSwitch(void);
 
 /* Override */
-s32 comboGetChestOverride(u16 scene, u8 id);
-s32 comboGetCollectibleOverride(u16 scene, u8 id);
-s32 comboGetSpecialOverride(u8 id);
-s32 comboGetNpcOverride(u8 id);
+s16 comboOverrideChest(u16 sceneId, u16 id, s16 gi);
+s16 comboOverrideCollectible(u16 sceneId, u16 id, s16 gi);
+s16 comboOverrideSpecial(u16 id, s16 gi);
+s16 comboOverrideNpc(u16 id, s16 gi);
 
 /* Text */
 void comboTextHijackItem(GameState_Play* play, u16 itemId);

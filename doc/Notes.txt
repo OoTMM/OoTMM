@@ -11,6 +11,7 @@ NPC override IDs:
 08 Lost Woods Target
 09 Bombchu Bowling Reward 1
 0a Bombchu Bowling Reward 2
+0b Skull Kid HP
 
 MM Events RAM: 801f0568
 

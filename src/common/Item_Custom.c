@@ -47,8 +47,6 @@ static void handleFireArrow(Actor_ItemCustom* item, GameState_Play* play)
 /* Var 0x0fff: GI */
 static void ItemCustom_Init(Actor_ItemCustom* item, GameState_Play* play)
 {
-    s32 override;
-
     item->type = ((item->base.initRot.z) & 0xf000) >> 12;
     item->flag = (item->base.initRot.z) & 0xff;
     item->gi = (item->base.variable) & 0x0fff;
@@ -60,23 +58,17 @@ static void ItemCustom_Init(Actor_ItemCustom* item, GameState_Play* play)
     }
 
     item->base.rot2.z = 0;
-    override = -1;
     switch (item->type)
     {
     case 0x1:
         /* Collectible */
-        override = comboGetCollectibleOverride(play->sceneId, item->flag);
+        item->gi = comboOverrideCollectible(play->sceneId, item->flag, item->gi);
         break;
-#if defined(GAME_OOT)
     case 0x2:
         /* Special */
-        override = comboGetSpecialOverride(item->flag);
+        item->gi = comboOverrideSpecial(item->flag, item->gi);
         break;
-#endif
     }
-    if (override >= 0)
-        item->gi = override;
-    item->gi = comboProgressive(item->gi);
 
     ActorSetScale((Actor*)item, 0.25f);
     item->base.position.y += 15.f;
