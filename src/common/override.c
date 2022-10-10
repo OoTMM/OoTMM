@@ -24,7 +24,6 @@ void comboInitOverride(void)
 
 s32 comboGetOverride(u16 key)
 {
-    return GI_OOT_DEFENSE_UPGRADE;
     for (int i = 0; i < 256; ++i)
     {
         ComboOverride* o = &gComboChestOverrides[i];
