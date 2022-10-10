@@ -83,6 +83,15 @@
 0:
 .endm
 
+.macro PATCH_OBJECT objectId, offset
+.section .patch, "awx"
+.int 0x7
+.int \objectId
+.int \offset
+.int (1f - 0f)
+0:
+.endm
+
 .macro PATCH_END
 1:
 .balign 4
