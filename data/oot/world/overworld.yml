@@ -45,6 +45,13 @@
     "Hyrule Field": "true"
     "Hyrule Castle": "true"
     "Temple of Time": "true"
+    "Bombchu Bowling": "true"
+"Bombchu Bowling":
+  exits:
+    "Market": "true"
+  locations:
+    "Bombchu Bowling Reward 1": "has_bombchu"
+    "Bombchu Bowling Reward 2": "has_bombchu"
 "Market Destroyed":
   exits:
     "Hyrule Field": "true"

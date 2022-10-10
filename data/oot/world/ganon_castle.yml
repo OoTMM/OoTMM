@@ -56,11 +56,11 @@
   "Ganon Castle Spirit": {
     "dungeon": "Ganon",
     "events": {
-      "GANON_TRIAL_SPIRIT": "can_hookshot && has_bombchus && has_fire && has_light_arrows"
+      "GANON_TRIAL_SPIRIT": "can_hookshot && has_bombchu && has_fire && has_light_arrows"
     },
     "locations": {
-      "Ganon Castle Spirit Chest 1": "can_hookshot && (has(MAGIC_UPGRADE) || has_bombchus)",
-      "Ganon Castle Spirit Chest 2": "can_hookshot && has_bombchus && has_lens"
+      "Ganon Castle Spirit Chest 1": "can_hookshot && (has(MAGIC_UPGRADE) || has_bombchu)",
+      "Ganon Castle Spirit Chest 2": "can_hookshot && has_bombchu && has_lens"
     }
   },
   "Ganon Castle Shadow": {

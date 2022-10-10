@@ -9,6 +9,8 @@ NPC override IDs:
 06 Song of Storms
 07 Guerudo Member Card
 08 Lost Woods Target
+09 Bombchu Bowling Reward 1
+0a Bombchu Bowling Reward 2
 
 MM Events RAM: 801f0568
 

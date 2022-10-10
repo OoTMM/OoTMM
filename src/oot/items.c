@@ -3,6 +3,9 @@
 #define CB_PASSIVE 0x00
 #define CB_GETITEM 0xff
 
+s16 EnExItem_Reward(Actor* actor);
+s16 EnExItem_RewardByIndex(int index);
+
 int GetItemCollectBehavior(s16 itemId)
 {
     switch (itemId)
@@ -55,8 +58,11 @@ int comboGiveItem(Actor* actor, GameState_Play* play, s16 itemId, float a, float
             gSave.eventsItem[(EV_OOT_ITEM_GORON_BRACELET & 0xf0) >> 4] |= (1 << (EV_OOT_ITEM_GORON_BRACELET & 0xf));
         }
         break;
+    case AC_EN_BOM_BOWL_PIT:
+        absItemId = EnExItem_RewardByIndex(*(u16*)((char*)actor + 0x14a));
+        break;
     case AC_EN_EX_ITEM:
-        override = comboGetNpcOverride(0x08);
+        absItemId = EnExItem_Reward(actor);
         break;
     case AC_EN_GO2:
         switch (absItemId)

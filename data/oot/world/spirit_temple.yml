@@ -22,7 +22,7 @@
     "dungeon": "Spirit",
     "exits": {
       "Spirit Temple Child Entrance": "is_child && has(SMALL_KEY_SPIRIT, 5)",
-      "Spirit Temple Statue": "has_bombchus"
+      "Spirit Temple Statue": "has_bombchu"
     },
     "locations": {
       "Spirit Temple Child Climb 1": "has_ranged_weapon",
