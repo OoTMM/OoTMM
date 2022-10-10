@@ -71,6 +71,8 @@
   exits:
     "Market Destroyed": "true"
     "Ganon Castle Main": "has_medallions"
+  locations:
+    "Great Fairy Defense Upgrade": "has(STRENGTH, 3) && can_play(SONG_ZELDA)"
 "Lost Woods":
   exits:
     "Kokiri Forest": "true"
@@ -157,6 +159,8 @@
     "Zora Domain": "event(KING_ZORA_LETTER)"
     "Jabu-Jabu Entrance": "is_child && has_bottle"
     "Ice Cavern Entrance": "is_adult"
+  locations:
+    "Great Fairy Farore's Wind": "has_explosives && can_play(SONG_ZELDA)"
 "Temple of Time":
   exits:
     "Market": "is_child"
@@ -172,6 +176,8 @@
   exits:
     "Goron City": "is_adult"
     "Death Mountain Crater Warp": "is_adult && has(HOOKSHOT)"
+  locations:
+    "Great Fairy Magic Upgrade 2": "is_adult && has(HAMMER) && can_play(SONG_ZELDA)"
 "Death Mountain Crater Warp":
   exits:
     "Fire Temple Entrance": "is_adult && has(TUNIC_GORON)"
@@ -199,4 +205,5 @@
     "Spirit Temple Entrance": "true"
   locations:
     "Desert Colossus Song Spirit": "true"
+    "Great Fairy Nayru's Love": "has_explosives && can_play(SONG_ZELDA)"
 

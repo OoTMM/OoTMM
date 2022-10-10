@@ -39,7 +39,11 @@ Windmill Song of Storms,        npc,           TOMB_DAMPE_WINDMILL,     0x05, SO
 Desert Colossus Song Spirit,    special,       DESERT_COLOSSUS,         0xac, SONG_TP_SPIRIT
 
 Great Fairy Magic Upgrade,      collectible,   GREAT_FAIRY_FOUNTAIN_UPGRADES, 0x00, MAGIC_UPGRADE
+Great Fairy Magic Upgrade 2,    collectible,   GREAT_FAIRY_FOUNTAIN_UPGRADES, 0x01, MAGIC_UPGRADE
+Great Fairy Defense Upgrade,    collectible,   GREAT_FAIRY_FOUNTAIN_UPGRADES, 0x02, DEFENSE_UPGRADE
 Great Fairy Din's Fire,         collectible,   GREAT_FAIRY_FOUNTAIN_SPELLS,   0x00, SPELL_FIRE
+Great Fairy Farore's Wind,      collectible,   GREAT_FAIRY_FOUNTAIN_SPELLS,   0x01, SPELL_WIND
+Great Fairy Nayru's Love,       collectible,   GREAT_FAIRY_FOUNTAIN_SPELLS,   0x02, SPELL_LOVE
 
 Deku Tree Map Chest,                chest,        INSIDE_DEKU_TREE, 0x03, MAP_DT
 Deku Tree Compass Chest,            chest,        INSIDE_DEKU_TREE, 0x02, COMPASS_DT
