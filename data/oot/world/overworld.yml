@@ -81,6 +81,7 @@
   locations:
     "Lost Woods Bridge": "true"
     "Lost Woods Target": "can_use_slingshot"
+    "Lost Woods Skull Kid": "is_child && can_play(SONG_SARIA)"
 "Sacred Meadow":
   exits:
     "Lost Woods": "true"

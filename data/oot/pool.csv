@@ -1,42 +1,43 @@
-location,                       type,          scene,                   id,                 item
+location,                       type,          scene,                   id,                     item
 
-KF Mido Top Left,               chest,         KOKIRI_MIDO,             0x00,               RUPEE_BLUE
-KF Mido Top Right,              chest,         KOKIRI_MIDO,             0x01,               RUPEE_BLUE
-KF Mido Bottom Left,            chest,         KOKIRI_MIDO,             0x02,               RUPEE_GREEN
-KF Mido Bottom Right,           chest,         KOKIRI_MIDO,             0x03,               RECOVERY_HEART
-KF Kokiri Sword Chest,          chest,         KOKIRI_FOREST,           0x00,               SWORD
-Malon Egg,                      npc,           HYRULE_CASTLE,           MALON_EGG,          CHICKEN
-Zelda's Letter,                 special,       CASTLE_COURTYARD,        0x40,               ZELDA_LETTER
-Zelda's Song,                   special,       CASTLE_COURTYARD,        0x59,               SONG_ZELDA
-Bombchu Bowling Reward 1,       npc,           BOMBCHU_BOWLING_ALLEY,   BOMBCHU_BOWLING_1,  BOMB_BAG
-Bombchu Bowling Reward 2,       npc,           BOMBCHU_BOWLING_ALLEY,   BOMBCHU_BOWLING_2,  HEART_PIECE
-Lost Woods Bridge,              special,       LOST_WOODS,              0xc1,               OCARINA
-Lost Woods Target,              npc,           LOST_WOODS,              LOST_WOODS_TARGET,  SLINGSHOT
-Saria's Song,                   special,       SACRED_FOREST_MEADOW,    0x58,               SONG_SARIA
-Anju's Bottle,                  npc,           KAKARIKO_VILLAGE,        ANJU_BOTTLE,        EMPTY_BOTTLE
-Kakariko Song Shadow,           special,       KAKARIKO_VILLAGE,        0x54,               SONG_TP_SHADOW
-Graveyard ReDead Tomb,          chest,         TOMB_REDEAD,             0x00,               HEART_PIECE
-Graveyard Royal Tomb,           special,       TOMB_ROYAL,              0x5a,               SONG_SUN
-Graveyard Fairy Tomb,           chest,         TOMB_FAIRY,              0x00,               SHIELD
-Darunia,                        npc,           GORON_CITY,              DARUNIA_BRACELET,   STRENGTH
-Goron City Tunic,               npc,           GORON_CITY,              GORON_LINK_TUNIC,   TUNIC_GORON
-Death Mountain Chest,           chest,         DEATH_MOUNTAIN_TRAIL,    0x01,               RUPEE_PURPLE
-Zora River HP Pillar,           collectible,   ZORA_RIVER,              0x04,               HEART_PIECE
-Zora River HP Platform,         collectible,   ZORA_RIVER,              0x0b,               HEART_PIECE
-Zora Domain Waterfall Chest,    chest,         ZORA_DOMAIN,             0x00,               HEART_PIECE
-Zora Domain Diving Game,        npc,           ZORA_DOMAIN,             ZORA_DIVING_GAME,   SCALE
-Zora Domain Tunic,              npc,           ZORA_DOMAIN,             ZORA_KING_TUNIC,    TUNIC_ZORA
-Lake Hylia Underwater Bottle,   special,       LAKE_HYLIA,              0x32,               RUTO_LETTER
-Lake Hylia Fire Arrow,          special,       LAKE_HYLIA,              0x60,               ARROW_FIRE
-Hyrule Field Ocarina of Time,   special,       HYRULE_FIELD,            0x43,               OCARINA
-Hyrule Field Song of Time,      special,       HYRULE_FIELD,            0xa9,               SONG_TIME
-Temple of Time Master Sword,    collectible,   TEMPLE_OF_TIME,          0x1f,               SWORD
-Temple of Time Medallion,       collectible,   TEMPLE_OF_TIME,          0x1e,               MEDALLION_LIGHT
-Temple of Time Light Arrows,    special,       TEMPLE_OF_TIME,          0xc4,               ARROW_LIGHT
-Graveyard Dampe Tomb Hookshot,  chest,         TOMB_DAMPE_WINDMILL,     0x00,               HOOKSHOT
-Windmill HP,                    collectible,   TOMB_DAMPE_WINDMILL,     0x01,               HEART_PIECE
-Windmill Song of Storms,        npc,           TOMB_DAMPE_WINDMILL,     SONG_STORMS,        SONG_STORMS
-Desert Colossus Song Spirit,    special,       DESERT_COLOSSUS,         0xac,               SONG_TP_SPIRIT
+KF Mido Top Left,               chest,         KOKIRI_MIDO,             0x00,                   RUPEE_BLUE
+KF Mido Top Right,              chest,         KOKIRI_MIDO,             0x01,                   RUPEE_BLUE
+KF Mido Bottom Left,            chest,         KOKIRI_MIDO,             0x02,                   RUPEE_GREEN
+KF Mido Bottom Right,           chest,         KOKIRI_MIDO,             0x03,                   RECOVERY_HEART
+KF Kokiri Sword Chest,          chest,         KOKIRI_FOREST,           0x00,                   SWORD
+Malon Egg,                      npc,           HYRULE_CASTLE,           MALON_EGG,              CHICKEN
+Zelda's Letter,                 special,       CASTLE_COURTYARD,        0x40,                   ZELDA_LETTER
+Zelda's Song,                   special,       CASTLE_COURTYARD,        0x59,                   SONG_ZELDA
+Bombchu Bowling Reward 1,       npc,           BOMBCHU_BOWLING_ALLEY,   BOMBCHU_BOWLING_1,      BOMB_BAG
+Bombchu Bowling Reward 2,       npc,           BOMBCHU_BOWLING_ALLEY,   BOMBCHU_BOWLING_2,      HEART_PIECE
+Lost Woods Bridge,              special,       LOST_WOODS,              0xc1,                   OCARINA
+Lost Woods Target,              npc,           LOST_WOODS,              LOST_WOODS_TARGET,      SLINGSHOT
+Lost Woods Skull Kid,           npc,           LOST_WOODS,              LOST_WOODS_SKULL_KID,   HEART_PIECE
+Saria's Song,                   special,       SACRED_FOREST_MEADOW,    0x58,                   SONG_SARIA
+Anju's Bottle,                  npc,           KAKARIKO_VILLAGE,        ANJU_BOTTLE,            EMPTY_BOTTLE
+Kakariko Song Shadow,           special,       KAKARIKO_VILLAGE,        0x54,                   SONG_TP_SHADOW
+Graveyard ReDead Tomb,          chest,         TOMB_REDEAD,             0x00,                   HEART_PIECE
+Graveyard Royal Tomb,           special,       TOMB_ROYAL,              0x5a,                   SONG_SUN
+Graveyard Fairy Tomb,           chest,         TOMB_FAIRY,              0x00,                   SHIELD
+Darunia,                        npc,           GORON_CITY,              DARUNIA_BRACELET,       STRENGTH
+Goron City Tunic,               npc,           GORON_CITY,              GORON_LINK_TUNIC,       TUNIC_GORON
+Death Mountain Chest,           chest,         DEATH_MOUNTAIN_TRAIL,    0x01,                   RUPEE_PURPLE
+Zora River HP Pillar,           collectible,   ZORA_RIVER,              0x04,                   HEART_PIECE
+Zora River HP Platform,         collectible,   ZORA_RIVER,              0x0b,                   HEART_PIECE
+Zora Domain Waterfall Chest,    chest,         ZORA_DOMAIN,             0x00,                   HEART_PIECE
+Zora Domain Diving Game,        npc,           ZORA_DOMAIN,             ZORA_DIVING_GAME,       SCALE
+Zora Domain Tunic,              npc,           ZORA_DOMAIN,             ZORA_KING_TUNIC,        TUNIC_ZORA
+Lake Hylia Underwater Bottle,   special,       LAKE_HYLIA,              0x32,                   RUTO_LETTER
+Lake Hylia Fire Arrow,          special,       LAKE_HYLIA,              0x60,                   ARROW_FIRE
+Hyrule Field Ocarina of Time,   special,       HYRULE_FIELD,            0x43,                   OCARINA
+Hyrule Field Song of Time,      special,       HYRULE_FIELD,            0xa9,                   SONG_TIME
+Temple of Time Master Sword,    collectible,   TEMPLE_OF_TIME,          0x1f,                   SWORD
+Temple of Time Medallion,       collectible,   TEMPLE_OF_TIME,          0x1e,                   MEDALLION_LIGHT
+Temple of Time Light Arrows,    special,       TEMPLE_OF_TIME,          0xc4,                   ARROW_LIGHT
+Graveyard Dampe Tomb Hookshot,  chest,         TOMB_DAMPE_WINDMILL,     0x00,                   HOOKSHOT
+Windmill HP,                    collectible,   TOMB_DAMPE_WINDMILL,     0x01,                   HEART_PIECE
+Windmill Song of Storms,        npc,           TOMB_DAMPE_WINDMILL,     SONG_STORMS,            SONG_STORMS
+Desert Colossus Song Spirit,    special,       DESERT_COLOSSUS,         0xac,                   SONG_TP_SPIRIT
 
 Great Fairy Magic Upgrade,      collectible,   GREAT_FAIRY_FOUNTAIN_UPGRADES, 0x00, MAGIC_UPGRADE
 Great Fairy Magic Upgrade 2,    collectible,   GREAT_FAIRY_FOUNTAIN_UPGRADES, 0x01, MAGIC_UPGRADE
