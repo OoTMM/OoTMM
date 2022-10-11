@@ -33,4 +33,7 @@ void MatrixRotation(u16 angle, int unk_1);
 void DisplayTextBox(GameState_Play* play, u16 textId);
 void DisplayTextBox2(GameState_Play* play, u16 textId);
 
+int GiveItem(Actor* actor, GameState_Play* play, s16 itemId, float a, float b);
+int GiveItemDefaultRange(Actor* actor, GameState_Play* play, s16 itemId);
+
 #endif

@@ -228,6 +228,7 @@ class Patcher {
     this.cursor += 0x08;
 
     const paddr = this.virtualToPhysical(addr);
+
     this.rom.writeUInt32BE((0x08000000 | (((func >>> 2) & 0x03ffffff) >>> 0)) >>> 0, paddr);
     this.rom.writeUInt32BE(0x0, paddr + 4);
   }
@@ -242,14 +243,24 @@ class Patcher {
     const data = patch.subarray(this.cursor, this.cursor + size);
     this.cursor += size;
     data.copy(this.rom, paddr);
-  };
+  }
+
+  patchCall = (patch: Buffer) => {
+    const addr = patch.readUInt32BE(this.cursor + 0x00);
+    const func = patch.readUInt32BE(this.cursor + 0x04);
+    this.cursor += 0x08;
+
+    const paddr = this.virtualToPhysical(addr);
+
+    this.rom.writeUInt32BE((0x0c000000 | (((func >>> 2) & 0x03ffffff) >>> 0)) >>> 0, paddr);
+  }
 
   async run() {
     const patch = await fs.readFile(path.resolve(PATH_BUILD, this.opts.debug ? 'Debug' : 'Release', `${this.game}_patch.bin`));
     this.cursor = 0;
     for (;;) {
-      /* Align on a 4-byte boundary */
-      this.cursor = (this.cursor + 3) & ~3;
+      /* Align on a 8-byte boundary */
+      this.cursor = (this.cursor + 7) & ~7;
       if (this.cursor >= patch.length) {
         break;
       }
@@ -279,6 +290,9 @@ class Patcher {
         break;
       case 0x07:
         this.patchObject(patch);
+        break;
+      case 0x08:
+        this.patchCall(patch);
         break;
       default:
         throw new Error("Invalid patch type: " + type);

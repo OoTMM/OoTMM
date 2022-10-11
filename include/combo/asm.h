@@ -94,7 +94,7 @@
 
 .macro PATCH_END
 1:
-.balign 4
+.balign 8
 .previous
 .endm
 

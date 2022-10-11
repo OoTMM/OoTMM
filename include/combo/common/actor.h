@@ -38,6 +38,7 @@
 
 typedef struct GameState_Play GameState_Play;
 
+typedef struct Actor Actor;
 typedef struct PACKED ALIGNED(0x4) Actor
 {
     u16         id;

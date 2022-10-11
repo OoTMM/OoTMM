@@ -3,22 +3,18 @@
 s16 EnExItem_RewardByIndex(int index)
 {
     s16 gi;
-    s32 npc;
 
-    npc = -1;
     switch (index)
     {
     case 0x00:
     case 0x05:
         /* Bomb pouch */
-        gi = GI_OOT_BOMB_BAG;
-        npc = 0x09;
+        gi = comboOverride(OV_NPC, 0, NPC_OOT_BOMBCHU_BOWLING_1, GI_OOT_BOMB_BAG);
         break;
     case 0x01:
     case 0x06:
         /* Piece of Heart */
-        gi = GI_OOT_HEART_PIECE;
-        npc = 0x0a;
+        gi = comboOverride(OV_NPC, 0, NPC_OOT_BOMBCHU_BOWLING_2, GI_OOT_HEART_PIECE);
         break;
     case 0x02:
     case 0x07:
@@ -37,16 +33,11 @@ s16 EnExItem_RewardByIndex(int index)
         break;
     case 0x13:
         /* Target: Slingshot */
-        gi = GI_OOT_SLINGSHOT;
-        npc = 0x08;
+        gi = comboOverride(OV_NPC, 0, NPC_OOT_LOST_WOODS_TARGET, GI_OOT_SLINGSHOT);
         break;
     default:
         gi = GI_NONE;
         break;
-    }
-    if (npc >= 0)
-    {
-        gi = comboOverride(OV_NPC, 0, npc, gi);
     }
     return gi;
 }
@@ -65,4 +56,12 @@ void EnExItem_Draw(Actor* actor, GameState_Play* play)
     comboDrawGI(play, actor, EnExItem_Reward(actor));
 }
 
+int EnExItem_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
+{
+    gi = EnExItem_Reward(actor);
+    return GiveItem(actor, play, gi, a, b);
+}
+
 PATCH_FUNC(0x80ad9f78, EnExItem_Draw);
+PATCH_CALL(0x80ad9e10, EnExItem_GiveItem);
+PATCH_CALL(0x80ad9eac, EnExItem_GiveItem);

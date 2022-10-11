@@ -45,6 +45,7 @@ static s16 comboOverrideImpl(u16 sceneId, u16 id, s16 gi)
     if (override >= 0)
         absGi = override;
     absGi = comboProgressive(absGi);
+
     return gi > 0 ? absGi : -absGi;
 }
 
