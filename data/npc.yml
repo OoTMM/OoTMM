@@ -22,6 +22,7 @@ OOT_GS_20:                  0x14
 OOT_GS_30:                  0x15
 OOT_GS_40:                  0x16
 OOT_GS_50:                  0x17
+OOT_SHEIK_FOREST:           0x18
 
 MM_KOTAKE_RED_POTION:     0x00
 MM_KOUME_PICTOGRAPH_BOX:  0x01

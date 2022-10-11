@@ -80,7 +80,7 @@
     "Sacred Meadow": "true"
     "Deku Theater": "true"
   events:
-    "BEAN_LOST_WOODS": "can_use_beans"
+    BEAN_LOST_WOODS: "can_use_beans"
   locations:
     "Lost Woods Bridge": "true"
     "Lost Woods Target": "can_use_slingshot"
@@ -103,6 +103,7 @@
     "Forest Temple Entrance": "can_hookshot"
   locations:
     "Saria's Song": "event(MEET_ZELDA)"
+    "Sacred Meadow Sheik Song": "is_adult"
     "Sacred Meadow GS Night Adult": "is_adult && gs_night && can_hookshot"
 "Kakariko":
   exits:

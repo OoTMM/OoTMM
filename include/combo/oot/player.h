@@ -4,7 +4,7 @@
 #include <ultra64.h>
 #include <combo/common/actor.h>
 
-typedef struct PACKED ALIGNED(4)
+typedef struct PACKED ALIGNED(4) Actor_Player
 {
     Actor           base;
     char            unk_13c[0x48];
