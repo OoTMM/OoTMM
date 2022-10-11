@@ -59,6 +59,10 @@ Deku Tree Compass Room Side Chest,  chest,        INSIDE_DEKU_TREE, 0x06, RECOVE
 Deku Tree Slingshot Chest,          chest,        INSIDE_DEKU_TREE, 0x01, SLINGSHOT
 Deku Tree Slingshot Side Chest,     chest,        INSIDE_DEKU_TREE, 0x05, RECOVERY_HEART
 Deku Tree Basement Chest,           chest,        INSIDE_DEKU_TREE, 0x04, RECOVERY_HEART
+Deku Tree GS Compass,               gs,           INSIDE_DEKU_TREE, 0x0b, GS_TOKEN
+Deku Tree GS Basement Vines,        gs,           INSIDE_DEKU_TREE, 0x0a, GS_TOKEN
+Deku Tree GS Basement Gate,         gs,           INSIDE_DEKU_TREE, 0x09, GS_TOKEN
+Deku Tree GS Basement Back Room,    gs,           INSIDE_DEKU_TREE, 0x08, GS_TOKEN
 Deku Tree Boss Container,           collectible,  LAIR_GOHMA,       0x1f, HEART_CONTAINER
 Deku Tree Boss,                     special,      LAIR_GOHMA,       0x19, STONE_EMERALD
 

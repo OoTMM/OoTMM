@@ -24,6 +24,7 @@ export const ITEMS_DUNGEON_REWARDS = new Set([
 ]);
 
 export const ITEMS_REQUIRED = new Set<string>([
+  'OOT_GS_TOKEN',
   'OOT_ARROW_FIRE',
   'OOT_ARROW_LIGHT',
   'OOT_BOMB_BAG',
@@ -247,7 +248,10 @@ class Solver {
 
     const checksCount = Object.keys(this.world.checks).length;
 
-    /* Start by placing the required reward items */
+    /* Fix the GS tokens */
+    this.fixTokens();
+
+    /* Place the required reward items */
     this.fixRewards();
 
     /* Handle dungeon items */
@@ -282,6 +286,16 @@ class Solver {
     const junkItem = sample(this.random, itemsArray(this.pools.junk));
     removeItem(this.pools.junk, junkItem);
     addItem(this.pools.required, item);
+  }
+
+  private fixTokens() {
+    for (const location in this.world.checks) {
+      const check = this.world.checks[location];
+      if (check.type === 'gs') {
+        this.place(location, 'OOT_GS_TOKEN');
+        removeItem(this.pools.required, 'OOT_GS_TOKEN');
+      }
+    }
   }
 
   private fixRewards() {

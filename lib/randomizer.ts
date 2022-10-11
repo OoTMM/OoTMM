@@ -87,6 +87,9 @@ export const randomizeGame = async (game: Game, logic: LogicResult): Promise<Buf
     if (c.game !== game) {
       continue;
     }
+    if (c.type === 'gs') {
+      continue;
+    }
     let { scene } = c;
     let id = await checkId(c);
     if (!scenes.hasOwnProperty(scene)) {

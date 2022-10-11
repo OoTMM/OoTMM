@@ -27,3 +27,5 @@
 "can_use_beans": "is_child && has(MAGIC_BEAN)"
 "hidden_grotto_bomb": "has(BOMB_BAG)"
 "hidden_grotto_storms": "can_play(SONG_STORMS)"
+"can_collect_distance": "can_hookshot || can_boomerang"
+"gs_night": "true"

@@ -7,9 +7,13 @@
     "Deku Tree Map Chest": "true"
     "Deku Tree Compass Chest": "true"
     "Deku Tree Compass Room Side Chest": "true"
+    "Deku Tree GS Compass": "true"
     "Deku Tree Slingshot Chest": "true"
     "Deku Tree Slingshot Side Chest": "true"
     "Deku Tree Basement Chest": "true"
+    "Deku Tree GS Basement Vines": "has_ranged_weapon"
+    "Deku Tree GS Basement Gate": "has_ranged_weapon"
+    "Deku Tree GS Basement Back Room": "is_child && has_explosives"
 "Deku Tree Boss":
   dungeon: "DT"
   exits:
