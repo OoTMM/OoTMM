@@ -139,6 +139,7 @@
     "Hyrule Field": "true"
     "Zora Domain": "can_play(SONG_ZELDA)"
   locations:
+    "Zora River Bean Seller": "is_child"
     "Zora River HP Pillar": "true"
     "Zora River HP Platform": "true"
 "Zora Domain":
