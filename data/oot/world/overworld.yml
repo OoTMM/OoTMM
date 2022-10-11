@@ -15,6 +15,9 @@
     "Deku Tree Main": "true"
   locations:
     "Kokiri Forest Kokiri Sword Chest": "is_child"
+    "Kokiri Forest GS Soil": "gs_soil"
+    "Kokiri Forest GS Night Child": "is_child && gs_night"
+    "Kokiri Forest GS Night Adult": "is_adult && gs_night && can_hookshot"
 "Mido's House":
   exits:
     "Kokiri Forest": "true"
@@ -83,6 +86,8 @@
     "Lost Woods Memory Game": "is_child && has(OCARINA)"
     "Lost Woods Scrub Sticks Upgrade": "true"
     "Lost Woods Grotto Scrub Nuts Upgrade": "has_explosives"
+    "Lost Woods GS Soil Bridge": "gs_soil"
+    "Lost Woods GS Soil Theater": "gs_soil"
 "Deku Theater":
   exits:
     "Lost Woods": "true"
@@ -95,12 +100,14 @@
     "Forest Temple Entrance": "can_hookshot"
   locations:
     "Saria's Song": "event(MEET_ZELDA)"
+    "Sacred Meadow GS Night Adult": "is_adult && gs_night && can_hookshot"
 "Kakariko":
   exits:
     "Hyrule Field": "true"
     "Death Mountain": "has(ZELDA_LETTER)"
     "Graveyard": "true"
     "Bottom of the Well": "is_child && can_play(SONG_STORMS) && has(SWORD)"
+    "Skulltula House": "true"
   locations:
     "Anju's Bottle": "is_child"
     "Windmill HP": "is_adult"
@@ -118,6 +125,11 @@
   exits:
     "Graveyard": "true"
     "Shadow Temple Entrance": "is_adult && can_use_din"
+"Skulltula House":
+  exits:
+    "Kakariko": "true"
+  locations:
+    "Skulltula House 10 Tokens": "has(GS_TOKEN, 10)"
 "Death Mountain":
   exits:
     "Goron City": "true"

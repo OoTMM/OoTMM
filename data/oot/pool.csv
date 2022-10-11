@@ -5,6 +5,9 @@ Kokiri Forest Mido Top Right,         chest,          KOKIRI_MIDO,              
 Kokiri Forest Mido Bottom Left,       chest,          KOKIRI_MIDO,              0x02,                   RUPEE_GREEN
 Kokiri Forest Mido Bottom Right,      chest,          KOKIRI_MIDO,              0x03,                   RECOVERY_HEART
 Kokiri Forest Kokiri Sword Chest,     chest,          KOKIRI_FOREST,            0x00,                   SWORD
+Kokiri Forest GS Soil,                gs,             KOKIRI_FOREST,            0x68,                   GS_TOKEN
+Kokiri Forest GS Night Child,         gs,             KOKIRI_FOREST,            0x69,                   GS_TOKEN
+Kokiri Forest GS Night Adult,         gs,             KOKIRI_FOREST,            0x6a,                   GS_TOKEN
 Malon Egg,                            npc,            HYRULE_CASTLE,            MALON_EGG,              CHICKEN
 Zelda's Letter,                       special,        CASTLE_COURTYARD,         0x40,                   ZELDA_LETTER
 Zelda's Song,                         special,        CASTLE_COURTYARD,         0x59,                   SONG_ZELDA
@@ -16,9 +19,12 @@ Lost Woods Skull Kid,                 npc,            LOST_WOODS,               
 Lost Woods Memory Game,               npc,            LOST_WOODS,               LOST_WOODS_MEMORY,      HEART_PIECE
 Lost Woods Scrub Sticks Upgrade,      npc,            LOST_WOODS,               SCRUB_STICKS,           STICK_UPGRADE
 Lost Woods Grotto Scrub Nuts Upgrade, npc,            GROTTOS,                  SCRUB_NUTS,             NUT_UPGRADE
+Lost Woods GS Soil Bridge,            gs,             LOST_WOODS,               0x70,                   GS_TOKEN
+Lost Woods GS Soil Theater,           gs,             LOST_WOODS,               0x71,                   GS_TOKEN
 Deku Theater Sticks Upgrade,          npc,            GROTTOS,                  THEATER_STICKS,         STICK_UPGRADE
 Deku Theater Nuts Upgrade,            npc,            GROTTOS,                  THEATER_NUTS,           NUT_UPGRADE
 Saria's Song,                         special,        SACRED_FOREST_MEADOW,     0x58,                   SONG_SARIA
+Sacred Meadow GS Night Adult,         gs,             SACRED_FOREST_MEADOW,     0x73,                   GS_TOKEN
 Anju's Bottle,                        npc,            KAKARIKO_VILLAGE,         ANJU_BOTTLE,            EMPTY_BOTTLE
 Kakariko Song Shadow,                 special,        KAKARIKO_VILLAGE,         0x54,                   SONG_TP_SHADOW
 Graveyard ReDead Tomb,                chest,          TOMB_REDEAD,              0x00,                   HEART_PIECE
@@ -45,6 +51,7 @@ Graveyard Dampe Tomb Hookshot,        chest,          TOMB_DAMPE_WINDMILL,      
 Windmill HP,                          collectible,    TOMB_DAMPE_WINDMILL,      0x01,                   HEART_PIECE
 Windmill Song of Storms,              npc,            TOMB_DAMPE_WINDMILL,      SONG_STORMS,            SONG_STORMS
 Desert Colossus Song Spirit,          special,        DESERT_COLOSSUS,          0xac,                   SONG_TP_SPIRIT
+Skulltula House 10 Tokens,            npc,            HOUSE_OF_SKULLTULA,       GS_10,                  WALLET
 
 Great Fairy Magic Upgrade,      collectible,   GREAT_FAIRY_FOUNTAIN_UPGRADES, 0x00, MAGIC_UPGRADE
 Great Fairy Magic Upgrade 2,    collectible,   GREAT_FAIRY_FOUNTAIN_UPGRADES, 0x01, MAGIC_UPGRADE

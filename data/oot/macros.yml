@@ -29,3 +29,4 @@
 "hidden_grotto_storms": "can_play(SONG_STORMS)"
 "can_collect_distance": "can_hookshot || can_boomerang"
 "gs_night": "true"
+"gs_soil": "is_child && has_bottle"

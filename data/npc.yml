@@ -17,6 +17,11 @@ OOT_BEAN_SELLER:            0x0f
 OOT_SCRUB_STICKS:           0x10
 OOT_SCRUB_NUTS:             0x11
 OOT_SCRUB_HP:               0x12
+OOT_GS_10:                  0x13
+OOT_GS_20:                  0x14
+OOT_GS_30:                  0x15
+OOT_GS_40:                  0x16
+OOT_GS_50:                  0x17
 
 MM_KOTAKE_RED_POTION:     0x00
 MM_KOUME_PICTOGRAPH_BOX:  0x01
