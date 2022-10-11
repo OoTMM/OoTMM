@@ -13,6 +13,7 @@ Bombchu Bowling Reward 2,       npc,           BOMBCHU_BOWLING_ALLEY,   BOMBCHU_
 Lost Woods Bridge,              special,       LOST_WOODS,              0xc1,                   OCARINA
 Lost Woods Target,              npc,           LOST_WOODS,              LOST_WOODS_TARGET,      SLINGSHOT
 Lost Woods Skull Kid,           npc,           LOST_WOODS,              LOST_WOODS_SKULL_KID,   HEART_PIECE
+Lost Woods Memory Game,         npc,           LOST_WOODS,              LOST_WOODS_MEMORY,      HEART_PIECE
 Saria's Song,                   special,       SACRED_FOREST_MEADOW,    0x58,                   SONG_SARIA
 Anju's Bottle,                  npc,           KAKARIKO_VILLAGE,        ANJU_BOTTLE,            EMPTY_BOTTLE
 Kakariko Song Shadow,           special,       KAKARIKO_VILLAGE,        0x54,                   SONG_TP_SHADOW
