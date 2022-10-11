@@ -129,8 +129,6 @@ int  comboAddItemGI(GameState_Play* play, s16 gi);
 void comboAddItemMm(u16 itemId);
 void comboAddItemOot(u16 itemId);
 
-int comboGiveItem(Actor* actor, GameState_Play* play, s16 itemId, float a, float b);
-
 # if defined(GAME_MM)
 void comboAfterBuy(Actor_EnGirlA* girlA, GameState_Play* play);
 void comboShopDisplayTextBox(GameState_Play* play, Actor_EnGirlA* girlA, int price);
