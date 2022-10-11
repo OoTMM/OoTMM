@@ -1,6 +1,7 @@
 import { logic, LogicResult } from './logic';
-import { DATA_GI, DATA_SCENES } from './data';
+import { DATA_GI, DATA_NPC, DATA_SCENES } from './data';
 import { Game, GAMES } from "./config";
+import { WorldCheck } from './logic/world';
 
 const OFFSETS = {
   oot: 0x1000,
@@ -58,6 +59,17 @@ const gi = async (game: Game, item: string) => {
   }
 
   return value;
+};
+
+const checkId = async (check: WorldCheck) => {
+  if (check.type === 'npc') {
+    const data = await DATA_NPC;
+    if (!data.hasOwnProperty(check.id)) {
+      throw new Error(`Unknown NPC ${check.id}`);
+    }
+    return data[check.id];
+  }
+  return check.id;
 }
 
 const toU16Buffer = (data: number[]) => {
@@ -75,7 +87,8 @@ export const randomizeGame = async (game: Game, logic: LogicResult): Promise<Buf
     if (c.game !== game) {
       continue;
     }
-    let { id, scene } = c;
+    let { scene } = c;
+    let id = await checkId(c);
     if (!scenes.hasOwnProperty(scene)) {
       throw new Error(`Unknown scene ${scene}`);
     }

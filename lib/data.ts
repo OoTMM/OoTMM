@@ -13,3 +13,4 @@ const loadYML = async <T>(filename: string) => {
 
 export const DATA_GI = loadYML<Defines>(path.join(PATH_DATA, 'gi.yml'));
 export const DATA_SCENES = loadYML<Defines>(path.join(PATH_DATA, 'scenes.yml'));
+export const DATA_NPC = loadYML<Defines>(path.join(PATH_DATA, 'npc.yml'));

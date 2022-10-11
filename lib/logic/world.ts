@@ -21,13 +21,21 @@ type WorldRegion = {
   events: ExprMap;
 };
 
+type WorldCheckNumeric = {
+  type: 'chest' | 'special' | 'collectible';
+  id: number;
+};
+
+type WorldCheckSymbolic = {
+  type: 'npc';
+  id: string;
+};
+
 export type WorldCheck = {
   game: Game;
-  type: 'chest' | 'npc' | 'special' | 'collectible';
   scene: string;
-  id: number;
   item: string;
-};
+} & (WorldCheckNumeric | WorldCheckSymbolic);
 
 export type World = {
   regions: {[k: string]: WorldRegion};
@@ -84,7 +92,12 @@ const loadWorldPool = async (world: World, game: Game, filename: string) => {
     const location = gameId(game, String(record.location), ' ');
     const type = String(record.type);
     const scene = gameId(game, String(record.scene), '_');
-    const id = Number(record.id);
+    let id = null;
+    if (type === 'npc') {
+      id = gameId(game, String(record.id), '_');
+    } else {
+      id = Number(record.id);
+    }
     const item = gameId(game, String(record.item), '_');
 
     const check = { game, type, scene, id, item } as WorldCheck;

@@ -18,6 +18,7 @@
 # include <combo/shader.h>
 # include <combo/scenes.h>
 # include <combo/patch.h>
+# include <combo/npc.h>
 
 # if defined(GAME_OOT)
 #  include <combo/oot/play.h>
