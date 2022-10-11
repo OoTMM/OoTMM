@@ -28,6 +28,6 @@ void EnElfgrp_GiveReward(Actor* actor, GameState_Play* play)
     if (GetCollectibleFlag(play, fairyIndex + 1))
         return;
 
-    gi = comboOverrideCollectible(play->sceneId, fairyIndex, kGreatFairyRewards[fairyIndex]);
+    gi = comboOverride(OV_COLLECTIBLE, play->sceneId, fairyIndex, kGreatFairyRewards[fairyIndex]);
     GiveItem(actor, play, gi, 200.f, 200.f);
 }

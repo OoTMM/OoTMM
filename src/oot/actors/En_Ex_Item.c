@@ -46,7 +46,7 @@ s16 EnExItem_RewardByIndex(int index)
     }
     if (npc >= 0)
     {
-        gi = comboOverrideNpc(npc, gi);
+        gi = comboOverride(OV_NPC, 0, npc, gi);
     }
     return gi;
 }

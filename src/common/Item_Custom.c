@@ -62,11 +62,11 @@ static void ItemCustom_Init(Actor_ItemCustom* item, GameState_Play* play)
     {
     case 0x1:
         /* Collectible */
-        item->gi = comboOverrideCollectible(play->sceneId, item->flag, item->gi);
+        item->gi = comboOverride(OV_COLLECTIBLE, play->sceneId, item->flag, item->gi);
         break;
     case 0x2:
         /* Special */
-        item->gi = comboOverrideSpecial(item->flag, item->gi);
+        item->gi = comboOverride(OV_SPECIAL, 0, item->flag, item->gi);
         break;
     }
 

@@ -29,20 +29,20 @@ int comboGiveItem(Actor* actor, GameState_Play* play, s16 itemId, float a, float
     switch (itemId)
     {
     case GI_MM_BOTTLED_POTION_RED:
-        itemId = comboOverrideNpc(0x00, GI_MM_BOTTLED_POTION_RED);
+        itemId = comboOverride(OV_NPC, 0, NPC_MM_KOTAKE_RED_POTION, GI_MM_BOTTLED_POTION_RED);
         break;
     case GI_MM_PICTOGRAPH_BOX:
-        itemId = comboOverrideNpc(0x01, GI_MM_PICTOGRAPH_BOX);
+        itemId = comboOverride(OV_NPC, 0, NPC_MM_KOUME_PICTOGRAPH_BOX, GI_MM_PICTOGRAPH_BOX);
         break;
     case GI_MM_SONG_AWAKENING:
-        itemId = comboOverrideNpc(0x02, GI_MM_SONG_AWAKENING);
+        itemId = comboOverride(OV_NPC, 0, NPC_MM_SONG_AWAKENING, GI_MM_SONG_AWAKENING);
         break;
     }
 
     switch (actor->id)
     {
     case AC_EN_BOX:
-        itemId = comboOverrideChest(play->sceneId, actor->variable & 0x1f, (actor->variable >> 5) & 0xff);
+        itemId = comboOverride(OV_CHEST, play->sceneId, actor->variable & 0x1f, (actor->variable >> 5) & 0xff);
         break;
     }
 

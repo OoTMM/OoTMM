@@ -32,22 +32,22 @@ int comboGiveItem(Actor* actor, GameState_Play* play, s16 itemId, float a, float
     switch (actor->id)
     {
     case AC_EN_BOX:
-        itemId = comboOverrideChest(play->sceneId, actor->variable & 0x1f, (actor->variable >> 5) & 0xff);
+        itemId = comboOverride(OV_CHEST, play->sceneId, actor->variable & 0x1f, (actor->variable >> 5) & 0xff);
         break;
     case AC_EN_MA1:
-        itemId = comboOverrideNpc(0x00, GI_OOT_CHICKEN);
+        itemId = comboOverride(OV_NPC, 0, 0x00, GI_OOT_CHICKEN);
         break;
     case AC_EN_NIW_LADY:
         if (itemId == GI_OOT_EMPTY_BOTTLE)
-            itemId = comboOverrideNpc(0x01, GI_OOT_EMPTY_BOTTLE);
+            itemId = comboOverride(OV_NPC, 0, 0x01, GI_OOT_EMPTY_BOTTLE);
         break;
     case AC_EN_DIVING_GAME:
-        itemId = comboOverrideNpc(0x03, GI_OOT_SCALE_SILVER);
+        itemId = comboOverride(OV_NPC, 0, 0x03, GI_OOT_SCALE_SILVER);
         break;
     case AC_EN_DU:
         if (itemId == GI_OOT_GORON_BRACELET)
         {
-            itemId = comboOverrideNpc(0x02, GI_OOT_GORON_BRACELET);
+            itemId = comboOverride(OV_NPC, 0, 0x02, GI_OOT_GORON_BRACELET);
             gSave.eventsItem[(EV_OOT_ITEM_GORON_BRACELET & 0xf0) >> 4] |= (1 << (EV_OOT_ITEM_GORON_BRACELET & 0xf));
         }
         break;

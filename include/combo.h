@@ -79,10 +79,12 @@ void comboWriteSave(void);
 void comboGameSwitch(void);
 
 /* Override */
-s16 comboOverrideChest(u16 sceneId, u16 id, s16 gi);
-s16 comboOverrideCollectible(u16 sceneId, u16 id, s16 gi);
-s16 comboOverrideSpecial(u16 id, s16 gi);
-s16 comboOverrideNpc(u16 id, s16 gi);
+#define OV_CHEST        0
+#define OV_COLLECTIBLE  1
+#define OV_SPECIAL      2
+#define OV_NPC          3
+
+s16 comboOverride(int type, u16 sceneId, u16 id, s16 gi);
 
 /* Text */
 void comboTextHijackItem(GameState_Play* play, u16 itemId);
@@ -123,7 +125,7 @@ extern const u16 kMaxRupees[];
 extern const u8 kOotTradeChild[];
 extern const u8 kOotTradeAdult[];
 
-void comboAddItem(u16 itemId);
+int  comboAddItemGI(GameState_Play* play, s16 gi);
 void comboAddItemMm(u16 itemId);
 void comboAddItemOot(u16 itemId);
 

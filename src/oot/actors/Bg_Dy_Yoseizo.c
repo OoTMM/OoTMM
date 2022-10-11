@@ -20,7 +20,7 @@ void BgDyYoseizo_Update(Actor* actor, GameState_Play* play)
         index = play->transition.spawnId;
         if (play->sceneId == SCE_OOT_GREAT_FAIRY_FOUNTAIN_SPELLS)
             index += 3;
-        itemId = comboOverrideCollectible(play->sceneId, play->transition.spawnId, kGreatFairyRewards[index]);
+        itemId = comboOverride(OV_COLLECTIBLE, play->sceneId, play->transition.spawnId, kGreatFairyRewards[index]);
 
         /* Collectible flags don't work here for some reason, use unused flags */
         collected = gSave.perm[SCE_OOT_GREAT_FAIRY_FOUNTAIN_UPGRADES].unused & (1 << index );
