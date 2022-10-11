@@ -11,22 +11,18 @@
   exits:
     "Link's House": "true"
     "Mido's House": "true"
-    "Kokiri Forest Child": "is_child"
     "Lost Woods": "true"
     "Deku Tree Main": "true"
+  locations:
+    "Kokiri Forest Kokiri Sword Chest": "is_child"
 "Mido's House":
   exits:
     "Kokiri Forest": "true"
   locations:
-    "KF Mido Top Left": "true"
-    "KF Mido Top Right": "true"
-    "KF Mido Bottom Left": "true"
-    "KF Mido Bottom Right": "true"
-"Kokiri Forest Child":
-  exits:
-    "Kokiri Forest": "true"
-  locations:
-    "KF Kokiri Sword Chest": "true"
+    "Kokiri Forest Mido Top Left": "true"
+    "Kokiri Forest Mido Top Right": "true"
+    "Kokiri Forest Mido Bottom Left": "true"
+    "Kokiri Forest Mido Bottom Right": "true"
 "Hyrule Field":
   exits:
     "Lost Woods": "true"
@@ -38,6 +34,7 @@
     "Gerudo Valley": "true"
     "MM Clock Town": "is_child"
   locations:
+    "Hyrule Field Grotto Scrub HP": "hidden_grotto_bomb"
     "Hyrule Field Ocarina of Time": "has_spiritual_stones"
     "Hyrule Field Song of Time": "has_spiritual_stones"
 "Market":
@@ -84,6 +81,8 @@
     "Lost Woods Target": "can_use_slingshot"
     "Lost Woods Skull Kid": "is_child && can_play(SONG_SARIA)"
     "Lost Woods Memory Game": "is_child && has(OCARINA)"
+    "Lost Woods Scrub Sticks Upgrade": "true"
+    "Lost Woods Grotto Scrub Nuts Upgrade": "has_explosives"
 "Deku Theater":
   exits:
     "Lost Woods": "true"

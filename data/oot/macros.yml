@@ -24,3 +24,6 @@
 "has_medallions": "has(MEDALLION_LIGHT) && has(MEDALLION_FOREST) && has(MEDALLION_FIRE) && has(MEDALLION_WATER) && has(MEDALLION_SPIRIT) && has(MEDALLION_SHADOW)"
 "has_light_arrows": "is_adult && has(BOW) && has(ARROW_LIGHT) && has(MAGIC_UPGRADE)"
 "has_fire_arrows": "is_adult && has(BOW) && has(ARROW_FIRE) && has(MAGIC_UPGRADE)"
+"can_use_beans": "is_child && has(MAGIC_BEAN)"
+"hidden_grotto_bomb": "has(BOMB_BAG)"
+"hidden_grotto_storms": "can_play(SONG_STORMS)"

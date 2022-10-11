@@ -38,6 +38,8 @@ static void debugCheat(GameState_Play* play)
         gSave.quest.stoneRuby = 1;
         gSave.quest.stoneSapphire = 1;
 
+        gSave.rupees = 999;
+
         gOotExtraTrade.child = 0xffff;
     }
 #endif
