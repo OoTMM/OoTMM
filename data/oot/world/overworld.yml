@@ -79,6 +79,8 @@
     "Hyrule Field": "true"
     "Sacred Meadow": "true"
     "Deku Theater": "true"
+  events:
+    "BEAN_LOST_WOODS": "can_use_beans"
   locations:
     "Lost Woods Bridge": "true"
     "Lost Woods Target": "can_use_slingshot"
@@ -88,6 +90,7 @@
     "Lost Woods Grotto Scrub Nuts Upgrade": "has_explosives"
     "Lost Woods GS Soil Bridge": "gs_soil"
     "Lost Woods GS Soil Theater": "gs_soil"
+    "Lost Woods GS Bean Ride": "is_adult && gs_night && event(BEAN_LOST_WOODS)"
 "Deku Theater":
   exits:
     "Lost Woods": "true"
