@@ -1,4 +1,4 @@
-#include <combo/asm.h>
+#include <combo.h>
 
 PATCH_START 0x808eda34
   j BgDyYoseizo_Update

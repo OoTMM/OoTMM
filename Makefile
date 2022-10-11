@@ -1,3 +1,7 @@
+# Configurable
+DEBUG ?= 0
+
+# Toolchain detection
 ifneq (, $(shell command -v mips64-ultra-elf-gcc 2>/dev/null))
 ARCH	:= mips64-ultra-elf
 else ifneq (, $(shell command -v mips64-elf-gcc 2>/dev/null))
@@ -19,6 +23,14 @@ OBJCOPY 	:= $(ARCH)-objcopy
 NM 			:= $(ARCH)-nm
 BUILD_DIR 	:= build
 SRC_DIR 	:= src
+
+# Debug/Release
+ifeq ($(DEBUG), 0)
+BUILD_DIR 	:= $(BUILD_DIR)/Release
+else
+BUILD_DIR 	:= $(BUILD_DIR)/Debug
+CFLAGS 		+= -DDEBUG=1
+endif
 
 LDSCRIPT		:= $(SRC_DIR)/link.ld.in
 SRC				:= $(shell find $(SRC_DIR)/common -name '*.c' -o -name '*.S')

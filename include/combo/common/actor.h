@@ -14,11 +14,15 @@
 # define AC_EN_MA1          0x0e7
 # define AC_ITEM_OCARINA    0x0f1
 # define AC_ITEM_ETCETERA   0x10f
+# define AC_EN_SKJ          0x115
 # define AC_BG_SPOT03_TAKI  0x11f
 # define AC_EN_DIVING_GAME  0x124
 # define AC_EN_NIW_LADY     0x13c
 # define AC_EN_SA           0x146
+# define AC_EN_BOM_BOWL_MAN 0x14b
+# define AC_EN_BOM_BOWL_PIT 0x14c
 # define AC_EN_OWL          0x14d
+# define AC_EN_EX_ITEM      0x168
 # define AC_EN_GO2          0x1ae
 #endif
 
@@ -34,6 +38,7 @@
 
 typedef struct GameState_Play GameState_Play;
 
+typedef struct Actor Actor;
 typedef struct PACKED ALIGNED(0x4) Actor
 {
     u16         id;

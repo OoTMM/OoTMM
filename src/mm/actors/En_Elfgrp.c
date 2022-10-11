@@ -13,7 +13,6 @@ void EnElfgrp_GiveReward(Actor* actor, GameState_Play* play)
 {
     u8      fairyIndex;
     u16     gi;
-    s32     override;
 
     fairyIndex = (actor->variable & 0xf) + 1;
     if (fairyIndex == 1 && gMmSave.playerForm == 0x04)
@@ -29,10 +28,6 @@ void EnElfgrp_GiveReward(Actor* actor, GameState_Play* play)
     if (GetCollectibleFlag(play, fairyIndex + 1))
         return;
 
-    gi = kGreatFairyRewards[fairyIndex];
-    override = comboGetCollectibleOverride(play->sceneId, fairyIndex);
-    if (override >= 0)
-        gi = override;
-    gi = comboProgressive(gi);
+    gi = comboOverride(OV_COLLECTIBLE, play->sceneId, fairyIndex, kGreatFairyRewards[fairyIndex]);
     GiveItem(actor, play, gi, 200.f, 200.f);
 }

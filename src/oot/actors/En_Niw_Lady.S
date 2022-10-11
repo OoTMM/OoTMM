@@ -1,4 +1,4 @@
-#include <combo/asm.h>
+#include <combo.h>
 
 /* Set the required cucco count to 1 */
 PATCH_START 0x80a9e6d0

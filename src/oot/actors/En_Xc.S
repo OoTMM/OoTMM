@@ -1,4 +1,4 @@
-#include <combo/asm.h>
+#include <combo.h>
 
 /* Disable Sheik near the Master Sword */
 PATCH_START 0x808e2d6c

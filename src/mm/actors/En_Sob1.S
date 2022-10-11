@@ -1,4 +1,4 @@
-#include <combo/asm.h>
+#include <combo.h>
 
 EnSob1_AfterBuy_Trampoline:
   lw a0,0x20(sp)

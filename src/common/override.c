@@ -1,9 +1,9 @@
 #include <combo.h>
 
 #if defined(GAME_OOT)
-# define CHEST_OVERRIDE_ADDR 0x03fe1000
+# define OVERRIDE_ADDR 0x03fe1000
 #else
-# define CHEST_OVERRIDE_ADDR 0x03fe2000
+# define OVERRIDE_ADDR 0x03fe2000
 #endif
 
 typedef struct PACKED
@@ -13,20 +13,20 @@ typedef struct PACKED
 }
 ComboOverride;
 
-#define CHEST_KEY(scene, id) (((scene) << 8) | (id))
+#define KEY(scene, id) (((scene) << 8) | (id))
 
-static ALIGNED(16) ComboOverride gComboChestOverrides[256];
+static ALIGNED(16) ComboOverride gComboOverrides[256];
 
 void comboInitOverride(void)
 {
-    DMARomToRam(CHEST_OVERRIDE_ADDR | PI_DOM1_ADDR2, &gComboChestOverrides, sizeof(gComboChestOverrides));
+    DMARomToRam(OVERRIDE_ADDR | PI_DOM1_ADDR2, &gComboOverrides, sizeof(gComboOverrides));
 }
 
-s32 comboGetOverride(u16 key)
+static s32 comboOverrideRaw(u16 key)
 {
     for (int i = 0; i < 256; ++i)
     {
-        ComboOverride* o = &gComboChestOverrides[i];
+        ComboOverride* o = &gComboOverrides[i];
         if (o->key == 0xffff)
             break;
         if (o->key == key)
@@ -35,22 +35,36 @@ s32 comboGetOverride(u16 key)
     return -1;
 }
 
-s32 comboGetChestOverride(u16 scene, u8 id)
+static s16 comboOverrideImpl(u16 sceneId, u16 id, s16 gi)
 {
-    return comboGetOverride(CHEST_KEY(scene, id));
+    s32 override;
+    u16 absGi;
+
+    override = comboOverrideRaw(KEY(sceneId, id));
+    absGi = gi > 0 ? gi : -gi;
+    if (override >= 0)
+        absGi = override;
+    absGi = comboProgressive(absGi);
+
+    return gi > 0 ? absGi : -absGi;
 }
 
-s32 comboGetCollectibleOverride(u16 scene, u8 id)
+s16 comboOverride(int type, u16 sceneId, u16 id, s16 gi)
 {
-    return comboGetOverride(CHEST_KEY(scene, (id | 0x40)));
-}
-
-s32 comboGetSpecialOverride(u8 id)
-{
-    return comboGetOverride(CHEST_KEY(0xf0, id));
-}
-
-s32 comboGetNpcOverride(u8 id)
-{
-    return comboGetOverride(CHEST_KEY(0xf1, id));
+    switch (type)
+    {
+    case OV_CHEST:
+        id &= 0x3f;
+        break;
+    case OV_COLLECTIBLE:
+        id = (id & 0x3f) | 0x40;
+        break;
+    case OV_SPECIAL:
+        sceneId = SCE_SPECIAL;
+        break;
+    case OV_NPC:
+        sceneId = SCE_NPC;
+        break;
+    }
+    return comboOverrideImpl(sceneId, id, gi);
 }

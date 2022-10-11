@@ -2,6 +2,7 @@ import fs from 'fs/promises';
 import path from 'path';
 
 import { Game, PATH_BUILD, CONFIG } from "./config";
+import { Options } from './options';
 
 type VRamEntry = {
   vstart: number;
@@ -32,199 +33,278 @@ const DATA_VRAM = {
   mm: DATA_VRAM_MM,
 };
 
-const makeVRamTable = (game: Game, rom: Buffer) => {
-  const vram = [...DATA_VRAM[game]];
-  const meta = CONFIG[game];
-  let addr = meta.actorsOvlAddr;
-  for (let i = 0; i < meta.actorsOvlCount; ++i) {
-    const base = rom.readUInt32BE(addr + 0x00);
-    const vstart = rom.readUInt32BE(addr + 0x08);
-    const vend = rom.readUInt32BE(addr + 0x0c);
-    addr += 0x20;
-    if (vstart > 0) {
-      vram.push({ vstart, vend, base });
+class Patcher {
+  private game: Game;
+  private opts: Options;
+  private rom: Buffer;
+  private vram: VRamEntry[];
+  private objectTable: number[];
+  private cursor: number;
+
+  constructor(game: Game, rom: Buffer, opts: Options) {
+    this.game = game;
+    this.rom = rom;
+    this.opts = opts;
+    this.vram = this.makeVramTable();
+    this.objectTable = this.makeObjectTable();
+    this.cursor = 0;
+  }
+
+  private makeVramTable() {
+    const vram = [...DATA_VRAM[this.game]];
+    const meta = CONFIG[this.game];
+    let addr = meta.actorsOvlAddr;
+    for (let i = 0; i < meta.actorsOvlCount; ++i) {
+      const base = this.rom.readUInt32BE(addr + 0x00);
+      const vstart = this.rom.readUInt32BE(addr + 0x08);
+      const vend = this.rom.readUInt32BE(addr + 0x0c);
+      addr += 0x20;
+      if (vstart > 0) {
+        vram.push({ vstart, vend, base });
+      }
     }
+    return vram;
   }
-  return vram;
-};
 
-const virtualToPhysical = (vram: VRamEntry[], addr: number) => {
-  for (const entry of vram) {
-    if (addr >= entry.vstart && addr < entry.vend) {
-      return entry.base + (addr - entry.vstart);
+  private makeObjectTable() {
+    const objectTable: number[] = [];
+    const meta = CONFIG[this.game];
+    let addr = meta.objectTableAddr;
+    for (let i = 0; i < meta.objectCount; ++i) {
+      const vstart = this.rom.readUInt32BE(addr);
+      addr += 0x08;
+      objectTable.push(vstart);
     }
-  }
-  throw new Error(`Virtual address ${addr.toString(16)} not found in vram table`);
-};
-
-const patchASM = (game: Game, rom: Buffer, vram: VRamEntry[], patch: Buffer, cursor: number) => {
-  const addr = patch.readUInt32BE(cursor + 0x00);
-  const size = patch.readUInt32BE(cursor + 0x04);
-  cursor += 0x08;
-  const data = patch.subarray(cursor, cursor + size);
-  cursor += size;
-  const paddr = virtualToPhysical(vram, addr);
-  data.copy(rom, paddr);
-  return cursor;
-};
-
-const patchLoadStore = (game: Game, rom: Buffer, vram: VRamEntry[], patch: Buffer, cursor: number) => {
-  const bits = patch.readUInt16BE(cursor + 0x00);
-  const unsigned = patch.readUInt16BE(cursor + 0x02);
-  const count = patch.readUInt32BE(cursor + 0x04) / 4;
-  cursor += 0x08;
-
-  /* Compute the correct MIPS opcodes for the load/store */
-  let op_load = 0;
-  let op_store = 0;
-
-  switch (bits) {
-  case 8: op_load = 0x20; break;
-  case 16: op_load = 0x21; break;
-  case 32: op_load = 0x23; break;
-  default: throw new Error(`Invalid bits ${bits}`);
-  }
-  op_store = op_load | 0x08;
-  if (unsigned) {
-    op_load |= 0x04;
+    return objectTable;
   }
 
-  /* Patch the load/store instructions */
-  for (let i = 0; i < count; ++i) {
-    const addr = patch.readUInt32BE(cursor + i * 4);
-    const paddr = virtualToPhysical(vram, addr);
-    let instr = rom.readUInt32BE(paddr);
-    let op = (instr >>> 26) & 0x3f;
-    switch (op) {
-    case 0x20:
-    case 0x21:
-    case 0x23:
-    case 0x24:
-    case 0x25:
-    case 0x27:
-      op = op_load;
-      break;
-    case 0x28:
-    case 0x29:
-    case 0x2b:
-    case 0x2c:
-    case 0x2d:
-    case 0x2f:
-      op = op_store;
-      break;
-    default:
-      throw new Error(`Invalid load/store opcode ${op.toString(16)} at ${paddr.toString(16)}`);
+  private virtualToPhysical(addr: number) {
+    for (const entry of this.vram) {
+      if (addr >= entry.vstart && addr < entry.vend) {
+        return entry.base + (addr - entry.vstart);
+      }
     }
-    instr = ((instr & 0x3ffffff) | (op << 26)) >>> 0;
-    rom.writeUInt32BE(instr, paddr);
+    throw new Error(`Virtual address ${addr.toString(16)} not found in vram table`);
   }
 
-  cursor += count * 4;
-  return cursor;
-};
-
-const patchRelHiLo = (game: Game, rom: Buffer, vram: VRamEntry[], patch: Buffer, cursor: number) => {
-  const target = patch.readUInt32BE(cursor + 0x00);
-  const count = patch.readUInt32BE(cursor + 0x04) / 4;
-  cursor += 0x08;
-
-  /* Computet the hi/lo pair */
-  const target_lo = target & 0xffff;
-  let target_hi = (target >>> 16) & 0xffff;
-  if (target_lo & 0x8000) {
-    target_hi += 1;
-  }
-
-  /* Patch the MIPS instructions */
-  for (let i = 0; i < count; ++i) {
-    const addr = patch.readUInt32BE(cursor + i * 4);
-    const paddr = virtualToPhysical(vram, addr);
-    let instr = rom.readUInt32BE(paddr);
-    const op = (instr >>> 26) & 0x3f;
-    let value = target_lo;
-    if (op === 0x0f) {
-      value = target_hi;
+  private objectToPhysical(objectId: number, offset: number) {
+    if (objectId >= this.objectTable.length) {
+      throw new Error(`Object ID ${objectId} out of range`);
     }
-    instr = ((instr & 0xffff0000) | value) >>> 0;
-    rom.writeUInt32BE(instr, paddr);
+    const vstart = this.objectTable[objectId];
+    return vstart + offset;
   }
 
-  cursor += count * 4;
-  return cursor;
-};
-
-const patchRelJump = (game: Game, rom: Buffer, vram: VRamEntry[], patch: Buffer, cursor: number) => {
-  let target = patch.readUInt32BE(cursor + 0x00);
-  const count = patch.readUInt32BE(cursor + 0x04) / 4;
-  cursor += 0x08;
-
-  target = (target & 0x0fffffff) >>> 2;
-
-  /* Patch the MIPS instructions */
-  for (let i = 0; i < count; ++i) {
-    const addr = patch.readUInt32BE(cursor + i * 4);
-    const paddr = virtualToPhysical(vram, addr);
-    let instr = rom.readUInt32BE(paddr);
-    instr = ((instr & 0xfc000000) | target) >>> 0;
-    rom.writeUInt32BE(instr, paddr);
+  patchASM(patch: Buffer) {
+    const addr = patch.readUInt32BE(this.cursor + 0x00);
+    const size = patch.readUInt32BE(this.cursor + 0x04);
+    this.cursor += 0x08;
+    const data = patch.subarray(this.cursor, this.cursor + size);
+    this.cursor += size;
+    const paddr = this.virtualToPhysical(addr);
+    data.copy(this.rom, paddr);
   }
 
-  cursor += count * 4;
-  return cursor;
-};
+  patchLoadStore(patch: Buffer) {
+    const bits = patch.readUInt16BE(this.cursor + 0x00);
+    const unsigned = patch.readUInt16BE(this.cursor + 0x02);
+    const count = patch.readUInt32BE(this.cursor + 0x04) / 4;
+    this.cursor += 0x08;
 
-const patchWrite32 = (game: Game, rom: Buffer, vram: VRamEntry[], patch: Buffer, cursor: number) => {
-  const value = patch.readUInt32BE(cursor + 0x00);
-  const count = patch.readUInt32BE(cursor + 0x04) / 4;
-  cursor += 0x08;
+    /* Compute the correct MIPS opcodes for the load/store */
+    let op_load = 0;
+    let op_store = 0;
 
-  /* Patch the MIPS instructions */
-  for (let i = 0; i < count; ++i) {
-    const addr = patch.readUInt32BE(cursor + i * 4);
-    const paddr = virtualToPhysical(vram, addr);
-    rom.writeUInt32BE(value, paddr);
+    switch (bits) {
+    case 8: op_load = 0x20; break;
+    case 16: op_load = 0x21; break;
+    case 32: op_load = 0x23; break;
+    default: throw new Error(`Invalid bits ${bits}`);
+    }
+    op_store = op_load | 0x08;
+    if (unsigned) {
+      op_load |= 0x04;
+    }
+
+    /* Patch the load/store instructions */
+    for (let i = 0; i < count; ++i) {
+      const addr = patch.readUInt32BE(this.cursor + i * 4);
+      const paddr = this.virtualToPhysical(addr);
+      let instr = this.rom.readUInt32BE(paddr);
+      let op = (instr >>> 26) & 0x3f;
+      switch (op) {
+      case 0x20:
+      case 0x21:
+      case 0x23:
+      case 0x24:
+      case 0x25:
+      case 0x27:
+        op = op_load;
+        break;
+      case 0x28:
+      case 0x29:
+      case 0x2b:
+      case 0x2c:
+      case 0x2d:
+      case 0x2f:
+        op = op_store;
+        break;
+      default:
+        throw new Error(`Invalid load/store opcode ${op.toString(16)} at ${paddr.toString(16)}`);
+      }
+      instr = ((instr & 0x3ffffff) | (op << 26)) >>> 0;
+      this.rom.writeUInt32BE(instr, paddr);
+    }
+
+    this.cursor += count * 4;
   }
 
-  cursor += count * 4;
-  return cursor;
-};
+  patchRelHiLo(patch: Buffer) {
+    const target = patch.readUInt32BE(this.cursor + 0x00);
+    const count = patch.readUInt32BE(this.cursor + 0x04) / 4;
+    this.cursor += 0x08;
 
-export const patchGame = async (game: Game) => {
+    /* Computet the hi/lo pair */
+    const target_lo = target & 0xffff;
+    let target_hi = (target >>> 16) & 0xffff;
+    if (target_lo & 0x8000) {
+      target_hi += 1;
+    }
+
+    /* Patch the MIPS instructions */
+    for (let i = 0; i < count; ++i) {
+      const addr = patch.readUInt32BE(this.cursor + i * 4);
+      const paddr = this.virtualToPhysical(addr);
+      let instr = this.rom.readUInt32BE(paddr);
+      const op = (instr >>> 26) & 0x3f;
+      let value = target_lo;
+      if (op === 0x0f) {
+        value = target_hi;
+      }
+      instr = ((instr & 0xffff0000) | value) >>> 0;
+      this.rom.writeUInt32BE(instr, paddr);
+    }
+
+    this.cursor += count * 4;
+  }
+
+  patchRelJump(patch: Buffer) {
+    let target = patch.readUInt32BE(this.cursor + 0x00);
+    const count = patch.readUInt32BE(this.cursor + 0x04) / 4;
+    this.cursor += 0x08;
+
+    target = (target & 0x0fffffff) >>> 2;
+
+    /* Patch the MIPS instructions */
+    for (let i = 0; i < count; ++i) {
+      const addr = patch.readUInt32BE(this.cursor + i * 4);
+      const paddr = this.virtualToPhysical(addr);
+      let instr = this.rom.readUInt32BE(paddr);
+      instr = ((instr & 0xfc000000) | target) >>> 0;
+      this.rom.writeUInt32BE(instr, paddr);
+    }
+
+    this.cursor += count * 4;
+  }
+
+  patchWrite32(patch: Buffer) {
+    const value = patch.readUInt32BE(this.cursor + 0x00);
+    const count = patch.readUInt32BE(this.cursor + 0x04) / 4;
+    this.cursor += 0x08;
+
+    /* Patch the MIPS instructions */
+    for (let i = 0; i < count; ++i) {
+      const addr = patch.readUInt32BE(this.cursor + i * 4);
+      const paddr = this.virtualToPhysical(addr);
+      this.rom.writeUInt32BE(value, paddr);
+    }
+
+    this.cursor += count * 4;
+  }
+
+  patchFunc = (patch: Buffer) => {
+    const addr = patch.readUInt32BE(this.cursor + 0x00);
+    const func = patch.readUInt32BE(this.cursor + 0x04);
+    this.cursor += 0x08;
+
+    const paddr = this.virtualToPhysical(addr);
+
+    this.rom.writeUInt32BE((0x08000000 | (((func >>> 2) & 0x03ffffff) >>> 0)) >>> 0, paddr);
+    this.rom.writeUInt32BE(0x0, paddr + 4);
+  }
+
+  patchObject(patch: Buffer) {
+    const objectId = patch.readUInt32BE(this.cursor + 0x00);
+    const offset = patch.readUInt32BE(this.cursor + 0x04);
+    const size = patch.readUInt32BE(this.cursor + 0x08);
+    this.cursor += 0x0c;
+
+    const paddr = this.objectToPhysical(objectId, offset);
+    const data = patch.subarray(this.cursor, this.cursor + size);
+    this.cursor += size;
+    data.copy(this.rom, paddr);
+  }
+
+  patchCall = (patch: Buffer) => {
+    const addr = patch.readUInt32BE(this.cursor + 0x00);
+    const func = patch.readUInt32BE(this.cursor + 0x04);
+    this.cursor += 0x08;
+
+    const paddr = this.virtualToPhysical(addr);
+
+    this.rom.writeUInt32BE((0x0c000000 | (((func >>> 2) & 0x03ffffff) >>> 0)) >>> 0, paddr);
+  }
+
+  async run() {
+    const patch = await fs.readFile(path.resolve(PATH_BUILD, this.opts.debug ? 'Debug' : 'Release', `${this.game}_patch.bin`));
+    this.cursor = 0;
+    for (;;) {
+      /* Align on a 8-byte boundary */
+      this.cursor = (this.cursor + 7) & ~7;
+      if (this.cursor >= patch.length) {
+        break;
+      }
+
+      /* Read the patch type */
+      const type = patch.readUInt32BE(this.cursor);
+      this.cursor += 4;
+
+      switch (type) {
+      case 0x01:
+        this.patchASM(patch);
+        break;
+      case 0x02:
+        this.patchLoadStore(patch);
+        break;
+      case 0x03:
+        this.patchRelHiLo(patch);
+        break;
+      case 0x04:
+        this.patchRelJump(patch);
+        break;
+      case 0x05:
+        this.patchWrite32(patch);
+        break;
+      case 0x06:
+        this.patchFunc(patch);
+        break;
+      case 0x07:
+        this.patchObject(patch);
+        break;
+      case 0x08:
+        this.patchCall(patch);
+        break;
+      default:
+        throw new Error("Invalid patch type: " + type);
+      }
+    }
+    return this.rom;
+  }
+}
+
+export const patchGame = async (opts: Options, game: Game) => {
   console.log("Patching " + game + "...");
   const rom = await fs.readFile(path.resolve(PATH_BUILD, 'roms', `${game}_decompressed.z64`));
-  const patch = await fs.readFile(path.resolve(PATH_BUILD, `${game}_patch.bin`));
-  const vram = makeVRamTable(game, rom);
-  let cursor = 0;
-  for (;;) {
-    /* Align on a 4-byte boundary */
-    cursor = (cursor + 3) & ~3;
-    if (cursor >= patch.length) {
-      break;
-    }
-
-    /* Read the patch type */
-    const type = patch.readUInt32BE(cursor);
-    cursor += 4;
-
-    switch (type) {
-    case 0x01:
-      cursor = patchASM(game, rom, vram, patch, cursor);
-      break;
-    case 0x02:
-      cursor = patchLoadStore(game, rom, vram, patch, cursor);
-      break;
-    case 0x03:
-      cursor = patchRelHiLo(game, rom, vram, patch, cursor);
-      break;
-    case 0x04:
-      cursor = patchRelJump(game, rom, vram, patch, cursor);
-      break;
-    case 0x05:
-      cursor = patchWrite32(game, rom, vram, patch, cursor);
-      break;
-    default:
-      throw new Error("Invalid patch type: " + type);
-    }
-  }
-  return rom;
+  const patcher = new Patcher(game, rom, opts);
+  return patcher.run();
 };

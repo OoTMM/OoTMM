@@ -1,4 +1,4 @@
-#include <combo/asm.h>
+#include <combo.h>
 
 /* Use our own DMA table */
 PATCH_REL_HILO(kComboDmaData)

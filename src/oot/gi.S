@@ -1,4 +1,4 @@
-#include <combo/asm.h>
+#include <combo.h>
 
 /* Disable silver gauntlets warp */
 PATCH_START(0x8084c22c)

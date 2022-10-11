@@ -1,4 +1,4 @@
-#include <combo/asm.h>
+#include <combo.h>
 
 /* Inject out actor at index 0x13 */
 PATCH_START 0x801af244

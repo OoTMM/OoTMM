@@ -1,4 +1,4 @@
-#include <combo/asm.h>
+#include <combo.h>
 
 /* Expand the GI buffer */
 PATCH_START 0x808420c8

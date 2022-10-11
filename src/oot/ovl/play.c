@@ -4,6 +4,7 @@ extern void Play_Init(void*);
 
 static void debugCheat(GameState_Play* play)
 {
+#if defined(DEBUG)
     if (play->gs.input[0].current.buttons & 0x20)
     {
         gSave.inventory[ITS_OOT_STICKS] = ITEM_OOT_STICK;
@@ -16,6 +17,7 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory[ITS_OOT_BOOMERANG] = ITEM_OOT_BOOMERANG;
         gSave.inventory[ITS_OOT_BOTTLE] = ITEM_OOT_RUTO_LETTER;
         gSave.inventory[ITS_OOT_BOTTLE2] = ITEM_OOT_EMPTY_BOTTLE;
+        gSave.inventory[ITS_OOT_BOMBCHU] = ITEM_OOT_BOMBCHU_10;
         gSave.equipment.swords = 0x7;
         gSave.equipment.shields = 0x7;
         gSave.equipment.tunics = 0x7;
@@ -35,6 +37,7 @@ static void debugCheat(GameState_Play* play)
         gSave.quest.stoneRuby = 1;
         gSave.quest.stoneSapphire = 1;
     }
+#endif
 }
 
 static void skipEntranceCutscene(GameState_Play* play)

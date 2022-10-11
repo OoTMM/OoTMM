@@ -194,6 +194,8 @@ static const char* const kItemNamesOot[] = {
     "the " C1 "Larger Magic Upgrade",
     "the " C1 "Defense Upgrade",
     C1 "Biggoron's Sword",
+    "the " C1 "Deku Shield",    /* Shop */
+    "the " C1 "Hylian Shield",  /* Shop */
 };
 
 static const char* const kItemNamesMm[] = {
@@ -397,7 +399,7 @@ static int isItemAmbiguousOot(u16 itemId)
     case ITEM_OOT_ZORA_MASK:
     case ITEM_OOT_MASK_OF_TRUTH:
     case ITEM_OOT_KOKIRI_SWORD:
-    case ITEM_OOT_HYLIAN_SHIELD:
+    case ITEM_OOT_SHIELD_HYLIAN:
     case ITEM_OOT_QUIVER:
     case ITEM_OOT_QUIVER2:
     case ITEM_OOT_QUIVER3:

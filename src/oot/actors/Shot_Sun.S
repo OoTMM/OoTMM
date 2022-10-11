@@ -1,4 +1,4 @@
-#include <combo/asm.h>
+#include <combo.h>
 
 .LShotSunTrampoline:
   lw  a0,0x60(sp)

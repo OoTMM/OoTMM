@@ -1,4 +1,4 @@
-#include <combo/asm.h>
+#include <combo.h>
 
 /* Patch Play_Init */
 PATCH_START(0x800f13e8)

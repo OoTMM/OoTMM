@@ -1,4 +1,4 @@
-#include <combo/asm.h>
+#include <combo.h>
 
 PATCH_START 0x80a795cc
   jal comboZoraWaterfallDown

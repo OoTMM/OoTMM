@@ -26,6 +26,8 @@ type GameConfig = {
   payloadAddr: number;
   actorsOvlAddr: number;
   actorsOvlCount: number;
+  objectTableAddr: number;
+  objectCount: number;
 };
 
 export const CONFIG_OOT: GameConfig = {
@@ -35,6 +37,8 @@ export const CONFIG_OOT: GameConfig = {
   payloadAddr: 0x03fa0000,
   actorsOvlAddr: 0xb5e490,
   actorsOvlCount: 471,
+  objectTableAddr: 0xb6ef58,
+  objectCount: 0x192,
 };
 
 export const CONFIG_MM: GameConfig = {
@@ -44,6 +48,8 @@ export const CONFIG_MM: GameConfig = {
   payloadAddr: 0x03fc0000,
   actorsOvlAddr: 0xc45510,
   actorsOvlCount: 690,
+  objectTableAddr: 0xb508e0,
+  objectCount: 0x283,
 };
 
 export const CONFIG = {

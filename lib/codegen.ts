@@ -1,7 +1,7 @@
 import fs from 'fs/promises';
 import path from 'path';
 import { PATH_BUILD } from './config';
-import { DATA_GI, DATA_SCENES } from './data';
+import { DATA_GI, DATA_SCENES, DATA_NPC } from './data';
 
 import { fileExists } from './util';
 
@@ -29,20 +29,11 @@ export class CodeGen {
   }
 };
 
-const codegenGI = async () => {
-  const data = await DATA_GI;
-  const cg = new CodeGen(path.resolve(PATH_BUILD, 'include', 'combo', 'gi_data.h'), 'GENERATED_GI_DATA_H');
-  for (const [k, v] of Object.entries(data)) {
-    cg.define("GI_" + k, v);
-  }
-  await cg.emit();
-};
-
-const codegenScenes = async () => {
-  const data = await DATA_SCENES;
-  const cg = new CodeGen(path.resolve(PATH_BUILD, 'include', 'combo', 'scenes.h'), 'GENERATED_SCENES_H');
-  for (const [k, v] of Object.entries(data)) {
-    cg.define("SCE_" + k, v);
+const codegenFile = async (data: Promise<{[k: string]: number}>, prefix: string, filename: string, guard: string) => {
+  const d = await data;
+  const cg = new CodeGen(path.resolve(PATH_BUILD, 'include', 'combo', filename), guard);
+  for (const [k, v] of Object.entries(d)) {
+    cg.define(prefix + "_" + k, v);
   }
   await cg.emit();
 };
@@ -50,7 +41,8 @@ const codegenScenes = async () => {
 export const codegen = async () => {
   console.log("Codegen...");
   return Promise.all([
-    codegenGI(),
-    codegenScenes(),
+    codegenFile(DATA_GI,      "GI",  "gi_data.h", "GENERATED_GI_DATA_H"),
+    codegenFile(DATA_SCENES,  "SCE", "scenes.h",  "GENERATED_SCENES_H"),
+    codegenFile(DATA_NPC,     "NPC", "npc.h",     "GENERATED_NPC_H"),
   ]);
 };

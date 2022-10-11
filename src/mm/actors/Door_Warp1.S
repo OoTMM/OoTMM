@@ -1,4 +1,4 @@
-#include <combo/asm.h>
+#include <combo.h>
 
 /* Patch DoorWarp1_RemainsIndex */
 PATCH_START 0x808b849c

@@ -9,26 +9,20 @@ void EnGirlA_Draw(Actor_EnGirlA* girlA, GameState_Play* play)
 
 void EnGirlA_PostHandler(Actor_EnGirlA* girlA, GameState_Play* play)
 {
-    int override;
     int soldOut;
 
-    override = -1;
     soldOut = 0;
     switch (girlA->base.variable)
     {
     /* Bomb Shop: Bomb Bag */
     case 0x17:
-        override = comboGetNpcOverride(0x03);
+        girlA->gi = comboOverride(OV_NPC, 0, 0x03, GI_MM_BOMB_BAG);
         soldOut = GetCollectibleFlag(play, 0x1f);
         break;
     }
     if (soldOut)
     {
         girlA->gi = GI_MM_SOLD_OUT;
-    }
-    else if (override >= 0)
-    {
-        girlA->gi = comboProgressive(override);
     }
 }
 

@@ -1,4 +1,4 @@
-#include <combo/asm.h>
+#include <combo.h>
 
 ItemPreventEmptyEquip:
   sge at,t1,0xff

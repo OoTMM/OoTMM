@@ -1,45 +1,7 @@
-NPC override IDs:
-
-00 Malon, Weird Egg (Chicken)
-01 Anju, Empty Bottle
-02 Darunia, Goron Bracelet
-03 Zora Diving Game, silver scale
-04 Link the Goron, Goron Tunic
-05 King Zora, Zora Tunic
-06 Song of Storms
-07 Guerudo Member Card
-
 MM Events RAM: 801f0568
-
-MM NPCs:
-
-00 Kotake (Red Potion)
-01 Koume (Picto-box)
-02 Song of Awakening
-03 Bomb Shop Bag
-04 Bomb Shop Big Bag
-05 Goron Mask
-06 Goron Elder
-07 Goron Baby
-08 Goron Powder Keg
-09 Epona's Song
-0a Pinnacle Rock HP
-0b Zora Song
-0c Stone Mask
-0d Garo Mask
-0e Song of Storms
-0f Gibdo Mask
-10 Mask of Scents
-11 Song Emptiness
-12 Oath to Order
 
 ===== MISSING FROM LOGIC =====
 Tomb Royal: <!-- <chest id="00" content="BOMBS_10"/> Requires fire -->
-
-=== Spirit Temple ===
-Keys before reaching statue: child = 5, adult = 3
-
-
 
 === MM Shop Items ===
 00: MM_POTION_RED

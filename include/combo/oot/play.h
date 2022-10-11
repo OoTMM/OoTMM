@@ -116,7 +116,4 @@ ASSERT_OFFSET(GameState_Play, transition.entrance, 0x11e1a);
 _Static_assert(sizeof(TransitionContext) == 0x130, "OoT TransitionContext size is wrong");
 _Static_assert(sizeof(GameState_Play) == 0x12518, "OoT GameState_Play size is wrong");
 
-typedef struct Actor Actor;
-int GiveItem(Actor* actor, GameState_Play* play, s16 itemId, float a, float b);
-
 #endif

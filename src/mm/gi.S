@@ -1,4 +1,4 @@
-#include <combo/asm.h>
+#include <combo.h>
 
 /* Use out extended table */
 PATCH_REL_HILO(kExtendedGetItems)

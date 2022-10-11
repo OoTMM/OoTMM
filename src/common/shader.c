@@ -32,6 +32,14 @@ void Shader_SoldOut(GameState*, s16);
 void Shader_Spell(GameState*, s16);
 void Shader_MoonTear(GameState*, s16);
 
+static void color4(u8* r, u8* g, u8* b, u8* a, u32 color)
+{
+    *r = (color >> 24) & 0xff;
+    *g = (color >> 16) & 0xff;
+    *b = (color >> 8) & 0xff;
+    *a = color & 0xff;
+}
+
 /* Custom Shaders */
 void Shader_Xlu0(GameState* gs, s16 shaderId)
 {
@@ -48,24 +56,61 @@ void Shader_Xlu0(GameState* gs, s16 shaderId)
 void Shader_CustomNote(GameState* gs, s16 shaderId)
 {
     const Shader* shader;
-    u32 c;
     u8 r;
     u8 g;
     u8 b;
     u8 a;
 
     shader = &kShaders[shaderId];
-    c = shader->lists[0];
-    r = (c >> 24) & 0xff;
-    g = (c >> 16) & 0xff;
-    b = (c >> 8) & 0xff;
-    a = (c >> 0) & 0xff;
+    color4(&r, &g, &b, &a, shader->lists[0]);
 
     OPEN_DISPS(gs->gfx);
     InitListPolyXlu(gs->gfx);
     gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(gs->gfx), G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gDPSetEnvColor(POLY_XLU_DISP++, r, g, b, a);
     gSPDisplayList(POLY_XLU_DISP++, shader->lists[1]);
+    CLOSE_DISPS();
+}
+
+void Shader_CustomHeartContainer(GameState* gs, s16 shaderId)
+{
+    static const u32 colors[] = {
+        /* Normal */
+        0xa0ffffff,
+        0x0064ffff,
+        0xff0064ff,
+        0x640032ff,
+
+        /* Double Defense */
+        0xffff00ff,
+        0xcccc00ff,
+        0xffffffff,
+        0xffffffff,
+    };
+
+    const Shader* shader;
+    u8 r;
+    u8 g;
+    u8 b;
+    u8 a;
+    u32 c;
+
+    shader = &kShaders[shaderId];
+    c = shader->lists[0];
+
+    OPEN_DISPS(gs->gfx);
+    InitListPolyXlu(gs->gfx);
+    gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(gs->gfx), G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    color4(&r, &g, &b, &a, colors[c * 4 + 0]);
+    gDPSetPrimColor(POLY_XLU_DISP++, 0, 0x80, r, g, b, a);
+    color4(&r, &g, &b, &a, colors[c * 4 + 1]);
+    gDPSetEnvColor(POLY_XLU_DISP++, r, g, b, a);
+    gSPDisplayList(POLY_XLU_DISP++, shader->lists[1]);
+    color4(&r, &g, &b, &a, colors[c * 4 + 2]);
+    gDPSetPrimColor(POLY_XLU_DISP++, 0, 0x80, r, g, b, a);
+    color4(&r, &g, &b, &a, colors[c * 4 + 3]);
+    gDPSetEnvColor(POLY_XLU_DISP++, r, g, b, a);
+    gSPDisplayList(POLY_XLU_DISP++, shader->lists[2]);
     CLOSE_DISPS();
 }
 
