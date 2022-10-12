@@ -12,9 +12,12 @@ Actor*  SpawnActor(void* const_1, GameState_Play* play, s16 actorId, float x, fl
 void    ActorDestroy(Actor* actor);
 int     Actor_HasParent(Actor* actor);
 void    ActorSetScale(Actor* actor, float scale);
-void    ActorEnableInteraction(Actor* actor, GameState_Play* play);
+void    ActorEnableGrab(Actor* actor, GameState_Play* play);
+void    ActorEnableTalk(Actor* actor, GameState_Play* play, float range);
+void    ActorEnableTalkEx(Actor* actor, GameState_Play* play, float range, u32 unk);
 void    ActorSetCollisionCylinder(GameState_Play* play, Actor* actor, float unk_3, float unk_4, float unk_5, u32 unk_6);
 void    ActorUpdateVelocity(Actor* actor);
+int     ActorTalkedTo(Actor* actor);
 
 u32     GetCollectibleFlag(GameState_Play* play, int flag);
 void    SetCollectibleFlag(GameState_Play* play, int flag);
@@ -35,5 +38,10 @@ void DisplayTextBox2(GameState_Play* play, u16 textId);
 
 int GiveItem(Actor* actor, GameState_Play* play, s16 itemId, float a, float b);
 int GiveItemDefaultRange(Actor* actor, GameState_Play* play, s16 itemId);
+
+void PlayerDisplayTextBox(GameState_Play* play, u16 messageId, void* unk);
+
+int  Message_GetState(void* unk);
+void Message_Close(GameState_Play* play);
 
 #endif

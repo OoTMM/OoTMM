@@ -122,13 +122,6 @@ void hookPlay_Init(GameState_Play* play)
         comboSpawnSpecial(play, -1191.f, -220.f, 1650.f, EV_OOT_CHK_SARIA_OCARINA, GI_OOT_OCARINA_FAIRY);
     }
 
-    /* Child Zelda checks */
-    if (play->sceneId == SCE_OOT_CASTLE_COURTYARD)
-    {
-        comboSpawnSpecial(play, -460.f, 84.f,  40.f, EV_OOT_CHK_ZELDA_LETTER, GI_OOT_ZELDA_LETTER);
-        comboSpawnSpecial(play, -460.f, 84.f, -40.f, EV_OOT_CHK_SONG_ZELDA, GI_OOT_SONG_ZELDA);
-    }
-
     /* Sun Song */
     if (play->sceneId == SCE_OOT_TOMB_ROYAL)
     {

@@ -9,8 +9,8 @@ Kokiri Forest GS Soil,                gs,             KOKIRI_FOREST,            
 Kokiri Forest GS Night Child,         gs,             KOKIRI_FOREST,            0x69,                   GS_TOKEN
 Kokiri Forest GS Night Adult,         gs,             KOKIRI_FOREST,            0x6a,                   GS_TOKEN
 Malon Egg,                            npc,            HYRULE_CASTLE,            MALON_EGG,              CHICKEN
-Zelda's Letter,                       special,        CASTLE_COURTYARD,         0x40,                   ZELDA_LETTER
-Zelda's Song,                         special,        CASTLE_COURTYARD,         0x59,                   SONG_ZELDA
+Zelda's Letter,                       npc,            CASTLE_COURTYARD,         ZELDA_LETTER,           ZELDA_LETTER
+Zelda's Song,                         npc,            CASTLE_COURTYARD,         ZELDA_SONG,             SONG_ZELDA
 Bombchu Bowling Reward 1,             npc,            BOMBCHU_BOWLING_ALLEY,    BOMBCHU_BOWLING_1,      BOMB_BAG
 Bombchu Bowling Reward 2,             npc,            BOMBCHU_BOWLING_ALLEY,    BOMBCHU_BOWLING_2,      HEART_PIECE
 Lost Woods Bridge,                    special,        LOST_WOODS,               0xc1,                   OCARINA
