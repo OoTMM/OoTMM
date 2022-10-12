@@ -5,6 +5,7 @@ Kokiri Forest Mido Top Right,         chest,          KOKIRI_MIDO,              
 Kokiri Forest Mido Bottom Left,       chest,          KOKIRI_MIDO,              0x02,                   RUPEE_GREEN
 Kokiri Forest Mido Bottom Right,      chest,          KOKIRI_MIDO,              0x03,                   RECOVERY_HEART
 Kokiri Forest Kokiri Sword Chest,     chest,          KOKIRI_FOREST,            0x00,                   SWORD
+Kokiri Forest Storms Grotto,          chest,          GROTTOS,                  0x0c,                   RUPEE_RED
 Kokiri Forest GS Soil,                gs,             KOKIRI_FOREST,            0x68,                   GS_TOKEN
 Kokiri Forest GS Night Child,         gs,             KOKIRI_FOREST,            0x69,                   GS_TOKEN
 Kokiri Forest GS Night Adult,         gs,             KOKIRI_FOREST,            0x6a,                   GS_TOKEN
@@ -19,6 +20,7 @@ Lost Woods Skull Kid,                 npc,            LOST_WOODS,               
 Lost Woods Memory Game,               npc,            LOST_WOODS,               LOST_WOODS_MEMORY,      HEART_PIECE
 Lost Woods Scrub Sticks Upgrade,      npc,            LOST_WOODS,               SCRUB_STICKS,           STICK_UPGRADE
 Lost Woods Grotto Scrub Nuts Upgrade, npc,            GROTTOS,                  SCRUB_NUTS,             NUT_UPGRADE
+Lost Woods Grotto Generic,            chest,          GROTTOS,                  0x14,                   RUPEE_BLUE
 Lost Woods GS Soil Bridge,            gs,             LOST_WOODS,               0x70,                   GS_TOKEN
 Lost Woods GS Soil Theater,           gs,             LOST_WOODS,               0x71,                   GS_TOKEN
 Lost Woods GS Bean Ride,              gs,             LOST_WOODS,               0x72,                   GS_TOKEN
@@ -26,6 +28,7 @@ Deku Theater Sticks Upgrade,          npc,            GROTTOS,                  
 Deku Theater Nuts Upgrade,            npc,            GROTTOS,                  THEATER_NUTS,           NUT_UPGRADE
 Saria's Song,                         special,        SACRED_FOREST_MEADOW,     0x58,                   SONG_SARIA
 Sacred Meadow Sheik Song,             npc,            SACRED_FOREST_MEADOW,     SHEIK_FOREST,           SONG_TP_FOREST
+Sacred Meadow Grotto,                 chest,          GROTTOS,                  0x11,                   RUPEE_PURPLE
 Sacred Meadow GS Night Adult,         gs,             SACRED_FOREST_MEADOW,     0x73,                   GS_TOKEN
 Anju's Bottle,                        npc,            KAKARIKO_VILLAGE,         ANJU_BOTTLE,            EMPTY_BOTTLE
 Kakariko Song Shadow,                 special,        KAKARIKO_VILLAGE,         0x54,                   SONG_TP_SHADOW

@@ -15,6 +15,7 @@
     "Deku Tree Main": "true"
   locations:
     "Kokiri Forest Kokiri Sword Chest": "is_child"
+    "Kokiri Forest Storms Grotto": "hidden_grotto_storms"
     "Kokiri Forest GS Soil": "gs_soil"
     "Kokiri Forest GS Night Child": "is_child && gs_night"
     "Kokiri Forest GS Night Adult": "is_adult && gs_night && can_hookshot"
@@ -88,6 +89,7 @@
     "Lost Woods Memory Game": "is_child && has(OCARINA)"
     "Lost Woods Scrub Sticks Upgrade": "true"
     "Lost Woods Grotto Scrub Nuts Upgrade": "has_explosives"
+    "Lost Woods Grotto Generic": "has_explosives"
     "Lost Woods GS Soil Bridge": "gs_soil"
     "Lost Woods GS Soil Theater": "gs_soil"
     "Lost Woods GS Bean Ride": "is_adult && gs_night && event(BEAN_LOST_WOODS)"
@@ -104,6 +106,7 @@
   locations:
     "Saria's Song": "event(MEET_ZELDA)"
     "Sacred Meadow Sheik Song": "is_adult"
+    "Sacred Meadow Grotto": "hidden_grotto_bomb"
     "Sacred Meadow GS Night Adult": "is_adult && gs_night && can_hookshot"
 "Kakariko":
   exits:
