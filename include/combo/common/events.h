@@ -6,6 +6,8 @@
 #define EV_OOT_CHK_EMERALD_TREE_DEAD        0x07
 #define EV_OOT_CHK_GOHMA                    0x09
 #define EV_OOT_CHK_DEKU_TREE_MEET           0x0c
+#define EV_OOT_CHK_MALON_SPOKEN_HYRULE      0x10
+#define EV_OOT_CHK_MALON_EGG                0x12
 #define EV_OOT_CHK_TREE_DEAD                0x17
 #define EV_OOT_CHK_STONE_EMERALD            0x19
 #define EV_OOT_CHK_MIDO_TREE_DEAD           0x1c

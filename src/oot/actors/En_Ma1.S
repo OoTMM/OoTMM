@@ -63,3 +63,15 @@ PATCH_START 0x809f1094
   lhu t0,(0xed4+(EV_OOT_CHK_SONG_EPONA >> 4))(v0) /* t0: event_chk_inf */
   li  t1,(1 << (EV_OOT_CHK_SONG_EPONA & 0xf))     /* t1: event mask */
 PATCH_END
+
+/* Run our code after the common handler */
+EnMa1_AfterHandlerTrampoline:
+  lw a0,0x18(sp)
+  lw a1,0x1c(sp)
+  j EnMa1_AfterHandler
+   addiu sp,0x18
+
+PATCH_START 0x809f1234
+  j EnMa1_AfterHandlerTrampoline
+   nop
+PATCH_END
