@@ -46,6 +46,7 @@ Zora Domain Diving Game,              npc,            ZORA_DOMAIN,              
 Zora Domain Tunic,                    npc,            ZORA_DOMAIN,              ZORA_KING_TUNIC,        TUNIC_ZORA
 Lake Hylia Underwater Bottle,         special,        LAKE_HYLIA,               0x32,                   RUTO_LETTER
 Lake Hylia Fire Arrow,                special,        LAKE_HYLIA,               0x60,                   ARROW_FIRE
+Lon Lon Ranch Malon Song,             npc,            LON_LON_RANCH,            MALON_SONG,             SONG_EPONA
 Hyrule Field Grotto Scrub HP,         npc,            GROTTOS,                  SCRUB_HP,               HEART_PIECE
 Hyrule Field Ocarina of Time,         special,        HYRULE_FIELD,             0x43,                   OCARINA
 Hyrule Field Song of Time,            special,        HYRULE_FIELD,             0xa9,                   SONG_TIME

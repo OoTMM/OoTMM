@@ -8,9 +8,12 @@ void EnMa1_HandlerNull(Actor* actor, GameState_Play* play)
 
 void EnMa1_HandlerOcarina2(Actor* actor, GameState_Play* play)
 {
+    s16 gi;
+
     if (!Actor_HasParent(actor))
     {
-        GiveItem(actor, play, GI_OOT_SONG_EPONA, 10000.f, 500.f);
+        gi = comboOverride(OV_NPC, 0, NPC_OOT_MALON_SONG, GI_OOT_SONG_EPONA);
+        GiveItem(actor, play, gi, 10000.f, 500.f);
     }
     else
     {
@@ -38,7 +41,7 @@ void EnMa1_HandlerEgg(Actor* actor, GameState_Play* play)
         {
             SetEventChk(EV_OOT_CHK_MALON_SPOKEN_HYRULE);
             SetEventChk(EV_OOT_CHK_MALON_EGG);
-            ActorDestroy(actor);
+            SET_HANDLER(actor, EnMa1_HandlerNull);
         }
     }
     else
@@ -53,7 +56,7 @@ void EnMa1_AfterHandler(Actor* actor, GameState_Play* play)
     if (actor->messageId == 0x2043)
     {
         Message_Close(play);
-        actor->update = EnMa1_HandlerEgg;
+        SET_HANDLER(actor, EnMa1_HandlerEgg);
         EnMa1_HandlerEgg(actor, play);
     }
 }

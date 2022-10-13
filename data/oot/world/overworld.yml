@@ -36,7 +36,7 @@
     "Zora River": "has_explosives"
     "Lake Hylia": "true"
     "Gerudo Valley": "true"
-    "MM Clock Town": "is_child"
+    "Lon Lon Ranch": "true"
   locations:
     "Hyrule Field Grotto Scrub HP": "hidden_grotto_bomb"
     "Hyrule Field Ocarina of Time": "has_spiritual_stones"
@@ -47,6 +47,7 @@
     "Hyrule Castle": "true"
     "Temple of Time": "true"
     "Bombchu Bowling": "true"
+    "MM Clock Town": "is_child"
 "Bombchu Bowling":
   exits:
     "Market": "true"
@@ -58,16 +59,23 @@
     "Hyrule Field": "true"
     "Temple of Time": "true"
     "Ganon Castle Exterior": "true"
+"Lon Lon Ranch":
+  exits:
+    "Hyrule Field": "true"
+  locations:
+    "Lon Lon Ranch Malon Song": "is_child && has(OCARINA) && event(MALON)"
 "Hyrule Castle":
   exits:
     "Market": "true"
-  locations:
-    "Malon Egg": "true"
-    "Zelda's Letter": "has(CHICKEN)"
-    "Zelda's Song": "has(CHICKEN)"
-    "Great Fairy Din's Fire": "has_explosives && can_play(SONG_ZELDA)"
   events:
-    MEET_ZELDA: "has(CHICKEN)"
+    MALON: "true"
+    TALON_CHILD: "has(CHICKEN)"
+    MEET_ZELDA: "event(TALON_CHILD)"
+  locations:
+    "Malon Egg": "event(MALON)"
+    "Zelda's Letter": "event(MEET_ZELDA)"
+    "Zelda's Song": "event(MEET_ZELDA)"
+    "Great Fairy Din's Fire": "has_explosives && can_play(SONG_ZELDA)"
 "Ganon Castle Exterior":
   exits:
     "Market Destroyed": "true"
