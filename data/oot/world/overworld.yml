@@ -68,8 +68,22 @@
 "Lon Lon Ranch":
   exits:
     "Hyrule Field": "true"
+    "Lon Lon Ranch Silo": "true"
+    "Lon Lon Ranch House": "true"
+  events:
+    EPONA: "is_adult && can_play(SONG_EPONA)"
   locations:
     "Lon Lon Ranch Malon Song": "is_child && has(OCARINA) && event(MALON)"
+"Lon Lon Ranch Silo":
+  exits:
+    "Lon Lon Ranch": "true"
+  locations:
+    "Lon Lon Ranch Silo HP": "is_child"
+"Lon Lon Ranch House":
+  exits:
+    "Lon Lon Ranch": "true"
+  locations:
+    "Lon Lon Ranch Talon Bottle": "is_child && event(TALON_CHILD)"
 "Hyrule Castle":
   exits:
     "Market": "true"
@@ -227,7 +241,7 @@
   exits:
     "Lake Hylia": "true"
     "Hyrule Field": "true"
-    "Gerudo Valley After Bridge": "can_longshot"
+    "Gerudo Valley After Bridge": "can_longshot || (is_adult && event(EPONA))"
 "Gerudo Valley After Bridge":
   exits:
     "Lake Hylia": "true"
