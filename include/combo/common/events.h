@@ -37,6 +37,7 @@
 #define EV_OOT_CHK_SONG_SARIA               0x58
 #define EV_OOT_CHK_ARROW_FIRE               0x60
 #define EV_OOT_CHK_MEDALLION_SHADOW         0x61
+#define EV_OOT_CHK_SONG_EPONA               0x62
 #define EV_OOT_ITEM_GORON_BRACELET          0x20
 
 #define MM_EV(a, b) (((a) << 3) | (b))
@@ -51,9 +52,10 @@
 #define EV_MM_WEEK_SPIN_UPGRADE                 MM_EV(0x17, 1)
 #define EV_MM_WEEK_FIRST_CYCLE                  MM_EV(0x3b, 2)
 
+#if !defined(__ASSEMBLER__)
+# define MM_SET_EVENT_WEEK(x)    (gMmSave.weekEventReg[(x) / 8] |= (1 << ((x) % 8)))
 int  GetEventChk(int index);
 void SetEventChk(int index);
-
-#define MM_SET_EVENT_WEEK(x)    (gMmSave.weekEventReg[(x) / 8] |= (1 << ((x) % 8)))
+#endif
 
 #endif

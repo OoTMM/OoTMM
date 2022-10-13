@@ -16,7 +16,6 @@
 # include <combo/object.h>
 # include <combo/save.h>
 # include <combo/shader.h>
-# include <combo/scenes.h>
 # include <combo/patch.h>
 # include <combo/npc.h>
 
@@ -34,7 +33,6 @@
 # endif
 
 # include <combo/common/actor.h>
-# include <combo/common/events.h>
 # include <combo/common/actor_init.h>
 # include <combo/common/actor_item_custom.h>
 # include <combo/common/api.h>
@@ -43,6 +41,8 @@
 /* Shared with assembler */
 #include <combo/gi.h>
 #include <combo/items.h>
+#include <combo/common/events.h>
+#include <combo/scenes.h>
 
 #if !defined(__ASSEMBLER__)
 void comboDisableInterrupts(void);
