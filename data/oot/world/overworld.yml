@@ -41,6 +41,8 @@
     "Hyrule Field Grotto Scrub HP": "hidden_grotto_bomb"
     "Hyrule Field Ocarina of Time": "has_spiritual_stones"
     "Hyrule Field Song of Time": "has_spiritual_stones"
+    "Hyrule Field Grotto Near Kakariko GS": "hidden_grotto_bomb && can_collect_distance"
+    "Hyrule Field Grotto Near Gerudo GS": "((is_child && hidden_grotto_bomb) || (is_adult && can_hammer)) && can_collect_distance && has_fire"
 "Market":
   exits:
     "Market Pot House": "true"

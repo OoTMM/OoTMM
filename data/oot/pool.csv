@@ -52,6 +52,8 @@ Lon Lon Ranch Talon Bottle,           npc,            RANCH_HOUSE_SILO,         
 Hyrule Field Grotto Scrub HP,         npc,            GROTTOS,                  SCRUB_HP,               HEART_PIECE
 Hyrule Field Ocarina of Time,         special,        HYRULE_FIELD,             0x43,                   OCARINA
 Hyrule Field Song of Time,            special,        HYRULE_FIELD,             0xa9,                   SONG_TIME
+Hyrule Field Grotto Near Kakariko GS, gs,             GROTTOS,                  0x59,                   GS_TOKEN
+Hyrule Field Grotto Near Gerudo GS,   gs,             GROTTOS,                  0x58,                   GS_TOKEN
 Market Pot House GS,                  gs,             GUARD_HOUSE,              0x7b,                   GS_TOKEN
 Temple of Time Master Sword,          collectible,    TEMPLE_OF_TIME,           0x1f,                   SWORD
 Temple of Time Medallion,             collectible,    TEMPLE_OF_TIME,           0x1e,                   MEDALLION_LIGHT
