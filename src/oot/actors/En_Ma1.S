@@ -33,6 +33,23 @@ PATCH_START 0x809f11f0
   nop
 PATCH_END
 
+/* Malon Text: Skip the talon check */
+PATCH_START 0x809f0a88
+  andi      t3,v0,0x04
+PATCH_END
+
+/* Malon Text: epona song fix */
+PATCH_START 0x809f0a4c
+  lhu t6,(0xed4+(EV_OOT_CHK_SONG_EPONA >> 4))(v1) /* t6: event_chk_inf */
+  li  t7,(1 << (EV_OOT_CHK_SONG_EPONA & 0xf))     /* t7: event mask */
+  nop
+PATCH_END
+
+/* Malon Text: Skip first box */
+PATCH_START 0x809f0af4
+  li  v0,0x2043
+PATCH_END
+
 /* Change the Talon check into a check for hyrule castle */
 PATCH_START 0x809f107c
   lw    t8,0x44(sp)                     /* t8: play */
