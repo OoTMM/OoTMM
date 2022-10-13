@@ -43,11 +43,17 @@
     "Hyrule Field Song of Time": "has_spiritual_stones"
 "Market":
   exits:
+    "Market Pot House": "true"
     "Hyrule Field": "true"
     "Hyrule Castle": "true"
     "Temple of Time": "true"
     "Bombchu Bowling": "true"
     "MM Clock Town": "is_child"
+"Market Pot House":
+  exits:
+    "Market": "true"
+  locations:
+    "Market Pot House GS": "true"
 "Bombchu Bowling":
   exits:
     "Market": "true"
