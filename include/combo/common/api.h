@@ -41,7 +41,12 @@ int GiveItemDefaultRange(Actor* actor, GameState_Play* play, s16 itemId);
 
 void PlayerDisplayTextBox(GameState_Play* play, u16 messageId, void* unk);
 
-int  Message_GetState(void* unk);
+#if defined(GAME_OOT)
+int  Message_GetState(MessageContext* ctx);
+#endif
 void Message_Close(GameState_Play* play);
+
+void OcarinaAction(GameState_Play *play, u16 ocarinaAction);
+void OcarinaAction2(GameState_Play *play, u16 ocarinaAction);
 
 #endif

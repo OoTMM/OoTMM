@@ -18,11 +18,12 @@
 #define ENTRANCE_TOT          0x053
 #define ENTRANCE_LAKE         0x4e6
 #define ENTRANCE_ZELDA        0x400
+#define ENTRANCE_RANCH        0x157
 
 #if defined(DEBUG)
 /* DEBUG: OoT child entrance */
 PATCH_START 0x800903e0
-  li t4,ENTRANCE_MARKET
+  li t4,ENTRANCE_RANCH
 PATCH_END
 #endif
 

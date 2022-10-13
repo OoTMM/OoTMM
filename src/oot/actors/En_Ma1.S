@@ -40,7 +40,7 @@ PATCH_END
 
 /* Malon Text: epona song fix */
 PATCH_START 0x809f0a4c
-  lhu t6,(0xed4+(EV_OOT_CHK_SONG_EPONA >> 4))(v1) /* t6: event_chk_inf */
+  lhu t6,(0xed4+((EV_OOT_CHK_SONG_EPONA >> 4) * 2))(v1) /* t6: event_chk_inf */
   li  t7,(1 << (EV_OOT_CHK_SONG_EPONA & 0xf))     /* t7: event mask */
   nop
 PATCH_END
@@ -60,7 +60,7 @@ PATCH_END
 
 /* Change the epona song check for an equivalent event check */
 PATCH_START 0x809f1094
-  lhu t0,(0xed4+(EV_OOT_CHK_SONG_EPONA >> 4))(v0) /* t0: event_chk_inf */
+  lhu t0,(0xed4+((EV_OOT_CHK_SONG_EPONA >> 4) * 2))(v0) /* t0: event_chk_inf */
   li  t1,(1 << (EV_OOT_CHK_SONG_EPONA & 0xf))     /* t1: event mask */
 PATCH_END
 
@@ -74,4 +74,20 @@ EnMa1_AfterHandlerTrampoline:
 PATCH_START 0x809f1234
   j EnMa1_AfterHandlerTrampoline
    nop
+PATCH_END
+
+/* Make malon accept the ocarina without talking to her */
+PATCH_START 0x809f1364
+  nop
+  nop
+PATCH_END
+
+/* Remove some Malon code */
+PATCH_START 0x809f1384
+  nop
+  nop
+PATCH_END
+
+PATCH_START 0x809f1398
+  nop
 PATCH_END

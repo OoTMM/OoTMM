@@ -16,7 +16,7 @@ void EnZl4_Update6(Actor* actor, GameState_Play* play)
 
 void EnZl4_Update5(Actor* actor, GameState_Play* play)
 {
-    if (Message_GetState((char*)play + 0x20d8) == 2)
+    if (Message_GetState(&play->msgCtx) == 2)
     {
         EnZl4_Update6(actor, play);
         actor->update = EnZl4_Update6;

@@ -31,6 +31,23 @@ CutsceneContext;
 
 typedef struct PACKED
 {
+    char view[0x128];
+    char unk_0128[0xdc88];
+    char textBuffer[0x556]; /* Probably smaller */
+    char unk_e306[0xe8];
+    u16  ocarinaMode;
+    char unk_e3f0[0x28];
+}
+MessageContext;
+
+typedef struct PACKED
+{
+    char unk_000[0x270];
+}
+InterfaceContext;
+
+typedef struct PACKED
+{
     char    unk_0[0x128];
     void*   icon_item;
     void*   icon_item_24;
@@ -108,9 +125,9 @@ typedef struct GameState_Play
     ActorList           actors[12];
     char                unk_01c90[0x00d4];
     CutsceneContext     cutscene;
-    char                unk_1d94[0xe0f4];
-    char                textBuffer[4]; /* Real size unknown */
-    char                unk_0fe8c[0x8d4];
+    char                unk_1d94[0x344];
+    MessageContext      msgCtx;
+    InterfaceContext    interfaceCtx;
     PauseContext        pauseCtx;
     char                unk_10a14[0xd90];
     char                objTable[4]; /* Real size unknown */
