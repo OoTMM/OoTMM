@@ -43,6 +43,7 @@ static void debugCheat(GameState_Play* play)
 
         gSave.quest.medallionShadow = 1;
         gSave.quest.medallionSpirit = 1;
+        gSave.quest.medallionForest = 1;
 
         gSave.rupees = 999;
 

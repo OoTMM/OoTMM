@@ -45,20 +45,46 @@ static void EnXc_Update_ForestMeadow(Actor* actor, GameState_Play* play)
     }
 }
 
-void EnXc_Update(Actor* actor, GameState_Play* play)
+static void EnXc_Update_TempleOfTime(Actor* this, GameState_Play* play)
 {
-    switch (actor->variable)
+    s16 gi;
+
+    if (!gSave.quest.medallionForest || GetEventChk(EV_OOT_CHK_SONG_TP_LIGHT))
+        ActorDestroy(this);
+
+    if (checkSetEvent(this, EV_OOT_CHK_SONG_TP_LIGHT))
+        return;
+
+    gi = comboOverride(OV_NPC, 0, NPC_OOT_SHEIK_LIGHT, GI_OOT_SONG_TP_LIGHT);
+    GiveItem(this, play, gi, 10000.f, 50.f);
+}
+
+static void EnXc_Init(Actor* this, GameState_Play* play)
+{
+    if (gSave.age == AGE_CHILD)
+    {
+        ActorDestroy(this);
+    }
+}
+
+void EnXc_Update(Actor* this, GameState_Play* play)
+{
+    switch (this->variable)
     {
     case 0x4:
-        EnXc_Update_LightArrow(actor, play);
+        EnXc_Update_LightArrow(this, play);
         break;
     case 0x6:
-        EnXc_Update_ForestMeadow(actor, play);
+        EnXc_Update_ForestMeadow(this, play);
+        break;
+    case 0x9:
+        EnXc_Update_TempleOfTime(this, play);
         break;
     default:
-        ActorDestroy(actor);
+        ActorDestroy(this);
         break;
     }
 }
 
+PATCH_FUNC(0x808e30a8, EnXc_Init);
 PATCH_FUNC(0x808e3060, EnXc_Update);
