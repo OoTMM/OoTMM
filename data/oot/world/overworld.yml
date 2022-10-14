@@ -211,7 +211,8 @@
     "Kakariko": "true"
   locations:
     "Graveyard ReDead Tomb": "can_play(SONG_SUN)"
-    "Graveyard Royal Tomb": "can_play(SONG_ZELDA) && has(SWORD)"
+    "Graveyard Royal Tomb Song": "can_play(SONG_ZELDA) && has(SWORD)"
+    "Graveyard Royal Tomb Chest": "has_fire"
     "Graveyard Fairy Tomb": "true"
     "Graveyard Dampe Tomb Hookshot": "is_adult"
     "Graveyard GS Soil": "gs_soil"

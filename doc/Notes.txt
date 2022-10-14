@@ -1,10 +1,5 @@
 MM Events RAM: 801f0568
 
-Adult Zelda Cutscene: 9 Sheik 4
-
-===== MISSING FROM LOGIC =====
-Tomb Royal: <!-- <chest id="00" content="BOMBS_10"/> Requires fire -->
-
 === MM Shop Items ===
 00: MM_POTION_RED
 01: MM_POTION_GREEN
