@@ -66,6 +66,9 @@ Bombchu Bowling Reward 2,             npc,            BOMBCHU_BOWLING_ALLEY,    
 Treasure Game HP,                     chest,          TREASURE_SHOP,            0x0a,                   HEART_PIECE
 Shooting Gallery Child,               npc,            SHOOTING_GALLERY,         SHOOTING_GAME_CHILD,    SLINGSHOT
 Shooting Gallery Adult,               npc,            SHOOTING_GALLERY,         SHOOTING_GAME_ADULT,    BOW
+Hyrule Castle GS Tree,                gs,             HYRULE_CASTLE,            0x7a,                   GS_TOKEN
+Hyrule Castle GS Grotto,              gs,             GROTTOS,                  0x79,                   GS_TOKEN
+Ganon Castle Exterior GS,             gs,             GANON_CASTLE_EXTERIOR,    0x78,                   GS_TOKEN
 Temple of Time Master Sword,          collectible,    TEMPLE_OF_TIME,           0x1f,                   SWORD
 Temple of Time Medallion,             collectible,    TEMPLE_OF_TIME,           0x1e,                   MEDALLION_LIGHT
 Temple of Time Light Arrows,          special,        TEMPLE_OF_TIME,           0xc4,                   ARROW_LIGHT
@@ -74,6 +77,7 @@ Windmill HP,                          collectible,    TOMB_DAMPE_WINDMILL,      
 Windmill Song of Storms,              npc,            TOMB_DAMPE_WINDMILL,      SONG_STORMS,            SONG_STORMS
 Desert Colossus Song Spirit,          special,        DESERT_COLOSSUS,          0xac,                   SONG_TP_SPIRIT
 Skulltula House 10 Tokens,            npc,            HOUSE_OF_SKULLTULA,       GS_10,                  WALLET
+Skulltula House 20 Tokens,            npc,            HOUSE_OF_SKULLTULA,       GS_20,                  STONE_OF_AGONY
 
 Great Fairy Magic Upgrade,      collectible,   GREAT_FAIRY_FOUNTAIN_UPGRADES, 0x00, MAGIC_UPGRADE
 Great Fairy Magic Upgrade 2,    collectible,   GREAT_FAIRY_FOUNTAIN_UPGRADES, 0x01, MAGIC_UPGRADE

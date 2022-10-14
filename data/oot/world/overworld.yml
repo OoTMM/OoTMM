@@ -120,12 +120,15 @@
     "Zelda's Letter": "event(MEET_ZELDA)"
     "Zelda's Song": "event(MEET_ZELDA)"
     "Great Fairy Din's Fire": "has_explosives && can_play(SONG_ZELDA)"
+    "Hyrule Castle GS Tree": "true"
+    "Hyrule Castle GS Grotto": "hidden_grotto_storms && has_explosives && can_boomerang"
 "Ganon Castle Exterior":
   exits:
     "Market Destroyed": "true"
     "Ganon Castle Main": "has_medallions"
   locations:
     "Great Fairy Defense Upgrade": "has(STRENGTH, 3) && can_play(SONG_ZELDA)"
+    "Ganon Castle Exterior GS": "can_collect_distance"
 "Lost Woods":
   exits:
     "Kokiri Forest": "true"
@@ -190,6 +193,7 @@
     "Kakariko": "true"
   locations:
     "Skulltula House 10 Tokens": "has(GS_TOKEN, 10)"
+    "Skulltula House 20 Tokens": "has(GS_TOKEN, 20)"
 "Death Mountain":
   exits:
     "Goron City": "true"
