@@ -41,6 +41,9 @@ static void debugCheat(GameState_Play* play)
         gSave.quest.stoneRuby = 1;
         gSave.quest.stoneSapphire = 1;
 
+        gSave.quest.medallionShadow = 1;
+        gSave.quest.medallionSpirit = 1;
+
         gSave.rupees = 999;
 
         gOotExtraTrade.child = 0xffff;
@@ -127,6 +130,19 @@ void hookPlay_Init(GameState_Play* play)
     }
 
     Play_Init(play);
+
+    /* Check for the light arrows */
+    if (gSave.entrance == 0x0053 && gSave.quest.medallionShadow && gSave.quest.medallionSpirit && gSave.age == AGE_ADULT && !GetEventChk(EV_OOT_CHK_LIGHT_ARROW))
+    {
+        SpawnActor(
+            (char*)play + 0x1c24,
+            play,
+            AC_EN_XC,
+            0, 0, 0,
+            0, 0, 0,
+            4
+        );
+    }
 
     /* Saria's Ocarina Check */
     if (gSave.entrance == 0x05e0 || gSave.entrance == 0x04de)

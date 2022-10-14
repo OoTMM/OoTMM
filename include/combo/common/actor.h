@@ -7,6 +7,7 @@
 # define AC_ITEM_CUSTOM     0x001
 # define AC_EN_BOX          0x00a
 # define AC_ITEM00          0x015
+# define AC_EN_XC           0x048
 # define AC_DOOR_WARP1      0x05d
 # define AC_ITEM_B_HEART    0x05f
 # define AC_BG_TOKI_SWD     0x06c

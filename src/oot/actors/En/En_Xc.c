@@ -16,6 +16,22 @@ static int checkSetEvent(Actor* actor, int event)
     return 0;
 }
 
+static void EnXc_Update_LightArrow(Actor* this, GameState_Play* play)
+{
+    s16 gi;
+
+    if (Actor_HasParent(this))
+    {
+        SetEventChk(EV_OOT_CHK_LIGHT_ARROW);
+        ActorDestroy(this);
+    }
+    else
+    {
+        gi = comboOverride(OV_NPC, 0, NPC_OOT_ZELDA_LIGHT_ARROW, GI_OOT_ARROW_LIGHT);
+        GiveItem(this, play, gi, 10000.f, 500.f);
+    }
+}
+
 static void EnXc_Update_ForestMeadow(Actor* actor, GameState_Play* play)
 {
     s16 gi;
@@ -33,6 +49,9 @@ void EnXc_Update(Actor* actor, GameState_Play* play)
 {
     switch (actor->variable)
     {
+    case 0x4:
+        EnXc_Update_LightArrow(actor, play);
+        break;
     case 0x6:
         EnXc_Update_ForestMeadow(actor, play);
         break;

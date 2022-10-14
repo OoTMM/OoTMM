@@ -1,5 +1,7 @@
 MM Events RAM: 801f0568
 
+Adult Zelda Cutscene: 9 Sheik 4
+
 ===== MISSING FROM LOGIC =====
 Tomb Royal: <!-- <chest id="00" content="BOMBS_10"/> Requires fire -->
 

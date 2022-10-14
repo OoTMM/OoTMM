@@ -73,7 +73,7 @@ Hyrule Castle GS Grotto,              gs,             GROTTOS,                  
 Ganon Castle Exterior GS,             gs,             GANON_CASTLE_EXTERIOR,    0x78,                   GS_TOKEN
 Temple of Time Master Sword,          collectible,    TEMPLE_OF_TIME,           0x1f,                   SWORD
 Temple of Time Medallion,             collectible,    TEMPLE_OF_TIME,           0x1e,                   MEDALLION_LIGHT
-Temple of Time Light Arrows,          special,        TEMPLE_OF_TIME,           0xc4,                   ARROW_LIGHT
+Temple of Time Light Arrows,          npc,            TEMPLE_OF_TIME,           ZELDA_LIGHT_ARROW,      ARROW_LIGHT
 Graveyard Dampe Tomb Hookshot,        chest,          TOMB_DAMPE_WINDMILL,      0x00,                   HOOKSHOT
 Windmill HP,                          collectible,    TOMB_DAMPE_WINDMILL,      0x01,                   HEART_PIECE
 Windmill Song of Storms,              npc,            TOMB_DAMPE_WINDMILL,      SONG_STORMS,            SONG_STORMS
