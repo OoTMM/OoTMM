@@ -37,6 +37,8 @@
     "Lake Hylia": "true"
     "Gerudo Valley": "true"
     "Lon Lon Ranch": "true"
+  events:
+    BIG_POE: "is_adult && event(EPONA) && has(BOW) && has_bottle"
   locations:
     "Hyrule Field Grotto Scrub HP": "hidden_grotto_bomb"
     "Hyrule Field Ocarina of Time": "has_spiritual_stones"
@@ -60,9 +62,11 @@
     "MM Clock Town": "is_child"
 "Market Pot House":
   exits:
-    "Market": "true"
+    "Market": "is_child"
+    "Market Destroyed": "is_adult"
   locations:
-    "Market Pot House GS": "true"
+    "Market Pot House Big Poes": "is_adult && event(BIG_POE)"
+    "Market Pot House GS": "is_child"
 "Back Alley":
   exits:
     "Market": "true"
@@ -93,6 +97,7 @@
 "Market Destroyed":
   exits:
     "Hyrule Field": "true"
+    "Market Pot House": "true"
     "Temple of Time": "true"
     "Ganon Castle Exterior": "true"
 "Lon Lon Ranch":

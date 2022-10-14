@@ -61,6 +61,7 @@ Hyrule Field Grotto Tektite HP,       collectible,    GROTTOS,                  
 Hyrule Field Grotto Near Kakariko GS, gs,             GROTTOS,                  0x59,                   GS_TOKEN
 Hyrule Field Grotto Near Gerudo GS,   gs,             GROTTOS,                  0x58,                   GS_TOKEN
 Market Dog Lady HP,                   npc,            BACK_ALLEY_HOUSE,         DOG_LADY,               HEART_PIECE
+Market Pot House Big Poes,            npc,            GUARD_HOUSE,              POE_COLLECTOR,          EMPTY_BOTTLE
 Market Pot House GS,                  gs,             GUARD_HOUSE,              0x7b,                   GS_TOKEN
 Bombchu Bowling Reward 1,             npc,            BOMBCHU_BOWLING_ALLEY,    BOMBCHU_BOWLING_1,      BOMB_BAG
 Bombchu Bowling Reward 2,             npc,            BOMBCHU_BOWLING_ALLEY,    BOMBCHU_BOWLING_2,      HEART_PIECE
