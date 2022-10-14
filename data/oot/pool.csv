@@ -30,9 +30,18 @@ Sacred Meadow Grotto,                 chest,          GROTTOS,                  
 Sacred Meadow GS Night Adult,         gs,             SACRED_FOREST_MEADOW,     0x73,                   GS_TOKEN
 Anju's Bottle,                        npc,            KAKARIKO_VILLAGE,         ANJU_BOTTLE,            EMPTY_BOTTLE
 Kakariko Song Shadow,                 special,        KAKARIKO_VILLAGE,         0x54,                   SONG_TP_SHADOW
+Kakariko GS Roof,                     gs,             KAKARIKO_VILLAGE,         0x8e,                   GS_TOKEN
+Kakariko GS Shooting Gallery,         gs,             KAKARIKO_VILLAGE,         0x8b,                   GS_TOKEN
+Kakariko GS Tree,                     gs,             KAKARIKO_VILLAGE,         0x8d,                   GS_TOKEN
+Kakariko GS House of Skulltula,       gs,             KAKARIKO_VILLAGE,         0x8c,                   GS_TOKEN
+Kakariko GS Bazaar,                   gs,             KAKARIKO_VILLAGE,         0x89,                   GS_TOKEN
+Kakariko GS Ladder,                   gs,             KAKARIKO_VILLAGE,         0x8a,                   GS_TOKEN
 Graveyard ReDead Tomb,                chest,          TOMB_REDEAD,              0x00,                   HEART_PIECE
 Graveyard Royal Tomb,                 special,        TOMB_ROYAL,               0x5a,                   SONG_SUN
 Graveyard Fairy Tomb,                 chest,          TOMB_FAIRY,               0x00,                   SHIELD
+Graveyard Dampe Tomb Hookshot,        chest,          TOMB_DAMPE_WINDMILL,      0x00,                   HOOKSHOT
+Graveyard GS Soil,                    gs,             GRAVEYARD,                0x88,                   GS_TOKEN
+Graveyard GS Wall,                    gs,             GRAVEYARD,                0x8f,                   GS_TOKEN
 Darunia,                              npc,            GORON_CITY,               DARUNIA_BRACELET,       STRENGTH
 Goron City Tunic,                     npc,            GORON_CITY,               GORON_LINK_TUNIC,       TUNIC_GORON
 Death Mountain Chest,                 chest,          DEATH_MOUNTAIN_TRAIL,     0x01,                   RUPEE_PURPLE
@@ -75,7 +84,6 @@ Temple of Time Master Sword,          collectible,    TEMPLE_OF_TIME,           
 Temple of Time Medallion,             collectible,    TEMPLE_OF_TIME,           0x1e,                   MEDALLION_LIGHT
 Temple of Time Sheik Song,            npc,            TEMPLE_OF_TIME,           SHEIK_LIGHT,            SONG_TP_LIGHT
 Temple of Time Light Arrows,          npc,            TEMPLE_OF_TIME,           ZELDA_LIGHT_ARROW,      ARROW_LIGHT
-Graveyard Dampe Tomb Hookshot,        chest,          TOMB_DAMPE_WINDMILL,      0x00,                   HOOKSHOT
 Windmill HP,                          collectible,    TOMB_DAMPE_WINDMILL,      0x01,                   HEART_PIECE
 Windmill Song of Storms,              npc,            TOMB_DAMPE_WINDMILL,      SONG_STORMS,            SONG_STORMS
 Desert Colossus Song Spirit,          special,        DESERT_COLOSSUS,          0xac,                   SONG_TP_SPIRIT
