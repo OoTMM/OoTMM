@@ -54,6 +54,7 @@
     "Hyrule Castle": "true"
     "Temple of Time": "true"
     "Bombchu Bowling": "true"
+    "Treasure Game": "true"
     "MM Clock Town": "is_child"
 "Market Pot House":
   exits:
@@ -66,6 +67,11 @@
   locations:
     "Bombchu Bowling Reward 1": "has_bombchu"
     "Bombchu Bowling Reward 2": "has_bombchu"
+"Treasure Game":
+  exits:
+    "Market": "true"
+  locations:
+    "Treasure Game HP": "has_lens"
 "Market Destroyed":
   exits:
     "Hyrule Field": "true"

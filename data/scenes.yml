@@ -14,7 +14,7 @@ OOT_THIEVES_HIDEOUT:                     0x0c
 OOT_INSIDE_GANON_CASTLE:                 0x0d
 OOT_GANON_TOWER_COLLAPSING:              0x0e
 OOT_INSIDE_GANON_CASTLE_COLLAPSING:      0x0f
-OOT_TREASURE_BOX_SHOP:                   0x10
+OOT_TREASURE_SHOP:                       0x10
 OOT_LAIR_GOHMA:                          0x11
 OOT_LAIR_KING_DODONGO:                   0x12
 OOT_LAIR_BARINADE:                       0x13

@@ -12,8 +12,6 @@ Kokiri Forest GS Night Adult,         gs,             KOKIRI_FOREST,            
 Malon Egg,                            npc,            HYRULE_CASTLE,            MALON_EGG,              CHICKEN
 Zelda's Letter,                       npc,            CASTLE_COURTYARD,         ZELDA_LETTER,           ZELDA_LETTER
 Zelda's Song,                         npc,            CASTLE_COURTYARD,         ZELDA_SONG,             SONG_ZELDA
-Bombchu Bowling Reward 1,             npc,            BOMBCHU_BOWLING_ALLEY,    BOMBCHU_BOWLING_1,      BOMB_BAG
-Bombchu Bowling Reward 2,             npc,            BOMBCHU_BOWLING_ALLEY,    BOMBCHU_BOWLING_2,      HEART_PIECE
 Lost Woods Bridge,                    special,        LOST_WOODS,               0xc1,                   OCARINA
 Lost Woods Target,                    npc,            LOST_WOODS,               LOST_WOODS_TARGET,      SLINGSHOT
 Lost Woods Skull Kid,                 npc,            LOST_WOODS,               LOST_WOODS_SKULL_KID,   HEART_PIECE
@@ -63,6 +61,9 @@ Hyrule Field Grotto Tektite HP,       collectible,    GROTTOS,                  
 Hyrule Field Grotto Near Kakariko GS, gs,             GROTTOS,                  0x59,                   GS_TOKEN
 Hyrule Field Grotto Near Gerudo GS,   gs,             GROTTOS,                  0x58,                   GS_TOKEN
 Market Pot House GS,                  gs,             GUARD_HOUSE,              0x7b,                   GS_TOKEN
+Bombchu Bowling Reward 1,             npc,            BOMBCHU_BOWLING_ALLEY,    BOMBCHU_BOWLING_1,      BOMB_BAG
+Bombchu Bowling Reward 2,             npc,            BOMBCHU_BOWLING_ALLEY,    BOMBCHU_BOWLING_2,      HEART_PIECE
+Treasure Game HP,                     chest,          TREASURE_SHOP,            0x0b,                   HEART_PIECE
 Temple of Time Master Sword,          collectible,    TEMPLE_OF_TIME,           0x1f,                   SWORD
 Temple of Time Medallion,             collectible,    TEMPLE_OF_TIME,           0x1e,                   MEDALLION_LIGHT
 Temple of Time Light Arrows,          special,        TEMPLE_OF_TIME,           0xc4,                   ARROW_LIGHT
