@@ -32,3 +32,4 @@
 "gs_night": "true"
 "gs_soil": "is_child && has_bottle"
 "has_weapon": "(is_child && has(SWORD)) || is_adult"
+"has_iron_boots": "is_adult && has(BOOTS_IRON)"

@@ -53,9 +53,13 @@ Lon Lon Ranch GS Tree,                gs,             LON_LON_RANCH,            
 Lon Lon Ranch GS House,               gs,             LON_LON_RANCH,            0x62,                   GS_TOKEN
 Lon Lon Ranch GS Inner Fence,         gs,             LON_LON_RANCH,            0x61,                   GS_TOKEN
 Lon Lon Ranch GS Outer Fence,         gs,             LON_LON_RANCH,            0x60,                   GS_TOKEN
-Hyrule Field Grotto Scrub HP,         npc,            GROTTOS,                  SCRUB_HP,               HEART_PIECE
 Hyrule Field Ocarina of Time,         special,        HYRULE_FIELD,             0x43,                   OCARINA
 Hyrule Field Song of Time,            special,        HYRULE_FIELD,             0xa9,                   SONG_TIME
+Hyrule Field Grotto Scrub HP,         npc,            GROTTOS,                  SCRUB_HP,               HEART_PIECE
+Hyrule Field Grotto Southeast,        chest,          GROTTOS,                  0x12,                   RUPEE_RED
+Hyrule Field Grotto Open,             chest,          GROTTOS,                  0x03,                   RUPEE_BLUE
+Hyrule Field Grotto Market,           chest,          GROTTOS,                  0x00,                   RUPEE_BLUE
+Hyrule Field Grotto Tektite HP,       collectible,    GROTTOS,                  0x01,                   HEART_PIECE
 Hyrule Field Grotto Near Kakariko GS, gs,             GROTTOS,                  0x59,                   GS_TOKEN
 Hyrule Field Grotto Near Gerudo GS,   gs,             GROTTOS,                  0x58,                   GS_TOKEN
 Market Pot House GS,                  gs,             GUARD_HOUSE,              0x7b,                   GS_TOKEN
