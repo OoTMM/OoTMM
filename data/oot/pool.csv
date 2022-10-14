@@ -32,6 +32,8 @@ Kakariko Anju Bottle,                 npc,            KAKARIKO_VILLAGE,         
 Kakariko Anju Egg,                    npc,            KAKARIKO_VILLAGE,         ANJU_EGG,               POCKET_CUCCO
 Kakariko Song Shadow,                 special,        KAKARIKO_VILLAGE,         0x54,                   SONG_TP_SHADOW
 Kakariko Man on Roof,                 npc,            KAKARIKO_VILLAGE,         KAKARIKO_ROOF_MAN,      HEART_PIECE
+Kakariko Grotto Front,                chest,          GROTTOS,                  0x0a,                   RUPEE_HUGE
+Kakariko Grotto Back,                 chest,          GROTTOS,                  0x08,                   RUPEE_RED
 Kakariko GS Roof,                     gs,             KAKARIKO_VILLAGE,         0x8e,                   GS_TOKEN
 Kakariko GS Shooting Gallery,         gs,             KAKARIKO_VILLAGE,         0x8b,                   GS_TOKEN
 Kakariko GS Tree,                     gs,             KAKARIKO_VILLAGE,         0x8d,                   GS_TOKEN
