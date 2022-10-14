@@ -64,6 +64,8 @@ Market Pot House GS,                  gs,             GUARD_HOUSE,              
 Bombchu Bowling Reward 1,             npc,            BOMBCHU_BOWLING_ALLEY,    BOMBCHU_BOWLING_1,      BOMB_BAG
 Bombchu Bowling Reward 2,             npc,            BOMBCHU_BOWLING_ALLEY,    BOMBCHU_BOWLING_2,      HEART_PIECE
 Treasure Game HP,                     chest,          TREASURE_SHOP,            0x0a,                   HEART_PIECE
+Shooting Gallery Child,               npc,            SHOOTING_GALLERY,         SHOOTING_GAME_CHILD,    SLINGSHOT
+Shooting Gallery Adult,               npc,            SHOOTING_GALLERY,         SHOOTING_GAME_ADULT,    BOW
 Temple of Time Master Sword,          collectible,    TEMPLE_OF_TIME,           0x1f,                   SWORD
 Temple of Time Medallion,             collectible,    TEMPLE_OF_TIME,           0x1e,                   MEDALLION_LIGHT
 Temple of Time Light Arrows,          special,        TEMPLE_OF_TIME,           0xc4,                   ARROW_LIGHT

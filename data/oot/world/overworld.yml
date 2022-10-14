@@ -55,6 +55,7 @@
     "Temple of Time": "true"
     "Bombchu Bowling": "true"
     "Treasure Game": "true"
+    "Shooting Gallery": "true"
     "MM Clock Town": "is_child"
 "Market Pot House":
   exits:
@@ -67,6 +68,13 @@
   locations:
     "Bombchu Bowling Reward 1": "has_bombchu"
     "Bombchu Bowling Reward 2": "has_bombchu"
+"Shooting Gallery":
+  exits:
+    "Market": "is_child"
+    "Kakariko": "is_adult"
+  locations:
+    "Shooting Gallery Child": "is_child"
+    "Shooting Gallery Adult": "is_adult && has(BOW)"
 "Treasure Game":
   exits:
     "Market": "true"
@@ -159,6 +167,7 @@
     "Graveyard": "true"
     "Bottom of the Well": "is_child && can_play(SONG_STORMS) && has(SWORD)"
     "Skulltula House": "true"
+    "Shooting Gallery": "is_adult"
   locations:
     "Anju's Bottle": "is_child"
     "Windmill HP": "is_adult"
