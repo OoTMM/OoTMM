@@ -76,6 +76,10 @@
     EPONA: "is_adult && can_play(SONG_EPONA)"
   locations:
     "Lon Lon Ranch Malon Song": "is_child && has(OCARINA) && event(MALON)"
+    "Lon Lon Ranch GS Tree": "is_child"
+    "Lon Lon Ranch GS House": "is_child && gs_night && can_boomerang"
+    "Lon Lon Ranch GS Inner Fence": "is_child && gs_night && can_boomerang"
+    "Lon Lon Ranch GS Outer Fence": "is_child && gs_night"
 "Lon Lon Ranch Silo":
   exits:
     "Lon Lon Ranch": "true"

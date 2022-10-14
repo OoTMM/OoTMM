@@ -49,6 +49,10 @@ Lake Hylia Fire Arrow,                special,        LAKE_HYLIA,               
 Lon Lon Ranch Malon Song,             npc,            LON_LON_RANCH,            MALON_SONG,             SONG_EPONA
 Lon Lon Ranch Silo HP,                collectible,    RANCH_HOUSE_SILO,         0x01,                   HEART_PIECE
 Lon Lon Ranch Talon Bottle,           npc,            RANCH_HOUSE_SILO,         TALON_BOTTLE,           MILK_BOTTLE
+Lon Lon Ranch GS Tree,                gs,             LON_LON_RANCH,            0x63,                   GS_TOKEN
+Lon Lon Ranch GS House,               gs,             LON_LON_RANCH,            0x62,                   GS_TOKEN
+Lon Lon Ranch GS Inner Fence,         gs,             LON_LON_RANCH,            0x61,                   GS_TOKEN
+Lon Lon Ranch GS Outer Fence,         gs,             LON_LON_RANCH,            0x60,                   GS_TOKEN
 Hyrule Field Grotto Scrub HP,         npc,            GROTTOS,                  SCRUB_HP,               HEART_PIECE
 Hyrule Field Ocarina of Time,         special,        HYRULE_FIELD,             0x43,                   OCARINA
 Hyrule Field Song of Time,            special,        HYRULE_FIELD,             0xa9,                   SONG_TIME
