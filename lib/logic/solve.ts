@@ -24,6 +24,7 @@ export const ITEMS_DUNGEON_REWARDS = new Set([
 ]);
 
 export const ITEMS_REQUIRED = new Set<string>([
+  'OOT_GS_TOKEN',
   'OOT_ARROW_FIRE',
   'OOT_ARROW_LIGHT',
   'OOT_BOMB_BAG',
@@ -45,20 +46,22 @@ export const ITEMS_REQUIRED = new Set<string>([
   'OOT_SHIELD',
   'OOT_SLINGSHOT',
   'OOT_SONG_EPONA',
-  'OOT_SONG_FIRE',
   'OOT_SONG_SARIA',
-  'OOT_SONG_TP_SHADOW',
-  'OOT_SONG_TP_SPIRIT',
   'OOT_SONG_STORMS',
   'OOT_SONG_SUN',
   'OOT_SONG_TIME',
   'OOT_SONG_ZELDA',
+  'OOT_SONG_TP_FIRE',
+  'OOT_SONG_TP_SHADOW',
+  'OOT_SONG_TP_SPIRIT',
   'OOT_SPELL_FIRE',
   'OOT_STRENGTH',
   'OOT_SWORD',
   'OOT_TUNIC_GORON',
   'OOT_TUNIC_ZORA',
   'OOT_ZELDA_LETTER',
+  'OOT_MAGIC_BEAN',
+  'OOT_MILK_BOTTLE',
   'MM_MASK_DEKU',
   'MM_MASK_GORON',
   'MM_MASK_ZORA',
@@ -247,7 +250,10 @@ class Solver {
 
     const checksCount = Object.keys(this.world.checks).length;
 
-    /* Start by placing the required reward items */
+    /* Fix the GS tokens */
+    this.fixTokens();
+
+    /* Place the required reward items */
     this.fixRewards();
 
     /* Handle dungeon items */
@@ -282,6 +288,16 @@ class Solver {
     const junkItem = sample(this.random, itemsArray(this.pools.junk));
     removeItem(this.pools.junk, junkItem);
     addItem(this.pools.required, item);
+  }
+
+  private fixTokens() {
+    for (const location in this.world.checks) {
+      const check = this.world.checks[location];
+      if (check.type === 'gs') {
+        this.place(location, 'OOT_GS_TOKEN');
+        removeItem(this.pools.required, 'OOT_GS_TOKEN');
+      }
+    }
   }
 
   private fixRewards() {

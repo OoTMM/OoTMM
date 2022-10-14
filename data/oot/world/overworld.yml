@@ -11,22 +11,22 @@
   exits:
     "Link's House": "true"
     "Mido's House": "true"
-    "Kokiri Forest Child": "is_child"
     "Lost Woods": "true"
     "Deku Tree Main": "true"
+  locations:
+    "Kokiri Forest Kokiri Sword Chest": "is_child"
+    "Kokiri Forest Storms Grotto": "hidden_grotto_storms"
+    "Kokiri Forest GS Soil": "gs_soil"
+    "Kokiri Forest GS Night Child": "is_child && gs_night"
+    "Kokiri Forest GS Night Adult": "is_adult && gs_night && can_hookshot"
 "Mido's House":
   exits:
     "Kokiri Forest": "true"
   locations:
-    "KF Mido Top Left": "true"
-    "KF Mido Top Right": "true"
-    "KF Mido Bottom Left": "true"
-    "KF Mido Bottom Right": "true"
-"Kokiri Forest Child":
-  exits:
-    "Kokiri Forest": "true"
-  locations:
-    "KF Kokiri Sword Chest": "true"
+    "Kokiri Forest Mido Top Left": "true"
+    "Kokiri Forest Mido Top Right": "true"
+    "Kokiri Forest Mido Bottom Left": "true"
+    "Kokiri Forest Mido Bottom Right": "true"
 "Hyrule Field":
   exits:
     "Lost Woods": "true"
@@ -36,37 +36,82 @@
     "Zora River": "has_explosives"
     "Lake Hylia": "true"
     "Gerudo Valley": "true"
-    "MM Clock Town": "is_child"
+    "Lon Lon Ranch": "true"
   locations:
+    "Hyrule Field Grotto Scrub HP": "hidden_grotto_bomb"
     "Hyrule Field Ocarina of Time": "has_spiritual_stones"
     "Hyrule Field Song of Time": "has_spiritual_stones"
+    "Hyrule Field Grotto Southeast": "has_explosives_or_hammer"
+    "Hyrule Field Grotto Open": "true"
+    "Hyrule Field Grotto Market": "has_explosives_or_hammer"
+    "Hyrule Field Grotto Tektite HP": "hidden_grotto_bomb && (has(SCALE, 2) || has_iron_boots)"
+    "Hyrule Field Grotto Near Kakariko GS": "hidden_grotto_bomb && can_collect_distance"
+    "Hyrule Field Grotto Near Gerudo GS": "((is_child && hidden_grotto_bomb) || (is_adult && can_hammer)) && can_collect_distance && has_fire"
 "Market":
   exits:
+    "Market Pot House": "true"
     "Hyrule Field": "true"
     "Hyrule Castle": "true"
     "Temple of Time": "true"
     "Bombchu Bowling": "true"
+    "Treasure Game": "true"
+    "MM Clock Town": "is_child"
+"Market Pot House":
+  exits:
+    "Market": "true"
+  locations:
+    "Market Pot House GS": "true"
 "Bombchu Bowling":
   exits:
     "Market": "true"
   locations:
     "Bombchu Bowling Reward 1": "has_bombchu"
     "Bombchu Bowling Reward 2": "has_bombchu"
+"Treasure Game":
+  exits:
+    "Market": "true"
+  locations:
+    "Treasure Game HP": "has_lens"
 "Market Destroyed":
   exits:
     "Hyrule Field": "true"
     "Temple of Time": "true"
     "Ganon Castle Exterior": "true"
+"Lon Lon Ranch":
+  exits:
+    "Hyrule Field": "true"
+    "Lon Lon Ranch Silo": "true"
+    "Lon Lon Ranch House": "true"
+  events:
+    EPONA: "is_adult && can_play(SONG_EPONA)"
+  locations:
+    "Lon Lon Ranch Malon Song": "is_child && has(OCARINA) && event(MALON)"
+    "Lon Lon Ranch GS Tree": "is_child"
+    "Lon Lon Ranch GS House": "is_child && gs_night && can_boomerang"
+    "Lon Lon Ranch GS Inner Fence": "is_child && gs_night && can_boomerang"
+    "Lon Lon Ranch GS Outer Fence": "is_child && gs_night"
+"Lon Lon Ranch Silo":
+  exits:
+    "Lon Lon Ranch": "true"
+  locations:
+    "Lon Lon Ranch Silo HP": "is_child"
+"Lon Lon Ranch House":
+  exits:
+    "Lon Lon Ranch": "true"
+  locations:
+    "Lon Lon Ranch Talon Bottle": "is_child && event(TALON_CHILD)"
 "Hyrule Castle":
   exits:
     "Market": "true"
-  locations:
-    "Malon Egg": "true"
-    "Zelda's Letter": "has(CHICKEN)"
-    "Zelda's Song": "has(CHICKEN)"
-    "Great Fairy Din's Fire": "has_explosives && can_play(SONG_ZELDA)"
   events:
-    MEET_ZELDA: "has(CHICKEN)"
+    MALON: "true"
+    TALON_CHILD: "has(CHICKEN)"
+    MEET_ZELDA: "event(TALON_CHILD)"
+  locations:
+    "Malon Egg": "event(MALON)"
+    "Zelda's Letter": "event(MEET_ZELDA)"
+    "Zelda's Song": "event(MEET_ZELDA)"
+    "Great Fairy Din's Fire": "has_explosives && can_play(SONG_ZELDA)"
 "Ganon Castle Exterior":
   exits:
     "Market Destroyed": "true"
@@ -78,21 +123,42 @@
     "Kokiri Forest": "true"
     "Hyrule Field": "true"
     "Sacred Meadow": "true"
+    "Deku Theater": "true"
+  events:
+    BEAN_LOST_WOODS: "can_use_beans"
   locations:
     "Lost Woods Bridge": "true"
     "Lost Woods Target": "can_use_slingshot"
+    "Lost Woods Skull Kid": "is_child && can_play(SONG_SARIA)"
+    "Lost Woods Memory Game": "is_child && has(OCARINA)"
+    "Lost Woods Scrub Sticks Upgrade": "true"
+    "Lost Woods Grotto Scrub Nuts Upgrade": "has_explosives"
+    "Lost Woods Grotto Generic": "has_explosives"
+    "Lost Woods GS Soil Bridge": "gs_soil"
+    "Lost Woods GS Soil Theater": "gs_soil"
+    "Lost Woods GS Bean Ride": "is_adult && gs_night && event(BEAN_LOST_WOODS)"
+"Deku Theater":
+  exits:
+    "Lost Woods": "true"
+  locations:
+    "Deku Theater Sticks Upgrade": "is_child && has(MASK_SKULL)"
+    "Deku Theater Nuts Upgrade": "is_child && has(MASK_TRUTH)"
 "Sacred Meadow":
   exits:
     "Lost Woods": "true"
     "Forest Temple Entrance": "can_hookshot"
   locations:
     "Saria's Song": "event(MEET_ZELDA)"
+    "Sacred Meadow Sheik Song": "is_adult"
+    "Sacred Meadow Grotto": "hidden_grotto_bomb"
+    "Sacred Meadow GS Night Adult": "is_adult && gs_night && can_hookshot"
 "Kakariko":
   exits:
     "Hyrule Field": "true"
     "Death Mountain": "has(ZELDA_LETTER)"
     "Graveyard": "true"
     "Bottom of the Well": "is_child && can_play(SONG_STORMS) && has(SWORD)"
+    "Skulltula House": "true"
   locations:
     "Anju's Bottle": "is_child"
     "Windmill HP": "is_adult"
@@ -110,6 +176,11 @@
   exits:
     "Graveyard": "true"
     "Shadow Temple Entrance": "is_adult && can_use_din"
+"Skulltula House":
+  exits:
+    "Kakariko": "true"
+  locations:
+    "Skulltula House 10 Tokens": "has(GS_TOKEN, 10)"
 "Death Mountain":
   exits:
     "Goron City": "true"
@@ -130,6 +201,7 @@
     "Hyrule Field": "true"
     "Zora Domain": "can_play(SONG_ZELDA)"
   locations:
+    "Zora River Bean Seller": "is_child"
     "Zora River HP Pillar": "true"
     "Zora River HP Platform": "true"
 "Zora Domain":
@@ -185,7 +257,7 @@
   exits:
     "Lake Hylia": "true"
     "Hyrule Field": "true"
-    "Gerudo Valley After Bridge": "can_longshot"
+    "Gerudo Valley After Bridge": "can_longshot || (is_adult && event(EPONA))"
 "Gerudo Valley After Bridge":
   exits:
     "Lake Hylia": "true"

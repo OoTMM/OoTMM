@@ -22,7 +22,7 @@ type WorldRegion = {
 };
 
 type WorldCheckNumeric = {
-  type: 'chest' | 'special' | 'collectible';
+  type: 'chest' | 'special' | 'collectible' | 'gs';
   id: number;
 };
 

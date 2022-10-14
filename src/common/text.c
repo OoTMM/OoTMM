@@ -622,7 +622,11 @@ void comboTextHijackItem(GameState_Play* play, u16 itemId)
 {
     char* b;
 
+#if defined(GAME_OOT)
+    b = play->msgCtx.textBuffer;
+#else
     b = play->textBuffer;
+#endif
     appendHeader(&b);
     appendStr(&b, "You got ");
     appendItemName(&b, itemId, 0);
@@ -634,7 +638,12 @@ void comboTextHijackItemShop(GameState_Play* play, u16 itemId, s16 price, int co
 {
     char* b;
 
+#if defined(GAME_OOT)
+    b = play->msgCtx.textBuffer;
+#else
     b = play->textBuffer;
+#endif
+
     appendShopHeader(&b, price);
 
     if (itemId == ITEM_NONE)

@@ -15,6 +15,7 @@ const SUBSTITUTIONS: {[k: string]: string} = {
   OOT_SCALE: "OOT_SCALE_SILVER",
   OOT_SHIELD: "OOT_SHIELD_DEKU",
   OOT_ICE_TRAP: "OOT_RUPEE_BLUE",
+  OOT_WALLET: "OOT_WALLET2",
   MM_SWORD: "MM_SWORD_KOKIRI",
   MM_SHIELD: "MM_SHIELD_HYLIAN",
   MM_OCARINA: "MM_OCARINA_OF_TIME",
@@ -85,6 +86,9 @@ export const randomizeGame = async (game: Game, logic: LogicResult): Promise<Buf
   const buf: number[] = [];
   for (const c of logic.items) {
     if (c.game !== game) {
+      continue;
+    }
+    if (c.type === 'gs') {
       continue;
     }
     let { scene } = c;

@@ -329,7 +329,7 @@ void comboAddItemOot(u16 itemId)
         break;
     case ITEM_OOT_MAGIC_BEAN:
         gOotSave.inventory[ITS_OOT_MAGIC_BEAN] = ITEM_OOT_MAGIC_BEAN;
-        gOotSave.ammo[ITS_OOT_MAGIC_BEAN]++;
+        gOotSave.ammo[ITS_OOT_MAGIC_BEAN] = 10;
         break;
     case ITEM_OOT_HAMMER:
         gOotSave.inventory[ITS_OOT_HAMMER] = ITEM_OOT_HAMMER;

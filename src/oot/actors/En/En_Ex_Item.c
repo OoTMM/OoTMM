@@ -31,6 +31,22 @@ s16 EnExItem_RewardByIndex(int index)
         /* Purple Rupee */
         gi = GI_OOT_RUPEE_PURPLE;
         break;
+    case 0x0a:
+        /* Treasure Game: Green Rupee */
+        gi = GI_OOT_RUPEE_GREEN;
+        break;
+    case 0x0b:
+        /* Treasure Game: Blue Rupee */
+        gi = GI_OOT_RUPEE_BLUE;
+        break;
+    case 0x0c:
+        /* Treasure Game: Red Rupee */
+        gi = GI_OOT_RUPEE_RED;
+        break;
+    case 0x0f:
+        /* Treasure Game: Small Key */
+        gi = GI_OOT_SMALL_KEY;
+        break;
     case 0x13:
         /* Target: Slingshot */
         gi = comboOverride(OV_NPC, 0, NPC_OOT_LOST_WOODS_TARGET, GI_OOT_SLINGSHOT);
