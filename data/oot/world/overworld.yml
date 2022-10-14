@@ -49,8 +49,9 @@
     "Hyrule Field Grotto Near Gerudo GS": "((is_child && hidden_grotto_bomb) || (is_adult && can_hammer)) && can_collect_distance && has_fire"
 "Market":
   exits:
-    "Market Pot House": "true"
     "Hyrule Field": "true"
+    "Market Pot House": "true"
+    "Back Alley": "true"
     "Hyrule Castle": "true"
     "Temple of Time": "true"
     "Bombchu Bowling": "true"
@@ -62,6 +63,15 @@
     "Market": "true"
   locations:
     "Market Pot House GS": "true"
+"Back Alley":
+  exits:
+    "Market": "true"
+    "Dog Lady House": "true"
+"Dog Lady House":
+  exits:
+    "Back Alley": "true"
+  locations:
+    "Market Dog Lady HP": "true"
 "Bombchu Bowling":
   exits:
     "Market": "true"
