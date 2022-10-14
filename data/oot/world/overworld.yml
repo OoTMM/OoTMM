@@ -186,6 +186,7 @@
     "Bottom of the Well": "is_child && can_play(SONG_STORMS) && has(SWORD)"
     "Skulltula House": "true"
     "Shooting Gallery": "is_adult"
+    "kakariko Rooftop": "can_hookshot"
   locations:
     "Kakariko Anju Bottle": "is_child"
     "Kakariko Anju Egg": "is_adult"
@@ -198,6 +199,11 @@
     "Kakariko GS House of Skulltula": "gs_night && is_child"
     "Kakariko GS Bazaar": "gs_night && is_child"
     "Kakariko GS Ladder": "gs_night && is_child && has(SLINGSHOT)"
+"kakariko Rooftop":
+  exits:
+    "Kakariko": "true"
+  locations:
+    "Kakariko Man on Roof": "true"
 "Graveyard":
   exits:
     "Kakariko": "true"
@@ -223,6 +229,7 @@
     "Goron City": "true"
     "Dodongo Cavern Entrance": "has_bombflowers && has(SWORD)"
     "Kakariko": "has(ZELDA_LETTER)"
+    "kakariko Rooftop": "is_child && has_explosives"
   locations:
     "Death Mountain Chest": "has_explosives"
     "Great Fairy Magic Upgrade": "has_explosives && can_play(SONG_ZELDA)"
