@@ -28,7 +28,8 @@ Saria's Song,                         special,        SACRED_FOREST_MEADOW,     
 Sacred Meadow Sheik Song,             npc,            SACRED_FOREST_MEADOW,     SHEIK_FOREST,           SONG_TP_FOREST
 Sacred Meadow Grotto,                 chest,          GROTTOS,                  0x11,                   RUPEE_PURPLE
 Sacred Meadow GS Night Adult,         gs,             SACRED_FOREST_MEADOW,     0x73,                   GS_TOKEN
-Anju's Bottle,                        npc,            KAKARIKO_VILLAGE,         ANJU_BOTTLE,            EMPTY_BOTTLE
+Kakariko Anju Bottle,                 npc,            KAKARIKO_VILLAGE,         ANJU_BOTTLE,            EMPTY_BOTTLE
+Kakariko Anju Egg,                    npc,            KAKARIKO_VILLAGE,         ANJU_EGG,               POCKET_CUCCO
 Kakariko Song Shadow,                 special,        KAKARIKO_VILLAGE,         0x54,                   SONG_TP_SHADOW
 Kakariko GS Roof,                     gs,             KAKARIKO_VILLAGE,         0x8e,                   GS_TOKEN
 Kakariko GS Shooting Gallery,         gs,             KAKARIKO_VILLAGE,         0x8b,                   GS_TOKEN
