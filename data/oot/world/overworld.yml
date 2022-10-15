@@ -259,11 +259,12 @@
     "Death Mountain Crater Bottom": "is_adult"
   locations:
     "Darunia": "can_play(SONG_ZELDA) && can_play(SONG_SARIA)"
-    "Goron City Tunic": "is_adult && has_explosives"
-    "Goron City Bomb Bag": "is_child && has_explosives"
     "Goron City Maze Center 1": "has_explosives"
     "Goron City Maze Center 2": "has_explosives"
     "Goron City Maze Left": "can_hammer"
+    "Goron City Big Pot HP": "is_child && has_bombflowers && (can_play(SONG_ZELDA) || has_fire)"
+    "Goron City Tunic": "is_adult && has_explosives"
+    "Goron City Bomb Bag": "is_child && has_explosives"
     "Goron City GS Platform": "is_adult && has_ranged_weapon"
     "Goron City GS Maze": "is_child && has_explosives"
 "Zora River":
