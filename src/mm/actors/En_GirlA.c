@@ -4,7 +4,7 @@ void EnGirlA_Draw(Actor_EnGirlA* girlA, GameState_Play* play)
 {
     if (girlA->gi != GI_MM_SOLD_OUT)
         MatrixRotation(girlA->angle, 1);
-    comboDrawGI(play, &girlA->base, girlA->gi);
+    comboDrawGI(play, &girlA->base, girlA->gi, 1.f);
 }
 
 void EnGirlA_PostHandler(Actor_EnGirlA* girlA, GameState_Play* play)

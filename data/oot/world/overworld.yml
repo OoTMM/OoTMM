@@ -1,9 +1,10 @@
 "SPAWN":
   exits:
     "Link's House": "is_child"
-    "Temple of Time": "is_adult && event(TIME_TRAVEL)"
+    "Temple of Time": "(is_adult && event(TIME_TRAVEL)) || can_play(SONG_TP_LIGHT)"
     "Graveyard Upper": "can_play(SONG_TP_SHADOW)"
     "Desert Colossus": "can_play(SONG_TP_SPIRIT)"
+    "Death Mountain Crater Warp": "can_play(SONG_TP_FIRE)"
 "Link's House":
   exits:
     "Kokiri Forest": "true"
@@ -37,6 +38,8 @@
     "Lake Hylia": "true"
     "Gerudo Valley": "true"
     "Lon Lon Ranch": "true"
+  events:
+    BIG_POE: "is_adult && event(EPONA) && has(BOW) && has_bottle"
   locations:
     "Hyrule Field Grotto Scrub HP": "hidden_grotto_bomb"
     "Hyrule Field Ocarina of Time": "has_spiritual_stones"
@@ -49,24 +52,44 @@
     "Hyrule Field Grotto Near Gerudo GS": "((is_child && hidden_grotto_bomb) || (is_adult && can_hammer)) && can_collect_distance && has_fire"
 "Market":
   exits:
-    "Market Pot House": "true"
     "Hyrule Field": "true"
+    "Market Pot House": "true"
+    "Back Alley": "true"
     "Hyrule Castle": "true"
     "Temple of Time": "true"
     "Bombchu Bowling": "true"
     "Treasure Game": "true"
+    "Shooting Gallery": "true"
     "MM Clock Town": "is_child"
 "Market Pot House":
   exits:
-    "Market": "true"
+    "Market": "is_child"
+    "Market Destroyed": "is_adult"
   locations:
-    "Market Pot House GS": "true"
+    "Market Pot House Big Poes": "is_adult && event(BIG_POE)"
+    "Market Pot House GS": "is_child"
+"Back Alley":
+  exits:
+    "Market": "true"
+    "Dog Lady House": "true"
+"Dog Lady House":
+  exits:
+    "Back Alley": "true"
+  locations:
+    "Market Dog Lady HP": "true"
 "Bombchu Bowling":
   exits:
     "Market": "true"
   locations:
     "Bombchu Bowling Reward 1": "has_bombchu"
     "Bombchu Bowling Reward 2": "has_bombchu"
+"Shooting Gallery":
+  exits:
+    "Market": "is_child"
+    "Kakariko": "is_adult"
+  locations:
+    "Shooting Gallery Child": "is_child"
+    "Shooting Gallery Adult": "is_adult && has(BOW)"
 "Treasure Game":
   exits:
     "Market": "true"
@@ -75,6 +98,7 @@
 "Market Destroyed":
   exits:
     "Hyrule Field": "true"
+    "Market Pot House": "true"
     "Temple of Time": "true"
     "Ganon Castle Exterior": "true"
 "Lon Lon Ranch":
@@ -112,12 +136,15 @@
     "Zelda's Letter": "event(MEET_ZELDA)"
     "Zelda's Song": "event(MEET_ZELDA)"
     "Great Fairy Din's Fire": "has_explosives && can_play(SONG_ZELDA)"
+    "Hyrule Castle GS Tree": "true"
+    "Hyrule Castle GS Grotto": "hidden_grotto_storms && has_explosives && can_boomerang"
 "Ganon Castle Exterior":
   exits:
     "Market Destroyed": "true"
     "Ganon Castle Main": "has_medallions"
   locations:
     "Great Fairy Defense Upgrade": "has(STRENGTH, 3) && can_play(SONG_ZELDA)"
+    "Ganon Castle Exterior GS": "can_collect_distance"
 "Lost Woods":
   exits:
     "Kokiri Forest": "true"
@@ -159,19 +186,44 @@
     "Graveyard": "true"
     "Bottom of the Well": "is_child && can_play(SONG_STORMS) && has(SWORD)"
     "Skulltula House": "true"
+    "Shooting Gallery": "is_adult"
+    "kakariko Rooftop": "can_hookshot"
   locations:
-    "Anju's Bottle": "is_child"
+    "Kakariko Anju Bottle": "is_child"
+    "Kakariko Anju Egg": "is_adult"
     "Windmill HP": "is_adult"
     "Windmill Song of Storms": "is_adult && has(OCARINA)"
     "Kakariko Song Shadow": "is_adult && has(MEDALLION_FOREST) && has(MEDALLION_FIRE) && has(MEDALLION_WATER)"
-"Graveyard":
+    "Kakariko Impa House HP": "true"
+    "Kakariko Grotto Front": "hidden_grotto_bomb && has_weapon"
+    "Kakariko Grotto Back": "true"
+    "Kakariko GS Roof": "gs_night && is_adult && has(HOOKSHOT)"
+    "Kakariko GS Shooting Gallery": "gs_night && is_child"
+    "Kakariko GS Tree": "gs_night && is_child"
+    "Kakariko GS House of Skulltula": "gs_night && is_child"
+    "Kakariko GS Bazaar": "gs_night && is_child"
+    "Kakariko GS Ladder": "gs_night && is_child && has(SLINGSHOT)"
+"kakariko Rooftop":
   exits:
     "Kakariko": "true"
   locations:
+    "Kakariko Man on Roof": "true"
+"Graveyard":
+  exits:
+    "Kakariko": "true"
+  events:
+    BEAN_GRAVEYARD: "can_use_beans"
+  locations:
+    "Graveyard Dampe Game": "is_child"
     "Graveyard ReDead Tomb": "can_play(SONG_SUN)"
-    "Graveyard Royal Tomb": "can_play(SONG_ZELDA) && has(SWORD)"
+    "Graveyard Royal Tomb Song": "can_play(SONG_ZELDA) && has(SWORD)"
+    "Graveyard Royal Tomb Chest": "has_fire"
     "Graveyard Fairy Tomb": "true"
-    "Graveyard Dampe Tomb Hookshot": "is_adult"
+    "Graveyard Dampe Tomb Reward 1": "is_adult"
+    "Graveyard Dampe Tomb Reward 2": "is_adult"
+    "Graveyard Crate HP": "is_adult && event(BEAN_GRAVEYARD)"
+    "Graveyard GS Soil": "gs_soil"
+    "Graveyard GS Wall": "gs_night && is_child && has(BOOMERANG)"
 "Graveyard Upper":
   exits:
     "Graveyard": "true"
@@ -181,21 +233,40 @@
     "Kakariko": "true"
   locations:
     "Skulltula House 10 Tokens": "has(GS_TOKEN, 10)"
+    "Skulltula House 20 Tokens": "has(GS_TOKEN, 20)"
+    "Skulltula House 30 Tokens": "has(GS_TOKEN, 30)"
 "Death Mountain":
   exits:
     "Goron City": "true"
     "Dodongo Cavern Entrance": "has_bombflowers && has(SWORD)"
     "Kakariko": "has(ZELDA_LETTER)"
+    "kakariko Rooftop": "is_child && has_explosives"
+    "Death Mountain Crater Top": "has_explosives_or_hammer"
+  events:
+    BEAN_DEATH_MOUNTAIN: "can_use_beans"
   locations:
     "Death Mountain Chest": "has_explosives"
+    "Death Mountain HP": "is_adult && event(BEAN_DEATH_MOUNTAIN)"
     "Great Fairy Magic Upgrade": "has_explosives && can_play(SONG_ZELDA)"
+    "Death Mountain Grotto": "hidden_grotto_storms"
+    "Death Mountain GS Entrance": "has_explosives"
+    "Death Mountain GS Soil": "gs_soil"
+    "Death Mountain GS Above Dodongo":  "gs_night && is_adult"
+    "Death Mountain GS Before Climb": "gs_night && is_adult && can_hammer"
 "Goron City":
   exits:
     "Death Mountain": "true"
     "Death Mountain Crater Bottom": "is_adult"
   locations:
     "Darunia": "can_play(SONG_ZELDA) && can_play(SONG_SARIA)"
+    "Goron City Maze Center 1": "has_explosives"
+    "Goron City Maze Center 2": "has_explosives"
+    "Goron City Maze Left": "can_hammer"
+    "Goron City Big Pot HP": "is_child && has_bombflowers && (can_play(SONG_ZELDA) || has_fire)"
     "Goron City Tunic": "is_adult && has_explosives"
+    "Goron City Bomb Bag": "is_child && has_explosives"
+    "Goron City GS Platform": "is_adult && has_ranged_weapon"
+    "Goron City GS Maze": "is_child && has_explosives"
 "Zora River":
   exits:
     "Hyrule Field": "true"
@@ -243,16 +314,30 @@
   locations:
     "Temple of Time Master Sword": "is_child && event(DOOR_OF_TIME_OPEN)"
     "Temple of Time Medallion": "is_adult && event(DOOR_OF_TIME_OPEN)"
+    "Temple of Time Sheik Song": "is_adult && event(DOOR_OF_TIME_OPEN) && has(MEDALLION_FOREST)"
     "Temple of Time Light Arrows": "is_adult && has_medallions"
+"Death Mountain Crater Top":
+  exits:
+    "Death Mountain": "true"
+  locations:
+    "Death Mountain Crater GS Crate": "is_child"
+    "Death Mountain Crater Grotto": "has_explosives"
+    "Death Mountain Crater Alcove HP": "has_tunic_goron"
 "Death Mountain Crater Bottom":
   exits:
     "Goron City": "is_adult"
-    "Death Mountain Crater Warp": "is_adult && has(HOOKSHOT)"
+    "Death Mountain Crater Warp": "is_adult && (has(HOOKSHOT) || has(BOOTS_HOVER))"
   locations:
     "Great Fairy Magic Upgrade 2": "is_adult && has(HAMMER) && can_play(SONG_ZELDA)"
 "Death Mountain Crater Warp":
   exits:
-    "Fire Temple Entrance": "is_adult && has(TUNIC_GORON)"
+    "Fire Temple Entrance": "has_tunic_goron"
+  events:
+    BEAN_DEATH_MOUNTAIN_CRATER: "can_use_beans"
+  locations:
+    "Death Mountain Crater Volcano HP": "has_tunic_goron && event(BEAN_DEATH_MOUNTAIN_CRATER)"
+    "Death Mountain Crater Sheik Song": "has_tunic_goron"
+    "Death Mountain Crater GS Soil": "gs_soil"
 "Gerudo Valley":
   exits:
     "Lake Hylia": "true"

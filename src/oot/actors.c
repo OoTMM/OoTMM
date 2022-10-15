@@ -13,7 +13,6 @@ static RemovedActor kRemovedActors[] = {
     { SCE_OOT_HYRULE_CASTLE, AC_EN_OWL }, /* Hyrule Castle - Owl */
     { SCE_OOT_ZORA_RIVER, AC_EN_OWL },
     { SCE_OOT_LOST_WOODS, AC_EN_OWL },
-    { SCE_OOT_TOMB_ROYAL, 0x12e }, /* Sun Song */
     { SCE_OOT_SACRED_FOREST_MEADOW, AC_EN_SA }, /* Saria in meadow */
 };
 
@@ -54,6 +53,7 @@ Actor* hookSpawnActor(void* const_1, GameState_Play* play, s16 actorId, float x,
     switch (actorId)
     {
     case AC_ITEM00:
+#if 0
         if ((variable & 0xff) == 0x06) /* Heart Piece */
         {
             actorId = AC_ITEM_CUSTOM;
@@ -66,6 +66,7 @@ Actor* hookSpawnActor(void* const_1, GameState_Play* play, s16 actorId, float x,
             rz = 0x1000 | ((variable >> 8) & 0x3f);
             variable = GI_OOT_SMALL_KEY;
         }
+#endif
         break;
     case AC_DOOR_WARP1:
         /* Blue warp */

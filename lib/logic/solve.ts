@@ -62,6 +62,7 @@ export const ITEMS_REQUIRED = new Set<string>([
   'OOT_ZELDA_LETTER',
   'OOT_MAGIC_BEAN',
   'OOT_MILK_BOTTLE',
+  'OOT_STONE_OF_AGONY',
   'MM_MASK_DEKU',
   'MM_MASK_GORON',
   'MM_MASK_ZORA',

@@ -71,3 +71,7 @@ SpawnActor = 0x800bac60;
 SpawnActorEx = 0x800bae14;
 ConvertMatrix = 0x801817fc;
 MatrixRotation = 0x801809ac;
+
+gModelView = 0x801fbe04;
+
+MatrixScaleMV = 0x8018039c;

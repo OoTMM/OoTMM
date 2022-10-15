@@ -32,7 +32,7 @@ void ItemEtcetera_DrawTreasureGame(Actor* this, GameState_Play* play)
         break;
     }
 
-    comboDrawGI(play, this, gi);
+    comboDrawGI(play, this, gi, 1.f);
 }
 
 PATCH_FUNC(0x80a5e5b8, ItemEtcetera_DrawTreasureGame);

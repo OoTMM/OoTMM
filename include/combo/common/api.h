@@ -50,4 +50,14 @@ int  Message_IsClosed(Actor* actor, GameState_Play* play);
 void OcarinaAction(GameState_Play *play, u16 ocarinaAction);
 void OcarinaAction2(GameState_Play *play, u16 ocarinaAction);
 
+/* Matrix Ops */
+#define MAT_SET 0
+#define MAT_MUL 1
+
+extern float* gModelView;
+
+void MatrixScaleMV(float sx, float sy, float sz, int mode);
+
+float RandFloat(void);
+
 #endif

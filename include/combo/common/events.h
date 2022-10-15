@@ -1,6 +1,10 @@
 #ifndef COMBO_COMMON_EVENTS_H
 #define COMBO_COMMON_EVENTS_H
 
+#define BITMAP16_GET(m,b)   ((m)[(b) >> 4] & (1 << ((b) & 0xf)))
+#define BITMAP16_SET(m,b)   ((m)[(b) >> 4] |= (1 << ((b) & 0xf)))
+#define BITMAP16_CLEAR(m,b) ((m)[(b) >> 4] &= ~(1 << ((b) & 0xf)))
+
 #define EV_OOT_CHK_DEKU_MIDO_MEET           0x02
 #define EV_OOT_CHK_DEKU_MIDO_SWORD_SHIELD   0x04
 #define EV_OOT_CHK_EMERALD_TREE_DEAD        0x07
@@ -24,6 +28,7 @@
 #define EV_OOT_CHK_SONG_TP_FIRE             0x51
 #define EV_OOT_CHK_SONG_TP_WATER            0x52
 #define EV_OOT_CHK_SONG_TP_SHADOW           0x54
+#define EV_OOT_CHK_SONG_TP_LIGHT            0x55
 #define EV_OOT_CHK_SONG_ZELDA               0x59
 #define EV_OOT_CHK_SONG_SUN                 0x5a
 #define EV_OOT_CHK_SONG_STORMS              0x5b
@@ -34,6 +39,7 @@
 #define EV_OOT_CHK_SARIA_OCARINA            0xc1
 #define EV_OOT_CHK_LIGHT_ARROW              0xc4
 #define EV_OOT_CHK_MEDALLION_SPIRIT         0xc8
+#define EV_OOT_ITEM_DAMPE_GRAVEYARD_HP      0x1c
 
 /* Custom flags that seems unused */
 #define EV_OOT_CHK_SONG_SARIA               0x58

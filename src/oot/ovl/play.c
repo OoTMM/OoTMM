@@ -17,6 +17,8 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory[ITS_OOT_BOOMERANG] = ITEM_OOT_BOOMERANG;
         gSave.inventory[ITS_OOT_BOTTLE] = ITEM_OOT_RUTO_LETTER;
         gSave.inventory[ITS_OOT_BOTTLE2] = ITEM_OOT_EMPTY_BOTTLE;
+        gSave.inventory[ITS_OOT_BOTTLE3] = ITEM_OOT_BIG_POE;
+        gSave.inventory[ITS_OOT_BOTTLE4] = ITEM_OOT_BIG_POE;
         gSave.inventory[ITS_OOT_BOMBCHU] = ITEM_OOT_BOMBCHU_10;
         gSave.inventory[ITS_OOT_TRADE_CHILD] = ITEM_OOT_ZELDA_LETTER;
         gSave.equipment.swords = 0x7;
@@ -33,15 +35,21 @@ static void debugCheat(GameState_Play* play)
         gSave.quest.songZelda = 1;
         gSave.quest.songSaria = 1;
         gSave.quest.songTime = 1;
-        gSave.quest.songStorms = 1;
+        gSave.quest.songSun = 1;
 
         gSave.quest.stoneEmerald = 1;
         gSave.quest.stoneRuby = 1;
         gSave.quest.stoneSapphire = 1;
 
+        gSave.quest.medallionShadow = 1;
+        gSave.quest.medallionSpirit = 1;
+        gSave.quest.medallionForest = 1;
+
         gSave.rupees = 999;
 
         gOotExtraTrade.child = 0xffff;
+
+        gSave.age = AGE_ADULT;
     }
 #endif
 }
@@ -124,16 +132,23 @@ void hookPlay_Init(GameState_Play* play)
 
     Play_Init(play);
 
+    /* Check for the light arrows */
+    if (gSave.entrance == 0x0053 && gSave.quest.medallionShadow && gSave.quest.medallionSpirit && gSave.age == AGE_ADULT && !GetEventChk(EV_OOT_CHK_LIGHT_ARROW))
+    {
+        SpawnActor(
+            (char*)play + 0x1c24,
+            play,
+            AC_EN_XC,
+            0, 0, 0,
+            0, 0, 0,
+            4
+        );
+    }
+
     /* Saria's Ocarina Check */
     if (gSave.entrance == 0x05e0 || gSave.entrance == 0x04de)
     {
         comboSpawnSpecial(play, -1191.f, -220.f, 1650.f, EV_OOT_CHK_SARIA_OCARINA, GI_OOT_OCARINA_FAIRY);
-    }
-
-    /* Sun Song */
-    if (play->sceneId == SCE_OOT_TOMB_ROYAL)
-    {
-        comboSpawnSpecial(play, 0.f, 70.f, -1160.f, EV_OOT_CHK_SONG_SUN, GI_OOT_SONG_SUN);
     }
 
     /* Saria's Song */
