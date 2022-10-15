@@ -245,6 +245,7 @@
   locations:
     "Death Mountain Chest": "has_explosives"
     "Great Fairy Magic Upgrade": "has_explosives && can_play(SONG_ZELDA)"
+    "Death Mountain Grotto": "hidden_grotto_storms"
     "Death Mountain GS Entrance": "has_explosives"
     "Death Mountain GS Soil": "gs_soil"
     "Death Mountain GS Above Dodongo":  "gs_night && is_adult"
@@ -315,6 +316,7 @@
     "Death Mountain": "true"
   locations:
     "Death Mountain Crater GS Crate": "is_child"
+    "Death Mountain Crater Grotto": "has_explosives"
 "Death Mountain Crater Bottom":
   exits:
     "Goron City": "is_adult"

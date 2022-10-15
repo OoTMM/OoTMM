@@ -52,6 +52,7 @@ Graveyard Crate HP,                   chest,          GRAVEYARD,                
 Graveyard GS Soil,                    gs,             GRAVEYARD,                0x88,                   GS_TOKEN
 Graveyard GS Wall,                    gs,             GRAVEYARD,                0x8f,                   GS_TOKEN
 Death Mountain Chest,                 chest,          DEATH_MOUNTAIN_TRAIL,     0x01,                   RUPEE_PURPLE
+Death Mountain Grotto,                chest,          GROTTOS,                  0x17,                   RUPEE_HUGE
 Death Mountain GS Entrance,           gs,             DEATH_MOUNTAIN_TRAIL,     0x82,                   GS_TOKEN
 Death Mountain GS Soil,               gs,             DEATH_MOUNTAIN_TRAIL,     0x81,                   GS_TOKEN
 Death Mountain GS Above Dodongo,      gs,             DEATH_MOUNTAIN_TRAIL,     0x83,                   GS_TOKEN
@@ -64,6 +65,7 @@ Goron City Tunic,                     npc,            GORON_CITY,               
 Goron City GS Platform,               gs,             GORON_CITY,               0x85,                   GS_TOKEN
 Goron City GS Maze,                   gs,             GORON_CITY,               0x86,                   GS_TOKEN
 Death Mountain Crater Sheik Song,     npc,            DEATH_MOUNTAIN_CRATER,    SHEIK_FIRE,             SONG_TP_FIRE
+Death Mountain Crater Grotto,         chest,          GROTTOS,                  0x1a,                   BOMBS_20
 Death Mountain Crater GS Soil,        gs,             DEATH_MOUNTAIN_CRATER,    0x80,                   GS_TOKEN
 Death Mountain Crater GS Crate,       gs,             DEATH_MOUNTAIN_CRATER,    0x87,                   GS_TOKEN
 Zora River Bean Seller,               npc,            ZORA_RIVER,               BEAN_SELLER,            MAGIC_BEAN
