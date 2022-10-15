@@ -200,10 +200,11 @@ Fire Temple Ring Jail,              chest,       TEMPLE_FIRE,   0x09, RUPEE_RED
 Fire Temple Boss Container,         collectible, LAIR_VOLVAGIA, 0x1f, HEART_CONTAINER
 Fire Temple Boss,                   special,     LAIR_VOLVAGIA, 0x49, MEDALLION_FIRE
 
-Ice Cavern HP,                      collectible, ICE_CAVERN, 0x01, HEART_PIECE
-Ice Cavern Iron Boots,              chest,       ICE_CAVERN, 0x02, BOOTS_IRON
-Ice Cavern Map,                     chest,       ICE_CAVERN, 0x00, MAP_IC
-Ice Cavern Compass,                 chest,       ICE_CAVERN, 0x01, COMPASS_IC
+Ice Cavern Iron Boots,              chest,        ICE_CAVERN, 0x02,         BOOTS_IRON
+Ice Cavern Map,                     chest,        ICE_CAVERN, 0x00,         MAP_IC
+Ice Cavern Compass,                 chest,        ICE_CAVERN, 0x01,         COMPASS_IC
+Ice Cavern HP,                      collectible,  ICE_CAVERN, 0x01,         HEART_PIECE
+Ice Cavern Sheik Song,              npc,          ICE_CAVERN, SHEIK_WATER,  SONG_TP_WATER
 
 Water Temple Under Center,          chest,       TEMPLE_WATER,  0x06, SMALL_KEY_WATER
 Water Temple Compass,               chest,       TEMPLE_WATER,  0x09, COMPASS_WATER

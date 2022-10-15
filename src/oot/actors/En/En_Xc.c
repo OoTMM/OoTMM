@@ -72,6 +72,20 @@ static void EnXc_Update_DeathMountainCrater(Actor* actor, GameState_Play* play)
     GiveItem(actor, play, gi, 10000.f, 50.f);
 }
 
+static void EnXc_Update_IceCavern(Actor* actor, GameState_Play* play)
+{
+    s16 gi;
+
+    if (checkSetEvent(actor, EV_OOT_CHK_SONG_TP_WATER))
+        return;
+
+    if (GetChestFlag(play, 0x02))
+    {
+        gi = comboOverride(OV_NPC, 0, NPC_OOT_SHEIK_WATER, GI_OOT_SONG_TP_WATER);
+        GiveItem(actor, play, gi, 10000.f, 5000.f);
+    }
+}
+
 static void EnXc_Update_TempleOfTime(Actor* this, GameState_Play* play)
 {
     s16 gi;
@@ -88,6 +102,7 @@ static void EnXc_Update_TempleOfTime(Actor* this, GameState_Play* play)
 
 static void EnXc_Init(Actor* this, GameState_Play* play)
 {
+    this->draw = NULL;
     if (gSave.age == AGE_CHILD)
     {
         ActorDestroy(this);
@@ -106,6 +121,9 @@ void EnXc_Update(Actor* this, GameState_Play* play)
         break;
     case 0x7:
         EnXc_Update_DeathMountainCrater(this, play);
+        break;
+    case 0x8:
+        EnXc_Update_IceCavern(this, play);
         break;
     case 0x9:
         EnXc_Update_TempleOfTime(this, play);

@@ -1,17 +1,12 @@
-{
-  "Ice Cavern Entrance": {
-    "dungeon": "IC",
-    "exits": {
-      "Zora Fountain": "true"
-    },
-    "events": {
-      "BLUE_FIRE": "has_bottle"
-    },
-    "locations": {
-      "Ice Cavern HP": "event(BLUE_FIRE)",
-      "Ice Cavern Iron Boots": "event(BLUE_FIRE)",
-      "Ice Cavern Map": "event(BLUE_FIRE)",
-      "Ice Cavern Compass": "event(BLUE_FIRE)"
-    }
-  }
-}
+"Ice Cavern Entrance":
+  dungeon: IC
+  exits:
+    "Zora Fountain": "true"
+  events:
+    BLUE_FIRE: "has_bottle"
+  locations:
+    "Ice Cavern Iron Boots": "event(BLUE_FIRE)"
+    "Ice Cavern Map": "event(BLUE_FIRE)"
+    "Ice Cavern Compass": "event(BLUE_FIRE)"
+    "Ice Cavern HP": "event(BLUE_FIRE)"
+    "Ice Cavern Sheik Song": "event(BLUE_FIRE)"

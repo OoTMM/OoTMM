@@ -2,9 +2,11 @@
   exits:
     "Link's House": "is_child"
     "Temple of Time": "(is_adult && event(TIME_TRAVEL)) || can_play(SONG_TP_LIGHT)"
+    "Sacred Meadow": "can_play(SONG_TP_FOREST)"
+    "Death Mountain Crater Warp": "can_play(SONG_TP_FIRE)"
+    "Lake Hylia": "can_play(SONG_TP_WATER)"
     "Graveyard Upper": "can_play(SONG_TP_SHADOW)"
     "Desert Colossus": "can_play(SONG_TP_SPIRIT)"
-    "Death Mountain Crater Warp": "can_play(SONG_TP_FIRE)"
 "Link's House":
   exits:
     "Kokiri Forest": "true"
