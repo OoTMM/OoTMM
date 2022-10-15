@@ -33,3 +33,4 @@
 "gs_soil": "is_child && has_bottle"
 "has_weapon": "(is_child && has(SWORD)) || is_adult"
 "has_iron_boots": "is_adult && has(BOOTS_IRON)"
+"has_tunic_goron": "is_adult && has(TUNIC_GORON)"

@@ -242,8 +242,11 @@
     "Kakariko": "has(ZELDA_LETTER)"
     "kakariko Rooftop": "is_child && has_explosives"
     "Death Mountain Crater Top": "has_explosives_or_hammer"
+  events:
+    BEAN_DEATH_MOUNTAIN: "can_use_beans"
   locations:
     "Death Mountain Chest": "has_explosives"
+    "Death Mountain HP": "is_adult && event(BEAN_DEATH_MOUNTAIN)"
     "Great Fairy Magic Upgrade": "has_explosives && can_play(SONG_ZELDA)"
     "Death Mountain Grotto": "hidden_grotto_storms"
     "Death Mountain GS Entrance": "has_explosives"
@@ -318,6 +321,7 @@
   locations:
     "Death Mountain Crater GS Crate": "is_child"
     "Death Mountain Crater Grotto": "has_explosives"
+    "Death Mountain Crater Alcove HP": "has_tunic_goron"
 "Death Mountain Crater Bottom":
   exits:
     "Goron City": "is_adult"
@@ -326,11 +330,12 @@
     "Great Fairy Magic Upgrade 2": "is_adult && has(HAMMER) && can_play(SONG_ZELDA)"
 "Death Mountain Crater Warp":
   exits:
-    "Fire Temple Entrance": "is_adult && has(TUNIC_GORON)"
+    "Fire Temple Entrance": "has_tunic_goron"
   events:
     BEAN_DEATH_MOUNTAIN_CRATER: "can_use_beans"
   locations:
-    "Death Mountain Crater Sheik Song": "is_adult && has(TUNIC_GORON)"
+    "Death Mountain Crater Volcano HP": "has_tunic_goron && event(BEAN_DEATH_MOUNTAIN_CRATER)"
+    "Death Mountain Crater Sheik Song": "has_tunic_goron"
     "Death Mountain Crater GS Soil": "gs_soil"
 "Gerudo Valley":
   exits:

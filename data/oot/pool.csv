@@ -52,6 +52,7 @@ Graveyard Crate HP,                   chest,          GRAVEYARD,                
 Graveyard GS Soil,                    gs,             GRAVEYARD,                0x88,                   GS_TOKEN
 Graveyard GS Wall,                    gs,             GRAVEYARD,                0x8f,                   GS_TOKEN
 Death Mountain Chest,                 chest,          DEATH_MOUNTAIN_TRAIL,     0x01,                   RUPEE_PURPLE
+Death Mountain HP,                    collectible,    DEATH_MOUNTAIN_TRAIL,     0x1e,                   HEART_PIECE
 Death Mountain Grotto,                chest,          GROTTOS,                  0x17,                   RUPEE_HUGE
 Death Mountain GS Entrance,           gs,             DEATH_MOUNTAIN_TRAIL,     0x82,                   GS_TOKEN
 Death Mountain GS Soil,               gs,             DEATH_MOUNTAIN_TRAIL,     0x81,                   GS_TOKEN
@@ -65,6 +66,8 @@ Goron City Tunic,                     npc,            GORON_CITY,               
 Goron City Bomb Bag,                  npc,            GORON_CITY,               GORON_BOMB_BAG,         BOMB_BAG
 Goron City GS Platform,               gs,             GORON_CITY,               0x85,                   GS_TOKEN
 Goron City GS Maze,                   gs,             GORON_CITY,               0x86,                   GS_TOKEN
+Death Mountain Crater Alcove HP,      collectible,    DEATH_MOUNTAIN_CRATER,    0x02,                   HEART_PIECE
+Death Mountain Crater Volcano HP,     collectible,    DEATH_MOUNTAIN_CRATER,    0x08,                   HEART_PIECE
 Death Mountain Crater Sheik Song,     npc,            DEATH_MOUNTAIN_CRATER,    SHEIK_FIRE,             SONG_TP_FIRE
 Death Mountain Crater Grotto,         chest,          GROTTOS,                  0x1a,                   BOMBS_20
 Death Mountain Crater GS Soil,        gs,             DEATH_MOUNTAIN_CRATER,    0x80,                   GS_TOKEN
