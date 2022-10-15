@@ -45,11 +45,11 @@ static void debugCheat(GameState_Play* play)
         gSave.quest.medallionSpirit = 1;
         gSave.quest.medallionForest = 1;
 
-        gSave.rupees = 999;
+        gSave.rupees = 99;
 
         gOotExtraTrade.child = 0xffff;
 
-        gSave.age = AGE_ADULT;
+        //gSave.age = AGE_ADULT;
     }
 #endif
 }

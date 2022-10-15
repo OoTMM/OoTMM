@@ -26,7 +26,7 @@
 #if defined(DEBUG)
 /* DEBUG: OoT child entrance */
 PATCH_START 0x800903e0
-  li t4,ENTRANCE_GORON
+  li t4,ENTRANCE_HYLIA
 PATCH_END
 #endif
 

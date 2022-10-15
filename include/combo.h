@@ -21,9 +21,9 @@
 
 # if defined(GAME_OOT)
 #  include <combo/oot/play.h>
-#  include <combo/oot/item_etc.h>
 #  include <combo/oot/player.h>
 #  include <combo/oot/actors/En_Item00.h>
+#  include <combo/oot/actors/Item_Etcetera.h>
 # endif
 
 # if defined(GAME_MM)

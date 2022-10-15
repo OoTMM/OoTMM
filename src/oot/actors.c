@@ -54,13 +54,7 @@ Actor* hookSpawnActor(void* const_1, GameState_Play* play, s16 actorId, float x,
     {
     case AC_ITEM00:
 #if 0
-        if ((variable & 0xff) == 0x06) /* Heart Piece */
-        {
-            actorId = AC_ITEM_CUSTOM;
-            rz = 0x1000 | ((variable >> 8) & 0x3f);
-            variable = GI_OOT_HEART_PIECE;
-        }
-        else if ((variable & 0xff) == 0x11) /* Small Key */
+        if ((variable & 0xff) == 0x11) /* Small Key */
         {
             actorId = AC_ITEM_CUSTOM;
             rz = 0x1000 | ((variable >> 8) & 0x3f);
@@ -114,24 +108,6 @@ Actor* hookSpawnActor(void* const_1, GameState_Play* play, s16 actorId, float x,
             comboSpawnCollectible(play, -1.f, 70.f, 80.f, 0x1f, GI_OOT_MASTER_SWORD);
         else
             comboSpawnCollectible(play, -1.f, 10.f, 500.f, 0x1e, GI_OOT_MEDALLION_LIGHT);
-        break;
-    case AC_ITEM_ETCETERA:
-        /* Special item */
-        switch (variable & 0xff)
-        {
-        case 0x1:
-            /* Ruto's letter */
-            actorId = AC_ITEM_CUSTOM;
-            rz = 0x2000 | EV_OOT_CHK_RUTO_LETTER;
-            variable = GI_OOT_RUTO_LETTER;
-            break;
-        case 0x7:
-            /* Fire Arrow */
-            actorId = AC_ITEM_CUSTOM;
-            rz = 0x2000 | EV_OOT_CHK_ARROW_FIRE;
-            variable = GI_OOT_ARROW_FIRE;
-            break;
-        }
         break;
     }
 
