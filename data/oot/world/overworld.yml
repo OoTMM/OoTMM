@@ -193,6 +193,7 @@
     "Windmill HP": "is_adult"
     "Windmill Song of Storms": "is_adult && has(OCARINA)"
     "Kakariko Song Shadow": "is_adult && has(MEDALLION_FOREST) && has(MEDALLION_FIRE) && has(MEDALLION_WATER)"
+    "Kakariko Impa House HP": "true"
     "Kakariko Grotto Front": "hidden_grotto_bomb && has_weapon"
     "Kakariko Grotto Back": "true"
     "Kakariko GS Roof": "gs_night && is_adult && has(HOOKSHOT)"
@@ -209,6 +210,8 @@
 "Graveyard":
   exits:
     "Kakariko": "true"
+  events:
+    BEAN_GRAVEYARD: "can_use_beans"
   locations:
     "Graveyard Dampe Game": "is_child"
     "Graveyard ReDead Tomb": "can_play(SONG_SUN)"
@@ -217,6 +220,7 @@
     "Graveyard Fairy Tomb": "true"
     "Graveyard Dampe Tomb Reward 1": "is_adult"
     "Graveyard Dampe Tomb Reward 2": "is_adult"
+    "Graveyard Crate HP": "is_adult && event(BEAN_GRAVEYARD)"
     "Graveyard GS Soil": "gs_soil"
     "Graveyard GS Wall": "gs_night && is_child && has(BOOMERANG)"
 "Graveyard Upper":

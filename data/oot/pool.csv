@@ -32,6 +32,7 @@ Kakariko Anju Bottle,                 npc,            KAKARIKO_VILLAGE,         
 Kakariko Anju Egg,                    npc,            KAKARIKO_VILLAGE,         ANJU_EGG,               POCKET_CUCCO
 Kakariko Song Shadow,                 special,        KAKARIKO_VILLAGE,         0x54,                   SONG_TP_SHADOW
 Kakariko Man on Roof,                 npc,            KAKARIKO_VILLAGE,         KAKARIKO_ROOF_MAN,      HEART_PIECE
+Kakariko Impa House HP,               collectible,    KAKARIKO_VILLAGE,         0x01,                   HEART_PIECE
 Kakariko Grotto Front,                chest,          GROTTOS,                  0x0a,                   RUPEE_HUGE
 Kakariko Grotto Back,                 chest,          GROTTOS,                  0x08,                   RUPEE_RED
 Kakariko GS Roof,                     gs,             KAKARIKO_VILLAGE,         0x8e,                   GS_TOKEN
@@ -47,6 +48,7 @@ Graveyard Royal Tomb Chest,           chest,          TOMB_ROYAL,               
 Graveyard Fairy Tomb,                 chest,          TOMB_FAIRY,               0x00,                   SHIELD
 Graveyard Dampe Tomb Reward 1,        chest,          TOMB_DAMPE_WINDMILL,      0x00,                   HOOKSHOT
 Graveyard Dampe Tomb Reward 2,        collectible,    TOMB_DAMPE_WINDMILL,      0x07,                   HEART_PIECE
+Graveyard Crate HP,                   chest,          GRAVEYARD,                0x04,                   HEART_PIECE
 Graveyard GS Soil,                    gs,             GRAVEYARD,                0x88,                   GS_TOKEN
 Graveyard GS Wall,                    gs,             GRAVEYARD,                0x8f,                   GS_TOKEN
 Darunia,                              npc,            GORON_CITY,               DARUNIA_BRACELET,       STRENGTH
