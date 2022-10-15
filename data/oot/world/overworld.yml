@@ -292,6 +292,7 @@
     "Zora Domain Waterfall Chest": "is_child"
     "Zora Domain Diving Game": "is_child"
     "Zora Domain Tunic": "is_adult && event(BLUE_FIRE)"
+    "Zora Domain GS Waterfall": "is_adult && gs_night && can_hookshot"
 "Lake Hylia":
   exits:
     "Hyrule Field": "true"
@@ -310,6 +311,9 @@
     "Ice Cavern Entrance": "is_adult"
   locations:
     "Great Fairy Farore's Wind": "has_explosives && can_play(SONG_ZELDA)"
+    "Zora Fountain GS Wall": "is_child && gs_night && can_boomerang"
+    "Zora Fountain GS Tree": "is_child"
+    "Zora Fountain GS Upper": "is_adult && gs_night && can_hammer && can_hookshot"
 "Temple of Time":
   exits:
     "Market": "is_child"

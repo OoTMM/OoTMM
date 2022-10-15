@@ -84,6 +84,10 @@ Zora River GS Near Bridge,            gs,             ZORA_RIVER,               
 Zora Domain Waterfall Chest,          chest,          ZORA_DOMAIN,              0x00,                   HEART_PIECE
 Zora Domain Diving Game,              npc,            ZORA_DOMAIN,              ZORA_DIVING_GAME,       SCALE
 Zora Domain Tunic,                    npc,            ZORA_DOMAIN,              ZORA_KING_TUNIC,        TUNIC_ZORA
+Zora Domain GS Waterfall,             gs,             ZORA_DOMAIN,              0x96,                   GS_TOKEN
+Zora Fountain GS Wall,                gs,             ZORA_FOUNTAIN,            0x92,                   GS_TOKEN
+Zora Fountain GS Tree,                gs,             ZORA_FOUNTAIN,            0x97,                   GS_TOKEN
+Zora Fountain GS Upper,               gs,             ZORA_FOUNTAIN,            0x95,                   GS_TOKEN
 Lake Hylia Underwater Bottle,         special,        LAKE_HYLIA,               0x32,                   RUTO_LETTER
 Lake Hylia Fire Arrow,                special,        LAKE_HYLIA,               0x60,                   ARROW_FIRE
 Lon Lon Ranch Malon Song,             npc,            LON_LON_RANCH,            MALON_SONG,             SONG_EPONA
