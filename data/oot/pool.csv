@@ -76,6 +76,10 @@ Death Mountain Crater GS Crate,       gs,             DEATH_MOUNTAIN_CRATER,    
 Zora River Bean Seller,               npc,            ZORA_RIVER,               BEAN_SELLER,            MAGIC_BEAN
 Zora River HP Pillar,                 collectible,    ZORA_RIVER,               0x04,                   HEART_PIECE
 Zora River HP Platform,               collectible,    ZORA_RIVER,               0x0b,                   HEART_PIECE
+Zora River GS Tree,                   gs,             ZORA_RIVER,               0x91,                   GS_TOKEN
+Zora River GS Ladder,                 gs,             ZORA_RIVER,               0x90,                   GS_TOKEN
+Zora River GS Near Grotto,            gs,             ZORA_RIVER,               0x94,                   GS_TOKEN
+Zora River GS Near Bridge,            gs,             ZORA_RIVER,               0x93,                   GS_TOKEN
 Zora Domain Waterfall Chest,          chest,          ZORA_DOMAIN,              0x00,                   HEART_PIECE
 Zora Domain Diving Game,              npc,            ZORA_DOMAIN,              ZORA_DIVING_GAME,       SCALE
 Zora Domain Tunic,                    npc,            ZORA_DOMAIN,              ZORA_KING_TUNIC,        TUNIC_ZORA
