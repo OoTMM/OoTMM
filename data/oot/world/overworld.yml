@@ -235,6 +235,7 @@
     "Skulltula House 10 Tokens": "has(GS_TOKEN, 10)"
     "Skulltula House 20 Tokens": "has(GS_TOKEN, 20)"
     "Skulltula House 30 Tokens": "has(GS_TOKEN, 30)"
+    "Skulltula House 40 Tokens": "has(GS_TOKEN, 40)"
 "Death Mountain":
   exits:
     "Goron City": "true"
