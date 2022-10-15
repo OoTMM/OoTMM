@@ -215,7 +215,8 @@
     "Graveyard Royal Tomb Song": "can_play(SONG_ZELDA) && has(SWORD)"
     "Graveyard Royal Tomb Chest": "has_fire"
     "Graveyard Fairy Tomb": "true"
-    "Graveyard Dampe Tomb Hookshot": "is_adult"
+    "Graveyard Dampe Tomb Reward 1": "is_adult"
+    "Graveyard Dampe Tomb Reward 2": "is_adult"
     "Graveyard GS Soil": "gs_soil"
     "Graveyard GS Wall": "gs_night && is_child && has(BOOMERANG)"
 "Graveyard Upper":

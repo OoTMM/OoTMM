@@ -45,7 +45,8 @@ Graveyard ReDead Tomb,                chest,          TOMB_REDEAD,              
 Graveyard Royal Tomb Song,            npc,            TOMB_ROYAL,               ROYAL_TOMB_SONG,        SONG_SUN
 Graveyard Royal Tomb Chest,           chest,          TOMB_ROYAL,               0x00,                   BOMBS_5
 Graveyard Fairy Tomb,                 chest,          TOMB_FAIRY,               0x00,                   SHIELD
-Graveyard Dampe Tomb Hookshot,        chest,          TOMB_DAMPE_WINDMILL,      0x00,                   HOOKSHOT
+Graveyard Dampe Tomb Reward 1,        chest,          TOMB_DAMPE_WINDMILL,      0x00,                   HOOKSHOT
+Graveyard Dampe Tomb Reward 2,        collectible,    TOMB_DAMPE_WINDMILL,      0x07,                   HEART_PIECE
 Graveyard GS Soil,                    gs,             GRAVEYARD,                0x88,                   GS_TOKEN
 Graveyard GS Wall,                    gs,             GRAVEYARD,                0x8f,                   GS_TOKEN
 Darunia,                              npc,            GORON_CITY,               DARUNIA_BRACELET,       STRENGTH
