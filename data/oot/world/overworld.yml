@@ -255,6 +255,8 @@
   locations:
     "Darunia": "can_play(SONG_ZELDA) && can_play(SONG_SARIA)"
     "Goron City Tunic": "is_adult && has_explosives"
+    "Goron City GS Platform": "is_adult && has_ranged_weapon"
+    "Goron City GS Maze": "is_child && has_explosives"
 "Zora River":
   exits:
     "Hyrule Field": "true"

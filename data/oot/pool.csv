@@ -51,13 +51,15 @@ Graveyard Dampe Tomb Reward 2,        collectible,    TOMB_DAMPE_WINDMILL,      
 Graveyard Crate HP,                   chest,          GRAVEYARD,                0x04,                   HEART_PIECE
 Graveyard GS Soil,                    gs,             GRAVEYARD,                0x88,                   GS_TOKEN
 Graveyard GS Wall,                    gs,             GRAVEYARD,                0x8f,                   GS_TOKEN
-Darunia,                              npc,            GORON_CITY,               DARUNIA_BRACELET,       STRENGTH
-Goron City Tunic,                     npc,            GORON_CITY,               GORON_LINK_TUNIC,       TUNIC_GORON
 Death Mountain Chest,                 chest,          DEATH_MOUNTAIN_TRAIL,     0x01,                   RUPEE_PURPLE
 Death Mountain GS Entrance,           gs,             DEATH_MOUNTAIN_TRAIL,     0x82,                   GS_TOKEN
 Death Mountain GS Soil,               gs,             DEATH_MOUNTAIN_TRAIL,     0x81,                   GS_TOKEN
 Death Mountain GS Above Dodongo,      gs,             DEATH_MOUNTAIN_TRAIL,     0x83,                   GS_TOKEN
 Death Mountain GS Before Climb,       gs,             DEATH_MOUNTAIN_TRAIL,     0x84,                   GS_TOKEN
+Darunia,                              npc,            GORON_CITY,               DARUNIA_BRACELET,       STRENGTH
+Goron City Tunic,                     npc,            GORON_CITY,               GORON_LINK_TUNIC,       TUNIC_GORON
+Goron City GS Platform,               gs,             GORON_CITY,               0x85,                   GS_TOKEN
+Goron City GS Maze,                   gs,             GORON_CITY,               0x86,                   GS_TOKEN
 Death Mountain Crater Sheik Song,     npc,            DEATH_MOUNTAIN_CRATER,    SHEIK_FIRE,             SONG_TP_FIRE
 Zora River Bean Seller,               npc,            ZORA_RIVER,               BEAN_SELLER,            MAGIC_BEAN
 Zora River HP Pillar,                 collectible,    ZORA_RIVER,               0x04,                   HEART_PIECE
