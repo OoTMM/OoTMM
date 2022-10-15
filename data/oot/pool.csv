@@ -94,6 +94,11 @@ Zora Fountain GS Tree,                gs,             ZORA_FOUNTAIN,            
 Zora Fountain GS Upper,               gs,             ZORA_FOUNTAIN,            0x95,                   GS_TOKEN
 Lake Hylia Underwater Bottle,         special,        LAKE_HYLIA,               0x32,                   RUTO_LETTER
 Lake Hylia Fire Arrow,                special,        LAKE_HYLIA,               0x60,                   ARROW_FIRE
+Lake Hylia GS Lab Wall,               gs,             LAKE_HYLIA,               0x9a,                   GS_TOKEN
+Lake Hylia GS Island,                 gs,             LAKE_HYLIA,               0x99,                   GS_TOKEN
+Lake Hylia GS Soil,                   gs,             LAKE_HYLIA,               0x98,                   GS_TOKEN
+Lake Hylia GS Big Tree,               gs,             LAKE_HYLIA,               0x9c,                   GS_TOKEN
+Lake Hylia GS Lab Crate,              gs,             LABORATORY,               0x9b,                   GS_TOKEN
 Lon Lon Ranch Malon Song,             npc,            LON_LON_RANCH,            MALON_SONG,             SONG_EPONA
 Lon Lon Ranch Silo HP,                collectible,    RANCH_HOUSE_SILO,         0x01,                   HEART_PIECE
 Lon Lon Ranch Talon Bottle,           npc,            RANCH_HOUSE_SILO,         TALON_BOTTLE,           MILK_BOTTLE
@@ -132,6 +137,7 @@ Skulltula House 10 Tokens,            npc,            HOUSE_OF_SKULLTULA,       
 Skulltula House 20 Tokens,            npc,            HOUSE_OF_SKULLTULA,       GS_20,                  STONE_OF_AGONY
 Skulltula House 30 Tokens,            npc,            HOUSE_OF_SKULLTULA,       GS_30,                  WALLET
 Skulltula House 40 Tokens,            npc,            HOUSE_OF_SKULLTULA,       GS_40,                  BOMBCHUS_10
+Skulltula House 50 Tokens,            npc,            HOUSE_OF_SKULLTULA,       GS_50,                  HEART_PIECE
 
 Great Fairy Magic Upgrade,      collectible,   GREAT_FAIRY_FOUNTAIN_UPGRADES, 0x00, MAGIC_UPGRADE
 Great Fairy Magic Upgrade 2,    collectible,   GREAT_FAIRY_FOUNTAIN_UPGRADES, 0x01, MAGIC_UPGRADE

@@ -238,6 +238,7 @@
     "Skulltula House 20 Tokens": "has(GS_TOKEN, 20)"
     "Skulltula House 30 Tokens": "has(GS_TOKEN, 30)"
     "Skulltula House 40 Tokens": "has(GS_TOKEN, 40)"
+    "Skulltula House 50 Tokens": "has(GS_TOKEN, 50)"
 "Death Mountain":
   exits:
     "Goron City": "true"
@@ -301,6 +302,7 @@
   exits:
     "Hyrule Field": "true"
     "Zora Domain": "is_child && has(SCALE)"
+    "Laboratory": "true"
     "Water Temple Entrance": "is_adult && has(BOOTS_IRON) && has(TUNIC_ZORA) && has(HOOKSHOT)"
   events:
     SCARECROW_CHILD: "is_child && has(OCARINA)"
@@ -308,6 +310,15 @@
   locations:
     "Lake Hylia Underwater Bottle": "has(SCALE)"
     "Lake Hylia Fire Arrow": "can_use_bow && (event(WATER_TEMPLE_CLEARED) || (can_longshot && scarecrow_hookshot))"
+    "Lake Hylia GS Lab Wall": "is_child && gs_night && can_boomerang"
+    "Lake Hylia GS Island": "is_child && gs_night"
+    "Lake Hylia GS Soil": "gs_soil"
+    "Lake Hylia GS Big Tree": "is_adult && gs_night && can_longshot"
+"Laboratory":
+  exits:
+    "Lake Hylia": "true"
+  locations:
+    "Lake Hylia GS Lab Crate": "is_adult && has_iron_boots && can_hookshot"
 "Zora Fountain":
   exits:
     "Zora Domain": "event(KING_ZORA_LETTER)"
