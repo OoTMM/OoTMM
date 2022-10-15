@@ -57,6 +57,9 @@ Death Mountain GS Soil,               gs,             DEATH_MOUNTAIN_TRAIL,     
 Death Mountain GS Above Dodongo,      gs,             DEATH_MOUNTAIN_TRAIL,     0x83,                   GS_TOKEN
 Death Mountain GS Before Climb,       gs,             DEATH_MOUNTAIN_TRAIL,     0x84,                   GS_TOKEN
 Darunia,                              npc,            GORON_CITY,               DARUNIA_BRACELET,       STRENGTH
+Goron City Maze Center 1,             chest,          GORON_CITY,               0x02,                   RUPEE_PURPLE
+Goron City Maze Center 2,             chest,          GORON_CITY,               0x01,                   RUPEE_PURPLE
+Goron City Maze Left,                 chest,          GORON_CITY,               0x00,                   RUPEE_HUGE
 Goron City Tunic,                     npc,            GORON_CITY,               GORON_LINK_TUNIC,       TUNIC_GORON
 Goron City GS Platform,               gs,             GORON_CITY,               0x85,                   GS_TOKEN
 Goron City GS Maze,                   gs,             GORON_CITY,               0x86,                   GS_TOKEN
