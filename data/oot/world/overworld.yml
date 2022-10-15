@@ -276,6 +276,8 @@
     "Zora River Bean Seller": "is_child"
     "Zora River HP Pillar": "true"
     "Zora River HP Platform": "true"
+    "Zora River Frogs Storms": "is_child && can_play(SONG_STORMS)"
+    "Zora River Frogs Game": "is_child && can_play(SONG_ZELDA) && can_play(SONG_SARIA) && can_play(SONG_EPONA) && can_play(SONG_SUN) && can_play(SONG_TIME) && can_play(SONG_STORMS)"
     "Zora River Grotto": "true"
     "Zora River GS Tree": "is_child"
     "Zora River GS Ladder": "is_child && gs_night && has_ranged_weapon"

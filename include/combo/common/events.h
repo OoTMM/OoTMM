@@ -39,6 +39,8 @@
 #define EV_OOT_CHK_SARIA_OCARINA            0xc1
 #define EV_OOT_CHK_LIGHT_ARROW              0xc4
 #define EV_OOT_CHK_MEDALLION_SPIRIT         0xc8
+#define EV_OOT_CHK_FROGS_GAME               0xd0
+
 #define EV_OOT_ITEM_DAMPE_GRAVEYARD_HP      0x1c
 
 /* Custom flags that seems unused */

@@ -73,9 +73,11 @@ Death Mountain Crater Sheik Song,     npc,            DEATH_MOUNTAIN_CRATER,    
 Death Mountain Crater Grotto,         chest,          GROTTOS,                  0x1a,                   BOMBS_20
 Death Mountain Crater GS Soil,        gs,             DEATH_MOUNTAIN_CRATER,    0x80,                   GS_TOKEN
 Death Mountain Crater GS Crate,       gs,             DEATH_MOUNTAIN_CRATER,    0x87,                   GS_TOKEN
-Zora River Bean Seller,               npc,            ZORA_RIVER,               BEAN_SELLER,            MAGIC_BEAN
 Zora River HP Pillar,                 collectible,    ZORA_RIVER,               0x04,                   HEART_PIECE
 Zora River HP Platform,               collectible,    ZORA_RIVER,               0x0b,                   HEART_PIECE
+Zora River Bean Seller,               npc,            ZORA_RIVER,               BEAN_SELLER,            MAGIC_BEAN
+Zora River Frogs Storms,              npc,            ZORA_RIVER,               FROGS_STORMS,           HEART_PIECE
+Zora River Frogs Game,                npc,            ZORA_RIVER,               FROGS_GAME,             HEART_PIECE
 Zora River Grotto,                    chest,          GROTTOS,                  0x09,                   RUPEE_RED
 Zora River GS Tree,                   gs,             ZORA_RIVER,               0x91,                   GS_TOKEN
 Zora River GS Ladder,                 gs,             ZORA_RIVER,               0x90,                   GS_TOKEN
