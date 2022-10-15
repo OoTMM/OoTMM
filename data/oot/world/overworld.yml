@@ -257,6 +257,7 @@
   locations:
     "Darunia": "can_play(SONG_ZELDA) && can_play(SONG_SARIA)"
     "Goron City Tunic": "is_adult && has_explosives"
+    "Goron City Bomb Bag": "is_child && has_explosives"
     "Goron City Maze Center 1": "has_explosives"
     "Goron City Maze Center 2": "has_explosives"
     "Goron City Maze Left": "can_hammer"

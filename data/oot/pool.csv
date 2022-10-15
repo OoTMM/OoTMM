@@ -62,6 +62,7 @@ Goron City Maze Center 1,             chest,          GORON_CITY,               
 Goron City Maze Center 2,             chest,          GORON_CITY,               0x01,                   RUPEE_PURPLE
 Goron City Maze Left,                 chest,          GORON_CITY,               0x00,                   RUPEE_HUGE
 Goron City Tunic,                     npc,            GORON_CITY,               GORON_LINK_TUNIC,       TUNIC_GORON
+Goron City Bomb Bag,                  npc,            GORON_CITY,               GORON_BOMB_BAG,         BOMB_BAG
 Goron City GS Platform,               gs,             GORON_CITY,               0x85,                   GS_TOKEN
 Goron City GS Maze,                   gs,             GORON_CITY,               0x86,                   GS_TOKEN
 Death Mountain Crater Sheik Song,     npc,            DEATH_MOUNTAIN_CRATER,    SHEIK_FIRE,             SONG_TP_FIRE
