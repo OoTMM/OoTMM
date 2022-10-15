@@ -276,6 +276,7 @@
     "Zora River Bean Seller": "is_child"
     "Zora River HP Pillar": "true"
     "Zora River HP Platform": "true"
+    "Zora River Grotto": "true"
     "Zora River GS Tree": "is_child"
     "Zora River GS Ladder": "is_child && gs_night && has_ranged_weapon"
     "Zora River GS Near Grotto": "is_adult && gs_night && can_hookshot"
