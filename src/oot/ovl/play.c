@@ -152,12 +152,6 @@ void hookPlay_Init(GameState_Play* play)
         comboSpawnSpecial(play, -1191.f, -220.f, 1650.f, EV_OOT_CHK_SARIA_OCARINA, GI_OOT_OCARINA_FAIRY);
     }
 
-    /* Sun Song */
-    if (play->sceneId == SCE_OOT_TOMB_ROYAL)
-    {
-        comboSpawnSpecial(play, 0.f, 70.f, -1160.f, EV_OOT_CHK_SONG_SUN, GI_OOT_SONG_SUN);
-    }
-
     /* Saria's Song */
     if (play->sceneId == SCE_OOT_SACRED_FOREST_MEADOW && gSave.age == AGE_CHILD && GetEventChk(EV_OOT_CHK_ZELDA_LETTER))
     {

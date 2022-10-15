@@ -42,7 +42,7 @@ Kakariko GS Bazaar,                   gs,             KAKARIKO_VILLAGE,         
 Kakariko GS Ladder,                   gs,             KAKARIKO_VILLAGE,         0x8a,                   GS_TOKEN
 Graveyard Dampe Game,                 collectible,    GRAVEYARD,                0x1f,                   HEART_PIECE
 Graveyard ReDead Tomb,                chest,          TOMB_REDEAD,              0x00,                   HEART_PIECE
-Graveyard Royal Tomb Song,            special,        TOMB_ROYAL,               0x5a,                   SONG_SUN
+Graveyard Royal Tomb Song,            npc,            TOMB_ROYAL,               ROYAL_TOMB_SONG,        SONG_SUN
 Graveyard Royal Tomb Chest,           chest,          TOMB_ROYAL,               0x00,                   BOMBS_5
 Graveyard Fairy Tomb,                 chest,          TOMB_FAIRY,               0x00,                   SHIELD
 Graveyard Dampe Tomb Hookshot,        chest,          TOMB_DAMPE_WINDMILL,      0x00,                   HOOKSHOT
