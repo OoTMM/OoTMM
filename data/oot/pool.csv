@@ -40,6 +40,7 @@ Kakariko GS Tree,                     gs,             KAKARIKO_VILLAGE,         
 Kakariko GS House of Skulltula,       gs,             KAKARIKO_VILLAGE,         0x8c,                   GS_TOKEN
 Kakariko GS Bazaar,                   gs,             KAKARIKO_VILLAGE,         0x89,                   GS_TOKEN
 Kakariko GS Ladder,                   gs,             KAKARIKO_VILLAGE,         0x8a,                   GS_TOKEN
+Graveyard Dampe Game,                 collectible,    GRAVEYARD,                0x1f,                   HEART_PIECE
 Graveyard ReDead Tomb,                chest,          TOMB_REDEAD,              0x00,                   HEART_PIECE
 Graveyard Royal Tomb Song,            special,        TOMB_ROYAL,               0x5a,                   SONG_SUN
 Graveyard Royal Tomb Chest,           chest,          TOMB_ROYAL,               0x00,                   BOMBS_5

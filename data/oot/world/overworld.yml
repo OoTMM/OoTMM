@@ -210,6 +210,7 @@
   exits:
     "Kakariko": "true"
   locations:
+    "Graveyard Dampe Game": "is_child"
     "Graveyard ReDead Tomb": "can_play(SONG_SUN)"
     "Graveyard Royal Tomb Song": "can_play(SONG_ZELDA) && has(SWORD)"
     "Graveyard Royal Tomb Chest": "has_fire"

@@ -100,3 +100,9 @@ Message_IsClosed = 0x80022ad0;
 
 OcarinaAction =  0x800dd400;
 OcarinaAction2 = 0x800dd430;
+
+gModelView = 0x80121204;
+
+MatrixScaleMV = 0x800aa8fc;
+
+RandFloat = 0x800cdccc;

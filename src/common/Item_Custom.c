@@ -161,7 +161,7 @@ static void ItemCustom_Draw(Actor_ItemCustom* item, GameState_Play* play)
     const GetItem* gi;
 
     gi = kExtendedGetItems + item->gi - 1;
-    comboDrawObject(play, &item->base, gi->objectId, gi->shaderId);
+    comboDrawObject(play, &item->base, gi->objectId, gi->shaderId, 1.f);
 }
 
 ActorInit gActorInit_ItemCustom = {
