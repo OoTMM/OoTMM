@@ -1,9 +1,10 @@
 "SPAWN":
   exits:
     "Link's House": "is_child"
-    "Temple of Time": "is_adult && event(TIME_TRAVEL)"
+    "Temple of Time": "(is_adult && event(TIME_TRAVEL)) || can_play(SONG_TP_LIGHT)"
     "Graveyard Upper": "can_play(SONG_TP_SHADOW)"
     "Desert Colossus": "can_play(SONG_TP_SPIRIT)"
+    "Death Mountain Crater Warp": "can_play(SONG_TP_FIRE)"
 "Link's House":
   exits:
     "Kokiri Forest": "true"
@@ -301,12 +302,14 @@
 "Death Mountain Crater Bottom":
   exits:
     "Goron City": "is_adult"
-    "Death Mountain Crater Warp": "is_adult && has(HOOKSHOT)"
+    "Death Mountain Crater Warp": "is_adult && (has(HOOKSHOT) || has(BOOTS_HOVER))"
   locations:
     "Great Fairy Magic Upgrade 2": "is_adult && has(HAMMER) && can_play(SONG_ZELDA)"
 "Death Mountain Crater Warp":
   exits:
     "Fire Temple Entrance": "is_adult && has(TUNIC_GORON)"
+  locations:
+    "Death Mountain Crater Sheik Song": "is_adult && has(TUNIC_GORON)"
 "Gerudo Valley":
   exits:
     "Lake Hylia": "true"

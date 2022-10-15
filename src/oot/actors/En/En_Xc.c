@@ -45,6 +45,33 @@ static void EnXc_Update_ForestMeadow(Actor* actor, GameState_Play* play)
     }
 }
 
+static void EnXc_Update_DeathMountainCrater(Actor* actor, GameState_Play* play)
+{
+    s16 gi;
+    float x;
+    float y;
+    float z;
+
+    if (checkSetEvent(actor, EV_OOT_CHK_SONG_TP_FIRE))
+        return;
+
+    x = LINK.base.position.x;
+    y = LINK.base.position.y;
+    z = LINK.base.position.z;
+
+    if (x <= -784.f || x >= -584.f)
+        return;
+
+    if (y <= 447.f || y >= 647.f)
+        return;
+
+    if (z <= -446.f || z >= -246.f)
+        return;
+
+    gi = comboOverride(OV_NPC, 0, NPC_OOT_SHEIK_FIRE, GI_OOT_SONG_TP_FIRE);
+    GiveItem(actor, play, gi, 10000.f, 50.f);
+}
+
 static void EnXc_Update_TempleOfTime(Actor* this, GameState_Play* play)
 {
     s16 gi;
@@ -76,6 +103,9 @@ void EnXc_Update(Actor* this, GameState_Play* play)
         break;
     case 0x6:
         EnXc_Update_ForestMeadow(this, play);
+        break;
+    case 0x7:
+        EnXc_Update_DeathMountainCrater(this, play);
         break;
     case 0x9:
         EnXc_Update_TempleOfTime(this, play);

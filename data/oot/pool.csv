@@ -54,6 +54,7 @@ Graveyard GS Wall,                    gs,             GRAVEYARD,                
 Darunia,                              npc,            GORON_CITY,               DARUNIA_BRACELET,       STRENGTH
 Goron City Tunic,                     npc,            GORON_CITY,               GORON_LINK_TUNIC,       TUNIC_GORON
 Death Mountain Chest,                 chest,          DEATH_MOUNTAIN_TRAIL,     0x01,                   RUPEE_PURPLE
+Death Mountain Crater Sheik Song,     npc,            DEATH_MOUNTAIN_CRATER,    SHEIK_FIRE,             SONG_TP_FIRE
 Zora River Bean Seller,               npc,            ZORA_RIVER,               BEAN_SELLER,            MAGIC_BEAN
 Zora River HP Pillar,                 collectible,    ZORA_RIVER,               0x04,                   HEART_PIECE
 Zora River HP Platform,               collectible,    ZORA_RIVER,               0x0b,                   HEART_PIECE
