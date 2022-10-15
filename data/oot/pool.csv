@@ -85,6 +85,8 @@ Zora Domain Waterfall Chest,          chest,          ZORA_DOMAIN,              
 Zora Domain Diving Game,              npc,            ZORA_DOMAIN,              ZORA_DIVING_GAME,       SCALE
 Zora Domain Tunic,                    npc,            ZORA_DOMAIN,              ZORA_KING_TUNIC,        TUNIC_ZORA
 Zora Domain GS Waterfall,             gs,             ZORA_DOMAIN,              0x96,                   GS_TOKEN
+Zora Fountain Iceberg HP,             collectible,    ZORA_FOUNTAIN,            0x01,                   HEART_PIECE
+Zora Fountain Bottom HP,              collectible,    ZORA_FOUNTAIN,            0x14,                   HEART_PIECE
 Zora Fountain GS Wall,                gs,             ZORA_FOUNTAIN,            0x92,                   GS_TOKEN
 Zora Fountain GS Tree,                gs,             ZORA_FOUNTAIN,            0x97,                   GS_TOKEN
 Zora Fountain GS Upper,               gs,             ZORA_FOUNTAIN,            0x95,                   GS_TOKEN
