@@ -20,11 +20,12 @@
 #define ENTRANCE_ZELDA        0x400
 #define ENTRANCE_RANCH        0x157
 #define ENTRANCE_RT           0x02d
+#define ENTRANCE_WINDMILL     0x453
 
 #if defined(DEBUG)
 /* DEBUG: OoT child entrance */
 PATCH_START 0x800903e0
-  li t4,ENTRANCE_RT
+  li t4,ENTRANCE_WINDMILL
 PATCH_END
 #endif
 
