@@ -234,6 +234,7 @@
   locations:
     "Skulltula House 10 Tokens": "has(GS_TOKEN, 10)"
     "Skulltula House 20 Tokens": "has(GS_TOKEN, 20)"
+    "Skulltula House 30 Tokens": "has(GS_TOKEN, 30)"
 "Death Mountain":
   exits:
     "Goron City": "true"
@@ -243,6 +244,10 @@
   locations:
     "Death Mountain Chest": "has_explosives"
     "Great Fairy Magic Upgrade": "has_explosives && can_play(SONG_ZELDA)"
+    "Death Mountain GS Entrance": "has_explosives"
+    "Death Mountain GS Soil": "gs_soil"
+    "Death Mountain GS Above Dodongo":  "gs_night && is_adult"
+    "Death Mountain GS Before Climb": "gs_night && is_adult && can_hammer"
 "Goron City":
   exits:
     "Death Mountain": "true"

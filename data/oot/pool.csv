@@ -54,6 +54,10 @@ Graveyard GS Wall,                    gs,             GRAVEYARD,                
 Darunia,                              npc,            GORON_CITY,               DARUNIA_BRACELET,       STRENGTH
 Goron City Tunic,                     npc,            GORON_CITY,               GORON_LINK_TUNIC,       TUNIC_GORON
 Death Mountain Chest,                 chest,          DEATH_MOUNTAIN_TRAIL,     0x01,                   RUPEE_PURPLE
+Death Mountain GS Entrance,           gs,             DEATH_MOUNTAIN_TRAIL,     0x82,                   GS_TOKEN
+Death Mountain GS Soil,               gs,             DEATH_MOUNTAIN_TRAIL,     0x81,                   GS_TOKEN
+Death Mountain GS Above Dodongo,      gs,             DEATH_MOUNTAIN_TRAIL,     0x83,                   GS_TOKEN
+Death Mountain GS Before Climb,       gs,             DEATH_MOUNTAIN_TRAIL,     0x84,                   GS_TOKEN
 Death Mountain Crater Sheik Song,     npc,            DEATH_MOUNTAIN_CRATER,    SHEIK_FIRE,             SONG_TP_FIRE
 Zora River Bean Seller,               npc,            ZORA_RIVER,               BEAN_SELLER,            MAGIC_BEAN
 Zora River HP Pillar,                 collectible,    ZORA_RIVER,               0x04,                   HEART_PIECE
@@ -99,6 +103,7 @@ Windmill Song of Storms,              npc,            TOMB_DAMPE_WINDMILL,      
 Desert Colossus Song Spirit,          special,        DESERT_COLOSSUS,          0xac,                   SONG_TP_SPIRIT
 Skulltula House 10 Tokens,            npc,            HOUSE_OF_SKULLTULA,       GS_10,                  WALLET
 Skulltula House 20 Tokens,            npc,            HOUSE_OF_SKULLTULA,       GS_20,                  STONE_OF_AGONY
+Skulltula House 30 Tokens,            npc,            HOUSE_OF_SKULLTULA,       GS_30,                  WALLET
 
 Great Fairy Magic Upgrade,      collectible,   GREAT_FAIRY_FOUNTAIN_UPGRADES, 0x00, MAGIC_UPGRADE
 Great Fairy Magic Upgrade 2,    collectible,   GREAT_FAIRY_FOUNTAIN_UPGRADES, 0x01, MAGIC_UPGRADE
