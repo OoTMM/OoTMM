@@ -304,6 +304,7 @@
     "Zora Domain": "is_child && has(SCALE)"
     "Laboratory": "true"
     "Water Temple Entrance": "is_adult && has(BOOTS_IRON) && has(TUNIC_ZORA) && has(HOOKSHOT)"
+    "Fishing Pond": "is_child || event(WATER_TEMPLE_CLEARED) || (can_longshot && scarecrow_hookshot)"
   events:
     SCARECROW_CHILD: "is_child && has(OCARINA)"
     SCARECROW: "is_adult && event(SCARECROW_CHILD)"
@@ -319,6 +320,12 @@
     "Lake Hylia": "true"
   locations:
     "Lake Hylia GS Lab Crate": "is_adult && has_iron_boots && can_hookshot"
+"Fishing Pond":
+  exits:
+    "Lake Hylia": "true"
+  locations:
+    "Fishing Pond Child": "is_child"
+    "Fishing Pond Adult": "is_adult"
 "Zora Fountain":
   exits:
     "Zora Domain": "event(KING_ZORA_LETTER)"
