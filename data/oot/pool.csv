@@ -136,6 +136,10 @@ Temple of Time Sheik Song,            npc,            TEMPLE_OF_TIME,           
 Temple of Time Light Arrows,          npc,            TEMPLE_OF_TIME,           ZELDA_LIGHT_ARROW,      ARROW_LIGHT
 Windmill HP,                          collectible,    TOMB_DAMPE_WINDMILL,      0x01,                   HEART_PIECE
 Windmill Song of Storms,              npc,            TOMB_DAMPE_WINDMILL,      SONG_STORMS,            SONG_STORMS
+Gerudo Valley GS Soil,                gs,             GERUDO_VALLEY,            0xa0,                   GS_TOKEN
+Gerudo Valley GS Wall,                gs,             GERUDO_VALLEY,            0xa1,                   GS_TOKEN
+Gerudo Valley GS Tent,                gs,             GERUDO_VALLEY,            0xa3,                   GS_TOKEN
+Gerudo Valley GS Pillar,              gs,             GERUDO_VALLEY,            0xa2,                   GS_TOKEN
 Desert Colossus Song Spirit,          special,        DESERT_COLOSSUS,          0xac,                   SONG_TP_SPIRIT
 Skulltula House 10 Tokens,            npc,            HOUSE_OF_SKULLTULA,       GS_10,                  WALLET
 Skulltula House 20 Tokens,            npc,            HOUSE_OF_SKULLTULA,       GS_20,                  STONE_OF_AGONY

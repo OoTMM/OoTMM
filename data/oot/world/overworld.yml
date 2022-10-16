@@ -380,10 +380,16 @@
     "Lake Hylia": "true"
     "Hyrule Field": "true"
     "Gerudo Valley After Bridge": "can_longshot || (is_adult && event(EPONA))"
+  locations:
+    "Gerudo Valley GS Soil": "gs_soil"
+    "Gerudo Valley GS Wall": "is_child && gs_night && can_boomerang"
 "Gerudo Valley After Bridge":
   exits:
     "Lake Hylia": "true"
     "Gerudo Fortress Exterior": "true"
+  locations:
+    "Gerudo Valley GS Tent": "is_adult && gs_night && can_hookshot"
+    "Gerudo Valley GS Pillar": "is_adult && gs_night && can_hookshot"
 "Gerudo Fortress Exterior":
   exits:
     "Gerudo Fortress": "can_hookshot"
