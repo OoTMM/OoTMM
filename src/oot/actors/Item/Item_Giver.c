@@ -16,6 +16,11 @@ static int ItemGiver_Common(Actor* this, GameState_Play* play, s16 gi, int ev)
     }
 }
 
+static void ItemGiver_SariaOcarina(Actor* this, GameState_Play* play)
+{
+    ItemGiver_Common(this, play, GI_OOT_OCARINA_FAIRY, EV_OOT_CHK_SARIA_OCARINA);
+}
+
 static void ItemGiver_SheikKakariko(Actor* this, GameState_Play* play)
 {
     if (ItemGiver_Common(this, play, GI_OOT_SONG_TP_SHADOW, EV_OOT_CHK_SONG_TP_SHADOW))
@@ -38,6 +43,9 @@ static void ItemGiver_Init(Actor* this, GameState_Play* play)
 {
     switch (this->variable)
     {
+    case NPC_OOT_SARIA_OCARINA:
+        this->update = ItemGiver_SariaOcarina;
+        break;
     case NPC_OOT_SHEIK_SHADOW:
         this->update = ItemGiver_SheikKakariko;
         break;
@@ -79,6 +87,12 @@ static void spawnGiver(GameState_Play* play, u16 npcId)
 
 void comboSpawnItemGivers(GameState_Play* play)
 {
+    /* Saria's Ocarina */
+    if (gSave.entrance == 0x05e0 && !GetEventChk(EV_OOT_CHK_SARIA_OCARINA))
+    {
+        spawnGiver(play, NPC_OOT_SARIA_OCARINA);
+    }
+
     /* Sheik in Kakariko */
     if (gSave.entrance == 0x0db && gSave.quest.medallionForest && gSave.quest.medallionFire && gSave.quest.medallionWater && gSave.age == AGE_ADULT && !GetEventChk(EV_OOT_CHK_SONG_TP_SHADOW))
     {
