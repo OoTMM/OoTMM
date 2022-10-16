@@ -68,7 +68,7 @@ void ItemOcarina_Draw(Actor* this, GameState_Play* play)
     s16 gi;
 
     gi = comboOverride(OV_NPC, 0, NPC_OOT_OCARINA_TIME_ITEM, GI_OOT_OCARINA_TIME);
-    comboDrawGI(play, this, gi, 1.f);
+    comboDrawGI(play, this, gi);
 }
 
 PATCH_FUNC(0x80a2b7c0, ItemOcarina_Handler);

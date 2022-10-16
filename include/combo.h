@@ -106,8 +106,8 @@ void*   comboGetObject(u16 objectId);
 u32     comboLoadObject(void* buffer, u16 objectId);
 
 /* Draw */
-void comboDrawObject(GameState_Play* play, Actor* actor, u16 objectId, u16 shaderId, float scale);
-void comboDrawGI(GameState_Play* play, Actor* actor, int gi, float scale);
+void comboDrawObject(GameState_Play* play, Actor* actor, u16 objectId, u16 shaderId);
+void comboDrawGI(GameState_Play* play, Actor* actor, int gi);
 
 /* Event */
 void comboOotSetEventChk(u16 flag);

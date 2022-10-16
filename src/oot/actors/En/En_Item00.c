@@ -20,7 +20,8 @@ void EnItem00_DrawHeartPiece(Actor_EnItem00* this, GameState_Play* play)
     s16 gi;
 
     gi = comboOverride(OV_COLLECTIBLE, play->sceneId, this->collectibleFlag, GI_OOT_HEART_PIECE);
-    comboDrawGI(play, &this->base, gi, 12.5f);
+    MatrixScaleMV(12.5f, 12.5f, 12.5f, MAT_MUL);
+    comboDrawGI(play, &this->base, gi);
 }
 
 PATCH_FUNC(0x80013498, EnItem00_DrawHeartPiece);
