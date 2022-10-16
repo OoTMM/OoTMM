@@ -5,7 +5,7 @@ import { WorldCheck } from './logic/world';
 
 const OFFSETS = {
   oot: 0x1000,
-  mm: 0x2000,
+  mm: 0x3000,
 };
 
 const SUBSTITUTIONS: {[k: string]: string} = {
