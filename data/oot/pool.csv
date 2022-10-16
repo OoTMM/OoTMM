@@ -12,7 +12,7 @@ Kokiri Forest GS Night Adult,         gs,             KOKIRI_FOREST,            
 Malon Egg,                            npc,            HYRULE_CASTLE,            MALON_EGG,              CHICKEN
 Zelda's Letter,                       npc,            CASTLE_COURTYARD,         ZELDA_LETTER,           ZELDA_LETTER
 Zelda's Song,                         npc,            CASTLE_COURTYARD,         ZELDA_SONG,             SONG_ZELDA
-Lost Woods Bridge,                    special,        LOST_WOODS,               0xc1,                   OCARINA
+Lost Woods Bridge,                    npc,            LOST_WOODS,               SARIA_OCARINA,          OCARINA
 Lost Woods Target,                    npc,            LOST_WOODS,               LOST_WOODS_TARGET,      SLINGSHOT
 Lost Woods Skull Kid,                 npc,            LOST_WOODS,               LOST_WOODS_SKULL_KID,   HEART_PIECE
 Lost Woods Memory Game,               npc,            LOST_WOODS,               LOST_WOODS_MEMORY,      HEART_PIECE
@@ -24,13 +24,13 @@ Lost Woods GS Soil Theater,           gs,             LOST_WOODS,               
 Lost Woods GS Bean Ride,              gs,             LOST_WOODS,               0x72,                   GS_TOKEN
 Deku Theater Sticks Upgrade,          npc,            GROTTOS,                  THEATER_STICKS,         STICK_UPGRADE
 Deku Theater Nuts Upgrade,            npc,            GROTTOS,                  THEATER_NUTS,           NUT_UPGRADE
-Saria's Song,                         special,        SACRED_FOREST_MEADOW,     0x58,                   SONG_SARIA
+Saria's Song,                         npc,            SACRED_FOREST_MEADOW,     SARIA_SONG,             SONG_SARIA
 Sacred Meadow Sheik Song,             npc,            SACRED_FOREST_MEADOW,     SHEIK_FOREST,           SONG_TP_FOREST
 Sacred Meadow Grotto,                 chest,          GROTTOS,                  0x11,                   RUPEE_PURPLE
 Sacred Meadow GS Night Adult,         gs,             SACRED_FOREST_MEADOW,     0x73,                   GS_TOKEN
 Kakariko Anju Bottle,                 npc,            KAKARIKO_VILLAGE,         ANJU_BOTTLE,            EMPTY_BOTTLE
 Kakariko Anju Egg,                    npc,            KAKARIKO_VILLAGE,         ANJU_EGG,               POCKET_CUCCO
-Kakariko Song Shadow,                 special,        KAKARIKO_VILLAGE,         0x54,                   SONG_TP_SHADOW
+Kakariko Song Shadow,                 npc,            KAKARIKO_VILLAGE,         SHEIK_SHADOW,           SONG_TP_SHADOW
 Kakariko Man on Roof,                 npc,            KAKARIKO_VILLAGE,         KAKARIKO_ROOF_MAN,      HEART_PIECE
 Kakariko Impa House HP,               collectible,    KAKARIKO_VILLAGE,         0x01,                   HEART_PIECE
 Kakariko Grotto Front,                chest,          GROTTOS,                  0x0a,                   RUPEE_HUGE
@@ -73,14 +73,36 @@ Death Mountain Crater Sheik Song,     npc,            DEATH_MOUNTAIN_CRATER,    
 Death Mountain Crater Grotto,         chest,          GROTTOS,                  0x1a,                   BOMBS_20
 Death Mountain Crater GS Soil,        gs,             DEATH_MOUNTAIN_CRATER,    0x80,                   GS_TOKEN
 Death Mountain Crater GS Crate,       gs,             DEATH_MOUNTAIN_CRATER,    0x87,                   GS_TOKEN
-Zora River Bean Seller,               npc,            ZORA_RIVER,               BEAN_SELLER,            MAGIC_BEAN
 Zora River HP Pillar,                 collectible,    ZORA_RIVER,               0x04,                   HEART_PIECE
 Zora River HP Platform,               collectible,    ZORA_RIVER,               0x0b,                   HEART_PIECE
+Zora River Bean Seller,               npc,            ZORA_RIVER,               BEAN_SELLER,            MAGIC_BEAN
+Zora River Frogs Storms,              npc,            ZORA_RIVER,               FROGS_STORMS,           HEART_PIECE
+Zora River Frogs Game,                npc,            ZORA_RIVER,               FROGS_GAME,             HEART_PIECE
+Zora River Grotto,                    chest,          GROTTOS,                  0x09,                   RUPEE_RED
+Zora River GS Tree,                   gs,             ZORA_RIVER,               0x91,                   GS_TOKEN
+Zora River GS Ladder,                 gs,             ZORA_RIVER,               0x90,                   GS_TOKEN
+Zora River GS Near Grotto,            gs,             ZORA_RIVER,               0x94,                   GS_TOKEN
+Zora River GS Near Bridge,            gs,             ZORA_RIVER,               0x93,                   GS_TOKEN
 Zora Domain Waterfall Chest,          chest,          ZORA_DOMAIN,              0x00,                   HEART_PIECE
 Zora Domain Diving Game,              npc,            ZORA_DOMAIN,              ZORA_DIVING_GAME,       SCALE
 Zora Domain Tunic,                    npc,            ZORA_DOMAIN,              ZORA_KING_TUNIC,        TUNIC_ZORA
-Lake Hylia Underwater Bottle,         special,        LAKE_HYLIA,               0x32,                   RUTO_LETTER
-Lake Hylia Fire Arrow,                special,        LAKE_HYLIA,               0x60,                   ARROW_FIRE
+Zora Domain GS Waterfall,             gs,             ZORA_DOMAIN,              0x96,                   GS_TOKEN
+Zora Fountain Iceberg HP,             collectible,    ZORA_FOUNTAIN,            0x01,                   HEART_PIECE
+Zora Fountain Bottom HP,              collectible,    ZORA_FOUNTAIN,            0x14,                   HEART_PIECE
+Zora Fountain GS Wall,                gs,             ZORA_FOUNTAIN,            0x92,                   GS_TOKEN
+Zora Fountain GS Tree,                gs,             ZORA_FOUNTAIN,            0x97,                   GS_TOKEN
+Zora Fountain GS Upper,               gs,             ZORA_FOUNTAIN,            0x95,                   GS_TOKEN
+Lake Hylia Underwater Bottle,         npc,            LAKE_HYLIA,               RUTO_LETTER,            RUTO_LETTER
+Lake Hylia Fire Arrow,                npc,            LAKE_HYLIA,               FIRE_ARROW,             ARROW_FIRE
+Lake Hylia HP,                        collectible,    LAKE_HYLIA,               0x1e,                   HEART_PIECE
+Lake Hylia GS Lab Wall,               gs,             LAKE_HYLIA,               0x9a,                   GS_TOKEN
+Lake Hylia GS Island,                 gs,             LAKE_HYLIA,               0x99,                   GS_TOKEN
+Lake Hylia GS Soil,                   gs,             LAKE_HYLIA,               0x98,                   GS_TOKEN
+Lake Hylia GS Big Tree,               gs,             LAKE_HYLIA,               0x9c,                   GS_TOKEN
+Laboratory Dive,                      npc,            LABORATORY,               LABORATORY_DIVE,        HEART_PIECE
+Laboratory GS Crate,                  gs,             LABORATORY,               0x9b,                   GS_TOKEN
+Fishing Pond Child,                   npc,            FISHING_POND,             FISH_CHILD,             HEART_PIECE
+Fishing Pond Adult,                   npc,            FISHING_POND,             FISH_ADULT,             SCALE
 Lon Lon Ranch Malon Song,             npc,            LON_LON_RANCH,            MALON_SONG,             SONG_EPONA
 Lon Lon Ranch Silo HP,                collectible,    RANCH_HOUSE_SILO,         0x01,                   HEART_PIECE
 Lon Lon Ranch Talon Bottle,           npc,            RANCH_HOUSE_SILO,         TALON_BOTTLE,           MILK_BOTTLE
@@ -114,10 +136,30 @@ Temple of Time Sheik Song,            npc,            TEMPLE_OF_TIME,           
 Temple of Time Light Arrows,          npc,            TEMPLE_OF_TIME,           ZELDA_LIGHT_ARROW,      ARROW_LIGHT
 Windmill HP,                          collectible,    TOMB_DAMPE_WINDMILL,      0x01,                   HEART_PIECE
 Windmill Song of Storms,              npc,            TOMB_DAMPE_WINDMILL,      SONG_STORMS,            SONG_STORMS
-Desert Colossus Song Spirit,          special,        DESERT_COLOSSUS,          0xac,                   SONG_TP_SPIRIT
+Gerudo Valley Chest,                  chest,          GERUDO_VALLEY,            0x00,                   RUPEE_PURPLE
+Gerudo Valley Crate HP,               collectible,    GERUDO_VALLEY,            0x02,                   HEART_PIECE
+Gerudo Valley Waterfall HP,           collectible,    GERUDO_VALLEY,            0x01,                   HEART_PIECE
+Gerudo Valley GS Soil,                gs,             GERUDO_VALLEY,            0xa0,                   GS_TOKEN
+Gerudo Valley GS Wall,                gs,             GERUDO_VALLEY,            0xa1,                   GS_TOKEN
+Gerudo Valley GS Tent,                gs,             GERUDO_VALLEY,            0xa3,                   GS_TOKEN
+Gerudo Valley GS Pillar,              gs,             GERUDO_VALLEY,            0xa2,                   GS_TOKEN
+Gerudo Fortress Chest,                chest,          GERUDO_FORTRESS,          0x00,                   HEART_PIECE
+Gerudo Fortress Archery Reward 1,     npc,            GERUDO_FORTRESS,          GERUDO_ARCHERY_1,       BOW
+Gerudo Fortress Archery Reward 2,     npc,            GERUDO_FORTRESS,          GERUDO_ARCHERY_2,       HEART_PIECE
+Gerudo Fortress GS Wall,              gs,             GERUDO_FORTRESS,          0xa9,                   GS_TOKEN
+Gerudo Fortress GS Target,            gs,             GERUDO_FORTRESS,          0xa8,                   GS_TOKEN
+Haunted Wasteland Chest,              chest,          HAUNTED_WASTELAND,        0x1f,                   RUPEE_PURPLE
+Haunted Wasteland GS,                 gs,             HAUNTED_WASTELAND,        0xb1,                   GS_TOKEN
+Desert Colossus HP,                   collectible,    DESERT_COLOSSUS,          0x0d,                   HEART_PIECE
+Desert Colossus Song Spirit,          npc,            DESERT_COLOSSUS,          SHEIK_SPIRIT,           SONG_TP_SPIRIT
+Desert Colossus GS Soil,              gs,             DESERT_COLOSSUS,          0xb0,                   GS_TOKEN
+Desert Colossus GS Tree,              gs,             DESERT_COLOSSUS,          0xb3,                   GS_TOKEN
+Desert Colossus GS Plateau,           gs,             DESERT_COLOSSUS,          0xb2,                   GS_TOKEN
 Skulltula House 10 Tokens,            npc,            HOUSE_OF_SKULLTULA,       GS_10,                  WALLET
 Skulltula House 20 Tokens,            npc,            HOUSE_OF_SKULLTULA,       GS_20,                  STONE_OF_AGONY
 Skulltula House 30 Tokens,            npc,            HOUSE_OF_SKULLTULA,       GS_30,                  WALLET
+Skulltula House 40 Tokens,            npc,            HOUSE_OF_SKULLTULA,       GS_40,                  BOMBCHUS_10
+Skulltula House 50 Tokens,            npc,            HOUSE_OF_SKULLTULA,       GS_50,                  HEART_PIECE
 
 Great Fairy Magic Upgrade,      collectible,   GREAT_FAIRY_FOUNTAIN_UPGRADES, 0x00, MAGIC_UPGRADE
 Great Fairy Magic Upgrade 2,    collectible,   GREAT_FAIRY_FOUNTAIN_UPGRADES, 0x01, MAGIC_UPGRADE
@@ -186,10 +228,11 @@ Fire Temple Ring Jail,              chest,       TEMPLE_FIRE,   0x09, RUPEE_RED
 Fire Temple Boss Container,         collectible, LAIR_VOLVAGIA, 0x1f, HEART_CONTAINER
 Fire Temple Boss,                   special,     LAIR_VOLVAGIA, 0x49, MEDALLION_FIRE
 
-Ice Cavern HP,                      collectible, ICE_CAVERN, 0x01, HEART_PIECE
-Ice Cavern Iron Boots,              chest,       ICE_CAVERN, 0x02, BOOTS_IRON
-Ice Cavern Map,                     chest,       ICE_CAVERN, 0x00, MAP_IC
-Ice Cavern Compass,                 chest,       ICE_CAVERN, 0x01, COMPASS_IC
+Ice Cavern Iron Boots,              chest,        ICE_CAVERN, 0x02,         BOOTS_IRON
+Ice Cavern Map,                     chest,        ICE_CAVERN, 0x00,         MAP_IC
+Ice Cavern Compass,                 chest,        ICE_CAVERN, 0x01,         COMPASS_IC
+Ice Cavern HP,                      collectible,  ICE_CAVERN, 0x01,         HEART_PIECE
+Ice Cavern Sheik Song,              npc,          ICE_CAVERN, SHEIK_WATER,  SONG_TP_WATER
 
 Water Temple Under Center,          chest,       TEMPLE_WATER,  0x06, SMALL_KEY_WATER
 Water Temple Compass,               chest,       TEMPLE_WATER,  0x09, COMPASS_WATER

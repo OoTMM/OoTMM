@@ -21,9 +21,9 @@
 
 # if defined(GAME_OOT)
 #  include <combo/oot/play.h>
-#  include <combo/oot/item_etc.h>
 #  include <combo/oot/player.h>
 #  include <combo/oot/actors/En_Item00.h>
+#  include <combo/oot/actors/Item_Etcetera.h>
 # endif
 
 # if defined(GAME_MM)
@@ -135,6 +135,8 @@ void comboAfterBuy(Actor_EnGirlA* girlA, GameState_Play* play);
 void comboShopDisplayTextBox(GameState_Play* play, Actor_EnGirlA* girlA, int price);
 void comboShopDisplayTextBoxConfirm(GameState_Play* play, Actor_EnGirlA* girlA, int price);
 # endif
+
+void comboSpawnItemGivers(GameState_Play* play);
 
 /* libc */
 int toupper(int c);

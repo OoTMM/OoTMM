@@ -2,9 +2,11 @@
   exits:
     "Link's House": "is_child"
     "Temple of Time": "(is_adult && event(TIME_TRAVEL)) || can_play(SONG_TP_LIGHT)"
+    "Sacred Meadow": "can_play(SONG_TP_FOREST)"
+    "Death Mountain Crater Warp": "can_play(SONG_TP_FIRE)"
+    "Lake Hylia": "can_play(SONG_TP_WATER)"
     "Graveyard Upper": "can_play(SONG_TP_SHADOW)"
     "Desert Colossus": "can_play(SONG_TP_SPIRIT)"
-    "Death Mountain Crater Warp": "can_play(SONG_TP_FIRE)"
 "Link's House":
   exits:
     "Kokiri Forest": "true"
@@ -235,6 +237,8 @@
     "Skulltula House 10 Tokens": "has(GS_TOKEN, 10)"
     "Skulltula House 20 Tokens": "has(GS_TOKEN, 20)"
     "Skulltula House 30 Tokens": "has(GS_TOKEN, 30)"
+    "Skulltula House 40 Tokens": "has(GS_TOKEN, 40)"
+    "Skulltula House 50 Tokens": "has(GS_TOKEN, 50)"
 "Death Mountain":
   exits:
     "Goron City": "true"
@@ -275,6 +279,13 @@
     "Zora River Bean Seller": "is_child"
     "Zora River HP Pillar": "true"
     "Zora River HP Platform": "true"
+    "Zora River Frogs Storms": "is_child && can_play(SONG_STORMS)"
+    "Zora River Frogs Game": "is_child && can_play(SONG_ZELDA) && can_play(SONG_SARIA) && can_play(SONG_EPONA) && can_play(SONG_SUN) && can_play(SONG_TIME) && can_play(SONG_STORMS)"
+    "Zora River Grotto": "true"
+    "Zora River GS Tree": "is_child"
+    "Zora River GS Ladder": "is_child && gs_night && has_ranged_weapon"
+    "Zora River GS Near Grotto": "is_adult && gs_night && can_hookshot"
+    "Zora River GS Near Bridge": "is_adult && gs_night && can_longshot"
 "Zora Domain":
   exits:
     "Zora River": "true"
@@ -286,17 +297,38 @@
     "Zora Domain Waterfall Chest": "is_child"
     "Zora Domain Diving Game": "is_child"
     "Zora Domain Tunic": "is_adult && event(BLUE_FIRE)"
+    "Zora Domain GS Waterfall": "is_adult && gs_night && can_hookshot"
 "Lake Hylia":
   exits:
     "Hyrule Field": "true"
     "Zora Domain": "is_child && has(SCALE)"
+    "Laboratory": "true"
     "Water Temple Entrance": "is_adult && has(BOOTS_IRON) && has(TUNIC_ZORA) && has(HOOKSHOT)"
+    "Fishing Pond": "is_child || event(WATER_TEMPLE_CLEARED) || (can_longshot && scarecrow_hookshot) || event(BEAN_LAKE_HYLIA)"
   events:
     SCARECROW_CHILD: "is_child && has(OCARINA)"
     SCARECROW: "is_adult && event(SCARECROW_CHILD)"
+    BEAN_LAKE_HYLIA: "can_use_beans"
   locations:
     "Lake Hylia Underwater Bottle": "has(SCALE)"
-    "Lake Hylia Fire Arrow": "can_use_bow && (event(WATER_TEMPLE_CLEARED) || (can_longshot && scarecrow_hookshot))"
+    "Lake Hylia Fire Arrow": "can_use_bow && (event(WATER_TEMPLE_CLEARED) || (can_longshot && scarecrow_hookshot) || event(BEAN_LAKE_HYLIA))"
+    "Lake Hylia HP": "is_adult && event(BEAN_LAKE_HYLIA)"
+    "Lake Hylia GS Lab Wall": "is_child && gs_night && can_boomerang"
+    "Lake Hylia GS Island": "is_child && gs_night"
+    "Lake Hylia GS Soil": "gs_soil"
+    "Lake Hylia GS Big Tree": "is_adult && gs_night && can_longshot"
+"Laboratory":
+  exits:
+    "Lake Hylia": "true"
+  locations:
+    "Laboratory Dive": "has(SCALE, 2)"
+    "Laboratory GS Crate": "is_adult && has_iron_boots && can_hookshot"
+"Fishing Pond":
+  exits:
+    "Lake Hylia": "true"
+  locations:
+    "Fishing Pond Child": "is_child"
+    "Fishing Pond Adult": "is_adult"
 "Zora Fountain":
   exits:
     "Zora Domain": "event(KING_ZORA_LETTER)"
@@ -304,6 +336,11 @@
     "Ice Cavern Entrance": "is_adult"
   locations:
     "Great Fairy Farore's Wind": "has_explosives && can_play(SONG_ZELDA)"
+    "Zora Fountain Iceberg HP": "is_adult"
+    "Zora Fountain Bottom HP": "is_adult && has_tunic_zora && has(BOOTS_IRON)"
+    "Zora Fountain GS Wall": "is_child && gs_night && can_boomerang"
+    "Zora Fountain GS Tree": "is_child"
+    "Zora Fountain GS Upper": "is_adult && gs_night && can_hammer && can_hookshot"
 "Temple of Time":
   exits:
     "Market": "is_child"
@@ -343,24 +380,50 @@
     "Lake Hylia": "true"
     "Hyrule Field": "true"
     "Gerudo Valley After Bridge": "can_longshot || (is_adult && event(EPONA))"
+  locations:
+    "Gerudo Valley Crate HP": "true"
+    "Gerudo Valley Waterfall HP": "true"
+    "Gerudo Valley GS Soil": "gs_soil"
+    "Gerudo Valley GS Wall": "is_child && gs_night && can_boomerang"
 "Gerudo Valley After Bridge":
   exits:
     "Lake Hylia": "true"
     "Gerudo Fortress Exterior": "true"
+  locations:
+    "Gerudo Valley Chest": "can_hammer"
+    "Gerudo Valley GS Tent": "is_adult && gs_night && can_hookshot"
+    "Gerudo Valley GS Pillar": "is_adult && gs_night && can_hookshot"
 "Gerudo Fortress Exterior":
   exits:
     "Gerudo Fortress": "can_hookshot"
     "Gerudo Valley After Bridge": "true"
-    "Desert": "has(GERUDO_CARD)"
+    "Haunted Wasteland Start": "has(GERUDO_CARD)"
     "Gerudo Training Grounds Entrance": "has(GERUDO_CARD)"
-"Desert":
+  locations:
+    "Gerudo Fortress Chest": "is_adult && (has_hover_boots || can_longshot || scarecrow_hookshot)"
+    "Gerudo Fortress Archery Reward 1": "is_adult && event(EPONA) && has(BOW) && has(GERUDO_CARD)"
+    "Gerudo Fortress Archery Reward 2": "is_adult && event(EPONA) && has(BOW) && has(GERUDO_CARD)"
+    "Gerudo Fortress GS Wall": "is_adult && gs_night && can_hookshot"
+    "Gerudo Fortress GS Target": "is_adult && gs_night && can_hookshot && has(GERUDO_CARD)"
+"Haunted Wasteland Start":
   exits:
     "Gerudo Fortress Exterior": "true"
-    "Desert Colossus": "has_lens && can_hookshot"
+    "Haunted Wasteland Structure": "can_longshot || has_hover_boots"
+"Haunted Wasteland Structure":
+  exits:
+    "Desert Colossus": "has_lens"
+  locations:
+    "Haunted Wasteland Chest": "has_fire"
+    "Haunted Wasteland GS": "true"
 "Desert Colossus":
   exits:
     "Spirit Temple Entrance": "true"
+  events:
+    BEAN_DESERT_COLOSSUS: "can_use_beans"
   locations:
+    "Desert Colossus HP": "is_adult && event(BEAN_DESERT_COLOSSUS)"
     "Desert Colossus Song Spirit": "true"
     "Great Fairy Nayru's Love": "has_explosives && can_play(SONG_ZELDA)"
-
+    "Desert Colossus GS Soil": "gs_soil"
+    "Desert Colossus GS Tree": "is_adult && gs_night && can_hookshot"
+    "Desert Colossus GS Plateau": "is_adult && gs_night && can_longshot"

@@ -5,6 +5,7 @@
 
 #if defined(GAME_OOT)
 # define AC_ITEM_CUSTOM     0x001
+# define AC_ITEM_GIVER      0x003
 # define AC_EN_BOX          0x00a
 # define AC_ITEM00          0x015
 # define AC_EN_XC           0x048

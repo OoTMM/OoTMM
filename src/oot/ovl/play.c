@@ -45,11 +45,14 @@ static void debugCheat(GameState_Play* play)
         gSave.quest.medallionSpirit = 1;
         gSave.quest.medallionForest = 1;
 
-        gSave.rupees = 999;
+        gSave.rupees = 99;
 
         gOotExtraTrade.child = 0xffff;
 
-        gSave.age = AGE_ADULT;
+        //gSave.age = AGE_ADULT;
+
+        SetEventChk(EV_OOT_CHK_ZELDA_LETTER);
+        SetEventChk(EV_OOT_CHK_SONG_ZELDA);
     }
 #endif
 }
@@ -131,31 +134,15 @@ void hookPlay_Init(GameState_Play* play)
     }
 
     Play_Init(play);
-
-    /* Check for the light arrows */
-    if (gSave.entrance == 0x0053 && gSave.quest.medallionShadow && gSave.quest.medallionSpirit && gSave.age == AGE_ADULT && !GetEventChk(EV_OOT_CHK_LIGHT_ARROW))
-    {
-        SpawnActor(
-            (char*)play + 0x1c24,
-            play,
-            AC_EN_XC,
-            0, 0, 0,
-            0, 0, 0,
-            4
-        );
-    }
-
-    /* Saria's Ocarina Check */
-    if (gSave.entrance == 0x05e0 || gSave.entrance == 0x04de)
-    {
-        comboSpawnSpecial(play, -1191.f, -220.f, 1650.f, EV_OOT_CHK_SARIA_OCARINA, GI_OOT_OCARINA_FAIRY);
-    }
+    comboSpawnItemGivers(play);
 
     /* Saria's Song */
+    /*
     if (play->sceneId == SCE_OOT_SACRED_FOREST_MEADOW && gSave.age == AGE_CHILD && GetEventChk(EV_OOT_CHK_ZELDA_LETTER))
     {
         comboSpawnSpecial(play, 125.f, 500.f, -2970.f, EV_OOT_CHK_SONG_SARIA, GI_OOT_SONG_SARIA);
     }
+    */
 
     if ((gSave.entrance & 0xfffc) == 0x0530)
     {

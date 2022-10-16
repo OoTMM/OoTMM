@@ -3,8 +3,10 @@
 #if defined(GAME_OOT)
 # define OVERRIDE_ADDR 0x03fe1000
 #else
-# define OVERRIDE_ADDR 0x03fe2000
+# define OVERRIDE_ADDR 0x03fe3000
 #endif
+
+#define OVERRIDE_MAX 512
 
 typedef struct PACKED
 {
@@ -15,7 +17,7 @@ ComboOverride;
 
 #define KEY(scene, id) (((scene) << 8) | (id))
 
-static ALIGNED(16) ComboOverride gComboOverrides[256];
+static ALIGNED(16) ComboOverride gComboOverrides[OVERRIDE_MAX];
 
 void comboInitOverride(void)
 {
@@ -24,7 +26,7 @@ void comboInitOverride(void)
 
 static s32 comboOverrideRaw(u16 key)
 {
-    for (int i = 0; i < 256; ++i)
+    for (int i = 0; i < OVERRIDE_MAX; ++i)
     {
         ComboOverride* o = &gComboOverrides[i];
         if (o->key == 0xffff)

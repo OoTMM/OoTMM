@@ -22,11 +22,13 @@
 #define ENTRANCE_RT           0x02d
 #define ENTRANCE_WINDMILL     0x453
 #define ENTRANCE_DMC          0x246
+#define ENTRANCE_FISH         0x45f
+#define ENTRANCE_COLOSSUS     0x1e1
 
 #if defined(DEBUG)
 /* DEBUG: OoT child entrance */
 PATCH_START 0x800903e0
-  li t4,ENTRANCE_GORON
+  li t4,ENTRANCE_SMEADOW
 PATCH_END
 #endif
 

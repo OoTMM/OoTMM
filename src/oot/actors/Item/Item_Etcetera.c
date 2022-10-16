@@ -1,13 +1,47 @@
 #include <combo.h>
 
-void ItemEtcetera_DrawTreasureGame(Actor* this, GameState_Play* play)
+static s16 ItemEtcetera_GetGI(Actor* this, s16 gi)
+{
+    switch (this->variable)
+    {
+    case 0x1:
+        gi = comboOverride(OV_NPC, 0, NPC_OOT_RUTO_LETTER, gi);
+        break;
+    case 0x7:
+        gi = comboOverride(OV_NPC, 0, NPC_OOT_FIRE_ARROW, gi);
+        break;
+    }
+
+    return gi;
+}
+
+int ItemEtcetera_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
+{
+    gi = ItemEtcetera_GetGI(this, gi);
+    return GiveItem(this, play, gi, a, b);
+}
+
+PATCH_CALL(0x80a5e230, ItemEtcetera_GiveItem);
+PATCH_CALL(0x80a5e2cc, ItemEtcetera_GiveItem);
+
+void ItemEtcetera_Draw(Actor_ItemEtcetera* this, GameState_Play* play)
+{
+    s16 gi;
+
+    gi = ItemEtcetera_GetGI(&this->base, this->gi);
+    comboDrawGI(play, &this->base, gi, 1.f);
+}
+
+PATCH_FUNC(0x80a5e610, ItemEtcetera_Draw);
+
+void ItemEtcetera_DrawTreasureGame(Actor_ItemEtcetera* this, GameState_Play* play)
 {
     s16 gi;
 
     if (*(u8*)((char*)play + 0x1c27) == 0)
         return;
 
-    switch (this->variable & 0xff)
+    switch (this->base.variable & 0xff)
     {
     case 0x8:
         gi = GI_OOT_RUPEE_GREEN;
@@ -32,7 +66,7 @@ void ItemEtcetera_DrawTreasureGame(Actor* this, GameState_Play* play)
         break;
     }
 
-    comboDrawGI(play, this, gi, 1.f);
+    comboDrawGI(play, &this->base, gi, 1.f);
 }
 
 PATCH_FUNC(0x80a5e5b8, ItemEtcetera_DrawTreasureGame);
