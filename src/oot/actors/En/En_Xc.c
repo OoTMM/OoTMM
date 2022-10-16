@@ -16,6 +16,22 @@ static int checkSetEvent(Actor* actor, int event)
     return 0;
 }
 
+static void EnXc_Update_DesertColossus(Actor* this, GameState_Play* play)
+{
+    s16 gi;
+
+    if (Actor_HasParent(this))
+    {
+        SetEventChk(EV_OOT_CHK_SONG_TP_SPIRIT);
+        ActorDestroy(this);
+    }
+    else
+    {
+        gi = comboOverride(OV_NPC, 0, NPC_OOT_SHEIK_SPIRIT, GI_OOT_SONG_TP_SPIRIT);
+        GiveItem(this, play, gi, 10000.f, 5000.f);
+    }
+}
+
 static void EnXc_Update_LightArrow(Actor* this, GameState_Play* play)
 {
     s16 gi;
@@ -103,7 +119,7 @@ static void EnXc_Update_TempleOfTime(Actor* this, GameState_Play* play)
 static void EnXc_Init(Actor* this, GameState_Play* play)
 {
     this->draw = NULL;
-    if (gSave.age == AGE_CHILD)
+    if (gSave.age == AGE_CHILD && this->variable != 0)
     {
         ActorDestroy(this);
     }
@@ -113,6 +129,9 @@ void EnXc_Update(Actor* this, GameState_Play* play)
 {
     switch (this->variable)
     {
+    case 0x0:
+        EnXc_Update_DesertColossus(this, play);
+        break;
     case 0x4:
         EnXc_Update_LightArrow(this, play);
         break;

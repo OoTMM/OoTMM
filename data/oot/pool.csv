@@ -151,7 +151,7 @@ Gerudo Fortress GS Target,            gs,             GERUDO_FORTRESS,          
 Haunted Wasteland Chest,              chest,          HAUNTED_WASTELAND,        0x1f,                   RUPEE_PURPLE
 Haunted Wasteland GS,                 gs,             HAUNTED_WASTELAND,        0xb1,                   GS_TOKEN
 Desert Colossus HP,                   collectible,    DESERT_COLOSSUS,          0x0d,                   HEART_PIECE
-Desert Colossus Song Spirit,          special,        DESERT_COLOSSUS,          0xac,                   SONG_TP_SPIRIT
+Desert Colossus Song Spirit,          npc,            DESERT_COLOSSUS,          SHEIK_SPIRIT,           SONG_TP_SPIRIT
 Desert Colossus GS Soil,              gs,             DESERT_COLOSSUS,          0xb0,                   GS_TOKEN
 Desert Colossus GS Tree,              gs,             DESERT_COLOSSUS,          0xb3,                   GS_TOKEN
 Desert Colossus GS Plateau,           gs,             DESERT_COLOSSUS,          0xb2,                   GS_TOKEN

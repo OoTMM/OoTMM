@@ -49,7 +49,7 @@ static void debugCheat(GameState_Play* play)
 
         gOotExtraTrade.child = 0xffff;
 
-        //gSave.age = AGE_ADULT;
+        gSave.age = AGE_ADULT;
     }
 #endif
 }
@@ -142,6 +142,19 @@ void hookPlay_Init(GameState_Play* play)
             0, 0, 0,
             0, 0, 0,
             4
+        );
+    }
+
+    /* Sheik in colossus */
+    if (gSave.entrance == 0x1e1 && !GetEventChk(EV_OOT_CHK_SONG_TP_SPIRIT))
+    {
+        SpawnActor(
+            (char*)play + 0x1c24,
+            play,
+            AC_EN_XC,
+            0, 0, 0,
+            0, 0, 0,
+            0
         );
     }
 
