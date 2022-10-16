@@ -106,8 +106,12 @@ void*   comboGetObject(u16 objectId);
 u32     comboLoadObject(void* buffer, u16 objectId);
 
 /* Draw */
-void comboDrawObject(GameState_Play* play, Actor* actor, u16 objectId, u16 shaderId);
-void comboDrawGI(GameState_Play* play, Actor* actor, int gi);
+#define DRAW_NO_PRE1    0x01
+#define DRAW_NO_PRE2    0x02
+#define DRAW_RAW        (DRAW_NO_PRE1 | DRAW_NO_PRE2)
+
+void comboDrawObject(GameState_Play* play, Actor* actor, u16 objectId, u16 shaderId, int flags);
+void comboDrawGI(GameState_Play* play, Actor* actor, int gi, int flags);
 
 /* Event */
 void comboOotSetEventChk(u16 flag);

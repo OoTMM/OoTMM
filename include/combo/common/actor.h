@@ -47,7 +47,7 @@ typedef struct PACKED ALIGNED(0x4) Actor
     u8          type;
     u8          room;
     s32         flags;
-    char        unk[0xc];
+    Vector3f    initPos;
     Vector3s    initRot;
     char        unk2[0x02];
     u16         variable;

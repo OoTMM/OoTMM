@@ -158,7 +158,7 @@ static void ItemCustom_Update(Actor_ItemCustom* item, GameState_Play* play)
 
 static void ItemCustom_Draw(Actor_ItemCustom* item, GameState_Play* play)
 {
-    comboDrawGI(play, &item->base, item->gi);
+    comboDrawGI(play, &item->base, item->gi, 0);
 }
 
 ActorInit gActorInit_ItemCustom = {

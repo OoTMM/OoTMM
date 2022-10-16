@@ -63,6 +63,7 @@ Actor* hookSpawnActor(void* const_1, GameState_Play* play, s16 actorId, float x,
         break;
     case AC_DOOR_WARP1:
         /* Blue warp */
+        /*
         switch (play->sceneId)
         {
         case SCE_OOT_LAIR_GOHMA:
@@ -94,6 +95,7 @@ Actor* hookSpawnActor(void* const_1, GameState_Play* play, s16 actorId, float x,
             comboSpawnSpecial(play, x, y, z, EV_OOT_CHK_MEDALLION_SPIRIT, GI_OOT_MEDALLION_SPIRIT);
             break;
         }
+        */
         break;
     case AC_BG_TOKI_SWD:
         if (gSave.age == AGE_CHILD)

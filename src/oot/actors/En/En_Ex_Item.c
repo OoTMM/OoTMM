@@ -69,7 +69,7 @@ void EnExItem_Draw(Actor* actor, GameState_Play* play)
 
     scale = *(float*)(((char*)actor) + 0x154);
     ActorSetScale(actor, scale);
-    comboDrawGI(play, actor, EnExItem_Reward(actor));
+    comboDrawGI(play, actor, EnExItem_Reward(actor), 0);
 }
 
 int EnExItem_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
