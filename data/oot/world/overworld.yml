@@ -381,6 +381,8 @@
     "Hyrule Field": "true"
     "Gerudo Valley After Bridge": "can_longshot || (is_adult && event(EPONA))"
   locations:
+    "Gerudo Valley Crate HP": "true"
+    "Gerudo Valley Waterfall HP": "true"
     "Gerudo Valley GS Soil": "gs_soil"
     "Gerudo Valley GS Wall": "is_child && gs_night && can_boomerang"
 "Gerudo Valley After Bridge":
@@ -416,7 +418,10 @@
 "Desert Colossus":
   exits:
     "Spirit Temple Entrance": "true"
+  events:
+    BEAN_DESERT_COLOSSUS: "can_use_beans"
   locations:
+    "Desert Colossus HP": "is_adult && event(BEAN_DESERT_COLOSSUS)"
     "Desert Colossus Song Spirit": "true"
     "Great Fairy Nayru's Love": "has_explosives && can_play(SONG_ZELDA)"
     "Desert Colossus GS Soil": "gs_soil"
