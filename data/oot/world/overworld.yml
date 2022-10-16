@@ -388,23 +388,29 @@
     "Lake Hylia": "true"
     "Gerudo Fortress Exterior": "true"
   locations:
+    "Gerudo Valley Chest": "can_hammer"
     "Gerudo Valley GS Tent": "is_adult && gs_night && can_hookshot"
     "Gerudo Valley GS Pillar": "is_adult && gs_night && can_hookshot"
 "Gerudo Fortress Exterior":
   exits:
     "Gerudo Fortress": "can_hookshot"
     "Gerudo Valley After Bridge": "true"
-    "Haunted Wasteland": "has(GERUDO_CARD)"
+    "Haunted Wasteland Start": "has(GERUDO_CARD)"
     "Gerudo Training Grounds Entrance": "has(GERUDO_CARD)"
   locations:
+    "Gerudo Fortress Chest": "is_adult && (has_hover_boots || can_longshot || scarecrow_hookshot)"
     "Gerudo Fortress GS Wall": "is_adult && gs_night && can_hookshot"
     "Gerudo Fortress GS Target": "is_adult && gs_night && can_hookshot && has(GERUDO_CARD)"
-"Haunted Wasteland":
+"Haunted Wasteland Start":
   exits:
     "Gerudo Fortress Exterior": "true"
-    "Desert Colossus": "has_lens && can_hookshot"
+    "Haunted Wasteland Structure": "can_longshot || has_hover_boots"
+"Haunted Wasteland Structure":
+  exits:
+    "Desert Colossus": "has_lens"
   locations:
-    "Haunted Wasteland GS": "has_lens && can_hookshot"
+    "Haunted Wasteland Chest": "has_fire"
+    "Haunted Wasteland GS": "true"
 "Desert Colossus":
   exits:
     "Spirit Temple Entrance": "true"
