@@ -399,6 +399,8 @@
     "Gerudo Training Grounds Entrance": "has(GERUDO_CARD)"
   locations:
     "Gerudo Fortress Chest": "is_adult && (has_hover_boots || can_longshot || scarecrow_hookshot)"
+    "Gerudo Fortress Archery Reward 1": "is_adult && event(EPONA) && has(BOW) && has(GERUDO_CARD)"
+    "Gerudo Fortress Archery Reward 2": "is_adult && event(EPONA) && has(BOW) && has(GERUDO_CARD)"
     "Gerudo Fortress GS Wall": "is_adult && gs_night && can_hookshot"
     "Gerudo Fortress GS Target": "is_adult && gs_night && can_hookshot && has(GERUDO_CARD)"
 "Haunted Wasteland Start":

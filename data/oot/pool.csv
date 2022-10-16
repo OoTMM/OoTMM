@@ -142,6 +142,8 @@ Gerudo Valley GS Wall,                gs,             GERUDO_VALLEY,            
 Gerudo Valley GS Tent,                gs,             GERUDO_VALLEY,            0xa3,                   GS_TOKEN
 Gerudo Valley GS Pillar,              gs,             GERUDO_VALLEY,            0xa2,                   GS_TOKEN
 Gerudo Fortress Chest,                chest,          GERUDO_FORTRESS,          0x00,                   HEART_PIECE
+Gerudo Fortress Archery Reward 1,     npc,            GERUDO_FORTRESS,          GERUDO_ARCHERY_1,       BOW
+Gerudo Fortress Archery Reward 2,     npc,            GERUDO_FORTRESS,          GERUDO_ARCHERY_2,       HEART_PIECE
 Gerudo Fortress GS Wall,              gs,             GERUDO_FORTRESS,          0xa9,                   GS_TOKEN
 Gerudo Fortress GS Target,            gs,             GERUDO_FORTRESS,          0xa8,                   GS_TOKEN
 Haunted Wasteland Chest,              chest,          HAUNTED_WASTELAND,        0x1f,                   RUPEE_PURPLE
