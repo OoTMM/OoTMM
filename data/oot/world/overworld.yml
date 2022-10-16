@@ -394,19 +394,23 @@
   exits:
     "Gerudo Fortress": "can_hookshot"
     "Gerudo Valley After Bridge": "true"
-    "Desert": "has(GERUDO_CARD)"
+    "Haunted Wasteland": "has(GERUDO_CARD)"
     "Gerudo Training Grounds Entrance": "has(GERUDO_CARD)"
   locations:
     "Gerudo Fortress GS Wall": "is_adult && gs_night && can_hookshot"
     "Gerudo Fortress GS Target": "is_adult && gs_night && can_hookshot && has(GERUDO_CARD)"
-"Desert":
+"Haunted Wasteland":
   exits:
     "Gerudo Fortress Exterior": "true"
     "Desert Colossus": "has_lens && can_hookshot"
+  locations:
+    "Haunted Wasteland GS": "has_lens && can_hookshot"
 "Desert Colossus":
   exits:
     "Spirit Temple Entrance": "true"
   locations:
     "Desert Colossus Song Spirit": "true"
     "Great Fairy Nayru's Love": "has_explosives && can_play(SONG_ZELDA)"
-
+    "Desert Colossus GS Soil": "gs_soil"
+    "Desert Colossus GS Tree": "is_adult && gs_night && can_hookshot"
+    "Desert Colossus GS Plateau": "is_adult && gs_night && can_longshot"
