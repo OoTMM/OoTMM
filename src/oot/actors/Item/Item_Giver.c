@@ -16,9 +16,12 @@ static int ItemGiver_Common(Actor* this, GameState_Play* play, s16 gi, int ev)
     }
 }
 
-static void ItemGiver_ZeldaLightArrow(Actor* this, GameState_Play* play)
+static void ItemGiver_SheikKakariko(Actor* this, GameState_Play* play)
 {
-    ItemGiver_Common(this, play, GI_OOT_ARROW_LIGHT, EV_OOT_CHK_LIGHT_ARROW);
+    if (ItemGiver_Common(this, play, GI_OOT_SONG_TP_SHADOW, EV_OOT_CHK_SONG_TP_SHADOW))
+    {
+        SetEventChk(EV_OOT_CHK_BONGO_ESCAPE);
+    }
 }
 
 static void ItemGiver_SheikDesertColossus(Actor* this, GameState_Play* play)
@@ -26,10 +29,18 @@ static void ItemGiver_SheikDesertColossus(Actor* this, GameState_Play* play)
     ItemGiver_Common(this, play, GI_OOT_SONG_TP_SPIRIT, EV_OOT_CHK_SONG_TP_SPIRIT);
 }
 
+static void ItemGiver_ZeldaLightArrow(Actor* this, GameState_Play* play)
+{
+    ItemGiver_Common(this, play, GI_OOT_ARROW_LIGHT, EV_OOT_CHK_LIGHT_ARROW);
+}
+
 static void ItemGiver_Init(Actor* this, GameState_Play* play)
 {
     switch (this->variable)
     {
+    case NPC_OOT_SHEIK_SHADOW:
+        this->update = ItemGiver_SheikKakariko;
+        break;
     case NPC_OOT_SHEIK_SPIRIT:
         this->update = ItemGiver_SheikDesertColossus;
         break;
@@ -68,6 +79,12 @@ static void spawnGiver(GameState_Play* play, u16 npcId)
 
 void comboSpawnItemGivers(GameState_Play* play)
 {
+    /* Sheik in Kakariko */
+    if (gSave.entrance == 0x0db && gSave.quest.medallionForest && gSave.quest.medallionFire && gSave.quest.medallionWater && gSave.age == AGE_ADULT && !GetEventChk(EV_OOT_CHK_SONG_TP_SHADOW))
+    {
+        spawnGiver(play, NPC_OOT_SHEIK_SHADOW);
+    }
+
     /* Sheik in colossus */
     if (gSave.entrance == 0x1e1 && !GetEventChk(EV_OOT_CHK_SONG_TP_SPIRIT))
     {
@@ -75,7 +92,7 @@ void comboSpawnItemGivers(GameState_Play* play)
     }
 
     /* Zelda Light Arrows */
-    if (gSave.entrance == 0x0053 && gSave.quest.medallionShadow && gSave.quest.medallionSpirit && gSave.age == AGE_ADULT && !GetEventChk(EV_OOT_CHK_LIGHT_ARROW))
+    if (gSave.entrance == 0x053 && gSave.quest.medallionShadow && gSave.quest.medallionSpirit && gSave.age == AGE_ADULT && !GetEventChk(EV_OOT_CHK_LIGHT_ARROW))
     {
         spawnGiver(play, NPC_OOT_ZELDA_LIGHT_ARROW);
     }

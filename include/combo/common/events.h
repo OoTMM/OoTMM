@@ -35,6 +35,7 @@
 #define EV_OOT_CHK_ZELDA_FLED               0x80
 #define EV_OOT_CHK_ZELDA_FLED_BRIDGE        0x82
 #define EV_OOT_CHK_SONG_TIME                0xa9
+#define EV_OOT_CHK_BONGO_ESCAPE             0xaa
 #define EV_OOT_CHK_SONG_TP_SPIRIT           0xac
 #define EV_OOT_CHK_SARIA_OCARINA            0xc1
 #define EV_OOT_CHK_LIGHT_ARROW              0xc4
