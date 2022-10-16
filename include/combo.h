@@ -136,6 +136,8 @@ void comboShopDisplayTextBox(GameState_Play* play, Actor_EnGirlA* girlA, int pri
 void comboShopDisplayTextBoxConfirm(GameState_Play* play, Actor_EnGirlA* girlA, int price);
 # endif
 
+void comboSpawnItemGivers(GameState_Play* play);
+
 /* libc */
 int toupper(int c);
 

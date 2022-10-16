@@ -16,38 +16,6 @@ static int checkSetEvent(Actor* actor, int event)
     return 0;
 }
 
-static void EnXc_Update_DesertColossus(Actor* this, GameState_Play* play)
-{
-    s16 gi;
-
-    if (Actor_HasParent(this))
-    {
-        SetEventChk(EV_OOT_CHK_SONG_TP_SPIRIT);
-        ActorDestroy(this);
-    }
-    else
-    {
-        gi = comboOverride(OV_NPC, 0, NPC_OOT_SHEIK_SPIRIT, GI_OOT_SONG_TP_SPIRIT);
-        GiveItem(this, play, gi, 10000.f, 5000.f);
-    }
-}
-
-static void EnXc_Update_LightArrow(Actor* this, GameState_Play* play)
-{
-    s16 gi;
-
-    if (Actor_HasParent(this))
-    {
-        SetEventChk(EV_OOT_CHK_LIGHT_ARROW);
-        ActorDestroy(this);
-    }
-    else
-    {
-        gi = comboOverride(OV_NPC, 0, NPC_OOT_ZELDA_LIGHT_ARROW, GI_OOT_ARROW_LIGHT);
-        GiveItem(this, play, gi, 10000.f, 500.f);
-    }
-}
-
 static void EnXc_Update_ForestMeadow(Actor* actor, GameState_Play* play)
 {
     s16 gi;
@@ -129,12 +97,6 @@ void EnXc_Update(Actor* this, GameState_Play* play)
 {
     switch (this->variable)
     {
-    case 0x0:
-        EnXc_Update_DesertColossus(this, play);
-        break;
-    case 0x4:
-        EnXc_Update_LightArrow(this, play);
-        break;
     case 0x6:
         EnXc_Update_ForestMeadow(this, play);
         break;

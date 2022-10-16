@@ -131,32 +131,7 @@ void hookPlay_Init(GameState_Play* play)
     }
 
     Play_Init(play);
-
-    /* Check for the light arrows */
-    if (gSave.entrance == 0x0053 && gSave.quest.medallionShadow && gSave.quest.medallionSpirit && gSave.age == AGE_ADULT && !GetEventChk(EV_OOT_CHK_LIGHT_ARROW))
-    {
-        SpawnActor(
-            (char*)play + 0x1c24,
-            play,
-            AC_EN_XC,
-            0, 0, 0,
-            0, 0, 0,
-            4
-        );
-    }
-
-    /* Sheik in colossus */
-    if (gSave.entrance == 0x1e1 && !GetEventChk(EV_OOT_CHK_SONG_TP_SPIRIT))
-    {
-        SpawnActor(
-            (char*)play + 0x1c24,
-            play,
-            AC_EN_XC,
-            0, 0, 0,
-            0, 0, 0,
-            0
-        );
-    }
+    comboSpawnItemGivers(play);
 
     /* Saria's Ocarina Check */
     if (gSave.entrance == 0x05e0 || gSave.entrance == 0x04de)
