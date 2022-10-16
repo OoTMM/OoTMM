@@ -95,13 +95,6 @@ Actor* hookSpawnActor(void* const_1, GameState_Play* play, s16 actorId, float x,
             break;
         }
         break;
-    case AC_ITEM_B_HEART:
-        /* Heart container */
-        /* Always use collectible flag 0x1f */
-        actorId = AC_ITEM_CUSTOM;
-        rz = 0x1000 | 0x1f;
-        variable = GI_OOT_HEART_CONTAINER;
-        break;
     case AC_BG_TOKI_SWD:
         if (gSave.age == AGE_CHILD)
             comboSpawnCollectible(play, -1.f, 70.f, 80.f, 0x1f, GI_OOT_MASTER_SWORD);
