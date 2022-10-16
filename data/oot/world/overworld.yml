@@ -304,13 +304,15 @@
     "Zora Domain": "is_child && has(SCALE)"
     "Laboratory": "true"
     "Water Temple Entrance": "is_adult && has(BOOTS_IRON) && has(TUNIC_ZORA) && has(HOOKSHOT)"
-    "Fishing Pond": "is_child || event(WATER_TEMPLE_CLEARED) || (can_longshot && scarecrow_hookshot)"
+    "Fishing Pond": "is_child || event(WATER_TEMPLE_CLEARED) || (can_longshot && scarecrow_hookshot) || event(BEAN_LAKE_HYLIA)"
   events:
     SCARECROW_CHILD: "is_child && has(OCARINA)"
     SCARECROW: "is_adult && event(SCARECROW_CHILD)"
+    BEAN_LAKE_HYLIA: "can_use_beans"
   locations:
     "Lake Hylia Underwater Bottle": "has(SCALE)"
-    "Lake Hylia Fire Arrow": "can_use_bow && (event(WATER_TEMPLE_CLEARED) || (can_longshot && scarecrow_hookshot))"
+    "Lake Hylia Fire Arrow": "can_use_bow && (event(WATER_TEMPLE_CLEARED) || (can_longshot && scarecrow_hookshot) || event(BEAN_LAKE_HYLIA))"
+    "Lake Hylia HP": "is_adult && event(BEAN_LAKE_HYLIA)"
     "Lake Hylia GS Lab Wall": "is_child && gs_night && can_boomerang"
     "Lake Hylia GS Island": "is_child && gs_night"
     "Lake Hylia GS Soil": "gs_soil"

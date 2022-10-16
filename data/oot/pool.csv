@@ -94,6 +94,7 @@ Zora Fountain GS Tree,                gs,             ZORA_FOUNTAIN,            
 Zora Fountain GS Upper,               gs,             ZORA_FOUNTAIN,            0x95,                   GS_TOKEN
 Lake Hylia Underwater Bottle,         npc,            LAKE_HYLIA,               RUTO_LETTER,            RUTO_LETTER
 Lake Hylia Fire Arrow,                npc,            LAKE_HYLIA,               FIRE_ARROW,             ARROW_FIRE
+Lake Hylia HP,                        collectible,    LAKE_HYLIA,               0x1e,                   HEART_PIECE
 Lake Hylia GS Lab Wall,               gs,             LAKE_HYLIA,               0x9a,                   GS_TOKEN
 Lake Hylia GS Island,                 gs,             LAKE_HYLIA,               0x99,                   GS_TOKEN
 Lake Hylia GS Soil,                   gs,             LAKE_HYLIA,               0x98,                   GS_TOKEN
