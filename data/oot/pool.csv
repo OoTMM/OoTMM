@@ -98,7 +98,8 @@ Lake Hylia GS Lab Wall,               gs,             LAKE_HYLIA,               
 Lake Hylia GS Island,                 gs,             LAKE_HYLIA,               0x99,                   GS_TOKEN
 Lake Hylia GS Soil,                   gs,             LAKE_HYLIA,               0x98,                   GS_TOKEN
 Lake Hylia GS Big Tree,               gs,             LAKE_HYLIA,               0x9c,                   GS_TOKEN
-Lake Hylia GS Lab Crate,              gs,             LABORATORY,               0x9b,                   GS_TOKEN
+Laboratory Dive,                      npc,            LABORATORY,               LABORATORY_DIVE,        HEART_PIECE
+Laboratory GS Crate,                  gs,             LABORATORY,               0x9b,                   GS_TOKEN
 Fishing Pond Child,                   npc,            FISHING_POND,             FISH_CHILD,             HEART_PIECE
 Fishing Pond Adult,                   npc,            FISHING_POND,             FISH_ADULT,             SCALE
 Lon Lon Ranch Malon Song,             npc,            LON_LON_RANCH,            MALON_SONG,             SONG_EPONA

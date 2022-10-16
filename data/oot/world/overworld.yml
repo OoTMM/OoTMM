@@ -319,7 +319,8 @@
   exits:
     "Lake Hylia": "true"
   locations:
-    "Lake Hylia GS Lab Crate": "is_adult && has_iron_boots && can_hookshot"
+    "Laboratory Dive": "has(SCALE, 2)"
+    "Laboratory GS Crate": "is_adult && has_iron_boots && can_hookshot"
 "Fishing Pond":
   exits:
     "Lake Hylia": "true"
