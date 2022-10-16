@@ -140,6 +140,8 @@ Gerudo Valley GS Soil,                gs,             GERUDO_VALLEY,            
 Gerudo Valley GS Wall,                gs,             GERUDO_VALLEY,            0xa1,                   GS_TOKEN
 Gerudo Valley GS Tent,                gs,             GERUDO_VALLEY,            0xa3,                   GS_TOKEN
 Gerudo Valley GS Pillar,              gs,             GERUDO_VALLEY,            0xa2,                   GS_TOKEN
+Gerudo Fortress GS Wall,              gs,             GERUDO_FORTRESS,          0xa9,                   GS_TOKEN
+Gerudo Fortress GS Target,            gs,             GERUDO_FORTRESS,          0xa8,                   GS_TOKEN
 Desert Colossus Song Spirit,          special,        DESERT_COLOSSUS,          0xac,                   SONG_TP_SPIRIT
 Skulltula House 10 Tokens,            npc,            HOUSE_OF_SKULLTULA,       GS_10,                  WALLET
 Skulltula House 20 Tokens,            npc,            HOUSE_OF_SKULLTULA,       GS_20,                  STONE_OF_AGONY

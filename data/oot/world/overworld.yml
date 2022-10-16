@@ -396,6 +396,9 @@
     "Gerudo Valley After Bridge": "true"
     "Desert": "has(GERUDO_CARD)"
     "Gerudo Training Grounds Entrance": "has(GERUDO_CARD)"
+  locations:
+    "Gerudo Fortress GS Wall": "is_adult && gs_night && can_hookshot"
+    "Gerudo Fortress GS Target": "is_adult && gs_night && can_hookshot && has(GERUDO_CARD)"
 "Desert":
   exits:
     "Gerudo Fortress Exterior": "true"
