@@ -199,6 +199,10 @@ Dodongo Cavern Boss,                 npc,           LAIR_KING_DODONGO, BLUE_WARP
 Jabu-Jabu Map Chest,                chest,        INSIDE_JABU_JABU,  0x02,                MAP_JJ
 Jabu-Jabu Compass Chest,            chest,        INSIDE_JABU_JABU,  0x04,                COMPASS_JJ
 Jabu-Jabu Boomerang Chest,          chest,        INSIDE_JABU_JABU,  0x01,                BOOMERANG
+Jabu-Jabu GS Water Switch,          gs,           INSIDE_JABU_JABU,  0x1b,                GS_TOKEN
+Jabu-Jabu GS Bottom Lower,          gs,           INSIDE_JABU_JABU,  0x18,                GS_TOKEN
+Jabu-Jabu GS Bottom Upper,          gs,           INSIDE_JABU_JABU,  0x19,                GS_TOKEN
+Jabu-Jabu GS Near Boss,             gs,           INSIDE_JABU_JABU,  0x1a,                GS_TOKEN
 Jabu-Jabu Boss Container,           collectible,  LAIR_BARINADE,     0x1f,                HEART_CONTAINER
 Jabu-Jabu Boss,                     npc,          LAIR_BARINADE,     BLUE_WARP_BARINADE,  STONE_SAPPHIRE
 
