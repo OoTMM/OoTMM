@@ -15,18 +15,6 @@ static RemovedActor kRemovedActors[] = {
     { SCE_OOT_LOST_WOODS, AC_EN_OWL },
 };
 
-void comboSpawnSpecial(GameState_Play* play, float x, float y, float z, u8 specialId, u16 gi)
-{
-    SpawnActor(
-        (char*)play + 0x1c24,
-        play,
-        AC_ITEM_CUSTOM,
-        x, y, z,
-        0, 0, 0x2000 | specialId,
-        gi
-    );
-}
-
 void comboSpawnCollectible(GameState_Play* play, float x, float y, float z, u8 flag, u16 gi)
 {
     SpawnActor(
@@ -60,42 +48,6 @@ Actor* hookSpawnActor(void* const_1, GameState_Play* play, s16 actorId, float x,
             variable = GI_OOT_SMALL_KEY;
         }
 #endif
-        break;
-    case AC_DOOR_WARP1:
-        /* Blue warp */
-        /*
-        switch (play->sceneId)
-        {
-        case SCE_OOT_LAIR_GOHMA:
-            comboSpawnSpecial(play, x, y, z, EV_OOT_CHK_STONE_EMERALD, GI_OOT_STONE_EMERALD);
-            SetEventChk(EV_OOT_CHK_EMERALD_TREE_DEAD);
-            SetEventChk(EV_OOT_CHK_GOHMA);
-            SetEventChk(EV_OOT_CHK_TREE_DEAD);
-            SetEventChk(EV_OOT_CHK_MIDO_TREE_DEAD);
-            break;
-        case SCE_OOT_LAIR_KING_DODONGO:
-            comboSpawnSpecial(play, x, y, z, EV_OOT_CHK_STONE_RUBY, GI_OOT_STONE_RUBY);
-            break;
-        case SCE_OOT_LAIR_BARINADE:
-            comboSpawnSpecial(play, x, y, z, EV_OOT_CHK_STONE_SAPPHIRE, GI_OOT_STONE_SAPPHIRE);
-            break;
-        case SCE_OOT_LAIR_PHANTOM_GANON:
-            comboSpawnSpecial(play, x, y, z, EV_OOT_CHK_MEDALLION_FOREST, GI_OOT_MEDALLION_FOREST);
-            break;
-        case SCE_OOT_LAIR_VOLVAGIA:
-            comboSpawnSpecial(play, x, y, z, EV_OOT_CHK_MEDALLION_FIRE, GI_OOT_MEDALLION_FIRE);
-            break;
-        case SCE_OOT_LAIR_MORPHA:
-            comboSpawnSpecial(play, x, y, z, EV_OOT_CHK_MEDALLION_WATER, GI_OOT_MEDALLION_WATER);
-            break;
-        case SCE_OOT_LAIR_BONGO_BONGO:
-            comboSpawnSpecial(play, x, y, z, EV_OOT_CHK_MEDALLION_SHADOW, GI_OOT_MEDALLION_SHADOW);
-            break;
-        case SCE_OOT_LAIR_TWINROVA:
-            comboSpawnSpecial(play, x, y, z, EV_OOT_CHK_MEDALLION_SPIRIT, GI_OOT_MEDALLION_SPIRIT);
-            break;
-        }
-        */
         break;
     case AC_BG_TOKI_SWD:
         if (gSave.age == AGE_CHILD)

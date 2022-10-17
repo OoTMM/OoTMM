@@ -138,14 +138,6 @@ void hookPlay_Init(GameState_Play* play)
     Play_Init(play);
     comboSpawnItemGivers(play);
 
-    /* Saria's Song */
-    /*
-    if (play->sceneId == SCE_OOT_SACRED_FOREST_MEADOW && gSave.age == AGE_CHILD && GetEventChk(EV_OOT_CHK_ZELDA_LETTER))
-    {
-        comboSpawnSpecial(play, 125.f, 500.f, -2970.f, EV_OOT_CHK_SONG_SARIA, GI_OOT_SONG_SARIA);
-    }
-    */
-
     if ((gSave.entrance & 0xfffc) == 0x0530)
     {
         comboGameSwitch();

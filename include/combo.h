@@ -82,8 +82,7 @@ void comboGameSwitch(void);
 /* Override */
 #define OV_CHEST        0
 #define OV_COLLECTIBLE  1
-#define OV_SPECIAL      2
-#define OV_NPC          3
+#define OV_NPC          2
 
 s16 comboOverride(int type, u16 sceneId, u16 id, s16 gi);
 
@@ -97,7 +96,6 @@ s32 comboProgressiveOot(s32 gi);
 s32 comboProgressiveMm(s32 gi);
 
 /* Actor */
-void comboSpawnSpecial(GameState_Play* play, float x, float y, float z, u8 specialId, u16 gi);
 void comboSpawnCollectible(GameState_Play* play, float x, float y, float z, u8 flag, u16 gi);
 
 /* Objects */

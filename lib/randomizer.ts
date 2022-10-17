@@ -98,11 +98,8 @@ export const randomizeGame = async (game: Game, logic: LogicResult): Promise<Buf
     }
     let sceneId = scenes[scene];
     switch (c.type) {
-    case 'special':
-      sceneId = 0xf0;
-      break;
     case 'npc':
-      sceneId = 0xf1;
+      sceneId = 0xf0;
       break;
     case 'collectible':
       id |= 0x40;

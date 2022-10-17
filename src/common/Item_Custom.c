@@ -9,13 +9,6 @@ static int shouldSpawn(Actor_ItemCustom* item, GameState_Play* play)
         if (GetCollectibleFlag(play, item->flag))
             return 0;
         break;
-#if defined(GAME_OOT)
-    case 0x2:
-        /* Special */
-        if (GetEventChk(item->flag))
-            return 0;
-        break;
-#endif
     }
     return 1;
 }
@@ -63,10 +56,6 @@ static void ItemCustom_Init(Actor_ItemCustom* item, GameState_Play* play)
     case 0x1:
         /* Collectible */
         item->gi = comboOverride(OV_COLLECTIBLE, play->sceneId, item->flag, item->gi);
-        break;
-    case 0x2:
-        /* Special */
-        item->gi = comboOverride(OV_SPECIAL, 0, item->flag, item->gi);
         break;
     }
 
@@ -142,14 +131,6 @@ static void ItemCustom_Update(Actor_ItemCustom* item, GameState_Play* play)
         case 0x1:
             /* Collectible */
             SetCollectibleFlag(play, item->flag);
-            break;
-#if defined(GAME_OOT)
-        case 0x2:
-            /* Special */
-            SetEventChk(item->flag);
-            if (item->flag == EV_OOT_CHK_RUTO_LETTER)
-                SetSwitchFlag(play, 0xb);
-#endif
             break;
         }
         ActorDestroy(&item->base);
