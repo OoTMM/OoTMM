@@ -50,6 +50,7 @@
 #define EV_OOT_CHK_MEDALLION_SHADOW         0x61
 #define EV_OOT_CHK_SONG_EPONA               0x62
 #define EV_OOT_ITEM_GORON_BRACELET          0x20
+#define EV_OOT_INF_MEDIGORON                0xb2
 
 #define MM_EV(a, b) (((a) << 3) | (b))
 

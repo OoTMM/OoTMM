@@ -63,6 +63,7 @@ export const ITEMS_REQUIRED = new Set<string>([
   'OOT_MAGIC_BEAN',
   'OOT_MILK_BOTTLE',
   'OOT_STONE_OF_AGONY',
+  'OOT_WALLET',
   'MM_MASK_DEKU',
   'MM_MASK_GORON',
   'MM_MASK_ZORA',
@@ -208,6 +209,7 @@ const makeItemPools = (world: World) => {
   }
 
   maxRequired(pools, 'OOT_SWORD', 2);
+  maxRequired(pools, 'OOT_WALLET', 1);
   maxRequired(pools, 'OOT_BOMB_BAG', 1);
   maxRequired(pools, 'OOT_BOW', 1);
   maxRequired(pools, 'OOT_SLINGSHOT', 1);

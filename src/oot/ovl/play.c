@@ -138,7 +138,7 @@ void hookPlay_Init(GameState_Play* play)
     Play_Init(play);
     comboSpawnItemGivers(play);
 
-    if ((gSave.entrance & 0xfffc) == 0x0530)
+    if (gSave.entrance == 0x0530)
     {
         comboGameSwitch();
         return;

@@ -65,6 +65,7 @@ Goron City Maze Left,                 chest,          GORON_CITY,               
 Goron City Big Pot HP,                collectible,    GORON_CITY,               0x1f,                   HEART_PIECE
 Goron City Tunic,                     npc,            GORON_CITY,               GORON_LINK_TUNIC,       TUNIC_GORON
 Goron City Bomb Bag,                  npc,            GORON_CITY,               GORON_BOMB_BAG,         BOMB_BAG
+Goron City Medigoron Giant Knife,     npc,            GORON_CITY,               MEDIGORON,              SWORD
 Goron City GS Platform,               gs,             GORON_CITY,               0x85,                   GS_TOKEN
 Goron City GS Maze,                   gs,             GORON_CITY,               0x86,                   GS_TOKEN
 Death Mountain Crater Alcove HP,      collectible,    DEATH_MOUNTAIN_CRATER,    0x02,                   HEART_PIECE
