@@ -57,6 +57,56 @@ static const BlueWarpData* DoorWarp1_GetData(GameState_Play* play)
     return &kBlueWarpData[id];
 }
 
+int DoorWarp1_Collide(Actor* this, GameState_Play* play)
+{
+    float dist;
+
+    dist = this->xzDistanceFromLink;
+    if (dist < 0.f)
+        dist = -dist;
+    if (dist < 60.f)
+    {
+        dist = LINK.base.position.y - this->position.y;
+        if (dist < 0.f)
+            dist = -dist;
+        if (dist < 20.f)
+            return 1;
+    }
+    return 0;
+}
+
+
+int DoorWarp1_ShouldTrigger(Actor* this, GameState_Play* play)
+{
+    const BlueWarpData* data;
+    int state;
+
+    if (DoorWarp1_Collide(this, play))
+    {
+        data = DoorWarp1_GetData(play);
+        if (data == NULL || GetEventChk(data->event))
+        {
+            if ((LINK.state & 0x400) == 0)
+            {
+                return 1;
+            }
+            return 0;
+        }
+        SpawnActor(
+            (char*)play + 0x1c24,
+            play,
+            AC_ITEM_GIVER,
+            0, 0, 0,
+            0, 0, 0,
+            data->npc
+        );
+        return 0;
+    }
+    return 0;
+}
+
+PATCH_FUNC(0x809056e8, DoorWarp1_ShouldTrigger);
+
 void DoorWarp1_AfterDrawWarp(Actor* this, GameState_Play* play)
 {
     static const int kRotDivisor = 100;

@@ -2,7 +2,12 @@
 
 static int ItemGiver_Common(Actor* this, GameState_Play* play, s16 gi, int ev)
 {
-    if (Actor_HasParent(this))
+    if (GetEventChk(ev))
+    {
+        ActorDestroy(this);
+        return 0;
+    }
+    else if (Actor_HasParent(this))
     {
         SetEventChk(ev);
         ActorDestroy(this);
@@ -16,44 +21,72 @@ static int ItemGiver_Common(Actor* this, GameState_Play* play, s16 gi, int ev)
     }
 }
 
-static void ItemGiver_SariaOcarina(Actor* this, GameState_Play* play)
-{
-    ItemGiver_Common(this, play, GI_OOT_OCARINA_FAIRY, EV_OOT_CHK_SARIA_OCARINA);
-}
-
-static void ItemGiver_SheikKakariko(Actor* this, GameState_Play* play)
-{
-    if (ItemGiver_Common(this, play, GI_OOT_SONG_TP_SHADOW, EV_OOT_CHK_SONG_TP_SHADOW))
-    {
-        SetEventChk(EV_OOT_CHK_BONGO_ESCAPE);
-    }
-}
-
-static void ItemGiver_SheikDesertColossus(Actor* this, GameState_Play* play)
-{
-    ItemGiver_Common(this, play, GI_OOT_SONG_TP_SPIRIT, EV_OOT_CHK_SONG_TP_SPIRIT);
-}
-
-static void ItemGiver_ZeldaLightArrow(Actor* this, GameState_Play* play)
-{
-    ItemGiver_Common(this, play, GI_OOT_ARROW_LIGHT, EV_OOT_CHK_LIGHT_ARROW);
-}
-
 static void ItemGiver_Init(Actor* this, GameState_Play* play)
+{
+}
+
+static void ItemGiver_Update(Actor* this, GameState_Play* play)
 {
     switch (this->variable)
     {
     case NPC_OOT_SARIA_OCARINA:
-        this->update = ItemGiver_SariaOcarina;
+        ItemGiver_Common(this, play, GI_OOT_OCARINA_FAIRY, EV_OOT_CHK_SARIA_OCARINA);
         break;
     case NPC_OOT_SHEIK_SHADOW:
-        this->update = ItemGiver_SheikKakariko;
+        if (ItemGiver_Common(this, play, GI_OOT_SONG_TP_SHADOW, EV_OOT_CHK_SONG_TP_SHADOW))
+        {
+            SetEventChk(EV_OOT_CHK_BONGO_ESCAPE);
+        }
         break;
     case NPC_OOT_SHEIK_SPIRIT:
-        this->update = ItemGiver_SheikDesertColossus;
+        ItemGiver_Common(this, play, GI_OOT_SONG_TP_SPIRIT, EV_OOT_CHK_SONG_TP_SPIRIT);
         break;
     case NPC_OOT_ZELDA_LIGHT_ARROW:
-        this->update = ItemGiver_ZeldaLightArrow;
+        ItemGiver_Common(this, play, GI_OOT_ARROW_LIGHT, EV_OOT_CHK_LIGHT_ARROW);
+        break;
+    case NPC_OOT_BLUE_WARP_GOHMA:
+        if (ItemGiver_Common(this, play, GI_OOT_STONE_EMERALD, EV_OOT_CHK_STONE_EMERALD))
+        {
+            SetEventChk(EV_OOT_CHK_EMERALD_TREE_DEAD);
+            SetEventChk(EV_OOT_CHK_GOHMA);
+            SetEventChk(EV_OOT_CHK_TREE_DEAD);
+            SetEventChk(EV_OOT_CHK_MIDO_TREE_DEAD);
+        }
+        break;
+    case NPC_OOT_BLUE_WARP_KING_DODONGO:
+        if (ItemGiver_Common(this, play, GI_OOT_STONE_RUBY, EV_OOT_CHK_STONE_RUBY))
+        {
+        }
+        break;
+    case NPC_OOT_BLUE_WARP_BARINADE:
+        if (ItemGiver_Common(this, play, GI_OOT_STONE_SAPPHIRE, EV_OOT_CHK_STONE_SAPPHIRE))
+        {
+        }
+        break;
+    case NPC_OOT_BLUE_WARP_PHANTOM_GANON:
+        if (ItemGiver_Common(this, play, GI_OOT_MEDALLION_FOREST, EV_OOT_CHK_MEDALLION_FOREST))
+        {
+        }
+        break;
+    case NPC_OOT_BLUE_WARP_VOLVAGIA:
+        if (ItemGiver_Common(this, play, GI_OOT_MEDALLION_FIRE, EV_OOT_CHK_MEDALLION_FIRE))
+        {
+        }
+        break;
+    case NPC_OOT_BLUE_WARP_MORPHA:
+        if (ItemGiver_Common(this, play, GI_OOT_MEDALLION_WATER, EV_OOT_CHK_MEDALLION_WATER))
+        {
+        }
+        break;
+    case NPC_OOT_BLUE_WARP_BONGO_BONGO:
+        if (ItemGiver_Common(this, play, GI_OOT_MEDALLION_SHADOW, EV_OOT_CHK_MEDALLION_SHADOW))
+        {
+        }
+        break;
+    case NPC_OOT_BLUE_WARP_TWINROVA:
+        if (ItemGiver_Common(this, play, GI_OOT_MEDALLION_SPIRIT, EV_OOT_CHK_MEDALLION_SPIRIT))
+        {
+        }
         break;
     default:
         ActorDestroy(this);
@@ -68,7 +101,7 @@ ActorInit ItemGiver_gActorInit = {
     0x1,
     sizeof(Actor),
     (ActorFunc)ItemGiver_Init,
-    NULL,
+    (ActorFunc)ItemGiver_Update,
     NULL,
     NULL,
 };

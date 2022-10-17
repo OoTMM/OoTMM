@@ -70,7 +70,9 @@ typedef struct PACKED ALIGNED(0x4) Actor
     float       speedXZ;
     float       gravity;
     float       minVelocityY;
-    char        unk_74[0x40];
+    char        unk_74[0x1c];
+    float       xzDistanceFromLink;
+    char        unk_94[0x20];
     Vector3s    rot2;
     char        unk_ba[2];
     float       modelOffsetY;
