@@ -187,6 +187,11 @@ Dodongo Cavern Compass Chest,        chest,         DODONGO_CAVERN,    0x05,    
 Dodongo Cavern Bomb Bag Side Chest,  chest,         DODONGO_CAVERN,    0x06,                    RUPEE_RED
 Dodongo Cavern Bomb Bag Chest,       chest,         DODONGO_CAVERN,    0x04,                    BOMB_BAG
 Dodongo Cavern Bridge Chest,         chest,         DODONGO_CAVERN,    0x0a,                    SHIELD
+Dodongo Cavern GS Side Room,         gs,            DODONGO_CAVERN,    0x14,                    GS_TOKEN
+Dodongo Cavern GS Stairs Vines,      gs,            DODONGO_CAVERN,    0x10,                    GS_TOKEN
+Dodongo Cavern GS Stairs Top,        gs,            DODONGO_CAVERN,    0x12,                    GS_TOKEN
+Dodongo Cavern GS Scarecrow,         gs,            DODONGO_CAVERN,    0x11,                    GS_TOKEN
+Dodongo Cavern GS Near Boss,         gs,            DODONGO_CAVERN,    0x13,                    GS_TOKEN
 Dodongo Cavern Boss Chest,           chest,         LAIR_KING_DODONGO, 0x00,                    BOMBS_10
 Dodongo Cavern Boss Container,       collectible,   LAIR_KING_DODONGO, 0x1f,                    HEART_CONTAINER
 Dodongo Cavern Boss,                 npc,           LAIR_KING_DODONGO, BLUE_WARP_KING_DODONGO,  STONE_RUBY

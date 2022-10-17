@@ -1,36 +1,115 @@
-{
-  "Dodongo Cavern Entrance": {
-    "dungeon": "DC",
-    "exits": {
-      "Death Mountain": "true",
-      "Dodongo Cavern After Slingshot": "can_hit_triggers_distance"
-    },
-    "locations": {
-      "Dodongo Cavern Map Chest": "true",
-      "Dodongo Cavern Compass Chest": "true",
-      "Dodongo Cavern Bomb Bag Side Chest": "true"
-    }
-  },
-  "Dodongo Cavern After Slingshot": {
-    "dungeon": "DC",
-    "exits": {
-      "Dodongo Cavern Entrance": "true",
-      "Dodongo Cavern Boss": "has_explosives"
-    },
-    "locations": {
-      "Dodongo Cavern Bomb Bag Chest": "true",
-      "Dodongo Cavern Bridge Chest": "has_explosives",
-      "Dodongo Cavern Boss Chest": "has_explosives"
-    }
-  },
-  "Dodongo Cavern Boss": {
-    "dungeon": "DC",
-    "exits": {
-      "Dodongo Cavern After Slingshot": "true"
-    },
-    "locations": {
-      "Dodongo Cavern Boss Container": "true",
-      "Dodongo Cavern Boss": "true"
-    }
-  }
-}
+"Dodongo Cavern Entrance":
+  dungeon: DC
+  exits:
+    "Death Mountain": "true"
+    "Dodongo Cavern Main": "has_bombflowers"
+"Dodongo Cavern Main":
+  dungeon: DC
+  exits:
+    "Dodongo Cavern Entrance": "true"
+    "Dodongo Cavern Right Corridor": "true"
+    "Dodongo Cavern Main Ledge": "is_adult"
+    "Dodongo Cavern Stairs": "event(DC_MAIN_SWITCH)"
+    "Dodongo Cavern Skull": "event(DC_BOMB_EYES)"
+  locations:
+    "Dodongo Cavern Map Chest": "has_bombflowers"
+"Dodongo Cavern Right Corridor":
+  dungeon: DC
+  exits:
+    "Dodongo Cavern Main": "true"
+    "Dodongo Cavern Side Room": "true"
+    "Dodongo Cavern Miniboss 1": "true"
+  locations:
+    "Dodongo Cavern GS Scarecrow": "scarecrow_hookshot"
+"Dodongo Cavern Side Room":
+  dungeon: DC
+  exits:
+    "Dodongo Cavern Right Corridor": "true"
+  locations:
+    "Dodongo Cavern GS Side Room": "true"
+"Dodongo Cavern Miniboss 1":
+  dungeon: DC
+  exits:
+    "Dodongo Cavern Right Corridor": "true"
+    "Dodongo Cavern Green Room": "has_weapon"
+"Dodongo Cavern Green Room":
+  dungeon: DC
+  exits:
+    "Dodongo Cavern Miniboss 1": "true"
+    "Dodongo Cavern Main Ledge": "is_child || has_fire"
+"Dodongo Cavern Main Ledge":
+  dungeon: DC
+  exits:
+    "Dodongo Cavern Main": "true"
+  events:
+    DC_MAIN_SWITCH: "true"
+"Dodongo Cavern Stairs":
+  dungeon: DC
+  exits:
+    "Dodongo Cavern Main": "true"
+    "Dodongo Cavern Compass Room": "true"
+    "Dodongo Cavern Stairs Top": "has_bombflowers"
+"Dodongo Cavern Stairs Top":
+  dungeon: DC
+  exits:
+    "Dodongo Cavern Stairs": "true"
+    "Dodongo Cavern Bomb Bag Room 1": "true"
+  locations:
+    "Dodongo Cavern GS Stairs Vines": "has_ranged_weapon"
+    "Dodongo Cavern GS Stairs Top": "can_hookshot || can_boomerang"
+"Dodongo Cavern Compass Room":
+  dungeon: DC
+  exits:
+    "Dodongo Cavern Stairs": "true"
+  locations:
+    "Dodongo Cavern Compass Chest": "true"
+"Dodongo Cavern Bomb Bag Room 1":
+  dungeon: DC
+  exits:
+    "Dodongo Cavern Stairs Top": "true"
+    "Dodongo Cavern Miniboss 2": "can_hit_triggers_distance"
+  locations:
+    "Dodongo Cavern Bomb Bag Side Chest": "true"
+"Dodongo Cavern Miniboss 2":
+  dungeon: DC
+  exits:
+    "Dodongo Cavern Bomb Bag Room 1": "true"
+    "Dodongo Cavern Bomb Bag Room 2": "can_hit_triggers_distance && has_weapon"
+"Dodongo Cavern Bomb Bag Room 2":
+  dungeon: DC
+  exits:
+    "Dodongo Cavern Miniboss 2": "true"
+    "Dodongo Cavern Main Bridge": "true"
+  locations:
+    "Dodongo Cavern Bomb Bag Chest": "true"
+"Dodongo Cavern Main Bridge":
+  dungeon: DC
+  exits:
+    "Dodongo Cavern Bomb Bag Room 2": "true"
+  events:
+    DC_SHORTCUT: "true"
+    DC_BOMB_EYES: "has(BOMB_BAG)"
+  locations:
+    "Dodongo Cavern Bridge Chest": "has_explosives"
+"Dodongo Cavern Skull":
+  dungeon: DC
+  exits:
+    "Dodongo Cavern Main": "true"
+    "Dodongo Cavern Pre Boss": "true"
+  locations:
+    "Dodongo Cavern GS Near Boss": "true"
+"Dodongo Cavern Pre Boss":
+  dungeon: DC
+  exits:
+    "Dodongo Cavern Boss": "true"
+  locations:
+     "Dodongo Cavern Boss Chest": "true"
+"Dodongo Cavern Boss":
+  dungeon: DC
+  exits:
+    "Dodongo Cavern After Boss": "has_bombflowers"
+"Dodongo Cavern After Boss":
+  dungeon: DC
+  locations:
+    "Dodongo Cavern Boss Container": "true"
+    "Dodongo Cavern Boss": "true"
