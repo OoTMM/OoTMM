@@ -217,8 +217,13 @@ Forest Temple Bow,                  chest,        TEMPLE_FOREST,       0x0c,    
 Forest Temple Compass,              chest,        TEMPLE_FOREST,       0x0f,                    COMPASS_FOREST
 Forest Temple Checkerboard,         chest,        TEMPLE_FOREST,       0x07,                    ARROWS_10
 Forest Temple Boss Key,             chest,        TEMPLE_FOREST,       0x0e,                    BOSS_KEY_FOREST
-Forest Temple Garden Top,           chest,        TEMPLE_FOREST,       0x02,                    SMALL_KEY_FOREST
+Forest Temple Floormaster,          chest,        TEMPLE_FOREST,       0x02,                    SMALL_KEY_FOREST
 Forest Temple Antichamber,          chest,        TEMPLE_FOREST,       0x0b,                    ARROWS_5
+Forest Temple GS Entrance,          gs,           TEMPLE_FOREST,       0x21,                    GS_TOKEN
+Forest Temple GS Main,              gs,           TEMPLE_FOREST,       0x23,                    GS_TOKEN
+Forest Temple GS Garden West,       gs,           TEMPLE_FOREST,       0x22,                    GS_TOKEN
+Forest Temple GS Garden East,       gs,           TEMPLE_FOREST,       0x20,                    GS_TOKEN
+Forest Temple GS Antichamber,       gs,           TEMPLE_FOREST,       0x24,                    GS_TOKEN
 Forest Temple Boss Container,       collectible,  LAIR_PHANTOM_GANON,  0x1f,                    HEART_CONTAINER
 Forest Temple Boss,                 npc,          LAIR_PHANTOM_GANON,  BLUE_WARP_PHANTOM_GANON, MEDALLION_FOREST
 
