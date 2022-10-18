@@ -1,38 +1,129 @@
-{
-  "Water Temple Entrance": {
-    "dungeon": "Water",
-    "exits": {
-      "Lake Hylia": "true",
-      "Water Temple Boss": "has(BOSS_KEY_WATER) && can_longshot"
-    },
-    "events": {
-      "WATER_TEMPLE_LEVEL_MIDDLE": "(can_play(SONG_ZELDA) && has(SMALL_KEY_WATER, 5)) || has_fire",
-      "WATER_TEMPLE_LEVEL_RESET": "can_play(SONG_ZELDA) && (scarecrow_hookshot || has(BOOTS_HOVER) || (has(HOOKSHOT) && has(SMALL_KEY_WATER, 5) && event(WATER_TEMPLE_LEVEL_MIDDLE)))"
-    },
-    "locations": {
-      "Water Temple Map": "event(WATER_TEMPLE_LEVEL_RESET)",
-      "Water Temple Compass": "event(WATER_TEMPLE_LEVEL_MIDDLE) && has(HOOKSHOT)",
-      "Water Temple Shell Chest": "event(WATER_TEMPLE_LEVEL_RESET) && (has(BOW) || has_fire)",
-      "Water Temple Dragon Chest": "event(WATER_TEMPLE_LEVEL_RESET) && has(STRENGTH) && has(HOOKSHOT)",
-      "Water Temple Under Center": "event(WATER_TEMPLE_LEVEL_MIDDLE) && has(HOOKSHOT)",
-      "Water Temple Bombable Chest": "event(WATER_TEMPLE_LEVEL_MIDDLE) && has_explosives",
-      "Water Temple Boss Key Chest": "has(SMALL_KEY_WATER, 6) && has(HOOKSHOT)",
-      "Water Temple Longshot": "has(SMALL_KEY_WATER, 6) && has(HOOKSHOT)",
-      "Water Temple River Chest": "has(SMALL_KEY_WATER, 6) && can_play(SONG_TIME) && has(HOOKSHOT)",
-      "Water Temple Corridor Chest": "can_longshot && has(BOW) && event(WATER_TEMPLE_LEVEL_MIDDLE)"
-    }
-  },
-  "Water Temple Boss": {
-    "dungeon": "Water",
-    "exits": {
-      "Water Temple Entrance": "true"
-    },
-    "events": {
-      "WATER_TEMPLE_CLEARED": "true"
-    },
-    "locations": {
-      "Water Temple Boss HC": "true",
-      "Water Temple Boss": "true"
-    }
-  }
-}
+"Water Temple Entrance":
+  dungeon: Water
+  exits:
+    "Lake Hylia": "true"
+    "Water Temple Main": "true"
+"Water Temple Main":
+  dungeon: Water
+  exits:
+    "Water Temple Ruto Room": "has_iron_boots"
+    "Water Temple Center": "has(SMALL_KEY_WATER, 5) || has_fire"
+    "Water Temple Compass Room": "event(WATER_LEVEL_MIDDLE) && can_hookshot"
+    "Water Temple Dragon Room": "event(WATER_LEVEL_RESET) && has(STRENGTH)"
+    "Water Temple Elevator": "event(WATER_LEVEL_MIDDLE) && can_hookshot"
+    "Water Temple Corridor": "can_longshot && has(BOW) && event(WATER_LEVEL_MIDDLE)"
+    "Water Temple Waterfalls": "has(SMALL_KEY_WATER, 4) && can_longshot"
+    "Water Temple Large Pit": "has(SMALL_KEY_WATER, 4) && event(WATER_LEVEL_RESET)"
+    "Water Temple Antichamber": "can_longshot"
+    "Water Temple Cage Room": "true"
+"Water Temple Main Ledge":
+  dungeon: Water
+  events:
+    WATER_LEVEL_RESET: "can_play(SONG_ZELDA)"
+  exits:
+    "Water Temple Main": "true"
+"Water Temple Ruto Room":
+  dungeon: Water
+  exits:
+    "Water Temple Map Room": "event(WATER_LEVEL_RESET)"
+    "Water Temple Shell Room": "event(WATER_LEVEL_RESET) && (has(BOW) || has_fire)"
+  locations:
+    "Water Temple Bombable Chest": "event(WATER_LEVEL_MIDDLE) && has_explosives"
+"Water Temple Map Room":
+  dungeon: Water
+  locations:
+    "Water Temple Map": "true"
+"Water Temple Shell Room":
+  dungeon: Water
+  locations:
+    "Water Temple Shell Chest": "true"
+"Water Temple Center":
+  dungeon: Water
+  exits:
+    "Water Temple Under Center": "event(WATER_LEVEL_MIDDLE)"
+  events:
+    WATER_LEVEL_MIDDLE: "can_hookshot && can_play(SONG_ZELDA)"
+  locations:
+    "Water Temple GS Center": "event(WATER_LEVEL_MIDDLE) && can_longshot"
+"Water Temple Under Center":
+  dungeon: Water
+  locations:
+    "Water Temple Under Center": "can_hookshot"
+"Water Temple Compass Room":
+  dungeon: Water
+  locations:
+    "Water Temple Compass": "can_hookshot"
+"Water Temple Dragon Room":
+  dungeon: Water
+  locations:
+    "Water Temple Dragon Chest": "can_hookshot"
+"Water Temple Elevator":
+  dungeon: Water
+  exits:
+    "Water Temple Main Ledge": "can_hookshot"
+"Water Temple Corridor":
+  dungeon: Water
+  locations:
+    "Water Temple Corridor Chest": "true"
+"Water Temple Waterfalls":
+  dungeon: Water
+  exits:
+    "Water Temple Blocks": "true"
+"Water Temple Blocks":
+  dungeon: Water
+  exits:
+    "Water Temple Waterfalls Ledge": "true"
+"Water Temple Waterfalls Ledge":
+  dungeon: Water
+  exits:
+    "Water Temple Boss Key Room": "has(SMALL_KEY_WATER, 5)"
+  locations:
+    "Water Temple GS Waterfalls": "can_hookshot"
+"Water Temple Boss Key Room":
+  dungeon: Water
+  locations:
+    "Water Temple Boss Key Chest": "true"
+"Water Temple Large Pit":
+  dungeon: Water
+  exits:
+    "Water Temple Before Dark Link": "has(SMALL_KEY_WATER, 5) && can_hookshot"
+  locations:
+    "Water Temple GS Large Pit": "can_longshot"
+"Water Temple Before Dark Link":
+  dungeon: Water
+  exits:
+    "Water Temple Dark Link": "can_hookshot"
+"Water Temple Dark Link":
+  dungeon: Water
+  exits:
+    "Water Temple Longshot Room": "has_weapon"
+"Water Temple Longshot Room":
+  dungeon: Water
+  exits:
+    "Water Temple River": "can_play(SONG_TIME)"
+  locations:
+    "Water Temple Longshot": "true"
+"Water Temple River":
+  dungeon: Water
+  locations:
+    "Water Temple River Chest": "can_longshot"
+    "Water Temple GS River": "can_longshot"
+"Water Temple Cage Room":
+  dungeon: Water
+  locations:
+    "Water Temple GS Cage": "can_longshot && has(MAGIC_UPGRADE)"
+"Water Temple Antichamber":
+  dungeon: Water
+  exits:
+    "Water Temple Boss": "has(BOSS_KEY_WATER)"
+"Water Temple Boss":
+  dungeon: Water
+  exits:
+    "Water Temple After Boss": "can_hookshot && has_weapon"
+"Water Temple After Boss":
+  dungeon: Water
+  events:
+    WATER_TEMPLE_CLEARED: "true"
+  locations:
+    "Water Temple Boss HC": "true"
+    "Water Temple Boss": "true"
