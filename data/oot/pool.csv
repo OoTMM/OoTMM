@@ -240,6 +240,12 @@ Fire Temple Below Maze Chest,       chest,        TEMPLE_FIRE,   0x0b,          
 Fire Temple Compass,                chest,        TEMPLE_FIRE,   0x07,                COMPASS_FIRE
 Fire Temple Hammer,                 chest,        TEMPLE_FIRE,   0x05,                HAMMER
 Fire Temple Ring Jail,              chest,        TEMPLE_FIRE,   0x09,                RUPEE_RED
+Fire Temple Scarecrow Chest,        chest,        TEMPLE_FIRE,   0x0d,                RUPEE_HUGE
+Fire Temple GS Lava Side Room,      gs,           TEMPLE_FIRE,   0x28,                GS_TOKEN
+Fire Temple GS Hammer Statues,      gs,           TEMPLE_FIRE,   0x29,                GS_TOKEN
+Fire Temple GS Maze,                gs,           TEMPLE_FIRE,   0x2a,                GS_TOKEN
+Fire Temple GS Scarecrow Wall,      gs,           TEMPLE_FIRE,   0x2c,                GS_TOKEN
+Fire Temple GS Scarecrow Top,       gs,           TEMPLE_FIRE,   0x2b,                GS_TOKEN
 Fire Temple Boss Container,         collectible,  LAIR_VOLVAGIA, 0x1f,                HEART_CONTAINER
 Fire Temple Boss,                   npc,          LAIR_VOLVAGIA, BLUE_WARP_VOLVAGIA,  MEDALLION_FIRE
 
