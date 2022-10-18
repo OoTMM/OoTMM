@@ -342,6 +342,11 @@ Spirit Temple Adult Invisible 2,          chest,        TEMPLE_SPIRIT,   0x15,  
 Spirit Temple Adult Late Sun on Wall,     chest,        TEMPLE_SPIRIT,   0x05,                SMALL_KEY_SPIRIT
 Spirit Temple Adult Boss Key Chest,       chest,        TEMPLE_SPIRIT,   0x0a,                BOSS_KEY_SPIRIT
 Spirit Temple Adult Topmost Sun on Wall,  chest,        TEMPLE_SPIRIT,   0x12,                BOMBS_20
+Spirit Temple GS Child Climb,             gs,           TEMPLE_SPIRIT,   0x3b,                GS_TOKEN
+Spirit Temple GS Child Fence,             gs,           TEMPLE_SPIRIT,   0x3c,                GS_TOKEN
+Spirit Temple GS Iron Knuckle,            gs,           TEMPLE_SPIRIT,   0x38,                GS_TOKEN
+Spirit Temple GS Boulders,                gs,           TEMPLE_SPIRIT,   0x39,                GS_TOKEN
+Spirit Temple GS Statue,                  gs,           TEMPLE_SPIRIT,   0x3a,                GS_TOKEN
 Spirit Temple Silver Gauntlets,           chest,        DESERT_COLOSSUS, 0x0b,                STRENGTH
 Spirit Temple Mirror Shield,              chest,        DESERT_COLOSSUS, 0x09,                SHIELD
 Spirit Temple Boss HC,                    collectible,  LAIR_TWINROVA,   0x1f,                HEART_CONTAINER
