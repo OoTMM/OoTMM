@@ -254,6 +254,9 @@ Ice Cavern Map,                     chest,        ICE_CAVERN, 0x00,         MAP_
 Ice Cavern Compass,                 chest,        ICE_CAVERN, 0x01,         COMPASS_IC
 Ice Cavern HP,                      collectible,  ICE_CAVERN, 0x01,         HEART_PIECE
 Ice Cavern Sheik Song,              npc,          ICE_CAVERN, SHEIK_WATER,  SONG_TP_WATER
+Ice Cavern GS Scythe Room,          gs,           ICE_CAVERN, 0x51,         GS_TOKEN
+Ice Cavern GS HP Room,              gs,           ICE_CAVERN, 0x52,         GS_TOKEN
+Ice Cavern GS Block Room,           gs,           ICE_CAVERN, 0x50,         GS_TOKEN
 
 Water Temple Under Center,          chest,        TEMPLE_WATER,  0x06,              RUPEE_BLUE
 Water Temple Compass,               chest,        TEMPLE_WATER,  0x09,              COMPASS_WATER

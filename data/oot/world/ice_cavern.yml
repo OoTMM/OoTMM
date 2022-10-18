@@ -10,3 +10,6 @@
     "Ice Cavern Compass": "event(BLUE_FIRE)"
     "Ice Cavern HP": "event(BLUE_FIRE)"
     "Ice Cavern Sheik Song": "event(BLUE_FIRE)"
+    "Ice Cavern GS Scythe Room": "event(BLUE_FIRE) && can_hookshot"
+    "Ice Cavern GS Block Room": "event(BLUE_FIRE) && can_hookshot"
+    "Ice Cavern GS HP Room": "event(BLUE_FIRE) && can_hookshot"
