@@ -21,6 +21,7 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory[ITS_OOT_BOTTLE4] = ITEM_OOT_BIG_POE;
         gSave.inventory[ITS_OOT_BOMBCHU] = ITEM_OOT_BOMBCHU_10;
         gSave.inventory[ITS_OOT_TRADE_CHILD] = ITEM_OOT_ZELDA_LETTER;
+        gSave.inventory[ITS_OOT_HAMMER] = ITEM_OOT_HAMMER;
         gSave.equipment.swords = 0x7;
         gSave.equipment.shields = 0x7;
         gSave.equipment.tunics = 0x7;
@@ -51,7 +52,7 @@ static void debugCheat(GameState_Play* play)
 
         gOotExtraTrade.child = 0xffff;
 
-        //gSave.age = AGE_ADULT;
+        gSave.age = AGE_ADULT;
 
         SetEventChk(EV_OOT_CHK_ZELDA_LETTER);
         SetEventChk(EV_OOT_CHK_SONG_ZELDA);
@@ -122,11 +123,18 @@ static void skipEntranceCutscene(GameState_Play* play)
     }
 }
 
+static void eventFixes(GameState_Play* play)
+{
+    /* Unlock the first fire temple door */
+    gSave.perm[SCE_OOT_TEMPLE_FIRE].switches |= (1 << 0x17);
+}
+
 void hookPlay_Init(GameState_Play* play)
 {
     comboObjectsReset();
     debugCheat(play);
     skipEntranceCutscene(play);
+    eventFixes(play);
 
     /* Skip Zelda's cutscene when having all the spiritual stones */
     if (gSave.quest.stoneEmerald && gSave.quest.stoneRuby && gSave.quest.stoneSapphire)

@@ -75,11 +75,9 @@ int DoorWarp1_Collide(Actor* this, GameState_Play* play)
     return 0;
 }
 
-
 int DoorWarp1_ShouldTrigger(Actor* this, GameState_Play* play)
 {
     const BlueWarpData* data;
-    int state;
 
     if (DoorWarp1_Collide(this, play))
     {

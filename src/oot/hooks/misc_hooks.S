@@ -24,11 +24,12 @@
 #define ENTRANCE_DMC          0x246
 #define ENTRANCE_FISH         0x45f
 #define ENTRANCE_COLOSSUS     0x1e1
+#define ENTRANCE_FIRE         0x165
 
 #if defined(DEBUG)
 /* DEBUG: OoT child entrance */
 PATCH_START 0x800903e0
-  li t4,ENTRANCE_BOSS1
+  li t4,ENTRANCE_FIRE
 PATCH_END
 #endif
 
