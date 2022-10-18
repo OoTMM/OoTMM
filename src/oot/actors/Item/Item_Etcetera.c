@@ -29,7 +29,7 @@ void ItemEtcetera_Draw(Actor_ItemEtcetera* this, GameState_Play* play)
     s16 gi;
 
     gi = ItemEtcetera_GetGI(&this->base, this->gi);
-    comboDrawGI(play, &this->base, gi, 1.f);
+    comboDrawGI(play, &this->base, gi, 0);
 }
 
 PATCH_FUNC(0x80a5e610, ItemEtcetera_Draw);
@@ -66,7 +66,7 @@ void ItemEtcetera_DrawTreasureGame(Actor_ItemEtcetera* this, GameState_Play* pla
         break;
     }
 
-    comboDrawGI(play, &this->base, gi, 1.f);
+    comboDrawGI(play, &this->base, gi, 0);
 }
 
 PATCH_FUNC(0x80a5e5b8, ItemEtcetera_DrawTreasureGame);

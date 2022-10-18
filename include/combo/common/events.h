@@ -1,10 +1,6 @@
 #ifndef COMBO_COMMON_EVENTS_H
 #define COMBO_COMMON_EVENTS_H
 
-#define BITMAP16_GET(m,b)   ((m)[(b) >> 4] & (1 << ((b) & 0xf)))
-#define BITMAP16_SET(m,b)   ((m)[(b) >> 4] |= (1 << ((b) & 0xf)))
-#define BITMAP16_CLEAR(m,b) ((m)[(b) >> 4] &= ~(1 << ((b) & 0xf)))
-
 #define EV_OOT_CHK_DEKU_MIDO_MEET           0x02
 #define EV_OOT_CHK_DEKU_MIDO_SWORD_SHIELD   0x04
 #define EV_OOT_CHK_EMERALD_TREE_DEAD        0x07
@@ -50,6 +46,7 @@
 #define EV_OOT_CHK_MEDALLION_SHADOW         0x61
 #define EV_OOT_CHK_SONG_EPONA               0x62
 #define EV_OOT_ITEM_GORON_BRACELET          0x20
+#define EV_OOT_INF_MEDIGORON                0xb2
 
 #define MM_EV(a, b) (((a) << 3) | (b))
 

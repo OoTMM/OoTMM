@@ -40,6 +40,7 @@ export class ExprParser {
 
     const expr = this.parseExpr();
     if (expr === undefined) {
+      console.log(input);
       throw new Error("Expected expression");
     }
     this.expect('EOF');

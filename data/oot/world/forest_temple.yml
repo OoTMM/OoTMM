@@ -1,34 +1,147 @@
-{
-  "Forest Temple Entrance": {
-    "dungeon": "Forest",
-    "exits": {
-      "Sacred Meadow": "true",
-      "Forest Temple Boss": "(has(BOW) || has(HOOKSHOT)) && has(SMALL_KEY_FOREST, 5) && has(BOSS_KEY_FOREST)"
-    },
-    "locations": {
-      "Forest Temple Tree Small Key": "can_hookshot",
-      "Forest Temple Mini-Boss Key": "has(SWORD)",
-      "Forest Temple Map": "true",
-      "Forest Temple Maze": "has(SMALL_KEY_FOREST, 1) && has(STRENGTH) && has(BOW)",
-      "Forest Temple Garden": "can_hookshot",
-      "Forest Temple Well": "true",
-      "Forest Temple Poe Key": "has(SMALL_KEY_FOREST, 3) && has(STRENGTH) && has(BOW)",
-      "Forest Temple Bow": "has(SMALL_KEY_FOREST, 3) && has(STRENGTH)",
-      "Forest Temple Compass": "has(SMALL_KEY_FOREST, 3) && has(STRENGTH) && has(BOW)",
-      "Forest Temple Checkerboard": "has(SMALL_KEY_FOREST, 5) && has(STRENGTH) && has(BOW)",
-      "Forest Temple Boss Key": "has(SMALL_KEY_FOREST, 2) && has(STRENGTH) && has(BOW)",
-      "Forest Temple Garden Top": "has(SMALL_KEY_FOREST, 2) && has(STRENGTH) && has(BOW)",
-      "Forest Temple Antichamber": "has(SMALL_KEY_FOREST, 5)"
-    }
-  },
-  "Forest Temple Boss": {
-    "dungeon": "Forest",
-    "exits": {
-      "Forest Temple Entrance": "true"
-    },
-    "locations": {
-      "Forest Temple Boss": "true",
-      "Forest Temple Boss Container": "true"
-    }
-  }
-}
+"Forest Temple Entrance":
+  dungeon: Forest
+  exits:
+    "Sacred Meadow": "true"
+    "Forest Temple Main": "true"
+  locations:
+    "Forest Temple Tree Small Key": "can_hookshot"
+    "Forest Temple GS Entrance": "can_collect_distance"
+"Forest Temple Main":
+  dungeon: Forest
+  exits:
+    "Forest Temple Entrance": "true"
+    "Forest Temple Mini-Boss": "true"
+    "Forest Temple Garden West": "can_play(SONG_TIME)"
+    "Forest Temple Garden East": "can_hit_triggers_distance"
+    "Forest Temple Maze": "has(SMALL_KEY_FOREST, 1)"
+    "Forest Temple Antichamber": "event(FOREST_POE_4)"
+  events:
+    FOREST_POE_4: "event(FOREST_POE_1) && event(FOREST_POE_2) && event(FOREST_POE_3) && can_use_bow"
+  locations:
+    "Forest Temple GS Main": "can_collect_distance"
+"Forest Temple Mini-Boss":
+  dungeon: Forest
+  locations:
+    "Forest Temple Mini-Boss Key": "has_weapon"
+"Forest Temple Garden West":
+  dungeon: Forest
+  exits:
+    "Forest Temple Main": "true"
+    "Forest Temple Map Room": "true"
+    "Forest Temple Well": "event(FOREST_WELL)"
+"Forest Temple Garden West Ledge":
+  dungeon: Forest
+  exits:
+    "Forest Temple Garden West": "true"
+    "Forest Temple Floormaster": "true"
+  locations:
+    "Forest Temple GS Garden West": "can_hookshot"
+"Forest Temple Floormaster":
+  dungeon: Forest
+  locations:
+    "Forest Temple Floormaster": "true"
+"Forest Temple Map Room":
+  dungeon: Forest
+  exits:
+    "Forest Temple Main": "true"
+    "Forest Temple Garden East Ledge": "true"
+  locations:
+    "Forest Temple Map": "true"
+"Forest Temple Garden East Ledge":
+  dungeon: Forest
+  exits:
+    "Forest Temple Garden East": "true"
+  events:
+    FOREST_WELL: "can_hookshot"
+"Forest Temple Garden East":
+  dungeon: Forest
+  locations:
+    "Forest Temple Garden": "can_hookshot"
+    "Forest Temple GS Garden East": "can_hookshot"
+  exits:
+    "Forest Temple Well": "event(FOREST_WELL)"
+"Forest Temple Well":
+  dungeon: Forest
+  exits:
+    "Forest Temple Garden West": "true"
+    "Forest Temple Garden East": "true"
+  locations:
+    "Forest Temple Well": "true"
+"Forest Temple Maze":
+  dungeon: Forest
+  exits:
+    "Forest Temple Main": "true"
+    "Forest Temple Twisted 1 Normal": "has(SMALL_KEY_FOREST, 2) && has(STRENGTH)"
+    "Forest Temple Twisted 1 Alt": "has(SMALL_KEY_FOREST, 2) && has(STRENGTH) && can_hit_triggers_distance"
+  locations:
+    "Forest Temple Maze": "has(STRENGTH) && can_hit_triggers_distance"
+"Forest Temple Twisted 1 Normal":
+  dungeon: Forest
+  exits:
+    "Forest Temple Poe 1": "has(SMALL_KEY_FOREST, 3)"
+"Forest Temple Twisted 1 Alt":
+  dungeon: Forest
+  exits:
+    "Forest Temple Garden West Ledge": "true"
+  locations:
+    "Forest Temple Boss Key": "true"
+"Forest Temple Poe 1":
+  dungeon: Forest
+  exits:
+    "Forest Temple Mini-Boss 2": "true"
+  events:
+    FOREST_POE_1: "can_use_bow"
+  locations:
+    "Forest Temple Poe Key": "can_use_bow"
+"Forest Temple Mini-Boss 2":
+  dungeon: Forest
+  exits:
+    "Forest Temple Poe 2": "has_weapon"
+  locations:
+    "Forest Temple Bow": "has_weapon"
+"Forest Temple Poe 2":
+  dungeon: Forest
+  exits:
+    "Forest Temple Twisted 2 Normal": "has(SMALL_KEY_FOREST, 4)"
+  events:
+    FOREST_POE_2: "can_use_bow"
+  locations:
+    "Forest Temple Compass": "can_use_bow"
+"Forest Temple Twisted 2 Normal":
+  dungeon: Forest
+  exits:
+    "Forest Temple Rotating Room": "has(SMALL_KEY_FOREST, 5)"
+"Forest Temple Rotating Room":
+  dungeon: Forest
+  exits:
+    "Forest Temple Twisted 2 Alt": "can_use_bow"
+"Forest Temple Twisted 2 Alt":
+  dungeon: Forest
+  exits:
+    "Forest Temple Checkerboard": "true"
+"Forest Temple Checkerboard":
+  dungeon: Forest
+  exits:
+    "Forest Temple Poe 3": "true"
+  locations:
+    "Forest Temple Checkerboard": "true"
+"Forest Temple Poe 3":
+  dungeon: Forest
+  events:
+    FOREST_POE_3: "true"
+"Forest Temple Antichamber":
+  dungeon: Forest
+  exits:
+    "Forest Temple Boss": "has(BOSS_KEY_FOREST)"
+  locations:
+    "Forest Temple Antichamber": "true"
+    "Forest Temple GS Antichamber": "can_collect_distance"
+"Forest Temple Boss":
+  dungeon: Forest
+  exits:
+    "Forest Temple After Boss": "can_use_bow && has(SWORD, 2)"
+"Forest Temple After Boss":
+  dungeon: Forest
+  locations:
+    "Forest Temple Boss": "true"
+    "Forest Temple Boss Container": "true"

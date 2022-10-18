@@ -65,6 +65,7 @@ Goron City Maze Left,                 chest,          GORON_CITY,               
 Goron City Big Pot HP,                collectible,    GORON_CITY,               0x1f,                   HEART_PIECE
 Goron City Tunic,                     npc,            GORON_CITY,               GORON_LINK_TUNIC,       TUNIC_GORON
 Goron City Bomb Bag,                  npc,            GORON_CITY,               GORON_BOMB_BAG,         BOMB_BAG
+Goron City Medigoron Giant Knife,     npc,            GORON_CITY,               MEDIGORON,              SWORD
 Goron City GS Platform,               gs,             GORON_CITY,               0x85,                   GS_TOKEN
 Goron City GS Maze,                   gs,             GORON_CITY,               0x86,                   GS_TOKEN
 Death Mountain Crater Alcove HP,      collectible,    DEATH_MOUNTAIN_CRATER,    0x02,                   HEART_PIECE
@@ -168,119 +169,155 @@ Great Fairy Din's Fire,         collectible,   GREAT_FAIRY_FOUNTAIN_SPELLS,   0x
 Great Fairy Farore's Wind,      collectible,   GREAT_FAIRY_FOUNTAIN_SPELLS,   0x01, SPELL_WIND
 Great Fairy Nayru's Love,       collectible,   GREAT_FAIRY_FOUNTAIN_SPELLS,   0x02, SPELL_LOVE
 
-Deku Tree Map Chest,                chest,        INSIDE_DEKU_TREE, 0x03, MAP_DT
-Deku Tree Compass Chest,            chest,        INSIDE_DEKU_TREE, 0x02, COMPASS_DT
-Deku Tree Compass Room Side Chest,  chest,        INSIDE_DEKU_TREE, 0x06, RECOVERY_HEART
-Deku Tree Slingshot Chest,          chest,        INSIDE_DEKU_TREE, 0x01, SLINGSHOT
-Deku Tree Slingshot Side Chest,     chest,        INSIDE_DEKU_TREE, 0x05, RECOVERY_HEART
-Deku Tree Basement Chest,           chest,        INSIDE_DEKU_TREE, 0x04, RECOVERY_HEART
-Deku Tree GS Compass,               gs,           INSIDE_DEKU_TREE, 0x0b, GS_TOKEN
-Deku Tree GS Basement Vines,        gs,           INSIDE_DEKU_TREE, 0x0a, GS_TOKEN
-Deku Tree GS Basement Gate,         gs,           INSIDE_DEKU_TREE, 0x09, GS_TOKEN
-Deku Tree GS Basement Back Room,    gs,           INSIDE_DEKU_TREE, 0x08, GS_TOKEN
-Deku Tree Boss Container,           collectible,  LAIR_GOHMA,       0x1f, HEART_CONTAINER
-Deku Tree Boss,                     special,      LAIR_GOHMA,       0x19, STONE_EMERALD
+Deku Tree Map Chest,                chest,        INSIDE_DEKU_TREE, 0x03,             MAP_DT
+Deku Tree Compass Chest,            chest,        INSIDE_DEKU_TREE, 0x02,             COMPASS_DT
+Deku Tree Compass Room Side Chest,  chest,        INSIDE_DEKU_TREE, 0x06,             RECOVERY_HEART
+Deku Tree Slingshot Chest,          chest,        INSIDE_DEKU_TREE, 0x01,             SLINGSHOT
+Deku Tree Slingshot Side Chest,     chest,        INSIDE_DEKU_TREE, 0x05,             RECOVERY_HEART
+Deku Tree Basement Chest,           chest,        INSIDE_DEKU_TREE, 0x04,             RECOVERY_HEART
+Deku Tree GS Compass,               gs,           INSIDE_DEKU_TREE, 0x0b,             GS_TOKEN
+Deku Tree GS Basement Vines,        gs,           INSIDE_DEKU_TREE, 0x0a,             GS_TOKEN
+Deku Tree GS Basement Gate,         gs,           INSIDE_DEKU_TREE, 0x09,             GS_TOKEN
+Deku Tree GS Basement Back Room,    gs,           INSIDE_DEKU_TREE, 0x08,             GS_TOKEN
+Deku Tree Boss Container,           collectible,  LAIR_GOHMA,       0x1f,             HEART_CONTAINER
+Deku Tree Boss,                     npc,          LAIR_GOHMA,       BLUE_WARP_GOHMA,  STONE_EMERALD
 
-Dodongo Cavern Map Chest,            chest,        DODONGO_CAVERN,    0x08, MAP_DC
-Dodongo Cavern Compass Chest,        chest,        DODONGO_CAVERN,    0x05, COMPASS_DC
-Dodongo Cavern Bomb Bag Side Chest,  chest,        DODONGO_CAVERN,    0x06, RUPEE_RED
-Dodongo Cavern Bomb Bag Chest,       chest,        DODONGO_CAVERN,    0x04, BOMB_BAG
-Dodongo Cavern Bridge Chest,         chest,        DODONGO_CAVERN,    0x0a, SHIELD
-Dodongo Cavern Boss Chest,           chest,        LAIR_KING_DODONGO, 0x00, BOMBS_10
-Dodongo Cavern Boss Container,       collectible,  LAIR_KING_DODONGO, 0x1f, HEART_CONTAINER
-Dodongo Cavern Boss,                 special,      LAIR_KING_DODONGO, 0x25, STONE_RUBY
+Dodongo Cavern Map Chest,            chest,         DODONGO_CAVERN,    0x08,                    MAP_DC
+Dodongo Cavern Compass Chest,        chest,         DODONGO_CAVERN,    0x05,                    COMPASS_DC
+Dodongo Cavern Bomb Bag Side Chest,  chest,         DODONGO_CAVERN,    0x06,                    RUPEE_RED
+Dodongo Cavern Bomb Bag Chest,       chest,         DODONGO_CAVERN,    0x04,                    BOMB_BAG
+Dodongo Cavern Bridge Chest,         chest,         DODONGO_CAVERN,    0x0a,                    SHIELD
+Dodongo Cavern GS Side Room,         gs,            DODONGO_CAVERN,    0x14,                    GS_TOKEN
+Dodongo Cavern GS Stairs Vines,      gs,            DODONGO_CAVERN,    0x10,                    GS_TOKEN
+Dodongo Cavern GS Stairs Top,        gs,            DODONGO_CAVERN,    0x12,                    GS_TOKEN
+Dodongo Cavern GS Scarecrow,         gs,            DODONGO_CAVERN,    0x11,                    GS_TOKEN
+Dodongo Cavern GS Near Boss,         gs,            DODONGO_CAVERN,    0x13,                    GS_TOKEN
+Dodongo Cavern Boss Chest,           chest,         LAIR_KING_DODONGO, 0x00,                    BOMBS_10
+Dodongo Cavern Boss Container,       collectible,   LAIR_KING_DODONGO, 0x1f,                    HEART_CONTAINER
+Dodongo Cavern Boss,                 npc,           LAIR_KING_DODONGO, BLUE_WARP_KING_DODONGO,  STONE_RUBY
 
-Jabu-Jabu Map Chest,                chest,       INSIDE_JABU_JABU,  0x02, MAP_JJ
-Jabu-Jabu Compass Chest,            chest,       INSIDE_JABU_JABU,  0x04, COMPASS_JJ
-Jabu-Jabu Boomerang Chest,          chest,       INSIDE_JABU_JABU,  0x01, BOOMERANG
-Jabu-Jabu Boss Container,           collectible, LAIR_BARINADE,     0x1f, HEART_CONTAINER
-Jabu-Jabu Boss,                     special,     LAIR_BARINADE,     0x37, STONE_SAPPHIRE
+Jabu-Jabu Map Chest,                chest,        INSIDE_JABU_JABU,  0x02,                MAP_JJ
+Jabu-Jabu Compass Chest,            chest,        INSIDE_JABU_JABU,  0x04,                COMPASS_JJ
+Jabu-Jabu Boomerang Chest,          chest,        INSIDE_JABU_JABU,  0x01,                BOOMERANG
+Jabu-Jabu GS Water Switch,          gs,           INSIDE_JABU_JABU,  0x1b,                GS_TOKEN
+Jabu-Jabu GS Bottom Lower,          gs,           INSIDE_JABU_JABU,  0x18,                GS_TOKEN
+Jabu-Jabu GS Bottom Upper,          gs,           INSIDE_JABU_JABU,  0x19,                GS_TOKEN
+Jabu-Jabu GS Near Boss,             gs,           INSIDE_JABU_JABU,  0x1a,                GS_TOKEN
+Jabu-Jabu Boss Container,           collectible,  LAIR_BARINADE,     0x1f,                HEART_CONTAINER
+Jabu-Jabu Boss,                     npc,          LAIR_BARINADE,     BLUE_WARP_BARINADE,  STONE_SAPPHIRE
 
-Forest Temple Tree Small Key,       chest,       TEMPLE_FOREST,       0x03, SMALL_KEY_FOREST
-Forest Temple Mini-Boss Key,        chest,       TEMPLE_FOREST,       0x00, SMALL_KEY_FOREST
-Forest Temple Map,                  chest,       TEMPLE_FOREST,       0x01, MAP_FOREST
-Forest Temple Maze,                 chest,       TEMPLE_FOREST,       0x04, ARROWS_30
-Forest Temple Garden,               chest,       TEMPLE_FOREST,       0x05, RECOVERY_HEART
-Forest Temple Well,                 chest,       TEMPLE_FOREST,       0x09, SMALL_KEY_FOREST
-Forest Temple Poe Key,              chest,       TEMPLE_FOREST,       0x0d, SMALL_KEY_FOREST
-Forest Temple Bow,                  chest,       TEMPLE_FOREST,       0x0c, BOW
-Forest Temple Compass,              chest,       TEMPLE_FOREST,       0x0f, COMPASS_FOREST
-Forest Temple Checkerboard,         chest,       TEMPLE_FOREST,       0x07, ARROWS_10
-Forest Temple Boss Key,             chest,       TEMPLE_FOREST,       0x0e, BOSS_KEY_FOREST
-Forest Temple Garden Top,           chest,       TEMPLE_FOREST,       0x02, SMALL_KEY_FOREST
-Forest Temple Antichamber,          chest,       TEMPLE_FOREST,       0x0b, ARROWS_5
-Forest Temple Boss Container,       collectible, LAIR_PHANTOM_GANON,  0x1f, HEART_CONTAINER
-Forest Temple Boss,                 special,     LAIR_PHANTOM_GANON,  0x48, MEDALLION_FOREST
+Forest Temple Tree Small Key,       chest,        TEMPLE_FOREST,       0x03,                    SMALL_KEY_FOREST
+Forest Temple Mini-Boss Key,        chest,        TEMPLE_FOREST,       0x00,                    SMALL_KEY_FOREST
+Forest Temple Map,                  chest,        TEMPLE_FOREST,       0x01,                    MAP_FOREST
+Forest Temple Maze,                 chest,        TEMPLE_FOREST,       0x04,                    ARROWS_30
+Forest Temple Garden,               chest,        TEMPLE_FOREST,       0x05,                    RECOVERY_HEART
+Forest Temple Well,                 chest,        TEMPLE_FOREST,       0x09,                    SMALL_KEY_FOREST
+Forest Temple Poe Key,              chest,        TEMPLE_FOREST,       0x0d,                    SMALL_KEY_FOREST
+Forest Temple Bow,                  chest,        TEMPLE_FOREST,       0x0c,                    BOW
+Forest Temple Compass,              chest,        TEMPLE_FOREST,       0x0f,                    COMPASS_FOREST
+Forest Temple Checkerboard,         chest,        TEMPLE_FOREST,       0x07,                    ARROWS_10
+Forest Temple Boss Key,             chest,        TEMPLE_FOREST,       0x0e,                    BOSS_KEY_FOREST
+Forest Temple Floormaster,          chest,        TEMPLE_FOREST,       0x02,                    SMALL_KEY_FOREST
+Forest Temple Antichamber,          chest,        TEMPLE_FOREST,       0x0b,                    ARROWS_5
+Forest Temple GS Entrance,          gs,           TEMPLE_FOREST,       0x21,                    GS_TOKEN
+Forest Temple GS Main,              gs,           TEMPLE_FOREST,       0x23,                    GS_TOKEN
+Forest Temple GS Garden West,       gs,           TEMPLE_FOREST,       0x22,                    GS_TOKEN
+Forest Temple GS Garden East,       gs,           TEMPLE_FOREST,       0x20,                    GS_TOKEN
+Forest Temple GS Antichamber,       gs,           TEMPLE_FOREST,       0x24,                    GS_TOKEN
+Forest Temple Boss Container,       collectible,  LAIR_PHANTOM_GANON,  0x1f,                    HEART_CONTAINER
+Forest Temple Boss,                 npc,          LAIR_PHANTOM_GANON,  BLUE_WARP_PHANTOM_GANON, MEDALLION_FOREST
 
-Fire Temple Jail 1 Chest,           chest,       TEMPLE_FIRE,   0x01, SMALL_KEY_FIRE
-Fire Temple Boss Key Side Chest,    chest,       TEMPLE_FIRE,   0x00, BOMBS_10
-Fire Temple Boss Key Chest,         chest,       TEMPLE_FIRE,   0x0c, BOSS_KEY_FIRE
-Fire Temple Jail 2 Chest,           chest,       TEMPLE_FIRE,   0x04, SMALL_KEY_FIRE
-Fire Temple Jail 3 Chest,           chest,       TEMPLE_FIRE,   0x02, SMALL_KEY_FIRE
-Fire Temple Maze Chest,             chest,       TEMPLE_FIRE,   0x03, SMALL_KEY_FIRE
-Fire Temple Jail 4 Chest,           chest,       TEMPLE_FIRE,   0x08, SMALL_KEY_FIRE
-Fire Temple Map,                    chest,       TEMPLE_FIRE,   0x0a, MAP_FIRE
-Fire Temple Above Maze Chest,       chest,       TEMPLE_FIRE,   0x06, SMALL_KEY_FIRE
-Fire Temple Below Maze Chest,       chest,       TEMPLE_FIRE,   0x0b, SMALL_KEY_FIRE
-Fire Temple Compass,                chest,       TEMPLE_FIRE,   0x07, COMPASS_FIRE
-Fire Temple Hammer,                 chest,       TEMPLE_FIRE,   0x05, HAMMER
-Fire Temple Ring Jail,              chest,       TEMPLE_FIRE,   0x09, RUPEE_RED
-Fire Temple Boss Container,         collectible, LAIR_VOLVAGIA, 0x1f, HEART_CONTAINER
-Fire Temple Boss,                   special,     LAIR_VOLVAGIA, 0x49, MEDALLION_FIRE
+Fire Temple Jail 1 Chest,           chest,        TEMPLE_FIRE,   0x01,                SMALL_KEY_FIRE
+Fire Temple Boss Key Side Chest,    chest,        TEMPLE_FIRE,   0x00,                BOMBS_10
+Fire Temple Boss Key Chest,         chest,        TEMPLE_FIRE,   0x0c,                BOSS_KEY_FIRE
+Fire Temple Jail 2 Chest,           chest,        TEMPLE_FIRE,   0x04,                SMALL_KEY_FIRE
+Fire Temple Jail 3 Chest,           chest,        TEMPLE_FIRE,   0x02,                SMALL_KEY_FIRE
+Fire Temple Maze Chest,             chest,        TEMPLE_FIRE,   0x03,                SMALL_KEY_FIRE
+Fire Temple Jail 4 Chest,           chest,        TEMPLE_FIRE,   0x08,                SMALL_KEY_FIRE
+Fire Temple Map,                    chest,        TEMPLE_FIRE,   0x0a,                MAP_FIRE
+Fire Temple Above Maze Chest,       chest,        TEMPLE_FIRE,   0x06,                SMALL_KEY_FIRE
+Fire Temple Below Maze Chest,       chest,        TEMPLE_FIRE,   0x0b,                SMALL_KEY_FIRE
+Fire Temple Compass,                chest,        TEMPLE_FIRE,   0x07,                COMPASS_FIRE
+Fire Temple Hammer,                 chest,        TEMPLE_FIRE,   0x05,                HAMMER
+Fire Temple Ring Jail,              chest,        TEMPLE_FIRE,   0x09,                RUPEE_RED
+Fire Temple Scarecrow Chest,        chest,        TEMPLE_FIRE,   0x0d,                RUPEE_HUGE
+Fire Temple GS Lava Side Room,      gs,           TEMPLE_FIRE,   0x28,                GS_TOKEN
+Fire Temple GS Hammer Statues,      gs,           TEMPLE_FIRE,   0x29,                GS_TOKEN
+Fire Temple GS Maze,                gs,           TEMPLE_FIRE,   0x2a,                GS_TOKEN
+Fire Temple GS Scarecrow Wall,      gs,           TEMPLE_FIRE,   0x2c,                GS_TOKEN
+Fire Temple GS Scarecrow Top,       gs,           TEMPLE_FIRE,   0x2b,                GS_TOKEN
+Fire Temple Boss Container,         collectible,  LAIR_VOLVAGIA, 0x1f,                HEART_CONTAINER
+Fire Temple Boss,                   npc,          LAIR_VOLVAGIA, BLUE_WARP_VOLVAGIA,  MEDALLION_FIRE
 
 Ice Cavern Iron Boots,              chest,        ICE_CAVERN, 0x02,         BOOTS_IRON
 Ice Cavern Map,                     chest,        ICE_CAVERN, 0x00,         MAP_IC
 Ice Cavern Compass,                 chest,        ICE_CAVERN, 0x01,         COMPASS_IC
 Ice Cavern HP,                      collectible,  ICE_CAVERN, 0x01,         HEART_PIECE
 Ice Cavern Sheik Song,              npc,          ICE_CAVERN, SHEIK_WATER,  SONG_TP_WATER
+Ice Cavern GS Scythe Room,          gs,           ICE_CAVERN, 0x51,         GS_TOKEN
+Ice Cavern GS HP Room,              gs,           ICE_CAVERN, 0x52,         GS_TOKEN
+Ice Cavern GS Block Room,           gs,           ICE_CAVERN, 0x50,         GS_TOKEN
 
-Water Temple Under Center,          chest,       TEMPLE_WATER,  0x06, SMALL_KEY_WATER
-Water Temple Compass,               chest,       TEMPLE_WATER,  0x09, COMPASS_WATER
-Water Temple Longshot,              chest,       TEMPLE_WATER,  0x07, HOOKSHOT
-Water Temple Dragon Chest,          chest,       TEMPLE_WATER,  0x0a, SMALL_KEY_WATER
-Water Temple Boss Key Chest,        chest,       TEMPLE_WATER,  0x05, BOSS_KEY_WATER
-Water Temple Bombable Chest,        chest,       TEMPLE_WATER,  0x00, SMALL_KEY_WATER
-Water Temple Shell Chest,           chest,       TEMPLE_WATER,  0x01, SMALL_KEY_WATER
-Water Temple Map,                   chest,       TEMPLE_WATER,  0x02, MAP_WATER
-Water Temple Corridor Chest,        chest,       TEMPLE_WATER,  0x08, SMALL_KEY_WATER
-Water Temple River Chest,           chest,       TEMPLE_WATER,  0x03, SMALL_KEY_WATER
-Water Temple Boss HC,               collectible, LAIR_MORPHA,   0x1f, HEART_CONTAINER
-Water Temple Boss,                  special,     LAIR_MORPHA,   0x4a, MEDALLION_WATER
+Water Temple Under Center,          chest,        TEMPLE_WATER,  0x06,              RUPEE_BLUE
+Water Temple Compass,               chest,        TEMPLE_WATER,  0x09,              COMPASS_WATER
+Water Temple Longshot,              chest,        TEMPLE_WATER,  0x07,              HOOKSHOT
+Water Temple Dragon Chest,          chest,        TEMPLE_WATER,  0x0a,              SMALL_KEY_WATER
+Water Temple Boss Key Chest,        chest,        TEMPLE_WATER,  0x05,              BOSS_KEY_WATER
+Water Temple Bombable Chest,        chest,        TEMPLE_WATER,  0x00,              SMALL_KEY_WATER
+Water Temple Shell Chest,           chest,        TEMPLE_WATER,  0x01,              SMALL_KEY_WATER
+Water Temple Map,                   chest,        TEMPLE_WATER,  0x02,              MAP_WATER
+Water Temple Corridor Chest,        chest,        TEMPLE_WATER,  0x08,              SMALL_KEY_WATER
+Water Temple River Chest,           chest,        TEMPLE_WATER,  0x03,              SMALL_KEY_WATER
+Water Temple GS River,              gs,           TEMPLE_WATER,  0x34,              GS_TOKEN
+Water Temple GS Center,             gs,           TEMPLE_WATER,  0x32,              GS_TOKEN
+Water Temple GS Large Pit,          gs,           TEMPLE_WATER,  0x31,              GS_TOKEN
+Water Temple GS Waterfalls,         gs,           TEMPLE_WATER,  0x33,              GS_TOKEN
+Water Temple GS Cage,               gs,           TEMPLE_WATER,  0x30,              GS_TOKEN
+Water Temple Boss HC,               collectible,  LAIR_MORPHA,   0x1f,              HEART_CONTAINER
+Water Temple Boss,                  npc,          LAIR_MORPHA,   BLUE_WARP_MORPHA,  MEDALLION_WATER
 
-Bottom of the Well Compass,         chest,       BOTTOM_OF_THE_WELL, 0x01, COMPASS_BOTW
-Bottom of the Well Under Debris,    chest,       BOTTOM_OF_THE_WELL, 0x02, BOMBCHUS_10
-Bottom of the Well Back West,       chest,       BOTTOM_OF_THE_WELL, 0x04, NUTS_10
-Bottom of the Well East,            chest,       BOTTOM_OF_THE_WELL, 0x05, SMALL_KEY_BOTW
-Bottom of the Well Front West,      chest,       BOTTOM_OF_THE_WELL, 0x08, SMALL_KEY_BOTW
-Bottom of the Well Underwater,      chest,       BOTTOM_OF_THE_WELL, 0x09, RECOVERY_HEART
-Bottom of the Well East Cage,       chest,       BOTTOM_OF_THE_WELL, 0x0c, RUPEE_BLUE
-Bottom of the Well Blood Chest,     chest,       BOTTOM_OF_THE_WELL, 0x0e, NUTS_10
-Bottom of the Well Underwater 2,    chest,       BOTTOM_OF_THE_WELL, 0x10, BOMBS_10
-Bottom of the Well Map,             chest,       BOTTOM_OF_THE_WELL, 0x07, MAP_BOTW
-Bottom of the Well Coffin,          collectible, BOTTOM_OF_THE_WELL, 0x01, SMALL_KEY_BOTW
-Bottom of the Well Pits,            chest,       BOTTOM_OF_THE_WELL, 0x0a, RUPEE_BLUE
-Bottom of the Well Lens,            chest,       BOTTOM_OF_THE_WELL, 0x03, LENS
-Bottom of the Well Lens Side Chest, chest,       BOTTOM_OF_THE_WELL, 0x14, RUPEE_HUGE
+Bottom of the Well Compass,         chest,        BOTTOM_OF_THE_WELL, 0x01, COMPASS_BOTW
+Bottom of the Well Under Debris,    chest,        BOTTOM_OF_THE_WELL, 0x02, BOMBCHUS_10
+Bottom of the Well Back West,       chest,        BOTTOM_OF_THE_WELL, 0x04, NUTS_10
+Bottom of the Well East,            chest,        BOTTOM_OF_THE_WELL, 0x05, SMALL_KEY_BOTW
+Bottom of the Well Front West,      chest,        BOTTOM_OF_THE_WELL, 0x08, SMALL_KEY_BOTW
+Bottom of the Well Underwater,      chest,        BOTTOM_OF_THE_WELL, 0x09, RECOVERY_HEART
+Bottom of the Well East Cage,       chest,        BOTTOM_OF_THE_WELL, 0x0c, RUPEE_BLUE
+Bottom of the Well Blood Chest,     chest,        BOTTOM_OF_THE_WELL, 0x0e, NUTS_10
+Bottom of the Well Underwater 2,    chest,        BOTTOM_OF_THE_WELL, 0x10, BOMBS_10
+Bottom of the Well Map,             chest,        BOTTOM_OF_THE_WELL, 0x07, MAP_BOTW
+Bottom of the Well Coffin,          collectible,  BOTTOM_OF_THE_WELL, 0x01, SMALL_KEY_BOTW
+Bottom of the Well Pits,            chest,        BOTTOM_OF_THE_WELL, 0x0a, RUPEE_BLUE
+Bottom of the Well Lens,            chest,        BOTTOM_OF_THE_WELL, 0x03, LENS
+Bottom of the Well Lens Side Chest, chest,        BOTTOM_OF_THE_WELL, 0x14, RUPEE_HUGE
+Bottom of the Well GS East Cage,    gs,           BOTTOM_OF_THE_WELL, 0x48, GS_TOKEN
+Bottom of the Well GS Inner West,   gs,           BOTTOM_OF_THE_WELL, 0x4a, GS_TOKEN
+Bottom of the Well GS Inner East,   gs,           BOTTOM_OF_THE_WELL, 0x49, GS_TOKEN
 
-Shadow Temple Map,                        chest,       TEMPLE_SHADOW,     0x01, MAP_SHADOW
-Shadow Temple Hover Boots,                chest,       TEMPLE_SHADOW,     0x07, BOOTS_HOVER
-Shadow Temple Silver Rupees,              chest,       TEMPLE_SHADOW,     0x02, SMALL_KEY_SHADOW
-Shadow Temple Compass,                    chest,       TEMPLE_SHADOW,     0x03, COMPASS_SHADOW
-Shadow Temple Falling Spikes Lower,       chest,       TEMPLE_SHADOW,     0x05, ARROWS_10
-Shadow Temple Falling Spikes Upper 1,     chest,       TEMPLE_SHADOW,     0x04, SMALL_KEY_SHADOW
-Shadow Temple Falling Spikes Upper 2,     chest,       TEMPLE_SHADOW,     0x06, RUPEE_BLUE
-Shadow Temple Invisible Spike Room,       chest,       TEMPLE_SHADOW,     0x09, RUPEE_BLUE
-Shadow Temple Boss Key Room 1,            chest,       TEMPLE_SHADOW,     0x0a, RUPEE_BLUE
-Shadow Temple Boss Key Room 2,            chest,       TEMPLE_SHADOW,     0x0b, BOSS_KEY_SHADOW
-Shadow Temple Skull,                      collectible, TEMPLE_SHADOW,     0x01, SMALL_KEY_SHADOW
-Shadow Temple Spinning Blades Visible,    chest,       TEMPLE_SHADOW,     0x0c, RUPEE_BLUE
-Shadow Temple Spinning Blades Invisible,  chest,       TEMPLE_SHADOW,     0x16, ARROWS_30
-Shadow Temple Invisible Floormaster,      chest,       TEMPLE_SHADOW,     0x0d, SMALL_KEY_SHADOW
-Shadow Temple Wind Room Hint,             chest,       TEMPLE_SHADOW,     0x15, ARROWS_10
-Shadow Temple After Wind,                 chest,       TEMPLE_SHADOW,     0x08, RUPEE_BLUE
-Shadow Temple After Wind Invisible,       chest,       TEMPLE_SHADOW,     0x14, SMALL_KEY_SHADOW
-Shadow Temple Boss HC,                    collectible, LAIR_BONGO_BONGO,  0x1f, HEART_CONTAINER
-Shadow Temple Boss,                       special,     LAIR_BONGO_BONGO,  0x61, MEDALLION_SHADOW
+Shadow Temple Map,                        chest,        TEMPLE_SHADOW,     0x01,                  MAP_SHADOW
+Shadow Temple Hover Boots,                chest,        TEMPLE_SHADOW,     0x07,                  BOOTS_HOVER
+Shadow Temple Silver Rupees,              chest,        TEMPLE_SHADOW,     0x02,                  SMALL_KEY_SHADOW
+Shadow Temple Compass,                    chest,        TEMPLE_SHADOW,     0x03,                  COMPASS_SHADOW
+Shadow Temple Falling Spikes Lower,       chest,        TEMPLE_SHADOW,     0x05,                  ARROWS_10
+Shadow Temple Falling Spikes Upper 1,     chest,        TEMPLE_SHADOW,     0x04,                  SMALL_KEY_SHADOW
+Shadow Temple Falling Spikes Upper 2,     chest,        TEMPLE_SHADOW,     0x06,                  RUPEE_BLUE
+Shadow Temple Invisible Spike Room,       chest,        TEMPLE_SHADOW,     0x09,                  RUPEE_BLUE
+Shadow Temple Boss Key Room 1,            chest,        TEMPLE_SHADOW,     0x0a,                  RUPEE_BLUE
+Shadow Temple Boss Key Room 2,            chest,        TEMPLE_SHADOW,     0x0b,                  BOSS_KEY_SHADOW
+Shadow Temple Skull,                      collectible,  TEMPLE_SHADOW,     0x01,                  SMALL_KEY_SHADOW
+Shadow Temple Spinning Blades Visible,    chest,        TEMPLE_SHADOW,     0x0c,                  RUPEE_BLUE
+Shadow Temple Spinning Blades Invisible,  chest,        TEMPLE_SHADOW,     0x16,                  ARROWS_30
+Shadow Temple Invisible Floormaster,      chest,        TEMPLE_SHADOW,     0x0d,                  SMALL_KEY_SHADOW
+Shadow Temple Wind Room Hint,             chest,        TEMPLE_SHADOW,     0x15,                  ARROWS_10
+Shadow Temple After Wind,                 chest,        TEMPLE_SHADOW,     0x08,                  RUPEE_BLUE
+Shadow Temple After Wind Invisible,       chest,        TEMPLE_SHADOW,     0x14,                  SMALL_KEY_SHADOW
+Shadow Temple GS Invisible Scythe,        gs,           TEMPLE_SHADOW,     0x43,                  GS_TOKEN
+Shadow Temple GS Skull Pot,               gs,           TEMPLE_SHADOW,     0x40,                  GS_TOKEN
+Shadow Temple GS Triple Skull Pot,        gs,           TEMPLE_SHADOW,     0x42,                  GS_TOKEN
+Shadow Temple GS Near Boat,               gs,           TEMPLE_SHADOW,     0x44,                  GS_TOKEN
+Shadow Temple GS Falling Spikes,          gs,           TEMPLE_SHADOW,     0x41,                  GS_TOKEN
+Shadow Temple Boss HC,                    collectible,  LAIR_BONGO_BONGO,  0x1f,                  HEART_CONTAINER
+Shadow Temple Boss,                       npc,          LAIR_BONGO_BONGO,  BLUE_WARP_BONGO_BONGO, MEDALLION_SHADOW
 
 Gerudo Fortress Jail 1,                   collectible, THIEVES_HIDEOUT, 0x0c,         SMALL_KEY_GF
 Gerudo Fortress Jail 2,                   collectible, THIEVES_HIDEOUT, 0x0f,         SMALL_KEY_GF
@@ -288,27 +325,32 @@ Gerudo Fortress Jail 3,                   collectible, THIEVES_HIDEOUT, 0x0a,   
 Gerudo Fortress Jail 4,                   collectible, THIEVES_HIDEOUT, 0x0e,         SMALL_KEY_GF
 Gerudo Member Card,                       npc,         THIEVES_HIDEOUT, GERUDO_CARD,  GERUDO_CARD
 
-Spirit Temple Child First Chest,          chest,       TEMPLE_SPIRIT,   0x08, RUPEE_BLUE
-Spirit Temple Child Second Chest,         chest,       TEMPLE_SPIRIT,   0x00, SMALL_KEY_SPIRIT
-Spirit Temple Child Climb 1,              chest,       TEMPLE_SPIRIT,   0x0c, RUPEE_BLUE
-Spirit Temple Child Climb 2,              chest,       TEMPLE_SPIRIT,   0x06, BOMBCHUS_10
-Spirit Temple Statue Base,                chest,       TEMPLE_SPIRIT,   0x03, MAP_SPIRIT
-Spirit Temple Statue Hands,               chest,       TEMPLE_SPIRIT,   0x02, SMALL_KEY_SPIRIT
-Spirit Temple Statue Upper Right,         chest,       TEMPLE_SPIRIT,   0x0f, RUPEE_BLUE
-Spirit Temple Sun Block Room Torches,     chest,       TEMPLE_SPIRIT,   0x01, SMALL_KEY_SPIRIT
-Spirit Temple Adult Silver Rupees,        chest,       TEMPLE_SPIRIT,   0x07, SMALL_KEY_SPIRIT
-Spirit Temple Adult Lullaby,              chest,       TEMPLE_SPIRIT,   0x04, COMPASS_SPIRIT
-Spirit Temple Adult Suns on Wall 1,       chest,       TEMPLE_SPIRIT,   0x0d, RECOVERY_HEART
-Spirit Temple Adult Suns on Wall 2,       chest,       TEMPLE_SPIRIT,   0x0e, ICE_TRAP
-Spirit Temple Adult Invisible 1,          chest,       TEMPLE_SPIRIT,   0x14, RECOVERY_HEART
-Spirit Temple Adult Invisible 2,          chest,       TEMPLE_SPIRIT,   0x15, RECOVERY_HEART
-Spirit Temple Adult Late Sun on Wall,     chest,       TEMPLE_SPIRIT,   0x05, SMALL_KEY_SPIRIT
-Spirit Temple Adult Boss Key Chest,       chest,       TEMPLE_SPIRIT,   0x0a, BOSS_KEY_SPIRIT
-Spirit Temple Adult Topmost Sun on Wall,  chest,       TEMPLE_SPIRIT,   0x12, BOMBS_20
-Spirit Temple Silver Gauntlets,           chest,       DESERT_COLOSSUS, 0x0b, STRENGTH
-Spirit Temple Mirror Shield,              chest,       DESERT_COLOSSUS, 0x09, SHIELD
-Spirit Temple Boss HC,                    collectible, LAIR_TWINROVA,   0x1f, HEART_CONTAINER
-Spirit Temple Boss,                       special,     LAIR_TWINROVA,   0xc8, MEDALLION_SPIRIT
+Spirit Temple Child First Chest,          chest,        TEMPLE_SPIRIT,   0x08,                RUPEE_BLUE
+Spirit Temple Child Second Chest,         chest,        TEMPLE_SPIRIT,   0x00,                SMALL_KEY_SPIRIT
+Spirit Temple Child Climb 1,              chest,        TEMPLE_SPIRIT,   0x0c,                RUPEE_BLUE
+Spirit Temple Child Climb 2,              chest,        TEMPLE_SPIRIT,   0x06,                BOMBCHUS_10
+Spirit Temple Statue Base,                chest,        TEMPLE_SPIRIT,   0x03,                MAP_SPIRIT
+Spirit Temple Statue Hands,               chest,        TEMPLE_SPIRIT,   0x02,                SMALL_KEY_SPIRIT
+Spirit Temple Statue Upper Right,         chest,        TEMPLE_SPIRIT,   0x0f,                RUPEE_BLUE
+Spirit Temple Sun Block Room Torches,     chest,        TEMPLE_SPIRIT,   0x01,                SMALL_KEY_SPIRIT
+Spirit Temple Adult Silver Rupees,        chest,        TEMPLE_SPIRIT,   0x07,                SMALL_KEY_SPIRIT
+Spirit Temple Adult Lullaby,              chest,        TEMPLE_SPIRIT,   0x04,                COMPASS_SPIRIT
+Spirit Temple Adult Suns on Wall 1,       chest,        TEMPLE_SPIRIT,   0x0d,                RECOVERY_HEART
+Spirit Temple Adult Suns on Wall 2,       chest,        TEMPLE_SPIRIT,   0x0e,                ICE_TRAP
+Spirit Temple Adult Invisible 1,          chest,        TEMPLE_SPIRIT,   0x14,                RECOVERY_HEART
+Spirit Temple Adult Invisible 2,          chest,        TEMPLE_SPIRIT,   0x15,                RECOVERY_HEART
+Spirit Temple Adult Late Sun on Wall,     chest,        TEMPLE_SPIRIT,   0x05,                SMALL_KEY_SPIRIT
+Spirit Temple Adult Boss Key Chest,       chest,        TEMPLE_SPIRIT,   0x0a,                BOSS_KEY_SPIRIT
+Spirit Temple Adult Topmost Sun on Wall,  chest,        TEMPLE_SPIRIT,   0x12,                BOMBS_20
+Spirit Temple GS Child Climb,             gs,           TEMPLE_SPIRIT,   0x3b,                GS_TOKEN
+Spirit Temple GS Child Fence,             gs,           TEMPLE_SPIRIT,   0x3c,                GS_TOKEN
+Spirit Temple GS Iron Knuckle,            gs,           TEMPLE_SPIRIT,   0x38,                GS_TOKEN
+Spirit Temple GS Boulders,                gs,           TEMPLE_SPIRIT,   0x39,                GS_TOKEN
+Spirit Temple GS Statue,                  gs,           TEMPLE_SPIRIT,   0x3a,                GS_TOKEN
+Spirit Temple Silver Gauntlets,           chest,        DESERT_COLOSSUS, 0x0b,                STRENGTH
+Spirit Temple Mirror Shield,              chest,        DESERT_COLOSSUS, 0x09,                SHIELD
+Spirit Temple Boss HC,                    collectible,  LAIR_TWINROVA,   0x1f,                HEART_CONTAINER
+Spirit Temple Boss,                       npc,          LAIR_TWINROVA,   BLUE_WARP_TWINROVA,  MEDALLION_SPIRIT
 
 Gerudo Training Grounds Entrance 1,                   chest,       GERUDO_TRAINING_GROUND, 0x07, ARROWS_10
 Gerudo Training Grounds Entrance 2,                   chest,       GERUDO_TRAINING_GROUND, 0x13, RUPEE_BLUE

@@ -43,6 +43,9 @@ int GiveItemDefaultRange(Actor* actor, GameState_Play* play, s16 itemId);
 
 void PlayerDisplayTextBox(GameState_Play* play, u16 messageId, void* unk);
 
+#define TEXT_STATE_NONE     0
+#define TEXT_STATE_CLOSING  2
+
 #if defined(GAME_OOT)
 int  Message_GetState(MessageContext* ctx);
 #endif
@@ -58,7 +61,9 @@ void OcarinaAction2(GameState_Play *play, u16 ocarinaAction);
 
 extern float* gModelView;
 
-void MatrixScaleMV(float sx, float sy, float sz, int mode);
+void ModelViewRotateY(float angle, int mode);
+void ModelViewTranslate(float tx, float ty, float tz, int mode);
+void ModelViewScale(float sx, float sy, float sz, int mode);
 
 float RandFloat(void);
 

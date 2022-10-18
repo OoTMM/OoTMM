@@ -21,14 +21,17 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory[ITS_OOT_BOTTLE4] = ITEM_OOT_BIG_POE;
         gSave.inventory[ITS_OOT_BOMBCHU] = ITEM_OOT_BOMBCHU_10;
         gSave.inventory[ITS_OOT_TRADE_CHILD] = ITEM_OOT_ZELDA_LETTER;
+        gSave.inventory[ITS_OOT_HAMMER] = ITEM_OOT_HAMMER;
         gSave.equipment.swords = 0x7;
         gSave.equipment.shields = 0x7;
         gSave.equipment.tunics = 0x7;
         gSave.equipment.boots = 0x7;
+        gSave.upgrades.dekuStick = 3;
         gSave.upgrades.bulletBag = 3;
         gSave.upgrades.bombBag = 3;
         gSave.upgrades.quiver = 3;
         gSave.upgrades.dive = 2;
+        gSave.ammo[ITS_OOT_STICKS] = 30;
         gSave.ammo[ITS_OOT_SLINGSHOT] = 50;
         gSave.ammo[ITS_OOT_BOMBS] = 40;
         gSave.ammo[ITS_OOT_BOW] = 50;
@@ -49,7 +52,7 @@ static void debugCheat(GameState_Play* play)
 
         gOotExtraTrade.child = 0xffff;
 
-        //gSave.age = AGE_ADULT;
+        gSave.age = AGE_ADULT;
 
         SetEventChk(EV_OOT_CHK_ZELDA_LETTER);
         SetEventChk(EV_OOT_CHK_SONG_ZELDA);
@@ -120,11 +123,21 @@ static void skipEntranceCutscene(GameState_Play* play)
     }
 }
 
+static void eventFixes(GameState_Play* play)
+{
+    /* Unlock the first fire temple door */
+    gSave.perm[SCE_OOT_TEMPLE_FIRE].switches |= (1 << 0x17);
+
+    /* Unlock a specific water temple door */
+    gSave.perm[SCE_OOT_TEMPLE_WATER].switches |= (1 << 0x15);
+}
+
 void hookPlay_Init(GameState_Play* play)
 {
     comboObjectsReset();
     debugCheat(play);
     skipEntranceCutscene(play);
+    eventFixes(play);
 
     /* Skip Zelda's cutscene when having all the spiritual stones */
     if (gSave.quest.stoneEmerald && gSave.quest.stoneRuby && gSave.quest.stoneSapphire)
@@ -136,15 +149,7 @@ void hookPlay_Init(GameState_Play* play)
     Play_Init(play);
     comboSpawnItemGivers(play);
 
-    /* Saria's Song */
-    /*
-    if (play->sceneId == SCE_OOT_SACRED_FOREST_MEADOW && gSave.age == AGE_CHILD && GetEventChk(EV_OOT_CHK_ZELDA_LETTER))
-    {
-        comboSpawnSpecial(play, 125.f, 500.f, -2970.f, EV_OOT_CHK_SONG_SARIA, GI_OOT_SONG_SARIA);
-    }
-    */
-
-    if ((gSave.entrance & 0xfffc) == 0x0530)
+    if (gSave.entrance == 0x0530)
     {
         comboGameSwitch();
         return;

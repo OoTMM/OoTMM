@@ -31,7 +31,7 @@ typedef struct PACKED ALIGNED(4)
     ControllerInput         input[4];
     char                    unk_74[0x27];
     u8                      running;
-    s32                     frameCount;
+    u32                     frameCount;
     char                    unk_a0[0x4];
 }
 GameState;

@@ -103,7 +103,9 @@ OcarinaAction2 = 0x800dd430;
 
 gModelView = 0x80121204;
 
-MatrixScaleMV = 0x800aa8fc;
+ModelViewRotateY = 0x800aab94;
+ModelViewTranslate = 0x800aa7f4;
+ModelViewScale = 0x800aa8fc;
 
 RandFloat = 0x800cdccc;
 GetChestFlag = 0x8002060c;

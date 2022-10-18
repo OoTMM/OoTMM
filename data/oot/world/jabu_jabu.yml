@@ -1,31 +1,25 @@
-{
-  "Jabu-Jabu Entrance": {
-    "dungeon": "JJ",
-    "exits": {
-      "Zora Fountain": "true",
-      "Jabu-Jabu Main": "has_ranged_weapon"
-    }
-  },
-  "Jabu-Jabu Main": {
-    "dungeon": "JJ",
-    "exits": {
-      "Jabu-Jabu Entrance": "true",
-      "Jabu-Jabu Boss": "has(BOOMERANG)"
-    },
-    "locations": {
-      "Jabu-Jabu Map Chest": "has(BOOMERANG)",
-      "Jabu-Jabu Compass Chest": "has(BOOMERANG)",
-      "Jabu-Jabu Boomerang Chest": "true"
-    }
-  },
-  "Jabu-Jabu Boss": {
-    "dungeon": "JJ",
-    "exits": {
-      "Jabu-Jabu Main": "true"
-    },
-    "locations": {
-      "Jabu-Jabu Boss Container": "true",
-      "Jabu-Jabu Boss": "true"
-    }
-  }
-}
+"Jabu-Jabu Entrance":
+  dungeon: JJ
+  exits:
+    "Zora Fountain": "true"
+    "Jabu-Jabu Main": "has_ranged_weapon"
+"Jabu-Jabu Main":
+  dungeon: JJ
+  exits:
+    "Jabu-Jabu Entrance": "true"
+    "Jabu-Jabu Boss": "can_boomerang"
+  locations:
+    "Jabu-Jabu Map Chest": "can_boomerang"
+    "Jabu-Jabu Compass Chest": "can_boomerang"
+    "Jabu-Jabu Boomerang Chest": "true"
+    "Jabu-Jabu GS Bottom Lower": "can_boomerang"
+    "Jabu-Jabu GS Bottom Upper": "can_boomerang"
+    "Jabu-Jabu GS Water Switch": "has_ranged_weapon"
+    "Jabu-Jabu GS Near Boss": "can_boomerang"
+"Jabu-Jabu Boss":
+  dungeon: JJ
+  exits:
+    "Jabu-Jabu Main": "true"
+  locations:
+    "Jabu-Jabu Boss Container": "true"
+    "Jabu-Jabu Boss": "true"
