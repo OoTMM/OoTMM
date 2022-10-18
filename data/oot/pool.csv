@@ -257,20 +257,23 @@ Water Temple River Chest,           chest,        TEMPLE_WATER,  0x03,          
 Water Temple Boss HC,               collectible,  LAIR_MORPHA,   0x1f,              HEART_CONTAINER
 Water Temple Boss,                  npc,          LAIR_MORPHA,   BLUE_WARP_MORPHA,  MEDALLION_WATER
 
-Bottom of the Well Compass,         chest,       BOTTOM_OF_THE_WELL, 0x01, COMPASS_BOTW
-Bottom of the Well Under Debris,    chest,       BOTTOM_OF_THE_WELL, 0x02, BOMBCHUS_10
-Bottom of the Well Back West,       chest,       BOTTOM_OF_THE_WELL, 0x04, NUTS_10
-Bottom of the Well East,            chest,       BOTTOM_OF_THE_WELL, 0x05, SMALL_KEY_BOTW
-Bottom of the Well Front West,      chest,       BOTTOM_OF_THE_WELL, 0x08, SMALL_KEY_BOTW
-Bottom of the Well Underwater,      chest,       BOTTOM_OF_THE_WELL, 0x09, RECOVERY_HEART
-Bottom of the Well East Cage,       chest,       BOTTOM_OF_THE_WELL, 0x0c, RUPEE_BLUE
-Bottom of the Well Blood Chest,     chest,       BOTTOM_OF_THE_WELL, 0x0e, NUTS_10
-Bottom of the Well Underwater 2,    chest,       BOTTOM_OF_THE_WELL, 0x10, BOMBS_10
-Bottom of the Well Map,             chest,       BOTTOM_OF_THE_WELL, 0x07, MAP_BOTW
-Bottom of the Well Coffin,          collectible, BOTTOM_OF_THE_WELL, 0x01, SMALL_KEY_BOTW
-Bottom of the Well Pits,            chest,       BOTTOM_OF_THE_WELL, 0x0a, RUPEE_BLUE
-Bottom of the Well Lens,            chest,       BOTTOM_OF_THE_WELL, 0x03, LENS
-Bottom of the Well Lens Side Chest, chest,       BOTTOM_OF_THE_WELL, 0x14, RUPEE_HUGE
+Bottom of the Well Compass,         chest,        BOTTOM_OF_THE_WELL, 0x01, COMPASS_BOTW
+Bottom of the Well Under Debris,    chest,        BOTTOM_OF_THE_WELL, 0x02, BOMBCHUS_10
+Bottom of the Well Back West,       chest,        BOTTOM_OF_THE_WELL, 0x04, NUTS_10
+Bottom of the Well East,            chest,        BOTTOM_OF_THE_WELL, 0x05, SMALL_KEY_BOTW
+Bottom of the Well Front West,      chest,        BOTTOM_OF_THE_WELL, 0x08, SMALL_KEY_BOTW
+Bottom of the Well Underwater,      chest,        BOTTOM_OF_THE_WELL, 0x09, RECOVERY_HEART
+Bottom of the Well East Cage,       chest,        BOTTOM_OF_THE_WELL, 0x0c, RUPEE_BLUE
+Bottom of the Well Blood Chest,     chest,        BOTTOM_OF_THE_WELL, 0x0e, NUTS_10
+Bottom of the Well Underwater 2,    chest,        BOTTOM_OF_THE_WELL, 0x10, BOMBS_10
+Bottom of the Well Map,             chest,        BOTTOM_OF_THE_WELL, 0x07, MAP_BOTW
+Bottom of the Well Coffin,          collectible,  BOTTOM_OF_THE_WELL, 0x01, SMALL_KEY_BOTW
+Bottom of the Well Pits,            chest,        BOTTOM_OF_THE_WELL, 0x0a, RUPEE_BLUE
+Bottom of the Well Lens,            chest,        BOTTOM_OF_THE_WELL, 0x03, LENS
+Bottom of the Well Lens Side Chest, chest,        BOTTOM_OF_THE_WELL, 0x14, RUPEE_HUGE
+Bottom of the Well GS East Cage,    gs,           BOTTOM_OF_THE_WELL, 0x48, GS_TOKEN
+Bottom of the Well GS Inner West,   gs,           BOTTOM_OF_THE_WELL, 0x4a, GS_TOKEN
+Bottom of the Well GS Inner East,   gs,           BOTTOM_OF_THE_WELL, 0x49, GS_TOKEN
 
 Shadow Temple Map,                        chest,        TEMPLE_SHADOW,     0x01,                  MAP_SHADOW
 Shadow Temple Hover Boots,                chest,        TEMPLE_SHADOW,     0x07,                  BOOTS_HOVER
