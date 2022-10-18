@@ -311,6 +311,11 @@ Shadow Temple Invisible Floormaster,      chest,        TEMPLE_SHADOW,     0x0d,
 Shadow Temple Wind Room Hint,             chest,        TEMPLE_SHADOW,     0x15,                  ARROWS_10
 Shadow Temple After Wind,                 chest,        TEMPLE_SHADOW,     0x08,                  RUPEE_BLUE
 Shadow Temple After Wind Invisible,       chest,        TEMPLE_SHADOW,     0x14,                  SMALL_KEY_SHADOW
+Shadow Temple GS Invisible Scythe,        gs,           TEMPLE_SHADOW,     0x43,                  GS_TOKEN
+Shadow Temple GS Skull Pot,               gs,           TEMPLE_SHADOW,     0x40,                  GS_TOKEN
+Shadow Temple GS Triple Skull Pot,        gs,           TEMPLE_SHADOW,     0x42,                  GS_TOKEN
+Shadow Temple GS Near Boat,               gs,           TEMPLE_SHADOW,     0x44,                  GS_TOKEN
+Shadow Temple GS Falling Spikes,          gs,           TEMPLE_SHADOW,     0x41,                  GS_TOKEN
 Shadow Temple Boss HC,                    collectible,  LAIR_BONGO_BONGO,  0x1f,                  HEART_CONTAINER
 Shadow Temple Boss,                       npc,          LAIR_BONGO_BONGO,  BLUE_WARP_BONGO_BONGO, MEDALLION_SHADOW
 
