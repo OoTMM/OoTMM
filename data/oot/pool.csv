@@ -17,6 +17,7 @@ Lost Woods Target,                    npc,            LOST_WOODS,               
 Lost Woods Skull Kid,                 npc,            LOST_WOODS,               LOST_WOODS_SKULL_KID,   HEART_PIECE
 Lost Woods Memory Game,               npc,            LOST_WOODS,               LOST_WOODS_MEMORY,      HEART_PIECE
 Lost Woods Scrub Sticks Upgrade,      npc,            LOST_WOODS,               SCRUB_STICKS,           STICK_UPGRADE
+Lost Woods Odd Mushroom,              npc,            LOST_WOODS,               TRADE_ODD_MUSHROOM,     ODD_MUSHROOM
 Lost Woods Grotto Scrub Nuts Upgrade, npc,            GROTTOS,                  SCRUB_NUTS,             NUT_UPGRADE
 Lost Woods Grotto Generic,            chest,          GROTTOS,                  0x14,                   RUPEE_BLUE
 Lost Woods GS Soil Bridge,            gs,             LOST_WOODS,               0x70,                   GS_TOKEN
@@ -29,8 +30,8 @@ Sacred Meadow Sheik Song,             npc,            SACRED_FOREST_MEADOW,     
 Sacred Meadow Grotto,                 chest,          GROTTOS,                  0x11,                   RUPEE_PURPLE
 Sacred Meadow GS Night Adult,         gs,             SACRED_FOREST_MEADOW,     0x73,                   GS_TOKEN
 Kakariko Anju Bottle,                 npc,            KAKARIKO_VILLAGE,         ANJU_BOTTLE,            EMPTY_BOTTLE
-Kakariko Anju Egg,                    npc,            KAKARIKO_VILLAGE,         ANJU_EGG,               POCKET_CUCCO
-Kakariko Anju Cojiro,                 npc,            KAKARIKO_VILLAGE,         ANJU_COJIRO,            COJIRO
+Kakariko Anju Egg,                    npc,            KAKARIKO_VILLAGE,         TRADE_POCKET_EGG,       POCKET_CUCCO
+Kakariko Anju Cojiro,                 npc,            KAKARIKO_VILLAGE,         TRADE_COJIRO,           COJIRO
 Kakariko Song Shadow,                 npc,            KAKARIKO_VILLAGE,         SHEIK_SHADOW,           SONG_TP_SHADOW
 Kakariko Man on Roof,                 npc,            KAKARIKO_VILLAGE,         KAKARIKO_ROOF_MAN,      HEART_PIECE
 Kakariko Impa House HP,               collectible,    KAKARIKO_VILLAGE,         0x01,                   HEART_PIECE

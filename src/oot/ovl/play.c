@@ -21,7 +21,6 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory[ITS_OOT_BOTTLE4] = ITEM_OOT_BIG_POE;
         gSave.inventory[ITS_OOT_BOMBCHU] = ITEM_OOT_BOMBCHU_10;
         gSave.inventory[ITS_OOT_TRADE_CHILD] = ITEM_OOT_ZELDA_LETTER;
-        gSave.inventory[ITS_OOT_TRADE_ADULT] = ITEM_OOT_POCKET_CUCCO;
         gSave.inventory[ITS_OOT_HAMMER] = ITEM_OOT_HAMMER;
         gSave.equipment.swords = 0x7;
         gSave.equipment.shields = 0x7;
@@ -52,7 +51,8 @@ static void debugCheat(GameState_Play* play)
         gSave.rupees = 99;
 
         gOotExtraTrade.child = 0xffff;
-        gOotExtraTrade.adult = 0xffff;
+        gOotExtraTrade.adult |= (1 << XITEM_OOT_ADULT_COJIRO);
+        gSave.inventory[ITS_OOT_TRADE_ADULT] = ITEM_OOT_COJIRO;
 
         gSave.age = AGE_ADULT;
 

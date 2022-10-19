@@ -91,7 +91,10 @@ void comboRemoveTradeItemAdult(u16 xitemId)
     if (gOotExtraTrade.adult & mask)
     {
         gOotExtraTrade.adult &= ~mask;
-        comboToggleTradeAdult();
+        if (gOotExtraTrade.adult)
+            comboToggleTradeAdult();
+        else
+            gSave.inventory[ITS_OOT_TRADE_ADULT] = ITEM_NONE;
         removeButtonItem(kOotTradeAdult[xitemId]);
     }
 }

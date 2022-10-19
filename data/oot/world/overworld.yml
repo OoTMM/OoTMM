@@ -161,6 +161,7 @@
     "Lost Woods Skull Kid": "is_child && can_play(SONG_SARIA)"
     "Lost Woods Memory Game": "is_child && has(OCARINA)"
     "Lost Woods Scrub Sticks Upgrade": "true"
+    "Lost Woods Odd Mushroom": "is_adult && has(COJIRO)"
     "Lost Woods Grotto Scrub Nuts Upgrade": "has_explosives"
     "Lost Woods Grotto Generic": "has_explosives"
     "Lost Woods GS Soil Bridge": "gs_soil"

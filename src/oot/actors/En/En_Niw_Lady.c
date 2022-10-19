@@ -25,10 +25,10 @@ int EnNiwLady_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, floa
         break;
     case GI_OOT_POCKET_EGG:
     case GI_OOT_POCKET_CUCCO:
-        gi = comboOverride(OV_NPC, 0, NPC_OOT_ANJU_EGG, gi);
+        gi = comboOverride(OV_NPC, 0, NPC_OOT_TRADE_POCKET_EGG, gi);
         break;
     case GI_OOT_COJIRO:
-        gi = comboOverride(OV_NPC, 0, NPC_OOT_ANJU_COJIRO, gi);
+        gi = comboOverride(OV_NPC, 0, NPC_OOT_TRADE_COJIRO, gi);
         comboRemoveTradeItemAdult(XITEM_OOT_ADULT_POCKET_CUCCO);
         break;
     }
