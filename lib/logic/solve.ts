@@ -64,6 +64,7 @@ export const ITEMS_REQUIRED = new Set<string>([
   'OOT_MILK_BOTTLE',
   'OOT_STONE_OF_AGONY',
   'OOT_WALLET',
+  'OOT_POCKET_CUCCO',
   'MM_MASK_DEKU',
   'MM_MASK_GORON',
   'MM_MASK_ZORA',

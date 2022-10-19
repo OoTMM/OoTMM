@@ -193,6 +193,7 @@
   locations:
     "Kakariko Anju Bottle": "is_child"
     "Kakariko Anju Egg": "is_adult"
+    "Kakariko Anju Cojiro": "is_adult && has(POCKET_CUCCO)"
     "Windmill HP": "is_adult"
     "Windmill Song of Storms": "is_adult && has(OCARINA)"
     "Kakariko Song Shadow": "is_adult && has(MEDALLION_FOREST) && has(MEDALLION_FIRE) && has(MEDALLION_WATER)"

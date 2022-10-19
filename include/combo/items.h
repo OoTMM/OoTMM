@@ -377,4 +377,28 @@
 #define ITS_MM_MASK_GIANT           0x2e
 #define ITS_MM_MASK_FIERCE_DEITY    0x2f
 
+/* Extra Items */
+#define XITEM_OOT_CHILD_WEIRD_EGG       0x0
+#define XITEM_OOT_CHILD_CHICKEN         0x1
+#define XITEM_OOT_CHILD_ZELDA_LETTER    0x2
+#define XITEM_OOT_CHILD_KEATON_MASK     0x3
+#define XITEM_OOT_CHILD_SKULL_MASK      0x4
+#define XITEM_OOT_CHILD_SPOOKY_MASK     0x5
+#define XITEM_OOT_CHILD_BUNNY_HOOD      0x6
+#define XITEM_OOT_CHILD_GORON_MASK      0x7
+#define XITEM_OOT_CHILD_ZORA_MASK       0x8
+#define XITEM_OOT_CHILD_GERUDO_MASK     0x9
+#define XITEM_OOT_CHILD_MASK_OF_TRUTH   0xa
+
+#define XITEM_OOT_ADULT_POCKET_EGG              0x0
+#define XITEM_OOT_ADULT_POCKET_CUCCO            0x1
+#define XITEM_OOT_ADULT_COJIRO                  0x2
+#define XITEM_OOT_ADULT_ODD_MUSHROOM            0x3
+#define XITEM_OOT_ADULT_ODD_POTION              0x4
+#define XITEM_OOT_ADULT_POACHER_SAW             0x5
+#define XITEM_OOT_ADULT_GORON_SWORD_BROKEN      0x6
+#define XITEM_OOT_ADULT_PRESCRIPTION            0x7
+#define XITEM_OOT_ADULT_EYE_DROPS               0x8
+#define XITEM_OOT_ADULT_CLAIM_CHECK             0x9
+
 #endif

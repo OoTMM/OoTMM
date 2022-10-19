@@ -668,3 +668,17 @@ void comboTextHijackItemShop(GameState_Play* play, u16 itemId, s16 price, int co
     }
     appendStr(&b, END);
 }
+
+#if defined(GAME_OOT)
+void comboMessageCancel(GameState_Play* play)
+{
+    u8* ctx = (u8*)(void*)&play->msgCtx;
+
+    ctx[0xe3e7] = 2;
+    ctx[0xe304] = 0x36;
+    ctx[0xe3e4] = 0;
+
+    play->msgCtx.ocarinaMode = 4;
+    *(((char*)&LINK) + 0x141) = 0;
+}
+#endif

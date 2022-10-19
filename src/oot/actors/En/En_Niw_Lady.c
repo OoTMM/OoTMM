@@ -1,7 +1,23 @@
 #include <combo.h>
 
+int EnNiwLady_GetActiveItem(GameState_Play* play)
+{
+    int itemAction;
+
+    itemAction = GetActiveItem(play);
+    if (itemAction == 6 && !BITMAP16_GET(gSave.eventsItem, EV_OOT_ITEM_ANJU_POCKET_EGG))
+    {
+        itemAction = -1;
+    }
+    return itemAction;
+}
+
+PATCH_CALL(0x80a9eb04, EnNiwLady_GetActiveItem);
+
 int EnNiwLady_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
 {
+    if (!(LINK.state & PLAYER_ACTOR_STATE_GET_ITEM))
+        Message_Close(play);
     switch (gi)
     {
     case GI_OOT_EMPTY_BOTTLE:
@@ -10,6 +26,10 @@ int EnNiwLady_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, floa
     case GI_OOT_POCKET_EGG:
     case GI_OOT_POCKET_CUCCO:
         gi = comboOverride(OV_NPC, 0, NPC_OOT_ANJU_EGG, gi);
+        break;
+    case GI_OOT_COJIRO:
+        gi = comboOverride(OV_NPC, 0, NPC_OOT_ANJU_COJIRO, gi);
+        comboRemoveTradeItemAdult(XITEM_OOT_ADULT_POCKET_CUCCO);
         break;
     }
     return GiveItem(actor, play, gi, a, b);

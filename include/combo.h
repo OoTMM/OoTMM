@@ -132,6 +132,14 @@ int  comboAddItemGI(GameState_Play* play, s16 gi);
 void comboAddItemMm(u16 itemId);
 void comboAddItemOot(u16 itemId);
 
+#if defined(GAME_OOT)
+void comboToggleTradeAdult(void);
+void comboToggleTradeChild(void);
+void comboToggleOcarina(void);
+void comboToggleHookshot(void);
+void comboRemoveTradeItemAdult(u16 xitemId);
+#endif
+
 # if defined(GAME_MM)
 void comboAfterBuy(Actor_EnGirlA* girlA, GameState_Play* play);
 void comboShopDisplayTextBox(GameState_Play* play, Actor_EnGirlA* girlA, int price);
@@ -142,6 +150,9 @@ void comboSpawnItemGivers(GameState_Play* play);
 
 /* libc */
 int toupper(int c);
+
+/* Util */
+u32 popcount(u32 x);
 
 #else
 # include <combo/asm.h>
