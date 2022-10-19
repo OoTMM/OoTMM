@@ -31,7 +31,7 @@
 #if defined(DEBUG)
 /* DEBUG: OoT child entrance */
 PATCH_START 0x800903e0
-  li t4,ENTRANCE_POTION_SHOP
+  li t4,ENTRANCE_LW
 PATCH_END
 #endif
 

@@ -18,6 +18,7 @@ Lost Woods Skull Kid,                 npc,            LOST_WOODS,               
 Lost Woods Memory Game,               npc,            LOST_WOODS,               LOST_WOODS_MEMORY,      HEART_PIECE
 Lost Woods Scrub Sticks Upgrade,      npc,            LOST_WOODS,               SCRUB_STICKS,           STICK_UPGRADE
 Lost Woods Odd Mushroom,              npc,            LOST_WOODS,               TRADE_ODD_MUSHROOM,     ODD_MUSHROOM
+Lost Woods Poacher's Saw,             npc,            LOST_WOODS,               TRADE_POACHER_SAW,      POACHER_SAW
 Lost Woods Grotto Scrub Nuts Upgrade, npc,            GROTTOS,                  SCRUB_NUTS,             NUT_UPGRADE
 Lost Woods Grotto Generic,            chest,          GROTTOS,                  0x14,                   RUPEE_BLUE
 Lost Woods GS Soil Bridge,            gs,             LOST_WOODS,               0x70,                   GS_TOKEN

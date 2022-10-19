@@ -51,8 +51,9 @@ static void debugCheat(GameState_Play* play)
         gSave.rupees = 99;
 
         gOotExtraTrade.child = 0xffff;
-        gOotExtraTrade.adult |= (1 << XITEM_OOT_ADULT_ODD_MUSHROOM);
-        gSave.inventory[ITS_OOT_TRADE_ADULT] = ITEM_OOT_ODD_MUSHROOM;
+        gOotExtraTrade.adult = 0;
+        gOotExtraTrade.adult |= (1 << XITEM_OOT_ADULT_ODD_POTION);
+        gSave.inventory[ITS_OOT_TRADE_ADULT] = ITEM_OOT_ODD_POTION;
 
         gSave.age = AGE_ADULT;
 

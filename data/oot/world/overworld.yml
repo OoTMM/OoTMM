@@ -162,6 +162,7 @@
     "Lost Woods Memory Game": "is_child && has(OCARINA)"
     "Lost Woods Scrub Sticks Upgrade": "true"
     "Lost Woods Odd Mushroom": "is_adult && has(COJIRO)"
+    "Lost Woods Poacher's Saw": "is_adult && has(ODD_POTION)"
     "Lost Woods Grotto Scrub Nuts Upgrade": "has_explosives"
     "Lost Woods Grotto Generic": "has_explosives"
     "Lost Woods GS Soil Bridge": "gs_soil"

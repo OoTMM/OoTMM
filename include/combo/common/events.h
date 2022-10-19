@@ -38,6 +38,7 @@
 #define EV_OOT_CHK_MEDALLION_SPIRIT         0xc8
 #define EV_OOT_CHK_FROGS_GAME               0xd0
 
+#define EV_OOT_ITEM_DEKU_SEEDS              0x13
 #define EV_OOT_ITEM_DAMPE_GRAVEYARD_HP      0x1c
 #define EV_OOT_ITEM_ANJU_POCKET_EGG         0x2c
 
