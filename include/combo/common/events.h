@@ -21,6 +21,7 @@
 #define EV_OOT_CHK_MEDALLION_FOREST         0x48
 #define EV_OOT_CHK_MEDALLION_FIRE           0x49
 #define EV_OOT_CHK_MEDALLION_WATER          0x4a
+#define EV_OOT_CHK_RAINBOW_BRIDGE           0x4d
 #define EV_OOT_CHK_MASTER_SWORD_CHAMBER     0x4f
 #define EV_OOT_CHK_SONG_TP_FOREST           0x50
 #define EV_OOT_CHK_SONG_TP_FIRE             0x51

@@ -46,9 +46,12 @@ static void debugCheat(GameState_Play* play)
         gSave.quest.stoneRuby = 0;
         gSave.quest.stoneSapphire = 0;
 
-        gSave.quest.medallionShadow = 0;
-        gSave.quest.medallionSpirit = 0;
-        gSave.quest.medallionForest = 0;
+        gSave.quest.medallionShadow = 1;
+        gSave.quest.medallionSpirit = 1;
+        gSave.quest.medallionForest = 1;
+        gSave.quest.medallionFire = 1;
+        gSave.quest.medallionWater = 1;
+        gSave.quest.medallionLight = 1;
 
         gSave.health = gSave.healthMax = 20 * 0x10;
 
@@ -140,6 +143,19 @@ static void eventFixes(GameState_Play* play)
 
     /* Unlock a specific water temple door */
     gSave.perm[SCE_OOT_TEMPLE_WATER].switches |= (1 << 0x15);
+
+    /* Skip Zelda's cutscene when having all the spiritual stones */
+    if (gSave.quest.stoneEmerald && gSave.quest.stoneRuby && gSave.quest.stoneSapphire)
+    {
+        SetEventChk(EV_OOT_CHK_ZELDA_FLED);
+        SetEventChk(EV_OOT_CHK_ZELDA_FLED_BRIDGE);
+    }
+
+    /* Set the rainbow bridge flag */
+    if (gSave.quest.medallionLight && gSave.quest.medallionForest && gSave.quest.medallionFire && gSave.quest.medallionWater && gSave.quest.medallionShadow && gSave.quest.medallionSpirit)
+    {
+        SetEventChk(EV_OOT_CHK_RAINBOW_BRIDGE);
+    }
 }
 
 void hookPlay_Init(GameState_Play* play)
@@ -148,13 +164,6 @@ void hookPlay_Init(GameState_Play* play)
     debugCheat(play);
     skipEntranceCutscene(play);
     eventFixes(play);
-
-    /* Skip Zelda's cutscene when having all the spiritual stones */
-    if (gSave.quest.stoneEmerald && gSave.quest.stoneRuby && gSave.quest.stoneSapphire)
-    {
-        SetEventChk(EV_OOT_CHK_ZELDA_FLED);
-        SetEventChk(EV_OOT_CHK_ZELDA_FLED_BRIDGE);
-    }
 
     Play_Init(play);
     comboSpawnItemGivers(play);

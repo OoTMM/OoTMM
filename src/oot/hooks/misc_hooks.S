@@ -39,7 +39,7 @@
 
 #if defined(DEBUG)
 /* DEBUG: OoT entrance */
-#define ENTRANCE ENTRANCE_BOSS7
+#define ENTRANCE ENTRANCE_MARKET
 
 PATCH_START 0x800903e0
   li t4,ENTRANCE
