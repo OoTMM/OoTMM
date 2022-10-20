@@ -396,9 +396,10 @@
 #define XITEM_OOT_ADULT_ODD_MUSHROOM            0x3
 #define XITEM_OOT_ADULT_ODD_POTION              0x4
 #define XITEM_OOT_ADULT_POACHER_SAW             0x5
-#define XITEM_OOT_ADULT_GORON_SWORD_BROKEN      0x6
+#define XITEM_OOT_ADULT_BROKEN_GORON_SWORD      0x6
 #define XITEM_OOT_ADULT_PRESCRIPTION            0x7
-#define XITEM_OOT_ADULT_EYE_DROPS               0x8
-#define XITEM_OOT_ADULT_CLAIM_CHECK             0x9
+#define XITEM_OOT_ADULT_EYEBALL_FROG            0x8
+#define XITEM_OOT_ADULT_EYE_DROPS               0x9
+#define XITEM_OOT_ADULT_CLAIM_CHECK             0xa
 
 #endif

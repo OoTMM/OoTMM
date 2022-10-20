@@ -22,6 +22,7 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory[ITS_OOT_BOMBCHU] = ITEM_OOT_BOMBCHU_10;
         gSave.inventory[ITS_OOT_TRADE_CHILD] = ITEM_OOT_ZELDA_LETTER;
         gSave.inventory[ITS_OOT_HAMMER] = ITEM_OOT_HAMMER;
+        gSave.inventory[ITS_OOT_HOOKSHOT] = ITEM_OOT_LONGSHOT;
         gSave.equipment.swords = 0x7;
         gSave.equipment.shields = 0x7;
         gSave.equipment.tunics = 0x7;
@@ -52,8 +53,8 @@ static void debugCheat(GameState_Play* play)
 
         gOotExtraTrade.child = 0xffff;
         gOotExtraTrade.adult = 0;
-        gOotExtraTrade.adult |= (1 << XITEM_OOT_ADULT_ODD_POTION);
-        gSave.inventory[ITS_OOT_TRADE_ADULT] = ITEM_OOT_ODD_POTION;
+        gOotExtraTrade.adult |= (1 << XITEM_OOT_ADULT_POACHER_SAW);
+        gSave.inventory[ITS_OOT_TRADE_ADULT] = ITEM_OOT_POACHER_SAW;
 
         gSave.age = AGE_ADULT;
 

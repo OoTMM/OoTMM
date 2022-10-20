@@ -27,11 +27,12 @@
 #define ENTRANCE_FIRE         0x165
 #define ENTRANCE_LW           0x11e
 #define ENTRANCE_POTION_SHOP  0x072
+#define ENTRANCE_VALLEY       0x3d0
 
 #if defined(DEBUG)
 /* DEBUG: OoT child entrance */
 PATCH_START 0x800903e0
-  li t4,ENTRANCE_LW
+  li t4,ENTRANCE_VALLEY
 PATCH_END
 #endif
 

@@ -396,6 +396,7 @@
     "Gerudo Fortress Exterior": "true"
   locations:
     "Gerudo Valley Chest": "can_hammer"
+    "Gerudo Valley Broken Goron Sword": "is_adult && has(POACHER_SAW)"
     "Gerudo Valley GS Tent": "is_adult && gs_night && can_hookshot"
     "Gerudo Valley GS Pillar": "is_adult && gs_night && can_hookshot"
 "Gerudo Fortress Exterior":
