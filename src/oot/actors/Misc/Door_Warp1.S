@@ -30,3 +30,13 @@ PATCH_START 0x80908180
   j Trampoline_DoorWarp1_AfterDrawWarp
    nop
 PATCH_END
+
+/* Skip Shadow Cutscene */
+PATCH_START 0x80906784
+  li t4,1
+PATCH_END
+
+/* Skip Spirit Cutscene */
+PATCH_START 0x809066f4
+  li t5,1
+PATCH_END

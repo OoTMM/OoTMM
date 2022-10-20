@@ -35,10 +35,11 @@
 #define ENTRANCE_BOSS4        0x00c
 #define ENTRANCE_BOSS5        0x305
 #define ENTRANCE_BOSS6        0x417
+#define ENTRANCE_BOSS7        0x413
 
 #if defined(DEBUG)
 /* DEBUG: OoT entrance */
-#define ENTRANCE ENTRANCE_BOSS6
+#define ENTRANCE ENTRANCE_BOSS7
 
 PATCH_START 0x800903e0
   li t4,ENTRANCE

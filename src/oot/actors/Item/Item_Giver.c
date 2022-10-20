@@ -72,14 +72,10 @@ static void ItemGiver_Update(Actor* this, GameState_Play* play)
         }
         break;
     case NPC_OOT_BLUE_WARP_BONGO_BONGO:
-        if (ItemGiver_Common(this, play, GI_OOT_MEDALLION_SHADOW, EV_OOT_CHK_MEDALLION_SHADOW))
-        {
-        }
+        ItemGiver_Common(this, play, GI_OOT_MEDALLION_SHADOW, EV_OOT_CHK_MEDALLION_SHADOW);
         break;
     case NPC_OOT_BLUE_WARP_TWINROVA:
-        if (ItemGiver_Common(this, play, GI_OOT_MEDALLION_SPIRIT, EV_OOT_CHK_MEDALLION_SPIRIT))
-        {
-        }
+        ItemGiver_Common(this, play, GI_OOT_MEDALLION_SPIRIT, EV_OOT_CHK_MEDALLION_SPIRIT);
         break;
     default:
         ActorDestroy(this);
