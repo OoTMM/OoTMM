@@ -92,6 +92,7 @@ Zora River GS Near Bridge,            gs,             ZORA_RIVER,               
 Zora Domain Waterfall Chest,          chest,          ZORA_DOMAIN,              0x00,                       HEART_PIECE
 Zora Domain Diving Game,              npc,            ZORA_DOMAIN,              ZORA_DIVING_GAME,           SCALE
 Zora Domain Tunic,                    npc,            ZORA_DOMAIN,              ZORA_KING_TUNIC,            TUNIC_ZORA
+Zora Domain Eyeball Frog,             npc,            ZORA_DOMAIN,              TRADE_EYEBALL_FROG,         EYEBALL_FROG
 Zora Domain GS Waterfall,             gs,             ZORA_DOMAIN,              0x96,                       GS_TOKEN
 Zora Fountain Iceberg HP,             collectible,    ZORA_FOUNTAIN,            0x01,                       HEART_PIECE
 Zora Fountain Bottom HP,              collectible,    ZORA_FOUNTAIN,            0x14,                       HEART_PIECE

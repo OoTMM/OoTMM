@@ -29,11 +29,12 @@
 #define ENTRANCE_POTION_SHOP  0x072
 #define ENTRANCE_VALLEY       0x3d0
 #define ENTRANCE_BIGGORON     0x1bd
+#define ENTRANCE_ZORA_DOMAIN  0x108
 
 #if defined(DEBUG)
 /* DEBUG: OoT child entrance */
 PATCH_START 0x800903e0
-  li t4,ENTRANCE_BIGGORON
+  li t4,ENTRANCE_ZORA_DOMAIN
 PATCH_END
 #endif
 

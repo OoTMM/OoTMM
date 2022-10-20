@@ -42,13 +42,15 @@
 #define EV_OOT_ITEM_DAMPE_GRAVEYARD_HP      0x1c
 #define EV_OOT_ITEM_ANJU_POCKET_EGG         0x2c
 
+#define EV_OOT_INF_KING_ZORA_THAWED         0x138
+
 /* Custom flags that seems unused */
 #define EV_OOT_CHK_SONG_SARIA               0x58
 #define EV_OOT_CHK_ARROW_FIRE               0x60
 #define EV_OOT_CHK_MEDALLION_SHADOW         0x61
 #define EV_OOT_CHK_SONG_EPONA               0x62
 #define EV_OOT_ITEM_GORON_BRACELET          0x20
-#define EV_OOT_INF_MEDIGORON                0xb2
+#define EV_OOT_INF_MEDIGORON                0x0b2
 
 #define MM_EV(a, b) (((a) << 3) | (b))
 

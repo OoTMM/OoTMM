@@ -13,3 +13,14 @@ PATCH_END
 PATCH_START 0x80ad6d1c
   li t9,0xff
 PATCH_END
+
+/* Skip Eyeball Frog Dialogue */
+PATCH_START 0x80ad63d8
+  li t7,2
+  sh t7,0x1d0(s0)
+PATCH_END
+
+/* Skip check for adult trade slot */
+PATCH_START 0x80ad63b0
+  li t5,0x34
+PATCH_END

@@ -53,15 +53,15 @@ static void debugCheat(GameState_Play* play)
 
         gOotExtraTrade.child = 0xffff;
         gOotExtraTrade.adult = 0;
-        gOotExtraTrade.adult |= (1 << XITEM_OOT_ADULT_BROKEN_GORON_SWORD);
-        gOotExtraTrade.adult |= (1 << XITEM_OOT_ADULT_EYE_DROPS);
-        gOotExtraTrade.adult |= (1 << XITEM_OOT_ADULT_CLAIM_CHECK);
-        gSave.inventory[ITS_OOT_TRADE_ADULT] = ITEM_OOT_GORON_SWORD_BROKEN;
+        gOotExtraTrade.adult |= (1 << XITEM_OOT_ADULT_PRESCRIPTION);
+        gSave.inventory[ITS_OOT_TRADE_ADULT] = ITEM_OOT_PRESCRIPTION;
 
         gSave.age = AGE_ADULT;
 
         SetEventChk(EV_OOT_CHK_ZELDA_LETTER);
         SetEventChk(EV_OOT_CHK_SONG_ZELDA);
+
+        BITMAP16_SET(gSave.eventsMisc, EV_OOT_INF_KING_ZORA_THAWED);
     }
 #endif
 }
