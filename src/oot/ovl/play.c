@@ -41,13 +41,13 @@ static void debugCheat(GameState_Play* play)
         gSave.quest.songTime = 1;
         gSave.quest.songSun = 1;
 
-        gSave.quest.stoneEmerald = 1;
-        gSave.quest.stoneRuby = 1;
-        gSave.quest.stoneSapphire = 1;
+        gSave.quest.stoneEmerald = 0;
+        gSave.quest.stoneRuby = 0;
+        gSave.quest.stoneSapphire = 0;
 
-        gSave.quest.medallionShadow = 1;
-        gSave.quest.medallionSpirit = 1;
-        gSave.quest.medallionForest = 1;
+        gSave.quest.medallionShadow = 0;
+        gSave.quest.medallionSpirit = 0;
+        gSave.quest.medallionForest = 0;
 
         gSave.rupees = 99;
 

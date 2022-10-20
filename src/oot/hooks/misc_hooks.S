@@ -31,11 +31,12 @@
 #define ENTRANCE_BIGGORON     0x1bd
 #define ENTRANCE_ZORA_DOMAIN  0x108
 #define ENTRANCE_LAB          0x043
+#define ENTRANCE_BOSS2        0x40b
 
 #if defined(DEBUG)
 /* DEBUG: OoT child entrance */
 PATCH_START 0x800903e0
-  li t4,ENTRANCE_TOT
+  li t4,ENTRANCE_BOSS2
 PATCH_END
 #endif
 

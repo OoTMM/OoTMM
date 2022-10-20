@@ -101,8 +101,8 @@ ActorInit ItemGiver_gActorInit = {
     0x1,
     sizeof(Actor),
     (ActorFunc)ItemGiver_Init,
-    (ActorFunc)ItemGiver_Update,
     NULL,
+    (ActorFunc)ItemGiver_Update,
     NULL,
 };
 
