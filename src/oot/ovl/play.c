@@ -22,6 +22,7 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory[ITS_OOT_BOMBCHU] = ITEM_OOT_BOMBCHU_10;
         gSave.inventory[ITS_OOT_TRADE_CHILD] = ITEM_OOT_ZELDA_LETTER;
         gSave.inventory[ITS_OOT_HAMMER] = ITEM_OOT_HAMMER;
+        gSave.inventory[ITS_OOT_HOOKSHOT] = ITEM_OOT_LONGSHOT;
         gSave.equipment.swords = 0x7;
         gSave.equipment.shields = 0x7;
         gSave.equipment.tunics = 0x7;
@@ -51,11 +52,17 @@ static void debugCheat(GameState_Play* play)
         gSave.rupees = 99;
 
         gOotExtraTrade.child = 0xffff;
+        gOotExtraTrade.adult = 0;
+        gOotExtraTrade.adult |= (1 << XITEM_OOT_ADULT_EYE_DROPS);
+        gOotExtraTrade.adult |= (1 << XITEM_OOT_ADULT_CLAIM_CHECK);
+        gSave.inventory[ITS_OOT_TRADE_ADULT] = ITEM_OOT_EYE_DROPS;
 
         gSave.age = AGE_ADULT;
 
         SetEventChk(EV_OOT_CHK_ZELDA_LETTER);
         SetEventChk(EV_OOT_CHK_SONG_ZELDA);
+
+        BITMAP16_SET(gSave.eventsMisc, EV_OOT_INF_KING_ZORA_THAWED);
     }
 #endif
 }

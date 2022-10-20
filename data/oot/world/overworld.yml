@@ -161,6 +161,8 @@
     "Lost Woods Skull Kid": "is_child && can_play(SONG_SARIA)"
     "Lost Woods Memory Game": "is_child && has(OCARINA)"
     "Lost Woods Scrub Sticks Upgrade": "true"
+    "Lost Woods Odd Mushroom": "is_adult && has(COJIRO)"
+    "Lost Woods Poacher's Saw": "is_adult && has(ODD_POTION)"
     "Lost Woods Grotto Scrub Nuts Upgrade": "has_explosives"
     "Lost Woods Grotto Generic": "has_explosives"
     "Lost Woods GS Soil Bridge": "gs_soil"
@@ -189,14 +191,16 @@
     "Bottom of the Well": "is_child && can_play(SONG_STORMS) && has(SWORD)"
     "Skulltula House": "true"
     "Shooting Gallery": "is_adult"
-    "kakariko Rooftop": "can_hookshot"
+    "Kakariko Rooftop": "can_hookshot"
   locations:
     "Kakariko Anju Bottle": "is_child"
     "Kakariko Anju Egg": "is_adult"
+    "Kakariko Anju Cojiro": "is_adult && has(POCKET_CUCCO)"
     "Windmill HP": "is_adult"
     "Windmill Song of Storms": "is_adult && has(OCARINA)"
     "Kakariko Song Shadow": "is_adult && has(MEDALLION_FOREST) && has(MEDALLION_FIRE) && has(MEDALLION_WATER)"
     "Kakariko Impa House HP": "true"
+    "Kakariko Potion Shop Odd Potion": "is_adult && has(ODD_MUSHROOM)"
     "Kakariko Grotto Front": "hidden_grotto_bomb && has_weapon"
     "Kakariko Grotto Back": "true"
     "Kakariko GS Roof": "gs_night && is_adult && has(HOOKSHOT)"
@@ -205,7 +209,7 @@
     "Kakariko GS House of Skulltula": "gs_night && is_child"
     "Kakariko GS Bazaar": "gs_night && is_child"
     "Kakariko GS Ladder": "gs_night && is_child && has(SLINGSHOT)"
-"kakariko Rooftop":
+"Kakariko Rooftop":
   exits:
     "Kakariko": "true"
   locations:
@@ -244,13 +248,16 @@
     "Goron City": "true"
     "Dodongo Cavern Entrance": "has_bombflowers && has(SWORD)"
     "Kakariko": "has(ZELDA_LETTER)"
-    "kakariko Rooftop": "is_child && has_explosives"
+    "Kakariko Rooftop": "is_child && has_explosives"
     "Death Mountain Crater Top": "has_explosives_or_hammer"
   events:
     BEAN_DEATH_MOUNTAIN: "can_use_beans"
   locations:
     "Death Mountain Chest": "has_explosives"
     "Death Mountain HP": "is_adult && event(BEAN_DEATH_MOUNTAIN)"
+    "Death Mountain Prescription": "is_adult && has_explosives && has(BROKEN_GORON_SWORD)"
+    "Death Mountain Claim Check": "is_adult && has_explosives && has(EYE_DROPS)"
+    "Death Mountain Biggoron Sword": "is_adult && has_explosives && has(CLAIM_CHECK)"
     "Great Fairy Magic Upgrade": "has_explosives && can_play(SONG_ZELDA)"
     "Death Mountain Grotto": "hidden_grotto_storms"
     "Death Mountain GS Entrance": "has_explosives"
@@ -298,6 +305,7 @@
     "Zora Domain Waterfall Chest": "is_child"
     "Zora Domain Diving Game": "is_child"
     "Zora Domain Tunic": "is_adult && event(BLUE_FIRE)"
+    "Zora Domain Eyeball Frog": "is_adult && event(BLUE_FIRE) && has(PRESCRIPTION)"
     "Zora Domain GS Waterfall": "is_adult && gs_night && can_hookshot"
 "Lake Hylia":
   exits:
@@ -323,6 +331,7 @@
     "Lake Hylia": "true"
   locations:
     "Laboratory Dive": "has(SCALE, 2)"
+    "Laboratory Eye Drops": "is_adult && has(EYEBALL_FROG)"
     "Laboratory GS Crate": "is_adult && has_iron_boots && can_hookshot"
 "Fishing Pond":
   exits:
@@ -392,6 +401,7 @@
     "Gerudo Fortress Exterior": "true"
   locations:
     "Gerudo Valley Chest": "can_hammer"
+    "Gerudo Valley Broken Goron Sword": "is_adult && has(POACHER_SAW)"
     "Gerudo Valley GS Tent": "is_adult && gs_night && can_hookshot"
     "Gerudo Valley GS Pillar": "is_adult && gs_night && can_hookshot"
 "Gerudo Fortress Exterior":

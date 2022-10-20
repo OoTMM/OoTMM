@@ -1,18 +1,13 @@
-{
-  "Gerudo Fortress": {
-    "dungeon": "GF",
-    "exits": {
-      "Gerudo Fortress Exterior": "true"
-    },
-    "events": {
-      "CARPENTERS_RESCUE": "has(SMALL_KEY_GF, 4)"
-    },
-    "locations": {
-      "Gerudo Fortress Jail 1": "true",
-      "Gerudo Fortress Jail 2": "true",
-      "Gerudo Fortress Jail 3": "true",
-      "Gerudo Fortress Jail 4": "true",
-      "Gerudo Member Card": "event(CARPENTERS_RESCUE)"
-    }
-  }
-}
+"Gerudo Fortress":
+  dungeon: "GF"
+  exits:
+    "Gerudo Fortress Exterior": "true"
+  events:
+    CARPENTERS_RESCUE: "has(SMALL_KEY_GF, 4)"
+  locations:
+    "Gerudo Fortress Jail 1": "true"
+    "Gerudo Fortress Jail 2": "true"
+    "Gerudo Fortress Jail 3": "true"
+    "Gerudo Fortress Jail 4": "true"
+    "Gerudo Member Card": "event(CARPENTERS_RESCUE)"
+

@@ -2,6 +2,7 @@
 #define OOT_SAVE_H
 
 #include <combo/types.h>
+#include <combo/util.h>
 
 typedef union
 {
@@ -90,7 +91,8 @@ typedef struct
     u16                     worldTime;
     u16                     unk_0e;
     u32                     isNight;
-    char                    unk_14[0x8];
+    char                    unk_14[0x4];
+    u32                     tradeQuestFlag;
     char                    newf[6];
     s16                     deathCount;
     u8                      playerName[8];
@@ -106,7 +108,10 @@ typedef struct
     u8                      magicUpgrade2;
     u8                      doubleDefense;
     u8                      isBiggoronSword;
-    char                    unk_3f[0x35];
+    char                    unk_3f[0x29];
+    u8                      buttons[7];
+    u16                     currentEquipment;
+    char                    unk_72[0x2];
     u8                      inventory[0x18];
     u8                      ammo[0xf];
     u8                      beans;
@@ -127,6 +132,13 @@ typedef struct
     u16                     checksum;
 }
 OotSave;
+
+ASSERT_OFFSET(OotSave, unk_3f,      0x3f);
+ASSERT_OFFSET(OotSave, buttons,     0x68);
+ASSERT_OFFSET(OotSave, equipment,   0x9c);
+ASSERT_OFFSET(OotSave, perm,        0xd4);
+ASSERT_OFFSET(OotSave, unk_be0,     0xbe0);
+ASSERT_OFFSET(OotSave, checksum,    0x1352);
 
 typedef struct
 {

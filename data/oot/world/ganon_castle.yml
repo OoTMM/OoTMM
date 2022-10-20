@@ -1,82 +1,59 @@
-{
-  "Ganon Castle Main": {
-    "dungeon": "Ganon",
-    "exits": {
-      "Ganon Castle Light": "has(STRENGTH, 3)",
-      "Ganon Castle Forest": "true",
-      "Ganon Castle Fire": "true",
-      "Ganon Castle Water": "true",
-      "Ganon Castle Spirit": "true",
-      "Ganon Castle Shadow": "true",
-      "Ganon Castle Tower": "event(GANON_TRIAL_LIGHT) && event(GANON_TRIAL_FOREST) && event(GANON_TRIAL_FIRE) && event(GANON_TRIAL_WATER) && event(GANON_TRIAL_SPIRIT) && event(GANON_TRIAL_SHADOW)"
-    }
-  },
-  "Ganon Castle Light": {
-    "dungeon": "Ganon",
-    "events": {
-      "GANON_TRIAL_LIGHT": "has(SMALL_KEY_GANON, 2) && can_hookshot && has_lens && has_light_arrows"
-    },
-    "locations": {
-      "Ganon Castle Light Chest Around 1": "true",
-      "Ganon Castle Light Chest Around 2": "true",
-      "Ganon Castle Light Chest Around 3": "true",
-      "Ganon Castle Light Chest Around 4": "true",
-      "Ganon Castle Light Chest Around 5": "true",
-      "Ganon Castle Light Chest Around 6": "true",
-      "Ganon Castle Light Chest Center": "has_lens",
-      "Ganon Castle Light Chest Lullaby": "has(SMALL_KEY_GANON, 1) && can_play(SONG_ZELDA)"
-    }
-  },
-  "Ganon Castle Forest": {
-    "dungeon": "Ganon",
-    "events": {
-      "GANON_TRIAL_FOREST": "has_fire && can_play(SONG_TIME) && has(BOOTS_HOVER) && has(BOOTS_IRON) && has_light_arrows"
-    },
-    "locations": {
-      "Ganon Castle Forest Chest": "true"
-    }
-  },
-  "Ganon Castle Fire": {
-    "dungeon": "Ganon",
-    "events": {
-      "GANON_TRIAL_FIRE": "has(TUNIC_GORON) && can_longshot && has(STRENGTH, 3) && has_light_arrows"
-    }
-  },
-  "Ganon Castle Water": {
-    "dungeon": "Ganon",
-    "events": {
-      "BLUE_FIRE": "has_bottle",
-      "GANON_TRIAL_WATER": "event(BLUE_FIRE) && has(HAMMER) && has_light_arrows"
-    },
-    "locations": {
-      "Ganon Castle Water Chest 1": "true",
-      "Ganon Castle Water Chest 2": "true"
-    }
-  },
-  "Ganon Castle Spirit": {
-    "dungeon": "Ganon",
-    "events": {
-      "GANON_TRIAL_SPIRIT": "can_hookshot && has_bombchu && has_fire && has_light_arrows"
-    },
-    "locations": {
-      "Ganon Castle Spirit Chest 1": "can_hookshot && (has(MAGIC_UPGRADE) || has_bombchu)",
-      "Ganon Castle Spirit Chest 2": "can_hookshot && has_bombchu && has_lens"
-    }
-  },
-  "Ganon Castle Shadow": {
-    "dungeon": "Ganon",
-    "events": {
-      "GANON_TRIAL_SHADOW": "has(BOOTS_HOVER) && has_lens && has_fire_arrows && has(HAMMER) && has_light_arrows"
-    },
-    "locations": {
-      "Ganon Castle Shadow Chest 1": "can_play(SONG_ZELDA) || can_hookshot || has(BOOTS_HOVER) || (has_lens && has_fire_arrows)",
-      "Ganon Castle Shadow Chest 2": "has(BOOTS_HOVER) && has_lens && has_fire_arrows"
-    }
-  },
-  "Ganon Castle Tower": {
-    "dungeon": "Ganon",
-    "locations": {
-      "Ganon Castle Boss Key": "true"
-    }
-  }
-}
+"Ganon Castle Main":
+  dungeon: Ganon
+  exits:
+    "Ganon Castle Light": "has(STRENGTH, 3)"
+    "Ganon Castle Forest": "true"
+    "Ganon Castle Fire": "true"
+    "Ganon Castle Water": "true"
+    "Ganon Castle Spirit": "true"
+    "Ganon Castle Shadow": "true"
+    "Ganon Castle Tower": "event(GANON_TRIAL_LIGHT) && event(GANON_TRIAL_FOREST) && event(GANON_TRIAL_FIRE) && event(GANON_TRIAL_WATER) && event(GANON_TRIAL_SPIRIT) && event(GANON_TRIAL_SHADOW)"
+"Ganon Castle Light":
+  dungeon: Ganon
+  events:
+    GANON_TRIAL_LIGHT: "has(SMALL_KEY_GANON, 2) && can_hookshot && has_lens && has_light_arrows"
+  locations:
+    "Ganon Castle Light Chest Around 1": "true"
+    "Ganon Castle Light Chest Around 2": "true"
+    "Ganon Castle Light Chest Around 3": "true"
+    "Ganon Castle Light Chest Around 4": "true"
+    "Ganon Castle Light Chest Around 5": "true"
+    "Ganon Castle Light Chest Around 6": "true"
+    "Ganon Castle Light Chest Center": "has_lens"
+    "Ganon Castle Light Chest Lullaby": "has(SMALL_KEY_GANON, 1) && can_play(SONG_ZELDA)"
+"Ganon Castle Forest":
+  dungeon: Ganon
+  events:
+    GANON_TRIAL_FOREST: "has_fire && can_play(SONG_TIME) && has(BOOTS_HOVER) && has(BOOTS_IRON) && has_light_arrows"
+  locations:
+    "Ganon Castle Forest Chest": "true"
+"Ganon Castle Fire":
+  dungeon: Ganon
+  events:
+    GANON_TRIAL_FIRE: "has(TUNIC_GORON) && can_longshot && has(STRENGTH, 3) && has_light_arrows"
+"Ganon Castle Water":
+  dungeon: Ganon
+  events:
+    "BLUE_FIRE": "has_bottle"
+    GANON_TRIAL_WATER: "event(BLUE_FIRE) && has(HAMMER) && has_light_arrows"
+  locations:
+    "Ganon Castle Water Chest 1": "true"
+    "Ganon Castle Water Chest 2": "true"
+"Ganon Castle Spirit":
+  dungeon: Ganon
+  events:
+    GANON_TRIAL_SPIRIT: "can_hookshot && has_bombchu && has_fire && has_light_arrows"
+  locations:
+    "Ganon Castle Spirit Chest 1": "can_hookshot && (has(MAGIC_UPGRADE) || has_bombchu)"
+    "Ganon Castle Spirit Chest 2": "can_hookshot && has_bombchu && has_lens"
+"Ganon Castle Shadow":
+  dungeon: Ganon
+  events:
+    GANON_TRIAL_SHADOW: "has(BOOTS_HOVER) && has_lens && has_fire_arrows && has(HAMMER) && has_light_arrows"
+  locations:
+    "Ganon Castle Shadow Chest 1": "can_play(SONG_ZELDA) || can_hookshot || has(BOOTS_HOVER) || (has_lens && has_fire_arrows)"
+    "Ganon Castle Shadow Chest 2": "has(BOOTS_HOVER) && has_lens && has_fire_arrows"
+"Ganon Castle Tower":
+  dungeon: Ganon
+  locations:
+    "Ganon Castle Boss Key": "true"

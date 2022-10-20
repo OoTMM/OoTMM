@@ -25,11 +25,17 @@
 #define ENTRANCE_FISH         0x45f
 #define ENTRANCE_COLOSSUS     0x1e1
 #define ENTRANCE_FIRE         0x165
+#define ENTRANCE_LW           0x11e
+#define ENTRANCE_POTION_SHOP  0x072
+#define ENTRANCE_VALLEY       0x3d0
+#define ENTRANCE_BIGGORON     0x1bd
+#define ENTRANCE_ZORA_DOMAIN  0x108
+#define ENTRANCE_LAB          0x043
 
 #if defined(DEBUG)
 /* DEBUG: OoT child entrance */
 PATCH_START 0x800903e0
-  li t4,ENTRANCE_FIRE
+  li t4,ENTRANCE_BIGGORON
 PATCH_END
 #endif
 

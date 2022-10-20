@@ -1,5 +1,84 @@
 #include <combo.h>
 
+#define SET_HANDLER(a, h) do { *(void**)(((char*)(a)) + 0x180) = (h); } while (0)
+
+static void EnGo2_HandlerNull(Actor* this, GameState_Play* play)
+{
+}
+
+static void EnGo2_HandlerGiveBiggoronItem(Actor* this, GameState_Play* play)
+{
+    s16 gi = *(s16*)((char*)this + 0x584);
+
+    if (Actor_HasParent(this))
+    {
+        SET_HANDLER(this, EnGo2_HandlerNull);
+        return;
+    }
+
+    switch (gi)
+    {
+    case GI_OOT_PRESCRIPTION:
+        gi = comboOverride(OV_NPC, 0, NPC_OOT_TRADE_PRESCRIPTION, gi);
+        comboRemoveTradeItemAdult(XITEM_OOT_ADULT_BROKEN_GORON_SWORD);
+        break;
+    case GI_OOT_CLAIM_CHECK:
+        gi = comboOverride(OV_NPC, 0, NPC_OOT_TRADE_CLAIM_CHECK, gi);
+        comboRemoveTradeItemAdult(XITEM_OOT_ADULT_EYE_DROPS);
+        break;
+    case GI_OOT_SWORD_BIGGORON:
+        gi = comboOverride(OV_NPC, 0, NPC_OOT_TRADE_BIGGORON_SWORD, gi);
+        gSave.tradeQuestFlag = 1;
+        break;
+    }
+
+    if (!(LINK.state & PLAYER_ACTOR_STATE_GET_ITEM))
+        Message_Close(play);
+
+    GiveItem(this, play, gi, 10000.f, 5000.f);
+}
+
+void EnGo2_SetBiggoronMessageId(Actor* this, GameState_Play* play, Actor* dst)
+{
+    u16 msgId;
+    s16 gi;
+
+    if ((this->variable & 0x1f) != 2)
+        return;
+
+    msgId = 0x3053;
+    gi = -1;
+
+    switch (GetActiveItem(play))
+    {
+    case 0xb: /* Broken Goron Sword */
+        gi = GI_OOT_PRESCRIPTION;
+        break;
+    case 0xe: /* Eye Drops */
+        gi = GI_OOT_CLAIM_CHECK;
+        break;
+    case 0xf: /* Claim check */
+        if (gSave.tradeQuestFlag == 0)
+            gi = GI_OOT_SWORD_BIGGORON;
+        else
+            msgId = 0x305e;
+        break;
+    default:
+        break;
+    }
+
+    if (gi >= 0)
+    {
+        *(s16*)((char*)this + 0x584) = gi;
+        SET_HANDLER(this, EnGo2_HandlerGiveBiggoronItem);
+    }
+
+    this->messageId = msgId;
+    dst->messageId = msgId;
+}
+
+PATCH_FUNC(0x80b58c8c, EnGo2_SetBiggoronMessageId);
+
 int EnGo2_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
 {
     switch (gi)

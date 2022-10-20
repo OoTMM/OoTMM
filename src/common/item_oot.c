@@ -9,6 +9,7 @@ const u8 kOotTradeAdult[] = {
     ITEM_OOT_POACHER_SAW,
     ITEM_OOT_GORON_SWORD_BROKEN,
     ITEM_OOT_PRESCRIPTION,
+    ITEM_OOT_EYEBALL_FROG,
     ITEM_OOT_EYE_DROPS,
     ITEM_OOT_CLAIM_CHECK
 };
@@ -626,11 +627,14 @@ void comboAddItemOot(u16 itemId)
     case ITEM_OOT_PRESCRIPTION:
         addTradeAdult(7);
         break;
-    case ITEM_OOT_EYE_DROPS:
+    case ITEM_OOT_EYEBALL_FROG:
         addTradeAdult(8);
         break;
-    case ITEM_OOT_CLAIM_CHECK:
+    case ITEM_OOT_EYE_DROPS:
         addTradeAdult(9);
+        break;
+    case ITEM_OOT_CLAIM_CHECK:
+        addTradeAdult(10);
         break;
 #if defined(GAME_OOT)
     case ITEM_OOT_SMALL_KEY:

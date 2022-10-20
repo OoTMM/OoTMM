@@ -67,4 +67,6 @@ void ModelViewScale(float sx, float sy, float sz, int mode);
 
 float RandFloat(void);
 
+int GetActiveItem(GameState_Play* play);
+
 #endif
