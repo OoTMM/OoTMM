@@ -32,11 +32,18 @@
 #define ENTRANCE_ZORA_DOMAIN  0x108
 #define ENTRANCE_LAB          0x043
 #define ENTRANCE_BOSS2        0x40b
+#define ENTRANCE_BOSS4        0x00c
 
 #if defined(DEBUG)
-/* DEBUG: OoT child entrance */
+/* DEBUG: OoT entrance */
+#define ENTRANCE ENTRANCE_BOSS4
+
 PATCH_START 0x800903e0
-  li t4,ENTRANCE_BOSS3
+  li t4,ENTRANCE
+PATCH_END
+
+PATCH_START 0x800903d0
+  li t5,ENTRANCE
 PATCH_END
 #endif
 

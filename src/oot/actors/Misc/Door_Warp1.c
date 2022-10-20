@@ -105,8 +105,6 @@ void DoorWarp1_AfterDrawWarp(Actor* this, GameState_Play* play)
     const BlueWarpData* data;
     s16 gi;
 
-    if (this->variable & 0xff00)
-        return;
     data = DoorWarp1_GetData(play);
     if (!data)
         return;
