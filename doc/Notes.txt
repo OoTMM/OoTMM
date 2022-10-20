@@ -1,3 +1,6 @@
+ooT: MM OCARINA glitch?
+
+
 MM Events RAM: 801f0568
 
 === MM Shop Items ===

@@ -28,6 +28,7 @@ static void EnGo2_HandlerGiveBiggoronItem(Actor* this, GameState_Play* play)
         break;
     case GI_OOT_SWORD_BIGGORON:
         gi = comboOverride(OV_NPC, 0, NPC_OOT_TRADE_BIGGORON_SWORD, gi);
+        gSave.tradeQuestFlag = 1;
         break;
     }
 
@@ -52,6 +53,15 @@ void EnGo2_SetBiggoronMessageId(Actor* this, GameState_Play* play, Actor* dst)
     {
     case 0xb: /* Broken Goron Sword */
         gi = GI_OOT_PRESCRIPTION;
+        break;
+    case 0xe: /* Eye Drops */
+        gi = GI_OOT_CLAIM_CHECK;
+        break;
+    case 0xf: /* Claim check */
+        if (gSave.tradeQuestFlag == 0)
+            gi = GI_OOT_SWORD_BIGGORON;
+        else
+            msgId = 0x305e;
         break;
     default:
         break;

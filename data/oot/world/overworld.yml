@@ -256,6 +256,8 @@
     "Death Mountain Chest": "has_explosives"
     "Death Mountain HP": "is_adult && event(BEAN_DEATH_MOUNTAIN)"
     "Death Mountain Prescription": "is_adult && has_explosives && has(BROKEN_GORON_SWORD)"
+    "Death Mountain Claim Check": "is_adult && has_explosives && has(EYE_DROPS)"
+    "Death Mountain Biggoron Sword": "is_adult && has_explosives && has(CLAIM_CHECK)"
     "Great Fairy Magic Upgrade": "has_explosives && can_play(SONG_ZELDA)"
     "Death Mountain Grotto": "hidden_grotto_storms"
     "Death Mountain GS Entrance": "has_explosives"

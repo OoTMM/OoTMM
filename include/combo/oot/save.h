@@ -91,7 +91,8 @@ typedef struct
     u16                     worldTime;
     u16                     unk_0e;
     u32                     isNight;
-    char                    unk_14[0x8];
+    char                    unk_14[0x4];
+    u32                     tradeQuestFlag;
     char                    newf[6];
     s16                     deathCount;
     u8                      playerName[8];

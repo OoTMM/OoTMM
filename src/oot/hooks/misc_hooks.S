@@ -35,7 +35,7 @@
 #if defined(DEBUG)
 /* DEBUG: OoT child entrance */
 PATCH_START 0x800903e0
-  li t4,ENTRANCE_LAB
+  li t4,ENTRANCE_BIGGORON
 PATCH_END
 #endif
 

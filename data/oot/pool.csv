@@ -58,6 +58,8 @@ Graveyard GS Wall,                    gs,             GRAVEYARD,                
 Death Mountain Chest,                 chest,          DEATH_MOUNTAIN_TRAIL,     0x01,                       RUPEE_PURPLE
 Death Mountain HP,                    collectible,    DEATH_MOUNTAIN_TRAIL,     0x1e,                       HEART_PIECE
 Death Mountain Prescription,          npc,            DEATH_MOUNTAIN_TRAIL,     TRADE_PRESCRIPTION,         PRESCRIPTION
+Death Mountain Claim Check,           npc,            DEATH_MOUNTAIN_TRAIL,     TRADE_CLAIM_CHECK,          CLAIM_CHECK
+Death Mountain Biggoron Sword,        npc,            DEATH_MOUNTAIN_TRAIL,     TRADE_BIGGORON_SWORD,       SWORD
 Death Mountain Grotto,                chest,          GROTTOS,                  0x17,                       RUPEE_HUGE
 Death Mountain GS Entrance,           gs,             DEATH_MOUNTAIN_TRAIL,     0x82,                       GS_TOKEN
 Death Mountain GS Soil,               gs,             DEATH_MOUNTAIN_TRAIL,     0x81,                       GS_TOKEN
