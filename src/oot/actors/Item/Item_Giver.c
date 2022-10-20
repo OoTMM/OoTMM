@@ -106,7 +106,7 @@ ActorInit ItemGiver_gActorInit = {
     NULL,
 };
 
-static void spawnGiver(GameState_Play* play, u16 npcId)
+void comboSpawnItemGiver(GameState_Play* play, u16 npcId)
 {
     SpawnActor(
         (char*)play + 0x1c24,
@@ -123,24 +123,24 @@ void comboSpawnItemGivers(GameState_Play* play)
     /* Saria's Ocarina */
     if (gSave.entrance == 0x05e0 && !GetEventChk(EV_OOT_CHK_SARIA_OCARINA))
     {
-        spawnGiver(play, NPC_OOT_SARIA_OCARINA);
+        comboSpawnItemGiver(play, NPC_OOT_SARIA_OCARINA);
     }
 
     /* Sheik in Kakariko */
     if (gSave.entrance == 0x0db && gSave.quest.medallionForest && gSave.quest.medallionFire && gSave.quest.medallionWater && gSave.age == AGE_ADULT && !GetEventChk(EV_OOT_CHK_SONG_TP_SHADOW))
     {
-        spawnGiver(play, NPC_OOT_SHEIK_SHADOW);
+        comboSpawnItemGiver(play, NPC_OOT_SHEIK_SHADOW);
     }
 
     /* Sheik in colossus */
     if (gSave.entrance == 0x1e1 && !GetEventChk(EV_OOT_CHK_SONG_TP_SPIRIT))
     {
-        spawnGiver(play, NPC_OOT_SHEIK_SPIRIT);
+        comboSpawnItemGiver(play, NPC_OOT_SHEIK_SPIRIT);
     }
 
     /* Zelda Light Arrows */
     if (gSave.entrance == 0x053 && gSave.quest.medallionShadow && gSave.quest.medallionSpirit && gSave.age == AGE_ADULT && !GetEventChk(EV_OOT_CHK_LIGHT_ARROW))
     {
-        spawnGiver(play, NPC_OOT_ZELDA_LIGHT_ARROW);
+        comboSpawnItemGiver(play, NPC_OOT_ZELDA_LIGHT_ARROW);
     }
 }

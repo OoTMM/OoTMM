@@ -95,9 +95,6 @@ s32 comboProgressive(s32 gi);
 s32 comboProgressiveOot(s32 gi);
 s32 comboProgressiveMm(s32 gi);
 
-/* Actor */
-void comboSpawnCollectible(GameState_Play* play, float x, float y, float z, u8 flag, u16 gi);
-
 /* Objects */
 void    comboObjectsReset(void);
 void*   comboGetObject(u16 objectId);
@@ -146,6 +143,7 @@ void comboShopDisplayTextBox(GameState_Play* play, Actor_EnGirlA* girlA, int pri
 void comboShopDisplayTextBoxConfirm(GameState_Play* play, Actor_EnGirlA* girlA, int price);
 # endif
 
+void comboSpawnItemGiver(GameState_Play* play, u16 npcId);
 void comboSpawnItemGivers(GameState_Play* play);
 
 /* libc */
