@@ -30,11 +30,12 @@
 #define ENTRANCE_VALLEY       0x3d0
 #define ENTRANCE_BIGGORON     0x1bd
 #define ENTRANCE_ZORA_DOMAIN  0x108
+#define ENTRANCE_LAB          0x043
 
 #if defined(DEBUG)
 /* DEBUG: OoT child entrance */
 PATCH_START 0x800903e0
-  li t4,ENTRANCE_ZORA_DOMAIN
+  li t4,ENTRANCE_LAB
 PATCH_END
 #endif
 

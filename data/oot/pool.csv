@@ -107,6 +107,7 @@ Lake Hylia GS Island,                 gs,             LAKE_HYLIA,               
 Lake Hylia GS Soil,                   gs,             LAKE_HYLIA,               0x98,                       GS_TOKEN
 Lake Hylia GS Big Tree,               gs,             LAKE_HYLIA,               0x9c,                       GS_TOKEN
 Laboratory Dive,                      npc,            LABORATORY,               LABORATORY_DIVE,            HEART_PIECE
+Laboratory Eye Drops,                 npc,            LABORATORY,               TRADE_EYE_DROPS,            EYE_DROPS
 Laboratory GS Crate,                  gs,             LABORATORY,               0x9b,                       GS_TOKEN
 Fishing Pond Child,                   npc,            FISHING_POND,             FISH_CHILD,                 HEART_PIECE
 Fishing Pond Adult,                   npc,            FISHING_POND,             FISH_ADULT,                 SCALE

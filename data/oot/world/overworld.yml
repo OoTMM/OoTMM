@@ -329,6 +329,7 @@
     "Lake Hylia": "true"
   locations:
     "Laboratory Dive": "has(SCALE, 2)"
+    "Laboratory Eye Drops": "is_adult && has(EYEBALL_FROG)"
     "Laboratory GS Crate": "is_adult && has_iron_boots && can_hookshot"
 "Fishing Pond":
   exits:
