@@ -54,28 +54,21 @@ static void ItemGiver_Update(Actor* this, GameState_Play* play)
         }
         break;
     case NPC_OOT_BLUE_WARP_KING_DODONGO:
-        if (ItemGiver_Common(this, play, GI_OOT_STONE_RUBY, EV_OOT_CHK_STONE_RUBY))
-        {
-        }
+        ItemGiver_Common(this, play, GI_OOT_STONE_RUBY, EV_OOT_CHK_STONE_RUBY);
         break;
     case NPC_OOT_BLUE_WARP_BARINADE:
-        if (ItemGiver_Common(this, play, GI_OOT_STONE_SAPPHIRE, EV_OOT_CHK_STONE_SAPPHIRE))
-        {
-        }
+        ItemGiver_Common(this, play, GI_OOT_STONE_SAPPHIRE, EV_OOT_CHK_STONE_SAPPHIRE);
         break;
     case NPC_OOT_BLUE_WARP_PHANTOM_GANON:
-        if (ItemGiver_Common(this, play, GI_OOT_MEDALLION_FOREST, EV_OOT_CHK_MEDALLION_FOREST))
-        {
-        }
+        ItemGiver_Common(this, play, GI_OOT_MEDALLION_FOREST, EV_OOT_CHK_MEDALLION_FOREST);
         break;
     case NPC_OOT_BLUE_WARP_VOLVAGIA:
-        if (ItemGiver_Common(this, play, GI_OOT_MEDALLION_FIRE, EV_OOT_CHK_MEDALLION_FIRE))
-        {
-        }
+        ItemGiver_Common(this, play, GI_OOT_MEDALLION_FIRE, EV_OOT_CHK_MEDALLION_FIRE);
         break;
     case NPC_OOT_BLUE_WARP_MORPHA:
         if (ItemGiver_Common(this, play, GI_OOT_MEDALLION_WATER, EV_OOT_CHK_MEDALLION_WATER))
         {
+            SetEventChk(EV_OOT_CHK_LAKE_HYLIA_WATER);
         }
         break;
     case NPC_OOT_BLUE_WARP_BONGO_BONGO:

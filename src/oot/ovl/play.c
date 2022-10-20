@@ -49,6 +49,8 @@ static void debugCheat(GameState_Play* play)
         gSave.quest.medallionSpirit = 0;
         gSave.quest.medallionForest = 0;
 
+        gSave.health = gSave.healthMax = 20 * 0x10;
+
         gSave.rupees = 99;
 
         gOotExtraTrade.child = 0xffff;
