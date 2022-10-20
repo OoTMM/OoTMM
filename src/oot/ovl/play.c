@@ -53,8 +53,10 @@ static void debugCheat(GameState_Play* play)
 
         gOotExtraTrade.child = 0xffff;
         gOotExtraTrade.adult = 0;
-        gOotExtraTrade.adult |= (1 << XITEM_OOT_ADULT_POACHER_SAW);
-        gSave.inventory[ITS_OOT_TRADE_ADULT] = ITEM_OOT_POACHER_SAW;
+        gOotExtraTrade.adult |= (1 << XITEM_OOT_ADULT_BROKEN_GORON_SWORD);
+        gOotExtraTrade.adult |= (1 << XITEM_OOT_ADULT_EYE_DROPS);
+        gOotExtraTrade.adult |= (1 << XITEM_OOT_ADULT_CLAIM_CHECK);
+        gSave.inventory[ITS_OOT_TRADE_ADULT] = ITEM_OOT_GORON_SWORD_BROKEN;
 
         gSave.age = AGE_ADULT;
 

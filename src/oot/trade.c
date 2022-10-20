@@ -34,7 +34,7 @@ static void toggleTrade(u8* slot, u32 flags, const u8* table, u32 tableSize)
 
 void comboToggleTradeAdult(void)
 {
-    toggleTrade(gSave.inventory + ITS_OOT_TRADE_ADULT, gOotExtraTrade.adult, kOotTradeAdult, 10);
+    toggleTrade(gSave.inventory + ITS_OOT_TRADE_ADULT, gOotExtraTrade.adult, kOotTradeAdult, 11);
 }
 
 void comboToggleTradeChild(void)

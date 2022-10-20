@@ -191,7 +191,7 @@
     "Bottom of the Well": "is_child && can_play(SONG_STORMS) && has(SWORD)"
     "Skulltula House": "true"
     "Shooting Gallery": "is_adult"
-    "kakariko Rooftop": "can_hookshot"
+    "Kakariko Rooftop": "can_hookshot"
   locations:
     "Kakariko Anju Bottle": "is_child"
     "Kakariko Anju Egg": "is_adult"
@@ -209,7 +209,7 @@
     "Kakariko GS House of Skulltula": "gs_night && is_child"
     "Kakariko GS Bazaar": "gs_night && is_child"
     "Kakariko GS Ladder": "gs_night && is_child && has(SLINGSHOT)"
-"kakariko Rooftop":
+"Kakariko Rooftop":
   exits:
     "Kakariko": "true"
   locations:
@@ -248,13 +248,14 @@
     "Goron City": "true"
     "Dodongo Cavern Entrance": "has_bombflowers && has(SWORD)"
     "Kakariko": "has(ZELDA_LETTER)"
-    "kakariko Rooftop": "is_child && has_explosives"
+    "Kakariko Rooftop": "is_child && has_explosives"
     "Death Mountain Crater Top": "has_explosives_or_hammer"
   events:
     BEAN_DEATH_MOUNTAIN: "can_use_beans"
   locations:
     "Death Mountain Chest": "has_explosives"
     "Death Mountain HP": "is_adult && event(BEAN_DEATH_MOUNTAIN)"
+    "Death Mountain Prescription": "is_adult && has_explosives && has(BROKEN_GORON_SWORD)"
     "Great Fairy Magic Upgrade": "has_explosives && can_play(SONG_ZELDA)"
     "Death Mountain Grotto": "hidden_grotto_storms"
     "Death Mountain GS Entrance": "has_explosives"
