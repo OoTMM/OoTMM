@@ -80,3 +80,8 @@ PATCH_END
 PATCH_START 0x80146bac
   li a1,0x3ca0
 PATCH_END
+
+/* Hook after save load */
+PATCH_START 0x80145464
+  j Sram_AfterOpenSave
+PATCH_END
