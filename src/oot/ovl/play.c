@@ -7,6 +7,7 @@ static void debugCheat(GameState_Play* play)
 #if defined(DEBUG)
     if (play->gs.input[0].current.buttons & 0x20)
     {
+        /*
         gSave.inventory[ITS_OOT_STICKS] = ITEM_OOT_STICK;
         gSave.inventory[ITS_OOT_NUTS] = ITEM_OOT_NUT;
         gSave.inventory[ITS_OOT_BOMBS] = ITEM_OOT_BOMB;
@@ -23,10 +24,13 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory[ITS_OOT_TRADE_CHILD] = ITEM_OOT_ZELDA_LETTER;
         gSave.inventory[ITS_OOT_HAMMER] = ITEM_OOT_HAMMER;
         gSave.inventory[ITS_OOT_HOOKSHOT] = ITEM_OOT_LONGSHOT;
+        gSave.inventory[ITS_OOT_LENS] = ITEM_OOT_LENS;
+        */
         gSave.equipment.swords = 0x7;
         gSave.equipment.shields = 0x7;
         gSave.equipment.tunics = 0x7;
         gSave.equipment.boots = 0x7;
+        /*
         gSave.upgrades.dekuStick = 3;
         gSave.upgrades.bulletBag = 3;
         gSave.upgrades.bombBag = 3;
@@ -40,14 +44,20 @@ static void debugCheat(GameState_Play* play)
         gSave.quest.songSaria = 1;
         gSave.quest.songTime = 1;
         gSave.quest.songSun = 1;
+        */
 
-        gSave.quest.stoneEmerald = 1;
-        gSave.quest.stoneRuby = 1;
-        gSave.quest.stoneSapphire = 1;
+        gSave.quest.stoneEmerald = 0;
+        gSave.quest.stoneRuby = 0;
+        gSave.quest.stoneSapphire = 0;
 
         gSave.quest.medallionShadow = 1;
         gSave.quest.medallionSpirit = 1;
         gSave.quest.medallionForest = 1;
+        gSave.quest.medallionFire = 1;
+        gSave.quest.medallionWater = 1;
+        gSave.quest.medallionLight = 1;
+
+        gSave.health = gSave.healthMax = 20 * 0x10;
 
         gSave.rupees = 99;
 
@@ -58,9 +68,6 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory[ITS_OOT_TRADE_ADULT] = ITEM_OOT_EYE_DROPS;
 
         gSave.age = AGE_ADULT;
-
-        SetEventChk(EV_OOT_CHK_ZELDA_LETTER);
-        SetEventChk(EV_OOT_CHK_SONG_ZELDA);
 
         BITMAP16_SET(gSave.eventsMisc, EV_OOT_INF_KING_ZORA_THAWED);
     }
@@ -137,6 +144,19 @@ static void eventFixes(GameState_Play* play)
 
     /* Unlock a specific water temple door */
     gSave.perm[SCE_OOT_TEMPLE_WATER].switches |= (1 << 0x15);
+
+    /* Skip Zelda's cutscene when having all the spiritual stones */
+    if (gSave.quest.stoneEmerald && gSave.quest.stoneRuby && gSave.quest.stoneSapphire)
+    {
+        SetEventChk(EV_OOT_CHK_ZELDA_FLED);
+        SetEventChk(EV_OOT_CHK_ZELDA_FLED_BRIDGE);
+    }
+
+    /* Set the rainbow bridge flag */
+    if (gSave.quest.medallionLight && gSave.quest.medallionForest && gSave.quest.medallionFire && gSave.quest.medallionWater && gSave.quest.medallionShadow && gSave.quest.medallionSpirit)
+    {
+        SetEventChk(EV_OOT_CHK_RAINBOW_BRIDGE);
+    }
 }
 
 void hookPlay_Init(GameState_Play* play)
@@ -145,13 +165,6 @@ void hookPlay_Init(GameState_Play* play)
     debugCheat(play);
     skipEntranceCutscene(play);
     eventFixes(play);
-
-    /* Skip Zelda's cutscene when having all the spiritual stones */
-    if (gSave.quest.stoneEmerald && gSave.quest.stoneRuby && gSave.quest.stoneSapphire)
-    {
-        SetEventChk(EV_OOT_CHK_ZELDA_FLED);
-        SetEventChk(EV_OOT_CHK_ZELDA_FLED_BRIDGE);
-    }
 
     Play_Init(play);
     comboSpawnItemGivers(play);

@@ -90,14 +90,7 @@ int DoorWarp1_ShouldTrigger(Actor* this, GameState_Play* play)
             }
             return 0;
         }
-        SpawnActor(
-            (char*)play + 0x1c24,
-            play,
-            AC_ITEM_GIVER,
-            0, 0, 0,
-            0, 0, 0,
-            data->npc
-        );
+        comboSpawnItemGiver(play, data->npc);
         return 0;
     }
     return 0;
@@ -112,8 +105,6 @@ void DoorWarp1_AfterDrawWarp(Actor* this, GameState_Play* play)
     const BlueWarpData* data;
     s16 gi;
 
-    if (this->variable & 0xff00)
-        return;
     data = DoorWarp1_GetData(play);
     if (!data)
         return;

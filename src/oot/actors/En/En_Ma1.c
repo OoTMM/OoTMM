@@ -31,32 +31,24 @@ void EnMa1_HandlerOcarina(Actor* actor, GameState_Play* play)
 
 PATCH_FUNC(0x809f1414, EnMa1_HandlerOcarina);
 
-void EnMa1_HandlerEgg(Actor* actor, GameState_Play* play)
+void EnMa1_HandlerEgg(Actor* this, GameState_Play* play)
 {
     s16 gi;
 
-    if (Actor_HasParent(actor))
+    if (Actor_HasParent(this))
     {
-        if (Message_GetState(&play->msgCtx) == 2)
+        if (Message_IsClosed(this, play))
         {
             SetEventChk(EV_OOT_CHK_MALON_SPOKEN_HYRULE);
             SetEventChk(EV_OOT_CHK_MALON_EGG);
-            SET_HANDLER(actor, EnMa1_HandlerNull);
+            SET_HANDLER(this, EnMa1_HandlerNull);
         }
     }
     else
     {
         gi = comboOverride(OV_NPC, 0, NPC_OOT_MALON_EGG, GI_OOT_CHICKEN);
-        GiveItem(actor, play, gi, 200.f, 200.f);
+        GiveItem(this, play, gi, 200.f, 200.f);
     }
 }
 
-void EnMa1_AfterHandler(Actor* actor, GameState_Play* play)
-{
-    if (actor->messageId == 0x2043)
-    {
-        Message_Close(play);
-        SET_HANDLER(actor, EnMa1_HandlerEgg);
-        EnMa1_HandlerEgg(actor, play);
-    }
-}
+PATCH_FUNC(0x809f1240, EnMa1_HandlerEgg);

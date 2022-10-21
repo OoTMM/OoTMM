@@ -64,6 +64,7 @@ LoadObject = 0x800812f0;
 GetObject = 0x80081628;
 ActorSetScale = 0x80020f88;
 
+PlaySound = 0x800646f0;
 PlaySound6 = 0x800c806c;
 
 Actor_HasParent = 0x80022bb0;
@@ -110,3 +111,6 @@ ModelViewScale = 0x800aa8fc;
 RandFloat = 0x800cdccc;
 GetChestFlag = 0x8002060c;
 GetActiveItem = 0x80022b04;
+
+AddItem = 0x8006fdcc;
+GetItemCollectBehavior = 0x80071420;

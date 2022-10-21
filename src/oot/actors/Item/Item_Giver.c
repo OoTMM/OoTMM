@@ -54,39 +54,28 @@ static void ItemGiver_Update(Actor* this, GameState_Play* play)
         }
         break;
     case NPC_OOT_BLUE_WARP_KING_DODONGO:
-        if (ItemGiver_Common(this, play, GI_OOT_STONE_RUBY, EV_OOT_CHK_STONE_RUBY))
-        {
-        }
+        ItemGiver_Common(this, play, GI_OOT_STONE_RUBY, EV_OOT_CHK_STONE_RUBY);
         break;
     case NPC_OOT_BLUE_WARP_BARINADE:
-        if (ItemGiver_Common(this, play, GI_OOT_STONE_SAPPHIRE, EV_OOT_CHK_STONE_SAPPHIRE))
-        {
-        }
+        ItemGiver_Common(this, play, GI_OOT_STONE_SAPPHIRE, EV_OOT_CHK_STONE_SAPPHIRE);
         break;
     case NPC_OOT_BLUE_WARP_PHANTOM_GANON:
-        if (ItemGiver_Common(this, play, GI_OOT_MEDALLION_FOREST, EV_OOT_CHK_MEDALLION_FOREST))
-        {
-        }
+        ItemGiver_Common(this, play, GI_OOT_MEDALLION_FOREST, EV_OOT_CHK_MEDALLION_FOREST);
         break;
     case NPC_OOT_BLUE_WARP_VOLVAGIA:
-        if (ItemGiver_Common(this, play, GI_OOT_MEDALLION_FIRE, EV_OOT_CHK_MEDALLION_FIRE))
-        {
-        }
+        ItemGiver_Common(this, play, GI_OOT_MEDALLION_FIRE, EV_OOT_CHK_MEDALLION_FIRE);
         break;
     case NPC_OOT_BLUE_WARP_MORPHA:
         if (ItemGiver_Common(this, play, GI_OOT_MEDALLION_WATER, EV_OOT_CHK_MEDALLION_WATER))
         {
+            SetEventChk(EV_OOT_CHK_LAKE_HYLIA_WATER);
         }
         break;
     case NPC_OOT_BLUE_WARP_BONGO_BONGO:
-        if (ItemGiver_Common(this, play, GI_OOT_MEDALLION_SHADOW, EV_OOT_CHK_MEDALLION_SHADOW))
-        {
-        }
+        ItemGiver_Common(this, play, GI_OOT_MEDALLION_SHADOW, EV_OOT_CHK_MEDALLION_SHADOW);
         break;
     case NPC_OOT_BLUE_WARP_TWINROVA:
-        if (ItemGiver_Common(this, play, GI_OOT_MEDALLION_SPIRIT, EV_OOT_CHK_MEDALLION_SPIRIT))
-        {
-        }
+        ItemGiver_Common(this, play, GI_OOT_MEDALLION_SPIRIT, EV_OOT_CHK_MEDALLION_SPIRIT);
         break;
     default:
         ActorDestroy(this);
@@ -101,12 +90,12 @@ ActorInit ItemGiver_gActorInit = {
     0x1,
     sizeof(Actor),
     (ActorFunc)ItemGiver_Init,
-    (ActorFunc)ItemGiver_Update,
     NULL,
+    (ActorFunc)ItemGiver_Update,
     NULL,
 };
 
-static void spawnGiver(GameState_Play* play, u16 npcId)
+void comboSpawnItemGiver(GameState_Play* play, u16 npcId)
 {
     SpawnActor(
         (char*)play + 0x1c24,
@@ -123,24 +112,24 @@ void comboSpawnItemGivers(GameState_Play* play)
     /* Saria's Ocarina */
     if (gSave.entrance == 0x05e0 && !GetEventChk(EV_OOT_CHK_SARIA_OCARINA))
     {
-        spawnGiver(play, NPC_OOT_SARIA_OCARINA);
+        comboSpawnItemGiver(play, NPC_OOT_SARIA_OCARINA);
     }
 
     /* Sheik in Kakariko */
     if (gSave.entrance == 0x0db && gSave.quest.medallionForest && gSave.quest.medallionFire && gSave.quest.medallionWater && gSave.age == AGE_ADULT && !GetEventChk(EV_OOT_CHK_SONG_TP_SHADOW))
     {
-        spawnGiver(play, NPC_OOT_SHEIK_SHADOW);
+        comboSpawnItemGiver(play, NPC_OOT_SHEIK_SHADOW);
     }
 
     /* Sheik in colossus */
     if (gSave.entrance == 0x1e1 && !GetEventChk(EV_OOT_CHK_SONG_TP_SPIRIT))
     {
-        spawnGiver(play, NPC_OOT_SHEIK_SPIRIT);
+        comboSpawnItemGiver(play, NPC_OOT_SHEIK_SPIRIT);
     }
 
     /* Zelda Light Arrows */
     if (gSave.entrance == 0x053 && gSave.quest.medallionShadow && gSave.quest.medallionSpirit && gSave.age == AGE_ADULT && !GetEventChk(EV_OOT_CHK_LIGHT_ARROW))
     {
-        spawnGiver(play, NPC_OOT_ZELDA_LIGHT_ARROW);
+        comboSpawnItemGiver(play, NPC_OOT_ZELDA_LIGHT_ARROW);
     }
 }

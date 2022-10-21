@@ -29,13 +29,23 @@
 #define ENTRANCE_POTION_SHOP  0x072
 #define ENTRANCE_VALLEY       0x3d0
 #define ENTRANCE_BIGGORON     0x1bd
-#define ENTRANCE_ZORA_DOMAIN  0x108
 #define ENTRANCE_LAB          0x043
+#define ENTRANCE_BOSS2        0x40b
+#define ENTRANCE_BOSS4        0x00c
+#define ENTRANCE_BOSS5        0x305
+#define ENTRANCE_BOSS6        0x417
+#define ENTRANCE_BOSS7        0x413
 
 #if defined(DEBUG)
-/* DEBUG: OoT child entrance */
+/* DEBUG: OoT entrance */
+#define ENTRANCE ENTRANCE_MIDO
+
 PATCH_START 0x800903e0
-  li t4,ENTRANCE_BIGGORON
+  li t4,ENTRANCE
+PATCH_END
+
+PATCH_START 0x800903d0
+  li t5,ENTRANCE
 PATCH_END
 #endif
 
