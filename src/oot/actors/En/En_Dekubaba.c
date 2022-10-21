@@ -20,7 +20,7 @@ void EnDekubaba_GiveItemDefaultRange(Actor* this, GameState_Play* play, s16 gi)
             dist = -dist;
         if (dist < 10.f)
         {
-            this->attachedA = &LINK;
+            this->attachedA = &LINK.base;
             PlaySound(0x4824);
             AddItem(play, ITEM_OOT_STICK);
         }

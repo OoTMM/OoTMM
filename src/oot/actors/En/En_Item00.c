@@ -20,7 +20,7 @@ int EnItem00_GiveItemDefaultRange(Actor_EnItem00* this, GameState_Play* play, s1
 
     if (itemId >= 0)
     {
-        this->base.attachedA = &LINK;
+        this->base.attachedA = &LINK.base;
         PlaySound(0x4824);
         return AddItem(play, itemId);
     }
