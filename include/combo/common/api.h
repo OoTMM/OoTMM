@@ -6,7 +6,7 @@
 typedef struct GameState_Play GameState_Play;
 typedef struct Actor Actor;
 
-void    LoadFile(void* dst, u32 vromAddr, u32 size);
+int    LoadFile(void* dst, u32 vromAddr, u32 size);
 
 Actor*  SpawnActor(void* const_1, GameState_Play* play, s16 actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable);
 void    ActorDestroy(Actor* actor);
