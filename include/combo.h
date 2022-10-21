@@ -135,6 +135,7 @@ void comboToggleTradeChild(void);
 void comboToggleOcarina(void);
 void comboToggleHookshot(void);
 void comboRemoveTradeItemAdult(u16 xitemId);
+void comboRemoveTradeItemChild(u16 xitemId);
 #endif
 
 # if defined(GAME_MM)
