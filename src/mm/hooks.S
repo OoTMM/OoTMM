@@ -19,20 +19,6 @@ PATCH_START(0x80080d14)
   lui t6, ((0x00020000 | MM_BASE) >> 16)
 PATCH_END
 
-/* Rebase MM save */
-PATCH_START(0x801c67c8)
-.int 0x100
-.int 0x140
-.int 0x180
-.int 0x1c0
-.int 0x200
-.int 0x280
-.int 0x300
-.int 0x380
-.int 0x400
-.int 0x480
-PATCH_END
-
 /* Downsize the heap by 0x20000 */
 PATCH_START(0x80174c4c)
   lui t8, 0x8076

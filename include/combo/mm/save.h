@@ -173,18 +173,18 @@ typedef struct
     s8                      bomberCode[5];
     MmHorseData             horseData;
     u16                     checksum;
+    u8                      eventInf[8];
+    u8                      unk_1014;
+    u8                      unk_1015;
+    u16                     jinxTimer;
+    s16                     rupeesDelta;
+    char                    unk[0x2c86];
 }
 MmSave;
 
 typedef struct
 {
     MmSave  save;
-    u8      eventInf[8];
-    u8      unk_1014;
-    u8      unk_1015;
-    u16     jinxTimer;
-    s16     rupeesDelta;
-    char    unk[0x2c86];
     u32     fileIndex;
     char    unk_3ca4[0x28c];
     u16     magicTarget;
@@ -194,7 +194,7 @@ typedef struct
 }
 MmSaveContext;
 
-_Static_assert(sizeof(MmSave) == 0x100c, "MmSave size is wrong");
+_Static_assert(sizeof(MmSave) == 0x3ca0, "MmSave size is wrong");
 _Static_assert(sizeof(MmSaveContext) == 0x48c8, "MmSaveContext size is wrong");
 
 #if defined(GAME_MM)

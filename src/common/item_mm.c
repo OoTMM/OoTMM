@@ -107,7 +107,7 @@ static void addRupees(s16 count)
 
 #if defined(GAME_MM)
     (void)max;
-    gSaveContext.rupeesDelta += count;
+    gSaveContext.save.rupeesDelta += count;
 #else
     max = kMaxRupees[gMmSave.inventory.upgrades.wallet];
     gMmSave.playerData.rupees += count;

@@ -58,15 +58,18 @@ static void saveOot(void)
 static void saveMm(void)
 {
     u32 base;
+    u32 saveSize;
+
+    /* Compute save args */
+    base = 0x8000 + 0x8000 * gSaveContext.fileIndex;
 
     /* Set the checksum */
     gMmSave.checksum = 0;
     gMmSave.checksum = computeChecksumMm(&gMmSave, sizeof(gMmSave));
 
     /* Write the save data to flash */
-    base = 0x8000 + 0x4000 * gSaveContext.fileIndex;
     comboReadWriteFlash(base, &gMmSave, sizeof(gMmSave), OS_WRITE);
-    comboReadWriteFlash(base + 0x2000, &gMmSave, sizeof(gMmSave), OS_WRITE);
+    comboReadWriteFlash(base + 0x4000, &gMmSave, sizeof(gMmSave), OS_WRITE);
 }
 
 void comboReadForeignSave(void)
@@ -78,7 +81,7 @@ void comboReadForeignSave(void)
 #endif
 
 #if !defined(GAME_MM)
-    comboReadWriteFlash(0x8000 + 0x4000 * fileIndex, &gMmSave, sizeof(gMmSave), OS_READ);
+    comboReadWriteFlash(0x8000 + 0x8000 * fileIndex, &gMmSave, sizeof(gMmSave), OS_READ);
 #endif
 }
 

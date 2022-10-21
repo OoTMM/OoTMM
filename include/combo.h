@@ -14,7 +14,6 @@
 # include <combo/defs.h>
 # include <combo/equipment.h>
 # include <combo/object.h>
-# include <combo/save.h>
 # include <combo/shader.h>
 # include <combo/patch.h>
 # include <combo/npc.h>
@@ -40,6 +39,7 @@
 #endif
 
 /* Shared with assembler */
+#include <combo/save.h>
 #include <combo/gi.h>
 #include <combo/items.h>
 #include <combo/common/events.h>
