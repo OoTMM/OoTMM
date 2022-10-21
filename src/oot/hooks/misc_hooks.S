@@ -39,7 +39,7 @@
 
 #if defined(DEBUG)
 /* DEBUG: OoT entrance */
-#define ENTRANCE ENTRANCE_KAKARIKO
+#define ENTRANCE ENTRANCE_MIDO
 
 PATCH_START 0x800903e0
   li t4,ENTRANCE
