@@ -31,3 +31,20 @@ PATCH_START 0x80831d8c
    nop
   lw    ra,0x00(sp)
 PATCH_END
+
+/* Disable calls to GetItemCollectBehavior */
+PATCH_START 0x8083c6f0
+  li v0,0xff
+PATCH_END
+
+PATCH_START 0x8083c830
+  li v0,0xff
+PATCH_END
+
+PATCH_START 0x8083c858
+  li v0,0xff
+PATCH_END
+
+PATCH_START 0x8083c944
+  li v0,0xff
+PATCH_END

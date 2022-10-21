@@ -2,15 +2,32 @@
 
 int EnItem00_GiveItemDefaultRange(Actor_EnItem00* this, GameState_Play* play, s16 gi)
 {
+    s16 itemId;
+
+    itemId = -1;
     switch (this->base.variable)
     {
     case 0x06:
     case 0x11:
         gi = comboOverride(OV_COLLECTIBLE, play->sceneId, this->collectibleFlag, gi);
         break;
+    default:
+        itemId = kExtendedGetItems[gi - 1].itemId;
+        if (GetItemCollectBehavior(itemId) == 0xff)
+            itemId = -1;
+        break;
     }
 
-    return GiveItemDefaultRange(&this->base, play, gi);
+    if (itemId >= 0)
+    {
+        this->base.attachedA = &LINK;
+        PlaySound(0x4824);
+        return AddItem(play, itemId);
+    }
+    else
+    {
+        return GiveItemDefaultRange(&this->base, play, gi);
+    }
 }
 
 PATCH_CALL(0x80012174, EnItem00_GiveItemDefaultRange);

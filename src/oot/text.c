@@ -3,7 +3,7 @@
 /* Instant text */
 static int DisplayTextBox_LoadFile(u8* dst, u32 vromAddr, u32 size)
 {
-    u8 buffer[512];
+    u8 buffer[1024];
     int ret;
     u32 i;
     u8 c;

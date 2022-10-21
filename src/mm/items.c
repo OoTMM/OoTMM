@@ -3,7 +3,7 @@
 #define CB_PASSIVE 0x00
 #define CB_GETITEM 0xff
 
-int GetItemCollectBehavior(s16 itemId)
+u8 GetItemCollectBehavior(s16 itemId)
 {
     switch (itemId)
     {

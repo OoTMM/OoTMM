@@ -1,11 +1,5 @@
 #include <combo.h>
 
-/* Patch GetItemCollectBehavior */
-PATCH_START(0x80071420)
-  j GetItemCollectBehavior
-   nop
-PATCH_END
-
 /* Expand link's chest item to 16 bits */
 PATCH_LOAD_STORE 16, 0
 .int 0x80022cd0

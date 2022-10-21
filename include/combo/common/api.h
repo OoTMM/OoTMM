@@ -69,4 +69,7 @@ float RandFloat(void);
 
 int GetActiveItem(GameState_Play* play);
 
+u8 AddItem(GameState_Play* play, u8 itemId);
+u8 GetItemCollectBehavior(s16 itemId);
+
 #endif
