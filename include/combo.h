@@ -124,6 +124,9 @@ extern const u8 kMaxSeeds[];
 extern const u16 kMaxRupees[];
 extern const u8 kOotTradeChild[];
 extern const u8 kOotTradeAdult[];
+extern const u8 kMmTrade1[];
+extern const u8 kMmTrade2[];
+extern const u8 kMmTrade3[];
 
 int  comboAddItemGI(GameState_Play* play, s16 gi);
 void comboAddItemMm(u16 itemId);

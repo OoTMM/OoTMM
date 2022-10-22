@@ -97,15 +97,19 @@ typedef struct
 }
 MmInventory;
 
-typedef struct
+typedef union
 {
-    u32 chest;
-    u32 switch0;
-    u32 switch1;
-    u32 clearedRoom;
-    u32 collectible;
-    u32 clearedFloors;
-    u32 rooms;
+    struct
+    {
+        u32 chest;
+        u32 switch0;
+        u32 switch1;
+        u32 clearedRoom;
+        u32 collectible;
+        u32 clearedFloors;
+        u32 rooms;
+    };
+    char raw[0x1c];
 }
 MmPermanentSceneFlags;
 
@@ -205,6 +209,17 @@ ALIGNED(16) extern MmSaveContext gSaveContext;
 ALIGNED(16) extern MmSave gMmSave;
 #endif
 
-#define gMmSaveBoss (gMmSave.permanentSceneFlags[1].clearedRoom)
+/* Custom */
+typedef struct
+{
+    u8 trade1;
+    u8 trade2;
+    u8 trade3;
+    u8 unused;
+}
+MmExtraTrade;
+
+#define gMmSaveBoss     (gMmSave.permanentSceneFlags[1].clearedRoom)
+#define gMmExtraTrade   (*((MmExtraTrade*)(gMmSave.permanentSceneFlags[2].raw + 0x10)))
 
 #endif /* MM_SAVE_H */
