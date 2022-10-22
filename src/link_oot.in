@@ -114,3 +114,5 @@ GetActiveItem = 0x80022b04;
 
 AddItem = 0x8006fdcc;
 GetItemCollectBehavior = 0x80071420;
+
+RandIntRange = 0x80063bf0;

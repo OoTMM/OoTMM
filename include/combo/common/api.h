@@ -76,4 +76,6 @@ u8 GetItemCollectBehavior(s16 itemId);
 void PrepareSave(SramContext* sram);
 #endif
 
+s16 RandIntRange(s16 base, s16 amplitude);
+
 #endif

@@ -71,6 +71,10 @@ static const MmInventory kDefaultInventory =
 
 void comboCreateSaveMM(void)
 {
+    int i;
+    int j;
+    u8 tmp;
+
     bzero(&gMmSave, sizeof(MmSave));
 
     /* Create some save data */
@@ -109,6 +113,48 @@ void comboCreateSaveMM(void)
     MM_SET_EVENT_WEEK(EV_MM_WEEK_TOWN_GUARDS);
     MM_SET_EVENT_WEEK(EV_MM_WEEK_FIRST_CYCLE);
     MM_SET_EVENT_WEEK(EV_MM_WEEK_FOREST_WITCH);
+
+    /* Set the high scores */
+    gMmSave.dekuPlaygroundHighScores[0] = 7500;
+    gMmSave.dekuPlaygroundHighScores[1] = 7500;
+    gMmSave.dekuPlaygroundHighScores[2] = 7600;
+    gMmSave.unk_ee8 = 0x13000a;
+    gMmSave.horseBackBalloonHighScore = 6000;
+    gMmSave.shootingGalleryHighScore = 0xa0027;
+
+    /* Set the lottery codes */
+    for (i = 0; i < 3; ++i)
+    {
+        for (j = 0; j < 3; ++j)
+            gMmSave.lotteryCodes[i][j] = RandIntRange(0, 10);
+    }
+
+    /* Set the bomber code */
+    gMmSave.bomberCode[0] = 1;
+    gMmSave.bomberCode[1] = 2;
+    gMmSave.bomberCode[2] = 3;
+    gMmSave.bomberCode[3] = 4;
+    gMmSave.bomberCode[4] = 5;
+
+    for (i = 0; i < 5; ++i)
+    {
+        j = RandIntRange(0, 5);
+        tmp = gMmSave.bomberCode[i];
+        gMmSave.bomberCode[i] = gMmSave.bomberCode[j];
+        gMmSave.bomberCode[j] = tmp;
+    }
+
+    /* Set the spider house masks order */
+    tmp = 0xff;
+    for (i = 0; i < 6; ++i)
+    {
+        do
+        {
+            gMmSave.spiderHouseMaskOrder[i] = RandIntRange(0, 0x10) & 3;
+        }
+        while (gMmSave.spiderHouseMaskOrder[i] == tmp);
+        tmp = gMmSave.spiderHouseMaskOrder[i];
+    }
 
     /* Save */
     comboWriteForeignSave();

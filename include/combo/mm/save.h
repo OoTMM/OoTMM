@@ -154,12 +154,12 @@ typedef struct
     u32                     stolenItems;
     u32                     unk_DD8;
     u32                     bankRupees;
-    u32                     unk_EE0;
-    u32                     unk_EE4;
-    u32                     unk_EE8;
+    u32                     unk_ee0;
+    u32                     unk_ee4;
+    u32                     unk_ee8;
     u32                     horseBackBalloonHighScore;
     u32                     lotteryCodeGuess;
-    u32                     shootingGalleryHighScores;
+    u32                     shootingGalleryHighScore;
     u8                      weekEventReg[100];
     u32                     mapsVisited;
     u32                     mapsVisible;
