@@ -104,6 +104,7 @@ OcarinaAction2 = 0x800dd430;
 
 gModelView = 0x80121204;
 
+ModelViewUnkTransform = 0x800abe54;
 ModelViewRotateY = 0x800aab94;
 ModelViewTranslate = 0x800aa7f4;
 ModelViewScale = 0x800aa8fc;

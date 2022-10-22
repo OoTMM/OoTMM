@@ -61,6 +61,7 @@ void OcarinaAction2(GameState_Play *play, u16 ocarinaAction);
 
 extern float* gModelView;
 
+void ModelViewUnkTransform(float* unk);
 void ModelViewRotateY(float angle, int mode);
 void ModelViewTranslate(float tx, float ty, float tz, int mode);
 void ModelViewScale(float sx, float sy, float sz, int mode);
