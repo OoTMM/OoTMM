@@ -2,6 +2,9 @@
   exits:
     "Termina Field": "true"
     "Clock Tower Rooftop": "true"
+    "Astral Observatory": "event(BOMBER_CODE)"
+  events:
+    BOMBER_CODE: "(has(MASK_DEKU) && has(MAGIC_UPGRADE)) || has(MASK_ZORA) || has(BOW)"
   locations:
     "Clock Town Platform HP": "true"
     "Clock Town Tree HP": "true"
@@ -9,6 +12,12 @@
     "Clock Town Great Fairy": "true"
     "Clock Town Great Fairy Alt": "has(MASK_DEKU) || has(MASK_GORON) || has(MASK_ZORA)"
     "Bomb Shop Bomb Bag": "true"
+"Astral Observatory":
+  exits:
+    "Clock Town": "true"
+  locations:
+    "Astral Observatory Passage Chest": "has_explosives"
+    "Astral Observatory Moon Tear": "true"
 "Termina Field":
   exits:
     "Clock Town": "true"

@@ -97,3 +97,4 @@ MM_MASK_GIBDO:            0x10
 MM_MASK_SCENTS:           0x11
 MM_SONG_EMPTINESS:        0x12
 MM_SONG_ORDER:            0x13
+MM_MOON_TEAR:             0x14
