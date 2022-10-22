@@ -77,3 +77,5 @@ gModelView = 0x801fbe04;
 MatrixScaleMV = 0x8018039c;
 
 PrepareSave = 0x8014546c;
+PlaySound = 0x8019f0c8;
+Message_Close = 0x801477b4;
