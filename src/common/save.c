@@ -58,7 +58,6 @@ static void saveOot(void)
 static void saveMm(void)
 {
     u32 base;
-    u32 saveSize;
 
     /* Compute save args */
     base = 0x8000 + 0x8000 * gSaveContext.fileIndex;
@@ -87,6 +86,9 @@ void comboReadForeignSave(void)
 
 void comboWriteForeignSave(void)
 {
+    if (gSaveContext.fileIndex == 0xff)
+        return;
+
 #if !defined(GAME_OOT)
     saveOot();
 #endif
@@ -98,6 +100,9 @@ void comboWriteForeignSave(void)
 
 void comboWriteSave(void)
 {
+    if (gSaveContext.fileIndex == 0xff)
+        return;
+
     saveOot();
     saveMm();
 }

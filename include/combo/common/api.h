@@ -72,4 +72,8 @@ int GetActiveItem(GameState_Play* play);
 u8 AddItem(GameState_Play* play, u8 itemId);
 u8 GetItemCollectBehavior(s16 itemId);
 
+#if defined(GAME_MM)
+void PrepareSave(SramContext* sram);
+#endif
+
 #endif

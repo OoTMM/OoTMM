@@ -85,3 +85,28 @@ PATCH_END
 PATCH_START 0x80145464
   j Sram_AfterOpenSave
 PATCH_END
+
+/* Use our own save func */
+PATCH_START 0x80146ff0
+  jal comboWriteSave
+PATCH_END
+
+PATCH_START 0x801584a0
+  jal comboWriteSave
+PATCH_END
+
+PATCH_START 0x801585a4
+  jal comboWriteSave
+PATCH_END
+
+PATCH_START 0x80829264
+  jal comboWriteSave
+PATCH_END
+
+PATCH_START 0x80829f54
+  jal comboWriteSave
+PATCH_END
+
+PATCH_START 0x80146f44
+  jal comboWriteSave
+PATCH_END
