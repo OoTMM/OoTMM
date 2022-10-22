@@ -78,4 +78,6 @@ void PrepareSave(SramContext* sram);
 
 s16 RandIntRange(s16 base, s16 amplitude);
 
+extern u32 gSegments[16];
+
 #endif

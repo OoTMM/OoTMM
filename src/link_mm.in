@@ -81,3 +81,5 @@ PlaySound = 0x8019f0c8;
 Message_Close = 0x801477b4;
 
 RandIntRange = 0x800ff450;
+
+gSegments = 0x801f8180;
