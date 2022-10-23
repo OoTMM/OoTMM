@@ -1,5 +1,6 @@
 "Clock Town":
   exits:
+    "Town Archery": "true"
     "Termina Field": "true"
     "Clock Tower Rooftop": "true"
     "Astral Observatory": "event(BOMBER_CODE)"
@@ -13,6 +14,12 @@
     "Clock Town Great Fairy Alt": "has(MASK_DEKU) || has(MASK_GORON) || has(MASK_ZORA)"
     "Bomb Shop Bomb Bag": "true"
     "Clock Town Business Scrub": "has(MOON_TEAR)"
+"Town Archery":
+  exits:
+    "Clock Town": "true"
+  locations:
+    "Town Archery Reward 1": "has(BOW)"
+    "Town Archery Reward 2": "has(BOW)"
 "Astral Observatory":
   exits:
     "Clock Town": "true"
@@ -41,9 +48,16 @@
   exits:
     "Swamp": "true"
     "Termina Field": "true"
+    "Swamp Archery": "true"
   locations:
     "Road to Southern Swamp HP": "true"
     "Road to Southern Swamp Grotto": "true"
+"Swamp Archery":
+  exits:
+    "Road to Southern Swamp": "true"
+  locations:
+    "Swamp Archery Reward 1": "has(BOW)"
+    "Swamp Archery Reward 2": "has(BOW)"
 "Swamp":
   exits:
     "Road to Southern Swamp": "true"
