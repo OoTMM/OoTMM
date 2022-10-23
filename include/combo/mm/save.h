@@ -97,15 +97,19 @@ typedef struct
 }
 MmInventory;
 
-typedef struct
+typedef union
 {
-    u32 chest;
-    u32 switch0;
-    u32 switch1;
-    u32 clearedRoom;
-    u32 collectible;
-    u32 clearedFloors;
-    u32 rooms;
+    struct
+    {
+        u32 chest;
+        u32 switch0;
+        u32 switch1;
+        u32 clearedRoom;
+        u32 collectible;
+        u32 clearedFloors;
+        u32 rooms;
+    };
+    char raw[0x1c];
 }
 MmPermanentSceneFlags;
 
@@ -154,12 +158,12 @@ typedef struct
     u32                     stolenItems;
     u32                     unk_DD8;
     u32                     bankRupees;
-    u32                     unk_EE0;
-    u32                     unk_EE4;
-    u32                     unk_EE8;
+    u32                     unk_ee0;
+    u32                     unk_ee4;
+    u32                     unk_ee8;
     u32                     horseBackBalloonHighScore;
     u32                     lotteryCodeGuess;
-    u32                     shootingGalleryHighScores;
+    u32                     shootingGalleryHighScore;
     u8                      weekEventReg[100];
     u32                     mapsVisited;
     u32                     mapsVisible;
@@ -173,18 +177,18 @@ typedef struct
     s8                      bomberCode[5];
     MmHorseData             horseData;
     u16                     checksum;
+    u8                      eventInf[8];
+    u8                      unk_1014;
+    u8                      unk_1015;
+    u16                     jinxTimer;
+    s16                     rupeesDelta;
+    char                    unk[0x2c86];
 }
 MmSave;
 
 typedef struct
 {
     MmSave  save;
-    u8      eventInf[8];
-    u8      unk_1014;
-    u8      unk_1015;
-    u16     jinxTimer;
-    s16     rupeesDelta;
-    char    unk[0x2c86];
     u32     fileIndex;
     char    unk_3ca4[0x28c];
     u16     magicTarget;
@@ -194,7 +198,7 @@ typedef struct
 }
 MmSaveContext;
 
-_Static_assert(sizeof(MmSave) == 0x100c, "MmSave size is wrong");
+_Static_assert(sizeof(MmSave) == 0x3ca0, "MmSave size is wrong");
 _Static_assert(sizeof(MmSaveContext) == 0x48c8, "MmSaveContext size is wrong");
 
 #if defined(GAME_MM)
@@ -205,6 +209,17 @@ ALIGNED(16) extern MmSaveContext gSaveContext;
 ALIGNED(16) extern MmSave gMmSave;
 #endif
 
-#define gMmSaveBoss (gMmSave.permanentSceneFlags[1].clearedRoom)
+/* Custom */
+typedef struct
+{
+    u8 trade1;
+    u8 trade2;
+    u8 trade3;
+    u8 unused;
+}
+MmExtraTrade;
+
+#define gMmSaveBoss     (gMmSave.permanentSceneFlags[1].clearedRoom)
+#define gMmExtraTrade   (*((MmExtraTrade*)(gMmSave.permanentSceneFlags[2].raw + 0x10)))
 
 #endif /* MM_SAVE_H */

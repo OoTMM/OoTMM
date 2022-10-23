@@ -25,6 +25,8 @@ void hookPlay_Init(GameState_Play* play)
 
     if (gSave.entranceIndex == 0xc010)
     {
+        gSave.isOwlSave = 1;
+        PrepareSave(&play->sramCtx);
         comboGameSwitch();
         return;
     }

@@ -679,6 +679,6 @@ void comboMessageCancel(GameState_Play* play)
     ctx[0xe3e4] = 0;
 
     play->msgCtx.ocarinaMode = 4;
-    *(((char*)&LINK) + 0x141) = 0;
+    *(((char*)GET_LINK(play)) + 0x141) = 0;
 }
 #endif

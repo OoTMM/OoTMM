@@ -32,7 +32,7 @@ static void EnGo2_HandlerGiveBiggoronItem(Actor* this, GameState_Play* play)
         break;
     }
 
-    if (!(LINK.state & PLAYER_ACTOR_STATE_GET_ITEM))
+    if (!(GET_LINK(play)->state & PLAYER_ACTOR_STATE_GET_ITEM))
         Message_Close(play);
 
     GiveItem(this, play, gi, 10000.f, 5000.f);

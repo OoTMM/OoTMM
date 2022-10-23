@@ -14,7 +14,6 @@
 # include <combo/defs.h>
 # include <combo/equipment.h>
 # include <combo/object.h>
-# include <combo/save.h>
 # include <combo/shader.h>
 # include <combo/patch.h>
 # include <combo/npc.h>
@@ -22,7 +21,6 @@
 # if defined(GAME_OOT)
 #  include <combo/oot/play.h>
 #  include <combo/oot/player.h>
-#  include <combo/oot/actors/En_Item00.h>
 #  include <combo/oot/actors/Item_Etcetera.h>
 # endif
 
@@ -34,12 +32,14 @@
 # endif
 
 # include <combo/common/actor.h>
+# include <combo/common/actors/En_Item00.h>
 # include <combo/common/actor_init.h>
 # include <combo/common/actor_item_custom.h>
 # include <combo/common/api.h>
 #endif
 
 /* Shared with assembler */
+#include <combo/save.h>
 #include <combo/gi.h>
 #include <combo/items.h>
 #include <combo/common/events.h>
@@ -124,6 +124,9 @@ extern const u8 kMaxSeeds[];
 extern const u16 kMaxRupees[];
 extern const u8 kOotTradeChild[];
 extern const u8 kOotTradeAdult[];
+extern const u8 kMmTrade1[];
+extern const u8 kMmTrade2[];
+extern const u8 kMmTrade3[];
 
 int  comboAddItemGI(GameState_Play* play, s16 gi);
 void comboAddItemMm(u16 itemId);

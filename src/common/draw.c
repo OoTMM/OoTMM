@@ -5,10 +5,14 @@ void PreDraw2(Actor* actor, GameState_Play* play, int unk);
 
 static void setObjectSegment(GfxContext* gfx, void* buffer)
 {
+    /* Set the segment in the display list */
     OPEN_DISPS(gfx);
     gSPSegment(POLY_OPA_DISP++, 0x06, buffer);
     gSPSegment(POLY_XLU_DISP++, 0x06, buffer);
     CLOSE_DISPS();
+
+    /* Set the segment on the CPU side - required for Moon tear */
+    gSegments[0x06] = (u32)buffer - 0x80000000;
 }
 
 void comboDrawObject(GameState_Play* play, Actor* actor, u16 objectId, u16 shaderId, int flags)

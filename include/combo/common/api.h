@@ -61,6 +61,7 @@ void OcarinaAction2(GameState_Play *play, u16 ocarinaAction);
 
 extern float* gModelView;
 
+void ModelViewUnkTransform(float* unk);
 void ModelViewRotateY(float angle, int mode);
 void ModelViewTranslate(float tx, float ty, float tz, int mode);
 void ModelViewScale(float sx, float sy, float sz, int mode);
@@ -71,5 +72,15 @@ int GetActiveItem(GameState_Play* play);
 
 u8 AddItem(GameState_Play* play, u8 itemId);
 u8 GetItemCollectBehavior(s16 itemId);
+
+#if defined(GAME_MM)
+void PrepareSave(SramContext* sram);
+#endif
+
+s16 RandIntRange(s16 base, s16 amplitude);
+
+extern u32 gSegments[16];
+
+#define GET_LINK(play) ((Actor_Player*)(play->actors[2].first))
 
 #endif

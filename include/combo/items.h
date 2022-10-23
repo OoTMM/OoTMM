@@ -333,7 +333,7 @@
 #define ITS_MM_ARROW_FIRE           0x02
 #define ITS_MM_ARROW_ICE            0x03
 #define ITS_MM_ARROW_LIGHT          0x04
-#define ITS_MM_TRADE                0x05
+#define ITS_MM_TRADE1               0x05
 #define ITS_MM_BOMBS                0x06
 #define ITS_MM_BOMBCHU              0x07
 #define ITS_MM_STICKS               0x08
@@ -401,5 +401,17 @@
 #define XITEM_OOT_ADULT_EYEBALL_FROG            0x8
 #define XITEM_OOT_ADULT_EYE_DROPS               0x9
 #define XITEM_OOT_ADULT_CLAIM_CHECK             0xa
+
+#define XITEM_MM_TRADE1_MOON_TEAR           0x0
+#define XITEM_MM_TRADE1_TITLE_DEED_LAND     0x1
+#define XITEM_MM_TRADE1_TITLE_DEED_SWAMP    0x2
+#define XITEM_MM_TRADE1_TITLE_DEED_MOUNTAIN 0x3
+#define XITEM_MM_TRADE1_TITLE_DEED_OCEAN    0x4
+
+#define XITEM_MM_TRADE2_ROOM_KEY        0x0
+#define XITEM_MM_TRADE2_LETTER_TO_MAMA  0x1
+
+#define XITEM_MM_TRADE3_LETTER_TO_KAFEI     0x0
+#define XITEM_MM_TRADE3_PENDANT_OF_MEMORIES 0x1
 
 #endif

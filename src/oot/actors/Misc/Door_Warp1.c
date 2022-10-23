@@ -66,7 +66,7 @@ int DoorWarp1_Collide(Actor* this, GameState_Play* play)
         dist = -dist;
     if (dist < 60.f)
     {
-        dist = LINK.base.position.y - this->position.y;
+        dist = GET_LINK(play)->base.position.y - this->position.y;
         if (dist < 0.f)
             dist = -dist;
         if (dist < 20.f)
@@ -84,7 +84,7 @@ int DoorWarp1_ShouldTrigger(Actor* this, GameState_Play* play)
         data = DoorWarp1_GetData(play);
         if (data == NULL || GetEventChk(data->event))
         {
-            if ((LINK.state & 0x400) == 0)
+            if ((GET_LINK(play)->state & 0x400) == 0)
             {
                 return 1;
             }
