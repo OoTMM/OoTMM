@@ -30,8 +30,12 @@
     "Termina Field Water Chest": "has(MASK_ZORA)"
     "Termina Field Tall Grass Chest": "true"
     "Termina Field Tree Stump Chest": "has(HOOKSHOT) || (has_beans && has_bottle)"
+    "Termina Field Kamaro Mask": "can_play(SONG_HEALING)"
     "Termina Field Tall Grass Grotto": "true"
     "Termina Field Pillar Grotto": "true"
+    "Termina Field Peahat Grotto": "has_weapon"
+    "Termina Field Dodongo Grotto": "has_weapon || has(BOMB_BAG)"
+    "Termina Field Bio Baba Grotto": "has_explosives && (has(BOW) || has(HOOKSHOT))"
 "Swamp":
   exits:
     "Termina Field": "true"

@@ -15,3 +15,4 @@
 "can_use_elegy3": "can_play(SONG_EMPTINESS) && has(MASK_ZORA) && has(MASK_GORON)"
 "has_bombchu": "has(BOMB_BAG)"
 "has_beans": "false"
+"has_weapon": "has(SWORD)"

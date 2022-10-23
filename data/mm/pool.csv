@@ -11,8 +11,12 @@ Bomb Shop Bomb Bag,                     npc,            BOMB_SHOP,              
 Termina Field Water Chest,              chest,          TERMINA_FIELD,              0x00,                   RUPEE_RED
 Termina Field Tall Grass Chest,         chest,          TERMINA_FIELD,              0x01,                   RUPEE_RED
 Termina Field Tree Stump Chest,         chest,          TERMINA_FIELD,              0x02,                   RUPEE_RED
+Termina Field Kamaro Mask,              npc,            TERMINA_FIELD,              MASK_KAMARO,            MASK_KAMARO
 Termina Field Tall Grass Grotto,        chest,          GROTTOS,                    0x1f,                   RUPEE_RED
 Termina Field Pillar Grotto,            chest,          GROTTOS,                    0x1a,                   BOMBCHU
+Termina Field Peahat Grotto,            chest,          GROTTOS,                    0x04,                   HEART_PIECE
+Termina Field Dodongo Grotto,           chest,          GROTTOS,                    0x00,                   HEART_PIECE
+Termina Field Bio Baba Grotto,          collectible,    GROTTOS,                    0x02,                   HEART_PIECE
 Swamp Potion Shop,                      npc,            POTION_SHOP,                KOTAKE_RED_POTION,      BOTTLED_POTION_RED
 Swamp Pictobox,                         npc,            TOURIST_INFORMATION,        KOUME_PICTOGRAPH_BOX,   PICTOGRAPH_BOX
 Deku Palace Song of Awakening,          npc,            DEKU_KING_CHAMBER,          SONG_AWAKENING,         SONG_AWAKENING
