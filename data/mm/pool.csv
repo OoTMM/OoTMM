@@ -8,8 +8,11 @@ Clock Town Great Fairy Alt,             collectible,    FAIRY_FOUNTAIN,         
 Astral Observatory Passage Chest,       chest,          OBSERVATORY,                0x00,                   RUPEE_SILVER
 Astral Observatory Moon Tear,           npc,            OBSERVATORY,                MOON_TEAR,              MOON_TEAR
 Bomb Shop Bomb Bag,                     npc,            BOMB_SHOP,                  SHOP_BOMB_BAG,          BOMB_BAG
+Termina Field Water Chest,              chest,          TERMINA_FIELD,              0x00,                   RUPEE_RED
 Termina Field Tall Grass Chest,         chest,          TERMINA_FIELD,              0x01,                   RUPEE_RED
+Termina Field Tree Stump Chest,         chest,          TERMINA_FIELD,              0x02,                   RUPEE_RED
 Termina Field Tall Grass Grotto,        chest,          GROTTOS,                    0x1f,                   RUPEE_RED
+Termina Field Pillar Grotto,            chest,          GROTTOS,                    0x1a,                   BOMBCHU
 Swamp Potion Shop,                      npc,            POTION_SHOP,                KOTAKE_RED_POTION,      BOTTLED_POTION_RED
 Swamp Pictobox,                         npc,            TOURIST_INFORMATION,        KOUME_PICTOGRAPH_BOX,   PICTOGRAPH_BOX
 Deku Palace Song of Awakening,          npc,            DEKU_KING_CHAMBER,          SONG_AWAKENING,         SONG_AWAKENING

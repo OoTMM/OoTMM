@@ -27,8 +27,11 @@
     "Great Bay Coast": "event(EPONA)"
     "Road to Ikana": "event(EPONA)"
   locations:
+    "Termina Field Water Chest": "has(MASK_ZORA)"
     "Termina Field Tall Grass Chest": "true"
+    "Termina Field Tree Stump Chest": "has(HOOKSHOT) || (has_beans && has_bottle)"
     "Termina Field Tall Grass Grotto": "true"
+    "Termina Field Pillar Grotto": "true"
 "Swamp":
   exits:
     "Termina Field": "true"
