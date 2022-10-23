@@ -106,6 +106,11 @@ export const ITEMS_REQUIRED = new Set<string>([
   'MM_POWDER_KEG',
   'MM_HOOKSHOT',
   'MM_PICTOGRAPH_BOX',
+  'MM_MOON_TEAR',
+  'MM_DEED_LAND',
+  'MM_DEED_SWAMP',
+  'MM_DEED_MOUNTAIN',
+  'MM_DEED_OCEAN',
 ]);
 
 const ITEMS_JUNK = new Set<string>([

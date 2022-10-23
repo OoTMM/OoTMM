@@ -1,6 +1,7 @@
 location,                               type,           scene,                      id,                     item
 
 Clock Town Platform HP,                 collectible,    CLOCK_TOWN_SOUTH,           0x0a,                   HEART_PIECE
+Clock Town Business Scrub,              npc,            CLOCK_TOWN_SOUTH,           BUSINESS_SCRUB_LAND,    DEED_LAND
 Clock Town Tree HP,                     collectible,    CLOCK_TOWN_NORTH,           0x0a,                   HEART_PIECE
 Clock Town Silver Rupee Chest,          chest,          CLOCK_TOWN_EAST,            0x0a,                   RUPEE_SILVER
 Clock Town Great Fairy,                 collectible,    FAIRY_FOUNTAIN,             0x00,                   MASK_GREAT_FAIRY
@@ -17,6 +18,9 @@ Termina Field Pillar Grotto,            chest,          GROTTOS,                
 Termina Field Peahat Grotto,            chest,          GROTTOS,                    0x04,                   HEART_PIECE
 Termina Field Dodongo Grotto,           chest,          GROTTOS,                    0x00,                   HEART_PIECE
 Termina Field Bio Baba Grotto,          collectible,    GROTTOS,                    0x02,                   HEART_PIECE
+Road to Southern Swamp HP,              collectible,    ROAD_SOUTHERN_SWAMP,        0x01,                   HEART_PIECE
+Road to Southern Swamp Grotto,          chest,          GROTTOS,                    0x1e,                   RUPEE_RED
+Southern Swamp HP,                      collectible,    SOUTHERN_SWAMP,             0x1e,                   HEART_PIECE
 Swamp Potion Shop,                      npc,            POTION_SHOP,                KOTAKE_RED_POTION,      BOTTLED_POTION_RED
 Swamp Pictobox,                         npc,            TOURIST_INFORMATION,        KOUME_PICTOGRAPH_BOX,   PICTOGRAPH_BOX
 Deku Palace Song of Awakening,          npc,            DEKU_KING_CHAMBER,          SONG_AWAKENING,         SONG_AWAKENING
