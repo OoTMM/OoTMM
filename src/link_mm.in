@@ -84,4 +84,4 @@ RandIntRange = 0x800ff450;
 
 gSegments = 0x801f8180;
 AddItem = 0x80112e80;
-GiveItemDefaultRange = 0x800b8bb0;
+GiveItemDefaultRange = 0x800b8b84;
