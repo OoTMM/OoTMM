@@ -74,7 +74,7 @@ MatrixRotation = 0x801809ac;
 
 gModelView = 0x801fbe04;
 
-MatrixScaleMV = 0x8018039c;
+ModelViewScale = 0x8018039c;
 
 PrepareSave = 0x8014546c;
 PlaySound = 0x8019f0c8;
@@ -83,3 +83,5 @@ Message_Close = 0x801477b4;
 RandIntRange = 0x800ff450;
 
 gSegments = 0x801f8180;
+AddItem = 0x80112e80;
+GiveItemDefaultRange = 0x800b8bb0;

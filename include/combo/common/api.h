@@ -81,4 +81,6 @@ s16 RandIntRange(s16 base, s16 amplitude);
 
 extern u32 gSegments[16];
 
+#define GET_LINK(play) ((Actor_Player*)(play->actors[2].first))
+
 #endif

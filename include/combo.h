@@ -21,7 +21,6 @@
 # if defined(GAME_OOT)
 #  include <combo/oot/play.h>
 #  include <combo/oot/player.h>
-#  include <combo/oot/actors/En_Item00.h>
 #  include <combo/oot/actors/Item_Etcetera.h>
 # endif
 
@@ -33,6 +32,7 @@
 # endif
 
 # include <combo/common/actor.h>
+# include <combo/common/actors/En_Item00.h>
 # include <combo/common/actor_init.h>
 # include <combo/common/actor_item_custom.h>
 # include <combo/common/api.h>

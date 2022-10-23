@@ -2,7 +2,7 @@
 
 int EnMk_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
 {
-    if (!(LINK.state & PLAYER_ACTOR_STATE_GET_ITEM))
+    if (!(GET_LINK(play)->state & PLAYER_ACTOR_STATE_GET_ITEM))
         Message_Close(play);
 
     switch (gi)

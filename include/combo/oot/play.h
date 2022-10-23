@@ -3,19 +3,12 @@
 
 #include <combo/util.h>
 #include <combo/game_state.h>
+#include <combo/common/actor.h>
 
 #define AGE_ADULT 0
 #define AGE_CHILD 1
 
-typedef struct Actor Actor;
 typedef struct Actor_Player Actor_Player;
-
-typedef struct
-{
-    u32     count;
-    Actor*  first;
-}
-ActorList;
 
 /* Start: 0x1d64 */
 typedef struct PACKED
@@ -144,7 +137,5 @@ ASSERT_OFFSET(GameState_Play, transition.entrance, 0x11e1a);
 
 _Static_assert(sizeof(TransitionContext) == 0x130, "OoT TransitionContext size is wrong");
 _Static_assert(sizeof(GameState_Play) == 0x12518, "OoT GameState_Play size is wrong");
-
-#define LINK (*((Actor_Player*)(play->actors[2].first)))
 
 #endif

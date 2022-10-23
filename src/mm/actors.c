@@ -23,14 +23,6 @@ Actor* hookSpawnActorEx(void* const_1, GameState_Play* play, s16 actorId, float 
             break;
         }
         break;
-    case AC_ITEM00:
-        if ((variable & 0xff) == 0x06)
-        {
-            actorId = AC_ITEM_CUSTOM;
-            rz = 0x1000 | ((variable >> 8) & 0x7f);
-            variable = GI_MM_HEART_PIECE;
-        }
-        break;
     case AC_ITEM_B_HEART:
         actorId = AC_ITEM_CUSTOM;
         rz = 0x1000 | 0x1f;

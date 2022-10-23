@@ -91,6 +91,13 @@ typedef struct PACKED ALIGNED(0x4) Actor
 }
 Actor;
 
+typedef struct
+{
+    u32     count;
+    Actor*  first;
+}
+ActorList;
+
 #if defined(GAME_OOT)
 _Static_assert(sizeof(Actor) == 0x13c, "OoT Actor size is wrong");
 #endif
