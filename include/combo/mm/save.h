@@ -222,13 +222,14 @@ MmExtraTrade;
 typedef struct
 {
     u32 pictobox:1;
-    u32 unused:31;
+    u32 songSoaring:1;
+    u32 unused:30;
 }
 MmExtraFlags;
 
 
-#define gMmSaveBoss     (gMmSave.permanentSceneFlags[1].clearedRoom)
-#define gMmExtraTrade   (*((MmExtraTrade*)(gMmSave.permanentSceneFlags[2].raw + 0x10)))
-#define gMmExtraFlags   (*((MmExtraFlags*)(gMmSave.permanentSceneFlags[3].raw + 0x10)))
+#define gMmSaveBoss     (gMmSave.permanentSceneFlags[1].unk_14)
+#define gMmExtraTrade   (*((MmExtraTrade*)(gMmSave.permanentSceneFlags[2].raw + 0x14)))
+#define gMmExtraFlags   (*((MmExtraFlags*)(gMmSave.permanentSceneFlags[3].raw + 0x14)))
 
 #endif /* MM_SAVE_H */

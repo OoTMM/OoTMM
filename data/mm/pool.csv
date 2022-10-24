@@ -23,6 +23,7 @@ Termina Field Bio Baba Grotto,          collectible,    GROTTOS,                
 Road to Southern Swamp HP,              collectible,    ROAD_SOUTHERN_SWAMP,        0x01,                   HEART_PIECE
 Road to Southern Swamp Grotto,          chest,          GROTTOS,                    0x1e,                   RUPEE_RED
 Southern Swamp HP,                      collectible,    SOUTHERN_SWAMP,             0x1e,                   HEART_PIECE
+Southern Swamp Song of Soaring,         npc,            SOUTHERN_SWAMP,             SONG_SOARING,           SONG_SOARING
 Southern Swamp Grotto,                  chest,          GROTTOS,                    0x1d,                   RUPEE_RED
 Woods of Mystery Grotto,                chest,          GROTTOS,                    0x1c,                   RUPEE_PURPLE
 Swamp Archery Reward 1,                 npc,            SHOOTING_GALLERY_SWAMP,     SHOOTING_GAME_SWAMP_1,  BOW

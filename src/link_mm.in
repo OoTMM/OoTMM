@@ -85,3 +85,6 @@ RandIntRange = 0x800ff450;
 gSegments = 0x801f8180;
 AddItem = 0x80112e80;
 GiveItemDefaultRange = 0x800b8b84;
+
+ActorEnableTalk = 0x800b8614;
+ActorTalkedTo = 0x800b84d0;
