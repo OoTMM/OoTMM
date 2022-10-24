@@ -99,6 +99,10 @@
   exits:
     "Deku Palace": "true"
     "Woodfall Temple Entrance": "has(MASK_DEKU) && can_play(SONG_AWAKENING) && has(SWORD)"
+  locations:
+    "Woodfall Near Owl Chest": "has(MASK_DEKU) || has(HOOKSHOT)"
+    "Woodfall Entrance Chest": "has(MASK_DEKU) || has(HOOKSHOT)"
+    "Woodfall HP Chest": "has(MASK_DEKU)"
 "Deku Shrine":
   exits:
     "Deku Palace": "true"

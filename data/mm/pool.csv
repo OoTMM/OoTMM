@@ -32,6 +32,9 @@ Tourist Information Boat Cruise,        npc,            TOURIST_INFORMATION,    
 Tourist Information Tingle Picture,     npc,            TOURIST_INFORMATION,        TOUR_GUIDE_HEART_PIECE, HEART_PIECE
 Deku Palace Song of Awakening,          npc,            DEKU_KING_CHAMBER,          SONG_AWAKENING,         SONG_AWAKENING
 Deku Shrine Mask of Scents,             npc,            DEKU_SHRINE,                MASK_SCENTS,            MASK_SCENTS
+Woodfall Near Owl Chest,                chest,          WOODFALL,                   0x02,                   RUPEE_RED
+Woodfall Entrance Chest,                chest,          WOODFALL,                   0x00,                   RUPEE_RED
+Woodgall HP Chest,                      chest,          WOODFALL,                   0x01,                   HEART_PIECE
 Lone Peak Shrine Lens Chest,            chest,          GROTTOS,                    0x01,                   LENS
 Lone Peak Shrine Boulder Chest,         chest,          GROTTOS,                    0x06,                   RUPEE_RED
 Lone Peak Shrine Invisible Chest,       chest,          GROTTOS,                    0x03,                   RUPEE_PURPLE
