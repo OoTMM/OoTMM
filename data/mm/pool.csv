@@ -30,7 +30,9 @@ Swamp Potion Shop,                      npc,            POTION_SHOP,            
 Tourist Information Pictobox,           npc,            TOURIST_INFORMATION,        KOUME_PICTOGRAPH_BOX,   PICTOGRAPH_BOX
 Tourist Information Boat Cruise,        npc,            TOURIST_INFORMATION,        KOUME_HEART_PIECE,      HEART_PIECE
 Tourist Information Tingle Picture,     npc,            TOURIST_INFORMATION,        TOUR_GUIDE_HEART_PIECE, HEART_PIECE
+Deku Palace HP,                         collectible,    DEKU_PALACE,                0x1e,                   HEART_PIECE
 Deku Palace Song of Awakening,          npc,            DEKU_KING_CHAMBER,          SONG_AWAKENING,         SONG_AWAKENING
+Deku Palace Grotto Chest,               chest,          GROTTOS,                    0x05,                   RUPEE_RED
 Deku Shrine Mask of Scents,             npc,            DEKU_SHRINE,                MASK_SCENTS,            MASK_SCENTS
 Woodfall Near Owl Chest,                chest,          WOODFALL,                   0x02,                   RUPEE_RED
 Woodfall Entrance Chest,                chest,          WOODFALL,                   0x00,                   RUPEE_RED

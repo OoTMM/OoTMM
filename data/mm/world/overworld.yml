@@ -94,6 +94,8 @@
   events:
     MAGIC_BEANS: "has(MASK_DEKU)"
   locations:
+    "Deku Palace HP": "has(MASK_DEKU)"
+    "Deku Palace Grotto Chest": "has(MASK_DEKU) && (has_bottle || can_play(SONG_STORMS))"
     "Deku Palace Song of Awakening": "has(SWORD) && has(MASK_DEKU) && has(OCARINA)"
 "Woodfall":
   exits:
