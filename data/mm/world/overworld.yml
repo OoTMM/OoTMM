@@ -73,6 +73,7 @@
   locations:
     "Tourist Information Pictobox": "can_rescue_koume"
     "Tourist Information Boat Cruise": "can_rescue_koume && event(CLEAN_SWAMP) && has(BOW)"
+    "Tourist Information Tingle Picture": "has(PICTOGRAPH_BOX)"
 "Woods of Mystery":
   exits:
     "Swamp": "true"
