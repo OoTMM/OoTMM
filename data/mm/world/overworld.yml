@@ -63,9 +63,15 @@
     "Road to Southern Swamp": "true"
     "Deku Palace": "can_rescue_koume"
     "Swamp Potion Shop": "true"
+    "Woods of Mystery": "true"
   locations:
     "Swamp Pictobox": "can_rescue_koume"
     "Southern Swamp HP": "has(MASK_DEKU) && has(DEED_LAND)"
+"Woods of Mystery":
+  exits:
+    "Swamp": "true"
+  locations:
+    "Woods of Mystery Grotto": "true"
 "Swamp Potion Shop":
   exits:
     "Swamp": "true"
