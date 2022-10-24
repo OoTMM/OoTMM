@@ -36,7 +36,8 @@ Deku Palace Grotto Chest,               chest,          GROTTOS,                
 Deku Shrine Mask of Scents,             npc,            DEKU_SHRINE,                MASK_SCENTS,            MASK_SCENTS
 Woodfall Near Owl Chest,                chest,          WOODFALL,                   0x02,                   RUPEE_RED
 Woodfall Entrance Chest,                chest,          WOODFALL,                   0x00,                   RUPEE_RED
-Woodgall HP Chest,                      chest,          WOODFALL,                   0x01,                   HEART_PIECE
+Woodfall HP Chest,                      chest,          WOODFALL,                   0x01,                   HEART_PIECE
+Swamp Spider House Mask of Truth,       npc,            SPIDER_HOUSE_SWAMP,         SPIDER_HOUSE_SWAMP,     MASK_TRUTH
 Lone Peak Shrine Lens Chest,            chest,          GROTTOS,                    0x01,                   LENS
 Lone Peak Shrine Boulder Chest,         chest,          GROTTOS,                    0x06,                   RUPEE_RED
 Lone Peak Shrine Invisible Chest,       chest,          GROTTOS,                    0x03,                   RUPEE_PURPLE
@@ -50,6 +51,8 @@ Pinnacle Rock Chest 1,                  chest,          PINNACLE_ROCK,          
 Pinnacle Rock Chest 2,                  chest,          PINNACLE_ROCK,              0x02,                   RUPEE_RED
 Pinnacle Rock HP,                       npc,            PINNACLE_ROCK,              SEAHORSE_HEART_PIECE,   HEART_PIECE
 Laboratory Zora Song,                   npc,            LABORATORY,                 SONG_ZORA,              SONG_ZORA
+Ocean Spider House Wallet,              npc,            SPIDER_HOUSE_OCEAN,         SPIDER_HOUSE_OCEAN,     WALLET
+Ocean Spider House Chest HP,            chest,          SPIDER_HOUSE_OCEAN,         0x00,                   HEART_PIECE
 Road to Ikana Stone Mask,               npc,            ROAD_IKANA,                 MASK_STONE,             MASK_STONE
 Gorman Track Garo Mask,                 npc,            GORMAN_TRACK,               MASK_GARO,              MASK_GARO
 Ikana Graveyard Captain Mask,           chest,          IKANA_GRAVEYARD,            0x00,                   MASK_CAPTAIN

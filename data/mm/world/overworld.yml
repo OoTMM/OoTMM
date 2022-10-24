@@ -65,6 +65,7 @@
     "Deku Palace": "can_rescue_koume"
     "Swamp Potion Shop": "true"
     "Woods of Mystery": "true"
+    "Swamp Spider House": "true"
   locations:
     "Southern Swamp HP": "has(MASK_DEKU) && has(DEED_LAND)"
 "Tourist Information":
@@ -110,6 +111,11 @@
     "Deku Palace": "true"
   locations:
     "Deku Shrine Mask of Scents": "has(MASK_DEKU) && has(BOW)"
+"Swamp Spider House":
+  exits:
+    "Swamp": "true"
+  locations:
+    "Swamp Spider House Mask of Truth": "has_bottle && has(BOW) && has(MASK_DEKU) && has(HOOKSHOT)"
 "Mountain Village Path":
   exits:
     "Termina Field": "has(BOW)"
@@ -177,6 +183,7 @@
     "Pinnacle Rock": "has(MASK_ZORA) && event(SEAHORSE)"
     "Laboratory": "true"
     "Zora Cape": "true"
+    "Ocean Spider House": "true"
   locations:
     "Great Bay Coast Zora Mask": "can_play(SONG_HEALING)"
 "Fisher's Hut":
@@ -210,6 +217,12 @@
   exits:
     "Zora Hall": "true"
     "Great Bay Temple Entrance": "has(MASK_ZORA) && has(HOOKSHOT) && can_play(SONG_ZORA)"
+"Ocean Spider House":
+  exits:
+    "Great Bay Coast": "true"
+  locations:
+    "Ocean Spider House Wallet": "has(MASK_GORON) && has(HOOKSHOT)"
+    "Ocean Spider House Chest HP": "has(BOW) && has(MASK_CAPTAIN)"
 "Gorman Track":
   exits:
     "Milk Road": "event(EPONA)"

@@ -16,3 +16,4 @@
 "has_bombchu": "has(BOMB_BAG)"
 "has_beans": "false"
 "has_weapon": "has(SWORD)"
+"can_use_beans": "has_beans && (has_bottle || can_play(SONG_STORMS))"
