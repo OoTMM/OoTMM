@@ -27,7 +27,8 @@ Woods of Mystery Grotto,                chest,          GROTTOS,                
 Swamp Archery Reward 1,                 npc,            SHOOTING_GALLERY_SWAMP,     SHOOTING_GAME_SWAMP_1,  BOW
 Swamp Archery Reward 2,                 npc,            SHOOTING_GALLERY_SWAMP,     SHOOTING_GAME_SWAMP_2,  HEART_PIECE
 Swamp Potion Shop,                      npc,            POTION_SHOP,                KOTAKE_RED_POTION,      BOTTLED_POTION_RED
-Swamp Pictobox,                         npc,            TOURIST_INFORMATION,        KOUME_PICTOGRAPH_BOX,   PICTOGRAPH_BOX
+Tourist Information Pictobox,           npc,            TOURIST_INFORMATION,        KOUME_PICTOGRAPH_BOX,   PICTOGRAPH_BOX
+Tourist Information Boat Cruise,        npc,            TOURIST_INFORMATION,        KOUME_HEART_PIECE,      HEART_PIECE
 Deku Palace Song of Awakening,          npc,            DEKU_KING_CHAMBER,          SONG_AWAKENING,         SONG_AWAKENING
 Deku Shrine Mask of Scents,             npc,            DEKU_SHRINE,                MASK_SCENTS,            MASK_SCENTS
 Lone Peak Shrine Lens Chest,            chest,          GROTTOS,                    0x01,                   LENS

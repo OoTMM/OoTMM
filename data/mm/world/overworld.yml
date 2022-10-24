@@ -61,12 +61,18 @@
 "Swamp":
   exits:
     "Road to Southern Swamp": "true"
+    "Tourist Information": "true"
     "Deku Palace": "can_rescue_koume"
     "Swamp Potion Shop": "true"
     "Woods of Mystery": "true"
   locations:
-    "Swamp Pictobox": "can_rescue_koume"
     "Southern Swamp HP": "has(MASK_DEKU) && has(DEED_LAND)"
+"Tourist Information":
+  exit:
+    "Swamp": "true"
+  locations:
+    "Tourist Information Pictobox": "can_rescue_koume"
+    "Tourist Information Boat Cruise": "can_rescue_koume && event(CLEAN_SWAMP) && has(BOW)"
 "Woods of Mystery":
   exits:
     "Swamp": "true"

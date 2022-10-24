@@ -219,7 +219,16 @@ typedef struct
 }
 MmExtraTrade;
 
+typedef struct
+{
+    u32 pictobox:1;
+    u32 unused:31;
+}
+MmExtraFlags;
+
+
 #define gMmSaveBoss     (gMmSave.permanentSceneFlags[1].clearedRoom)
 #define gMmExtraTrade   (*((MmExtraTrade*)(gMmSave.permanentSceneFlags[2].raw + 0x10)))
+#define gMmExtraFlags   (*((MmExtraFlags*)(gMmSave.permanentSceneFlags[3].raw + 0x10)))
 
 #endif /* MM_SAVE_H */
