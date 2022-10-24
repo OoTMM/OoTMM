@@ -68,6 +68,7 @@
     "Swamp Spider House": "true"
   locations:
     "Southern Swamp HP": "has(MASK_DEKU) && has(DEED_LAND)"
+    "Southern Swamp Grotto": "has(MASK_DEKU)"
 "Tourist Information":
   exit:
     "Swamp": "true"
