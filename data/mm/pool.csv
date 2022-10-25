@@ -49,6 +49,7 @@ Goron Elder,                            npc,            PATH_GORON_VILLAGE_WINTE
 Goron Baby,                             npc,            GORON_SHRINE,               GORON_BABY,             SONG_GORON_HALF
 Goron Powder Keg,                       npc,            GORON_VILLAGE_WINTER,       GORON_KEG,              POWDER_KEG
 Romani Ranch Epona Song,                npc,            ROMANI_RANCH,               SONG_EPONA,             SONG_EPONA
+Romani Ranch Aliens,                    npc,            ROMANI_RANCH,               ROMANI_BOTTLE,          BOTTLED_MILK
 Cucco Shack Bunny Mask,                 npc,            CUCCO_SHACK,                MASK_BUNNY,             MASK_BUNNY
 Doggy Racetrack Chest,                  chest,          DOG_RACETRACK,              0x00,                   RUPEE_PURPLE
 Doggy Racetrack HP,                     npc,            DOG_RACETRACK,              DOG_LADY_HEART_PIECE,   HEART_PIECE

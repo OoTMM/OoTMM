@@ -1,4 +1,4 @@
-"has_bottle": "has(EMPTY_BOTTLE) || has(BOTTLED_POTION_RED)"
+"has_bottle": "has(EMPTY_BOTTLE) || has(BOTTLED_POTION_RED) || has(BOTTLED_MILK)"
 "can_rescue_koume": "has_bottle"
 "can_get_beans": "has(MASK_DEKU) && has(MAGIC_UPGRADE)"
 "can_play(song)": "has(OCARINA) && has(song)"

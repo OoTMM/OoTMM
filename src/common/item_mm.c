@@ -201,6 +201,7 @@ void comboAddItemMm(u16 itemId)
         gMmSave.inventory.items[ITS_MM_GREAT_FAIRY_SWORD] = ITEM_MM_GREAT_FAIRY_SWORD;
         break;
     case ITEM_MM_EMPTY_BOTTLE:
+    case ITEM_MM_BOTTLED_MILK:
     case ITEM_MM_BOTTLED_GOLD_DUST:
     case ITEM_MM_BOTTLED_CHATEAU_ROMANI:
         addNewBottle(itemId);
