@@ -174,10 +174,16 @@
 "Romani Ranch":
   exits:
     "Milk Road": "true"
+    "Cucco Shack": "true"
   events:
     EPONA: "can_use_keg && can_play(SONG_EPONA)"
   locations:
     "Romani Ranch Epona Song": "can_use_keg && has(OCARINA)"
+"Cucco Shack":
+  exits:
+    "Romani Ranch": "true"
+  locations:
+    "Cucco Shack Bunny Mask": "has(MASK_BREMEN)"
 "Great Bay Coast":
   exits:
     "Fisher's Hut": "true"
