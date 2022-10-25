@@ -170,7 +170,7 @@
   exits:
     "Romani Ranch": "true"
     "Termina Field": "true"
-    "Gorman Track": "can_play(SONG_EPONA)"
+    "Gorman Track": "true"
 "Romani Ranch":
   exits:
     "Milk Road": "true"
@@ -241,9 +241,9 @@
     "Ocean Spider House Chest HP": "has(BOW) && has(MASK_CAPTAIN)"
 "Gorman Track":
   exits:
-    "Milk Road": "can_play(SONG_EPONA)"
+    "Milk Road": "true"
   locations:
-    "Gorman Track Garo Mask": "true"
+    "Gorman Track Garo Mask": "can_play(SONG_EPONA)"
 "Road to Ikana":
   exits:
     "Termina Field": "can_play(SONG_EPONA)"

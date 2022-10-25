@@ -226,7 +226,8 @@ typedef struct
     u32 maskBunny:1;
     u32 songEpona:1;
     u32 maskRomani:1;
-    u32 unused:27;
+    u32 maskGaro:1;
+    u32 unused:26;
 }
 MmExtraFlags;
 
