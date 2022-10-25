@@ -88,3 +88,5 @@ GiveItemDefaultRange = 0x800b8b84;
 
 ActorEnableTalk = 0x800b8614;
 ActorTalkedTo = 0x800b84d0;
+
+PlayerDisplayTextBox = 0x801518b0;

@@ -33,8 +33,8 @@
     "Road to Southern Swamp": "true"
     "Mountain Village Path": "has(BOW)"
     "Milk Road": "true"
-    "Great Bay Coast": "event(EPONA)"
-    "Road to Ikana": "event(EPONA)"
+    "Great Bay Coast": "can_play(SONG_EPONA)"
+    "Road to Ikana": "can_play(SONG_EPONA)"
   locations:
     "Termina Field Water Chest": "has(MASK_ZORA)"
     "Termina Field Tall Grass Chest": "true"
@@ -170,14 +170,12 @@
   exits:
     "Romani Ranch": "true"
     "Termina Field": "true"
-    "Gorman Track": "event(EPONA)"
+    "Gorman Track": "can_play(SONG_EPONA)"
 "Romani Ranch":
   exits:
     "Milk Road": "true"
     "Cucco Shack": "true"
     "Doggy Racetrack": "true"
-  events:
-    EPONA: "can_use_keg && can_play(SONG_EPONA)"
   locations:
     "Romani Ranch Epona Song": "can_use_keg && has(OCARINA)"
 "Cucco Shack":
@@ -194,7 +192,7 @@
 "Great Bay Coast":
   exits:
     "Fisher's Hut": "true"
-    "Termina Field": "event(EPONA)"
+    "Termina Field": "can_play(SONG_EPONA)"
     "Pirate Fortress Exterior": "has(MASK_ZORA)"
     "Pinnacle Rock": "has(MASK_ZORA) && event(SEAHORSE)"
     "Laboratory": "true"
@@ -241,12 +239,12 @@
     "Ocean Spider House Chest HP": "has(BOW) && has(MASK_CAPTAIN)"
 "Gorman Track":
   exits:
-    "Milk Road": "event(EPONA)"
+    "Milk Road": "can_play(SONG_EPONA)"
   locations:
     "Gorman Track Garo Mask": "true"
 "Road to Ikana":
   exits:
-    "Termina Field": "event(EPONA)"
+    "Termina Field": "can_play(SONG_EPONA)"
     "Ikana Valley": "(has(MASK_GARO) || has(MASK_GIBDO)) && has(HOOKSHOT)"
     "Ikana Graveyard": "true"
   locations:

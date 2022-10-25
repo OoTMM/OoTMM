@@ -224,7 +224,8 @@ typedef struct
     u32 pictobox:1;
     u32 songSoaring:1;
     u32 maskBunny:1;
-    u32 unused:29;
+    u32 songEpona:1;
+    u32 unused:28;
 }
 MmExtraFlags;
 

@@ -12,6 +12,8 @@ static void debugCheat(GameState_Play* play)
         gSave.itemEquips.buttonItems[0][0] = ITEM_MM_SWORD_GILDED;
         gSave.inventory.items[ITS_MM_OCARINA] = ITEM_MM_OCARINA_OF_TIME;
         gSave.inventory.items[ITS_MM_MASK_DEKU] = ITEM_MM_MASK_DEKU;
+        gSave.inventory.items[ITS_MM_BOW] = ITEM_MM_BOW;
+        gSave.inventory.upgrades.quiver = 3;
     }
 #endif
 }
