@@ -84,6 +84,7 @@ export const ITEMS_REQUIRED = new Set<string>([
   'MM_MASK_CAPTAIN',
   'MM_MASK_SCENTS',
   'MM_MASK_BREMEN',
+  'MM_MASK_TRUTH',
   'MM_BOTTLED_POTION_RED',
   'MM_MAGIC_UPGRADE',
   'MM_SONG_TIME',

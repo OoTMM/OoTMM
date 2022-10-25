@@ -175,6 +175,7 @@
   exits:
     "Milk Road": "true"
     "Cucco Shack": "true"
+    "Doggy Racetrack": "true"
   events:
     EPONA: "can_use_keg && can_play(SONG_EPONA)"
   locations:
@@ -184,6 +185,12 @@
     "Romani Ranch": "true"
   locations:
     "Cucco Shack Bunny Mask": "has(MASK_BREMEN)"
+"Doggy Racetrack":
+  exits:
+    "Romani Ranch": "true"
+  locations:
+    "Doggy Racetrack Chest": "can_use_beans || has(MASK_ZORA) || has(HOOKSHOT)"
+    "Doggy Racetrack HP": "has(MASK_TRUTH)"
 "Great Bay Coast":
   exits:
     "Fisher's Hut": "true"

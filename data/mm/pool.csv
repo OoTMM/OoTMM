@@ -50,6 +50,8 @@ Goron Baby,                             npc,            GORON_SHRINE,           
 Goron Powder Keg,                       npc,            GORON_VILLAGE_WINTER,       GORON_KEG,              POWDER_KEG
 Romani Ranch Epona Song,                npc,            ROMANI_RANCH,               SONG_EPONA,             SONG_EPONA
 Cucco Shack Bunny Mask,                 npc,            CUCCO_SHACK,                MASK_BUNNY,             MASK_BUNNY
+Doggy Racetrack Chest,                  chest,          DOG_RACETRACK,              0x00,                   RUPEE_PURPLE
+Doggy Racetrack HP,                     npc,            DOG_RACETRACK,              DOG_LADY_HEART_PIECE,   HEART_PIECE
 Great Bay Coast Zora Mask,              npc,            GREAT_BAY_COAST,            MASK_ZORA,              MASK_ZORA
 Pinnacle Rock Chest 1,                  chest,          PINNACLE_ROCK,              0x01,                   RUPEE_RED
 Pinnacle Rock Chest 2,                  chest,          PINNACLE_ROCK,              0x02,                   RUPEE_RED
