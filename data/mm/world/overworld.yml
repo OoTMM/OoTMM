@@ -179,6 +179,7 @@
   locations:
     "Romani Ranch Epona Song": "can_use_keg && has(BOW)"
     "Romani Ranch Aliens": "can_use_keg && has(BOW)"
+    "Romani Ranch Cremia Escort": "can_use_keg && has(BOW)"
 "Cucco Shack":
   exits:
     "Romani Ranch": "true"
