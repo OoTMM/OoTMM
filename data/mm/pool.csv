@@ -4,6 +4,7 @@ Clock Town Platform HP,                 collectible,    CLOCK_TOWN_SOUTH,       
 Clock Town Business Scrub,              npc,            CLOCK_TOWN_SOUTH,           BUSINESS_SCRUB_LAND,    DEED_LAND
 Clock Town Tree HP,                     collectible,    CLOCK_TOWN_NORTH,           0x0a,                   HEART_PIECE
 Clock Town Silver Rupee Chest,          chest,          CLOCK_TOWN_EAST,            0x0a,                   RUPEE_SILVER
+Clock Town Guru Guru Mask Bremen,       npc,            LAUNDRY_POOL,               MASK_BREMEN,            MASK_BREMEN
 Clock Town Great Fairy,                 collectible,    FAIRY_FOUNTAIN,             0x00,                   MASK_GREAT_FAIRY
 Clock Town Great Fairy Alt,             collectible,    FAIRY_FOUNTAIN,             0x01,                   MAGIC_UPGRADE
 Town Archery Reward 1,                  npc,            SHOOTING_GALLERY,           SHOOTING_GAME_TOWN_1,   BOW
