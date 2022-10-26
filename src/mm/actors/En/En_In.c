@@ -1,6 +1,6 @@
 #include <combo.h>
 
-void EnIn_HasActorGivenItem(Actor* actor)
+int EnIn_HasActorGivenItem(Actor* actor)
 {
     int ret;
 

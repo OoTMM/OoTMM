@@ -14,6 +14,7 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.items[ITS_MM_MASK_DEKU] = ITEM_MM_MASK_DEKU;
         gSave.inventory.items[ITS_MM_BOW] = ITEM_MM_BOW;
         gSave.inventory.upgrades.quiver = 3;
+        gSave.inventory.questItems.songHealing = 1;
     }
 #endif
 }

@@ -22,9 +22,22 @@ typedef struct PACKED ALIGNED(4) GameState_Play
     SramContext     sramCtx;
     char            unk_046e0[0x11c10];
     char            textBuffer[4]; /* Real size unknown */
-    char            unk_162f4[0x2f64];
+    char            unk_162f4[0x02581];
+    u8              transitionType;
+    char            unk_18876[0x00004];
+    u16             nextEntrance;
+    char            unk_1887c[3];
+    u8              transitionGfx;
+    char            unk_18880[0x2ca];
+    u8              transitionMode;
+    char            unk_18b4b[0x70d];
 }
 GameState_Play;
+
+#define TRANS_TYPE_NONE     0x00
+#define TRANS_TYPE_NORMAL   0x14
+
+#define TRANS_GFX_BLACK     0x02
 
 _Static_assert(sizeof(GameState_Play) == 0x19258, "MM GameState_Play size is wrong");
 

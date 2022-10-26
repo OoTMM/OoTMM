@@ -7,12 +7,13 @@
 #define ENTRANCE_BOSS1      0x3800
 #define ENTRANCE_SWAMP      0x8420
 #define ENTRANCE_RANCH      0x6400
+#define ENTRANCE_GREAT_BAY  0x6800
 
 void Sram_AfterOpenSave(void)
 {
     gSave.entranceIndex = ENTRANCE_CLOCKTOWN;
 
 #if defined(DEBUG)
-    gSave.entranceIndex = ENTRANCE_RANCH;
+    gSave.entranceIndex = ENTRANCE_GREAT_BAY;
 #endif
 }
