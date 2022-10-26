@@ -17,3 +17,8 @@ PATCH_END
 PATCH_START 0x80b945cc
   nop
 PATCH_END
+
+/* Remove Zora Mask check */
+PATCH_START 0x80b93684
+  li t1,0xff
+PATCH_END
