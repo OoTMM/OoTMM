@@ -56,6 +56,7 @@ Doggy Racetrack Chest,                  chest,          DOG_RACETRACK,          
 Doggy Racetrack HP,                     npc,            DOG_RACETRACK,              DOG_LADY_HEART_PIECE,   HEART_PIECE
 Great Bay Coast Zora Mask,              npc,            GREAT_BAY_COAST,            MASK_ZORA,              MASK_ZORA
 Great Bay Coast HP,                     collectible,    GREAT_BAY_COAST,            0x05,                   HEART_PIECE
+Great Bay Coast Fisherman HP,           npc,            GREAT_BAY_COAST,            FISHERMAN_HEART_PIECE,  HEART_PIECE
 Great Bay Coast Fisherman Grotto,       chest,          GROTTOS,                    0x17,                   RUPEE_RED
 Zora Cape Ledge Chest 1,                chest,          ZORA_CAPE,                  0x01,                   RUPEE_RED
 Zora Cape Ledge Chest 2,                chest,          ZORA_CAPE,                  0x02,                   RUPEE_RED

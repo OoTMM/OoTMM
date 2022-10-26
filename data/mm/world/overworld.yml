@@ -203,6 +203,7 @@
   locations:
     "Great Bay Coast Zora Mask": "can_play(SONG_HEALING)"
     "Great Bay Coast HP": "can_use_beans"
+    "Great Bay Coast Fisherman HP": "has(MASK_ZORA) && event(BOSS_GREAT_BAY)"
     "Great Bay Coast Fisherman Grotto": "true"
 "Fisher's Hut":
   exits:
