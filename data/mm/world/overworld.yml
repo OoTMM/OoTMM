@@ -202,6 +202,7 @@
     "Ocean Spider House": "true"
   locations:
     "Great Bay Coast Zora Mask": "can_play(SONG_HEALING)"
+    "Great Bay Coast HP": "can_use_beans"
     "Great Bay Coast Fisherman Grotto": "true"
 "Fisher's Hut":
   exits:
@@ -230,6 +231,8 @@
     "Zora Cape Ledge Chest 1": "has(HOOKSHOT)"
     "Zora Cape Ledge Chest 2": "has(HOOKSHOT)"
     "Zora Cape Underwater Chest": "has(MASK_ZORA)"
+    "Zora Cape Waterfall HP": "has(MASK_ZORA)"
+    "Zora Cape Grotto": "has_explosives"
 "Zora Hall":
   exits:
     "Zora Cape": "true"
