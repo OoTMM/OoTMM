@@ -12,6 +12,7 @@ static void debugCheat(GameState_Play* play)
         gSave.itemEquips.buttonItems[0][0] = ITEM_MM_SWORD_GILDED;
         gSave.inventory.items[ITS_MM_OCARINA] = ITEM_MM_OCARINA_OF_TIME;
         gSave.inventory.items[ITS_MM_MASK_DEKU] = ITEM_MM_MASK_DEKU;
+        gSave.inventory.items[ITS_MM_MASK_ZORA] = ITEM_MM_MASK_ZORA;
         gSave.inventory.items[ITS_MM_BOW] = ITEM_MM_BOW;
         gSave.inventory.upgrades.quiver = 3;
         gSave.inventory.questItems.songHealing = 1;
@@ -23,6 +24,9 @@ void hookPlay_Init(GameState_Play* play)
 {
     comboObjectsReset();
     debugCheat(play);
+
+    /* Force alt beaver race */
+    MM_SET_EVENT_WEEK(EV_MM_WEEK_BEAVER_RACE_ALT);
 
     Play_Init(play);
 

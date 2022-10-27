@@ -228,12 +228,19 @@
   exits:
     "Great Bay Coast": "true"
     "Zora Hall": "has(MASK_ZORA)"
+    "Waterfall Rapids": "has(HOOKSHOT)"
   locations:
     "Zora Cape Ledge Chest 1": "has(HOOKSHOT)"
     "Zora Cape Ledge Chest 2": "has(HOOKSHOT)"
     "Zora Cape Underwater Chest": "has(MASK_ZORA)"
     "Zora Cape Waterfall HP": "has(MASK_ZORA)"
     "Zora Cape Grotto": "has_explosives"
+"Waterfall Rapids":
+  exits:
+    "Zora Cape": "true"
+  locations:
+    "Waterfall Rapids Beaver Race 1": "has(MASK_ZORA)"
+    "Waterfall Rapids Beaver Race 2": "has(MASK_ZORA)"
 "Zora Hall":
   exits:
     "Zora Cape": "true"

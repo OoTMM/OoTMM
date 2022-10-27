@@ -67,6 +67,8 @@
 #define EV_MM_WEEK_FOREST_WITCH                 MM_EV(0x10, 4)
 #define EV_MM_WEEK_SPIN_UPGRADE                 MM_EV(0x17, 1)
 #define EV_MM_WEEK_FIRST_CYCLE                  MM_EV(0x3b, 2)
+#define EV_MM_WEEK_BEAVER_RACE1_DONE            MM_EV(0x5d, 0)
+#define EV_MM_WEEK_BEAVER_RACE_ALT              MM_EV(24,   2)
 
 #if !defined(__ASSEMBLER__)
 # define MM_SET_EVENT_WEEK(x)    (gMmSave.weekEventReg[(x) / 8] |= (1 << ((x) % 8)))

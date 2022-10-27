@@ -69,6 +69,8 @@ Pinnacle Rock HP,                       npc,            PINNACLE_ROCK,          
 Laboratory Zora Song,                   npc,            LABORATORY,                 SONG_ZORA,              SONG_ZORA
 Ocean Spider House Wallet,              npc,            SPIDER_HOUSE_OCEAN,         SPIDER_HOUSE_OCEAN,     WALLET
 Ocean Spider House Chest HP,            chest,          SPIDER_HOUSE_OCEAN,         0x00,                   HEART_PIECE
+Waterfall Rapids Beaver Race 1,         npc,            WATERFALL_RAPIDS,           BEAVER_1,               EMPTY_BOTTLE
+Waterfall Rapids Beaver Race 2,         npc,            WATERFALL_RAPIDS,           BEAVER_2,               HEART_PIECE
 Road to Ikana Stone Mask,               npc,            ROAD_IKANA,                 MASK_STONE,             MASK_STONE
 Gorman Track Garo Mask,                 npc,            GORMAN_TRACK,               MASK_GARO,              MASK_GARO
 Ikana Graveyard Captain Mask,           chest,          IKANA_GRAVEYARD,            0x00,                   MASK_CAPTAIN
