@@ -67,6 +67,7 @@ Pinnacle Rock Chest 1,                  chest,          PINNACLE_ROCK,          
 Pinnacle Rock Chest 2,                  chest,          PINNACLE_ROCK,              0x02,                   RUPEE_RED
 Pinnacle Rock HP,                       npc,            PINNACLE_ROCK,              SEAHORSE_HEART_PIECE,   HEART_PIECE
 Laboratory Zora Song,                   npc,            LABORATORY,                 SONG_ZORA,              SONG_ZORA
+Laboratory Fish HP,                     npc,            LABORATORY,                 LAB_FISH_HEART_PIECE,   HEART_PIECE
 Ocean Spider House Wallet,              npc,            SPIDER_HOUSE_OCEAN,         SPIDER_HOUSE_OCEAN,     WALLET
 Ocean Spider House Chest HP,            chest,          SPIDER_HOUSE_OCEAN,         0x00,                   HEART_PIECE
 Waterfall Rapids Beaver Race 1,         npc,            WATERFALL_RAPIDS,           BEAVER_1,               EMPTY_BOTTLE

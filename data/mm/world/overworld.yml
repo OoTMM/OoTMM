@@ -223,7 +223,8 @@
   exits:
     "Great Bay Coast": "true"
   locations:
-    "Laboratory Zora Song": "event(ZORA_EGGS_PIRATE) && event(ZORA_EGGS_PINNACLE_ROCK)"
+    "Laboratory Zora Song": "event(ZORA_EGGS_PIRATE) && event(ZORA_EGGS_PINNACLE_ROCK) && has(MASK_ZORA) && has(OCARINA)"
+    "Laboratory Fish HP": "has_bottle"
 "Zora Cape":
   exits:
     "Great Bay Coast": "true"
