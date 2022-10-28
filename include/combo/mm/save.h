@@ -232,6 +232,8 @@ typedef struct
 }
 MmExtraFlags;
 
+#define MM_PLAYER_FORM_ZORA     2
+#define MM_PLAYER_FORM_HUMAN    4
 
 #define gMmSaveBoss     (gMmSave.permanentSceneFlags[1].unk_14)
 #define gMmExtraTrade   (*((MmExtraTrade*)(gMmSave.permanentSceneFlags[2].raw + 0x14)))

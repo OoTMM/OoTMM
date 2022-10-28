@@ -16,6 +16,10 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.items[ITS_MM_BOW] = ITEM_MM_BOW;
         gSave.inventory.upgrades.quiver = 3;
         gSave.inventory.questItems.songHealing = 1;
+        gSave.inventory.items[ITS_MM_BOTTLE + 0] = ITEM_MM_BOTTLED_ZORA_EGG;
+        gSave.inventory.items[ITS_MM_BOTTLE + 1] = ITEM_MM_BOTTLED_ZORA_EGG;
+        gSave.inventory.items[ITS_MM_BOTTLE + 2] = ITEM_MM_BOTTLED_ZORA_EGG;
+        gSave.inventory.items[ITS_MM_BOTTLE + 3] = ITEM_MM_BOTTLED_ZORA_EGG;
     }
 #endif
 }
