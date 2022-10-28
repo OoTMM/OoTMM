@@ -219,7 +219,24 @@ typedef struct
 }
 MmExtraTrade;
 
-#define gMmSaveBoss     (gMmSave.permanentSceneFlags[1].clearedRoom)
-#define gMmExtraTrade   (*((MmExtraTrade*)(gMmSave.permanentSceneFlags[2].raw + 0x10)))
+typedef struct
+{
+    u32 pictobox:1;
+    u32 songSoaring:1;
+    u32 maskBunny:1;
+    u32 songEpona:1;
+    u32 maskRomani:1;
+    u32 maskGaro:1;
+    u32 maskZora:1;
+    u32 unused:25;
+}
+MmExtraFlags;
+
+#define MM_PLAYER_FORM_ZORA     2
+#define MM_PLAYER_FORM_HUMAN    4
+
+#define gMmSaveBoss     (gMmSave.permanentSceneFlags[1].unk_14)
+#define gMmExtraTrade   (*((MmExtraTrade*)(gMmSave.permanentSceneFlags[2].raw + 0x14)))
+#define gMmExtraFlags   (*((MmExtraFlags*)(gMmSave.permanentSceneFlags[3].raw + 0x14)))
 
 #endif /* MM_SAVE_H */

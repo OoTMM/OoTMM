@@ -31,3 +31,42 @@ Actor* hookSpawnActorEx(void* const_1, GameState_Play* play, s16 actorId, float 
     }
     return SpawnActorEx(const_1, play, actorId, x, y, z, rx, ry, rz, variable, unk1, unk2, unk3);
 }
+
+int EnDnh_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b);
+int EnShn_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b);
+
+static int Actor_ByteCode_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
+{
+    switch (actor->id)
+    {
+    case 0x168:
+        return EnDnh_GiveItem(actor, play, gi, a, b);
+    case 0x1c5:
+        return EnShn_GiveItem(actor, play, gi, a, b);
+    default:
+        return GiveItem(actor, play, gi, a, b);
+    }
+}
+
+PATCH_CALL(0x8010aa34, Actor_ByteCode_GiveItem);
+
+void EnDnh_AfterGivingItem(Actor* actor);
+
+static int Actor_ByteCode_HasParent(Actor* actor)
+{
+    int ret;
+
+    ret = Actor_HasParent(actor);
+    if (ret)
+    {
+        switch (actor->id)
+        {
+        case 0x168:
+            EnDnh_AfterGivingItem(actor);
+            break;
+        }
+    }
+    return ret;
+}
+
+PATCH_CALL(0x8010a9f8, Actor_ByteCode_HasParent);

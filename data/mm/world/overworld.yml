@@ -1,5 +1,6 @@
 "Clock Town":
   exits:
+    "Town Archery": "true"
     "Termina Field": "true"
     "Clock Tower Rooftop": "true"
     "Astral Observatory": "event(BOMBER_CODE)"
@@ -9,9 +10,17 @@
     "Clock Town Platform HP": "true"
     "Clock Town Tree HP": "true"
     "Clock Town Silver Rupee Chest": "true"
+    "Clock Town Guru Guru Mask Bremen": "true"
     "Clock Town Great Fairy": "true"
     "Clock Town Great Fairy Alt": "has(MASK_DEKU) || has(MASK_GORON) || has(MASK_ZORA)"
     "Bomb Shop Bomb Bag": "true"
+    "Clock Town Business Scrub": "has(MOON_TEAR)"
+"Town Archery":
+  exits:
+    "Clock Town": "true"
+  locations:
+    "Town Archery Reward 1": "has(BOW)"
+    "Town Archery Reward 2": "has(BOW)"
 "Astral Observatory":
   exits:
     "Clock Town": "true"
@@ -21,21 +30,59 @@
 "Termina Field":
   exits:
     "Clock Town": "true"
-    "Swamp": "true"
+    "Road to Southern Swamp": "true"
     "Mountain Village Path": "has(BOW)"
     "Milk Road": "true"
-    "Great Bay Coast": "event(EPONA)"
-    "Road to Ikana": "event(EPONA)"
+    "Great Bay Coast": "can_play(SONG_EPONA)"
+    "Road to Ikana": "can_play(SONG_EPONA)"
   locations:
+    "Termina Field Water Chest": "has(MASK_ZORA)"
     "Termina Field Tall Grass Chest": "true"
+    "Termina Field Tree Stump Chest": "has(HOOKSHOT) || (has_beans && has_bottle)"
+    "Termina Field Kamaro Mask": "can_play(SONG_HEALING)"
     "Termina Field Tall Grass Grotto": "true"
+    "Termina Field Pillar Grotto": "true"
+    "Termina Field Peahat Grotto": "has_weapon"
+    "Termina Field Dodongo Grotto": "has_weapon || has(BOMB_BAG)"
+    "Termina Field Bio Baba Grotto": "has_explosives && (has(BOW) || has(HOOKSHOT))"
+"Road to Southern Swamp":
+  exits:
+    "Swamp": "true"
+    "Termina Field": "true"
+    "Swamp Archery": "true"
+  locations:
+    "Road to Southern Swamp HP": "true"
+    "Road to Southern Swamp Grotto": "true"
+"Swamp Archery":
+  exits:
+    "Road to Southern Swamp": "true"
+  locations:
+    "Swamp Archery Reward 1": "has(BOW)"
+    "Swamp Archery Reward 2": "has(BOW)"
 "Swamp":
   exits:
-    "Termina Field": "true"
+    "Road to Southern Swamp": "true"
+    "Tourist Information": "true"
     "Deku Palace": "can_rescue_koume"
     "Swamp Potion Shop": "true"
+    "Woods of Mystery": "true"
+    "Swamp Spider House": "true"
   locations:
-    "Swamp Pictobox": "can_rescue_koume"
+    "Southern Swamp HP": "has(MASK_DEKU) && has(DEED_LAND)"
+    "Southern Swamp Song of Soaring": "has(MASK_DEKU)"
+    "Southern Swamp Grotto": "has(MASK_DEKU)"
+"Tourist Information":
+  exit:
+    "Swamp": "true"
+  locations:
+    "Tourist Information Pictobox": "can_rescue_koume"
+    "Tourist Information Boat Cruise": "can_rescue_koume && event(CLEAN_SWAMP) && has(BOW)"
+    "Tourist Information Tingle Picture": "has(PICTOGRAPH_BOX)"
+"Woods of Mystery":
+  exits:
+    "Swamp": "true"
+  locations:
+    "Woods of Mystery Grotto": "true"
 "Swamp Potion Shop":
   exits:
     "Swamp": "true"
@@ -51,16 +98,27 @@
   events:
     MAGIC_BEANS: "has(MASK_DEKU)"
   locations:
+    "Deku Palace HP": "has(MASK_DEKU)"
+    "Deku Palace Grotto Chest": "has(MASK_DEKU) && (has_bottle || can_play(SONG_STORMS))"
     "Deku Palace Song of Awakening": "has(SWORD) && has(MASK_DEKU) && has(OCARINA)"
 "Woodfall":
   exits:
     "Deku Palace": "true"
     "Woodfall Temple Entrance": "has(MASK_DEKU) && can_play(SONG_AWAKENING) && has(SWORD)"
+  locations:
+    "Woodfall Near Owl Chest": "has(MASK_DEKU) || has(HOOKSHOT)"
+    "Woodfall Entrance Chest": "has(MASK_DEKU) || has(HOOKSHOT)"
+    "Woodfall HP Chest": "has(MASK_DEKU)"
 "Deku Shrine":
   exits:
     "Deku Palace": "true"
   locations:
     "Deku Shrine Mask of Scents": "has(MASK_DEKU) && has(BOW)"
+"Swamp Spider House":
+  exits:
+    "Swamp": "true"
+  locations:
+    "Swamp Spider House Mask of Truth": "has_bottle && has(BOW) && has(MASK_DEKU) && has(HOOKSHOT)"
 "Mountain Village Path":
   exits:
     "Termina Field": "has(BOW)"
@@ -112,24 +170,41 @@
   exits:
     "Romani Ranch": "true"
     "Termina Field": "true"
-    "Gorman Track": "event(EPONA)"
+    "Gorman Track": "true"
 "Romani Ranch":
   exits:
     "Milk Road": "true"
-  events:
-    EPONA: "can_use_keg && can_play(SONG_EPONA)"
+    "Cucco Shack": "true"
+    "Doggy Racetrack": "true"
   locations:
-    "Romani Ranch Epona Song": "can_use_keg && has(OCARINA)"
+    "Romani Ranch Epona Song": "can_use_keg && has(BOW)"
+    "Romani Ranch Aliens": "can_use_keg && has(BOW)"
+    "Romani Ranch Cremia Escort": "can_use_keg && has(BOW)"
+"Cucco Shack":
+  exits:
+    "Romani Ranch": "true"
+  locations:
+    "Cucco Shack Bunny Mask": "has(MASK_BREMEN)"
+"Doggy Racetrack":
+  exits:
+    "Romani Ranch": "true"
+  locations:
+    "Doggy Racetrack Chest": "can_use_beans || has(MASK_ZORA) || has(HOOKSHOT)"
+    "Doggy Racetrack HP": "has(MASK_TRUTH)"
 "Great Bay Coast":
   exits:
     "Fisher's Hut": "true"
-    "Termina Field": "event(EPONA)"
+    "Termina Field": "can_play(SONG_EPONA)"
     "Pirate Fortress Exterior": "has(MASK_ZORA)"
     "Pinnacle Rock": "has(MASK_ZORA) && event(SEAHORSE)"
     "Laboratory": "true"
     "Zora Cape": "true"
+    "Ocean Spider House": "true"
   locations:
     "Great Bay Coast Zora Mask": "can_play(SONG_HEALING)"
+    "Great Bay Coast HP": "can_use_beans"
+    "Great Bay Coast Fisherman HP": "has(MASK_ZORA) && event(BOSS_GREAT_BAY)"
+    "Great Bay Coast Fisherman Grotto": "true"
 "Fisher's Hut":
   exits:
     "Great Bay Coast": "true"
@@ -148,11 +223,25 @@
   exits:
     "Great Bay Coast": "true"
   locations:
-    "Laboratory Zora Song": "event(ZORA_EGGS_PIRATE) && event(ZORA_EGGS_PINNACLE_ROCK)"
+    "Laboratory Zora Song": "event(ZORA_EGGS_PIRATE) && event(ZORA_EGGS_PINNACLE_ROCK) && has(MASK_ZORA) && has(OCARINA)"
+    "Laboratory Fish HP": "has_bottle"
 "Zora Cape":
   exits:
     "Great Bay Coast": "true"
     "Zora Hall": "has(MASK_ZORA)"
+    "Waterfall Rapids": "has(HOOKSHOT)"
+  locations:
+    "Zora Cape Ledge Chest 1": "has(HOOKSHOT)"
+    "Zora Cape Ledge Chest 2": "has(HOOKSHOT)"
+    "Zora Cape Underwater Chest": "has(MASK_ZORA)"
+    "Zora Cape Waterfall HP": "has(MASK_ZORA)"
+    "Zora Cape Grotto": "has_explosives"
+"Waterfall Rapids":
+  exits:
+    "Zora Cape": "true"
+  locations:
+    "Waterfall Rapids Beaver Race 1": "has(MASK_ZORA)"
+    "Waterfall Rapids Beaver Race 2": "has(MASK_ZORA)"
 "Zora Hall":
   exits:
     "Zora Cape": "true"
@@ -161,14 +250,20 @@
   exits:
     "Zora Hall": "true"
     "Great Bay Temple Entrance": "has(MASK_ZORA) && has(HOOKSHOT) && can_play(SONG_ZORA)"
+"Ocean Spider House":
+  exits:
+    "Great Bay Coast": "true"
+  locations:
+    "Ocean Spider House Wallet": "has(MASK_GORON) && has(HOOKSHOT)"
+    "Ocean Spider House Chest HP": "has(BOW) && has(MASK_CAPTAIN)"
 "Gorman Track":
   exits:
-    "Milk Road": "event(EPONA)"
+    "Milk Road": "true"
   locations:
-    "Gorman Track Garo Mask": "true"
+    "Gorman Track Garo Mask": "can_play(SONG_EPONA)"
 "Road to Ikana":
   exits:
-    "Termina Field": "event(EPONA)"
+    "Termina Field": "can_play(SONG_EPONA)"
     "Ikana Valley": "(has(MASK_GARO) || has(MASK_GIBDO)) && has(HOOKSHOT)"
     "Ikana Graveyard": "true"
   locations:

@@ -33,6 +33,7 @@
 # define AC_EN_BOX          0x006
 # define AC_ITEM00          0x00e
 # define AC_ITEM_CUSTOM     0x013
+# define AC_ITEM_GIVER      0x01f
 # define AC_DOOR_WARP1      0x038
 # define AC_ITEM_B_HEART    0x03a
 # define AC_DM_HINA         0x140

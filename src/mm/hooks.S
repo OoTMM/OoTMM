@@ -1,18 +1,5 @@
 #include <combo.h>
 
-#define ENTRANCE_CLOCKTOWN  0xd800
-#define ENTRANCE_WOODS      0xc200
-#define ENTRANCE_DKING      0x7610
-#define ENTRANCE_TEMPLE1    0x3000
-#define ENTRANCE_BOSS1      0x3800
-
-#if defined(DEBUG)
-/* DEBUG: MM entrance */
-PATCH_START 0x8014533c
-  li t8,ENTRANCE_CLOCKTOWN
-PATCH_END
-#endif
-
 /* Rebase MM's DMA Table */
 PATCH_START(0x80080d14)
   lui a0, ((0x00020000 | MM_BASE) >> 16)

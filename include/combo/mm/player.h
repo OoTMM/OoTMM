@@ -11,10 +11,15 @@ typedef struct PACKED ALIGNED(4)
     OSMesgQueue objMsgQueue;
     OSMesg      objMsg;
     void*       objBuffer;
-    char        unk_1fc[0xb7c];
-
+    char        unk_1fc[0x870];
+    u32         state;
+    u32         state2;
+    u32         state3;
+    char        unk_a78[0x300];
 }
 Actor_Player;
+
+#define PLAYER_ACTOR_STATE_GET_ITEM 0x400
 
 _Static_assert(sizeof(Actor_Player) == 0xd78, "MM Actor_Player size is wrong");
 

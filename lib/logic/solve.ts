@@ -83,7 +83,11 @@ export const ITEMS_REQUIRED = new Set<string>([
   'MM_MASK_GIBDO',
   'MM_MASK_CAPTAIN',
   'MM_MASK_SCENTS',
+  'MM_MASK_BREMEN',
+  'MM_MASK_TRUTH',
   'MM_BOTTLED_POTION_RED',
+  'MM_EMPTY_BOTTLE',
+  'MM_BOTTLED_MILK',
   'MM_MAGIC_UPGRADE',
   'MM_SONG_TIME',
   'MM_SONG_AWAKENING',
@@ -106,6 +110,12 @@ export const ITEMS_REQUIRED = new Set<string>([
   'MM_POWDER_KEG',
   'MM_HOOKSHOT',
   'MM_PICTOGRAPH_BOX',
+  'MM_MOON_TEAR',
+  'MM_DEED_LAND',
+  'MM_DEED_SWAMP',
+  'MM_DEED_MOUNTAIN',
+  'MM_DEED_OCEAN',
+  'MM_WALLET',
 ]);
 
 const ITEMS_JUNK = new Set<string>([

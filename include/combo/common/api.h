@@ -83,4 +83,8 @@ extern u32 gSegments[16];
 
 #define GET_LINK(play) ((Actor_Player*)(play->actors[2].first))
 
+s16  ActorCutscene_GetCurrentIndex(void);
+void ActorCutscene_Stop(s16 cutsceneId);
+void Cutscene_End(GameState_Play* play, void* unk);
+
 #endif

@@ -1,4 +1,4 @@
-"has_bottle": "has(EMPTY_BOTTLE) || has(BOTTLED_POTION_RED)"
+"has_bottle": "has(EMPTY_BOTTLE) || has(BOTTLED_POTION_RED) || has(BOTTLED_MILK)"
 "can_rescue_koume": "has_bottle"
 "can_get_beans": "has(MASK_DEKU) && has(MAGIC_UPGRADE)"
 "can_play(song)": "has(OCARINA) && has(song)"
@@ -14,3 +14,6 @@
 "can_use_elegy2": "can_play(SONG_EMPTINESS) && (has(MASK_ZORA) || has(MASK_GORON))"
 "can_use_elegy3": "can_play(SONG_EMPTINESS) && has(MASK_ZORA) && has(MASK_GORON)"
 "has_bombchu": "has(BOMB_BAG)"
+"has_beans": "event(MAGIC_BEANS)"
+"has_weapon": "has(SWORD)"
+"can_use_beans": "has_beans && (has_bottle || can_play(SONG_STORMS))"

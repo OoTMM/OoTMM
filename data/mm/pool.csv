@@ -1,19 +1,46 @@
 location,                               type,           scene,                      id,                     item
 
 Clock Town Platform HP,                 collectible,    CLOCK_TOWN_SOUTH,           0x0a,                   HEART_PIECE
+Clock Town Business Scrub,              npc,            CLOCK_TOWN_SOUTH,           BUSINESS_SCRUB_LAND,    DEED_LAND
 Clock Town Tree HP,                     collectible,    CLOCK_TOWN_NORTH,           0x0a,                   HEART_PIECE
 Clock Town Silver Rupee Chest,          chest,          CLOCK_TOWN_EAST,            0x0a,                   RUPEE_SILVER
+Clock Town Guru Guru Mask Bremen,       npc,            LAUNDRY_POOL,               MASK_BREMEN,            MASK_BREMEN
 Clock Town Great Fairy,                 collectible,    FAIRY_FOUNTAIN,             0x00,                   MASK_GREAT_FAIRY
 Clock Town Great Fairy Alt,             collectible,    FAIRY_FOUNTAIN,             0x01,                   MAGIC_UPGRADE
+Town Archery Reward 1,                  npc,            SHOOTING_GALLERY,           SHOOTING_GAME_TOWN_1,   BOW
+Town Archery Reward 2,                  npc,            SHOOTING_GALLERY,           SHOOTING_GAME_TOWN_2,   HEART_PIECE
 Astral Observatory Passage Chest,       chest,          OBSERVATORY,                0x00,                   RUPEE_SILVER
 Astral Observatory Moon Tear,           npc,            OBSERVATORY,                MOON_TEAR,              MOON_TEAR
 Bomb Shop Bomb Bag,                     npc,            BOMB_SHOP,                  SHOP_BOMB_BAG,          BOMB_BAG
+Termina Field Water Chest,              chest,          TERMINA_FIELD,              0x00,                   RUPEE_RED
 Termina Field Tall Grass Chest,         chest,          TERMINA_FIELD,              0x01,                   RUPEE_RED
+Termina Field Tree Stump Chest,         chest,          TERMINA_FIELD,              0x02,                   RUPEE_RED
+Termina Field Kamaro Mask,              npc,            TERMINA_FIELD,              MASK_KAMARO,            MASK_KAMARO
 Termina Field Tall Grass Grotto,        chest,          GROTTOS,                    0x1f,                   RUPEE_RED
+Termina Field Pillar Grotto,            chest,          GROTTOS,                    0x1a,                   BOMBCHU
+Termina Field Peahat Grotto,            chest,          GROTTOS,                    0x04,                   HEART_PIECE
+Termina Field Dodongo Grotto,           chest,          GROTTOS,                    0x00,                   HEART_PIECE
+Termina Field Bio Baba Grotto,          collectible,    GROTTOS,                    0x02,                   HEART_PIECE
+Road to Southern Swamp HP,              collectible,    ROAD_SOUTHERN_SWAMP,        0x01,                   HEART_PIECE
+Road to Southern Swamp Grotto,          chest,          GROTTOS,                    0x1e,                   RUPEE_RED
+Southern Swamp HP,                      collectible,    SOUTHERN_SWAMP,             0x1e,                   HEART_PIECE
+Southern Swamp Song of Soaring,         npc,            SOUTHERN_SWAMP,             SONG_SOARING,           SONG_SOARING
+Southern Swamp Grotto,                  chest,          GROTTOS,                    0x1d,                   RUPEE_RED
+Woods of Mystery Grotto,                chest,          GROTTOS,                    0x1c,                   RUPEE_PURPLE
+Swamp Archery Reward 1,                 npc,            SHOOTING_GALLERY_SWAMP,     SHOOTING_GAME_SWAMP_1,  BOW
+Swamp Archery Reward 2,                 npc,            SHOOTING_GALLERY_SWAMP,     SHOOTING_GAME_SWAMP_2,  HEART_PIECE
 Swamp Potion Shop,                      npc,            POTION_SHOP,                KOTAKE_RED_POTION,      BOTTLED_POTION_RED
-Swamp Pictobox,                         npc,            TOURIST_INFORMATION,        KOUME_PICTOGRAPH_BOX,   PICTOGRAPH_BOX
+Tourist Information Pictobox,           npc,            TOURIST_INFORMATION,        KOUME_PICTOGRAPH_BOX,   PICTOGRAPH_BOX
+Tourist Information Boat Cruise,        npc,            TOURIST_INFORMATION,        KOUME_HEART_PIECE,      HEART_PIECE
+Tourist Information Tingle Picture,     npc,            TOURIST_INFORMATION,        TOUR_GUIDE_HEART_PIECE, HEART_PIECE
+Deku Palace HP,                         collectible,    DEKU_PALACE,                0x1e,                   HEART_PIECE
 Deku Palace Song of Awakening,          npc,            DEKU_KING_CHAMBER,          SONG_AWAKENING,         SONG_AWAKENING
+Deku Palace Grotto Chest,               chest,          GROTTOS,                    0x05,                   RUPEE_RED
 Deku Shrine Mask of Scents,             npc,            DEKU_SHRINE,                MASK_SCENTS,            MASK_SCENTS
+Woodfall Near Owl Chest,                chest,          WOODFALL,                   0x02,                   RUPEE_RED
+Woodfall Entrance Chest,                chest,          WOODFALL,                   0x00,                   RUPEE_RED
+Woodfall HP Chest,                      chest,          WOODFALL,                   0x01,                   HEART_PIECE
+Swamp Spider House Mask of Truth,       npc,            SPIDER_HOUSE_SWAMP,         SPIDER_HOUSE_SWAMP,     MASK_TRUTH
 Lone Peak Shrine Lens Chest,            chest,          GROTTOS,                    0x01,                   LENS
 Lone Peak Shrine Boulder Chest,         chest,          GROTTOS,                    0x06,                   RUPEE_RED
 Lone Peak Shrine Invisible Chest,       chest,          GROTTOS,                    0x03,                   RUPEE_PURPLE
@@ -22,11 +49,29 @@ Goron Elder,                            npc,            PATH_GORON_VILLAGE_WINTE
 Goron Baby,                             npc,            GORON_SHRINE,               GORON_BABY,             SONG_GORON_HALF
 Goron Powder Keg,                       npc,            GORON_VILLAGE_WINTER,       GORON_KEG,              POWDER_KEG
 Romani Ranch Epona Song,                npc,            ROMANI_RANCH,               SONG_EPONA,             SONG_EPONA
+Romani Ranch Aliens,                    npc,            ROMANI_RANCH,               ROMANI_BOTTLE,          BOTTLED_MILK
+Romani Ranch Cremia Escort,             npc,            ROMANI_RANCH,               CREMIA_ESCORT,          MASK_ROMANI
+Cucco Shack Bunny Mask,                 npc,            CUCCO_SHACK,                MASK_BUNNY,             MASK_BUNNY
+Doggy Racetrack Chest,                  chest,          DOG_RACETRACK,              0x00,                   RUPEE_PURPLE
+Doggy Racetrack HP,                     npc,            DOG_RACETRACK,              DOG_LADY_HEART_PIECE,   HEART_PIECE
 Great Bay Coast Zora Mask,              npc,            GREAT_BAY_COAST,            MASK_ZORA,              MASK_ZORA
+Great Bay Coast HP,                     collectible,    GREAT_BAY_COAST,            0x05,                   HEART_PIECE
+Great Bay Coast Fisherman HP,           npc,            GREAT_BAY_COAST,            FISHERMAN_HEART_PIECE,  HEART_PIECE
+Great Bay Coast Fisherman Grotto,       chest,          GROTTOS,                    0x17,                   RUPEE_RED
+Zora Cape Ledge Chest 1,                chest,          ZORA_CAPE,                  0x01,                   RUPEE_RED
+Zora Cape Ledge Chest 2,                chest,          ZORA_CAPE,                  0x02,                   RUPEE_RED
+Zora Cape Underwater Chest,             chest,          ZORA_CAPE,                  0x00,                   RUPEE_PURPLE
+Zora Cape Waterfall HP,                 collectible,    ZORA_CAPE,                  0x07,                   HEART_PIECE
+Zora Cape Grotto,                       chest,          GROTTOS,                    0x15,                   BOMBCHU
 Pinnacle Rock Chest 1,                  chest,          PINNACLE_ROCK,              0x01,                   RUPEE_RED
 Pinnacle Rock Chest 2,                  chest,          PINNACLE_ROCK,              0x02,                   RUPEE_RED
 Pinnacle Rock HP,                       npc,            PINNACLE_ROCK,              SEAHORSE_HEART_PIECE,   HEART_PIECE
 Laboratory Zora Song,                   npc,            LABORATORY,                 SONG_ZORA,              SONG_ZORA
+Laboratory Fish HP,                     npc,            LABORATORY,                 LAB_FISH_HEART_PIECE,   HEART_PIECE
+Ocean Spider House Wallet,              npc,            SPIDER_HOUSE_OCEAN,         SPIDER_HOUSE_OCEAN,     WALLET
+Ocean Spider House Chest HP,            chest,          SPIDER_HOUSE_OCEAN,         0x00,                   HEART_PIECE
+Waterfall Rapids Beaver Race 1,         npc,            WATERFALL_RAPIDS,           BEAVER_1,               EMPTY_BOTTLE
+Waterfall Rapids Beaver Race 2,         npc,            WATERFALL_RAPIDS,           BEAVER_2,               HEART_PIECE
 Road to Ikana Stone Mask,               npc,            ROAD_IKANA,                 MASK_STONE,             MASK_STONE
 Gorman Track Garo Mask,                 npc,            GORMAN_TRACK,               MASK_GARO,              MASK_GARO
 Ikana Graveyard Captain Mask,           chest,          IKANA_GRAVEYARD,            0x00,                   MASK_CAPTAIN

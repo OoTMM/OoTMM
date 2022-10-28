@@ -19,6 +19,7 @@ const SUBSTITUTIONS: {[k: string]: string} = {
   MM_SWORD: "MM_SWORD_KOKIRI",
   MM_SHIELD: "MM_SHIELD_HYLIAN",
   MM_OCARINA: "MM_OCARINA_OF_TIME",
+  MM_WALLET: "MM_WALLET2",
 };
 
 const gi = async (game: Game, item: string) => {
