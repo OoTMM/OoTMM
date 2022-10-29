@@ -131,6 +131,7 @@
     "Path to Snowhead": "true"
   locations:
     "Mountain Village Waterfall Chest": "event(BOSS_SNOWHEAD)"
+    "Mountain Village Don Gero Mask": "event(GORON_FOOD)"
     "Mountain Village Tunnel Grotto": "event(BOSS_SNOWHEAD)"
 "Goron Village Path":
   exits:
@@ -169,6 +170,8 @@
 "Goron Shrine":
   exits:
     "Goron Village": "true"
+  events:
+    GORON_FOOD: "has(MASK_GORON)"
   locations:
     "Goron Baby": "has(MASK_GORON) && can_play(SONG_GORON_HALF)"
 "Path to Snowhead":

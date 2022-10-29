@@ -85,7 +85,9 @@ export const ITEMS_REQUIRED = new Set<string>([
   'MM_MASK_SCENTS',
   'MM_MASK_BREMEN',
   'MM_MASK_TRUTH',
+  'MM_MASK_DON_GERO',
   'MM_BOTTLED_POTION_RED',
+  'MM_BOTTLED_GOLD_DUST',
   'MM_EMPTY_BOTTLE',
   'MM_BOTTLED_MILK',
   'MM_MAGIC_UPGRADE',
@@ -238,6 +240,11 @@ const makeItemPools = (world: World) => {
   maxRequired(pools, 'OOT_MAGIC_UPGRADE', 1);
   maxRequired(pools, 'OOT_OCARINA', 1);
   maxRequired(pools, 'OOT_BOMBCHUS_10', 1);
+
+  maxRequired(pools, 'MM_SWORD', 1);
+  maxRequired(pools, 'MM_BOMB_BAG', 1);
+  maxRequired(pools, 'MM_BOW', 1);
+  maxRequired(pools, 'MM_MAGIC_UPGRADE', 1);
 
   return pools;
 };

@@ -42,6 +42,7 @@ Woodfall Entrance Chest,                chest,          WOODFALL,               
 Woodfall HP Chest,                      chest,          WOODFALL,                   0x01,                   HEART_PIECE
 Swamp Spider House Mask of Truth,       npc,            SPIDER_HOUSE_SWAMP,         SPIDER_HOUSE_SWAMP,     MASK_TRUTH
 Mountain Village Waterfall Chest,       chest,          MOUNTAIN_VILLAGE_WINTER,    0x00,                   RUPEE_RED
+Mountain Village Don Gero Mask,         npc,            MOUNTAIN_VILLAGE_WINTER,    MASK_DON_GERO,          MASK_DON_GERO
 Mountain Village Tunnel Grotto,         chest,          GROTTOS,                    0x1b,                   RUPEE_RED
 Lone Peak Shrine Lens Chest,            chest,          GROTTOS,                    0x01,                   LENS
 Lone Peak Shrine Boulder Chest,         chest,          GROTTOS,                    0x06,                   RUPEE_RED

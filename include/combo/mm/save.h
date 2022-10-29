@@ -228,7 +228,8 @@ typedef struct
     u32 maskRomani:1;
     u32 maskGaro:1;
     u32 maskZora:1;
-    u32 unused:25;
+    u32 maskDonGero:1;
+    u32 unused:24;
 }
 MmExtraFlags;
 

@@ -15,8 +15,6 @@ typedef struct PACKED
 }
 ComboOverride;
 
-#define KEY(scene, id) (((scene) << 8) | (id))
-
 static ALIGNED(16) ComboOverride gComboOverrides[OVERRIDE_MAX];
 
 void comboInitOverride(void)
@@ -65,7 +63,7 @@ static s16 comboOverrideImpl(u16 sceneId, u16 id, s16 gi)
     s32 override;
     u16 absGi;
 
-    override = comboOverrideRaw(KEY(sceneId, id));
+    override = comboOverrideRaw(makeKey(sceneId, id));
     absGi = gi > 0 ? gi : -gi;
     if (override >= 0)
         absGi = override;
