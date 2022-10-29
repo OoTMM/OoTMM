@@ -56,6 +56,7 @@ Goron Baby,                             npc,            GORON_SHRINE,           
 Goron Powder Keg,                       npc,            GORON_VILLAGE_WINTER,       GORON_KEG,              POWDER_KEG
 Path to Snowhead HP,                    collectible,    PATH_SNOWHEAD,              0x08,                   HEART_PIECE
 Path to Snowhead Grotto,                chest,          GROTTOS,                    0x13,                   RUPEE_RED
+Goron Race Reward,                      npc,            GORON_RACETRACK,            GORON_RACE,             BOTTLED_GOLD_DUST
 Romani Ranch Epona Song,                npc,            ROMANI_RANCH,               SONG_EPONA,             SONG_EPONA
 Romani Ranch Aliens,                    npc,            ROMANI_RANCH,               ROMANI_BOTTLE,          BOTTLED_MILK
 Romani Ranch Cremia Escort,             npc,            ROMANI_RANCH,               CREMIA_ESCORT,          MASK_ROMANI

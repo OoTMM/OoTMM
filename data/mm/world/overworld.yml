@@ -136,6 +136,7 @@
   exits:
     "Mountain Village": "true"
     "Goron Village": "true"
+    "Goron Race": "can_use_keg"
   locations:
     "Goron Village Path Underwater Chest 1": "event(BOSS_SNOWHEAD) && has(MASK_ZORA)"
     "Goron Village Path Underwater Chest 2": "event(BOSS_SNOWHEAD) && has(MASK_ZORA)"
@@ -181,6 +182,11 @@
   exits:
     "Path to Snowhead": "true"
     "Snowhead Temple Entrance": "has(MASK_GORON)"
+"Goron Race":
+  exits:
+    "Goron Village Path": "true"
+  locations:
+    "Goron Race Reward": "event(BOSS_SNOWHEAD) && goron_fast_roll"
 "Milk Road":
   exits:
     "Romani Ranch": "true"
