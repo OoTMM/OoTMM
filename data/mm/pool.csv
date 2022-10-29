@@ -41,13 +41,21 @@ Woodfall Near Owl Chest,                chest,          WOODFALL,               
 Woodfall Entrance Chest,                chest,          WOODFALL,                   0x00,                   RUPEE_RED
 Woodfall HP Chest,                      chest,          WOODFALL,                   0x01,                   HEART_PIECE
 Swamp Spider House Mask of Truth,       npc,            SPIDER_HOUSE_SWAMP,         SPIDER_HOUSE_SWAMP,     MASK_TRUTH
+Mountain Village Waterfall Chest,       chest,          MOUNTAIN_VILLAGE_WINTER,    0x00,                   RUPEE_RED
+Mountain Village Tunnel Grotto,         chest,          GROTTOS,                    0x1b,                   RUPEE_RED
 Lone Peak Shrine Lens Chest,            chest,          GROTTOS,                    0x01,                   LENS
 Lone Peak Shrine Boulder Chest,         chest,          GROTTOS,                    0x06,                   RUPEE_RED
 Lone Peak Shrine Invisible Chest,       chest,          GROTTOS,                    0x03,                   RUPEE_PURPLE
 Goron Graveyard Mask,                   npc,            GORON_GRAVEYARD,            MASK_GORON,             MASK_GORON
+Goron Village Path Underwater Chest 1,  chest,          PATH_GORON_VILLAGE_WINTER,  0x06,                   HEART_PIECE
+Goron Village Path Underwater Chest 2,  chest,          PATH_GORON_VILLAGE_WINTER,  0x00,                   RUPEE_RED
+Goron Village Path Frozen Grotto Chest, chest,          GROTTOS,                    0x02,                   RUPEE_RED
+Goron Village Path Ramp Grotto Chest,   chest,          GROTTOS,                    0x19,                   BOMBCHU
 Goron Elder,                            npc,            PATH_GORON_VILLAGE_WINTER,  GORON_ELDER,            SONG_GORON_HALF
 Goron Baby,                             npc,            GORON_SHRINE,               GORON_BABY,             SONG_GORON_HALF
 Goron Powder Keg,                       npc,            GORON_VILLAGE_WINTER,       GORON_KEG,              POWDER_KEG
+Path to Snowhead HP,                    collectible,    PATH_SNOWHEAD,              0x08,                   HEART_PIECE
+Path to Snowhead Grotto,                chest,          GROTTOS,                    0x13,                   RUPEE_RED
 Romani Ranch Epona Song,                npc,            ROMANI_RANCH,               SONG_EPONA,             SONG_EPONA
 Romani Ranch Aliens,                    npc,            ROMANI_RANCH,               ROMANI_BOTTLE,          BOTTLED_MILK
 Romani Ranch Cremia Escort,             npc,            ROMANI_RANCH,               CREMIA_ESCORT,          MASK_ROMANI

@@ -24,6 +24,29 @@ void comboInitOverride(void)
     DMARomToRam(OVERRIDE_ADDR | PI_DOM1_ADDR2, &gComboOverrides, sizeof(gComboOverrides));
 }
 
+static u16 makeKey(u16 sceneId, u16 id)
+{
+#if defined(GAME_MM)
+    switch (sceneId)
+    {
+    case SCE_MM_SOUTHERN_SWAMP_CLEAR:
+        sceneId = SCE_MM_SOUTHERN_SWAMP;
+        break;
+    case SCE_MM_PATH_GORON_VILLAGE_SPRING:
+        sceneId = SCE_MM_PATH_GORON_VILLAGE_WINTER;
+        break;
+    case SCE_MM_GORON_VILLAGE_SPRING:
+        sceneId = SCE_MM_GORON_VILLAGE_WINTER;
+        break;
+    case SCE_MM_MOUNTAIN_VILLAGE_SPRING:
+        sceneId = SCE_MM_MOUNTAIN_VILLAGE_WINTER;
+        break;
+    }
+#endif
+
+    return (sceneId << 8) | id;
+}
+
 static s32 comboOverrideRaw(u16 key)
 {
     for (int i = 0; i < OVERRIDE_MAX; ++i)

@@ -128,11 +128,19 @@
     "Mountain Village Path": "can_break_boulders"
     "Goron Village Path": "true"
     "Goron Graveyard": "can_use_lens"
-    "Snowhead": "has(OCARINA) && has(SONG_GORON_HALF, 2) && has(MASK_GORON) && can_use_lens"
+    "Path to Snowhead": "true"
+  locations:
+    "Mountain Village Waterfall Chest": "event(BOSS_SNOWHEAD)"
+    "Mountain Village Tunnel Grotto": "event(BOSS_SNOWHEAD)"
 "Goron Village Path":
   exits:
     "Mountain Village": "true"
     "Goron Village": "true"
+  locations:
+    "Goron Village Path Underwater Chest 1": "event(BOSS_SNOWHEAD) && has(MASK_ZORA)"
+    "Goron Village Path Underwater Chest 2": "event(BOSS_SNOWHEAD) && has(MASK_ZORA)"
+    "Goron Village Path Frozen Grotto Chest": "event(GORON_GRAVEYARD_HOT_WATER)"
+    "Goron Village Path Ramp Grotto Chest": "has(BOMB_BAG) && (has(MASK_GORON) || scarecrow_hookshot) && event(BOSS_SNOWHEAD)"
 "Goron Village":
   exits:
     "Goron Village Path": "true"
@@ -142,7 +150,7 @@
     GORON_SPIRIT: "can_use_lens"
   locations:
     "Goron Elder": "has(MASK_GORON) && has(OCARINA) && event(GORON_GRAVEYARD_HOT_WATER)"
-    "Goron Powder Keg": "(event(SPRING) || can_use_fire_arrows) && has(MASK_GORON)"
+    "Goron Powder Keg": "(event(BOSS_SNOWHEAD) || can_use_fire_arrows) && has(MASK_GORON)"
 "Lone Peak Shrine":
   exits:
     "Goron Village": "can_use_lens"
@@ -162,9 +170,16 @@
     "Goron Village": "true"
   locations:
     "Goron Baby": "has(MASK_GORON) && can_play(SONG_GORON_HALF)"
-"Snowhead":
+"Path to Snowhead":
   exits:
     "Mountain Village": "true"
+    "Snowhead": "has(OCARINA) && has(SONG_GORON_HALF, 2) && goron_fast_roll && can_use_lens"
+  locations:
+    "Path to Snowhead HP": "can_use_lens && goron_fast_roll && scarecrow_hookshot"
+    "Path to Snowhead Grotto": "has(BOMB_BAG) && goron_fast_roll"
+"Snowhead":
+  exits:
+    "Path to Snowhead": "true"
     "Snowhead Temple Entrance": "has(MASK_GORON)"
 "Milk Road":
   exits:

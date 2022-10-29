@@ -121,7 +121,7 @@
 "Snowhead Temple After Boss":
   dungeon: SH
   events:
-    SPRING: "true"
+    BOSS_SNOWHEAD: "true"
   locations:
     "Snowhead Temple Boss HC": "true"
     "Snowhead Temple Boss": "true"
