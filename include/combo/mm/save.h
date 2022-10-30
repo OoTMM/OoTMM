@@ -238,7 +238,8 @@ typedef struct
     u32 scrubOcean:1;
     u32 scrubValley:1;
     u32 scrubBombBag:1;
-    u32 unused:15;
+    u32 zoraHallLights:1;
+    u32 unused:14;
 }
 MmExtraFlags;
 
