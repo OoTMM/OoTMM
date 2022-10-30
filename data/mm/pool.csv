@@ -59,6 +59,8 @@ Goron Village Path Ramp Grotto Chest,   chest,          GROTTOS,                
 Goron Elder,                            npc,            PATH_GORON_VILLAGE_WINTER,  GORON_ELDER,            SONG_GORON_HALF
 Goron Baby,                             npc,            GORON_SHRINE,               GORON_BABY,             SONG_GORON_HALF
 Goron Powder Keg,                       npc,            GORON_VILLAGE_WINTER,       GORON_KEG,              POWDER_KEG
+Goron Village Scrub Deed,               npc,            GORON_VILLAGE_WINTER,       SCRUB_MOUNTAIN,         DEED_MOUNTAIN
+Goron Village Scrub Bomb Bag,           npc,            GORON_VILLAGE_WINTER,       SCRUB_BOMB_BAG,         BOMB_BAG
 Path to Snowhead HP,                    collectible,    PATH_SNOWHEAD,              0x08,                   HEART_PIECE
 Path to Snowhead Grotto,                chest,          GROTTOS,                    0x13,                   RUPEE_RED
 Goron Race Reward,                      npc,            GORON_RACETRACK,            GORON_RACE,             BOTTLED_GOLD_DUST
