@@ -71,7 +71,7 @@
   events:
     FROG_3: "has(MASK_DEKU) && has(MASK_DON_GERO)"
   locations:
-    "Southern Swamp HP": "has(DEED_LAND)"
+    "Southern Swamp HP": "has(DEED_LAND) && has(MASK_DEKU)"
     "Southern Swamp Scrub Deed": "has(DEED_LAND)"
     "Southern Swamp Song of Soaring": "has(MASK_DEKU)"
     "Southern Swamp Grotto": "has(MASK_DEKU)"
@@ -163,10 +163,11 @@
     "Lone Peak Shrine": "true"
     "Goron Shrine": "true"
   locations:
-    "Goron Elder": "has(MASK_GORON) && has(OCARINA) && event(GORON_GRAVEYARD_HOT_WATER)"
-    "Goron Powder Keg": "(event(BOSS_SNOWHEAD) || can_use_fire_arrows) && has(MASK_GORON)"
+    "Goron Village HP": "has(DEED_SWAMP) && has(MASK_DEKU)"
     "Goron Village Scrub Deed": "has(DEED_SWAMP)"
     "Goron Village Scrub Bomb Bag": "has(MASK_GORON) && has(WALLET)"
+    "Goron Elder": "has(MASK_GORON) && has(OCARINA) && event(GORON_GRAVEYARD_HOT_WATER)"
+    "Goron Powder Keg": "(event(BOSS_SNOWHEAD) || can_use_fire_arrows) && has(MASK_GORON)"
 "Lone Peak Shrine":
   exits:
     "Goron Village": "can_use_lens"
