@@ -285,6 +285,9 @@
   exits:
     "Zora Cape": "true"
     "Zora Cape Peninsula": "true"
+  locations:
+    "Zora Hall Scrub HP": "has(DEED_MOUNTAIN) && has(MASK_DEKU)"
+    "Zora Hall Scrub Deed": "has(DEED_MOUNTAIN)"
 "Zora Cape Peninsula":
   exits:
     "Zora Hall": "true"
