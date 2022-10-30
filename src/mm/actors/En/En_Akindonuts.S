@@ -1,0 +1,43 @@
+#include <combo.h>
+
+/* Prevent scrubs from actually moving */
+PATCH_START 0x8013d648
+  jr ra
+   li v0,0
+PATCH_END
+
+PATCH_START 0x80bee984
+  li t6,0
+PATCH_END
+
+PATCH_START 0x80bee9e8
+  li t4,0
+PATCH_END
+
+PATCH_START 0x80beea4c
+  li t2,0
+PATCH_END
+
+PATCH_START 0x80beeab0
+  li t0,0
+PATCH_END
+
+/* Remove check for buying the bomb bag */
+PATCH_START 0x80bed2a4
+  nop
+PATCH_END
+
+PATCH_START 0x80bed2ac
+  nop
+  nop
+PATCH_END
+
+PATCH_START 0x80bed2bc
+  nop
+PATCH_END
+
+PATCH_START 0x80bed2c4
+  nop
+  nop
+  nop
+PATCH_END

@@ -232,7 +232,13 @@ typedef struct
     u32 swordRazor:1;
     u32 swordGilded:1;
     u32 maskGoron:1;
-    u32 unused:21;
+    u32 scrubTown:1;
+    u32 scrubSwamp:1;
+    u32 scrubMountain:1;
+    u32 scrubOcean:1;
+    u32 scrubValley:1;
+    u32 scrubBombBag:1;
+    u32 unused:15;
 }
 MmExtraFlags;
 

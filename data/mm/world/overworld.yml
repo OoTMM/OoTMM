@@ -72,6 +72,7 @@
     FROG_3: "has(MASK_DEKU) && has(MASK_DON_GERO)"
   locations:
     "Southern Swamp HP": "has(MASK_DEKU) && has(DEED_LAND)"
+    "Southern Swamp Scrub Deed": "has(MASK_DEKU) && has(DEED_LAND)"
     "Southern Swamp Song of Soaring": "has(MASK_DEKU)"
     "Southern Swamp Grotto": "has(MASK_DEKU)"
 "Tourist Information":

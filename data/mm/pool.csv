@@ -1,7 +1,7 @@
 location,                               type,           scene,                      id,                     item
 
 Clock Town Platform HP,                 collectible,    CLOCK_TOWN_SOUTH,           0x0a,                   HEART_PIECE
-Clock Town Business Scrub,              npc,            CLOCK_TOWN_SOUTH,           BUSINESS_SCRUB_LAND,    DEED_LAND
+Clock Town Business Scrub,              npc,            CLOCK_TOWN_SOUTH,           SCRUB_LAND,             DEED_LAND
 Clock Town Tree HP,                     collectible,    CLOCK_TOWN_NORTH,           0x0a,                   HEART_PIECE
 Clock Town Silver Rupee Chest,          chest,          CLOCK_TOWN_EAST,            0x0a,                   RUPEE_SILVER
 Clock Town Guru Guru Mask Bremen,       npc,            LAUNDRY_POOL,               MASK_BREMEN,            MASK_BREMEN
@@ -24,6 +24,7 @@ Termina Field Bio Baba Grotto,          collectible,    GROTTOS,                
 Road to Southern Swamp HP,              collectible,    ROAD_SOUTHERN_SWAMP,        0x01,                   HEART_PIECE
 Road to Southern Swamp Grotto,          chest,          GROTTOS,                    0x1e,                   RUPEE_RED
 Southern Swamp HP,                      collectible,    SOUTHERN_SWAMP,             0x1e,                   HEART_PIECE
+Southern Swamp Scrub Deed,              npc,            SOUTHERN_SWAMP,             SCRUB_SWAMP,            DEED_SWAMP
 Southern Swamp Song of Soaring,         npc,            SOUTHERN_SWAMP,             SONG_SOARING,           SONG_SOARING
 Southern Swamp Grotto,                  chest,          GROTTOS,                    0x1d,                   RUPEE_RED
 Woods of Mystery Grotto,                chest,          GROTTOS,                    0x1c,                   RUPEE_PURPLE
