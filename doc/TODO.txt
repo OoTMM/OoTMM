@@ -1,7 +1,4 @@
- - Remove one lock in Fire Temple
- - NPC: Adult King Zora
- - Flags for dungeons
- - MM teleport pads
- - Stone Temple Tower & Inverted override IDs
- - OOT Medigoron
- - OOT Carpet man
+- MM teleport pads
+- MM unbreakable Razor Blade
+- MM GetCollectibleBehavior
+- MM Song of Time patches
