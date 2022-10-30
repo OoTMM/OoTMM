@@ -157,8 +157,6 @@
     "Goron Village Path": "true"
     "Lone Peak Shrine": "true"
     "Goron Shrine": "true"
-  events:
-    GORON_SPIRIT: "can_use_lens"
   locations:
     "Goron Elder": "has(MASK_GORON) && has(OCARINA) && event(GORON_GRAVEYARD_HOT_WATER)"
     "Goron Powder Keg": "(event(BOSS_SNOWHEAD) || can_use_fire_arrows) && has(MASK_GORON)"
@@ -173,7 +171,7 @@
   exits:
     "Mountain Village": "true"
   locations:
-    "Goron Graveyard Mask": "can_play(SONG_HEALING) && event(GORON_SPIRIT)"
+    "Goron Graveyard Mask": "can_use_lens && can_play(SONG_HEALING)"
   events:
     GORON_GRAVEYARD_HOT_WATER: "has_bottle && has(MASK_GORON)"
 "Goron Shrine":

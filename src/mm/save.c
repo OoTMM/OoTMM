@@ -1,5 +1,7 @@
 #include <combo.h>
 
+#define ENTRANCE(scene, id) (((scene) - 3) << 9)
+
 #define ENTRANCE_CLOCKTOWN  0xd800
 #define ENTRANCE_WOODS      0xc200
 #define ENTRANCE_DKING      0x7610
@@ -11,12 +13,13 @@
 #define ENTRANCE_BEAVER     0x8e00
 #define ENTRANCE_LAB        0x5800
 #define ENTRANCE_SMITH      0x5200
+#define ENTRANCE_GSHRINE    0x5e00
 
 void Sram_AfterOpenSave(void)
 {
     gSave.entranceIndex = ENTRANCE_CLOCKTOWN;
 
 #if defined(DEBUG)
-    gSave.entranceIndex = ENTRANCE_SMITH;
+    gSave.entranceIndex = ENTRANCE(SCE_MM_GORON_GRAVEYARD, 0);
 #endif
 }
