@@ -43,6 +43,7 @@ Woodfall HP Chest,                      chest,          WOODFALL,               
 Swamp Spider House Mask of Truth,       npc,            SPIDER_HOUSE_SWAMP,         SPIDER_HOUSE_SWAMP,     MASK_TRUTH
 Mountain Village Waterfall Chest,       chest,          MOUNTAIN_VILLAGE_WINTER,    0x00,                   RUPEE_RED
 Mountain Village Don Gero Mask,         npc,            MOUNTAIN_VILLAGE_WINTER,    MASK_DON_GERO,          MASK_DON_GERO
+Mountain Village Frog Choir HP,         npc,            MOUNTAIN_VILLAGE_WINTER,    FROG_HEART_PIECE,       HEART_PIECE
 Mountain Village Tunnel Grotto,         chest,          GROTTOS,                    0x1b,                   RUPEE_RED
 Blacksmith Razor Blade,                 npc,            BLACKSMITH,                 SWORD_RAZOR,            SWORD
 Blacksmith Gilded Sword,                npc,            BLACKSMITH,                 SWORD_GILDED,           SWORD

@@ -5,6 +5,7 @@
     "Clock Tower Rooftop": "true"
     "Astral Observatory": "event(BOMBER_CODE)"
   events:
+    FROG_1: "has(MASK_DON_GERO)"
     BOMBER_CODE: "(has(MASK_DEKU) && has(MAGIC_UPGRADE)) || has(MASK_ZORA) || has(BOW)"
   locations:
     "Clock Town Platform HP": "true"
@@ -67,6 +68,8 @@
     "Swamp Potion Shop": "true"
     "Woods of Mystery": "true"
     "Swamp Spider House": "true"
+  events:
+    FROG_3: "has(MASK_DEKU) && has(MASK_DON_GERO)"
   locations:
     "Southern Swamp HP": "has(MASK_DEKU) && has(DEED_LAND)"
     "Southern Swamp Song of Soaring": "has(MASK_DEKU)"
@@ -133,6 +136,7 @@
   locations:
     "Mountain Village Waterfall Chest": "event(BOSS_SNOWHEAD)"
     "Mountain Village Don Gero Mask": "event(GORON_FOOD)"
+    "Mountain Village Frog Choir HP": "event(BOSS_SNOWHEAD) && event(FROG_1) && event(FROG_2) && event(FROG_3) && event(FROG_4)"
     "Mountain Village Tunnel Grotto": "event(BOSS_SNOWHEAD)"
 "Blacksmith":
   exits:
