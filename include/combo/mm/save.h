@@ -229,7 +229,9 @@ typedef struct
     u32 maskGaro:1;
     u32 maskZora:1;
     u32 maskDonGero:1;
-    u32 unused:24;
+    u32 swordRazor:1;
+    u32 swordGilded:1;
+    u32 unused:22;
 }
 MmExtraFlags;
 

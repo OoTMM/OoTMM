@@ -129,10 +129,19 @@
     "Goron Village Path": "true"
     "Goron Graveyard": "can_use_lens"
     "Path to Snowhead": "true"
+    "Blacksmith": "true"
   locations:
     "Mountain Village Waterfall Chest": "event(BOSS_SNOWHEAD)"
     "Mountain Village Don Gero Mask": "event(GORON_FOOD)"
     "Mountain Village Tunnel Grotto": "event(BOSS_SNOWHEAD)"
+"Blacksmith":
+  exits:
+    "Mountain Village": "true"
+  events:
+    GOLD_DUST_USED: "has(WALLET) && has(BOTTLED_GOLD_DUST)"
+  locations:
+    "Blacksmith Razor Blade": "has(WALLET)"
+    "Blacksmith Gilded Sword": "event(GOLD_DUST_USED)"
 "Goron Village Path":
   exits:
     "Mountain Village": "true"

@@ -15,11 +15,11 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.items[ITS_MM_MASK_ZORA] = ITEM_MM_MASK_ZORA;
         gSave.inventory.items[ITS_MM_BOW] = ITEM_MM_BOW;
         gSave.inventory.upgrades.quiver = 3;
+        gSave.inventory.upgrades.wallet = 2;
+        gSave.playerData.rupees = 500;
         gSave.inventory.questItems.songHealing = 1;
-        gSave.inventory.items[ITS_MM_BOTTLE + 0] = ITEM_MM_BOTTLED_FISH;
-        gSave.inventory.items[ITS_MM_BOTTLE + 1] = ITEM_MM_BOTTLED_FISH;
-        gSave.inventory.items[ITS_MM_BOTTLE + 2] = ITEM_MM_BOTTLED_FISH;
-        gSave.inventory.items[ITS_MM_BOTTLE + 3] = ITEM_MM_BOTTLED_FISH;
+        gSave.inventory.items[ITS_MM_BOTTLE + 0] = ITEM_MM_BOTTLED_GOLD_DUST;
+        gSave.inventory.items[ITS_MM_BOTTLE + 1] = ITEM_MM_BOTTLED_SPRING_WATER_HOT;
     }
 #endif
 }

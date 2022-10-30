@@ -10,12 +10,13 @@
 #define ENTRANCE_GREAT_BAY  0x6800
 #define ENTRANCE_BEAVER     0x8e00
 #define ENTRANCE_LAB        0x5800
+#define ENTRANCE_SMITH      0x5200
 
 void Sram_AfterOpenSave(void)
 {
     gSave.entranceIndex = ENTRANCE_CLOCKTOWN;
 
 #if defined(DEBUG)
-    gSave.entranceIndex = ENTRANCE_LAB;
+    gSave.entranceIndex = ENTRANCE_SMITH;
 #endif
 }
