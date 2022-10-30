@@ -82,6 +82,7 @@ Zora Cape Waterfall HP,                 collectible,    ZORA_CAPE,              
 Zora Cape Grotto,                       chest,          GROTTOS,                    0x15,                   BOMBCHU
 Zora Hall Scrub Deed,                   npc,            ZORA_HALL_ROOMS,            SCRUB_OCEAN,            DEED_OCEAN
 Zora Hall Scrub HP,                     collectible,    ZORA_HALL_ROOMS,            0x1e,                   HEART_PIECE
+Zora Hall Evan HP,                      npc,            ZORA_HALL_ROOMS,            ZORA_EVAN,              HEART_PIECE
 Pinnacle Rock Chest 1,                  chest,          PINNACLE_ROCK,              0x01,                   RUPEE_RED
 Pinnacle Rock Chest 2,                  chest,          PINNACLE_ROCK,              0x02,                   RUPEE_RED
 Pinnacle Rock HP,                       npc,            PINNACLE_ROCK,              SEAHORSE_HEART_PIECE,   HEART_PIECE
