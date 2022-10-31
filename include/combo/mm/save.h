@@ -239,7 +239,8 @@ typedef struct
     u32 scrubValley:1;
     u32 scrubBombBag:1;
     u32 zoraHallLights:1;
-    u32 unused:14;
+    u32 songGoronIntro:1;
+    u32 unused:13;
 }
 MmExtraFlags;
 
