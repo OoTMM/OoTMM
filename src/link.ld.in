@@ -14,10 +14,6 @@ SECTIONS
 # include "link_mm.in"
 #endif
 
-  OVERLAY 0x06000000 : AT(0x06000000) {
-    .cobject.data: { *(.cobject.data) }
-  }
-
   . = PAYLOAD_RAM;
   .text : {
     *(.text*);

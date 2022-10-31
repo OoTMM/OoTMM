@@ -65,7 +65,7 @@
   exits:
     "Great Bay Temple Compass Room": "true"
   events:
-    FROG_GB: "has(MASK_DON_GERO)"
+    FROG_4: "has(MASK_DON_GERO)"
   locations:
     "Great Bay Temple Boss Key": "true"
 "Great Bay Temple Green Pipe":

@@ -9,10 +9,10 @@ static const u16 kSwords[] = {
 
 const u8 kMmTrade1[] = {
     ITEM_MM_MOON_TEAR,
-    ITEM_MM_TITLE_DEED_LAND,
-    ITEM_MM_TITLE_DEED_SWAMP,
-    ITEM_MM_TITLE_DEED_MOUNTAIN,
-    ITEM_MM_TITLE_DEED_OCEAN,
+    ITEM_MM_DEED_LAND,
+    ITEM_MM_DEED_SWAMP,
+    ITEM_MM_DEED_MOUNTAIN,
+    ITEM_MM_DEED_OCEAN,
 };
 
 const u8 kMmTrade2[] = {
@@ -273,17 +273,17 @@ void comboAddItemMm(u16 itemId)
     case ITEM_MM_MOON_TEAR:
         addTrade1(XITEM_MM_TRADE1_MOON_TEAR);
         break;
-    case ITEM_MM_TITLE_DEED_LAND:
-        addTrade1(XITEM_MM_TRADE1_TITLE_DEED_LAND);
+    case ITEM_MM_DEED_LAND:
+        addTrade1(XITEM_MM_TRADE1_DEED_LAND);
         break;
-    case ITEM_MM_TITLE_DEED_SWAMP:
-        addTrade1(XITEM_MM_TRADE1_TITLE_DEED_SWAMP);
+    case ITEM_MM_DEED_SWAMP:
+        addTrade1(XITEM_MM_TRADE1_DEED_SWAMP);
         break;
-    case ITEM_MM_TITLE_DEED_MOUNTAIN:
-        addTrade1(XITEM_MM_TRADE1_TITLE_DEED_MOUNTAIN);
+    case ITEM_MM_DEED_MOUNTAIN:
+        addTrade1(XITEM_MM_TRADE1_DEED_MOUNTAIN);
         break;
-    case ITEM_MM_TITLE_DEED_OCEAN:
-        addTrade1(XITEM_MM_TRADE1_TITLE_DEED_OCEAN);
+    case ITEM_MM_DEED_OCEAN:
+        addTrade1(XITEM_MM_TRADE1_DEED_OCEAN);
         break;
     case ITEM_MM_ROOM_KEY:
         addTrade2(XITEM_MM_TRADE2_ROOM_KEY);

@@ -94,3 +94,7 @@ PlayerDisplayTextBox = 0x801518b0;
 Cutscene_End = 0x800ea0ec;
 ActorCutscene_GetCurrentIndex = 0x800f207c;
 ActorCutscene_Stop = 0x800f1fbc;
+
+gActorOvl = 0x801aefd0;
+
+SetSwitchFlag = 0x800b5bf4;

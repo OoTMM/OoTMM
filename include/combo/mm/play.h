@@ -23,8 +23,10 @@ typedef struct PACKED ALIGNED(4) GameState_Play
     char            unk_046e0[0x11c10];
     char            textBuffer[4]; /* Real size unknown */
     char            unk_162f4[0x0063e];
-    u8              ocarinaMode;
-    char            unk_16933[0x01f42];
+    u16             ocarinaMode;
+    char            unk_16934[2];
+    s16             ocarinaSong;
+    char            unk_16938[0x01f3d];
     u8              transitionType;
     char            unk_18876[0x00004];
     u16             nextEntrance;

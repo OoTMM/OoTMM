@@ -16,5 +16,5 @@ int EnSth_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
     return GiveItem(this, play, gi, a, b);
 }
 
-PATCH_CALL(0x801311f4, EnSth_GiveItem);
-PATCH_CALL(0x80131224, EnSth_GiveItem);
+PATCH_CALL(0x80b67524, EnSth_GiveItem);
+PATCH_CALL(0x80b67c00, EnSth_GiveItem);

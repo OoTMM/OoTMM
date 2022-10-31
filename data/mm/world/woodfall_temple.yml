@@ -12,6 +12,8 @@
   exits:
     "Woodfall Temple Entrance": "true"
     "Woodfall Temple Boss": "has(BOW)"
+  events:
+    FROG_2: "has(MASK_DON_GERO)"
   locations:
     "Woodfall Temple Compass": "true"
     "Woodfall Temple Dark Chest": "has(SWORD)"

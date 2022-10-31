@@ -15,13 +15,34 @@ typedef struct PACKED
 }
 ComboOverride;
 
-#define KEY(scene, id) (((scene) << 8) | (id))
-
 static ALIGNED(16) ComboOverride gComboOverrides[OVERRIDE_MAX];
 
 void comboInitOverride(void)
 {
     DMARomToRam(OVERRIDE_ADDR | PI_DOM1_ADDR2, &gComboOverrides, sizeof(gComboOverrides));
+}
+
+static u16 makeKey(u16 sceneId, u16 id)
+{
+#if defined(GAME_MM)
+    switch (sceneId)
+    {
+    case SCE_MM_SOUTHERN_SWAMP_CLEAR:
+        sceneId = SCE_MM_SOUTHERN_SWAMP;
+        break;
+    case SCE_MM_PATH_GORON_VILLAGE_SPRING:
+        sceneId = SCE_MM_PATH_GORON_VILLAGE_WINTER;
+        break;
+    case SCE_MM_GORON_VILLAGE_SPRING:
+        sceneId = SCE_MM_GORON_VILLAGE_WINTER;
+        break;
+    case SCE_MM_MOUNTAIN_VILLAGE_SPRING:
+        sceneId = SCE_MM_MOUNTAIN_VILLAGE_WINTER;
+        break;
+    }
+#endif
+
+    return (sceneId << 8) | id;
 }
 
 static s32 comboOverrideRaw(u16 key)
@@ -42,7 +63,7 @@ static s16 comboOverrideImpl(u16 sceneId, u16 id, s16 gi)
     s32 override;
     u16 absGi;
 
-    override = comboOverrideRaw(KEY(sceneId, id));
+    override = comboOverrideRaw(makeKey(sceneId, id));
     absGi = gi > 0 ? gi : -gi;
     if (override >= 0)
         absGi = override;

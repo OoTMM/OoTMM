@@ -154,7 +154,8 @@ void comboSpawnItemGivers(GameState_Play* play);
 int toupper(int c);
 
 /* Util */
-u32 popcount(u32 x);
+u32     popcount(u32 x);
+void*   actorAddr(u16 actorId, u32 addr);
 
 #else
 # include <combo/asm.h>

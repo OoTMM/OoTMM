@@ -9,3 +9,13 @@ u32 popcount(u32 x)
     x = (x & 0x0000ffff) + ((x >> 16) & 0x0000ffff);
     return x;
 }
+
+void* actorAddr(u16 actorId, u32 addr)
+{
+    ActorOvl* ovl;
+    u32 offset;
+
+    ovl = gActorOvl + actorId;
+    offset = addr - ovl->vramStart;
+    return (char*)ovl->data + offset;
+}
