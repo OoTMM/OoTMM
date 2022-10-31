@@ -1,11 +1,6 @@
 #include <combo.h>
 
 /* Prevent scrubs from actually moving */
-PATCH_START 0x8013d648
-  jr ra
-   li v0,0
-PATCH_END
-
 PATCH_START 0x80bee984
   li t6,0
 PATCH_END

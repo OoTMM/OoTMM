@@ -194,10 +194,10 @@
 #define ITEM_MM_BOTTLED_SEAHORSE            0x24
 #define ITEM_MM_BOTTLED_CHATEAU_ROMANI      0x25
 #define ITEM_MM_MOON_TEAR                   0x28
-#define ITEM_MM_TITLE_DEED_LAND             0x29
-#define ITEM_MM_TITLE_DEED_SWAMP            0x2a
-#define ITEM_MM_TITLE_DEED_MOUNTAIN         0x2b
-#define ITEM_MM_TITLE_DEED_OCEAN            0x2c
+#define ITEM_MM_DEED_LAND                   0x29
+#define ITEM_MM_DEED_SWAMP                  0x2a
+#define ITEM_MM_DEED_MOUNTAIN               0x2b
+#define ITEM_MM_DEED_OCEAN                  0x2c
 #define ITEM_MM_ROOM_KEY                    0x2d
 #define ITEM_MM_LETTER_TO_MAMA              0x2e
 #define ITEM_MM_LETTER_TO_KAFEI             0x2f
@@ -403,10 +403,10 @@
 #define XITEM_OOT_ADULT_CLAIM_CHECK             0xa
 
 #define XITEM_MM_TRADE1_MOON_TEAR           0x0
-#define XITEM_MM_TRADE1_TITLE_DEED_LAND     0x1
-#define XITEM_MM_TRADE1_TITLE_DEED_SWAMP    0x2
-#define XITEM_MM_TRADE1_TITLE_DEED_MOUNTAIN 0x3
-#define XITEM_MM_TRADE1_TITLE_DEED_OCEAN    0x4
+#define XITEM_MM_TRADE1_DEED_LAND           0x1
+#define XITEM_MM_TRADE1_DEED_SWAMP          0x2
+#define XITEM_MM_TRADE1_DEED_MOUNTAIN       0x3
+#define XITEM_MM_TRADE1_DEED_OCEAN          0x4
 
 #define XITEM_MM_TRADE2_ROOM_KEY        0x0
 #define XITEM_MM_TRADE2_LETTER_TO_MAMA  0x1

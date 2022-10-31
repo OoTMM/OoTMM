@@ -25,6 +25,7 @@ static void debugCheat(GameState_Play* play)
         gMmSave.playerData.magicAcquired = 1;
         gSaveContext.magicTarget = 0x30;
         gSave.inventory.items[ITS_MM_MASK_GORON] = ITEM_MM_MASK_GORON;
+        gSave.inventory.items[ITS_MM_TRADE1] = ITEM_MM_DEED_SWAMP;
     }
 #endif
 }
