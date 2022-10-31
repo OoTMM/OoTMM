@@ -311,6 +311,8 @@
     "Ikana Valley": "(has(MASK_GARO) || has(MASK_GIBDO)) && has(HOOKSHOT)"
     "Ikana Graveyard": "true"
   locations:
+    "Road to Ikana Chest": "has(HOOKSHOT)"
+    "Road to Ikana Grotto": "has(MASK_GORON)"
     "Road to Ikana Stone Mask": "can_use_lens && has_bottle"
 "Ikana Graveyard":
   exits:
