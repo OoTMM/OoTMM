@@ -346,6 +346,7 @@
   locations:
     "Ikana Valley Scrub Rupee": "has(DEED_OCEAN) && has(MASK_ZORA)"
     "Ikana Valley Scrub HP": "has(DEED_OCEAN) && has(MASK_ZORA) && has(MASK_DEKU)"
+    "Ikana Valley Grotto": "true"
 "Ikana Canyon":
   exits:
     "Ikana Valley": "true"
