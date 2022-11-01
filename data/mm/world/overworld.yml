@@ -318,6 +318,8 @@
   exits:
     "Road to Ikana": "true"
     "Beneath The Graveyard Night 1": "has(MASK_CAPTAIN)"
+    "Beneath The Graveyard Night 2": "has(MASK_CAPTAIN)"
+    "Beneath The Graveyard Night 3": "has(MASK_CAPTAIN)"
   locations:
     "Ikana Graveyard Captain Mask": "can_play(SONG_AWAKENING)"
     "Ikana Graveyard Grotto": "has(BOMB_BAG)"
@@ -327,6 +329,14 @@
   locations:
     "Beneath The Graveyard Chest": "true"
     "Beneath The Graveyard Song of Storms": "true"
+"Beneath The Graveyard Night 2":
+  exits:
+    "Ikana Graveyard": "true"
+  locations:
+    "Beneath The Graveyard HP": "has_explosives"
+"Beneath The Graveyard Night 3":
+  exits:
+    "Ikana Graveyard": "true"
 "Ikana Valley":
   exits:
     "Road to Ikana": "true"
