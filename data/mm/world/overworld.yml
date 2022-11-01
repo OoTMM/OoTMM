@@ -378,6 +378,14 @@
   exits:
     "Stone Tower Temple Inverted Entrance": "true"
     "Stone Tower Top": "can_use_light_arrows"
+    "Stone Tower Top Inverted Upper": "can_use_beans"
+"Stone Tower Top Inverted Upper":
+  exits:
+    "Stone Tower Top Inverted": "true"
+  locations:
+    "Stone Tower Inverted Chest 1": "true"
+    "Stone Tower Inverted Chest 2": "true"
+    "Stone Tower Inverted Chest 3": "true"
 "Clock Tower Rooftop":
   exits:
     "Moon": "can_play(SONG_ORDER) && has(REMAINS_ODOLWA) && has(REMAINS_GOHT) && has(REMAINS_GYORG) && has(REMAINS_TWINMOLD)"

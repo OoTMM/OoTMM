@@ -107,6 +107,9 @@ Ikana Valley Scrub Rupee,               npc,            IKANA_CANYON,           
 Ikana Valley Scrub HP,                  collectible,    IKANA_CANYON,               0x1e,                   HEART_PIECE
 Ikana Valley Grotto,                    chest,          GROTTOS,                    0x14,                   BOMBCHUS_5
 Music Box House Gibdo Mask,             npc,            MUSIC_BOX_HOUSE,            MASK_GIBDO,             MASK_GIBDO
+Stone Tower Inverted Chest 1,           chest,          STONE_TOWER_INVERTED,       0x1d,                   RUPEE_SILVER
+Stone Tower Inverted Chest 2,           chest,          STONE_TOWER_INVERTED,       0x1e,                   BOMBCHUS_10
+Stone Tower Inverted Chest 3,           chest,          STONE_TOWER_INVERTED,       0x1f,                   MAGIC_BEAN
 Oath to Order,                          npc,            LAIR_ODOLWA,                SONG_ORDER,             SONG_ORDER
 
 Woodfall Temple Entrance Chest,     chest,          TEMPLE_WOODFALL,  0x18, STRAY_FAIRY_WF
