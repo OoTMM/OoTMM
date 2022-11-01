@@ -103,6 +103,8 @@ Beneath The Graveyard Chest,            chest,          BENEATH_THE_GRAVEYARD,  
 Beneath The Graveyard Song of Storms,   npc,            BENEATH_THE_GRAVEYARD,      SONG_STORMS,            SONG_STORMS
 Beneath The Graveyard HP,               chest,          BENEATH_THE_GRAVEYARD,      0x00,                   HEART_PIECE
 Beneath The Graveyard Dampe Chest,      chest,          DAMPE_HOUSE,                0x00,                   EMPTY_BOTTLE
+Ikana Valley Scrub Rupee,               npc,            IKANA_CANYON,               SCRUB_VALLEY,           RUPEE_GOLD
+Ikana Valley Scrub HP,                  collectible,    IKANA_CANYON,               0x1e,                   HEART_PIECE
 Music Box House Gibdo Mask,             npc,            MUSIC_BOX_HOUSE,            MASK_GIBDO,             MASK_GIBDO
 Oath to Order,                          npc,            LAIR_ODOLWA,                SONG_ORDER,             SONG_ORDER
 
