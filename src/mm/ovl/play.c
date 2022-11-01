@@ -19,6 +19,7 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.upgrades.wallet = 2;
         gSave.playerData.rupees = 500;
         gSave.inventory.questItems.songHealing = 1;
+        gSave.inventory.questItems.songTime = 1;
         gSave.inventory.items[ITS_MM_BOTTLE + 0] = ITEM_MM_BOTTLED_GOLD_DUST;
         gSave.inventory.items[ITS_MM_BOTTLE + 1] = ITEM_MM_BOTTLED_SPRING_WATER_HOT;
         gSave.playerData.magic = 0x30;
@@ -31,6 +32,7 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.questItems.songLullabyIntro = 1;
 
         gSave.inventory.items[ITS_MM_KEG] = ITEM_MM_POWDER_KEG;
+        gSave.inventory.items[ITS_MM_MASK_CAPTAIN] = ITEM_MM_MASK_CAPTAIN;
     }
 #endif
 }
