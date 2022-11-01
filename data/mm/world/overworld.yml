@@ -337,6 +337,8 @@
 "Beneath The Graveyard Night 3":
   exits:
     "Ikana Graveyard": "true"
+  locations:
+    "Beneath The Graveyard Dampe Chest": "has_weapon"
 "Ikana Valley":
   exits:
     "Road to Ikana": "true"
