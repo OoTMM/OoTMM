@@ -244,7 +244,8 @@ typedef struct
     u32 powderKeg:1;
     u32 maskStone:1;
     u32 songStorms:1;
-    u32 unused:9;
+    u32 songEmptiness:1;
+    u32 unused:8;
 }
 MmExtraFlags;
 

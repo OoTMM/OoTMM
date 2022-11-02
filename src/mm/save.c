@@ -20,6 +20,6 @@ void Sram_AfterOpenSave(void)
     gSave.entranceIndex = ENTRANCE_CLOCKTOWN;
 
 #if defined(DEBUG)
-    gSave.entranceIndex = ENTRANCE(SCE_MM_IKANA_GRAVEYARD, 0);
+    gSave.entranceIndex = ENTRANCE(SCE_MM_LAIR_IKANA, 0);
 #endif
 }
