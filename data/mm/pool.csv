@@ -106,6 +106,7 @@ Beneath The Graveyard Dampe Chest,      chest,          DAMPE_HOUSE,            
 Ikana Valley Scrub Rupee,               npc,            IKANA_CANYON,               SCRUB_VALLEY,           RUPEE_GOLD
 Ikana Valley Scrub HP,                  collectible,    IKANA_CANYON,               0x1e,                   HEART_PIECE
 Ikana Valley Grotto,                    chest,          GROTTOS,                    0x14,                   BOMBCHUS_5
+Ghost Hut HP,                           npc,            GHOST_HUT,                  GHOST_HUT_HEART_PIECE,  HEART_PIECE
 Music Box House Gibdo Mask,             npc,            MUSIC_BOX_HOUSE,            MASK_GIBDO,             MASK_GIBDO
 Stone Tower Inverted Chest 1,           chest,          STONE_TOWER_INVERTED,       0x1d,                   RUPEE_SILVER
 Stone Tower Inverted Chest 2,           chest,          STONE_TOWER_INVERTED,       0x1e,                   BOMBCHUS_10

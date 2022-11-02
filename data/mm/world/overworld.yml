@@ -352,6 +352,7 @@
     "Ikana Valley": "true"
     "Ikana Spring Water Cave": "true"
     "Music Box House": "event(IKANA_CURSE_LIFTED)"
+    "Ghost Hut": "true"
     "Beneath the Well Entrance": "true"
     "Ancient Castle of Ikana Exterior": "has_mirror_shield"
     "Stone Tower": "true"
@@ -365,6 +366,11 @@
     "Ikana Canyon": "true"
   locations:
     "Music Box House Gibdo Mask": "can_play(SONG_HEALING)"
+"Ghost Hut":
+  exits:
+    "Ikana Canyon": "true"
+  locations:
+    "Ghost Hut HP": "has(BOW)"
 "Stone Tower":
   exits:
     "Ikana Canyon": "true"
