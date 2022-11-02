@@ -86,6 +86,7 @@ export const ITEMS_REQUIRED = new Set<string>([
   'MM_MASK_BREMEN',
   'MM_MASK_TRUTH',
   'MM_MASK_DON_GERO',
+  'MM_MASK_GREAT_FAIRY',
   'MM_BOTTLED_POTION_RED',
   'MM_BOTTLED_GOLD_DUST',
   'MM_EMPTY_BOTTLE',
@@ -285,7 +286,7 @@ class Solver {
     const checksCount = Object.keys(this.world.checks).length;
 
     /* Fix the GS tokens */
-    this.fixTokens();
+    this.fixTokensAndFairies();
 
     /* Place the required reward items */
     this.fixRewards();
@@ -324,12 +325,17 @@ class Solver {
     addItem(this.pools.required, item);
   }
 
-  private fixTokens() {
+  private fixTokensAndFairies() {
     for (const location in this.world.checks) {
       const check = this.world.checks[location];
       if (check.type === 'gs') {
         this.place(location, 'OOT_GS_TOKEN');
         removeItem(this.pools.required, 'OOT_GS_TOKEN');
+      }
+      else if (check.type === 'sf') {
+        const item = check.item;
+        this.place(location, item);
+        removeItem(this.pools.dungeon, item);
       }
     }
   }

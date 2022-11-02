@@ -89,7 +89,7 @@ export const randomizeGame = async (game: Game, logic: LogicResult): Promise<Buf
     if (c.game !== game) {
       continue;
     }
-    if (c.type === 'gs') {
+    if (c.type === 'gs' || c.type === 'sf') {
       continue;
     }
     let { scene } = c;

@@ -109,10 +109,16 @@
   exits:
     "Deku Palace": "true"
     "Woodfall Temple Entrance": "has(MASK_DEKU) && can_play(SONG_AWAKENING) && has(SWORD)"
+    "Woodfall Great Fairy Fountain": "has(MASK_DEKU)"
   locations:
     "Woodfall Near Owl Chest": "has(MASK_DEKU) || has(HOOKSHOT)"
     "Woodfall Entrance Chest": "has(MASK_DEKU) || has(HOOKSHOT)"
     "Woodfall HP Chest": "has(MASK_DEKU)"
+"Woodfall Great Fairy Fountain":
+  exits:
+    "Woodfall": "true"
+  locations:
+    "Woodfall Great Fairy": "has(STRAY_FAIRY_WF, 15)"
 "Deku Shrine":
   exits:
     "Deku Palace": "true"
