@@ -318,23 +318,42 @@
   exits:
     "Road to Ikana": "true"
     "Beneath The Graveyard Night 1": "has(MASK_CAPTAIN)"
+    "Beneath The Graveyard Night 2": "has(MASK_CAPTAIN)"
+    "Beneath The Graveyard Night 3": "has(MASK_CAPTAIN)"
   locations:
     "Ikana Graveyard Captain Mask": "can_play(SONG_AWAKENING)"
+    "Ikana Graveyard Grotto": "has(BOMB_BAG)"
 "Beneath The Graveyard Night 1":
   exits:
     "Ikana Graveyard": "true"
   locations:
     "Beneath The Graveyard Chest": "true"
     "Beneath The Graveyard Song of Storms": "true"
+"Beneath The Graveyard Night 2":
+  exits:
+    "Ikana Graveyard": "true"
+  locations:
+    "Beneath The Graveyard HP": "has_explosives"
+"Beneath The Graveyard Night 3":
+  exits:
+    "Ikana Graveyard": "true"
+  locations:
+    "Beneath The Graveyard Dampe Chest": "has_weapon"
 "Ikana Valley":
   exits:
     "Road to Ikana": "true"
     "Ikana Canyon": "can_use_ice_arrows && has(HOOKSHOT)"
+    "Secret Shrine Entrance": "true"
+  locations:
+    "Ikana Valley Scrub Rupee": "has(DEED_OCEAN) && has(MASK_ZORA)"
+    "Ikana Valley Scrub HP": "has(DEED_OCEAN) && has(MASK_ZORA) && has(MASK_DEKU)"
+    "Ikana Valley Grotto": "true"
 "Ikana Canyon":
   exits:
     "Ikana Valley": "true"
     "Ikana Spring Water Cave": "true"
     "Music Box House": "event(IKANA_CURSE_LIFTED)"
+    "Ghost Hut": "true"
     "Beneath the Well Entrance": "true"
     "Ancient Castle of Ikana Exterior": "has_mirror_shield"
     "Stone Tower": "true"
@@ -348,6 +367,11 @@
     "Ikana Canyon": "true"
   locations:
     "Music Box House Gibdo Mask": "can_play(SONG_HEALING)"
+"Ghost Hut":
+  exits:
+    "Ikana Canyon": "true"
+  locations:
+    "Ghost Hut HP": "has(BOW)"
 "Stone Tower":
   exits:
     "Ikana Canyon": "true"
@@ -361,6 +385,14 @@
   exits:
     "Stone Tower Temple Inverted Entrance": "true"
     "Stone Tower Top": "can_use_light_arrows"
+    "Stone Tower Top Inverted Upper": "can_use_beans"
+"Stone Tower Top Inverted Upper":
+  exits:
+    "Stone Tower Top Inverted": "true"
+  locations:
+    "Stone Tower Inverted Chest 1": "true"
+    "Stone Tower Inverted Chest 2": "true"
+    "Stone Tower Inverted Chest 3": "true"
 "Clock Tower Rooftop":
   exits:
     "Moon": "can_play(SONG_ORDER) && has(REMAINS_ODOLWA) && has(REMAINS_GOHT) && has(REMAINS_GYORG) && has(REMAINS_TWINMOLD)"

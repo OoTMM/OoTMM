@@ -20,6 +20,6 @@ void Sram_AfterOpenSave(void)
     gSave.entranceIndex = ENTRANCE_CLOCKTOWN;
 
 #if defined(DEBUG)
-    gSave.entranceIndex = ENTRANCE(SCE_MM_GORON_VILLAGE_WINTER, 0);
+    gSave.entranceIndex = ENTRANCE(SCE_MM_MUSIC_BOX_HOUSE, 0);
 #endif
 }

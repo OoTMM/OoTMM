@@ -3,7 +3,7 @@ import { ItemPlacement, addItem, ITEMS_DUNGEON_REWARDS, ITEMS_REQUIRED } from ".
 import { Items } from "./state";
 import { World } from "./world";
 
-const isItemImportant = (item: string) => (ITEMS_DUNGEON_REWARDS.has(item) || ITEMS_REQUIRED.has(item) || /_BOSS_KEY_/.test(item)) && !/GS_TOKEN$/.test(item);
+const isItemImportant = (item: string) => (ITEMS_DUNGEON_REWARDS.has(item) || ITEMS_REQUIRED.has(item) || /_BOSS_KEY_/.test(item)) && !(/GS_TOKEN$/.test(item) || /MM_HEART_(PIECE|CONTAINER)$/.test(item));
 
 export const playthrough = (world: World, placement: ItemPlacement) => {
   let reachable: Reachable | undefined;
