@@ -118,6 +118,8 @@ export const ITEMS_REQUIRED = new Set<string>([
   'MM_DEED_MOUNTAIN',
   'MM_DEED_OCEAN',
   'MM_WALLET',
+  'MM_HEART_PIECE',
+  'MM_HEART_CONTAINER',
 ]);
 
 const ITEMS_JUNK = new Set<string>([

@@ -343,6 +343,7 @@
   exits:
     "Road to Ikana": "true"
     "Ikana Canyon": "can_use_ice_arrows && has(HOOKSHOT)"
+    "Secret Shrine Entrance": "true"
   locations:
     "Ikana Valley Scrub Rupee": "has(DEED_OCEAN) && has(MASK_ZORA)"
     "Ikana Valley Scrub HP": "has(DEED_OCEAN) && has(MASK_ZORA) && has(MASK_DEKU)"

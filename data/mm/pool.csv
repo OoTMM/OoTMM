@@ -202,6 +202,12 @@ Stone Tower Temple Inverted Giant Mask,                 chest,          TEMPLE_S
 Stone Tower Boss HC,                                    collectible,    LAIR_TWINMOLD,                0x1f, HEART_CONTAINER
 Stone Tower Boss,                                       collectible,    LAIR_TWINMOLD,                0x1e, REMAINS_TWINMOLD
 
+Secret Shrine Boss 1 Chest,   chest,        SECRET_SHRINE,  0x00, RUPEE_SILVER
+Secret Shrine Boss 2 Chest,   chest,        SECRET_SHRINE,  0x01, RUPEE_SILVER
+Secret Shrine Boss 3 Chest,   chest,        SECRET_SHRINE,  0x02, RUPEE_SILVER
+Secret Shrine Boss 4 Chest,   chest,        SECRET_SHRINE,  0x03, RUPEE_SILVER
+Secret Shrine HP Chest,       chest,        SECRET_SHRINE,  0x0a, HEART_PIECE
+
 Moon Trial Deku HP,           collectible,  MOON_DEKU,   0x01, HEART_PIECE
 Moon Trial Goron HP,          collectible,  MOON_GORON,  0x01, HEART_PIECE
 Moon Trial Zora HP,           collectible,  MOON_ZORA,   0x01, HEART_PIECE

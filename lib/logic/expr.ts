@@ -36,3 +36,4 @@ export const exprAge = (age: Age): Expr => state => state.age === age;
 export const exprHas = (item: string, count: number): Expr => state => itemCount(state, item) >= count;
 export const exprEvent = (event: string): Expr => state => state.events.has(event);
 export const exprMasks = (count: number): Expr => state => itemsCount(state, MASKS) >= count;
+export const exprHealth = (count: number): Expr => state => (3 + itemCount(state, 'MM_HEART_CONTAINER') + itemCount(state, 'MM_HEART_PIECE') / 4) >= count;
