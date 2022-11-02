@@ -154,20 +154,36 @@ const EXTRA_ITEMS = [
   'MM_SONG_HEALING',
 ];
 
+const randomInt = (random: Random, max: number) => {
+  /* Create a mask that is all 1s up to the max value */
+  let mask = max - 1;
+  mask |= mask >> 1;
+  mask |= mask >> 2;
+  mask |= mask >> 4;
+  mask |= mask >> 8;
+  mask |= mask >> 16;
+
+  for (;;) {
+    const value = random.next() & mask;
+    if (value < max) {
+      return value;
+    }
+  }
+};
+
 const sample = <T>(random: Random, arr: T[]): T => {
   if (arr.length === 0) {
     throw new Error('Empty Array');
   }
 
-  /* Biased towards low values, but that's fine */
-  const index = random.next() % arr.length;
+  const index = randomInt(random, arr.length);
   return arr[index];
 };
 
 const shuffle = <T>(random: Random, arr: T[]): T[] => {
   const copy = [...arr];
   for (let i = 0; i < copy.length; i++) {
-    const j = random.next() % copy.length;
+    const j = randomInt(random, copy.length);
     [copy[i], copy[j]] = [copy[j], copy[i]];
   }
   return copy;
