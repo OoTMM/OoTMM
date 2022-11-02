@@ -351,12 +351,18 @@
 "Ikana Canyon":
   exits:
     "Ikana Valley": "true"
+    "Ikana Fairy Fountain": "true"
     "Ikana Spring Water Cave": "true"
     "Music Box House": "event(IKANA_CURSE_LIFTED)"
     "Ghost Hut": "true"
     "Beneath the Well Entrance": "true"
     "Ancient Castle of Ikana Exterior": "has_mirror_shield"
     "Stone Tower": "true"
+"Ikana Fairy Fountain":
+  exits:
+    "Ikana Canyon": "true"
+  locations:
+    "Ikana Great Fairy": "has(STRAY_FAIRY_ST, 15)"
 "Ikana Spring Water Cave":
   exits:
     "Ikana Canyon": "true"
