@@ -245,7 +245,8 @@ typedef struct
     u32 maskStone:1;
     u32 songStorms:1;
     u32 songEmptiness:1;
-    u32 unused:8;
+    u32 maskGibdo:1;
+    u32 unused:7;
 }
 MmExtraFlags;
 
