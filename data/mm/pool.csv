@@ -82,6 +82,7 @@ Zora Cape Ledge Chest 2,                chest,          ZORA_CAPE,              
 Zora Cape Underwater Chest,             chest,          ZORA_CAPE,                  0x00,                   RUPEE_PURPLE
 Zora Cape Waterfall HP,                 collectible,    ZORA_CAPE,                  0x07,                   HEART_PIECE
 Zora Cape Grotto,                       chest,          GROTTOS,                    0x15,                   BOMBCHU
+Great Bay Fairy,                        npc,            FAIRY_FOUNTAIN,             GREAT_FAIRY_OCEAN,      DEFENSE_UPGRADE
 Zora Hall Scrub Deed,                   npc,            ZORA_HALL_ROOMS,            SCRUB_OCEAN,            DEED_OCEAN
 Zora Hall Scrub HP,                     collectible,    ZORA_HALL_ROOMS,            0x1e,                   HEART_PIECE
 Zora Hall Evan HP,                      npc,            ZORA_HALL_ROOMS,            ZORA_EVAN,              HEART_PIECE
@@ -188,6 +189,15 @@ Great Bay Temple Green Pipe 2 Lower Chest,        chest,          TEMPLE_GREAT_B
 Great Bay Temple Green Pipe 2 Upper Chest,        chest,          TEMPLE_GREAT_BAY, 0x14, STRAY_FAIRY_GB
 Great Bay Temple Green Pipe 3 Chest,              chest,          TEMPLE_GREAT_BAY, 0x16, STRAY_FAIRY_GB
 Great Bay Temple Entrance Chest,                  chest,          TEMPLE_GREAT_BAY, 0x18, STRAY_FAIRY_GB
+Great Bay Temple SF Water Wheel Platform,         sf,             TEMPLE_GREAT_BAY, 0x30, STRAY_FAIRY_GB
+Great Bay Temple SF Water Wheel Skulltula,        sf,             TEMPLE_GREAT_BAY, 0x32, STRAY_FAIRY_GB
+Great Bay Temple SF Central Room Barrel,          sf,             TEMPLE_GREAT_BAY, 0x1c, STRAY_FAIRY_GB
+Great Bay Temple SF Central Room Underwater Pot,  sf,             TEMPLE_GREAT_BAY, 0x36, STRAY_FAIRY_GB
+Great Bay Temple SF Map Room Pot,                 sf,             TEMPLE_GREAT_BAY, 0x3c, STRAY_FAIRY_GB
+Great Bay Temple SF Compass Room Pot,             sf,             TEMPLE_GREAT_BAY, 0x3a, STRAY_FAIRY_GB
+Great Bay Temple SF Green Pipe 3 Barrel,          sf,             TEMPLE_GREAT_BAY, 0x1a, STRAY_FAIRY_GB
+Great Bay Temple SF Antichamber Above Water,      sf,             TEMPLE_GREAT_BAY, 0x31, STRAY_FAIRY_GB
+Great Bay Temple SF Antichamber Underwater,       sf,             TEMPLE_GREAT_BAY, 0x2f, STRAY_FAIRY_GB
 Great Bay Temple Boss HC,                         collectible,    LAIR_GYORG,       0x1f, HEART_CONTAINER
 Great Bay Temple Boss,                            collectible,    LAIR_GYORG,       0x1e, REMAINS_GYORG
 

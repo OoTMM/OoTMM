@@ -281,12 +281,18 @@
     "Great Bay Coast": "true"
     "Zora Hall": "has(MASK_ZORA)"
     "Waterfall Rapids": "has(HOOKSHOT)"
+    "Great Bay Fairy Fountain": "has(MASK_ZORA) && has(HOOKSHOT) && has_explosives"
   locations:
     "Zora Cape Ledge Chest 1": "has(HOOKSHOT)"
     "Zora Cape Ledge Chest 2": "has(HOOKSHOT)"
     "Zora Cape Underwater Chest": "has(MASK_ZORA)"
     "Zora Cape Waterfall HP": "has(MASK_ZORA)"
     "Zora Cape Grotto": "has_explosives"
+"Great Bay Fairy Fountain":
+  exits:
+    "Zora Cape": "true"
+  locations:
+    "Great Bay Fairy": "has(STRAY_FAIRY_GB, 15)"
 "Waterfall Rapids":
   exits:
     "Zora Cape": "true"
