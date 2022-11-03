@@ -17,6 +17,8 @@
     "Snowhead Temple Center Level 1": "true"
   locations:
     "Snowhead Temple Bridge Room": "can_use_fire_arrows"
+    "Snowhead Temple SF Bridge Under Platform": "has(MASK_GORON) && has(BOW) && has(MASK_GREAT_FAIRY)"
+    "Snowhead Temple SF Bridge Pillar": "can_use_lens && has(BOW) && has(MASK_GREAT_FAIRY)"
 "Snowhead Temple Map Room":
   dungeon: SH
   exits:
@@ -24,6 +26,7 @@
     "Snowhead Temple Map Room Upper": "can_use_fire_arrows"
   locations:
     "Snowhead Temple Map": "true"
+    "Snowhead Temple SF Map Room": "true"
 "Snowhead Temple Map Room Upper":
   dungeon: SH
   exits:
@@ -67,6 +70,7 @@
     "Snowhead Temple Compass": "true"
     "Snowhead Temple Compass Room Ledge": "can_use_fire_arrows"
     "Snowhead Temple Block Room Ledge": "can_use_fire_arrows"
+    "Snowhead Temple SF Compass Room Crate": "has(BOMB_BAG)"
 "Snowhead Temple Icicles":
   dungeon: SH
   exits:
@@ -80,6 +84,8 @@
   exits:
     "Snowhead Temple Icicles": "has(SMALL_KEY_SH, 3)"
     "Snowhead Temple Center Level 2": "true"
+  locations:
+    "Snowhead Temple SF Dual Switches": "can_use_lens && has(BOW) && has(MASK_GREAT_FAIRY)"
 "Snowhead Temple Center Level 2":
   dungeon: SH
   exits:
@@ -101,11 +107,16 @@
   exits:
     "Snowhead Temple Center Level 3": "has(SMALL_KEY_SH, 3)"
     "Snowhead Temple Dinofol Room": "true"
+  locations:
+    "Snowhead Temple SF Snow Room": "can_use_lens && has(BOW) && has(MASK_GREAT_FAIRY)"
 "Snowhead Temple Dinofol Room":
   dungeon: SH
   exits:
     "Snowhead Snow Room": "true"
     "Snowhead Temple Center Level 4": "event(SNOWHEAD_RAISE_PILLAR)"
+  locations:
+    "Snowhead Temple SF Dinolfos 1": "true"
+    "Snowhead Temple SF Dinolfos 2": "true"
 "Snowhead Temple Center Level 4":
   dungeon: SH
   exits:

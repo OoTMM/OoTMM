@@ -206,6 +206,12 @@
   exits:
     "Path to Snowhead": "true"
     "Snowhead Temple Entrance": "has(MASK_GORON)"
+    "Snowhead Great Fairy Fountain": "has(MASK_GORON)"
+"Snowhead Great Fairy Fountain":
+  exits:
+    "Snowhead": "true"
+  locations:
+    "Snowhead Great Fairy": "has(STRAY_FAIRY_SH, 15)"
 "Goron Race":
   exits:
     "Goron Village Path": "true"
