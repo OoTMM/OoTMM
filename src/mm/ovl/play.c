@@ -26,7 +26,6 @@ static void debugCheat(GameState_Play* play)
         gMmSave.playerData.magicAcquired = 1;
         gSaveContext.magicTarget = 0x30;
         gSave.inventory.items[ITS_MM_MASK_GORON] = ITEM_MM_MASK_GORON;
-        gSave.inventory.items[ITS_MM_TRADE1] = ITEM_MM_DEED_SWAMP;
         gSave.inventory.ammo[ITS_MM_BOW] = 50;
         gSave.inventory.items[ITS_MM_ARROW_FIRE] = ITEM_MM_ARROW_FIRE;
         gSave.inventory.questItems.songLullabyIntro = 1;
@@ -35,6 +34,14 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.items[ITS_MM_MASK_CAPTAIN] = ITEM_MM_MASK_CAPTAIN;
         gSave.playerData.healthCapacity = 0x10 * 20;
         gSave.playerData.health = gSave.playerData.healthCapacity;
+
+        gMmExtraTrade.trade1 = 0xffff;
+        gMmExtraTrade.trade2 = 0xffff;
+        gMmExtraTrade.trade3 = 0xffff;
+
+        gSave.inventory.items[ITS_MM_TRADE1] = ITEM_MM_DEED_SWAMP;
+        gSave.inventory.items[ITS_MM_TRADE2] = ITEM_MM_ROOM_KEY;
+        gSave.inventory.items[ITS_MM_TRADE3] = ITEM_MM_PENDANT_OF_MEMORIES;
     }
 #endif
 }
