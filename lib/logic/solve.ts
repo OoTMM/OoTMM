@@ -164,7 +164,7 @@ const randomInt = (random: Random, max: number) => {
   mask |= mask >> 16;
 
   for (;;) {
-    const value = random.next() & mask;
+    const value = (random.next() >>> 8) & mask;
     if (value < max) {
       return value;
     }
