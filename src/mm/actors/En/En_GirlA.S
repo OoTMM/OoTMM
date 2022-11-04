@@ -26,3 +26,24 @@ PATCH_START 0x808648e8
   j EnGirlA_PostHandler_Trampoline
    nop
 PATCH_END
+
+/* Always allow the Bomb Bag to be bought */
+PATCH_START 0x80863d8c
+  li at,1
+PATCH_END
+
+PATCH_START 0x80863df0
+  li t7,0
+PATCH_END
+
+PATCH_START 0x80863e08
+  li at,1
+PATCH_END
+
+PATCH_START 0x80863e70
+  li t7,0
+PATCH_END
+
+PATCH_START 0x80863e84
+  li t9,0
+PATCH_END
