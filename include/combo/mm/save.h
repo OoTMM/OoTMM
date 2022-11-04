@@ -251,11 +251,20 @@ typedef struct
 }
 MmExtraFlags;
 
+typedef struct
+{
+    u32 shopBombBag:1;
+    u32 shopBombBag2:1;
+    u32 unused:30;
+}
+MmExtraFlags2;
+
 #define MM_PLAYER_FORM_ZORA     2
 #define MM_PLAYER_FORM_HUMAN    4
 
 #define gMmSaveBoss     (gMmSave.permanentSceneFlags[1].unk_14)
 #define gMmExtraTrade   (*((MmExtraTrade*)(gMmSave.permanentSceneFlags[2].raw + 0x14)))
 #define gMmExtraFlags   (*((MmExtraFlags*)(gMmSave.permanentSceneFlags[3].raw + 0x14)))
+#define gMmExtraFlags2  (*((MmExtraFlags2*)(gMmSave.permanentSceneFlags[4].raw + 0x14)))
 
 #endif /* MM_SAVE_H */
