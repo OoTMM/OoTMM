@@ -17,6 +17,7 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.items[ITS_MM_LENS] = ITEM_MM_LENS_OF_TRUTH;
         gSave.inventory.upgrades.quiver = 3;
         gSave.inventory.upgrades.wallet = 2;
+        gSave.inventory.upgrades.bombBag = 3;
         gSave.playerData.rupees = 500;
         gSave.inventory.questItems.songHealing = 1;
         gSave.inventory.questItems.songTime = 1;

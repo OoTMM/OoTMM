@@ -9,7 +9,7 @@ typedef void (*EntryPoint)(void)  __attribute__ ((noreturn));
 #else
 # define FOREIGN_OFF    0x400
 # define FOREIGN_CART   0x10001000
-# define FOREIGN_SIZE   0x63d0
+# define FOREIGN_SIZE   0x6430
 #endif
 #define FOREIGN_DRAM   (0x80000000 | FOREIGN_OFF)
 
