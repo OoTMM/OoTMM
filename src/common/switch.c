@@ -5,9 +5,11 @@ typedef void (*EntryPoint)(void)  __attribute__ ((noreturn));
 #if defined(GAME_OOT)
 # define FOREIGN_OFF    0x80000
 # define FOREIGN_CART   (0x10001000 | MM_BASE)
+# define FOREIGN_SIZE   0x19500
 #else
 # define FOREIGN_OFF    0x400
 # define FOREIGN_CART   0x10001000
+# define FOREIGN_SIZE   0x63d0
 #endif
 #define FOREIGN_DRAM   (0x80000000 | FOREIGN_OFF)
 
@@ -53,9 +55,9 @@ void comboGameSwitch(void)
     comboWriteSave();
     comboDisableInterrupts();
     waitSubsystems();
-    osInvalICache((void*)FOREIGN_DRAM, 0x100000);
-    osInvalDCache((void*)FOREIGN_DRAM, 0x100000);
-    comboDma_NoCacheInval((void*)FOREIGN_OFF, FOREIGN_CART, 0x100000);
+    osInvalICache((void*)FOREIGN_DRAM, FOREIGN_SIZE);
+    osInvalDCache((void*)FOREIGN_DRAM, FOREIGN_SIZE);
+    comboDma_NoCacheInval((void*)FOREIGN_OFF, FOREIGN_CART, FOREIGN_SIZE);
     comboExportContext();
     ((EntryPoint)FOREIGN_DRAM)();
 }
