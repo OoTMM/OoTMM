@@ -29,6 +29,7 @@
 #  include <combo/mm/player.h>
 #  include <combo/mm/actor_engirla.h>
 #  include <combo/mm/actor_ensob1.h>
+#  include <combo/mm/actor_enfsn.h>
 # endif
 
 # include <combo/common/actor.h>

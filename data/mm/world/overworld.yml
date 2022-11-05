@@ -21,6 +21,7 @@
   exits:
     "Clock Town": "true"
     "Bomb Shop": "true"
+    "Curiosity Shop": "true"
     "Termina Field": "true"
   locations:
     "Clock Town Bank Reward 1": "true"
@@ -32,6 +33,12 @@
   locations:
     "Bomb Shop Bomb Bag": "true"
     "Bomb Shop Bomb Bag 2": "event(SAKON_BOMB_BAG)"
+"Curiosity Shop":
+  exits:
+    "Clock Town West": "true"
+  locations:
+    "Bomb Shop Bomb Bag 2": "has(WALLET, 1)"
+    "Curiosity Shop All-Night Mask": "event(SAKON_BOMB_BAG) && has(WALLET, 2)"
 "Town Archery":
   exits:
     "Clock Town": "true"

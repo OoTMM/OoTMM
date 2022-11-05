@@ -4,8 +4,10 @@ static int itemPrice(Actor_EnGirlA* girlA)
 {
     switch (girlA->base.variable)
     {
+    case 0x14:
     case 0x17:
         return 50;
+    case 0x15:
     case 0x18:
         return 90;
     case 0x19:
