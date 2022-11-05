@@ -4,7 +4,7 @@
     "Termina Field": "true"
     "Clock Tower Rooftop": "true"
     "Astral Observatory": "event(BOMBER_CODE)"
-    "Bomb Shop": "true"
+    "Clock Town West": "true"
   events:
     FROG_1: "has(MASK_DON_GERO)"
     BOMBER_CODE: "(has(MASK_DEKU) && has(MAGIC_UPGRADE)) || has(MASK_ZORA) || has(BOW)"
@@ -17,9 +17,18 @@
     "Clock Town Great Fairy": "true"
     "Clock Town Great Fairy Alt": "has(MASK_DEKU) || has(MASK_GORON) || has(MASK_ZORA)"
     "Clock Town Business Scrub": "has(MOON_TEAR)"
-"Bomb Shop":
+"Clock Town West":
   exits:
     "Clock Town": "true"
+    "Bomb Shop": "true"
+    "Termina Field": "true"
+  locations:
+    "Clock Town Bank Reward 1": "true"
+    "Clock Town Bank Reward 2": "true"
+    "Clock Town Bank Reward 3": "true"
+"Bomb Shop":
+  exits:
+    "Clock Town West": "true"
   locations:
     "Bomb Shop Bomb Bag": "true"
     "Bomb Shop Bomb Bag 2": "event(SAKON_BOMB_BAG)"

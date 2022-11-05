@@ -247,7 +247,7 @@ typedef struct
     u32 songEmptiness:1;
     u32 maskGibdo:1;
     u32 greatFairies:6;
-    u32 unused:1;
+    u32 bankReward2:1;
 }
 MmExtraFlags;
 

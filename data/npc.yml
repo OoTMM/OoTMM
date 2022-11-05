@@ -137,3 +137,6 @@ MM_GREAT_FAIRY_SWAMP:         0x38
 MM_GREAT_FAIRY_MOUNTAIN:      0x39
 MM_GREAT_FAIRY_OCEAN:         0x3a
 MM_GREAT_FAIRY_VALLEY:        0x3b
+MM_BANK_1:                    0x3c
+MM_BANK_2:                    0x3d
+MM_BANK_3:                    0x3e
