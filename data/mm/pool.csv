@@ -18,7 +18,8 @@ Astral Observatory Moon Tear,           npc,            OBSERVATORY,            
 Bomb Shop Bomb Bag,                     npc,            BOMB_SHOP,                  SHOP_BOMB_BAG,          BOMB_BAG
 Bomb Shop Bomb Bag 2,                   npc,            BOMB_SHOP,                  SHOP_BOMB_BAG2,         BOMB_BAG
 Curiosity Shop All-Night Mask,          npc,            CURIOSITY_SHOP,             MASK_ALL_NIGHT,         MASK_ALL_NIGHT
-Post Office Heart Piece,                npc,            POST_OFFICE,                POSTMAN_HEART_PIECE,    HEART_PIECE
+Post Office HP,                         npc,            POST_OFFICE,                POSTMAN_HEART_PIECE,    HEART_PIECE
+Swordsman School HP,                    npc,            SWORDSMAN_SCHOOL,           SWORDSMAN_HEART_PIECE,  HEART_PIECE
 Termina Field Water Chest,              chest,          TERMINA_FIELD,              0x00,                   RUPEE_RED
 Termina Field Tall Grass Chest,         chest,          TERMINA_FIELD,              0x01,                   RUPEE_RED
 Termina Field Tree Stump Chest,         chest,          TERMINA_FIELD,              0x02,                   RUPEE_RED

@@ -3,7 +3,6 @@
     "Town Archery": "true"
     "Termina Field": "true"
     "Clock Tower Rooftop": "true"
-    "Astral Observatory": "event(BOMBER_CODE)"
     "Clock Town West": "true"
   events:
     FROG_1: "has(MASK_DON_GERO)"
@@ -23,6 +22,8 @@
     "Bomb Shop": "true"
     "Curiosity Shop": "true"
     "Post Office": "true"
+    "Swordsman School": "true"
+    "Astral Observatory": "event(BOMBER_CODE)"
     "Termina Field": "true"
   locations:
     "Clock Town Bank Reward 1": "true"
@@ -45,7 +46,12 @@
   exits:
     "Clock Town West": "true"
   locations:
-    "Post Office Heart Piece": "has(MASK_BUNNY)"
+    "Post Office HP": "has(MASK_BUNNY)"
+"Swordsman School":
+  exits:
+    "Clock Town West": "true"
+  locations:
+    "Swordsman School HP": "has(SWORD)"
 "Town Archery":
   exits:
     "Clock Town": "true"
@@ -54,7 +60,7 @@
     "Town Archery Reward 2": "has(BOW)"
 "Astral Observatory":
   exits:
-    "Clock Town": "true"
+    "Clock Town West": "true"
   locations:
     "Astral Observatory Passage Chest": "has_explosives"
     "Astral Observatory Moon Tear": "true"
