@@ -256,7 +256,8 @@ typedef struct
     u32 shopBombBag:1;
     u32 shopBombBag2:1;
     u32 maskAllNight:1;
-    u32 unused:29;
+    u32 maskKafei:1;
+    u32 unused:28;
 }
 MmExtraFlags2;
 

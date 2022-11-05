@@ -35,6 +35,7 @@ Actor* hookSpawnActorEx(void* const_1, GameState_Play* play, s16 actorId, float 
 int EnGo_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b);
 int EnDnh_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b);
 int EnShn_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b);
+int EnAl_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b);
 
 static int Actor_ByteCode_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
 {
@@ -46,6 +47,8 @@ static int Actor_ByteCode_GiveItem(Actor* actor, GameState_Play* play, s16 gi, f
         return EnDnh_GiveItem(actor, play, gi, a, b);
     case 0x1c5:
         return EnShn_GiveItem(actor, play, gi, a, b);
+    case 0x262:
+        return EnAl_GiveItem(actor, play, gi, a, b);
     default:
         return GiveItem(actor, play, gi, a, b);
     }

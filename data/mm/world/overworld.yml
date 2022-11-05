@@ -1,9 +1,9 @@
 "Clock Town":
   exits:
-    "Town Archery": "true"
     "Termina Field": "true"
     "Clock Tower Rooftop": "true"
     "Clock Town West": "true"
+    "Clock Town East": "true"
   events:
     FROG_1: "has(MASK_DON_GERO)"
     BOMBER_CODE: "(has(MASK_DEKU) && has(MAGIC_UPGRADE)) || has(MASK_ZORA) || has(BOW)"
@@ -11,7 +11,6 @@
   locations:
     "Clock Town Platform HP": "true"
     "Clock Town Tree HP": "true"
-    "Clock Town Silver Rupee Chest": "true"
     "Clock Town Guru Guru Mask Bremen": "true"
     "Clock Town Great Fairy": "true"
     "Clock Town Great Fairy Alt": "has(MASK_DEKU) || has(MASK_GORON) || has(MASK_ZORA)"
@@ -23,13 +22,20 @@
     "Curiosity Shop": "true"
     "Post Office": "true"
     "Swordsman School": "true"
-    "Astral Observatory": "event(BOMBER_CODE)"
     "Termina Field": "true"
   locations:
     "Clock Town Bank Reward 1": "true"
     "Clock Town Bank Reward 2": "true"
     "Clock Town Bank Reward 3": "true"
     "Clock Town Rosa Sisters HP": "has(MASK_KAMARO)"
+"Clock Town East":
+  exits:
+    "Clock Town": "true"
+    "Mayor's Office": "true"
+    "Town Archery": "true"
+    "Astral Observatory": "event(BOMBER_CODE)"
+  locations:
+    "Clock Town Silver Rupee Chest": "true"
 "Bomb Shop":
   exits:
     "Clock Town West": "true"
@@ -52,15 +58,20 @@
     "Clock Town West": "true"
   locations:
     "Swordsman School HP": "has(SWORD)"
+"Mayor's Office":
+  exits:
+    "Clock Town East": "true"
+  locations:
+    "Mayor's Office Kafei's Mask": "true"
 "Town Archery":
   exits:
-    "Clock Town": "true"
+    "Clock Town East": "true"
   locations:
     "Town Archery Reward 1": "has(BOW)"
     "Town Archery Reward 2": "has(BOW)"
 "Astral Observatory":
   exits:
-    "Clock Town West": "true"
+    "Clock Town East": "true"
   locations:
     "Astral Observatory Passage Chest": "has_explosives"
     "Astral Observatory Moon Tear": "true"
