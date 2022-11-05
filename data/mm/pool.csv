@@ -19,6 +19,7 @@ Honey & Darling Reward 1,               npc,            HONEY_DARLING,          
 Honey & Darling Reward 2,               npc,            HONEY_DARLING,              HONEY_DARLING_2,        HEART_PIECE
 Stock Pot Inn Guest Room Chest,         chest,          STOCK_POT_INN,              0x00,                   RUPEE_SILVER
 Stock Pot Inn Room Key,                 npc,            STOCK_POT_INN,              ROOM_KEY,               ROOM_KEY
+Stock Pot Inn Letter to Kafei,          npc,            STOCK_POT_INN,              LETTER_TO_KAFEI,        LETTER_TO_KAFEI
 Astral Observatory Passage Chest,       chest,          OBSERVATORY,                0x00,                   RUPEE_SILVER
 Astral Observatory Moon Tear,           npc,            OBSERVATORY,                MOON_TEAR,              MOON_TEAR
 Bomb Shop Bomb Bag,                     npc,            BOMB_SHOP,                  SHOP_BOMB_BAG,          BOMB_BAG
