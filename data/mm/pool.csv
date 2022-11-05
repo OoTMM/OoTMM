@@ -17,6 +17,7 @@ Town Archery Reward 2,                  npc,            SHOOTING_GALLERY,       
 Chest Game HP,                          npc,            TREASURE_SHOP,              CHEST_GAME,             HEART_PIECE
 Honey & Darling Reward 1,               npc,            HONEY_DARLING,              HONEY_DARLING_1,        RUPEE_PURPLE
 Honey & Darling Reward 2,               npc,            HONEY_DARLING,              HONEY_DARLING_2,        HEART_PIECE
+Stock Pot Inn Guest Room Chest,         chest,          STOCK_POT_INN,              0x00,                   RUPEE_SILVER
 Stock Pot Inn Room Key,                 npc,            STOCK_POT_INN,              ROOM_KEY,               ROOM_KEY
 Astral Observatory Passage Chest,       chest,          OBSERVATORY,                0x00,                   RUPEE_SILVER
 Astral Observatory Moon Tear,           npc,            OBSERVATORY,                MOON_TEAR,              MOON_TEAR

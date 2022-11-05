@@ -87,6 +87,7 @@
   exits:
     "Clock Town East": "true"
   locations:
+    "Stock Pot Inn Guest Room Chest": "has(ROOM_KEY)"
     "Stock Pot Inn Room Key": "true"
 "Astral Observatory":
   exits:

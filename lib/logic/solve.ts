@@ -130,6 +130,7 @@ export const ITEMS_REQUIRED = new Set<string>([
   'MM_DEED_SWAMP',
   'MM_DEED_MOUNTAIN',
   'MM_DEED_OCEAN',
+  'MM_ROOM_KEY',
   'MM_WALLET',
   'MM_HEART_PIECE',
   'MM_HEART_CONTAINER',
