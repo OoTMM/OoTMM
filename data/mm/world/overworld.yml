@@ -22,6 +22,7 @@
     "Clock Town": "true"
     "Bomb Shop": "true"
     "Curiosity Shop": "true"
+    "Post Office": "true"
     "Termina Field": "true"
   locations:
     "Clock Town Bank Reward 1": "true"
@@ -39,6 +40,11 @@
   locations:
     "Bomb Shop Bomb Bag 2": "has(WALLET, 1)"
     "Curiosity Shop All-Night Mask": "event(SAKON_BOMB_BAG) && has(WALLET, 2)"
+"Post Office":
+  exits:
+    "Clock Town West": "true"
+  locations:
+    "Post Office Heart Piece": "has(MASK_BUNNY)"
 "Town Archery":
   exits:
     "Clock Town": "true"

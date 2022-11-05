@@ -141,3 +141,4 @@ MM_BANK_1:                    0x3c
 MM_BANK_2:                    0x3d
 MM_BANK_3:                    0x3e
 MM_MASK_ALL_NIGHT:            0x3f
+MM_POSTMAN_HEART_PIECE:       0x40
