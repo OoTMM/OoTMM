@@ -33,6 +33,7 @@
     "Clock Town": "true"
     "Mayor's Office": "true"
     "Town Archery": "true"
+    "Chest Game": "true"
     "Astral Observatory": "event(BOMBER_CODE)"
   locations:
     "Clock Town Silver Rupee Chest": "true"
@@ -69,6 +70,11 @@
   locations:
     "Town Archery Reward 1": "has(BOW)"
     "Town Archery Reward 2": "has(BOW)"
+"Chest Game":
+  exits:
+    "Clock Town East": "true"
+  locations:
+    "Chest Game HP": "has(MASK_GORON)"
 "Astral Observatory":
   exits:
     "Clock Town East": "true"

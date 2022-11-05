@@ -14,6 +14,7 @@ Clock Town Great Fairy Alt,             npc,            FAIRY_FOUNTAIN,         
 Mayor's Office Kafei's Mask,            npc,            MAYOR_HOUSE,                MASK_KAFEI,             MASK_KAFEI
 Town Archery Reward 1,                  npc,            SHOOTING_GALLERY,           SHOOTING_GAME_TOWN_1,   BOW
 Town Archery Reward 2,                  npc,            SHOOTING_GALLERY,           SHOOTING_GAME_TOWN_2,   HEART_PIECE
+Chest Game HP,                          npc,            TREASURE_SHOP,              CHEST_GAME,             HEART_PIECE
 Astral Observatory Passage Chest,       chest,          OBSERVATORY,                0x00,                   RUPEE_SILVER
 Astral Observatory Moon Tear,           npc,            OBSERVATORY,                MOON_TEAR,              MOON_TEAR
 Bomb Shop Bomb Bag,                     npc,            BOMB_SHOP,                  SHOP_BOMB_BAG,          BOMB_BAG
