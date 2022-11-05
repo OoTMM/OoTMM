@@ -34,6 +34,7 @@
     "Mayor's Office": "true"
     "Town Archery": "true"
     "Chest Game": "true"
+    "Honey & Darling Game": "true"
     "Astral Observatory": "event(BOMBER_CODE)"
   locations:
     "Clock Town Silver Rupee Chest": "true"
@@ -75,6 +76,12 @@
     "Clock Town East": "true"
   locations:
     "Chest Game HP": "has(MASK_GORON)"
+"Honey & Darling Game":
+  exits:
+    "Clock Town East": "true"
+  locations:
+    "Honey & Darling Reward 1": "has(BOW) || has(BOMB_BAG)"
+    "Honey & Darling Reward 2": "has(BOW) && has(BOMB_BAG)"
 "Astral Observatory":
   exits:
     "Clock Town East": "true"
