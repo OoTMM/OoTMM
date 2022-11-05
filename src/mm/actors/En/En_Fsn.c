@@ -25,3 +25,13 @@ int EnFsn_HasGivenShopItem(Actor_EnFsn* this, GameState_Play* play)
 }
 
 PATCH_CALL(0x80ae3be0, EnFsn_HasGivenShopItem);
+
+void EnFsn_DisplayTextBox(GameState_Play* play, Actor_EnGirlA* girlA)
+{
+    comboShopDisplayTextBox(play, girlA, itemPrice(girlA));
+}
+
+void EnFsn_DisplayTextBoxConfirm(GameState_Play* play, Actor_EnGirlA* girlA)
+{
+    comboShopDisplayTextBoxConfirm(play, girlA, itemPrice(girlA));
+}
