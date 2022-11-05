@@ -28,6 +28,7 @@
     "Clock Town Bank Reward 1": "true"
     "Clock Town Bank Reward 2": "true"
     "Clock Town Bank Reward 3": "true"
+    "Clock Town Rosa Sisters HP": "has(MASK_KAMARO)"
 "Bomb Shop":
   exits:
     "Clock Town West": "true"
