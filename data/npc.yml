@@ -148,3 +148,4 @@ MM_MASK_KAFEI:                0x43
 MM_CHEST_GAME:                0x44
 MM_HONEY_DARLING_1:           0x45
 MM_HONEY_DARLING_2:           0x46
+MM_ROOM_KEY:                  0x47

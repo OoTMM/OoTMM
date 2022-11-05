@@ -258,10 +258,12 @@ typedef struct
     u32 maskAllNight:1;
     u32 maskKafei:1;
     u32 honeyDarling:1;
-    u32 unused:27;
+    u32 roomKey:1;
+    u32 unused:26;
 }
 MmExtraFlags2;
 
+#define MM_PLAYER_FORM_GORON    1
 #define MM_PLAYER_FORM_ZORA     2
 #define MM_PLAYER_FORM_HUMAN    4
 

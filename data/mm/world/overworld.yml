@@ -35,6 +35,7 @@
     "Town Archery": "true"
     "Chest Game": "true"
     "Honey & Darling Game": "true"
+    "Stock Pot Inn": "true"
     "Astral Observatory": "event(BOMBER_CODE)"
   locations:
     "Clock Town Silver Rupee Chest": "true"
@@ -82,6 +83,11 @@
   locations:
     "Honey & Darling Reward 1": "has(BOW) || has(BOMB_BAG)"
     "Honey & Darling Reward 2": "has(BOW) && has(BOMB_BAG)"
+"Stock Pot Inn":
+  exits:
+    "Clock Town East": "true"
+  locations:
+    "Stock Pot Inn Room Key": "true"
 "Astral Observatory":
   exits:
     "Clock Town East": "true"
