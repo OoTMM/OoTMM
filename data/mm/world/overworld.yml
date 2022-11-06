@@ -21,6 +21,7 @@
     "Clock Town Tree HP": "true"
     "Clock Town Bomber Notebook": "event(BOMBER_CODE)"
     "Clock Town Blast Mask": "event(SAKON_BOMB_BAG)"
+    "Clock Town Keaton HP": "has(MASK_KEATON)"
 "Clock Town West":
   exits:
     "Termina Field": "true"
