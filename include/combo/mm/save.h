@@ -262,7 +262,8 @@ typedef struct
     u32 letterKafei:1;
     u32 pendant:1;
     u32 letterMama:1;
-    u32 unused:23;
+    u32 notebook:1;
+    u32 unused:22;
 }
 MmExtraFlags2;
 

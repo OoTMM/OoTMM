@@ -1,27 +1,33 @@
-"Clock Town":
+"Clock Town South":
   exits:
     "Termina Field": "true"
     "Clock Tower Rooftop": "true"
+    "Clock Town North": "true"
     "Clock Town West": "true"
     "Clock Town East": "true"
     "Clock Town Laundry Pool": "true"
+  locations:
+    "Clock Town Platform HP": "true"
+    "Clock Town Business Scrub": "has(MOON_TEAR)"
+"Clock Town North":
+  exits:
+    "Termina Field": "true"
+    "Clock Town South": "true"
+    "Clock Town Fairy Fountain": "true"
   events:
     BOMBER_CODE: "(has(MASK_DEKU) && has(MAGIC_UPGRADE)) || has(MASK_ZORA) || has(BOW)"
     SAKON_BOMB_BAG: "has_weapon"
   locations:
-    "Clock Town Platform HP": "true"
     "Clock Town Tree HP": "true"
-    "Clock Town Great Fairy": "true"
-    "Clock Town Great Fairy Alt": "has(MASK_DEKU) || has(MASK_GORON) || has(MASK_ZORA)"
-    "Clock Town Business Scrub": "has(MOON_TEAR)"
+    "Clock Town Bomber Notebook": "event(BOMBER_CODE)"
 "Clock Town West":
   exits:
-    "Clock Town": "true"
+    "Termina Field": "true"
+    "Clock Town South": "true"
     "Bomb Shop": "true"
     "Curiosity Shop": "true"
     "Post Office": "true"
     "Swordsman School": "true"
-    "Termina Field": "true"
   locations:
     "Clock Town Bank Reward 1": "true"
     "Clock Town Bank Reward 2": "true"
@@ -29,7 +35,8 @@
     "Clock Town Rosa Sisters HP": "has(MASK_KAMARO)"
 "Clock Town East":
   exits:
-    "Clock Town": "true"
+    "Termina Field": "true"
+    "Clock Town South": "true"
     "Mayor's Office": "true"
     "Town Archery": "true"
     "Chest Game": "true"
@@ -40,12 +47,18 @@
     "Clock Town Silver Rupee Chest": "true"
 "Clock Town Laundry Pool":
   exits:
-    "Clock Town": "true"
+    "Clock Town South": "true"
     "Curiosity Shop Back Room": "has(LETTER_TO_KAFEI)"
   events:
     FROG_1: "has(MASK_DON_GERO)"
   locations:
     "Clock Town Guru Guru Mask Bremen": "true"
+"Clock Town Fairy Fountain":
+  exits:
+    "Clock Town North": "true"
+  locations:
+    "Clock Town Great Fairy": "true"
+    "Clock Town Great Fairy Alt": "has(MASK_DEKU) || has(MASK_GORON) || has(MASK_ZORA)"
 "Bomb Shop":
   exits:
     "Clock Town West": "true"
@@ -112,7 +125,10 @@
     "Astral Observatory Moon Tear": "true"
 "Termina Field":
   exits:
-    "Clock Town": "true"
+    "Clock Town South": "true"
+    "Clock Town North": "true"
+    "Clock Town East": "true"
+    "Clock Town West": "true"
     "Road to Southern Swamp": "true"
     "Mountain Village Path": "has(BOW)"
     "Milk Road": "true"
