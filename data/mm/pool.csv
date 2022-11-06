@@ -33,6 +33,8 @@ Curiosity Shop Back Room Owner Reward 1,        npc,            CURIOSITY_SHOP, 
 Curiosity Shop Back Room Owner Reward 2,        npc,            CURIOSITY_SHOP,             LETTER_TO_MAMA,         LETTER_TO_MAMA
 Post Office HP,                                 npc,            POST_OFFICE,                POSTMAN_HEART_PIECE,    HEART_PIECE
 Swordsman School HP,                            npc,            SWORDSMAN_SCHOOL,           SWORDSMAN_HEART_PIECE,  HEART_PIECE
+Deku Playground Reward 1,                       npc,            DEKU_PLAYGROUND,            DEKU_PLAYGROUND_1,      RUPEE_PURPLE
+Deku Playground Reward 2,                       npc,            DEKU_PLAYGROUND,            DEKU_PLAYGROUND_2,      HEART_PIECE
 Termina Field Water Chest,                      chest,          TERMINA_FIELD,              0x00,                   RUPEE_RED
 Termina Field Tall Grass Chest,                 chest,          TERMINA_FIELD,              0x01,                   RUPEE_RED
 Termina Field Tree Stump Chest,                 chest,          TERMINA_FIELD,              0x02,                   RUPEE_RED

@@ -14,6 +14,7 @@
     "Termina Field": "true"
     "Clock Town South": "true"
     "Clock Town Fairy Fountain": "true"
+    "Deku Playground": "has(MASK_DEKU)"
   events:
     BOMBER_CODE: "(has(MASK_DEKU) && has(MAGIC_UPGRADE)) || has(MASK_ZORA) || has(BOW)"
     SAKON_BOMB_BAG: "has_weapon"
@@ -119,6 +120,12 @@
     "Stock Pot Inn Guest Room Chest": "has(ROOM_KEY)"
     "Stock Pot Inn Room Key": "true"
     "Stock Pot Inn Letter to Kafei": "has(MASK_KAFEI)"
+"Deku Playground":
+  exits:
+    "Clock Town North": "true"
+  locations:
+    "Deku Playground Reward 1": "has(MASK_DEKU)"
+    "Deku Playground Reward 2": "has(MASK_DEKU)"
 "Astral Observatory":
   exits:
     "Clock Town East": "true"
