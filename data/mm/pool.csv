@@ -26,6 +26,8 @@ Bomb Shop Bomb Bag,                             npc,            BOMB_SHOP,      
 Bomb Shop Bomb Bag 2,                           npc,            BOMB_SHOP,                  SHOP_BOMB_BAG2,         BOMB_BAG
 Curiosity Shop All-Night Mask,                  npc,            CURIOSITY_SHOP,             MASK_ALL_NIGHT,         MASK_ALL_NIGHT
 Curiosity Shop Back Room Pendant of Memories,   npc,            CURIOSITY_SHOP,             PENDANT_OF_MEMORIES,    PENDANT_OF_MEMORIES
+Curiosity Shop Back Room Owner Reward 1,        npc,            CURIOSITY_SHOP,             MASK_KEATON,            MASK_KEATON
+Curiosity Shop Back Room Owner Reward 2,        npc,            CURIOSITY_SHOP,             LETTER_TO_MAMA,         LETTER_TO_MAMA
 Post Office HP,                                 npc,            POST_OFFICE,                POSTMAN_HEART_PIECE,    HEART_PIECE
 Swordsman School HP,                            npc,            SWORDSMAN_SCHOOL,           SWORDSMAN_HEART_PIECE,  HEART_PIECE
 Termina Field Water Chest,                      chest,          TERMINA_FIELD,              0x00,                   RUPEE_RED

@@ -261,7 +261,8 @@ typedef struct
     u32 roomKey:1;
     u32 letterKafei:1;
     u32 pendant:1;
-    u32 unused:24;
+    u32 letterMama:1;
+    u32 unused:23;
 }
 MmExtraFlags2;
 

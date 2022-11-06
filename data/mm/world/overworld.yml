@@ -63,6 +63,8 @@
     "Clock Town Laundry Pool": "true"
   locations:
     "Curiosity Shop Back Room Pendant of Memories": "true"
+    "Curiosity Shop Back Room Owner Reward 1": "true"
+    "Curiosity Shop Back Room Owner Reward 2": "true"
 "Post Office":
   exits:
     "Clock Town West": "true"

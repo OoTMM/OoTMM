@@ -40,3 +40,8 @@ PATCH_START 0x80ae291c
   jal EnFsn_DisplayTextBoxConfirm
    move a1,t1
 PATCH_END
+
+/* Disable check for keaton mask */
+PATCH_START 0x80ae1cec
+  li t5,0xff
+PATCH_END
