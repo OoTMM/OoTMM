@@ -50,3 +50,10 @@ PATCH_END
 PATCH_START 0x8083d274
   xori at,v0,0xba
 PATCH_END
+
+/* Disable special cases */
+PATCH_START 0x800b8aac
+  nop
+  nop
+  nop
+PATCH_END

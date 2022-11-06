@@ -260,7 +260,8 @@ typedef struct
     u32 honeyDarling:1;
     u32 roomKey:1;
     u32 letterKafei:1;
-    u32 unused:25;
+    u32 pendant:1;
+    u32 unused:24;
 }
 MmExtraFlags2;
 

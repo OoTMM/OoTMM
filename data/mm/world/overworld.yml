@@ -4,14 +4,13 @@
     "Clock Tower Rooftop": "true"
     "Clock Town West": "true"
     "Clock Town East": "true"
+    "Clock Town Laundry Pool": "true"
   events:
-    FROG_1: "has(MASK_DON_GERO)"
     BOMBER_CODE: "(has(MASK_DEKU) && has(MAGIC_UPGRADE)) || has(MASK_ZORA) || has(BOW)"
     SAKON_BOMB_BAG: "has_weapon"
   locations:
     "Clock Town Platform HP": "true"
     "Clock Town Tree HP": "true"
-    "Clock Town Guru Guru Mask Bremen": "true"
     "Clock Town Great Fairy": "true"
     "Clock Town Great Fairy Alt": "has(MASK_DEKU) || has(MASK_GORON) || has(MASK_ZORA)"
     "Clock Town Business Scrub": "has(MOON_TEAR)"
@@ -39,6 +38,14 @@
     "Astral Observatory": "event(BOMBER_CODE)"
   locations:
     "Clock Town Silver Rupee Chest": "true"
+"Clock Town Laundry Pool":
+  exits:
+    "Clock Town": "true"
+    "Curiosity Shop Back Room": "has(LETTER_TO_KAFEI)"
+  events:
+    FROG_1: "has(MASK_DON_GERO)"
+  locations:
+    "Clock Town Guru Guru Mask Bremen": "true"
 "Bomb Shop":
   exits:
     "Clock Town West": "true"
@@ -51,6 +58,11 @@
   locations:
     "Bomb Shop Bomb Bag 2": "has(WALLET, 1)"
     "Curiosity Shop All-Night Mask": "event(SAKON_BOMB_BAG) && has(WALLET, 2)"
+"Curiosity Shop Back Room":
+  exits:
+    "Clock Town Laundry Pool": "true"
+  locations:
+    "Curiosity Shop Back Room Pendant of Memories": "true"
 "Post Office":
   exits:
     "Clock Town West": "true"
