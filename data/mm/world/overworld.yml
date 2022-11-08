@@ -45,6 +45,7 @@
     "Chest Game": "true"
     "Honey & Darling Game": "true"
     "Stock Pot Inn": "true"
+    "Milk Bar": "true"
     "Astral Observatory": "event(BOMBER_CODE)"
   locations:
     "Clock Town Silver Rupee Chest": "true"
@@ -99,6 +100,11 @@
     "Clock Town East": "true"
   locations:
     "Mayor's Office Kafei's Mask": "true"
+"Milk Bar":
+  exits:
+    "Clock Town East": "true"
+  locations:
+    "Milk Bar Troupe Leader Mask": "has(OCARINA) && has(MASK_DEKU) && has(MASK_ZORA) && has(MASK_GORON) && has(MASK_ROMANI)"
 "Town Archery":
   exits:
     "Clock Town East": "true"

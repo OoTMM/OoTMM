@@ -29,6 +29,12 @@ static void ItemGiver_Update(Actor* this, GameState_Play* play)
         else if (ItemGiver_Common(this, play, GI_MM_SONG_EPONA))
             gMmExtraFlags.songEpona = 1;
         break;
+    case NPC_MM_MASK_TROUPE_LEADER:
+        if (gMmExtraFlags2.maskTroupeLeader)
+            ActorDestroy(this);
+        else if (ItemGiver_Common(this, play, GI_MM_MASK_TROUPE_LEADER))
+            gMmExtraFlags2.maskTroupeLeader = 1;
+        break;
     default:
         ActorDestroy(this);
         break;
