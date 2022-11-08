@@ -56,4 +56,7 @@ PATCH_START 0x800b8aac
   nop
   nop
   nop
+  nop
+  nop
+  nop
 PATCH_END
