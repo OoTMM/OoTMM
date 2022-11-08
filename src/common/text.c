@@ -310,7 +310,7 @@ static const char* const kItemNamesMm[] = {
     "", /* JP Song */
     "the " C1 "Bomber's Notebook",
     "",
-    "",
+    "a " C0 "Heart Container",
     "",
     "",
     "",
@@ -322,7 +322,7 @@ static const char* const kItemNamesMm[] = {
     "a " C0 "Small Key",
     "",
     "",
-    "a " C0 "Heart Piece",
+    "a " C0 "Piece of Heart",
     "",
     "",
     "",

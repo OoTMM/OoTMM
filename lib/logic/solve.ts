@@ -79,13 +79,26 @@ export const ITEMS_REQUIRED = new Set<string>([
   'MM_MASK_DEKU',
   'MM_MASK_GORON',
   'MM_MASK_ZORA',
-  'MM_MASK_GARO',
-  'MM_MASK_GIBDO',
   'MM_MASK_CAPTAIN',
-  'MM_MASK_SCENTS',
-  'MM_MASK_BREMEN',
-  'MM_MASK_TRUTH',
+  'MM_MASK_GIANT',
+  'MM_MASK_ALL_NIGHT',
+  'MM_MASK_BUNNY',
+  'MM_MASK_KEATON',
+  'MM_MASK_GARO',
+  'MM_MASK_ROMANI',
+  'MM_MASK_TROUPE_LEADER',
+  'MM_MASK_POSTMAN',
+  'MM_MASK_COUPLE',
+  'MM_MASK_GREAT_FAIRY',
+  'MM_MASK_GIBDO',
   'MM_MASK_DON_GERO',
+  'MM_MASK_KAMARO',
+  'MM_MASK_TRUTH',
+  'MM_MASK_STONE',
+  'MM_MASK_BREMEN',
+  'MM_MASK_BLAST',
+  'MM_MASK_SCENTS',
+  'MM_MASK_KAFEI',
   'MM_BOTTLED_POTION_RED',
   'MM_BOTTLED_GOLD_DUST',
   'MM_EMPTY_BOTTLE',
@@ -117,6 +130,10 @@ export const ITEMS_REQUIRED = new Set<string>([
   'MM_DEED_SWAMP',
   'MM_DEED_MOUNTAIN',
   'MM_DEED_OCEAN',
+  'MM_ROOM_KEY',
+  'MM_LETTER_TO_KAFEI',
+  'MM_PENDANT_OF_MEMORIES',
+  'MM_LETTER_TO_MAMA',
   'MM_WALLET',
   'MM_HEART_PIECE',
   'MM_HEART_CONTAINER',
@@ -153,20 +170,36 @@ const EXTRA_ITEMS = [
   'MM_SONG_HEALING',
 ];
 
+const randomInt = (random: Random, max: number) => {
+  /* Create a mask that is all 1s up to the max value */
+  let mask = max - 1;
+  mask |= mask >> 1;
+  mask |= mask >> 2;
+  mask |= mask >> 4;
+  mask |= mask >> 8;
+  mask |= mask >> 16;
+
+  for (;;) {
+    const value = (random.next() >>> 8) & mask;
+    if (value < max) {
+      return value;
+    }
+  }
+};
+
 const sample = <T>(random: Random, arr: T[]): T => {
   if (arr.length === 0) {
     throw new Error('Empty Array');
   }
 
-  /* Biased towards low values, but that's fine */
-  const index = random.next() % arr.length;
+  const index = randomInt(random, arr.length);
   return arr[index];
 };
 
 const shuffle = <T>(random: Random, arr: T[]): T[] => {
   const copy = [...arr];
   for (let i = 0; i < copy.length; i++) {
-    const j = random.next() % copy.length;
+    const j = randomInt(random, copy.length);
     [copy[i], copy[j]] = [copy[j], copy[i]];
   }
   return copy;
@@ -285,7 +318,7 @@ class Solver {
     const checksCount = Object.keys(this.world.checks).length;
 
     /* Fix the GS tokens */
-    this.fixTokens();
+    this.fixTokensAndFairies();
 
     /* Place the required reward items */
     this.fixRewards();
@@ -324,12 +357,17 @@ class Solver {
     addItem(this.pools.required, item);
   }
 
-  private fixTokens() {
+  private fixTokensAndFairies() {
     for (const location in this.world.checks) {
       const check = this.world.checks[location];
       if (check.type === 'gs') {
         this.place(location, 'OOT_GS_TOKEN');
         removeItem(this.pools.required, 'OOT_GS_TOKEN');
+      }
+      else if (check.type === 'sf') {
+        const item = check.item;
+        this.place(location, item);
+        removeItem(this.pools.dungeon, item);
       }
     }
   }

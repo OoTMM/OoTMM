@@ -29,6 +29,7 @@
 #  include <combo/mm/player.h>
 #  include <combo/mm/actor_engirla.h>
 #  include <combo/mm/actor_ensob1.h>
+#  include <combo/mm/actor_enfsn.h>
 # endif
 
 # include <combo/common/actor.h>
@@ -132,6 +133,8 @@ int  comboAddItemGI(GameState_Play* play, s16 gi);
 void comboAddItemMm(u16 itemId);
 void comboAddItemOot(u16 itemId);
 
+void comboToggleTrade(u8* slot, u32 flags, const u8* table, u32 tableSize);
+
 #if defined(GAME_OOT)
 void comboToggleTradeAdult(void);
 void comboToggleTradeChild(void);
@@ -139,6 +142,12 @@ void comboToggleOcarina(void);
 void comboToggleHookshot(void);
 void comboRemoveTradeItemAdult(u16 xitemId);
 void comboRemoveTradeItemChild(u16 xitemId);
+#endif
+
+#if defined(GAME_MM)
+void comboToggleTrade1(void);
+void comboToggleTrade2(void);
+void comboToggleTrade3(void);
 #endif
 
 # if defined(GAME_MM)

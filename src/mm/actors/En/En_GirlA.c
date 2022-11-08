@@ -14,10 +14,20 @@ void EnGirlA_PostHandler(Actor_EnGirlA* girlA, GameState_Play* play)
     soldOut = 0;
     switch (girlA->base.variable)
     {
+    case 0x13:
+        girlA->gi = comboOverride(OV_NPC, 0, NPC_MM_MASK_ALL_NIGHT, GI_MM_MASK_ALL_NIGHT);
+        soldOut = gMmExtraFlags2.maskAllNight;
+        break;
     /* Bomb Shop: Bomb Bag */
+    case 0x14:
     case 0x17:
-        girlA->gi = comboOverride(OV_NPC, 0, 0x03, GI_MM_BOMB_BAG);
-        soldOut = GetCollectibleFlag(play, 0x1f);
+        girlA->gi = comboOverride(OV_NPC, 0, NPC_MM_SHOP_BOMB_BAG, GI_MM_BOMB_BAG);
+        soldOut = gMmExtraFlags2.shopBombBag;
+        break;
+    case 0x15:
+    case 0x18:
+        girlA->gi = comboOverride(OV_NPC, 0, NPC_MM_SHOP_BOMB_BAG2, GI_MM_BOMB_BAG2);
+        soldOut = gMmExtraFlags2.shopBombBag2;
         break;
     }
     if (soldOut)
@@ -49,9 +59,21 @@ void comboAfterBuy(Actor_EnGirlA* girlA, GameState_Play* play)
     soldOut = 0;
     switch (girlA->base.variable)
     {
-    /* Bomb Shop: Bomb Bag */
+    /* All Night Mask */
+    case 0x13:
+        gMmExtraFlags2.maskAllNight = 1;
+        soldOut = 1;
+        break;
+    /* Bomb Bag */
+    case 0x14:
     case 0x17:
-        SetCollectibleFlag(play, 0x1f);
+        gMmExtraFlags2.shopBombBag = 1;
+        soldOut = 1;
+        break;
+    /* Bomb Bag 2 */
+    case 0x15:
+    case 0x18:
+        gMmExtraFlags2.shopBombBag2 = 1;
         soldOut = 1;
         break;
     }

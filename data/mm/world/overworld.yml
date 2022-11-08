@@ -1,36 +1,166 @@
-"Clock Town":
+"Clock Town South":
   exits:
-    "Town Archery": "true"
     "Termina Field": "true"
     "Clock Tower Rooftop": "true"
+    "Clock Town North": "true"
+    "Clock Town West": "true"
+    "Clock Town East": "true"
+    "Clock Town Laundry Pool": "true"
+  events:
+    CLOCK_TOWN_SCRUB: "has(MOON_TEAR)"
+  locations:
+    "Clock Town South Chest Lower": "has(HOOKSHOT)"
+    "Clock Town South Chest Upper": "has(HOOKSHOT)"
+    "Clock Town Platform HP": "true"
+    "Clock Town Business Scrub": "event(CLOCK_TOWN_SCRUB)"
+    "Clock Town Post Box": "has(MASK_POSTMAN)"
+"Clock Town North":
+  exits:
+    "Termina Field": "true"
+    "Clock Town South": "true"
+    "Clock Town Fairy Fountain": "true"
+    "Deku Playground": "has(MASK_DEKU)"
+  events:
+    BOMBER_CODE: "(has(MASK_DEKU) && has(MAGIC_UPGRADE)) || has(MASK_ZORA) || has(BOW)"
+    SAKON_BOMB_BAG: "has_weapon"
+  locations:
+    "Clock Town Tree HP": "true"
+    "Clock Town Bomber Notebook": "event(BOMBER_CODE)"
+    "Clock Town Blast Mask": "event(SAKON_BOMB_BAG)"
+    "Clock Town Keaton HP": "has(MASK_KEATON)"
+"Clock Town West":
+  exits:
+    "Termina Field": "true"
+    "Clock Town South": "true"
+    "Bomb Shop": "true"
+    "Curiosity Shop": "true"
+    "Post Office": "true"
+    "Swordsman School": "true"
+  locations:
+    "Clock Town Bank Reward 1": "true"
+    "Clock Town Bank Reward 2": "true"
+    "Clock Town Bank Reward 3": "true"
+    "Clock Town Rosa Sisters HP": "has(MASK_KAMARO)"
+"Clock Town East":
+  exits:
+    "Termina Field": "true"
+    "Clock Town South": "true"
+    "Mayor's Office": "true"
+    "Town Archery": "true"
+    "Chest Game": "true"
+    "Honey & Darling Game": "true"
+    "Stock Pot Inn": "true"
+    "Milk Bar": "true"
     "Astral Observatory": "event(BOMBER_CODE)"
+  locations:
+    "Clock Town Silver Rupee Chest": "true"
+"Clock Town Laundry Pool":
+  exits:
+    "Clock Town South": "true"
+    "Curiosity Shop Back Room": "has(LETTER_TO_KAFEI)"
   events:
     FROG_1: "has(MASK_DON_GERO)"
-    BOMBER_CODE: "(has(MASK_DEKU) && has(MAGIC_UPGRADE)) || has(MASK_ZORA) || has(BOW)"
   locations:
-    "Clock Town Platform HP": "true"
-    "Clock Town Tree HP": "true"
-    "Clock Town Silver Rupee Chest": "true"
     "Clock Town Guru Guru Mask Bremen": "true"
+"Clock Town Fairy Fountain":
+  exits:
+    "Clock Town North": "true"
+  locations:
     "Clock Town Great Fairy": "true"
     "Clock Town Great Fairy Alt": "has(MASK_DEKU) || has(MASK_GORON) || has(MASK_ZORA)"
+"Bomb Shop":
+  exits:
+    "Clock Town West": "true"
+  locations:
     "Bomb Shop Bomb Bag": "true"
-    "Clock Town Business Scrub": "has(MOON_TEAR)"
+    "Bomb Shop Bomb Bag 2": "event(SAKON_BOMB_BAG)"
+"Curiosity Shop":
+  exits:
+    "Clock Town West": "true"
+  locations:
+    "Bomb Shop Bomb Bag 2": "has(WALLET, 1)"
+    "Curiosity Shop All-Night Mask": "event(SAKON_BOMB_BAG) && has(WALLET, 2)"
+"Curiosity Shop Back Room":
+  exits:
+    "Clock Town Laundry Pool": "true"
+  events:
+    MEET_KAFEI: "true"
+  locations:
+    "Curiosity Shop Back Room Pendant of Memories": "event(MEET_KAFEI)"
+    "Curiosity Shop Back Room Owner Reward 1": "event(MEET_KAFEI)"
+    "Curiosity Shop Back Room Owner Reward 2": "event(MEET_KAFEI)"
+"Post Office":
+  exits:
+    "Clock Town West": "true"
+  locations:
+    "Post Office HP": "has(MASK_BUNNY)"
+    "Post Office Postman Hat": "has(LETTER_TO_MAMA)"
+"Swordsman School":
+  exits:
+    "Clock Town West": "true"
+  locations:
+    "Swordsman School HP": "has(SWORD)"
+"Mayor's Office":
+  exits:
+    "Clock Town East": "true"
+  locations:
+    "Mayor's Office Kafei's Mask": "true"
+    "Mayor's Office HP": "has(MASK_COUPLE)"
+"Milk Bar":
+  exits:
+    "Clock Town East": "true"
+  locations:
+    "Milk Bar Troupe Leader Mask": "has(OCARINA) && has(MASK_DEKU) && has(MASK_ZORA) && has(MASK_GORON) && has(MASK_ROMANI)"
+    "Milk Bar Madame Aroma Bottle": "has(LETTER_TO_MAMA)"
 "Town Archery":
   exits:
-    "Clock Town": "true"
+    "Clock Town East": "true"
   locations:
     "Town Archery Reward 1": "has(BOW)"
     "Town Archery Reward 2": "has(BOW)"
+"Chest Game":
+  exits:
+    "Clock Town East": "true"
+  locations:
+    "Chest Game HP": "has(MASK_GORON)"
+"Honey & Darling Game":
+  exits:
+    "Clock Town East": "true"
+  locations:
+    "Honey & Darling Reward 1": "has(BOW) || has(BOMB_BAG)"
+    "Honey & Darling Reward 2": "has(BOW) && has(BOMB_BAG)"
+"Stock Pot Inn":
+  exits:
+    "Clock Town East": "true"
+  locations:
+    "Stock Pot Inn Guest Room Chest": "has(ROOM_KEY)"
+    "Stock Pot Inn Staff Room Chest": "true"
+    "Stock Pot Inn Room Key": "true"
+    "Stock Pot Inn Letter to Kafei": "has(MASK_KAFEI)"
+    "Stock Pot Inn Couple's Mask": "event(SUN_MASK) && has(PENDANT_OF_MEMORIES) && has(MASK_KAFEI)"
+    "Stock Pot Inn Grandma HP 1": "has(MASK_ALL_NIGHT)"
+    "Stock Pot Inn Grandma HP 2": "has(MASK_ALL_NIGHT)"
+    "Stock Pot Inn ??? HP": "has_paper"
+"Deku Playground":
+  exits:
+    "Clock Town North": "true"
+  locations:
+    "Deku Playground Reward 1": "has(MASK_DEKU)"
+    "Deku Playground Reward 2": "has(MASK_DEKU)"
 "Astral Observatory":
   exits:
-    "Clock Town": "true"
+    "Clock Town East": "true"
+  events:
+    SCRUB_TELESCOPE: "event(CLOCK_TOWN_SCRUB)"
   locations:
     "Astral Observatory Passage Chest": "has_explosives"
     "Astral Observatory Moon Tear": "true"
 "Termina Field":
   exits:
-    "Clock Town": "true"
+    "Clock Town South": "true"
+    "Clock Town North": "true"
+    "Clock Town East": "true"
+    "Clock Town West": "true"
     "Road to Southern Swamp": "true"
     "Mountain Village Path": "has(BOW)"
     "Milk Road": "true"
@@ -46,6 +176,8 @@
     "Termina Field Peahat Grotto": "has_weapon"
     "Termina Field Dodongo Grotto": "has_weapon || has(BOMB_BAG)"
     "Termina Field Bio Baba Grotto": "has_explosives && (has(BOW) || has(HOOKSHOT))"
+    "Termina Field Scrub": "event(SCRUB_TELESCOPE) && has(WALLET)"
+    "Termina Field Gossip Stones HP": "has(OCARINA) && (has(SONG_GORON_HALF, 2) || has(SONG_AWAKENING) || has(SONG_ZORA)) && can_break_boulders"
 "Road to Southern Swamp":
   exits:
     "Swamp": "true"
@@ -109,10 +241,16 @@
   exits:
     "Deku Palace": "true"
     "Woodfall Temple Entrance": "has(MASK_DEKU) && can_play(SONG_AWAKENING) && has(SWORD)"
+    "Woodfall Great Fairy Fountain": "has(MASK_DEKU)"
   locations:
     "Woodfall Near Owl Chest": "has(MASK_DEKU) || has(HOOKSHOT)"
     "Woodfall Entrance Chest": "has(MASK_DEKU) || has(HOOKSHOT)"
     "Woodfall HP Chest": "has(MASK_DEKU)"
+"Woodfall Great Fairy Fountain":
+  exits:
+    "Woodfall": "true"
+  locations:
+    "Woodfall Great Fairy": "has(STRAY_FAIRY_WF, 15)"
 "Deku Shrine":
   exits:
     "Deku Palace": "true"
@@ -200,6 +338,12 @@
   exits:
     "Path to Snowhead": "true"
     "Snowhead Temple Entrance": "has(MASK_GORON)"
+    "Snowhead Great Fairy Fountain": "has(MASK_GORON)"
+"Snowhead Great Fairy Fountain":
+  exits:
+    "Snowhead": "true"
+  locations:
+    "Snowhead Great Fairy": "has(STRAY_FAIRY_SH, 15)"
 "Goron Race":
   exits:
     "Goron Village Path": "true"
@@ -269,12 +413,18 @@
     "Great Bay Coast": "true"
     "Zora Hall": "has(MASK_ZORA)"
     "Waterfall Rapids": "has(HOOKSHOT)"
+    "Great Bay Fairy Fountain": "has(MASK_ZORA) && has(HOOKSHOT) && has_explosives"
   locations:
     "Zora Cape Ledge Chest 1": "has(HOOKSHOT)"
     "Zora Cape Ledge Chest 2": "has(HOOKSHOT)"
     "Zora Cape Underwater Chest": "has(MASK_ZORA)"
     "Zora Cape Waterfall HP": "has(MASK_ZORA)"
     "Zora Cape Grotto": "has_explosives"
+"Great Bay Fairy Fountain":
+  exits:
+    "Zora Cape": "true"
+  locations:
+    "Great Bay Fairy": "has(STRAY_FAIRY_GB, 15)"
 "Waterfall Rapids":
   exits:
     "Zora Cape": "true"
@@ -344,19 +494,31 @@
     "Road to Ikana": "true"
     "Ikana Canyon": "can_use_ice_arrows && has(HOOKSHOT)"
     "Secret Shrine Entrance": "true"
+    "Sakon Hideout": "event(MEET_KAFEI)"
   locations:
     "Ikana Valley Scrub Rupee": "has(DEED_OCEAN) && has(MASK_ZORA)"
     "Ikana Valley Scrub HP": "has(DEED_OCEAN) && has(MASK_ZORA) && has(MASK_DEKU)"
     "Ikana Valley Grotto": "true"
+"Sakon Hideout":
+  exits:
+    "Ikana Valley": "true"
+  events:
+    SUN_MASK: "true"
 "Ikana Canyon":
   exits:
     "Ikana Valley": "true"
+    "Ikana Fairy Fountain": "true"
     "Ikana Spring Water Cave": "true"
     "Music Box House": "event(IKANA_CURSE_LIFTED)"
     "Ghost Hut": "true"
     "Beneath the Well Entrance": "true"
     "Ancient Castle of Ikana Exterior": "has_mirror_shield"
     "Stone Tower": "true"
+"Ikana Fairy Fountain":
+  exits:
+    "Ikana Canyon": "true"
+  locations:
+    "Ikana Great Fairy": "has(STRAY_FAIRY_ST, 15)"
 "Ikana Spring Water Cave":
   exits:
     "Ikana Canyon": "true"

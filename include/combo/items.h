@@ -214,7 +214,7 @@
 #define ITEM_MM_MASK_KEATON                 0x3a
 #define ITEM_MM_MASK_GARO                   0x3b
 #define ITEM_MM_MASK_ROMANI                 0x3c
-#define ITEM_MM_MASK_CIRCUS                 0x3d
+#define ITEM_MM_MASK_TROUPE_LEADER          0x3d
 #define ITEM_MM_MASK_POSTMAN                0x3e
 #define ITEM_MM_MASK_COUPLE                 0x3f
 #define ITEM_MM_MASK_GREAT_FAIRY            0x40
@@ -365,7 +365,7 @@
 #define ITS_MM_MASK_SCENTS          0x22
 #define ITS_MM_MASK_GORON           0x23
 #define ITS_MM_MASK_ROMANI          0x24
-#define ITS_MM_MASK_CIRCUS          0x25
+#define ITS_MM_MASK_TROUPE_LEADER   0x25
 #define ITS_MM_MASK_KAFEI           0x26
 #define ITS_MM_MASK_COUPLE          0x27
 #define ITS_MM_MASK_TRUTH           0x28

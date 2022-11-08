@@ -4,7 +4,8 @@
     "Moon Trial Goron": "masks(2)"
     "Moon Trial Zora":  "masks(3)"
     "Moon Trial Link":  "masks(4)"
-  # TODO: Add Fierce Deity Check here once all 20 masks are in the pool
+  locations:
+    "Moon Fierce Deity Mask": "masks(20) && event(MOON_TRIAL_DEKU) && event(MOON_TRIAL_GORON) && event(MOON_TRIAL_ZORA) && event(MOON_TRIAL_LINK)"
 "Moon Trial Deku":
   events:
     MOON_TRIAL_DEKU: "has(MASK_DEKU)"

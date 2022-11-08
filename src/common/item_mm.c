@@ -336,8 +336,8 @@ void comboAddItemMm(u16 itemId)
     case ITEM_MM_MASK_ROMANI:
         gMmSave.inventory.items[ITS_MM_MASK_ROMANI] = ITEM_MM_MASK_ROMANI;
         break;
-    case ITEM_MM_MASK_CIRCUS:
-        gMmSave.inventory.items[ITS_MM_MASK_CIRCUS] = ITEM_MM_MASK_CIRCUS;
+    case ITEM_MM_MASK_TROUPE_LEADER:
+        gMmSave.inventory.items[ITS_MM_MASK_TROUPE_LEADER] = ITEM_MM_MASK_TROUPE_LEADER;
         break;
     case ITEM_MM_MASK_KAFEI:
         gMmSave.inventory.items[ITS_MM_MASK_KAFEI] = ITEM_MM_MASK_KAFEI;

@@ -26,7 +26,7 @@ const DATA_VRAM_MM: VRamEntry[] = [
   { vstart: 0x80803df0, vend: 0x80804010, base: 0xc7e2d0, }, /* ovl_opening */
   { vstart: 0x80804010, vend: 0x80814e80, base: 0xc7e4f0, }, /* ovl_file_choose */
   { vstart: 0x8082da90, vend: 0x80862af0, base: 0xca7f00, }, /* ovl_player_actor */
-  { vstart: 0x808160a0, vend: 0x8082aed0, base: 0xc90550, }, /* kaleido_scope */
+  { vstart: 0x808160a0, vend: 0x8082da50, base: 0xc90550, }, /* kaleido_scope */
 ];
 
 const DATA_VRAM = {

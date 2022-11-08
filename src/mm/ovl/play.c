@@ -13,20 +13,22 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.items[ITS_MM_OCARINA] = ITEM_MM_OCARINA_OF_TIME;
         gSave.inventory.items[ITS_MM_MASK_DEKU] = ITEM_MM_MASK_DEKU;
         gSave.inventory.items[ITS_MM_MASK_ZORA] = ITEM_MM_MASK_ZORA;
+        gSave.inventory.items[ITS_MM_MASK_GORON] = ITEM_MM_MASK_GORON;
         gSave.inventory.items[ITS_MM_BOW] = ITEM_MM_BOW;
         gSave.inventory.items[ITS_MM_LENS] = ITEM_MM_LENS_OF_TRUTH;
         gSave.inventory.upgrades.quiver = 3;
         gSave.inventory.upgrades.wallet = 2;
+        gSave.inventory.upgrades.bombBag = 3;
         gSave.playerData.rupees = 500;
         gSave.inventory.questItems.songHealing = 1;
         gSave.inventory.questItems.songTime = 1;
+        gSave.inventory.questItems.songSoaring = 1;
         gSave.inventory.items[ITS_MM_BOTTLE + 0] = ITEM_MM_BOTTLED_GOLD_DUST;
         gSave.inventory.items[ITS_MM_BOTTLE + 1] = ITEM_MM_BOTTLED_SPRING_WATER_HOT;
         gSave.playerData.magic = 0x30;
         gMmSave.playerData.magicAcquired = 1;
         gSaveContext.magicTarget = 0x30;
         gSave.inventory.items[ITS_MM_MASK_GORON] = ITEM_MM_MASK_GORON;
-        gSave.inventory.items[ITS_MM_TRADE1] = ITEM_MM_DEED_SWAMP;
         gSave.inventory.ammo[ITS_MM_BOW] = 50;
         gSave.inventory.items[ITS_MM_ARROW_FIRE] = ITEM_MM_ARROW_FIRE;
         gSave.inventory.questItems.songLullabyIntro = 1;
@@ -35,6 +37,20 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.items[ITS_MM_MASK_CAPTAIN] = ITEM_MM_MASK_CAPTAIN;
         gSave.playerData.healthCapacity = 0x10 * 20;
         gSave.playerData.health = gSave.playerData.healthCapacity;
+
+        gMmExtraTrade.trade1 = 0xffff;
+        gMmExtraTrade.trade2 = 0xffff;
+        gMmExtraTrade.trade3 = 0xffff;
+
+        gSave.inventory.items[ITS_MM_TRADE1] = ITEM_MM_DEED_SWAMP;
+        gSave.inventory.items[ITS_MM_TRADE2] = ITEM_MM_ROOM_KEY;
+        gSave.inventory.items[ITS_MM_TRADE3] = ITEM_MM_PENDANT_OF_MEMORIES;
+
+        gSave.inventory.items[ITS_MM_MASK_KAFEI] = ITEM_MM_MASK_KAFEI;
+        gSave.inventory.items[ITS_MM_MASK_ROMANI] = ITEM_MM_MASK_ROMANI;
+        gSave.inventory.items[ITS_MM_MASK_COUPLE] = ITEM_MM_MASK_COUPLE;
+        gSave.inventory.items[ITS_MM_MASK_POSTMAN] = ITEM_MM_MASK_POSTMAN;
+        gSave.inventory.items[ITS_MM_MASK_TROUPE_LEADER] = ITEM_MM_MASK_TROUPE_LEADER;
     }
 #endif
 }

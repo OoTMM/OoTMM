@@ -246,15 +246,41 @@ typedef struct
     u32 songStorms:1;
     u32 songEmptiness:1;
     u32 maskGibdo:1;
-    u32 unused:7;
+    u32 greatFairies:6;
+    u32 bankReward2:1;
 }
 MmExtraFlags;
 
+typedef struct
+{
+    u32 shopBombBag:1;
+    u32 shopBombBag2:1;
+    u32 maskAllNight:1;
+    u32 maskKafei:1;
+    u32 honeyDarling:1;
+    u32 roomKey:1;
+    u32 letterKafei:1;
+    u32 pendant:1;
+    u32 letterMama:1;
+    u32 notebook:1;
+    u32 maskBlast:1;
+    u32 dekuPlayground:1;
+    u32 maskCouple:1;
+    u32 grandma:1;
+    u32 maskPostman:1;
+    u32 maskTroupeLeader:1;
+    u32 maskFierceDeity:1;
+    u32 unused:15;
+}
+MmExtraFlags2;
+
+#define MM_PLAYER_FORM_GORON    1
 #define MM_PLAYER_FORM_ZORA     2
 #define MM_PLAYER_FORM_HUMAN    4
 
 #define gMmSaveBoss     (gMmSave.permanentSceneFlags[1].unk_14)
 #define gMmExtraTrade   (*((MmExtraTrade*)(gMmSave.permanentSceneFlags[2].raw + 0x14)))
 #define gMmExtraFlags   (*((MmExtraFlags*)(gMmSave.permanentSceneFlags[3].raw + 0x14)))
+#define gMmExtraFlags2  (*((MmExtraFlags2*)(gMmSave.permanentSceneFlags[4].raw + 0x14)))
 
 #endif /* MM_SAVE_H */

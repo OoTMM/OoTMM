@@ -121,7 +121,7 @@ MM_OPENING:                             0x1a
 MM_TEMPLE_WOODFALL:                     0x1b
 MM_PATH_MOUNTAIN_VILLAGE:               0x1c
 MM_CASTLE_IKANA:                        0x1d
-MM_DEKU_SCRUB_PLAYGROUND:               0x1e
+MM_DEKU_PLAYGROUND:                     0x1e
 MM_LAIR_ODOLWA:                         0x1f
 MM_SHOOTING_GALLERY:                    0x20
 MM_TEMPLE_SNOWHEAD:                     0x21

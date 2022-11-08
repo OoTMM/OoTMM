@@ -1,39 +1,46 @@
 import crypto from 'crypto';
 
-const rotl = (x: number, k: number) => (x << k) | (x >>> (32 - k));
-
 const getSeed = () => {
-  const buf = crypto.randomBytes(16);
+  const buf = crypto.randomBytes(4 * 6);
   const seed = [];
-  for (let i = 0; i < 4; i++) {
+  for (let i = 0; i < 6; i++) {
     seed.push(buf.readUInt32LE(i * 4));
   }
   return seed;
 };
 
 export class Random {
-  private state: number[] = [0, 0, 0, 0];
+  private state: number[] = [0, 0, 0, 0, 0];
+  private counter: number = 0;
 
   constructor() {
   }
 
   next() {
-    const s = this.state;
-    const result = (rotl(s[0] + s[3], 7) + s[0]) >>> 0;
-    const t = (s[1] << 9);
-    s[2] ^= s[0];
-    s[3] ^= s[1];
-    s[1] ^= s[2];
-    s[0] ^= s[3];
-    s[2] ^= t;
-    s[3] = rotl(s[3], 11);
-    return result;
+    let t = this.state[4];
+    const s = this.state[0];
+    this.state[4] = this.state[3];
+    this.state[3] = this.state[2];
+    this.state[2] = this.state[1];
+    this.state[1] = s;
+
+    t = ((t >> 2) ^ t) >>> 0;
+    t = ((t << 1) ^ t) >>> 0;
+    t = (((s << 4) ^ s) ^ t) >>> 0;
+    this.state[0] = t;
+    this.counter = (this.counter + 362437) >>> 0;
+    return (t + this.counter) >>> 0;
   }
 
   seed(seed?: number[]) {
     if (!seed) {
       seed = getSeed();
     }
-    this.state = [...seed];
+    this.state[0] = seed[0];
+    this.state[1] = seed[1];
+    this.state[2] = seed[2];
+    this.state[3] = seed[3];
+    this.state[4] = seed[4];
+    this.counter = seed[5];
   }
 }
