@@ -2,6 +2,7 @@ location,                                       type,           scene,          
 
 Clock Town Platform HP,                         collectible,    CLOCK_TOWN_SOUTH,           0x0a,                   HEART_PIECE
 Clock Town Business Scrub,                      npc,            CLOCK_TOWN_SOUTH,           SCRUB_LAND,             DEED_LAND
+Clock Town Post Box,                            npc,            CLOCK_TOWN_SOUTH,           POSTBOX,                HEART_PIECE
 Clock Town Tree HP,                             collectible,    CLOCK_TOWN_NORTH,           0x0a,                   HEART_PIECE
 Clock Town Bomber Notebook,                     npc,            CLOCK_TOWN_NORTH,           BOMBER_NOTEBOOK,        BOMBER_NOTEBOOK
 Clock Town Blast Mask,                          npc,            CLOCK_TOWN_NORTH,           MASK_BLAST,             MASK_BLAST

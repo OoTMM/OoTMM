@@ -9,6 +9,7 @@
   locations:
     "Clock Town Platform HP": "true"
     "Clock Town Business Scrub": "has(MOON_TEAR)"
+    "Clock Town Post Box": "has(MASK_POSTMAN)"
 "Clock Town North":
   exits:
     "Termina Field": "true"
