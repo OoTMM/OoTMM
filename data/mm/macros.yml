@@ -22,3 +22,4 @@
 "can_unfreeze_smith": "event(BOSS_SNOWHEAD) || can_use_fire_arrows || event(GORON_GRAVEYARD_HOT_WATER)"
 "can_use_deku_bubble": "has(MASK_DEKU) && has(MAGIC_UPGRADE)"
 "has_weapon_range": "has(BOW) || has(HOOKSHOT) || has(MASK_ZORA) || can_use_deku_bubble"
+"has_paper": "has(DEED_LAND) || has(DEED_SWAMP) || has(DEED_MOUNTAIN) || has(DEED_OCEAN) || has(LETTER_TO_KAFEI) || has(LETTER_TO_MAMA)"

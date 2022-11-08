@@ -38,6 +38,7 @@ int EnShn_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
 int EnAn_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b);
 int EnNb_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b);
 int EnAl_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b);
+int EnBjt_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b);
 
 static int Actor_ByteCode_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
 {
@@ -55,6 +56,8 @@ static int Actor_ByteCode_GiveItem(Actor* actor, GameState_Play* play, s16 gi, f
         return EnNb_GiveItem(actor, play, gi, a, b);
     case 0x262:
         return EnAl_GiveItem(actor, play, gi, a, b);
+    case 0x27d:
+        return EnBjt_GiveItem(actor, play, gi, a, b);
     default:
         return GiveItem(actor, play, gi, a, b);
     }
