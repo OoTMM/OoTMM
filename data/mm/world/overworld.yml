@@ -150,6 +150,8 @@
 "Astral Observatory":
   exits:
     "Clock Town East": "true"
+  events:
+    SCRUB_TELESCOPE: "event(CLOCK_TOWN_SCRUB)"
   locations:
     "Astral Observatory Passage Chest": "has_explosives"
     "Astral Observatory Moon Tear": "true"
@@ -174,6 +176,7 @@
     "Termina Field Peahat Grotto": "has_weapon"
     "Termina Field Dodongo Grotto": "has_weapon || has(BOMB_BAG)"
     "Termina Field Bio Baba Grotto": "has_explosives && (has(BOW) || has(HOOKSHOT))"
+    "Termina Field Scrub": "event(SCRUB_TELESCOPE) && has(WALLET)"
 "Road to Southern Swamp":
   exits:
     "Swamp": "true"
