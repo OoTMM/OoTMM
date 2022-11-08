@@ -1,5 +1,7 @@
 location,                                       type,           scene,                      id,                     item
 
+Clock Town South Chest Lower,                   chest,          CLOCK_TOWN_SOUTH,           0x00,                   RUPEE_RED
+Clock Town South Chest Upper,                   chest,          CLOCK_TOWN_SOUTH,           0x01,                   RUPEE_PURPLE
 Clock Town Platform HP,                         collectible,    CLOCK_TOWN_SOUTH,           0x0a,                   HEART_PIECE
 Clock Town Business Scrub,                      npc,            CLOCK_TOWN_SOUTH,           SCRUB_LAND,             DEED_LAND
 Clock Town Post Box,                            npc,            CLOCK_TOWN_SOUTH,           POSTBOX,                HEART_PIECE

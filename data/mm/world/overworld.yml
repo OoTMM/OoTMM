@@ -6,9 +6,13 @@
     "Clock Town West": "true"
     "Clock Town East": "true"
     "Clock Town Laundry Pool": "true"
+  events:
+    CLOCK_TOWN_SCRUB: "has(MOON_TEAR)"
   locations:
+    "Clock Town South Chest Lower": "has(HOOKSHOT)"
+    "Clock Town South Chest Upper": "has(HOOKSHOT)"
     "Clock Town Platform HP": "true"
-    "Clock Town Business Scrub": "has(MOON_TEAR)"
+    "Clock Town Business Scrub": "event(CLOCK_TOWN_SCRUB)"
     "Clock Town Post Box": "has(MASK_POSTMAN)"
 "Clock Town North":
   exits:
