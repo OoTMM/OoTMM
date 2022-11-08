@@ -21,8 +21,10 @@ Chest Game HP,                                  npc,            TREASURE_SHOP,  
 Honey & Darling Reward 1,                       npc,            HONEY_DARLING,              HONEY_DARLING_1,        RUPEE_PURPLE
 Honey & Darling Reward 2,                       npc,            HONEY_DARLING,              HONEY_DARLING_2,        HEART_PIECE
 Stock Pot Inn Guest Room Chest,                 chest,          STOCK_POT_INN,              0x00,                   RUPEE_SILVER
+Stock Pot Inn Staff Room Chest,                 chest,          STOCK_POT_INN,              0x01,                   RUPEE_SILVER
 Stock Pot Inn Room Key,                         npc,            STOCK_POT_INN,              ROOM_KEY,               ROOM_KEY
 Stock Pot Inn Letter to Kafei,                  npc,            STOCK_POT_INN,              LETTER_TO_KAFEI,        LETTER_TO_KAFEI
+Stock Pot Inn Couple's Mask,                    npc,            STOCK_POT_INN,              MASK_COUPLE,            MASK_COUPLE
 Astral Observatory Passage Chest,               chest,          OBSERVATORY,                0x00,                   RUPEE_SILVER
 Astral Observatory Moon Tear,                   npc,            OBSERVATORY,                MOON_TEAR,              MOON_TEAR
 Bomb Shop Bomb Bag,                             npc,            BOMB_SHOP,                  SHOP_BOMB_BAG,          BOMB_BAG

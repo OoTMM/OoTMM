@@ -45,3 +45,23 @@ int EnTest3_TalkedTo(Actor* this, GameState_Play* play)
 }
 
 PATCH_CALL(0x80a3f758, EnTest3_TalkedTo);
+
+void EnTest3_AfterUpdate(Actor* this, GameState_Play* play)
+{
+    int* state;
+    s16 gi;
+
+    state = actorAddr(0x159, 0x80a41d68);
+    if (*state == 2)
+    {
+        /* Anju and Kafei reunited */
+        if (Actor_HasParent(this) || gMmExtraFlags2.maskCouple)
+        {
+            gMmExtraFlags2.maskCouple = 1;
+            return;
+        }
+
+        gi = comboOverride(OV_NPC, 0, NPC_MM_MASK_COUPLE, GI_MM_MASK_COUPLE);
+        GiveItem(this, play, gi, 100.f, 50.f);
+    }
+}
