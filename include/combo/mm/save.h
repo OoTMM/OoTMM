@@ -269,7 +269,8 @@ typedef struct
     u32 grandma:1;
     u32 maskPostman:1;
     u32 maskTroupeLeader:1;
-    u32 unused:16;
+    u32 maskFierceDeity:1;
+    u32 unused:15;
 }
 MmExtraFlags2;
 

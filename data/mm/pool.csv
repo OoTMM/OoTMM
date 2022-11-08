@@ -271,9 +271,10 @@ Secret Shrine Boss 3 Chest,   chest,        SECRET_SHRINE,  0x02, RUPEE_SILVER
 Secret Shrine Boss 4 Chest,   chest,        SECRET_SHRINE,  0x03, RUPEE_SILVER
 Secret Shrine HP Chest,       chest,        SECRET_SHRINE,  0x0a, HEART_PIECE
 
-Moon Trial Deku HP,           collectible,  MOON_DEKU,   0x01, HEART_PIECE
-Moon Trial Goron HP,          collectible,  MOON_GORON,  0x01, HEART_PIECE
-Moon Trial Zora HP,           collectible,  MOON_ZORA,   0x01, HEART_PIECE
-Moon Trial Link Chest 1,      chest,        MOON_LINK,   0x01, ARROWS_30
-Moon Trial Link Chest 2,      chest,        MOON_LINK,   0x02, BOMBCHUS_10
-Moon Trial Link HP,           collectible,  MOON_LINK,   0x01, HEART_PIECE
+Moon Trial Deku HP,           collectible,  MOON_DEKU,   0x01,              HEART_PIECE
+Moon Trial Goron HP,          collectible,  MOON_GORON,  0x01,              HEART_PIECE
+Moon Trial Zora HP,           collectible,  MOON_ZORA,   0x01,              HEART_PIECE
+Moon Trial Link Chest 1,      chest,        MOON_LINK,   0x01,              ARROWS_30
+Moon Trial Link Chest 2,      chest,        MOON_LINK,   0x02,              BOMBCHUS_10
+Moon Trial Link HP,           collectible,  MOON_LINK,   0x01,              HEART_PIECE
+Moon Fierce Deity Mask,       npc,          MOON_LINK,   MASK_FIERCE_DEITY, MASK_FIERCE_DEITY
