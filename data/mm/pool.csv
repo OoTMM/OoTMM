@@ -25,6 +25,8 @@ Stock Pot Inn Staff Room Chest,                 chest,          STOCK_POT_INN,  
 Stock Pot Inn Room Key,                         npc,            STOCK_POT_INN,              ROOM_KEY,               ROOM_KEY
 Stock Pot Inn Letter to Kafei,                  npc,            STOCK_POT_INN,              LETTER_TO_KAFEI,        LETTER_TO_KAFEI
 Stock Pot Inn Couple's Mask,                    npc,            STOCK_POT_INN,              MASK_COUPLE,            MASK_COUPLE
+Stock Pot Inn Grandma HP 1,                     npc,            STOCK_POT_INN,              GRANDMA_HEART_PIECE_1,  HEART_PIECE
+Stock Pot Inn Grandma HP 2,                     npc,            STOCK_POT_INN,              GRANDMA_HEART_PIECE_2,  HEART_PIECE
 Astral Observatory Passage Chest,               chest,          OBSERVATORY,                0x00,                   RUPEE_SILVER
 Astral Observatory Moon Tear,                   npc,            OBSERVATORY,                MOON_TEAR,              MOON_TEAR
 Bomb Shop Bomb Bag,                             npc,            BOMB_SHOP,                  SHOP_BOMB_BAG,          BOMB_BAG

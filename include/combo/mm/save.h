@@ -266,7 +266,8 @@ typedef struct
     u32 maskBlast:1;
     u32 dekuPlayground:1;
     u32 maskCouple:1;
-    u32 unused:19;
+    u32 grandma:1;
+    u32 unused:18;
 }
 MmExtraFlags2;
 

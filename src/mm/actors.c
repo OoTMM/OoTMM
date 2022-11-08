@@ -36,6 +36,7 @@ int EnGo_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b);
 int EnDnh_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b);
 int EnShn_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b);
 int EnAn_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b);
+int EnNb_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b);
 int EnAl_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b);
 
 static int Actor_ByteCode_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
@@ -50,6 +51,8 @@ static int Actor_ByteCode_GiveItem(Actor* actor, GameState_Play* play, s16 gi, f
         return EnShn_GiveItem(actor, play, gi, a, b);
     case 0x202:
         return EnAn_GiveItem(actor, play, gi, a, b);
+    case 0x243:
+        return EnNb_GiveItem(actor, play, gi, a, b);
     case 0x262:
         return EnAl_GiveItem(actor, play, gi, a, b);
     default:
@@ -62,6 +65,7 @@ PATCH_CALL(0x8010aa34, Actor_ByteCode_GiveItem);
 void EnGo_AfterGivingItem(Actor* actor);
 void EnDnh_AfterGivingItem(Actor* actor);
 void EnAn_AfterGivingItem(Actor* actor);
+void EnNb_AfterGivingItem(Actor* actor);
 
 static int Actor_ByteCode_HasParent(Actor* actor)
 {
@@ -80,6 +84,9 @@ static int Actor_ByteCode_HasParent(Actor* actor)
             break;
         case 0x202:
             EnAn_AfterGivingItem(actor);
+            break;
+        case 0x243:
+            EnNb_AfterGivingItem(actor);
             break;
         }
     }
