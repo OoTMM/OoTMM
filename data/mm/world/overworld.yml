@@ -100,6 +100,7 @@
     "Clock Town East": "true"
   locations:
     "Mayor's Office Kafei's Mask": "true"
+    "Mayor's Office HP": "has(MASK_COUPLE)"
 "Milk Bar":
   exits:
     "Clock Town East": "true"

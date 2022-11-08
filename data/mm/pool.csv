@@ -15,6 +15,7 @@ Clock Town Guru Guru Mask Bremen,               npc,            LAUNDRY_POOL,   
 Clock Town Great Fairy,                         npc,            FAIRY_FOUNTAIN,             GREAT_FAIRY_TOWN,       MASK_GREAT_FAIRY
 Clock Town Great Fairy Alt,                     npc,            FAIRY_FOUNTAIN,             GREAT_FAIRY_TOWN_ALT,   MAGIC_UPGRADE
 Mayor's Office Kafei's Mask,                    npc,            MAYOR_HOUSE,                MASK_KAFEI,             MASK_KAFEI
+Mayor's Office HP,                              npc,            MAYOR_HOUSE,                MAYOR_HEART_PIECE,      HEART_PIECE
 Milk Bar Troupe Leader Mask,                    npc,            MILK_BAR,                   MASK_TROUPE_LEADER,     MASK_TROUPE_LEADER
 Milk Bar Madame Aroma Bottle,                   npc,            MILK_BAR,                   CHATEAU_ROMANI,         BOTTLED_CHATEAU_ROMANI
 Town Archery Reward 1,                          npc,            SHOOTING_GALLERY,           SHOOTING_GAME_TOWN_1,   BOW
