@@ -177,6 +177,7 @@
     "Termina Field Dodongo Grotto": "has_weapon || has(BOMB_BAG)"
     "Termina Field Bio Baba Grotto": "has_explosives && (has(BOW) || has(HOOKSHOT))"
     "Termina Field Scrub": "event(SCRUB_TELESCOPE) && has(WALLET)"
+    "Termina Field Gossip Stones HP": "has(OCARINA) && (has(SONG_GORON_HALF, 2) || has(SONG_AWAKENING) || has(SONG_ZORA)) && can_break_boulders"
 "Road to Southern Swamp":
   exits:
     "Swamp": "true"
