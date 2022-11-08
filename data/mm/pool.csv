@@ -37,6 +37,7 @@ Curiosity Shop Back Room Pendant of Memories,   npc,            CURIOSITY_SHOP, 
 Curiosity Shop Back Room Owner Reward 1,        npc,            CURIOSITY_SHOP,             MASK_KEATON,            MASK_KEATON
 Curiosity Shop Back Room Owner Reward 2,        npc,            CURIOSITY_SHOP,             LETTER_TO_MAMA,         LETTER_TO_MAMA
 Post Office HP,                                 npc,            POST_OFFICE,                POSTMAN_HEART_PIECE,    HEART_PIECE
+Post Office Postman Hat,                        npc,            POST_OFFICE,                MASK_POSTMAN,           MASK_POSTMAN
 Swordsman School HP,                            npc,            SWORDSMAN_SCHOOL,           SWORDSMAN_HEART_PIECE,  HEART_PIECE
 Deku Playground Reward 1,                       npc,            DEKU_PLAYGROUND,            DEKU_PLAYGROUND_1,      RUPEE_PURPLE
 Deku Playground Reward 2,                       npc,            DEKU_PLAYGROUND,            DEKU_PLAYGROUND_2,      HEART_PIECE

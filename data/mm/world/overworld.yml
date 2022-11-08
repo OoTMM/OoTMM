@@ -88,6 +88,7 @@
     "Clock Town West": "true"
   locations:
     "Post Office HP": "has(MASK_BUNNY)"
+    "Post Office Postman Hat": "has(LETTER_TO_MAMA)"
 "Swordsman School":
   exits:
     "Clock Town West": "true"
