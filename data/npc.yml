@@ -170,3 +170,5 @@ MM_MAYOR_HEART_PIECE:         0x59
 MM_POSTBOX:                   0x5a
 MM_SCRUB_TELESCOPE:           0x5b
 MM_GOSSIP_HEART_PIECE:        0x5c
+MM_SKULL_KID_OCARINA:         0x5d
+MM_SKULL_KID_SONG:            0x5e

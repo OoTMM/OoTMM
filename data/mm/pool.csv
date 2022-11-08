@@ -17,6 +17,8 @@ Clock Town Rosa Sisters HP,                     npc,            CLOCK_TOWN_WEST,
 Clock Town Guru Guru Mask Bremen,               npc,            LAUNDRY_POOL,               MASK_BREMEN,            MASK_BREMEN
 Clock Town Great Fairy,                         npc,            FAIRY_FOUNTAIN,             GREAT_FAIRY_TOWN,       MASK_GREAT_FAIRY
 Clock Town Great Fairy Alt,                     npc,            FAIRY_FOUNTAIN,             GREAT_FAIRY_TOWN_ALT,   MAGIC_UPGRADE
+Clock Tower Roof Skull Kid Ocarina,             npc,            CLOCK_TOWER_ROOFTOP,        SKULL_KID_OCARINA,      OCARINA
+Clock Tower Roof Skull Kid Song of Time,        npc,            CLOCK_TOWER_ROOFTOP,        SKULL_KID_SONG,         SONG_TIME
 Mayor's Office Kafei's Mask,                    npc,            MAYOR_HOUSE,                MASK_KAFEI,             MASK_KAFEI
 Mayor's Office HP,                              npc,            MAYOR_HOUSE,                MAYOR_HEART_PIECE,      HEART_PIECE
 Milk Bar Troupe Leader Mask,                    npc,            MILK_BAR,                   MASK_TROUPE_LEADER,     MASK_TROUPE_LEADER

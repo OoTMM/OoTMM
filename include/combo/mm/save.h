@@ -270,7 +270,8 @@ typedef struct
     u32 maskPostman:1;
     u32 maskTroupeLeader:1;
     u32 maskFierceDeity:1;
-    u32 unused:15;
+    u32 ocarina:1;
+    u32 unused:14;
 }
 MmExtraFlags2;
 
