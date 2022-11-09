@@ -66,6 +66,20 @@ int DoorWarp1_ShouldTrigger(Actor* this, GameState_Play* play)
     if (data == NULL)
         return 1;
 
+    /* Check if the item is being obtained */
+    if (Actor_HasParent(this))
+    {
+        if (!gMmExtraFlags2.songOath)
+        {
+            gMmExtraFlags2.songOath = 1;
+            this->attachedA = NULL;
+        }
+        else
+        {
+            gMmExtraBoss |= (1 << data->index);
+        }
+    }
+
     /* Check if we are obtaining an item */
     link = GET_LINK(play);
     if (link->state & PLAYER_ACTOR_STATE_GET_ITEM)
@@ -75,21 +89,6 @@ int DoorWarp1_ShouldTrigger(Actor* this, GameState_Play* play)
     if (gMmExtraBoss & (1 << data->index))
         return 1;
 
-    if (Actor_HasParent(this))
-    {
-        if (!gMmExtraFlags2.songOath)
-        {
-            gMmExtraFlags2.songOath = 1;
-            this->attachedA = NULL;
-            return 0;
-        }
-        else
-        {
-            gMmExtraBoss |= (1 << data->index);
-            return 1;
-        }
-    }
-
     /* Give the correct item */
     if (!gMmExtraFlags2.songOath)
         gi = comboOverride(OV_NPC, 0, NPC_MM_SONG_ORDER, GI_MM_SONG_ORDER);
@@ -97,6 +96,27 @@ int DoorWarp1_ShouldTrigger(Actor* this, GameState_Play* play)
         gi = comboOverride(OV_NPC, 0, data->npc, data->gi);
     GiveItem(this, play, gi, 9999.f, 9999.f);
     return 0;
+}
+
+void DoorWarp1_AfterDraw(Actor* this, GameState_Play* play)
+{
+    static const int kRotDivisor = 100;
+    const BlueWarpData* data;
+    float angle;
+    s16 gi;
+
+    data = DoorWarp1_GetData(this, play);
+    if (data == NULL)
+        return;
+    if (gMmExtraBoss & (1 << data->index))
+        return;
+    gi = comboOverride(OV_NPC, 0, data->npc, data->gi);
+
+    angle = (play->gs.frameCount % kRotDivisor) * (1.f / kRotDivisor) * M_PI * 2.f;
+    ModelViewTranslate(this->position.x, this->position.y + 35.f, this->position.z, MAT_SET);
+    ModelViewScale(0.35f, 0.35f, 0.35f, MAT_MUL);
+    ModelViewRotateY(angle, MAT_MUL);
+    comboDrawGI(play, this, gi, DRAW_RAW);
 }
 
 PATCH_FUNC(0x808b866c, DoorWarp1_ShouldTrigger);

@@ -75,6 +75,8 @@ MatrixRotation = 0x801809ac;
 gModelView = 0x801fbe04;
 
 ModelViewScale = 0x8018039c;
+ModelViewRotateY = 0x80180b48;
+ModelViewTranslate = 0x8018029c;
 
 PrepareSave = 0x8014546c;
 PlaySound = 0x8019f0c8;
