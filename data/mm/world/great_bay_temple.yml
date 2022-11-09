@@ -114,9 +114,10 @@
     "Great Bay Temple After Boss": "true"
 "Great Bay Temple After Boss":
   dungeon: GB
+  exits:
+    "Oath to Order": "true"
   events:
     BOSS_GREAT_BAY: "true"
   locations:
     "Great Bay Temple Boss HC": "true"
     "Great Bay Temple Boss": "true"
-    "Oath to Order": "true"

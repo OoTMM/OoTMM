@@ -145,7 +145,8 @@
     "Stone Tower After Boss": "true"
 "Stone Tower After Boss":
   dungeon: ST
+  exits:
+    "Oath to Order": "true"
   locations:
     "Stone Tower Boss HC": "true"
     "Stone Tower Boss": "true"
-    "Oath to Order": "true"

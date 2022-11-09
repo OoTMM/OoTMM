@@ -131,9 +131,10 @@
     "Snowhead Temple After Boss": "true"
 "Snowhead Temple After Boss":
   dungeon: SH
+  exits:
+    "Oath to Order": "true"
   events:
     BOSS_SNOWHEAD: "true"
   locations:
     "Snowhead Temple Boss HC": "true"
     "Snowhead Temple Boss": "true"
-    "Oath to Order": "true"

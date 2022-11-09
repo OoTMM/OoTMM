@@ -270,7 +270,9 @@ typedef struct
     u32 maskPostman:1;
     u32 maskTroupeLeader:1;
     u32 maskFierceDeity:1;
-    u32 unused:15;
+    u32 ocarina:1;
+    u32 songOath:1;
+    u32 unused:13;
 }
 MmExtraFlags2;
 
@@ -278,7 +280,7 @@ MmExtraFlags2;
 #define MM_PLAYER_FORM_ZORA     2
 #define MM_PLAYER_FORM_HUMAN    4
 
-#define gMmSaveBoss     (gMmSave.permanentSceneFlags[1].unk_14)
+#define gMmExtraBoss    (*((u32*)(gMmSave.permanentSceneFlags[2].raw + 0x14)))
 #define gMmExtraTrade   (*((MmExtraTrade*)(gMmSave.permanentSceneFlags[2].raw + 0x14)))
 #define gMmExtraFlags   (*((MmExtraFlags*)(gMmSave.permanentSceneFlags[3].raw + 0x14)))
 #define gMmExtraFlags2  (*((MmExtraFlags2*)(gMmSave.permanentSceneFlags[4].raw + 0x14)))

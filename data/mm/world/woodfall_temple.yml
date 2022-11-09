@@ -108,10 +108,12 @@
   exits:
     "Woodfall Temple After Boss": "true"
 "Woodfall Temple After Boss":
+  dungeon: "WF"
+  exits:
+    "Oath to Order": "true"
   events:
     CLEAN_SWAMP: "true"
     DEKU_PRINCESS: "has_bottle"
   locations:
     "Woodfall Temple Boss Container": "true"
     "Woodfall Temple Boss": "true"
-    "Oath to Order": "true"

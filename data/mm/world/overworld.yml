@@ -1,3 +1,6 @@
+"Oath to Order":
+  locations:
+    "Oath to Order": "true"
 "Clock Town South":
   exits:
     "Termina Field": "true"
@@ -6,6 +9,7 @@
     "Clock Town West": "true"
     "Clock Town East": "true"
     "Clock Town Laundry Pool": "true"
+    "Clock Tower Roof": "true"
   events:
     CLOCK_TOWN_SCRUB: "has(MOON_TEAR)"
   locations:
@@ -68,6 +72,10 @@
   locations:
     "Clock Town Great Fairy": "true"
     "Clock Town Great Fairy Alt": "has(MASK_DEKU) || has(MASK_GORON) || has(MASK_ZORA)"
+"Clock Tower Roof":
+  locations:
+    "Clock Tower Roof Skull Kid Ocarina": "has_weapon_range"
+    "Clock Tower Roof Skull Kid Song of Time": "has_weapon_range"
 "Bomb Shop":
   exits:
     "Clock Town West": "true"

@@ -60,3 +60,8 @@ PATCH_START 0x800b8aac
   nop
   nop
 PATCH_END
+
+/* Disable Ocarina cutscene */
+PATCH_START 0x8084843c
+  li at,0xffff
+PATCH_END
