@@ -13,6 +13,8 @@ typedef struct PACKED ALIGNED(4)
 }
 Shader;
 
+#define DRAWGI_NONE 0
+
 #define DRAWGI_OOT_EMPTY_BOTTLE             0x01
 #define DRAWGI_OOT_SMALL_KEY                0x02
 #define DRAWGI_OOT_NOTE_GREEN               0x03
