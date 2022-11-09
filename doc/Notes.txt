@@ -63,3 +63,33 @@ Doggy Racetrack Chest
 Stump Chest
 Monument Room Lower Wall Skulltula
 Gold Room Ceiling Skulltula
+
+
+
+
+=== SONGS ===
+Zelda's Lullaby - RED
+Epona's Song - ORANGE
+Saria's Song - GREEN
+Sun's Song - YELLOW
+Song of Time - BLUE
+Song of Storms - PURPLE
+Minuet of Forest - GREEN
+Bolero of Fire - RED
+Serenade of Water - BLUE
+Requiem of Spirit - ORANGE
+Nocturne of Shadow - PURPLE
+Prelude of Light - YELLOW
+
+Song of Time - BLUE
+Song of Healing - ?
+Epona's Song - ORANGE
+Song of Soaring - WHITE?
+Song of Storms - PURPLE?
+
+Sonata of Awakening - GREEN
+Goron Lullaby - RED
+New Wave Bossa Nova - BLUE
+Elegy of Emptiness - ???
+Oath to Order - ???
+===

@@ -87,7 +87,7 @@
 /* ???                       */ { Shader_GS,                     { 0x6004db0, 0x6004eb8 }},
 /* Red Potion in a bottle    */ { Shader_Opa0_Xlu1,              { 0x6000cc0, 0x60009b0 }},
 /* Zora Egg in a bottle      */ { Shader_Opa0_Xlu1,              { 0x6001010, 0x6000cf0 }},
-/* Moon's Tear               */ { Shader_MoonTear,               { 0x6000d78, 0x6000c80 }}, /* Missing shader in OoT */
+/* Moon's Tear               */ { Shader_MoonTear,               { 0x6000d78, 0x6000c80 }},
 /* Land Title Deed           */ { Shader_Opa01,                  { 0x6000a08, 0x6000968 }},
 /* Deku Mask                 */ { Shader_Opa0_Xlu1,              { 0x6000f20, 0x6000b50 }},
 /* Remains - Odolwa          */ { (void*)0x800efd44,             { 0x6000690, 0x6000690 }}, /* Missing shader in OoT */
