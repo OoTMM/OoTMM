@@ -5,3 +5,4 @@ PATCH_START 0x808b849c
   jr ra
    li v0,0
 PATCH_END
+
