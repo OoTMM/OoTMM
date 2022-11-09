@@ -1,6 +1,6 @@
 #include <combo.h>
 
-void EnSellnuts_HasGivenItem(Actor* this)
+int EnSellnuts_HasGivenItem(Actor* this)
 {
     if (Actor_HasParent(this))
     {

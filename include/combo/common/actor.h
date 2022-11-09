@@ -4,7 +4,6 @@
 #include <combo/types.h>
 
 #if defined(GAME_OOT)
-# define AC_ITEM_CUSTOM     0x001
 # define AC_ITEM_GIVER      0x003
 # define AC_EN_BOX          0x00a
 # define AC_ITEM00          0x015
@@ -32,7 +31,6 @@
 # define AC_EN_GIRLA        0x002
 # define AC_EN_BOX          0x006
 # define AC_ITEM00          0x00e
-# define AC_ITEM_CUSTOM     0x013
 # define AC_ITEM_GIVER      0x01f
 # define AC_DOOR_WARP1      0x038
 # define AC_ITEM_B_HEART    0x03a
