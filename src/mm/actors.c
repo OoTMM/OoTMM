@@ -23,11 +23,6 @@ Actor* hookSpawnActorEx(void* const_1, GameState_Play* play, s16 actorId, float 
             break;
         }
         break;
-    case AC_ITEM_B_HEART:
-        actorId = AC_ITEM_CUSTOM;
-        rz = 0x1000 | 0x1f;
-        variable = GI_MM_HEART_CONTAINER;
-        break;
     }
     return SpawnActorEx(const_1, play, actorId, x, y, z, rx, ry, rz, variable, unk1, unk2, unk3);
 }
