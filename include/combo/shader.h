@@ -197,5 +197,17 @@ extern const Shader kShaders[256];
 #define DRAWGI_MM_REMAINS_GYORG             0xb0
 #define DRAWGI_MM_REMAINS_TWINMOLD          0xb1
 #define DRAWGI_MM_SOLD_OUT                  0xb2
+#define DRAWGI_NOTE_PURPLE                  0xb3
+#define DRAWGI_NOTE_BLUE                    0xb4
+#define DRAWGI_NOTE_GREEN                   0xb5
+#define DRAWGI_NOTE_YELLOW                  0xb6
+#define DRAWGI_NOTE_ORANGE                  0xb7
+#define DRAWGI_NOTE_RED                     0xb8
+#define DRAWGI_NOTE_PURPLE_DOWN             0xb9
+#define DRAWGI_NOTE_BLUE_DOWN               0xba
+#define DRAWGI_NOTE_GREEN_DOWN              0xbb
+#define DRAWGI_NOTE_YELLOW_DOWN             0xbc
+#define DRAWGI_NOTE_ORANGE_DOWN             0xbd
+#define DRAWGI_NOTE_RED_DOWN                0xbe
 
 #endif

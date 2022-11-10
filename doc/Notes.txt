@@ -82,16 +82,16 @@ Nocturne of Shadow - PURPLE
 Prelude of Light - YELLOW
 
 Song of Time - BLUE
-Song of Healing - ?
+Song of Healing - GREEN
 Epona's Song - ORANGE
-Song of Soaring - WHITE?
-Song of Storms - PURPLE?
+Song of Soaring - RED
+Song of Storms - PURPLE
 
 Sonata of Awakening - GREEN
 Goron Lullaby - RED
 New Wave Bossa Nova - BLUE
-Elegy of Emptiness - ???
-Oath to Order - ???
+Elegy of Emptiness - ORANGE
+Oath to Order - PURPLE
 ===
 
 
