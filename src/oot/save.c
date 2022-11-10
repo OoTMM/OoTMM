@@ -39,8 +39,8 @@
 void Sram_AfterOpenSave(void)
 {
 #if defined(DEBUG)
-    //gSave.entrance = ENTRANCE_MIDO;
-    gSave.entrance = ENTRANCE_MARKET;
+    gSave.entrance = ENTRANCE_MIDO;
+    //gSave.entrance = ENTRANCE_MARKET;
 #endif
 
     if (gComboCtx.valid)
