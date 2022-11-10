@@ -75,7 +75,7 @@ static s16 comboOverrideImpl(u16 sceneId, u16 id, s16 gi)
 s16 comboOverride(int type, u16 sceneId, u16 id, s16 gi)
 {
 #if defined(DEBUG)
-    //return -(0x100 | GI_MM_SONG_ORDER);
+    return -(0x100 | GI_MM_DEFENSE_UPGRADE);
 #endif
     switch (type)
     {

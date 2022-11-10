@@ -31,8 +31,8 @@ extern const Shader kShaders[256];
 #define DRAWGI_OOT_MEDALLION_SHADOW         0x0a
 #define DRAWGI_OOT_MEDALLION_LIGHT          0x0b
 #define DRAWGI_DEKU_NUT                     0x0c
-#define DRAWGI_OOT_HEART_CONTAINER          0x0d
-#define DRAWGI_OOT_HEART_PIECE              0x0e
+#define DRAWGI_HEART_CONTAINER              0x0d
+#define DRAWGI_HEART_PIECE                  0x0e
 #define DRAWGI_QUIVER                       0x0f
 #define DRAWGI_QUIVER2                      0x10
 #define DRAWGI_QUIVER3                      0x11
@@ -128,7 +128,7 @@ extern const Shader kShaders[256];
 #define DRAWGI_OOT_STONE_EMERALD            0x6b
 #define DRAWGI_OOT_STONE_RUBY               0x6c
 #define DRAWGI_OOT_STONE_SAPPHIRE           0x6d
-#define DRAWGI_OOT_DEFENSE_UPGRADE          0x6e
+#define DRAWGI_DEFENSE_UPGRADE              0x6e
 #define DRAWGI_MM_MASK_KAMARO               0x83
 #define DRAWGI_MM_MASK_COUPLE               0x84
 #define DRAWGI_MM_NOTE_BLUE                 0x85
@@ -141,8 +141,6 @@ extern const Shader kShaders[256];
 #define DRAWGI_MM_MASK_TROUPE_LEADER        0x8f
 #define DRAWGI_MM_MASK_BREMEN               0x90
 #define DRAWGI_MM_MASK_ALL_NIGHT            0x91
-#define DRAWGI_MM_HEART_CONTAINER           0x93
-#define DRAWGI_MM_HEART_PIECE               0x94
 #define DRAWGI_MM_MASK_DON_GERO             0xa3
 #define DRAWGI_MM_SHIELD_HERO               0xa8
 #define DRAWGI_MM_HOOKSHOT                  0xa9
