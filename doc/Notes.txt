@@ -120,3 +120,7 @@ x Unk Poe -> Poe (MM: 206)
 x Unk Fairy -> Fairy (207)
 x Fake Hot Spring Water -> Big Poe
 x Unk After kokiri sword -> GS Token 2
+
+Notes:
+/* OoT              Music Note (Green)        */ { Shader_CustomNote,             { 0x00c800ff, 0x6000ae0 }},
+/* MM               Note (Blue)               */ { Shader_Xlu01,                  { 0x6000aa0, 0x6000ae0 }},

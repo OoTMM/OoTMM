@@ -21,12 +21,6 @@ extern const Shader kShaders[256];
 
 #define DRAWGI_EMPTY_BOTTLE                 0x01
 #define DRAWGI_SMALL_KEY                    0x02
-#define DRAWGI_OOT_NOTE_GREEN               0x03
-#define DRAWGI_OOT_NOTE_RED                 0x04
-#define DRAWGI_OOT_NOTE_BLUE                0x05
-#define DRAWGI_OOT_NOTE_ORANGE              0x06
-#define DRAWGI_OOT_NOTE_PURPLE              0x07
-#define DRAWGI_OOT_NOTE_YELLOW              0x08
 #define DRAWGI_RECOVERY_HEART               0x09
 #define DRAWGI_BOSS_KEY                     0x0a
 #define DRAWGI_COMPASS                      0x0b
@@ -84,7 +78,6 @@ extern const Shader kShaders[256];
 #define DRAWGI_FISH                         0x3f
 #define DRAWGI_OOT_POACHER_SAW              0x40
 #define DRAWGI_OOT_MEGATON_HAMMER           0x41
-#define DRAWGI_OOT_BETA_WHISTLE             0x42
 #define DRAWGI_OOT_BIGGORON_SWORD           0x43
 #define DRAWGI_OOT_CHICKEN                  0x44
 #define DRAWGI_OOT_RUTO_LETTER              0x45
@@ -93,10 +86,6 @@ extern const Shader kShaders[256];
 #define DRAWGI_OOT_SEEDS                    0x48
 #define DRAWGI_OOT_GAUNTLETS_SILVER         0x49
 #define DRAWGI_OOT_GAUNTLETS_GOLD           0x4a
-#define DRAWGI_OOT_BETA_COIN_YELLOW         0x4b
-#define DRAWGI_OOT_BETA_COIN_RED            0x4c
-#define DRAWGI_OOT_BETA_COIN_GREEN          0x4d
-#define DRAWGI_OOT_BETA_COIN_BLUE           0x4e
 #define DRAWGI_OOT_MASK_SKULL               0x4f
 #define DRAWGI_MASK_BUNNY                   0x50
 #define DRAWGI_MASK_TRUTH                   0x51
@@ -123,7 +112,6 @@ extern const Shader kShaders[256];
 #define DRAWGI_OOT_SPELL_LOVE               0x66
 #define DRAWGI_OOT_BLUE_FIRE                0x67
 #define DRAWGI_BUG                          0x68
-#define DRAWGI_OOT_BUTTERFLY                0x69
 #define DRAWGI_POE                          0x6a
 #define DRAWGI_FAIRY                        0x6b
 #define DRAWGI_OOT_BULLET_BAG2              0x6c
@@ -137,7 +125,6 @@ extern const Shader kShaders[256];
 #define DRAWGI_OOT_SWORD_KOKIRI             0x74
 #define DRAWGI_GS_TOKEN2                    0x75
 #define DRAWGI_OOT_SWORD_MASTER             0x76
-#define DRAWGI_OOT_NOTE_GRAY                0x77
 #define DRAWGI_OOT_STONE_EMERALD            0x78
 #define DRAWGI_OOT_STONE_RUBY               0x79
 #define DRAWGI_OOT_STONE_SAPPHIRE           0x7a
