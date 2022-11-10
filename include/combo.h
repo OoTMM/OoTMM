@@ -14,7 +14,6 @@
 # include <combo/defs.h>
 # include <combo/equipment.h>
 # include <combo/object.h>
-# include <combo/shader.h>
 # include <combo/patch.h>
 # include <combo/npc.h>
 
@@ -22,6 +21,7 @@
 #  include <combo/oot/play.h>
 #  include <combo/oot/player.h>
 #  include <combo/oot/actors/Item_Etcetera.h>
+#  include <combo/oot/actor_engirla.h>
 # endif
 
 # if defined(GAME_MM)
@@ -45,6 +45,7 @@
 #include <combo/items.h>
 #include <combo/common/events.h>
 #include <combo/scenes.h>
+#include <combo/shader.h>
 
 #if !defined(__ASSEMBLER__)
 void comboDisableInterrupts(void);

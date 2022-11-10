@@ -2,9 +2,8 @@
 #include <combo/custom.h>
 
 const GetItem kExtendedGetItems[] = {
-#define X(a, b, c, d, e)    {a, b, Y(c), 8, Z(e)}
+#define X(a, b, c, d, e)    {a, b, c, 8, Y(e)}
 #define Y(x)                x
-#define Z(x)                x
 
 #if defined(GAME_OOT)
 # include "data/oot/gi.inc"
@@ -12,9 +11,7 @@ const GetItem kExtendedGetItems[] = {
 # include "data/mm/gi.inc"
 #endif
 # undef Y
-# undef Z
-# define Y(x)               ((x) | MASK_FOREIGN_SHADER)
-# define Z(x)               ((((x) < 0x2000) * ((x) | MASK_FOREIGN_OBJECT)) | ((x) >= 0x2000) * (x))
+# define Y(x)               ((((x) < 0x2000) * ((x) | MASK_FOREIGN_OBJECT)) | ((x) >= 0x2000) * (x))
 #if defined(GAME_OOT)
 # include "data/mm/gi.inc"
 #else
@@ -23,7 +20,6 @@ const GetItem kExtendedGetItems[] = {
 
 #undef X
 #undef Y
-#undef Z
 };
 
 u16 comboItemFromGI(s32 gi)
