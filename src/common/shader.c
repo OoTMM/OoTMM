@@ -55,20 +55,35 @@ void Shader_Xlu0(GameState* gs, s16 shaderId)
 
 void Shader_CustomNote(GameState* gs, s16 shaderId)
 {
+    static const u32 kColors[] = {
+        0x8000ffff /* Purple */,
+        0x0000ffff /* Blue */,
+        0x00ff00ff /* Green */,
+        0xffff00ff /* Yellow */,
+        0xff8000ff /* Orange */,
+        0xff0000ff /* Red */,
+    };
+
     const Shader* shader;
+    float angle;
     u8 r;
     u8 g;
     u8 b;
     u8 a;
 
     shader = &kShaders[shaderId];
-    color4(&r, &g, &b, &a, shader->lists[0]);
+    angle = M_PI / 16;
+    if (shader->lists[1] & 0x10)
+        angle += M_PI;
+    color4(&r, &g, &b, &a, kColors[shader->lists[1] & 0xf]);
+
+    ModelViewRotateZ(angle, MAT_MUL);
 
     OPEN_DISPS(gs->gfx);
     InitListPolyXlu(gs->gfx);
     gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(gs->gfx), G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gDPSetEnvColor(POLY_XLU_DISP++, r, g, b, a);
-    gSPDisplayList(POLY_XLU_DISP++, shader->lists[1]);
+    gSPDisplayList(POLY_XLU_DISP++, shader->lists[0]);
     CLOSE_DISPS();
 }
 
@@ -256,14 +271,6 @@ void Shader_MasterSword(GameState* gs, s16 shaderId)
     CLOSE_DISPS();
 }
 
-const Shader kShaders[256] = {
-#if defined(GAME_OOT)
-# include "data/oot/shaders.inc"
-# include "data/mm/shaders.inc"
-#endif
-
-#if defined(GAME_MM)
-# include "data/mm/shaders.inc"
-# include "data/oot/shaders.inc"
-#endif
+const Shader kShaders[] = {
+#include "data/shaders.inc"
 };

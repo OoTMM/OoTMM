@@ -48,7 +48,7 @@ export const CONFIG_MM: GameConfig = {
   payloadAddr: 0x03fc0000,
   actorsOvlAddr: 0xc45510,
   actorsOvlCount: 690,
-  objectTableAddr: 0xb508e0,
+  objectTableAddr: 0xc58c80,
   objectCount: 0x283,
 };
 
