@@ -256,14 +256,6 @@ void Shader_MasterSword(GameState* gs, s16 shaderId)
     CLOSE_DISPS();
 }
 
-const Shader kShaders[256] = {
-#if defined(GAME_OOT)
-# include "data/oot/shaders.inc"
-# include "data/mm/shaders.inc"
-#endif
-
-#if defined(GAME_MM)
-# include "data/mm/shaders.inc"
-# include "data/oot/shaders.inc"
-#endif
+const Shader kShaders[] = {
+#include "data/shaders.inc"
 };
