@@ -65,13 +65,19 @@ void Shader_CustomNote(GameState* gs, s16 shaderId)
     };
 
     const Shader* shader;
+    float angle;
     u8 r;
     u8 g;
     u8 b;
     u8 a;
 
     shader = &kShaders[shaderId];
+    angle = M_PI / 16;
+    if (shader->lists[1] & 0x10)
+        angle += M_PI;
     color4(&r, &g, &b, &a, kColors[shader->lists[1] & 0xf]);
+
+    ModelViewRotateZ(angle, MAT_MUL);
 
     OPEN_DISPS(gs->gfx);
     InitListPolyXlu(gs->gfx);
