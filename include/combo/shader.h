@@ -131,10 +131,6 @@ extern const Shader kShaders[256];
 #define DRAWGI_DEFENSE_UPGRADE              0x6e
 #define DRAWGI_MM_MASK_KAMARO               0x83
 #define DRAWGI_MM_MASK_COUPLE               0x84
-#define DRAWGI_MM_NOTE_BLUE                 0x85
-#define DRAWGI_MM_NOTE_ORANGE               0x86
-#define DRAWGI_MM_NOTE_PURPLE               0x87
-#define DRAWGI_MM_NOTE_GREEN                0x88
 #define DRAWGI_MM_NOTEBOOK                  0x8c
 #define DRAWGI_MM_MASK_STONE                0x8d
 #define DRAWGI_MM_MASK_KAFEI                0x8e
@@ -148,7 +144,6 @@ extern const Shader kShaders[256];
 #define DRAWGI_MM_BOW                       0xaf
 #define DRAWGI_MM_SHIELD_MIRROR             0xb4
 #define DRAWGI_MM_LETTER_TO_MAMA            0xb7
-#define DRAWGI_MM_UNK1                      0xb8
 #define DRAWGI_MM_MASK_SUN                  0xba
 #define DRAWGI_MM_MASK_BLAST                0xbb
 #define DRAWGI_MM_BOTTLED_FAIRY             0xbc
@@ -160,9 +155,6 @@ extern const Shader kShaders[256];
 #define DRAWGI_MM_DEED_OCEAN                0xc4
 #define DRAWGI_MM_MASK_GORON                0xc5
 #define DRAWGI_MM_MASK_ZORA                 0xc6
-#define DRAWGI_MM_UNK3                      0xc7
-#define DRAWGI_MM_BUG                       0xcc
-#define DRAWGI_MM_UNK4                      0xcd
 #define DRAWGI_MM_RUPEE_GREEN               0xd0
 #define DRAWGI_MM_RUPEE_BLUE                0xd1
 #define DRAWGI_MM_RUPEE_RED                 0xd2
