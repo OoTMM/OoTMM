@@ -192,3 +192,4 @@
 /* OoT       Custom: Stick Upgrade 2           */ { Shader_CustomStick,            { 0x60004d0, 2 }},
 /* OoT       Custom: Deku Nut Upgrade          */ { Shader_CustomNut,              { 0x6000e90, 1 }},
 /* OoT       Custom: Deku Nut Upgrade 2        */ { Shader_CustomNut,              { 0x6000e90, 2 }},
+/* MM        Custom: Spin Upgrade              */ { Shader_CustomSpin,             { 0x6000998, 0x6000850 }},

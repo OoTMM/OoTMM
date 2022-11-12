@@ -144,11 +144,13 @@ static void shaderFlameEffect(GameState* gs, int colorIndex)
     static const u32 kPrimColors[] = {
         0x00ffffc0,
         0xff00ffc0,
+        0xff0000c0,
     };
 
     static const u32 kEnvColors[] = {
         0x0000ffc0,
         0xff0000c0,
+        0xffff00c0,
     };
 
     u8 r;
@@ -381,6 +383,29 @@ void Shader_MasterSword(GameState* gs, s16 shaderId)
     gSPSegment(POLY_OPA_DISP++, 8, dummySegment(gs->gfx));
     InitListPolyOpa(gs->gfx);
     gSPDisplayList(POLY_OPA_DISP++, shader->lists[0]);
+    CLOSE_DISPS();
+}
+
+void Shader_CustomSpin(GameState* gs, s16 shaderId)
+{
+    const Shader* shader;
+
+    shader = &kShaders[shaderId];
+    float rot;
+
+
+    rot = (gs->frameCount * 0.01f);
+    OPEN_DISPS(gs->gfx);
+    ModelViewRotateX(rot * 3, MAT_MUL);
+    ModelViewRotateY(rot * 5, MAT_MUL);
+    ModelViewRotateZ(rot * 7, MAT_MUL);
+    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(gs->gfx), G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    InitListPolyOpa(gs->gfx);
+    gSPDisplayList(POLY_OPA_DISP++, shader->lists[0]);
+    gSPDisplayList(POLY_OPA_DISP++, shader->lists[1]);
+
+    InitListPolyXlu(gs->gfx);
+    shaderFlameEffect(gs, 2);
     CLOSE_DISPS();
 }
 
