@@ -64,6 +64,9 @@ static s16 comboOverrideImpl(u16 sceneId, u16 id, s16 gi)
     u16 absGi;
 
     override = comboOverrideRaw(makeKey(sceneId, id));
+#if defined(DEBUG)
+    override = 0x100 | GI_OOT_STICK_UPGRADE;
+#endif
     absGi = gi > 0 ? gi : -gi;
     if (override >= 0)
         absGi = override;
@@ -76,7 +79,7 @@ s16 comboOverride(int type, u16 sceneId, u16 id, s16 gi)
 {
 #if defined(DEBUG)
     //return -(0x100 | GI_MM_SONG_ORDER);
-    //return -(GI_OOT_SONG_TP_LIGHT);
+    //return -(GI_OOT_STICK_UPGRADE);
 #endif
     switch (type)
     {

@@ -5,7 +5,7 @@ extern void Play_Init(void*);
 static void debugCheat(GameState_Play* play)
 {
 #if defined(DEBUG)
-    if (play->gs.input[0].current.buttons & 0x20)
+    if (play->gs.input[0].current.buttons & L_TRIG)
     {
         /*
         gSave.inventory[ITS_OOT_STICKS] = ITEM_OOT_STICK;
@@ -174,4 +174,12 @@ void hookPlay_Init(GameState_Play* play)
         comboGameSwitch();
         return;
     }
+
+#if defined(DEBUG)
+    if (play->gs.input[0].current.buttons & R_TRIG)
+    {
+        comboGameSwitch();
+        return;
+    }
+#endif
 }
