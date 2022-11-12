@@ -65,7 +65,7 @@ static s16 comboOverrideImpl(u16 sceneId, u16 id, s16 gi)
 
     override = comboOverrideRaw(makeKey(sceneId, id));
 #if defined(DEBUG)
-    override = 0x100 | GI_OOT_STICK_UPGRADE;
+    override = 0x100 | GI_OOT_NUT_UPGRADE;
 #endif
     absGi = gi > 0 ? gi : -gi;
     if (override >= 0)

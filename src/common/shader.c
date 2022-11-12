@@ -170,18 +170,19 @@ static void shaderFlameEffect(GameState* gs, int colorIndex)
     CLOSE_DISPS();
 }
 
+static const u32 kNutStickPrimColors[] = {
+    0xa06428ff,
+    0xffffffff,
+    0xffffbbff,
+};
+static const u32 kNutStickEnvColors[] = {
+    0x28a000ff,
+    0x505050ff,
+    0xaaaa00ff,
+};
+
 void Shader_CustomStick(GameState* gs, s16 shaderId)
 {
-    static const u32 kPrimColors[] = {
-        0xa06428ff,
-        0xffffffff,
-        0xffffbbff,
-    };
-    static const u32 kEnvColors[] = {
-        0x28a000ff,
-        0x505050ff,
-        0xaaaa00ff,
-    };
     const Shader* shader;
     u8 r;
     u8 g;
@@ -193,9 +194,41 @@ void Shader_CustomStick(GameState* gs, s16 shaderId)
     OPEN_DISPS(gs->gfx);
     InitListPolyOpa(gs->gfx);
     gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(gs->gfx), G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    color4(&r, &g, &b, &a, kPrimColors[shader->lists[1]]);
+    color4(&r, &g, &b, &a, kNutStickPrimColors[shader->lists[1]]);
     gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, r, g, b, a);
-    color4(&r, &g, &b, &a, kEnvColors[shader->lists[1]]);
+    color4(&r, &g, &b, &a, kNutStickEnvColors[shader->lists[1]]);
+    gDPSetEnvColor(POLY_OPA_DISP++, r, g, b, a);
+    gSPDisplayList(POLY_OPA_DISP++, shader->lists[0]);
+
+    /* Draw fire */
+    if (shader->lists[1])
+    {
+        InitListPolyXlu(gs->gfx);
+        shaderFlameEffect(gs, shader->lists[1] - 1);
+    }
+
+    CLOSE_DISPS();
+}
+
+void Shader_CustomNut(GameState* gs, s16 shaderId)
+{
+    const Shader* shader;
+    u8 r;
+    u8 g;
+    u8 b;
+    u8 a;
+    u32 fc;
+
+    shader = &kShaders[shaderId];
+    fc = gs->frameCount * 6;
+
+    OPEN_DISPS(gs->gfx);
+    InitListPolyOpa(gs->gfx);
+    gSPSegment(POLY_OPA_DISP++, 0x09, GetSegment(gs->gfx, 0, fc, fc, 0x20, 0x20, 1, fc, fc, 0x20, 0x20));
+    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(gs->gfx), G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    color4(&r, &g, &b, &a, kNutStickPrimColors[shader->lists[1]]);
+    gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, r, g, b, a);
+    color4(&r, &g, &b, &a, kNutStickEnvColors[shader->lists[1]]);
     gDPSetEnvColor(POLY_OPA_DISP++, r, g, b, a);
     gSPDisplayList(POLY_OPA_DISP++, shader->lists[0]);
 

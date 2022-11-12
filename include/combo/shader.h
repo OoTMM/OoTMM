@@ -211,5 +211,7 @@ extern const Shader kShaders[256];
 #define DRAWGI_NOTE_RED_DOWN                0xbe
 #define DRAWGI_OOT_STICK_UPGRADE            0xbf
 #define DRAWGI_OOT_STICK_UPGRADE2           0xc0
+#define DRAWGI_OOT_NUT_UPGRADE              0xc1
+#define DRAWGI_OOT_NUT_UPGRADE2             0xc2
 
 #endif
