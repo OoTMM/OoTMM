@@ -2,3 +2,5 @@
 - MM unbreakable Razor Blade
 - MM GetCollectibleBehavior
 - MM Song of Time patches
+- OoT Gerudo Card
+- Common Win

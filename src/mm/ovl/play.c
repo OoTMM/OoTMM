@@ -51,6 +51,8 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.items[ITS_MM_MASK_COUPLE] = ITEM_MM_MASK_COUPLE;
         gSave.inventory.items[ITS_MM_MASK_POSTMAN] = ITEM_MM_MASK_POSTMAN;
         gSave.inventory.items[ITS_MM_MASK_TROUPE_LEADER] = ITEM_MM_MASK_TROUPE_LEADER;
+
+        gSave.inventory.questItems.remainsOdolwa = 1;
     }
 #endif
 }

@@ -19,9 +19,7 @@ void Sram_AfterOpenSave(void)
 {
     gSave.entranceIndex = ENTRANCE_CLOCKTOWN;
 
-/*
 #if defined(DEBUG)
     gSave.entranceIndex = ENTRANCE_BOSS1;
 #endif
-*/
 }
