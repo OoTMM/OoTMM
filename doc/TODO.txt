@@ -1,6 +1,6 @@
-- MM teleport pads
-- MM unbreakable Razor Blade
+x MM teleport pads
 - MM GetCollectibleBehavior
-- MM Song of Time patches
+- MM unbreakable Razor Blade
 - OoT Gerudo Card
+- MM Song of Time patches
 - Common Win

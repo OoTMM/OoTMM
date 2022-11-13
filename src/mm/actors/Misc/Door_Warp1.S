@@ -1,5 +1,7 @@
 #include <combo.h>
 
+#define BOSS_FLAGS_ADDR (gSaveContext + 0xf8 + 0x1c * 1 + 0x14)
+
 /* Patch DoorWarp1_RemainsIndex */
 PATCH_START 0x808b849c
   jr ra
@@ -17,4 +19,37 @@ DoorWarp1_AfterDraw_Trampoline:
 PATCH_START 0x808bb8a4
   j DoorWarp1_AfterDraw_Trampoline
    nop
+PATCH_END
+
+/* Check for boss beaten flag to enable warp pad */
+PATCH_START 0x808b8d44
+  lui a0,%HI(BOSS_FLAGS_ADDR)
+PATCH_END
+
+PATCH_START 0x808b8d6c
+  lui a0,%HI(BOSS_FLAGS_ADDR)
+PATCH_END
+
+PATCH_START 0x808b8d50
+  addiu a0,%LO(BOSS_FLAGS_ADDR)
+PATCH_END
+
+PATCH_START 0x808b8d80
+  addiu a0,%LO(BOSS_FLAGS_ADDR)
+PATCH_END
+
+PATCH_START 0x808b8d60
+  lw v0,0(a0)
+PATCH_END
+
+PATCH_START 0x808b8d84
+  lw v0,0(a0)
+PATCH_END
+
+PATCH_START 0x808b8da0
+  lw v0,0(a0)
+PATCH_END
+
+PATCH_START 0x808b8dbc
+  lw v0,0(a0)
 PATCH_END
