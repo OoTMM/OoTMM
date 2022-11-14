@@ -38,11 +38,11 @@ static void debugCheat(GameState_Play* play)
         gSave.playerData.healthCapacity = 0x10 * 20;
         gSave.playerData.health = gSave.playerData.healthCapacity;
 
-        gMmExtraTrade.trade1 = 0xff;
+        gSave.inventory.items[ITS_MM_TRADE1] = ITEM_MM_DEED_LAND;
+        gMmExtraTrade.trade1 = 0x02;
         gMmExtraTrade.trade2 = 0xff;
         gMmExtraTrade.trade3 = 0xff;
 
-        gSave.inventory.items[ITS_MM_TRADE1] = ITEM_MM_DEED_SWAMP;
         gSave.inventory.items[ITS_MM_TRADE2] = ITEM_MM_ROOM_KEY;
         gSave.inventory.items[ITS_MM_TRADE3] = ITEM_MM_PENDANT_OF_MEMORIES;
 
