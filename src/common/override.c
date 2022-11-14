@@ -65,7 +65,7 @@ static s16 comboOverrideImpl(u16 sceneId, u16 id, s16 gi)
 
     override = comboOverrideRaw(makeKey(sceneId, id));
 #if defined(DEBUG)
-    //override = GI_MM_SPIN_UPGRADE;
+    //override = GI_MM_MOON_TEAR;
 #endif
     absGi = gi > 0 ? gi : -gi;
     if (override >= 0)
@@ -78,7 +78,7 @@ static s16 comboOverrideImpl(u16 sceneId, u16 id, s16 gi)
 s16 comboOverride(int type, u16 sceneId, u16 id, s16 gi)
 {
 #if defined(DEBUG)
-    //return -(0x100 | GI_MM_SONG_ORDER);
+    //return -(0x100 | GI_MM_MOON_TEAR);
     //return -(GI_OOT_STICK_UPGRADE);
 #endif
     switch (type)

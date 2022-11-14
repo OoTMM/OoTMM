@@ -29,6 +29,11 @@ PATCH_LOAD_STORE 8, 1
 .int 0x8085b914
 PATCH_END
 
+/* Make the drawID read from the table unsigned too */
+PATCH_LOAD_STORE 8, 1
+.int 0x80853b40
+PATCH_END
+
 /* Use our item-inventory handler */
 PATCH_START(0x8084834c)
   lw v0,0x24(sp)
