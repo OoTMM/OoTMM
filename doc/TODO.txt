@@ -20,10 +20,10 @@
 
 Trade Remove:
 x Moon Tear
-- Land Deed
-- Swamp Deed
-- Mountain Deed
-- Ocean Deed
+x Land Deed
+x Swamp Deed
+x Mountain Deed
+x Ocean Deed
 - Letter to Kafei
 - Pendant of Memories
 - Room Key

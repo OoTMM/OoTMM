@@ -5,7 +5,6 @@ int EnSellnuts_HasGivenItem(Actor* this)
     if (Actor_HasParent(this))
     {
         gMmExtraFlags.scrubTown = 1;
-        comboRemoveTradeItem1(XITEM_MM_TRADE1_MOON_TEAR);
         return 1;
     }
     return 0;
@@ -18,6 +17,7 @@ int EnSellnuts_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, floa
     /* Unfreeze player */
     GET_LINK(play)->state &= ~PLAYER_ACTOR_STATE_CUTSCENE_FROZEN;
 
+    comboRemoveTradeItem1(XITEM_MM_TRADE1_MOON_TEAR);
     if (gMmExtraFlags.scrubTown)
         gi = GI_MM_RECOVERY_HEART;
     else

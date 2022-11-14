@@ -19,19 +19,15 @@ int EnAkindonuts_HasGivenItem(Actor* this)
         {
         case SCRUB_SWAMP:
             gMmExtraFlags.scrubSwamp = 1;
-            comboRemoveTradeItem1(XITEM_MM_TRADE1_DEED_LAND);
             break;
         case SCRUB_MOUNTAIN:
             gMmExtraFlags.scrubMountain = 1;
-            comboRemoveTradeItem1(XITEM_MM_TRADE1_DEED_SWAMP);
             break;
         case SCRUB_OCEAN:
             gMmExtraFlags.scrubOcean = 1;
-            comboRemoveTradeItem1(XITEM_MM_TRADE1_DEED_MOUNTAIN);
             break;
         case SCRUB_VALLEY:
             gMmExtraFlags.scrubValley = 1;
-            comboRemoveTradeItem1(XITEM_MM_TRADE1_DEED_OCEAN);
             break;
         case SCRUB_BOMB_BAG:
             gMmExtraFlags.scrubBombBag = 1;
@@ -50,6 +46,7 @@ int EnAkindonuts_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, f
     switch (gi)
     {
     case GI_MM_DEED_SWAMP:
+        comboRemoveTradeItem1(XITEM_MM_TRADE1_DEED_LAND);
         if (gMmExtraFlags.scrubSwamp)
             gi = GI_MM_RECOVERY_HEART;
         else
@@ -59,6 +56,7 @@ int EnAkindonuts_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, f
         }
         break;
     case GI_MM_DEED_MOUNTAIN:
+        comboRemoveTradeItem1(XITEM_MM_TRADE1_DEED_SWAMP);
         if (gMmExtraFlags.scrubMountain)
             gi = GI_MM_RECOVERY_HEART;
         else
@@ -68,6 +66,7 @@ int EnAkindonuts_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, f
         }
         break;
     case GI_MM_DEED_OCEAN:
+        comboRemoveTradeItem1(XITEM_MM_TRADE1_DEED_MOUNTAIN);
         if (gMmExtraFlags.scrubOcean)
             gi = GI_MM_RECOVERY_HEART;
         else
@@ -77,6 +76,7 @@ int EnAkindonuts_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, f
         }
         break;
     case GI_MM_RUPEE_GOLD:
+        comboRemoveTradeItem1(XITEM_MM_TRADE1_DEED_OCEAN);
         if (gMmExtraFlags.scrubValley)
             gi = GI_MM_RECOVERY_HEART;
         else
