@@ -103,3 +103,4 @@ ActorCutscene_Stop = 0x800f1fbc;
 gActorOvl = 0x801aefd0;
 
 SetSwitchFlag = 0x800b5bf4;
+GetItemCollectBehavior = 0x801143cc;

@@ -1,5 +1,4 @@
-x MM teleport pads
-- MM GetCollectibleBehavior
+- MM Removed Trade Items
 - MM unbreakable Razor Blade
 - OoT Gerudo Card
 - MM Song of Time patches
