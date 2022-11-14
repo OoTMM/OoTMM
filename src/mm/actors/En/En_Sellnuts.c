@@ -5,6 +5,7 @@ int EnSellnuts_HasGivenItem(Actor* this)
     if (Actor_HasParent(this))
     {
         gMmExtraFlags.scrubTown = 1;
+        comboRemoveTradeItem1(XITEM_MM_TRADE1_MOON_TEAR);
         return 1;
     }
     return 0;

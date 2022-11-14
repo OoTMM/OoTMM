@@ -212,10 +212,12 @@ ALIGNED(16) extern MmSave gMmSave;
 /* Custom */
 typedef struct
 {
-    u8 trade1;
-    u8 trade2;
-    u8 trade3;
-    u8 unused;
+    u32 trade1:5;
+    u32 trade2:2;
+    u32 trade3:2;
+    u32 tradeObtained1:5;
+    u32 tradeObtained2:2;
+    u32 tradeObtained3:2;
 }
 MmExtraTrade;
 

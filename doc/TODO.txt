@@ -1,5 +1,32 @@
 - MM Removed Trade Items
+- Common add Seed Option
+- MM Instant Text
+- OoT Combo title screen
+- OoT Shield Fix
+- MM Shield Fix
+- MM Remove stealing bird
+- OoT Like-Like fix
+- MM Deku/Goron/Zora B button fix
+- MM Epona no bow fix
 - MM unbreakable Razor Blade
 - OoT Gerudo Card
 - MM Song of Time patches
+- OoT Logic/Adult Saria song fix
+- MM Logic SoT
+- OoT File select copy
+- Save Options (Hold, sound)
+- Save Slot 3
 - Common Win
+
+Trade Remove:
+x Moon Tear
+- Land Deed
+- Swamp Deed
+- Mountain Deed
+- Ocean Deed
+- Letter to Kafei
+- Pendant of Memories
+- Room Key
+- Letter to Mama
+- ??? Paper
+- Night 3 Rook Key remove?
