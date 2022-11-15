@@ -25,7 +25,7 @@ x Swamp Deed
 x Mountain Deed
 x Ocean Deed
 x Letter to Kafei
-- Pendant of Memories
+x Pendant of Memories
 - Room Key
 - Letter to Mama
 x ??? Paper

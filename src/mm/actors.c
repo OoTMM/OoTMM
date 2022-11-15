@@ -83,6 +83,9 @@ static void Actor_ByteCode_RemoveItem(s16 item, s16 slot)
     case ITEM_MM_LETTER_TO_KAFEI:
         comboRemoveTradeItem3(XITEM_MM_TRADE3_LETTER_TO_KAFEI);
         break;
+    case ITEM_MM_PENDANT_OF_MEMORIES:
+        comboRemoveTradeItem3(XITEM_MM_TRADE3_PENDANT_OF_MEMORIES);
+        break;
     default:
         RemoveItem(item, slot);
         break;
