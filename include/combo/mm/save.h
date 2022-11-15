@@ -274,7 +274,8 @@ typedef struct
     u32 maskFierceDeity:1;
     u32 ocarina:1;
     u32 songOath:1;
-    u32 unused:13;
+    u32 progressiveShield:1;
+    u32 unused:12;
 }
 MmExtraFlags2;
 

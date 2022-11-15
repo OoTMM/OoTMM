@@ -403,6 +403,9 @@ void comboAddItemMm(u16 itemId)
     case ITEM_MM_SWORD_GILDED:
         addSword(3);
         break;
+    case ITEM_MM_PROGRESSIVE_SHIELD_HERO:
+        gMmExtraFlags2.progressiveShield = 1;
+        /* Fallthrough */
     case ITEM_MM_SHIELD_HERO:
         addShield(1);
         break;

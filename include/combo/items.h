@@ -299,6 +299,7 @@
 #define ITEM_MM_MAGIC_UPGRADE2              0xa5
 #define ITEM_MM_DEFENSE_UPGRADE             0xa6
 #define ITEM_MM_SPIN_UPGRADE                0xa7
+#define ITEM_MM_PROGRESSIVE_SHIELD_HERO     0xa8
 
 #define ITEM_NONE   0xff
 
