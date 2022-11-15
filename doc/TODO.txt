@@ -1,4 +1,3 @@
-- Common add Seed Option
 - MM Instant Text
 - OoT Combo title screen
 - OoT Shield Fix

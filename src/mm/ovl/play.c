@@ -62,7 +62,7 @@ static void debugCheat(GameState_Play* play)
 void hookPlay_Init(GameState_Play* play)
 {
     comboObjectsReset();
-    //debugCheat(play);
+    debugCheat(play);
 
     /* Force alt beaver race */
     MM_SET_EVENT_WEEK(EV_MM_WEEK_BEAVER_RACE_ALT);

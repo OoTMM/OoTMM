@@ -1,14 +1,5 @@
 import crypto from 'crypto';
 
-const getSeed = () => {
-  const buf = crypto.randomBytes(4 * 6);
-  const seed = [];
-  for (let i = 0; i < 6; i++) {
-    seed.push(buf.readUInt32LE(i * 4));
-  }
-  return seed;
-};
-
 export class Random {
   private state: number[] = [0, 0, 0, 0, 0];
   private counter: number = 0;
@@ -32,15 +23,17 @@ export class Random {
     return (t + this.counter) >>> 0;
   }
 
-  seed(seed?: number[]) {
-    if (!seed) {
-      seed = getSeed();
+  seed(seed: string) {
+    const hash = crypto.createHash('sha512');
+    hash.update(seed);
+    const digest = hash.digest('hex');
+    for (let i = 0; i < 5; ++i) {
+      this.state[i] = parseInt(digest.substr(i * 8, 8), 16);
     }
-    this.state[0] = seed[0];
-    this.state[1] = seed[1];
-    this.state[2] = seed[2];
-    this.state[3] = seed[3];
-    this.state[4] = seed[4];
-    this.counter = seed[5];
+    this.counter = 0;
   }
+}
+
+export const randString = () => {
+  return crypto.randomBytes(48).toString('hex');
 }

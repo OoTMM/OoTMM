@@ -2,6 +2,7 @@ import { logic, LogicResult } from './logic';
 import { DATA_GI, DATA_NPC, DATA_SCENES } from './data';
 import { Game, GAMES } from "./config";
 import { WorldCheck } from './logic/world';
+import { Options } from './options';
 
 const OFFSETS = {
   oot: 0x1000,
@@ -113,9 +114,9 @@ export const randomizeGame = async (game: Game, logic: LogicResult): Promise<Buf
   return toU16Buffer(buf);
 };
 
-export const randomize = async (rom: Buffer) => {
+export const randomize = async (rom: Buffer, opts: Options) => {
   console.log("Randomizing...");
-  const res = await logic();
+  const res = await logic(opts);
   const buffer = Buffer.alloc(0x20000, 0xff);
   for (const g of GAMES) {
     const gameBuffer = await randomizeGame(g, res);

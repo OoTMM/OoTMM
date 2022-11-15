@@ -1,18 +1,30 @@
-import { Random } from '../random';
+import { Random, randString } from '../random';
 import { ItemPlacement, solve } from './solve';
 import { createWorld, WorldCheck } from './world';
 import { spoiler } from './spoiler';
 import { LogicSeedError } from './error';
+import { Options } from '../options';
 
 export type LogicResult = {
   items: WorldCheck[];
   log: string;
 };
 
-export const logic = async (): Promise<LogicResult> => {
+const getSeed = (opts: Options): string => {
+  if (opts.seed) {
+    return opts.seed;
+  }
+  if (opts.debug) {
+    return 'DEBUG';
+  }
+  return randString();
+}
+
+export const logic = async (opts: Options): Promise<LogicResult> => {
+  const seed = getSeed(opts);
   const world = await createWorld();
   const random = new Random();
-  random.seed();
+  random.seed(seed);
 
   let placement: ItemPlacement = {};
   let error: Error | null = null;
@@ -31,7 +43,7 @@ export const logic = async (): Promise<LogicResult> => {
   if (error) {
     throw error;
   }
-  const log = spoiler(world, placement);
+  const log = spoiler(world, placement, seed);
 
   const items: WorldCheck[] = [];
   for (const loc in placement) {
