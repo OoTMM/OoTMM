@@ -360,16 +360,16 @@ void comboAddItemOot(u16 itemId)
         gOotSave.equipment.swords &= ~(EQ_OOT_SWORD_KNIFE_BROKEN);
         gOotSave.isBiggoronSword = 1;
         break;
-    case ITEM_OOT_SHIELD_DEKU:
+    case ITEM_OOT_PROGRESSIVE_SHIELD_DEKU:
         gOotExtraItems.shield |= EQ_OOT_SHIELD_DEKU;
         /* Fallthrough */
-    case ITEM_OOT_SHOP_SHIELD_DEKU:
+    case ITEM_OOT_SHIELD_DEKU:
         gOotSave.equipment.shields |= EQ_OOT_SHIELD_DEKU;
         break;
-    case ITEM_OOT_SHIELD_HYLIAN:
+    case ITEM_OOT_PROGRESSIVE_SHIELD_HYLIAN:
         gOotExtraItems.shield |= EQ_OOT_SHIELD_HYLIAN;
         /* Fallthrough */
-    case ITEM_OOT_SHOP_SHIELD_HYLIAN:
+    case ITEM_OOT_SHIELD_HYLIAN:
         gOotSave.equipment.shields |= EQ_OOT_SHIELD_HYLIAN;
         break;
     case ITEM_OOT_SHIELD_MIRROR:

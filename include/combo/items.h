@@ -151,12 +151,12 @@
 #define ITEM_OOT_NUT_UPGRADE2           0x9b
 
 /* Custom */
-#define ITEM_OOT_MAGIC_UPGRADE          0x9c
-#define ITEM_OOT_MAGIC_UPGRADE2         0x9d
-#define ITEM_OOT_DEFENSE_UPGRADE        0x9e
-#define ITEM_OOT_SWORD_BIGGORON         0x9f
-#define ITEM_OOT_SHOP_SHIELD_DEKU       0xa0
-#define ITEM_OOT_SHOP_SHIELD_HYLIAN     0xa1
+#define ITEM_OOT_MAGIC_UPGRADE              0x9c
+#define ITEM_OOT_MAGIC_UPGRADE2             0x9d
+#define ITEM_OOT_DEFENSE_UPGRADE            0x9e
+#define ITEM_OOT_SWORD_BIGGORON             0x9f
+#define ITEM_OOT_PROGRESSIVE_SHIELD_DEKU    0xa0
+#define ITEM_OOT_PROGRESSIVE_SHIELD_HYLIAN  0xa1
 
 #define ITEM_MM_OCARINA_OF_TIME             0x00
 #define ITEM_MM_BOW                         0x01

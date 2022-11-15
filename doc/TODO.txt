@@ -1,4 +1,3 @@
-- OoT Shield Fix
 - MM Shield Fix
 - OoT Combo title screen
 - MM Remove stealing bird
