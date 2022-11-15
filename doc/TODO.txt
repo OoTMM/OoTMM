@@ -1,7 +1,6 @@
-- MM Instant Text
-- OoT Combo title screen
 - OoT Shield Fix
 - MM Shield Fix
+- OoT Combo title screen
 - MM Remove stealing bird
 - OoT Like-Like fix
 - MM Deku/Goron/Zora B button fix
