@@ -1,11 +1,5 @@
 #include <combo.h>
 
-/* Use our own item collect behavior */
-PATCH_START 0x801143cc
-  j GetItemCollectBehavior
-   nop
-PATCH_END
-
 /* MM already have 16 bits indices into the GI table */
 /* Make link's gi held item unsigned */
 PATCH_LOAD_STORE 8, 1
@@ -33,6 +27,11 @@ PATCH_LOAD_STORE 8, 1
 .int 0x8085a82c
 .int 0x8085a83c
 .int 0x8085b914
+PATCH_END
+
+/* Make the drawID read from the table unsigned too */
+PATCH_LOAD_STORE 8, 1
+.int 0x80853b40
 PATCH_END
 
 /* Use our item-inventory handler */

@@ -1,4 +1,19 @@
-- MM teleport pads
+- Common add Seed Option
+- MM Instant Text
+- OoT Combo title screen
+- OoT Shield Fix
+- MM Shield Fix
+- MM Remove stealing bird
+- OoT Like-Like fix
+- MM Deku/Goron/Zora B button fix
+- MM Epona no bow fix
 - MM unbreakable Razor Blade
-- MM GetCollectibleBehavior
+- OoT Gerudo Card
 - MM Song of Time patches
+- OoT Logic/Adult Saria song fix
+- MM Logic SoT
+- MM Termina Field near Swamp Entrance Skip Cutscene
+- OoT File select copy
+- Save Options (Hold, sound)
+- Save Slot 3
+- Common Win

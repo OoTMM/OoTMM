@@ -149,6 +149,9 @@ void comboRemoveTradeItemChild(u16 xitemId);
 void comboToggleTrade1(void);
 void comboToggleTrade2(void);
 void comboToggleTrade3(void);
+void comboRemoveTradeItem1(u16 xitemId);
+void comboRemoveTradeItem2(u16 xitemId);
+void comboRemoveTradeItem3(u16 xitemId);
 #endif
 
 # if defined(GAME_MM)

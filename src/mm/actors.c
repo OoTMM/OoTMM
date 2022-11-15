@@ -75,3 +75,24 @@ static int Actor_ByteCode_HasParent(Actor* actor)
 }
 
 PATCH_CALL(0x8010a9f8, Actor_ByteCode_HasParent);
+
+static void Actor_ByteCode_RemoveItem(s16 item, s16 slot)
+{
+    switch (item)
+    {
+    case ITEM_MM_LETTER_TO_KAFEI:
+        comboRemoveTradeItem3(XITEM_MM_TRADE3_LETTER_TO_KAFEI);
+        break;
+    case ITEM_MM_PENDANT_OF_MEMORIES:
+        comboRemoveTradeItem3(XITEM_MM_TRADE3_PENDANT_OF_MEMORIES);
+        break;
+    case ITEM_MM_LETTER_TO_MAMA:
+        comboRemoveTradeItem2(XITEM_MM_TRADE2_LETTER_TO_MAMA);
+        break;
+    default:
+        RemoveItem(item, slot);
+        break;
+    }
+}
+
+PATCH_CALL(0x8010bc60, Actor_ByteCode_RemoveItem);

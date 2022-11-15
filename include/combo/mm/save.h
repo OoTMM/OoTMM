@@ -212,10 +212,12 @@ ALIGNED(16) extern MmSave gMmSave;
 /* Custom */
 typedef struct
 {
-    u8 trade1;
-    u8 trade2;
-    u8 trade3;
-    u8 unused;
+    u32 trade1:5;
+    u32 trade2:2;
+    u32 trade3:2;
+    u32 tradeObtained1:5;
+    u32 tradeObtained2:2;
+    u32 tradeObtained3:2;
 }
 MmExtraTrade;
 
@@ -280,7 +282,7 @@ MmExtraFlags2;
 #define MM_PLAYER_FORM_ZORA     2
 #define MM_PLAYER_FORM_HUMAN    4
 
-#define gMmExtraBoss    (*((u32*)(gMmSave.permanentSceneFlags[2].raw + 0x14)))
+#define gMmExtraBoss    (*((u32*)(gMmSave.permanentSceneFlags[1].raw + 0x14)))
 #define gMmExtraTrade   (*((MmExtraTrade*)(gMmSave.permanentSceneFlags[2].raw + 0x14)))
 #define gMmExtraFlags   (*((MmExtraFlags*)(gMmSave.permanentSceneFlags[3].raw + 0x14)))
 #define gMmExtraFlags2  (*((MmExtraFlags2*)(gMmSave.permanentSceneFlags[4].raw + 0x14)))

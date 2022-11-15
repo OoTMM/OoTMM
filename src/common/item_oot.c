@@ -451,16 +451,16 @@ void comboAddItemOot(u16 itemId)
 #endif
         break;
     case ITEM_OOT_NUT_UPGRADE:
-        addNutUpgrade(1);
-        break;
-    case ITEM_OOT_NUT_UPGRADE2:
         addNutUpgrade(2);
         break;
+    case ITEM_OOT_NUT_UPGRADE2:
+        addNutUpgrade(3);
+        break;
     case ITEM_OOT_STICK_UPGRADE:
-        addStickUpgrade(1);
+        addStickUpgrade(2);
         break;
     case ITEM_OOT_STICK_UPGRADE2:
-        addStickUpgrade(2);
+        addStickUpgrade(3);
         break;
     case ITEM_OOT_DEFENSE_UPGRADE:
         gOotSave.doubleDefense = 1;

@@ -142,6 +142,7 @@ static void addTrade1(u8 index)
     if (gMmSave.inventory.items[ITS_MM_TRADE1] == ITEM_NONE)
         gMmSave.inventory.items[ITS_MM_TRADE1] = itemId;
     gMmExtraTrade.trade1 |= (1 << (u16)index);
+    gMmExtraTrade.tradeObtained1 |= (1 << (u16)index);
 }
 
 static void addTrade2(u8 index)
@@ -152,6 +153,7 @@ static void addTrade2(u8 index)
     if (gMmSave.inventory.items[ITS_MM_TRADE2] == ITEM_NONE)
         gMmSave.inventory.items[ITS_MM_TRADE2] = itemId;
     gMmExtraTrade.trade2 |= (1 << (u16)index);
+    gMmExtraTrade.tradeObtained2 |= (1 << (u16)index);
 }
 
 static void addTrade3(u8 index)
@@ -162,6 +164,7 @@ static void addTrade3(u8 index)
     if (gMmSave.inventory.items[ITS_MM_TRADE3] == ITEM_NONE)
         gMmSave.inventory.items[ITS_MM_TRADE3] = itemId;
     gMmExtraTrade.trade3 |= (1 << (u16)index);
+    gMmExtraTrade.tradeObtained3 |= (1 << (u16)index);
 }
 
 void comboAddItemMm(u16 itemId)

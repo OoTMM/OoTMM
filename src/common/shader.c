@@ -129,6 +129,121 @@ void Shader_CustomHeartContainer(GameState* gs, s16 shaderId)
     CLOSE_DISPS();
 }
 
+static void shaderFlameEffect(GameState* gs, int colorIndex)
+{
+#if defined(GAME_OOT)
+    static const u32 kMatTransformOffset = 0x11da0;
+    static const u32 kFlameDlist = 0x52a10;
+#else
+    static const u32 kMatTransformOffset = 0x187fc;
+    static const u32 kFlameDlist = 0x7d590;
+#endif
+
+    static const float flameScale = 0.0055f;
+
+    static const u32 kPrimColors[] = {
+        0x00ffffc0,
+        0xff00ffc0,
+        0xff0000c0,
+    };
+
+    static const u32 kEnvColors[] = {
+        0x0000ffc0,
+        0xff0000c0,
+        0xffff00c0,
+    };
+
+    u8 r;
+    u8 g;
+    u8 b;
+    u8 a;
+
+    OPEN_DISPS(gs->gfx);
+    ModelViewUnkTransform((float*)((char*)gs + kMatTransformOffset));
+    ModelViewTranslate(0.f, -30.f, -15.f, MAT_MUL);
+    ModelViewScale(flameScale * 1.7f, flameScale, flameScale, MAT_MUL);
+    gSPSegment(POLY_XLU_DISP++, 0x08, GetSegment(gs->gfx, 0, 0, 0, 0x20, 0x40, 1, 0, (-gs->frameCount & 0x7f) << 2, 0x20, 0x80));
+    gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(gs->gfx), G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    color4(&r, &g, &b, &a, kPrimColors[colorIndex]);
+    gDPSetPrimColor(POLY_XLU_DISP++, 0x80, 0x80, r, g, b, a);
+    color4(&r, &g, &b, &a, kEnvColors[colorIndex]);
+    gDPSetEnvColor(POLY_XLU_DISP++, r, g, b, a);
+    gSPDisplayList(POLY_XLU_DISP++, 0x04000000 | kFlameDlist);
+    CLOSE_DISPS();
+}
+
+static const u32 kNutStickPrimColors[] = {
+    0xa06428ff,
+    0xffffffff,
+    0xffffbbff,
+};
+static const u32 kNutStickEnvColors[] = {
+    0x28a000ff,
+    0x505050ff,
+    0xaaaa00ff,
+};
+
+void Shader_CustomStick(GameState* gs, s16 shaderId)
+{
+    const Shader* shader;
+    u8 r;
+    u8 g;
+    u8 b;
+    u8 a;
+
+    shader = &kShaders[shaderId];
+
+    OPEN_DISPS(gs->gfx);
+    InitListPolyOpa(gs->gfx);
+    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(gs->gfx), G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    color4(&r, &g, &b, &a, kNutStickPrimColors[shader->lists[1]]);
+    gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, r, g, b, a);
+    color4(&r, &g, &b, &a, kNutStickEnvColors[shader->lists[1]]);
+    gDPSetEnvColor(POLY_OPA_DISP++, r, g, b, a);
+    gSPDisplayList(POLY_OPA_DISP++, shader->lists[0]);
+
+    /* Draw fire */
+    if (shader->lists[1])
+    {
+        InitListPolyXlu(gs->gfx);
+        shaderFlameEffect(gs, shader->lists[1] - 1);
+    }
+
+    CLOSE_DISPS();
+}
+
+void Shader_CustomNut(GameState* gs, s16 shaderId)
+{
+    const Shader* shader;
+    u8 r;
+    u8 g;
+    u8 b;
+    u8 a;
+    u32 fc;
+
+    shader = &kShaders[shaderId];
+    fc = gs->frameCount * 6;
+
+    OPEN_DISPS(gs->gfx);
+    InitListPolyOpa(gs->gfx);
+    gSPSegment(POLY_OPA_DISP++, 0x09, GetSegment(gs->gfx, 0, fc, fc, 0x20, 0x20, 1, fc, fc, 0x20, 0x20));
+    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(gs->gfx), G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    color4(&r, &g, &b, &a, kNutStickPrimColors[shader->lists[1]]);
+    gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, r, g, b, a);
+    color4(&r, &g, &b, &a, kNutStickEnvColors[shader->lists[1]]);
+    gDPSetEnvColor(POLY_OPA_DISP++, r, g, b, a);
+    gSPDisplayList(POLY_OPA_DISP++, shader->lists[0]);
+
+    /* Draw fire */
+    if (shader->lists[1])
+    {
+        InitListPolyXlu(gs->gfx);
+        shaderFlameEffect(gs, shader->lists[1] - 1);
+    }
+
+    CLOSE_DISPS();
+}
+
 static void* pushMatrix(GfxContext* gfx, const float* mat)
 {
     void* end = gfx->polyOpa.end;
@@ -268,6 +383,29 @@ void Shader_MasterSword(GameState* gs, s16 shaderId)
     gSPSegment(POLY_OPA_DISP++, 8, dummySegment(gs->gfx));
     InitListPolyOpa(gs->gfx);
     gSPDisplayList(POLY_OPA_DISP++, shader->lists[0]);
+    CLOSE_DISPS();
+}
+
+void Shader_CustomSpin(GameState* gs, s16 shaderId)
+{
+    const Shader* shader;
+
+    shader = &kShaders[shaderId];
+    float rot;
+
+
+    rot = (gs->frameCount * 0.01f);
+    OPEN_DISPS(gs->gfx);
+    ModelViewRotateX(rot * 3, MAT_MUL);
+    ModelViewRotateY(rot * 5, MAT_MUL);
+    ModelViewRotateZ(rot * 7, MAT_MUL);
+    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(gs->gfx), G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    InitListPolyOpa(gs->gfx);
+    gSPDisplayList(POLY_OPA_DISP++, shader->lists[0]);
+    gSPDisplayList(POLY_OPA_DISP++, shader->lists[1]);
+
+    InitListPolyXlu(gs->gfx);
+    shaderFlameEffect(gs, 2);
     CLOSE_DISPS();
 }
 

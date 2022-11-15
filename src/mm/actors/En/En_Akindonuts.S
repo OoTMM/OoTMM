@@ -36,3 +36,8 @@ PATCH_START 0x80bed2c4
   nop
   nop
 PATCH_END
+
+/* Do not remove the last deed directly */
+PATCH_START 0x80bed014
+  nop
+PATCH_END

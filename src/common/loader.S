@@ -28,5 +28,5 @@ PATCH_START(LOADER_ADDR)
   addiu sp,0x14
 
   j LOADER_NEXT
-  nop
+   nop
 PATCH_END

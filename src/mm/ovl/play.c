@@ -38,11 +38,12 @@ static void debugCheat(GameState_Play* play)
         gSave.playerData.healthCapacity = 0x10 * 20;
         gSave.playerData.health = gSave.playerData.healthCapacity;
 
-        gMmExtraTrade.trade1 = 0xff;
+        gSave.inventory.items[ITS_MM_TRADE1] = ITEM_MM_DEED_LAND;
+        gSave.inventory.items[ITS_MM_TRADE3] = ITEM_MM_LETTER_TO_KAFEI;
+        gMmExtraTrade.trade1 = 0x02;
         gMmExtraTrade.trade2 = 0xff;
         gMmExtraTrade.trade3 = 0xff;
 
-        gSave.inventory.items[ITS_MM_TRADE1] = ITEM_MM_DEED_SWAMP;
         gSave.inventory.items[ITS_MM_TRADE2] = ITEM_MM_ROOM_KEY;
         gSave.inventory.items[ITS_MM_TRADE3] = ITEM_MM_PENDANT_OF_MEMORIES;
 
@@ -51,6 +52,9 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.items[ITS_MM_MASK_COUPLE] = ITEM_MM_MASK_COUPLE;
         gSave.inventory.items[ITS_MM_MASK_POSTMAN] = ITEM_MM_MASK_POSTMAN;
         gSave.inventory.items[ITS_MM_MASK_TROUPE_LEADER] = ITEM_MM_MASK_TROUPE_LEADER;
+
+        //gSave.inventory.questItems.remainsOdolwa = 1;
+        gMmExtraBoss |= 0x01;
     }
 #endif
 }
@@ -58,7 +62,7 @@ static void debugCheat(GameState_Play* play)
 void hookPlay_Init(GameState_Play* play)
 {
     comboObjectsReset();
-    debugCheat(play);
+    //debugCheat(play);
 
     /* Force alt beaver race */
     MM_SET_EVENT_WEEK(EV_MM_WEEK_BEAVER_RACE_ALT);
