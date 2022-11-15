@@ -24,9 +24,9 @@ x Land Deed
 x Swamp Deed
 x Mountain Deed
 x Ocean Deed
-- Letter to Kafei
+x Letter to Kafei
 - Pendant of Memories
 - Room Key
 - Letter to Mama
 x ??? Paper
-- Night 3 Rook Key remove?
+

@@ -89,4 +89,6 @@ s16  ActorCutscene_GetCurrentIndex(void);
 void ActorCutscene_Stop(s16 cutsceneId);
 void Cutscene_End(GameState_Play* play, void* unk);
 
+void RemoveItem(s16 item, s16 slot);
+
 #endif
