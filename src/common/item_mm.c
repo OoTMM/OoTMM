@@ -399,6 +399,7 @@ void comboAddItemMm(u16 itemId)
         break;
     case ITEM_MM_SWORD_RAZOR:
         addSword(2);
+        gMmSave.playerData.swordHealth = 100;
         break;
     case ITEM_MM_SWORD_GILDED:
         addSword(3);
