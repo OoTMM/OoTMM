@@ -259,12 +259,12 @@ MM_ROOM_KEY:                  0xa0
 MM_LETTER_TO_MAMA:            0xa1
 MM_LETTER_TO_KAFEI:           0xaa
 MM_PENDANT_OF_MEMORIES:       0xab
-MM_MAP_CLOCKTOWN:             0xb4
-MM_MAP_WOODFALL:              0xb5
-MM_MAP_SNOWHEAD:              0xb6
-MM_MAP_ROMANI_RANCH:          0xb7
-MM_MAP_GREAT_BAY:             0xb8
-MM_MAP_STONE_TOWER:           0xb9
+MM_WORLD_MAP_CLOCKTOWN:       0xb4
+MM_WORLD_MAP_WOODFALL:        0xb5
+MM_WORLD_MAP_SNOWHEAD:        0xb6
+MM_WORLD_MAP_ROMANI_RANCH:    0xb7
+MM_WORLD_MAP_GREAT_BAY:       0xb8
+MM_WORLD_MAP_STONE_TOWER:     0xb9
 
 MM_MAGIC_UPGRADE:             0xbb
 MM_MAGIC_UPGRADE2:            0xbc

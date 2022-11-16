@@ -202,7 +202,7 @@
 #define ITEM_MM_LETTER_TO_MAMA              0x2e
 #define ITEM_MM_LETTER_TO_KAFEI             0x2f
 #define ITEM_MM_PENDANT_OF_MEMORIES         0x30
-#define ITEM_MM_MAP_WORLD                   0x31
+#define ITEM_MM_WORLD_MAP                   0x31
 #define ITEM_MM_MASK_DEKU                   0x32
 #define ITEM_MM_MASK_GORON                  0x33
 #define ITEM_MM_MASK_ZORA                   0x34
@@ -300,6 +300,12 @@
 #define ITEM_MM_DEFENSE_UPGRADE             0xa6
 #define ITEM_MM_SPIN_UPGRADE                0xa7
 #define ITEM_MM_PROGRESSIVE_SHIELD_HERO     0xa8
+#define ITEM_MM_WORLD_MAP_CLOCKTOWN         0xa9
+#define ITEM_MM_WORLD_MAP_WOODFALL          0xaa
+#define ITEM_MM_WORLD_MAP_SNOWHEAD          0xab
+#define ITEM_MM_WORLD_MAP_ROMANI_RANCH      0xac
+#define ITEM_MM_WORLD_MAP_GREAT_BAY         0xad
+#define ITEM_MM_WORLD_MAP_STONE_TOWER       0xae
 
 #define ITEM_NONE   0xff
 

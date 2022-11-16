@@ -1,4 +1,3 @@
-- MM Tingle Maps
 - MM Sell Gold Dust Fix
 - OoT Gerudo Card
 - MM Song of Time patches

@@ -368,6 +368,12 @@ static const char* const kItemNamesMm[] = {
     "the " C1 "Defense Upgrade",
     "the " C1 "Spin Attack Upgrade",
     "the " C1 "Hero's Shield", /* Progressive */
+    "a " C0 "World Map (Clock Town)",
+    "a " C0 "World Map (Woodfall)",
+    "a " C0 "World Map (Snowhead)",
+    "a " C0 "World Map (Romani Ranch)",
+    "a " C0 "World Map (Great Bay)",
+    "a " C0 "World Map (Stone Tower)",
 };
 
 static void appendStr(char** dst, const char* src)
