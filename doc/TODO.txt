@@ -1,8 +1,9 @@
-- MM Remove stealing bird
 - OoT Like-Like fix
 - MM Deku/Goron/Zora B button fix
 - MM Epona no bow fix
 - MM unbreakable Razor Blade
+- MM Tingle Maps
+- MM Sell Gold Dust Fix
 - OoT Gerudo Card
 - MM Song of Time patches
 - OoT Logic/Adult Saria song fix
