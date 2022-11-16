@@ -1,4 +1,3 @@
-- OoT Like-Like fix
 - MM Deku/Goron/Zora B button fix
 - MM Epona no bow fix
 - MM unbreakable Razor Blade
