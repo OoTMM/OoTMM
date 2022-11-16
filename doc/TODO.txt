@@ -1,4 +1,3 @@
-- OoT Gerudo Card
 - MM Song of Time patches
 - OoT Logic/Adult Saria song fix
 - MM Shops fix
