@@ -1,4 +1,3 @@
-- MM Epona no bow fix
 - MM unbreakable Razor Blade
 - MM Tingle Maps
 - MM Sell Gold Dust Fix

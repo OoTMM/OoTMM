@@ -54,3 +54,8 @@ PATCH_END
 PATCH_START 0x8016a4b8
   li t2,0
 PATCH_END
+
+/* Epona B button fix */
+PATCH_START 0x8011231c
+  li t8,1
+PATCH_END
