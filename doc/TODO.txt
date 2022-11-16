@@ -1,7 +1,7 @@
-- MM Sell Gold Dust Fix
 - OoT Gerudo Card
 - MM Song of Time patches
 - OoT Logic/Adult Saria song fix
+- MM Shops fix
 - MM Logic SoT
 - MM night 3 grace period
 - MM Termina Field near Swamp Entrance Skip Cutscene
