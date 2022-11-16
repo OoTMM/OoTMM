@@ -7,9 +7,19 @@ PATCH_START(0x80080d14)
 PATCH_END
 
 /* Downsize the heap by 0x20000 */
-PATCH_START(0x80174c4c)
-  lui t8, 0x8076
+PATCH_START 0x80174c4c
+  lui t8,0x8076
 PATCH_END
+
+/* Not sure about this
+PATCH_START 0x80165e34
+  lui a0,0x8076
+PATCH_END
+
+PATCH_START 0x801789b0
+  lui t9,0x8076
+PATCH_END
+*/
 
 /* Hook in Main to load the payload */
 PATCH_START(0x8008035c)

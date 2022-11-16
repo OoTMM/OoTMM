@@ -91,4 +91,6 @@ void Cutscene_End(GameState_Play* play, void* unk);
 
 void RemoveItem(s16 item, s16 slot);
 
+void* ActorAlloc(u32 size);
+
 #endif

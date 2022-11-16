@@ -83,8 +83,10 @@ SetSwitchFlag = 0x800204d0;
 GetSegment = 0x8007eb84;
 ConvertMatrix = 0x800ab6bc;
 
-malloc = 0x80066c10;
+malloc = 0x800cda20;
+free = 0x800cd008;
 LoadFile = 0x80000df0;
+ActorAlloc = 0x80066c10;
 
 PreDraw1 = 0x80022438;
 PreDraw2 = 0x80022554;
@@ -120,3 +122,4 @@ GetItemCollectBehavior = 0x80071420;
 
 RandIntRange = 0x80063bf0;
 gSegments = 0x80120c38;
+osSetIntMask = 0x80003cc0;

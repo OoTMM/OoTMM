@@ -1,5 +1,6 @@
 #include <combo.h>
 
+extern void* gMmMag;
 extern void Play_Init(void*);
 
 static void debugCheat(GameState_Play* play)
@@ -161,6 +162,10 @@ static void eventFixes(GameState_Play* play)
 
 void hookPlay_Init(GameState_Play* play)
 {
+    if (gMmMag)
+    {
+        free(gMmMag);
+    }
     comboObjectsReset();
     debugCheat(play);
     skipEntranceCutscene(play);
