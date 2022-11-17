@@ -77,6 +77,7 @@ u8 GetItemCollectBehavior(s16 itemId);
 
 #if defined(GAME_MM)
 void PrepareSave(SramContext* sram);
+void Sram_SaveEndOfCycle(GameState_Play* play);
 #endif
 
 s16 RandIntRange(s16 base, s16 amplitude);

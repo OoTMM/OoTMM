@@ -108,3 +108,5 @@ gActorOvl = 0x801aefd0;
 SetSwitchFlag = 0x800b5bf4;
 GetItemCollectBehavior = 0x801143cc;
 RemoveItem = 0x801149a0;
+
+Sram_SaveEndOfCycle = 0x80143b0c;

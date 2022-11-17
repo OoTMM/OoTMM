@@ -5,6 +5,7 @@ extern void Play_Init(GameState_Play*);
 static void debugCheat(GameState_Play* play)
 {
 #if defined(DEBUG)
+#if 0
     /*if (play->gs.input[0].current.buttons & 0x20)*/
     {
         gSave.itemEquips.sword = 3;
@@ -57,6 +58,9 @@ static void debugCheat(GameState_Play* play)
         //gSave.inventory.questItems.remainsOdolwa = 1;
         gMmExtraBoss |= 0x01;
     }
+#endif
+    gSave.inventory.questItems.songTime = 1;
+    gSave.inventory.items[ITS_MM_OCARINA] = ITEM_MM_OCARINA_OF_TIME;
 #endif
 }
 

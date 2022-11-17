@@ -6,7 +6,9 @@
 
 typedef struct
 {
-    char unk_00[0x28];
+    void* readBuf;
+    void* saveBuf;
+    char unk_00[0x20];
 }
 SramContext;
 
