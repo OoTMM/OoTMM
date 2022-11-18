@@ -30,3 +30,8 @@ PATCH_END
 PATCH_START 0x80840024
   move t8,v0
 PATCH_END
+
+/* Disable first song of time cutscene */
+PATCH_START 0x808528c4
+  li t8,0x1c00
+PATCH_END
