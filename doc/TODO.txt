@@ -1,6 +1,5 @@
-- OoT Logic/Adult Saria song fix
-- MM Shops fix
 - MM Logic SoT
+- MM Shops fix
 - MM night 3 grace period
 - MM Termina Field near Swamp Entrance Skip Cutscene
 - OoT File select copy
