@@ -129,8 +129,9 @@ static void addSeeds(u8 count)
 
     if (gOotSave.upgrades.bulletBag == 0)
         return;
-    max = kMaxSeeds[gOotSave.upgrades.dekuStick];
+    max = kMaxSeeds[gOotSave.upgrades.bulletBag];
     addAmmo(ITEM_OOT_SLINGSHOT, max, count);
+    BITMAP16_SET(gOotSave.eventsItem, EV_OOT_ITEM_DEKU_SEEDS);
 }
 
 static void addBombchus(u8 count)
