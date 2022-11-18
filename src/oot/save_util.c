@@ -81,8 +81,6 @@ void comboCreateSaveMM(void)
     gMmSave.entranceIndex = 0xd800;
     gMmSave.cutscene = 0;
     gMmSave.isFirstCycle = 1;
-    gMmSave.day = 1;
-    gMmSave.daysElapsed = 1;
     gMmSave.hasTatl = 1;
     gMmSave.playerForm = 4;
     gMmSave.time = 0x3fff;

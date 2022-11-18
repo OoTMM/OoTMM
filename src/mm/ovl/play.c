@@ -64,9 +64,17 @@ static void debugCheat(GameState_Play* play)
 
 void hookPlay_Init(GameState_Play* play)
 {
-    /* Moon crash */
+    int isEndOfGame;
+
+    isEndOfGame = 0;
+    if (gSave.entranceIndex == 0x5400 && gSaveContext.nextCutscene == 0xfff7)
+    {
+        isEndOfGame = 1;
+    }
+
     if (gSave.entranceIndex == 0xc030)
     {
+        /* Moon crash */
         gSave.entranceIndex = 0xd800;
     }
 
@@ -85,6 +93,23 @@ void hookPlay_Init(GameState_Play* play)
     MM_SET_EVENT_WEEK(MM_EV(82, 1));
 
     Play_Init(play);
+
+    if (isEndOfGame)
+    {
+        /* End game */
+        gMmExtraFlags2.majora = 1;
+        if (!gOotExtraFlags.ganon)
+        {
+            gSave.playerForm = MM_PLAYER_FORM_HUMAN;
+            gSave.day = 0;
+            gSave.time = 0x3fff;
+            Sram_SaveNewDay(play);
+            play->nextEntrance = 0xd800;
+            play->transitionType = TRANS_TYPE_NORMAL;
+            play->transitionGfx = TRANS_GFX_BLACK;
+            return;
+        }
+    }
 
     if (gSave.entranceIndex == 0xc010)
     {

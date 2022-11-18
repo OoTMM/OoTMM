@@ -204,7 +204,9 @@ typedef struct
     u16             magicTarget;
     char            unk_3f32[0xe];
     SaveOptions     options;
-    char            unk_3f46[0x964];
+    char            unk_3f46[0x4];
+    u16             nextCutscene;
+    char            unk_3f4c[0x95e];
     u16             dungeonId;
     u8              maskMaskBit[27];
 }
@@ -287,7 +289,8 @@ typedef struct
     u32 ocarina:1;
     u32 songOath:1;
     u32 progressiveShield:1;
-    u32 unused:12;
+    u32 majora:1;
+    u32 unused:11;
 }
 MmExtraFlags2;
 

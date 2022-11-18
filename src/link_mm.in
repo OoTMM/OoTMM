@@ -110,3 +110,4 @@ GetItemCollectBehavior = 0x801143cc;
 RemoveItem = 0x801149a0;
 
 Sram_SaveEndOfCycle = 0x80143b0c;
+Sram_SaveNewDay = 0x80146f5c;
