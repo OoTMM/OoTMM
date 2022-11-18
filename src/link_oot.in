@@ -123,3 +123,5 @@ GetItemCollectBehavior = 0x80071420;
 RandIntRange = 0x80063bf0;
 gSegments = 0x80120c38;
 osSetIntMask = 0x80003cc0;
+
+Sram_CopySave = 0x80090fd0;

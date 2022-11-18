@@ -106,3 +106,21 @@ void comboWriteSave(void)
     saveOot();
     saveMm();
 }
+
+void comboCopyMmSave(int dst, int src)
+{
+    char buf[0x800];
+    u32 devAddrSrc;
+    u32 devAddrDst;
+
+    devAddrSrc = 0x8000 + 0x8000 * src;
+    devAddrDst = 0x8000 + 0x8000 * dst;
+
+    for (int i = 0; i < 0x8000 / sizeof(buf); ++i)
+    {
+        comboReadWriteFlash(devAddrSrc, buf, sizeof(buf), OS_READ);
+        comboReadWriteFlash(devAddrDst, buf, sizeof(buf), OS_WRITE);
+        devAddrSrc += sizeof(buf);
+        devAddrDst += sizeof(buf);
+    }
+}

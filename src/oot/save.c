@@ -49,3 +49,11 @@ void Sram_AfterOpenSave(void)
         gComboCtx.valid = 0;
     }
 }
+
+void Sram_CopySaveWrapper(void* fileSelect, void* sramCtx)
+{
+    Sram_CopySave(fileSelect, sramCtx);
+    comboCopyMmSave(*(short*)((char*)fileSelect + 0x1ca50), *(short*)((char*)fileSelect + 0x1ca38));
+}
+
+PATCH_CALL(0x808048d8, Sram_CopySaveWrapper);

@@ -94,4 +94,6 @@ void RemoveItem(s16 item, s16 slot);
 
 void* ActorAlloc(u32 size);
 
+void Sram_CopySave(void*, void*);
+
 #endif
