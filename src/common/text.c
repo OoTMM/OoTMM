@@ -194,8 +194,8 @@ static const char* const kItemNamesOot[] = {
     "the " C1 "Larger Magic Upgrade",
     "the " C1 "Defense Upgrade",
     C1 "Biggoron's Sword",
-    "the " C1 "Deku Shield",    /* Shop */
-    "the " C1 "Hylian Shield",  /* Shop */
+    "the " C1 "Deku Shield",    /* Progressive */
+    "the " C1 "Hylian Shield",  /* Progressive */
 };
 
 static const char* const kItemNamesMm[] = {
@@ -367,6 +367,13 @@ static const char* const kItemNamesMm[] = {
     "the " C1 "Larger Magic Upgrade",
     "the " C1 "Defense Upgrade",
     "the " C1 "Spin Attack Upgrade",
+    "the " C1 "Hero's Shield", /* Progressive */
+    "a " C0 "World Map (Clock Town)",
+    "a " C0 "World Map (Woodfall)",
+    "a " C0 "World Map (Snowhead)",
+    "a " C0 "World Map (Romani Ranch)",
+    "a " C0 "World Map (Great Bay)",
+    "a " C0 "World Map (Stone Tower)",
 };
 
 static void appendStr(char** dst, const char* src)

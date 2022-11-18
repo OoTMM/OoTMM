@@ -73,9 +73,9 @@ static s32 progressiveSword(void)
 static s32 progressiveShield(void)
 {
     if (!(gOotExtraItems.shield & EQ_OOT_SHIELD_DEKU))
-        return GI_OOT_SHIELD_DEKU;
+        return GI_OOT_PROGRESSIVE_SHIELD_DEKU;
     if (!(gOotExtraItems.shield & EQ_OOT_SHIELD_HYLIAN))
-        return GI_OOT_SHIELD_HYLIAN;
+        return GI_OOT_PROGRESSIVE_SHIELD_HYLIAN;
     return GI_OOT_SHIELD_MIRROR;
 }
 
@@ -185,8 +185,8 @@ s32 comboProgressiveOot(s32 gi)
     case GI_OOT_GIANT_KNIFE:
         gi = progressiveSword();
         break;
-    case GI_OOT_SHIELD_DEKU:
-    case GI_OOT_SHIELD_HYLIAN:
+    case GI_OOT_PROGRESSIVE_SHIELD_DEKU:
+    case GI_OOT_PROGRESSIVE_SHIELD_HYLIAN:
     case GI_OOT_SHIELD_MIRROR:
         gi = progressiveShield();
         break;

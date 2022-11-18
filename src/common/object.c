@@ -251,7 +251,7 @@ void* comboGetObject(u16 objectId)
         if (sObjectsIds[i] == 0)
         {
             size = comboLoadObject(NULL, objectId);
-            addr = malloc(size);
+            addr = ActorAlloc(size);
             comboLoadObject(addr, objectId);
             sObjectsIds[i] = objectId;
             sObjectsAddr[i] = addr;

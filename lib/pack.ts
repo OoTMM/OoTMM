@@ -114,7 +114,7 @@ export const pack = async (opts: Options) => {
   fixDMA(rom);
   fixHeader(rom);
   fixChecksum(rom);
-  const log = await randomize(rom);
+  const log = await randomize(rom, opts);
 
   await fs.writeFile(path.resolve(PATH_DIST, 'spoiler.txt'), log);
   await fs.writeFile(path.resolve(PATH_DIST, 'OoTMM.z64'), rom);

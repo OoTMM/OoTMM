@@ -62,7 +62,7 @@
     "Bombchu Bowling": "true"
     "Treasure Game": "true"
     "Shooting Gallery": "true"
-    "MM Clock Town South": "is_child"
+    "MM SPAWN": "is_child"
 "Market Pot House":
   exits:
     "Market": "is_child"
@@ -151,10 +151,7 @@
   exits:
     "Kokiri Forest": "true"
     "Hyrule Field": "true"
-    "Sacred Meadow": "true"
-    "Deku Theater": "true"
-  events:
-    BEAN_LOST_WOODS: "can_use_beans"
+    "Lost Woods Deep": "is_child || can_play(SONG_SARIA)"
   locations:
     "Lost Woods Bridge": "true"
     "Lost Woods Target": "can_use_slingshot"
@@ -163,20 +160,28 @@
     "Lost Woods Scrub Sticks Upgrade": "true"
     "Lost Woods Odd Mushroom": "is_adult && has(COJIRO)"
     "Lost Woods Poacher's Saw": "is_adult && has(ODD_POTION)"
-    "Lost Woods Grotto Scrub Nuts Upgrade": "has_explosives"
     "Lost Woods Grotto Generic": "has_explosives"
     "Lost Woods GS Soil Bridge": "gs_soil"
+"Lost Woods Deep":
+  exits:
+    "Lost Woods": "is_child || can_play(SONG_SARIA)"
+    "Sacred Meadow": "true"
+    "Deku Theater": "true"
+  events:
+    BEAN_LOST_WOODS: "can_use_beans"
+  locations:
+    "Lost Woods Grotto Scrub Nuts Upgrade": "has_explosives"
     "Lost Woods GS Soil Theater": "gs_soil"
     "Lost Woods GS Bean Ride": "is_adult && gs_night && event(BEAN_LOST_WOODS)"
 "Deku Theater":
   exits:
-    "Lost Woods": "true"
+    "Lost Woods Deep": "true"
   locations:
     "Deku Theater Sticks Upgrade": "is_child && has(MASK_SKULL)"
     "Deku Theater Nuts Upgrade": "is_child && has(MASK_TRUTH)"
 "Sacred Meadow":
   exits:
-    "Lost Woods": "true"
+    "Lost Woods Deep": "true"
     "Forest Temple Entrance": "can_hookshot"
   locations:
     "Saria's Song": "event(MEET_ZELDA)"

@@ -7,4 +7,3 @@ Save Layout:
 0x14000     MM Save 2 backup
 0x18000     MM Save 3
 0x1c000     MM Save 3 backup
-0x20000     MM Settings (Needs to be relocated)

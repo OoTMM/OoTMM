@@ -1,3 +1,6 @@
+"SPAWN":
+  exits:
+    "Clock Town South": "can_play(SONG_TIME)"
 "Oath to Order":
   locations:
     "Oath to Order": "true"

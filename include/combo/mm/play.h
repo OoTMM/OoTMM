@@ -6,7 +6,9 @@
 
 typedef struct
 {
-    char unk_00[0x28];
+    void* readBuf;
+    void* saveBuf;
+    char unk_00[0x20];
 }
 SramContext;
 
@@ -56,8 +58,8 @@ typedef struct PACKED ALIGNED(4) GameState_Play
 }
 GameState_Play;
 
-#define TRANS_TYPE_NONE     0x00
-#define TRANS_TYPE_NORMAL   0x14
+#define TRANS_TYPE_NONE         0x00
+#define TRANS_TYPE_NORMAL       0x14
 
 #define TRANS_GFX_BLACK     0x02
 

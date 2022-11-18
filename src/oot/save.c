@@ -35,11 +35,12 @@
 #define ENTRANCE_BOSS5        0x305
 #define ENTRANCE_BOSS6        0x417
 #define ENTRANCE_BOSS7        0x413
+#define ENTRANCE_GANON        0x517
 
 void Sram_AfterOpenSave(void)
 {
 #if defined(DEBUG)
-    gSave.entrance = ENTRANCE_MIDO;
+    gSave.entrance = ENTRANCE_GANON;
     //gSave.entrance = ENTRANCE_MARKET;
 #endif
 
@@ -49,3 +50,11 @@ void Sram_AfterOpenSave(void)
         gComboCtx.valid = 0;
     }
 }
+
+void Sram_CopySaveWrapper(void* fileSelect, void* sramCtx)
+{
+    Sram_CopySave(fileSelect, sramCtx);
+    comboCopyMmSave(*(short*)((char*)fileSelect + 0x1ca50), *(short*)((char*)fileSelect + 0x1ca38));
+}
+
+PATCH_CALL(0x808048d8, Sram_CopySaveWrapper);

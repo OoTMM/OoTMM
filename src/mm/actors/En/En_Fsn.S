@@ -45,3 +45,8 @@ PATCH_END
 PATCH_START 0x80ae1cec
   li t5,0xff
 PATCH_END
+
+/* Make it impossible to sell gold dust */
+PATCH_START 0x801c210c
+.short 0
+PATCH_END

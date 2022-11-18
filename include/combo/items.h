@@ -151,12 +151,12 @@
 #define ITEM_OOT_NUT_UPGRADE2           0x9b
 
 /* Custom */
-#define ITEM_OOT_MAGIC_UPGRADE          0x9c
-#define ITEM_OOT_MAGIC_UPGRADE2         0x9d
-#define ITEM_OOT_DEFENSE_UPGRADE        0x9e
-#define ITEM_OOT_SWORD_BIGGORON         0x9f
-#define ITEM_OOT_SHOP_SHIELD_DEKU       0xa0
-#define ITEM_OOT_SHOP_SHIELD_HYLIAN     0xa1
+#define ITEM_OOT_MAGIC_UPGRADE              0x9c
+#define ITEM_OOT_MAGIC_UPGRADE2             0x9d
+#define ITEM_OOT_DEFENSE_UPGRADE            0x9e
+#define ITEM_OOT_SWORD_BIGGORON             0x9f
+#define ITEM_OOT_PROGRESSIVE_SHIELD_DEKU    0xa0
+#define ITEM_OOT_PROGRESSIVE_SHIELD_HYLIAN  0xa1
 
 #define ITEM_MM_OCARINA_OF_TIME             0x00
 #define ITEM_MM_BOW                         0x01
@@ -202,7 +202,7 @@
 #define ITEM_MM_LETTER_TO_MAMA              0x2e
 #define ITEM_MM_LETTER_TO_KAFEI             0x2f
 #define ITEM_MM_PENDANT_OF_MEMORIES         0x30
-#define ITEM_MM_MAP_WORLD                   0x31
+#define ITEM_MM_WORLD_MAP                   0x31
 #define ITEM_MM_MASK_DEKU                   0x32
 #define ITEM_MM_MASK_GORON                  0x33
 #define ITEM_MM_MASK_ZORA                   0x34
@@ -299,6 +299,13 @@
 #define ITEM_MM_MAGIC_UPGRADE2              0xa5
 #define ITEM_MM_DEFENSE_UPGRADE             0xa6
 #define ITEM_MM_SPIN_UPGRADE                0xa7
+#define ITEM_MM_PROGRESSIVE_SHIELD_HERO     0xa8
+#define ITEM_MM_WORLD_MAP_CLOCKTOWN         0xa9
+#define ITEM_MM_WORLD_MAP_WOODFALL          0xaa
+#define ITEM_MM_WORLD_MAP_SNOWHEAD          0xab
+#define ITEM_MM_WORLD_MAP_ROMANI_RANCH      0xac
+#define ITEM_MM_WORLD_MAP_GREAT_BAY         0xad
+#define ITEM_MM_WORLD_MAP_STONE_TOWER       0xae
 
 #define ITEM_NONE   0xff
 

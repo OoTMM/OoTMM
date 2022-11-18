@@ -2,6 +2,7 @@ import { logic, LogicResult } from './logic';
 import { DATA_GI, DATA_NPC, DATA_SCENES } from './data';
 import { Game, GAMES } from "./config";
 import { WorldCheck } from './logic/world';
+import { Options } from './options';
 
 const OFFSETS = {
   oot: 0x1000,
@@ -13,11 +14,11 @@ const SUBSTITUTIONS: {[k: string]: string} = {
   OOT_OCARINA: "OOT_OCARINA_FAIRY",
   OOT_STRENGTH: "OOT_GORON_BRACELET",
   OOT_SCALE: "OOT_SCALE_SILVER",
-  OOT_SHIELD: "OOT_SHIELD_DEKU",
+  OOT_SHIELD: "OOT_PROGRESSIVE_SHIELD_DEKU",
   OOT_ICE_TRAP: "OOT_RUPEE_BLUE",
   OOT_WALLET: "OOT_WALLET2",
   MM_SWORD: "MM_SWORD_KOKIRI",
-  MM_SHIELD: "MM_SHIELD_HYLIAN",
+  MM_SHIELD: "MM_PROGRESSIVE_SHIELD_HERO",
   MM_OCARINA: "MM_OCARINA_OF_TIME",
   MM_WALLET: "MM_WALLET2",
 };
@@ -113,9 +114,9 @@ export const randomizeGame = async (game: Game, logic: LogicResult): Promise<Buf
   return toU16Buffer(buf);
 };
 
-export const randomize = async (rom: Buffer) => {
+export const randomize = async (rom: Buffer, opts: Options) => {
   console.log("Randomizing...");
-  const res = await logic();
+  const res = await logic(opts);
   const buffer = Buffer.alloc(0x20000, 0xff);
   for (const g of GAMES) {
     const gameBuffer = await randomizeGame(g, res);

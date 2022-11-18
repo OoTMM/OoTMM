@@ -56,7 +56,10 @@ PreDraw1 = 0x800b8050;
 PreDraw2 = 0x800b8118;
 
 LoadFile = 0x80080c90;
-malloc = 0x80102c60;
+malloc = 0x80086dd0;
+free = 0x80086310;
+osSetIntMask = 0x80088010;
+ActorAlloc = 0x80102c60;
 
 LoadObjectGi = 0x80838830;
 
@@ -105,3 +108,6 @@ gActorOvl = 0x801aefd0;
 SetSwitchFlag = 0x800b5bf4;
 GetItemCollectBehavior = 0x801143cc;
 RemoveItem = 0x801149a0;
+
+Sram_SaveEndOfCycle = 0x80143b0c;
+Sram_SaveNewDay = 0x80146f5c;

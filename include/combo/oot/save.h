@@ -184,7 +184,15 @@ typedef struct
 }
 OotExtraItems;
 
+typedef struct
+{
+    u32 ganon:1;
+    u32 unused:31;
+}
+OotExtraFlags;
+
 #define gOotExtraTrade (*((OotExtraTrade*)(gOotSave.perm[0].raw + 0x10)))
 #define gOotExtraItems (*((OotExtraItems*)(gOotSave.perm[1].raw + 0x10)))
+#define gOotExtraFlags (*((OotExtraFlags*)(gOotSave.perm[2].raw + 0x10)))
 
 #endif

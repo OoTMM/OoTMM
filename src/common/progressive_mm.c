@@ -15,14 +15,9 @@ static s32 progressiveSword(void)
 
 static s32 progressiveShield(void)
 {
-    /* TODO: Use extra field like OoT */
-    switch (gMmSave.itemEquips.shield)
-    {
-    case 0:
-        return GI_MM_SHIELD_HYLIAN;
-    default:
+    if (gMmExtraFlags2.progressiveShield)
         return GI_MM_SHIELD_MIRROR;
-    }
+    return GI_MM_PROGRESSIVE_SHIELD_HERO;
 }
 
 static s32 progressiveBow(void)
@@ -93,7 +88,7 @@ s32 comboProgressiveMm(s32 gi)
     case GI_MM_SWORD_GILDED:
         gi = progressiveSword();
         break;
-    case GI_MM_SHIELD_HYLIAN:
+    case GI_MM_PROGRESSIVE_SHIELD_HERO:
     case GI_MM_SHIELD_MIRROR:
         gi = progressiveShield();
         break;

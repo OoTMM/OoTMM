@@ -23,6 +23,7 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.questItems.songHealing = 1;
         gSave.inventory.questItems.songTime = 1;
         gSave.inventory.questItems.songSoaring = 1;
+        gSave.inventory.questItems.songEpona = 1;
         gSave.inventory.items[ITS_MM_BOTTLE + 0] = ITEM_MM_BOTTLED_GOLD_DUST;
         gSave.inventory.items[ITS_MM_BOTTLE + 1] = ITEM_MM_BOTTLED_SPRING_WATER_HOT;
         gSave.playerData.magic = 0x30;
@@ -31,6 +32,7 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.items[ITS_MM_MASK_GORON] = ITEM_MM_MASK_GORON;
         gSave.inventory.ammo[ITS_MM_BOW] = 50;
         gSave.inventory.items[ITS_MM_ARROW_FIRE] = ITEM_MM_ARROW_FIRE;
+        gSave.inventory.items[ITS_MM_ARROW_LIGHT] = ITEM_MM_ARROW_LIGHT;
         gSave.inventory.questItems.songLullabyIntro = 1;
 
         gSave.inventory.items[ITS_MM_KEG] = ITEM_MM_POWDER_KEG;
@@ -52,6 +54,7 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.items[ITS_MM_MASK_COUPLE] = ITEM_MM_MASK_COUPLE;
         gSave.inventory.items[ITS_MM_MASK_POSTMAN] = ITEM_MM_MASK_POSTMAN;
         gSave.inventory.items[ITS_MM_MASK_TROUPE_LEADER] = ITEM_MM_MASK_TROUPE_LEADER;
+        gSave.inventory.items[ITS_MM_MASK_FIERCE_DEITY] = ITEM_MM_MASK_FIERCE_DEITY;
 
         //gSave.inventory.questItems.remainsOdolwa = 1;
         gMmExtraBoss |= 0x01;
@@ -61,8 +64,22 @@ static void debugCheat(GameState_Play* play)
 
 void hookPlay_Init(GameState_Play* play)
 {
+    int isEndOfGame;
+
+    isEndOfGame = 0;
+    if (gSave.entranceIndex == 0x5400 && gSaveContext.nextCutscene == 0xfff7)
+    {
+        isEndOfGame = 1;
+    }
+
+    if (gSave.entranceIndex == 0xc030)
+    {
+        /* Moon crash */
+        gSave.entranceIndex = 0xd800;
+    }
+
     comboObjectsReset();
-    //debugCheat(play);
+    debugCheat(play);
 
     /* Force alt beaver race */
     MM_SET_EVENT_WEEK(EV_MM_WEEK_BEAVER_RACE_ALT);
@@ -76,6 +93,23 @@ void hookPlay_Init(GameState_Play* play)
     MM_SET_EVENT_WEEK(MM_EV(82, 1));
 
     Play_Init(play);
+
+    if (isEndOfGame)
+    {
+        /* End game */
+        gMmExtraFlags2.majora = 1;
+        if (!gOotExtraFlags.ganon)
+        {
+            gSave.playerForm = MM_PLAYER_FORM_HUMAN;
+            gSave.day = 0;
+            gSave.time = 0x3fff;
+            Sram_SaveNewDay(play);
+            play->nextEntrance = 0xd800;
+            play->transitionType = TRANS_TYPE_NORMAL;
+            play->transitionGfx = TRANS_GFX_BLACK;
+            return;
+        }
+    }
 
     if (gSave.entranceIndex == 0xc010)
     {

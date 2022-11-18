@@ -21,8 +21,10 @@ const spoilerSpheres = (buffer: string[], world: World, placement: ItemPlacement
   }
 };
 
-export const spoiler = (world: World, placement: ItemPlacement) => {
+export const spoiler = (world: World, placement: ItemPlacement, seed: string) => {
   const buffer: string[] = [];
+  buffer.push(`Seed: ${seed}`);
+  buffer.push('');
   spoilerRaw(buffer, placement);
   spoilerSpheres(buffer, world, placement);
   return buffer.join("\n");
