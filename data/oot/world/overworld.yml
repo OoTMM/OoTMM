@@ -62,7 +62,7 @@
     "Bombchu Bowling": "true"
     "Treasure Game": "true"
     "Shooting Gallery": "true"
-    "MM Clock Town South": "is_child"
+    "MM SPAWN": "is_child"
 "Market Pot House":
   exits:
     "Market": "is_child"
