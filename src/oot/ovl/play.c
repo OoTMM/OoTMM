@@ -162,6 +162,20 @@ static void eventFixes(GameState_Play* play)
 
 void hookPlay_Init(GameState_Play* play)
 {
+    if (gSave.entrance == 0x006b)
+    {
+        /* End game */
+        gOotExtraFlags.ganon = 1;
+        if (!gMmExtraFlags2.majora)
+        {
+            gSave.age = AGE_ADULT;
+            *(u16*)((char*)&gSaveContext + 0x1412) = 0;
+            gSave.cutscene = 0;
+            gSave.entrance = 0x023f;
+            comboWriteSave();
+        }
+    }
+
     if (gMmMag)
     {
         free(gMmMag);

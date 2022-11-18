@@ -35,11 +35,12 @@
 #define ENTRANCE_BOSS5        0x305
 #define ENTRANCE_BOSS6        0x417
 #define ENTRANCE_BOSS7        0x413
+#define ENTRANCE_GANON        0x517
 
 void Sram_AfterOpenSave(void)
 {
 #if defined(DEBUG)
-    gSave.entrance = ENTRANCE_MIDO;
+    gSave.entrance = ENTRANCE_GANON;
     //gSave.entrance = ENTRANCE_MARKET;
 #endif
 
