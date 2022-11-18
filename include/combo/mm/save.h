@@ -188,13 +188,25 @@ MmSave;
 
 typedef struct
 {
-    MmSave  save;
-    u32     fileIndex;
-    char    unk_3ca4[0x28c];
-    u16     magicTarget;
-    char    unk_3f32[0x978];
-    u16     dungeonId;
-    u8      maskMaskBit[27];
+    u16 optionId;
+    u8  unk_02;
+    u8  audio;
+    u8  unk_04;
+    u8  zTarget;
+}
+SaveOptions;
+
+typedef struct
+{
+    MmSave          save;
+    u32             fileIndex;
+    char            unk_3ca4[0x28c];
+    u16             magicTarget;
+    char            unk_3f32[0xe];
+    SaveOptions     options;
+    char            unk_3f46[0x964];
+    u16             dungeonId;
+    u8              maskMaskBit[27];
 }
 MmSaveContext;
 

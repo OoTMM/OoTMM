@@ -246,3 +246,12 @@ PATCH_START 0x801c5fc0 + 0x10 * SCE_MM_TEMPLE_STONE_TOWER_INVERTED
 .int 0xffffffff
 .int 0xffffffff
 PATCH_END
+
+/* Disable save options write */
+PATCH_START 0x8080a518
+  nop
+PATCH_END
+
+PATCH_START 0x8080a520
+  nop
+PATCH_END

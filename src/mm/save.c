@@ -15,8 +15,21 @@
 #define ENTRANCE_SMITH      0x5200
 #define ENTRANCE_GSHRINE    0x5e00
 
+static void Sram_LoadOptions(void)
+{
+    u8 ootHeader[0x20];
+
+    comboReadWriteFlash(0x00000, ootHeader, sizeof(ootHeader), OS_READ);
+    gSaveContext.options.optionId = 0xa51d;
+    gSaveContext.options.unk_02 = 1;
+    gSaveContext.options.audio = ootHeader[0];
+    gSaveContext.options.unk_04 = 0;
+    gSaveContext.options.zTarget = ootHeader[1];
+}
+
 void Sram_AfterOpenSave(void)
 {
+    Sram_LoadOptions();
     gSave.playerForm = MM_PLAYER_FORM_HUMAN;
     gSave.entranceIndex = ENTRANCE_CLOCKTOWN;
 

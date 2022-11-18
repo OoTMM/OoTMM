@@ -1,4 +1,3 @@
-- Save Options (Hold, sound)
 - Save Slot 3
 - MM Check Game Over
 - Common Win
