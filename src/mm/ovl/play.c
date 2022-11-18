@@ -66,6 +66,12 @@ static void debugCheat(GameState_Play* play)
 
 void hookPlay_Init(GameState_Play* play)
 {
+    /* Moon crash */
+    if (gSave.entranceIndex == 0xc030)
+    {
+        gSave.entranceIndex = 0xd800;
+    }
+
     comboObjectsReset();
     debugCheat(play);
 
