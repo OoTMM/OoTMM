@@ -1,4 +1,3 @@
-- MM Shops fix
 - MM night 3 grace period
 - MM Termina Field near Swamp Entrance Skip Cutscene
 - OoT File select copy

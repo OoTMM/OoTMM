@@ -14,6 +14,24 @@ static int itemPrice(Actor_EnGirlA* girlA)
         return 40;
     case 0x1a:
         return 30;
+    case 0x1b:
+        return 90;
+    case 0x1c:
+        return 20;
+    case 0x1d:
+        return 60;
+    case 0x1e:
+        return 40;
+    case 0x1f:
+        return 40;
+    case 0x20:
+        return 80;
+    case 0x21:
+        return 10;
+    case 0x22:
+        return 20;
+    case 0x23:
+        return 50;
     }
     UNREACHABLE();
 }
