@@ -17,6 +17,7 @@
 
 void Sram_AfterOpenSave(void)
 {
+    gSave.playerForm = MM_PLAYER_FORM_HUMAN;
     gSave.entranceIndex = ENTRANCE_CLOCKTOWN;
 
     /* Grace period */
