@@ -1,4 +1,3 @@
-- MM Song of Time patches
 - OoT Logic/Adult Saria song fix
 - MM Shops fix
 - MM Logic SoT
@@ -8,5 +7,4 @@
 - Save Options (Hold, sound)
 - Save Slot 3
 - MM Check Game Over
-- MM Check Stray Fairies + SoT
 - Common Win
