@@ -14,6 +14,7 @@
 #define ENTRANCE_LAB        0x5800
 #define ENTRANCE_SMITH      0x5200
 #define ENTRANCE_GSHRINE    0x5e00
+#define ENTRANCE_ENDING     ((SCE_MM_TERMINA_FIELD - 3) << 9) | 0
 
 static void Sram_LoadOptions(void)
 {
@@ -40,8 +41,8 @@ void Sram_AfterOpenSave(void)
     }
 
 #if defined(DEBUG)
-    //gSave.entranceIndex = ENTRANCE_SWAMP;
-    gSave.entranceIndex = ENTRANCE_CLOCKTOWN;
+    gSave.entranceIndex = ENTRANCE_ENDING;
+    gSave.cutscene = 0xfff6;
 #endif
 }
 

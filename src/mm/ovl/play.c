@@ -5,7 +5,6 @@ extern void Play_Init(GameState_Play*);
 static void debugCheat(GameState_Play* play)
 {
 #if defined(DEBUG)
-#if 0
     /*if (play->gs.input[0].current.buttons & 0x20)*/
     {
         gSave.itemEquips.sword = 3;
@@ -15,9 +14,9 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.items[ITS_MM_MASK_DEKU] = ITEM_MM_MASK_DEKU;
         gSave.inventory.items[ITS_MM_MASK_ZORA] = ITEM_MM_MASK_ZORA;
         gSave.inventory.items[ITS_MM_MASK_GORON] = ITEM_MM_MASK_GORON;
-        //gSave.inventory.items[ITS_MM_BOW] = ITEM_MM_BOW;
+        gSave.inventory.items[ITS_MM_BOW] = ITEM_MM_BOW;
         gSave.inventory.items[ITS_MM_LENS] = ITEM_MM_LENS_OF_TRUTH;
-        //gSave.inventory.upgrades.quiver = 3;
+        gSave.inventory.upgrades.quiver = 3;
         gSave.inventory.upgrades.wallet = 2;
         gSave.inventory.upgrades.bombBag = 3;
         gSave.playerData.rupees = 500;
@@ -33,6 +32,7 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.items[ITS_MM_MASK_GORON] = ITEM_MM_MASK_GORON;
         gSave.inventory.ammo[ITS_MM_BOW] = 50;
         gSave.inventory.items[ITS_MM_ARROW_FIRE] = ITEM_MM_ARROW_FIRE;
+        gSave.inventory.items[ITS_MM_ARROW_LIGHT] = ITEM_MM_ARROW_LIGHT;
         gSave.inventory.questItems.songLullabyIntro = 1;
 
         gSave.inventory.items[ITS_MM_KEG] = ITEM_MM_POWDER_KEG;
@@ -54,13 +54,11 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.items[ITS_MM_MASK_COUPLE] = ITEM_MM_MASK_COUPLE;
         gSave.inventory.items[ITS_MM_MASK_POSTMAN] = ITEM_MM_MASK_POSTMAN;
         gSave.inventory.items[ITS_MM_MASK_TROUPE_LEADER] = ITEM_MM_MASK_TROUPE_LEADER;
+        gSave.inventory.items[ITS_MM_MASK_FIERCE_DEITY] = ITEM_MM_MASK_FIERCE_DEITY;
 
         //gSave.inventory.questItems.remainsOdolwa = 1;
         gMmExtraBoss |= 0x01;
     }
-#endif
-    gSave.inventory.questItems.songTime = 1;
-    gSave.inventory.items[ITS_MM_OCARINA] = ITEM_MM_OCARINA_OF_TIME;
 #endif
 }
 

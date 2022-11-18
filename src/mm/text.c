@@ -49,4 +49,3 @@ static int DisplayTextBox_LoadFile(u8* dst, u32 vromAddr, u32 size)
 
 PATCH_CALL(0x80151200, DisplayTextBox_LoadFile);
 PATCH_CALL(0x8015126c, DisplayTextBox_LoadFile);
-PATCH_CALL(0x80151178, DisplayTextBox_LoadFile);
