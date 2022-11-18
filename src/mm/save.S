@@ -1,42 +1,13 @@
 #include <combo.h>
 
-.align 4
-kMmOwlSaveCellOffsets:
+/* Rebase MM save */
+PATCH_START 0x801c67c8
 .int SAVE_OFFSET_MM_1 >> 7
 .int SAVE_OFFSET_MM_1_BACKUP >> 7
 .int SAVE_OFFSET_MM_2 >> 7
 .int SAVE_OFFSET_MM_2_BACKUP >> 7
 .int SAVE_OFFSET_MM_3 >> 7
 .int SAVE_OFFSET_MM_3_BACKUP >> 7
-
-kMmOwlSaveCellSizes:
-.int 0x80
-.int 0x80
-.int 0x80
-.int 0x80
-.int 0x80
-.int 0x80
-
-/* Rebase MM save */
-/* TODO: Redo this correctly */
-PATCH_START(0x801c67c8)
-.int SAVE_OFFSET_MM_1 >> 7
-.int SAVE_OFFSET_MM_1_BACKUP >> 7
-.int SAVE_OFFSET_MM_2 >> 7
-.int SAVE_OFFSET_MM_2_BACKUP >> 7
-.int SAVE_OFFSET_MM_1 >> 7
-.int SAVE_OFFSET_MM_1_BACKUP >> 7
-.int SAVE_OFFSET_MM_2 >> 7
-.int SAVE_OFFSET_MM_2_BACKUP >> 7
-.int 0x300
-.int 0x380
-PATCH_END
-
-PATCH_START 0x801c6840
-.int SAVE_OFFSET_MM_1 >> 7
-.int SAVE_OFFSET_MM_1_BACKUP >> 7
-.int SAVE_OFFSET_MM_2 >> 7
-.int SAVE_OFFSET_MM_2_BACKUP >> 7
 PATCH_END
 
 /* Disable Owl Save reset */
@@ -62,6 +33,21 @@ PATCH_START 0x801c67f0
 .int 0x80
 .int 0x80
 .int 0x80
+PATCH_END
+
+/* Normal and Owl saves are the same */
+PATCH_START 0x80144f18
+  move v1,v0
+PATCH_END
+
+PATCH_START 0x80146518
+  slti at,v1,3
+PATCH_END
+
+/* TODO: Change that */
+PATCH_START 0x80147414
+  jr ra
+   nop
 PATCH_END
 
 /* Always checksum the whole thing */
