@@ -1,4 +1,3 @@
-- OoT green nut/Sticks
 - Bremen Mask Check Guru
 - MM Toilet hand not using item
 - Fishing anticheat (maybe others)
