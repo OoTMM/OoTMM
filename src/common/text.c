@@ -352,7 +352,7 @@ static const char* const kItemNamesMm[] = {
     "",
     C0 "20 Bombchu",
     C0 "10 Bombchu",
-    "a" C0 "Bombchu",
+    "a " C0 "Bombchu",
     C0 "5 Bombchu",
     C0 "20 Deku Sticks",
     C0 "30 Deku Sticks",

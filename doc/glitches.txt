@@ -1,6 +1,5 @@
 - OoT green nut/Sticks
 - Bremen Mask Check Guru
-- MM "aBombchu"
 - MM Toilet hand not using item
 - Fishing anticheat (maybe others)
 - Milk need MM/OoT
@@ -17,3 +16,4 @@
 - Bank Softlock
 - Seed num issue
 - Moon tear (Lens) crash (?)
+- Ruto still in blue warp
