@@ -1,0 +1,19 @@
+- OoT green nut/Sticks
+- Bremen Mask Check Guru
+- MM "aBombchu"
+- MM Toilet hand not using item
+- Fishing anticheat (maybe others)
+- Milk need MM/OoT
+- Red refill MM not working
+- Woodfall entrance cutscene
+- Great bay entrance cutscene
+- Zora Hall Entrance
+- Village cutscene
+- Baby Goron Lullaby Intro
+- MM Progressive Bow / Archery 1 broken?
+- Man on Roof logic
+- Moon Crash reload OoT (check)
+- Foreign rupees carry
+- Bank Softlock
+- Seed num issue
+- Moon tear (Lens) crash (?)
