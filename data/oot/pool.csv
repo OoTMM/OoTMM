@@ -35,7 +35,7 @@ Kakariko Anju Egg,                    npc,            KAKARIKO_VILLAGE,         
 Kakariko Anju Cojiro,                 npc,            KAKARIKO_VILLAGE,         TRADE_COJIRO,               COJIRO
 Kakariko Song Shadow,                 npc,            KAKARIKO_VILLAGE,         SHEIK_SHADOW,               SONG_TP_SHADOW
 Kakariko Man on Roof,                 npc,            KAKARIKO_VILLAGE,         KAKARIKO_ROOF_MAN,          HEART_PIECE
-Kakariko Impa House HP,               collectible,    KAKARIKO_VILLAGE,         0x01,                       HEART_PIECE
+Kakariko Impa House HP,               collectible,    IMPA_HOUSE,               0x01,                       HEART_PIECE
 Kakariko Grotto Front,                chest,          GROTTOS,                  0x0a,                       RUPEE_HUGE
 Kakariko Grotto Back,                 chest,          GROTTOS,                  0x08,                       RUPEE_RED
 Kakariko GS Roof,                     gs,             KAKARIKO_VILLAGE,         0x8e,                       GS_TOKEN

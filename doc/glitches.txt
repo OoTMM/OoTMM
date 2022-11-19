@@ -17,5 +17,3 @@
 - Moon tear (Lens) crash (?)
 - Ruto still in blue warp
 - Grace period broken
-
-- BAD HP Kakariko Impa House HP: OOT_SONG_TP_SPIRIT
