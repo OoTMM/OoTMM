@@ -9,7 +9,6 @@
 - Village cutscene
 - Baby Goron Lullaby Intro
 - MM Progressive Bow / Archery 1 broken?
-- Man on Roof logic
 - Moon Crash reload OoT (check)
 - Foreign rupees carry
 - Bank Softlock
