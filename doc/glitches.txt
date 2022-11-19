@@ -8,7 +8,6 @@
 - Zora Hall Entrance
 - Village cutscene
 - Baby Goron Lullaby Intro
-- MM Progressive Bow / Archery 1 broken?
 - Moon Crash reload OoT (check)
 - Foreign rupees carry
 - Bank Softlock
