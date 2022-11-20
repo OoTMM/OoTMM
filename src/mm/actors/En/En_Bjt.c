@@ -13,22 +13,22 @@ void EnBjt_RemoveItem(s16 itemId)
 {
     switch (itemId)
     {
-    case ITEM_MM_DEED_LAND:
+    case 0x2b:
         comboRemoveTradeItem1(XITEM_MM_TRADE1_DEED_LAND);
         break;
-    case ITEM_MM_DEED_SWAMP:
-        comboRemoveTradeItem1(XITEM_MM_TRADE1_DEED_SWAMP);
-        break;
-    case ITEM_MM_DEED_MOUNTAIN:
-        comboRemoveTradeItem1(XITEM_MM_TRADE1_DEED_MOUNTAIN);
-        break;
-    case ITEM_MM_DEED_OCEAN:
-        comboRemoveTradeItem1(XITEM_MM_TRADE1_DEED_OCEAN);
-        break;
-    case ITEM_MM_LETTER_TO_KAFEI:
+    case 0x2d:
         comboRemoveTradeItem3(XITEM_MM_TRADE3_LETTER_TO_KAFEI);
         break;
-    case ITEM_MM_LETTER_TO_MAMA:
+    case 0x2f:
+        comboRemoveTradeItem1(XITEM_MM_TRADE1_DEED_SWAMP);
+        break;
+    case 0x30:
+        comboRemoveTradeItem1(XITEM_MM_TRADE1_DEED_MOUNTAIN);
+        break;
+    case 0x31:
+        comboRemoveTradeItem1(XITEM_MM_TRADE1_DEED_OCEAN);
+        break;
+    case 0x33:
         comboRemoveTradeItem2(XITEM_MM_TRADE2_LETTER_TO_MAMA);
         break;
     }

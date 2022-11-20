@@ -1,5 +1,4 @@
 - Bremen Mask Check Guru
-- MM Toilet hand not using item
 - Fishing anticheat (maybe others)
 - Red refill MM not working
 - Woodfall entrance cutscene
