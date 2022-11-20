@@ -1,10 +1,6 @@
 - Bremen Mask Check Guru
 - Fishing anticheat (maybe others)
 - Red refill MM not working
-- Woodfall entrance cutscene
-- Great bay entrance cutscene
-- Zora Hall Entrance
-- Village cutscene
 - Baby Goron Lullaby Intro
 - Moon Crash reload OoT (check)
 - Foreign rupees carry
@@ -14,5 +10,12 @@
 - OoT Biggoron no shuffle
 - kamaro precond
 - Stray Fairies
+- MM Magic Jars
 
 - Eyeball softlock instant text
+
+=== MISSING CUTSCENES REMOVAL ===
+- Woodfall entrance cutscene
+- Great bay entrance cutscene
+- Zora Hall Entrance
+- Village cutscene
