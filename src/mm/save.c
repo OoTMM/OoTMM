@@ -35,7 +35,7 @@ void Sram_AfterOpenSave(void)
     gSave.entranceIndex = ENTRANCE_CLOCKTOWN;
 
     /* Grace period */
-    if (gSave.day == 3 && gSave.isNight && gSave.time > 0x3e20)
+    if (gSave.day == 3 && gSave.isNight && gSave.time > 0x3e20 && gSave.time < 0x4000)
     {
         gSave.time = 0x3e20;
     }

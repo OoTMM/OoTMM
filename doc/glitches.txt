@@ -12,7 +12,6 @@
 - Bank Softlock (?, maybe rupee related?)
 - Seed num issue
 - Ruto still in blue warp
-- Grace period broken
 - Dampe hookshot chest
 - OoT Biggoron no shuffle
 - kamaro precond
