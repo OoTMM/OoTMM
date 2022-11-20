@@ -10,7 +10,6 @@
 - OoT Biggoron no shuffle
 - kamaro precond
 - Stray Fairies
-- MM Magic Jars
 
 - Eyeball softlock instant text
 
