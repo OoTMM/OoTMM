@@ -83,8 +83,8 @@
   exits:
     "Market": "true"
   locations:
-    "Bombchu Bowling Reward 1": "has_bombchu"
-    "Bombchu Bowling Reward 2": "has_bombchu"
+    "Bombchu Bowling Reward 1": "has(BOMB_BAG)"
+    "Bombchu Bowling Reward 2": "has(BOMB_BAG)"
 "Shooting Gallery":
   exits:
     "Market": "is_child"
