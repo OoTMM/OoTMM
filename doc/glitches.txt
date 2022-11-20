@@ -1,7 +1,6 @@
 - Bremen Mask Check Guru
 - MM Toilet hand not using item
 - Fishing anticheat (maybe others)
-- Milk need MM/OoT
 - Red refill MM not working
 - Woodfall entrance cutscene
 - Great bay entrance cutscene

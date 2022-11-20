@@ -515,6 +515,7 @@ static int isItemAmbiguousMm(u16 itemId)
     case ITEM_MM_MAGIC_UPGRADE:
     case ITEM_MM_MAGIC_UPGRADE2:
     case ITEM_MM_DEFENSE_UPGRADE:
+    case ITEM_MM_BOTTLED_MILK:
         return 1;
     default:
         return 0;
