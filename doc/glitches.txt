@@ -5,7 +5,6 @@
 - Moon Crash reload OoT (check)
 - Foreign rupees carry
 - Foreign Rupees softlock (might be the same issue)
-- Seed num issue
 - Ruto still in blue warp
 - OoT Biggoron no shuffle
 - kamaro precond
