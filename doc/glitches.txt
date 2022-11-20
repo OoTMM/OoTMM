@@ -15,7 +15,7 @@
 - Grace period broken
 - Dampe hookshot chest
 - OoT Biggoron no shuffle
-- OoT Great fairies broken
 - kamaro precond
+- Stray Fairies
 
 - Eyeball softlock instant text

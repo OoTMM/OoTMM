@@ -172,12 +172,12 @@ Skulltula House 30 Tokens,            npc,            HOUSE_OF_SKULLTULA,       
 Skulltula House 40 Tokens,            npc,            HOUSE_OF_SKULLTULA,       GS_40,                      BOMBCHUS_10
 Skulltula House 50 Tokens,            npc,            HOUSE_OF_SKULLTULA,       GS_50,                      HEART_PIECE
 
-Great Fairy Magic Upgrade,      collectible,   GREAT_FAIRY_FOUNTAIN_UPGRADES, 0x00, MAGIC_UPGRADE
-Great Fairy Magic Upgrade 2,    collectible,   GREAT_FAIRY_FOUNTAIN_UPGRADES, 0x01, MAGIC_UPGRADE
-Great Fairy Defense Upgrade,    collectible,   GREAT_FAIRY_FOUNTAIN_UPGRADES, 0x02, DEFENSE_UPGRADE
-Great Fairy Din's Fire,         collectible,   GREAT_FAIRY_FOUNTAIN_SPELLS,   0x00, SPELL_FIRE
-Great Fairy Farore's Wind,      collectible,   GREAT_FAIRY_FOUNTAIN_SPELLS,   0x01, SPELL_WIND
-Great Fairy Nayru's Love,       collectible,   GREAT_FAIRY_FOUNTAIN_SPELLS,   0x02, SPELL_LOVE
+Great Fairy Magic Upgrade,      npc,   GREAT_FAIRY_FOUNTAIN_UPGRADES, FAIRY_MAGIC_UPGRADE,   MAGIC_UPGRADE
+Great Fairy Magic Upgrade 2,    npc,   GREAT_FAIRY_FOUNTAIN_UPGRADES, FAIRY_MAGIC_UPGRADE2,  MAGIC_UPGRADE
+Great Fairy Defense Upgrade,    npc,   GREAT_FAIRY_FOUNTAIN_UPGRADES, FAIRY_DEFENSE_UPGRADE, DEFENSE_UPGRADE
+Great Fairy Din's Fire,         npc,   GREAT_FAIRY_FOUNTAIN_SPELLS,   FAIRY_SPELL_FIRE,      SPELL_FIRE
+Great Fairy Farore's Wind,      npc,   GREAT_FAIRY_FOUNTAIN_SPELLS,   FAIRY_SPELL_WIND,      SPELL_WIND
+Great Fairy Nayru's Love,       npc,   GREAT_FAIRY_FOUNTAIN_SPELLS,   FAIRY_SPELL_LOVE,      SPELL_LOVE
 
 Deku Tree Map Chest,                chest,        INSIDE_DEKU_TREE, 0x03,             MAP_DT
 Deku Tree Compass Chest,            chest,        INSIDE_DEKU_TREE, 0x02,             COMPASS_DT

@@ -4,43 +4,49 @@ static const s16 kGreatFairyRewards[] = {
     GI_OOT_MAGIC_UPGRADE,
     GI_OOT_MAGIC_UPGRADE2,
     GI_OOT_DEFENSE_UPGRADE,
-    GI_OOT_SPELL_FIRE,
     GI_OOT_SPELL_WIND,
+    GI_OOT_SPELL_FIRE,
     GI_OOT_SPELL_LOVE,
 };
 
-void BgDyYoseizo_Update(Actor* actor, GameState_Play* play)
+static const u8 kGreatFairyNPCs[] = {
+    NPC_OOT_FAIRY_MAGIC_UPGRADE,
+    NPC_OOT_FAIRY_MAGIC_UPGRADE2,
+    NPC_OOT_FAIRY_DEFENSE_UPGRADE,
+    NPC_OOT_FAIRY_SPELL_WIND,
+    NPC_OOT_FAIRY_SPELL_FIRE,
+    NPC_OOT_FAIRY_SPELL_LOVE,
+};
+
+void BgDyYoseizo_Update(Actor* this, GameState_Play* play)
 {
     u8 index;
-    u16 itemId;
-    u32 collected;
+    s16 gi;
+    u8 mask;
 
     if (GetSwitchFlag(play, 0x38))
     {
         index = play->transition.spawnId;
         if (play->sceneId == SCE_OOT_GREAT_FAIRY_FOUNTAIN_SPELLS)
             index += 3;
-        itemId = comboOverride(OV_COLLECTIBLE, play->sceneId, play->transition.spawnId, kGreatFairyRewards[index]);
+        mask = 1 << index;
 
-        /* Collectible flags don't work here for some reason, use unused flags */
-        collected = gSave.perm[SCE_OOT_GREAT_FAIRY_FOUNTAIN_UPGRADES].unused & (1 << index );
-        if (!Actor_HasParent(actor) && !collected)
+        if (Actor_HasParent(this) || gOotExtraFlags.greatFairies & mask)
         {
-            GiveItem(actor, play, itemId, 400.f, 400.f);
-            gSave.perm[SCE_OOT_GREAT_FAIRY_FOUNTAIN_UPGRADES].unused |= (1 << index);
-        }
-        else
-        {
-            if (collected)
+            /* Refill */
+            if (gSave.magicUpgrade)
             {
-                /* Refill */
-                if (gSave.magicUpgrade)
-                {
-                    gSave.magicSize = 0;
-                    gSaveContext.magicTarget = gSave.magicUpgrade2 ? 0x60 : 0x30;
-                }
+                gSave.magicSize = 0;
+                gSaveContext.magicTarget = gSave.magicUpgrade2 ? 0x60 : 0x30;
             }
-            ActorDestroy(actor);
+            gOotExtraFlags.greatFairies |= mask;
+            ActorDestroy(this);
+            return;
         }
+
+        gi = comboOverride(OV_NPC, 0, kGreatFairyNPCs[index], kGreatFairyRewards[index]);
+        GiveItem(this, play, gi, 400.f, 400.f);
     }
 }
+
+PATCH_FUNC(0x808eda34, BgDyYoseizo_Update);
