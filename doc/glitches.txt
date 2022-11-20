@@ -11,7 +11,6 @@
 - Foreign rupees carry
 - Bank Softlock (?, maybe rupee related?)
 - Seed num issue
-- Moon tear (Lens) crash (?)
 - Ruto still in blue warp
 - Grace period broken
 - Dampe hookshot chest

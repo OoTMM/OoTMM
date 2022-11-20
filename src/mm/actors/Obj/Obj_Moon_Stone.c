@@ -16,4 +16,4 @@ int ObjMoonStone_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, fl
     return GiveItem(this, play, gi, a, b);
 }
 
-PATCH_FUNC(0x80c06840, ObjMoonStone_GiveItem);
+PATCH_CALL(0x80c06840, ObjMoonStone_GiveItem);
