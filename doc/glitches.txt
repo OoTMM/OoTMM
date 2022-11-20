@@ -10,14 +10,13 @@
 - Baby Goron Lullaby Intro
 - Moon Crash reload OoT (check)
 - Foreign rupees carry
-- Bank Softlock
+- Bank Softlock (?, maybe rupee related?)
 - Seed num issue
 - Moon tear (Lens) crash (?)
 - Ruto still in blue warp
 - Grace period broken
 - Dampe hookshot chest
 - OoT Biggoron no shuffle
-- Gerudo card no shuffle
 - OoT Great fairies broken
 - kamaro precond
 
