@@ -9,10 +9,9 @@
 - Baby Goron Lullaby Intro
 - Moon Crash reload OoT (check)
 - Foreign rupees carry
-- Bank Softlock (?, maybe rupee related?)
+- Foreign Rupees softlock (might be the same issue)
 - Seed num issue
 - Ruto still in blue warp
-- Dampe hookshot chest
 - OoT Biggoron no shuffle
 - kamaro precond
 - Stray Fairies
