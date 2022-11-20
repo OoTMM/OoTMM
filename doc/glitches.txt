@@ -15,3 +15,10 @@
 - Moon tear (Lens) crash (?)
 - Ruto still in blue warp
 - Grace period broken
+- Dampe hookshot chest
+- OoT Biggoron no shuffle
+- Gerudo card no shuffle
+- OoT Great fairies broken
+- kamaro precond
+
+- Eyeball softlock instant text

@@ -3,37 +3,16 @@
 /* TODO: Broken hook, this does not work with HOOK_CALL */
 /* Maybe it has something to do with the missing nop? */
 /* Should investigate because possible UB */
-.global hookDeep_En_Mag_Main
-hookDeep_En_Mag_Main:
-  /* Prologue */
-  addiu sp,-0xc
-  sw    ra,0x8(sp)
-  sw    a0,0x4(sp)
-  sw    a1,0x0(sp)
-
-  /* Apply our changes */
-  jal   hook_En_Mag_Main
-
-  /* Restore */
-  lw      a1,0x0(sp)
-  lw      a0,0x4(sp)
-  lw      ra,0x8(sp)
-  addiu   sp,0xc
+EnMag_BeforeUpdate_Trampoline:
+  HOOK_CALL EnMag_BeforeUpdate
 
   /* Original code */
-  sw a1,0x44(sp)
-  lw a0,0x44(sp)
-
-  /* Return */
-  jr      ra
-   nop
-
-/* Replaces
-   sw a1,0x44(sp)
+  sw  a1,0x44(sp)
+  jr  ra
    lw a0,0x44(sp)
-*/
+
 PATCH_START 0x80aed38c
-  jal hookDeep_En_Mag_Main
+  jal EnMag_BeforeUpdate_Trampoline
    nop
 PATCH_END
 
