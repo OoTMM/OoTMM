@@ -11,6 +11,7 @@ services:
       - ./dist:/app/dist
       - ./include:/app/include
       - ./lib:/app/lib
+      - ./out:/app/out
       - ./roms:/app/roms
       - ./src:/app/src
       - ./docker-entrypoint.sh:/app/docker-entrypoint.sh

@@ -10,7 +10,7 @@ export const ROOT = path.resolve(__dirname, '..');
 export const PATH_ROMS = path.resolve(ROOT, 'roms');
 export const PATH_BUILD =path.resolve(ROOT, 'build');
 export const PATH_DATA = path.resolve(ROOT, 'data');
-export const PATH_DIST = path.resolve(ROOT, 'dist');
+export const PATH_DIST = path.resolve(ROOT, 'out');
 
 export const CUSTOM_ADDR = 0x03f80000;
 

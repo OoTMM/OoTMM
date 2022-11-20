@@ -25,7 +25,7 @@ Install docker, then run:
 The first build can be a bit slow. Subsequent builds will be much faster.
 On older versions of docker, you may need to run `docker-compose up --build` instead (note the dash).
 
-The output will be `dist/OoTMM.z64`.
+The output will be `out/OoTMM.z64`.
 
 ### Native (for developers)
 
@@ -48,7 +48,7 @@ Then you can build the project:
 
     npm start
 
-The output will be `dist/OoTMM.z64`.
+The output will be `out/OoTMM.z64`.
 
 ## License
 
