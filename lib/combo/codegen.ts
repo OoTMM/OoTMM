@@ -1,7 +1,7 @@
 import fs from 'fs/promises';
 import path from 'path';
 import { PATH_BUILD } from './config';
-import { DATA_GI, DATA_SCENES, DATA_NPC } from './data';
+import { DATA_GI, DATA_NPC, DATA_SCENES } from './data';
 
 import { fileExists } from './util';
 
@@ -29,10 +29,9 @@ export class CodeGen {
   }
 };
 
-const codegenFile = async (data: Promise<{[k: string]: number}>, prefix: string, filename: string, guard: string) => {
-  const d = await data;
+const codegenFile = async (data: {[k: string]: number}, prefix: string, filename: string, guard: string) => {
   const cg = new CodeGen(path.resolve(PATH_BUILD, 'include', 'combo', filename), guard);
-  for (const [k, v] of Object.entries(d)) {
+  for (const [k, v] of Object.entries(data)) {
     cg.define(prefix + "_" + k, v);
   }
   await cg.emit();

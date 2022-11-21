@@ -51,11 +51,10 @@ const gi = async (game: Game, item: string) => {
     item = subst;
   }
 
-  const data = await DATA_GI;
-  if (!data.hasOwnProperty(item)) {
+  if (!DATA_GI.hasOwnProperty(item)) {
     throw new Error(`Unknown item ${item}`);
   }
-  let value = data[item];
+  let value = DATA_GI[item];
 
   if ((/^OOT_/.test(item) && game === 'mm') || (/^MM_/.test(item) && game === 'oot')) {
     value |= 0x100;

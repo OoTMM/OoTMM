@@ -1,3 +1,12 @@
+import fs from 'fs';
+import YAML from 'yaml';
+
+/* Loader hooks */
+require.extensions[".yml"] = (module, filename) => {
+  const content = fs.readFileSync(filename, "utf8");
+  module.exports = YAML.parse(content);
+};
+
 import { generate } from "./combo";
 import { Options } from "./combo/options";
 
