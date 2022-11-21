@@ -8,6 +8,7 @@ require.extensions[".yml"] = (module, filename) => {
 };
 
 import { generate } from "./combo";
+import { PATH_ROMS } from './combo/config';
 import { Options } from "./combo/options";
 
 const makeOptions = (args: string[]): Options => {
@@ -33,8 +34,8 @@ const makeOptions = (args: string[]): Options => {
 const main = async () => {
   const opts = makeOptions(process.argv.slice(2));
   const gen = generate({
-    oot: "oot",
-    mm: "mm",
+    oot: PATH_ROMS + '/oot.z64',
+    mm: PATH_ROMS + '/mm.z64',
     opts
   });
   await gen.run();

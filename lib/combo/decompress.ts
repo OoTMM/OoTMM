@@ -66,7 +66,18 @@ export const decompressGame = async (game: Game, rom: Buffer): Promise<Decompres
   return { rom: out, dma: dmaBuffer };
 };
 
-export const decompressGames = async () => {
+type DecompressGamesParams = {
+  oot: string;
+  mm: string;
+};
+
+export type DecompressedRoms = {
+  oot: DecompressedGame;
+  mm: DecompressedGame;
+};
+
+/*
+export const decompressGames = async (params: DecompressGamesParams): Promise<DecompressedRoms> => {
   const outDir = path.resolve(PATH_BUILD, 'roms');
   await fs.mkdir(outDir, { recursive: true });
   for (const g of GAMES) {
@@ -74,7 +85,7 @@ export const decompressGames = async () => {
     if (await fileExists(stampPath))
       continue;
     console.log("Decompressing " + g + "...");
-    const f = await fs.readFile(path.resolve(PATH_ROMS, `${g}.z64`));
+    const f = await fs.readFile(params[g]);
     const { rom, dma } = await decompressGame(g, f);
     await Promise.all([
       fs.writeFile(path.resolve(outDir, `${g}_decompressed.z64`), rom),
@@ -82,4 +93,15 @@ export const decompressGames = async () => {
     ]);
     await fs.writeFile(stampPath, "");
   }
+};
+*/
+
+export const decompressGames = async (params: DecompressGamesParams): Promise<DecompressedRoms> => {
+  console.log("Decompressing...");
+  const [oot, mm] = await Promise.all(GAMES.map(async (g) => {
+    const f = await fs.readFile(params[g]);
+    const { rom, dma } = await decompressGame(g, f);
+    return { rom, dma };
+  }));
+  return { oot, mm };
 };

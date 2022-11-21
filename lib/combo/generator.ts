@@ -4,6 +4,12 @@ import { custom } from "./custom";
 import { decompressGames } from "./decompress";
 import { Options } from "./options";
 import { pack } from "./pack";
+import { randomize } from "./randomizer";
+
+type GeneratorOutput = {
+  rom: Buffer;
+  log: string;
+};
 
 export class Generator {
   constructor(
@@ -13,11 +19,15 @@ export class Generator {
   ) {
   }
 
-  async run() {
-    await decompressGames();
-    await codegen();
+  async run(): Promise<GeneratorOutput> {
+    const roms = await decompressGames({ oot: this.oot as string, mm: this.mm as string });
+    if (!process.env.ROLLUP) {
+      await codegen();
+    }
     await custom();
-    await build(this.opts);
-    await pack(this.opts);
+    const buildResult = await build(this.opts);
+    const rom = await pack(roms, buildResult, this.opts);
+    const log = await randomize(rom, this.opts);
+    return { rom, log };
   }
 };

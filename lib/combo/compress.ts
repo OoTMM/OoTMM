@@ -59,11 +59,11 @@ const compressFiles = async (rom: Buffer, dmaOld: DmaData) => {
   return Promise.all(promises);
 };
 
-export const compressGame = async (game: Game, rom: Buffer) => {
+export const compressGame = async (game: Game, rom: Buffer, dma: Buffer) => {
   console.log("Compressing " + game + "...");
 
   const conf = CONFIG[game];
-  const dmaOld = new DmaData(await fs.readFile(path.resolve(PATH_BUILD, 'roms', `${game}_dma.bin`)));
+  const dmaOld = new DmaData(Buffer.from(dma));
   const dmaNew = new DmaData(Buffer.from(rom.subarray(conf.dmaAddr, conf.dmaAddr + conf.dmaCount * 16)));
   const newRom = Buffer.alloc(32 * 1024 * 1024);
   const files = await compressFiles(rom, dmaOld);

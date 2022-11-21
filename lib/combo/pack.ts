@@ -7,18 +7,22 @@ import { patchGame } from './patch';
 import { DmaData } from './dma';
 import { randomize } from './randomizer';
 import { Options } from './options';
+import { BuildOutput } from './build';
+import { DecompressedRoms } from './decompress';
 
-const combineRoms = async (opts: Options) => {
-  const oot = await patchGame(opts, 'oot');
-  const mm = await patchGame(opts, 'mm');
-  const compressedOot = await compressGame('oot', oot);
-  const compressedMm = await compressGame('mm', mm);
-  return Buffer.concat([compressedOot, compressedMm]);
+const combineRoms = async (roms: DecompressedRoms, build: BuildOutput, opts: Options) => {
+  const [oot, mm] = await Promise.all(GAMES.map(async (g) => {
+    const rom = roms[g].rom;
+    const patchedRom = await patchGame(rom, build[g].patches, opts, g);
+    const compressedRom = await compressGame(g, patchedRom, roms[g].dma);
+    return compressedRom;
+  }));
+  return Buffer.concat([oot, mm]);
 };
 
-const packPayload = async (opts: Options, rom: Buffer, game: Game) => {
+const packPayload = async (rom: Buffer, build: BuildOutput, game: Game) => {
   console.log("Packing payload for " + game + "...");
-  const payload = await fs.readFile(path.resolve(PATH_BUILD, opts.debug ? 'Debug' : 'Release', game + '_payload.bin'));
+  const payload = build[game].payload;
   if (payload.length > 0x20000) {
     throw new Error("Payload too large");
   }
@@ -103,19 +107,20 @@ const fixChecksum = (rom: Buffer) => {
   rom.writeUInt32BE(c2, 0x14);
 };
 
-export const pack = async (opts: Options) => {
-  const rom = await combineRoms(opts);
+export const pack = async (roms: DecompressedRoms, build: BuildOutput, opts: Options): Promise<Buffer> => {
+  const rom = await combineRoms(roms, build, opts);
   fs.mkdir(PATH_DIST, { recursive: true });
 
   for (const g of GAMES) {
-    await packPayload(opts, rom, g);
+    await packPayload(rom, build, g);
   }
   await packCustom(rom);
   fixDMA(rom);
   fixHeader(rom);
   fixChecksum(rom);
-  const log = await randomize(rom, opts);
-
+  return rom;
+  /*
   await fs.writeFile(path.resolve(PATH_DIST, 'spoiler.txt'), log);
   await fs.writeFile(path.resolve(PATH_DIST, 'OoTMM.z64'), rom);
+  */
 };
