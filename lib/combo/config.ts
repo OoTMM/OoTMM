@@ -1,14 +1,14 @@
 import path from 'path';
 
-import DATA_FILES_OOT from '../data/oot/files.json';
-import DATA_FILES_MM from '../data/mm/files.json';
+import DATA_FILES_OOT from '../../data/oot/files.json';
+import DATA_FILES_MM from '../../data/mm/files.json';
 
 export const GAMES = ['oot', 'mm'] as const;
 export type Game = typeof GAMES[number];
 
-export const ROOT = path.resolve(__dirname, '..');
+export const ROOT = path.resolve(__dirname, '../..');
 export const PATH_ROMS = path.resolve(ROOT, 'roms');
-export const PATH_BUILD =path.resolve(ROOT, 'build');
+export const PATH_BUILD = path.resolve(ROOT, 'build');
 export const PATH_DATA = path.resolve(ROOT, 'data');
 export const PATH_DIST = path.resolve(ROOT, 'out');
 

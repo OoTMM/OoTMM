@@ -1,34 +1,37 @@
-import { spawn } from 'child_process';
-import { decompressGames } from './decompress';
-import { custom } from './custom';
-import { pack } from './pack';
-import { codegen } from './codegen';
-import { makeOptions, Options } from './options';
+import { generate } from "./combo";
+import { Options } from "./combo/options";
 
-const build = async (opts: Options) => {
-  return new Promise((resolve, reject) => {
-    const args = ['-j', '32'];
-    if (opts.debug) {
-      args.push('DEBUG=1');
+const makeOptions = (args: string[]): Options => {
+  const opts: Options = {
+    debug: false
+  };
+  for (let i = 0; i < args.length; i++) {
+    const opt = args[i];
+    switch (opt) {
+    case "--debug":
+      opts.debug = true;
+      break;
+    case "--seed":
+      opts.seed = args[++i];
+      break;
+    default:
+      throw new Error(`Unknown option: ${opt}`);
     }
-    const proc = spawn('make', args, { stdio: 'inherit' });
-    proc.on('close', (code) => {
-      if (code === 0) {
-        resolve(null);
-      } else {
-        reject(new Error(`make exited with code ${code}`));
-      }
-    });
+  }
+  return opts;
+};
+
+const main = async () => {
+  const opts = makeOptions(process.argv.slice(2));
+  const gen = generate({
+    oot: "oot",
+    mm: "mm",
+    opts
   });
-};
+  await gen.run();
+}
 
-const run = async (opts: Options) => {
-  await decompressGames();
-  await codegen();
-  await custom();
-  await build(opts);
-  await pack(opts);
-};
-
-const options = makeOptions(process.argv.slice(2));
-run(options);
+main().catch((err) => {
+  console.error(err);
+  process.exit(1);
+});
