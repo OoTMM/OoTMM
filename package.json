@@ -6,7 +6,7 @@
     "start": "ts-node -T ./lib/index.ts"
   },
   "dependencies": {
-    "yaz0": "^1.0.1"
+    "yaz0": "^2.0.3"
   },
   "main": "dist/index.node.min.js",
   "devDependencies": {

@@ -1,22 +1,16 @@
 import { Readable } from 'stream';
 import fs from 'fs/promises';
 import crypto from 'crypto';
-import { createYaz0Stream } from 'yaz0';
+import Yaz0 from 'yaz0';
 
 import { DmaData } from './dma';
 import { CONFIG, Game, GAMES } from './config';
 
 export const copyFile = async (src: Buffer, dst: Buffer, compressed: boolean) => {
-  let stream = Readable.from(src);
   if (compressed) {
-    stream = stream.pipe(createYaz0Stream('decompress'));
+    src = await Yaz0.decompress(src);
   }
-  let offset = 0;
-  for await (const chunk of stream) {
-    chunk.copy(dst, offset);
-    offset += chunk.length;
-  }
-  return null;
+  src.copy(dst);
 };
 
 type DecompressedGame = {

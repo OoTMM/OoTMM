@@ -1,8 +1,7 @@
 import fs from 'fs/promises';
 import path from 'path';
-import { Readable } from 'stream';
 import crypto from 'crypto';
-import { createYaz0Stream } from 'yaz0';
+import Yaz0 from 'yaz0';
 
 import { Game, CONFIG, PATH_BUILD } from './config';
 import { DmaData } from './dma';
@@ -24,24 +23,11 @@ export const compressFile = async (data: Buffer): Promise<Buffer> => {
   }
 
   /* Cache miss - compress */
-  return new Promise((resolve, reject) => {
-    const stream = createYaz0Stream('compress', { size: data.length, level: 7 });
-    const chunks: Buffer[] = [];
-    stream.on('data', (chunk) => chunks.push(chunk));
-    stream.on('error', reject);
-    stream.on('end', () => {
-      const out = Buffer.concat(chunks);
-      if (!process.env.ROLLUP) {
-        fs.writeFile(filename, out).then(_ => resolve(out));
-      } else {
-        resolve(out);
-      }
-    });
-    const bufStream = new Readable();
-    bufStream.push(data);
-    bufStream.push(null);
-    bufStream.pipe(stream);
-  });
+  const compressed = await Yaz0.compress(data);
+  if (!process.env.ROLLUP) {
+    await fs.writeFile(filename, compressed);
+  }
+  return compressed;
 };
 
 const compressFiles = async (rom: Buffer, dmaOld: DmaData) => {
