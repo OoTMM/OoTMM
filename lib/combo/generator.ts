@@ -24,9 +24,9 @@ export class Generator {
     if (!process.env.ROLLUP) {
       await codegen();
     }
-    await custom();
+    const customData = await custom(roms);
     const buildResult = await build(this.opts);
-    const rom = await pack(roms, buildResult, this.opts);
+    const rom = await pack(roms, buildResult, customData, this.opts);
     const log = await randomize(rom, this.opts);
     return { rom, log };
   }

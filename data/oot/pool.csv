@@ -1,5 +1,4 @@
 location,                             type,           scene,                    id,                         item
-
 Kokiri Forest Mido Top Left,          chest,          KOKIRI_MIDO,              0x00,                       RUPEE_BLUE
 Kokiri Forest Mido Top Right,         chest,          KOKIRI_MIDO,              0x01,                       RUPEE_BLUE
 Kokiri Forest Mido Bottom Left,       chest,          KOKIRI_MIDO,              0x02,                       RUPEE_GREEN
@@ -171,14 +170,12 @@ Skulltula House 20 Tokens,            npc,            HOUSE_OF_SKULLTULA,       
 Skulltula House 30 Tokens,            npc,            HOUSE_OF_SKULLTULA,       GS_30,                      WALLET
 Skulltula House 40 Tokens,            npc,            HOUSE_OF_SKULLTULA,       GS_40,                      BOMBCHUS_10
 Skulltula House 50 Tokens,            npc,            HOUSE_OF_SKULLTULA,       GS_50,                      HEART_PIECE
-
 Great Fairy Magic Upgrade,      npc,   GREAT_FAIRY_FOUNTAIN_UPGRADES, FAIRY_MAGIC_UPGRADE,   MAGIC_UPGRADE
 Great Fairy Magic Upgrade 2,    npc,   GREAT_FAIRY_FOUNTAIN_UPGRADES, FAIRY_MAGIC_UPGRADE2,  MAGIC_UPGRADE
 Great Fairy Defense Upgrade,    npc,   GREAT_FAIRY_FOUNTAIN_UPGRADES, FAIRY_DEFENSE_UPGRADE, DEFENSE_UPGRADE
 Great Fairy Din's Fire,         npc,   GREAT_FAIRY_FOUNTAIN_SPELLS,   FAIRY_SPELL_FIRE,      SPELL_FIRE
 Great Fairy Farore's Wind,      npc,   GREAT_FAIRY_FOUNTAIN_SPELLS,   FAIRY_SPELL_WIND,      SPELL_WIND
 Great Fairy Nayru's Love,       npc,   GREAT_FAIRY_FOUNTAIN_SPELLS,   FAIRY_SPELL_LOVE,      SPELL_LOVE
-
 Deku Tree Map Chest,                chest,        INSIDE_DEKU_TREE, 0x03,             MAP_DT
 Deku Tree Compass Chest,            chest,        INSIDE_DEKU_TREE, 0x02,             COMPASS_DT
 Deku Tree Compass Room Side Chest,  chest,        INSIDE_DEKU_TREE, 0x06,             RECOVERY_HEART
@@ -191,7 +188,6 @@ Deku Tree GS Basement Gate,         gs,           INSIDE_DEKU_TREE, 0x09,       
 Deku Tree GS Basement Back Room,    gs,           INSIDE_DEKU_TREE, 0x08,             GS_TOKEN
 Deku Tree Boss Container,           collectible,  LAIR_GOHMA,       0x1f,             HEART_CONTAINER
 Deku Tree Boss,                     npc,          LAIR_GOHMA,       BLUE_WARP_GOHMA,  STONE_EMERALD
-
 Dodongo Cavern Map Chest,            chest,         DODONGO_CAVERN,    0x08,                    MAP_DC
 Dodongo Cavern Compass Chest,        chest,         DODONGO_CAVERN,    0x05,                    COMPASS_DC
 Dodongo Cavern Bomb Bag Side Chest,  chest,         DODONGO_CAVERN,    0x06,                    RUPEE_RED
@@ -205,7 +201,6 @@ Dodongo Cavern GS Near Boss,         gs,            DODONGO_CAVERN,    0x13,    
 Dodongo Cavern Boss Chest,           chest,         LAIR_KING_DODONGO, 0x00,                    BOMBS_10
 Dodongo Cavern Boss Container,       collectible,   LAIR_KING_DODONGO, 0x1f,                    HEART_CONTAINER
 Dodongo Cavern Boss,                 npc,           LAIR_KING_DODONGO, BLUE_WARP_KING_DODONGO,  STONE_RUBY
-
 Jabu-Jabu Map Chest,                chest,        INSIDE_JABU_JABU,  0x02,                MAP_JJ
 Jabu-Jabu Compass Chest,            chest,        INSIDE_JABU_JABU,  0x04,                COMPASS_JJ
 Jabu-Jabu Boomerang Chest,          chest,        INSIDE_JABU_JABU,  0x01,                BOOMERANG
@@ -215,7 +210,6 @@ Jabu-Jabu GS Bottom Upper,          gs,           INSIDE_JABU_JABU,  0x19,      
 Jabu-Jabu GS Near Boss,             gs,           INSIDE_JABU_JABU,  0x1a,                GS_TOKEN
 Jabu-Jabu Boss Container,           collectible,  LAIR_BARINADE,     0x1f,                HEART_CONTAINER
 Jabu-Jabu Boss,                     npc,          LAIR_BARINADE,     BLUE_WARP_BARINADE,  STONE_SAPPHIRE
-
 Forest Temple Tree Small Key,       chest,        TEMPLE_FOREST,       0x03,                    SMALL_KEY_FOREST
 Forest Temple Mini-Boss Key,        chest,        TEMPLE_FOREST,       0x00,                    SMALL_KEY_FOREST
 Forest Temple Map,                  chest,        TEMPLE_FOREST,       0x01,                    MAP_FOREST
@@ -236,7 +230,6 @@ Forest Temple GS Garden East,       gs,           TEMPLE_FOREST,       0x20,    
 Forest Temple GS Antichamber,       gs,           TEMPLE_FOREST,       0x24,                    GS_TOKEN
 Forest Temple Boss Container,       collectible,  LAIR_PHANTOM_GANON,  0x1f,                    HEART_CONTAINER
 Forest Temple Boss,                 npc,          LAIR_PHANTOM_GANON,  BLUE_WARP_PHANTOM_GANON, MEDALLION_FOREST
-
 Fire Temple Jail 1 Chest,           chest,        TEMPLE_FIRE,   0x01,                SMALL_KEY_FIRE
 Fire Temple Boss Key Side Chest,    chest,        TEMPLE_FIRE,   0x00,                BOMBS_10
 Fire Temple Boss Key Chest,         chest,        TEMPLE_FIRE,   0x0c,                BOSS_KEY_FIRE
@@ -258,7 +251,6 @@ Fire Temple GS Scarecrow Wall,      gs,           TEMPLE_FIRE,   0x2c,          
 Fire Temple GS Scarecrow Top,       gs,           TEMPLE_FIRE,   0x2b,                GS_TOKEN
 Fire Temple Boss Container,         collectible,  LAIR_VOLVAGIA, 0x1f,                HEART_CONTAINER
 Fire Temple Boss,                   npc,          LAIR_VOLVAGIA, BLUE_WARP_VOLVAGIA,  MEDALLION_FIRE
-
 Ice Cavern Iron Boots,              chest,        ICE_CAVERN, 0x02,         BOOTS_IRON
 Ice Cavern Map,                     chest,        ICE_CAVERN, 0x00,         MAP_IC
 Ice Cavern Compass,                 chest,        ICE_CAVERN, 0x01,         COMPASS_IC
@@ -267,7 +259,6 @@ Ice Cavern Sheik Song,              npc,          ICE_CAVERN, SHEIK_WATER,  SONG
 Ice Cavern GS Scythe Room,          gs,           ICE_CAVERN, 0x51,         GS_TOKEN
 Ice Cavern GS HP Room,              gs,           ICE_CAVERN, 0x52,         GS_TOKEN
 Ice Cavern GS Block Room,           gs,           ICE_CAVERN, 0x50,         GS_TOKEN
-
 Water Temple Under Center,          chest,        TEMPLE_WATER,  0x06,              RUPEE_BLUE
 Water Temple Compass,               chest,        TEMPLE_WATER,  0x09,              COMPASS_WATER
 Water Temple Longshot,              chest,        TEMPLE_WATER,  0x07,              HOOKSHOT
@@ -285,7 +276,6 @@ Water Temple GS Waterfalls,         gs,           TEMPLE_WATER,  0x33,          
 Water Temple GS Cage,               gs,           TEMPLE_WATER,  0x30,              GS_TOKEN
 Water Temple Boss HC,               collectible,  LAIR_MORPHA,   0x1f,              HEART_CONTAINER
 Water Temple Boss,                  npc,          LAIR_MORPHA,   BLUE_WARP_MORPHA,  MEDALLION_WATER
-
 Bottom of the Well Compass,         chest,        BOTTOM_OF_THE_WELL, 0x01, COMPASS_BOTW
 Bottom of the Well Under Debris,    chest,        BOTTOM_OF_THE_WELL, 0x02, BOMBCHUS_10
 Bottom of the Well Back West,       chest,        BOTTOM_OF_THE_WELL, 0x04, NUTS_10
@@ -303,7 +293,6 @@ Bottom of the Well Lens Side Chest, chest,        BOTTOM_OF_THE_WELL, 0x14, RUPE
 Bottom of the Well GS East Cage,    gs,           BOTTOM_OF_THE_WELL, 0x48, GS_TOKEN
 Bottom of the Well GS Inner West,   gs,           BOTTOM_OF_THE_WELL, 0x4a, GS_TOKEN
 Bottom of the Well GS Inner East,   gs,           BOTTOM_OF_THE_WELL, 0x49, GS_TOKEN
-
 Shadow Temple Map,                        chest,        TEMPLE_SHADOW,     0x01,                  MAP_SHADOW
 Shadow Temple Hover Boots,                chest,        TEMPLE_SHADOW,     0x07,                  BOOTS_HOVER
 Shadow Temple Silver Rupees,              chest,        TEMPLE_SHADOW,     0x02,                  SMALL_KEY_SHADOW
@@ -328,13 +317,11 @@ Shadow Temple GS Near Boat,               gs,           TEMPLE_SHADOW,     0x44,
 Shadow Temple GS Falling Spikes,          gs,           TEMPLE_SHADOW,     0x41,                  GS_TOKEN
 Shadow Temple Boss HC,                    collectible,  LAIR_BONGO_BONGO,  0x1f,                  HEART_CONTAINER
 Shadow Temple Boss,                       npc,          LAIR_BONGO_BONGO,  BLUE_WARP_BONGO_BONGO, MEDALLION_SHADOW
-
 Gerudo Fortress Jail 1,                   collectible, THIEVES_HIDEOUT, 0x0c,         SMALL_KEY_GF
 Gerudo Fortress Jail 2,                   collectible, THIEVES_HIDEOUT, 0x0f,         SMALL_KEY_GF
 Gerudo Fortress Jail 3,                   collectible, THIEVES_HIDEOUT, 0x0a,         SMALL_KEY_GF
 Gerudo Fortress Jail 4,                   collectible, THIEVES_HIDEOUT, 0x0e,         SMALL_KEY_GF
 Gerudo Member Card,                       npc,         THIEVES_HIDEOUT, GERUDO_CARD,  GERUDO_CARD
-
 Spirit Temple Child First Chest,          chest,        TEMPLE_SPIRIT,   0x08,                RUPEE_BLUE
 Spirit Temple Child Second Chest,         chest,        TEMPLE_SPIRIT,   0x00,                SMALL_KEY_SPIRIT
 Spirit Temple Child Climb 1,              chest,        TEMPLE_SPIRIT,   0x0c,                RUPEE_BLUE
@@ -361,7 +348,6 @@ Spirit Temple Silver Gauntlets,           chest,        DESERT_COLOSSUS, 0x0b,  
 Spirit Temple Mirror Shield,              chest,        DESERT_COLOSSUS, 0x09,                SHIELD
 Spirit Temple Boss HC,                    collectible,  LAIR_TWINROVA,   0x1f,                HEART_CONTAINER
 Spirit Temple Boss,                       npc,          LAIR_TWINROVA,   BLUE_WARP_TWINROVA,  MEDALLION_SPIRIT
-
 Gerudo Training Grounds Entrance 1,                   chest,       GERUDO_TRAINING_GROUND, 0x07, ARROWS_10
 Gerudo Training Grounds Entrance 2,                   chest,       GERUDO_TRAINING_GROUND, 0x13, RUPEE_BLUE
 Gerudo Training Grounds Stalfos,                      chest,       GERUDO_TRAINING_GROUND, 0x00, SMALL_KEY_GTG
@@ -384,7 +370,6 @@ Gerudo Training Maze Chest 1,                         chest,       GERUDO_TRAINI
 Gerudo Training Maze Chest 2,                         chest,       GERUDO_TRAINING_GROUND, 0x0a, RUPEE_RED
 Gerudo Training Maze Chest 3,                         chest,       GERUDO_TRAINING_GROUND, 0x09, ARROWS_30
 Gerudo Training Maze Chest 4,                         chest,       GERUDO_TRAINING_GROUND, 0x0c, ARROW_ICE
-
 Ganon Castle Water Chest 1,                     chest,  INSIDE_GANON_CASTLE,  0x06, RECOVERY_HEART
 Ganon Castle Water Chest 2,                     chest,  INSIDE_GANON_CASTLE,  0x07, ICE_TRAP
 Ganon Castle Forest Chest,                      chest,  INSIDE_GANON_CASTLE,  0x09, RUPEE_BLUE

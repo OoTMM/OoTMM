@@ -2,8 +2,9 @@ import { spawn } from "child_process";
 import fs from "fs/promises";
 import path from "path";
 
-import { GAMES, PATH_BUILD } from "./config";
+import { GAMES, PATH_BUILD, ROOT } from "./config";
 import { Options } from "./options";
+import { fileExists } from "./util";
 
 type BuildGameOutput = {
   payload: Buffer;
@@ -15,7 +16,24 @@ export type BuildOutput = {
   mm: BuildGameOutput;
 };
 
+const cloneDependencies = async () => {
+  const thirdPartyDir = path.resolve(ROOT, 'third_party');
+  const stampFile = path.resolve(thirdPartyDir, '.stamp');
+  if (await fileExists(stampFile))
+    return;
+  await fs.mkdir(thirdPartyDir, { recursive: true });
+  return new Promise((resolve, reject) => {
+    const proc = spawn('git', ['clone', '--depth', '50', 'https://github.com/decompals/ultralib', thirdPartyDir + '/ultralib'], { stdio: 'inherit' });
+    proc.on('close', (code) => {
+      if (code !== 0)
+        return reject(new Error(`git clone failed with code ${code}`));
+      fs.writeFile(stampFile, '').then(_ => resolve(null));
+    });
+  });
+};
+
 const make = async (opts: Options) => {
+  await cloneDependencies();
   return new Promise((resolve, reject) => {
     const args = ['-j', '32'];
     if (opts.debug) {

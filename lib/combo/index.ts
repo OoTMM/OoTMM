@@ -1,11 +1,5 @@
-import { MonitorCallback } from "./monitor";
 import { Options } from "./options";
 import { Generator } from "./generator";
-
-type Output = {
-  rom: Buffer,
-  log: string,
-};
 
 type GeneratorParams = {
   oot: string | Buffer,

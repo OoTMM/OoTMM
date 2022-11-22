@@ -115,7 +115,7 @@ export const randomizeGame = async (game: Game, logic: LogicResult): Promise<Buf
 
 export const randomize = async (rom: Buffer, opts: Options) => {
   console.log("Randomizing...");
-  const res = await logic(opts);
+  const res = logic(opts);
   const buffer = Buffer.alloc(0x20000, 0xff);
   for (const g of GAMES) {
     const gameBuffer = await randomizeGame(g, res);

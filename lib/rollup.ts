@@ -1,13 +1,19 @@
+import './register';
+
 import fs from 'fs/promises';
 import rollup from 'rollup';
 import typescript from '@rollup/plugin-typescript';
 import jsonPlugin from '@rollup/plugin-json';
 import replace from '@rollup/plugin-replace';
 import yamlPlugin from '@rollup/plugin-yaml';
-import alias from '@rollup/plugin-alias';
+import dsvPlugin from '@rollup/plugin-dsv';
 import externals from 'rollup-plugin-node-externals';
+import terser from '@rollup/plugin-terser';
 
 import { build as comboBuild } from './combo/build';
+import { decompressGames as comboDecompress } from './combo/decompress';
+import { codegen, codegen as comboCodegen } from './combo/codegen';
+import { custom as comboCustom } from './combo/custom';
 
 async function build() {
   const inputOptions = {
@@ -15,19 +21,28 @@ async function build() {
     plugins: [
       replace({
         preventAssignment: true,
+        'process.env.NODE_ENV': JSON.stringify('production'),
         'process.env.ROLLUP': JSON.stringify(true),
       }),
       typescript(),
-      alias({
-        entries: { find: './data', replacement: './data-bundler' },
-      }),
       externals(),
       jsonPlugin(),
       yamlPlugin(),
+      dsvPlugin({
+        processRow: (row) => {
+          const data: any = {};
+          Object.keys(row).forEach((key) => {
+            const value = row[key];
+            data[key.trim()] = (value || "").trim();
+          });
+          return data;
+        }
+      }),
+      terser(),
     ],
   };
   const outputOptions = {
-    file: 'dist/ootmm.js',
+    file: 'dist/index.node.min.js',
     format: 'cjs',
   } as const;
   const bundle = await rollup.rollup(inputOptions);
@@ -35,6 +50,10 @@ async function build() {
 }
 
 async function copyData() {
+  const romsRoot = __dirname + '/../roms';
+  const decompressedRoms = await comboDecompress({ oot: romsRoot + '/oot.z64', mm: romsRoot + '/mm.z64' });
+  await comboCustom(decompressedRoms);
+  await codegen();
   const b = await comboBuild({});
   await fs.mkdir('dist/data', { recursive: true });
   await Promise.all(

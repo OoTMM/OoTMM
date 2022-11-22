@@ -6,28 +6,29 @@
     "start": "ts-node -T ./lib/index.ts"
   },
   "dependencies": {
-    "csv": "^6.2.0",
-    "glob": "^8.0.3",
-    "glob-promise": "^5.0.0",
-    "yaml": "^2.1.1",
     "yaz0": "^1.0.1"
   },
+  "main": "dist/index.node.min.js",
   "devDependencies": {
-    "@rollup/plugin-alias": "^4.0.2",
-    "@rollup/plugin-commonjs": "^23.0.2",
+    "@rollup/plugin-dsv": "^3.0.1",
     "@rollup/plugin-json": "^5.0.1",
-    "@rollup/plugin-node-resolve": "^15.0.1",
     "@rollup/plugin-replace": "^5.0.1",
+    "@rollup/plugin-terser": "^0.1.0",
     "@rollup/plugin-typescript": "^9.0.2",
     "@rollup/plugin-yaml": "^4.0.1",
     "@types/node": "^18.7.13",
+    "@types/webpack-env": "^1.18.0",
+    "csv": "^6.2.0",
     "rollup": "^3.3.0",
-    "rollup-plugin-natives": "^0.7.6",
     "rollup-plugin-node-externals": "^5.0.2",
     "ts-node": "^10.9.1",
     "tslib": "^2.4.1",
-    "typescript": "^4.8.2"
+    "typescript": "^4.8.2",
+    "yaml": "^2.1.1"
   },
+  "files": [
+    "dist/data"
+  ],
   "license": "MIT",
   "private": "true"
 }

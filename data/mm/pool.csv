@@ -1,5 +1,4 @@
 location,                                       type,           scene,                      id,                     item
-
 Clock Town South Chest Lower,                   chest,          CLOCK_TOWN_SOUTH,           0x00,                   RUPEE_RED
 Clock Town South Chest Upper,                   chest,          CLOCK_TOWN_SOUTH,           0x01,                   RUPEE_PURPLE
 Clock Town Platform HP,                         collectible,    CLOCK_TOWN_SOUTH,           0x0a,                   HEART_PIECE
@@ -155,30 +154,28 @@ Stone Tower Inverted Chest 1,                   chest,          STONE_TOWER_INVE
 Stone Tower Inverted Chest 2,                   chest,          STONE_TOWER_INVERTED,       0x1e,                   BOMBCHUS_10
 Stone Tower Inverted Chest 3,                   chest,          STONE_TOWER_INVERTED,       0x1f,                   MAGIC_BEAN
 Oath to Order,                                  npc,            LAIR_ODOLWA,                SONG_ORDER,             SONG_ORDER
-
-Woodfall Temple Entrance Chest,         chest,          TEMPLE_WOODFALL,  0x18,           STRAY_FAIRY_WF
-Woodfall Temple Water Chest,            chest,          TEMPLE_WOODFALL,  0x01,           SMALL_KEY_WF
-Woodfall Temple Map,                    chest,          TEMPLE_WOODFALL,  0x1d,           MAP_WF
-Woodfall Temple Compass,                chest,          TEMPLE_WOODFALL,  0x1c,           COMPASS_WF
-Woodfall Temple Dark Chest,             chest,          TEMPLE_WOODFALL,  0x19,           STRAY_FAIRY_WF
-Woodfall Temple Center Chest,           chest,          TEMPLE_WOODFALL,  0x17,           STRAY_FAIRY_WF
-Woodfall Temple Bow,                    chest,          TEMPLE_WOODFALL,  0x1b,           BOW
-Woodfall Temple Boss Key Chest,         chest,          TEMPLE_WOODFALL,  0x1e,           BOSS_KEY_WF
-Woodfall Temple SF Entrance,            sf,             TEMPLE_WOODFALL,  0x2b,           STRAY_FAIRY_WF
-Woodfall Temple SF Main Pot,            sf,             TEMPLE_WOODFALL,  0x38,           STRAY_FAIRY_WF
-Woodfall Temple SF Main Deku Baba,      sf,             TEMPLE_WOODFALL,  0x2e,           STRAY_FAIRY_WF
-Woodfall Temple SF Main Bubble,         sf,             TEMPLE_WOODFALL,  0x30,           STRAY_FAIRY_WF
-Woodfall Temple SF Maze Skulltula,      sf,             TEMPLE_WOODFALL,  0x31,           STRAY_FAIRY_WF
-Woodfall Temple SF Maze Beehive,        sf,             TEMPLE_WOODFALL,  0x1d,           STRAY_FAIRY_WF
-Woodfall Temple SF Maze Bubble,         sf,             TEMPLE_WOODFALL,  0x2f,           STRAY_FAIRY_WF
-Woodfall Temple SF Water Room Beehive,  sf,             TEMPLE_WOODFALL,  0x1e,           STRAY_FAIRY_WF
-Woodfall Temple SF Antichamber 1,       sf,             TEMPLE_WOODFALL,  0x2a,           STRAY_FAIRY_WF
-Woodfall Temple SF Antichamber 2,       sf,             TEMPLE_WOODFALL,  0x2c,           STRAY_FAIRY_WF
-Woodfall Temple SF Antichamber 3,       sf,             TEMPLE_WOODFALL,  0x32,           STRAY_FAIRY_WF
-Woodfall Temple SF Antichamber Pillar,  sf,             TEMPLE_WOODFALL,  0x2d,           STRAY_FAIRY_WF
-Woodfall Temple Boss Container,         collectible,    LAIR_ODOLWA,      0x1f,           HEART_CONTAINER
-Woodfall Temple Boss,                   npc,            LAIR_ODOLWA,      REMAINS_ODOLWA, REMAINS_ODOLWA
-
+Woodfall Temple Entrance Chest,                 chest,          TEMPLE_WOODFALL,            0x18,                   STRAY_FAIRY_WF
+Woodfall Temple Water Chest,                    chest,          TEMPLE_WOODFALL,            0x01,                   SMALL_KEY_WF
+Woodfall Temple Map,                            chest,          TEMPLE_WOODFALL,            0x1d,                   MAP_WF
+Woodfall Temple Compass,                        chest,          TEMPLE_WOODFALL,            0x1c,                   COMPASS_WF
+Woodfall Temple Dark Chest,                     chest,          TEMPLE_WOODFALL,            0x19,                   STRAY_FAIRY_WF
+Woodfall Temple Center Chest,                   chest,          TEMPLE_WOODFALL,            0x17,                   STRAY_FAIRY_WF
+Woodfall Temple Bow,                            chest,          TEMPLE_WOODFALL,            0x1b,                   BOW
+Woodfall Temple Boss Key Chest,                 chest,          TEMPLE_WOODFALL,            0x1e,                   BOSS_KEY_WF
+Woodfall Temple SF Entrance,                    sf,             TEMPLE_WOODFALL,            0x2b,                   STRAY_FAIRY_WF
+Woodfall Temple SF Main Pot,                    sf,             TEMPLE_WOODFALL,            0x38,                   STRAY_FAIRY_WF
+Woodfall Temple SF Main Deku Baba,              sf,             TEMPLE_WOODFALL,            0x2e,                   STRAY_FAIRY_WF
+Woodfall Temple SF Main Bubble,                 sf,             TEMPLE_WOODFALL,            0x30,                   STRAY_FAIRY_WF
+Woodfall Temple SF Maze Skulltula,              sf,             TEMPLE_WOODFALL,            0x31,                   STRAY_FAIRY_WF
+Woodfall Temple SF Maze Beehive,                sf,             TEMPLE_WOODFALL,            0x1d,                   STRAY_FAIRY_WF
+Woodfall Temple SF Maze Bubble,                 sf,             TEMPLE_WOODFALL,            0x2f,                   STRAY_FAIRY_WF
+Woodfall Temple SF Water Room Beehive,          sf,             TEMPLE_WOODFALL,            0x1e,                   STRAY_FAIRY_WF
+Woodfall Temple SF Antichamber 1,               sf,             TEMPLE_WOODFALL,            0x2a,                   STRAY_FAIRY_WF
+Woodfall Temple SF Antichamber 2,               sf,             TEMPLE_WOODFALL,            0x2c,                   STRAY_FAIRY_WF
+Woodfall Temple SF Antichamber 3,               sf,             TEMPLE_WOODFALL,            0x32,                   STRAY_FAIRY_WF
+Woodfall Temple SF Antichamber Pillar,          sf,             TEMPLE_WOODFALL,            0x2d,                   STRAY_FAIRY_WF
+Woodfall Temple Boss Container,                 collectible,    LAIR_ODOLWA,                0x1f,                   HEART_CONTAINER
+Woodfall Temple Boss,                           npc,            LAIR_ODOLWA,                REMAINS_ODOLWA,         REMAINS_ODOLWA
 Snowhead Temple Compass Room Ledge,       chest,          TEMPLE_SNOWHEAD, 0x19,          STRAY_FAIRY_SH
 Snowhead Temple Compass,                  chest,          TEMPLE_SNOWHEAD, 0x1c,          COMPASS_SH
 Snowhead Temple Bridge Room,              chest,          TEMPLE_SNOWHEAD, 0x01,          SMALL_KEY_SH
@@ -203,7 +200,6 @@ Snowhead Temple SF Dinolfos 1,            sf,             TEMPLE_SNOWHEAD, 0x2d,
 Snowhead Temple SF Dinolfos 2,            sf,             TEMPLE_SNOWHEAD, 0x31,          STRAY_FAIRY_SH
 Snowhead Temple Boss HC,                  collectible,    LAIR_GOHT,       0x1f,          HEART_CONTAINER
 Snowhead Temple Boss,                     npc,            LAIR_GOHT,       REMAINS_GOHT,  REMAINS_GOHT
-
 Pirate Fortress Entrance Chest 1,                 chest,        PIRATE_FORTRESS_ENTRANCE, 0x00, RUPEE_RED
 Pirate Fortress Entrance Chest 2,                 chest,        PIRATE_FORTRESS_ENTRANCE, 0x01, RUPEE_RED
 Pirate Fortress Entrance Chest 3,                 chest,        PIRATE_FORTRESS_ENTRANCE, 0x02, RUPEE_RED
@@ -216,7 +212,6 @@ Pirate Fortress Interior Aquarium,                chest,        PIRATE_FORTRESS_
 Pirate Fortress Interior Silver Rupee Chest,      chest,        PIRATE_FORTRESS_INTERIOR, 0x03, RUPEE_SILVER
 Pirate Fortress Exterior Lower Chest,             chest,        PIRATE_FORTRESS_EXTERIOR, 0x00, RUPEE_RED
 Pirate Fortress Exterior Upper Chest,             chest,        PIRATE_FORTRESS_EXTERIOR, 0x01, RUPEE_RED
-
 Great Bay Temple Map,                             chest,          TEMPLE_GREAT_BAY, 0x1d,           MAP_GB
 Great Bay Temple Baba Chest,                      chest,          TEMPLE_GREAT_BAY, 0x19,           STRAY_FAIRY_GB
 Great Bay Temple Boss Key,                        chest,          TEMPLE_GREAT_BAY, 0x1e,           BOSS_KEY_GB
@@ -239,14 +234,11 @@ Great Bay Temple SF Antichamber Above Water,      sf,             TEMPLE_GREAT_B
 Great Bay Temple SF Antichamber Underwater,       sf,             TEMPLE_GREAT_BAY, 0x2f,           STRAY_FAIRY_GB
 Great Bay Temple Boss HC,                         collectible,    LAIR_GYORG,       0x1f,           HEART_CONTAINER
 Great Bay Temple Boss,                            npc,            LAIR_GYORG,       REMAINS_GYORG,  REMAINS_GYORG
-
 Beneath the Well Skulltulla Chest,                chest,          BENEATH_THE_WELL, 0x01, RUPEE_PURPLE
 Beneath the Well Keese Chest,                     chest,          BENEATH_THE_WELL, 0x02, RUPEE_PURPLE
 Beneath the Well Mirror Shield,                   chest,          BENEATH_THE_WELL, 0x1b, SHIELD
-
 Ancient Castle of Ikana HP,                       collectible,    CASTLE_IKANA, 0x0a,           HEART_PIECE
 Ancient Castle of Ikana Song Emptiness,           npc,            LAIR_IKANA,   SONG_EMPTINESS, SONG_EMPTINESS
-
 Stone Tower Temple Entrance Chest,                      chest,          TEMPLE_STONE_TOWER,           0x16,             STRAY_FAIRY_ST
 Stone Tower Temple Entrance Switch Chest,               chest,          TEMPLE_STONE_TOWER,           0x12,             STRAY_FAIRY_ST
 Stone Tower Temple Under West Garden Ledge Chest,       chest,          TEMPLE_STONE_TOWER,           0x15,             STRAY_FAIRY_ST
@@ -273,13 +265,11 @@ Stone Tower Temple Inverted Boss Key,                   chest,          TEMPLE_S
 Stone Tower Temple Inverted Giant Mask,                 chest,          TEMPLE_STONE_TOWER_INVERTED,  0x1a,             MASK_GIANT
 Stone Tower Boss HC,                                    collectible,    LAIR_TWINMOLD,                0x1f,             HEART_CONTAINER
 Stone Tower Boss,                                       npc,            LAIR_TWINMOLD,                REMAINS_TWINMOLD, REMAINS_TWINMOLD
-
 Secret Shrine Boss 1 Chest,   chest,        SECRET_SHRINE,  0x00, RUPEE_SILVER
 Secret Shrine Boss 2 Chest,   chest,        SECRET_SHRINE,  0x01, RUPEE_SILVER
 Secret Shrine Boss 3 Chest,   chest,        SECRET_SHRINE,  0x02, RUPEE_SILVER
 Secret Shrine Boss 4 Chest,   chest,        SECRET_SHRINE,  0x03, RUPEE_SILVER
 Secret Shrine HP Chest,       chest,        SECRET_SHRINE,  0x0a, HEART_PIECE
-
 Moon Trial Deku HP,           collectible,  MOON_DEKU,   0x01,              HEART_PIECE
 Moon Trial Goron HP,          collectible,  MOON_GORON,  0x01,              HEART_PIECE
 Moon Trial Zora HP,           collectible,  MOON_ZORA,   0x01,              HEART_PIECE

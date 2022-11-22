@@ -1,11 +1,7 @@
-import path from 'path';
-import fs from 'fs/promises';
-
 import { compressGame } from './compress';
-import { Game, GAMES, PATH_DIST, PATH_BUILD, CONFIG, CUSTOM_ADDR } from './config';
+import { Game, GAMES, CONFIG, CUSTOM_ADDR } from './config';
 import { patchGame } from './patch';
 import { DmaData } from './dma';
-import { randomize } from './randomizer';
 import { Options } from './options';
 import { BuildOutput } from './build';
 import { DecompressedRoms } from './decompress';
@@ -30,13 +26,12 @@ const packPayload = async (rom: Buffer, build: BuildOutput, game: Game) => {
   payload.copy(rom, addr);
 };
 
-const packCustom = async (rom: Buffer) => {
+const packCustom = async (rom: Buffer, custom: Buffer) => {
   console.log("Packing custom data...");
-  const customData = await fs.readFile(path.resolve(PATH_BUILD, 'custom.bin'));
-  if (customData.length > 0x20000) {
+  if (custom.length > 0x20000) {
     throw new Error("Custom data too large");
   }
-  customData.copy(rom, CUSTOM_ADDR);
+  custom.copy(rom, CUSTOM_ADDR);
 };
 
 const fixDMA = (rom: Buffer) => {
@@ -107,20 +102,15 @@ const fixChecksum = (rom: Buffer) => {
   rom.writeUInt32BE(c2, 0x14);
 };
 
-export const pack = async (roms: DecompressedRoms, build: BuildOutput, opts: Options): Promise<Buffer> => {
+export const pack = async (roms: DecompressedRoms, build: BuildOutput, custom: Buffer, opts: Options): Promise<Buffer> => {
   const rom = await combineRoms(roms, build, opts);
-  fs.mkdir(PATH_DIST, { recursive: true });
 
   for (const g of GAMES) {
     await packPayload(rom, build, g);
   }
-  await packCustom(rom);
+  await packCustom(rom, custom);
   fixDMA(rom);
   fixHeader(rom);
   fixChecksum(rom);
   return rom;
-  /*
-  await fs.writeFile(path.resolve(PATH_DIST, 'spoiler.txt'), log);
-  await fs.writeFile(path.resolve(PATH_DIST, 'OoTMM.z64'), rom);
-  */
 };

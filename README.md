@@ -42,7 +42,6 @@ On windows, we recommend using [WSL](https://docs.microsoft.com/en-us/windows/ws
 Install the required dependencies:
 
     npm i
-    ./install-deps.sh
 
 Then you can build the project:
 

@@ -1,12 +1,10 @@
 import { Readable } from 'stream';
 import fs from 'fs/promises';
-import path from 'path';
 import crypto from 'crypto';
 import { createYaz0Stream } from 'yaz0';
 
 import { DmaData } from './dma';
-import { CONFIG, Game, GAMES, PATH_BUILD, PATH_ROMS } from './config';
-import { fileExists } from './util';
+import { CONFIG, Game, GAMES } from './config';
 
 export const copyFile = async (src: Buffer, dst: Buffer, compressed: boolean) => {
   let stream = Readable.from(src);
@@ -75,26 +73,6 @@ export type DecompressedRoms = {
   oot: DecompressedGame;
   mm: DecompressedGame;
 };
-
-/*
-export const decompressGames = async (params: DecompressGamesParams): Promise<DecompressedRoms> => {
-  const outDir = path.resolve(PATH_BUILD, 'roms');
-  await fs.mkdir(outDir, { recursive: true });
-  for (const g of GAMES) {
-    const stampPath = path.resolve(outDir, `${g}.stamp`);
-    if (await fileExists(stampPath))
-      continue;
-    console.log("Decompressing " + g + "...");
-    const f = await fs.readFile(params[g]);
-    const { rom, dma } = await decompressGame(g, f);
-    await Promise.all([
-      fs.writeFile(path.resolve(outDir, `${g}_decompressed.z64`), rom),
-      fs.writeFile(path.resolve(outDir, `${g}_dma.bin`), dma),
-    ]);
-    await fs.writeFile(stampPath, "");
-  }
-};
-*/
 
 export const decompressGames = async (params: DecompressGamesParams): Promise<DecompressedRoms> => {
   console.log("Decompressing...");

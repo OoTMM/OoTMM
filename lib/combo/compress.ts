@@ -9,14 +9,18 @@ import { DmaData } from './dma';
 import { fileExists } from './util';
 
 export const compressFile = async (data: Buffer): Promise<Buffer> => {
-  const hash = crypto.createHash('sha256').update(data).digest('hex');
-  const dir = path.resolve(PATH_BUILD, 'cache', 'yaz0', hash.slice(0, 2));
-  const filename = path.resolve(dir, hash);
+  let filename = "";
 
-  /* Check for the file in cache */
-  await fs.mkdir(dir, { recursive: true });
-  if (await fileExists(filename)) {
-    return fs.readFile(filename);
+  if (!process.env.ROLLUP) {
+    const hash = crypto.createHash('sha256').update(data).digest('hex');
+    const dir = path.resolve(PATH_BUILD, 'cache', 'yaz0', hash.slice(0, 2));
+    filename = path.resolve(dir, hash);
+
+    /* Check for the file in cache */
+    await fs.mkdir(dir, { recursive: true });
+    if (await fileExists(filename)) {
+      return fs.readFile(filename);
+    }
   }
 
   /* Cache miss - compress */
@@ -27,7 +31,11 @@ export const compressFile = async (data: Buffer): Promise<Buffer> => {
     stream.on('error', reject);
     stream.on('end', () => {
       const out = Buffer.concat(chunks);
-      fs.writeFile(filename, out).then(_ => resolve(out));
+      if (!process.env.ROLLUP) {
+        fs.writeFile(filename, out).then(_ => resolve(out));
+      } else {
+        resolve(out);
+      }
     });
     const bufStream = new Readable();
     bufStream.push(data);

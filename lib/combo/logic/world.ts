@@ -1,15 +1,8 @@
-import fs from 'fs/promises';
-import path from 'path';
-
-import glob from 'glob-promise';
-import YAML from 'yaml';
-import * as CSV from 'csv';
-
-import { Game, GAMES, PATH_DATA } from '../config';
+import { Game, GAMES } from '../config';
 import { gameId } from '../util';
 import { Expr } from './expr';
 import { ExprParser } from './expr-parser';
-import { createReadStream } from 'fs';
+import { DATA_POOL, DATA_MACROS, DATA_WORLD } from '../data';
 
 type ExprMap = {
   [k: string]: Expr;
@@ -56,10 +49,8 @@ const mapExprs = (exprParser: ExprParser, game: Game, data: any) => {
   return result;
 }
 
-const loadWorldRegions = async (world: World, game: Game, exprParser: ExprParser, filename: string) => {
-  const text = await fs.readFile(filename, 'utf8');
-  const data = YAML.parse(text) as any;
-
+const loadWorldRegions = async (world: World, game: Game, exprParser: ExprParser) => {
+  const data = DATA_WORLD[game];
   for (let name in data) {
     const region = data[name];
     name = gameId(game, name, ' ');
@@ -84,11 +75,8 @@ const loadWorldRegions = async (world: World, game: Game, exprParser: ExprParser
   }
 };
 
-const loadWorldPool = async (world: World, game: Game, filename: string) => {
-  const text = createReadStream(filename);
-  const csvParser = CSV.parse({ columns: true, skip_empty_lines: true, trim: true });
-  text.pipe(csvParser);
-  for await (const record of csvParser) {
+const loadWorldPool = (world: World, game: Game) => {
+  for (const record of DATA_POOL[game]) {
     const location = gameId(game, String(record.location), ' ');
     const type = String(record.type);
     const scene = gameId(game, String(record.scene), '_');
@@ -106,9 +94,8 @@ const loadWorldPool = async (world: World, game: Game, filename: string) => {
   }
 };
 
-const loadMacros = async (exprParser: ExprParser, filename: string) => {
-  const text = await fs.readFile(filename, 'utf8');
-  const data = YAML.parse(text) as any;
+const loadMacros = (exprParser: ExprParser, game: Game) => {
+  const data = DATA_MACROS[game];
   for (let name in data) {
     const buffer = data[name];
 
@@ -124,23 +111,18 @@ const loadMacros = async (exprParser: ExprParser, filename: string) => {
   }
 };
 
-const loadWorldGame = async (world: World, game: Game) => {
+const loadWorldGame = (world: World, game: Game) => {
   /* Create the expr parser */
   const exprParser = new ExprParser(game);
-  await loadMacros(exprParser, path.join(PATH_DATA, game, 'macros.yml'));
-
-  /* Load the world */
-  const worldFiles = await glob(path.resolve(PATH_DATA, game, 'world', '*.yml'));
-  await Promise.all(worldFiles.map(x => loadWorldRegions(world, game, exprParser, x)));
-  const poolFile = path.resolve(PATH_DATA, game, 'pool.csv');
-  await loadWorldPool(world, game, poolFile);
+  loadMacros(exprParser, game);
+  loadWorldRegions(world, game, exprParser);
+  loadWorldPool(world, game);
 }
 
-export const createWorld = async () => {
+export const createWorld = () => {
   const world: World = { regions: {}, checks: {}, pool: [], dungeons: {} };
   for (const g of GAMES) {
-    await loadWorldGame(world, g);
+    loadWorldGame(world, g);
   }
   return world;
 };
-
