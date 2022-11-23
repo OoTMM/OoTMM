@@ -4,6 +4,7 @@ const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const env = process.env.NODE_ENV || 'development';
 const dev = env === 'development';
@@ -14,7 +15,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/',
-    filename: 'app.js',
+    filename: dev ? 'app.js' : 'app.[contenthash].min.js',
   },
   module: {
     rules: [
@@ -26,7 +27,7 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          'style-loader',
+          dev ? 'style-loader' : MiniCssExtractPlugin.loader,
           'css-loader',
           'postcss-loader'
         ]
@@ -52,6 +53,9 @@ module.exports = {
       patterns: [
         { from: 'node_modules/@ootmm/core/dist/data' }
       ]
+    }),
+    new MiniCssExtractPlugin({
+      filename: dev ? 'app.css' : 'app.[contenthash].min.css',
     }),
     new webpack.ProvidePlugin({
       Buffer: ['buffer', 'Buffer']
