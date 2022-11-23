@@ -10,7 +10,6 @@ export const copyFile = async (src: Buffer, dst: Buffer, compressed: boolean) =>
   if (compressed) {
     src = await Yaz0.decompress(src);
   }
-  console.log(src);
   src.copy(dst);
 };
 

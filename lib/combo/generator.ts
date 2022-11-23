@@ -29,11 +29,11 @@ export class Generator {
   async run(): Promise<GeneratorOutput> {
     const roms = await decompressGames(this.monitor, { oot: this.oot, mm: this.mm });
     if (!process.env.ROLLUP) {
-      await codegen();
+      await codegen(this.monitor);
     }
-    const customData = await custom(roms);
+    const customData = await custom(this.monitor, roms);
     const buildResult = await build(this.opts);
-    const rom = await pack(roms, buildResult, customData, this.opts);
+    const rom = await pack(this.monitor, roms, buildResult, customData, this.opts);
     const log = await randomize(rom, this.opts);
     return { rom, log };
   }

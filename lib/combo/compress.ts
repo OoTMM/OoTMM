@@ -56,8 +56,6 @@ const compressFiles = async (rom: Buffer, dmaOld: DmaData) => {
 };
 
 export const compressGame = async (game: Game, rom: Buffer, dma: Buffer) => {
-  console.log("Compressing " + game + "...");
-
   const conf = CONFIG[game];
   const dmaOld = new DmaData(Buffer.from(dma));
   const dmaNew = new DmaData(Buffer.from(rom.subarray(conf.dmaAddr, conf.dmaAddr + conf.dmaCount * 16)));

@@ -55,8 +55,8 @@ async function copyData() {
   const oot = await fs.readFile(romsRoot + '/oot.z64');
   const mm = await fs.readFile(romsRoot + '/mm.z64');
   const decompressedRoms = await comboDecompress(dummyMonitor, { oot, mm });
-  await comboCustom(decompressedRoms);
-  await comboCodegen();
+  await comboCustom(dummyMonitor, decompressedRoms);
+  await comboCodegen(dummyMonitor);
   const b = await comboBuild({});
   await fs.mkdir('dist/data', { recursive: true });
   await Promise.all(

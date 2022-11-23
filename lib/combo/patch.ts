@@ -304,7 +304,6 @@ class Patcher {
 }
 
 export const patchGame = async (rom: Buffer, patches: Buffer, opts: Options, game: Game) => {
-  console.log("Patching " + game + "...");
   const patcher = new Patcher(game, rom, patches, opts);
   return patcher.run();
 };

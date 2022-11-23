@@ -1,6 +1,7 @@
 import fs from 'fs/promises';
 import path from 'path';
 import { DATA_GI, DATA_NPC, DATA_SCENES } from './data';
+import { Monitor } from './monitor';
 
 import { fileExists } from './util';
 
@@ -40,8 +41,8 @@ const codegenFile = async (data: {[k: string]: number}, prefix: string, filename
   }
 };
 
-export const codegen = async () => {
-  console.log("Codegen...");
+export const codegen = async (monitor: Monitor) => {
+  monitor.log("Codegen");
   return Promise.all([
     codegenFile(DATA_GI,      "GI",  "gi_data.h", "GENERATED_GI_DATA_H"),
     codegenFile(DATA_SCENES,  "SCE", "scenes.h",  "GENERATED_SCENES_H"),
