@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { GeneratorConfig } from './GeneratorConfig';
+import { Generator } from './Generator';
 
 export const App = () => (
   <div>
-    <GeneratorConfig/>
+    <Generator/>
   </div>
 );

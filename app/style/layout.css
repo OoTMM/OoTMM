@@ -1,0 +1,9 @@
+.main {
+  width: 800px;
+  border: 1px solid #ccc;
+  padding: 1em;
+  background: #f4f4f4;
+  margin: 0 auto;
+  margin-top: 5em;
+  border-radius: 0.5em;
+}

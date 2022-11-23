@@ -13,7 +13,8 @@ module.exports = {
   entry: './app/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'app.js'
+    publicPath: '/',
+    filename: 'app.js',
   },
   module: {
     rules: [
@@ -21,6 +22,20 @@ module.exports = {
         test: /\.jsx?$/,
         exclude: /node_modules/,
         use: 'babel-loader'
+      },
+      {
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          'css-loader',
+          'postcss-loader'
+        ]
+      },
+      {
+        test: /\.png$/,
+        use: [
+          'file-loader',
+        ]
       }
     ],
   },

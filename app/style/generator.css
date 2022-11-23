@@ -1,0 +1,12 @@
+.generator-title {
+  display: inline-block;
+  font-size: 1.5em;
+}
+
+.generator-error {
+  display: block;
+  margin: 1em;
+  padding: 1em;
+  color: #330000;
+  background: #ffcccc;
+}
