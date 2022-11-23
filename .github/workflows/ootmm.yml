@@ -15,7 +15,9 @@ jobs:
         repo: deb http://practicerom.com/public/packages/debian staging main
         repo-name: practicerom
         keys-asc: https://practicerom.com/public/packages/debian/pgp.pub
-        packages-to-install: n64-ultra
+    - name: Install deps
+      run: |
+        sudo apt-get install n64-ultra
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
