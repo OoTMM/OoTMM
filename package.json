@@ -18,14 +18,15 @@
   },
   "homepage": "https://github.com/OoTMM/gui#readme",
   "dependencies": {
-    "@ootmm/core": "*",
+    "@ootmm/core": "file:./vendor/core",
     "buffer": "^6.0.3",
     "core-js": "^3.26.1",
     "crypto-browserify": "^3.12.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-dropzone": "^14.2.3",
-    "stream-browserify": "^3.0.0"
+    "stream-browserify": "^3.0.0",
+    "tmp": "^0.2.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.2",

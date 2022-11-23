@@ -1,13 +1,11 @@
 #!/bin/sh
 
-rm -rf tmp
-mkdir -p tmp
-git clone --depth=50 --branch=develop https://github.com/OoTMM/core tmp || exit 1
-cd tmp
+rm -rf vendor/core
+mkdir -p vendor/core
+git clone --depth=50 --branch=develop https://github.com/OoTMM/core vendor/core || exit 1
+cd vendor/core
 npm i || exit 1
 npm run build || exit 1
-npm link || exit 1
-cd ..
-npm link @ootmm/core
+cd ../..
 npm i || exit 1
 npm run build || exit 1
