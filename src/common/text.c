@@ -214,7 +214,7 @@ static const char* const kItemNamesMm[] = {
     "a " C0 "Powder Keg",
     "the " C1 "Pictograph Box",
     "the " C1 "Lens of Truth",
-    "the " C1 "Longshot",
+    "the " C1 "Hookshot",
     "the " C1 "Great Fairy's Sword",
     "a " C1 "bottle of Red Potion",
     "an " C1 "Empty Bottle",
