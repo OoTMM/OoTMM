@@ -25,7 +25,7 @@ export const compressFile = async (data: Buffer): Promise<Buffer> => {
   }
 
   /* Cache miss - compress */
-  const compressed = await Yaz0.compress(data);
+  const compressed = await Yaz0.compress(data, 7);
   if (!process.env.ROLLUP) {
     await fs.writeFile(filename, compressed);
   }
