@@ -9,6 +9,7 @@ import { align, arrayToIndexMap } from './util';
 import { compressFile } from './compress';
 import { CodeGen } from './codegen';
 import { DecompressedRoms } from './decompress';
+import { Monitor } from './monitor';
 
 const FILES_TO_INDEX_OOT = arrayToIndexMap(DATA_FILES.oot);
 const FILES_TO_INDEX_MM = arrayToIndexMap(DATA_FILES.mm);
