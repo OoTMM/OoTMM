@@ -1,0 +1,25 @@
+name: OoTMM
+
+on:
+  push:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Add n64 toolchain
+      uses: myci-actions/add-deb-repo@10
+      with:
+        repo: deb http://practicerom.com/public/packages/debian staging main
+        repo-name: practicerom
+        keys-asc: https://practicerom.com/public/packages/debian/pgp.pub
+        packages-to-install: n64-ultra
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18.x
+    - name: Build
+      run: |
+        ./deploy.sh
