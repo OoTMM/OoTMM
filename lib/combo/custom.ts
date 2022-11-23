@@ -62,7 +62,7 @@ const makeSplitObject = async (roms: DecompressedRoms, entry: CustomEntry) => {
 
 export const custom = async (monitor: Monitor, roms: DecompressedRoms) => {
   monitor.log("Building custom objects");
-  const cgPath = process.env.ROLLUP ? '' : path.resolve('build', 'include', 'combo', 'custom.h');
+  const cgPath = process.env.ROLLUP ? '' : path.resolve('include', 'combo', 'custom.h');
   const cg = new CodeGen(cgPath, 'CUSTOM_H');
   const objects = await Promise.all(ENTRIES.map(x => makeSplitObject(roms, x)));
   const objectDmaBuffer = Buffer.alloc(0x10 * objects.length);

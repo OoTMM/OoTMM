@@ -51,11 +51,6 @@ async function build() {
 }
 
 async function copyData() {
-  const romsRoot = __dirname + '/../roms';
-  const oot = await fs.readFile(romsRoot + '/oot.z64');
-  const mm = await fs.readFile(romsRoot + '/mm.z64');
-  const decompressedRoms = await comboDecompress(dummyMonitor, { oot, mm });
-  await comboCustom(dummyMonitor, decompressedRoms);
   await comboCodegen(dummyMonitor);
   const b = await comboBuild({});
   await fs.mkdir('dist/data', { recursive: true });
