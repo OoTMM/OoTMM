@@ -16,5 +16,5 @@ jobs:
              'OoTMM',
              'gui',
              'workflows/ootmm.yml',
-             'master',
+             'master'
            });
