@@ -1,25 +1,28 @@
-export type MonitorCallbackParams = {
-  message: string;
-  progress: number;
-  total: number;
+export type MonitorCallbacks = {
+  onProgress?: (progress: number, total: number) => void;
+  onLog?: (log: string) => void;
 };
-
-export type MonitorConfig = {
-  log: (msg: string) => void;
-};
-
-export type MonitorCallback = (params: MonitorCallbackParams) => void;
 
 export class Monitor {
   private progress = 0;
   private total = 0;
 
-  constructor(private callback: MonitorCallback) {
-    this.callback = callback;
+  constructor(private callbacks: MonitorCallbacks) {
   }
 
   setProgress(progress: number, total: number) {
     this.progress = progress;
     this.total = total;
+    if (this.callbacks.onProgress) {
+      this.callbacks.onProgress(progress, total);
+    }
+  }
+
+  log(message: string) {
+    if (this.callbacks.onLog) {
+      this.callbacks.onLog(message);
+    } else {
+      console.log(message);
+    }
   }
 }

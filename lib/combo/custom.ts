@@ -1,7 +1,8 @@
 import path from 'path';
 import fs from 'fs/promises';
+import { Buffer } from 'buffer';
 
-import { Game, PATH_BUILD, DATA_FILES, CUSTOM_ADDR } from './config';
+import { Game, DATA_FILES, CUSTOM_ADDR } from './config';
 import { DmaData } from './dma';
 import { splitObject } from './split';
 import { align, arrayToIndexMap } from './util';
@@ -48,7 +49,7 @@ const makeSplitObject = async (roms: DecompressedRoms, entry: CustomEntry) => {
   const obj = splitObject(buf, entry.offsets);
 
   if (!process.env.ROLLUP) {
-    const outDir = path.resolve(PATH_BUILD, 'custom');
+    const outDir = path.resolve('build', 'custom');
     const outBasename = entry.name.toLowerCase();
     const outFilename = path.resolve(outDir, `${outBasename}.zobj`);
     await fs.mkdir(outDir, { recursive: true });
@@ -60,7 +61,8 @@ const makeSplitObject = async (roms: DecompressedRoms, entry: CustomEntry) => {
 
 export const custom = async (roms: DecompressedRoms) => {
   console.log("Building custom objects...");
-  const cg = new CodeGen(path.resolve(PATH_BUILD, 'include', 'combo', 'custom.h'), 'CUSTOM_H');
+  const cgPath = process.env.ROLLUP ? '' : path.resolve('build', 'include', 'combo', 'custom.h');
+  const cg = new CodeGen(cgPath, 'CUSTOM_H');
   const objects = await Promise.all(ENTRIES.map(x => makeSplitObject(roms, x)));
   const objectDmaBuffer = Buffer.alloc(0x10 * objects.length);
   const objectDma = new DmaData(objectDmaBuffer);

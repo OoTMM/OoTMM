@@ -1,3 +1,5 @@
+import { Buffer } from 'buffer';
+
 import { compressGame } from './compress';
 import { Game, GAMES, CONFIG, CUSTOM_ADDR } from './config';
 import { patchGame } from './patch';

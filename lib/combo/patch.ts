@@ -1,7 +1,6 @@
-import fs from 'fs/promises';
-import path from 'path';
+import { Buffer } from 'buffer';
 
-import { Game, PATH_BUILD, CONFIG } from "./config";
+import { Game, CONFIG } from "./config";
 import { Options } from './options';
 
 type VRamEntry = {

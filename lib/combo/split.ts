@@ -1,3 +1,5 @@
+import { Buffer } from 'buffer';
+
 export type SplitObject = {
   data: Buffer;
   offsets: number[];

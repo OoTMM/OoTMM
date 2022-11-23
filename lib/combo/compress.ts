@@ -1,9 +1,11 @@
 import fs from 'fs/promises';
 import path from 'path';
 import crypto from 'crypto';
+import { Buffer } from 'buffer';
+
 import Yaz0 from 'yaz0';
 
-import { Game, CONFIG, PATH_BUILD } from './config';
+import { Game, CONFIG } from './config';
 import { DmaData } from './dma';
 import { fileExists } from './util';
 
@@ -12,7 +14,7 @@ export const compressFile = async (data: Buffer): Promise<Buffer> => {
 
   if (!process.env.ROLLUP) {
     const hash = crypto.createHash('sha256').update(data).digest('hex');
-    const dir = path.resolve(PATH_BUILD, 'cache', 'yaz0', hash.slice(0, 2));
+    const dir = path.resolve('build', 'cache', 'yaz0', hash.slice(0, 2));
     filename = path.resolve(dir, hash);
 
     /* Check for the file in cache */

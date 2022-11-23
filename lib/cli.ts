@@ -1,6 +1,5 @@
 import fs from 'fs/promises';
 import { generate } from "./combo";
-import { PATH_ROMS } from './combo/config';
 import { Options } from "./combo/options";
 
 const makeOptions = (args: string[]): Options => {
@@ -25,11 +24,11 @@ const makeOptions = (args: string[]): Options => {
 
 const main = async () => {
   const opts = makeOptions(process.argv.slice(2));
-  const gen = generate({
-    oot: PATH_ROMS + '/oot.z64',
-    mm: PATH_ROMS + '/mm.z64',
-    opts
-  });
+  const [oot, mm] = await Promise.all([
+    fs.readFile('./roms/oot.z64'),
+    fs.readFile('./roms/mm.z64'),
+  ]);
+  const gen = generate({ oot, mm, opts });
   const { rom, log } = await gen.run();
   await fs.mkdir('out', { recursive: true });
   return Promise.all([
@@ -42,3 +41,4 @@ main().catch((err) => {
   console.error(err);
   process.exit(1);
 });
+

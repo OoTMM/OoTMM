@@ -1,6 +1,5 @@
 import fs from 'fs/promises';
 import path from 'path';
-import { PATH_BUILD } from './config';
 import { DATA_GI, DATA_NPC, DATA_SCENES } from './data';
 
 import { fileExists } from './util';
@@ -16,25 +15,29 @@ export class CodeGen {
   }
 
   async emit() {
-    const dir = path.dirname(this.filename);
-    await fs.mkdir(dir, { recursive: true });
-    const buf = ['#ifndef ' + this.guard, '#define ' + this.guard, '', ...this.defines, '', '#endif', ''].join("\n");
-    let previousBuf = undefined;
-    if (await fileExists(this.filename)) {
-      previousBuf = await fs.readFile(this.filename, 'utf8');
-    }
-    if (previousBuf !== buf) {
-      await fs.writeFile(this.filename, buf);
+    if (!process.env.ROLLUP) {
+      const dir = path.dirname(this.filename);
+      await fs.mkdir(dir, { recursive: true });
+      const buf = ['#ifndef ' + this.guard, '#define ' + this.guard, '', ...this.defines, '', '#endif', ''].join("\n");
+      let previousBuf = undefined;
+      if (await fileExists(this.filename)) {
+        previousBuf = await fs.readFile(this.filename, 'utf8');
+      }
+      if (previousBuf !== buf) {
+        await fs.writeFile(this.filename, buf);
+      }
     }
   }
 };
 
 const codegenFile = async (data: {[k: string]: number}, prefix: string, filename: string, guard: string) => {
-  const cg = new CodeGen(path.resolve(PATH_BUILD, 'include', 'combo', filename), guard);
-  for (const [k, v] of Object.entries(data)) {
-    cg.define(prefix + "_" + k, v);
+  if (!process.env.ROLLUP) {
+    const cg = new CodeGen(path.resolve('build', 'include', 'combo', filename), guard);
+    for (const [k, v] of Object.entries(data)) {
+      cg.define(prefix + "_" + k, v);
+    }
+    await cg.emit();
   }
-  await cg.emit();
 };
 
 export const codegen = async () => {

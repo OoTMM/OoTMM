@@ -1,7 +1,10 @@
+import { Buffer } from 'buffer';
+
 import { build } from "./build";
 import { codegen } from "./codegen";
 import { custom } from "./custom";
 import { decompressGames } from "./decompress";
+import { Monitor, MonitorCallbacks } from './monitor';
 import { Options } from "./options";
 import { pack } from "./pack";
 import { randomize } from "./randomizer";
@@ -12,15 +15,19 @@ type GeneratorOutput = {
 };
 
 export class Generator {
+  private monitor: Monitor;
+
   constructor(
-    private oot: string | Buffer,
-    private mm: string | Buffer,
-    private opts: Options
+    private oot: Buffer,
+    private mm: Buffer,
+    private opts: Options,
+    monitorCallbacks: MonitorCallbacks,
   ) {
+    this.monitor = new Monitor(monitorCallbacks);
   }
 
   async run(): Promise<GeneratorOutput> {
-    const roms = await decompressGames({ oot: this.oot as string, mm: this.mm as string });
+    const roms = await decompressGames(this.monitor, { oot: this.oot, mm: this.mm });
     if (!process.env.ROLLUP) {
       await codegen();
     }

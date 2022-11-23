@@ -12,8 +12,9 @@ import terser from '@rollup/plugin-terser';
 
 import { build as comboBuild } from './combo/build';
 import { decompressGames as comboDecompress } from './combo/decompress';
-import { codegen, codegen as comboCodegen } from './combo/codegen';
+import { codegen as comboCodegen } from './combo/codegen';
 import { custom as comboCustom } from './combo/custom';
+import { Monitor } from './combo/monitor';
 
 async function build() {
   const inputOptions = {
@@ -25,7 +26,7 @@ async function build() {
         'process.env.ROLLUP': JSON.stringify(true),
       }),
       typescript(),
-      externals(),
+      externals({ builtinsPrefix: 'strip' }),
       jsonPlugin(),
       yamlPlugin(),
       dsvPlugin({
@@ -43,7 +44,7 @@ async function build() {
   };
   const outputOptions = {
     file: 'dist/index.node.min.js',
-    format: 'cjs',
+    format: 'es',
   } as const;
   const bundle = await rollup.rollup(inputOptions);
   await bundle.write(outputOptions);
@@ -51,9 +52,11 @@ async function build() {
 
 async function copyData() {
   const romsRoot = __dirname + '/../roms';
-  const decompressedRoms = await comboDecompress({ oot: romsRoot + '/oot.z64', mm: romsRoot + '/mm.z64' });
+  const oot = await fs.readFile(romsRoot + '/oot.z64');
+  const mm = await fs.readFile(romsRoot + '/mm.z64');
+  const decompressedRoms = await comboDecompress(dummyMonitor, { oot, mm });
   await comboCustom(decompressedRoms);
-  await codegen();
+  await comboCodegen();
   const b = await comboBuild({});
   await fs.mkdir('dist/data', { recursive: true });
   await Promise.all(
@@ -65,6 +68,8 @@ async function copyData() {
     })
   );
 }
+
+const dummyMonitor = new Monitor({});
 
 build().then(copyData).catch((err) => {
   console.error(err);

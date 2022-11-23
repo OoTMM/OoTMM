@@ -1,3 +1,5 @@
+import { Buffer } from 'buffer';
+
 export type DmaDataRecord = {
   virtStart: number;
   virtEnd: number;

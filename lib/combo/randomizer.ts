@@ -1,3 +1,5 @@
+import { Buffer } from 'buffer';
+
 import { logic, LogicResult } from './logic';
 import { DATA_GI, DATA_NPC, DATA_SCENES } from './data';
 import { Game, GAMES } from "./config";

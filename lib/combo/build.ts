@@ -1,8 +1,9 @@
 import { spawn } from "child_process";
 import fs from "fs/promises";
 import path from "path";
+import { Buffer } from "buffer";
 
-import { GAMES, PATH_BUILD, ROOT } from "./config";
+import { GAMES } from "./config";
 import { Options } from "./options";
 import { fileExists } from "./util";
 
@@ -17,7 +18,7 @@ export type BuildOutput = {
 };
 
 const cloneDependencies = async () => {
-  const thirdPartyDir = path.resolve(ROOT, 'third_party');
+  const thirdPartyDir = path.resolve('third_party');
   const stampFile = path.resolve(thirdPartyDir, '.stamp');
   if (await fileExists(stampFile))
     return;
@@ -61,11 +62,22 @@ const getBuildArtifacts = async (root: string): Promise<BuildOutput> => {
   return { oot, mm };
 };
 
+const fetchBuildArtifacts = async (): Promise<BuildOutput> => {
+  const [oot, mm] = await Promise.all(GAMES.map(async (g) => {
+    const [payload, patches] = await Promise.all([
+      fetch(`/${g}_payload.bin`).then(x => x.arrayBuffer()).then(x => Buffer.from(x)),
+      fetch(`/${g}_patch.bin`).then(x => x.arrayBuffer()).then(x => Buffer.from(x)),
+    ]);
+    return { payload, patches };
+  }));
+  return { oot, mm };
+};
+
 export const build = async (opts: Options): Promise<BuildOutput> => {
   if (!process.env.ROLLUP) {
     await make(opts);
-    return getBuildArtifacts(PATH_BUILD + (opts.debug ? '/Debug' : '/Release'));
+    return getBuildArtifacts('build' + (opts.debug ? '/Debug' : '/Release'));
   } else {
-    return getBuildArtifacts(__dirname + '/data');
+    return fetchBuildArtifacts();
   }
 };
