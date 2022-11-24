@@ -175,9 +175,9 @@
 #define ITEM_MM_GREAT_FAIRY_SWORD           0x10
 #define ITEM_MM_RED_POTION_WITH_BOTTLE      0x11
 #define ITEM_MM_EMPTY_BOTTLE                0x12
-#define ITEM_MM_RED_POTION                  0x13
-#define ITEM_MM_GREEN_POTION                0x14
-#define ITEM_MM_BLUE_POTION                 0x15
+#define ITEM_MM_POTION_RED                  0x13
+#define ITEM_MM_POTION_GREEN                0x14
+#define ITEM_MM_POTION_BLUE                 0x15
 #define ITEM_MM_BOTTLED_FAIRY               0x16
 #define ITEM_MM_BOTTLED_DEKU_PRINCESS       0x17
 #define ITEM_MM_BOTTLED_MILK                0x18

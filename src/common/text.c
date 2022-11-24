@@ -358,11 +358,11 @@ static const char* const kItemNamesMm[] = {
     C0 "30 Deku Sticks",
     C0 "30 Deku Nuts",
     C0 "40 Deku Nuts",
-    "",
-    "",
-    "",
-    "",
-    "",
+    "some " C0 "Chateau Romani",
+    "some " C0 "Milk",
+    "", /* Gold dust refill */
+    "", /* ??? */
+    "a " C0 "Seahorse",
     "the " C1 "Magic Upgrade",
     "the " C1 "Larger Magic Upgrade",
     "the " C1 "Defense Upgrade",

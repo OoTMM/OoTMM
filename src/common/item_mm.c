@@ -119,6 +119,18 @@ static void addNewBottle(u16 itemId)
     }
 }
 
+static void fillBottle(u16 itemId)
+{
+    for (int i = 0; i < 6; ++i)
+    {
+        if (gMmSave.inventory.items[ITS_MM_BOTTLE + i] == ITEM_MM_EMPTY_BOTTLE)
+        {
+            gMmSave.inventory.items[ITS_MM_BOTTLE + i] = itemId;
+            break;
+        }
+    }
+}
+
 static void addRupees(s16 count)
 {
     u16 max;
@@ -210,7 +222,23 @@ void comboAddItemMm(u16 itemId)
         addNewBottle(itemId);
         break;
     case ITEM_MM_RED_POTION_WITH_BOTTLE:
-        addNewBottle(ITEM_MM_RED_POTION);
+        addNewBottle(ITEM_MM_POTION_RED);
+        break;
+    case ITEM_MM_POTION_RED:
+    case ITEM_MM_POTION_BLUE:
+    case ITEM_MM_POTION_GREEN:
+    case ITEM_MM_BOTTLED_MILK_HALF:
+        fillBottle(itemId);
+        break;
+    case ITEM_MM_SEAHORSE:
+    case ITEM_MM_BOTTLED_SEAHORSE:
+        fillBottle(ITEM_MM_BOTTLED_SEAHORSE);
+        break;
+    case ITEM_MM_MILK:
+        fillBottle(ITEM_MM_BOTTLED_MILK);
+        break;
+    case ITEM_MM_CHATEAU_ROMANI:
+        fillBottle(ITEM_MM_BOTTLED_CHATEAU_ROMANI);
         break;
     case ITEM_MM_BOMB:
         addBombs(1);

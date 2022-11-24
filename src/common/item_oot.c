@@ -151,6 +151,18 @@ static void addNewBottle(u16 itemId)
     }
 }
 
+static void fillBottle(u16 itemId)
+{
+    for (int i = 0; i < 4; ++i)
+    {
+        if (gOotSave.inventory[ITS_OOT_BOTTLE + i] == ITEM_OOT_EMPTY_BOTTLE)
+        {
+            gOotSave.inventory[ITS_OOT_BOTTLE + i] = itemId;
+            return;
+        }
+    }
+}
+
 static void addBombBag(u8 level)
 {
     gOotSave.inventory[ITS_OOT_BOMBS] = ITEM_OOT_BOMB;
@@ -346,6 +358,16 @@ void comboAddItemOot(u16 itemId)
     case ITEM_OOT_RUTO_LETTER:
     case ITEM_OOT_MILK_BOTTLE:
         addNewBottle(itemId);
+        break;
+    case ITEM_OOT_POTION_RED:
+    case ITEM_OOT_POTION_BLUE:
+    case ITEM_OOT_POTION_GREEN:
+    case ITEM_OOT_LON_LON_MILK:
+    case ITEM_OOT_LON_LON_MILK_HALF:
+    case ITEM_OOT_FISH:
+    case ITEM_OOT_BLUE_FIRE:
+    case ITEM_OOT_BUG:
+        fillBottle(itemId);
         break;
     case ITEM_OOT_KOKIRI_SWORD:
         gOotSave.equipment.swords |= EQ_OOT_SWORD_KOKIRI;
