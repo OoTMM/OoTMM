@@ -20,15 +20,15 @@ const getSeed = (opts: Options): string => {
   return randString();
 }
 
-export const logic = async (opts: Options): Promise<LogicResult> => {
+export const logic = (opts: Options): LogicResult => {
   const seed = getSeed(opts);
-  const world = await createWorld();
+  const world = createWorld();
   const random = new Random();
   random.seed(seed);
 
   let placement: ItemPlacement = {};
   let error: Error | null = null;
-  for (let i = 0; i < 20; ++i) {
+  for (let i = 0; i < 100; ++i) {
     try {
       error = null;
       placement = solve(world, random);

@@ -1,12 +1,12 @@
 "SPAWN":
   exits:
     "Link's House": "is_child"
-    "Temple of Time": "(is_adult && event(TIME_TRAVEL)) || can_play(SONG_TP_LIGHT)"
-    "Sacred Meadow": "can_play(SONG_TP_FOREST)"
-    "Death Mountain Crater Warp": "can_play(SONG_TP_FIRE)"
-    "Lake Hylia": "can_play(SONG_TP_WATER)"
-    "Graveyard Upper": "can_play(SONG_TP_SHADOW)"
-    "Desert Colossus": "can_play(SONG_TP_SPIRIT)"
+    "Temple of Time": "(is_adult && event(TIME_TRAVEL)) || (is_child && can_play(SONG_TP_LIGHT))"
+    "Sacred Meadow": "(is_child || event(TIME_TRAVEL)) && can_play(SONG_TP_FOREST)"
+    "Death Mountain Crater Warp": "(is_child || event(TIME_TRAVEL)) && can_play(SONG_TP_FIRE)"
+    "Lake Hylia": "(is_child || event(TIME_TRAVEL)) && can_play(SONG_TP_WATER)"
+    "Graveyard Upper": "(is_child || event(TIME_TRAVEL)) && can_play(SONG_TP_SHADOW)"
+    "Desert Colossus": "(is_child || event(TIME_TRAVEL)) && can_play(SONG_TP_SPIRIT)"
 "Link's House":
   exits:
     "Kokiri Forest": "true"
@@ -83,8 +83,8 @@
   exits:
     "Market": "true"
   locations:
-    "Bombchu Bowling Reward 1": "has_bombchu"
-    "Bombchu Bowling Reward 2": "has_bombchu"
+    "Bombchu Bowling Reward 1": "has(BOMB_BAG)"
+    "Bombchu Bowling Reward 2": "has(BOMB_BAG)"
 "Shooting Gallery":
   exits:
     "Market": "is_child"
@@ -204,7 +204,7 @@
     "Windmill HP": "is_adult"
     "Windmill Song of Storms": "is_adult && has(OCARINA)"
     "Kakariko Song Shadow": "is_adult && has(MEDALLION_FOREST) && has(MEDALLION_FIRE) && has(MEDALLION_WATER)"
-    "Kakariko Impa House HP": "true"
+    "Kakariko Man on Roof": "can_hookshot"
     "Kakariko Potion Shop Odd Potion": "is_adult && has(ODD_MUSHROOM)"
     "Kakariko Grotto Front": "hidden_grotto_bomb && has_weapon"
     "Kakariko Grotto Back": "true"
@@ -218,7 +218,7 @@
   exits:
     "Kakariko": "true"
   locations:
-    "Kakariko Man on Roof": "true"
+    "Kakariko Impa House HP": "true"
 "Graveyard":
   exits:
     "Kakariko": "true"

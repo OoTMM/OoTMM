@@ -214,7 +214,7 @@ static const char* const kItemNamesMm[] = {
     "a " C0 "Powder Keg",
     "the " C1 "Pictograph Box",
     "the " C1 "Lens of Truth",
-    "the " C1 "Longshot",
+    "the " C1 "Hookshot",
     "the " C1 "Great Fairy's Sword",
     "a " C1 "bottle of Red Potion",
     "an " C1 "Empty Bottle",
@@ -352,7 +352,7 @@ static const char* const kItemNamesMm[] = {
     "",
     C0 "20 Bombchu",
     C0 "10 Bombchu",
-    "a" C0 "Bombchu",
+    "a " C0 "Bombchu",
     C0 "5 Bombchu",
     C0 "20 Deku Sticks",
     C0 "30 Deku Sticks",
@@ -515,6 +515,7 @@ static int isItemAmbiguousMm(u16 itemId)
     case ITEM_MM_MAGIC_UPGRADE:
     case ITEM_MM_MAGIC_UPGRADE2:
     case ITEM_MM_DEFENSE_UPGRADE:
+    case ITEM_MM_BOTTLED_MILK:
         return 1;
     default:
         return 0;

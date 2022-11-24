@@ -41,3 +41,8 @@ PATCH_START(0x8084834c)
   jal comboAddItemGI
    lh a1,0x384(v0)
 PATCH_END
+
+/* Fix magic jars */
+PATCH_START 0x80114750
+  li t7,0xfff
+PATCH_END

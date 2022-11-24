@@ -11,11 +11,11 @@ services:
       - ./dist:/app/dist
       - ./include:/app/include
       - ./lib:/app/lib
+      - ./out:/app/out
       - ./roms:/app/roms
       - ./src:/app/src
       - ./docker-entrypoint.sh:/app/docker-entrypoint.sh
       - ./package.json:/app/package.json
       - ./package-lock.json:/app/package-lock.json
-      - ./install-deps.sh:/app/install-deps.sh
       - ./Makefile:/app/Makefile
       - ./tsconfig.json:/app/tsconfig.json

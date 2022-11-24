@@ -1,0 +1,80 @@
+export { default as DATA_GI } from '../../data/gi.yml';
+export { default as DATA_SCENES } from '../../data/scenes.yml';
+export { default as DATA_NPC } from '../../data/npc.yml';
+
+import poolOot from '../../data/oot/pool.csv';
+import poolMm from '../../data/mm/pool.csv';
+
+export const DATA_POOL = {
+  oot: poolOot,
+  mm: poolMm,
+};
+
+import macrosOot from '../../data/oot/macros.yml';
+import macrosMm from '../../data/mm/macros.yml';
+
+export const DATA_MACROS = {
+  oot: macrosOot,
+  mm: macrosMm,
+};
+
+import worldOotOverworld from '../../data/oot/world/overworld.yml';
+import worldOotDekuTree from '../../data/oot/world/deku_tree.yml';
+import worldOotDodongoCavern from '../../data/oot/world/dodongo_cavern.yml';
+import worldOotJabuJabu from '../../data/oot/world/jabu_jabu.yml';
+import worldOotForestTemple from '../../data/oot/world/forest_temple.yml';
+import worldOotFireTemple from '../../data/oot/world/fire_temple.yml';
+import worldOotWaterTemple from '../../data/oot/world/water_temple.yml';
+import worldOotSpiritTemple from '../../data/oot/world/spirit_temple.yml';
+import worldOotShadowTemple from '../../data/oot/world/shadow_temple.yml';
+import worldOotBottomOfTheWell from '../../data/oot/world/bottom_of_the_well.yml';
+import worldOotIceCavern from '../../data/oot/world/ice_cavern.yml';
+import worldOotGerudoFortress from '../../data/oot/world/gerudo_fortress.yml';
+import worldOotGerudoTrainingGrounds from '../../data/oot/world/gerudo_training_grounds.yml';
+import worldOotGanonCastle from '../../data/oot/world/ganon_castle.yml';
+
+const worldOot = {
+  ...worldOotOverworld,
+  ...worldOotDekuTree,
+  ...worldOotDodongoCavern,
+  ...worldOotJabuJabu,
+  ...worldOotForestTemple,
+  ...worldOotFireTemple,
+  ...worldOotWaterTemple,
+  ...worldOotSpiritTemple,
+  ...worldOotShadowTemple,
+  ...worldOotBottomOfTheWell,
+  ...worldOotIceCavern,
+  ...worldOotGerudoFortress,
+  ...worldOotGerudoTrainingGrounds,
+  ...worldOotGanonCastle,
+};
+
+import worldMmOverworld from '../../data/mm/world/overworld.yml';
+import worldMmWoodfallTemple from '../../data/mm/world/woodfall_temple.yml';
+import worldMmSnowheadTemple from '../../data/mm/world/snowhead_temple.yml';
+import worldMmGreatBayTemple from '../../data/mm/world/great_bay_temple.yml';
+import worldMmStoneTowerTemple from '../../data/mm/world/stone_tower_temple.yml';
+import worldMmPirateFortress from '../../data/mm/world/pirate_fortress.yml';
+import worldMmAncientCastleOfIkana from '../../data/mm/world/ancient_castle_of_ikana.yml';
+import worldMmBeneathTheWell from '../../data/mm/world/beneath_the_well.yml';
+import worldMmSecretShrine from '../../data/mm/world/secret_shrine.yml';
+import worldMmMoon from '../../data/mm/world/moon.yml';
+
+const worldMm = {
+  ...worldMmOverworld,
+  ...worldMmWoodfallTemple,
+  ...worldMmSnowheadTemple,
+  ...worldMmGreatBayTemple,
+  ...worldMmStoneTowerTemple,
+  ...worldMmPirateFortress,
+  ...worldMmAncientCastleOfIkana,
+  ...worldMmBeneathTheWell,
+  ...worldMmSecretShrine,
+  ...worldMmMoon,
+};
+
+export const DATA_WORLD = {
+  oot: worldOot,
+  mm: worldMm,
+};

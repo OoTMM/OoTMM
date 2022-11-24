@@ -2,10 +2,14 @@ import fs from 'fs/promises';
 import { Game } from './config';
 
 export const fileExists = async (path: string) => {
-  try {
-    await fs.access(path, fs.constants.F_OK);
-    return true;
-  } catch {
+  if (!process.env.ROLLUP) {
+    try {
+      await fs.access(path, fs.constants.F_OK);
+      return true;
+    } catch {
+      return false;
+    }
+  } else {
     return false;
   }
 }

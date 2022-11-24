@@ -263,6 +263,8 @@
 #define ITEM_MM_MAP                         0x76
 #define ITEM_MM_STRAY_FAIRY                 0x77
 #define ITEM_MM_SMALL_KEY                   0x78
+#define ITEM_MM_MAGIC_JAR_SMALL             0x79
+#define ITEM_MM_MAGIC_JAR_LARGE             0x7a
 #define ITEM_MM_HEART_PIECE                 0x7b
 #define ITEM_MM_RECOVERY_HEART              0x83
 #define ITEM_MM_RUPEE_GREEN                 0x84

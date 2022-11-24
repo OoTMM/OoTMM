@@ -1,3 +1,5 @@
+import { Buffer } from 'buffer';
+
 import { logic, LogicResult } from './logic';
 import { DATA_GI, DATA_NPC, DATA_SCENES } from './data';
 import { Game, GAMES } from "./config";
@@ -51,11 +53,10 @@ const gi = async (game: Game, item: string) => {
     item = subst;
   }
 
-  const data = await DATA_GI;
-  if (!data.hasOwnProperty(item)) {
+  if (!DATA_GI.hasOwnProperty(item)) {
     throw new Error(`Unknown item ${item}`);
   }
-  let value = data[item];
+  let value = DATA_GI[item];
 
   if ((/^OOT_/.test(item) && game === 'mm') || (/^MM_/.test(item) && game === 'oot')) {
     value |= 0x100;
@@ -116,7 +117,7 @@ export const randomizeGame = async (game: Game, logic: LogicResult): Promise<Buf
 
 export const randomize = async (rom: Buffer, opts: Options) => {
   console.log("Randomizing...");
-  const res = await logic(opts);
+  const res = logic(opts);
   const buffer = Buffer.alloc(0x20000, 0xff);
   for (const g of GAMES) {
     const gameBuffer = await randomizeGame(g, res);

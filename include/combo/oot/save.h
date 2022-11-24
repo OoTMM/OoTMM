@@ -187,7 +187,8 @@ OotExtraItems;
 typedef struct
 {
     u32 ganon:1;
-    u32 unused:31;
+    u32 greatFairies:6;
+    u32 unused:25;
 }
 OotExtraFlags;
 

@@ -1,39 +1,35 @@
 import fs from 'fs/promises';
 import path from 'path';
-import { Readable } from 'stream';
 import crypto from 'crypto';
-import { createYaz0Stream } from 'yaz0';
+import { Buffer } from 'buffer';
 
-import { Game, CONFIG, PATH_BUILD } from './config';
+import Yaz0 from 'yaz0';
+
+import { Game, CONFIG } from './config';
 import { DmaData } from './dma';
 import { fileExists } from './util';
 
 export const compressFile = async (data: Buffer): Promise<Buffer> => {
-  const hash = crypto.createHash('sha256').update(data).digest('hex');
-  const dir = path.resolve(PATH_BUILD, 'cache', 'yaz0', hash.slice(0, 2));
-  const filename = path.resolve(dir, hash);
+  let filename = "";
 
-  /* Check for the file in cache */
-  await fs.mkdir(dir, { recursive: true });
-  if (await fileExists(filename)) {
-    return fs.readFile(filename);
+  if (!process.env.ROLLUP) {
+    const hash = crypto.createHash('sha256').update(data).digest('hex');
+    const dir = path.resolve('build', 'cache', 'yaz0', hash.slice(0, 2));
+    filename = path.resolve(dir, hash);
+
+    /* Check for the file in cache */
+    await fs.mkdir(dir, { recursive: true });
+    if (await fileExists(filename)) {
+      return fs.readFile(filename);
+    }
   }
 
   /* Cache miss - compress */
-  return new Promise((resolve, reject) => {
-    const stream = createYaz0Stream('compress', { size: data.length, level: 7 });
-    const chunks: Buffer[] = [];
-    stream.on('data', (chunk) => chunks.push(chunk));
-    stream.on('error', reject);
-    stream.on('end', () => {
-      const out = Buffer.concat(chunks);
-      fs.writeFile(filename, out).then(_ => resolve(out));
-    });
-    const bufStream = new Readable();
-    bufStream.push(data);
-    bufStream.push(null);
-    bufStream.pipe(stream);
-  });
+  const compressed = await Yaz0.compress(data, 7);
+  if (!process.env.ROLLUP) {
+    await fs.writeFile(filename, compressed);
+  }
+  return compressed;
 };
 
 const compressFiles = async (rom: Buffer, dmaOld: DmaData) => {
@@ -59,11 +55,9 @@ const compressFiles = async (rom: Buffer, dmaOld: DmaData) => {
   return Promise.all(promises);
 };
 
-export const compressGame = async (game: Game, rom: Buffer) => {
-  console.log("Compressing " + game + "...");
-
+export const compressGame = async (game: Game, rom: Buffer, dma: Buffer) => {
   const conf = CONFIG[game];
-  const dmaOld = new DmaData(await fs.readFile(path.resolve(PATH_BUILD, 'roms', `${game}_dma.bin`)));
+  const dmaOld = new DmaData(Buffer.from(dma));
   const dmaNew = new DmaData(Buffer.from(rom.subarray(conf.dmaAddr, conf.dmaAddr + conf.dmaCount * 16)));
   const newRom = Buffer.alloc(32 * 1024 * 1024);
   const files = await compressFiles(rom, dmaOld);

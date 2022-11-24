@@ -1,7 +1,6 @@
-import fs from 'fs/promises';
-import path from 'path';
+import { Buffer } from 'buffer';
 
-import { Game, PATH_BUILD, CONFIG } from "./config";
+import { Game, CONFIG } from "./config";
 import { Options } from './options';
 
 type VRamEntry = {
@@ -38,13 +37,15 @@ class Patcher {
   private game: Game;
   private opts: Options;
   private rom: Buffer;
+  private patches: Buffer;
   private vram: VRamEntry[];
   private objectTable: number[];
   private cursor: number;
 
-  constructor(game: Game, rom: Buffer, opts: Options) {
+  constructor(game: Game, rom: Buffer, patches: Buffer, opts: Options) {
     this.game = game;
     this.rom = rom;
+    this.patches = patches;
     this.opts = opts;
     this.vram = this.makeVramTable();
     this.objectTable = this.makeObjectTable();
@@ -257,43 +258,42 @@ class Patcher {
   }
 
   async run() {
-    const patch = await fs.readFile(path.resolve(PATH_BUILD, this.opts.debug ? 'Debug' : 'Release', `${this.game}_patch.bin`));
     this.cursor = 0;
     for (;;) {
       /* Align on a 8-byte boundary */
       this.cursor = (this.cursor + 7) & ~7;
-      if (this.cursor >= patch.length) {
+      if (this.cursor >= this.patches.length) {
         break;
       }
 
       /* Read the patch type */
-      const type = patch.readUInt32BE(this.cursor);
+      const type = this.patches.readUInt32BE(this.cursor);
       this.cursor += 4;
 
       switch (type) {
       case 0x01:
-        this.patchASM(patch);
+        this.patchASM(this.patches);
         break;
       case 0x02:
-        this.patchLoadStore(patch);
+        this.patchLoadStore(this.patches);
         break;
       case 0x03:
-        this.patchRelHiLo(patch);
+        this.patchRelHiLo(this.patches);
         break;
       case 0x04:
-        this.patchRelJump(patch);
+        this.patchRelJump(this.patches);
         break;
       case 0x05:
-        this.patchWrite32(patch);
+        this.patchWrite32(this.patches);
         break;
       case 0x06:
-        this.patchFunc(patch);
+        this.patchFunc(this.patches);
         break;
       case 0x07:
-        this.patchObject(patch);
+        this.patchObject(this.patches);
         break;
       case 0x08:
-        this.patchCall(patch);
+        this.patchCall(this.patches);
         break;
       default:
         throw new Error("Invalid patch type: " + type);
@@ -303,9 +303,7 @@ class Patcher {
   }
 }
 
-export const patchGame = async (opts: Options, game: Game) => {
-  console.log("Patching " + game + "...");
-  const rom = await fs.readFile(path.resolve(PATH_BUILD, 'roms', `${game}_decompressed.z64`));
-  const patcher = new Patcher(game, rom, opts);
+export const patchGame = async (rom: Buffer, patches: Buffer, opts: Options, game: Game) => {
+  const patcher = new Patcher(game, rom, patches, opts);
   return patcher.run();
 };

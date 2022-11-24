@@ -1,12 +1,15 @@
 import path from 'path';
 import fs from 'fs/promises';
+import { Buffer } from 'buffer';
 
-import { Game, PATH_BUILD, DATA_FILES, CUSTOM_ADDR } from './config';
+import { Game, DATA_FILES, CUSTOM_ADDR } from './config';
 import { DmaData } from './dma';
 import { splitObject } from './split';
-import { align, arrayToIndexMap, fileExists } from './util';
+import { align, arrayToIndexMap } from './util';
 import { compressFile } from './compress';
 import { CodeGen } from './codegen';
+import { DecompressedRoms } from './decompress';
+import { Monitor } from './monitor';
 
 const FILES_TO_INDEX_OOT = arrayToIndexMap(DATA_FILES.oot);
 const FILES_TO_INDEX_MM = arrayToIndexMap(DATA_FILES.mm);
@@ -30,56 +33,38 @@ const ENTRIES: CustomEntry[] = [
   { game: 'oot', name: "GI_MASTER_SWORD",       file: "objects/object_toki_objects", offsets: [0x1bd0] },
 ];
 
-const DMA: {[k in Game]?: DmaData} = {
-  oot: undefined,
-  mm: undefined,
-};
-
-const getDmaData = async (game: Game) => {
-  let dma = DMA[game];
-  if (dma === undefined) {
-    const filename = path.resolve(PATH_BUILD, 'roms', `${game}_dma.bin`);
-    const buf = await fs.readFile(filename);
-    dma = new DmaData(buf);
-    DMA[game] = dma;
-  }
-  return dma;
-};
-
-const getObjectBuffer = async (entry: CustomEntry) => {
+const getObjectBuffer = async (roms: DecompressedRoms, entry: CustomEntry) => {
+  const rom = roms[entry.game].rom;
+  const dma = new DmaData(roms[entry.game].dma);
   const index = FILES_TO_INDEX[entry.game][entry.file];
   if (index === undefined) {
     throw new Error(`File ${entry.file} not found in game ${entry.game}`);
   }
-  const dma = await getDmaData(entry.game);
   const dmaEntry = dma.read(index);
-  const filename = path.resolve(PATH_BUILD, 'roms', `${entry.game}_decompressed.z64`);
-  const f = await fs.open(filename, 'r');
-  const buf = Buffer.alloc(dmaEntry.virtEnd - dmaEntry.virtStart);
-  await f.read(buf, 0, buf.byteLength, dmaEntry.virtStart);
-  await f.close();
-  return buf;
+  return Buffer.from(rom.subarray(dmaEntry.virtStart, dmaEntry.virtEnd));
 };
 
 /* TODO: Cache this */
-const makeSplitObject = async (entry: CustomEntry) => {
-  const outDir = path.resolve(PATH_BUILD, 'custom');
-  const outBasename = entry.name.toLowerCase();
-  await fs.mkdir(outDir, { recursive: true });
-
-  const buf = await getObjectBuffer(entry);
+const makeSplitObject = async (roms: DecompressedRoms, entry: CustomEntry) => {
+  const buf = await getObjectBuffer(roms, entry);
   const obj = splitObject(buf, entry.offsets);
 
-  const outFilename = path.resolve(outDir, `${outBasename}.zobj`);
-  await fs.writeFile(outFilename, obj.data);
+  if (!process.env.ROLLUP) {
+    const outDir = path.resolve('build', 'custom');
+    const outBasename = entry.name.toLowerCase();
+    const outFilename = path.resolve(outDir, `${outBasename}.zobj`);
+    await fs.mkdir(outDir, { recursive: true });
+    await fs.writeFile(outFilename, obj.data);
+  }
 
   return obj;
 };
 
-export const custom = async () => {
-  console.log("Building custom objects...");
-  const cg = new CodeGen(path.resolve(PATH_BUILD, 'include', 'combo', 'custom.h'), 'CUSTOM_H');
-  const objects = await Promise.all(ENTRIES.map(x => makeSplitObject(x)));
+export const custom = async (monitor: Monitor, roms: DecompressedRoms) => {
+  monitor.log("Building custom objects");
+  const cgPath = process.env.ROLLUP ? '' : path.resolve('include', 'combo', 'custom.h');
+  const cg = new CodeGen(cgPath, 'CUSTOM_H');
+  const objects = await Promise.all(ENTRIES.map(x => makeSplitObject(roms, x)));
   const objectDmaBuffer = Buffer.alloc(0x10 * objects.length);
   const objectDma = new DmaData(objectDmaBuffer);
   const objTable = Buffer.alloc(0x08 * objects.length);
@@ -118,8 +103,9 @@ export const custom = async () => {
   cg.define('CUSTOM_OBJECTS_SIZE', objects.length);
   data.push(objTable);
 
-  await Promise.all([
-    fs.writeFile(path.resolve(PATH_BUILD, 'custom.bin'), Buffer.concat(data)),
-    cg.emit(),
-  ]);
+  if (!process.env.ROLLUP) {
+    await cg.emit();
+  }
+
+  return Buffer.concat(data);
 };

@@ -73,12 +73,12 @@ static void addHealth(u8 count)
 #endif
 }
 
-static void addAmmo(u16 itemId, u8 max, u8 count)
+static void addAmmo(u8 slot, u16 item, u8 max, u8 count)
 {
-    gOotSave.inventory[itemId] = itemId;
-    gOotSave.ammo[itemId] += count;
-    if (gOotSave.ammo[itemId] > max)
-        gOotSave.ammo[itemId] = max;
+    gOotSave.inventory[slot] = item;
+    gOotSave.ammo[slot] += count;
+    if (gOotSave.ammo[slot] > max)
+        gOotSave.ammo[slot] = max;
 }
 
 static void addSticks(u8 count)
@@ -89,7 +89,7 @@ static void addSticks(u8 count)
         gOotSave.upgrades.dekuStick = 1;
 
     max = kMaxSticks[gOotSave.upgrades.dekuStick];
-    addAmmo(ITEM_OOT_STICK, max, count);
+    addAmmo(ITS_OOT_STICKS, ITEM_OOT_STICK, max, count);
 }
 
 static void addNuts(u8 count)
@@ -99,8 +99,8 @@ static void addNuts(u8 count)
     if (gOotSave.upgrades.dekuNut == 0)
         gOotSave.upgrades.dekuNut = 1;
 
-    max = kMaxNuts[gOotSave.upgrades.dekuStick];
-    addAmmo(ITEM_OOT_NUT, max, count);
+    max = kMaxNuts[gOotSave.upgrades.dekuNut];
+    addAmmo(ITS_OOT_NUTS, ITEM_OOT_NUT, max, count);
 }
 
 static void addBombs(u8 count)
@@ -110,7 +110,7 @@ static void addBombs(u8 count)
     if (gOotSave.upgrades.bombBag == 0)
         return;
     max = kMaxBombs[gOotSave.upgrades.bombBag];
-    addAmmo(ITEM_OOT_BOMB, max, count);
+    addAmmo(ITS_OOT_BOMBS, ITEM_OOT_BOMB, max, count);
 }
 
 static void addArrows(u8 count)
@@ -120,7 +120,7 @@ static void addArrows(u8 count)
     if (gOotSave.upgrades.quiver == 0)
         return;
     max = kMaxArrows[gOotSave.upgrades.quiver];
-    addAmmo(ITEM_OOT_BOW, max, count);
+    addAmmo(ITS_OOT_BOW, ITEM_OOT_BOW, max, count);
 }
 
 static void addSeeds(u8 count)
@@ -129,13 +129,14 @@ static void addSeeds(u8 count)
 
     if (gOotSave.upgrades.bulletBag == 0)
         return;
-    max = kMaxSeeds[gOotSave.upgrades.dekuStick];
-    addAmmo(ITEM_OOT_SLINGSHOT, max, count);
+    max = kMaxSeeds[gOotSave.upgrades.bulletBag];
+    addAmmo(ITS_OOT_SLINGSHOT, ITEM_OOT_SLINGSHOT, max, count);
+    BITMAP16_SET(gOotSave.eventsItem, EV_OOT_ITEM_DEKU_SEEDS);
 }
 
 static void addBombchus(u8 count)
 {
-    addAmmo(ITEM_OOT_BOMBCHU_10, 50, count);
+    addAmmo(ITS_OOT_BOMBCHU, ITEM_OOT_BOMBCHU_10, 50, count);
 }
 
 static void addNewBottle(u16 itemId)

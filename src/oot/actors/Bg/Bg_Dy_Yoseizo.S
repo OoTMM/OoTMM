@@ -1,6 +1,10 @@
 #include <combo.h>
 
-PATCH_START 0x808eda34
-  j BgDyYoseizo_Update
-   nop
+/* Skip Magic check */
+PATCH_START 0x808ebb1c
+  li t6,1
+PATCH_END
+
+PATCH_START 0x808ebb5c
+  li t2,1
 PATCH_END

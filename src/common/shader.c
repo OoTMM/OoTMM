@@ -178,7 +178,7 @@ static const u32 kNutStickPrimColors[] = {
     0xffffbbff,
 };
 static const u32 kNutStickEnvColors[] = {
-    0x28a000ff,
+    0x280a00ff,
     0x505050ff,
     0xaaaa00ff,
 };
