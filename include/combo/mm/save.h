@@ -290,7 +290,8 @@ typedef struct
     u32 songOath:1;
     u32 progressiveShield:1;
     u32 majora:1;
-    u32 unused:11;
+    u32 maskBremen:1;
+    u32 unused:10;
 }
 MmExtraFlags2;
 
