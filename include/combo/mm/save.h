@@ -291,7 +291,8 @@ typedef struct
     u32 progressiveShield:1;
     u32 majora:1;
     u32 maskBremen:1;
-    u32 unused:10;
+    u32 maskScents:1;
+    u32 unused:9;
 }
 MmExtraFlags2;
 
