@@ -9,6 +9,8 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const env = process.env.NODE_ENV || 'development';
 const dev = env === 'development';
 
+const VERSION = process.env.VERSION || "XXX";
+
 module.exports = {
   mode: dev ? 'development' : 'production',
   entry: './app/index.js',
@@ -49,6 +51,10 @@ module.exports = {
     },
   },
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(env),
+      'process.env.VERSION': JSON.stringify(VERSION),
+    }),
     new CopyWebpackPlugin({
       patterns: [
         { from: 'node_modules/@ootmm/core/dist/data' }

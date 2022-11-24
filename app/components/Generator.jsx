@@ -54,6 +54,8 @@ export const Generator = () => {
     <div>
       <h1 className="generator-title">OoTMM Web Generator</h1>
       <br/>
+      <p>Version: {process.env.VERSION}</p>
+      <br/>
       <br/>
       {error && <div className="generator-error">{error}</div>}
       {!(generating || result) &&
