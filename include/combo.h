@@ -108,6 +108,7 @@ u32     comboLoadObject(void* buffer, u16 objectId);
 #define DRAW_NO_PRE2    0x02
 #define DRAW_RAW        (DRAW_NO_PRE1 | DRAW_NO_PRE2)
 
+void comboSetObjectSegment(GfxContext* gfx, void* buffer);
 void comboDrawObject(GameState_Play* play, Actor* actor, u16 objectId, u16 shaderId, int flags);
 void comboDrawGI(GameState_Play* play, Actor* actor, int gi, int flags);
 

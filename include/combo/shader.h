@@ -214,5 +214,6 @@ extern const Shader kShaders[256];
 #define DRAWGI_OOT_NUT_UPGRADE              0xc1
 #define DRAWGI_OOT_NUT_UPGRADE2             0xc2
 #define DRAWGI_MM_SPIN_UPGRADE              0xc3
+#define DRAWGI_MM_STRAY_FAIRY               0xc4
 
 #endif
