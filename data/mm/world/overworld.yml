@@ -188,7 +188,7 @@
     "Termina Field Dodongo Grotto": "has_weapon || has(BOMB_BAG)"
     "Termina Field Bio Baba Grotto": "has_explosives && has(MASK_ZORA)"
     "Termina Field Scrub": "event(SCRUB_TELESCOPE) && has(WALLET)"
-    "Termina Field Gossip Stones HP": "has(OCARINA) && (has(SONG_GORON_HALF, 2) || has(SONG_AWAKENING) || has(SONG_ZORA)) && can_break_boulders"
+    "Termina Field Gossip Stones HP": "has(OCARINA) && ((has(MASK_GORON) && has(SONG_GORON_HALF, 2)) || (has(MASK_DEKU) && has(SONG_AWAKENING)) || (has(MASK_ZORA) && has(SONG_ZORA))) && can_break_boulders"
 "Road to Southern Swamp":
   exits:
     "Swamp": "true"
@@ -322,7 +322,7 @@
     "Goron Village": "can_use_lens"
   locations:
     "Lone Peak Shrine Lens Chest": "true"
-    "Lone Peak Shrine Boulder Chest": "can_break_boulders"
+    "Lone Peak Shrine Boulder Chest": "has_explosives"
     "Lone Peak Shrine Invisible Chest": "can_use_lens"
 "Goron Graveyard":
   exits:
