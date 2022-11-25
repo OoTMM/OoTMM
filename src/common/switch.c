@@ -44,6 +44,10 @@ static void waitSubsystems(void)
         if (!(tmp & 0x40000000))
             break;
     }
+
+    /* Disable video */
+    tmp = IO_READ(VI_CONTROL_REG);
+    IO_WRITE(VI_CONTROL_REG, tmp & ~0x3);
 }
 
 void comboGameSwitch(void)
@@ -57,6 +61,7 @@ void comboGameSwitch(void)
     waitSubsystems();
     osInvalICache((void*)FOREIGN_DRAM, FOREIGN_SIZE);
     osInvalDCache((void*)FOREIGN_DRAM, FOREIGN_SIZE);
+
     comboDma_NoCacheInval((void*)FOREIGN_OFF, FOREIGN_CART, FOREIGN_SIZE);
     comboExportContext();
     ((EntryPoint)FOREIGN_DRAM)();
