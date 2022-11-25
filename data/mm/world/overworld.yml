@@ -147,7 +147,7 @@
     "Stock Pot Inn Guest Room Chest": "has(ROOM_KEY)"
     "Stock Pot Inn Staff Room Chest": "true"
     "Stock Pot Inn Room Key": "true"
-    "Stock Pot Inn Letter to Kafei": "has(MASK_KAFEI)"
+    "Stock Pot Inn Letter to Kafei": "has(MASK_KAFEI) && (has(ROOM_KEY) || has(MASK_DEKU))"
     "Stock Pot Inn Couple's Mask": "event(SUN_MASK) && has(PENDANT_OF_MEMORIES) && has(MASK_KAFEI)"
     "Stock Pot Inn Grandma HP 1": "has(MASK_ALL_NIGHT)"
     "Stock Pot Inn Grandma HP 2": "has(MASK_ALL_NIGHT)"
