@@ -98,4 +98,7 @@ void* ActorAlloc(u32 size);
 
 void Sram_CopySave(void*, void*);
 
+void Play_Init(GameState_Play*);
+void Play_Draw(GameState_Play*);
+
 #endif

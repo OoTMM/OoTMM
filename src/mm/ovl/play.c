@@ -1,7 +1,5 @@
 #include <combo.h>
 
-extern void Play_Init(GameState_Play*);
-
 static void debugCheat(GameState_Play* play)
 {
 #if defined(DEBUG)

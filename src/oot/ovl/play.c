@@ -1,7 +1,6 @@
 #include <combo.h>
 
 extern void* gMmMag;
-extern void Play_Init(void*);
 
 static void debugCheat(GameState_Play* play)
 {
@@ -190,6 +189,12 @@ void hookPlay_Init(GameState_Play* play)
         return;
     }
 
+    /* Title screen transition skip */
+    if (gComboCtx.valid)
+    {
+        play->transition.gfx = 11;
+    }
+
 #if defined(DEBUG)
     if (play->gs.input[0].current.buttons & R_TRIG)
     {
@@ -197,4 +202,19 @@ void hookPlay_Init(GameState_Play* play)
         return;
     }
 #endif
+}
+
+void Play_DrawWrapper(GameState_Play* play)
+{
+    Play_Draw(play);
+
+    if (gComboCtx.valid)
+    {
+        OPEN_DISPS(play->gs.gfx);
+        gDPSetCycleType(OVERLAY_DISP++, G_CYC_FILL);
+        gDPSetRenderMode(OVERLAY_DISP++, G_RM_NOOP, G_RM_NOOP2);
+        gDPSetFillColor(OVERLAY_DISP++, 0);
+        gDPFillRectangle(OVERLAY_DISP++, 0, 0, 0xfff, 0xfff);
+        CLOSE_DISPS();
+    }
 }

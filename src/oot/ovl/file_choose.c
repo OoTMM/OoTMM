@@ -1,5 +1,6 @@
 #include <combo.h>
 
+/* DEBUG */
 void hook_FileChoose_Update(void* fc)
 {
     if (gComboCtx.valid)
