@@ -40,7 +40,7 @@
 void Sram_AfterOpenSave(void)
 {
 #if defined(DEBUG)
-    //gSave.entrance = ENTRANCE_GANON;
+    gSave.entrance = ENTRANCE_GORON;
     //gSave.entrance = ENTRANCE_MARKET;
 #endif
 

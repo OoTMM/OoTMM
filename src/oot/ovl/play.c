@@ -24,7 +24,7 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory[ITS_OOT_HAMMER] = ITEM_OOT_HAMMER;
         gSave.inventory[ITS_OOT_HOOKSHOT] = ITEM_OOT_LONGSHOT;
         gSave.inventory[ITS_OOT_LENS] = ITEM_OOT_LENS;
-        gSave.equipment.swords = 0x7;
+        gSave.equipment.swords = 0x3;
         gSave.equipment.shields = 0x7;
         gSave.equipment.tunics = 0x7;
         gSave.equipment.boots = 0x7;
@@ -33,6 +33,7 @@ static void debugCheat(GameState_Play* play)
         gSave.upgrades.bombBag = 3;
         gSave.upgrades.quiver = 3;
         gSave.upgrades.dive = 2;
+        gSave.upgrades.wallet = 2;
         gSave.ammo[ITS_OOT_STICKS] = 30;
         gSave.ammo[ITS_OOT_SLINGSHOT] = 50;
         gSave.ammo[ITS_OOT_BOMBS] = 40;
@@ -55,7 +56,7 @@ static void debugCheat(GameState_Play* play)
 
         gSave.health = gSave.healthMax = 20 * 0x10;
 
-        gSave.rupees = 99;
+        gSave.rupees = 500;
 
         gOotExtraTrade.child = 0xffff;
         gOotExtraTrade.adult = 0;
@@ -63,7 +64,7 @@ static void debugCheat(GameState_Play* play)
         gOotExtraTrade.adult |= (1 << XITEM_OOT_ADULT_CLAIM_CHECK);
         gSave.inventory[ITS_OOT_TRADE_ADULT] = ITEM_OOT_EYE_DROPS;
 
-        //gSave.age = AGE_ADULT;
+        gSave.age = AGE_ADULT;
 
         BITMAP16_SET(gSave.eventsMisc, EV_OOT_INF_KING_ZORA_THAWED);
     }
