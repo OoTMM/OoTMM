@@ -42,7 +42,7 @@ void Sram_AfterOpenSave(void)
     }
 
 #if defined(DEBUG)
-    //gSave.entranceIndex = ((SCE_MM_TEMPLE_SNOWHEAD - 3) << 9) | 0;
+    gSave.entranceIndex = ENTRANCE_GSHRINE;
     //gSave.cutscene = 0xfff6;
 #endif
 }

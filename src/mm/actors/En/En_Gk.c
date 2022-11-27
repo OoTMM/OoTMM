@@ -29,15 +29,22 @@ void EnGk_LearnSongLullaby(Actor* this, GameState_Play* play)
 
 void EnGk_CheckLullaby(Actor* this, GameState_Play* play)
 {
-    if (play->ocarinaMode == 3)
+    if (play->ocarinaMode == 3 && gSave.playerForm == MM_PLAYER_FORM_GORON)
     {
         switch (play->ocarinaSong)
         {
         case 0x01:
         case 0x0e:
-            play->ocarinaSong = 1;
-            SetSwitchFlag(play, 0x14);
-            SET_HANDLER(this, EnGk_LearnSongLullaby);
+            if (gMmExtraFlags.songGoron)
+            {
+                play->ocarinaSong = 0x01;
+            }
+            else
+            {
+                play->ocarinaSong = 0x0e;
+                SET_HANDLER(this, EnGk_LearnSongLullaby);
+                SetSwitchFlag(play, 0x14);
+            }
             break;
         }
     }
