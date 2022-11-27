@@ -15,6 +15,7 @@
 #define ENTRANCE_SMITH      0x5200
 #define ENTRANCE_GSHRINE    0x5e00
 #define ENTRANCE_ENDING     ((SCE_MM_MOON - 3) << 9) | 0
+#define ENTRANCE(a)         (((a) - 3) << 9)
 
 static void Sram_LoadOptions(void)
 {
@@ -42,7 +43,7 @@ void Sram_AfterOpenSave(void)
     }
 
 #if defined(DEBUG)
-    //gSave.entranceIndex = ENTRANCE_GSHRINE;
+    //gSave.entranceIndex = ENTRANCE(SCE_MM_LAIR_GOHT);
     //gSave.cutscene = 0xfff6;
 #endif
 }
