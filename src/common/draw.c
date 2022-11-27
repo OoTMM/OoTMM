@@ -3,7 +3,7 @@
 void PreDraw1(Actor* actor, GameState_Play* play, int unk);
 void PreDraw2(Actor* actor, GameState_Play* play, int unk);
 
-static void setObjectSegment(GfxContext* gfx, void* buffer)
+void comboSetObjectSegment(GfxContext* gfx, void* buffer)
 {
     /* Set the segment in the display list */
     OPEN_DISPS(gfx);
@@ -19,8 +19,11 @@ void comboDrawObject(GameState_Play* play, Actor* actor, u16 objectId, u16 shade
 {
     void* objBuffer;
 
-    objBuffer = comboGetObject(objectId);
-    setObjectSegment(play->gs.gfx, objBuffer);
+    if (objectId)
+    {
+        objBuffer = comboGetObject(objectId);
+        comboSetObjectSegment(play->gs.gfx, objBuffer);
+    }
     if (!(flags & DRAW_NO_PRE1))
         PreDraw1(actor, play, 0);
     if (!(flags & DRAW_NO_PRE2))

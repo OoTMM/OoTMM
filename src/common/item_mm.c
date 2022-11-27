@@ -555,6 +555,9 @@ void comboAddItemMm(u16 itemId)
         addRupees(200);
         break;
 #if defined(GAME_MM)
+    case ITEM_MM_STRAY_FAIRY:
+        gMmSave.inventory.strayFairies[gSaveContext.dungeonId] += 1;
+        break;
     case ITEM_MM_SMALL_KEY:
         {
             s8* keys = &gSave.inventory.dungeonKeys[gSaveContext.dungeonId];

@@ -35,3 +35,12 @@ PATCH_END
 PATCH_START 0x808528c4
   li t8,0x1c00
 PATCH_END
+
+/* Make give item treat fairies as normal items */
+PATCH_START 0x80852da4
+  li at,0xfff
+PATCH_END
+
+PATCH_START 0x80852dd8
+  li at,0xfff
+PATCH_END

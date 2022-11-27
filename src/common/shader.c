@@ -129,13 +129,17 @@ void Shader_CustomHeartContainer(GameState* gs, s16 shaderId)
     CLOSE_DISPS();
 }
 
+#if defined(GAME_OOT)
+static const u32 kMatTransformOffset = 0x11da0;
+#else
+static const u32 kMatTransformOffset = 0x187fc;
+#endif
+
 static void shaderFlameEffect(GameState* gs, int colorIndex)
 {
 #if defined(GAME_OOT)
-    static const u32 kMatTransformOffset = 0x11da0;
     static const u32 kFlameDlist = 0x52a10;
 #else
-    static const u32 kMatTransformOffset = 0x187fc;
     static const u32 kFlameDlist = 0x7d590;
 #endif
 
@@ -406,6 +410,126 @@ void Shader_CustomSpin(GameState* gs, s16 shaderId)
 
     InitListPolyXlu(gs->gfx);
     shaderFlameEffect(gs, 2);
+    CLOSE_DISPS();
+}
+
+typedef struct
+{
+    Vtx_t vertices[16];
+    Gfx   dlist[48];
+}
+CustomStrayFairyObj;
+
+#define qu016(x) ((x) * 65536)
+
+CustomStrayFairyObj kStrayFairyObj =
+{
+    {
+        /* Head */
+        { { -20,  -2, 0 }, 0, { 0x000, 0x400 }, { 255, 255, 255, 255 } },
+        { {  20,  -2, 0 }, 0, { 0x400, 0x400 }, { 255, 255, 255, 255 } },
+        { {  20,  38, 0 }, 0, { 0x400, 0x000 }, { 255, 255, 255, 255 } },
+        { { -20,  38, 0 }, 0, { 0x000, 0x000 }, { 255, 255, 255, 255 } },
+
+        /* Body */
+        { {  -6, -19, 0 }, 0, { 0x000, 0x400 }, { 255, 255, 255, 255 } },
+        { {   6, -19, 0 }, 0, { 0x200, 0x400 }, { 255, 255, 255, 255 } },
+        { {   6,   1, 0 }, 0, { 0x200, 0x000 }, { 255, 255, 255, 255 } },
+        { {  -6,   1, 0 }, 0, { 0x000, 0x000 }, { 255, 255, 255, 255 } },
+
+        /* Limbs */
+        { { -10,  23, 0 }, 0, { 0x000, 0x200 }, { 255, 255, 255, 255 } },
+        { {   5,  48, 0 }, 0, { 0x200, 0x200 }, { 255, 255, 255, 255 } },
+        { {  30,  63, 0 }, 0, { 0x200, 0x000 }, { 255, 255, 255, 255 } },
+        { {  15,  38, 0 }, 0, { 0x000, 0x000 }, { 255, 255, 255, 255 } },
+        { {  10,  23, 0 }, 0, { 0x000, 0x200 }, { 255, 255, 255, 255 } },
+        { {  -5,  48, 0 }, 0, { 0x200, 0x200 }, { 255, 255, 255, 255 } },
+        { { -30,  63, 0 }, 0, { 0x200, 0x000 }, { 255, 255, 255, 255 } },
+        { { -15,  38, 0 }, 0, { 0x000, 0x000 }, { 255, 255, 255, 255 } },
+    },
+    {
+        gsDPPipeSync(),
+        gsDPSetCombineLERP(TEXEL1, PRIMITIVE, PRIM_LOD_FRAC, TEXEL0, TEXEL1, 1, PRIM_LOD_FRAC, TEXEL0, PRIMITIVE, ENVIRONMENT, COMBINED, ENVIRONMENT, COMBINED, 0, PRIMITIVE, 0),
+        gsDPSetRenderMode(G_RM_PASS, G_RM_ZB_CLD_SURF2),
+        gsSPClearGeometryMode(G_CULL_BACK | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR),
+        gsDPSetTextureLUT(G_TT_NONE),
+        gsSPTexture(0xffff, 0xffff, 0, G_TX_RENDERTILE, G_ON),
+        gsSPVertex(offsetof(CustomStrayFairyObj, vertices) | 0x06000000, 16, 0),
+        gsDPLoadTextureBlock(
+            0x0402c030,
+            G_IM_FMT_IA, G_IM_SIZ_8b,
+            16, 32,
+            0,
+            G_TX_MIRROR | G_TX_CLAMP,
+            G_TX_MIRROR | G_TX_CLAMP,
+            G_TX_NOMASK, G_TX_NOMASK,
+            G_TX_NOLOD, G_TX_NOLOD
+        ),
+        gsSP2Triangles(4, 5, 6, 0, 4, 6, 7, 0),
+        gsDPLoadTextureBlock(
+            0x0402c630,
+            G_IM_FMT_IA, G_IM_SIZ_8b,
+            16, 16,
+            0,
+            G_TX_MIRROR | G_TX_CLAMP,
+            G_TX_MIRROR | G_TX_CLAMP,
+            G_TX_NOMASK, G_TX_NOMASK,
+            G_TX_NOLOD, G_TX_NOLOD
+        ),
+        gsSP2Triangles(8, 9, 10, 0, 8, 10, 11, 0),
+        gsSP2Triangles(12, 13, 14, 0, 12, 14, 15, 0),
+        gsDPLoadTextureBlock(
+            0x0402bc30,
+            G_IM_FMT_IA, G_IM_SIZ_8b,
+            32, 32,
+            0,
+            G_TX_MIRROR | G_TX_CLAMP,
+            G_TX_MIRROR | G_TX_CLAMP,
+            G_TX_NOMASK, G_TX_NOMASK,
+            G_TX_NOLOD, G_TX_NOLOD
+        ),
+        gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
+        gsSPEndDisplayList(),
+    }
+};
+
+static void Shader_CustomStrayFairy(GameState_Play* play, s16 shaderId)
+{
+    static u32 kEnvColors[] = {
+        0xba5084ff,
+        0x45852bff,
+        0x7f65ccff,
+        0xc2c164ff,
+    };
+
+    static u32 kPrimColors[] = {
+        0xd2b8c8ff,
+        0xf0f6c2ff,
+        0xe1ebfdff,
+        0xfefee7ff,
+    };
+
+    int index;
+    u8 r;
+    u8 g;
+    u8 b;
+    u8 a;
+
+#if defined(GAME_MM)
+    index = gSaveContext.dungeonId;
+#else
+    index = 0;
+#endif
+    comboSetObjectSegment(play->gs.gfx, &kStrayFairyObj);
+    ModelViewUnkTransform((float*)((char*)play + kMatTransformOffset));
+    OPEN_DISPS(play->gs.gfx);
+    gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    InitListPolyXlu(play->gs.gfx);
+    color4(&r, &g, &b, &a, kEnvColors[index]);
+    gDPSetEnvColor(POLY_XLU_DISP++, r, g, b, a);
+    color4(&r, &g, &b, &a, kPrimColors[index]);
+    gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, r, g, b, a);
+    gSPDisplayList(POLY_XLU_DISP++, offsetof(CustomStrayFairyObj, dlist) | 0x06000000);
     CLOSE_DISPS();
 }
 

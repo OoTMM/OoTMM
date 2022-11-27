@@ -318,7 +318,7 @@ static const char* const kItemNamesMm[] = {
     "the " C0 "Big Key",
     "the " C0 "Compass",
     "the " C0 "Dungeon Map",
-    "", /* Stray Fairy */
+    "a " C0 "Stray Fairy",
     "a " C0 "Small Key",
     "",
     "",

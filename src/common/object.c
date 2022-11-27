@@ -205,6 +205,9 @@ u32 comboLoadObject(void* buffer, u16 objectId)
     const ObjectData* table;
     int isForeignObject;
 
+    if (!objectId)
+        return 0;
+
     isForeignObject = 0;
     if (objectId & 0x2000)
     {
