@@ -15,6 +15,14 @@ PATCH_START(LOADER_ADDR)
   jal   DMARomToRam
    nop
 
+#if defined(GAME_MM)
+  /* MM's DMARomToRam does not inval icache */
+  li    a0,PAYLOAD_RAM
+  li    a1,PAYLOAD_SIZE
+  jal   osInvalICache
+   nop
+#endif
+
   /* Init */
   jal init
    nop
