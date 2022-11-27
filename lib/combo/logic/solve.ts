@@ -411,11 +411,6 @@ class Solver {
 
     let validLocations = Array.from(locations).filter(x => assumedReachable.locations.has(x)).filter(x => !this.placement[x]);
 
-    /* Fairies can only be in chests */
-    if (item.match(/^MM_STRAY_FAIRY_/)) {
-      validLocations = validLocations.filter(x => this.world.checks[x].type === 'chest');
-    }
-
     const location = sample(this.random, validLocations);
     this.place(location, item);
     removeItem(pool, item);
