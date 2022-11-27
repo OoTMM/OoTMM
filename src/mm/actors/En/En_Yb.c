@@ -1,9 +1,24 @@
 #include <combo.h>
 
-int EnYb_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
+int EnYb_HasGivenItem(Actor* this)
 {
-    gi = comboOverride(OV_NPC, 0, NPC_MM_MASK_KAMARO, gi);
-    return GiveItem(actor, play, gi, a, b);
+    if (Actor_HasParent(this))
+    {
+        gMmExtraFlags2.maskKamaro = 1;
+        return 1;
+    }
+    return 0;
+}
+
+PATCH_CALL(0x80bfa940, EnYb_HasGivenItem);
+
+int EnYb_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
+{
+    if (gMmExtraFlags2.maskKamaro)
+        gi = GI_MM_RECOVERY_HEART;
+    else
+        gi = comboOverride(OV_NPC, 0, NPC_MM_MASK_KAMARO, gi);
+    return GiveItem(this, play, gi, a, b);
 }
 
 PATCH_CALL(0x80bfa9b0, EnYb_GiveItem);

@@ -297,7 +297,8 @@ typedef struct
     u32 majora:1;
     u32 maskBremen:1;
     u32 maskScents:1;
-    u32 unused:9;
+    u32 maskKamaro:1;
+    u32 unused:8;
 }
 MmExtraFlags2;
 
