@@ -65,7 +65,7 @@ static s16 comboOverrideImpl(u16 sceneId, u16 id, s16 gi)
 
     override = comboOverrideRaw(makeKey(sceneId, id));
 #if defined(DEBUG)
-    override = GI_OOT_SWORD_KOKIRI;
+    //override = GI_OOT_SWORD_KOKIRI;
 #endif
     absGi = gi > 0 ? gi : -gi;
     if (override >= 0)

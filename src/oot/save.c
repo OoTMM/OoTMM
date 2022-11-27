@@ -40,7 +40,7 @@
 void Sram_AfterOpenSave(void)
 {
 #if defined(DEBUG)
-    gSave.entrance = ENTRANCE_MIDO;
+    gSave.entrance = ENTRANCE_FISH;
     //gSave.entrance = ENTRANCE_MARKET;
 #endif
 
