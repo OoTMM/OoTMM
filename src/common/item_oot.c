@@ -31,7 +31,7 @@ const u8 kOotTradeChild[] = {
 #if defined(GAME_OOT)
 /* Used for dungeons, to map boss lairs to their main scene */
 /* Also, colossus is considered to be in spirit */
-static u16 mainScene(u16 sceneId)
+static u16 mainScene(u16 sceneId, int isBossKey)
 {
     switch (sceneId)
     {
@@ -52,6 +52,14 @@ static u16 mainScene(u16 sceneId)
         return SCE_OOT_TEMPLE_SPIRIT;
     case SCE_OOT_LAIR_BONGO_BONGO:
         return SCE_OOT_TEMPLE_SHADOW;
+    case SCE_OOT_GANON_TOWER:
+        if (!isBossKey)
+            return SCE_OOT_INSIDE_GANON_CASTLE;
+        break;
+    case SCE_OOT_INSIDE_GANON_CASTLE:
+        if (isBossKey)
+            return SCE_OOT_GANON_TOWER;
+        break;
     }
 
     return sceneId;
@@ -661,22 +669,22 @@ void comboAddItemOot(u16 itemId)
         break;
 #if defined(GAME_OOT)
     case ITEM_OOT_SMALL_KEY:
-        sceneId = mainScene(gSaveContext.sceneId);
+        sceneId = mainScene(gSaveContext.sceneId, 0);
         if (gOotSave.dungeonKeys[sceneId] < 0)
             gOotSave.dungeonKeys[sceneId] = 1;
         else
             gOotSave.dungeonKeys[sceneId]++;
         break;
     case ITEM_OOT_MAP:
-        sceneId = mainScene(gSaveContext.sceneId);
+        sceneId = mainScene(gSaveContext.sceneId, 0);
         gOotSave.dungeonItems[sceneId].map = 1;
         break;
     case ITEM_OOT_COMPASS:
-        sceneId = mainScene(gSaveContext.sceneId);
+        sceneId = mainScene(gSaveContext.sceneId, 0);
         gOotSave.dungeonItems[sceneId].compass = 1;
         break;
     case ITEM_OOT_BIG_KEY:
-        sceneId = mainScene(gSaveContext.sceneId);
+        sceneId = mainScene(gSaveContext.sceneId, 1);
         gOotSave.dungeonItems[sceneId].bossKey = 1;
         break;
 #endif
