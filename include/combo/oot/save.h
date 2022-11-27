@@ -188,7 +188,9 @@ typedef struct
 {
     u32 ganon:1;
     u32 greatFairies:6;
-    u32 unused:25;
+    u32 fishingChild:1;
+    u32 fishingAdult:1;
+    u32 unused:23;
 }
 OotExtraFlags;
 
