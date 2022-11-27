@@ -32,6 +32,7 @@ void Sram_AfterOpenSave(void)
 {
     Sram_LoadOptions();
     gSave.playerForm = MM_PLAYER_FORM_HUMAN;
+    gSave.equippedMask = 0;
     gSave.entranceIndex = ENTRANCE_CLOCKTOWN;
 
     /* Grace period */
@@ -41,7 +42,7 @@ void Sram_AfterOpenSave(void)
     }
 
 #if defined(DEBUG)
-    gSave.entranceIndex = ((SCE_MM_TEMPLE_SNOWHEAD - 3) << 9) | 0;
+    //gSave.entranceIndex = ((SCE_MM_TEMPLE_SNOWHEAD - 3) << 9) | 0;
     //gSave.cutscene = 0xfff6;
 #endif
 }
