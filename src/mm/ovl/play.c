@@ -99,6 +99,7 @@ void hookPlay_Init(GameState_Play* play)
         if (!gOotExtraFlags.ganon)
         {
             gSave.playerForm = MM_PLAYER_FORM_HUMAN;
+            gSave.equippedMask = 0;
             gSave.day = 0;
             gSave.time = 0x3fff;
             Sram_SaveNewDay(play);
