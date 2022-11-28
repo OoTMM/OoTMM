@@ -459,7 +459,7 @@
   exits:
     "Great Bay Coast": "true"
   locations:
-    "Ocean Spider House Wallet": "has(MASK_GORON) && has(HOOKSHOT)"
+    "Ocean Spider House Wallet": "has(MASK_GORON) && has(HOOKSHOT) && can_use_fire_arrows"
     "Ocean Spider House Chest HP": "has(BOW) && has(MASK_CAPTAIN)"
 "Gorman Track":
   exits:
