@@ -64,7 +64,9 @@ static void debugCheat(GameState_Play* play)
         gOotExtraTrade.adult |= (1 << XITEM_OOT_ADULT_CLAIM_CHECK);
         gSave.inventory[ITS_OOT_TRADE_ADULT] = ITEM_OOT_EYE_DROPS;
 
-        gSave.age = AGE_ADULT;
+#if defined(DEBUG_AGE)
+        gSave.age = DEBUG_AGE;
+#endif
 
         BITMAP16_SET(gSave.eventsMisc, EV_OOT_INF_KING_ZORA_THAWED);
     }
