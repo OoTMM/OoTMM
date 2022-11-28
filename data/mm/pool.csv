@@ -253,7 +253,7 @@ Stone Tower Temple Mirrors Room Right Chest,            chest,          TEMPLE_S
 Stone Tower Temple Wind Room Ledge Chest,               chest,          TEMPLE_STONE_TOWER,           0x19,             STRAY_FAIRY_ST
 Stone Tower Temple Wind Room Jail Chest,                chest,          TEMPLE_STONE_TOWER,           0x0d,             STRAY_FAIRY_ST
 Stone Tower Temple Light Arrow,                         chest,          TEMPLE_STONE_TOWER,           0x1b,             ARROW_LIGHT
-Stone Tower Temple Before Water Bridge Chest,           chest,          TEMPLE_STONE_TOWER,           0x00,             STRAY_FAIRY_ST
+Stone Tower Temple Before Water Bridge Chest,           chest,          TEMPLE_STONE_TOWER,           0x14,             STRAY_FAIRY_ST
 Stone Tower Temple Water Bridge Chest,                  chest,          TEMPLE_STONE_TOWER,           0x0c,             STRAY_FAIRY_ST
 Stone Tower Temple Inverted Entrance Chest,             chest,          TEMPLE_STONE_TOWER_INVERTED,  0x10,             STRAY_FAIRY_ST
 Stone Tower Temple Inverted East Lower Chest,           chest,          TEMPLE_STONE_TOWER_INVERTED,  0x13,             STRAY_FAIRY_ST
