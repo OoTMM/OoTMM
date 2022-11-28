@@ -39,6 +39,9 @@ static u16 makeKey(u16 sceneId, u16 id)
     case SCE_MM_MOUNTAIN_VILLAGE_SPRING:
         sceneId = SCE_MM_MOUNTAIN_VILLAGE_WINTER;
         break;
+    case SCE_MM_TEMPLE_STONE_TOWER_INVERTED:
+        sceneId = SCE_MM_TEMPLE_STONE_TOWER;
+        break;
     }
 #endif
 
