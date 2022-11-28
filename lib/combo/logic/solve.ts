@@ -196,8 +196,8 @@ const sample = <T>(random: Random, arr: T[]): T => {
 
 const shuffle = <T>(random: Random, arr: T[]): T[] => {
   const copy = [...arr].sort();
-  for (let i = 0; i < copy.length; i++) {
-    const j = randomInt(random, copy.length);
+  for (let i = 0; i < copy.length - 1; i++) {
+    const j = i + randomInt(random, copy.length - i);
     [copy[i], copy[j]] = [copy[j], copy[i]];
   }
   return copy;
