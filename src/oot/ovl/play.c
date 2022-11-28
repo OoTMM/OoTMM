@@ -47,12 +47,12 @@ static void debugCheat(GameState_Play* play)
         gSave.quest.stoneRuby = 0;
         gSave.quest.stoneSapphire = 0;
 
-        gSave.quest.medallionShadow = 1;
-        gSave.quest.medallionSpirit = 1;
-        gSave.quest.medallionForest = 1;
-        gSave.quest.medallionFire = 1;
-        gSave.quest.medallionWater = 1;
-        gSave.quest.medallionLight = 1;
+        //gSave.quest.medallionShadow = 1;
+        //gSave.quest.medallionSpirit = 1;
+        //gSave.quest.medallionForest = 1;
+        //gSave.quest.medallionFire = 1;
+        //gSave.quest.medallionWater = 1;
+        //gSave.quest.medallionLight = 1;
 
         gSave.health = gSave.healthMax = 20 * 0x10;
 

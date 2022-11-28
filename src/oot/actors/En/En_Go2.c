@@ -84,6 +84,7 @@ int EnGo2_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
     switch (gi)
     {
     case GI_OOT_TUNIC_GORON:
+        gOotExtraFlags.tunicGoron = 1;
         gi = comboOverride(OV_NPC, 0, NPC_OOT_GORON_LINK_TUNIC, gi);
         break;
     case GI_OOT_BOMB_BAG2:
@@ -97,3 +98,14 @@ int EnGo2_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
 
 PATCH_CALL(0x80b56ff4, EnGo2_GiveItem);
 PATCH_CALL(0x80b5ad5c, EnGo2_GiveItem);
+
+u16 EnGo2_GetMessageLinkGoron(void)
+{
+    if (!gOotExtraFlags.tunicGoron)
+        return 0x3033;
+    if (gSave.quest.medallionFire)
+        return 0x3042;
+    return 0x3038;
+}
+
+PATCH_FUNC(0x80b57868, EnGo2_GetMessageLinkGoron);
