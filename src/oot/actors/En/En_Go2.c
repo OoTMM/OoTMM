@@ -28,7 +28,7 @@ static void EnGo2_HandlerGiveBiggoronItem(Actor* this, GameState_Play* play)
         break;
     case GI_OOT_SWORD_BIGGORON:
         gi = comboOverride(OV_NPC, 0, NPC_OOT_TRADE_BIGGORON_SWORD, gi);
-        gSave.tradeQuestFlag = 1;
+        gOotExtraFlags.biggoron = 1;
         break;
     }
 
@@ -58,10 +58,10 @@ void EnGo2_SetBiggoronMessageId(Actor* this, GameState_Play* play, Actor* dst)
         gi = GI_OOT_CLAIM_CHECK;
         break;
     case 0xf: /* Claim check */
-        if (gSave.tradeQuestFlag == 0)
+        if (!gOotExtraFlags.biggoron)
             gi = GI_OOT_SWORD_BIGGORON;
         else
-            msgId = 0x305e;
+            msgId = 0x3053;
         break;
     default:
         break;

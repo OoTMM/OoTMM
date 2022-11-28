@@ -191,7 +191,8 @@ typedef struct
     u32 fishingChild:1;
     u32 fishingAdult:1;
     u32 tunicGoron:1;
-    u32 unused:22;
+    u32 biggoron:1;
+    u32 unused:21;
 }
 OotExtraFlags;
 
