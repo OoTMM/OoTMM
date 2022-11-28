@@ -122,7 +122,7 @@
     "Clock Town East": "true"
   locations:
     "Milk Bar Troupe Leader Mask": "has(OCARINA) && has(MASK_DEKU) && has(MASK_ZORA) && has(MASK_GORON) && has(MASK_ROMANI)"
-    "Milk Bar Madame Aroma Bottle": "has(LETTER_TO_MAMA)"
+    "Milk Bar Madame Aroma Bottle": "has(MASK_KAFEI) && has(LETTER_TO_MAMA)"
 "Town Archery":
   exits:
     "Clock Town East": "true"
