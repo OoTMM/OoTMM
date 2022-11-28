@@ -23,6 +23,7 @@ OBJCOPY 	:= $(ARCH)-objcopy
 NM 			:= $(ARCH)-nm
 BUILD_DIR 	:= build
 SRC_DIR 	:= src
+DEBUG_FILE  := include/combo/debug.h
 
 # Debug/Release
 ifeq ($(DEBUG), 0)
@@ -66,11 +67,11 @@ $(OOT_ELF): $(OOT_OBJ) $(OOT_LDSCRIPT)
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) $(OOT_OBJ) -T $(OOT_LDSCRIPT) -o $@
 
-$(BUILD_DIR)/obj/oot/%.S.o: $(SRC_DIR)/%.S
+$(BUILD_DIR)/obj/oot/%.S.o: $(SRC_DIR)/%.S $(DEBUG_FILE)
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -DGAME_OOT=1 -c -o $@ $<
 
-$(BUILD_DIR)/obj/oot/%.c.o: $(SRC_DIR)/%.c
+$(BUILD_DIR)/obj/oot/%.c.o: $(SRC_DIR)/%.c $(DEBUG_FILE)
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -D_LANGUAGE_C=1 -DGAME_OOT=1 -c -o $@ $<
 
@@ -90,17 +91,20 @@ $(MM_ELF): $(MM_OBJ) $(MM_LDSCRIPT)
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) $(MM_OBJ) -T $(MM_LDSCRIPT) -o $@
 
-$(BUILD_DIR)/obj/mm/%.S.o: $(SRC_DIR)/%.S
+$(BUILD_DIR)/obj/mm/%.S.o: $(SRC_DIR)/%.S $(DEBUG_FILE)
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -DGAME_MM=1 -c -o $@ $<
 
-$(BUILD_DIR)/obj/mm/%.c.o: $(SRC_DIR)/%.c
+$(BUILD_DIR)/obj/mm/%.c.o: $(SRC_DIR)/%.c $(DEBUG_FILE)
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -D_LANGUAGE_C=1 -DGAME_MM=1 -c -o $@ $<
 
 $(MM_LDSCRIPT): $(LDSCRIPT)
 	@mkdir -p $(dir $@)
 	$(CC) -Iinclude -E -P -x c -MMD -MT $@ -DGAME_MM=1 $< -o $@
+
+$(DEBUG_FILE):
+	touch $@
 
 .PHONY: clean
 clean:

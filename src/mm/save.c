@@ -1,21 +1,6 @@
 #include <combo.h>
 
-#define ENTRANCE(scene, id) (((scene) - 3) << 9)
-
 #define ENTRANCE_CLOCKTOWN  0xd800
-#define ENTRANCE_WOODS      0xc200
-#define ENTRANCE_DKING      0x7610
-#define ENTRANCE_TEMPLE1    0x3000
-#define ENTRANCE_BOSS1      0x3800
-#define ENTRANCE_SWAMP      0x8400
-#define ENTRANCE_RANCH      0x6400
-#define ENTRANCE_GREAT_BAY  0x6800
-#define ENTRANCE_BEAVER     0x8e00
-#define ENTRANCE_LAB        0x5800
-#define ENTRANCE_SMITH      0x5200
-#define ENTRANCE_GSHRINE    0x5e00
-#define ENTRANCE_ENDING     ((SCE_MM_MOON - 3) << 9) | 0
-#define ENTRANCE(a)         (((a) - 3) << 9)
 
 static void Sram_LoadOptions(void)
 {
@@ -42,9 +27,8 @@ void Sram_AfterOpenSave(void)
         gSave.time = 0x3e20;
     }
 
-#if defined(DEBUG)
-    //gSave.entranceIndex = ENTRANCE(SCE_MM_LAIR_GOHT);
-    //gSave.cutscene = 0xfff6;
+#if defined(DEBUG) && defined(DEBUG_MM_ENTRANCE)
+    gSave.entranceIndex = DEBUG_MM_ENTRANCE;
 #endif
 }
 

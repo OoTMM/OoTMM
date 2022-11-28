@@ -1,6 +1,10 @@
 #ifndef COMBO_COMBO_H
 #define COMBO_COMBO_H
 
+#if defined(DEBUG)
+# include <combo/debug.h>
+#endif
+
 #if !defined(__ASSEMBLER__)
 # include <stddef.h>
 # include <string.h>

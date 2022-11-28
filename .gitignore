@@ -5,3 +5,4 @@
 /out
 /third_party
 /node_modules
+/include/combo/debug.h
