@@ -118,6 +118,15 @@ PATCH_START 0x80143d04
   nop
 PATCH_END
 
+/* Do not reset gold skulltula tokens */
+PATCH_START 0x8014449c
+  nop
+PATCH_END
+
+PATCH_START 0x801444a4
+  nop
+PATCH_END
+
 /* Do not remove fierce deity */
 PATCH_START 0x80143d98
   nop
