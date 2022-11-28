@@ -430,6 +430,24 @@ class Solver {
     const assumedAccessibleItems = combinedItems(this.items, pool);
 
     /* Get all assumed reachable locations */
+    let reachable = this.reachable!;
+    const reachableLocations = new Set(reachable.locations);
+    for (;;) {
+      let changed = false;
+      reachable = pathfind(this.world, assumedAccessibleItems, reachable);
+      for (const l of reachable.locations.values()) {
+        if (!reachableLocations.has(l)) {
+          changed = true;
+          reachableLocations.add(l);
+          if (this.placement[l]) {
+            addItem(assumedAccessibleItems, this.placement[l]);
+          }
+        }
+      }
+      if (!changed) {
+        break;
+      }
+    }
     const assumedReachable = pathfind(this.world, assumedAccessibleItems, this.reachable).locations;
 
     /* Get all assumed reachable locations that have not been placed */
