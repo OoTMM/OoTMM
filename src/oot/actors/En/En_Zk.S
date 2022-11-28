@@ -24,3 +24,12 @@ PATCH_END
 PATCH_START 0x80ad63b0
   li t5,0x34
 PATCH_END
+
+/* Disable check for zora sapphire */
+PATCH_START 0x80ad5d74
+  li t7,0
+PATCH_END
+
+PATCH_START 0x80ad6408
+  li t2,0
+PATCH_END
