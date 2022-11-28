@@ -137,8 +137,8 @@ extern const u8 kMmTrade2[];
 extern const u8 kMmTrade3[];
 
 int  comboAddItemGI(GameState_Play* play, s16 gi);
-void comboAddItemMm(u16 itemId);
-void comboAddItemOot(u16 itemId);
+void comboAddItemMm(GameState_Play* play, u16 itemId);
+void comboAddItemOot(GameState_Play* play, u16 itemId);
 
 void comboToggleTrade(u8* slot, u32 flags, const u8* table, u32 tableSize);
 

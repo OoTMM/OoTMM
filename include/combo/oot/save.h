@@ -149,7 +149,7 @@ typedef struct
     char    unk_13ce[0x28];
     s16     magicTarget;
     char    unk_13f8[0x0a];
-    u16     sceneId;
+    u16     mapIndex;
     char    unk_1404[0x20];
     u16     healthDelta;
     char    unk_1428[0x28];

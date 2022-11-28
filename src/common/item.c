@@ -13,12 +13,12 @@ const u8 kMaxArrows[] = { 0, 30, 40, 50 };
 const u8 kMaxSeeds[] = { 0, 30, 40, 50 };
 const u16 kMaxRupees[] = { 99, 200, 500 };
 
-static void comboAddItem(u16 itemId)
+static void comboAddItem(GameState_Play* play, u16 itemId)
 {
     if ((itemId & MASK_FOREIGN_ITEM) == ITEM_BASE_MM)
-        comboAddItemMm(itemId & 0xff);
+        comboAddItemMm(play, itemId & 0xff);
     else
-        comboAddItemOot(itemId & 0xff);
+        comboAddItemOot(play, itemId & 0xff);
 }
 
 int comboAddItemGI(GameState_Play* play, s16 gi)
@@ -31,6 +31,6 @@ int comboAddItemGI(GameState_Play* play, s16 gi)
         itemId |= MASK_FOREIGN_ITEM;
 
     comboTextHijackItem(play, itemId);
-    comboAddItem(itemId);
+    comboAddItem(play, itemId);
     return -1;
 }

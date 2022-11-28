@@ -179,7 +179,7 @@ static void addTrade3(u8 index)
     gMmExtraTrade.tradeObtained3 |= (1 << (u16)index);
 }
 
-void comboAddItemMm(u16 itemId)
+void comboAddItemMm(GameState_Play* play, u16 itemId)
 {
     switch (itemId)
     {
