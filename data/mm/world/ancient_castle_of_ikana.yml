@@ -1,6 +1,6 @@
 "Ancient Castle of Ikana Exterior":
   exits:
-    "Beneath the Well End": "has_mirror_shield"
+    "Beneath the Well End": "has_mirror_shield || can_use_light_arrows"
     "Ancient Castle of Ikana Entrance": "true"
 "Ancient Castle of Ikana Entrance":
   exits:
