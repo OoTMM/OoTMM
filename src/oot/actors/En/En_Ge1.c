@@ -1,5 +1,13 @@
 #include <combo.h>
 
+int EnGe1_IsPeaceful(void)
+{
+    return gSave.quest.gerudoCard;
+}
+
+PATCH_FUNC(0x80a8f554, EnGe1_IsPeaceful);
+PATCH_FUNC(0x80b23e68, EnGe1_IsPeaceful); /* En_Ge2 */
+
 int EnGe1_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
 {
     switch (gi)
