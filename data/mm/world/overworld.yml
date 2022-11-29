@@ -29,7 +29,7 @@
     "Deku Playground": "has(MASK_DEKU)"
   events:
     BOMBER_CODE: "(has(MASK_DEKU) && has(MAGIC_UPGRADE)) || has(MASK_ZORA) || has(BOW)"
-    SAKON_BOMB_BAG: "has_weapon"
+    SAKON_BOMB_BAG: "can_fight"
   locations:
     "Clock Town Tree HP": "true"
     "Clock Town Bomber Notebook": "event(BOMBER_CODE)"
@@ -176,7 +176,7 @@
     "Mountain Village Path": "has(BOW)"
     "Milk Road": "true"
     "Great Bay Coast": "can_play(SONG_EPONA)"
-    "Road to Ikana": "can_play(SONG_EPONA)"
+    "Road to Ikana": "true"
   locations:
     "Termina Field Water Chest": "has(MASK_ZORA)"
     "Termina Field Tall Grass Chest": "true"
@@ -184,9 +184,9 @@
     "Termina Field Kamaro Mask": "can_play(SONG_HEALING)"
     "Termina Field Tall Grass Grotto": "true"
     "Termina Field Pillar Grotto": "true"
-    "Termina Field Peahat Grotto": "has_weapon"
-    "Termina Field Dodongo Grotto": "has_weapon || has(BOMB_BAG)"
-    "Termina Field Bio Baba Grotto": "has_explosives && has(MASK_ZORA)"
+    "Termina Field Peahat Grotto": "can_fight || has(BOW)"
+    "Termina Field Dodongo Grotto": "has_weapon || has(BOMB_BAG) || has(MASK_GORON) || has(BOW)"
+    "Termina Field Bio Baba Grotto": "can_break_boulders && has(MASK_ZORA)"
     "Termina Field Scrub": "event(SCRUB_TELESCOPE) && has(WALLET)"
     "Termina Field Gossip Stones HP": "has(OCARINA) && ((has(MASK_GORON) && has(SONG_GORON_HALF, 2)) || (has(MASK_DEKU) && has(SONG_AWAKENING)) || (has(MASK_ZORA) && has(SONG_ZORA))) && can_break_boulders"
 "Road to Southern Swamp":
@@ -275,10 +275,10 @@
 "Mountain Village Path":
   exits:
     "Termina Field": "has(BOW)"
-    "Mountain Village": "can_break_boulders"
+    "Mountain Village": "can_break_boulders || can_use_fire_arrows"
 "Mountain Village":
   exits:
-    "Mountain Village Path": "can_break_boulders"
+    "Mountain Village Path": "can_break_boulders || can_use_fire_arrows"
     "Goron Village Path": "true"
     "Goron Graveyard": "can_use_lens"
     "Path to Snowhead": "true"
@@ -304,7 +304,7 @@
   locations:
     "Goron Village Path Underwater Chest 1": "event(BOSS_SNOWHEAD) && has(MASK_ZORA)"
     "Goron Village Path Underwater Chest 2": "event(BOSS_SNOWHEAD) && has(MASK_ZORA)"
-    "Goron Village Path Frozen Grotto Chest": "event(GORON_GRAVEYARD_HOT_WATER)"
+    "Goron Village Path Frozen Grotto Chest": "(event(GORON_GRAVEYARD_HOT_WATER) || can_use_fire_arrows) && has_explosives"
     "Goron Village Path Ramp Grotto Chest": "has(BOMB_BAG) && (has(MASK_GORON) || scarecrow_hookshot) && event(BOSS_SNOWHEAD)"
 "Goron Village":
   exits:
@@ -315,11 +315,11 @@
     "Goron Village HP": "has(DEED_SWAMP) && has(MASK_DEKU)"
     "Goron Village Scrub Deed": "has(DEED_SWAMP)"
     "Goron Village Scrub Bomb Bag": "has(MASK_GORON) && has(WALLET)"
-    "Goron Elder": "has(MASK_GORON) && has(OCARINA) && event(GORON_GRAVEYARD_HOT_WATER)"
+    "Goron Elder": "has(MASK_GORON) && has(OCARINA) && (event(GORON_GRAVEYARD_HOT_WATER) || can_use_fire_arrows)"
     "Goron Powder Keg": "(event(BOSS_SNOWHEAD) || can_use_fire_arrows) && has(MASK_GORON)"
 "Lone Peak Shrine":
   exits:
-    "Goron Village": "can_use_lens"
+    "Goron Village": "can_use_lens || can_play(SONG_SOARING)"
   locations:
     "Lone Peak Shrine Lens Chest": "true"
     "Lone Peak Shrine Boulder Chest": "has_explosives"
@@ -430,7 +430,7 @@
     "Zora Cape Ledge Chest 2": "has(HOOKSHOT)"
     "Zora Cape Underwater Chest": "has(MASK_ZORA)"
     "Zora Cape Waterfall HP": "has(MASK_ZORA)"
-    "Zora Cape Grotto": "has_explosives"
+    "Zora Cape Grotto": "can_break_boulders"
 "Great Bay Fairy Fountain":
   exits:
     "Zora Cape": "true"
@@ -449,7 +449,7 @@
   locations:
     "Zora Hall Scrub HP": "has(DEED_MOUNTAIN) && has(MASK_GORON) && has(MASK_DEKU)"
     "Zora Hall Scrub Deed": "has(DEED_MOUNTAIN) && has(MASK_GORON)"
-    "Zora Hall Evan HP": "has(MASK_ZORA) && has(OCARINA) && has(HOOKSHOT)"
+    "Zora Hall Evan HP": "has(MASK_ZORA) && has(OCARINA)"
     "Zora Hall Scene Lights": "can_use_fire_arrows"
 "Zora Cape Peninsula":
   exits:
@@ -459,7 +459,7 @@
   exits:
     "Great Bay Coast": "true"
   locations:
-    "Ocean Spider House Wallet": "has(MASK_GORON) && has(HOOKSHOT) && can_use_fire_arrows"
+    "Ocean Spider House Wallet": "has(MASK_GORON) && has(HOOKSHOT)"
     "Ocean Spider House Chest HP": "has(BOW) && has(MASK_CAPTAIN)"
 "Gorman Track":
   exits:
@@ -468,13 +468,13 @@
     "Gorman Track Garo Mask": "can_play(SONG_EPONA)"
 "Road to Ikana":
   exits:
-    "Termina Field": "can_play(SONG_EPONA)"
-    "Ikana Valley": "(has(MASK_GARO) || has(MASK_GIBDO)) && has(HOOKSHOT)"
-    "Ikana Graveyard": "true"
+    "Termina Field": "true"
+    "Ikana Valley": "can_play(SONG_EPONA) && (has(MASK_GARO) || has(MASK_GIBDO)) && has(HOOKSHOT)"
+    "Ikana Graveyard": "can_play(SONG_EPONA)"
   locations:
     "Road to Ikana Chest": "has(HOOKSHOT)"
     "Road to Ikana Grotto": "has(MASK_GORON)"
-    "Road to Ikana Stone Mask": "can_use_lens && has_bottle"
+    "Road to Ikana Stone Mask": "can_play(SONG_EPONA) && can_use_lens && has_bottle"
 "Ikana Graveyard":
   exits:
     "Road to Ikana": "true"
@@ -482,19 +482,19 @@
     "Beneath The Graveyard Night 2": "has(MASK_CAPTAIN)"
     "Beneath The Graveyard Night 3": "has(MASK_CAPTAIN)"
   locations:
-    "Ikana Graveyard Captain Mask": "can_play(SONG_AWAKENING)"
+    "Ikana Graveyard Captain Mask": "can_play(SONG_AWAKENING) && has(BOW) && can_fight"
     "Ikana Graveyard Grotto": "has(BOMB_BAG)"
 "Beneath The Graveyard Night 1":
   exits:
     "Ikana Graveyard": "true"
   locations:
-    "Beneath The Graveyard Chest": "true"
-    "Beneath The Graveyard Song of Storms": "true"
+    "Beneath The Graveyard Chest": "has_weapon || (has(BOMB_BAG) && has(BOW)) || has(MASK_GORON)"
+    "Beneath The Graveyard Song of Storms": "has_weapon || (has(BOMB_BAG) && has(BOW)) || has(MASK_GORON)"
 "Beneath The Graveyard Night 2":
   exits:
     "Ikana Graveyard": "true"
   locations:
-    "Beneath The Graveyard HP": "has_explosives"
+    "Beneath The Graveyard HP": "can_fight && has_explosives"
 "Beneath The Graveyard Night 3":
   exits:
     "Ikana Graveyard": "true"
@@ -523,7 +523,7 @@
     "Music Box House": "event(IKANA_CURSE_LIFTED)"
     "Ghost Hut": "true"
     "Beneath the Well Entrance": "true"
-    "Ancient Castle of Ikana Exterior": "has_mirror_shield"
+    "Ancient Castle of Ikana Exterior": "has_mirror_shield || can_use_light_arrows"
     "Stone Tower": "true"
 "Ikana Fairy Fountain":
   exits:

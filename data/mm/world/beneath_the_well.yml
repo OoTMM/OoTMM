@@ -13,6 +13,6 @@
     "Beneath the Well End": "has(MASK_GIBDO) && has(BOMB_BAG)"
 "Beneath the Well End":
   exits:
-    "Ancient Castle of Ikana Exterior": "has_mirror_shield"
+    "Ancient Castle of Ikana Exterior": "has_mirror_shield || can_use_light_arrows"
   locations:
     "Beneath the Well Mirror Shield": "true"

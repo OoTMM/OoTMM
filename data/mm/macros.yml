@@ -15,7 +15,7 @@
 "can_use_elegy3": "can_play(SONG_EMPTINESS) && has(MASK_ZORA) && has(MASK_GORON)"
 "has_bombchu": "has(BOMB_BAG)"
 "has_beans": "event(MAGIC_BEANS)"
-"has_weapon": "has(SWORD)"
+"has_weapon": "has(SWORD) || has(GREAT_FAIRY_SWORD)"
 "can_use_beans": "has_beans && (has_bottle || can_play(SONG_STORMS))"
 "scarecrow_hookshot": "has(OCARINA) && has(HOOKSHOT)"
 "goron_fast_roll": "has(MASK_GORON) && has(MAGIC_UPGRADE)"
@@ -23,3 +23,4 @@
 "can_use_deku_bubble": "has(MASK_DEKU) && has(MAGIC_UPGRADE)"
 "has_weapon_range": "has(BOW) || has(HOOKSHOT) || has(MASK_ZORA) || can_use_deku_bubble"
 "has_paper": "has(DEED_LAND) || has(DEED_SWAMP) || has(DEED_MOUNTAIN) || has(DEED_OCEAN) || has(LETTER_TO_KAFEI) || has(LETTER_TO_MAMA)"
+"can_fight": "has_weapon || has(MASK_ZORA) || has(MASK_GORON)"
