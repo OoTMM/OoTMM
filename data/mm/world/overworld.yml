@@ -292,10 +292,11 @@
   exits:
     "Mountain Village": "true"
   events:
+    BLACKSMITH_ENABLED: "event(BOSS_SNOWHEAD) || can_use_fire_arrows || event(GORON_GRAVEYARD_HOT_WATER)"
     GOLD_DUST_USED: "has(WALLET) && has(BOTTLED_GOLD_DUST)"
   locations:
-    "Blacksmith Razor Blade": "has(WALLET)"
-    "Blacksmith Gilded Sword": "event(GOLD_DUST_USED)"
+    "Blacksmith Razor Blade": "event(BLACKSMITH_ENABLED) && has(WALLET)"
+    "Blacksmith Gilded Sword": "event(BLACKSMITH_ENABLED) && event(GOLD_DUST_USED)"
 "Goron Village Path":
   exits:
     "Mountain Village": "true"
@@ -459,7 +460,7 @@
   exits:
     "Great Bay Coast": "true"
   locations:
-    "Ocean Spider House Wallet": "has(MASK_GORON) && has(HOOKSHOT)"
+    "Ocean Spider House Wallet": "has(MASK_GORON) && has(HOOKSHOT) && can_use_fire_arrows"
     "Ocean Spider House Chest HP": "has(BOW) && has(MASK_CAPTAIN)"
 "Gorman Track":
   exits:
