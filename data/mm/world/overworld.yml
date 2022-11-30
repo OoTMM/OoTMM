@@ -390,7 +390,7 @@
   exits:
     "Fisher's Hut": "true"
     "Termina Field": "can_play(SONG_EPONA)"
-    "Pirate Fortress Exterior": "has(MASK_ZORA)"
+    "Pirate Fortress Entrance": "has(MASK_ZORA)"
     "Pinnacle Rock": "has(MASK_ZORA) && event(SEAHORSE)"
     "Laboratory": "true"
     "Zora Cape": "true"
