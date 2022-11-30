@@ -122,7 +122,7 @@ Lon Lon Ranch GS Outer Fence,         gs,             LON_LON_RANCH,            
 Hyrule Field Ocarina of Time,         npc,            HYRULE_FIELD,             OCARINA_TIME_ITEM,          OCARINA
 Hyrule Field Song of Time,            npc,            HYRULE_FIELD,             OCARINA_TIME_SONG,          SONG_TIME
 Hyrule Field Grotto Scrub HP,         npc,            GROTTOS,                  SCRUB_HP,                   HEART_PIECE
-Hyrule Field Grotto Southeast,        chest,          GROTTOS,                  0x12,                       RUPEE_RED
+Hyrule Field Grotto Southeast,        chest,          GROTTOS,                  0x02,                       RUPEE_RED
 Hyrule Field Grotto Open,             chest,          GROTTOS,                  0x03,                       RUPEE_BLUE
 Hyrule Field Grotto Market,           chest,          GROTTOS,                  0x00,                       RUPEE_BLUE
 Hyrule Field Grotto Tektite HP,       collectible,    GROTTOS,                  0x01,                       HEART_PIECE
