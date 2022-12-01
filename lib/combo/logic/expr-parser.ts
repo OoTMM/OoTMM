@@ -41,7 +41,7 @@ export class ExprParser {
     const expr = this.parseExpr();
     if (expr === undefined) {
       console.log(input);
-      throw new Error("Expected expression");
+      throw this.error("Expected expression");
     }
     this.expect('EOF');
     this.ctx = [];
@@ -68,7 +68,7 @@ export class ExprParser {
     this.expect('(');
     const age = this.expect('identifier');
     if (age !== 'child' && age !== 'adult') {
-      throw new Error(`Expected child or adult at ${this.ctx[0].cursor}`);
+      throw this.error(`Expected child or adult at ${this.ctx[0].cursor}`);
     }
     this.expect(')');
     return exprAge(age);
@@ -141,7 +141,7 @@ export class ExprParser {
         for (;;) {
           const arg = this.popNextToken();
           if (arg.type !== 'number' && arg.type !== 'identifier') {
-            throw new Error(`Expected number or identifier at ${this.ctx[0].cursor}`);
+            throw this.error(`Expected number or identifier at ${this.ctx[0].cursor}`);
           }
           args.push(arg);
           if (this.accept(')')) {
@@ -154,7 +154,7 @@ export class ExprParser {
 
     /* Check that the number of arguments matches */
     if (args.length !== macro.args.length) {
-      throw new Error(`Expected ${macro.args.length} arguments at ${this.ctx[0].cursor}`);
+      throw this.error(`Expected ${macro.args.length} arguments at ${this.ctx[0].cursor}`);
     }
 
     /* Zip the arguments */
@@ -169,7 +169,7 @@ export class ExprParser {
     /* Parse */
     const expr = this.parseExpr();
     if (expr === undefined) {
-      throw new Error("Expected expression");
+      throw this.error("Expected expression");
     }
     this.expect('EOF');
     this.ctx.pop();
@@ -202,7 +202,7 @@ export class ExprParser {
     while (this.accept('||')) {
       expr = this.parseExprAnd();
       if (expr === undefined) {
-        throw new Error(`Expected expression after || at ${this.ctx[0].cursor}`);
+        throw this.error(`Expected expression after || at ${this.ctx[0].cursor}`);
       }
       exprs.push(expr);
     }
@@ -223,7 +223,7 @@ export class ExprParser {
     while (this.accept('&&')) {
       expr = this.parseExprSingle();
       if (expr === undefined) {
-        throw new Error(`Expected expression after && at ${this.ctx[0].cursor}`);
+        throw this.error(`Expected expression after && at ${this.ctx[0].cursor}`);
       }
       exprs.push(expr);
     }
@@ -252,7 +252,7 @@ export class ExprParser {
   private expect<T extends TokenType>(t: T): TokenValue<T> {
     const token = this.accept(t);
     if (token === undefined) {
-      throw new Error(`Expected token ${t} at ${this.ctx[0].cursor}`);
+      throw this.error(`Expected token ${t} at ${this.ctx[0].cursor}`);
     }
     return token;
   }
@@ -335,6 +335,10 @@ export class ExprParser {
     }
 
     /* Unknown token */
-    throw new Error(`Unknown token at ${ctx.cursor}`);
+    throw this.error(`Unknown token at ${ctx.cursor}`);
+  }
+
+  private error(msg: string) {
+    return new Error(msg + "\nwhen parsing `" + this.ctx[0].buffer + "`");
   }
 };
