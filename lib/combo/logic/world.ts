@@ -49,7 +49,7 @@ const mapExprs = (exprParser: ExprParser, game: Game, data: any) => {
   return result;
 }
 
-const loadWorldRegions = async (world: World, game: Game, exprParser: ExprParser) => {
+const loadWorldRegions = (world: World, game: Game, exprParser: ExprParser) => {
   const data = DATA_WORLD[game];
   for (let name in data) {
     const region = data[name];
