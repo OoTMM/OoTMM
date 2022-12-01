@@ -325,7 +325,7 @@
     BEAN_LAKE_HYLIA: "can_use_beans"
   locations:
     "Lake Hylia Underwater Bottle": "has(SCALE)"
-    "Lake Hylia Fire Arrow": "can_use_bow && (event(WATER_TEMPLE_CLEARED) || (can_longshot && scarecrow_hookshot) || event(BEAN_LAKE_HYLIA))"
+    "Lake Hylia Fire Arrow": "can_use_bow && (event(WATER_TEMPLE_CLEARED) || (can_longshot && scarecrow_hookshot))"
     "Lake Hylia HP": "is_adult && event(BEAN_LAKE_HYLIA)"
     "Lake Hylia GS Lab Wall": "is_child && gs_night && can_boomerang"
     "Lake Hylia GS Island": "is_child && gs_night"
