@@ -348,12 +348,14 @@ void comboAddItemOot(GameState_Play* play, u16 itemId)
     case ITEM_OOT_POTION_RED:
     case ITEM_OOT_POTION_BLUE:
     case ITEM_OOT_POTION_GREEN:
-    case ITEM_OOT_LON_LON_MILK:
     case ITEM_OOT_LON_LON_MILK_HALF:
     case ITEM_OOT_FISH:
     case ITEM_OOT_BLUE_FIRE:
     case ITEM_OOT_BUG:
         fillBottle(itemId);
+        break;
+    case ITEM_OOT_LON_LON_MILK:
+        fillBottle(ITEM_OOT_MILK_BOTTLE);
         break;
     case ITEM_OOT_KOKIRI_SWORD:
         gOotSave.equipment.swords |= EQ_OOT_SWORD_KOKIRI;
