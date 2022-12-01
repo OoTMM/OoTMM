@@ -7,7 +7,7 @@
     "Ganon Castle Water": "true"
     "Ganon Castle Spirit": "true"
     "Ganon Castle Shadow": "true"
-    "Ganon Castle Tower": "event(GANON_TRIAL_LIGHT) && event(GANON_TRIAL_FOREST) && event(GANON_TRIAL_FIRE) && event(GANON_TRIAL_WATER) && event(GANON_TRIAL_SPIRIT) && event(GANON_TRIAL_SHADOW)"
+    "Ganon Castle Tower": "true"
 "Ganon Castle Light":
   dungeon: Ganon
   events:

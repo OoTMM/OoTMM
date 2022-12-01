@@ -156,6 +156,18 @@ static void eventFixes(GameState_Play* play)
     {
         SetEventChk(EV_OOT_CHK_RAINBOW_BRIDGE);
     }
+
+    /* Open Trials */
+    if (gSave.entrance == 0x0467)
+    {
+        SetEventChk(EV_OOT_CHK_TRIAL_LIGHT);
+        SetEventChk(EV_OOT_CHK_TRIAL_FIRE);
+        SetEventChk(EV_OOT_CHK_TRIAL_SHADOW);
+        SetEventChk(EV_OOT_CHK_TRIAL_WATER);
+        SetEventChk(EV_OOT_CHK_TRIAL_FOREST);
+        SetEventChk(EV_OOT_CHK_TRIAL_SPIRIT);
+        SetEventChk(EN_OOT_CHK_GANON_BARRIER);
+    }
 }
 
 void hookPlay_Init(GameState_Play* play)

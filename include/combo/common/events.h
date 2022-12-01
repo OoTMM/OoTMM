@@ -42,6 +42,14 @@
 #define EV_OOT_CHK_MEDALLION_SPIRIT         0xc8
 #define EV_OOT_CHK_FROGS_GAME               0xd0
 
+#define EV_OOT_CHK_TRIAL_LIGHT              0xbf
+#define EV_OOT_CHK_TRIAL_FIRE               0xbe
+#define EV_OOT_CHK_TRIAL_SHADOW             0xbd
+#define EV_OOT_CHK_TRIAL_WATER              0xbc
+#define EV_OOT_CHK_TRIAL_FOREST             0xbb
+#define EV_OOT_CHK_TRIAL_SPIRIT             0xad
+#define EN_OOT_CHK_GANON_BARRIER            0xc3
+
 #define EV_OOT_ITEM_DEKU_SEEDS              0x13
 #define EV_OOT_ITEM_DAMPE_GRAVEYARD_HP      0x1c
 #define EV_OOT_ITEM_ANJU_POCKET_EGG         0x2c
