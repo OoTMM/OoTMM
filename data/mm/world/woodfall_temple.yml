@@ -113,7 +113,7 @@
     "Oath to Order": "true"
   events:
     CLEAN_SWAMP: "true"
-    DEKU_PRINCESS: "has_bottle"
+    DEKU_PRINCESS: "has_bottle && has_weapon"
   locations:
     "Woodfall Temple Boss Container": "true"
     "Woodfall Temple Boss": "true"
