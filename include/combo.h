@@ -66,6 +66,14 @@ ComboContext;
 
 extern ComboContext gComboCtx;
 
+typedef struct PACKED ALIGNED(4)
+{
+    u8 dungeonRewards[12];
+}
+ComboData;
+
+extern ComboData gComboData;
+
 void comboLoadContext(void);
 void comboExportContext(void);
 
@@ -73,6 +81,7 @@ void comboExportContext(void);
 void comboInit(void);
 void comboInitDma(void);
 void comboInitOverride(void);
+void comboInitData(void);
 
 /* Flash */
 void comboReadWriteFlash(u32 devAddr, void* dramAddr, u32 size, s32 direction);

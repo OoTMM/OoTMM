@@ -1,7 +1,7 @@
 import { Buffer } from 'buffer';
 
 import { logic, LogicResult } from './logic';
-import { DATA_GI, DATA_NPC, DATA_SCENES } from './data';
+import { DATA_GI, DATA_NPC, DATA_SCENES, DATA_REGIONS } from './data';
 import { Game, GAMES } from "./config";
 import { WorldCheck } from './logic/world';
 import { Options } from './options';
@@ -76,6 +76,14 @@ const checkId = async (check: WorldCheck) => {
   return check.id;
 }
 
+const toU8Buffer = (data: number[]) => {
+  const buf = Buffer.alloc(data.length);
+  for (let i = 0; i < data.length; ++i) {
+    buf.writeUInt8(data[i], i);
+  }
+  return buf;
+};
+
 const toU16Buffer = (data: number[]) => {
   const buf = Buffer.alloc(data.length * 2);
   for (let i = 0; i < data.length; ++i) {
@@ -115,6 +123,23 @@ export const randomizeGame = async (game: Game, logic: LogicResult): Promise<Buf
   return toU16Buffer(buf);
 };
 
+export const randomizerDataDungeonRewards = async (logic: LogicResult): Promise<Buffer> => {
+  const data = logic.dungeonRewards.map((region) => {
+    const regionId = DATA_REGIONS[region];
+    if (regionId === undefined) {
+      throw new Error(`Unknown region ${region}`);
+    }
+    return regionId;
+  });
+  return toU8Buffer(data);
+};
+
+export const randomizerData = async (logic: LogicResult, options: Options): Promise<Buffer> => {
+  const buffers = [];
+  buffers.push(await randomizerDataDungeonRewards(logic));
+  return Buffer.concat(buffers);
+};
+
 export const randomize = async (rom: Buffer, opts: Options) => {
   console.log("Randomizing...");
   const res = logic(opts);
@@ -123,6 +148,8 @@ export const randomize = async (rom: Buffer, opts: Options) => {
     const gameBuffer = await randomizeGame(g, res);
     gameBuffer.copy(buffer, OFFSETS[g]);
   }
+  const data = await randomizerData(res, opts);
+  data.copy(buffer, 0);
   buffer.copy(rom, 0x03fe0000);
   return res.log;
 }

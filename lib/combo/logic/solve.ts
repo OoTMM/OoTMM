@@ -7,7 +7,7 @@ import { World } from './world';
 import { LogicSeedError } from './error';
 
 const ITEMS_DUNGEON = /^(OOT|MM)_(MAP|COMPASS|SMALL_KEY|BOSS_KEY|STRAY_FAIRY)_[A-Z_]+$/;
-export const ITEMS_DUNGEON_REWARDS = new Set([
+export const ORDERED_DUNGEON_REWARDS = [
   'OOT_STONE_EMERALD',
   'OOT_STONE_RUBY',
   'OOT_STONE_SAPPHIRE',
@@ -21,7 +21,9 @@ export const ITEMS_DUNGEON_REWARDS = new Set([
   'MM_REMAINS_GOHT',
   'MM_REMAINS_GYORG',
   'MM_REMAINS_TWINMOLD',
-]);
+];
+
+export const ITEMS_DUNGEON_REWARDS = new Set(ORDERED_DUNGEON_REWARDS);
 
 export const ITEMS_REQUIRED = new Set<string>([
   'OOT_GS_TOKEN',
