@@ -158,7 +158,7 @@ Gerudo Fortress Archery Reward 1,     npc,            GERUDO_FORTRESS,          
 Gerudo Fortress Archery Reward 2,     npc,            GERUDO_FORTRESS,          GERUDO_ARCHERY_2,           HEART_PIECE
 Gerudo Fortress GS Wall,              gs,             GERUDO_FORTRESS,          0xa9,                       GS_TOKEN
 Gerudo Fortress GS Target,            gs,             GERUDO_FORTRESS,          0xa8,                       GS_TOKEN
-Haunted Wasteland Chest,              chest,          HAUNTED_WASTELAND,        0x1f,                       RUPEE_PURPLE
+Haunted Wasteland Chest,              chest,          HAUNTED_WASTELAND,        0x00,                       RUPEE_PURPLE
 Haunted Wasteland GS,                 gs,             HAUNTED_WASTELAND,        0xb1,                       GS_TOKEN
 Desert Colossus HP,                   collectible,    DESERT_COLOSSUS,          0x0d,                       HEART_PIECE
 Desert Colossus Song Spirit,          npc,            DESERT_COLOSSUS,          SHEIK_SPIRIT,               SONG_TP_SPIRIT
