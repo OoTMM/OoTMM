@@ -5,6 +5,7 @@
 # define CZ             "\x05\x40"
 # define COLOR_RED      "\x05\x41"
 # define COLOR_GREEN    "\x05\x42"
+# define COLOR_BLUE     "\x05\x43"
 # define COLOR_TEAL     "\x05\x44"
 # define COLOR_PINK     "\x05\x45"
 # define COLOR_YELLOW   "\x05\x46"
@@ -13,11 +14,15 @@
 # define CHOICE3        "\x1c"
 # define NL             "\x01"
 # define NOCLOSE        "\x0a"
+# define SIGNAL         "\x0b"
+# define ICON           "\x13"
+# define BB             "\x04"
 #else
 # define FAST           "\x17"
 # define CZ             "\x00"
 # define COLOR_RED      "\x01"
 # define COLOR_GREEN    "\x02"
+# define COLOR_BLUE     ""
 # define COLOR_YELLOW   "\x04"
 # define COLOR_TEAL     "\x05"
 # define COLOR_PINK     "\x06"
@@ -26,6 +31,9 @@
 # define CHOICE3        "\xc3"
 # define NL             "\x11"
 # define NOCLOSE        "\x1a"
+# define SIGNAL         ""
+# define ICON           ""
+# define BB             ""
 #endif
 
 #define C0   COLOR_TEAL
@@ -690,3 +698,67 @@ void comboMessageCancel(GameState_Play* play)
     *(((char*)GET_LINK(play)) + 0x141) = 0;
 }
 #endif
+
+static const char kIcons[] = {
+    0x6c,
+    0x6d,
+    0x6e,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+};
+
+static const char* kDungeonRewardsRegions[] = {
+    "In the " COLOR_YELLOW "Sacred Realm",
+    "Inside a " COLOR_GREEN "Large Tree",
+    "Inside a " COLOR_RED "Scorching Cavern",
+    "Inside a " COLOR_BLUE "Divine Fish",
+    "In a " COLOR_GREEN "Sacred Forest",
+    "In a " COLOR_RED "Volcanic Crater",
+    "In a " COLOR_BLUE "Deep Lake",
+    "In the " COLOR_PINK "Land of the Dead",
+    "In a " COLOR_YELLOW "Stone Giant",
+    "In a " COLOR_GREEN "Poisonous Swamp",
+    "In a " COLOR_TEAL "Frozen Peak",
+    "At large in the " COLOR_BLUE "Ocean",
+    "At the top of a " COLOR_YELLOW "Stone Tower",
+};
+
+void comboTextHijackDungeonRewardHints(GameState_Play* play, int base, int count)
+{
+    char* b;
+    int index;
+
+#if defined(GAME_OOT)
+    b = play->msgCtx.textBuffer;
+#else
+    b = play->textBuffer;
+#endif
+    appendHeader(&b);
+    for (int i = 0; i < count; ++i)
+    {
+        index = base + i;
+        appendStr(&b, FAST ICON);
+        *b++ = kIcons[index];
+        appendStr(&b, kDungeonRewardsRegions[gComboData.dungeonRewards[index]]);
+        appendClearColor(&b);
+        appendStr(&b, "...");
+
+        if (i == (count - 1))
+        {
+            appendStr(&b, SIGNAL END);
+        }
+        else
+        {
+            appendStr(&b, BB);
+        }
+
+    }
+}

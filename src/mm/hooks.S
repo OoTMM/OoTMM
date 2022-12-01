@@ -6,9 +6,9 @@ PATCH_START(0x80080d14)
   lui t6, ((0x00020000 | MM_BASE) >> 16)
 PATCH_END
 
-/* Downsize the heap by 0x20000 */
+/* Downsize the heap by 0x30000 */
 PATCH_START 0x80174c4c
-  lui t8,0x8076
+  lui t8,0x8075
 PATCH_END
 
 /* Not sure about this
