@@ -207,7 +207,7 @@
   exits:
     "Road to Southern Swamp": "true"
     "Tourist Information": "true"
-    "Deku Palace": "event(KOUME) || has(PICTOGRAPH_BOX) || (has(MASK_DEKU) && (has(BOW) || has(HOOKSHOT) || has(MASK_ZORA))"
+    "Deku Palace": "event(KOUME) || has(PICTOGRAPH_BOX) || (has(MASK_DEKU) && (has(BOW) || has(HOOKSHOT) || has(MASK_ZORA)))"
     "Swamp Potion Shop": "true"
     "Woods of Mystery": "true"
     "Swamp Spider House": "true"
@@ -273,7 +273,7 @@
   exits:
     "Swamp": "true"
   locations:
-    "Swamp Spider House Mask of Truth": "has_weapon && has_bottle && has_weapon_range && (has(HOOKSHOT) || has(MASK_ZORA) || (has(MASK_DEKU) && (has(BOW) || has(MAGIC_UPGRADE) || has(BOMB_BAG))) && (has(HOOKSHOT) || has(MASK_ZORA) || can_use_beans) && (has(HOOKSHOT) || has(MASK_ZORA) || (can_use_beans && can_break_boulders))"
+    "Swamp Spider House Mask of Truth": "has_weapon && has_bottle && has_weapon_range && (has(HOOKSHOT) || has(MASK_ZORA) || (has(MASK_DEKU) && (has(BOW) || has(MAGIC_UPGRADE) || has(BOMB_BAG))) && (has(HOOKSHOT) || has(MASK_ZORA) || can_use_beans) && (has(HOOKSHOT) || has(MASK_ZORA) || (can_use_beans && can_break_boulders)))"
 
 # Preparation for skulltula spirits shuffle
 # "Swamp Spider House Mask of Truth": "has(SWAMP_SPIRIT, 30)"
@@ -345,7 +345,7 @@
   locations:
     "Twin Islands Underwater Chest 1": "event(BOSS_SNOWHEAD) && has(MASK_ZORA)"
     "Twin Islands Underwater Chest 2": "event(BOSS_SNOWHEAD) && has(MASK_ZORA)"
-    "Twin Islands Frozen Grotto Chest": "(event(GORON_GRAVEYARD_HOT_WATER) || can_use_fire_arrows || (event(WELL_HOT_WATER) && can_play(SONG_SOARING)) && has_explosives"
+    "Twin Islands Frozen Grotto Chest": "(event(GORON_GRAVEYARD_HOT_WATER) || can_use_fire_arrows || (event(WELL_HOT_WATER) && can_play(SONG_SOARING))) && has_explosives"
     "Twin Islands Ramp Grotto Chest": "has_explosives && (has(MASK_GORON) || scarecrow_hookshot)"
 "Goron Village":
   exits:
@@ -398,7 +398,7 @@
     "Snowhead Great Fairy": "has(STRAY_FAIRY_SH, 15)"
 "Goron Race":
   exits:
-    "Goron Village Path": "true"
+    "Twin Islands": "true"
   locations:
     "Goron Race Reward": "event(BOSS_SNOWHEAD) && goron_fast_roll"
 "Milk Road":
