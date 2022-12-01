@@ -4,6 +4,8 @@
     "Beneath the Well North Section": "has(MASK_GIBDO) && event(BLUE_POTION)"
     "Beneath the Well East Section": "has(MASK_GIBDO) && event(MAGIC_BEANS)"
 "Beneath the Well North Section":
+  events:
+    WELL_HOT_WATER: "has(MASK_GIBDO) && event(BLUE_POTION)"
   locations:
     "Beneath the Well Keese Chest": "true"
 "Beneath the Well East Section":
