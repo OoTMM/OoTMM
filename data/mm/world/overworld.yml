@@ -460,8 +460,8 @@
   exits:
     "Great Bay Coast": "true"
   locations:
-    "Ocean Spider House Wallet": "has(MASK_GORON) && has(HOOKSHOT) && can_use_fire_arrows"
-    "Ocean Spider House Chest HP": "has(BOW) && has(MASK_CAPTAIN)"
+    "Ocean Spider House Wallet": "has_explosives && has(MASK_GORON) && has(HOOKSHOT) && can_use_fire_arrows"
+    "Ocean Spider House Chest HP": "has_explosives && has(BOW) && has(MASK_CAPTAIN)"
 "Gorman Track":
   exits:
     "Milk Road": "true"
