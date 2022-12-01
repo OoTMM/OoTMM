@@ -182,8 +182,8 @@ MM_STONE_TOWER_INVERTED:                0x59
 MM_MOUNTAIN_VILLAGE_SPRING:             0x5a
 MM_PATH_SNOWHEAD:                       0x5b
 MM_SNOWHEAD:                            0x5c
-MM_PATH_GORON_VILLAGE_WINTER:           0x5d
-MM_PATH_GORON_VILLAGE_SPRING:           0x5e
+MM_TWIN_ISLANDS_WINTER:                 0x5d
+MM_TWIN_ISLANDS_SPRING:                 0x5e
 MM_LAIR_GYORG:                          0x5f
 MM_SECRET_SHRINE:                       0x60
 MM_STOCK_POT_INN:                       0x61
