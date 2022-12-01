@@ -222,13 +222,12 @@
 "Graveyard":
   exits:
     "Kakariko": "true"
+    "Graveyard Royal Tomb": "can_play(SONG_ZELDA)"
   events:
     BEAN_GRAVEYARD: "can_use_beans"
   locations:
     "Graveyard Dampe Game": "is_child"
     "Graveyard ReDead Tomb": "can_play(SONG_SUN)"
-    "Graveyard Royal Tomb Song": "can_play(SONG_ZELDA) && has(SWORD)"
-    "Graveyard Royal Tomb Chest": "has_fire"
     "Graveyard Fairy Tomb": "true"
     "Graveyard Dampe Tomb Reward 1": "is_adult"
     "Graveyard Dampe Tomb Reward 2": "is_adult"
@@ -239,6 +238,12 @@
   exits:
     "Graveyard": "true"
     "Shadow Temple Entrance": "is_adult && can_use_din"
+"Graveyard Royal Tomb":
+  exits:
+    "Graveyard": "true"
+  locations:
+    "Graveyard Royal Tomb Song": "has(SWORD)"
+    "Graveyard Royal Tomb Chest": "has_fire"
 "Skulltula House":
   exits:
     "Kakariko": "true"
