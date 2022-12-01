@@ -30,8 +30,8 @@ static u16 makeKey(u16 sceneId, u16 id)
     case SCE_MM_SOUTHERN_SWAMP_CLEAR:
         sceneId = SCE_MM_SOUTHERN_SWAMP;
         break;
-    case SCE_MM_PATH_GORON_VILLAGE_SPRING:
-        sceneId = SCE_MM_PATH_GORON_VILLAGE_WINTER;
+    case SCE_MM_TWIN_ISLANDS_SPRING:
+        sceneId = SCE_MM_TWIN_ISLANDS_WINTER;
         break;
     case SCE_MM_GORON_VILLAGE_SPRING:
         sceneId = SCE_MM_GORON_VILLAGE_WINTER;

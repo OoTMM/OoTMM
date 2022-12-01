@@ -91,11 +91,11 @@ Lone Peak Shrine Lens Chest,                    chest,          GROTTOS,        
 Lone Peak Shrine Boulder Chest,                 chest,          GROTTOS,                    0x06,                   RUPEE_RED
 Lone Peak Shrine Invisible Chest,               chest,          GROTTOS,                    0x03,                   RUPEE_PURPLE
 Goron Graveyard Mask,                           npc,            GORON_GRAVEYARD,            MASK_GORON,             MASK_GORON
-Goron Village Path Underwater Chest 1,          chest,          PATH_GORON_VILLAGE_WINTER,  0x06,                   HEART_PIECE
-Goron Village Path Underwater Chest 2,          chest,          PATH_GORON_VILLAGE_WINTER,  0x00,                   RUPEE_RED
-Goron Village Path Frozen Grotto Chest,         chest,          GROTTOS,                    0x02,                   RUPEE_RED
-Goron Village Path Ramp Grotto Chest,           chest,          GROTTOS,                    0x19,                   BOMBCHU
-Goron Elder,                                    npc,            PATH_GORON_VILLAGE_WINTER,  GORON_ELDER,            SONG_GORON_HALF
+Twin Islands Underwater Chest 1,                chest,          TWIN_ISLANDS_WINTER,        0x06,                   HEART_PIECE
+Twin Islands Underwater Chest 2,                chest,          TWIN_ISLANDS_WINTER,        0x00,                   RUPEE_RED
+Twin Islands Frozen Grotto Chest,               chest,          GROTTOS,                    0x02,                   RUPEE_RED
+Twin Islands Ramp Grotto Chest,                 chest,          GROTTOS,                    0x19,                   BOMBCHU
+Goron Elder,                                    npc,            TWIN_ISLANDS_WINTER,        GORON_ELDER,            SONG_GORON_HALF
 Goron Baby,                                     npc,            GORON_SHRINE,               GORON_BABY,             SONG_GORON_HALF
 Goron Village HP,                               collectible,    GORON_VILLAGE_WINTER,       0x1e,                   HEART_PIECE
 Goron Village Scrub Deed,                       npc,            GORON_VILLAGE_WINTER,       SCRUB_MOUNTAIN,         DEED_MOUNTAIN
