@@ -160,7 +160,15 @@ static void eventFixes(GameState_Play* play)
 
 void hookPlay_Init(GameState_Play* play)
 {
-    if (gSave.entrance == 0x006b)
+    if (gSave.entrance == 0x007a)
+    {
+        /* Entering courtyard */
+        if (GetEventChk(EV_OOT_CHK_ZELDA_LETTER))
+            gSave.entrance = 0x0594;
+        else
+            gSave.entrance = 0x0400;
+    }
+    else if (gSave.entrance == 0x006b)
     {
         /* End game */
         gOotExtraFlags.ganon = 1;
