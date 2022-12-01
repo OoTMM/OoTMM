@@ -222,7 +222,7 @@
   exit:
     "Swamp": "true"
   locations:
-    "Tourist Information Pictobox": "event(KOUME) || has(PICTOGRAPH_BOX) || (has(MASK_DEKU) && (has(BOW) || has(HOOKSHOT) || has(MASK_ZORA))"
+    "Tourist Information Pictobox": "event(KOUME)"
     "Tourist Information Boat Cruise": "event(KOUME) && event(CLEAN_SWAMP) && has(BOW)"
     "Tourist Information Tingle Picture": "has(PICTOGRAPH_BOX)"
 "Woods of Mystery":
@@ -522,8 +522,8 @@
   exits:
     "Road to Ikana": "true"
     "Beneath The Graveyard Night 1": "has(MASK_CAPTAIN)"
-    "Beneath The Graveyard Night 2": "has(MASK_CAPTAIN) && can_use_lens"
-    "Beneath The Graveyard Night 3": "has(MASK_CAPTAIN) && has_weapon_range"
+    "Beneath The Graveyard Night 2": "has(MASK_CAPTAIN)"
+    "Beneath The Graveyard Night 3": "has(MASK_CAPTAIN)"
   locations:
     "Ikana Graveyard Captain Mask": "can_play(SONG_AWAKENING) && has(BOW) && can_fight"
     "Ikana Graveyard Grotto": "has(BOMB_BAG)"
@@ -537,12 +537,12 @@
   exits:
     "Ikana Graveyard": "true"
   locations:
-    "Beneath The Graveyard HP": "can_fight && has_explosives"
+    "Beneath The Graveyard HP": "can_fight && has_explosives && can_use_lens"
 "Beneath The Graveyard Night 3":
   exits:
     "Ikana Graveyard": "true"
   locations:
-    "Beneath The Graveyard Dampe Chest": "has_weapon"
+    "Beneath The Graveyard Dampe Chest": "has_weapon && has_weapon_range"
 "Ikana Valley":
   exits:
     "Road to Ikana": "true"
