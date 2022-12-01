@@ -51,7 +51,7 @@ Graveyard Royal Tomb Chest,           chest,          TOMB_ROYAL,               
 Graveyard Fairy Tomb,                 chest,          TOMB_FAIRY,               0x00,                       SHIELD
 Graveyard Dampe Tomb Reward 1,        chest,          TOMB_DAMPE_WINDMILL,      0x00,                       HOOKSHOT
 Graveyard Dampe Tomb Reward 2,        collectible,    TOMB_DAMPE_WINDMILL,      0x07,                       HEART_PIECE
-Graveyard Crate HP,                   chest,          GRAVEYARD,                0x04,                       HEART_PIECE
+Graveyard Crate HP,                   collectible,    GRAVEYARD,                0x04,                       HEART_PIECE
 Graveyard GS Soil,                    gs,             GRAVEYARD,                0x88,                       GS_TOKEN
 Graveyard GS Wall,                    gs,             GRAVEYARD,                0x8f,                       GS_TOKEN
 Death Mountain Chest,                 chest,          DEATH_MOUNTAIN_TRAIL,     0x01,                       RUPEE_PURPLE
