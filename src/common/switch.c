@@ -30,6 +30,7 @@ static void waitSubsystems(void)
         if (!(tmp & 1))
             break;
     }
+    IO_WRITE(SP_STATUS_REG, 0xaaaaae);
 
     for (;;)
     {
@@ -37,6 +38,7 @@ static void waitSubsystems(void)
         if (!(tmp & 0x170))
             break;
     }
+    IO_WRITE(MI_BASE_REG, 0x800);
 
     for (;;)
     {
@@ -44,10 +46,28 @@ static void waitSubsystems(void)
         if (!(tmp & 0x40000000))
             break;
     }
+    IO_WRITE(AI_STATUS_REG, 0);
 
-    /* Disable video */
+    for (;;)
+    {
+        tmp = IO_READ(PI_STATUS_REG);
+        if (!(tmp & 3))
+            break;
+    }
+    IO_WRITE(PI_STATUS_REG, 2);
+
+    for (;;)
+    {
+        tmp = IO_READ(SI_STATUS_REG);
+        if (!(tmp & 3))
+            break;
+    }
+    IO_WRITE(SI_STATUS_REG, 0);
+
     tmp = IO_READ(VI_CONTROL_REG);
     IO_WRITE(VI_CONTROL_REG, tmp & ~0x3);
+    tmp = IO_READ(VI_CURRENT_REG);
+    IO_WRITE(VI_CURRENT_REG, tmp);
 }
 
 NORETURN void comboGameSwitch2(void);
