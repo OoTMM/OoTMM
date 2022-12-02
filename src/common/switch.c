@@ -66,10 +66,11 @@ NORETURN void comboGameSwitch(void)
 
 NORETURN void comboGameSwitch3(void)
 {
-    osInvalICache((void*)FOREIGN_DRAM, FOREIGN_SIZE);
-    osInvalDCache((void*)FOREIGN_DRAM, FOREIGN_SIZE);
+    comboInvalDCache((void*)FOREIGN_DRAM, FOREIGN_SIZE);
     comboDma_NoCacheInval((void*)FOREIGN_OFF, FOREIGN_CART, FOREIGN_SIZE);
-    comboDma((void*)FOREIGN_OFF, FOREIGN_CART, FOREIGN_SIZE);
+    comboInvalDCache((void*)FOREIGN_DRAM, FOREIGN_SIZE);
+    comboInvalICache((void*)FOREIGN_DRAM, FOREIGN_SIZE);
+
     comboExportContext();
     ((EntryPoint)FOREIGN_DRAM)();
 }

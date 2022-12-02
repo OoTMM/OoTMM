@@ -191,6 +191,10 @@ int toupper(int c);
 u32     popcount(u32 x);
 void*   actorAddr(u16 actorId, u32 addr);
 
+/* System */
+void comboInvalICache(void* addr, u32 size);
+void comboInvalDCache(void* addr, u32 size);
+
 #else
 # include <combo/asm.h>
 #endif
