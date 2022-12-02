@@ -50,7 +50,9 @@ static void waitSubsystems(void)
     IO_WRITE(VI_CONTROL_REG, tmp & ~0x3);
 }
 
-void comboGameSwitch(void)
+NORETURN void comboGameSwitch2(void);
+
+NORETURN void comboGameSwitch(void)
 {
 #if defined(GAME_OOT)
     gComboCtx.saveIndex = gSaveContext.fileIndex;
@@ -59,10 +61,15 @@ void comboGameSwitch(void)
     comboWriteSave();
     comboDisableInterrupts();
     waitSubsystems();
+    comboGameSwitch2();
+}
+
+NORETURN void comboGameSwitch3(void)
+{
     osInvalICache((void*)FOREIGN_DRAM, FOREIGN_SIZE);
     osInvalDCache((void*)FOREIGN_DRAM, FOREIGN_SIZE);
-
     comboDma_NoCacheInval((void*)FOREIGN_OFF, FOREIGN_CART, FOREIGN_SIZE);
+    comboDma((void*)FOREIGN_OFF, FOREIGN_CART, FOREIGN_SIZE);
     comboExportContext();
     ((EntryPoint)FOREIGN_DRAM)();
 }
