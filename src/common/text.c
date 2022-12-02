@@ -5,27 +5,36 @@
 # define CZ             "\x05\x40"
 # define COLOR_RED      "\x05\x41"
 # define COLOR_GREEN    "\x05\x42"
+# define COLOR_BLUE     "\x05\x43"
 # define COLOR_TEAL     "\x05\x44"
 # define COLOR_PINK     "\x05\x45"
 # define COLOR_YELLOW   "\x05\x46"
+# define COLOR_ORANGE   COLOR_YELLOW
 # define END            "\x02"
 # define CHOICE2        "\x1b"
 # define CHOICE3        "\x1c"
 # define NL             "\x01"
 # define NOCLOSE        "\x0a"
+# define SIGNAL         "\x0b"
+# define ICON           "\x13"
+# define BB             "\x04"
 #else
 # define FAST           "\x17"
 # define CZ             "\x00"
 # define COLOR_RED      "\x01"
 # define COLOR_GREEN    "\x02"
+# define COLOR_BLUE     "\x03"
 # define COLOR_YELLOW   "\x04"
 # define COLOR_TEAL     "\x05"
 # define COLOR_PINK     "\x06"
+# define COLOR_ORANGE   "\x08"
 # define END            "\xbf"
 # define CHOICE2        "\xc2"
 # define CHOICE3        "\xc3"
 # define NL             "\x11"
 # define NOCLOSE        "\x1a"
+# define ICON           ""
+# define BB             ""
 #endif
 
 #define C0   COLOR_TEAL
@@ -541,6 +550,16 @@ static void appendShopHeader(char** b, s16 price)
     appendStr(b, FAST);
 }
 
+#if defined(GAME_MM)
+static void appendBossRewardHeader(char** b, char icon)
+{
+    memcpy(*b, "\x06\x00\xfe\xff\xff\xff\xff\xff\xff\xff\xff", 11);
+    (*b)[2] = icon;
+    *b += 11;
+    appendStr(b, FAST);
+}
+#endif
+
 static void appendClearColor(char** b)
 {
 #if defined(GAME_OOT)
@@ -688,5 +707,82 @@ void comboMessageCancel(GameState_Play* play)
 
     play->msgCtx.ocarinaMode = 4;
     *(((char*)GET_LINK(play)) + 0x141) = 0;
+}
+#endif
+
+#if defined(GAME_OOT)
+static const char kIcons[] = {
+    0x6c,
+    0x6d,
+    0x6e,
+    0x6b,
+    0x66,
+    0x67,
+    0x68,
+    0x69,
+    0x6a,
+};
+#endif
+
+static const char* kDungeonRewardsRegions[] = {
+    "In the " COLOR_YELLOW "Sacred Realm",
+    "Inside the " COLOR_GREEN "Deku Tree",
+    "Inside " COLOR_RED "Dodongo's Cavern",
+    "Inside " COLOR_BLUE "Jabu-Jabu",
+    "In the " COLOR_GREEN "Forest Temple",
+    "In the " COLOR_RED "Fire Temple",
+    "In the " COLOR_BLUE "Water Temple",
+    "In the " COLOR_ORANGE "Spirit Temple",
+    "In the " COLOR_PINK "Shadow Temple",
+    "In " COLOR_GREEN "Woodfall Temple",
+    "In " COLOR_TEAL "Snowhead Temple",
+    "In " COLOR_BLUE "Great Bay Temple",
+    "In " COLOR_ORANGE "Stone Tower Temple",
+};
+
+#if defined(GAME_OOT)
+void comboTextHijackDungeonRewardHints(GameState_Play* play, int base, int count)
+{
+    char* b;
+    int index;
+
+    b = play->msgCtx.textBuffer;
+    appendHeader(&b);
+    for (int i = 0; i < count; ++i)
+    {
+        index = base + i;
+        appendStr(&b, FAST ICON);
+        *b++ = kIcons[index];
+        appendStr(&b, kDungeonRewardsRegions[gComboData.dungeonRewards[index]]);
+        appendClearColor(&b);
+        appendStr(&b, "...");
+
+        if (i == (count - 1))
+        {
+            appendStr(&b, SIGNAL END);
+        }
+        else
+        {
+            appendStr(&b, BB);
+        }
+
+    }
+}
+#endif
+
+#if defined(GAME_MM)
+void comboTextHijackDungeonRewardHints(GameState_Play* play, int hint)
+{
+    char* b;
+    int index;
+
+    b = play->textBuffer;
+    appendBossRewardHeader(&b, 0x55 + hint);
+    appendStr(&b, kDungeonRewardsRegions[gComboData.dungeonRewards[9 + hint]]);
+    appendClearColor(&b);
+    appendStr(&b, "...");
+    if (hint != 3)
+        appendStr(&b, "\x19");
+    appendStr(&b, END);
 }
 #endif

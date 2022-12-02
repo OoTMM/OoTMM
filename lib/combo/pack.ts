@@ -33,7 +33,7 @@ const combineRoms = async (monitor: Monitor, roms: DecompressedRoms, build: Buil
 const packPayload = async (monitor: Monitor, rom: Buffer, build: BuildOutput, game: Game) => {
   monitor.log("Packing payload for " + game);
   const payload = build[game].payload;
-  if (payload.length > 0x20000) {
+  if (payload.length > 0x30000) {
     throw new Error("Payload too large");
   }
   const addr = CONFIG[game].payloadAddr;
