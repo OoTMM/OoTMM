@@ -49,8 +49,12 @@ void PlayerDisplayTextBox(GameState_Play* play, u16 messageId, void* unk);
 
 #if defined(GAME_OOT)
 int  Message_GetState(MessageContext* ctx);
+#else
+int  Message_GetState(void* ctx);
 #endif
+
 void Message_Close(GameState_Play* play);
+int  Message_ShouldAdvance(GameState_Play* play);
 int  Message_IsClosed(Actor* actor, GameState_Play* play);
 
 void OcarinaAction(GameState_Play *play, u16 ocarinaAction);

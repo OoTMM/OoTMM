@@ -105,7 +105,12 @@ s16 comboOverride(int type, u16 sceneId, u16 id, s16 gi);
 /* Text */
 void comboTextHijackItem(GameState_Play* play, u16 itemId);
 void comboTextHijackItemShop(GameState_Play* play, u16 itemId, s16 price, int confirm);
+
+#if defined(GAME_OOT)
 void comboTextHijackDungeonRewardHints(GameState_Play* play, int base, int count);
+#else
+void comboTextHijackDungeonRewardHints(GameState_Play* play, int hint);
+#endif
 
 /* Progressive */
 s32 comboProgressive(s32 gi);
