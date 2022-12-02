@@ -717,18 +717,18 @@ static const char kIcons[] = {
 
 static const char* kDungeonRewardsRegions[] = {
     "In the " COLOR_YELLOW "Sacred Realm",
-    "Inside a " COLOR_GREEN "Large Tree",
-    "Inside a " COLOR_RED "Scorching Cavern",
-    "Inside a " COLOR_BLUE "Divine Fish",
-    "In a " COLOR_GREEN "Sacred Forest",
-    "In a " COLOR_RED "Volcanic Crater",
-    "In a " COLOR_BLUE "Deep Lake",
-    "In a " COLOR_YELLOW "Stone Giant",
-    "In the " COLOR_PINK "Land of the Dead",
-    "In a " COLOR_GREEN "Poisonous Swamp",
-    "In a " COLOR_TEAL "Frozen Peak",
-    "At large in the " COLOR_BLUE "Ocean",
-    "At the top of a " COLOR_YELLOW "Stone Tower",
+    "Inside the " COLOR_GREEN "Deku Tree",
+    "Inside " COLOR_RED "Dodongo's Cavern",
+    "Inside " COLOR_BLUE "Jabu-Jabu",
+    "In the " COLOR_GREEN "Forest Temple",
+    "In the " COLOR_RED "Fire Temple",
+    "In the " COLOR_BLUE "Water Temple",
+    "In the " COLOR_YELLOW "Spirit Temple",
+    "In the " COLOR_PINK "Shadow Temple",
+    "In " COLOR_GREEN "Woodfall Temple",
+    "In " COLOR_TEAL "Snowhead Temple",
+    "In " COLOR_BLUE "Great Bay Temple",
+    "In " COLOR_YELLOW "Stone Tower Temple",
 };
 
 void comboTextHijackDungeonRewardHints(GameState_Play* play, int base, int count)
