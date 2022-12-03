@@ -17,20 +17,29 @@ static void waitSubsystems(void)
 {
     u32 tmp;
 
-    for (;;)
-    {
-        tmp = IO_READ(SP_STATUS_REG);
-        if (tmp & 1)
-            break;
-    }
+    /* VI and vblank */
+    while (IO_READ(VI_CURRENT_REG) != 512)
+        ;
+    while (IO_READ(VI_CURRENT_REG) == 512)
+        ;
+    while (IO_READ(VI_CURRENT_REG) != 512)
+        ;
+    tmp = IO_READ(VI_CONTROL_REG);
+    IO_WRITE(VI_CONTROL_REG, tmp & ~0x3);
+    /* DEBUG */ IO_WRITE(VI_CONTROL_REG, 0);
+    tmp = IO_READ(VI_CURRENT_REG);
+    IO_WRITE(VI_CURRENT_REG, tmp);
+
 
     for (;;)
     {
-        tmp = IO_READ(SP_DMA_BUSY_REG);
-        if (!(tmp & 1))
+        tmp = IO_READ(SP_STATUS_REG);
+        if ((tmp & 2) && (tmp & 1) && !(tmp & (SP_STATUS_DMA_BUSY | SP_STATUS_DMA_FULL)))
             break;
     }
-    IO_WRITE(SP_STATUS_REG, 0xaaaaae);
+    IO_WRITE(SP_STATUS_REG, SP_SET_HALT | SP_CLR_BROKE | SP_CLR_INTR | SP_CLR_SSTEP | SP_CLR_INTR_BREAK | SP_CLR_SIG0 | SP_CLR_SIG1 | SP_CLR_SIG2 | SP_CLR_SIG3 | SP_CLR_SIG4 | SP_CLR_SIG5 | SP_CLR_SIG6 | SP_CLR_SIG7);
+    IO_WRITE(SP_SEMAPHORE_REG, 0);
+    IO_WRITE(SP_PC_REG, 0);
 
     for (;;)
     {
@@ -43,10 +52,11 @@ static void waitSubsystems(void)
     for (;;)
     {
         tmp = IO_READ(AI_STATUS_REG);
-        if (!(tmp & 0x40000000))
+        if (!(tmp & 0xc0000001))
             break;
     }
     IO_WRITE(AI_STATUS_REG, 0);
+    IO_WRITE(AI_CONTROL_REG, 0);
 
     for (;;)
     {
@@ -54,7 +64,7 @@ static void waitSubsystems(void)
         if (!(tmp & 3))
             break;
     }
-    IO_WRITE(PI_STATUS_REG, 2);
+    IO_WRITE(PI_STATUS_REG, 3);
 
     for (;;)
     {
@@ -63,11 +73,6 @@ static void waitSubsystems(void)
             break;
     }
     IO_WRITE(SI_STATUS_REG, 0);
-
-    tmp = IO_READ(VI_CONTROL_REG);
-    IO_WRITE(VI_CONTROL_REG, tmp & ~0x3);
-    tmp = IO_READ(VI_CURRENT_REG);
-    IO_WRITE(VI_CURRENT_REG, tmp);
 }
 
 NORETURN void comboGameSwitch2(void);
@@ -86,10 +91,10 @@ NORETURN void comboGameSwitch(void)
 
 NORETURN void comboGameSwitch3(void)
 {
-    comboInvalDCache((void*)FOREIGN_DRAM, FOREIGN_SIZE);
     comboDma_NoCacheInval((void*)FOREIGN_OFF, FOREIGN_CART, FOREIGN_SIZE);
     comboInvalDCache((void*)FOREIGN_DRAM, FOREIGN_SIZE);
     comboInvalICache((void*)FOREIGN_DRAM, FOREIGN_SIZE);
+    IO_WRITE(PI_STATUS_REG, PI_STATUS_RESET | PI_STATUS_CLR_INTR);
 
     comboExportContext();
     ((EntryPoint)FOREIGN_DRAM)();

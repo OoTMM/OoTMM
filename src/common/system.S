@@ -3,7 +3,11 @@
 .global comboDisableInterrupts
 comboDisableInterrupts:
   /* Zero some COP0 registers to disable threads */
-  mtc0 zero, $12
+  mfc0 a0, $12
+  li a1, 0xfffffffe
+  and a0, a1
+  mtc0 a0, $12
+
   mtc0 zero, $9
   mtc0 zero, $11
   mtc0 zero, $13
