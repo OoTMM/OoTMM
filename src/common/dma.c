@@ -72,18 +72,17 @@ void comboDma_NoCacheInval(void* dramAddr, u32 cartAddr, u32 size)
 {
     u32 tmp;
 
-    waitForPi();
-    while (size)
-    {
-        tmp = size;
-        if (tmp > 0x2000)
-            tmp = 0x2000;
-        IO_WRITE(PI_DRAM_ADDR_REG, (u32)dramAddr & 0x1fffffff);
-        IO_WRITE(PI_CART_ADDR_REG, cartAddr | PI_DOM1_ADDR2);
-        IO_WRITE(PI_WR_LEN_REG, tmp - 1);
-        waitForPi();
-        size -= tmp;
-        dramAddr = (void*)((u32)dramAddr + tmp);
-        cartAddr += tmp;
+    IO_WRITE(PI_DRAM_ADDR_REG, (u32)dramAddr & 0x1fffffff);
+    for (;;) {
+        tmp = IO_READ(PI_STATUS_REG);
+        if (!(tmp & 2))
+            break;
+    }
+    IO_WRITE(PI_CART_ADDR_REG, cartAddr | PI_DOM1_ADDR2);
+    IO_WRITE(PI_WR_LEN_REG, size - 1);
+    for (;;) {
+        tmp = IO_READ(PI_STATUS_REG);
+        if (!(tmp & 1))
+            break;
     }
 }
