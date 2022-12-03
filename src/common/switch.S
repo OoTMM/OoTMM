@@ -3,8 +3,6 @@
 .globl comboGameSwitch2
 comboGameSwitch2:
   la sp,(kComboDmaData + 0x2000)
-  li a0,0xfffffff0
-  and sp,a0
   j comboGameSwitch3
    nop
 
@@ -13,11 +11,6 @@ comboGameSwitch4:
   /* Reset the tag registers */
   mtc0 zero,$28
   mtc0 zero,$29
-
-  /* Reset the timer and cause */
-  mtc0 zero, $9
-  mtc0 zero, $11
-  mtc0 zero, $13
 
 #if 0
   /* Reset the icache */

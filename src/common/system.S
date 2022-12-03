@@ -1,15 +1,5 @@
 #include <combo.h>
 
-.global setSR
-setSR:
-  jr ra
-   mtc0 a0,$12
-
-.global setConfig
-setConfig:
-  jr ra
-   mtc0 a0,$16
-
 .global comboDisableInterrupts
 comboDisableInterrupts:
   /* Zero some COP0 registers to disable threads */
