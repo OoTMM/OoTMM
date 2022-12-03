@@ -122,6 +122,7 @@ static void readFlash(u32 devAddr, void* dramAddr, u32 size)
         sFlashIoMesg.dramAddr = dramAddr;
         sFlashIoMesg.devAddr = (devAddr & 0x00ffffff) >> (sFlashVersion == OLD_FLASH ? 1 : 0);
         sFlashIoMesg.size = readSize;
+        osInvalDCache(dramAddr, readSize);
         osEPiStartDma(&sFlashHandle, &sFlashIoMesg, OS_READ);
         osRecvMesg(&sFlashQueue, NULL, OS_MESG_BLOCK);
 
@@ -129,9 +130,6 @@ static void readFlash(u32 devAddr, void* dramAddr, u32 size)
         devAddr += readSize;
         size -= readSize;
     }
-
-    /* Invalidate cache */
-    osInvalDCache(dramAddr, size);
 }
 
 static void writeFlashBlock(u32 blockId, void* data)

@@ -87,10 +87,3 @@ void comboDma_NoCacheInval(void* dramAddr, u32 cartAddr, u32 size)
         cartAddr += tmp;
     }
 }
-
-void comboDma(void* dramAddr, u32 cartAddr, u32 size)
-{
-    comboDma_NoCacheInval(dramAddr, cartAddr, size);
-    osInvalICache(dramAddr, size);
-    osInvalDCache(dramAddr, size);
-}

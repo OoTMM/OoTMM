@@ -1,6 +1,6 @@
 #include <combo.h>
 
-PATCH_START(LOADER_ADDR)
+PATCH_START LOADER_ADDR
   addiu sp, -0x14
   sw    ra, 0x00(sp)
   sw    a0, 0x04(sp)

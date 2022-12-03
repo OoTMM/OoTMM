@@ -1,8 +1,5 @@
 #include <combo.h>
 
-/* TODO: Broken hook, this does not work with HOOK_CALL */
-/* Maybe it has something to do with the missing nop? */
-/* Should investigate because possible UB */
 EnMag_BeforeUpdate_Trampoline:
   HOOK_CALL EnMag_BeforeUpdate
 
