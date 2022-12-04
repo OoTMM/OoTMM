@@ -4,6 +4,7 @@ int EnTalk_TalkedTo(Actor* this, GameState_Play* play)
 {
     static int sHintNum;
     static int sInMessage;
+    int messageState;
 
     if ((this->variable & 0x3f) != 0x18)
         return ActorTalkedTo(this);
@@ -19,7 +20,8 @@ int EnTalk_TalkedTo(Actor* this, GameState_Play* play)
         return 0;
     }
 
-    if (Message_ShouldAdvance(play))
+    messageState = Message_GetState((char*)play + 0x4908);
+    if ((messageState == 5 || sHintNum == 3) && Message_ShouldAdvance(play))
     {
         sHintNum++;
         if (sHintNum == 4)
