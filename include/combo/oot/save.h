@@ -108,7 +108,8 @@ typedef struct
     u8                      magicUpgrade2;
     u8                      doubleDefense;
     u8                      isBiggoronSword;
-    char                    unk_3f[0x29];
+    char                    unk_3f[0x27];
+    u16                     sceneId;
     u8                      buttons[7];
     u16                     currentEquipment;
     char                    unk_72[0x2];
@@ -134,6 +135,7 @@ typedef struct
 OotSave;
 
 ASSERT_OFFSET(OotSave, unk_3f,      0x3f);
+ASSERT_OFFSET(OotSave, sceneId,     0x66);
 ASSERT_OFFSET(OotSave, buttons,     0x68);
 ASSERT_OFFSET(OotSave, equipment,   0x9c);
 ASSERT_OFFSET(OotSave, perm,        0xd4);

@@ -209,6 +209,8 @@ void hookPlay_Init(GameState_Play* play)
 
     if (gSave.entrance == 0x0530)
     {
+        PlayStoreFlags(play);
+        gSave.sceneId = play->sceneId;
         comboGameSwitch();
         return;
     }

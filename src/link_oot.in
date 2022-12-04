@@ -128,3 +128,5 @@ osSetIntMask = 0x80003cc0;
 Sram_CopySave = 0x80090fd0;
 
 SetRoomClear = 0x800206ac;
+
+PlayStoreFlags = 0x8009d894;
