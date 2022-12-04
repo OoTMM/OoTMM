@@ -24,7 +24,7 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory[ITS_OOT_HAMMER] = ITEM_OOT_HAMMER;
         gSave.inventory[ITS_OOT_HOOKSHOT] = ITEM_OOT_LONGSHOT;
         gSave.inventory[ITS_OOT_LENS] = ITEM_OOT_LENS;
-        gSave.equipment.swords = 0x3;
+        gSave.equipment.swords = 0x7;
         gSave.equipment.shields = 0x7;
         gSave.equipment.tunics = 0x7;
         gSave.equipment.boots = 0x7;
@@ -47,6 +47,8 @@ static void debugCheat(GameState_Play* play)
         gSave.quest.stoneRuby = 0;
         gSave.quest.stoneSapphire = 0;
 
+        gMmExtraFlags2.majora = 1;
+
         //gSave.quest.medallionShadow = 1;
         //gSave.quest.medallionSpirit = 1;
         //gSave.quest.medallionForest = 1;
@@ -55,6 +57,7 @@ static void debugCheat(GameState_Play* play)
         //gSave.quest.medallionLight = 1;
 
         gSave.health = gSave.healthMax = 20 * 0x10;
+        gSave.isBiggoronSword = 1;
 
         gSave.rupees = 500;
 
@@ -171,6 +174,45 @@ static void eventFixes(GameState_Play* play)
     }
 }
 
+static void endGame(void)
+{
+    u8  tmpAge;
+    u16 tmpNextCutscene;
+    s32 tmpCutscene;
+    u16 tmpEntrance;
+    u16 tmpSceneId;
+
+    /* Flag ganon as beaten */
+    gOotExtraFlags.ganon = 1;
+
+    /* Save tmp gameplay values (in case majora was beaten too) */
+    tmpAge = gSave.age;
+    tmpNextCutscene = *(u16*)((char*)&gSaveContext + 0x1412);
+    tmpCutscene = gSave.cutscene;
+    tmpEntrance = gSave.entrance;
+    tmpSceneId = gSave.sceneId;
+
+    /* Edit gameplay values for end of game save */
+    gSave.age = AGE_ADULT;
+    *(u16*)((char*)&gSaveContext + 0x1412) = 0;
+    gSave.cutscene = 0;
+    gSave.entrance = 0x023d;
+    gSave.sceneId = SCE_OOT_GANON_CASTLE_EXTERIOR;
+
+    /* Save */
+    comboWriteSave();
+
+    /* Restore gameplay values to play the cutscene if majora was beaten too */
+    if (gMmExtraFlags2.majora)
+    {
+        gSave.age = tmpAge;
+        *(u16*)((char*)&gSaveContext + 0x1412) = tmpNextCutscene;
+        gSave.cutscene = tmpCutscene;
+        gSave.entrance = tmpEntrance;
+        gSave.sceneId = tmpSceneId;
+    }
+}
+
 void hookPlay_Init(GameState_Play* play)
 {
     if (gSave.entrance == 0x007a)
@@ -183,16 +225,7 @@ void hookPlay_Init(GameState_Play* play)
     }
     else if (gSave.entrance == 0x006b)
     {
-        /* End game */
-        gOotExtraFlags.ganon = 1;
-        if (!gMmExtraFlags2.majora)
-        {
-            gSave.age = AGE_ADULT;
-            *(u16*)((char*)&gSaveContext + 0x1412) = 0;
-            gSave.cutscene = 0;
-            gSave.entrance = 0x023f;
-            comboWriteSave();
-        }
+        endGame();
     }
 
     if (gMmMag)
