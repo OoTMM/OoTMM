@@ -116,3 +116,5 @@ DisplayTextBox = 0x80150d08;
 Message_IsClosed = 0x800b867c;
 Message_GetState = 0x80152498;
 Message_ShouldAdvance = 0x80147624;
+
+Interface_LoadItemIconImpl = 0x80112b40;

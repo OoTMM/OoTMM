@@ -40,10 +40,14 @@ static void addHealth(u8 count)
 #endif
 }
 
-static void addSword(int index)
+static void addSword(GameState_Play* play, int index)
 {
     gMmSave.itemEquips.buttonItems[0][0] = kSwords[index];
     gMmSave.itemEquips.sword = index;
+
+#if defined(GAME_MM)
+    Interface_LoadItemIconImpl(play, 0);
+#endif
 }
 
 static void addShield(int index)
@@ -438,14 +442,14 @@ void comboAddItemMm(GameState_Play* play, u16 itemId)
 #endif
         break;
     case ITEM_MM_SWORD_KOKIRI:
-        addSword(1);
+        addSword(play, 1);
         break;
     case ITEM_MM_SWORD_RAZOR:
-        addSword(2);
+        addSword(play, 2);
         gMmSave.playerData.swordHealth = 100;
         break;
     case ITEM_MM_SWORD_GILDED:
-        addSword(3);
+        addSword(play, 3);
         break;
     case ITEM_MM_PROGRESSIVE_SHIELD_HERO:
         gMmExtraFlags2.progressiveShield = 1;
