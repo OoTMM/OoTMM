@@ -60,9 +60,10 @@ static void debugCheat(GameState_Play* play)
 
         gOotExtraTrade.child = 0xffff;
         gOotExtraTrade.adult = 0;
+        gOotExtraTrade.adult |= (1 << XITEM_OOT_ADULT_EYEBALL_FROG);
         gOotExtraTrade.adult |= (1 << XITEM_OOT_ADULT_EYE_DROPS);
         gOotExtraTrade.adult |= (1 << XITEM_OOT_ADULT_CLAIM_CHECK);
-        gSave.inventory[ITS_OOT_TRADE_ADULT] = ITEM_OOT_EYE_DROPS;
+        gSave.inventory[ITS_OOT_TRADE_ADULT] = ITEM_OOT_EYEBALL_FROG;
 
 #if defined(DEBUG_AGE)
         gSave.age = DEBUG_AGE;
