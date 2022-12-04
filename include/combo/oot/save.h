@@ -102,7 +102,8 @@ typedef struct
     s8                      magicSize;
     s8                      magicAmount;
     u16                     rupees;
-    char                    unk_36[4];
+    u16                     swordHealth;
+    char                    unk_38[2];
     u8                      magicUpgrade;
     char                    unk_3b[1];
     u8                      magicUpgrade2;

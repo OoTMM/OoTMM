@@ -365,6 +365,7 @@ void comboAddItemOot(GameState_Play* play, u16 itemId)
         break;
     case ITEM_OOT_GIANT_KNIFE:
         gOotSave.equipment.swords |= EQ_OOT_SWORD_KNIFE;
+        gOotSave.swordHealth = 8;
         break;
     case ITEM_OOT_SWORD_BIGGORON:
         gOotSave.equipment.swords |= EQ_OOT_SWORD_KNIFE;

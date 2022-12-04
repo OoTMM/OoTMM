@@ -24,7 +24,7 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory[ITS_OOT_HAMMER] = ITEM_OOT_HAMMER;
         gSave.inventory[ITS_OOT_HOOKSHOT] = ITEM_OOT_LONGSHOT;
         gSave.inventory[ITS_OOT_LENS] = ITEM_OOT_LENS;
-        gSave.equipment.swords = 0x7;
+        gSave.equipment.swords = 0x3;
         gSave.equipment.shields = 0x7;
         gSave.equipment.tunics = 0x7;
         gSave.equipment.boots = 0x7;
@@ -57,7 +57,6 @@ static void debugCheat(GameState_Play* play)
         //gSave.quest.medallionLight = 1;
 
         gSave.health = gSave.healthMax = 20 * 0x10;
-        gSave.isBiggoronSword = 1;
 
         gSave.rupees = 500;
 
