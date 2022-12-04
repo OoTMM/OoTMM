@@ -59,7 +59,7 @@ static const char* const kItemNamesOot[] = {
     C1 "Farore's Wind",
     "the " C1 "Boomerang",
     "the " C1 "Lens of Truth",
-    "a" C0 "Magic Bean",
+    "a " C0 "Magic Bean",
     "the " C1 "Megaton Hammer",
     "the " C1 "Light Arrow",
     C1 "Nayru's Love",
