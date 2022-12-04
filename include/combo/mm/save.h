@@ -208,18 +208,22 @@ typedef struct PACKED
     SaveOptions     options;
     char            unk_3f46[0x4];
     u16             nextCutscene;
-    char            unk_3f4c[0x97c];
+    char            unk_3f4c[0xe];
+    u16             healthDelta;
+    char            unk_3f5c[0x96c];
     u16             dungeonId;
 }
 MmSaveContext;
 
 _Static_assert(sizeof(MmSave) == 0x3ca0, "MmSave size is wrong");
 _Static_assert(sizeof(MmSaveContext) == 0x48ca, "MmSaveContext size is wrong");
-ASSERT_OFFSET(MmSaveContext, unk_3f32,   0x3f32);
-ASSERT_OFFSET(MmSaveContext, dungeonId2, 0x3f36);
-ASSERT_OFFSET(MmSaveContext, options,    0x3f40);
-ASSERT_OFFSET(MmSaveContext, unk_3f4c,   0x3f4c);
-ASSERT_OFFSET(MmSaveContext, dungeonId,  0x48c8);
+ASSERT_OFFSET(MmSaveContext, unk_3f32,      0x3f32);
+ASSERT_OFFSET(MmSaveContext, dungeonId2,    0x3f36);
+ASSERT_OFFSET(MmSaveContext, options,       0x3f40);
+ASSERT_OFFSET(MmSaveContext, unk_3f4c,      0x3f4c);
+ASSERT_OFFSET(MmSaveContext, healthDelta,   0x3f5a);
+ASSERT_OFFSET(MmSaveContext, unk_3f5c,      0x3f5c);
+ASSERT_OFFSET(MmSaveContext, dungeonId,     0x48c8);
 
 #if defined(GAME_MM)
 ALIGNED(16) extern MmSaveContext gSaveContext;

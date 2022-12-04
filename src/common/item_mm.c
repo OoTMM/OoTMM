@@ -25,6 +25,21 @@ const u8 kMmTrade3[] = {
     ITEM_MM_PENDANT_OF_MEMORIES,
 };
 
+static void addHealth(u8 count)
+{
+    u16 health;
+
+    health = (u16)count * 0x10;
+
+#if defined(GAME_MM)
+    gSaveContext.healthDelta += health;
+#else
+    gMmSave.playerData.health += health;
+    if (gMmSave.playerData.health > gMmSave.playerData.healthCapacity)
+        gMmSave.playerData.health = gMmSave.playerData.healthCapacity;
+#endif
+}
+
 static void addSword(int index)
 {
     gMmSave.itemEquips.buttonItems[0][0] = kSwords[index];
@@ -521,17 +536,15 @@ void comboAddItemMm(GameState_Play* play, u16 itemId)
         {
             gMmSave.inventory.questItems.heartPieces = 0;
             gMmSave.playerData.healthCapacity += 0x10;
-            gMmSave.playerData.health += 0x10;
         }
+        addHealth(20);
         break;
     case ITEM_MM_HEART_CONTAINER:
         gMmSave.playerData.healthCapacity += 0x10;
-        gMmSave.playerData.health += 0x10;
+        addHealth(20);
         break;
     case ITEM_MM_RECOVERY_HEART:
-        gMmSave.playerData.health += 0x10;
-        if (gMmSave.playerData.health > gMmSave.playerData.healthCapacity)
-            gMmSave.playerData.health = gMmSave.playerData.healthCapacity;
+        addHealth(1);
         break;
     case ITEM_MM_RUPEE_GREEN:
         addRupees(1);

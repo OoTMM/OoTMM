@@ -37,7 +37,7 @@ static void debugCheat(GameState_Play* play)
 
         gSave.inventory.items[ITS_MM_KEG] = ITEM_MM_POWDER_KEG;
         gSave.inventory.items[ITS_MM_MASK_CAPTAIN] = ITEM_MM_MASK_CAPTAIN;
-        gSave.playerData.healthCapacity = 0x10 * 20;
+        gSave.playerData.healthCapacity = 0x10 * 10;
         gSave.playerData.health = gSave.playerData.healthCapacity;
 
         gSave.inventory.items[ITS_MM_TRADE1] = ITEM_MM_DEED_LAND;
