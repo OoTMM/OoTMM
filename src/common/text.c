@@ -774,7 +774,6 @@ void comboTextHijackDungeonRewardHints(GameState_Play* play, int base, int count
 void comboTextHijackDungeonRewardHints(GameState_Play* play, int hint)
 {
     char* b;
-    int index;
 
     b = play->textBuffer;
     appendBossRewardHeader(&b, 0x55 + hint);

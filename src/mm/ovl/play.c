@@ -44,8 +44,8 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.items[ITS_MM_TRADE1] = ITEM_MM_DEED_LAND;
         gSave.inventory.items[ITS_MM_TRADE3] = ITEM_MM_LETTER_TO_KAFEI;
         gMmExtraTrade.trade1 = 0x02;
-        gMmExtraTrade.trade2 = 0xff;
-        gMmExtraTrade.trade3 = 0xff;
+        gMmExtraTrade.trade2 = 0x03;
+        gMmExtraTrade.trade3 = 0x03;
 
         gSave.inventory.items[ITS_MM_TRADE2] = ITEM_MM_ROOM_KEY;
         gSave.inventory.items[ITS_MM_TRADE3] = ITEM_MM_PENDANT_OF_MEMORIES;

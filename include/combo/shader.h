@@ -5,7 +5,7 @@
 # include <combo/game_state.h>
 # include <combo/types.h>
 
-typedef void (*ShaderFunc)(GameState* gs, s16 index);
+typedef void (*ShaderFunc)(GameState_Play* play, s16 index);
 
 typedef struct PACKED ALIGNED(4)
 {

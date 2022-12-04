@@ -28,7 +28,7 @@ void comboDrawObject(GameState_Play* play, Actor* actor, u16 objectId, u16 shade
         PreDraw1(actor, play, 0);
     if (!(flags & DRAW_NO_PRE2))
         PreDraw2(actor, play, 0);
-    kShaders[shaderId - 1].func(&play->gs, shaderId - 1);
+    kShaders[shaderId - 1].func(play, shaderId - 1);
 }
 
 void comboDrawGI(GameState_Play* play, Actor* actor, int gi, int flags)
