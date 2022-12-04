@@ -118,3 +118,4 @@ Message_GetState = 0x80152498;
 Message_ShouldAdvance = 0x80147624;
 
 Interface_LoadItemIconImpl = 0x80112b40;
+ReloadShield = 0x80123c90;

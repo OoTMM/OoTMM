@@ -50,9 +50,13 @@ static void addSword(GameState_Play* play, int index)
 #endif
 }
 
-static void addShield(int index)
+static void addShield(GameState_Play* play, int index)
 {
     gMmSave.itemEquips.shield = index;
+
+#if defined(GAME_MM)
+    ReloadShield(play, GET_LINK(play));
+#endif
 }
 
 static void addBombBag(int index)
@@ -455,10 +459,10 @@ void comboAddItemMm(GameState_Play* play, u16 itemId)
         gMmExtraFlags2.progressiveShield = 1;
         /* Fallthrough */
     case ITEM_MM_SHIELD_HERO:
-        addShield(1);
+        addShield(play, 1);
         break;
     case ITEM_MM_SHIELD_MIRROR:
-        addShield(2);
+        addShield(play, 2);
         break;
     case ITEM_MM_BOMB_BAG:
         addBombBag(1);
