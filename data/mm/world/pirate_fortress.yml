@@ -15,14 +15,14 @@
     "Pirate Fortress Interior Water Chest 1": "true"
     "Pirate Fortress Interior Water Chest 2": "true"
     "Pirate Fortress Interior Water Chest 3": "true"
-    "Pirate Fortress Interior HP": "has(MASK_GORON) || (has_explosives && has(MASK_BUNNY))"
+    "Pirate Fortress Interior HP": "true"
 "Pirate Fortress Exterior":
   exits:
     "Pirate Fortress Entrance": "true"
-    "Pirate Fortress Interior Hookshot Room": "has(BOW)"
+    "Pirate Fortress Interior Hookshot Room": "has(BOW) || can_use_deku_bubble"
     "Pirate Fortress Interior Other Rooms": "has(HOOKSHOT)"
   events:
-    ZORA_EGGS_PIRATE: "has(HOOKSHOT) && has(MASK_ZORA) && has_bottle"
+    ZORA_EGGS_PIRATE: "has(HOOKSHOT) && has(MASK_ZORA) && has_bottle && has_weapon"
   locations:
     "Pirate Fortress Exterior Lower Chest": "true"
     "Pirate Fortress Exterior Upper Chest": "has(HOOKSHOT)"

@@ -35,7 +35,7 @@ PATCH_LOAD_STORE 8, 1
 PATCH_END
 
 /* Use our item-inventory handler */
-PATCH_START(0x8084834c)
+PATCH_START 0x8084834c
   lw v0,0x24(sp)
   lw a0,0x20(sp)
   jal comboAddItemGI
@@ -45,4 +45,9 @@ PATCH_END
 /* Fix magic jars */
 PATCH_START 0x80114750
   li t7,0xfff
+PATCH_END
+
+/* Fix references to remains ShaderIDs */
+PATCH_START 0x80852c8c
+  li v0,0
 PATCH_END

@@ -3,6 +3,7 @@
 
 #include <ultra64.h>
 
+#define NORETURN    __attribute__((noreturn))
 #define PACKED      __attribute__((packed))
 #define ALIGNED(x)  __attribute__((aligned(x)))
 #define UNREACHABLE __builtin_unreachable

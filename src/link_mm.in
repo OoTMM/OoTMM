@@ -111,3 +111,11 @@ RemoveItem = 0x801149a0;
 
 Sram_SaveEndOfCycle = 0x80143b0c;
 Sram_SaveNewDay = 0x80146f5c;
+
+DisplayTextBox = 0x80150d08;
+Message_IsClosed = 0x800b867c;
+Message_GetState = 0x80152498;
+Message_ShouldAdvance = 0x80147624;
+
+Interface_LoadItemIconImpl = 0x80112b40;
+ReloadShield = 0x80123c90;

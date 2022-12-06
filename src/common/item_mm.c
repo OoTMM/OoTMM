@@ -25,15 +25,38 @@ const u8 kMmTrade3[] = {
     ITEM_MM_PENDANT_OF_MEMORIES,
 };
 
-static void addSword(int index)
+static void addHealth(u8 count)
+{
+    u16 health;
+
+    health = (u16)count * 0x10;
+
+#if defined(GAME_MM)
+    gSaveContext.healthDelta += health;
+#else
+    gMmSave.playerData.health += health;
+    if (gMmSave.playerData.health > gMmSave.playerData.healthCapacity)
+        gMmSave.playerData.health = gMmSave.playerData.healthCapacity;
+#endif
+}
+
+static void addSword(GameState_Play* play, int index)
 {
     gMmSave.itemEquips.buttonItems[0][0] = kSwords[index];
     gMmSave.itemEquips.sword = index;
+
+#if defined(GAME_MM)
+    Interface_LoadItemIconImpl(play, 0);
+#endif
 }
 
-static void addShield(int index)
+static void addShield(GameState_Play* play, int index)
 {
     gMmSave.itemEquips.shield = index;
+
+#if defined(GAME_MM)
+    ReloadShield(play, GET_LINK(play));
+#endif
 }
 
 static void addBombBag(int index)
@@ -119,6 +142,18 @@ static void addNewBottle(u16 itemId)
     }
 }
 
+static void fillBottle(u16 itemId)
+{
+    for (int i = 0; i < 6; ++i)
+    {
+        if (gMmSave.inventory.items[ITS_MM_BOTTLE + i] == ITEM_MM_EMPTY_BOTTLE)
+        {
+            gMmSave.inventory.items[ITS_MM_BOTTLE + i] = itemId;
+            break;
+        }
+    }
+}
+
 static void addRupees(s16 count)
 {
     u16 max;
@@ -167,7 +202,7 @@ static void addTrade3(u8 index)
     gMmExtraTrade.tradeObtained3 |= (1 << (u16)index);
 }
 
-void comboAddItemMm(u16 itemId)
+void comboAddItemMm(GameState_Play* play, u16 itemId)
 {
     switch (itemId)
     {
@@ -210,7 +245,23 @@ void comboAddItemMm(u16 itemId)
         addNewBottle(itemId);
         break;
     case ITEM_MM_RED_POTION_WITH_BOTTLE:
-        addNewBottle(ITEM_MM_RED_POTION);
+        addNewBottle(ITEM_MM_POTION_RED);
+        break;
+    case ITEM_MM_POTION_RED:
+    case ITEM_MM_POTION_BLUE:
+    case ITEM_MM_POTION_GREEN:
+    case ITEM_MM_BOTTLED_MILK_HALF:
+        fillBottle(itemId);
+        break;
+    case ITEM_MM_SEAHORSE:
+    case ITEM_MM_BOTTLED_SEAHORSE:
+        fillBottle(ITEM_MM_BOTTLED_SEAHORSE);
+        break;
+    case ITEM_MM_MILK:
+        fillBottle(ITEM_MM_BOTTLED_MILK);
+        break;
+    case ITEM_MM_CHATEAU_ROMANI:
+        fillBottle(ITEM_MM_BOTTLED_CHATEAU_ROMANI);
         break;
     case ITEM_MM_BOMB:
         addBombs(1);
@@ -395,23 +446,23 @@ void comboAddItemMm(u16 itemId)
 #endif
         break;
     case ITEM_MM_SWORD_KOKIRI:
-        addSword(1);
+        addSword(play, 1);
         break;
     case ITEM_MM_SWORD_RAZOR:
-        addSword(2);
+        addSword(play, 2);
         gMmSave.playerData.swordHealth = 100;
         break;
     case ITEM_MM_SWORD_GILDED:
-        addSword(3);
+        addSword(play, 3);
         break;
     case ITEM_MM_PROGRESSIVE_SHIELD_HERO:
         gMmExtraFlags2.progressiveShield = 1;
         /* Fallthrough */
     case ITEM_MM_SHIELD_HERO:
-        addShield(1);
+        addShield(play, 1);
         break;
     case ITEM_MM_SHIELD_MIRROR:
-        addShield(2);
+        addShield(play, 2);
         break;
     case ITEM_MM_BOMB_BAG:
         addBombBag(1);
@@ -493,17 +544,15 @@ void comboAddItemMm(u16 itemId)
         {
             gMmSave.inventory.questItems.heartPieces = 0;
             gMmSave.playerData.healthCapacity += 0x10;
-            gMmSave.playerData.health += 0x10;
         }
+        addHealth(20);
         break;
     case ITEM_MM_HEART_CONTAINER:
         gMmSave.playerData.healthCapacity += 0x10;
-        gMmSave.playerData.health += 0x10;
+        addHealth(20);
         break;
     case ITEM_MM_RECOVERY_HEART:
-        gMmSave.playerData.health += 0x10;
-        if (gMmSave.playerData.health > gMmSave.playerData.healthCapacity)
-            gMmSave.playerData.health = gMmSave.playerData.healthCapacity;
+        addHealth(1);
         break;
     case ITEM_MM_RUPEE_GREEN:
         addRupees(1);
@@ -527,15 +576,18 @@ void comboAddItemMm(u16 itemId)
         addRupees(200);
         break;
 #if defined(GAME_MM)
-    case ITEM_MM_SMALL_KEY:
-    {
-        s8* keys = &gSave.inventory.dungeonKeys[gSaveContext.dungeonId];
-        if (*keys < 0)
-            *keys = 1;
-        else
-            *keys += 1;
+    case ITEM_MM_STRAY_FAIRY:
+        gMmSave.inventory.strayFairies[gSaveContext.dungeonId] += 1;
         break;
-    }
+    case ITEM_MM_SMALL_KEY:
+        {
+            s8* keys = &gSave.inventory.dungeonKeys[gSaveContext.dungeonId];
+            if (*keys < 0)
+                *keys = 1;
+            else
+                *keys += 1;
+        }
+        break;
     case ITEM_MM_BIG_KEY:
         gSave.inventory.dungeonItems[gSaveContext.dungeonId].bossKey = 1;
         break;

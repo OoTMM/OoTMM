@@ -17,7 +17,7 @@
     CLOCK_TOWN_SCRUB: "has(MOON_TEAR)"
   locations:
     "Clock Town South Chest Lower": "has(HOOKSHOT)"
-    "Clock Town South Chest Upper": "has(HOOKSHOT)"
+    "Clock Town South Chest Upper": "has(HOOKSHOT) || (has(MASK_DEKU) && event(CLOCK_TOWN_SCRUB))"
     "Clock Town Platform HP": "true"
     "Clock Town Business Scrub": "event(CLOCK_TOWN_SCRUB)"
     "Clock Town Post Box": "has(MASK_POSTMAN)"
@@ -26,10 +26,10 @@
     "Termina Field": "true"
     "Clock Town South": "true"
     "Clock Town Fairy Fountain": "true"
-    "Deku Playground": "has(MASK_DEKU)"
+    "Deku Playground": "true"
   events:
-    BOMBER_CODE: "(has(MASK_DEKU) && has(MAGIC_UPGRADE)) || has(MASK_ZORA) || has(BOW)"
-    SAKON_BOMB_BAG: "has_weapon"
+    BOMBER_CODE: "has_weapon_range"
+    SAKON_BOMB_BAG: "can_fight"
   locations:
     "Clock Town Tree HP": "true"
     "Clock Town Bomber Notebook": "event(BOMBER_CODE)"
@@ -45,8 +45,8 @@
     "Swordsman School": "true"
   locations:
     "Clock Town Bank Reward 1": "true"
-    "Clock Town Bank Reward 2": "true"
-    "Clock Town Bank Reward 3": "true"
+    "Clock Town Bank Reward 2": "has(WALLET, 1)"
+    "Clock Town Bank Reward 3": "has(WALLET, 2)"
     "Clock Town Rosa Sisters HP": "has(MASK_KAMARO)"
 "Clock Town East":
   exits:
@@ -122,7 +122,7 @@
     "Clock Town East": "true"
   locations:
     "Milk Bar Troupe Leader Mask": "has(OCARINA) && has(MASK_DEKU) && has(MASK_ZORA) && has(MASK_GORON) && has(MASK_ROMANI)"
-    "Milk Bar Madame Aroma Bottle": "has(LETTER_TO_MAMA)"
+    "Milk Bar Madame Aroma Bottle": "has(MASK_KAFEI) && has(LETTER_TO_MAMA)"
 "Town Archery":
   exits:
     "Clock Town East": "true"
@@ -138,7 +138,7 @@
   exits:
     "Clock Town East": "true"
   locations:
-    "Honey & Darling Reward 1": "has(BOW) || has(BOMB_BAG)"
+    "Honey & Darling Reward 1": "has(BOW) || has(BOMB_BAG) || can_use_deku_bubble"
     "Honey & Darling Reward 2": "has(BOW) && has(BOMB_BAG)"
 "Stock Pot Inn":
   exits:
@@ -147,7 +147,7 @@
     "Stock Pot Inn Guest Room Chest": "has(ROOM_KEY)"
     "Stock Pot Inn Staff Room Chest": "true"
     "Stock Pot Inn Room Key": "true"
-    "Stock Pot Inn Letter to Kafei": "has(MASK_KAFEI)"
+    "Stock Pot Inn Letter to Kafei": "has(MASK_KAFEI) && (has(ROOM_KEY) || has(MASK_DEKU))"
     "Stock Pot Inn Couple's Mask": "event(SUN_MASK) && has(PENDANT_OF_MEMORIES) && has(MASK_KAFEI)"
     "Stock Pot Inn Grandma HP 1": "has(MASK_ALL_NIGHT)"
     "Stock Pot Inn Grandma HP 2": "has(MASK_ALL_NIGHT)"
@@ -176,7 +176,7 @@
     "Mountain Village Path": "has(BOW)"
     "Milk Road": "true"
     "Great Bay Coast": "can_play(SONG_EPONA)"
-    "Road to Ikana": "can_play(SONG_EPONA)"
+    "Road to Ikana": "true"
   locations:
     "Termina Field Water Chest": "has(MASK_ZORA)"
     "Termina Field Tall Grass Chest": "true"
@@ -184,11 +184,11 @@
     "Termina Field Kamaro Mask": "can_play(SONG_HEALING)"
     "Termina Field Tall Grass Grotto": "true"
     "Termina Field Pillar Grotto": "true"
-    "Termina Field Peahat Grotto": "has_weapon"
-    "Termina Field Dodongo Grotto": "has_weapon || has(BOMB_BAG)"
-    "Termina Field Bio Baba Grotto": "has_explosives && (has(BOW) || has(HOOKSHOT))"
+    "Termina Field Peahat Grotto": "can_fight || has(BOW)"
+    "Termina Field Dodongo Grotto": "has_weapon || has(BOMB_BAG) || has(MASK_GORON) || has(BOW)"
+    "Termina Field Bio Baba Grotto": "can_break_boulders && has(MASK_ZORA)"
     "Termina Field Scrub": "event(SCRUB_TELESCOPE) && has(WALLET)"
-    "Termina Field Gossip Stones HP": "has(OCARINA) && (has(SONG_GORON_HALF, 2) || has(SONG_AWAKENING) || has(SONG_ZORA)) && can_break_boulders"
+    "Termina Field Gossip Stones HP": "has(OCARINA) && ((has(MASK_GORON) && has(SONG_GORON_HALF, 2)) || (has(MASK_DEKU) && has(SONG_AWAKENING)) || (has(MASK_ZORA) && has(SONG_ZORA))) && can_break_boulders"
 "Road to Southern Swamp":
   exits:
     "Swamp": "true"
@@ -207,12 +207,12 @@
   exits:
     "Road to Southern Swamp": "true"
     "Tourist Information": "true"
-    "Deku Palace": "can_rescue_koume"
+    "Deku Palace": "event(KOUME) || has(PICTOGRAPH_BOX) || (has(MASK_DEKU) && (has(BOW) || has(HOOKSHOT) || has(MASK_ZORA)))"
     "Swamp Potion Shop": "true"
     "Woods of Mystery": "true"
     "Swamp Spider House": "true"
   events:
-    FROG_3: "has(MASK_DEKU) && has(MASK_DON_GERO)"
+    FROG_3: "has(MASK_DON_GERO)"
   locations:
     "Southern Swamp HP": "has(DEED_LAND) && has(MASK_DEKU)"
     "Southern Swamp Scrub Deed": "has(DEED_LAND)"
@@ -222,12 +222,14 @@
   exit:
     "Swamp": "true"
   locations:
-    "Tourist Information Pictobox": "can_rescue_koume"
-    "Tourist Information Boat Cruise": "can_rescue_koume && event(CLEAN_SWAMP) && has(BOW)"
+    "Tourist Information Pictobox": "event(KOUME)"
+    "Tourist Information Boat Cruise": "event(KOUME) && event(CLEAN_SWAMP) && has(BOW)"
     "Tourist Information Tingle Picture": "has(PICTOGRAPH_BOX)"
 "Woods of Mystery":
   exits:
     "Swamp": "true"
+  events:
+    KOUME: "has_bottle"
   locations:
     "Woods of Mystery Grotto": "true"
 "Swamp Potion Shop":
@@ -239,15 +241,15 @@
     "Swamp Potion Shop": "true"
 "Deku Palace":
   exits:
-    "Swamp": "can_rescue_koume"
+    "Swamp": "event(KOUME)"
     "Woodfall": "has(MASK_DEKU)"
     "Deku Shrine": "has(MASK_DEKU) && event(DEKU_PRINCESS)"
   events:
     MAGIC_BEANS: "has(MASK_DEKU)"
   locations:
     "Deku Palace HP": "has(MASK_DEKU)"
-    "Deku Palace Grotto Chest": "has(MASK_DEKU) && (has_bottle || can_play(SONG_STORMS))"
-    "Deku Palace Song of Awakening": "has(SWORD) && has(MASK_DEKU) && has(OCARINA)"
+    "Deku Palace Grotto Chest": "has(MASK_DEKU) && (can_use_beans || has(HOOKSHOT))"
+    "Deku Palace Song of Awakening": "has(MASK_DEKU) && has(OCARINA) && can_use_beans"
 "Woodfall":
   exits:
     "Deku Palace": "true"
@@ -266,20 +268,58 @@
   exits:
     "Deku Palace": "true"
   locations:
-    "Deku Shrine Mask of Scents": "has(MASK_DEKU) && has(BOW)"
+    "Deku Shrine Mask of Scents": "true"
 "Swamp Spider House":
   exits:
     "Swamp": "true"
   locations:
-    "Swamp Spider House Mask of Truth": "has_bottle && has(BOW) && has(MASK_DEKU) && has(HOOKSHOT)"
+    "Swamp Spider House Mask of Truth": "has_weapon && has_bottle && has_weapon_range && (has(HOOKSHOT) || has(MASK_ZORA) || (has(MASK_DEKU) && (has(BOW) || has(MAGIC_UPGRADE) || has(BOMB_BAG))) && (has(HOOKSHOT) || has(MASK_ZORA) || can_use_beans) && (has(HOOKSHOT) || has(MASK_ZORA) || (can_use_beans && can_break_boulders)))"
+
+# Preparation for skulltula spirits shuffle
+# "Swamp Spider House Mask of Truth": "has(SWAMP_SPIRIT, 30)"
+# "Swamp Skulltula Main Room Near Ceiling": "has(HOOKSHOT) || has(MASK_ZORA) || ( has(MASK_DEKU) && ( has(BOW) || has(MAGIC_UPGRADE) || has(BOMB_BAG) ) )"
+# "Swamp Skulltula Main Room Lower Right Soft Soil": "has_bottle"
+# "Swamp Skulltula Main Room Lower Left Soft Soil": "has_bottle"
+# "Swamp Skulltula Main Room Upper Soft Soil": "has_bottle"
+# "Swamp Skulltula Main Room Upper Pillar": "true"
+# "Swamp Skulltula Main Room Pillar": "true"
+# "Swamp Skulltula Main Room Water": "true"
+# "Swamp Skulltula Main Room Jar": "true"
+
+# "Swamp Skulltula Gold Room Near Ceiling": "has(HOOKSHOT) || has(MASK_ZORA) || can_use_beans"
+# "Swamp Skulltula Gold Room Pillar": "true"
+# "Swamp Skulltula Gold Room Wall": "true"
+
+# "Swamp Skulltula Tree Room Hive: "has_weapon_range"
+# "Swamp Skulltula Tree Room Grass 1": "true"
+# "Swamp Skulltula Tree Room Grass 2": "true"
+# "Swamp Skulltula Tree Room Tree 1: "true"
+# "Swamp Skulltula Tree Room Tree 2: "true"
+# "Swamp Skulltula Tree Room Tree 3: "true"
+
+# "Swamp Skulltula Monument Room Lower Wall": "has(HOOKSHOT) || has(MASK_ZORA) || (can_use_beans && can_break_boulders)"
+# "Swamp Skulltula Monument Room On Monument": "true"
+# "Swamp Skulltula Monument Room Crate 1": "true"
+# "Swamp Skulltula Monument Room Crate 2": "true"
+# "Swamp Skulltula Monument Room Torch": "true"
+
+# "Swamp Skulltula Gold Room Hive": "has_weapon_range"
+# "Swamp Skulltula Pot Room Hive 1": "has_weapon_range"
+# "Swamp Skulltula Pot Room Hive 2": "has_weapon_range"
+# "Swamp Skulltula Pot Room Behind Vines": "has_weapon"
+# "Swamp Skulltula Pot Room Pot 1": "true"
+# "Swamp Skulltula Pot Room Pot 2": "true"
+# "Swamp Skulltula Pot Room Jar": "true"
+# "Swamp Skulltula Pot Room Wall": "true"
+
 "Mountain Village Path":
   exits:
     "Termina Field": "has(BOW)"
-    "Mountain Village": "can_break_boulders"
+    "Mountain Village": "can_break_boulders || can_use_fire_arrows"
 "Mountain Village":
   exits:
-    "Mountain Village Path": "can_break_boulders"
-    "Goron Village Path": "true"
+    "Mountain Village Path": "can_break_boulders || can_use_fire_arrows"
+    "Twin Islands": "true"
     "Goron Graveyard": "can_use_lens"
     "Path to Snowhead": "true"
     "Blacksmith": "true"
@@ -292,37 +332,38 @@
   exits:
     "Mountain Village": "true"
   events:
+    BLACKSMITH_ENABLED: "event(BOSS_SNOWHEAD) || can_use_fire_arrows || event(GORON_GRAVEYARD_HOT_WATER) || (event(WELL_HOT_WATER) && can_play(SONG_SOARING))"
     GOLD_DUST_USED: "has(WALLET) && has(BOTTLED_GOLD_DUST)"
   locations:
-    "Blacksmith Razor Blade": "has(WALLET)"
-    "Blacksmith Gilded Sword": "event(GOLD_DUST_USED)"
-"Goron Village Path":
+    "Blacksmith Razor Blade": "event(BLACKSMITH_ENABLED) && has(WALLET)"
+    "Blacksmith Gilded Sword": "event(BLACKSMITH_ENABLED) && event(GOLD_DUST_USED)"
+"Twin Islands":
   exits:
     "Mountain Village": "true"
     "Goron Village": "true"
     "Goron Race": "can_use_keg"
   locations:
-    "Goron Village Path Underwater Chest 1": "event(BOSS_SNOWHEAD) && has(MASK_ZORA)"
-    "Goron Village Path Underwater Chest 2": "event(BOSS_SNOWHEAD) && has(MASK_ZORA)"
-    "Goron Village Path Frozen Grotto Chest": "event(GORON_GRAVEYARD_HOT_WATER)"
-    "Goron Village Path Ramp Grotto Chest": "has(BOMB_BAG) && (has(MASK_GORON) || scarecrow_hookshot) && event(BOSS_SNOWHEAD)"
+    "Twin Islands Underwater Chest 1": "event(BOSS_SNOWHEAD) && has(MASK_ZORA)"
+    "Twin Islands Underwater Chest 2": "event(BOSS_SNOWHEAD) && has(MASK_ZORA)"
+    "Twin Islands Frozen Grotto Chest": "(event(GORON_GRAVEYARD_HOT_WATER) || can_use_fire_arrows || (event(WELL_HOT_WATER) && can_play(SONG_SOARING))) && has_explosives"
+    "Twin Islands Ramp Grotto Chest": "has_explosives && (has(MASK_GORON) || scarecrow_hookshot)"
 "Goron Village":
   exits:
-    "Goron Village Path": "true"
+    "Twin Islands": "true"
     "Lone Peak Shrine": "true"
     "Goron Shrine": "true"
   locations:
     "Goron Village HP": "has(DEED_SWAMP) && has(MASK_DEKU)"
     "Goron Village Scrub Deed": "has(DEED_SWAMP)"
     "Goron Village Scrub Bomb Bag": "has(MASK_GORON) && has(WALLET)"
-    "Goron Elder": "has(MASK_GORON) && has(OCARINA) && event(GORON_GRAVEYARD_HOT_WATER)"
+    "Goron Elder": "has(MASK_GORON) && has(OCARINA) && (event(GORON_GRAVEYARD_HOT_WATER) || can_use_fire_arrows || (event(WELL_HOT_WATER) && can_play(SONG_SOARING)))"
     "Goron Powder Keg": "(event(BOSS_SNOWHEAD) || can_use_fire_arrows) && has(MASK_GORON)"
 "Lone Peak Shrine":
   exits:
-    "Goron Village": "can_use_lens"
+    "Goron Village": "can_use_lens || can_play(SONG_SOARING)"
   locations:
     "Lone Peak Shrine Lens Chest": "true"
-    "Lone Peak Shrine Boulder Chest": "can_break_boulders"
+    "Lone Peak Shrine Boulder Chest": "has_explosives"
     "Lone Peak Shrine Invisible Chest": "can_use_lens"
 "Goron Graveyard":
   exits:
@@ -341,15 +382,15 @@
 "Path to Snowhead":
   exits:
     "Mountain Village": "true"
-    "Snowhead": "has(OCARINA) && has(SONG_GORON_HALF, 2) && goron_fast_roll && can_use_lens"
+    "Snowhead": "goron_fast_roll"
   locations:
     "Path to Snowhead HP": "can_use_lens && goron_fast_roll && scarecrow_hookshot"
-    "Path to Snowhead Grotto": "has(BOMB_BAG) && goron_fast_roll"
+    "Path to Snowhead Grotto": "has_explosives && goron_fast_roll"
 "Snowhead":
   exits:
     "Path to Snowhead": "true"
-    "Snowhead Temple Entrance": "has(MASK_GORON)"
-    "Snowhead Great Fairy Fountain": "has(MASK_GORON)"
+    "Snowhead Temple Entrance": "can_lullaby"
+    "Snowhead Great Fairy Fountain": "can_lullaby"
 "Snowhead Great Fairy Fountain":
   exits:
     "Snowhead": "true"
@@ -357,7 +398,7 @@
     "Snowhead Great Fairy": "has(STRAY_FAIRY_SH, 15)"
 "Goron Race":
   exits:
-    "Goron Village Path": "true"
+    "Twin Islands": "true"
   locations:
     "Goron Race Reward": "event(BOSS_SNOWHEAD) && goron_fast_roll"
 "Milk Road":
@@ -371,7 +412,7 @@
     "Cucco Shack": "true"
     "Doggy Racetrack": "true"
   locations:
-    "Romani Ranch Epona Song": "can_use_keg && has(BOW)"
+    "Romani Ranch Epona Song": "can_use_keg"
     "Romani Ranch Aliens": "can_use_keg && has(BOW)"
     "Romani Ranch Cremia Escort": "can_use_keg && has(BOW)"
 "Cucco Shack":
@@ -389,16 +430,18 @@
   exits:
     "Fisher's Hut": "true"
     "Termina Field": "can_play(SONG_EPONA)"
-    "Pirate Fortress Exterior": "has(MASK_ZORA)"
+    "Pirate Fortress Entrance": "has(MASK_ZORA)"
     "Pinnacle Rock": "has(MASK_ZORA) && event(SEAHORSE)"
     "Laboratory": "true"
     "Zora Cape": "true"
     "Ocean Spider House": "true"
   locations:
     "Great Bay Coast Zora Mask": "can_play(SONG_HEALING)"
-    "Great Bay Coast HP": "can_use_beans"
+    "Great Bay Coast HP": "can_use_beans && scarecrow_hookshot"
     "Great Bay Coast Fisherman HP": "has(MASK_ZORA) && event(BOSS_GREAT_BAY)"
     "Great Bay Coast Fisherman Grotto": "true"
+#    "Great Bay Coast Ledge Cow 1": "has(HOOKSHOT) && can_play(SONG_EPONA)"
+#    "Great Bay Coard Ledge Cow 2": "has(HOOKSHOT) && can_play(SONG_EPONA)"
 "Fisher's Hut":
   exits:
     "Great Bay Coast": "true"
@@ -430,7 +473,7 @@
     "Zora Cape Ledge Chest 2": "has(HOOKSHOT)"
     "Zora Cape Underwater Chest": "has(MASK_ZORA)"
     "Zora Cape Waterfall HP": "has(MASK_ZORA)"
-    "Zora Cape Grotto": "has_explosives"
+    "Zora Cape Grotto": "can_break_boulders"
 "Great Bay Fairy Fountain":
   exits:
     "Zora Cape": "true"
@@ -449,7 +492,7 @@
   locations:
     "Zora Hall Scrub HP": "has(DEED_MOUNTAIN) && has(MASK_GORON) && has(MASK_DEKU)"
     "Zora Hall Scrub Deed": "has(DEED_MOUNTAIN) && has(MASK_GORON)"
-    "Zora Hall Evan HP": "has(MASK_ZORA) && has(OCARINA) && has(HOOKSHOT)"
+    "Zora Hall Evan HP": "has(MASK_ZORA) && has(OCARINA)"
     "Zora Hall Scene Lights": "can_use_fire_arrows"
 "Zora Cape Peninsula":
   exits:
@@ -459,8 +502,8 @@
   exits:
     "Great Bay Coast": "true"
   locations:
-    "Ocean Spider House Wallet": "has(MASK_GORON) && has(HOOKSHOT)"
-    "Ocean Spider House Chest HP": "has(BOW) && has(MASK_CAPTAIN)"
+    "Ocean Spider House Wallet": "has_explosives && (has(MASK_GORON) || can_play(SONG_SOARING)) && has(HOOKSHOT) && can_use_fire_arrows"
+    "Ocean Spider House Chest HP": "has_explosives && (has(MASK_GORON) || can_play(SONG_SOARING)) && has(HOOKSHOT) && has(BOW) && has(MASK_CAPTAIN)"
 "Gorman Track":
   exits:
     "Milk Road": "true"
@@ -468,13 +511,13 @@
     "Gorman Track Garo Mask": "can_play(SONG_EPONA)"
 "Road to Ikana":
   exits:
-    "Termina Field": "can_play(SONG_EPONA)"
-    "Ikana Valley": "(has(MASK_GARO) || has(MASK_GIBDO)) && has(HOOKSHOT)"
-    "Ikana Graveyard": "true"
+    "Termina Field": "true"
+    "Ikana Valley": "can_play(SONG_EPONA) && (has(MASK_GARO) || has(MASK_GIBDO)) && has(HOOKSHOT)"
+    "Ikana Graveyard": "can_play(SONG_EPONA)"
   locations:
     "Road to Ikana Chest": "has(HOOKSHOT)"
     "Road to Ikana Grotto": "has(MASK_GORON)"
-    "Road to Ikana Stone Mask": "can_use_lens && has_bottle"
+    "Road to Ikana Stone Mask": "can_play(SONG_EPONA) && can_use_lens && has_bottle"
 "Ikana Graveyard":
   exits:
     "Road to Ikana": "true"
@@ -482,24 +525,24 @@
     "Beneath The Graveyard Night 2": "has(MASK_CAPTAIN)"
     "Beneath The Graveyard Night 3": "has(MASK_CAPTAIN)"
   locations:
-    "Ikana Graveyard Captain Mask": "can_play(SONG_AWAKENING)"
+    "Ikana Graveyard Captain Mask": "can_play(SONG_AWAKENING) && has(BOW) && can_fight"
     "Ikana Graveyard Grotto": "has(BOMB_BAG)"
 "Beneath The Graveyard Night 1":
   exits:
     "Ikana Graveyard": "true"
   locations:
-    "Beneath The Graveyard Chest": "true"
-    "Beneath The Graveyard Song of Storms": "true"
+    "Beneath The Graveyard Chest": "has_weapon || (has(BOMB_BAG) && has(BOW)) || has(MASK_GORON)"
+    "Beneath The Graveyard Song of Storms": "has_weapon || (has(BOMB_BAG) && has(BOW)) || has(MASK_GORON)"
 "Beneath The Graveyard Night 2":
   exits:
     "Ikana Graveyard": "true"
   locations:
-    "Beneath The Graveyard HP": "has_explosives"
+    "Beneath The Graveyard HP": "can_fight && has_explosives && can_use_lens"
 "Beneath The Graveyard Night 3":
   exits:
     "Ikana Graveyard": "true"
   locations:
-    "Beneath The Graveyard Dampe Chest": "has_weapon"
+    "Beneath The Graveyard Dampe Chest": "has_weapon && has_weapon_range"
 "Ikana Valley":
   exits:
     "Road to Ikana": "true"
@@ -523,7 +566,7 @@
     "Music Box House": "event(IKANA_CURSE_LIFTED)"
     "Ghost Hut": "true"
     "Beneath the Well Entrance": "true"
-    "Ancient Castle of Ikana Exterior": "has_mirror_shield"
+    "Ancient Castle of Ikana Exterior": "has_mirror_shield || can_use_light_arrows"
     "Stone Tower": "true"
 "Ikana Fairy Fountain":
   exits:

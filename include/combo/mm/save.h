@@ -196,24 +196,34 @@ typedef struct
 }
 SaveOptions;
 
-typedef struct
+typedef struct PACKED
 {
     MmSave          save;
     u32             fileIndex;
     char            unk_3ca4[0x28c];
     u16             magicTarget;
-    char            unk_3f32[0xe];
+    char            unk_3f32[0x4];
+    u16             dungeonId2;
+    char            unk_3f38[0x8];
     SaveOptions     options;
     char            unk_3f46[0x4];
     u16             nextCutscene;
-    char            unk_3f4c[0x95e];
+    char            unk_3f4c[0xe];
+    u16             healthDelta;
+    char            unk_3f5c[0x96c];
     u16             dungeonId;
-    u8              maskMaskBit[27];
 }
 MmSaveContext;
 
 _Static_assert(sizeof(MmSave) == 0x3ca0, "MmSave size is wrong");
-_Static_assert(sizeof(MmSaveContext) == 0x48c8, "MmSaveContext size is wrong");
+_Static_assert(sizeof(MmSaveContext) == 0x48ca, "MmSaveContext size is wrong");
+ASSERT_OFFSET(MmSaveContext, unk_3f32,      0x3f32);
+ASSERT_OFFSET(MmSaveContext, dungeonId2,    0x3f36);
+ASSERT_OFFSET(MmSaveContext, options,       0x3f40);
+ASSERT_OFFSET(MmSaveContext, unk_3f4c,      0x3f4c);
+ASSERT_OFFSET(MmSaveContext, healthDelta,   0x3f5a);
+ASSERT_OFFSET(MmSaveContext, unk_3f5c,      0x3f5c);
+ASSERT_OFFSET(MmSaveContext, dungeonId,     0x48c8);
 
 #if defined(GAME_MM)
 ALIGNED(16) extern MmSaveContext gSaveContext;
@@ -290,7 +300,12 @@ typedef struct
     u32 songOath:1;
     u32 progressiveShield:1;
     u32 majora:1;
-    u32 unused:11;
+    u32 maskBremen:1;
+    u32 maskScents:1;
+    u32 maskKamaro:1;
+    u32 maskTruth:1;
+    u32 moonTear:1;
+    u32 unused:6;
 }
 MmExtraFlags2;
 

@@ -51,7 +51,7 @@ Graveyard Royal Tomb Chest,           chest,          TOMB_ROYAL,               
 Graveyard Fairy Tomb,                 chest,          TOMB_FAIRY,               0x00,                       SHIELD
 Graveyard Dampe Tomb Reward 1,        chest,          TOMB_DAMPE_WINDMILL,      0x00,                       HOOKSHOT
 Graveyard Dampe Tomb Reward 2,        collectible,    TOMB_DAMPE_WINDMILL,      0x07,                       HEART_PIECE
-Graveyard Crate HP,                   chest,          GRAVEYARD,                0x04,                       HEART_PIECE
+Graveyard Crate HP,                   collectible,    GRAVEYARD,                0x04,                       HEART_PIECE
 Graveyard GS Soil,                    gs,             GRAVEYARD,                0x88,                       GS_TOKEN
 Graveyard GS Wall,                    gs,             GRAVEYARD,                0x8f,                       GS_TOKEN
 Death Mountain Chest,                 chest,          DEATH_MOUNTAIN_TRAIL,     0x01,                       RUPEE_PURPLE
@@ -122,7 +122,7 @@ Lon Lon Ranch GS Outer Fence,         gs,             LON_LON_RANCH,            
 Hyrule Field Ocarina of Time,         npc,            HYRULE_FIELD,             OCARINA_TIME_ITEM,          OCARINA
 Hyrule Field Song of Time,            npc,            HYRULE_FIELD,             OCARINA_TIME_SONG,          SONG_TIME
 Hyrule Field Grotto Scrub HP,         npc,            GROTTOS,                  SCRUB_HP,                   HEART_PIECE
-Hyrule Field Grotto Southeast,        chest,          GROTTOS,                  0x12,                       RUPEE_RED
+Hyrule Field Grotto Southeast,        chest,          GROTTOS,                  0x02,                       RUPEE_RED
 Hyrule Field Grotto Open,             chest,          GROTTOS,                  0x03,                       RUPEE_BLUE
 Hyrule Field Grotto Market,           chest,          GROTTOS,                  0x00,                       RUPEE_BLUE
 Hyrule Field Grotto Tektite HP,       collectible,    GROTTOS,                  0x01,                       HEART_PIECE
@@ -158,7 +158,7 @@ Gerudo Fortress Archery Reward 1,     npc,            GERUDO_FORTRESS,          
 Gerudo Fortress Archery Reward 2,     npc,            GERUDO_FORTRESS,          GERUDO_ARCHERY_2,           HEART_PIECE
 Gerudo Fortress GS Wall,              gs,             GERUDO_FORTRESS,          0xa9,                       GS_TOKEN
 Gerudo Fortress GS Target,            gs,             GERUDO_FORTRESS,          0xa8,                       GS_TOKEN
-Haunted Wasteland Chest,              chest,          HAUNTED_WASTELAND,        0x1f,                       RUPEE_PURPLE
+Haunted Wasteland Chest,              chest,          HAUNTED_WASTELAND,        0x00,                       RUPEE_PURPLE
 Haunted Wasteland GS,                 gs,             HAUNTED_WASTELAND,        0xb1,                       GS_TOKEN
 Desert Colossus HP,                   collectible,    DESERT_COLOSSUS,          0x0d,                       HEART_PIECE
 Desert Colossus Song Spirit,          npc,            DESERT_COLOSSUS,          SHEIK_SPIRIT,               SONG_TP_SPIRIT
@@ -359,7 +359,7 @@ Gerudo Training Grounds Behind Block Visible 3,       chest,       GERUDO_TRAINI
 Gerudo Training Grounds Eye Statue,                   chest,       GERUDO_TRAINING_GROUND, 0x03, SMALL_KEY_GTG
 Gerudo Training Grounds Hammer Room Switch,           chest,       GERUDO_TRAINING_GROUND, 0x10, SMALL_KEY_GTG
 Gerudo Training Grounds Hammer Room,                  chest,       GERUDO_TRAINING_GROUND, 0x12, ARROWS_10
-Gerudo Training Grounds Lizalfos,                     chest,       GERUDO_TRAINING_GROUND, 0x1e, SMALL_KEY_GTG
+Gerudo Training Grounds Lizalfos,                     chest,       GERUDO_TRAINING_GROUND, 0x01, SMALL_KEY_GTG
 Gerudo Training Water,                                chest,       GERUDO_TRAINING_GROUND, 0x0d, SMALL_KEY_GTG
 Gerudo Training Freestanding Key,                     collectible, GERUDO_TRAINING_GROUND, 0x01, SMALL_KEY_GTG
 Gerudo Training Maze Upper Cage,                      chest,       GERUDO_TRAINING_GROUND, 0x04, SMALL_KEY_GTG

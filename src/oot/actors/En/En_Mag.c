@@ -2,12 +2,11 @@
 
 void EnMag_BeforeUpdate(Actor* this, GameState_Play* play)
 {
-    if (gComboCtx.valid)
+    if (gComboCtx.valid && play->transition.type == 0)
     {
-        *(u8*)((char*)&gOotSave + 0x1418) = 0;
         *(u32*)(((char*)&gSaveContext) + 4956) = 2;
         play->transition.type = TRANS_TYPE_NORMAL;
-        play->transition.gfx = 11;
+        play->transition.gfx = 4;
     }
 }
 
@@ -78,7 +77,7 @@ void EnMag_AfterDraw(Actor* this, GameState_Play* play)
     gDPSetColorDither(OVERLAY_DISP++, G_CD_DISABLE);
     gDPSetAlphaCompare(OVERLAY_DISP++, G_AC_NONE);
     gDPSetDepthSource(OVERLAY_DISP++, G_ZS_PRIM);
-    gDPSetCombineMode(OVERLAY_DISP++, G_CC_MODULATEIA_PRIM,G_CC_MODULATEIA_PRIM);
+    gDPSetCombineMode(OVERLAY_DISP++, G_CC_MODULATEIA_PRIM, G_CC_MODULATEIA_PRIM);
     gDPSetCombineKey(OVERLAY_DISP++, G_CK_NONE);
     gDPSetTextureConvert(OVERLAY_DISP++, G_TC_FILT);
     gDPSetTextureDetail(OVERLAY_DISP++, G_TD_CLAMP);

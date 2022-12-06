@@ -18,6 +18,7 @@ InitDmaManager = 0x80000e6c;
 
 gSaveContext = 0x8011a5d0;
 Play_Init = 0x8009a750;
+Play_Draw = 0x8009cac8;
 
 PlayMusic = 0x800c6b54;
 GiveItem = 0x80022bd4;
@@ -127,3 +128,5 @@ osSetIntMask = 0x80003cc0;
 Sram_CopySave = 0x80090fd0;
 
 SetRoomClear = 0x800206ac;
+
+PlayStoreFlags = 0x8009d894;

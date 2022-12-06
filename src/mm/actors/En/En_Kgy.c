@@ -49,3 +49,12 @@ u16 EnKgy_GetMessage(void)
 }
 
 PATCH_FUNC(0x80b41528, EnKgy_GetMessage);
+
+u16 EnKgy_GetMessage2(void)
+{
+    if (gSave.playerForm != MM_PLAYER_FORM_HUMAN)
+        return 0xc38;
+    return 0xc3a;
+}
+
+PATCH_FUNC(0x80b41460, EnKgy_GetMessage2);

@@ -1,6 +1,10 @@
 #ifndef COMBO_COMBO_H
 #define COMBO_COMBO_H
 
+#if defined(DEBUG)
+# include <combo/debug.h>
+#endif
+
 #if !defined(__ASSEMBLER__)
 # include <stddef.h>
 # include <string.h>
@@ -62,6 +66,14 @@ ComboContext;
 
 extern ComboContext gComboCtx;
 
+typedef struct PACKED ALIGNED(4)
+{
+    u8 dungeonRewards[13];
+}
+ComboData;
+
+extern ComboData gComboData;
+
 void comboLoadContext(void);
 void comboExportContext(void);
 
@@ -69,6 +81,7 @@ void comboExportContext(void);
 void comboInit(void);
 void comboInitDma(void);
 void comboInitOverride(void);
+void comboInitData(void);
 
 /* Flash */
 void comboReadWriteFlash(u32 devAddr, void* dramAddr, u32 size, s32 direction);
@@ -93,6 +106,12 @@ s16 comboOverride(int type, u16 sceneId, u16 id, s16 gi);
 void comboTextHijackItem(GameState_Play* play, u16 itemId);
 void comboTextHijackItemShop(GameState_Play* play, u16 itemId, s16 price, int confirm);
 
+#if defined(GAME_OOT)
+void comboTextHijackDungeonRewardHints(GameState_Play* play, int base, int count);
+#else
+void comboTextHijackDungeonRewardHints(GameState_Play* play, int hint);
+#endif
+
 /* Progressive */
 s32 comboProgressive(s32 gi);
 s32 comboProgressiveOot(s32 gi);
@@ -108,6 +127,7 @@ u32     comboLoadObject(void* buffer, u16 objectId);
 #define DRAW_NO_PRE2    0x02
 #define DRAW_RAW        (DRAW_NO_PRE1 | DRAW_NO_PRE2)
 
+void comboSetObjectSegment(GfxContext* gfx, void* buffer);
 void comboDrawObject(GameState_Play* play, Actor* actor, u16 objectId, u16 shaderId, int flags);
 void comboDrawGI(GameState_Play* play, Actor* actor, int gi, int flags);
 
@@ -132,8 +152,8 @@ extern const u8 kMmTrade2[];
 extern const u8 kMmTrade3[];
 
 int  comboAddItemGI(GameState_Play* play, s16 gi);
-void comboAddItemMm(u16 itemId);
-void comboAddItemOot(u16 itemId);
+void comboAddItemMm(GameState_Play* play, u16 itemId);
+void comboAddItemOot(GameState_Play* play, u16 itemId);
 
 void comboToggleTrade(u8* slot, u32 flags, const u8* table, u32 tableSize);
 
@@ -170,6 +190,10 @@ int toupper(int c);
 /* Util */
 u32     popcount(u32 x);
 void*   actorAddr(u16 actorId, u32 addr);
+
+/* System */
+void comboInvalICache(void* addr, u32 size);
+void comboInvalDCache(void* addr, u32 size);
 
 #else
 # include <combo/asm.h>

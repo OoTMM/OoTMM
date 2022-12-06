@@ -91,11 +91,11 @@ Lone Peak Shrine Lens Chest,                    chest,          GROTTOS,        
 Lone Peak Shrine Boulder Chest,                 chest,          GROTTOS,                    0x06,                   RUPEE_RED
 Lone Peak Shrine Invisible Chest,               chest,          GROTTOS,                    0x03,                   RUPEE_PURPLE
 Goron Graveyard Mask,                           npc,            GORON_GRAVEYARD,            MASK_GORON,             MASK_GORON
-Goron Village Path Underwater Chest 1,          chest,          PATH_GORON_VILLAGE_WINTER,  0x06,                   HEART_PIECE
-Goron Village Path Underwater Chest 2,          chest,          PATH_GORON_VILLAGE_WINTER,  0x00,                   RUPEE_RED
-Goron Village Path Frozen Grotto Chest,         chest,          GROTTOS,                    0x02,                   RUPEE_RED
-Goron Village Path Ramp Grotto Chest,           chest,          GROTTOS,                    0x19,                   BOMBCHU
-Goron Elder,                                    npc,            PATH_GORON_VILLAGE_WINTER,  GORON_ELDER,            SONG_GORON_HALF
+Twin Islands Underwater Chest 1,                chest,          TWIN_ISLANDS_WINTER,        0x06,                   HEART_PIECE
+Twin Islands Underwater Chest 2,                chest,          TWIN_ISLANDS_WINTER,        0x00,                   RUPEE_RED
+Twin Islands Frozen Grotto Chest,               chest,          GROTTOS,                    0x02,                   RUPEE_RED
+Twin Islands Ramp Grotto Chest,                 chest,          GROTTOS,                    0x19,                   BOMBCHU
+Goron Elder,                                    npc,            TWIN_ISLANDS_WINTER,        GORON_ELDER,            SONG_GORON_HALF
 Goron Baby,                                     npc,            GORON_SHRINE,               GORON_BABY,             SONG_GORON_HALF
 Goron Village HP,                               collectible,    GORON_VILLAGE_WINTER,       0x1e,                   HEART_PIECE
 Goron Village Scrub Deed,                       npc,            GORON_VILLAGE_WINTER,       SCRUB_MOUNTAIN,         DEED_MOUNTAIN
@@ -239,32 +239,32 @@ Beneath the Well Keese Chest,                     chest,          BENEATH_THE_WE
 Beneath the Well Mirror Shield,                   chest,          BENEATH_THE_WELL, 0x1b, SHIELD
 Ancient Castle of Ikana HP,                       collectible,    CASTLE_IKANA, 0x0a,           HEART_PIECE
 Ancient Castle of Ikana Song Emptiness,           npc,            LAIR_IKANA,   SONG_EMPTINESS, SONG_EMPTINESS
-Stone Tower Temple Entrance Chest,                      chest,          TEMPLE_STONE_TOWER,           0x16,             STRAY_FAIRY_ST
-Stone Tower Temple Entrance Switch Chest,               chest,          TEMPLE_STONE_TOWER,           0x12,             STRAY_FAIRY_ST
-Stone Tower Temple Under West Garden Ledge Chest,       chest,          TEMPLE_STONE_TOWER,           0x15,             STRAY_FAIRY_ST
-Stone Tower Temple Under West Garden Lava Chest,        chest,          TEMPLE_STONE_TOWER,           0x02,             SMALL_KEY_ST
-Stone Tower Temple Map,                                 chest,          TEMPLE_STONE_TOWER,           0x1d,             MAP_ST
-Stone Tower Temple Center Sun Block Chest,              chest,          TEMPLE_STONE_TOWER,           0x18,             STRAY_FAIRY_ST
-Stone Tower Temple Center Across Water Chest,           chest,          TEMPLE_STONE_TOWER,           0x01,             SMALL_KEY_ST
-Stone Tower Temple Compass,                             chest,          TEMPLE_STONE_TOWER,           0x1c,             COMPASS_ST
-Stone Tower Temple Water Sun Switch Chest,              chest,          TEMPLE_STONE_TOWER,           0x17,             STRAY_FAIRY_ST
-Stone Tower Temple Mirrors Room Center Chest,           chest,          TEMPLE_STONE_TOWER,           0x0f,             STRAY_FAIRY_ST
-Stone Tower Temple Mirrors Room Right Chest,            chest,          TEMPLE_STONE_TOWER,           0x0b,             STRAY_FAIRY_ST
-Stone Tower Temple Wind Room Ledge Chest,               chest,          TEMPLE_STONE_TOWER,           0x19,             STRAY_FAIRY_ST
-Stone Tower Temple Wind Room Jail Chest,                chest,          TEMPLE_STONE_TOWER,           0x0d,             STRAY_FAIRY_ST
-Stone Tower Temple Light Arrow,                         chest,          TEMPLE_STONE_TOWER,           0x1b,             ARROW_LIGHT
-Stone Tower Temple Before Water Bridge Chest,           chest,          TEMPLE_STONE_TOWER,           0x00,             STRAY_FAIRY_ST
-Stone Tower Temple Water Bridge Chest,                  chest,          TEMPLE_STONE_TOWER,           0x0c,             STRAY_FAIRY_ST
-Stone Tower Temple Inverted Entrance Chest,             chest,          TEMPLE_STONE_TOWER_INVERTED,  0x10,             STRAY_FAIRY_ST
-Stone Tower Temple Inverted East Lower Chest,           chest,          TEMPLE_STONE_TOWER_INVERTED,  0x13,             STRAY_FAIRY_ST
-Stone Tower Temple Inverted East Middle Chest,          chest,          TEMPLE_STONE_TOWER_INVERTED,  0x04,             SMALL_KEY_ST
-Stone Tower Temple Inverted East Upper Chest,           chest,          TEMPLE_STONE_TOWER_INVERTED,  0x0e,             STRAY_FAIRY_ST
-Stone Tower Temple Inverted Wizrobe Chest,              chest,          TEMPLE_STONE_TOWER_INVERTED,  0x11,             STRAY_FAIRY_ST
-Stone Tower Temple Inverted Under Wizrobe Chest,        chest,          TEMPLE_STONE_TOWER_INVERTED,  0x05,             SMALL_KEY_ST
-Stone Tower Temple Inverted Boss Key,                   chest,          TEMPLE_STONE_TOWER_INVERTED,  0x1e,             BOSS_KEY_ST
-Stone Tower Temple Inverted Giant Mask,                 chest,          TEMPLE_STONE_TOWER_INVERTED,  0x1a,             MASK_GIANT
-Stone Tower Boss HC,                                    collectible,    LAIR_TWINMOLD,                0x1f,             HEART_CONTAINER
-Stone Tower Boss,                                       npc,            LAIR_TWINMOLD,                REMAINS_TWINMOLD, REMAINS_TWINMOLD
+Stone Tower Temple Entrance Chest,                      chest,          TEMPLE_STONE_TOWER,   0x16,             STRAY_FAIRY_ST
+Stone Tower Temple Entrance Switch Chest,               chest,          TEMPLE_STONE_TOWER,   0x12,             STRAY_FAIRY_ST
+Stone Tower Temple Under West Garden Ledge Chest,       chest,          TEMPLE_STONE_TOWER,   0x15,             STRAY_FAIRY_ST
+Stone Tower Temple Under West Garden Lava Chest,        chest,          TEMPLE_STONE_TOWER,   0x02,             SMALL_KEY_ST
+Stone Tower Temple Map,                                 chest,          TEMPLE_STONE_TOWER,   0x1d,             MAP_ST
+Stone Tower Temple Center Sun Block Chest,              chest,          TEMPLE_STONE_TOWER,   0x18,             STRAY_FAIRY_ST
+Stone Tower Temple Center Across Water Chest,           chest,          TEMPLE_STONE_TOWER,   0x01,             SMALL_KEY_ST
+Stone Tower Temple Compass,                             chest,          TEMPLE_STONE_TOWER,   0x1c,             COMPASS_ST
+Stone Tower Temple Water Sun Switch Chest,              chest,          TEMPLE_STONE_TOWER,   0x17,             STRAY_FAIRY_ST
+Stone Tower Temple Mirrors Room Center Chest,           chest,          TEMPLE_STONE_TOWER,   0x0f,             STRAY_FAIRY_ST
+Stone Tower Temple Mirrors Room Right Chest,            chest,          TEMPLE_STONE_TOWER,   0x0b,             STRAY_FAIRY_ST
+Stone Tower Temple Wind Room Ledge Chest,               chest,          TEMPLE_STONE_TOWER,   0x19,             STRAY_FAIRY_ST
+Stone Tower Temple Wind Room Jail Chest,                chest,          TEMPLE_STONE_TOWER,   0x0d,             STRAY_FAIRY_ST
+Stone Tower Temple Light Arrow,                         chest,          TEMPLE_STONE_TOWER,   0x1b,             ARROW_LIGHT
+Stone Tower Temple Before Water Bridge Chest,           chest,          TEMPLE_STONE_TOWER,   0x14,             STRAY_FAIRY_ST
+Stone Tower Temple Water Bridge Chest,                  chest,          TEMPLE_STONE_TOWER,   0x0c,             STRAY_FAIRY_ST
+Stone Tower Temple Inverted Entrance Chest,             chest,          TEMPLE_STONE_TOWER,   0x10,             STRAY_FAIRY_ST
+Stone Tower Temple Inverted East Lower Chest,           chest,          TEMPLE_STONE_TOWER,   0x13,             STRAY_FAIRY_ST
+Stone Tower Temple Inverted East Middle Chest,          chest,          TEMPLE_STONE_TOWER,   0x04,             SMALL_KEY_ST
+Stone Tower Temple Inverted East Upper Chest,           chest,          TEMPLE_STONE_TOWER,   0x0e,             STRAY_FAIRY_ST
+Stone Tower Temple Inverted Wizrobe Chest,              chest,          TEMPLE_STONE_TOWER,   0x11,             STRAY_FAIRY_ST
+Stone Tower Temple Inverted Under Wizrobe Chest,        chest,          TEMPLE_STONE_TOWER,   0x05,             SMALL_KEY_ST
+Stone Tower Temple Inverted Boss Key,                   chest,          TEMPLE_STONE_TOWER,   0x1e,             BOSS_KEY_ST
+Stone Tower Temple Inverted Giant Mask,                 chest,          TEMPLE_STONE_TOWER,   0x1a,             MASK_GIANT
+Stone Tower Boss HC,                                    collectible,    LAIR_TWINMOLD,        0x1f,             HEART_CONTAINER
+Stone Tower Boss,                                       npc,            LAIR_TWINMOLD,        REMAINS_TWINMOLD, REMAINS_TWINMOLD
 Secret Shrine Boss 1 Chest,   chest,        SECRET_SHRINE,  0x00, RUPEE_SILVER
 Secret Shrine Boss 2 Chest,   chest,        SECRET_SHRINE,  0x01, RUPEE_SILVER
 Secret Shrine Boss 3 Chest,   chest,        SECRET_SHRINE,  0x02, RUPEE_SILVER

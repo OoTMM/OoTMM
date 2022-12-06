@@ -30,14 +30,17 @@ static u16 makeKey(u16 sceneId, u16 id)
     case SCE_MM_SOUTHERN_SWAMP_CLEAR:
         sceneId = SCE_MM_SOUTHERN_SWAMP;
         break;
-    case SCE_MM_PATH_GORON_VILLAGE_SPRING:
-        sceneId = SCE_MM_PATH_GORON_VILLAGE_WINTER;
+    case SCE_MM_TWIN_ISLANDS_SPRING:
+        sceneId = SCE_MM_TWIN_ISLANDS_WINTER;
         break;
     case SCE_MM_GORON_VILLAGE_SPRING:
         sceneId = SCE_MM_GORON_VILLAGE_WINTER;
         break;
     case SCE_MM_MOUNTAIN_VILLAGE_SPRING:
         sceneId = SCE_MM_MOUNTAIN_VILLAGE_WINTER;
+        break;
+    case SCE_MM_TEMPLE_STONE_TOWER_INVERTED:
+        sceneId = SCE_MM_TEMPLE_STONE_TOWER;
         break;
     }
 #endif
@@ -64,8 +67,8 @@ static s16 comboOverrideImpl(u16 sceneId, u16 id, s16 gi)
     u16 absGi;
 
     override = comboOverrideRaw(makeKey(sceneId, id));
-#if defined(DEBUG)
-    //override = GI_MM_MOON_TEAR;
+#if defined(DEBUG) && defined(DEBUG_OVERRIDE)
+    override = DEBUG_OVERRIDE;
 #endif
     absGi = gi > 0 ? gi : -gi;
     if (override >= 0)
@@ -77,10 +80,6 @@ static s16 comboOverrideImpl(u16 sceneId, u16 id, s16 gi)
 
 s16 comboOverride(int type, u16 sceneId, u16 id, s16 gi)
 {
-#if defined(DEBUG)
-    //return -(0x100 | GI_MM_MOON_TEAR);
-    //return -(GI_OOT_STICK_UPGRADE);
-#endif
     switch (type)
     {
     case OV_CHEST:

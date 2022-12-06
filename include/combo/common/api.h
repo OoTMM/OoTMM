@@ -49,8 +49,12 @@ void PlayerDisplayTextBox(GameState_Play* play, u16 messageId, void* unk);
 
 #if defined(GAME_OOT)
 int  Message_GetState(MessageContext* ctx);
+#else
+int  Message_GetState(void* ctx);
 #endif
+
 void Message_Close(GameState_Play* play);
+int  Message_ShouldAdvance(GameState_Play* play);
 int  Message_IsClosed(Actor* actor, GameState_Play* play);
 
 void OcarinaAction(GameState_Play *play, u16 ocarinaAction);
@@ -97,5 +101,12 @@ void RemoveItem(s16 item, s16 slot);
 void* ActorAlloc(u32 size);
 
 void Sram_CopySave(void*, void*);
+
+void Play_Init(GameState_Play*);
+void Play_Draw(GameState_Play*);
+
+void Interface_LoadItemIconImpl(GameState_Play* play, int slot);
+void ReloadShield(GameState_Play* play, Actor_Player* link);
+void PlayStoreFlags(GameState_Play* play);
 
 #endif

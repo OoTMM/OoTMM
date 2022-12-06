@@ -1,5 +1,17 @@
 #include <combo.h>
 
+int EnSth_HasGivenItemMaskOfTruth(Actor* this)
+{
+    if (Actor_HasParent(this))
+    {
+        gMmExtraFlags2.maskTruth = 1;
+        return 1;
+    }
+    return 0;
+}
+
+PATCH_CALL(0x80b67478, EnSth_HasGivenItemMaskOfTruth);
+
 int EnSth_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
 {
     switch (gi)
@@ -9,7 +21,10 @@ int EnSth_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
         gi = comboOverride(OV_NPC, 0, NPC_MM_SPIDER_HOUSE_OCEAN, gi);
         break;
     case GI_MM_MASK_TRUTH:
-        gi = comboOverride(OV_NPC, 0, NPC_MM_SPIDER_HOUSE_SWAMP, gi);
+        if (gMmExtraFlags2.maskTruth)
+            gi = GI_MM_RECOVERY_HEART;
+        else
+            gi = comboOverride(OV_NPC, 0, NPC_MM_SPIDER_HOUSE_SWAMP, gi);
         break;
     }
 

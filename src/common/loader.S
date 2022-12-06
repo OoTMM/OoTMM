@@ -1,6 +1,6 @@
 #include <combo.h>
 
-PATCH_START(LOADER_ADDR)
+PATCH_START LOADER_ADDR
   addiu sp, -0x14
   sw    ra, 0x00(sp)
   sw    a0, 0x04(sp)
@@ -14,6 +14,14 @@ PATCH_START(LOADER_ADDR)
   li    a2, PAYLOAD_SIZE
   jal   DMARomToRam
    nop
+
+#if defined(GAME_MM)
+  /* MM's DMARomToRam does not inval icache */
+  li    a0,PAYLOAD_RAM
+  li    a1,PAYLOAD_SIZE
+  jal   osInvalICache
+   nop
+#endif
 
   /* Init */
   jal init

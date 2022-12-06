@@ -7,7 +7,7 @@ import { World } from './world';
 import { LogicSeedError } from './error';
 
 const ITEMS_DUNGEON = /^(OOT|MM)_(MAP|COMPASS|SMALL_KEY|BOSS_KEY|STRAY_FAIRY)_[A-Z_]+$/;
-export const ITEMS_DUNGEON_REWARDS = new Set([
+export const ORDERED_DUNGEON_REWARDS = [
   'OOT_STONE_EMERALD',
   'OOT_STONE_RUBY',
   'OOT_STONE_SAPPHIRE',
@@ -21,7 +21,9 @@ export const ITEMS_DUNGEON_REWARDS = new Set([
   'MM_REMAINS_GOHT',
   'MM_REMAINS_GYORG',
   'MM_REMAINS_TWINMOLD',
-]);
+];
+
+export const ITEMS_DUNGEON_REWARDS = new Set(ORDERED_DUNGEON_REWARDS);
 
 export const ITEMS_REQUIRED = new Set<string>([
   'OOT_GS_TOKEN',
@@ -108,6 +110,7 @@ export const ITEMS_REQUIRED = new Set<string>([
   'MM_SONG_AWAKENING',
   'MM_SONG_HEALING',
   'MM_SONG_EPONA',
+  'MM_SONG_SOARING',
   'MM_SONG_GORON_HALF',
   'MM_SONG_ZORA',
   'MM_SONG_STORMS',
@@ -137,6 +140,7 @@ export const ITEMS_REQUIRED = new Set<string>([
   'MM_WALLET',
   'MM_HEART_PIECE',
   'MM_HEART_CONTAINER',
+  'MM_GREAT_FAIRY_SWORD',
 ]);
 
 const ITEMS_JUNK = new Set<string>([
@@ -196,8 +200,8 @@ const sample = <T>(random: Random, arr: T[]): T => {
 
 const shuffle = <T>(random: Random, arr: T[]): T[] => {
   const copy = [...arr].sort();
-  for (let i = 0; i < copy.length; i++) {
-    const j = randomInt(random, copy.length);
+  for (let i = 0; i < copy.length - 1; i++) {
+    const j = i + randomInt(random, copy.length - i);
     [copy[i], copy[j]] = [copy[j], copy[i]];
   }
   return copy;
@@ -411,11 +415,6 @@ class Solver {
 
     let validLocations = Array.from(locations).filter(x => assumedReachable.locations.has(x)).filter(x => !this.placement[x]);
 
-    /* Fairies can only be in chests */
-    if (item.match(/^MM_STRAY_FAIRY_/)) {
-      validLocations = validLocations.filter(x => this.world.checks[x].type === 'chest');
-    }
-
     const location = sample(this.random, validLocations);
     this.place(location, item);
     removeItem(pool, item);
@@ -435,6 +434,24 @@ class Solver {
     const assumedAccessibleItems = combinedItems(this.items, pool);
 
     /* Get all assumed reachable locations */
+    let reachable = this.reachable!;
+    const reachableLocations = new Set(reachable.locations);
+    for (;;) {
+      let changed = false;
+      reachable = pathfind(this.world, assumedAccessibleItems, reachable);
+      for (const l of reachable.locations.values()) {
+        if (!reachableLocations.has(l)) {
+          changed = true;
+          reachableLocations.add(l);
+          if (this.placement[l]) {
+            addItem(assumedAccessibleItems, this.placement[l]);
+          }
+        }
+      }
+      if (!changed) {
+        break;
+      }
+    }
     const assumedReachable = pathfind(this.world, assumedAccessibleItems, this.reachable).locations;
 
     /* Get all assumed reachable locations that have not been placed */

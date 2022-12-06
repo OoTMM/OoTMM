@@ -102,13 +102,15 @@ typedef struct
     s8                      magicSize;
     s8                      magicAmount;
     u16                     rupees;
-    char                    unk_36[4];
+    u16                     swordHealth;
+    char                    unk_38[2];
     u8                      magicUpgrade;
     char                    unk_3b[1];
     u8                      magicUpgrade2;
     u8                      doubleDefense;
     u8                      isBiggoronSword;
-    char                    unk_3f[0x29];
+    char                    unk_3f[0x27];
+    u16                     sceneId;
     u8                      buttons[7];
     u16                     currentEquipment;
     char                    unk_72[0x2];
@@ -134,6 +136,7 @@ typedef struct
 OotSave;
 
 ASSERT_OFFSET(OotSave, unk_3f,      0x3f);
+ASSERT_OFFSET(OotSave, sceneId,     0x66);
 ASSERT_OFFSET(OotSave, buttons,     0x68);
 ASSERT_OFFSET(OotSave, equipment,   0x9c);
 ASSERT_OFFSET(OotSave, perm,        0xd4);
@@ -149,7 +152,7 @@ typedef struct
     char    unk_13ce[0x28];
     s16     magicTarget;
     char    unk_13f8[0x0a];
-    u16     sceneId;
+    u16     mapIndex;
     char    unk_1404[0x20];
     u16     healthDelta;
     char    unk_1428[0x28];
@@ -188,7 +191,12 @@ typedef struct
 {
     u32 ganon:1;
     u32 greatFairies:6;
-    u32 unused:25;
+    u32 fishingChild:1;
+    u32 fishingAdult:1;
+    u32 tunicGoron:1;
+    u32 biggoron:1;
+    u32 tunicZora:1;
+    u32 unused:20;
 }
 OotExtraFlags;
 

@@ -1,7 +1,6 @@
 #include <combo.h>
 
 extern void* gMmMag;
-extern void Play_Init(void*);
 
 static void debugCheat(GameState_Play* play)
 {
@@ -25,7 +24,7 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory[ITS_OOT_HAMMER] = ITEM_OOT_HAMMER;
         gSave.inventory[ITS_OOT_HOOKSHOT] = ITEM_OOT_LONGSHOT;
         gSave.inventory[ITS_OOT_LENS] = ITEM_OOT_LENS;
-        gSave.equipment.swords = 0x7;
+        gSave.equipment.swords = 0x3;
         gSave.equipment.shields = 0x7;
         gSave.equipment.tunics = 0x7;
         gSave.equipment.boots = 0x7;
@@ -34,6 +33,7 @@ static void debugCheat(GameState_Play* play)
         gSave.upgrades.bombBag = 3;
         gSave.upgrades.quiver = 3;
         gSave.upgrades.dive = 2;
+        gSave.upgrades.wallet = 2;
         gSave.ammo[ITS_OOT_STICKS] = 30;
         gSave.ammo[ITS_OOT_SLINGSHOT] = 50;
         gSave.ammo[ITS_OOT_BOMBS] = 40;
@@ -47,24 +47,29 @@ static void debugCheat(GameState_Play* play)
         gSave.quest.stoneRuby = 0;
         gSave.quest.stoneSapphire = 0;
 
-        gSave.quest.medallionShadow = 1;
-        gSave.quest.medallionSpirit = 1;
-        gSave.quest.medallionForest = 1;
-        gSave.quest.medallionFire = 1;
-        gSave.quest.medallionWater = 1;
-        gSave.quest.medallionLight = 1;
+        gMmExtraFlags2.majora = 1;
+
+        //gSave.quest.medallionShadow = 1;
+        //gSave.quest.medallionSpirit = 1;
+        //gSave.quest.medallionForest = 1;
+        //gSave.quest.medallionFire = 1;
+        //gSave.quest.medallionWater = 1;
+        //gSave.quest.medallionLight = 1;
 
         gSave.health = gSave.healthMax = 20 * 0x10;
 
-        gSave.rupees = 99;
+        gSave.rupees = 500;
 
         gOotExtraTrade.child = 0xffff;
         gOotExtraTrade.adult = 0;
+        gOotExtraTrade.adult |= (1 << XITEM_OOT_ADULT_EYEBALL_FROG);
         gOotExtraTrade.adult |= (1 << XITEM_OOT_ADULT_EYE_DROPS);
         gOotExtraTrade.adult |= (1 << XITEM_OOT_ADULT_CLAIM_CHECK);
-        gSave.inventory[ITS_OOT_TRADE_ADULT] = ITEM_OOT_EYE_DROPS;
+        gSave.inventory[ITS_OOT_TRADE_ADULT] = ITEM_OOT_EYEBALL_FROG;
 
-        //gSave.age = AGE_ADULT;
+#if defined(DEBUG_AGE)
+        gSave.age = DEBUG_AGE;
+#endif
 
         BITMAP16_SET(gSave.eventsMisc, EV_OOT_INF_KING_ZORA_THAWED);
     }
@@ -154,22 +159,72 @@ static void eventFixes(GameState_Play* play)
     {
         SetEventChk(EV_OOT_CHK_RAINBOW_BRIDGE);
     }
+
+    /* Open Trials */
+    if (gSave.entrance == 0x0467)
+    {
+        SetEventChk(EV_OOT_CHK_TRIAL_LIGHT);
+        SetEventChk(EV_OOT_CHK_TRIAL_FIRE);
+        SetEventChk(EV_OOT_CHK_TRIAL_SHADOW);
+        SetEventChk(EV_OOT_CHK_TRIAL_WATER);
+        SetEventChk(EV_OOT_CHK_TRIAL_FOREST);
+        SetEventChk(EV_OOT_CHK_TRIAL_SPIRIT);
+        SetEventChk(EN_OOT_CHK_GANON_BARRIER);
+    }
+}
+
+static void endGame(void)
+{
+    u8  tmpAge;
+    u16 tmpNextCutscene;
+    s32 tmpCutscene;
+    u16 tmpEntrance;
+    u16 tmpSceneId;
+
+    /* Flag ganon as beaten */
+    gOotExtraFlags.ganon = 1;
+
+    /* Save tmp gameplay values (in case majora was beaten too) */
+    tmpAge = gSave.age;
+    tmpNextCutscene = *(u16*)((char*)&gSaveContext + 0x1412);
+    tmpCutscene = gSave.cutscene;
+    tmpEntrance = gSave.entrance;
+    tmpSceneId = gSave.sceneId;
+
+    /* Edit gameplay values for end of game save */
+    gSave.age = AGE_ADULT;
+    *(u16*)((char*)&gSaveContext + 0x1412) = 0;
+    gSave.cutscene = 0;
+    gSave.entrance = 0x023d;
+    gSave.sceneId = SCE_OOT_GANON_CASTLE_EXTERIOR;
+
+    /* Save */
+    comboWriteSave();
+
+    /* Restore gameplay values to play the cutscene if majora was beaten too */
+    if (gMmExtraFlags2.majora)
+    {
+        gSave.age = tmpAge;
+        *(u16*)((char*)&gSaveContext + 0x1412) = tmpNextCutscene;
+        gSave.cutscene = tmpCutscene;
+        gSave.entrance = tmpEntrance;
+        gSave.sceneId = tmpSceneId;
+    }
 }
 
 void hookPlay_Init(GameState_Play* play)
 {
-    if (gSave.entrance == 0x006b)
+    if (gSave.entrance == 0x007a)
     {
-        /* End game */
-        gOotExtraFlags.ganon = 1;
-        if (!gMmExtraFlags2.majora)
-        {
-            gSave.age = AGE_ADULT;
-            *(u16*)((char*)&gSaveContext + 0x1412) = 0;
-            gSave.cutscene = 0;
-            gSave.entrance = 0x023f;
-            comboWriteSave();
-        }
+        /* Entering courtyard */
+        if (GetEventChk(EV_OOT_CHK_ZELDA_LETTER))
+            gSave.entrance = 0x0594;
+        else
+            gSave.entrance = 0x0400;
+    }
+    else if (gSave.entrance == 0x006b)
+    {
+        endGame();
     }
 
     if (gMmMag)
@@ -186,8 +241,16 @@ void hookPlay_Init(GameState_Play* play)
 
     if (gSave.entrance == 0x0530)
     {
+        PlayStoreFlags(play);
+        gSave.sceneId = play->sceneId;
         comboGameSwitch();
         return;
+    }
+
+    /* Title screen transition skip */
+    if (gComboCtx.valid)
+    {
+        play->transition.gfx = 11;
     }
 
 #if defined(DEBUG)
@@ -197,4 +260,19 @@ void hookPlay_Init(GameState_Play* play)
         return;
     }
 #endif
+}
+
+void Play_DrawWrapper(GameState_Play* play)
+{
+    Play_Draw(play);
+
+    if (gComboCtx.valid)
+    {
+        OPEN_DISPS(play->gs.gfx);
+        gDPSetCycleType(OVERLAY_DISP++, G_CYC_FILL);
+        gDPSetRenderMode(OVERLAY_DISP++, G_RM_NOOP, G_RM_NOOP2);
+        gDPSetFillColor(OVERLAY_DISP++, 0);
+        gDPFillRectangle(OVERLAY_DISP++, 0, 0, 0xfff, 0xfff);
+        CLOSE_DISPS();
+    }
 }

@@ -1,21 +1,21 @@
 #include <combo.h>
 
-extern void Play_Init(GameState_Play*);
-
 static void debugCheat(GameState_Play* play)
 {
 #if defined(DEBUG)
     /*if (play->gs.input[0].current.buttons & 0x20)*/
     {
-        gSave.itemEquips.sword = 3;
-        gSave.itemEquips.shield = 2;
-        gSave.itemEquips.buttonItems[0][0] = ITEM_MM_SWORD_GILDED;
+        gSave.itemEquips.sword = 1;
+        gSave.itemEquips.shield = 1;
+        gMmExtraFlags2.progressiveShield = 1;
+        gSave.itemEquips.buttonItems[0][0] = ITEM_MM_SWORD_KOKIRI;
         gSave.inventory.items[ITS_MM_OCARINA] = ITEM_MM_OCARINA_OF_TIME;
         gSave.inventory.items[ITS_MM_MASK_DEKU] = ITEM_MM_MASK_DEKU;
         gSave.inventory.items[ITS_MM_MASK_ZORA] = ITEM_MM_MASK_ZORA;
         gSave.inventory.items[ITS_MM_MASK_GORON] = ITEM_MM_MASK_GORON;
         gSave.inventory.items[ITS_MM_BOW] = ITEM_MM_BOW;
         gSave.inventory.items[ITS_MM_LENS] = ITEM_MM_LENS_OF_TRUTH;
+        gSave.inventory.items[ITS_MM_BOMBS] = ITEM_MM_BOMB;
         gSave.inventory.upgrades.quiver = 3;
         gSave.inventory.upgrades.wallet = 2;
         gSave.inventory.upgrades.bombBag = 3;
@@ -31,20 +31,21 @@ static void debugCheat(GameState_Play* play)
         gSaveContext.magicTarget = 0x30;
         gSave.inventory.items[ITS_MM_MASK_GORON] = ITEM_MM_MASK_GORON;
         gSave.inventory.ammo[ITS_MM_BOW] = 50;
+        gSave.inventory.ammo[ITS_MM_BOMBS] = 40;
         gSave.inventory.items[ITS_MM_ARROW_FIRE] = ITEM_MM_ARROW_FIRE;
         gSave.inventory.items[ITS_MM_ARROW_LIGHT] = ITEM_MM_ARROW_LIGHT;
         gSave.inventory.questItems.songLullabyIntro = 1;
 
         gSave.inventory.items[ITS_MM_KEG] = ITEM_MM_POWDER_KEG;
         gSave.inventory.items[ITS_MM_MASK_CAPTAIN] = ITEM_MM_MASK_CAPTAIN;
-        gSave.playerData.healthCapacity = 0x10 * 20;
+        gSave.playerData.healthCapacity = 0x10 * 10;
         gSave.playerData.health = gSave.playerData.healthCapacity;
 
         gSave.inventory.items[ITS_MM_TRADE1] = ITEM_MM_DEED_LAND;
         gSave.inventory.items[ITS_MM_TRADE3] = ITEM_MM_LETTER_TO_KAFEI;
         gMmExtraTrade.trade1 = 0x02;
-        gMmExtraTrade.trade2 = 0xff;
-        gMmExtraTrade.trade3 = 0xff;
+        gMmExtraTrade.trade2 = 0x03;
+        gMmExtraTrade.trade3 = 0x03;
 
         gSave.inventory.items[ITS_MM_TRADE2] = ITEM_MM_ROOM_KEY;
         gSave.inventory.items[ITS_MM_TRADE3] = ITEM_MM_PENDANT_OF_MEMORIES;
@@ -101,6 +102,7 @@ void hookPlay_Init(GameState_Play* play)
         if (!gOotExtraFlags.ganon)
         {
             gSave.playerForm = MM_PLAYER_FORM_HUMAN;
+            gSave.equippedMask = 0;
             gSave.day = 0;
             gSave.time = 0x3fff;
             Sram_SaveNewDay(play);

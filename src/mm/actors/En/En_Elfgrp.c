@@ -35,6 +35,7 @@ void EnElfgrp_GiveReward(Actor* actor, GameState_Play* play)
     if (Actor_HasParent(actor))
     {
         gMmExtraFlags.greatFairies |= mask;
+        actor->attachedA = NULL;
         /* TODO: Probably need an event flag? */
         return;
     }

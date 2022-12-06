@@ -6,7 +6,7 @@
 static u16   sObjectsIds[OBJECT_COUNT];
 static void* sObjectsAddr[OBJECT_COUNT];
 
-const ObjectData kExtraObjectsTable[] = {
+ALIGNED(16) const ObjectData kExtraObjectsTable[] = {
 #define X(a, b) { Y(a), Y(b) }
 #define Y(x)    ((x) | 0x04000000)
 
@@ -22,7 +22,7 @@ const ObjectData kExtraObjectsTable[] = {
 #undef Y
 };
 
-ObjectData kCustomObjectsTable[CUSTOM_OBJECTS_SIZE];
+ALIGNED(16) ObjectData kCustomObjectsTable[CUSTOM_OBJECTS_SIZE];
 
 static const ObjectPatch kObjectPatches[] = {
 #if defined(GAME_OOT)
@@ -204,6 +204,9 @@ u32 comboLoadObject(void* buffer, u16 objectId)
     u32 vromEnd;
     const ObjectData* table;
     int isForeignObject;
+
+    if (!objectId)
+        return 0;
 
     isForeignObject = 0;
     if (objectId & 0x2000)

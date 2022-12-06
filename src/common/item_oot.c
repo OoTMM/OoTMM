@@ -29,32 +29,18 @@ const u8 kOotTradeChild[] = {
 };
 
 #if defined(GAME_OOT)
-/* Used for dungeons, to map boss lairs to their main scene */
-/* Also, colossus is considered to be in spirit */
-static u16 mainScene(u16 sceneId)
+static u16 dungeon(GameState_Play* play, int isBossKey)
 {
-    switch (sceneId)
-    {
-    case SCE_OOT_LAIR_GOHMA:
-        return SCE_OOT_INSIDE_DEKU_TREE;
-    case SCE_OOT_LAIR_KING_DODONGO:
-        return SCE_OOT_DODONGO_CAVERN;
-    case SCE_OOT_LAIR_BARINADE:
-        return SCE_OOT_INSIDE_JABU_JABU;
-    case SCE_OOT_LAIR_PHANTOM_GANON:
-        return SCE_OOT_TEMPLE_FOREST;
-    case SCE_OOT_LAIR_VOLVAGIA:
-        return SCE_OOT_TEMPLE_FIRE;
-    case SCE_OOT_LAIR_MORPHA:
-        return SCE_OOT_TEMPLE_WATER;
-    case SCE_OOT_LAIR_TWINROVA:
-    case SCE_OOT_DESERT_COLOSSUS:
-        return SCE_OOT_TEMPLE_SPIRIT;
-    case SCE_OOT_LAIR_BONGO_BONGO:
-        return SCE_OOT_TEMPLE_SHADOW;
-    }
+    u16 mapIndex;
 
-    return sceneId;
+    /* Desert colossus hands */
+    if (play->sceneId == SCE_OOT_DESERT_COLOSSUS)
+        return SCE_OOT_TEMPLE_SPIRIT;
+
+    mapIndex = gSaveContext.mapIndex;
+    if (mapIndex == SCE_OOT_GANON_TOWER || mapIndex == SCE_OOT_INSIDE_GANON_CASTLE)
+        return isBossKey ? SCE_OOT_GANON_TOWER : SCE_OOT_INSIDE_GANON_CASTLE;
+    return mapIndex;
 }
 #endif
 
@@ -151,6 +137,18 @@ static void addNewBottle(u16 itemId)
     }
 }
 
+static void fillBottle(u16 itemId)
+{
+    for (int i = 0; i < 4; ++i)
+    {
+        if (gOotSave.inventory[ITS_OOT_BOTTLE + i] == ITEM_OOT_EMPTY_BOTTLE)
+        {
+            gOotSave.inventory[ITS_OOT_BOTTLE + i] = itemId;
+            return;
+        }
+    }
+}
+
 static void addBombBag(u8 level)
 {
     gOotSave.inventory[ITS_OOT_BOMBS] = ITEM_OOT_BOMB;
@@ -222,11 +220,11 @@ static void addRupees(u16 count)
 #endif
 }
 
-void comboAddItemOot(u16 itemId)
+void comboAddItemOot(GameState_Play* play, u16 itemId)
 {
-    u16 sceneId;
+    u16 dungeonId;
 
-    (void)sceneId;
+    (void)dungeonId;
     switch (itemId)
     {
     case ITEM_OOT_STICK:
@@ -347,6 +345,18 @@ void comboAddItemOot(u16 itemId)
     case ITEM_OOT_MILK_BOTTLE:
         addNewBottle(itemId);
         break;
+    case ITEM_OOT_POTION_RED:
+    case ITEM_OOT_POTION_BLUE:
+    case ITEM_OOT_POTION_GREEN:
+    case ITEM_OOT_LON_LON_MILK_HALF:
+    case ITEM_OOT_FISH:
+    case ITEM_OOT_BLUE_FIRE:
+    case ITEM_OOT_BUG:
+        fillBottle(itemId);
+        break;
+    case ITEM_OOT_LON_LON_MILK:
+        fillBottle(ITEM_OOT_MILK_BOTTLE);
+        break;
     case ITEM_OOT_KOKIRI_SWORD:
         gOotSave.equipment.swords |= EQ_OOT_SWORD_KOKIRI;
         break;
@@ -355,6 +365,7 @@ void comboAddItemOot(u16 itemId)
         break;
     case ITEM_OOT_GIANT_KNIFE:
         gOotSave.equipment.swords |= EQ_OOT_SWORD_KNIFE;
+        gOotSave.swordHealth = 8;
         break;
     case ITEM_OOT_SWORD_BIGGORON:
         gOotSave.equipment.swords |= EQ_OOT_SWORD_KNIFE;
@@ -639,23 +650,23 @@ void comboAddItemOot(u16 itemId)
         break;
 #if defined(GAME_OOT)
     case ITEM_OOT_SMALL_KEY:
-        sceneId = mainScene(gSaveContext.sceneId);
-        if (gOotSave.dungeonKeys[sceneId] < 0)
-            gOotSave.dungeonKeys[sceneId] = 1;
+        dungeonId = dungeon(play, 0);
+        if (gOotSave.dungeonKeys[dungeonId] < 0)
+            gOotSave.dungeonKeys[dungeonId] = 1;
         else
-            gOotSave.dungeonKeys[sceneId]++;
+            gOotSave.dungeonKeys[dungeonId]++;
         break;
     case ITEM_OOT_MAP:
-        sceneId = mainScene(gSaveContext.sceneId);
-        gOotSave.dungeonItems[sceneId].map = 1;
+        dungeonId = dungeon(play, 0);
+        gOotSave.dungeonItems[dungeonId].map = 1;
         break;
     case ITEM_OOT_COMPASS:
-        sceneId = mainScene(gSaveContext.sceneId);
-        gOotSave.dungeonItems[sceneId].compass = 1;
+        dungeonId = dungeon(play, 0);
+        gOotSave.dungeonItems[dungeonId].compass = 1;
         break;
     case ITEM_OOT_BIG_KEY:
-        sceneId = mainScene(gSaveContext.sceneId);
-        gOotSave.dungeonItems[sceneId].bossKey = 1;
+        dungeonId = dungeon(play, 1);
+        gOotSave.dungeonItems[dungeonId].bossKey = 1;
         break;
 #endif
     }
