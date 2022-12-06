@@ -1,6 +1,6 @@
 "Pirate Fortress Entrance":
   exits:
-    "Pirate Fortress Interior Water Tunnel": "has(MASK_ZORA) && has(MASK_GORON)"
+    "Pirate Fortress Sewers": "has(MASK_ZORA) && has(MASK_GORON)"
     "Pirate Fortress Exterior": "has(HOOKSHOT)"
   events:
     PHOTO_GERUDO: "has(PICTOGRAPH_BOX)"
@@ -8,14 +8,14 @@
     "Pirate Fortress Entrance Chest 1": "has(MASK_ZORA)"
     "Pirate Fortress Entrance Chest 2": "has(MASK_ZORA)"
     "Pirate Fortress Entrance Chest 3": "has(MASK_ZORA)"
-"Pirate Fortress Interior Water Tunnel":
+"Pirate Fortress Sewers":
   exits:
     "Pirate Fortress Exterior": "true"
   locations:
-    "Pirate Fortress Interior Water Chest 1": "true"
-    "Pirate Fortress Interior Water Chest 2": "true"
-    "Pirate Fortress Interior Water Chest 3": "true"
-    "Pirate Fortress Interior HP": "true"
+    "Pirate Fortress Sewers Chest 1": "true"
+    "Pirate Fortress Sewers Chest 2": "true"
+    "Pirate Fortress Sewers Chest 3": "true"
+    "Pirate Fortress Sewers HP": "true"
 "Pirate Fortress Exterior":
   exits:
     "Pirate Fortress Entrance": "true"

@@ -203,10 +203,10 @@ Snowhead Temple Boss,                     npc,            LAIR_GOHT,       REMAI
 Pirate Fortress Entrance Chest 1,                 chest,        PIRATE_FORTRESS_ENTRANCE, 0x00, RUPEE_RED
 Pirate Fortress Entrance Chest 2,                 chest,        PIRATE_FORTRESS_ENTRANCE, 0x01, RUPEE_RED
 Pirate Fortress Entrance Chest 3,                 chest,        PIRATE_FORTRESS_ENTRANCE, 0x02, RUPEE_RED
-Pirate Fortress Interior Water Chest 1,           chest,        PIRATE_FORTRESS_INTERIOR, 0x01, RUPEE_RED
-Pirate Fortress Interior Water Chest 2,           chest,        PIRATE_FORTRESS_INTERIOR, 0x04, RUPEE_RED
-Pirate Fortress Interior Water Chest 3,           chest,        PIRATE_FORTRESS_INTERIOR, 0x06, RUPEE_BLUE
-Pirate Fortress Interior HP,                      collectible,  PIRATE_FORTRESS_INTERIOR, 0x0c, HEART_PIECE
+Pirate Fortress Sewers Chest 1,           chest,        PIRATE_FORTRESS_INTERIOR, 0x01, RUPEE_RED
+Pirate Fortress Sewers Chest 2,           chest,        PIRATE_FORTRESS_INTERIOR, 0x04, RUPEE_RED
+Pirate Fortress Sewers Chest 3,           chest,        PIRATE_FORTRESS_INTERIOR, 0x06, RUPEE_BLUE
+Pirate Fortress Sewers HP,                      collectible,  PIRATE_FORTRESS_INTERIOR, 0x0c, HEART_PIECE
 Pirate Fortress Interior Hookshot,                chest,        PIRATE_FORTRESS_INTERIOR, 0x02, HOOKSHOT
 Pirate Fortress Interior Aquarium,                chest,        PIRATE_FORTRESS_INTERIOR, 0x00, RUPEE_RED
 Pirate Fortress Interior Silver Rupee Chest,      chest,        PIRATE_FORTRESS_INTERIOR, 0x03, RUPEE_SILVER
