@@ -13,7 +13,7 @@ export type LogicResult = {
 };
 
 export const logic = (opts: Options): LogicResult => {
-  const world = createWorld();
+  const world = createWorld(opts.settings);
   const random = new Random();
   random.seed(opts.seed);
 
@@ -22,7 +22,7 @@ export const logic = (opts: Options): LogicResult => {
   for (let i = 0; i < 100; ++i) {
     try {
       error = null;
-      placement = solve(world, random);
+      placement = solve(opts, world, random);
       break;
     } catch (e) {
       if (!(e instanceof LogicSeedError)) {

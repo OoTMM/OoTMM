@@ -35,6 +35,12 @@ static void ItemGiver_Update(Actor* this, GameState_Play* play)
         else if (ItemGiver_Common(this, play, GI_MM_MASK_TROUPE_LEADER))
             gMmExtraFlags2.maskTroupeLeader = 1;
         break;
+    case NPC_MM_SONG_HEALING:
+        if (gMmExtraFlags2.songHealing)
+            ActorDestroy(this);
+        else if (ItemGiver_Common(this, play, GI_MM_SONG_HEALING))
+            gMmExtraFlags2.songHealing = 1;
+        break;
     default:
         ActorDestroy(this);
         break;
@@ -63,4 +69,13 @@ void comboSpawnItemGiver(GameState_Play* play, u16 npcId)
         0, 0, 0,
         npcId
     );
+}
+
+void comboSpawnItemGivers(GameState_Play* play)
+{
+    /* Song of Healing */
+    if (!gMmExtraFlags2.songHealing)
+    {
+        comboSpawnItemGiver(play, NPC_MM_SONG_HEALING);
+    }
 }

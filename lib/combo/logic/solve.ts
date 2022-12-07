@@ -5,6 +5,8 @@ import { pathfind, Reachable } from './pathfind';
 import { Items } from './state';
 import { World } from './world';
 import { LogicSeedError } from './error';
+import { CONSTRAINTS, itemConstraint } from './constraints';
+import { Options } from '../options';
 
 const ITEMS_DUNGEON = /^(OOT|MM)_(MAP|COMPASS|SMALL_KEY|BOSS_KEY|STRAY_FAIRY)_[A-Z_]+$/;
 export const ORDERED_DUNGEON_REWARDS = [
@@ -169,7 +171,6 @@ const EXTRA_ITEMS = [
   'MM_MASK_DEKU',
   'MM_SHIELD',
   'MM_SWORD',
-  'MM_SONG_HEALING',
 ];
 
 const randomInt = (random: Random, max: number) => {
@@ -305,6 +306,7 @@ class Solver {
   private reachedLocations = new Set<string>();
 
   constructor(
+    private opts: Options,
     private world: World,
     private random: Random,
   ) {
@@ -359,6 +361,10 @@ class Solver {
     addItem(this.pools.required, item);
   }
 
+  private constraint(item: string) {
+    return itemConstraint(item, this.opts.settings);
+  }
+
   private fixTokensAndFairies() {
     for (const location in this.world.checks) {
       const check = this.world.checks[location];
@@ -400,7 +406,7 @@ class Solver {
     for (const game of GAMES) {
       for (const baseItem of ['SMALL_KEY', 'BOSS_KEY', 'STRAY_FAIRY', 'MAP', 'COMPASS']) {
         const item = gameId(game, baseItem + '_' + dungeon.toUpperCase(), '_');
-        const locations = this.world.dungeons[dungeon];
+        const locations = new Set(Array.from(this.world.dungeons[dungeon]).filter(loc => this.world.checks[loc].constraint === 'none'));
         while (this.pools.dungeon[item]) {
           reachable = this.randomRestricted(this.pools.dungeon, assumed, item, locations, reachable);
         }
@@ -427,6 +433,9 @@ class Solver {
     /* Select a random item from the required pool */
     const requiredItem = sample(this.random, itemsArray(pool));
 
+    /* Get the constraint associated with the item */
+    const constraint = this.constraint(requiredItem);
+
     /* Remove the selected item from the required pool */
     removeItem(pool, requiredItem);
 
@@ -452,10 +461,12 @@ class Solver {
         break;
       }
     }
-    const assumedReachable = pathfind(this.world, assumedAccessibleItems, this.reachable).locations;
+    const assumedReachable = reachable.locations;
 
     /* Get all assumed reachable locations that have not been placed */
-    const unplacedLocs = Array.from(assumedReachable).filter(location => !this.placement[location]);
+    const unplacedLocs = Array.from(assumedReachable)
+      .filter(location => this.world.checks[location].constraint === constraint)
+      .filter(location => !this.placement[location]);
 
     /* If there is nowhere to place an item, raise an error */
     if (unplacedLocs.length === 0) {
@@ -472,16 +483,22 @@ class Solver {
   private fill() {
     const pool = poolsArray(this.pools);
     const shuffledPool = shuffle(this.random, pool);
-    let i = 0;
+    const locations = Object.keys(this.world.checks).filter(loc => !this.placement[loc]);
+    const locationsByConstraint = Object.fromEntries(CONSTRAINTS.map(c => [c, new Array<string>()]));
 
-    for (const location in this.world.checks) {
-      if (this.placement[location]) {
-        continue;
-      }
-      const item = shuffledPool[i++];
-      this.place(location, item);
+    /* Filter the locations */
+    for (const loc of locations) {
+      const constraint = this.world.checks[loc].constraint;
+      locationsByConstraint[constraint].push(loc);
     }
-    if (i !== shuffledPool.length) {
+
+    for (const item of shuffledPool) {
+      const constraint = this.constraint(item);
+      const loc = locationsByConstraint[constraint].pop()!;
+      this.place(loc, item);
+    }
+
+    if (!Object.values(locationsByConstraint).every(x => x.length === 0)) {
       throw new Error('Item Count Error');
     }
   }
@@ -507,7 +524,7 @@ class Solver {
   }
 }
 
-export const solve = (world: World, random: Random) => {
-  const solver = new Solver(world, random);
+export const solve = (opts: Options, world: World, random: Random) => {
+  const solver = new Solver(opts, world, random);
   return solver.solve();
 }

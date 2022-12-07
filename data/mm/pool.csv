@@ -1,4 +1,5 @@
 location,                                       type,           scene,                      id,                     item
+Initial Song of Healing,                        npc,            CLOCK_TOWN_SOUTH,           SONG_HEALING,           SONG_HEALING
 Clock Town South Chest Lower,                   chest,          CLOCK_TOWN_SOUTH,           0x00,                   RUPEE_RED
 Clock Town South Chest Upper,                   chest,          CLOCK_TOWN_SOUTH,           0x01,                   RUPEE_PURPLE
 Clock Town Platform HP,                         collectible,    CLOCK_TOWN_SOUTH,           0x0a,                   HEART_PIECE

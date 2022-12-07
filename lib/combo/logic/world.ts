@@ -3,6 +3,8 @@ import { gameId } from '../util';
 import { Expr } from './expr';
 import { ExprParser } from './expr-parser';
 import { DATA_POOL, DATA_MACROS, DATA_WORLD } from '../data';
+import { constraint, Constraint, itemConstraint } from './constraints';
+import { Settings } from '../settings';
 
 type ExprMap = {
   [k: string]: Expr;
@@ -28,6 +30,7 @@ export type WorldCheck = {
   game: Game;
   scene: string;
   item: string;
+  constraint: Constraint;
 } & (WorldCheckNumeric | WorldCheckSymbolic);
 
 export type World = {
@@ -75,7 +78,7 @@ const loadWorldRegions = (world: World, game: Game, exprParser: ExprParser) => {
   }
 };
 
-const loadWorldPool = (world: World, game: Game) => {
+const loadWorldPool = (world: World, game: Game, settings: Settings) => {
   for (const record of DATA_POOL[game]) {
     const location = gameId(game, String(record.location), ' ');
     const type = String(record.type);
@@ -87,8 +90,9 @@ const loadWorldPool = (world: World, game: Game) => {
       id = Number(record.id);
     }
     const item = gameId(game, String(record.item), '_');
+    const constraint = itemConstraint(item, settings);
 
-    const check = { game, type, scene, id, item } as WorldCheck;
+    const check = { game, type, scene, id, item, constraint } as WorldCheck;
     world.checks[location] = check;
     world.pool.push(item);
   }
@@ -111,18 +115,18 @@ const loadMacros = (exprParser: ExprParser, game: Game) => {
   }
 };
 
-const loadWorldGame = (world: World, game: Game) => {
+const loadWorldGame = (world: World, game: Game, settings: Settings) => {
   /* Create the expr parser */
   const exprParser = new ExprParser(game);
   loadMacros(exprParser, game);
   loadWorldRegions(world, game, exprParser);
-  loadWorldPool(world, game);
+  loadWorldPool(world, game, settings);
 }
 
-export const createWorld = () => {
+export const createWorld = (settings: Settings) => {
   const world: World = { regions: {}, checks: {}, pool: [], dungeons: {} };
   for (const g of GAMES) {
-    loadWorldGame(world, g);
+    loadWorldGame(world, g, settings);
   }
   return world;
 };
