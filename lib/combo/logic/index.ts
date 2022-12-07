@@ -12,21 +12,10 @@ export type LogicResult = {
   log: string;
 };
 
-const getSeed = (opts: Options): string => {
-  if (opts.seed) {
-    return opts.seed;
-  }
-  if (opts.debug) {
-    return 'DEBUG';
-  }
-  return randString();
-}
-
 export const logic = (opts: Options): LogicResult => {
-  const seed = getSeed(opts);
   const world = createWorld();
   const random = new Random();
-  random.seed(seed);
+  random.seed(opts.seed);
 
   let placement: ItemPlacement = {};
   let error: Error | null = null;
@@ -45,7 +34,7 @@ export const logic = (opts: Options): LogicResult => {
   if (error) {
     throw error;
   }
-  const log = spoiler(world, placement, seed);
+  const log = spoiler(world, placement, opts.seed);
 
   const items: WorldCheck[] = [];
   for (const loc in placement) {
