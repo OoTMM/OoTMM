@@ -6,16 +6,18 @@
   display: block;
   padding: 1em;
   margin-bottom: -1px;
+  color: #222;
+  text-decoration: none;
 }
 
 .tab-bar-header-tab.active {
   background: white;
-  border: 1px solid black;
+  border: 1px solid #999;
   border-bottom: none;
 }
 
 .tab-bar-body {
   background: white;
   padding: 2em 1em;
-  border: 1px solid black;
+  border: 1px solid #999;
 }

@@ -14,7 +14,7 @@ export const Generator = ({ onGenerate, error }) => {
 
   return (
     <TabBar>
-      <Tab name="ROM Config" component={<RomConfig setRom={setRom} error={error} onGenerate={() => onGenerate({ roms, settings })}/>}/>
+      <Tab name="ROM Config" component={<RomConfig roms={roms} setRom={setRom} error={error} onGenerate={() => onGenerate({ roms, settings })}/>}/>
       {SETTINGS_CATEGORIES.map(category =>
         <Tab key={category.key} name={category.name} component={<Settings category={category.key} settings={settings} setSetting={setSetting}/>}/>
       )}

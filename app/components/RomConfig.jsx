@@ -1,24 +1,21 @@
 import React from 'react';
 
-export const RomConfig = ({ setRom, error, onGenerate }) => {
+import { FileSelect } from './FileSelect';
+
+export const RomConfig = ({ roms, setRom, error, onGenerate }) => {
   return (
     <div>
       {error && <div className="generator-error">{error}</div>}
       <form target='_self' onSubmit={(e) => {e.preventDefault(); onGenerate();}}>
-        <label>
-          Ocarina of Time (1.0, U or J)<br/>
-          <input type="file" onChange={e => setRom('oot', e.target.files[0])}/>
-        </label>
-        <br/>
-        <br/>
-        <label>
-          Majora's Mask (U only)<br/>
-          <input type="file" onChange={e => setRom('mm', e.target.files[0])}/>
-        </label>
-        <br/>
+        <div className="flex-h">
+          <FileSelect game="oot" label="Ocarina of Time (1.0, U or J)" file={roms.oot} onChange={f => setRom('oot', f)}/>
+          <FileSelect game="mm" label="Majora's Mask (U only)" file={roms.mm} onChange={f => setRom('mm', f)}/>
+        </div>
         <br/>
         <button type="submit">Generate</button>
       </form>
     </div>
   );
 };
+
+/* <input type="file" onChange={e => setRom('mm', e.target.files[0])}/> */
