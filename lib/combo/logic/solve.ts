@@ -255,38 +255,6 @@ const maxRequired = (pools: ItemPools, item: string, count: number) => {
   pools.nice[item] = extra;
 };
 
-const makeItemPools = (world: World) => {
-  const pools: ItemPools = { dungeon: {}, required: {}, nice: {}, junk: {} };
-
-  for (const item of world.pool) {
-    if (ITEMS_DUNGEON.test(item) || ITEMS_DUNGEON_REWARDS.has(item)) {
-      addItem(pools.dungeon, item);
-    } else if (ITEMS_REQUIRED.has(item)) {
-      addItem(pools.required, item);
-    } else if (ITEMS_JUNK.has(item)) {
-      addItem(pools.junk, item);
-    } else {
-      addItem(pools.nice, item);
-    }
-  }
-
-  maxRequired(pools, 'OOT_SWORD', 2);
-  maxRequired(pools, 'OOT_WALLET', 1);
-  maxRequired(pools, 'OOT_BOMB_BAG', 1);
-  maxRequired(pools, 'OOT_BOW', 1);
-  maxRequired(pools, 'OOT_SLINGSHOT', 1);
-  maxRequired(pools, 'OOT_MAGIC_UPGRADE', 1);
-  maxRequired(pools, 'OOT_OCARINA', 1);
-  maxRequired(pools, 'OOT_BOMBCHUS_10', 1);
-
-  maxRequired(pools, 'MM_SWORD', 1);
-  maxRequired(pools, 'MM_BOMB_BAG', 1);
-  maxRequired(pools, 'MM_BOW', 1);
-  maxRequired(pools, 'MM_MAGIC_UPGRADE', 1);
-
-  return pools;
-};
-
 const combinedItems = (items: Items, other: Items) => {
   const combined: Items = {};
   for (const item in items) {
@@ -304,13 +272,16 @@ class Solver {
   private reachable?: Reachable;
   private pools: ItemPools;
   private reachedLocations = new Set<string>();
+  private fixedLocations = new Set<string>();
+  private restrictedAssumed: Items = {};
 
   constructor(
     private opts: Options,
     private world: World,
     private random: Random,
   ) {
-    this.pools = makeItemPools(world);
+    this.fixLocations();
+    this.pools = this.makeItemPools();
   }
 
   solve() {
@@ -354,6 +325,53 @@ class Solver {
 
     return this.placement;
   }
+
+  private fixLocations() {
+    if (!this.opts.settings.shuffleGerudoCard) {
+      this.fixedLocations.add('OOT Gerudo Member Card');
+    }
+  }
+
+  private makeItemPools() {
+    const pools: ItemPools = { dungeon: {}, required: {}, nice: {}, junk: {} };
+
+    for (const location in this.world.checks) {
+      const check = this.world.checks[location];
+      const { item } = check;
+
+      if (this.fixedLocations.has(location)) {
+        this.place(location, item);
+        addItem(this.restrictedAssumed, item);
+        continue;
+      }
+
+      if (ITEMS_DUNGEON.test(item) || ITEMS_DUNGEON_REWARDS.has(item)) {
+        addItem(pools.dungeon, item);
+      } else if (ITEMS_REQUIRED.has(item)) {
+        addItem(pools.required, item);
+      } else if (ITEMS_JUNK.has(item)) {
+        addItem(pools.junk, item);
+      } else {
+        addItem(pools.nice, item);
+      }
+    }
+
+    maxRequired(pools, 'OOT_SWORD', 2);
+    maxRequired(pools, 'OOT_WALLET', 1);
+    maxRequired(pools, 'OOT_BOMB_BAG', 1);
+    maxRequired(pools, 'OOT_BOW', 1);
+    maxRequired(pools, 'OOT_SLINGSHOT', 1);
+    maxRequired(pools, 'OOT_MAGIC_UPGRADE', 1);
+    maxRequired(pools, 'OOT_OCARINA', 1);
+    maxRequired(pools, 'OOT_BOMBCHUS_10', 1);
+
+    maxRequired(pools, 'MM_SWORD', 1);
+    maxRequired(pools, 'MM_BOMB_BAG', 1);
+    maxRequired(pools, 'MM_BOW', 1);
+    maxRequired(pools, 'MM_MAGIC_UPGRADE', 1);
+
+    return pools;
+  };
 
   private insertItem(item: string) {
     const junkItem = sample(this.random, itemsArray(this.pools.junk));
@@ -406,7 +424,7 @@ class Solver {
     for (const game of GAMES) {
       for (const baseItem of ['SMALL_KEY', 'BOSS_KEY', 'STRAY_FAIRY', 'MAP', 'COMPASS']) {
         const item = gameId(game, baseItem + '_' + dungeon.toUpperCase(), '_');
-        const locations = new Set(Array.from(this.world.dungeons[dungeon]).filter(loc => this.world.checks[loc].constraint === 'none'));
+        const locations = new Set(Array.from(this.world.dungeons[dungeon]).filter(loc => !this.placement[loc] && this.world.checks[loc].constraint === 'none'));
         while (this.pools.dungeon[item]) {
           reachable = this.randomRestricted(this.pools.dungeon, assumed, item, locations, reachable);
         }
@@ -416,7 +434,7 @@ class Solver {
 
   private randomRestricted(pool: Items, assume: Items, item: string, locations: Set<string>, reachable?: Reachable) {
     const rewardsPool: Items = Array.from(ITEMS_DUNGEON_REWARDS).reduce((acc, x) => ({ ...acc, [x]: 1 }), {});
-    const assumedItems = combinedItems(combinedItems(this.pools.required, assume), rewardsPool);
+    const assumedItems = combinedItems(combinedItems(combinedItems(this.pools.required, assume), rewardsPool), this.restrictedAssumed);
     const assumedReachable = pathfind(this.world, assumedItems, reachable);
 
     let validLocations = Array.from(locations).filter(x => assumedReachable.locations.has(x)).filter(x => !this.placement[x]);
