@@ -1,18 +1,16 @@
 import React, { useState } from 'react';
-import { RomConfig } from './RomConfig';
+
+import { Generator } from './Generator';
 import { Progress } from './Progress';
 import { Result } from './Result';
 
 export const App = () => {
-  const [roms, setRoms] = useState({ oot: null, mm: null });
   const [error, setError] = useState("");
   const [isGenerating, setIsGenerating] = useState(false);
   const [message, setMessage] = useState("");
   const [result, setResult] = useState(null);
 
-  const setRom = (game, data) => setRoms({ ...roms, [game]: data });
-
-  const generateRom = async () => {
+  const generate = async ({ roms }) => {
     const [oot, mm] = await Promise.all([
       roms.oot.arrayBuffer(),
       roms.mm.arrayBuffer(),
@@ -21,8 +19,8 @@ export const App = () => {
     const mmBuffer = Buffer.from(mm);
     const worker = new Worker(new URL('../worker.js', import.meta.url));
     worker.onmessage = ({ data }) => {
-      console.log(data);
       if (data.type === 'log') {
+        console.log(data.message);
         setMessage(data.message);
       } else if (data.type === 'error') {
         setError(data.message);
@@ -50,7 +48,7 @@ export const App = () => {
       <br/>
       {result && <Result rom={result.rom} log={result.log}/>}
       {!result && isGenerating && <Progress message={message}/>}
-      {!result && !isGenerating && <RomConfig setRom={setRom} error={error} onGenerate={generateRom}/>}
+      {!result && !isGenerating && <Generator error={error} onGenerate={generate}/>}
     </div>
   );
 };
