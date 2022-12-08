@@ -10,7 +10,7 @@ int EnSth_HasGivenItemMaskOfTruth(Actor* this)
     return 0;
 }
 
-PATCH_CALL(0x80b67478, EnSth_HasGivenItemMaskOfTruth);
+PATCH_CALL(0x80b67b70, EnSth_HasGivenItemMaskOfTruth);
 
 int EnSth_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
 {

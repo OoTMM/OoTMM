@@ -1,11 +1,11 @@
 import fs from 'fs/promises';
 import { generate } from "./combo";
-import { Options } from "./combo/options";
+import { OptionsInput } from "./combo/options";
 
-const makeOptions = (args: string[]): Options => {
-  const opts: Options = {
-    debug: false
-  };
+const makeOptions = (args: string[]): OptionsInput => {
+  const opts: OptionsInput = {};
+  opts.settings = {};
+
   for (let i = 0; i < args.length; i++) {
     const opt = args[i];
     switch (opt) {
@@ -14,6 +14,9 @@ const makeOptions = (args: string[]): Options => {
       break;
     case "--seed":
       opts.seed = args[++i];
+      break;
+    case "--songsanity":
+      opts.settings.songs = "anywhere";
       break;
     default:
       throw new Error(`Unknown option: ${opt}`);
