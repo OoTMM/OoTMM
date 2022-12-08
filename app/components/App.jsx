@@ -10,7 +10,7 @@ export const App = () => {
   const [message, setMessage] = useState("");
   const [result, setResult] = useState(null);
 
-  const generate = async ({ roms }) => {
+  const generate = async ({ roms, settings }) => {
     const [oot, mm] = await Promise.all([
       roms.oot.arrayBuffer(),
       roms.mm.arrayBuffer(),
@@ -36,7 +36,7 @@ export const App = () => {
     setError("");
     setIsGenerating(true);
     setMessage("Generating");
-    worker.postMessage({ type: 'start', params: { oot: ootBuffer, mm: mmBuffer }});
+    worker.postMessage({ type: 'start', params: { oot: ootBuffer, mm: mmBuffer, opts: { settings } }});
   };
 
   return (
