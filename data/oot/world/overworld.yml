@@ -303,8 +303,8 @@
     "Lost Woods": "can_dive_small"
   locations:
     "Zora River Bean Seller": "is_child"
-    "Zora River HP Pillar": "is_child || (is_adult && has(BOOTS_HOVER))"
-    "Zora River HP Platform": "is_child || (is_adult && has(BOOTS_HOVER))"
+    "Zora River HP Pillar": "is_child || has_hover_boots"
+    "Zora River HP Platform": "is_child || has_hover_boots"
     "Zora River Frogs Storms": "is_child && can_play(SONG_STORMS)"
     "Zora River Frogs Game": "is_child && can_play(SONG_ZELDA) && can_play(SONG_SARIA) && can_play(SONG_EPONA) && can_play(SONG_SUN) && can_play(SONG_TIME) && can_play(SONG_STORMS)"
     "Zora River Grotto": "true"
