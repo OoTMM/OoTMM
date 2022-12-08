@@ -194,7 +194,7 @@
     "Hyrule Field": "true"
     "Death Mountain": "has(ZELDA_LETTER)"
     "Graveyard": "true"
-    "Bottom of the Well": "is_child && can_play(SONG_STORMS) && has(SWORD)"
+    "Bottom of the Well": "is_child && can_play(SONG_STORMS)"
     "Skulltula House": "true"
     "Shooting Gallery": "is_adult"
     "Kakariko Rooftop": "can_hookshot"
