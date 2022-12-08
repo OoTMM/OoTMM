@@ -7,3 +7,9 @@
   margin-top: 5em;
   border-radius: 0.5em;
 }
+
+.flex-h {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -1,0 +1,13 @@
+label {
+  display: flex;
+  flex-direction: column;
+  font-weight: bold;
+}
+
+label > * {
+  font-weight: initial;
+}
+
+input[type=file] {
+  display: none;
+}
