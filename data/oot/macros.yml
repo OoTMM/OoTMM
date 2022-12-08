@@ -37,3 +37,5 @@
 "has_tunic_zora": "is_adult && has(TUNIC_ZORA)"
 "has_iron_boots": "is_adult && has(BOOTS_IRON)"
 "has_hover_boots": "is_adult && has(BOOTS_HOVER)"
+"can_dive_small": "has(SCALE) || has_iron_boots"
+"can_div_big": "has(SCALE, 2) || has_iron_boots"

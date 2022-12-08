@@ -36,7 +36,7 @@
     "Market": "is_child"
     "Market Destroyed": "is_adult"
     "Kakariko": "true"
-    "Zora River": "has_explosives"
+    "Zora River Front": "true"
     "Lake Hylia": "true"
     "Gerudo Valley": "true"
     "Lon Lon Ranch": "true"
@@ -49,7 +49,7 @@
     "Hyrule Field Grotto Southeast": "has_explosives_or_hammer"
     "Hyrule Field Grotto Open": "true"
     "Hyrule Field Grotto Market": "has_explosives_or_hammer"
-    "Hyrule Field Grotto Tektite HP": "hidden_grotto_bomb && (has(SCALE, 2) || has_iron_boots)"
+    "Hyrule Field Grotto Tektite HP": "hidden_grotto_bomb && can_dive_big"
     "Hyrule Field Grotto Near Kakariko GS": "hidden_grotto_bomb && can_collect_distance"
     "Hyrule Field Grotto Near Gerudo GS": "((is_child && hidden_grotto_bomb) || (is_adult && can_hammer)) && can_collect_distance && has_fire"
 "Market":
@@ -152,6 +152,7 @@
     "Kokiri Forest": "true"
     "Hyrule Field": "true"
     "Lost Woods Deep": "is_child || can_play(SONG_SARIA)"
+    "Zora River": "can_dive_small"
   locations:
     "Lost Woods Bridge": "true"
     "Lost Woods Target": "can_use_slingshot"
@@ -289,21 +290,27 @@
     "Goron City Medigoron Giant Knife": "is_adult && has(WALLET)"
     "Goron City GS Platform": "is_adult && has_ranged_weapon"
     "Goron City GS Maze": "is_child && has_explosives"
-"Zora River":
+"Zora River Front":
   exits:
     "Hyrule Field": "true"
+    "Zora River": "is_adult || (is_child && has_explosives)"
+  locations:
+    "Zora River GS Tree": "is_child"
+"Zora River":
+  exits:
+    "Zora River Front": "true"
     "Zora Domain": "can_play(SONG_ZELDA)"
+    "Lost Woods": "can_dive_small"
   locations:
     "Zora River Bean Seller": "is_child"
-    "Zora River HP Pillar": "true"
-    "Zora River HP Platform": "true"
+    "Zora River HP Pillar": "is_child || (is_adult && has(BOOTS_HOVER))"
+    "Zora River HP Platform": "is_child || (is_adult && has(BOOTS_HOVER))"
     "Zora River Frogs Storms": "is_child && can_play(SONG_STORMS)"
     "Zora River Frogs Game": "is_child && can_play(SONG_ZELDA) && can_play(SONG_SARIA) && can_play(SONG_EPONA) && can_play(SONG_SUN) && can_play(SONG_TIME) && can_play(SONG_STORMS)"
     "Zora River Grotto": "true"
-    "Zora River GS Tree": "is_child"
-    "Zora River GS Ladder": "is_child && gs_night && has_ranged_weapon"
+    "Zora River GS Ladder": "is_child && gs_night"
     "Zora River GS Near Grotto": "is_adult && gs_night && can_hookshot"
-    "Zora River GS Near Bridge": "is_adult && gs_night && can_longshot"
+    "Zora River GS Near Bridge": "is_adult && gs_night && can_hookshot"
 "Zora Domain":
   exits:
     "Zora River": "true"
