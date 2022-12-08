@@ -11,10 +11,9 @@ import externals from 'rollup-plugin-node-externals';
 import terser from '@rollup/plugin-terser';
 
 import { build as comboBuild } from './combo/build';
-import { decompressGames as comboDecompress } from './combo/decompress';
 import { codegen as comboCodegen } from './combo/codegen';
-import { custom as comboCustom } from './combo/custom';
 import { Monitor } from './combo/monitor';
+import { DEFAULT_SETTINGS } from './combo';
 
 async function build() {
   const inputOptions = {
@@ -52,7 +51,7 @@ async function build() {
 
 async function copyData() {
   await comboCodegen(dummyMonitor);
-  const b = await comboBuild({});
+  const b = await comboBuild({ debug: false, seed: 'ROLLUP', settings: DEFAULT_SETTINGS });
   await fs.mkdir('dist/data', { recursive: true });
   await Promise.all(
     Object.entries(b).map(async ([game, { payload, patches }]) => {

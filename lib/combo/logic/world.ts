@@ -36,7 +36,6 @@ export type WorldCheck = {
 export type World = {
   regions: {[k: string]: WorldRegion};
   checks: {[k: string]: WorldCheck};
-  pool: string[];
   dungeons: {[k: string]: Set<string>};
 };
 
@@ -94,7 +93,6 @@ const loadWorldPool = (world: World, game: Game, settings: Settings) => {
 
     const check = { game, type, scene, id, item, constraint } as WorldCheck;
     world.checks[location] = check;
-    world.pool.push(item);
   }
 };
 
@@ -124,7 +122,7 @@ const loadWorldGame = (world: World, game: Game, settings: Settings) => {
 }
 
 export const createWorld = (settings: Settings) => {
-  const world: World = { regions: {}, checks: {}, pool: [], dungeons: {} };
+  const world: World = { regions: {}, checks: {}, dungeons: {} };
   for (const g of GAMES) {
     loadWorldGame(world, g, settings);
   }

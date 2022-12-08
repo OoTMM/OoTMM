@@ -1,8 +1,10 @@
 import fs from 'fs/promises';
+import YAML from 'yaml';
+
 import { generate } from "./combo";
 import { OptionsInput } from "./combo/options";
 
-const makeOptions = (args: string[]): OptionsInput => {
+const makeOptions = async (args: string[]): Promise<OptionsInput> => {
   const opts: OptionsInput = {};
   opts.settings = {};
 
@@ -15,9 +17,13 @@ const makeOptions = (args: string[]): OptionsInput => {
     case "--seed":
       opts.seed = args[++i];
       break;
-    case "--songsanity":
-      opts.settings.songs = "anywhere";
-      break;
+    case "--config":
+      {
+        const configFile = await fs.readFile(args[++i]);
+        const settings = YAML.parse(configFile.toString());
+        opts.settings = settings;
+        break;
+      }
     default:
       throw new Error(`Unknown option: ${opt}`);
     }
@@ -26,7 +32,7 @@ const makeOptions = (args: string[]): OptionsInput => {
 };
 
 const main = async () => {
-  const opts = makeOptions(process.argv.slice(2));
+  const opts = await makeOptions(process.argv.slice(2));
   const [oot, mm] = await Promise.all([
     fs.readFile('./roms/oot.z64'),
     fs.readFile('./roms/mm.z64'),

@@ -8,6 +8,12 @@ export const SETTINGS = [{
     { value: 'anywhere', name: 'Anywhere' },
   ],
   default: 'songLocations'
+}, {
+  key: 'shuffleGerudoCard',
+  name: 'Gerudo Card Shuffle',
+  category: 'main',
+  type: 'boolean',
+  default: true
 }] as const;
 
 export const SETTINGS_CATEGORIES = [{
@@ -20,27 +26,38 @@ type SettingDataEnumValue = {
   readonly name: string;
 };
 
-type SettingDataEnum = {
+type SettingDataCommon = {
   readonly key: string;
   readonly name: string;
+  readonly category: string;
+};
+
+type SettingDataEnum = SettingDataCommon & {
   readonly type: 'enum';
   readonly values: ReadonlyArray<SettingDataEnumValue>;
   readonly default: string;
 };
 
-type InputToShape<T> = T extends SettingDataEnum ? { [K in T['key']]: T['values'][number]['value'] } : never;
+type SettingDataBoolean = SettingDataCommon & {
+  readonly type: 'boolean';
+  readonly default: boolean;
+};
+
+type InputToShape<T> = T extends SettingDataEnum ? { [K in T['key']]: T['values'][number]['value'] }
+  : T extends SettingDataBoolean ? { [K in T['key']]: boolean }
+  : never;
 
 type SettingDataEntry = typeof SETTINGS[number];
 
 type SettingShapes = InputToShape<SettingDataEntry>;
 
-export type Settings = SettingShapes;
+type UnionToIntersection<U> =
+  (U extends any ? (k: U)=>void : never) extends ((k: infer I)=>void) ? I : never
+
+export type Settings = UnionToIntersection<SettingShapes>;
 
 export const DEFAULT_SETTINGS: Settings = SETTINGS.map(s => {
-  if (s.type === 'enum') {
-    return {[s.key]: s.default};
-  }
-  return {};
+  return {[s.key]: s.default};
 }).reduce((a, b) => ({...a, ...b}), {}) as Settings;
 
 export const settings = (s: Partial<Settings>): Settings => ({...DEFAULT_SETTINGS, ...s});
