@@ -3,7 +3,7 @@ import { gameId } from '../util';
 import { Expr } from './expr';
 import { ExprParser } from './expr-parser';
 import { DATA_POOL, DATA_MACROS, DATA_WORLD } from '../data';
-import { constraint, Constraint, itemConstraint } from './constraints';
+import { Constraint, itemConstraint } from './constraints';
 import { Settings } from '../settings';
 
 type ExprMap = {

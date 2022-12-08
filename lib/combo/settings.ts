@@ -1,4 +1,4 @@
-const SETTINGS = [{
+export const SETTINGS = [{
   name: 'Song Shuffle',
   key: 'songs',
   type: 'enum',
