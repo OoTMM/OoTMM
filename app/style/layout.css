@@ -1,5 +1,5 @@
 .main {
-  width: 800px;
+  width: 1024px;
   border: 1px solid #ccc;
   padding: 1em;
   background: #f4f4f4;
@@ -12,4 +12,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.settings {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.settings > label {
+  max-width: 25%;
+  flex: 1;
+  margin: 1em;
 }

@@ -8,6 +8,7 @@
   margin-bottom: -1px;
   color: #222;
   text-decoration: none;
+  border: 1px solid transparent;
 }
 
 .tab-bar-header-tab.active {

@@ -8,6 +8,11 @@ label > * {
   font-weight: initial;
 }
 
+label.checkbox {
+  flex-direction: row;
+  align-items: baseline;
+}
+
 input[type=file] {
   display: none;
 }
