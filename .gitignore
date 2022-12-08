@@ -6,3 +6,4 @@
 /third_party
 /node_modules
 /include/combo/debug.h
+/config.yml
