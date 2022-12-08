@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "scripts": {
     "build": "ts-node -T ./lib/rollup.ts",
-    "start": "ts-node -T ./lib/index.ts"
+    "start": "ts-node -T ./lib/index.ts",
+    "test": "cross-env NODE_ENV=test jest"
   },
   "dependencies": {
     "core-js": "^3.26.1",
@@ -19,12 +20,17 @@
     "@rollup/plugin-terser": "^0.1.0",
     "@rollup/plugin-typescript": "^9.0.2",
     "@rollup/plugin-yaml": "^4.0.1",
+    "@types/glob": "^8.0.0",
+    "@types/jest": "^29.2.4",
     "@types/node": "^18.7.13",
     "@types/randombytes": "^2.0.0",
     "@types/webpack-env": "^1.18.0",
+    "cross-env": "^7.0.3",
     "csv": "^6.2.0",
+    "glob": "^8.0.3",
     "rollup": "^3.3.0",
     "rollup-plugin-node-externals": "^5.0.2",
+    "ts-jest": "^29.0.3",
     "ts-node": "^10.9.1",
     "tslib": "^2.4.1",
     "typescript": "^4.8.2",
