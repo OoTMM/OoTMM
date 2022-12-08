@@ -1,23 +1,34 @@
 export const SETTINGS = [{
-  name: 'Song Shuffle',
   key: 'songs',
+  name: 'Song Shuffle',
+  category: 'main',
   type: 'enum',
-  values: {
-    songLocations: 'Song Locations',
-    anywhere: 'Anywhere',
-  },
+  values: [
+    { value: 'songLocations', name: 'Song Locations' },
+    { value: 'anywhere', name: 'Anywhere' },
+  ],
   default: 'songLocations'
 }] as const;
 
-type SettingDataEnum = {
+export const SETTINGS_CATEGORIES = [{
+  name: "Main",
+  key: "main",
+}];
+
+type SettingDataEnumValue = {
+  readonly value: string;
   readonly name: string;
+};
+
+type SettingDataEnum = {
   readonly key: string;
+  readonly name: string;
   readonly type: 'enum';
-  readonly values: {[k: string]: string};
+  readonly values: ReadonlyArray<SettingDataEnumValue>;
   readonly default: string;
 };
 
-type InputToShape<T> = T extends SettingDataEnum ? { [K in T['key']]: keyof T['values'] } : never;
+type InputToShape<T> = T extends SettingDataEnum ? { [K in T['key']]: T['values'][number]['value'] } : never;
 
 type SettingDataEntry = typeof SETTINGS[number];
 
@@ -25,7 +36,7 @@ type SettingShapes = InputToShape<SettingDataEntry>;
 
 export type Settings = SettingShapes;
 
-const DEFAULT_SETTINGS: Settings = SETTINGS.map(s => {
+export const DEFAULT_SETTINGS: Settings = SETTINGS.map(s => {
   if (s.type === 'enum') {
     return {[s.key]: s.default};
   }

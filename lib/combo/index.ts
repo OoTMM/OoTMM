@@ -3,7 +3,7 @@ import { Buffer } from 'buffer';
 import { options, OptionsInput } from './options';
 import { Generator } from './generator';
 import { MonitorCallbacks } from './monitor';
-import { SETTINGS } from './settings';
+import { SETTINGS, DEFAULT_SETTINGS, SETTINGS_CATEGORIES } from './settings';
 
 type GeneratorParams = {
   oot: Buffer,
@@ -17,4 +17,4 @@ export const generate = (params: GeneratorParams): Generator => {
   return new Generator(params.oot, params.mm, opts, params.monitor || {});
 };
 
-export { SETTINGS };
+export { SETTINGS, DEFAULT_SETTINGS, SETTINGS_CATEGORIES };
