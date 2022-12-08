@@ -1,6 +1,11 @@
 "SPAWN":
   exits:
-    "Clock Town South": "can_play(SONG_TIME)"
+    "INITIAL": "can_play(SONG_TIME)"
+"INITIAL":
+  exits:
+    "Clock Town South": "true"
+  locations:
+    "Initial Song of Healing": "true"
 "Oath to Order":
   locations:
     "Oath to Order": "true"

@@ -94,6 +94,7 @@ void hookPlay_Init(GameState_Play* play)
     MM_SET_EVENT_WEEK(MM_EV(82, 1));
 
     Play_Init(play);
+    comboSpawnItemGivers(play);
 
     if (isEndOfGame)
     {

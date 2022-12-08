@@ -305,7 +305,8 @@ typedef struct
     u32 maskKamaro:1;
     u32 maskTruth:1;
     u32 moonTear:1;
-    u32 unused:6;
+    u32 songHealing:1;
+    u32 unused:5;
 }
 MmExtraFlags2;
 
