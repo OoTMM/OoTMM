@@ -11,7 +11,7 @@ export const SETTINGS = [{
 }] as const;
 
 export const SETTINGS_CATEGORIES = [{
-  name: "Main",
+  name: "Main Settings",
   key: "main",
 }];
 
