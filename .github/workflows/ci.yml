@@ -1,0 +1,33 @@
+name: Continuous Integration Workflow
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js 18.x
+        uses: actions/setup-node@v2
+        with:
+          node-version: 18.x
+      - name: Install dependencies
+        run: npm i
+      - name: Test
+        run: npm test
+  deploy:
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/develop' }}
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+     - name: Deploy
+       uses: actions/github-script@v6
+       with:
+         github-token: ${{ secrets.PAT_TOKEN }}
+         script: |
+          await github.rest.actions.createWorkflowDispatch({
+            owner: 'OoTMM',
+            repo: 'gui',
+            workflow_id: 'ootmm.yml',
+            ref: 'master'
+          })
