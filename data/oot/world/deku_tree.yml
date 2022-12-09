@@ -3,6 +3,7 @@
   exits:
     "Kokiri Forest": "true"
     "Deku Tree Slingshot Room": "has_shield"
+    "Deku Tree Basement": "true"
   locations:
     "Deku Tree Map Chest": "true"
     "Deku Tree Compass Chest": "true"
@@ -18,6 +19,7 @@
 "Deku Tree Basement":
   dungeon: DT
   exits:
+    "Deku Tree Lobby": "true"
     "Deku Tree Basement Back Room": "can_hit_triggers_distance"
 # TODO: Edit once tricks are in
 #    "Deku Tree Basement Ledge": "false"
