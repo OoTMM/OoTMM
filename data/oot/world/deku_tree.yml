@@ -31,7 +31,6 @@
   dungeon: DT
   exits:
     "Deku Tree Basement Ledge": "is_child"
-    "Deku Tree Before Boss": "true"
   locations:
     "Deku Tree GS Basement Back Room": "has_explosives_or_hammer && can_collect_distance"
 "Deku Tree Basement Ledge":
