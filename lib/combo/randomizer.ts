@@ -5,6 +5,7 @@ import { DATA_GI, DATA_NPC, DATA_SCENES, DATA_REGIONS } from './data';
 import { Game, GAMES } from "./config";
 import { WorldCheck } from './logic/world';
 import { Options } from './options';
+import { Settings } from './settings';
 
 const OFFSETS = {
   oot: 0x1000,
@@ -92,14 +93,17 @@ const toU16Buffer = (data: number[]) => {
   return buf;
 };
 
-export const randomizeGame = async (game: Game, logic: LogicResult): Promise<Buffer> => {
+export const randomizeGame = async (settings: Settings, game: Game, logic: LogicResult): Promise<Buffer> => {
   const scenes = await DATA_SCENES;
   const buf: number[] = [];
   for (const c of logic.items) {
     if (c.game !== game) {
       continue;
     }
-    if (c.type === 'gs' || c.type === 'sf') {
+    if (game === 'oot' && c.type === 'gs' && settings.goldSkulltulaTokens === 'none') {
+      continue;
+    }
+    if (c.type === 'sf') {
       continue;
     }
     let { scene } = c;
@@ -111,6 +115,9 @@ export const randomizeGame = async (game: Game, logic: LogicResult): Promise<Buf
     switch (c.type) {
     case 'npc':
       sceneId = 0xf0;
+      break;
+    case 'gs':
+      sceneId = 0xf1;
       break;
     case 'collectible':
       id |= 0x40;
@@ -145,7 +152,7 @@ export const randomize = async (rom: Buffer, opts: Options) => {
   const res = logic(opts);
   const buffer = Buffer.alloc(0x20000, 0xff);
   for (const g of GAMES) {
-    const gameBuffer = await randomizeGame(g, res);
+    const gameBuffer = await randomizeGame(opts.settings, g, res);
     gameBuffer.copy(buffer, OFFSETS[g]);
   }
   const data = await randomizerData(res, opts);
