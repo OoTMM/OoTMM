@@ -15,7 +15,7 @@
     "Link's House": "true"
     "Mido's House": "true"
     "Lost Woods": "true"
-    "Deku Tree Main": "true"
+    "Deku Tree Main": "is_child"
   locations:
     "Kokiri Forest Kokiri Sword Chest": "is_child"
     "Kokiri Forest Storms Grotto": "hidden_grotto_storms"
