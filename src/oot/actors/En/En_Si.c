@@ -39,3 +39,4 @@ void EnSi_GiveItem(GameState_Play* play, Actor* this)
 }
 
 PATCH_CALL(0x80b4b190, EnSi_GiveItem);
+PATCH_CALL(0x80b4b280, EnSi_GiveItem);
