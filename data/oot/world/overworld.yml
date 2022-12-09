@@ -114,8 +114,8 @@
     "Lon Lon Ranch Malon Song": "is_child && has(OCARINA) && event(MALON)"
     "Lon Lon Ranch GS Tree": "is_child"
     "Lon Lon Ranch GS House": "is_child && gs_night && can_boomerang"
-    "Lon Lon Ranch GS Inner Fence": "is_child && gs_night && can_boomerang"
-    "Lon Lon Ranch GS Outer Fence": "is_child && gs_night"
+    "Lon Lon Ranch GS Rain Shed": "is_child && gs_night"
+    "Lon Lon Ranch GS Back Wall": "is_child && gs_night && can_boomerang"
 "Lon Lon Ranch Silo":
   exits:
     "Lon Lon Ranch": "true"
@@ -192,7 +192,7 @@
 "Kakariko":
   exits:
     "Hyrule Field": "true"
-    "Death Mountain": "has(ZELDA_LETTER)"
+    "Death Mountain": "has(ZELDA_LETTER) || is_adult"
     "Graveyard": "true"
     "Bottom of the Well": "is_child && can_play(SONG_STORMS)"
     "Skulltula House": "true"
@@ -257,7 +257,7 @@
 "Death Mountain":
   exits:
     "Goron City": "true"
-    "Dodongo Cavern Entrance": "has_bombflowers && has(SWORD)"
+    "Dodongo Cavern Entrance": "has_bombflowers || is_adult"
     "Kakariko": "has(ZELDA_LETTER)"
     "Kakariko Rooftop": "is_child && has_explosives"
     "Death Mountain Crater Top": "has_explosives_or_hammer"
@@ -315,7 +315,7 @@
   exits:
     "Zora River": "true"
     "Lake Hylia": "is_child && has(SCALE)"
-    "Zora Fountain": "event(KING_ZORA_LETTER)"
+    "Zora Domain Back": "event(KING_ZORA_LETTER)"
   events:
     KING_ZORA_LETTER: "is_child && has(RUTO_LETTER)"
   locations:
@@ -324,13 +324,17 @@
     "Zora Domain Tunic": "is_adult && event(BLUE_FIRE)"
     "Zora Domain Eyeball Frog": "is_adult && event(BLUE_FIRE) && has(PRESCRIPTION)"
     "Zora Domain GS Waterfall": "is_adult && gs_night && can_hookshot"
+"Zora Domain Back":
+  exits:
+    "Zora Fountain": "true"
+    "Zora Domain": "event(KING_ZORA_LETTER)"
 "Lake Hylia":
   exits:
     "Hyrule Field": "true"
     "Zora Domain": "is_child && has(SCALE)"
     "Laboratory": "true"
     "Water Temple Entrance": "is_adult && has(BOOTS_IRON) && has(TUNIC_ZORA) && has(HOOKSHOT)"
-    "Fishing Pond": "is_child || event(WATER_TEMPLE_CLEARED) || (can_longshot && scarecrow_hookshot) || event(BEAN_LAKE_HYLIA)"
+    "Fishing Pond": "is_child || event(WATER_TEMPLE_CLEARED) || scarecrow_hookshot || event(BEAN_LAKE_HYLIA)"
   events:
     SCARECROW_CHILD: "is_child && has(OCARINA)"
     SCARECROW: "is_adult && event(SCARECROW_CHILD)"
@@ -358,7 +362,7 @@
     "Fishing Pond Adult": "is_adult"
 "Zora Fountain":
   exits:
-    "Zora Domain": "event(KING_ZORA_LETTER)"
+    "Zora Domain Back": "true"
     "Jabu-Jabu Entrance": "is_child && has_bottle"
     "Ice Cavern Entrance": "is_adult"
   locations:
@@ -383,19 +387,24 @@
 "Death Mountain Crater Top":
   exits:
     "Death Mountain": "true"
+    "Death Mountain Crater Bottom": "event(RED_BOULDER_BROKEN)"
   locations:
     "Death Mountain Crater GS Crate": "is_child"
     "Death Mountain Crater Grotto": "has_explosives"
     "Death Mountain Crater Alcove HP": "has_tunic_goron"
 "Death Mountain Crater Bottom":
   exits:
-    "Goron City": "is_adult"
+    "Goron City": "true"
     "Death Mountain Crater Warp": "is_adult && (has(HOOKSHOT) || has(BOOTS_HOVER))"
+    "Death Mountain Crater Top": "event(RED_BOULDER_BROKEN)"
+  events:
+    RED_BOULDER_BROKEN: "can_hammer"
   locations:
-    "Great Fairy Magic Upgrade 2": "is_adult && has(HAMMER) && can_play(SONG_ZELDA)"
+    "Great Fairy Magic Upgrade 2": "can_hammer && can_play(SONG_ZELDA)"
 "Death Mountain Crater Warp":
   exits:
     "Fire Temple Entrance": "has_tunic_goron"
+    "Death Mountain Crater Bottom": "is_adult && (has(HOOKSHOT) || has(BOOTS_HOVER))"
   events:
     BEAN_DEATH_MOUNTAIN_CRATER: "can_use_beans"
   locations:
@@ -406,9 +415,9 @@
   exits:
     "Lake Hylia": "true"
     "Hyrule Field": "true"
-    "Gerudo Valley After Bridge": "can_longshot || (is_adult && event(EPONA))"
+    "Gerudo Valley After Bridge": "can_longshot || event(EPONA)"
   locations:
-    "Gerudo Valley Crate HP": "true"
+    "Gerudo Valley Crate HP": "is_child || can_longshot"
     "Gerudo Valley Waterfall HP": "true"
     "Gerudo Valley GS Soil": "gs_soil"
     "Gerudo Valley GS Wall": "is_child && gs_night && can_boomerang"
@@ -454,4 +463,4 @@
     "Great Fairy Nayru's Love": "has_explosives && can_play(SONG_ZELDA)"
     "Desert Colossus GS Soil": "gs_soil"
     "Desert Colossus GS Tree": "is_adult && gs_night && can_hookshot"
-    "Desert Colossus GS Plateau": "is_adult && gs_night && can_longshot"
+    "Desert Colossus GS Plateau": "is_adult && gs_night && (can_longshot || event(BEAN_DESERT_COLOSSUS))"
