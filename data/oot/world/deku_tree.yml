@@ -9,7 +9,7 @@
     "Deku Tree Compass Room Side Chest": "true"
     "Deku Tree GS Compass": "true"
 "Deku Tree Slingshot Room":
-  dungeon: "DT"
+  dungeon: DT
   exits:
     "Deku Tree Lobby": "true"
   locations:
@@ -26,21 +26,21 @@
     "Deku Tree GS Basement Gate": "true"
     "Deku Tree GS Basement Vines": "has_ranged_weapon || can_use_din"
 "Deku Tree Basement Back Room":
-  dungeon: "DT"
+  dungeon: DT
   exits:
     "Deku Tree Basement Ledge": "is_child"
     "Deku Tree Before Boss": "true"
   locations:
     "Deku Tree GS Basement Back Room": "has_explosives_or_hammer && can_collect_distance"
 "Deku Tree Before Boss":
-  dungeon: "DT"
+  dungeon: DT
   exits:
     "Deku Tree Basement Ledge": "true"
     "Deku Tree Boss": "has_shield"
 "Deku Tree Boss":
-  dungeon: "DT"
+  dungeon: DT
   exits:
     "Deku Tree Main": "true"
   locations:
-    "Deku Tree Boss Container": "has(SWORD)"
-    "Deku Tree Boss": "has(SWORD)"
+    "Deku Tree Boss Container": "true"
+    "Deku Tree Boss": "true"
