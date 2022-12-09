@@ -28,3 +28,14 @@ void EnSi_Draw(Actor* this, GameState_Play* play)
 }
 
 PATCH_CALL(0x80b4b3f8, EnSi_Draw);
+
+void EnSi_GiveItem(GameState_Play* play, Actor* this)
+{
+    s16 gi;
+
+    gi = EnSi_Override(this);
+    PlayerDisplayTextBox(play, 0xb4, NULL);
+    comboAddItemGI(play, gi);
+}
+
+PATCH_CALL(0x80b4b190, EnSi_GiveItem);
