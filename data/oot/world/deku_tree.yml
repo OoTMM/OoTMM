@@ -34,6 +34,11 @@
     "Deku Tree Before Boss": "true"
   locations:
     "Deku Tree GS Basement Back Room": "has_explosives_or_hammer && can_collect_distance"
+"Deku Tree Basement Ledge":
+  dungeon: DT
+  exits:
+    "Deku Tree Basement Back Room": "is_child"
+    "Deku Tree Before Boss": "true"
 "Deku Tree Before Boss":
   dungeon: DT
   exits:
