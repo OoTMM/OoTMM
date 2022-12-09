@@ -1,6 +1,10 @@
 #include <combo.h>
 
-/* Patch DrawGI */
-PATCH_START 0x80b4b418
-  li a1,(DRAWGI_GS_TOKEN2 - 1)
+/* Nop other drawing code */
+PATCH_START 0x80b4b408
+  nop
+PATCH_END
+
+PATCH_START 0x80b4b414
+  nop
 PATCH_END
