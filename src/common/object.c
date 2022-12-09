@@ -1,7 +1,7 @@
 #include <combo.h>
 #include <combo/custom.h>
 
-#define OBJECT_COUNT    8
+#define OBJECT_COUNT    16
 
 static u16   sObjectsIds[OBJECT_COUNT];
 static void* sObjectsAddr[OBJECT_COUNT];

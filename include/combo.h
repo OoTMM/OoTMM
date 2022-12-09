@@ -99,6 +99,7 @@ void comboGameSwitch(void);
 #define OV_CHEST        0
 #define OV_COLLECTIBLE  1
 #define OV_NPC          2
+#define OV_GS           3
 
 s16 comboOverride(int type, u16 sceneId, u16 id, s16 gi);
 

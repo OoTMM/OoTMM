@@ -9,6 +9,18 @@ export const SETTINGS = [{
   ],
   default: 'songLocations'
 }, {
+  key: 'goldSkulltulaTokens',
+  name: 'Gold Skulltula Tokens Shuffle',
+  category: 'main',
+  type: 'enum',
+  values: [
+    { value: 'none', name: 'No Shuffle' },
+    { value: 'dungeons', name: 'Dungeons Only' },
+    { value: 'overworld', name: 'Overworld Only' },
+    { value: 'all', name: 'All Tokens' },
+  ],
+  default: 'none'
+}, {
   key: 'shuffleGerudoCard',
   name: 'Gerudo Card Shuffle',
   category: 'main',
