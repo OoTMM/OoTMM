@@ -20,7 +20,7 @@
   exits:
     "Deku Tree Basement Back Room": "can_hit_triggers_distance"
 # TODO: Edit once tricks are in
-    "Deku Tree Basement Ledge": "false"
+#    "Deku Tree Basement Ledge": "false"
   locations:
     "Deku Tree Basement Chest": "true"
     "Deku Tree GS Basement Gate": "true"
