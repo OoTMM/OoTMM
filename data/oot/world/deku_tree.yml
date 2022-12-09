@@ -46,7 +46,7 @@
 "Deku Tree Boss":
   dungeon: DT
   exits:
-    "Deku Tree Main": "true"
+    "Deku Tree Before Boss": "true"
   locations:
     "Deku Tree Boss Container": "true"
     "Deku Tree Boss": "true"
