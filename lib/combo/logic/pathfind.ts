@@ -32,7 +32,11 @@ const pathfindRegions = (world: World, items: Items, age: Age, reachable: Reacha
   const newRegions = new Set<string>();
   const oldRegions = reachable.regions[age];
   for (const region of oldRegions) {
-    const exits = world.regions[region].exits;
+    const worldRegion = world.regions[region];
+    if (!worldRegion) {
+      throw new Error(`Unknown region: ${region}`);
+    }
+    const exits = worldRegion.exits;
     for (const exit in exits) {
       if (oldRegions.has(exit) || newRegions.has(exit)) {
         continue;
