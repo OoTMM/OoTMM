@@ -120,6 +120,7 @@ s32 comboProgressiveMm(s32 gi);
 
 /* Objects */
 void    comboObjectsReset(void);
+void    comboObjectsGC(void);
 void*   comboGetObject(u16 objectId);
 u32     comboLoadObject(void* buffer, u16 objectId);
 

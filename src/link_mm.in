@@ -60,6 +60,7 @@ malloc = 0x80086dd0;
 free = 0x80086310;
 osSetIntMask = 0x80088010;
 ActorAlloc = 0x80102c60;
+ActorFree = 0x80102ce0;
 
 LoadObjectGi = 0x80838830;
 

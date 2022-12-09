@@ -2,9 +2,11 @@
 #include <combo/custom.h>
 
 #define OBJECT_COUNT    16
+#define OBJECT_TTL      6
 
 static u16   sObjectsIds[OBJECT_COUNT];
 static void* sObjectsAddr[OBJECT_COUNT];
+static u16   sObjectsTTL[OBJECT_COUNT];
 
 ALIGNED(16) const ObjectData kExtraObjectsTable[] = {
 #define X(a, b) { Y(a), Y(b) }
@@ -248,7 +250,10 @@ void* comboGetObject(u16 objectId)
     {
         /* Already loaded the object */
         if (sObjectsIds[i] == objectId)
+        {
+            sObjectsTTL[i] = OBJECT_TTL;
             return sObjectsAddr[i];
+        }
 
         /* Free slot */
         if (sObjectsIds[i] == 0)
@@ -258,6 +263,7 @@ void* comboGetObject(u16 objectId)
             comboLoadObject(addr, objectId);
             sObjectsIds[i] = objectId;
             sObjectsAddr[i] = addr;
+            sObjectsTTL[i] = OBJECT_TTL;
             return addr;
         }
     }
@@ -270,5 +276,26 @@ void comboObjectsReset(void)
     {
         sObjectsIds[i] = 0;
         sObjectsAddr[i] = NULL;
+        sObjectsTTL[i] = 0;
+    }
+}
+
+void comboObjectsGC(void)
+{
+    for (int i = 0; i < OBJECT_COUNT; ++i)
+    {
+        if (sObjectsAddr[i] == NULL)
+            continue;
+        if (sObjectsTTL[i] == 0)
+        {
+            ActorFree(sObjectsAddr[i]);
+            sObjectsIds[i] = 0;
+            sObjectsAddr[i] = NULL;
+            sObjectsTTL[i] = 0;
+        }
+        else
+        {
+            sObjectsTTL[i]--;
+        }
     }
 }
