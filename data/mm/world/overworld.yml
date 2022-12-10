@@ -359,7 +359,7 @@
     "Goron Shrine": "true"
   locations:
     "Goron Village HP": "has(DEED_SWAMP) && has(MASK_DEKU)"
-    "Goron Village Scrub Deed": "has(DEED_SWAMP)"
+    "Goron Village Scrub Deed": "has(DEED_SWAMP) && has(MASK_DEKU)"
     "Goron Village Scrub Bomb Bag": "has(MASK_GORON) && has(WALLET)"
     "Goron Elder": "has(MASK_GORON) && has(OCARINA) && (event(GORON_GRAVEYARD_HOT_WATER) || can_use_fire_arrows || (event(WELL_HOT_WATER) && can_play(SONG_SOARING)))"
     "Goron Powder Keg": "(event(BOSS_SNOWHEAD) || can_use_fire_arrows) && has(MASK_GORON)"
@@ -381,7 +381,7 @@
   exits:
     "Goron Village": "true"
   events:
-    GORON_FOOD: "has(MASK_GORON)"
+    GORON_FOOD: "has(MASK_GORON) && has(MAGIC_UPGRADE) && (can_use_fire_arrows || can_play(SONG_GORON_HALF))"
   locations:
     "Goron Baby": "has(MASK_GORON) && can_play(SONG_GORON_HALF)"
 "Path to Snowhead":
