@@ -167,10 +167,16 @@
   exits:
     "Clock Town East": "true"
   events:
-    SCRUB_TELESCOPE: "event(CLOCK_TOWN_SCRUB)"
+    SCRUB_TELESCOPE: "true"
+    TEAR_TELESCOPE: "true"
   locations:
     "Astral Observatory Passage Chest": "has_explosives"
-    "Astral Observatory Moon Tear": "true"
+"Astral Observatory Balcony":
+  exits:
+    "Terminal Field": "can_use_beans"
+    "Astral Observatory": "true"
+  locations:
+    "Astral Observatory Moon Tear": "event(TEAR_TELESCOPE)"
 "Termina Field":
   exits:
     "Clock Town South": "true"
@@ -182,6 +188,7 @@
     "Milk Road": "true"
     "Great Bay Coast": "can_play(SONG_EPONA)"
     "Road to Ikana": "true"
+    "Astral Observatory Balcony": "has(MASK_DEKU)"
   locations:
     "Termina Field Water Chest": "has(MASK_ZORA)"
     "Termina Field Tall Grass Chest": "true"
