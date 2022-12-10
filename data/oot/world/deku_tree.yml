@@ -1,23 +1,52 @@
-"Deku Tree Main":
+"Deku Tree Lobby":
   dungeon: DT
   exits:
     "Kokiri Forest": "true"
-    "Deku Tree Boss": "has(SLINGSHOT)"
+    "Deku Tree Slingshot Room": "has_shield"
+    "Deku Tree Basement": "true"
   locations:
     "Deku Tree Map Chest": "true"
     "Deku Tree Compass Chest": "true"
     "Deku Tree Compass Room Side Chest": "true"
     "Deku Tree GS Compass": "true"
+"Deku Tree Slingshot Room":
+  dungeon: DT
+  exits:
+    "Deku Tree Lobby": "true"
+  locations:
     "Deku Tree Slingshot Chest": "true"
     "Deku Tree Slingshot Side Chest": "true"
-    "Deku Tree Basement Chest": "true"
-    "Deku Tree GS Basement Vines": "has_ranged_weapon"
-    "Deku Tree GS Basement Gate": "has_ranged_weapon"
-    "Deku Tree GS Basement Back Room": "is_child && has_explosives"
-"Deku Tree Boss":
-  dungeon: "DT"
+"Deku Tree Basement":
+  dungeon: DT
   exits:
-    "Deku Tree Main": "true"
+    "Deku Tree Lobby": "true"
+    "Deku Tree Basement Back Room": "can_hit_triggers_distance"
+# TODO: Edit once tricks are in
+#    "Deku Tree Basement Ledge": "false"
   locations:
-    "Deku Tree Boss Container": "has(SWORD)"
-    "Deku Tree Boss": "has(SWORD)"
+    "Deku Tree Basement Chest": "true"
+    "Deku Tree GS Basement Gate": "true"
+    "Deku Tree GS Basement Vines": "has_ranged_weapon || can_use_din"
+"Deku Tree Basement Back Room":
+  dungeon: DT
+  exits:
+    "Deku Tree Basement Ledge": "is_child"
+  locations:
+    "Deku Tree GS Basement Back Room": "has_explosives_or_hammer && can_collect_distance"
+"Deku Tree Basement Ledge":
+  dungeon: DT
+  exits:
+    "Deku Tree Basement Back Room": "is_child"
+    "Deku Tree Before Boss": "true"
+"Deku Tree Before Boss":
+  dungeon: DT
+  exits:
+    "Deku Tree Basement Ledge": "true"
+    "Deku Tree Boss": "has_shield"
+"Deku Tree Boss":
+  dungeon: DT
+  exits:
+    "Deku Tree Before Boss": "true"
+  locations:
+    "Deku Tree Boss Container": "true"
+    "Deku Tree Boss": "true"
