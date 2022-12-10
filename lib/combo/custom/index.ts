@@ -2,14 +2,14 @@ import path from 'path';
 import fs from 'fs/promises';
 import { Buffer } from 'buffer';
 
-import { Game, DATA_FILES, CUSTOM_ADDR } from './config';
-import { DmaData } from './dma';
+import { Game, DATA_FILES, CUSTOM_ADDR } from '../config';
+import { DmaData } from '../dma';
 import { splitObject } from './split';
-import { align, arrayToIndexMap } from './util';
-import { compressFile } from './compress';
-import { CodeGen } from './codegen';
-import { DecompressedRoms } from './decompress';
-import { Monitor } from './monitor';
+import { arrayToIndexMap } from '../util';
+import { CodeGen } from '../codegen';
+import { DecompressedRoms } from '../decompress';
+import { Monitor } from '../monitor';
+import { CustomArchive } from './archive';
 
 const FILES_TO_INDEX_OOT = arrayToIndexMap(DATA_FILES.oot);
 const FILES_TO_INDEX_MM = arrayToIndexMap(DATA_FILES.mm);
@@ -60,52 +60,36 @@ const makeSplitObject = async (roms: DecompressedRoms, entry: CustomEntry) => {
   return obj;
 };
 
+export const customExtractedObjects = async (roms: DecompressedRoms, archive: CustomArchive, cg: CodeGen) => {
+  for (const entry of ENTRIES) {
+    const obj = await makeSplitObject(roms, entry);
+    const objectId = await archive.addObject(obj.data);
+    cg.define('CUSTOM_OBJECT_ID_' + entry.name, objectId);
+    for (let i = 0; i < obj.offsets.length; ++i) {
+      cg.define('CUSTOM_OBJECT_' + entry.name + '_' + i, obj.offsets[i]);
+    }
+  }
+};
+
 export const custom = async (monitor: Monitor, roms: DecompressedRoms) => {
   monitor.log("Building custom objects");
   const cgPath = process.env.ROLLUP ? '' : path.resolve('include', 'combo', 'custom.h');
   const cg = new CodeGen(cgPath, 'CUSTOM_H');
-  const objects = await Promise.all(ENTRIES.map(x => makeSplitObject(roms, x)));
-  const objectDmaBuffer = Buffer.alloc(0x10 * objects.length);
-  const objectDma = new DmaData(objectDmaBuffer);
-  const objTable = Buffer.alloc(0x08 * objects.length);
-  let vaddr = 0x08000000;
-  let paddr = CUSTOM_ADDR;
-  const data: Buffer[] = [];
-  for (let i = 0; i < objects.length; ++i) {
-    const obj = objects[i];
-    const objEntry = ENTRIES[i];
-    const objCompressed = await compressFile(obj.data);
-    const objCompressedSize = align(objCompressed.byteLength, 0x10);
-    const virtStart = vaddr;
-    const virtEnd = vaddr + obj.data.byteLength;
-    const physStart = paddr;
-    const physEnd = paddr + objCompressedSize;
-    objectDma.write(i, { virtStart, virtEnd, physStart, physEnd });
-    objTable.writeUInt32BE(virtStart, i * 8 + 0);
-    objTable.writeUInt32BE(virtEnd, i * 8 + 4);
-    data.push(objCompressed);
-    if (objCompressed.byteLength !== objCompressedSize) {
-      data.push(Buffer.alloc(objCompressedSize - objCompressed.byteLength));
-    }
-    vaddr = virtEnd;
-    paddr += objCompressedSize;
-    cg.define(['CUSTOM_OBJECT_ID', objEntry.name].join('_'), 0x2000 | i);
-    for (let j = 0; j < obj.offsets.length; ++j) {
-      const offset = obj.offsets[j];
-      cg.define(['CUSTOM_OBJECT', objEntry.name, j].join('_'), offset);
-    }
-  }
-  cg.define('CUSTOM_DMA_ADDR', paddr);
-  cg.define('CUSTOM_DMA_SIZE', objects.length);
-  data.push(objectDmaBuffer);
-  paddr += objectDmaBuffer.byteLength;
-  cg.define('CUSTOM_OBJECTS_ADDR', paddr);
-  cg.define('CUSTOM_OBJECTS_SIZE', objects.length);
-  data.push(objTable);
+  const archive = new CustomArchive();
+
+  /* Extract some objects */
+  await customExtractedObjects(roms, archive, cg);
+
+  /* Emit the custom header and data */
+  const pack = archive.pack();
+  cg.define('CUSTOM_DMA_ADDR', pack.dmaAddr);
+  cg.define('CUSTOM_DMA_SIZE', pack.dmaCount);
+  cg.define('CUSTOM_OBJECTS_ADDR', pack.objectTableAddr);
+  cg.define('CUSTOM_OBJECTS_SIZE', pack.objectTableCount);
 
   if (!process.env.ROLLUP) {
     await cg.emit();
   }
 
-  return Buffer.concat(data);
+  return pack.data;
 };
