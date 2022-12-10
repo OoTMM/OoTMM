@@ -173,7 +173,7 @@
     "Astral Observatory Passage Chest": "has_explosives"
 "Astral Observatory Balcony":
   exits:
-    "Terminal Field": "can_use_beans"
+    "Termina Field": "can_use_beans"
     "Astral Observatory": "true"
   locations:
     "Astral Observatory Moon Tear": "event(TEAR_TELESCOPE)"
