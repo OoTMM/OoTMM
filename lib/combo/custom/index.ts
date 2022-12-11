@@ -2,14 +2,15 @@ import path from 'path';
 import fs from 'fs/promises';
 import { Buffer } from 'buffer';
 
-import { Game, DATA_FILES, CUSTOM_ADDR } from '../config';
+import { Game, DATA_FILES } from '../config';
 import { DmaData } from '../dma';
 import { splitObject } from './split';
-import { arrayToIndexMap } from '../util';
+import { arrayToIndexMap, fetchOrRead } from '../util';
 import { CodeGen } from '../codegen';
 import { DecompressedRoms } from '../decompress';
 import { Monitor } from '../monitor';
 import { CustomArchive } from './archive';
+import { KeepFile } from './keep';
 
 const FILES_TO_INDEX_OOT = arrayToIndexMap(DATA_FILES.oot);
 const FILES_TO_INDEX_MM = arrayToIndexMap(DATA_FILES.mm);
@@ -60,7 +61,7 @@ const makeSplitObject = async (roms: DecompressedRoms, entry: CustomEntry) => {
   return obj;
 };
 
-export const customExtractedObjects = async (roms: DecompressedRoms, archive: CustomArchive, cg: CodeGen) => {
+const customExtractedObjects = async (roms: DecompressedRoms, archive: CustomArchive, cg: CodeGen) => {
   for (const entry of ENTRIES) {
     const obj = await makeSplitObject(roms, entry);
     const objectId = await archive.addObject(obj.data);
@@ -71,6 +72,14 @@ export const customExtractedObjects = async (roms: DecompressedRoms, archive: Cu
   }
 };
 
+const customKeepFiles = async (roms: DecompressedRoms, archive: CustomArchive, cg: CodeGen) => {
+  const keep = new KeepFile();
+  const dpad = await fetchOrRead('dpad.png');
+  await keep.addTexture(dpad, 'RGBA32');
+  const custonKeepId = await archive.addObject(keep.pack());
+  cg.define('CUSTOM_OBJECT_ID_KEEP', custonKeepId);
+};
+
 export const custom = async (monitor: Monitor, roms: DecompressedRoms) => {
   monitor.log("Building custom objects");
   const cgPath = process.env.ROLLUP ? '' : path.resolve('include', 'combo', 'custom.h');
@@ -79,6 +88,9 @@ export const custom = async (monitor: Monitor, roms: DecompressedRoms) => {
 
   /* Extract some objects */
   await customExtractedObjects(roms, archive, cg);
+
+  /* Setup custom keep */
+  await customKeepFiles(roms, archive, cg);
 
   /* Emit the custom header and data */
   const pack = archive.pack();
