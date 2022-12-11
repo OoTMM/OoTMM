@@ -133,6 +133,8 @@ void    comboLoadCustomKeep(void);
 void comboSetObjectSegment(GfxContext* gfx, void* buffer);
 void comboDrawObject(GameState_Play* play, Actor* actor, u16 objectId, u16 shaderId, int flags);
 void comboDrawGI(GameState_Play* play, Actor* actor, int gi, int flags);
+void comboDrawInit2D(GameState_Play* play);
+void comboDrawBlit2D(GameState_Play* play, u32 segAddr, int w, int h, int x, int y, float scale);
 
 /* Event */
 void comboOotSetEventChk(u16 flag);
@@ -200,6 +202,8 @@ void comboInvalDCache(void* addr, u32 size);
 
 /* Custom keep files */
 extern void* gCustomKeep;
+
+void comboDpadDraw(GameState_Play* play);
 
 #else
 # include <combo/asm.h>

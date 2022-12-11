@@ -276,4 +276,9 @@ void Play_DrawWrapper(GameState_Play* play)
         gDPFillRectangle(OVERLAY_DISP++, 0, 0, 0xfff, 0xfff);
         CLOSE_DISPS();
     }
+    else
+    {
+        /* Need to draw dpad */
+        comboDpadDraw(play);
+    }
 }
