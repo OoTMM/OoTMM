@@ -123,6 +123,7 @@ void    comboObjectsReset(void);
 void    comboObjectsGC(void);
 void*   comboGetObject(u16 objectId);
 u32     comboLoadObject(void* buffer, u16 objectId);
+void    comboLoadCustomKeep(void);
 
 /* Draw */
 #define DRAW_NO_PRE1    0x01
@@ -196,6 +197,9 @@ void*   actorAddr(u16 actorId, u32 addr);
 /* System */
 void comboInvalICache(void* addr, u32 size);
 void comboInvalDCache(void* addr, u32 size);
+
+/* Custom keep files */
+extern void* gCustomKeep;
 
 #else
 # include <combo/asm.h>
