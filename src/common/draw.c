@@ -61,7 +61,7 @@ void comboDrawInit2D(GameState_Play* play)
     CLOSE_DISPS();
 }
 
-void comboDrawBlit2D(GameState_Play* play, u32 segAddr, int w, int h, int x, int y, float scale)
+void comboDrawBlit2D(GameState_Play* play, u32 segAddr, int w, int h, float x, float y, float scale)
 {
     float rScale;
 

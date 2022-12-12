@@ -9,8 +9,8 @@ static void* sDpadIconBuffer;
 static u8 sDpadItems[] = { ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE };
 static u8 sDpadItemsOld[] = { ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE };
 
-static const int kDpadPosX = 265;
-static const int kDpadPosY = 70;
+static const int kDpadPosX = 275;
+static const int kDpadPosY = 75;
 
 static const int kDpadOffX[] = { 0, 0, -1, 1 };
 static const int kDpadOffY[] = { 1, -1, 0, 0 };
@@ -60,6 +60,8 @@ static void reloadIcons(GameState_Play* play)
 void comboDpadDraw(GameState_Play* play)
 {
     u8 alpha;
+    float x;
+    float y;
 
     if (!canShowDpad())
         return;
@@ -83,7 +85,9 @@ void comboDpadDraw(GameState_Play* play)
     {
         if (sDpadItems[i] != ITEM_NONE)
         {
-            comboDrawBlit2D(play, 0x07000000 | (i * 32 * 32 * 4), 32, 32, kDpadPosX + kDpadOffX[i] * 16, kDpadPosY + kDpadOffY[i] * 16, kDpadItemScale);
+            x = kDpadPosX + kDpadOffX[i] * 32 * kDpadItemScale + 1.5f;
+            y = kDpadPosY + kDpadOffY[i] * 32 * kDpadItemScale + 1;
+            comboDrawBlit2D(play, 0x07000000 | (i * 32 * 32 * 4), 32, 32, x, y, kDpadItemScale);
         }
     }
 }
