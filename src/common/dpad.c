@@ -60,15 +60,53 @@ void comboDpadDraw(GameState_Play* play)
 #endif
 }
 
-/*
-void comboDpadRefresh(GameState_Play* play)
+static void dpadUseItem(GameState_Play* play, int index)
 {
+#if defined(GAME_OOT)
+    s16 itemId;
+    void (*Player_UseButton)(GameState_Play* play, Actor_Player* link, s16 itemId);
 
+    itemId = sDpadItems[index];
+    if (itemId == ITEM_NONE)
+        return;
+    Player_UseButton = OverlayAddr(0x80834000);
+    Player_UseButton(play, GET_LINK(play), itemId);
+#endif
 }
-*/
 
+static void dpadSetItems(GameState_Play* play)
+{
+#if defined(GAME_OOT)
+    /* Update the items */
+    sDpadItems[DPAD_DOWN] = gSave.inventory[ITS_OOT_OCARINA];
+
+    if (gSave.age == AGE_CHILD)
+    {
+        sDpadItems[DPAD_LEFT] = ITEM_NONE;
+        sDpadItems[DPAD_RIGHT] = ITEM_NONE;
+    }
+    else
+    {
+        sDpadItems[DPAD_LEFT] = (gSave.equipment.boots & EQ_OOT_BOOTS_HOVER) ? ITEM_OOT_HOVER_BOOTS : ITEM_NONE;
+        sDpadItems[DPAD_RIGHT] = (gSave.equipment.boots & EQ_OOT_BOOTS_IRON) ? ITEM_OOT_IRON_BOOTS : ITEM_NONE;
+    }
+#endif
+}
 
 void comboDpadUpdate(GameState_Play* play)
 {
-    sDpadItems[DPAD_DOWN] = ITEM_OOT_OCARINA_TIME;
+    u32 buttons;
+
+    dpadSetItems(play);
+
+    /* Detect button press */
+    buttons = play->gs.input[0].current.buttons;
+    if (buttons & U_JPAD)
+        dpadUseItem(play, DPAD_UP);
+    else if (buttons & D_JPAD)
+        dpadUseItem(play, DPAD_DOWN);
+    else if (buttons & L_JPAD)
+        dpadUseItem(play, DPAD_LEFT);
+    else if (buttons & R_JPAD)
+        dpadUseItem(play, DPAD_RIGHT);
 }

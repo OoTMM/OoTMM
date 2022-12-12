@@ -112,4 +112,6 @@ void PlayStoreFlags(GameState_Play* play);
 
 void Player_Update(Actor_Player* this, GameState_Play* play);
 
+void* OverlayAddr(u32 addr);
+
 #endif
