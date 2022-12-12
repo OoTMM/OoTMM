@@ -19,10 +19,8 @@ static float kDpadItemScale = 0.4f;
 
 static int canShowDpad(void)
 {
-#if defined(GAME_OOT)
-    if (gSaveContext.noInterface)
+    if (gSaveContext.gameMode)
         return 0;
-#endif
     return 1;
 }
 
@@ -66,12 +64,8 @@ void comboDpadDraw(GameState_Play* play)
     if (!canShowDpad())
         return;
 
-    alpha = 0xff;
     reloadIcons(play);
-
-#if defined(GAME_OOT)
     alpha = (u8)play->interfaceCtx.alpha.health;
-#endif
 
     /* Init */
     OPEN_DISPS(play->gs.gfx);
