@@ -26,9 +26,14 @@ static int canShowDpad(void)
     return 1;
 }
 
-static int canUseDpad(void)
+static int canUseDpad(GameState_Play* play)
 {
+    Actor_Player* link;
+
+    link = GET_LINK(play);
     if (!canShowDpad())
+        return 0;
+    if (link->state & 0x30000483)
         return 0;
     return 1;
 }
@@ -174,7 +179,7 @@ void comboDpadUpdate(GameState_Play* play)
     u32 buttons;
 
     dpadSetItems(play);
-    if (!canUseDpad())
+    if (!canUseDpad(play))
         return;
 
     /* Detect button press */
