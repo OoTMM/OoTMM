@@ -17,6 +17,22 @@ static const int kDpadOffY[] = { 1, -1, 0, 0 };
 
 static float kDpadItemScale = 0.4f;
 
+static int canShowDpad(void)
+{
+#if defined(GAME_OOT)
+    if (gSaveContext.noInterface)
+        return 0;
+#endif
+    return 1;
+}
+
+static int canUseDpad(void)
+{
+    if (!canShowDpad())
+        return 0;
+    return 1;
+}
+
 static void reloadIcons(GameState_Play* play)
 {
     if (!sDpadIconBuffer)
@@ -36,14 +52,22 @@ static void reloadIcons(GameState_Play* play)
 
 void comboDpadDraw(GameState_Play* play)
 {
+    u8 alpha;
+
+    if (!canShowDpad())
+        return;
+
 #if defined(GAME_OOT)
     reloadIcons(play);
+
+    alpha = (u8)play->interfaceCtx.alpha.health;
 
     /* Init */
     OPEN_DISPS(play->gs.gfx);
     gDPPipeSync(OVERLAY_DISP++);
     gSPSegment(OVERLAY_DISP++, 0x06, gCustomKeep);
     gSPSegment(OVERLAY_DISP++, 0x07, sDpadIconBuffer);
+    gDPSetPrimColor(OVERLAY_DISP++, 0, 0x80, 0xff, 0xff, 0xff, alpha);
     CLOSE_DISPS();
 
     /* Draw */
@@ -121,9 +145,11 @@ void comboDpadUpdate(GameState_Play* play)
     u32 buttons;
 
     dpadSetItems(play);
+    if (!canUseDpad())
+        return;
 
     /* Detect button press */
-    buttons = play->gs.input[0].current.buttons;
+    buttons = play->gs.input[0].pressed.buttons;
     if (buttons & U_JPAD)
         dpadUseItem(play, DPAD_UP);
     else if (buttons & D_JPAD)

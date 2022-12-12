@@ -147,7 +147,10 @@ typedef struct
 {
     OotSave save;
     u32     fileIndex;
-    char    unk_1358[0x74];
+    /*char    unk_1358[0x74];*/
+    char    unk_1358[0x04];
+    u32     noInterface;
+    char    unk_1360[0x6c];
     s16     rupeesDelta;
     char    unk_13ce[0x28];
     s16     magicTarget;
@@ -158,6 +161,8 @@ typedef struct
     char    unk_1428[0x28];
 }
 OotSaveContext;
+
+ASSERT_OFFSET(OotSaveContext, noInterface, 0x135c);
 
 _Static_assert(sizeof(OotSave) == 0x1354, "OotSave size is wrong");
 _Static_assert(sizeof(OotSaveContext) == 0x1450, "OotSaveContext size is wrong");
