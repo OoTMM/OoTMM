@@ -204,6 +204,19 @@ void comboInvalDCache(void* addr, u32 size);
 extern void* gCustomKeep;
 
 void comboDpadDraw(GameState_Play* play);
+void comboDpadUpdate(GameState_Play* play);
+
+/* DMA */
+typedef struct
+{
+    u32 vstart;
+    u32 vend;
+    u32 pstart;
+    u32 pend;
+}
+DmaEntry;
+
+extern DmaEntry kComboDmaData[];
 
 #else
 # include <combo/asm.h>
