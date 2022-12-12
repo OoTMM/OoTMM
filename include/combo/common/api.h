@@ -114,4 +114,6 @@ void Player_Update(Actor_Player* this, GameState_Play* play);
 
 void* OverlayAddr(u32 addr);
 
+void LoadIcon(u32 vaddr, int iconId, void* buffer, int size);
+
 #endif

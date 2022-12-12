@@ -44,7 +44,11 @@ static void reloadIcons(GameState_Play* play)
     {
         if (sDpadItems[i] != sDpadItemsOld[i] && sDpadItems[i] != ITEM_NONE)
         {
+#if defined(GAME_OOT)
             DMARomToRam((kComboDmaData[8].pstart + 0x1000 * sDpadItems[i]) | PI_DOM1_ADDR2, sDpadIconBuffer + (i * 32 * 32 * 4), 32 * 32 * 4);
+#else
+            LoadIcon(0xa36c10, sDpadItems[i], sDpadIconBuffer + (i * 32 * 32 * 4), 0x1000);
+#endif
             sDpadItemsOld[i] = sDpadItems[i];
         }
     }
@@ -58,9 +62,9 @@ void comboDpadDraw(GameState_Play* play)
         return;
 
     alpha = 0xff;
-#if defined(GAME_OOT)
     reloadIcons(play);
 
+#if defined(GAME_OOT)
     alpha = (u8)play->interfaceCtx.alpha.health;
 #endif
 
@@ -76,7 +80,6 @@ void comboDpadDraw(GameState_Play* play)
     comboDrawInit2D(play);
     comboDrawBlit2D(play, 0x06000000, 32, 32, kDpadPosX, kDpadPosY, 0.5f);
 
-#if defined(GAME_OOT)
     for (int i = 0; i < 4; ++i)
     {
         if (sDpadItems[i] != ITEM_NONE)
@@ -84,7 +87,6 @@ void comboDpadDraw(GameState_Play* play)
             comboDrawBlit2D(play, 0x07000000 | (i * 32 * 32 * 4), 32, 32, kDpadPosX + kDpadOffX[i] * 16, kDpadPosY + kDpadOffY[i] * 16, kDpadItemScale);
         }
     }
-#endif
 }
 
 #if defined(GAME_OOT)
@@ -102,9 +104,9 @@ static void toggleBoots(GameState_Play* play, s16 itemId)
 }
 #endif
 
+#if defined(GAME_OOT)
 static void dpadUseItem(GameState_Play* play, int index)
 {
-#if defined(GAME_OOT)
     s16 itemId;
     void (*Player_UseButton)(GameState_Play* play, Actor_Player* link, s16 itemId);
 
@@ -120,13 +122,19 @@ static void dpadUseItem(GameState_Play* play, int index)
         Player_UseButton = OverlayAddr(0x80834000);
         Player_UseButton(play, GET_LINK(play), itemId);
     }
-#endif
 }
+#endif
 
+#if defined(GAME_MM)
+static void dpadUseItem(GameState_Play* play, int index)
+{
 
+}
+#endif
+
+#if defined(GAME_OOT)
 static void dpadSetItems(GameState_Play* play)
 {
-#if defined(GAME_OOT)
     /* Update the items */
     sDpadItems[DPAD_DOWN] = gSave.inventory[ITS_OOT_OCARINA];
 
@@ -140,8 +148,19 @@ static void dpadSetItems(GameState_Play* play)
         sDpadItems[DPAD_LEFT] = (gSave.equipment.boots & EQ_OOT_BOOTS_HOVER) ? ITEM_OOT_HOVER_BOOTS : ITEM_NONE;
         sDpadItems[DPAD_RIGHT] = (gSave.equipment.boots & EQ_OOT_BOOTS_IRON) ? ITEM_OOT_IRON_BOOTS : ITEM_NONE;
     }
-#endif
 }
+#endif
+
+#if defined(GAME_MM)
+static void dpadSetItems(GameState_Play* play)
+{
+    /* Update the items */
+    sDpadItems[DPAD_DOWN] = gSave.inventory.items[ITS_MM_OCARINA];
+    sDpadItems[DPAD_UP] = gSave.inventory.items[ITS_MM_MASK_DEKU];
+    sDpadItems[DPAD_LEFT] = gSave.inventory.items[ITS_MM_MASK_GORON];
+    sDpadItems[DPAD_RIGHT] = gSave.inventory.items[ITS_MM_MASK_ZORA];
+}
+#endif
 
 void comboDpadUpdate(GameState_Play* play)
 {
