@@ -7,8 +7,9 @@ PATCH_START(0x80080d14)
 PATCH_END
 
 /* Downsize the heap by 0x30000 */
+/* DEBUG */
 PATCH_START 0x80174c4c
-  lui t8,0x8075
+  lui t8,0x8074
 PATCH_END
 
 /* Not sure about this

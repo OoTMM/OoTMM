@@ -57,10 +57,12 @@ void comboDpadDraw(GameState_Play* play)
     if (!canShowDpad())
         return;
 
+    alpha = 0xff;
 #if defined(GAME_OOT)
     reloadIcons(play);
 
     alpha = (u8)play->interfaceCtx.alpha.health;
+#endif
 
     /* Init */
     OPEN_DISPS(play->gs.gfx);
@@ -74,6 +76,7 @@ void comboDpadDraw(GameState_Play* play)
     comboDrawInit2D(play);
     comboDrawBlit2D(play, 0x06000000, 32, 32, kDpadPosX, kDpadPosY, 0.5f);
 
+#if defined(GAME_OOT)
     for (int i = 0; i < 4; ++i)
     {
         if (sDpadItems[i] != ITEM_NONE)

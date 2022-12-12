@@ -39,7 +39,6 @@ void comboDrawGI(GameState_Play* play, Actor* actor, int gi, int flags)
     comboDrawObject(play, actor, giEntry->objectId, giEntry->shaderId, flags);
 }
 
-#if defined(GAME_OOT)
 void comboDrawInit2D(GameState_Play* play)
 {
     OPEN_DISPS(play->gs.gfx);
@@ -93,4 +92,3 @@ void comboDrawBlit2D(GameState_Play* play, u32 segAddr, int w, int h, int x, int
     );
     CLOSE_DISPS();
 }
-#endif

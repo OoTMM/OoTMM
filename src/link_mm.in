@@ -56,8 +56,8 @@ PreDraw1 = 0x800b8050;
 PreDraw2 = 0x800b8118;
 
 LoadFile = 0x80080c90;
-malloc = 0x80086dd0;
-free = 0x80086310;
+_malloc = 0x80086dd0;
+_free = 0x80086310;
 osSetIntMask = 0x80088010;
 ActorAlloc = 0x80102c60;
 ActorFree = 0x80102ce0;
@@ -120,3 +120,5 @@ Message_ShouldAdvance = 0x80147624;
 
 Interface_LoadItemIconImpl = 0x80112b40;
 UpdateEquipment = 0x80123c90;
+
+Play_Draw = 0x80168f64;
