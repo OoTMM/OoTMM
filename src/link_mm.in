@@ -125,3 +125,5 @@ Play_Draw = 0x80168f64;
 
 Player_Update = 0x80160b80;
 LoadIcon = 0x80178e3c;
+
+OverlayAddr = 0x801638d8;

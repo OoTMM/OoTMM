@@ -108,7 +108,7 @@ static void toggleBoots(GameState_Play* play, s16 itemId)
 static void dpadUseItem(GameState_Play* play, int index)
 {
     s16 itemId;
-    void (*Player_UseButton)(GameState_Play* play, Actor_Player* link, s16 itemId);
+    void (*Player_UseItem)(GameState_Play* play, Actor_Player* link, s16 itemId);
 
     itemId = sDpadItems[index];
     if (itemId == ITEM_NONE)
@@ -119,8 +119,8 @@ static void dpadUseItem(GameState_Play* play, int index)
     }
     else
     {
-        Player_UseButton = OverlayAddr(0x80834000);
-        Player_UseButton(play, GET_LINK(play), itemId);
+        Player_UseItem = OverlayAddr(0x80834000);
+        Player_UseItem(play, GET_LINK(play), itemId);
     }
 }
 #endif
@@ -128,7 +128,14 @@ static void dpadUseItem(GameState_Play* play, int index)
 #if defined(GAME_MM)
 static void dpadUseItem(GameState_Play* play, int index)
 {
+    s16 itemId;
+    void (*Player_UseItem)(GameState_Play* play, Actor_Player* link, s16 itemId);
 
+    itemId = sDpadItems[index];
+    if (itemId == ITEM_NONE)
+        return;
+    Player_UseItem = OverlayAddr(0x80831990);
+    Player_UseItem(play, GET_LINK(play), itemId);
 }
 #endif
 
