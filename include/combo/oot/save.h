@@ -112,7 +112,7 @@ typedef struct
     char                    unk_3f[0x27];
     u16                     sceneId;
     u8                      buttons[7];
-    u16                     currentEquipment;
+    OotSaveEquipment        currentEquipment;
     char                    unk_72[0x2];
     u8                      inventory[0x18];
     u8                      ammo[0xf];

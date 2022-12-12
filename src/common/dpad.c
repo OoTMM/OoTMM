@@ -60,6 +60,21 @@ void comboDpadDraw(GameState_Play* play)
 #endif
 }
 
+#if defined(GAME_OOT)
+static void toggleBoots(GameState_Play* play, s16 itemId)
+{
+    u16 targetBoots;
+
+    targetBoots = (itemId == ITEM_OOT_HOVER_BOOTS) ? 3 : 2;
+    if (gSave.currentEquipment.boots == targetBoots)
+        gSave.currentEquipment.boots = 1;
+    else
+        gSave.currentEquipment.boots = targetBoots;
+    UpdateEquipment(play, GET_LINK(play));
+    PlaySound(0x835);
+}
+#endif
+
 static void dpadUseItem(GameState_Play* play, int index)
 {
 #if defined(GAME_OOT)
@@ -69,10 +84,18 @@ static void dpadUseItem(GameState_Play* play, int index)
     itemId = sDpadItems[index];
     if (itemId == ITEM_NONE)
         return;
-    Player_UseButton = OverlayAddr(0x80834000);
-    Player_UseButton(play, GET_LINK(play), itemId);
+    if (itemId == ITEM_OOT_HOVER_BOOTS || itemId == ITEM_OOT_IRON_BOOTS)
+    {
+        toggleBoots(play, itemId);
+    }
+    else
+    {
+        Player_UseButton = OverlayAddr(0x80834000);
+        Player_UseButton(play, GET_LINK(play), itemId);
+    }
 #endif
 }
+
 
 static void dpadSetItems(GameState_Play* play)
 {

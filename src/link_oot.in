@@ -135,3 +135,5 @@ PlayStoreFlags = 0x8009d894;
 Player_Update = 0x80097740;
 
 OverlayAddr = 0x80099dbc;
+
+UpdateEquipment = 0x80079764;

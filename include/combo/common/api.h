@@ -107,7 +107,7 @@ void Play_Init(GameState_Play*);
 void Play_Draw(GameState_Play*);
 
 void Interface_LoadItemIconImpl(GameState_Play* play, int slot);
-void ReloadShield(GameState_Play* play, Actor_Player* link);
+void UpdateEquipment(GameState_Play* play, Actor_Player* link);
 void PlayStoreFlags(GameState_Play* play);
 
 void Player_Update(Actor_Player* this, GameState_Play* play);
