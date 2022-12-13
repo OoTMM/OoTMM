@@ -147,7 +147,7 @@
     "Ganon Castle Main": "has_medallions"
   locations:
     "Great Fairy Defense Upgrade": "has(STRENGTH, 3) && can_play(SONG_ZELDA)"
-    "Ganon Castle Exterior GS": "can_collect_distance"
+    "Ganon Castle Exterior GS": "true"
 "Lost Woods":
   exits:
     "Kokiri Forest": "true"
@@ -159,10 +159,10 @@
     "Lost Woods Target": "can_use_slingshot"
     "Lost Woods Skull Kid": "is_child && can_play(SONG_SARIA)"
     "Lost Woods Memory Game": "is_child && has(OCARINA)"
-    "Lost Woods Scrub Sticks Upgrade": "true"
+    "Lost Woods Scrub Sticks Upgrade": "is_child"
     "Lost Woods Odd Mushroom": "is_adult && has(COJIRO)"
     "Lost Woods Poacher's Saw": "is_adult && has(ODD_POTION)"
-    "Lost Woods Grotto Generic": "has_explosives"
+    "Lost Woods Grotto Generic": "has_explosives_or_hammer"
     "Lost Woods GS Soil Bridge": "gs_soil"
 "Lost Woods Bridge":
   exits:
@@ -179,7 +179,7 @@
   events:
     BEAN_LOST_WOODS: "can_use_beans"
   locations:
-    "Lost Woods Grotto Scrub Nuts Upgrade": "has_explosives"
+    "Lost Woods Grotto Scrub Nuts Upgrade": "has_explosives_or_hammer"
     "Lost Woods GS Soil Theater": "gs_soil"
     "Lost Woods GS Bean Ride": "is_adult && gs_night && event(BEAN_LOST_WOODS)"
 "Deku Theater":
@@ -205,24 +205,24 @@
     "Bottom of the Well": "is_child && can_play(SONG_STORMS)"
     "Skulltula House": "true"
     "Shooting Gallery": "is_adult"
-    "Kakariko Rooftop": "can_hookshot"
+    "Kakariko Rooftop": "is_child || can_hookshot"
   locations:
     "Kakariko Anju Bottle": "is_child"
     "Kakariko Anju Egg": "is_adult"
     "Kakariko Anju Cojiro": "is_adult && has(POCKET_CUCCO)"
-    "Windmill HP": "is_adult"
+    "Windmill HP": "can_boomerang || (is_adult && can_play(SONG_TIME))"
     "Windmill Song of Storms": "is_adult && has(OCARINA)"
     "Kakariko Song Shadow": "is_adult && has(MEDALLION_FOREST) && has(MEDALLION_FIRE) && has(MEDALLION_WATER)"
     "Kakariko Man on Roof": "can_hookshot"
     "Kakariko Potion Shop Odd Potion": "is_adult && has(ODD_MUSHROOM)"
-    "Kakariko Grotto Front": "hidden_grotto_bomb && has_weapon"
+    "Kakariko Grotto Front": "hidden_grotto_bomb"
     "Kakariko Grotto Back": "true"
     "Kakariko GS Roof": "gs_night && is_adult && has(HOOKSHOT)"
     "Kakariko GS Shooting Gallery": "gs_night && is_child"
     "Kakariko GS Tree": "gs_night && is_child"
     "Kakariko GS House of Skulltula": "gs_night && is_child"
     "Kakariko GS Bazaar": "gs_night && is_child"
-    "Kakariko GS Ladder": "gs_night && is_child && has(SLINGSHOT)"
+    "Kakariko GS Ladder": "gs_night && is_child && (has(SLINGSHOT) || has_explosives)"
 "Kakariko Rooftop":
   exits:
     "Kakariko": "true"
@@ -240,7 +240,7 @@
     "Graveyard Fairy Tomb": "true"
     "Graveyard Dampe Tomb Reward 1": "is_adult"
     "Graveyard Dampe Tomb Reward 2": "is_adult"
-    "Graveyard Crate HP": "is_adult && event(BEAN_GRAVEYARD)"
+    "Graveyard Crate HP": "is_adult && (event(BEAN_GRAVEYARD) || can_longshot)"
     "Graveyard GS Soil": "gs_soil"
     "Graveyard GS Wall": "gs_night && is_child && has(BOOMERANG)"
 "Graveyard Upper":
@@ -251,7 +251,7 @@
   exits:
     "Graveyard": "true"
   locations:
-    "Graveyard Royal Tomb Song": "has(SWORD)"
+    "Graveyard Royal Tomb Song": "true"
     "Graveyard Royal Tomb Chest": "has_fire"
 "Skulltula House":
   exits:
@@ -267,22 +267,32 @@
     "Goron City": "true"
     "Dodongo Cavern Entrance": "has_bombflowers || is_adult"
     "Kakariko": "has(ZELDA_LETTER)"
-    "Kakariko Rooftop": "is_child && has_explosives"
-    "Death Mountain Crater Top": "has_explosives_or_hammer"
+    "Death Mountain Summit": "event(BOULDER_DEATH_MOUNTAIN) || can_ride_bean(BEAN_DEATH_MOUNTAIN)"
   events:
     BEAN_DEATH_MOUNTAIN: "can_use_beans"
+    BOULDER_DEATH_MOUNTAIN: "has_explosives_or_hammer"
   locations:
-    "Death Mountain Chest": "has_explosives"
-    "Death Mountain HP": "is_adult && event(BEAN_DEATH_MOUNTAIN)"
-    "Death Mountain Prescription": "is_adult && has_explosives && has(BROKEN_GORON_SWORD)"
-    "Death Mountain Claim Check": "is_adult && has_explosives && has(EYE_DROPS)"
-    "Death Mountain Biggoron Sword": "is_adult && has_explosives && has(CLAIM_CHECK)"
-    "Great Fairy Magic Upgrade": "has_explosives && can_play(SONG_ZELDA)"
+    "Death Mountain Chest": "has_explosives_or_hammer"
+    "Death Mountain HP": "true"
     "Death Mountain Grotto": "hidden_grotto_storms"
-    "Death Mountain GS Entrance": "has_explosives"
-    "Death Mountain GS Soil": "gs_soil"
-    "Death Mountain GS Above Dodongo":  "gs_night && is_adult"
-    "Death Mountain GS Before Climb": "gs_night && is_adult && can_hammer"
+    "Death Mountain GS Entrance": "has_explosives_or_hammer"
+    "Death Mountain GS Soil": "gs_soil && has_bombflowers"
+    "Death Mountain GS Above Dodongo":  "gs_night && can_hammer"
+"Death Mountain Summit":
+  exits:
+    "Death Mountain": "true"
+    "Kakariko Rooftop": "is_child"
+    "Death Mountain Crater Top": "true"
+  events:
+    BEAN_DEATH_MOUNTAIN: "can_use_beans"
+    BOULDER_DEATH_MOUNTAIN: "has_explosives_or_hammer"
+  locations:
+    "Death Mountain Prescription": "adult_trade(BROKEN_GORON_SWORD)"
+    "Death Mountain Claim Check": "adult_trade(EYE_DROPS)"
+    "Death Mountain Biggoron Sword": "adult_trade(CLAIM_CHECK)"
+    "Great Fairy Magic Upgrade": "has_explosives_or_hammer && can_play(SONG_ZELDA)"
+    "Death Mountain GS Before Climb": "gs_night && can_hammer"
+
 "Goron City Shortcut":
   exits:
     "Lost Woods": "true"
@@ -293,19 +303,19 @@
   exits:
     "Goron City Shortcut": "event(GORON_CITY_SHORTCUT)"
     "Death Mountain": "true"
-    "Death Mountain Crater Bottom": "is_adult"
+    "Death Mountain Crater Bottom": "is_adult && (has_explosives || can_use_bow || has(STRENGTH))"
   event:
     GORON_CITY_SHORTCUT: "has_bombflowers || can_hammer || can_use_bow || can_use_din"
   locations:
     "Darunia": "can_play(SONG_ZELDA) && can_play(SONG_SARIA)"
-    "Goron City Maze Center 1": "has_explosives"
-    "Goron City Maze Center 2": "has_explosives"
-    "Goron City Maze Left": "can_hammer"
-    "Goron City Big Pot HP": "is_child && has_bombflowers && (can_play(SONG_ZELDA) || has_fire)"
-    "Goron City Tunic": "is_adult && has_explosives"
+    "Goron City Maze Center 1": "has_explosives_or_hammer || can_lift_silver"
+    "Goron City Maze Center 2": "has_explosives_or_hammer || can_lift_silver"
+    "Goron City Maze Left": "can_hammer || can_lift_silver"
+    "Goron City Big Pot HP": "is_child && has_explosives && (can_play(SONG_ZELDA) || has_fire)"
+    "Goron City Tunic": "is_adult && (has_explosives || can_use_bow || has(STRENGTH))"
     "Goron City Bomb Bag": "is_child && has_explosives"
-    "Goron City Medigoron Giant Knife": "is_adult && has(WALLET)"
-    "Goron City GS Platform": "is_adult && has_ranged_weapon"
+    "Goron City Medigoron Giant Knife": "is_adult && has(WALLET) && (has_bombflowers || can_hammer)"
+    "Goron City GS Platform": "is_adult"
     "Goron City GS Maze": "is_child && has_explosives"
 "Zora River Front":
   exits:
@@ -339,8 +349,8 @@
     "Zora Domain Waterfall Chest": "is_child"
     "Zora Domain Diving Game": "is_child"
     "Zora Domain Tunic": "is_adult && event(BLUE_FIRE)"
-    "Zora Domain Eyeball Frog": "is_adult && event(BLUE_FIRE) && has(PRESCRIPTION)"
-    "Zora Domain GS Waterfall": "is_adult && gs_night && can_hookshot"
+    "Zora Domain Eyeball Frog": "event(BLUE_FIRE) && adult_trade(PRESCRIPTION)"
+    "Zora Domain GS Waterfall": "is_adult && gs_night && (has_ranged_weapon_adult || has(MAGIC_UPGRADE))"
 "Zora Domain Back":
   exits:
     "Zora Fountain": "true"
@@ -357,13 +367,13 @@
     SCARECROW: "is_adult && event(SCARECROW_CHILD)"
     BEAN_LAKE_HYLIA: "can_use_beans"
   locations:
-    "Lake Hylia Underwater Bottle": "has(SCALE)"
+    "Lake Hylia Underwater Bottle": "is_child && has(SCALE)"
     "Lake Hylia Fire Arrow": "can_use_bow && (event(WATER_TEMPLE_CLEARED) || (can_longshot && scarecrow_hookshot))"
-    "Lake Hylia HP": "is_adult && event(BEAN_LAKE_HYLIA)"
-    "Lake Hylia GS Lab Wall": "is_child && gs_night && can_boomerang"
+    "Lake Hylia HP": "can_ride_bean(BEAN_LAKE_HYLIA) || scarecrow_hookshot"
+    "Lake Hylia GS Lab Wall": "gs_night && can_boomerang"
     "Lake Hylia GS Island": "is_child && gs_night"
     "Lake Hylia GS Soil": "gs_soil"
-    "Lake Hylia GS Big Tree": "is_adult && gs_night && can_longshot"
+    "Lake Hylia GS Big Tree": "gs_night && can_longshot"
 "Laboratory":
   exits:
     "Lake Hylia": "true"
@@ -385,10 +395,10 @@
   locations:
     "Great Fairy Farore's Wind": "has_explosives && can_play(SONG_ZELDA)"
     "Zora Fountain Iceberg HP": "is_adult"
-    "Zora Fountain Bottom HP": "is_adult && has_tunic_zora && has(BOOTS_IRON)"
-    "Zora Fountain GS Wall": "is_child && gs_night && can_boomerang"
+    "Zora Fountain Bottom HP": "has_tunic_zora && has_iron_boots"
+    "Zora Fountain GS Wall": "gs_night && can_boomerang"
     "Zora Fountain GS Tree": "is_child"
-    "Zora Fountain GS Upper": "is_adult && gs_night && can_hammer && can_hookshot"
+    "Zora Fountain GS Upper": "gs_night && has_explosives_or_hammer && can_hookshot && can_lift_silver"
 "Temple of Time":
   exits:
     "Market": "is_child"
@@ -400,19 +410,19 @@
     "Temple of Time Master Sword": "is_child && event(DOOR_OF_TIME_OPEN)"
     "Temple of Time Medallion": "is_adult && event(DOOR_OF_TIME_OPEN)"
     "Temple of Time Sheik Song": "is_adult && event(DOOR_OF_TIME_OPEN) && has(MEDALLION_FOREST)"
-    "Temple of Time Light Arrows": "is_adult && has_medallions"
+    "Temple of Time Light Arrows": "is_adult && has(MEDALLION_SPIRIT) && has(MEDALLION_SHADOW)"
 "Death Mountain Crater Top":
   exits:
-    "Death Mountain": "true"
-    "Death Mountain Crater Bottom": "event(RED_BOULDER_BROKEN)"
+    "Death Mountain Summit": "true"
+    "Death Mountain Crater Bottom": "event(RED_BOULDER_BROKEN) || has_hover_boots"
   locations:
     "Death Mountain Crater GS Crate": "is_child"
-    "Death Mountain Crater Grotto": "has_explosives"
-    "Death Mountain Crater Alcove HP": "has_tunic_goron"
+    "Death Mountain Crater Grotto": "has_explosives_or_hammer"
+    "Death Mountain Crater Alcove HP": "true"
 "Death Mountain Crater Bottom":
   exits:
     "Goron City": "true"
-    "Death Mountain Crater Warp": "is_adult && (has(HOOKSHOT) || has(BOOTS_HOVER))"
+    "Death Mountain Crater Warp": "can_hookshot || has_hover_boots"
     "Death Mountain Crater Top": "event(RED_BOULDER_BROKEN)"
   events:
     RED_BOULDER_BROKEN: "can_hammer"
@@ -421,12 +431,12 @@
 "Death Mountain Crater Warp":
   exits:
     "Fire Temple Entrance": "has_tunic_goron"
-    "Death Mountain Crater Bottom": "is_adult && (has(HOOKSHOT) || has(BOOTS_HOVER))"
+    "Death Mountain Crater Bottom": "can_hookshot || has_hover_boots || can_ride_bean(BEAN_DEATH_MOUNTAIN_CRATER)"
   events:
     BEAN_DEATH_MOUNTAIN_CRATER: "can_use_beans"
   locations:
-    "Death Mountain Crater Volcano HP": "has_tunic_goron && event(BEAN_DEATH_MOUNTAIN_CRATER)"
-    "Death Mountain Crater Sheik Song": "has_tunic_goron"
+    "Death Mountain Crater Volcano HP": "can_ride_bean(BEAN_DEATH_MOUNTAIN_CRATER)"
+    "Death Mountain Crater Sheik Song": "true"
     "Death Mountain Crater GS Soil": "gs_soil"
 "Gerudo Valley":
   exits:
@@ -449,7 +459,7 @@
     "Gerudo Valley GS Pillar": "is_adult && gs_night && can_hookshot"
 "Gerudo Fortress Exterior":
   exits:
-    "Gerudo Fortress": "can_hookshot"
+    "Gerudo Fortress": "true"
     "Gerudo Valley After Bridge": "true"
     "Haunted Wasteland Start": "has(GERUDO_CARD)"
     "Gerudo Training Grounds Entrance": "has(GERUDO_CARD)"
