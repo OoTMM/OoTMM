@@ -2,7 +2,7 @@ import { World } from './world';
 import { Age, AGES, Items } from './state';
 
 export type Reachable = {
-  regions: {
+  areas: {
     child: Set<string>;
     adult: Set<string>;
   },
@@ -11,7 +11,7 @@ export type Reachable = {
 };
 
 const reachableDefault = (): Reachable => ({
-  regions: {
+  areas: {
     child: new Set(['OOT SPAWN']),
     adult: new Set(['OOT SPAWN']),
   },
@@ -20,35 +20,35 @@ const reachableDefault = (): Reachable => ({
 });
 
 const reachableDup = (reachable: Reachable): Reachable => ({
-  regions: {
-    child: new Set(reachable.regions.child),
-    adult: new Set(reachable.regions.adult),
+  areas: {
+    child: new Set(reachable.areas.child),
+    adult: new Set(reachable.areas.adult),
   },
   locations: new Set(reachable.locations),
   events: new Set(reachable.events),
 });
 
-const pathfindRegions = (world: World, items: Items, age: Age, reachable: Reachable) => {
-  const newRegions = new Set<string>();
-  const oldRegions = reachable.regions[age];
-  for (const region of oldRegions) {
-    const worldRegion = world.regions[region];
-    if (!worldRegion) {
-      throw new Error(`Unknown region: ${region}`);
+const pathfindAreas = (world: World, items: Items, age: Age, reachable: Reachable) => {
+  const newAreas = new Set<string>();
+  const oldAreas = reachable.areas[age];
+  for (const area of oldAreas) {
+    const worldArea = world.areas[area];
+    if (!worldArea) {
+      throw new Error(`Unknown area: ${area}`);
     }
-    const exits = worldRegion.exits;
+    const exits = worldArea.exits;
     for (const exit in exits) {
-      if (oldRegions.has(exit) || newRegions.has(exit)) {
+      if (oldAreas.has(exit) || newAreas.has(exit)) {
         continue;
       }
       const expr = exits[exit];
       if (expr({ items, age, events: reachable.events })) {
-        newRegions.add(exit);
+        newAreas.add(exit);
       }
     }
   }
-  if (newRegions.size > 0) {
-    newRegions.forEach(x => reachable.regions[age].add(x));
+  if (newAreas.size > 0) {
+    newAreas.forEach(x => reachable.areas[age].add(x));
     return true;
   }
   return false;
@@ -56,8 +56,8 @@ const pathfindRegions = (world: World, items: Items, age: Age, reachable: Reacha
 
 const pathfindEvents = (world: World, items: Items, age: Age, reachable: Reachable) => {
   let changed = false;
-  for (const region of reachable.regions[age]) {
-    const events = world.regions[region].events;
+  for (const area of reachable.areas[age]) {
+    const events = world.areas[area].events;
     for (const event in events) {
       if (reachable.events.has(event)) {
         continue;
@@ -75,8 +75,8 @@ const pathfindEvents = (world: World, items: Items, age: Age, reachable: Reachab
 const pathfindLocations = (world: World, items: Items, age: Age, reachable: Reachable) => {
   const newLocations = new Set<string>();
   const oldLocations = reachable.locations;
-  for (const region of reachable.regions[age]) {
-    const locations = world.regions[region].locations;
+  for (const area of reachable.areas[age]) {
+    const locations = world.areas[area].locations;
     for (const location in locations) {
       if (oldLocations.has(location) || newLocations.has(location)) {
         continue;
@@ -101,11 +101,11 @@ export const pathfind = (world: World, items: Items, reachable?: Reachable) => {
     reachable = reachableDup(reachable);
   }
 
-  /* Reach all regions & events */
+  /* Reach all areas & events */
   for (;;) {
     let changed = false;
     for (const age of AGES) {
-      changed ||= pathfindRegions(world, items, age, reachable);
+      changed ||= pathfindAreas(world, items, age, reachable);
       changed ||= pathfindEvents(world, items, age, reachable);
     }
     if (!changed) {

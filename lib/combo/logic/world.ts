@@ -10,7 +10,7 @@ type ExprMap = {
   [k: string]: Expr;
 }
 
-type WorldRegion = {
+type WorldArea = {
   locations: ExprMap;
   exits: ExprMap;
   events: ExprMap;
@@ -34,7 +34,7 @@ export type WorldCheck = {
 } & (WorldCheckNumeric | WorldCheckSymbolic);
 
 export type World = {
-  regions: {[k: string]: WorldRegion};
+  areas: {[k: string]: WorldArea};
   checks: {[k: string]: WorldCheck};
   dungeons: {[k: string]: Set<string>};
 };
@@ -51,21 +51,21 @@ const mapExprs = (exprParser: ExprParser, game: Game, data: any) => {
   return result;
 }
 
-const loadWorldRegions = (world: World, game: Game, exprParser: ExprParser) => {
+const loadWorldAreas = (world: World, game: Game, exprParser: ExprParser) => {
   const data = DATA_WORLD[game];
   for (let name in data) {
-    const region = data[name];
+    const area = data[name];
     name = gameId(game, name, ' ');
-    const dungeon = region.dungeon;
-    const locations = mapExprs(exprParser, game, region.locations || {});
-    const exits = mapExprs(exprParser, game, region.exits || {});
-    const events = mapExprs(exprParser, game, region.events || {});
+    const dungeon = area.dungeon;
+    const locations = mapExprs(exprParser, game, area.locations || {});
+    const exits = mapExprs(exprParser, game, area.exits || {});
+    const events = mapExprs(exprParser, game, area.events || {});
 
     if (name === undefined) {
-      throw new Error(`Region name is undefined`);
+      throw new Error(`Area name is undefined`);
     }
 
-    world.regions[name] = { locations, exits, events };
+    world.areas[name] = { locations, exits, events };
 
     if (dungeon !== undefined) {
       if (world.dungeons[dungeon] === undefined) {
@@ -117,12 +117,12 @@ const loadWorldGame = (world: World, game: Game, settings: Settings) => {
   /* Create the expr parser */
   const exprParser = new ExprParser(game);
   loadMacros(exprParser, game);
-  loadWorldRegions(world, game, exprParser);
+  loadWorldAreas(world, game, exprParser);
   loadWorldPool(world, game, settings);
 }
 
 export const createWorld = (settings: Settings) => {
-  const world: World = { regions: {}, checks: {}, dungeons: {} };
+  const world: World = { areas: {}, checks: {}, dungeons: {} };
   for (const g of GAMES) {
     loadWorldGame(world, g, settings);
   }
