@@ -14,6 +14,7 @@ import glob from 'glob';
 
 import { build as comboBuild } from './combo/build';
 import { codegen as comboCodegen } from './combo/codegen';
+import { customAssets } from './combo/custom';
 import { Monitor } from './combo/monitor';
 import { DEFAULT_SETTINGS } from './combo';
 
@@ -65,6 +66,7 @@ async function copyData() {
   );
 
   /* Copy the extra assets */
+  await customAssets();
   let promises: Promise<void>[] = [];
   glob.sync('build/assets/*.bin').forEach((filename) => {
     promises.push(fs.copyFile(filename, `dist/data/${path.basename(filename)}`));

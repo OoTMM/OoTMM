@@ -73,9 +73,14 @@ const customExtractedObjects = async (roms: DecompressedRoms, archive: CustomArc
   }
 };
 
+export const customAssets = async () => ({
+  dpad: await png('dpad'),
+});
+
 const customKeepFiles = async (roms: DecompressedRoms, archive: CustomArchive, cg: CodeGen) => {
   const keep = new KeepFile();
-  const dpad = await png('dpad');
+  const assets = await customAssets();
+  const { dpad } = assets;
   await keep.addData(dpad);
   const custonKeepId = await archive.addObject(keep.pack());
   cg.define('CUSTOM_OBJECT_ID_KEEP', custonKeepId);
