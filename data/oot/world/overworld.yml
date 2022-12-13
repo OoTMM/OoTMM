@@ -15,6 +15,7 @@
     "Link's House": "true"
     "Mido's House": "true"
     "Lost Woods": "true"
+    "Lost Woods Bridge": "true"
     "Deku Tree Lobby": "is_child"
   locations:
     "Kokiri Forest Kokiri Sword Chest": "is_child"
@@ -32,7 +33,7 @@
     "Kokiri Forest Mido Bottom Right": "true"
 "Hyrule Field":
   exits:
-    "Lost Woods": "true"
+    "Lost Woods Bridge": "true"
     "Market": "is_child"
     "Market Destroyed": "is_adult"
     "Kakariko": "true"
@@ -150,12 +151,11 @@
 "Lost Woods":
   exits:
     "Kokiri Forest": "true"
-    "Hyrule Field": "true"
+    "Lost Woods Bridge": "can_longshot || has_hover_boots || (can_use_beans && is_adult)
     "Lost Woods Deep": "is_child || can_play(SONG_SARIA)"
     "Goron City Shortcut": "true"
     "Zora River": "can_dive_small"
   locations:
-    "Lost Woods Bridge": "true"
     "Lost Woods Target": "can_use_slingshot"
     "Lost Woods Skull Kid": "is_child && can_play(SONG_SARIA)"
     "Lost Woods Memory Game": "is_child && has(OCARINA)"
@@ -164,6 +164,13 @@
     "Lost Woods Poacher's Saw": "is_adult && has(ODD_POTION)"
     "Lost Woods Grotto Generic": "has_explosives"
     "Lost Woods GS Soil Bridge": "gs_soil"
+"Lost Woods Bridge":
+  exits:
+    "Kokiri Forest": "true"
+    "Hyrule Field": "true"
+    "Lost Woods": "can_longshot"
+  locations:
+    "Saria's Gift": "true"
 "Lost Woods Deep":
   exits:
     "Lost Woods": "is_child || can_play(SONG_SARIA)"
