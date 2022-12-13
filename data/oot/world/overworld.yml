@@ -170,7 +170,7 @@
     "Hyrule Field": "true"
     "Lost Woods": "can_longshot"
   locations:
-    "Saria's Gift": "true"
+    "LW Gift from Saria": "true"
 "Lost Woods Deep":
   exits:
     "Lost Woods": "is_child || can_play(SONG_SARIA)"
