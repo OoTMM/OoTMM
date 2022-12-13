@@ -385,6 +385,39 @@ static const char* const kItemNamesMm[] = {
     "a " C0 "World Map (Stone Tower)",
 };
 
+static void autoLineBreaks(char* buffer)
+{
+    static const int kMaxLineLength = 37;
+    int lineLength;
+    int i;
+    int lastSpace;
+    u8 c;
+
+    lastSpace = -1;
+    lineLength = 0;
+    i = 0;
+    for (;;)
+    {
+        c = (u8)(buffer[i]);
+        if (c == END[0])
+            break;
+        if (c >= ' ' && c <= '~')
+        {
+            lineLength++;
+            if (lineLength == kMaxLineLength)
+            {
+                lineLength = i - lastSpace;
+                buffer[lastSpace] = NL[0];
+            }
+        }
+        if (c == ' ')
+        {
+            lastSpace = i;
+        }
+        i += comboMultibyteCharSize(c);
+    }
+}
+
 static void appendStr(char** dst, const char* src)
 {
     size_t len = strlen(src);
@@ -794,15 +827,14 @@ void comboTextHijackSkullReward(GameState_Play* play, s16 itemId, int count)
     b = play->msgCtx.textBuffer;
     appendHeader(&b);
     appendStr(&b,
-        "Yeaaarrgh! I'm cursed!! Please save" NL
-        "me by destroying " COLOR_RED
+        "Yeaaarrgh! I'm cursed!! Please save me by destroying " COLOR_RED
     );
     appendNum(&b, count);
     appendStr(&b,
-        " Spiders of the" NL
-        "Curse" CZ " and I will give you "
+        " Spiders of the Curse" CZ " and I will give you "
     );
     appendItemName(&b, itemId, 0);
     appendStr(&b, CZ "." END);
+    autoLineBreaks(play->msgCtx.textBuffer);
 }
 #endif
