@@ -37,7 +37,7 @@ export type World = {
   areas: {[k: string]: WorldArea};
   checks: {[k: string]: WorldCheck};
   dungeons: {[k: string]: Set<string>};
-  regions: {[k: string]: Set<string>};
+  regions: {[k: string]: string};
 };
 
 const DUNGEONS_REGIONS: {[k: string]: string} = {
@@ -107,6 +107,8 @@ const loadWorldAreas = (world: World, game: Game, exprParser: ExprParser) => {
       const d = world.dungeons[dungeon];
       Object.keys(locations).forEach(x => d.add(x));
     }
+
+    Object.keys(locations).forEach(x => world.regions[x] = region);
   }
 };
 
@@ -155,7 +157,7 @@ const loadWorldGame = (world: World, game: Game, settings: Settings) => {
 }
 
 export const createWorld = (settings: Settings) => {
-  const world: World = { areas: {}, checks: {}, dungeons: {} };
+  const world: World = { areas: {}, checks: {}, dungeons: {}, regions: {} };
   for (const g of GAMES) {
     loadWorldGame(world, g, settings);
   }
