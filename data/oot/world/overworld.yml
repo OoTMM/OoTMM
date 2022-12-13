@@ -182,6 +182,7 @@
     "Lost Woods Grotto Generic": "has_explosives_or_hammer"
     "Lost Woods GS Soil Bridge": "gs_soil"
 "Lost Woods Bridge":
+  region: LOST_WOODS
   exits:
     "Kokiri Forest": "true"
     "Hyrule Field": "true"
@@ -312,6 +313,7 @@
     "Death Mountain GS Soil": "gs_soil && has_bombflowers"
     "Death Mountain GS Above Dodongo":  "gs_night && can_hammer"
 "Death Mountain Summit":
+  region: DEATH_MOUNTAIN_TRAIL
   exits:
     "Death Mountain": "true"
     "Kakariko Rooftop": "is_child"
@@ -325,7 +327,6 @@
     "Death Mountain Biggoron Sword": "adult_trade(CLAIM_CHECK)"
     "Great Fairy Magic Upgrade": "has_explosives_or_hammer && can_play(SONG_ZELDA)"
     "Death Mountain GS Before Climb": "gs_night && can_hammer"
-
 "Goron City Shortcut":
   region: GORON_CITY
   exits:
@@ -376,6 +377,7 @@
     "Zora River GS Near Grotto": "is_adult && gs_night && can_hookshot"
     "Zora River GS Near Bridge": "is_adult && gs_night && can_hookshot"
 "Zora Domain":
+  region: ZORA_DOMAIN
   exits:
     "Zora River": "true"
     "Lake Hylia": "is_child && has(SCALE)"
@@ -389,10 +391,12 @@
     "Zora Domain Eyeball Frog": "event(BLUE_FIRE) && adult_trade(PRESCRIPTION)"
     "Zora Domain GS Waterfall": "is_adult && gs_night && (has_ranged_weapon_adult || has(MAGIC_UPGRADE))"
 "Zora Domain Back":
+  region: ZORA_DOMAIN
   exits:
     "Zora Fountain": "true"
     "Zora Domain": "event(KING_ZORA_LETTER)"
 "Lake Hylia":
+  region: LAKE_HYLIA
   exits:
     "Hyrule Field": "true"
     "Zora Domain": "is_child && has(SCALE)"
@@ -412,6 +416,7 @@
     "Lake Hylia GS Soil": "gs_soil"
     "Lake Hylia GS Big Tree": "gs_night && can_longshot"
 "Laboratory":
+  region: LAKE_HYLIA
   exits:
     "Lake Hylia": "true"
   locations:
@@ -419,12 +424,14 @@
     "Laboratory Eye Drops": "is_adult && has(EYEBALL_FROG)"
     "Laboratory GS Crate": "is_adult && has_iron_boots && can_hookshot"
 "Fishing Pond":
+  region: LAKE_HYLIA
   exits:
     "Lake Hylia": "true"
   locations:
     "Fishing Pond Child": "is_child"
     "Fishing Pond Adult": "is_adult"
 "Zora Fountain":
+  region: ZORA_FOUNTAIN
   exits:
     "Zora Domain Back": "true"
     "Jabu-Jabu Entrance": "is_child && has_bottle"
@@ -437,18 +444,24 @@
     "Zora Fountain GS Tree": "is_child"
     "Zora Fountain GS Upper": "gs_night && has_explosives_or_hammer && can_hookshot && can_lift_silver"
 "Temple of Time":
+  region: TEMPLE_OF_TIME
   exits:
     "Market": "is_child"
     "Market Destroyed": "is_adult"
+    "Sacred Realm": "is_adult && event(DOOR_OF_TIME_OPEN)"
   events:
     DOOR_OF_TIME_OPEN: "can_play(SONG_TIME)"
     TIME_TRAVEL: "event(DOOR_OF_TIME_OPEN) && has(SWORD, 2)"
   locations:
     "Temple of Time Master Sword": "is_child && event(DOOR_OF_TIME_OPEN)"
-    "Temple of Time Medallion": "is_adult && event(DOOR_OF_TIME_OPEN)"
     "Temple of Time Sheik Song": "is_adult && event(DOOR_OF_TIME_OPEN) && has(MEDALLION_FOREST)"
     "Temple of Time Light Arrows": "is_adult && has(MEDALLION_SPIRIT) && has(MEDALLION_SHADOW)"
+"Sacred Realm":
+  region: SACRED_REALM
+  locations:
+    "Temple of Time Medallion": "true"
 "Death Mountain Crater Top":
+  region: DEATH_MOUNTAIN_CRATER
   exits:
     "Death Mountain Summit": "true"
     "Death Mountain Crater Bottom": "event(RED_BOULDER_BROKEN) || has_hover_boots"
@@ -457,6 +470,7 @@
     "Death Mountain Crater Grotto": "has_explosives_or_hammer"
     "Death Mountain Crater Alcove HP": "true"
 "Death Mountain Crater Bottom":
+  region: DEATH_MOUNTAIN_CRATER
   exits:
     "Goron City": "true"
     "Death Mountain Crater Warp": "can_hookshot || has_hover_boots"
@@ -466,6 +480,7 @@
   locations:
     "Great Fairy Magic Upgrade 2": "can_hammer && can_play(SONG_ZELDA)"
 "Death Mountain Crater Warp":
+  region: DEATH_MOUNTAIN_CRATER
   exits:
     "Fire Temple Entrance": "has_tunic_goron"
     "Death Mountain Crater Bottom": "can_hookshot || has_hover_boots || can_ride_bean(BEAN_DEATH_MOUNTAIN_CRATER)"
@@ -476,6 +491,7 @@
     "Death Mountain Crater Sheik Song": "true"
     "Death Mountain Crater GS Soil": "gs_soil"
 "Gerudo Valley":
+  region: GERUDO_VALLEY
   exits:
     "Lake Hylia": "true"
     "Hyrule Field": "true"
@@ -486,6 +502,7 @@
     "Gerudo Valley GS Soil": "gs_soil"
     "Gerudo Valley GS Wall": "is_child && gs_night && can_boomerang"
 "Gerudo Valley After Bridge":
+  region: GERUDO_VALLEY
   exits:
     "Lake Hylia": "true"
     "Gerudo Fortress Exterior": "true"
@@ -495,6 +512,7 @@
     "Gerudo Valley GS Tent": "is_adult && gs_night && can_hookshot"
     "Gerudo Valley GS Pillar": "is_adult && gs_night && can_hookshot"
 "Gerudo Fortress Exterior":
+  region: GERUDO_FORTRESS
   exits:
     "Gerudo Fortress": "true"
     "Gerudo Valley After Bridge": "true"
@@ -507,16 +525,19 @@
     "Gerudo Fortress GS Wall": "is_adult && gs_night && can_hookshot"
     "Gerudo Fortress GS Target": "is_adult && gs_night && can_hookshot && has(GERUDO_CARD)"
 "Haunted Wasteland Start":
+  region: HAUNTED_WASTELAND
   exits:
     "Gerudo Fortress Exterior": "true"
     "Haunted Wasteland Structure": "can_longshot || has_hover_boots"
 "Haunted Wasteland Structure":
+  region: HAUNTED_WASTELAND
   exits:
     "Desert Colossus": "has_lens"
   locations:
     "Haunted Wasteland Chest": "has_fire"
     "Haunted Wasteland GS": "can_collect_distance"
 "Desert Colossus":
+  region: DESERT_COLOSSUS
   exits:
     "Spirit Temple Entrance": "true"
   events:
