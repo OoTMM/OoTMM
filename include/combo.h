@@ -123,6 +123,7 @@ void    comboObjectsReset(void);
 void    comboObjectsGC(void);
 void*   comboGetObject(u16 objectId);
 u32     comboLoadObject(void* buffer, u16 objectId);
+void    comboLoadCustomKeep(void);
 
 /* Draw */
 #define DRAW_NO_PRE1    0x01
@@ -132,6 +133,8 @@ u32     comboLoadObject(void* buffer, u16 objectId);
 void comboSetObjectSegment(GfxContext* gfx, void* buffer);
 void comboDrawObject(GameState_Play* play, Actor* actor, u16 objectId, u16 shaderId, int flags);
 void comboDrawGI(GameState_Play* play, Actor* actor, int gi, int flags);
+void comboDrawInit2D(GameState_Play* play);
+void comboDrawBlit2D(GameState_Play* play, u32 segAddr, int w, int h, float x, float y, float scale);
 
 /* Event */
 void comboOotSetEventChk(u16 flag);
@@ -196,6 +199,24 @@ void*   actorAddr(u16 actorId, u32 addr);
 /* System */
 void comboInvalICache(void* addr, u32 size);
 void comboInvalDCache(void* addr, u32 size);
+
+/* Custom keep files */
+extern void* gCustomKeep;
+
+void comboDpadDraw(GameState_Play* play);
+void comboDpadUpdate(GameState_Play* play);
+
+/* DMA */
+typedef struct
+{
+    u32 vstart;
+    u32 vend;
+    u32 pstart;
+    u32 pend;
+}
+DmaEntry;
+
+extern DmaEntry kComboDmaData[];
 
 #else
 # include <combo/asm.h>

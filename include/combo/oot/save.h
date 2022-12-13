@@ -112,7 +112,7 @@ typedef struct
     char                    unk_3f[0x27];
     u16                     sceneId;
     u8                      buttons[7];
-    u16                     currentEquipment;
+    OotSaveEquipment        currentEquipment;
     char                    unk_72[0x2];
     u8                      inventory[0x18];
     u8                      ammo[0xf];
@@ -147,7 +147,10 @@ typedef struct
 {
     OotSave save;
     u32     fileIndex;
-    char    unk_1358[0x74];
+    /*char    unk_1358[0x74];*/
+    char    unk_1358[0x04];
+    s32     gameMode;
+    char    unk_1360[0x6c];
     s16     rupeesDelta;
     char    unk_13ce[0x28];
     s16     magicTarget;
@@ -158,6 +161,8 @@ typedef struct
     char    unk_1428[0x28];
 }
 OotSaveContext;
+
+ASSERT_OFFSET(OotSaveContext, gameMode, 0x135c);
 
 _Static_assert(sizeof(OotSave) == 0x1354, "OotSave size is wrong");
 _Static_assert(sizeof(OotSaveContext) == 0x1450, "OotSaveContext size is wrong");

@@ -21,15 +21,6 @@
 #define VROM_FOREIGN_OFFSET  0x04000000
 #define VROM_CUSTOM_OFFSET   0x08000000
 
-typedef struct
-{
-    u32 vstart;
-    u32 vend;
-    u32 pstart;
-    u32 pend;
-}
-DmaEntry;
-
 ALIGNED(16) DmaEntry kComboDmaData[DMA_COUNT + DMA_COUNT_FOREIGN + CUSTOM_DMA_SIZE + 1];
 
 extern s16 gDmaDataCount;

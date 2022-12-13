@@ -131,3 +131,9 @@ Sram_CopySave = 0x80090fd0;
 SetRoomClear = 0x800206ac;
 
 PlayStoreFlags = 0x8009d894;
+
+Player_Update = 0x80097740;
+
+OverlayAddr = 0x80099dbc;
+
+UpdateEquipment = 0x80079764;

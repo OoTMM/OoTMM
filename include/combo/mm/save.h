@@ -200,7 +200,9 @@ typedef struct PACKED
 {
     MmSave          save;
     u32             fileIndex;
-    char            unk_3ca4[0x28c];
+    char            unk_3ca4[0x4];
+    s32             gameMode;
+    char            unk_3cac[0x284];
     u16             magicTarget;
     char            unk_3f32[0x4];
     u16             dungeonId2;
@@ -217,6 +219,11 @@ MmSaveContext;
 
 _Static_assert(sizeof(MmSave) == 0x3ca0, "MmSave size is wrong");
 _Static_assert(sizeof(MmSaveContext) == 0x48ca, "MmSaveContext size is wrong");
+
+ASSERT_OFFSET(MmSaveContext, fileIndex,     0x3ca0);
+ASSERT_OFFSET(MmSaveContext, unk_3ca4,      0x3ca4);
+ASSERT_OFFSET(MmSaveContext, gameMode,      0x3ca8);
+ASSERT_OFFSET(MmSaveContext, unk_3cac,      0x3cac);
 ASSERT_OFFSET(MmSaveContext, unk_3f32,      0x3f32);
 ASSERT_OFFSET(MmSaveContext, dungeonId2,    0x3f36);
 ASSERT_OFFSET(MmSaveContext, options,       0x3f40);

@@ -1,6 +1,8 @@
 #include <combo.h>
 #include <combo/custom.h>
 
+void* gCustomKeep;
+
 #define OBJECT_COUNT    16
 #define OBJECT_TTL      6
 
@@ -138,7 +140,17 @@ static const ObjectPatch kObjectPatches[] = {
 
 void comboInitObjects(void)
 {
+    /* Load the DMA table */
     DMARomToRam(CUSTOM_OBJECTS_ADDR | PI_DOM1_ADDR2, kCustomObjectsTable, CUSTOM_OBJECTS_SIZE * sizeof(ObjectData));
+}
+
+void comboLoadCustomKeep(void)
+{
+    u32 customKeepSize;
+
+    customKeepSize = comboLoadObject(NULL, CUSTOM_OBJECT_ID_KEEP);
+    gCustomKeep = malloc(customKeepSize);
+    comboLoadObject(gCustomKeep, CUSTOM_OBJECT_ID_KEEP);
 }
 
 #if defined(GAME_OOT)

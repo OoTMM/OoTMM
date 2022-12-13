@@ -253,6 +253,11 @@ void hookPlay_Init(GameState_Play* play)
         play->transition.gfx = 11;
     }
 
+    if (!gCustomKeep)
+    {
+        comboLoadCustomKeep();
+    }
+
 #if defined(DEBUG)
     if (play->gs.input[0].current.buttons & R_TRIG)
     {
@@ -275,5 +280,10 @@ void Play_DrawWrapper(GameState_Play* play)
         gDPSetFillColor(OVERLAY_DISP++, 0);
         gDPFillRectangle(OVERLAY_DISP++, 0, 0, 0xfff, 0xfff);
         CLOSE_DISPS();
+    }
+    else
+    {
+        /* Need to draw dpad */
+        comboDpadDraw(play);
     }
 }

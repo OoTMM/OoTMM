@@ -49,3 +49,17 @@ PATCH_END
 PATCH_START 0x80859760
   li t8,DRAWGI_MM_MASK_SUN
 PATCH_END
+
+/* Use our Player_UpdateWrapper */
+PATCH_START 0x801d0b68
+.int Player_UpdateWrapper
+PATCH_END
+
+PATCH_START 0x80123100
+  lui t5,%HI(Player_UpdateWrapper)
+PATCH_END
+
+PATCH_START 0x8012310c
+  addiu t5,%LO(Player_UpdateWrapper)
+PATCH_END
+
