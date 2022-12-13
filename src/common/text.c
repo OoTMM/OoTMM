@@ -785,3 +785,24 @@ void comboTextHijackDungeonRewardHints(GameState_Play* play, int hint)
     appendStr(&b, END);
 }
 #endif
+
+#if defined(GAME_OOT)
+void comboTextHijackSkullReward(GameState_Play* play, s16 itemId, int count)
+{
+    char* b;
+
+    b = play->msgCtx.textBuffer;
+    appendHeader(&b);
+    appendStr(&b,
+        "Yeaaarrgh! I'm cursed!! Please save" NL
+        "me by destroying " COLOR_RED
+    );
+    appendNum(&b, count);
+    appendStr(&b,
+        " Spiders of the" NL
+        "Curse" CZ " and I will give you "
+    );
+    appendItemName(&b, itemId, 0);
+    appendStr(&b, CZ "." END);
+}
+#endif

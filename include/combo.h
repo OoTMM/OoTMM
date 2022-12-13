@@ -109,6 +109,7 @@ void comboTextHijackItemShop(GameState_Play* play, u16 itemId, s16 price, int co
 
 #if defined(GAME_OOT)
 void comboTextHijackDungeonRewardHints(GameState_Play* play, int base, int count);
+void comboTextHijackSkullReward(GameState_Play* play, s16 itemId, int count);
 #else
 void comboTextHijackDungeonRewardHints(GameState_Play* play, int hint);
 #endif
