@@ -151,7 +151,7 @@
 "Lost Woods":
   exits:
     "Kokiri Forest": "true"
-    "Lost Woods Bridge": "can_longshot || has_hover_boots || (can_use_beans && is_adult)
+    "Lost Woods Bridge": "can_longshot || has_hover_boots || (can_use_beans && is_adult)"
     "Lost Woods Deep": "is_child || can_play(SONG_SARIA)"
     "Goron City Shortcut": "true"
     "Zora River": "can_dive_small"
