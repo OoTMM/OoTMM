@@ -34,6 +34,3 @@ export const gameId = (game: Game, id: string, char: string) => {
   return [game.toUpperCase(), id].join(char);
 }
 
-export const fetchOrRead = async (filename: string): Promise<Buffer> => {
-  return fs.readFile(__dirname + '/../../data/' + filename);
-};

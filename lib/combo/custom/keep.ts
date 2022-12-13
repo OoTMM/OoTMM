@@ -1,17 +1,3 @@
-import { PNG } from 'pngjs';
-
-const parsePNG = async (data: Buffer) => new Promise<PNG>((resolve, reject) => {
-  const png = new PNG({
-    colorType: 6,
-    bitDepth: 8
-  });
-  png.parse(data, (err, res) => {
-    if (err)
-      return reject(err);
-    resolve(res);
-  });
-});
-
 export class KeepFile {
   private offset = 0;
   private data: Buffer[] = [];
@@ -35,11 +21,6 @@ export class KeepFile {
     const offset = this.offset;
     this.offset += data.length;
     return offset;
-  }
-
-  async addTexture(data: Buffer, format: 'RGBA32') {
-    const png = await parsePNG(data);
-    return this.addData(png.data);
   }
 
   pack() {

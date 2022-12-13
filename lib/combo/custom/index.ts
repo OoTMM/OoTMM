@@ -5,12 +5,13 @@ import { Buffer } from 'buffer';
 import { Game, DATA_FILES } from '../config';
 import { DmaData } from '../dma';
 import { splitObject } from './split';
-import { arrayToIndexMap, fetchOrRead } from '../util';
+import { arrayToIndexMap } from '../util';
 import { CodeGen } from '../codegen';
 import { DecompressedRoms } from '../decompress';
 import { Monitor } from '../monitor';
 import { CustomArchive } from './archive';
 import { KeepFile } from './keep';
+import { png } from './png';
 
 const FILES_TO_INDEX_OOT = arrayToIndexMap(DATA_FILES.oot);
 const FILES_TO_INDEX_MM = arrayToIndexMap(DATA_FILES.mm);
@@ -74,8 +75,8 @@ const customExtractedObjects = async (roms: DecompressedRoms, archive: CustomArc
 
 const customKeepFiles = async (roms: DecompressedRoms, archive: CustomArchive, cg: CodeGen) => {
   const keep = new KeepFile();
-  const dpad = await fetchOrRead('dpad.png');
-  await keep.addTexture(dpad, 'RGBA32');
+  const dpad = await png('dpad');
+  await keep.addData(dpad);
   const custonKeepId = await archive.addObject(keep.pack());
   cg.define('CUSTOM_OBJECT_ID_KEEP', custonKeepId);
 };
