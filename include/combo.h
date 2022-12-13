@@ -104,6 +104,7 @@ void comboGameSwitch(void);
 s16 comboOverride(int type, u16 sceneId, u16 id, s16 gi);
 
 /* Text */
+int  comboMultibyteCharSize(u8 c);
 void comboTextHijackItem(GameState_Play* play, u16 itemId);
 void comboTextHijackItemShop(GameState_Play* play, u16 itemId, s16 price, int confirm);
 
