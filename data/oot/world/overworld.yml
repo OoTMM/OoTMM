@@ -1,4 +1,5 @@
 "SPAWN":
+  region: NONE
   exits:
     "Link's House": "is_child"
     "Temple of Time": "(is_adult && event(TIME_TRAVEL)) || (is_child && can_play(SONG_TP_LIGHT))"
@@ -8,9 +9,11 @@
     "Graveyard Upper": "(is_child || event(TIME_TRAVEL)) && can_play(SONG_TP_SHADOW)"
     "Desert Colossus": "(is_child || event(TIME_TRAVEL)) && can_play(SONG_TP_SPIRIT)"
 "Link's House":
+  region: KOKIRI_FOREST
   exits:
     "Kokiri Forest": "true"
 "Kokiri Forest":
+  region: KOKIRI_FOREST
   exits:
     "Link's House": "true"
     "Mido's House": "true"
@@ -24,6 +27,7 @@
     "Kokiri Forest GS Night Child": "is_child && gs_night"
     "Kokiri Forest GS Night Adult": "is_adult && gs_night && can_hookshot"
 "Mido's House":
+  region: KOKIRI_FOREST
   exits:
     "Kokiri Forest": "true"
   locations:
@@ -32,6 +36,7 @@
     "Kokiri Forest Mido Bottom Left": "true"
     "Kokiri Forest Mido Bottom Right": "true"
 "Hyrule Field":
+  region: HYRULE_FIELD
   exits:
     "Lost Woods Bridge": "true"
     "Market": "is_child"
@@ -54,6 +59,7 @@
     "Hyrule Field Grotto Near Kakariko GS": "hidden_grotto_bomb && can_collect_distance"
     "Hyrule Field Grotto Near Gerudo GS": "((is_child && hidden_grotto_bomb) || (is_adult && can_hammer)) && can_collect_distance && has_fire"
 "Market":
+  region: MARKET
   exits:
     "Hyrule Field": "true"
     "Market Pot House": "true"
@@ -65,6 +71,7 @@
     "Shooting Gallery": "true"
     "MM SPAWN": "is_child"
 "Market Pot House":
+  region: MARKET
   exits:
     "Market": "is_child"
     "Market Destroyed": "is_adult"
@@ -72,15 +79,18 @@
     "Market Pot House Big Poes": "is_adult && event(BIG_POE)"
     "Market Pot House GS": "is_child"
 "Back Alley":
+  region: MARKET
   exits:
     "Market": "true"
     "Dog Lady House": "true"
 "Dog Lady House":
+  region: MARKET
   exits:
     "Back Alley": "true"
   locations:
     "Market Dog Lady HP": "true"
 "Bombchu Bowling":
+  region: MARKET
   exits:
     "Market": "true"
   locations:
