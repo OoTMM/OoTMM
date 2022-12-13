@@ -104,11 +104,13 @@ void comboGameSwitch(void);
 s16 comboOverride(int type, u16 sceneId, u16 id, s16 gi);
 
 /* Text */
+int  comboMultibyteCharSize(u8 c);
 void comboTextHijackItem(GameState_Play* play, u16 itemId);
 void comboTextHijackItemShop(GameState_Play* play, u16 itemId, s16 price, int confirm);
 
 #if defined(GAME_OOT)
 void comboTextHijackDungeonRewardHints(GameState_Play* play, int base, int count);
+void comboTextHijackSkullReward(GameState_Play* play, s16 itemId, int count);
 #else
 void comboTextHijackDungeonRewardHints(GameState_Play* play, int hint);
 #endif
