@@ -461,7 +461,7 @@
     "Desert Colossus": "has_lens"
   locations:
     "Haunted Wasteland Chest": "has_fire"
-    "Haunted Wasteland GS": "true"
+    "Haunted Wasteland GS": "can_collect_distance"
 "Desert Colossus":
   exits:
     "Spirit Temple Entrance": "true"
