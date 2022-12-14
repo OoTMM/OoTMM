@@ -50,6 +50,7 @@
 #include <combo/common/events.h>
 #include <combo/scenes.h>
 #include <combo/shader.h>
+#include <combo/config.h>
 
 #if !defined(__ASSEMBLER__)
 void comboDisableInterrupts(void);
@@ -75,6 +76,7 @@ ComboDataHints;
 
 typedef struct PACKED ALIGNED(4)
 {
+    u8             config[0x40];
     ComboDataHints hints;
 }
 ComboData;
