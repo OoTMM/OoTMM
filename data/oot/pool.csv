@@ -11,7 +11,7 @@ Kokiri Forest GS Night Adult,         gs,             KOKIRI_FOREST,            
 Malon Egg,                            npc,            HYRULE_CASTLE,            MALON_EGG,                  CHICKEN
 Zelda's Letter,                       npc,            CASTLE_COURTYARD,         ZELDA_LETTER,               ZELDA_LETTER
 Zelda's Song,                         npc,            CASTLE_COURTYARD,         ZELDA_SONG,                 SONG_ZELDA
-Lost Woods Bridge,                    npc,            LOST_WOODS,               SARIA_OCARINA,              OCARINA
+Lost Woods Gift from Saria,           npc,            LOST_WOODS,               SARIA_OCARINA,              OCARINA
 Lost Woods Target,                    npc,            LOST_WOODS,               LOST_WOODS_TARGET,          SLINGSHOT
 Lost Woods Skull Kid,                 npc,            LOST_WOODS,               LOST_WOODS_SKULL_KID,       HEART_PIECE
 Lost Woods Memory Game,               npc,            LOST_WOODS,               LOST_WOODS_MEMORY,          HEART_PIECE

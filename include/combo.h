@@ -69,6 +69,13 @@ extern ComboContext gComboCtx;
 typedef struct PACKED ALIGNED(4)
 {
     u8 dungeonRewards[13];
+    u8 lightArrows;
+}
+ComboDataHints;
+
+typedef struct PACKED ALIGNED(4)
+{
+    ComboDataHints hints;
 }
 ComboData;
 
@@ -111,6 +118,7 @@ void comboTextHijackItemShop(GameState_Play* play, u16 itemId, s16 price, int co
 #if defined(GAME_OOT)
 void comboTextHijackDungeonRewardHints(GameState_Play* play, int base, int count);
 void comboTextHijackSkullReward(GameState_Play* play, s16 itemId, int count);
+void comboTextHijackLightArrows(GameState_Play* play);
 #else
 void comboTextHijackDungeonRewardHints(GameState_Play* play, int hint);
 #endif
