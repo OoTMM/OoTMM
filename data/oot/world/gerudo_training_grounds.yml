@@ -40,7 +40,7 @@
   dungeon: GTG
   exits:
     "Gerudo Training Grounds Maze Side": "can_play(SONG_TIME)"
-    "Gerudo Training Grounds Hammer": "can_hookshot && (has_hover_boots || can_play(SONG_TIME))"
+    "Gerudo Training Grounds Hammer": "can_hookshot && (can_longshot || has_hover_boots || can_play(SONG_TIME))"
     "Gerudo Training Grounds Water": "can_hookshot && (has_hover_boots || can_play(SONG_TIME))"
 "Gerudo Training Grounds Maze Side":
   dungeon: GTG
