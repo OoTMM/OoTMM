@@ -10,7 +10,7 @@ Clock Town Bomber Notebook,                     npc,            CLOCK_TOWN_NORTH
 Clock Town Blast Mask,                          npc,            CLOCK_TOWN_NORTH,           MASK_BLAST,             MASK_BLAST
 Clock Town Keaton HP,                           npc,            CLOCK_TOWN_NORTH,           KEATON_HEART_PIECE,     HEART_PIECE
 Clock Town Silver Rupee Chest,                  chest,          CLOCK_TOWN_EAST,            0x0a,                   RUPEE_SILVER
-clock Town Postman Hat,                         npc,            CLOCK_TOWN_EAST,            MASK_POSTMAN,           MASK_POSTMAN
+Clock Town Postman Hat,                         npc,            CLOCK_TOWN_EAST,            MASK_POSTMAN,           MASK_POSTMAN
 Clock Town Bank Reward 1,                       npc,            CLOCK_TOWN_WEST,            BANK_1,                 WALLET
 Clock Town Bank Reward 2,                       npc,            CLOCK_TOWN_WEST,            BANK_2,                 RUPEE_BLUE
 Clock Town Bank Reward 3,                       npc,            CLOCK_TOWN_WEST,            BANK_3,                 HEART_PIECE
