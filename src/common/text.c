@@ -385,6 +385,95 @@ static const char* const kItemNamesMm[] = {
     "a " C0 "World Map (Stone Tower)",
 };
 
+typedef struct
+{
+    char* prepos;
+    char* name;
+}
+RegionName;
+
+const RegionName kRegionNamesOot[] = {
+    { "in",         "the " COLOR_YELLOW "Sacred Realm" },
+    { "inside",     "the " COLOR_GREEN "Deku Tree" },
+    { "inside",     COLOR_RED "Dodongo's Cavern" },
+    { "inside",     COLOR_BLUE "Jabu-Jabu" },
+    { "in",         "the " COLOR_GREEN "Forest Temple" },
+    { "in",         "the " COLOR_RED "Fire Temple" },
+    { "in",         "the " COLOR_BLUE "Water Temple" },
+    { "in",         "the " COLOR_ORANGE "Spirit Temple" },
+    { "in",         "the " COLOR_PINK "Shadow Temple" },
+    { "at",         "the " COLOR_PINK "Bottom of the Well" },
+    { "in",         "the " COLOR_TEAL "Ice Caverns" },
+    { "in",         COLOR_YELLOW "Gerudo Training Grounds" },
+    { "in",         "the "COLOR_YELLOW "Thieve's Hideout" },
+    { "inside",     COLOR_RED "Ganon's Castle" },
+    { "in",         "the " COLOR_GREEN "Kokiri Forest" },
+    { "in",         COLOR_YELLOW "Hyrule Field" },
+    { "in",         COLOR_YELLOW "Hyrule's Market" },
+    { "in",         COLOR_ORANGE "Lon Lon Ranch" },
+    { "in",         COLOR_YELLOW "Hyrule's Castle" },
+    { "in",         COLOR_RED "Ganon's Castle Exterior" },
+    { "in",         "the " COLOR_GREEN "Lost Woods" },
+    { "in",         "the " COLOR_GREEN "Sacred Meadow" },
+    { "in",         COLOR_RED "Kakariko" },
+    { "inside",     COLOR_PINK "Kakariko's Graveyard" },
+    { "on",         COLOR_RED "Death Mountain's Trail" },
+    { "in",         COLOR_RED "Death Mountain's Crater" },
+    { "in",         COLOR_RED "Goron City" },
+    { "in",         COLOR_BLUE "Zora's River" },
+    { "in",         COLOR_BLUE "Zora's Domain" },
+    { "in",         COLOR_BLUE "Zora's Fountain" },
+    { "around",     COLOR_BLUE "Lake Hylia" },
+    { "in",         "the " COLOR_YELLOW "Temple of Time" },
+    { "in",         COLOR_ORANGE "Gerudo Valley" },
+    { "around",     COLOR_ORANGE "Gerudo Fortress" },
+    { "in",         "the " COLOR_YELLOW "Haunted Wastelands" },
+    { "around",     "the " COLOR_ORANGE "Desert Colossus" },
+};
+
+const RegionName kRegionNamesMm[] = {
+    { "in",         COLOR_GREEN "Woodfall Temple" },
+    { "in",         COLOR_TEAL "Snowhead Temple" },
+    { "in",         COLOR_BLUE "Great Bay Temple" },
+    { "in",         COLOR_ORANGE "Stone Tower Temple" },
+    { "in",         COLOR_YELLOW "South Clock Town" },
+    { "in",         COLOR_YELLOW "North Clock Town" },
+    { "in",         COLOR_YELLOW "East Clock Town" },
+    { "in",         COLOR_YELLOW "West Clock Town" },
+    { "in",         "the " COLOR_YELLOW "Laundry Pool" },
+    { "inside",     "the " COLOR_PINK "Giants's Dream" },
+    { "on",         COLOR_YELLOW "Clock Tower Roof" },
+    { "in",         "the " COLOR_RED "Stock Pot Inn" },
+    { "in",         COLOR_RED "Termina Field" },
+    { "on",         "the " COLOR_GREEN "Road to the Swamp" },
+    { "in",         "the " COLOR_GREEN "Southern Swamp" },
+    { "in",         COLOR_GREEN "Deku Palace" },
+    { "in",         COLOR_GREEN "Woodfall" },
+    { "on",         "the " COLOR_RED "Path to Mountain Village" },
+    { "in",         "the " COLOR_RED "Mountain Village" },
+    { "on",         "the " COLOR_RED "Path to Snowhead" },
+    { "around",     COLOR_RED "Twin Islands" },
+    { "around",     COLOR_RED "Goron Village" },
+    { "in",         COLOR_RED "Snowhead" },
+    { "around",     "the " COLOR_PINK "Milk Road" },
+    { "around",     COLOR_ORANGE "Romani Ranch" },
+    { "around",     COLOR_BLUE "Great Bay Coast" },
+    { "in",         "the " COLOR_BLUE "Pirate's Fortress Exterior" },
+    { "in",         "the " COLOR_BLUE "Pirate's Fortress Sewers" },
+    { "in",         "the " COLOR_BLUE "Pirate's Fortress Interior" },
+    { "around",     COLOR_BLUE "Zora Cape" },
+    { "in",         COLOR_BLUE "Zora Hall" },
+    { "in",         COLOR_BLUE "Pinnacle Rock" },
+    { "on",         "the " COLOR_ORANGE "Road to Ikana" },
+    { "in",         COLOR_PINK "Ikana's Graveyard" },
+    { "in",         COLOR_ORANGE "Ikana Canyon" },
+    { "in",         "the " COLOR_ORANGE "Ancient Castle of Ikana" },
+    { "somewhere",  COLOR_PINK "Beneath the Well" },
+    { "in",         "a " COLOR_YELLOW "Secret Shrine" },
+    { "on",         "the " COLOR_ORANGE "Stone Tower" },
+    { "on",         "the " COLOR_RED "Moon" },
+};
+
 static void autoLineBreaks(char* buffer)
 {
     static const int kMaxLineLength = 37;
@@ -757,21 +846,35 @@ static const char kIcons[] = {
 };
 #endif
 
-static const char* kDungeonRewardsRegions[] = {
-    "In the " COLOR_YELLOW "Sacred Realm",
-    "Inside the " COLOR_GREEN "Deku Tree",
-    "Inside " COLOR_RED "Dodongo's Cavern",
-    "Inside " COLOR_BLUE "Jabu-Jabu",
-    "In the " COLOR_GREEN "Forest Temple",
-    "In the " COLOR_RED "Fire Temple",
-    "In the " COLOR_BLUE "Water Temple",
-    "In the " COLOR_ORANGE "Spirit Temple",
-    "In the " COLOR_PINK "Shadow Temple",
-    "In " COLOR_GREEN "Woodfall Temple",
-    "In " COLOR_TEAL "Snowhead Temple",
-    "In " COLOR_BLUE "Great Bay Temple",
-    "In " COLOR_ORANGE "Stone Tower Temple",
-};
+static void appendRegionName(char** b, u8 regionId, int prepos, int capitalize)
+{
+    char* start;
+    const RegionName* regName;
+
+    if (regionId & 0x80)
+    {
+        regName = &kRegionNamesMm[(regionId & 0x7f) - 1];
+    }
+    else
+    {
+        regName = &kRegionNamesOot[(regionId & 0x7f) - 1];
+    }
+
+    start = *b;
+    if (prepos)
+    {
+        appendStr(b, regName->prepos);
+        appendStr(b, " ");
+    }
+    appendStr(b, regName->name);
+    appendClearColor(b);
+
+    if (capitalize)
+    {
+        start[0] = toupper(start[0]);
+    }
+}
+
 
 #if defined(GAME_OOT)
 void comboTextHijackDungeonRewardHints(GameState_Play* play, int base, int count)
@@ -786,8 +889,7 @@ void comboTextHijackDungeonRewardHints(GameState_Play* play, int base, int count
         index = base + i;
         appendStr(&b, FAST ICON);
         *b++ = kIcons[index];
-        appendStr(&b, kDungeonRewardsRegions[gComboData.dungeonRewards[index]]);
-        appendClearColor(&b);
+        appendRegionName(&b, gComboData.dungeonRewards[index], 1, 1);
         appendStr(&b, "...");
 
         if (i == (count - 1))
@@ -810,8 +912,7 @@ void comboTextHijackDungeonRewardHints(GameState_Play* play, int hint)
 
     b = play->textBuffer;
     appendBossRewardHeader(&b, 0x55 + hint);
-    appendStr(&b, kDungeonRewardsRegions[gComboData.dungeonRewards[9 + hint]]);
-    appendClearColor(&b);
+    appendRegionName(&b, gComboData.dungeonRewards[9 + hint], 1, 1);
     appendStr(&b, "...");
     if (hint != 3)
         appendStr(&b, "\x19");

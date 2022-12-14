@@ -131,7 +131,7 @@ export const randomizeGame = async (settings: Settings, game: Game, logic: Logic
 };
 
 export const randomizerDataDungeonRewards = async (logic: LogicResult): Promise<Buffer> => {
-  const data = logic.dungeonRewards.map((region) => {
+  const data = logic.hints.dungeonRewards.map((region) => {
     const regionId = DATA_REGIONS[region];
     if (regionId === undefined) {
       throw new Error(`Unknown region ${region}`);
