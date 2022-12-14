@@ -889,7 +889,7 @@ void comboTextHijackDungeonRewardHints(GameState_Play* play, int base, int count
         index = base + i;
         appendStr(&b, FAST ICON);
         *b++ = kIcons[index];
-        appendRegionName(&b, gComboData.dungeonRewards[index], 1, 1);
+        appendRegionName(&b, gComboData.hints.dungeonRewards[index], 1, 1);
         appendStr(&b, "...");
 
         if (i == (count - 1))
@@ -912,7 +912,7 @@ void comboTextHijackDungeonRewardHints(GameState_Play* play, int hint)
 
     b = play->textBuffer;
     appendBossRewardHeader(&b, 0x55 + hint);
-    appendRegionName(&b, gComboData.dungeonRewards[9 + hint], 1, 1);
+    appendRegionName(&b, gComboData.hints.dungeonRewards[9 + hint], 1, 1);
     appendStr(&b, "...");
     if (hint != 3)
         appendStr(&b, "\x19");
@@ -936,6 +936,20 @@ void comboTextHijackSkullReward(GameState_Play* play, s16 itemId, int count)
     );
     appendItemName(&b, itemId, 0);
     appendStr(&b, CZ "." END);
+    autoLineBreaks(play->msgCtx.textBuffer);
+}
+
+void comboTextHijackLightArrows(GameState_Play* play)
+{
+    char* b;
+
+    b = play->msgCtx.textBuffer;
+    appendHeader(&b);
+    appendStr(&b,
+        "Have you found the " COLOR_YELLOW "Light Arrows " CZ
+    );
+    appendRegionName(&b, gComboData.hints.lightArrows, 1, 0);
+    appendStr(&b, "?" END);
     autoLineBreaks(play->msgCtx.textBuffer);
 }
 #endif

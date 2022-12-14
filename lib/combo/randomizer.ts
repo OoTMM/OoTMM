@@ -130,8 +130,8 @@ export const randomizeGame = async (settings: Settings, game: Game, logic: Logic
   return toU16Buffer(buf);
 };
 
-export const randomizerDataDungeonRewards = async (logic: LogicResult): Promise<Buffer> => {
-  const data = logic.hints.dungeonRewards.map((region) => {
+const regionsBuffer = (regions: string[]) => {
+  const data = regions.map((region) => {
     const regionId = DATA_REGIONS[region];
     if (regionId === undefined) {
       throw new Error(`Unknown region ${region}`);
@@ -141,9 +141,16 @@ export const randomizerDataDungeonRewards = async (logic: LogicResult): Promise<
   return toU8Buffer(data);
 };
 
+export const randomizerHints = (logic: LogicResult): Buffer => {
+  const buffers: Buffer[] = [];
+  buffers.push(regionsBuffer(logic.hints.dungeonRewards));
+  buffers.push(regionsBuffer([logic.hints.lightArrow]));
+  return Buffer.concat(buffers);
+};
+
 export const randomizerData = async (logic: LogicResult, options: Options): Promise<Buffer> => {
   const buffers = [];
-  buffers.push(await randomizerDataDungeonRewards(logic));
+  buffers.push(randomizerHints(logic));
   return Buffer.concat(buffers);
 };
 
