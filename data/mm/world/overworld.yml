@@ -342,7 +342,7 @@
 "Swamp Spider House":
   region: SOUTHERN_SWAMP
   exits:
-    "Swamp": "true"
+    "Swamp Back": "true"
   locations:
     "Swamp Spider House Mask of Truth": "has_weapon && has_bottle && has_weapon_range && (has(HOOKSHOT) || has(MASK_ZORA) || (has(MASK_DEKU) && (has(BOW) || has(MAGIC_UPGRADE) || has(BOMB_BAG))) && (has(HOOKSHOT) || has(MASK_ZORA) || can_use_beans) && (has(HOOKSHOT) || has(MASK_ZORA) || (can_use_beans && can_break_boulders)))"
 
