@@ -385,6 +385,32 @@ static const char* const kItemNamesMm[] = {
     "a " C0 "World Map (Stone Tower)",
 };
 
+typedef struct
+{
+    char* prepos;
+    char* name;
+}
+RegionName;
+
+const RegionName kRegionNamesOot[] = {
+    { "in",         "the " COLOR_YELLOW "Sacred Realm" },
+    { "inside",     "the " COLOR_GREEN "Deku Tree" },
+    { "inside",     COLOR_RED "Dodongo's Cavern" },
+    { "inside",     COLOR_BLUE "Jabu-Jabu" },
+    { "in",         "the " COLOR_GREEN "Forest Temple" },
+    { "in",         "the " COLOR_RED "Fire Temple" },
+    { "in",         "the " COLOR_BLUE "Water Temple" },
+    { "in",         "the " COLOR_ORANGE "Spirit Temple" },
+    { "in",         "the " COLOR_PINK "Shadow Temple" },
+};
+
+const RegionName kRegionNamesMm[] = {
+    { "in", COLOR_GREEN "Woodfall Temple" },
+    { "in", COLOR_TEAL "Snowhead Temple" },
+    { "in", COLOR_BLUE "Great Bay Temple" },
+    { "in", COLOR_ORANGE "Stone Tower Temple" },
+};
+
 static void autoLineBreaks(char* buffer)
 {
     static const int kMaxLineLength = 37;
@@ -757,21 +783,35 @@ static const char kIcons[] = {
 };
 #endif
 
-static const char* kDungeonRewardsRegions[] = {
-    "In the " COLOR_YELLOW "Sacred Realm",
-    "Inside the " COLOR_GREEN "Deku Tree",
-    "Inside " COLOR_RED "Dodongo's Cavern",
-    "Inside " COLOR_BLUE "Jabu-Jabu",
-    "In the " COLOR_GREEN "Forest Temple",
-    "In the " COLOR_RED "Fire Temple",
-    "In the " COLOR_BLUE "Water Temple",
-    "In the " COLOR_ORANGE "Spirit Temple",
-    "In the " COLOR_PINK "Shadow Temple",
-    "In " COLOR_GREEN "Woodfall Temple",
-    "In " COLOR_TEAL "Snowhead Temple",
-    "In " COLOR_BLUE "Great Bay Temple",
-    "In " COLOR_ORANGE "Stone Tower Temple",
-};
+static void appendRegionName(char** b, u8 regionId, int prepos, int capitalize)
+{
+    char* start;
+    const RegionName* regName;
+
+    if (regionId & 0x80)
+    {
+        regName = &kRegionNamesMm[(regionId & 0x7f) - 1];
+    }
+    else
+    {
+        regName = &kRegionNamesOot[(regionId & 0x7f) - 1];
+    }
+
+    start = *b;
+    if (prepos)
+    {
+        appendStr(b, regName->prepos);
+        appendStr(b, " ");
+    }
+    appendStr(b, regName->name);
+    appendClearColor(b);
+
+    if (capitalize)
+    {
+        start[0] = toupper(start[0]);
+    }
+}
+
 
 #if defined(GAME_OOT)
 void comboTextHijackDungeonRewardHints(GameState_Play* play, int base, int count)
@@ -786,8 +826,7 @@ void comboTextHijackDungeonRewardHints(GameState_Play* play, int base, int count
         index = base + i;
         appendStr(&b, FAST ICON);
         *b++ = kIcons[index];
-        appendStr(&b, kDungeonRewardsRegions[gComboData.dungeonRewards[index]]);
-        appendClearColor(&b);
+        appendRegionName(&b, gComboData.dungeonRewards[index], 1, 1);
         appendStr(&b, "...");
 
         if (i == (count - 1))
@@ -810,8 +849,7 @@ void comboTextHijackDungeonRewardHints(GameState_Play* play, int hint)
 
     b = play->textBuffer;
     appendBossRewardHeader(&b, 0x55 + hint);
-    appendStr(&b, kDungeonRewardsRegions[gComboData.dungeonRewards[9 + hint]]);
-    appendClearColor(&b);
+    appendRegionName(&b, gComboData.dungeonRewards[9 + hint], 1, 1);
     appendStr(&b, "...");
     if (hint != 3)
         appendStr(&b, "\x19");
