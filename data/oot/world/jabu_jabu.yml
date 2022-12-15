@@ -2,7 +2,7 @@
   dungeon: JJ
   exits:
     "Zora Fountain": "true"
-    "Jabu-Jabu Main": "has_ranged_weapon"
+    "Jabu-Jabu Main": "has_ranged_weapon || has_explosives"
 "Jabu-Jabu Main":
   dungeon: JJ
   exits:
@@ -14,7 +14,7 @@
     "Jabu-Jabu Boomerang Chest": "true"
     "Jabu-Jabu GS Bottom Lower": "can_boomerang"
     "Jabu-Jabu GS Bottom Upper": "can_boomerang"
-    "Jabu-Jabu GS Water Switch": "has_ranged_weapon"
+    "Jabu-Jabu GS Water Switch": "has_ranged_weapon || has_explosives"
     "Jabu-Jabu GS Near Boss": "can_boomerang"
 "Jabu-Jabu Boss":
   dungeon: JJ

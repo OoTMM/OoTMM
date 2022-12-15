@@ -4,12 +4,12 @@ import { createWorld, WorldCheck } from './world';
 import { spoiler } from './spoiler';
 import { LogicSeedError } from './error';
 import { Options } from '../options';
-import { dungeonRewardRegions } from './hints';
+import { hints, Hints } from './hints';
 
 export type LogicResult = {
   items: WorldCheck[];
-  dungeonRewards: string[];
   log: string;
+  hints: Hints;
 };
 
 export const logic = (opts: Options): LogicResult => {
@@ -41,6 +41,6 @@ export const logic = (opts: Options): LogicResult => {
     const check = world.checks[loc];
     items.push({ ...check, item: placement[loc] });
   }
-  const dungeonRewards = dungeonRewardRegions(placement);
-  return { items, log, dungeonRewards };
+  const h = hints(world, placement);
+  return { items, log, hints: h };
 };

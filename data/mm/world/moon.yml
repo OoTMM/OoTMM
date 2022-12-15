@@ -1,4 +1,5 @@
 "Moon":
+  region: MOON
   exits:
     "Moon Trial Deku":  "masks(1)"
     "Moon Trial Goron": "masks(2)"
@@ -7,30 +8,36 @@
   locations:
     "Moon Fierce Deity Mask": "masks(20) && event(MOON_TRIAL_DEKU) && event(MOON_TRIAL_GORON) && event(MOON_TRIAL_ZORA) && event(MOON_TRIAL_LINK)"
 "Moon Trial Deku":
+  region: MOON
   events:
     MOON_TRIAL_DEKU: "has(MASK_DEKU)"
   locations:
     "Moon Trial Deku HP": "has(MASK_DEKU)"
 "Moon Trial Goron":
+  region: MOON
   events:
     MOON_TRIAL_GORON: "has(MASK_GORON) && has(MAGIC_UPGRADE)"
   locations:
     "Moon Trial Goron HP": "has(MASK_GORON) && has(MAGIC_UPGRADE)"
 "Moon Trial Zora":
+  region: MOON
   events:
     MOON_TRIAL_ZORA: "has(MASK_ZORA)"
   locations:
     "Moon Trial Zora HP": "has(MASK_ZORA)"
 "Moon Trial Link":
+  region: MOON
   exits:
     "Moon Trial Link 2": "has(HOOKSHOT)"
 "Moon Trial Link 2":
+  region: MOON
   exits:
     "Moon Trial Link 3": "has_bombchu && has(BOW)"
   locations:
     "Moon Trial Link Chest 1": "true"
     "Moon Trial Link Chest 2": "true"
 "Moon Trial Link 3":
+  region: MOON
   events:
     MOON_TRIAL_LINK: "has_bombchu && can_use_fire_arrows"
   locations:

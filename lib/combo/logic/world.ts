@@ -2,7 +2,7 @@ import { Game, GAMES } from '../config';
 import { gameId } from '../util';
 import { Expr } from './expr';
 import { ExprParser } from './expr-parser';
-import { DATA_POOL, DATA_MACROS, DATA_WORLD } from '../data';
+import { DATA_POOL, DATA_MACROS, DATA_WORLD, DATA_REGIONS } from '../data';
 import { Constraint, itemConstraint } from './constraints';
 import { Settings } from '../settings';
 
@@ -37,6 +37,27 @@ export type World = {
   areas: {[k: string]: WorldArea};
   checks: {[k: string]: WorldCheck};
   dungeons: {[k: string]: Set<string>};
+  regions: {[k: string]: string};
+};
+
+const DUNGEONS_REGIONS: {[k: string]: string} = {
+  DT: "DEKU_TREE",
+  DC: "DODONGO_CAVERN",
+  JJ: "JABU_JABU",
+  Forest: "TEMPLE_FOREST",
+  Fire: "TEMPLE_FIRE",
+  Water: "TEMPLE_WATER",
+  Spirit: "TEMPLE_SPIRIT",
+  Shadow: "TEMPLE_SHADOW",
+  BotW: "BOTTOM_OF_THE_WELL",
+  IC: "ICE_CAVERN",
+  GTG: "GERUDO_TRAINING_GROUNDS",
+  GF: "THIEVES_HIDEOUT",
+  Ganon: "GANON_CASTLE",
+  WF: "TEMPLE_WOODFALL",
+  SH: "TEMPLE_SNOWHEAD",
+  GB: "TEMPLE_GREAT_BAY",
+  ST: "TEMPLE_STONE_TOWER",
 };
 
 const mapExprs = (exprParser: ExprParser, game: Game, data: any) => {
@@ -56,13 +77,25 @@ const loadWorldAreas = (world: World, game: Game, exprParser: ExprParser) => {
   for (let name in data) {
     const area = data[name];
     name = gameId(game, name, ' ');
-    const dungeon = area.dungeon;
+    const dungeon = area.dungeon || null;
+    let region = area.region || DUNGEONS_REGIONS[dungeon];
+    if (region !== 'NONE') {
+      region = region ? gameId(game, region, '_') : undefined;
+    }
     const locations = mapExprs(exprParser, game, area.locations || {});
     const exits = mapExprs(exprParser, game, area.exits || {});
     const events = mapExprs(exprParser, game, area.events || {});
 
     if (name === undefined) {
       throw new Error(`Area name is undefined`);
+    }
+
+    if (region === undefined) {
+      throw new Error(`Undefined region for area ${name}`);
+    }
+
+    if (DATA_REGIONS[region] === undefined) {
+      throw new Error(`Unknown region ${region}`);
     }
 
     world.areas[name] = { locations, exits, events };
@@ -74,6 +107,8 @@ const loadWorldAreas = (world: World, game: Game, exprParser: ExprParser) => {
       const d = world.dungeons[dungeon];
       Object.keys(locations).forEach(x => d.add(x));
     }
+
+    Object.keys(locations).forEach(x => world.regions[x] = region);
   }
 };
 
@@ -122,7 +157,7 @@ const loadWorldGame = (world: World, game: Game, settings: Settings) => {
 }
 
 export const createWorld = (settings: Settings) => {
-  const world: World = { areas: {}, checks: {}, dungeons: {} };
+  const world: World = { areas: {}, checks: {}, dungeons: {}, regions: {} };
   for (const g of GAMES) {
     loadWorldGame(world, g, settings);
   }
