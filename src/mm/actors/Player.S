@@ -63,3 +63,7 @@ PATCH_START 0x8012310c
   addiu t5,%LO(Player_UpdateWrapper)
 PATCH_END
 
+/* Ignore the owl save flag when soaring */
+PATCH_START 0x80841640
+  li t6,0
+PATCH_END
