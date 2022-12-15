@@ -281,7 +281,7 @@ const combinedItems = (items: Items, other: Items) => {
 class Solver {
   private placement: ItemPlacement = {};
   private items: Items = {};
-  private reachable?: Reachable;
+  private reachable: Reachable;
   private pools: ItemPools;
   private reachedLocations = new Set<string>();
   private fixedLocations = new Set<string>();
@@ -294,6 +294,7 @@ class Solver {
   ) {
     this.fixLocations();
     this.pools = this.makeItemPools();
+    this.reachable = pathfind(this.world, {});
   }
 
   solve() {
@@ -448,38 +449,28 @@ class Solver {
   }
 
   private fixDungeon(dungeon: string) {
-    let reachable: Reachable | undefined = undefined;
-    const assumed: Items = {};
+    const pool = combinedItems(this.pools.dungeon, this.pools.required);
 
     for (const game of GAMES) {
       for (const baseItem of ['SMALL_KEY', 'BOSS_KEY', 'STRAY_FAIRY', 'MAP', 'COMPASS']) {
         const item = gameId(game, baseItem + '_' + dungeon.toUpperCase(), '_');
-        const locations = new Set(Array.from(this.world.dungeons[dungeon]).filter(loc => !this.placement[loc] && this.world.checks[loc].constraint === 'none'));
-        while (this.pools.dungeon[item]) {
-          reachable = this.randomRestricted(this.pools.dungeon, assumed, item, locations, reachable);
+        while (pool[item]) {
+          this.randomAssumed(pool, { restrictedLocations: this.world.dungeons[dungeon], forcedItem: item });
         }
       }
     }
   }
 
-  private randomRestricted(pool: Items, assume: Items, item: string, locations: Set<string>, reachable?: Reachable) {
-    const rewardsPool: Items = Array.from(ITEMS_DUNGEON_REWARDS).reduce((acc, x) => ({ ...acc, [x]: 1 }), {});
-    const assumedItems = combinedItems(combinedItems(combinedItems(this.pools.required, assume), rewardsPool), this.restrictedAssumed);
-    const assumedReachable = pathfind(this.world, assumedItems, reachable);
+  private randomAssumed(pool: Items, opts?: { restrictedLocations?: Set<string>, forcedItem?: string }) {
+    const options = opts || {};
 
-    let validLocations = Array.from(locations).filter(x => assumedReachable.locations.has(x)).filter(x => !this.placement[x]);
-
-    const location = sample(this.random, validLocations);
-    this.place(location, item);
-    removeItem(pool, item);
-    addItem(assume, item);
-
-    return assumedReachable;
-  }
-
-  private randomAssumed(pool: Items) {
     /* Select a random item from the required pool */
-    const requiredItem = sample(this.random, itemsArray(pool));
+    let requiredItem: string | null = null
+    if (options.forcedItem) {
+      requiredItem = options.forcedItem;
+    } else {
+      requiredItem = sample(this.random, itemsArray(pool));
+    }
 
     /* Get the constraint associated with the item */
     const constraint = this.constraint(requiredItem);
@@ -512,9 +503,13 @@ class Solver {
     const assumedReachable = reachable.locations;
 
     /* Get all assumed reachable locations that have not been placed */
-    const unplacedLocs = Array.from(assumedReachable)
+    let unplacedLocs = Array.from(assumedReachable)
       .filter(location => this.world.checks[location].constraint === constraint)
       .filter(location => !this.placement[location]);
+
+    if (options.restrictedLocations) {
+      unplacedLocs = unplacedLocs.filter(x => options.restrictedLocations!.has(x));
+    }
 
     /* If there is nowhere to place an item, raise an error */
     if (unplacedLocs.length === 0) {
