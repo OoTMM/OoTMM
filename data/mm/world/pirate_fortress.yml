@@ -1,4 +1,5 @@
 "Pirate Fortress Entrance":
+  region: PIRATE_FORTRESS_EXTERIOR
   exits:
     "Pirate Fortress Sewers": "has(MASK_ZORA) && has(MASK_GORON)"
     "Pirate Fortress Exterior": "has(HOOKSHOT)"
@@ -9,6 +10,7 @@
     "Pirate Fortress Entrance Chest 2": "has(MASK_ZORA)"
     "Pirate Fortress Entrance Chest 3": "has(MASK_ZORA)"
 "Pirate Fortress Sewers":
+  region: PIRATE_FORTRESS_SEWERS
   exits:
     "Pirate Fortress Exterior": "true"
   locations:
@@ -17,6 +19,7 @@
     "Pirate Fortress Sewers Chest 3": "true"
     "Pirate Fortress Sewers HP": "true"
 "Pirate Fortress Exterior":
+  region: PIRATE_FORTRESS_INTERIOR
   exits:
     "Pirate Fortress Entrance": "true"
     "Pirate Fortress Interior Hookshot Room": "has(BOW) || can_use_deku_bubble"
@@ -27,9 +30,11 @@
     "Pirate Fortress Exterior Lower Chest": "true"
     "Pirate Fortress Exterior Upper Chest": "has(HOOKSHOT)"
 "Pirate Fortress Interior Hookshot Room":
+  region: PIRATE_FORTRESS_INTERIOR
   locations:
     "Pirate Fortress Interior Hookshot": "true"
 "Pirate Fortress Interior Other Rooms":
+  region: PIRATE_FORTRESS_INTERIOR
   locations:
     "Pirate Fortress Interior Aquarium": "has(MASK_ZORA)"
     "Pirate Fortress Interior Silver Rupee Chest": "true"

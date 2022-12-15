@@ -99,6 +99,7 @@ void Cutscene_End(GameState_Play* play, void* unk);
 void RemoveItem(s16 item, s16 slot);
 
 void* ActorAlloc(u32 size);
+void  ActorFree(void* data);
 
 void Sram_CopySave(void*, void*);
 
@@ -106,7 +107,13 @@ void Play_Init(GameState_Play*);
 void Play_Draw(GameState_Play*);
 
 void Interface_LoadItemIconImpl(GameState_Play* play, int slot);
-void ReloadShield(GameState_Play* play, Actor_Player* link);
+void UpdateEquipment(GameState_Play* play, Actor_Player* link);
 void PlayStoreFlags(GameState_Play* play);
+
+void Player_Update(Actor_Player* this, GameState_Play* play);
+
+void* OverlayAddr(u32 addr);
+
+void LoadIcon(u32 vaddr, int iconId, void* buffer, int size);
 
 #endif

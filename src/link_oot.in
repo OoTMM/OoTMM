@@ -88,6 +88,7 @@ malloc = 0x800cda20;
 free = 0x800cd008;
 LoadFile = 0x80000df0;
 ActorAlloc = 0x80066c10;
+ActorFree = 0x80066c90;
 
 PreDraw1 = 0x80022438;
 PreDraw2 = 0x80022554;
@@ -130,3 +131,9 @@ Sram_CopySave = 0x80090fd0;
 SetRoomClear = 0x800206ac;
 
 PlayStoreFlags = 0x8009d894;
+
+Player_Update = 0x80097740;
+
+OverlayAddr = 0x80099dbc;
+
+UpdateEquipment = 0x80079764;

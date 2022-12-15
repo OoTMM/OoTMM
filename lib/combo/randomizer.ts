@@ -1,10 +1,11 @@
 import { Buffer } from 'buffer';
 
 import { logic, LogicResult } from './logic';
-import { DATA_GI, DATA_NPC, DATA_SCENES, DATA_REGIONS } from './data';
+import { DATA_GI, DATA_NPC, DATA_SCENES, DATA_REGIONS, DATA_CONFIG } from './data';
 import { Game, GAMES } from "./config";
 import { WorldCheck } from './logic/world';
 import { Options } from './options';
+import { Settings } from './settings';
 
 const OFFSETS = {
   oot: 0x1000,
@@ -92,14 +93,17 @@ const toU16Buffer = (data: number[]) => {
   return buf;
 };
 
-export const randomizeGame = async (game: Game, logic: LogicResult): Promise<Buffer> => {
+export const randomizeGame = async (settings: Settings, game: Game, logic: LogicResult): Promise<Buffer> => {
   const scenes = await DATA_SCENES;
   const buf: number[] = [];
   for (const c of logic.items) {
     if (c.game !== game) {
       continue;
     }
-    if (c.type === 'gs' || c.type === 'sf') {
+    if (game === 'oot' && c.type === 'gs' && settings.goldSkulltulaTokens === 'none') {
+      continue;
+    }
+    if (c.type === 'sf') {
       continue;
     }
     let { scene } = c;
@@ -112,6 +116,9 @@ export const randomizeGame = async (game: Game, logic: LogicResult): Promise<Buf
     case 'npc':
       sceneId = 0xf0;
       break;
+    case 'gs':
+      sceneId = 0xf1;
+      break;
     case 'collectible':
       id |= 0x40;
       break;
@@ -123,8 +130,8 @@ export const randomizeGame = async (game: Game, logic: LogicResult): Promise<Buf
   return toU16Buffer(buf);
 };
 
-export const randomizerDataDungeonRewards = async (logic: LogicResult): Promise<Buffer> => {
-  const data = logic.dungeonRewards.map((region) => {
+const regionsBuffer = (regions: string[]) => {
+  const data = regions.map((region) => {
     const regionId = DATA_REGIONS[region];
     if (regionId === undefined) {
       throw new Error(`Unknown region ${region}`);
@@ -134,9 +141,35 @@ export const randomizerDataDungeonRewards = async (logic: LogicResult): Promise<
   return toU8Buffer(data);
 };
 
+export const randomizerConfig = (config: Set<string>): Buffer => {
+  const bits = Array.from(config).map((c) => {
+    const bit = DATA_CONFIG[c];
+    if (bit === undefined) {
+      throw new Error(`Unknown config ${c}`);
+    }
+    return bit;
+  });
+  const block = Buffer.alloc(0x40, 0);
+  for (const bit of bits) {
+    const byte = Math.floor(bit / 8);
+    const mask = 1 << (bit % 8);
+    block[byte] |= mask;
+  }
+  return block;
+};
+
+export const randomizerHints = (logic: LogicResult): Buffer => {
+  const buffers: Buffer[] = [];
+  buffers.push(regionsBuffer(logic.hints.dungeonRewards));
+  buffers.push(regionsBuffer([logic.hints.lightArrow]));
+  buffers.push(regionsBuffer([logic.hints.oathToOrder]));
+  return Buffer.concat(buffers);
+};
+
 export const randomizerData = async (logic: LogicResult, options: Options): Promise<Buffer> => {
   const buffers = [];
-  buffers.push(await randomizerDataDungeonRewards(logic));
+  buffers.push(randomizerConfig(logic.config));
+  buffers.push(randomizerHints(logic));
   return Buffer.concat(buffers);
 };
 
@@ -145,7 +178,7 @@ export const randomize = async (rom: Buffer, opts: Options) => {
   const res = logic(opts);
   const buffer = Buffer.alloc(0x20000, 0xff);
   for (const g of GAMES) {
-    const gameBuffer = await randomizeGame(g, res);
+    const gameBuffer = await randomizeGame(opts.settings, g, res);
     gameBuffer.copy(buffer, OFFSETS[g]);
   }
   const data = await randomizerData(res, opts);

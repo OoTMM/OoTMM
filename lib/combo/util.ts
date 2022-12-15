@@ -33,3 +33,4 @@ export const gameId = (game: Game, id: string, char: string) => {
   }
   return [game.toUpperCase(), id].join(char);
 }
+

@@ -30,7 +30,7 @@ int comboAddItemGI(GameState_Play* play, s16 gi)
     if (gi & MASK_FOREIGN_GI)
         itemId |= MASK_FOREIGN_ITEM;
 
-    comboTextHijackItem(play, itemId);
     comboAddItem(play, itemId);
+    comboTextHijackItem(play, itemId);
     return -1;
 }

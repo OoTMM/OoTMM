@@ -1,46 +1,9 @@
 #include <combo.h>
 
-#if defined(GAME_OOT)
-# define FAST           "\x08"
-# define CZ             "\x05\x40"
-# define COLOR_RED      "\x05\x41"
-# define COLOR_GREEN    "\x05\x42"
-# define COLOR_BLUE     "\x05\x43"
-# define COLOR_TEAL     "\x05\x44"
-# define COLOR_PINK     "\x05\x45"
-# define COLOR_YELLOW   "\x05\x46"
-# define COLOR_ORANGE   COLOR_YELLOW
-# define END            "\x02"
-# define CHOICE2        "\x1b"
-# define CHOICE3        "\x1c"
-# define NL             "\x01"
-# define NOCLOSE        "\x0a"
-# define SIGNAL         "\x0b"
-# define ICON           "\x13"
-# define BB             "\x04"
-#else
-# define FAST           "\x17"
-# define CZ             "\x00"
-# define COLOR_RED      "\x01"
-# define COLOR_GREEN    "\x02"
-# define COLOR_BLUE     "\x03"
-# define COLOR_YELLOW   "\x04"
-# define COLOR_TEAL     "\x05"
-# define COLOR_PINK     "\x06"
-# define COLOR_ORANGE   "\x08"
-# define END            "\xbf"
-# define CHOICE2        "\xc2"
-# define CHOICE3        "\xc3"
-# define NL             "\x11"
-# define NOCLOSE        "\x1a"
-# define ICON           ""
-# define BB             ""
-#endif
-
-#define C0   COLOR_TEAL
-#define C1   COLOR_RED
-#define C2   COLOR_PINK
-#define C3   COLOR_YELLOW
+#define C0   TEXT_COLOR_TEAL
+#define C1   TEXT_COLOR_RED
+#define C2   TEXT_COLOR_PINK
+#define C3   TEXT_COLOR_YELLOW
 
 static const char* const kItemNamesOot[] = {
     "a " C0 "Deku Stick",
@@ -385,12 +348,94 @@ static const char* const kItemNamesMm[] = {
     "a " C0 "World Map (Stone Tower)",
 };
 
-static void appendStr(char** dst, const char* src)
+typedef struct
 {
-    size_t len = strlen(src);
-    memcpy(*dst, src, len);
-    *dst += len;
+    char* prepos;
+    char* name;
 }
+RegionName;
+
+const RegionName kRegionNamesOot[] = {
+    { "in",         "the " TEXT_COLOR_YELLOW "Sacred Realm" },
+    { "inside",     "the " TEXT_COLOR_GREEN "Deku Tree" },
+    { "inside",     TEXT_COLOR_RED "Dodongo's Cavern" },
+    { "inside",     TEXT_COLOR_BLUE "Jabu-Jabu" },
+    { "in",         "the " TEXT_COLOR_GREEN "Forest Temple" },
+    { "in",         "the " TEXT_COLOR_RED "Fire Temple" },
+    { "in",         "the " TEXT_COLOR_BLUE "Water Temple" },
+    { "in",         "the " TEXT_COLOR_ORANGE "Spirit Temple" },
+    { "in",         "the " TEXT_COLOR_PINK "Shadow Temple" },
+    { "at",         "the " TEXT_COLOR_PINK "Bottom of the Well" },
+    { "in",         "the " TEXT_COLOR_TEAL "Ice Caverns" },
+    { "in",         TEXT_COLOR_YELLOW "Gerudo Training Grounds" },
+    { "in",         "the " TEXT_COLOR_YELLOW "Thieve's Hideout" },
+    { "inside",     TEXT_COLOR_RED "Ganon's Castle" },
+    { "in",         "the " TEXT_COLOR_GREEN "Kokiri Forest" },
+    { "in",         TEXT_COLOR_YELLOW "Hyrule Field" },
+    { "in",         TEXT_COLOR_YELLOW "Hyrule's Market" },
+    { "in",         TEXT_COLOR_ORANGE "Lon Lon Ranch" },
+    { "in",         TEXT_COLOR_YELLOW "Hyrule's Castle" },
+    { "in",         TEXT_COLOR_RED "Ganon's Castle Exterior" },
+    { "in",         "the " TEXT_COLOR_GREEN "Lost Woods" },
+    { "in",         "the " TEXT_COLOR_GREEN "Sacred Meadow" },
+    { "in",         TEXT_COLOR_RED "Kakariko" },
+    { "inside",     TEXT_COLOR_PINK "Kakariko's Graveyard" },
+    { "on",         TEXT_COLOR_RED "Death Mountain's Trail" },
+    { "in",         TEXT_COLOR_RED "Death Mountain's Crater" },
+    { "in",         TEXT_COLOR_RED "Goron City" },
+    { "in",         TEXT_COLOR_BLUE "Zora's River" },
+    { "in",         TEXT_COLOR_BLUE "Zora's Domain" },
+    { "in",         TEXT_COLOR_BLUE "Zora's Fountain" },
+    { "around",     TEXT_COLOR_BLUE "Lake Hylia" },
+    { "in",         "the " TEXT_COLOR_YELLOW "Temple of Time" },
+    { "in",         TEXT_COLOR_ORANGE "Gerudo Valley" },
+    { "around",     TEXT_COLOR_ORANGE "Gerudo Fortress" },
+    { "in",         "the " TEXT_COLOR_YELLOW "Haunted Wastelands" },
+    { "around",     "the " TEXT_COLOR_ORANGE "Desert Colossus" },
+};
+
+const RegionName kRegionNamesMm[] = {
+    { "in",         TEXT_COLOR_GREEN "Woodfall Temple" },
+    { "in",         TEXT_COLOR_TEAL "Snowhead Temple" },
+    { "in",         TEXT_COLOR_BLUE "Great Bay Temple" },
+    { "in",         TEXT_COLOR_ORANGE "Stone Tower Temple" },
+    { "in",         TEXT_COLOR_YELLOW "South Clock Town" },
+    { "in",         TEXT_COLOR_YELLOW "North Clock Town" },
+    { "in",         TEXT_COLOR_YELLOW "East Clock Town" },
+    { "in",         TEXT_COLOR_YELLOW "West Clock Town" },
+    { "in",         "the " TEXT_COLOR_YELLOW "Laundry Pool" },
+    { "inside",     "the " TEXT_COLOR_PINK "Giants's Dream" },
+    { "on",         TEXT_COLOR_YELLOW "Clock Tower Roof" },
+    { "in",         "the " TEXT_COLOR_RED "Stock Pot Inn" },
+    { "in",         TEXT_COLOR_RED "Termina Field" },
+    { "on",         "the " TEXT_COLOR_GREEN "Road to the Swamp" },
+    { "in",         "the " TEXT_COLOR_GREEN "Southern Swamp" },
+    { "in",         TEXT_COLOR_GREEN "Deku Palace" },
+    { "in",         TEXT_COLOR_GREEN "Woodfall" },
+    { "on",         "the " TEXT_COLOR_RED "Path to Mountain Village" },
+    { "in",         "the " TEXT_COLOR_RED "Mountain Village" },
+    { "on",         "the " TEXT_COLOR_RED "Path to Snowhead" },
+    { "around",     TEXT_COLOR_RED "Twin Islands" },
+    { "around",     TEXT_COLOR_RED "Goron Village" },
+    { "in",         TEXT_COLOR_RED "Snowhead" },
+    { "around",     "the " TEXT_COLOR_PINK "Milk Road" },
+    { "around",     TEXT_COLOR_ORANGE "Romani Ranch" },
+    { "around",     TEXT_COLOR_BLUE "Great Bay Coast" },
+    { "in",         "the " TEXT_COLOR_BLUE "Pirate's Fortress Exterior" },
+    { "in",         "the " TEXT_COLOR_BLUE "Pirate's Fortress Sewers" },
+    { "in",         "the " TEXT_COLOR_BLUE "Pirate's Fortress Interior" },
+    { "around",     TEXT_COLOR_BLUE "Zora Cape" },
+    { "in",         TEXT_COLOR_BLUE "Zora Hall" },
+    { "in",         TEXT_COLOR_BLUE "Pinnacle Rock" },
+    { "on",         "the " TEXT_COLOR_ORANGE "Road to Ikana" },
+    { "in",         TEXT_COLOR_PINK "Ikana's Graveyard" },
+    { "in",         TEXT_COLOR_ORANGE "Ikana Canyon" },
+    { "in",         "the " TEXT_COLOR_ORANGE "Ancient Castle of Ikana" },
+    { "somewhere",  TEXT_COLOR_PINK "Beneath the Well" },
+    { "in",         "a " TEXT_COLOR_YELLOW "Secret Shrine" },
+    { "on",         "the " TEXT_COLOR_ORANGE "Stone Tower" },
+    { "on",         "the " TEXT_COLOR_RED "Moon" },
+};
 
 static int isItemAmbiguousOot(u16 itemId)
 {
@@ -531,23 +576,63 @@ static int isItemAmbiguousMm(u16 itemId)
     }
 }
 
-static void appendHeader(char** b)
+void comboTextAutoLineBreaks(char* buffer)
+{
+    static const int kMaxLineLength = 37;
+    int lineLength;
+    int i;
+    int lastSpace;
+    u8 c;
+
+    lastSpace = -1;
+    lineLength = 0;
+    i = 0;
+    for (;;)
+    {
+        c = (u8)(buffer[i]);
+        if (c == (u8)(TEXT_END[0]))
+            break;
+        if (c >= ' ' && c <= '~')
+        {
+            lineLength++;
+            if (lineLength == kMaxLineLength)
+            {
+                lineLength = i - lastSpace;
+                buffer[lastSpace] = TEXT_NL[0];
+            }
+        }
+        if (c == ' ')
+        {
+            lastSpace = i;
+        }
+        i += comboMultibyteCharSize(c);
+    }
+}
+
+void comboTextAppendStr(char** dst, const char* src)
+{
+    size_t len = strlen(src);
+    memcpy(*dst, src, len);
+    *dst += len;
+}
+
+void comboTextAppendHeader(char** b)
 {
 #if defined(GAME_MM)
     /* MM has a header */
     memcpy(*b, "\x00\x30\xfe\xff\xff\xff\xff\xff\xff\xff\xff", 11);
     *b += 11;
 #endif
-    appendStr(b, FAST);
+    comboTextAppendStr(b, TEXT_FAST);
 }
 
-static void appendShopHeader(char** b, s16 price)
+void comboTextAppendShopHeader(char** b, s16 price)
 {
 #if defined(GAME_MM)
     memcpy((*b) + 5, &price, 2);
     *b += 11;
 #endif
-    appendStr(b, FAST);
+    comboTextAppendStr(b, TEXT_FAST);
 }
 
 #if defined(GAME_MM)
@@ -556,14 +641,14 @@ static void appendBossRewardHeader(char** b, char icon)
     memcpy(*b, "\x06\x00\xfe\xff\xff\xff\xff\xff\xff\xff\xff", 11);
     (*b)[2] = icon;
     *b += 11;
-    appendStr(b, FAST);
+    comboTextAppendStr(b, TEXT_FAST);
 }
 #endif
 
-static void appendClearColor(char** b)
+void comboTextAppendClearColor(char** b)
 {
 #if defined(GAME_OOT)
-    appendStr(b, CZ);
+    comboTextAppendStr(b, TEXT_CZ);
 #else
     /* strlen doesn't like NUL */
     **b = 0;
@@ -571,7 +656,7 @@ static void appendClearColor(char** b)
 #endif
 }
 
-static void appendNum(char** b, int num)
+void comboTextAppendNum(char** b, int num)
 {
     int denum;
     int started;
@@ -599,7 +684,7 @@ static void appendNum(char** b, int num)
     }
 }
 
-static void appendItemName(char** b, u16 itemId, int capitalize)
+void comboTextAppendItemName(char** b, u16 itemId, int capitalize)
 {
     char* start;
     const char* itemName;
@@ -621,23 +706,52 @@ static void appendItemName(char** b, u16 itemId, int capitalize)
     }
 
     start = *b;
-    appendStr(b, itemName);
-    appendClearColor(b);
+    comboTextAppendStr(b, itemName);
+    comboTextAppendClearColor(b);
 
     if (ambiguous)
     {
-        appendStr(b, " (");
+        comboTextAppendStr(b, " (");
         if (itemId & MASK_FOREIGN_ITEM)
         {
-            appendStr(b, COLOR_PINK "MM");
+            comboTextAppendStr(b, TEXT_COLOR_PINK "MM");
         }
         else
         {
-            appendStr(b, COLOR_TEAL "OoT");
+            comboTextAppendStr(b, TEXT_COLOR_TEAL "OoT");
         }
-        appendClearColor(b);
-        appendStr(b, ")");
+        comboTextAppendClearColor(b);
+        comboTextAppendStr(b, ")");
     }
+
+    if (capitalize)
+    {
+        start[0] = toupper(start[0]);
+    }
+}
+
+void comboTextAppendRegionName(char** b, u8 regionId, int prepos, int capitalize)
+{
+    char* start;
+    const RegionName* regName;
+
+    if (regionId & 0x80)
+    {
+        regName = &kRegionNamesMm[(regionId & 0x7f) - 1];
+    }
+    else
+    {
+        regName = &kRegionNamesOot[(regionId & 0x7f) - 1];
+    }
+
+    start = *b;
+    if (prepos)
+    {
+        comboTextAppendStr(b, regName->prepos);
+        comboTextAppendStr(b, " ");
+    }
+    comboTextAppendStr(b, regName->name);
+    comboTextAppendClearColor(b);
 
     if (capitalize)
     {
@@ -654,11 +768,11 @@ void comboTextHijackItem(GameState_Play* play, u16 itemId)
 #else
     b = play->textBuffer;
 #endif
-    appendHeader(&b);
-    appendStr(&b, "You got ");
-    appendItemName(&b, itemId, 0);
-    appendStr(&b, "!");
-    appendStr(&b, END);
+    comboTextAppendHeader(&b);
+    comboTextAppendStr(&b, "You got ");
+    comboTextAppendItemName(&b, itemId, 0);
+    comboTextAppendStr(&b, "!");
+    comboTextAppendStr(&b, TEXT_END);
 }
 
 void comboTextHijackItemShop(GameState_Play* play, u16 itemId, s16 price, int confirm)
@@ -671,29 +785,29 @@ void comboTextHijackItemShop(GameState_Play* play, u16 itemId, s16 price, int co
     b = play->textBuffer;
 #endif
 
-    appendShopHeader(&b, price);
+    comboTextAppendShopHeader(&b, price);
 
     if (itemId == ITEM_NONE)
     {
-        appendStr(&b, "SOLD OUT" NOCLOSE END);
+        comboTextAppendStr(&b, "SOLD OUT" TEXT_NOCLOSE TEXT_END);
 
     }
 
-    appendItemName(&b, itemId, 1);
-    appendStr(&b, NL COLOR_RED);
-    appendNum(&b, price);
-    appendStr(&b, " Rupees");
+    comboTextAppendItemName(&b, itemId, 1);
+    comboTextAppendStr(&b, TEXT_NL TEXT_COLOR_RED);
+    comboTextAppendNum(&b, price);
+    comboTextAppendStr(&b, " Rupees");
     if (confirm)
     {
-        appendStr(&b, NL CHOICE2 COLOR_GREEN);
-        appendStr(&b, "Buy" NL);
-        appendStr(&b, "No thanks");
+        comboTextAppendStr(&b, TEXT_NL TEXT_CHOICE2 TEXT_COLOR_GREEN);
+        comboTextAppendStr(&b, "Buy" TEXT_NL);
+        comboTextAppendStr(&b, "No thanks");
     }
     else
     {
-        appendStr(&b, NL NL NOCLOSE);
+        comboTextAppendStr(&b, TEXT_NL TEXT_NL TEXT_NOCLOSE);
     }
-    appendStr(&b, END);
+    comboTextAppendStr(&b, TEXT_END);
 }
 
 #if defined(GAME_OOT)
@@ -708,9 +822,7 @@ void comboMessageCancel(GameState_Play* play)
     play->msgCtx.ocarinaMode = 4;
     *(((char*)GET_LINK(play)) + 0x141) = 0;
 }
-#endif
 
-#if defined(GAME_OOT)
 static const char kIcons[] = {
     0x6c,
     0x6d,
@@ -722,48 +834,29 @@ static const char kIcons[] = {
     0x69,
     0x6a,
 };
-#endif
 
-static const char* kDungeonRewardsRegions[] = {
-    "In the " COLOR_YELLOW "Sacred Realm",
-    "Inside the " COLOR_GREEN "Deku Tree",
-    "Inside " COLOR_RED "Dodongo's Cavern",
-    "Inside " COLOR_BLUE "Jabu-Jabu",
-    "In the " COLOR_GREEN "Forest Temple",
-    "In the " COLOR_RED "Fire Temple",
-    "In the " COLOR_BLUE "Water Temple",
-    "In the " COLOR_ORANGE "Spirit Temple",
-    "In the " COLOR_PINK "Shadow Temple",
-    "In " COLOR_GREEN "Woodfall Temple",
-    "In " COLOR_TEAL "Snowhead Temple",
-    "In " COLOR_BLUE "Great Bay Temple",
-    "In " COLOR_ORANGE "Stone Tower Temple",
-};
-
-#if defined(GAME_OOT)
 void comboTextHijackDungeonRewardHints(GameState_Play* play, int base, int count)
 {
     char* b;
     int index;
 
     b = play->msgCtx.textBuffer;
-    appendHeader(&b);
+    comboTextAppendHeader(&b);
     for (int i = 0; i < count; ++i)
     {
         index = base + i;
-        appendStr(&b, FAST ICON);
+        comboTextAppendStr(&b, TEXT_FAST TEXT_ICON);
         *b++ = kIcons[index];
-        appendStr(&b, kDungeonRewardsRegions[gComboData.dungeonRewards[index]]);
-        appendClearColor(&b);
-        appendStr(&b, "...");
+        comboTextAppendRegionName(&b, gComboData.hints.dungeonRewards[index], 1, 1);
+        comboTextAppendStr(&b, "...");
 
         if (i == (count - 1))
         {
-            appendStr(&b, SIGNAL END);
+            comboTextAppendStr(&b, TEXT_SIGNAL TEXT_END);
         }
         else
         {
-            appendStr(&b, BB);
+            comboTextAppendStr(&b, TEXT_BB);
         }
 
     }
@@ -777,11 +870,63 @@ void comboTextHijackDungeonRewardHints(GameState_Play* play, int hint)
 
     b = play->textBuffer;
     appendBossRewardHeader(&b, 0x55 + hint);
-    appendStr(&b, kDungeonRewardsRegions[gComboData.dungeonRewards[9 + hint]]);
-    appendClearColor(&b);
-    appendStr(&b, "...");
+    comboTextAppendRegionName(&b, gComboData.hints.dungeonRewards[9 + hint], 1, 1);
+    comboTextAppendStr(&b, "...");
     if (hint != 3)
-        appendStr(&b, "\x19");
-    appendStr(&b, END);
+        comboTextAppendStr(&b, "\x19");
+    comboTextAppendStr(&b, TEXT_END);
+}
+#endif
+
+#if defined(GAME_OOT)
+void comboTextHijackSkullReward(GameState_Play* play, s16 itemId, int count)
+{
+    char* b;
+
+    b = play->msgCtx.textBuffer;
+    comboTextAppendHeader(&b);
+    comboTextAppendStr(&b,
+        "Yeaaarrgh! I'm cursed!! Please save me by destroying " TEXT_COLOR_RED
+    );
+    comboTextAppendNum(&b, count);
+    comboTextAppendStr(&b,
+        " Spiders of the Curse" TEXT_CZ " and I will give you "
+    );
+    comboTextAppendItemName(&b, itemId, 0);
+    comboTextAppendStr(&b, TEXT_CZ "." TEXT_END);
+    comboTextAutoLineBreaks(play->msgCtx.textBuffer);
+}
+
+void comboTextHijackLightArrows(GameState_Play* play)
+{
+    char* b;
+
+    b = play->msgCtx.textBuffer;
+    comboTextAppendHeader(&b);
+    comboTextAppendStr(&b,
+        "Have you found the " TEXT_COLOR_YELLOW "Light Arrows " TEXT_CZ
+    );
+    comboTextAppendRegionName(&b, gComboData.hints.lightArrows, 1, 0);
+    comboTextAppendStr(&b, "?" TEXT_END);
+    comboTextAutoLineBreaks(play->msgCtx.textBuffer);
+}
+#endif
+
+#if defined(GAME_MM)
+void comboTextHijackOathToOrder(GameState_Play* play)
+{
+    char* b;
+    char* start;
+
+    b = play->textBuffer;
+    comboTextAppendHeader(&b);
+    start = b;
+    comboTextAppendStr(&b,
+        "Have you found the " TEXT_COLOR_PINK "Oath to Order "
+    );
+    comboTextAppendClearColor(&b);
+    comboTextAppendRegionName(&b, gComboData.hints.oathToOrder, 1, 0);
+    comboTextAppendStr(&b, "?" TEXT_END);
+    comboTextAutoLineBreaks(start);
 }
 #endif

@@ -130,6 +130,7 @@ export const ITEMS_REQUIRED = new Set<string>([
   'MM_POWDER_KEG',
   'MM_HOOKSHOT',
   'MM_PICTOGRAPH_BOX',
+  'MM_MAGIC_BEAN',
   'MM_MOON_TEAR',
   'MM_DEED_LAND',
   'MM_DEED_SWAMP',
@@ -246,6 +247,17 @@ const removeItem = (items: Items, item: string) => {
   }
 };
 
+const removeItemPools = (pools: ItemPools, item: string) => {
+  const keys = ['dungeon', 'required', 'nice', 'junk'] as const;
+  for (const key of keys) {
+    const items = pools[key];
+    if (items[item]) {
+      removeItem(items, item);
+      return;
+    }
+  }
+};
+
 const maxRequired = (pools: ItemPools, item: string, count: number) => {
   if ((pools.required[item] || 0) <= count) {
     return;
@@ -293,7 +305,8 @@ class Solver {
     const checksCount = Object.keys(this.world.checks).length;
 
     /* Fix the GS tokens */
-    this.fixTokensAndFairies();
+    this.fixTokens();
+    this.fixFairies();
 
     /* Place the required reward items */
     this.fixRewards();
@@ -330,6 +343,10 @@ class Solver {
     if (!this.opts.settings.shuffleGerudoCard) {
       this.fixedLocations.add('OOT Gerudo Member Card');
     }
+
+    if (this.opts.settings.ganonBossKey === 'vanilla') {
+      this.fixedLocations.add('OOT Ganon Castle Boss Key');
+    }
   }
 
   private makeItemPools() {
@@ -364,6 +381,7 @@ class Solver {
     maxRequired(pools, 'OOT_MAGIC_UPGRADE', 1);
     maxRequired(pools, 'OOT_OCARINA', 1);
     maxRequired(pools, 'OOT_BOMBCHUS_10', 1);
+    maxRequired(pools, 'OOT_GS_TOKEN', 50);
 
     maxRequired(pools, 'MM_SWORD', 1);
     maxRequired(pools, 'MM_BOMB_BAG', 1);
@@ -383,14 +401,26 @@ class Solver {
     return itemConstraint(item, this.opts.settings);
   }
 
-  private fixTokensAndFairies() {
+  private fixTokens() {
+    const setting = this.opts.settings.goldSkulltulaTokens;
+    const shuffleInDungeons = ['dungeons', 'all'].includes(setting);
+    const shuffleInOverworld = ['overworld', 'all'].includes(setting);
+    const skullLocations = Object.keys(this.world.checks).filter(x => this.world.checks[x].item === 'OOT_GS_TOKEN');
+    const dungeonLocations = Object.values(this.world.dungeons).reduce((acc, x) => new Set([...acc, ...x]));
+
+    for (const location of skullLocations) {
+      const isDungeon = dungeonLocations.has(location);
+      if (!((isDungeon && shuffleInDungeons) || (!isDungeon && shuffleInOverworld))) {
+        this.place(location, 'OOT_GS_TOKEN');
+        removeItemPools(this.pools, 'OOT_GS_TOKEN');
+      }
+    }
+  }
+
+  private fixFairies() {
     for (const location in this.world.checks) {
       const check = this.world.checks[location];
-      if (check.type === 'gs') {
-        this.place(location, 'OOT_GS_TOKEN');
-        removeItem(this.pools.required, 'OOT_GS_TOKEN');
-      }
-      else if (check.type === 'sf') {
+      if (check.type === 'sf') {
         const item = check.item;
         this.place(location, item);
         removeItem(this.pools.dungeon, item);

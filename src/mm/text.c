@@ -1,5 +1,21 @@
 #include <combo.h>
 
+int comboMultibyteCharSize(u8 c)
+{
+    switch (c)
+    {
+    case 0x14:
+        return 2;
+    case 0x1b:
+    case 0x1c:
+    case 0x1d:
+    case 0x1e:
+    case 0x1f:
+        return 3;
+    }
+    return 1;
+}
+
 /* Instant text */
 static int DisplayTextBox_LoadFile(u8* dst, u32 vromAddr, u32 size)
 {
@@ -7,6 +23,7 @@ static int DisplayTextBox_LoadFile(u8* dst, u32 vromAddr, u32 size)
     int ret;
     u32 i;
     u8 c;
+    int len;
 
     ret = LoadFile(buffer, vromAddr, size);
     i = 0;
@@ -22,21 +39,12 @@ static int DisplayTextBox_LoadFile(u8* dst, u32 vromAddr, u32 size)
         c = buffer[i++];
         *dst++ = c;
 
+        len = comboMultibyteCharSize(c);
+        while (len-- > 1)
+            *dst++ = buffer[i++];
+
         switch (c)
         {
-        case 0x14:
-            /* Skip 1 byte */
-            *dst++ = buffer[i++];
-            break;
-        case 0x1b:
-        case 0x1c:
-        case 0x1d:
-        case 0x1e:
-        case 0x1f:
-            /* Skip 2 bytes */
-            *dst++ = buffer[i++];
-            *dst++ = buffer[i++];
-            break;
         case 0x10:
         case 0x12:
             /* Inject extra fast text marker */

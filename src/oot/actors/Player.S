@@ -48,3 +48,8 @@ PATCH_END
 PATCH_START 0x8083c944
   li v0,0xff
 PATCH_END
+
+/* Use our wrapper */
+PATCH_START 0x800fc548
+  .int Player_UpdateWrapper
+PATCH_END

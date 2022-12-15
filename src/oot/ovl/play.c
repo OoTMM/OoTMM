@@ -141,12 +141,6 @@ static void skipEntranceCutscene(GameState_Play* play)
 
 static void eventFixes(GameState_Play* play)
 {
-    /* Unlock the first fire temple door */
-    gSave.perm[SCE_OOT_TEMPLE_FIRE].switches |= (1 << 0x17);
-
-    /* Unlock a specific water temple door */
-    gSave.perm[SCE_OOT_TEMPLE_WATER].switches |= (1 << 0x15);
-
     /* Skip Zelda's cutscene when having all the spiritual stones */
     if (gSave.quest.stoneEmerald && gSave.quest.stoneRuby && gSave.quest.stoneSapphire)
     {
@@ -253,6 +247,11 @@ void hookPlay_Init(GameState_Play* play)
         play->transition.gfx = 11;
     }
 
+    if (!gCustomKeep)
+    {
+        comboLoadCustomKeep();
+    }
+
 #if defined(DEBUG)
     if (play->gs.input[0].current.buttons & R_TRIG)
     {
@@ -264,6 +263,7 @@ void hookPlay_Init(GameState_Play* play)
 
 void Play_DrawWrapper(GameState_Play* play)
 {
+    comboObjectsGC();
     Play_Draw(play);
 
     if (gComboCtx.valid)
@@ -274,5 +274,10 @@ void Play_DrawWrapper(GameState_Play* play)
         gDPSetFillColor(OVERLAY_DISP++, 0);
         gDPFillRectangle(OVERLAY_DISP++, 0, 0, 0xfff, 0xfff);
         CLOSE_DISPS();
+    }
+    else
+    {
+        /* Need to draw dpad */
+        comboDpadDraw(play);
     }
 }

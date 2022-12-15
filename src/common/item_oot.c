@@ -495,6 +495,10 @@ void comboAddItemOot(GameState_Play* play, u16 itemId)
         gOotSave.healthMax += 0x10;
         addHealth(20);
         break;
+    case ITEM_OOT_GS_TOKEN:
+        gOotSave.quest.goldToken = 1;
+        gOotSave.goldTokens++;
+        break;
     case ITEM_OOT_GERUDO_CARD:
         gOotSave.quest.gerudoCard = 1;
         break;

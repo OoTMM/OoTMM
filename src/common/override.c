@@ -91,6 +91,9 @@ s16 comboOverride(int type, u16 sceneId, u16 id, s16 gi)
     case OV_NPC:
         sceneId = SCE_NPC;
         break;
+    case OV_GS:
+        sceneId = SCE_GS;
+        break;
     }
     return comboOverrideImpl(sceneId, id, gi);
 }

@@ -68,6 +68,12 @@ void hookPlay_Init(GameState_Play* play)
     int isEndOfGame;
 
     isEndOfGame = 0;
+
+    if (!gCustomKeep)
+    {
+        comboLoadCustomKeep();
+    }
+
     if (gSave.entranceIndex == 0x5400 && gSaveContext.nextCutscene == 0xfff7)
     {
         isEndOfGame = 1;
@@ -121,4 +127,11 @@ void hookPlay_Init(GameState_Play* play)
         comboGameSwitch();
         return;
     }
+}
+
+void Play_DrawWrapper(GameState_Play* play)
+{
+    comboObjectsGC();
+    Play_Draw(play);
+    comboDpadDraw(play);
 }

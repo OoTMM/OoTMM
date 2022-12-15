@@ -55,7 +55,7 @@ static void addShield(GameState_Play* play, int index)
     gMmSave.itemEquips.shield = index;
 
 #if defined(GAME_MM)
-    ReloadShield(play, GET_LINK(play));
+    UpdateEquipment(play, GET_LINK(play));
 #endif
 }
 

@@ -26,3 +26,8 @@ PATCH_END
 PATCH_START 0x80b92e94
   nop
 PATCH_END
+
+/* Hack: change bne to beq */
+PATCH_START 0x80b92e4c
+.byte 0x15
+PATCH_END

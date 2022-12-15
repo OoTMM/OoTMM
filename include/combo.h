@@ -20,6 +20,7 @@
 # include <combo/object.h>
 # include <combo/patch.h>
 # include <combo/npc.h>
+# include <combo/text.h>
 
 # if defined(GAME_OOT)
 #  include <combo/oot/play.h>
@@ -50,6 +51,7 @@
 #include <combo/common/events.h>
 #include <combo/scenes.h>
 #include <combo/shader.h>
+#include <combo/config.h>
 
 #if !defined(__ASSEMBLER__)
 void comboDisableInterrupts(void);
@@ -69,6 +71,15 @@ extern ComboContext gComboCtx;
 typedef struct PACKED ALIGNED(4)
 {
     u8 dungeonRewards[13];
+    u8 lightArrows;
+    u8 oathToOrder;
+}
+ComboDataHints;
+
+typedef struct PACKED ALIGNED(4)
+{
+    u8             config[0x40];
+    ComboDataHints hints;
 }
 ComboData;
 
@@ -99,17 +110,22 @@ void comboGameSwitch(void);
 #define OV_CHEST        0
 #define OV_COLLECTIBLE  1
 #define OV_NPC          2
+#define OV_GS           3
 
 s16 comboOverride(int type, u16 sceneId, u16 id, s16 gi);
 
 /* Text */
+int  comboMultibyteCharSize(u8 c);
 void comboTextHijackItem(GameState_Play* play, u16 itemId);
 void comboTextHijackItemShop(GameState_Play* play, u16 itemId, s16 price, int confirm);
 
 #if defined(GAME_OOT)
 void comboTextHijackDungeonRewardHints(GameState_Play* play, int base, int count);
+void comboTextHijackSkullReward(GameState_Play* play, s16 itemId, int count);
+void comboTextHijackLightArrows(GameState_Play* play);
 #else
 void comboTextHijackDungeonRewardHints(GameState_Play* play, int hint);
+void comboTextHijackOathToOrder(GameState_Play* play);
 #endif
 
 /* Progressive */
@@ -119,8 +135,10 @@ s32 comboProgressiveMm(s32 gi);
 
 /* Objects */
 void    comboObjectsReset(void);
+void    comboObjectsGC(void);
 void*   comboGetObject(u16 objectId);
 u32     comboLoadObject(void* buffer, u16 objectId);
+void    comboLoadCustomKeep(void);
 
 /* Draw */
 #define DRAW_NO_PRE1    0x01
@@ -130,6 +148,8 @@ u32     comboLoadObject(void* buffer, u16 objectId);
 void comboSetObjectSegment(GfxContext* gfx, void* buffer);
 void comboDrawObject(GameState_Play* play, Actor* actor, u16 objectId, u16 shaderId, int flags);
 void comboDrawGI(GameState_Play* play, Actor* actor, int gi, int flags);
+void comboDrawInit2D(GameState_Play* play);
+void comboDrawBlit2D(GameState_Play* play, u32 segAddr, int w, int h, float x, float y, float scale);
 
 /* Event */
 void comboOotSetEventChk(u16 flag);
@@ -194,6 +214,27 @@ void*   actorAddr(u16 actorId, u32 addr);
 /* System */
 void comboInvalICache(void* addr, u32 size);
 void comboInvalDCache(void* addr, u32 size);
+
+/* Custom keep files */
+extern void* gCustomKeep;
+
+void comboDpadDraw(GameState_Play* play);
+void comboDpadUpdate(GameState_Play* play);
+
+int comboConfig(int flag);
+int comboDoorIsUnlocked(GameState_Play* play, int flag);
+
+/* DMA */
+typedef struct
+{
+    u32 vstart;
+    u32 vend;
+    u32 pstart;
+    u32 pend;
+}
+DmaEntry;
+
+extern DmaEntry kComboDmaData[];
 
 #else
 # include <combo/asm.h>

@@ -5,7 +5,8 @@
 
 typedef struct PACKED ALIGNED(4)
 {
-    char                unk_000[0x2a8];
+    char                unk_000[0x298];
+    DisplayListBuffer   overlay;
     DisplayListBuffer   polyOpa;
     DisplayListBuffer   polyXlu;
     char                unk_2c8[0x8];

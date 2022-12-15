@@ -1,10 +1,14 @@
 #include <combo.h>
 #include <combo/custom.h>
 
-#define OBJECT_COUNT    8
+void* gCustomKeep;
+
+#define OBJECT_COUNT    16
+#define OBJECT_TTL      6
 
 static u16   sObjectsIds[OBJECT_COUNT];
 static void* sObjectsAddr[OBJECT_COUNT];
+static u16   sObjectsTTL[OBJECT_COUNT];
 
 ALIGNED(16) const ObjectData kExtraObjectsTable[] = {
 #define X(a, b) { Y(a), Y(b) }
@@ -136,7 +140,17 @@ static const ObjectPatch kObjectPatches[] = {
 
 void comboInitObjects(void)
 {
+    /* Load the DMA table */
     DMARomToRam(CUSTOM_OBJECTS_ADDR | PI_DOM1_ADDR2, kCustomObjectsTable, CUSTOM_OBJECTS_SIZE * sizeof(ObjectData));
+}
+
+void comboLoadCustomKeep(void)
+{
+    u32 customKeepSize;
+
+    customKeepSize = comboLoadObject(NULL, CUSTOM_OBJECT_ID_KEEP);
+    gCustomKeep = malloc(customKeepSize);
+    comboLoadObject(gCustomKeep, CUSTOM_OBJECT_ID_KEEP);
 }
 
 #if defined(GAME_OOT)
@@ -248,7 +262,10 @@ void* comboGetObject(u16 objectId)
     {
         /* Already loaded the object */
         if (sObjectsIds[i] == objectId)
+        {
+            sObjectsTTL[i] = OBJECT_TTL;
             return sObjectsAddr[i];
+        }
 
         /* Free slot */
         if (sObjectsIds[i] == 0)
@@ -258,6 +275,7 @@ void* comboGetObject(u16 objectId)
             comboLoadObject(addr, objectId);
             sObjectsIds[i] = objectId;
             sObjectsAddr[i] = addr;
+            sObjectsTTL[i] = OBJECT_TTL;
             return addr;
         }
     }
@@ -270,5 +288,26 @@ void comboObjectsReset(void)
     {
         sObjectsIds[i] = 0;
         sObjectsAddr[i] = NULL;
+        sObjectsTTL[i] = 0;
+    }
+}
+
+void comboObjectsGC(void)
+{
+    for (int i = 0; i < OBJECT_COUNT; ++i)
+    {
+        if (sObjectsAddr[i] == NULL)
+            continue;
+        if (sObjectsTTL[i] == 0)
+        {
+            ActorFree(sObjectsAddr[i]);
+            sObjectsIds[i] = 0;
+            sObjectsAddr[i] = NULL;
+            sObjectsTTL[i] = 0;
+        }
+        else
+        {
+            sObjectsTTL[i]--;
+        }
     }
 }
