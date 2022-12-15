@@ -141,12 +141,6 @@ static void skipEntranceCutscene(GameState_Play* play)
 
 static void eventFixes(GameState_Play* play)
 {
-    /* Unlock the first fire temple door */
-    gSave.perm[SCE_OOT_TEMPLE_FIRE].switches |= (1 << 0x17);
-
-    /* Unlock a specific water temple door */
-    gSave.perm[SCE_OOT_TEMPLE_WATER].switches |= (1 << 0x15);
-
     /* Skip Zelda's cutscene when having all the spiritual stones */
     if (gSave.quest.stoneEmerald && gSave.quest.stoneRuby && gSave.quest.stoneSapphire)
     {
