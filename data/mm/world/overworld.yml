@@ -24,7 +24,7 @@
   events:
     CLOCK_TOWN_SCRUB: "has(MOON_TEAR)"
   locations:
-    "Clock Town South Chest Lower": "has(HOOKSHOT)"
+    "Clock Town South Chest Lower": "has(HOOKSHOT) || (has(MASK_DEKU) && event(CLOCK_TOWN_SCRUB))"
     "Clock Town South Chest Upper": "has(HOOKSHOT) || (has(MASK_DEKU) && event(CLOCK_TOWN_SCRUB))"
     "Clock Town Platform HP": "true"
     "Clock Town Business Scrub": "event(CLOCK_TOWN_SCRUB)"
@@ -34,6 +34,7 @@
   exits:
     "Termina Field": "true"
     "Clock Town South": "true"
+    "Clock Town East": "true"
     "Clock Town Fairy Fountain": "true"
     "Deku Playground": "true"
   events:
@@ -72,6 +73,7 @@
     "Astral Observatory": "event(BOMBER_CODE)"
   locations:
     "Clock Town Silver Rupee Chest": "true"
+    "Clock Town Postman Hat": "event(POSTMAN_FREEDOM)"
 "Clock Town Laundry Pool":
   region: LAUNDRY_POOL
   exits:
@@ -123,9 +125,10 @@
   region: CLOCK_TOWN_WEST
   exits:
     "Clock Town West": "true"
+  events:
+    POSTMAN_FREEDOM: "has(LETTER_TO_MAMA)"
   locations:
     "Post Office HP": "has(MASK_BUNNY)"
-    "Post Office Postman Hat": "has(LETTER_TO_MAMA)"
 "Swordsman School":
   region: CLOCK_TOWN_WEST
   exits:
@@ -170,12 +173,14 @@
   region: STOCK_POT_INN
   exits:
     "Clock Town East": "true"
+  events:
+    MEET_ANJU: "has(MASK_KAFEI) && (has(ROOM_KEY) || has(MASK_DEKU))"
   locations:
     "Stock Pot Inn Guest Room Chest": "has(ROOM_KEY)"
     "Stock Pot Inn Staff Room Chest": "true"
     "Stock Pot Inn Room Key": "true"
-    "Stock Pot Inn Letter to Kafei": "has(MASK_KAFEI) && (has(ROOM_KEY) || has(MASK_DEKU))"
-    "Stock Pot Inn Couple's Mask": "event(SUN_MASK) && has(PENDANT_OF_MEMORIES) && has(MASK_KAFEI)"
+    "Stock Pot Inn Letter to Kafei": "event(MEET_ANJU)"
+    "Stock Pot Inn Couple's Mask": "event(SUN_MASK) && has(PENDANT_OF_MEMORIES) && event(MEET_ANJU)"
     "Stock Pot Inn Grandma HP 1": "has(MASK_ALL_NIGHT)"
     "Stock Pot Inn Grandma HP 2": "has(MASK_ALL_NIGHT)"
     "Stock Pot Inn ??? HP": "has_paper"
@@ -190,6 +195,7 @@
   region: CLOCK_TOWN_EAST
   exits:
     "Clock Town East": "true"
+    "Astral Observatory Balcony": "true"
   events:
     SCRUB_TELESCOPE: "true"
     TEAR_TELESCOPE: "true"
@@ -218,11 +224,11 @@
   locations:
     "Termina Field Water Chest": "has(MASK_ZORA)"
     "Termina Field Tall Grass Chest": "true"
-    "Termina Field Tree Stump Chest": "has(HOOKSHOT) || (has_beans && has_bottle)"
+    "Termina Field Tree Stump Chest": "has(HOOKSHOT) || can_use_beans"
     "Termina Field Kamaro Mask": "can_play(SONG_HEALING)"
     "Termina Field Tall Grass Grotto": "true"
     "Termina Field Pillar Grotto": "true"
-    "Termina Field Peahat Grotto": "can_fight || has(BOW)"
+    "Termina Field Peahat Grotto": "can_fight || has(BOW) || has(MASK_DEKU)"
     "Termina Field Dodongo Grotto": "has_weapon || has(BOMB_BAG) || has(MASK_GORON) || has(BOW)"
     "Termina Field Bio Baba Grotto": "can_break_boulders && has(MASK_ZORA)"
     "Termina Field Scrub": "event(SCRUB_TELESCOPE) && has(WALLET)"
@@ -230,11 +236,11 @@
 "Road to Southern Swamp":
   region: ROAD_TO_SWAMP
   exits:
-    "Swamp": "true"
+    "Swamp Front": "true"
     "Termina Field": "true"
     "Swamp Archery": "true"
   locations:
-    "Road to Southern Swamp HP": "true"
+    "Road to Southern Swamp HP": "has_weapon_range"
     "Road to Southern Swamp Grotto": "true"
 "Swamp Archery":
   region: ROAD_TO_SWAMP
@@ -243,26 +249,34 @@
   locations:
     "Swamp Archery Reward 1": "has(BOW)"
     "Swamp Archery Reward 2": "has(BOW)"
-"Swamp":
+"Swamp Front":
   region: SOUTHERN_SWAMP
   exits:
     "Road to Southern Swamp": "true"
     "Tourist Information": "true"
-    "Deku Palace": "event(KOUME) || has(PICTOGRAPH_BOX) || (has(MASK_DEKU) && (has(BOW) || has(HOOKSHOT) || has(MASK_ZORA)))"
+    "Swamp Back": "event(BOAT_RIDE) || (has(MASK_DEKU) && (has(BOW) || has(HOOKSHOT) || has(MASK_ZORA)))"
     "Swamp Potion Shop": "true"
     "Woods of Mystery": "true"
-    "Swamp Spider House": "true"
   events:
+    MAGIC_BEANS_SWAMP: "has(MAGIC_BEAN) && (has(MASK_DEKU) || (has(MOON_TEAR) && has(DEED_LAND)))"
     FROG_3: "has(MASK_DON_GERO)"
   locations:
     "Southern Swamp HP": "has(DEED_LAND) && has(MASK_DEKU)"
     "Southern Swamp Scrub Deed": "has(DEED_LAND)"
-    "Southern Swamp Song of Soaring": "has(MASK_DEKU)"
-    "Southern Swamp Grotto": "has(MASK_DEKU)"
+"Swamp Back":
+  region: SOUTHERN_SWAMP
+  exits:
+    "Swamp Front": "event(BOAT_RIDE) || (has(MASK_DEKU) && has(BOW))"
+    "Deku Palace": "true"
+    "Swamp Spider House": "has(MASK_DEKU)"
+  locations:
+    "Southern Swamp Grotto": "has(MASK_DEKU)"  
 "Tourist Information":
   region: SOUTHERN_SWAMP
   exit:
-    "Swamp": "true"
+    "Swamp Front": "true"
+  events:
+     BOAT_RIDE: "has(PICTOGRAPH_BOX) || event(KOUME)"
   locations:
     "Tourist Information Pictobox": "event(KOUME)"
     "Tourist Information Boat Cruise": "event(KOUME) && event(CLEAN_SWAMP) && has(BOW)"
@@ -270,41 +284,50 @@
 "Woods of Mystery":
   region: SOUTHERN_SWAMP
   exits:
-    "Swamp": "true"
+    "Swamp Front": "true"
   events:
     KOUME: "has_bottle"
   locations:
     "Woods of Mystery Grotto": "true"
+    "Swamp Potion Shop Kotake": "true"
 "Swamp Potion Shop":
   region: SOUTHERN_SWAMP
   exits:
-    "Swamp": "true"
+    "Swamp Front": "true"
   events:
     BLUE_POTION: "has_bottle && has(MASK_SCENTS)"
   locations:
-    "Swamp Potion Shop": "true"
+    "Swamp Potion Shop Kotake": "true"
 "Deku Palace":
   region: DEKU_PALACE
   exits:
-    "Swamp": "event(KOUME)"
-    "Woodfall": "has(MASK_DEKU)"
+    "Swamp Back": "true"
+    "Swamp Canopy": "has(MASK_DEKU)"
     "Deku Shrine": "has(MASK_DEKU) && event(DEKU_PRINCESS)"
   events:
-    MAGIC_BEANS: "has(MASK_DEKU)"
+    MAGIC_BEANS_PALACE: "has(MASK_DEKU)"
   locations:
     "Deku Palace HP": "has(MASK_DEKU)"
     "Deku Palace Grotto Chest": "has(MASK_DEKU) && (can_use_beans || has(HOOKSHOT))"
-    "Deku Palace Song of Awakening": "has(MASK_DEKU) && has(OCARINA) && can_use_beans"
+    "Deku Palace Sonata of Awakening": "has(MASK_DEKU) && has(OCARINA) && can_use_beans"
+"Swamp Canopy":
+  region: SOUTHERN_SWAMP
+  exits:
+    "Swamp Back": "true"
+    "Deku Palace": "true"
+    "Woodfall": "has(MASK_DEKU)"
+  locations:
+    "Southern Swamp Song of Soaring": "has(MASK_DEKU)"
 "Woodfall":
   region: WOODFALL
   exits:
-    "Deku Palace": "true"
-    "Woodfall Temple Entrance": "has(MASK_DEKU) && can_play(SONG_AWAKENING) && has(SWORD)"
+    "Swamp Canopy": "true"
+    "Woodfall Temple Entrance": "has(MASK_DEKU) && can_play(SONG_AWAKENING) && has_weapon"
     "Woodfall Great Fairy Fountain": "has(MASK_DEKU)"
   locations:
-    "Woodfall Near Owl Chest": "has(MASK_DEKU) || has(HOOKSHOT)"
+    "Woodfall Near Owl Chest": "has(MASK_DEKU)"
     "Woodfall Entrance Chest": "has(MASK_DEKU) || has(HOOKSHOT)"
-    "Woodfall HP Chest": "has(MASK_DEKU)"
+    "Woodfall HP Chest": "has(MASK_DEKU) || has(HOOKSHOT)"
 "Woodfall Great Fairy Fountain":
   region: WOODFALL
   exits:
@@ -320,7 +343,7 @@
 "Swamp Spider House":
   region: SOUTHERN_SWAMP
   exits:
-    "Swamp": "true"
+    "Swamp Back": "true"
   locations:
     "Swamp Spider House Mask of Truth": "has_weapon && has_bottle && has_weapon_range && (has(HOOKSHOT) || has(MASK_ZORA) || (has(MASK_DEKU) && (has(BOW) || has(MAGIC_UPGRADE) || has(BOMB_BAG))) && (has(HOOKSHOT) || has(MASK_ZORA) || can_use_beans) && (has(HOOKSHOT) || has(MASK_ZORA) || (can_use_beans && can_break_boulders)))"
 

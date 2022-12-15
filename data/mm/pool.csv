@@ -10,6 +10,7 @@ Clock Town Bomber Notebook,                     npc,            CLOCK_TOWN_NORTH
 Clock Town Blast Mask,                          npc,            CLOCK_TOWN_NORTH,           MASK_BLAST,             MASK_BLAST
 Clock Town Keaton HP,                           npc,            CLOCK_TOWN_NORTH,           KEATON_HEART_PIECE,     HEART_PIECE
 Clock Town Silver Rupee Chest,                  chest,          CLOCK_TOWN_EAST,            0x0a,                   RUPEE_SILVER
+Clock Town Postman Hat,                         npc,            CLOCK_TOWN_EAST,            MASK_POSTMAN,           MASK_POSTMAN
 Clock Town Bank Reward 1,                       npc,            CLOCK_TOWN_WEST,            BANK_1,                 WALLET
 Clock Town Bank Reward 2,                       npc,            CLOCK_TOWN_WEST,            BANK_2,                 RUPEE_BLUE
 Clock Town Bank Reward 3,                       npc,            CLOCK_TOWN_WEST,            BANK_3,                 HEART_PIECE
@@ -45,7 +46,6 @@ Curiosity Shop Back Room Pendant of Memories,   npc,            CURIOSITY_SHOP, 
 Curiosity Shop Back Room Owner Reward 1,        npc,            CURIOSITY_SHOP,             MASK_KEATON,            MASK_KEATON
 Curiosity Shop Back Room Owner Reward 2,        npc,            CURIOSITY_SHOP,             LETTER_TO_MAMA,         LETTER_TO_MAMA
 Post Office HP,                                 npc,            POST_OFFICE,                POSTMAN_HEART_PIECE,    HEART_PIECE
-Post Office Postman Hat,                        npc,            POST_OFFICE,                MASK_POSTMAN,           MASK_POSTMAN
 Swordsman School HP,                            npc,            SWORDSMAN_SCHOOL,           SWORDSMAN_HEART_PIECE,  HEART_PIECE
 Deku Playground Reward 1,                       npc,            DEKU_PLAYGROUND,            DEKU_PLAYGROUND_1,      RUPEE_PURPLE
 Deku Playground Reward 2,                       npc,            DEKU_PLAYGROUND,            DEKU_PLAYGROUND_2,      HEART_PIECE
@@ -69,12 +69,12 @@ Southern Swamp Grotto,                          chest,          GROTTOS,        
 Woods of Mystery Grotto,                        chest,          GROTTOS,                    0x1c,                   RUPEE_PURPLE
 Swamp Archery Reward 1,                         npc,            SHOOTING_GALLERY_SWAMP,     SHOOTING_GAME_SWAMP_1,  BOW
 Swamp Archery Reward 2,                         npc,            SHOOTING_GALLERY_SWAMP,     SHOOTING_GAME_SWAMP_2,  HEART_PIECE
-Swamp Potion Shop,                              npc,            POTION_SHOP,                KOTAKE_RED_POTION,      BOTTLED_POTION_RED
+Swamp Potion Shop Kotake,                       npc,            POTION_SHOP,                KOTAKE_RED_POTION,      BOTTLED_POTION_RED
 Tourist Information Pictobox,                   npc,            TOURIST_INFORMATION,        KOUME_PICTOGRAPH_BOX,   PICTOGRAPH_BOX
 Tourist Information Boat Cruise,                npc,            TOURIST_INFORMATION,        KOUME_HEART_PIECE,      HEART_PIECE
 Tourist Information Tingle Picture,             npc,            TOURIST_INFORMATION,        TOUR_GUIDE_HEART_PIECE, HEART_PIECE
 Deku Palace HP,                                 collectible,    DEKU_PALACE,                0x1e,                   HEART_PIECE
-Deku Palace Song of Awakening,                  npc,            DEKU_KING_CHAMBER,          SONG_AWAKENING,         SONG_AWAKENING
+Deku Palace Sonata of Awakening,                npc,            DEKU_KING_CHAMBER,          SONG_AWAKENING,         SONG_AWAKENING
 Deku Palace Grotto Chest,                       chest,          GROTTOS,                    0x05,                   RUPEE_RED
 Deku Shrine Mask of Scents,                     npc,            DEKU_SHRINE,                MASK_SCENTS,            MASK_SCENTS
 Woodfall Near Owl Chest,                        chest,          WOODFALL,                   0x02,                   RUPEE_RED

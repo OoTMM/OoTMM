@@ -130,6 +130,7 @@ export const ITEMS_REQUIRED = new Set<string>([
   'MM_POWDER_KEG',
   'MM_HOOKSHOT',
   'MM_PICTOGRAPH_BOX',
+  'MM_MAGIC_BEAN',
   'MM_MOON_TEAR',
   'MM_DEED_LAND',
   'MM_DEED_SWAMP',
@@ -341,10 +342,6 @@ class Solver {
   private fixLocations() {
     if (!this.opts.settings.shuffleGerudoCard) {
       this.fixedLocations.add('OOT Gerudo Member Card');
-    }
-
-    if (this.opts.settings.ganonBossKey === 'vanilla') {
-      this.fixedLocations.add('OOT Ganon Castle Boss Key');
     }
   }
 
