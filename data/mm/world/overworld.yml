@@ -258,7 +258,7 @@
     "Swamp Potion Shop": "true"
     "Woods of Mystery": "true"
   events:
-    MAGIC_BEANS_SWAMP: "has(MAGIC_BEAN) && (has(MASK_DEKU) || (has(MOON_TEAR) && has(DEED_LAND) && has(DEED_SWAMP)))"
+    MAGIC_BEANS_SWAMP: "has(MAGIC_BEAN) && (has(MASK_DEKU) || (has(MOON_TEAR) && has(DEED_LAND)))"
     FROG_3: "has(MASK_DON_GERO)"
   locations:
     "Southern Swamp HP": "has(DEED_LAND) && has(MASK_DEKU)"
