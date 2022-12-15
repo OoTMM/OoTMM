@@ -474,46 +474,6 @@ const RegionName kRegionNamesMm[] = {
     { "on",         "the " COLOR_RED "Moon" },
 };
 
-static void autoLineBreaks(char* buffer)
-{
-    static const int kMaxLineLength = 37;
-    int lineLength;
-    int i;
-    int lastSpace;
-    u8 c;
-
-    lastSpace = -1;
-    lineLength = 0;
-    i = 0;
-    for (;;)
-    {
-        c = (u8)(buffer[i]);
-        if (c == (u8)(END[0]))
-            break;
-        if (c >= ' ' && c <= '~')
-        {
-            lineLength++;
-            if (lineLength == kMaxLineLength)
-            {
-                lineLength = i - lastSpace;
-                buffer[lastSpace] = NL[0];
-            }
-        }
-        if (c == ' ')
-        {
-            lastSpace = i;
-        }
-        i += comboMultibyteCharSize(c);
-    }
-}
-
-static void appendStr(char** dst, const char* src)
-{
-    size_t len = strlen(src);
-    memcpy(*dst, src, len);
-    *dst += len;
-}
-
 static int isItemAmbiguousOot(u16 itemId)
 {
     switch (itemId)
@@ -653,23 +613,63 @@ static int isItemAmbiguousMm(u16 itemId)
     }
 }
 
-static void appendHeader(char** b)
+void comboTextAutoLineBreaks(char* buffer)
+{
+    static const int kMaxLineLength = 37;
+    int lineLength;
+    int i;
+    int lastSpace;
+    u8 c;
+
+    lastSpace = -1;
+    lineLength = 0;
+    i = 0;
+    for (;;)
+    {
+        c = (u8)(buffer[i]);
+        if (c == (u8)(END[0]))
+            break;
+        if (c >= ' ' && c <= '~')
+        {
+            lineLength++;
+            if (lineLength == kMaxLineLength)
+            {
+                lineLength = i - lastSpace;
+                buffer[lastSpace] = NL[0];
+            }
+        }
+        if (c == ' ')
+        {
+            lastSpace = i;
+        }
+        i += comboMultibyteCharSize(c);
+    }
+}
+
+void comboTextAppendStr(char** dst, const char* src)
+{
+    size_t len = strlen(src);
+    memcpy(*dst, src, len);
+    *dst += len;
+}
+
+void comboTextAppendHeader(char** b)
 {
 #if defined(GAME_MM)
     /* MM has a header */
     memcpy(*b, "\x00\x30\xfe\xff\xff\xff\xff\xff\xff\xff\xff", 11);
     *b += 11;
 #endif
-    appendStr(b, FAST);
+    comboTextAppendStr(b, FAST);
 }
 
-static void appendShopHeader(char** b, s16 price)
+void comboTextAppendShopHeader(char** b, s16 price)
 {
 #if defined(GAME_MM)
     memcpy((*b) + 5, &price, 2);
     *b += 11;
 #endif
-    appendStr(b, FAST);
+    comboTextAppendStr(b, FAST);
 }
 
 #if defined(GAME_MM)
@@ -678,14 +678,14 @@ static void appendBossRewardHeader(char** b, char icon)
     memcpy(*b, "\x06\x00\xfe\xff\xff\xff\xff\xff\xff\xff\xff", 11);
     (*b)[2] = icon;
     *b += 11;
-    appendStr(b, FAST);
+    comboTextAppendStr(b, FAST);
 }
 #endif
 
-static void appendClearColor(char** b)
+void comboTextAppendClearColor(char** b)
 {
 #if defined(GAME_OOT)
-    appendStr(b, CZ);
+    comboTextAppendStr(b, CZ);
 #else
     /* strlen doesn't like NUL */
     **b = 0;
@@ -693,7 +693,7 @@ static void appendClearColor(char** b)
 #endif
 }
 
-static void appendNum(char** b, int num)
+void comboTextAppendNum(char** b, int num)
 {
     int denum;
     int started;
@@ -721,7 +721,7 @@ static void appendNum(char** b, int num)
     }
 }
 
-static void appendItemName(char** b, u16 itemId, int capitalize)
+void comboTextAppendItemName(char** b, u16 itemId, int capitalize)
 {
     char* start;
     const char* itemName;
@@ -743,22 +743,22 @@ static void appendItemName(char** b, u16 itemId, int capitalize)
     }
 
     start = *b;
-    appendStr(b, itemName);
-    appendClearColor(b);
+    comboTextAppendStr(b, itemName);
+    comboTextAppendClearColor(b);
 
     if (ambiguous)
     {
-        appendStr(b, " (");
+        comboTextAppendStr(b, " (");
         if (itemId & MASK_FOREIGN_ITEM)
         {
-            appendStr(b, COLOR_PINK "MM");
+            comboTextAppendStr(b, COLOR_PINK "MM");
         }
         else
         {
-            appendStr(b, COLOR_TEAL "OoT");
+            comboTextAppendStr(b, COLOR_TEAL "OoT");
         }
-        appendClearColor(b);
-        appendStr(b, ")");
+        comboTextAppendClearColor(b);
+        comboTextAppendStr(b, ")");
     }
 
     if (capitalize)
@@ -767,86 +767,7 @@ static void appendItemName(char** b, u16 itemId, int capitalize)
     }
 }
 
-void comboTextHijackItem(GameState_Play* play, u16 itemId)
-{
-    char* b;
-
-#if defined(GAME_OOT)
-    b = play->msgCtx.textBuffer;
-#else
-    b = play->textBuffer;
-#endif
-    appendHeader(&b);
-    appendStr(&b, "You got ");
-    appendItemName(&b, itemId, 0);
-    appendStr(&b, "!");
-    appendStr(&b, END);
-}
-
-void comboTextHijackItemShop(GameState_Play* play, u16 itemId, s16 price, int confirm)
-{
-    char* b;
-
-#if defined(GAME_OOT)
-    b = play->msgCtx.textBuffer;
-#else
-    b = play->textBuffer;
-#endif
-
-    appendShopHeader(&b, price);
-
-    if (itemId == ITEM_NONE)
-    {
-        appendStr(&b, "SOLD OUT" NOCLOSE END);
-
-    }
-
-    appendItemName(&b, itemId, 1);
-    appendStr(&b, NL COLOR_RED);
-    appendNum(&b, price);
-    appendStr(&b, " Rupees");
-    if (confirm)
-    {
-        appendStr(&b, NL CHOICE2 COLOR_GREEN);
-        appendStr(&b, "Buy" NL);
-        appendStr(&b, "No thanks");
-    }
-    else
-    {
-        appendStr(&b, NL NL NOCLOSE);
-    }
-    appendStr(&b, END);
-}
-
-#if defined(GAME_OOT)
-void comboMessageCancel(GameState_Play* play)
-{
-    u8* ctx = (u8*)(void*)&play->msgCtx;
-
-    ctx[0xe3e7] = 2;
-    ctx[0xe304] = 0x36;
-    ctx[0xe3e4] = 0;
-
-    play->msgCtx.ocarinaMode = 4;
-    *(((char*)GET_LINK(play)) + 0x141) = 0;
-}
-#endif
-
-#if defined(GAME_OOT)
-static const char kIcons[] = {
-    0x6c,
-    0x6d,
-    0x6e,
-    0x6b,
-    0x66,
-    0x67,
-    0x68,
-    0x69,
-    0x6a,
-};
-#endif
-
-static void appendRegionName(char** b, u8 regionId, int prepos, int capitalize)
+void comboTextAppendRegionName(char** b, u8 regionId, int prepos, int capitalize)
 {
     char* start;
     const RegionName* regName;
@@ -863,11 +784,11 @@ static void appendRegionName(char** b, u8 regionId, int prepos, int capitalize)
     start = *b;
     if (prepos)
     {
-        appendStr(b, regName->prepos);
-        appendStr(b, " ");
+        comboTextAppendStr(b, regName->prepos);
+        comboTextAppendStr(b, " ");
     }
-    appendStr(b, regName->name);
-    appendClearColor(b);
+    comboTextAppendStr(b, regName->name);
+    comboTextAppendClearColor(b);
 
     if (capitalize)
     {
@@ -875,30 +796,104 @@ static void appendRegionName(char** b, u8 regionId, int prepos, int capitalize)
     }
 }
 
+void comboTextHijackItem(GameState_Play* play, u16 itemId)
+{
+    char* b;
 
 #if defined(GAME_OOT)
+    b = play->msgCtx.textBuffer;
+#else
+    b = play->textBuffer;
+#endif
+    comboTextAppendHeader(&b);
+    comboTextAppendStr(&b, "You got ");
+    comboTextAppendItemName(&b, itemId, 0);
+    comboTextAppendStr(&b, "!");
+    comboTextAppendStr(&b, END);
+}
+
+void comboTextHijackItemShop(GameState_Play* play, u16 itemId, s16 price, int confirm)
+{
+    char* b;
+
+#if defined(GAME_OOT)
+    b = play->msgCtx.textBuffer;
+#else
+    b = play->textBuffer;
+#endif
+
+    comboTextAppendShopHeader(&b, price);
+
+    if (itemId == ITEM_NONE)
+    {
+        comboTextAppendStr(&b, "SOLD OUT" NOCLOSE END);
+
+    }
+
+    comboTextAppendItemName(&b, itemId, 1);
+    comboTextAppendStr(&b, NL COLOR_RED);
+    comboTextAppendNum(&b, price);
+    comboTextAppendStr(&b, " Rupees");
+    if (confirm)
+    {
+        comboTextAppendStr(&b, NL CHOICE2 COLOR_GREEN);
+        comboTextAppendStr(&b, "Buy" NL);
+        comboTextAppendStr(&b, "No thanks");
+    }
+    else
+    {
+        comboTextAppendStr(&b, NL NL NOCLOSE);
+    }
+    comboTextAppendStr(&b, END);
+}
+
+#if defined(GAME_OOT)
+void comboMessageCancel(GameState_Play* play)
+{
+    u8* ctx = (u8*)(void*)&play->msgCtx;
+
+    ctx[0xe3e7] = 2;
+    ctx[0xe304] = 0x36;
+    ctx[0xe3e4] = 0;
+
+    play->msgCtx.ocarinaMode = 4;
+    *(((char*)GET_LINK(play)) + 0x141) = 0;
+}
+
+static const char kIcons[] = {
+    0x6c,
+    0x6d,
+    0x6e,
+    0x6b,
+    0x66,
+    0x67,
+    0x68,
+    0x69,
+    0x6a,
+};
+
 void comboTextHijackDungeonRewardHints(GameState_Play* play, int base, int count)
 {
     char* b;
     int index;
 
     b = play->msgCtx.textBuffer;
-    appendHeader(&b);
+    comboTextAppendHeader(&b);
     for (int i = 0; i < count; ++i)
     {
         index = base + i;
-        appendStr(&b, FAST ICON);
+        comboTextAppendStr(&b, FAST ICON);
         *b++ = kIcons[index];
-        appendRegionName(&b, gComboData.hints.dungeonRewards[index], 1, 1);
-        appendStr(&b, "...");
+        comboTextAppendRegionName(&b, gComboData.hints.dungeonRewards[index], 1, 1);
+        comboTextAppendStr(&b, "...");
 
         if (i == (count - 1))
         {
-            appendStr(&b, SIGNAL END);
+            comboTextAppendStr(&b, SIGNAL END);
         }
         else
         {
-            appendStr(&b, BB);
+            comboTextAppendStr(&b, BB);
         }
 
     }
@@ -912,11 +907,11 @@ void comboTextHijackDungeonRewardHints(GameState_Play* play, int hint)
 
     b = play->textBuffer;
     appendBossRewardHeader(&b, 0x55 + hint);
-    appendRegionName(&b, gComboData.hints.dungeonRewards[9 + hint], 1, 1);
-    appendStr(&b, "...");
+    comboTextAppendRegionName(&b, gComboData.hints.dungeonRewards[9 + hint], 1, 1);
+    comboTextAppendStr(&b, "...");
     if (hint != 3)
-        appendStr(&b, "\x19");
-    appendStr(&b, END);
+        comboTextAppendStr(&b, "\x19");
+    comboTextAppendStr(&b, END);
 }
 #endif
 
@@ -926,17 +921,17 @@ void comboTextHijackSkullReward(GameState_Play* play, s16 itemId, int count)
     char* b;
 
     b = play->msgCtx.textBuffer;
-    appendHeader(&b);
-    appendStr(&b,
+    comboTextAppendHeader(&b);
+    comboTextAppendStr(&b,
         "Yeaaarrgh! I'm cursed!! Please save me by destroying " COLOR_RED
     );
-    appendNum(&b, count);
-    appendStr(&b,
+    comboTextAppendNum(&b, count);
+    comboTextAppendStr(&b,
         " Spiders of the Curse" CZ " and I will give you "
     );
-    appendItemName(&b, itemId, 0);
-    appendStr(&b, CZ "." END);
-    autoLineBreaks(play->msgCtx.textBuffer);
+    comboTextAppendItemName(&b, itemId, 0);
+    comboTextAppendStr(&b, CZ "." END);
+    comboTextAutoLineBreaks(play->msgCtx.textBuffer);
 }
 
 void comboTextHijackLightArrows(GameState_Play* play)
@@ -944,13 +939,13 @@ void comboTextHijackLightArrows(GameState_Play* play)
     char* b;
 
     b = play->msgCtx.textBuffer;
-    appendHeader(&b);
-    appendStr(&b,
+    comboTextAppendHeader(&b);
+    comboTextAppendStr(&b,
         "Have you found the " COLOR_YELLOW "Light Arrows " CZ
     );
-    appendRegionName(&b, gComboData.hints.lightArrows, 1, 0);
-    appendStr(&b, "?" END);
-    autoLineBreaks(play->msgCtx.textBuffer);
+    comboTextAppendRegionName(&b, gComboData.hints.lightArrows, 1, 0);
+    comboTextAppendStr(&b, "?" END);
+    comboTextAutoLineBreaks(play->msgCtx.textBuffer);
 }
 #endif
 
@@ -961,14 +956,14 @@ void comboTextHijackOathToOrder(GameState_Play* play)
     char* start;
 
     b = play->textBuffer;
-    appendHeader(&b);
+    comboTextAppendHeader(&b);
     start = b;
-    appendStr(&b,
+    comboTextAppendStr(&b,
         "Have you found the " COLOR_PINK "Oath to Order "
     );
-    appendClearColor(&b);
-    appendRegionName(&b, gComboData.hints.oathToOrder, 1, 0);
-    appendStr(&b, "?" END);
-    autoLineBreaks(start);
+    comboTextAppendClearColor(&b);
+    comboTextAppendRegionName(&b, gComboData.hints.oathToOrder, 1, 0);
+    comboTextAppendStr(&b, "?" END);
+    comboTextAutoLineBreaks(start);
 }
 #endif
