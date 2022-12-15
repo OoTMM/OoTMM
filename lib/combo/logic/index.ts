@@ -11,6 +11,7 @@ export type LogicResult = {
   items: WorldCheck[];
   log: string;
   hints: Hints;
+  config: Set<string>;
 };
 
 export const logic = (opts: Options): LogicResult => {
@@ -45,5 +46,5 @@ export const logic = (opts: Options): LogicResult => {
     items.push({ ...check, item: placement[loc] });
   }
   const h = hints(world, placement);
-  return { items, log, hints: h };
+  return { items, log, hints: h, config };
 };

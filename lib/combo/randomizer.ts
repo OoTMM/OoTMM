@@ -141,18 +141,8 @@ const regionsBuffer = (regions: string[]) => {
   return toU8Buffer(data);
 };
 
-export const config = (settings: Settings): string[] => {
-  const config: string[] = [];
-  if (settings.ganonBossKey === 'removed') {
-    config.push('GANON_NO_BOSS_KEY');
-  }
-
-  return config;
-};
-
-export const randomizerConfig = (settings: Settings): Buffer => {
-  const conf = config(settings);
-  const bits = conf.map((c) => {
+export const randomizerConfig = (config: Set<string>): Buffer => {
+  const bits = Array.from(config).map((c) => {
     const bit = DATA_CONFIG[c];
     if (bit === undefined) {
       throw new Error(`Unknown config ${c}`);
@@ -177,7 +167,7 @@ export const randomizerHints = (logic: LogicResult): Buffer => {
 
 export const randomizerData = async (logic: LogicResult, options: Options): Promise<Buffer> => {
   const buffers = [];
-  buffers.push(randomizerConfig(options.settings));
+  buffers.push(randomizerConfig(logic.config));
   buffers.push(randomizerHints(logic));
   return Buffer.concat(buffers);
 };
