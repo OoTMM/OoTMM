@@ -1,6 +1,6 @@
 import fs from 'fs/promises';
 import path from 'path';
-import { DATA_GI, DATA_NPC, DATA_SCENES } from './data';
+import { DATA_GI, DATA_NPC, DATA_SCENES, DATA_CONFIG } from './data';
 import { Monitor } from './monitor';
 
 import { fileExists } from './util';
@@ -47,5 +47,6 @@ export const codegen = async (monitor: Monitor) => {
     codegenFile(DATA_GI,      "GI",  "gi_data.h", "GENERATED_GI_DATA_H"),
     codegenFile(DATA_SCENES,  "SCE", "scenes.h",  "GENERATED_SCENES_H"),
     codegenFile(DATA_NPC,     "NPC", "npc.h",     "GENERATED_NPC_H"),
+    codegenFile(DATA_CONFIG,  "CFG", "config.h",  "GENERATED_CONFIG_H"),
   ]);
 };

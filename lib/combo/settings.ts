@@ -21,6 +21,17 @@ export const SETTINGS = [{
   ],
   default: 'none'
 }, {
+  key: 'ganonBossKey',
+  name: 'Ganon Boss Key Shuffle',
+  category: 'main',
+  type: 'enum',
+  values: [
+    { value: 'removed', name: 'Removed' },
+    { value: 'vanilla', name: 'Vanilla' },
+    { value: 'ganon', name: 'Ganon\'s Castle' },
+  ],
+  default: 'removed'
+}, {
   key: 'shuffleGerudoCard',
   name: 'Gerudo Card Shuffle',
   category: 'main',

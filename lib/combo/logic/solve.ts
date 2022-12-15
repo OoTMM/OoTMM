@@ -342,6 +342,10 @@ class Solver {
     if (!this.opts.settings.shuffleGerudoCard) {
       this.fixedLocations.add('OOT Gerudo Member Card');
     }
+
+    if (this.opts.settings.ganonBossKey === 'vanilla') {
+      this.fixedLocations.add('OOT Ganon Castle Boss Key');
+    }
   }
 
   private makeItemPools() {

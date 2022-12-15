@@ -5,6 +5,7 @@ import { spoiler } from './spoiler';
 import { LogicSeedError } from './error';
 import { Options } from '../options';
 import { hints, Hints } from './hints';
+import { alterWorld, configFromSettings } from './settings';
 
 export type LogicResult = {
   items: WorldCheck[];
@@ -13,7 +14,9 @@ export type LogicResult = {
 };
 
 export const logic = (opts: Options): LogicResult => {
+  const config = configFromSettings(opts.settings);
   const world = createWorld(opts.settings);
+  alterWorld(world, opts.settings, config);
   const random = new Random();
   random.seed(opts.seed);
 

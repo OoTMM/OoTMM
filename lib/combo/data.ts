@@ -2,6 +2,7 @@ export { default as DATA_GI } from '../../data/gi.yml';
 export { default as DATA_SCENES } from '../../data/scenes.yml';
 export { default as DATA_NPC } from '../../data/npc.yml';
 export { default as DATA_REGIONS } from '../../data/regions.yml';
+export { default as DATA_CONFIG } from '../../data/config.yml';
 
 import poolOot from '../../data/oot/pool.csv';
 import poolMm from '../../data/mm/pool.csv';
