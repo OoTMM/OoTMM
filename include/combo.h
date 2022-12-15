@@ -236,6 +236,9 @@ DmaEntry;
 
 extern DmaEntry kComboDmaData[];
 
+/* Misc */
+int comboCanAccessMoon(void);
+
 #else
 # include <combo/asm.h>
 #endif

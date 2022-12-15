@@ -4,10 +4,7 @@
 
 static void DmStk_Start(Actor* this, GameState_Play* play)
 {
-    if (gSave.inventory.questItems.remainsOdolwa
-        && gSave.inventory.questItems.remainsGoht
-        && gSave.inventory.questItems.remainsGyorg
-        && gSave.inventory.questItems.remainsTwinmold)
+    if (comboCanAccessMoon())
     {
         PlayerDisplayTextBox(play, 0x2013, this);
         comboTextHijackOathToOrder(play);
