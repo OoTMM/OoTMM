@@ -229,6 +229,7 @@
     "Swamp Potion Shop": "true"
     "Woods of Mystery": "true"
   events:
+    MAGIC_BEANS_SWAMP: "has(MAGIC_BEAN) && (has(MASK_DEKU) || (has(MOON_TEAR) && has(DEED_LAND) && has(DEED_SWAMP)))"
     FROG_3: "has(MASK_DON_GERO)"
   locations:
     "Southern Swamp HP": "has(DEED_LAND) && has(MASK_DEKU)"
@@ -270,7 +271,7 @@
     "Swamp Canopy": "has(MASK_DEKU)"
     "Deku Shrine": "has(MASK_DEKU) && event(DEKU_PRINCESS)"
   events:
-    MAGIC_BEANS: "has(MASK_DEKU)"
+    MAGIC_BEANS_PALACE: "has(MASK_DEKU)"
   locations:
     "Deku Palace HP": "has(MASK_DEKU)"
     "Deku Palace Grotto Chest": "has(MASK_DEKU) && (can_use_beans || has(HOOKSHOT))"
@@ -303,7 +304,7 @@
     "Deku Shrine Mask of Scents": "true"
 "Swamp Spider House":
   exits:
-    "Swamp": "true"
+    "Swamp Back": "true"
   locations:
     "Swamp Spider House Mask of Truth": "has_weapon && has_bottle && has_weapon_range && (has(HOOKSHOT) || has(MASK_ZORA) || (has(MASK_DEKU) && (has(BOW) || has(MAGIC_UPGRADE) || has(BOMB_BAG))) && (has(HOOKSHOT) || has(MASK_ZORA) || can_use_beans) && (has(HOOKSHOT) || has(MASK_ZORA) || (can_use_beans && can_break_boulders)))"
 
