@@ -24,3 +24,4 @@
 "can_fight": "has_weapon || has(MASK_ZORA) || has(MASK_GORON)"
 "can_lullaby": "has(OCARINA) && has(SONG_GORON_HALF, 2) && has(MASK_GORON)"
 "has_shield": "true"
+"can_activate_crystal": "can_break_boulders || has_weapon || has(BOW) || has(HOOKSHOT) || has(MASK_DEKU) || has(MASK_ZORA)"
