@@ -488,7 +488,7 @@ static void autoLineBreaks(char* buffer)
     for (;;)
     {
         c = (u8)(buffer[i]);
-        if (c == END[0])
+        if (c == (u8)(END[0]))
             break;
         if (c >= ' ' && c <= '~')
         {
@@ -951,5 +951,24 @@ void comboTextHijackLightArrows(GameState_Play* play)
     appendRegionName(&b, gComboData.hints.lightArrows, 1, 0);
     appendStr(&b, "?" END);
     autoLineBreaks(play->msgCtx.textBuffer);
+}
+#endif
+
+#if defined(GAME_MM)
+void comboTextHijackOathToOrder(GameState_Play* play)
+{
+    char* b;
+    char* start;
+
+    b = play->textBuffer;
+    appendHeader(&b);
+    start = b;
+    appendStr(&b,
+        "Have you found the " COLOR_PINK "Oath to Order "
+    );
+    appendClearColor(&b);
+    appendRegionName(&b, gComboData.hints.oathToOrder, 1, 0);
+    appendStr(&b, "?" END);
+    autoLineBreaks(start);
 }
 #endif

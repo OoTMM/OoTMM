@@ -71,6 +71,7 @@ typedef struct PACKED ALIGNED(4)
 {
     u8 dungeonRewards[13];
     u8 lightArrows;
+    u8 oathToOrder;
 }
 ComboDataHints;
 
@@ -123,6 +124,7 @@ void comboTextHijackSkullReward(GameState_Play* play, s16 itemId, int count);
 void comboTextHijackLightArrows(GameState_Play* play);
 #else
 void comboTextHijackDungeonRewardHints(GameState_Play* play, int hint);
+void comboTextHijackOathToOrder(GameState_Play* play);
 #endif
 
 /* Progressive */

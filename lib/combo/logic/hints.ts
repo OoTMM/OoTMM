@@ -4,6 +4,7 @@ import { World } from './world';
 export type Hints = {
   dungeonRewards: string[];
   lightArrow: string;
+  oathToOrder: string;
 };
 
 const findItem = (items: ItemPlacement, item: string) => {
@@ -18,5 +19,6 @@ const findItem = (items: ItemPlacement, item: string) => {
 export const hints = (world: World, items: ItemPlacement): Hints => {
   const dungeonRewards = ORDERED_DUNGEON_REWARDS.map(item => findItem(items, item)).map(loc => world.regions[loc!]);
   const lightArrow = world.regions[findItem(items, 'OOT_ARROW_LIGHT')!];
-  return { dungeonRewards, lightArrow };
+  const oathToOrder = world.regions[findItem(items, 'MM_SONG_ORDER')!];
+  return { dungeonRewards, lightArrow, oathToOrder };
 };

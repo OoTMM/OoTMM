@@ -162,6 +162,7 @@ export const randomizerHints = (logic: LogicResult): Buffer => {
   const buffers: Buffer[] = [];
   buffers.push(regionsBuffer(logic.hints.dungeonRewards));
   buffers.push(regionsBuffer([logic.hints.lightArrow]));
+  buffers.push(regionsBuffer([logic.hints.oathToOrder]));
   return Buffer.concat(buffers);
 };
 
