@@ -20,6 +20,7 @@
 # include <combo/object.h>
 # include <combo/patch.h>
 # include <combo/npc.h>
+# include <combo/text.h>
 
 # if defined(GAME_OOT)
 #  include <combo/oot/play.h>
