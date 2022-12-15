@@ -469,7 +469,12 @@ class Solver {
     if (options.forcedItem) {
       requiredItem = options.forcedItem;
     } else {
-      requiredItem = sample(this.random, itemsArray(pool));
+      const items = itemsArray(pool);
+      if (items.length === 0) {
+        const unreachableLocs = Object.keys(this.world.checks).filter(x => !this.reachable.locations.has(x));
+        throw new Error(`Unreachable locations: ${unreachableLocs.join(', ')}`);
+      }
+      requiredItem = sample(this.random, items);
     }
 
     /* Get the constraint associated with the item */
