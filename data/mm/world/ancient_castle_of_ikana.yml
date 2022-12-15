@@ -46,11 +46,12 @@
 "Ancient Castle of Ikana Wizzrobe":
   region: IKANA_CASTLE
   exits:
-    "Ancient Castle of Ikana Interior South": "can_fight || has(BOW)"
+    "Ancient Castle of Ikana Interior South": "can_use_light_arrows"
     "Ancient Castle of Ikana Roof Interior": "can_fight || has(BOW)"
 "Ancient Castle of Ikana Roof Interior":
   region: IKANA_CASTLE
   exits:
+    "Ancient Castle of Ikana Interior": "event(IKANA_CASTLE_LIGHT2)"
     "Ancient Castle of Ikana Wizzrobe": "true"
   events:
     IKANA_CASTLE_LIGHT2: "can_use_keg"
