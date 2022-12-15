@@ -24,36 +24,36 @@
 "Ganon Castle Forest":
   dungeon: Ganon
   events:
-    GANON_TRIAL_FOREST: "has_fire && can_play(SONG_TIME) && has(BOOTS_HOVER) && has(BOOTS_IRON) && has_light_arrows"
+    GANON_TRIAL_FOREST: "(has_fire_arrows || (can_use_din && has_ranged_weapon_adult)) && has_light_arrows"
   locations:
     "Ganon Castle Forest Chest": "true"
 "Ganon Castle Fire":
   dungeon: Ganon
   events:
-    GANON_TRIAL_FIRE: "has(TUNIC_GORON) && can_longshot && has(STRENGTH, 3) && has_light_arrows"
+    GANON_TRIAL_FIRE: "has_tunic_goron && can_longshot && has(STRENGTH, 3) && has_light_arrows"
 "Ganon Castle Water":
   dungeon: Ganon
   events:
-    "BLUE_FIRE": "has_bottle"
-    GANON_TRIAL_WATER: "event(BLUE_FIRE) && has(HAMMER) && has_light_arrows"
+    BLUE_FIRE: "has_bottle"
+    GANON_TRIAL_WATER: "event(BLUE_FIRE) && can_hammer && has_light_arrows"
   locations:
     "Ganon Castle Water Chest 1": "true"
     "Ganon Castle Water Chest 2": "true"
 "Ganon Castle Spirit":
   dungeon: Ganon
   events:
-    GANON_TRIAL_SPIRIT: "can_hookshot && has_bombchu && has_fire && has_light_arrows"
+    GANON_TRIAL_SPIRIT: "can_hookshot && has_explosives && has_light_arrows"
   locations:
-    "Ganon Castle Spirit Chest 1": "can_hookshot && (has(MAGIC_UPGRADE) || has_bombchu)"
-    "Ganon Castle Spirit Chest 2": "can_hookshot && has_bombchu && has_lens"
+    "Ganon Castle Spirit Chest 1": "can_hookshot"
+    "Ganon Castle Spirit Chest 2": "can_hookshot && has_explosives && has_lens"
 "Ganon Castle Shadow":
   dungeon: Ganon
   events:
-    GANON_TRIAL_SHADOW: "has(BOOTS_HOVER) && has_lens && has_fire_arrows && has(HAMMER) && has_light_arrows"
+    GANON_TRIAL_SHADOW: "can_hammer && has_light_arrows && (can_longshot || has_fire_arrows) && (has_hover_boots || has_fire) && (has_lens || (can_longshot && has_hover_boots))"
   locations:
-    "Ganon Castle Shadow Chest 1": "can_play(SONG_ZELDA) || can_hookshot || has(BOOTS_HOVER) || (has_lens && has_fire_arrows)"
-    "Ganon Castle Shadow Chest 2": "has(BOOTS_HOVER) && has_lens && has_fire_arrows"
+    "Ganon Castle Shadow Chest 1": "can_play(SONG_TIME) || can_hookshot || has_hover_boots || has_fire_arrows"
+    "Ganon Castle Shadow Chest 2": "(can_longshot || has_fire_arrows) && (has_hover_boots || has_fire)"
 "Ganon Castle Tower":
   dungeon: Ganon
   locations:
-    "Ganon Castle Boss Key": "true"
+    "Ganon Castle Boss Key": "has_weapon"
