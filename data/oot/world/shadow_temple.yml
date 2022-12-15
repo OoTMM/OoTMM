@@ -2,49 +2,49 @@
   dungeon: Shadow
   exits:
     "Graveyard Upper": "true"
-    "Shadow Temple Pit": "has(BOOTS_HOVER) || can_hookshot"
+    "Shadow Temple Pit": "has_hover_boots || can_hookshot"
 "Shadow Temple Pit":
   dungeon: Shadow
   exits:
-    "Shadow Temple Main": "has(BOOTS_HOVER) && has_lens"
+    "Shadow Temple Main": "has_hover_boots && has_lens"
   locations:
     "Shadow Temple Map": "has_lens"
     "Shadow Temple Hover Boots": "has_lens"
 "Shadow Temple Main":
   dungeon: Shadow
   exits:
-    "Shadow Temple Open": "has(SMALL_KEY_SHADOW, 1) && has_explosives_or_hammer"
+    "Shadow Temple Open": "has(SMALL_KEY_SHADOW, 1) && has_explosives"
   locations:
-    "Shadow Temple Silver Rupees": "can_hookshot"
+    "Shadow Temple Silver Rupees": "can_hookshot || has_hover_boots"
     "Shadow Temple Compass": "true"
 "Shadow Temple Open":
   dungeon: Shadow
   exits:
-    "Shadow Temple Wind": "has(SMALL_KEY_SHADOW, 3) && can_hookshot"
+    "Shadow Temple Wind": "has(SMALL_KEY_SHADOW, 3) && can_hookshot && has_lens"
   locations:
     "Shadow Temple Spinning Blades Visible": "true"
-    "Shadow Temple Spinning Blades Invisible": "true"
-    "Shadow Temple Falling Spikes Lower": "has(STRENGTH)"
-    "Shadow Temple Falling Spikes Upper 1": "has(STRENGTH)"
-    "Shadow Temple Falling Spikes Upper 2": "has(STRENGTH)"
-    "Shadow Temple Invisible Spike Room": "has(SMALL_KEY_SHADOW, 2) && can_hookshot"
-    "Shadow Temple Skull": "has(SMALL_KEY_SHADOW, 2) && can_hookshot && has(BOMB_BAG)"
-    "Shadow Temple GS Skull Pot": "has(SMALL_KEY_SHADOW, 2) && can_hookshot"
-    "Shadow Temple GS Falling Spikes": "has(STRENGTH)"
-    "Shadow Temple GS Invisible Scythe": "can_hookshot"
+    "Shadow Temple Spinning Blades Invisible": "has_lens"
+    "Shadow Temple Falling Spikes Lower": "true"
+    "Shadow Temple Falling Spikes Upper 1": "has(STRENGTH) && has_lens"
+    "Shadow Temple Falling Spikes Upper 2": "has(STRENGTH) && has_lens"
+    "Shadow Temple Invisible Spike Room": "has(SMALL_KEY_SHADOW, 2) && can_hookshot && has_lens"
+    "Shadow Temple Skull": "has(SMALL_KEY_SHADOW, 2) && can_hookshot && has_explosives && has_lens"
+    "Shadow Temple GS Skull Pot": "has(SMALL_KEY_SHADOW, 2) && can_hookshot && has_lens"
+    "Shadow Temple GS Falling Spikes": "can_hookshot"
+    "Shadow Temple GS Invisible Scythe": "true"
 "Shadow Temple Wind":
   dungeon: Shadow
   exits:
     "Shadow Temple Boat": "has(SMALL_KEY_SHADOW, 4) && can_play(SONG_ZELDA)"
   locations:
-    "Shadow Temple Wind Room Hint": "true"
+    "Shadow Temple Wind Room Hint": "has_lens"
     "Shadow Temple After Wind": "true"
-    "Shadow Temple After Wind Invisible": "has_explosives"
-    "Shadow Temple GS Near Boat": "has(SMALL_KEY_SHADOW, 4) && scarecrow_longshot"
+    "Shadow Temple After Wind Invisible": "has_explosives && has_lens"
+    "Shadow Temple GS Near Boat": "has(SMALL_KEY_SHADOW, 4) && can_longshot"
 "Shadow Temple Boat":
   dungeon: Shadow
   exits:
-    "Shadow Temple Boss": "has(SMALL_KEY_SHADOW, 5) && has(BOSS_KEY_SHADOW) && has(BOW)"
+    "Shadow Temple Boss": "has(SMALL_KEY_SHADOW, 5) && has(BOSS_KEY_SHADOW) && (can_use_bow || scarecrow_longshot)"
   locations:
     "Shadow Temple Boss Key Room 1": "can_use_din"
     "Shadow Temple Boss Key Room 2": "can_use_din"
