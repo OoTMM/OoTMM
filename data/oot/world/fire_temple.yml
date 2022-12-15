@@ -3,49 +3,61 @@ Fire Temple Entrance:
   exits:
     "Death Mountain Crater Bottom": "true"
     "Fire Temple Lava Room": "has(SMALL_KEY_FIRE, 1)"
-    "Fire Temple Boss": "has(BOSS_KEY_FIRE) && event(FIRE_TEMPLE_PILLAR_HAMMER) && can_hammer"
+    "Fire Temple Boss": "has(BOSS_KEY_FIRE) && (event(FIRE_TEMPLE_PILLAR_HAMMER) || has_hover_boots)"
   locations:
     "Fire Temple Jail 1 Chest": "true"
-    "Fire Temple Boss Key Side Chest": "can_hammer && has_explosives && has(HOOKSHOT)"
-    "Fire Temple Boss Key Chest": "can_hammer && has_explosives && has(HOOKSHOT)"
+    "Fire Temple Boss Key Side Chest": "can_hammer"
+    "Fire Temple Boss Key Chest": "can_hammer"
     "Fire Temple GS Hammer Statues": "can_hammer"
 "Fire Temple Lava Room":
   dungeon: Fire
   exits:
-    "Fire Temple After Elevator": "has(SMALL_KEY_FIRE, 3) && (has(BOW) || has(HOOKSHOT) || has_explosives)"
+    "Fire Temple After Elevator": "has(SMALL_KEY_FIRE, 3) && has(STRENGTH) && (has_ranged_weapon_adult || has_explosives)"
   locations:
     "Fire Temple Jail 2 Chest": "true"
-    "Fire Temple Jail 3 Chest": "true"
+    "Fire Temple Jail 3 Chest": "has_explosives"
     "Fire Temple GS Lava Side Room": "can_play(SONG_TIME)"
 "Fire Temple After Elevator":
   dungeon: Fire
   exits:
     "Fire Temple Entrance": "true"
-    "Fire Temple Ring": "has(SMALL_KEY_FIRE, 7) && can_play(SONG_TIME)"
+    "Fire Temple Ring": "has(SMALL_KEY_FIRE, 6)"
     "Fire Temple Scarecrow": "has(SMALL_KEY_FIRE, 5) && scarecrow_hookshot"
   locations:
     "Fire Temple Maze Chest": "true"
     "Fire Temple Jail 4 Chest": "true"
-    "Fire Temple Map": "has(SMALL_KEY_FIRE, 4) && has(BOW)"
+    "Fire Temple Map": "has(SMALL_KEY_FIRE, 4) && (can_use_bow || has(SMALL_KEY_FIRE, 5))"
     "Fire Temple Above Maze Chest": "has(SMALL_KEY_FIRE, 5)"
-    "Fire Temple Below Maze Chest": "has(SMALL_KEY_FIRE, 5) && has_explosives_or_hammer"
+    "Fire Temple Below Maze Chest": "has(SMALL_KEY_FIRE, 5) && has_explosives"
     "Fire Temple GS Maze": "has_explosives"
 "Fire Temple Ring":
   dungeon: Fire
   exits:
     "Fire Temple After Elevator": "true"
-    "Fire Temple After Miniboss": "has_explosives && has(HOOKSHOT)"
+    "Fire Temple Before Miniboss": "has(SMALL_KEY_FIRE, 7)"
+    "Fire Temple Pillar Ledge": "has_hover_boots"
   locations:
     "Fire Temple Compass": "true"
-"Fire Temple After Miniboss":
+"Fire Temple Before Miniboss":
   dungeon: Fire
   exits:
+    "Fire Temple After Miniboss": "has_explosives"
+    "Fire Temple Pillar Ledge": "can_play(SONG_TIME)"
+  locations:
+    "Fire Temple Ring Jail": "can_hammer && can_play(SONG_TIME)"
+"Fire Temple Pillar Ledge":
+  dungeon: Fire
+  exits:
+    "Fire Temple Before Miniboss": "can_hammer"
     "Fire Temple Ring": "true"
   events:
     FIRE_TEMPLE_PILLAR_HAMMER: "can_hammer"
+"Fire Temple After Miniboss":
+  dungeon: Fire
+  exits:
+    "Fire Temple Pillar Ledge": "true"
   locations:
     "Fire Temple Hammer": "true"
-    "Fire Temple Ring Jail": "can_hammer"
 "Fire Temple Boss":
   dungeon: Fire
   exits:
@@ -58,6 +70,6 @@ Fire Temple Entrance:
 "Fire Temple Scarecrow":
   dungeon: Fire
   locations:
-    "Fire Temple Scarecrow Chest": "can_hookshot"
-    "Fire Temple GS Scarecrow Wall": "can_collect_distance"
+    "Fire Temple Scarecrow Chest": "true"
+    "Fire Temple GS Scarecrow Wall": "has_ranged_weapon_adult"
     "Fire Temple GS Scarecrow Top": "can_collect_distance"
