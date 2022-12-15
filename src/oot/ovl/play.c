@@ -12,6 +12,7 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory[ITS_OOT_BOMBS] = ITEM_OOT_BOMB;
         gSave.inventory[ITS_OOT_BOW] = ITEM_OOT_BOW;
         gSave.inventory[ITS_OOT_ARROW_FIRE] = ITEM_OOT_ARROW_FIRE;
+        gSave.inventory[ITS_OOT_ARROW_LIGHT] = ITEM_OOT_ARROW_LIGHT;
         gSave.inventory[ITS_OOT_SLINGSHOT] = ITEM_OOT_SLINGSHOT;
         gSave.inventory[ITS_OOT_OCARINA] = ITEM_OOT_OCARINA_TIME;
         gSave.inventory[ITS_OOT_BOOMERANG] = ITEM_OOT_BOOMERANG;
@@ -48,6 +49,10 @@ static void debugCheat(GameState_Play* play)
         gSave.quest.stoneSapphire = 0;
 
         gMmExtraFlags2.majora = 1;
+
+        gSave.magicUpgrade = 1;
+        gSave.magicUpgrade2 = 1;
+        gSave.magicAmount = 0x60;
 
         //gSave.quest.medallionShadow = 1;
         //gSave.quest.medallionSpirit = 1;
