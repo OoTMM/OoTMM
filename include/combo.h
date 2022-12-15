@@ -218,6 +218,9 @@ extern void* gCustomKeep;
 void comboDpadDraw(GameState_Play* play);
 void comboDpadUpdate(GameState_Play* play);
 
+int comboConfig(int flag);
+int comboDoorIsUnlocked(GameState_Play* play, int flag);
+
 /* DMA */
 typedef struct
 {
