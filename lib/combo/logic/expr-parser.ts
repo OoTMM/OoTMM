@@ -1,8 +1,9 @@
 import { Game } from '../config';
+import { Settings } from '../settings';
 import { gameId } from '../util';
-import { Expr, exprTrue, exprFalse, exprAnd, exprOr, exprAge, exprHas, exprEvent, exprMasks, exprHealth } from './expr';
+import { Expr, exprTrue, exprFalse, exprAnd, exprOr, exprAge, exprHas, exprEvent, exprMasks, exprHealth, exprSetting, exprNot, exprCond } from './expr';
 
-const SIMPLE_TOKENS = ['||', '&&', '(', ')', ',', 'true', 'false'] as const;
+const SIMPLE_TOKENS = ['||', '&&', '(', ')', ',', 'true', 'false', '!'] as const;
 
 type TokenSimple = { type: typeof SIMPLE_TOKENS[number] };
 type TokenEOF = { type: 'EOF' };
@@ -29,7 +30,7 @@ export class ExprParser {
   private ctx: ParseContext[] = [];
   private macros: {[k: string]: Macro} = {};
 
-  constructor(private game: Game) {}
+  constructor(private settings: Settings, private game: Game) {}
 
   addMacro(name: string, args: string[], buffer: string) {
     this.macros[name] = { args, buffer };
@@ -58,6 +59,41 @@ export class ExprParser {
     if (this.accept('false')) {
       return exprFalse();
     }
+  }
+
+  private parseExprNot(): Expr | undefined {
+    if (this.accept('!')) {
+      const expr = this.parseExprSingle();
+      if (expr === undefined) {
+        throw this.error("Expected expression");
+      }
+      return exprNot(expr);
+    }
+  }
+
+  /* This could be a macro once macros properly handle parens */
+  private parseExprCond(): Expr | undefined {
+    if (this.peek('identifier') !== 'cond') {
+      return undefined;
+    }
+    this.accept('identifier');
+    this.expect('(');
+    const cond = this.parseExpr();
+    if (cond === undefined) {
+      throw this.error("Expected expression");
+    }
+    this.expect(',');
+    const then = this.parseExpr();
+    if (then === undefined) {
+      throw this.error("Expected expression");
+    }
+    this.expect(',');
+    const otherwise = this.parseExpr();
+    if (otherwise === undefined) {
+      throw this.error("Expected expression");
+    }
+    this.expect(')');
+    return exprCond(cond, then, otherwise);
   }
 
   private parseExprAge(): Expr | undefined {
@@ -122,6 +158,21 @@ export class ExprParser {
     return exprHealth(count);
   }
 
+  private parseExprSetting(): Expr | undefined {
+    let value: string | boolean = true;
+    if (this.peek('identifier') !== 'config') {
+      return undefined;
+    }
+    this.accept('identifier');
+    this.expect('(');
+    const key = this.expect('identifier');
+    if (this.accept(',')) {
+      value = this.expect('identifier');
+    }
+    this.expect(')');
+    return exprSetting(this.settings, key, value);
+  }
+
   private parseMacro(): Expr | undefined {
     /* Check for a macro with the given name */
     const name = this.peek('identifier');
@@ -184,11 +235,14 @@ export class ExprParser {
     }
     return this.parseExprTrue()
       || this.parseExprFalse()
+      || this.parseExprNot()
+      || this.parseExprCond()
       || this.parseExprAge()
       || this.parseExprHas()
       || this.parseExprEvent()
       || this.parseExprMasks()
       || this.parseExprHealth()
+      || this.parseExprSetting()
       || this.parseMacro();
   }
 

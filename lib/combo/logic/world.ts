@@ -152,7 +152,7 @@ const loadMacros = (exprParser: ExprParser, game: Game) => {
 
 const loadWorldGame = (world: World, game: Game, settings: Settings) => {
   /* Create the expr parser */
-  const exprParser = new ExprParser(game);
+  const exprParser = new ExprParser(settings, game);
   loadMacros(exprParser, game);
   loadWorldAreas(world, game, exprParser);
   loadWorldPool(world, game, settings);
