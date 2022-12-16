@@ -878,6 +878,7 @@
     "Stone Tower": "true"
     "Stone Tower Top": "can_use_elegy3"
     "Stone Tower Top Inverted": "can_use_elegy && can_use_light_arrows"
+    "Stone Tower Temple Entrance": "true"
 "Stone Tower Top Inverted":
   region: STONE_TOWER
   exits:
