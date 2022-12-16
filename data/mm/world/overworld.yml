@@ -420,19 +420,24 @@
 # "Swamp Skulltula Pot Room Jar": "true"
 # "Swamp Skulltula Pot Room Wall": "true"
 
-"Mountain Village Path":
+"Mountain Village Path Lower":
   region: PATH_TO_MOUNTAIN_VILLAGE
   exits:
     "Termina Field": "has(BOW)"
-    "Mountain Village": "can_break_boulders || can_use_fire_arrows"
+    "Mountain Village Path Upper": "can_break_boulders || can_use_fire_arrows"
   gossip:
     "Mountain Village Path Gossip": "true"
+"Mountain Village Path Upper":
+  region: PATH_TO_MOUNTAIN_VILLAGE
+  exits:
+    "Mountain Village Path Lower": "can_break_boulders || can_use_fire_arrows"
+    "Mountain Village": "true"
 "Mountain Village":
   region: MOUNTAIN_VILLAGE
   exits:
-    "Mountain Village Path": "can_break_boulders || can_use_fire_arrows"
+    "Mountain Village Path Upper": "true"
     "Twin Islands": "true"
-    "Goron Graveyard": "can_use_lens || (event(BOSS_SNOWHEAD) && has(MASK_GORON))"
+    "Goron Graveyard": "can_use_lens || (event(BOSS_SNOWHEAD) && (has(MASK_GORON) || has(MASK_ZORA)))"
     "Path to Snowhead Front": "true"
     "Blacksmith": "true"
   gossip:
@@ -444,7 +449,7 @@
     "Mountain Village Waterfall Chest": "event(BOSS_SNOWHEAD) && can_use_lens"
     "Mountain Village Don Gero Mask": "event(GORON_FOOD)"
     "Mountain Village Frog Choir HP": "event(BOSS_SNOWHEAD) && event(FROG_1) && event(FROG_2) && event(FROG_3) && event(FROG_4)"
-    "Mountain Village Tunnel Grotto": "event(BOSS_SNOWHEAD) && (has(MASK_GORON) || (can_use_lens && has(MASK_ZORA)))"
+    "Mountain Village Tunnel Grotto": "event(BOSS_SNOWHEAD) && (has(MASK_GORON) || has(MASK_ZORA))"
 "Blacksmith":
   region: MOUNTAIN_VILLAGE
   exits:
