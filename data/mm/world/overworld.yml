@@ -348,7 +348,7 @@
     "Woodfall": "has(MASK_DEKU)"
     "Woodfall Shrine": "has(MASK_DEKU)"
     "Woodfall Great Fairy Fountain": "has(MASK_DEKU)"
-    "Soaring Map": "can_play(SONG_SOARING)"
+    "INITIAL": "can_play(SONG_SOARING)"
 "Woodfall Great Fairy Fountain":
   region: WOODFALL
   exits:
@@ -466,7 +466,7 @@
   exits:
     "Goron Village": "can_use_lens"
     "Lone Peak Shrine": "true"
-    "Soaring Map": "can_play(SONG_SOARING)"
+    "INITIAL": "can_play(SONG_SOARING)"
 "Lone Peak Shrine":
   region: GORON_VILLAGE
   exits:
@@ -790,16 +790,3 @@
     "Stone Tower Inverted Chest 1": "true"
     "Stone Tower Inverted Chest 2": "true"
     "Stone Tower Inverted Chest 3": "true"
-"Soaring Map":
-  region: NONE
-  exits:
-    "Clock Town South": "event(CLOCK_TOWN_OWL)"
-    "Swamp Front": "event(SWAMP_OWL)"
-    "Woodfall Shrine": "event(WOODFALL_OWL)"
-    "Mountain Village": "event(MOUNTAIN_VILLAGE_OWL)"
-    "Snowhead": "event(SNOWHEAD_OWL)"
-    "Milk Road": "event(MILK_ROAD_OWL)"
-    "Great Bay Coast": "event(GREAT_BAY_OWL)"
-    "Zora Cape Peninsula": "event(ZORA_CAPE_OWL)"
-    "Ikana Canyon": "event(IKANA_CANYON_OWL)"
-    "Stone Tower Top": "event(STONE_TOWER_OWL)"
