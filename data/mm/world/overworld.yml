@@ -219,7 +219,7 @@
     "Clock Town East": "true"
     "Clock Town West": "true"
     "Road to Southern Swamp": "true"
-    "Mountain Village Path": "has(BOW)"
+    "Mountain Village Path Lower": "has(BOW)"
     "Milk Road": "true"
     "Great Bay Coast": "can_play(SONG_EPONA)"
     "Road to Ikana": "true"
