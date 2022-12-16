@@ -263,7 +263,7 @@
   events:
     MAGIC_BEANS_SWAMP: "has(MAGIC_BEAN) && (has(MASK_DEKU) || (has(MOON_TEAR) && has(DEED_LAND)))"
     FROG_3: "has(MASK_DON_GERO)"
-    SWAMP_OWL" "true"
+    SWAMP_OWL: "true"
   locations:
     "Southern Swamp HP": "has(DEED_LAND) && has(MASK_DEKU)"
     "Southern Swamp Scrub Deed": "has(DEED_LAND)"
@@ -408,7 +408,7 @@
 "Mountain Village Path":
   region: PATH_TO_MOUNTAIN_VILLAGE
   exits:
-    "Termina Field": "has(BOW) || event(GORON_GRAVEYARD_HOT_WATER)"
+    "Termina Field": "has(BOW)"
     "Mountain Village": "can_break_boulders || can_use_fire_arrows"
 "Mountain Village":
   region: MOUNTAIN_VILLAGE
@@ -799,6 +799,6 @@
     "Snowhead": "event(SNOWHEAD_OWL)"
     "Milk Road": "event(MILK_ROAD_OWL)"
     "Great Bay Coast": "event(GREAT_BAY_OWL)"
-    "Zora Hall Balcony": "event(ZORA_CAPE_OWL)"
+    "Zora Cape Peninsula": "event(ZORA_CAPE_OWL)"
     "Ikana Canyon": "event(IKANA_CANYON_OWL)"
     "Stone Tower Top": "event(STONE_TOWER_OWL)"
