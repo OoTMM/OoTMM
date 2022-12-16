@@ -329,7 +329,6 @@
     "Woodfall Shrine": "has(MASK_DEKU)"
     "Woodfall Near Great Fairy Fountain": "has(HOOKSHOT) && has(MASK_DEKU)"
   locations:
-    "Woodfall Near Owl Chest": "has(MASK_DEKU)"
     "Woodfall Entrance Chest": "has(MASK_DEKU) || has(HOOKSHOT)"
     "Woodfall HP Chest": "has(MASK_DEKU) || has(HOOKSHOT)"
 "Woodfall Shrine":
@@ -348,7 +347,6 @@
     "Woodfall": "has(MASK_DEKU)"
     "Woodfall Shrine": "has(MASK_DEKU)"
     "Woodfall Great Fairy Fountain": "has(MASK_DEKU)"
-    "INITIAL": "can_play(SONG_SOARING)"
 "Woodfall Great Fairy Fountain":
   region: WOODFALL
   exits:
@@ -466,7 +464,6 @@
   exits:
     "Goron Village": "can_use_lens"
     "Lone Peak Shrine": "true"
-    "INITIAL": "can_play(SONG_SOARING)"
 "Lone Peak Shrine":
   region: GORON_VILLAGE
   exits:
