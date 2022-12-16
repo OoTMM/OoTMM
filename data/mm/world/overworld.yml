@@ -416,7 +416,7 @@
     "Mountain Village Path": "can_break_boulders || can_use_fire_arrows"
     "Twin Islands": "true"
     "Goron Graveyard": "can_use_lens || (event(BOSS_SNOWHEAD) && has(MASK_GORON))"
-    "Path to Snowhead": "true"
+    "Path to Snowhead Front": "true"
     "Blacksmith": "true"
   events:
     MOUNTAIN_VILLAGE_OWL: "true"
@@ -457,7 +457,8 @@
   locations:
     "Goron Village HP": "has(DEED_SWAMP) && has(MASK_DEKU)"
     "Goron Village Scrub Deed": "has(DEED_SWAMP) && has(MASK_DEKU)"
-    "Goron Village Scrub Bomb Bag": "(has(MASK_GORON) || (has(MOON_TEAR) && has(DEED_LAND) && has(DEED_SWAMP))) && has(WALLET)"
+    "Goron Village Scrub Bomb Bag": "has(MASK_GORON) && has(WALLET)"
+#    "Goron Village Scrub Bomb Bag": "(has(MASK_GORON) || (has(MOON_TEAR) && has(DEED_LAND) && has(DEED_SWAMP))) && has(WALLET)"
     "Goron Elder": "has(MASK_GORON) && has(OCARINA) && (event(GORON_GRAVEYARD_HOT_WATER) || can_use_fire_arrows || (event(WELL_HOT_WATER) && can_play(SONG_SOARING)))"
     "Goron Powder Keg": "(event(BOSS_SNOWHEAD) || can_use_fire_arrows) && has(MASK_GORON)"
 "Front of Lone Peak Shrine":
