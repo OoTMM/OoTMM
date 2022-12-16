@@ -790,7 +790,6 @@
     "Stone Tower Inverted Chest 2": "true"
     "Stone Tower Inverted Chest 3": "true"
 "Soaring Map":
-  region: SOARING_MAP
   exits:
     "Clock Town South": "event(CLOCK_TOWN_OWL)"
     "Swamp Front": "event(SWAMP_OWL)"
