@@ -37,11 +37,20 @@ export const SETTINGS = [{
   category: 'main',
   type: 'boolean',
   default: true
+}, {
+  key: 'noLogic',
+  name: 'No Logic',
+  category: 'advanced',
+  type: 'boolean',
+  default: false
 }] as const;
 
 export const SETTINGS_CATEGORIES = [{
   name: "Main Settings",
   key: "main",
+}, {
+  name: "Advanced",
+  key: "advanced",
 }];
 
 type SettingDataEnumValue = {

@@ -38,7 +38,7 @@ export const logic = (opts: Options): LogicResult => {
   if (error) {
     throw error;
   }
-  const log = spoiler(world, placement, opts.seed);
+  const log = spoiler(world, placement, opts);
 
   const items: WorldCheck[] = [];
   for (const loc in placement) {

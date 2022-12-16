@@ -155,8 +155,8 @@ static void dpadSetItems(GameState_Play* play)
     }
     else
     {
-        sDpadItems[DPAD_LEFT] = (gSave.equipment.boots & EQ_OOT_BOOTS_HOVER) ? ITEM_OOT_HOVER_BOOTS : ITEM_NONE;
-        sDpadItems[DPAD_RIGHT] = (gSave.equipment.boots & EQ_OOT_BOOTS_IRON) ? ITEM_OOT_IRON_BOOTS : ITEM_NONE;
+        sDpadItems[DPAD_LEFT] = (gSave.equipment.boots & EQ_OOT_BOOTS_IRON) ? ITEM_OOT_IRON_BOOTS : ITEM_NONE;
+        sDpadItems[DPAD_RIGHT] = (gSave.equipment.boots & EQ_OOT_BOOTS_HOVER) ? ITEM_OOT_HOVER_BOOTS : ITEM_NONE;
     }
 }
 #endif
