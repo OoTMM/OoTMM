@@ -294,7 +294,12 @@ class Solver {
   ) {
     this.fixLocations();
     this.pools = this.makeItemPools();
-    this.reachable = pathfind(this.world, {});
+    if (this.opts.settings.noLogic) {
+      const allLocations = new Set<string>(Object.keys(this.world.checks));
+      this.reachable = { events: new Set<string>, areas: { child: new Set<string>(), adult: new Set<string>() }, locations: allLocations };
+    } else {
+      this.reachable = pathfind(this.world, {});
+    }
   }
 
   solve() {
