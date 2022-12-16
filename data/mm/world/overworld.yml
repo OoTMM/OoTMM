@@ -361,7 +361,7 @@
     "Woodfall Front of Temple": "event(OPEN_WOODFALL_TEMPLE)"
   events:
     WOODFALL_OWL: "true"
-    OPEN_WOODFALL_TEMPLE: "has(MASK_DEKU) && can_play(SONG_AWAKENING)
+    OPEN_WOODFALL_TEMPLE: "has(MASK_DEKU) && can_play(SONG_AWAKENING)"
   locations:
     "Woodfall Near Owl Chest": "has(MASK_DEKU) || (has(HOOKSHOT) && can_play(SONG_SOARING))"
 "Woodfall Near Great Fairy Fountain":
