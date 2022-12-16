@@ -465,7 +465,7 @@
   exits:
     "Mountain Village": "true"
     "Goron Village": "true"
-    "Goron Race": "can_use_keg"
+    "Goron Race": "can_use_keg || event(POWDER_KEG_TRIAL)"
   events:
     TWIN_ISLANDS_HOT_WATER: "(event(GORON_GRAVEYARD_HOT_WATER) || can_use_fire_arrows || event(BOSS_SNOWHEAD) || (event(WELL_HOT_WATER) && can_play(SONG_SOARING))) && has_bottle"
   locations:
@@ -479,13 +479,15 @@
     "Twin Islands": "true"
     "Front of Lone Peak Shrine": "true"
     "Goron Shrine": "true"
+  events:
+    POWDER_KEG_TRIAL: "(event(BOSS_SNOWHEAD) || can_use_fire_arrows) && has(MASK_GORON)"
   locations:
     "Goron Village HP": "has(DEED_SWAMP) && has(MASK_DEKU)"
     "Goron Village Scrub Deed": "has(DEED_SWAMP) && has(MASK_DEKU)"
     "Goron Village Scrub Bomb Bag": "has(MASK_GORON) && has(WALLET)"
 #    "Goron Village Scrub Bomb Bag": "(has(MASK_GORON) || (has(MOON_TEAR) && has(DEED_LAND) && has(DEED_SWAMP))) && has(WALLET)"
     "Goron Elder": "has(MASK_GORON) && has(OCARINA) && (event(GORON_GRAVEYARD_HOT_WATER) || can_use_fire_arrows || (event(WELL_HOT_WATER) && can_play(SONG_SOARING)))"
-    "Goron Powder Keg": "(event(BOSS_SNOWHEAD) || can_use_fire_arrows) && has(MASK_GORON)"
+    "Goron Powder Keg": "event(POWDER_KEG_TRIAL)"
 "Front of Lone Peak Shrine":
   region: GORON_VILLAGE
   exits:
