@@ -160,7 +160,7 @@ export class ExprParser {
 
   private parseExprSetting(): Expr | undefined {
     let value: string | boolean = true;
-    if (this.peek('identifier') !== 'config') {
+    if (this.peek('identifier') !== 'setting') {
       return undefined;
     }
     this.accept('identifier');
