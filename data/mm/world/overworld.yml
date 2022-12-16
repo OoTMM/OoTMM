@@ -349,7 +349,7 @@
     "Woodfall Entrance Chest": "has(MASK_DEKU) || has(HOOKSHOT)"
     "Woodfall HP Chest": "has(MASK_DEKU) || has(HOOKSHOT)"
 "Woodfall Front of Temple":
-  region: Woodfall
+  region: WOODFALL
   exits:
     "Woodfall Temple Entrance": "has_weapon"
     "Woodfall Shrine": "has(MASK_DEKU)"
