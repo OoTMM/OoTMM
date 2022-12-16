@@ -344,23 +344,24 @@
     "Swamp Canopy": "true"
     "Woodfall Shrine": "has(MASK_DEKU)"
     "Woodfall Near Great Fairy Fountain": "has(HOOKSHOT) && has(MASK_DEKU)"
-    "Woodfall Temple After Boss": "event(CLEAN_SWAMP)"
+    "Woodfall Temple After Boss": "event(CLEAN_SWAMP) && event(OPEN_WOODFALL_TEMPLE)"
   locations:
     "Woodfall Entrance Chest": "has(MASK_DEKU) || has(HOOKSHOT)"
     "Woodfall HP Chest": "has(MASK_DEKU) || has(HOOKSHOT)"
 "Woodfall Front of Temple":
   region: Woodfall
   exits:
-    "Woodfall Temple Entrance": "true"
+    "Woodfall Temple Entrance": "has_weapon"
     "Woodfall Shrine": "has(MASK_DEKU)"
 "Woodfall Shrine":
   region: WOODFALL
   exits:
     "Woodfall": "has(MASK_DEKU)"
     "Woodfall Near Great Fairy Fountain": "has(MASK_DEKU)"
-    "Woodfall Front of Temple": "has(MASK_DEKU) && can_play(SONG_AWAKENING) && has_weapon"
+    "Woodfall Front of Temple": "event(OPEN_WOODFALL_TEMPLE)"
   events:
     WOODFALL_OWL: "true"
+    OPEN_WOODFALL_TEMPLE: "has(MASK_DEKU) && can_play(SONG_AWAKENING)
   locations:
     "Woodfall Near Owl Chest": "has(MASK_DEKU) || (has(HOOKSHOT) && can_play(SONG_SOARING))"
 "Woodfall Near Great Fairy Fountain":
@@ -532,21 +533,32 @@
   region: PATH_TO_SNOWHEAD
   exits:
     "Path to Snowhead Middle": "goron_fast_roll"
-    "Snowhead": "true"
+    "Snowhead Entrance": "true"
   locations:
     "Path to Snowhead Grotto": "has_explosives"
-"Snowhead":
+"Snowhead Entrance":
   region: SNOWHEAD
   exits:
     "Path to Snowhead Back": "true"
-    "Snowhead Temple Entrance": "can_lullaby"
-    "Snowhead Great Fairy Fountain": "can_lullaby"
+    "Snowhead": "event(OPEN_SNOWHEAD_TEMPLE)"
+    "Snowhead Near Great Fairy Fountain": "event(OPEN_SNOWHEAD_TEMPLE)"
   events:
     SNOWHEAD_OWL: "true"
+    OPEN_SNOWHEAD_TEMPLE: "can_lullaby"
+"Snowhead":
+  region: SNOWHEAD
+  exits:
+    "Snowhead Entrance": "event(OPEN_SNOWHEAD_TEMPLE)"
+    "Snowhead Temple Entrance": "true"
+"Snowhead Near Great Fairy Fountain":
+  region: SNOWHEAD
+  exits:
+    "Snowhead Entrance": "event(OPEN_SNOWHEAD_TEMPLE)"
+    "Snowhead Great Fairy Fountain": "true"
 "Snowhead Great Fairy Fountain":
   region: SNOWHEAD
   exits:
-    "Snowhead": "true"
+    "Snowhead Near Great Fairy Fountain": "true"
   locations:
     "Snowhead Great Fairy": "has(STRAY_FAIRY_SH, 15)"
 "Goron Race":
