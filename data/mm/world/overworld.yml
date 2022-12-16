@@ -209,6 +209,8 @@
     "Astral Observatory": "true"
   locations:
     "Astral Observatory Moon Tear": "event(TEAR_TELESCOPE)"
+  gossip:
+    "Termina Field Gossip Near Observatory": "true"
 "Termina Field":
   region: TERMINA_FIELD
   exits:
@@ -236,6 +238,16 @@
     "Termina Field Gossip Stones HP": "has(OCARINA) && ((has(MASK_GORON) && has(SONG_GORON_HALF, 2)) || (has(MASK_DEKU) && has(SONG_AWAKENING)) || (has(MASK_ZORA) && has(SONG_ZORA))) && can_break_boulders"
 #    "Termina Field Log Grotto Cow 1": "has_explosives && can_play(SONG_EPONA)"
 #    "Termina Field Log Grotto Cow 2": "has_explosives && can_play(SONG_EPONA)"
+  gossip:
+    "Termina Field Gossip Southeast": "true"
+    "Termina Field Gossip Southwest": "true"
+    "Termina Field Gossip Northeast": "true"
+    "Termina Field Gossip Near Mountain": "true"
+    "Termina Field Gossip Near Kamaro": "true"
+    "Termina Field Gossip Grotto Leftmost": "true"
+    "Termina Field Gossip Grotto Left-Center": "true"
+    "Termina Field Gossip Grotto Right-Center": "true"
+    "Termina Field Gossip Grotto Rightmost": "true"
 "Road to Southern Swamp":
   region: ROAD_TO_SWAMP
   exits:
@@ -245,6 +257,8 @@
   locations:
     "Road to Southern Swamp HP": "has_weapon_range"
     "Road to Southern Swamp Grotto": "true"
+  gossip:
+    "Road to Southern Swamp Gossip": "true"
 "Swamp Archery":
   region: ROAD_TO_SWAMP
   exits:
@@ -267,6 +281,8 @@
   locations:
     "Southern Swamp HP": "has(DEED_LAND) && has(MASK_DEKU)"
     "Southern Swamp Scrub Deed": "has(DEED_LAND)"
+  gossip:
+    "Southern Swamp Gossip": "true"
 "Swamp Back":
   region: SOUTHERN_SWAMP
   exits:
@@ -274,7 +290,7 @@
     "Deku Palace": "true"
     "Swamp Spider House": "has(MASK_DEKU)"
   locations:
-    "Southern Swamp Grotto": "has(MASK_DEKU)"  
+    "Southern Swamp Grotto": "has(MASK_DEKU)"
 "Tourist Information":
   region: SOUTHERN_SWAMP
   exit:
@@ -365,7 +381,8 @@
     "Swamp Back": "true"
   locations:
     "Swamp Spider House Mask of Truth": "has_weapon && has_bottle && has_weapon_range && (has(HOOKSHOT) || has(MASK_ZORA) || (has(MASK_DEKU) && (has(BOW) || has(MAGIC_UPGRADE) || has(BOMB_BAG))) && (has(HOOKSHOT) || has(MASK_ZORA) || can_use_beans) && (has(HOOKSHOT) || has(MASK_ZORA) || (can_use_beans && can_break_boulders)))"
-
+  gossip:
+    "Swamp Spider House Gossip": "true"
 # Preparation for skulltula spirits shuffle
 # "Swamp Spider House Mask of Truth": "has(SWAMP_SPIRIT, 30)"
 # "Swamp Skulltula Main Room Near Ceiling": "has(HOOKSHOT) || has(MASK_ZORA) || ( has(MASK_DEKU) && ( has(BOW) || has(MAGIC_UPGRADE) || has(BOMB_BAG) ) )"
@@ -408,6 +425,8 @@
   exits:
     "Termina Field": "has(BOW)"
     "Mountain Village": "can_break_boulders || can_use_fire_arrows"
+  gossip:
+    "Mountain Village Path Gossip": "true"
 "Mountain Village":
   region: MOUNTAIN_VILLAGE
   exits:
@@ -416,6 +435,9 @@
     "Goron Graveyard": "can_use_lens || (event(BOSS_SNOWHEAD) && has(MASK_GORON))"
     "Path to Snowhead Front": "true"
     "Blacksmith": "true"
+  gossip:
+    "Mountain Village Gossip Outside": "event(BOSS_SNOWHEAD)"
+    "Mountain Village Gossip Tunnel": "event(BOSS_SNOWHEAD) && (has(MASK_GORON) || has(MASK_ZORA))"
   events:
     MOUNTAIN_VILLAGE_OWL: "true"
   locations:
@@ -535,6 +557,8 @@
     "Gorman Track": "true"
   events:
     MILK_ROAD_OWL: "true"
+  gossip:
+    "Milk Road Gossip": "true"
 "Romani Ranch":
   region: ROMANI_RANCH
   exits:
@@ -546,12 +570,18 @@
     "Romani Ranch Epona Song": "can_use_keg"
     "Romani Ranch Aliens": "can_use_keg && has(BOW)"
     "Romani Ranch Cremia Escort": "can_use_keg && has(BOW)"
+  gossip:
+    "Romani Ranch Gossip Entrance": "true"
+    "Romani Ranch Gossip Behind House": "true"
+    "Romani Ranch Gossip Near Tree": "true"
 "Cucco Shack":
   region: ROMANI_RANCH
   exits:
     "Romani Ranch": "true"
   locations:
     "Cucco Shack Bunny Mask": "has(MASK_BREMEN)"
+  gossip:
+    "Cucco Shack Gossip": "true"
 "Doggy Racetrack":
   region: ROMANI_RANCH
   exits:
@@ -559,6 +589,8 @@
   locations:
     "Doggy Racetrack Chest": "can_use_beans || has(MASK_ZORA) || has(HOOKSHOT)"
     "Doggy Racetrack HP": "has(MASK_TRUTH)"
+  gossip:
+    "Doggy Racetrack Gossip": "true"
 "Stables":
   region: ROMANI_RANCH
   exits:
@@ -586,6 +618,8 @@
     "Great Bay Coast Fisherman Grotto": "true"
 #    "Great Bay Coast Ledge Cow 1": "has(HOOKSHOT) && can_play(SONG_EPONA)"
 #    "Great Bay Coard Ledge Cow 2": "has(HOOKSHOT) && can_play(SONG_EPONA)"
+  gossip:
+    "Great Bay Coast Gossip": "true"
 "Fisher's Hut":
   region: GREAT_BAY_COAST
   exits:
@@ -623,6 +657,8 @@
     "Zora Cape Underwater Chest": "has(MASK_ZORA)"
     "Zora Cape Waterfall HP": "has(MASK_ZORA)"
     "Zora Cape Grotto": "can_break_boulders"
+  gossip:
+    "Zora Cape Gossip": "true"
 "Great Bay Fairy Fountain":
   region: ZORA_CAPE
   exits:
@@ -677,6 +713,8 @@
     "Road to Ikana Chest": "has(HOOKSHOT)"
     "Road to Ikana Grotto": "has(MASK_GORON)"
     "Road to Ikana Stone Mask": "can_play(SONG_EPONA) && can_use_lens && has_bottle"
+  gossip:
+    "Road to Ikana Gossip": "can_play(SONG_EPONA)"
 "Ikana Graveyard":
   region: IKANA_GRAVEYARD
   exits:
@@ -717,6 +755,9 @@
     "Ikana Valley Scrub Rupee": "has(DEED_OCEAN) && has(MASK_ZORA)"
     "Ikana Valley Scrub HP": "has(DEED_OCEAN) && has(MASK_ZORA) && has(MASK_DEKU)"
     "Ikana Valley Grotto": "true"
+  gossip:
+    "Ikana Valley Gossip Lower": "true"
+    "Ikana Valley Gossip Scrub": "has(DEED_OCEAN) && has(MASK_ZORA) && has(MASK_DEKU)"
 "Sakon Hideout":
   region: IKANA_CANYON
   exits:
@@ -736,6 +777,8 @@
     "Stone Tower": "true"
   events:
     IKANA_CANYON_OWL: "true"
+  gossip:
+    "Ikana Canyon Gossip Upper": "true"
 "Ikana Fairy Fountain":
   region: IKANA_CANYON
   exits:

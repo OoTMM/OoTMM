@@ -13,6 +13,8 @@
     "Dodongo Cavern Skull": "event(DC_BOMB_EYES)"
   locations:
     "Dodongo Cavern Map Chest": "has_bombflowers || can_hammer"
+  gossip:
+    "Dodongo Cavern Gossip": "has_bombflowers || can_hammer"
 "Dodongo Cavern Right Corridor":
   dungeon: DC
   exits:

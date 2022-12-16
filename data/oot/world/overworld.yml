@@ -26,6 +26,11 @@
     "Kokiri Forest GS Soil": "gs_soil"
     "Kokiri Forest GS Night Child": "is_child && gs_night"
     "Kokiri Forest GS Night Adult": "can_hookshot && gs_night"
+  gossip:
+    "Kokiri Gossip Near Lost Woods Open": "true"
+    "Kokiri Gossip Near Lost Woods Grotto": "hidden_grotto_storms"
+    "Kokiri Gossip Left of Deku Tree": "true"
+    "Kokiri Gossip Right of Deku Tree": "true"
 "Mido's House":
   region: KOKIRI_FOREST
   exits:
@@ -58,6 +63,11 @@
     "Hyrule Field Grotto Tektite HP": "hidden_grotto_bomb && can_dive_big"
     "Hyrule Field Grotto Near Kakariko GS": "hidden_grotto_bomb && can_collect_distance"
     "Hyrule Field Grotto Near Gerudo GS": "((is_child && hidden_grotto_bomb) || can_hammer) && can_collect_distance && has_fire"
+  gossip:
+    "Hyrule Field Gossip Near Castle Town": "has_explosives_or_hammer"
+    "Hyrule Field Gossip Near Lake Hylia": "true"
+    "Hyrule Field Gossip Southeast Grotto": "has_explosives_or_hammer"
+    "Hyrule Field Gossip Near Gerudo Valley": "((is_child && hidden_grotto_bomb) || can_hammer) && has_fire"
 "Market":
   region: MARKET
   exits:
@@ -70,6 +80,11 @@
     "Treasure Game": "true"
     "Shooting Gallery Child": "true"
     "MM SPAWN": "is_child"
+  gossip:
+    "Market Gossip Outside Temple Leftmost": "true"
+    "Market Gossip Outside Temple Left-Center": "true"
+    "Market Gossip Outside Temple Right-Center": "true"
+    "Market Gossip Outside Temple Rightmost": "true"
 "Market Pot House":
   region: MARKET
   exits:
@@ -156,6 +171,10 @@
     "Great Fairy Din's Fire": "has_explosives && can_play(SONG_ZELDA)"
     "Hyrule Castle GS Tree": "true"
     "Hyrule Castle GS Grotto": "hidden_grotto_storms && has_explosives && can_boomerang"
+  gossip:
+    "Hyrule Castle Gossip After Climb": "true"
+    "Hyrule Castle Gossip Before Moat": "true"
+    "Hyrule Castle Gossip Grotto": "hidden_grotto_storms && has_explosives"
 "Ganon Castle Exterior":
   region: GANON_CASTLE_EXTERIOR
   exits:
@@ -183,6 +202,9 @@
     "Lost Woods Poacher's Saw": "adult_trade(ODD_POTION)"
     "Lost Woods Grotto Generic": "has_explosives_or_hammer"
     "Lost Woods GS Soil Bridge": "gs_soil"
+  gossip:
+    "Lost Woods Gossip Under Bridge": "true"
+    "Lost Woods Gossip Grotto": "has_explosives_or_hammer"
 "Lost Woods Bridge":
   region: LOST_WOODS
   exits:
@@ -221,6 +243,10 @@
     "Sacred Meadow Sheik Song": "is_adult"
     "Sacred Meadow Grotto": "hidden_grotto_bomb"
     "Sacred Meadow GS Night Adult": "can_hookshot && gs_night"
+  gossip:
+    "Sacred Meadow Gossip Near Forest Temple": "true"
+    "Sacred Meadow Gossip Atop Maze Woods Side": "true"
+    "Sacred Meadow Gossip Atop Maze Temple Side": "true"
 "Kakariko":
   region: KAKARIKO
   exits:
@@ -248,6 +274,8 @@
     "Kakariko GS House of Skulltula": "gs_night && is_child"
     "Kakariko GS Bazaar": "gs_night && is_child"
     "Kakariko GS Ladder": "gs_night && is_child && (can_use_slingshot || has_explosives)"
+  gossip:
+    "Kakariko Gossip Grotto": "true"
 "Kakariko Rooftop":
   region: KAKARIKO
   exits:
@@ -281,6 +309,8 @@
   exits:
     "Graveyard": "true"
     "Shadow Temple Entrance": "is_adult && can_use_din"
+  gossip:
+    "Graveyard Gossip": "true"
 "Graveyard Royal Tomb":
   region: GRAVEYARD
   exits:
@@ -315,6 +345,8 @@
     "Death Mountain GS Entrance": "has_explosives_or_hammer"
     "Death Mountain GS Soil": "gs_soil && has_bombflowers"
     "Death Mountain GS Above Dodongo":  "gs_night && can_hammer"
+  gossip:
+    "Death Mountain Gossip Grotto": "hidden_grotto_storms"
 "Death Mountain Summit":
   region: DEATH_MOUNTAIN_TRAIL
   exits:
@@ -330,6 +362,8 @@
     "Death Mountain Biggoron Sword": "adult_trade(CLAIM_CHECK)"
     "Great Fairy Magic Upgrade": "has_explosives_or_hammer && can_play(SONG_ZELDA)"
     "Death Mountain GS Before Climb": "gs_night && can_hammer"
+  gossip:
+    "Death Mountain Gossip on Climb": "true"
 "Goron City Shortcut":
   region: GORON_CITY
   exits:
@@ -356,6 +390,9 @@
     "Goron City Medigoron Giant Knife": "is_adult && has(WALLET) && (has_bombflowers || can_hammer)"
     "Goron City GS Platform": "is_adult"
     "Goron City GS Maze": "is_child && has_explosives"
+  gossip:
+    "Goron City Gossip Boulder Maze": "has_explosives_or_hammer || can_lift_silver"
+    "Goron City Gossip Near Medigoron": "has_bombflowers || can_hammer"
 "Zora River Front":
   region: ZORA_RIVER
   exits:
@@ -379,6 +416,10 @@
     "Zora River GS Ladder": "is_child && gs_night"
     "Zora River GS Near Grotto": "is_adult && gs_night && can_hookshot"
     "Zora River GS Near Bridge": "is_adult && gs_night && can_hookshot"
+  gossip:
+    "Zora River Gossip High Pillar": "true"
+    "Zora River Gossip Near Domain": "true"
+    "Zora River Gossip Grotto": "true"
 "Zora Domain":
   region: ZORA_DOMAIN
   exits:
@@ -393,6 +434,8 @@
     "Zora Domain Tunic": "is_adult && event(BLUE_FIRE)"
     "Zora Domain Eyeball Frog": "event(BLUE_FIRE) && adult_trade(PRESCRIPTION)"
     "Zora Domain GS Waterfall": "is_adult && gs_night && (has_ranged_weapon_adult || has(MAGIC_UPGRADE))"
+  gossip:
+    "Zora Domain Gossip": "true"
 "Zora Domain Back":
   region: ZORA_DOMAIN
   exits:
@@ -418,6 +461,10 @@
     "Lake Hylia GS Island": "is_child && gs_night"
     "Lake Hylia GS Soil": "gs_soil"
     "Lake Hylia GS Big Tree": "gs_night && can_longshot"
+  gossip:
+    "Lake Hylia Gossip Near River": "true"
+    "Lake Hylia Gossip Southeast Lake": "true"
+    "Lake Hylia Gossip Southwest Lake": "true"
 "Laboratory":
   region: LAKE_HYLIA
   exits:
@@ -446,6 +493,9 @@
     "Zora Fountain GS Wall": "gs_night && can_boomerang"
     "Zora Fountain GS Tree": "is_child"
     "Zora Fountain GS Upper": "gs_night && has_explosives_or_hammer && can_hookshot && can_lift_silver"
+  gossip:
+    "Zora Fountain Gossip Northwest": "true"
+    "Zora Fountain Gossip Near Fairy": "true"
 "Temple of Time":
   region: TEMPLE_OF_TIME
   exits:
@@ -473,6 +523,9 @@
     "Death Mountain Crater GS Crate": "is_child"
     "Death Mountain Crater Grotto": "has_explosives_or_hammer"
     "Death Mountain Crater Alcove HP": "true"
+  gossip:
+    "Death Mountain Crater Gossip Grotto": "has_explosives_or_hammer"
+    "Death Mountain Crater Gossip Wall": "has_explosives"
 "Death Mountain Crater Bottom":
   region: DEATH_MOUNTAIN_CRATER
   exits:
@@ -505,6 +558,8 @@
     "Gerudo Valley Waterfall HP": "true"
     "Gerudo Valley GS Soil": "gs_soil"
     "Gerudo Valley GS Wall": "can_boomerang && gs_night"
+  gossip:
+    "Gerudo Valley Gossip": "true"
 "Gerudo Valley After Bridge":
   region: GERUDO_VALLEY
   exits:
@@ -553,3 +608,5 @@
     "Desert Colossus GS Soil": "gs_soil"
     "Desert Colossus GS Tree": "can_hookshot && gs_night"
     "Desert Colossus GS Plateau": "gs_night && (can_longshot || can_ride_bean(BEAN_DESERT_COLOSSUS))"
+  gossip:
+    "Desert Colossus Gossip": "true"

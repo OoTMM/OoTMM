@@ -11,9 +11,10 @@ type ExprMap = {
 }
 
 type WorldArea = {
-  locations: ExprMap;
   exits: ExprMap;
   events: ExprMap;
+  locations: ExprMap;
+  gossip: ExprMap;
 };
 
 type WorldCheckNumeric = {
@@ -85,6 +86,7 @@ const loadWorldAreas = (world: World, game: Game, exprParser: ExprParser) => {
     const locations = mapExprs(exprParser, game, area.locations || {});
     const exits = mapExprs(exprParser, game, area.exits || {});
     const events = mapExprs(exprParser, game, area.events || {});
+    const gossip = mapExprs(exprParser, game, area.gossip || {});
 
     if (name === undefined) {
       throw new Error(`Area name is undefined`);
@@ -98,7 +100,7 @@ const loadWorldAreas = (world: World, game: Game, exprParser: ExprParser) => {
       throw new Error(`Unknown region ${region}`);
     }
 
-    world.areas[name] = { locations, exits, events };
+    world.areas[name] = { exits, events, locations, gossip };
 
     if (dungeon !== undefined) {
       if (world.dungeons[dungeon] === undefined) {
