@@ -221,8 +221,8 @@
     "Road to Southern Swamp": "true"
     "Mountain Village Path Lower": "has(BOW)"
     "Milk Road": "true"
-    "Great Bay Coast": "can_play(SONG_EPONA)"
-    "Road to Ikana": "true"
+    "Great Bay Fence": "can_play(SONG_EPONA)"
+    "Road to Ikana Front": "true"
     "Astral Observatory Balcony": "has(MASK_DEKU)"
   locations:
     "Termina Field Water Chest": "has(MASK_ZORA)"
@@ -344,17 +344,24 @@
     "Swamp Canopy": "true"
     "Woodfall Shrine": "has(MASK_DEKU)"
     "Woodfall Near Great Fairy Fountain": "has(HOOKSHOT) && has(MASK_DEKU)"
+    "Woodfall Temple After Boss": "event(CLEAN_SWAMP) && event(OPEN_WOODFALL_TEMPLE)"
   locations:
     "Woodfall Entrance Chest": "has(MASK_DEKU) || has(HOOKSHOT)"
     "Woodfall HP Chest": "has(MASK_DEKU) || has(HOOKSHOT)"
+"Woodfall Front of Temple":
+  region: WOODFALL
+  exits:
+    "Woodfall Temple Entrance": "has_weapon"
+    "Woodfall Shrine": "has(MASK_DEKU)"
 "Woodfall Shrine":
   region: WOODFALL
   exits:
     "Woodfall": "has(MASK_DEKU)"
     "Woodfall Near Great Fairy Fountain": "has(MASK_DEKU)"
-    "Woodfall Temple Entrance": "has(MASK_DEKU) && can_play(SONG_AWAKENING) && has_weapon"
+    "Woodfall Front of Temple": "event(OPEN_WOODFALL_TEMPLE)"
   events:
     WOODFALL_OWL: "true"
+    OPEN_WOODFALL_TEMPLE: "has(MASK_DEKU) && can_play(SONG_AWAKENING)"
   locations:
     "Woodfall Near Owl Chest": "has(MASK_DEKU) || (has(HOOKSHOT) && can_play(SONG_SOARING))"
 "Woodfall Near Great Fairy Fountain":
@@ -533,21 +540,32 @@
   region: PATH_TO_SNOWHEAD
   exits:
     "Path to Snowhead Middle": "goron_fast_roll"
-    "Snowhead": "true"
+    "Snowhead Entrance": "true"
   locations:
     "Path to Snowhead Grotto": "has_explosives"
-"Snowhead":
+"Snowhead Entrance":
   region: SNOWHEAD
   exits:
     "Path to Snowhead Back": "true"
-    "Snowhead Temple Entrance": "can_lullaby"
-    "Snowhead Great Fairy Fountain": "can_lullaby"
+    "Snowhead": "event(OPEN_SNOWHEAD_TEMPLE)"
+    "Snowhead Near Great Fairy Fountain": "event(OPEN_SNOWHEAD_TEMPLE)"
   events:
     SNOWHEAD_OWL: "true"
+    OPEN_SNOWHEAD_TEMPLE: "can_lullaby"
+"Snowhead":
+  region: SNOWHEAD
+  exits:
+    "Snowhead Entrance": "event(OPEN_SNOWHEAD_TEMPLE)"
+    "Snowhead Temple Entrance": "true"
+"Snowhead Near Great Fairy Fountain":
+  region: SNOWHEAD
+  exits:
+    "Snowhead Entrance": "event(OPEN_SNOWHEAD_TEMPLE)"
+    "Snowhead Great Fairy Fountain": "true"
 "Snowhead Great Fairy Fountain":
   region: SNOWHEAD
   exits:
-    "Snowhead": "true"
+    "Snowhead Near Great Fairy Fountain": "true"
   locations:
     "Snowhead Great Fairy": "has(STRAY_FAIRY_SH, 15)"
 "Goron Race":
@@ -606,13 +624,18 @@
 #    "Stables Cow 1": "can_use_keg && can_play(SONG_EPONA)"
 #    "Stables Cow 2": "can_use_keg && can_play(SONG_EPONA)"
 #    "Stables Cow 3": "can_use_keg && can_play(SONG_EPONA)"
+"Great Bay Fence":
+  region: TERMINA_FIELD
+  exits:
+    "Termina Field": "can_play(SONG_EPONA)"
+    "Great Bay Coast": "true"
 "Great Bay Coast":
   region: GREAT_BAY_COAST
   exits:
     "Fisher's Hut": "true"
-    "Termina Field": "can_play(SONG_EPONA)"
+    "Great Bay Fence": "true"
     "Pirate Fortress Entrance": "has(MASK_ZORA)"
-    "Pinnacle Rock": "has(MASK_ZORA) && event(SEAHORSE)"
+    "Pinnacle Rock Entrance": "has(MASK_ZORA)"
     "Laboratory": "true"
     "Zora Cape": "true"
     "Ocean Spider House": "true"
@@ -621,7 +644,7 @@
   locations:
     "Great Bay Coast Zora Mask": "can_play(SONG_HEALING)"
     "Great Bay Coast HP": "can_use_beans && scarecrow_hookshot"
-    "Great Bay Coast Fisherman HP": "has(MASK_ZORA) && event(BOSS_GREAT_BAY)"
+    "Great Bay Coast Fisherman HP": "has(HOOKSHOT) && event(BOSS_GREAT_BAY)"
     "Great Bay Coast Fisherman Grotto": "true"
 #    "Great Bay Coast Ledge Cow 1": "has(HOOKSHOT) && can_play(SONG_EPONA)"
 #    "Great Bay Coard Ledge Cow 2": "has(HOOKSHOT) && can_play(SONG_EPONA)"
@@ -633,10 +656,15 @@
     "Great Bay Coast": "true"
   events:
     SEAHORSE: "event(PHOTO_GERUDO) && has_bottle"
+"Pinnacle Rock Entrance":
+  region: PINNACLE_ROCK
+  exits:
+    "Pinnacle Rock": "has(MASK_ZORA) && event(SEAHORSE)"
+    "Great Bay Coast": "true"
 "Pinnacle Rock":
   region: PINNACLE_ROCK
   exits:
-    "Great Bay Coast": "true"
+    "Pinnacle Rock Entrance": "true"
   events:
     ZORA_EGGS_PINNACLE_ROCK: "has(MASK_ZORA) && has_bottle"
   locations:
@@ -654,35 +682,51 @@
   region: ZORA_CAPE
   exits:
     "Great Bay Coast": "true"
-    "Zora Hall": "has(MASK_ZORA)"
+    "Zora Hall Entrance": "has(MASK_ZORA)"
     "Zora Cape Peninsula": "has(MASK_ZORA)"
-    "Waterfall Rapids": "has(HOOKSHOT)"
-    "Great Bay Fairy Fountain": "has(MASK_ZORA) && has(HOOKSHOT) && has_explosives"
+    "Waterfall Cliffs": "has(HOOKSHOT)"
+    "Great Bay Near Fairy Fountain": "has(HOOKSHOT)"
   locations:
-    "Zora Cape Ledge Chest 1": "has(HOOKSHOT)"
-    "Zora Cape Ledge Chest 2": "has(HOOKSHOT)"
     "Zora Cape Underwater Chest": "has(MASK_ZORA)"
     "Zora Cape Waterfall HP": "has(MASK_ZORA)"
     "Zora Cape Grotto": "can_break_boulders"
   gossip:
     "Zora Cape Gossip": "true"
+"Great Bay Near Fairy Fountain":
+  region: ZORA_CAPE
+  exits:
+    "Zora Cape": "true"
+    "Great Bay Fairy Fountain": "has_explosives"
 "Great Bay Fairy Fountain":
   region: ZORA_CAPE
   exits:
-    "Zora Cape": "true"
+    "Great Bay Near Fairy Fountain": "true"
   locations:
     "Great Bay Fairy": "has(STRAY_FAIRY_GB, 15)"
-"Waterfall Rapids":
+"Waterfall Cliffs":
   region: ZORA_CAPE
   exits:
     "Zora Cape": "true"
+    "Waterfall Rapids": "true"
+  locations:
+    "Zora Cape Ledge Chest 1": "has(HOOKSHOT)"
+    "Zora Cape Ledge Chest 2": "has(HOOKSHOT)"
+"Waterfall Rapids":
+  region: ZORA_CAPE
+  exits:
+    "Waterfall Cliffs": "true"
   locations:
     "Waterfall Rapids Beaver Race 1": "has(MASK_ZORA)"
     "Waterfall Rapids Beaver Race 2": "has(MASK_ZORA)"
+"Zora Hall Entrance":
+  region: ZORA_CAPE
+  exits:
+    "Zora Cape": "has(MASK_ZORA)"
+    "Zora Hall": "has(MASK_ZORA)"
 "Zora Hall":
   region: ZORA_HALL
   exits:
-    "Zora Cape": "has(MASK_ZORA)"
+    "Zora Hall Entrance": "has(MASK_ZORA)"
     "Zora Cape Peninsula": "true"
   locations:
     "Zora Hall Scrub HP": "has(DEED_MOUNTAIN) && has(MASK_GORON) && has(MASK_DEKU)"
@@ -710,35 +754,41 @@
     "Milk Road": "true"
   locations:
     "Gorman Track Garo Mask": "can_play(SONG_EPONA)"
-"Road to Ikana":
+"Road to Ikana Front":
   region: ROAD_TO_IKANA
   exits:
     "Termina Field": "true"
-    "Ikana Valley": "can_play(SONG_EPONA) && (has(MASK_GARO) || has(MASK_GIBDO)) && has(HOOKSHOT)"
-    "Ikana Graveyard": "can_play(SONG_EPONA)"
+    "Road to Ikana Center": "can_play(SONG_EPONA)"
   locations:
     "Road to Ikana Chest": "has(HOOKSHOT)"
     "Road to Ikana Grotto": "has(MASK_GORON)"
-    "Road to Ikana Stone Mask": "can_play(SONG_EPONA) && can_use_lens && has_bottle"
+"Road to Ikana Center":
+  region: ROAD_TO_IKANA
+  exits:
+    "Road to Ikana Front": "can_play(SONG_EPONA)"
+    "Road to Ikana Top": "(has(MASK_GARO) || has(MASK_GIBDO)) && has(HOOKSHOT)"
+    "Ikana Graveyard": "true"
+  locations:
+    "Road to Ikana Stone Mask": "can_use_lens && has_bottle"
   gossip:
-    "Road to Ikana Gossip": "can_play(SONG_EPONA)"
+    "Road to Ikana Gossip": "true"
 "Ikana Graveyard":
   region: IKANA_GRAVEYARD
   exits:
-    "Road to Ikana": "true"
+    "Road to Ikana Center": "true"
     "Beneath The Graveyard Night 1": "has(MASK_CAPTAIN)"
     "Beneath The Graveyard Night 2": "has(MASK_CAPTAIN)"
     "Beneath The Graveyard Night 3": "has(MASK_CAPTAIN)"
   locations:
     "Ikana Graveyard Captain Mask": "can_play(SONG_AWAKENING) && has(BOW) && can_fight"
-    "Ikana Graveyard Grotto": "has(BOMB_BAG)"
+    "Ikana Graveyard Grotto": "has_explosives"
 "Beneath The Graveyard Night 1":
   region: IKANA_GRAVEYARD
   exits:
     "Ikana Graveyard": "true"
   locations:
-    "Beneath The Graveyard Chest": "has_weapon || (has(BOMB_BAG) && has(BOW)) || has(MASK_GORON)"
-    "Beneath The Graveyard Song of Storms": "has_weapon || (has(BOMB_BAG) && has(BOW)) || has(MASK_GORON)"
+    "Beneath The Graveyard Chest": "can_fight || has_explosives || has(BOW) || has(HOOKSHOT) || has(MASK_DEKU)"
+    "Beneath The Graveyard Song of Storms": "can_fight || has_explosives"
 "Beneath The Graveyard Night 2":
   region: IKANA_GRAVEYARD
   exits:
@@ -750,14 +800,20 @@
   exits:
     "Ikana Graveyard": "true"
   locations:
-    "Beneath The Graveyard Dampe Chest": "has_weapon && has_weapon_range"
+    "Beneath The Graveyard Dampe Chest": "has_weapon_range"
+"Road to Ikana Top":
+  region: ROAD_TO_IKANA
+  exits:
+    "Road to Ikana Center": "true"
+    "Ikana Valley": "true"
 "Ikana Valley":
   region: IKANA_CANYON
   exits:
-    "Road to Ikana": "true"
+    "Road to Ikana Top": "true"
     "Ikana Canyon": "can_use_ice_arrows && has(HOOKSHOT)"
     "Secret Shrine Entrance": "true"
     "Sakon Hideout": "event(MEET_KAFEI)"
+    "Swamp Front": "true"
   locations:
     "Ikana Valley Scrub Rupee": "has(DEED_OCEAN) && has(MASK_ZORA)"
     "Ikana Valley Scrub HP": "has(DEED_OCEAN) && has(MASK_ZORA) && has(MASK_DEKU)"
@@ -809,7 +865,7 @@
   exits:
     "Ikana Canyon": "true"
   locations:
-    "Ghost Hut HP": "has(BOW)"
+    "Ghost Hut HP": "has(BOW) || has(HOOKSHOT) || can_use_deku_bubble"
 "Stone Tower":
   region: STONE_TOWER
   exits:
@@ -819,10 +875,17 @@
   region: STONE_TOWER
   exits:
     "Stone Tower": "true"
-    "Stone Tower Temple Entrance": "can_use_elegy"
+    "Stone Tower Front of Temple": "can_use_elegy"
     "Stone Tower Top Inverted": "can_use_elegy && can_use_light_arrows"
   events:
     STONE_TOWER_OWL: "true"
+"Stone Tower Front of Temple":
+  region: STONE_TOWER
+  exits:
+    "Stone Tower": "true"
+    "Stone Tower Top": "can_use_elegy3"
+    "Stone Tower Top Inverted": "can_use_elegy && can_use_light_arrows"
+    "Stone Tower Temple Entrance": "true"
 "Stone Tower Top Inverted":
   region: STONE_TOWER
   exits:

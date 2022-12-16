@@ -1,7 +1,7 @@
 "Woodfall Temple Entrance":
   dungeon: WF
   exits:
-    "Woodfall": "true"
+    "Woodfall Front of Temple": "true"
     "Woodfall Temple Main": "has(MASK_DEKU)"
   locations:
     "Woodfall Temple Entrance Chest": "has(MASK_DEKU)"
@@ -111,6 +111,7 @@
   dungeon: "WF"
   exits:
     "Oath to Order": "true"
+    "Woodfall": "true"
   events:
     CLEAN_SWAMP: "true"
     DEKU_PRINCESS: "has_bottle && has_weapon"

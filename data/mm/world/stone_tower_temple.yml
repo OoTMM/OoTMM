@@ -1,7 +1,7 @@
 "Stone Tower Temple Entrance":
   dungeon: ST
   exits:
-    "Stone Tower Top": "true"
+    "Stone Tower Front of Temple": "true"
     "Stone Tower Temple West": "true"
   locations:
     "Stone Tower Temple Entrance Chest": "has(BOW)"
