@@ -5,6 +5,7 @@
     "Moon Trial Goron": "masks(2)"
     "Moon Trial Zora":  "masks(3)"
     "Moon Trial Link":  "masks(4)"
+    "Moon Boss": "true"
   locations:
     "Moon Fierce Deity Mask": "masks(20) && event(MOON_TRIAL_DEKU) && event(MOON_TRIAL_GORON) && event(MOON_TRIAL_ZORA) && event(MOON_TRIAL_LINK)"
 "Moon Trial Deku":
@@ -42,3 +43,8 @@
     MOON_TRIAL_LINK: "has_bombchu && can_use_fire_arrows"
   locations:
     "Moon Trial Link HP": "true"
+"Moon Boss":
+  region: MOON
+  events:
+    MAJORA_PHASE_1: "has(BOW) || has(MASK_ZORA) || (has(MASK_FIERCE_DEITY) && has(MAGIC_UPGRADE))"
+    MAJORA: "event(MAJORA_PHASE_1) && (has_weapon || has(MASK_ZORA) || has(MASK_FIERCE_DEITY))"
