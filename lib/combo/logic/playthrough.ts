@@ -7,7 +7,7 @@ import { World } from './world';
 
 const isItemImportant = (item: string) => (ITEMS_DUNGEON_REWARDS.has(item) || ITEMS_REQUIRED.has(item) || /_BOSS_KEY_/.test(item)) && !(/GS_TOKEN$/.test(item) || /MM_HEART_(PIECE|CONTAINER)$/.test(item));
 
-const findSpheres = (world: World, placement: ItemPlacement, restrict?: Set<string>) => {
+export const findSpheres = (world: World, placement: ItemPlacement, restrict?: Set<string>, forbid?: Set<string>) => {
   const locations = new Set<string>();
   const items: Items = {};
   const spheres: string[][] = [];
@@ -21,6 +21,9 @@ const findSpheres = (world: World, placement: ItemPlacement, restrict?: Set<stri
         continue;
       }
       if (restrict && !restrict.has(loc)) {
+        continue;
+      }
+      if (forbid && forbid.has(loc)) {
         continue;
       }
       const item = placement[loc];
@@ -56,7 +59,7 @@ const findSpheresShuffled = (random: Random, world: World, placement: ItemPlacem
   return { locations, spheres };
 }
 
-const wayOfTheHero = (random: Random, world: World, placement: ItemPlacement) => {
+const findMinimalSpheres = (random: Random, world: World, placement: ItemPlacement) => {
   const shuffled = findSpheresShuffled(random, world, placement);
   const { locations } = shuffled;
   let { spheres } = shuffled;
@@ -74,6 +77,6 @@ const wayOfTheHero = (random: Random, world: World, placement: ItemPlacement) =>
 }
 
 export const playthrough = (random: Random, world: World, placement: ItemPlacement) => {
-  const spheres = wayOfTheHero(random, world, placement);
+  const spheres = findMinimalSpheres(random, world, placement);
   return spheres.map(sphere => sphere.filter(item => isItemImportant(placement[item]))).filter(sphere => sphere.length !== 0);
 }
