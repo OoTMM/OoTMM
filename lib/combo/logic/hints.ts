@@ -1,7 +1,7 @@
 import { ItemPlacement } from './solve';
 import { World } from './world';
 import { findSpheres } from './playthrough';
-import { Random, sample } from '../random';
+import { Random, sample, shuffle } from '../random';
 import { pathfind } from './pathfind';
 import { Items } from './state';
 import { addItem, DUNGEON_REWARDS_ORDERED, isDungeonItem, isDungeonReward } from './items';
@@ -111,6 +111,18 @@ class HintsSolver {
     return true;
   }
 
+  private duplicateHints() {
+    const hints = shuffle(this.random, Object.values(this.gossip).map(x => ({ ...x })));
+    const locs = new Set<string>(this.world.gossip);
+    for (const k in this.gossip) {
+      locs.delete(k);
+    }
+    const unplacedLocs = shuffle(this.random, Array.from(locs));
+    for (let i = 0; i < hints.length; ++i) {
+      this.gossip[unplacedLocs[i]] = hints[i];
+    }
+  }
+
   private placeGossips() {
     /* TODO: refactor this */
     this.hintedLocations.add(this.findItem('OOT_ARROW_LIGHT')!);
@@ -128,6 +140,8 @@ class HintsSolver {
       }
     }
 
+    /* Duplicate every hint */
+    this.duplicateHints();
     console.log(this.gossip);
   }
 
