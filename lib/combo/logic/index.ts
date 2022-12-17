@@ -51,7 +51,7 @@ export const logic = (opts: Options): LogicResult => {
     const check = world.checks[loc];
     items.push({ ...check, item: placement[loc] });
   }
-  const h = hints(random, world, placement, spheres);
+  const h = hints(random, opts.settings, world, placement, spheres);
 
   return { items, log, hints: h, config };
 };

@@ -1,10 +1,12 @@
-import { ItemPlacement, ORDERED_DUNGEON_REWARDS } from './solve';
+import { ItemPlacement } from './solve';
 import { World } from './world';
 import { findSpheres } from './playthrough';
 import { Random, sample } from '../random';
 import { pathfind } from './pathfind';
 import { Items } from './state';
-import { addItem } from './items';
+import { addItem, DUNGEON_REWARDS_ORDERED, isDungeonItem, isDungeonReward } from './items';
+import { Settings } from '../settings';
+import { CONSTRAINT_NONE, itemConstraint } from './constraints';
 
 export type HintGossipHero = {
   type: 'hero',
@@ -26,6 +28,7 @@ class HintsSolver {
 
   constructor(
     private random: Random,
+    private settings: Settings,
     private world: World,
     private items: ItemPlacement,
     private spheres: string[][],
@@ -41,16 +44,30 @@ class HintsSolver {
     return null;
   }
 
-  private wayOfTheHero(world: World, ItemPlacement: ItemPlacement, spheres: string[][]) {
+  private isItemWayOfTheHero(item: string) {
+    if (itemConstraint(item, this.settings) !== CONSTRAINT_NONE) {
+      return false;
+    }
+    if (isDungeonItem(item)) {
+      return false;
+    }
+    if (isDungeonReward(item)) {
+      return false;
+    }
+    return true;
+  }
+
+  private wayOfTheHero() {
     const woth = new Set<string>();
-    for (const sphere of spheres) {
+    for (const sphere of this.spheres) {
       for (const loc of sphere) {
-        if (findSpheres(world, ItemPlacement, undefined, new Set([loc])) === null) {
+        if (findSpheres(this.world, this.items, undefined, new Set([loc])) === null) {
           woth.add(loc);
         }
       }
     }
-    return woth;
+    const locs = Array.from(woth).filter(loc => this.isItemWayOfTheHero(this.items[loc]));
+    return new Set(locs);
   }
 
   private findValidGossip(loc: string) {
@@ -99,14 +116,23 @@ class HintsSolver {
     this.hintedLocations.add(this.findItem('OOT_ARROW_LIGHT')!);
     this.hintedLocations.add(this.findItem('MM_SONG_ORDER')!);
 
-    const woth = this.wayOfTheHero(this.world, this.items, this.spheres);
-    this.placeGossipHero(woth);
+    /* Place way of the hero hints */
+    const woth = this.wayOfTheHero();
+    let wothHints = 0;
+    for (let i = 0; i < 150; ++i) {
+      if (this.placeGossipHero(woth)) {
+        ++wothHints;
+        if (wothHints >= 9) {
+          break;
+        }
+      }
+    }
 
     console.log(this.gossip);
   }
 
   run() {
-    const dungeonRewards = ORDERED_DUNGEON_REWARDS.map(item => this.findItem(item)).map(loc => this.world.regions[loc!]);
+    const dungeonRewards = DUNGEON_REWARDS_ORDERED.map(item => this.findItem(item)).map(loc => this.world.regions[loc!]);
     const lightArrow = this.world.regions[this.findItem('OOT_ARROW_LIGHT')!];
     const oathToOrder = this.world.regions[this.findItem('MM_SONG_ORDER')!];
     this.placeGossips();
@@ -114,7 +140,7 @@ class HintsSolver {
   }
 }
 
-export const hints = (random: Random, world: World, items: ItemPlacement, spheres: string[][]): Hints => {
-  const solver = new HintsSolver(random, world, items, spheres);
+export const hints = (random: Random, settings: Settings, world: World, items: ItemPlacement, spheres: string[][]): Hints => {
+  const solver = new HintsSolver(random, settings, world, items, spheres);
   return solver.run();
 };

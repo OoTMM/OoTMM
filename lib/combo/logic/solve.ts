@@ -7,26 +7,9 @@ import { World } from './world';
 import { LogicSeedError } from './error';
 import { CONSTRAINTS, itemConstraint } from './constraints';
 import { Options } from '../options';
-import { addItem, combinedItems, itemsArray, removeItem } from './items';
+import { addItem, combinedItems, DUNGEON_REWARDS, itemsArray, removeItem } from './items';
 
 const ITEMS_DUNGEON = /^(OOT|MM)_(MAP|COMPASS|SMALL_KEY|BOSS_KEY|STRAY_FAIRY)_[A-Z_]+$/;
-export const ORDERED_DUNGEON_REWARDS = [
-  'OOT_STONE_EMERALD',
-  'OOT_STONE_RUBY',
-  'OOT_STONE_SAPPHIRE',
-  'OOT_MEDALLION_LIGHT',
-  'OOT_MEDALLION_FOREST',
-  'OOT_MEDALLION_FIRE',
-  'OOT_MEDALLION_WATER',
-  'OOT_MEDALLION_SPIRIT',
-  'OOT_MEDALLION_SHADOW',
-  'MM_REMAINS_ODOLWA',
-  'MM_REMAINS_GOHT',
-  'MM_REMAINS_GYORG',
-  'MM_REMAINS_TWINMOLD',
-];
-
-export const ITEMS_DUNGEON_REWARDS = new Set(ORDERED_DUNGEON_REWARDS);
 
 export const ITEMS_REQUIRED = new Set<string>([
   'OOT_GS_TOKEN',
@@ -303,7 +286,7 @@ class Solver {
         continue;
       }
 
-      if (ITEMS_DUNGEON.test(item) || ITEMS_DUNGEON_REWARDS.has(item)) {
+      if (ITEMS_DUNGEON.test(item) || DUNGEON_REWARDS.has(item)) {
         addItem(pools.dungeon, item);
       } else if (ITEMS_REQUIRED.has(item)) {
         addItem(pools.required, item);
@@ -375,7 +358,7 @@ class Solver {
 
     for (const location in this.world.checks) {
       const item = this.world.checks[location].item;
-      if (ITEMS_DUNGEON_REWARDS.has(item)) {
+      if (DUNGEON_REWARDS.has(item)) {
         rewards.push(item);
         locations.push(location);
       }

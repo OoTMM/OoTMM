@@ -1,11 +1,11 @@
 import { Random, shuffle } from '../random';
-import { addItem } from './items';
+import { addItem, DUNGEON_REWARDS } from './items';
 import { pathfind } from './pathfind';
-import { ItemPlacement, ITEMS_DUNGEON_REWARDS, ITEMS_REQUIRED } from './solve';
+import { ItemPlacement, ITEMS_REQUIRED } from './solve';
 import { Items } from './state';
 import { World } from './world';
 
-const isItemImportant = (item: string) => (ITEMS_DUNGEON_REWARDS.has(item) || ITEMS_REQUIRED.has(item) || /_BOSS_KEY_/.test(item)) && !(/GS_TOKEN$/.test(item) || /MM_HEART_(PIECE|CONTAINER)$/.test(item));
+const isItemImportant = (item: string) => (DUNGEON_REWARDS.has(item) || ITEMS_REQUIRED.has(item) || /_BOSS_KEY_/.test(item)) && !(/GS_TOKEN$/.test(item) || /MM_HEART_(PIECE|CONTAINER)$/.test(item));
 
 export const findSpheres = (world: World, placement: ItemPlacement, restrict?: Set<string>, forbid?: Set<string>) => {
   const locations = new Set<string>();
