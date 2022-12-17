@@ -1,7 +1,8 @@
-import { pathfind, Reachable } from "./pathfind";
-import { ItemPlacement, addItem, ITEMS_DUNGEON_REWARDS, ITEMS_REQUIRED } from "./solve";
-import { Items } from "./state";
-import { World } from "./world";
+import { addItem } from './items';
+import { pathfind, Reachable } from './pathfind';
+import { ItemPlacement, ITEMS_DUNGEON_REWARDS, ITEMS_REQUIRED } from './solve';
+import { Items } from './state';
+import { World } from './world';
 
 const isItemImportant = (item: string) => (ITEMS_DUNGEON_REWARDS.has(item) || ITEMS_REQUIRED.has(item) || /_BOSS_KEY_/.test(item)) && !(/GS_TOKEN$/.test(item) || /MM_HEART_(PIECE|CONTAINER)$/.test(item));
 

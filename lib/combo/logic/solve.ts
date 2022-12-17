@@ -7,6 +7,7 @@ import { World } from './world';
 import { LogicSeedError } from './error';
 import { CONSTRAINTS, itemConstraint } from './constraints';
 import { Options } from '../options';
+import { addItem, combinedItems, itemsArray, removeItem } from './items';
 
 const ITEMS_DUNGEON = /^(OOT|MM)_(MAP|COMPASS|SMALL_KEY|BOSS_KEY|STRAY_FAIRY)_[A-Z_]+$/;
 export const ORDERED_DUNGEON_REWARDS = [
@@ -219,33 +220,12 @@ type ItemPools = {
   junk: Items,
 };
 
-const itemsArray = (items: Items) => {
-  const arr: string[] = [];
-  for (const item in items) {
-    for (let i = 0; i < items[item]; i++) {
-      arr.push(item);
-    }
-  }
-  return arr;
-};
-
 const poolsArray = (pools: ItemPools) => {
   return [
     ...itemsArray(pools.required),
     ...itemsArray(pools.nice),
     ...itemsArray(pools.junk),
   ];
-};
-
-export const addItem = (items: Items, item: string) => {
-  items[item] = (items[item] || 0) + 1;
-};
-
-const removeItem = (items: Items, item: string) => {
-  items[item] -= 1;
-  if (items[item] === 0) {
-    delete items[item];
-  }
 };
 
 const removeItemPools = (pools: ItemPools, item: string) => {
@@ -266,17 +246,6 @@ const maxRequired = (pools: ItemPools, item: string, count: number) => {
   const extra = pools.required[item] - count;
   pools.required[item] = count;
   pools.nice[item] = extra;
-};
-
-const combinedItems = (items: Items, other: Items) => {
-  const combined: Items = {};
-  for (const item in items) {
-    combined[item] = items[item];
-  }
-  for (const item in other) {
-    combined[item] = (combined[item] || 0) + other[item];
-  }
-  return combined;
 };
 
 class Solver {
