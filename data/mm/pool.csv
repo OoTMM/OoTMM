@@ -211,8 +211,8 @@ Pirate Fortress Sewers HP,                      collectible,  PIRATE_FORTRESS_IN
 Pirate Fortress Interior Hookshot,                chest,        PIRATE_FORTRESS_INTERIOR, 0x02, HOOKSHOT
 Pirate Fortress Interior Aquarium,                chest,        PIRATE_FORTRESS_INTERIOR, 0x00, RUPEE_RED
 Pirate Fortress Interior Silver Rupee Chest,      chest,        PIRATE_FORTRESS_INTERIOR, 0x03, RUPEE_SILVER
-Pirate Fortress Exterior Lower Chest,             chest,        PIRATE_FORTRESS_EXTERIOR, 0x00, RUPEE_RED
-Pirate Fortress Exterior Upper Chest,             chest,        PIRATE_FORTRESS_EXTERIOR, 0x01, RUPEE_RED
+Pirate Fortress Interior Lower Chest,             chest,        PIRATE_FORTRESS_EXTERIOR, 0x00, RUPEE_RED
+Pirate Fortress Interior Upper Chest,             chest,        PIRATE_FORTRESS_EXTERIOR, 0x01, RUPEE_RED
 Great Bay Temple Map,                             chest,          TEMPLE_GREAT_BAY, 0x1d,           MAP_GB
 Great Bay Temple Baba Chest,                      chest,          TEMPLE_GREAT_BAY, 0x19,           STRAY_FAIRY_GB
 Great Bay Temple Boss Key,                        chest,          TEMPLE_GREAT_BAY, 0x1e,           BOSS_KEY_GB
