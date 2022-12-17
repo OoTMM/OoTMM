@@ -61,12 +61,12 @@ const DUNGEONS_REGIONS: {[k: string]: string} = {
   ST: "TEMPLE_STONE_TOWER",
 };
 
-const mapExprs = (exprParser: ExprParser, game: Game, data: any) => {
+const mapExprs = (exprParser: ExprParser, game: Game, char: string, data: any) => {
   const result: ExprMap = {};
   for (const [k, v] of Object.entries(data)) {
     let name = k;
     if (!(/^(MM|OOT) /.test(name))) {
-      name = gameId(game, k, ' ');
+      name = gameId(game, k, char);
     }
     result[name] = exprParser.parse(v as string);
   }
@@ -83,10 +83,10 @@ const loadWorldAreas = (world: World, game: Game, exprParser: ExprParser) => {
     if (region !== 'NONE') {
       region = region ? gameId(game, region, '_') : undefined;
     }
-    const locations = mapExprs(exprParser, game, area.locations || {});
-    const exits = mapExprs(exprParser, game, area.exits || {});
-    const events = mapExprs(exprParser, game, area.events || {});
-    const gossip = mapExprs(exprParser, game, area.gossip || {});
+    const locations = mapExprs(exprParser, game, ' ', area.locations || {});
+    const exits = mapExprs(exprParser, game, ' ', area.exits || {});
+    const events = mapExprs(exprParser, game, '_', area.events || {});
+    const gossip = mapExprs(exprParser, game, ' ', area.gossip || {});
 
     if (name === undefined) {
       throw new Error(`Area name is undefined`);

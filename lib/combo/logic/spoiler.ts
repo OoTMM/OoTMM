@@ -1,5 +1,4 @@
 import { Options } from "../options";
-import { playthrough } from "./playthrough";
 import { ItemPlacement } from "./solve";
 import { World } from "./world";
 
@@ -10,8 +9,7 @@ const spoilerRaw = (buffer: string[], placement: ItemPlacement) => {
   buffer.push('');
 };
 
-const spoilerSpheres = (buffer: string[], world: World, placement: ItemPlacement) => {
-  const spheres = playthrough(world, placement);
+const spoilerSpheres = (buffer: string[], world: World, placement: ItemPlacement, spheres: string[][]) => {
   for (const i in spheres) {
     buffer.push(`Sphere ${i}`);
     const sphere = spheres[i];
@@ -22,13 +20,13 @@ const spoilerSpheres = (buffer: string[], world: World, placement: ItemPlacement
   }
 };
 
-export const spoiler = (world: World, placement: ItemPlacement, opts: Options) => {
+export const spoiler = (world: World, placement: ItemPlacement, spheres: string[][], opts: Options) => {
   const buffer: string[] = [];
   buffer.push(`Seed: ${opts.seed}`);
   buffer.push('');
   spoilerRaw(buffer, placement);
   if (!opts.settings.noLogic) {
-    spoilerSpheres(buffer, world, placement);
+    spoilerSpheres(buffer, world, placement, spheres);
   }
   return buffer.join("\n");
 };
