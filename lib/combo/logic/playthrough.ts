@@ -11,10 +11,10 @@ export const findSpheres = (world: World, placement: ItemPlacement, restrict?: S
   const locations = new Set<string>();
   const items: Items = {};
   const spheres: string[][] = [];
-  let reachable = pathfind(world, items);
+  let reachable = pathfind(world, items, false);
 
   for (;;) {
-    reachable = pathfind(world, items, reachable);
+    reachable = pathfind(world, items, false, reachable);
     const sphere = [];
     for (const loc of reachable.locations) {
       if (locations.has(loc)) {

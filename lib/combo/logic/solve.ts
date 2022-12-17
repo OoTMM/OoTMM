@@ -231,9 +231,9 @@ class Solver {
     this.pools = this.makeItemPools();
     if (this.opts.settings.noLogic) {
       const allLocations = new Set<string>(Object.keys(this.world.checks));
-      this.reachable = { events: new Set<string>, areas: { child: new Set<string>(), adult: new Set<string>() }, locations: allLocations };
+      this.reachable = { events: new Set<string>, areas: { child: new Set<string>(), adult: new Set<string>() }, locations: allLocations, gossip: new Set<string>() };
     } else {
-      this.reachable = pathfind(this.world, {});
+      this.reachable = pathfind(this.world, {}, false);
     }
   }
 
@@ -259,7 +259,7 @@ class Solver {
 
     for (;;) {
       for (;;) {
-        this.reachable = pathfind(this.world, this.items, this.reachable);
+        this.reachable = pathfind(this.world, this.items, false, this.reachable);
         const changed = this.markAccessible();
         if (!changed) {
           break;
@@ -431,7 +431,7 @@ class Solver {
     const reachableLocations = new Set(reachable.locations);
     for (;;) {
       let changed = false;
-      reachable = pathfind(this.world, assumedAccessibleItems, reachable);
+      reachable = pathfind(this.world, assumedAccessibleItems, false, reachable);
       for (const l of reachable.locations.values()) {
         if (!reachableLocations.has(l)) {
           changed = true;
