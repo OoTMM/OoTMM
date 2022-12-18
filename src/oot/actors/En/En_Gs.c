@@ -10,6 +10,7 @@ int EnGs_TalkedTo(Actor* this, GameState_Play* play)
         if (key == 0x18)
             key = (gSaveContext.grottoChestFlag & 0x1f) | 0x20;
         comboHintGossip(key, play);
+        return 1;
     }
     return 0;
 }
