@@ -162,6 +162,17 @@ const hintBuffer = (game: Game, gossip: string, hint: HintGossip): Buffer => {
       data.writeUInt8(region, 2);
     }
     break;
+  case 'foolish':
+    {
+      const region = DATA_REGIONS[hint.region];
+      if (region === undefined) {
+        throw new Error(`Unknown region ${hint.region}`);
+      }
+      data.writeUInt8(id, 0);
+      data.writeUInt8(0x01, 1);
+      data.writeUInt8(region, 2);
+    }
+    break;
   }
   return data;
 }

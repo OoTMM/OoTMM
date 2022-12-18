@@ -4,7 +4,7 @@ import { findSpheres } from './playthrough';
 import { Random, sample, shuffle } from '../random';
 import { pathfind } from './pathfind';
 import { Items } from './state';
-import { addItem, DUNGEON_REWARDS_ORDERED, isDungeonItem, isDungeonReward } from './items';
+import { addItem, DUNGEON_REWARDS_ORDERED, isDungeonItem, isDungeonReward, isItemMajor, isToken, itemsArray } from './items';
 import { Settings } from '../settings';
 import { CONSTRAINT_NONE, itemConstraint } from './constraints';
 import { Game } from '../config';
@@ -15,7 +15,12 @@ export type HintGossipHero = {
   location: string;
 };
 
-export type HintGossip = { game: Game } & HintGossipHero;
+export type HintGossipFoolish = {
+  type: 'foolish',
+  region: string,
+};
+
+export type HintGossip = { game: Game } & (HintGossipHero | HintGossipFoolish);
 
 export type Hints = {
   dungeonRewards: string[];
@@ -101,6 +106,106 @@ class HintsSolver {
     return sample(this.random, gossips);
   }
 
+  private wayOfTheHeroItems(woth: Set<string>) {
+    const items: {[k: string]: Set<string> } = {};
+    for (const loc of woth) {
+      const item = this.items[loc];
+      items[item] ||= new Set<string>();
+      items[item].add(loc);
+    }
+    return items;
+  }
+
+  private majorItemFoolish(loc: string, item: string, wothItems: {[k: string]: Set<string>}) {
+    /* TODO: this is fragile */
+    let maximumRequired = -1;
+    switch (item) {
+    case 'OOT_SWORD':
+      maximumRequired = 2;
+      break;
+    case 'OOT_OCARINA':
+    case 'OOT_BOMB_BAG':
+    case 'OOT_BOW':
+    case 'OOT_SLINGSHOT':
+    case 'MM_SWORD':
+    case 'MM_BOW':
+    case 'MM_BOMB_BAG':
+      maximumRequired = 1;
+      break;
+    }
+    if (maximumRequired === -1) {
+      return false;
+    }
+    const woth = wothItems[item];
+    if (!woth) {
+      return false;
+    }
+    if (woth.size < maximumRequired) {
+      return false;
+    }
+    if (woth.has(loc)) {
+      return false;
+    }
+    return true;
+  }
+
+  private locationFoolish(loc: string, wothItems: {[k: string]: Set<string>}) {
+    const item = this.items[loc];
+    if (isDungeonItem(item) || isDungeonReward(item) || isToken(item)) {
+      return 0;
+    }
+    if (isItemMajor(item) && !this.majorItemFoolish(loc, item, wothItems)) {
+      return -1;
+    }
+    if (this.hintedLocations.has(loc)) {
+      return 0;
+    }
+    return 1;
+  }
+
+  private foolishRegions(wothItems: {[k: string]: Set<string>}) {
+    let regions: {[k:string]: number} = {};
+
+    for (const location in this.world.checks) {
+      const region = this.world.regions[location];
+      regions[region] ||= 0;
+      if (regions[region] === -1) {
+        continue;
+      }
+      const value = this.locationFoolish(location, wothItems);
+      if (value === -1) {
+        regions[region] = -1;
+      } else {
+        regions[region] += value;
+      }
+    }
+
+    for (const r in regions) {
+      if (regions[r] <= 0) {
+        delete regions[r];
+      }
+    }
+
+    return regions;
+  }
+
+  private placeGossipFoolish(regions: {[k: string]: number}, count: number) {
+    let placed = 0;
+    regions = { ...regions };
+    while (placed < count) {
+      const regionsArray = itemsArray(regions); /* Ugly */
+      if (regionsArray.length === 0) {
+        break;
+      }
+      const region = sample(this.random, regionsArray);
+      delete regions[region];
+      const gossip = sample(this.random, Object.keys(this.world.gossip).filter(x => !this.gossip[x]));
+      this.gossip[gossip] = { game: this.world.gossip[gossip].game, type: 'foolish', region: region };
+      placed++;
+    }
+    return placed;
+  }
+
   private placeGossipHero(woth: Set<string>) {
     const locs = Array.from(woth).filter(loc => !this.hintedLocations.has(loc));
     if (locs.length === 0) {
@@ -129,6 +234,11 @@ class HintsSolver {
   }
 
   private placeGossips() {
+    const woth = this.wayOfTheHero();
+    const wothItems = this.wayOfTheHeroItems(woth);
+    const foolishRegions = this.foolishRegions(wothItems);
+    let hints = 0;
+
     /* TODO: refactor this */
     this.hintedLocations.add(this.findItem('OOT_ARROW_LIGHT')!);
     this.hintedLocations.add(this.findItem('MM_SONG_ORDER')!);
@@ -141,8 +251,9 @@ class HintsSolver {
       'OOT Skulltula House 50 Tokens',
     ].forEach(x => this.hintedLocations.add(x));
 
+    hints += this.placeGossipFoolish(foolishRegions, 5);
+
     /* Place way of the hero hints */
-    const woth = this.wayOfTheHero();
     let wothHints = 0;
     for (let i = 0; i < 150; ++i) {
       if (this.placeGossipHero(woth)) {

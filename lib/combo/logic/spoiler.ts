@@ -10,6 +10,9 @@ const spoilerHints = (buffer: string[], hints: Hints, placement: ItemPlacement) 
     if (h.type === 'hero') {
       buffer.push(`  ${gossip}: Hero, ${h.region} (${h.location}: ${placement[h.location]})`);
     }
+    if (h.type === 'foolish') {
+      buffer.push(`  ${gossip}: Foolish, ${h.region}`);
+    }
   }
   buffer.push('');
 };

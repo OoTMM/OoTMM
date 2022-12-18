@@ -77,6 +77,12 @@ void comboHintGossip(u8 key, GameState_Play* play)
             comboTextAppendStr(&b, " is on the " TEXT_COLOR_YELLOW "Way of the Hero");
             comboTextAppendClearColor(&b);
             break;
+        case HINT_TYPE_FOOLISH:
+            comboTextAppendStr(&b, "plundering ");
+            comboTextAppendRegionName(&b, hint->region, 0, 0);
+            comboTextAppendStr(&b, " is a " TEXT_COLOR_PINK "foolish choice");
+            comboTextAppendClearColor(&b);
+            break;
         }
     }
     comboTextAppendStr(&b, "." TEXT_END);
