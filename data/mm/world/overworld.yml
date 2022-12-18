@@ -650,6 +650,10 @@
 #    "Great Bay Coard Ledge Cow 2": "has(HOOKSHOT) && can_play(SONG_EPONA)"
   gossip:
     "Great Bay Coast Gossip": "true"
+"Great Bay Coast Captured":
+  region: GREAT_BAY_COAST
+  exits:
+    "Great Bay Coast": "true"
 "Fisher's Hut":
   region: GREAT_BAY_COAST
   exits:
@@ -676,7 +680,7 @@
   exits:
     "Great Bay Coast": "true"
   locations:
-    "Laboratory Zora Song": "event(ZORA_EGGS_PIRATE) && event(ZORA_EGGS_PINNACLE_ROCK) && has(MASK_ZORA) && has(OCARINA)"
+    "Laboratory Zora Song": "event(ZORA_EGGS_HOOKSHOT_ROOM) && event(ZORA_EGGS_BARREL_MAZE) && event(ZORA_EGGS_LONE_GUARD) && event(ZORA_EGGS_TREASURE_ROOM) && event(ZORA_EGGS_PINNACLE_ROCK) && has(MASK_ZORA) && has(OCARINA)"
     "Laboratory Fish HP": "has_bottle"
 "Zora Cape":
   region: ZORA_CAPE
