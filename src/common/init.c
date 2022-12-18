@@ -9,6 +9,7 @@ void comboInit(void)
     comboInitData();
     comboInitObjects();
     comboInitOverride();
+    comboInitHints();
 }
 
 ALIGNED(16) ComboData gComboData;

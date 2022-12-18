@@ -245,6 +245,9 @@ int comboCanAccessMoon(void);
 
 #define HINT_TYPE_HERO 0x00
 
+void comboInitHints(void);
+void comboHintGossip(u8 key, GameState_Play* play);
+
 #else
 # include <combo/asm.h>
 #endif
