@@ -8,6 +8,12 @@ else ifneq (, $(shell command -v mips64-elf-gcc 2>/dev/null))
 ARCH	:= mips64-elf
 else ifneq (, $(shell command -v mips-elf-gcc 2>/dev/null))
 ARCH	:= mips-elf
+else ifneq (, $(shell command -v mips64-ultra-gcc 2>/dev/null))
+ARCH	:= mips64-ultra
+else ifneq (, $(shell command -v mips64-gcc 2>/dev/null))
+ARCH	:= mips64
+else ifneq (, $(shell command -v mips-gcc 2>/dev/null))
+ARCH	:= mips
 else
 $(error "No MIPS toolchain found")
 endif
