@@ -7,13 +7,15 @@ import { Items } from './state';
 import { addItem, DUNGEON_REWARDS_ORDERED, isDungeonItem, isDungeonReward } from './items';
 import { Settings } from '../settings';
 import { CONSTRAINT_NONE, itemConstraint } from './constraints';
+import { Game } from '../config';
 
 export type HintGossipHero = {
   type: 'hero',
-  location: string,
+  region: string,
+  location: string;
 };
 
-export type HintGossip = HintGossipHero;
+export type HintGossip = { game: Game } & HintGossipHero;
 
 export type Hints = {
   dungeonRewards: string[];
@@ -106,20 +108,20 @@ class HintsSolver {
     if (gossip === null) {
       return false;
     }
-    this.gossip[gossip] = { type: 'hero', location: loc };
+    this.gossip[gossip] = { game: this.world.gossip[gossip].game, type: 'hero', region: this.world.regions[loc], location: loc };
     this.hintedLocations.add(loc);
     return true;
   }
 
   private duplicateHints() {
     const hints = shuffle(this.random, Object.values(this.gossip).map(x => ({ ...x })));
-    const locs = new Set<string>(this.world.gossip);
+    const locs = new Set<string>(Object.keys(this.world.gossip));
     for (const k in this.gossip) {
       locs.delete(k);
     }
     const unplacedLocs = shuffle(this.random, Array.from(locs));
     for (let i = 0; i < hints.length; ++i) {
-      this.gossip[unplacedLocs[i]] = hints[i];
+      this.gossip[unplacedLocs[i]] = { ...hints[i], game: this.world.gossip[unplacedLocs[i]].game };
     }
   }
 
@@ -142,7 +144,6 @@ class HintsSolver {
 
     /* Duplicate every hint */
     this.duplicateHints();
-    console.log(this.gossip);
   }
 
   run() {

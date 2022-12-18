@@ -239,6 +239,12 @@ extern DmaEntry kComboDmaData[];
 /* Misc */
 int comboCanAccessMoon(void);
 
+/* Hints */
+#define HINT_GOSSIP         0x00
+#define HINT_GOSSIP_GROTTO  0x01
+
+#define HINT_TYPE_HERO 0x00
+
 #else
 # include <combo/asm.h>
 #endif

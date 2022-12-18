@@ -80,3 +80,22 @@ export const DATA_WORLD = {
   oot: worldOot,
   mm: worldMm,
 };
+
+const mapGossip = (game: Game, data: any[]) => {
+  const result: {[k: string]: any} = {};
+  for (const v of data) {
+    const key = gameId(game, v.location, ' ');
+    result[key] = { type: v.type, id: parseInt(v.id) }
+  }
+  return result;
+};
+
+import hintsOot from '../../data/oot/hints.csv';
+import hintsMm from '../../data/mm/hints.csv';
+import { Game } from './config';
+import { gameId } from './util';
+
+export const DATA_HINTS = {
+  oot: mapGossip('oot', hintsOot),
+  mm: mapGossip('mm', hintsMm),
+};

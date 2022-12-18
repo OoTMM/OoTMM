@@ -44,14 +44,13 @@ export const logic = (opts: Options): LogicResult => {
   if (!opts.settings.noLogic) {
     spheres = playthrough(random, world, placement);
   }
-  const log = spoiler(world, placement, spheres, opts);
-
   const items: WorldCheck[] = [];
   for (const loc in placement) {
     const check = world.checks[loc];
     items.push({ ...check, item: placement[loc] });
   }
   const h = hints(random, opts.settings, world, placement, spheres);
+  const log = spoiler(world, placement, spheres, opts, h);
 
   return { items, log, hints: h, config };
 };

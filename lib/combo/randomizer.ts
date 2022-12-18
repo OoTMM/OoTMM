@@ -1,15 +1,22 @@
 import { Buffer } from 'buffer';
 
 import { logic, LogicResult } from './logic';
-import { DATA_GI, DATA_NPC, DATA_SCENES, DATA_REGIONS, DATA_CONFIG } from './data';
+import { DATA_GI, DATA_NPC, DATA_SCENES, DATA_REGIONS, DATA_CONFIG, DATA_HINTS } from './data';
 import { Game, GAMES } from "./config";
 import { WorldCheck } from './logic/world';
 import { Options } from './options';
 import { Settings } from './settings';
+import { HintGossip, Hints } from './logic/hints';
+import { Monitor } from './monitor';
 
-const OFFSETS = {
+const GAME_DATA_OFFSETS = {
   oot: 0x1000,
   mm: 0x3000,
+};
+
+const HINTS_DATA_OFFSETS = {
+  oot: 0x5000,
+  mm: 0x6000,
 };
 
 const SUBSTITUTIONS: {[k: string]: string} = {
@@ -26,7 +33,7 @@ const SUBSTITUTIONS: {[k: string]: string} = {
   MM_WALLET: "MM_WALLET2",
 };
 
-const gi = async (game: Game, item: string) => {
+const gi = (game: Game, item: string) => {
   /* Dungeon Items */
   /* TODO: Refactor this horror */
   if (/^OOT_MAP/.test(item)) {
@@ -66,13 +73,12 @@ const gi = async (game: Game, item: string) => {
   return value;
 };
 
-const checkId = async (check: WorldCheck) => {
+const checkId = (check: WorldCheck) => {
   if (check.type === 'npc') {
-    const data = await DATA_NPC;
-    if (!data.hasOwnProperty(check.id)) {
+    if (!DATA_NPC.hasOwnProperty(check.id)) {
       throw new Error(`Unknown NPC ${check.id}`);
     }
-    return data[check.id];
+    return DATA_NPC[check.id];
   }
   return check.id;
 }
@@ -93,8 +99,7 @@ const toU16Buffer = (data: number[]) => {
   return buf;
 };
 
-export const randomizeGame = async (settings: Settings, game: Game, logic: LogicResult): Promise<Buffer> => {
-  const scenes = await DATA_SCENES;
+const gameChecks = (settings: Settings, game: Game, logic: LogicResult): Buffer => {
   const buf: number[] = [];
   for (const c of logic.items) {
     if (c.game !== game) {
@@ -107,11 +112,11 @@ export const randomizeGame = async (settings: Settings, game: Game, logic: Logic
       continue;
     }
     let { scene } = c;
-    let id = await checkId(c);
-    if (!scenes.hasOwnProperty(scene)) {
+    let id = checkId(c);
+    if (!DATA_SCENES.hasOwnProperty(scene)) {
       throw new Error(`Unknown scene ${scene}`);
     }
-    let sceneId = scenes[scene];
+    let sceneId = DATA_SCENES[scene];
     switch (c.type) {
     case 'npc':
       sceneId = 0xf0;
@@ -124,11 +129,54 @@ export const randomizeGame = async (settings: Settings, game: Game, logic: Logic
       break;
     }
     const key = (sceneId << 8) | id;
-    const item = await gi(game, c.item);
+    const item = gi(game, c.item);
     buf.push(key, item);
   }
   return toU16Buffer(buf);
 };
+
+const hintBuffer = (game: Game, gossip: string, hint: HintGossip): Buffer => {
+  const data = Buffer.alloc(8, 0xff);
+  let gossipData = DATA_HINTS[game][gossip];
+  if (!gossipData) {
+    throw new Error(`Unknown gossip ${gossip} for game ${game}`);
+  }
+  let id = null;
+  switch (gossipData.type) {
+  case 'gossip':
+    id = gossipData.id;
+    break;
+  case 'gossip-grotto':
+    id = gossipData.id | 0x20;
+    break;
+  }
+  switch (hint.type) {
+  case 'hero':
+    {
+      const region = DATA_REGIONS[hint.region];
+      if (region === undefined) {
+        throw new Error(`Unknown region ${hint.region}`);
+      }
+      data.writeUInt8(id, 0);
+      data.writeUInt8(0x00, 1);
+      data.writeUInt8(region, 2);
+    }
+    break;
+  }
+  return data;
+}
+
+const gameHints = (game: Game, hints: Hints): Buffer => {
+  const buffers: Buffer[] = [];
+  for (const gossip in hints.gossip) {
+    const h = hints.gossip[gossip];
+    if (h.game !== game) {
+      continue;
+    }
+    buffers.push(hintBuffer(game, gossip, h));
+  }
+  return Buffer.concat(buffers);
+}
 
 const regionsBuffer = (regions: string[]) => {
   const data = regions.map((region) => {
@@ -166,22 +214,24 @@ export const randomizerHints = (logic: LogicResult): Buffer => {
   return Buffer.concat(buffers);
 };
 
-export const randomizerData = async (logic: LogicResult, options: Options): Promise<Buffer> => {
+export const randomizerData = (logic: LogicResult, options: Options): Buffer => {
   const buffers = [];
   buffers.push(randomizerConfig(logic.config));
   buffers.push(randomizerHints(logic));
   return Buffer.concat(buffers);
 };
 
-export const randomize = async (rom: Buffer, opts: Options) => {
-  console.log("Randomizing...");
+export const randomize = (monitor: Monitor, rom: Buffer, opts: Options) => {
+  monitor.log("Randomizing...");
   const res = logic(opts);
   const buffer = Buffer.alloc(0x20000, 0xff);
   for (const g of GAMES) {
-    const gameBuffer = await randomizeGame(opts.settings, g, res);
-    gameBuffer.copy(buffer, OFFSETS[g]);
+    const checksBuffer = gameChecks(opts.settings, g, res);
+    const hintsBuffer = gameHints(g, res.hints);
+    checksBuffer.copy(buffer, GAME_DATA_OFFSETS[g]);
+    hintsBuffer.copy(buffer, HINTS_DATA_OFFSETS[g]);
   }
-  const data = await randomizerData(res, opts);
+  const data = randomizerData(res, opts);
   data.copy(buffer, 0);
   buffer.copy(rom, 0x03fe0000);
   return res.log;

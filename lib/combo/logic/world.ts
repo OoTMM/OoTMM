@@ -34,12 +34,16 @@ export type WorldCheck = {
   constraint: Constraint;
 } & (WorldCheckNumeric | WorldCheckSymbolic);
 
+export type WorldGossip = {
+  game: Game;
+};
+
 export type World = {
   areas: {[k: string]: WorldArea};
   checks: {[k: string]: WorldCheck};
   dungeons: {[k: string]: Set<string>};
   regions: {[k: string]: string};
-  gossip: Set<string>;
+  gossip: {[k: string]: WorldGossip};
 };
 
 const DUNGEONS_REGIONS: {[k: string]: string} = {
@@ -111,8 +115,9 @@ const loadWorldAreas = (world: World, game: Game, exprParser: ExprParser) => {
       Object.keys(locations).forEach(x => d.add(x));
     }
 
+    const worldGossip = { game };
     Object.keys(locations).forEach(x => world.regions[x] = region);
-    Object.keys(gossip).forEach(x => world.gossip.add(x));
+    Object.keys(gossip).forEach(x => world.gossip[x] = worldGossip);
   }
 };
 
@@ -161,7 +166,7 @@ const loadWorldGame = (world: World, game: Game, settings: Settings) => {
 }
 
 export const createWorld = (settings: Settings) => {
-  const world: World = { areas: {}, checks: {}, dungeons: {}, regions: {}, gossip: new Set<string>() };
+  const world: World = { areas: {}, checks: {}, dungeons: {}, regions: {}, gossip: {} };
   for (const g of GAMES) {
     loadWorldGame(world, g, settings);
   }
