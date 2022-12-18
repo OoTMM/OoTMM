@@ -56,6 +56,9 @@ class HintsSolver {
     if (isDungeonReward(item)) {
       return false;
     }
+    if (!this.settings.shuffleGerudoCard && item == 'OOT_GERUDO_CARD') {
+      return false;
+    }
     return true;
   }
 
@@ -129,6 +132,14 @@ class HintsSolver {
     /* TODO: refactor this */
     this.hintedLocations.add(this.findItem('OOT_ARROW_LIGHT')!);
     this.hintedLocations.add(this.findItem('MM_SONG_ORDER')!);
+
+    [
+      'OOT Skulltula House 10 Tokens',
+      'OOT Skulltula House 20 Tokens',
+      'OOT Skulltula House 30 Tokens',
+      'OOT Skulltula House 40 Tokens',
+      'OOT Skulltula House 50 Tokens',
+    ].forEach(x => this.hintedLocations.add(x));
 
     /* Place way of the hero hints */
     const woth = this.wayOfTheHero();
