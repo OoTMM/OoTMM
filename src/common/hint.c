@@ -105,6 +105,11 @@ void comboHintGossip(u8 key, GameState_Play* play)
                 appendCorrectItemName(&b, hint->item2);
             }
             break;
+        case HINT_TYPE_ITEM_REGION:
+            appendCorrectItemName(&b, hint->item);
+            comboTextAppendStr(&b, " can be found ");
+            comboTextAppendRegionName(&b, hint->region, 1, 0);
+            break;
         }
     }
     comboTextAppendStr(&b, "." TEXT_END);

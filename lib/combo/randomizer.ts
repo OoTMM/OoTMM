@@ -189,6 +189,19 @@ const hintBuffer = (game: Game, gossip: string, hint: HintGossip): Buffer => {
       }
     }
     break;
+  case 'item-region':
+      {
+        const region = DATA_REGIONS[hint.region];
+        if (region === undefined) {
+          throw new Error(`Unknown region ${hint.region}`);
+        }
+        const item = gi('oot', hint.item);
+        data.writeUInt8(id, 0);
+        data.writeUInt8(0x03, 1);
+        data.writeUInt8(region, 2);
+        data.writeUInt16BE(item, 4);
+      }
+      break;
   }
   return data;
 }
