@@ -20,7 +20,13 @@ export type HintGossipFoolish = {
   region: string,
 };
 
-export type HintGossip = { game: Game } & (HintGossipHero | HintGossipFoolish);
+export type HintGossipItemExact = {
+  type: 'item-exact',
+  check: string,
+  items: string[],
+};
+
+export type HintGossip = { game: Game } & (HintGossipHero | HintGossipFoolish | HintGossipItemExact);
 
 export type Hints = {
   dungeonRewards: string[];
@@ -28,6 +34,17 @@ export type Hints = {
   oathToOrder: string;
   gossip: {[k: string]: HintGossip};
 };
+
+const HINTS_ITEMS_ALWAYS = [
+  'OOT_FROGS_FINAL',
+  'OOT_FISHING',
+  'MM_RANCH_DEFENSE',
+  'MM_BUTLER_RACE',
+  'MM_COUPLE_MASK',
+  'MM_DON_GERO_CHOIR',
+  'MM_GORON_RACE',
+  'MM_GRAVEYARD_NIGHT3',
+];
 
 class HintsSolver {
   private hintedLocations = new Set<string>();
@@ -80,7 +97,10 @@ class HintsSolver {
     return new Set(locs);
   }
 
-  private findValidGossip(loc: string) {
+  private findValidGossip(locs: Set<string> | string) {
+    if (typeof locs === 'string') {
+      locs = new Set([locs]);
+    }
     const items: Items = {};
     let reachable = pathfind(this.world, items, true);
     const locations = new Set<string>();
@@ -88,7 +108,7 @@ class HintsSolver {
       let change = false;
       reachable = pathfind(this.world, items, true, reachable);
       for (const l of reachable.locations) {
-        if (locations.has(l) || l == loc) {
+        if (locations.has(l) || locs.has(l)) {
           continue;
         }
         addItem(items, this.items[l]);
@@ -189,6 +209,42 @@ class HintsSolver {
     return regions;
   }
 
+  private placeGossipItemExact(checkHint: string) {
+    const locations = this.world.checkHints[checkHint];
+    for (const l of locations) {
+      if (this.hintedLocations.has(l)) {
+        return false;
+      }
+    }
+    const items = locations.map(l => this.items[l]);
+    const gossip = this.findValidGossip(new Set(locations));
+    if (!gossip) {
+      return false;
+    }
+    this.gossip[gossip] = { game: this.world.gossip[gossip].game, type: 'item-exact', items, check: checkHint };
+    for (const l of locations) {
+      this.hintedLocations.add(l);
+    }
+    return true;
+  }
+
+  private placeGossipItemExactPool(pool: string[], count?: number) {
+    if (count === undefined) {
+      count = pool.length;
+    }
+    let placed = 0;
+    pool = shuffle(this.random, pool);
+    for (const checkHint of pool) {
+      if (placed >= count) {
+        break;
+      }
+      if (this.placeGossipItemExact(checkHint)) {
+        placed++;
+      }
+    }
+    return placed;
+  }
+
   private placeGossipFoolish(regions: {[k: string]: number}, count: number) {
     let placed = 0;
     regions = { ...regions };
@@ -250,6 +306,9 @@ class HintsSolver {
       'OOT Skulltula House 40 Tokens',
       'OOT Skulltula House 50 Tokens',
     ].forEach(x => this.hintedLocations.add(x));
+
+    /* Place always hints */
+    hints += this.placeGossipItemExactPool(HINTS_ITEMS_ALWAYS);
 
     hints += this.placeGossipFoolish(foolishRegions, 5);
 

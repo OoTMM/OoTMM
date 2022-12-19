@@ -32,6 +32,7 @@ export type WorldCheck = {
   scene: string;
   item: string;
   constraint: Constraint;
+  hint: string;
 } & (WorldCheckNumeric | WorldCheckSymbolic);
 
 export type WorldGossip = {
@@ -44,6 +45,7 @@ export type World = {
   dungeons: {[k: string]: Set<string>};
   regions: {[k: string]: string};
   gossip: {[k: string]: WorldGossip};
+  checkHints: {[k: string]: string[]};
 };
 
 const DUNGEONS_REGIONS: {[k: string]: string} = {
@@ -134,8 +136,16 @@ const loadWorldPool = (world: World, game: Game, settings: Settings) => {
     }
     const item = gameId(game, String(record.item), '_');
     const constraint = itemConstraint(item, settings);
+    let hint = String(record.hint);
+    if (hint !== 'NONE') {
+      hint = gameId(game, hint, '_');
+      if (world.checkHints[hint] === undefined) {
+        world.checkHints[hint] = [];
+      }
+      world.checkHints[hint].push(location);
+    }
 
-    const check = { game, type, scene, id, item, constraint } as WorldCheck;
+    const check = { game, type, scene, id, item, constraint, hint } as WorldCheck;
     world.checks[location] = check;
   }
 };
@@ -166,7 +176,7 @@ const loadWorldGame = (world: World, game: Game, settings: Settings) => {
 }
 
 export const createWorld = (settings: Settings) => {
-  const world: World = { areas: {}, checks: {}, dungeons: {}, regions: {}, gossip: {} };
+  const world: World = { areas: {}, checks: {}, dungeons: {}, regions: {}, gossip: {}, checkHints: {} };
   for (const g of GAMES) {
     loadWorldGame(world, g, settings);
   }

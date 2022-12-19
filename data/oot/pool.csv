@@ -1,4 +1,4 @@
-location,                                             type,           check,                scene,                          id,                         item
+location,                                             type,           hint,                 scene,                          id,                         item
 Kokiri Forest Mido Top Left,                          chest,          NONE,                 KOKIRI_MIDO,                    0x00,                       RUPEE_BLUE
 Kokiri Forest Mido Top Right,                         chest,          NONE,                 KOKIRI_MIDO,                    0x01,                       RUPEE_BLUE
 Kokiri Forest Mido Bottom Left,                       chest,          NONE,                 KOKIRI_MIDO,                    0x02,                       RUPEE_GREEN
@@ -84,7 +84,7 @@ Zora River HP Pillar,                                 collectible,    NONE,     
 Zora River HP Platform,                               collectible,    NONE,                 ZORA_RIVER,                     0x0b,                       HEART_PIECE
 Zora River Bean Seller,                               npc,            NONE,                 ZORA_RIVER,                     BEAN_SELLER,                MAGIC_BEAN
 Zora River Frogs Storms,                              npc,            NONE,                 ZORA_RIVER,                     FROGS_STORMS,               HEART_PIECE
-Zora River Frogs Game,                                npc,            NONE,                 ZORA_RIVER,                     FROGS_GAME,                 HEART_PIECE
+Zora River Frogs Game,                                npc,            FROGS_FINAL,          ZORA_RIVER,                     FROGS_GAME,                 HEART_PIECE
 Zora River Grotto,                                    chest,          NONE,                 GROTTOS,                        0x09,                       RUPEE_RED
 Zora River GS Tree,                                   gs,             NONE,                 ZORA_RIVER,                     0x91,                       GS_TOKEN
 Zora River GS Ladder,                                 gs,             NONE,                 ZORA_RIVER,                     0x90,                       GS_TOKEN
@@ -110,8 +110,8 @@ Lake Hylia GS Big Tree,                               gs,             NONE,     
 Laboratory Dive,                                      npc,            NONE,                 LABORATORY,                     LABORATORY_DIVE,            HEART_PIECE
 Laboratory Eye Drops,                                 npc,            NONE,                 LABORATORY,                     TRADE_EYE_DROPS,            EYE_DROPS
 Laboratory GS Crate,                                  gs,             NONE,                 LABORATORY,                     0x9b,                       GS_TOKEN
-Fishing Pond Child,                                   npc,            NONE,                 FISHING_POND,                   FISH_CHILD,                 HEART_PIECE
-Fishing Pond Adult,                                   npc,            NONE,                 FISHING_POND,                   FISH_ADULT,                 SCALE
+Fishing Pond Child,                                   npc,            FISHING,              FISHING_POND,                   FISH_CHILD,                 HEART_PIECE
+Fishing Pond Adult,                                   npc,            FISHING,              FISHING_POND,                   FISH_ADULT,                 SCALE
 Lon Lon Ranch Malon Song,                             npc,            NONE,                 LON_LON_RANCH,                  MALON_SONG,                 SONG_EPONA
 Lon Lon Ranch Silo HP,                                collectible,    NONE,                 RANCH_HOUSE_SILO,               0x01,                       HEART_PIECE
 Lon Lon Ranch Talon Bottle,                           npc,            NONE,                 RANCH_HOUSE_SILO,               TALON_BOTTLE,               MILK_BOTTLE

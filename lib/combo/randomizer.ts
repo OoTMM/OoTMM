@@ -1,7 +1,7 @@
 import { Buffer } from 'buffer';
 
 import { logic, LogicResult } from './logic';
-import { DATA_GI, DATA_NPC, DATA_SCENES, DATA_REGIONS, DATA_CONFIG, DATA_HINTS } from './data';
+import { DATA_GI, DATA_NPC, DATA_SCENES, DATA_REGIONS, DATA_CONFIG, DATA_HINTS_POOL } from './data';
 import { Game, GAMES } from "./config";
 import { WorldCheck } from './logic/world';
 import { Options } from './options';
@@ -137,7 +137,7 @@ const gameChecks = (settings: Settings, game: Game, logic: LogicResult): Buffer 
 
 const hintBuffer = (game: Game, gossip: string, hint: HintGossip): Buffer => {
   const data = Buffer.alloc(8, 0xff);
-  let gossipData = DATA_HINTS[game][gossip];
+  let gossipData = DATA_HINTS_POOL[game][gossip];
   if (!gossipData) {
     throw new Error(`Unknown gossip ${gossip} for game ${game}`);
   }
