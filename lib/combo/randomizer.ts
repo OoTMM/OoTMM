@@ -1,7 +1,7 @@
 import { Buffer } from 'buffer';
 
 import { logic, LogicResult } from './logic';
-import { DATA_GI, DATA_NPC, DATA_SCENES, DATA_REGIONS, DATA_CONFIG, DATA_HINTS_POOL } from './data';
+import { DATA_GI, DATA_NPC, DATA_SCENES, DATA_REGIONS, DATA_CONFIG, DATA_HINTS_POOL, DATA_HINTS } from './data';
 import { Game, GAMES } from "./config";
 import { WorldCheck } from './logic/world';
 import { Options } from './options';
@@ -171,6 +171,22 @@ const hintBuffer = (game: Game, gossip: string, hint: HintGossip): Buffer => {
       data.writeUInt8(id, 0);
       data.writeUInt8(0x01, 1);
       data.writeUInt8(region, 2);
+    }
+    break;
+  case 'item-exact':
+    {
+      const check = DATA_HINTS[hint.check];
+      if (check === undefined) {
+        throw new Error(`Unknown named check: ${hint.check}`);
+      }
+      const items = hint.items.map((item) => gi('oot', item));
+      data.writeUInt8(id, 0);
+      data.writeUInt8(0x02, 1);
+      data.writeUInt8(check, 2);
+      data.writeUInt16BE(items[0], 4);
+      if (items.length > 1) {
+        data.writeUInt16BE(items[1], 6);
+      }
     }
     break;
   }

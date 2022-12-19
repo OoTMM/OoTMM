@@ -48,5 +48,6 @@ void comboTextAppendClearColor(char** b);
 void comboTextAppendNum(char** b, int num);
 void comboTextAppendItemName(char** b, u16 itemId, int capitalize);
 void comboTextAppendRegionName(char** b, u8 regionId, int prepos, int capitalize);
+void comboTextAppendCheckName(char** b, u8 checkId);
 
 #endif

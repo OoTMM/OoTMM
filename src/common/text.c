@@ -437,6 +437,20 @@ const RegionName kRegionNamesMm[] = {
     { "on",         "the " TEXT_COLOR_RED "Moon" },
 };
 
+static const char* const kCheckNamesOot[] = {
+    "the " TEXT_COLOR_BLUE "Frogs Ocarina Game",
+    TEXT_COLOR_BLUE "Fishing",
+};
+
+static const char* const kCheckNamesMm[] = {
+    "the " TEXT_COLOR_ORANGE "Ranch Defense",
+    "the " TEXT_COLOR_GREEN  "Butler Race",
+    TEXT_COLOR_PINK "Anju and Kafei",
+    TEXT_COLOR_BLUE "Don Gero's Choir",
+    "the " TEXT_COLOR_RED "Goron Race",
+    "the " TEXT_COLOR_PINK "Graveyard Big Poe",
+};
+
 static int isItemAmbiguousOot(u16 itemId)
 {
     switch (itemId)
@@ -757,6 +771,23 @@ void comboTextAppendRegionName(char** b, u8 regionId, int prepos, int capitalize
     {
         start[0] = toupper(start[0]);
     }
+}
+
+void comboTextAppendCheckName(char** b, u8 checkId)
+{
+    const char* checkName;
+
+    if (checkId & 0x80)
+    {
+        checkName = kCheckNamesMm[(checkId & 0x7f) - 1];
+    }
+    else
+    {
+        checkName = kCheckNamesOot[(checkId & 0x7f) - 1];
+    }
+
+    comboTextAppendStr(b, checkName);
+    comboTextAppendClearColor(b);
 }
 
 void comboTextHijackItem(GameState_Play* play, u16 itemId)

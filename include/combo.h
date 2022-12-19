@@ -243,8 +243,9 @@ int comboCanAccessMoon(void);
 #define HINT_GOSSIP         0x00
 #define HINT_GOSSIP_GROTTO  0x01
 
-#define HINT_TYPE_HERO      0x00
-#define HINT_TYPE_FOOLISH   0x01
+#define HINT_TYPE_HERO          0x00
+#define HINT_TYPE_FOOLISH       0x01
+#define HINT_TYPE_ITEM_EXACT    0x02
 
 void comboInitHints(void);
 void comboHintGossip(u8 key, GameState_Play* play);

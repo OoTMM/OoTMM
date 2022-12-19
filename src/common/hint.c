@@ -45,6 +45,18 @@ void comboInitHints(void)
     DMARomToRam(HINTS_ADDR | PI_DOM1_ADDR2, gHints,  sizeof(gHints));
 }
 
+static void appendCorrectItemName(char** b, s16 gi)
+{
+    s16 itemId;
+
+#if defined(GAME_MM)
+    gi ^= MASK_FOREIGN_GI;
+#endif
+    gi = comboProgressive(gi);
+    itemId = comboItemFromGI(gi);
+    comboTextAppendItemName(b, itemId, 0);
+}
+
 void comboHintGossip(u8 key, GameState_Play* play)
 {
     char* b;
@@ -82,6 +94,16 @@ void comboHintGossip(u8 key, GameState_Play* play)
             comboTextAppendRegionName(&b, hint->region, 0, 0);
             comboTextAppendStr(&b, " is a " TEXT_COLOR_PINK "foolish choice");
             comboTextAppendClearColor(&b);
+            break;
+        case HINT_TYPE_ITEM_EXACT:
+            comboTextAppendCheckName(&b, hint->region);
+            comboTextAppendStr(&b, " gives ");
+            appendCorrectItemName(&b, hint->item);
+            if (hint->item2 != -1)
+            {
+                comboTextAppendStr(&b, " and ");
+                appendCorrectItemName(&b, hint->item2);
+            }
             break;
         }
     }
