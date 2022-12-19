@@ -366,7 +366,7 @@ const RegionName kRegionNamesOot[] = {
     { "in",         "the " TEXT_COLOR_ORANGE "Spirit Temple" },
     { "in",         "the " TEXT_COLOR_PINK "Shadow Temple" },
     { "at",         "the " TEXT_COLOR_PINK "Bottom of the Well" },
-    { "in",         "the " TEXT_COLOR_TEAL "Ice Caverns" },
+    { "in",         "the " TEXT_COLOR_TEAL "Ice Cavern" },
     { "in",         TEXT_COLOR_YELLOW "Gerudo Training Grounds" },
     { "in",         "the " TEXT_COLOR_YELLOW "Thieve's Hideout" },
     { "inside",     TEXT_COLOR_RED "Ganon's Castle" },
