@@ -46,6 +46,25 @@ const HINTS_ITEMS_ALWAYS = [
   'MM_GRAVEYARD_NIGHT3',
 ];
 
+const HINTS_ITEMS_SOMETIMES = [
+  'OOT_RAVAGED_VILLAGE',
+  'OOT_ZORA_KING',
+  'OOT_GANON_FAIRY',
+  'OOT_TEMPLE_FIRE_HAMMER',
+  'OOT_TEMPLE_FIRE_SCARECROW',
+  'OOT_GTG_WATER',
+  'OOT_HAUNTED_WASTELAND',
+  'OOT_GERUDO_ARCHERY',
+  'MM_BANK_3',
+  'MM_SOUND_CHECK',
+  'MM_BOAT_ARCHERY',
+  'MM_OSH_CHEST',
+  'MM_PINNACLE_ROCK_HP',
+  'MM_FISHERMAN_GAME',
+  'MM_SONG_ELEGY',
+  'MM_SECRET_SHRINE_HP',
+];
+
 class HintsSolver {
   private hintedLocations = new Set<string>();
   private gossip: {[k: string]: HintGossip} = {};
@@ -210,7 +229,7 @@ class HintsSolver {
   }
 
   private placeGossipItemExact(checkHint: string) {
-    const locations = this.world.checkHints[checkHint];
+    const locations = shuffle(this.random, this.world.checkHints[checkHint]);
     for (const l of locations) {
       if (this.hintedLocations.has(l)) {
         return false;
@@ -310,17 +329,34 @@ class HintsSolver {
     /* Place always hints */
     hints += this.placeGossipItemExactPool(HINTS_ITEMS_ALWAYS);
 
-    hints += this.placeGossipFoolish(foolishRegions, 5);
+    /* Place 3 sometimes hints */
+    hints += this.placeGossipItemExactPool(HINTS_ITEMS_SOMETIMES, 3);
+
+    /* Place 5 foolish hints */
+    const foolishHints = this.placeGossipFoolish(foolishRegions, 5);
+    hints += foolishHints;
+
+    const missingFoolish = 5 - foolishHints;
+    if (missingFoolish > 0) {
+      hints += this.placeGossipItemExactPool(HINTS_ITEMS_SOMETIMES, missingFoolish);
+    }
 
     /* Place way of the hero hints */
     let wothHints = 0;
     for (let i = 0; i < 150; ++i) {
       if (this.placeGossipHero(woth)) {
         ++wothHints;
+        ++hints;
         if (wothHints >= 9) {
           break;
         }
       }
+    }
+
+    /* Place remaining hints */
+    const missingHints = 34 - hints;
+    if (missingHints > 0) {
+      hints += this.placeGossipItemExactPool(HINTS_ITEMS_SOMETIMES, missingHints);
     }
 
     /* Duplicate every hint */

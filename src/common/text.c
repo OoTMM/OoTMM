@@ -440,6 +440,14 @@ const RegionName kRegionNamesMm[] = {
 static const char* const kCheckNamesOot[] = {
     "the " TEXT_COLOR_BLUE "Frogs Ocarina Game",
     TEXT_COLOR_BLUE "Fishing",
+    "a " TEXT_COLOR_PINK "Ravaged Village",
+    TEXT_COLOR_BLUE "King Zora",
+    "the " TEXT_COLOR_RED "Great Fairy outside of Ganon's Castle",
+    "the " TEXT_COLOR_RED "Fire Temple Hammer Chest",
+    "the " TEXT_COLOR_RED "Fire Temple Scarecrow Chest",
+    "the " TEXT_COLOR_YELLOW "Gerudo Training Grounds Water Room",
+    "the " TEXT_COLOR_ORANGE "Haunted Wastelands Chest",
+    "the " TEXT_COLOR_YELLOW "Gerudo Archery",
 };
 
 static const char* const kCheckNamesMm[] = {
@@ -449,6 +457,14 @@ static const char* const kCheckNamesMm[] = {
     TEXT_COLOR_BLUE "Don Gero's Choir",
     "the " TEXT_COLOR_RED "Goron Race",
     "the " TEXT_COLOR_PINK "Graveyard Big Poe",
+    "the " TEXT_COLOR_TEAL "Bank's Final Reward",
+    "the " TEXT_COLOR_TEAL "Sound Check",
+    "the " TEXT_COLOR_GREEN "Boat Archery",
+    "the " TEXT_COLOR_BLUE "Ocean Spider House Chest",
+    "the " TEXT_COLOR_BLUE "Pinnacle Rock Seahorses",
+    "the " TEXT_COLOR_BLUE "Fisherman's Game",
+    TEXT_COLOR_ORANGE "Igos du Ikana",
+    "the " TEXT_COLOR_YELLOW "Secret Shrine Final Chest",
 };
 
 static int isItemAmbiguousOot(u16 itemId)

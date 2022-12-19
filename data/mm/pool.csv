@@ -13,7 +13,7 @@ Clock Town Silver Rupee Chest,                    chest,          NONE,         
 Clock Town Postman Hat,                           npc,            NONE,               CLOCK_TOWN_EAST,            MASK_POSTMAN,           MASK_POSTMAN
 Clock Town Bank Reward 1,                         npc,            NONE,               CLOCK_TOWN_WEST,            BANK_1,                 WALLET
 Clock Town Bank Reward 2,                         npc,            NONE,               CLOCK_TOWN_WEST,            BANK_2,                 RUPEE_BLUE
-Clock Town Bank Reward 3,                         npc,            NONE,               CLOCK_TOWN_WEST,            BANK_3,                 HEART_PIECE
+Clock Town Bank Reward 3,                         npc,            BANK_3,             CLOCK_TOWN_WEST,            BANK_3,                 HEART_PIECE
 Clock Town Rosa Sisters HP,                       npc,            NONE,               CLOCK_TOWN_WEST,            ROSA_HEART_PIECE,       HEART_PIECE
 Clock Town Guru Guru Mask Bremen,                 npc,            NONE,               LAUNDRY_POOL,               MASK_BREMEN,            MASK_BREMEN
 Clock Town Great Fairy,                           npc,            NONE,               FAIRY_FOUNTAIN,             GREAT_FAIRY_TOWN,       MASK_GREAT_FAIRY
@@ -22,7 +22,7 @@ Clock Tower Roof Skull Kid Ocarina,               npc,            NONE,         
 Clock Tower Roof Skull Kid Song of Time,          npc,            NONE,               CLOCK_TOWER_ROOFTOP,        SKULL_KID_SONG,         SONG_TIME
 Mayor's Office Kafei's Mask,                      npc,            NONE,               MAYOR_HOUSE,                MASK_KAFEI,             MASK_KAFEI
 Mayor's Office HP,                                npc,            NONE,               MAYOR_HOUSE,                MAYOR_HEART_PIECE,      HEART_PIECE
-Milk Bar Troupe Leader Mask,                      npc,            NONE,               MILK_BAR,                   MASK_TROUPE_LEADER,     MASK_TROUPE_LEADER
+Milk Bar Troupe Leader Mask,                      npc,            SOUND_CHECK,        MILK_BAR,                   MASK_TROUPE_LEADER,     MASK_TROUPE_LEADER
 Milk Bar Madame Aroma Bottle,                     npc,            NONE,               MILK_BAR,                   CHATEAU_ROMANI,         BOTTLED_CHATEAU_ROMANI
 Town Archery Reward 1,                            npc,            NONE,               SHOOTING_GALLERY,           SHOOTING_GAME_TOWN_1,   BOW
 Town Archery Reward 2,                            npc,            NONE,               SHOOTING_GALLERY,           SHOOTING_GAME_TOWN_2,   HEART_PIECE
@@ -71,7 +71,7 @@ Swamp Archery Reward 1,                           npc,            NONE,         
 Swamp Archery Reward 2,                           npc,            NONE,               SHOOTING_GALLERY_SWAMP,     SHOOTING_GAME_SWAMP_2,  HEART_PIECE
 Swamp Potion Shop Kotake,                         npc,            NONE,               POTION_SHOP,                KOTAKE_RED_POTION,      BOTTLED_POTION_RED
 Tourist Information Pictobox,                     npc,            NONE,               TOURIST_INFORMATION,        KOUME_PICTOGRAPH_BOX,   PICTOGRAPH_BOX
-Tourist Information Boat Cruise,                  npc,            NONE,               TOURIST_INFORMATION,        KOUME_HEART_PIECE,      HEART_PIECE
+Tourist Information Boat Cruise,                  npc,            BOAT_ARCHERY,       TOURIST_INFORMATION,        KOUME_HEART_PIECE,      HEART_PIECE
 Tourist Information Tingle Picture,               npc,            NONE,               TOURIST_INFORMATION,        TOUR_GUIDE_HEART_PIECE, HEART_PIECE
 Deku Palace HP,                                   collectible,    NONE,               DEKU_PALACE,                0x1e,                   HEART_PIECE
 Deku Palace Sonata of Awakening,                  npc,            NONE,               DEKU_KING_CHAMBER,          SONG_AWAKENING,         SONG_AWAKENING
@@ -114,7 +114,7 @@ Doggy Racetrack Chest,                            chest,          NONE,         
 Doggy Racetrack HP,                               npc,            NONE,               DOG_RACETRACK,              DOG_LADY_HEART_PIECE,   HEART_PIECE
 Great Bay Coast Zora Mask,                        npc,            NONE,               GREAT_BAY_COAST,            MASK_ZORA,              MASK_ZORA
 Great Bay Coast HP,                               collectible,    NONE,               GREAT_BAY_COAST,            0x05,                   HEART_PIECE
-Great Bay Coast Fisherman HP,                     npc,            NONE,               GREAT_BAY_COAST,            FISHERMAN_HEART_PIECE,  HEART_PIECE
+Great Bay Coast Fisherman HP,                     npc,            FISHERMAN_GAME,     GREAT_BAY_COAST,            FISHERMAN_HEART_PIECE,  HEART_PIECE
 Great Bay Coast Fisherman Grotto,                 chest,          NONE,               GROTTOS,                    0x17,                   RUPEE_RED
 Zora Cape Ledge Chest 1,                          chest,          NONE,               ZORA_CAPE,                  0x01,                   RUPEE_RED
 Zora Cape Ledge Chest 2,                          chest,          NONE,               ZORA_CAPE,                  0x02,                   RUPEE_RED
@@ -128,11 +128,11 @@ Zora Hall Evan HP,                                npc,            NONE,         
 Zora Hall Scene Lights,                           npc,            NONE,               ZORA_HALL,                  ZORA_HALL_LIGHTS,       RUPEE_BLUE
 Pinnacle Rock Chest 1,                            chest,          NONE,               PINNACLE_ROCK,              0x01,                   RUPEE_RED
 Pinnacle Rock Chest 2,                            chest,          NONE,               PINNACLE_ROCK,              0x02,                   RUPEE_RED
-Pinnacle Rock HP,                                 npc,            NONE,               PINNACLE_ROCK,              SEAHORSE_HEART_PIECE,   HEART_PIECE
+Pinnacle Rock HP,                                 npc,            PINNACLE_ROCK_HP,   PINNACLE_ROCK,              SEAHORSE_HEART_PIECE,   HEART_PIECE
 Laboratory Zora Song,                             npc,            NONE,               LABORATORY,                 SONG_ZORA,              SONG_ZORA
 Laboratory Fish HP,                               npc,            NONE,               LABORATORY,                 LAB_FISH_HEART_PIECE,   HEART_PIECE
 Ocean Spider House Wallet,                        npc,            NONE,               SPIDER_HOUSE_OCEAN,         SPIDER_HOUSE_OCEAN,     WALLET
-Ocean Spider House Chest HP,                      chest,          NONE,               SPIDER_HOUSE_OCEAN,         0x00,                   HEART_PIECE
+Ocean Spider House Chest HP,                      chest,          OSH_CHEST,          SPIDER_HOUSE_OCEAN,         0x00,                   HEART_PIECE
 Waterfall Rapids Beaver Race 1,                   npc,            NONE,               WATERFALL_RAPIDS,           BEAVER_1,               EMPTY_BOTTLE
 Waterfall Rapids Beaver Race 2,                   npc,            NONE,               WATERFALL_RAPIDS,           BEAVER_2,               HEART_PIECE
 Road to Ikana Chest,                              chest,          NONE,               ROAD_IKANA,                 0x00,                   RUPEE_RED
@@ -239,7 +239,7 @@ Beneath the Well Skulltulla Chest,                chest,          NONE,         
 Beneath the Well Keese Chest,                     chest,          NONE,               BENEATH_THE_WELL,           0x02,                   RUPEE_PURPLE
 Beneath the Well Mirror Shield,                   chest,          NONE,               BENEATH_THE_WELL,           0x1b,                   SHIELD
 Ancient Castle of Ikana HP,                       collectible,    NONE,               CASTLE_IKANA,               0x0a,                   HEART_PIECE
-Ancient Castle of Ikana Song Emptiness,           npc,            NONE,               LAIR_IKANA,                 SONG_EMPTINESS,         SONG_EMPTINESS
+Ancient Castle of Ikana Song Emptiness,           npc,            SONG_ELEGY,         LAIR_IKANA,                 SONG_EMPTINESS,         SONG_EMPTINESS
 Stone Tower Temple Entrance Chest,                chest,          NONE,               TEMPLE_STONE_TOWER,         0x16,                   STRAY_FAIRY_ST
 Stone Tower Temple Entrance Switch Chest,         chest,          NONE,               TEMPLE_STONE_TOWER,         0x12,                   STRAY_FAIRY_ST
 Stone Tower Temple Under West Garden Ledge Chest, chest,          NONE,               TEMPLE_STONE_TOWER,         0x15,                   STRAY_FAIRY_ST
@@ -270,7 +270,7 @@ Secret Shrine Boss 1 Chest,                       chest,          NONE,         
 Secret Shrine Boss 2 Chest,                       chest,          NONE,               SECRET_SHRINE,              0x01,                   RUPEE_SILVER
 Secret Shrine Boss 3 Chest,                       chest,          NONE,               SECRET_SHRINE,              0x02,                   RUPEE_SILVER
 Secret Shrine Boss 4 Chest,                       chest,          NONE,               SECRET_SHRINE,              0x03,                   RUPEE_SILVER
-Secret Shrine HP Chest,                           chest,          NONE,               SECRET_SHRINE,              0x0a,                   HEART_PIECE
+Secret Shrine HP Chest,                           chest,          SECRET_SHRINE_HP,   SECRET_SHRINE,              0x0a,                   HEART_PIECE
 Moon Trial Deku HP,                               collectible,    NONE,               MOON_DEKU,                  0x01,                   HEART_PIECE
 Moon Trial Goron HP,                              collectible,    NONE,               MOON_GORON,                 0x01,                   HEART_PIECE
 Moon Trial Zora HP,                               collectible,    NONE,               MOON_ZORA,                  0x01,                   HEART_PIECE

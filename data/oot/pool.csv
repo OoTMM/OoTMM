@@ -32,7 +32,7 @@ Sacred Meadow GS Night Adult,                         gs,             NONE,     
 Kakariko Anju Bottle,                                 npc,            NONE,                 KAKARIKO_VILLAGE,               ANJU_BOTTLE,                EMPTY_BOTTLE
 Kakariko Anju Egg,                                    npc,            NONE,                 KAKARIKO_VILLAGE,               TRADE_POCKET_EGG,           POCKET_CUCCO
 Kakariko Anju Cojiro,                                 npc,            NONE,                 KAKARIKO_VILLAGE,               TRADE_COJIRO,               COJIRO
-Kakariko Song Shadow,                                 npc,            NONE,                 KAKARIKO_VILLAGE,               SHEIK_SHADOW,               SONG_TP_SHADOW
+Kakariko Song Shadow,                                 npc,            RAVAGED_VILLAGE,      KAKARIKO_VILLAGE,               SHEIK_SHADOW,               SONG_TP_SHADOW
 Kakariko Man on Roof,                                 npc,            NONE,                 KAKARIKO_VILLAGE,               KAKARIKO_ROOF_MAN,          HEART_PIECE
 Kakariko Impa House HP,                               collectible,    NONE,                 IMPA_HOUSE,                     0x01,                       HEART_PIECE
 Kakariko Grotto Front,                                chest,          NONE,                 GROTTOS,                        0x0a,                       RUPEE_HUGE
@@ -92,8 +92,8 @@ Zora River GS Near Grotto,                            gs,             NONE,     
 Zora River GS Near Bridge,                            gs,             NONE,                 ZORA_RIVER,                     0x93,                       GS_TOKEN
 Zora Domain Waterfall Chest,                          chest,          NONE,                 ZORA_DOMAIN,                    0x00,                       HEART_PIECE
 Zora Domain Diving Game,                              npc,            NONE,                 ZORA_DOMAIN,                    ZORA_DIVING_GAME,           SCALE
-Zora Domain Tunic,                                    npc,            NONE,                 ZORA_DOMAIN,                    ZORA_KING_TUNIC,            TUNIC_ZORA
-Zora Domain Eyeball Frog,                             npc,            NONE,                 ZORA_DOMAIN,                    TRADE_EYEBALL_FROG,         EYEBALL_FROG
+Zora Domain Tunic,                                    npc,            ZORA_KING,            ZORA_DOMAIN,                    ZORA_KING_TUNIC,            TUNIC_ZORA
+Zora Domain Eyeball Frog,                             npc,            ZORA_KING,            ZORA_DOMAIN,                    TRADE_EYEBALL_FROG,         EYEBALL_FROG
 Zora Domain GS Waterfall,                             gs,             NONE,                 ZORA_DOMAIN,                    0x96,                       GS_TOKEN
 Zora Fountain Iceberg HP,                             collectible,    NONE,                 ZORA_FOUNTAIN,                  0x01,                       HEART_PIECE
 Zora Fountain Bottom HP,                              collectible,    NONE,                 ZORA_FOUNTAIN,                  0x14,                       HEART_PIECE
@@ -154,11 +154,11 @@ Gerudo Valley GS Wall,                                gs,             NONE,     
 Gerudo Valley GS Tent,                                gs,             NONE,                 GERUDO_VALLEY,                  0xa3,                       GS_TOKEN
 Gerudo Valley GS Pillar,                              gs,             NONE,                 GERUDO_VALLEY,                  0xa2,                       GS_TOKEN
 Gerudo Fortress Chest,                                chest,          NONE,                 GERUDO_FORTRESS,                0x00,                       HEART_PIECE
-Gerudo Fortress Archery Reward 1,                     npc,            NONE,                 GERUDO_FORTRESS,                GERUDO_ARCHERY_1,           HEART_PIECE
-Gerudo Fortress Archery Reward 2,                     npc,            NONE,                 GERUDO_FORTRESS,                GERUDO_ARCHERY_2,           BOW
+Gerudo Fortress Archery Reward 1,                     npc,            GERUDO_ARCHERY,       GERUDO_FORTRESS,                GERUDO_ARCHERY_1,           HEART_PIECE
+Gerudo Fortress Archery Reward 2,                     npc,            GERUDO_ARCHERY,       GERUDO_FORTRESS,                GERUDO_ARCHERY_2,           BOW
 Gerudo Fortress GS Wall,                              gs,             NONE,                 GERUDO_FORTRESS,                0xa9,                       GS_TOKEN
 Gerudo Fortress GS Target,                            gs,             NONE,                 GERUDO_FORTRESS,                0xa8,                       GS_TOKEN
-Haunted Wasteland Chest,                              chest,          NONE,                 HAUNTED_WASTELAND,              0x00,                       RUPEE_PURPLE
+Haunted Wasteland Chest,                              chest,          HAUNTED_WASTELAND,    HAUNTED_WASTELAND,              0x00,                       RUPEE_PURPLE
 Haunted Wasteland GS,                                 gs,             NONE,                 HAUNTED_WASTELAND,              0xb1,                       GS_TOKEN
 Desert Colossus HP,                                   collectible,    NONE,                 DESERT_COLOSSUS,                0x0d,                       HEART_PIECE
 Desert Colossus Song Spirit,                          npc,            NONE,                 DESERT_COLOSSUS,                SHEIK_SPIRIT,               SONG_TP_SPIRIT
@@ -172,7 +172,7 @@ Skulltula House 40 Tokens,                            npc,            NONE,     
 Skulltula House 50 Tokens,                            npc,            NONE,                 HOUSE_OF_SKULLTULA,             GS_50,                      HEART_PIECE
 Great Fairy Magic Upgrade,                            npc,            NONE,                 GREAT_FAIRY_FOUNTAIN_UPGRADES,  FAIRY_MAGIC_UPGRADE,        MAGIC_UPGRADE
 Great Fairy Magic Upgrade 2,                          npc,            NONE,                 GREAT_FAIRY_FOUNTAIN_UPGRADES,  FAIRY_MAGIC_UPGRADE2,       MAGIC_UPGRADE
-Great Fairy Defense Upgrade,                          npc,            NONE,                 GREAT_FAIRY_FOUNTAIN_UPGRADES,  FAIRY_DEFENSE_UPGRADE,      DEFENSE_UPGRADE
+Great Fairy Defense Upgrade,                          npc,            GANON_FAIRY,          GREAT_FAIRY_FOUNTAIN_UPGRADES,  FAIRY_DEFENSE_UPGRADE,      DEFENSE_UPGRADE
 Great Fairy Din's Fire,                               npc,            NONE,                 GREAT_FAIRY_FOUNTAIN_SPELLS,    FAIRY_SPELL_FIRE,           SPELL_FIRE
 Great Fairy Farore's Wind,                            npc,            NONE,                 GREAT_FAIRY_FOUNTAIN_SPELLS,    FAIRY_SPELL_WIND,           SPELL_WIND
 Great Fairy Nayru's Love,                             npc,            NONE,                 GREAT_FAIRY_FOUNTAIN_SPELLS,    FAIRY_SPELL_LOVE,           SPELL_LOVE
@@ -241,9 +241,9 @@ Fire Temple Map,                                      chest,          NONE,     
 Fire Temple Above Maze Chest,                         chest,          NONE,                 TEMPLE_FIRE,                    0x06,                       SMALL_KEY_FIRE
 Fire Temple Below Maze Chest,                         chest,          NONE,                 TEMPLE_FIRE,                    0x0b,                       SMALL_KEY_FIRE
 Fire Temple Compass,                                  chest,          NONE,                 TEMPLE_FIRE,                    0x07,                       COMPASS_FIRE
-Fire Temple Hammer,                                   chest,          NONE,                 TEMPLE_FIRE,                    0x05,                       HAMMER
+Fire Temple Hammer,                                   chest,          TEMPLE_FIRE_HAMMER,   TEMPLE_FIRE,                    0x05,                       HAMMER
 Fire Temple Ring Jail,                                chest,          NONE,                 TEMPLE_FIRE,                    0x09,                       RUPEE_RED
-Fire Temple Scarecrow Chest,                          chest,          NONE,                 TEMPLE_FIRE,                    0x0d,                       RUPEE_HUGE
+Fire Temple Scarecrow Chest,                          chest,          TEMPLE_FIRE_SCARECROW,TEMPLE_FIRE,                    0x0d,                       RUPEE_HUGE
 Fire Temple GS Lava Side Room,                        gs,             NONE,                 TEMPLE_FIRE,                    0x28,                       GS_TOKEN
 Fire Temple GS Hammer Statues,                        gs,             NONE,                 TEMPLE_FIRE,                    0x29,                       GS_TOKEN
 Fire Temple GS Maze,                                  gs,             NONE,                 TEMPLE_FIRE,                    0x2a,                       GS_TOKEN
@@ -360,7 +360,7 @@ Gerudo Training Grounds Eye Statue,                   chest,          NONE,     
 Gerudo Training Grounds Hammer Room Switch,           chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x10,                       SMALL_KEY_GTG
 Gerudo Training Grounds Hammer Room,                  chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x12,                       ARROWS_10
 Gerudo Training Grounds Lizalfos,                     chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x01,                       SMALL_KEY_GTG
-Gerudo Training Water,                                chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x0d,                       SMALL_KEY_GTG
+Gerudo Training Water,                                chest,          GTG_WATER,            GERUDO_TRAINING_GROUND,         0x0d,                       SMALL_KEY_GTG
 Gerudo Training Freestanding Key,                     collectible,    NONE,                 GERUDO_TRAINING_GROUND,         0x01,                       SMALL_KEY_GTG
 Gerudo Training Maze Upper Cage,                      chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x04,                       SMALL_KEY_GTG
 Gerudo Training Maze Upper Fake Ceiling,              chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x0b,                       SMALL_KEY_GTG
