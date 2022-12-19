@@ -26,7 +26,13 @@ export type HintGossipItemExact = {
   items: string[],
 };
 
-export type HintGossip = { game: Game } & (HintGossipHero | HintGossipFoolish | HintGossipItemExact);
+export type HintGossipItemRegion = {
+  type: 'item-region',
+  region: string,
+  item: string;
+};
+
+export type HintGossip = { game: Game } & (HintGossipHero | HintGossipFoolish | HintGossipItemExact | HintGossipItemRegion);
 
 export type Hints = {
   dungeonRewards: string[];
@@ -85,6 +91,16 @@ class HintsSolver {
       }
     }
     return null;
+  }
+
+  private findItems(item: string) {
+    const locs: string[] = [];
+    for (const loc in this.items) {
+      if (this.items[loc] === item) {
+        locs.push(loc);
+      }
+    }
+    return locs;
   }
 
   private isItemWayOfTheHero(item: string) {
@@ -229,6 +245,9 @@ class HintsSolver {
   }
 
   private placeGossipItemExact(checkHint: string) {
+    if (checkHint === 'NONE') {
+      return false;
+    }
     const locations = shuffle(this.random, this.world.checkHints[checkHint]);
     for (const l of locations) {
       if (this.hintedLocations.has(l)) {
@@ -296,6 +315,39 @@ class HintsSolver {
     return true;
   }
 
+  private placeGossipItemRegion(item: string) {
+    const locations = this.findItems(item).filter(x => !this.hintedLocations.has(x));
+    if (locations.length === 0) {
+      return false;
+    }
+    const location = sample(this.random, locations);
+    const hint = this.world.checks[location].hint;
+    if (this.placeGossipItemExact(hint)) {
+      return true;
+    }
+    const gossip = this.findValidGossip(location);
+    if (gossip === null) {
+      return false;
+    }
+    this.gossip[gossip] = { game: this.world.gossip[gossip].game, type: 'item-region', item, region: this.world.regions[location] };
+    this.hintedLocations.add(location);
+    return true;
+  }
+
+  private placeGossipItemRegionSpheres(count: number) {
+    const items = shuffle(this.random, this.spheres.flat().map(x => this.items[x]));
+    let placed = 0;
+    for (const item of items) {
+      if (placed >= count) {
+        break;
+      }
+      if (this.placeGossipItemRegion(item)) {
+        placed++;
+      }
+    }
+    return placed;
+  }
+
   private duplicateHints() {
     const hints = shuffle(this.random, Object.values(this.gossip).map(x => ({ ...x })));
     const locs = new Set<string>(Object.keys(this.world.gossip));
@@ -340,6 +392,14 @@ class HintsSolver {
     if (missingFoolish > 0) {
       hints += this.placeGossipItemExactPool(HINTS_ITEMS_SOMETIMES, missingFoolish);
     }
+
+    /* Place Soaring spoiler */
+    if (this.placeGossipItemRegion('MM_SONG_SOARING')) {
+      hints++;
+    }
+
+    /* Place sphere spoilers */
+    hints += this.placeGossipItemRegionSpheres(4);
 
     /* Place way of the hero hints */
     let wothHints = 0;

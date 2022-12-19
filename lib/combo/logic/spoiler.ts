@@ -14,7 +14,10 @@ const spoilerHints = (buffer: string[], hints: Hints, placement: ItemPlacement) 
       buffer.push(`  ${gossip}: Foolish, ${h.region}`);
     }
     if (h.type === 'item-exact') {
-      buffer.push(`  ${gossip}: Item, ${h.check} (${h.items.join(', ')})`);
+      buffer.push(`  ${gossip}: Item-Exact, ${h.check} (${h.items.join(', ')})`);
+    }
+    if (h.type === 'item-region') {
+      buffer.push(`  ${gossip}: Item-Region, ${h.region} (${h.item})`);
     }
   }
   buffer.push('');
