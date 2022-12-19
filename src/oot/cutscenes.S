@@ -19,3 +19,8 @@ PATCH_END
 PATCH_START 0x80056e4c
   li v0,1
 PATCH_END
+
+/* Disable the tower collapse cutscene */
+PATCH_START 0x80056f3c
+  li v0,1
+PATCH_END
