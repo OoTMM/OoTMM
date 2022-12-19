@@ -84,6 +84,7 @@ void hookPlay_Init(GameState_Play* play)
     {
         /* Moon crash */
         gSave.entranceIndex = 0xd800;
+        comboReadForeignSave();
     }
 
     comboObjectsReset();
