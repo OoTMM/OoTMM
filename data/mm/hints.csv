@@ -1,0 +1,29 @@
+location,                                             type,             id
+Termina Field Gossip Near Observatory,                gossip,           0x11
+Termina Field Gossip Southeast,                       gossip,           0x00
+Termina Field Gossip Southwest,                       gossip,           0x08
+Termina Field Gossip Northeast,                       gossip,           0x0b
+Termina Field Gossip Near Mountain,                   gossip,           0x0a
+Termina Field Gossip Near Kamaro,                     gossip,           0x09
+Road to Southern Swamp Gossip,                        gossip,           0x10
+Southern Swamp Gossip,                                gossip,           0x01
+Swamp Spider House Gossip,                            gossip,           0x17
+Mountain Village Path Gossip,                         gossip,           0x03
+Mountain Village Gossip Outside,                      gossip,           0x16
+Mountain Village Gossip Tunnel,                       gossip,           0x02
+Milk Road Gossip,                                     gossip,           0x0e
+Romani Ranch Gossip Entrance,                         gossip,           0x14
+Romani Ranch Gossip Behind House,                     gossip,           0x0d
+Romani Ranch Gossip Near Tree,                        gossip,           0x0c
+Cucco Shack Gossip,                                   gossip,           0x12
+Doggy Racetrack Gossip,                               gossip,           0x13
+Great Bay Coast Gossip,                               gossip,           0x0f
+Zora Cape Gossip,                                     gossip,           0x04
+Road to Ikana Gossip,                                 gossip,           0x05
+Ikana Valley Gossip Lower,                            gossip,           0x06
+Ikana Valley Gossip Scrub,                            gossip,           0x15
+Ikana Canyon Gossip Upper,                            gossip,           0x07
+Termina Field Gossip Grotto Leftmost,                 gossip-grotto,    0x00
+Termina Field Gossip Grotto Left-Center,              gossip-grotto,    0x01
+Termina Field Gossip Grotto Right-Center,             gossip-grotto,    0x02
+Termina Field Gossip Grotto Rightmost,                gossip-grotto,    0x03

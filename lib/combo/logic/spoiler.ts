@@ -1,7 +1,27 @@
-import { Options } from "../options";
-import { playthrough } from "./playthrough";
-import { ItemPlacement } from "./solve";
-import { World } from "./world";
+import { Options } from '../options';
+import { Hints } from './hints';
+import { ItemPlacement } from './solve';
+import { World } from './world';
+
+const spoilerHints = (buffer: string[], hints: Hints, placement: ItemPlacement) => {
+  buffer.push('Hints');
+  for (const gossip in hints.gossip) {
+    const h = hints.gossip[gossip];
+    if (h.type === 'hero') {
+      buffer.push(`  ${gossip}: Hero, ${h.region} (${h.location}: ${placement[h.location]})`);
+    }
+    if (h.type === 'foolish') {
+      buffer.push(`  ${gossip}: Foolish, ${h.region}`);
+    }
+    if (h.type === 'item-exact') {
+      buffer.push(`  ${gossip}: Item-Exact, ${h.check} (${h.items.join(', ')})`);
+    }
+    if (h.type === 'item-region') {
+      buffer.push(`  ${gossip}: Item-Region, ${h.region} (${h.item})`);
+    }
+  }
+  buffer.push('');
+};
 
 const spoilerRaw = (buffer: string[], placement: ItemPlacement) => {
   for (const loc in placement) {
@@ -10,8 +30,7 @@ const spoilerRaw = (buffer: string[], placement: ItemPlacement) => {
   buffer.push('');
 };
 
-const spoilerSpheres = (buffer: string[], world: World, placement: ItemPlacement) => {
-  const spheres = playthrough(world, placement);
+const spoilerSpheres = (buffer: string[], world: World, placement: ItemPlacement, spheres: string[][]) => {
   for (const i in spheres) {
     buffer.push(`Sphere ${i}`);
     const sphere = spheres[i];
@@ -22,13 +41,14 @@ const spoilerSpheres = (buffer: string[], world: World, placement: ItemPlacement
   }
 };
 
-export const spoiler = (world: World, placement: ItemPlacement, opts: Options) => {
+export const spoiler = (world: World, placement: ItemPlacement, spheres: string[][], opts: Options, hints: Hints) => {
   const buffer: string[] = [];
   buffer.push(`Seed: ${opts.seed}`);
   buffer.push('');
-  spoilerRaw(buffer, placement);
+  spoilerHints(buffer, hints, placement);
   if (!opts.settings.noLogic) {
-    spoilerSpheres(buffer, world, placement);
+    spoilerSpheres(buffer, world, placement, spheres);
   }
+  spoilerRaw(buffer, placement);
   return buffer.join("\n");
 };

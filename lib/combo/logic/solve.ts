@@ -1,5 +1,5 @@
 import { GAMES } from '../config';
-import { Random } from '../random';
+import { Random, sample, shuffle } from '../random';
 import { gameId } from '../util';
 import { pathfind, Reachable } from './pathfind';
 import { Items } from './state';
@@ -7,145 +7,9 @@ import { World } from './world';
 import { LogicSeedError } from './error';
 import { CONSTRAINTS, itemConstraint } from './constraints';
 import { Options } from '../options';
+import { addItem, combinedItems, DUNGEON_REWARDS, itemsArray, removeItem, ITEMS_REQUIRED } from './items';
 
 const ITEMS_DUNGEON = /^(OOT|MM)_(MAP|COMPASS|SMALL_KEY|BOSS_KEY|STRAY_FAIRY)_[A-Z_]+$/;
-export const ORDERED_DUNGEON_REWARDS = [
-  'OOT_STONE_EMERALD',
-  'OOT_STONE_RUBY',
-  'OOT_STONE_SAPPHIRE',
-  'OOT_MEDALLION_LIGHT',
-  'OOT_MEDALLION_FOREST',
-  'OOT_MEDALLION_FIRE',
-  'OOT_MEDALLION_WATER',
-  'OOT_MEDALLION_SPIRIT',
-  'OOT_MEDALLION_SHADOW',
-  'MM_REMAINS_ODOLWA',
-  'MM_REMAINS_GOHT',
-  'MM_REMAINS_GYORG',
-  'MM_REMAINS_TWINMOLD',
-];
-
-export const ITEMS_DUNGEON_REWARDS = new Set(ORDERED_DUNGEON_REWARDS);
-
-export const ITEMS_REQUIRED = new Set<string>([
-  'OOT_GS_TOKEN',
-  'OOT_ARROW_FIRE',
-  'OOT_ARROW_LIGHT',
-  'OOT_BOMB_BAG',
-  'OOT_BOMBCHUS_10',
-  'OOT_BOOMERANG',
-  'OOT_BOOTS_HOVER',
-  'OOT_BOOTS_IRON',
-  'OOT_BOW',
-  'OOT_CHICKEN',
-  'OOT_EMPTY_BOTTLE',
-  'OOT_GERUDO_CARD',
-  'OOT_HAMMER',
-  'OOT_HOOKSHOT',
-  'OOT_LENS',
-  'OOT_MAGIC_UPGRADE',
-  'OOT_OCARINA',
-  'OOT_RUTO_LETTER',
-  'OOT_SCALE',
-  'OOT_SHIELD',
-  'OOT_SLINGSHOT',
-  'OOT_SONG_EPONA',
-  'OOT_SONG_SARIA',
-  'OOT_SONG_STORMS',
-  'OOT_SONG_SUN',
-  'OOT_SONG_TIME',
-  'OOT_SONG_ZELDA',
-  'OOT_SONG_TP_FIRE',
-  'OOT_SONG_TP_SHADOW',
-  'OOT_SONG_TP_SPIRIT',
-  'OOT_SPELL_FIRE',
-  'OOT_STRENGTH',
-  'OOT_SWORD',
-  'OOT_TUNIC_GORON',
-  'OOT_TUNIC_ZORA',
-  'OOT_ZELDA_LETTER',
-  'OOT_MAGIC_BEAN',
-  'OOT_MILK_BOTTLE',
-  'OOT_STONE_OF_AGONY',
-  'OOT_WALLET',
-  'OOT_POCKET_CUCCO',
-  'OOT_COJIRO',
-  'OOT_ODD_MUSHROOM',
-  'OOT_ODD_POTION',
-  'OOT_POACHER_SAW',
-  'OOT_BROKEN_GORON_SWORD',
-  'OOT_PRESCRIPTION',
-  'OOT_EYEBALL_FROG',
-  'OOT_EYE_DROPS',
-  'OOT_CLAIM_CHECK',
-  'OOT_MASK_TRUTH',
-  'OOT_MASK_SKULL',
-  'MM_MASK_DEKU',
-  'MM_MASK_GORON',
-  'MM_MASK_ZORA',
-  'MM_MASK_CAPTAIN',
-  'MM_MASK_GIANT',
-  'MM_MASK_ALL_NIGHT',
-  'MM_MASK_BUNNY',
-  'MM_MASK_KEATON',
-  'MM_MASK_GARO',
-  'MM_MASK_ROMANI',
-  'MM_MASK_TROUPE_LEADER',
-  'MM_MASK_POSTMAN',
-  'MM_MASK_COUPLE',
-  'MM_MASK_GREAT_FAIRY',
-  'MM_MASK_GIBDO',
-  'MM_MASK_DON_GERO',
-  'MM_MASK_KAMARO',
-  'MM_MASK_TRUTH',
-  'MM_MASK_STONE',
-  'MM_MASK_BREMEN',
-  'MM_MASK_BLAST',
-  'MM_MASK_SCENTS',
-  'MM_MASK_KAFEI',
-  'MM_MASK_FIERCE_DEITY',
-  'MM_BOTTLED_POTION_RED',
-  'MM_BOTTLED_GOLD_DUST',
-  'MM_EMPTY_BOTTLE',
-  'MM_BOTTLED_MILK',
-  'MM_MAGIC_UPGRADE',
-  'MM_SONG_TIME',
-  'MM_SONG_AWAKENING',
-  'MM_SONG_HEALING',
-  'MM_SONG_EPONA',
-  'MM_SONG_SOARING',
-  'MM_SONG_GORON_HALF',
-  'MM_SONG_ZORA',
-  'MM_SONG_STORMS',
-  'MM_SONG_EMPTINESS',
-  'MM_SONG_ORDER',
-  'MM_BOW',
-  'MM_OCARINA',
-  'MM_SWORD',
-  'MM_SHIELD',
-  'MM_BOMB_BAG',
-  'MM_LENS',
-  'MM_ARROW_FIRE',
-  'MM_ARROW_ICE',
-  'MM_ARROW_LIGHT',
-  'MM_POWDER_KEG',
-  'MM_HOOKSHOT',
-  'MM_PICTOGRAPH_BOX',
-  'MM_MAGIC_BEAN',
-  'MM_MOON_TEAR',
-  'MM_DEED_LAND',
-  'MM_DEED_SWAMP',
-  'MM_DEED_MOUNTAIN',
-  'MM_DEED_OCEAN',
-  'MM_ROOM_KEY',
-  'MM_LETTER_TO_KAFEI',
-  'MM_PENDANT_OF_MEMORIES',
-  'MM_LETTER_TO_MAMA',
-  'MM_WALLET',
-  'MM_HEART_PIECE',
-  'MM_HEART_CONTAINER',
-  'MM_GREAT_FAIRY_SWORD',
-]);
 
 const ITEMS_JUNK = new Set<string>([
   'OOT_RUPEE_GREEN',
@@ -175,41 +39,6 @@ const EXTRA_ITEMS = [
   'MM_SWORD',
 ];
 
-const randomInt = (random: Random, max: number) => {
-  /* Create a mask that is all 1s up to the max value */
-  let mask = max - 1;
-  mask |= mask >> 1;
-  mask |= mask >> 2;
-  mask |= mask >> 4;
-  mask |= mask >> 8;
-  mask |= mask >> 16;
-
-  for (;;) {
-    const value = (random.next() >>> 8) & mask;
-    if (value < max) {
-      return value;
-    }
-  }
-};
-
-const sample = <T>(random: Random, arr: T[]): T => {
-  if (arr.length === 0) {
-    throw new Error('Empty Array');
-  }
-
-  const index = randomInt(random, arr.length);
-  return ([...arr].sort())[index];
-};
-
-const shuffle = <T>(random: Random, arr: T[]): T[] => {
-  const copy = [...arr].sort();
-  for (let i = 0; i < copy.length - 1; i++) {
-    const j = i + randomInt(random, copy.length - i);
-    [copy[i], copy[j]] = [copy[j], copy[i]];
-  }
-  return copy;
-};
-
 export type ItemPlacement = {[k: string]: string};
 
 type ItemPools = {
@@ -219,33 +48,12 @@ type ItemPools = {
   junk: Items,
 };
 
-const itemsArray = (items: Items) => {
-  const arr: string[] = [];
-  for (const item in items) {
-    for (let i = 0; i < items[item]; i++) {
-      arr.push(item);
-    }
-  }
-  return arr;
-};
-
 const poolsArray = (pools: ItemPools) => {
   return [
     ...itemsArray(pools.required),
     ...itemsArray(pools.nice),
     ...itemsArray(pools.junk),
   ];
-};
-
-export const addItem = (items: Items, item: string) => {
-  items[item] = (items[item] || 0) + 1;
-};
-
-const removeItem = (items: Items, item: string) => {
-  items[item] -= 1;
-  if (items[item] === 0) {
-    delete items[item];
-  }
 };
 
 const removeItemPools = (pools: ItemPools, item: string) => {
@@ -268,17 +76,6 @@ const maxRequired = (pools: ItemPools, item: string, count: number) => {
   pools.nice[item] = extra;
 };
 
-const combinedItems = (items: Items, other: Items) => {
-  const combined: Items = {};
-  for (const item in items) {
-    combined[item] = items[item];
-  }
-  for (const item in other) {
-    combined[item] = (combined[item] || 0) + other[item];
-  }
-  return combined;
-};
-
 class Solver {
   private placement: ItemPlacement = {};
   private items: Items = {};
@@ -297,9 +94,9 @@ class Solver {
     this.pools = this.makeItemPools();
     if (this.opts.settings.noLogic) {
       const allLocations = new Set<string>(Object.keys(this.world.checks));
-      this.reachable = { events: new Set<string>, areas: { child: new Set<string>(), adult: new Set<string>() }, locations: allLocations };
+      this.reachable = { events: new Set<string>, areas: { child: new Set<string>(), adult: new Set<string>() }, locations: allLocations, gossip: new Set<string>() };
     } else {
-      this.reachable = pathfind(this.world, {});
+      this.reachable = pathfind(this.world, {}, false);
     }
   }
 
@@ -325,7 +122,7 @@ class Solver {
 
     for (;;) {
       for (;;) {
-        this.reachable = pathfind(this.world, this.items, this.reachable);
+        this.reachable = pathfind(this.world, this.items, false, this.reachable);
         const changed = this.markAccessible();
         if (!changed) {
           break;
@@ -369,7 +166,7 @@ class Solver {
         continue;
       }
 
-      if (ITEMS_DUNGEON.test(item) || ITEMS_DUNGEON_REWARDS.has(item)) {
+      if (ITEMS_DUNGEON.test(item) || DUNGEON_REWARDS.has(item)) {
         addItem(pools.dungeon, item);
       } else if (ITEMS_REQUIRED.has(item)) {
         addItem(pools.required, item);
@@ -441,7 +238,7 @@ class Solver {
 
     for (const location in this.world.checks) {
       const item = this.world.checks[location].item;
-      if (ITEMS_DUNGEON_REWARDS.has(item)) {
+      if (DUNGEON_REWARDS.has(item)) {
         rewards.push(item);
         locations.push(location);
       }
@@ -497,7 +294,7 @@ class Solver {
     const reachableLocations = new Set(reachable.locations);
     for (;;) {
       let changed = false;
-      reachable = pathfind(this.world, assumedAccessibleItems, reachable);
+      reachable = pathfind(this.world, assumedAccessibleItems, false, reachable);
       for (const l of reachable.locations.values()) {
         if (!reachableLocations.has(l)) {
           changed = true;

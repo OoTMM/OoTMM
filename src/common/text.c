@@ -437,6 +437,36 @@ const RegionName kRegionNamesMm[] = {
     { "on",         "the " TEXT_COLOR_RED "Moon" },
 };
 
+static const char* const kCheckNamesOot[] = {
+    "the " TEXT_COLOR_BLUE "Frogs Ocarina Game",
+    TEXT_COLOR_BLUE "Fishing",
+    "a " TEXT_COLOR_PINK "Ravaged Village",
+    TEXT_COLOR_BLUE "King Zora",
+    "the " TEXT_COLOR_RED "Great Fairy outside of Ganon's Castle",
+    "the " TEXT_COLOR_RED "Fire Temple Hammer Chest",
+    "the " TEXT_COLOR_RED "Fire Temple Scarecrow Chest",
+    "the " TEXT_COLOR_YELLOW "Gerudo Training Grounds Water Room",
+    "the " TEXT_COLOR_ORANGE "Haunted Wastelands Chest",
+    "the " TEXT_COLOR_YELLOW "Gerudo Archery",
+};
+
+static const char* const kCheckNamesMm[] = {
+    "the " TEXT_COLOR_ORANGE "Ranch Defense",
+    "the " TEXT_COLOR_GREEN  "Butler Race",
+    TEXT_COLOR_PINK "Anju and Kafei",
+    TEXT_COLOR_BLUE "Don Gero's Choir",
+    "the " TEXT_COLOR_RED "Goron Race",
+    "the " TEXT_COLOR_PINK "Graveyard Big Poe",
+    "the " TEXT_COLOR_TEAL "Bank's Final Reward",
+    "the " TEXT_COLOR_TEAL "Sound Check",
+    "the " TEXT_COLOR_GREEN "Boat Archery",
+    "the " TEXT_COLOR_BLUE "Ocean Spider House Chest",
+    "the " TEXT_COLOR_BLUE "Pinnacle Rock Seahorses",
+    "the " TEXT_COLOR_BLUE "Fisherman's Game",
+    TEXT_COLOR_ORANGE "Igos du Ikana",
+    "the " TEXT_COLOR_YELLOW "Secret Shrine Final Chest",
+};
+
 static int isItemAmbiguousOot(u16 itemId)
 {
     switch (itemId)
@@ -757,6 +787,23 @@ void comboTextAppendRegionName(char** b, u8 regionId, int prepos, int capitalize
     {
         start[0] = toupper(start[0]);
     }
+}
+
+void comboTextAppendCheckName(char** b, u8 checkId)
+{
+    const char* checkName;
+
+    if (checkId & 0x80)
+    {
+        checkName = kCheckNamesMm[(checkId & 0x7f) - 1];
+    }
+    else
+    {
+        checkName = kCheckNamesOot[(checkId & 0x7f) - 1];
+    }
+
+    comboTextAppendStr(b, checkName);
+    comboTextAppendClearColor(b);
 }
 
 void comboTextHijackItem(GameState_Play* play, u16 itemId)

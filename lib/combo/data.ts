@@ -3,6 +3,7 @@ export { default as DATA_SCENES } from '../../data/scenes.yml';
 export { default as DATA_NPC } from '../../data/npc.yml';
 export { default as DATA_REGIONS } from '../../data/regions.yml';
 export { default as DATA_CONFIG } from '../../data/config.yml';
+export { default as DATA_HINTS } from '../../data/hints.yml';
 
 import poolOot from '../../data/oot/pool.csv';
 import poolMm from '../../data/mm/pool.csv';
@@ -79,4 +80,23 @@ const worldMm = {
 export const DATA_WORLD = {
   oot: worldOot,
   mm: worldMm,
+};
+
+const mapGossip = (game: Game, data: any[]) => {
+  const result: {[k: string]: any} = {};
+  for (const v of data) {
+    const key = gameId(game, v.location, ' ');
+    result[key] = { type: v.type, id: parseInt(v.id) }
+  }
+  return result;
+};
+
+import hintsOot from '../../data/oot/hints.csv';
+import hintsMm from '../../data/mm/hints.csv';
+import { Game } from './config';
+import { gameId } from './util';
+
+export const DATA_HINTS_POOL = {
+  oot: mapGossip('oot', hintsOot),
+  mm: mapGossip('mm', hintsMm),
 };

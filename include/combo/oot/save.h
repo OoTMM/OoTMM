@@ -147,10 +147,11 @@ typedef struct
 {
     OotSave save;
     u32     fileIndex;
-    /*char    unk_1358[0x74];*/
     char    unk_1358[0x04];
     s32     gameMode;
-    char    unk_1360[0x6c];
+    char    unk_1360[0x37];
+    u8      grottoChestFlag;
+    char    unk_1398[0x34];
     s16     rupeesDelta;
     char    unk_13ce[0x28];
     s16     magicTarget;
@@ -158,11 +159,16 @@ typedef struct
     u16     mapIndex;
     char    unk_1404[0x20];
     u16     healthDelta;
-    char    unk_1428[0x28];
+    char    unk_1426[0x2a];
 }
 OotSaveContext;
 
-ASSERT_OFFSET(OotSaveContext, gameMode, 0x135c);
+ASSERT_OFFSET(OotSaveContext, gameMode,         0x135c);
+ASSERT_OFFSET(OotSaveContext, unk_1360,         0x1360);
+ASSERT_OFFSET(OotSaveContext, grottoChestFlag,  0x1397);
+ASSERT_OFFSET(OotSaveContext, unk_1398,         0x1398);
+ASSERT_OFFSET(OotSaveContext, unk_1404,         0x1404);
+ASSERT_OFFSET(OotSaveContext, unk_1426,         0x1426);
 
 _Static_assert(sizeof(OotSave) == 0x1354, "OotSave size is wrong");
 _Static_assert(sizeof(OotSaveContext) == 0x1450, "OotSaveContext size is wrong");

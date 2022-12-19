@@ -32,13 +32,20 @@ export type WorldCheck = {
   scene: string;
   item: string;
   constraint: Constraint;
+  hint: string;
 } & (WorldCheckNumeric | WorldCheckSymbolic);
+
+export type WorldGossip = {
+  game: Game;
+};
 
 export type World = {
   areas: {[k: string]: WorldArea};
   checks: {[k: string]: WorldCheck};
   dungeons: {[k: string]: Set<string>};
   regions: {[k: string]: string};
+  gossip: {[k: string]: WorldGossip};
+  checkHints: {[k: string]: string[]};
 };
 
 const DUNGEONS_REGIONS: {[k: string]: string} = {
@@ -61,12 +68,12 @@ const DUNGEONS_REGIONS: {[k: string]: string} = {
   ST: "TEMPLE_STONE_TOWER",
 };
 
-const mapExprs = (exprParser: ExprParser, game: Game, data: any) => {
+const mapExprs = (exprParser: ExprParser, game: Game, char: string, data: any) => {
   const result: ExprMap = {};
   for (const [k, v] of Object.entries(data)) {
     let name = k;
     if (!(/^(MM|OOT) /.test(name))) {
-      name = gameId(game, k, ' ');
+      name = gameId(game, k, char);
     }
     result[name] = exprParser.parse(v as string);
   }
@@ -83,10 +90,10 @@ const loadWorldAreas = (world: World, game: Game, exprParser: ExprParser) => {
     if (region !== 'NONE') {
       region = region ? gameId(game, region, '_') : undefined;
     }
-    const locations = mapExprs(exprParser, game, area.locations || {});
-    const exits = mapExprs(exprParser, game, area.exits || {});
-    const events = mapExprs(exprParser, game, area.events || {});
-    const gossip = mapExprs(exprParser, game, area.gossip || {});
+    const locations = mapExprs(exprParser, game, ' ', area.locations || {});
+    const exits = mapExprs(exprParser, game, ' ', area.exits || {});
+    const events = mapExprs(exprParser, game, '_', area.events || {});
+    const gossip = mapExprs(exprParser, game, ' ', area.gossip || {});
 
     if (name === undefined) {
       throw new Error(`Area name is undefined`);
@@ -110,7 +117,9 @@ const loadWorldAreas = (world: World, game: Game, exprParser: ExprParser) => {
       Object.keys(locations).forEach(x => d.add(x));
     }
 
+    const worldGossip = { game };
     Object.keys(locations).forEach(x => world.regions[x] = region);
+    Object.keys(gossip).forEach(x => world.gossip[x] = worldGossip);
   }
 };
 
@@ -127,8 +136,16 @@ const loadWorldPool = (world: World, game: Game, settings: Settings) => {
     }
     const item = gameId(game, String(record.item), '_');
     const constraint = itemConstraint(item, settings);
+    let hint = String(record.hint);
+    if (hint !== 'NONE') {
+      hint = gameId(game, hint, '_');
+      if (world.checkHints[hint] === undefined) {
+        world.checkHints[hint] = [];
+      }
+      world.checkHints[hint].push(location);
+    }
 
-    const check = { game, type, scene, id, item, constraint } as WorldCheck;
+    const check = { game, type, scene, id, item, constraint, hint } as WorldCheck;
     world.checks[location] = check;
   }
 };
@@ -159,7 +176,7 @@ const loadWorldGame = (world: World, game: Game, settings: Settings) => {
 }
 
 export const createWorld = (settings: Settings) => {
-  const world: World = { areas: {}, checks: {}, dungeons: {}, regions: {} };
+  const world: World = { areas: {}, checks: {}, dungeons: {}, regions: {}, gossip: {}, checkHints: {} };
   for (const g of GAMES) {
     loadWorldGame(world, g, settings);
   }
