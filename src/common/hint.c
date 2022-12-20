@@ -85,13 +85,13 @@ void comboHintGossip(u8 key, GameState_Play* play)
         switch (hint->type)
         {
         case HINT_TYPE_HERO:
-            comboTextAppendRegionName(&b, hint->region, 0, 0);
+            comboTextAppendRegionName(&b, hint->region, 0);
             comboTextAppendStr(&b, " is on the " TEXT_COLOR_YELLOW "Way of the Hero");
             comboTextAppendClearColor(&b);
             break;
         case HINT_TYPE_FOOLISH:
             comboTextAppendStr(&b, "plundering ");
-            comboTextAppendRegionName(&b, hint->region, 0, 0);
+            comboTextAppendRegionName(&b, hint->region, 0);
             comboTextAppendStr(&b, " is a " TEXT_COLOR_PINK "foolish choice");
             comboTextAppendClearColor(&b);
             break;
@@ -108,7 +108,7 @@ void comboHintGossip(u8 key, GameState_Play* play)
         case HINT_TYPE_ITEM_REGION:
             appendCorrectItemName(&b, hint->item);
             comboTextAppendStr(&b, " can be found ");
-            comboTextAppendRegionName(&b, hint->region, 1, 0);
+            comboTextAppendRegionName(&b, hint->region, TF_PREPOS);
             break;
         }
     }

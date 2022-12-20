@@ -40,14 +40,18 @@
 # define TEXT_BB             ""
 #endif
 
+#define TF_CAPITALIZE   (1 << 0)
+#define TF_PREPOS       (1 << 1)
+#define TF_PROGRESSIVE  (1 << 2)
+
 void comboTextAutoLineBreaks(char* buffer);
 void comboTextAppendStr(char** dst, const char* src);
 void comboTextAppendHeader(char** b);
 void comboTextAppendShopHeader(char** b, s16 price);
 void comboTextAppendClearColor(char** b);
 void comboTextAppendNum(char** b, int num);
-void comboTextAppendItemName(char** b, u16 itemId, int capitalize);
-void comboTextAppendRegionName(char** b, u8 regionId, int prepos, int capitalize);
+void comboTextAppendItemName(char** b, u16 itemId, int flags);
+void comboTextAppendRegionName(char** b, u8 regionId, int flags);
 void comboTextAppendCheckName(char** b, u8 checkId);
 
 #endif
