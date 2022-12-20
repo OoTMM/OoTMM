@@ -22,7 +22,7 @@ int EnSsh_TalkedTo(Actor* this, GameState_Play* play)
     {
         sInMessage = 0;
         npc = kNPCs[this->variable - 1];
-        gi = comboOverride(OV_NPC, 0, npc, GI_OOT_RUPEE_BLUE);
+        gi = comboOverrideEx(OV_NPC, 0, npc, GI_OOT_RUPEE_BLUE, OVF_NO_PROGRESSIVE);
         itemId = comboItemFromGI(gi);
         comboTextHijackSkullReward(play, itemId, this->variable * 10);
         return 1;
