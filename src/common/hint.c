@@ -52,8 +52,9 @@ static void appendCorrectItemName(char** b, s16 gi)
 #if defined(GAME_MM)
     gi ^= MASK_FOREIGN_GI;
 #endif
+    gi = comboProgressive(gi);
     itemId = comboItemFromGI(gi);
-    comboTextAppendItemName(b, itemId, TF_PROGRESSIVE);
+    comboTextAppendItemName(b, itemId, 0);
 }
 
 void comboHintGossip(u8 key, GameState_Play* play)

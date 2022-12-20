@@ -478,7 +478,6 @@ static int isItemAmbiguousOot(u16 itemId)
     case ITEM_OOT_ARROW_FIRE:
     case ITEM_OOT_OCARINA_TIME:
     case ITEM_OOT_BOMBCHU_10:
-    case ITEM_OOT_HOOKSHOT:
     case ITEM_OOT_ARROW_ICE:
     case ITEM_OOT_LENS:
     case ITEM_OOT_MAGIC_BEAN:
@@ -549,7 +548,6 @@ static int isItemAmbiguousMm(u16 itemId)
     case ITEM_MM_NUT:
     case ITEM_MM_MAGIC_BEAN:
     case ITEM_MM_LENS_OF_TRUTH:
-    case ITEM_MM_HOOKSHOT:
     case ITEM_MM_RED_POTION_WITH_BOTTLE:
     case ITEM_MM_EMPTY_BOTTLE:
     case ITEM_MM_MASK_GORON:
@@ -735,45 +733,6 @@ void comboTextAppendItemName(char** b, u16 itemId, int flags)
     {
         itemName = kItemNamesOot[itemId & 0xff];
         ambiguous = isItemAmbiguousOot(itemId & 0xff);
-    }
-
-    if (flags & TF_PROGRESSIVE)
-    {
-        switch (itemId)
-        {
-        case ITEM_OOT_KOKIRI_SWORD:
-        case ITEM_MM_SWORD_KOKIRI:
-            itemName = "a " C1 "Progressive Sword";
-            ambiguous = 1;
-            break;
-        case ITEM_OOT_PROGRESSIVE_SHIELD_DEKU:
-        case ITEM_MM_PROGRESSIVE_SHIELD_HERO:
-            itemName = "a " C1 "Progressive Shield";
-            ambiguous = 1;
-            break;
-        case ITEM_OOT_OCARINA_FAIRY:
-            itemName = "a " C1 "Progressive Ocarina";
-            ambiguous = 1;
-            break;
-        case ITEM_OOT_HOOKSHOT:
-            itemName = "a " C1 "Progressive Hookshot";
-            ambiguous = 1;
-            break;
-        case ITEM_OOT_WALLET2:
-        case ITEM_MM_WALLET2:
-            itemName = "a " C1 "Progressive Wallet";
-            ambiguous = 1;
-            break;
-        case ITEM_MM_SONG_GORON_HALF:
-            itemName = "a " C2 "Progressive Goron Lullaby";
-            break;
-        case ITEM_OOT_SILVER_SCALE:
-            itemName = "a " C1 "Progressive Scale";
-            break;
-        case ITEM_OOT_GORON_BRACELET:
-            itemName = "a " C1 "Progressive Strength";
-            break;
-        }
     }
 
     start = *b;
@@ -980,7 +939,7 @@ void comboTextHijackSkullReward(GameState_Play* play, s16 itemId, int count)
     comboTextAppendStr(&b,
         " Spiders of the Curse" TEXT_CZ " and I will give you "
     );
-    comboTextAppendItemName(&b, itemId, TF_PROGRESSIVE);
+    comboTextAppendItemName(&b, itemId, 0);
     comboTextAppendStr(&b, TEXT_CZ "." TEXT_END);
     comboTextAutoLineBreaks(play->msgCtx.textBuffer);
 }

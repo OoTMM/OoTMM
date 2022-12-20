@@ -61,7 +61,7 @@ static s32 comboOverrideRaw(u16 key)
     return -1;
 }
 
-static s16 comboOverrideImpl(u16 sceneId, u16 id, s16 gi, int flags)
+static s16 comboOverrideImpl(u16 sceneId, u16 id, s16 gi)
 {
     s32 override;
     u16 absGi;
@@ -73,19 +73,12 @@ static s16 comboOverrideImpl(u16 sceneId, u16 id, s16 gi, int flags)
     absGi = gi > 0 ? gi : -gi;
     if (override >= 0)
         absGi = override;
-
-    if (!(flags & OVF_NO_PROGRESSIVE))
-        absGi = comboProgressive(absGi);
+    absGi = comboProgressive(absGi);
 
     return gi > 0 ? absGi : -absGi;
 }
 
 s16 comboOverride(int type, u16 sceneId, u16 id, s16 gi)
-{
-    return comboOverrideEx(type, sceneId, id, gi, 0);
-}
-
-s16 comboOverrideEx(int type, u16 sceneId, u16 id, s16 gi, int flags)
 {
     switch (type)
     {
@@ -102,5 +95,5 @@ s16 comboOverrideEx(int type, u16 sceneId, u16 id, s16 gi, int flags)
         sceneId = SCE_GS;
         break;
     }
-    return comboOverrideImpl(sceneId, id, gi, flags);
+    return comboOverrideImpl(sceneId, id, gi);
 }
