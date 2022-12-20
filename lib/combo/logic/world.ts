@@ -109,7 +109,7 @@ const loadWorldAreas = (world: World, game: Game, exprParser: ExprParser) => {
 
     world.areas[name] = { exits, events, locations, gossip };
 
-    if (dungeon !== undefined) {
+    if (dungeon) {
       if (world.dungeons[dungeon] === undefined) {
         world.dungeons[dungeon] = new Set();
       }
