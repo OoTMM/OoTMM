@@ -4,6 +4,14 @@ import { Hints } from './hints';
 import { ItemPlacement } from './solve';
 import { World } from './world';
 
+const VERSION = process.env.VERSION || 'XXX';
+
+const spoilerHeader = (buffer: string[], seed: string) => {
+  buffer.push(`Seed: ${seed}`);
+  buffer.push(`Version: ${VERSION}`);
+  buffer.push('');
+};
+
 const spoilerSettings = (buffer: string[], settings: Settings) => {
   buffer.push('Settings');
   for (const s in settings) {
@@ -53,8 +61,7 @@ const spoilerSpheres = (buffer: string[], world: World, placement: ItemPlacement
 
 export const spoiler = (world: World, placement: ItemPlacement, spheres: string[][], opts: Options, hints: Hints) => {
   const buffer: string[] = [];
-  buffer.push(`Seed: ${opts.seed}`);
-  buffer.push('');
+  spoilerHeader(buffer, opts.seed);
   spoilerSettings(buffer, opts.settings);
   spoilerHints(buffer, hints, placement);
   if (!opts.settings.noLogic) {

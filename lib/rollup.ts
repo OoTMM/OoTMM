@@ -18,6 +18,8 @@ import { customAssets } from './combo/custom';
 import { Monitor } from './combo/monitor';
 import { DEFAULT_SETTINGS } from './combo';
 
+const VERSION = process.env.VERSION || 'XXX';
+
 async function build() {
   const inputOptions = {
     input: 'lib/combo/index.ts',
@@ -26,6 +28,7 @@ async function build() {
         preventAssignment: true,
         'process.env.NODE_ENV': JSON.stringify('production'),
         'process.env.ROLLUP': JSON.stringify(true),
+        'process.env.VERSION': JSON.stringify(VERSION),
       }),
       typescript(),
       externals({ builtinsPrefix: 'strip' }),
