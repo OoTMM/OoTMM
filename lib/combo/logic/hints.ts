@@ -103,10 +103,7 @@ class HintsSolver {
     return locs;
   }
 
-  private isItemWayOfTheHero(item: string) {
-    if (itemConstraint(item, this.settings) !== CONSTRAINT_NONE) {
-      return false;
-    }
+  private isItemHintable(item: string) {
     if (isDungeonItem(item)) {
       return false;
     }
@@ -114,6 +111,16 @@ class HintsSolver {
       return false;
     }
     if (!this.settings.shuffleGerudoCard && item == 'OOT_GERUDO_CARD') {
+      return false;
+    }
+    return true;
+  }
+
+  private isItemWayOfTheHero(item: string) {
+    if (!this.isItemHintable(item)) {
+      return false;
+    }
+    if (itemConstraint(item, this.settings) !== CONSTRAINT_NONE) {
       return false;
     }
     return true;
@@ -169,6 +176,11 @@ class HintsSolver {
       items[item].add(loc);
     }
     return items;
+  }
+
+  private playthroughItems() {
+    const items = this.spheres.flat().map(x => this.items[x]).filter(x => this.isItemHintable(x));
+    return shuffle(this.random, items);
   }
 
   private majorItemFoolish(loc: string, item: string, wothItems: {[k: string]: Set<string>}) {
@@ -248,7 +260,7 @@ class HintsSolver {
     if (checkHint === 'NONE') {
       return false;
     }
-    const locations = shuffle(this.random, this.world.checkHints[checkHint]);
+    const locations = this.world.checkHints[checkHint];
     for (const l of locations) {
       if (this.hintedLocations.has(l)) {
         return false;
@@ -295,6 +307,14 @@ class HintsSolver {
       delete regions[region];
       const gossip = sample(this.random, Object.keys(this.world.gossip).filter(x => !this.gossip[x]));
       this.gossip[gossip] = { game: this.world.gossip[gossip].game, type: 'foolish', region: region };
+
+      /* Mark everythibng in the region as hinted */
+      for (const loc in this.world.checks) {
+        if (this.world.regions[loc] === region) {
+          this.hintedLocations.add(loc);
+        }
+      }
+
       placed++;
     }
     return placed;
@@ -335,7 +355,7 @@ class HintsSolver {
   }
 
   private placeGossipItemRegionSpheres(count: number) {
-    const items = shuffle(this.random, this.spheres.flat().map(x => this.items[x]));
+    const items = this.playthroughItems();
     let placed = 0;
     for (const item of items) {
       if (placed >= count) {
