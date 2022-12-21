@@ -137,3 +137,5 @@ Player_Update = 0x80097740;
 OverlayAddr = 0x80099dbc;
 
 UpdateEquipment = 0x80079764;
+
+Player_UsingItem = 0x80079bf8;

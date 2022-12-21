@@ -53,3 +53,12 @@ PATCH_END
 PATCH_START 0x800fc548
   .int Player_UpdateWrapper
 PATCH_END
+
+/* Use our dpad hook */
+Player_DpadHook_Trampoline:
+  j   Player_DpadHook
+   lw a1,0x2c(sp)
+
+PATCH_START 0x80831f3c
+  jal Player_DpadHook_Trampoline
+PATCH_END
