@@ -231,8 +231,8 @@ Great Bay Temple SF Central Room Underwater Pot,  sf,             NONE,         
 Great Bay Temple SF Map Room Pot,                 sf,             NONE,               TEMPLE_GREAT_BAY,           0x3c,                   STRAY_FAIRY_GB
 Great Bay Temple SF Compass Room Pot,             sf,             NONE,               TEMPLE_GREAT_BAY,           0x3a,                   STRAY_FAIRY_GB
 Great Bay Temple SF Green Pipe 3 Barrel,          sf,             NONE,               TEMPLE_GREAT_BAY,           0x1a,                   STRAY_FAIRY_GB
-Great Bay Temple SF Antichamber Above Water,      sf,             NONE,               TEMPLE_GREAT_BAY,           0x31,                   STRAY_FAIRY_GB
-Great Bay Temple SF Antichamber Underwater,       sf,             NONE,               TEMPLE_GREAT_BAY,           0x2f,                   STRAY_FAIRY_GB
+Great Bay Temple SF Pre-Boss Above Water,         sf,             NONE,               TEMPLE_GREAT_BAY,           0x31,                   STRAY_FAIRY_GB
+Great Bay Temple SF Pre-Boss Underwater,          sf,             NONE,               TEMPLE_GREAT_BAY,           0x2f,                   STRAY_FAIRY_GB
 Great Bay Temple Boss HC,                         collectible,    NONE,               LAIR_GYORG,                 0x1f,                   HEART_CONTAINER
 Great Bay Temple Boss,                            npc,            NONE,               LAIR_GYORG,                 REMAINS_GYORG,          REMAINS_GYORG
 Beneath the Well Skulltulla Chest,                chest,          NONE,               BENEATH_THE_WELL,           0x01,                   RUPEE_PURPLE
