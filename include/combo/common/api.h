@@ -117,4 +117,6 @@ void* OverlayAddr(u32 addr);
 
 void LoadIcon(u32 vaddr, int iconId, void* buffer, int size);
 
+int Player_UsingItem(Actor_Player* link);
+
 #endif

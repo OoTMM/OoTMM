@@ -130,3 +130,5 @@ LoadIcon = 0x80178e3c;
 OverlayAddr = 0x801638d8;
 
 PlayMusic = 0x801a3238;
+
+Player_UsingItem = 0x801240dc;
