@@ -54,6 +54,8 @@ const worldOot = {
 };
 
 import worldMmOverworld from '../../data/mm/world/overworld.yml';
+import worldMmSwampSpiderHouse from '../../data/mm/world/swamp_spider_house.yml';
+import worldMmOceanSpiderHouse from '../../data/mm/world/ocean_spider_house.yml';
 import worldMmWoodfallTemple from '../../data/mm/world/woodfall_temple.yml';
 import worldMmSnowheadTemple from '../../data/mm/world/snowhead_temple.yml';
 import worldMmGreatBayTemple from '../../data/mm/world/great_bay_temple.yml';
@@ -74,6 +76,8 @@ const worldMm = {
   ...worldMmAncientCastleOfIkana,
   ...worldMmBeneathTheWell,
   ...worldMmSecretShrine,
+  ...worldMmSwampSpiderHouse,
+  ...worldMmOceanSpiderHouse,
   ...worldMmMoon,
 };
 
