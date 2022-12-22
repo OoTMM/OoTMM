@@ -8,7 +8,7 @@
   exits:
     "Snowhead Temple Entrance": "true"
     "Snowhead Temple Compass Room": "has(SMALL_KEY_SH, 3)"
-    "Snowhead Temple Bridge": "true"
+    "Snowhead Temple Bridge Front": "true"
     "Snowhead Temple Center Level 1": "can_use_fire_arrows || has_hot_water"
 "Snowhead Temple Bridge Front":
   dungeon: SH
