@@ -131,7 +131,7 @@
   dungeon: SH
   exits:
     "Snowhead Temple Map Room Upper": "true"
-    "Snowhead Temple Center Level 2 Dual": "has_weapon || has(MASK_ZORA) || has(MASK_GORON)"
+    "Snowhead Temple Center Level 2 Dual": "true"
     "Snowhead Temple Center Level 3 Iced": "has(MASK_GORON) || has(HOOKSHOT)"
     "Snowhead Temple Snow Room": "has(SMALL_KEY_SH, 3)"
     "Snowhead Temple Fire Arrow": "true"
