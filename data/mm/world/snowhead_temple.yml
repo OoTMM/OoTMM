@@ -51,7 +51,7 @@
     "Snowhead Temple Block Room": "true"
     "Snowhead Temple Pillars Room": "can_use_fire_arrows"
     "Snowhead Temple Main": "can_use_fire_arrows"
-    "Snowhead Temple Center Level 2": "scarecrow_hookshot"
+    "Snowhead Temple Center Level 2 Map": "scarecrow_hookshot"
 "Snowhead Temple Pillars Room":
   dungeon: SH
   exits:
