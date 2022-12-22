@@ -259,16 +259,16 @@ Ice Cavern Sheik Song,                                npc,            NONE,     
 Ice Cavern GS Scythe Room,                            gs,             NONE,                 ICE_CAVERN,                     0x51,                       GS_TOKEN
 Ice Cavern GS HP Room,                                gs,             NONE,                 ICE_CAVERN,                     0x52,                       GS_TOKEN
 Ice Cavern GS Block Room,                             gs,             NONE,                 ICE_CAVERN,                     0x50,                       GS_TOKEN
-Water Temple Under Center,                            chest,          NONE,                 TEMPLE_WATER,                   0x06,                       RUPEE_BLUE
+Water Temple Central Pillar Chest,                    chest,          TEMPLE_WATER_PILLAR,  TEMPLE_WATER,                   0x06,                       RUPEE_BLUE
 Water Temple Compass,                                 chest,          NONE,                 TEMPLE_WATER,                   0x09,                       COMPASS_WATER
 Water Temple Longshot,                                chest,          NONE,                 TEMPLE_WATER,                   0x07,                       HOOKSHOT
 Water Temple Dragon Chest,                            chest,          NONE,                 TEMPLE_WATER,                   0x0a,                       SMALL_KEY_WATER
-Water Temple Boss Key Chest,                          chest,          NONE,                 TEMPLE_WATER,                   0x05,                       BOSS_KEY_WATER
+Water Temple Boss Key Chest,                          chest,          TEMPLE_WATER_BK_CHEST,TEMPLE_WATER,                   0x05,                       BOSS_KEY_WATER
 Water Temple Bombable Chest,                          chest,          NONE,                 TEMPLE_WATER,                   0x00,                       SMALL_KEY_WATER
 Water Temple Shell Chest,                             chest,          NONE,                 TEMPLE_WATER,                   0x01,                       SMALL_KEY_WATER
 Water Temple Map,                                     chest,          NONE,                 TEMPLE_WATER,                   0x02,                       MAP_WATER
 Water Temple Corridor Chest,                          chest,          NONE,                 TEMPLE_WATER,                   0x08,                       SMALL_KEY_WATER
-Water Temple River Chest,                             chest,          NONE,                 TEMPLE_WATER,                   0x03,                       SMALL_KEY_WATER
+Water Temple River Chest,                             chest,          TEMPLE_WATER_RIVER,   TEMPLE_WATER,                   0x03,                       SMALL_KEY_WATER
 Water Temple GS River,                                gs,             NONE,                 TEMPLE_WATER,                   0x34,                       GS_TOKEN
 Water Temple GS Center,                               gs,             NONE,                 TEMPLE_WATER,                   0x32,                       GS_TOKEN
 Water Temple GS Large Pit,                            gs,             NONE,                 TEMPLE_WATER,                   0x31,                       GS_TOKEN
@@ -303,7 +303,7 @@ Shadow Temple Falling Spikes Upper 2,                 chest,          NONE,     
 Shadow Temple Invisible Spike Room,                   chest,          NONE,                 TEMPLE_SHADOW,                  0x09,                       RUPEE_BLUE
 Shadow Temple Boss Key Room 1,                        chest,          NONE,                 TEMPLE_SHADOW,                  0x0a,                       RUPEE_BLUE
 Shadow Temple Boss Key Room 2,                        chest,          NONE,                 TEMPLE_SHADOW,                  0x0b,                       BOSS_KEY_SHADOW
-Shadow Temple Skull,                                  collectible,    NONE,                 TEMPLE_SHADOW,                  0x01,                       SMALL_KEY_SHADOW
+Shadow Temple Skull,                                  collectible,    TEMPLE_SHADOW_POT,    TEMPLE_SHADOW,                  0x01,                       SMALL_KEY_SHADOW
 Shadow Temple Spinning Blades Visible,                chest,          NONE,                 TEMPLE_SHADOW,                  0x0c,                       RUPEE_BLUE
 Shadow Temple Spinning Blades Invisible,              chest,          NONE,                 TEMPLE_SHADOW,                  0x16,                       ARROWS_30
 Shadow Temple Invisible Floormaster,                  chest,          NONE,                 TEMPLE_SHADOW,                  0x0d,                       SMALL_KEY_SHADOW

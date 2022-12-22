@@ -51,7 +51,7 @@
 "Water Temple Under Center":
   dungeon: Water
   locations:
-    "Water Temple Under Center": "can_hookshot"
+    "Water Temple Central Pillar Chest": "can_hookshot"
 "Water Temple Compass Room":
   dungeon: Water
   locations:
