@@ -45,6 +45,7 @@ export const ITEMS_REQUIRED = new Set<string>([
   'OOT_SONG_SUN',
   'OOT_SONG_TIME',
   'OOT_SONG_ZELDA',
+  'OOT_SONG_TP_FOREST',
   'OOT_SONG_TP_FIRE',
   'OOT_SONG_TP_SHADOW',
   'OOT_SONG_TP_SPIRIT',
