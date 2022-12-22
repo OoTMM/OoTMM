@@ -156,10 +156,10 @@
   dungeon: SH
   exits:
     "Snowhead Temple Center Level 3 Snow": "has(SMALL_KEY_SH, 3)"
-    "Snowhead Temple Dinofols Room": "can_use_fire_arrows"
+    "Snowhead Temple Dinolfos Room": "can_use_fire_arrows"
   locations:
     "Snowhead Temple SF Snow Room": "can_use_lens && (has(BOW) || has(HOOKSHOT)) && has(MASK_GREAT_FAIRY)"
-"Snowhead Temple Dinofols Room":
+"Snowhead Temple Dinolfos Room":
   dungeon: SH
   exits:
     "Snowhead Temple Snow Room": "true"
@@ -172,7 +172,7 @@
 "Snowhead Temple Boss Key Room":
   dungeon: SH
   exits:
-    "Snowhead Temple Dinofols Room": "event(SNOWHEAD_RAISE_PILLAR)"
+    "Snowhead Temple Dinolfos Room": "event(SNOWHEAD_RAISE_PILLAR)"
     "Snowhead Temple Center Level 3 Iced": "true"
     "Snowhead Temple Center Level 3 Snow": "event(SNOWHEAD_RAISE_PILLAR)"
   locations:
