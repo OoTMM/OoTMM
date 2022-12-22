@@ -206,6 +206,7 @@ MM_LENS:                      0x42
 MM_PICTOGRAPH_BOX:            0x43
 MM_OCARINA_OF_TIME:           0x4c
 MM_BOMBER_NOTEBOOK:           0x50
+MM_GS_TOKEN:                  0x52
 MM_BOTTLED_POTION_RED:        0x59
 MM_EMPTY_BOTTLE:              0x5a
 MM_POTION_RED:                0x5b
@@ -287,3 +288,5 @@ MM_REMAINS_GYORG:             0xcc
 MM_REMAINS_TWINMOLD:          0xcd
 MM_SOLD_OUT:                  0xce
 MM_PROGRESSIVE_SHIELD_HERO:   0xcf
+MM_GS_TOKEN_SWAMP:            0xd0
+MM_GS_TOKEN_OCEAN:            0xd1

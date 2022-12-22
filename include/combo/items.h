@@ -255,6 +255,7 @@
 #define ITEM_MM_SONG_SOARING                0x6a
 #define ITEM_MM_SONG_STORMS                 0x6b
 #define ITEM_MM_BOMBER_NOTEBOOK             0x6d
+#define ITEM_MM_GS_TOKEN                    0x6e
 #define ITEM_MM_HEART_CONTAINER             0x6f
 #define ITEM_MM_HEART_PIECE2                0x70
 #define ITEM_MM_SONG_GORON_HALF             0x73
@@ -308,6 +309,8 @@
 #define ITEM_MM_WORLD_MAP_ROMANI_RANCH      0xac
 #define ITEM_MM_WORLD_MAP_GREAT_BAY         0xad
 #define ITEM_MM_WORLD_MAP_STONE_TOWER       0xae
+#define ITEM_MM_GS_TOKEN_SWAMP              0xaf
+#define ITEM_MM_GS_TOKEN_OCEAN              0xb0
 
 #define ITEM_NONE   0xff
 
