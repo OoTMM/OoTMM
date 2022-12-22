@@ -36,8 +36,15 @@ class ObjectSplitter {
           const fmt = (data >>> 16) & 0xff;
           let bpp = 0;
           switch (fmt) {
-            case 0x50: bpp = 4; break;
-            case 0x10: bpp = 16; break;
+          case 0x50:
+          case 0x90:
+            bpp = 4;
+            break;
+          case 0x10:
+            bpp = 16;
+            break;
+          default:
+            throw new Error(`Unknown texture format 0x${fmt.toString(16)}`);
           }
           const data3 = list.readUInt32BE(i + 8 * 6 + 4);
           const w = (((data3 >>> 12) & 0xfff) / 4) + 1;
