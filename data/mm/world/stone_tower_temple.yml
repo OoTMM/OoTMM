@@ -153,7 +153,7 @@
 "Stone Tower Temple Boss":
   dungeon: ST
   exits:
-    "Stone Tower After Boss": "has(MAGIC_UPGRADE) && (has(MASK_GIANT) || has(MASK_FIERCE_DEITY))"
+    "Stone Tower After Boss": "has(MAGIC_UPGRADE) && ((has(MASK_GIANT) && has(SWORD)) || has(MASK_FIERCE_DEITY))"
 "Stone Tower After Boss":
   dungeon: ST
   exits:
