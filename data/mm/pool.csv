@@ -82,6 +82,36 @@ Woodfall Entrance Chest,                          chest,          NONE,         
 Woodfall HP Chest,                                chest,          NONE,               WOODFALL,                   0x01,                   HEART_PIECE
 Woodfall Great Fairy,                             npc,            NONE,               FAIRY_FOUNTAIN,             GREAT_FAIRY_SWAMP,      SPIN_UPGRADE
 Swamp Spider House Mask of Truth,                 npc,            NONE,               SPIDER_HOUSE_SWAMP,         SPIDER_HOUSE_SWAMP,     MASK_TRUTH
+Swamp Skulltula Main Room Near Ceiling,           chest,          NONE,               SPIDER_HOUSE_SWAMP,         0x00,                   GS_TOKEN_SWAMP
+Swamp Skulltula Main Room Lower Right Soft Soil,  chest,          NONE,               SPIDER_HOUSE_SWAMP,         0x0c,                   GS_TOKEN_SWAMP
+Swamp Skulltula Main Room Lower Left Soft Soil,   chest,          NONE,               SPIDER_HOUSE_SWAMP,         0x09,                   GS_TOKEN_SWAMP
+Swamp Skulltula Main Room Upper Soft Soil,        chest,          NONE,               SPIDER_HOUSE_SWAMP,         0x0b,                   GS_TOKEN_SWAMP
+Swamp Skulltula Main Room Upper Pillar,           chest,          NONE,               SPIDER_HOUSE_SWAMP,         0x13,                   GS_TOKEN_SWAMP
+Swamp Skulltula Main Room Pillar,                 chest,          NONE,               SPIDER_HOUSE_SWAMP,         0x0f,                   GS_TOKEN_SWAMP
+Swamp Skulltula Main Room Water,                  chest,          NONE,               SPIDER_HOUSE_SWAMP,         0x08,                   GS_TOKEN_SWAMP
+Swamp Skulltula Main Room Jar,                    chest,          NONE,               SPIDER_HOUSE_SWAMP,         0x1e,                   GS_TOKEN_SWAMP
+Swamp Skulltula Gold Room Near Ceiling,           chest,          NONE,               SPIDER_HOUSE_SWAMP,         0x01,                   GS_TOKEN_SWAMP
+Swamp Skulltula Gold Room Pillar,                 chest,          NONE,               SPIDER_HOUSE_SWAMP,         0x04,                   GS_TOKEN_SWAMP
+Swamp Skulltula Gold Room Wall,                   chest,          NONE,               SPIDER_HOUSE_SWAMP,         0x19,                   GS_TOKEN_SWAMP
+Swamp Skulltula Gold Room Hive,                   chest,          NONE,               SPIDER_HOUSE_SWAMP,         0x12,                   GS_TOKEN_SWAMP
+Swamp Skulltula Tree Room Hive,                   chest,          NONE,               SPIDER_HOUSE_SWAMP,         0x1a,                   GS_TOKEN_SWAMP
+Swamp Skulltula Tree Room Grass 1,                chest,          NONE,               SPIDER_HOUSE_SWAMP,         0x06,                   GS_TOKEN_SWAMP
+Swamp Skulltula Tree Room Grass 2,                chest,          NONE,               SPIDER_HOUSE_SWAMP,         0x07,                   GS_TOKEN_SWAMP
+Swamp Skulltula Tree Room Tree 1,                 chest,          NONE,               SPIDER_HOUSE_SWAMP,         0x15,                   GS_TOKEN_SWAMP
+Swamp Skulltula Tree Room Tree 2,                 chest,          NONE,               SPIDER_HOUSE_SWAMP,         0x18,                   GS_TOKEN_SWAMP
+Swamp Skulltula Tree Room Tree 3,                 chest,          NONE,               SPIDER_HOUSE_SWAMP,         0x1d,                   GS_TOKEN_SWAMP
+Swamp Skulltula Monument Room Lower Wall,         chest,          NONE,               SPIDER_HOUSE_SWAMP,         0x0d,                   GS_TOKEN_SWAMP
+Swamp Skulltula Monument Room On Monument,        chest,          NONE,               SPIDER_HOUSE_SWAMP,         0x0e,                   GS_TOKEN_SWAMP
+Swamp Skulltula Monument Room Crate 1,            chest,          NONE,               SPIDER_HOUSE_SWAMP,         0x0a,                   GS_TOKEN_SWAMP
+Swamp Skulltula Monument Room Crate 2,            chest,          NONE,               SPIDER_HOUSE_SWAMP,         0x1b,                   GS_TOKEN_SWAMP
+Swamp Skulltula Monument Room Torch,              chest,          NONE,               SPIDER_HOUSE_SWAMP,         0x02,                   GS_TOKEN_SWAMP
+Swamp Skulltula Pot Room Hive 1,                  chest,          NONE,               SPIDER_HOUSE_SWAMP,         0x17,                   GS_TOKEN_SWAMP
+Swamp Skulltula Pot Room Hive 2,                  chest,          NONE,               SPIDER_HOUSE_SWAMP,         0x1c,                   GS_TOKEN_SWAMP
+Swamp Skulltula Pot Room Behind Vines,            chest,          NONE,               SPIDER_HOUSE_SWAMP,         0x14,                   GS_TOKEN_SWAMP
+Swamp Skulltula Pot Room Pot 1,                   chest,          NONE,               SPIDER_HOUSE_SWAMP,         0x10,                   GS_TOKEN_SWAMP
+Swamp Skulltula Pot Room Pot 2,                   chest,          NONE,               SPIDER_HOUSE_SWAMP,         0x11,                   GS_TOKEN_SWAMP
+Swamp Skulltula Pot Room Jar,                     chest,          NONE,               SPIDER_HOUSE_SWAMP,         0x05,                   GS_TOKEN_SWAMP
+Swamp Skulltula Pot Room Wall,                    chest,          NONE,               SPIDER_HOUSE_SWAMP,         0x16,                   GS_TOKEN_SWAMP
 Mountain Village Waterfall Chest,                 chest,          NONE,               MOUNTAIN_VILLAGE_WINTER,    0x00,                   RUPEE_RED
 Mountain Village Don Gero Mask,                   npc,            NONE,               MOUNTAIN_VILLAGE_WINTER,    MASK_DON_GERO,          MASK_DON_GERO
 Mountain Village Frog Choir HP,                   npc,            DON_GERO_CHOIR,     MOUNTAIN_VILLAGE_WINTER,    FROG_HEART_PIECE,       HEART_PIECE
