@@ -104,7 +104,7 @@
     "Snowhead Temple Dual Switches": "has(SMALL_KEY_SH, 3) || (has_explosives && has(SMALL_KEY_SH, 2))"
   locations:
     "Snowhead Temple Icicle Room Alcove": "can_use_lens"
-    "Snowhead Temple Icicle Room": "(has(BOW) || has(MASK_ZORA) || can_use_lens) && can_break_boulders"
+    "Snowhead Temple Icicle Room": "(has(BOW) || has(MASK_ZORA) || can_use_lens || has(HOOKSHOT)) && can_break_boulders"
 "Snowhead Temple Dual Switches":
   dungeon: SH
   exits:
