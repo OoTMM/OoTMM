@@ -171,9 +171,9 @@ Woodfall Temple SF Maze Skulltula,                sf,             NONE,         
 Woodfall Temple SF Maze Beehive,                  sf,             NONE,               TEMPLE_WOODFALL,            0x1d,                   STRAY_FAIRY_WF
 Woodfall Temple SF Maze Bubble,                   sf,             NONE,               TEMPLE_WOODFALL,            0x2f,                   STRAY_FAIRY_WF
 Woodfall Temple SF Water Room Beehive,            sf,             NONE,               TEMPLE_WOODFALL,            0x1e,                   STRAY_FAIRY_WF
-Woodfall Temple SF Pre-Boss 1,                    sf,             NONE,               TEMPLE_WOODFALL,            0x2a,                   STRAY_FAIRY_WF
-Woodfall Temple SF Pre-Boss 2,                    sf,             NONE,               TEMPLE_WOODFALL,            0x2c,                   STRAY_FAIRY_WF
-Woodfall Temple SF Pre-Boss 3,                    sf,             NONE,               TEMPLE_WOODFALL,            0x32,                   STRAY_FAIRY_WF
+Woodfall Temple SF Pre-Boss Bottom Right,         sf,             NONE,               TEMPLE_WOODFALL,            0x2a,                   STRAY_FAIRY_WF
+Woodfall Temple SF Pre-Boss Left,                 sf,             NONE,               TEMPLE_WOODFALL,            0x2c,                   STRAY_FAIRY_WF
+Woodfall Temple SF Pre-Boss Top Right,            sf,             NONE,               TEMPLE_WOODFALL,            0x32,                   STRAY_FAIRY_WF
 Woodfall Temple SF Pre-Boss Pillar,               sf,             NONE,               TEMPLE_WOODFALL,            0x2d,                   STRAY_FAIRY_WF
 Woodfall Temple Boss Container,                   collectible,    NONE,               LAIR_ODOLWA,                0x1f,                   HEART_CONTAINER
 Woodfall Temple Boss,                             npc,            NONE,               LAIR_ODOLWA,                REMAINS_ODOLWA,         REMAINS_ODOLWA
