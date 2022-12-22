@@ -289,6 +289,18 @@ void Shader_BossRemains(GameState_Play* play, s16 shaderId)
 
 void Shader_SpiritualStones(GameState_Play* play, s16 shaderId)
 {
+    static const u32 kPrimColors[] = {
+        0xffffa0ff,
+        0xffaaffff,
+        0x32ffffff,
+    };
+
+    static const u32 kEnvColors[] = {
+        0x00ff00ff,
+        0xff0064ff,
+        0x320096ff,
+    };
+
     static const float kMatrixRot[] = {
         1.f, 0.f, 0.f, 0.f,
         0.f, 0.f, 1.f, 0.f,
@@ -296,42 +308,12 @@ void Shader_SpiritualStones(GameState_Play* play, s16 shaderId)
         0.f, 0.f, 0.f, 1.f,
     };
 
-    u8 primRed, primGreen, primBlue;
-    u8 envRed, envGreen, envBlue;
+    u8 r, g, b, a;
     const Shader* shader;
+    int colorIndex;
 
     shader = &kShaders[shaderId];
-
-    switch (shader->lists[0] & 0xffff)
-    {
-    case 0x1240:
-        /* Emerald */
-        primRed = 0xff;
-        primGreen = 0xff;
-        primBlue = 0xa0;
-        envRed = 0x00;
-        envGreen = 0xff;
-        envBlue = 0x00;
-        break;
-    case 0x20a0:
-        /* Ruby */
-        primRed = 0xff;
-        primGreen = 0xaa;
-        primBlue = 0xff;
-        envRed = 0xff;
-        envGreen = 0x00;
-        envBlue = 100;
-        break;
-    case 0x3530:
-        /* Sapphire */
-        primRed = 0x32;
-        primGreen = 0xff;
-        primBlue = 0xff;
-        envRed = 0x32;
-        envGreen = 0;
-        envBlue = 0x96;
-        break;
-    }
+    colorIndex = shader->lists[0];
 
     OPEN_DISPS(play->gs.gfx);
 
@@ -346,14 +328,16 @@ void Shader_SpiritualStones(GameState_Play* play, s16 shaderId)
     gSPSegment(POLY_OPA_DISP++, 8, dummySegment(play->gs.gfx));
 
     InitListPolyXlu(play->gs.gfx);
-    gDPSetPrimColor(POLY_XLU_DISP++, 0x00, 0x80, primRed, primGreen, primBlue, 0xFF);
-    gDPSetEnvColor(POLY_XLU_DISP++, envRed, envGreen, envBlue, 0xFF);
-    gSPDisplayList(POLY_XLU_DISP++, shader->lists[0]);
+    color4(&r, &g, &b, &a, kPrimColors[colorIndex]);
+    gDPSetPrimColor(POLY_XLU_DISP++, 0x00, 0x80, r, g, b, a);
+    color4(&r, &g, &b, &a, kEnvColors[colorIndex]);
+    gDPSetEnvColor(POLY_XLU_DISP++, r, g, b, a);
+    gSPDisplayList(POLY_XLU_DISP++, shader->lists[1]);
 
     InitListPolyOpa(play->gs.gfx);
     gDPSetPrimColor(POLY_OPA_DISP++, 0x00, 0x80, 0xff, 0xff, 0xaa, 0xff);
     gDPSetEnvColor(POLY_OPA_DISP++, 0x96, 0x78, 0x00, 0xFF);
-    gSPDisplayList(POLY_OPA_DISP++, shader->lists[1]);
+    gSPDisplayList(POLY_OPA_DISP++, shader->lists[2]);
 
     CLOSE_DISPS();
 }

@@ -33,6 +33,15 @@ const ENTRIES: CustomEntry[] = [
   { game: 'mm',  name: "GI_REMAINS_GYORG",      file: "objects/object_bsmask",       offsets: [0x1d80] },
   { game: 'mm',  name: "GI_REMAINS_TWINMOLD",   file: "objects/object_bsmask",       offsets: [0x5020] },
   { game: 'oot', name: "GI_MASTER_SWORD",       file: "objects/object_toki_objects", offsets: [0x1bd0] },
+  { game: 'oot', name: "GI_STONE_EMERALD",      file: "objects/object_gi_jewel",     offsets: [0x1240, 0x10e0] },
+  { game: 'oot', name: "GI_STONE_RUBY",         file: "objects/object_gi_jewel",     offsets: [0x20a0, 0x1fb0] },
+  { game: 'oot', name: "GI_STONE_SAPPHIRE",     file: "objects/object_gi_jewel",     offsets: [0x3530, 0x3370] },
+  { game: 'oot', name: "GI_MEDALLION_FOREST",   file: "objects/object_gi_medal",     offsets: [0x0cb0, 0x0e18] },
+  { game: 'oot', name: "GI_MEDALLION_FIRE",     file: "objects/object_gi_medal",     offsets: [0x1af0, 0x0e18] },
+  { game: 'oot', name: "GI_MEDALLION_WATER",    file: "objects/object_gi_medal",     offsets: [0x2830, 0x0e18] },
+  { game: 'oot', name: "GI_MEDALLION_SPIRIT",   file: "objects/object_gi_medal",     offsets: [0x3610, 0x0e18] },
+  { game: 'oot', name: "GI_MEDALLION_SHADOW",   file: "objects/object_gi_medal",     offsets: [0x4330, 0x0e18] },
+  { game: 'oot', name: "GI_MEDALLION_LIGHT",    file: "objects/object_gi_medal",     offsets: [0x5220, 0x0e18] },
 ];
 
 const getObjectBuffer = async (roms: DecompressedRoms, entry: CustomEntry) => {
