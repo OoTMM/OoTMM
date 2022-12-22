@@ -25,8 +25,8 @@
     "Stone Tower Temple West Garden": "true"
   locations:
     "Stone Tower Temple Under West Garden Ledge Chest": "has(HOOKSHOT)"
-    "Stone Tower Temple Under West Garden Lava Chest": "((event(STONE_TOWER_WEST_GARDEN_LIGHT) && has_mirror_shield) || can_use_light_arrows) && has(MASK_GORON)"
-    "Stone Tower Temple Map": "((event(STONE_TOWER_WEST_GARDEN_LIGHT) && has_mirror_shield) || can_use_light_arrows) && has(MASK_GORON)"
+    "Stone Tower Temple Under West Garden Lava Chest": "((event(STONE_TOWER_WEST_GARDEN_LIGHT) && has_mirror_shield) || can_use_light_arrows)"
+    "Stone Tower Temple Map": "((event(STONE_TOWER_WEST_GARDEN_LIGHT) && has_mirror_shield) || can_use_light_arrows)"
 "Stone Tower Temple Center":
   dungeon: ST
   exits:
