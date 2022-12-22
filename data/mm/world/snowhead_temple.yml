@@ -70,7 +70,7 @@
   dungeon: SH
   exits:
     "Snowhead Temple Center Level 1": "true"
-    "Snowhead Temple Block Room Upper": "has(HOOKSHOT) || (event(SNOWHEAD_PUSH_BLOCK) && || has(MASK_ZORA))"
+    "Snowhead Temple Block Room Upper": "has(HOOKSHOT) || (event(SNOWHEAD_PUSH_BLOCK) && has(MASK_ZORA))"
   events:
     SNOWHEAD_PUSH_BLOCK: "true"
   locations:
