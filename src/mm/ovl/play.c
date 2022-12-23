@@ -16,6 +16,7 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.items[ITS_MM_BOW] = ITEM_MM_BOW;
         gSave.inventory.items[ITS_MM_LENS] = ITEM_MM_LENS_OF_TRUTH;
         gSave.inventory.items[ITS_MM_BOMBS] = ITEM_MM_BOMB;
+        gSave.inventory.items[ITS_MM_HOOKSHOT] = ITEM_MM_HOOKSHOT;
         gSave.inventory.upgrades.quiver = 3;
         gSave.inventory.upgrades.wallet = 2;
         gSave.inventory.upgrades.bombBag = 3;
@@ -61,6 +62,10 @@ static void debugCheat(GameState_Play* play)
 
         //gSave.inventory.questItems.remainsOdolwa = 1;
         gMmExtraBoss |= 0x01;
+
+        //gSave.day = 3;
+        //gSave.isNight = 1;
+        //gSave.time = 0x3000;
     }
 #endif
 }
