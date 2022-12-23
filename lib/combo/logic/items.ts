@@ -136,6 +136,7 @@ export const ITEMS_REQUIRED = new Set<string>([
   'MM_HEART_PIECE',
   'MM_HEART_CONTAINER',
   'MM_GREAT_FAIRY_SWORD',
+  'MM_SPIN_UPGRADE',
 ]);
 
 export const isSong = (item: string) => !!item.match(/^(OOT|MM)_SONG_/);
