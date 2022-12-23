@@ -187,7 +187,6 @@ class Solver {
     maxRequired(pools, 'OOT_BOMBCHUS_10', 1);
     maxRequired(pools, 'OOT_GS_TOKEN', 50);
 
-    maxRequired(pools, 'MM_SWORD', 1);
     maxRequired(pools, 'MM_BOMB_BAG', 1);
     maxRequired(pools, 'MM_BOW', 1);
     maxRequired(pools, 'MM_MAGIC_UPGRADE', 1);
