@@ -16,7 +16,7 @@
   dungeon: ST
   exits:
     "Stone Tower Temple Under West Garden": "true"
-    "Stone Tower Temple Center": "has(SMALL_KEY_ST, 4)"
+    "Stone Tower Temple Center": "has(SMALL_KEY_ST, 4) || (has(SMALL_KEY_ST, 3) && has(MASK_ZORA))"
   events:
     STONE_TOWER_WEST_GARDEN_LIGHT: "has_explosives"
 "Stone Tower Temple Under West Garden":
@@ -30,7 +30,7 @@
 "Stone Tower Temple Center":
   dungeon: ST
   exits:
-    "Stone Tower Temple West Garden": "has(SMALL_KEY_ST, 4)"
+    "Stone Tower Temple West Garden": "has(SMALL_KEY_ST, 4) || (has(SMALL_KEY_ST, 3) && has(MASK_GORON) && has_explosives && can_play(SONG_EMPTINESS))"
     "Stone Tower Temple Water Room": "has(MASK_ZORA)"
   locations:
     "Stone Tower Temple Center Across Water Chest": "true"
@@ -92,7 +92,7 @@
   dungeon: ST
   exits:
     "Stone Tower Temple Inverted Entrance": "true"
-    "Stone Tower Temple Inverted Wizzrobe": "has(MASK_DEKU) && has(SMALL_KEY_ST, 3) && can_use_light_arrows"
+    "Stone Tower Temple Inverted Wizzrobe": "has(MASK_DEKU) && can_use_light_arrows  && (has(SMALL_KEY_ST, 3) || (has(SMALL_KEY_ST, 2) && has(MASK_ZORA) && has(MASK_GORON) && has_explosives && can_play(SONG_EMPTINESS)))"
   events:
     STONE_TOWER_WATER_CHEST_SUN: "can_use_light_arrows"
   locations:
