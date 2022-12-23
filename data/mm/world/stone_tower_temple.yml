@@ -92,7 +92,7 @@
   dungeon: ST
   exits:
     "Stone Tower Temple Inverted Entrance": "true"
-    "Stone Tower Temple Inverted Wizzrobe": "has(MASK_DEKU) && can_use_light_arrows  && (has(SMALL_KEY_ST, 3) || (has(SMALL_KEY_ST, 2) && has(MASK_ZORA) && has(MASK_GORON) && has_explosives && can_play(SONG_EMPTINESS)))"
+    "Stone Tower Temple Inverted Wizzrobe": "has(MASK_DEKU) && can_use_light_arrows  && has(SMALL_KEY_ST, 3)"
   events:
     STONE_TOWER_WATER_CHEST_SUN: "can_use_light_arrows"
   locations:
