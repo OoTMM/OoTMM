@@ -34,7 +34,7 @@
     "Stone Tower Temple Water Room": "has(MASK_ZORA)"
   locations:
     "Stone Tower Temple Center Across Water Chest": "true"
-    "Stone Tower Temple Center Sun Block Chest": "(has(MASK_ZORA) || has(MASK_DEKU)) && can_use_light_arrows"
+    "Stone Tower Temple Center Sun Block Chest": "(has(MASK_ZORA) || has(MASK_DEKU) || has_explosives || (has(MAGIC_UPGRADE) && ((has_weapon && has(SPIN_UPGRADE)) || has(SWORD, 3) || has(GREAT_FAIRY_SWORD)))) && can_use_light_arrows"
 "Stone Tower Temple Water Room":
   dungeon: ST
   exits:
@@ -74,7 +74,7 @@
   exits:
     "Stone Tower Temple Water Bridge": "true"
   locations:
-    "Stone Tower Temple Before Water Bridge Chest": "event(STONE_TOWER_BRIDGE_CHEST_SWITCH)"
+    "Stone Tower Temple Before Water Bridge Chest": "event(STONE_TOWER_BRIDGE_CHEST_SWITCH) || has_explosives"
 "Stone Tower Temple Water Bridge":
   dungeon: ST
   exits:
