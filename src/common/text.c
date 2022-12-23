@@ -449,8 +449,8 @@ static const char* const kCheckNamesOot[] = {
     "the " TEXT_COLOR_ORANGE "Haunted Wastelands Chest",
     "the " TEXT_COLOR_YELLOW "Horseback Archery",
     "the " TEXT_COLOR_BLUE "Water Temple Central Pillar Chest",
-    "the " TEXT_COLOR_BLUE "Water Temple Central River Chest",
-    "the " TEXT_COLOR_BLUE "Water Temple Central Boss Key Chest",
+    "the " TEXT_COLOR_BLUE "Water Temple River Chest",
+    "the " TEXT_COLOR_BLUE "Water Temple Boss Key Chest",
     "the " TEXT_COLOR_PINK "Shadow Temple Flaming Pot",
 };
 
