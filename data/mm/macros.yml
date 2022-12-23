@@ -26,3 +26,4 @@
 "has_shield": "true"
 "can_activate_crystal": "can_break_boulders || has_weapon || has(BOW) || has(HOOKSHOT) || has(MASK_DEKU) || has(MASK_ZORA)"
 "can_evade_gerudo": "has(BOW) || has(HOOKSHOT) || has(MASK_ZORA) || has(MASK_STONE)"
+"has_hot_water": "can_play(SONG_SOARING) && (event(GORON_GRAVEYARD_HOT_WATER) || event(TWIN_ISLANDS_HOT_WATER) || event(WELL_HOT_WATER))"
