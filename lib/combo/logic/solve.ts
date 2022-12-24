@@ -7,9 +7,7 @@ import { World } from './world';
 import { LogicSeedError } from './error';
 import { CONSTRAINTS, itemConstraint } from './constraints';
 import { Options } from '../options';
-import { addItem, combinedItems, DUNGEON_REWARDS, itemsArray, removeItem, ITEMS_REQUIRED } from './items';
-
-const ITEMS_DUNGEON = /^(OOT|MM)_(MAP|COMPASS|SMALL_KEY|BOSS_KEY|STRAY_FAIRY)_[A-Z_]+$/;
+import { addItem, combinedItems, itemsArray, removeItem, ITEMS_REQUIRED, isDungeonItem, isDungeonReward, isGoldToken, isHouseToken } from './items';
 
 const ITEMS_JUNK = new Set<string>([
   'OOT_RUPEE_GREEN',
@@ -83,13 +81,15 @@ class Solver {
   private pools: ItemPools;
   private reachedLocations = new Set<string>();
   private fixedLocations = new Set<string>();
-  private restrictedAssumed: Items = {};
 
   constructor(
     private opts: Options,
     private world: World,
     private random: Random,
   ) {
+    this.fixGoldTokens();
+    this.fixHouseTokens();
+    this.fixFairies();
     this.fixLocations();
     this.pools = this.makeItemPools();
     if (this.opts.settings.noLogic) {
@@ -107,10 +107,6 @@ class Solver {
     }
 
     const checksCount = Object.keys(this.world.checks).length;
-
-    /* Fix the GS tokens */
-    this.fixTokens();
-    this.fixFairies();
 
     /* Place the required reward items */
     this.fixRewards();
@@ -162,11 +158,10 @@ class Solver {
 
       if (this.fixedLocations.has(location)) {
         this.place(location, item);
-        addItem(this.restrictedAssumed, item);
         continue;
       }
 
-      if (ITEMS_DUNGEON.test(item) || DUNGEON_REWARDS.has(item)) {
+      if (isDungeonItem(item) || isDungeonReward(item)) {
         addItem(pools.dungeon, item);
       } else if (ITEMS_REQUIRED.has(item)) {
         addItem(pools.required, item);
@@ -204,18 +199,26 @@ class Solver {
     return itemConstraint(item, this.opts.settings);
   }
 
-  private fixTokens() {
+  private fixGoldTokens() {
     const setting = this.opts.settings.goldSkulltulaTokens;
     const shuffleInDungeons = ['dungeons', 'all'].includes(setting);
     const shuffleInOverworld = ['overworld', 'all'].includes(setting);
-    const skullLocations = Object.keys(this.world.checks).filter(x => this.world.checks[x].item === 'OOT_GS_TOKEN');
+    const skullLocations = Object.keys(this.world.checks).filter(x => isGoldToken(this.world.checks[x].item));
     const dungeonLocations = Object.values(this.world.dungeons).reduce((acc, x) => new Set([...acc, ...x]));
 
     for (const location of skullLocations) {
       const isDungeon = dungeonLocations.has(location);
       if (!((isDungeon && shuffleInDungeons) || (!isDungeon && shuffleInOverworld))) {
-        this.place(location, 'OOT_GS_TOKEN');
-        removeItemPools(this.pools, 'OOT_GS_TOKEN');
+        this.fixedLocations.add(location);
+      }
+    }
+  }
+
+  private fixHouseTokens() {
+    for (const location in this.world.checks) {
+      const item = this.world.checks[location].item;
+      if (isHouseToken(item)) {
+        this.fixedLocations.add(location);
       }
     }
   }
@@ -224,9 +227,7 @@ class Solver {
     for (const location in this.world.checks) {
       const check = this.world.checks[location];
       if (check.type === 'sf') {
-        const item = check.item;
-        this.place(location, item);
-        removeItem(this.pools.dungeon, item);
+        this.fixedLocations.add(location);
       }
     }
   }
@@ -237,7 +238,7 @@ class Solver {
 
     for (const location in this.world.checks) {
       const item = this.world.checks[location].item;
-      if (DUNGEON_REWARDS.has(item)) {
+      if (isDungeonReward(item)) {
         rewards.push(item);
         locations.push(location);
       }
