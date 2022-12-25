@@ -443,8 +443,6 @@ class HintsSolver {
         if (!this.limitedItemUseless(this.items[list[place]])) {
           return false;
         }
-        else {
-        }
       }
     }
     return true;
@@ -479,8 +477,6 @@ class HintsSolver {
         }
         if (!this.limitedItemUseless(this.items[list[place]])) {
           return false;
-        }
-        else {
         }
       }
     }
