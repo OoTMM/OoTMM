@@ -22,7 +22,6 @@ export const ITEMS_REQUIRED = new Set<string>([
   'OOT_ARROW_FIRE',
   'OOT_ARROW_LIGHT',
   'OOT_BOMB_BAG',
-  'OOT_BOMBCHUS_10',
   'OOT_BOOMERANG',
   'OOT_BOOTS_HOVER',
   'OOT_BOOTS_IRON',
@@ -139,6 +138,51 @@ export const ITEMS_REQUIRED = new Set<string>([
   'MM_SPIN_UPGRADE',
 ]);
 
+export const ITEMS_SOMETIMES_REQUIRED = new Set<string>([
+  'OOT_GS_TOKEN',
+  'OOT_CHICKEN',
+  'OOT_SONG_SUN',
+  'OOT_WALLET',
+  'OOT_POCKET_CUCCO',
+  'OOT_COJIRO',
+  'OOT_ODD_MUSHROOM',
+  'OOT_ODD_POTION',
+  'OOT_POACHER_SAW',
+  'OOT_BROKEN_GORON_SWORD',
+  'OOT_PRESCRIPTION',
+  'OOT_EYEBALL_FROG',
+  'OOT_EYE_DROPS',
+  'OOT_CLAIM_CHECK',
+  'OOT_MASK_TRUTH',
+  'OOT_MASK_SKULL',
+  'MM_MASK_CAPTAIN',
+  'MM_MASK_ALL_NIGHT',
+  'MM_MASK_BUNNY',
+  'MM_MASK_KEATON',
+  'MM_MASK_ROMANI',
+  'MM_MASK_TROUPE_LEADER',
+  'MM_MASK_POSTMAN',
+  'MM_MASK_COUPLE',
+  'MM_MASK_GREAT_FAIRY',
+  'MM_MASK_DON_GERO',
+  'MM_MASK_KAMARO',
+  'MM_MASK_TRUTH',
+  'MM_MASK_STONE',
+  'MM_MASK_BREMEN',
+  'MM_MASK_KAFEI',
+  'MM_SONG_HEALING',
+  'MM_POWDER_KEG',
+  'MM_DEED_SWAMP',
+  'MM_DEED_MOUNTAIN',
+  'MM_DEED_OCEAN',
+  'MM_ROOM_KEY',
+  'MM_LETTER_TO_KAFEI',
+  'MM_PENDANT_OF_MEMORIES',
+  'MM_LETTER_TO_MAMA',
+  'MM_HEART_PIECE',
+  'MM_HEART_CONTAINER',
+]);
+
 export const isSong = (item: string) => !!item.match(/^(OOT|MM)_SONG_/);
 export const isCompass = (item: string) => !!item.match(/^(OOT|MM)_COMPASS_/);
 export const isMap = (item: string) => !!item.match(/^(OOT|MM)_MAP_/);
@@ -151,6 +195,8 @@ export const isDungeonItem = (item: string) => isMapCompass(item) || isKey(item)
 export const isDungeonReward = (item: string) => DUNGEON_REWARDS.has(item);
 export const isToken = (item: string) => !!item.match(/^(OOT|MM)_GS_TOKEN/);
 export const isItemMajor = (item: string) => ITEMS_REQUIRED.has(item);
+export const isItemMajorSometimes = (item: string) => ITEMS_SOMETIMES_REQUIRED.has(item);
+export const isItemMajorAlways = (item: string) => ITEMS_REQUIRED.has(item) && !ITEMS_SOMETIMES_REQUIRED.has(item);
 
 export const itemsArray = (items: Items) => {
   const arr: string[] = [];
