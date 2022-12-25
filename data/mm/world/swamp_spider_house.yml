@@ -1,5 +1,5 @@
 "Swamp Spider House":
-  region: SOUTHERN_SWAMP
+  region: SPIDER_HOUSE_SWAMP
   exits:
     "Swamp Back": "true"
   locations:

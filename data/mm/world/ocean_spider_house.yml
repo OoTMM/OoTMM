@@ -1,12 +1,12 @@
 "Ocean Spider House Front":
-  region: GREAT_BAY_COAST
+  region: SPIDER_HOUSE_OCEAN
   exits:
     "Great Bay Coast": "true"
     "Ocean Spider House Back": "has_explosives && has(HOOKSHOT)"
   locations:
     "Ocean Spider House Wallet": "has(GS_TOKEN_OCEAN, 30)"
 "Ocean Spider House Back":
-  region: GREAT_BAY_COAST
+  region: SPIDER_HOUSE_OCEAN
   exits:
     "Ocean Spider House Front": "has(MASK_GORON) || can_play(SONG_SOARING)"
   locations:
