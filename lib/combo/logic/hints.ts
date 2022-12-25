@@ -4,7 +4,7 @@ import { findSpheres } from './playthrough';
 import { Random, sample, shuffle } from '../random';
 import { pathfind } from './pathfind';
 import { Items } from './state';
-import { addItem, DUNGEON_REWARDS_ORDERED, isDungeonItem, isDungeonReward, isItemMajor, isToken, itemsArray } from './items';
+import { addItem, DUNGEON_REWARDS_ORDERED, isDungeonItem, isDungeonReward, isItemMajor, isItemMajorSometimes, isItemMajorAlways, isToken, itemsArray } from './items';
 import { Settings } from '../settings';
 import { CONSTRAINT_NONE, itemConstraint } from './constraints';
 import { Game } from '../config';
@@ -69,6 +69,222 @@ const HINTS_ITEMS_SOMETIMES = [
   'MM_FISHERMAN_GAME',
   'MM_SONG_ELEGY',
   'MM_SECRET_SHRINE_HP',
+];
+
+const LOCATIONS_FOR_CHICKEN = [
+  'OOT Lost Woods Gift from Saria',
+  'OOT Zelda\'s Letter',
+  'OOT Zelda\'s Song'
+];
+
+const LOCATIONS_FOR_SKULL_MASK = [
+  'OOT Deku Theater Sticks Upgrade'
+];
+
+const LOCATIONS_FOR_TRUTH_MASK_OOT = [
+  'OOT Deku Theater Nuts Upgrade'
+];
+
+const LOCATIONS_FOR_POCKET_CUCCO = [
+  'OOT Kakariko Anju Cojiro'
+];
+
+const LOCATIONS_FOR_COJIRO = [
+  'OOT Lost Woods Odd Mushroom'
+];
+
+const LOCATIONS_FOR_ODD_MUSHROOM = [
+  'OOT Kakariko Potion Shop Odd Potion'
+];
+
+const LOCATIONS_FOR_ODD_POTION = [
+  'OOT Lost Woods Poacher\'s Saw'
+];
+
+const LOCATIONS_FOR_POACHER_SAW = [
+  'OOT Gerudo Valley Broken Goron Sword'
+];
+
+const LOCATIONS_FOR_BROKEN_GORON_SWORD = [
+  'OOT Death Mountain Prescription'
+];
+
+const LOCATIONS_FOR_PRESCRIPTION = [
+  'OOT Zora Domain Eyeball Frog'
+];
+
+const LOCATIONS_FOR_EYEBALL_FROG = [
+  'OOT Laboratory Eye Drops'
+];
+
+const LOCATIONS_FOR_EYE_DROPS = [
+  'OOT Death Mountain Claim Check'
+];
+
+const LOCATIONS_FOR_CLAIM_CHECK = [
+  'OOT Death Mountain Biggoron Sword'
+];
+
+const LOCATIONS_FOR_WALLET_OOT = [
+  'OOT Goron City Medigoron Giant Knife'
+];
+
+const LOCATIONS_FOR_SONG_SUN = [
+  'OOT Graveyard ReDead Tomb',
+  'OOT Zora River Frogs Game'
+];
+
+const LOCATIONS_FOR_MASK_CAPTAIN = [
+  'MM Moon Fierce Deity Mask',
+  'MM Beneath The Graveyard Chest',
+  'MM Beneath The Graveyard Song of Storms',
+  'MM Beneath The Graveyard HP',
+  'MM Beneath The Graveyard Dampe Chest'
+];
+
+const LOCATIONS_FOR_MASK_ALL_NIGHT = [
+  'MM Moon Fierce Deity Mask',
+  'MM Stock Pot Inn Grandma HP 1',
+  'MM Stock Pot Inn Grandma HP 2'
+];
+
+const LOCATIONS_FOR_MASK_BUNNY = [
+  'MM Moon Fierce Deity Mask',
+  'MM Post Office HP'
+];
+
+const LOCATIONS_FOR_MASK_KEATON = [
+  'MM Moon Fierce Deity Mask',
+  'MM Clock Town Keaton HP'
+];
+
+const LOCATIONS_FOR_MASK_ROMANI = [
+  'MM Moon Fierce Deity Mask',
+  'MM Milk Bar Troupe Leader Mask'
+];
+
+const LOCATIONS_FOR_MASK_TROUPE_LEADER = [
+  'MM Moon Fierce Deity Mask'
+];
+
+const LOCATIONS_FOR_MASK_POSTMAN = [
+  'MM Moon Fierce Deity Mask',
+  'MM Clock Town Post Box'
+];
+
+const LOCATIONS_FOR_MASK_COUPLE = [
+  'MM Moon Fierce Deity Mask',
+  'MM Mayor\'s Office HP'
+];
+
+const LOCATIONS_FOR_MASK_GREAT_FAIRY = [
+  'MM Moon Fierce Deity Mask',
+  'MM Woodfall Great Fairy',
+  'MM Snowhead Great Fairy',
+  'MM Great Bay Fairy'
+];
+
+const LOCATIONS_FOR_MASK_DON_GERO = [
+  'MM Moon Fierce Deity Mask',
+  'MM Mountain Village Frog Choir HP'
+];
+
+const LOCATIONS_FOR_MASK_KAMARO = [
+  'MM Moon Fierce Deity Mask',
+  'MM Clock Town Rosa Sisters HP'
+];
+
+const LOCATIONS_FOR_MASK_TRUTH_MM = [
+  'MM Moon Fierce Deity Mask',
+  'MM Doggy Racetrack HP'
+];
+
+const LOCATIONS_FOR_MASK_STONE = [
+  'MM Moon Fierce Deity Mask'
+];
+
+const LOCATIONS_FOR_MASK_BREMEN = [
+  'MM Moon Fierce Deity Mask',
+  'MM Cucco Shack Bunny Mask'
+];
+
+const LOCATIONS_FOR_MASK_KAFEI = [
+  'MM Moon Fierce Deity Mask',
+  'MM Stock Pot Inn Letter to Kafei',
+  'MM Stock Pot Inn Couple\'s Mask',
+  'MM Milk Bar Madame Aroma Bottle'
+];
+
+const LOCATIONS_FOR_DEED_SWAMP = [
+  'MM Stock Pot Inn ??? HP',
+  'MM Goron Village HP',
+  'MM Goron Village Scrub Deed'
+];
+
+const LOCATIONS_FOR_DEED_MOUNTAIN = [
+  'MM Stock Pot Inn ??? HP',
+  'MM Zora Hall Scrub HP',
+  'MM Zora Hall Scrub Deed'
+];
+
+const LOCATIONS_FOR_DEED_OCEAN = [
+  'MM Stock Pot Inn ??? HP',
+  'MM Ikana Valley Scrub Rupee',
+  'MM Ikana Valley Scrub HP'
+];
+
+const LOCATIONS_FOR_ROOM_KEY = [
+  'MM Stock Pot Inn Letter to Kafei',
+  'MM Stock Pot Inn Couple\'s Mask',
+  'MM Stock Pot Inn Guest Room Chest'
+];
+
+const LOCATIONS_FOR_LETTER_TO_KAFEI = [
+  'MM Stock Pot Inn ??? HP',
+  'MM Stock Pot Inn Couple\'s Mask',
+  'MM Curiosity Shop Back Room Pendant of Memories',
+  'MM Curiosity Shop Back Room Owner Reward 1',
+  'MM Curiosity Shop Back Room Owner Reward 2'
+];
+
+const LOCATIONS_FOR_PENDANT_OF_MEMORIES = [
+  'MM Stock Pot Inn Couple\'s Mask'
+];
+
+const LOCATIONS_FOR_LETTER_TO_MAMA = [
+  'MM Stock Pot Inn ??? HP',
+  'MM Milk Bar Madame Aroma Bottle',
+  'MM Clock Town Postman Hat'
+];
+
+const LOCATIONS_FOR_POWDER_KEG = [
+  'MM Romani Ranch Epona Song',
+  'MM Romani Ranch Aliens',
+  'MM Romani Ranch Cremia Escort',
+  'MM Ancient Castle of Ikana Song Emptiness'
+];
+
+const LOCATIONS_FOR_SONG_HEALING = [
+  'MM Termina Field Kamaro Mask',
+  'MM Goron Graveyard Mask',
+  'MM Great Bay Coast Zora Mask',
+  'MM Music Box House Gibdo Mask'
+];
+
+const LOCATIONS_FOR_HEART_PIECE = [
+  'MM Secret Shrine Boss 1 Chest',
+  'MM Secret Shrine Boss 2 Chest',
+  'MM Secret Shrine Boss 3 Chest',
+  'MM Secret Shrine Boss 4 Chest',
+  'MM Secret Shrine HP Chest'
+];
+
+const LOCATIONS_FOR_HEART_CONTAINER = [
+  'MM Secret Shrine Boss 1 Chest',
+  'MM Secret Shrine Boss 2 Chest',
+  'MM Secret Shrine Boss 3 Chest',
+  'MM Secret Shrine Boss 4 Chest',
+  'MM Secret Shrine HP Chest'
 ];
 
 class HintsSolver {
@@ -216,12 +432,153 @@ class HintsSolver {
     return true;
   }
 
+  private limitedItemUselessHelper(list: string[]) {
+    for (let place in list) {
+      if (isItemMajorAlways(this.items[list[place]])) {
+        //TODO: This fails to capture sometimes items gating extraneous progrssive items. This is obscure enough to let pass for now.
+        return false;
+      }
+      else if (isItemMajorSometimes(this.items[list[place]])) {
+        // This is a dangerous form of recursion, but I think I've avoided infinite loops.
+        if (!this.limitedItemUseless(this.items[list[place]])) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
+  private limitedItemUselessHelperSafe(list: string[]) {
+    // This function has to have layers of additional checks to cover for somtimes required items that come in collections of optional requirements having self-gates.
+    // For instance, without this safe mode, a MM HP landing in Secret Shrine or toilet hand already having a paper item would cause an infinite loop.
+    const paperItems = ['MM_DEED_SWAMP', 'MM_DEED_MOUNTAIN', 'MM_DEED_OCEAN', 'MM_LETTER_TO_KAFEI', 'MM_LETTER_TO_MAMA'];
+    for (let place in list) {
+      if (isItemMajorAlways(this.items[list[place]])) {
+        return false;
+      }
+      else if (isItemMajorSometimes(this.items[list[place]])) {
+        if (this.items[list[place]] == 'MM_HEART_PIECE' || this.items[list[place]] == 'MM_HEART_CONTAINER') {
+          if (list[place] == 'MM Secret Shrine Boss 1 Chest' || list[place] == 'MM Secret Shrine Boss 2 Chest' || list[place] == 'MM Secret Shrine Boss 3 Chest') {
+            return false;
+          }
+          else if (list[place] == 'MM Secret Shrine Boss 4 Chest' || list[place] == 'MM Secret Shrine HP Chest') {
+            continue;
+          }
+        }
+        else if (paperItems.includes(this.items[list[place]])) {
+          if (list[place] == 'MM Stock Pot Inn ??? HP') {
+            return false;
+          }
+        }
+        else if (this.items[list[place]] == 'OOT_WALLET') {
+          if (list[place] == 'OOT Goron City Medigoron Giant Knife') {
+            continue;
+          }
+        }
+        if (!this.limitedItemUseless(this.items[list[place]])) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
+  private limitedItemUseless(item: string) {
+    switch (item) {
+      case 'OOT_CHICKEN':
+        return this.limitedItemUselessHelper(LOCATIONS_FOR_CHICKEN);
+      case 'OOT_MASK_SKULL':
+        return this.limitedItemUselessHelper(LOCATIONS_FOR_SKULL_MASK);
+      case 'OOT_MASK_TRUTH':
+        return this.limitedItemUselessHelper(LOCATIONS_FOR_TRUTH_MASK_OOT);
+      case 'OOT_POCKET_CUCCO':
+        return this.limitedItemUselessHelper(LOCATIONS_FOR_POCKET_CUCCO);
+      case 'OOT_COJIRO':
+        return this.limitedItemUselessHelper(LOCATIONS_FOR_COJIRO);
+      case 'OOT_ODD_MUSHROOM':
+        return this.limitedItemUselessHelper(LOCATIONS_FOR_ODD_MUSHROOM);
+      case 'OOT_ODD_POTION':
+        return this.limitedItemUselessHelper(LOCATIONS_FOR_ODD_POTION);
+      case 'OOT_POACHER_SAW':
+        return this.limitedItemUselessHelper(LOCATIONS_FOR_POACHER_SAW);
+      case 'OOT_BROKEN_GORON_SWORD':
+        return this.limitedItemUselessHelper(LOCATIONS_FOR_BROKEN_GORON_SWORD);
+      case 'OOT_PRESCRIPTION':
+        return this.limitedItemUselessHelper(LOCATIONS_FOR_PRESCRIPTION);
+      case 'OOT_EYEBALL_FROG':
+        return this.limitedItemUselessHelper(LOCATIONS_FOR_EYEBALL_FROG);
+      case 'OOT_EYE_DROPS':
+        return this.limitedItemUselessHelper(LOCATIONS_FOR_EYE_DROPS);
+      case 'OOT_CLAIM_CHECK':
+        return this.limitedItemUselessHelper(LOCATIONS_FOR_CLAIM_CHECK);
+      case 'OOT_WALLET':
+        return this.limitedItemUselessHelperSafe(LOCATIONS_FOR_WALLET_OOT);
+      case 'OOT_SONG_SUN':
+        return this.limitedItemUselessHelper(LOCATIONS_FOR_SONG_SUN);
+      case 'MM_MASK_CAPTAIN':
+        return this.limitedItemUselessHelper(LOCATIONS_FOR_MASK_CAPTAIN);
+      case 'MM_MASK_ALL_NIGHT':
+        return this.limitedItemUselessHelper(LOCATIONS_FOR_MASK_ALL_NIGHT);
+      case 'MM_MASK_BUNNY':
+        return this.limitedItemUselessHelper(LOCATIONS_FOR_MASK_BUNNY);
+      case 'MM_MASK_KEATON':
+        return this.limitedItemUselessHelper(LOCATIONS_FOR_MASK_KEATON);
+      case 'MM_MASK_ROMANI':
+        return this.limitedItemUselessHelper(LOCATIONS_FOR_MASK_ROMANI);
+      case 'MM_MASK_TROUPE_LEADER':
+        return this.limitedItemUselessHelper(LOCATIONS_FOR_MASK_TROUPE_LEADER);
+      case 'MM_MASK_POSTMAN':
+        return this.limitedItemUselessHelper(LOCATIONS_FOR_MASK_POSTMAN);
+      case 'MM_MASK_COUPLE':
+        return this.limitedItemUselessHelper(LOCATIONS_FOR_MASK_COUPLE);
+      case 'MM_MASK_GREAT_FAIRY':
+        return this.limitedItemUselessHelper(LOCATIONS_FOR_MASK_GREAT_FAIRY);
+      case 'MM_MASK_DON_GERO':
+        return this.limitedItemUselessHelper(LOCATIONS_FOR_MASK_DON_GERO);
+      case 'MM_MASK_CAPTAIN':
+        return this.limitedItemUselessHelper(LOCATIONS_FOR_MASK_CAPTAIN);
+      case 'MM_MASK_KAMARO':
+        return this.limitedItemUselessHelper(LOCATIONS_FOR_MASK_KAMARO);
+      case 'MM_MASK_TRUTH':
+        return this.limitedItemUselessHelper(LOCATIONS_FOR_MASK_TRUTH_MM);
+      case 'MM_MASK_STONE':
+        return this.limitedItemUselessHelper(LOCATIONS_FOR_MASK_STONE);
+      case 'MM_MASK_BREMEN':
+        return this.limitedItemUselessHelper(LOCATIONS_FOR_MASK_BREMEN);
+      case 'MM_MASK_KAFEI':
+        return this.limitedItemUselessHelper(LOCATIONS_FOR_MASK_KAFEI);
+      case 'MM_DEED_SWAMP':
+        return this.limitedItemUselessHelperSafe(LOCATIONS_FOR_DEED_SWAMP);
+      case 'MM_DEED_MOUNTAIN':
+        return this.limitedItemUselessHelperSafe(LOCATIONS_FOR_DEED_MOUNTAIN);
+      case 'MM_DEED_OCEAN':
+        return this.limitedItemUselessHelperSafe(LOCATIONS_FOR_DEED_OCEAN);
+      case 'MM_ROOM_KEY':
+        return this.limitedItemUselessHelper(LOCATIONS_FOR_ROOM_KEY);
+      case 'MM_LETTER_TO_KAFEI':
+        return this.limitedItemUselessHelperSafe(LOCATIONS_FOR_LETTER_TO_KAFEI);
+      case 'MM_PENDANT_OF_MEMORIES':
+        return this.limitedItemUselessHelper(LOCATIONS_FOR_PENDANT_OF_MEMORIES);
+      case 'MM_LETTER_TO_MAMA':
+        return this.limitedItemUselessHelperSafe(LOCATIONS_FOR_LETTER_TO_MAMA);
+      case 'MM_POWDER_KEG':
+        return this.limitedItemUselessHelper(LOCATIONS_FOR_POWDER_KEG);
+      case 'MM_SONG_HEALING':
+        return this.limitedItemUselessHelper(LOCATIONS_FOR_SONG_HEALING);
+      case 'MM_HEART_PIECE':
+        return this.limitedItemUselessHelperSafe(LOCATIONS_FOR_HEART_PIECE);
+      case 'MM_HEART_CONTAINER':
+        return this.limitedItemUselessHelperSafe(LOCATIONS_FOR_HEART_CONTAINER);
+    }
+    return false;
+  }
+
   private locationFoolish(loc: string, wothItems: {[k: string]: Set<string>}) {
     const item = this.items[loc];
     if (isDungeonItem(item) || isDungeonReward(item) || isToken(item)) {
       return 0;
     }
-    if (isItemMajor(item) && !this.majorItemFoolish(loc, item, wothItems)) {
+    if (isItemMajor(item) && !this.majorItemFoolish(loc, item, wothItems) && !this.limitedItemUseless(item)) {
       return -1;
     }
     if (this.hintedLocations.has(loc)) {
