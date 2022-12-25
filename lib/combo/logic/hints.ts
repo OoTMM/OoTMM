@@ -139,7 +139,8 @@ const LOCATIONS_FOR_MASK_CAPTAIN = [
   'MM Beneath The Graveyard Chest',
   'MM Beneath The Graveyard Song of Storms',
   'MM Beneath The Graveyard HP',
-  'MM Beneath The Graveyard Dampe Chest'
+  'MM Beneath The Graveyard Dampe Chest',
+  'MM Ocean Spider House Chest HP'
 ];
 
 const LOCATIONS_FOR_MASK_ALL_NIGHT = [
