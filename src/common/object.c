@@ -163,7 +163,11 @@ static u32 comboGetTextureOverride(u32 texture)
     case 0x44bb0:
         return 0x32930; /* Inaccurate, find in hearts */
     case 0x44fb0:
-        return 0x32930; /* Inaccurate, find in bombpouch */
+        return 0x33130;
+    case 0x54F20:
+        return 0x39450;
+    case 0x7DF10:
+        return 0x53390;
     default:
         return 0x32930; /* Fine default */
     }
@@ -177,6 +181,12 @@ static u32 comboGetTextureOverride(u32 texture)
     {
     case 0x32930:
         return 0x447b0;
+    case 0x33130:
+        return 0x44FB0;
+    case 0x39450:
+        return 0x54F20;
+    case 0x53390:
+        return 0x7DF10;
     default:
         return 0x447b0; /* Fine default */
     }
