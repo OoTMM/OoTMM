@@ -517,6 +517,24 @@ static void Shader_CustomStrayFairy(GameState_Play* play, s16 shaderId)
     CLOSE_DISPS();
 }
 
+void Shader_CustomGS(GameState_Play* play, s16 index)
+{
+    const Shader* shader;
+    u8 r;
+    u8 g;
+    u8 b;
+    u8 a;
+
+    shader = &kShaders[index];
+    OPEN_DISPS(play->gs.gfx);
+    color4(&r, &g, &b, &a, shader->lists[2]);
+    gDPSetEnvColor(POLY_XLU_DISP++, r, g, b, a);
+    color4(&r, &g, &b, &a, shader->lists[3]);
+    gDPSetPrimColor(POLY_XLU_DISP++, 0, 0x80, r, g, b, a);
+    CLOSE_DISPS();
+    Shader_GS(play, index);
+}
+
 const Shader kShaders[] = {
 #include "data/shaders.inc"
 };
