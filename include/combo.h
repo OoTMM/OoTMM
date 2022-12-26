@@ -14,7 +14,6 @@
 
 # include <ultra64.h>
 # include <combo/actor_ovl.h>
-# include <combo/audio.h>
 # include <combo/defs.h>
 # include <combo/equipment.h>
 # include <combo/object.h>
