@@ -8,7 +8,7 @@ static int checkItemToggle(GameState_Play* play)
 
     p = &play->pauseCtx;
     ret = 0;
-    press = !!(play->gs.input[0].pressed.buttons & 0x20);
+    press = !!(play->gs.input[0].pressed.buttons & (L_TRIG | U_CBUTTONS));
 
     if (p->item_cursor == ITS_OOT_OCARINA && (popcount(gOotExtraItems.ocarina) >= 2))
     {
