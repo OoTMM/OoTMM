@@ -87,8 +87,7 @@ class Solver {
     private world: World,
     private random: Random,
   ) {
-    this.fixGoldTokens();
-    this.fixHouseTokens();
+    this.fixTokens();
     this.fixFairies();
     this.fixLocations();
     this.pools = this.makeItemPools();
@@ -156,6 +155,10 @@ class Solver {
       const check = this.world.checks[location];
       const { item } = check;
 
+      if (this.placement[location]) {
+        continue;
+      }
+
       if (this.fixedLocations.has(location)) {
         this.place(location, item);
         continue;
@@ -199,7 +202,9 @@ class Solver {
     return itemConstraint(item, this.opts.settings);
   }
 
-  private fixGoldTokens() {
+  private goldTokenLocations() {
+    const shuffled = new Set<string>();
+    const nonShuffled = new Set<string>();
     const setting = this.opts.settings.goldSkulltulaTokens;
     const shuffleInDungeons = ['dungeons', 'all'].includes(setting);
     const shuffleInOverworld = ['overworld', 'all'].includes(setting);
@@ -209,16 +214,77 @@ class Solver {
     for (const location of skullLocations) {
       const isDungeon = dungeonLocations.has(location);
       if (!((isDungeon && shuffleInDungeons) || (!isDungeon && shuffleInOverworld))) {
-        this.fixedLocations.add(location);
+        nonShuffled.add(location);
+      } else {
+        shuffled.add(location);
       }
+    }
+
+    return { shuffled, nonShuffled };
+  }
+
+  private houseTokenLocations() {
+    const locations = new Set<string>();
+    for (const location in this.world.checks) {
+      const { item } = this.world.checks[location];
+      if (isHouseToken(item)) {
+        locations.add(location);
+      }
+    }
+    return locations;
+  }
+
+  private fixCrossTokens(gsShuffled: Set<string>, gsNonShuffled: Set<string>, house: Set<string>) {
+    let isCross = false;
+    let isCrossShuffled = false;
+    let isCrossNonShuffled = false;
+
+    if (this.opts.settings.housesSkulltulaTokens === 'cross-noshuffle' || this.opts.settings.housesSkulltulaTokens === 'cross-all') {
+      isCross = true;
+      isCrossNonShuffled = true;
+    }
+    if (this.opts.settings.housesSkulltulaTokens === 'cross-shuffle' || this.opts.settings.housesSkulltulaTokens === 'cross-all') {
+      isCross = true;
+      isCrossShuffled = true;
+    }
+
+    if (!isCross) {
+      return;
+    }
+
+    let locations = new Set(house);
+    if (isCrossShuffled) {
+      locations = new Set([...locations, ...gsShuffled]);
+    }
+    if (isCrossNonShuffled) {
+      locations = new Set([...locations, ...gsNonShuffled]);
+    }
+    const pool = shuffle(this.random, Array.from(locations).map(loc => this.world.checks[loc].item));
+    for (const location of locations) {
+      this.place(location, pool.pop()!);
     }
   }
 
-  private fixHouseTokens() {
-    for (const location in this.world.checks) {
-      const item = this.world.checks[location].item;
-      if (isHouseToken(item)) {
-        this.fixedLocations.add(location);
+  private fixTokens() {
+    const gsLocations = this.goldTokenLocations();
+    const houseLocations = this.houseTokenLocations();
+
+    /* Fix the cross tokens */
+    this.fixCrossTokens(gsLocations.shuffled, gsLocations.nonShuffled, houseLocations);
+
+    /* Fix the non-shuffled GS */
+    for (const location of gsLocations.nonShuffled) {
+      if (!this.placement[location]) {
+        this.place(location, this.world.checks[location].item);
+      }
+    }
+
+    /* Fix the non-shuffled house tokens */
+    if (this.opts.settings.housesSkulltulaTokens !== 'all') {
+      for (const location of houseLocations) {
+        if (!this.placement[location]) {
+          this.place(location, this.world.checks[location].item);
+        }
       }
     }
   }

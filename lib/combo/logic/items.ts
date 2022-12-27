@@ -70,6 +70,8 @@ export const ITEMS_REQUIRED = new Set<string>([
   'OOT_CLAIM_CHECK',
   'OOT_MASK_TRUTH',
   'OOT_MASK_SKULL',
+  'MM_GS_TOKEN_SWAMP',
+  'MM_GS_TOKEN_OCEAN',
   'MM_MASK_DEKU',
   'MM_MASK_GORON',
   'MM_MASK_ZORA',

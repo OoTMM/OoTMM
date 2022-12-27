@@ -21,6 +21,19 @@ export const SETTINGS = [{
   ],
   default: 'none'
 }, {
+  key: 'housesSkulltulaTokens',
+  name: 'Houses Skulltula Tokens Shuffle',
+  category: 'main',
+  type: 'enum',
+  values: [
+    { value: 'none', name: 'No Shuffle' },
+    { value: 'cross-noshuffle', name: 'Non-Shuffled Gold Skulltulas' },
+    { value: 'cross-shuffle', name: 'Shuffled Gold Skulltulas' },
+    { value: 'cross-all', name: 'Any Gold Skulltulas' },
+    { value: 'all', name: 'Everywhere' },
+  ],
+  default: 'none'
+}, {
   key: 'ganonBossKey',
   name: 'Ganon Boss Key Shuffle',
   category: 'main',
