@@ -119,4 +119,8 @@ void LoadIcon(u32 vaddr, int iconId, void* buffer, int size);
 
 int Player_UsingItem(Actor_Player* link);
 
+void PlaySound(u16 soundId);
+void PlaySoundSpecial(u16 soundId);
+void PlayMusic(int arg0, int arg1, int arg2, int arg3, int arg4);
+
 #endif

@@ -1,11 +1,11 @@
 import { Random, shuffle } from '../random';
-import { addItem, isDungeonReward, isItemMajor } from './items';
+import { addItem, isBossKey, isDungeonReward, isGoldToken, isItemMajor } from './items';
 import { pathfind } from './pathfind';
 import { ItemPlacement } from './solve';
 import { Items } from './state';
 import { World } from './world';
 
-const isItemImportant = (item: string) => (isDungeonReward(item) || isItemMajor(item) || /_BOSS_KEY_/.test(item)) && !(/GS_TOKEN$/.test(item) || /MM_HEART_(PIECE|CONTAINER)$/.test(item));
+const isItemImportant = (item: string) => (isDungeonReward(item) || isItemMajor(item) || isBossKey(item)) && !(isGoldToken(item) || /MM_HEART_(PIECE|CONTAINER)$/.test(item));
 
 export const findSpheres = (world: World, placement: ItemPlacement, restrict?: Set<string>, forbid?: Set<string>) => {
   const locations = new Set<string>();

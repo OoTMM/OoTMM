@@ -489,6 +489,12 @@ void comboAddItemMm(GameState_Play* play, u16 itemId)
     case ITEM_MM_WALLET3:
         gMmSave.inventory.upgrades.wallet = 2;
         break;
+    case ITEM_MM_GS_TOKEN_SWAMP:
+        gMmSave.skullCountSwamp++;
+        break;
+    case ITEM_MM_GS_TOKEN_OCEAN:
+        gMmSave.skullCountOcean++;
+        break;
     case ITEM_MM_SONG_AWAKENING:
         gMmSave.inventory.questItems.songAwakening = 1;
         break;

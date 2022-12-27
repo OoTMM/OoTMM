@@ -70,6 +70,8 @@ export const ITEMS_REQUIRED = new Set<string>([
   'OOT_CLAIM_CHECK',
   'OOT_MASK_TRUTH',
   'OOT_MASK_SKULL',
+  'MM_GS_TOKEN_SWAMP',
+  'MM_GS_TOKEN_OCEAN',
   'MM_MASK_DEKU',
   'MM_MASK_GORON',
   'MM_MASK_ZORA',
@@ -193,10 +195,12 @@ export const isMapCompass = (item: string) => isMap(item) || isCompass(item);
 export const isKey = (item: string) => isSmallKey(item) || isBossKey(item);
 export const isDungeonItem = (item: string) => isMapCompass(item) || isKey(item) || isStrayFairy(item);
 export const isDungeonReward = (item: string) => DUNGEON_REWARDS.has(item);
-export const isToken = (item: string) => !!item.match(/^(OOT|MM)_GS_TOKEN/);
 export const isItemMajor = (item: string) => ITEMS_REQUIRED.has(item);
 export const isItemMajorSometimes = (item: string) => ITEMS_SOMETIMES_REQUIRED.has(item);
 export const isItemMajorAlways = (item: string) => ITEMS_REQUIRED.has(item) && !ITEMS_SOMETIMES_REQUIRED.has(item);
+export const isGoldToken = (item: string) => !!item.match(/^OOT_GS_TOKEN/);
+export const isHouseToken = (item: string) => !!item.match(/^MM_GS_TOKEN/);
+export const isToken = (item: string) => isGoldToken(item) || isHouseToken(item);
 
 export const itemsArray = (items: Items) => {
   const arr: string[] = [];

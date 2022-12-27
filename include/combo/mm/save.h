@@ -151,7 +151,8 @@ typedef struct
     u32                     unk_E84;
     u32                     unk_E88[7];
     u32                     scenesVisible[7];
-    u32                     skullTokenCount;
+    u16                     skullCountSwamp;
+    u16                     skullCountOcean;
     u32                     unk_EC4;
     u32                     unk_EC8;
     u32                     unk_ECC[2];

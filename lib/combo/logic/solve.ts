@@ -7,9 +7,7 @@ import { World } from './world';
 import { LogicSeedError } from './error';
 import { CONSTRAINTS, itemConstraint } from './constraints';
 import { Options } from '../options';
-import { addItem, combinedItems, DUNGEON_REWARDS, itemsArray, removeItem, ITEMS_REQUIRED } from './items';
-
-const ITEMS_DUNGEON = /^(OOT|MM)_(MAP|COMPASS|SMALL_KEY|BOSS_KEY|STRAY_FAIRY)_[A-Z_]+$/;
+import { addItem, combinedItems, itemsArray, removeItem, ITEMS_REQUIRED, isDungeonItem, isDungeonReward, isGoldToken, isHouseToken } from './items';
 
 const ITEMS_JUNK = new Set<string>([
   'OOT_RUPEE_GREEN',
@@ -83,13 +81,14 @@ class Solver {
   private pools: ItemPools;
   private reachedLocations = new Set<string>();
   private fixedLocations = new Set<string>();
-  private restrictedAssumed: Items = {};
 
   constructor(
     private opts: Options,
     private world: World,
     private random: Random,
   ) {
+    this.fixTokens();
+    this.fixFairies();
     this.fixLocations();
     this.pools = this.makeItemPools();
     if (this.opts.settings.noLogic) {
@@ -107,10 +106,6 @@ class Solver {
     }
 
     const checksCount = Object.keys(this.world.checks).length;
-
-    /* Fix the GS tokens */
-    this.fixTokens();
-    this.fixFairies();
 
     /* Place the required reward items */
     this.fixRewards();
@@ -160,13 +155,16 @@ class Solver {
       const check = this.world.checks[location];
       const { item } = check;
 
-      if (this.fixedLocations.has(location)) {
-        this.place(location, item);
-        addItem(this.restrictedAssumed, item);
+      if (this.placement[location]) {
         continue;
       }
 
-      if (ITEMS_DUNGEON.test(item) || DUNGEON_REWARDS.has(item)) {
+      if (this.fixedLocations.has(location)) {
+        this.place(location, item);
+        continue;
+      }
+
+      if (isDungeonItem(item) || isDungeonReward(item)) {
         addItem(pools.dungeon, item);
       } else if (ITEMS_REQUIRED.has(item)) {
         addItem(pools.required, item);
@@ -204,18 +202,89 @@ class Solver {
     return itemConstraint(item, this.opts.settings);
   }
 
-  private fixTokens() {
+  private goldTokenLocations() {
+    const shuffled = new Set<string>();
+    const nonShuffled = new Set<string>();
     const setting = this.opts.settings.goldSkulltulaTokens;
     const shuffleInDungeons = ['dungeons', 'all'].includes(setting);
     const shuffleInOverworld = ['overworld', 'all'].includes(setting);
-    const skullLocations = Object.keys(this.world.checks).filter(x => this.world.checks[x].item === 'OOT_GS_TOKEN');
+    const skullLocations = Object.keys(this.world.checks).filter(x => isGoldToken(this.world.checks[x].item));
     const dungeonLocations = Object.values(this.world.dungeons).reduce((acc, x) => new Set([...acc, ...x]));
 
     for (const location of skullLocations) {
       const isDungeon = dungeonLocations.has(location);
       if (!((isDungeon && shuffleInDungeons) || (!isDungeon && shuffleInOverworld))) {
-        this.place(location, 'OOT_GS_TOKEN');
-        removeItemPools(this.pools, 'OOT_GS_TOKEN');
+        nonShuffled.add(location);
+      } else {
+        shuffled.add(location);
+      }
+    }
+
+    return { shuffled, nonShuffled };
+  }
+
+  private houseTokenLocations() {
+    const locations = new Set<string>();
+    for (const location in this.world.checks) {
+      const { item } = this.world.checks[location];
+      if (isHouseToken(item)) {
+        locations.add(location);
+      }
+    }
+    return locations;
+  }
+
+  private fixCrossTokens(gsShuffled: Set<string>, gsNonShuffled: Set<string>, house: Set<string>) {
+    let isCross = false;
+    let isCrossShuffled = false;
+    let isCrossNonShuffled = false;
+
+    if (this.opts.settings.housesSkulltulaTokens === 'cross-noshuffle' || this.opts.settings.housesSkulltulaTokens === 'cross-all') {
+      isCross = true;
+      isCrossNonShuffled = true;
+    }
+    if (this.opts.settings.housesSkulltulaTokens === 'cross-shuffle' || this.opts.settings.housesSkulltulaTokens === 'cross-all') {
+      isCross = true;
+      isCrossShuffled = true;
+    }
+
+    if (!isCross) {
+      return;
+    }
+
+    let locations = new Set(house);
+    if (isCrossShuffled) {
+      locations = new Set([...locations, ...gsShuffled]);
+    }
+    if (isCrossNonShuffled) {
+      locations = new Set([...locations, ...gsNonShuffled]);
+    }
+    const pool = shuffle(this.random, Array.from(locations).map(loc => this.world.checks[loc].item));
+    for (const location of locations) {
+      this.place(location, pool.pop()!);
+    }
+  }
+
+  private fixTokens() {
+    const gsLocations = this.goldTokenLocations();
+    const houseLocations = this.houseTokenLocations();
+
+    /* Fix the cross tokens */
+    this.fixCrossTokens(gsLocations.shuffled, gsLocations.nonShuffled, houseLocations);
+
+    /* Fix the non-shuffled GS */
+    for (const location of gsLocations.nonShuffled) {
+      if (!this.placement[location]) {
+        this.place(location, this.world.checks[location].item);
+      }
+    }
+
+    /* Fix the non-shuffled house tokens */
+    if (this.opts.settings.housesSkulltulaTokens !== 'all') {
+      for (const location of houseLocations) {
+        if (!this.placement[location]) {
+          this.place(location, this.world.checks[location].item);
+        }
       }
     }
   }
@@ -224,9 +293,7 @@ class Solver {
     for (const location in this.world.checks) {
       const check = this.world.checks[location];
       if (check.type === 'sf') {
-        const item = check.item;
-        this.place(location, item);
-        removeItem(this.pools.dungeon, item);
+        this.fixedLocations.add(location);
       }
     }
   }
@@ -237,7 +304,7 @@ class Solver {
 
     for (const location in this.world.checks) {
       const item = this.world.checks[location].item;
-      if (DUNGEON_REWARDS.has(item)) {
+      if (isDungeonReward(item)) {
         rewards.push(item);
         locations.push(location);
       }

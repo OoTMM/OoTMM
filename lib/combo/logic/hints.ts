@@ -4,7 +4,7 @@ import { findSpheres } from './playthrough';
 import { Random, sample, shuffle } from '../random';
 import { pathfind } from './pathfind';
 import { Items } from './state';
-import { addItem, DUNGEON_REWARDS_ORDERED, isDungeonItem, isDungeonReward, isItemMajor, isItemMajorSometimes, isItemMajorAlways, isToken, itemsArray } from './items';
+import { addItem, DUNGEON_REWARDS_ORDERED, isDungeonItem, isDungeonReward, isItemMajor, isItemMajorSometimes, isItemMajorAlways, isToken, isGoldToken, itemsArray } from './items';
 import { Settings } from '../settings';
 import { CONSTRAINT_NONE, itemConstraint } from './constraints';
 import { Game } from '../config';
@@ -330,6 +330,9 @@ class HintsSolver {
     if (!this.settings.shuffleGerudoCard && item == 'OOT_GERUDO_CARD') {
       return false;
     }
+    if (isToken(item)) {
+      return false;
+    }
     return true;
   }
 
@@ -576,7 +579,7 @@ class HintsSolver {
 
   private locationFoolish(loc: string, wothItems: {[k: string]: Set<string>}) {
     const item = this.items[loc];
-    if (isDungeonItem(item) || isDungeonReward(item) || isToken(item)) {
+    if (isDungeonItem(item) || isDungeonReward(item) || isGoldToken(item)) {
       return 0;
     }
     if (isItemMajor(item) && !this.majorItemFoolish(loc, item, wothItems) && !this.limitedItemUseless(item)) {

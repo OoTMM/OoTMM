@@ -66,6 +66,8 @@ static void debugCheat(GameState_Play* play)
         //gSave.day = 3;
         //gSave.isNight = 1;
         //gSave.time = 0x3000;
+
+        //gSave.skullCountOcean = 0x10;
     }
 #endif
 }

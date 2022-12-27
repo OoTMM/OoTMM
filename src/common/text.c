@@ -346,6 +346,8 @@ static const char* const kItemNamesMm[] = {
     "a " C0 "World Map (Romani Ranch)",
     "a " C0 "World Map (Great Bay)",
     "a " C0 "World Map (Stone Tower)",
+    "a " C0 "Swamp Skulltula Token",
+    "an " C0 "Ocean Skulltula Token",
 };
 
 typedef struct
@@ -435,6 +437,8 @@ const RegionName kRegionNamesMm[] = {
     { "in",         "a " TEXT_COLOR_YELLOW "Secret Shrine" },
     { "on",         "the " TEXT_COLOR_ORANGE "Stone Tower" },
     { "on",         "the " TEXT_COLOR_RED "Moon" },
+    { "in",         "the " TEXT_COLOR_GREEN "Swamp Spider House" },
+    { "in",         "the " TEXT_COLOR_BLUE "Ocean Spider House" },
 };
 
 static const char* const kCheckNamesOot[] = {
