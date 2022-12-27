@@ -203,8 +203,7 @@ class Solver {
   }
 
   private goldTokenLocations() {
-    const shuffled = new Set<string>();
-    const nonShuffled = new Set<string>();
+    const locations = new Set<string>();
     const setting = this.opts.settings.goldSkulltulaTokens;
     const shuffleInDungeons = ['dungeons', 'all'].includes(setting);
     const shuffleInOverworld = ['overworld', 'all'].includes(setting);
@@ -214,13 +213,11 @@ class Solver {
     for (const location of skullLocations) {
       const isDungeon = dungeonLocations.has(location);
       if (!((isDungeon && shuffleInDungeons) || (!isDungeon && shuffleInOverworld))) {
-        nonShuffled.add(location);
-      } else {
-        shuffled.add(location);
+        locations.add(location);
       }
     }
 
-    return { shuffled, nonShuffled };
+    return locations;
   }
 
   private houseTokenLocations() {
@@ -234,31 +231,12 @@ class Solver {
     return locations;
   }
 
-  private fixCrossTokens(gsShuffled: Set<string>, gsNonShuffled: Set<string>, house: Set<string>) {
-    let isCross = false;
-    let isCrossShuffled = false;
-    let isCrossNonShuffled = false;
-
-    if (this.opts.settings.housesSkulltulaTokens === 'cross-noshuffle' || this.opts.settings.housesSkulltulaTokens === 'cross-all') {
-      isCross = true;
-      isCrossNonShuffled = true;
-    }
-    if (this.opts.settings.housesSkulltulaTokens === 'cross-shuffle' || this.opts.settings.housesSkulltulaTokens === 'cross-all') {
-      isCross = true;
-      isCrossShuffled = true;
-    }
-
-    if (!isCross) {
+  private fixCrossTokens(gs: Set<string>, house: Set<string>) {
+    if (this.opts.settings.housesSkulltulaTokens !== 'cross') {
       return;
     }
 
-    let locations = new Set(house);
-    if (isCrossShuffled) {
-      locations = new Set([...locations, ...gsShuffled]);
-    }
-    if (isCrossNonShuffled) {
-      locations = new Set([...locations, ...gsNonShuffled]);
-    }
+    const locations = new Set([...gs, ...house]);
     const pool = shuffle(this.random, Array.from(locations).map(loc => this.world.checks[loc].item));
     for (const location of locations) {
       this.place(location, pool.pop()!);
@@ -270,10 +248,10 @@ class Solver {
     const houseLocations = this.houseTokenLocations();
 
     /* Fix the cross tokens */
-    this.fixCrossTokens(gsLocations.shuffled, gsLocations.nonShuffled, houseLocations);
+    this.fixCrossTokens(gsLocations, houseLocations);
 
     /* Fix the non-shuffled GS */
-    for (const location of gsLocations.nonShuffled) {
+    for (const location of gsLocations) {
       if (!this.placement[location]) {
         this.place(location, this.world.checks[location].item);
       }

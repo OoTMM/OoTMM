@@ -27,10 +27,8 @@ export const SETTINGS = [{
   type: 'enum',
   values: [
     { value: 'none', name: 'No Shuffle' },
-    { value: 'cross-noshuffle', name: 'Non-Shuffled Gold Skulltulas' },
-    { value: 'cross-shuffle', name: 'Shuffled Gold Skulltulas' },
-    { value: 'cross-all', name: 'Any Gold Skulltulas' },
-    { value: 'all', name: 'Everywhere' },
+    { value: 'cross', name: 'Gold Skulltulas Only' },
+    { value: 'all', name: 'All Tokens' },
   ],
   default: 'none'
 }, {
