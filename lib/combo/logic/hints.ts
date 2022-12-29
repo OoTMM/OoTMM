@@ -56,6 +56,8 @@ const FIXED_HINTS_LOCATIONS = [
   'MM Goron Powder Keg',
   'MM Waterfall Rapids Beaver Race 1',
   'MM Waterfall Rapids Beaver Race 2',
+  'MM Swamp Spider House Mask of Truth',
+  'MM Ocean Spider House Wallet',
 ]
 
 const HINTS_ITEMS_ALWAYS = [

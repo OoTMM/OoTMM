@@ -257,6 +257,15 @@ class Patcher {
     this.rom.writeUInt32BE((0x0c000000 | (((func >>> 2) & 0x03ffffff) >>> 0)) >>> 0, paddr);
   }
 
+  patchVROM(patch: Buffer) {
+    const paddr = patch.readUInt32BE(this.cursor + 0x00);
+    const size = patch.readUInt32BE(this.cursor + 0x04);
+    this.cursor += 0x08;
+    const data = patch.subarray(this.cursor, this.cursor + size);
+    this.cursor += size;
+    data.copy(this.rom, paddr);
+  }
+
   async run() {
     this.cursor = 0;
     for (;;) {
@@ -294,6 +303,9 @@ class Patcher {
         break;
       case 0x08:
         this.patchCall(this.patches);
+        break;
+      case 0x09:
+        this.patchVROM(this.patches);
         break;
       default:
         throw new Error("Invalid patch type: " + type);
