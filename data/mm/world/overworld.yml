@@ -661,7 +661,7 @@
   exits:
     "Great Bay Near Fairy Fountain": "true"
   locations:
-    "Great Bay Fairy": "has(STRAY_FAIRY_GB, 15)"
+    "Great Bay Great Fairy": "has(STRAY_FAIRY_GB, 15)"
 "Waterfall Cliffs":
   region: ZORA_CAPE
   exits:

@@ -49,6 +49,10 @@ const FIXED_HINTS_LOCATIONS = [
   'OOT Skulltula House 50 Tokens',
   'MM Laboratory Zora Song',
   'MM Moon Fierce Deity Mask',
+  'MM Woodfall Great Fairy',
+  'MM Snowhead Great Fairy',
+  'MM Great Bay Great Fairy',
+  'MM Ikana Great Fairy',
 ]
 
 const HINTS_ITEMS_ALWAYS = [
@@ -192,7 +196,7 @@ const LOCATIONS_FOR_MASK_GREAT_FAIRY = [
   'MM Moon Fierce Deity Mask',
   'MM Woodfall Great Fairy',
   'MM Snowhead Great Fairy',
-  'MM Great Bay Fairy'
+  'MM Great Bay Great Fairy',
 ];
 
 const LOCATIONS_FOR_MASK_DON_GERO = [

@@ -151,7 +151,7 @@ Zora Cape Ledge Chest 2,                          chest,          NONE,         
 Zora Cape Underwater Chest,                       chest,          NONE,               ZORA_CAPE,                  0x00,                   RUPEE_PURPLE
 Zora Cape Waterfall HP,                           collectible,    NONE,               ZORA_CAPE,                  0x07,                   HEART_PIECE
 Zora Cape Grotto,                                 chest,          NONE,               GROTTOS,                    0x15,                   BOMBCHU
-Great Bay Fairy,                                  npc,            NONE,               FAIRY_FOUNTAIN,             GREAT_FAIRY_OCEAN,      DEFENSE_UPGRADE
+Great Bay Great Fairy,                            npc,            NONE,               FAIRY_FOUNTAIN,             GREAT_FAIRY_OCEAN,      DEFENSE_UPGRADE
 Zora Hall Scrub Deed,                             npc,            NONE,               ZORA_HALL_ROOMS,            SCRUB_OCEAN,            DEED_OCEAN
 Zora Hall Scrub HP,                               collectible,    NONE,               ZORA_HALL_ROOMS,            0x1e,                   HEART_PIECE
 Zora Hall Evan HP,                                npc,            NONE,               ZORA_HALL_ROOMS,            ZORA_EVAN,              HEART_PIECE
