@@ -54,6 +54,8 @@ const FIXED_HINTS_LOCATIONS = [
   'MM Great Bay Great Fairy',
   'MM Ikana Great Fairy',
   'MM Goron Powder Keg',
+  'MM Waterfall Rapids Beaver Race 1',
+  'MM Waterfall Rapids Beaver Race 2',
 ]
 
 const HINTS_ITEMS_ALWAYS = [
