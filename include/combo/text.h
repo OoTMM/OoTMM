@@ -36,6 +36,7 @@
 # define TEXT_CHOICE3        "\xc3"
 # define TEXT_NL             "\x11"
 # define TEXT_NOCLOSE        "\x1a"
+# define TEXT_SIGNAL         "\xe0"
 # define TEXT_ICON           ""
 # define TEXT_BB             ""
 #endif

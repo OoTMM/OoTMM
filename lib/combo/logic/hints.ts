@@ -41,6 +41,15 @@ export type Hints = {
   gossip: {[k: string]: HintGossip};
 };
 
+const FIXED_HINTS_LOCATIONS = [
+  'OOT Skulltula House 10 Tokens',
+  'OOT Skulltula House 20 Tokens',
+  'OOT Skulltula House 30 Tokens',
+  'OOT Skulltula House 40 Tokens',
+  'OOT Skulltula House 50 Tokens',
+  'MM Laboratory Zora Song',
+]
+
 const HINTS_ITEMS_ALWAYS = [
   'OOT_FROGS_FINAL',
   'OOT_FISHING',
@@ -750,14 +759,7 @@ class HintsSolver {
     /* TODO: refactor this */
     this.hintedLocations.add(this.findItem('OOT_ARROW_LIGHT')!);
     this.hintedLocations.add(this.findItem('MM_SONG_ORDER')!);
-
-    [
-      'OOT Skulltula House 10 Tokens',
-      'OOT Skulltula House 20 Tokens',
-      'OOT Skulltula House 30 Tokens',
-      'OOT Skulltula House 40 Tokens',
-      'OOT Skulltula House 50 Tokens',
-    ].forEach(x => this.hintedLocations.add(x));
+    FIXED_HINTS_LOCATIONS.forEach(x => this.hintedLocations.add(x));
 
     /* Place always hints */
     hints += this.placeGossipItemExactPool(HINTS_ITEMS_ALWAYS);
