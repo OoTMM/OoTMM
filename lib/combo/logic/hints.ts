@@ -53,6 +53,7 @@ const FIXED_HINTS_LOCATIONS = [
   'MM Snowhead Great Fairy',
   'MM Great Bay Great Fairy',
   'MM Ikana Great Fairy',
+  'MM Goron Powder Keg',
 ]
 
 const HINTS_ITEMS_ALWAYS = [
