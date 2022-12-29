@@ -282,22 +282,6 @@ const LOCATIONS_FOR_SONG_HEALING = [
   'MM Music Box House Gibdo Mask'
 ];
 
-const LOCATIONS_FOR_HEART_PIECE = [
-  'MM Secret Shrine Boss 1 Chest',
-  'MM Secret Shrine Boss 2 Chest',
-  'MM Secret Shrine Boss 3 Chest',
-  'MM Secret Shrine Boss 4 Chest',
-  'MM Secret Shrine HP Chest'
-];
-
-const LOCATIONS_FOR_HEART_CONTAINER = [
-  'MM Secret Shrine Boss 1 Chest',
-  'MM Secret Shrine Boss 2 Chest',
-  'MM Secret Shrine Boss 3 Chest',
-  'MM Secret Shrine Boss 4 Chest',
-  'MM Secret Shrine HP Chest'
-];
-
 class HintsSolver {
   private hintedLocations = new Set<string>();
   private gossip: {[k: string]: HintGossip} = {};
@@ -471,15 +455,7 @@ class HintsSolver {
         return false;
       }
       else if (isItemMajorSometimes(this.items[list[place]])) {
-        if (this.items[list[place]] == 'MM_HEART_PIECE' || this.items[list[place]] == 'MM_HEART_CONTAINER') {
-          if (list[place] == 'MM Secret Shrine Boss 1 Chest' || list[place] == 'MM Secret Shrine Boss 2 Chest' || list[place] == 'MM Secret Shrine Boss 3 Chest') {
-            return false;
-          }
-          else if (list[place] == 'MM Secret Shrine Boss 4 Chest' || list[place] == 'MM Secret Shrine HP Chest') {
-            continue;
-          }
-        }
-        else if (paperItems.includes(this.items[list[place]])) {
+        if (paperItems.includes(this.items[list[place]])) {
           if (list[place] == 'MM Stock Pot Inn ??? HP') {
             return false;
           }
@@ -579,10 +555,6 @@ class HintsSolver {
         return this.limitedItemUselessHelper(LOCATIONS_FOR_POWDER_KEG);
       case 'MM_SONG_HEALING':
         return this.limitedItemUselessHelper(LOCATIONS_FOR_SONG_HEALING);
-      case 'MM_HEART_PIECE':
-        return this.limitedItemUselessHelperSafe(LOCATIONS_FOR_HEART_PIECE);
-      case 'MM_HEART_CONTAINER':
-        return this.limitedItemUselessHelperSafe(LOCATIONS_FOR_HEART_CONTAINER);
     }
     return false;
   }

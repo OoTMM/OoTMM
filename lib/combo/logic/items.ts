@@ -134,8 +134,6 @@ export const ITEMS_REQUIRED = new Set<string>([
   'MM_PENDANT_OF_MEMORIES',
   'MM_LETTER_TO_MAMA',
   'MM_WALLET',
-  'MM_HEART_PIECE',
-  'MM_HEART_CONTAINER',
   'MM_GREAT_FAIRY_SWORD',
   'MM_SPIN_UPGRADE',
 ]);
@@ -181,8 +179,6 @@ export const ITEMS_SOMETIMES_REQUIRED = new Set<string>([
   'MM_LETTER_TO_KAFEI',
   'MM_PENDANT_OF_MEMORIES',
   'MM_LETTER_TO_MAMA',
-  'MM_HEART_PIECE',
-  'MM_HEART_CONTAINER',
 ]);
 
 export const isSong = (item: string) => !!item.match(/^(OOT|MM)_SONG_/);
