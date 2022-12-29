@@ -38,7 +38,7 @@
 # define TEXT_NOCLOSE        "\x1a"
 # define TEXT_SIGNAL         "\xe0"
 # define TEXT_ICON           ""
-# define TEXT_BB             ""
+# define TEXT_BB             "\x10"
 #endif
 
 #define TF_CAPITALIZE   (1 << 0)

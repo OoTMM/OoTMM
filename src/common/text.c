@@ -631,15 +631,21 @@ void comboTextAutoLineBreaks(char* buffer)
         if (c >= ' ' && c <= '~')
         {
             lineLength++;
-            if (lineLength == kMaxLineLength)
+            if (lineLength >= kMaxLineLength && lastSpace != -1)
             {
                 lineLength = i - lastSpace;
                 buffer[lastSpace] = TEXT_NL[0];
+                lastSpace = -1;
             }
         }
         if (c == ' ')
         {
             lastSpace = i;
+        }
+        if (c == (u8)(TEXT_NL[0]) || c == (u8)(TEXT_BB[0]))
+        {
+            lastSpace = -1;
+            lineLength = 0;
         }
         i += comboMultibyteCharSize(c);
     }

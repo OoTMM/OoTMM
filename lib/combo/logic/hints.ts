@@ -48,6 +48,7 @@ const FIXED_HINTS_LOCATIONS = [
   'OOT Skulltula House 40 Tokens',
   'OOT Skulltula House 50 Tokens',
   'MM Laboratory Zora Song',
+  'MM Moon Fierce Deity Mask',
 ]
 
 const HINTS_ITEMS_ALWAYS = [
