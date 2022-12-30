@@ -920,45 +920,6 @@ void comboMessageCancel(GameState_Play* play)
     play->msgCtx.ocarinaMode = 4;
     *(((char*)GET_LINK(play)) + 0x141) = 0;
 }
-
-static const char kIcons[] = {
-    0x6c,
-    0x6d,
-    0x6e,
-    0x6b,
-    0x66,
-    0x67,
-    0x68,
-    0x69,
-    0x6a,
-};
-
-void comboTextHijackDungeonRewardHints(GameState_Play* play, int base, int count)
-{
-    char* b;
-    int index;
-
-    b = play->msgCtx.textBuffer;
-    comboTextAppendHeader(&b);
-    for (int i = 0; i < count; ++i)
-    {
-        index = base + i;
-        comboTextAppendStr(&b, TEXT_FAST TEXT_ICON);
-        *b++ = kIcons[index];
-        comboTextAppendRegionName(&b, gComboData.hints.dungeonRewards[index], TF_PREPOS | TF_CAPITALIZE);
-        comboTextAppendStr(&b, "...");
-
-        if (i == (count - 1))
-        {
-            comboTextAppendStr(&b, TEXT_SIGNAL TEXT_END);
-        }
-        else
-        {
-            comboTextAppendStr(&b, TEXT_BB);
-        }
-
-    }
-}
 #endif
 
 #if defined(GAME_MM)
@@ -1028,3 +989,12 @@ void comboTextHijackOathToOrder(GameState_Play* play)
     comboTextAutoLineBreaks(start);
 }
 #endif
+
+void comboTextAppendNpcReward(char** b, s16 npcId, s16 gi)
+{
+    s16 itemId;
+
+    gi = comboOverrideEx(OV_NPC, 0, npcId, gi, OVF_NO_PROGRESSIVE);
+    itemId = comboItemFromGI(gi);
+    comboTextAppendItemName(b, itemId, TF_PREPOS | TF_PROGRESSIVE);
+}

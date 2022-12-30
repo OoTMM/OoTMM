@@ -47,6 +47,8 @@ const FIXED_HINTS_LOCATIONS = [
   'OOT Skulltula House 30 Tokens',
   'OOT Skulltula House 40 Tokens',
   'OOT Skulltula House 50 Tokens',
+  'OOT Hyrule Field Ocarina of Time',
+  'OOT Hyrule Field Song of Time',
   'MM Laboratory Zora Song',
   'MM Moon Fierce Deity Mask',
   'MM Woodfall Great Fairy',

@@ -54,5 +54,6 @@ void comboTextAppendNum(char** b, int num);
 void comboTextAppendItemName(char** b, u16 itemId, int flags);
 void comboTextAppendRegionName(char** b, u8 regionId, int flags);
 void comboTextAppendCheckName(char** b, u8 checkId);
+void comboTextAppendNpcReward(char** b, s16 npcId, s16 gi);
 
 #endif
