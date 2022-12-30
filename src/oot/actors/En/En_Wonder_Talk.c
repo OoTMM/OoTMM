@@ -28,7 +28,6 @@ static void hintDungeons(GameState_Play* play)
     int base;
     int count;
     int isChild;
-    int index;
 
     b = play->msgCtx.textBuffer;
     isChild = gSave.age == AGE_CHILD;
