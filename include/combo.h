@@ -102,6 +102,9 @@ void comboWriteForeignSave(void);
 void comboWriteSave(void);
 void comboCopyMmSave(int dst, int src);
 
+/* Save util */
+void comboCreateSaveMM(void);
+
 /* Switch */
 void comboGameSwitch(void);
 

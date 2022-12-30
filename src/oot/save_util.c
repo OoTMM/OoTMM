@@ -155,7 +155,4 @@ void comboCreateSaveMM(void)
         while (gMmSave.spiderHouseMaskOrder[i] == tmp);
         tmp = gMmSave.spiderHouseMaskOrder[i];
     }
-
-    /* Save */
-    comboWriteForeignSave();
 }

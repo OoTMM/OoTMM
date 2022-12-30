@@ -43,6 +43,16 @@ export const SETTINGS = [{
   ],
   default: 'removed'
 }, {
+  key: 'mapCompassShuffle',
+  name: 'Map / Compass Shuffle',
+  category: 'main',
+  type: 'enum',
+  values: [
+    { value: 'ownDungeon', name: 'Own Dungeon' },
+    { value: 'removed', name: 'Removed' },
+  ],
+  default: 'ownDungeon'
+}, {
   key: 'shuffleGerudoCard',
   name: 'Gerudo Card Shuffle',
   category: 'main',
