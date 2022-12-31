@@ -105,9 +105,6 @@ const gameChecks = (settings: Settings, game: Game, logic: LogicResult): Buffer 
     if (c.game !== game) {
       continue;
     }
-    if (game === 'oot' && c.type === 'gs' && settings.goldSkulltulaTokens === 'none') {
-      continue;
-    }
     if (c.type === 'sf') {
       continue;
     }
