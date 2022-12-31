@@ -23,7 +23,7 @@ void Sram_CopySaveWrapper(void* fileSelect, void* sramCtx)
 
 PATCH_CALL(0x808048d8, Sram_CopySaveWrapper);
 
-static u32 kDungeonMapCompassMaskOot = 0x3f;
+static u32 kDungeonMapCompassMaskOot = 0x3ff;
 
 static void startingMapCompass(void)
 {
