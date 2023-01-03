@@ -43,7 +43,8 @@ void EnSth_AfterInit(Actor* this, GameState_Play* play)
             (char*)play + 0x1ca0,
             play,
             0xd4,
-            1.f, 540.f, 476.f,
+            //-110.f, 540.f, 250.f,
+            -110.f, 650.f, 250.f,
             0, 0, 0,
             0
         );
