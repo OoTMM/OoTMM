@@ -528,6 +528,7 @@ void comboAddItemOot(GameState_Play* play, u16 itemId)
         break;
     case ITEM_OOT_SONG_EPONA:
         gOotSave.quest.songEpona = 1;
+        BITMAP16_SET(gOotSave.eventsChk, EV_OOT_CHK_EPONA);
         break;
     case ITEM_OOT_SONG_ZELDA:
         gOotSave.quest.songZelda = 1;

@@ -9,6 +9,7 @@
 #define EV_OOT_CHK_MALON_SPOKEN_HYRULE      0x10
 #define EV_OOT_CHK_MALON_EGG                0x12
 #define EV_OOT_CHK_TREE_DEAD                0x17
+#define EV_OOT_CHK_EPONA                    0x18
 #define EV_OOT_CHK_STONE_EMERALD            0x19
 #define EV_OOT_CHK_MIDO_TREE_DEAD           0x1c
 #define EV_OOT_CHK_BOMBCHU_BOWLING          0x22
