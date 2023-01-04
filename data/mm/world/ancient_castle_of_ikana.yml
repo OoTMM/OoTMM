@@ -18,7 +18,6 @@
     "Ancient Castle of Ikana Interior North": "can_use_fire_arrows"
     "Ancient Castle of Ikana Interior South": "can_use_fire_arrows"
     "Ancient Castle of Ikana Pre-Boss": "(has_mirror_shield && event(IKANA_CASTLE_LIGHT2)) || can_use_light_arrows"
-    "Ancient Castle of Ikana Interior North 2": "has(MASK_DEKU)"
 "Ancient Castle of Ikana Interior North":
   region: IKANA_CASTLE
   exits:
