@@ -69,3 +69,8 @@ PATCH_END
 PATCH_START(0x8081f928)
   nop
 PATCH_END
+
+/* Disable AA and Divot in some cases */
+PATCH_START 0x8009c5ac
+  nop
+PATCH_END
