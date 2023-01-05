@@ -1,0 +1,9 @@
+#include <combo.h>
+
+PATCH_START 0x808da4b8
+.int 0x40800000
+PATCH_END
+
+PATCH_START 0x808d98d0
+  li t2,1
+PATCH_END
