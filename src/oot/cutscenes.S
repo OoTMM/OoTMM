@@ -24,3 +24,9 @@ PATCH_END
 PATCH_START 0x80056f3c
   li v0,1
 PATCH_END
+
+/* Disable some entrance cutscenes */
+/* Nabboru battle */
+PATCH_START 0x800efdf4
+.short 0xfff
+PATCH_END
