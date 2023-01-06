@@ -43,6 +43,8 @@ static void debugCheat(GameState_Play* play)
         gSave.quest.songSaria = 1;
         gSave.quest.songTime = 1;
         gSave.quest.songSun = 1;
+        gSave.quest.songEpona = 1;
+        gSave.quest.songStorms = 1;
 
         gSave.quest.stoneEmerald = 0;
         gSave.quest.stoneRuby = 0;
