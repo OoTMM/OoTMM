@@ -85,6 +85,17 @@ static void debugCheat(GameState_Play* play)
 
 static void eventFixes(GameState_Play* play)
 {
+    u32 tmp;
+
+    /* Skip forest temple cutscene */
+    if (gSave.entrance == 0x169)
+    {
+        tmp = gSave.perm[SCE_OOT_TEMPLE_FOREST].switches;
+        if ((tmp & 0xf0000000) != 0xf0000000)
+            tmp |= 0x08000000;
+        gSave.perm[SCE_OOT_TEMPLE_FOREST].switches = tmp;
+    }
+
     /* Skip Zelda's cutscene when having all the spiritual stones */
     if (gSave.quest.stoneEmerald && gSave.quest.stoneRuby && gSave.quest.stoneSapphire)
     {
