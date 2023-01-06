@@ -37,3 +37,11 @@ void EnOkarinaTag_HandlerTombRoyal(Actor* this, GameState_Play* play)
 }
 
 PATCH_FUNC(0x80a87510, EnOkarinaTag_HandlerTombRoyal);
+
+static void EnOkarinaTag_HandleWindmill(Actor* this, GameState_Play* play)
+{
+    SetEventChk(EV_OOT_CHK_WINDMILL_FAST);
+    SetEventChk(EV_OOT_CHK_WELL_DRAINED);
+}
+
+PATCH_CALL(0x80a873bc, EnOkarinaTag_HandleWindmill);

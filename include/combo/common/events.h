@@ -22,6 +22,7 @@
 #define EV_OOT_CHK_MEDALLION_FOREST         0x48
 #define EV_OOT_CHK_MEDALLION_FIRE           0x49
 #define EV_OOT_CHK_MEDALLION_WATER          0x4a
+#define EV_OOT_CHK_DOOR_TIME                0x4b
 #define EV_OOT_CHK_RAINBOW_BRIDGE           0x4d
 #define EV_OOT_CHK_MASTER_SWORD_CHAMBER     0x4f
 #define EV_OOT_CHK_SONG_TP_FOREST           0x50
@@ -32,6 +33,8 @@
 #define EV_OOT_CHK_SONG_ZELDA               0x59
 #define EV_OOT_CHK_SONG_SUN                 0x5a
 #define EV_OOT_CHK_SONG_STORMS              0x5b
+#define EV_OOT_CHK_WINDMILL_FAST            0x65
+#define EV_OOT_CHK_WELL_DRAINED             0x67
 #define EV_OOT_CHK_LAKE_HYLIA_WATER         0x69
 #define EV_OOT_CHK_ZELDA_FLED               0x80
 #define EV_OOT_CHK_ZELDA_FLED_BRIDGE        0x82
