@@ -1,0 +1,14 @@
+#include <combo.h>
+
+/* Fast jabu */
+PATCH_START 0x809020c4
+  nop
+PATCH_END
+
+PATCH_START 0x80902080
+  lui a1,%HI(0x80901f1c)
+PATCH_END
+
+PATCH_START 0x8090208c
+  addiu a1,%LO(0x80901f1c)
+PATCH_END

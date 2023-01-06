@@ -17,7 +17,7 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory[ITS_OOT_OCARINA] = ITEM_OOT_OCARINA_TIME;
         gSave.inventory[ITS_OOT_BOOMERANG] = ITEM_OOT_BOOMERANG;
         gSave.inventory[ITS_OOT_BOTTLE] = ITEM_OOT_RUTO_LETTER;
-        gSave.inventory[ITS_OOT_BOTTLE2] = ITEM_OOT_EMPTY_BOTTLE;
+        gSave.inventory[ITS_OOT_BOTTLE2] = ITEM_OOT_FISH;
         gSave.inventory[ITS_OOT_BOTTLE3] = ITEM_OOT_BIG_POE;
         gSave.inventory[ITS_OOT_BOTTLE4] = ITEM_OOT_BIG_POE;
         gSave.inventory[ITS_OOT_BOMBCHU] = ITEM_OOT_BOMBCHU_10;
