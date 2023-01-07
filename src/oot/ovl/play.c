@@ -103,7 +103,7 @@ static void eventFixes(GameState_Play* play)
         u16 tmp;
         tmp = gSave.eventsMisc[20];
         if (!(tmp & 0xff))
-            tmp |= 0x0e;
+            tmp |= 0x1e;
         gSave.eventsMisc[20] = tmp;
     }
 
