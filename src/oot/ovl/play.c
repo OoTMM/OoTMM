@@ -85,15 +85,26 @@ static void debugCheat(GameState_Play* play)
 
 static void eventFixes(GameState_Play* play)
 {
-    u32 tmp;
 
     /* Skip forest temple cutscene */
     if (gSave.entrance == 0x169)
     {
+        u32 tmp;
         tmp = gSave.perm[SCE_OOT_TEMPLE_FOREST].switches;
         if ((tmp & 0xf0000000) != 0xf0000000)
             tmp |= 0x08000000;
         gSave.perm[SCE_OOT_TEMPLE_FOREST].switches = tmp;
+    }
+
+    /* Ruto fixes */
+    if (gSave.entrance == 0x028)
+    {
+        /* Skip the intro cutscene */
+        u16 tmp;
+        tmp = gSave.eventsMisc[20];
+        if (!(tmp & 0xff))
+            tmp |= 0x0e;
+        gSave.eventsMisc[20] = tmp;
     }
 
     /* Skip Zelda's cutscene when having all the spiritual stones */
