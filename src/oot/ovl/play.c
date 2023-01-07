@@ -45,6 +45,12 @@ static void debugCheat(GameState_Play* play)
         gSave.quest.songSun = 1;
         gSave.quest.songEpona = 1;
         gSave.quest.songStorms = 1;
+        gSave.quest.songTpLight = 1;
+        gSave.quest.songTpShadow = 1;
+        gSave.quest.songTpWater = 1;
+        gSave.quest.songTpFire = 1;
+        gSave.quest.songTpForest = 1;
+        gSave.quest.songTpSpirit = 1;
 
         gSave.quest.stoneEmerald = 0;
         gSave.quest.stoneRuby = 0;
