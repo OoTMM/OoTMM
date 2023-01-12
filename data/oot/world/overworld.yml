@@ -552,7 +552,7 @@
   exits:
     "Lake Hylia": "true"
     "Hyrule Field": "true"
-    "Gerudo Valley After Bridge": "can_longshot || event(EPONA)"
+    "Gerudo Valley After Bridge": "can_longshot || (is_adult && event(EPONA))"
   locations:
     "Gerudo Valley Crate HP": "is_child || can_longshot"
     "Gerudo Valley Waterfall HP": "true"
@@ -575,8 +575,8 @@
   exits:
     "Gerudo Fortress": "true"
     "Gerudo Valley After Bridge": "true"
-    "Haunted Wasteland Start": "has(GERUDO_CARD)"
-    "Gerudo Training Grounds Entrance": "has(GERUDO_CARD)"
+    "Haunted Wasteland Start": "has(GERUDO_CARD) && is_adult"
+    "Gerudo Training Grounds Entrance": "has(GERUDO_CARD) && is_adult"
   locations:
     "Gerudo Fortress Chest": "has_hover_boots || can_longshot || scarecrow_hookshot"
     "Gerudo Fortress Archery Reward 1": "event(EPONA) && can_use_bow && has(GERUDO_CARD)"
