@@ -418,10 +418,10 @@
     "Mountain Village": "true"
   events:
     BLACKSMITH_ENABLED: "event(BOSS_SNOWHEAD) || can_use_fire_arrows || event(GORON_GRAVEYARD_HOT_WATER) || (event(WELL_HOT_WATER) && can_play(SONG_SOARING))"
-    GOLD_DUST_USED: "has(WALLET) && has(BOTTLED_GOLD_DUST)"
+    GOLD_DUST_USED: "has(WALLET) && has(BOTTLED_GOLD_DUST) && event(BLACKSMITH_ENABLED)"
   locations:
     "Blacksmith Razor Blade": "event(BLACKSMITH_ENABLED) && has(WALLET)"
-    "Blacksmith Gilded Sword": "event(BLACKSMITH_ENABLED) && event(GOLD_DUST_USED)"
+    "Blacksmith Gilded Sword": "event(GOLD_DUST_USED)"
 "Twin Islands":
   region: TWIN_ISLANDS
   exits:
