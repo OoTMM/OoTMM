@@ -4,7 +4,7 @@ import { findSpheres } from './playthrough';
 import { Random, sample, shuffle } from '../random';
 import { pathfind } from './pathfind';
 import { Items } from './state';
-import { addItem, DUNGEON_REWARDS_ORDERED, isDungeonItem, isDungeonReward, isItemMajor, isItemMajorSometimes, isItemMajorAlways, isToken, isGoldToken, itemsArray } from './items';
+import { addItem, DUNGEON_REWARDS_ORDERED, isDungeonItem, isDungeonReward, isItemMajor, isItemMajorSometimes, isItemMajorAlways, isToken, isGoldToken, itemsArray, isKey, isHouseToken, isSmallKey } from './items';
 import { Settings } from '../settings';
 import { CONSTRAINT_NONE, itemConstraint } from './constraints';
 import { Game } from '../config';
@@ -326,6 +326,9 @@ class HintsSolver {
   }
 
   private isItemHintable(item: string) {
+    if (isSmallKey(item) && this.settings.smallKeyShuffle !== 'ownDungeon') {
+      return true;
+    }
     if (isDungeonItem(item)) {
       return false;
     }
@@ -335,7 +338,10 @@ class HintsSolver {
     if (!this.settings.shuffleGerudoCard && item == 'OOT_GERUDO_CARD') {
       return false;
     }
-    if (isToken(item)) {
+    if (isGoldToken(item)) {
+      return false;
+    }
+    if (isHouseToken(item) && this.settings.housesSkulltulaTokens === 'none') {
       return false;
     }
     return true;
@@ -572,10 +578,10 @@ class HintsSolver {
 
   private locationFoolish(loc: string, wothItems: {[k: string]: Set<string>}) {
     const item = this.items[loc];
-    if (isDungeonItem(item) || isDungeonReward(item) || isGoldToken(item)) {
+    if (!this.isItemHintable(item)) {
       return 0;
     }
-    if (isItemMajor(item) && !this.majorItemFoolish(loc, item, wothItems) && !this.limitedItemUseless(item)) {
+    if ((isItemMajor(item) || isKey(item)) && !this.majorItemFoolish(loc, item, wothItems) && !this.limitedItemUseless(item)) {
       return -1;
     }
     if (this.hintedLocations.has(loc)) {
@@ -735,15 +741,15 @@ class HintsSolver {
   }
 
   private placeGossips() {
+    /* Set the always hinted locations */
+    this.hintedLocations.add(this.findItem('OOT_ARROW_LIGHT')!);
+    this.hintedLocations.add(this.findItem('MM_SONG_ORDER')!);
+    FIXED_HINTS_LOCATIONS.forEach(x => this.hintedLocations.add(x));
+
     const woth = this.wayOfTheHero();
     const wothItems = this.wayOfTheHeroItems(woth);
     const foolishRegions = this.foolishRegions(wothItems);
     let hints = 0;
-
-    /* TODO: refactor this */
-    this.hintedLocations.add(this.findItem('OOT_ARROW_LIGHT')!);
-    this.hintedLocations.add(this.findItem('MM_SONG_ORDER')!);
-    FIXED_HINTS_LOCATIONS.forEach(x => this.hintedLocations.add(x));
 
     /* Place always hints */
     hints += this.placeGossipItemExactPool(HINTS_ITEMS_ALWAYS);
