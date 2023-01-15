@@ -56,6 +56,11 @@ static void addSmallKey(u16 dungeonId)
     gOotSave.dungeonKeys[dungeonId] = keyCount;
 }
 
+static void addBossKey(u16 dungeonId)
+{
+    gOotSave.dungeonItems[dungeonId].bossKey = 1;
+}
+
 static void addHealth(u8 count)
 {
     u16 health;
@@ -680,7 +685,7 @@ void comboAddItemOot(GameState_Play* play, u16 itemId)
         break;
     case ITEM_OOT_BOSS_KEY:
         dungeonId = dungeon(play, 1);
-        gOotSave.dungeonItems[dungeonId].bossKey = 1;
+        addBossKey(dungeonId);
         break;
 #endif
     case ITEM_OOT_SMALL_KEY_FOREST:
@@ -712,6 +717,24 @@ void comboAddItemOot(GameState_Play* play, u16 itemId)
         break;
     case ITEM_OOT_SMALL_KEY_GTG:
         addSmallKey(SCE_OOT_GERUDO_TRAINING_GROUND);
+        break;
+    case ITEM_OOT_BOSS_KEY_FOREST:
+        addBossKey(SCE_OOT_TEMPLE_FOREST);
+        break;
+    case ITEM_OOT_BOSS_KEY_FIRE:
+        addBossKey(SCE_OOT_TEMPLE_FIRE);
+        break;
+    case ITEM_OOT_BOSS_KEY_WATER:
+        addBossKey(SCE_OOT_TEMPLE_WATER);
+        break;
+    case ITEM_OOT_BOSS_KEY_SPIRIT:
+        addBossKey(SCE_OOT_TEMPLE_SPIRIT);
+        break;
+    case ITEM_OOT_BOSS_KEY_SHADOW:
+        addBossKey(SCE_OOT_TEMPLE_SHADOW);
+        break;
+    case ITEM_OOT_BOSS_KEY_GANON:
+        addBossKey(SCE_OOT_GANON_TOWER);
         break;
     }
 }
