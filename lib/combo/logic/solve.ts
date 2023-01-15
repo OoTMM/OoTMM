@@ -294,6 +294,7 @@ class Solver {
 
   private fixDungeon(dungeon: string) {
     const dungeonItems = new Set(['SMALL_KEY', 'BOSS_KEY', 'STRAY_FAIRY', 'MAP', 'COMPASS']);
+    const pool = combinedItems(this.pools.required, this.pools.nice);
 
     if (this.opts.settings.smallKeyShuffle === 'anywhere') {
       dungeonItems.delete('SMALL_KEY');
@@ -302,9 +303,9 @@ class Solver {
     for (const game of GAMES) {
       for (const baseItem of dungeonItems) {
         const item = gameId(game, baseItem + '_' + dungeon.toUpperCase(), '_');
-        const pool = isMapCompass(item) ? this.pools.nice : this.pools.required;
         while (pool[item]) {
           this.randomAssumed(pool, { restrictedLocations: this.world.dungeons[dungeon], forcedItem: item });
+          removeItemPools(this.pools, item);
         }
       }
     }
