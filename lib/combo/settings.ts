@@ -53,6 +53,16 @@ export const SETTINGS = [{
   ],
   default: 'ownDungeon'
 }, {
+  key: 'smallKeyShuffle',
+  name: 'Small Key Shuffle',
+  category: 'main',
+  type: 'enum',
+  values: [
+    { value: 'ownDungeon', name: 'Own Dungeon' },
+    { value: 'anywhere', name: 'Anywhere' },
+  ],
+  default: 'ownDungeon'
+}, {
   key: 'shuffleGerudoCard',
   name: 'Gerudo Card Shuffle',
   category: 'main',
