@@ -440,7 +440,7 @@ CustomStrayFairyObj kStrayFairyObj =
         gsSPTexture(0xffff, 0xffff, 0, G_TX_RENDERTILE, G_ON),
         gsSPVertex(offsetof(CustomStrayFairyObj, vertices) | 0x06000000, 16, 0),
         gsDPLoadTextureBlock(
-            0x0402c030,
+            0x08000000 | CUSTOM_KEEP_SF_TEXTURE_1,
             G_IM_FMT_IA, G_IM_SIZ_8b,
             16, 32,
             0,
@@ -451,7 +451,7 @@ CustomStrayFairyObj kStrayFairyObj =
         ),
         gsSP2Triangles(4, 5, 6, 0, 4, 6, 7, 0),
         gsDPLoadTextureBlock(
-            0x0402c630,
+            0x08000000 | CUSTOM_KEEP_SF_TEXTURE_2,
             G_IM_FMT_IA, G_IM_SIZ_8b,
             16, 16,
             0,
@@ -463,7 +463,7 @@ CustomStrayFairyObj kStrayFairyObj =
         gsSP2Triangles(8, 9, 10, 0, 8, 10, 11, 0),
         gsSP2Triangles(12, 13, 14, 0, 12, 14, 15, 0),
         gsDPLoadTextureBlock(
-            0x0402bc30,
+            0x08000000 | CUSTOM_KEEP_SF_TEXTURE_3,
             G_IM_FMT_IA, G_IM_SIZ_8b,
             32, 32,
             0,
@@ -504,9 +504,11 @@ static void Shader_CustomStrayFairy(GameState_Play* play, s16 shaderId)
 #else
     index = 0;
 #endif
+
+    OPEN_DISPS(play->gs.gfx);
+    gSPSegment(POLY_XLU_DISP++, 0x08, gCustomKeep);
     comboSetObjectSegment(play->gs.gfx, &kStrayFairyObj);
     ModelViewUnkTransform((float*)((char*)play + kMatTransformOffset));
-    OPEN_DISPS(play->gs.gfx);
     gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     InitListPolyXlu(play->gs.gfx);
     color4(&r, &g, &b, &a, kEnvColors[index]);
