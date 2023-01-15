@@ -157,6 +157,16 @@
 #define ITEM_OOT_SWORD_BIGGORON             0x9f
 #define ITEM_OOT_PROGRESSIVE_SHIELD_DEKU    0xa0
 #define ITEM_OOT_PROGRESSIVE_SHIELD_HYLIAN  0xa1
+#define ITEM_OOT_SMALL_KEY_FOREST           0xa2
+#define ITEM_OOT_SMALL_KEY_FIRE             0xa3
+#define ITEM_OOT_SMALL_KEY_WATER            0xa4
+#define ITEM_OOT_SMALL_KEY_SPIRIT           0xa5
+#define ITEM_OOT_SMALL_KEY_SHADOW           0xa6
+#define ITEM_OOT_SMALL_KEY_GANON            0xa7
+#define ITEM_OOT_SMALL_KEY_ICE              0xa8
+#define ITEM_OOT_SMALL_KEY_BOTW             0xa9
+#define ITEM_OOT_SMALL_KEY_GF               0xaa
+#define ITEM_OOT_SMALL_KEY_GTG              0xab
 
 #define ITEM_MM_OCARINA_OF_TIME             0x00
 #define ITEM_MM_BOW                         0x01
@@ -311,6 +321,10 @@
 #define ITEM_MM_WORLD_MAP_STONE_TOWER       0xae
 #define ITEM_MM_GS_TOKEN_SWAMP              0xaf
 #define ITEM_MM_GS_TOKEN_OCEAN              0xb0
+#define ITEM_MM_SMALL_KEY_WF                0xb1
+#define ITEM_MM_SMALL_KEY_SH                0xb2
+#define ITEM_MM_SMALL_KEY_GB                0xb3
+#define ITEM_MM_SMALL_KEY_ST                0xb4
 
 #define ITEM_NONE   0xff
 

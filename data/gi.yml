@@ -150,6 +150,16 @@ OOT_MAGIC_UPGRADE2:               0x97
 OOT_DEFENSE_UPGRADE:              0x98
 OOT_PROGRESSIVE_SHIELD_DEKU:      0x99
 OOT_PROGRESSIVE_SHIELD_HYLIAN:    0x9a
+OOT_SMALL_KEY_FOREST:             0x9b
+OOT_SMALL_KEY_FIRE:               0x9c
+OOT_SMALL_KEY_WATER:              0x9d
+OOT_SMALL_KEY_SPIRIT:             0x9e
+OOT_SMALL_KEY_SHADOW:             0x9f
+OOT_SMALL_KEY_GANON:              0xa0
+OOT_SMALL_KEY_ICE:                0xa1
+OOT_SMALL_KEY_BOTW:               0xa2
+OOT_SMALL_KEY_GF:                 0xa3
+OOT_SMALL_KEY_GTG:                0xa4
 
 MM_RUPEE_GREEN:               0x01
 MM_RUPEE_BLUE:                0x02
@@ -290,3 +300,7 @@ MM_SOLD_OUT:                  0xce
 MM_PROGRESSIVE_SHIELD_HERO:   0xcf
 MM_GS_TOKEN_SWAMP:            0xd0
 MM_GS_TOKEN_OCEAN:            0xd1
+MM_SMALL_KEY_WF:              0xd2
+MM_SMALL_KEY_SH:              0xd3
+MM_SMALL_KEY_GB:              0xd4
+MM_SMALL_KEY_ST:              0xd5

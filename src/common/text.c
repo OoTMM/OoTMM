@@ -168,6 +168,16 @@ static const char* const kItemNamesOot[] = {
     C1 "Biggoron's Sword",
     "the " C1 "Deku Shield",    /* Progressive */
     "the " C1 "Hylian Shield",  /* Progressive */
+    "a " C0 "Small Key (Forest)",
+    "a " C0 "Small Key (Fire)",
+    "a " C0 "Small Key (Water)",
+    "a " C0 "Small Key (Spirit)",
+    "a " C0 "Small Key (Shadow)",
+    "a " C0 "Small Key (Ganon)",
+    "a " C0 "Small Key (Ice)",
+    "a " C0 "Small Key (Well)",
+    "a " C0 "Small Key (Hideout)",
+    "a " C0 "Small Key (GTG)",
 };
 
 static const char* const kItemNamesMm[] = {
@@ -348,6 +358,10 @@ static const char* const kItemNamesMm[] = {
     "a " C0 "World Map (Stone Tower)",
     "a " C0 "Swamp Skulltula Token",
     "an " C0 "Ocean Skulltula Token",
+    "a " C0 "Small Key (Woodfall)",
+    "a " C0 "Small Key (Snowhead)",
+    "a " C0 "Small Key (Great Bay)",
+    "a " C0 "Small Key (Stone Tower)",
 };
 
 typedef struct
