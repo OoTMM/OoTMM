@@ -175,6 +175,10 @@ static int csmcFromItemOot(s16 gi)
     case GI_OOT_MASK_GORON:
     case GI_OOT_MASK_ZORA:
     case GI_OOT_MASK_GERUDO:
+    case GI_OOT_STICK_UPGRADE:
+    case GI_OOT_STICK_UPGRADE2:
+    case GI_OOT_NUT_UPGRADE:
+    case GI_OOT_NUT_UPGRADE2:
         return CSMC_MAJOR;
     case GI_OOT_SMALL_KEY:
     case GI_OOT_SMALL_KEY_FOREST:
