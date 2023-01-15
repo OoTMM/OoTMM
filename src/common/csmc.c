@@ -326,6 +326,9 @@ void comboCsmcInit(Actor* this, GameState_Play* play, s16 gi)
 {
     int type;
 
+    if (!comboConfig(CFG_CSMC))
+        return;
+
     type = csmcFromItem(gi);
     if (type == CSMC_MAJOR || type == CSMC_BOSS_KEY)
     {
@@ -350,7 +353,10 @@ void comboCsmcPreDraw(Actor* this, GameState_Play* play, s16 gi)
     const void* listFront;
     const void* listSide;
 
-    type = csmcFromItem(gi);
+    if (comboConfig(CFG_CSMC))
+        type = csmcFromItem(gi);
+    else
+        type = CSMC_NORMAL;
     switch (type)
     {
     case CSMC_NORMAL:
