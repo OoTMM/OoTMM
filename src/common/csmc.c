@@ -352,6 +352,12 @@ void comboCsmcInit(Actor* this, GameState_Play* play, s16 gi)
     {
 #if defined(GAME_OOT)
         ActorSetScale(this, 0.005f);
+        /* Fix for spirit temple chest */
+        if (play->sceneId == SCE_OOT_TEMPLE_SPIRIT && (this->variable & 0x1f) == 0x04)
+        {
+            this->position.x += 40.f;
+            this->position.z += 40.f;
+        }
 #else
         ActorSetScale(this, 0.0075f);
 #endif
