@@ -160,6 +160,12 @@ OOT_SMALL_KEY_ICE:                0xa1
 OOT_SMALL_KEY_BOTW:               0xa2
 OOT_SMALL_KEY_GF:                 0xa3
 OOT_SMALL_KEY_GTG:                0xa4
+OOT_BOSS_KEY_FOREST:              0xa5
+OOT_BOSS_KEY_FIRE:                0xa6
+OOT_BOSS_KEY_WATER:               0xa7
+OOT_BOSS_KEY_SPIRIT:              0xa8
+OOT_BOSS_KEY_SHADOW:              0xa9
+OOT_BOSS_KEY_GANON:               0xaa
 
 MM_RUPEE_GREEN:               0x01
 MM_RUPEE_BLUE:                0x02
@@ -304,3 +310,7 @@ MM_SMALL_KEY_WF:              0xd2
 MM_SMALL_KEY_SH:              0xd3
 MM_SMALL_KEY_GB:              0xd4
 MM_SMALL_KEY_ST:              0xd5
+MM_BOSS_KEY_WF:               0xd6
+MM_BOSS_KEY_SH:               0xd7
+MM_BOSS_KEY_GB:               0xd8
+MM_BOSS_KEY_ST:               0xd9

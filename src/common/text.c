@@ -178,6 +178,12 @@ static const char* const kItemNamesOot[] = {
     "a " C0 "Small Key (Well)",
     "a " C0 "Small Key (Hideout)",
     "a " C0 "Small Key (GTG)",
+    "the " C0 "Boss Key (Forest)",
+    "the " C0 "Boss Key (Fire)",
+    "the " C0 "Boss Key (Water)",
+    "the " C0 "Boss Key (Spirit)",
+    "the " C0 "Boss Key (Shadow)",
+    "the " C0 "Boss Key (Ganon)",
 };
 
 static const char* const kItemNamesMm[] = {
@@ -362,6 +368,10 @@ static const char* const kItemNamesMm[] = {
     "a " C0 "Small Key (Snowhead)",
     "a " C0 "Small Key (Great Bay)",
     "a " C0 "Small Key (Stone Tower)",
+    "the " C0 "Boss Key (Woodfall)",
+    "the " C0 "Boss Key (Snowhead)",
+    "the " C0 "Boss Key (Great Bay)",
+    "the " C0 "Boss Key (Stone Tower)",
 };
 
 typedef struct
