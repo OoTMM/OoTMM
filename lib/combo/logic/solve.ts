@@ -7,7 +7,7 @@ import { World } from './world';
 import { LogicSeedError } from './error';
 import { CONSTRAINTS, itemConstraint } from './constraints';
 import { Options } from '../options';
-import { addItem, combinedItems, itemsArray, removeItem, ITEMS_REQUIRED, isDungeonItem, isDungeonReward, isGoldToken, isHouseToken, isKey, isStrayFairy, isMapCompass } from './items';
+import { addItem, combinedItems, itemsArray, removeItem, ITEMS_REQUIRED, isDungeonItem, isDungeonReward, isGoldToken, isHouseToken, isKey, isStrayFairy, isMapCompass, isSmallKey, isGanonBossKey, isRegularBossKey } from './items';
 
 const ITEMS_JUNK = new Set<string>([
   'OOT_RUPEE_GREEN',
@@ -293,16 +293,20 @@ class Solver {
   }
 
   private fixDungeon(dungeon: string) {
-    const dungeonItems = new Set(['SMALL_KEY', 'BOSS_KEY', 'STRAY_FAIRY', 'MAP', 'COMPASS']);
     const pool = combinedItems(this.pools.required, this.pools.nice);
 
-    if (this.opts.settings.smallKeyShuffle === 'anywhere') {
-      dungeonItems.delete('SMALL_KEY');
-    }
-
     for (const game of GAMES) {
-      for (const baseItem of dungeonItems) {
+      for (const baseItem of ['SMALL_KEY', 'BOSS_KEY', 'STRAY_FAIRY', 'MAP', 'COMPASS']) {
         const item = gameId(game, baseItem + '_' + dungeon.toUpperCase(), '_');
+
+        if (isSmallKey(item) && this.opts.settings.smallKeyShuffle === 'anywhere') {
+          continue;
+        } else if (isGanonBossKey(item) && this.opts.settings.ganonBossKey === 'anywhere') {
+          continue;
+        } else if (isRegularBossKey(item) && this.opts.settings.bossKeyShuffle === 'anywhere') {
+          continue;
+        }
+
         while (pool[item]) {
           this.randomAssumed(pool, { restrictedLocations: this.world.dungeons[dungeon], forcedItem: item });
           removeItemPools(this.pools, item);

@@ -8,7 +8,7 @@ import { Options } from './options';
 import { Settings } from './settings';
 import { HintGossip, Hints } from './logic/hints';
 import { Monitor } from './monitor';
-import { isSmallKey } from './logic/items';
+import { isGanonBossKey, isRegularBossKey, isSmallKey } from './logic/items';
 import { gameId } from './util';
 
 const GAME_DATA_OFFSETS = {
@@ -36,24 +36,22 @@ const SUBSTITUTIONS: {[k: string]: string} = {
 };
 
 const gi = (settings: Settings, game: Game, item: string) => {
-  /* Dungeon Items */
-  /* TODO: Refactor this horror */
-  if (settings.smallKeyShuffle === 'ownDungeon' && isSmallKey(item)) {
+  if (isSmallKey(item) && settings.smallKeyShuffle === 'ownDungeon') {
     item = gameId(game, 'SMALL_KEY', '_');
+  } else if (isGanonBossKey(item) && settings.ganonBossKey !== 'anywhere') {
+    item = gameId(game, 'BOSS_KEY', '_');
+  } else if (isRegularBossKey(item) && settings.bossKeyShuffle === 'ownDungeon') {
+    item = gameId(game, 'BOSS_KEY', '_');
   }
 
   if (/^OOT_MAP/.test(item)) {
     item = "OOT_MAP";
   } else if (/^OOT_COMPASS/.test(item)) {
     item = "OOT_COMPASS";
-  } else if (/^OOT_BOSS_KEY/.test(item)) {
-    item = "OOT_BOSS_KEY";
   } else if (/^MM_MAP/.test(item)) {
     item = "MM_MAP";
   } else if (/^MM_COMPASS/.test(item)) {
     item = "MM_COMPASS";
-  } else if (/^MM_BOSS_KEY/.test(item)) {
-    item = "MM_BOSS_KEY";
   } else if (/^MM_STRAY_FAIRY/.test(item)) {
     item = "MM_STRAY_FAIRY";
   }
