@@ -587,7 +587,7 @@ class HintsSolver {
     if (!this.isItemHintable(item)) {
       return 0;
     }
-    if ((isItemMajor(item) || isKey(item)) && !this.majorItemFoolish(loc, item, wothItems) && !this.limitedItemUseless(item)) {
+    if ((isItemMajor(item) || isDungeonReward(item) || isKey(item)) && !this.majorItemFoolish(loc, item, wothItems) && !this.limitedItemUseless(item)) {
       return -1;
     }
     if (this.hintedLocations.has(loc)) {
