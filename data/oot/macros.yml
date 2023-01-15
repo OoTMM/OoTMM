@@ -47,3 +47,4 @@
 "can_lift_gold": "is_adult && has(STRENGTH, 3)"
 "can_ride_bean(x)": "is_adult && event(x)"
 "adult_trade(x)": "is_adult && has(x)"
+"has_small_keys_fire(x)": "cond(setting(smallKeyShuffle, anywhere), has(SMALL_KEY_FIRE, x + 1), has(SMALL_KEY_FIRE, x))"

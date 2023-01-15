@@ -3,7 +3,7 @@ import { Settings } from '../settings';
 import { gameId } from '../util';
 import { Expr, exprTrue, exprFalse, exprAnd, exprOr, exprAge, exprHas, exprEvent, exprMasks, exprHealth, exprSetting, exprNot, exprCond } from './expr';
 
-const SIMPLE_TOKENS = ['||', '&&', '(', ')', ',', 'true', 'false', '!'] as const;
+const SIMPLE_TOKENS = ['||', '&&', '(', ')', ',', 'true', 'false', '!', '+', '-'] as const;
 
 type TokenSimple = { type: typeof SIMPLE_TOKENS[number] };
 type TokenEOF = { type: 'EOF' };
@@ -47,6 +47,52 @@ export class ExprParser {
     this.expect('EOF');
     this.ctx = [];
     return expr;
+  }
+
+  private parseNumericSingle(): number | undefined {
+    const n = this.accept('number');
+    if (n !== undefined) {
+      return n;
+    }
+    if (this.accept('(')) {
+      const nexpr = this.parseNumeric();
+      if (nexpr === undefined) {
+        throw this.error("Expected math expression");
+      }
+      this.expect(')');
+      return nexpr;
+    }
+  }
+
+  private parseNumeric(): number | undefined {
+    return this.parseNumericAdd();
+  }
+
+  private parseNumericAdd(): number | undefined {
+    let value = 0;
+    const first = this.parseNumericSingle();
+    if (first === undefined) {
+      return undefined;
+    }
+    value = first;
+    for (;;) {
+      let substract = false;
+      if (this.accept('-')) {
+        substract = true;
+      } else if (!this.accept('+')) {
+        break;
+      }
+      const next = this.parseNumericSingle();
+      if (next === undefined) {
+        throw this.error("Expected number");
+      }
+      if (substract) {
+        value -= next;
+      } else {
+        value += next;
+      }
+    }
+    return value;
   }
 
   private parseExprTrue(): Expr | undefined {
@@ -119,7 +165,11 @@ export class ExprParser {
     const item = gameId(this.game, this.expect('identifier'), '_');
     let count = 1;
     if (this.accept(',')) {
-      count = this.expect('number');
+      const n = this.parseNumeric();
+      if (n === undefined) {
+        throw this.error("Expected number");
+      }
+      count = n;
     }
     this.expect(')');
     return exprHas(item, count);
@@ -142,7 +192,10 @@ export class ExprParser {
     }
     this.accept('identifier');
     this.expect('(');
-    const count = this.expect('number');
+    const count = this.parseNumeric();
+    if (count === undefined) {
+      throw this.error("Expected number");
+    }
     this.expect(')');
     return exprMasks(count);
   }
@@ -153,7 +206,10 @@ export class ExprParser {
     }
     this.accept('identifier');
     this.expect('(');
-    const count = this.expect('number');
+    const count = this.parseNumeric();
+    if (count === undefined) {
+      throw this.error("Expected number");
+    }
     this.expect(')');
     return exprHealth(count);
   }

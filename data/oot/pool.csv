@@ -242,7 +242,7 @@ Fire Temple Above Maze Chest,                         chest,          NONE,     
 Fire Temple Below Maze Chest,                         chest,          NONE,                 TEMPLE_FIRE,                    0x0b,                       SMALL_KEY_FIRE
 Fire Temple Compass,                                  chest,          NONE,                 TEMPLE_FIRE,                    0x07,                       COMPASS_FIRE
 Fire Temple Hammer,                                   chest,          TEMPLE_FIRE_HAMMER,   TEMPLE_FIRE,                    0x05,                       HAMMER
-Fire Temple Ring Jail,                                chest,          NONE,                 TEMPLE_FIRE,                    0x09,                       RUPEE_RED
+Fire Temple Ring Jail,                                chest,          NONE,                 TEMPLE_FIRE,                    0x09,                       SMALL_KEY_FIRE
 Fire Temple Scarecrow Chest,                          chest,          TEMPLE_FIRE_SCARECROW,TEMPLE_FIRE,                    0x0d,                       RUPEE_HUGE
 Fire Temple GS Lava Side Room,                        gs,             NONE,                 TEMPLE_FIRE,                    0x28,                       GS_TOKEN
 Fire Temple GS Hammer Statues,                        gs,             NONE,                 TEMPLE_FIRE,                    0x29,                       GS_TOKEN
