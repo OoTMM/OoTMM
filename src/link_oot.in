@@ -64,6 +64,7 @@ gActorOvl = 0x800e8530;
 LoadObject = 0x800812f0;
 GetObject = 0x80081628;
 ActorSetScale = 0x80020f88;
+ActorSetUnk = 0x80020f04;
 
 PlaySound = 0x800646f0;
 PlaySound6 = 0x800c806c;

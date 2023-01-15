@@ -90,6 +90,12 @@ export const SETTINGS = [{
   type: 'boolean',
   default: true
 }, {
+  key: 'csmc',
+  name: 'Chest Size Matches Content',
+  category: 'misc',
+  type: 'boolean',
+  default: false
+}, {
   key: 'noLogic',
   name: 'No Logic',
   category: 'advanced',
@@ -100,6 +106,9 @@ export const SETTINGS = [{
 export const SETTINGS_CATEGORIES = [{
   name: "Main Settings",
   key: "main",
+}, {
+  name: "Misc",
+  key: "misc",
 }, {
   name: "Advanced",
   key: "advanced",

@@ -82,15 +82,25 @@ const customExtractedObjects = async (roms: DecompressedRoms, archive: CustomArc
   }
 };
 
-export const customAssets = async () => ({
-  dpad: await png('dpad'),
+export const customAssets = async (): Promise<{[k: string]: Buffer}> => ({
+  DPAD: await png('dpad', 'rgba32'),
+  CHEST_MAJOR_FRONT: await png('chest_front_major', 'rgba16'),
+  CHEST_MAJOR_SIDE: await png('chest_side_major', 'rgba16'),
+  CHEST_KEY_FRONT: await png('chest_front_key', 'rgba16'),
+  CHEST_KEY_SIDE: await png('chest_side_key', 'rgba16'),
+  CHEST_SPIDER_FRONT: await png('chest_front_spider', 'rgba16'),
+  CHEST_SPIDER_SIDE: await png('chest_side_spider', 'rgba16'),
+  CHEST_FAIRY_FRONT: await png('chest_front_fairy', 'rgba16'),
+  CHEST_FAIRY_SIDE: await png('chest_side_fairy', 'rgba16'),
 });
 
 const customKeepFiles = async (roms: DecompressedRoms, archive: CustomArchive, cg: CodeGen) => {
   const keep = new KeepFile();
   const assets = await customAssets();
-  const { dpad } = assets;
-  await keep.addData(dpad);
+  for (const k in assets) {
+    const off = await keep.addData(assets[k]);
+    cg.define('CUSTOM_KEEP_' + k, off);
+  }
   const custonKeepId = await archive.addObject(keep.pack());
   cg.define('CUSTOM_OBJECT_ID_KEEP', custonKeepId);
 };

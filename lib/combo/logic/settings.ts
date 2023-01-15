@@ -17,6 +17,10 @@ export const configFromSettings = (settings: Settings) => {
     config.add('SMALL_KEY_SHUFFLE');
   }
 
+  if (settings.csmc) {
+    config.add('CSMC');
+  }
+
   return config;
 };
 
