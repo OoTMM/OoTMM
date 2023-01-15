@@ -4,7 +4,7 @@ import { findSpheres } from './playthrough';
 import { Random, sample, shuffle } from '../random';
 import { pathfind } from './pathfind';
 import { Items } from './state';
-import { addItem, DUNGEON_REWARDS_ORDERED, isDungeonItem, isDungeonReward, isItemMajor, isItemMajorSometimes, isItemMajorAlways, isToken, isGoldToken, itemsArray, isKey, isHouseToken, isSmallKey } from './items';
+import { addItem, DUNGEON_REWARDS_ORDERED, isDungeonItem, isDungeonReward, isItemMajor, isItemMajorSometimes, isItemMajorAlways, isToken, isGoldToken, itemsArray, isKey, isHouseToken, isSmallKey, isGanonBossKey, isRegularBossKey } from './items';
 import { Settings } from '../settings';
 import { CONSTRAINT_NONE, itemConstraint } from './constraints';
 import { Game } from '../config';
@@ -326,7 +326,13 @@ class HintsSolver {
   }
 
   private isItemHintable(item: string) {
-    if (isSmallKey(item) && this.settings.smallKeyShuffle !== 'ownDungeon') {
+    if (isSmallKey(item) && this.settings.smallKeyShuffle === 'anywhere') {
+      return true;
+    }
+    if (isGanonBossKey(item) && this.settings.ganonBossKey === 'anywhere') {
+      return true;
+    }
+    if (isRegularBossKey(item) && this.settings.bossKeyShuffle === 'anywhere') {
       return true;
     }
     if (isDungeonItem(item)) {
