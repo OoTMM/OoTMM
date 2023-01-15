@@ -7,7 +7,7 @@ import { World } from './world';
 import { LogicSeedError } from './error';
 import { CONSTRAINTS, itemConstraint } from './constraints';
 import { Options } from '../options';
-import { addItem, combinedItems, itemsArray, removeItem, ITEMS_REQUIRED, isDungeonItem, isDungeonReward, isGoldToken, isHouseToken, isKey, isStrayFairy, isMapCompass, isSmallKey, isGanonBossKey, isRegularBossKey } from './items';
+import { addItem, combinedItems, itemsArray, removeItem, ITEMS_REQUIRED, isDungeonReward, isGoldToken, isHouseToken, isKey, isStrayFairy, isMapCompass, isSmallKey, isGanonBossKey, isRegularBossKey } from './items';
 
 const ITEMS_JUNK = new Set<string>([
   'OOT_RUPEE_GREEN',
@@ -107,7 +107,9 @@ class Solver {
     const checksCount = Object.keys(this.world.checks).length;
 
     /* Place the required reward items */
-    this.fixRewards();
+    if (this.opts.settings.dungeonRewardShuffle === 'dungeonBlueWarps') {
+      this.fixRewards();
+    }
 
     /* Handle dungeon items */
     for (const dungeon in this.world.dungeons) {

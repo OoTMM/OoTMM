@@ -4,7 +4,7 @@ import { findSpheres } from './playthrough';
 import { Random, sample, shuffle } from '../random';
 import { pathfind } from './pathfind';
 import { Items } from './state';
-import { addItem, DUNGEON_REWARDS_ORDERED, isDungeonItem, isDungeonReward, isItemMajor, isItemMajorSometimes, isItemMajorAlways, isToken, isGoldToken, itemsArray, isKey, isHouseToken, isSmallKey, isGanonBossKey, isRegularBossKey } from './items';
+import { addItem, DUNGEON_REWARDS_ORDERED, isDungeonItem, isDungeonReward, isItemMajor, isItemMajorSometimes, isItemMajorAlways, isToken, isGoldToken, itemsArray, isKey, isHouseToken, isSmallKey, isGanonBossKey, isRegularBossKey, DUNGEON_REWARDS } from './items';
 import { Settings } from '../settings';
 import { CONSTRAINT_NONE, itemConstraint } from './constraints';
 import { Game } from '../config';
@@ -338,7 +338,7 @@ class HintsSolver {
     if (isDungeonItem(item)) {
       return false;
     }
-    if (isDungeonReward(item)) {
+    if (isDungeonReward(item) && this.settings.dungeonRewardShuffle !== 'anywhere') {
       return false;
     }
     if (!this.settings.shuffleGerudoCard && item == 'OOT_GERUDO_CARD') {
@@ -751,6 +751,7 @@ class HintsSolver {
     this.hintedLocations.add(this.findItem('OOT_ARROW_LIGHT')!);
     this.hintedLocations.add(this.findItem('MM_SONG_ORDER')!);
     FIXED_HINTS_LOCATIONS.forEach(x => this.hintedLocations.add(x));
+    DUNGEON_REWARDS.forEach(x => this.hintedLocations.add(this.findItem(x)!));
 
     const woth = this.wayOfTheHero();
     const wothItems = this.wayOfTheHeroItems(woth);

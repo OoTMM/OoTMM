@@ -74,6 +74,16 @@ export const SETTINGS = [{
   ],
   default: 'removed'
 }, {
+  key: 'dungeonRewardShuffle',
+  name: 'Dungeon Reward Shuffle',
+  category: 'main',
+  type: 'enum',
+  values: [
+    { value: 'dungeonBlueWarps', name: 'Dungeon Blue Warps' },
+    { value: 'anywhere', name: 'Anywhere' },
+  ],
+  default: 'dungeonBlueWarps'
+}, {
   key: 'shuffleGerudoCard',
   name: 'Gerudo Card Shuffle',
   category: 'main',
