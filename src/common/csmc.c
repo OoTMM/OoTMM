@@ -322,11 +322,24 @@ static int csmcFromItem(s16 gi)
         return csmcFromItemOot(gi);
 }
 
+static int csmcEnabled(Actor* this, GameState_Play* play)
+{
+    if (!comboConfig(CFG_CSMC))
+        return 0;
+
+#if defined(GAME_OOT)
+    if (play->sceneId == SCE_OOT_TREASURE_SHOP && (this->variable & 0x1f) != 0x0a)
+        return 0;
+#endif
+
+    return 1;
+}
+
 void comboCsmcInit(Actor* this, GameState_Play* play, s16 gi)
 {
     int type;
 
-    if (!comboConfig(CFG_CSMC))
+    if (!csmcEnabled(this, play))
         return;
 
     type = csmcFromItem(gi);
@@ -353,7 +366,7 @@ void comboCsmcPreDraw(Actor* this, GameState_Play* play, s16 gi)
     const void* listFront;
     const void* listSide;
 
-    if (comboConfig(CFG_CSMC))
+    if (csmcEnabled(this, play))
         type = csmcFromItem(gi);
     else
         type = CSMC_NORMAL;
