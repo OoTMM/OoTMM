@@ -17,6 +17,8 @@ static const int kDpadOffY[] = { 1, -1, 0, 0 };
 
 static float kDpadItemScale = 0.4f;
 
+static int altDpad = 0;
+
 static int canShowDpad(void)
 {
     if (gSaveContext.gameMode)
@@ -164,6 +166,21 @@ static void toggleBoots(GameState_Play* play, s16 itemId)
 #endif
 
 #if defined(GAME_OOT)
+static void toggleTunic(GameState_Play* play, s16 itemId)
+{
+    u16 targetTunic;
+
+    targetTunic = (itemId == ITEM_OOT_ZORA_TUNIC) ? 3 : 2;
+    if (gSave.equips.equipment.tunics == targetTunic)
+        gSave.equips.equipment.tunics = 1;
+    else
+        gSave.equips.equipment.tunics = targetTunic;
+    UpdateEquipment(play, GET_LINK(play));
+    PlaySound(0x835);
+}
+#endif
+
+#if defined(GAME_OOT)
 static void dpadUseItem(GameState_Play* play, int index, int flags)
 {
     s16 itemId;
@@ -175,6 +192,10 @@ static void dpadUseItem(GameState_Play* play, int index, int flags)
     if (itemId == ITEM_OOT_HOVER_BOOTS || itemId == ITEM_OOT_IRON_BOOTS)
     {
         toggleBoots(play, itemId);
+    }
+    else if (itemId == ITEM_OOT_ZORA_TUNIC || itemId == ITEM_OOT_GORON_TUNIC)
+    {
+        toggleTunic(play, itemId);
     }
     else
     {
@@ -209,6 +230,11 @@ void comboDpadUpdate(GameState_Play* play)
         sDpadItems[DPAD_LEFT] = ITEM_NONE;
         sDpadItems[DPAD_RIGHT] = ITEM_NONE;
     }
+    else if (altDpad)
+    {
+       sDpadItems[DPAD_LEFT] = (gSave.inventory.equipment.tunics & EQ_OOT_TUNIC_GORON) ? ITEM_OOT_GORON_TUNIC : ITEM_NONE;
+       sDpadItems[DPAD_RIGHT] = (gSave.inventory.equipment.tunics & EQ_OOT_TUNIC_ZORA) ? ITEM_OOT_ZORA_TUNIC : ITEM_NONE;
+    }
     else
     {
         sDpadItems[DPAD_LEFT] = (gSave.inventory.equipment.boots & EQ_OOT_BOOTS_IRON) ? ITEM_OOT_IRON_BOOTS : ITEM_NONE;
@@ -221,12 +247,18 @@ void comboDpadUpdate(GameState_Play* play)
 void comboDpadUpdate(GameState_Play* play)
 {
     /* Update the items */
-    sDpadItems[DPAD_DOWN] = gSave.inventory.items[ITS_MM_OCARINA];
+    sDpadItems[DPAD_DOWN] = altDpad ? gSave.inventory.items[ITS_MM_MASK_FIERCE_DEITY] : gSave.inventory.items[ITS_MM_OCARINA];
     sDpadItems[DPAD_UP] = gSave.inventory.items[ITS_MM_MASK_DEKU];
     sDpadItems[DPAD_LEFT] = gSave.inventory.items[ITS_MM_MASK_GORON];
     sDpadItems[DPAD_RIGHT] = gSave.inventory.items[ITS_MM_MASK_ZORA];
 }
 #endif
+
+void toggleDpad(GameState_Play* play)
+{
+    altDpad = !altDpad;
+    PlaySound(0x835);
+}
 
 int comboDpadUse(GameState_Play* play, int flags)
 {
@@ -236,6 +268,11 @@ int comboDpadUse(GameState_Play* play, int flags)
 
     /* Detect button press */
     buttons = play->gs.input[0].pressed.buttons;
+    if (buttons & L_TRIG)
+    {
+        toggleDpad(play);
+        return 1;
+    }
     if (buttons & U_JPAD)
     {
         dpadUseItem(play, DPAD_UP, flags);
