@@ -32,17 +32,6 @@ export const SETTINGS = [{
   ],
   default: 'none'
 }, {
-  key: 'ganonBossKey',
-  name: 'Ganon Boss Key Shuffle',
-  category: 'main',
-  type: 'enum',
-  values: [
-    { value: 'removed', name: 'Removed' },
-    { value: 'vanilla', name: 'Vanilla' },
-    { value: 'ganon', name: 'Ganon\'s Castle' },
-  ],
-  default: 'removed'
-}, {
   key: 'mapCompassShuffle',
   name: 'Map / Compass Shuffle',
   category: 'main',
@@ -52,6 +41,38 @@ export const SETTINGS = [{
     { value: 'removed', name: 'Removed' },
   ],
   default: 'ownDungeon'
+}, {
+  key: 'smallKeyShuffle',
+  name: 'Small Key Shuffle',
+  category: 'main',
+  type: 'enum',
+  values: [
+    { value: 'ownDungeon', name: 'Own Dungeon' },
+    { value: 'anywhere', name: 'Anywhere' },
+  ],
+  default: 'ownDungeon'
+}, {
+  key: 'bossKeyShuffle',
+  name: 'Boss Key Shuffle',
+  category: 'main',
+  type: 'enum',
+  values: [
+    { value: 'ownDungeon', name: 'Own Dungeon' },
+    { value: 'anywhere', name: 'Anywhere' },
+  ],
+  default: 'ownDungeon'
+}, {
+  key: 'ganonBossKey',
+  name: 'Ganon Boss Key Shuffle',
+  category: 'main',
+  type: 'enum',
+  values: [
+    { value: 'removed', name: 'Removed' },
+    { value: 'vanilla', name: 'Vanilla' },
+    { value: 'ganon', name: 'Ganon\'s Castle' },
+    { value: 'anywhere', name: 'Anywhere' },
+  ],
+  default: 'removed'
 }, {
   key: 'shuffleGerudoCard',
   name: 'Gerudo Card Shuffle',

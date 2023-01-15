@@ -7,7 +7,7 @@ int comboDoorIsUnlocked(GameState_Play* play, int flag)
     sceneId = play->sceneId;
 
     /* Fire temple 1st door */
-    if (sceneId == SCE_OOT_TEMPLE_FIRE && flag == 0x17)
+    if (sceneId == SCE_OOT_TEMPLE_FIRE && flag == 0x17 && !comboConfig(CFG_SMALL_KEY_SHUFFLE))
         return 1;
 
     /* Water temple water raise door */

@@ -7,7 +7,7 @@ import { World } from './world';
 import { LogicSeedError } from './error';
 import { CONSTRAINTS, itemConstraint } from './constraints';
 import { Options } from '../options';
-import { addItem, combinedItems, itemsArray, removeItem, ITEMS_REQUIRED, isDungeonItem, isDungeonReward, isGoldToken, isHouseToken } from './items';
+import { addItem, combinedItems, itemsArray, removeItem, ITEMS_REQUIRED, isDungeonItem, isDungeonReward, isGoldToken, isHouseToken, isKey, isStrayFairy, isMapCompass, isSmallKey, isGanonBossKey, isRegularBossKey } from './items';
 
 const ITEMS_JUNK = new Set<string>([
   'OOT_RUPEE_GREEN',
@@ -40,7 +40,6 @@ const EXTRA_ITEMS = [
 export type ItemPlacement = {[k: string]: string};
 
 type ItemPools = {
-  dungeon: Items,
   required: Items,
   nice: Items,
   junk: Items,
@@ -55,7 +54,7 @@ const poolsArray = (pools: ItemPools) => {
 };
 
 const removeItemPools = (pools: ItemPools, item: string) => {
-  const keys = ['dungeon', 'required', 'nice', 'junk'] as const;
+  const keys = ['required', 'nice', 'junk'] as const;
   for (const key of keys) {
     const items = pools[key];
     if (items[item]) {
@@ -149,7 +148,7 @@ class Solver {
   }
 
   private makeItemPools() {
-    const pools: ItemPools = { dungeon: {}, required: {}, nice: {}, junk: {} };
+    const pools: ItemPools = { required: {}, nice: {}, junk: {} };
 
     for (const location in this.world.checks) {
       const check = this.world.checks[location];
@@ -164,9 +163,7 @@ class Solver {
         continue;
       }
 
-      if (isDungeonItem(item) || isDungeonReward(item)) {
-        addItem(pools.dungeon, item);
-      } else if (ITEMS_REQUIRED.has(item)) {
+      if (isDungeonReward(item) || isKey(item) || isStrayFairy(item) || ITEMS_REQUIRED.has(item)) {
         addItem(pools.required, item);
       } else if (ITEMS_JUNK.has(item)) {
         addItem(pools.junk, item);
@@ -291,18 +288,28 @@ class Solver {
     rewards = shuffle(this.random, rewards);
     for (let i = 0; i < rewards.length; i++) {
       this.place(locations[i], rewards[i]);
-      removeItem(this.pools.dungeon, rewards[i]);
+      removeItem(this.pools.required, rewards[i]);
     }
   }
 
   private fixDungeon(dungeon: string) {
-    const pool = combinedItems(this.pools.dungeon, this.pools.required);
+    const pool = combinedItems(this.pools.required, this.pools.nice);
 
     for (const game of GAMES) {
       for (const baseItem of ['SMALL_KEY', 'BOSS_KEY', 'STRAY_FAIRY', 'MAP', 'COMPASS']) {
         const item = gameId(game, baseItem + '_' + dungeon.toUpperCase(), '_');
+
+        if (isSmallKey(item) && this.opts.settings.smallKeyShuffle === 'anywhere') {
+          continue;
+        } else if (isGanonBossKey(item) && this.opts.settings.ganonBossKey === 'anywhere') {
+          continue;
+        } else if (isRegularBossKey(item) && this.opts.settings.bossKeyShuffle === 'anywhere') {
+          continue;
+        }
+
         while (pool[item]) {
           this.randomAssumed(pool, { restrictedLocations: this.world.dungeons[dungeon], forcedItem: item });
+          removeItemPools(this.pools, item);
         }
       }
     }

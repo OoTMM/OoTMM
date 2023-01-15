@@ -8,6 +8,8 @@ import { Options } from './options';
 import { Settings } from './settings';
 import { HintGossip, Hints } from './logic/hints';
 import { Monitor } from './monitor';
+import { isGanonBossKey, isRegularBossKey, isSmallKey } from './logic/items';
+import { gameId } from './util';
 
 const GAME_DATA_OFFSETS = {
   oot: 0x1000,
@@ -33,25 +35,23 @@ const SUBSTITUTIONS: {[k: string]: string} = {
   MM_WALLET: "MM_WALLET2",
 };
 
-const gi = (game: Game, item: string) => {
-  /* Dungeon Items */
-  /* TODO: Refactor this horror */
+const gi = (settings: Settings, game: Game, item: string) => {
+  if (isSmallKey(item) && settings.smallKeyShuffle === 'ownDungeon') {
+    item = gameId(game, 'SMALL_KEY', '_');
+  } else if (isGanonBossKey(item) && settings.ganonBossKey !== 'anywhere') {
+    item = gameId(game, 'BOSS_KEY', '_');
+  } else if (isRegularBossKey(item) && settings.bossKeyShuffle === 'ownDungeon') {
+    item = gameId(game, 'BOSS_KEY', '_');
+  }
+
   if (/^OOT_MAP/.test(item)) {
     item = "OOT_MAP";
   } else if (/^OOT_COMPASS/.test(item)) {
     item = "OOT_COMPASS";
-  } else if (/^OOT_SMALL_KEY/.test(item)) {
-    item = "OOT_SMALL_KEY";
-  } else if (/^OOT_BOSS_KEY/.test(item)) {
-    item = "OOT_BOSS_KEY";
   } else if (/^MM_MAP/.test(item)) {
     item = "MM_MAP";
   } else if (/^MM_COMPASS/.test(item)) {
     item = "MM_COMPASS";
-  } else if (/^MM_SMALL_KEY/.test(item)) {
-    item = "MM_SMALL_KEY";
-  } else if (/^MM_BOSS_KEY/.test(item)) {
-    item = "MM_BOSS_KEY";
   } else if (/^MM_STRAY_FAIRY/.test(item)) {
     item = "MM_STRAY_FAIRY";
   }
@@ -126,13 +126,13 @@ const gameChecks = (settings: Settings, game: Game, logic: LogicResult): Buffer 
       break;
     }
     const key = (sceneId << 8) | id;
-    const item = gi(game, c.item);
+    const item = gi(settings, game, c.item);
     buf.push(key, item);
   }
   return toU16Buffer(buf);
 };
 
-const hintBuffer = (game: Game, gossip: string, hint: HintGossip): Buffer => {
+const hintBuffer = (settings: Settings, game: Game, gossip: string, hint: HintGossip): Buffer => {
   const data = Buffer.alloc(8, 0xff);
   let gossipData = DATA_HINTS_POOL[game][gossip];
   if (!gossipData) {
@@ -176,7 +176,7 @@ const hintBuffer = (game: Game, gossip: string, hint: HintGossip): Buffer => {
       if (check === undefined) {
         throw new Error(`Unknown named check: ${hint.check}`);
       }
-      const items = hint.items.map((item) => gi('oot', item));
+      const items = hint.items.map((item) => gi(settings, 'oot', item));
       data.writeUInt8(id, 0);
       data.writeUInt8(0x02, 1);
       data.writeUInt8(check, 2);
@@ -192,7 +192,7 @@ const hintBuffer = (game: Game, gossip: string, hint: HintGossip): Buffer => {
         if (region === undefined) {
           throw new Error(`Unknown region ${hint.region}`);
         }
-        const item = gi('oot', hint.item);
+        const item = gi(settings, 'oot', hint.item);
         data.writeUInt8(id, 0);
         data.writeUInt8(0x03, 1);
         data.writeUInt8(region, 2);
@@ -203,14 +203,14 @@ const hintBuffer = (game: Game, gossip: string, hint: HintGossip): Buffer => {
   return data;
 }
 
-const gameHints = (game: Game, hints: Hints): Buffer => {
+const gameHints = (settings: Settings, game: Game, hints: Hints): Buffer => {
   const buffers: Buffer[] = [];
   for (const gossip in hints.gossip) {
     const h = hints.gossip[gossip];
     if (h.game !== game) {
       continue;
     }
-    buffers.push(hintBuffer(game, gossip, h));
+    buffers.push(hintBuffer(settings, game, gossip, h));
   }
   return Buffer.concat(buffers);
 }
@@ -264,7 +264,7 @@ export const randomize = (monitor: Monitor, rom: Buffer, opts: Options) => {
   const buffer = Buffer.alloc(0x20000, 0xff);
   for (const g of GAMES) {
     const checksBuffer = gameChecks(opts.settings, g, res);
-    const hintsBuffer = gameHints(g, res.hints);
+    const hintsBuffer = gameHints(opts.settings, g, res.hints);
     checksBuffer.copy(buffer, GAME_DATA_OFFSETS[g]);
     hintsBuffer.copy(buffer, HINTS_DATA_OFFSETS[g]);
   }

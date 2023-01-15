@@ -25,6 +25,23 @@ const u8 kMmTrade3[] = {
     ITEM_MM_PENDANT_OF_MEMORIES,
 };
 
+static void addSmallKey(u16 dungeonId)
+{
+    s8 keyCount;
+
+    keyCount = gMmSave.inventory.dungeonKeys[dungeonId];
+    if (keyCount < 0)
+        keyCount = 1;
+    else
+        keyCount++;
+    gMmSave.inventory.dungeonKeys[dungeonId] = keyCount;
+}
+
+static void addBossKey(u16 dungeonId)
+{
+    gMmSave.inventory.dungeonItems[dungeonId].bossKey = 1;
+}
+
 static void addHealth(u8 count)
 {
     u16 health;
@@ -586,16 +603,10 @@ void comboAddItemMm(GameState_Play* play, u16 itemId)
         gMmSave.inventory.strayFairies[gSaveContext.dungeonId] += 1;
         break;
     case ITEM_MM_SMALL_KEY:
-        {
-            s8* keys = &gSave.inventory.dungeonKeys[gSaveContext.dungeonId];
-            if (*keys < 0)
-                *keys = 1;
-            else
-                *keys += 1;
-        }
+        addSmallKey(gSaveContext.dungeonId);
         break;
-    case ITEM_MM_BIG_KEY:
-        gSave.inventory.dungeonItems[gSaveContext.dungeonId].bossKey = 1;
+    case ITEM_MM_BOSS_KEY:
+        addBossKey(gSaveContext.dungeonId);
         break;
     case ITEM_MM_MAP:
         gSave.inventory.dungeonItems[gSaveContext.dungeonId].map = 1;
@@ -604,6 +615,30 @@ void comboAddItemMm(GameState_Play* play, u16 itemId)
         gSave.inventory.dungeonItems[gSaveContext.dungeonId].compass = 1;
         break;
 #endif
+    case ITEM_MM_SMALL_KEY_WF:
+        addSmallKey(0);
+        break;
+    case ITEM_MM_SMALL_KEY_SH:
+        addSmallKey(1);
+        break;
+    case ITEM_MM_SMALL_KEY_GB:
+        addSmallKey(2);
+        break;
+    case ITEM_MM_SMALL_KEY_ST:
+        addSmallKey(3);
+        break;
+    case ITEM_MM_BOSS_KEY_WF:
+        addBossKey(0);
+        break;
+    case ITEM_MM_BOSS_KEY_SH:
+        addBossKey(1);
+        break;
+    case ITEM_MM_BOSS_KEY_GB:
+        addBossKey(2);
+        break;
+    case ITEM_MM_BOSS_KEY_ST:
+        addBossKey(3);
+        break;
     case ITEM_MM_DEFENSE_UPGRADE:
         gMmSave.playerData.doubleDefense = 1;
         gMmSave.inventory.defenseHearts = 20;

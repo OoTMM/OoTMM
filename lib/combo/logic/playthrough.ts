@@ -1,11 +1,25 @@
 import { Random, shuffle } from '../random';
-import { addItem, isBossKey, isDungeonReward, isGoldToken, isItemMajor } from './items';
+import { Settings } from '../settings';
+import { addItem, isBossKey, isDungeonReward, isToken, isItemMajor, isSmallKey } from './items';
 import { pathfind } from './pathfind';
 import { ItemPlacement } from './solve';
 import { Items } from './state';
 import { World } from './world';
 
-const isItemImportant = (item: string) => (isDungeonReward(item) || isItemMajor(item) || isBossKey(item)) && !(isGoldToken(item) || /MM_HEART_(PIECE|CONTAINER)$/.test(item));
+const isItemImportant = (settings: Settings, item: string) => {
+  if (settings.smallKeyShuffle === 'anywhere' && isSmallKey(item))
+    return true;
+  if (isToken(item))
+    return false;
+  if (isDungeonReward(item))
+    return true;
+  if (isItemMajor(item))
+    return true;
+  if (isBossKey(item))
+    return true;
+  return false;
+}
+
 
 export const findSpheres = (world: World, placement: ItemPlacement, restrict?: Set<string>, forbid?: Set<string>) => {
   const locations = new Set<string>();
@@ -76,7 +90,7 @@ const findMinimalSpheres = (random: Random, world: World, placement: ItemPlaceme
   return spheres;
 }
 
-export const playthrough = (random: Random, world: World, placement: ItemPlacement) => {
+export const playthrough = (settings: Settings, random: Random, world: World, placement: ItemPlacement) => {
   const spheres = findMinimalSpheres(random, world, placement);
-  return spheres.map(sphere => sphere.filter(item => isItemImportant(placement[item]))).filter(sphere => sphere.length !== 0);
+  return spheres.map(sphere => sphere.filter(item => isItemImportant(settings, placement[item]))).filter(sphere => sphere.length !== 0);
 }

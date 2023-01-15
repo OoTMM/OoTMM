@@ -42,7 +42,7 @@ export const logic = (opts: Options): LogicResult => {
 
   let spheres: string[][] = [];
   if (!opts.settings.noLogic) {
-    spheres = playthrough(random, world, placement);
+    spheres = playthrough(opts.settings, random, world, placement);
   }
   const items: WorldCheck[] = [];
   for (const loc in placement) {

@@ -44,6 +44,23 @@ static u16 dungeon(GameState_Play* play, int isBossKey)
 }
 #endif
 
+static void addSmallKey(u16 dungeonId)
+{
+    s8 keyCount;
+
+    keyCount = gOotSave.dungeonKeys[dungeonId];
+    if (keyCount < 0)
+        keyCount = 1;
+    else
+        keyCount++;
+    gOotSave.dungeonKeys[dungeonId] = keyCount;
+}
+
+static void addBossKey(u16 dungeonId)
+{
+    gOotSave.dungeonItems[dungeonId].bossKey = 1;
+}
+
 static void addHealth(u8 count)
 {
     u16 health;
@@ -656,10 +673,7 @@ void comboAddItemOot(GameState_Play* play, u16 itemId)
 #if defined(GAME_OOT)
     case ITEM_OOT_SMALL_KEY:
         dungeonId = dungeon(play, 0);
-        if (gOotSave.dungeonKeys[dungeonId] < 0)
-            gOotSave.dungeonKeys[dungeonId] = 1;
-        else
-            gOotSave.dungeonKeys[dungeonId]++;
+        addSmallKey(dungeonId);
         break;
     case ITEM_OOT_MAP:
         dungeonId = dungeon(play, 0);
@@ -669,10 +683,58 @@ void comboAddItemOot(GameState_Play* play, u16 itemId)
         dungeonId = dungeon(play, 0);
         gOotSave.dungeonItems[dungeonId].compass = 1;
         break;
-    case ITEM_OOT_BIG_KEY:
+    case ITEM_OOT_BOSS_KEY:
         dungeonId = dungeon(play, 1);
-        gOotSave.dungeonItems[dungeonId].bossKey = 1;
+        addBossKey(dungeonId);
         break;
 #endif
+    case ITEM_OOT_SMALL_KEY_FOREST:
+        addSmallKey(SCE_OOT_TEMPLE_FOREST);
+        break;
+    case ITEM_OOT_SMALL_KEY_FIRE:
+        addSmallKey(SCE_OOT_TEMPLE_FIRE);
+        break;
+    case ITEM_OOT_SMALL_KEY_WATER:
+        addSmallKey(SCE_OOT_TEMPLE_WATER);
+        break;
+    case ITEM_OOT_SMALL_KEY_SPIRIT:
+        addSmallKey(SCE_OOT_TEMPLE_SPIRIT);
+        break;
+    case ITEM_OOT_SMALL_KEY_SHADOW:
+        addSmallKey(SCE_OOT_TEMPLE_SHADOW);
+        break;
+    case ITEM_OOT_SMALL_KEY_GANON:
+        addSmallKey(SCE_OOT_INSIDE_GANON_CASTLE);
+        break;
+    case ITEM_OOT_SMALL_KEY_ICE:
+        addSmallKey(SCE_OOT_ICE_CAVERN);
+        break;
+    case ITEM_OOT_SMALL_KEY_BOTW:
+        addSmallKey(SCE_OOT_BOTTOM_OF_THE_WELL);
+        break;
+    case ITEM_OOT_SMALL_KEY_GF:
+        addSmallKey(SCE_OOT_THIEVES_HIDEOUT);
+        break;
+    case ITEM_OOT_SMALL_KEY_GTG:
+        addSmallKey(SCE_OOT_GERUDO_TRAINING_GROUND);
+        break;
+    case ITEM_OOT_BOSS_KEY_FOREST:
+        addBossKey(SCE_OOT_TEMPLE_FOREST);
+        break;
+    case ITEM_OOT_BOSS_KEY_FIRE:
+        addBossKey(SCE_OOT_TEMPLE_FIRE);
+        break;
+    case ITEM_OOT_BOSS_KEY_WATER:
+        addBossKey(SCE_OOT_TEMPLE_WATER);
+        break;
+    case ITEM_OOT_BOSS_KEY_SPIRIT:
+        addBossKey(SCE_OOT_TEMPLE_SPIRIT);
+        break;
+    case ITEM_OOT_BOSS_KEY_SHADOW:
+        addBossKey(SCE_OOT_TEMPLE_SHADOW);
+        break;
+    case ITEM_OOT_BOSS_KEY_GANON:
+        addBossKey(SCE_OOT_GANON_TOWER);
+        break;
     }
 }

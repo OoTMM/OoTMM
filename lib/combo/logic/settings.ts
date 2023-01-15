@@ -13,12 +13,20 @@ export const configFromSettings = (settings: Settings) => {
     config.add('STARTING_MAP_COMPASS');
   }
 
+  if (settings.smallKeyShuffle === 'anywhere') {
+    config.add('SMALL_KEY_SHUFFLE');
+  }
+
   return config;
 };
 
 export const alterWorld = (world: World, settings: Settings, config: Set<string>) => {
   if (config.has('GANON_NO_BOSS_KEY')) {
     world.checks['OOT Ganon Castle Boss Key'].item = 'OOT_RUPEE_BLUE';
+  }
+
+  if (!config.has('SMALL_KEY_SHUFFLE')) {
+    world.checks['OOT Fire Temple Ring Jail'].item = 'OOT_RUPEE_BLUE';
   }
 
   if (config.has('STARTING_MAP_COMPASS')) {
