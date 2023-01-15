@@ -678,7 +678,7 @@ void comboAddItemOot(GameState_Play* play, u16 itemId)
         dungeonId = dungeon(play, 0);
         gOotSave.dungeonItems[dungeonId].compass = 1;
         break;
-    case ITEM_OOT_BIG_KEY:
+    case ITEM_OOT_BOSS_KEY:
         dungeonId = dungeon(play, 1);
         gOotSave.dungeonItems[dungeonId].bossKey = 1;
         break;

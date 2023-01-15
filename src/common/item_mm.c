@@ -600,7 +600,7 @@ void comboAddItemMm(GameState_Play* play, u16 itemId)
     case ITEM_MM_SMALL_KEY:
         addSmallKey(gSaveContext.dungeonId);
         break;
-    case ITEM_MM_BIG_KEY:
+    case ITEM_MM_BOSS_KEY:
         gSave.inventory.dungeonItems[gSaveContext.dungeonId].bossKey = 1;
         break;
     case ITEM_MM_MAP:

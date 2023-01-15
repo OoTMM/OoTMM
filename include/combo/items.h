@@ -117,7 +117,7 @@
 #define ITEM_OOT_GS_TOKEN               0x71
 #define ITEM_OOT_HEART_CONTAINER        0x72
 #define ITEM_OOT_HEART_PIECE2           0x73
-#define ITEM_OOT_BIG_KEY                0x74
+#define ITEM_OOT_BOSS_KEY               0x74
 #define ITEM_OOT_COMPASS                0x75
 #define ITEM_OOT_MAP                    0x76
 #define ITEM_OOT_SMALL_KEY              0x77
@@ -269,7 +269,7 @@
 #define ITEM_MM_HEART_CONTAINER             0x6f
 #define ITEM_MM_HEART_PIECE2                0x70
 #define ITEM_MM_SONG_GORON_HALF             0x73
-#define ITEM_MM_BIG_KEY                     0x74
+#define ITEM_MM_BOSS_KEY                    0x74
 #define ITEM_MM_COMPASS                     0x75
 #define ITEM_MM_MAP                         0x76
 #define ITEM_MM_STRAY_FAIRY                 0x77
