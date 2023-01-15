@@ -65,6 +65,7 @@ ActorFree = 0x80102ce0;
 LoadObjectGi = 0x80838830;
 
 ActorSetScale = 0x800b67e0;
+ActorSetUnk = 0x800b675c;
 Actor_HasParent = 0x800b89f8;
 ActorDestroy = 0x800b670c;
 

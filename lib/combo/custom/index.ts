@@ -90,6 +90,8 @@ export const customAssets = async (): Promise<{[k: string]: Buffer}> => ({
   CHEST_KEY_SIDE: await png('chest_side_key', 'rgba16'),
   CHEST_SPIDER_FRONT: await png('chest_front_spider', 'rgba16'),
   CHEST_SPIDER_SIDE: await png('chest_side_spider', 'rgba16'),
+  CHEST_FAIRY_FRONT: await png('chest_front_fairy', 'rgba16'),
+  CHEST_FAIRY_SIDE: await png('chest_side_fairy', 'rgba16'),
 });
 
 const customKeepFiles = async (roms: DecompressedRoms, archive: CustomArchive, cg: CodeGen) => {

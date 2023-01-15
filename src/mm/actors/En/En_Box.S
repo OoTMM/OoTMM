@@ -17,3 +17,21 @@ PATCH_END
 PATCH_START 0x808694dc
   li at,0xfff
 PATCH_END
+
+/* Use our handlers */
+PATCH_START 0x80869b40
+.int EnBox_InitWrapper
+PATCH_END
+
+PATCH_START 0x80869b4c
+.int EnBox_DrawWrapper
+PATCH_END
+
+/* Remove relocs */
+PATCH_START 0x80869d74
+.int 0
+PATCH_END
+
+PATCH_START 0x80869d80
+.int 0
+PATCH_END

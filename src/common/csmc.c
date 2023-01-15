@@ -6,24 +6,37 @@
 #define CSMC_MAJOR      0x02
 #define CSMC_KEY        0x03
 #define CSMC_SPIDER     0x04
+#define CSMC_FAIRY      0x05
+
+#if defined(GAME_OOT)
+# define CHEST_TEX_NORMAL_FRONT     0x06001798
+# define CHEST_TEX_NORMAL_SIDE      0x06002798
+# define CHEST_TEX_BOSS_KEY_FRONT   0x06003798
+# define CHEST_TEX_BOSS_KEY_SIDE    0x06002f98
+#else
+# define CHEST_TEX_NORMAL_FRONT     0x06001e60
+# define CHEST_TEX_NORMAL_SIDE      0x06002e60
+# define CHEST_TEX_BOSS_KEY_FRONT   0x06004e60
+# define CHEST_TEX_BOSS_KEY_SIDE    0x06005e60
+#endif
 
 static const Gfx kListNormalFront[] = {
-    gsDPLoadTextureBlock(0x06001798, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 64, 0, G_TX_MIRROR | G_TX_WRAP, G_TX_MIRROR | G_TX_WRAP, 5, 6, 0, 0),
+    gsDPLoadTextureBlock(CHEST_TEX_NORMAL_FRONT, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 64, 0, G_TX_MIRROR | G_TX_WRAP, G_TX_MIRROR | G_TX_WRAP, 5, 6, 0, 0),
     gsSPEndDisplayList(),
 };
 
 static const Gfx kListNormalSide[] = {
-    gsDPLoadTextureBlock(0x06002798, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_MIRROR | G_TX_WRAP, G_TX_MIRROR | G_TX_WRAP, 5, 5, 0, 0),
+    gsDPLoadTextureBlock(CHEST_TEX_NORMAL_SIDE, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_MIRROR | G_TX_WRAP, G_TX_MIRROR | G_TX_WRAP, 5, 5, 0, 0),
     gsSPEndDisplayList(),
 };
 
 static const Gfx kListBossKeyFront[] = {
-    gsDPLoadTextureBlock(0x06003798, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 64, 0, G_TX_MIRROR | G_TX_WRAP, G_TX_MIRROR | G_TX_WRAP, 5, 6, 0, 0),
+    gsDPLoadTextureBlock(CHEST_TEX_BOSS_KEY_FRONT, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 64, 0, G_TX_MIRROR | G_TX_WRAP, G_TX_MIRROR | G_TX_WRAP, 5, 6, 0, 0),
     gsSPEndDisplayList(),
 };
 
 static const Gfx kListBossKeySide[] = {
-    gsDPLoadTextureBlock(0x06002f98, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_MIRROR | G_TX_WRAP, G_TX_MIRROR | G_TX_WRAP, 5, 5, 0, 0),
+    gsDPLoadTextureBlock(CHEST_TEX_BOSS_KEY_SIDE, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_MIRROR | G_TX_WRAP, G_TX_MIRROR | G_TX_WRAP, 5, 5, 0, 0),
     gsSPEndDisplayList(),
 };
 
@@ -57,6 +70,15 @@ static const Gfx kListSpiderSide[] = {
     gsSPEndDisplayList(),
 };
 
+static const Gfx kListFairyFront[] = {
+    gsDPLoadTextureBlock(0x09000000 | CUSTOM_KEEP_CHEST_FAIRY_FRONT, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 64, 0, G_TX_MIRROR | G_TX_WRAP, G_TX_MIRROR | G_TX_WRAP, 5, 6, 0, 0),
+    gsSPEndDisplayList(),
+};
+
+static const Gfx kListFairySide[] = {
+    gsDPLoadTextureBlock(0x09000000 | CUSTOM_KEEP_CHEST_FAIRY_SIDE, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_MIRROR | G_TX_WRAP, G_TX_MIRROR | G_TX_WRAP, 5, 5, 0, 0),
+    gsSPEndDisplayList(),
+};
 
 static int csmcFromItemOot(s16 gi)
 {
@@ -281,6 +303,8 @@ static int csmcFromItemMm(s16 gi)
     case GI_MM_GS_TOKEN_OCEAN:
     case GI_MM_GS_TOKEN_SWAMP:
         return CSMC_SPIDER;
+    case GI_MM_STRAY_FAIRY:
+        return CSMC_FAIRY;
     }
     return CSMC_NORMAL;
 }
@@ -306,16 +330,16 @@ void comboCsmcInit(Actor* this, GameState_Play* play, s16 gi)
     if (type == CSMC_MAJOR || type == CSMC_BOSS_KEY)
     {
         ActorSetScale(this, 0.01f);
-#if defined(GAME_OOT)
         ActorSetUnk(this, 40.f);
-#endif
     }
     else
     {
-        ActorSetScale(this, 0.005f);
 #if defined(GAME_OOT)
-        ActorSetUnk(this, 20.f);
+        ActorSetScale(this, 0.005f);
+#else
+        ActorSetScale(this, 0.0075f);
 #endif
+        ActorSetUnk(this, 20.f);
     }
 
 }
@@ -348,6 +372,10 @@ void comboCsmcPreDraw(Actor* this, GameState_Play* play, s16 gi)
     case CSMC_SPIDER:
         listFront = kListSpiderFront;
         listSide = kListSpiderSide;
+        break;
+    case CSMC_FAIRY:
+        listFront = kListFairyFront;
+        listSide = kListFairySide;
         break;
     }
 
