@@ -372,6 +372,11 @@ static const char* const kItemNamesMm[] = {
     "the " C0 "Boss Key (Snowhead)",
     "the " C0 "Boss Key (Great Bay)",
     "the " C0 "Boss Key (Stone Tower)",
+    "a " C0 "Stray Fairy (Woodfall)",
+    "a " C0 "Stray Fairy (Snowhead)",
+    "a " C0 "Stray Fairy (Great Bay)",
+    "a " C0 "Stray Fairy (Stone Tower)",
+    "a " C0 "Stray Fairy (Town)",
 };
 
 typedef struct

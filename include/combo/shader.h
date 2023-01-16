@@ -217,5 +217,10 @@ extern const Shader kShaders[256];
 #define DRAWGI_MM_STRAY_FAIRY               0xc4
 #define DRAWGI_MM_GS_TOKEN_SWAMP            0xc5
 #define DRAWGI_MM_GS_TOKEN_OCEAN            0xc6
+#define DRAWGI_MM_STRAY_FAIRY_WF            0xc7
+#define DRAWGI_MM_STRAY_FAIRY_SH            0xc8
+#define DRAWGI_MM_STRAY_FAIRY_GB            0xc9
+#define DRAWGI_MM_STRAY_FAIRY_ST            0xca
+#define DRAWGI_MM_STRAY_FAIRY_TOWN          0xcb
 
 #endif

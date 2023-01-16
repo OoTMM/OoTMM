@@ -308,6 +308,11 @@ static int csmcFromItemMm(s16 gi)
     case GI_MM_GS_TOKEN_SWAMP:
         return CSMC_SPIDER;
     case GI_MM_STRAY_FAIRY:
+    case GI_MM_STRAY_FAIRY_WF:
+    case GI_MM_STRAY_FAIRY_SH:
+    case GI_MM_STRAY_FAIRY_GB:
+    case GI_MM_STRAY_FAIRY_ST:
+    case GI_MM_STRAY_FAIRY_TOWN:
         return CSMC_FAIRY;
     }
     return CSMC_NORMAL;
