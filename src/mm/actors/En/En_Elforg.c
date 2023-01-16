@@ -50,3 +50,13 @@ void EnElforg_DrawWrapper(Actor* this, GameState_Play* play)
     }
     draw(this, play);
 }
+
+void EnElforg_GiveItemTown(GameState_Play* play, Actor* this)
+{
+    s16 gi;
+
+    gi = EnElforg_Item(this, play);
+    PlayerDisplayTextBox(play, 0x579, NULL);
+    comboAddItemGI(play, gi);
+    gMmExtraFlags2.townStrayFairy = 1;
+}

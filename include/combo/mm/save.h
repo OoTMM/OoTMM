@@ -314,7 +314,8 @@ typedef struct
     u32 maskTruth:1;
     u32 moonTear:1;
     u32 songHealing:1;
-    u32 unused:5;
+    u32 townStrayFairy:1;
+    u32 unused:4;
 }
 MmExtraFlags2;
 
