@@ -16,6 +16,7 @@ Clock Town Bank Reward 2,                         npc,            NONE,         
 Clock Town Bank Reward 3,                         npc,            BANK_3,             CLOCK_TOWN_WEST,            BANK_3,                 HEART_PIECE
 Clock Town Rosa Sisters HP,                       npc,            NONE,               CLOCK_TOWN_WEST,            ROSA_HEART_PIECE,       HEART_PIECE
 Clock Town Guru Guru Mask Bremen,                 npc,            NONE,               LAUNDRY_POOL,               MASK_BREMEN,            MASK_BREMEN
+Clock Town Stray Fairy,                           npc,            NONE,               LAUNDRY_POOL,               STRAY_FAIRY_TOWN,       STRAY_FAIRY_TOWN
 Clock Town Great Fairy,                           npc,            NONE,               FAIRY_FOUNTAIN,             GREAT_FAIRY_TOWN,       MASK_GREAT_FAIRY
 Clock Town Great Fairy Alt,                       npc,            NONE,               FAIRY_FOUNTAIN,             GREAT_FAIRY_TOWN_ALT,   MAGIC_UPGRADE
 Clock Tower Roof Skull Kid Ocarina,               npc,            NONE,               CLOCK_TOWER_ROOFTOP,        SKULL_KID_OCARINA,      OCARINA

@@ -84,13 +84,14 @@
     FROG_1: "has(MASK_DON_GERO)"
   locations:
     "Clock Town Guru Guru Mask Bremen": "true"
+    "Clock Town Stray Fairy": "true"
 "Clock Town Fairy Fountain":
   region: CLOCK_TOWN_NORTH
   exits:
     "Clock Town North": "true"
   locations:
-    "Clock Town Great Fairy": "true"
-    "Clock Town Great Fairy Alt": "has(MASK_DEKU) || has(MASK_GORON) || has(MASK_ZORA)"
+    "Clock Town Great Fairy": "has(STRAY_FAIRY_TOWN)"
+    "Clock Town Great Fairy Alt": "has(STRAY_FAIRY_TOWN) && (has(MASK_DEKU) || has(MASK_GORON) || has(MASK_ZORA))"
 "Clock Tower Roof":
   region: CLOCK_TOWER_ROOF
   exits:
