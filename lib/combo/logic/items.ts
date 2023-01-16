@@ -194,8 +194,6 @@ export const isKey = (item: string) => isSmallKey(item) || isBossKey(item);
 export const isDungeonItem = (item: string) => isMapCompass(item) || isKey(item) || isStrayFairy(item);
 export const isDungeonReward = (item: string) => DUNGEON_REWARDS.has(item);
 export const isItemMajor = (item: string) => ITEMS_REQUIRED.has(item);
-export const isItemMajorSometimes = (item: string) => ITEMS_SOMETIMES_REQUIRED.has(item);
-export const isItemMajorAlways = (item: string) => ITEMS_REQUIRED.has(item) && !ITEMS_SOMETIMES_REQUIRED.has(item);
 export const isGoldToken = (item: string) => !!item.match(/^OOT_GS_TOKEN/);
 export const isHouseToken = (item: string) => !!item.match(/^MM_GS_TOKEN/);
 export const isToken = (item: string) => isGoldToken(item) || isHouseToken(item);

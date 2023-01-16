@@ -21,6 +21,15 @@ const spoilerSettings = (buffer: string[], settings: Settings) => {
   buffer.push('');
 };
 
+const spoilerFoolish = (buffer: string[], foolish: {[k: string]: number}) => {
+  buffer.push('Foolish Regions');
+  for (const region in foolish) {
+    const weight = foolish[region];
+    buffer.push(`  ${region}: ${weight}`);
+  }
+  buffer.push('');
+};
+
 const spoilerHints = (buffer: string[], hints: Hints, placement: ItemPlacement) => {
   buffer.push('Hints');
   for (const gossip in hints.gossip) {
@@ -63,6 +72,7 @@ export const spoiler = (world: World, placement: ItemPlacement, spheres: string[
   const buffer: string[] = [];
   spoilerHeader(buffer, opts.seed);
   spoilerSettings(buffer, opts.settings);
+  spoilerFoolish(buffer, hints.foolish);
   spoilerHints(buffer, hints, placement);
   if (!opts.settings.noLogic) {
     spoilerSpheres(buffer, world, placement, spheres);
