@@ -35,6 +35,7 @@ static void debugCheat(GameState_Play* play)
         gSave.upgrades.quiver = 3;
         gSave.upgrades.dive = 2;
         gSave.upgrades.wallet = 2;
+        gSave.upgrades.strength = 3;
         gSave.ammo[ITS_OOT_STICKS] = 30;
         gSave.ammo[ITS_OOT_SLINGSHOT] = 50;
         gSave.ammo[ITS_OOT_BOMBS] = 40;
@@ -61,6 +62,8 @@ static void debugCheat(GameState_Play* play)
         gSave.magicUpgrade = 1;
         gSave.magicUpgrade2 = 1;
         gSave.magicAmount = 0x60;
+
+        gSave.dungeonKeys[SCE_OOT_TEMPLE_FOREST] = 9;
 
         //gSave.quest.medallionShadow = 1;
         //gSave.quest.medallionSpirit = 1;
