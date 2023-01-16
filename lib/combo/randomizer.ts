@@ -44,7 +44,7 @@ const gi = (settings: Settings, game: Game, item: string) => {
     item = gameId(game, 'BOSS_KEY', '_');
   } else if (isTownStrayFairy(item) && settings.townFairyShuffle === 'vanilla') {
     item = gameId(game, 'STRAY_FAIRY', '_');
-  } else if (isDungeonStrayFairy(item)) {
+  } else if (isDungeonStrayFairy(item) && settings.strayFairyShuffle !== 'anywhere') {
     item = gameId(game, 'STRAY_FAIRY', '_');
   }
 
@@ -107,9 +107,6 @@ const gameChecks = (settings: Settings, game: Game, logic: LogicResult): Buffer 
     if (c.game !== game) {
       continue;
     }
-    if (c.type === 'sf') {
-      continue;
-    }
     let { scene } = c;
     let id = checkId(c);
     if (!DATA_SCENES.hasOwnProperty(scene)) {
@@ -125,6 +122,9 @@ const gameChecks = (settings: Settings, game: Game, logic: LogicResult): Buffer 
       break;
     case 'collectible':
       id |= 0x40;
+      break;
+    case 'sf':
+      id |= 0x80;
       break;
     }
     const key = (sceneId << 8) | id;

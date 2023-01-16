@@ -7,7 +7,7 @@ import { World } from './world';
 import { LogicSeedError } from './error';
 import { CONSTRAINTS, itemConstraint } from './constraints';
 import { Options } from '../options';
-import { addItem, combinedItems, itemsArray, removeItem, ITEMS_REQUIRED, isDungeonReward, isGoldToken, isHouseToken, isKey, isStrayFairy, isSmallKey, isGanonBossKey, isRegularBossKey, isTownStrayFairy } from './items';
+import { addItem, combinedItems, itemsArray, removeItem, ITEMS_REQUIRED, isDungeonReward, isGoldToken, isHouseToken, isKey, isStrayFairy, isSmallKey, isGanonBossKey, isRegularBossKey, isTownStrayFairy, isDungeonStrayFairy } from './items';
 
 const ITEMS_JUNK = new Set<string>([
   'OOT_RUPEE_GREEN',
@@ -271,8 +271,16 @@ class Solver {
       const check = this.world.checks[location];
       if (isTownStrayFairy(check.item) && this.opts.settings.townFairyShuffle === 'vanilla') {
         this.fixedLocations.add(location);
-      } else if (check.type === 'sf') {
-        this.fixedLocations.add(location);
+      } else if (isDungeonStrayFairy(check.item)) {
+        if (check.type === 'sf') {
+          if (this.opts.settings.strayFairyShuffle !== 'anywhere' && this.opts.settings.strayFairyShuffle !== 'ownDungeon') {
+            this.fixedLocations.add(location);
+          }
+        } else {
+          if (this.opts.settings.strayFairyShuffle === 'vanilla') {
+            this.fixedLocations.add(location);
+          }
+        }
       }
     }
   }
@@ -308,6 +316,8 @@ class Solver {
         } else if (isGanonBossKey(item) && this.opts.settings.ganonBossKey === 'anywhere') {
           continue;
         } else if (isRegularBossKey(item) && this.opts.settings.bossKeyShuffle === 'anywhere') {
+          continue;
+        } else if (isDungeonStrayFairy(item) && this.opts.settings.strayFairyShuffle === 'anywhere') {
           continue;
         }
 

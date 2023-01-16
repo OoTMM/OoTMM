@@ -67,10 +67,22 @@ export const SETTINGS = [{
   category: 'main',
   type: 'enum',
   values: [
-    { value: 'vanilla', name: 'vanilla' },
+    { value: 'vanilla', name: 'Vanilla' },
     { value: 'anywhere', name: 'Anywhere' },
   ],
   default: 'vanilla'
+}, {
+  key: 'strayFairyShuffle',
+  name: 'Dungeon Stray Fairy Shuffle',
+  category: 'main',
+  type: 'enum',
+  values: [
+    { value: 'vanilla', name: 'Vanilla' },
+    { value: 'mixed', name: 'Chests Own Dungeon' },
+    { value: 'ownDungeon', name: 'Own Dungeon' },
+    { value: 'anywhere', name: 'Anywhere' },
+  ],
+  default: 'mixed'
 }, {
   key: 'ganonBossKey',
   name: 'Ganon Boss Key Shuffle',
