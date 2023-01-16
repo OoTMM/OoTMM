@@ -662,6 +662,9 @@ void comboAddItemMm(GameState_Play* play, u16 itemId)
     case ITEM_MM_STRAY_FAIRY_ST:
         addStrayFairy(3);
         break;
+    case ITEM_MM_STRAY_FAIRY_TOWN:
+        addStrayFairy(4);
+        break;
     case ITEM_MM_DEFENSE_UPGRADE:
         gMmSave.playerData.doubleDefense = 1;
         gMmSave.inventory.defenseHearts = 20;
