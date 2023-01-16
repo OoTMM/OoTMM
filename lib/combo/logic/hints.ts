@@ -363,6 +363,10 @@ const SIMPLE_DEPENDENCIES: {[k: string]: string[]} = {
   ],
   MM_GS_TOKEN_OCEAN: [
     'MM Ocean Spider House Wallet',
+  ],
+  MM_STRAY_FAIRY_TOWN: [
+    'MM Clock Town Great Fairy',
+    'MM Clock Town Great Fairy Alt',
   ]
 };
 

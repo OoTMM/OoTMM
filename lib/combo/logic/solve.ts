@@ -7,7 +7,7 @@ import { World } from './world';
 import { LogicSeedError } from './error';
 import { CONSTRAINTS, itemConstraint } from './constraints';
 import { Options } from '../options';
-import { addItem, combinedItems, itemsArray, removeItem, ITEMS_REQUIRED, isDungeonReward, isGoldToken, isHouseToken, isKey, isStrayFairy, isMapCompass, isSmallKey, isGanonBossKey, isRegularBossKey } from './items';
+import { addItem, combinedItems, itemsArray, removeItem, ITEMS_REQUIRED, isDungeonReward, isGoldToken, isHouseToken, isKey, isStrayFairy, isSmallKey, isGanonBossKey, isRegularBossKey, isTownStrayFairy } from './items';
 
 const ITEMS_JUNK = new Set<string>([
   'OOT_RUPEE_GREEN',
@@ -269,7 +269,9 @@ class Solver {
   private fixFairies() {
     for (const location in this.world.checks) {
       const check = this.world.checks[location];
-      if (check.type === 'sf') {
+      if (isTownStrayFairy(check.item) && this.opts.settings.townFairyShuffle === 'vanilla') {
+        this.fixedLocations.add(location);
+      } else if (check.type === 'sf') {
         this.fixedLocations.add(location);
       }
     }

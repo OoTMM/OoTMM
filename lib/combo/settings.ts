@@ -62,6 +62,16 @@ export const SETTINGS = [{
   ],
   default: 'ownDungeon'
 }, {
+  key: 'townFairyShuffle',
+  name: 'Town Stray Fairy Shuffle',
+  category: 'main',
+  type: 'enum',
+  values: [
+    { value: 'vanilla', name: 'vanilla' },
+    { value: 'anywhere', name: 'Anywhere' },
+  ],
+  default: 'vanilla'
+}, {
   key: 'ganonBossKey',
   name: 'Ganon Boss Key Shuffle',
   category: 'main',

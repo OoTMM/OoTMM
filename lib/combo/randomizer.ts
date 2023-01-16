@@ -8,7 +8,7 @@ import { Options } from './options';
 import { Settings } from './settings';
 import { HintGossip, Hints } from './logic/hints';
 import { Monitor } from './monitor';
-import { isGanonBossKey, isRegularBossKey, isSmallKey } from './logic/items';
+import { isDungeonStrayFairy, isGanonBossKey, isRegularBossKey, isSmallKey, isTownStrayFairy } from './logic/items';
 import { gameId } from './util';
 
 const GAME_DATA_OFFSETS = {
@@ -42,6 +42,10 @@ const gi = (settings: Settings, game: Game, item: string) => {
     item = gameId(game, 'BOSS_KEY', '_');
   } else if (isRegularBossKey(item) && settings.bossKeyShuffle === 'ownDungeon') {
     item = gameId(game, 'BOSS_KEY', '_');
+  } else if (isTownStrayFairy(item) && settings.townFairyShuffle === 'vanilla') {
+    item = gameId(game, 'STRAY_FAIRY', '_');
+  } else if (isDungeonStrayFairy(item)) {
+    item = gameId(game, 'STRAY_FAIRY', '_');
   }
 
   if (/^OOT_MAP/.test(item)) {
@@ -52,8 +56,6 @@ const gi = (settings: Settings, game: Game, item: string) => {
     item = "MM_MAP";
   } else if (/^MM_COMPASS/.test(item)) {
     item = "MM_COMPASS";
-  } else if (/^MM_STRAY_FAIRY/.test(item)) {
-    item = "MM_STRAY_FAIRY";
   }
 
   const subst = SUBSTITUTIONS[item];
