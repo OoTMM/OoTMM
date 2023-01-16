@@ -260,7 +260,7 @@ export const randomizerData = (logic: LogicResult, options: Options): Buffer => 
 
 export const randomize = (monitor: Monitor, rom: Buffer, opts: Options) => {
   monitor.log("Randomizing...");
-  const res = logic(opts);
+  const res = logic(monitor, opts);
   const buffer = Buffer.alloc(0x20000, 0xff);
   for (const g of GAMES) {
     const checksBuffer = gameChecks(opts.settings, g, res);

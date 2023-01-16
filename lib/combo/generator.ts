@@ -23,7 +23,7 @@ export class Generator {
     private opts: Options,
     monitorCallbacks: MonitorCallbacks,
   ) {
-    this.monitor = new Monitor(monitorCallbacks);
+    this.monitor = new Monitor(monitorCallbacks, opts.debug);
   }
 
   async run(): Promise<GeneratorOutput> {

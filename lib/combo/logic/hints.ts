@@ -4,10 +4,11 @@ import { findSpheres } from './playthrough';
 import { Random, sample, shuffle } from '../random';
 import { pathfind } from './pathfind';
 import { Items } from './state';
-import { addItem, DUNGEON_REWARDS_ORDERED, isDungeonItem, isDungeonReward, isItemMajor, isGoldToken, itemsArray, isKey, isHouseToken, isSmallKey, isGanonBossKey, isRegularBossKey, DUNGEON_REWARDS, isStrayFairy } from './items';
+import { addItem, DUNGEON_REWARDS_ORDERED, isDungeonItem, isDungeonReward, isItemMajor, isGoldToken, itemsArray, isKey, isHouseToken, isSmallKey, isGanonBossKey, isRegularBossKey, DUNGEON_REWARDS, isStrayFairy, isToken } from './items';
 import { Settings } from '../settings';
 import { CONSTRAINT_NONE, itemConstraint } from './constraints';
 import { Game } from '../config';
+import { Monitor } from '../monitor';
 
 export type HintGossipHero = {
   type: 'hero',
@@ -154,6 +155,95 @@ const SIMPLE_DEPENDENCIES: {[k: string]: string[]} = {
     'OOT Hyrule Field Ocarina of Time',
     'OOT Hyrule Field Song of Time',
   ],
+  OOT_SMALL_KEY_FOREST: [
+    'OOT Forest Temple Map',
+    'OOT Forest Temple Maze',
+    'OOT Forest Temple Garden',
+    'OOT Forest Temple Well',
+    'OOT Forest Temple Poe Key',
+    'OOT Forest Temple Bow',
+    'OOT Forest Temple Compass',
+    'OOT Forest Temple Checkerboard',
+    'OOT Forest Temple Boss Key',
+    'OOT Forest Temple Floormaster',
+    'OOT Forest Temple Antichamber',
+    'OOT Forest Temple GS Entrance',
+    'OOT Forest Temple GS Main',
+    'OOT Forest Temple GS Garden West',
+    'OOT Forest Temple GS Garden East',
+    'OOT Forest Temple GS Antichamber',
+    'OOT Forest Temple Boss Container',
+    'OOT Forest Temple Boss',
+  ],
+  OOT_BOSS_KEY_FOREST: [
+    'OOT Forest Temple Boss Container',
+    'OOT Forest Temple Boss',
+  ],
+  OOT_SMALL_KEY_SPIRIT: [
+    'OOT Spirit Temple Child Climb 1',
+    'OOT Spirit Temple Child Climb 2',
+    'OOT Spirit Temple Statue Base',
+    'OOT Spirit Temple Statue Hands',
+    'OOT Spirit Temple Statue Upper Right',
+    'OOT Spirit Temple Sun Block Room Torches',
+    'OOT Spirit Temple Adult Suns on Wall 1',
+    'OOT Spirit Temple Adult Suns on Wall 2',
+    'OOT Spirit Temple Adult Invisible 1',
+    'OOT Spirit Temple Adult Invisible 2',
+    'OOT Spirit Temple Adult Late Sun on Wall',
+    'OOT Spirit Temple Adult Boss Key Chest',
+    'OOT Spirit Temple Adult Topmost Sun on Wall',
+    'OOT Spirit Temple GS Child Climb',
+    'OOT Spirit Temple GS Iron Knuckle',
+    'OOT Spirit Temple GS Statue',
+    'OOT Spirit Temple Silver Gauntlets',
+    'OOT Spirit Temple Mirror Shield',
+    'OOT Spirit Temple Boss HC',
+    'OOT Spirit Temple Boss',
+  ],
+  OOT_BOSS_KEY_SPIRIT: [
+    'OOT Spirit Temple Boss HC',
+    'OOT Spirit Temple Boss',
+  ],
+  OOT_GS_TOKEN: [
+    'OOT Skulltula House 10 Tokens',
+    'OOT Skulltula House 20 Tokens',
+    'OOT Skulltula House 30 Tokens',
+    'OOT Skulltula House 40 Tokens',
+    'OOT Skulltula House 50 Tokens',
+  ],
+  OOT_SMALL_KEY_GF: [
+    'OOT Gerudo Fortress Jail 1',
+    'OOT Gerudo Fortress Jail 2',
+    'OOT Gerudo Fortress Jail 3',
+    'OOT Gerudo Fortress Jail 4',
+    'OOT Gerudo Member Card',
+  ],
+  OOT_SMALL_KEY_GTG: [
+    'OOT Gerudo Training Grounds Stalfos',
+    'OOT Gerudo Training Grounds Near Block',
+    'OOT Gerudo Training Grounds Behind Block Invisible',
+    'OOT Gerudo Training Grounds Behind Block Visible 1',
+    'OOT Gerudo Training Grounds Behind Block Visible 2',
+    'OOT Gerudo Training Grounds Behind Block Visible 3',
+    'OOT Gerudo Training Grounds Eye Statue',
+    'OOT Gerudo Training Grounds Hammer Room Switch',
+    'OOT Gerudo Training Grounds Hammer Room,',
+    'OOT Gerudo Training Grounds Lizalfos',
+    'OOT Gerudo Training Water',
+    'OOT Gerudo Training Freestanding Key',
+    'OOT Gerudo Training Maze Upper Cage',
+    'OOT Gerudo Training Maze Upper Fake Ceiling',
+    'OOT Gerudo Training Maze Side Chest 1',
+    'OOT Gerudo Training Maze Side Chest 2',
+    'OOT Gerudo Training Maze Chest 1',
+    'OOT Gerudo Training Maze Chest 2',
+    'OOT Gerudo Training Maze Chest 3',
+    'OOT Gerudo Training Maze Chest 4',
+  ],
+  OOT_SMALL_KEY_GANON: [
+    'OOT Ganon Castle Light Chest Lullaby',
+  ],
   MM_MASK_CAPTAIN: [
     'MM Moon Fierce Deity Mask',
     'MM Beneath The Graveyard Chest',
@@ -267,6 +357,12 @@ const SIMPLE_DEPENDENCIES: {[k: string]: string[]} = {
     'MM Goron Graveyard Mask',
     'MM Great Bay Coast Zora Mask',
     'MM Music Box House Gibdo Mask'
+  ],
+  MM_GS_TOKEN_SWAMP: [
+    'MM Swamp Spider House Mask of Truth',
+  ],
+  MM_GS_TOKEN_OCEAN: [
+    'MM Ocean Spider House Wallet',
   ]
 };
 
@@ -276,6 +372,7 @@ class HintsSolver {
   private foolish: {[k: string]: number} = {};
 
   constructor(
+    private monitor: Monitor,
     private random: Random,
     private settings: Settings,
     private world: World,
@@ -438,7 +535,7 @@ class HintsSolver {
     while (locsToCheck.length > 0) {
       const l = locsToCheck.pop()!;
       const item = this.items[l];
-      if (isItemMajor(item) || isDungeonReward(item) || isKey(item) || isStrayFairy(item) || isHouseToken(item)) {
+      if (isItemMajor(item) || isDungeonReward(item) || isKey(item) || isStrayFairy(item) || isToken(item)) {
         /* May be a progression item - need to check other locations */
         const dependencies = SIMPLE_DEPENDENCIES[item];
         if (dependencies === undefined) {
@@ -453,6 +550,7 @@ class HintsSolver {
         }
       }
     }
+    this.monitor.debug("isItemUseless - Purged: " + this.items[loc]);
     return true;
   }
 
@@ -686,7 +784,7 @@ class HintsSolver {
   }
 }
 
-export const hints = (random: Random, settings: Settings, world: World, items: ItemPlacement, spheres: string[][]): Hints => {
-  const solver = new HintsSolver(random, settings, world, items, spheres);
+export const hints = (monitor: Monitor, random: Random, settings: Settings, world: World, items: ItemPlacement, spheres: string[][]): Hints => {
+  const solver = new HintsSolver(monitor, random, settings, world, items, spheres);
   return solver.run();
 };
