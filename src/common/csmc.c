@@ -412,5 +412,8 @@ void comboCsmcPreDraw(Actor* this, GameState_Play* play, s16 gi)
     gSPSegment(POLY_OPA_DISP++, 0x09, gCustomKeep);
     gSPSegment(POLY_OPA_DISP++, 0x0a, listFront);
     gSPSegment(POLY_OPA_DISP++, 0x0b, listSide);
+    gSPSegment(POLY_XLU_DISP++, 0x09, gCustomKeep);
+    gSPSegment(POLY_XLU_DISP++, 0x0a, listFront);
+    gSPSegment(POLY_XLU_DISP++, 0x0b, listSide);
     CLOSE_DISPS();
 }
