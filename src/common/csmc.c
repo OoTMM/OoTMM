@@ -417,3 +417,17 @@ void comboCsmcPreDraw(Actor* this, GameState_Play* play, s16 gi)
     gSPSegment(POLY_XLU_DISP++, 0x0b, listSide);
     CLOSE_DISPS();
 }
+
+int comboCsmcChestSize(s16 gi)
+{
+    if (!comboConfig(CFG_CSMC))
+        return -1;
+    switch (csmcFromItem(gi))
+    {
+    case CSMC_MAJOR:
+    case CSMC_BOSS_KEY:
+        return 1;
+    default:
+        return 0;
+    }
+}

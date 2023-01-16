@@ -262,6 +262,7 @@ void comboHintGossip(u8 key, GameState_Play* play);
 /* CSMC */
 void comboCsmcInit(Actor* this, GameState_Play* play, s16 gi);
 void comboCsmcPreDraw(Actor* this, GameState_Play* play, s16 gi);
+int  comboCsmcChestSize(s16 gi);
 
 #else
 # include <combo/asm.h>
