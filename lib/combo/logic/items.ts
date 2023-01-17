@@ -181,6 +181,28 @@ export const ITEMS_SOMETIMES_REQUIRED = new Set<string>([
   'MM_LETTER_TO_MAMA',
 ]);
 
+const ITEMS_JUNK = new Set<string>([
+  'OOT_RUPEE_GREEN',
+  'OOT_RUPEE_BLUE',
+  'OOT_RUPEE_RED',
+  'OOT_RECOVERY_HEART',
+  'OOT_ARROWS_5',
+  'OOT_ARROWS_10',
+  'OOT_ARROWS_30',
+  'MM_RUPEE_GREEN',
+  'MM_RUPEE_BLUE',
+  'MM_RUPEE_RED',
+  'MM_RECOVERY_HEART',
+  'MM_ARROWS_10',
+  'MM_ARROWS_30',
+  'MM_ARROWS_40',
+  'MM_BOMB',
+  'MM_BOMBS_5',
+  'MM_BOMBS_10',
+  'MM_BOMBS_20',
+  'MM_BOMBS_30',
+]);
+
 export const isSong = (item: string) => !!item.match(/^(OOT|MM)_SONG_/);
 export const isCompass = (item: string) => !!item.match(/^(OOT|MM)_COMPASS_/);
 export const isMap = (item: string) => !!item.match(/^(OOT|MM)_MAP_/);
@@ -199,6 +221,7 @@ export const isItemMajor = (item: string) => ITEMS_REQUIRED.has(item);
 export const isGoldToken = (item: string) => !!item.match(/^OOT_GS_TOKEN/);
 export const isHouseToken = (item: string) => !!item.match(/^MM_GS_TOKEN/);
 export const isToken = (item: string) => isGoldToken(item) || isHouseToken(item);
+export const isJunk = (item: string) => ITEMS_JUNK.has(item);
 
 export const itemsArray = (items: Items) => {
   const arr: string[] = [];

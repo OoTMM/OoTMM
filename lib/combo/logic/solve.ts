@@ -6,31 +6,9 @@ import { Items } from './state';
 import { World } from './world';
 import { LogicSeedError } from './error';
 import { Options } from '../options';
-import { addItem, combinedItems, itemsArray, removeItem, ITEMS_REQUIRED, isDungeonReward, isGoldToken, isHouseToken, isKey, isStrayFairy, isSmallKey, isGanonBossKey, isRegularBossKey, isTownStrayFairy, isDungeonStrayFairy, isSong } from './items';
+import { addItem, combinedItems, itemsArray, removeItem, ITEMS_REQUIRED, isDungeonReward, isGoldToken, isHouseToken, isKey, isStrayFairy, isSmallKey, isGanonBossKey, isRegularBossKey, isTownStrayFairy, isDungeonStrayFairy, isSong, isJunk } from './items';
 
-const ITEMS_JUNK = new Set<string>([
-  'OOT_RUPEE_GREEN',
-  'OOT_RUPEE_BLUE',
-  'OOT_RUPEE_RED',
-  'OOT_RECOVERY_HEART',
-  'OOT_ARROWS_5',
-  'OOT_ARROWS_10',
-  'OOT_ARROWS_30',
-  'MM_RUPEE_GREEN',
-  'MM_RUPEE_BLUE',
-  'MM_RUPEE_RED',
-  'MM_RECOVERY_HEART',
-  'MM_ARROWS_10',
-  'MM_ARROWS_30',
-  'MM_ARROWS_40',
-  'MM_BOMB',
-  'MM_BOMBS_5',
-  'MM_BOMBS_10',
-  'MM_BOMBS_20',
-  'MM_BOMBS_30',
-]);
-
-const EXTRA_ITEMS = [
+export const EXTRA_ITEMS = [
   'OOT_MASK_SKULL',
   'OOT_MASK_SPOOKY',
   'OOT_MASK_KEATON',
@@ -178,7 +156,7 @@ class Solver {
 
       if (isDungeonReward(item) || isKey(item) || isStrayFairy(item) || ITEMS_REQUIRED.has(item)) {
         addItem(pools.required, item);
-      } else if (ITEMS_JUNK.has(item)) {
+      } else if (isJunk(item)) {
         addItem(pools.junk, item);
       } else {
         addItem(pools.nice, item);
