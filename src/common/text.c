@@ -845,6 +845,17 @@ void comboTextAppendRegionName(char** b, u8 regionId, int flags)
     char* start;
     const RegionName* regName;
 
+    if (regionId == 0)
+    {
+        if (flags & TF_PREPOS)
+        {
+            comboTextAppendStr(b, "in ");
+        }
+        comboTextAppendStr(b, "the " TEXT_COLOR_RED "Void");
+        comboTextAppendClearColor(b);
+        return;
+    }
+
     if (regionId & 0x80)
     {
         regName = &kRegionNamesMm[(regionId & 0x7f) - 1];

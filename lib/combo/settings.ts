@@ -169,10 +169,14 @@ type SettingShapes = InputToShape<SettingDataEntry>;
 type UnionToIntersection<U> =
   (U extends any ? (k: U)=>void : never) extends ((k: infer I)=>void) ? I : never
 
-export type Settings = UnionToIntersection<SettingShapes>;
+type SettingsBase = UnionToIntersection<SettingShapes>;
 
-export const DEFAULT_SETTINGS: Settings = SETTINGS.map(s => {
+export type Settings = SettingsBase & {
+  startingItems: {[k: string]: number}
+};
+
+export const DEFAULT_SETTINGS: Settings = { ...SETTINGS.map(s => {
   return {[s.key]: s.default};
-}).reduce((a, b) => ({...a, ...b}), {}) as Settings;
+}).reduce((a, b) => ({...a, ...b}), {}), startingItems: {} } as Settings;
 
 export const settings = (s: Partial<Settings>): Settings => ({...DEFAULT_SETTINGS, ...s});

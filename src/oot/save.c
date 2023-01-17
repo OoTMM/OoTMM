@@ -43,6 +43,34 @@ static void startingMapCompass(void)
     }
 }
 
+ALIGNED(16) static u16 gStartingItemsBuffer[64];
+
+static void applyStartingItems(void)
+{
+    int slice;
+    u16 gi;
+    u16 count;
+
+    slice = 0;
+    for (;;)
+    {
+        DMARomToRam((0x03fe7000 + slice * sizeof(gStartingItemsBuffer)) | PI_DOM1_ADDR2, gStartingItemsBuffer, sizeof(gStartingItemsBuffer));
+        slice++;
+        for (int i = 0; i < ARRAY_SIZE(gStartingItemsBuffer); i += 2)
+        {
+            gi = gStartingItemsBuffer[i];
+            count = gStartingItemsBuffer[i + 1];
+            if (gi == 0xffff)
+                return;
+            for (u16 j = 0; j < count; ++j)
+            {
+                gi = comboProgressive(gi);
+                comboAddItemNoEffect(gi);
+            }
+        }
+    }
+}
+
 void comboCreateSave(void* unk, void* buffer)
 {
     u32 base;
@@ -52,6 +80,9 @@ void comboCreateSave(void* unk, void* buffer)
 
     if (comboConfig(CFG_STARTING_MAP_COMPASS))
         startingMapCompass();
+
+    /* Apply starting items */
+    applyStartingItems();
 
     /* Write save */
     comboWriteSave();

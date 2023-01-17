@@ -20,6 +20,14 @@ const ITEMS_JUNK = new Set<string>([
   'MM_RUPEE_BLUE',
   'MM_RUPEE_RED',
   'MM_RECOVERY_HEART',
+  'MM_ARROWS_10',
+  'MM_ARROWS_30',
+  'MM_ARROWS_40',
+  'MM_BOMB',
+  'MM_BOMBS_5',
+  'MM_BOMBS_10',
+  'MM_BOMBS_20',
+  'MM_BOMBS_30',
 ]);
 
 const EXTRA_ITEMS = [
@@ -74,7 +82,7 @@ const maxRequired = (pools: ItemPools, item: string, count: number) => {
 
 class Solver {
   private placement: ItemPlacement = {};
-  private items: Items = {};
+  private items: Items;
   private reachable: Reachable;
   private pools: ItemPools;
   private reachedLocations = new Set<string>();
@@ -85,6 +93,7 @@ class Solver {
     private world: World,
     private random: Random,
   ) {
+    this.items = { ...opts.settings.startingItems };
     this.fixTokens();
     this.fixFairies();
     this.fixLocations();
@@ -189,6 +198,18 @@ class Solver {
     maxRequired(pools, 'MM_BOMB_BAG', 1);
     maxRequired(pools, 'MM_BOW', 1);
     maxRequired(pools, 'MM_MAGIC_UPGRADE', 1);
+
+    for (const item in this.opts.settings.startingItems) {
+      const count = this.opts.settings.startingItems[item];
+      for (let i = 0; i < count; ++i) {
+        removeItemPools(pools, item);
+        let junk = 'OOT_RUPEE_BLUE';
+        if (item.startsWith('MM_')) {
+          junk = 'MM_RUPEE_BLUE';
+        }
+        addItem(pools.junk, junk);
+      }
+    }
 
     return pools;
   };

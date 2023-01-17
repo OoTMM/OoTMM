@@ -465,7 +465,7 @@ class HintsSolver {
     const woth = new Set<string>();
     for (const sphere of this.spheres) {
       for (const loc of sphere) {
-        if (findSpheres(this.world, this.items, undefined, new Set([loc])) === null) {
+        if (findSpheres(this.settings, this.world, this.items, undefined, new Set([loc])) === null) {
           woth.add(loc);
         }
       }
@@ -745,10 +745,7 @@ class HintsSolver {
 
   private placeGossips() {
     /* Set the always hinted locations */
-    this.hintedLocations.add(this.findItem('OOT_ARROW_LIGHT')!);
-    this.hintedLocations.add(this.findItem('MM_SONG_ORDER')!);
     FIXED_HINTS_LOCATIONS.forEach(x => this.hintedLocations.add(x));
-    DUNGEON_REWARDS.forEach(x => this.hintedLocations.add(this.findItem(x)!));
 
     const woth = this.wayOfTheHero();
     const wothItems = this.wayOfTheHeroItems(woth);
@@ -800,10 +797,33 @@ class HintsSolver {
     this.duplicateHints();
   }
 
+  private locRegion(loc: string | null) {
+    if (loc === null) {
+      return 'NONE';
+    }
+    return this.world.regions[loc];
+  }
+
+  markLocation(location: string | null) {
+    if (location === null) {
+      return;
+    }
+    this.hintedLocations.add(location);
+  }
+
   run() {
-    const dungeonRewards = DUNGEON_REWARDS_ORDERED.map(item => this.findItem(item)).map(loc => this.world.regions[loc!]);
-    const lightArrow = this.world.regions[this.findItem('OOT_ARROW_LIGHT')!];
-    const oathToOrder = this.world.regions[this.findItem('MM_SONG_ORDER')!];
+    const dungeonRewardLocations = DUNGEON_REWARDS_ORDERED.map(item => this.findItem(item));
+    const lightArrowLocation = this.findItem('OOT_ARROW_LIGHT');
+    const oathToOrderLocation = this.findItem('MM_SONG_ORDER');
+
+    dungeonRewardLocations.forEach(x => this.markLocation(x));
+    this.markLocation(lightArrowLocation);
+    this.markLocation(oathToOrderLocation);
+
+    const dungeonRewards = dungeonRewardLocations.map(x => this.locRegion(x));
+    const lightArrow = this.locRegion(lightArrowLocation);
+    const oathToOrder = this.locRegion(oathToOrderLocation);
+
     this.placeGossips();
     return { dungeonRewards, lightArrow, oathToOrder, foolish: this.foolish, gossip: this.gossip };
   }

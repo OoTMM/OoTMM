@@ -15,8 +15,24 @@ const spoilerHeader = (buffer: string[], seed: string) => {
 const spoilerSettings = (buffer: string[], settings: Settings) => {
   buffer.push('Settings');
   for (const s in settings) {
+    if (s === 'startingItems') {
+      continue;
+    }
     const v = (settings as any)[s];
     buffer.push(`  ${s}: ${v}`);
+  }
+  buffer.push('');
+};
+
+const spoilerStartingItems = (buffer: string[], startingItems: {[k: string]: number}) => {
+  if (Object.keys(startingItems).length === 0) {
+    return;
+  }
+
+  buffer.push('Starting Items');
+  for (const item in startingItems) {
+    const count = startingItems[item];
+    buffer.push(`  ${item}: ${count}`);
   }
   buffer.push('');
 };
@@ -72,6 +88,7 @@ export const spoiler = (world: World, placement: ItemPlacement, spheres: string[
   const buffer: string[] = [];
   spoilerHeader(buffer, opts.seed);
   spoilerSettings(buffer, opts.settings);
+  spoilerStartingItems(buffer, opts.settings.startingItems);
   spoilerFoolish(buffer, hints.foolish);
   spoilerHints(buffer, hints, placement);
   if (!opts.settings.noLogic) {
