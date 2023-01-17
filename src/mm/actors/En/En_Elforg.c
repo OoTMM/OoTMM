@@ -68,7 +68,7 @@ void EnElforg_GiveItemTown(GameState_Play* play, Actor* this)
 
     gi = EnElforg_Item(this, play);
     PlayerDisplayTextBox(play, 0x579, NULL);
-    comboAddItemGI(play, gi);
+    comboAddItem(play, gi);
     gMmExtraFlags2.townStrayFairy = 1;
 }
 
@@ -78,5 +78,5 @@ void EnElforg_GiveItemDungeon(GameState_Play* play, Actor* this)
 
     gi = EnElforg_Item(this, play);
     PlayerDisplayTextBox(play, 0x579, NULL);
-    comboAddItemGI(play, gi);
+    comboAddItem(play, gi);
 }

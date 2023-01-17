@@ -28,23 +28,7 @@ const u8 kOotTradeChild[] = {
     ITEM_OOT_MASK_OF_TRUTH,
 };
 
-#if defined(GAME_OOT)
-static u16 dungeon(GameState_Play* play, int isBossKey)
-{
-    u16 mapIndex;
-
-    /* Desert colossus hands */
-    if (play->sceneId == SCE_OOT_DESERT_COLOSSUS)
-        return SCE_OOT_TEMPLE_SPIRIT;
-
-    mapIndex = gSaveContext.mapIndex;
-    if (mapIndex == SCE_OOT_GANON_TOWER || mapIndex == SCE_OOT_INSIDE_GANON_CASTLE)
-        return isBossKey ? SCE_OOT_GANON_TOWER : SCE_OOT_INSIDE_GANON_CASTLE;
-    return mapIndex;
-}
-#endif
-
-static void addSmallKey(u16 dungeonId)
+void comboAddSmallKeyOot(u16 dungeonId)
 {
     s8 keyCount;
 
@@ -56,9 +40,19 @@ static void addSmallKey(u16 dungeonId)
     gOotSave.dungeonKeys[dungeonId] = keyCount;
 }
 
-static void addBossKey(u16 dungeonId)
+void comboAddBossKeyOot(u16 dungeonId)
 {
     gOotSave.dungeonItems[dungeonId].bossKey = 1;
+}
+
+void comboAddCompassOot(u16 dungeonId)
+{
+    gOotSave.dungeonItems[dungeonId].compass = 1;
+}
+
+void comboAddMapOot(u16 dungeonId)
+{
+    gOotSave.dungeonItems[dungeonId].map = 1;
 }
 
 static void addHealth(u8 count)
@@ -66,15 +60,24 @@ static void addHealth(u8 count)
     u16 health;
 
     health = (u16)count * 0x10;
-
-#if defined(GAME_OOT)
-    gSaveContext.healthDelta += health;
-#else
     gOotSave.health += health;
     if (gOotSave.health > gOotSave.healthMax)
         gOotSave.health = gOotSave.healthMax;
-#endif
 }
+
+static void addMagicUpgrade(int level)
+{
+    gOotSave.magicUpgrade = 1;
+    if (level >= 2)
+        gOotSave.magicUpgrade2 = 1;
+}
+
+static void refillMagic(int level)
+{
+    gOotSave.magicSize = level;
+    gOotSave.magicAmount = level * 0x30;
+}
+
 
 static void addAmmo(u8 slot, u16 item, u8 max, u8 count)
 {
@@ -225,19 +228,13 @@ static void addRupees(u16 count)
 {
     u16 max;
 
-#if defined(GAME_OOT)
-    (void)max;
-    (void)kMaxRupees;
-    gSaveContext.rupeesDelta += count;
-#else
     max = kMaxRupees[gOotSave.upgrades.wallet];
     gOotSave.rupees += count;
     if (gOotSave.rupees > max)
         gOotSave.rupees = max;
-#endif
 }
 
-void comboAddItemOot(GameState_Play* play, u16 itemId)
+void comboAddItemOot(u16 itemId, int noEffect)
 {
     u16 dungeonId;
 
@@ -460,24 +457,14 @@ void comboAddItemOot(GameState_Play* play, u16 itemId)
         gOotSave.upgrades.wallet = 2;
         break;
     case ITEM_OOT_MAGIC_UPGRADE:
-        gOotSave.magicUpgrade = 1;
-#if defined(GAME_OOT)
-        gOotSave.magicSize = 0;
-        gSaveContext.magicTarget = 0x30;
-#else
-        gOotSave.magicSize = 1;
-        gOotSave.magicAmount = 0x30;
-#endif
+        addMagicUpgrade(1);
+        if (noEffect)
+            refillMagic(1);
         break;
     case ITEM_OOT_MAGIC_UPGRADE2:
-        gOotSave.magicUpgrade2 = 1;
-#if defined(GAME_OOT)
-        gOotSave.magicSize = 0;
-        gSaveContext.magicTarget = 0x60;
-#else
-        gOotSave.magicSize = 2;
-        gOotSave.magicAmount = 0x60;
-#endif
+        addMagicUpgrade(2);
+        if (noEffect)
+            refillMagic(2);
         break;
     case ITEM_OOT_NUT_UPGRADE:
         addNutUpgrade(2);
@@ -494,23 +481,26 @@ void comboAddItemOot(GameState_Play* play, u16 itemId)
     case ITEM_OOT_DEFENSE_UPGRADE:
         gOotSave.doubleDefense = 1;
         gOotSave.doubleDefenseHearts = 20;
-        addHealth(20);
+        if (noEffect)
+            addHealth(20);
         break;
     case ITEM_OOT_HEART_PIECE:
     case ITEM_OOT_HEART_PIECE2:
         gOotSave.quest.heartPieces++;
-#if !defined(GAME_OOT)
-        if (gOotSave.quest.heartPieces >= 4)
+        if (noEffect)
         {
-            gOotSave.quest.heartPieces -= 4;
-            gOotSave.healthMax += 0x10;
+            if (gOotSave.quest.heartPieces >= 4)
+            {
+                gOotSave.quest.heartPieces -= 4;
+                gOotSave.healthMax += 0x10;
+            }
+            addHealth(20);
         }
-#endif
-        addHealth(20);
         break;
     case ITEM_OOT_HEART_CONTAINER:
         gOotSave.healthMax += 0x10;
-        addHealth(20);
+        if (noEffect)
+            addHealth(20);
         break;
     case ITEM_OOT_GS_TOKEN:
         gOotSave.quest.goldToken = 1;
@@ -587,22 +577,28 @@ void comboAddItemOot(GameState_Play* play, u16 itemId)
         gOotSave.quest.medallionForest = 1;
         break;
     case ITEM_OOT_RUPEE_GREEN:
-        addRupees(1);
+        if (noEffect)
+            addRupees(1);
         break;
     case ITEM_OOT_RUPEE_BLUE:
-        addRupees(5);
+        if (noEffect)
+            addRupees(5);
         break;
     case ITEM_OOT_RUPEE_RED:
-        addRupees(20);
+        if (noEffect)
+            addRupees(20);
         break;
     case ITEM_OOT_RUPEE_PURPLE:
-        addRupees(50);
+        if (noEffect)
+            addRupees(50);
         break;
     case ITEM_OOT_RUPEE_HUGE:
-        addRupees(200);
+        if (noEffect)
+            addRupees(200);
         break;
     case ITEM_OOT_RECOVERY_HEART:
-        addHealth(1);
+        if (noEffect)
+            addHealth(1);
         break;
     case ITEM_OOT_WEIRD_EGG:
         addTradeChild(0);
@@ -670,71 +666,53 @@ void comboAddItemOot(GameState_Play* play, u16 itemId)
     case ITEM_OOT_CLAIM_CHECK:
         addTradeAdult(10);
         break;
-#if defined(GAME_OOT)
-    case ITEM_OOT_SMALL_KEY:
-        dungeonId = dungeon(play, 0);
-        addSmallKey(dungeonId);
-        break;
-    case ITEM_OOT_MAP:
-        dungeonId = dungeon(play, 0);
-        gOotSave.dungeonItems[dungeonId].map = 1;
-        break;
-    case ITEM_OOT_COMPASS:
-        dungeonId = dungeon(play, 0);
-        gOotSave.dungeonItems[dungeonId].compass = 1;
-        break;
-    case ITEM_OOT_BOSS_KEY:
-        dungeonId = dungeon(play, 1);
-        addBossKey(dungeonId);
-        break;
-#endif
     case ITEM_OOT_SMALL_KEY_FOREST:
-        addSmallKey(SCE_OOT_TEMPLE_FOREST);
+        comboAddSmallKeyOot(SCE_OOT_TEMPLE_FOREST);
         break;
     case ITEM_OOT_SMALL_KEY_FIRE:
-        addSmallKey(SCE_OOT_TEMPLE_FIRE);
+        comboAddSmallKeyOot(SCE_OOT_TEMPLE_FIRE);
         break;
     case ITEM_OOT_SMALL_KEY_WATER:
-        addSmallKey(SCE_OOT_TEMPLE_WATER);
+        comboAddSmallKeyOot(SCE_OOT_TEMPLE_WATER);
         break;
     case ITEM_OOT_SMALL_KEY_SPIRIT:
-        addSmallKey(SCE_OOT_TEMPLE_SPIRIT);
+        comboAddSmallKeyOot(SCE_OOT_TEMPLE_SPIRIT);
         break;
     case ITEM_OOT_SMALL_KEY_SHADOW:
-        addSmallKey(SCE_OOT_TEMPLE_SHADOW);
+        comboAddSmallKeyOot(SCE_OOT_TEMPLE_SHADOW);
         break;
     case ITEM_OOT_SMALL_KEY_GANON:
-        addSmallKey(SCE_OOT_INSIDE_GANON_CASTLE);
+        comboAddSmallKeyOot(SCE_OOT_INSIDE_GANON_CASTLE);
         break;
     case ITEM_OOT_SMALL_KEY_ICE:
-        addSmallKey(SCE_OOT_ICE_CAVERN);
+        comboAddSmallKeyOot(SCE_OOT_ICE_CAVERN);
         break;
     case ITEM_OOT_SMALL_KEY_BOTW:
-        addSmallKey(SCE_OOT_BOTTOM_OF_THE_WELL);
+        comboAddSmallKeyOot(SCE_OOT_BOTTOM_OF_THE_WELL);
         break;
     case ITEM_OOT_SMALL_KEY_GF:
-        addSmallKey(SCE_OOT_THIEVES_HIDEOUT);
+        comboAddSmallKeyOot(SCE_OOT_THIEVES_HIDEOUT);
         break;
     case ITEM_OOT_SMALL_KEY_GTG:
-        addSmallKey(SCE_OOT_GERUDO_TRAINING_GROUND);
+        comboAddSmallKeyOot(SCE_OOT_GERUDO_TRAINING_GROUND);
         break;
     case ITEM_OOT_BOSS_KEY_FOREST:
-        addBossKey(SCE_OOT_TEMPLE_FOREST);
+        comboAddBossKeyOot(SCE_OOT_TEMPLE_FOREST);
         break;
     case ITEM_OOT_BOSS_KEY_FIRE:
-        addBossKey(SCE_OOT_TEMPLE_FIRE);
+        comboAddBossKeyOot(SCE_OOT_TEMPLE_FIRE);
         break;
     case ITEM_OOT_BOSS_KEY_WATER:
-        addBossKey(SCE_OOT_TEMPLE_WATER);
+        comboAddBossKeyOot(SCE_OOT_TEMPLE_WATER);
         break;
     case ITEM_OOT_BOSS_KEY_SPIRIT:
-        addBossKey(SCE_OOT_TEMPLE_SPIRIT);
+        comboAddBossKeyOot(SCE_OOT_TEMPLE_SPIRIT);
         break;
     case ITEM_OOT_BOSS_KEY_SHADOW:
-        addBossKey(SCE_OOT_TEMPLE_SHADOW);
+        comboAddBossKeyOot(SCE_OOT_TEMPLE_SHADOW);
         break;
     case ITEM_OOT_BOSS_KEY_GANON:
-        addBossKey(SCE_OOT_GANON_TOWER);
+        comboAddBossKeyOot(SCE_OOT_GANON_TOWER);
         break;
     }
 }
