@@ -55,3 +55,14 @@ PATCH_START 0x80acd488
   jal EnElforg_GiveItemTown
    move a1,s0
 PATCH_END
+
+/* Disable the default fairy item behavior & load actor as param 2 */
+PATCH_START 0x80acd4dc
+  jal EnElforg_GiveItemDungeon
+   move a1,s0
+PATCH_END
+
+/* Always play fanfare */
+PATCH_START 0x80acd4f4
+  li t0,99
+PATCH_END
