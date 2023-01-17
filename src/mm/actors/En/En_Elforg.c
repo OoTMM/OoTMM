@@ -11,17 +11,28 @@ static s16 EnElforg_Item(Actor* this, GameState_Play* play)
     case SCE_MM_LAUNDRY_POOL:
         gi = comboOverride(OV_NPC, 0, NPC_MM_STRAY_FAIRY_TOWN, gi);
         break;
+    default:
+        gi = comboOverride(OV_SF, play->sceneId, (this->variable & 0xfe00) >> 9, gi);
+        break;
     }
     return gi;
 }
 
 static void EnElforg_Draw(Actor* this, GameState_Play* play)
 {
+    ActorCallback draw;
     static const int kRotDivisor = 100;
     float angle;
     s16 gi;
 
     gi = EnElforg_Item(this, play);
+    if (gi == GI_MM_STRAY_FAIRY)
+    {
+        draw = actorAddr(0x1b0, 0x80acd8c0);
+        draw(this, play);
+        return;
+    }
+
     angle = (play->gs.frameCount % kRotDivisor) * (1.f / kRotDivisor) * M_PI * 2.f;
     ModelViewTranslate(this->position.x, this->position.y, this->position.z, MAT_SET);
     ModelViewScale(0.35f, 0.35f, 0.35f, MAT_MUL);
