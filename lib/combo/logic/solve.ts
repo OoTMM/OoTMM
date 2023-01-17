@@ -85,11 +85,6 @@ class Solver {
   }
 
   solve() {
-    /* Fix the item pool */
-    for (const item of EXTRA_ITEMS) {
-      this.insertItem(item);
-    }
-
     const checksCount = Object.keys(this.world.checks).length;
 
     /* Place the required reward items */
@@ -163,6 +158,11 @@ class Solver {
       }
     }
 
+    /* Add the extra items */
+    for (const item of EXTRA_ITEMS) {
+      this.insertItem(pools, item);
+    }
+
     maxRequired(pools, 'OOT_SWORD', 2);
     maxRequired(pools, 'OOT_WALLET', 1);
     maxRequired(pools, 'OOT_BOMB_BAG', 1);
@@ -192,10 +192,10 @@ class Solver {
     return pools;
   };
 
-  private insertItem(item: string) {
-    const junkItem = sample(this.random, itemsArray(this.pools.junk));
-    removeItem(this.pools.junk, junkItem);
-    addItem(this.pools.required, item);
+  private insertItem(pools: ItemPools, item: string) {
+    const junkItem = sample(this.random, itemsArray(pools.junk));
+    removeItem(pools.junk, junkItem);
+    addItem(pools.required, item);
   }
 
   private goldTokenLocations() {
