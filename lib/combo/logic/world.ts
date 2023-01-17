@@ -3,7 +3,6 @@ import { gameId } from '../util';
 import { Expr } from './expr';
 import { ExprParser } from './expr-parser';
 import { DATA_POOL, DATA_MACROS, DATA_WORLD, DATA_REGIONS } from '../data';
-import { Constraint, itemConstraint } from './constraints';
 import { Settings } from '../settings';
 
 type ExprMap = {
@@ -31,7 +30,6 @@ export type WorldCheck = {
   game: Game;
   scene: string;
   item: string;
-  constraint: Constraint;
   hint: string;
 } & (WorldCheckNumeric | WorldCheckSymbolic);
 
@@ -135,7 +133,6 @@ const loadWorldPool = (world: World, game: Game, settings: Settings) => {
       id = Number(record.id);
     }
     const item = gameId(game, String(record.item), '_');
-    const constraint = itemConstraint(item, settings);
     let hint = String(record.hint);
     if (hint !== 'NONE') {
       hint = gameId(game, hint, '_');
@@ -145,7 +142,7 @@ const loadWorldPool = (world: World, game: Game, settings: Settings) => {
       world.checkHints[hint].push(location);
     }
 
-    const check = { game, type, scene, id, item, constraint, hint } as WorldCheck;
+    const check = { game, type, scene, id, item, hint } as WorldCheck;
     world.checks[location] = check;
   }
 };

@@ -4,9 +4,8 @@ import { findSpheres } from './playthrough';
 import { Random, sample, shuffle } from '../random';
 import { pathfind } from './pathfind';
 import { Items } from './state';
-import { addItem, DUNGEON_REWARDS_ORDERED, isDungeonItem, isDungeonReward, isItemMajor, isGoldToken, itemsArray, isKey, isHouseToken, isSmallKey, isGanonBossKey, isRegularBossKey, DUNGEON_REWARDS, isStrayFairy, isToken, isTownStrayFairy } from './items';
+import { addItem, DUNGEON_REWARDS_ORDERED, isDungeonItem, isDungeonReward, isItemMajor, isGoldToken, itemsArray, isKey, isHouseToken, isSmallKey, isGanonBossKey, isRegularBossKey, DUNGEON_REWARDS, isStrayFairy, isToken, isTownStrayFairy, isSong } from './items';
 import { Settings } from '../settings';
-import { CONSTRAINT_NONE, itemConstraint } from './constraints';
 import { Game } from '../config';
 import { Monitor } from '../monitor';
 
@@ -456,7 +455,7 @@ class HintsSolver {
     if (!this.isItemHintable(item)) {
       return false;
     }
-    if (itemConstraint(item, this.settings) !== CONSTRAINT_NONE) {
+    if (isSong(item) && this.settings.songs !== 'anywhere') {
       return false;
     }
     return true;

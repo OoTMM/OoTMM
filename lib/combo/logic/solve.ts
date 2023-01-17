@@ -5,9 +5,8 @@ import { pathfind, Reachable } from './pathfind';
 import { Items } from './state';
 import { World } from './world';
 import { LogicSeedError } from './error';
-import { CONSTRAINTS, itemConstraint } from './constraints';
 import { Options } from '../options';
-import { addItem, combinedItems, itemsArray, removeItem, ITEMS_REQUIRED, isDungeonReward, isGoldToken, isHouseToken, isKey, isStrayFairy, isSmallKey, isGanonBossKey, isRegularBossKey, isTownStrayFairy, isDungeonStrayFairy } from './items';
+import { addItem, combinedItems, itemsArray, removeItem, ITEMS_REQUIRED, isDungeonReward, isGoldToken, isHouseToken, isKey, isStrayFairy, isSmallKey, isGanonBossKey, isRegularBossKey, isTownStrayFairy, isDungeonStrayFairy, isSong } from './items';
 
 const ITEMS_JUNK = new Set<string>([
   'OOT_RUPEE_GREEN',
@@ -111,6 +110,9 @@ class Solver {
       this.fixRewards();
     }
 
+    /* Place songs */
+    this.fixSongs();
+
     /* Handle dungeon items */
     for (const dungeon in this.world.dungeons) {
       this.fixDungeon(dungeon);
@@ -195,10 +197,6 @@ class Solver {
     const junkItem = sample(this.random, itemsArray(this.pools.junk));
     removeItem(this.pools.junk, junkItem);
     addItem(this.pools.required, item);
-  }
-
-  private constraint(item: string) {
-    return itemConstraint(item, this.opts.settings);
   }
 
   private goldTokenLocations() {
@@ -329,6 +327,26 @@ class Solver {
     }
   }
 
+  private fixSongs() {
+    if (this.opts.settings.songs === 'anywhere') {
+      return;
+    }
+
+    const pool = combinedItems(this.pools.required, this.pools.nice);
+    const songs = shuffle(this.random, itemsArray(pool).filter(x => isSong(x)));
+    const locations = new Set(Object.keys(this.world.checks).filter(x => isSong(this.world.checks[x].item)));
+
+    if (songs.length > locations.size) {
+      throw new Error(`Not enough song locations for ${songs.length} songs`);
+    }
+
+    for (let i = 0; i < songs.length; i++) {
+      const song = songs[i];
+      this.randomAssumed(pool, { restrictedLocations: locations, forcedItem: song });
+      removeItemPools(this.pools, song);
+    }
+  }
+
   private randomAssumed(pool: Items, opts?: { restrictedLocations?: Set<string>, forcedItem?: string }) {
     const options = opts || {};
 
@@ -344,9 +362,6 @@ class Solver {
       }
       requiredItem = sample(this.random, items);
     }
-
-    /* Get the constraint associated with the item */
-    const constraint = this.constraint(requiredItem);
 
     /* Remove the selected item from the required pool */
     removeItem(pool, requiredItem);
@@ -377,7 +392,6 @@ class Solver {
 
     /* Get all assumed reachable locations that have not been placed */
     let unplacedLocs = Array.from(assumedReachable)
-      .filter(location => this.world.checks[location].constraint === constraint)
       .filter(location => !this.placement[location]);
 
     if (options.restrictedLocations) {
@@ -400,21 +414,13 @@ class Solver {
     const pool = poolsArray(this.pools);
     const shuffledPool = shuffle(this.random, pool);
     const locations = Object.keys(this.world.checks).filter(loc => !this.placement[loc]);
-    const locationsByConstraint = Object.fromEntries(CONSTRAINTS.map(c => [c, new Array<string>()]));
-
-    /* Filter the locations */
-    for (const loc of locations) {
-      const constraint = this.world.checks[loc].constraint;
-      locationsByConstraint[constraint].push(loc);
-    }
 
     for (const item of shuffledPool) {
-      const constraint = this.constraint(item);
-      const loc = locationsByConstraint[constraint].pop()!;
+      const loc = locations.pop()!;
       this.place(loc, item);
     }
 
-    if (!Object.values(locationsByConstraint).every(x => x.length === 0)) {
+    if (locations.length > 0) {
       throw new Error('Item Count Error');
     }
   }
