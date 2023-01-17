@@ -17,5 +17,3 @@ export const RomConfig = ({ roms, setRom, error, onGenerate }) => {
     </div>
   );
 };
-
-/* <input type="file" onChange={e => setRom('mm', e.target.files[0])}/> */
