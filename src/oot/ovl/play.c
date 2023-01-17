@@ -64,6 +64,7 @@ static void debugCheat(GameState_Play* play)
         gSave.magicAmount = 0x60;
 
         gSave.dungeonKeys[SCE_OOT_TEMPLE_FOREST] = 9;
+        gSave.dungeonKeys[SCE_OOT_INSIDE_GANON_CASTLE] = 9;
 
         //gSave.quest.medallionShadow = 1;
         //gSave.quest.medallionSpirit = 1;
