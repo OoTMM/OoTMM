@@ -62,6 +62,8 @@ const FIXED_HINTS_LOCATIONS = [
   'MM Waterfall Rapids Beaver Race 2',
   'MM Swamp Spider House Mask of Truth',
   'MM Ocean Spider House Wallet',
+  'MM Clock Town Great Fairy',
+  'MM Clock Town Great Fairy Alt',
 ]
 
 const HINTS_ITEMS_ALWAYS = [
