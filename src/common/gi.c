@@ -34,7 +34,7 @@ u16 comboItemFromGI(s32 gi)
 
 void comboLoadObjectGi(Actor_Player* player, u16 objectId)
 {
-    if (objectId)
+    if (objectId & ~MASK_FOREIGN_OBJECT)
     {
         /* Unsure what this does */
         /* OoT: *((u8*)player + 0x160) = 1; */

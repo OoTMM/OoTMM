@@ -95,6 +95,9 @@ s16 comboOverrideEx(int type, u16 sceneId, u16 id, s16 gi, int flags)
     case OV_COLLECTIBLE:
         id = (id & 0x3f) | 0x40;
         break;
+    case OV_SF:
+        id = (id & 0x3f) | 0x80;
+        break;
     case OV_NPC:
         sceneId = SCE_NPC;
         break;

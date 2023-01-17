@@ -440,7 +440,7 @@ CustomStrayFairyObj kStrayFairyObj =
         gsSPTexture(0xffff, 0xffff, 0, G_TX_RENDERTILE, G_ON),
         gsSPVertex(offsetof(CustomStrayFairyObj, vertices) | 0x06000000, 16, 0),
         gsDPLoadTextureBlock(
-            0x0402c030,
+            0x08000000 | CUSTOM_KEEP_SF_TEXTURE_1,
             G_IM_FMT_IA, G_IM_SIZ_8b,
             16, 32,
             0,
@@ -451,7 +451,7 @@ CustomStrayFairyObj kStrayFairyObj =
         ),
         gsSP2Triangles(4, 5, 6, 0, 4, 6, 7, 0),
         gsDPLoadTextureBlock(
-            0x0402c630,
+            0x08000000 | CUSTOM_KEEP_SF_TEXTURE_2,
             G_IM_FMT_IA, G_IM_SIZ_8b,
             16, 16,
             0,
@@ -463,7 +463,7 @@ CustomStrayFairyObj kStrayFairyObj =
         gsSP2Triangles(8, 9, 10, 0, 8, 10, 11, 0),
         gsSP2Triangles(12, 13, 14, 0, 12, 14, 15, 0),
         gsDPLoadTextureBlock(
-            0x0402bc30,
+            0x08000000 | CUSTOM_KEEP_SF_TEXTURE_3,
             G_IM_FMT_IA, G_IM_SIZ_8b,
             32, 32,
             0,
@@ -484,6 +484,7 @@ static void Shader_CustomStrayFairy(GameState_Play* play, s16 shaderId)
         0x45852bff,
         0x7f65ccff,
         0xc2c164ff,
+        0xbc702dff,
     };
 
     static u32 kPrimColors[] = {
@@ -491,27 +492,37 @@ static void Shader_CustomStrayFairy(GameState_Play* play, s16 shaderId)
         0xf0f6c2ff,
         0xe1ebfdff,
         0xfefee7ff,
+        0xf1e5d9ff,
     };
 
+    const Shader* shader;
     int index;
     u8 r;
     u8 g;
     u8 b;
     u8 a;
 
+    shader = &kShaders[shaderId];
+    index = shader->lists[0];
 #if defined(GAME_MM)
-    index = gSaveContext.dungeonId;
-#else
-    index = 0;
+    if (index == 0)
+    {
+        if (play->sceneId == SCE_MM_CLOCK_TOWN_EAST || play->sceneId == SCE_MM_LAUNDRY_POOL)
+            index = 5;
+        else
+            index = gSaveContext.dungeonId + 1;
+    }
 #endif
+
+    OPEN_DISPS(play->gs.gfx);
+    gSPSegment(POLY_XLU_DISP++, 0x08, gCustomKeep);
     comboSetObjectSegment(play->gs.gfx, &kStrayFairyObj);
     ModelViewUnkTransform((float*)((char*)play + kMatTransformOffset));
-    OPEN_DISPS(play->gs.gfx);
     gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     InitListPolyXlu(play->gs.gfx);
-    color4(&r, &g, &b, &a, kEnvColors[index]);
+    color4(&r, &g, &b, &a, kEnvColors[index - 1]);
     gDPSetEnvColor(POLY_XLU_DISP++, r, g, b, a);
-    color4(&r, &g, &b, &a, kPrimColors[index]);
+    color4(&r, &g, &b, &a, kPrimColors[index - 1]);
     gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, r, g, b, a);
     gSPDisplayList(POLY_XLU_DISP++, offsetof(CustomStrayFairyObj, dlist) | 0x06000000);
     CLOSE_DISPS();

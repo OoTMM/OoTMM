@@ -189,6 +189,8 @@ export const isGanonBossKey = (item: string) => item === 'OOT_BOSS_KEY_GANON';
 export const isBossKey = (item: string) => !!item.match(/^(OOT|MM)_BOSS_KEY_/);
 export const isRegularBossKey = (item: string) => isBossKey(item) && !isGanonBossKey(item);
 export const isStrayFairy = (item: string) => !!item.match(/^(OOT|MM)_STRAY_FAIRY_/);
+export const isTownStrayFairy = (item: string) => item === 'MM_STRAY_FAIRY_TOWN';
+export const isDungeonStrayFairy = (item: string) => isStrayFairy(item) && !isTownStrayFairy(item);
 export const isMapCompass = (item: string) => isMap(item) || isCompass(item);
 export const isKey = (item: string) => isSmallKey(item) || isBossKey(item);
 export const isDungeonItem = (item: string) => isMapCompass(item) || isKey(item) || isStrayFairy(item);

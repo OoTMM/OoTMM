@@ -44,12 +44,12 @@ const ENTRIES: CustomEntry[] = [
   { game: 'oot', name: "GI_MEDALLION_LIGHT",    file: "objects/object_gi_medal",     offsets: [0x5220, 0x0e18] },
 ];
 
-const getObjectBuffer = async (roms: DecompressedRoms, entry: CustomEntry) => {
-  const rom = roms[entry.game].rom;
-  const dma = new DmaData(roms[entry.game].dma);
-  const index = FILES_TO_INDEX[entry.game][entry.file];
+const getObjectBuffer = async (roms: DecompressedRoms, game: Game, file: string) => {
+  const rom = roms[game].rom;
+  const dma = new DmaData(roms[game].dma);
+  const index = FILES_TO_INDEX[game][file];
   if (index === undefined) {
-    throw new Error(`File ${entry.file} not found in game ${entry.game}`);
+    throw new Error(`File ${file} not found in game ${game}`);
   }
   const dmaEntry = dma.read(index);
   return Buffer.from(rom.subarray(dmaEntry.virtStart, dmaEntry.virtEnd));
@@ -57,7 +57,7 @@ const getObjectBuffer = async (roms: DecompressedRoms, entry: CustomEntry) => {
 
 /* TODO: Cache this */
 const makeSplitObject = async (roms: DecompressedRoms, entry: CustomEntry) => {
-  const buf = await getObjectBuffer(roms, entry);
+  const buf = await getObjectBuffer(roms, entry.game, entry.file);
   const obj = splitObject(buf, entry.offsets);
 
   if (!process.env.ROLLUP) {
@@ -94,9 +94,22 @@ export const customAssets = async (): Promise<{[k: string]: Buffer}> => ({
   CHEST_FAIRY_SIDE: await png('chest_side_fairy', 'rgba16'),
 });
 
+const extractRaw = async (roms: DecompressedRoms, game: Game, file: string, offset: number, size: number) => {
+  const obj = await getObjectBuffer(roms, game, file);
+  return obj.subarray(offset, offset + size);
+};
+
+export const extractedAssets = async (roms: DecompressedRoms): Promise<{[k: string]: Buffer}> => ({
+  SF_TEXTURE_1: await extractRaw(roms, 'mm', 'objects/gameplay_keep', 0x2c030, 16 * 32),
+  SF_TEXTURE_2: await extractRaw(roms, 'mm', 'objects/gameplay_keep', 0x2c630, 16 * 16),
+  SF_TEXTURE_3: await extractRaw(roms, 'mm', 'objects/gameplay_keep', 0x2bc30, 32 * 32),
+});
+
 const customKeepFiles = async (roms: DecompressedRoms, archive: CustomArchive, cg: CodeGen) => {
   const keep = new KeepFile();
-  const assets = await customAssets();
+  const cAssets = await customAssets();
+  const eAssets = await extractedAssets(roms);
+  const assets = { ...cAssets, ...eAssets };
   for (const k in assets) {
     const off = await keep.addData(assets[k]);
     cg.define('CUSTOM_KEEP_' + k, off);

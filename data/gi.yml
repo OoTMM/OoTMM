@@ -314,3 +314,8 @@ MM_BOSS_KEY_WF:               0xd6
 MM_BOSS_KEY_SH:               0xd7
 MM_BOSS_KEY_GB:               0xd8
 MM_BOSS_KEY_ST:               0xd9
+MM_STRAY_FAIRY_WF:            0xda
+MM_STRAY_FAIRY_SH:            0xdb
+MM_STRAY_FAIRY_GB:            0xdc
+MM_STRAY_FAIRY_ST:            0xdd
+MM_STRAY_FAIRY_TOWN:          0xde

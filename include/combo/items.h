@@ -335,6 +335,11 @@
 #define ITEM_MM_BOSS_KEY_SH                 0xb6
 #define ITEM_MM_BOSS_KEY_GB                 0xb7
 #define ITEM_MM_BOSS_KEY_ST                 0xb8
+#define ITEM_MM_STRAY_FAIRY_WF              0xb9
+#define ITEM_MM_STRAY_FAIRY_SH              0xba
+#define ITEM_MM_STRAY_FAIRY_GB              0xbb
+#define ITEM_MM_STRAY_FAIRY_ST              0xbc
+#define ITEM_MM_STRAY_FAIRY_TOWN            0xbd
 
 #define ITEM_NONE   0xff
 

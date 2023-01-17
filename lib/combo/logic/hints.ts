@@ -4,7 +4,7 @@ import { findSpheres } from './playthrough';
 import { Random, sample, shuffle } from '../random';
 import { pathfind } from './pathfind';
 import { Items } from './state';
-import { addItem, DUNGEON_REWARDS_ORDERED, isDungeonItem, isDungeonReward, isItemMajor, isGoldToken, itemsArray, isKey, isHouseToken, isSmallKey, isGanonBossKey, isRegularBossKey, DUNGEON_REWARDS, isStrayFairy, isToken } from './items';
+import { addItem, DUNGEON_REWARDS_ORDERED, isDungeonItem, isDungeonReward, isItemMajor, isGoldToken, itemsArray, isKey, isHouseToken, isSmallKey, isGanonBossKey, isRegularBossKey, DUNGEON_REWARDS, isStrayFairy, isToken, isTownStrayFairy } from './items';
 import { Settings } from '../settings';
 import { CONSTRAINT_NONE, itemConstraint } from './constraints';
 import { Game } from '../config';
@@ -62,6 +62,8 @@ const FIXED_HINTS_LOCATIONS = [
   'MM Waterfall Rapids Beaver Race 2',
   'MM Swamp Spider House Mask of Truth',
   'MM Ocean Spider House Wallet',
+  'MM Clock Town Great Fairy',
+  'MM Clock Town Great Fairy Alt',
 ]
 
 const HINTS_ITEMS_ALWAYS = [
@@ -363,6 +365,22 @@ const SIMPLE_DEPENDENCIES: {[k: string]: string[]} = {
   ],
   MM_GS_TOKEN_OCEAN: [
     'MM Ocean Spider House Wallet',
+  ],
+  MM_STRAY_FAIRY_TOWN: [
+    'MM Clock Town Great Fairy',
+    'MM Clock Town Great Fairy Alt',
+  ],
+  MM_STRAY_FAIRY_WF: [
+    'MM Woodfall Great Fairy',
+  ],
+  MM_STRAY_FAIRY_SH: [
+    'MM Snowhead Great Fairy',
+  ],
+  MM_STRAY_FAIRY_GB: [
+    'MM Great Bay Great Fairy',
+  ],
+  MM_STRAY_FAIRY_ST: [
+    'MM Ikana Great Fairy',
   ]
 };
 
@@ -408,6 +426,12 @@ class HintsSolver {
       return true;
     }
     if (isRegularBossKey(item) && this.settings.bossKeyShuffle === 'anywhere') {
+      return true;
+    }
+    if (isTownStrayFairy(item) && this.settings.townFairyShuffle === 'anywhere') {
+      return true;
+    }
+    if (isStrayFairy(item) && this.settings.strayFairyShuffle === 'anywhere') {
       return true;
     }
     if (isDungeonItem(item)) {
@@ -506,6 +530,7 @@ class HintsSolver {
     case 'OOT_BOMB_BAG':
     case 'OOT_BOW':
     case 'OOT_SLINGSHOT':
+    case 'OOT_WALLET':
     case 'MM_SWORD':
     case 'MM_BOW':
     case 'MM_BOMB_BAG':
@@ -525,6 +550,7 @@ class HintsSolver {
     if (woth.has(loc)) {
       return false;
     }
+    this.monitor.debug("majorItemFoolish - Purged: " + item);
     return true;
   }
 
@@ -559,7 +585,7 @@ class HintsSolver {
     if (!this.isItemHintable(item)) {
       return 0;
     }
-    if ((isItemMajor(item) || isDungeonReward(item) || isKey(item)) && !this.majorItemFoolish(loc, item, wothItems) && !this.isItemUseless(loc)) {
+    if ((isItemMajor(item) || isDungeonReward(item) || isKey(item) || isStrayFairy(item)) && !this.majorItemFoolish(loc, item, wothItems) && !this.isItemUseless(loc)) {
       return -1;
     }
     if (this.hintedLocations.has(loc)) {

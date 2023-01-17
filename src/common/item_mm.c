@@ -42,6 +42,14 @@ static void addBossKey(u16 dungeonId)
     gMmSave.inventory.dungeonItems[dungeonId].bossKey = 1;
 }
 
+static void addStrayFairy(u16 dungeonId)
+{
+    if (dungeonId == 4)
+        MM_SET_EVENT_WEEK(MM_EV(8, 7));
+    else
+        gMmSave.inventory.strayFairies[dungeonId]++;
+}
+
 static void addHealth(u8 count)
 {
     u16 health;
@@ -600,7 +608,10 @@ void comboAddItemMm(GameState_Play* play, u16 itemId)
         break;
 #if defined(GAME_MM)
     case ITEM_MM_STRAY_FAIRY:
-        gMmSave.inventory.strayFairies[gSaveContext.dungeonId] += 1;
+        if (play->sceneId == SCE_MM_LAUNDRY_POOL || play->sceneId == SCE_MM_CLOCK_TOWN_EAST)
+            addStrayFairy(4);
+        else
+            addStrayFairy(gSaveContext.dungeonId);
         break;
     case ITEM_MM_SMALL_KEY:
         addSmallKey(gSaveContext.dungeonId);
@@ -638,6 +649,21 @@ void comboAddItemMm(GameState_Play* play, u16 itemId)
         break;
     case ITEM_MM_BOSS_KEY_ST:
         addBossKey(3);
+        break;
+    case ITEM_MM_STRAY_FAIRY_WF:
+        addStrayFairy(0);
+        break;
+    case ITEM_MM_STRAY_FAIRY_SH:
+        addStrayFairy(1);
+        break;
+    case ITEM_MM_STRAY_FAIRY_GB:
+        addStrayFairy(2);
+        break;
+    case ITEM_MM_STRAY_FAIRY_ST:
+        addStrayFairy(3);
+        break;
+    case ITEM_MM_STRAY_FAIRY_TOWN:
+        addStrayFairy(4);
         break;
     case ITEM_MM_DEFENSE_UPGRADE:
         gMmSave.playerData.doubleDefense = 1;

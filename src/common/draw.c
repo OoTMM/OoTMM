@@ -19,7 +19,7 @@ void comboDrawObject(GameState_Play* play, Actor* actor, u16 objectId, u16 shade
 {
     void* objBuffer;
 
-    if (objectId)
+    if (objectId & ~MASK_FOREIGN_OBJECT)
     {
         objBuffer = comboGetObject(objectId);
         comboSetObjectSegment(play->gs.gfx, objBuffer);

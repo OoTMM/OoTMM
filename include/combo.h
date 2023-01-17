@@ -115,6 +115,7 @@ void comboGameSwitch(void);
 #define OV_COLLECTIBLE  1
 #define OV_NPC          2
 #define OV_GS           3
+#define OV_SF           4
 
 #define OVF_NO_PROGRESSIVE   (1 << 0)
 

@@ -16,6 +16,7 @@ Clock Town Bank Reward 2,                         npc,            NONE,         
 Clock Town Bank Reward 3,                         npc,            BANK_3,             CLOCK_TOWN_WEST,            BANK_3,                 HEART_PIECE
 Clock Town Rosa Sisters HP,                       npc,            NONE,               CLOCK_TOWN_WEST,            ROSA_HEART_PIECE,       HEART_PIECE
 Clock Town Guru Guru Mask Bremen,                 npc,            NONE,               LAUNDRY_POOL,               MASK_BREMEN,            MASK_BREMEN
+Clock Town Stray Fairy,                           npc,            NONE,               LAUNDRY_POOL,               STRAY_FAIRY_TOWN,       STRAY_FAIRY_TOWN
 Clock Town Great Fairy,                           npc,            NONE,               FAIRY_FOUNTAIN,             GREAT_FAIRY_TOWN,       MASK_GREAT_FAIRY
 Clock Town Great Fairy Alt,                       npc,            NONE,               FAIRY_FOUNTAIN,             GREAT_FAIRY_TOWN_ALT,   MAGIC_UPGRADE
 Clock Tower Roof Skull Kid Ocarina,               npc,            NONE,               CLOCK_TOWER_ROOFTOP,        SKULL_KID_OCARINA,      OCARINA
@@ -224,7 +225,7 @@ Woodfall Temple Center Chest,                     chest,          NONE,         
 Woodfall Temple Bow,                              chest,          NONE,               TEMPLE_WOODFALL,            0x1b,                   BOW
 Woodfall Temple Boss Key Chest,                   chest,          NONE,               TEMPLE_WOODFALL,            0x1e,                   BOSS_KEY_WF
 Woodfall Temple SF Entrance,                      sf,             NONE,               TEMPLE_WOODFALL,            0x2b,                   STRAY_FAIRY_WF
-Woodfall Temple SF Main Pot,                      sf,             NONE,               TEMPLE_WOODFALL,            0x38,                   STRAY_FAIRY_WF
+Woodfall Temple SF Main Pot,                      sf,             NONE,               TEMPLE_WOODFALL,            0x1c,                   STRAY_FAIRY_WF
 Woodfall Temple SF Main Deku Baba,                sf,             NONE,               TEMPLE_WOODFALL,            0x2e,                   STRAY_FAIRY_WF
 Woodfall Temple SF Main Bubble,                   sf,             NONE,               TEMPLE_WOODFALL,            0x30,                   STRAY_FAIRY_WF
 Woodfall Temple SF Maze Skulltula,                sf,             NONE,               TEMPLE_WOODFALL,            0x31,                   STRAY_FAIRY_WF
@@ -287,9 +288,9 @@ Great Bay Temple Entrance Chest,                  chest,          NONE,         
 Great Bay Temple SF Water Wheel Platform,         sf,             NONE,               TEMPLE_GREAT_BAY,           0x30,                   STRAY_FAIRY_GB
 Great Bay Temple SF Water Wheel Skulltula,        sf,             NONE,               TEMPLE_GREAT_BAY,           0x32,                   STRAY_FAIRY_GB
 Great Bay Temple SF Central Room Barrel,          sf,             NONE,               TEMPLE_GREAT_BAY,           0x1c,                   STRAY_FAIRY_GB
-Great Bay Temple SF Central Room Underwater Pot,  sf,             NONE,               TEMPLE_GREAT_BAY,           0x36,                   STRAY_FAIRY_GB
-Great Bay Temple SF Map Room Pot,                 sf,             NONE,               TEMPLE_GREAT_BAY,           0x3c,                   STRAY_FAIRY_GB
-Great Bay Temple SF Compass Room Pot,             sf,             NONE,               TEMPLE_GREAT_BAY,           0x3a,                   STRAY_FAIRY_GB
+Great Bay Temple SF Central Room Underwater Pot,  sf,             NONE,               TEMPLE_GREAT_BAY,           0x1b,                   STRAY_FAIRY_GB
+Great Bay Temple SF Map Room Pot,                 sf,             NONE,               TEMPLE_GREAT_BAY,           0x1e,                   STRAY_FAIRY_GB
+Great Bay Temple SF Compass Room Pot,             sf,             NONE,               TEMPLE_GREAT_BAY,           0x1d,                   STRAY_FAIRY_GB
 Great Bay Temple SF Green Pipe 3 Barrel,          sf,             NONE,               TEMPLE_GREAT_BAY,           0x1a,                   STRAY_FAIRY_GB
 Great Bay Temple SF Pre-Boss Above Water,         sf,             NONE,               TEMPLE_GREAT_BAY,           0x31,                   STRAY_FAIRY_GB
 Great Bay Temple SF Pre-Boss Underwater,          sf,             NONE,               TEMPLE_GREAT_BAY,           0x2f,                   STRAY_FAIRY_GB
