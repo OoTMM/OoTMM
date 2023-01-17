@@ -361,6 +361,15 @@ class Solver {
       throw new Error(`Not enough song locations for ${songs.length} songs`);
     }
 
+    if (songs.length < locations.size) {
+      const count = locations.size - songs.length;
+      const junk = shuffle(this.random, itemsArray(this.pools.junk));
+
+      for (let i = 0; i < count; i++) {
+        songs.push(junk.pop()!);
+      }
+    }
+
     for (let i = 0; i < songs.length; i++) {
       const song = songs[i];
       this.randomAssumed(pool, { restrictedLocations: locations, forcedItem: song });
