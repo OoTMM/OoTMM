@@ -136,6 +136,12 @@ export const SETTINGS = [{
   type: 'boolean',
   default: false
 }, {
+  key: 'trickHiddenGrottos',
+  name: 'Hidden Grottos (OoT) without Stone of Agony',
+  category: 'trick',
+  type: 'boolean',
+  default: false
+}, {
   key: 'trickMido',
   name: 'Backflip Over Mido',
   category: 'trick',
