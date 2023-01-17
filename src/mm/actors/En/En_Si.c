@@ -18,7 +18,7 @@ void EnSi_AddItem(Actor* this, GameState_Play* play)
     gi = EnSi_GetOverride(this, play);
     SetChestFlag(play, (this->variable & 0xfc) >> 2);
     PlayerDisplayTextBox(play, 0x52, NULL);
-    comboAddItemGI(play, gi);
+    comboAddItem(play, gi);
     PlaySoundSpecial(0x39);
 }
 

@@ -25,7 +25,7 @@ const u8 kMmTrade3[] = {
     ITEM_MM_PENDANT_OF_MEMORIES,
 };
 
-static void addSmallKey(u16 dungeonId)
+void comboAddSmallKeyMm(u16 dungeonId)
 {
     s8 keyCount;
 
@@ -37,12 +37,12 @@ static void addSmallKey(u16 dungeonId)
     gMmSave.inventory.dungeonKeys[dungeonId] = keyCount;
 }
 
-static void addBossKey(u16 dungeonId)
+void comboAddBossKeyMm(u16 dungeonId)
 {
     gMmSave.inventory.dungeonItems[dungeonId].bossKey = 1;
 }
 
-static void addStrayFairy(u16 dungeonId)
+void comboAddStrayFairyMm(u16 dungeonId)
 {
     if (dungeonId == 4)
         MM_SET_EVENT_WEEK(MM_EV(8, 7));
@@ -55,33 +55,20 @@ static void addHealth(u8 count)
     u16 health;
 
     health = (u16)count * 0x10;
-
-#if defined(GAME_MM)
-    gSaveContext.healthDelta += health;
-#else
     gMmSave.playerData.health += health;
     if (gMmSave.playerData.health > gMmSave.playerData.healthCapacity)
         gMmSave.playerData.health = gMmSave.playerData.healthCapacity;
-#endif
 }
 
-static void addSword(GameState_Play* play, int index)
+static void addSword(int index)
 {
     gMmSave.itemEquips.buttonItems[0][0] = kSwords[index];
     gMmSave.itemEquips.sword = index;
-
-#if defined(GAME_MM)
-    Interface_LoadItemIconImpl(play, 0);
-#endif
 }
 
-static void addShield(GameState_Play* play, int index)
+static void addShield(int index)
 {
     gMmSave.itemEquips.shield = index;
-
-#if defined(GAME_MM)
-    UpdateEquipment(play, GET_LINK(play));
-#endif
 }
 
 static void addBombBag(int index)
@@ -183,15 +170,10 @@ static void addRupees(s16 count)
 {
     u16 max;
 
-#if defined(GAME_MM)
-    (void)max;
-    gSaveContext.save.rupeesDelta += count;
-#else
     max = kMaxRupees[gMmSave.inventory.upgrades.wallet];
     gMmSave.playerData.rupees += count;
     if (gMmSave.playerData.rupees > max)
         gMmSave.playerData.rupees = max;
-#endif
 }
 
 static void addTrade1(u8 index)
@@ -227,7 +209,20 @@ static void addTrade3(u8 index)
     gMmExtraTrade.tradeObtained3 |= (1 << (u16)index);
 }
 
-void comboAddItemMm(GameState_Play* play, u16 itemId)
+static void addMagicUpgrade(int level)
+{
+    gMmSave.playerData.magicAcquired = 1;
+    if (level >= 2)
+        gMmSave.playerData.doubleMagic = 1;
+}
+
+static void refillMagic(int level)
+{
+    gMmSave.playerData.magicLevel = level;
+    gMmSave.playerData.magic = level * 0x30;
+}
+
+void comboAddItemMm(u16 itemId, int noEffect)
 {
     switch (itemId)
     {
@@ -449,45 +444,33 @@ void comboAddItemMm(GameState_Play* play, u16 itemId)
         gMmSave.inventory.items[ITS_MM_MASK_FIERCE_DEITY] = ITEM_MM_MASK_FIERCE_DEITY;
         break;
     case ITEM_MM_MAGIC_UPGRADE:
-        gMmSave.playerData.magicAcquired = 1;
-#if defined(GAME_MM)
-        gSave.playerData.magicLevel = 0;
-        gSave.playerData.magic = 0x30;
-        gSaveContext.magicTarget = 0x30;
-#else
-        gMmSave.playerData.magicLevel = 1;
-        gMmSave.playerData.magic = 0x30;
-#endif
+        addMagicUpgrade(1);
+        if (noEffect)
+            refillMagic(1);
         break;
     case ITEM_MM_MAGIC_UPGRADE2:
-        gMmSave.playerData.doubleMagic = 1;
-#if defined(GAME_MM)
-        gSave.playerData.magicLevel = 0;
-        gSave.playerData.magic = 0x60;
-        gSaveContext.magicTarget = 0x60;
-#else
-        gMmSave.playerData.magicLevel = 2;
-        gMmSave.playerData.magic = 0x60;
-#endif
+        addMagicUpgrade(2);
+        if (noEffect)
+            refillMagic(2);
         break;
     case ITEM_MM_SWORD_KOKIRI:
-        addSword(play, 1);
+        addSword(1);
         break;
     case ITEM_MM_SWORD_RAZOR:
-        addSword(play, 2);
+        addSword(2);
         gMmSave.playerData.swordHealth = 100;
         break;
     case ITEM_MM_SWORD_GILDED:
-        addSword(play, 3);
+        addSword(3);
         break;
     case ITEM_MM_PROGRESSIVE_SHIELD_HERO:
         gMmExtraFlags2.progressiveShield = 1;
         /* Fallthrough */
     case ITEM_MM_SHIELD_HERO:
-        addShield(play, 1);
+        addShield(1);
         break;
     case ITEM_MM_SHIELD_MIRROR:
-        addShield(play, 2);
+        addShield(2);
         break;
     case ITEM_MM_BOMB_BAG:
         addBombBag(1);
@@ -576,99 +559,90 @@ void comboAddItemMm(GameState_Play* play, u16 itemId)
             gMmSave.inventory.questItems.heartPieces = 0;
             gMmSave.playerData.healthCapacity += 0x10;
         }
-        addHealth(20);
+        if (noEffect)
+            addHealth(20);
         break;
     case ITEM_MM_HEART_CONTAINER:
         gMmSave.playerData.healthCapacity += 0x10;
-        addHealth(20);
+        if (noEffect)
+            addHealth(20);
         break;
     case ITEM_MM_RECOVERY_HEART:
-        addHealth(1);
+        if (noEffect)
+            addHealth(1);
         break;
     case ITEM_MM_RUPEE_GREEN:
-        addRupees(1);
+        if (noEffect)
+            addRupees(1);
         break;
     case ITEM_MM_RUPEE_BLUE:
-        addRupees(5);
+        if (noEffect)
+            addRupees(5);
         break;
     case ITEM_MM_RUPEE_RED10:
-        addRupees(10);
+        if (noEffect)
+            addRupees(10);
         break;
     case ITEM_MM_RUPEE_RED:
-        addRupees(20);
+        if (noEffect)
+            addRupees(20);
         break;
     case ITEM_MM_RUPEE_PURPLE:
-        addRupees(50);
+        if (noEffect)
+            addRupees(50);
         break;
     case ITEM_MM_RUPEE_SILVER:
-        addRupees(100);
+        if (noEffect)
+            addRupees(100);
         break;
     case ITEM_MM_RUPEE_GOLD:
-        addRupees(200);
+        if (noEffect)
+            addRupees(200);
         break;
-#if defined(GAME_MM)
-    case ITEM_MM_STRAY_FAIRY:
-        if (play->sceneId == SCE_MM_LAUNDRY_POOL || play->sceneId == SCE_MM_CLOCK_TOWN_EAST)
-            addStrayFairy(4);
-        else
-            addStrayFairy(gSaveContext.dungeonId);
-        break;
-    case ITEM_MM_SMALL_KEY:
-        addSmallKey(gSaveContext.dungeonId);
-        break;
-    case ITEM_MM_BOSS_KEY:
-        addBossKey(gSaveContext.dungeonId);
-        break;
-    case ITEM_MM_MAP:
-        gSave.inventory.dungeonItems[gSaveContext.dungeonId].map = 1;
-        break;
-    case ITEM_MM_COMPASS:
-        gSave.inventory.dungeonItems[gSaveContext.dungeonId].compass = 1;
-        break;
-#endif
     case ITEM_MM_SMALL_KEY_WF:
-        addSmallKey(0);
+        comboAddSmallKeyMm(0);
         break;
     case ITEM_MM_SMALL_KEY_SH:
-        addSmallKey(1);
+        comboAddSmallKeyMm(1);
         break;
     case ITEM_MM_SMALL_KEY_GB:
-        addSmallKey(2);
+        comboAddSmallKeyMm(2);
         break;
     case ITEM_MM_SMALL_KEY_ST:
-        addSmallKey(3);
+        comboAddSmallKeyMm(3);
         break;
     case ITEM_MM_BOSS_KEY_WF:
-        addBossKey(0);
+        comboAddBossKeyMm(0);
         break;
     case ITEM_MM_BOSS_KEY_SH:
-        addBossKey(1);
+        comboAddBossKeyMm(1);
         break;
     case ITEM_MM_BOSS_KEY_GB:
-        addBossKey(2);
+        comboAddBossKeyMm(2);
         break;
     case ITEM_MM_BOSS_KEY_ST:
-        addBossKey(3);
+        comboAddBossKeyMm(3);
         break;
     case ITEM_MM_STRAY_FAIRY_WF:
-        addStrayFairy(0);
+        comboAddStrayFairyMm(0);
         break;
     case ITEM_MM_STRAY_FAIRY_SH:
-        addStrayFairy(1);
+        comboAddStrayFairyMm(1);
         break;
     case ITEM_MM_STRAY_FAIRY_GB:
-        addStrayFairy(2);
+        comboAddStrayFairyMm(2);
         break;
     case ITEM_MM_STRAY_FAIRY_ST:
-        addStrayFairy(3);
+        comboAddStrayFairyMm(3);
         break;
     case ITEM_MM_STRAY_FAIRY_TOWN:
-        addStrayFairy(4);
+        comboAddStrayFairyMm(4);
         break;
     case ITEM_MM_DEFENSE_UPGRADE:
         gMmSave.playerData.doubleDefense = 1;
         gMmSave.inventory.defenseHearts = 20;
-        gMmSave.playerData.health = gMmSave.playerData.healthCapacity;
+        if (noEffect)
+            addHealth(20);
         break;
     case ITEM_MM_SPIN_UPGRADE:
         MM_SET_EVENT_WEEK(EV_MM_WEEK_SPIN_UPGRADE);

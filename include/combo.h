@@ -179,9 +179,19 @@ extern const u8 kMmTrade1[];
 extern const u8 kMmTrade2[];
 extern const u8 kMmTrade3[];
 
-int  comboAddItemGI(GameState_Play* play, s16 gi);
-void comboAddItemMm(GameState_Play* play, u16 itemId);
-void comboAddItemOot(GameState_Play* play, u16 itemId);
+void comboAddItemMm(u16 itemId, int noEffect);
+void comboAddItemOot(u16 itemId, int noEffect);
+void comboAddItemEffect(GameState_Play* play, u16 itemId);
+void comboAddSmallKeyOot(u16 dungeonId);
+void comboAddBossKeyOot(u16 dungeonId);
+void comboAddCompassOot(u16 dungeonId);
+void comboAddMapOot(u16 dungeonId);
+void comboAddSmallKeyMm(u16 dungeonId);
+void comboAddBossKeyMm(u16 dungeonId);
+void comboAddStrayFairyMm(u16 dungeonId);
+
+int  comboAddItem(GameState_Play* play, s16 gi);
+int  comboAddItemNoEffect(s16 gi);
 
 void comboToggleTrade(u8* slot, u32 flags, const u8* table, u32 tableSize);
 

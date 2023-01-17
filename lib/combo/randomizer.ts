@@ -21,6 +21,8 @@ const HINTS_DATA_OFFSETS = {
   mm: 0x6000,
 };
 
+const STARTING_ITEMS_DATA_OFFSET = 0x7000;
+
 const SUBSTITUTIONS: {[k: string]: string} = {
   OOT_SWORD: "OOT_SWORD_KOKIRI",
   OOT_OCARINA: "OOT_OCARINA_FAIRY",
@@ -35,17 +37,19 @@ const SUBSTITUTIONS: {[k: string]: string} = {
   MM_WALLET: "MM_WALLET2",
 };
 
-const gi = (settings: Settings, game: Game, item: string) => {
-  if (isSmallKey(item) && settings.smallKeyShuffle === 'ownDungeon') {
-    item = gameId(game, 'SMALL_KEY', '_');
-  } else if (isGanonBossKey(item) && settings.ganonBossKey !== 'anywhere') {
-    item = gameId(game, 'BOSS_KEY', '_');
-  } else if (isRegularBossKey(item) && settings.bossKeyShuffle === 'ownDungeon') {
-    item = gameId(game, 'BOSS_KEY', '_');
-  } else if (isTownStrayFairy(item) && settings.townFairyShuffle === 'vanilla') {
-    item = gameId(game, 'STRAY_FAIRY', '_');
-  } else if (isDungeonStrayFairy(item) && settings.strayFairyShuffle !== 'anywhere') {
-    item = gameId(game, 'STRAY_FAIRY', '_');
+const gi = (settings: Settings, game: Game, item: string, generic: boolean) => {
+  if (generic) {
+    if (isSmallKey(item) && settings.smallKeyShuffle === 'ownDungeon') {
+      item = gameId(game, 'SMALL_KEY', '_');
+    } else if (isGanonBossKey(item) && settings.ganonBossKey !== 'anywhere') {
+      item = gameId(game, 'BOSS_KEY', '_');
+    } else if (isRegularBossKey(item) && settings.bossKeyShuffle === 'ownDungeon') {
+      item = gameId(game, 'BOSS_KEY', '_');
+    } else if (isTownStrayFairy(item) && settings.townFairyShuffle === 'vanilla') {
+      item = gameId(game, 'STRAY_FAIRY', '_');
+    } else if (isDungeonStrayFairy(item) && settings.strayFairyShuffle !== 'anywhere') {
+      item = gameId(game, 'STRAY_FAIRY', '_');
+    }
   }
 
   if (/^OOT_MAP/.test(item)) {
@@ -128,7 +132,7 @@ const gameChecks = (settings: Settings, game: Game, logic: LogicResult): Buffer 
       break;
     }
     const key = (sceneId << 8) | id;
-    const item = gi(settings, game, c.item);
+    const item = gi(settings, game, c.item, true);
     buf.push(key, item);
   }
   return toU16Buffer(buf);
@@ -178,7 +182,7 @@ const hintBuffer = (settings: Settings, game: Game, gossip: string, hint: HintGo
       if (check === undefined) {
         throw new Error(`Unknown named check: ${hint.check}`);
       }
-      const items = hint.items.map((item) => gi(settings, 'oot', item));
+      const items = hint.items.map((item) => gi(settings, 'oot', item, true));
       data.writeUInt8(id, 0);
       data.writeUInt8(0x02, 1);
       data.writeUInt8(check, 2);
@@ -194,7 +198,7 @@ const hintBuffer = (settings: Settings, game: Game, gossip: string, hint: HintGo
         if (region === undefined) {
           throw new Error(`Unknown region ${hint.region}`);
         }
-        const item = gi(settings, 'oot', hint.item);
+        const item = gi(settings, 'oot', hint.item, true);
         data.writeUInt8(id, 0);
         data.writeUInt8(0x03, 1);
         data.writeUInt8(region, 2);
@@ -260,6 +264,23 @@ export const randomizerData = (logic: LogicResult, options: Options): Buffer => 
   return Buffer.concat(buffers);
 };
 
+const randomizerStartingItems = (settings: Settings): Buffer => {
+  const buffer = Buffer.alloc(0x1000, 0xff);
+  const ids: number[] = [];
+  for (const item in settings.startingItems) {
+    const count = settings.startingItems[item];
+    const id = gi(settings, 'oot', item, false);
+    if (gi === undefined) {
+      throw new Error(`Unknown item ${item}`);
+    }
+    ids.push(id);
+    ids.push(count);
+  }
+  const data = toU16Buffer(ids);
+  data.copy(buffer, 0);
+  return buffer;
+};
+
 export const randomize = (monitor: Monitor, rom: Buffer, opts: Options) => {
   monitor.log("Randomizing...");
   const res = logic(monitor, opts);
@@ -272,6 +293,8 @@ export const randomize = (monitor: Monitor, rom: Buffer, opts: Options) => {
   }
   const data = randomizerData(res, opts);
   data.copy(buffer, 0);
+  const startingItems = randomizerStartingItems(opts.settings);
+  startingItems.copy(buffer, STARTING_ITEMS_DATA_OFFSET);
   buffer.copy(rom, 0x03fe0000);
   return res.log;
 }

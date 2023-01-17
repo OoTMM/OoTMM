@@ -20,10 +20,9 @@ const isItemImportant = (settings: Settings, item: string) => {
   return false;
 }
 
-
-export const findSpheres = (world: World, placement: ItemPlacement, restrict?: Set<string>, forbid?: Set<string>) => {
+export const findSpheres = (settings: Settings, world: World, placement: ItemPlacement, restrict?: Set<string>, forbid?: Set<string>) => {
   const locations = new Set<string>();
-  const items: Items = {};
+  const items: Items = { ...settings.startingItems };
   const spheres: string[][] = [];
   let reachable = pathfind(world, items, false);
 
@@ -59,9 +58,9 @@ export const findSpheres = (world: World, placement: ItemPlacement, restrict?: S
   return spheres;
 }
 
-const findSpheresShuffled = (random: Random, world: World, placement: ItemPlacement) => {
+const findSpheresShuffled = (settings: Settings, random: Random, world: World, placement: ItemPlacement) => {
   const locations = new Set<string>();
-  const spheres = findSpheres(world, placement)!;
+  const spheres = findSpheres(settings, world, placement)!;
   const newSpheres = Array.from(spheres);
   newSpheres.map(s => shuffle(random, s));
   newSpheres.reverse();
@@ -73,15 +72,15 @@ const findSpheresShuffled = (random: Random, world: World, placement: ItemPlacem
   return { locations, spheres };
 }
 
-const findMinimalSpheres = (random: Random, world: World, placement: ItemPlacement) => {
-  const shuffled = findSpheresShuffled(random, world, placement);
+const findMinimalSpheres = (settings: Settings, random: Random, world: World, placement: ItemPlacement) => {
+  const shuffled = findSpheresShuffled(settings, random, world, placement);
   const { locations } = shuffled;
   let { spheres } = shuffled;
   let woth = new Set(locations);
   for (const loc of locations) {
     const wothMaybe = new Set(woth);
     wothMaybe.delete(loc);
-    const spheresMaybe = findSpheres(world, placement, wothMaybe);
+    const spheresMaybe = findSpheres(settings, world, placement, wothMaybe);
     if (spheresMaybe !== null) {
       woth = wothMaybe;
       spheres = spheresMaybe;
@@ -91,6 +90,6 @@ const findMinimalSpheres = (random: Random, world: World, placement: ItemPlaceme
 }
 
 export const playthrough = (settings: Settings, random: Random, world: World, placement: ItemPlacement) => {
-  const spheres = findMinimalSpheres(random, world, placement);
+  const spheres = findMinimalSpheres(settings, random, world, placement);
   return spheres.map(sphere => sphere.filter(item => isItemImportant(settings, placement[item]))).filter(sphere => sphere.length !== 0);
 }
