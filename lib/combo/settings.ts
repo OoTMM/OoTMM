@@ -123,6 +123,78 @@ export const SETTINGS = [{
   category: 'advanced',
   type: 'boolean',
   default: false
+}, {
+  key: 'trickOoTLens',
+  name: 'Fewer Lens Requirements (OoT)',
+  category: 'trick',
+  type: 'boolean',
+  default: false
+}, {
+  key: 'trickFewerTunic',
+  name: 'Fewer Tunic Requirements',
+  category: 'trick',
+  type: 'boolean',
+  default: false
+}, {
+  key: 'trickMido',
+  name: 'Backflip Over Mido',
+  category: 'trick',
+  type: 'boolean',
+  default: false
+}, {
+  key: 'trickManRoof',
+  name: 'Man on Roof with Nothing',
+  category: 'trick',
+  type: 'boolean',
+  default: false
+}, {
+  key: 'trickBlindWasteland',
+  name: 'Blind Wasteland Crossing',
+  category: 'trick',
+  type: 'boolean',
+  default: false
+}, {
+  key: 'trickNightSkulls',
+  name: 'Nighttime Gold Skulltulas without Sun\'s Song',
+  category: 'trick',
+  type: 'boolean',
+  default: true
+}, {
+  key: 'trickMMLens',
+  name: 'Fewer Lens Requirements (MM)',
+  category: 'trick',
+  type: 'boolean',
+  default: false
+}, {
+  key: 'trickGoronBomb',
+  name: 'Bomb Jump Fences as Goron',
+  category: 'trick',
+  type: 'boolean',
+  default: false
+}, {
+  key: 'tricknoSeahorse',
+  name: 'Pinnacle Rock without Seahorse',
+  category: 'trick',
+  type: 'boolean',
+  default: false
+}, {
+  key: 'trickZoraHallHuman',
+  name: 'Swim to Zora Hall as Human',
+  category: 'trick',
+  type: 'boolean',
+  default: false
+}, {
+  key: 'trickIcelessIkana',
+  name: 'Climb Ikana Canyon without Ice Arrows',
+  category: 'trick',
+  type: 'boolean',
+  default: false
+}, {
+  key: 'trickOneMaskStone',
+  name: 'Climb Stone Tower with One Mask',
+  category: 'trick',
+  type: 'boolean',
+  default: false
 }] as const;
 
 export const SETTINGS_CATEGORIES = [{
@@ -134,6 +206,9 @@ export const SETTINGS_CATEGORIES = [{
 }, {
   name: "Advanced",
   key: "advanced",
+}, {
+  name: "Logic Tricks",
+  key: "trick",
 }];
 
 type Tricks = {[k: string]: boolean};

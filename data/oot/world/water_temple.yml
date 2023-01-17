@@ -43,7 +43,7 @@
 "Water Temple Center":
   dungeon: Water
   exits:
-    "Water Temple Under Center": "event(WATER_LEVEL_MIDDLE) && has_iron_boots"
+    "Water Temple Under Center": "event(WATER_LEVEL_MIDDLE) && has_iron_boots && has_tunic_zora_strict"
   events:
     WATER_LEVEL_MIDDLE: "can_hookshot && can_play(SONG_ZELDA)"
   locations:
