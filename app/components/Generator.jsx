@@ -5,6 +5,7 @@ import { Tab, TabBar } from './Tab';
 import { RomConfig } from './RomConfig';
 import { Settings } from './Settings';
 import { StartingItems } from './StartingItems';
+import { Tricks } from './Tricks';
 
 export const Generator = ({ onGenerate, error }) => {
   const [roms, setRoms] = useState({ oot: null, mm: null });
@@ -38,6 +39,7 @@ export const Generator = ({ onGenerate, error }) => {
       {SETTINGS_CATEGORIES.map(category =>
         <Tab key={category.key} name={category.name} component={<Settings category={category.key} settings={settings} setSetting={setSetting}/>}/>
       )}
+      <Tab name="Tricks" component={<Tricks settings={settings} setSetting={setSetting}/>}/>
       <Tab name="Starting Items" component={<StartingItems settings={settings} setSetting={setSetting} itemPool={itemPool}/>}/>
     </TabBar>
   );
