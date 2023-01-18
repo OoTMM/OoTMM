@@ -136,6 +136,11 @@ export const SETTINGS_CATEGORIES = [{
   key: "advanced",
 }];
 
+type Tricks = {[k: string]: boolean};
+export const TRICKS: Tricks = {
+  TEST: false,
+};
+
 type SettingDataEnumValue = {
   readonly value: string;
   readonly name: string;
@@ -172,11 +177,12 @@ type UnionToIntersection<U> =
 type SettingsBase = UnionToIntersection<SettingShapes>;
 
 export type Settings = SettingsBase & {
-  startingItems: {[k: string]: number}
+  startingItems: {[k: string]: number},
+  tricks: Tricks,
 };
 
 export const DEFAULT_SETTINGS: Settings = { ...SETTINGS.map(s => {
   return {[s.key]: s.default};
-}).reduce((a, b) => ({...a, ...b}), {}), startingItems: {} } as Settings;
+}).reduce((a, b) => ({...a, ...b}), {}), startingItems: {}, tricks: { ...TRICKS } } as Settings;
 
 export const settings = (s: Partial<Settings>): Settings => ({...DEFAULT_SETTINGS, ...s});
