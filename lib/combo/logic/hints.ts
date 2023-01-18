@@ -483,7 +483,7 @@ class HintsSolver {
     if (typeof locs === 'string') {
       locs = new Set([locs]);
     }
-    const items: Items = {};
+    const items: Items = { ...this.settings.startingItems };
     let reachable = pathfind(this.world, items, true);
     const locations = new Set<string>();
     for (;;) {
