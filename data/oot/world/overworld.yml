@@ -264,7 +264,7 @@
     "Windmill HP": "can_boomerang || (is_adult && can_play(SONG_TIME))"
     "Windmill Song of Storms": "is_adult && has(OCARINA)"
     "Kakariko Song Shadow": "is_adult && has(MEDALLION_FOREST) && has(MEDALLION_FIRE) && has(MEDALLION_WATER)"
-    "Kakariko Man on Roof": "can_hookshot || setting(trickManRoof)"
+    "Kakariko Man on Roof": "can_hookshot || trick(OOT_MAN_ON_ROOF)"
     "Kakariko Potion Shop Odd Potion": "adult_trade(ODD_MUSHROOM)"
     "Kakariko Grotto Front": "hidden_grotto_bomb"
     "Kakariko Grotto Back": "true"
@@ -591,7 +591,7 @@
 "Haunted Wasteland Structure":
   region: HAUNTED_WASTELAND
   exits:
-    "Desert Colossus": "has_lens_strict || setting(trickBlindWasteland)"
+    "Desert Colossus": "has_lens_strict || trick(OOT_BLIND_WASTELAND)"
   locations:
     "Haunted Wasteland Chest": "has_fire"
     "Haunted Wasteland GS": "can_collect_distance"
@@ -599,7 +599,7 @@
   region: DESERT_COLOSSUS
   exits:
     "Spirit Temple Entrance": "true"
-    "Haunted Wasteland Structure": "setting(trickBlindWasteland)"
+    "Haunted Wasteland Structure": "trick(OOT_BLIND_WASTELAND)"
   events:
     BEAN_DESERT_COLOSSUS: "can_use_beans"
   locations:

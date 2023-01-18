@@ -387,6 +387,7 @@ class HintsSolver {
   private hintedLocations = new Set<string>();
   private gossip: {[k: string]: HintGossip} = {};
   private foolish: {[k: string]: number} = {};
+  private dependencies: typeof SIMPLE_DEPENDENCIES;
 
   constructor(
     private monitor: Monitor,
@@ -396,6 +397,10 @@ class HintsSolver {
     private items: ItemPlacement,
     private spheres: string[][],
   ){
+    this.dependencies = JSON.parse(JSON.stringify(SIMPLE_DEPENDENCIES));
+    if (!settings.tricks['OOT_NIGHT_GS']) {
+      delete this.dependencies['OOT_SONG_SUN'];
+    }
   }
 
   private findItem(item: string) {
@@ -562,7 +567,7 @@ class HintsSolver {
       const item = this.items[l];
       if (isItemMajor(item) || isDungeonReward(item) || isKey(item) || isStrayFairy(item) || isToken(item)) {
         /* May be a progression item - need to check other locations */
-        const dependencies = SIMPLE_DEPENDENCIES[item];
+        const dependencies = this.dependencies[item];
         if (dependencies === undefined) {
           return false;
         } else {
