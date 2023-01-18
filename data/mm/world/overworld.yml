@@ -222,7 +222,7 @@
     "Road to Southern Swamp": "true"
     "Mountain Village Path Lower": "has(BOW)"
     "Milk Road": "true"
-    "Great Bay Fence": "can_play(SONG_EPONA)"
+    "Great Bay Fence": "can_play(SONG_EPONA) || can_goron_bomb_jump"
     "Road to Ikana Front": "true"
     "Astral Observatory Balcony": "has(MASK_DEKU)"
   locations:
@@ -400,7 +400,7 @@
   exits:
     "Mountain Village Path Upper": "true"
     "Twin Islands": "true"
-    "Goron Graveyard": "can_use_lens || (event(BOSS_SNOWHEAD) && (has(MASK_GORON) || has(MASK_ZORA)))"
+    "Goron Graveyard": "can_use_lens_strict || (event(BOSS_SNOWHEAD) && (has(MASK_GORON) || has(MASK_ZORA)))"
     "Path to Snowhead Front": "true"
     "Blacksmith": "true"
   gossip:
@@ -469,7 +469,7 @@
   exits:
     "Mountain Village": "true"
   locations:
-    "Goron Graveyard Mask": "can_use_lens && can_play(SONG_HEALING)"
+    "Goron Graveyard Mask": "can_use_lens_strict && can_play(SONG_HEALING)"
   events:
     GORON_GRAVEYARD_HOT_WATER: "has_bottle && has(MASK_GORON)"
 "Goron Shrine":
@@ -583,7 +583,7 @@
 "Great Bay Fence":
   region: TERMINA_FIELD
   exits:
-    "Termina Field": "can_play(SONG_EPONA)"
+    "Termina Field": "can_play(SONG_EPONA) || can_goron_bomb_jump"
     "Great Bay Coast": "true"
 "Great Bay Coast":
   region: GREAT_BAY_COAST
@@ -619,7 +619,7 @@
 "Pinnacle Rock Entrance":
   region: PINNACLE_ROCK
   exits:
-    "Pinnacle Rock": "has(MASK_ZORA) && event(SEAHORSE)"
+    "Pinnacle Rock": "has(MASK_ZORA) && (event(SEAHORSE) || trick(MM_NO_SEAHORSE))"
     "Great Bay Coast": "true"
 "Pinnacle Rock":
   region: PINNACLE_ROCK
@@ -643,7 +643,7 @@
   exits:
     "Great Bay Coast": "true"
     "Zora Hall Entrance": "has(MASK_ZORA)"
-    "Zora Cape Peninsula": "has(MASK_ZORA)"
+    "Zora Cape Peninsula": "has(MASK_ZORA) || trick(MM_ZORA_HALL_HUMAN)"
     "Waterfall Cliffs": "has(HOOKSHOT)"
     "Great Bay Near Fairy Fountain": "has(HOOKSHOT)"
   locations:
@@ -696,7 +696,7 @@
 "Zora Cape Peninsula":
   region: ZORA_CAPE
   exits:
-    "Zora Cape": "has(MASK_ZORA)"
+    "Zora Cape": "has(MASK_ZORA) || trick(MM_ZORA_HALL_HUMAN)"
     "Zora Hall": "true"
     "Great Bay Temple Entrance": "has(MASK_ZORA) && has(HOOKSHOT) && can_play(SONG_ZORA)"
   events:
@@ -711,18 +711,18 @@
   region: ROAD_TO_IKANA
   exits:
     "Termina Field": "true"
-    "Road to Ikana Center": "can_play(SONG_EPONA)"
+    "Road to Ikana Center": "can_play(SONG_EPONA) || can_goron_bomb_jump"
   locations:
     "Road to Ikana Chest": "has(HOOKSHOT)"
     "Road to Ikana Grotto": "has(MASK_GORON)"
 "Road to Ikana Center":
   region: ROAD_TO_IKANA
   exits:
-    "Road to Ikana Front": "can_play(SONG_EPONA)"
+    "Road to Ikana Front": "can_play(SONG_EPONA) || can_goron_bomb_jump"
     "Road to Ikana Top": "(has(MASK_GARO) || has(MASK_GIBDO)) && has(HOOKSHOT)"
     "Ikana Graveyard": "true"
   locations:
-    "Road to Ikana Stone Mask": "can_use_lens && has_bottle"
+    "Road to Ikana Stone Mask": "can_use_lens_strict && has_bottle"
   gossip:
     "Road to Ikana Gossip": "true"
 "Ikana Graveyard":
@@ -763,7 +763,7 @@
   region: IKANA_CANYON
   exits:
     "Road to Ikana Top": "true"
-    "Ikana Canyon": "can_use_ice_arrows && has(HOOKSHOT)"
+    "Ikana Canyon": "(can_use_ice_arrows || trick(MM_ICELESS_IKANA)) && has(HOOKSHOT)"
     "Secret Shrine Entrance": "true"
     "Sakon Hideout": "event(MEET_KAFEI)"
     "Swamp Front": "true"
@@ -823,7 +823,7 @@
   region: STONE_TOWER
   exits:
     "Ikana Canyon": "true"
-    "Stone Tower Top": "can_use_elegy3 && has(HOOKSHOT)" # Probably overkill
+    "Stone Tower Top": "(can_use_elegy3 || (can_use_elegy2 && trick(MM_ONE_MASK_STONE_TOWER))) && has(HOOKSHOT)"
 "Stone Tower Top":
   region: STONE_TOWER
   exits:

@@ -3,8 +3,8 @@ import { Buffer } from 'buffer';
 import { options, OptionsInput } from './options';
 import { Generator } from './generator';
 import { MonitorCallbacks } from './monitor';
-import { SETTINGS, DEFAULT_SETTINGS, SETTINGS_CATEGORIES, Settings } from './settings';
-import { createWorld, World } from './logic/world';
+import { SETTINGS, DEFAULT_SETTINGS, SETTINGS_CATEGORIES, Settings, TRICKS } from './settings';
+import { createWorld } from './logic/world';
 import { alterWorld, configFromSettings } from './logic/settings';
 import { Items } from './logic/state';
 import { addItem, isDungeonItem, isDungeonReward, isJunk, isStrayFairy, isToken } from './logic/items';
@@ -22,7 +22,7 @@ export const generate = (params: GeneratorParams): Generator => {
   return new Generator(params.oot, params.mm, opts, params.monitor || {});
 };
 
-export { SETTINGS, DEFAULT_SETTINGS, SETTINGS_CATEGORIES };
+export { SETTINGS, DEFAULT_SETTINGS, SETTINGS_CATEGORIES, TRICKS };
 
 export const itemPool = (aSettings: Partial<Settings>) => {
   const settings: Settings = { ...DEFAULT_SETTINGS, ...aSettings };

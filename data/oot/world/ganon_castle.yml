@@ -30,7 +30,7 @@
 "Ganon Castle Fire":
   dungeon: Ganon
   events:
-    GANON_TRIAL_FIRE: "has_tunic_goron && can_longshot && has(STRENGTH, 3) && has_light_arrows"
+    GANON_TRIAL_FIRE: "has_tunic_goron_strict && can_longshot && has(STRENGTH, 3) && has_light_arrows"
 "Ganon Castle Water":
   dungeon: Ganon
   events:

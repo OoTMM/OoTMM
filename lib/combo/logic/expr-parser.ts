@@ -1,7 +1,7 @@
 import { Game } from '../config';
 import { Settings } from '../settings';
 import { gameId } from '../util';
-import { Expr, exprTrue, exprFalse, exprAnd, exprOr, exprAge, exprHas, exprEvent, exprMasks, exprHealth, exprSetting, exprNot, exprCond } from './expr';
+import { Expr, exprTrue, exprFalse, exprAnd, exprOr, exprAge, exprHas, exprEvent, exprMasks, exprHealth, exprSetting, exprNot, exprCond, exprTrick } from './expr';
 
 const SIMPLE_TOKENS = ['||', '&&', '(', ')', ',', 'true', 'false', '!', '+', '-'] as const;
 
@@ -229,6 +229,18 @@ export class ExprParser {
     return exprSetting(this.settings, key, value);
   }
 
+  private parseExprTrick(): Expr | undefined {
+    let value: string | boolean = true;
+    if (this.peek('identifier') !== 'trick') {
+      return undefined;
+    }
+    this.accept('identifier');
+    this.expect('(');
+    const trick = this.expect('identifier');
+    this.expect(')');
+    return exprTrick(this.settings, trick);
+  }
+
   private parseMacro(): Expr | undefined {
     /* Check for a macro with the given name */
     const name = this.peek('identifier');
@@ -299,6 +311,7 @@ export class ExprParser {
       || this.parseExprMasks()
       || this.parseExprHealth()
       || this.parseExprSetting()
+      || this.parseExprTrick()
       || this.parseMacro();
   }
 

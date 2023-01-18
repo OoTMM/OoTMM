@@ -136,6 +136,32 @@ export const SETTINGS_CATEGORIES = [{
   key: "advanced",
 }];
 
+export const TRICKS = {
+  OOT_LENS: "Fewer Lens Requirements (OoT)",
+  OOT_TUNICS: "Fewer Tunic Requirements",
+  OOT_HIDDEN_GROTTOS: "Hidden Grottos (OoT) without Stone of Agony",
+  OOT_MIDO_SKIP: "Backflip Over Mido",
+  OOT_MAN_ON_ROOF: "Man on Roof with Nothing",
+  OOT_BLIND_WASTELAND: "Blind Wasteland Crossing",
+  OOT_NIGHT_GS: "Nighttime Gold Skulltulas without Sun's Song",
+  MM_LENS: "Fewer Lens Requirements (MM)",
+  MM_GORON_BOMB_JUMP: "Bomb Jump Fences as Goron",
+  MM_NO_SEAHORSE: "Pinnacle Rock without Seahorse",
+  MM_ZORA_HALL_HUMAN: "Swim to Zora Hall as Human",
+  MM_ICELESS_IKANA: "Climb Ikana Canyon without Ice Arrows",
+  MM_ONE_MASK_STONE_TOWER: "Climb Stone Tower with One Mask",
+};
+
+export type Tricks = {[k in keyof typeof TRICKS]: boolean};
+export type Trick = keyof Tricks;
+
+const DEFAULT_ENABLED_TRICKS = new Set<Trick>(['OOT_NIGHT_GS']);
+
+const DEFAULT_TRICKS = Object.keys(TRICKS).reduce((tricks, trick) => {
+  tricks[trick as Trick] = DEFAULT_ENABLED_TRICKS.has(trick as Trick);
+  return tricks;
+}, {} as Tricks);
+
 type SettingDataEnumValue = {
   readonly value: string;
   readonly name: string;
@@ -172,11 +198,12 @@ type UnionToIntersection<U> =
 type SettingsBase = UnionToIntersection<SettingShapes>;
 
 export type Settings = SettingsBase & {
-  startingItems: {[k: string]: number}
+  startingItems: {[k: string]: number},
+  tricks: Tricks,
 };
 
 export const DEFAULT_SETTINGS: Settings = { ...SETTINGS.map(s => {
   return {[s.key]: s.default};
-}).reduce((a, b) => ({...a, ...b}), {}), startingItems: {} } as Settings;
+}).reduce((a, b) => ({...a, ...b}), {}), startingItems: {}, tricks: { ...DEFAULT_TRICKS } } as Settings;
 
 export const settings = (s: Partial<Settings>): Settings => ({...DEFAULT_SETTINGS, ...s});
