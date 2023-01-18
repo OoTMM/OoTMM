@@ -1,4 +1,4 @@
-import { Settings, TRICKS } from '../settings';
+import { Settings, Trick, TRICKS } from '../settings';
 import type { Age, State } from './state';
 
 const MASKS = [
@@ -50,8 +50,8 @@ export const exprSetting = (settings: Settings, setting: string, value: any): Ex
 };
 
 export const exprTrick = (settings: Settings, trick: string): Expr => {
-  if (TRICKS[trick] === undefined) {
+  if (!TRICKS.hasOwnProperty(trick)) {
     throw new Error(`Trick ${trick} not found`);
   }
-  return settings.tricks[trick] ? exprTrue() : exprFalse();
+  return settings.tricks[trick as Trick] ? exprTrue() : exprFalse();
 };

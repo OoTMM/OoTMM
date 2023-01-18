@@ -1,5 +1,5 @@
 import { Options } from '../options';
-import { Settings } from '../settings';
+import { Settings, Trick, Tricks } from '../settings';
 import { Hints } from './hints';
 import { ItemPlacement } from './solve';
 import { World } from './world';
@@ -15,11 +15,23 @@ const spoilerHeader = (buffer: string[], seed: string) => {
 const spoilerSettings = (buffer: string[], settings: Settings) => {
   buffer.push('Settings');
   for (const s in settings) {
-    if (s === 'startingItems') {
+    if (s === 'startingItems' || s === 'tricks') {
       continue;
     }
     const v = (settings as any)[s];
     buffer.push(`  ${s}: ${v}`);
+  }
+  buffer.push('');
+};
+
+const spoilerTricks = (buffer: string[], tricks: Tricks) => {
+  const tt = Object.keys(tricks).filter(t => tricks[t as Trick]);
+  if (tt.length === 0) {
+    return;
+  }
+  buffer.push('Tricks');
+  for (const t of tt) {
+    buffer.push(`  ${t}`);
   }
   buffer.push('');
 };
@@ -88,6 +100,7 @@ export const spoiler = (world: World, placement: ItemPlacement, spheres: string[
   const buffer: string[] = [];
   spoilerHeader(buffer, opts.seed);
   spoilerSettings(buffer, opts.settings);
+  spoilerTricks(buffer, opts.settings.tricks);
   spoilerStartingItems(buffer, opts.settings.startingItems);
   spoilerFoolish(buffer, hints.foolish);
   spoilerHints(buffer, hints, placement);
