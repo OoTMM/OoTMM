@@ -25,7 +25,8 @@ int comboAddItem(GameState_Play* play, s16 gi)
     itemId = kExtendedGetItems[gi].itemId;
     if (gi & MASK_FOREIGN_GI)
     {
-        comboAddItemForeign(itemId, 1);
+        itemId |= MASK_FOREIGN_ITEM;
+        comboAddItemForeign(itemId & 0xff, 1);
     }
     else
     {
@@ -45,7 +46,8 @@ int comboAddItemNoEffect(s16 gi)
     itemId = kExtendedGetItems[gi].itemId;
     if (gi & MASK_FOREIGN_GI)
     {
-        comboAddItemForeign(itemId, 1);
+        itemId |= MASK_FOREIGN_ITEM;
+        comboAddItemForeign(itemId & 0xff, 1);
     }
     else
     {
