@@ -67,3 +67,13 @@ PATCH_END
 PATCH_START 0x80841640
   li t6,0
 PATCH_END
+
+/* Don't spawn the soaring cutscene */
+PATCH_START 0x80841728
+  nop
+PATCH_END
+
+PATCH_START 0x808416f4
+  nop
+  nop
+PATCH_END
