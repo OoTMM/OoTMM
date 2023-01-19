@@ -156,12 +156,25 @@ static void addNewBottle(u16 itemId)
 
 static void fillBottle(u16 itemId)
 {
+    int slot;
+
+    slot = -1;
     for (int i = 0; i < 6; ++i)
     {
         if (gMmSave.inventory.items[ITS_MM_BOTTLE + i] == ITEM_MM_EMPTY_BOTTLE)
         {
-            gMmSave.inventory.items[ITS_MM_BOTTLE + i] = itemId;
+            slot = i;
             break;
+        }
+    }
+    if (slot == -1)
+        return;
+    gMmSave.inventory.items[ITS_MM_BOTTLE + slot] = itemId;
+    for (int i = 1; i <= 3; ++i)
+    {
+        if (gMmSave.itemEquips.cButtonSlots[0][i] == ITS_MM_BOTTLE + slot)
+        {
+            gMmSave.itemEquips.buttonItems[0][i] = itemId;
         }
     }
 }

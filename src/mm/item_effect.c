@@ -17,6 +17,12 @@ static void addRupees(s16 count)
     gSaveContext.save.rupeesDelta += count;
 }
 
+static void reloadIconsC(GameState_Play* play)
+{
+    for (int i = 1; i < 4; i++)
+        Interface_LoadItemIconImpl(play, i);
+}
+
 void comboAddItemEffect(GameState_Play* play, u16 itemId)
 {
     switch (itemId)
@@ -84,6 +90,16 @@ void comboAddItemEffect(GameState_Play* play, u16 itemId)
         break;
     case ITEM_MM_COMPASS:
         gSave.inventory.dungeonItems[gSaveContext.dungeonId].compass = 1;
+        break;
+    case ITEM_MM_POTION_RED:
+    case ITEM_MM_POTION_BLUE:
+    case ITEM_MM_POTION_GREEN:
+    case ITEM_MM_BOTTLED_MILK_HALF:
+    case ITEM_MM_SEAHORSE:
+    case ITEM_MM_BOTTLED_SEAHORSE:
+    case ITEM_MM_MILK:
+    case ITEM_MM_CHATEAU_ROMANI:
+        reloadIconsC(play);
         break;
     }
 }
