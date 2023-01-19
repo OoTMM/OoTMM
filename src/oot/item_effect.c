@@ -89,6 +89,10 @@ void comboAddItemEffect(GameState_Play* play, u16 itemId)
         dungeonId = dungeon(play, 1);
         comboAddBossKeyOot(dungeonId);
         break;
+    case ITEM_OOT_HOOKSHOT:
+    case ITEM_OOT_LONGSHOT:
+    case ITEM_OOT_OCARINA_FAIRY:
+    case ITEM_OOT_OCARINA_TIME:
     case ITEM_OOT_POTION_RED:
     case ITEM_OOT_POTION_BLUE:
     case ITEM_OOT_POTION_GREEN:

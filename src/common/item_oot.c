@@ -247,6 +247,48 @@ static void addRupees(u16 count)
         gOotSave.rupees = max;
 }
 
+static void addHookshot(int level)
+{
+    u16 itemId;
+
+    if (level >= 2)
+        itemId = ITEM_OOT_LONGSHOT;
+    else
+        itemId = ITEM_OOT_HOOKSHOT;
+    gOotSave.inventory[ITS_OOT_HOOKSHOT] = itemId;
+    gOotExtraItems.hookshot |= (1 << (level - 1));
+
+    /* Reload the items */
+    for (int i = 0; i < 3; ++i)
+    {
+        if (gOotSave.buttons[4 + i] == ITS_OOT_HOOKSHOT)
+        {
+            gOotSave.buttons[1 + i] = itemId;
+        }
+    }
+}
+
+static void addOcarina(int level)
+{
+    u16 itemId;
+
+    if (level >= 2)
+        itemId = ITEM_OOT_OCARINA_TIME;
+    else
+        itemId = ITEM_OOT_OCARINA_FAIRY;
+    gOotSave.inventory[ITS_OOT_OCARINA] = itemId;
+    gOotExtraItems.ocarina |= (1 << (level - 1));
+
+    /* Reload the items */
+    for (int i = 0; i < 3; ++i)
+    {
+        if (gOotSave.buttons[4 + i] == ITS_OOT_OCARINA)
+        {
+            gOotSave.buttons[1 + i] = itemId;
+        }
+    }
+}
+
 void comboAddItemOot(u16 itemId, int noEffect)
 {
     u16 dungeonId;
@@ -316,13 +358,10 @@ void comboAddItemOot(u16 itemId, int noEffect)
         addSeeds(30);
         break;
     case ITEM_OOT_OCARINA_FAIRY:
-        if (gOotSave.inventory[ITS_OOT_OCARINA] == ITEM_NONE)
-            gOotSave.inventory[ITS_OOT_OCARINA] = ITEM_OOT_OCARINA_FAIRY;
-        gOotExtraItems.ocarina |= 0x1;
+        addOcarina(1);
         break;
     case ITEM_OOT_OCARINA_TIME:
-        gOotSave.inventory[ITS_OOT_OCARINA] = ITEM_OOT_OCARINA_TIME;
-        gOotExtraItems.ocarina |= 0x2;
+        addOcarina(2);
         break;
     case ITEM_OOT_BOMBCHU_5:
         addBombchus(5);
@@ -334,13 +373,10 @@ void comboAddItemOot(u16 itemId, int noEffect)
         addBombchus(20);
         break;
     case ITEM_OOT_HOOKSHOT:
-        if (gOotSave.inventory[ITS_OOT_HOOKSHOT] == ITEM_NONE)
-            gOotSave.inventory[ITS_OOT_HOOKSHOT] = ITEM_OOT_HOOKSHOT;
-        gOotExtraItems.hookshot |= 0x1;
+        addHookshot(1);
         break;
     case ITEM_OOT_LONGSHOT:
-        gOotSave.inventory[ITS_OOT_HOOKSHOT] = ITEM_OOT_LONGSHOT;
-        gOotExtraItems.hookshot |= 0x2;
+        addHookshot(2);
         break;
     case ITEM_OOT_ARROW_ICE:
         gOotSave.inventory[ITS_OOT_ARROW_ICE] = ITEM_OOT_ARROW_ICE;
