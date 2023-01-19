@@ -31,6 +31,12 @@ static void addMagicUpgrade(int level)
     gSaveContext.magicTarget = 0x30 * level;
 }
 
+static void reloadIconsC(GameState_Play* play)
+{
+    for (int i = 1; i < 4; i++)
+        Interface_LoadItemIconImpl(play, i);
+}
+
 void comboAddItemEffect(GameState_Play* play, u16 itemId)
 {
     u16 dungeonId;
@@ -82,6 +88,16 @@ void comboAddItemEffect(GameState_Play* play, u16 itemId)
     case ITEM_OOT_BOSS_KEY:
         dungeonId = dungeon(play, 1);
         comboAddBossKeyOot(dungeonId);
+        break;
+    case ITEM_OOT_POTION_RED:
+    case ITEM_OOT_POTION_BLUE:
+    case ITEM_OOT_POTION_GREEN:
+    case ITEM_OOT_LON_LON_MILK_HALF:
+    case ITEM_OOT_FISH:
+    case ITEM_OOT_BLUE_FIRE:
+    case ITEM_OOT_BUG:
+    case ITEM_OOT_LON_LON_MILK:
+        reloadIconsC(play);
         break;
     }
 }

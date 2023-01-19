@@ -159,12 +159,25 @@ static void addNewBottle(u16 itemId)
 
 static void fillBottle(u16 itemId)
 {
+    int slot;
+
+    slot = -1;
     for (int i = 0; i < 4; ++i)
     {
         if (gOotSave.inventory[ITS_OOT_BOTTLE + i] == ITEM_OOT_EMPTY_BOTTLE)
         {
-            gOotSave.inventory[ITS_OOT_BOTTLE + i] = itemId;
-            return;
+            slot = i;
+            break;
+        }
+    }
+    if (slot == -1)
+        return;
+    gOotSave.inventory[ITS_OOT_BOTTLE + slot] = itemId;
+    for (int i = 0; i < 3; ++i)
+    {
+        if (gOotSave.buttons[4 + i] == ITS_OOT_BOTTLE + slot)
+        {
+            gOotSave.buttons[1 + i] = itemId;
         }
     }
 }
