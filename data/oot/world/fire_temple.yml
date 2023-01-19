@@ -4,7 +4,7 @@ Fire Temple Entrance:
     "Death Mountain Crater Bottom": "true"
     "Fire Temple Lava Room": "has_small_keys_fire(1)"
     "Fire Temple Boss": "has(BOSS_KEY_FIRE) && (event(FIRE_TEMPLE_PILLAR_HAMMER) || has_hover_boots) && has_tunic_goron_strict"
-    "Fire Temple Boss Key Loop": "cond(setting(smallKeyShuffle, anywhere), has_small_keys_fire(1), true) && can_hammer"
+    "Fire Temple Boss Key Loop": "cond(setting(smallKeyShuffle, anywhere), has(SMALL_KEY_FIRE, 8), true) && can_hammer"
   locations:
     "Fire Temple Jail 1 Chest": "true"
 "Fire Temple Boss Key Loop":
