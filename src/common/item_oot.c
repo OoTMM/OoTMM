@@ -733,9 +733,6 @@ void comboAddItemOot(u16 itemId, int noEffect)
     case ITEM_OOT_SMALL_KEY_GANON:
         comboAddSmallKeyOot(SCE_OOT_INSIDE_GANON_CASTLE);
         break;
-    case ITEM_OOT_SMALL_KEY_ICE:
-        comboAddSmallKeyOot(SCE_OOT_ICE_CAVERN);
-        break;
     case ITEM_OOT_SMALL_KEY_BOTW:
         comboAddSmallKeyOot(SCE_OOT_BOTTOM_OF_THE_WELL);
         break;

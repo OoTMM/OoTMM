@@ -188,7 +188,6 @@ static int csmcFromItemOot(s16 gi)
     case GI_OOT_SMALL_KEY_SPIRIT:
     case GI_OOT_SMALL_KEY_SHADOW:
     case GI_OOT_SMALL_KEY_GANON:
-    case GI_OOT_SMALL_KEY_ICE:
     case GI_OOT_SMALL_KEY_BOTW:
     case GI_OOT_SMALL_KEY_GF:
     case GI_OOT_SMALL_KEY_GTG:

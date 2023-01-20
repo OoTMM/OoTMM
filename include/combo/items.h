@@ -163,16 +163,15 @@
 #define ITEM_OOT_SMALL_KEY_SPIRIT           0xa5
 #define ITEM_OOT_SMALL_KEY_SHADOW           0xa6
 #define ITEM_OOT_SMALL_KEY_GANON            0xa7
-#define ITEM_OOT_SMALL_KEY_ICE              0xa8
-#define ITEM_OOT_SMALL_KEY_BOTW             0xa9
-#define ITEM_OOT_SMALL_KEY_GF               0xaa
-#define ITEM_OOT_SMALL_KEY_GTG              0xab
-#define ITEM_OOT_BOSS_KEY_FOREST            0xac
-#define ITEM_OOT_BOSS_KEY_FIRE              0xad
-#define ITEM_OOT_BOSS_KEY_WATER             0xae
-#define ITEM_OOT_BOSS_KEY_SPIRIT            0xaf
-#define ITEM_OOT_BOSS_KEY_SHADOW            0xb0
-#define ITEM_OOT_BOSS_KEY_GANON             0xb1
+#define ITEM_OOT_SMALL_KEY_BOTW             0xa8
+#define ITEM_OOT_SMALL_KEY_GF               0xa9
+#define ITEM_OOT_SMALL_KEY_GTG              0xaa
+#define ITEM_OOT_BOSS_KEY_FOREST            0xab
+#define ITEM_OOT_BOSS_KEY_FIRE              0xac
+#define ITEM_OOT_BOSS_KEY_WATER             0xad
+#define ITEM_OOT_BOSS_KEY_SPIRIT            0xae
+#define ITEM_OOT_BOSS_KEY_SHADOW            0xaf
+#define ITEM_OOT_BOSS_KEY_GANON             0xb0
 
 #define ITEM_MM_OCARINA_OF_TIME             0x00
 #define ITEM_MM_BOW                         0x01

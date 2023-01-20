@@ -174,7 +174,6 @@ static const char* const kItemNamesOot[] = {
     "a " C0 "Small Key (Spirit)",
     "a " C0 "Small Key (Shadow)",
     "a " C0 "Small Key (Ganon)",
-    "a " C0 "Small Key (Ice)",
     "a " C0 "Small Key (Well)",
     "a " C0 "Small Key (Hideout)",
     "a " C0 "Small Key (GTG)",
