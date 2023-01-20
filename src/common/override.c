@@ -74,15 +74,18 @@ static s16 comboOverrideImpl(u16 sceneId, u16 id, s16 gi, int flags)
     if (override >= 0)
         absGi = override;
 
-    if (!(flags & OVF_NO_PROGRESSIVE))
+    if (flags & OVF_PROGRESSIVE)
         absGi = comboProgressive(absGi);
+
+    if (flags & OVF_DOWNGRADE)
+        absGi = comboDowngrade(absGi);
 
     return gi > 0 ? absGi : -absGi;
 }
 
 s16 comboOverride(int type, u16 sceneId, u16 id, s16 gi)
 {
-    return comboOverrideEx(type, sceneId, id, gi, 0);
+    return comboOverrideEx(type, sceneId, id, gi, OVF_PROGRESSIVE | OVF_DOWNGRADE);
 }
 
 s16 comboOverrideEx(int type, u16 sceneId, u16 id, s16 gi, int flags)

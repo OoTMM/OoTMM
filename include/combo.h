@@ -117,7 +117,8 @@ void comboGameSwitch(void);
 #define OV_GS           3
 #define OV_SF           4
 
-#define OVF_NO_PROGRESSIVE   (1 << 0)
+#define OVF_PROGRESSIVE       (1 << 0)
+#define OVF_DOWNGRADE         (1 << 1)
 
 s16 comboOverride(int type, u16 sceneId, u16 id, s16 gi);
 s16 comboOverrideEx(int type, u16 sceneId, u16 id, s16 gi, int flags);
@@ -140,6 +141,7 @@ void comboTextHijackOathToOrder(GameState_Play* play);
 s32 comboProgressive(s32 gi);
 s32 comboProgressiveOot(s32 gi);
 s32 comboProgressiveMm(s32 gi);
+s16 comboDowngrade(s16 gi);
 
 /* Objects */
 void    comboObjectsReset(void);
@@ -192,6 +194,9 @@ void comboAddStrayFairyMm(u16 dungeonId);
 
 int  comboAddItem(GameState_Play* play, s16 gi);
 int  comboAddItemNoEffect(s16 gi);
+
+int comboIsItemUnavailable(s16 gi);
+int comboIsItemMinor(s16 gi);
 
 void comboToggleTrade(u8* slot, u32 flags, const u8* table, u32 tableSize);
 
@@ -274,6 +279,14 @@ void comboHintGossip(u8 key, GameState_Play* play);
 void comboCsmcInit(Actor* this, GameState_Play* play, s16 gi);
 void comboCsmcPreDraw(Actor* this, GameState_Play* play, s16 gi);
 int  comboCsmcChestSize(s16 gi);
+
+/* Shop */
+#define SC_OK               0x00
+#define SC_OK_NOCUTSCENE    0x01
+#define SC_ERR_CANNOTBUY    0x02
+#define SC_ERR_NORUPEES     0x04
+
+int comboShopPrecond(GameState_Play* play, Actor_EnGirlA* girlA);
 
 #else
 # include <combo/asm.h>

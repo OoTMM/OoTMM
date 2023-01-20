@@ -1034,7 +1034,7 @@ void comboTextAppendNpcReward(char** b, s16 npcId, s16 gi)
 {
     s16 itemId;
 
-    gi = comboOverrideEx(OV_NPC, 0, npcId, gi, OVF_NO_PROGRESSIVE);
+    gi = comboOverrideEx(OV_NPC, 0, npcId, gi, 0);
     itemId = comboItemFromGI(gi);
     comboTextAppendItemName(b, itemId, TF_PREPOS | TF_PROGRESSIVE);
 }

@@ -29,7 +29,7 @@ static void powderKegHint(GameState_Play* play)
     char* b;
     char* start;
 
-    gi = comboOverrideEx(OV_NPC, 0, NPC_MM_GORON_KEG, GI_MM_POWDER_KEG, OVF_NO_PROGRESSIVE);
+    gi = comboOverrideEx(OV_NPC, 0, NPC_MM_GORON_KEG, GI_MM_POWDER_KEG, 0);
     itemId = comboItemFromGI(gi);
 
     b = play->textBuffer;

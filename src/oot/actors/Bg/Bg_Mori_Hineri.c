@@ -9,7 +9,7 @@ void BgMoriHineri_DrawWrapper(Actor* this, GameState_Play* play)
     float* f;
 
     /* Init CSMC */
-    gi = comboOverrideEx(OV_CHEST, play->sceneId, 0xe, GI_OOT_BOSS_KEY, OVF_NO_PROGRESSIVE);
+    gi = comboOverrideEx(OV_CHEST, play->sceneId, 0xe, GI_OOT_BOSS_KEY, 0);
     comboCsmcPreDraw(this, play, gi);
 
     /* Check for CSMC and small chest */

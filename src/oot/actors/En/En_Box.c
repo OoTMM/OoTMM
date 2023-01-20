@@ -3,7 +3,7 @@
 static s16 EnBox_Item(Actor* this, GameState_Play* play, s16 gi, int progressive)
 {
     if (!(play->sceneId == SCE_OOT_TREASURE_SHOP && (this->variable & 0x1f) == 0x0a && gi == -GI_OOT_TC_RUPEE_PURPLE))
-        gi = comboOverrideEx(OV_CHEST, play->sceneId, this->variable & 0x1f, gi, progressive ? 0 : OVF_NO_PROGRESSIVE);
+        gi = comboOverrideEx(OV_CHEST, play->sceneId, this->variable & 0x1f, gi, progressive ? OVF_PROGRESSIVE | OVF_DOWNGRADE : 0);
     return gi;
 }
 

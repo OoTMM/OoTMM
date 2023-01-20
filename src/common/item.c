@@ -55,3 +55,112 @@ int comboAddItemNoEffect(s16 gi)
     }
     return -1;
 }
+
+static int isItemUnavailableOot(s32 gi)
+{
+    switch (gi)
+    {
+    case GI_OOT_BOMB:
+    case GI_OOT_BOMBS_5:
+    case GI_OOT_BOMBS_10:
+    case GI_OOT_BOMBS_20:
+    case GI_OOT_BOMBS_30:
+        return gOotSave.upgrades.bombBag == 0;
+    case GI_OOT_ARROWS_5:
+    case GI_OOT_ARROWS_10:
+    case GI_OOT_ARROWS_30:
+        return gOotSave.upgrades.quiver == 0;
+    case GI_OOT_DEKU_SEEDS_5:
+    case GI_OOT_DEKU_SEEDS_30:
+        return gOotSave.upgrades.bulletBag == 0;
+    default:
+        return 0;
+    }
+}
+
+static int isItemUnavailableMm(s32 gi)
+{
+    switch (gi)
+    {
+    case GI_MM_BOMB:
+    case GI_MM_BOMBS_5:
+    case GI_MM_BOMBS_10:
+    case GI_MM_BOMBS_20:
+    case GI_MM_BOMBS_30:
+    case GI_MM_BOMBCHU:
+    case GI_MM_BOMBCHUS_5:
+    case GI_MM_BOMBCHUS_10:
+    case GI_MM_BOMBCHUS_20:
+        return gMmSave.inventory.upgrades.bombBag == 0;
+    case GI_MM_ARROWS_10:
+    case GI_MM_ARROWS_30:
+    case GI_MM_ARROWS_40:
+        return gMmSave.inventory.upgrades.quiver == 0;
+    default:
+        return 0;
+    }
+}
+
+int comboIsItemUnavailable(s16 gi)
+{
+#if defined(GAME_MM)
+    gi ^= MASK_FOREIGN_GI;
+#endif
+    if (gi & MASK_FOREIGN_GI)
+        return isItemUnavailableMm(gi & ~MASK_FOREIGN_GI);
+    else
+        return isItemUnavailableOot(gi);
+}
+
+static int isItemMinorOot(s16 gi)
+{
+    switch (gi)
+    {
+    case GI_OOT_BOMB:
+    case GI_OOT_BOMBS_5:
+    case GI_OOT_BOMBS_10:
+    case GI_OOT_BOMBS_20:
+    case GI_OOT_BOMBS_30:
+    case GI_OOT_ARROWS_5:
+    case GI_OOT_ARROWS_10:
+    case GI_OOT_ARROWS_30:
+    case GI_OOT_DEKU_SEEDS_5:
+    case GI_OOT_DEKU_SEEDS_30:
+        return 1;
+    default:
+        return 0;
+    }
+}
+
+static int isItemMinorMm(s16 gi)
+{
+    switch (gi)
+    {
+    case GI_MM_BOMB:
+    case GI_MM_BOMBS_5:
+    case GI_MM_BOMBS_10:
+    case GI_MM_BOMBS_20:
+    case GI_MM_BOMBS_30:
+    case GI_MM_BOMBCHU:
+    case GI_MM_BOMBCHUS_5:
+    case GI_MM_BOMBCHUS_10:
+    case GI_MM_BOMBCHUS_20:
+    case GI_MM_ARROWS_10:
+    case GI_MM_ARROWS_30:
+    case GI_MM_ARROWS_40:
+        return 1;
+    default:
+        return 0;
+    }
+}
+
+int comboIsItemMinor(s16 gi)
+{
+#if defined(GAME_MM)
+    gi ^= MASK_FOREIGN_GI;
+#endif
+    if (gi & MASK_FOREIGN_GI)
+        return isItemMinorMm(gi & ~MASK_FOREIGN_GI);
+    else
+        return isItemMinorOot(gi);
+}

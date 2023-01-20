@@ -4,11 +4,11 @@ static s16 EnBox_Item(Actor* this, GameState_Play* play, s16 gi, int progressive
 {
     if (play->sceneId == SCE_MM_TREASURE_SHOP && gi == -GI_MM_HEART_PIECE)
     {
-        gi = comboOverrideEx(OV_NPC, 0, NPC_MM_CHEST_GAME, gi, progressive ? 0 : OVF_NO_PROGRESSIVE);
+        gi = comboOverrideEx(OV_NPC, 0, NPC_MM_CHEST_GAME, gi, progressive ? OVF_PROGRESSIVE | OVF_DOWNGRADE : 0);
     }
     else
     {
-        gi = comboOverrideEx(OV_CHEST, play->sceneId, this->variable & 0x1f, gi, progressive ? 0 : OVF_NO_PROGRESSIVE);
+        gi = comboOverrideEx(OV_CHEST, play->sceneId, this->variable & 0x1f, gi, progressive ? OVF_PROGRESSIVE | OVF_DOWNGRADE : 0);
     }
     return gi;
 }

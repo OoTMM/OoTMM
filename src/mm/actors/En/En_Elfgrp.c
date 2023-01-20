@@ -112,8 +112,8 @@ static void EnElfgrp_DisplayTextBox(GameState_Play* play, s16 messageId, Actor* 
 
     if (fairyIndex <= 1)
     {
-        gi = comboOverrideEx(OV_NPC, 0, kGreatFairyNPCs[0], kGreatFairyRewards[0], OVF_NO_PROGRESSIVE);
-        gi2 = comboOverrideEx(OV_NPC, 0, kGreatFairyNPCs[1], kGreatFairyRewards[1], OVF_NO_PROGRESSIVE);
+        gi = comboOverrideEx(OV_NPC, 0, kGreatFairyNPCs[0], kGreatFairyRewards[0], 0);
+        gi2 = comboOverrideEx(OV_NPC, 0, kGreatFairyNPCs[1], kGreatFairyRewards[1], 0);
         itemId = comboItemFromGI(gi);
         itemId2 = comboItemFromGI(gi2);
         fairyHintTown(play, itemId, itemId2);
@@ -121,7 +121,7 @@ static void EnElfgrp_DisplayTextBox(GameState_Play* play, s16 messageId, Actor* 
     }
 
     /* Hint */
-    gi = comboOverrideEx(OV_NPC, 0, kGreatFairyNPCs[fairyIndex], kGreatFairyRewards[fairyIndex], OVF_NO_PROGRESSIVE);
+    gi = comboOverrideEx(OV_NPC, 0, kGreatFairyNPCs[fairyIndex], kGreatFairyRewards[fairyIndex], 0);
     itemId = comboItemFromGI(gi);
     fairyHint(play, itemId);
 }
