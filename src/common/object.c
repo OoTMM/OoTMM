@@ -107,7 +107,6 @@ static const ObjectPatch kObjectPatches[] = {
     { OBJ_OOT_GI_M_ARROW, { 0x0b18, 0x0bb8, 0x0d28 } },
     { OBJ_OOT_GI_MAGICPOT, { 0x05b8, 0x0f18 } },
     { OBJ_OOT_GI_MAP, { 0x0490, 0x0ba8 } },
-    { OBJ_OOT_GI_MEDAL, { 0x0ce8, 0x0e30, 0x1b28, 0x2868, 0x3648, 0x4368, 0x5258 } },
     { OBJ_OOT_GI_MELODY, { 0x0af8 } },
     { OBJ_OOT_GI_MILK, { 0x1098, 0x1158, 0x12c0 } },
     { OBJ_OOT_GI_MUSHROOM, { 0x0a08, 0x0c18 } },
@@ -137,6 +136,12 @@ static const ObjectPatch kObjectPatches[] = {
     { CUSTOM_OBJECT_ID_GI_STONE_EMERALD, { 0xba0, 0x12a8 } },
     { CUSTOM_OBJECT_ID_GI_STONE_RUBY, { 0x670, 0x938 } },
     { CUSTOM_OBJECT_ID_GI_STONE_SAPPHIRE, { 0x1308 } },
+    { CUSTOM_OBJECT_ID_GI_MEDALLION_FOREST, { 0x3a8, 0xe58 } },
+    { CUSTOM_OBJECT_ID_GI_MEDALLION_FIRE,   { 0x1e8, 0xc48 } },
+    { CUSTOM_OBJECT_ID_GI_MEDALLION_WATER,  { 0x368, 0xe18 } },
+    { CUSTOM_OBJECT_ID_GI_MEDALLION_SPIRIT, { 0x3b8, 0xe58 } },
+    { CUSTOM_OBJECT_ID_GI_MEDALLION_SHADOW, { 0x308, 0xd78 } },
+    { CUSTOM_OBJECT_ID_GI_MEDALLION_LIGHT,  { 0x508, 0xf98 } },
 #endif
 };
 
