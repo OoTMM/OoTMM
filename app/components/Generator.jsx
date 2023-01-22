@@ -9,6 +9,7 @@ import { Tricks } from './Tricks';
 
 export const Generator = ({ onGenerate, error }) => {
   const [roms, setRoms] = useState({ oot: null, mm: null });
+  const [seed, setSeed] = useState("");
   const [settings, setSettings] = useState({...DEFAULT_SETTINGS});
   const [itemPool, setItemPool] = useState(makeItemPool(settings));
 
@@ -35,7 +36,7 @@ export const Generator = ({ onGenerate, error }) => {
 
   return (
     <TabBar>
-      <Tab name="ROM Config" component={<RomConfig roms={roms} setRom={setRom} error={error} onGenerate={() => onGenerate({ roms, settings })}/>}/>
+      <Tab name="ROM Config" component={<RomConfig roms={roms} setRom={setRom} seed={seed} setSeed={setSeed} error={error} onGenerate={() => onGenerate({ roms, settings, seed })}/>}/>
       {SETTINGS_CATEGORIES.map(category =>
         <Tab key={category.key} name={category.name} component={<Settings category={category.key} settings={settings} setSetting={setSetting}/>}/>
       )}
