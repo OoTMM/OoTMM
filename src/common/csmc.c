@@ -291,6 +291,7 @@ static int csmcFromItemMm(s16 gi)
     case GI_MM_SPIN_UPGRADE:
     case GI_MM_BOMBER_NOTEBOOK:
     case GI_MM_DEFENSE_UPGRADE:
+    case GI_MM_BOTTLED_CHATEAU_ROMANI:
         return CSMC_MAJOR;
     case GI_MM_SMALL_KEY:
     case GI_MM_SMALL_KEY_WF:
