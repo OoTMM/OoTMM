@@ -1,7 +1,7 @@
 #include <combo.h>
 
 /* Use out extended table */
-PATCH_REL_HILO(kExtendedGetItems)
+PATCH_REL_HILO kExtendedGetItemsTable
 .int 0x8082ece4
 .int 0x8082ece8
 .int 0x8083d288

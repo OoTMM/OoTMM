@@ -25,19 +25,17 @@ PATCH_FUNC(0x80959d28, EnMk_HandlerZoraEggs);
 static void hintZoraEggs(GameState_Play* play)
 {
     s16 gi;
-    s16 itemId;
     char* b;
     char* start;
 
     gi = comboOverrideEx(OV_NPC, 0, NPC_MM_SONG_ZORA, GI_MM_SONG_ZORA, 0);
-    itemId = comboItemFromGI(gi);
     b = play->textBuffer;
     comboTextAppendHeader(&b);
     start = b;
     comboTextAppendStr(&b, "If you can bring all of the " TEXT_COLOR_BLUE "Zora Eggs ");
     comboTextAppendClearColor(&b);
     comboTextAppendStr(&b, "here, you will get ");
-    comboTextAppendItemName(&b, itemId, TF_PREPOS | TF_PROGRESSIVE);
+    comboTextAppendItemName(&b, gi, TF_PREPOS | TF_PROGRESSIVE);
     comboTextAppendStr(&b, "!" TEXT_SIGNAL TEXT_END);
     comboTextAutoLineBreaks(start);
 }

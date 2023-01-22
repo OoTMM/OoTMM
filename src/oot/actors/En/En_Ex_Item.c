@@ -19,7 +19,7 @@ s16 EnExItem_RewardByIndex(int index)
     case 0x02:
     case 0x07:
         /* Bombchu */
-        gi = GI_OOT_BOMBCHUS_10;
+        gi = GI_OOT_BOMBCHU_10;
         break;
     case 0x03:
     case 0x08:

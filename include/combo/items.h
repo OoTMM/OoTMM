@@ -27,12 +27,12 @@
 #define ITEM_OOT_POTION_BLUE            0x17
 #define ITEM_OOT_BOTTLED_FAIRY          0x18
 #define ITEM_OOT_FISH                   0x19
-#define ITEM_OOT_MILK_BOTTLE            0x1a
+#define ITEM_OOT_MILK                   0x1a
 #define ITEM_OOT_RUTO_LETTER            0x1b
 #define ITEM_OOT_BLUE_FIRE              0x1c
 #define ITEM_OOT_BUG                    0x1d
 #define ITEM_OOT_BIG_POE                0x1e
-#define ITEM_OOT_LON_LON_MILK_HALF      0x1f
+#define ITEM_OOT_MILK_HALF              0x1f
 #define ITEM_OOT_POE                    0x20
 #define ITEM_OOT_WEIRD_EGG              0x21
 #define ITEM_OOT_CHICKEN                0x22
@@ -124,7 +124,7 @@
 #define ITEM_OOT_MAGIC_JAR_SMALL        0x78
 #define ITEM_OOT_MAGIC_JAR_LARGE        0x79
 #define ITEM_OOT_HEART_PIECE            0x7a
-#define ITEM_OOT_LON_LON_MILK           0x82
+#define ITEM_OOT_BOTTLED_MILK           0x82
 #define ITEM_OOT_RECOVERY_HEART         0x83
 #define ITEM_OOT_RUPEE_GREEN            0x84
 #define ITEM_OOT_RUPEE_BLUE             0x85
@@ -149,29 +149,6 @@
 #define ITEM_OOT_STICK_UPGRADE2         0x99
 #define ITEM_OOT_NUT_UPGRADE            0x9a
 #define ITEM_OOT_NUT_UPGRADE2           0x9b
-
-/* Custom */
-#define ITEM_OOT_MAGIC_UPGRADE              0x9c
-#define ITEM_OOT_MAGIC_UPGRADE2             0x9d
-#define ITEM_OOT_DEFENSE_UPGRADE            0x9e
-#define ITEM_OOT_SWORD_BIGGORON             0x9f
-#define ITEM_OOT_PROGRESSIVE_SHIELD_DEKU    0xa0
-#define ITEM_OOT_PROGRESSIVE_SHIELD_HYLIAN  0xa1
-#define ITEM_OOT_SMALL_KEY_FOREST           0xa2
-#define ITEM_OOT_SMALL_KEY_FIRE             0xa3
-#define ITEM_OOT_SMALL_KEY_WATER            0xa4
-#define ITEM_OOT_SMALL_KEY_SPIRIT           0xa5
-#define ITEM_OOT_SMALL_KEY_SHADOW           0xa6
-#define ITEM_OOT_SMALL_KEY_GANON            0xa7
-#define ITEM_OOT_SMALL_KEY_BOTW             0xa8
-#define ITEM_OOT_SMALL_KEY_GF               0xa9
-#define ITEM_OOT_SMALL_KEY_GTG              0xaa
-#define ITEM_OOT_BOSS_KEY_FOREST            0xab
-#define ITEM_OOT_BOSS_KEY_FIRE              0xac
-#define ITEM_OOT_BOSS_KEY_WATER             0xad
-#define ITEM_OOT_BOSS_KEY_SPIRIT            0xae
-#define ITEM_OOT_BOSS_KEY_SHADOW            0xaf
-#define ITEM_OOT_BOSS_KEY_GANON             0xb0
 
 #define ITEM_MM_OCARINA_OF_TIME             0x00
 #define ITEM_MM_BOW                         0x01
@@ -299,10 +276,10 @@
 #define ITEM_MM_ARROWS_10                   0x93
 #define ITEM_MM_ARROWS_30                   0x94
 #define ITEM_MM_ARROWS_40                   0x95
-#define ITEM_MM_BOMBCHUS_20                 0x97
-#define ITEM_MM_BOMBCHUS_10                 0x98
+#define ITEM_MM_BOMBCHU_20                 0x97
+#define ITEM_MM_BOMBCHU_10                 0x98
 #define ITEM_MM_BOMBCHU_ALT                 0x99
-#define ITEM_MM_BOMBCHUS_5                  0x9a
+#define ITEM_MM_BOMBCHU_5                  0x9a
 #define ITEM_MM_STICKS_20                   0x9b
 #define ITEM_MM_STICKS_30                   0x9c
 #define ITEM_MM_NUTS_30                     0x9d
@@ -312,35 +289,8 @@
 #define ITEM_MM_GOLD_DUST                   0xa1
 #define ITEM_MM_SEAHORSE                    0xa3
 
-/* Custom */
-#define ITEM_MM_MAGIC_UPGRADE               0xa4
-#define ITEM_MM_MAGIC_UPGRADE2              0xa5
-#define ITEM_MM_DEFENSE_UPGRADE             0xa6
-#define ITEM_MM_SPIN_UPGRADE                0xa7
-#define ITEM_MM_PROGRESSIVE_SHIELD_HERO     0xa8
-#define ITEM_MM_WORLD_MAP_CLOCKTOWN         0xa9
-#define ITEM_MM_WORLD_MAP_WOODFALL          0xaa
-#define ITEM_MM_WORLD_MAP_SNOWHEAD          0xab
-#define ITEM_MM_WORLD_MAP_ROMANI_RANCH      0xac
-#define ITEM_MM_WORLD_MAP_GREAT_BAY         0xad
-#define ITEM_MM_WORLD_MAP_STONE_TOWER       0xae
-#define ITEM_MM_GS_TOKEN_SWAMP              0xaf
-#define ITEM_MM_GS_TOKEN_OCEAN              0xb0
-#define ITEM_MM_SMALL_KEY_WF                0xb1
-#define ITEM_MM_SMALL_KEY_SH                0xb2
-#define ITEM_MM_SMALL_KEY_GB                0xb3
-#define ITEM_MM_SMALL_KEY_ST                0xb4
-#define ITEM_MM_BOSS_KEY_WF                 0xb5
-#define ITEM_MM_BOSS_KEY_SH                 0xb6
-#define ITEM_MM_BOSS_KEY_GB                 0xb7
-#define ITEM_MM_BOSS_KEY_ST                 0xb8
-#define ITEM_MM_STRAY_FAIRY_WF              0xb9
-#define ITEM_MM_STRAY_FAIRY_SH              0xba
-#define ITEM_MM_STRAY_FAIRY_GB              0xbb
-#define ITEM_MM_STRAY_FAIRY_ST              0xbc
-#define ITEM_MM_STRAY_FAIRY_TOWN            0xbd
-
-#define ITEM_NONE   0xff
+#define ITEM_CUSTOM     0xf0
+#define ITEM_NONE       0xff
 
 /* Item slots */
 #define ITS_OOT_STICKS          0x00

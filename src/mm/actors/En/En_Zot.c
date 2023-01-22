@@ -25,11 +25,8 @@ PATCH_CALL(0x80b98f7c, EnZot_GiveItem);
 
 static void appendTextNpcItem(char** buf, GameState_Play* play, s16 npcId, s16 gi)
 {
-    s16 itemId;
-
     gi = comboOverrideEx(OV_NPC, 0, npcId, gi, 0);
-    itemId = comboItemFromGI(gi);
-    comboTextAppendItemName(buf, itemId, TF_PREPOS | TF_PROGRESSIVE);
+    comboTextAppendItemName(buf, gi, TF_PREPOS | TF_PROGRESSIVE);
 }
 
 void EnZot_DisplayBeaverHint(Actor* this, GameState_Play* play)
