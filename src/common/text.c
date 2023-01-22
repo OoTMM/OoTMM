@@ -499,141 +499,132 @@ static const char* const kCheckNamesMm[] = {
     "the " TEXT_COLOR_YELLOW "Secret Shrine Final Chest",
 };
 
-static int isItemAmbiguousOot(u16 itemId)
+static int isItemAmbiguousOot(s16 gi)
 {
-    switch (itemId)
+    switch (gi)
     {
-    case ITEM_OOT_STICK:
-    case ITEM_OOT_NUT:
-    case ITEM_OOT_BOMB:
-    case ITEM_OOT_BOW:
-    case ITEM_OOT_ARROW_FIRE:
-    case ITEM_OOT_OCARINA_TIME:
-    case ITEM_OOT_BOMBCHU_10:
-    case ITEM_OOT_HOOKSHOT:
-    case ITEM_OOT_ARROW_ICE:
-    case ITEM_OOT_LENS:
-    case ITEM_OOT_MAGIC_BEAN:
-    case ITEM_OOT_ARROW_LIGHT:
-    case ITEM_OOT_EMPTY_BOTTLE:
-    case ITEM_OOT_MILK_BOTTLE:
-    case ITEM_OOT_KEATON_MASK:
-    case ITEM_OOT_BUNNY_HOOD:
-    case ITEM_OOT_GORON_MASK:
-    case ITEM_OOT_ZORA_MASK:
-    case ITEM_OOT_MASK_OF_TRUTH:
-    case ITEM_OOT_KOKIRI_SWORD:
-    case ITEM_OOT_SHIELD_HYLIAN:
-    case ITEM_OOT_QUIVER:
-    case ITEM_OOT_QUIVER2:
-    case ITEM_OOT_QUIVER3:
-    case ITEM_OOT_BOMB_BAG:
-    case ITEM_OOT_BOMB_BAG2:
-    case ITEM_OOT_BOMB_BAG3:
-    case ITEM_OOT_WALLET2:
-    case ITEM_OOT_WALLET3:
-    case ITEM_OOT_SONG_EPONA:
-    case ITEM_OOT_SONG_TIME:
-    case ITEM_OOT_SONG_STORMS:
-    case ITEM_OOT_HEART_CONTAINER:
-    case ITEM_OOT_HEART_PIECE:
-    case ITEM_OOT_HEART_PIECE2:
-    case ITEM_OOT_RECOVERY_HEART:
-    case ITEM_OOT_RUPEE_GREEN:
-    case ITEM_OOT_RUPEE_BLUE:
-    case ITEM_OOT_RUPEE_RED:
-    case ITEM_OOT_RUPEE_PURPLE:
-    case ITEM_OOT_RUPEE_HUGE:
-    case ITEM_OOT_STICKS_5:
-    case ITEM_OOT_STICKS_10:
-    case ITEM_OOT_NUTS_5:
-    case ITEM_OOT_NUTS_10:
-    case ITEM_OOT_BOMBS_5:
-    case ITEM_OOT_BOMBS_10:
-    case ITEM_OOT_BOMBS_20:
-    case ITEM_OOT_BOMBS_30:
-    case ITEM_OOT_ARROWS_5:
-    case ITEM_OOT_ARROWS_10:
-    case ITEM_OOT_ARROWS_30:
-    case ITEM_OOT_BOMBCHU_5:
-    case ITEM_OOT_BOMBCHU_20:
-    case ITEM_OOT_MAGIC_UPGRADE:
-    case ITEM_OOT_MAGIC_UPGRADE2:
-    case ITEM_OOT_DEFENSE_UPGRADE:
+    case GI_OOT_STICK:
+    case GI_OOT_BOMB:
+    case GI_OOT_BOW:
+    case GI_OOT_ARROW_FIRE:
+    case GI_OOT_OCARINA_TIME:
+    case GI_OOT_BOMBCHU_10:
+    case GI_OOT_HOOKSHOT:
+    case GI_OOT_ARROW_ICE:
+    case GI_OOT_LENS:
+    case GI_OOT_MAGIC_BEAN:
+    case GI_OOT_ARROW_LIGHT:
+    case GI_OOT_EMPTY_BOTTLE:
+    case GI_OOT_MILK_BOTTLE:
+    case GI_OOT_MASK_KEATON:
+    case GI_OOT_MASK_BUNNY:
+    case GI_OOT_MASK_GORON:
+    case GI_OOT_MASK_ZORA:
+    case GI_OOT_MASK_TRUTH:
+    case GI_OOT_SWORD_KOKIRI:
+    case GI_OOT_SHIELD_HYLIAN:
+    case GI_OOT_QUIVER2:
+    case GI_OOT_QUIVER3:
+    case GI_OOT_BOMB_BAG:
+    case GI_OOT_BOMB_BAG2:
+    case GI_OOT_BOMB_BAG3:
+    case GI_OOT_WALLET2:
+    case GI_OOT_WALLET3:
+    case GI_OOT_SONG_EPONA:
+    case GI_OOT_SONG_TIME:
+    case GI_OOT_SONG_STORMS:
+    case GI_OOT_HEART_CONTAINER:
+    case GI_OOT_HEART_CONTAINER2:
+    case GI_OOT_HEART_PIECE:
+    case GI_OOT_RECOVERY_HEART:
+    case GI_OOT_RUPEE_GREEN:
+    case GI_OOT_RUPEE_BLUE:
+    case GI_OOT_RUPEE_RED:
+    case GI_OOT_RUPEE_PURPLE:
+    case GI_OOT_RUPEE_HUGE:
+    case GI_OOT_STICKS_5:
+    case GI_OOT_STICKS_10:
+    case GI_OOT_NUTS_5:
+    case GI_OOT_NUTS_5_ALT:
+    case GI_OOT_NUTS_10:
+    case GI_OOT_BOMBS_5:
+    case GI_OOT_BOMBS_10:
+    case GI_OOT_BOMBS_20:
+    case GI_OOT_BOMBS_30:
+    case GI_OOT_ARROWS_5:
+    case GI_OOT_ARROWS_10:
+    case GI_OOT_ARROWS_30:
+    case GI_OOT_BOMBCHU_5:
+    case GI_OOT_BOMBCHU_20:
+    case GI_OOT_MAGIC_UPGRADE:
+    case GI_OOT_MAGIC_UPGRADE2:
+    case GI_OOT_DEFENSE_UPGRADE:
         return 1;
     default:
         return 0;
     }
 }
 
-static int isItemAmbiguousMm(u16 itemId)
+static int isItemAmbiguousMm(s16 gi)
 {
-    switch (itemId)
+    switch (gi)
     {
-    case ITEM_MM_OCARINA_OF_TIME:
-    case ITEM_MM_BOW:
-    case ITEM_MM_ARROW_FIRE:
-    case ITEM_MM_ARROW_ICE:
-    case ITEM_MM_ARROW_LIGHT:
-    case ITEM_MM_BOMB:
-    case ITEM_MM_BOMBCHU:
-    case ITEM_MM_STICK:
-    case ITEM_MM_NUT:
-    case ITEM_MM_MAGIC_BEAN:
-    case ITEM_MM_LENS_OF_TRUTH:
-    case ITEM_MM_HOOKSHOT:
-    case ITEM_MM_RED_POTION_WITH_BOTTLE:
-    case ITEM_MM_EMPTY_BOTTLE:
-    case ITEM_MM_MASK_GORON:
-    case ITEM_MM_MASK_ZORA:
-    case ITEM_MM_MASK_TRUTH:
-    case ITEM_MM_MASK_BUNNY:
-    case ITEM_MM_MASK_KEATON:
-    case ITEM_MM_SWORD_KOKIRI:
-    case ITEM_MM_SHIELD_HERO:
-    case ITEM_MM_QUIVER:
-    case ITEM_MM_QUIVER2:
-    case ITEM_MM_QUIVER3:
-    case ITEM_MM_BOMB_BAG:
-    case ITEM_MM_BOMB_BAG2:
-    case ITEM_MM_BOMB_BAG3:
-    case ITEM_MM_WALLET2:
-    case ITEM_MM_WALLET3:
-    case ITEM_MM_SONG_TIME:
-    case ITEM_MM_SONG_EPONA:
-    case ITEM_MM_SONG_STORMS:
-    case ITEM_MM_HEART_CONTAINER:
-    case ITEM_MM_HEART_PIECE:
-    case ITEM_MM_HEART_PIECE2:
-    case ITEM_MM_RECOVERY_HEART:
-    case ITEM_MM_RUPEE_GREEN:
-    case ITEM_MM_RUPEE_BLUE:
-    case ITEM_MM_RUPEE_RED10:
-    case ITEM_MM_RUPEE_RED:
-    case ITEM_MM_RUPEE_PURPLE:
-    case ITEM_MM_RUPEE_SILVER:
-    case ITEM_MM_RUPEE_GOLD:
-    case ITEM_MM_NUTS_5:
-    case ITEM_MM_NUTS_10:
-    case ITEM_MM_BOMBS_5:
-    case ITEM_MM_BOMBS_10:
-    case ITEM_MM_BOMBS_20:
-    case ITEM_MM_BOMBS_30:
-    case ITEM_MM_ARROWS_10:
-    case ITEM_MM_ARROWS_30:
-    case ITEM_MM_ARROWS_40:
-    case ITEM_MM_BOMBCHUS_20:
-    case ITEM_MM_BOMBCHUS_10:
-    case ITEM_MM_BOMBCHU_ALT:
-    case ITEM_MM_BOMBCHUS_5:
-    case ITEM_MM_STICKS_20:
-    case ITEM_MM_STICKS_30:
-    case ITEM_MM_NUTS_30:
-    case ITEM_MM_NUTS_40:
-    case ITEM_MM_MAGIC_UPGRADE:
-    case ITEM_MM_MAGIC_UPGRADE2:
-    case ITEM_MM_DEFENSE_UPGRADE:
-    case ITEM_MM_BOTTLED_MILK:
+    case GI_MM_OCARINA_OF_TIME:
+    case GI_MM_BOW:
+    case GI_MM_ARROW_FIRE:
+    case GI_MM_ARROW_ICE:
+    case GI_MM_ARROW_LIGHT:
+    case GI_MM_BOMB:
+    case GI_MM_BOMBCHU:
+    case GI_MM_DEKU_STICK:
+    case GI_MM_DEKU_NUT:
+    case GI_MM_MAGIC_BEAN:
+    case GI_MM_LENS:
+    case GI_MM_HOOKSHOT:
+    case GI_MM_BOTTLED_POTION_RED:
+    case GI_MM_EMPTY_BOTTLE:
+    case GI_MM_MASK_GORON:
+    case GI_MM_MASK_ZORA:
+    case GI_MM_MASK_TRUTH:
+    case GI_MM_MASK_BUNNY:
+    case GI_MM_MASK_KEATON:
+    case GI_MM_SWORD_KOKIRI:
+    case GI_MM_SHIELD_HERO:
+    case GI_MM_QUIVER2:
+    case GI_MM_QUIVER3:
+    case GI_MM_BOMB_BAG:
+    case GI_MM_BOMB_BAG2:
+    case GI_MM_BOMB_BAG3:
+    case GI_MM_WALLET2:
+    case GI_MM_WALLET3:
+    case GI_MM_SONG_TIME:
+    case GI_MM_SONG_EPONA:
+    case GI_MM_SONG_STORMS:
+    case GI_MM_HEART_CONTAINER:
+    case GI_MM_HEART_PIECE:
+    case GI_MM_RECOVERY_HEART:
+    case GI_MM_RUPEE_GREEN:
+    case GI_MM_RUPEE_BLUE:
+    case GI_MM_RUPEE_RED:
+    case GI_MM_RUPEE_PURPLE:
+    case GI_MM_RUPEE_SILVER:
+    case GI_MM_RUPEE_GOLD:
+    case GI_MM_DEKU_NUTS_5:
+    case GI_MM_DEKU_NUTS_10:
+    case GI_MM_BOMBS_5:
+    case GI_MM_BOMBS_10:
+    case GI_MM_BOMBS_20:
+    case GI_MM_BOMBS_30:
+    case GI_MM_ARROWS_10:
+    case GI_MM_ARROWS_30:
+    case GI_MM_ARROWS_40:
+    case GI_MM_BOMBCHU_20:
+    case GI_MM_BOMBCHU_10:
+    case GI_MM_BOMBCHU_5:
+    case GI_MM_MAGIC_UPGRADE:
+    case GI_MM_MAGIC_UPGRADE2:
+    case GI_MM_DEFENSE_UPGRADE:
+    case GI_MM_BOTTLED_MILK:
         return 1;
     default:
         return 0;
@@ -754,61 +745,61 @@ void comboTextAppendNum(char** b, int num)
     }
 }
 
-void comboTextAppendItemName(char** b, u16 itemId, int flags)
+void comboTextAppendItemName(char** b, s16 gi, int flags)
 {
     char* start;
     const char* itemName;
     int ambiguous;
 
 #if defined(GAME_MM)
-    itemId ^= MASK_FOREIGN_ITEM;
+    gi ^= MASK_FOREIGN_GI;
 #endif
 
-    if (itemId & MASK_FOREIGN_ITEM)
+    if (gi & MASK_FOREIGN_GI)
     {
-        itemName = kItemNamesMm[itemId & 0xff];
-        ambiguous = isItemAmbiguousMm(itemId & 0xff);
+        itemName = kItemNamesMm[gi & ~MASK_FOREIGN_GI];
+        ambiguous = isItemAmbiguousMm(gi & ~MASK_FOREIGN_GI);
     }
     else
     {
-        itemName = kItemNamesOot[itemId & 0xff];
-        ambiguous = isItemAmbiguousOot(itemId & 0xff);
+        itemName = kItemNamesOot[gi & ~MASK_FOREIGN_GI];
+        ambiguous = isItemAmbiguousOot(gi & ~MASK_FOREIGN_GI);
     }
 
     if (flags & TF_PROGRESSIVE)
     {
-        switch (itemId)
+        switch (gi)
         {
-        case ITEM_OOT_KOKIRI_SWORD:
-        case ITEM_MM_SWORD_KOKIRI | MASK_FOREIGN_ITEM:
+        case GI_OOT_SWORD_KOKIRI:
+        case GI_MM_SWORD_KOKIRI | MASK_FOREIGN_GI:
             itemName = "a " C1 "Progressive Sword";
             ambiguous = 1;
             break;
-        case ITEM_OOT_PROGRESSIVE_SHIELD_DEKU:
-        case ITEM_MM_PROGRESSIVE_SHIELD_HERO | MASK_FOREIGN_ITEM:
+        case GI_OOT_PROGRESSIVE_SHIELD_DEKU:
+        case GI_MM_PROGRESSIVE_SHIELD_HERO | MASK_FOREIGN_GI:
             itemName = "a " C1 "Progressive Shield";
             ambiguous = 1;
             break;
-        case ITEM_OOT_OCARINA_FAIRY:
+        case GI_OOT_OCARINA_FAIRY:
             itemName = "a " C1 "Progressive Ocarina";
             ambiguous = 1;
             break;
-        case ITEM_OOT_HOOKSHOT:
+        case GI_OOT_HOOKSHOT:
             itemName = "a " C1 "Progressive Hookshot";
             ambiguous = 1;
             break;
-        case ITEM_OOT_WALLET2:
-        case ITEM_MM_WALLET2 | MASK_FOREIGN_ITEM:
+        case GI_OOT_WALLET2:
+        case GI_MM_WALLET2 | MASK_FOREIGN_GI:
             itemName = "a " C1 "Progressive Wallet";
             ambiguous = 1;
             break;
-        case ITEM_MM_SONG_GORON_HALF | MASK_FOREIGN_ITEM:
+        case GI_MM_SONG_GORON_HALF | MASK_FOREIGN_GI:
             itemName = "a " C2 "Progressive Goron Lullaby";
             break;
-        case ITEM_OOT_SILVER_SCALE:
+        case GI_OOT_SCALE_SILVER:
             itemName = "a " C1 "Progressive Scale";
             break;
-        case ITEM_OOT_GORON_BRACELET:
+        case GI_OOT_GORON_BRACELET:
             itemName = "a " C1 "Progressive Strength";
             break;
         }
@@ -821,7 +812,7 @@ void comboTextAppendItemName(char** b, u16 itemId, int flags)
     if (ambiguous)
     {
         comboTextAppendStr(b, " (");
-        if (itemId & MASK_FOREIGN_ITEM)
+        if (gi & MASK_FOREIGN_GI)
         {
             comboTextAppendStr(b, TEXT_COLOR_PINK "MM");
         }
@@ -896,7 +887,7 @@ void comboTextAppendCheckName(char** b, u8 checkId)
     comboTextAppendClearColor(b);
 }
 
-void comboTextHijackItem(GameState_Play* play, u16 itemId)
+void comboTextHijackItem(GameState_Play* play, s16 gi)
 {
     char* b;
 
@@ -907,12 +898,21 @@ void comboTextHijackItem(GameState_Play* play, u16 itemId)
 #endif
     comboTextAppendHeader(&b);
     comboTextAppendStr(&b, "You got ");
-    comboTextAppendItemName(&b, itemId, 0);
+    comboTextAppendItemName(&b, gi, 0);
     comboTextAppendStr(&b, "!");
     comboTextAppendStr(&b, TEXT_END);
 }
 
-void comboTextHijackItemShop(GameState_Play* play, u16 itemId, s16 price, int confirm)
+static int isSoldOut(s16 gi)
+{
+#if defined(GAME_OOT)
+    return 0;
+#else
+    return gi == GI_MM_SOLD_OUT;
+#endif
+}
+
+void comboTextHijackItemShop(GameState_Play* play, s16 gi, s16 price, int confirm)
 {
     char* b;
 
@@ -924,13 +924,13 @@ void comboTextHijackItemShop(GameState_Play* play, u16 itemId, s16 price, int co
 
     comboTextAppendShopHeader(&b, price);
 
-    if (itemId == ITEM_NONE)
+    if (isSoldOut(gi))
     {
         comboTextAppendStr(&b, "SOLD OUT" TEXT_NOCLOSE TEXT_END);
-
+        return;
     }
 
-    comboTextAppendItemName(&b, itemId, TF_CAPITALIZE);
+    comboTextAppendItemName(&b, gi, TF_CAPITALIZE);
     comboTextAppendStr(&b, TEXT_NL TEXT_COLOR_RED);
     comboTextAppendNum(&b, price);
     comboTextAppendStr(&b, " Rupees");
@@ -977,7 +977,7 @@ void comboTextHijackDungeonRewardHints(GameState_Play* play, int hint)
 #endif
 
 #if defined(GAME_OOT)
-void comboTextHijackSkullReward(GameState_Play* play, s16 itemId, int count)
+void comboTextHijackSkullReward(GameState_Play* play, s16 gi, int count)
 {
     char* b;
 
@@ -990,7 +990,7 @@ void comboTextHijackSkullReward(GameState_Play* play, s16 itemId, int count)
     comboTextAppendStr(&b,
         " Spiders of the Curse" TEXT_CZ " and I will give you "
     );
-    comboTextAppendItemName(&b, itemId, TF_PROGRESSIVE);
+    comboTextAppendItemName(&b, gi, TF_PROGRESSIVE);
     comboTextAppendStr(&b, TEXT_CZ "." TEXT_END);
     comboTextAutoLineBreaks(play->msgCtx.textBuffer);
 }
@@ -1031,9 +1031,6 @@ void comboTextHijackOathToOrder(GameState_Play* play)
 
 void comboTextAppendNpcReward(char** b, s16 npcId, s16 gi)
 {
-    s16 itemId;
-
     gi = comboOverrideEx(OV_NPC, 0, npcId, gi, 0);
-    itemId = comboItemFromGI(gi);
-    comboTextAppendItemName(b, itemId, TF_PREPOS | TF_PROGRESSIVE);
+    comboTextAppendItemName(b, gi, TF_PREPOS | TF_PROGRESSIVE);
 }

@@ -65,7 +65,7 @@ static int EnElfgrp_GetFairyCount(GameState_Play* play, int type)
 
 PATCH_FUNC(0x80a39bd0, EnElfgrp_GetFairyCount);
 
-static void fairyHint(GameState_Play* play, s16 itemId)
+static void fairyHint(GameState_Play* play, s16 gi)
 {
     char* b;
     char* start;
@@ -76,12 +76,12 @@ static void fairyHint(GameState_Play* play, s16 itemId)
     comboTextAppendStr(&b, "Young one, please help us! If you bring the " TEXT_COLOR_PINK "15 Stray Fairies");
     comboTextAppendClearColor(&b);
     comboTextAppendStr(&b, " here, we will give you ");
-    comboTextAppendItemName(&b, itemId, TF_PREPOS | TF_PROGRESSIVE);
+    comboTextAppendItemName(&b, gi, TF_PREPOS | TF_PROGRESSIVE);
     comboTextAppendStr(&b, "!" TEXT_END);
     comboTextAutoLineBreaks(start);
 }
 
-static void fairyHintTown(GameState_Play* play, s16 itemId, s16 itemId2)
+static void fairyHintTown(GameState_Play* play, s16 gi, s16 gi2)
 {
     char* b;
     char* start;
@@ -92,9 +92,9 @@ static void fairyHintTown(GameState_Play* play, s16 itemId, s16 itemId2)
     comboTextAppendStr(&b, "Young one, please help us! If you bring the missing " TEXT_COLOR_ORANGE "Stray Fairy");
     comboTextAppendClearColor(&b);
     comboTextAppendStr(&b, " here, we will give you ");
-    comboTextAppendItemName(&b, itemId, TF_PREPOS | TF_PROGRESSIVE);
+    comboTextAppendItemName(&b, gi, TF_PREPOS | TF_PROGRESSIVE);
     comboTextAppendStr(&b, " and ");
-    comboTextAppendItemName(&b, itemId2, TF_PREPOS | TF_PROGRESSIVE);
+    comboTextAppendItemName(&b, gi2, TF_PREPOS | TF_PROGRESSIVE);
     comboTextAppendStr(&b, "!" TEXT_END);
     comboTextAutoLineBreaks(start);
 }
@@ -102,9 +102,7 @@ static void fairyHintTown(GameState_Play* play, s16 itemId, s16 itemId2)
 static void EnElfgrp_DisplayTextBox(GameState_Play* play, s16 messageId, Actor* this)
 {
     s16 gi;
-    s16 itemId;
     s16 gi2;
-    s16 itemId2;
     u8 fairyIndex;
 
     fairyIndex = EnElfgrp_GetFairyIndex(this);
@@ -114,16 +112,13 @@ static void EnElfgrp_DisplayTextBox(GameState_Play* play, s16 messageId, Actor* 
     {
         gi = comboOverrideEx(OV_NPC, 0, kGreatFairyNPCs[0], kGreatFairyRewards[0], 0);
         gi2 = comboOverrideEx(OV_NPC, 0, kGreatFairyNPCs[1], kGreatFairyRewards[1], 0);
-        itemId = comboItemFromGI(gi);
-        itemId2 = comboItemFromGI(gi2);
-        fairyHintTown(play, itemId, itemId2);
+        fairyHintTown(play, gi, gi2);
         return;
     }
 
     /* Hint */
     gi = comboOverrideEx(OV_NPC, 0, kGreatFairyNPCs[fairyIndex], kGreatFairyRewards[fairyIndex], 0);
-    itemId = comboItemFromGI(gi);
-    fairyHint(play, itemId);
+    fairyHint(play, gi);
 }
 
 PATCH_CALL(0x80a3a9f0, EnElfgrp_DisplayTextBox);

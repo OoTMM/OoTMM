@@ -168,7 +168,7 @@ Desert Colossus GS Plateau,                           gs,             NONE,     
 Skulltula House 10 Tokens,                            npc,            NONE,                 HOUSE_OF_SKULLTULA,             GS_10,                      WALLET
 Skulltula House 20 Tokens,                            npc,            NONE,                 HOUSE_OF_SKULLTULA,             GS_20,                      STONE_OF_AGONY
 Skulltula House 30 Tokens,                            npc,            NONE,                 HOUSE_OF_SKULLTULA,             GS_30,                      WALLET
-Skulltula House 40 Tokens,                            npc,            NONE,                 HOUSE_OF_SKULLTULA,             GS_40,                      BOMBCHUS_10
+Skulltula House 40 Tokens,                            npc,            NONE,                 HOUSE_OF_SKULLTULA,             GS_40,                      BOMBCHU_10
 Skulltula House 50 Tokens,                            npc,            NONE,                 HOUSE_OF_SKULLTULA,             GS_50,                      HEART_PIECE
 Great Fairy Magic Upgrade,                            npc,            NONE,                 GREAT_FAIRY_FOUNTAIN_UPGRADES,  FAIRY_MAGIC_UPGRADE,        MAGIC_UPGRADE
 Great Fairy Magic Upgrade 2,                          npc,            NONE,                 GREAT_FAIRY_FOUNTAIN_UPGRADES,  FAIRY_MAGIC_UPGRADE2,       MAGIC_UPGRADE
@@ -277,7 +277,7 @@ Water Temple GS Cage,                                 gs,             NONE,     
 Water Temple Boss HC,                                 collectible,    NONE,                 LAIR_MORPHA,                    0x1f,                       HEART_CONTAINER
 Water Temple Boss,                                    npc,            NONE,                 LAIR_MORPHA,                    BLUE_WARP_MORPHA,           MEDALLION_WATER
 Bottom of the Well Compass,                           chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x01,                       COMPASS_BOTW
-Bottom of the Well Under Debris,                      chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x02,                       BOMBCHUS_10
+Bottom of the Well Under Debris,                      chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x02,                       BOMBCHU_10
 Bottom of the Well Back West,                         chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x04,                       NUTS_10
 Bottom of the Well East,                              chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x05,                       SMALL_KEY_BOTW
 Bottom of the Well Front West,                        chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x08,                       SMALL_KEY_BOTW
@@ -325,7 +325,7 @@ Gerudo Member Card,                                   npc,            NONE,     
 Spirit Temple Child First Chest,                      chest,          NONE,                 TEMPLE_SPIRIT,                  0x08,                       RUPEE_BLUE
 Spirit Temple Child Second Chest,                     chest,          NONE,                 TEMPLE_SPIRIT,                  0x00,                       SMALL_KEY_SPIRIT
 Spirit Temple Child Climb 1,                          chest,          NONE,                 TEMPLE_SPIRIT,                  0x0c,                       RUPEE_BLUE
-Spirit Temple Child Climb 2,                          chest,          NONE,                 TEMPLE_SPIRIT,                  0x06,                       BOMBCHUS_10
+Spirit Temple Child Climb 2,                          chest,          NONE,                 TEMPLE_SPIRIT,                  0x06,                       BOMBCHU_10
 Spirit Temple Statue Base,                            chest,          NONE,                 TEMPLE_SPIRIT,                  0x03,                       MAP_SPIRIT
 Spirit Temple Statue Hands,                           chest,          NONE,                 TEMPLE_SPIRIT,                  0x02,                       SMALL_KEY_SPIRIT
 Spirit Temple Statue Upper Right,                     chest,          NONE,                 TEMPLE_SPIRIT,                  0x0f,                       RUPEE_BLUE
@@ -364,7 +364,7 @@ Gerudo Training Water,                                chest,          GTG_WATER,
 Gerudo Training Freestanding Key,                     collectible,    NONE,                 GERUDO_TRAINING_GROUND,         0x01,                       SMALL_KEY_GTG
 Gerudo Training Maze Upper Cage,                      chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x04,                       SMALL_KEY_GTG
 Gerudo Training Maze Upper Fake Ceiling,              chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x0b,                       SMALL_KEY_GTG
-Gerudo Training Maze Side Chest 1,                    chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x05,                       BOMBCHUS_5
+Gerudo Training Maze Side Chest 1,                    chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x05,                       BOMBCHU_5
 Gerudo Training Maze Side Chest 2,                    chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x08,                       ARROWS_30
 Gerudo Training Maze Chest 1,                         chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x06,                       RUPEE_PURPLE
 Gerudo Training Maze Chest 2,                         chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x0a,                       RUPEE_RED
@@ -383,6 +383,6 @@ Ganon Castle Light Chest Around 6,                    chest,          NONE,     
 Ganon Castle Light Chest Lullaby,                     chest,          NONE,                 INSIDE_GANON_CASTLE,            0x11,                       SMALL_KEY_GANON
 Ganon Castle Shadow Chest 1,                          chest,          NONE,                 INSIDE_GANON_CASTLE,            0x08,                       RUPEE_BLUE
 Ganon Castle Shadow Chest 2,                          chest,          NONE,                 INSIDE_GANON_CASTLE,            0x05,                       STRENGTH
-Ganon Castle Spirit Chest 1,                          chest,          NONE,                 INSIDE_GANON_CASTLE,            0x12,                       BOMBCHUS_20
+Ganon Castle Spirit Chest 1,                          chest,          NONE,                 INSIDE_GANON_CASTLE,            0x12,                       BOMBCHU_20
 Ganon Castle Spirit Chest 2,                          chest,          NONE,                 INSIDE_GANON_CASTLE,            0x14,                       ARROWS_10
 Ganon Castle Boss Key,                                chest,          NONE,                 GANON_TOWER,                    0x0b,                       BOSS_KEY_GANON

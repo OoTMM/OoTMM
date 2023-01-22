@@ -14,7 +14,6 @@ int EnSsh_TalkedTo(Actor* this, GameState_Play* play)
 
     s16 gi;
     s16 npc;
-    u16 itemId;
 
     if (this->variable == 0)
         return ActorTalkedTo(this);
@@ -23,8 +22,7 @@ int EnSsh_TalkedTo(Actor* this, GameState_Play* play)
         sInMessage = 0;
         npc = kNPCs[this->variable - 1];
         gi = comboOverrideEx(OV_NPC, 0, npc, GI_OOT_RUPEE_BLUE, 0);
-        itemId = comboItemFromGI(gi);
-        comboTextHijackSkullReward(play, itemId, this->variable * 10);
+        comboTextHijackSkullReward(play, gi, this->variable * 10);
         return 1;
     }
     if (ActorTalkedTo(this))

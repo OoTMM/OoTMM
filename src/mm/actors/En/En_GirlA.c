@@ -43,13 +43,13 @@ void comboShopDisplayTextBox(GameState_Play* play, Actor_EnGirlA* girlA, int pri
     {
         girlA->disabled = 1;
     }
-    comboTextHijackItemShop(play, comboItemFromGI(girlA->gi), price, 0);
+    comboTextHijackItemShop(play, girlA->gi, price, 0);
 }
 
 void comboShopDisplayTextBoxConfirm(GameState_Play* play, Actor_EnGirlA* girlA, int price)
 {
     DisplayTextBox2(play, girlA->messageId2);
-    comboTextHijackItemShop(play, comboItemFromGI(girlA->gi), price, 1);
+    comboTextHijackItemShop(play, girlA->gi, price, 1);
 }
 
 void comboAfterBuy(Actor_EnGirlA* girlA, GameState_Play* play)

@@ -18,7 +18,7 @@
 "has_fire_spirit": "has(MAGIC_UPGRADE) && ((has(BOW) && has(ARROW_FIRE)) || (has(SPELL_FIRE))) && (has_explosives || has(SMALL_KEY_SPIRIT, 2))"
 "has_lens": "has_lens_strict || trick(OOT_LENS)"
 "has_lens_strict": "has(MAGIC_UPGRADE) && has(LENS)"
-"has_bombchu": "has(BOMBCHUS_10) || has(BOMBCHUS_20) || has(BOMBCHUS_5)"
+"has_bombchu": "has(BOMBCHU_10) || has(BOMBCHU_20) || has(BOMBCHU_5)"
 "can_use_din": "has(MAGIC_UPGRADE) && has(SPELL_FIRE)"
 "can_boomerang": "is_child && has(BOOMERANG)"
 "has_ranged_weapon_child": "can_use_slingshot || can_boomerang"

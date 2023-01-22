@@ -170,7 +170,7 @@ class Solver {
     maxRequired(pools, 'OOT_SLINGSHOT', 1);
     maxRequired(pools, 'OOT_MAGIC_UPGRADE', 1);
     maxRequired(pools, 'OOT_OCARINA', 1);
-    maxRequired(pools, 'OOT_BOMBCHUS_10', 1);
+    maxRequired(pools, 'OOT_BOMBCHU_10', 1);
     maxRequired(pools, 'OOT_GS_TOKEN', 50);
 
     maxRequired(pools, 'MM_BOMB_BAG', 1);

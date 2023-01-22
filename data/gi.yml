@@ -1,10 +1,10 @@
 OOT_BOMBS_5:              0x01
 OOT_NUTS_5:               0x02
-OOT_BOMBCHUS_10:          0x03
+OOT_BOMBCHU_10:           0x03
 OOT_BOW:                  0x04
 OOT_SLINGSHOT:            0x05
 OOT_BOOMERANG:            0x06
-OOT_DEKU_STICKS:          0x07
+OOT_STICK:                0x07
 OOT_HOOKSHOT:             0x08
 OOT_LONGSHOT:             0x09
 OOT_LENS:                 0x0a
@@ -13,9 +13,9 @@ OOT_OCARINA_TIME:         0x0c
 OOT_HAMMER:               0x0d
 OOT_COJIRO:               0x0e
 OOT_EMPTY_BOTTLE:         0x0f
-OOT_RED_POTION:           0x10
-OOT_GREEN_POTION:         0x11
-OOT_BLUE_POTION:          0x12
+OOT_POTION_RED:           0x10
+OOT_POTION_GREEN:         0x11
+OOT_POTION_BLUE:          0x12
 OOT_BOTTLED_FAIRY:        0x13
 OOT_MILK_BOTTLE:          0x14
 OOT_RUTO_LETTER:          0x15
@@ -103,8 +103,8 @@ OOT_BOMBS_10:             0x66
 OOT_BOMBS_20:             0x67
 OOT_BOMBS_30:             0x68
 OOT_DEKU_SEEDS_30:        0x69
-OOT_BOMBCHUS_5:           0x6a
-OOT_BOMBCHUS_20:          0x6b
+OOT_BOMBCHU_5:            0x6a
+OOT_BOMBCHU_20:           0x6b
 OOT_FISH:                 0x6c
 OOT_BUG:                  0x6d
 OOT_BLUE_FIRE:            0x6e
@@ -185,7 +185,7 @@ MM_BOMBS_10:                  0x16
 MM_BOMBS_20:                  0x17
 MM_BOMBS_30:                  0x18
 MM_DEKU_STICK:                0x19
-MM_BOMBCHUS_10:               0x1a
+MM_BOMBCHU_10:                0x1a
 MM_BOMB_BAG:                  0x1b
 MM_BOMB_BAG2:                 0x1c
 MM_BOMB_BAG3:                 0x1d
@@ -201,8 +201,8 @@ MM_ARROW_LIGHT:               0x27
 MM_DEKU_NUT:                  0x28
 MM_DEKU_NUTS_5:               0x29
 MM_DEKU_NUTS_10:              0x2a
-MM_BOMBCHUS_20:               0x2e
-MM_SHIELD_HYLIAN:             0x32
+MM_BOMBCHU_20:                0x2e
+MM_SHIELD_HERO:               0x32
 MM_SHIELD_MIRROR:             0x33
 MM_POWDER_KEG:                0x34
 MM_MAGIC_BEAN:                0x35
@@ -210,7 +210,7 @@ MM_BOMBCHU:                   0x36
 MM_SWORD_KOKIRI:              0x37
 MM_SWORD_RAZOR:               0x38
 MM_SWORD_GILDED:              0x39
-MM_BOMBCHUS_5:                0x3a
+MM_BOMBCHU_5:                 0x3a
 MM_GREAT_FAIRY_SWORD:         0x3b
 MM_SMALL_KEY:                 0x3c
 MM_BOSS_KEY:                  0x3d
