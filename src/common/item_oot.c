@@ -776,5 +776,65 @@ void comboAddItemOot(s16 gi, int noEffect)
     case GI_OOT_BOSS_KEY_GANON:
         comboAddBossKeyOot(SCE_OOT_GANON_TOWER);
         break;
+    case GI_OOT_MAP_DT:
+        comboAddMapOot(SCE_OOT_INSIDE_DEKU_TREE);
+        break;
+    case GI_OOT_MAP_DC:
+        comboAddMapOot(SCE_OOT_DODONGO_CAVERN);
+        break;
+    case GI_OOT_MAP_JJ:
+        comboAddMapOot(SCE_OOT_INSIDE_JABU_JABU);
+        break;
+    case GI_OOT_MAP_FOREST:
+        comboAddMapOot(SCE_OOT_TEMPLE_FOREST);
+        break;
+    case GI_OOT_MAP_FIRE:
+        comboAddMapOot(SCE_OOT_TEMPLE_FIRE);
+        break;
+    case GI_OOT_MAP_WATER:
+        comboAddMapOot(SCE_OOT_TEMPLE_WATER);
+        break;
+    case GI_OOT_MAP_SPIRIT:
+        comboAddMapOot(SCE_OOT_TEMPLE_SPIRIT);
+        break;
+    case GI_OOT_MAP_SHADOW:
+        comboAddMapOot(SCE_OOT_TEMPLE_SHADOW);
+        break;
+    case GI_OOT_MAP_BOTW:
+        comboAddMapOot(SCE_OOT_BOTTOM_OF_THE_WELL);
+        break;
+    case GI_OOT_MAP_ICE:
+        comboAddMapOot(SCE_OOT_ICE_CAVERN);
+        break;
+    case GI_OOT_COMPASS_DT:
+        comboAddCompassOot(SCE_OOT_INSIDE_DEKU_TREE);
+        break;
+    case GI_OOT_COMPASS_DC:
+        comboAddCompassOot(SCE_OOT_DODONGO_CAVERN);
+        break;
+    case GI_OOT_COMPASS_JJ:
+        comboAddCompassOot(SCE_OOT_INSIDE_JABU_JABU);
+        break;
+    case GI_OOT_COMPASS_FOREST:
+        comboAddCompassOot(SCE_OOT_TEMPLE_FOREST);
+        break;
+    case GI_OOT_COMPASS_FIRE:
+        comboAddCompassOot(SCE_OOT_TEMPLE_FIRE);
+        break;
+    case GI_OOT_COMPASS_WATER:
+        comboAddCompassOot(SCE_OOT_TEMPLE_WATER);
+        break;
+    case GI_OOT_COMPASS_SPIRIT:
+        comboAddCompassOot(SCE_OOT_TEMPLE_SPIRIT);
+        break;
+    case GI_OOT_COMPASS_SHADOW:
+        comboAddCompassOot(SCE_OOT_TEMPLE_SHADOW);
+        break;
+    case GI_OOT_COMPASS_BOTW:
+        comboAddCompassOot(SCE_OOT_BOTTOM_OF_THE_WELL);
+        break;
+    case GI_OOT_COMPASS_ICE:
+        comboAddCompassOot(SCE_OOT_ICE_CAVERN);
+        break;
     }
 }

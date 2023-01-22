@@ -9,10 +9,6 @@ export const configFromSettings = (settings: Settings) => {
     config.add('GANON_NO_BOSS_KEY');
   }
 
-  if (settings.mapCompassShuffle === 'removed') {
-    config.add('STARTING_MAP_COMPASS');
-  }
-
   if (settings.smallKeyShuffle === 'anywhere') {
     config.add('SMALL_KEY_SHUFFLE');
   }
@@ -33,7 +29,7 @@ export const alterWorld = (world: World, settings: Settings, config: Set<string>
     world.checks['OOT Fire Temple Ring Jail'].item = 'OOT_RUPEE_BLUE';
   }
 
-  if (config.has('STARTING_MAP_COMPASS')) {
+  if (['starting', 'removed'].includes(settings.mapCompassShuffle)) {
     for (const loc in world.checks) {
       const check = world.checks[loc];
       const item = check.item;

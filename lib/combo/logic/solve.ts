@@ -6,7 +6,7 @@ import { Items } from './state';
 import { World } from './world';
 import { LogicSeedError } from './error';
 import { Options } from '../options';
-import { addItem, combinedItems, itemsArray, removeItem, ITEMS_REQUIRED, isDungeonReward, isGoldToken, isHouseToken, isKey, isStrayFairy, isSmallKey, isGanonBossKey, isRegularBossKey, isTownStrayFairy, isDungeonStrayFairy, isSong, isJunk } from './items';
+import { addItem, combinedItems, itemsArray, removeItem, ITEMS_REQUIRED, isDungeonReward, isGoldToken, isHouseToken, isKey, isStrayFairy, isSmallKey, isGanonBossKey, isRegularBossKey, isTownStrayFairy, isDungeonStrayFairy, isSong, isJunk, isMapCompass } from './items';
 
 export const EXTRA_ITEMS = [
   'OOT_MASK_SKULL',
@@ -315,6 +315,8 @@ class Solver {
         } else if (isRegularBossKey(item) && this.opts.settings.bossKeyShuffle === 'anywhere') {
           continue;
         } else if (isDungeonStrayFairy(item) && this.opts.settings.strayFairyShuffle === 'anywhere') {
+          continue;
+        } else if (isMapCompass(item) && this.opts.settings.mapCompassShuffle === 'anywhere') {
           continue;
         }
 

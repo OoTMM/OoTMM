@@ -188,6 +188,8 @@ void comboAddMapOot(u16 dungeonId);
 void comboAddSmallKeyMm(u16 dungeonId);
 void comboAddBossKeyMm(u16 dungeonId);
 void comboAddStrayFairyMm(u16 dungeonId);
+void comboAddMapMm(u16 dungeonId);
+void comboAddCompassMm(u16 dungeonId);
 
 int  comboAddItem(GameState_Play* play, s16 gi);
 int  comboAddItemNoEffect(s16 gi);

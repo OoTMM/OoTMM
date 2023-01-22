@@ -82,10 +82,10 @@ void comboAddItemEffect(GameState_Play* play, s16 gi)
         comboAddBossKeyMm(gSaveContext.dungeonId);
         break;
     case GI_MM_MAP:
-        gSave.inventory.dungeonItems[gSaveContext.dungeonId].map = 1;
+        comboAddMapMm(gSaveContext.dungeonId);
         break;
     case GI_MM_COMPASS:
-        gSave.inventory.dungeonItems[gSaveContext.dungeonId].compass = 1;
+        comboAddCompassMm(gSaveContext.dungeonId);
         break;
     case GI_MM_POTION_RED:
     case GI_MM_POTION_BLUE:

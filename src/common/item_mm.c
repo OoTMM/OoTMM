@@ -50,6 +50,16 @@ void comboAddStrayFairyMm(u16 dungeonId)
         gMmSave.inventory.strayFairies[dungeonId]++;
 }
 
+void comboAddMapMm(u16 dungeonId)
+{
+    gMmSave.inventory.dungeonItems[dungeonId].map = 1;
+}
+
+void comboAddCompassMm(u16 dungeonId)
+{
+    gMmSave.inventory.dungeonItems[dungeonId].compass = 1;
+}
+
 static void addHealth(u8 count)
 {
     u16 health;
@@ -649,6 +659,30 @@ void comboAddItemMm(s16 gi, int noEffect)
         break;
     case GI_MM_SPIN_UPGRADE:
         MM_SET_EVENT_WEEK(EV_MM_WEEK_SPIN_UPGRADE);
+        break;
+    case GI_MM_MAP_WF:
+        comboAddMapMm(0);
+        break;
+    case GI_MM_MAP_SH:
+        comboAddMapMm(1);
+        break;
+    case GI_MM_MAP_GB:
+        comboAddMapMm(2);
+        break;
+    case GI_MM_MAP_ST:
+        comboAddMapMm(3);
+        break;
+    case GI_MM_COMPASS_WF:
+        comboAddCompassMm(0);
+        break;
+    case GI_MM_COMPASS_SH:
+        comboAddCompassMm(1);
+        break;
+    case GI_MM_COMPASS_GB:
+        comboAddCompassMm(2);
+        break;
+    case GI_MM_COMPASS_ST:
+        comboAddCompassMm(3);
         break;
     }
 }

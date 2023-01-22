@@ -8,7 +8,7 @@ import { Options } from './options';
 import { Settings } from './settings';
 import { HintGossip, Hints } from './logic/hints';
 import { Monitor } from './monitor';
-import { isDungeonStrayFairy, isGanonBossKey, isRegularBossKey, isSmallKey, isTownStrayFairy } from './logic/items';
+import { isDungeonStrayFairy, isGanonBossKey, isMap, isCompass, isRegularBossKey, isSmallKey, isTownStrayFairy } from './logic/items';
 import { gameId } from './util';
 
 const GAME_DATA_OFFSETS = {
@@ -49,17 +49,11 @@ const gi = (settings: Settings, game: Game, item: string, generic: boolean) => {
       item = gameId(game, 'STRAY_FAIRY', '_');
     } else if (isDungeonStrayFairy(item) && settings.strayFairyShuffle !== 'anywhere') {
       item = gameId(game, 'STRAY_FAIRY', '_');
+    } else if (isMap(item) && settings.mapCompassShuffle === 'ownDungeon') {
+      item = gameId(game, 'MAP', '_');
+    } else if (isCompass(item) && settings.mapCompassShuffle === 'ownDungeon') {
+      item = gameId(game, 'COMPASS', '_');
     }
-  }
-
-  if (/^OOT_MAP/.test(item)) {
-    item = "OOT_MAP";
-  } else if (/^OOT_COMPASS/.test(item)) {
-    item = "OOT_COMPASS";
-  } else if (/^MM_MAP/.test(item)) {
-    item = "MM_MAP";
-  } else if (/^MM_COMPASS/.test(item)) {
-    item = "MM_COMPASS";
   }
 
   const subst = SUBSTITUTIONS[item];
@@ -264,11 +258,54 @@ export const randomizerData = (logic: LogicResult, options: Options): Buffer => 
   return Buffer.concat(buffers);
 };
 
+const effectiveStartingItems = (settings: Settings): {[k: string]: number} => {
+  const MAPS_AND_COMPASSES = [
+    'OOT_MAP_DT',
+    'OOT_MAP_DC',
+    'OOT_MAP_JJ',
+    'OOT_MAP_FOREST',
+    'OOT_MAP_FIRE',
+    'OOT_MAP_WATER',
+    'OOT_MAP_SPIRIT',
+    'OOT_MAP_SHADOW',
+    'OOT_MAP_BOTW',
+    'OOT_MAP_ICE',
+    'OOT_COMPASS_DT',
+    'OOT_COMPASS_DC',
+    'OOT_COMPASS_JJ',
+    'OOT_COMPASS_FOREST',
+    'OOT_COMPASS_FIRE',
+    'OOT_COMPASS_WATER',
+    'OOT_COMPASS_SPIRIT',
+    'OOT_COMPASS_SHADOW',
+    'OOT_COMPASS_BOTW',
+    'OOT_COMPASS_ICE',
+    'MM_MAP_WF',
+    'MM_MAP_SH',
+    'MM_MAP_GB',
+    'MM_MAP_ST',
+    'MM_COMPASS_WF',
+    'MM_COMPASS_SH',
+    'MM_COMPASS_GB',
+    'MM_COMPASS_ST',
+  ];
+
+  const items = {...settings.startingItems};
+  if (settings.mapCompassShuffle === 'starting') {
+    for (const item of MAPS_AND_COMPASSES) {
+      items[item] = 1;
+    }
+  }
+
+  return items;
+}
+
 const randomizerStartingItems = (settings: Settings): Buffer => {
   const buffer = Buffer.alloc(0x1000, 0xff);
   const ids: number[] = [];
-  for (const item in settings.startingItems) {
-    const count = settings.startingItems[item];
+  const items = effectiveStartingItems(settings);
+  for (const item in items) {
+    const count = items[item];
     const id = gi(settings, 'oot', item, false);
     if (gi === undefined) {
       throw new Error(`Unknown item ${item}`);

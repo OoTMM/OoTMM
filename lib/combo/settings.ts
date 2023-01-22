@@ -38,6 +38,8 @@ export const SETTINGS = [{
   type: 'enum',
   values: [
     { value: 'ownDungeon', name: 'Own Dungeon' },
+    { value: 'anywhere', name: 'Anywhere' },
+    { value: 'starting', name: 'Starting Items' },
     { value: 'removed', name: 'Removed' },
   ],
   default: 'ownDungeon'
