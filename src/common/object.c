@@ -100,7 +100,6 @@ static const ObjectPatch kObjectPatches[] = {
     { OBJ_OOT_GI_HOOKSHOT, { 0x0788, 0x09e0, 0x1278, 0x14f0 } },
     { OBJ_OOT_GI_HOVERBOOTS, { 0x1888, 0x1a20 } },
     { OBJ_OOT_GI_INSECT, { 0x0868, 0x0b58 } },
-    { OBJ_OOT_GI_JEWEL, { 0x10f8, 0x1290, 0x1fc8, 0x20f0, 0x3388 } },
     { OBJ_OOT_GI_KEY, { 0x0838 } },
     { OBJ_OOT_GI_KI_TAN_MASK, { 0x0af8 } },
     { OBJ_OOT_GI_LIQUID, { 0x1460, 0x16c0, 0x1720, 0x17b8 } },
@@ -135,6 +134,9 @@ static const ObjectPatch kObjectPatches[] = {
     { OBJ_OOT_GI_SWORD_1, { 0x0998, 0x0bc0, 0x0c48 } },
     { OBJ_OOT_GI_TICKETSTONE, { 0x0f38 } },
     { OBJ_OOT_GI_TRUTH_MASK, { 0x1408, 0x16e8 } },
+    { CUSTOM_OBJECT_ID_GI_STONE_EMERALD, { 0xba0, 0x12a8 } },
+    { CUSTOM_OBJECT_ID_GI_STONE_RUBY, { 0x670, 0x938 } },
+    { CUSTOM_OBJECT_ID_GI_STONE_SAPPHIRE, { 0x1308 } },
 #endif
 };
 
@@ -227,20 +229,23 @@ u32 comboLoadObject(void* buffer, u16 objectId)
     u32 vromStart;
     u32 vromEnd;
     const ObjectData* table;
-    int isForeignObject;
+    int isPatchable;
+    u16 patchObjectId;
 
     if (!objectId)
         return 0;
 
-    isForeignObject = 0;
+    isPatchable = 0;
+    patchObjectId = objectId & ~MASK_FOREIGN_OBJECT;
     if (objectId & 0x2000)
     {
         table = kCustomObjectsTable;
+        isPatchable = 1;
     }
     else if (objectId & 0x1000)
     {
         table = kExtraObjectsTable;
-        isForeignObject = 1;
+        isPatchable = 1;
     }
     else
     {
@@ -254,8 +259,8 @@ u32 comboLoadObject(void* buffer, u16 objectId)
     if (buffer)
     {
         LoadFile(buffer, vromStart, vromEnd - vromStart);
-        if (isForeignObject)
-            comboPatchForeignObject(buffer, objectId);
+        if (isPatchable)
+            comboPatchForeignObject(buffer, patchObjectId);
     }
     return vromEnd - vromStart;
 }
