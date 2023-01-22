@@ -1,3 +1,4 @@
+import { Settings, Trick, TRICKS } from '../settings';
 import type { Age, State } from './state';
 
 const MASKS = [
@@ -32,8 +33,25 @@ export const exprTrue = (): Expr => state => true;
 export const exprFalse = (): Expr => state => false;
 export const exprAnd = (exprs: Expr[]): Expr => state => exprs.every(expr => expr(state));
 export const exprOr = (exprs: Expr[]): Expr => state => exprs.some(expr => expr(state));
+export const exprNot = (expr: Expr): Expr => state => !expr(state);
+export const exprCond = (cond: Expr, then: Expr, otherwise: Expr): Expr => state => cond(state) ? then(state) : otherwise(state);
 export const exprAge = (age: Age): Expr => state => state.age === age;
 export const exprHas = (item: string, count: number): Expr => state => itemCount(state, item) >= count;
 export const exprEvent = (event: string): Expr => state => state.events.has(event);
 export const exprMasks = (count: number): Expr => state => itemsCount(state, MASKS) >= count;
 export const exprHealth = (count: number): Expr => state => (3 + itemCount(state, 'MM_HEART_CONTAINER') + itemCount(state, 'MM_HEART_PIECE') / 4) >= count;
+
+export const exprSetting = (settings: Settings, setting: string, value: any): Expr => {
+  const v = (settings as any)[setting];
+  if (v === undefined) {
+    throw new Error(`Setting ${setting} not found`);
+  }
+  return v === value ? exprTrue() : exprFalse();
+};
+
+export const exprTrick = (settings: Settings, trick: string): Expr => {
+  if (!TRICKS.hasOwnProperty(trick)) {
+    throw new Error(`Trick ${trick} not found`);
+  }
+  return settings.tricks[trick as Trick] ? exprTrue() : exprFalse();
+};

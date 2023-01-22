@@ -61,7 +61,7 @@ static s32 comboOverrideRaw(u16 key)
     return -1;
 }
 
-static s16 comboOverrideImpl(u16 sceneId, u16 id, s16 gi)
+static s16 comboOverrideImpl(u16 sceneId, u16 id, s16 gi, int flags)
 {
     s32 override;
     u16 absGi;
@@ -73,12 +73,22 @@ static s16 comboOverrideImpl(u16 sceneId, u16 id, s16 gi)
     absGi = gi > 0 ? gi : -gi;
     if (override >= 0)
         absGi = override;
-    absGi = comboProgressive(absGi);
+
+    if (flags & OVF_PROGRESSIVE)
+        absGi = comboProgressive(absGi);
+
+    if (flags & OVF_DOWNGRADE)
+        absGi = comboDowngrade(absGi);
 
     return gi > 0 ? absGi : -absGi;
 }
 
 s16 comboOverride(int type, u16 sceneId, u16 id, s16 gi)
+{
+    return comboOverrideEx(type, sceneId, id, gi, OVF_PROGRESSIVE | OVF_DOWNGRADE);
+}
+
+s16 comboOverrideEx(int type, u16 sceneId, u16 id, s16 gi, int flags)
 {
     switch (type)
     {
@@ -88,6 +98,9 @@ s16 comboOverride(int type, u16 sceneId, u16 id, s16 gi)
     case OV_COLLECTIBLE:
         id = (id & 0x3f) | 0x40;
         break;
+    case OV_SF:
+        id = (id & 0x3f) | 0x80;
+        break;
     case OV_NPC:
         sceneId = SCE_NPC;
         break;
@@ -95,5 +108,5 @@ s16 comboOverride(int type, u16 sceneId, u16 id, s16 gi)
         sceneId = SCE_GS;
         break;
     }
-    return comboOverrideImpl(sceneId, id, gi);
+    return comboOverrideImpl(sceneId, id, gi, flags);
 }

@@ -12,11 +12,12 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory[ITS_OOT_BOMBS] = ITEM_OOT_BOMB;
         gSave.inventory[ITS_OOT_BOW] = ITEM_OOT_BOW;
         gSave.inventory[ITS_OOT_ARROW_FIRE] = ITEM_OOT_ARROW_FIRE;
+        gSave.inventory[ITS_OOT_ARROW_LIGHT] = ITEM_OOT_ARROW_LIGHT;
         gSave.inventory[ITS_OOT_SLINGSHOT] = ITEM_OOT_SLINGSHOT;
         gSave.inventory[ITS_OOT_OCARINA] = ITEM_OOT_OCARINA_TIME;
         gSave.inventory[ITS_OOT_BOOMERANG] = ITEM_OOT_BOOMERANG;
         gSave.inventory[ITS_OOT_BOTTLE] = ITEM_OOT_RUTO_LETTER;
-        gSave.inventory[ITS_OOT_BOTTLE2] = ITEM_OOT_EMPTY_BOTTLE;
+        gSave.inventory[ITS_OOT_BOTTLE2] = ITEM_OOT_FISH;
         gSave.inventory[ITS_OOT_BOTTLE3] = ITEM_OOT_BIG_POE;
         gSave.inventory[ITS_OOT_BOTTLE4] = ITEM_OOT_BIG_POE;
         gSave.inventory[ITS_OOT_BOMBCHU] = ITEM_OOT_BOMBCHU_10;
@@ -34,6 +35,7 @@ static void debugCheat(GameState_Play* play)
         gSave.upgrades.quiver = 3;
         gSave.upgrades.dive = 2;
         gSave.upgrades.wallet = 2;
+        gSave.upgrades.strength = 3;
         gSave.ammo[ITS_OOT_STICKS] = 30;
         gSave.ammo[ITS_OOT_SLINGSHOT] = 50;
         gSave.ammo[ITS_OOT_BOMBS] = 40;
@@ -42,12 +44,27 @@ static void debugCheat(GameState_Play* play)
         gSave.quest.songSaria = 1;
         gSave.quest.songTime = 1;
         gSave.quest.songSun = 1;
+        gSave.quest.songEpona = 1;
+        gSave.quest.songStorms = 1;
+        gSave.quest.songTpLight = 1;
+        gSave.quest.songTpShadow = 1;
+        gSave.quest.songTpWater = 1;
+        gSave.quest.songTpFire = 1;
+        gSave.quest.songTpForest = 1;
+        gSave.quest.songTpSpirit = 1;
 
         gSave.quest.stoneEmerald = 0;
         gSave.quest.stoneRuby = 0;
         gSave.quest.stoneSapphire = 0;
 
         gMmExtraFlags2.majora = 1;
+
+        gSave.magicUpgrade = 1;
+        gSave.magicUpgrade2 = 1;
+        gSave.magicAmount = 0x60;
+
+        gSave.dungeonKeys[SCE_OOT_TEMPLE_FOREST] = 9;
+        gSave.dungeonKeys[SCE_OOT_INSIDE_GANON_CASTLE] = 9;
 
         //gSave.quest.medallionShadow = 1;
         //gSave.quest.medallionSpirit = 1;
@@ -76,71 +93,30 @@ static void debugCheat(GameState_Play* play)
 #endif
 }
 
-static void skipEntranceCutscene(GameState_Play* play)
-{
-    switch (gSave.entrance)
-    {
-    case 0x0185:
-        SetEventChk(0xa0);
-        break;
-    case 0x013d:
-        SetEventChk(0xa1);
-        break;
-    case 0x00db:
-        SetEventChk(0xa3);
-        break;
-    case 0x0108:
-        SetEventChk(0xa4);
-        break;
-    case 0x0138:
-        if (gSave.age == 1)
-            SetEventChk(0xa5);
-        else
-            SetEventChk(0xba);
-        break;
-    case 0x014d:
-        SetEventChk(0xa6);
-        break;
-    case 0x0053:
-        SetEventChk(0xa7);
-        break;
-    case 0x0000:
-        SetEventChk(0xa8);
-        break;
-    case 0x0102:
-        SetEventChk(0xb1);
-        break;
-    case 0x0117:
-        SetEventChk(0xb2);
-        break;
-    case 0x0129:
-        SetEventChk(0xb3);
-        break;
-    case 0x0157:
-        SetEventChk(0xb4);
-        break;
-    case 0x0028:
-        SetEventChk(0xb5);
-        break;
-    case 0x00E4:
-        SetEventChk(0xb6);
-        break;
-    case 0x0225:
-        SetEventChk(0xb7);
-        break;
-    case 0x0123:
-        SetEventChk(0xb8);
-        break;
-    case 0x0147:
-        SetEventChk(0xb9);
-        break;
-    default:
-        break;
-    }
-}
-
 static void eventFixes(GameState_Play* play)
 {
+
+    /* Skip forest temple cutscene */
+    if (gSave.entrance == 0x169)
+    {
+        u32 tmp;
+        tmp = gSave.perm[SCE_OOT_TEMPLE_FOREST].switches;
+        if ((tmp & 0xf0000000) != 0xf0000000)
+            tmp |= 0x08000000;
+        gSave.perm[SCE_OOT_TEMPLE_FOREST].switches = tmp;
+    }
+
+    /* Ruto fixes */
+    if (gSave.entrance == 0x028)
+    {
+        /* Skip the intro cutscene */
+        u16 tmp;
+        tmp = gSave.eventsMisc[20];
+        if (!(tmp & 0xff))
+            tmp |= 0x1e;
+        gSave.eventsMisc[20] = tmp;
+    }
+
     /* Skip Zelda's cutscene when having all the spiritual stones */
     if (gSave.quest.stoneEmerald && gSave.quest.stoneRuby && gSave.quest.stoneSapphire)
     {
@@ -227,7 +203,6 @@ void hookPlay_Init(GameState_Play* play)
     }
     comboObjectsReset();
     debugCheat(play);
-    skipEntranceCutscene(play);
     eventFixes(play);
 
     Play_Init(play);

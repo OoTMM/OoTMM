@@ -20,9 +20,11 @@ glob.sync(__dirname + "/../data/**/*.csv").forEach(mockCSV);
 
 import { logic } from "../lib/combo/logic";
 import { DEFAULT_SETTINGS } from "../lib/combo/settings";
+import { Monitor } from "../lib/combo/monitor";
 
 for (let i = 0; i < 3; ++i) {
   test("Can randomize a seed (" + (i + 1) + ")", () => {
-    logic({ debug: false, seed: "TEST" + i, settings: DEFAULT_SETTINGS });
+    const mon = new Monitor({});
+    logic(mon, { debug: false, seed: "TEST" + i, settings: DEFAULT_SETTINGS });
   });
 }

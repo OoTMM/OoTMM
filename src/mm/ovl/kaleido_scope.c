@@ -5,7 +5,7 @@ void KaleidoScope_AfterSetCutsorColor(GameState_Play* play)
     int press;
     int effect;
 
-    press = !!(play->gs.input[0].pressed.buttons & 0x20);
+    press = !!(play->gs.input[0].pressed.buttons & (L_TRIG | U_CBUTTONS));
     effect = 0;
 
     if (play->pauseCtx.cursorSlot[0] == ITS_MM_TRADE1 && popcount(gMmExtraTrade.trade1) > 1)

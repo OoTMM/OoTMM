@@ -16,6 +16,7 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.items[ITS_MM_BOW] = ITEM_MM_BOW;
         gSave.inventory.items[ITS_MM_LENS] = ITEM_MM_LENS_OF_TRUTH;
         gSave.inventory.items[ITS_MM_BOMBS] = ITEM_MM_BOMB;
+        gSave.inventory.items[ITS_MM_HOOKSHOT] = ITEM_MM_HOOKSHOT;
         gSave.inventory.upgrades.quiver = 3;
         gSave.inventory.upgrades.wallet = 2;
         gSave.inventory.upgrades.bombBag = 3;
@@ -24,6 +25,10 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.questItems.songTime = 1;
         gSave.inventory.questItems.songSoaring = 1;
         gSave.inventory.questItems.songEpona = 1;
+        gSave.inventory.questItems.songOrder = 1;
+        gSave.inventory.questItems.songStorms = 1;
+        gSave.inventory.questItems.songNewWave = 1;
+        gSave.inventory.questItems.songAwakening = 1;
         gSave.inventory.items[ITS_MM_BOTTLE + 0] = ITEM_MM_BOTTLED_GOLD_DUST;
         gSave.inventory.items[ITS_MM_BOTTLE + 1] = ITEM_MM_BOTTLED_SPRING_WATER_HOT;
         gSave.playerData.magic = 0x30;
@@ -34,7 +39,9 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.ammo[ITS_MM_BOMBS] = 40;
         gSave.inventory.items[ITS_MM_ARROW_FIRE] = ITEM_MM_ARROW_FIRE;
         gSave.inventory.items[ITS_MM_ARROW_LIGHT] = ITEM_MM_ARROW_LIGHT;
+        gSave.inventory.items[ITS_MM_PICTOBOX] = ITEM_MM_PICTOGRAPH_BOX;
         gSave.inventory.questItems.songLullabyIntro = 1;
+        gSave.inventory.questItems.songLullaby = 1;
 
         gSave.inventory.items[ITS_MM_KEG] = ITEM_MM_POWDER_KEG;
         gSave.inventory.items[ITS_MM_MASK_CAPTAIN] = ITEM_MM_MASK_CAPTAIN;
@@ -59,6 +66,12 @@ static void debugCheat(GameState_Play* play)
 
         //gSave.inventory.questItems.remainsOdolwa = 1;
         gMmExtraBoss |= 0x01;
+
+        //gSave.day = 3;
+        //gSave.isNight = 1;
+        //gSave.time = 0x3000;
+
+        //gSave.skullCountOcean = 0x10;
     }
 #endif
 }
@@ -83,6 +96,7 @@ void hookPlay_Init(GameState_Play* play)
     {
         /* Moon crash */
         gSave.entranceIndex = 0xd800;
+        comboReadForeignSave();
     }
 
     comboObjectsReset();

@@ -17,3 +17,8 @@ PATCH_END
 PATCH_START 0x80aab370
   nop
 PATCH_END
+
+/* Do not set link's form */
+PATCH_START 0x80aab210
+  nop
+PATCH_END

@@ -22,3 +22,26 @@ int EnJs_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
 }
 
 PATCH_CALL(0x8096a370, EnJs_GiveItem);
+
+static void EnJs_DisplayHint(GameState_Play* play, s16 messageId)
+{
+    s16 gi;
+    s16 itemId;
+    char* b;
+    char* start;
+
+    gi = comboOverrideEx(OV_NPC, 0, NPC_MM_MASK_FIERCE_DEITY, GI_MM_MASK_FIERCE_DEITY, 0);
+    itemId = comboItemFromGI(gi);
+
+    /* Hint */
+    DisplayTextBox2(play, messageId);
+    b = play->textBuffer;
+    comboTextAppendHeader(&b);
+    start = b;
+    comboTextAppendStr(&b, "You have only weak masks..." TEXT_NL "Having better masks would give you ");
+    comboTextAppendItemName(&b, itemId, TF_PREPOS | TF_PROGRESSIVE);
+    comboTextAppendStr(&b, "..." TEXT_BB "So...you'll play?" TEXT_NL TEXT_NL TEXT_COLOR_GREEN TEXT_CHOICE2 "Yes" TEXT_NL "No" TEXT_END);
+    comboTextAutoLineBreaks(start);
+}
+
+PATCH_CALL(0x8096a4c8, EnJs_DisplayHint);

@@ -15,18 +15,18 @@ void EnGirlA_PostHandler(Actor_EnGirlA* girlA, GameState_Play* play)
     switch (girlA->base.variable)
     {
     case 0x13:
-        girlA->gi = comboOverride(OV_NPC, 0, NPC_MM_MASK_ALL_NIGHT, GI_MM_MASK_ALL_NIGHT);
+        girlA->gi = comboOverrideEx(OV_NPC, 0, NPC_MM_MASK_ALL_NIGHT, GI_MM_MASK_ALL_NIGHT, OVF_PROGRESSIVE);
         soldOut = gMmExtraFlags2.maskAllNight;
         break;
     /* Bomb Shop: Bomb Bag */
     case 0x14:
     case 0x17:
-        girlA->gi = comboOverride(OV_NPC, 0, NPC_MM_SHOP_BOMB_BAG, GI_MM_BOMB_BAG);
+        girlA->gi = comboOverrideEx(OV_NPC, 0, NPC_MM_SHOP_BOMB_BAG, GI_MM_BOMB_BAG, OVF_PROGRESSIVE);
         soldOut = gMmExtraFlags2.shopBombBag;
         break;
     case 0x15:
     case 0x18:
-        girlA->gi = comboOverride(OV_NPC, 0, NPC_MM_SHOP_BOMB_BAG2, GI_MM_BOMB_BAG2);
+        girlA->gi = comboOverrideEx(OV_NPC, 0, NPC_MM_SHOP_BOMB_BAG2, GI_MM_BOMB_BAG2, OVF_PROGRESSIVE);
         soldOut = gMmExtraFlags2.shopBombBag2;
         break;
     }

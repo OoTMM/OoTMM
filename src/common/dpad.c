@@ -143,7 +143,7 @@ static void dpadUseItem(GameState_Play* play, int index)
 #endif
 
 #if defined(GAME_OOT)
-static void dpadSetItems(GameState_Play* play)
+void comboDpadUpdate(GameState_Play* play)
 {
     /* Update the items */
     sDpadItems[DPAD_DOWN] = gSave.inventory[ITS_OOT_OCARINA];
@@ -155,14 +155,14 @@ static void dpadSetItems(GameState_Play* play)
     }
     else
     {
-        sDpadItems[DPAD_LEFT] = (gSave.equipment.boots & EQ_OOT_BOOTS_HOVER) ? ITEM_OOT_HOVER_BOOTS : ITEM_NONE;
-        sDpadItems[DPAD_RIGHT] = (gSave.equipment.boots & EQ_OOT_BOOTS_IRON) ? ITEM_OOT_IRON_BOOTS : ITEM_NONE;
+        sDpadItems[DPAD_LEFT] = (gSave.equipment.boots & EQ_OOT_BOOTS_IRON) ? ITEM_OOT_IRON_BOOTS : ITEM_NONE;
+        sDpadItems[DPAD_RIGHT] = (gSave.equipment.boots & EQ_OOT_BOOTS_HOVER) ? ITEM_OOT_HOVER_BOOTS : ITEM_NONE;
     }
 }
 #endif
 
 #if defined(GAME_MM)
-static void dpadSetItems(GameState_Play* play)
+void comboDpadUpdate(GameState_Play* play)
 {
     /* Update the items */
     sDpadItems[DPAD_DOWN] = gSave.inventory.items[ITS_MM_OCARINA];
@@ -172,22 +172,33 @@ static void dpadSetItems(GameState_Play* play)
 }
 #endif
 
-void comboDpadUpdate(GameState_Play* play)
+int comboDpadUse(GameState_Play* play)
 {
     u32 buttons;
-
-    dpadSetItems(play);
     if (!canUseDpad(play))
-        return;
+        return 0;
 
     /* Detect button press */
     buttons = play->gs.input[0].pressed.buttons;
     if (buttons & U_JPAD)
+    {
         dpadUseItem(play, DPAD_UP);
-    else if (buttons & D_JPAD)
+        return 1;
+    }
+    if (buttons & D_JPAD)
+    {
         dpadUseItem(play, DPAD_DOWN);
-    else if (buttons & L_JPAD)
+        return 1;
+    }
+    if (buttons & L_JPAD)
+    {
         dpadUseItem(play, DPAD_LEFT);
-    else if (buttons & R_JPAD)
+        return 1;
+    }
+    if (buttons & R_JPAD)
+    {
         dpadUseItem(play, DPAD_RIGHT);
+        return 1;
+    }
+    return 0;
 }

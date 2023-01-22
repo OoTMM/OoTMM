@@ -2,17 +2,21 @@ Fire Temple Entrance:
   dungeon: Fire
   exits:
     "Death Mountain Crater Bottom": "true"
-    "Fire Temple Lava Room": "has(SMALL_KEY_FIRE, 1)"
-    "Fire Temple Boss": "has(BOSS_KEY_FIRE) && (event(FIRE_TEMPLE_PILLAR_HAMMER) || has_hover_boots)"
+    "Fire Temple Lava Room": "has_small_keys_fire(1)"
+    "Fire Temple Boss": "has(BOSS_KEY_FIRE) && (event(FIRE_TEMPLE_PILLAR_HAMMER) || has_hover_boots) && has_tunic_goron_strict"
+    "Fire Temple Boss Key Loop": "cond(setting(smallKeyShuffle, anywhere), has(SMALL_KEY_FIRE, 8), true) && can_hammer"
   locations:
     "Fire Temple Jail 1 Chest": "true"
+"Fire Temple Boss Key Loop":
+  dungeon: Fire
+  locations:
     "Fire Temple Boss Key Side Chest": "can_hammer"
     "Fire Temple Boss Key Chest": "can_hammer"
     "Fire Temple GS Hammer Statues": "can_hammer"
 "Fire Temple Lava Room":
   dungeon: Fire
   exits:
-    "Fire Temple After Elevator": "has(SMALL_KEY_FIRE, 3) && has(STRENGTH) && (has_ranged_weapon_adult || has_explosives)"
+    "Fire Temple After Elevator": "has_small_keys_fire(3) && has(STRENGTH) && (has_ranged_weapon_adult || has_explosives) && has_tunic_goron_strict"
   locations:
     "Fire Temple Jail 2 Chest": "true"
     "Fire Temple Jail 3 Chest": "has_explosives"
@@ -21,20 +25,20 @@ Fire Temple Entrance:
   dungeon: Fire
   exits:
     "Fire Temple Entrance": "true"
-    "Fire Temple Ring": "has(SMALL_KEY_FIRE, 6)"
-    "Fire Temple Scarecrow": "has(SMALL_KEY_FIRE, 5) && scarecrow_hookshot"
+    "Fire Temple Ring": "has_small_keys_fire(6)"
+    "Fire Temple Scarecrow": "has_small_keys_fire(5) && scarecrow_hookshot"
   locations:
     "Fire Temple Maze Chest": "true"
     "Fire Temple Jail 4 Chest": "true"
-    "Fire Temple Map": "has(SMALL_KEY_FIRE, 4) && (can_use_bow || has(SMALL_KEY_FIRE, 5))"
-    "Fire Temple Above Maze Chest": "has(SMALL_KEY_FIRE, 5)"
-    "Fire Temple Below Maze Chest": "has(SMALL_KEY_FIRE, 5) && has_explosives"
+    "Fire Temple Map": "has_small_keys_fire(4) && (can_use_bow || has_small_keys_fire(5))"
+    "Fire Temple Above Maze Chest": "has_small_keys_fire(5)"
+    "Fire Temple Below Maze Chest": "has_small_keys_fire(5) && has_explosives"
     "Fire Temple GS Maze": "has_explosives"
 "Fire Temple Ring":
   dungeon: Fire
   exits:
     "Fire Temple After Elevator": "true"
-    "Fire Temple Before Miniboss": "has(SMALL_KEY_FIRE, 7)"
+    "Fire Temple Before Miniboss": "has_small_keys_fire(7)"
     "Fire Temple Pillar Ledge": "has_hover_boots"
   locations:
     "Fire Temple Compass": "true"

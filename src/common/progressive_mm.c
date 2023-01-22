@@ -79,29 +79,6 @@ static s32 progressiveSongLullaby(void)
     }
 }
 
-static int isItemUnavailable(s32 gi)
-{
-    switch (gi)
-    {
-    case GI_MM_BOMB:
-    case GI_MM_BOMBS_5:
-    case GI_MM_BOMBS_10:
-    case GI_MM_BOMBS_20:
-    case GI_MM_BOMBS_30:
-    case GI_MM_BOMBCHU:
-    case GI_MM_BOMBCHUS_5:
-    case GI_MM_BOMBCHUS_10:
-    case GI_MM_BOMBCHUS_20:
-        return gMmSave.inventory.upgrades.bombBag == 0;
-    case GI_MM_ARROWS_10:
-    case GI_MM_ARROWS_30:
-    case GI_MM_ARROWS_40:
-        return gMmSave.inventory.upgrades.quiver == 0;
-    default:
-        return 0;
-    }
-}
-
 s32 comboProgressiveMm(s32 gi)
 {
     switch (gi)
@@ -138,9 +115,6 @@ s32 comboProgressiveMm(s32 gi)
         gi = progressiveSongLullaby();
         break;
     }
-
-    if (isItemUnavailable(gi))
-        gi = GI_MM_RUPEE_BLUE;
 
     return gi;
 }

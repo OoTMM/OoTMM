@@ -127,28 +127,6 @@ static s32 progressiveUpgradeStick(void)
     return GI_OOT_STICK_UPGRADE2;
 }
 
-static int isItemUnavailable(s32 gi)
-{
-    switch (gi)
-    {
-    case GI_OOT_BOMB:
-    case GI_OOT_BOMBS_5:
-    case GI_OOT_BOMBS_10:
-    case GI_OOT_BOMBS_20:
-    case GI_OOT_BOMBS_30:
-        return gOotSave.upgrades.bombBag == 0;
-    case GI_OOT_ARROWS_5:
-    case GI_OOT_ARROWS_10:
-    case GI_OOT_ARROWS_30:
-        return gOotSave.upgrades.quiver == 0;
-    case GI_OOT_DEKU_SEEDS_5:
-    case GI_OOT_DEKU_SEEDS_30:
-        return gOotSave.upgrades.bulletBag == 0;
-    default:
-        return 0;
-    }
-}
-
 s32 comboProgressiveOot(s32 gi)
 {
     switch (gi)
@@ -219,9 +197,6 @@ s32 comboProgressiveOot(s32 gi)
     default:
         break;
     }
-
-    if (isItemUnavailable(gi))
-        gi = GI_OOT_RUPEE_BLUE;
 
     return gi;
 }

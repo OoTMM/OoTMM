@@ -30,7 +30,7 @@
 "Ganon Castle Fire":
   dungeon: Ganon
   events:
-    GANON_TRIAL_FIRE: "has_tunic_goron && can_longshot && has(STRENGTH, 3) && has_light_arrows"
+    GANON_TRIAL_FIRE: "has_tunic_goron_strict && can_longshot && has(STRENGTH, 3) && has_light_arrows"
 "Ganon Castle Water":
   dungeon: Ganon
   events:
@@ -57,3 +57,9 @@
   dungeon: Ganon
   locations:
     "Ganon Castle Boss Key": "has_weapon"
+  exits:
+    "Ganon Castle Tower Boss": "setting(ganonBossKey, removed) || has(BOSS_KEY_GANON)"
+"Ganon Castle Tower Boss":
+  dungeon: Ganon
+  events:
+    GANON: "has_light_arrows"

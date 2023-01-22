@@ -37,6 +37,11 @@ static int DisplayTextBox_LoadFile(u8* dst, u32 vromAddr, u32 size)
     while (i < size)
     {
         c = buffer[i++];
+        if (c == 0x1e)
+        {
+            /* Disable fast text */
+            *dst++ = 0x18;
+        }
         *dst++ = c;
 
         len = comboMultibyteCharSize(c);
@@ -47,6 +52,7 @@ static int DisplayTextBox_LoadFile(u8* dst, u32 vromAddr, u32 size)
         {
         case 0x10:
         case 0x12:
+        case 0x1e:
             /* Inject extra fast text marker */
             *dst++ = 0x17;
             break;

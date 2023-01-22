@@ -23,7 +23,7 @@ export class Generator {
     private opts: Options,
     monitorCallbacks: MonitorCallbacks,
   ) {
-    this.monitor = new Monitor(monitorCallbacks);
+    this.monitor = new Monitor(monitorCallbacks, opts.debug);
   }
 
   async run(): Promise<GeneratorOutput> {
@@ -34,7 +34,7 @@ export class Generator {
     const customData = await custom(this.monitor, roms);
     const buildResult = await build(this.opts);
     const rom = await pack(this.monitor, roms, buildResult, customData, this.opts);
-    const log = await randomize(rom, this.opts);
+    const log = randomize(this.monitor, rom, this.opts);
     return { rom, log };
   }
 };

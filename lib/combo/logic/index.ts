@@ -6,6 +6,8 @@ import { LogicSeedError } from './error';
 import { Options } from '../options';
 import { hints, Hints } from './hints';
 import { alterWorld, configFromSettings } from './settings';
+import { playthrough } from './playthrough';
+import { Monitor } from '../monitor';
 
 export type LogicResult = {
   items: WorldCheck[];
@@ -14,7 +16,7 @@ export type LogicResult = {
   config: Set<string>;
 };
 
-export const logic = (opts: Options): LogicResult => {
+export const logic = (monitor: Monitor, opts: Options): LogicResult => {
   const config = configFromSettings(opts.settings);
   const world = createWorld(opts.settings);
   alterWorld(world, opts.settings, config);
@@ -38,13 +40,18 @@ export const logic = (opts: Options): LogicResult => {
   if (error) {
     throw error;
   }
-  const log = spoiler(world, placement, opts.seed);
 
+  let spheres: string[][] = [];
+  if (!opts.settings.noLogic) {
+    spheres = playthrough(opts.settings, random, world, placement);
+  }
   const items: WorldCheck[] = [];
   for (const loc in placement) {
     const check = world.checks[loc];
     items.push({ ...check, item: placement[loc] });
   }
-  const h = hints(world, placement);
+  const h = hints(monitor, random, opts.settings, world, placement, spheres);
+  const log = spoiler(world, placement, spheres, opts, h);
+
   return { items, log, hints: h, config };
 };

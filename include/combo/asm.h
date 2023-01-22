@@ -92,6 +92,14 @@
 0:
 .endm
 
+.macro PATCH_VROM addr
+.section .patch, "awx"
+.int 0x9
+.int \addr
+.int (1f - 0f)
+0:
+.endm
+
 .macro PATCH_END
 1:
 .balign 8

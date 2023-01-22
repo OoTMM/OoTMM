@@ -1,8 +1,9 @@
 "Stone Tower Temple Entrance":
   dungeon: ST
   exits:
-    "Stone Tower Top": "true"
+    "Stone Tower Front of Temple": "true"
     "Stone Tower Temple West": "true"
+    "Stone Tower Temple Water Room": "can_use_light_arrows || event(STONE_TOWER_EAST_ENTRY_BLOCK)"
   locations:
     "Stone Tower Temple Entrance Chest": "has(BOW)"
     "Stone Tower Temple Entrance Switch Chest": "event(STONE_TOWER_ENTRANCE_CHEST_SWITCH)"
@@ -14,9 +15,8 @@
 "Stone Tower Temple West Garden":
   dungeon: ST
   exits:
-    "Stone Tower Temple West": "true"
     "Stone Tower Temple Under West Garden": "true"
-    "Stone Tower Temple Center": "has(SMALL_KEY_ST, 4)"
+    "Stone Tower Temple Center": "has(SMALL_KEY_ST, 4) || (has(SMALL_KEY_ST, 3) && has(MASK_ZORA))"
   events:
     STONE_TOWER_WEST_GARDEN_LIGHT: "has_explosives"
 "Stone Tower Temple Under West Garden":
@@ -25,41 +25,44 @@
     "Stone Tower Temple West Garden": "true"
   locations:
     "Stone Tower Temple Under West Garden Ledge Chest": "has(HOOKSHOT)"
-    "Stone Tower Temple Under West Garden Lava Chest": "event(STONE_TOWER_WEST_GARDEN_LIGHT) && has_mirror_shield && has(MASK_GORON)"
-    "Stone Tower Temple Map": "event(STONE_TOWER_WEST_GARDEN_LIGHT) && has_mirror_shield && has(MASK_GORON)"
+    "Stone Tower Temple Under West Garden Lava Chest": "((event(STONE_TOWER_WEST_GARDEN_LIGHT) && has_mirror_shield) || can_use_light_arrows)"
+    "Stone Tower Temple Map": "((event(STONE_TOWER_WEST_GARDEN_LIGHT) && has_mirror_shield) || can_use_light_arrows)"
 "Stone Tower Temple Center":
   dungeon: ST
   exits:
-    "Stone Tower Temple West Garden": "has(SMALL_KEY_ST, 4)"
+    "Stone Tower Temple West Garden": "has(SMALL_KEY_ST, 4) || (has(SMALL_KEY_ST, 3) && has(MASK_GORON) && has_explosives && can_play(SONG_EMPTINESS))"
     "Stone Tower Temple Water Room": "has(MASK_ZORA)"
   locations:
-    "Stone Tower Temple Center Across Water Chest": "has(MASK_ZORA)"
-    "Stone Tower Temple Center Sun Block Chest": "has(MASK_ZORA) && can_use_light_arrows"
+    "Stone Tower Temple Center Across Water Chest": "true"
+    "Stone Tower Temple Center Sun Block Chest": "(has(MASK_ZORA) || has(MASK_DEKU) || has_explosives || (has(MAGIC_UPGRADE) && ((has_weapon && has(SPIN_UPGRADE)) || has(SWORD, 3) || has(GREAT_FAIRY_SWORD)))) && can_use_light_arrows"
 "Stone Tower Temple Water Room":
   dungeon: ST
   exits:
     "Stone Tower Temple Center": "has(MASK_ZORA)"
     "Stone Tower Temple Mirrors Room": "has(SMALL_KEY_ST, 4)"
+    "Stone Tower Temple Entrance": "event(STONE_TOWER_EAST_ENTRY_BLOCK)"
   events:
     STONE_TOWER_WATER_CHEST_SWITCH: "has(MASK_ZORA)"
+    STONE_TOWER_EAST_ENTRY_BLOCK: "has_mirror_shield || can_use_light_arrows"
   locations:
-    "Stone Tower Temple Compass": "has_mirror_shield"
+    "Stone Tower Temple Compass": "event(STONE_TOWER_EAST_ENTRY_BLOCK)"
     "Stone Tower Temple Water Sun Switch Chest": "has(MASK_ZORA) && event(STONE_TOWER_WATER_CHEST_SUN)"
 "Stone Tower Temple Mirrors Room":
   dungeon: ST
   exits:
     "Stone Tower Temple Water Room": "has(SMALL_KEY_ST, 4)"
-    "Stone Tower Temple Wind Room": "has_mirror_shield"
+    "Stone Tower Temple Wind Room": "(has(MASK_GORON) && has_mirror_shield) || can_use_light_arrows"
   locations:
-    "Stone Tower Temple Mirrors Room Center Chest": "has(MASK_GORON) && has_mirror_shield"
-    "Stone Tower Temple Mirrors Room Right Chest": "has(MASK_GORON) && has_mirror_shield"
+    "Stone Tower Temple Mirrors Room Center Chest": "(has(MASK_GORON) && has_mirror_shield) || can_use_light_arrows"
+    "Stone Tower Temple Mirrors Room Right Chest": "(has(MASK_GORON) && has_mirror_shield) || can_use_light_arrows"
 "Stone Tower Temple Wind Room":
   dungeon: ST
   exits:
-    "Stone Tower Temple Light Arrow Room": "has(MASK_DEKU)"
+    "Stone Tower Temple Light Arrow Room": "has(MASK_DEKU) || can_use_light_arrows"
+    "Stone Tower Temple Mirrors Room": "true"
   locations:
     "Stone Tower Temple Wind Room Ledge Chest": "has(MASK_DEKU)"
-    "Stone Tower Temple Wind Room Jail Chest": "has(MASK_DEKU) && has(MASK_GORON)"
+    "Stone Tower Temple Wind Room Jail Chest": "(has(MASK_DEKU) || can_use_light_arrows) && has(MASK_GORON)"
 "Stone Tower Temple Light Arrow Room":
   dungeon: ST
   exits:
@@ -71,11 +74,13 @@
   exits:
     "Stone Tower Temple Water Bridge": "true"
   locations:
-    "Stone Tower Temple Before Water Bridge Chest": "event(STONE_TOWER_BRIDGE_CHEST_SWITCH)"
+    "Stone Tower Temple Before Water Bridge Chest": "event(STONE_TOWER_BRIDGE_CHEST_SWITCH) || has_explosives"
 "Stone Tower Temple Water Bridge":
   dungeon: ST
+  exits:
+    "Stone Tower Temple Entrance": "true"
   locations:
-    "Stone Tower Temple Water Bridge Chest": "has(BOW)"
+    "Stone Tower Temple Water Bridge Chest": "true"
 "Stone Tower Temple Inverted Entrance":
   dungeon: ST
   exits:
@@ -87,66 +92,73 @@
   dungeon: ST
   exits:
     "Stone Tower Temple Inverted Entrance": "true"
-    "Stone Tower Temple Inverted Rotating Room": "has(MASK_DEKU) && has(SMALL_KEY_ST, 4)"
+    "Stone Tower Temple Inverted Wizzrobe": "has(MASK_DEKU) && can_use_light_arrows  && has(SMALL_KEY_ST, 3)"
   events:
     STONE_TOWER_WATER_CHEST_SUN: "can_use_light_arrows"
   locations:
-    "Stone Tower Temple Inverted East Lower Chest": "has(MASK_DEKU) && can_use_fire_arrows && event(STONE_TOWER_WATER_CHEST_SWITCH)"
+    "Stone Tower Temple Inverted East Lower Chest": "has(MASK_DEKU) && can_use_fire_arrows"
     "Stone Tower Temple Inverted East Middle Chest": "has(MASK_DEKU)"
     "Stone Tower Temple Inverted East Upper Chest": "has(MASK_DEKU) && can_use_elegy"
-"Stone Tower Temple Inverted Rotating Room":
+"Stone Tower Temple Inverted Wizzrobe":
   dungeon: ST
   exits:
-    "Stone Tower Temple Inverted Wizrobe": "has(MASK_GORON) && can_use_light_arrows"
-"Stone Tower Temple Inverted Wizrobe":
-  dungeon: ST
-  exits:
-    "Stone Tower Temple Inverted Under Wizrobe": "has(HOOKSHOT)"
+    "Stone Tower Temple Inverted Wizzrobe Ledge": "has(HOOKSHOT) && (can_fight || has(BOW))"
+    "Stone Tower Temple Inverted East": "can_use_light_arrows && has(SMALL_KEY_ST, 4)"
   locations:
-    "Stone Tower Temple Inverted Wizrobe Chest": "has(HOOKSHOT)"
-"Stone Tower Temple Inverted Under Wizrobe":
+    "Stone Tower Temple Inverted Wizrobe Chest": "has(HOOKSHOT) && (can_fight || has(BOW))"
+"Stone Tower Temple Inverted Wizzrobe Ledge":
   dungeon: ST
   exits:
-    "Stone Tower Temple Inverted Center": "has(MASK_DEKU)"
+    "Stone Tower Temple Inverted Wizzrobe": "true"
+    "Stone Tower Temple Inverted Death Armos Maze": "has(MASK_DEKU)"
   locations:
-    "Stone Tower Temple Inverted Under Wizrobe Chest": "has(MASK_DEKU) && can_use_elegy"
-"Stone Tower Temple Inverted Center":
-  dungeon: ST
-  exits:
-    "Stone Tower Temple Inverted Boss Key Room": "has(BOW) && has(MASK_DEKU)"
-    "Stone Tower Temple Inverted Entrance Ledge": "true"
-"Stone Tower Temple Inverted Boss Key Room":
+    "Stone Tower Temple Inverted Wizrobe Chest": "can_fight || has(BOW)"
+"Stone Tower Temple Inverted Death Armos Maze":
   dungeon: ST
   exits:
     "Stone Tower Temple Inverted Center": "true"
+    "Stone Tower Temple Inverted Wizzrobe Ledge": "has(MASK_DEKU)"
+  locations:
+    "Stone Tower Temple Inverted Under Wizrobe Chest": "can_use_elegy"
+"Stone Tower Temple Inverted Center":
+  dungeon: ST
+  exits:
+    "Stone Tower Temple Inverted Boss Key Room": "has_weapon_range && has(MASK_DEKU)"
+    "Stone Tower Temple Inverted Entrance Ledge": "true"
+    "Stone Tower Temple Inverted Death Armos Maze": "true"
+"Stone Tower Temple Inverted Boss Key Room":
+  dungeon: ST
+  exits:
+    "Stone Tower Temple Inverted Center": "has_weapon_range && has(MASK_DEKU)"
   locations:
     "Stone Tower Temple Inverted Boss Key": "can_use_light_arrows"
 "Stone Tower Temple Inverted Entrance Ledge":
   dungeon: ST
-  events:
-    STONE_TOWER_ENTRANCE_CHEST_SWITCH: "true"
   exits:
     "Stone Tower Temple Inverted Bridge": "has(SMALL_KEY_ST, 4) && has(HOOKSHOT)"
+  events:
+    STONE_TOWER_ENTRANCE_CHEST_SWITCH: "true"
 "Stone Tower Temple Inverted Bridge":
   dungeon: ST
-  locations:
-    "Stone Tower Temple Inverted Giant Mask": "has(BOW)"
   exits:
-    "Stone Tower Temple Inverted Bridge 2": "has(BOW)"
+    "Stone Tower Temple Inverted Bridge 2": "true"
+  locations:
+    "Stone Tower Temple Inverted Giant Mask": "true"
 "Stone Tower Temple Inverted Bridge 2":
   dungeon: ST
-  events:
-    STONE_TOWER_BRIDGE_CHEST_SWITCH: "true"
   exits:
     "Stone Tower Temple Boss": "has(HOOKSHOT) && has(BOSS_KEY_ST)"
+  events:
+    STONE_TOWER_BRIDGE_CHEST_SWITCH: "true"
 "Stone Tower Temple Boss":
   dungeon: ST
   exits:
-    "Stone Tower After Boss": "true"
+    "Stone Tower After Boss": "has(MAGIC_UPGRADE) && ((has(MASK_GIANT) && has(SWORD)) || has(MASK_FIERCE_DEITY))"
 "Stone Tower After Boss":
   dungeon: ST
   exits:
     "Oath to Order": "true"
+    "Ikana Canyon": "true"
   locations:
     "Stone Tower Boss HC": "true"
     "Stone Tower Boss": "true"

@@ -33,3 +33,13 @@ PATCH_END
 PATCH_START 0x80ad6408
   li t2,0
 PATCH_END
+
+/* Move instantly */
+PATCH_START 0x80ad6ac4
+  li v0,1
+PATCH_END
+
+/* Disable relocs */
+PATCH_START 0x80ad71c4
+.int 0
+PATCH_END

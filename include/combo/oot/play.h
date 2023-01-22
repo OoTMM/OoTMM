@@ -27,11 +27,27 @@ typedef struct PACKED
     char view[0x128];
     char unk_0128[0xdc88];
     char textBuffer[0x556]; /* Probably smaller */
-    char unk_e306[0xe8];
+    char unk_e306[0xe6];
+    u16  lastSongPlayed;
     u16  ocarinaMode;
     char unk_e3f0[0x28];
 }
 MessageContext;
+
+#define OCARINA_SONG_MINUET             0x0
+#define OCARINA_SONG_BOLERO             0x1
+#define OCARINA_SONG_SERENADE           0x2
+#define OCARINA_SONG_REQUIEM            0x3
+#define OCARINA_SONG_NOCTURNE           0x4
+#define OCARINA_SONG_PRELUDE            0x5
+#define OCARINA_SONG_SARIAS             0x6
+#define OCARINA_SONG_EPONAS             0x7
+#define OCARINA_SONG_LULLABY            0x8
+#define OCARINA_SONG_SUNS               0x9
+#define OCARINA_SONG_TIME               0xa
+#define OCARINA_SONG_STORMS             0xb
+#define OCARINA_SONG_SCARECROW_SPAWN    0xc
+#define OCARINA_SONG_MEMORY_GAME        0xd
 
 typedef struct PACKED
 {

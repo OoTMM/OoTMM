@@ -13,6 +13,8 @@
     "Dodongo Cavern Skull": "event(DC_BOMB_EYES)"
   locations:
     "Dodongo Cavern Map Chest": "has_bombflowers || can_hammer"
+  gossip:
+    "Dodongo Cavern Gossip": "has_bombflowers || can_hammer"
 "Dodongo Cavern Right Corridor":
   dungeon: DC
   exits:
@@ -56,7 +58,7 @@
     "Dodongo Cavern Bomb Bag Room 1": "true"
   locations:
     "Dodongo Cavern GS Stairs Vines": "true"
-    "Dodongo Cavern GS Stairs Top": "can_hookshot || can_boomerang"
+    "Dodongo Cavern GS Stairs Top": "(can_hookshot || can_boomerang) && event(DC_SHORTCUT)"
 "Dodongo Cavern Compass Room":
   dungeon: DC
   exits:

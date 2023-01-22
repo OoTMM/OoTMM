@@ -7,7 +7,7 @@ export class Monitor {
   private progress = 0;
   private total = 0;
 
-  constructor(private callbacks: MonitorCallbacks) {
+  constructor(private callbacks: MonitorCallbacks, private isDebug?: boolean) {
   }
 
   setProgress(progress: number, total: number) {
@@ -23,6 +23,12 @@ export class Monitor {
       this.callbacks.onLog(message);
     } else {
       console.log(message);
+    }
+  }
+
+  debug(message: string) {
+    if (this.isDebug) {
+      this.log(message);
     }
   }
 }

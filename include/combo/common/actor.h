@@ -38,8 +38,10 @@
 #endif
 
 typedef struct GameState_Play GameState_Play;
-
 typedef struct Actor Actor;
+
+typedef void (*ActorCallback)(Actor*, GameState_Play*);
+
 typedef struct PACKED ALIGNED(0x4) Actor
 {
     u16         id;

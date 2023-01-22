@@ -14,7 +14,6 @@
 
 # include <ultra64.h>
 # include <combo/actor_ovl.h>
-# include <combo/audio.h>
 # include <combo/defs.h>
 # include <combo/equipment.h>
 # include <combo/object.h>
@@ -45,6 +44,8 @@
 #endif
 
 /* Shared with assembler */
+#include <PR/gbi.h>
+
 #include <combo/save.h>
 #include <combo/gi.h>
 #include <combo/items.h>
@@ -103,6 +104,9 @@ void comboWriteForeignSave(void);
 void comboWriteSave(void);
 void comboCopyMmSave(int dst, int src);
 
+/* Save util */
+void comboCreateSaveMM(void);
+
 /* Switch */
 void comboGameSwitch(void);
 
@@ -111,8 +115,13 @@ void comboGameSwitch(void);
 #define OV_COLLECTIBLE  1
 #define OV_NPC          2
 #define OV_GS           3
+#define OV_SF           4
+
+#define OVF_PROGRESSIVE       (1 << 0)
+#define OVF_DOWNGRADE         (1 << 1)
 
 s16 comboOverride(int type, u16 sceneId, u16 id, s16 gi);
+s16 comboOverrideEx(int type, u16 sceneId, u16 id, s16 gi, int flags);
 
 /* Text */
 int  comboMultibyteCharSize(u8 c);
@@ -132,6 +141,7 @@ void comboTextHijackOathToOrder(GameState_Play* play);
 s32 comboProgressive(s32 gi);
 s32 comboProgressiveOot(s32 gi);
 s32 comboProgressiveMm(s32 gi);
+s16 comboDowngrade(s16 gi);
 
 /* Objects */
 void    comboObjectsReset(void);
@@ -171,9 +181,22 @@ extern const u8 kMmTrade1[];
 extern const u8 kMmTrade2[];
 extern const u8 kMmTrade3[];
 
-int  comboAddItemGI(GameState_Play* play, s16 gi);
-void comboAddItemMm(GameState_Play* play, u16 itemId);
-void comboAddItemOot(GameState_Play* play, u16 itemId);
+void comboAddItemMm(u16 itemId, int noEffect);
+void comboAddItemOot(u16 itemId, int noEffect);
+void comboAddItemEffect(GameState_Play* play, u16 itemId);
+void comboAddSmallKeyOot(u16 dungeonId);
+void comboAddBossKeyOot(u16 dungeonId);
+void comboAddCompassOot(u16 dungeonId);
+void comboAddMapOot(u16 dungeonId);
+void comboAddSmallKeyMm(u16 dungeonId);
+void comboAddBossKeyMm(u16 dungeonId);
+void comboAddStrayFairyMm(u16 dungeonId);
+
+int  comboAddItem(GameState_Play* play, s16 gi);
+int  comboAddItemNoEffect(s16 gi);
+
+int comboIsItemUnavailable(s16 gi);
+int comboIsItemMinor(s16 gi);
 
 void comboToggleTrade(u8* slot, u32 flags, const u8* table, u32 tableSize);
 
@@ -220,6 +243,7 @@ extern void* gCustomKeep;
 
 void comboDpadDraw(GameState_Play* play);
 void comboDpadUpdate(GameState_Play* play);
+int  comboDpadUse(GameState_Play* play);
 
 int comboConfig(int flag);
 int comboDoorIsUnlocked(GameState_Play* play, int flag);
@@ -235,6 +259,34 @@ typedef struct
 DmaEntry;
 
 extern DmaEntry kComboDmaData[];
+
+/* Misc */
+int comboCanAccessMoon(void);
+
+/* Hints */
+#define HINT_GOSSIP         0x00
+#define HINT_GOSSIP_GROTTO  0x01
+
+#define HINT_TYPE_HERO          0x00
+#define HINT_TYPE_FOOLISH       0x01
+#define HINT_TYPE_ITEM_EXACT    0x02
+#define HINT_TYPE_ITEM_REGION   0x03
+
+void comboInitHints(void);
+void comboHintGossip(u8 key, GameState_Play* play);
+
+/* CSMC */
+void comboCsmcInit(Actor* this, GameState_Play* play, s16 gi);
+void comboCsmcPreDraw(Actor* this, GameState_Play* play, s16 gi);
+int  comboCsmcChestSize(s16 gi);
+
+/* Shop */
+#define SC_OK               0x00
+#define SC_OK_NOCUTSCENE    0x01
+#define SC_ERR_CANNOTBUY    0x02
+#define SC_ERR_NORUPEES     0x04
+
+int comboShopPrecond(GameState_Play* play, Actor_EnGirlA* girlA);
 
 #else
 # include <combo/asm.h>

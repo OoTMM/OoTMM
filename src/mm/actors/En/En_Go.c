@@ -21,3 +21,30 @@ int EnGo_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
     }
     return GiveItem(this, play, gi, a, b);
 }
+
+static void powderKegHint(GameState_Play* play)
+{
+    s16 gi;
+    s16 itemId;
+    char* b;
+    char* start;
+
+    gi = comboOverrideEx(OV_NPC, 0, NPC_MM_GORON_KEG, GI_MM_POWDER_KEG, 0);
+    itemId = comboItemFromGI(gi);
+
+    b = play->textBuffer;
+    comboTextAppendHeader(&b);
+    start = b;
+    comboTextAppendStr(&b, "If you pass my test, I will give you ");
+    comboTextAppendItemName(&b, itemId, TF_PREPOS | TF_PROGRESSIVE);
+    comboTextAppendStr(&b, "!" TEXT_SIGNAL TEXT_END);
+    comboTextAutoLineBreaks(start);
+}
+
+void EnGo_AfterTextBox(Actor* this, GameState_Play* play, s16 messageId)
+{
+    if (messageId == 0x0c81)
+    {
+        powderKegHint(play);
+    }
+}

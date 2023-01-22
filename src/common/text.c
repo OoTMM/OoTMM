@@ -122,7 +122,7 @@ static const char* const kItemNamesOot[] = {
     "a " C0 "Gold Skulltula Token",
     "a " C0 "Heart Container",
     "a " C0 "Piece of Heart",
-    "the " C0 "Big Key",
+    "the " C0 "Boss Key",
     "the " C0 "Compass",
     "the " C0 "Dungeon Map",
     "a " C0 "Small Key",
@@ -168,6 +168,21 @@ static const char* const kItemNamesOot[] = {
     C1 "Biggoron's Sword",
     "the " C1 "Deku Shield",    /* Progressive */
     "the " C1 "Hylian Shield",  /* Progressive */
+    "a " C0 "Small Key (Forest)",
+    "a " C0 "Small Key (Fire)",
+    "a " C0 "Small Key (Water)",
+    "a " C0 "Small Key (Spirit)",
+    "a " C0 "Small Key (Shadow)",
+    "a " C0 "Small Key (Ganon)",
+    "a " C0 "Small Key (Well)",
+    "a " C0 "Small Key (Hideout)",
+    "a " C0 "Small Key (GTG)",
+    "the " C0 "Boss Key (Forest)",
+    "the " C0 "Boss Key (Fire)",
+    "the " C0 "Boss Key (Water)",
+    "the " C0 "Boss Key (Spirit)",
+    "the " C0 "Boss Key (Shadow)",
+    "the " C0 "Boss Key (Ganon)",
 };
 
 static const char* const kItemNamesMm[] = {
@@ -287,7 +302,7 @@ static const char* const kItemNamesMm[] = {
     "",
     "",
     "the " C2 "Lullaby Intro",
-    "the " C0 "Big Key",
+    "the " C0 "Boss Key",
     "the " C0 "Compass",
     "the " C0 "Dungeon Map",
     "a " C0 "Stray Fairy",
@@ -346,6 +361,21 @@ static const char* const kItemNamesMm[] = {
     "a " C0 "World Map (Romani Ranch)",
     "a " C0 "World Map (Great Bay)",
     "a " C0 "World Map (Stone Tower)",
+    "a " C0 "Swamp Skulltula Token",
+    "an " C0 "Ocean Skulltula Token",
+    "a " C0 "Small Key (Woodfall)",
+    "a " C0 "Small Key (Snowhead)",
+    "a " C0 "Small Key (Great Bay)",
+    "a " C0 "Small Key (Stone Tower)",
+    "the " C0 "Boss Key (Woodfall)",
+    "the " C0 "Boss Key (Snowhead)",
+    "the " C0 "Boss Key (Great Bay)",
+    "the " C0 "Boss Key (Stone Tower)",
+    "a " C0 "Stray Fairy (Woodfall)",
+    "a " C0 "Stray Fairy (Snowhead)",
+    "a " C0 "Stray Fairy (Great Bay)",
+    "a " C0 "Stray Fairy (Stone Tower)",
+    "a " C0 "Stray Fairy (Town)",
 };
 
 typedef struct
@@ -366,7 +396,7 @@ const RegionName kRegionNamesOot[] = {
     { "in",         "the " TEXT_COLOR_ORANGE "Spirit Temple" },
     { "in",         "the " TEXT_COLOR_PINK "Shadow Temple" },
     { "at",         "the " TEXT_COLOR_PINK "Bottom of the Well" },
-    { "in",         "the " TEXT_COLOR_TEAL "Ice Caverns" },
+    { "in",         "the " TEXT_COLOR_TEAL "Ice Cavern" },
     { "in",         TEXT_COLOR_YELLOW "Gerudo Training Grounds" },
     { "in",         "the " TEXT_COLOR_YELLOW "Thieve's Hideout" },
     { "inside",     TEXT_COLOR_RED "Ganon's Castle" },
@@ -435,6 +465,38 @@ const RegionName kRegionNamesMm[] = {
     { "in",         "a " TEXT_COLOR_YELLOW "Secret Shrine" },
     { "on",         "the " TEXT_COLOR_ORANGE "Stone Tower" },
     { "on",         "the " TEXT_COLOR_RED "Moon" },
+    { "in",         "the " TEXT_COLOR_GREEN "Swamp Spider House" },
+    { "in",         "the " TEXT_COLOR_BLUE "Ocean Spider House" },
+};
+
+static const char* const kCheckNamesOot[] = {
+    "the " TEXT_COLOR_BLUE "Frogs Ocarina Game",
+    TEXT_COLOR_BLUE "Fishing",
+    "a " TEXT_COLOR_PINK "Ravaged Village",
+    TEXT_COLOR_BLUE "King Zora",
+    "the " TEXT_COLOR_RED "Great Fairy outside of Ganon's Castle",
+    "the " TEXT_COLOR_RED "Fire Temple Hammer Chest",
+    "the " TEXT_COLOR_RED "Fire Temple Scarecrow Chest",
+    "the " TEXT_COLOR_YELLOW "Gerudo Training Grounds Water Room",
+    "the " TEXT_COLOR_ORANGE "Haunted Wastelands Chest",
+    "the " TEXT_COLOR_YELLOW "Gerudo Archery",
+};
+
+static const char* const kCheckNamesMm[] = {
+    "the " TEXT_COLOR_ORANGE "Ranch Defense",
+    "the " TEXT_COLOR_GREEN  "Butler Race",
+    TEXT_COLOR_PINK "Anju and Kafei",
+    TEXT_COLOR_BLUE "Don Gero's Choir",
+    "the " TEXT_COLOR_RED "Goron Race",
+    "the " TEXT_COLOR_PINK "Graveyard Big Poe",
+    "the " TEXT_COLOR_TEAL "Bank's Final Reward",
+    "the " TEXT_COLOR_TEAL "Sound Check",
+    "the " TEXT_COLOR_GREEN "Boat Archery",
+    "the " TEXT_COLOR_BLUE "Ocean Spider House Chest",
+    "the " TEXT_COLOR_BLUE "Pinnacle Rock Seahorses",
+    "the " TEXT_COLOR_BLUE "Fisherman's Game",
+    TEXT_COLOR_ORANGE "Igos du Ikana",
+    "the " TEXT_COLOR_YELLOW "Secret Shrine Final Chest",
 };
 
 static int isItemAmbiguousOot(u16 itemId)
@@ -448,6 +510,7 @@ static int isItemAmbiguousOot(u16 itemId)
     case ITEM_OOT_ARROW_FIRE:
     case ITEM_OOT_OCARINA_TIME:
     case ITEM_OOT_BOMBCHU_10:
+    case ITEM_OOT_HOOKSHOT:
     case ITEM_OOT_ARROW_ICE:
     case ITEM_OOT_LENS:
     case ITEM_OOT_MAGIC_BEAN:
@@ -518,6 +581,7 @@ static int isItemAmbiguousMm(u16 itemId)
     case ITEM_MM_NUT:
     case ITEM_MM_MAGIC_BEAN:
     case ITEM_MM_LENS_OF_TRUTH:
+    case ITEM_MM_HOOKSHOT:
     case ITEM_MM_RED_POTION_WITH_BOTTLE:
     case ITEM_MM_EMPTY_BOTTLE:
     case ITEM_MM_MASK_GORON:
@@ -595,15 +659,21 @@ void comboTextAutoLineBreaks(char* buffer)
         if (c >= ' ' && c <= '~')
         {
             lineLength++;
-            if (lineLength == kMaxLineLength)
+            if (lineLength >= kMaxLineLength && lastSpace != -1)
             {
                 lineLength = i - lastSpace;
                 buffer[lastSpace] = TEXT_NL[0];
+                lastSpace = -1;
             }
         }
         if (c == ' ')
         {
             lastSpace = i;
+        }
+        if (c == (u8)(TEXT_NL[0]) || c == (u8)(TEXT_BB[0]))
+        {
+            lastSpace = -1;
+            lineLength = 0;
         }
         i += comboMultibyteCharSize(c);
     }
@@ -684,7 +754,7 @@ void comboTextAppendNum(char** b, int num)
     }
 }
 
-void comboTextAppendItemName(char** b, u16 itemId, int capitalize)
+void comboTextAppendItemName(char** b, u16 itemId, int flags)
 {
     char* start;
     const char* itemName;
@@ -703,6 +773,45 @@ void comboTextAppendItemName(char** b, u16 itemId, int capitalize)
     {
         itemName = kItemNamesOot[itemId & 0xff];
         ambiguous = isItemAmbiguousOot(itemId & 0xff);
+    }
+
+    if (flags & TF_PROGRESSIVE)
+    {
+        switch (itemId)
+        {
+        case ITEM_OOT_KOKIRI_SWORD:
+        case ITEM_MM_SWORD_KOKIRI | MASK_FOREIGN_ITEM:
+            itemName = "a " C1 "Progressive Sword";
+            ambiguous = 1;
+            break;
+        case ITEM_OOT_PROGRESSIVE_SHIELD_DEKU:
+        case ITEM_MM_PROGRESSIVE_SHIELD_HERO | MASK_FOREIGN_ITEM:
+            itemName = "a " C1 "Progressive Shield";
+            ambiguous = 1;
+            break;
+        case ITEM_OOT_OCARINA_FAIRY:
+            itemName = "a " C1 "Progressive Ocarina";
+            ambiguous = 1;
+            break;
+        case ITEM_OOT_HOOKSHOT:
+            itemName = "a " C1 "Progressive Hookshot";
+            ambiguous = 1;
+            break;
+        case ITEM_OOT_WALLET2:
+        case ITEM_MM_WALLET2 | MASK_FOREIGN_ITEM:
+            itemName = "a " C1 "Progressive Wallet";
+            ambiguous = 1;
+            break;
+        case ITEM_MM_SONG_GORON_HALF | MASK_FOREIGN_ITEM:
+            itemName = "a " C2 "Progressive Goron Lullaby";
+            break;
+        case ITEM_OOT_SILVER_SCALE:
+            itemName = "a " C1 "Progressive Scale";
+            break;
+        case ITEM_OOT_GORON_BRACELET:
+            itemName = "a " C1 "Progressive Strength";
+            break;
+        }
     }
 
     start = *b;
@@ -724,16 +833,27 @@ void comboTextAppendItemName(char** b, u16 itemId, int capitalize)
         comboTextAppendStr(b, ")");
     }
 
-    if (capitalize)
+    if (flags & TF_CAPITALIZE)
     {
         start[0] = toupper(start[0]);
     }
 }
 
-void comboTextAppendRegionName(char** b, u8 regionId, int prepos, int capitalize)
+void comboTextAppendRegionName(char** b, u8 regionId, int flags)
 {
     char* start;
     const RegionName* regName;
+
+    if (regionId == 0)
+    {
+        if (flags & TF_PREPOS)
+        {
+            comboTextAppendStr(b, "in ");
+        }
+        comboTextAppendStr(b, "the " TEXT_COLOR_RED "Void");
+        comboTextAppendClearColor(b);
+        return;
+    }
 
     if (regionId & 0x80)
     {
@@ -745,7 +865,7 @@ void comboTextAppendRegionName(char** b, u8 regionId, int prepos, int capitalize
     }
 
     start = *b;
-    if (prepos)
+    if (flags & TF_PREPOS)
     {
         comboTextAppendStr(b, regName->prepos);
         comboTextAppendStr(b, " ");
@@ -753,10 +873,27 @@ void comboTextAppendRegionName(char** b, u8 regionId, int prepos, int capitalize
     comboTextAppendStr(b, regName->name);
     comboTextAppendClearColor(b);
 
-    if (capitalize)
+    if (flags & TF_CAPITALIZE)
     {
         start[0] = toupper(start[0]);
     }
+}
+
+void comboTextAppendCheckName(char** b, u8 checkId)
+{
+    const char* checkName;
+
+    if (checkId & 0x80)
+    {
+        checkName = kCheckNamesMm[(checkId & 0x7f) - 1];
+    }
+    else
+    {
+        checkName = kCheckNamesOot[(checkId & 0x7f) - 1];
+    }
+
+    comboTextAppendStr(b, checkName);
+    comboTextAppendClearColor(b);
 }
 
 void comboTextHijackItem(GameState_Play* play, u16 itemId)
@@ -793,7 +930,7 @@ void comboTextHijackItemShop(GameState_Play* play, u16 itemId, s16 price, int co
 
     }
 
-    comboTextAppendItemName(&b, itemId, 1);
+    comboTextAppendItemName(&b, itemId, TF_CAPITALIZE);
     comboTextAppendStr(&b, TEXT_NL TEXT_COLOR_RED);
     comboTextAppendNum(&b, price);
     comboTextAppendStr(&b, " Rupees");
@@ -822,45 +959,6 @@ void comboMessageCancel(GameState_Play* play)
     play->msgCtx.ocarinaMode = 4;
     *(((char*)GET_LINK(play)) + 0x141) = 0;
 }
-
-static const char kIcons[] = {
-    0x6c,
-    0x6d,
-    0x6e,
-    0x6b,
-    0x66,
-    0x67,
-    0x68,
-    0x69,
-    0x6a,
-};
-
-void comboTextHijackDungeonRewardHints(GameState_Play* play, int base, int count)
-{
-    char* b;
-    int index;
-
-    b = play->msgCtx.textBuffer;
-    comboTextAppendHeader(&b);
-    for (int i = 0; i < count; ++i)
-    {
-        index = base + i;
-        comboTextAppendStr(&b, TEXT_FAST TEXT_ICON);
-        *b++ = kIcons[index];
-        comboTextAppendRegionName(&b, gComboData.hints.dungeonRewards[index], 1, 1);
-        comboTextAppendStr(&b, "...");
-
-        if (i == (count - 1))
-        {
-            comboTextAppendStr(&b, TEXT_SIGNAL TEXT_END);
-        }
-        else
-        {
-            comboTextAppendStr(&b, TEXT_BB);
-        }
-
-    }
-}
 #endif
 
 #if defined(GAME_MM)
@@ -870,7 +968,7 @@ void comboTextHijackDungeonRewardHints(GameState_Play* play, int hint)
 
     b = play->textBuffer;
     appendBossRewardHeader(&b, 0x55 + hint);
-    comboTextAppendRegionName(&b, gComboData.hints.dungeonRewards[9 + hint], 1, 1);
+    comboTextAppendRegionName(&b, gComboData.hints.dungeonRewards[9 + hint], TF_PREPOS | TF_CAPITALIZE);
     comboTextAppendStr(&b, "...");
     if (hint != 3)
         comboTextAppendStr(&b, "\x19");
@@ -892,7 +990,7 @@ void comboTextHijackSkullReward(GameState_Play* play, s16 itemId, int count)
     comboTextAppendStr(&b,
         " Spiders of the Curse" TEXT_CZ " and I will give you "
     );
-    comboTextAppendItemName(&b, itemId, 0);
+    comboTextAppendItemName(&b, itemId, TF_PROGRESSIVE);
     comboTextAppendStr(&b, TEXT_CZ "." TEXT_END);
     comboTextAutoLineBreaks(play->msgCtx.textBuffer);
 }
@@ -906,7 +1004,7 @@ void comboTextHijackLightArrows(GameState_Play* play)
     comboTextAppendStr(&b,
         "Have you found the " TEXT_COLOR_YELLOW "Light Arrows " TEXT_CZ
     );
-    comboTextAppendRegionName(&b, gComboData.hints.lightArrows, 1, 0);
+    comboTextAppendRegionName(&b, gComboData.hints.lightArrows, TF_PREPOS);
     comboTextAppendStr(&b, "?" TEXT_END);
     comboTextAutoLineBreaks(play->msgCtx.textBuffer);
 }
@@ -925,8 +1023,17 @@ void comboTextHijackOathToOrder(GameState_Play* play)
         "Have you found the " TEXT_COLOR_PINK "Oath to Order "
     );
     comboTextAppendClearColor(&b);
-    comboTextAppendRegionName(&b, gComboData.hints.oathToOrder, 1, 0);
+    comboTextAppendRegionName(&b, gComboData.hints.oathToOrder, TF_PREPOS);
     comboTextAppendStr(&b, "?" TEXT_END);
     comboTextAutoLineBreaks(start);
 }
 #endif
+
+void comboTextAppendNpcReward(char** b, s16 npcId, s16 gi)
+{
+    s16 itemId;
+
+    gi = comboOverrideEx(OV_NPC, 0, npcId, gi, 0);
+    itemId = comboItemFromGI(gi);
+    comboTextAppendItemName(b, itemId, TF_PREPOS | TF_PROGRESSIVE);
+}

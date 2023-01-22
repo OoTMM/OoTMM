@@ -44,3 +44,23 @@ void EnTimeTag_HandlerSoaring(Actor* this, GameState_Play* play)
 }
 
 PATCH_FUNC(0x80aca268, EnTimeTag_HandlerSoaring);
+
+void EnTimeTag_MoonCutscene(Actor* this, GameState_Play* play)
+{
+    if (comboCanAccessMoon())
+    {
+        /* Skip to Moon */
+        gSave.day = 3;
+        gSave.time = 0x4000;
+        play->nextEntrance = ((SCE_MM_MOON - 3) << 9);
+        play->transitionType = TRANS_TYPE_NORMAL;
+        play->transitionGfx = TRANS_GFX_BLACK;
+    }
+    else
+    {
+        PlayerDisplayTextBox(play, 0x2039, NULL);
+        SET_HANDLER(this, EnTimeTag_HandlerNull);
+    }
+}
+
+PATCH_FUNC(0x80ac9fe4, EnTimeTag_MoonCutscene);

@@ -289,6 +289,18 @@ void Shader_BossRemains(GameState_Play* play, s16 shaderId)
 
 void Shader_SpiritualStones(GameState_Play* play, s16 shaderId)
 {
+    static const u32 kPrimColors[] = {
+        0xffffa0ff,
+        0xffaaffff,
+        0x32ffffff,
+    };
+
+    static const u32 kEnvColors[] = {
+        0x00ff00ff,
+        0xff0064ff,
+        0x320096ff,
+    };
+
     static const float kMatrixRot[] = {
         1.f, 0.f, 0.f, 0.f,
         0.f, 0.f, 1.f, 0.f,
@@ -296,42 +308,12 @@ void Shader_SpiritualStones(GameState_Play* play, s16 shaderId)
         0.f, 0.f, 0.f, 1.f,
     };
 
-    u8 primRed, primGreen, primBlue;
-    u8 envRed, envGreen, envBlue;
+    u8 r, g, b, a;
     const Shader* shader;
+    int colorIndex;
 
     shader = &kShaders[shaderId];
-
-    switch (shader->lists[0] & 0xffff)
-    {
-    case 0x1240:
-        /* Emerald */
-        primRed = 0xff;
-        primGreen = 0xff;
-        primBlue = 0xa0;
-        envRed = 0x00;
-        envGreen = 0xff;
-        envBlue = 0x00;
-        break;
-    case 0x20a0:
-        /* Ruby */
-        primRed = 0xff;
-        primGreen = 0xaa;
-        primBlue = 0xff;
-        envRed = 0xff;
-        envGreen = 0x00;
-        envBlue = 100;
-        break;
-    case 0x3530:
-        /* Sapphire */
-        primRed = 0x32;
-        primGreen = 0xff;
-        primBlue = 0xff;
-        envRed = 0x32;
-        envGreen = 0;
-        envBlue = 0x96;
-        break;
-    }
+    colorIndex = shader->lists[0];
 
     OPEN_DISPS(play->gs.gfx);
 
@@ -346,14 +328,16 @@ void Shader_SpiritualStones(GameState_Play* play, s16 shaderId)
     gSPSegment(POLY_OPA_DISP++, 8, dummySegment(play->gs.gfx));
 
     InitListPolyXlu(play->gs.gfx);
-    gDPSetPrimColor(POLY_XLU_DISP++, 0x00, 0x80, primRed, primGreen, primBlue, 0xFF);
-    gDPSetEnvColor(POLY_XLU_DISP++, envRed, envGreen, envBlue, 0xFF);
-    gSPDisplayList(POLY_XLU_DISP++, shader->lists[0]);
+    color4(&r, &g, &b, &a, kPrimColors[colorIndex]);
+    gDPSetPrimColor(POLY_XLU_DISP++, 0x00, 0x80, r, g, b, a);
+    color4(&r, &g, &b, &a, kEnvColors[colorIndex]);
+    gDPSetEnvColor(POLY_XLU_DISP++, r, g, b, a);
+    gSPDisplayList(POLY_XLU_DISP++, shader->lists[1]);
 
     InitListPolyOpa(play->gs.gfx);
     gDPSetPrimColor(POLY_OPA_DISP++, 0x00, 0x80, 0xff, 0xff, 0xaa, 0xff);
     gDPSetEnvColor(POLY_OPA_DISP++, 0x96, 0x78, 0x00, 0xFF);
-    gSPDisplayList(POLY_OPA_DISP++, shader->lists[1]);
+    gSPDisplayList(POLY_OPA_DISP++, shader->lists[2]);
 
     CLOSE_DISPS();
 }
@@ -456,7 +440,7 @@ CustomStrayFairyObj kStrayFairyObj =
         gsSPTexture(0xffff, 0xffff, 0, G_TX_RENDERTILE, G_ON),
         gsSPVertex(offsetof(CustomStrayFairyObj, vertices) | 0x06000000, 16, 0),
         gsDPLoadTextureBlock(
-            0x0402c030,
+            0x08000000 | CUSTOM_KEEP_SF_TEXTURE_1,
             G_IM_FMT_IA, G_IM_SIZ_8b,
             16, 32,
             0,
@@ -467,7 +451,7 @@ CustomStrayFairyObj kStrayFairyObj =
         ),
         gsSP2Triangles(4, 5, 6, 0, 4, 6, 7, 0),
         gsDPLoadTextureBlock(
-            0x0402c630,
+            0x08000000 | CUSTOM_KEEP_SF_TEXTURE_2,
             G_IM_FMT_IA, G_IM_SIZ_8b,
             16, 16,
             0,
@@ -479,7 +463,7 @@ CustomStrayFairyObj kStrayFairyObj =
         gsSP2Triangles(8, 9, 10, 0, 8, 10, 11, 0),
         gsSP2Triangles(12, 13, 14, 0, 12, 14, 15, 0),
         gsDPLoadTextureBlock(
-            0x0402bc30,
+            0x08000000 | CUSTOM_KEEP_SF_TEXTURE_3,
             G_IM_FMT_IA, G_IM_SIZ_8b,
             32, 32,
             0,
@@ -500,6 +484,7 @@ static void Shader_CustomStrayFairy(GameState_Play* play, s16 shaderId)
         0x45852bff,
         0x7f65ccff,
         0xc2c164ff,
+        0xbc702dff,
     };
 
     static u32 kPrimColors[] = {
@@ -507,30 +492,58 @@ static void Shader_CustomStrayFairy(GameState_Play* play, s16 shaderId)
         0xf0f6c2ff,
         0xe1ebfdff,
         0xfefee7ff,
+        0xf1e5d9ff,
     };
 
+    const Shader* shader;
     int index;
     u8 r;
     u8 g;
     u8 b;
     u8 a;
 
+    shader = &kShaders[shaderId];
+    index = shader->lists[0];
 #if defined(GAME_MM)
-    index = gSaveContext.dungeonId;
-#else
-    index = 0;
+    if (index == 0)
+    {
+        if (play->sceneId == SCE_MM_CLOCK_TOWN_EAST || play->sceneId == SCE_MM_LAUNDRY_POOL)
+            index = 5;
+        else
+            index = gSaveContext.dungeonId + 1;
+    }
 #endif
+
+    OPEN_DISPS(play->gs.gfx);
+    gSPSegment(POLY_XLU_DISP++, 0x08, gCustomKeep);
     comboSetObjectSegment(play->gs.gfx, &kStrayFairyObj);
     ModelViewUnkTransform((float*)((char*)play + kMatTransformOffset));
-    OPEN_DISPS(play->gs.gfx);
     gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     InitListPolyXlu(play->gs.gfx);
-    color4(&r, &g, &b, &a, kEnvColors[index]);
+    color4(&r, &g, &b, &a, kEnvColors[index - 1]);
     gDPSetEnvColor(POLY_XLU_DISP++, r, g, b, a);
-    color4(&r, &g, &b, &a, kPrimColors[index]);
+    color4(&r, &g, &b, &a, kPrimColors[index - 1]);
     gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, r, g, b, a);
     gSPDisplayList(POLY_XLU_DISP++, offsetof(CustomStrayFairyObj, dlist) | 0x06000000);
     CLOSE_DISPS();
+}
+
+void Shader_CustomGS(GameState_Play* play, s16 index)
+{
+    const Shader* shader;
+    u8 r;
+    u8 g;
+    u8 b;
+    u8 a;
+
+    shader = &kShaders[index];
+    OPEN_DISPS(play->gs.gfx);
+    color4(&r, &g, &b, &a, shader->lists[2]);
+    gDPSetEnvColor(POLY_XLU_DISP++, r, g, b, a);
+    color4(&r, &g, &b, &a, shader->lists[3]);
+    gDPSetPrimColor(POLY_XLU_DISP++, 0, 0x80, r, g, b, a);
+    CLOSE_DISPS();
+    Shader_GS(play, index);
 }
 
 const Shader kShaders[] = {

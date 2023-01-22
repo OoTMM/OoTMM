@@ -1,0 +1,13 @@
+#include <combo.h>
+
+PATCH_START 0x80a25e9c
+  lui at,0x4128
+PATCH_END
+
+PATCH_START 0x80a2707c
+.float 8.4
+PATCH_END
+
+PATCH_START 0x80a27080
+.float 3.6
+PATCH_END

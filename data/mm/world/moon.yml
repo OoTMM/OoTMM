@@ -1,44 +1,109 @@
 "Moon":
   region: MOON
   exits:
-    "Moon Trial Deku":  "masks(1)"
-    "Moon Trial Goron": "masks(2)"
+    "Moon Trial Deku Entrance":  "masks(1)"
+    "Moon Trial Goron Entrance": "masks(2)"
     "Moon Trial Zora":  "masks(3)"
-    "Moon Trial Link":  "masks(4)"
+    "Moon Trial Link Entrance":  "masks(4)"
+    "Moon Boss": "true"
   locations:
     "Moon Fierce Deity Mask": "masks(20) && event(MOON_TRIAL_DEKU) && event(MOON_TRIAL_GORON) && event(MOON_TRIAL_ZORA) && event(MOON_TRIAL_LINK)"
-"Moon Trial Deku":
+"Moon Trial Deku Entrance":
   region: MOON
-  events:
-    MOON_TRIAL_DEKU: "has(MASK_DEKU)"
+  exits:
+    "Moon": "true"
+    "Moon Trial Deku Exit": "has(MASK_DEKU)"
   locations:
     "Moon Trial Deku HP": "has(MASK_DEKU)"
-"Moon Trial Goron":
+#  gossips:
+#    "Moon Trial Deku Gossip 1 (Front-Left)": "has(MASK_DEKU)"
+#    "Moon Trial Deku Gossip 2 (Front-Right)": "has(MASK_DEKU)"
+#    "Moon Trial Deku Gossip 3 (Mid-Left)": "has(MASK_DEKU)"
+#    "Moon Trial Deku Gossip 4 (mid-Right)": "has(MASK_DEKU)"
+#    "Moon Trial Deku Gossip 5 (Back)": "has(MASK_DEKU)"
+"Moon Trial Deku Exit":
   region: MOON
+  exits:
+    "Moon": "true"
+    "Moon Trial Deku Entrance": "has(MASK_DEKU)"
   events:
-    MOON_TRIAL_GORON: "has(MASK_GORON) && has(MAGIC_UPGRADE)"
+    MOON_TRIAL_DEKU: "true"
+"Moon Trial Goron Entrance":
+  region: MOON
+  exits:
+    "Moon": "true"
+    "Moon Trial Goron Exit": "goron_fast_roll"
   locations:
-    "Moon Trial Goron HP": "has(MASK_GORON) && has(MAGIC_UPGRADE)"
+    "Moon Trial Goron HP": "goron_fast_roll"
+#  gossips (these ones are as if you came from and are facing away from the exit):
+#    "Moon Trial Goron Gossip 1 (Center Left)": "goron_fast_roll"
+#    "Moon Trial Goron Gossip 2 (Center Right)": "goron_fast_roll"
+#    "Moon Trial Goron Gossip 3 (West Left)": "goron_fast_roll"
+#    "Moon Trial Goron Gossip 4" (West Right): "goron_fast_roll"
+#    "Moon Trial Goron Gossip 5 (By Heart Piece)": "goron_fast_roll"
+"Moon Trial Goron Exit":
+  region: MOON
+  exits:
+    "Moon": "true"
+    "Moon Trial Goron Entrance": "goron_fast_roll"
+  events:
+    MOON_TRIAL_GORON: "true"
 "Moon Trial Zora":
   region: MOON
+  exits:
+    "Moon": "true"
   events:
     MOON_TRIAL_ZORA: "has(MASK_ZORA)"
   locations:
     "Moon Trial Zora HP": "has(MASK_ZORA)"
-"Moon Trial Link":
+#  gossips:
+#    "Moon Trial Zora Gossip 1 (Outer Left)": "has(MASK_ZORA)"
+#    "Moon Trial Zora Gossip 2 (Middle Left)": "has(MASK_ZORA)"
+#    "Moon Trial Zora Gossip 3 (Inner Right)": "has(MASK_ZORA)"
+#    "Moon Trial Zora Gossip 4" (Middle Right): "has(MASK_ZORA)"
+#    "Moon Trial Zora Gossip 5 (Outer Right)": "has(MASK_ZORA)"
+"Moon Trial Link Entrance":
   region: MOON
   exits:
-    "Moon Trial Link 2": "has(HOOKSHOT)"
-"Moon Trial Link 2":
+    "Moon": "true"
+    "Moon Trial Link Rest 1": "can_fight || has(BOW)"
+"Moon Trial Link Rest 1":
   region: MOON
   exits:
-    "Moon Trial Link 3": "has_bombchu && has(BOW)"
+    "Moon Trial Link Entrance": "can_fight || can_use_deku_bubble || has(BOW)"
+    "Moon Trial Link Rest 2": "has(HOOKSHOT) && (can_fight || has(BOW))"
+#  gossips:
+#    "Moon Trial Link Gossip 1": "true"
+"Moon Trial Link Rest 2":
+  region: MOON
+  exits:
+    "Moon Trial Link Rest 1": "can_fight || has(BOW)"
+    "Moon Trial Link Rest 3": "has_bombchu && has(BOW)"
   locations:
     "Moon Trial Link Chest 1": "true"
-    "Moon Trial Link Chest 2": "true"
-"Moon Trial Link 3":
+    "Moon Trial Link Chest 2": "can_fight || has(BOMB_BAG)"
+#  gossips:
+#    "Moon Trial Link Gossip 2": "true"
+"Moon Trial Link Rest 3":
   region: MOON
-  events:
-    MOON_TRIAL_LINK: "has_bombchu && can_use_fire_arrows"
+  exits:
+    "Moon Trial Link Rest 2": "can_fight || has(BOMB_BAG)"
+    "Moon Trial Link Exit": "has_bombchu && can_use_fire_arrows"
   locations:
     "Moon Trial Link HP": "true"
+#  gossips:
+#    "Moon Trial Link Gossip 3 (Left) ": "true"
+#    "Moon Trial Link Gossip 4 (Right) ": "true"
+#    "Moon Trial Link Gossip 5": "true"
+"Moon Trial Link Exit":
+  region: MOON
+  exits:
+    "Moon Trial Link Rest 3": "true"
+    "Moon": "true"
+  events:
+    MOON_TRIAL_LINK: "true"
+"Moon Boss":
+  region: MOON
+  events:
+    MAJORA_PHASE_1: "has(BOW) || has(MASK_ZORA) || (has(MASK_FIERCE_DEITY) && has(MAGIC_UPGRADE))"
+    MAJORA: "event(MAJORA_PHASE_1) && (has_weapon || has(MASK_ZORA) || has(MASK_FIERCE_DEITY))"

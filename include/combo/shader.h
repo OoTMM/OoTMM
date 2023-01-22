@@ -106,7 +106,7 @@ extern const Shader kShaders[256];
 #define DRAWGI_ARROW_FIRE                   0x55
 #define DRAWGI_ARROW_ICE                    0x56
 #define DRAWGI_ARROW_LIGHT                  0x57
-#define DRAWGI_GS_TOKEN                     0x58
+#define DRAWGI_OOT_GS_TOKEN                 0x58
 #define DRAWGI_OOT_SPELL_FIRE               0x59
 #define DRAWGI_OOT_SPELL_WIND               0x5a
 #define DRAWGI_OOT_SPELL_LOVE               0x5b
@@ -215,5 +215,12 @@ extern const Shader kShaders[256];
 #define DRAWGI_OOT_NUT_UPGRADE2             0xc2
 #define DRAWGI_MM_SPIN_UPGRADE              0xc3
 #define DRAWGI_MM_STRAY_FAIRY               0xc4
+#define DRAWGI_MM_GS_TOKEN_SWAMP            0xc5
+#define DRAWGI_MM_GS_TOKEN_OCEAN            0xc6
+#define DRAWGI_MM_STRAY_FAIRY_WF            0xc7
+#define DRAWGI_MM_STRAY_FAIRY_SH            0xc8
+#define DRAWGI_MM_STRAY_FAIRY_GB            0xc9
+#define DRAWGI_MM_STRAY_FAIRY_ST            0xca
+#define DRAWGI_MM_STRAY_FAIRY_TOWN          0xcb
 
 #endif

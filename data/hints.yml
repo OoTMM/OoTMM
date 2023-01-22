@@ -1,0 +1,29 @@
+NONE: 0x00
+
+OOT_FROGS_FINAL:      0x01
+OOT_FISHING:          0x02
+
+OOT_RAVAGED_VILLAGE:        0x03
+OOT_ZORA_KING:              0x04
+OOT_GANON_FAIRY:            0x05
+OOT_TEMPLE_FIRE_HAMMER:     0x06
+OOT_TEMPLE_FIRE_SCARECROW:  0x07
+OOT_GTG_WATER:              0x08
+OOT_HAUNTED_WASTELAND:      0x09
+OOT_GERUDO_ARCHERY:         0x0a
+
+MM_RANCH_DEFENSE:     0x81
+MM_BUTLER_RACE:       0x82
+MM_COUPLE_MASK:       0x83
+MM_DON_GERO_CHOIR:    0x84
+MM_GORON_RACE:        0x85
+MM_GRAVEYARD_NIGHT3:  0x86
+
+MM_BANK_3:                    0x87
+MM_SOUND_CHECK:               0x88
+MM_BOAT_ARCHERY:              0x89
+MM_OSH_CHEST:                 0x8a
+MM_PINNACLE_ROCK_HP:          0x8b
+MM_FISHERMAN_GAME:            0x8c
+MM_SONG_ELEGY:                0x8d
+MM_SECRET_SHRINE_HP:          0x8e

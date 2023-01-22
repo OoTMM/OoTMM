@@ -65,6 +65,7 @@ ActorFree = 0x80102ce0;
 LoadObjectGi = 0x80838830;
 
 ActorSetScale = 0x800b67e0;
+ActorSetUnk = 0x800b675c;
 Actor_HasParent = 0x800b89f8;
 ActorDestroy = 0x800b670c;
 
@@ -103,6 +104,7 @@ PlayerDisplayTextBox = 0x801518b0;
 Cutscene_End = 0x800ea0ec;
 ActorCutscene_GetCurrentIndex = 0x800f207c;
 ActorCutscene_Stop = 0x800f1fbc;
+ActorCutscene_GetCanPlayNext = 0x800f1be4;
 
 gActorOvl = 0x801aefd0;
 
@@ -129,3 +131,9 @@ LoadIcon = 0x80178e3c;
 OverlayAddr = 0x801638d8;
 
 PlayMusic = 0x801a3238;
+
+Player_UsingItem = 0x801240dc;
+SetChestFlag = 0x800b5c90;
+PlaySoundSpecial = 0x801a3098;
+
+Actor_RunByteCode = 0x8010bf58;

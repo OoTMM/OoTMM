@@ -1,6 +1,12 @@
 import { World } from './world';
 import { Age, AGES, Items } from './state';
 
+/*
+ * TODO: This whole module needs some serious refactoring.
+ * Should probably be a class with some configurable options.
+ * Should also probably have ItemPlacement access and perform item collection.
+ */
+
 export type Reachable = {
   areas: {
     child: Set<string>;
@@ -8,6 +14,7 @@ export type Reachable = {
   },
   locations: Set<string>;
   events: Set<string>;
+  gossip: Set<string>;
 };
 
 const reachableDefault = (): Reachable => ({
@@ -17,6 +24,7 @@ const reachableDefault = (): Reachable => ({
   },
   locations: new Set(),
   events: new Set(),
+  gossip: new Set(),
 });
 
 const reachableDup = (reachable: Reachable): Reachable => ({
@@ -26,6 +34,7 @@ const reachableDup = (reachable: Reachable): Reachable => ({
   },
   locations: new Set(reachable.locations),
   events: new Set(reachable.events),
+  gossip: new Set(reachable.gossip),
 });
 
 const pathfindAreas = (world: World, items: Items, age: Age, reachable: Reachable) => {
@@ -72,6 +81,24 @@ const pathfindEvents = (world: World, items: Items, age: Age, reachable: Reachab
   return changed;
 };
 
+const pathfindGossip = (world: World, items: Items, age: Age, reachable: Reachable) => {
+  let changed = false;
+  for (const area of reachable.areas[age]) {
+    const gossips = world.areas[area].gossip;
+    for (const gossip in gossips) {
+      if (reachable.gossip.has(gossip)) {
+        continue;
+      }
+      const expr = gossips[gossip];
+      if (expr({ items, age, events: reachable.events })) {
+        reachable.gossip.add(gossip);
+        changed = true;
+      }
+    }
+  }
+  return changed;
+};
+
 const pathfindLocations = (world: World, items: Items, age: Age, reachable: Reachable) => {
   const newLocations = new Set<string>();
   const oldLocations = reachable.locations;
@@ -94,7 +121,7 @@ const pathfindLocations = (world: World, items: Items, age: Age, reachable: Reac
   return false;
 };
 
-export const pathfind = (world: World, items: Items, reachable?: Reachable) => {
+export const pathfind = (world: World, items: Items, gossip: boolean, reachable?: Reachable) => {
   if (reachable === undefined) {
     reachable = reachableDefault();
   } else {
@@ -107,6 +134,9 @@ export const pathfind = (world: World, items: Items, reachable?: Reachable) => {
     for (const age of AGES) {
       changed ||= pathfindAreas(world, items, age, reachable);
       changed ||= pathfindEvents(world, items, age, reachable);
+      if (gossip) {
+        changed ||= pathfindGossip(world, items, age, reachable);
+      }
     }
     if (!changed) {
       break;

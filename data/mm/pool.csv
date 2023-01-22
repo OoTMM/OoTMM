@@ -1,280 +1,341 @@
-location,                                       type,           scene,                      id,                     item
-Initial Song of Healing,                        npc,            CLOCK_TOWN_SOUTH,           SONG_HEALING,           SONG_HEALING
-Clock Town South Chest Lower,                   chest,          CLOCK_TOWN_SOUTH,           0x00,                   RUPEE_RED
-Clock Town South Chest Upper,                   chest,          CLOCK_TOWN_SOUTH,           0x01,                   RUPEE_PURPLE
-Clock Town Platform HP,                         collectible,    CLOCK_TOWN_SOUTH,           0x0a,                   HEART_PIECE
-Clock Town Business Scrub,                      npc,            CLOCK_TOWN_SOUTH,           SCRUB_LAND,             DEED_LAND
-Clock Town Post Box,                            npc,            CLOCK_TOWN_SOUTH,           POSTBOX,                HEART_PIECE
-Clock Town Tree HP,                             collectible,    CLOCK_TOWN_NORTH,           0x0a,                   HEART_PIECE
-Clock Town Bomber Notebook,                     npc,            CLOCK_TOWN_NORTH,           BOMBER_NOTEBOOK,        BOMBER_NOTEBOOK
-Clock Town Blast Mask,                          npc,            CLOCK_TOWN_NORTH,           MASK_BLAST,             MASK_BLAST
-Clock Town Keaton HP,                           npc,            CLOCK_TOWN_NORTH,           KEATON_HEART_PIECE,     HEART_PIECE
-Clock Town Silver Rupee Chest,                  chest,          CLOCK_TOWN_EAST,            0x0a,                   RUPEE_SILVER
-Clock Town Postman Hat,                         npc,            CLOCK_TOWN_EAST,            MASK_POSTMAN,           MASK_POSTMAN
-Clock Town Bank Reward 1,                       npc,            CLOCK_TOWN_WEST,            BANK_1,                 WALLET
-Clock Town Bank Reward 2,                       npc,            CLOCK_TOWN_WEST,            BANK_2,                 RUPEE_BLUE
-Clock Town Bank Reward 3,                       npc,            CLOCK_TOWN_WEST,            BANK_3,                 HEART_PIECE
-Clock Town Rosa Sisters HP,                     npc,            CLOCK_TOWN_WEST,            ROSA_HEART_PIECE,       HEART_PIECE
-Clock Town Guru Guru Mask Bremen,               npc,            LAUNDRY_POOL,               MASK_BREMEN,            MASK_BREMEN
-Clock Town Great Fairy,                         npc,            FAIRY_FOUNTAIN,             GREAT_FAIRY_TOWN,       MASK_GREAT_FAIRY
-Clock Town Great Fairy Alt,                     npc,            FAIRY_FOUNTAIN,             GREAT_FAIRY_TOWN_ALT,   MAGIC_UPGRADE
-Clock Tower Roof Skull Kid Ocarina,             npc,            CLOCK_TOWER_ROOFTOP,        SKULL_KID_OCARINA,      OCARINA
-Clock Tower Roof Skull Kid Song of Time,        npc,            CLOCK_TOWER_ROOFTOP,        SKULL_KID_SONG,         SONG_TIME
-Mayor's Office Kafei's Mask,                    npc,            MAYOR_HOUSE,                MASK_KAFEI,             MASK_KAFEI
-Mayor's Office HP,                              npc,            MAYOR_HOUSE,                MAYOR_HEART_PIECE,      HEART_PIECE
-Milk Bar Troupe Leader Mask,                    npc,            MILK_BAR,                   MASK_TROUPE_LEADER,     MASK_TROUPE_LEADER
-Milk Bar Madame Aroma Bottle,                   npc,            MILK_BAR,                   CHATEAU_ROMANI,         BOTTLED_CHATEAU_ROMANI
-Town Archery Reward 1,                          npc,            SHOOTING_GALLERY,           SHOOTING_GAME_TOWN_1,   BOW
-Town Archery Reward 2,                          npc,            SHOOTING_GALLERY,           SHOOTING_GAME_TOWN_2,   HEART_PIECE
-Chest Game HP,                                  npc,            TREASURE_SHOP,              CHEST_GAME,             HEART_PIECE
-Honey & Darling Reward 1,                       npc,            HONEY_DARLING,              HONEY_DARLING_1,        RUPEE_PURPLE
-Honey & Darling Reward 2,                       npc,            HONEY_DARLING,              HONEY_DARLING_2,        HEART_PIECE
-Stock Pot Inn Guest Room Chest,                 chest,          STOCK_POT_INN,              0x00,                   RUPEE_SILVER
-Stock Pot Inn Staff Room Chest,                 chest,          STOCK_POT_INN,              0x01,                   RUPEE_SILVER
-Stock Pot Inn Room Key,                         npc,            STOCK_POT_INN,              ROOM_KEY,               ROOM_KEY
-Stock Pot Inn Letter to Kafei,                  npc,            STOCK_POT_INN,              LETTER_TO_KAFEI,        LETTER_TO_KAFEI
-Stock Pot Inn Couple's Mask,                    npc,            STOCK_POT_INN,              MASK_COUPLE,            MASK_COUPLE
-Stock Pot Inn Grandma HP 1,                     npc,            STOCK_POT_INN,              GRANDMA_HEART_PIECE_1,  HEART_PIECE
-Stock Pot Inn Grandma HP 2,                     npc,            STOCK_POT_INN,              GRANDMA_HEART_PIECE_2,  HEART_PIECE
-Stock Pot Inn ??? HP,                           npc,            STOCK_POT_INN,              TOILET_HEART_PIECE,     HEART_PIECE
-Astral Observatory Passage Chest,               chest,          OBSERVATORY,                0x00,                   RUPEE_SILVER
-Astral Observatory Moon Tear,                   npc,            OBSERVATORY,                MOON_TEAR,              MOON_TEAR
-Bomb Shop Bomb Bag,                             npc,            BOMB_SHOP,                  SHOP_BOMB_BAG,          BOMB_BAG
-Bomb Shop Bomb Bag 2,                           npc,            BOMB_SHOP,                  SHOP_BOMB_BAG2,         BOMB_BAG
-Curiosity Shop All-Night Mask,                  npc,            CURIOSITY_SHOP,             MASK_ALL_NIGHT,         MASK_ALL_NIGHT
-Curiosity Shop Back Room Pendant of Memories,   npc,            CURIOSITY_SHOP,             PENDANT_OF_MEMORIES,    PENDANT_OF_MEMORIES
-Curiosity Shop Back Room Owner Reward 1,        npc,            CURIOSITY_SHOP,             MASK_KEATON,            MASK_KEATON
-Curiosity Shop Back Room Owner Reward 2,        npc,            CURIOSITY_SHOP,             LETTER_TO_MAMA,         LETTER_TO_MAMA
-Post Office HP,                                 npc,            POST_OFFICE,                POSTMAN_HEART_PIECE,    HEART_PIECE
-Swordsman School HP,                            npc,            SWORDSMAN_SCHOOL,           SWORDSMAN_HEART_PIECE,  HEART_PIECE
-Deku Playground Reward 1,                       npc,            DEKU_PLAYGROUND,            DEKU_PLAYGROUND_1,      RUPEE_PURPLE
-Deku Playground Reward 2,                       npc,            DEKU_PLAYGROUND,            DEKU_PLAYGROUND_2,      HEART_PIECE
-Termina Field Water Chest,                      chest,          TERMINA_FIELD,              0x00,                   RUPEE_RED
-Termina Field Tall Grass Chest,                 chest,          TERMINA_FIELD,              0x01,                   RUPEE_RED
-Termina Field Tree Stump Chest,                 chest,          TERMINA_FIELD,              0x02,                   RUPEE_RED
-Termina Field Kamaro Mask,                      npc,            TERMINA_FIELD,              MASK_KAMARO,            MASK_KAMARO
-Termina Field Tall Grass Grotto,                chest,          GROTTOS,                    0x1f,                   RUPEE_RED
-Termina Field Pillar Grotto,                    chest,          GROTTOS,                    0x1a,                   BOMBCHU
-Termina Field Peahat Grotto,                    chest,          GROTTOS,                    0x04,                   HEART_PIECE
-Termina Field Dodongo Grotto,                   chest,          GROTTOS,                    0x00,                   HEART_PIECE
-Termina Field Bio Baba Grotto,                  collectible,    GROTTOS,                    0x02,                   HEART_PIECE
-Termina Field Scrub,                            npc,            GROTTOS,                    SCRUB_TELESCOPE,        HEART_PIECE
-Termina Field Gossip Stones HP,                 npc,            GROTTOS,                    GOSSIP_HEART_PIECE,     HEART_PIECE
-Road to Southern Swamp HP,                      collectible,    ROAD_SOUTHERN_SWAMP,        0x01,                   HEART_PIECE
-Road to Southern Swamp Grotto,                  chest,          GROTTOS,                    0x1e,                   RUPEE_RED
-Southern Swamp HP,                              collectible,    SOUTHERN_SWAMP,             0x1e,                   HEART_PIECE
-Southern Swamp Scrub Deed,                      npc,            SOUTHERN_SWAMP,             SCRUB_SWAMP,            DEED_SWAMP
-Southern Swamp Song of Soaring,                 npc,            SOUTHERN_SWAMP,             SONG_SOARING,           SONG_SOARING
-Southern Swamp Grotto,                          chest,          GROTTOS,                    0x1d,                   RUPEE_RED
-Woods of Mystery Grotto,                        chest,          GROTTOS,                    0x1c,                   RUPEE_PURPLE
-Swamp Archery Reward 1,                         npc,            SHOOTING_GALLERY_SWAMP,     SHOOTING_GAME_SWAMP_1,  BOW
-Swamp Archery Reward 2,                         npc,            SHOOTING_GALLERY_SWAMP,     SHOOTING_GAME_SWAMP_2,  HEART_PIECE
-Swamp Potion Shop Kotake,                       npc,            POTION_SHOP,                KOTAKE_RED_POTION,      BOTTLED_POTION_RED
-Tourist Information Pictobox,                   npc,            TOURIST_INFORMATION,        KOUME_PICTOGRAPH_BOX,   PICTOGRAPH_BOX
-Tourist Information Boat Cruise,                npc,            TOURIST_INFORMATION,        KOUME_HEART_PIECE,      HEART_PIECE
-Tourist Information Tingle Picture,             npc,            TOURIST_INFORMATION,        TOUR_GUIDE_HEART_PIECE, HEART_PIECE
-Deku Palace HP,                                 collectible,    DEKU_PALACE,                0x1e,                   HEART_PIECE
-Deku Palace Sonata of Awakening,                npc,            DEKU_KING_CHAMBER,          SONG_AWAKENING,         SONG_AWAKENING
-Deku Palace Grotto Chest,                       chest,          GROTTOS,                    0x05,                   RUPEE_RED
-Deku Shrine Mask of Scents,                     npc,            DEKU_SHRINE,                MASK_SCENTS,            MASK_SCENTS
-Woodfall Near Owl Chest,                        chest,          WOODFALL,                   0x02,                   RUPEE_RED
-Woodfall Entrance Chest,                        chest,          WOODFALL,                   0x00,                   RUPEE_RED
-Woodfall HP Chest,                              chest,          WOODFALL,                   0x01,                   HEART_PIECE
-Woodfall Great Fairy,                           npc,            FAIRY_FOUNTAIN,             GREAT_FAIRY_SWAMP,      SPIN_UPGRADE
-Swamp Spider House Mask of Truth,               npc,            SPIDER_HOUSE_SWAMP,         SPIDER_HOUSE_SWAMP,     MASK_TRUTH
-Mountain Village Waterfall Chest,               chest,          MOUNTAIN_VILLAGE_WINTER,    0x00,                   RUPEE_RED
-Mountain Village Don Gero Mask,                 npc,            MOUNTAIN_VILLAGE_WINTER,    MASK_DON_GERO,          MASK_DON_GERO
-Mountain Village Frog Choir HP,                 npc,            MOUNTAIN_VILLAGE_WINTER,    FROG_HEART_PIECE,       HEART_PIECE
-Mountain Village Tunnel Grotto,                 chest,          GROTTOS,                    0x1b,                   RUPEE_RED
-Blacksmith Razor Blade,                         npc,            BLACKSMITH,                 SWORD_RAZOR,            SWORD
-Blacksmith Gilded Sword,                        npc,            BLACKSMITH,                 SWORD_GILDED,           SWORD
-Lone Peak Shrine Lens Chest,                    chest,          GROTTOS,                    0x01,                   LENS
-Lone Peak Shrine Boulder Chest,                 chest,          GROTTOS,                    0x06,                   RUPEE_RED
-Lone Peak Shrine Invisible Chest,               chest,          GROTTOS,                    0x03,                   RUPEE_PURPLE
-Goron Graveyard Mask,                           npc,            GORON_GRAVEYARD,            MASK_GORON,             MASK_GORON
-Twin Islands Underwater Chest 1,                chest,          TWIN_ISLANDS_WINTER,        0x06,                   HEART_PIECE
-Twin Islands Underwater Chest 2,                chest,          TWIN_ISLANDS_WINTER,        0x00,                   RUPEE_RED
-Twin Islands Frozen Grotto Chest,               chest,          GROTTOS,                    0x02,                   RUPEE_RED
-Twin Islands Ramp Grotto Chest,                 chest,          GROTTOS,                    0x19,                   BOMBCHU
-Goron Elder,                                    npc,            TWIN_ISLANDS_WINTER,        GORON_ELDER,            SONG_GORON_HALF
-Goron Baby,                                     npc,            GORON_SHRINE,               GORON_BABY,             SONG_GORON_HALF
-Goron Village HP,                               collectible,    GORON_VILLAGE_WINTER,       0x1e,                   HEART_PIECE
-Goron Village Scrub Deed,                       npc,            GORON_VILLAGE_WINTER,       SCRUB_MOUNTAIN,         DEED_MOUNTAIN
-Goron Village Scrub Bomb Bag,                   npc,            GORON_VILLAGE_WINTER,       SCRUB_BOMB_BAG,         BOMB_BAG
-Goron Powder Keg,                               npc,            GORON_VILLAGE_WINTER,       GORON_KEG,              POWDER_KEG
-Path to Snowhead HP,                            collectible,    PATH_SNOWHEAD,              0x08,                   HEART_PIECE
-Path to Snowhead Grotto,                        chest,          GROTTOS,                    0x13,                   RUPEE_RED
-Snowhead Great Fairy,                           npc,            FAIRY_FOUNTAIN,             GREAT_FAIRY_MOUNTAIN,   MAGIC_UPGRADE
-Goron Race Reward,                              npc,            GORON_RACETRACK,            GORON_RACE,             BOTTLED_GOLD_DUST
-Romani Ranch Epona Song,                        npc,            ROMANI_RANCH,               SONG_EPONA,             SONG_EPONA
-Romani Ranch Aliens,                            npc,            ROMANI_RANCH,               ROMANI_BOTTLE,          BOTTLED_MILK
-Romani Ranch Cremia Escort,                     npc,            ROMANI_RANCH,               CREMIA_ESCORT,          MASK_ROMANI
-Cucco Shack Bunny Mask,                         npc,            CUCCO_SHACK,                MASK_BUNNY,             MASK_BUNNY
-Doggy Racetrack Chest,                          chest,          DOG_RACETRACK,              0x00,                   RUPEE_PURPLE
-Doggy Racetrack HP,                             npc,            DOG_RACETRACK,              DOG_LADY_HEART_PIECE,   HEART_PIECE
-Great Bay Coast Zora Mask,                      npc,            GREAT_BAY_COAST,            MASK_ZORA,              MASK_ZORA
-Great Bay Coast HP,                             collectible,    GREAT_BAY_COAST,            0x05,                   HEART_PIECE
-Great Bay Coast Fisherman HP,                   npc,            GREAT_BAY_COAST,            FISHERMAN_HEART_PIECE,  HEART_PIECE
-Great Bay Coast Fisherman Grotto,               chest,          GROTTOS,                    0x17,                   RUPEE_RED
-Zora Cape Ledge Chest 1,                        chest,          ZORA_CAPE,                  0x01,                   RUPEE_RED
-Zora Cape Ledge Chest 2,                        chest,          ZORA_CAPE,                  0x02,                   RUPEE_RED
-Zora Cape Underwater Chest,                     chest,          ZORA_CAPE,                  0x00,                   RUPEE_PURPLE
-Zora Cape Waterfall HP,                         collectible,    ZORA_CAPE,                  0x07,                   HEART_PIECE
-Zora Cape Grotto,                               chest,          GROTTOS,                    0x15,                   BOMBCHU
-Great Bay Fairy,                                npc,            FAIRY_FOUNTAIN,             GREAT_FAIRY_OCEAN,      DEFENSE_UPGRADE
-Zora Hall Scrub Deed,                           npc,            ZORA_HALL_ROOMS,            SCRUB_OCEAN,            DEED_OCEAN
-Zora Hall Scrub HP,                             collectible,    ZORA_HALL_ROOMS,            0x1e,                   HEART_PIECE
-Zora Hall Evan HP,                              npc,            ZORA_HALL_ROOMS,            ZORA_EVAN,              HEART_PIECE
-Zora Hall Scene Lights,                         npc,            ZORA_HALL,                  ZORA_HALL_LIGHTS,       RUPEE_BLUE
-Pinnacle Rock Chest 1,                          chest,          PINNACLE_ROCK,              0x01,                   RUPEE_RED
-Pinnacle Rock Chest 2,                          chest,          PINNACLE_ROCK,              0x02,                   RUPEE_RED
-Pinnacle Rock HP,                               npc,            PINNACLE_ROCK,              SEAHORSE_HEART_PIECE,   HEART_PIECE
-Laboratory Zora Song,                           npc,            LABORATORY,                 SONG_ZORA,              SONG_ZORA
-Laboratory Fish HP,                             npc,            LABORATORY,                 LAB_FISH_HEART_PIECE,   HEART_PIECE
-Ocean Spider House Wallet,                      npc,            SPIDER_HOUSE_OCEAN,         SPIDER_HOUSE_OCEAN,     WALLET
-Ocean Spider House Chest HP,                    chest,          SPIDER_HOUSE_OCEAN,         0x00,                   HEART_PIECE
-Waterfall Rapids Beaver Race 1,                 npc,            WATERFALL_RAPIDS,           BEAVER_1,               EMPTY_BOTTLE
-Waterfall Rapids Beaver Race 2,                 npc,            WATERFALL_RAPIDS,           BEAVER_2,               HEART_PIECE
-Road to Ikana Chest,                            chest,          ROAD_IKANA,                 0x00,                   RUPEE_RED
-Road to Ikana Grotto,                           chest,          GROTTOS,                    0x16,                   BOMBCHU
-Road to Ikana Stone Mask,                       npc,            ROAD_IKANA,                 MASK_STONE,             MASK_STONE
-Gorman Track Garo Mask,                         npc,            GORMAN_TRACK,               MASK_GARO,              MASK_GARO
-Ikana Graveyard Captain Mask,                   chest,          IKANA_GRAVEYARD,            0x00,                   MASK_CAPTAIN
-Ikana Graveyard Grotto,                         chest,          GROTTOS,                    0x18,                   BOMBCHUS_5
-Beneath The Graveyard Chest,                    chest,          BENEATH_THE_GRAVEYARD,      0x03,                   RUPEE_PURPLE
-Beneath The Graveyard Song of Storms,           npc,            BENEATH_THE_GRAVEYARD,      SONG_STORMS,            SONG_STORMS
-Beneath The Graveyard HP,                       chest,          BENEATH_THE_GRAVEYARD,      0x00,                   HEART_PIECE
-Beneath The Graveyard Dampe Chest,              chest,          DAMPE_HOUSE,                0x00,                   EMPTY_BOTTLE
-Ikana Valley Scrub Rupee,                       npc,            IKANA_CANYON,               SCRUB_VALLEY,           RUPEE_GOLD
-Ikana Valley Scrub HP,                          collectible,    IKANA_CANYON,               0x1e,                   HEART_PIECE
-Ikana Valley Grotto,                            chest,          GROTTOS,                    0x14,                   BOMBCHUS_5
-Ikana Great Fairy,                              npc,            FAIRY_FOUNTAIN,             GREAT_FAIRY_VALLEY,     GREAT_FAIRY_SWORD
-Ghost Hut HP,                                   npc,            GHOST_HUT,                  GHOST_HUT_HEART_PIECE,  HEART_PIECE
-Music Box House Gibdo Mask,                     npc,            MUSIC_BOX_HOUSE,            MASK_GIBDO,             MASK_GIBDO
-Stone Tower Inverted Chest 1,                   chest,          STONE_TOWER_INVERTED,       0x1d,                   RUPEE_SILVER
-Stone Tower Inverted Chest 2,                   chest,          STONE_TOWER_INVERTED,       0x1e,                   BOMBCHUS_10
-Stone Tower Inverted Chest 3,                   chest,          STONE_TOWER_INVERTED,       0x1f,                   MAGIC_BEAN
-Oath to Order,                                  npc,            LAIR_ODOLWA,                SONG_ORDER,             SONG_ORDER
-Woodfall Temple Entrance Chest,                 chest,          TEMPLE_WOODFALL,            0x18,                   STRAY_FAIRY_WF
-Woodfall Temple Water Chest,                    chest,          TEMPLE_WOODFALL,            0x01,                   SMALL_KEY_WF
-Woodfall Temple Map,                            chest,          TEMPLE_WOODFALL,            0x1d,                   MAP_WF
-Woodfall Temple Compass,                        chest,          TEMPLE_WOODFALL,            0x1c,                   COMPASS_WF
-Woodfall Temple Dark Chest,                     chest,          TEMPLE_WOODFALL,            0x19,                   STRAY_FAIRY_WF
-Woodfall Temple Center Chest,                   chest,          TEMPLE_WOODFALL,            0x17,                   STRAY_FAIRY_WF
-Woodfall Temple Bow,                            chest,          TEMPLE_WOODFALL,            0x1b,                   BOW
-Woodfall Temple Boss Key Chest,                 chest,          TEMPLE_WOODFALL,            0x1e,                   BOSS_KEY_WF
-Woodfall Temple SF Entrance,                    sf,             TEMPLE_WOODFALL,            0x2b,                   STRAY_FAIRY_WF
-Woodfall Temple SF Main Pot,                    sf,             TEMPLE_WOODFALL,            0x38,                   STRAY_FAIRY_WF
-Woodfall Temple SF Main Deku Baba,              sf,             TEMPLE_WOODFALL,            0x2e,                   STRAY_FAIRY_WF
-Woodfall Temple SF Main Bubble,                 sf,             TEMPLE_WOODFALL,            0x30,                   STRAY_FAIRY_WF
-Woodfall Temple SF Maze Skulltula,              sf,             TEMPLE_WOODFALL,            0x31,                   STRAY_FAIRY_WF
-Woodfall Temple SF Maze Beehive,                sf,             TEMPLE_WOODFALL,            0x1d,                   STRAY_FAIRY_WF
-Woodfall Temple SF Maze Bubble,                 sf,             TEMPLE_WOODFALL,            0x2f,                   STRAY_FAIRY_WF
-Woodfall Temple SF Water Room Beehive,          sf,             TEMPLE_WOODFALL,            0x1e,                   STRAY_FAIRY_WF
-Woodfall Temple SF Antichamber 1,               sf,             TEMPLE_WOODFALL,            0x2a,                   STRAY_FAIRY_WF
-Woodfall Temple SF Antichamber 2,               sf,             TEMPLE_WOODFALL,            0x2c,                   STRAY_FAIRY_WF
-Woodfall Temple SF Antichamber 3,               sf,             TEMPLE_WOODFALL,            0x32,                   STRAY_FAIRY_WF
-Woodfall Temple SF Antichamber Pillar,          sf,             TEMPLE_WOODFALL,            0x2d,                   STRAY_FAIRY_WF
-Woodfall Temple Boss Container,                 collectible,    LAIR_ODOLWA,                0x1f,                   HEART_CONTAINER
-Woodfall Temple Boss,                           npc,            LAIR_ODOLWA,                REMAINS_ODOLWA,         REMAINS_ODOLWA
-Snowhead Temple Compass Room Ledge,       chest,          TEMPLE_SNOWHEAD, 0x19,          STRAY_FAIRY_SH
-Snowhead Temple Compass,                  chest,          TEMPLE_SNOWHEAD, 0x1c,          COMPASS_SH
-Snowhead Temple Bridge Room,              chest,          TEMPLE_SNOWHEAD, 0x01,          SMALL_KEY_SH
-Snowhead Temple Block Room,               chest,          TEMPLE_SNOWHEAD, 0x03,          SMALL_KEY_SH
-Snowhead Temple Block Room Ledge,         chest,          TEMPLE_SNOWHEAD, 0x15,          STRAY_FAIRY_SH
-Snowhead Temple Central Room Bottom,      chest,          TEMPLE_SNOWHEAD, 0x14,          STRAY_FAIRY_SH
-Snowhead Temple Boss Key,                 chest,          TEMPLE_SNOWHEAD, 0x1e,          BOSS_KEY_SH
-Snowhead Temple Central Room Alcove,      chest,          TEMPLE_SNOWHEAD, 0x17,          STRAY_FAIRY_SH
-Snowhead Temple Pillars Room,             chest,          TEMPLE_SNOWHEAD, 0x18,          STRAY_FAIRY_SH
-Snowhead Temple Fire Arrow,               chest,          TEMPLE_SNOWHEAD, 0x1b,          ARROW_FIRE
-Snowhead Temple Icicle Room Alcove,       chest,          TEMPLE_SNOWHEAD, 0x16,          STRAY_FAIRY_SH
-Snowhead Temple Icicle Room,              chest,          TEMPLE_SNOWHEAD, 0x04,          SMALL_KEY_SH
-Snowhead Temple Map,                      chest,          TEMPLE_SNOWHEAD, 0x1d,          MAP_SH
-Snowhead Temple Map Alcove,               chest,          TEMPLE_SNOWHEAD, 0x13,          STRAY_FAIRY_SH
-Snowhead Temple SF Bridge Under Platform, sf,             TEMPLE_SNOWHEAD, 0x2f,          STRAY_FAIRY_SH
-Snowhead Temple SF Bridge Pillar,         sf,             TEMPLE_SNOWHEAD, 0x30,          STRAY_FAIRY_SH
-Snowhead Temple SF Map Room,              sf,             TEMPLE_SNOWHEAD, 0x32,          STRAY_FAIRY_SH
-Snowhead Temple SF Compass Room Crate,    sf,             TEMPLE_SNOWHEAD, 0x1e,          STRAY_FAIRY_SH
-Snowhead Temple SF Dual Switches,         sf,             TEMPLE_SNOWHEAD, 0x2c,          STRAY_FAIRY_SH
-Snowhead Temple SF Snow Room,             sf,             TEMPLE_SNOWHEAD, 0x2b,          STRAY_FAIRY_SH
-Snowhead Temple SF Dinolfos 1,            sf,             TEMPLE_SNOWHEAD, 0x2d,          STRAY_FAIRY_SH
-Snowhead Temple SF Dinolfos 2,            sf,             TEMPLE_SNOWHEAD, 0x31,          STRAY_FAIRY_SH
-Snowhead Temple Boss HC,                  collectible,    LAIR_GOHT,       0x1f,          HEART_CONTAINER
-Snowhead Temple Boss,                     npc,            LAIR_GOHT,       REMAINS_GOHT,  REMAINS_GOHT
-Pirate Fortress Entrance Chest 1,                 chest,        PIRATE_FORTRESS_ENTRANCE, 0x00, RUPEE_RED
-Pirate Fortress Entrance Chest 2,                 chest,        PIRATE_FORTRESS_ENTRANCE, 0x01, RUPEE_RED
-Pirate Fortress Entrance Chest 3,                 chest,        PIRATE_FORTRESS_ENTRANCE, 0x02, RUPEE_RED
-Pirate Fortress Sewers Chest 1,           chest,        PIRATE_FORTRESS_INTERIOR, 0x01, RUPEE_RED
-Pirate Fortress Sewers Chest 2,           chest,        PIRATE_FORTRESS_INTERIOR, 0x04, RUPEE_RED
-Pirate Fortress Sewers Chest 3,           chest,        PIRATE_FORTRESS_INTERIOR, 0x06, RUPEE_BLUE
-Pirate Fortress Sewers HP,                      collectible,  PIRATE_FORTRESS_INTERIOR, 0x0c, HEART_PIECE
-Pirate Fortress Interior Hookshot,                chest,        PIRATE_FORTRESS_INTERIOR, 0x02, HOOKSHOT
-Pirate Fortress Interior Aquarium,                chest,        PIRATE_FORTRESS_INTERIOR, 0x00, RUPEE_RED
-Pirate Fortress Interior Silver Rupee Chest,      chest,        PIRATE_FORTRESS_INTERIOR, 0x03, RUPEE_SILVER
-Pirate Fortress Exterior Lower Chest,             chest,        PIRATE_FORTRESS_EXTERIOR, 0x00, RUPEE_RED
-Pirate Fortress Exterior Upper Chest,             chest,        PIRATE_FORTRESS_EXTERIOR, 0x01, RUPEE_RED
-Great Bay Temple Map,                             chest,          TEMPLE_GREAT_BAY, 0x1d,           MAP_GB
-Great Bay Temple Baba Chest,                      chest,          TEMPLE_GREAT_BAY, 0x19,           STRAY_FAIRY_GB
-Great Bay Temple Boss Key,                        chest,          TEMPLE_GREAT_BAY, 0x1e,           BOSS_KEY_GB
-Great Bay Temple Compass,                         chest,          TEMPLE_GREAT_BAY, 0x1c,           COMPASS_GB
-Great Bay Temple Compass Room Underwater,         chest,          TEMPLE_GREAT_BAY, 0x01,           SMALL_KEY_GB
-Great Bay Temple Ice Arrow,                       chest,          TEMPLE_GREAT_BAY, 0x1b,           ARROW_ICE
-Great Bay Temple Green Pipe 1 Chest,              chest,          TEMPLE_GREAT_BAY, 0x15,           STRAY_FAIRY_GB
-Great Bay Temple Green Pipe 2 Lower Chest,        chest,          TEMPLE_GREAT_BAY, 0x17,           STRAY_FAIRY_GB
-Great Bay Temple Green Pipe 2 Upper Chest,        chest,          TEMPLE_GREAT_BAY, 0x14,           STRAY_FAIRY_GB
-Great Bay Temple Green Pipe 3 Chest,              chest,          TEMPLE_GREAT_BAY, 0x16,           STRAY_FAIRY_GB
-Great Bay Temple Entrance Chest,                  chest,          TEMPLE_GREAT_BAY, 0x18,           STRAY_FAIRY_GB
-Great Bay Temple SF Water Wheel Platform,         sf,             TEMPLE_GREAT_BAY, 0x30,           STRAY_FAIRY_GB
-Great Bay Temple SF Water Wheel Skulltula,        sf,             TEMPLE_GREAT_BAY, 0x32,           STRAY_FAIRY_GB
-Great Bay Temple SF Central Room Barrel,          sf,             TEMPLE_GREAT_BAY, 0x1c,           STRAY_FAIRY_GB
-Great Bay Temple SF Central Room Underwater Pot,  sf,             TEMPLE_GREAT_BAY, 0x36,           STRAY_FAIRY_GB
-Great Bay Temple SF Map Room Pot,                 sf,             TEMPLE_GREAT_BAY, 0x3c,           STRAY_FAIRY_GB
-Great Bay Temple SF Compass Room Pot,             sf,             TEMPLE_GREAT_BAY, 0x3a,           STRAY_FAIRY_GB
-Great Bay Temple SF Green Pipe 3 Barrel,          sf,             TEMPLE_GREAT_BAY, 0x1a,           STRAY_FAIRY_GB
-Great Bay Temple SF Antichamber Above Water,      sf,             TEMPLE_GREAT_BAY, 0x31,           STRAY_FAIRY_GB
-Great Bay Temple SF Antichamber Underwater,       sf,             TEMPLE_GREAT_BAY, 0x2f,           STRAY_FAIRY_GB
-Great Bay Temple Boss HC,                         collectible,    LAIR_GYORG,       0x1f,           HEART_CONTAINER
-Great Bay Temple Boss,                            npc,            LAIR_GYORG,       REMAINS_GYORG,  REMAINS_GYORG
-Beneath the Well Skulltulla Chest,                chest,          BENEATH_THE_WELL, 0x01, RUPEE_PURPLE
-Beneath the Well Keese Chest,                     chest,          BENEATH_THE_WELL, 0x02, RUPEE_PURPLE
-Beneath the Well Mirror Shield,                   chest,          BENEATH_THE_WELL, 0x1b, SHIELD
-Ancient Castle of Ikana HP,                       collectible,    CASTLE_IKANA, 0x0a,           HEART_PIECE
-Ancient Castle of Ikana Song Emptiness,           npc,            LAIR_IKANA,   SONG_EMPTINESS, SONG_EMPTINESS
-Stone Tower Temple Entrance Chest,                      chest,          TEMPLE_STONE_TOWER,   0x16,             STRAY_FAIRY_ST
-Stone Tower Temple Entrance Switch Chest,               chest,          TEMPLE_STONE_TOWER,   0x12,             STRAY_FAIRY_ST
-Stone Tower Temple Under West Garden Ledge Chest,       chest,          TEMPLE_STONE_TOWER,   0x15,             STRAY_FAIRY_ST
-Stone Tower Temple Under West Garden Lava Chest,        chest,          TEMPLE_STONE_TOWER,   0x02,             SMALL_KEY_ST
-Stone Tower Temple Map,                                 chest,          TEMPLE_STONE_TOWER,   0x1d,             MAP_ST
-Stone Tower Temple Center Sun Block Chest,              chest,          TEMPLE_STONE_TOWER,   0x18,             STRAY_FAIRY_ST
-Stone Tower Temple Center Across Water Chest,           chest,          TEMPLE_STONE_TOWER,   0x01,             SMALL_KEY_ST
-Stone Tower Temple Compass,                             chest,          TEMPLE_STONE_TOWER,   0x1c,             COMPASS_ST
-Stone Tower Temple Water Sun Switch Chest,              chest,          TEMPLE_STONE_TOWER,   0x17,             STRAY_FAIRY_ST
-Stone Tower Temple Mirrors Room Center Chest,           chest,          TEMPLE_STONE_TOWER,   0x0f,             STRAY_FAIRY_ST
-Stone Tower Temple Mirrors Room Right Chest,            chest,          TEMPLE_STONE_TOWER,   0x0b,             STRAY_FAIRY_ST
-Stone Tower Temple Wind Room Ledge Chest,               chest,          TEMPLE_STONE_TOWER,   0x19,             STRAY_FAIRY_ST
-Stone Tower Temple Wind Room Jail Chest,                chest,          TEMPLE_STONE_TOWER,   0x0d,             STRAY_FAIRY_ST
-Stone Tower Temple Light Arrow,                         chest,          TEMPLE_STONE_TOWER,   0x1b,             ARROW_LIGHT
-Stone Tower Temple Before Water Bridge Chest,           chest,          TEMPLE_STONE_TOWER,   0x14,             STRAY_FAIRY_ST
-Stone Tower Temple Water Bridge Chest,                  chest,          TEMPLE_STONE_TOWER,   0x0c,             STRAY_FAIRY_ST
-Stone Tower Temple Inverted Entrance Chest,             chest,          TEMPLE_STONE_TOWER,   0x10,             STRAY_FAIRY_ST
-Stone Tower Temple Inverted East Lower Chest,           chest,          TEMPLE_STONE_TOWER,   0x13,             STRAY_FAIRY_ST
-Stone Tower Temple Inverted East Middle Chest,          chest,          TEMPLE_STONE_TOWER,   0x04,             SMALL_KEY_ST
-Stone Tower Temple Inverted East Upper Chest,           chest,          TEMPLE_STONE_TOWER,   0x0e,             STRAY_FAIRY_ST
-Stone Tower Temple Inverted Wizrobe Chest,              chest,          TEMPLE_STONE_TOWER,   0x11,             STRAY_FAIRY_ST
-Stone Tower Temple Inverted Under Wizrobe Chest,        chest,          TEMPLE_STONE_TOWER,   0x05,             SMALL_KEY_ST
-Stone Tower Temple Inverted Boss Key,                   chest,          TEMPLE_STONE_TOWER,   0x1e,             BOSS_KEY_ST
-Stone Tower Temple Inverted Giant Mask,                 chest,          TEMPLE_STONE_TOWER,   0x1a,             MASK_GIANT
-Stone Tower Boss HC,                                    collectible,    LAIR_TWINMOLD,        0x1f,             HEART_CONTAINER
-Stone Tower Boss,                                       npc,            LAIR_TWINMOLD,        REMAINS_TWINMOLD, REMAINS_TWINMOLD
-Secret Shrine Boss 1 Chest,   chest,        SECRET_SHRINE,  0x00, RUPEE_SILVER
-Secret Shrine Boss 2 Chest,   chest,        SECRET_SHRINE,  0x01, RUPEE_SILVER
-Secret Shrine Boss 3 Chest,   chest,        SECRET_SHRINE,  0x02, RUPEE_SILVER
-Secret Shrine Boss 4 Chest,   chest,        SECRET_SHRINE,  0x03, RUPEE_SILVER
-Secret Shrine HP Chest,       chest,        SECRET_SHRINE,  0x0a, HEART_PIECE
-Moon Trial Deku HP,           collectible,  MOON_DEKU,   0x01,              HEART_PIECE
-Moon Trial Goron HP,          collectible,  MOON_GORON,  0x01,              HEART_PIECE
-Moon Trial Zora HP,           collectible,  MOON_ZORA,   0x01,              HEART_PIECE
-Moon Trial Link Chest 1,      chest,        MOON_LINK,   0x01,              ARROWS_30
-Moon Trial Link Chest 2,      chest,        MOON_LINK,   0x02,              BOMBCHUS_10
-Moon Trial Link HP,           collectible,  MOON_LINK,   0x01,              HEART_PIECE
-Moon Fierce Deity Mask,       npc,          MOON_LINK,   MASK_FIERCE_DEITY, MASK_FIERCE_DEITY
+location,                                         type,           hint,               scene,                      id,                     item
+Initial Song of Healing,                          npc,            NONE,               CLOCK_TOWN_SOUTH,           SONG_HEALING,           SONG_HEALING
+Clock Town South Chest Lower,                     chest,          NONE,               CLOCK_TOWN_SOUTH,           0x00,                   RUPEE_RED
+Clock Town South Chest Upper,                     chest,          NONE,               CLOCK_TOWN_SOUTH,           0x01,                   RUPEE_PURPLE
+Clock Town Platform HP,                           collectible,    NONE,               CLOCK_TOWN_SOUTH,           0x0a,                   HEART_PIECE
+Clock Town Business Scrub,                        npc,            NONE,               CLOCK_TOWN_SOUTH,           SCRUB_LAND,             DEED_LAND
+Clock Town Post Box,                              npc,            NONE,               CLOCK_TOWN_SOUTH,           POSTBOX,                HEART_PIECE
+Clock Town Tree HP,                               collectible,    NONE,               CLOCK_TOWN_NORTH,           0x0a,                   HEART_PIECE
+Clock Town Bomber Notebook,                       npc,            NONE,               CLOCK_TOWN_NORTH,           BOMBER_NOTEBOOK,        BOMBER_NOTEBOOK
+Clock Town Blast Mask,                            npc,            NONE,               CLOCK_TOWN_NORTH,           MASK_BLAST,             MASK_BLAST
+Clock Town Keaton HP,                             npc,            NONE,               CLOCK_TOWN_NORTH,           KEATON_HEART_PIECE,     HEART_PIECE
+Clock Town Silver Rupee Chest,                    chest,          NONE,               CLOCK_TOWN_EAST,            0x0a,                   RUPEE_SILVER
+Clock Town Postman Hat,                           npc,            NONE,               CLOCK_TOWN_EAST,            MASK_POSTMAN,           MASK_POSTMAN
+Clock Town Bank Reward 1,                         npc,            NONE,               CLOCK_TOWN_WEST,            BANK_1,                 WALLET
+Clock Town Bank Reward 2,                         npc,            NONE,               CLOCK_TOWN_WEST,            BANK_2,                 RUPEE_BLUE
+Clock Town Bank Reward 3,                         npc,            BANK_3,             CLOCK_TOWN_WEST,            BANK_3,                 HEART_PIECE
+Clock Town Rosa Sisters HP,                       npc,            NONE,               CLOCK_TOWN_WEST,            ROSA_HEART_PIECE,       HEART_PIECE
+Clock Town Guru Guru Mask Bremen,                 npc,            NONE,               LAUNDRY_POOL,               MASK_BREMEN,            MASK_BREMEN
+Clock Town Stray Fairy,                           npc,            NONE,               LAUNDRY_POOL,               STRAY_FAIRY_TOWN,       STRAY_FAIRY_TOWN
+Clock Town Great Fairy,                           npc,            NONE,               FAIRY_FOUNTAIN,             GREAT_FAIRY_TOWN,       MASK_GREAT_FAIRY
+Clock Town Great Fairy Alt,                       npc,            NONE,               FAIRY_FOUNTAIN,             GREAT_FAIRY_TOWN_ALT,   MAGIC_UPGRADE
+Clock Tower Roof Skull Kid Ocarina,               npc,            NONE,               CLOCK_TOWER_ROOFTOP,        SKULL_KID_OCARINA,      OCARINA
+Clock Tower Roof Skull Kid Song of Time,          npc,            NONE,               CLOCK_TOWER_ROOFTOP,        SKULL_KID_SONG,         SONG_TIME
+Mayor's Office Kafei's Mask,                      npc,            NONE,               MAYOR_HOUSE,                MASK_KAFEI,             MASK_KAFEI
+Mayor's Office HP,                                npc,            NONE,               MAYOR_HOUSE,                MAYOR_HEART_PIECE,      HEART_PIECE
+Milk Bar Troupe Leader Mask,                      npc,            SOUND_CHECK,        MILK_BAR,                   MASK_TROUPE_LEADER,     MASK_TROUPE_LEADER
+Milk Bar Madame Aroma Bottle,                     npc,            NONE,               MILK_BAR,                   CHATEAU_ROMANI,         BOTTLED_CHATEAU_ROMANI
+Town Archery Reward 1,                            npc,            NONE,               SHOOTING_GALLERY,           SHOOTING_GAME_TOWN_1,   BOW
+Town Archery Reward 2,                            npc,            NONE,               SHOOTING_GALLERY,           SHOOTING_GAME_TOWN_2,   HEART_PIECE
+Chest Game HP,                                    npc,            NONE,               TREASURE_SHOP,              CHEST_GAME,             HEART_PIECE
+Honey & Darling Reward 1,                         npc,            NONE,               HONEY_DARLING,              HONEY_DARLING_1,        RUPEE_PURPLE
+Honey & Darling Reward 2,                         npc,            NONE,               HONEY_DARLING,              HONEY_DARLING_2,        HEART_PIECE
+Stock Pot Inn Guest Room Chest,                   chest,          NONE,               STOCK_POT_INN,              0x00,                   RUPEE_SILVER
+Stock Pot Inn Staff Room Chest,                   chest,          NONE,               STOCK_POT_INN,              0x01,                   RUPEE_SILVER
+Stock Pot Inn Room Key,                           npc,            NONE,               STOCK_POT_INN,              ROOM_KEY,               ROOM_KEY
+Stock Pot Inn Letter to Kafei,                    npc,            NONE,               STOCK_POT_INN,              LETTER_TO_KAFEI,        LETTER_TO_KAFEI
+Stock Pot Inn Couple's Mask,                      npc,            COUPLE_MASK,        STOCK_POT_INN,              MASK_COUPLE,            MASK_COUPLE
+Stock Pot Inn Grandma HP 1,                       npc,            NONE,               STOCK_POT_INN,              GRANDMA_HEART_PIECE_1,  HEART_PIECE
+Stock Pot Inn Grandma HP 2,                       npc,            NONE,               STOCK_POT_INN,              GRANDMA_HEART_PIECE_2,  HEART_PIECE
+Stock Pot Inn ??? HP,                             npc,            NONE,               STOCK_POT_INN,              TOILET_HEART_PIECE,     HEART_PIECE
+Astral Observatory Passage Chest,                 chest,          NONE,               OBSERVATORY,                0x00,                   RUPEE_SILVER
+Astral Observatory Moon Tear,                     npc,            NONE,               OBSERVATORY,                MOON_TEAR,              MOON_TEAR
+Bomb Shop Bomb Bag,                               npc,            NONE,               BOMB_SHOP,                  SHOP_BOMB_BAG,          BOMB_BAG
+Bomb Shop Bomb Bag 2,                             npc,            NONE,               BOMB_SHOP,                  SHOP_BOMB_BAG2,         BOMB_BAG
+Curiosity Shop All-Night Mask,                    npc,            NONE,               CURIOSITY_SHOP,             MASK_ALL_NIGHT,         MASK_ALL_NIGHT
+Curiosity Shop Back Room Pendant of Memories,     npc,            NONE,               CURIOSITY_SHOP,             PENDANT_OF_MEMORIES,    PENDANT_OF_MEMORIES
+Curiosity Shop Back Room Owner Reward 1,          npc,            NONE,               CURIOSITY_SHOP,             MASK_KEATON,            MASK_KEATON
+Curiosity Shop Back Room Owner Reward 2,          npc,            NONE,               CURIOSITY_SHOP,             LETTER_TO_MAMA,         LETTER_TO_MAMA
+Post Office HP,                                   npc,            NONE,               POST_OFFICE,                POSTMAN_HEART_PIECE,    HEART_PIECE
+Swordsman School HP,                              npc,            NONE,               SWORDSMAN_SCHOOL,           SWORDSMAN_HEART_PIECE,  HEART_PIECE
+Deku Playground Reward 1,                         npc,            NONE,               DEKU_PLAYGROUND,            DEKU_PLAYGROUND_1,      RUPEE_PURPLE
+Deku Playground Reward 2,                         npc,            NONE,               DEKU_PLAYGROUND,            DEKU_PLAYGROUND_2,      HEART_PIECE
+Termina Field Water Chest,                        chest,          NONE,               TERMINA_FIELD,              0x00,                   RUPEE_RED
+Termina Field Tall Grass Chest,                   chest,          NONE,               TERMINA_FIELD,              0x01,                   RUPEE_RED
+Termina Field Tree Stump Chest,                   chest,          NONE,               TERMINA_FIELD,              0x02,                   RUPEE_RED
+Termina Field Kamaro Mask,                        npc,            NONE,               TERMINA_FIELD,              MASK_KAMARO,            MASK_KAMARO
+Termina Field Tall Grass Grotto,                  chest,          NONE,               GROTTOS,                    0x1f,                   RUPEE_RED
+Termina Field Pillar Grotto,                      chest,          NONE,               GROTTOS,                    0x1a,                   BOMBCHU
+Termina Field Peahat Grotto,                      chest,          NONE,               GROTTOS,                    0x04,                   HEART_PIECE
+Termina Field Dodongo Grotto,                     chest,          NONE,               GROTTOS,                    0x00,                   HEART_PIECE
+Termina Field Bio Baba Grotto,                    collectible,    NONE,               GROTTOS,                    0x02,                   HEART_PIECE
+Termina Field Scrub,                              npc,            NONE,               GROTTOS,                    SCRUB_TELESCOPE,        HEART_PIECE
+Termina Field Gossip Stones HP,                   npc,            NONE,               GROTTOS,                    GOSSIP_HEART_PIECE,     HEART_PIECE
+Road to Southern Swamp HP,                        collectible,    NONE,               ROAD_SOUTHERN_SWAMP,        0x01,                   HEART_PIECE
+Road to Southern Swamp Grotto,                    chest,          NONE,               GROTTOS,                    0x1e,                   RUPEE_RED
+Southern Swamp HP,                                collectible,    NONE,               SOUTHERN_SWAMP,             0x1e,                   HEART_PIECE
+Southern Swamp Scrub Deed,                        npc,            NONE,               SOUTHERN_SWAMP,             SCRUB_SWAMP,            DEED_SWAMP
+Southern Swamp Song of Soaring,                   npc,            NONE,               SOUTHERN_SWAMP,             SONG_SOARING,           SONG_SOARING
+Southern Swamp Grotto,                            chest,          NONE,               GROTTOS,                    0x1d,                   RUPEE_RED
+Woods of Mystery Grotto,                          chest,          NONE,               GROTTOS,                    0x1c,                   RUPEE_PURPLE
+Swamp Archery Reward 1,                           npc,            NONE,               SHOOTING_GALLERY_SWAMP,     SHOOTING_GAME_SWAMP_1,  BOW
+Swamp Archery Reward 2,                           npc,            NONE,               SHOOTING_GALLERY_SWAMP,     SHOOTING_GAME_SWAMP_2,  HEART_PIECE
+Swamp Potion Shop Kotake,                         npc,            NONE,               POTION_SHOP,                KOTAKE_RED_POTION,      BOTTLED_POTION_RED
+Tourist Information Pictobox,                     npc,            NONE,               TOURIST_INFORMATION,        KOUME_PICTOGRAPH_BOX,   PICTOGRAPH_BOX
+Tourist Information Boat Cruise,                  npc,            BOAT_ARCHERY,       TOURIST_INFORMATION,        KOUME_HEART_PIECE,      HEART_PIECE
+Tourist Information Tingle Picture,               npc,            NONE,               TOURIST_INFORMATION,        TOUR_GUIDE_HEART_PIECE, HEART_PIECE
+Deku Palace HP,                                   collectible,    NONE,               DEKU_PALACE,                0x1e,                   HEART_PIECE
+Deku Palace Sonata of Awakening,                  npc,            NONE,               DEKU_KING_CHAMBER,          SONG_AWAKENING,         SONG_AWAKENING
+Deku Palace Grotto Chest,                         chest,          NONE,               GROTTOS,                    0x05,                   RUPEE_RED
+Deku Shrine Mask of Scents,                       npc,            BUTLER_RACE,        DEKU_SHRINE,                MASK_SCENTS,            MASK_SCENTS
+Woodfall Near Owl Chest,                          chest,          NONE,               WOODFALL,                   0x02,                   RUPEE_RED
+Woodfall Entrance Chest,                          chest,          NONE,               WOODFALL,                   0x00,                   RUPEE_RED
+Woodfall HP Chest,                                chest,          NONE,               WOODFALL,                   0x01,                   HEART_PIECE
+Woodfall Great Fairy,                             npc,            NONE,               FAIRY_FOUNTAIN,             GREAT_FAIRY_SWAMP,      SPIN_UPGRADE
+Swamp Spider House Mask of Truth,                 npc,            NONE,               SPIDER_HOUSE_SWAMP,         SPIDER_HOUSE_SWAMP,     MASK_TRUTH
+Swamp Skulltula Main Room Near Ceiling,           chest,          NONE,               SPIDER_HOUSE_SWAMP,         0x00,                   GS_TOKEN_SWAMP
+Swamp Skulltula Main Room Lower Right Soft Soil,  chest,          NONE,               SPIDER_HOUSE_SWAMP,         0x0c,                   GS_TOKEN_SWAMP
+Swamp Skulltula Main Room Lower Left Soft Soil,   chest,          NONE,               SPIDER_HOUSE_SWAMP,         0x09,                   GS_TOKEN_SWAMP
+Swamp Skulltula Main Room Upper Soft Soil,        chest,          NONE,               SPIDER_HOUSE_SWAMP,         0x0b,                   GS_TOKEN_SWAMP
+Swamp Skulltula Main Room Upper Pillar,           chest,          NONE,               SPIDER_HOUSE_SWAMP,         0x13,                   GS_TOKEN_SWAMP
+Swamp Skulltula Main Room Pillar,                 chest,          NONE,               SPIDER_HOUSE_SWAMP,         0x0f,                   GS_TOKEN_SWAMP
+Swamp Skulltula Main Room Water,                  chest,          NONE,               SPIDER_HOUSE_SWAMP,         0x08,                   GS_TOKEN_SWAMP
+Swamp Skulltula Main Room Jar,                    chest,          NONE,               SPIDER_HOUSE_SWAMP,         0x1e,                   GS_TOKEN_SWAMP
+Swamp Skulltula Gold Room Near Ceiling,           chest,          NONE,               SPIDER_HOUSE_SWAMP,         0x01,                   GS_TOKEN_SWAMP
+Swamp Skulltula Gold Room Pillar,                 chest,          NONE,               SPIDER_HOUSE_SWAMP,         0x04,                   GS_TOKEN_SWAMP
+Swamp Skulltula Gold Room Wall,                   chest,          NONE,               SPIDER_HOUSE_SWAMP,         0x19,                   GS_TOKEN_SWAMP
+Swamp Skulltula Gold Room Hive,                   chest,          NONE,               SPIDER_HOUSE_SWAMP,         0x12,                   GS_TOKEN_SWAMP
+Swamp Skulltula Tree Room Hive,                   chest,          NONE,               SPIDER_HOUSE_SWAMP,         0x1a,                   GS_TOKEN_SWAMP
+Swamp Skulltula Tree Room Grass 1,                chest,          NONE,               SPIDER_HOUSE_SWAMP,         0x06,                   GS_TOKEN_SWAMP
+Swamp Skulltula Tree Room Grass 2,                chest,          NONE,               SPIDER_HOUSE_SWAMP,         0x07,                   GS_TOKEN_SWAMP
+Swamp Skulltula Tree Room Tree 1,                 chest,          NONE,               SPIDER_HOUSE_SWAMP,         0x15,                   GS_TOKEN_SWAMP
+Swamp Skulltula Tree Room Tree 2,                 chest,          NONE,               SPIDER_HOUSE_SWAMP,         0x18,                   GS_TOKEN_SWAMP
+Swamp Skulltula Tree Room Tree 3,                 chest,          NONE,               SPIDER_HOUSE_SWAMP,         0x1d,                   GS_TOKEN_SWAMP
+Swamp Skulltula Monument Room Lower Wall,         chest,          NONE,               SPIDER_HOUSE_SWAMP,         0x0d,                   GS_TOKEN_SWAMP
+Swamp Skulltula Monument Room On Monument,        chest,          NONE,               SPIDER_HOUSE_SWAMP,         0x0e,                   GS_TOKEN_SWAMP
+Swamp Skulltula Monument Room Crate 1,            chest,          NONE,               SPIDER_HOUSE_SWAMP,         0x0a,                   GS_TOKEN_SWAMP
+Swamp Skulltula Monument Room Crate 2,            chest,          NONE,               SPIDER_HOUSE_SWAMP,         0x1b,                   GS_TOKEN_SWAMP
+Swamp Skulltula Monument Room Torch,              chest,          NONE,               SPIDER_HOUSE_SWAMP,         0x02,                   GS_TOKEN_SWAMP
+Swamp Skulltula Pot Room Hive 1,                  chest,          NONE,               SPIDER_HOUSE_SWAMP,         0x17,                   GS_TOKEN_SWAMP
+Swamp Skulltula Pot Room Hive 2,                  chest,          NONE,               SPIDER_HOUSE_SWAMP,         0x1c,                   GS_TOKEN_SWAMP
+Swamp Skulltula Pot Room Behind Vines,            chest,          NONE,               SPIDER_HOUSE_SWAMP,         0x14,                   GS_TOKEN_SWAMP
+Swamp Skulltula Pot Room Pot 1,                   chest,          NONE,               SPIDER_HOUSE_SWAMP,         0x10,                   GS_TOKEN_SWAMP
+Swamp Skulltula Pot Room Pot 2,                   chest,          NONE,               SPIDER_HOUSE_SWAMP,         0x11,                   GS_TOKEN_SWAMP
+Swamp Skulltula Pot Room Jar,                     chest,          NONE,               SPIDER_HOUSE_SWAMP,         0x05,                   GS_TOKEN_SWAMP
+Swamp Skulltula Pot Room Wall,                    chest,          NONE,               SPIDER_HOUSE_SWAMP,         0x16,                   GS_TOKEN_SWAMP
+Mountain Village Waterfall Chest,                 chest,          NONE,               MOUNTAIN_VILLAGE_WINTER,    0x00,                   RUPEE_RED
+Mountain Village Don Gero Mask,                   npc,            NONE,               MOUNTAIN_VILLAGE_WINTER,    MASK_DON_GERO,          MASK_DON_GERO
+Mountain Village Frog Choir HP,                   npc,            DON_GERO_CHOIR,     MOUNTAIN_VILLAGE_WINTER,    FROG_HEART_PIECE,       HEART_PIECE
+Mountain Village Tunnel Grotto,                   chest,          NONE,               GROTTOS,                    0x1b,                   RUPEE_RED
+Blacksmith Razor Blade,                           npc,            NONE,               BLACKSMITH,                 SWORD_RAZOR,            SWORD
+Blacksmith Gilded Sword,                          npc,            NONE,               BLACKSMITH,                 SWORD_GILDED,           SWORD
+Lone Peak Shrine Lens Chest,                      chest,          NONE,               GROTTOS,                    0x01,                   LENS
+Lone Peak Shrine Boulder Chest,                   chest,          NONE,               GROTTOS,                    0x06,                   RUPEE_RED
+Lone Peak Shrine Invisible Chest,                 chest,          NONE,               GROTTOS,                    0x03,                   RUPEE_PURPLE
+Goron Graveyard Mask,                             npc,            NONE,               GORON_GRAVEYARD,            MASK_GORON,             MASK_GORON
+Twin Islands Underwater Chest 1,                  chest,          NONE,               TWIN_ISLANDS_WINTER,        0x06,                   HEART_PIECE
+Twin Islands Underwater Chest 2,                  chest,          NONE,               TWIN_ISLANDS_WINTER,        0x00,                   RUPEE_RED
+Twin Islands Frozen Grotto Chest,                 chest,          NONE,               GROTTOS,                    0x02,                   RUPEE_RED
+Twin Islands Ramp Grotto Chest,                   chest,          NONE,               GROTTOS,                    0x19,                   BOMBCHU
+Goron Elder,                                      npc,            NONE,               TWIN_ISLANDS_WINTER,        GORON_ELDER,            SONG_GORON_HALF
+Goron Baby,                                       npc,            NONE,               GORON_SHRINE,               GORON_BABY,             SONG_GORON_HALF
+Goron Village HP,                                 collectible,    NONE,               GORON_VILLAGE_WINTER,       0x1e,                   HEART_PIECE
+Goron Village Scrub Deed,                         npc,            NONE,               GORON_VILLAGE_WINTER,       SCRUB_MOUNTAIN,         DEED_MOUNTAIN
+Goron Village Scrub Bomb Bag,                     npc,            NONE,               GORON_VILLAGE_WINTER,       SCRUB_BOMB_BAG,         BOMB_BAG
+Goron Powder Keg,                                 npc,            NONE,               GORON_VILLAGE_WINTER,       GORON_KEG,              POWDER_KEG
+Path to Snowhead HP,                              collectible,    NONE,               PATH_SNOWHEAD,              0x08,                   HEART_PIECE
+Path to Snowhead Grotto,                          chest,          NONE,               GROTTOS,                    0x13,                   RUPEE_RED
+Snowhead Great Fairy,                             npc,            NONE,               FAIRY_FOUNTAIN,             GREAT_FAIRY_MOUNTAIN,   MAGIC_UPGRADE
+Goron Race Reward,                                npc,            GORON_RACE,         GORON_RACETRACK,            GORON_RACE,             BOTTLED_GOLD_DUST
+Romani Ranch Epona Song,                          npc,            NONE,               ROMANI_RANCH,               SONG_EPONA,             SONG_EPONA
+Romani Ranch Aliens,                              npc,            RANCH_DEFENSE,      ROMANI_RANCH,               ROMANI_BOTTLE,          BOTTLED_MILK
+Romani Ranch Cremia Escort,                       npc,            RANCH_DEFENSE,      ROMANI_RANCH,               CREMIA_ESCORT,          MASK_ROMANI
+Cucco Shack Bunny Mask,                           npc,            NONE,               CUCCO_SHACK,                MASK_BUNNY,             MASK_BUNNY
+Doggy Racetrack Chest,                            chest,          NONE,               DOG_RACETRACK,              0x00,                   RUPEE_PURPLE
+Doggy Racetrack HP,                               npc,            NONE,               DOG_RACETRACK,              DOG_LADY_HEART_PIECE,   HEART_PIECE
+Great Bay Coast Zora Mask,                        npc,            NONE,               GREAT_BAY_COAST,            MASK_ZORA,              MASK_ZORA
+Great Bay Coast HP,                               collectible,    NONE,               GREAT_BAY_COAST,            0x05,                   HEART_PIECE
+Great Bay Coast Fisherman HP,                     npc,            FISHERMAN_GAME,     GREAT_BAY_COAST,            FISHERMAN_HEART_PIECE,  HEART_PIECE
+Great Bay Coast Fisherman Grotto,                 chest,          NONE,               GROTTOS,                    0x17,                   RUPEE_RED
+Zora Cape Ledge Chest 1,                          chest,          NONE,               ZORA_CAPE,                  0x01,                   RUPEE_RED
+Zora Cape Ledge Chest 2,                          chest,          NONE,               ZORA_CAPE,                  0x02,                   RUPEE_RED
+Zora Cape Underwater Chest,                       chest,          NONE,               ZORA_CAPE,                  0x00,                   RUPEE_PURPLE
+Zora Cape Waterfall HP,                           collectible,    NONE,               ZORA_CAPE,                  0x07,                   HEART_PIECE
+Zora Cape Grotto,                                 chest,          NONE,               GROTTOS,                    0x15,                   BOMBCHU
+Great Bay Great Fairy,                            npc,            NONE,               FAIRY_FOUNTAIN,             GREAT_FAIRY_OCEAN,      DEFENSE_UPGRADE
+Zora Hall Scrub Deed,                             npc,            NONE,               ZORA_HALL_ROOMS,            SCRUB_OCEAN,            DEED_OCEAN
+Zora Hall Scrub HP,                               collectible,    NONE,               ZORA_HALL_ROOMS,            0x1e,                   HEART_PIECE
+Zora Hall Evan HP,                                npc,            NONE,               ZORA_HALL_ROOMS,            ZORA_EVAN,              HEART_PIECE
+Zora Hall Scene Lights,                           npc,            NONE,               ZORA_HALL,                  ZORA_HALL_LIGHTS,       RUPEE_BLUE
+Pinnacle Rock Chest 1,                            chest,          NONE,               PINNACLE_ROCK,              0x01,                   RUPEE_RED
+Pinnacle Rock Chest 2,                            chest,          NONE,               PINNACLE_ROCK,              0x02,                   RUPEE_RED
+Pinnacle Rock HP,                                 npc,            PINNACLE_ROCK_HP,   PINNACLE_ROCK,              SEAHORSE_HEART_PIECE,   HEART_PIECE
+Laboratory Zora Song,                             npc,            NONE,               LABORATORY,                 SONG_ZORA,              SONG_ZORA
+Laboratory Fish HP,                               npc,            NONE,               LABORATORY,                 LAB_FISH_HEART_PIECE,   HEART_PIECE
+Ocean Spider House Wallet,                        npc,            NONE,               SPIDER_HOUSE_OCEAN,         SPIDER_HOUSE_OCEAN,     WALLET
+Ocean Spider House Chest HP,                      chest,          OSH_CHEST,          SPIDER_HOUSE_OCEAN,         0x00,                   HEART_PIECE
+Ocean Skulltula Entrance Right Wall,              chest,          NONE,               SPIDER_HOUSE_OCEAN,         0x0c,                   GS_TOKEN_OCEAN
+Ocean Skulltula Entrance Left Wall,               chest,          NONE,               SPIDER_HOUSE_OCEAN,         0x0d,                   GS_TOKEN_OCEAN
+Ocean Skulltula Entrance Web,                     chest,          NONE,               SPIDER_HOUSE_OCEAN,         0x0f,                   GS_TOKEN_OCEAN
+Ocean Skulltula 2nd Room Ceiling Edge,            chest,          NONE,               SPIDER_HOUSE_OCEAN,         0x05,                   GS_TOKEN_OCEAN
+Ocean Skulltula 2nd Room Ceiling Plank,           chest,          NONE,               SPIDER_HOUSE_OCEAN,         0x06,                   GS_TOKEN_OCEAN
+Ocean Skulltula 2nd Room Jar,                     chest,          NONE,               SPIDER_HOUSE_OCEAN,         0x0b,                   GS_TOKEN_OCEAN
+Ocean Skulltula 2nd Room Webbed Hole,             chest,          NONE,               SPIDER_HOUSE_OCEAN,         0x0e,                   GS_TOKEN_OCEAN
+Ocean Skulltula 2nd Room Webbed Pot,              chest,          NONE,               SPIDER_HOUSE_OCEAN,         0x17,                   GS_TOKEN_OCEAN
+Ocean Skulltula 2nd Room Upper Pot,               chest,          NONE,               SPIDER_HOUSE_OCEAN,         0x18,                   GS_TOKEN_OCEAN
+Ocean Skulltula 2nd Room Lower Pot,               chest,          NONE,               SPIDER_HOUSE_OCEAN,         0x1b,                   GS_TOKEN_OCEAN
+Ocean Skulltula 2nd Room Behind Skull 1,          chest,          NONE,               SPIDER_HOUSE_OCEAN,         0x1d,                   GS_TOKEN_OCEAN
+Ocean Skulltula 2nd Room Behind Skull 2,          chest,          NONE,               SPIDER_HOUSE_OCEAN,         0x1e,                   GS_TOKEN_OCEAN
+Ocean Skulltula Storage Room Behind Boat,         chest,          NONE,               SPIDER_HOUSE_OCEAN,         0x01,                   GS_TOKEN_OCEAN
+Ocean Skulltula Storage Room Ceiling Web,         chest,          NONE,               SPIDER_HOUSE_OCEAN,         0x09,                   GS_TOKEN_OCEAN
+Ocean Skulltula Storage Room Behind Crate,        chest,          NONE,               SPIDER_HOUSE_OCEAN,         0x0a,                   GS_TOKEN_OCEAN
+Ocean Skulltula Storage Room Crate,               chest,          NONE,               SPIDER_HOUSE_OCEAN,         0x16,                   GS_TOKEN_OCEAN
+Ocean Skulltula Storage Room Jar,                 chest,          NONE,               SPIDER_HOUSE_OCEAN,         0x1a,                   GS_TOKEN_OCEAN
+Ocean Skulltula Library Hole Behind Picture,      chest,          NONE,               SPIDER_HOUSE_OCEAN,         0x02,                   GS_TOKEN_OCEAN
+Ocean Skulltula Library Hole Behind Cabinet,      chest,          NONE,               SPIDER_HOUSE_OCEAN,         0x03,                   GS_TOKEN_OCEAN
+Ocean Skulltula Library On Corner Bookshelf,      chest,          NONE,               SPIDER_HOUSE_OCEAN,         0x04,                   GS_TOKEN_OCEAN
+Ocean Skulltula Library Ceiling Edge,             chest,          NONE,               SPIDER_HOUSE_OCEAN,         0x08,                   GS_TOKEN_OCEAN
+Ocean Skulltula Library Behind Picture,           chest,          NONE,               SPIDER_HOUSE_OCEAN,         0x14,                   GS_TOKEN_OCEAN
+Ocean Skulltula Library Behind Bookcase 1,        chest,          NONE,               SPIDER_HOUSE_OCEAN,         0x15,                   GS_TOKEN_OCEAN
+Ocean Skulltula Library Behind Bookcase 2,        chest,          NONE,               SPIDER_HOUSE_OCEAN,         0x1c,                   GS_TOKEN_OCEAN
+Ocean Skulltula Colored Skulls Ceiling Edge,      chest,          NONE,               SPIDER_HOUSE_OCEAN,         0x07,                   GS_TOKEN_OCEAN
+Ocean Skulltula Colored Skulls Chandelier 1,      chest,          NONE,               SPIDER_HOUSE_OCEAN,         0x10,                   GS_TOKEN_OCEAN
+Ocean Skulltula Colored Skulls Chandelier 2,      chest,          NONE,               SPIDER_HOUSE_OCEAN,         0x11,                   GS_TOKEN_OCEAN
+Ocean Skulltula Colored Skulls Chandelier 3,      chest,          NONE,               SPIDER_HOUSE_OCEAN,         0x12,                   GS_TOKEN_OCEAN
+Ocean Skulltula Colored Skulls Behind Picture,    chest,          NONE,               SPIDER_HOUSE_OCEAN,         0x13,                   GS_TOKEN_OCEAN
+Ocean Skulltula Colored Skulls Pot,               chest,          NONE,               SPIDER_HOUSE_OCEAN,         0x19,                   GS_TOKEN_OCEAN
+Waterfall Rapids Beaver Race 1,                   npc,            NONE,               WATERFALL_RAPIDS,           BEAVER_1,               EMPTY_BOTTLE
+Waterfall Rapids Beaver Race 2,                   npc,            NONE,               WATERFALL_RAPIDS,           BEAVER_2,               HEART_PIECE
+Road to Ikana Chest,                              chest,          NONE,               ROAD_IKANA,                 0x00,                   RUPEE_RED
+Road to Ikana Grotto,                             chest,          NONE,               GROTTOS,                    0x16,                   BOMBCHU
+Road to Ikana Stone Mask,                         npc,            NONE,               ROAD_IKANA,                 MASK_STONE,             MASK_STONE
+Gorman Track Garo Mask,                           npc,            NONE,               GORMAN_TRACK,               MASK_GARO,              MASK_GARO
+Ikana Graveyard Captain Mask,                     chest,          NONE,               IKANA_GRAVEYARD,            0x00,                   MASK_CAPTAIN
+Ikana Graveyard Grotto,                           chest,          NONE,               GROTTOS,                    0x18,                   BOMBCHUS_5
+Beneath The Graveyard Chest,                      chest,          NONE,               BENEATH_THE_GRAVEYARD,      0x03,                   RUPEE_PURPLE
+Beneath The Graveyard Song of Storms,             npc,            NONE,               BENEATH_THE_GRAVEYARD,      SONG_STORMS,            SONG_STORMS
+Beneath The Graveyard HP,                         chest,          NONE,               BENEATH_THE_GRAVEYARD,      0x00,                   HEART_PIECE
+Beneath The Graveyard Dampe Chest,                chest,          GRAVEYARD_NIGHT3,   DAMPE_HOUSE,                0x00,                   EMPTY_BOTTLE
+Ikana Valley Scrub Rupee,                         npc,            NONE,               IKANA_CANYON,               SCRUB_VALLEY,           RUPEE_GOLD
+Ikana Valley Scrub HP,                            collectible,    NONE,               IKANA_CANYON,               0x1e,                   HEART_PIECE
+Ikana Valley Grotto,                              chest,          NONE,               GROTTOS,                    0x14,                   BOMBCHUS_5
+Ikana Great Fairy,                                npc,            NONE,               FAIRY_FOUNTAIN,             GREAT_FAIRY_VALLEY,     GREAT_FAIRY_SWORD
+Ghost Hut HP,                                     npc,            NONE,               GHOST_HUT,                  GHOST_HUT_HEART_PIECE,  HEART_PIECE
+Music Box House Gibdo Mask,                       npc,            NONE,               MUSIC_BOX_HOUSE,            MASK_GIBDO,             MASK_GIBDO
+Stone Tower Inverted Chest 1,                     chest,          NONE,               STONE_TOWER_INVERTED,       0x1d,                   RUPEE_SILVER
+Stone Tower Inverted Chest 2,                     chest,          NONE,               STONE_TOWER_INVERTED,       0x1e,                   BOMBCHUS_10
+Stone Tower Inverted Chest 3,                     chest,          NONE,               STONE_TOWER_INVERTED,       0x1f,                   MAGIC_BEAN
+Oath to Order,                                    npc,            NONE,               LAIR_ODOLWA,                SONG_ORDER,             SONG_ORDER
+Woodfall Temple Entrance Chest,                   chest,          NONE,               TEMPLE_WOODFALL,            0x18,                   STRAY_FAIRY_WF
+Woodfall Temple Water Chest,                      chest,          NONE,               TEMPLE_WOODFALL,            0x01,                   SMALL_KEY_WF
+Woodfall Temple Map,                              chest,          NONE,               TEMPLE_WOODFALL,            0x1d,                   MAP_WF
+Woodfall Temple Compass,                          chest,          NONE,               TEMPLE_WOODFALL,            0x1c,                   COMPASS_WF
+Woodfall Temple Dark Chest,                       chest,          NONE,               TEMPLE_WOODFALL,            0x19,                   STRAY_FAIRY_WF
+Woodfall Temple Center Chest,                     chest,          NONE,               TEMPLE_WOODFALL,            0x17,                   STRAY_FAIRY_WF
+Woodfall Temple Bow,                              chest,          NONE,               TEMPLE_WOODFALL,            0x1b,                   BOW
+Woodfall Temple Boss Key Chest,                   chest,          NONE,               TEMPLE_WOODFALL,            0x1e,                   BOSS_KEY_WF
+Woodfall Temple SF Entrance,                      sf,             NONE,               TEMPLE_WOODFALL,            0x2b,                   STRAY_FAIRY_WF
+Woodfall Temple SF Main Pot,                      sf,             NONE,               TEMPLE_WOODFALL,            0x1c,                   STRAY_FAIRY_WF
+Woodfall Temple SF Main Deku Baba,                sf,             NONE,               TEMPLE_WOODFALL,            0x2e,                   STRAY_FAIRY_WF
+Woodfall Temple SF Main Bubble,                   sf,             NONE,               TEMPLE_WOODFALL,            0x30,                   STRAY_FAIRY_WF
+Woodfall Temple SF Maze Skulltula,                sf,             NONE,               TEMPLE_WOODFALL,            0x31,                   STRAY_FAIRY_WF
+Woodfall Temple SF Maze Beehive,                  sf,             NONE,               TEMPLE_WOODFALL,            0x1d,                   STRAY_FAIRY_WF
+Woodfall Temple SF Maze Bubble,                   sf,             NONE,               TEMPLE_WOODFALL,            0x2f,                   STRAY_FAIRY_WF
+Woodfall Temple SF Water Room Beehive,            sf,             NONE,               TEMPLE_WOODFALL,            0x1e,                   STRAY_FAIRY_WF
+Woodfall Temple SF Pre-Boss Bottom Right,         sf,             NONE,               TEMPLE_WOODFALL,            0x2a,                   STRAY_FAIRY_WF
+Woodfall Temple SF Pre-Boss Left,                 sf,             NONE,               TEMPLE_WOODFALL,            0x2c,                   STRAY_FAIRY_WF
+Woodfall Temple SF Pre-Boss Top Right,            sf,             NONE,               TEMPLE_WOODFALL,            0x32,                   STRAY_FAIRY_WF
+Woodfall Temple SF Pre-Boss Pillar,               sf,             NONE,               TEMPLE_WOODFALL,            0x2d,                   STRAY_FAIRY_WF
+Woodfall Temple Boss Container,                   collectible,    NONE,               LAIR_ODOLWA,                0x1f,                   HEART_CONTAINER
+Woodfall Temple Boss,                             npc,            NONE,               LAIR_ODOLWA,                REMAINS_ODOLWA,         REMAINS_ODOLWA
+Snowhead Temple Compass Room Ledge,               chest,          NONE,               TEMPLE_SNOWHEAD,            0x19,                   STRAY_FAIRY_SH
+Snowhead Temple Compass,                          chest,          NONE,               TEMPLE_SNOWHEAD,            0x1c,                   COMPASS_SH
+Snowhead Temple Bridge Room,                      chest,          NONE,               TEMPLE_SNOWHEAD,            0x01,                   SMALL_KEY_SH
+Snowhead Temple Block Room,                       chest,          NONE,               TEMPLE_SNOWHEAD,            0x03,                   SMALL_KEY_SH
+Snowhead Temple Block Room Ledge,                 chest,          NONE,               TEMPLE_SNOWHEAD,            0x15,                   STRAY_FAIRY_SH
+Snowhead Temple Central Room Bottom,              chest,          NONE,               TEMPLE_SNOWHEAD,            0x14,                   STRAY_FAIRY_SH
+Snowhead Temple Boss Key,                         chest,          NONE,               TEMPLE_SNOWHEAD,            0x1e,                   BOSS_KEY_SH
+Snowhead Temple Central Room Alcove,              chest,          NONE,               TEMPLE_SNOWHEAD,            0x17,                   STRAY_FAIRY_SH
+Snowhead Temple Pillars Room,                     chest,          NONE,               TEMPLE_SNOWHEAD,            0x18,                   STRAY_FAIRY_SH
+Snowhead Temple Fire Arrow,                       chest,          NONE,               TEMPLE_SNOWHEAD,            0x1b,                   ARROW_FIRE
+Snowhead Temple Icicle Room Alcove,               chest,          NONE,               TEMPLE_SNOWHEAD,            0x16,                   STRAY_FAIRY_SH
+Snowhead Temple Icicle Room,                      chest,          NONE,               TEMPLE_SNOWHEAD,            0x04,                   SMALL_KEY_SH
+Snowhead Temple Map,                              chest,          NONE,               TEMPLE_SNOWHEAD,            0x1d,                   MAP_SH
+Snowhead Temple Map Alcove,                       chest,          NONE,               TEMPLE_SNOWHEAD,            0x13,                   STRAY_FAIRY_SH
+Snowhead Temple SF Bridge Under Platform,         sf,             NONE,               TEMPLE_SNOWHEAD,            0x2f,                   STRAY_FAIRY_SH
+Snowhead Temple SF Bridge Pillar,                 sf,             NONE,               TEMPLE_SNOWHEAD,            0x30,                   STRAY_FAIRY_SH
+Snowhead Temple SF Map Room,                      sf,             NONE,               TEMPLE_SNOWHEAD,            0x32,                   STRAY_FAIRY_SH
+Snowhead Temple SF Compass Room Crate,            sf,             NONE,               TEMPLE_SNOWHEAD,            0x1e,                   STRAY_FAIRY_SH
+Snowhead Temple SF Dual Switches,                 sf,             NONE,               TEMPLE_SNOWHEAD,            0x2c,                   STRAY_FAIRY_SH
+Snowhead Temple SF Snow Room,                     sf,             NONE,               TEMPLE_SNOWHEAD,            0x2b,                   STRAY_FAIRY_SH
+Snowhead Temple SF Dinolfos 1,                    sf,             NONE,               TEMPLE_SNOWHEAD,            0x2d,                   STRAY_FAIRY_SH
+Snowhead Temple SF Dinolfos 2,                    sf,             NONE,               TEMPLE_SNOWHEAD,            0x31,                   STRAY_FAIRY_SH
+Snowhead Temple Boss HC,                          collectible,    NONE,               LAIR_GOHT,                  0x1f,                   HEART_CONTAINER
+Snowhead Temple Boss,                             npc,            NONE,               LAIR_GOHT,                  REMAINS_GOHT,           REMAINS_GOHT
+Pirate Fortress Entrance Chest 1,                 chest,          NONE,               PIRATE_FORTRESS_ENTRANCE,   0x00,                   RUPEE_RED
+Pirate Fortress Entrance Chest 2,                 chest,          NONE,               PIRATE_FORTRESS_ENTRANCE,   0x01,                   RUPEE_RED
+Pirate Fortress Entrance Chest 3,                 chest,          NONE,               PIRATE_FORTRESS_ENTRANCE,   0x02,                   RUPEE_RED
+Pirate Fortress Sewers Chest 1,                   chest,          NONE,               PIRATE_FORTRESS_INTERIOR,   0x01,                   RUPEE_RED
+Pirate Fortress Sewers Chest 2,                   chest,          NONE,               PIRATE_FORTRESS_INTERIOR,   0x04,                   RUPEE_RED
+Pirate Fortress Sewers Chest 3,                   chest,          NONE,               PIRATE_FORTRESS_INTERIOR,   0x06,                   RUPEE_BLUE
+Pirate Fortress Sewers HP,                        collectible,    NONE,               PIRATE_FORTRESS_INTERIOR,   0x0c,                   HEART_PIECE
+Pirate Fortress Interior Hookshot,                chest,          NONE,               PIRATE_FORTRESS_INTERIOR,   0x02,                   HOOKSHOT
+Pirate Fortress Interior Aquarium,                chest,          NONE,               PIRATE_FORTRESS_INTERIOR,   0x00,                   RUPEE_RED
+Pirate Fortress Interior Silver Rupee Chest,      chest,          NONE,               PIRATE_FORTRESS_INTERIOR,   0x03,                   RUPEE_SILVER
+Pirate Fortress Interior Lower Chest,             chest,          NONE,               PIRATE_FORTRESS_EXTERIOR,   0x00,                   RUPEE_RED
+Pirate Fortress Interior Upper Chest,             chest,          NONE,               PIRATE_FORTRESS_EXTERIOR,   0x01,                   RUPEE_RED
+Great Bay Temple Map,                             chest,          NONE,               TEMPLE_GREAT_BAY,           0x1d,                   MAP_GB
+Great Bay Temple Baba Chest,                      chest,          NONE,               TEMPLE_GREAT_BAY,           0x19,                   STRAY_FAIRY_GB
+Great Bay Temple Boss Key,                        chest,          NONE,               TEMPLE_GREAT_BAY,           0x1e,                   BOSS_KEY_GB
+Great Bay Temple Compass,                         chest,          NONE,               TEMPLE_GREAT_BAY,           0x1c,                   COMPASS_GB
+Great Bay Temple Compass Room Underwater,         chest,          NONE,               TEMPLE_GREAT_BAY,           0x01,                   SMALL_KEY_GB
+Great Bay Temple Ice Arrow,                       chest,          NONE,               TEMPLE_GREAT_BAY,           0x1b,                   ARROW_ICE
+Great Bay Temple Green Pipe 1 Chest,              chest,          NONE,               TEMPLE_GREAT_BAY,           0x15,                   STRAY_FAIRY_GB
+Great Bay Temple Green Pipe 2 Lower Chest,        chest,          NONE,               TEMPLE_GREAT_BAY,           0x17,                   STRAY_FAIRY_GB
+Great Bay Temple Green Pipe 2 Upper Chest,        chest,          NONE,               TEMPLE_GREAT_BAY,           0x14,                   STRAY_FAIRY_GB
+Great Bay Temple Green Pipe 3 Chest,              chest,          NONE,               TEMPLE_GREAT_BAY,           0x16,                   STRAY_FAIRY_GB
+Great Bay Temple Entrance Chest,                  chest,          NONE,               TEMPLE_GREAT_BAY,           0x18,                   STRAY_FAIRY_GB
+Great Bay Temple SF Water Wheel Platform,         sf,             NONE,               TEMPLE_GREAT_BAY,           0x30,                   STRAY_FAIRY_GB
+Great Bay Temple SF Water Wheel Skulltula,        sf,             NONE,               TEMPLE_GREAT_BAY,           0x32,                   STRAY_FAIRY_GB
+Great Bay Temple SF Central Room Barrel,          sf,             NONE,               TEMPLE_GREAT_BAY,           0x1c,                   STRAY_FAIRY_GB
+Great Bay Temple SF Central Room Underwater Pot,  sf,             NONE,               TEMPLE_GREAT_BAY,           0x1b,                   STRAY_FAIRY_GB
+Great Bay Temple SF Map Room Pot,                 sf,             NONE,               TEMPLE_GREAT_BAY,           0x1e,                   STRAY_FAIRY_GB
+Great Bay Temple SF Compass Room Pot,             sf,             NONE,               TEMPLE_GREAT_BAY,           0x1d,                   STRAY_FAIRY_GB
+Great Bay Temple SF Green Pipe 3 Barrel,          sf,             NONE,               TEMPLE_GREAT_BAY,           0x1a,                   STRAY_FAIRY_GB
+Great Bay Temple SF Pre-Boss Above Water,         sf,             NONE,               TEMPLE_GREAT_BAY,           0x31,                   STRAY_FAIRY_GB
+Great Bay Temple SF Pre-Boss Underwater,          sf,             NONE,               TEMPLE_GREAT_BAY,           0x2f,                   STRAY_FAIRY_GB
+Great Bay Temple Boss HC,                         collectible,    NONE,               LAIR_GYORG,                 0x1f,                   HEART_CONTAINER
+Great Bay Temple Boss,                            npc,            NONE,               LAIR_GYORG,                 REMAINS_GYORG,          REMAINS_GYORG
+Beneath the Well Skulltulla Chest,                chest,          NONE,               BENEATH_THE_WELL,           0x01,                   RUPEE_PURPLE
+Beneath the Well Keese Chest,                     chest,          NONE,               BENEATH_THE_WELL,           0x02,                   RUPEE_PURPLE
+Beneath the Well Mirror Shield,                   chest,          NONE,               BENEATH_THE_WELL,           0x1b,                   SHIELD
+Ancient Castle of Ikana HP,                       collectible,    NONE,               CASTLE_IKANA,               0x0a,                   HEART_PIECE
+Ancient Castle of Ikana Song Emptiness,           npc,            SONG_ELEGY,         LAIR_IKANA,                 SONG_EMPTINESS,         SONG_EMPTINESS
+Stone Tower Temple Entrance Chest,                chest,          NONE,               TEMPLE_STONE_TOWER,         0x16,                   STRAY_FAIRY_ST
+Stone Tower Temple Entrance Switch Chest,         chest,          NONE,               TEMPLE_STONE_TOWER,         0x12,                   STRAY_FAIRY_ST
+Stone Tower Temple Under West Garden Ledge Chest, chest,          NONE,               TEMPLE_STONE_TOWER,         0x15,                   STRAY_FAIRY_ST
+Stone Tower Temple Under West Garden Lava Chest,  chest,          NONE,               TEMPLE_STONE_TOWER,         0x02,                   SMALL_KEY_ST
+Stone Tower Temple Map,                           chest,          NONE,               TEMPLE_STONE_TOWER,         0x1d,                   MAP_ST
+Stone Tower Temple Center Sun Block Chest,        chest,          NONE,               TEMPLE_STONE_TOWER,         0x18,                   STRAY_FAIRY_ST
+Stone Tower Temple Center Across Water Chest,     chest,          NONE,               TEMPLE_STONE_TOWER,         0x01,                   SMALL_KEY_ST
+Stone Tower Temple Compass,                       chest,          NONE,               TEMPLE_STONE_TOWER,         0x1c,                   COMPASS_ST
+Stone Tower Temple Water Sun Switch Chest,        chest,          NONE,               TEMPLE_STONE_TOWER,         0x17,                   STRAY_FAIRY_ST
+Stone Tower Temple Mirrors Room Center Chest,     chest,          NONE,               TEMPLE_STONE_TOWER,         0x0f,                   STRAY_FAIRY_ST
+Stone Tower Temple Mirrors Room Right Chest,      chest,          NONE,               TEMPLE_STONE_TOWER,         0x0b,                   STRAY_FAIRY_ST
+Stone Tower Temple Wind Room Ledge Chest,         chest,          NONE,               TEMPLE_STONE_TOWER,         0x19,                   STRAY_FAIRY_ST
+Stone Tower Temple Wind Room Jail Chest,          chest,          NONE,               TEMPLE_STONE_TOWER,         0x0d,                   STRAY_FAIRY_ST
+Stone Tower Temple Light Arrow,                   chest,          NONE,               TEMPLE_STONE_TOWER,         0x1b,                   ARROW_LIGHT
+Stone Tower Temple Before Water Bridge Chest,     chest,          NONE,               TEMPLE_STONE_TOWER,         0x14,                   STRAY_FAIRY_ST
+Stone Tower Temple Water Bridge Chest,            chest,          NONE,               TEMPLE_STONE_TOWER,         0x0c,                   STRAY_FAIRY_ST
+Stone Tower Temple Inverted Entrance Chest,       chest,          NONE,               TEMPLE_STONE_TOWER,         0x10,                   STRAY_FAIRY_ST
+Stone Tower Temple Inverted East Lower Chest,     chest,          NONE,               TEMPLE_STONE_TOWER,         0x13,                   STRAY_FAIRY_ST
+Stone Tower Temple Inverted East Middle Chest,    chest,          NONE,               TEMPLE_STONE_TOWER,         0x04,                   SMALL_KEY_ST
+Stone Tower Temple Inverted East Upper Chest,     chest,          NONE,               TEMPLE_STONE_TOWER,         0x0e,                   STRAY_FAIRY_ST
+Stone Tower Temple Inverted Wizrobe Chest,        chest,          NONE,               TEMPLE_STONE_TOWER,         0x11,                   STRAY_FAIRY_ST
+Stone Tower Temple Inverted Under Wizrobe Chest,  chest,          NONE,               TEMPLE_STONE_TOWER,         0x05,                   SMALL_KEY_ST
+Stone Tower Temple Inverted Boss Key,             chest,          NONE,               TEMPLE_STONE_TOWER,         0x1e,                   BOSS_KEY_ST
+Stone Tower Temple Inverted Giant Mask,           chest,          NONE,               TEMPLE_STONE_TOWER,         0x1a,                   MASK_GIANT
+Stone Tower Boss HC,                              collectible,    NONE,               LAIR_TWINMOLD,              0x1f,                   HEART_CONTAINER
+Stone Tower Boss,                                 npc,            NONE,               LAIR_TWINMOLD,              REMAINS_TWINMOLD,       REMAINS_TWINMOLD
+Secret Shrine Boss 1 Chest,                       chest,          NONE,               SECRET_SHRINE,              0x00,                   RUPEE_SILVER
+Secret Shrine Boss 2 Chest,                       chest,          NONE,               SECRET_SHRINE,              0x01,                   RUPEE_SILVER
+Secret Shrine Boss 3 Chest,                       chest,          NONE,               SECRET_SHRINE,              0x02,                   RUPEE_SILVER
+Secret Shrine Boss 4 Chest,                       chest,          NONE,               SECRET_SHRINE,              0x03,                   RUPEE_SILVER
+Secret Shrine HP Chest,                           chest,          SECRET_SHRINE_HP,   SECRET_SHRINE,              0x0a,                   HEART_PIECE
+Moon Trial Deku HP,                               collectible,    NONE,               MOON_DEKU,                  0x01,                   HEART_PIECE
+Moon Trial Goron HP,                              collectible,    NONE,               MOON_GORON,                 0x01,                   HEART_PIECE
+Moon Trial Zora HP,                               collectible,    NONE,               MOON_ZORA,                  0x01,                   HEART_PIECE
+Moon Trial Link Chest 1,                          chest,          NONE,               MOON_LINK,                  0x01,                   ARROWS_30
+Moon Trial Link Chest 2,                          chest,          NONE,               MOON_LINK,                  0x02,                   BOMBCHUS_10
+Moon Trial Link HP,                               collectible,    NONE,               MOON_LINK,                  0x01,                   HEART_PIECE
+Moon Fierce Deity Mask,                           npc,            NONE,               MOON_LINK,                  MASK_FIERCE_DEITY,      MASK_FIERCE_DEITY

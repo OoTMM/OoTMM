@@ -1,0 +1,41 @@
+location,                                             type,             id
+Kokiri Gossip Near Lost Woods Open,                   gossip,           0x1e
+Kokiri Gossip Left of Deku Tree,                      gossip,           0x1f
+Kokiri Gossip Right of Deku Tree,                     gossip,           0x00
+Hyrule Field Gossip Near Gerudo Valley,               gossip,           0x1b
+Market Gossip Outside Temple Leftmost,                gossip,           0x06
+Market Gossip Outside Temple Left-Center,             gossip,           0x07
+Market Gossip Outside Temple Right-Center,            gossip,           0x0e
+Market Gossip Outside Temple Rightmost,               gossip,           0x10
+Hyrule Castle Gossip After Climb,                     gossip,           0x12
+Hyrule Castle Gossip Before Moat,                     gossip,           0x0b
+Hyrule Castle Gossip Grotto,                          gossip,           0x13
+Lost Woods Gossip Under Bridge,                       gossip,           0x1d
+Sacred Meadow Gossip Near Forest Temple,              gossip,           0x1c
+Sacred Meadow Gossip Atop Maze Woods Side,            gossip,           0x16
+Sacred Meadow Gossip Atop Maze Temple Side,           gossip,           0x17
+Graveyard Gossip,                                     gossip,           0x0a
+Death Mountain Gossip on Climb,                       gossip,           0x04
+Goron City Gossip Boulder Maze,                       gossip,           0x15
+Goron City Gossip Near Medigoron,                     gossip,           0x19
+Zora River Gossip High Pillar,                        gossip,           0x0d
+Zora River Gossip Near Domain,                        gossip,           0x0c
+Zora Domain Gossip,                                   gossip,           0x09
+Lake Hylia Gossip Near River,                         gossip,           0x03
+Lake Hylia Gossip Southeast Lake,                     gossip,           0x0f
+Lake Hylia Gossip Southwest Lake,                     gossip,           0x08
+Zora Fountain Gossip Northwest,                       gossip,           0x02
+Zora Fountain Gossip Near Fairy,                      gossip,           0x01
+Death Mountain Crater Gossip Wall,                    gossip,           0x05
+Gerudo Valley Gossip,                                 gossip,           0x11
+Desert Colossus Gossip,                               gossip,           0x1a
+Dodongo Cavern Gossip,                                gossip,           0x14
+Kokiri Gossip Near Lost Woods Grotto,                 gossip-grotto,    0x0c
+Hyrule Field Gossip Near Castle Town,                 gossip-grotto,    0x00
+Hyrule Field Gossip Near Lake Hylia,                  gossip-grotto,    0x03
+Hyrule Field Gossip Southeast Grotto,                 gossip-grotto,    0x02
+Lost Woods Gossip Grotto,                             gossip-grotto,    0x14
+Kakariko Gossip Grotto,                               gossip-grotto,    0x08
+Death Mountain Gossip Grotto,                         gossip-grotto,    0x17
+Zora River Gossip Grotto,                             gossip-grotto,    0x09
+Death Mountain Crater Gossip Grotto,                  gossip-grotto,    0x1a

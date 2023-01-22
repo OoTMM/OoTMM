@@ -57,7 +57,7 @@ PATCH_START(0x8084c128)
 PATCH_END
 
 PATCH_START(0x8084c130)
-  jal comboAddItemGI
+  jal comboAddItem
    nop
 PATCH_END
 

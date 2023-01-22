@@ -79,6 +79,19 @@ void Sram_SaveEndOfCycleWrapper(GameState_Play* play)
         }
     }
 
+    /* Reload bottles */
+    for (int i = 1; i <= 3; ++i)
+    {
+        int slot;
+
+        slot = gSave.itemEquips.cButtonSlots[0][i];
+        if (slot >= ITS_MM_BOTTLE && slot <= ITS_MM_BOTTLE6)
+        {
+            gSave.itemEquips.buttonItems[0][i] = gSave.inventory.items[slot];
+            Interface_LoadItemIconImpl(play, i);
+        }
+    }
+
     /* Reset unk_14 and room flags, except for dungeons */
     for (int i = 7; i < ARRAY_SIZE(gSave.permanentSceneFlags); ++i)
     {

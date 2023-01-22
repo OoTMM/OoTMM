@@ -117,7 +117,7 @@
 #define ITEM_OOT_GS_TOKEN               0x71
 #define ITEM_OOT_HEART_CONTAINER        0x72
 #define ITEM_OOT_HEART_PIECE2           0x73
-#define ITEM_OOT_BIG_KEY                0x74
+#define ITEM_OOT_BOSS_KEY               0x74
 #define ITEM_OOT_COMPASS                0x75
 #define ITEM_OOT_MAP                    0x76
 #define ITEM_OOT_SMALL_KEY              0x77
@@ -157,6 +157,21 @@
 #define ITEM_OOT_SWORD_BIGGORON             0x9f
 #define ITEM_OOT_PROGRESSIVE_SHIELD_DEKU    0xa0
 #define ITEM_OOT_PROGRESSIVE_SHIELD_HYLIAN  0xa1
+#define ITEM_OOT_SMALL_KEY_FOREST           0xa2
+#define ITEM_OOT_SMALL_KEY_FIRE             0xa3
+#define ITEM_OOT_SMALL_KEY_WATER            0xa4
+#define ITEM_OOT_SMALL_KEY_SPIRIT           0xa5
+#define ITEM_OOT_SMALL_KEY_SHADOW           0xa6
+#define ITEM_OOT_SMALL_KEY_GANON            0xa7
+#define ITEM_OOT_SMALL_KEY_BOTW             0xa8
+#define ITEM_OOT_SMALL_KEY_GF               0xa9
+#define ITEM_OOT_SMALL_KEY_GTG              0xaa
+#define ITEM_OOT_BOSS_KEY_FOREST            0xab
+#define ITEM_OOT_BOSS_KEY_FIRE              0xac
+#define ITEM_OOT_BOSS_KEY_WATER             0xad
+#define ITEM_OOT_BOSS_KEY_SPIRIT            0xae
+#define ITEM_OOT_BOSS_KEY_SHADOW            0xaf
+#define ITEM_OOT_BOSS_KEY_GANON             0xb0
 
 #define ITEM_MM_OCARINA_OF_TIME             0x00
 #define ITEM_MM_BOW                         0x01
@@ -255,10 +270,11 @@
 #define ITEM_MM_SONG_SOARING                0x6a
 #define ITEM_MM_SONG_STORMS                 0x6b
 #define ITEM_MM_BOMBER_NOTEBOOK             0x6d
+#define ITEM_MM_GS_TOKEN                    0x6e
 #define ITEM_MM_HEART_CONTAINER             0x6f
 #define ITEM_MM_HEART_PIECE2                0x70
 #define ITEM_MM_SONG_GORON_HALF             0x73
-#define ITEM_MM_BIG_KEY                     0x74
+#define ITEM_MM_BOSS_KEY                    0x74
 #define ITEM_MM_COMPASS                     0x75
 #define ITEM_MM_MAP                         0x76
 #define ITEM_MM_STRAY_FAIRY                 0x77
@@ -308,6 +324,21 @@
 #define ITEM_MM_WORLD_MAP_ROMANI_RANCH      0xac
 #define ITEM_MM_WORLD_MAP_GREAT_BAY         0xad
 #define ITEM_MM_WORLD_MAP_STONE_TOWER       0xae
+#define ITEM_MM_GS_TOKEN_SWAMP              0xaf
+#define ITEM_MM_GS_TOKEN_OCEAN              0xb0
+#define ITEM_MM_SMALL_KEY_WF                0xb1
+#define ITEM_MM_SMALL_KEY_SH                0xb2
+#define ITEM_MM_SMALL_KEY_GB                0xb3
+#define ITEM_MM_SMALL_KEY_ST                0xb4
+#define ITEM_MM_BOSS_KEY_WF                 0xb5
+#define ITEM_MM_BOSS_KEY_SH                 0xb6
+#define ITEM_MM_BOSS_KEY_GB                 0xb7
+#define ITEM_MM_BOSS_KEY_ST                 0xb8
+#define ITEM_MM_STRAY_FAIRY_WF              0xb9
+#define ITEM_MM_STRAY_FAIRY_SH              0xba
+#define ITEM_MM_STRAY_FAIRY_GB              0xbb
+#define ITEM_MM_STRAY_FAIRY_ST              0xbc
+#define ITEM_MM_STRAY_FAIRY_TOWN            0xbd
 
 #define ITEM_NONE   0xff
 

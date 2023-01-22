@@ -1,8 +1,9 @@
 import { Game } from '../config';
+import { Settings } from '../settings';
 import { gameId } from '../util';
-import { Expr, exprTrue, exprFalse, exprAnd, exprOr, exprAge, exprHas, exprEvent, exprMasks, exprHealth } from './expr';
+import { Expr, exprTrue, exprFalse, exprAnd, exprOr, exprAge, exprHas, exprEvent, exprMasks, exprHealth, exprSetting, exprNot, exprCond, exprTrick } from './expr';
 
-const SIMPLE_TOKENS = ['||', '&&', '(', ')', ',', 'true', 'false'] as const;
+const SIMPLE_TOKENS = ['||', '&&', '(', ')', ',', 'true', 'false', '!', '+', '-'] as const;
 
 type TokenSimple = { type: typeof SIMPLE_TOKENS[number] };
 type TokenEOF = { type: 'EOF' };
@@ -29,7 +30,7 @@ export class ExprParser {
   private ctx: ParseContext[] = [];
   private macros: {[k: string]: Macro} = {};
 
-  constructor(private game: Game) {}
+  constructor(private settings: Settings, private game: Game) {}
 
   addMacro(name: string, args: string[], buffer: string) {
     this.macros[name] = { args, buffer };
@@ -48,6 +49,52 @@ export class ExprParser {
     return expr;
   }
 
+  private parseNumericSingle(): number | undefined {
+    const n = this.accept('number');
+    if (n !== undefined) {
+      return n;
+    }
+    if (this.accept('(')) {
+      const nexpr = this.parseNumeric();
+      if (nexpr === undefined) {
+        throw this.error("Expected math expression");
+      }
+      this.expect(')');
+      return nexpr;
+    }
+  }
+
+  private parseNumeric(): number | undefined {
+    return this.parseNumericAdd();
+  }
+
+  private parseNumericAdd(): number | undefined {
+    let value = 0;
+    const first = this.parseNumericSingle();
+    if (first === undefined) {
+      return undefined;
+    }
+    value = first;
+    for (;;) {
+      let substract = false;
+      if (this.accept('-')) {
+        substract = true;
+      } else if (!this.accept('+')) {
+        break;
+      }
+      const next = this.parseNumericSingle();
+      if (next === undefined) {
+        throw this.error("Expected number");
+      }
+      if (substract) {
+        value -= next;
+      } else {
+        value += next;
+      }
+    }
+    return value;
+  }
+
   private parseExprTrue(): Expr | undefined {
     if (this.accept('true')) {
       return exprTrue();
@@ -58,6 +105,41 @@ export class ExprParser {
     if (this.accept('false')) {
       return exprFalse();
     }
+  }
+
+  private parseExprNot(): Expr | undefined {
+    if (this.accept('!')) {
+      const expr = this.parseExprSingle();
+      if (expr === undefined) {
+        throw this.error("Expected expression");
+      }
+      return exprNot(expr);
+    }
+  }
+
+  /* This could be a macro once macros properly handle parens */
+  private parseExprCond(): Expr | undefined {
+    if (this.peek('identifier') !== 'cond') {
+      return undefined;
+    }
+    this.accept('identifier');
+    this.expect('(');
+    const cond = this.parseExpr();
+    if (cond === undefined) {
+      throw this.error("Expected expression");
+    }
+    this.expect(',');
+    const then = this.parseExpr();
+    if (then === undefined) {
+      throw this.error("Expected expression");
+    }
+    this.expect(',');
+    const otherwise = this.parseExpr();
+    if (otherwise === undefined) {
+      throw this.error("Expected expression");
+    }
+    this.expect(')');
+    return exprCond(cond, then, otherwise);
   }
 
   private parseExprAge(): Expr | undefined {
@@ -83,7 +165,11 @@ export class ExprParser {
     const item = gameId(this.game, this.expect('identifier'), '_');
     let count = 1;
     if (this.accept(',')) {
-      count = this.expect('number');
+      const n = this.parseNumeric();
+      if (n === undefined) {
+        throw this.error("Expected number");
+      }
+      count = n;
     }
     this.expect(')');
     return exprHas(item, count);
@@ -95,7 +181,7 @@ export class ExprParser {
     }
     this.accept('identifier');
     this.expect('(');
-    const event = gameId(this.game, this.expect('identifier'), ' ');
+    const event = gameId(this.game, this.expect('identifier'), '_');
     this.expect(')');
     return exprEvent(event);
   }
@@ -106,7 +192,10 @@ export class ExprParser {
     }
     this.accept('identifier');
     this.expect('(');
-    const count = this.expect('number');
+    const count = this.parseNumeric();
+    if (count === undefined) {
+      throw this.error("Expected number");
+    }
     this.expect(')');
     return exprMasks(count);
   }
@@ -117,9 +206,39 @@ export class ExprParser {
     }
     this.accept('identifier');
     this.expect('(');
-    const count = this.expect('number');
+    const count = this.parseNumeric();
+    if (count === undefined) {
+      throw this.error("Expected number");
+    }
     this.expect(')');
     return exprHealth(count);
+  }
+
+  private parseExprSetting(): Expr | undefined {
+    let value: string | boolean = true;
+    if (this.peek('identifier') !== 'setting') {
+      return undefined;
+    }
+    this.accept('identifier');
+    this.expect('(');
+    const key = this.expect('identifier');
+    if (this.accept(',')) {
+      value = this.expect('identifier');
+    }
+    this.expect(')');
+    return exprSetting(this.settings, key, value);
+  }
+
+  private parseExprTrick(): Expr | undefined {
+    let value: string | boolean = true;
+    if (this.peek('identifier') !== 'trick') {
+      return undefined;
+    }
+    this.accept('identifier');
+    this.expect('(');
+    const trick = this.expect('identifier');
+    this.expect(')');
+    return exprTrick(this.settings, trick);
   }
 
   private parseMacro(): Expr | undefined {
@@ -184,11 +303,15 @@ export class ExprParser {
     }
     return this.parseExprTrue()
       || this.parseExprFalse()
+      || this.parseExprNot()
+      || this.parseExprCond()
       || this.parseExprAge()
       || this.parseExprHas()
       || this.parseExprEvent()
       || this.parseExprMasks()
       || this.parseExprHealth()
+      || this.parseExprSetting()
+      || this.parseExprTrick()
       || this.parseMacro();
   }
 

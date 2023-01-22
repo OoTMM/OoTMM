@@ -12,6 +12,7 @@ Actor*  SpawnActor(void* const_1, GameState_Play* play, s16 actorId, float x, fl
 void    ActorDestroy(Actor* actor);
 int     Actor_HasParent(Actor* actor);
 void    ActorSetScale(Actor* actor, float scale);
+void    ActorSetUnk(Actor* actor, float unk);
 void    ActorEnableGrab(Actor* actor, GameState_Play* play);
 void    ActorEnableTalk(Actor* actor, GameState_Play* play, float range);
 void    ActorEnableTalkEx(Actor* actor, GameState_Play* play, float range, u32 unk);
@@ -92,6 +93,7 @@ extern u32 gSegments[16];
 
 #define GET_LINK(play) ((Actor_Player*)(play->actors[2].first))
 
+int  ActorCutscene_GetCanPlayNext(int cutscene);
 s16  ActorCutscene_GetCurrentIndex(void);
 void ActorCutscene_Stop(s16 cutsceneId);
 void Cutscene_End(GameState_Play* play, void* unk);
@@ -115,5 +117,14 @@ void Player_Update(Actor_Player* this, GameState_Play* play);
 void* OverlayAddr(u32 addr);
 
 void LoadIcon(u32 vaddr, int iconId, void* buffer, int size);
+
+int Player_UsingItem(Actor_Player* link);
+
+void PlaySound(u16 soundId);
+void PlaySoundSpecial(u16 soundId);
+void PlayMusic(int arg0, int arg1, int arg2, int arg3, int arg4);
+
+int Actor_RunByteCode(Actor* this, GameState_Play* play, void* bytecode, void* unk1, void* unk2);
+void Enemy_StartFinishingBlow(GameState_Play* play, Actor* this);
 
 #endif
