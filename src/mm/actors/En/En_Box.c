@@ -13,6 +13,14 @@ static s16 EnBox_Item(Actor* this, GameState_Play* play, s16 gi, int progressive
     return gi;
 }
 
+static s16 EnBox_GetGI(Actor* this)
+{
+    s32 raw;
+
+    raw = *(s32*)((char*)this + 0x21c);
+    return (s16)(-raw);
+}
+
 int EnBox_GiveItemDefaultRange(Actor* actor, GameState_Play* play, s16 gi)
 {
     gi = EnBox_Item(actor, play, gi, 1);
@@ -31,7 +39,7 @@ void EnBox_InitWrapper(Actor* this, GameState_Play* play)
     init(this, play);
 
     /* Resize chest */
-    gi = EnBox_Item(this, play, -1, 0);
+    gi = EnBox_Item(this, play, EnBox_GetGI(this), 0);
     comboCsmcInit(this, play, gi);
 }
 
@@ -41,7 +49,7 @@ void EnBox_DrawWrapper(Actor* this, GameState_Play* play)
     s16 gi;
 
     /* Prepare the segments */
-    gi = EnBox_Item(this, play, -1, 0);
+    gi = EnBox_Item(this, play, EnBox_GetGI(this), 0);
     comboCsmcPreDraw(this, play, gi);
 
     /* Draw */
