@@ -44,15 +44,19 @@ void comboAddItemEffect(GameState_Play* play, s16 gi)
     switch (gi)
     {
     case GI_OOT_RUPEE_GREEN:
+    case GI_OOT_TC_RUPEE_GREEN:
         addRupees(1);
         break;
     case GI_OOT_RUPEE_BLUE:
+    case GI_OOT_TC_RUPEE_BLUE:
         addRupees(5);
         break;
     case GI_OOT_RUPEE_RED:
+    case GI_OOT_TC_RUPEE_RED:
         addRupees(20);
         break;
     case GI_OOT_RUPEE_PURPLE:
+    case GI_OOT_TC_RUPEE_PURPLE:
         addRupees(50);
         break;
     case GI_OOT_RUPEE_HUGE:
@@ -69,11 +73,13 @@ void comboAddItemEffect(GameState_Play* play, s16 gi)
         break;
     case GI_OOT_DEFENSE_UPGRADE:
     case GI_OOT_HEART_PIECE:
+    case GI_OOT_TC_HEART_PIECE:
     case GI_OOT_HEART_CONTAINER:
     case GI_OOT_HEART_CONTAINER2:
         addHealth(20);
         break;
     case GI_OOT_SMALL_KEY:
+    case GI_OOT_TC_SMALL_KEY:
         dungeonId = dungeon(play, 0);
         comboAddSmallKeyOot(dungeonId);
         break;

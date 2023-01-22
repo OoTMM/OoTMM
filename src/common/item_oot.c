@@ -545,6 +545,7 @@ void comboAddItemOot(s16 gi, int noEffect)
             addHealth(20);
         break;
     case GI_OOT_HEART_PIECE:
+    case GI_OOT_TC_HEART_PIECE:
         gOotSave.quest.heartPieces++;
         if (noEffect)
         {
@@ -637,18 +638,22 @@ void comboAddItemOot(s16 gi, int noEffect)
         gOotSave.quest.medallionForest = 1;
         break;
     case GI_OOT_RUPEE_GREEN:
+    case GI_OOT_TC_RUPEE_GREEN:
         if (noEffect)
             addRupees(1);
         break;
     case GI_OOT_RUPEE_BLUE:
+    case GI_OOT_TC_RUPEE_BLUE:
         if (noEffect)
             addRupees(5);
         break;
     case GI_OOT_RUPEE_RED:
+    case GI_OOT_TC_RUPEE_RED:
         if (noEffect)
             addRupees(20);
         break;
     case GI_OOT_RUPEE_PURPLE:
+    case GI_OOT_TC_RUPEE_PURPLE:
         if (noEffect)
             addRupees(50);
         break;

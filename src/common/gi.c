@@ -2,7 +2,7 @@
 #include <combo/custom.h>
 
 const GetItem kExtendedGetItems[] = {
-#define X(a, b, c, d, e)    {a, b, c, 8, Y(e)}
+#define X(a, b, c, d, e, text) {a, b, c, 8, Y(e)}
 #define Y(x)                x
 
 #if defined(GAME_OOT)
@@ -21,16 +21,6 @@ const GetItem kExtendedGetItems[] = {
 #undef X
 #undef Y
 };
-
-u16 comboItemFromGI(s32 gi)
-{
-    u16 itemId;
-
-    itemId = kExtendedGetItems[gi - 1].itemId;
-    if (gi & MASK_FOREIGN_GI)
-        itemId |= MASK_FOREIGN_ITEM;
-    return itemId;
-}
 
 void comboLoadObjectGi(Actor_Player* player, u16 objectId)
 {

@@ -165,9 +165,6 @@ void comboDrawBlit2D(GameState_Play* play, u32 segAddr, int w, int h, float x, f
 void comboOotSetEventChk(u16 flag);
 void comboMmSetEventWeek(u16 flag);
 
-/* GI */
-u16 comboItemFromGI(s32 gi);
-
 /* Item */
 extern const u8 kMaxSticks[];
 extern const u8 kMaxNuts[];

@@ -1,11 +1,9 @@
 #include <combo.h>
 
 #if defined(GAME_OOT)
-# define ITEM_BASE_MM           MASK_FOREIGN_ITEM
 # define comboAddItemNative     comboAddItemOot
 # define comboAddItemForeign    comboAddItemMm
 #else
-# define ITEM_BASE_MM 0x0
 # define comboAddItemNative     comboAddItemMm
 # define comboAddItemForeign    comboAddItemOot
 #endif
