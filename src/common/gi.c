@@ -1,22 +1,28 @@
 #include <combo.h>
 #include <combo/custom.h>
 
-const GetItem kExtendedGetItems[] = {
+const ExtendedItemTable kExtendedGetItemsTable = {
 #define X(a, b, c, d, e, text) {a, b, c, 8, Y(e)}
 #define Y(x)                x
 
+{
 #if defined(GAME_OOT)
 # include "data/oot/gi.inc"
 #else
 # include "data/mm/gi.inc"
 #endif
+},
+
 # undef Y
 # define Y(x)               ((((x) < 0x2000) * ((x) | MASK_FOREIGN_OBJECT)) | ((x) >= 0x2000) * (x))
+
+{
 #if defined(GAME_OOT)
 # include "data/mm/gi.inc"
 #else
 # include "data/oot/gi.inc"
 #endif
+},
 
 #undef X
 #undef Y
