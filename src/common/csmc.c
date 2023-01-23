@@ -260,7 +260,6 @@ static int csmcFromItemMm(s16 gi)
     case GI_MM_SWORD_KOKIRI:
     case GI_MM_SWORD_RAZOR:
     case GI_MM_SWORD_GILDED:
-    case GI_MM_SHIELD_HERO:
     case GI_MM_SHIELD_MIRROR:
     case GI_MM_PROGRESSIVE_SHIELD_HERO:
     case GI_MM_BOMB_BAG:

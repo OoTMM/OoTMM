@@ -298,6 +298,10 @@ const effectiveStartingItems = (settings: Settings): {[k: string]: number} => {
     }
   }
 
+  if (settings.progressiveShieldsMm === 'start') {
+    items['MM_SHIELD_HERO'] = 1;
+  }
+
   return items;
 }
 

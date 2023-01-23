@@ -18,7 +18,6 @@ export const EXTRA_ITEMS = [
   'OOT_MASK_ZORA',
   'OOT_MASK_GERUDO',
   'MM_MASK_DEKU',
-  'MM_SHIELD',
   'MM_SWORD',
 ];
 

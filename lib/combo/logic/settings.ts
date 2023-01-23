@@ -1,5 +1,5 @@
 import { Settings } from "../settings";
-import { isGanonBossKey, isMapCompass } from "./items";
+import { isGanonBossKey, isJunk, isMapCompass } from "./items";
 import { World } from "./world";
 
 export const configFromSettings = (settings: Settings) => {
@@ -29,11 +29,16 @@ export const configFromSettings = (settings: Settings) => {
     config.add('OOT_PROGRESSIVE_SWORDS_GORON');
   }
 
+  if (settings.progressiveShieldsMm === 'progressive') {
+    config.add('MM_PROGRESSIVE_SHIELDS');
+  }
+
   return config;
 };
 
 export const alterWorld = (world: World, settings: Settings, config: Set<string>) => {
   let fireTempleKeyRemoved = false;
+  let mmExtraShield = false;
   let ootShields = 3;
 
   for (const loc in world.checks) {
@@ -68,6 +73,16 @@ export const alterWorld = (world: World, settings: Settings, config: Set<string>
       } else {
         item = 'OOT_RUPEE_BLUE';
       }
+    }
+
+    /* MM shields */
+    if (item === 'MM_SHIELD_MIRROR' && config.has('MM_PROGRESSIVE_SHIELDS')) {
+      item = 'MM_SHIELD';
+    }
+
+    if (isJunk(item) && config.has('MM_PROGRESSIVE_SHIELDS') && !mmExtraShield) {
+      mmExtraShield = true;
+      item = 'MM_SHIELD';
     }
 
     /* OoT swords */

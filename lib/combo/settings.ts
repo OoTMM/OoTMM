@@ -141,6 +141,17 @@ export const SETTINGS = [{
   ],
   default: 'goron'
 }, {
+  key: 'progressiveShieldsMm',
+  name: 'MM Shields',
+  category: 'progressive',
+  type: 'enum',
+  values: [
+    { value: 'separate', name: 'Separate' },
+    { value: 'start', name: 'Start with Hero Shield' },
+    { value: 'progressive', name: 'Progressive' },
+  ],
+  default: 'start'
+}, {
   key: 'csmc',
   name: 'Chest Size Matches Content',
   category: 'misc',
