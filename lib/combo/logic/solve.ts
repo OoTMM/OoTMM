@@ -128,6 +128,10 @@ class Solver {
       this.fixedLocations.add('OOT Gerudo Member Card');
     }
 
+    if (!this.opts.settings.shuffleMasterSword) {
+      this.fixedLocations.add('OOT Temple of Time Master Sword');
+    }
+
     if (this.opts.settings.ganonBossKey === 'vanilla') {
       this.fixedLocations.add('OOT Ganon Castle Boss Key');
     }

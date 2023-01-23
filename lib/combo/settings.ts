@@ -108,6 +108,12 @@ export const SETTINGS = [{
   ],
   default: 'dungeonBlueWarps'
 }, {
+  key: 'shuffleMasterSword',
+  name: 'Master Sword Shuffle',
+  category: 'main',
+  type: 'boolean',
+  default: true
+}, {
   key: 'shuffleGerudoCard',
   name: 'Gerudo Card Shuffle',
   category: 'main',
