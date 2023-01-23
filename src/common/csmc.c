@@ -144,8 +144,8 @@ static int csmcFromItemOot(s16 gi)
     case GI_OOT_SILVER_GAUNTLETS:
     case GI_OOT_GOLDEN_GAUNTLETS:
     case GI_OOT_SWORD_KOKIRI:
-    case GI_OOT_MASTER_SWORD:
-    case GI_OOT_GIANT_KNIFE:
+    case GI_OOT_SWORD_MASTER:
+    case GI_OOT_SWORD_KNIFE:
     case GI_OOT_SWORD_BIGGORON:
     case GI_OOT_TUNIC_GORON:
     case GI_OOT_TUNIC_ZORA:

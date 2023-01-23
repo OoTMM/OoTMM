@@ -44,7 +44,7 @@ static void hintMedigoron(GameState_Play* play)
 
     comboTextAppendHeader(&b);
     comboTextAppendStr(&b, "How about buying ");
-    comboTextAppendNpcReward(&b, NPC_OOT_MEDIGORON, GI_OOT_GIANT_KNIFE);
+    comboTextAppendNpcReward(&b, NPC_OOT_MEDIGORON, GI_OOT_SWORD_KNIFE);
     comboTextAppendStr(&b, " for 200 Rupees?" TEXT_NL TEXT_COLOR_GREEN TEXT_CHOICE2 "Buy" TEXT_NL "Don't buy" TEXT_END);
     comboTextAutoLineBreaks(start);
 }

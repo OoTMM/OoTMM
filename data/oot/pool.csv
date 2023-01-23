@@ -3,7 +3,7 @@ Kokiri Forest Mido Top Left,                          chest,          NONE,     
 Kokiri Forest Mido Top Right,                         chest,          NONE,                 KOKIRI_MIDO,                    0x01,                       RUPEE_BLUE
 Kokiri Forest Mido Bottom Left,                       chest,          NONE,                 KOKIRI_MIDO,                    0x02,                       RUPEE_GREEN
 Kokiri Forest Mido Bottom Right,                      chest,          NONE,                 KOKIRI_MIDO,                    0x03,                       RECOVERY_HEART
-Kokiri Forest Kokiri Sword Chest,                     chest,          NONE,                 KOKIRI_FOREST,                  0x00,                       SWORD
+Kokiri Forest Kokiri Sword Chest,                     chest,          NONE,                 KOKIRI_FOREST,                  0x00,                       SWORD_KOKIRI
 Kokiri Forest Storms Grotto,                          chest,          NONE,                 GROTTOS,                        0x0c,                       RUPEE_RED
 Kokiri Forest GS Soil,                                gs,             NONE,                 KOKIRI_FOREST,                  0x68,                       GS_TOKEN
 Kokiri Forest GS Night Child,                         gs,             NONE,                 KOKIRI_FOREST,                  0x69,                       GS_TOKEN
@@ -58,7 +58,7 @@ Death Mountain Chest,                                 chest,          NONE,     
 Death Mountain HP,                                    collectible,    NONE,                 DEATH_MOUNTAIN_TRAIL,           0x1e,                       HEART_PIECE
 Death Mountain Prescription,                          npc,            NONE,                 DEATH_MOUNTAIN_TRAIL,           TRADE_PRESCRIPTION,         PRESCRIPTION
 Death Mountain Claim Check,                           npc,            NONE,                 DEATH_MOUNTAIN_TRAIL,           TRADE_CLAIM_CHECK,          CLAIM_CHECK
-Death Mountain Biggoron Sword,                        npc,            NONE,                 DEATH_MOUNTAIN_TRAIL,           TRADE_BIGGORON_SWORD,       SWORD
+Death Mountain Biggoron Sword,                        npc,            NONE,                 DEATH_MOUNTAIN_TRAIL,           TRADE_BIGGORON_SWORD,       SWORD_BIGGORON
 Death Mountain Grotto,                                chest,          NONE,                 GROTTOS,                        0x17,                       RUPEE_HUGE
 Death Mountain GS Entrance,                           gs,             NONE,                 DEATH_MOUNTAIN_TRAIL,           0x82,                       GS_TOKEN
 Death Mountain GS Soil,                               gs,             NONE,                 DEATH_MOUNTAIN_TRAIL,           0x81,                       GS_TOKEN
@@ -71,7 +71,7 @@ Goron City Maze Left,                                 chest,          NONE,     
 Goron City Big Pot HP,                                collectible,    NONE,                 GORON_CITY,                     0x1f,                       HEART_PIECE
 Goron City Tunic,                                     npc,            NONE,                 GORON_CITY,                     GORON_LINK_TUNIC,           TUNIC_GORON
 Goron City Bomb Bag,                                  npc,            NONE,                 GORON_CITY,                     GORON_BOMB_BAG,             BOMB_BAG
-Goron City Medigoron Giant Knife,                     npc,            NONE,                 GORON_CITY,                     MEDIGORON,                  SWORD
+Goron City Medigoron Giant Knife,                     npc,            NONE,                 GORON_CITY,                     MEDIGORON,                  SWORD_KNIFE
 Goron City GS Platform,                               gs,             NONE,                 GORON_CITY,                     0x85,                       GS_TOKEN
 Goron City GS Maze,                                   gs,             NONE,                 GORON_CITY,                     0x86,                       GS_TOKEN
 Death Mountain Crater Alcove HP,                      collectible,    NONE,                 DEATH_MOUNTAIN_CRATER,          0x02,                       HEART_PIECE
@@ -139,7 +139,7 @@ Shooting Gallery Adult,                               npc,            NONE,     
 Hyrule Castle GS Tree,                                gs,             NONE,                 HYRULE_CASTLE,                  0x7a,                       GS_TOKEN
 Hyrule Castle GS Grotto,                              gs,             NONE,                 GROTTOS,                        0x79,                       GS_TOKEN
 Ganon Castle Exterior GS,                             gs,             NONE,                 GANON_CASTLE_EXTERIOR,          0x78,                       GS_TOKEN
-Temple of Time Master Sword,                          npc,            NONE,                 TEMPLE_OF_TIME,                 MASTER_SWORD,               SWORD
+Temple of Time Master Sword,                          npc,            NONE,                 TEMPLE_OF_TIME,                 MASTER_SWORD,               SWORD_MASTER
 Temple of Time Medallion,                             npc,            NONE,                 TEMPLE_OF_TIME,                 LIGHT_MEDALLION,            MEDALLION_LIGHT
 Temple of Time Sheik Song,                            npc,            NONE,                 TEMPLE_OF_TIME,                 SHEIK_LIGHT,                SONG_TP_LIGHT
 Temple of Time Light Arrows,                          npc,            NONE,                 TEMPLE_OF_TIME,                 ZELDA_LIGHT_ARROW,          ARROW_LIGHT

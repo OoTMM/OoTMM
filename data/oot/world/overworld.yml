@@ -504,7 +504,7 @@
     "Sacred Realm": "is_adult && event(DOOR_OF_TIME_OPEN)"
   events:
     DOOR_OF_TIME_OPEN: "can_play(SONG_TIME)"
-    TIME_TRAVEL: "event(DOOR_OF_TIME_OPEN) && has(SWORD, 2)"
+    TIME_TRAVEL: "event(DOOR_OF_TIME_OPEN) && has_sword_master"
   locations:
     "Temple of Time Master Sword": "is_child && event(DOOR_OF_TIME_OPEN)"
     "Temple of Time Sheik Song": "is_adult && event(DOOR_OF_TIME_OPEN) && has(MEDALLION_FOREST)"

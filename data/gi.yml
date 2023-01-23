@@ -37,7 +37,7 @@ OOT_EYEBALL_FROG:         0x24
 OOT_EYE_DROPS:            0x25
 OOT_CLAIM_CHECK:          0x26
 OOT_SWORD_KOKIRI:         0x27
-OOT_GIANT_KNIFE:          0x28
+OOT_SWORD_KNIFE:          0x28
 OOT_SHIELD_DEKU:          0x29
 OOT_SHIELD_HYLIAN:        0x2a
 OOT_SHIELD_MIRROR:        0x2b
@@ -135,7 +135,7 @@ OOT_SONG_SARIA:                   0x88
 OOT_SONG_SUN:                     0x89
 OOT_SONG_TIME:                    0x8a
 OOT_SONG_STORMS:                  0x8b
-OOT_MASTER_SWORD:                 0x8c
+OOT_SWORD_MASTER:                 0x8c
 OOT_STONE_EMERALD:                0x8d
 OOT_STONE_RUBY:                   0x8e
 OOT_STONE_SAPPHIRE:               0x8f

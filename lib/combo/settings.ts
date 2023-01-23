@@ -124,6 +124,17 @@ export const SETTINGS = [{
   ],
   default: 'separate'
 }, {
+  key: 'progressiveSwordsOot',
+  name: 'OoT Swords',
+  category: 'progressive',
+  type: 'enum',
+  values: [
+    { value: 'separate', name: 'Separate' },
+    { value: 'goron', name: 'Progressive Knife and Biggoron' },
+    { value: 'progressive', name: 'Progressive' },
+  ],
+  default: 'goron'
+}, {
   key: 'csmc',
   name: 'Chest Size Matches Content',
   category: 'misc',

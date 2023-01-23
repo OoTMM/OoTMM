@@ -163,7 +163,9 @@ class Solver {
       this.insertItem(pools, item);
     }
 
-    maxRequired(pools, 'OOT_SWORD', 2);
+    if (this.opts.settings.progressiveSwordsOot === 'progressive') {
+      maxRequired(pools, 'OOT_SWORD', 2);
+    }
     maxRequired(pools, 'OOT_WALLET', 1);
     maxRequired(pools, 'OOT_BOMB_BAG', 1);
     maxRequired(pools, 'OOT_BOW', 1);

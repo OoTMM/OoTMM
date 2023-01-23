@@ -20,7 +20,7 @@ void BgTokiSwd_Handler(Actor* this, GameState_Play* play)
 
     if (gSave.age == AGE_CHILD && !GetEventChk(EV_OOT_CHK_MASTER_SWORD_CHAMBER))
     {
-        BgTokiSwd_GiveItem(this, play, GI_OOT_MASTER_SWORD, NPC_OOT_MASTER_SWORD, EV_OOT_CHK_MASTER_SWORD_CHAMBER);
+        BgTokiSwd_GiveItem(this, play, GI_OOT_SWORD_MASTER, NPC_OOT_MASTER_SWORD, EV_OOT_CHK_MASTER_SWORD_CHAMBER);
         return;
     }
 

@@ -408,6 +408,18 @@ void comboTextAppendItemName(char** b, s16 gi, int flags)
         switch (gi)
         {
         case GI_OOT_SWORD_KOKIRI:
+            if (comboConfig(CFG_OOT_PROGRESSIVE_SWORDS))
+            {
+                itemName = "a " C1 "Progressive Sword";
+                ambiguous = 1;
+            }
+            break;
+        case GI_OOT_SWORD_KNIFE:
+            if (comboConfig(CFG_OOT_PROGRESSIVE_SWORDS_GORON))
+            {
+                itemName = "a " C1 "Progressive Goron Sword";
+            }
+            break;
         case GI_MM_SWORD_KOKIRI | MASK_FOREIGN_GI:
             itemName = "a " C1 "Progressive Sword";
             ambiguous = 1;

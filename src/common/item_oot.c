@@ -434,10 +434,10 @@ void comboAddItemOot(s16 gi, int noEffect)
     case GI_OOT_SWORD_KOKIRI:
         gOotSave.equipment.swords |= EQ_OOT_SWORD_KOKIRI;
         break;
-    case GI_OOT_MASTER_SWORD:
+    case GI_OOT_SWORD_MASTER:
         gOotSave.equipment.swords |= EQ_OOT_SWORD_MASTER;
         break;
-    case GI_OOT_GIANT_KNIFE:
+    case GI_OOT_SWORD_KNIFE:
         gOotSave.equipment.swords |= EQ_OOT_SWORD_KNIFE;
         gOotSave.swordHealth = 8;
         break;
