@@ -82,6 +82,7 @@ class Solver {
     } else {
       this.reachable = pathfind(this.world, {}, false);
     }
+    this.markAccessible();
   }
 
   solve() {
