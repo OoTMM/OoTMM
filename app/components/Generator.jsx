@@ -7,31 +7,49 @@ import { Settings } from './Settings';
 import { StartingItems } from './StartingItems';
 import { Tricks } from './Tricks';
 
+const savedSettings = JSON.parse(localStorage.getItem('settings') || "{}");
+
+const limitStartingItems = (startingItems, itemPool) => {
+  const items = { ...startingItems };
+  for (const i in items) {
+    if (!itemPool[i]) {
+      delete items[i];
+    } else if (items[i] > itemPool[i]) {
+      items[i] = itemPool[i];
+    }
+  }
+  return items;
+};
+
 export const Generator = ({ onGenerate, error }) => {
   const [roms, setRoms] = useState({ oot: null, mm: null });
   const [seed, setSeed] = useState("");
-  const [settings, setSettings] = useState({...DEFAULT_SETTINGS});
-  const [itemPool, setItemPool] = useState(makeItemPool(settings));
+  const [settings, setSettings] = useState({...DEFAULT_SETTINGS, ...savedSettings});
+  const [itemPool, setItemPool] = useState(() => {
+    const pool = makeItemPool(settings);
+    let { startingItems } = settings;
+    startingItems = limitStartingItems(startingItems, pool);
+    const newSettings = { ...settings, startingItems };
+    localStorage.setItem('settings', JSON.stringify(newSettings));
+    setSettings(newSettings);
+    return pool;
+  });
 
   const setRom = (game, data) => setRoms({ ...roms, [game]: data });
   const limitItemPool = (setting) => {
     const ip = makeItemPool(setting);
     setItemPool(ip);
-    const { startingItems } = settings;
-    for (const i in startingItems) {
-      if (!itemPool[i]) {
-        delete startingItems[i];
-      } else if (startingItems[i] > itemPool[i]) {
-        startingItems[i] = itemPool[i];
-      }
-    }
+    let { startingItems } = settings;
+    startingItems = limitStartingItems(startingItems, ip);
     return startingItems;
   };
   const setSetting = (setting) => {
     if (!setting.startingItems) {
       setting = { ...setting, startingItems: limitItemPool(setting) };
     }
-    setSettings({ ...settings, ...setting });
+    const newSettings = { ...settings, ...setting };
+    localStorage.setItem('settings', JSON.stringify(newSettings));
+    setSettings(newSettings);
   };
 
   return (
