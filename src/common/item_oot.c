@@ -803,7 +803,7 @@ void comboAddItemOot(s16 gi, int noEffect)
     case GI_OOT_MAP_BOTW:
         comboAddMapOot(SCE_OOT_BOTTOM_OF_THE_WELL);
         break;
-    case GI_OOT_MAP_ICE:
+    case GI_OOT_MAP_IC:
         comboAddMapOot(SCE_OOT_ICE_CAVERN);
         break;
     case GI_OOT_COMPASS_DT:
@@ -833,7 +833,7 @@ void comboAddItemOot(s16 gi, int noEffect)
     case GI_OOT_COMPASS_BOTW:
         comboAddCompassOot(SCE_OOT_BOTTOM_OF_THE_WELL);
         break;
-    case GI_OOT_COMPASS_ICE:
+    case GI_OOT_COMPASS_IC:
         comboAddCompassOot(SCE_OOT_ICE_CAVERN);
         break;
     }

@@ -174,7 +174,7 @@ OOT_MAP_WATER:                    0xaf
 OOT_MAP_SPIRIT:                   0xb0
 OOT_MAP_SHADOW:                   0xb1
 OOT_MAP_BOTW:                     0xb2
-OOT_MAP_ICE:                      0xb3
+OOT_MAP_IC:                       0xb3
 OOT_COMPASS_DT:                   0xb4
 OOT_COMPASS_DC:                   0xb5
 OOT_COMPASS_JJ:                   0xb6
@@ -184,7 +184,7 @@ OOT_COMPASS_WATER:                0xb9
 OOT_COMPASS_SPIRIT:               0xba
 OOT_COMPASS_SHADOW:               0xbb
 OOT_COMPASS_BOTW:                 0xbc
-OOT_COMPASS_ICE:                  0xbd
+OOT_COMPASS_IC:                   0xbd
 
 MM_RUPEE_GREEN:               0x01
 MM_RUPEE_BLUE:                0x02
