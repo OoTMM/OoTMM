@@ -166,7 +166,8 @@ s32 comboProgressiveOot(s32 gi)
     case GI_OOT_PROGRESSIVE_SHIELD_DEKU:
     case GI_OOT_PROGRESSIVE_SHIELD_HYLIAN:
     case GI_OOT_SHIELD_MIRROR:
-        gi = progressiveShield();
+        if (comboConfig(CFG_OOT_PROGRESSIVE_SHIELDS))
+            gi = progressiveShield();
         break;
     /* Upgrades */
     case GI_OOT_GORON_BRACELET:

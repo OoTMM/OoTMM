@@ -114,6 +114,16 @@ export const SETTINGS = [{
   type: 'boolean',
   default: true
 }, {
+  key: 'progressiveShieldsOot',
+  name: 'OoT Shields',
+  category: 'main',
+  type: 'enum',
+  values: [
+    { value: 'separate', name: 'Separate' },
+    { value: 'progressive', name: 'Progressive' },
+  ],
+  default: 'separate'
+}, {
   key: 'csmc',
   name: 'Chest Size Matches Content',
   category: 'misc',
@@ -130,6 +140,9 @@ export const SETTINGS = [{
 export const SETTINGS_CATEGORIES = [{
   name: "Main Settings",
   key: "main",
+}, {
+  name: "Progressive Items",
+  key: "progressive",
 }, {
   name: "Misc",
   key: "misc",

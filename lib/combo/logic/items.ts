@@ -37,6 +37,7 @@ export const ITEMS_REQUIRED = new Set<string>([
   'OOT_RUTO_LETTER',
   'OOT_SCALE',
   'OOT_SHIELD',
+  'OOT_SHIELD_MIRROR',
   'OOT_SLINGSHOT',
   'OOT_SONG_EPONA',
   'OOT_SONG_SARIA',

@@ -1,3 +1,4 @@
-GANON_NO_BOSS_KEY:    0x00
-SMALL_KEY_SHUFFLE:    0x01
-CSMC:                 0x02
+GANON_NO_BOSS_KEY:       0x00
+SMALL_KEY_SHUFFLE:       0x01
+CSMC:                    0x02
+OOT_PROGRESSIVE_SHIELDS: 0x03

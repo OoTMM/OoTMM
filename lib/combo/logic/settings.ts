@@ -17,6 +17,10 @@ export const configFromSettings = (settings: Settings) => {
     config.add('CSMC');
   }
 
+  if (settings.progressiveShieldsOot === 'progressive') {
+    config.add('OOT_PROGRESSIVE_SHIELDS');
+  }
+
   return config;
 };
 
@@ -39,6 +43,23 @@ export const alterWorld = (world: World, settings: Settings, config: Set<string>
         } else {
           check.item = 'MM_RUPEE_BLUE';
         }
+      }
+    }
+  }
+
+  if (config.has('OOT_PROGRESSIVE_SHIELDS')) {
+    let count = 3;
+    for (const loc in world.checks) {
+      const check = world.checks[loc];
+      let item = check.item;
+      if (['OOT_SHIELD_DEKU', 'OOT_SHIELD_HYLIAN', 'OOT_SHIELD_MIRROR'].includes(item)) {
+        if (count > 0) {
+          count -= 1;
+          item = 'OOT_SHIELD';
+        } else {
+          item = 'OOT_RUPEE_BLUE';
+        }
+        check.item = item;
       }
     }
   }

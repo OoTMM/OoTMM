@@ -119,8 +119,6 @@ static int csmcFromItemOot(s16 gi)
     case GI_OOT_RUTO_LETTER:
     case GI_OOT_SCALE_SILVER:
     case GI_OOT_SCALE_GOLDEN:
-    case GI_OOT_SHIELD_DEKU:
-    case GI_OOT_SHIELD_HYLIAN:
     case GI_OOT_SHIELD_MIRROR:
     case GI_OOT_PROGRESSIVE_SHIELD_DEKU:
     case GI_OOT_PROGRESSIVE_SHIELD_HYLIAN:
