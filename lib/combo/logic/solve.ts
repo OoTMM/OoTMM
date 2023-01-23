@@ -81,7 +81,7 @@ class Solver {
     } else {
       this.reachable = pathfind(this.world, {}, false);
     }
-    this.markAccessible();
+    this.propagate();
   }
 
   solve() {
@@ -101,14 +101,6 @@ class Solver {
     }
 
     for (;;) {
-      for (;;) {
-        this.reachable = pathfind(this.world, this.items, false, this.reachable);
-        const changed = this.markAccessible();
-        if (!changed) {
-          break;
-        }
-      }
-
       if (this.reachable.locations.size === checksCount) {
         break;
       }
@@ -363,6 +355,16 @@ class Solver {
     }
   }
 
+  private propagate() {
+    for (;;) {
+      this.reachable = pathfind(this.world, this.items, false, this.reachable);
+      const changed = this.markAccessible();
+      if (!changed) {
+        break;
+      }
+    }
+  }
+
   private randomAssumed(pool: Items, opts?: { restrictedLocations?: Set<string>, forcedItem?: string }) {
     const options = opts || {};
 
@@ -424,6 +426,9 @@ class Solver {
 
     /* Place the selected item at the selected location */
     this.place(location, requiredItem);
+
+    /* Propagate */
+    this.propagate();
   }
 
   private fill() {
