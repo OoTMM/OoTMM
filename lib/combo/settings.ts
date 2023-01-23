@@ -116,7 +116,7 @@ export const SETTINGS = [{
 }, {
   key: 'progressiveShieldsOot',
   name: 'OoT Shields',
-  category: 'main',
+  category: 'progressive',
   type: 'enum',
   values: [
     { value: 'separate', name: 'Separate' },
