@@ -1,15 +1,23 @@
 #include <combo.h>
 
+static u8 sIsPictobox;
+
 void EnDnh_AfterGivingItem(Actor* actor)
 {
-    gMmExtraFlags.pictobox = 1;
+    if (sIsPictobox)
+    {
+        gMmExtraFlags.pictobox = 1;
+        sIsPictobox = 0;
+    }
 }
 
 int EnDnh_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
 {
+    sIsPictobox = 0;
     switch (gi)
     {
     case GI_MM_PICTOGRAPH_BOX:
+        sIsPictobox = 1;
         if (gMmExtraFlags.pictobox)
             gi = GI_MM_RECOVERY_HEART;
         else
