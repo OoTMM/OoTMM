@@ -113,7 +113,8 @@ s32 comboProgressiveMm(s32 gi)
         break;
     case GI_MM_SONG_GORON:
     case GI_MM_SONG_GORON_HALF:
-        gi = progressiveSongLullaby();
+        if (comboConfig(CFG_MM_PROGRESSIVE_LULLABY))
+            gi = progressiveSongLullaby();
         break;
     }
 

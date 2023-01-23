@@ -152,6 +152,16 @@ export const SETTINGS = [{
   ],
   default: 'start'
 }, {
+  key: 'progressiveGoronLullaby',
+  name: 'MM Goron Lullaby',
+  category: 'progressive',
+  type: 'enum',
+  values: [
+    { value: 'single', name: 'Full Lullaby Only' },
+    { value: 'progressive', name: 'Progressive' },
+  ],
+  default: 'progressive'
+}, {
   key: 'csmc',
   name: 'Chest Size Matches Content',
   category: 'misc',

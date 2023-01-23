@@ -236,7 +236,7 @@
     "Termina Field Dodongo Grotto": "has_weapon || has(BOMB_BAG) || has(MASK_GORON) || has(BOW)"
     "Termina Field Bio Baba Grotto": "can_break_boulders && has(MASK_ZORA)"
     "Termina Field Scrub": "event(SCRUB_TELESCOPE) && has(WALLET)"
-    "Termina Field Gossip Stones HP": "has(OCARINA) && ((has(MASK_GORON) && has(SONG_GORON_HALF, 2)) || (has(MASK_DEKU) && has(SONG_AWAKENING)) || (has(MASK_ZORA) && has(SONG_ZORA))) && can_break_boulders"
+    "Termina Field Gossip Stones HP": "has(OCARINA) && ((has(MASK_GORON) && has_goron_song) || (has(MASK_DEKU) && has(SONG_AWAKENING)) || (has(MASK_ZORA) && has(SONG_ZORA))) && can_break_boulders"
 #    "Termina Field Log Grotto Cow 1": "has_explosives && can_play(SONG_EPONA)"
 #    "Termina Field Log Grotto Cow 2": "has_explosives && can_play(SONG_EPONA)"
   gossip:
@@ -477,9 +477,9 @@
   exits:
     "Goron Village": "true"
   events:
-    GORON_FOOD: "has(MASK_GORON) && has(MAGIC_UPGRADE) && (can_use_fire_arrows || can_play(SONG_GORON_HALF))"
+    GORON_FOOD: "has(MASK_GORON) && has(MAGIC_UPGRADE) && (can_use_fire_arrows || can_lullaby_half)"
   locations:
-    "Goron Baby": "has(MASK_GORON) && can_play(SONG_GORON_HALF)"
+    "Goron Baby": "has(MASK_GORON) && can_lullaby_half"
 "Path to Snowhead Front":
   region: PATH_TO_SNOWHEAD
   exits:

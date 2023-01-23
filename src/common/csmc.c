@@ -249,6 +249,7 @@ static int csmcFromItemMm(s16 gi)
     case GI_MM_SONG_EPONA:
     case GI_MM_SONG_SOARING:
     case GI_MM_SONG_GORON_HALF:
+    case GI_MM_SONG_GORON:
     case GI_MM_SONG_ZORA:
     case GI_MM_SONG_STORMS:
     case GI_MM_SONG_EMPTINESS:

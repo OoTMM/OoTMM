@@ -33,6 +33,10 @@ export const configFromSettings = (settings: Settings) => {
     config.add('MM_PROGRESSIVE_SHIELDS');
   }
 
+  if (settings.progressiveGoronLullaby === 'progressive') {
+    config.add('MM_PROGRESSIVE_LULLABY');
+  }
+
   return config;
 };
 
@@ -93,6 +97,17 @@ export const alterWorld = (world: World, settings: Settings, config: Set<string>
     /* OoT swords (Goron) */
     if (['OOT_SWORD_KNIFE', 'OOT_SWORD_BIGGORON'].includes(item) && config.has('OOT_PROGRESSIVE_SWORDS_GORON')) {
       item = 'OOT_SWORD_GORON';
+    }
+
+    /* MM lullaby */
+    if (item === 'MM_SONG_GORON') {
+      if (config.has('MM_PROGRESSIVE_LULLABY')) {
+        item = 'MM_SONG_GORON_HALF';
+      } else {
+        item = 'MM_RUPEE_BLUE';
+      }
+    } else if (item === 'MM_SONG_GORON_HALF' && !config.has('MM_PROGRESSIVE_LULLABY')) {
+      item = 'MM_SONG_GORON';
     }
 
     check.item = item;

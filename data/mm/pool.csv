@@ -128,7 +128,7 @@ Twin Islands Underwater Chest 2,                  chest,          NONE,         
 Twin Islands Frozen Grotto Chest,                 chest,          NONE,               GROTTOS,                    0x02,                   RUPEE_RED
 Twin Islands Ramp Grotto Chest,                   chest,          NONE,               GROTTOS,                    0x19,                   BOMBCHU
 Goron Elder,                                      npc,            NONE,               TWIN_ISLANDS_WINTER,        GORON_ELDER,            SONG_GORON_HALF
-Goron Baby,                                       npc,            NONE,               GORON_SHRINE,               GORON_BABY,             SONG_GORON_HALF
+Goron Baby,                                       npc,            NONE,               GORON_SHRINE,               GORON_BABY,             SONG_GORON
 Goron Village HP,                                 collectible,    NONE,               GORON_VILLAGE_WINTER,       0x1e,                   HEART_PIECE
 Goron Village Scrub Deed,                         npc,            NONE,               GORON_VILLAGE_WINTER,       SCRUB_MOUNTAIN,         DEED_MOUNTAIN
 Goron Village Scrub Bomb Bag,                     npc,            NONE,               GORON_VILLAGE_WINTER,       SCRUB_BOMB_BAG,         BOMB_BAG

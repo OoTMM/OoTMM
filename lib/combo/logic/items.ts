@@ -110,6 +110,7 @@ export const ITEMS_REQUIRED = new Set<string>([
   'MM_SONG_EPONA',
   'MM_SONG_SOARING',
   'MM_SONG_GORON_HALF',
+  'MM_SONG_GORON',
   'MM_SONG_ZORA',
   'MM_SONG_STORMS',
   'MM_SONG_EMPTINESS',
