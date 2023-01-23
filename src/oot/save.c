@@ -51,6 +51,14 @@ static void applyStartingItems(void)
     }
 }
 
+static void applyStartingEvents(void)
+{
+    if (comboConfig(CFG_DOOR_OF_TIME_OPEN))
+    {
+        SetEventChk(EV_OOT_CHK_DOOR_TIME);
+    }
+}
+
 void comboCreateSave(void* unk, void* buffer)
 {
     u32 base;
@@ -60,6 +68,9 @@ void comboCreateSave(void* unk, void* buffer)
 
     /* Apply starting items */
     applyStartingItems();
+
+    /* Apply starting events */
+    applyStartingEvents();
 
     /* Write save */
     comboWriteSave();

@@ -37,6 +37,10 @@ export const configFromSettings = (settings: Settings) => {
     config.add('MM_PROGRESSIVE_LULLABY');
   }
 
+  if (settings.doorOfTime === 'open') {
+    config.add('DOOR_OF_TIME_OPEN');
+  }
+
   return config;
 };
 

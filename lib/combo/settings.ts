@@ -120,6 +120,16 @@ export const SETTINGS = [{
   type: 'boolean',
   default: true
 }, {
+  key: 'doorOfTime',
+  name: 'Door of Time',
+  category: 'main',
+  type: 'enum',
+  values: [
+    { value: 'closed', name: 'Closed' },
+    { value: 'open', name: 'Open' },
+  ],
+  default: 'closed'
+}, {
   key: 'progressiveShieldsOot',
   name: 'OoT Shields',
   category: 'progressive',
