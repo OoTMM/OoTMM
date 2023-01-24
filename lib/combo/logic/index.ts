@@ -14,6 +14,17 @@ export type LogicResult = {
   log: string;
   hints: Hints;
   config: Set<string>;
+  hash: string;
+};
+
+const ALPHABET = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+const seedHash = (random: Random): string => {
+  const letters: string[] = [];
+  for (let i = 0; i < 8; ++i) {
+    letters.push(ALPHABET[random.next() % ALPHABET.length]);
+  }
+  return letters.join('');
 };
 
 export const logic = (monitor: Monitor, opts: Options): LogicResult => {
@@ -52,6 +63,7 @@ export const logic = (monitor: Monitor, opts: Options): LogicResult => {
   }
   const h = hints(monitor, random, opts.settings, world, placement, spheres);
   const log = spoiler(world, placement, spheres, opts, h);
+  const hash = seedHash(random);
 
-  return { items, log, hints: h, config };
+  return { items, log, hints: h, config, hash };
 };
