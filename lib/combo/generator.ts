@@ -12,6 +12,7 @@ import { randomize } from "./randomizer";
 type GeneratorOutput = {
   rom: Buffer;
   log: string;
+  hash: string;
 };
 
 export class Generator {
@@ -34,7 +35,7 @@ export class Generator {
     const customData = await custom(this.monitor, roms);
     const buildResult = await build(this.opts);
     const rom = await pack(this.monitor, roms, buildResult, customData, this.opts);
-    const log = randomize(this.monitor, rom, this.opts);
-    return { rom, log };
+    const { log, hash } = randomize(this.monitor, rom, this.opts);
+    return { rom, log, hash };
   }
 };

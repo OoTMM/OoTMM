@@ -338,5 +338,5 @@ export const randomize = (monitor: Monitor, rom: Buffer, opts: Options) => {
   const startingItems = randomizerStartingItems(opts.settings);
   startingItems.copy(buffer, STARTING_ITEMS_DATA_OFFSET);
   buffer.copy(rom, 0x03fe0000);
-  return res.log;
+  return { log: res.log , hash: res.hash };
 }
