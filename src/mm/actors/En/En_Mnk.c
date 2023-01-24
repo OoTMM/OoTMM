@@ -1,6 +1,6 @@
 #include <combo.h>
 
-void EnMnk_SongCutscene(Actor* actor, GameState_Play* play)
+static void EnMnk_SongCutscene(Actor* actor, GameState_Play* play)
 {
     s16 gi;
 
@@ -11,3 +11,5 @@ void EnMnk_SongCutscene(Actor* actor, GameState_Play* play)
         MM_SET_EVENT_WEEK(EV_MM_WEEK_MONKEY_PUNISHED);
     }
 }
+
+PATCH_FUNC(0x80ab76b0, EnMnk_SongCutscene);
