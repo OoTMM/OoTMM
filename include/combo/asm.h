@@ -41,6 +41,7 @@
 #define sp    $29
 #define fp    $30
 #define ra    $31
+#define s8    fp
 
 .macro PATCH_START addr
 .section .patch, "awx"
