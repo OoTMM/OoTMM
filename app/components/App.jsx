@@ -27,8 +27,7 @@ export const App = () => {
         setIsGenerating(false);
         worker.terminate();
       } else if (data.type === 'end') {
-        const { rom, log } = data;
-        setResult({ rom, log });
+        setResult(data);
         setIsGenerating(false);
         worker.terminate();
       }
@@ -46,7 +45,7 @@ export const App = () => {
       <p>Version: {process.env.VERSION}</p>
       <br/>
       <br/>
-      {result && <Result rom={result.rom} log={result.log}/>}
+      {result && <Result rom={result.rom} log={result.log} hash={result.hash}/>}
       {!result && isGenerating && <Progress message={message}/>}
       {!result && !isGenerating && <Generator error={error} onGenerate={generate}/>}
     </div>

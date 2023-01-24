@@ -10,7 +10,7 @@ const startWorker = (params) => {
   };
   generator = generate(params);
   generator.run().then(result => {
-    self.postMessage({ type: 'end', rom: result.rom, log: result.log });
+    self.postMessage({ type: 'end', rom: result.rom, log: result.log, hash: result.hash });
   }).catch((err) => {
     self.postMessage({ type: 'error', message: err.message });
   });

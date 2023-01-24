@@ -8,11 +8,18 @@ const download = (data, name, mime) => {
   a.click();
 };
 
-export const Result = ({ rom, log }) => {
+const appendHash = (str, hash, ext) => {
+  if (hash) {
+    return `${str}-${hash}.${ext}`;
+  }
+  return `${str}.${ext}`;
+};
+
+export const Result = ({ rom, log, hash }) => {
   return (
     <div>
-      <button onClick={() => download(rom, 'OoTMM.z64', 'application/octet-stream')}>Save ROM</button>
-      <button onClick={() => download(log, 'spoiler.txt', 'text/plain')}>Save Spoiler Log</button>
+      <button onClick={() => download(rom, appendHash('OoTMM', hash, 'z64'), 'application/octet-stream')}>Save ROM</button>
+      <button onClick={() => download(log, appendHash('spoiler', hash, 'txt'), 'text/plain')}>Save Spoiler Log</button>
     </div>
   );
 };
