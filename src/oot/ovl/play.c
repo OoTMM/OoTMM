@@ -184,6 +184,23 @@ static void endGame(void)
 
 void hookPlay_Init(GameState_Play* play)
 {
+    /* Handle swordless */
+    if (gSave.currentEquipment.swords == 0 || (gSave.equipment.swords & (1 << (gSave.currentEquipment.swords - 1))) == 0)
+    {
+        /* Set swordless */
+        gSave.currentEquipment.swords = 0;
+        switch (gSave.buttons[0])
+        {
+        case ITEM_OOT_KOKIRI_SWORD:
+        case ITEM_OOT_MASTER_SWORD:
+        case ITEM_OOT_GIANT_KNIFE:
+        case ITEM_OOT_GIANT_KNIFE_BROKEN:
+            gSave.buttons[0] = 0xff;
+            break;
+        }
+        gSave.eventsMisc[29] = 1;
+    }
+
     if (gSave.entrance == 0x007a)
     {
         /* Entering courtyard */
