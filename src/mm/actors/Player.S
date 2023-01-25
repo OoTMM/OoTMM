@@ -77,3 +77,8 @@ PATCH_START 0x808416f4
   nop
   nop
 PATCH_END
+
+/* Always reset form on void */
+PATCH_START 0x808345e8
+  nop
+PATCH_END
