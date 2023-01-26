@@ -2,7 +2,10 @@
 
 void EnDekubaba_GiveItemDefaultRange(Actor* this, GameState_Play* play, s16 gi)
 {
+    Actor_Player* link;
     float dist;
+
+    link = GET_LINK(play);
 
     if (GetItemCollectBehavior(ITEM_OOT_STICK) == 0xff)
     {
@@ -15,14 +18,13 @@ void EnDekubaba_GiveItemDefaultRange(Actor* this, GameState_Play* play, s16 gi)
         dist = -dist;
     if (dist < 50.f)
     {
-        dist = this->position.y - GET_LINK(play)->base.position.y;
+        dist = this->position.y - link->base.position.y;
         if (dist < 0.f)
             dist = -dist;
         if (dist < 10.f)
         {
-            this->attachedA = &GET_LINK(play)->base;
-            PlaySound(0x4824);
-            AddItem(play, ITEM_OOT_STICK);
+            this->attachedA = &link->base;
+            AddItemWithIcon(play, link, &kExtendedGetItems[gi - 1]);
         }
     }
 }

@@ -121,6 +121,7 @@ GetChestFlag = 0x8002060c;
 GetActiveItem = 0x80022b04;
 
 AddItem = 0x8006fdcc;
+Player_AddItemWithIcon = 0x8083c590;
 GetItemCollectBehavior = 0x80071420;
 
 RandIntRange = 0x80063bf0;

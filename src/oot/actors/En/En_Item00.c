@@ -1,9 +1,11 @@
 #include <combo.h>
 
-int EnItem00_GiveItemDefaultRange(Actor_EnItem00* this, GameState_Play* play, s16 gi)
+void EnItem00_GiveItemDefaultRange(Actor_EnItem00* this, GameState_Play* play, s16 gi)
 {
+    Actor_Player* link;
     s16 itemId;
 
+    link = GET_LINK(play);
     itemId = -1;
     switch (this->base.variable)
     {
@@ -20,17 +22,15 @@ int EnItem00_GiveItemDefaultRange(Actor_EnItem00* this, GameState_Play* play, s1
 
     if (itemId >= 0)
     {
-        this->base.attachedA = (Actor*)GET_LINK(play);
-        PlaySound(0x4824);
-        return AddItem(play, itemId);
+        this->base.attachedA = &link->base;
+        AddItemWithIcon(play, link, &kExtendedGetItems[gi - 1]);
     }
     else
     {
-        return GiveItemDefaultRange(&this->base, play, gi);
+        GiveItemDefaultRange(&this->base, play, gi);
     }
 }
 
-PATCH_CALL(0x80012174, EnItem00_GiveItemDefaultRange);
 PATCH_CALL(0x80012e4c, EnItem00_GiveItemDefaultRange);
 
 void EnItem00_DrawHeartPieceSmallKey(Actor_EnItem00* this, GameState_Play* play)
