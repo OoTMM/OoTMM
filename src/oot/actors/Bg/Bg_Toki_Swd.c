@@ -33,7 +33,7 @@ void BgTokiSwd_Handler(Actor* this, GameState_Play* play)
     if (Actor_HasParent(this))
     {
         /* Unset FW */
-        *(int*)((char*)&gSave + 0xe64) = 0;
+        *(int*)((char*)&gSave + 0xe64 + 0x1c) = 0;
 
         /* Time Travel */
         t = &play->transition;
