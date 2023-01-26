@@ -44,19 +44,19 @@ void Sram_SaveEndOfCycleWrapper(GameState_Play* play)
     gMmExtraTrade.trade2 = gMmExtraTrade.tradeObtained2;
     gMmExtraTrade.trade3 = gMmExtraTrade.tradeObtained3;
 
-    if (gMmExtraTrade.trade1 && gSave.inventory.items[ITS_MM_TRADE1] == ITEM_NONE)
+    if (gMmExtraTrade.trade1)
     {
         gSave.inventory.items[ITS_MM_TRADE1] = ITEM_MM_DEED_OCEAN;
         comboToggleTrade1();
     }
 
-    if (gMmExtraTrade.trade2 && gSave.inventory.items[ITS_MM_TRADE2] == ITEM_NONE)
+    if (gMmExtraTrade.trade2)
     {
         gSave.inventory.items[ITS_MM_TRADE2] = ITEM_MM_LETTER_TO_MAMA;
         comboToggleTrade2();
     }
 
-    if (gMmExtraTrade.trade3 && gSave.inventory.items[ITS_MM_TRADE3] == ITEM_NONE)
+    if (gMmExtraTrade.trade3)
     {
         gSave.inventory.items[ITS_MM_TRADE3] = ITEM_MM_PENDANT_OF_MEMORIES;
         comboToggleTrade3();
