@@ -94,6 +94,7 @@ RandIntRange = 0x800ff450;
 
 gSegments = 0x801f8180;
 AddItem = 0x80112e80;
+Player_AddItemWithIcon = 0x8083d168;
 GiveItemDefaultRange = 0x800b8b84;
 
 ActorEnableTalk = 0x800b8614;
