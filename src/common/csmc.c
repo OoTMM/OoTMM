@@ -343,6 +343,11 @@ static int csmcEnabled(Actor* this, GameState_Play* play)
         return 0;
 #endif
 
+#if defined(GAME_MM)
+    if (play->sceneId == SCE_MM_MOON_GORON)
+        return 0;
+#endif
+
     return 1;
 }
 
