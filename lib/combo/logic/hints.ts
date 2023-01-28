@@ -423,6 +423,9 @@ class HintsSolver {
   }
 
   private isLocationHintable(loc: string) {
+    if (loc === 'OOT Temple of Time Medallion' || loc === 'MM Oath to Order') {
+      return false;
+    }
     const item = this.items[loc];
     if (loc === 'OOT Temple of Time Master Sword' && !this.settings.shuffleMasterSword) {
       return false;

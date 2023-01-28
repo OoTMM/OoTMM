@@ -71,7 +71,7 @@ const RegionName kRegionNamesMm[] = {
     { "in",         TEXT_COLOR_YELLOW "East Clock Town" },
     { "in",         TEXT_COLOR_YELLOW "West Clock Town" },
     { "in",         "the " TEXT_COLOR_YELLOW "Laundry Pool" },
-    { "inside",     "the " TEXT_COLOR_PINK "Giants's Dream" },
+    { "inside",     "the " TEXT_COLOR_PINK "Giant's Dream" },
     { "on",         TEXT_COLOR_YELLOW "Clock Tower Roof" },
     { "in",         "the " TEXT_COLOR_RED "Stock Pot Inn" },
     { "in",         TEXT_COLOR_RED "Termina Field" },
