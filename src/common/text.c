@@ -196,6 +196,7 @@ static int isItemAmbiguousOot(s16 gi)
     case GI_OOT_MAGIC_UPGRADE:
     case GI_OOT_MAGIC_UPGRADE2:
     case GI_OOT_DEFENSE_UPGRADE:
+    case GI_OOT_SHIELD_MIRROR:
         return 1;
     default:
         return 0;
@@ -262,6 +263,7 @@ static int isItemAmbiguousMm(s16 gi)
     case GI_MM_MAGIC_UPGRADE2:
     case GI_MM_DEFENSE_UPGRADE:
     case GI_MM_BOTTLED_MILK:
+    case GI_MM_SHIELD_MIRROR:
         return 1;
     default:
         return 0;
