@@ -127,7 +127,7 @@ static const char* const kCheckNamesMm[] = {
     "the " TEXT_COLOR_RED "Goron Race",
     "the " TEXT_COLOR_PINK "Graveyard Big Poe",
     "the " TEXT_COLOR_TEAL "Bank's Final Reward",
-    "the " TEXT_COLOR_TEAL "Sound Check",
+    "the " TEXT_COLOR_TEAL "Milk Bar Performance",
     "the " TEXT_COLOR_GREEN "Boat Archery",
     "the " TEXT_COLOR_BLUE "Ocean Spider House Chest",
     "the " TEXT_COLOR_BLUE "Pinnacle Rock Seahorses",
