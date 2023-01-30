@@ -6,6 +6,12 @@
 #define GAME_START 0xb0000000
 #endif
 
+.balign 8
+kTempStack:
+.space 0x1000
+kTempStackEnd:
+.space 0x8
+
 kInitialRSP:
   lui   t5,0xbfc0
 .Lloop:
@@ -28,6 +34,15 @@ comboGameSwitch2:
   la    t1,0b0101010101010101010101110
   sw    t1,0x0010(t0)
 
+  /* Exec from uncached */
+  la t0,(comboGameSwitch3 + 0x20000000)
+  jr t0
+   nop
+
+comboGameSwitch3:
+  /* Load uncached stack */
+  la sp,(kTempStackEnd + 0x20000000)
+
   /* Flush DCACHE */
   la t0,0x80000000
   la t1,0x80002000
@@ -35,6 +50,15 @@ comboGameSwitch2:
   cache 0x01,(t0)
   addiu t0,0x10
   bne t0,t1,.LDcacheLoop
+   nop
+
+  /* Flush ICACHE */
+  la t0,0x80000000
+  la t1,0x80004000
+.LIcacheLoop:
+  cache 0x00,(t0)
+  addiu t0,0x20
+  bne t0,t1,.LIcacheLoop
    nop
 
   /* Copy PIF RSP code */
