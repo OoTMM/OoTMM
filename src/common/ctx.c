@@ -21,3 +21,8 @@ void comboLoadContext(void)
     }
     bzero(&gComboCtxRead, sizeof(gComboCtx));
 }
+
+void comboExportContext(void)
+{
+    memcpy(&gComboCtxWrite, &gComboCtx, sizeof(gComboCtx));
+}

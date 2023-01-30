@@ -46,3 +46,35 @@ void comboInitDma(void)
     gDmaDataCount = DMA_COUNT + DMA_COUNT_FOREIGN + CUSTOM_DMA_SIZE;
 #endif
 }
+
+static void waitForPi(void)
+{
+    u32 status;
+
+    for (;;)
+    {
+        status = IO_READ(PI_STATUS_REG);
+        if ((status & 3) == 0)
+            return;
+    }
+}
+
+void comboDma_NoCacheInval(void* dramAddr, u32 cartAddr, u32 size)
+{
+    u32 tmp;
+
+    waitForPi();
+    while (size)
+    {
+        tmp = size;
+        if (tmp > 0x2000)
+            tmp = 0x2000;
+        IO_WRITE(PI_DRAM_ADDR_REG, (u32)dramAddr & 0x1fffffff);
+        IO_WRITE(PI_CART_ADDR_REG, cartAddr | PI_DOM1_ADDR2);
+        IO_WRITE(PI_WR_LEN_REG, tmp - 1);
+        waitForPi();
+        size -= tmp;
+        dramAddr = (void*)((u32)dramAddr + tmp);
+        cartAddr += tmp;
+    }
+}

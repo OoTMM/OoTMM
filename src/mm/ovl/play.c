@@ -138,7 +138,6 @@ void hookPlay_Init(GameState_Play* play)
     {
         gSave.isOwlSave = 1;
         PrepareSave(&play->sramCtx);
-        comboWriteSave();
         comboGameSwitch();
         return;
     }

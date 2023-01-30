@@ -87,6 +87,7 @@ ComboData;
 extern ComboData gComboData;
 
 void comboLoadContext(void);
+void comboExportContext(void);
 
 /* Init */
 void comboInit(void);

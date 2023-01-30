@@ -20,5 +20,4 @@ static void DemoKankyo_Warp(GameState_Play* play, void* unk, Actor* this)
     t->entrance = sWarpEntrances[play->msgCtx.lastSongPlayed];
 }
 
-/* CRASHES ON ED SOMETIMES */
 PATCH_CALL(0x80930ab0, DemoKankyo_Warp);
