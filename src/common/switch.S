@@ -1,5 +1,11 @@
 #include <combo.h>
 
+#if defined(GAME_OOT)
+#define GAME_START 0xb2000000
+#else
+#define GAME_START 0xb0000000
+#endif
+
 kInitialRSP:
   lui   t5,0xbfc0
 .Lloop:
@@ -145,7 +151,7 @@ comboGameSwitch2:
   0:
 
   /* dma rom to ram */
-  lui     t3, 0xB000
+  lui     t3, %HI(GAME_START)
   lw      t1, 0x0008(t3)
   lui     t2, 0x1FFF
   ori     t2, t2, 0xFFFF
@@ -180,6 +186,18 @@ comboGameSwitch2:
   /* clear sp semaphore */
   lui      at, 0xA404
   sw       zero, 0x001C(at)
+
+  /* custom: copy combo ctx */
+  la      a0,(gComboCtx+0x20000000)
+  la      a1,(gComboCtxWrite+0x20000000)
+  lw      a2,0x00(a0)
+  sw      a2,0x00(a1)
+  lw      a2,0x04(a0)
+  sw      a2,0x04(a1)
+  lw      a2,0x08(a0)
+  sw      a2,0x08(a1)
+  lw      a2,0x0c(a0)
+  sw      a2,0x0c(a1)
 
   /* compute checksum */
   lui     t3, 0xB000
@@ -287,6 +305,7 @@ comboGameSwitch2:
   sw      t1, 0x0018(t0)
 
   /* check checksum */
+  /*
   lw      t0, 0x0010(t3)
   bne     a3, t0, . + 0x001C
   nop
@@ -297,6 +316,7 @@ comboGameSwitch2:
   nop
   bgezal  zero, .
   nop
+  */
 
   /* clear sp mem */
   lui     t0, 0xA400
@@ -310,7 +330,7 @@ comboGameSwitch2:
   sw      t1, -0x0004(t0)
 
   /* jump to game preamble */
-  lui     t0, 0xB000
+  lui     t0, %HI(GAME_START)
   lw      t0, 0x0008(t0)
   la      t1, 0x80400000
   lw      t2, 0x0000(t0)
