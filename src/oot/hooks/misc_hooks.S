@@ -24,5 +24,5 @@ PATCH_END
 
 /* Patch ucode anti-piracy */
 PATCH_START 0x800060b0
-  j 0x800010d0
+  j 0x800010c8
 PATCH_END
