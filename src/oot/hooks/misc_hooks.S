@@ -21,3 +21,8 @@ PATCH_END
 PATCH_START 0x80090d84
   jal comboCreateSave
 PATCH_END
+
+/* Patch ucode anti-piracy */
+PATCH_START 0x800060b0
+  j 0x800010d0
+PATCH_END
