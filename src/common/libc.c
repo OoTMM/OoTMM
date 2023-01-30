@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <string.h>
 
 int toupper(int c)
@@ -12,6 +13,17 @@ int toupper(int c)
 
 void* memcpy(void* dst, const void* src, size_t size)
 {
+    /* Special case - 4 byte copies */
+    if ((size % 4) == 0 && ((uint32_t)dst % 4) == 0 && ((uint32_t)src % 4) == 0)
+    {
+        size /= 4;
+        for (size_t i = 0; i < size; ++i)
+        {
+            ((uint32_t*)dst)[i] = ((uint32_t*)src)[i];
+        }
+        return dst;
+    }
+
     for (size_t i = 0; i < size; ++i)
         ((char*)dst)[i] = ((char*)src)[i];
     return dst;
