@@ -230,6 +230,7 @@ void hookPlay_Init(GameState_Play* play)
     {
         PlayStoreFlags(play);
         gSave.sceneId = play->sceneId;
+        comboWriteSave();
         comboGameSwitch();
         return;
     }
@@ -248,6 +249,7 @@ void hookPlay_Init(GameState_Play* play)
 #if defined(DEBUG)
     if (play->gs.input[0].current.buttons & R_TRIG)
     {
+        comboWriteSave();
         comboGameSwitch();
         return;
     }
