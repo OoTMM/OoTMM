@@ -5,6 +5,7 @@ mkdir -p vendor/core
 if [ "stable" = "$1" ]; then
   git clone --depth=50 --branch=master https://github.com/OoTMM/core vendor/core || exit 1
   cd vendor/core
+  git fetch --tags
   export VERSION="$(git tag --list --sort='-version:refname' | head -n1)"
   git checkout "$VERSION"
 else
