@@ -287,6 +287,10 @@ int  comboCsmcChestSize(s16 gi);
 
 int comboShopPrecond(GameState_Play* play, Actor_EnGirlA* girlA);
 
+/* Entrance */
+void comboInitEntrances(void);
+s32 comboEntranceOverride(s16 entranceId);
+
 #else
 # include <combo/asm.h>
 #endif
