@@ -64,6 +64,7 @@ typedef struct PACKED ALIGNED(4)
     char magic[8];
     u32  valid;
     u32  saveIndex;
+    s32  entrance;
 }
 ComboContext;
 

@@ -192,9 +192,16 @@ void hookPlay_Init(GameState_Play* play)
     {
         gIsEntranceOverride = 0;
         override = comboEntranceOverride(gSave.entrance);
-        if (override >= 0)
+        if (override != -1)
         {
-            gSave.entrance = override;
+            if (override >= 0)
+                gSave.entrance = override;
+            else
+            {
+                gComboCtx.entrance = override & 0x7fffffff;
+                comboGameSwitch();
+                return;
+            }
         }
     }
 
