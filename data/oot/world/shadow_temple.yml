@@ -53,6 +53,11 @@
 "Shadow Temple Boss":
   boss: true
   dungeon: Shadow
+  exits:
+    "Shadow Temple After Boss": "has_weapon && has_lens && (can_use_bow || can_use_slingshot)"
+"Shadow Temple After Boss":
+  boss: true
+  dungeon: Shadow
   locations:
     "Shadow Temple Boss HC": "true"
     "Shadow Temple Boss": "true"

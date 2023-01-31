@@ -160,7 +160,6 @@
   dungeon: ST
   exits:
     "Oath to Order": "true"
-    "Ikana Canyon": "true"
   locations:
     "Stone Tower Boss HC": "true"
     "Stone Tower Boss": "true"

@@ -190,7 +190,6 @@
   dungeon: SH
   exits:
     "Oath to Order": "true"
-    "Mountain Village": "true"
   events:
     BOSS_SNOWHEAD: "true"
   locations:
