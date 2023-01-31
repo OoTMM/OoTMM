@@ -106,10 +106,12 @@
     "Woodfall Temple SF Pre-Boss Top Right": "true"
     "Woodfall Temple SF Pre-Boss Pillar": "has(MASK_DEKU) && has(BOW)"
 "Woodfall Temple Boss":
+  boss: true
   dungeon: "WF"
   exits:
     "Woodfall Temple After Boss": "true"
 "Woodfall Temple After Boss":
+  boss: true
   dungeon: "WF"
   exits:
     "Oath to Order": "true"

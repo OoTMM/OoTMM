@@ -109,10 +109,12 @@
   locations:
      "Dodongo Cavern Boss Chest": "true"
 "Dodongo Cavern Boss":
+  boss: true
   dungeon: DC
   exits:
     "Dodongo Cavern After Boss": "has_bombflowers"
 "Dodongo Cavern After Boss":
+  boss: true
   dungeon: DC
   locations:
     "Dodongo Cavern Boss Container": "true"

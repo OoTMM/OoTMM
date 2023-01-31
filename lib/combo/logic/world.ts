@@ -10,6 +10,8 @@ type ExprMap = {
 }
 
 type WorldArea = {
+  boss: boolean;
+  dungeon: string | null;
   exits: ExprMap;
   events: ExprMap;
   locations: ExprMap;
@@ -83,6 +85,7 @@ const loadWorldAreas = (world: World, game: Game, exprParser: ExprParser) => {
   for (let name in data) {
     const area = data[name];
     name = gameId(game, name, ' ');
+    const boss = area.boss || false;
     const dungeon = area.dungeon || null;
     let region = area.region || DUNGEONS_REGIONS[dungeon];
     if (region !== 'NONE') {
@@ -105,7 +108,7 @@ const loadWorldAreas = (world: World, game: Game, exprParser: ExprParser) => {
       throw new Error(`Unknown region ${region}`);
     }
 
-    world.areas[name] = { exits, events, locations, gossip };
+    world.areas[name] = { boss, dungeon, exits, events, locations, gossip };
 
     if (dungeon) {
       if (world.dungeons[dungeon] === undefined) {

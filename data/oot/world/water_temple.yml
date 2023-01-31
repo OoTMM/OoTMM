@@ -123,10 +123,12 @@
   exits:
     "Water Temple Boss": "has(BOSS_KEY_WATER)"
 "Water Temple Boss":
+  boss: true
   dungeon: Water
   exits:
     "Water Temple After Boss": "can_hookshot && has_weapon"
 "Water Temple After Boss":
+  boss: true
   dungeon: Water
   events:
     WATER_TEMPLE_CLEARED: "true"

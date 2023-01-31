@@ -51,6 +51,7 @@
     "Shadow Temple Invisible Floormaster": "true"
     "Shadow Temple GS Triple Skull Pot": "can_hookshot"
 "Shadow Temple Boss":
+  boss: true
   dungeon: Shadow
   locations:
     "Shadow Temple Boss HC": "true"
