@@ -1,5 +1,6 @@
 import { World } from './world';
 import { Age, AGES, Items } from './state';
+import { Optional } from '../util';
 
 /*
  * TODO: This whole module needs some serious refactoring.
@@ -37,7 +38,13 @@ const reachableDup = (reachable: Reachable): Reachable => ({
   gossip: new Set(reachable.gossip),
 });
 
-const pathfindAreas = (world: World, items: Items, age: Age, reachable: Reachable) => {
+export type EntranceOverrides = {[k: string]: {[k: string]: string | null}};
+type PathfinderOptions = {
+  entranceOverrides: EntranceOverrides;
+  ignoreItems: boolean;
+};
+
+const pathfindAreas = (world: World, items: Items, age: Age, reachable: Reachable, opts: PathfinderOptions) => {
   const newAreas = new Set<string>();
   const oldAreas = reachable.areas[age];
   for (const area of oldAreas) {
@@ -46,12 +53,20 @@ const pathfindAreas = (world: World, items: Items, age: Age, reachable: Reachabl
       throw new Error(`Unknown area: ${area}`);
     }
     const exits = worldArea.exits;
-    for (const exit in exits) {
+    for (let exit in exits) {
+      const expr = exits[exit];
+      const overrides = opts.entranceOverrides[area] || {};
+      const override = overrides[exit];
+      if (override === null) {
+        continue;
+      }
+      if (override !== undefined) {
+        exit = override;
+      }
       if (oldAreas.has(exit) || newAreas.has(exit)) {
         continue;
       }
-      const expr = exits[exit];
-      if (expr({ items, age, events: reachable.events })) {
+      if (expr({ items, age, events: reachable.events, ignoreItems: opts.ignoreItems })) {
         newAreas.add(exit);
       }
     }
@@ -63,7 +78,7 @@ const pathfindAreas = (world: World, items: Items, age: Age, reachable: Reachabl
   return false;
 };
 
-const pathfindEvents = (world: World, items: Items, age: Age, reachable: Reachable) => {
+const pathfindEvents = (world: World, items: Items, age: Age, reachable: Reachable, opts: PathfinderOptions) => {
   let changed = false;
   for (const area of reachable.areas[age]) {
     const events = world.areas[area].events;
@@ -72,7 +87,7 @@ const pathfindEvents = (world: World, items: Items, age: Age, reachable: Reachab
         continue;
       }
       const expr = events[event];
-      if (expr({ items, age, events: reachable.events })) {
+      if (expr({ items, age, events: reachable.events, ignoreItems: opts.ignoreItems })) {
         reachable.events.add(event);
         changed = true;
       }
@@ -81,7 +96,7 @@ const pathfindEvents = (world: World, items: Items, age: Age, reachable: Reachab
   return changed;
 };
 
-const pathfindGossip = (world: World, items: Items, age: Age, reachable: Reachable) => {
+const pathfindGossip = (world: World, items: Items, age: Age, reachable: Reachable, opts: PathfinderOptions) => {
   let changed = false;
   for (const area of reachable.areas[age]) {
     const gossips = world.areas[area].gossip;
@@ -90,7 +105,7 @@ const pathfindGossip = (world: World, items: Items, age: Age, reachable: Reachab
         continue;
       }
       const expr = gossips[gossip];
-      if (expr({ items, age, events: reachable.events })) {
+      if (expr({ items, age, events: reachable.events, ignoreItems: opts.ignoreItems })) {
         reachable.gossip.add(gossip);
         changed = true;
       }
@@ -99,7 +114,7 @@ const pathfindGossip = (world: World, items: Items, age: Age, reachable: Reachab
   return changed;
 };
 
-const pathfindLocations = (world: World, items: Items, age: Age, reachable: Reachable) => {
+const pathfindLocations = (world: World, items: Items, age: Age, reachable: Reachable, opts: PathfinderOptions) => {
   const newLocations = new Set<string>();
   const oldLocations = reachable.locations;
   for (const area of reachable.areas[age]) {
@@ -109,7 +124,7 @@ const pathfindLocations = (world: World, items: Items, age: Age, reachable: Reac
         continue;
       }
       const expr = locations[location];
-      if (expr({ items, age, events: reachable.events })) {
+      if (expr({ items, age, events: reachable.events, ignoreItems: opts.ignoreItems })) {
         newLocations.add(location);
       }
     }
@@ -121,7 +136,8 @@ const pathfindLocations = (world: World, items: Items, age: Age, reachable: Reac
   return false;
 };
 
-export const pathfind = (world: World, items: Items, gossip: boolean, reachable?: Reachable) => {
+export const pathfind = (world: World, items: Items, gossip: boolean, reachable?: Reachable, opts?: Optional<PathfinderOptions>) => {
+  const o: PathfinderOptions = { entranceOverrides: {}, ignoreItems: false, ...(opts || {}) };
   if (reachable === undefined) {
     reachable = reachableDefault();
   } else {
@@ -132,10 +148,10 @@ export const pathfind = (world: World, items: Items, gossip: boolean, reachable?
   for (;;) {
     let changed = false;
     for (const age of AGES) {
-      changed ||= pathfindAreas(world, items, age, reachable);
-      changed ||= pathfindEvents(world, items, age, reachable);
+      changed ||= pathfindAreas(world, items, age, reachable, o);
+      changed ||= pathfindEvents(world, items, age, reachable, o);
       if (gossip) {
-        changed ||= pathfindGossip(world, items, age, reachable);
+        changed ||= pathfindGossip(world, items, age, reachable, o);
       }
     }
     if (!changed) {
@@ -147,7 +163,7 @@ export const pathfind = (world: World, items: Items, gossip: boolean, reachable?
   for (;;) {
     let changed = false;
     for (const age of AGES) {
-      changed ||= pathfindLocations(world, items, age, reachable);
+      changed ||= pathfindLocations(world, items, age, reachable, o);
     }
     if (!changed) {
       break;

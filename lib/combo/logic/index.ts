@@ -8,6 +8,7 @@ import { hints, Hints } from './hints';
 import { alterWorld, configFromSettings } from './settings';
 import { playthrough } from './playthrough';
 import { Monitor } from '../monitor';
+import { shuffleEntrances } from './entrance';
 
 export type LogicResult = {
   items: WorldCheck[];
@@ -33,6 +34,7 @@ export const logic = (monitor: Monitor, opts: Options): LogicResult => {
   alterWorld(world, opts.settings, config);
   const random = new Random();
   random.seed(opts.seed);
+  shuffleEntrances(world, random);
 
   let placement: ItemPlacement = {};
   let error: Error | null = null;

@@ -21,8 +21,8 @@ export const DATA_MACROS = {
   mm: macrosMm,
 };
 
-import entrancesOot from '../../data/oot/entrances.yml';
-import entrancesMm from '../../data/mm/entrances.yml';
+import entrancesOot from '../../data/oot/entrances.csv';
+import entrancesMm from '../../data/mm/entrances.csv';
 
 export const DATA_ENTRANCES = {
   oot: entrancesOot,

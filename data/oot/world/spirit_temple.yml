@@ -105,6 +105,11 @@
 "Spirit Temple Boss":
   boss: true
   dungeon: Spirit
+  exits:
+    "Spirit Temple After Boss": "has_mirror_shield"
+"Spirit Temple After Boss":
+  boss: true
+  dungeon: Spirit
   locations:
     "Spirit Temple Boss HC": "true"
     "Spirit Temple Boss": "true"
