@@ -3,7 +3,11 @@ import { Settings } from "../settings";
 import { EntranceOverrides, pathfind, Reachable } from "./pathfind";
 import { DUNGEONS_REGIONS, ExprMap, World, WorldEntrance } from "./world";
 
+export type EntranceShuffleResult = {[k: string]: {[k:string]: { from: string, to: string }}};
+
 class EntranceShuffler {
+  private overrides: EntranceShuffleResult = {};
+
   constructor(
     private world: World,
     private random: Random,
@@ -116,6 +120,11 @@ class EntranceShuffler {
       /* Replace the events */
       const dstBoss = this.world.areas[lastAreaByDungeon[dstDungeon]];
       dstBoss.events = events[srcDungeon];
+
+      /* Mark the override */
+      const override = this.overrides[src.from] || {};
+      override[src.to] = { from: dst.from, to: dst.to };
+      this.overrides[src.from] = override;
     }
   }
 
@@ -123,10 +132,12 @@ class EntranceShuffler {
     if (this.settings.entranceShuffle === 'boss') {
       this.fixBosses();
     }
+
+    return this.overrides;
   }
 };
 
 export function shuffleEntrances(world: World, random: Random, settings: Settings) {
   const shuffler = new EntranceShuffler(world, random, settings);
-  shuffler.run();
+  return shuffler.run();
 }

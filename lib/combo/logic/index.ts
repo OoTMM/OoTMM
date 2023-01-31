@@ -8,7 +8,8 @@ import { hints, Hints } from './hints';
 import { alterWorld, configFromSettings } from './settings';
 import { playthrough } from './playthrough';
 import { Monitor } from '../monitor';
-import { shuffleEntrances } from './entrance';
+import { EntranceShuffleResult, shuffleEntrances } from './entrance';
+import { EntranceOverrides } from './pathfind';
 
 export type LogicResult = {
   items: WorldCheck[];
@@ -16,6 +17,7 @@ export type LogicResult = {
   hints: Hints;
   config: Set<string>;
   hash: string;
+  entrances: EntranceShuffleResult;
 };
 
 const ALPHABET = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -34,7 +36,7 @@ export const logic = (monitor: Monitor, opts: Options): LogicResult => {
   alterWorld(world, opts.settings, config);
   const random = new Random();
   random.seed(opts.seed);
-  shuffleEntrances(world, random, opts.settings);
+  const entrances = shuffleEntrances(world, random, opts.settings);
 
   let placement: ItemPlacement = {};
   let error: Error | null = null;
@@ -64,8 +66,8 @@ export const logic = (monitor: Monitor, opts: Options): LogicResult => {
     items.push({ ...check, item: placement[loc] });
   }
   const h = hints(monitor, random, opts.settings, world, placement, spheres);
-  const log = spoiler(world, placement, spheres, opts, h);
+  const log = spoiler(world, placement, spheres, opts, h, entrances);
   const hash = seedHash(random);
 
-  return { items, log, hints: h, config, hash };
+  return { items, log, hints: h, config, hash, entrances };
 };
