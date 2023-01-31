@@ -2,7 +2,7 @@ import { Game, GAMES } from '../config';
 import { gameId } from '../util';
 import { Expr } from './expr';
 import { ExprParser } from './expr-parser';
-import { DATA_POOL, DATA_MACROS, DATA_WORLD, DATA_REGIONS } from '../data';
+import { DATA_POOL, DATA_MACROS, DATA_WORLD, DATA_REGIONS, DATA_ENTRANCES } from '../data';
 import { Settings } from '../settings';
 
 type ExprMap = {
@@ -39,6 +39,11 @@ export type WorldGossip = {
   game: Game;
 };
 
+export type WorldEntrance = {
+  from: string;
+  to: string;
+};
+
 export type World = {
   areas: {[k: string]: WorldArea};
   checks: {[k: string]: WorldCheck};
@@ -46,6 +51,7 @@ export type World = {
   regions: {[k: string]: string};
   gossip: {[k: string]: WorldGossip};
   checkHints: {[k: string]: string[]};
+  entrances: WorldEntrance[];
 };
 
 const DUNGEONS_REGIONS: {[k: string]: string} = {
@@ -150,6 +156,14 @@ const loadWorldPool = (world: World, game: Game, settings: Settings) => {
   }
 };
 
+function loadWorldEntrances(world: World, game: Game) {
+  for (const record of DATA_ENTRANCES[game]) {
+    const from = gameId(game, String(record.from), ' ');
+    const to = gameId(game, String(record.to), ' ');
+    world.entrances.push({ from, to });
+  }
+}
+
 const loadMacros = (exprParser: ExprParser, game: Game) => {
   const data = DATA_MACROS[game];
   for (let name in data) {
@@ -173,10 +187,11 @@ const loadWorldGame = (world: World, game: Game, settings: Settings) => {
   loadMacros(exprParser, game);
   loadWorldAreas(world, game, exprParser);
   loadWorldPool(world, game, settings);
+  loadWorldEntrances(world, game);
 }
 
 export const createWorld = (settings: Settings) => {
-  const world: World = { areas: {}, checks: {}, dungeons: {}, regions: {}, gossip: {}, checkHints: {} };
+  const world: World = { areas: {}, checks: {}, dungeons: {}, regions: {}, gossip: {}, checkHints: {}, entrances: [] };
   for (const g of GAMES) {
     loadWorldGame(world, g, settings);
   }
