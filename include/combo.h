@@ -291,6 +291,8 @@ int comboShopPrecond(GameState_Play* play, Actor_EnGirlA* girlA);
 void comboInitEntrances(void);
 s32 comboEntranceOverride(s16 entranceId);
 
+extern s8 gIsEntranceOverride;
+
 #else
 # include <combo/asm.h>
 #endif

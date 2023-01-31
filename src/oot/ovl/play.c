@@ -185,6 +185,19 @@ static void endGame(void)
 
 void hookPlay_Init(GameState_Play* play)
 {
+    s32 override;
+
+    /* Handle transition override */
+    if (gIsEntranceOverride)
+    {
+        gIsEntranceOverride = 0;
+        override = comboEntranceOverride(gSave.entrance);
+        if (override >= 0)
+        {
+            gSave.entrance = override;
+        }
+    }
+
     /* Handle swordless */
     if (gSave.currentEquipment.swords == 0 || (gSave.equipment.swords & (1 << (gSave.currentEquipment.swords - 1))) == 0)
     {

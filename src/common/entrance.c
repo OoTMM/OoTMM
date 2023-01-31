@@ -6,6 +6,8 @@
 # define ENTRANCES_ADDR 0x03fe9000
 #endif
 
+s8 gIsEntranceOverride;
+
 typedef struct PACKED ALIGNED(4)
 {
     s32 key;
