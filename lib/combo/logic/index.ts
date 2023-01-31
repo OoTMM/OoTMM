@@ -34,7 +34,7 @@ export const logic = (monitor: Monitor, opts: Options): LogicResult => {
   alterWorld(world, opts.settings, config);
   const random = new Random();
   random.seed(opts.seed);
-  shuffleEntrances(world, random);
+  shuffleEntrances(world, random, opts.settings);
 
   let placement: ItemPlacement = {};
   let error: Error | null = null;

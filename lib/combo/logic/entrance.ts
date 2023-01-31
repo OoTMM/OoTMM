@@ -1,11 +1,13 @@
 import { Random, sample } from "../random";
+import { Settings } from "../settings";
 import { EntranceOverrides, pathfind, Reachable } from "./pathfind";
-import { World, WorldEntrance } from "./world";
+import { DUNGEONS_REGIONS, ExprMap, World, WorldEntrance } from "./world";
 
 class EntranceShuffler {
   constructor(
     private world: World,
     private random: Random,
+    private settings: Settings,
   ){
   }
 
@@ -39,7 +41,24 @@ class EntranceShuffler {
       bossEntrancesByDungeon[dungeon] = e;
     }
 
+    /* Extract dungeons and events */
     const dungeons = Object.keys(bossEntrancesByDungeon);
+    const events: {[k: string]: ExprMap} = {};
+    const lastAreaByDungeon: {[k: string]: string} = {};
+    const dungeonsBossAreas: {[k: string]: string[]} = {};
+    for (const d of dungeons) {
+      events[d] = {};
+      dungeonsBossAreas[d] = [];
+      for (const a in this.world.areas) {
+        const area = this.world.areas[a];
+        if (area.dungeon === d && area.boss) {
+          events[d] = { ...events[d], ...area.events };
+          area.events = {};
+          lastAreaByDungeon[d] = a;
+          dungeonsBossAreas[d].push(a);
+        }
+      }
+    }
 
     /* Set up base reachability */
     const reachable = pathfind(this.world, {}, false, undefined, { entranceOverrides: overrides, ignoreItems: true });
@@ -70,15 +89,44 @@ class EntranceShuffler {
       }
     }
 
-    console.log(placed);
+    /* Alter the world */
+    for (const srcDungeon in placed) {
+      const dstDungeon = placed[srcDungeon];
+      const src = bossEntrancesByDungeon[srcDungeon];
+      const dst = bossEntrancesByDungeon[dstDungeon];
+
+      /* Replace the entrance */
+      const srcArea = this.world.areas[src.from];
+      const expr = srcArea.exits[src.to];
+      delete srcArea.exits[src.to];
+      srcArea.exits[dst.to] = expr;
+
+      /* Replace the dungeon tag */
+      for (const a of dungeonsBossAreas[dstDungeon]) {
+        const area = this.world.areas[a];
+        area.dungeon = srcDungeon;
+
+        for (const l in area.locations) {
+          this.world.regions[l] = DUNGEONS_REGIONS[srcDungeon];
+          this.world.dungeons[srcDungeon].add(l);
+          this.world.dungeons[dstDungeon].delete(l);
+        }
+      }
+
+      /* Replace the events */
+      const dstBoss = this.world.areas[lastAreaByDungeon[dstDungeon]];
+      dstBoss.events = events[srcDungeon];
+    }
   }
 
   run() {
-    this.fixBosses();
+    if (this.settings.entranceShuffle === 'boss') {
+      this.fixBosses();
+    }
   }
 };
 
-export function shuffleEntrances(world: World, random: Random) {
-  const shuffler = new EntranceShuffler(world, random);
+export function shuffleEntrances(world: World, random: Random, settings: Settings) {
+  const shuffler = new EntranceShuffler(world, random, settings);
   shuffler.run();
 }

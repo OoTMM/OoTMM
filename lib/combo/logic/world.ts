@@ -5,7 +5,7 @@ import { ExprParser } from './expr-parser';
 import { DATA_POOL, DATA_MACROS, DATA_WORLD, DATA_REGIONS, DATA_ENTRANCES } from '../data';
 import { Settings } from '../settings';
 
-type ExprMap = {
+export type ExprMap = {
   [k: string]: Expr;
 }
 
@@ -54,24 +54,24 @@ export type World = {
   entrances: WorldEntrance[];
 };
 
-const DUNGEONS_REGIONS: {[k: string]: string} = {
-  DT: "DEKU_TREE",
-  DC: "DODONGO_CAVERN",
-  JJ: "JABU_JABU",
-  Forest: "TEMPLE_FOREST",
-  Fire: "TEMPLE_FIRE",
-  Water: "TEMPLE_WATER",
-  Spirit: "TEMPLE_SPIRIT",
-  Shadow: "TEMPLE_SHADOW",
-  BotW: "BOTTOM_OF_THE_WELL",
-  IC: "ICE_CAVERN",
-  GTG: "GERUDO_TRAINING_GROUNDS",
-  GF: "THIEVES_HIDEOUT",
-  Ganon: "GANON_CASTLE",
-  WF: "TEMPLE_WOODFALL",
-  SH: "TEMPLE_SNOWHEAD",
-  GB: "TEMPLE_GREAT_BAY",
-  ST: "TEMPLE_STONE_TOWER",
+export const DUNGEONS_REGIONS: {[k: string]: string} = {
+  DT: "OOT_DEKU_TREE",
+  DC: "OOT_DODONGO_CAVERN",
+  JJ: "OOT_JABU_JABU",
+  Forest: "OOT_TEMPLE_FOREST",
+  Fire: "OOT_TEMPLE_FIRE",
+  Water: "OOT_TEMPLE_WATER",
+  Spirit: "OOT_TEMPLE_SPIRIT",
+  Shadow: "OOT_TEMPLE_SHADOW",
+  BotW: "OOT_BOTTOM_OF_THE_WELL",
+  IC: "OOT_ICE_CAVERN",
+  GTG: "OOT_GERUDO_TRAINING_GROUNDS",
+  GF: "OOT_THIEVES_HIDEOUT",
+  Ganon: "OOT_GANON_CASTLE",
+  WF: "MM_TEMPLE_WOODFALL",
+  SH: "MM_TEMPLE_SNOWHEAD",
+  GB: "MM_TEMPLE_GREAT_BAY",
+  ST: "MM_TEMPLE_STONE_TOWER",
 };
 
 const mapExprs = (exprParser: ExprParser, game: Game, char: string, data: any) => {
@@ -93,9 +93,12 @@ const loadWorldAreas = (world: World, game: Game, exprParser: ExprParser) => {
     name = gameId(game, name, ' ');
     const boss = area.boss || false;
     const dungeon = area.dungeon || null;
-    let region = area.region || DUNGEONS_REGIONS[dungeon];
+    let region = area.region;
     if (region !== 'NONE') {
       region = region ? gameId(game, region, '_') : undefined;
+    }
+    if (dungeon) {
+      region = DUNGEONS_REGIONS[dungeon];
     }
     const locations = mapExprs(exprParser, game, ' ', area.locations || {});
     const exits = mapExprs(exprParser, game, ' ', area.exits || {});
