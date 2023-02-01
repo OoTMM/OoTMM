@@ -65,7 +65,7 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.items[ITS_MM_MASK_FIERCE_DEITY] = ITEM_MM_MASK_FIERCE_DEITY;
 
         //gSave.inventory.questItems.remainsOdolwa = 1;
-        gMmExtraBoss |= 0x01;
+        gMmExtraBoss.boss |= 0x01;
 
         //gSave.day = 3;
         //gSave.isNight = 1;

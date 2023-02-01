@@ -40,18 +40,22 @@ void comboTriggerWarp(GameState_Play* play, int index)
         entrance = 0x060C;
         break;
     case 8: /* Woodfall */
+        gMmExtraBoss.boss |= (1 << 0);
         MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_WF);
         entrance = 0x3010;
         break;
     case 9: /* Snowhead */
+        gMmExtraBoss.boss |= (1 << 1);
         MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_SH);
         entrance = 0xae70;
         break;
     case 10: /* Great Bay */
+        gMmExtraBoss.boss |= (1 << 2);
         MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_GB);
         entrance = 0x20f0;
         break;
     case 11: /* Stone Tower */
+        gMmExtraBoss.boss |= (1 << 3);
         MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_ST);
         entrance = 0x6a90;
         break;

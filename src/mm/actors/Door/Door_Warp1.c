@@ -88,7 +88,7 @@ int DoorWarp1_ShouldTrigger(Actor* this, GameState_Play* play)
         }
         else
         {
-            gMmExtraBoss |= (1 << data->index);
+            gMmExtraBoss.items |= (1 << data->index);
         }
     }
 
@@ -98,7 +98,7 @@ int DoorWarp1_ShouldTrigger(Actor* this, GameState_Play* play)
         return 0;
 
     /* Check if we already have the item */
-    if (gMmExtraBoss & (1 << data->index))
+    if (gMmExtraBoss.items & (1 << data->index))
     {
         comboTriggerWarp(play, id + 8);
         return 0;
@@ -123,7 +123,7 @@ void DoorWarp1_AfterDraw(Actor* this, GameState_Play* play)
     data = DoorWarp1_GetData(this, play);
     if (data == NULL)
         return;
-    if (gMmExtraBoss & (1 << data->index))
+    if (gMmExtraBoss.items & (1 << data->index))
         return;
     gi = comboOverride(OV_NPC, 0, data->npc, data->gi);
 
