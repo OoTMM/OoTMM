@@ -82,6 +82,7 @@ typedef struct PACKED ALIGNED(4)
 {
     u8             config[0x40];
     ComboDataHints hints;
+    u8             blueWarps[12];
 }
 ComboData;
 

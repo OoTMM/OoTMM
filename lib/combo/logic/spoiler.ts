@@ -2,7 +2,6 @@ import { Options } from '../options';
 import { Settings, Trick, Tricks } from '../settings';
 import { EntranceShuffleResult } from './entrance';
 import { Hints } from './hints';
-import { EntranceOverrides } from './pathfind';
 import { ItemPlacement } from './solve';
 import { World } from './world';
 
@@ -57,8 +56,8 @@ const spoilerEntrances = (buffer: string[], entrances: EntranceShuffleResult) =>
   }
 
   buffer.push('Entrances');
-  for (const srcFrom in entrances) {
-    const e = entrances[srcFrom];
+  for (const srcFrom in entrances.overrides) {
+    const e = entrances.overrides[srcFrom];
     for (const srcTo in e) {
       const dest = e[srcTo];
       buffer.push(`  ${srcFrom}/${srcTo} -> ${dest.from}/${dest.to}`);

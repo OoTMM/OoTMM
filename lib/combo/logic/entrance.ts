@@ -3,10 +3,28 @@ import { Settings } from "../settings";
 import { EntranceOverrides, pathfind, Reachable } from "./pathfind";
 import { DUNGEONS_REGIONS, ExprMap, World, WorldEntrance } from "./world";
 
-export type EntranceShuffleResult = {[k: string]: {[k:string]: { from: string, to: string }}};
+export type EntranceShuffleResult = {
+  overrides: {[k: string]: {[k:string]: { from: string, to: string }}};
+  blueWarps: number[];
+};
+
+const DUNGEON_INDEX = {
+  DT: 0,
+  DC: 1,
+  JJ: 2,
+  Forest: 3,
+  Fire: 4,
+  Water: 5,
+  Shadow: 6,
+  Spirit: 7,
+  WF: 8,
+  SH: 9,
+  GB: 10,
+  ST: 11,
+} as {[k: string]: number};
 
 class EntranceShuffler {
-  private overrides: EntranceShuffleResult = {};
+  private result: EntranceShuffleResult = { overrides: {}, blueWarps: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] };
 
   constructor(
     private world: World,
@@ -99,6 +117,9 @@ class EntranceShuffler {
       const src = bossEntrancesByDungeon[srcDungeon];
       const dst = bossEntrancesByDungeon[dstDungeon];
 
+      /* Mark the blue warp */
+      this.result.blueWarps[DUNGEON_INDEX[srcDungeon]] = DUNGEON_INDEX[dstDungeon];
+
       /* Replace the entrance */
       const srcArea = this.world.areas[src.from];
       const expr = srcArea.exits[src.to];
@@ -122,9 +143,9 @@ class EntranceShuffler {
       dstBoss.events = events[srcDungeon];
 
       /* Mark the override */
-      const override = this.overrides[src.from] || {};
+      const override = this.result.overrides[src.from] || {};
       override[src.to] = { from: dst.from, to: dst.to };
-      this.overrides[src.from] = override;
+      this.result.overrides[src.from] = override;
     }
   }
 
@@ -133,7 +154,7 @@ class EntranceShuffler {
       this.fixBosses();
     }
 
-    return this.overrides;
+    return this.result;
   }
 };
 

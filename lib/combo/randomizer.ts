@@ -268,11 +268,11 @@ const regionsBuffer = (regions: string[]) => {
 const gameEntrances = (game: Game, entrances: EntranceShuffleResult) => {
   const data: number[] = [];
   const gamePrefix = game === 'oot' ? 'OOT ' : 'MM ';
-  for (const srcFrom in entrances) {
+  for (const srcFrom in entrances.overrides) {
     if (!srcFrom.startsWith(gamePrefix)) {
       continue;
     }
-    const src = entrances[srcFrom];
+    const src = entrances.overrides[srcFrom];
     for (const srcTo in src) {
       const dst = src[srcTo];
       const srcId = entrance(game, srcFrom, srcTo);
@@ -308,10 +308,13 @@ export const randomizerHints = (logic: LogicResult): Buffer => {
   return Buffer.concat(buffers);
 };
 
+const randomizerBlueWarps = (logic: LogicResult): Buffer => toU8Buffer(logic.entrances.blueWarps);
+
 export const randomizerData = (logic: LogicResult, options: Options): Buffer => {
   const buffers = [];
   buffers.push(randomizerConfig(logic.config));
   buffers.push(randomizerHints(logic));
+  buffers.push(randomizerBlueWarps(logic));
   return Buffer.concat(buffers);
 };
 
