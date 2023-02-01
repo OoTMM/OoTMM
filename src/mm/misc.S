@@ -9,3 +9,8 @@ PATCH_END
 PATCH_START 0x800edcc4
   li t7,1
 PATCH_END
+
+/* Disable fast time flow when not having ocarina */
+PATCH_START 0x80130154
+  li t9,0
+PATCH_END

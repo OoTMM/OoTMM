@@ -15,7 +15,7 @@
     "Bottom of the Well Map": "has_explosives || (has_bombflowers && (has(SMALL_KEY_BOTW, 3) || can_use_din))"
     "Bottom of the Well Coffin": "true"
     "Bottom of the Well Pits": "has_lens && has(SMALL_KEY_BOTW, 3)"
-    "Bottom of the Well Lens": "can_play(SONG_ZELDA) && has(SWORD)"
+    "Bottom of the Well Lens": "can_play(SONG_ZELDA) && has_weapon"
     "Bottom of the Well Lens Side Chest": "can_play(SONG_ZELDA) && has_lens"
     "Bottom of the Well GS East Cage": "has(SMALL_KEY_BOTW, 3) && has_lens && can_boomerang"
     "Bottom of the Well GS Inner West": "has(SMALL_KEY_BOTW, 3) && has_lens && can_boomerang"

@@ -63,7 +63,6 @@
 
 /* Custom flags that seems unused */
 #define EV_OOT_CHK_SONG_SARIA               0x58
-#define EV_OOT_CHK_ARROW_FIRE               0x60
 #define EV_OOT_CHK_MEDALLION_SHADOW         0x61
 #define EV_OOT_CHK_SONG_EPONA               0x62
 #define EV_OOT_ITEM_GORON_BRACELET          0x20

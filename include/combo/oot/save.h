@@ -207,7 +207,8 @@ typedef struct
     u32 tunicGoron:1;
     u32 biggoron:1;
     u32 tunicZora:1;
-    u32 unused:20;
+    u32 fireArrow:1;
+    u32 unused:19;
 }
 OotExtraFlags;
 

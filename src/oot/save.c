@@ -23,26 +23,6 @@ void Sram_CopySaveWrapper(void* fileSelect, void* sramCtx)
 
 PATCH_CALL(0x808048d8, Sram_CopySaveWrapper);
 
-static u32 kDungeonMapCompassMaskOot = 0x3ff;
-
-static void startingMapCompass(void)
-{
-    for (int i = 0; i < SCE_OOT_GANON_TOWER_COLLAPSING; ++i)
-    {
-        if ((1 << i) & kDungeonMapCompassMaskOot)
-        {
-            gOotSave.dungeonItems[i].map = 1;
-            gOotSave.dungeonItems[i].compass = 1;
-        }
-    }
-
-    for (int i = 0; i < 4; ++i)
-    {
-        gMmSave.inventory.dungeonItems[i].map = 1;
-        gMmSave.inventory.dungeonItems[i].compass = 1;
-    }
-}
-
 ALIGNED(16) static u16 gStartingItemsBuffer[64];
 
 static void applyStartingItems(void)
@@ -71,6 +51,14 @@ static void applyStartingItems(void)
     }
 }
 
+static void applyStartingEvents(void)
+{
+    if (comboConfig(CFG_DOOR_OF_TIME_OPEN))
+    {
+        SetEventChk(EV_OOT_CHK_DOOR_TIME);
+    }
+}
+
 void comboCreateSave(void* unk, void* buffer)
 {
     u32 base;
@@ -78,11 +66,11 @@ void comboCreateSave(void* unk, void* buffer)
     /* Create MM save */
     comboCreateSaveMM();
 
-    if (comboConfig(CFG_STARTING_MAP_COMPASS))
-        startingMapCompass();
-
     /* Apply starting items */
     applyStartingItems();
+
+    /* Apply starting events */
+    applyStartingEvents();
 
     /* Write save */
     comboWriteSave();

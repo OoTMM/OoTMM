@@ -109,3 +109,18 @@ u16 EnGo2_GetMessageLinkGoron(void)
 }
 
 PATCH_FUNC(0x80b57868, EnGo2_GetMessageLinkGoron);
+
+void EnGo2_InitWrapper(Actor* this, GameState_Play* play)
+{
+    ActorCallback callback;
+
+    if (play->sceneId == SCE_OOT_BAZAAR && gSave.age == AGE_ADULT)
+    {
+        ActorDestroy(this);
+    }
+    else
+    {
+        callback = actorAddr(0x1ae, 0x80b5a0f0);
+        callback(this, play);
+    }
+}

@@ -143,7 +143,7 @@
 "Forest Temple Boss":
   dungeon: Forest
   exits:
-    "Forest Temple After Boss": "can_use_bow && has(SWORD, 2)"
+    "Forest Temple After Boss": "can_use_bow && has_weapon"
 "Forest Temple After Boss":
   dungeon: Forest
   locations:

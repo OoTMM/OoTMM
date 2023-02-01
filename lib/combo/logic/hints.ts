@@ -422,7 +422,14 @@ class HintsSolver {
     return locs;
   }
 
-  private isItemHintable(item: string) {
+  private isLocationHintable(loc: string) {
+    if (loc === 'OOT Temple of Time Medallion' || loc === 'MM Oath to Order') {
+      return false;
+    }
+    const item = this.items[loc];
+    if (loc === 'OOT Temple of Time Master Sword' && !this.settings.shuffleMasterSword) {
+      return false;
+    }
     if (isSmallKey(item) && this.settings.smallKeyShuffle === 'anywhere') {
       return true;
     }
@@ -456,8 +463,9 @@ class HintsSolver {
     return true;
   }
 
-  private isItemWayOfTheHero(item: string) {
-    if (!this.isItemHintable(item)) {
+  private isLocationWayOfTheHero(loc: string) {
+    const item = this.items[loc];
+    if (!this.isLocationHintable(loc)) {
       return false;
     }
     if (isSong(item) && this.settings.songs !== 'anywhere') {
@@ -475,7 +483,7 @@ class HintsSolver {
         }
       }
     }
-    const locs = Array.from(woth).filter(loc => this.isItemWayOfTheHero(this.items[loc]));
+    const locs = Array.from(woth).filter(loc => this.isLocationWayOfTheHero(loc));
     return new Set(locs);
   }
 
@@ -519,7 +527,7 @@ class HintsSolver {
   }
 
   private playthroughItems() {
-    const items = this.spheres.flat().map(x => this.items[x]).filter(x => this.isItemHintable(x));
+    const items = this.spheres.flat().filter(loc => this.isLocationHintable(loc)).map(loc => this.items[loc]);
     return shuffle(this.random, items);
   }
 
@@ -586,7 +594,7 @@ class HintsSolver {
 
   private locationFoolish(loc: string, wothItems: {[k: string]: Set<string>}) {
     const item = this.items[loc];
-    if (!this.isItemHintable(item)) {
+    if (!this.isLocationHintable(loc)) {
       return 0;
     }
     if ((isItemMajor(item) || isDungeonReward(item) || isKey(item) || isStrayFairy(item)) && !this.majorItemFoolish(loc, item, wothItems) && !this.isItemUseless(loc)) {

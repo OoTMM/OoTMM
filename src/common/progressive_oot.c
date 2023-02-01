@@ -58,15 +58,20 @@ static s32 progressiveHookshot(void)
     return GI_OOT_LONGSHOT;
 }
 
+static s32 progressiveSwordGoron(void)
+{
+    if (!(gOotSave.equipment.swords & (EQ_OOT_SWORD_KNIFE | EQ_OOT_SWORD_KNIFE_BROKEN)))
+        return GI_OOT_SWORD_KNIFE;
+    return GI_OOT_SWORD_BIGGORON;
+}
+
 static s32 progressiveSword(void)
 {
     if (!(gOotSave.equipment.swords & EQ_OOT_SWORD_KOKIRI))
         return GI_OOT_SWORD_KOKIRI;
     if (!(gOotSave.equipment.swords & EQ_OOT_SWORD_MASTER))
-        return GI_OOT_MASTER_SWORD;
-    if (!(gOotSave.equipment.swords & (EQ_OOT_SWORD_KNIFE | EQ_OOT_SWORD_KNIFE_BROKEN)))
-        return GI_OOT_GIANT_KNIFE;
-    return GI_OOT_SWORD_BIGGORON;
+        return GI_OOT_SWORD_MASTER;
+    return progressiveSwordGoron();
 }
 
 /* We use an extra field to know which shields we got from shops */
@@ -158,15 +163,20 @@ s32 comboProgressiveOot(s32 gi)
         break;
     /* Equipment */
     case GI_OOT_SWORD_KOKIRI:
-    case GI_OOT_MASTER_SWORD:
+    case GI_OOT_SWORD_MASTER:
+        if (comboConfig(CFG_OOT_PROGRESSIVE_SWORDS))
+            gi = progressiveSword();
+        break;
     case GI_OOT_SWORD_BIGGORON:
-    case GI_OOT_GIANT_KNIFE:
-        gi = progressiveSword();
+    case GI_OOT_SWORD_KNIFE:
+        if (comboConfig(CFG_OOT_PROGRESSIVE_SWORDS) || comboConfig(CFG_OOT_PROGRESSIVE_SWORDS_GORON))
+            gi = progressiveSwordGoron();
         break;
     case GI_OOT_PROGRESSIVE_SHIELD_DEKU:
     case GI_OOT_PROGRESSIVE_SHIELD_HYLIAN:
     case GI_OOT_SHIELD_MIRROR:
-        gi = progressiveShield();
+        if (comboConfig(CFG_OOT_PROGRESSIVE_SHIELDS))
+            gi = progressiveShield();
         break;
     /* Upgrades */
     case GI_OOT_GORON_BRACELET:

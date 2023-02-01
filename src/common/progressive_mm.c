@@ -90,7 +90,8 @@ s32 comboProgressiveMm(s32 gi)
         break;
     case GI_MM_PROGRESSIVE_SHIELD_HERO:
     case GI_MM_SHIELD_MIRROR:
-        gi = progressiveShield();
+        if (comboConfig(CFG_MM_PROGRESSIVE_SHIELDS))
+            gi = progressiveShield();
         break;
     case GI_MM_BOMB_BAG:
     case GI_MM_BOMB_BAG2:
@@ -112,7 +113,8 @@ s32 comboProgressiveMm(s32 gi)
         break;
     case GI_MM_SONG_GORON:
     case GI_MM_SONG_GORON_HALF:
-        gi = progressiveSongLullaby();
+        if (comboConfig(CFG_MM_PROGRESSIVE_LULLABY))
+            gi = progressiveSongLullaby();
         break;
     }
 

@@ -125,12 +125,12 @@ s16 comboOverrideEx(int type, u16 sceneId, u16 id, s16 gi, int flags);
 
 /* Text */
 int  comboMultibyteCharSize(u8 c);
-void comboTextHijackItem(GameState_Play* play, u16 itemId);
-void comboTextHijackItemShop(GameState_Play* play, u16 itemId, s16 price, int confirm);
+void comboTextHijackItem(GameState_Play* play, s16 gi);
+void comboTextHijackItemShop(GameState_Play* play, s16 gi, s16 price, int confirm);
 
 #if defined(GAME_OOT)
 void comboTextHijackDungeonRewardHints(GameState_Play* play, int base, int count);
-void comboTextHijackSkullReward(GameState_Play* play, s16 itemId, int count);
+void comboTextHijackSkullReward(GameState_Play* play, s16 gi, int count);
 void comboTextHijackLightArrows(GameState_Play* play);
 #else
 void comboTextHijackDungeonRewardHints(GameState_Play* play, int hint);
@@ -165,9 +165,6 @@ void comboDrawBlit2D(GameState_Play* play, u32 segAddr, int w, int h, float x, f
 void comboOotSetEventChk(u16 flag);
 void comboMmSetEventWeek(u16 flag);
 
-/* GI */
-u16 comboItemFromGI(s32 gi);
-
 /* Item */
 extern const u8 kMaxSticks[];
 extern const u8 kMaxNuts[];
@@ -181,9 +178,9 @@ extern const u8 kMmTrade1[];
 extern const u8 kMmTrade2[];
 extern const u8 kMmTrade3[];
 
-void comboAddItemMm(u16 itemId, int noEffect);
-void comboAddItemOot(u16 itemId, int noEffect);
-void comboAddItemEffect(GameState_Play* play, u16 itemId);
+void comboAddItemMm(s16 gi, int noEffect);
+void comboAddItemOot(s16 gi, int noEffect);
+void comboAddItemEffect(GameState_Play* play, s16 gi);
 void comboAddSmallKeyOot(u16 dungeonId);
 void comboAddBossKeyOot(u16 dungeonId);
 void comboAddCompassOot(u16 dungeonId);
@@ -191,6 +188,8 @@ void comboAddMapOot(u16 dungeonId);
 void comboAddSmallKeyMm(u16 dungeonId);
 void comboAddBossKeyMm(u16 dungeonId);
 void comboAddStrayFairyMm(u16 dungeonId);
+void comboAddMapMm(u16 dungeonId);
+void comboAddCompassMm(u16 dungeonId);
 
 int  comboAddItem(GameState_Play* play, s16 gi);
 int  comboAddItemNoEffect(s16 gi);

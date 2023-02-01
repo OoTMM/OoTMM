@@ -47,13 +47,10 @@ void comboInitHints(void)
 
 static void appendCorrectItemName(char** b, s16 gi)
 {
-    s16 itemId;
-
 #if defined(GAME_MM)
     gi ^= MASK_FOREIGN_GI;
 #endif
-    itemId = comboItemFromGI(gi);
-    comboTextAppendItemName(b, itemId, TF_PROGRESSIVE);
+    comboTextAppendItemName(b, gi, TF_PROGRESSIVE);
 }
 
 void comboHintGossip(u8 key, GameState_Play* play)

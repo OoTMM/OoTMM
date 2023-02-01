@@ -5,378 +5,15 @@
 #define C2   TEXT_COLOR_PINK
 #define C3   TEXT_COLOR_YELLOW
 
+#define X(a, b, c, d, e, text) text
 static const char* const kItemNamesOot[] = {
-    "a " C0 "Deku Stick",
-    "a " C0 "Deku Nut",
-    "a " C0 "Bomb",
-    "the " C1 "Fairy Bow",
-    "the " C1 "Fire Arrow",
-    C1 "Din's Fire",
-    "the " C1 "Fairy Slingshot",
-    "the " C1 "Fairy Ocarina",
-    "the " C1 "Ocarina of Time",
-    C0 "10 Bombchu",
-    "the " C1 "Hookshot",
-    "the " C1 "Longshot",
-    "the " C1 "Ice Arrow",
-    C1 "Farore's Wind",
-    "the " C1 "Boomerang",
-    "the " C1 "Lens of Truth",
-    "a " C0 "Magic Bean",
-    "the " C1 "Megaton Hammer",
-    "the " C1 "Light Arrow",
-    C1 "Nayru's Love",
-    "an " C1 "Empty Bottle",
-    "a " C0 "Red Potion",
-    "a " C0 "Green Potion",
-    "a " C0 "Blue Potion",
-    "a " C0 "Fairy",
-    "a " C0 "Fish",
-    "a bottle of " C0 "Lon Lon Milk",
-    C1 "Ruto's Letter",
-    "some " C0 "Blue Fire",
-    "a " C0 "Bug",
-    "a " C0 "Big Poe",
-    "half a bottle of " C0 "Lon Lon Milk",
-    "a " C0 "Poe",
-    "the " C1 "Weird Egg",
-    "the " C1 "Chicken",
-    C1 "Zelda's Letter",
-    "the " C1 "Keaton Mask",
-    "the " C1 "Skull Mask",
-    "the " C1 "Spooky Mask",
-    "the " C1 "Bunny Hood",
-    "the " C1 "Goron Mask",
-    "the " C1 "Zora Mask",
-    "the " C1 "Gerudo Mask",
-    "the " C1 "Mask of Truth",
-    "", /* SOLD OUT */
-    "the " C1 "Pocket Egg",
-    "the " C1 "Pocket Cucco",
-    C1 "Cojiro",
-    "the " C1 "Odd Mushroom",
-    "the " C1 "Odd Potion",
-    "the " C1 "Poacher's Saw",
-    "the " C1 "Broken Goron's Sword",
-    "the " C1 "Prescription",
-    "the " C1 "Eyeball Frog",
-    "the " C1 "Eye Drops",
-    "the " C1 "Claim Check",
-    "", /* Bow & Fire */
-    "", /* Bow & Ice */
-    "", /* Bow & Light */
-    "the " C1 "Kokiri Sword",
-    "the " C1 "Master Sword",
-    "the " C1 "Giant's Knife",
-    "the " C1 "Deku Shield",
-    "the " C1 "Hylian Shield",
-    "the " C1 "Mirror Shield",
-    "", /* Kokiri Tunic */
-    "the " C1 "Goron Tunic",
-    "the " C1 "Zora Tunic",
-    "", /* Kokiri Boots */
-    "the " C1 "Iron Boots",
-    "the " C1 "Hover Boots",
-    "", /* Bullet bag */
-    "the " C1 "Large Bullet Bag",
-    "the " C1 "Largest Bullet Bag",
-    "", /* Quiver */
-    "the " C1 "Big Quiver",
-    "the " C1 "Biggest Quiver",
-    "the " C1 "Bomb Bag",
-    "the " C1 "Big Bomb Bag",
-    "the " C1 "Biggest Bomb Bag",
-    "the " C1 "Goron's Bracelet",
-    "the " C1 "Silver Gauntlets",
-    "the " C1 "Golden Gauntlets",
-    "the " C1 "Silver Scale",
-    "the " C1 "Golden Scale",
-    "the " C1 "Giant's Knife",
-    "the " C1 "Adult's Wallet",
-    "the " C1 "Giant's Wallet",
-    C0 "5 Deku Seeds",
-    "", /* Fishing pole */
-    "the " C2 "Minuet of Forest",
-    "the " C2 "Bolero of Fire",
-    "the " C2 "Serenade of Water",
-    "the " C2 "Requiem of Spirit",
-    "the " C2 "Nocturne of Shadow",
-    "the " C2 "Prelude of Light",
-    C2 "Zelda's Lullaby",
-    C2 "Epona's Song",
-    C2 "Saria's Song",
-    "the " C2 "Sun's Song",
-    "the " C2 "Song of Time",
-    "the " C2 "Song of Storms",
-    "the " C3 "Forest Medallion",
-    "the " C3 "Fire Medallion",
-    "the " C3 "Water Medallion",
-    "the " C3 "Spirit Medallion",
-    "the " C3 "Shadow Medallion",
-    "the " C3 "Light Medallion",
-    "the " C3 "Kokiri's Emerald",
-    "the " C3 "Goron's Ruby",
-    "the " C3 "Zora's Sapphire",
-    "the " C1 "Stone of Agony",
-    "the " C1 "Gerudo's Card",
-    "a " C0 "Gold Skulltula Token",
-    "a " C0 "Heart Container",
-    "a " C0 "Piece of Heart",
-    "the " C0 "Boss Key",
-    "the " C0 "Compass",
-    "the " C0 "Dungeon Map",
-    "a " C0 "Small Key",
-    "a " C0 "Small Magic Jar",
-    "a " C0 "Large Magic Jar",
-    "a " C0 "Piece of Heart",
-    "", /* Dummy */
-    "", /* Dummy */
-    "", /* Dummy */
-    "", /* Dummy */
-    "", /* Dummy */
-    "", /* Dummy */
-    "", /* Dummy */
-    "some " C0 "Lon Lon Milk",
-    "a " C0 "Recovery Heart",
-    "a " C0 "Green Rupee",
-    "a " C0 "Blue Rupee",
-    "a " C0 "Red Rupee",
-    "a " C0 "Purple Rupee",
-    "a " C0 "Huge Rupee",
-    "", /* Dummy */
-    C0 "5 Deku Sticks",
-    C0 "10 Deku Sticks",
-    C0 "5 Deku Nuts",
-    C0 "10 Deku Nuts",
-    C0 "5 Bombs",
-    C0 "10 Bombs",
-    C0 "20 Bombs",
-    C0 "30 Bombs",
-    C0 "5 Arrows",
-    C0 "10 Arrows",
-    C0 "30 Arrows",
-    C0 "30 Deku Seeds",
-    C0 "5 Bombchu",
-    C0 "20 Bombchu",
-    "the " C1 "Deku Stick Upgrade",
-    "the " C1 "Second Deku Stick Upgrade",
-    "the " C1 "Deku Nut Upgrade",
-    "the " C1 "Second Deku Nut Upgrade",
-    "the " C1 "Magic Upgrade",
-    "the " C1 "Larger Magic Upgrade",
-    "the " C1 "Defense Upgrade",
-    C1 "Biggoron's Sword",
-    "the " C1 "Deku Shield",    /* Progressive */
-    "the " C1 "Hylian Shield",  /* Progressive */
-    "a " C0 "Small Key (Forest)",
-    "a " C0 "Small Key (Fire)",
-    "a " C0 "Small Key (Water)",
-    "a " C0 "Small Key (Spirit)",
-    "a " C0 "Small Key (Shadow)",
-    "a " C0 "Small Key (Ganon)",
-    "a " C0 "Small Key (Well)",
-    "a " C0 "Small Key (Hideout)",
-    "a " C0 "Small Key (GTG)",
-    "the " C0 "Boss Key (Forest)",
-    "the " C0 "Boss Key (Fire)",
-    "the " C0 "Boss Key (Water)",
-    "the " C0 "Boss Key (Spirit)",
-    "the " C0 "Boss Key (Shadow)",
-    "the " C0 "Boss Key (Ganon)",
+#include "data/oot/gi.inc"
 };
 
 static const char* const kItemNamesMm[] = {
-    "the " C1 "Ocarina of Time",
-    "the " C1 "Hero's Bow",
-    "the " C1 "Fire Arrow",
-    "the " C1 "Ice Arrow",
-    "the " C1 "Light Arrow",
-    "", /* Fairy Ocarina */
-    "the " C1 "Bombs",
-    "the " C1 "Bombchu",
-    "a " C0 "Deku Stick",
-    "a " C0 "Deku Nut",
-    "a " C0 "Magic Bean",
-    "", /* Fairy Slingshot (JP) */
-    "a " C0 "Powder Keg",
-    "the " C1 "Pictograph Box",
-    "the " C1 "Lens of Truth",
-    "the " C1 "Hookshot",
-    "the " C1 "Great Fairy's Sword",
-    "a " C1 "bottle of Red Potion",
-    "an " C1 "Empty Bottle",
-    "a " C0 "Red Potion",
-    "a " C0 "Green Potion",
-    "a " C0 "Blue Potion",
-    "a " C0 "Fairy",
-    "the " C1 "Deku Princess",
-    "a bottle of " C0 "Milk",
-    "half a bottle of " C0 "Milk",
-    "a " C0 "Fish",
-    "a " C0 "Bug",
-    "", /* Blue fire */
-    "a " C0 "Poe",
-    "a " C0 "Big Poe",
-    "a bottle of " C0 "Spring Water",
-    "a bottle of " C0 "Hot Spring Water",
-    "a " C1 "Zora Egg",
-    "a bottle of " C1 "Gold Dust",
-    "a " C0 "Magic Mushroom",
-    "a " C1 "Seahorse",
-    "a bottle of " C0 "Chateau Romani",
-    "", /* Hylian Loach */
-    "", /* Drink */
-    "the " C1 "Moon's Tear",
-    "the " C1 "Land Title Deed",
-    "the " C1 "Swamp Title Deed",
-    "the " C1 "Mountain Title Deed",
-    "the " C1 "Ocean Title Deed",
-    "the " C1 "Room Key",
-    "the " C1 "Letter to Mama",
-    "the " C1 "Letter to Kafei",
-    "the " C1 "Pendant of Memories",
-    "", /* Map JP */
-    "the " C1 "Deku Mask",
-    "the " C1 "Goron Mask",
-    "the " C1 "Zora Mask",
-    "the " C1 "Fierce Deity's Mask",
-    "the " C1 "Mask of Truth",
-    "the " C1 "Kafei's Mask",
-    "the " C1 "All Night Mask",
-    "the " C1 "Bunny Hood",
-    "the " C1 "Keaton Mask",
-    "the " C1 "Garo's Mask",
-    C1 "Romani's Mask",
-    "the " C1 "Circus Leader's Mask",
-    "the " C1 "Postman's Hat",
-    "the " C1 "Couple's Mask",
-    "the " C1 "Great Fairy Mask",
-    "the " C1 "Gibdo Mask",
-    "the " C1 "Don Gero's Mask",
-    "the " C1 "Kamaro's Mask",
-    "the " C1 "Captain's Hat",
-    "the " C1 "Stone Mask",
-    "the " C1 "Bremen Mask",
-    "the " C1 "Blast Mask",
-    "the " C1 "Mask of Scents",
-    "the " C1 "Giant's Mask",
-    "", /* Medallion */
-    "", /* Medallion */
-    "", /* Medallion */
-    "the " C1 "Kokiri Sword",
-    "the " C1 "Razor Sword",
-    "the " C1 "Gilded Sword",
-    "", /* Fierce Deity's Sword */
-    "the " C1 "Hero's Shield",
-    "the " C1 "Mirror Shield",
-    "", /* Quiver */
-    "the " C1 "Big Quiver",
-    "the " C1 "Biggest Quiver",
-    "the " C1 "Bomb Bag",
-    "the " C1 "Big Bomb Bag",
-    "the " C1 "Biggest Bomb Bag",
-    "", /* JP items */
-    "the " C1 "Adult Wallet",
-    "the " C1 "Giant Wallet",
-    "",
-    C3 "Odolwa's Remains",
-    C3 "Goht's Remains",
-    C3 "Gyorg's Remains",
-    C3 "Twinmold's Remains",
-    "the " C2 "Sonata of Awakening",
-    "the " C2 "Goron Lullaby",
-    "the " C2 "New Wave Bossa Nova",
-    "the " C2 "Elegy of Emptiness",
-    "the " C2 "Oath to Order",
-    "", /* JP Song */
-    "the " C2 "Song of Time",
-    "the " C2 "Song of Healing",
-    C2 "Epona's Song",
-    "the " C2 "Song of Soaring",
-    "the " C2 "Song of Storms",
-    "", /* JP Song */
-    "the " C1 "Bomber's Notebook",
-    "",
-    "a " C0 "Heart Container",
-    "",
-    "",
-    "",
-    "the " C2 "Lullaby Intro",
-    "the " C0 "Boss Key",
-    "the " C0 "Compass",
-    "the " C0 "Dungeon Map",
-    "a " C0 "Stray Fairy",
-    "a " C0 "Small Key",
-    "",
-    "",
-    "a " C0 "Piece of Heart",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "a " C0 "Recovery Heart",
-    "a " C0 "Green Rupee",
-    "a " C0 "Blue Rupee",
-    "a " C0 "Red Rupee (10)",
-    "a " C0 "Red Rupee",
-    "a " C0 "Purple Rupee",
-    "a " C0 "Silver Rupee",
-    "a " C0 "Gold Rupee",
-    "",
-    "",
-    C0 "5 Deku Nuts",
-    C0 "10 Deku Nuts",
-    C0 "5 Bombs",
-    C0 "10 Bombs",
-    C0 "20 Bombs",
-    C0 "30 Bombs",
-    C0 "10 Arrows",
-    C0 "30 Arrows",
-    C0 "40 Arrows",
-    "",
-    C0 "20 Bombchu",
-    C0 "10 Bombchu",
-    "a " C0 "Bombchu",
-    C0 "5 Bombchu",
-    C0 "20 Deku Sticks",
-    C0 "30 Deku Sticks",
-    C0 "30 Deku Nuts",
-    C0 "40 Deku Nuts",
-    "some " C0 "Chateau Romani",
-    "some " C0 "Milk",
-    "", /* Gold dust refill */
-    "", /* ??? */
-    "a " C0 "Seahorse",
-    "the " C1 "Magic Upgrade",
-    "the " C1 "Larger Magic Upgrade",
-    "the " C1 "Defense Upgrade",
-    "the " C1 "Spin Attack Upgrade",
-    "the " C1 "Hero's Shield", /* Progressive */
-    "a " C0 "World Map (Clock Town)",
-    "a " C0 "World Map (Woodfall)",
-    "a " C0 "World Map (Snowhead)",
-    "a " C0 "World Map (Romani Ranch)",
-    "a " C0 "World Map (Great Bay)",
-    "a " C0 "World Map (Stone Tower)",
-    "a " C0 "Swamp Skulltula Token",
-    "an " C0 "Ocean Skulltula Token",
-    "a " C0 "Small Key (Woodfall)",
-    "a " C0 "Small Key (Snowhead)",
-    "a " C0 "Small Key (Great Bay)",
-    "a " C0 "Small Key (Stone Tower)",
-    "the " C0 "Boss Key (Woodfall)",
-    "the " C0 "Boss Key (Snowhead)",
-    "the " C0 "Boss Key (Great Bay)",
-    "the " C0 "Boss Key (Stone Tower)",
-    "a " C0 "Stray Fairy (Woodfall)",
-    "a " C0 "Stray Fairy (Snowhead)",
-    "a " C0 "Stray Fairy (Great Bay)",
-    "a " C0 "Stray Fairy (Stone Tower)",
-    "a " C0 "Stray Fairy (Town)",
+#include "data/mm/gi.inc"
 };
+#undef X
 
 typedef struct
 {
@@ -434,7 +71,7 @@ const RegionName kRegionNamesMm[] = {
     { "in",         TEXT_COLOR_YELLOW "East Clock Town" },
     { "in",         TEXT_COLOR_YELLOW "West Clock Town" },
     { "in",         "the " TEXT_COLOR_YELLOW "Laundry Pool" },
-    { "inside",     "the " TEXT_COLOR_PINK "Giants's Dream" },
+    { "inside",     "the " TEXT_COLOR_PINK "Giant's Dream" },
     { "on",         TEXT_COLOR_YELLOW "Clock Tower Roof" },
     { "in",         "the " TEXT_COLOR_RED "Stock Pot Inn" },
     { "in",         TEXT_COLOR_RED "Termina Field" },
@@ -490,7 +127,7 @@ static const char* const kCheckNamesMm[] = {
     "the " TEXT_COLOR_RED "Goron Race",
     "the " TEXT_COLOR_PINK "Graveyard Big Poe",
     "the " TEXT_COLOR_TEAL "Bank's Final Reward",
-    "the " TEXT_COLOR_TEAL "Sound Check",
+    "the " TEXT_COLOR_TEAL "Milk Bar Performance",
     "the " TEXT_COLOR_GREEN "Boat Archery",
     "the " TEXT_COLOR_BLUE "Ocean Spider House Chest",
     "the " TEXT_COLOR_BLUE "Pinnacle Rock Seahorses",
@@ -499,141 +136,134 @@ static const char* const kCheckNamesMm[] = {
     "the " TEXT_COLOR_YELLOW "Secret Shrine Final Chest",
 };
 
-static int isItemAmbiguousOot(u16 itemId)
+static int isItemAmbiguousOot(s16 gi)
 {
-    switch (itemId)
+    switch (gi)
     {
-    case ITEM_OOT_STICK:
-    case ITEM_OOT_NUT:
-    case ITEM_OOT_BOMB:
-    case ITEM_OOT_BOW:
-    case ITEM_OOT_ARROW_FIRE:
-    case ITEM_OOT_OCARINA_TIME:
-    case ITEM_OOT_BOMBCHU_10:
-    case ITEM_OOT_HOOKSHOT:
-    case ITEM_OOT_ARROW_ICE:
-    case ITEM_OOT_LENS:
-    case ITEM_OOT_MAGIC_BEAN:
-    case ITEM_OOT_ARROW_LIGHT:
-    case ITEM_OOT_EMPTY_BOTTLE:
-    case ITEM_OOT_MILK_BOTTLE:
-    case ITEM_OOT_KEATON_MASK:
-    case ITEM_OOT_BUNNY_HOOD:
-    case ITEM_OOT_GORON_MASK:
-    case ITEM_OOT_ZORA_MASK:
-    case ITEM_OOT_MASK_OF_TRUTH:
-    case ITEM_OOT_KOKIRI_SWORD:
-    case ITEM_OOT_SHIELD_HYLIAN:
-    case ITEM_OOT_QUIVER:
-    case ITEM_OOT_QUIVER2:
-    case ITEM_OOT_QUIVER3:
-    case ITEM_OOT_BOMB_BAG:
-    case ITEM_OOT_BOMB_BAG2:
-    case ITEM_OOT_BOMB_BAG3:
-    case ITEM_OOT_WALLET2:
-    case ITEM_OOT_WALLET3:
-    case ITEM_OOT_SONG_EPONA:
-    case ITEM_OOT_SONG_TIME:
-    case ITEM_OOT_SONG_STORMS:
-    case ITEM_OOT_HEART_CONTAINER:
-    case ITEM_OOT_HEART_PIECE:
-    case ITEM_OOT_HEART_PIECE2:
-    case ITEM_OOT_RECOVERY_HEART:
-    case ITEM_OOT_RUPEE_GREEN:
-    case ITEM_OOT_RUPEE_BLUE:
-    case ITEM_OOT_RUPEE_RED:
-    case ITEM_OOT_RUPEE_PURPLE:
-    case ITEM_OOT_RUPEE_HUGE:
-    case ITEM_OOT_STICKS_5:
-    case ITEM_OOT_STICKS_10:
-    case ITEM_OOT_NUTS_5:
-    case ITEM_OOT_NUTS_10:
-    case ITEM_OOT_BOMBS_5:
-    case ITEM_OOT_BOMBS_10:
-    case ITEM_OOT_BOMBS_20:
-    case ITEM_OOT_BOMBS_30:
-    case ITEM_OOT_ARROWS_5:
-    case ITEM_OOT_ARROWS_10:
-    case ITEM_OOT_ARROWS_30:
-    case ITEM_OOT_BOMBCHU_5:
-    case ITEM_OOT_BOMBCHU_20:
-    case ITEM_OOT_MAGIC_UPGRADE:
-    case ITEM_OOT_MAGIC_UPGRADE2:
-    case ITEM_OOT_DEFENSE_UPGRADE:
+    case GI_OOT_STICK:
+    case GI_OOT_BOMB:
+    case GI_OOT_BOW:
+    case GI_OOT_ARROW_FIRE:
+    case GI_OOT_OCARINA_TIME:
+    case GI_OOT_BOMBCHU_10:
+    case GI_OOT_HOOKSHOT:
+    case GI_OOT_ARROW_ICE:
+    case GI_OOT_LENS:
+    case GI_OOT_MAGIC_BEAN:
+    case GI_OOT_ARROW_LIGHT:
+    case GI_OOT_EMPTY_BOTTLE:
+    case GI_OOT_MILK_BOTTLE:
+    case GI_OOT_MASK_KEATON:
+    case GI_OOT_MASK_BUNNY:
+    case GI_OOT_MASK_GORON:
+    case GI_OOT_MASK_ZORA:
+    case GI_OOT_MASK_TRUTH:
+    case GI_OOT_SWORD_KOKIRI:
+    case GI_OOT_SHIELD_HYLIAN:
+    case GI_OOT_QUIVER2:
+    case GI_OOT_QUIVER3:
+    case GI_OOT_BOMB_BAG:
+    case GI_OOT_BOMB_BAG2:
+    case GI_OOT_BOMB_BAG3:
+    case GI_OOT_WALLET2:
+    case GI_OOT_WALLET3:
+    case GI_OOT_SONG_EPONA:
+    case GI_OOT_SONG_TIME:
+    case GI_OOT_SONG_STORMS:
+    case GI_OOT_HEART_CONTAINER:
+    case GI_OOT_HEART_CONTAINER2:
+    case GI_OOT_HEART_PIECE:
+    case GI_OOT_RECOVERY_HEART:
+    case GI_OOT_RUPEE_GREEN:
+    case GI_OOT_RUPEE_BLUE:
+    case GI_OOT_RUPEE_RED:
+    case GI_OOT_RUPEE_PURPLE:
+    case GI_OOT_RUPEE_HUGE:
+    case GI_OOT_STICKS_5:
+    case GI_OOT_STICKS_10:
+    case GI_OOT_NUTS_5:
+    case GI_OOT_NUTS_5_ALT:
+    case GI_OOT_NUTS_10:
+    case GI_OOT_BOMBS_5:
+    case GI_OOT_BOMBS_10:
+    case GI_OOT_BOMBS_20:
+    case GI_OOT_BOMBS_30:
+    case GI_OOT_ARROWS_5:
+    case GI_OOT_ARROWS_10:
+    case GI_OOT_ARROWS_30:
+    case GI_OOT_BOMBCHU_5:
+    case GI_OOT_BOMBCHU_20:
+    case GI_OOT_MAGIC_UPGRADE:
+    case GI_OOT_MAGIC_UPGRADE2:
+    case GI_OOT_DEFENSE_UPGRADE:
+    case GI_OOT_SHIELD_MIRROR:
         return 1;
     default:
         return 0;
     }
 }
 
-static int isItemAmbiguousMm(u16 itemId)
+static int isItemAmbiguousMm(s16 gi)
 {
-    switch (itemId)
+    switch (gi)
     {
-    case ITEM_MM_OCARINA_OF_TIME:
-    case ITEM_MM_BOW:
-    case ITEM_MM_ARROW_FIRE:
-    case ITEM_MM_ARROW_ICE:
-    case ITEM_MM_ARROW_LIGHT:
-    case ITEM_MM_BOMB:
-    case ITEM_MM_BOMBCHU:
-    case ITEM_MM_STICK:
-    case ITEM_MM_NUT:
-    case ITEM_MM_MAGIC_BEAN:
-    case ITEM_MM_LENS_OF_TRUTH:
-    case ITEM_MM_HOOKSHOT:
-    case ITEM_MM_RED_POTION_WITH_BOTTLE:
-    case ITEM_MM_EMPTY_BOTTLE:
-    case ITEM_MM_MASK_GORON:
-    case ITEM_MM_MASK_ZORA:
-    case ITEM_MM_MASK_TRUTH:
-    case ITEM_MM_MASK_BUNNY:
-    case ITEM_MM_MASK_KEATON:
-    case ITEM_MM_SWORD_KOKIRI:
-    case ITEM_MM_SHIELD_HERO:
-    case ITEM_MM_QUIVER:
-    case ITEM_MM_QUIVER2:
-    case ITEM_MM_QUIVER3:
-    case ITEM_MM_BOMB_BAG:
-    case ITEM_MM_BOMB_BAG2:
-    case ITEM_MM_BOMB_BAG3:
-    case ITEM_MM_WALLET2:
-    case ITEM_MM_WALLET3:
-    case ITEM_MM_SONG_TIME:
-    case ITEM_MM_SONG_EPONA:
-    case ITEM_MM_SONG_STORMS:
-    case ITEM_MM_HEART_CONTAINER:
-    case ITEM_MM_HEART_PIECE:
-    case ITEM_MM_HEART_PIECE2:
-    case ITEM_MM_RECOVERY_HEART:
-    case ITEM_MM_RUPEE_GREEN:
-    case ITEM_MM_RUPEE_BLUE:
-    case ITEM_MM_RUPEE_RED10:
-    case ITEM_MM_RUPEE_RED:
-    case ITEM_MM_RUPEE_PURPLE:
-    case ITEM_MM_RUPEE_SILVER:
-    case ITEM_MM_RUPEE_GOLD:
-    case ITEM_MM_NUTS_5:
-    case ITEM_MM_NUTS_10:
-    case ITEM_MM_BOMBS_5:
-    case ITEM_MM_BOMBS_10:
-    case ITEM_MM_BOMBS_20:
-    case ITEM_MM_BOMBS_30:
-    case ITEM_MM_ARROWS_10:
-    case ITEM_MM_ARROWS_30:
-    case ITEM_MM_ARROWS_40:
-    case ITEM_MM_BOMBCHUS_20:
-    case ITEM_MM_BOMBCHUS_10:
-    case ITEM_MM_BOMBCHU_ALT:
-    case ITEM_MM_BOMBCHUS_5:
-    case ITEM_MM_STICKS_20:
-    case ITEM_MM_STICKS_30:
-    case ITEM_MM_NUTS_30:
-    case ITEM_MM_NUTS_40:
-    case ITEM_MM_MAGIC_UPGRADE:
-    case ITEM_MM_MAGIC_UPGRADE2:
-    case ITEM_MM_DEFENSE_UPGRADE:
-    case ITEM_MM_BOTTLED_MILK:
+    case GI_MM_OCARINA_OF_TIME:
+    case GI_MM_BOW:
+    case GI_MM_ARROW_FIRE:
+    case GI_MM_ARROW_ICE:
+    case GI_MM_ARROW_LIGHT:
+    case GI_MM_BOMB:
+    case GI_MM_BOMBCHU:
+    case GI_MM_DEKU_STICK:
+    case GI_MM_DEKU_NUT:
+    case GI_MM_MAGIC_BEAN:
+    case GI_MM_LENS:
+    case GI_MM_HOOKSHOT:
+    case GI_MM_BOTTLED_POTION_RED:
+    case GI_MM_EMPTY_BOTTLE:
+    case GI_MM_MASK_GORON:
+    case GI_MM_MASK_ZORA:
+    case GI_MM_MASK_TRUTH:
+    case GI_MM_MASK_BUNNY:
+    case GI_MM_MASK_KEATON:
+    case GI_MM_SWORD_KOKIRI:
+    case GI_MM_SHIELD_HERO:
+    case GI_MM_QUIVER2:
+    case GI_MM_QUIVER3:
+    case GI_MM_BOMB_BAG:
+    case GI_MM_BOMB_BAG2:
+    case GI_MM_BOMB_BAG3:
+    case GI_MM_WALLET2:
+    case GI_MM_WALLET3:
+    case GI_MM_SONG_TIME:
+    case GI_MM_SONG_EPONA:
+    case GI_MM_SONG_STORMS:
+    case GI_MM_HEART_CONTAINER:
+    case GI_MM_HEART_PIECE:
+    case GI_MM_RECOVERY_HEART:
+    case GI_MM_RUPEE_GREEN:
+    case GI_MM_RUPEE_BLUE:
+    case GI_MM_RUPEE_RED:
+    case GI_MM_RUPEE_PURPLE:
+    case GI_MM_RUPEE_SILVER:
+    case GI_MM_RUPEE_GOLD:
+    case GI_MM_DEKU_NUTS_5:
+    case GI_MM_DEKU_NUTS_10:
+    case GI_MM_BOMBS_5:
+    case GI_MM_BOMBS_10:
+    case GI_MM_BOMBS_20:
+    case GI_MM_BOMBS_30:
+    case GI_MM_ARROWS_10:
+    case GI_MM_ARROWS_30:
+    case GI_MM_ARROWS_40:
+    case GI_MM_BOMBCHU_20:
+    case GI_MM_BOMBCHU_10:
+    case GI_MM_BOMBCHU_5:
+    case GI_MM_MAGIC_UPGRADE:
+    case GI_MM_MAGIC_UPGRADE2:
+    case GI_MM_DEFENSE_UPGRADE:
+    case GI_MM_BOTTLED_MILK:
+    case GI_MM_SHIELD_MIRROR:
         return 1;
     default:
         return 0;
@@ -754,61 +384,73 @@ void comboTextAppendNum(char** b, int num)
     }
 }
 
-void comboTextAppendItemName(char** b, u16 itemId, int flags)
+void comboTextAppendItemName(char** b, s16 gi, int flags)
 {
     char* start;
     const char* itemName;
     int ambiguous;
 
 #if defined(GAME_MM)
-    itemId ^= MASK_FOREIGN_ITEM;
+    gi ^= MASK_FOREIGN_GI;
 #endif
 
-    if (itemId & MASK_FOREIGN_ITEM)
+    if (gi & MASK_FOREIGN_GI)
     {
-        itemName = kItemNamesMm[itemId & 0xff];
-        ambiguous = isItemAmbiguousMm(itemId & 0xff);
+        itemName = kItemNamesMm[(gi & ~MASK_FOREIGN_GI) - 1];
+        ambiguous = isItemAmbiguousMm(gi & ~MASK_FOREIGN_GI);
     }
     else
     {
-        itemName = kItemNamesOot[itemId & 0xff];
-        ambiguous = isItemAmbiguousOot(itemId & 0xff);
+        itemName = kItemNamesOot[(gi & ~MASK_FOREIGN_GI) - 1];
+        ambiguous = isItemAmbiguousOot(gi & ~MASK_FOREIGN_GI);
     }
 
     if (flags & TF_PROGRESSIVE)
     {
-        switch (itemId)
+        switch (gi)
         {
-        case ITEM_OOT_KOKIRI_SWORD:
-        case ITEM_MM_SWORD_KOKIRI | MASK_FOREIGN_ITEM:
+        case GI_OOT_SWORD_KOKIRI:
+            if (comboConfig(CFG_OOT_PROGRESSIVE_SWORDS))
+            {
+                itemName = "a " C1 "Progressive Sword";
+                ambiguous = 1;
+            }
+            break;
+        case GI_OOT_SWORD_KNIFE:
+            if (comboConfig(CFG_OOT_PROGRESSIVE_SWORDS_GORON))
+            {
+                itemName = "a " C1 "Progressive Goron Sword";
+            }
+            break;
+        case GI_MM_SWORD_KOKIRI | MASK_FOREIGN_GI:
             itemName = "a " C1 "Progressive Sword";
             ambiguous = 1;
             break;
-        case ITEM_OOT_PROGRESSIVE_SHIELD_DEKU:
-        case ITEM_MM_PROGRESSIVE_SHIELD_HERO | MASK_FOREIGN_ITEM:
+        case GI_OOT_PROGRESSIVE_SHIELD_DEKU:
+        case GI_MM_PROGRESSIVE_SHIELD_HERO | MASK_FOREIGN_GI:
             itemName = "a " C1 "Progressive Shield";
             ambiguous = 1;
             break;
-        case ITEM_OOT_OCARINA_FAIRY:
+        case GI_OOT_OCARINA_FAIRY:
             itemName = "a " C1 "Progressive Ocarina";
             ambiguous = 1;
             break;
-        case ITEM_OOT_HOOKSHOT:
+        case GI_OOT_HOOKSHOT:
             itemName = "a " C1 "Progressive Hookshot";
             ambiguous = 1;
             break;
-        case ITEM_OOT_WALLET2:
-        case ITEM_MM_WALLET2 | MASK_FOREIGN_ITEM:
+        case GI_OOT_WALLET2:
+        case GI_MM_WALLET2 | MASK_FOREIGN_GI:
             itemName = "a " C1 "Progressive Wallet";
             ambiguous = 1;
             break;
-        case ITEM_MM_SONG_GORON_HALF | MASK_FOREIGN_ITEM:
+        case GI_MM_SONG_GORON_HALF | MASK_FOREIGN_GI:
             itemName = "a " C2 "Progressive Goron Lullaby";
             break;
-        case ITEM_OOT_SILVER_SCALE:
+        case GI_OOT_SCALE_SILVER:
             itemName = "a " C1 "Progressive Scale";
             break;
-        case ITEM_OOT_GORON_BRACELET:
+        case GI_OOT_GORON_BRACELET:
             itemName = "a " C1 "Progressive Strength";
             break;
         }
@@ -821,7 +463,7 @@ void comboTextAppendItemName(char** b, u16 itemId, int flags)
     if (ambiguous)
     {
         comboTextAppendStr(b, " (");
-        if (itemId & MASK_FOREIGN_ITEM)
+        if (gi & MASK_FOREIGN_GI)
         {
             comboTextAppendStr(b, TEXT_COLOR_PINK "MM");
         }
@@ -896,7 +538,7 @@ void comboTextAppendCheckName(char** b, u8 checkId)
     comboTextAppendClearColor(b);
 }
 
-void comboTextHijackItem(GameState_Play* play, u16 itemId)
+void comboTextHijackItem(GameState_Play* play, s16 gi)
 {
     char* b;
 
@@ -907,12 +549,21 @@ void comboTextHijackItem(GameState_Play* play, u16 itemId)
 #endif
     comboTextAppendHeader(&b);
     comboTextAppendStr(&b, "You got ");
-    comboTextAppendItemName(&b, itemId, 0);
+    comboTextAppendItemName(&b, gi, 0);
     comboTextAppendStr(&b, "!");
     comboTextAppendStr(&b, TEXT_END);
 }
 
-void comboTextHijackItemShop(GameState_Play* play, u16 itemId, s16 price, int confirm)
+static int isSoldOut(s16 gi)
+{
+#if defined(GAME_OOT)
+    return 0;
+#else
+    return gi == GI_MM_SOLD_OUT;
+#endif
+}
+
+void comboTextHijackItemShop(GameState_Play* play, s16 gi, s16 price, int confirm)
 {
     char* b;
 
@@ -924,13 +575,13 @@ void comboTextHijackItemShop(GameState_Play* play, u16 itemId, s16 price, int co
 
     comboTextAppendShopHeader(&b, price);
 
-    if (itemId == ITEM_NONE)
+    if (isSoldOut(gi))
     {
         comboTextAppendStr(&b, "SOLD OUT" TEXT_NOCLOSE TEXT_END);
-
+        return;
     }
 
-    comboTextAppendItemName(&b, itemId, TF_CAPITALIZE);
+    comboTextAppendItemName(&b, gi, TF_CAPITALIZE);
     comboTextAppendStr(&b, TEXT_NL TEXT_COLOR_RED);
     comboTextAppendNum(&b, price);
     comboTextAppendStr(&b, " Rupees");
@@ -977,7 +628,7 @@ void comboTextHijackDungeonRewardHints(GameState_Play* play, int hint)
 #endif
 
 #if defined(GAME_OOT)
-void comboTextHijackSkullReward(GameState_Play* play, s16 itemId, int count)
+void comboTextHijackSkullReward(GameState_Play* play, s16 gi, int count)
 {
     char* b;
 
@@ -990,7 +641,7 @@ void comboTextHijackSkullReward(GameState_Play* play, s16 itemId, int count)
     comboTextAppendStr(&b,
         " Spiders of the Curse" TEXT_CZ " and I will give you "
     );
-    comboTextAppendItemName(&b, itemId, TF_PROGRESSIVE);
+    comboTextAppendItemName(&b, gi, TF_PROGRESSIVE);
     comboTextAppendStr(&b, TEXT_CZ "." TEXT_END);
     comboTextAutoLineBreaks(play->msgCtx.textBuffer);
 }
@@ -1031,9 +682,6 @@ void comboTextHijackOathToOrder(GameState_Play* play)
 
 void comboTextAppendNpcReward(char** b, s16 npcId, s16 gi)
 {
-    s16 itemId;
-
     gi = comboOverrideEx(OV_NPC, 0, npcId, gi, 0);
-    itemId = comboItemFromGI(gi);
-    comboTextAppendItemName(b, itemId, TF_PREPOS | TF_PROGRESSIVE);
+    comboTextAppendItemName(b, gi, TF_PREPOS | TF_PROGRESSIVE);
 }

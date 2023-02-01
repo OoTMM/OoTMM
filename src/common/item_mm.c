@@ -50,6 +50,16 @@ void comboAddStrayFairyMm(u16 dungeonId)
         gMmSave.inventory.strayFairies[dungeonId]++;
 }
 
+void comboAddMapMm(u16 dungeonId)
+{
+    gMmSave.inventory.dungeonItems[dungeonId].map = 1;
+}
+
+void comboAddCompassMm(u16 dungeonId)
+{
+    gMmSave.inventory.dungeonItems[dungeonId].compass = 1;
+}
+
 static void addHealth(u8 count)
 {
     u16 health;
@@ -129,7 +139,7 @@ static void addSticks(int count)
         gMmSave.inventory.ammo[ITS_MM_STICKS] = max;
 }
 
-static void addBombchus(int count)
+static void addBombchu(int count)
 {
     u16 max;
 
@@ -235,337 +245,331 @@ static void refillMagic(int level)
     gMmSave.playerData.magic = level * 0x30;
 }
 
-void comboAddItemMm(u16 itemId, int noEffect)
+void comboAddItemMm(s16 gi, int noEffect)
 {
-    switch (itemId)
+    switch (gi)
     {
-    case ITEM_MM_OCARINA_OF_TIME:
+    case GI_MM_OCARINA_OF_TIME:
         gMmSave.inventory.items[ITS_MM_OCARINA] = ITEM_MM_OCARINA_OF_TIME;
         break;
-    case ITEM_MM_ARROW_FIRE:
+    case GI_MM_ARROW_FIRE:
         gMmSave.inventory.items[ITS_MM_ARROW_FIRE] = ITEM_MM_ARROW_FIRE;
         break;
-    case ITEM_MM_ARROW_ICE:
+    case GI_MM_ARROW_ICE:
         gMmSave.inventory.items[ITS_MM_ARROW_ICE] = ITEM_MM_ARROW_ICE;
         break;
-    case ITEM_MM_ARROW_LIGHT:
+    case GI_MM_ARROW_LIGHT:
         gMmSave.inventory.items[ITS_MM_ARROW_LIGHT] = ITEM_MM_ARROW_LIGHT;
         break;
-    case ITEM_MM_MAGIC_BEAN:
+    case GI_MM_MAGIC_BEAN:
         gMmSave.inventory.items[ITS_MM_BEANS] = ITEM_MM_MAGIC_BEAN;
         gMmSave.inventory.ammo[ITS_MM_BEANS]++;
         break;
-    case ITEM_MM_POWDER_KEG:
+    case GI_MM_POWDER_KEG:
         gMmSave.inventory.items[ITS_MM_KEG] = ITEM_MM_POWDER_KEG;
         gMmSave.inventory.ammo[ITS_MM_KEG] = 1;
         break;
-    case ITEM_MM_PICTOGRAPH_BOX:
+    case GI_MM_PICTOGRAPH_BOX:
         gMmSave.inventory.items[ITS_MM_PICTOBOX] = ITEM_MM_PICTOGRAPH_BOX;
         break;
-    case ITEM_MM_LENS_OF_TRUTH:
+    case GI_MM_LENS:
         gMmSave.inventory.items[ITS_MM_LENS] = ITEM_MM_LENS_OF_TRUTH;
         break;
-    case ITEM_MM_HOOKSHOT:
+    case GI_MM_HOOKSHOT:
         gMmSave.inventory.items[ITS_MM_HOOKSHOT] = ITEM_MM_HOOKSHOT;
         break;
-    case ITEM_MM_GREAT_FAIRY_SWORD:
+    case GI_MM_GREAT_FAIRY_SWORD:
         gMmSave.inventory.items[ITS_MM_GREAT_FAIRY_SWORD] = ITEM_MM_GREAT_FAIRY_SWORD;
         break;
-    case ITEM_MM_EMPTY_BOTTLE:
-    case ITEM_MM_BOTTLED_MILK:
-    case ITEM_MM_BOTTLED_GOLD_DUST:
-    case ITEM_MM_BOTTLED_CHATEAU_ROMANI:
-        addNewBottle(itemId);
+    case GI_MM_EMPTY_BOTTLE:
+        addNewBottle(ITEM_MM_EMPTY_BOTTLE);
         break;
-    case ITEM_MM_RED_POTION_WITH_BOTTLE:
+    case GI_MM_BOTTLED_MILK:
+        addNewBottle(ITEM_MM_BOTTLED_MILK);
+        break;
+    case GI_MM_BOTTLED_GOLD_DUST:
+        addNewBottle(ITEM_MM_BOTTLED_GOLD_DUST);
+        break;
+    case GI_MM_BOTTLED_CHATEAU_ROMANI:
+        addNewBottle(ITEM_MM_BOTTLED_CHATEAU_ROMANI);
+        break;
+    case GI_MM_BOTTLED_POTION_RED:
         addNewBottle(ITEM_MM_POTION_RED);
         break;
-    case ITEM_MM_POTION_RED:
-    case ITEM_MM_POTION_BLUE:
-    case ITEM_MM_POTION_GREEN:
-    case ITEM_MM_BOTTLED_MILK_HALF:
-        fillBottle(itemId);
+    case GI_MM_POTION_RED:
+        fillBottle(ITEM_MM_POTION_RED);
         break;
-    case ITEM_MM_SEAHORSE:
-    case ITEM_MM_BOTTLED_SEAHORSE:
+    case GI_MM_POTION_BLUE:
+        fillBottle(ITEM_MM_POTION_BLUE);
+        break;
+    case GI_MM_POTION_GREEN:
+        fillBottle(ITEM_MM_POTION_GREEN);
+        break;
+    case GI_MM_SEAHORSE:
+    case GI_MM_SEAHORSE2:
         fillBottle(ITEM_MM_BOTTLED_SEAHORSE);
         break;
-    case ITEM_MM_MILK:
+    case GI_MM_MILK:
         fillBottle(ITEM_MM_BOTTLED_MILK);
         break;
-    case ITEM_MM_CHATEAU_ROMANI:
+    case GI_MM_CHATEAU_ROMANI:
         fillBottle(ITEM_MM_BOTTLED_CHATEAU_ROMANI);
         break;
-    case ITEM_MM_BOMB:
+    case GI_MM_BOMB:
         addBombs(1);
         break;
-    case ITEM_MM_BOMBS_5:
+    case GI_MM_BOMBS_5:
         addBombs(5);
         break;
-    case ITEM_MM_BOMBS_10:
+    case GI_MM_BOMBS_10:
         addBombs(10);
         break;
-    case ITEM_MM_BOMBS_20:
+    case GI_MM_BOMBS_20:
         addBombs(20);
         break;
-    case ITEM_MM_BOMBS_30:
+    case GI_MM_BOMBS_30:
         addBombs(30);
         break;
-    case ITEM_MM_ARROWS_10:
+    case GI_MM_ARROWS_10:
         addArrows(10);
         break;
-    case ITEM_MM_ARROWS_30:
+    case GI_MM_ARROWS_30:
         addArrows(30);
         break;
-    case ITEM_MM_ARROWS_40:
+    case GI_MM_ARROWS_40:
         addArrows(40);
         break;
-    case ITEM_MM_NUT:
+    case GI_MM_DEKU_NUT:
         addNuts(1);
         break;
-    case ITEM_MM_NUTS_5:
+    case GI_MM_DEKU_NUTS_5:
         addNuts(5);
         break;
-    case ITEM_MM_NUTS_10:
+    case GI_MM_DEKU_NUTS_10:
         addNuts(10);
         break;
-    case ITEM_MM_NUTS_30:
-        addNuts(30);
-        break;
-    case ITEM_MM_NUTS_40:
-        addNuts(40);
-        break;
-    case ITEM_MM_STICK:
+    case GI_MM_DEKU_STICK:
         addSticks(1);
         break;
-    case ITEM_MM_STICKS_20:
-        addSticks(20);
+    case GI_MM_BOMBCHU:
+        addBombchu(1);
         break;
-    case ITEM_MM_STICKS_30:
-        addSticks(30);
+    case GI_MM_BOMBCHU_5:
+        addBombchu(5);
         break;
-    case ITEM_MM_BOMBCHU:
-    case ITEM_MM_BOMBCHU_ALT:
-        addBombchus(1);
+    case GI_MM_BOMBCHU_10:
+        addBombchu(10);
         break;
-    case ITEM_MM_BOMBCHUS_5:
-        addBombchus(5);
+    case GI_MM_BOMBCHU_20:
+        addBombchu(20);
         break;
-    case ITEM_MM_BOMBCHUS_10:
-        addBombchus(10);
-        break;
-    case ITEM_MM_BOMBCHUS_20:
-        addBombchus(20);
-        break;
-    case ITEM_MM_MOON_TEAR:
+    case GI_MM_MOON_TEAR:
         addTrade1(XITEM_MM_TRADE1_MOON_TEAR);
         break;
-    case ITEM_MM_DEED_LAND:
+    case GI_MM_DEED_LAND:
         addTrade1(XITEM_MM_TRADE1_DEED_LAND);
         break;
-    case ITEM_MM_DEED_SWAMP:
+    case GI_MM_DEED_SWAMP:
         addTrade1(XITEM_MM_TRADE1_DEED_SWAMP);
         break;
-    case ITEM_MM_DEED_MOUNTAIN:
+    case GI_MM_DEED_MOUNTAIN:
         addTrade1(XITEM_MM_TRADE1_DEED_MOUNTAIN);
         break;
-    case ITEM_MM_DEED_OCEAN:
+    case GI_MM_DEED_OCEAN:
         addTrade1(XITEM_MM_TRADE1_DEED_OCEAN);
         break;
-    case ITEM_MM_ROOM_KEY:
+    case GI_MM_ROOM_KEY:
         addTrade2(XITEM_MM_TRADE2_ROOM_KEY);
         break;
-    case ITEM_MM_LETTER_TO_MAMA:
+    case GI_MM_LETTER_TO_MAMA:
         addTrade2(XITEM_MM_TRADE2_LETTER_TO_MAMA);
         break;
-    case ITEM_MM_LETTER_TO_KAFEI:
+    case GI_MM_LETTER_TO_KAFEI:
         addTrade3(XITEM_MM_TRADE3_LETTER_TO_KAFEI);
         break;
-    case ITEM_MM_PENDANT_OF_MEMORIES:
+    case GI_MM_PENDANT_OF_MEMORIES:
         addTrade3(XITEM_MM_TRADE3_PENDANT_OF_MEMORIES);
         break;
-    case ITEM_MM_MASK_POSTMAN:
+    case GI_MM_MASK_POSTMAN:
         gMmSave.inventory.items[ITS_MM_MASK_POSTMAN] = ITEM_MM_MASK_POSTMAN;
         break;
-    case ITEM_MM_MASK_ALL_NIGHT:
+    case GI_MM_MASK_ALL_NIGHT:
         gMmSave.inventory.items[ITS_MM_MASK_ALL_NIGHT] = ITEM_MM_MASK_ALL_NIGHT;
         break;
-    case ITEM_MM_MASK_BLAST:
+    case GI_MM_MASK_BLAST:
         gMmSave.inventory.items[ITS_MM_MASK_BLAST] = ITEM_MM_MASK_BLAST;
         break;
-    case ITEM_MM_MASK_STONE:
+    case GI_MM_MASK_STONE:
         gMmSave.inventory.items[ITS_MM_MASK_STONE] = ITEM_MM_MASK_STONE;
         break;
-    case ITEM_MM_MASK_GREAT_FAIRY:
+    case GI_MM_MASK_GREAT_FAIRY:
         gMmSave.inventory.items[ITS_MM_MASK_GREAT_FAIRY] = ITEM_MM_MASK_GREAT_FAIRY;
         break;
-    case ITEM_MM_MASK_DEKU:
+    case GI_MM_MASK_DEKU:
         gMmSave.inventory.items[ITS_MM_MASK_DEKU] = ITEM_MM_MASK_DEKU;
         break;
-    case ITEM_MM_MASK_KEATON:
+    case GI_MM_MASK_KEATON:
         gMmSave.inventory.items[ITS_MM_MASK_KEATON] = ITEM_MM_MASK_KEATON;
         break;
-    case ITEM_MM_MASK_BREMEN:
+    case GI_MM_MASK_BREMEN:
         gMmSave.inventory.items[ITS_MM_MASK_BREMEN] = ITEM_MM_MASK_BREMEN;
         break;
-    case ITEM_MM_MASK_BUNNY:
+    case GI_MM_MASK_BUNNY:
         gMmSave.inventory.items[ITS_MM_MASK_BUNNY] = ITEM_MM_MASK_BUNNY;
         break;
-    case ITEM_MM_MASK_DON_GERO:
+    case GI_MM_MASK_DON_GERO:
         gMmSave.inventory.items[ITS_MM_MASK_DON_GERO] = ITEM_MM_MASK_DON_GERO;
         break;
-    case ITEM_MM_MASK_SCENTS:
+    case GI_MM_MASK_SCENTS:
         gMmSave.inventory.items[ITS_MM_MASK_SCENTS] = ITEM_MM_MASK_SCENTS;
         break;
-    case ITEM_MM_MASK_GORON:
+    case GI_MM_MASK_GORON:
         gMmSave.inventory.items[ITS_MM_MASK_GORON] = ITEM_MM_MASK_GORON;
         break;
-    case ITEM_MM_MASK_ROMANI:
+    case GI_MM_MASK_ROMANI:
         gMmSave.inventory.items[ITS_MM_MASK_ROMANI] = ITEM_MM_MASK_ROMANI;
         break;
-    case ITEM_MM_MASK_TROUPE_LEADER:
+    case GI_MM_MASK_TROUPE_LEADER:
         gMmSave.inventory.items[ITS_MM_MASK_TROUPE_LEADER] = ITEM_MM_MASK_TROUPE_LEADER;
         break;
-    case ITEM_MM_MASK_KAFEI:
+    case GI_MM_MASK_KAFEI:
         gMmSave.inventory.items[ITS_MM_MASK_KAFEI] = ITEM_MM_MASK_KAFEI;
         break;
-    case ITEM_MM_MASK_COUPLE:
+    case GI_MM_MASK_COUPLE:
         gMmSave.inventory.items[ITS_MM_MASK_COUPLE] = ITEM_MM_MASK_COUPLE;
         break;
-    case ITEM_MM_MASK_TRUTH:
+    case GI_MM_MASK_TRUTH:
         gMmSave.inventory.items[ITS_MM_MASK_TRUTH] = ITEM_MM_MASK_TRUTH;
         break;
-    case ITEM_MM_MASK_ZORA:
+    case GI_MM_MASK_ZORA:
         gMmSave.inventory.items[ITS_MM_MASK_ZORA] = ITEM_MM_MASK_ZORA;
         break;
-    case ITEM_MM_MASK_KAMARO:
+    case GI_MM_MASK_KAMARO:
         gMmSave.inventory.items[ITS_MM_MASK_KAMARO] = ITEM_MM_MASK_KAMARO;
         break;
-    case ITEM_MM_MASK_GIBDO:
+    case GI_MM_MASK_GIBDO:
         gMmSave.inventory.items[ITS_MM_MASK_GIBDO] = ITEM_MM_MASK_GIBDO;
         break;
-    case ITEM_MM_MASK_GARO:
+    case GI_MM_MASK_GARO:
         gMmSave.inventory.items[ITS_MM_MASK_GARO] = ITEM_MM_MASK_GARO;
         break;
-    case ITEM_MM_MASK_CAPTAIN:
+    case GI_MM_MASK_CAPTAIN:
         gMmSave.inventory.items[ITS_MM_MASK_CAPTAIN] = ITEM_MM_MASK_CAPTAIN;
         break;
-    case ITEM_MM_MASK_GIANT:
+    case GI_MM_MASK_GIANT:
         gMmSave.inventory.items[ITS_MM_MASK_GIANT] = ITEM_MM_MASK_GIANT;
         break;
-    case ITEM_MM_MASK_FIERCE_DEITY:
+    case GI_MM_MASK_FIERCE_DEITY:
         gMmSave.inventory.items[ITS_MM_MASK_FIERCE_DEITY] = ITEM_MM_MASK_FIERCE_DEITY;
         break;
-    case ITEM_MM_MAGIC_UPGRADE:
+    case GI_MM_MAGIC_UPGRADE:
         addMagicUpgrade(1);
         if (noEffect)
             refillMagic(1);
         break;
-    case ITEM_MM_MAGIC_UPGRADE2:
+    case GI_MM_MAGIC_UPGRADE2:
         addMagicUpgrade(2);
         if (noEffect)
             refillMagic(2);
         break;
-    case ITEM_MM_SWORD_KOKIRI:
+    case GI_MM_SWORD_KOKIRI:
         addSword(1);
         break;
-    case ITEM_MM_SWORD_RAZOR:
+    case GI_MM_SWORD_RAZOR:
         addSword(2);
         gMmSave.playerData.swordHealth = 100;
         break;
-    case ITEM_MM_SWORD_GILDED:
+    case GI_MM_SWORD_GILDED:
         addSword(3);
         break;
-    case ITEM_MM_PROGRESSIVE_SHIELD_HERO:
+    case GI_MM_PROGRESSIVE_SHIELD_HERO:
         gMmExtraFlags2.progressiveShield = 1;
         /* Fallthrough */
-    case ITEM_MM_SHIELD_HERO:
+    case GI_MM_SHIELD_HERO:
         addShield(1);
         break;
-    case ITEM_MM_SHIELD_MIRROR:
+    case GI_MM_SHIELD_MIRROR:
         addShield(2);
         break;
-    case ITEM_MM_BOMB_BAG:
+    case GI_MM_BOMB_BAG:
         addBombBag(1);
         break;
-    case ITEM_MM_BOMB_BAG2:
+    case GI_MM_BOMB_BAG2:
         addBombBag(2);
         break;
-    case ITEM_MM_BOMB_BAG3:
+    case GI_MM_BOMB_BAG3:
         addBombBag(3);
         break;
-    case ITEM_MM_BOW:
-    case ITEM_MM_QUIVER:
+    case GI_MM_BOW:
         addBowQuiver(1);
         break;
-    case ITEM_MM_QUIVER2:
+    case GI_MM_QUIVER2:
         addBowQuiver(2);
         break;
-    case ITEM_MM_QUIVER3:
+    case GI_MM_QUIVER3:
         addBowQuiver(3);
         break;
-    case ITEM_MM_WALLET2:
+    case GI_MM_WALLET2:
         gMmSave.inventory.upgrades.wallet = 1;
         break;
-    case ITEM_MM_WALLET3:
+    case GI_MM_WALLET3:
         gMmSave.inventory.upgrades.wallet = 2;
         break;
-    case ITEM_MM_GS_TOKEN_SWAMP:
+    case GI_MM_GS_TOKEN_SWAMP:
         gMmSave.skullCountSwamp++;
         break;
-    case ITEM_MM_GS_TOKEN_OCEAN:
+    case GI_MM_GS_TOKEN_OCEAN:
         gMmSave.skullCountOcean++;
         break;
-    case ITEM_MM_SONG_AWAKENING:
+    case GI_MM_SONG_AWAKENING:
         gMmSave.inventory.questItems.songAwakening = 1;
         break;
-    case ITEM_MM_SONG_GORON:
+    case GI_MM_SONG_GORON:
         gMmSave.inventory.questItems.songLullaby = 1;
         break;
-    case ITEM_MM_SONG_ZORA:
+    case GI_MM_SONG_ZORA:
         gMmSave.inventory.questItems.songNewWave = 1;
         break;
-    case ITEM_MM_SOMG_EMPTINESS:
+    case GI_MM_SONG_EMPTINESS:
         gMmSave.inventory.questItems.songEmpty = 1;
         break;
-    case ITEM_MM_SONG_ORDER:
+    case GI_MM_SONG_ORDER:
         gMmSave.inventory.questItems.songOrder = 1;
         break;
-    case ITEM_MM_SONG_TIME:
+    case GI_MM_SONG_TIME:
         gMmSave.inventory.questItems.songTime = 1;
         break;
-    case ITEM_MM_SONG_HEALING:
+    case GI_MM_SONG_HEALING:
         gMmSave.inventory.questItems.songHealing = 1;
         break;
-    case ITEM_MM_SONG_EPONA:
+    case GI_MM_SONG_EPONA:
         gMmSave.inventory.questItems.songEpona = 1;
         break;
-    case ITEM_MM_SONG_SOARING:
+    case GI_MM_SONG_SOARING:
         gMmSave.inventory.questItems.songSoaring = 1;
         break;
-    case ITEM_MM_SONG_STORMS:
+    case GI_MM_SONG_STORMS:
         gMmSave.inventory.questItems.songStorms = 1;
         break;
-    case ITEM_MM_SONG_GORON_HALF:
+    case GI_MM_SONG_GORON_HALF:
         gMmSave.inventory.questItems.songLullabyIntro = 1;
         break;
-    case ITEM_MM_BOMBER_NOTEBOOK:
+    case GI_MM_BOMBER_NOTEBOOK:
         gMmSave.inventory.questItems.notebook = 1;
         break;
-    case ITEM_MM_REMAINS_ODOLWA:
+    case GI_MM_REMAINS_ODOLWA:
         gMmSave.inventory.questItems.remainsOdolwa = 1;
         break;
-    case ITEM_MM_REMAINS_GOHT:
+    case GI_MM_REMAINS_GOHT:
         gMmSave.inventory.questItems.remainsGoht = 1;
         break;
-    case ITEM_MM_REMAINS_GYORG:
+    case GI_MM_REMAINS_GYORG:
         gMmSave.inventory.questItems.remainsGyorg = 1;
         break;
-    case ITEM_MM_REMAINS_TWINMOLD:
+    case GI_MM_REMAINS_TWINMOLD:
         gMmSave.inventory.questItems.remainsTwinmold = 1;
         break;
-    case ITEM_MM_HEART_PIECE:
-    case ITEM_MM_HEART_PIECE2:
+    case GI_MM_HEART_PIECE:
         gMmSave.inventory.questItems.heartPieces += 1;
         if (gMmSave.inventory.questItems.heartPieces == 4)
         {
@@ -575,90 +579,110 @@ void comboAddItemMm(u16 itemId, int noEffect)
         if (noEffect)
             addHealth(20);
         break;
-    case ITEM_MM_HEART_CONTAINER:
+    case GI_MM_HEART_CONTAINER:
         gMmSave.playerData.healthCapacity += 0x10;
         if (noEffect)
             addHealth(20);
         break;
-    case ITEM_MM_RECOVERY_HEART:
+    case GI_MM_RECOVERY_HEART:
         if (noEffect)
             addHealth(1);
         break;
-    case ITEM_MM_RUPEE_GREEN:
+    case GI_MM_RUPEE_GREEN:
         if (noEffect)
             addRupees(1);
         break;
-    case ITEM_MM_RUPEE_BLUE:
+    case GI_MM_RUPEE_BLUE:
         if (noEffect)
             addRupees(5);
         break;
-    case ITEM_MM_RUPEE_RED10:
-        if (noEffect)
-            addRupees(10);
-        break;
-    case ITEM_MM_RUPEE_RED:
+    case GI_MM_RUPEE_RED:
         if (noEffect)
             addRupees(20);
         break;
-    case ITEM_MM_RUPEE_PURPLE:
+    case GI_MM_RUPEE_PURPLE:
         if (noEffect)
             addRupees(50);
         break;
-    case ITEM_MM_RUPEE_SILVER:
+    case GI_MM_RUPEE_SILVER:
         if (noEffect)
             addRupees(100);
         break;
-    case ITEM_MM_RUPEE_GOLD:
+    case GI_MM_RUPEE_GOLD:
         if (noEffect)
             addRupees(200);
         break;
-    case ITEM_MM_SMALL_KEY_WF:
+    case GI_MM_SMALL_KEY_WF:
         comboAddSmallKeyMm(0);
         break;
-    case ITEM_MM_SMALL_KEY_SH:
+    case GI_MM_SMALL_KEY_SH:
         comboAddSmallKeyMm(1);
         break;
-    case ITEM_MM_SMALL_KEY_GB:
+    case GI_MM_SMALL_KEY_GB:
         comboAddSmallKeyMm(2);
         break;
-    case ITEM_MM_SMALL_KEY_ST:
+    case GI_MM_SMALL_KEY_ST:
         comboAddSmallKeyMm(3);
         break;
-    case ITEM_MM_BOSS_KEY_WF:
+    case GI_MM_BOSS_KEY_WF:
         comboAddBossKeyMm(0);
         break;
-    case ITEM_MM_BOSS_KEY_SH:
+    case GI_MM_BOSS_KEY_SH:
         comboAddBossKeyMm(1);
         break;
-    case ITEM_MM_BOSS_KEY_GB:
+    case GI_MM_BOSS_KEY_GB:
         comboAddBossKeyMm(2);
         break;
-    case ITEM_MM_BOSS_KEY_ST:
+    case GI_MM_BOSS_KEY_ST:
         comboAddBossKeyMm(3);
         break;
-    case ITEM_MM_STRAY_FAIRY_WF:
+    case GI_MM_STRAY_FAIRY_WF:
         comboAddStrayFairyMm(0);
         break;
-    case ITEM_MM_STRAY_FAIRY_SH:
+    case GI_MM_STRAY_FAIRY_SH:
         comboAddStrayFairyMm(1);
         break;
-    case ITEM_MM_STRAY_FAIRY_GB:
+    case GI_MM_STRAY_FAIRY_GB:
         comboAddStrayFairyMm(2);
         break;
-    case ITEM_MM_STRAY_FAIRY_ST:
+    case GI_MM_STRAY_FAIRY_ST:
         comboAddStrayFairyMm(3);
         break;
-    case ITEM_MM_STRAY_FAIRY_TOWN:
+    case GI_MM_STRAY_FAIRY_TOWN:
         comboAddStrayFairyMm(4);
         break;
-    case ITEM_MM_DEFENSE_UPGRADE:
+    case GI_MM_DEFENSE_UPGRADE:
         gMmSave.playerData.doubleDefense = 1;
         gMmSave.inventory.defenseHearts = 20;
         if (noEffect)
             addHealth(20);
         break;
-    case ITEM_MM_SPIN_UPGRADE:
+    case GI_MM_SPIN_UPGRADE:
         MM_SET_EVENT_WEEK(EV_MM_WEEK_SPIN_UPGRADE);
+        break;
+    case GI_MM_MAP_WF:
+        comboAddMapMm(0);
+        break;
+    case GI_MM_MAP_SH:
+        comboAddMapMm(1);
+        break;
+    case GI_MM_MAP_GB:
+        comboAddMapMm(2);
+        break;
+    case GI_MM_MAP_ST:
+        comboAddMapMm(3);
+        break;
+    case GI_MM_COMPASS_WF:
+        comboAddCompassMm(0);
+        break;
+    case GI_MM_COMPASS_SH:
+        comboAddCompassMm(1);
+        break;
+    case GI_MM_COMPASS_GB:
+        comboAddCompassMm(2);
+        break;
+    case GI_MM_COMPASS_ST:
+        comboAddCompassMm(3);
         break;
     }
 }

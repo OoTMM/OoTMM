@@ -119,8 +119,6 @@ static int csmcFromItemOot(s16 gi)
     case GI_OOT_RUTO_LETTER:
     case GI_OOT_SCALE_SILVER:
     case GI_OOT_SCALE_GOLDEN:
-    case GI_OOT_SHIELD_DEKU:
-    case GI_OOT_SHIELD_HYLIAN:
     case GI_OOT_SHIELD_MIRROR:
     case GI_OOT_PROGRESSIVE_SHIELD_DEKU:
     case GI_OOT_PROGRESSIVE_SHIELD_HYLIAN:
@@ -146,8 +144,8 @@ static int csmcFromItemOot(s16 gi)
     case GI_OOT_SILVER_GAUNTLETS:
     case GI_OOT_GOLDEN_GAUNTLETS:
     case GI_OOT_SWORD_KOKIRI:
-    case GI_OOT_MASTER_SWORD:
-    case GI_OOT_GIANT_KNIFE:
+    case GI_OOT_SWORD_MASTER:
+    case GI_OOT_SWORD_KNIFE:
     case GI_OOT_SWORD_BIGGORON:
     case GI_OOT_TUNIC_GORON:
     case GI_OOT_TUNIC_ZORA:
@@ -251,6 +249,7 @@ static int csmcFromItemMm(s16 gi)
     case GI_MM_SONG_EPONA:
     case GI_MM_SONG_SOARING:
     case GI_MM_SONG_GORON_HALF:
+    case GI_MM_SONG_GORON:
     case GI_MM_SONG_ZORA:
     case GI_MM_SONG_STORMS:
     case GI_MM_SONG_EMPTINESS:
@@ -262,7 +261,6 @@ static int csmcFromItemMm(s16 gi)
     case GI_MM_SWORD_KOKIRI:
     case GI_MM_SWORD_RAZOR:
     case GI_MM_SWORD_GILDED:
-    case GI_MM_SHIELD_HYLIAN:
     case GI_MM_SHIELD_MIRROR:
     case GI_MM_PROGRESSIVE_SHIELD_HERO:
     case GI_MM_BOMB_BAG:
@@ -340,6 +338,11 @@ static int csmcEnabled(Actor* this, GameState_Play* play)
 
 #if defined(GAME_OOT)
     if (play->sceneId == SCE_OOT_TREASURE_SHOP && (this->variable & 0x1f) != 0x0a)
+        return 0;
+#endif
+
+#if defined(GAME_MM)
+    if (play->sceneId == SCE_MM_MOON_GORON)
         return 0;
 #endif
 

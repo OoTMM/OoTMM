@@ -2,6 +2,7 @@
 #define COMBO_COMMON_API_H
 
 #include <combo/types.h>
+#include <combo/gi.h>
 
 typedef struct GameState_Play GameState_Play;
 typedef struct Actor Actor;
@@ -79,6 +80,7 @@ float RandFloat(void);
 int GetActiveItem(GameState_Play* play);
 
 u8 AddItem(GameState_Play* play, u8 itemId);
+u8 AddItemWithIcon(GameState_Play* play, Actor_Player* link, const GetItem* giEntry);
 u8 GetItemCollectBehavior(s16 itemId);
 
 #if defined(GAME_MM)

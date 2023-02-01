@@ -38,6 +38,8 @@ export const SETTINGS = [{
   type: 'enum',
   values: [
     { value: 'ownDungeon', name: 'Own Dungeon' },
+    { value: 'anywhere', name: 'Anywhere' },
+    { value: 'starting', name: 'Starting Items' },
     { value: 'removed', name: 'Removed' },
   ],
   default: 'ownDungeon'
@@ -106,11 +108,69 @@ export const SETTINGS = [{
   ],
   default: 'dungeonBlueWarps'
 }, {
+  key: 'shuffleMasterSword',
+  name: 'Master Sword Shuffle',
+  category: 'main',
+  type: 'boolean',
+  default: true
+}, {
   key: 'shuffleGerudoCard',
   name: 'Gerudo Card Shuffle',
   category: 'main',
   type: 'boolean',
   default: true
+}, {
+  key: 'doorOfTime',
+  name: 'Door of Time',
+  category: 'main',
+  type: 'enum',
+  values: [
+    { value: 'closed', name: 'Closed' },
+    { value: 'open', name: 'Open' },
+  ],
+  default: 'closed'
+}, {
+  key: 'progressiveShieldsOot',
+  name: 'OoT Shields',
+  category: 'progressive',
+  type: 'enum',
+  values: [
+    { value: 'separate', name: 'Separate' },
+    { value: 'progressive', name: 'Progressive' },
+  ],
+  default: 'separate'
+}, {
+  key: 'progressiveSwordsOot',
+  name: 'OoT Swords',
+  category: 'progressive',
+  type: 'enum',
+  values: [
+    { value: 'separate', name: 'Separate' },
+    { value: 'goron', name: 'Progressive Knife and Biggoron' },
+    { value: 'progressive', name: 'Progressive' },
+  ],
+  default: 'goron'
+}, {
+  key: 'progressiveShieldsMm',
+  name: 'MM Shields',
+  category: 'progressive',
+  type: 'enum',
+  values: [
+    { value: 'separate', name: 'Separate' },
+    { value: 'start', name: 'Start with Hero Shield' },
+    { value: 'progressive', name: 'Progressive' },
+  ],
+  default: 'start'
+}, {
+  key: 'progressiveGoronLullaby',
+  name: 'MM Goron Lullaby',
+  category: 'progressive',
+  type: 'enum',
+  values: [
+    { value: 'single', name: 'Full Lullaby Only' },
+    { value: 'progressive', name: 'Progressive' },
+  ],
+  default: 'progressive'
 }, {
   key: 'csmc',
   name: 'Chest Size Matches Content',
@@ -128,6 +188,9 @@ export const SETTINGS = [{
 export const SETTINGS_CATEGORIES = [{
   name: "Main Settings",
   key: "main",
+}, {
+  name: "Progressive Items",
+  key: "progressive",
 }, {
   name: "Misc",
   key: "misc",

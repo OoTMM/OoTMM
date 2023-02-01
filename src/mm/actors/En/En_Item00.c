@@ -2,8 +2,10 @@
 
 int EnItem00_GiveItem(Actor_EnItem00* this, GameState_Play* play, s16 gi, float a, float b)
 {
+    Actor_Player* link;
     s16 itemId;
 
+    link = GET_LINK(play);
     itemId = -1;
     switch (this->base.variable)
     {
@@ -19,9 +21,8 @@ int EnItem00_GiveItem(Actor_EnItem00* this, GameState_Play* play, s16 gi, float 
 
     if (itemId >= 0)
     {
-        this->base.attachedA = &GET_LINK(play)->base;
-        PlaySound(0x4824);
-        return AddItem(play, itemId);
+        this->base.attachedA = &link->base;
+        return AddItemWithIcon(play, link, &kExtendedGetItems[gi - 1]);
     }
     else
     {
@@ -29,7 +30,6 @@ int EnItem00_GiveItem(Actor_EnItem00* this, GameState_Play* play, s16 gi, float 
     }
 }
 
-PATCH_CALL(0x800a6348, EnItem00_GiveItem);
 PATCH_CALL(0x800a700c, EnItem00_GiveItem);
 PATCH_CALL(0x800a6a8c, EnItem00_GiveItem);
 

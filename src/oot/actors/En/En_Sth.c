@@ -13,7 +13,7 @@ int EnSth_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
     case GI_OOT_WALLET3:
         gi = comboOverride(OV_NPC, 0, NPC_OOT_GS_30, gi);
         break;
-    case GI_OOT_BOMBCHUS_10:
+    case GI_OOT_BOMBCHU_10:
         gi = comboOverride(OV_NPC, 0, NPC_OOT_GS_40, gi);
         break;
     case GI_OOT_HEART_PIECE:

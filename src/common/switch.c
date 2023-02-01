@@ -93,14 +93,12 @@ NORETURN void comboGameSwitch(void)
 NORETURN void comboGameSwitch3(void)
 {
     comboInvalDCache((void*)FOREIGN_DRAM, FOREIGN_SIZE);
+    comboInvalICache((void*)FOREIGN_DRAM, FOREIGN_SIZE);
     comboDma_NoCacheInval((void*)FOREIGN_OFF, FOREIGN_CART, FOREIGN_SIZE);
+    comboInvalDCache((void*)FOREIGN_DRAM, FOREIGN_SIZE);
     comboInvalICache((void*)FOREIGN_DRAM, FOREIGN_SIZE);
     IO_WRITE(PI_STATUS_REG, PI_STATUS_RESET | PI_STATUS_CLR_INTR);
 
     comboExportContext();
-
-    NORETURN void (*entry)(u32);
-    entry = (void*)(((u32)(&comboGameSwitch4) & 0x0fffffff) | 0xa0000000);
-
-    entry(FOREIGN_DRAM);
+    comboGameSwitch4(FOREIGN_DRAM);
 }

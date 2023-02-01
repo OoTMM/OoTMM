@@ -15,6 +15,18 @@ static s16 ItemEtcetera_GetGI(Actor* this, s16 gi)
     return gi;
 }
 
+static int ItemEtcetera_HasGivenItem(Actor* this)
+{
+    if (!Actor_HasParent(this))
+        return 0;
+    if ((this->variable & 0xff) == 0x7)
+        gOotExtraFlags.fireArrow = 1;
+    return 1;
+}
+
+PATCH_CALL(0x80a5e1cc, ItemEtcetera_HasGivenItem);
+PATCH_CALL(0x80a5e268, ItemEtcetera_HasGivenItem);
+
 int ItemEtcetera_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
 {
     gi = ItemEtcetera_GetGI(this, gi);

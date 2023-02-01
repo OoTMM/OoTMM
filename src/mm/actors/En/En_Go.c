@@ -25,18 +25,16 @@ int EnGo_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
 static void powderKegHint(GameState_Play* play)
 {
     s16 gi;
-    s16 itemId;
     char* b;
     char* start;
 
     gi = comboOverrideEx(OV_NPC, 0, NPC_MM_GORON_KEG, GI_MM_POWDER_KEG, 0);
-    itemId = comboItemFromGI(gi);
 
     b = play->textBuffer;
     comboTextAppendHeader(&b);
     start = b;
     comboTextAppendStr(&b, "If you pass my test, I will give you ");
-    comboTextAppendItemName(&b, itemId, TF_PREPOS | TF_PROGRESSIVE);
+    comboTextAppendItemName(&b, gi, TF_PREPOS | TF_PROGRESSIVE);
     comboTextAppendStr(&b, "!" TEXT_SIGNAL TEXT_END);
     comboTextAutoLineBreaks(start);
 }

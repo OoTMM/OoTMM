@@ -6,7 +6,7 @@ import { Items } from './state';
 import { World } from './world';
 import { LogicSeedError } from './error';
 import { Options } from '../options';
-import { addItem, combinedItems, itemsArray, removeItem, ITEMS_REQUIRED, isDungeonReward, isGoldToken, isHouseToken, isKey, isStrayFairy, isSmallKey, isGanonBossKey, isRegularBossKey, isTownStrayFairy, isDungeonStrayFairy, isSong, isJunk } from './items';
+import { addItem, combinedItems, itemsArray, removeItem, ITEMS_REQUIRED, isDungeonReward, isGoldToken, isHouseToken, isKey, isStrayFairy, isSmallKey, isGanonBossKey, isRegularBossKey, isTownStrayFairy, isDungeonStrayFairy, isSong, isJunk, isMapCompass } from './items';
 
 export const EXTRA_ITEMS = [
   'OOT_MASK_SKULL',
@@ -18,7 +18,6 @@ export const EXTRA_ITEMS = [
   'OOT_MASK_ZORA',
   'OOT_MASK_GERUDO',
   'MM_MASK_DEKU',
-  'MM_SHIELD',
   'MM_SWORD',
 ];
 
@@ -82,6 +81,7 @@ class Solver {
     } else {
       this.reachable = pathfind(this.world, {}, false);
     }
+    this.propagate();
   }
 
   solve() {
@@ -101,14 +101,6 @@ class Solver {
     }
 
     for (;;) {
-      for (;;) {
-        this.reachable = pathfind(this.world, this.items, false, this.reachable);
-        const changed = this.markAccessible();
-        if (!changed) {
-          break;
-        }
-      }
-
       if (this.reachable.locations.size === checksCount) {
         break;
       }
@@ -126,6 +118,10 @@ class Solver {
   private fixLocations() {
     if (!this.opts.settings.shuffleGerudoCard) {
       this.fixedLocations.add('OOT Gerudo Member Card');
+    }
+
+    if (!this.opts.settings.shuffleMasterSword) {
+      this.fixedLocations.add('OOT Temple of Time Master Sword');
     }
 
     if (this.opts.settings.ganonBossKey === 'vanilla') {
@@ -163,14 +159,16 @@ class Solver {
       this.insertItem(pools, item);
     }
 
-    maxRequired(pools, 'OOT_SWORD', 2);
+    if (this.opts.settings.progressiveSwordsOot === 'progressive') {
+      maxRequired(pools, 'OOT_SWORD', 2);
+    }
     maxRequired(pools, 'OOT_WALLET', 1);
     maxRequired(pools, 'OOT_BOMB_BAG', 1);
     maxRequired(pools, 'OOT_BOW', 1);
     maxRequired(pools, 'OOT_SLINGSHOT', 1);
     maxRequired(pools, 'OOT_MAGIC_UPGRADE', 1);
     maxRequired(pools, 'OOT_OCARINA', 1);
-    maxRequired(pools, 'OOT_BOMBCHUS_10', 1);
+    maxRequired(pools, 'OOT_BOMBCHU_10', 1);
     maxRequired(pools, 'OOT_GS_TOKEN', 50);
 
     maxRequired(pools, 'MM_BOMB_BAG', 1);
@@ -316,6 +314,8 @@ class Solver {
           continue;
         } else if (isDungeonStrayFairy(item) && this.opts.settings.strayFairyShuffle === 'anywhere') {
           continue;
+        } else if (isMapCompass(item) && this.opts.settings.mapCompassShuffle === 'anywhere') {
+          continue;
         }
 
         while (pool[item]) {
@@ -352,6 +352,16 @@ class Solver {
       const song = songs[i];
       this.randomAssumed(pool, { restrictedLocations: locations, forcedItem: song });
       removeItemPools(this.pools, song);
+    }
+  }
+
+  private propagate() {
+    for (;;) {
+      this.reachable = pathfind(this.world, this.items, false, this.reachable);
+      const changed = this.markAccessible();
+      if (!changed) {
+        break;
+      }
     }
   }
 
@@ -416,6 +426,9 @@ class Solver {
 
     /* Place the selected item at the selected location */
     this.place(location, requiredItem);
+
+    /* Propagate */
+    this.propagate();
   }
 
   private fill() {

@@ -336,7 +336,7 @@
     "Kakariko": "has(ZELDA_LETTER) || is_adult"
     "Death Mountain Summit": "event(BOULDER_DEATH_MOUNTAIN) || can_ride_bean(BEAN_DEATH_MOUNTAIN)"
   events:
-    BEAN_DEATH_MOUNTAIN: "can_use_beans"
+    BEAN_DEATH_MOUNTAIN: "can_use_beans && has_bombflowers"
     BOULDER_DEATH_MOUNTAIN: "has_explosives_or_hammer"
   locations:
     "Death Mountain Chest": "has_explosives_or_hammer"
@@ -503,8 +503,8 @@
     "Market Destroyed": "is_adult"
     "Sacred Realm": "is_adult && event(DOOR_OF_TIME_OPEN)"
   events:
-    DOOR_OF_TIME_OPEN: "can_play(SONG_TIME)"
-    TIME_TRAVEL: "event(DOOR_OF_TIME_OPEN) && has(SWORD, 2)"
+    DOOR_OF_TIME_OPEN: "setting(doorOfTime, open) || can_play(SONG_TIME)"
+    TIME_TRAVEL: "event(DOOR_OF_TIME_OPEN) && has_sword_master"
   locations:
     "Temple of Time Master Sword": "is_child && event(DOOR_OF_TIME_OPEN)"
     "Temple of Time Sheik Song": "is_adult && event(DOOR_OF_TIME_OPEN) && has(MEDALLION_FOREST)"

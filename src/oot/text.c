@@ -46,6 +46,10 @@ static int DisplayTextBox_LoadFile(u8* dst, u32 vromAddr, u32 size)
         {
             *dst++ = 8;
         }
+        if (c == 0x10)
+        {
+            *dst++ = 9;
+        }
     }
     return ret;
 }

@@ -20,3 +20,20 @@ PATCH_END
 PATCH_START 0x800a4350
   lui t8,0x8060
 PATCH_END
+
+/* Make adult start with no items equipped */
+PATCH_START 0x8006f8bc
+  li v0,0xff
+PATCH_END
+
+PATCH_START 0x8006f898
+  li t6,0xff
+PATCH_END
+
+PATCH_START 0x8006f8d8
+  sb v0,0x6b(a1)
+PATCH_END
+
+PATCH_START 0x8006f888
+  li t2,0xff
+PATCH_END
