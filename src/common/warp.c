@@ -71,12 +71,12 @@ void comboTriggerWarp(GameState_Play* play, int bossId)
     case 10: /* Great Bay */
         gMmExtraBoss.boss |= (1 << 2);
         MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_GB);
-        entrance = 0x20f0;
+        entrance = 0x6a90;
         break;
     case 11: /* Stone Tower */
         gMmExtraBoss.boss |= (1 << 3);
         MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_ST);
-        entrance = 0x6a90;
+        entrance = 0x20f0;
         break;
     default:
         UNREACHABLE();
