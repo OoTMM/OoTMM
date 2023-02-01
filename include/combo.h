@@ -70,7 +70,7 @@ ComboContext;
 
 extern ComboContext gComboCtx;
 
-typedef struct PACKED ALIGNED(4)
+typedef struct PACKED
 {
     u8 dungeonRewards[13];
     u8 lightArrows;
@@ -294,6 +294,9 @@ void comboInitEntrances(void);
 s32 comboEntranceOverride(s16 entranceId);
 
 extern s8 gIsEntranceOverride;
+
+/* Warp */
+void comboTriggerWarp(GameState_Play* play, int index);
 
 #else
 # include <combo/asm.h>

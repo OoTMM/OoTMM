@@ -118,7 +118,7 @@ class EntranceShuffler {
       const dst = bossEntrancesByDungeon[dstDungeon];
 
       /* Mark the blue warp */
-      this.result.blueWarps[DUNGEON_INDEX[srcDungeon]] = DUNGEON_INDEX[dstDungeon];
+      this.result.blueWarps[DUNGEON_INDEX[dstDungeon]] = DUNGEON_INDEX[srcDungeon];
 
       /* Replace the entrance */
       const srcArea = this.world.areas[src.from];
