@@ -45,13 +45,7 @@ static void ItemGiver_Update(Actor* this, GameState_Play* play)
         ItemGiver_Common(this, play, GI_OOT_ARROW_LIGHT, EV_OOT_CHK_LIGHT_ARROW);
         break;
     case NPC_OOT_BLUE_WARP_GOHMA:
-        if (ItemGiver_Common(this, play, GI_OOT_STONE_EMERALD, EV_OOT_CHK_STONE_EMERALD))
-        {
-            SetEventChk(EV_OOT_CHK_EMERALD_TREE_DEAD);
-            SetEventChk(EV_OOT_CHK_GOHMA);
-            SetEventChk(EV_OOT_CHK_TREE_DEAD);
-            SetEventChk(EV_OOT_CHK_MIDO_TREE_DEAD);
-        }
+        ItemGiver_Common(this, play, GI_OOT_STONE_EMERALD, EV_OOT_CHK_STONE_EMERALD);
         break;
     case NPC_OOT_BLUE_WARP_KING_DODONGO:
         ItemGiver_Common(this, play, GI_OOT_STONE_RUBY, EV_OOT_CHK_STONE_RUBY);
@@ -66,10 +60,7 @@ static void ItemGiver_Update(Actor* this, GameState_Play* play)
         ItemGiver_Common(this, play, GI_OOT_MEDALLION_FIRE, EV_OOT_CHK_MEDALLION_FIRE);
         break;
     case NPC_OOT_BLUE_WARP_MORPHA:
-        if (ItemGiver_Common(this, play, GI_OOT_MEDALLION_WATER, EV_OOT_CHK_MEDALLION_WATER))
-        {
-            SetEventChk(EV_OOT_CHK_LAKE_HYLIA_WATER);
-        }
+        ItemGiver_Common(this, play, GI_OOT_MEDALLION_WATER, EV_OOT_CHK_MEDALLION_WATER);
         break;
     case NPC_OOT_BLUE_WARP_BONGO_BONGO:
         ItemGiver_Common(this, play, GI_OOT_MEDALLION_SHADOW, EV_OOT_CHK_MEDALLION_SHADOW);

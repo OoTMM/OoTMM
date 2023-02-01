@@ -30,6 +30,12 @@ void Sram_AfterOpenSave(void)
 #if defined(DEBUG) && defined(DEBUG_MM_ENTRANCE)
     gSave.entranceIndex = DEBUG_MM_ENTRANCE;
 #endif
+
+    if (gComboCtx.valid && gComboCtx.entrance != -1)
+    {
+        gSave.entranceIndex = gComboCtx.entrance;
+        gComboCtx.entrance = -1;
+    }
 }
 
 void Sram_SaveEndOfCycleWrapper(GameState_Play* play)

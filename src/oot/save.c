@@ -12,6 +12,12 @@ void Sram_AfterOpenSave(void)
     {
         gSave.entrance = ENTRANCE_MARKET;
         gComboCtx.valid = 0;
+
+        if (gComboCtx.entrance != -1)
+        {
+            gSave.entrance = gComboCtx.entrance;
+            gComboCtx.entrance = -1;
+        }
     }
 }
 

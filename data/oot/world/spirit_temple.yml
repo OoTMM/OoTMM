@@ -103,6 +103,12 @@
     "Spirit Temple Adult Boss Key Chest": "can_play(SONG_ZELDA) && can_hookshot && can_use_bow"
     "Spirit Temple Adult Topmost Sun on Wall": "has_mirror_shield"
 "Spirit Temple Boss":
+  boss: true
+  dungeon: Spirit
+  exits:
+    "Spirit Temple After Boss": "has_mirror_shield"
+"Spirit Temple After Boss":
+  boss: true
   dungeon: Spirit
   locations:
     "Spirit Temple Boss HC": "true"

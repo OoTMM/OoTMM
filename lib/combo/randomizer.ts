@@ -1,7 +1,7 @@
 import { Buffer } from 'buffer';
 
 import { logic, LogicResult } from './logic';
-import { DATA_GI, DATA_NPC, DATA_SCENES, DATA_REGIONS, DATA_CONFIG, DATA_HINTS_POOL, DATA_HINTS } from './data';
+import { DATA_GI, DATA_NPC, DATA_SCENES, DATA_REGIONS, DATA_CONFIG, DATA_HINTS_POOL, DATA_HINTS, DATA_ENTRANCES } from './data';
 import { Game, GAMES } from "./config";
 import { WorldCheck } from './logic/world';
 import { Options } from './options';
@@ -10,6 +10,7 @@ import { HintGossip, Hints } from './logic/hints';
 import { Monitor } from './monitor';
 import { isDungeonStrayFairy, isGanonBossKey, isMap, isCompass, isRegularBossKey, isSmallKey, isTownStrayFairy } from './logic/items';
 import { gameId } from './util';
+import { EntranceShuffleResult } from './logic/entrance';
 
 const GAME_DATA_OFFSETS = {
   oot: 0x1000,
@@ -22,6 +23,11 @@ const HINTS_DATA_OFFSETS = {
 };
 
 const STARTING_ITEMS_DATA_OFFSET = 0x7000;
+
+const ENTRANCE_DATA_OFFSETS = {
+  oot: 0x8000,
+  mm: 0x9000,
+};
 
 const SUBSTITUTIONS: {[k: string]: string} = {
   OOT_SWORD: "OOT_SWORD_KOKIRI",
@@ -40,19 +46,19 @@ const SUBSTITUTIONS: {[k: string]: string} = {
 
 const gi = (settings: Settings, game: Game, item: string, generic: boolean) => {
   if (generic) {
-    if (isSmallKey(item) && settings.smallKeyShuffle === 'ownDungeon') {
+    if (isSmallKey(item) && settings.smallKeyShuffle === 'ownDungeon' && settings.erBoss === 'none') {
       item = gameId(game, 'SMALL_KEY', '_');
     } else if (isGanonBossKey(item) && settings.ganonBossKey !== 'anywhere') {
       item = gameId(game, 'BOSS_KEY', '_');
-    } else if (isRegularBossKey(item) && settings.bossKeyShuffle === 'ownDungeon') {
+    } else if (isRegularBossKey(item) && settings.bossKeyShuffle === 'ownDungeon' && settings.erBoss === 'none') {
       item = gameId(game, 'BOSS_KEY', '_');
     } else if (isTownStrayFairy(item) && settings.townFairyShuffle === 'vanilla') {
       item = gameId(game, 'STRAY_FAIRY', '_');
-    } else if (isDungeonStrayFairy(item) && settings.strayFairyShuffle !== 'anywhere') {
+    } else if (isDungeonStrayFairy(item) && settings.strayFairyShuffle !== 'anywhere' && settings.erBoss === 'none') {
       item = gameId(game, 'STRAY_FAIRY', '_');
-    } else if (isMap(item) && settings.mapCompassShuffle === 'ownDungeon') {
+    } else if (isMap(item) && settings.mapCompassShuffle === 'ownDungeon' && settings.erBoss === 'none') {
       item = gameId(game, 'MAP', '_');
-    } else if (isCompass(item) && settings.mapCompassShuffle === 'ownDungeon') {
+    } else if (isCompass(item) && settings.mapCompassShuffle === 'ownDungeon' && settings.erBoss === 'none') {
       item = gameId(game, 'COMPASS', '_');
     }
   }
@@ -73,6 +79,30 @@ const gi = (settings: Settings, game: Game, item: string, generic: boolean) => {
 
   return value;
 };
+
+const entrance = (game: Game, from: string, to: string) => {
+  let entrGame: Game;
+
+  if (from.startsWith('MM ')) {
+    from = from.substring(3);
+    to = to.substring(3);
+    entrGame = 'mm';
+  } else {
+    from = from.substring(4);
+    to = to.substring(4);
+    entrGame = 'oot';
+  }
+  const entrances = DATA_ENTRANCES[entrGame];
+  const e = entrances.find((e: any) => e.from === from && e.to === to);
+  if (!e) {
+    throw new Error(`Unknown ${entrGame} entrance ${from} -> ${to}`);
+  }
+  let id = Number(e.id);
+  if (game !== entrGame) {
+    id = (id | 0x80000000) >>> 0;
+  }
+  return id;
+}
 
 const checkId = (check: WorldCheck) => {
   if (check.type === 'npc') {
@@ -96,6 +126,14 @@ const toU16Buffer = (data: number[]) => {
   const buf = Buffer.alloc(data.length * 2);
   for (let i = 0; i < data.length; ++i) {
     buf.writeUInt16BE(data[i], i * 2);
+  }
+  return buf;
+};
+
+const toU32Buffer = (data: number[]) => {
+  const buf = Buffer.alloc(data.length * 4);
+  for (let i = 0; i < data.length; ++i) {
+    buf.writeUInt32BE(data[i], i * 4);
   }
   return buf;
 };
@@ -227,6 +265,24 @@ const regionsBuffer = (regions: string[]) => {
   return toU8Buffer(data);
 };
 
+const gameEntrances = (game: Game, entrances: EntranceShuffleResult) => {
+  const data: number[] = [];
+  const gamePrefix = game === 'oot' ? 'OOT ' : 'MM ';
+  for (const srcFrom in entrances.overrides) {
+    if (!srcFrom.startsWith(gamePrefix)) {
+      continue;
+    }
+    const src = entrances.overrides[srcFrom];
+    for (const srcTo in src) {
+      const dst = src[srcTo];
+      const srcId = entrance(game, srcFrom, srcTo);
+      const dstId = entrance(game, dst.from, dst.to);
+      data.push(srcId, dstId);
+    }
+  }
+  return toU32Buffer(data);
+};
+
 export const randomizerConfig = (config: Set<string>): Buffer => {
   const bits = Array.from(config).map((c) => {
     const bit = DATA_CONFIG[c];
@@ -252,10 +308,13 @@ export const randomizerHints = (logic: LogicResult): Buffer => {
   return Buffer.concat(buffers);
 };
 
+const randomizerBlueWarps = (logic: LogicResult): Buffer => toU8Buffer(logic.entrances.blueWarps);
+
 export const randomizerData = (logic: LogicResult, options: Options): Buffer => {
   const buffers = [];
   buffers.push(randomizerConfig(logic.config));
   buffers.push(randomizerHints(logic));
+  buffers.push(randomizerBlueWarps(logic));
   return Buffer.concat(buffers);
 };
 
@@ -330,8 +389,10 @@ export const randomize = (monitor: Monitor, rom: Buffer, opts: Options) => {
   for (const g of GAMES) {
     const checksBuffer = gameChecks(opts.settings, g, res);
     const hintsBuffer = gameHints(opts.settings, g, res.hints);
+    const entrancesBuffer = gameEntrances(g, res.entrances);
     checksBuffer.copy(buffer, GAME_DATA_OFFSETS[g]);
     hintsBuffer.copy(buffer, HINTS_DATA_OFFSETS[g]);
+    entrancesBuffer.copy(buffer, ENTRANCE_DATA_OFFSETS[g]);
   }
   const data = randomizerData(res, opts);
   data.copy(buffer, 0);

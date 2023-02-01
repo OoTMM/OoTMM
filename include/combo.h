@@ -64,12 +64,13 @@ typedef struct PACKED ALIGNED(4)
     char magic[8];
     u32  valid;
     u32  saveIndex;
+    s32  entrance;
 }
 ComboContext;
 
 extern ComboContext gComboCtx;
 
-typedef struct PACKED ALIGNED(4)
+typedef struct PACKED
 {
     u8 dungeonRewards[13];
     u8 lightArrows;
@@ -81,6 +82,7 @@ typedef struct PACKED ALIGNED(4)
 {
     u8             config[0x40];
     ComboDataHints hints;
+    u8             blueWarps[12];
 }
 ComboData;
 
@@ -286,6 +288,15 @@ int  comboCsmcChestSize(s16 gi);
 #define SC_ERR_NORUPEES     0x04
 
 int comboShopPrecond(GameState_Play* play, Actor_EnGirlA* girlA);
+
+/* Entrance */
+void comboInitEntrances(void);
+s32 comboEntranceOverride(s16 entranceId);
+
+extern s8 gIsEntranceOverride;
+
+/* Warp */
+void comboTriggerWarp(GameState_Play* play, int index);
 
 #else
 # include <combo/asm.h>

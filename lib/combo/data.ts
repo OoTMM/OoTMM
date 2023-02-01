@@ -21,6 +21,14 @@ export const DATA_MACROS = {
   mm: macrosMm,
 };
 
+import entrancesOot from '../../data/oot/entrances.csv';
+import entrancesMm from '../../data/mm/entrances.csv';
+
+export const DATA_ENTRANCES = {
+  oot: entrancesOot,
+  mm: entrancesMm,
+};
+
 import worldOotOverworld from '../../data/oot/world/overworld.yml';
 import worldOotDekuTree from '../../data/oot/world/deku_tree.yml';
 import worldOotDodongoCavern from '../../data/oot/world/dodongo_cavern.yml';

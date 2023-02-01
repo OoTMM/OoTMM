@@ -1,6 +1,8 @@
 import fs from 'fs/promises';
 import { Game } from './config';
 
+export type Optional<T> = T extends {} ? {[K in keyof T]?: T[K]} : T | undefined;
+
 export const fileExists = async (path: string) => {
   if (!process.env.ROLLUP) {
     try {

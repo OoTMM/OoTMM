@@ -79,8 +79,27 @@ static void debugCheat(GameState_Play* play)
 void hookPlay_Init(GameState_Play* play)
 {
     int isEndOfGame;
+    s32 override;
 
     isEndOfGame = 0;
+
+    /* Handle transition override */
+    if (gIsEntranceOverride)
+    {
+        gIsEntranceOverride = 0;
+        override = comboEntranceOverride(gSave.entranceIndex);
+        if (override != -1)
+        {
+            if (override >= 0)
+                gSave.entranceIndex = override;
+            else
+            {
+                gComboCtx.entrance = override & 0x7fffffff;
+                comboGameSwitch();
+                return;
+            }
+        }
+    }
 
     if (!gCustomKeep)
     {

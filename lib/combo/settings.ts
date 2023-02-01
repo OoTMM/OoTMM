@@ -130,6 +130,17 @@ export const SETTINGS = [{
   ],
   default: 'closed'
 }, {
+  key: 'erBoss',
+  name: 'Boss Entrance Shuffle (Experimental)',
+  category: 'main',
+  type: 'enum',
+  values: [
+    { value: 'none', name: 'None' },
+    { value: 'ownGame', name: 'Own Game' },
+    { value: 'full', name: 'Full' },
+  ],
+  default: 'none'
+}, {
   key: 'progressiveShieldsOot',
   name: 'OoT Shields',
   category: 'progressive',

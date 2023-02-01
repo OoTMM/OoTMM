@@ -14,6 +14,7 @@ void comboLoadContext(void)
     {
         bzero(&gComboCtx, sizeof(gComboCtx));
         memcpy(gComboCtx.magic, MAGIC, sizeof(gComboCtx.magic));
+        gComboCtx.entrance = -1;
     }
     else
     {
