@@ -115,7 +115,7 @@
   boss: true
   dungeon: GB
   exits:
-    "Great Bay Temple After Boss": "has(MAGIC_UPGRADE) && (has(MASK_ZORA) || has(MASK_FIERCE_DEITY)) && has(BOW)"
+    "Great Bay Temple After Boss": "event(TIME_TRAVEL) && (has(MAGIC_UPGRADE) && (has(MASK_ZORA) || has(MASK_FIERCE_DEITY)) && has(BOW))"
 "Great Bay Temple After Boss":
   boss: true
   dungeon: GB
