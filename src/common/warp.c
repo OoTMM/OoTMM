@@ -72,9 +72,7 @@ void comboTriggerWarp(GameState_Play* play, int index)
     }
     else
     {
-        entrance |= 0x80000000;
-        gComboCtx.entrance = entrance;
-        comboGameSwitch();
+        comboGameSwitch(play, entrance);
     }
 #endif
 
@@ -87,9 +85,7 @@ void comboTriggerWarp(GameState_Play* play, int index)
     }
     else
     {
-        entrance |= 0x80000000;
-        gComboCtx.entrance = entrance;
-        comboGameSwitch();
+        comboGameSwitch(play, entrance);
     }
 #endif
 }

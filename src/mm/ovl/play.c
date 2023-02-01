@@ -94,8 +94,9 @@ void hookPlay_Init(GameState_Play* play)
                 gSave.entranceIndex = override;
             else
             {
-                gComboCtx.entrance = override & 0x7fffffff;
-                comboGameSwitch();
+                gSave.entranceIndex = gLastEntrance;
+                Play_Init(play);
+                comboGameSwitch(play, override);
                 return;
             }
         }
@@ -133,6 +134,7 @@ void hookPlay_Init(GameState_Play* play)
     MM_SET_EVENT_WEEK(MM_EV(82, 1));
 
     Play_Init(play);
+    gLastEntrance = gSave.entranceIndex;
     comboSpawnItemGivers(play);
 
     if (isEndOfGame)
@@ -155,9 +157,7 @@ void hookPlay_Init(GameState_Play* play)
 
     if (gSave.entranceIndex == 0xc010)
     {
-        gSave.isOwlSave = 1;
-        PrepareSave(&play->sramCtx);
-        comboGameSwitch();
+        comboGameSwitch(play, -1);
         return;
     }
 }

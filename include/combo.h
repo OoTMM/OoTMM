@@ -110,7 +110,7 @@ void comboCopyMmSave(int dst, int src);
 void comboCreateSaveMM(void);
 
 /* Switch */
-void comboGameSwitch(void);
+void comboGameSwitch(GameState_Play* play, s32 entrance);
 
 /* Override */
 #define OV_CHEST        0
@@ -294,6 +294,7 @@ void comboInitEntrances(void);
 s32 comboEntranceOverride(s16 entranceId);
 
 extern s8 gIsEntranceOverride;
+extern s32 gLastEntrance;
 
 /* Warp */
 void comboTriggerWarp(GameState_Play* play, int index);

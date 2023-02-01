@@ -6,7 +6,8 @@
 # define ENTRANCES_ADDR 0x03fe9000
 #endif
 
-s8 gIsEntranceOverride;
+s8  gIsEntranceOverride;
+s32 gLastEntrance;
 
 typedef struct PACKED ALIGNED(4)
 {

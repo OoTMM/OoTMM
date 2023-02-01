@@ -78,10 +78,22 @@ static void waitSubsystems(void)
 NORETURN void comboGameSwitch2(void);
 NORETURN void comboGameSwitch4(u32);
 
-NORETURN void comboGameSwitch(void)
+NORETURN void comboGameSwitch(GameState_Play* play, s32 entrance)
 {
+    if (entrance == -1)
+        gComboCtx.entrance = -1;
+    else
+        gComboCtx.entrance = (entrance & 0x7fffffff);
+
 #if defined(GAME_OOT)
     gComboCtx.saveIndex = gSaveContext.fileIndex;
+    PlayStoreFlags(play);
+    gSave.sceneId = play->sceneId;
+#endif
+
+#if defined(GAME_MM)
+    gSave.isOwlSave = 1;
+    PrepareSave(&play->sramCtx);
 #endif
 
     comboWriteSave();

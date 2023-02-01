@@ -198,8 +198,9 @@ void hookPlay_Init(GameState_Play* play)
                 gSave.entrance = override;
             else
             {
-                gComboCtx.entrance = override & 0x7fffffff;
-                comboGameSwitch();
+                gSave.entrance = gLastEntrance;
+                Play_Init(play);
+                comboGameSwitch(play, override);
                 return;
             }
         }
@@ -244,13 +245,12 @@ void hookPlay_Init(GameState_Play* play)
     eventFixes(play);
 
     Play_Init(play);
+    gLastEntrance = gSave.entrance;
     comboSpawnItemGivers(play);
 
     if (gSave.entrance == 0x0530)
     {
-        PlayStoreFlags(play);
-        gSave.sceneId = play->sceneId;
-        comboGameSwitch();
+        comboGameSwitch(play, -1);
         return;
     }
 
@@ -268,7 +268,7 @@ void hookPlay_Init(GameState_Play* play)
 #if defined(DEBUG)
     if (play->gs.input[0].current.buttons & R_TRIG)
     {
-        comboGameSwitch();
+        comboGameSwitch(play, -1);
         return;
     }
 #endif
