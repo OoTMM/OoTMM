@@ -79,6 +79,9 @@ void comboTriggerWarp(GameState_Play* play, int index)
 #if defined(GAME_MM)
     if (index >= 8)
     {
+        gSave.playerForm = MM_PLAYER_FORM_HUMAN;
+        gSave.equippedMask = 0;
+
         play->nextEntrance = entrance;
         play->transitionType = TRANS_TYPE_NORMAL;
         play->transitionGfx = TRANS_GFX_BLACK;
