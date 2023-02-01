@@ -82,3 +82,21 @@ PATCH_END
 PATCH_START 0x808345e8
   nop
 PATCH_END
+
+/* Write to the transition flag */
+Player_WriteTransitionFlag:
+  /* Replaced code */
+  sh t9,-0x7786(at)
+
+  li  t0,1
+  lui t9,%HI(gIsEntranceOverride)
+  sb  t0,%LO(gIsEntranceOverride)(t9)
+
+  /* Replaced code */
+  jr ra
+   li t0,0x4
+
+PATCH_START 0x808354d8
+  jal Player_WriteTransitionFlag
+   nop
+PATCH_END
