@@ -1,11 +1,29 @@
 #include <combo.h>
 
-void comboTriggerWarp(GameState_Play* play, int index)
+void comboTriggerWarp(GameState_Play* play, int bossId)
 {
+    int index;
     s32 entrance;
 
+    /* Flag the actual boss as dead (MM) */
+    switch (bossId)
+    {
+    case 8:
+        gMmExtraBoss.bossCycle |= (1 << 0);
+        break;
+    case 9:
+        gMmExtraBoss.bossCycle |= (1 << 1);
+        break;
+    case 10:
+        gMmExtraBoss.bossCycle |= (1 << 2);
+        break;
+    case 11:
+        gMmExtraBoss.bossCycle |= (1 << 3);
+        break;
+    }
+
     /* Use shuffled index */
-    index = (int)gComboData.blueWarps[index];
+    index = (int)gComboData.blueWarps[bossId];
 
     /* Set flags and entrance */
     switch (index)
@@ -42,6 +60,7 @@ void comboTriggerWarp(GameState_Play* play, int index)
     case 8: /* Woodfall */
         gMmExtraBoss.boss |= (1 << 0);
         MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_WF);
+        MM_SET_EVENT_WEEK(EV_MM_WEEK_WOODFALL_TEMPLE_RISE);
         entrance = 0x3010;
         break;
     case 9: /* Snowhead */

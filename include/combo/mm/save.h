@@ -245,8 +245,9 @@ ALIGNED(16) extern MmSave gMmSave;
 typedef struct
 {
     u8 boss;
+    u8 bossCycle;
     u8 items;
-    u16 unused;
+    u8 unused;
 }
 MmExtraBoss;
 

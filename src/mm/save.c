@@ -45,6 +45,9 @@ void Sram_SaveEndOfCycleWrapper(GameState_Play* play)
     /* Not an Owl save */
     gSave.isOwlSave = 0;
 
+    /* Revive bosses */
+    gMmExtraBoss.bossCycle = 0;
+
     /* Regain trade quest items */
     gMmExtraTrade.trade1 = gMmExtraTrade.tradeObtained1;
     gMmExtraTrade.trade2 = gMmExtraTrade.tradeObtained2;
