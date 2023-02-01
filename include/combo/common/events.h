@@ -83,6 +83,11 @@
 #define EV_MM_WEEK_BEAVER_RACE_ALT              MM_EV(24,   2)
 #define EV_MM_WEEK_PAMELA_FATHER                MM_EV(75,   5)
 
+#define EV_MM_WEEK_DUNGEON_WF                   MM_EV(7,    7)
+#define EV_MM_WEEK_DUNGEON_SH                   MM_EV(33,   7)
+#define EV_MM_WEEK_DUNGEON_GB                   MM_EV(52,   5)
+#define EV_MM_WEEK_DUNGEON_ST                   MM_EV(55,   7)
+
 #if !defined(__ASSEMBLER__)
 # define MM_SET_EVENT_WEEK(x)       (gMmSave.weekEventReg[(x) / 8] |= (1 << ((x) % 8)))
 # define MM_CLEAR_EVENT_WEEK(x)     (gMmSave.weekEventReg[(x) / 8] &= ~(1 << ((x) % 8)))

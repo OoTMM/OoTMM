@@ -40,12 +40,20 @@ void comboTriggerWarp(GameState_Play* play, int index)
         entrance = 0x060C;
         break;
     case 8: /* Woodfall */
+        MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_WF);
+        entrance = 0x3010;
         break;
     case 9: /* Snowhead */
+        MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_SH);
+        entrance = 0xae70;
         break;
     case 10: /* Great Bay */
+        MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_GB);
+        entrance = 0x20f0;
         break;
     case 11: /* Stone Tower */
+        MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_ST);
+        entrance = 0x6a90;
         break;
     }
 
@@ -58,6 +66,21 @@ void comboTriggerWarp(GameState_Play* play, int index)
         t->type = TRANS_TYPE_NORMAL;
         t->gfx = TRANS_GFX_BLACK;
         t->entrance = entrance;
+    }
+    else
+    {
+        entrance |= 0x80000000;
+        gComboCtx.entrance = entrance;
+        comboGameSwitch();
+    }
+#endif
+
+#if defined(GAME_MM)
+    if (index >= 8)
+    {
+        play->nextEntrance = entrance;
+        play->transitionType = TRANS_TYPE_NORMAL;
+        play->transitionGfx = TRANS_GFX_BLACK;
     }
     else
     {
