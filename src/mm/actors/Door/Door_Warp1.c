@@ -135,3 +135,36 @@ void DoorWarp1_AfterDraw(Actor* this, GameState_Play* play)
 }
 
 PATCH_FUNC(0x808b866c, DoorWarp1_ShouldTrigger);
+
+static void DoorWarp1_TriggerBossWarpPad(Actor* this, GameState_Play* play)
+{
+    s32 entrance;
+
+    switch (play->sceneId)
+    {
+    case SCE_MM_TEMPLE_WOODFALL:
+        entrance = 0x3800;
+        break;
+    case SCE_MM_TEMPLE_SNOWHEAD:
+        entrance = 0x8200;
+        break;
+    case SCE_MM_TEMPLE_GREAT_BAY:
+        entrance = 0xb800;
+        break;
+    case SCE_MM_TEMPLE_STONE_TOWER:
+    case SCE_MM_TEMPLE_STONE_TOWER_INVERTED:
+        entrance = 0x6600;
+        break;
+    default:
+        UNREACHABLE();
+        break;
+    }
+
+    play->nextEntrance = entrance;
+    play->transitionType = TRANS_TYPE_NORMAL;
+    play->transitionGfx = TRANS_GFX_BLACK;
+
+    gIsEntranceOverride = 1;
+}
+
+PATCH_FUNC(0x808b9524, DoorWarp1_TriggerBossWarpPad);

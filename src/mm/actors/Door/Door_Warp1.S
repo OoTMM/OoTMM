@@ -62,3 +62,8 @@ PATCH_END
 PATCH_START 0x808b8fc8
   li t2,1
 PATCH_END
+
+/* Patch the boss warp pads */
+PATCH_START 0x808b9410
+  nop
+PATCH_END
