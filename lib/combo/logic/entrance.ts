@@ -34,6 +34,16 @@ class EntranceShuffler {
   }
 
   private isBossAssignable(src: WorldEntrance, dst: WorldEntrance, overrides: EntranceOverrides, reachable: Reachable) {
+    if (this.settings.erBoss === 'ownGame') {
+      /* Check that the entrances are from the same game */
+      /* TODO: Ugly */
+      const prefixA = src.from.split(' ')[0];
+      const prefixB = dst.from.split(' ')[0];
+      if (prefixA !== prefixB) {
+        return false;
+      }
+    }
+
     /* Pathfind with the override */
     overrides = { ...overrides, [src.from]: { [src.to]: dst.to } };
     reachable = pathfind(this.world, {}, false, undefined, { entranceOverrides: overrides, ignoreItems: true });
@@ -150,7 +160,7 @@ class EntranceShuffler {
   }
 
   run() {
-    if (this.settings.entranceShuffle === 'boss') {
+    if (this.settings.erBoss !== 'none') {
       this.fixBosses();
     }
 

@@ -46,19 +46,19 @@ const SUBSTITUTIONS: {[k: string]: string} = {
 
 const gi = (settings: Settings, game: Game, item: string, generic: boolean) => {
   if (generic) {
-    if (isSmallKey(item) && settings.smallKeyShuffle === 'ownDungeon' && settings.entranceShuffle === 'none') {
+    if (isSmallKey(item) && settings.smallKeyShuffle === 'ownDungeon' && settings.erBoss === 'none') {
       item = gameId(game, 'SMALL_KEY', '_');
     } else if (isGanonBossKey(item) && settings.ganonBossKey !== 'anywhere') {
       item = gameId(game, 'BOSS_KEY', '_');
-    } else if (isRegularBossKey(item) && settings.bossKeyShuffle === 'ownDungeon' && settings.entranceShuffle === 'none') {
+    } else if (isRegularBossKey(item) && settings.bossKeyShuffle === 'ownDungeon' && settings.erBoss === 'none') {
       item = gameId(game, 'BOSS_KEY', '_');
     } else if (isTownStrayFairy(item) && settings.townFairyShuffle === 'vanilla') {
       item = gameId(game, 'STRAY_FAIRY', '_');
-    } else if (isDungeonStrayFairy(item) && settings.strayFairyShuffle !== 'anywhere' && settings.entranceShuffle === 'none') {
+    } else if (isDungeonStrayFairy(item) && settings.strayFairyShuffle !== 'anywhere' && settings.erBoss === 'none') {
       item = gameId(game, 'STRAY_FAIRY', '_');
-    } else if (isMap(item) && settings.mapCompassShuffle === 'ownDungeon' && settings.entranceShuffle === 'none') {
+    } else if (isMap(item) && settings.mapCompassShuffle === 'ownDungeon' && settings.erBoss === 'none') {
       item = gameId(game, 'MAP', '_');
-    } else if (isCompass(item) && settings.mapCompassShuffle === 'ownDungeon' && settings.entranceShuffle === 'none') {
+    } else if (isCompass(item) && settings.mapCompassShuffle === 'ownDungeon' && settings.erBoss === 'none') {
       item = gameId(game, 'COMPASS', '_');
     }
   }

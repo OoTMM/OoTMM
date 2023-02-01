@@ -55,6 +55,9 @@ void comboTriggerWarp(GameState_Play* play, int index)
         MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_ST);
         entrance = 0x6a90;
         break;
+    default:
+        UNREACHABLE();
+        break;
     }
 
 #if defined(GAME_OOT)

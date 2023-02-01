@@ -130,13 +130,14 @@ export const SETTINGS = [{
   ],
   default: 'closed'
 }, {
-  key: 'entranceShuffle',
-  name: 'Entrance Shuffle',
+  key: 'erBoss',
+  name: 'Boss Entrance Shuffle (Experimental)',
   category: 'main',
   type: 'enum',
   values: [
     { value: 'none', name: 'None' },
-    { value: 'boss', name: 'Boss' },
+    { value: 'ownGame', name: 'Own Game' },
+    { value: 'full', name: 'Full' },
   ],
   default: 'none'
 }, {
