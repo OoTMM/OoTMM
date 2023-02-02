@@ -29,7 +29,7 @@ s32 comboEntranceOverride(s16 entranceId)
     {
         if (gEntrances[i].key == -1)
             break;
-        if (gEntrances[i].key == entranceId)
+        if (gEntrances[i].key == (s32)((u16)entranceId & 0xffff))
             return gEntrances[i].value;
     }
     return -1;
