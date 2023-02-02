@@ -242,9 +242,13 @@ void comboInvalDCache(void* addr, u32 size);
 /* Custom keep files */
 extern void* gCustomKeep;
 
+/* Dpad */
+#define DPF_ITEMS      0x01
+#define DPF_EQUIP      0x02
+
 void comboDpadDraw(GameState_Play* play);
 void comboDpadUpdate(GameState_Play* play);
-int  comboDpadUse(GameState_Play* play);
+int  comboDpadUse(GameState_Play* play, int flags);
 
 int comboConfig(int flag);
 int comboDoorIsUnlocked(GameState_Play* play, int flag);
