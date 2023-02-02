@@ -55,7 +55,7 @@ void comboTriggerWarp(GameState_Play* play, int bossId)
         entrance = 0x0580;
         break;
     case 7: /* Spirit */
-        entrance = 0x060C;
+        entrance = 0x0610;
         break;
     case 8: /* Woodfall */
         gMmExtraBoss.boss |= (1 << 0);
