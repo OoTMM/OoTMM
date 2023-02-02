@@ -19,10 +19,6 @@ typedef struct PACKED ALIGNED(4)
 }
 Actor_Player;
 
-#define PLAYER_ACTOR_STATE_GET_ITEM             0x00000400
-#define PLAYER_ACTOR_STATE_HOLD_ITEM            0x00000800
-#define PLAYER_ACTOR_STATE_CUTSCENE_FROZEN      0x20000000
-
 _Static_assert(sizeof(Actor_Player) == 0xd78, "MM Actor_Player size is wrong");
 
 #endif

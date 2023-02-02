@@ -4,6 +4,16 @@
 #include <combo/types.h>
 #include <combo/gi.h>
 
+#define PLAYER_ACTOR_STATE_TRANSITION           0x00000001
+#define PLAYER_ACTOR_STATE_TRANSFORM            0x00000002
+#define PLAYER_ACTOR_STATE_CLIMB                0x00000004
+#define PLAYER_ACTOR_STATE_DEATH                0x00000080
+#define PLAYER_ACTOR_STATE_GET_ITEM             0x00000400
+#define PLAYER_ACTOR_STATE_HOLD_ITEM            0x00000800
+#define PLAYER_ACTOR_STATE_EPONA                0x00800000
+#define PLAYER_ACTOR_STATE_USE_ITEM             0x10000000
+#define PLAYER_ACTOR_STATE_CUTSCENE_FROZEN      0x20000000
+
 typedef struct GameState_Play GameState_Play;
 typedef struct Actor Actor;
 
