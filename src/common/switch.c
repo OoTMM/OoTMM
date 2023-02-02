@@ -5,12 +5,11 @@ typedef void (*EntryPoint)(void)  __attribute__ ((noreturn));
 #if defined(GAME_OOT)
 # define FOREIGN_OFF    0x80000
 # define FOREIGN_CART   (0x10001000 | MM_BASE)
-# define FOREIGN_SIZE   0x19500
 #else
 # define FOREIGN_OFF    0x400
 # define FOREIGN_CART   0x10001000
-# define FOREIGN_SIZE   0x6430
 #endif
+#define FOREIGN_SIZE   0x100000
 #define FOREIGN_DRAM   (0x80000000 | FOREIGN_OFF)
 
 static void waitSubsystems(void)
