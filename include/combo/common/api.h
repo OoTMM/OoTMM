@@ -129,4 +129,6 @@ void PlayMusic(int arg0, int arg1, int arg2, int arg3, int arg4);
 int Actor_RunByteCode(Actor* this, GameState_Play* play, void* bytecode, void* unk1, void* unk2);
 void Enemy_StartFinishingBlow(GameState_Play* play, Actor* this);
 
+void DeathWarp(GameState_Play* play);
+
 #endif

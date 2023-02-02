@@ -144,3 +144,5 @@ Player_UsingItem = 0x80079bf8;
 
 Enemy_StartFinishingBlow = 0x80025b4c;
 Interface_LoadItemIconImpl = 0x8006fb50;
+
+DeathWarp = 0x8009da10;

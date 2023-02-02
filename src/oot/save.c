@@ -13,11 +13,11 @@ static const s32 kDungeonEntrances[] = {
     0x082,
 };
 
-static void dungeonRespawn(void)
+static void dungeonRespawn(s16 sceneId)
 {
     int id;
 
-    switch (gSave.sceneId)
+    switch (sceneId)
     {
     case SCE_OOT_LAIR_GOHMA:
         id = 0;
@@ -65,7 +65,7 @@ void Sram_AfterOpenSave(void)
 #endif
 
     /* Dungeon shuffle override */
-    dungeonRespawn();
+    dungeonRespawn(gSave.sceneId);
 
     /* Game switch override */
     if (gComboCtx.valid)
@@ -146,3 +146,11 @@ void comboCreateSave(void* unk, void* buffer)
     memcpy((char*)buffer + base, &gOotSave, 0x1354);
     memcpy((char*)buffer + base + 0x3cf0, &gOotSave, 0x1354);
 }
+
+static void DeathWarpWrapper(GameState_Play* play)
+{
+    dungeonRespawn(play->sceneId);
+    DeathWarp(play);
+}
+
+PATCH_CALL(0x8009dacc, DeathWarpWrapper);
