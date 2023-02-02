@@ -36,6 +36,40 @@ static int canUseDpad(GameState_Play* play)
     return 1;
 }
 
+static int canUseDpadItem(GameState_Play* play, s16 itemId)
+{
+    Actor_Player* link;
+
+    link = GET_LINK(play);
+
+    /* No item == no use */
+    if (itemId == ITEM_NONE)
+        return 0;
+
+    /* Giant mask can't use any item */
+#if defined(GAME_MM)
+    if (gSave.equippedMask == PLAYER_MASK_GIANT)
+        return 0;
+#endif
+
+    /* Boots have no further restrictions */
+#if defined(GAME_OOT)
+    if (itemId == ITEM_OOT_IRON_BOOTS || itemId == ITEM_OOT_HOVER_BOOTS)
+        return 1;
+#endif
+
+    /* Underwater - disable everything except zora mask */
+    if (link->state & PLAYER_ACTOR_STATE_WATER)
+    {
+#if defined(GAME_MM)
+        if (itemId != ITEM_MM_MASK_ZORA)
+#endif
+            return 0;
+    }
+
+    return 1;
+}
+
 static void reloadIcons(GameState_Play* play)
 {
     if (!sDpadIconBuffer)
@@ -59,6 +93,7 @@ static void reloadIcons(GameState_Play* play)
 
 void comboDpadDraw(GameState_Play* play)
 {
+    s16 itemId;
     u8 alpha;
     float x;
     float y;
@@ -75,7 +110,6 @@ void comboDpadDraw(GameState_Play* play)
     gSPSegment(OVERLAY_DISP++, 0x06, gCustomKeep);
     gSPSegment(OVERLAY_DISP++, 0x07, sDpadIconBuffer);
     gDPSetPrimColor(OVERLAY_DISP++, 0, 0x80, 0xff, 0xff, 0xff, alpha);
-    CLOSE_DISPS();
 
     /* Draw */
     comboDrawInit2D(play);
@@ -83,13 +117,23 @@ void comboDpadDraw(GameState_Play* play)
 
     for (int i = 0; i < 4; ++i)
     {
-        if (sDpadItems[i] != ITEM_NONE)
+        itemId = sDpadItems[i];
+        if (itemId != ITEM_NONE)
         {
+            if (canUseDpadItem(play, itemId))
+            {
+                gDPSetPrimColor(OVERLAY_DISP++, 0, 0x80, 0xff, 0xff, 0xff, alpha);
+            }
+            else
+            {
+                gDPSetPrimColor(OVERLAY_DISP++, 0, 0x80, 0x80, 0x80, 0x80, alpha * 0.5f);
+            }
             x = kDpadPosX + kDpadOffX[i] * 32 * kDpadItemScale + 1.5f;
             y = kDpadPosY + kDpadOffY[i] * 32 * kDpadItemScale + 1;
             comboDrawBlit2D(play, 0x07000000 | (i * 32 * 32 * 4), 32, 32, x, y, kDpadItemScale);
         }
     }
+    CLOSE_DISPS();
 }
 
 #if defined(GAME_OOT)
@@ -114,7 +158,7 @@ static void dpadUseItem(GameState_Play* play, int index)
     void (*Player_UseItem)(GameState_Play* play, Actor_Player* link, s16 itemId);
 
     itemId = sDpadItems[index];
-    if (itemId == ITEM_NONE)
+    if (!canUseDpadItem(play, itemId))
         return;
     if (itemId == ITEM_OOT_HOVER_BOOTS || itemId == ITEM_OOT_IRON_BOOTS)
     {
@@ -135,7 +179,7 @@ static void dpadUseItem(GameState_Play* play, int index)
     void (*Player_UseItem)(GameState_Play* play, Actor_Player* link, s16 itemId);
 
     itemId = sDpadItems[index];
-    if (itemId == ITEM_NONE)
+    if (!canUseDpadItem(play, itemId))
         return;
     Player_UseItem = OverlayAddr(0x80831990);
     Player_UseItem(play, GET_LINK(play), itemId);
