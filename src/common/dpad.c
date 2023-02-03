@@ -52,6 +52,8 @@ static int canUseDpadItem(GameState_Play* play, s16 itemId, int flags)
 #if defined(GAME_OOT)
     if (itemId == ITEM_OOT_IRON_BOOTS || itemId == ITEM_OOT_HOVER_BOOTS)
         isEquip = 1;
+    if ((itemId == ITEM_OOT_OCARINA_FAIRY || itemId == ITEM_OOT_OCARINA_TIME) && (play->interfaceCtx.restrictions.ocarina || play->interfaceCtx.restrictions.all))
+        return 0;
 #endif
 
     if (isEquip)

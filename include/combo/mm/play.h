@@ -32,13 +32,30 @@ typedef struct PACKED
         s16 start;
     }
     alpha;
-    char unk_278[0x0d0];
+    char unk_278[0x096];
+    struct PACKED {
+        u8 hGauge;
+        u8 bButton;
+        u8 aButton;
+        u8 tradeItems;
+        u8 songOfTime;
+        u8 songOfDoubleTime;
+        u8 invSongOfTime;
+        u8 songOfSoaring;
+        u8 songOfStorms;
+        u8 masks;
+        u8 pictoBox;
+        u8 all;
+    } restrictions;
+    char unk_31a[0x02e];
 }
 InterfaceContext;
 
-ASSERT_OFFSET(InterfaceContext, unk_000,  0x000);
-ASSERT_OFFSET(InterfaceContext, alpha,    0x264);
-ASSERT_OFFSET(InterfaceContext, unk_278,  0x278);
+ASSERT_OFFSET(InterfaceContext, unk_000,        0x000);
+ASSERT_OFFSET(InterfaceContext, alpha,          0x264);
+ASSERT_OFFSET(InterfaceContext, unk_278,        0x278);
+ASSERT_OFFSET(InterfaceContext, restrictions,   0x30e);
+ASSERT_OFFSET(InterfaceContext, unk_31a,        0x31a);
 
 typedef struct
 {
