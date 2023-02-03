@@ -26,7 +26,7 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.questItems.songHealing = 1;
         gSave.inventory.questItems.songTime = 1;
         gSave.inventory.questItems.songSoaring = 1;
-        gSave.inventory.questItems.songEpona = 1;
+        //gSave.inventory.questItems.songEpona = 1;
         gSave.inventory.questItems.songOrder = 1;
         gSave.inventory.questItems.songStorms = 1;
         gSave.inventory.questItems.songNewWave = 1;
