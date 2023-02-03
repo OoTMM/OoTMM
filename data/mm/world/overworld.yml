@@ -438,6 +438,7 @@
     "Twin Islands Underwater Chest 2": "event(BOSS_SNOWHEAD) && has(MASK_ZORA)"
     "Twin Islands Frozen Grotto Chest": "(event(GORON_GRAVEYARD_HOT_WATER) || can_use_fire_arrows || event(BOSS_SNOWHEAD) || (event(WELL_HOT_WATER) && can_play(SONG_SOARING))) && has_explosives"
     "Twin Islands Ramp Grotto Chest": "has_explosives && (has(MASK_GORON) || scarecrow_hookshot)"
+    "Goron Elder": "has(MASK_GORON) && has(OCARINA) && (event(GORON_GRAVEYARD_HOT_WATER) || can_use_fire_arrows || (event(WELL_HOT_WATER) && can_play(SONG_SOARING)))"
 "Goron Village":
   region: GORON_VILLAGE
   exits:
@@ -451,7 +452,6 @@
     "Goron Village Scrub Deed": "has(DEED_SWAMP) && has(MASK_DEKU)"
     "Goron Village Scrub Bomb Bag": "has(MASK_GORON) && has(WALLET)"
 #    "Goron Village Scrub Bomb Bag": "(has(MASK_GORON) || (has(MOON_TEAR) && has(DEED_LAND) && has(DEED_SWAMP))) && has(WALLET)"
-    "Goron Elder": "has(MASK_GORON) && has(OCARINA) && (event(GORON_GRAVEYARD_HOT_WATER) || can_use_fire_arrows || (event(WELL_HOT_WATER) && can_play(SONG_SOARING)))"
     "Goron Powder Keg": "event(POWDER_KEG_TRIAL)"
 "Front of Lone Peak Shrine":
   region: GORON_VILLAGE
