@@ -80,6 +80,7 @@
 #define EV_MM_WEEK_SPIN_UPGRADE                 MM_EV(0x17, 1)
 #define EV_MM_WEEK_FIRST_CYCLE                  MM_EV(0x3b, 2)
 #define EV_MM_WEEK_BEAVER_RACE1_DONE            MM_EV(0x5d, 0)
+#define EV_MM_WEEK_PRINCESS_RETURNED            MM_EV(23,   5)
 #define EV_MM_WEEK_BEAVER_RACE_ALT              MM_EV(24,   2)
 #define EV_MM_WEEK_PAMELA_FATHER                MM_EV(75,   5)
 
