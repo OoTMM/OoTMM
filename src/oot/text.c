@@ -38,6 +38,10 @@ static int DisplayTextBox_LoadFile(u8* dst, u32 vromAddr, u32 size)
     while (i < size)
     {
         c = buffer[i++];
+        if (c == 0x10)
+        {
+            *dst++ = 9;
+        }
         *dst++ = c;
         len = comboMultibyteCharSize(c);
         while (len-- > 1)
@@ -45,10 +49,6 @@ static int DisplayTextBox_LoadFile(u8* dst, u32 vromAddr, u32 size)
         if (c == 0x04)
         {
             *dst++ = 8;
-        }
-        if (c == 0x10)
-        {
-            *dst++ = 9;
         }
     }
     return ret;
