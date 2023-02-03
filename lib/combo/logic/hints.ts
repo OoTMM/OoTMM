@@ -637,6 +637,9 @@ class HintsSolver {
       return false;
     }
     const locations = this.world.checkHints[checkHint];
+    if (locations.every(l => this.hintedLocations.has(l))) {
+      return false;
+    }
     for (const l of locations) {
       if (this.hintedLocations.has(l)) {
         return false;
