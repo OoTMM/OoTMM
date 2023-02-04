@@ -214,10 +214,6 @@ const SIMPLE_DEPENDENCIES: {[k: string]: string[]} = {
     'OOT Skulltula House 50 Tokens',
   ],
   OOT_SMALL_KEY_GF: [
-    'OOT Gerudo Fortress Jail 1',
-    'OOT Gerudo Fortress Jail 2',
-    'OOT Gerudo Fortress Jail 3',
-    'OOT Gerudo Fortress Jail 4',
     'OOT Gerudo Member Card',
   ],
   OOT_SMALL_KEY_GTG: [
