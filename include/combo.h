@@ -54,6 +54,19 @@
 #include <combo/shader.h>
 #include <combo/config.h>
 
+#define BOSSID_GOHMA                0x00
+#define BOSSID_KING_DODONGO         0x01
+#define BOSSID_BARINADE             0x02
+#define BOSSID_PHANTOM_GANON        0x03
+#define BOSSID_VOLVAGIA             0x04
+#define BOSSID_MORPHA               0x05
+#define BOSSID_BONGO_BONGO          0x06
+#define BOSSID_TWINROVA             0x07
+#define BOSSID_ODOLWA               0x08
+#define BOSSID_GOHT                 0x09
+#define BOSSID_GYORG                0x0a
+#define BOSSID_TWINMOLD             0x0b
+
 #if !defined(__ASSEMBLER__)
 void comboDisableInterrupts(void);
 void comboDma(void* addr, u32 cartAddr, u32 size);
@@ -82,7 +95,7 @@ typedef struct PACKED ALIGNED(4)
 {
     u8             config[0x40];
     ComboDataHints hints;
-    u8             blueWarps[12];
+    u8             boss[12];
 }
 ComboData;
 

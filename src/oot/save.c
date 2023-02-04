@@ -15,47 +15,47 @@ static const s32 kDungeonEntrances[] = {
 
 static void dungeonRespawn(s16 sceneId)
 {
-    int id;
+    int bossId;
 
     switch (sceneId)
     {
     case SCE_OOT_LAIR_GOHMA:
-        id = 0;
+        bossId = BOSSID_GOHMA;
         break;
     case SCE_OOT_LAIR_KING_DODONGO:
-        id = 1;
+        bossId = BOSSID_KING_DODONGO;
         break;
     case SCE_OOT_LAIR_BARINADE:
-        id = 2;
+        bossId = BOSSID_BARINADE;
         break;
     case SCE_OOT_LAIR_PHANTOM_GANON:
-        id = 3;
+        bossId = BOSSID_PHANTOM_GANON;
         break;
     case SCE_OOT_LAIR_VOLVAGIA:
-        id = 4;
+        bossId = BOSSID_VOLVAGIA;
         break;
     case SCE_OOT_LAIR_MORPHA:
-        id = 5;
+        bossId = BOSSID_MORPHA;
         break;
     case SCE_OOT_LAIR_BONGO_BONGO:
-        id = 6;
+        bossId = BOSSID_BONGO_BONGO;
         break;
     case SCE_OOT_LAIR_TWINROVA:
-        id = 7;
+        bossId = BOSSID_TWINROVA;
         break;
     default:
         return;
     }
 
-    id = gComboData.blueWarps[id];
-    if (id >= 8)
+    bossId = gComboData.boss[bossId];
+    if (bossId >= BOSSID_ODOLWA)
     {
         /* Coming from MM */
         gSave.entrance = ENTRANCE_MARKET;
         return;
     }
 
-    gSave.entrance = kDungeonEntrances[id];
+    gSave.entrance = kDungeonEntrances[bossId];
 }
 
 void Sram_AfterOpenSave(void)
