@@ -47,7 +47,7 @@ static void debugCheat(GameState_Play* play)
 
         gSave.inventory.items[ITS_MM_KEG] = ITEM_MM_POWDER_KEG;
         gSave.inventory.items[ITS_MM_MASK_CAPTAIN] = ITEM_MM_MASK_CAPTAIN;
-        gSave.playerData.healthCapacity = 0x10 * 10;
+        //gSave.playerData.healthCapacity = 0x10 * 10;
         gSave.playerData.health = gSave.playerData.healthCapacity;
 
         gSave.inventory.items[ITS_MM_TRADE1] = ITEM_MM_DEED_LAND;
@@ -67,7 +67,7 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.items[ITS_MM_MASK_FIERCE_DEITY] = ITEM_MM_MASK_FIERCE_DEITY;
 
         //gSave.inventory.questItems.remainsOdolwa = 1;
-        gMmExtraBoss.boss |= 0x01;
+        //gMmExtraBoss.boss |= 0x01;
 
         //gSave.day = 3;
         //gSave.isNight = 1;
