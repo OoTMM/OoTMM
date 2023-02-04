@@ -522,9 +522,9 @@ class HintsSolver {
     return items;
   }
 
-  private playthroughItems() {
-    const items = this.spheres.flat().filter(loc => this.isLocationHintable(loc)).map(loc => this.items[loc]);
-    return shuffle(this.random, items);
+  private playthroughLocations() {
+    const locations = this.spheres.flat().filter(loc => this.isLocationHintable(loc));
+    return shuffle(this.random, locations);
   }
 
   private majorItemFoolish(loc: string, item: string, wothItems: {[k: string]: Set<string>}) {
@@ -710,12 +710,11 @@ class HintsSolver {
     return true;
   }
 
-  private placeGossipItemRegion(item: string) {
-    const locations = this.findItems(item).filter(x => !this.hintedLocations.has(x));
-    if (locations.length === 0) {
+  private placeGossipItemRegion(location: string | null) {
+    if (location === null || this.hintedLocations.has(location)) {
       return false;
     }
-    const location = sample(this.random, locations);
+    const item = this.items[location];
     const hint = this.world.checks[location].hint;
     if (this.placeGossipItemExact(hint)) {
       return true;
@@ -730,13 +729,13 @@ class HintsSolver {
   }
 
   private placeGossipItemRegionSpheres(count: number) {
-    const items = this.playthroughItems();
+    const locations = this.playthroughLocations();
     let placed = 0;
-    for (const item of items) {
+    for (const loc of locations) {
       if (placed >= count) {
         break;
       }
-      if (this.placeGossipItemRegion(item)) {
+      if (this.placeGossipItemRegion(loc)) {
         placed++;
       }
     }
@@ -780,7 +779,7 @@ class HintsSolver {
     }
 
     /* Place Soaring spoiler */
-    if (this.placeGossipItemRegion('MM_SONG_SOARING')) {
+    if (this.placeGossipItemRegion(this.findItem('MM_SONG_SOARING'))) {
       hints++;
     }
 
