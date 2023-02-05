@@ -15,3 +15,8 @@ PATCH_END
 PATCH_START 0x809e2fbc
   andi t7,t6,0x4
 PATCH_END
+
+/* Skip the cutscene */
+PATCH_START 0x809e33cc
+  li t6,1
+PATCH_END
