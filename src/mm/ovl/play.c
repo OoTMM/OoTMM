@@ -8,7 +8,7 @@ static void debugCheat(GameState_Play* play)
         gMmExtraBoss.boss = 0xff;
 
         gSave.itemEquips.sword = 1;
-        gSave.itemEquips.shield = 1;
+        gSave.itemEquips.shield = 2;
         gMmExtraFlags2.progressiveShield = 1;
         gSave.itemEquips.buttonItems[0][0] = ITEM_MM_SWORD_KOKIRI;
         gSave.inventory.items[ITS_MM_OCARINA] = ITEM_MM_OCARINA_OF_TIME;
