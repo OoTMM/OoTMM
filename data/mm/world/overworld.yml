@@ -769,6 +769,8 @@
     "Secret Shrine Entrance": "true"
     "Sakon Hideout": "event(MEET_KAFEI)"
     "Swamp Front": "true"
+  events:
+    BLUE_POTION: "has_bottle && has(WALLET)"
   locations:
     "Ikana Valley Scrub Rupee": "has(DEED_OCEAN) && has(MASK_ZORA)"
     "Ikana Valley Scrub HP": "has(DEED_OCEAN) && has(MASK_ZORA) && has(MASK_DEKU)"
