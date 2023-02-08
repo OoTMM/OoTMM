@@ -99,20 +99,16 @@
   dungeon: DC
   exits:
     "Dodongo Cavern Main": "true"
-    "Dodongo Cavern Pre Boss": "true"
-  locations:
-    "Dodongo Cavern GS Near Boss": "true"
-"Dodongo Cavern Pre Boss":
-  dungeon: DC
-  exits:
     "Dodongo Cavern Boss": "true"
   locations:
-     "Dodongo Cavern Boss Chest": "true"
+    "Dodongo Cavern GS Near Boss": "true"
 "Dodongo Cavern Boss":
   boss: true
   dungeon: DC
   exits:
-    "Dodongo Cavern After Boss": "has_bombflowers"
+    "Dodongo Cavern After Boss": "has_explosives"
+  locations:
+    "Dodongo Cavern Boss Chest": "true"
 "Dodongo Cavern After Boss":
   boss: true
   dungeon: DC
