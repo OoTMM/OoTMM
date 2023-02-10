@@ -1,9 +1,9 @@
-tr.active {
+.starting-items tr.active {
     background-color: #d0d0d0;
     font-weight: bold;
 }
 
-table {
+.starting-items table {
     display: inline-block;
     width: 40%;
 }
@@ -15,7 +15,7 @@ div.starting-items {
 }
 
 td.count {
-    padding-right: 8px;
+    padding: 3px 8px 3px 3px;
 }
 
 button.count-adjust {
