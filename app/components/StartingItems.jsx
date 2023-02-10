@@ -25,7 +25,7 @@ export const StartingItems = ({ settings, setSetting, itemPool }) => {
       </thead>
       <tbody>
         {Object.keys(itemPool).map(item =>
-          <tr key={item}>
+          <tr key={item} className={settings.startingItems[item] > 0 ? "active" : "inactive"}>
             <td>{item}</td>
             <td>
               <button onClick={() => alterItem(item, -1)}>-</button>
