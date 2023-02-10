@@ -1,0 +1,48 @@
+.starting-items tr.active {
+  background-color: #d0d0d0;
+  font-weight: bold;
+}
+
+.starting-items table {
+  display: inline-block;
+  width: 40%;
+}
+
+.starting-items th {
+  font-weight: bold;
+  text-decoration: underline;
+  font-size: 150%;
+  text-align: left;
+  padding-bottom: 10px;
+  padding-left: 3px;
+}
+
+div.starting-items {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+td.count {
+  padding: 3px 8px 3px 3px;
+}
+
+button.count-adjust {
+  margin: 0 1px;
+}
+
+.reset-button {
+  background-color: #f44336;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  padding: 15px 50px;
+  text-align: center;
+  display: inline-block;
+  font-size: 16px;
+  margin: 0 0 20px 50px;
+}
+
+.reset-button:active {
+  opacity: 0.7;
+}
