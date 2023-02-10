@@ -25,7 +25,7 @@ export const StartingItems = ({ settings, setSetting, itemPool }) => {
       <table>
         <thead>
           <tr>
-            <th colspan="2">{gamePrefix === "MM" ? "Majora's Mask" : "Ocarina of Time"}</th>
+            <th colSpan="2">{gamePrefix === "MM" ? "Majora's Mask" : "Ocarina of Time"}</th>
           </tr>
         </thead>
         <tbody>
