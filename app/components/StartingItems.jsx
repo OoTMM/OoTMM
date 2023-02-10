@@ -4,7 +4,7 @@ export const StartingItems = ({ settings, setSetting, itemPool }) => {
   const alterItem = (item, delta) => {
     const { startingItems } = settings;
     const count = startingItems[item] || 0;
-    if (count + delta < 0) {
+    if (count + delta <= 0) {
       delete startingItems[item];
     } else {
       startingItems[item] = count + delta;
