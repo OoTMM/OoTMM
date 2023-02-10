@@ -15,6 +15,10 @@ export const StartingItems = ({ settings, setSetting, itemPool }) => {
     setSetting({ startingItems });
   };
 
+  const resetItems = () => {
+    setSetting({ startingItems: {}})
+  };
+
   // Valid gamePrefix are "MM" and "OOT"
   const buildSingleTable = (gamePrefix) => {
     return (
@@ -43,9 +47,12 @@ export const StartingItems = ({ settings, setSetting, itemPool }) => {
   }
 
   return (
-    <div className="starting-items">
-      {buildSingleTable("MM")}
-      {buildSingleTable("OOT")}
-    </div>
+    <React.Fragment>
+      <button className="reset-button" onClick={() => resetItems()}>Reset Starting Items</button>
+      <div className="starting-items">
+        {buildSingleTable("MM")}
+        {buildSingleTable("OOT")}
+      </div>
+    </React.Fragment>
   );
 };

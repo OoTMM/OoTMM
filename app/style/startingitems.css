@@ -21,3 +21,19 @@ td.count {
 button.count-adjust {
   margin: 0 1px;
 }
+
+.reset-button {
+  background-color: #f44336;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  padding: 15px 50px;
+  text-align: center;
+  display: inline-block;
+  font-size: 16px;
+  margin: 0 0 20px 50px;
+}
+
+.reset-button:active {
+  opacity: 0.7;
+}
