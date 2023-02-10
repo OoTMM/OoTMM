@@ -15,26 +15,37 @@ export const StartingItems = ({ settings, setSetting, itemPool }) => {
     setSetting({ startingItems });
   };
 
-  return (
-    <table>
-      <thead>
-        <tr>
-          <th>Item</th>
-          <th>Count</th>
-        </tr>
-      </thead>
-      <tbody>
-        {Object.keys(itemPool).map(item =>
-          <tr key={item} className={settings.startingItems[item] > 0 ? "active" : "inactive"}>
-            <td>{item}</td>
-            <td>
-              <button onClick={() => alterItem(item, -1)}>-</button>
-              {settings.startingItems[item] || 0}
-              <button onClick={() => alterItem(item, 1)}>+</button>
-            </td>
+  // Valid gamePrefix are "MM" and "OOT"
+  const buildSingleTable = (gamePrefix) => {
+    return (
+      <table>
+        <thead>
+          <tr>
+            <th colspan="2">{gamePrefix === "MM" ? "Majora's Mask" : "Ocarina of Time"}</th>
           </tr>
-        )}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {Object.keys(itemPool)
+            .filter(item => item.startsWith(gamePrefix))
+            .map(item =>
+              <tr key={item} className={settings.startingItems[item] > 0 ? "active" : "inactive"}>
+                <td className="count">
+                  <button className="count-adjust" onClick={() => alterItem(item, -1)}>-</button>
+                  {settings.startingItems[item] || 0}
+                  <button className="count-adjust" onClick={() => alterItem(item, 1)}>+</button>
+                </td>
+                <td>{item}</td>
+              </tr>
+            )}
+        </tbody>
+      </table>
+    )
+  }
+
+  return (
+    <div className="starting-items">
+      {buildSingleTable("MM")}
+      {buildSingleTable("OOT")}
+    </div>
   );
 };

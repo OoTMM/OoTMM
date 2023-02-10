@@ -2,3 +2,22 @@ tr.active {
     background-color: #d0d0d0;
     font-weight: bold;
 }
+
+table {
+    display: inline-block;
+    width: 40%;
+}
+
+div.starting-items {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+td.count {
+    padding-right: 8px;
+}
+
+button.count-adjust {
+    margin: 0 1px;
+}
