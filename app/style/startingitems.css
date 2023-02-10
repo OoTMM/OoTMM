@@ -1,23 +1,23 @@
 .starting-items tr.active {
-    background-color: #d0d0d0;
-    font-weight: bold;
+  background-color: #d0d0d0;
+  font-weight: bold;
 }
 
 .starting-items table {
-    display: inline-block;
-    width: 40%;
+  display: inline-block;
+  width: 40%;
 }
 
 div.starting-items {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }
 
 td.count {
-    padding: 3px 8px 3px 3px;
+  padding: 3px 8px 3px 3px;
 }
 
 button.count-adjust {
-    margin: 0 1px;
+  margin: 0 1px;
 }
