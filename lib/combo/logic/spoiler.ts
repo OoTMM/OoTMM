@@ -4,7 +4,7 @@ import { EntranceShuffleResult } from './entrance';
 import { Hints } from './hints';
 import { ItemPlacement } from './solve';
 import { World } from './world';
-import { findFrontendItemName } from '../names';
+import { itemName } from '../names';
 
 const VERSION = process.env.VERSION || 'XXX';
 
@@ -81,17 +81,17 @@ const spoilerHints = (buffer: string[], hints: Hints, placement: ItemPlacement) 
   for (const gossip in hints.gossip) {
     const h = hints.gossip[gossip];
     if (h.type === 'hero') {
-      buffer.push(`  ${gossip}: Hero, ${h.region} (${h.location}: ${findFrontendItemName(placement[h.location])})`);
+      buffer.push(`  ${gossip}: Hero, ${h.region} (${h.location}: ${itemName(placement[h.location])})`);
     }
     if (h.type === 'foolish') {
       buffer.push(`  ${gossip}: Foolish, ${h.region}`);
     }
     if (h.type === 'item-exact') {
-      const newNames = h.items.map(findFrontendItemName);
+      const newNames = h.items.map(itemName);
       buffer.push(`  ${gossip}: Item-Exact, ${h.check} (${newNames.join(', ')})`);
     }
     if (h.type === 'item-region') {
-      buffer.push(`  ${gossip}: Item-Region, ${h.region} (${findFrontendItemName(h.item)})`);
+      buffer.push(`  ${gossip}: Item-Region, ${h.region} (${itemName(h.item)})`);
     }
   }
   buffer.push('');
@@ -99,7 +99,7 @@ const spoilerHints = (buffer: string[], hints: Hints, placement: ItemPlacement) 
 
 const spoilerRaw = (buffer: string[], placement: ItemPlacement) => {
   for (const loc in placement) {
-    buffer.push(`${loc}: ${findFrontendItemName(placement[loc])}`);
+    buffer.push(`${loc}: ${itemName(placement[loc])}`);
   }
   buffer.push('');
 };
@@ -109,7 +109,7 @@ const spoilerSpheres = (buffer: string[], world: World, placement: ItemPlacement
     buffer.push(`Sphere ${i}`);
     const sphere = spheres[i];
     for (const loc of sphere) {
-      buffer.push(`  ${loc}: ${findFrontendItemName(placement[loc])}`);
+      buffer.push(`  ${loc}: ${itemName(placement[loc])}`);
     }
     buffer.push('');
   }
