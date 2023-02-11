@@ -131,7 +131,7 @@ export const SETTINGS = [{
   default: 'closed'
 }, {
   key: 'erBoss',
-  name: 'Boss Entrance Shuffle (Experimental)',
+  name: 'Boss Entrance Shuffle',
   category: 'main',
   type: 'enum',
   values: [
