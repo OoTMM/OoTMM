@@ -92,3 +92,35 @@ void comboDrawBlit2D(GameState_Play* play, u32 segAddr, int w, int h, float x, f
     );
     CLOSE_DISPS();
 }
+
+void comboDrawBlit2D_IA4(GameState_Play* play, u32 segAddr, int w, int h, float x, float y, float scale)
+{
+    float rScale;
+
+    rScale = 1.f / scale;
+    OPEN_DISPS(play->gs.gfx);
+    gDPPipeSync(OVERLAY_DISP++);
+    gDPTileSync(OVERLAY_DISP++);
+    gDPLoadTextureTile_4b(
+        OVERLAY_DISP++,
+        segAddr,
+        G_IM_FMT_IA,
+        w, h,
+        0, 0,
+        w - 1, h - 1,
+        0,
+        G_TX_WRAP, G_TX_WRAP,
+        G_TX_NOMASK, G_TX_NOMASK,
+        G_TX_NOLOD, G_TX_NOLOD
+    );
+    gDPTileSync(OVERLAY_DISP++);
+    gSPTextureRectangle(
+        OVERLAY_DISP++,
+        x * 4, y * 4,
+        x * 4 + (w * 4) * scale, y * 4 + (h * 4) * scale,
+        0,
+        0, 0,
+        ((1 << 10) * rScale), ((1 << 10) * rScale)
+    );
+    CLOSE_DISPS();
+}

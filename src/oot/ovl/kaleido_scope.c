@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/custom.h>
 
 static int checkItemToggle(GameState_Play* play)
 {
@@ -89,3 +90,14 @@ void KaleidoSetCursorColor(GameState_Play* play)
     gDPSetEnvColor(POLY_OPA_DISP++, 0, 0, 0, 0xff);
     CLOSE_DISPS();
 }
+
+static void KaleidoScope_HandleKeysMenu(GameState_Play* play)
+{
+    OPEN_DISPS(play->gs.gfx);
+    gSPSegment(OVERLAY_DISP++, 0x06, gCustomKeep);
+    comboDrawInit2D(play);
+    comboDrawBlit2D_IA4(play, 0x06000000 | (CUSTOM_KEEP_FONT + 5 * 0x30), 8, 12, 80.f, 80.f, 1.f);
+    CLOSE_DISPS();
+}
+
+PATCH_FUNC(0x8081ce54, KaleidoScope_HandleKeysMenu);
