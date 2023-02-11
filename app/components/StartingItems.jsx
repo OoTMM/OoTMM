@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { itemName } from '@ootmm/core';
+
 export const StartingItems = ({ settings, setSetting, itemPool }) => {
   const alterItem = (item, delta) => {
     const { startingItems } = settings;
@@ -38,7 +40,7 @@ export const StartingItems = ({ settings, setSetting, itemPool }) => {
                   {settings.startingItems[item] || 0}
                   <button className="count-adjust" onClick={() => alterItem(item, 1)}>+</button>
                 </td>
-                <td>{item}</td>
+                <td>{itemName(item)}</td>
               </tr>
             )}
         </tbody>
