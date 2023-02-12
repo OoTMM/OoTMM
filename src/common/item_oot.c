@@ -38,6 +38,7 @@ void comboAddSmallKeyOot(u16 dungeonId)
     else
         keyCount++;
     gOotSave.dungeonKeys[dungeonId] = keyCount;
+    gOotSave.dungeonItems[dungeonId].maxKeys++;
 }
 
 void comboAddBossKeyOot(u16 dungeonId)
