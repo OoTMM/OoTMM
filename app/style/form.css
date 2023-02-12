@@ -17,6 +17,10 @@ input[type=file] {
   display: none;
 }
 
+input[type=checkbox] {
+  transition: border-color 200ms ease-in 0s, box-shadow 200ms ease-in 0s;
+}
+
 select {
   transition: border-color 200ms ease-in 0s, box-shadow 200ms ease-in 0s;
   font-size: 1.5rem;
