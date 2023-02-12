@@ -93,11 +93,7 @@ void KaleidoSetCursorColor(GameState_Play* play)
 
 static void KaleidoScope_HandleKeysMenu(GameState_Play* play)
 {
-    OPEN_DISPS(play->gs.gfx);
-    gSPSegment(OVERLAY_DISP++, 0x06, gCustomKeep);
-    comboDrawInit2D(play);
-    comboDrawBlit2D_IA4(play, 0x06000000 | (CUSTOM_KEEP_FONT + 5 * 0x30), 8, 12, 80.f, 80.f, 1.f);
-    CLOSE_DISPS();
+    comboMenuKeys(play);
 }
 
 PATCH_FUNC(0x8081ce54, KaleidoScope_HandleKeysMenu);

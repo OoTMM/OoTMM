@@ -124,8 +124,8 @@ void comboDpadDraw(GameState_Play* play)
     gDPSetPrimColor(OVERLAY_DISP++, 0, 0x80, 0xff, 0xff, 0xff, alpha);
 
     /* Draw */
-    comboDrawInit2D(play);
-    comboDrawBlit2D(play, 0x06000000, 32, 32, kDpadPosX, kDpadPosY, 0.5f);
+    comboDrawInit2D(&OVERLAY_DISP);
+    comboDrawBlit2D(&OVERLAY_DISP, 0x06000000, 32, 32, kDpadPosX, kDpadPosY, 0.5f);
 
     for (int i = 0; i < 4; ++i)
     {
@@ -142,7 +142,7 @@ void comboDpadDraw(GameState_Play* play)
             }
             x = kDpadPosX + kDpadOffX[i] * 32 * kDpadItemScale + 1.5f;
             y = kDpadPosY + kDpadOffY[i] * 32 * kDpadItemScale + 1;
-            comboDrawBlit2D(play, 0x07000000 | (i * 32 * 32 * 4), 32, 32, x, y, kDpadItemScale);
+            comboDrawBlit2D(&OVERLAY_DISP, 0x07000000 | (i * 32 * 32 * 4), 32, 32, x, y, kDpadItemScale);
         }
     }
     CLOSE_DISPS();
