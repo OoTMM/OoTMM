@@ -40,7 +40,7 @@ static DungeonDef gDungeonDefs[] = {
     { "Dodongo",        SCE_OOT_DODONGO_CAVERN,         DD_OOT | DD_MAP_COMPASS, 0 },
     { "Jabu",           SCE_OOT_INSIDE_JABU_JABU,       DD_OOT | DD_MAP_COMPASS, 0 },
     { "Forest",         SCE_OOT_TEMPLE_FOREST,          DD_OOT | DD_MAP_COMPASS | DD_BOSS_KEY, 5 },
-    { "Fire",           SCE_OOT_TEMPLE_FIRE,            DD_OOT | DD_MAP_COMPASS | DD_BOSS_KEY, 8 },
+    { "Fire",           SCE_OOT_TEMPLE_FIRE,            DD_OOT | DD_MAP_COMPASS | DD_BOSS_KEY, 7 },
     { "Water",          SCE_OOT_TEMPLE_WATER,           DD_OOT | DD_MAP_COMPASS | DD_BOSS_KEY, 5 },
     { "Shadow",         SCE_OOT_TEMPLE_SHADOW,          DD_OOT | DD_MAP_COMPASS | DD_BOSS_KEY, 5 },
     { "Spirit",         SCE_OOT_TEMPLE_SPIRIT,          DD_OOT | DD_MAP_COMPASS | DD_BOSS_KEY, 5 },
@@ -48,12 +48,13 @@ static DungeonDef gDungeonDefs[] = {
     { "Ice",            SCE_OOT_ICE_CAVERN,             DD_OOT | DD_MAP_COMPASS, 0 },
     { "Hideout",        SCE_OOT_THIEVES_HIDEOUT,        DD_OOT, 4 },
     { "GTG",            SCE_OOT_GERUDO_TRAINING_GROUND, DD_OOT, 9 },
-    { "Ganon",          SCE_OOT_INSIDE_GANON_CASTLE,    DD_OOT | DD_MAP_COMPASS | DD_BOSS_KEY, 2 },
+    { "Ganon",          SCE_OOT_INSIDE_GANON_CASTLE,    DD_OOT | DD_BOSS_KEY, 2 },
     { "Woodfall",       0,                              DD_MM  | DD_MAP_COMPASS | DD_BOSS_KEY | DD_FAIRIES, 1 },
     { "Snowhead",       1,                              DD_MM  | DD_MAP_COMPASS | DD_BOSS_KEY | DD_FAIRIES, 3 },
     { "Great Bay",      2,                              DD_MM  | DD_MAP_COMPASS | DD_BOSS_KEY | DD_FAIRIES, 1 },
     { "Stone Tower",    3,                              DD_MM  | DD_MAP_COMPASS | DD_BOSS_KEY | DD_FAIRIES, 4 },
-    { "Misc.",         -1,                              DD_MISC, 0 },
+    { "Clock Town",     0,                              DD_MISC, 0 },
+    { "Tokens",         1,                              DD_MISC, 0 },
 };
 
 static void color4(u8* r, u8* g, u8* b, u8* a, u32 color)
@@ -155,6 +156,8 @@ static void dungeonDataOot(DungeonData* out, const DungeonDef* def)
 {
     out->keys = gOotSave.dungeonItems[def->id].maxKeys;
     out->fairies = 0;
+    out->map = gOotSave.dungeonItems[def->id].map;
+    out->compass = gOotSave.dungeonItems[def->id].compass;
     if (def->id == SCE_OOT_INSIDE_GANON_CASTLE)
         out->bossKey = gOotSave.dungeonItems[SCE_OOT_GANON_TOWER].bossKey;
     else
@@ -166,6 +169,8 @@ static void dungeonDataMm(DungeonData* out, const DungeonDef* def)
     out->keys = gMmSave.inventory.dungeonItems[def->id].maxKeys;
     out->bossKey = gMmSave.inventory.dungeonItems[def->id].bossKey;
     out->fairies = gMmSave.inventory.strayFairies[def->id];
+    out->map = gMmSave.inventory.dungeonItems[def->id].map;
+    out->compass = gMmSave.inventory.dungeonItems[def->id].compass;
 }
 
 static void printDungeonData(GameState_Play* play, int base, int index)
@@ -180,33 +185,67 @@ static void printDungeonData(GameState_Play* play, int base, int index)
 
     OPEN_DISPS(play->gs.gfx);
     def = gDungeonDefs + base + index;
-    if (def->flags & DD_MM)
-        dungeonDataMm(&data, def);
-    else
-        dungeonDataOot(&data, def);
     y = 66.f + 12 * index;
     gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, 255, 255, 255, 255);
     printStr(play, def->name, 46.f, y);
-    if (def->flags & DD_MAP_COMPASS)
+    if (def->flags & DD_MISC)
     {
-        comboDrawBlit2D(&POLY_XLU_DISP, 0x06000000 | CUSTOM_KEEP_SMALL_ICON_MAP, 12, 12, 150.f, y, 1.f);
-        comboDrawBlit2D(&POLY_XLU_DISP, 0x06000000 | CUSTOM_KEEP_SMALL_ICON_COMPASS, 12, 12, 162.f, y, 1.f);
+        switch (def->id)
+        {
+        case 0:
+            /* Town Fairy */
+            color4(&r, &g, &b, &a, kFairyColors[4]);
+            gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, r, g, b, a);
+            comboDrawBlit2D(&POLY_XLU_DISP, 0x06000000 | CUSTOM_KEEP_SMALL_ICON_FAIRY, 12, 12, 220.f, y, 1.f);
+            printNumColored(play, !!MM_GET_EVENT_WEEK(EV_MM_WEEK_TOWN_FAIRY), 1, 2, 232.f, y);
+            break;
+        case 1:
+            /* OoT skulls */
+            gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, 255, 255, 0, 255);
+            comboDrawBlit2D(&POLY_XLU_DISP, 0x06000000 | CUSTOM_KEEP_SMALL_ICON_SKULL, 12, 12, 150.f, y, 1.f);
+            printNumColored(play, gOotSave.goldTokens, 100, 3, 162.f, y);
+
+            /* MM skulls - swamp */
+            gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, 0, 255, 0, 255);
+            comboDrawBlit2D(&POLY_XLU_DISP, 0x06000000 | CUSTOM_KEEP_SMALL_ICON_SKULL, 12, 12, 190.f, y, 1.f);
+            printNumColored(play, gMmSave.skullCountSwamp, 30, 2, 202.f, y);
+
+            /* MM skulls - ocean */
+            gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, 0, 0, 255, 255);
+            comboDrawBlit2D(&POLY_XLU_DISP, 0x06000000 | CUSTOM_KEEP_SMALL_ICON_SKULL, 12, 12, 230.f, y, 1.f);
+            printNumColored(play, gMmSave.skullCountOcean, 30, 2, 242.f, y);
+            break;
+        }
     }
-    if (def->flags & DD_BOSS_KEY)
+    else
     {
-        comboDrawBlit2D(&POLY_XLU_DISP, 0x06000000 | CUSTOM_KEEP_SMALL_ICON_BOSS_KEY, 12, 12, 174.f, y, 1.f);
-    }
-    if (def->maxKeys)
-    {
-        comboDrawBlit2D(&POLY_XLU_DISP, 0x06000000 | CUSTOM_KEEP_SMALL_ICON_KEY, 12, 12, 190.f, y, 1.f);
-        printNumColored(play, data.keys, def->maxKeys, 1, 202.f, y);
-    }
-    if (def->flags & DD_FAIRIES)
-    {
-        color4(&r, &g, &b, &a, kFairyColors[def->id]);
-        gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, r, g, b, a);
-        comboDrawBlit2D(&POLY_XLU_DISP, 0x06000000 | CUSTOM_KEEP_SMALL_ICON_FAIRY, 12, 12, 220.f, y, 1.f);
-        printNumColored(play, data.fairies, 15, 2, 232.f, y);
+        if (def->flags & DD_MM)
+            dungeonDataMm(&data, def);
+        else
+            dungeonDataOot(&data, def);
+        if (def->flags & DD_MAP_COMPASS)
+        {
+            if (data.map)
+                comboDrawBlit2D(&POLY_XLU_DISP, 0x06000000 | CUSTOM_KEEP_SMALL_ICON_MAP, 12, 12, 150.f, y, 1.f);
+            if (data.compass)
+                comboDrawBlit2D(&POLY_XLU_DISP, 0x06000000 | CUSTOM_KEEP_SMALL_ICON_COMPASS, 12, 12, 162.f, y, 1.f);
+        }
+        if (def->flags & DD_BOSS_KEY && data.bossKey)
+        {
+            comboDrawBlit2D(&POLY_XLU_DISP, 0x06000000 | CUSTOM_KEEP_SMALL_ICON_BOSS_KEY, 12, 12, 174.f, y, 1.f);
+        }
+        if (def->maxKeys)
+        {
+            comboDrawBlit2D(&POLY_XLU_DISP, 0x06000000 | CUSTOM_KEEP_SMALL_ICON_KEY, 12, 12, 190.f, y, 1.f);
+            printNumColored(play, data.keys, def->maxKeys, 1, 202.f, y);
+        }
+        if (def->flags & DD_FAIRIES)
+        {
+            color4(&r, &g, &b, &a, kFairyColors[def->id]);
+            gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, r, g, b, a);
+            comboDrawBlit2D(&POLY_XLU_DISP, 0x06000000 | CUSTOM_KEEP_SMALL_ICON_FAIRY, 12, 12, 220.f, y, 1.f);
+            printNumColored(play, data.fairies, 15, 2, 232.f, y);
+        }
     }
     CLOSE_DISPS();
 }
@@ -242,6 +281,12 @@ void comboMenuKeys(GameState_Play* play)
             PlaySound(0x4809);
             delay = 6;
         }
+    }
+
+    /* Handle fire temple keys */
+    if (comboConfig(CFG_SMALL_KEY_SHUFFLE))
+    {
+        gDungeonDefs[4].maxKeys = 8;
     }
 
     OPEN_DISPS(play->gs.gfx);
