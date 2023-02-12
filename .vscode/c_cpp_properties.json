@@ -7,7 +7,8 @@
       "${workspaceFolder}/include"
     ],
     "myDefines": [
-      "_LANGUAGE_C=1"
+      "_LANGUAGE_C=1",
+      "F3DEX_GBI_2 = 1"
     ]
   },
   "configurations": [

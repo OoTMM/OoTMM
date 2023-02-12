@@ -65,10 +65,162 @@ static void color4(u8* r, u8* g, u8* b, u8* a, u32 color)
     *a = color & 0xff;
 }
 
+static Vtx gVtxBuffer[1024];
+static int gVtxBufferIndex;
+
+static Vtx* vtxAlloc(GameState_Play* play, int count)
+{
+    Vtx* v;
+
+    v = gVtxBuffer + gVtxBufferIndex;
+    gVtxBufferIndex = (gVtxBufferIndex + count) % ARRAY_SIZE(gVtxBuffer);
+
+    return v;
+}
+
+static void drawTexIA4(GameState_Play* play, u32 texAddr, int w, int h, float x, float y)
+{
+    Vtx* v;
+    int xx[4];
+    int yy[4];
+    int txx[4];
+    int tyy[4];
+
+    v = vtxAlloc(play, 4);
+
+    xx[0] = x;
+    xx[1] = x + w;
+    xx[2] = x + w;
+    xx[3] = x;
+
+    yy[0] = y;
+    yy[1] = y;
+    yy[2] = y - h;
+    yy[3] = y - h;
+
+    txx[0] = 0;
+    txx[1] = w * 32;
+    txx[2] = w * 32;
+    txx[3] = 0;
+
+    tyy[0] = 0;
+    tyy[1] = 0;
+    tyy[2] = h * 32;
+    tyy[3] = h * 32;
+
+    for (int i = 0; i < 4; ++i)
+    {
+        v[i].v.ob[0] = xx[i];
+        v[i].v.ob[1] = yy[i];
+        v[i].v.ob[2] = 0;
+        v[i].v.tc[0] = txx[i];
+        v[i].v.tc[1] = tyy[i];
+        v[i].v.flag = 0;
+        v[i].v.cn[0] = 0xff;
+        v[i].v.cn[1] = 0xff;
+        v[i].v.cn[2] = 0xff;
+        v[i].v.cn[3] = 0xff;
+    }
+
+    OPEN_DISPS(play->gs.gfx);
+    gDPPipeSync(POLY_OPA_DISP++);
+    gSPVertex(POLY_OPA_DISP++, (u32)v & 0xffffffff, 4, 0);
+    gDPTileSync(POLY_OPA_DISP++);
+    gDPLoadTextureTile_4b(
+        POLY_OPA_DISP++,
+        texAddr,
+        G_IM_FMT_IA,
+        w, h,
+        0, 0,
+        w - 1, h - 1,
+        0,
+        G_TX_WRAP, G_TX_WRAP,
+        G_TX_NOMASK, G_TX_NOMASK,
+        G_TX_NOLOD, G_TX_NOLOD
+    );
+    gDPTileSync(POLY_OPA_DISP++);
+    gSP2Triangles(
+        POLY_OPA_DISP++,
+        0, 2, 1, 0,
+        0, 3, 2, 0
+    );
+    CLOSE_DISPS();
+}
+
+static void drawTexRGBA32(GameState_Play* play, u32 texAddr, int w, int h, float x, float y)
+{
+    Vtx* v;
+    int xx[4];
+    int yy[4];
+    int txx[4];
+    int tyy[4];
+
+    v = vtxAlloc(play, 4);
+
+    xx[0] = x;
+    xx[1] = x + w;
+    xx[2] = x + w;
+    xx[3] = x;
+
+    yy[0] = y;
+    yy[1] = y;
+    yy[2] = y - h;
+    yy[3] = y - h;
+
+    txx[0] = 0;
+    txx[1] = w * 32;
+    txx[2] = w * 32;
+    txx[3] = 0;
+
+    tyy[0] = 0;
+    tyy[1] = 0;
+    tyy[2] = h * 32;
+    tyy[3] = h * 32;
+
+    for (int i = 0; i < 4; ++i)
+    {
+        v[i].v.ob[0] = xx[i];
+        v[i].v.ob[1] = yy[i];
+        v[i].v.ob[2] = 0;
+        v[i].v.tc[0] = txx[i];
+        v[i].v.tc[1] = tyy[i];
+        v[i].v.flag = 0;
+        v[i].v.cn[0] = 0xff;
+        v[i].v.cn[1] = 0xff;
+        v[i].v.cn[2] = 0xff;
+        v[i].v.cn[3] = 0xff;
+    }
+
+    OPEN_DISPS(play->gs.gfx);
+    gDPPipeSync(POLY_OPA_DISP++);
+    gSPVertex(POLY_OPA_DISP++, (u32)v & 0xffffffff, 4, 0);
+    gDPTileSync(POLY_OPA_DISP++);
+    gDPLoadTextureTile(
+        POLY_OPA_DISP++,
+        texAddr,
+        G_IM_FMT_RGBA,
+        G_IM_SIZ_32b,
+        w, h,
+        0, 0,
+        w - 1, h - 1,
+        0,
+        G_TX_WRAP, G_TX_WRAP,
+        G_TX_NOMASK, G_TX_NOMASK,
+        G_TX_NOLOD, G_TX_NOLOD
+    );
+    gDPTileSync(POLY_OPA_DISP++);
+    gSP2Triangles(
+        POLY_OPA_DISP++,
+        0, 2, 1, 0,
+        0, 3, 2, 0
+    );
+    CLOSE_DISPS();
+}
+
 static void printChar(GameState_Play* play, char c, float x, float y)
 {
     OPEN_DISPS(play->gs.gfx);
-    comboDrawBlit2D_IA4(&POLY_XLU_DISP, 0x06000000 | (CUSTOM_KEEP_FONT + (c - ' ') * 0x30), 8, 12, x, y, 1.f);
+    drawTexIA4(play, 0x06000000 | (CUSTOM_KEEP_FONT + (c - ' ') * 0x30), 8, 12, x, y);
     CLOSE_DISPS();
 }
 
@@ -177,6 +329,7 @@ static void printDungeonData(GameState_Play* play, int base, int index)
 {
     const DungeonDef* def;
     DungeonData data;
+    float x;
     float y;
     u8 r;
     u8 g;
@@ -185,9 +338,10 @@ static void printDungeonData(GameState_Play* play, int base, int index)
 
     OPEN_DISPS(play->gs.gfx);
     def = gDungeonDefs + base + index;
-    y = 66.f + 12 * index;
+    x = -110.f;
+    y = 54.f - 12 * index;
     gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, 255, 255, 255, 255);
-    printStr(play, def->name, 46.f, y);
+    printStr(play, def->name, x, y);
     if (def->flags & DD_MISC)
     {
         switch (def->id)
@@ -196,24 +350,24 @@ static void printDungeonData(GameState_Play* play, int base, int index)
             /* Town Fairy */
             color4(&r, &g, &b, &a, kFairyColors[4]);
             gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, r, g, b, a);
-            comboDrawBlit2D(&POLY_XLU_DISP, 0x06000000 | CUSTOM_KEEP_SMALL_ICON_FAIRY, 12, 12, 220.f, y, 1.f);
-            printNumColored(play, !!MM_GET_EVENT_WEEK(EV_MM_WEEK_TOWN_FAIRY), 1, 2, 232.f, y);
+            drawTexRGBA32(play, 0x06000000 | CUSTOM_KEEP_SMALL_ICON_FAIRY, 12, 12, x + 174.f, y);
+            printNumColored(play, !!MM_GET_EVENT_WEEK(EV_MM_WEEK_TOWN_FAIRY), 1, 2, x + 186.f, y);
             break;
         case 1:
             /* OoT skulls */
             gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, 255, 255, 0, 255);
-            comboDrawBlit2D(&POLY_XLU_DISP, 0x06000000 | CUSTOM_KEEP_SMALL_ICON_SKULL, 12, 12, 150.f, y, 1.f);
-            printNumColored(play, gOotSave.goldTokens, 100, 3, 162.f, y);
+            drawTexRGBA32(play, 0x06000000 | CUSTOM_KEEP_SMALL_ICON_SKULL, 12, 12, x + 104.f, y);
+            printNumColored(play, gOotSave.goldTokens, 100, 3, x + 116.f, y);
 
             /* MM skulls - swamp */
             gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, 0, 255, 0, 255);
-            comboDrawBlit2D(&POLY_XLU_DISP, 0x06000000 | CUSTOM_KEEP_SMALL_ICON_SKULL, 12, 12, 190.f, y, 1.f);
-            printNumColored(play, gMmSave.skullCountSwamp, 30, 2, 202.f, y);
+            drawTexRGBA32(play, 0x06000000 | CUSTOM_KEEP_SMALL_ICON_SKULL, 12, 12, x + 144.f, y);
+            printNumColored(play, gMmSave.skullCountSwamp, 30, 2, x + 156.f, y);
 
             /* MM skulls - ocean */
             gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, 0, 0, 255, 255);
-            comboDrawBlit2D(&POLY_XLU_DISP, 0x06000000 | CUSTOM_KEEP_SMALL_ICON_SKULL, 12, 12, 230.f, y, 1.f);
-            printNumColored(play, gMmSave.skullCountOcean, 30, 2, 242.f, y);
+            drawTexRGBA32(play, 0x06000000 | CUSTOM_KEEP_SMALL_ICON_SKULL, 12, 12, x + 184.f, y);
+            printNumColored(play, gMmSave.skullCountOcean, 30, 2, x + 196.f, y);
             break;
         }
     }
@@ -226,25 +380,25 @@ static void printDungeonData(GameState_Play* play, int base, int index)
         if (def->flags & DD_MAP_COMPASS)
         {
             if (data.map)
-                comboDrawBlit2D(&POLY_XLU_DISP, 0x06000000 | CUSTOM_KEEP_SMALL_ICON_MAP, 12, 12, 150.f, y, 1.f);
+                drawTexRGBA32(play, 0x06000000 | CUSTOM_KEEP_SMALL_ICON_MAP, 12, 12, x + 104.f, y);
             if (data.compass)
-                comboDrawBlit2D(&POLY_XLU_DISP, 0x06000000 | CUSTOM_KEEP_SMALL_ICON_COMPASS, 12, 12, 162.f, y, 1.f);
+                drawTexRGBA32(play, 0x06000000 | CUSTOM_KEEP_SMALL_ICON_COMPASS, 12, 12, x + 116.f, y);
         }
         if (def->flags & DD_BOSS_KEY && data.bossKey)
         {
-            comboDrawBlit2D(&POLY_XLU_DISP, 0x06000000 | CUSTOM_KEEP_SMALL_ICON_BOSS_KEY, 12, 12, 174.f, y, 1.f);
+            drawTexRGBA32(play, 0x06000000 | CUSTOM_KEEP_SMALL_ICON_BOSS_KEY, 12, 12, x + 128.f, y);
         }
         if (def->maxKeys)
         {
-            comboDrawBlit2D(&POLY_XLU_DISP, 0x06000000 | CUSTOM_KEEP_SMALL_ICON_KEY, 12, 12, 190.f, y, 1.f);
-            printNumColored(play, data.keys, def->maxKeys, 1, 202.f, y);
+            drawTexRGBA32(play, 0x06000000 | CUSTOM_KEEP_SMALL_ICON_KEY, 12, 12, x + 144.f, y);
+            printNumColored(play, data.keys, def->maxKeys, 1, x + 156.f, y);
         }
         if (def->flags & DD_FAIRIES)
         {
             color4(&r, &g, &b, &a, kFairyColors[def->id]);
             gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, r, g, b, a);
-            comboDrawBlit2D(&POLY_XLU_DISP, 0x06000000 | CUSTOM_KEEP_SMALL_ICON_FAIRY, 12, 12, 220.f, y, 1.f);
-            printNumColored(play, data.fairies, 15, 2, 232.f, y);
+            drawTexRGBA32(play, 0x06000000 | CUSTOM_KEEP_SMALL_ICON_FAIRY, 12, 12, x + 174.f, y);
+            printNumColored(play, data.fairies, 15, 2, x + 186.f, y);
         }
     }
     CLOSE_DISPS();
@@ -290,6 +444,7 @@ void comboMenuKeys(GameState_Play* play)
     }
 
     OPEN_DISPS(play->gs.gfx);
+    gSPSegment(POLY_OPA_DISP++, 0x06, gCustomKeep);
     gSPSegment(POLY_XLU_DISP++, 0x06, gCustomKeep);
     comboDrawInit2D(&POLY_XLU_DISP);
     for (int i = 0; i < 10; ++i)
