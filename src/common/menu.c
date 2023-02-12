@@ -298,7 +298,7 @@ static void printNumColored(GameState_Play* play, int num, int max, int digits, 
         b = 255;
     }
     OPEN_DISPS(play->gs.gfx);
-    gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, r, g, b, 255);
+    gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, r, g, b, 255);
     CLOSE_DISPS();
 
     printNum(play, num, digits, x, y);
@@ -340,7 +340,7 @@ static void printDungeonData(GameState_Play* play, int base, int index)
     def = gDungeonDefs + base + index;
     x = -110.f;
     y = 54.f - 12 * index;
-    gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, 255, 255, 255, 255);
+    gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 255, 255, 255, 255);
     printStr(play, def->name, x, y);
     if (def->flags & DD_MISC)
     {
@@ -349,23 +349,23 @@ static void printDungeonData(GameState_Play* play, int base, int index)
         case 0:
             /* Town Fairy */
             color4(&r, &g, &b, &a, kFairyColors[4]);
-            gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, r, g, b, a);
+            gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, r, g, b, a);
             drawTexRGBA32(play, 0x06000000 | CUSTOM_KEEP_SMALL_ICON_FAIRY, 12, 12, x + 174.f, y);
             printNumColored(play, !!MM_GET_EVENT_WEEK(EV_MM_WEEK_TOWN_FAIRY), 1, 2, x + 186.f, y);
             break;
         case 1:
             /* OoT skulls */
-            gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, 255, 255, 0, 255);
+            gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 255, 255, 0, 255);
             drawTexRGBA32(play, 0x06000000 | CUSTOM_KEEP_SMALL_ICON_SKULL, 12, 12, x + 104.f, y);
             printNumColored(play, gOotSave.goldTokens, 100, 3, x + 116.f, y);
 
             /* MM skulls - swamp */
-            gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, 0, 255, 0, 255);
+            gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 0, 255, 0, 255);
             drawTexRGBA32(play, 0x06000000 | CUSTOM_KEEP_SMALL_ICON_SKULL, 12, 12, x + 144.f, y);
             printNumColored(play, gMmSave.skullCountSwamp, 30, 2, x + 156.f, y);
 
             /* MM skulls - ocean */
-            gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, 0, 0, 255, 255);
+            gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 0, 0, 255, 255);
             drawTexRGBA32(play, 0x06000000 | CUSTOM_KEEP_SMALL_ICON_SKULL, 12, 12, x + 184.f, y);
             printNumColored(play, gMmSave.skullCountOcean, 30, 2, x + 196.f, y);
             break;
@@ -396,7 +396,7 @@ static void printDungeonData(GameState_Play* play, int base, int index)
         if (def->flags & DD_FAIRIES)
         {
             color4(&r, &g, &b, &a, kFairyColors[def->id]);
-            gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, r, g, b, a);
+            gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, r, g, b, a);
             drawTexRGBA32(play, 0x06000000 | CUSTOM_KEEP_SMALL_ICON_FAIRY, 12, 12, x + 174.f, y);
             printNumColored(play, data.fairies, 15, 2, x + 186.f, y);
         }
@@ -444,9 +444,8 @@ void comboMenuKeys(GameState_Play* play)
     }
 
     OPEN_DISPS(play->gs.gfx);
+    gDPSetCombineMode(POLY_OPA_DISP++, G_CC_MODULATEIA_PRIM, G_CC_MODULATEIA_PRIM);
     gSPSegment(POLY_OPA_DISP++, 0x06, gCustomKeep);
-    gSPSegment(POLY_XLU_DISP++, 0x06, gCustomKeep);
-    comboDrawInit2D(&POLY_XLU_DISP);
     for (int i = 0; i < 10; ++i)
         printDungeonData(play, cursor, i);
     CLOSE_DISPS();
