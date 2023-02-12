@@ -16,3 +16,20 @@ label.checkbox {
 input[type=file] {
   display: none;
 }
+
+input[type=checkbox] {
+  transition: border-color 200ms ease-in 0s, box-shadow 200ms ease-in 0s;
+}
+
+select {
+  transition: border-color 200ms ease-in 0s, box-shadow 200ms ease-in 0s;
+  font-size: 1.5rem;
+  height: 30px;
+  min-height: 30px;
+  border-radius: 2px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(90, 103, 116);
+  background-color: transparent;
+  position: relative;
+}
