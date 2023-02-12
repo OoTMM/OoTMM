@@ -1,13 +1,13 @@
-import React from "react";
+import React from 'react';
 
 const styles = {
   div: {
-    display: "flex",
-    "flex-direction": "column",
-    with: "100%",
+    display: 'flex',
+    'flex-direction': 'column',
+    with: '100%',
   },
   label: {
-    "margin-bottom": "8px",
+    'margin-bottom': '8px',
   },
 };
 

@@ -1,13 +1,13 @@
-import React from "react";
-import { SETTINGS } from "@ootmm/core";
+import React from 'react';
+import { SETTINGS } from '@ootmm/core';
 
-import { Dropdown } from "./Dropdown";
-import { Checkbox } from "./Checkbox";
+import { Dropdown } from './Dropdown';
+import { Checkbox } from './Checkbox';
 
 export const Settings = ({ category, settings, setSetting }) => {
   const settingsData = SETTINGS.filter((s) => s.category === category);
-  const enumList = settingsData.filter((x) => x.type == "enum");
-  const booleanList = settingsData.filter((x) => x.type == "boolean");
+  const enumList = settingsData.filter((x) => x.type == 'enum');
+  const booleanList = settingsData.filter((x) => x.type == 'boolean');
 
   return (
     <form className="settings">
