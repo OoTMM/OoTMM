@@ -12,22 +12,22 @@ export const Settings = ({ category, settings, setSetting }) => {
   return (
     <form className="settings">
       <div>
+        {booleanList.map((setting) => (
+          <Checkbox
+            key={setting.key}
+            label={setting.name}
+            checked={settings[setting.key]}
+            onChange={(v) => setSetting({ [setting.key]: v })}
+          />
+        ))}
+      </div>
+      <div>
         {enumList.map((setting) => (
           <Dropdown
             value={settings[setting.key]}
             key={setting.key}
             label={setting.name}
             options={setting.values}
-            onChange={(v) => setSetting({ [setting.key]: v })}
-          />
-        ))}
-      </div>
-      <div>
-        {booleanList.map((setting) => (
-          <Checkbox
-            key={setting.key}
-            label={setting.name}
-            checked={settings[setting.key]}
             onChange={(v) => setSetting({ [setting.key]: v })}
           />
         ))}
