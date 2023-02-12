@@ -35,6 +35,7 @@ void comboAddSmallKeyMm(u16 dungeonId)
     else
         keyCount++;
     gMmSave.inventory.dungeonKeys[dungeonId] = keyCount;
+    gMmSave.inventory.dungeonItems[dungeonId].maxKeys++;
 }
 
 void comboAddBossKeyMm(u16 dungeonId)

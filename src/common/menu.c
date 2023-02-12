@@ -3,8 +3,10 @@
 
 #define DD_OOT          0x00
 #define DD_MM           0x01
-#define DD_MAP_COMPASS  0x02
-#define DD_BOSS_KEY     0x04
+#define DD_MISC         0x02
+#define DD_MAP_COMPASS  0x04
+#define DD_BOSS_KEY     0x08
+#define DD_FAIRIES      0x10
 
 typedef struct
 {
@@ -18,11 +20,20 @@ DungeonDef;
 typedef struct
 {
     s8 keys;
+    u8 fairies;
     u8 map:1;
     u8 compass:1;
     u8 bossKey:1;
 }
 DungeonData;
+
+static u32 kFairyColors[] = {
+    0xba5084ff,
+    0x45852bff,
+    0x7f65ccff,
+    0xc2c164ff,
+    0xbc702dff,
+};
 
 static DungeonDef gDungeonDefs[] = {
     { "Deku",           SCE_OOT_INSIDE_DEKU_TREE,       DD_OOT | DD_MAP_COMPASS, 0 },
@@ -38,11 +49,20 @@ static DungeonDef gDungeonDefs[] = {
     { "Hideout",        SCE_OOT_THIEVES_HIDEOUT,        DD_OOT, 4 },
     { "GTG",            SCE_OOT_GERUDO_TRAINING_GROUND, DD_OOT, 9 },
     { "Ganon",          SCE_OOT_INSIDE_GANON_CASTLE,    DD_OOT | DD_MAP_COMPASS | DD_BOSS_KEY, 2 },
-    { "Woodfall",       0,                              DD_MM  | DD_MAP_COMPASS | DD_BOSS_KEY,  0 },
-    { "Snowhead",       1,                              DD_MM  | DD_MAP_COMPASS | DD_BOSS_KEY,  0 },
-    { "Great Bay",      2,                              DD_MM  | DD_MAP_COMPASS | DD_BOSS_KEY,  0 },
-    { "Stone Tower",    3,                              DD_MM  | DD_MAP_COMPASS | DD_BOSS_KEY,  0 },
+    { "Woodfall",       0,                              DD_MM  | DD_MAP_COMPASS | DD_BOSS_KEY | DD_FAIRIES, 1 },
+    { "Snowhead",       1,                              DD_MM  | DD_MAP_COMPASS | DD_BOSS_KEY | DD_FAIRIES, 3 },
+    { "Great Bay",      2,                              DD_MM  | DD_MAP_COMPASS | DD_BOSS_KEY | DD_FAIRIES, 1 },
+    { "Stone Tower",    3,                              DD_MM  | DD_MAP_COMPASS | DD_BOSS_KEY | DD_FAIRIES, 4 },
+    { "Misc.",         -1,                              DD_MISC, 0 },
 };
+
+static void color4(u8* r, u8* g, u8* b, u8* a, u32 color)
+{
+    *r = (color >> 24) & 0xff;
+    *g = (color >> 16) & 0xff;
+    *b = (color >> 8) & 0xff;
+    *a = color & 0xff;
+}
 
 static void printChar(GameState_Play* play, char c, float x, float y)
 {
@@ -71,9 +91,70 @@ static void printDigit(GameState_Play* play, int digit, float x, float y)
     printChar(play, '0' + digit, x, y);
 }
 
+static void printNum(GameState_Play* play, int num, int digits, float x, float y)
+{
+    int d;
+    int denum;
+    int zero;
+
+    if (num == 0)
+    {
+        printDigit(play, 0, x + 8.f * (digits - 1), y);
+        return;
+    }
+
+    denum = 1;
+    for (int i = 1; i < digits; ++i)
+        denum *= 10;
+    zero = 0;
+    while (denum)
+    {
+        d = (num / denum) % 10;
+        if (d || zero)
+        {
+            printDigit(play, d, x, y);
+            zero = 1;
+        }
+        denum /= 10;
+        x += 8.f;
+    }
+}
+
+static void printNumColored(GameState_Play* play, int num, int max, int digits, float x, float y)
+{
+    u8 r;
+    u8 g;
+    u8 b;
+
+    if (num <= 0)
+    {
+        r = 127;
+        g = 127;
+        b = 127;
+    }
+    else if (num >= max)
+    {
+        r = 200;
+        g = 100;
+        b = 100;
+    }
+    else
+    {
+        r = 255;
+        g = 255;
+        b = 255;
+    }
+    OPEN_DISPS(play->gs.gfx);
+    gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, r, g, b, 255);
+    CLOSE_DISPS();
+
+    printNum(play, num, digits, x, y);
+}
+
 static void dungeonDataOot(DungeonData* out, const DungeonDef* def)
 {
     out->keys = gOotSave.dungeonItems[def->id].maxKeys;
+    out->fairies = 0;
     if (def->id == SCE_OOT_INSIDE_GANON_CASTLE)
         out->bossKey = gOotSave.dungeonItems[SCE_OOT_GANON_TOWER].bossKey;
     else
@@ -82,7 +163,9 @@ static void dungeonDataOot(DungeonData* out, const DungeonDef* def)
 
 static void dungeonDataMm(DungeonData* out, const DungeonDef* def)
 {
-    out->keys = 0;
+    out->keys = gMmSave.inventory.dungeonItems[def->id].maxKeys;
+    out->bossKey = gMmSave.inventory.dungeonItems[def->id].bossKey;
+    out->fairies = gMmSave.inventory.strayFairies[def->id];
 }
 
 static void printDungeonData(GameState_Play* play, int base, int index)
@@ -90,6 +173,10 @@ static void printDungeonData(GameState_Play* play, int base, int index)
     const DungeonDef* def;
     DungeonData data;
     float y;
+    u8 r;
+    u8 g;
+    u8 b;
+    u8 a;
 
     OPEN_DISPS(play->gs.gfx);
     def = gDungeonDefs + base + index;
@@ -98,6 +185,7 @@ static void printDungeonData(GameState_Play* play, int base, int index)
     else
         dungeonDataOot(&data, def);
     y = 66.f + 12 * index;
+    gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, 255, 255, 255, 255);
     printStr(play, def->name, 46.f, y);
     if (def->flags & DD_MAP_COMPASS)
     {
@@ -111,7 +199,14 @@ static void printDungeonData(GameState_Play* play, int base, int index)
     if (def->maxKeys)
     {
         comboDrawBlit2D(&POLY_XLU_DISP, 0x06000000 | CUSTOM_KEEP_SMALL_ICON_KEY, 12, 12, 190.f, y, 1.f);
-        printDigit(play, data.keys, 202.f, y);
+        printNumColored(play, data.keys, def->maxKeys, 1, 202.f, y);
+    }
+    if (def->flags & DD_FAIRIES)
+    {
+        color4(&r, &g, &b, &a, kFairyColors[def->id]);
+        gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, r, g, b, a);
+        comboDrawBlit2D(&POLY_XLU_DISP, 0x06000000 | CUSTOM_KEEP_SMALL_ICON_FAIRY, 12, 12, 220.f, y, 1.f);
+        printNumColored(play, data.fairies, 15, 2, 232.f, y);
     }
     CLOSE_DISPS();
 }
