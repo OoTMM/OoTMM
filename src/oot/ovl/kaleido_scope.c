@@ -108,7 +108,11 @@ static void KaleidoScope_HandleMapDungeonMenu(GameState_Play* play, void* unk, u
     }
 
     if (isKeysMenu)
-        comboMenuKeys(play, onMenu);
+    {
+        if (onMenu)
+            comboMenuKeysUpdate(play);
+        comboMenuKeysDraw(play);
+    }
     else
     {
         handler = OverlayAddr(overlayAddr);

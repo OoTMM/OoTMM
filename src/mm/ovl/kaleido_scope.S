@@ -12,3 +12,22 @@ PATCH_START 0x8081c674
   j KaleidoScope_AfterSetCutsorColor_Trampoline
    nop
 PATCH_END
+
+/* Relocs */
+PATCH_START 0x8082cea4
+.int 0
+.int 0
+PATCH_END
+
+PATCH_START 0x8082cf50
+.int 0
+.int 0
+PATCH_END
+
+PATCH_START 0x8082d8f8
+.int 0
+PATCH_END
+
+PATCH_START 0x8082d8fc
+.int 0
+PATCH_END

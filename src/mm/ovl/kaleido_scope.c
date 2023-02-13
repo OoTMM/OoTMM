@@ -43,3 +43,73 @@ void KaleidoScope_AfterSetCutsorColor(GameState_Play* play)
         PlaySound(0x4809);
     }
 }
+
+static int isKeysMenu;
+
+typedef void (*KaleidoScopeHandler)(GameState_Play*);
+
+static void KaleidoScope_DrawMapDungeonMenu(GameState_Play* play, u32 overlayAddr)
+{
+    KaleidoScopeHandler handler;
+
+    if (isKeysMenu)
+    {
+        comboMenuKeysDraw(play);
+    }
+    else
+    {
+        handler = OverlayAddr(overlayAddr);
+        handler(play);
+    }
+}
+
+static void KaleidoScope_UpdateMapDungeonMenu(GameState_Play* play, u32 overlayAddr)
+{
+    KaleidoScopeHandler handler;
+
+    if (play->gs.input[0].pressed.buttons & (L_TRIG | U_CBUTTONS))
+    {
+        isKeysMenu = !isKeysMenu;
+        PlaySound(0x4809);
+    }
+
+    if (isKeysMenu)
+    {
+        comboMenuKeysUpdate(play);
+    }
+    else
+    {
+        handler = OverlayAddr(overlayAddr);
+        handler(play);
+    }
+}
+
+static void KaleidoScope_DrawMapMenu(GameState_Play *play)
+{
+    KaleidoScope_DrawMapDungeonMenu(play, 0x8081e7d8);
+}
+
+PATCH_CALL(0x80822a14, KaleidoScope_DrawMapMenu);
+PATCH_CALL(0x808230e4, KaleidoScope_DrawMapMenu);
+
+static void KaleidoScope_DrawDungeonMenu(GameState_Play *play)
+{
+    KaleidoScope_DrawMapDungeonMenu(play, 0x8081d6dc);
+}
+
+PATCH_CALL(0x808229cc, KaleidoScope_DrawDungeonMenu);
+PATCH_CALL(0x80822f34, KaleidoScope_DrawDungeonMenu);
+
+static void KaleidoScope_UpdateMapMenu(GameState_Play* play)
+{
+    KaleidoScope_UpdateMapDungeonMenu(play, 0x8081fb1c);
+}
+
+PATCH_CALL(0x8082ae00, KaleidoScope_UpdateMapMenu);
+
+static void KaleidoScope_UpdateDungeonMenu(GameState_Play* play)
+{
+    KaleidoScope_UpdateMapDungeonMenu(play, 0x8081e118);
+}
+
+PATCH_CALL(0x8082adf0, KaleidoScope_UpdateDungeonMenu);

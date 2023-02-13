@@ -319,7 +319,8 @@ extern s32 gLastEntrance;
 void comboTriggerWarp(GameState_Play* play, int index);
 
 /* Menu */
-void comboMenuKeys(GameState_Play* play, int onMenu);
+void comboMenuKeysUpdate(GameState_Play* play);
+void comboMenuKeysDraw(GameState_Play* play);
 
 #else
 # include <combo/asm.h>

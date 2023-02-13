@@ -404,9 +404,10 @@ static void printDungeonData(GameState_Play* play, int base, int index)
     CLOSE_DISPS();
 }
 
-void comboMenuKeys(GameState_Play* play, int onMenu)
+static int menuCursor;
+
+void comboMenuKeysUpdate(GameState_Play* play)
 {
-    static int cursor;
     static int delay;
     int change;
 
@@ -415,19 +416,19 @@ void comboMenuKeys(GameState_Play* play, int onMenu)
     {
         delay--;
     }
-    else if (onMenu)
+    else
     {
         float stickY = play->gs.input[0].current.y / 128.f;
-        if (stickY > 0.5f && cursor > 0)
+        if (stickY > 0.5f && menuCursor > 0)
         {
             change = 1;
-            cursor--;
+            menuCursor--;
         }
 
-        if (stickY < -0.5f && cursor < ARRAY_SIZE(gDungeonDefs) - 10)
+        if (stickY < -0.5f && menuCursor < ARRAY_SIZE(gDungeonDefs) - 10)
         {
             change = 1;
-            cursor++;
+            menuCursor++;
         }
 
         if (change)
@@ -436,7 +437,10 @@ void comboMenuKeys(GameState_Play* play, int onMenu)
             delay = 6;
         }
     }
+}
 
+void comboMenuKeysDraw(GameState_Play* play)
+{
     /* Handle fire temple keys */
     if (comboConfig(CFG_SMALL_KEY_SHUFFLE))
     {
@@ -447,6 +451,6 @@ void comboMenuKeys(GameState_Play* play, int onMenu)
     gDPSetCombineMode(POLY_OPA_DISP++, G_CC_MODULATEIA_PRIM, G_CC_MODULATEIA_PRIM);
     gSPSegment(POLY_OPA_DISP++, 0x06, gCustomKeep);
     for (int i = 0; i < 10; ++i)
-        printDungeonData(play, cursor, i);
+        printDungeonData(play, menuCursor, i);
     CLOSE_DISPS();
 }
