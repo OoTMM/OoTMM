@@ -93,11 +93,12 @@ void KaleidoSetCursorColor(GameState_Play* play)
 
 static int isKeysMenu;
 
-typedef void (*KaleidoScopeHandler)(GameState_Play*, void*);
+typedef void (*KaleidoScopeHandler)(GameState_Play*);
+typedef void (*KaleidoScopeHandler2)(GameState_Play*, void*);
 
 static void KaleidoScope_HandleMapDungeonMenu(GameState_Play* play, void* unk, u32 overlayAddr)
 {
-    KaleidoScopeHandler handler;
+    KaleidoScopeHandler2 handler;
     int onMenu;
 
     onMenu = play->pauseCtx.screen_idx == 1;
@@ -135,3 +136,17 @@ static void KaleidoScope_HandleDungeonMenu(GameState_Play* play, void* unk)
 
 PATCH_CALL(0x808207e4, KaleidoScope_HandleDungeonMenu);
 PATCH_CALL(0x80820ac4, KaleidoScope_HandleDungeonMenu);
+
+static void KaleidoScope_HandleDungeonChests(GameState_Play* play)
+{
+    KaleidoScopeHandler handler;
+
+    if (!isKeysMenu)
+    {
+        handler = OverlayAddr(0x808292e8);
+        handler(play);
+    }
+}
+
+PATCH_CALL(0x80820840, KaleidoScope_HandleDungeonChests);
+PATCH_CALL(0x80820b38, KaleidoScope_HandleDungeonChests);
