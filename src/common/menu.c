@@ -404,7 +404,7 @@ static void printDungeonData(GameState_Play* play, int base, int index)
     CLOSE_DISPS();
 }
 
-void comboMenuKeys(GameState_Play* play)
+void comboMenuKeys(GameState_Play* play, int onMenu)
 {
     static int cursor;
     static int delay;
@@ -415,7 +415,7 @@ void comboMenuKeys(GameState_Play* play)
     {
         delay--;
     }
-    else
+    else if (onMenu)
     {
         float stickY = play->gs.input[0].current.y / 128.f;
         if (stickY > 0.5f && cursor > 0)
