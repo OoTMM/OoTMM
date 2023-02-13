@@ -78,6 +78,50 @@ static Vtx* vtxAlloc(GameState_Play* play, int count)
     return v;
 }
 
+static void drawBackground(GameState_Play* play, float x, float y, float w, float h)
+{
+    Vtx* v;
+
+    int xx[4];
+    int yy[4];
+
+    v = vtxAlloc(play, 4);
+
+    xx[0] = x;
+    xx[1] = x + w;
+    xx[2] = x + w;
+    xx[3] = x;
+
+    yy[0] = y;
+    yy[1] = y;
+    yy[2] = y - h;
+    yy[3] = y - h;
+
+    for (int i = 0; i < 4; ++i)
+    {
+        v[i].v.ob[0] = xx[i];
+        v[i].v.ob[1] = yy[i];
+        v[i].v.ob[2] = 0;
+        v[i].v.tc[0] = 0;
+        v[i].v.tc[1] = 0;
+        v[i].v.flag = 0;
+        v[i].v.cn[0] = 0x00;
+        v[i].v.cn[1] = 0x00;
+        v[i].v.cn[2] = 0x00;
+        v[i].v.cn[3] = 0xff;
+    }
+
+    OPEN_DISPS(play->gs.gfx);
+    gDPPipeSync(POLY_OPA_DISP++);
+    gSPVertex(POLY_OPA_DISP++, (u32)v & 0xffffffff, 4, 0);
+    gSP2Triangles(
+        POLY_OPA_DISP++,
+        0, 2, 1, 0,
+        0, 3, 2, 0
+    );
+    CLOSE_DISPS();
+}
+
 static void drawTexIA4(GameState_Play* play, u32 texAddr, int w, int h, float x, float y)
 {
     Vtx* v;
@@ -434,7 +478,7 @@ void comboMenuKeysUpdate(GameState_Play* play)
         if (change)
         {
             PlaySound(0x4809);
-            delay = 6;
+            delay = 3;
         }
     }
 }
@@ -448,6 +492,9 @@ void comboMenuKeysDraw(GameState_Play* play)
     }
 
     OPEN_DISPS(play->gs.gfx);
+    gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 0, 0, 0, 255);
+    gDPSetCombineMode(POLY_OPA_DISP++, G_CC_PRIMITIVE, G_CC_PRIMITIVE);
+    drawBackground(play, -110.f, 59.f, 217.f, 128.f);
     gDPSetCombineMode(POLY_OPA_DISP++, G_CC_MODULATEIA_PRIM, G_CC_MODULATEIA_PRIM);
     gSPSegment(POLY_OPA_DISP++, 0x06, gCustomKeep);
     for (int i = 0; i < 10; ++i)
