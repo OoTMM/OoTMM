@@ -5,9 +5,9 @@ import { Progress } from './Progress';
 import { Result } from './Result';
 
 export const App = () => {
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
   const [isGenerating, setIsGenerating] = useState(false);
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState('');
   const [result, setResult] = useState(null);
 
   const generate = async ({ roms, settings, seed }) => {
@@ -32,22 +32,29 @@ export const App = () => {
         worker.terminate();
       }
     };
-    setError("");
+    setError('');
     setIsGenerating(true);
-    setMessage("Generating");
-    worker.postMessage({ type: 'start', params: { oot: ootBuffer, mm: mmBuffer, opts: { settings, seed } }});
+    setMessage('Generating');
+    worker.postMessage({
+      type: 'start',
+      params: { oot: ootBuffer, mm: mmBuffer, opts: { settings, seed } },
+    });
   };
 
   return (
     <div>
-      <h1 className="generator-title">OoTMM Web Generator</h1>
-      <br/>
+      <h1>OoTMM Web Generator</h1>
+      <br />
       <p>Version: {process.env.VERSION}</p>
-      <br/>
-      <br/>
-      {result && <Result rom={result.rom} log={result.log} hash={result.hash}/>}
-      {!result && isGenerating && <Progress message={message}/>}
-      {!result && !isGenerating && <Generator error={error} onGenerate={generate}/>}
+      <br />
+      <br />
+      {result && (
+        <Result rom={result.rom} log={result.log} hash={result.hash} />
+      )}
+      {!result && isGenerating && <Progress message={message} />}
+      {!result && !isGenerating && (
+        <Generator error={error} onGenerate={generate} />
+      )}
     </div>
   );
 };

@@ -8,17 +8,17 @@ label > * {
   font-weight: initial;
 }
 
-label.checkbox {
-  flex-direction: row;
-  align-items: baseline;
-}
-
 input[type=file] {
   display: none;
 }
 
 input[type=checkbox] {
-  transition: border-color 200ms ease-in 0s, box-shadow 200ms ease-in 0s;
+  height: 20px;
+  width: 20px;
+  min-width: 20px;
+  margin-right: 6px;
+  opacity: 0.5;
+  transition: all 200ms ease-in 0s;
 }
 
 select {
