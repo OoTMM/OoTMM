@@ -84,6 +84,7 @@
 #define EV_MM_WEEK_PRINCESS_RETURNED            MM_EV(23,   5)
 #define EV_MM_WEEK_BEAVER_RACE_ALT              MM_EV(24,   2)
 #define EV_MM_WEEK_PAMELA_FATHER                MM_EV(75,   5)
+#define EV_MM_WEEK_TOWN_FAIRY                   MM_EV(8,    7)
 
 #define EV_MM_WEEK_WOODFALL_TEMPLE_RISE         MM_EV(20,   0)
 #define EV_MM_WEEK_DUNGEON_WF                   MM_EV(20,   1)

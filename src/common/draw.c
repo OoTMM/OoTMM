@@ -39,38 +39,35 @@ void comboDrawGI(GameState_Play* play, Actor* actor, int gi, int flags)
     comboDrawObject(play, actor, giEntry->objectId, giEntry->shaderId, flags);
 }
 
-void comboDrawInit2D(GameState_Play* play)
+void comboDrawInit2D(Gfx** dl)
 {
-    OPEN_DISPS(play->gs.gfx);
-    gSPLoadGeometryMode(OVERLAY_DISP++, 0);
-    gDPSetAlphaDither(OVERLAY_DISP++, G_AD_DISABLE);
-    gDPSetColorDither(OVERLAY_DISP++, G_CD_DISABLE);
-    gDPSetAlphaCompare(OVERLAY_DISP++, G_AC_NONE);
-    gDPSetDepthSource(OVERLAY_DISP++, G_ZS_PRIM);
-    gDPSetCombineMode(OVERLAY_DISP++, G_CC_MODULATEIA_PRIM, G_CC_MODULATEIA_PRIM);
-    gDPSetCombineKey(OVERLAY_DISP++, G_CK_NONE);
-    gDPSetTextureConvert(OVERLAY_DISP++, G_TC_FILT);
-    gDPSetTextureDetail(OVERLAY_DISP++, G_TD_CLAMP);
-    gDPSetTexturePersp(OVERLAY_DISP++, G_TP_NONE);
-    gDPSetTextureLOD(OVERLAY_DISP++, G_TL_TILE);
-    gDPSetTextureLUT(OVERLAY_DISP++, G_TT_NONE);
-    gDPPipelineMode(OVERLAY_DISP++, G_PM_NPRIMITIVE);
-    gDPSetCycleType(OVERLAY_DISP++, G_CYC_1CYCLE);
-    gDPSetRenderMode(OVERLAY_DISP++, G_RM_XLU_SURF, G_RM_XLU_SURF2);
-    gDPSetTextureFilter(OVERLAY_DISP++, G_TF_BILERP);
-    CLOSE_DISPS();
+    gSPLoadGeometryMode((*dl)++, 0);
+    gDPSetAlphaDither((*dl)++, G_AD_DISABLE);
+    gDPSetColorDither((*dl)++, G_CD_DISABLE);
+    gDPSetAlphaCompare((*dl)++, G_AC_NONE);
+    gDPSetDepthSource((*dl)++, G_ZS_PRIM);
+    gDPSetCombineMode((*dl)++, G_CC_MODULATEIA_PRIM, G_CC_MODULATEIA_PRIM);
+    gDPSetCombineKey((*dl)++, G_CK_NONE);
+    gDPSetTextureConvert((*dl)++, G_TC_FILT);
+    gDPSetTextureDetail((*dl)++, G_TD_CLAMP);
+    gDPSetTexturePersp((*dl)++, G_TP_NONE);
+    gDPSetTextureLOD((*dl)++, G_TL_TILE);
+    gDPSetTextureLUT((*dl)++, G_TT_NONE);
+    gDPPipelineMode((*dl)++, G_PM_NPRIMITIVE);
+    gDPSetCycleType((*dl)++, G_CYC_1CYCLE);
+    gDPSetRenderMode((*dl)++, G_RM_XLU_SURF, G_RM_XLU_SURF2);
+    gDPSetTextureFilter((*dl)++, G_TF_BILERP);
 }
 
-void comboDrawBlit2D(GameState_Play* play, u32 segAddr, int w, int h, float x, float y, float scale)
+void comboDrawBlit2D(Gfx** dl, u32 segAddr, int w, int h, float x, float y, float scale)
 {
     float rScale;
 
     rScale = 1.f / scale;
-    OPEN_DISPS(play->gs.gfx);
-    gDPPipeSync(OVERLAY_DISP++);
-    gDPTileSync(OVERLAY_DISP++);
+    gDPPipeSync((*dl)++);
+    gDPTileSync((*dl)++);
     gDPLoadTextureTile(
-        OVERLAY_DISP++,
+        (*dl)++,
         segAddr,
         G_IM_FMT_RGBA, G_IM_SIZ_32b,
         w, h,
@@ -81,14 +78,43 @@ void comboDrawBlit2D(GameState_Play* play, u32 segAddr, int w, int h, float x, f
         G_TX_NOMASK, G_TX_NOMASK,
         G_TX_NOLOD, G_TX_NOLOD
     );
-    gDPTileSync(OVERLAY_DISP++);
+    gDPTileSync((*dl)++);
     gSPTextureRectangle(
-        OVERLAY_DISP++,
+        (*dl)++,
         x * 4, y * 4,
         x * 4 + (w * 4) * scale, y * 4 + (h * 4) * scale,
         0,
         0, 0,
         ((1 << 10) * rScale), ((1 << 10) * rScale)
     );
-    CLOSE_DISPS();
+}
+
+void comboDrawBlit2D_IA4(Gfx** dl, u32 segAddr, int w, int h, float x, float y, float scale)
+{
+    float rScale;
+
+    rScale = 1.f / scale;
+    gDPPipeSync((*dl)++);
+    gDPTileSync((*dl)++);
+    gDPLoadTextureTile_4b(
+        (*dl)++,
+        segAddr,
+        G_IM_FMT_IA,
+        w, h,
+        0, 0,
+        w - 1, h - 1,
+        0,
+        G_TX_WRAP, G_TX_WRAP,
+        G_TX_NOMASK, G_TX_NOMASK,
+        G_TX_NOLOD, G_TX_NOLOD
+    );
+    gDPTileSync((*dl)++);
+    gSPTextureRectangle(
+        (*dl)++,
+        x * 4, y * 4,
+        x * 4 + (w * 4) * scale, y * 4 + (h * 4) * scale,
+        0,
+        0, 0,
+        ((1 << 10) * rScale), ((1 << 10) * rScale)
+    );
 }

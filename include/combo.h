@@ -173,8 +173,9 @@ void    comboLoadCustomKeep(void);
 void comboSetObjectSegment(GfxContext* gfx, void* buffer);
 void comboDrawObject(GameState_Play* play, Actor* actor, u16 objectId, u16 shaderId, int flags);
 void comboDrawGI(GameState_Play* play, Actor* actor, int gi, int flags);
-void comboDrawInit2D(GameState_Play* play);
-void comboDrawBlit2D(GameState_Play* play, u32 segAddr, int w, int h, float x, float y, float scale);
+void comboDrawInit2D(Gfx** dl);
+void comboDrawBlit2D(Gfx** dl, u32 segAddr, int w, int h, float x, float y, float scale);
+void comboDrawBlit2D_IA4(Gfx** dl, u32 segAddr, int w, int h, float x, float y, float scale);
 
 /* Event */
 void comboOotSetEventChk(u16 flag);
@@ -316,6 +317,10 @@ extern s32 gLastEntrance;
 
 /* Warp */
 void comboTriggerWarp(GameState_Play* play, int index);
+
+/* Menu */
+void comboMenuKeysUpdate(GameState_Play* play);
+void comboMenuKeysDraw(GameState_Play* play);
 
 #else
 # include <combo/asm.h>

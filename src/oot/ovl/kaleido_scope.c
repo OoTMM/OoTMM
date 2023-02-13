@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/custom.h>
 
 static int checkItemToggle(GameState_Play* play)
 {
@@ -89,3 +90,48 @@ void KaleidoSetCursorColor(GameState_Play* play)
     gDPSetEnvColor(POLY_OPA_DISP++, 0, 0, 0, 0xff);
     CLOSE_DISPS();
 }
+
+static int isKeysMenu;
+
+typedef void (*KaleidoScopeHandler)(GameState_Play*, void*);
+
+static void KaleidoScope_HandleMapDungeonMenu(GameState_Play* play, void* unk, u32 overlayAddr)
+{
+    KaleidoScopeHandler handler;
+    int onMenu;
+
+    onMenu = play->pauseCtx.screen_idx == 1;
+    if (onMenu && play->gs.input[0].pressed.buttons & (L_TRIG | U_CBUTTONS))
+    {
+        isKeysMenu = !isKeysMenu;
+        PlaySound(0x4809);
+    }
+
+    if (isKeysMenu)
+    {
+        if (onMenu)
+            comboMenuKeysUpdate(play);
+        comboMenuKeysDraw(play);
+    }
+    else
+    {
+        handler = OverlayAddr(overlayAddr);
+        handler(play, unk);
+    }
+}
+
+static void KaleidoScope_HandleMapMenu(GameState_Play* play, void* unk)
+{
+    KaleidoScope_HandleMapDungeonMenu(play, unk, 0x8081ce54);
+}
+
+PATCH_CALL(0x80820850, KaleidoScope_HandleMapMenu);
+PATCH_CALL(0x80820b48, KaleidoScope_HandleMapMenu);
+
+static void KaleidoScope_HandleDungeonMenu(GameState_Play* play, void* unk)
+{
+    KaleidoScope_HandleMapDungeonMenu(play, unk, 0x8081b660);
+}
+
+PATCH_CALL(0x808207e4, KaleidoScope_HandleDungeonMenu);
+PATCH_CALL(0x80820ac4, KaleidoScope_HandleDungeonMenu);

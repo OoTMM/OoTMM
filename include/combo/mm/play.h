@@ -59,7 +59,9 @@ ASSERT_OFFSET(InterfaceContext, unk_31a,        0x31a);
 
 typedef struct
 {
-    char    unk_000[0x242];
+    char    unk_000[0x204];
+    u8      screenIndex;
+    char    unk_205[0x3d];
     s16     cursorIndexX[5];
     s16     cursorIndexY[5];
     char    unk_256[0x008];
@@ -71,6 +73,8 @@ typedef struct
 }
 PauseContext;
 
+ASSERT_OFFSET(PauseContext, unk_000,        0x000);
+ASSERT_OFFSET(PauseContext, screenIndex,    0x204);
 _Static_assert(sizeof(PauseContext) == 0x2d0, "MM PauseContext size is wrong");
 
 typedef struct PACKED ALIGNED(4) GameState_Play

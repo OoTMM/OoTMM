@@ -40,7 +40,21 @@ const parsePngRgba16 = async (data: Buffer) => {
   return rgba16;
 };
 
-export const png = async (filename: string, mode: 'rgba32' | 'rgba16') => {
+const parsePngI4 = async (data: Buffer) => {
+  const rgba32 = await rawPng(data);
+  const i4 = Buffer.alloc(rgba32.length / 8);
+  for (let i = 0; i < rgba32.length; i += 8) {
+    const d1 = rgba32.readUInt32BE(i);
+    const r1 = (d1 >> 24) & 0xff;
+    const d2 = rgba32.readUInt32BE(i + 4);
+    const r2 = (d2 >> 24) & 0xff;
+    const v = ((r1 >> 4) << 4) | (r2 >> 4);
+    i4.writeUint8(v, i / 8);
+  }
+  return i4;
+};
+
+export const png = async (filename: string, mode: 'rgba32' | 'rgba16' | 'i4') => {
   if (process.env.ROLLUP) {
     return fetch(`/${filename}.bin`).then(x => x.arrayBuffer()).then(x => Buffer.from(x));
   } else {
@@ -52,6 +66,9 @@ export const png = async (filename: string, mode: 'rgba32' | 'rgba16') => {
       break;
     case 'rgba16':
       pngBuffer = await parsePngRgba16(data);
+      break;
+    case 'i4':
+      pngBuffer = await parsePngI4(data);
       break;
     }
     await fs.mkdir(__dirname + '/../../../build/assets', { recursive: true });

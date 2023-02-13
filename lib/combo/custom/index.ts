@@ -12,6 +12,7 @@ import { Monitor } from '../monitor';
 import { CustomArchive } from './archive';
 import { KeepFile } from './keep';
 import { png } from './png';
+import { font } from './font';
 
 const FILES_TO_INDEX_OOT = arrayToIndexMap(DATA_FILES.oot);
 const FILES_TO_INDEX_MM = arrayToIndexMap(DATA_FILES.mm);
@@ -92,6 +93,13 @@ export const customAssets = async (): Promise<{[k: string]: Buffer}> => ({
   CHEST_SPIDER_SIDE: await png('chest_side_spider', 'rgba16'),
   CHEST_FAIRY_FRONT: await png('chest_front_fairy', 'rgba16'),
   CHEST_FAIRY_SIDE: await png('chest_side_fairy', 'rgba16'),
+  FONT: await font('font_8x12'),
+  SMALL_ICON_KEY: await png('small_icon_key', 'rgba32'),
+  SMALL_ICON_BOSS_KEY: await png('small_icon_boss_key', 'rgba32'),
+  SMALL_ICON_MAP: await png('small_icon_map', 'rgba32'),
+  SMALL_ICON_COMPASS: await png('small_icon_compass', 'rgba32'),
+  SMALL_ICON_FAIRY: await png('small_icon_fairy', 'rgba32'),
+  SMALL_ICON_SKULL: await png('small_icon_skull', 'rgba32'),
 });
 
 const extractRaw = async (roms: DecompressedRoms, game: Game, file: string, offset: number, size: number) => {

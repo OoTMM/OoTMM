@@ -49,7 +49,7 @@ MmUpgrades;
 
 typedef struct
 {
-    u8 unused:5;
+    u8 maxKeys:5;
     u8 map:1;
     u8 compass:1;
     u8 bossKey:1;

@@ -5,6 +5,7 @@ extern void* gMmMag;
 static void debugCheat(GameState_Play* play)
 {
 #if defined(DEBUG)
+    gMmSave.inventory.strayFairies[0] = 15;
     if (play->gs.input[0].current.buttons & L_TRIG)
     {
         gSave.inventory[ITS_OOT_STICKS] = ITEM_OOT_STICK;
