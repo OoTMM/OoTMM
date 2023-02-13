@@ -170,4 +170,9 @@ void Enemy_StartFinishingBlow(GameState_Play* play, Actor* this);
 
 void DeathWarp(GameState_Play* play);
 
+#if defined(GAME_MM)
+void DrawDungeonUnk1(void* unk);
+void DrawDungeonUnk2(void* unk);
+#endif
+
 #endif

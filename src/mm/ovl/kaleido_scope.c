@@ -113,3 +113,21 @@ static void KaleidoScope_UpdateDungeonMenu(GameState_Play* play)
 }
 
 PATCH_CALL(0x8082adf0, KaleidoScope_UpdateDungeonMenu);
+
+static void KaleidoScope_DrawDungeonUnk1(void* unk)
+{
+    if (!isKeysMenu)
+        DrawDungeonUnk1(unk);
+}
+
+PATCH_CALL(0x808229d4, KaleidoScope_DrawDungeonUnk1);
+PATCH_CALL(0x80822f3c, KaleidoScope_DrawDungeonUnk1);
+
+static void KaleidoScope_DrawDungeonUnk2(void* unk)
+{
+    if (!isKeysMenu)
+        DrawDungeonUnk2(unk);
+}
+
+PATCH_CALL(0x80822a00, KaleidoScope_DrawDungeonUnk2);
+PATCH_CALL(0x80822f68, KaleidoScope_DrawDungeonUnk2);
