@@ -1,5 +1,6 @@
 .main {
   width: 90%;
+  min-width: 1024px;
   border: 1px solid #ccc;
   padding: 1em;
   background: #f4f4f4;

@@ -44,10 +44,7 @@ export const App = () => {
   return (
     <div>
       <h1>OoTMM Web Generator</h1>
-      <br />
-      <p>Version: {process.env.VERSION}</p>
-      <br />
-      <br />
+      <h2>Version: {process.env.VERSION}</h2>
       {result && (
         <Result rom={result.rom} log={result.log} hash={result.hash} />
       )}
