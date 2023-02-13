@@ -20,7 +20,7 @@ export const Tricks = ({ settings, setSetting }) => {
 
   return (
     <form className="settings">
-      <h1>Ocarina of Time</h1>
+      <h2>Ocarina of Time</h2>
       <div className="checkboxes" style={styles.fistDiv}>
         {ootTricks.map((trick) => (
           <Checkbox
@@ -31,7 +31,7 @@ export const Tricks = ({ settings, setSetting }) => {
           />
         ))}
       </div>
-      <h1>Majora's Mask</h1>
+      <h2>Majora's Mask</h2>
       <div className="checkboxes">
         {mmTricks.map((trick) => (
           <Checkbox
