@@ -208,7 +208,7 @@
 "Astral Observatory Balcony":
   region: TERMINA_FIELD
   exits:
-    "Termina Field": "can_use_beans"
+    "Termina Field": "can_use_beans || can_goron_bomb_jump"
     "Astral Observatory": "true"
   locations:
     "Astral Observatory Moon Tear": "event(TEAR_TELESCOPE)"
@@ -226,7 +226,7 @@
     "Milk Road": "true"
     "Great Bay Fence": "can_play(SONG_EPONA) || can_goron_bomb_jump"
     "Road to Ikana Front": "true"
-    "Astral Observatory Balcony": "has(MASK_DEKU)"
+    "Astral Observatory Balcony": "has(MASK_DEKU) || can_goron_bomb_jump"
   locations:
     "Termina Field Water Chest": "has(MASK_ZORA)"
     "Termina Field Tall Grass Chest": "true"
