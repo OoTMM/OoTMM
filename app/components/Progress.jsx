@@ -1,5 +1,5 @@
 import React from 'react';
 
 export const Progress = ({ message }) => {
-  return <h1>{message}</h1>;
+  return <h2>{message}</h2>;
 };

@@ -18,7 +18,7 @@ export const StartingItems = ({ settings, setSetting, itemPool }) => {
   };
 
   const resetItems = () => {
-    setSetting({ startingItems: {}})
+    setSetting({ startingItems: {} });
   };
 
   // Valid gamePrefix are "MM" and "OOT"
@@ -27,33 +27,52 @@ export const StartingItems = ({ settings, setSetting, itemPool }) => {
       <table>
         <thead>
           <tr>
-            <th colSpan="2">{gamePrefix === "MM" ? "Majora's Mask" : "Ocarina of Time"}</th>
+            <th colSpan="2">
+              {gamePrefix === 'MM' ? "Majora's Mask" : 'Ocarina of Time'}
+            </th>
           </tr>
         </thead>
         <tbody>
           {Object.keys(itemPool)
-            .filter(item => item.startsWith(gamePrefix))
-            .map(item =>
-              <tr key={item} className={settings.startingItems[item] > 0 ? "active" : "inactive"}>
+            .filter((item) => item.startsWith(gamePrefix))
+            .map((item) => (
+              <tr
+                key={item}
+                className={
+                  settings.startingItems[item] > 0 ? 'active' : 'inactive'
+                }
+              >
                 <td className="count">
-                  <button className="count-adjust" onClick={() => alterItem(item, -1)}>-</button>
+                  <button
+                    className="count-adjust"
+                    onClick={() => alterItem(item, -1)}
+                  >
+                    -
+                  </button>
                   {settings.startingItems[item] || 0}
-                  <button className="count-adjust" onClick={() => alterItem(item, 1)}>+</button>
+                  <button
+                    className="count-adjust"
+                    onClick={() => alterItem(item, 1)}
+                  >
+                    +
+                  </button>
                 </td>
                 <td>{itemName(item)}</td>
               </tr>
-            )}
+            ))}
         </tbody>
       </table>
-    )
-  }
+    );
+  };
 
   return (
     <React.Fragment>
-      <button className="reset-button" onClick={() => resetItems()}>Reset Starting Items</button>
-      <div className="starting-items">
-        {buildSingleTable("MM")}
-        {buildSingleTable("OOT")}
+      <button className="btn-danger" onClick={() => resetItems()}>
+        Reset Starting Items
+      </button>
+      <div className="starting-items section-margin-top">
+        {buildSingleTable('MM')}
+        {buildSingleTable('OOT')}
       </div>
     </React.Fragment>
   );

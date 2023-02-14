@@ -24,7 +24,7 @@ export const Settings = ({ category, settings, setSetting }) => {
         </div>
       )}
       {enumList.length > 0 && (
-        <div className="dropboxes">
+        <div className="three-column-grid">
           {enumList.map((setting) => (
             <Dropdown
               value={settings[setting.key]}

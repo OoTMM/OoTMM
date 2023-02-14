@@ -22,11 +22,19 @@ h1 {
 }
 
 h2 {
-    font-size: 20px;
-    line-height: 28px;
-    margin-bottom: 24px
+  font-size: 20px;
+  line-height: 28px;
+  margin-bottom: 24px
 }
 
 label {
   font-weight: 500 !important;
+}
+
+.sm-margin-top {
+  margin-top: 8px;
+}
+
+.section-margin-top {
+  margin-top: 24px;
 }

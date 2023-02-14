@@ -12,16 +12,10 @@ export const Tricks = ({ settings, setSetting }) => {
     (x) => x.substring(0, 2) === 'MM'
   );
 
-  const styles = {
-    fistDiv: {
-      'margin-bottom': '24px',
-    },
-  };
-
   return (
     <form className="settings">
       <h2>Ocarina of Time</h2>
-      <div className="checkboxes" style={styles.fistDiv}>
+      <div className="three-column-grid">
         {ootTricks.map((trick) => (
           <Checkbox
             key={trick}
@@ -31,8 +25,8 @@ export const Tricks = ({ settings, setSetting }) => {
           />
         ))}
       </div>
-      <h2>Majora's Mask</h2>
-      <div className="checkboxes">
+      <h2 className="section-margin-top">Majora's Mask</h2>
+      <div className="three-column-grid">
         {mmTricks.map((trick) => (
           <Checkbox
             key={trick}
