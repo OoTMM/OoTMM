@@ -596,7 +596,7 @@ class HintsSolver {
     if ((isItemMajor(item) || isDungeonReward(item) || isKey(item) || isStrayFairy(item)) && !this.majorItemFoolish(loc, item, wothItems) && !this.isItemUseless(loc)) {
       return -1;
     }
-    if (this.hintedLocations.has(loc)) {
+    if (this.hintedLocations.has(loc) || this.settings.disabledLocations.includes(loc)) {
       return 0;
     }
     return 1;
@@ -662,6 +662,10 @@ class HintsSolver {
     for (const checkHint of pool) {
       if (placed >= count) {
         break;
+      }
+      const locations = this.world.checkHints[checkHint];
+      if (locations.every(l => this.settings.disabledLocations.includes(l))) {
+        continue;
       }
       if (this.placeGossipItemExact(checkHint)) {
         placed++;
@@ -802,6 +806,11 @@ class HintsSolver {
     const missingHints = 34 - hints;
     if (missingHints > 0) {
       hints += this.placeGossipItemExactPool(HINTS_ITEMS_SOMETIMES, missingHints);
+    }
+
+    /* Ensure there are enough hints */
+    if (hints < 34) {
+      throw new Error(`Not able to generate enough hints to fill each gossip stone.`);
     }
 
     /* Duplicate every hint */
