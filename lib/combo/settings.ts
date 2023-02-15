@@ -273,6 +273,7 @@ type SettingsBase = UnionToIntersection<SettingShapes>;
 
 export type Settings = SettingsBase & {
   startingItems: {[k: string]: number},
+  disabledLocations: string[],
   tricks: Tricks,
 };
 

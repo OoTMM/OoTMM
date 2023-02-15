@@ -64,6 +64,7 @@ class Solver {
   private pools: ItemPools;
   private reachedLocations = new Set<string>();
   private fixedLocations = new Set<string>();
+  private disabledLocations: string[];
 
   constructor(
     private opts: Options,
@@ -71,6 +72,7 @@ class Solver {
     private random: Random,
   ) {
     this.items = { ...opts.settings.startingItems };
+    this.disabledLocations = [ ...opts.settings.disabledLocations];
     this.fixTokens();
     this.fixFairies();
     this.fixLocations();
@@ -100,6 +102,10 @@ class Solver {
       this.fixDungeon(dungeon);
     }
 
+    /* Place junk into disabled locations */
+    this.disableLocations();
+
+    /* Place required itemss */
     for (;;) {
       if (this.reachable.locations.size === checksCount) {
         break;
@@ -355,6 +361,22 @@ class Solver {
     }
   }
 
+  private disableLocations() {
+    const junkArray = shuffle(this.random, itemsArray(this.pools.junk));
+
+    if (this.disabledLocations.length > junkArray.length) {
+      throw new Error(`Too many disabled locations, max=${junkArray.length}`);
+    }
+
+    for (let i = 0; i < this.disabledLocations.length; i++) {
+      const junk = junkArray[i];
+      this.place(this.disabledLocations[i], junk);
+      removeItemPools(this.pools, junk);
+    }
+  
+    return;
+  }
+
   private propagate() {
     for (;;) {
       this.reachable = pathfind(this.world, this.items, false, this.reachable);
@@ -462,6 +484,9 @@ class Solver {
   private place(location: string, item: string) {
     if (this.world.checks[location] === undefined) {
       throw new Error('Invalid Location: ' + location);
+    }
+    if (!isJunk(item) && this.opts.settings.disabledLocations.includes(location)) {
+      throw new Error(`Unable to place ${item} at ${location}.`)
     }
     this.placement[location] = item;
   }
