@@ -237,10 +237,6 @@ void hookPlay_Init(GameState_Play* play)
         endGame();
     }
 
-    if (gMmMag)
-    {
-        free(gMmMag);
-    }
     comboObjectsReset();
     debugCheat(play);
     eventFixes(play);
