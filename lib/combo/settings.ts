@@ -236,6 +236,8 @@ const DEFAULT_TRICKS = Object.keys(TRICKS).reduce((tricks, trick) => {
   return tricks;
 }, {} as Tricks);
 
+const DEFAULT_DISABLED_LOCATIONS: string[] = [];
+
 type SettingDataEnumValue = {
   readonly value: string;
   readonly name: string;
@@ -279,6 +281,6 @@ export type Settings = SettingsBase & {
 
 export const DEFAULT_SETTINGS: Settings = { ...SETTINGS.map(s => {
   return {[s.key]: s.default};
-}).reduce((a, b) => ({...a, ...b}), {}), startingItems: {}, tricks: { ...DEFAULT_TRICKS } } as Settings;
+}).reduce((a, b) => ({...a, ...b}), {}), startingItems: {}, disabledLocations: DEFAULT_DISABLED_LOCATIONS, tricks: { ...DEFAULT_TRICKS } } as Settings;
 
 export const settings = (s: Partial<Settings>): Settings => ({...DEFAULT_SETTINGS, ...s});
