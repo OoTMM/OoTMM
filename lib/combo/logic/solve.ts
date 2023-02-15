@@ -73,9 +73,6 @@ class Solver {
   ) {
     this.items = { ...opts.settings.startingItems };
     this.disabledLocations = new Set<string>(opts.settings.disabledLocations);
-    this.fixTokens();
-    this.fixFairies();
-    this.fixLocations();
     this.pools = this.makeItemPools();
     if (this.opts.settings.noLogic) {
       const allLocations = new Set<string>(Object.keys(this.world.checks));
@@ -89,6 +86,14 @@ class Solver {
   solve() {
     const checksCount = Object.keys(this.world.checks).length;
 
+    /* Place junk into disabled locations */
+    this.disableLocations();
+
+    /* Place items fixed to default */
+    this.fixTokens();
+    this.fixFairies();
+    this.fixLocations();
+
     /* Place the required reward items */
     if (this.opts.settings.dungeonRewardShuffle === 'dungeonBlueWarps') {
       this.fixRewards();
@@ -101,9 +106,6 @@ class Solver {
     for (const dungeon in this.world.dungeons) {
       this.fixDungeon(dungeon);
     }
-
-    /* Place junk into disabled locations */
-    this.disableLocations();
 
     /* Place required itemss */
     for (;;) {
@@ -123,15 +125,24 @@ class Solver {
 
   private fixLocations() {
     if (!this.opts.settings.shuffleGerudoCard) {
-      this.fixedLocations.add('OOT Gerudo Member Card');
+      const location = 'OOT Gerudo Member Card';
+      const item = this.world.checks[location].item;
+      this.place(location, item);
+      removeItemPools(this.pools, item);
     }
 
     if (!this.opts.settings.shuffleMasterSword) {
-      this.fixedLocations.add('OOT Temple of Time Master Sword');
+      const location = 'OOT Temple of Time Master Sword';
+      const item = this.world.checks[location].item;
+      this.place(location, item);
+      removeItemPools(this.pools, item);
     }
 
     if (this.opts.settings.ganonBossKey === 'vanilla') {
-      this.fixedLocations.add('OOT Ganon Castle Boss Key');
+      const location = 'OOT Ganon Castle Boss Key';
+      const item = this.world.checks[location].item;
+      this.place(location, item);
+      removeItemPools(this.pools, item);
     }
   }
 
@@ -253,7 +264,9 @@ class Solver {
     /* Fix the non-shuffled GS */
     for (const location of gsLocations) {
       if (!this.placement[location]) {
-        this.place(location, this.world.checks[location].item);
+        const item = this.world.checks[location].item;
+        this.place(location, item);
+        removeItemPools(this.pools, item);
       }
     }
 
@@ -261,7 +274,9 @@ class Solver {
     if (this.opts.settings.housesSkulltulaTokens !== 'all') {
       for (const location of houseLocations) {
         if (!this.placement[location]) {
-          this.place(location, this.world.checks[location].item);
+          const item = this.world.checks[location].item;
+          this.place(location, item);
+          removeItemPools(this.pools, item);
         }
       }
     }
@@ -271,15 +286,18 @@ class Solver {
     for (const location in this.world.checks) {
       const check = this.world.checks[location];
       if (isTownStrayFairy(check.item) && this.opts.settings.townFairyShuffle === 'vanilla') {
-        this.fixedLocations.add(location);
+        this.place(location, check.item);
+        removeItemPools(this.pools, check.item);
       } else if (isDungeonStrayFairy(check.item)) {
         if (check.type === 'sf') {
           if (this.opts.settings.strayFairyShuffle !== 'anywhere' && this.opts.settings.strayFairyShuffle !== 'ownDungeon') {
-            this.fixedLocations.add(location);
+            this.place(location, check.item);
+            removeItemPools(this.pools, check.item);
           }
         } else {
           if (this.opts.settings.strayFairyShuffle === 'vanilla') {
-            this.fixedLocations.add(location);
+            this.place(location, check.item);
+            removeItemPools(this.pools, check.item);
           }
         }
       }
