@@ -808,11 +808,6 @@ class HintsSolver {
       hints += this.placeGossipItemExactPool(HINTS_ITEMS_SOMETIMES, missingHints);
     }
 
-    /* Ensure there are enough hints */
-    if (hints < 34) {
-      throw new Error(`Not able to generate enough hints to fill each gossip stone.`);
-    }
-
     /* Duplicate every hint */
     this.duplicateHints();
   }
