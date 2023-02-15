@@ -250,7 +250,9 @@ class Solver {
     const locations = new Set([...gs, ...house]);
     const pool = shuffle(this.random, Array.from(locations).map(loc => this.world.checks[loc].item));
     for (const location of locations) {
-      this.place(location, pool.pop()!);
+      const item = pool.pop();
+      this.place(location, item!);
+      removeItemPools(this.pools, item!);
     }
   }
 
