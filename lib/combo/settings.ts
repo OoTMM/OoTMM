@@ -236,7 +236,7 @@ const DEFAULT_TRICKS = Object.keys(TRICKS).reduce((tricks, trick) => {
   return tricks;
 }, {} as Tricks);
 
-const DEFAULT_DISABLED_LOCATIONS: string[] = [];
+const DEFAULT_JUNK_LOCATIONS: string[] = [];
 
 type SettingDataEnumValue = {
   readonly value: string;
@@ -275,12 +275,12 @@ type SettingsBase = UnionToIntersection<SettingShapes>;
 
 export type Settings = SettingsBase & {
   startingItems: {[k: string]: number},
-  disabledLocations: string[],
+  junkLocations: string[],
   tricks: Tricks,
 };
 
 export const DEFAULT_SETTINGS: Settings = { ...SETTINGS.map(s => {
   return {[s.key]: s.default};
-}).reduce((a, b) => ({...a, ...b}), {}), startingItems: {}, disabledLocations: DEFAULT_DISABLED_LOCATIONS, tricks: { ...DEFAULT_TRICKS } } as Settings;
+}).reduce((a, b) => ({...a, ...b}), {}), startingItems: {}, junkLocations: DEFAULT_JUNK_LOCATIONS, tricks: { ...DEFAULT_TRICKS } } as Settings;
 
 export const settings = (s: Partial<Settings>): Settings => ({...DEFAULT_SETTINGS, ...s});

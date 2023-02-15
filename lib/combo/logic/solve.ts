@@ -64,7 +64,7 @@ class Solver {
   private pools: ItemPools;
   private reachedLocations = new Set<string>();
   private fixedLocations = new Set<string>();
-  private disabledLocations = new Set<string>();
+  private junkLocations = new Set<string>();
 
   constructor(
     private opts: Options,
@@ -72,7 +72,7 @@ class Solver {
     private random: Random,
   ) {
     this.items = { ...opts.settings.startingItems };
-    this.disabledLocations = new Set<string>(opts.settings.disabledLocations);
+    this.junkLocations = new Set<string>(opts.settings.junkLocations);
     this.pools = this.makeItemPools();
     if (this.opts.settings.noLogic) {
       const allLocations = new Set<string>(Object.keys(this.world.checks));
@@ -86,8 +86,8 @@ class Solver {
   solve() {
     const checksCount = Object.keys(this.world.checks).length;
 
-    /* Place junk into disabled locations */
-    this.disableLocations();
+    /* Place junk into junkLocations */
+    this.placeJunkLocations();
 
     /* Place items fixed to default */
     this.fixTokens();
@@ -379,17 +379,17 @@ class Solver {
     }
   }
 
-  private disableLocations() {
+  private placeJunkLocations() {
     const junkArray = shuffle(this.random, itemsArray(this.pools.junk));
-    const disabledLocations = [ ...this.disabledLocations ];
+    const junkLocations = [ ...this.junkLocations ];
 
-    if (disabledLocations.length > junkArray.length) {
-      throw new Error(`Too many disabled locations, max=${junkArray.length}`);
+    if (junkLocations.length > junkArray.length) {
+      throw new Error(`Too many junk locations, max=${junkArray.length}`);
     }
 
-    for (let i = 0; i < disabledLocations.length; i++) {
+    for (let i = 0; i < junkLocations.length; i++) {
       const junk = junkArray[i];
-      this.place(disabledLocations[i], junk);
+      this.place(junkLocations[i], junk);
       removeItemPools(this.pools, junk);
     }
   }
@@ -502,7 +502,7 @@ class Solver {
     if (this.world.checks[location] === undefined) {
       throw new Error('Invalid Location: ' + location);
     }
-    if (!isJunk(item) && this.opts.settings.disabledLocations.includes(location)) {
+    if (!isJunk(item) && this.opts.settings.junkLocations.includes(location)) {
       throw new Error(`Unable to place ${item} at ${location}.`)
     }
     this.placement[location] = item;

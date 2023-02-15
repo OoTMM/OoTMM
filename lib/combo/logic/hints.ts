@@ -596,7 +596,7 @@ class HintsSolver {
     if ((isItemMajor(item) || isDungeonReward(item) || isKey(item) || isStrayFairy(item)) && !this.majorItemFoolish(loc, item, wothItems) && !this.isItemUseless(loc)) {
       return -1;
     }
-    if (this.hintedLocations.has(loc) || this.settings.disabledLocations.includes(loc)) {
+    if (this.hintedLocations.has(loc) || this.settings.junkLocations.includes(loc)) {
       return 0;
     }
     return 1;
@@ -664,7 +664,7 @@ class HintsSolver {
         break;
       }
       const locations = this.world.checkHints[checkHint];
-      if (locations.every(l => this.settings.disabledLocations.includes(l))) {
+      if (locations.every(l => this.settings.junkLocations.includes(l))) {
         continue;
       }
       if (this.placeGossipItemExact(checkHint)) {
