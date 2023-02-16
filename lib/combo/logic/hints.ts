@@ -596,7 +596,7 @@ class HintsSolver {
     if ((isItemMajor(item) || isDungeonReward(item) || isKey(item) || isStrayFairy(item)) && !this.majorItemFoolish(loc, item, wothItems) && !this.isItemUseless(loc)) {
       return -1;
     }
-    if (this.hintedLocations.has(loc)) {
+    if (this.hintedLocations.has(loc) || this.settings.junkLocations.includes(loc)) {
       return 0;
     }
     return 1;
@@ -662,6 +662,10 @@ class HintsSolver {
     for (const checkHint of pool) {
       if (placed >= count) {
         break;
+      }
+      const locations = this.world.checkHints[checkHint];
+      if (locations.every(l => this.settings.junkLocations.includes(l))) {
+        continue;
       }
       if (this.placeGossipItemExact(checkHint)) {
         placed++;

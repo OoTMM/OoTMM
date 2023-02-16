@@ -64,6 +64,7 @@ class Solver {
   private pools: ItemPools;
   private reachedLocations = new Set<string>();
   private fixedLocations = new Set<string>();
+  private junkLocations = new Set<string>();
 
   constructor(
     private opts: Options,
@@ -71,9 +72,7 @@ class Solver {
     private random: Random,
   ) {
     this.items = { ...opts.settings.startingItems };
-    this.fixTokens();
-    this.fixFairies();
-    this.fixLocations();
+    this.junkLocations = new Set<string>(opts.settings.junkLocations);
     this.pools = this.makeItemPools();
     if (this.opts.settings.noLogic) {
       const allLocations = new Set<string>(Object.keys(this.world.checks));
@@ -86,6 +85,14 @@ class Solver {
 
   solve() {
     const checksCount = Object.keys(this.world.checks).length;
+
+    /* Place junk into junkLocations */
+    this.placeJunkLocations();
+
+    /* Place items fixed to default */
+    this.fixTokens();
+    this.fixFairies();
+    this.fixLocations();
 
     /* Place the required reward items */
     if (this.opts.settings.dungeonRewardShuffle === 'dungeonBlueWarps') {
@@ -100,6 +107,7 @@ class Solver {
       this.fixDungeon(dungeon);
     }
 
+    /* Place required itemss */
     for (;;) {
       if (this.reachable.locations.size === checksCount) {
         break;
@@ -117,15 +125,24 @@ class Solver {
 
   private fixLocations() {
     if (!this.opts.settings.shuffleGerudoCard) {
-      this.fixedLocations.add('OOT Gerudo Member Card');
+      const location = 'OOT Gerudo Member Card';
+      const item = this.world.checks[location].item;
+      this.place(location, item);
+      removeItemPools(this.pools, item);
     }
 
     if (!this.opts.settings.shuffleMasterSword) {
-      this.fixedLocations.add('OOT Temple of Time Master Sword');
+      const location = 'OOT Temple of Time Master Sword';
+      const item = this.world.checks[location].item;
+      this.place(location, item);
+      removeItemPools(this.pools, item);
     }
 
     if (this.opts.settings.ganonBossKey === 'vanilla') {
-      this.fixedLocations.add('OOT Ganon Castle Boss Key');
+      const location = 'OOT Ganon Castle Boss Key';
+      const item = this.world.checks[location].item;
+      this.place(location, item);
+      removeItemPools(this.pools, item);
     }
   }
 
@@ -233,7 +250,9 @@ class Solver {
     const locations = new Set([...gs, ...house]);
     const pool = shuffle(this.random, Array.from(locations).map(loc => this.world.checks[loc].item));
     for (const location of locations) {
-      this.place(location, pool.pop()!);
+      const item = pool.pop();
+      this.place(location, item!);
+      removeItemPools(this.pools, item!);
     }
   }
 
@@ -247,7 +266,9 @@ class Solver {
     /* Fix the non-shuffled GS */
     for (const location of gsLocations) {
       if (!this.placement[location]) {
-        this.place(location, this.world.checks[location].item);
+        const item = this.world.checks[location].item;
+        this.place(location, item);
+        removeItemPools(this.pools, item);
       }
     }
 
@@ -255,7 +276,9 @@ class Solver {
     if (this.opts.settings.housesSkulltulaTokens !== 'all') {
       for (const location of houseLocations) {
         if (!this.placement[location]) {
-          this.place(location, this.world.checks[location].item);
+          const item = this.world.checks[location].item;
+          this.place(location, item);
+          removeItemPools(this.pools, item);
         }
       }
     }
@@ -265,15 +288,18 @@ class Solver {
     for (const location in this.world.checks) {
       const check = this.world.checks[location];
       if (isTownStrayFairy(check.item) && this.opts.settings.townFairyShuffle === 'vanilla') {
-        this.fixedLocations.add(location);
+        this.place(location, check.item);
+        removeItemPools(this.pools, check.item);
       } else if (isDungeonStrayFairy(check.item)) {
         if (check.type === 'sf') {
           if (this.opts.settings.strayFairyShuffle !== 'anywhere' && this.opts.settings.strayFairyShuffle !== 'ownDungeon') {
-            this.fixedLocations.add(location);
+            this.place(location, check.item);
+            removeItemPools(this.pools, check.item);
           }
         } else {
           if (this.opts.settings.strayFairyShuffle === 'vanilla') {
-            this.fixedLocations.add(location);
+            this.place(location, check.item);
+            removeItemPools(this.pools, check.item);
           }
         }
       }
@@ -352,6 +378,21 @@ class Solver {
       const song = songs[i];
       this.randomAssumed(pool, { restrictedLocations: locations, forcedItem: song });
       removeItemPools(this.pools, song);
+    }
+  }
+
+  private placeJunkLocations() {
+    const junkArray = shuffle(this.random, itemsArray(this.pools.junk));
+    const junkLocations = [ ...this.junkLocations ];
+
+    if (junkLocations.length > junkArray.length) {
+      throw new Error(`Too many junk locations, max=${junkArray.length}`);
+    }
+
+    for (let i = 0; i < junkLocations.length; i++) {
+      const junk = junkArray[i];
+      this.place(junkLocations[i], junk);
+      removeItemPools(this.pools, junk);
     }
   }
 
@@ -462,6 +503,9 @@ class Solver {
   private place(location: string, item: string) {
     if (this.world.checks[location] === undefined) {
       throw new Error('Invalid Location: ' + location);
+    }
+    if (!isJunk(item) && this.opts.settings.junkLocations.includes(location)) {
+      throw new Error(`Unable to place ${item} at ${location}.`)
     }
     this.placement[location] = item;
   }

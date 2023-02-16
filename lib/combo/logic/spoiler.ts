@@ -17,7 +17,7 @@ const spoilerHeader = (buffer: string[], seed: string) => {
 const spoilerSettings = (buffer: string[], settings: Settings) => {
   buffer.push('Settings');
   for (const s in settings) {
-    if (s === 'startingItems' || s === 'tricks') {
+    if (s === 'startingItems' || s === 'tricks' || s === 'junkLocations') {
       continue;
     }
     const v = (settings as any)[s];
@@ -47,6 +47,18 @@ const spoilerStartingItems = (buffer: string[], startingItems: {[k: string]: num
   for (const item in startingItems) {
     const count = startingItems[item];
     buffer.push(`  ${item}: ${count}`);
+  }
+  buffer.push('');
+};
+
+const spoilerJunkLocations = (buffer: string[], junkLocations: string[]) => {
+  if (junkLocations.length === 0) {
+    return;
+  }
+
+  buffer.push('Junk Locations');
+  for (const location of junkLocations) {
+    buffer.push(`  ${location}`);
   }
   buffer.push('');
 };
@@ -121,6 +133,7 @@ export const spoiler = (world: World, placement: ItemPlacement, spheres: string[
   spoilerSettings(buffer, opts.settings);
   spoilerTricks(buffer, opts.settings.tricks);
   spoilerStartingItems(buffer, opts.settings.startingItems);
+  spoilerJunkLocations(buffer, opts.settings.junkLocations);
   spoilerEntrances(buffer, entrances);
   spoilerFoolish(buffer, hints.foolish);
   spoilerHints(buffer, hints, placement);

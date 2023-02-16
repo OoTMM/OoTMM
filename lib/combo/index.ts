@@ -5,7 +5,7 @@ import { Generator } from './generator';
 import { MonitorCallbacks } from './monitor';
 import { SETTINGS, DEFAULT_SETTINGS, SETTINGS_CATEGORIES, Settings, TRICKS } from './settings';
 import { createWorld } from './logic/world';
-import { alterWorld, configFromSettings } from './logic/settings';
+import { alterWorld, configFromSettings, isShuffled } from './logic/settings';
 import { itemName } from './names';
 import { Items } from './logic/state';
 import { addItem, isDungeonItem, isDungeonReward, isJunk, isStrayFairy, isToken } from './logic/items';
@@ -17,6 +17,10 @@ type GeneratorParams = {
   opts?: OptionsInput,
   monitor?: MonitorCallbacks
 };
+
+type LocInfo = {
+  [k: string]: string[]
+}
 
 export const generate = (params: GeneratorParams): Generator => {
   const opts = options(params.opts || {});
@@ -49,4 +53,22 @@ export const itemPool = (aSettings: Partial<Settings>) => {
     addItem(items, item);
   }
   return items;
+}
+
+export const locationList = (aSettings: Partial<Settings>) => {
+  const settings: Settings = { ...DEFAULT_SETTINGS, ...aSettings };
+  const world = createWorld(settings);
+  const config = configFromSettings(settings);
+  alterWorld(world, settings, config);
+
+  /* Everywhere below Check.type is a placeholder for Check.flags that I am going to add to the item tables. */
+  const locations: LocInfo = {};
+  for (const loc in world.checks) {
+    if (!isShuffled(settings, loc)) {
+      continue;
+    }
+    locations[loc] = [world.checks[loc].type];
+  }
+
+  return locations;
 }

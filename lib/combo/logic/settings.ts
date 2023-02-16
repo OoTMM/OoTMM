@@ -117,3 +117,8 @@ export const alterWorld = (world: World, settings: Settings, config: Set<string>
     check.item = item;
   }
 };
+
+/* Added as a placeholder. Currently is only in function that exposes location list to gui  */
+export const isShuffled = (settings: Settings, location: string) => {
+  return true;
+}
