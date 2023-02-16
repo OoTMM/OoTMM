@@ -22,12 +22,25 @@ OotPermanentSceneFlags;
 
 typedef struct
 {
+    u8   buttonItems[4];
+    u8   cButtonSlots[3];
     u16  boots:4;
     u16  tunics:4;
     u16  shields:4;
     u16  swords:4;
 }
-OotSaveEquipment;
+OotItemEquips;
+
+_Static_assert(sizeof(OotItemEquips) == 0xa, "Wrong size for OotItemEquips");
+
+typedef struct
+{
+    u16  boots:4;
+    u16  tunics:4;
+    u16  shields:4;
+    u16  swords:4;
+}
+OotEquipment;
 
 typedef struct
 {
@@ -109,15 +122,17 @@ typedef struct
     u8                      magicUpgrade2;
     u8                      doubleDefense;
     u8                      isBiggoronSword;
-    char                    unk_3f[0x27];
+    u8                      ocarinaGameRound;
+    OotItemEquips           childEquips;
+    OotItemEquips           adultEquips;
+    char                    unk_54[0x12];
     u16                     sceneId;
-    u8                      buttons[7];
-    OotSaveEquipment        currentEquipment;
+    OotItemEquips           equips;
     char                    unk_72[0x2];
     u8                      inventory[0x18];
     u8                      ammo[0xf];
     u8                      beans;
-    OotSaveEquipment        equipment;
+    OotEquipment            equipment;
     u16                     unk_9e;
     OotSaveUpgrades         upgrades;
     OotSaveQuest            quest;
@@ -135,9 +150,11 @@ typedef struct
 }
 OotSave;
 
-ASSERT_OFFSET(OotSave, unk_3f,      0x3f);
+ASSERT_OFFSET(OotSave, childEquips, 0x40);
+ASSERT_OFFSET(OotSave, adultEquips, 0x4a);
+ASSERT_OFFSET(OotSave, unk_54,      0x54);
 ASSERT_OFFSET(OotSave, sceneId,     0x66);
-ASSERT_OFFSET(OotSave, buttons,     0x68);
+ASSERT_OFFSET(OotSave, equips,      0x68);
 ASSERT_OFFSET(OotSave, equipment,   0x9c);
 ASSERT_OFFSET(OotSave, perm,        0xd4);
 ASSERT_OFFSET(OotSave, unk_be0,     0xbe0);

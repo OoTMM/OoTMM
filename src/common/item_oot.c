@@ -176,9 +176,9 @@ static void fillBottle(u16 itemId)
     gOotSave.inventory[ITS_OOT_BOTTLE + slot] = itemId;
     for (int i = 0; i < 3; ++i)
     {
-        if (gOotSave.buttons[4 + i] == ITS_OOT_BOTTLE + slot)
+        if (gOotSave.equips.cButtonSlots[i] == ITS_OOT_BOTTLE + slot)
         {
-            gOotSave.buttons[1 + i] = itemId;
+            gOotSave.equips.buttonItems[1 + i] = itemId;
         }
     }
 }
@@ -248,6 +248,24 @@ static void addRupees(u16 count)
         gOotSave.rupees = max;
 }
 
+static void reloadSlotEquips(OotItemEquips* equips, int slot)
+{
+    for (int i = 0; i < 3; ++i)
+    {
+        if (equips->cButtonSlots[i] == slot)
+        {
+            equips->buttonItems[1 + i] = gOotSave.inventory[slot];
+        }
+    }
+}
+
+static void reloadSlot(int slot)
+{
+    reloadSlotEquips(&gOotSave.equips, slot);
+    reloadSlotEquips(&gOotSave.childEquips, slot);
+    reloadSlotEquips(&gOotSave.adultEquips, slot);
+}
+
 static void addHookshot(int level)
 {
     u16 itemId;
@@ -258,15 +276,7 @@ static void addHookshot(int level)
         itemId = ITEM_OOT_HOOKSHOT;
     gOotSave.inventory[ITS_OOT_HOOKSHOT] = itemId;
     gOotExtraItems.hookshot |= (1 << (level - 1));
-
-    /* Reload the items */
-    for (int i = 0; i < 3; ++i)
-    {
-        if (gOotSave.buttons[4 + i] == ITS_OOT_HOOKSHOT)
-        {
-            gOotSave.buttons[1 + i] = itemId;
-        }
-    }
+    reloadSlot(ITS_OOT_HOOKSHOT);
 }
 
 static void addOcarina(int level)
@@ -279,15 +289,7 @@ static void addOcarina(int level)
         itemId = ITEM_OOT_OCARINA_FAIRY;
     gOotSave.inventory[ITS_OOT_OCARINA] = itemId;
     gOotExtraItems.ocarina |= (1 << (level - 1));
-
-    /* Reload the items */
-    for (int i = 0; i < 3; ++i)
-    {
-        if (gOotSave.buttons[4 + i] == ITS_OOT_OCARINA)
-        {
-            gOotSave.buttons[1 + i] = itemId;
-        }
-    }
+    reloadSlot(ITS_OOT_OCARINA);
 }
 
 void comboAddItemOot(s16 gi, int noEffect)

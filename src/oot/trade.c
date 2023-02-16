@@ -44,9 +44,10 @@ static void removeButtonItem(u16 itemId)
 {
     for (int i = 1; i < 4; ++i)
     {
-        if (gSave.buttons[i] == itemId)
+        if (gSave.equips.buttonItems[i] == itemId)
         {
-            gSave.buttons[i] = ITEM_NONE;
+            gSave.equips.buttonItems[i] = ITEM_NONE;
+            gSave.equips.cButtonSlots[i - 1] = 0xff;
         }
     }
 }

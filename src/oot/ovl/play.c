@@ -208,17 +208,17 @@ void hookPlay_Init(GameState_Play* play)
     }
 
     /* Handle swordless */
-    if (gSave.currentEquipment.swords == 0 || (gSave.equipment.swords & (1 << (gSave.currentEquipment.swords - 1))) == 0)
+    if (gSave.equips.swords == 0 || (gSave.equipment.swords & (1 << (gSave.equips.swords - 1))) == 0)
     {
         /* Set swordless */
-        gSave.currentEquipment.swords = 0;
-        switch (gSave.buttons[0])
+        gSave.equips.swords = 0;
+        switch (gSave.equips.buttonItems[0])
         {
         case ITEM_OOT_KOKIRI_SWORD:
         case ITEM_OOT_MASTER_SWORD:
         case ITEM_OOT_GIANT_KNIFE:
         case ITEM_OOT_GIANT_KNIFE_BROKEN:
-            gSave.buttons[0] = 0xff;
+            gSave.equips.buttonItems[0] = ITEM_NONE;
             break;
         }
         gSave.eventsMisc[29] = 1;

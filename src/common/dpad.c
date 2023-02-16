@@ -154,10 +154,10 @@ static void toggleBoots(GameState_Play* play, s16 itemId)
     u16 targetBoots;
 
     targetBoots = (itemId == ITEM_OOT_HOVER_BOOTS) ? 3 : 2;
-    if (gSave.currentEquipment.boots == targetBoots)
-        gSave.currentEquipment.boots = 1;
+    if (gSave.equips.boots == targetBoots)
+        gSave.equips.boots = 1;
     else
-        gSave.currentEquipment.boots = targetBoots;
+        gSave.equips.boots = targetBoots;
     UpdateEquipment(play, GET_LINK(play));
     PlaySound(0x835);
 }
