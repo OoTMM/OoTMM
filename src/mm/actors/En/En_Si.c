@@ -7,7 +7,7 @@ static void FreezePlayer(GameState_Play* play) {
     Actor_Player* link;
     link = GET_LINK(play);
     link->base.freezeTimer = 100;
-    link->state1 |= 0x200;
+    link->state |= PLAYER_ACTOR_STATE_FROZEN;
 }
 
 // maybe worth moving somewhere common
@@ -15,7 +15,7 @@ static void UnfreezePlayer(GameState_Play* play) {
     Actor_Player* link;
     link = GET_LINK(play);
     link->base.freezeTimer = 0;
-    link->state &= ~0x200;
+    link->state &= ~PLAYER_ACTOR_STATE_FROZEN;
 }
 
 void EnSi_WaitForPlayerToCloseMessage(Actor* this, GameState_Play* play) {
