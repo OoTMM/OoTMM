@@ -39,19 +39,19 @@ PATCH_START 0x808b8d80
 PATCH_END
 
 PATCH_START 0x808b8d60
-  lw v0,0(a0)
+  lbu v0,0(a0)
 PATCH_END
 
 PATCH_START 0x808b8d84
-  lw v0,0(a0)
+  lbu v0,0(a0)
 PATCH_END
 
 PATCH_START 0x808b8da0
-  lw v0,0(a0)
+  lbu v0,0(a0)
 PATCH_END
 
 PATCH_START 0x808b8dbc
-  lw v0,0(a0)
+  lbu v0,0(a0)
 PATCH_END
 
 /* Skip boss shortcut cutscene */
@@ -61,4 +61,9 @@ PATCH_END
 
 PATCH_START 0x808b8fc8
   li t2,1
+PATCH_END
+
+/* Patch the boss warp pads */
+PATCH_START 0x808b9410
+  nop
 PATCH_END

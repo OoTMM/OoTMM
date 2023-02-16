@@ -62,3 +62,21 @@ Player_DpadHook_Trampoline:
 PATCH_START 0x80831f3c
   jal Player_DpadHook_Trampoline
 PATCH_END
+
+Player_WriteTransitionFlagHook:
+  /* Replaced code */
+  sh t6,0x1e1a(at)
+
+  /* Set the transition flag */
+  li  v0,1
+  lui t6,%HI(gIsEntranceOverride)
+  sb  v0,%LO(gIsEntranceOverride)(t6)
+
+  /* Replaced code */
+  jr ra
+   lh v0,0x1e1a(v1)
+
+PATCH_START 0x808372ac
+  jal Player_WriteTransitionFlagHook
+   nop
+PATCH_END

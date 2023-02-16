@@ -138,3 +138,6 @@ SetChestFlag = 0x800b5c90;
 PlaySoundSpecial = 0x801a3098;
 
 Actor_RunByteCode = 0x8010bf58;
+
+DrawDungeonUnk1 = 0x8012c8ac;
+DrawDungeonUnk2 = 0x801091f0;

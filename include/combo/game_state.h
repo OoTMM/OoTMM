@@ -6,8 +6,8 @@
 typedef struct PACKED
 {
     u16 buttons;
-    u8  x;
-    u8  y;
+    s8  x;
+    s8  y;
     u16 zero;
 }
 ControllerInputState;

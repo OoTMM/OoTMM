@@ -141,10 +141,12 @@
     "Forest Temple Antichamber": "true"
     "Forest Temple GS Antichamber": "can_collect_distance"
 "Forest Temple Boss":
+  boss: true
   dungeon: Forest
   exits:
-    "Forest Temple After Boss": "can_use_bow && has_weapon"
+    "Forest Temple After Boss": "(can_use_bow || can_use_slingshot) && has_weapon"
 "Forest Temple After Boss":
+  boss: true
   dungeon: Forest
   locations:
     "Forest Temple Boss": "true"

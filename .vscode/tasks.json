@@ -1,0 +1,17 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "npm",
+			"script": "start:debug",
+			"problemMatcher": ["$gcc"],
+			"label": "Generate Seed (Debug)",
+		},
+		{
+			"type": "npm",
+			"script": "start",
+			"problemMatcher": ["$gcc"],
+			"label": "Generate Seed (Release)",
+		}
+	]
+}

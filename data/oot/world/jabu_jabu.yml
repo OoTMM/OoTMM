@@ -17,9 +17,13 @@
     "Jabu-Jabu GS Water Switch": "has_ranged_weapon || has_explosives"
     "Jabu-Jabu GS Near Boss": "can_boomerang"
 "Jabu-Jabu Boss":
+  boss: true
   dungeon: JJ
   exits:
-    "Jabu-Jabu Main": "true"
+    "Jabu-Jabu After Boss": "can_boomerang"
+"Jabu-Jabu After Boss":
+  boss: true
+  dungeon: JJ
   locations:
     "Jabu-Jabu Boss Container": "true"
     "Jabu-Jabu Boss": "true"

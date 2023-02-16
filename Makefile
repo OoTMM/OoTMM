@@ -19,7 +19,7 @@ $(error "No MIPS toolchain found")
 endif
 
 CFLAGS 		:= -EB -ffreestanding -nostdlib -fno-PIC -mabi=32 -mno-shared -mno-abicalls \
-			   -march=vr4300 -mtune=vr4300 -mfix4300 -G 0 -Os \
+			   -march=vr4300 -mtune=vr4300 -mfix4300 -mfix-r4000 -G 0 -Os \
 			   -Wall -Werror=implicit-function-declaration -Werror=implicit-int -Wimplicit-fallthrough \
 			   -isystem third_party/ultralib/include -isystem third_party/ultralib/include/gcc -Iinclude -Ibuild/include \
 			    -MMD -MP \

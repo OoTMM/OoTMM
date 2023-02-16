@@ -80,8 +80,17 @@
 #define EV_MM_WEEK_SPIN_UPGRADE                 MM_EV(0x17, 1)
 #define EV_MM_WEEK_FIRST_CYCLE                  MM_EV(0x3b, 2)
 #define EV_MM_WEEK_BEAVER_RACE1_DONE            MM_EV(0x5d, 0)
+#define EV_MM_WEEK_KEETA_DEAD                   MM_EV(23,   2)
+#define EV_MM_WEEK_PRINCESS_RETURNED            MM_EV(23,   5)
 #define EV_MM_WEEK_BEAVER_RACE_ALT              MM_EV(24,   2)
 #define EV_MM_WEEK_PAMELA_FATHER                MM_EV(75,   5)
+#define EV_MM_WEEK_TOWN_FAIRY                   MM_EV(8,    7)
+
+#define EV_MM_WEEK_WOODFALL_TEMPLE_RISE         MM_EV(20,   0)
+#define EV_MM_WEEK_DUNGEON_WF                   MM_EV(20,   1)
+#define EV_MM_WEEK_DUNGEON_SH                   MM_EV(33,   7)
+#define EV_MM_WEEK_DUNGEON_GB                   MM_EV(55,   7)
+#define EV_MM_WEEK_DUNGEON_ST                   MM_EV(52,   5)
 
 #if !defined(__ASSEMBLER__)
 # define MM_SET_EVENT_WEEK(x)       (gMmSave.weekEventReg[(x) / 8] |= (1 << ((x) % 8)))

@@ -10,3 +10,8 @@ PATCH_END
 PATCH_START 0x8095a7c0
   li at,0xfff
 PATCH_END
+
+/* Disable auto-talk */
+PATCH_START 0x8095bee4
+  nop
+PATCH_END

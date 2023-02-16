@@ -1,0 +1,33 @@
+{
+  "env": {
+    "myIncludePath": [
+      "${workspaceFolder}/third_party/ultralib/include/gcc",
+      "${workspaceFolder}/third_party/ultralib/include",
+      "${workspaceFolder}/build/include",
+      "${workspaceFolder}/include"
+    ],
+    "myDefines": [
+      "_LANGUAGE_C=1",
+      "F3DEX_GBI_2 = 1"
+    ]
+  },
+  "configurations": [
+    {
+      "name": "OoT",
+      "includePath": ["${myIncludePath}"],
+      "defines": ["${myDefines}", "GAME_OOT=1"],
+      "cStandard": "gnu17",
+      "cppStandard": "gnu++17",
+      "intelliSenseMode": "linux-gcc-x86"
+    },
+    {
+      "name": "MM",
+      "includePath": ["${myIncludePath}"],
+      "defines": ["${myDefines}", "GAME_MM=1"],
+      "cStandard": "gnu17",
+      "cppStandard": "gnu++17",
+      "intelliSenseMode": "linux-gcc-x86"
+    }
+  ],
+  "version": 4
+}

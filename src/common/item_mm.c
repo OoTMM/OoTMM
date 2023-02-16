@@ -35,6 +35,7 @@ void comboAddSmallKeyMm(u16 dungeonId)
     else
         keyCount++;
     gMmSave.inventory.dungeonKeys[dungeonId] = keyCount;
+    gMmSave.inventory.dungeonItems[dungeonId].maxKeys++;
 }
 
 void comboAddBossKeyMm(u16 dungeonId)
@@ -45,7 +46,7 @@ void comboAddBossKeyMm(u16 dungeonId)
 void comboAddStrayFairyMm(u16 dungeonId)
 {
     if (dungeonId == 4)
-        MM_SET_EVENT_WEEK(MM_EV(8, 7));
+        MM_SET_EVENT_WEEK(EV_MM_WEEK_TOWN_FAIRY);
     else
         gMmSave.inventory.strayFairies[dungeonId]++;
 }

@@ -54,6 +54,19 @@
 #include <combo/shader.h>
 #include <combo/config.h>
 
+#define BOSSID_GOHMA                0x00
+#define BOSSID_KING_DODONGO         0x01
+#define BOSSID_BARINADE             0x02
+#define BOSSID_PHANTOM_GANON        0x03
+#define BOSSID_VOLVAGIA             0x04
+#define BOSSID_MORPHA               0x05
+#define BOSSID_BONGO_BONGO          0x06
+#define BOSSID_TWINROVA             0x07
+#define BOSSID_ODOLWA               0x08
+#define BOSSID_GOHT                 0x09
+#define BOSSID_GYORG                0x0a
+#define BOSSID_TWINMOLD             0x0b
+
 #if !defined(__ASSEMBLER__)
 void comboDisableInterrupts(void);
 void comboDma(void* addr, u32 cartAddr, u32 size);
@@ -64,12 +77,13 @@ typedef struct PACKED ALIGNED(4)
     char magic[8];
     u32  valid;
     u32  saveIndex;
+    s32  entrance;
 }
 ComboContext;
 
 extern ComboContext gComboCtx;
 
-typedef struct PACKED ALIGNED(4)
+typedef struct PACKED
 {
     u8 dungeonRewards[13];
     u8 lightArrows;
@@ -81,6 +95,7 @@ typedef struct PACKED ALIGNED(4)
 {
     u8             config[0x40];
     ComboDataHints hints;
+    u8             boss[12];
 }
 ComboData;
 
@@ -108,7 +123,7 @@ void comboCopyMmSave(int dst, int src);
 void comboCreateSaveMM(void);
 
 /* Switch */
-void comboGameSwitch(void);
+void comboGameSwitch(GameState_Play* play, s32 entrance);
 
 /* Override */
 #define OV_CHEST        0
@@ -158,8 +173,9 @@ void    comboLoadCustomKeep(void);
 void comboSetObjectSegment(GfxContext* gfx, void* buffer);
 void comboDrawObject(GameState_Play* play, Actor* actor, u16 objectId, u16 shaderId, int flags);
 void comboDrawGI(GameState_Play* play, Actor* actor, int gi, int flags);
-void comboDrawInit2D(GameState_Play* play);
-void comboDrawBlit2D(GameState_Play* play, u32 segAddr, int w, int h, float x, float y, float scale);
+void comboDrawInit2D(Gfx** dl);
+void comboDrawBlit2D(Gfx** dl, u32 segAddr, int w, int h, float x, float y, float scale);
+void comboDrawBlit2D_IA4(Gfx** dl, u32 segAddr, int w, int h, float x, float y, float scale);
 
 /* Event */
 void comboOotSetEventChk(u16 flag);
@@ -240,9 +256,13 @@ void comboInvalDCache(void* addr, u32 size);
 /* Custom keep files */
 extern void* gCustomKeep;
 
+/* Dpad */
+#define DPF_ITEMS      0x01
+#define DPF_EQUIP      0x02
+
 void comboDpadDraw(GameState_Play* play);
 void comboDpadUpdate(GameState_Play* play);
-int  comboDpadUse(GameState_Play* play);
+int  comboDpadUse(GameState_Play* play, int flags);
 
 int comboConfig(int flag);
 int comboDoorIsUnlocked(GameState_Play* play, int flag);
@@ -286,6 +306,21 @@ int  comboCsmcChestSize(s16 gi);
 #define SC_ERR_NORUPEES     0x04
 
 int comboShopPrecond(GameState_Play* play, Actor_EnGirlA* girlA);
+
+/* Entrance */
+void comboInitEntrances(void);
+s32 comboEntranceOverride(s16 entranceId);
+int comboBossLairIndex();
+
+extern s8 gIsEntranceOverride;
+extern s32 gLastEntrance;
+
+/* Warp */
+void comboTriggerWarp(GameState_Play* play, int index);
+
+/* Menu */
+void comboMenuKeysUpdate(GameState_Play* play);
+void comboMenuKeysDraw(GameState_Play* play);
 
 #else
 # include <combo/asm.h>

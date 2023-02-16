@@ -12,15 +12,6 @@ PATCH_START 0x80091474
    nop
 PATCH_END
 
-/* Expand the Heap */
-PATCH_START 0x800a4330
-  lui t7,0x8060
-PATCH_END
-
-PATCH_START 0x800a4350
-  lui t8,0x8060
-PATCH_END
-
 /* Make adult start with no items equipped */
 PATCH_START 0x8006f8bc
   li v0,0xff

@@ -6,6 +6,7 @@ import { MonitorCallbacks } from './monitor';
 import { SETTINGS, DEFAULT_SETTINGS, SETTINGS_CATEGORIES, Settings, TRICKS } from './settings';
 import { createWorld } from './logic/world';
 import { alterWorld, configFromSettings } from './logic/settings';
+import { itemName } from './names';
 import { Items } from './logic/state';
 import { addItem, isDungeonItem, isDungeonReward, isJunk, isStrayFairy, isToken } from './logic/items';
 import { EXTRA_ITEMS } from './logic/solve';
@@ -22,7 +23,7 @@ export const generate = (params: GeneratorParams): Generator => {
   return new Generator(params.oot, params.mm, opts, params.monitor || {});
 };
 
-export { SETTINGS, DEFAULT_SETTINGS, SETTINGS_CATEGORIES, TRICKS };
+export { SETTINGS, DEFAULT_SETTINGS, SETTINGS_CATEGORIES, TRICKS, itemName };
 
 export const itemPool = (aSettings: Partial<Settings>) => {
   const settings: Settings = { ...DEFAULT_SETTINGS, ...aSettings };

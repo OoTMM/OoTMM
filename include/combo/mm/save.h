@@ -49,7 +49,7 @@ MmUpgrades;
 
 typedef struct
 {
-    u8 unused:5;
+    u8 maxKeys:5;
     u8 map:1;
     u8 compass:1;
     u8 bossKey:1;
@@ -244,6 +244,15 @@ ALIGNED(16) extern MmSave gMmSave;
 /* Custom */
 typedef struct
 {
+    u8 boss;
+    u8 bossCycle;
+    u8 items;
+    u8 unused;
+}
+MmExtraBoss;
+
+typedef struct
+{
     u32 trade1:5;
     u32 trade2:2;
     u32 trade3:2;
@@ -323,7 +332,7 @@ MmExtraFlags2;
 #define MM_PLAYER_FORM_ZORA     2
 #define MM_PLAYER_FORM_HUMAN    4
 
-#define gMmExtraBoss    (*((u32*)(gMmSave.permanentSceneFlags[1].raw + 0x14)))
+#define gMmExtraBoss    (*((MmExtraBoss*)(gMmSave.permanentSceneFlags[1].raw + 0x14)))
 #define gMmExtraTrade   (*((MmExtraTrade*)(gMmSave.permanentSceneFlags[2].raw + 0x14)))
 #define gMmExtraFlags   (*((MmExtraFlags*)(gMmSave.permanentSceneFlags[3].raw + 0x14)))
 #define gMmExtraFlags2  (*((MmExtraFlags2*)(gMmSave.permanentSceneFlags[4].raw + 0x14)))

@@ -15,22 +15,32 @@ static const BlueWarpData kBlueWarpData[] = {
     { GI_MM_REMAINS_TWINMOLD, NPC_MM_REMAINS_TWINMOLD, 3 },
 };
 
-static const BlueWarpData* DoorWarp1_GetData(Actor* this, GameState_Play* play)
+static const int DoorWarp1_GetID(Actor* this, GameState_Play* play)
 {
     if ((this->variable & 0xff) != 0x01)
-        return NULL;
+        return -1;
     switch (play->sceneId)
     {
     case SCE_MM_LAIR_ODOLWA:
-        return &kBlueWarpData[0];
+        return 0;
     case SCE_MM_LAIR_GOHT:
-        return &kBlueWarpData[1];
+        return 1;
     case SCE_MM_LAIR_GYORG:
-        return &kBlueWarpData[2];
+        return 2;
     case SCE_MM_LAIR_TWINMOLD:
-        return &kBlueWarpData[3];
+        return 3;
     }
-    return NULL;
+    return -1;
+}
+
+static const BlueWarpData* DoorWarp1_GetData(Actor* this, GameState_Play* play)
+{
+    int id;
+
+    id = DoorWarp1_GetID(this, play);
+    if (id < 0)
+        return NULL;
+    return &kBlueWarpData[id];
 }
 
 int DoorWarp1_Collide(Actor* this, GameState_Play* play)
@@ -54,6 +64,7 @@ int DoorWarp1_Collide(Actor* this, GameState_Play* play)
 int DoorWarp1_ShouldTrigger(Actor* this, GameState_Play* play)
 {
     Actor_Player* link;
+    int id;
     const BlueWarpData* data;
     s16 gi;
 
@@ -62,9 +73,10 @@ int DoorWarp1_ShouldTrigger(Actor* this, GameState_Play* play)
         return 0;
 
     /* Fetch extended blue warp data */
-    data = DoorWarp1_GetData(this, play);
-    if (data == NULL)
+    id = DoorWarp1_GetID(this, play);
+    if (id == -1)
         return 1;
+    data = &kBlueWarpData[id];
 
     /* Check if the item is being obtained */
     if (Actor_HasParent(this))
@@ -76,7 +88,7 @@ int DoorWarp1_ShouldTrigger(Actor* this, GameState_Play* play)
         }
         else
         {
-            gMmExtraBoss |= (1 << data->index);
+            gMmExtraBoss.items |= (1 << data->index);
         }
     }
 
@@ -86,8 +98,11 @@ int DoorWarp1_ShouldTrigger(Actor* this, GameState_Play* play)
         return 0;
 
     /* Check if we already have the item */
-    if (gMmExtraBoss & (1 << data->index))
-        return 1;
+    if (gMmExtraBoss.items & (1 << data->index))
+    {
+        comboTriggerWarp(play, id + 8);
+        return 0;
+    }
 
     /* Give the correct item */
     if (!gMmExtraFlags2.songOath)
@@ -108,7 +123,7 @@ void DoorWarp1_AfterDraw(Actor* this, GameState_Play* play)
     data = DoorWarp1_GetData(this, play);
     if (data == NULL)
         return;
-    if (gMmExtraBoss & (1 << data->index))
+    if (gMmExtraBoss.items & (1 << data->index))
         return;
     gi = comboOverride(OV_NPC, 0, data->npc, data->gi);
 
@@ -120,3 +135,36 @@ void DoorWarp1_AfterDraw(Actor* this, GameState_Play* play)
 }
 
 PATCH_FUNC(0x808b866c, DoorWarp1_ShouldTrigger);
+
+static void DoorWarp1_TriggerBossWarpPad(Actor* this, GameState_Play* play)
+{
+    s32 entrance;
+
+    switch (play->sceneId)
+    {
+    case SCE_MM_TEMPLE_WOODFALL:
+        entrance = 0x3800;
+        break;
+    case SCE_MM_TEMPLE_SNOWHEAD:
+        entrance = 0x8200;
+        break;
+    case SCE_MM_TEMPLE_GREAT_BAY:
+        entrance = 0xb800;
+        break;
+    case SCE_MM_TEMPLE_STONE_TOWER:
+    case SCE_MM_TEMPLE_STONE_TOWER_INVERTED:
+        entrance = 0x6600;
+        break;
+    default:
+        UNREACHABLE();
+        break;
+    }
+
+    play->nextEntrance = entrance;
+    play->transitionType = TRANS_TYPE_NORMAL;
+    play->transitionGfx = TRANS_GFX_BLACK;
+
+    gIsEntranceOverride = 1;
+}
+
+PATCH_FUNC(0x808b9524, DoorWarp1_TriggerBossWarpPad);

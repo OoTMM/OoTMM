@@ -62,18 +62,20 @@ Fire Temple Entrance:
     "Fire Temple Pillar Ledge": "true"
   locations:
     "Fire Temple Hammer": "true"
-"Fire Temple Boss":
-  dungeon: Fire
-  exits:
-    "Fire Temple After Boss": "can_hammer"
-"Fire Temple After Boss":
-  dungeon: Fire
-  locations:
-    "Fire Temple Boss Container": "true"
-    "Fire Temple Boss": "true"
 "Fire Temple Scarecrow":
   dungeon: Fire
   locations:
     "Fire Temple Scarecrow Chest": "true"
     "Fire Temple GS Scarecrow Wall": "has_ranged_weapon_adult"
     "Fire Temple GS Scarecrow Top": "can_collect_distance"
+"Fire Temple Boss":
+  boss: true
+  dungeon: Fire
+  exits:
+    "Fire Temple After Boss": "can_hammer"
+"Fire Temple After Boss":
+  boss: true
+  dungeon: Fire
+  locations:
+    "Fire Temple Boss Container": "true"
+    "Fire Temple Boss": "true"

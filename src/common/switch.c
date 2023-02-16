@@ -5,12 +5,11 @@ typedef void (*EntryPoint)(void)  __attribute__ ((noreturn));
 #if defined(GAME_OOT)
 # define FOREIGN_OFF    0x80000
 # define FOREIGN_CART   (0x10001000 | MM_BASE)
-# define FOREIGN_SIZE   0x19500
 #else
 # define FOREIGN_OFF    0x400
 # define FOREIGN_CART   0x10001000
-# define FOREIGN_SIZE   0x6430
 #endif
+#define FOREIGN_SIZE   0x100000
 #define FOREIGN_DRAM   (0x80000000 | FOREIGN_OFF)
 
 static void waitSubsystems(void)
@@ -78,10 +77,22 @@ static void waitSubsystems(void)
 NORETURN void comboGameSwitch2(void);
 NORETURN void comboGameSwitch4(u32);
 
-NORETURN void comboGameSwitch(void)
+NORETURN void comboGameSwitch(GameState_Play* play, s32 entrance)
 {
+    if (entrance == -1)
+        gComboCtx.entrance = -1;
+    else
+        gComboCtx.entrance = (entrance & 0x7fffffff);
+
 #if defined(GAME_OOT)
     gComboCtx.saveIndex = gSaveContext.fileIndex;
+    PlayStoreFlags(play);
+    gSave.sceneId = play->sceneId;
+#endif
+
+#if defined(GAME_MM)
+    gSave.isOwlSave = 1;
+    PrepareSave(&play->sramCtx);
 #endif
 
     comboWriteSave();

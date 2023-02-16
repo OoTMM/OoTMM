@@ -4,6 +4,46 @@
 #include <combo/types.h>
 #include <combo/gi.h>
 
+#define PLAYER_ACTOR_STATE_TRANSITION           0x00000001
+#define PLAYER_ACTOR_STATE_TRANSFORM            0x00000002
+#define PLAYER_ACTOR_STATE_CLIMB                0x00000004
+#define PLAYER_ACTOR_STATE_DEATH                0x00000080
+#define PLAYER_ACTOR_STATE_FROZEN               0x00000200
+#define PLAYER_ACTOR_STATE_GET_ITEM             0x00000400
+#define PLAYER_ACTOR_STATE_HOLD_ITEM            0x00000800
+#define PLAYER_ACTOR_STATE_EPONA                0x00800000
+#define PLAYER_ACTOR_STATE_WATER                0x08000000
+#define PLAYER_ACTOR_STATE_USE_ITEM             0x10000000
+#define PLAYER_ACTOR_STATE_CUTSCENE_FROZEN      0x20000000
+
+#if defined(GAME_MM)
+# define PLAYER_MASK_NONE               0x00
+# define PLAYER_MASK_TRUTH              0x01
+# define PLAYER_MASK_KAFEI              0x02
+# define PLAYER_MASK_ALL_NIGHT          0x03
+# define PLAYER_MASK_BUNNY              0x04
+# define PLAYER_MASK_KEATON             0x05
+# define PLAYER_MASK_GARO               0x06
+# define PLAYER_MASK_ROMANI             0x07
+# define PLAYER_MASK_TROUPE_LEADER      0x08
+# define PLAYER_MASK_POSTMAN            0x09
+# define PLAYER_MASK_COUPLE             0x0a
+# define PLAYER_MASK_GREAT_FAIRY        0x0b
+# define PLAYER_MASK_GIBDO              0x0c
+# define PLAYER_MASK_DON_GERO           0x0d
+# define PLAYER_MASK_KAMARO             0x0e
+# define PLAYER_MASK_CAPTAIN            0x0f
+# define PLAYER_MASK_STONE              0x10
+# define PLAYER_MASK_BREMEN             0x11
+# define PLAYER_MASK_BLAST              0x12
+# define PLAYER_MASK_SCENTS             0x13
+# define PLAYER_MASK_GIANT              0x14
+# define PLAYER_MASK_FIERCE_DEITY       0x15
+# define PLAYER_MASK_GORON              0x16
+# define PLAYER_MASK_ZORA               0x17
+# define PLAYER_MASK_DEKU               0x18
+#endif
+
 typedef struct GameState_Play GameState_Play;
 typedef struct Actor Actor;
 
@@ -128,5 +168,12 @@ void PlayMusic(int arg0, int arg1, int arg2, int arg3, int arg4);
 
 int Actor_RunByteCode(Actor* this, GameState_Play* play, void* bytecode, void* unk1, void* unk2);
 void Enemy_StartFinishingBlow(GameState_Play* play, Actor* this);
+
+void DeathWarp(GameState_Play* play);
+
+#if defined(GAME_MM)
+void DrawDungeonUnk1(void* unk);
+void DrawDungeonUnk2(void* unk);
+#endif
 
 #endif

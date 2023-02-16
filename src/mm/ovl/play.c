@@ -5,8 +5,10 @@ static void debugCheat(GameState_Play* play)
 #if defined(DEBUG)
     /*if (play->gs.input[0].current.buttons & 0x20)*/
     {
+        gMmExtraBoss.boss = 0xff;
+
         gSave.itemEquips.sword = 1;
-        gSave.itemEquips.shield = 1;
+        gSave.itemEquips.shield = 2;
         gMmExtraFlags2.progressiveShield = 1;
         gSave.itemEquips.buttonItems[0][0] = ITEM_MM_SWORD_KOKIRI;
         gSave.inventory.items[ITS_MM_OCARINA] = ITEM_MM_OCARINA_OF_TIME;
@@ -17,6 +19,7 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.items[ITS_MM_LENS] = ITEM_MM_LENS_OF_TRUTH;
         gSave.inventory.items[ITS_MM_BOMBS] = ITEM_MM_BOMB;
         gSave.inventory.items[ITS_MM_HOOKSHOT] = ITEM_MM_HOOKSHOT;
+        gSave.inventory.items[ITS_MM_GREAT_FAIRY_SWORD] = ITEM_MM_GREAT_FAIRY_SWORD;
         gSave.inventory.upgrades.quiver = 3;
         gSave.inventory.upgrades.wallet = 2;
         gSave.inventory.upgrades.bombBag = 3;
@@ -24,12 +27,12 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.questItems.songHealing = 1;
         gSave.inventory.questItems.songTime = 1;
         gSave.inventory.questItems.songSoaring = 1;
-        gSave.inventory.questItems.songEpona = 1;
+        //gSave.inventory.questItems.songEpona = 1;
         gSave.inventory.questItems.songOrder = 1;
         gSave.inventory.questItems.songStorms = 1;
         gSave.inventory.questItems.songNewWave = 1;
         gSave.inventory.questItems.songAwakening = 1;
-        gSave.inventory.items[ITS_MM_BOTTLE + 0] = ITEM_MM_BOTTLED_GOLD_DUST;
+        gSave.inventory.items[ITS_MM_BOTTLE + 0] = ITEM_MM_BOTTLED_DEKU_PRINCESS;
         gSave.inventory.items[ITS_MM_BOTTLE + 1] = ITEM_MM_BOTTLED_SPRING_WATER_HOT;
         gSave.playerData.magic = 0x30;
         gMmSave.playerData.magicAcquired = 1;
@@ -45,7 +48,7 @@ static void debugCheat(GameState_Play* play)
 
         gSave.inventory.items[ITS_MM_KEG] = ITEM_MM_POWDER_KEG;
         gSave.inventory.items[ITS_MM_MASK_CAPTAIN] = ITEM_MM_MASK_CAPTAIN;
-        gSave.playerData.healthCapacity = 0x10 * 10;
+        //gSave.playerData.healthCapacity = 0x10 * 10;
         gSave.playerData.health = gSave.playerData.healthCapacity;
 
         gSave.inventory.items[ITS_MM_TRADE1] = ITEM_MM_DEED_LAND;
@@ -65,7 +68,7 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.items[ITS_MM_MASK_FIERCE_DEITY] = ITEM_MM_MASK_FIERCE_DEITY;
 
         //gSave.inventory.questItems.remainsOdolwa = 1;
-        gMmExtraBoss |= 0x01;
+        //gMmExtraBoss.boss |= 0x01;
 
         //gSave.day = 3;
         //gSave.isNight = 1;
@@ -79,8 +82,28 @@ static void debugCheat(GameState_Play* play)
 void hookPlay_Init(GameState_Play* play)
 {
     int isEndOfGame;
+    s32 override;
 
     isEndOfGame = 0;
+
+    /* Handle transition override */
+    if (gIsEntranceOverride)
+    {
+        gIsEntranceOverride = 0;
+        override = comboEntranceOverride(gSave.entranceIndex);
+        if (override != -1)
+        {
+            if (override >= 0)
+                gSave.entranceIndex = override;
+            else
+            {
+                gSave.entranceIndex = gLastEntrance;
+                Play_Init(play);
+                comboGameSwitch(play, override);
+                return;
+            }
+        }
+    }
 
     if (!gCustomKeep)
     {
@@ -114,6 +137,7 @@ void hookPlay_Init(GameState_Play* play)
     MM_SET_EVENT_WEEK(MM_EV(82, 1));
 
     Play_Init(play);
+    gLastEntrance = gSave.entranceIndex;
     comboSpawnItemGivers(play);
 
     if (isEndOfGame)
@@ -136,9 +160,7 @@ void hookPlay_Init(GameState_Play* play)
 
     if (gSave.entranceIndex == 0xc010)
     {
-        gSave.isOwlSave = 1;
-        PrepareSave(&play->sramCtx);
-        comboGameSwitch();
+        comboGameSwitch(play, -1);
         return;
     }
 }

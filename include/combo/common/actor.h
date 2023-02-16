@@ -79,7 +79,8 @@ typedef struct PACKED ALIGNED(0x4) Actor
     float       modelOffsetY;
     char        unk_c0[0x4e];
     u16         messageId;
-    char        unk_110[0x8];
+    u16         freezeTimer;
+    char        unk_11A[0x6];
     Actor*      attachedA;
     Actor*      attachedB;
     Actor*      prev;

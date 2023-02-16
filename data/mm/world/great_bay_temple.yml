@@ -112,14 +112,15 @@
     "Great Bay Temple SF Pre-Boss Above Water": "can_use_ice_arrows || (has(MASK_GREAT_FAIRY) && (has(BOW) || has(HOOKSHOT)))"
     "Great Bay Temple SF Pre-Boss Underwater": "true"
 "Great Bay Temple Boss":
+  boss: true
   dungeon: GB
   exits:
-    "Great Bay Temple After Boss": "has(MAGIC_UPGRADE) && (has(MASK_ZORA) || has(MASK_FIERCE_DEITY))"
+    "Great Bay Temple After Boss": "event(TIME_TRAVEL) && (has(MAGIC_UPGRADE) && (has(MASK_ZORA) || has(MASK_FIERCE_DEITY)) && has(BOW))"
 "Great Bay Temple After Boss":
+  boss: true
   dungeon: GB
   exits:
     "Oath to Order": "true"
-    "Zora Cape Peninsula": "true"
   events:
     BOSS_GREAT_BAY: "true"
   locations:

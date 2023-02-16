@@ -30,6 +30,12 @@ void Sram_AfterOpenSave(void)
 #if defined(DEBUG) && defined(DEBUG_MM_ENTRANCE)
     gSave.entranceIndex = DEBUG_MM_ENTRANCE;
 #endif
+
+    if (gComboCtx.valid && gComboCtx.entrance != -1)
+    {
+        gSave.entranceIndex = gComboCtx.entrance;
+        gComboCtx.entrance = -1;
+    }
 }
 
 void Sram_SaveEndOfCycleWrapper(GameState_Play* play)
@@ -38,6 +44,9 @@ void Sram_SaveEndOfCycleWrapper(GameState_Play* play)
 
     /* Not an Owl save */
     gSave.isOwlSave = 0;
+
+    /* Revive bosses */
+    gMmExtraBoss.bossCycle = 0;
 
     /* Regain trade quest items */
     gMmExtraTrade.trade1 = gMmExtraTrade.tradeObtained1;

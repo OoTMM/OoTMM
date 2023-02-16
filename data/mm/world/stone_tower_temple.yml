@@ -151,14 +151,15 @@
   events:
     STONE_TOWER_BRIDGE_CHEST_SWITCH: "true"
 "Stone Tower Temple Boss":
+  boss: true
   dungeon: ST
   exits:
-    "Stone Tower After Boss": "has(MAGIC_UPGRADE) && ((has(MASK_GIANT) && has(SWORD)) || has(MASK_FIERCE_DEITY))"
+    "Stone Tower After Boss": "event(TIME_TRAVEL) && (has(MAGIC_UPGRADE) && ((has(MASK_GIANT) && has(SWORD)) || has(MASK_FIERCE_DEITY)))"
 "Stone Tower After Boss":
+  boss: true
   dungeon: ST
   exits:
     "Oath to Order": "true"
-    "Ikana Canyon": "true"
   locations:
     "Stone Tower Boss HC": "true"
     "Stone Tower Boss": "true"

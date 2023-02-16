@@ -31,8 +31,54 @@ static int canUseDpad(GameState_Play* play)
     link = GET_LINK(play);
     if (!canShowDpad())
         return 0;
-    if (link->state & 0x30000483)
+    if (link->state & (PLAYER_ACTOR_STATE_EPONA | PLAYER_ACTOR_STATE_USE_ITEM | PLAYER_ACTOR_STATE_CUTSCENE_FROZEN | PLAYER_ACTOR_STATE_GET_ITEM | PLAYER_ACTOR_STATE_DEATH | PLAYER_ACTOR_STATE_TRANSITION | PLAYER_ACTOR_STATE_TRANSFORM))
         return 0;
+    return 1;
+}
+
+static int canUseDpadItem(GameState_Play* play, s16 itemId, int flags)
+{
+    Actor_Player* link;
+    int isEquip;
+
+    link = GET_LINK(play);
+    isEquip = 0;
+
+    /* No item == no use */
+    if (itemId == ITEM_NONE)
+        return 0;
+
+    /* Boots */
+#if defined(GAME_OOT)
+    if (itemId == ITEM_OOT_IRON_BOOTS || itemId == ITEM_OOT_HOVER_BOOTS)
+        isEquip = 1;
+    if ((itemId == ITEM_OOT_OCARINA_FAIRY || itemId == ITEM_OOT_OCARINA_TIME) && play->interfaceCtx.restrictions.ocarina)
+        return 0;
+#endif
+
+    if (isEquip)
+    {
+        return !!(flags & DPF_EQUIP);
+    }
+
+    if (!(flags & DPF_ITEMS))
+        return 0;
+
+    /* Giant mask can't use any item */
+#if defined(GAME_MM)
+    if (gSave.equippedMask == PLAYER_MASK_GIANT)
+        return 0;
+#endif
+
+    /* Underwater - disable everything except zora mask */
+    if (link->state & PLAYER_ACTOR_STATE_WATER)
+    {
+#if defined(GAME_MM)
+        if (itemId != ITEM_MM_MASK_ZORA)
+#endif
+            return 0;
+    }
+
     return 1;
 }
 
@@ -59,6 +105,7 @@ static void reloadIcons(GameState_Play* play)
 
 void comboDpadDraw(GameState_Play* play)
 {
+    s16 itemId;
     u8 alpha;
     float x;
     float y;
@@ -75,21 +122,30 @@ void comboDpadDraw(GameState_Play* play)
     gSPSegment(OVERLAY_DISP++, 0x06, gCustomKeep);
     gSPSegment(OVERLAY_DISP++, 0x07, sDpadIconBuffer);
     gDPSetPrimColor(OVERLAY_DISP++, 0, 0x80, 0xff, 0xff, 0xff, alpha);
-    CLOSE_DISPS();
 
     /* Draw */
-    comboDrawInit2D(play);
-    comboDrawBlit2D(play, 0x06000000, 32, 32, kDpadPosX, kDpadPosY, 0.5f);
+    comboDrawInit2D(&OVERLAY_DISP);
+    comboDrawBlit2D(&OVERLAY_DISP, 0x06000000, 32, 32, kDpadPosX, kDpadPosY, 0.5f);
 
     for (int i = 0; i < 4; ++i)
     {
-        if (sDpadItems[i] != ITEM_NONE)
+        itemId = sDpadItems[i];
+        if (itemId != ITEM_NONE)
         {
+            if (canUseDpadItem(play, itemId, DPF_ITEMS | DPF_EQUIP))
+            {
+                gDPSetPrimColor(OVERLAY_DISP++, 0, 0x80, 0xff, 0xff, 0xff, alpha);
+            }
+            else
+            {
+                gDPSetPrimColor(OVERLAY_DISP++, 0, 0x80, 0x80, 0x80, 0x80, alpha * 0.5f);
+            }
             x = kDpadPosX + kDpadOffX[i] * 32 * kDpadItemScale + 1.5f;
             y = kDpadPosY + kDpadOffY[i] * 32 * kDpadItemScale + 1;
-            comboDrawBlit2D(play, 0x07000000 | (i * 32 * 32 * 4), 32, 32, x, y, kDpadItemScale);
+            comboDrawBlit2D(&OVERLAY_DISP, 0x07000000 | (i * 32 * 32 * 4), 32, 32, x, y, kDpadItemScale);
         }
     }
+    CLOSE_DISPS();
 }
 
 #if defined(GAME_OOT)
@@ -108,13 +164,13 @@ static void toggleBoots(GameState_Play* play, s16 itemId)
 #endif
 
 #if defined(GAME_OOT)
-static void dpadUseItem(GameState_Play* play, int index)
+static void dpadUseItem(GameState_Play* play, int index, int flags)
 {
     s16 itemId;
     void (*Player_UseItem)(GameState_Play* play, Actor_Player* link, s16 itemId);
 
     itemId = sDpadItems[index];
-    if (itemId == ITEM_NONE)
+    if (!canUseDpadItem(play, itemId, flags))
         return;
     if (itemId == ITEM_OOT_HOVER_BOOTS || itemId == ITEM_OOT_IRON_BOOTS)
     {
@@ -129,13 +185,13 @@ static void dpadUseItem(GameState_Play* play, int index)
 #endif
 
 #if defined(GAME_MM)
-static void dpadUseItem(GameState_Play* play, int index)
+static void dpadUseItem(GameState_Play* play, int index, int flags)
 {
     s16 itemId;
     void (*Player_UseItem)(GameState_Play* play, Actor_Player* link, s16 itemId);
 
     itemId = sDpadItems[index];
-    if (itemId == ITEM_NONE)
+    if (!canUseDpadItem(play, itemId, flags))
         return;
     Player_UseItem = OverlayAddr(0x80831990);
     Player_UseItem(play, GET_LINK(play), itemId);
@@ -172,7 +228,7 @@ void comboDpadUpdate(GameState_Play* play)
 }
 #endif
 
-int comboDpadUse(GameState_Play* play)
+int comboDpadUse(GameState_Play* play, int flags)
 {
     u32 buttons;
     if (!canUseDpad(play))
@@ -182,22 +238,22 @@ int comboDpadUse(GameState_Play* play)
     buttons = play->gs.input[0].pressed.buttons;
     if (buttons & U_JPAD)
     {
-        dpadUseItem(play, DPAD_UP);
+        dpadUseItem(play, DPAD_UP, flags);
         return 1;
     }
     if (buttons & D_JPAD)
     {
-        dpadUseItem(play, DPAD_DOWN);
+        dpadUseItem(play, DPAD_DOWN, flags);
         return 1;
     }
     if (buttons & L_JPAD)
     {
-        dpadUseItem(play, DPAD_LEFT);
+        dpadUseItem(play, DPAD_LEFT, flags);
         return 1;
     }
     if (buttons & R_JPAD)
     {
-        dpadUseItem(play, DPAD_RIGHT);
+        dpadUseItem(play, DPAD_RIGHT, flags);
         return 1;
     }
     return 0;
