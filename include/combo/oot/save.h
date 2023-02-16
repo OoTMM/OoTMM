@@ -22,25 +22,22 @@ OotPermanentSceneFlags;
 
 typedef struct
 {
-    u8   buttonItems[4];
-    u8   cButtonSlots[3];
-    u16  boots:4;
-    u16  tunics:4;
-    u16  shields:4;
-    u16  swords:4;
-}
-OotItemEquips;
-
-_Static_assert(sizeof(OotItemEquips) == 0xa, "Wrong size for OotItemEquips");
-
-typedef struct
-{
     u16  boots:4;
     u16  tunics:4;
     u16  shields:4;
     u16  swords:4;
 }
 OotEquipment;
+
+typedef struct
+{
+    u8              buttonItems[4];
+    u8              cButtonSlots[3];
+    OotEquipment    equipment;
+}
+OotItemEquips;
+
+_Static_assert(sizeof(OotItemEquips) == 0xa, "Wrong size for OotItemEquips");
 
 typedef struct
 {

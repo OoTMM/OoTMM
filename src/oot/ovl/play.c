@@ -208,10 +208,10 @@ void hookPlay_Init(GameState_Play* play)
     }
 
     /* Handle swordless */
-    if (gSave.equips.swords == 0 || (gSave.equipment.swords & (1 << (gSave.equips.swords - 1))) == 0)
+    if (gSave.equips.equipment.swords == 0 || (gSave.equipment.swords & (1 << (gSave.equips.equipment.swords - 1))) == 0)
     {
         /* Set swordless */
-        gSave.equips.swords = 0;
+        gSave.equips.equipment.swords = 0;
         switch (gSave.equips.buttonItems[0])
         {
         case ITEM_OOT_KOKIRI_SWORD:
