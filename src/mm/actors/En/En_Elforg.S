@@ -50,15 +50,14 @@ PATCH_START 0x80acd27c
   nop
 PATCH_END
 
-/* Pass the fairy actor as param 2 */
-PATCH_START 0x80acd488
-  jal EnElforg_GiveItemTown
-   move a1,s0
+/* Always treat as if it's a town fairy */
+PATCH_START 0x80acd464
+  nop
 PATCH_END
 
-/* Disable the default fairy item behavior & load actor as param 2 */
-PATCH_START 0x80acd4dc
-  jal EnElforg_GiveItemDungeon
+/* Pass the fairy actor as param 2 */
+PATCH_START 0x80acd488
+  jal EnElforg_GiveItem
    move a1,s0
 PATCH_END
 
