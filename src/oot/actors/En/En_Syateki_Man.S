@@ -1,6 +1,6 @@
 #include <combo.h>
 
-/* Force Quiver2 as a reward */
-PATCH_START 0x809a12b8
-  li v0,1
+/* Force quiver as a reward */
+PATCH_START 0x809a12cc
+  move at,v0
 PATCH_END
