@@ -62,7 +62,7 @@
     "Forest Temple GS Garden East": "can_hookshot"
   exits:
     "Forest Temple Well": "event(FOREST_WELL) || can_dive_big"
-    "Forest Temple Garden East Ledge": "can_longshot"
+    "Forest Temple Garden East Ledge": "can_longshot || (can_hookshot && trick(OOT_FOREST_HOOK))"
 "Forest Temple Well":
   dungeon: Forest
   exits:

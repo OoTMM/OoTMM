@@ -48,7 +48,7 @@ Fire Temple Entrance:
     "Fire Temple After Miniboss": "has_explosives"
     "Fire Temple Pillar Ledge": "can_play(SONG_TIME)"
   locations:
-    "Fire Temple Ring Jail": "can_hammer && can_play(SONG_TIME)"
+    "Fire Temple Ring Jail": "can_hammer && (can_play(SONG_TIME) || (trick(OOT_HAMMER_WALLS) && has_hover_boots))"
 "Fire Temple Pillar Ledge":
   dungeon: Fire
   exits:
