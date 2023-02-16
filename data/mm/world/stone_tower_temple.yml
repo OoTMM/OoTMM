@@ -85,7 +85,7 @@
   dungeon: ST
   exits:
     "Stone Tower Top Inverted": "true"
-    "Stone Tower Temple Inverted East": "true"
+    "Stone Tower Temple Inverted East": "can_use_light_arrows"
   locations:
     "Stone Tower Temple Inverted Entrance Chest": "can_use_light_arrows"
 "Stone Tower Temple Inverted East":
@@ -93,6 +93,8 @@
   exits:
     "Stone Tower Temple Inverted Entrance": "true"
     "Stone Tower Temple Inverted Wizzrobe": "has(MASK_DEKU) && can_use_light_arrows  && has(SMALL_KEY_ST, 3)"
+    "Stone Tower Temple Inverted Bridge": "trick(MM_ISTT_EYEGORE) && has_shield && has(BOMB_BAG)"
+    "Stone Tower Temple Inverted Boss Key Room": trick(MM_ISTT_EYEGORE) && (has(MASK_DEKU) || has(MASK_ZORA))
   events:
     STONE_TOWER_WATER_CHEST_SUN: "can_use_light_arrows"
   locations:
@@ -142,6 +144,8 @@
   dungeon: ST
   exits:
     "Stone Tower Temple Inverted Bridge 2": "true"
+    "Stone Tower Temple Inverted Boss Key Room": "trick(MM_ISTT_EYEGORE) && has(MASK_GORON)"
+    "Stone Tower Temple Inverted Center": "trick(MM_ISTT_EYEGORE) && has(MASK_GORON)"
   locations:
     "Stone Tower Temple Inverted Giant Mask": "true"
 "Stone Tower Temple Inverted Bridge 2":

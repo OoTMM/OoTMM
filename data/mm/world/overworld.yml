@@ -27,7 +27,7 @@
     CLOCK_TOWN_SCRUB: "has(MOON_TEAR)"
     CLOCK_TOWN_OWL: "true"
   locations:
-    "Clock Town South Chest Lower": "has(HOOKSHOT) || (has(MASK_DEKU) && event(CLOCK_TOWN_SCRUB))"
+    "Clock Town South Chest Lower": "has(HOOKSHOT) || (has(MASK_DEKU) && event(CLOCK_TOWN_SCRUB)) || trick(MM_SCT_NOTHING)"
     "Clock Town South Chest Upper": "has(HOOKSHOT) || (has(MASK_DEKU) && event(CLOCK_TOWN_SCRUB))"
     "Clock Town Platform HP": "true"
     "Clock Town Business Scrub": "event(CLOCK_TOWN_SCRUB)"
@@ -73,7 +73,7 @@
     "Honey & Darling Game": "true"
     "Stock Pot Inn": "true"
     "Milk Bar": "true"
-    "Astral Observatory": "event(BOMBER_CODE)"
+    "Astral Observatory": "event(BOMBER_CODE) || trick(MM_BOMBER_SKIP)"
   locations:
     "Clock Town Silver Rupee Chest": "true"
     "Clock Town Postman Hat": "event(POSTMAN_FREEDOM)"
@@ -402,7 +402,7 @@
   exits:
     "Mountain Village Path Upper": "true"
     "Twin Islands": "true"
-    "Goron Graveyard": "can_use_lens_strict || (event(BOSS_SNOWHEAD) && (has(MASK_GORON) || has(MASK_ZORA)))"
+    "Goron Graveyard": "can_use_lens_strict || trick(MM_DARMANI_WALL) || (event(BOSS_SNOWHEAD) && (has(MASK_GORON) || has(MASK_ZORA)))"
     "Path to Snowhead Front": "true"
     "Blacksmith": "true"
   gossip:
