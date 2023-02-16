@@ -388,20 +388,27 @@ static void comboTextAppendOrd(char** b, int num)
 {
     const char* suffix;
 
-    switch (num % 10)
+    if (num >= 11 && num <= 13)
     {
-    case 1:
-        suffix = "st";
-        break;
-    case 2:
-        suffix = "nd";
-        break;
-    case 3:
-        suffix = "rd";
-        break;
-    default:
         suffix = "th";
-        break;
+    }
+    else
+    {
+        switch (num % 10)
+        {
+        case 1:
+            suffix = "st";
+            break;
+        case 2:
+            suffix = "nd";
+            break;
+        case 3:
+            suffix = "rd";
+            break;
+        default:
+            suffix = "th";
+            break;
+        }
     }
 
     comboTextAppendNum(b, num);
