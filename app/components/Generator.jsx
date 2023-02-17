@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { SETTINGS_CATEGORIES, DEFAULT_SETTINGS, itemPool as makeItemPool, locationList as makeLocationList } from '@ootmm/core';
+import { merge } from 'lodash';
 
 import { Tab, TabBar } from './Tab';
 import { RomConfig } from './RomConfig';
@@ -25,8 +26,8 @@ const limitStartingItems = (startingItems, itemPool) => {
 export const Generator = ({ onGenerate, error }) => {
   const [roms, setRoms] = useState({ oot: null, mm: null });
   const [seed, setSeed] = useState("");
-  const [settings, setSettings] = useState({...DEFAULT_SETTINGS, ...savedSettings});
   const [locList, setLocList] = useState(() => makeLocationList(settings) );
+  const [settings, setSettings] = useState(merge({}, DEFAULT_SETTINGS, savedSettings));
   const [itemPool, setItemPool] = useState(() => {
     const pool = makeItemPool(settings);
     let { startingItems } = settings;
