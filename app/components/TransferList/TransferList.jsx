@@ -84,9 +84,20 @@ export const TransferList = ({ label, locList, settings, setSetting }) => {
   return (
     <div className='transfer-list'>
       <div className='tl-buttons'>
-        <button className="tl-button" onClick={() => moveSelectedRight()}>Add {"\u25b6"}</button>
-        <button className="tl-button" onClick={() => resetLists()}>Reset</button>
-        <button className="tl-button" onClick={() => moveSelectedLeft()}>{"\u25c0"} Remove</button>
+        <button
+          className="tl-button"
+          onClick={() => moveSelectedRight()}
+          disabled={intersection(left, selected).length === 0}
+        >Add {"\u25b6"}</button>
+        <button
+          className="tl-button"
+          onClick={() => resetLists()}
+        >Reset</button>
+        <button
+          className="tl-button"
+          onClick={() => moveSelectedLeft()}
+          disabled={intersection(settings[label], selected).length === 0}
+        >{"\u25c0"} Remove</button>
       </div>
       <div className='tl-lists'>
           {buildListElements(left)}

@@ -46,11 +46,11 @@ button.tl-button {
   border-radius: 10px;
 }
 
-button.tl-button:hover {
+button.tl-button:hover:enabled {
   background-color: #a0a0a0;
 }
 
-button.tl-button:active {
+button.tl-button:active:enabled {
   background-color: #e0e0e0;
 }
 
