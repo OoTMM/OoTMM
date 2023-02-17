@@ -62,7 +62,7 @@ export const Generator = ({ onGenerate, error }) => {
     const locList = makeLocationList(newSettings);
     const junkLocations = newSettings.junkLocations;
     for (let i=0; i<junkLocations.length; i++) {
-      if (!shuffledLocList.includes(junkLocations[i])) {
+      if (Object.keys(locList).indexOf(junkLocations[i]) === -1) {
         delete junkLocations[i];
       }
     }

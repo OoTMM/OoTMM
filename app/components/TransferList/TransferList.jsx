@@ -1,29 +1,92 @@
 import React from 'react';
 import { Scrollbox } from './Scrollbox';
+import { ListElement } from './ListElement';
+import './transferlist.css';
 
-// const styles = {
-//     div: {
-//       display: 'flex',
-//       'align-items': 'center',
-//       'flex-direction': 'row',
-//       with: '100%',
-//       width: '40%',
-//       'background-color': '#f0f0f0'
-//     },
-//   };
+const intersection = (a, b) => {
+  return a.filter((v) => b.indexOf(v) !== -1);
+}
 
-  export const TransferList = ({ label, locList, settings, setSettings }) => {
-    // params
-    // label: name of the setting in the settings object
-    // locList: full list of locations
-    // settings: setting object
-    // setSettings: hook to change the settings state variable
-    const [selected, setSelected] = React.useState([]);
+export const TransferList = ({ label, locList, settings, setSetting }) => {
+  // params
+  // label: name of the setting in the settings object
+  // locList: full list of locations
+  // settings: setting object
+  // setSettings: hook to change the settings state variable
+  const [selected, setSelected] = React.useState([]);
+  const [left, setLeft] = React.useState(() => {
+    const newLocList = [...Object.keys(locList)];
+    if (settings[label].length === 0) {
+      return newLocList;
+    } else {
+      for (const loc of settings[label]) {
+        const idx = newLocList.indexOf(loc);
+        if (idx === -1) {
+          console.log(`Error: ${loc} from ${label} not found in location list.`);
+        } else {
+          newLocList.splice(idx, 1);
+        }
+      }
+      return newLocList;
+    }
+  });
 
+  const handleSelect = (loc) => {
+    const newSelected = [ ...selected ];
+    const idx = newSelected.indexOf(loc);
+    if (idx === -1) {
+      newSelected.push(loc);
+    } else {
+      newSelected.splice(idx, 1);
+    }
+    setSelected(newSelected);
+  };
 
-    return (
-        <Scrollbox width="40%" height="400px">
-          {locList}
-        </Scrollbox>
-    );
-  }
+  const buildListElements = (locations) => (
+    <Scrollbox width="50%" height="400px">
+      {locations.map((loc) => (
+        <ListElement
+          key={loc}
+          label={loc}
+          selected={selected.includes(loc)}
+          onClick={() => handleSelect(loc)}
+        />
+      ))}
+    </Scrollbox>
+  );
+
+  const moveSelectedRight = () => {
+    const toMove = intersection(left, selected);
+    const newRight = [ ...toMove, ...settings[label] ];
+    const newLeft = left.filter((v) => toMove.indexOf(v) === -1);
+    const newSelected = selected.filter((v) => toMove.indexOf(v) === -1);
+    setSetting({ [label]: newRight });
+    setLeft(newLeft);
+    setSelected(newSelected);
+    console.log(settings)
+  };
+
+  const moveSelectedLeft = () => {
+    const toMove = intersection(settings[label], selected);
+    const newLeft = [ ...toMove, ...left ];
+    const newRight = settings[label].filter((v) => toMove.indexOf(v) === -1);
+    const newSelected = selected.filter((v) => toMove.indexOf(v) === -1);
+    setSetting({ [label]: newRight });
+    setLeft(newLeft);
+    setSelected(newSelected);
+    console.log(settings)
+  };
+
+  return (
+    <>
+      <div className='transfer-button-row'>
+        <button className="transfer-button" onClick={() => moveSelectedRight()}>Add {"\u25b6"}</button>
+        <button className="transfer-button" onClick={() => moveSelectedLeft()}>{"\u25c0"} Remove</button>
+      </div>
+      <div className='transfer-list'>
+          {buildListElements(left)}
+          {buildListElements(settings[label])}
+      </div>
+    </>
+  );
+}
