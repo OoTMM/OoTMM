@@ -63,7 +63,6 @@ export const TransferList = ({ label, locList, settings, setSetting }) => {
     setSetting({ [label]: newRight });
     setLeft(newLeft);
     setSelected(newSelected);
-    console.log(settings)
   };
 
   const moveSelectedLeft = () => {
@@ -74,19 +73,25 @@ export const TransferList = ({ label, locList, settings, setSetting }) => {
     setSetting({ [label]: newRight });
     setLeft(newLeft);
     setSelected(newSelected);
-    console.log(settings)
   };
 
+  const resetLists = () => {
+    setLeft(Object.keys(locList));
+    setSetting({ [label]: [] });
+    setSelected([]);
+  }
+
   return (
-    <>
-      <div className='transfer-button-row'>
-        <button className="transfer-button" onClick={() => moveSelectedRight()}>Add {"\u25b6"}</button>
-        <button className="transfer-button" onClick={() => moveSelectedLeft()}>{"\u25c0"} Remove</button>
+    <div className='transfer-list'>
+      <div className='tl-buttons'>
+        <button className="tl-button" onClick={() => moveSelectedRight()}>Add {"\u25b6"}</button>
+        <button className="tl-button" onClick={() => resetLists()}>Reset</button>
+        <button className="tl-button" onClick={() => moveSelectedLeft()}>{"\u25c0"} Remove</button>
       </div>
-      <div className='transfer-list'>
+      <div className='tl-lists'>
           {buildListElements(left)}
           {buildListElements(settings[label])}
       </div>
-    </>
+    </div>
   );
 }

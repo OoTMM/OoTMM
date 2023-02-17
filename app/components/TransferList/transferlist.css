@@ -12,7 +12,7 @@ li {
 }
 
 li:hover {
-  background-color: #696969;
+  background-color: #a0a0a0;
 }
 
 li.selected {
@@ -28,13 +28,43 @@ ol {
 }
 
 div.transfer-list {
+  width: 50%;
+}
+
+div.tl-buttons {
   display: flex;
   flex-direction: row;
-  width: 50%;
+}
+
+button.tl-button {
+  display: inline-block;
+  width: 100%;
+  padding: 10px;
+  margin: 2px;
+  font-size: 16px;
+  border-width: 1px;
+  border-radius: 10px;
+}
+
+button.tl-button:hover {
+  background-color: #a0a0a0;
+}
+
+button.tl-button:active {
+  background-color: #e0e0e0;
+}
+
+div.tl-lists {
+  display: flex;
+  flex-direction: row;
   border: 1px solid black;
   border-radius: 10px;
+  padding: 2px;
+  background-color: #7504c9;
 }
 
 div.no-overflow {
   overflow: hidden;
+  border: 1px solid black;
+  border-radius: 10px;
 }
