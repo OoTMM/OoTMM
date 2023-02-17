@@ -225,7 +225,7 @@ const SIMPLE_DEPENDENCIES: {[k: string]: string[]} = {
     'OOT Gerudo Training Grounds Behind Block Visible 3',
     'OOT Gerudo Training Grounds Eye Statue',
     'OOT Gerudo Training Grounds Hammer Room Switch',
-    'OOT Gerudo Training Grounds Hammer Room,',
+    'OOT Gerudo Training Grounds Hammer Room',
     'OOT Gerudo Training Grounds Lizalfos',
     'OOT Gerudo Training Water',
     'OOT Gerudo Training Freestanding Key',
