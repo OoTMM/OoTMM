@@ -9,7 +9,7 @@ import React from 'react';
 //     },
 //   };
 
-  export const Scrollbox = ({ width, height }) => {
+  export const Scrollbox = ({ width, height, children }) => {
     const [selected, setSelected] = React.useState([]);
 
     const boxStyle = {
@@ -23,7 +23,7 @@ import React from 'react';
 
     return (
         <div style={boxStyle.div}>
-            
+            {children}
         </div>
     );
   }
