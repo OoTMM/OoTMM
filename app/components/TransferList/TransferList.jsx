@@ -13,6 +13,7 @@ export const TransferList = ({ label, locList, settings, setSetting }) => {
   // locList: full list of locations
   // settings: setting object
   // setSettings: hook to change the settings state variable
+  const [searchString, setSearchString] = React.useState('');
   const [selected, setSelected] = React.useState([]);
   const [left, setLeft] = React.useState(() => {
     const newLocList = [...Object.keys(locList)];
@@ -44,7 +45,7 @@ export const TransferList = ({ label, locList, settings, setSetting }) => {
 
   const buildListElements = (locations) => (
     <Scrollbox width="50%" height="400px">
-      {locations.map((loc) => (
+      {filterList(locations).map((loc) => (
         <ListElement
           key={loc}
           label={loc}
@@ -79,7 +80,11 @@ export const TransferList = ({ label, locList, settings, setSetting }) => {
     setLeft(Object.keys(locList));
     setSetting({ [label]: [] });
     setSelected([]);
-  }
+  };
+
+  const filterList = (locations) => {
+    return locations.filter((v) => v.toLowerCase().includes(searchString.toLowerCase()));
+  };
 
   return (
     <div className='transfer-list'>
@@ -102,6 +107,14 @@ export const TransferList = ({ label, locList, settings, setSetting }) => {
       <div className='tl-lists'>
           {buildListElements(left)}
           {buildListElements(settings[label])}
+      </div>
+      <div className='tl-filters'>
+        <input type="text" className='tl-text-input' value={searchString}
+          onChange={e => setSearchString(e.target.value)}
+        />
+        <button className="filter-clear" onClick={e => setSearchString('')}
+          hidden={searchString === ''}
+        >X</button>
       </div>
     </div>
   );

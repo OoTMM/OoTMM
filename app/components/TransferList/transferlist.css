@@ -68,3 +68,22 @@ div.no-overflow {
   border: 1px solid black;
   border-radius: 10px;
 }
+
+div.tl-filters {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  margin-top: 5px;
+}
+
+button.filter-clear {
+  background-color: #FE6969;
+  margin: 0 5px;
+}
+
+input.tl-text-input {
+  display: inline;
+  width: 100%;
+  font-size: inherit;
+  line-height: 2;
+}
