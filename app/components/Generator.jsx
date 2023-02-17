@@ -9,6 +9,8 @@ import { StartingItems } from './StartingItems';
 import { Tricks } from './Tricks';
 import { JunkLocations } from './JunkLocations';
 
+const displayJunkItems = !(makeLocationList === undefined);
+
 const savedSettings = JSON.parse(localStorage.getItem('settings') || "{}");
 
 const limitStartingItems = (startingItems, itemPool) => {
@@ -26,7 +28,9 @@ const limitStartingItems = (startingItems, itemPool) => {
 export const Generator = ({ onGenerate, error }) => {
   const [roms, setRoms] = useState({ oot: null, mm: null });
   const [seed, setSeed] = useState("");
-  const [locList, setLocList] = useState(() => makeLocationList(settings) );
+  if (displayJunkItems) {
+    const [locList, setLocList] = useState(() => makeLocationList(settings) );
+  }
   const [settings, setSettings] = useState(merge({}, DEFAULT_SETTINGS, savedSettings));
   const [itemPool, setItemPool] = useState(() => {
     const pool = makeItemPool(settings);
@@ -52,9 +56,11 @@ export const Generator = ({ onGenerate, error }) => {
       setting = { ...setting, startingItems: limitItemPool(setting) };
     }
     let newSettings = { ...settings, ...setting };
-    const [newLocList, junkLocations] = pruneLocationList(newSettings);
-    newSettings = { ...newSettings, junkLocations: junkLocations };
-    setLocList(newLocList);
+    if (displayJunkItems) {
+      const [newLocList, junkLocations] = pruneLocationList(newSettings);
+      newSettings = { ...newSettings, junkLocations: junkLocations };
+      setLocList(newLocList);
+    }
     localStorage.setItem('settings', JSON.stringify(newSettings));
     setSettings(newSettings);
   };
@@ -70,6 +76,14 @@ export const Generator = ({ onGenerate, error }) => {
     return [locList, junkLocations];
   };
   
+  const generateJunkItemsTab = () => {
+    console.log("display junk?", displayJunkItems)
+    if (displayJunkItems) {
+      return '';
+      // return <Tab name="Junk Locations" component={<JunkLocations settings={settings} setSetting={setSetting} locList={locList}/>}/>;
+    }
+    return null;
+  };
 
   return (
     <TabBar>
@@ -79,7 +93,7 @@ export const Generator = ({ onGenerate, error }) => {
       )}
       <Tab name="Tricks" component={<Tricks settings={settings} setSetting={setSetting}/>}/>
       <Tab name="Starting Items" component={<StartingItems settings={settings} setSetting={setSetting} itemPool={itemPool}/>}/>
-      <Tab name="Junk Locations" component={<JunkLocations settings={settings} setSetting={setSetting} locList={locList}/>}/>
+      {generateJunkItemsTab()}
     </TabBar>
   );
 };
