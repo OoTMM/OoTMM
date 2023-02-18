@@ -5,7 +5,8 @@
     "build": "ts-node -T ./lib/rollup.ts",
     "start": "ts-node -T ./lib/index.ts",
     "start:debug": "ts-node -T ./lib/index.ts --debug --config config.yml",
-    "test": "cross-env NODE_ENV=test jest"
+    "test": "cross-env NODE_ENV=test jest",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "core-js": "^3.26.1",

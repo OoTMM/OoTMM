@@ -1,5 +1,5 @@
 import { Settings, Trick, TRICKS } from '../settings';
-import type { Age, State } from './state';
+import type { Age, PathfindState } from './pathfind';
 
 const MASKS = [
   'MM_MASK_CAPTAIN',
@@ -24,10 +24,10 @@ const MASKS = [
   'MM_MASK_KAFEI',
 ];
 
-const itemCount = (state: State, item: string): number => state.items[item] || 0;
-const itemsCount = (state: State, items: string[]): number => items.reduce((acc, item) => acc + itemCount(state, item), 0);
+const itemCount = (state: PathfindState, item: string): number => state.items[item] || 0;
+const itemsCount = (state: PathfindState, items: string[]): number => items.reduce((acc, item) => acc + itemCount(state, item), 0);
 
-export type Expr = (state: State) => boolean;
+export type Expr = (state: PathfindState) => boolean;
 
 export const exprTrue = (): Expr => state => true;
 export const exprFalse = (): Expr => state => false;

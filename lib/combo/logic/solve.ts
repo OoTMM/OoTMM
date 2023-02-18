@@ -1,8 +1,7 @@
 import { GAMES } from '../config';
 import { Random, sample, shuffle } from '../random';
 import { gameId } from '../util';
-import { pathfind, Reachable } from './pathfind';
-import { Items } from './state';
+import { pathfind, Reachable, Items } from './pathfind';
 import { World } from './world';
 import { LogicSeedError } from './error';
 import { Options } from '../options';

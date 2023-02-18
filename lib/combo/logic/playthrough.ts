@@ -1,9 +1,8 @@
 import { Random, shuffle } from '../random';
 import { Settings } from '../settings';
 import { addItem, isBossKey, isDungeonReward, isToken, isItemMajor, isSmallKey } from './items';
-import { pathfind } from './pathfind';
+import { pathfind, Items } from './pathfind';
 import { ItemPlacement } from './solve';
-import { Items } from './state';
 import { World } from './world';
 
 const isItemImportant = (settings: Settings, item: string) => {
