@@ -1,6 +1,6 @@
 import { Random, sample } from "../random";
 import { Settings } from "../settings";
-import { EntranceOverrides, pathfind, Reachable } from "./pathfind";
+//import { EntranceOverrides, pathfind, Reachable } from "./pathfind.old";
 import { DUNGEONS_REGIONS, ExprMap, World, WorldEntrance } from "./world";
 
 export type EntranceShuffleResult = {

@@ -2,11 +2,11 @@ import { ItemPlacement } from './solve';
 import { World } from './world';
 import { findSpheres } from './playthrough';
 import { Random, sample, shuffle } from '../random';
-import { pathfind, Items } from './pathfind';
 import { addItem, DUNGEON_REWARDS_ORDERED, isDungeonItem, isDungeonReward, isItemMajor, isGoldToken, itemsArray, isKey, isHouseToken, isSmallKey, isGanonBossKey, isRegularBossKey, DUNGEON_REWARDS, isStrayFairy, isToken, isTownStrayFairy, isSong } from './items';
 import { Settings } from '../settings';
 import { Game } from '../config';
 import { Monitor } from '../monitor';
+import { Pathfinder } from './pathfind';
 
 export type HintGossipHero = {
   type: 'hero',
@@ -383,6 +383,7 @@ export class LogicPassHints {
   private gossip: {[k: string]: HintGossip} = {};
   private foolish: {[k: string]: number} = {};
   private dependencies: typeof SIMPLE_DEPENDENCIES;
+  private pathfinder: Pathfinder;
 
   constructor(
     private readonly state: {
@@ -398,6 +399,7 @@ export class LogicPassHints {
     if (!state.settings.tricks['OOT_NIGHT_GS']) {
       delete this.dependencies['OOT_SONG_SUN'];
     }
+    this.pathfinder = new Pathfinder(state.world, state.settings);
   }
 
   private findItem(item: string) {
@@ -488,25 +490,8 @@ export class LogicPassHints {
     if (typeof locs === 'string') {
       locs = new Set([locs]);
     }
-    const items: Items = { ...this.state.settings.startingItems };
-    let reachable = pathfind(this.state.world, items, true);
-    const locations = new Set<string>();
-    for (;;) {
-      let change = false;
-      reachable = pathfind(this.state.world, items, true, reachable);
-      for (const l of reachable.locations) {
-        if (locations.has(l) || locs.has(l)) {
-          continue;
-        }
-        addItem(items, this.state.items[l]);
-        locations.add(l);
-        change = true;
-      }
-      if (!change) {
-        break;
-      }
-    }
-    const gossips = Array.from(reachable.gossip).filter(x => !this.gossip[x]);
+    const pathfinderState = this.pathfinder.run(null, { recursive: true, gossip: true, items: this.state.items });
+    const gossips = Array.from(pathfinderState.gossip).filter(x => !this.gossip[x]);
     if (gossips.length === 0) {
       return null;
     }

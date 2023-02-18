@@ -1,10 +1,10 @@
 import { GAMES } from '../config';
 import { Random, sample, shuffle } from '../random';
 import { gameId } from '../util';
-import { pathfind, Reachable, Items } from './pathfind';
+import { Pathfinder, PathfinderState } from './pathfind';
 import { World } from './world';
 import { LogicSeedError } from './error';
-import { addItem, combinedItems, itemsArray, removeItem, ITEMS_REQUIRED, isDungeonReward, isGoldToken, isHouseToken, isKey, isStrayFairy, isSmallKey, isGanonBossKey, isRegularBossKey, isTownStrayFairy, isDungeonStrayFairy, isSong, isJunk, isMapCompass } from './items';
+import { Items, addItem, combinedItems, itemsArray, removeItem, ITEMS_REQUIRED, isDungeonReward, isGoldToken, isHouseToken, isKey, isStrayFairy, isSmallKey, isGanonBossKey, isRegularBossKey, isTownStrayFairy, isDungeonStrayFairy, isSong, isJunk, isMapCompass } from './items';
 import { Settings } from '../settings';
 
 export const EXTRA_ITEMS = [
@@ -57,11 +57,10 @@ const maxRequired = (pools: ItemPools, item: string, count: number) => {
 };
 
 export class LogicPassSolver {
-  private placement!: ItemPlacement;
-  private items!: Items;
-  private reachable!: Reachable;
+  private items!: ItemPlacement;
+  private pathfinder!: Pathfinder;
+  private pathfinderState!: PathfinderState;
   private pools!: ItemPools;
-  private reachedLocations!: Set<string>;
   private junkLocations!: Set<string>;
 
   constructor(
@@ -71,6 +70,7 @@ export class LogicPassSolver {
       random: Random,
     }
   ) {
+    this.pathfinder = new Pathfinder(this.state.world, this.state.settings);
   }
 
   run() {
@@ -92,18 +92,10 @@ export class LogicPassSolver {
   }
 
   private initSolver() {
-    this.placement = {};
-    this.items = { ...this.state.settings.startingItems };
-    this.reachedLocations = new Set<string>();
+    this.items = {};
     this.junkLocations = new Set<string>(this.state.settings.junkLocations);
     this.pools = this.makeItemPools();
-    if (this.state.settings.noLogic) {
-      const allLocations = new Set<string>(Object.keys(this.state.world.checks));
-      this.reachable = { events: new Set<string>, areas: { child: new Set<string>(), adult: new Set<string>() }, locations: allLocations, gossip: new Set<string>() };
-    } else {
-      this.reachable = pathfind(this.state.world, {}, false);
-    }
-    this.propagate();
+    this.pathfinderState = this.pathfinder.run(null);
   }
 
   private solve() {
@@ -131,9 +123,11 @@ export class LogicPassSolver {
       this.fixDungeon(dungeon);
     }
 
-    /* Place required itemss */
+    /* Place required items */
     for (;;) {
-      if (this.reachable.locations.size === checksCount) {
+      /* Pathfind */
+      this.pathfinderState = this.pathfinder.run(this.pathfinderState, { recursive: true, items: this.items });
+      if (this.pathfinderState.locations.size === checksCount) {
         break;
       }
 
@@ -144,7 +138,7 @@ export class LogicPassSolver {
     /* At this point we have a beatable game */
     this.fill();
 
-    return this.placement;
+    return this.items;
   }
 
   private fixLocations() {
@@ -177,7 +171,7 @@ export class LogicPassSolver {
       const check = this.state.world.checks[location];
       const { item } = check;
 
-      if (this.placement[location]) {
+      if (this.items[location]) {
         continue;
       }
 
@@ -284,7 +278,7 @@ export class LogicPassSolver {
 
     /* Fix the non-shuffled GS */
     for (const location of gsLocations) {
-      if (!this.placement[location]) {
+      if (!this.items[location]) {
         const item = this.state.world.checks[location].item;
         this.place(location, item);
         removeItemPools(this.pools, item);
@@ -294,7 +288,7 @@ export class LogicPassSolver {
     /* Fix the non-shuffled house tokens */
     if (this.state.settings.housesSkulltulaTokens !== 'all') {
       for (const location of houseLocations) {
-        if (!this.placement[location]) {
+        if (!this.items[location]) {
           const item = this.state.world.checks[location].item;
           this.place(location, item);
           removeItemPools(this.pools, item);
@@ -415,16 +409,6 @@ export class LogicPassSolver {
     }
   }
 
-  private propagate() {
-    for (;;) {
-      this.reachable = pathfind(this.state.world, this.items, false, this.reachable);
-      const changed = this.markAccessible();
-      if (!changed) {
-        break;
-      }
-    }
-  }
-
   private randomAssumed(pool: Items, opts?: { restrictedLocations?: Set<string>, forcedItem?: string }) {
     const options = opts || {};
 
@@ -435,7 +419,7 @@ export class LogicPassSolver {
     } else {
       const items = itemsArray(pool);
       if (items.length === 0) {
-        const unreachableLocs = Object.keys(this.state.world.checks).filter(x => !this.reachable.locations.has(x));
+        const unreachableLocs = Object.keys(this.state.world.checks).filter(x => !this.pathfinderState.locations.has(x));
         throw new Error(`Unreachable locations: ${unreachableLocs.join(', ')}`);
       }
       requiredItem = sample(this.state.random, items);
@@ -444,33 +428,12 @@ export class LogicPassSolver {
     /* Remove the selected item from the required pool */
     removeItem(pool, requiredItem);
 
-    /* Get all assumed accessible items */
-    const assumedAccessibleItems = combinedItems(this.items, pool);
-
     /* Get all assumed reachable locations */
-    let reachable = this.reachable!;
-    const reachableLocations = new Set(reachable.locations);
-    for (;;) {
-      let changed = false;
-      reachable = pathfind(this.state.world, assumedAccessibleItems, false, reachable);
-      for (const l of reachable.locations.values()) {
-        if (!reachableLocations.has(l)) {
-          changed = true;
-          reachableLocations.add(l);
-          if (this.placement[l]) {
-            addItem(assumedAccessibleItems, this.placement[l]);
-          }
-        }
-      }
-      if (!changed) {
-        break;
-      }
-    }
-    const assumedReachable = reachable.locations;
+    const result = this.pathfinder.run(this.pathfinderState, { recursive: true, items: this.items, assumedItems: pool });
 
     /* Get all assumed reachable locations that have not been placed */
-    let unplacedLocs = Array.from(assumedReachable)
-      .filter(location => !this.placement[location]);
+    let unplacedLocs = Array.from(result.locations)
+      .filter(location => !this.items[location]);
 
     if (options.restrictedLocations) {
       unplacedLocs = unplacedLocs.filter(x => options.restrictedLocations!.has(x));
@@ -486,15 +449,12 @@ export class LogicPassSolver {
 
     /* Place the selected item at the selected location */
     this.place(location, requiredItem);
-
-    /* Propagate */
-    this.propagate();
   }
 
   private fill() {
     const pool = poolsArray(this.pools);
     const shuffledPool = shuffle(this.state.random, pool);
-    const locations = Object.keys(this.state.world.checks).filter(loc => !this.placement[loc]);
+    const locations = Object.keys(this.state.world.checks).filter(loc => !this.items[loc]);
 
     for (const item of shuffledPool) {
       const loc = locations.pop()!;
@@ -506,19 +466,6 @@ export class LogicPassSolver {
     }
   }
 
-  private markAccessible() {
-    let changed = false;
-    this.reachable!.locations.forEach(loc => {
-      if (this.placement[loc] && !this.reachedLocations.has(loc)) {
-        this.reachedLocations.add(loc);
-        const item = this.placement[loc];
-        addItem(this.items, item);
-        changed = true;
-      }
-    });
-    return changed;
-  }
-
   private place(location: string, item: string) {
     if (this.state.world.checks[location] === undefined) {
       throw new Error('Invalid Location: ' + location);
@@ -526,6 +473,6 @@ export class LogicPassSolver {
     if (!isJunk(item) && this.state.settings.junkLocations.includes(location)) {
       throw new Error(`Unable to place ${item} at ${location}.`)
     }
-    this.placement[location] = item;
+    this.items[location] = item;
   }
 }

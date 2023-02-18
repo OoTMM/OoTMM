@@ -1,4 +1,4 @@
-import { Items } from './pathfind';
+export type Items = {[k: string]: number};
 
 export const DUNGEON_REWARDS_ORDERED = [
   'OOT_STONE_EMERALD',
