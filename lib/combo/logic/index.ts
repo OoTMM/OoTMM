@@ -1,5 +1,5 @@
 import { Random } from '../random';
-import { ItemPlacement, solve } from './solve';
+import { ItemPlacement, LogicPassSolver, solve } from './solve';
 import { createWorld, World, WorldCheck } from './world';
 import { spoiler } from './spoiler';
 import { LogicSeedError } from './error';
@@ -65,26 +65,11 @@ const createState = (opts: Options) => {
 };
 
 export const logic = (monitor: Monitor, opts: Options): LogicResult => {
-  const state = pipeline(createState(opts)).apply(LogicPassEntrances).exec();
-  const entrances = shuffleEntrances(state.world, state.random, opts.settings);
-
-  let placement: ItemPlacement = {};
-  let error: Error | null = null;
-  for (let i = 0; i < 100; ++i) {
-    try {
-      error = null;
-      placement = solve(opts, state.world, state.random);
-      break;
-    } catch (e) {
-      if (!(e instanceof LogicSeedError)) {
-        throw e;
-      }
-      error = e;
-    }
-  }
-  if (error) {
-    throw error;
-  }
+  const state = pipeline(
+    createState(opts)
+  ).apply(LogicPassEntrances)
+  .apply(LogicPassSolver)
+  .exec();
 
   let spheres: string[][] = [];
   if (!opts.settings.noLogic) {
