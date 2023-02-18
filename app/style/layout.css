@@ -21,15 +21,8 @@
   gap: 0.5rem;
   width: 100%;
 }
-
-.settings > .dropboxes {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 15px;
-}
-
-
-.settings> .checkboxes {
+ 
+.three-column-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 15px;
