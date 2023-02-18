@@ -127,19 +127,34 @@ const spoilerSpheres = (buffer: string[], world: World, placement: ItemPlacement
   }
 };
 
-export const spoiler = (world: World, placement: ItemPlacement, spheres: string[][], opts: Options, hints: Hints, entrances: EntranceShuffleResult) => {
-  const buffer: string[] = [];
-  spoilerHeader(buffer, opts.seed);
-  spoilerSettings(buffer, opts.settings);
-  spoilerTricks(buffer, opts.settings.tricks);
-  spoilerStartingItems(buffer, opts.settings.startingItems);
-  spoilerJunkLocations(buffer, opts.settings.junkLocations);
-  spoilerEntrances(buffer, entrances);
-  spoilerFoolish(buffer, hints.foolish);
-  spoilerHints(buffer, hints, placement);
-  if (!opts.settings.noLogic) {
-    spoilerSpheres(buffer, world, placement, spheres);
+export class LogicPassSpoiler {
+  constructor(
+    private readonly state: {
+      world: World,
+      items: ItemPlacement,
+      spheres: string[][],
+      opts: Options,
+      hints: Hints,
+      entrances: EntranceShuffleResult,
+    }
+  ) {
   }
-  spoilerRaw(buffer, placement);
-  return buffer.join("\n");
-};
+
+  run() {
+    const buffer: string[] = [];
+    spoilerHeader(buffer, this.state.opts.seed);
+    spoilerSettings(buffer, this.state.opts.settings);
+    spoilerTricks(buffer, this.state.opts.settings.tricks);
+    spoilerStartingItems(buffer, this.state.opts.settings.startingItems);
+    spoilerJunkLocations(buffer, this.state.opts.settings.junkLocations);
+    spoilerEntrances(buffer, this.state.entrances);
+    spoilerFoolish(buffer, this.state.hints.foolish);
+    spoilerHints(buffer, this.state.hints, this.state.items);
+    if (!this.state.opts.settings.noLogic) {
+      spoilerSpheres(buffer, this.state.world, this.state.items, this.state.spheres);
+    }
+    spoilerRaw(buffer, this.state.items);
+    const log = buffer.join("\n");
+    return { log };
+  };
+}

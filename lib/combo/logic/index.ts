@@ -1,73 +1,62 @@
 import { Random } from '../random';
-import { ItemPlacement, solve } from './solve';
+import { LogicPassSolver } from './solve';
 import { createWorld, WorldCheck } from './world';
-import { spoiler } from './spoiler';
-import { LogicSeedError } from './error';
+import { LogicPassSpoiler } from './spoiler';
 import { Options } from '../options';
-import { hints, Hints } from './hints';
+import { Hints, LogicPassHints } from './hints';
 import { alterWorld, configFromSettings } from './settings';
-import { playthrough } from './playthrough';
+import { LogicPassPlaythrough } from './playthrough';
 import { Monitor } from '../monitor';
-import { EntranceShuffleResult, shuffleEntrances } from './entrance';
-import { EntranceOverrides } from './pathfind';
+import { LogicPassEntrances } from './entrance';
+import { LogicPassHash } from './hash';
 
-export type LogicResult = {
-  items: WorldCheck[];
-  log: string;
-  hints: Hints;
-  config: Set<string>;
-  hash: string;
-  entrances: EntranceShuffleResult;
-};
+interface LogicPass<Out> {
+  run: () => Out;
+}
 
-const ALPHABET = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+type LogicPassConstructor<In, Out> = new (state: In) => LogicPass<Out>;
 
-const seedHash = (random: Random): string => {
-  const letters: string[] = [];
-  for (let i = 0; i < 8; ++i) {
-    letters.push(ALPHABET[random.next() % ALPHABET.length]);
+class LogicPipeline<State> {
+  constructor(private readonly state: State) {
   }
-  return letters.join('');
+
+  apply<Out>(pass: LogicPassConstructor<State, Out>): LogicPipeline<State & Out> {
+    const passInstance = new pass(this.state);
+    const newState = { ...this.state, ...passInstance.run() };
+    return new LogicPipeline(newState);
+  }
+
+  exec(): State {
+    return this.state;
+  }
 };
 
-export const logic = (monitor: Monitor, opts: Options): LogicResult => {
-  const config = configFromSettings(opts.settings);
-  const world = createWorld(opts.settings);
-  alterWorld(world, opts.settings, config);
+function pipeline<State>(state: State): LogicPipeline<State> {
+  return new LogicPipeline(state);
+}
+
+const createState = (monitor: Monitor, opts: Options) => {
   const random = new Random();
   random.seed(opts.seed);
-  const entrances = shuffleEntrances(world, random, opts.settings);
+  const world = createWorld(opts.settings);
+  const config = configFromSettings(opts.settings);
+  alterWorld(world, opts.settings, config);
 
-  let placement: ItemPlacement = {};
-  let error: Error | null = null;
-  for (let i = 0; i < 100; ++i) {
-    try {
-      error = null;
-      placement = solve(opts, world, random);
-      break;
-    } catch (e) {
-      if (!(e instanceof LogicSeedError)) {
-        throw e;
-      }
-      error = e;
-    }
-  }
-  if (error) {
-    throw error;
-  }
-
-  let spheres: string[][] = [];
-  if (!opts.settings.noLogic) {
-    spheres = playthrough(opts.settings, random, world, placement);
-  }
-  const items: WorldCheck[] = [];
-  for (const loc in placement) {
-    const check = world.checks[loc];
-    items.push({ ...check, item: placement[loc] });
-  }
-  const h = hints(monitor, random, opts.settings, world, placement, spheres);
-  const log = spoiler(world, placement, spheres, opts, h, entrances);
-  const hash = seedHash(random);
-
-  return { items, log, hints: h, config, hash, entrances };
+  return { opts, monitor, random, world, config, settings: opts.settings };
 };
+
+export const logic = (monitor: Monitor, opts: Options) => {
+  const state = pipeline(
+    createState(monitor, opts)
+  ).apply(LogicPassEntrances)
+  .apply(LogicPassSolver)
+  .apply(LogicPassPlaythrough)
+  .apply(LogicPassHints)
+  .apply(LogicPassSpoiler)
+  .apply(LogicPassHash)
+  .exec();
+
+  return state;
+};
+
+export type LogicResult = ReturnType<typeof logic>;

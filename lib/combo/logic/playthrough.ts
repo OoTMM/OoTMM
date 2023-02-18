@@ -1,9 +1,8 @@
 import { Random, shuffle } from '../random';
 import { Settings } from '../settings';
 import { addItem, isBossKey, isDungeonReward, isToken, isItemMajor, isSmallKey } from './items';
-import { pathfind } from './pathfind';
+import { pathfind, Items } from './pathfind';
 import { ItemPlacement } from './solve';
-import { Items } from './state';
 import { World } from './world';
 
 const isItemImportant = (settings: Settings, item: string) => {
@@ -89,7 +88,25 @@ const findMinimalSpheres = (settings: Settings, random: Random, world: World, pl
   return spheres;
 }
 
-export const playthrough = (settings: Settings, random: Random, world: World, placement: ItemPlacement) => {
-  const spheres = findMinimalSpheres(settings, random, world, placement);
-  return spheres.map(sphere => sphere.filter(item => isItemImportant(settings, placement[item]))).filter(sphere => sphere.length !== 0);
+export class LogicPassPlaythrough {
+  constructor(
+    private readonly state: {
+      settings: Settings,
+      random: Random,
+      world: World,
+      items: ItemPlacement,
+    },
+  ){
+  }
+
+  run() {
+    let spheres: string[][] = [];
+
+    if (!this.state.settings.noLogic) {
+      const rawSpheres = findMinimalSpheres(this.state.settings, this.state.random, this.state.world, this.state.items);
+      spheres = rawSpheres.map(sphere => sphere.filter(item => isItemImportant(this.state.settings, this.state.items[item]))).filter(sphere => sphere.length !== 0);
+    }
+
+    return { spheres };
+  }
 }

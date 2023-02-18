@@ -140,7 +140,10 @@ const toU32Buffer = (data: number[]) => {
 
 const gameChecks = (settings: Settings, game: Game, logic: LogicResult): Buffer => {
   const buf: number[] = [];
-  for (const c of logic.items) {
+  for (const loc in logic.world.checks) {
+    const c = logic.world.checks[loc];
+    const item = logic.items[loc];
+
     if (c.game !== game) {
       continue;
     }
@@ -165,8 +168,8 @@ const gameChecks = (settings: Settings, game: Game, logic: LogicResult): Buffer 
       break;
     }
     const key = (sceneId << 8) | id;
-    const item = gi(settings, game, c.item, true);
-    buf.push(key, item);
+    const itemGi = gi(settings, game, item, true);
+    buf.push(key, itemGi);
   }
   return toU16Buffer(buf);
 };

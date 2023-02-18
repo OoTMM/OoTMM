@@ -1,6 +1,18 @@
 import { World } from './world';
-import { Age, AGES, Items } from './state';
 import { Optional } from '../util';
+
+export const AGES = ['child', 'adult'] as const;
+
+export type Items = {[k: string]: number};
+export type Age = typeof AGES[number];
+
+export type PathfindState = {
+  items: Items;
+  age: Age;
+  events: Set<string>;
+  ignoreItems: boolean;
+};
+
 
 /*
  * TODO: This whole module needs some serious refactoring.

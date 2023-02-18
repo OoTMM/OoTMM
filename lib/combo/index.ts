@@ -7,7 +7,7 @@ import { SETTINGS, DEFAULT_SETTINGS, SETTINGS_CATEGORIES, Settings, TRICKS } fro
 import { createWorld } from './logic/world';
 import { alterWorld, configFromSettings, isShuffled } from './logic/settings';
 import { itemName } from './names';
-import { Items } from './logic/state';
+import { Items } from './logic/pathfind';
 import { addItem, isDungeonItem, isDungeonReward, isJunk, isStrayFairy, isToken } from './logic/items';
 import { EXTRA_ITEMS } from './logic/solve';
 

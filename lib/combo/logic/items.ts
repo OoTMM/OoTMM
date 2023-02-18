@@ -1,4 +1,4 @@
-import { Items } from './state';
+import { Items } from './pathfind';
 
 export const DUNGEON_REWARDS_ORDERED = [
   'OOT_STONE_EMERALD',
