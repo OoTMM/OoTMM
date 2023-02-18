@@ -4,6 +4,6 @@
     "strict": true,
     "esModuleInterop": true,
     "resolveJsonModule": true,
-    "moduleResolution": "node"
+    "moduleResolution": "node",
   }
 }
