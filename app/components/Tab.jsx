@@ -6,7 +6,7 @@ export const TabBar = ({ children }) => {
   return (
     <div className="tab-bar">
       <nav className="tab-bar-header">
-        {React.Children.map(children, (child, i) =>
+        {React.Children.toArray(children).filter((v) => v !== null).map((child, i) =>
           <a key={i} className={["tab-bar-header-tab", i === activeTab ? "active" : "inactive"].join(" ")} href="#" onClick={() => setActiveTab(i)}>{child.props.name}</a>
         )}
       </nav>

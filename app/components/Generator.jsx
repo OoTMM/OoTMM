@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
+import { SETTINGS_CATEGORIES, DEFAULT_SETTINGS, itemPool as makeItemPool, locationList as makeLocationList } from '@ootmm/core';
 import { merge } from 'lodash';
-import { SETTINGS_CATEGORIES, DEFAULT_SETTINGS, itemPool as makeItemPool } from '@ootmm/core';
 
 import { Tab, TabBar } from './Tab';
 import { RomConfig } from './RomConfig';
 import { Settings } from './Settings';
 import { StartingItems } from './StartingItems';
 import { Tricks } from './Tricks';
+import { JunkLocations } from './JunkLocations';
+
+const displayJunkItems = !(makeLocationList === undefined);
 
 const savedSettings = JSON.parse(localStorage.getItem('settings') || "{}");
 
@@ -25,6 +28,12 @@ const limitStartingItems = (startingItems, itemPool) => {
 export const Generator = ({ onGenerate, error }) => {
   const [roms, setRoms] = useState({ oot: null, mm: null });
   const [seed, setSeed] = useState("");
+  const [locList, setLocList] = useState(() => {
+    if (displayJunkItems) {
+      return makeLocationList(settings);
+    }
+    return null;
+  });
   const [settings, setSettings] = useState(merge({}, DEFAULT_SETTINGS, savedSettings));
   const [itemPool, setItemPool] = useState(() => {
     const pool = makeItemPool(settings);
@@ -44,13 +53,38 @@ export const Generator = ({ onGenerate, error }) => {
     startingItems = limitStartingItems(startingItems, ip);
     return startingItems;
   };
+  
   const setSetting = (setting) => {
-    if (!setting.startingItems) {
+    if (!(setting.startingItems || setting.junkLocations)) {
       setting = { ...setting, startingItems: limitItemPool(setting) };
     }
-    const newSettings = { ...settings, ...setting };
+    let newSettings = { ...settings, ...setting };
+    if (displayJunkItems) {
+      const [newLocList, junkLocations] = pruneLocationList(newSettings);
+      newSettings = { ...newSettings, junkLocations: junkLocations };
+      setLocList(newLocList);
+    }
     localStorage.setItem('settings', JSON.stringify(newSettings));
     setSettings(newSettings);
+  };
+
+  const pruneLocationList = (newSettings) => {
+    const locList = makeLocationList(newSettings);
+    const junkLocations = newSettings.junkLocations;
+    for (let i=0; i<junkLocations.length; i++) {
+      if (Object.keys(locList).indexOf(junkLocations[i]) === -1) {
+        delete junkLocations[i];
+      }
+    }
+    return [locList, junkLocations];
+  };
+  
+  const generateJunkItemsTab = () => {
+    console.log("display junk?", displayJunkItems)
+    if (displayJunkItems) {
+      return <Tab name="Junk Locations" component={<JunkLocations settings={settings} setSetting={setSetting} locList={locList}/>}/>;
+    }
+    return null;
   };
 
   return (
@@ -61,6 +95,7 @@ export const Generator = ({ onGenerate, error }) => {
       )}
       <Tab name="Tricks" component={<Tricks settings={settings} setSetting={setSetting}/>}/>
       <Tab name="Starting Items" component={<StartingItems settings={settings} setSetting={setSetting} itemPool={itemPool}/>}/>
+      {generateJunkItemsTab()}
     </TabBar>
   );
 };
