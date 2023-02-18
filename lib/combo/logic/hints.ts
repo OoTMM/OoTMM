@@ -378,29 +378,31 @@ const SIMPLE_DEPENDENCIES: {[k: string]: string[]} = {
   ]
 };
 
-class HintsSolver {
+export class LogicPassHints {
   private hintedLocations = new Set<string>();
   private gossip: {[k: string]: HintGossip} = {};
   private foolish: {[k: string]: number} = {};
   private dependencies: typeof SIMPLE_DEPENDENCIES;
 
   constructor(
-    private monitor: Monitor,
-    private random: Random,
-    private settings: Settings,
-    private world: World,
-    private items: ItemPlacement,
-    private spheres: string[][],
+    private readonly state: {
+      monitor: Monitor,
+      random: Random,
+      settings: Settings,
+      world: World,
+      items: ItemPlacement,
+      spheres: string[][],
+    },
   ){
     this.dependencies = JSON.parse(JSON.stringify(SIMPLE_DEPENDENCIES));
-    if (!settings.tricks['OOT_NIGHT_GS']) {
+    if (!state.settings.tricks['OOT_NIGHT_GS']) {
       delete this.dependencies['OOT_SONG_SUN'];
     }
   }
 
   private findItem(item: string) {
-    for (const loc in this.items) {
-      if (this.items[loc] === item) {
+    for (const loc in this.state.items) {
+      if (this.state.items[loc] === item) {
         return loc;
       }
     }
@@ -409,8 +411,8 @@ class HintsSolver {
 
   private findItems(item: string) {
     const locs: string[] = [];
-    for (const loc in this.items) {
-      if (this.items[loc] === item) {
+    for (const loc in this.state.items) {
+      if (this.state.items[loc] === item) {
         locs.push(loc);
       }
     }
@@ -421,49 +423,49 @@ class HintsSolver {
     if (loc === 'OOT Temple of Time Medallion' || loc === 'MM Oath to Order') {
       return false;
     }
-    const item = this.items[loc];
-    if (loc === 'OOT Temple of Time Master Sword' && !this.settings.shuffleMasterSword) {
+    const item = this.state.items[loc];
+    if (loc === 'OOT Temple of Time Master Sword' && !this.state.settings.shuffleMasterSword) {
       return false;
     }
-    if (isSmallKey(item) && this.settings.smallKeyShuffle === 'anywhere') {
+    if (isSmallKey(item) && this.state.settings.smallKeyShuffle === 'anywhere') {
       return true;
     }
-    if (isGanonBossKey(item) && this.settings.ganonBossKey === 'anywhere') {
+    if (isGanonBossKey(item) && this.state.settings.ganonBossKey === 'anywhere') {
       return true;
     }
-    if (isRegularBossKey(item) && this.settings.bossKeyShuffle === 'anywhere') {
+    if (isRegularBossKey(item) && this.state.settings.bossKeyShuffle === 'anywhere') {
       return true;
     }
-    if (isTownStrayFairy(item) && this.settings.townFairyShuffle === 'anywhere') {
+    if (isTownStrayFairy(item) && this.state.settings.townFairyShuffle === 'anywhere') {
       return true;
     }
-    if (isStrayFairy(item) && this.settings.strayFairyShuffle === 'anywhere') {
+    if (isStrayFairy(item) && this.state.settings.strayFairyShuffle === 'anywhere') {
       return true;
     }
     if (isDungeonItem(item)) {
       return false;
     }
-    if (isDungeonReward(item) && this.settings.dungeonRewardShuffle !== 'anywhere') {
+    if (isDungeonReward(item) && this.state.settings.dungeonRewardShuffle !== 'anywhere') {
       return false;
     }
-    if (!this.settings.shuffleGerudoCard && item == 'OOT_GERUDO_CARD') {
+    if (!this.state.settings.shuffleGerudoCard && item == 'OOT_GERUDO_CARD') {
       return false;
     }
     if (isGoldToken(item)) {
       return false;
     }
-    if (isHouseToken(item) && this.settings.housesSkulltulaTokens === 'none') {
+    if (isHouseToken(item) && this.state.settings.housesSkulltulaTokens === 'none') {
       return false;
     }
     return true;
   }
 
   private isLocationWayOfTheHero(loc: string) {
-    const item = this.items[loc];
+    const item = this.state.items[loc];
     if (!this.isLocationHintable(loc)) {
       return false;
     }
-    if (isSong(item) && this.settings.songs !== 'anywhere') {
+    if (isSong(item) && this.state.settings.songs !== 'anywhere') {
       return false;
     }
     return true;
@@ -471,9 +473,9 @@ class HintsSolver {
 
   private wayOfTheHero() {
     const woth = new Set<string>();
-    for (const sphere of this.spheres) {
+    for (const sphere of this.state.spheres) {
       for (const loc of sphere) {
-        if (findSpheres(this.settings, this.world, this.items, undefined, new Set([loc])) === null) {
+        if (findSpheres(this.state.settings, this.state.world, this.state.items, undefined, new Set([loc])) === null) {
           woth.add(loc);
         }
       }
@@ -486,17 +488,17 @@ class HintsSolver {
     if (typeof locs === 'string') {
       locs = new Set([locs]);
     }
-    const items: Items = { ...this.settings.startingItems };
-    let reachable = pathfind(this.world, items, true);
+    const items: Items = { ...this.state.settings.startingItems };
+    let reachable = pathfind(this.state.world, items, true);
     const locations = new Set<string>();
     for (;;) {
       let change = false;
-      reachable = pathfind(this.world, items, true, reachable);
+      reachable = pathfind(this.state.world, items, true, reachable);
       for (const l of reachable.locations) {
         if (locations.has(l) || locs.has(l)) {
           continue;
         }
-        addItem(items, this.items[l]);
+        addItem(items, this.state.items[l]);
         locations.add(l);
         change = true;
       }
@@ -508,13 +510,13 @@ class HintsSolver {
     if (gossips.length === 0) {
       return null;
     }
-    return sample(this.random, gossips);
+    return sample(this.state.random, gossips);
   }
 
   private wayOfTheHeroItems(woth: Set<string>) {
     const items: {[k: string]: Set<string> } = {};
     for (const loc of woth) {
-      const item = this.items[loc];
+      const item = this.state.items[loc];
       items[item] ||= new Set<string>();
       items[item].add(loc);
     }
@@ -522,8 +524,8 @@ class HintsSolver {
   }
 
   private playthroughLocations() {
-    const locations = this.spheres.flat().filter(loc => this.isLocationHintable(loc));
-    return shuffle(this.random, locations);
+    const locations = this.state.spheres.flat().filter(loc => this.isLocationHintable(loc));
+    return shuffle(this.state.random, locations);
   }
 
   private majorItemFoolish(loc: string, item: string, wothItems: {[k: string]: Set<string>}) {
@@ -557,7 +559,7 @@ class HintsSolver {
     if (woth.has(loc)) {
       return false;
     }
-    this.monitor.debug("majorItemFoolish - Purged: " + item);
+    this.state.monitor.debug("majorItemFoolish - Purged: " + item);
     return true;
   }
 
@@ -567,7 +569,7 @@ class HintsSolver {
 
     while (locsToCheck.length > 0) {
       const l = locsToCheck.pop()!;
-      const item = this.items[l];
+      const item = this.state.items[l];
       if (isItemMajor(item) || isDungeonReward(item) || isKey(item) || isStrayFairy(item) || isToken(item)) {
         /* May be a progression item - need to check other locations */
         const dependencies = this.dependencies[item];
@@ -583,19 +585,19 @@ class HintsSolver {
         }
       }
     }
-    this.monitor.debug("isItemUseless - Purged: " + this.items[loc]);
+    this.state.monitor.debug("isItemUseless - Purged: " + this.state.items[loc]);
     return true;
   }
 
   private locationFoolish(loc: string, wothItems: {[k: string]: Set<string>}) {
-    const item = this.items[loc];
+    const item = this.state.items[loc];
     if (!this.isLocationHintable(loc)) {
       return 0;
     }
     if ((isItemMajor(item) || isDungeonReward(item) || isKey(item) || isStrayFairy(item)) && !this.majorItemFoolish(loc, item, wothItems) && !this.isItemUseless(loc)) {
       return -1;
     }
-    if (this.hintedLocations.has(loc) || this.settings.junkLocations.includes(loc)) {
+    if (this.hintedLocations.has(loc) || this.state.settings.junkLocations.includes(loc)) {
       return 0;
     }
     return 1;
@@ -604,8 +606,8 @@ class HintsSolver {
   private foolishRegions(wothItems: {[k: string]: Set<string>}) {
     let regions: {[k:string]: number} = {};
 
-    for (const location in this.world.checks) {
-      const region = this.world.regions[location];
+    for (const location in this.state.world.checks) {
+      const region = this.state.world.regions[location];
       regions[region] ||= 0;
       if (regions[region] === -1) {
         continue;
@@ -631,7 +633,7 @@ class HintsSolver {
     if (checkHint === 'NONE') {
       return false;
     }
-    const locations = this.world.checkHints[checkHint];
+    const locations = this.state.world.checkHints[checkHint];
     if (locations.every(l => this.hintedLocations.has(l))) {
       return false;
     }
@@ -640,12 +642,12 @@ class HintsSolver {
         return false;
       }
     }
-    const items = locations.map(l => this.items[l]);
+    const items = locations.map(l => this.state.items[l]);
     const gossip = this.findValidGossip(new Set(locations));
     if (!gossip) {
       return false;
     }
-    this.gossip[gossip] = { game: this.world.gossip[gossip].game, type: 'item-exact', items, check: checkHint };
+    this.gossip[gossip] = { game: this.state.world.gossip[gossip].game, type: 'item-exact', items, check: checkHint };
     for (const l of locations) {
       this.hintedLocations.add(l);
     }
@@ -657,13 +659,13 @@ class HintsSolver {
       count = pool.length;
     }
     let placed = 0;
-    pool = shuffle(this.random, pool);
+    pool = shuffle(this.state.random, pool);
     for (const checkHint of pool) {
       if (placed >= count) {
         break;
       }
-      const locations = this.world.checkHints[checkHint];
-      if (locations.every(l => this.settings.junkLocations.includes(l))) {
+      const locations = this.state.world.checkHints[checkHint];
+      if (locations.every(l => this.state.settings.junkLocations.includes(l))) {
         continue;
       }
       if (this.placeGossipItemExact(checkHint)) {
@@ -681,14 +683,14 @@ class HintsSolver {
       if (regionsArray.length === 0) {
         break;
       }
-      const region = sample(this.random, regionsArray);
+      const region = sample(this.state.random, regionsArray);
       delete regions[region];
-      const gossip = sample(this.random, Object.keys(this.world.gossip).filter(x => !this.gossip[x]));
-      this.gossip[gossip] = { game: this.world.gossip[gossip].game, type: 'foolish', region: region };
+      const gossip = sample(this.state.random, Object.keys(this.state.world.gossip).filter(x => !this.gossip[x]));
+      this.gossip[gossip] = { game: this.state.world.gossip[gossip].game, type: 'foolish', region: region };
 
       /* Mark everythibng in the region as hinted */
-      for (const loc in this.world.checks) {
-        if (this.world.regions[loc] === region) {
+      for (const loc in this.state.world.checks) {
+        if (this.state.world.regions[loc] === region) {
           this.hintedLocations.add(loc);
         }
       }
@@ -703,12 +705,12 @@ class HintsSolver {
     if (locs.length === 0) {
       return false;
     }
-    const loc = sample(this.random, locs);
+    const loc = sample(this.state.random, locs);
     const gossip = this.findValidGossip(loc);
     if (gossip === null) {
       return false;
     }
-    this.gossip[gossip] = { game: this.world.gossip[gossip].game, type: 'hero', region: this.world.regions[loc], location: loc };
+    this.gossip[gossip] = { game: this.state.world.gossip[gossip].game, type: 'hero', region: this.state.world.regions[loc], location: loc };
     this.hintedLocations.add(loc);
     return true;
   }
@@ -717,8 +719,8 @@ class HintsSolver {
     if (location === null || this.hintedLocations.has(location)) {
       return false;
     }
-    const item = this.items[location];
-    const hint = this.world.checks[location].hint;
+    const item = this.state.items[location];
+    const hint = this.state.world.checks[location].hint;
     if (this.placeGossipItemExact(hint)) {
       return true;
     }
@@ -726,7 +728,7 @@ class HintsSolver {
     if (gossip === null) {
       return false;
     }
-    this.gossip[gossip] = { game: this.world.gossip[gossip].game, type: 'item-region', item, region: this.world.regions[location] };
+    this.gossip[gossip] = { game: this.state.world.gossip[gossip].game, type: 'item-region', item, region: this.state.world.regions[location] };
     this.hintedLocations.add(location);
     return true;
   }
@@ -746,14 +748,14 @@ class HintsSolver {
   }
 
   private duplicateHints() {
-    const hints = shuffle(this.random, Object.values(this.gossip).map(x => ({ ...x })));
-    const locs = new Set<string>(Object.keys(this.world.gossip));
+    const hints = shuffle(this.state.random, Object.values(this.gossip).map(x => ({ ...x })));
+    const locs = new Set<string>(Object.keys(this.state.world.gossip));
     for (const k in this.gossip) {
       locs.delete(k);
     }
-    const unplacedLocs = shuffle(this.random, Array.from(locs));
+    const unplacedLocs = shuffle(this.state.random, Array.from(locs));
     for (let i = 0; i < hints.length; ++i) {
-      this.gossip[unplacedLocs[i]] = { ...hints[i], game: this.world.gossip[unplacedLocs[i]].game };
+      this.gossip[unplacedLocs[i]] = { ...hints[i], game: this.state.world.gossip[unplacedLocs[i]].game };
     }
   }
 
@@ -815,7 +817,7 @@ class HintsSolver {
     if (loc === null) {
       return 'NONE';
     }
-    return this.world.regions[loc];
+    return this.state.world.regions[loc];
   }
 
   markLocation(location: string | null) {
@@ -839,11 +841,7 @@ class HintsSolver {
     const oathToOrder = this.locRegion(oathToOrderLocation);
 
     this.placeGossips();
-    return { dungeonRewards, lightArrow, oathToOrder, foolish: this.foolish, gossip: this.gossip };
+    const hints: Hints = { dungeonRewards, lightArrow, oathToOrder, foolish: this.foolish, gossip: this.gossip };
+    return { hints };
   }
 }
-
-export const hints = (monitor: Monitor, random: Random, settings: Settings, world: World, items: ItemPlacement, spheres: string[][]): Hints => {
-  const solver = new HintsSolver(monitor, random, settings, world, items, spheres);
-  return solver.run();
-};
