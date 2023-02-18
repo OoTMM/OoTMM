@@ -1,9 +1,9 @@
 import { Random, shuffle } from '../random';
 import { Settings } from '../settings';
-import { addItem, isBossKey, isDungeonReward, isToken, isItemMajor, isSmallKey } from './items';
-import { pathfind, Items } from './pathfind';
+import { addItem, isBossKey, isDungeonReward, isToken, isItemMajor, isSmallKey, Items } from './items';
 import { ItemPlacement } from './solve';
 import { World } from './world';
+import { Pathfinder, PathfinderState } from './pathfind';
 
 const isItemImportant = (settings: Settings, item: string) => {
   if (settings.smallKeyShuffle === 'anywhere' && isSmallKey(item))
@@ -19,34 +19,18 @@ const isItemImportant = (settings: Settings, item: string) => {
   return false;
 }
 
-export const findSpheres = (settings: Settings, world: World, placement: ItemPlacement, restrict?: Set<string>, forbid?: Set<string>) => {
-  const locations = new Set<string>();
-  const items: Items = { ...settings.startingItems };
+export const findSpheres = (settings: Settings, world: World, items: ItemPlacement, restrict?: Set<string>, forbid?: Set<string>) => {
   const spheres: string[][] = [];
-  let reachable = pathfind(world, items, false);
+  const pathfinder = new Pathfinder(world, settings);
+  let pathfinderState: PathfinderState | null = null;
 
   for (;;) {
-    reachable = pathfind(world, items, false, reachable);
-    const sphere = [];
-    for (const loc of reachable.locations) {
-      if (locations.has(loc)) {
-        continue;
-      }
-      if (restrict && !restrict.has(loc)) {
-        continue;
-      }
-      if (forbid && forbid.has(loc)) {
-        continue;
-      }
-      const item = placement[loc];
-      locations.add(loc);
-      addItem(items, item);
-      sphere.push(loc);
-    }
+    pathfinderState = pathfinder.run(pathfinderState, { items, restrictedLocations: restrict, forbiddenLocations: forbid });
+    const sphere = Array.from(pathfinderState.newLocations);
     if (sphere.length !== 0) {
       spheres.push(sphere);
     }
-    if (reachable.events.has('OOT_GANON') && reachable.events.has('MM_MAJORA')) {
+    if (pathfinderState.events.has('OOT_GANON') && pathfinderState.events.has('MM_MAJORA')) {
       break;
     }
     if (sphere.length === 0) {
