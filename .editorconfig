@@ -17,3 +17,6 @@ indent_size = 4
 [Makefile]
 indent_size = 4
 indent_style = tab
+
+[*.{ts,js}]
+quote_type = single
