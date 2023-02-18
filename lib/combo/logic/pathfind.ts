@@ -146,18 +146,24 @@ export class Pathfinder {
     for (const area of this.state.areas[age]) {
       const locations = this.world.areas[area].locations;
       for (const location in locations) {
-        if (oldLocations.has(location) || newLocations.has(location)) {
-          continue;
-        }
         if (this.opts.restrictedLocations && !this.opts.restrictedLocations.has(location)) {
           continue;
         }
         if (this.opts.forbiddenLocations && this.opts.forbiddenLocations.has(location)) {
           continue;
         }
+        if (oldLocations.has(location) || newLocations.has(location)) {
+          continue;
+        }
         const expr = locations[location];
         if (this.evalExpr(expr, age)) {
           newLocations.add(location);
+          const item = this.opts.items?.[location];
+          if (item) {
+            addItem(this.state.items, item);
+          } else {
+            this.state.uncollectedLocations.add(location);
+          }
         }
       }
     }
@@ -219,17 +225,6 @@ export class Pathfinder {
       anyChange = anyChange || changed;
       if (!changed) {
         break;
-      }
-    }
-
-    /* Collect every item */
-    for (const location of this.state.newLocations) {
-      const item = this.opts.items?.[location];
-      if (item) {
-        addItem(this.state.items, item);
-        anyChange = true;
-      } else {
-        this.state.uncollectedLocations.add(location);
       }
     }
 
