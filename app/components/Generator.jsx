@@ -28,9 +28,12 @@ const limitStartingItems = (startingItems, itemPool) => {
 export const Generator = ({ onGenerate, error }) => {
   const [roms, setRoms] = useState({ oot: null, mm: null });
   const [seed, setSeed] = useState("");
-  if (displayJunkItems) {
-    const [locList, setLocList] = useState(() => makeLocationList(settings) );
-  }
+  const [locList, setLocList] = useState(() => {
+    if (displayJunkItems) {
+      return makeLocationList(settings);
+    }
+    return null;
+  });
   const [settings, setSettings] = useState(merge({}, DEFAULT_SETTINGS, savedSettings));
   const [itemPool, setItemPool] = useState(() => {
     const pool = makeItemPool(settings);
@@ -79,8 +82,7 @@ export const Generator = ({ onGenerate, error }) => {
   const generateJunkItemsTab = () => {
     console.log("display junk?", displayJunkItems)
     if (displayJunkItems) {
-      return '';
-      // return <Tab name="Junk Locations" component={<JunkLocations settings={settings} setSetting={setSetting} locList={locList}/>}/>;
+      return <Tab name="Junk Locations" component={<JunkLocations settings={settings} setSetting={setSetting} locList={locList}/>}/>;
     }
     return null;
   };
