@@ -158,12 +158,6 @@ export class Pathfinder {
         const expr = locations[location];
         if (this.evalExpr(expr, age)) {
           newLocations.add(location);
-          const item = this.opts.items?.[location];
-          if (item) {
-            addItem(this.state.items, item);
-          } else {
-            this.state.uncollectedLocations.add(location);
-          }
         }
       }
     }
@@ -225,6 +219,16 @@ export class Pathfinder {
       anyChange = anyChange || changed;
       if (!changed) {
         break;
+      }
+    }
+
+    /* Collect items */
+    for (const location of this.state.newLocations) {
+      const item = this.opts.items?.[location];
+      if (item) {
+        addItem(this.state.items, item);
+      } else {
+        this.state.uncollectedLocations.add(location);
       }
     }
 
