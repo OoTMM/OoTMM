@@ -4,6 +4,7 @@ import { addItem, isBossKey, isDungeonReward, isToken, isItemMajor, isSmallKey, 
 import { ItemPlacement } from './solve';
 import { World } from './world';
 import { Pathfinder, PathfinderState } from './pathfind';
+import { Monitor } from '../monitor';
 
 const isItemImportant = (settings: Settings, item: string) => {
   if (settings.smallKeyShuffle === 'anywhere' && isSmallKey(item))
@@ -79,6 +80,7 @@ export class LogicPassPlaythrough {
       random: Random,
       world: World,
       items: ItemPlacement,
+      monitor: Monitor,
     },
   ){
   }
@@ -86,6 +88,7 @@ export class LogicPassPlaythrough {
   run() {
     let spheres: string[][] = [];
 
+    this.state.monitor.log('Logic: Playthrough');
     if (!this.state.settings.noLogic) {
       const rawSpheres = findMinimalSpheres(this.state.settings, this.state.random, this.state.world, this.state.items);
       spheres = rawSpheres.map(sphere => sphere.filter(item => isItemImportant(this.state.settings, this.state.items[item]))).filter(sphere => sphere.length !== 0);

@@ -5,6 +5,7 @@ import { Hints } from './hints';
 import { ItemPlacement } from './solve';
 import { World } from './world';
 import { itemName } from '../names';
+import { Monitor } from '../monitor';
 
 const VERSION = process.env.VERSION || 'XXX';
 
@@ -136,11 +137,14 @@ export class LogicPassSpoiler {
       opts: Options,
       hints: Hints,
       entrances: EntranceShuffleResult,
+      monitor: Monitor,
     }
   ) {
   }
 
   run() {
+    this.state.monitor.log('Logic: Spoiler');
+
     const buffer: string[] = [];
     spoilerHeader(buffer, this.state.opts.seed);
     spoilerSettings(buffer, this.state.opts.settings);

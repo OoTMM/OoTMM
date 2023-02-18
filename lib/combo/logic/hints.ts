@@ -813,6 +813,8 @@ export class LogicPassHints {
   }
 
   run() {
+    this.state.monitor.log('Logic: Hints');
+
     const dungeonRewardLocations = DUNGEON_REWARDS_ORDERED.map(item => this.findItem(item));
     const lightArrowLocation = this.findItem('OOT_ARROW_LIGHT');
     const oathToOrderLocation = this.findItem('MM_SONG_ORDER');
