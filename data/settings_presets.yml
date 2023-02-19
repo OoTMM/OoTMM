@@ -1,0 +1,47 @@
+Standard:
+  songs: anywhere
+  goldSkulltulaTokens: none
+  housesSkulltulaTokens: none
+  mapCompassShuffle: starting
+  smallKeyShuffle: ownDungeon
+  bossKeyShuffle: ownDungeon
+  townFairyShuffle: vanilla
+  strayFairyShuffle: anywhere
+  ganonBossKey: removed
+  dungeonRewardShuffle: dungeonBlueWarps
+  shuffleMasterSword: false
+  shuffleGerudoCard: false
+  doorOfTime: open
+  erBoss: none
+  progressiveShieldsOot: separate
+  progressiveSwordsOot: separate
+  progressiveShieldsMm: start
+  progressiveGoronLullaby: single
+  csmc: true
+  noLogic: false
+  startingItems:
+    MM_OCARINA: 1
+    MM_SONG_SOARING: 1
+    MM_SONG_TIME: 1
+    MM_SWORD: 1
+    OOT_OCARINA: 1
+    OOT_SONG_TP_LIGHT: 1
+    OOT_ZELDA_LETTER: 1
+  enabledTricks:
+    - OOT_LENS
+    - OOT_TUNICS
+    - OOT_HIDDEN_GROTTOS
+    - OOT_MAN_ON_ROOF
+    - OOT_DC_JUMP
+    - OOT_FOREST_HOOK
+    - OOT_HAMMER_WALLS
+    - OOT_VOLCANO_HOVERS
+    - OOT_NIGHT_GS
+    - MM_LENS
+    - MM_NO_SEAHORSE
+    - MM_ONE_MASK_STONE_TOWER
+  junkLocations:
+    - MM Woodfall Great Fairy
+    - MM Snowhead Great Fairy
+    - MM Great Bay Great Fairy
+    - MM Ikana Great Fairy

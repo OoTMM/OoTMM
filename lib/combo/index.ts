@@ -9,6 +9,7 @@ import { alterWorld, configFromSettings, isShuffled } from './logic/settings';
 import { itemName } from './names';
 import { addItem, isDungeonItem, isDungeonReward, isJunk, isStrayFairy, isToken, Items } from './logic/items';
 import { EXTRA_ITEMS } from './logic/solve';
+import SETTINGS_PRESETS from '../../data/settings_presets.yml';
 
 type GeneratorParams = {
   oot: Buffer,
@@ -26,7 +27,7 @@ export const generate = (params: GeneratorParams): Generator => {
   return new Generator(params.oot, params.mm, opts, params.monitor || {});
 };
 
-export { SETTINGS, DEFAULT_SETTINGS, SETTINGS_CATEGORIES, TRICKS, itemName };
+export { SETTINGS, DEFAULT_SETTINGS, SETTINGS_CATEGORIES, TRICKS, itemName, SETTINGS_PRESETS };
 
 export const itemPool = (aSettings: Partial<Settings>) => {
   const settings: Settings = { ...DEFAULT_SETTINGS, ...aSettings };
