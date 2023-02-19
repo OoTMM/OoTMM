@@ -264,8 +264,8 @@ export class LogicPassEntrances {
       const dstDungeon = placed[srcDungeon];
       const srcEntrance = entranceByDungeon[srcDungeon];
       const dstEntrance = entranceByDungeon[dstDungeon];
-      const srcExit = exitsByDungeon[srcDungeon];
-      const dstExit = exitsByDungeon[dstDungeon];
+      const srcExit = exitsByDungeon[dstDungeon];
+      const dstExit = exitsByDungeon[srcDungeon];
 
       /* Mark the dungeon */
       this.result.dungeons[DUNGEON_INDEX[dstDungeon]] = DUNGEON_INDEX[srcDungeon];
