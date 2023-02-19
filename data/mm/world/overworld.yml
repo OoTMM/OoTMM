@@ -276,7 +276,7 @@
   exits:
     "Road to Southern Swamp": "true"
     "Tourist Information": "true"
-    "Swamp Back": "event(BOAT_RIDE) || (has(MASK_DEKU) && (has(BOW) || has(HOOKSHOT) || has(MASK_ZORA)))"
+    "Swamp Back": "event(BOAT_RIDE) || (has(MASK_DEKU) && (has(BOW) || has(HOOKSHOT))) || has(MASK_ZORA)"
     "Swamp Potion Shop": "true"
     "Woods of Mystery": "true"
   events:
@@ -291,11 +291,11 @@
 "Swamp Back":
   region: SOUTHERN_SWAMP
   exits:
-    "Swamp Front": "event(BOAT_RIDE) || (has(MASK_DEKU) && has(BOW))"
+    "Swamp Front": "event(BOAT_RIDE) || (has(BOW) && (has(MASK_DEKU) || has(MASK_ZORA)))"
     "Deku Palace": "true"
-    "Swamp Spider House": "has(MASK_DEKU)"
+    "Swamp Spider House": "has(MASK_DEKU) || has(MASK_ZORA)"
   locations:
-    "Southern Swamp Grotto": "has(MASK_DEKU)"
+    "Southern Swamp Grotto": "has(MASK_DEKU) || has(MASK_ZORA)"
 "Tourist Information":
   region: SOUTHERN_SWAMP
   exit:
