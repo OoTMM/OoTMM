@@ -72,6 +72,7 @@ type PathfinderOptions = {
 export class Pathfinder {
   private opts!: PathfinderOptions;
   private state!: PathfinderState;
+  private resolveOverride!: (area: string, exit: string) => string;
 
   constructor(
     private readonly world: World,
@@ -108,14 +109,15 @@ export class Pathfinder {
       return;
     }
     const a = this.world.areas[area];
-    for (const exitArea of remainigExitsDup) {
+    for (const originalExitArea of remainigExitsDup) {
+      const expr = a.exits[originalExitArea];
+      const exitArea = this.resolveOverride(area, originalExitArea);
       if (this.state.areas[age].has(exitArea)) {
-        remainingExits.delete(exitArea);
+        remainingExits.delete(originalExitArea);
         continue;
       }
-      const expr = a.exits[exitArea];
       if (this.evalExpr(expr, age)) {
-        remainingExits.delete(exitArea);
+        remainingExits.delete(originalExitArea);
         newExits.add(exitArea);
       }
     }
@@ -128,47 +130,28 @@ export class Pathfinder {
     }
   }
 
+  private resolveOverrideImpl(area: string, exitName: string) {
+    const overrides = this.opts.entranceOverrides?.[area] || {};
+    const override = overrides[exitName];
+    if (override === null) {
+      return "VOID";
+    }
+    if (override !== undefined) {
+      return override;
+    }
+    return exitName;
+  }
+
+  private resolveOverrideIdentity(area: string, exitName: string) {
+    return exitName;
+  }
+
   private pathfindAreas(age: Age) {
     const areas = Object.keys(this.state.ageStates[age].queueExits);
     for (const area of areas) {
       this.pathfindSingleArea(area, age);
     }
   }
-
-  /*
-  private pathfindAreas(age: Age) {
-    const newAreas = new Set<string>();
-    const oldAreas = this.state.areas[age];
-    for (const area of oldAreas) {
-      const worldArea = this.world.areas[area];
-      if (!worldArea) {
-        throw new Error(`Unknown area: ${area}`);
-      }
-      const exits = worldArea.exits;
-      for (let exit in exits) {
-        const expr = exits[exit];
-        const overrides = this.opts.entranceOverrides?.[area] || {};
-        const override = overrides[exit];
-        if (override === null) {
-          continue;
-        }
-        if (override !== undefined) {
-          exit = override;
-        }
-        if (oldAreas.has(exit) || newAreas.has(exit)) {
-          continue;
-        }
-        if (this.evalExpr(expr, age)) {
-          newAreas.add(exit);
-        }
-      }
-    }
-    if (newAreas.size > 0) {
-      newAreas.forEach(x => this.state.areas[age].add(x));
-      return true;
-    }
-    return false;
-  }*/
 
   private pathfindEvents(age: Age) {
     let changed = false;
@@ -238,6 +221,13 @@ export class Pathfinder {
   }
 
   private pathfind() {
+    /* Bind resolver */
+    if (this.opts.entranceOverrides) {
+      this.resolveOverride = this.resolveOverrideImpl;
+    } else {
+      this.resolveOverride = this.resolveOverrideIdentity;
+    }
+
     /* Handle initial state */
     if (!this.state.started) {
       this.state.started = true;

@@ -39,7 +39,7 @@ export class LogicPassEntrances {
   }
   private result: EntranceShuffleResult = { overrides: {}, blueWarps: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] };
 
-  private isBossAssignable(src: WorldEntrance, dst: WorldEntrance, overrides: EntranceOverrides, pathfinderState: PathfinderState) {
+  private isBossAssignable(src: WorldEntrance, dst: WorldEntrance, overrides: EntranceOverrides) {
     if (this.input.settings.erBoss === 'ownGame') {
       /* Check that the entrances are from the same game */
       /* TODO: Ugly */
@@ -52,7 +52,7 @@ export class LogicPassEntrances {
 
     /* Pathfind with the override */
     overrides = { ...overrides, [src.from]: { [src.to]: dst.to } };
-    pathfinderState = this.pathfinder.run(pathfinderState, { recursive: true, entranceOverrides: overrides, ignoreItems: true });
+    const pathfinderState = this.pathfinder.run(null, { recursive: true, entranceOverrides: overrides, ignoreItems: true });
 
     /* Check if every location is reachable */
     const dungeon = this.input.world.areas[dst.to].dungeon!;
@@ -99,12 +99,11 @@ export class LogicPassEntrances {
     }
 
     /* Set up base reachability */
-    const pathfinderState = this.pathfinder.run(null, { recursive: true, entranceOverrides: overrides, ignoreItems: true });
     for (const dungeonSrc of dungeons) {
       for (const dungeonDst of dungeons) {
         const src = bossEntrancesByDungeon[dungeonSrc];
         const dst = bossEntrancesByDungeon[dungeonDst];
-        if (this.isBossAssignable(src, dst, overrides, pathfinderState)) {
+        if (this.isBossAssignable(src, dst, overrides)) {
           const combination = combinations[dungeonDst] || [];
           combination.push(dungeonSrc);
           combinations[dungeonDst] = combination;
