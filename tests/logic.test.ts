@@ -24,7 +24,7 @@ import { Monitor } from "../lib/combo/monitor";
 
 for (let i = 0; i < 3; ++i) {
   test("Can randomize a seed (" + (i + 1) + ")", () => {
-    const mon = new Monitor({});
+    const mon = new Monitor({ onLog: () => {} });
     logic(mon, { debug: false, seed: "TEST" + i, settings: DEFAULT_SETTINGS });
   });
 }
