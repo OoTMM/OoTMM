@@ -3,6 +3,9 @@
 void comboTriggerWarp(GameState_Play* play, int bossId)
 {
     s32 entrance;
+    int dungeonId;
+    int dungeonEntranceId;
+    int isMmEntrance;
 
 #if defined(GAME_MM)
     /* Flag the actual boss as dead (MM) */
@@ -23,60 +26,95 @@ void comboTriggerWarp(GameState_Play* play, int bossId)
     }
 #endif
 
-    /* Use shuffled index */
-    bossId = (int)gComboData.boss[bossId];
+    /* Compute shuffled indices */
+    dungeonId = (int)gComboData.boss[bossId];
+    dungeonEntranceId = (int)gComboData.dungeons[dungeonId];
 
-    /* Set flags and entrance */
-    switch (bossId)
+    /* Set flags */
+    switch (dungeonId)
     {
-    case BOSSID_GOHMA:
+    case DUNGEONID_DEKU_TREE:
         BITMAP16_SET(gOotSave.eventsChk, EV_OOT_CHK_EMERALD_TREE_DEAD);
         BITMAP16_SET(gOotSave.eventsChk, EV_OOT_CHK_GOHMA);
         BITMAP16_SET(gOotSave.eventsChk, EV_OOT_CHK_TREE_DEAD);
         BITMAP16_SET(gOotSave.eventsChk, EV_OOT_CHK_MIDO_TREE_DEAD);
-        entrance = 0x0457;
         break;
-    case BOSSID_KING_DODONGO:
-        entrance = 0x0242;
+    case DUNGEONID_DODONGOS_CAVERN:
         break;
-    case BOSSID_BARINADE:
-        entrance = 0x0221;
+    case DUNGEONID_JABU_JABU:
         break;
-    case BOSSID_PHANTOM_GANON:
-        entrance = 0x0608;
+    case DUNGEONID_TEMPLE_FOREST:
         break;
-    case BOSSID_VOLVAGIA:
-        entrance = 0x0564;
+    case DUNGEONID_TEMPLE_FIRE:
         break;
-    case BOSSID_MORPHA:
+    case DUNGEONID_TEMPLE_WATER:
         BITMAP16_SET(gOotSave.eventsChk, EV_OOT_CHK_LAKE_HYLIA_WATER);
-        entrance = 0x060C;
         break;
-    case BOSSID_BONGO_BONGO:
-        entrance = 0x0580;
-        break;
-    case BOSSID_TWINROVA:
-        entrance = 0x0610;
-        break;
-    case BOSSID_ODOLWA:
+    case DUNGEONID_TEMPLE_WOODFALL:
         gMmExtraBoss.boss |= (1 << 0);
         MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_WF);
         MM_SET_EVENT_WEEK(EV_MM_WEEK_WOODFALL_TEMPLE_RISE);
-        entrance = 0x3010;
         break;
-    case BOSSID_GOHT:
+    case DUNGEONID_TEMPLE_SNOWHEAD:
         gMmExtraBoss.boss |= (1 << 1);
         MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_SH);
-        entrance = 0xae70;
         break;
-    case BOSSID_GYORG:
+    case DUNGEONID_TEMPLE_GREAT_BAY:
         gMmExtraBoss.boss |= (1 << 2);
         MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_GB);
-        entrance = 0x6a90;
         break;
-    case BOSSID_TWINMOLD:
+    case DUNGEONID_TEMPLE_STONE_TOWER_INVERTED:
         gMmExtraBoss.boss |= (1 << 3);
         MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_ST);
+        break;
+    default:
+        UNREACHABLE();
+        break;
+    }
+
+    /* Set entrance */
+    isMmEntrance = 0;
+    switch (dungeonEntranceId)
+    {
+    case DUNGEONID_DEKU_TREE:
+        entrance = 0x0457;
+        break;
+    case DUNGEONID_DODONGOS_CAVERN:
+        entrance = 0x0242;
+        break;
+    case DUNGEONID_JABU_JABU:
+        entrance = 0x0221;
+        break;
+    case DUNGEONID_TEMPLE_FOREST:
+        entrance = 0x0608;
+        break;
+    case DUNGEONID_TEMPLE_FIRE:
+        entrance = 0x0564;
+        break;
+    case DUNGEONID_TEMPLE_WATER:
+        entrance = 0x060C;
+        break;
+    case DUNGEONID_TEMPLE_SHADOW:
+        entrance = 0x0580;
+        break;
+    case DUNGEONID_TEMPLE_SPIRIT:
+        entrance = 0x0610;
+        break;
+    case DUNGEONID_TEMPLE_WOODFALL:
+        isMmEntrance = 1;
+        entrance = 0x3010;
+        break;
+    case DUNGEONID_TEMPLE_SNOWHEAD:
+        isMmEntrance = 1;
+        entrance = 0xae70;
+        break;
+    case DUNGEONID_TEMPLE_GREAT_BAY:
+        isMmEntrance = 1;
+        entrance = 0x6a90;
+        break;
+    case DUNGEONID_TEMPLE_STONE_TOWER:
+    case DUNGEONID_TEMPLE_STONE_TOWER_INVERTED:
+        isMmEntrance = 1;
         entrance = 0x20f0;
         break;
     default:
@@ -85,7 +123,7 @@ void comboTriggerWarp(GameState_Play* play, int bossId)
     }
 
 #if defined(GAME_OOT)
-    if (bossId < BOSSID_ODOLWA)
+    if (!isMmEntrance)
     {
         TransitionContext* t;
 
@@ -101,7 +139,7 @@ void comboTriggerWarp(GameState_Play* play, int bossId)
 #endif
 
 #if defined(GAME_MM)
-    if (bossId >= BOSSID_ODOLWA)
+    if (isMmEntrance)
     {
         gSave.playerForm = MM_PLAYER_FORM_HUMAN;
         gSave.equippedMask = 0;
