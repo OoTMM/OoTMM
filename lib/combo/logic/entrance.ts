@@ -1,12 +1,13 @@
 import { Random, sample } from "../random";
 import { Settings } from "../settings";
 import { DUNGEONS_REGIONS, ExprMap, World, WorldEntrance } from "./world";
-import { Pathfinder, EntranceOverrides, PathfinderState } from './pathfind';
+import { Pathfinder, EntranceOverrides } from './pathfind';
 import { Monitor } from "../monitor";
 
 export type EntranceShuffleResult = {
   overrides: {[k: string]: {[k:string]: { from: string, to: string }}};
-  blueWarps: number[];
+  boss: number[];
+  dungeons: number[];
 };
 
 const BOSS_INDEX_BY_DUNGEON = {
@@ -24,6 +25,22 @@ const BOSS_INDEX_BY_DUNGEON = {
   IST: 11,
 } as {[k: string]: number};
 
+const DUNGEON_INDEX = {
+  DT: 0,
+  DC: 1,
+  JJ: 2,
+  Forest: 3,
+  Fire: 4,
+  Water: 5,
+  Shadow: 6,
+  Spirit: 7,
+  WF: 8,
+  SH: 9,
+  GB: 10,
+  IST: 11,
+  ST: 12,
+};
+
 export class LogicPassEntrances {
   private pathfinder: Pathfinder;
 
@@ -37,7 +54,11 @@ export class LogicPassEntrances {
   ) {
     this.pathfinder = new Pathfinder(input.world, input.settings);
   }
-  private result: EntranceShuffleResult = { overrides: {}, blueWarps: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] };
+  private result: EntranceShuffleResult = {
+    overrides: {},
+    boss: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+    dungeons: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+  };
 
   private isBossAssignable(src: WorldEntrance, dst: WorldEntrance, overrides: EntranceOverrides) {
     if (this.input.settings.erBoss === 'ownGame') {
@@ -133,7 +154,7 @@ export class LogicPassEntrances {
       const dst = bossEntrancesByDungeon[dstDungeon];
 
       /* Mark the blue warp */
-      this.result.blueWarps[BOSS_INDEX_BY_DUNGEON[dstDungeon]] = BOSS_INDEX_BY_DUNGEON[srcDungeon];
+      this.result.boss[BOSS_INDEX_BY_DUNGEON[dstDungeon]] = BOSS_INDEX_BY_DUNGEON[srcDungeon];
 
       /* Replace the entrance */
       const srcArea = this.input.world.areas[src.from];

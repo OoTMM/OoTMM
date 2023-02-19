@@ -311,13 +311,15 @@ export const randomizerHints = (logic: LogicResult): Buffer => {
   return Buffer.concat(buffers);
 };
 
-const randomizerBlueWarps = (logic: LogicResult): Buffer => toU8Buffer(logic.entrances.blueWarps);
+const randomizerBoss = (logic: LogicResult): Buffer => toU8Buffer(logic.entrances.boss);
+const randomizerDungeons = (logic: LogicResult): Buffer => toU8Buffer(logic.entrances.dungeons);
 
 export const randomizerData = (logic: LogicResult, options: Options): Buffer => {
   const buffers = [];
   buffers.push(randomizerConfig(logic.config));
   buffers.push(randomizerHints(logic));
-  buffers.push(randomizerBlueWarps(logic));
+  buffers.push(randomizerBoss(logic));
+  buffers.push(randomizerDungeons(logic));
   return Buffer.concat(buffers);
 };
 

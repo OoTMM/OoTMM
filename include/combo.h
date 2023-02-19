@@ -54,6 +54,7 @@
 #include <combo/shader.h>
 #include <combo/config.h>
 
+/* Boss IDs */
 #define BOSSID_GOHMA                0x00
 #define BOSSID_KING_DODONGO         0x01
 #define BOSSID_BARINADE             0x02
@@ -66,6 +67,22 @@
 #define BOSSID_GOHT                 0x09
 #define BOSSID_GYORG                0x0a
 #define BOSSID_TWINMOLD             0x0b
+
+/* Dungeon IDs */
+/* The first values should match the bosses */
+#define DUNGEONID_DEKU_TREE                 BOSSID_GOHMA
+#define DUNGEONID_DODONGOS_CAVERN           BOSSID_KING_DODONGO
+#define DUNGEONID_JABU_JABU                 BOSSID_BARINADE
+#define DUNGEONID_TEMPLE_FOREST             BOSSID_PHANTOM_GANON
+#define DUNGEONID_TEMPLE_FIRE               BOSSID_VOLVAGIA
+#define DUNGEONID_TEMPLE_WATER              BOSSID_MORPHA
+#define DUNGEONID_TEMPLE_SHADOW             BOSSID_BONGO_BONGO
+#define DUNGEONID_TEMPLE_SPIRIT             BOSSID_TWINROVA
+#define DUNGEONID_TEMPLE_WOODFALL           BOSSID_ODOLWA
+#define DUNGEONID_TEMPLE_SNOWHEAD           BOSSID_GOHT
+#define DUNGEONID_TEMPLE_GREAT_BAY          BOSSID_GYORG
+#define DUNGEONID_TEMPLE_STONE_INVERTED     BOSSID_TWINMOLD
+#define DUNGEONID_TEMPLE_STONE              0x0c
 
 #if !defined(__ASSEMBLER__)
 void comboDisableInterrupts(void);
@@ -93,9 +110,10 @@ ComboDataHints;
 
 typedef struct PACKED ALIGNED(4)
 {
-    u8             config[0x40];
-    ComboDataHints hints;
-    u8             boss[12];
+    u8              config[0x40];
+    ComboDataHints  hints;
+    u8              boss[12];
+    u8              dungeons[13];
 }
 ComboData;
 
