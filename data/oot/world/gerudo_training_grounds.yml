@@ -1,4 +1,4 @@
-"Gerudo Training Grounds Entrance":
+"Gerudo Training Grounds":
   dungeon: GTG
   exits:
     "Gerudo Fortress": "true"

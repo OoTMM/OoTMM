@@ -158,6 +158,12 @@ export const SETTINGS = [{
   type: 'boolean',
   default: false
 }, {
+  key: 'erMinorDungeons',
+  name: 'Shuffle OoT Minor Dungeons with Dungeons',
+  category: 'main',
+  type: 'boolean',
+  default: false
+}, {
   key: 'progressiveShieldsOot',
   name: 'OoT Shields',
   category: 'progressive',

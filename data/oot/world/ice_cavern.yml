@@ -1,4 +1,4 @@
-"Ice Cavern Entrance":
+"Ice Cavern":
   dungeon: IC
   exits:
     "Zora Fountain": "true"
