@@ -10,6 +10,10 @@ export const AGES = ['child', 'adult'] as const;
 
 export type Age = typeof AGES[number];
 
+type PathfinderStateAge = {
+  queueExits: {[k: string]: Set<string>};
+}
+
 export type PathfinderState = {
   items: Items;
   areas: {
@@ -22,13 +26,18 @@ export type PathfinderState = {
   events: Set<string>;
   gossip: Set<string>;
   goal: boolean;
+  started: boolean;
+  ageStates: {
+    child: PathfinderStateAge;
+    adult: PathfinderStateAge;
+  }
 }
 
 const defaultState = (settings: Settings): PathfinderState => ({
   items: { ...settings.startingItems },
   areas: {
-    child: new Set(['OOT SPAWN']),
-    adult: new Set(['OOT SPAWN']),
+    child: new Set(),
+    adult: new Set(),
   },
   locations: new Set(),
   newLocations: new Set(),
@@ -36,6 +45,15 @@ const defaultState = (settings: Settings): PathfinderState => ({
   events: new Set(),
   gossip: new Set(),
   goal: false,
+  started: false,
+  ageStates: {
+    child: {
+      queueExits: {},
+    },
+    adult: {
+      queueExits: {},
+    },
+  }
 });
 
 export type EntranceOverrides = {[k: string]: {[k: string]: string | null}};
@@ -73,6 +91,51 @@ export class Pathfinder {
     return expr({ items: this.state.items, age, events: this.state.events, ignoreItems: this.opts.ignoreItems || false });
   }
 
+  private exploreArea(area: string, age: Age) {
+    const a = this.world.areas[area];
+    const exits = Object.keys(a.exits).filter(x => !this.state.areas[age].has(x));
+    if (exits.length > 0) {
+      this.state.ageStates[age].queueExits[area] = new Set(exits);
+    }
+    this.state.areas[age].add(area);
+  }
+
+  private pathfindSingleArea(area: string, age: Age) {
+    const remainingExits = this.state.ageStates[age].queueExits[area];
+    const remainigExitsDup = new Set(remainingExits);
+    const newExits = new Set<string>();
+    if (!remainingExits) {
+      return;
+    }
+    const a = this.world.areas[area];
+    for (const exitArea of remainigExitsDup) {
+      if (this.state.areas[age].has(exitArea)) {
+        remainingExits.delete(exitArea);
+        continue;
+      }
+      const expr = a.exits[exitArea];
+      if (this.evalExpr(expr, age)) {
+        remainingExits.delete(exitArea);
+        newExits.add(exitArea);
+      }
+    }
+    if (remainingExits.size === 0) {
+      delete this.state.ageStates[age].queueExits[area];
+    }
+    for (const exitArea of newExits) {
+      this.exploreArea(exitArea, age);
+      this.pathfindSingleArea(exitArea, age);
+    }
+  }
+
+  private pathfindAreas(age: Age) {
+    const areas = Object.keys(this.state.ageStates[age].queueExits);
+    for (const area of areas) {
+      this.pathfindSingleArea(area, age);
+    }
+  }
+
+  /*
   private pathfindAreas(age: Age) {
     const newAreas = new Set<string>();
     const oldAreas = this.state.areas[age];
@@ -105,7 +168,7 @@ export class Pathfinder {
       return true;
     }
     return false;
-  }
+  }*/
 
   private pathfindEvents(age: Age) {
     let changed = false;
@@ -175,6 +238,13 @@ export class Pathfinder {
   }
 
   private pathfind() {
+    /* Handle initial state */
+    if (!this.state.started) {
+      this.state.started = true;
+      this.exploreArea('OOT SPAWN', 'child');
+      this.exploreArea('OOT SPAWN', 'adult');
+    }
+
     /* Handle no logic */
     if (this.settings.noLogic) {
       this.state.locations = new Set(Object.keys(this.world.checks));
@@ -212,11 +282,15 @@ export class Pathfinder {
     this.state.newLocations = new Set();
     let anyChange = false;
 
+    /* Propagate to areas */
+    for (const age of AGES) {
+      this.pathfindAreas(age);
+    }
+
     /* Reach all areas & events */
     for (;;) {
       let changed = false;
       for (const age of AGES) {
-        changed ||= this.pathfindAreas(age);
         changed ||= this.pathfindEvents(age);
         if (this.opts.gossip) {
           changed ||= this.pathfindGossip(age);
