@@ -1,6 +1,6 @@
 import { ItemPlacement } from './solve';
 import { World } from './world';
-import { findSpheres } from './playthrough';
+import { Analysis, findSpheres } from './analysis';
 import { Random, sample, shuffle } from '../random';
 import { addItem, DUNGEON_REWARDS_ORDERED, isDungeonItem, isDungeonReward, isItemMajor, isGoldToken, itemsArray, isKey, isHouseToken, isSmallKey, isGanonBossKey, isRegularBossKey, DUNGEON_REWARDS, isStrayFairy, isToken, isTownStrayFairy, isSong } from './items';
 import { Settings } from '../settings';
@@ -392,7 +392,7 @@ export class LogicPassHints {
       settings: Settings,
       world: World,
       items: ItemPlacement,
-      spheres: string[][],
+      analysis: Analysis,
     },
   ){
     this.dependencies = JSON.parse(JSON.stringify(SIMPLE_DEPENDENCIES));
@@ -475,7 +475,7 @@ export class LogicPassHints {
 
   private wayOfTheHero() {
     const woth = new Set<string>();
-    for (const sphere of this.state.spheres) {
+    for (const sphere of this.state.analysis.spheres) {
       for (const loc of sphere) {
         if (findSpheres(this.state.settings, this.state.world, this.state.items, undefined, new Set([loc])) === null) {
           woth.add(loc);
@@ -509,7 +509,7 @@ export class LogicPassHints {
   }
 
   private playthroughLocations() {
-    const locations = this.state.spheres.flat().filter(loc => this.isLocationHintable(loc));
+    const locations = this.state.analysis.spheres.flat().filter(loc => this.isLocationHintable(loc));
     return shuffle(this.state.random, locations);
   }
 

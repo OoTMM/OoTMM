@@ -227,6 +227,7 @@ export const isGoldToken = (item: string) => !!item.match(/^OOT_GS_TOKEN/);
 export const isHouseToken = (item: string) => !!item.match(/^MM_GS_TOKEN/);
 export const isToken = (item: string) => isGoldToken(item) || isHouseToken(item);
 export const isJunk = (item: string) => ITEMS_JUNK.has(item);
+export const isItemImportant = (item: string) => isItemMajor(item) || isDungeonReward(item) || isToken(item) || isStrayFairy(item) || isKey(item);
 
 export const itemsArray = (items: Items) => {
   const arr: string[] = [];

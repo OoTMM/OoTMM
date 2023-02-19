@@ -1,24 +1,10 @@
 import { Random, shuffle } from '../random';
 import { Settings } from '../settings';
-import { addItem, isBossKey, isDungeonReward, isToken, isItemMajor, isSmallKey, Items } from './items';
+import { isItemImportant } from './items';
 import { ItemPlacement } from './solve';
 import { World } from './world';
 import { Pathfinder, PathfinderState } from './pathfind';
 import { Monitor } from '../monitor';
-
-const isItemImportant = (settings: Settings, item: string) => {
-  if (settings.smallKeyShuffle === 'anywhere' && isSmallKey(item))
-    return true;
-  if (isToken(item))
-    return false;
-  if (isDungeonReward(item))
-    return true;
-  if (isItemMajor(item))
-    return true;
-  if (isBossKey(item))
-    return true;
-  return false;
-}
 
 export const findSpheres = (settings: Settings, world: World, items: ItemPlacement, restrict?: Set<string>, forbid?: Set<string>) => {
   const spheres: string[][] = [];
@@ -73,7 +59,12 @@ const findMinimalSpheres = (settings: Settings, random: Random, world: World, pl
   return spheres;
 }
 
-export class LogicPassPlaythrough {
+export class LogicPassAnalysis {
+  private pathfinder: Pathfinder;
+  private spheres: string[][] = [];
+  private requiredLocs = new Set<string>();
+  private uselessLocs = new Set<string>();
+
   constructor(
     private readonly state: {
       settings: Settings,
@@ -83,17 +74,59 @@ export class LogicPassPlaythrough {
       monitor: Monitor,
     },
   ){
+    this.pathfinder = new Pathfinder(this.state.world, this.state.settings);
+  }
+
+  private makeSpheresRaw() {
+    const spheres: string[][] = [];
+    let pathfinderState: PathfinderState | null = null;
+
+    do {
+      pathfinderState = this.pathfinder.run(pathfinderState, { items: this.state.items, stopAtGoal: true });
+      const sphere = Array.from(pathfinderState.newLocations).filter(x => isItemImportant(this.state.items[x]));
+      if (sphere.length !== 0) {
+        spheres.push(shuffle(this.state.random, sphere));
+      }
+    } while (!pathfinderState.goal);
+
+    return spheres;
+  }
+
+  private makeSpheres() {
+    const spheres: string[][] = [];
+    const rawSpheres = this.makeSpheresRaw().reverse();
+    const spheresLocs = new Set(rawSpheres.flat());
+
+    for (const sphere of rawSpheres) {
+      const filteredSphere: string[] = [];
+      for (const loc of sphere) {
+        spheresLocs.delete(loc);
+        const pathfinderState = this.pathfinder.run(null, { items: this.state.items, restrictedLocations: spheresLocs, recursive: true, stopAtGoal: true });
+        if (!pathfinderState.goal) {
+          spheresLocs.add(loc);
+          filteredSphere.push(loc);
+        }
+      }
+      if (filteredSphere.length !== 0) {
+        spheres.push(filteredSphere);
+      }
+    }
+
+    this.spheres = spheres.reverse();
   }
 
   run() {
-    let spheres: string[][] = [];
-
-    this.state.monitor.log('Logic: Playthrough');
+    this.state.monitor.log('Logic: Analysis');
     if (!this.state.settings.noLogic) {
-      const rawSpheres = findMinimalSpheres(this.state.settings, this.state.random, this.state.world, this.state.items);
-      spheres = rawSpheres.map(sphere => sphere.filter(item => isItemImportant(this.state.settings, this.state.items[item]))).filter(sphere => sphere.length !== 0);
+      this.makeSpheres();
     }
 
-    return { spheres };
+    const analysis = {
+      spheres: this.spheres,
+    }
+
+    return { analysis };
   }
 }
+
+export type Analysis = ReturnType<LogicPassAnalysis['run']>['analysis'];

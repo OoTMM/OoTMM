@@ -6,6 +6,7 @@ import { ItemPlacement } from './solve';
 import { World } from './world';
 import { itemName } from '../names';
 import { Monitor } from '../monitor';
+import { Analysis } from './analysis';
 
 const VERSION = process.env.VERSION || 'XXX';
 
@@ -133,7 +134,7 @@ export class LogicPassSpoiler {
     private readonly state: {
       world: World,
       items: ItemPlacement,
-      spheres: string[][],
+      analysis: Analysis,
       opts: Options,
       hints: Hints,
       entrances: EntranceShuffleResult,
@@ -155,7 +156,7 @@ export class LogicPassSpoiler {
     spoilerFoolish(buffer, this.state.hints.foolish);
     spoilerHints(buffer, this.state.hints, this.state.items);
     if (!this.state.opts.settings.noLogic) {
-      spoilerSpheres(buffer, this.state.world, this.state.items, this.state.spheres);
+      spoilerSpheres(buffer, this.state.world, this.state.items, this.state.analysis.spheres);
     }
     spoilerRaw(buffer, this.state.items);
     const log = buffer.join("\n");
