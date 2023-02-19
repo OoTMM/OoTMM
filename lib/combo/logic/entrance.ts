@@ -1,8 +1,9 @@
 import { Random, sample } from "../random";
 import { Settings } from "../settings";
 import { DUNGEONS_REGIONS, ExprMap, World, WorldEntrance } from "./world";
-import { Pathfinder, EntranceOverrides } from './pathfind';
+import { Pathfinder, EntranceOverrides, PathfinderState } from './pathfind';
 import { Monitor } from "../monitor";
+import { cloneDeep } from "lodash";
 
 export type EntranceShuffleResult = {
   overrides: {[k: string]: {[k:string]: { from: string, to: string }}};
@@ -39,7 +40,7 @@ const DUNGEON_INDEX = {
   GB: 10,
   IST: 11,
   ST: 12,
-};
+} as {[k: string]: number};;
 
 export class LogicPassEntrances {
   private pathfinder: Pathfinder;
@@ -79,9 +80,20 @@ export class LogicPassEntrances {
       locations = [...this.input.world.dungeons[dungeon]];
     }
 
-    /* Pathfind with the override */
     overrides = { ...overrides, [src.from]: { [src.to]: dst.to } };
-    const pathfinderState = this.pathfinder.run(null, { recursive: true, entranceOverrides: overrides, ignoreItems: true });
+    const extraStartAreas = new Set<string>();
+
+    if (!opts?.mergeStoneTowers) {
+      /* Stone Tower and Inverted rely on each other's events */
+      if (dungeon === 'ST') {
+        extraStartAreas.add("MM Stone Tower Temple Inverted");
+      } else if (dungeon === 'IST') {
+        extraStartAreas.add("MM Stone Tower Temple");
+      }
+    }
+
+    /* Pathfind with the override */
+    const pathfinderState = this.pathfinder.run(null, { recursive: true, entranceOverrides: overrides, ignoreItems: true, extraStartAreas });
 
     /* Check if every location is reachable */
     if (locations.some(l => !pathfinderState.locations.has(l))) {
@@ -198,6 +210,7 @@ export class LogicPassEntrances {
     const exitsByDungeon: {[k: string]: WorldEntrance} = {};
     const overrides: EntranceOverrides = {};
     const combinations: {[k: string]: string[]} = {};
+    const placed: {[k: string]: string} = {};
 
     /* Set up null overrides */
     for (const e of dungeonEntrances) {
@@ -222,15 +235,61 @@ export class LogicPassEntrances {
       for (const dungeonDst of dungeons) {
         const src = entranceByDungeon[dungeonSrc];
         const dst = entranceByDungeon[dungeonDst];
+        const combination = combinations[dungeonDst] || [];
         if (this.isAssignable(src, dst, overrides, { ownGame: this.input.settings.erDungeons === 'ownGame' })) {
-          const combination = combinations[dungeonDst] || [];
           combination.push(dungeonSrc);
-          combinations[dungeonDst] = combination;
         }
+        combinations[dungeonDst] = combination;
       }
     }
 
-    console.log(combinations);
+    /* Place dungeons */
+    for (;;) {
+      const keys = Object.keys(combinations);
+      if (keys.length === 0) {
+        break;
+      }
+      const sorted = keys.sort((a, b) => combinations[a].length - combinations[b].length);
+      const dungeon = sorted[0];
+      const src = sample(this.input.random, combinations[dungeon]);
+      placed[src] = dungeon;
+      delete combinations[dungeon];
+      for (const k of Object.keys(combinations)) {
+        combinations[k] = combinations[k].filter(s => s !== src);
+      }
+    }
+
+    /* Alter the world */
+    for (const srcDungeon in placed) {
+      const dstDungeon = placed[srcDungeon];
+      const srcEntrance = entranceByDungeon[srcDungeon];
+      const dstEntrance = entranceByDungeon[dstDungeon];
+      const srcExit = exitsByDungeon[srcDungeon];
+      const dstExit = exitsByDungeon[dstDungeon];
+
+      /* Mark the dungeon */
+      this.result.dungeons[DUNGEON_INDEX[dstDungeon]] = DUNGEON_INDEX[srcDungeon];
+
+      /* Replace the entrance */
+      const entranceArea = this.input.world.areas[srcEntrance.from];
+      const entranceExpr = entranceArea.exits[srcEntrance.to];
+      delete entranceArea.exits[srcEntrance.to];
+      entranceArea.exits[dstEntrance.to] = entranceExpr;
+
+      const exitArea = this.input.world.areas[srcExit.from];
+      const exitExpr = exitArea.exits[srcExit.to];
+      delete exitArea.exits[srcExit.to];
+      exitArea.exits[dstExit.to] = exitExpr;
+
+      /* Mark the overrides */
+      const entranceOverride = this.result.overrides[srcEntrance.from] || {};
+      entranceOverride[srcEntrance.to] = { from: dstEntrance.from, to: dstEntrance.to };
+      this.result.overrides[srcEntrance.from] = entranceOverride;
+
+      const exitOverride = this.result.overrides[srcExit.from] || {};
+      exitOverride[srcExit.to] = { from: dstExit.from, to: dstExit.to };
+      this.result.overrides[srcExit.from] = exitOverride;
+    }
   }
 
   run() {
@@ -238,7 +297,6 @@ export class LogicPassEntrances {
 
     if (this.input.settings.erDungeons !== 'none') {
       this.fixDungeons();
-      process.exit(0);
     }
 
     if (this.input.settings.erBoss !== 'none') {

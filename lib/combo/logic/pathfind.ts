@@ -67,6 +67,7 @@ type PathfinderOptions = {
   stopAtGoal?: boolean;
   restrictedLocations?: Set<string>;
   forbiddenLocations?: Set<string>;
+  extraStartAreas?: Set<string>;
 };
 
 export class Pathfinder {
@@ -233,6 +234,12 @@ export class Pathfinder {
       this.state.started = true;
       this.exploreArea('OOT SPAWN', 'child');
       this.exploreArea('OOT SPAWN', 'adult');
+
+      const extraStartAreas = Array.from(this.opts.extraStartAreas || []);
+      for (const area of extraStartAreas) {
+        this.exploreArea(area, 'child');
+        this.exploreArea(area, 'adult');
+      }
     }
 
     /* Handle no logic */
