@@ -7,6 +7,7 @@ import { World } from './world';
 import { itemName } from '../names';
 import { Monitor } from '../monitor';
 import { Analysis } from './analysis';
+import { regionName } from '../regions';
 
 const VERSION = process.env.VERSION || 'XXX';
 
@@ -111,11 +112,15 @@ const spoilerHints = (buffer: string[], hints: Hints, placement: ItemPlacement) 
   buffer.push('');
 };
 
-const spoilerRaw = (buffer: string[], placement: ItemPlacement) => {
-  for (const loc in placement) {
-    buffer.push(`${loc}: ${itemName(placement[loc])}`);
-  }
-  buffer.push('');
+const spoilerRaw = (buffer: string[], world: World, placement: ItemPlacement) => {
+  const regionNames = new Set(Object.values(world.regions))
+  regionNames.forEach(region => {
+    const regionalLocations = Object.keys(world.regions).filter(location => world.regions[location] == region).map(loc => `  ${loc}: ${itemName(placement[loc])}`);
+    buffer.push(`${regionName(region)}:`);
+    buffer.push(regionalLocations.join('\n'));
+    buffer.push('')
+    }
+  )
 };
 
 const spoilerSpheres = (buffer: string[], world: World, placement: ItemPlacement, spheres: string[][]) => {
@@ -158,7 +163,7 @@ export class LogicPassSpoiler {
     if (!this.state.opts.settings.noLogic) {
       spoilerSpheres(buffer, this.state.world, this.state.items, this.state.analysis.spheres);
     }
-    spoilerRaw(buffer, this.state.items);
+    spoilerRaw(buffer, this.state.world, this.state.items);
     const log = buffer.join("\n");
     return { log };
   };
