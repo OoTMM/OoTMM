@@ -124,6 +124,14 @@ void comboTriggerWarp(GameState_Play* play, int bossId)
         isMmEntrance = 1;
         entrance = 0x20f0;
         break;
+    case DUNGEONID_SPIDER_HOUSE_SWAMP:
+        isMmEntrance = 1;
+        entrance = 0x8480;
+        break;
+    case DUNGEONID_SPIDER_HOUSE_OCEAN:
+        isMmEntrance = 1;
+        entrance = 0x6880;
+        break;
     default:
         UNREACHABLE();
         break;

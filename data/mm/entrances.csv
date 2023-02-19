@@ -13,3 +13,7 @@ Stone Tower Temple Inverted,        Stone Tower Top Inverted,               0x2a
 Stone Tower Top Inverted,           Stone Tower Temple Inverted,            0xac10
 Stone Tower Temple,                 Stone Tower Front of Temple,            0x2600
 Stone Tower Front of Temple,        Stone Tower Temple,                     0xaa20
+Swamp Spider House,                 Swamp Back,                             0x4800
+Swamp Back,                         Swamp Spider House,                     0x8480
+Ocean Spider House,                 Great Bay Coast,                        0x4a00
+Great Bay Coast,                    Ocean Spider House,                     0x6880

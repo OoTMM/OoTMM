@@ -83,6 +83,9 @@
 #define DUNGEONID_TEMPLE_GREAT_BAY                  BOSSID_GYORG
 #define DUNGEONID_TEMPLE_STONE_TOWER_INVERTED       BOSSID_TWINMOLD
 #define DUNGEONID_TEMPLE_STONE_TOWER                0x0c
+#define DUNGEONID_SPIDER_HOUSE_SWAMP                0x0d
+#define DUNGEONID_SPIDER_HOUSE_OCEAN                0x0e
+
 
 #if !defined(__ASSEMBLER__)
 void comboDisableInterrupts(void);
@@ -113,7 +116,7 @@ typedef struct PACKED ALIGNED(4)
     u8              config[0x40];
     ComboDataHints  hints;
     u8              boss[12];
-    u8              dungeons[13];
+    u8              dungeons[15];
 }
 ComboData;
 

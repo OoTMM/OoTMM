@@ -598,7 +598,7 @@
     "Pinnacle Rock Entrance": "has(MASK_ZORA)"
     "Laboratory": "true"
     "Zora Cape": "true"
-    "Ocean Spider House Front": "true"
+    "Ocean Spider House": "true"
   events:
     GREAT_BAY_OWL: "true"
   locations:

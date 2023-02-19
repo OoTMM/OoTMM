@@ -152,6 +152,12 @@ export const SETTINGS = [{
   ],
   default: 'none'
 }, {
+  key: 'erSpiderHouses',
+  name: 'Shuffle Spider Houses with Dungeons',
+  category: 'main',
+  type: 'boolean',
+  default: false
+}, {
   key: 'progressiveShieldsOot',
   name: 'OoT Shields',
   category: 'progressive',
