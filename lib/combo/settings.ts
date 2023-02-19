@@ -141,6 +141,17 @@ export const SETTINGS = [{
   ],
   default: 'none'
 }, {
+  key: 'erDungeons',
+  name: 'Dungeon Entrance Shuffle',
+  category: 'main',
+  type: 'enum',
+  values: [
+    { value: 'none', name: 'None' },
+    { value: 'ownGame', name: 'Own Game' },
+    { value: 'full', name: 'Full' },
+  ],
+  default: 'none'
+}, {
   key: 'progressiveShieldsOot',
   name: 'OoT Shields',
   category: 'progressive',

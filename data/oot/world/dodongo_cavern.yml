@@ -1,4 +1,4 @@
-"Dodongo Cavern Entrance":
+"Dodongo Cavern":
   dungeon: DC
   exits:
     "Death Mountain": "true"
@@ -6,7 +6,7 @@
 "Dodongo Cavern Main":
   dungeon: DC
   exits:
-    "Dodongo Cavern Entrance": "true"
+    "Dodongo Cavern": "true"
     "Dodongo Cavern Right Corridor": "true"
     "Dodongo Cavern Main Ledge": "is_adult"
     "Dodongo Cavern Stairs": "event(DC_MAIN_SWITCH)"

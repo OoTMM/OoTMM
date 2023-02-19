@@ -185,8 +185,19 @@ export class LogicPassEntrances {
     }
   }
 
+  private fixDungeons() {
+    const dungeonEntrances = this.input.world.entrances.filter(e => { console.log(e); return !this.input.world.areas[e.from].dungeon && this.input.world.areas[e.to].dungeon });
+    console.log(dungeonEntrances);
+  }
+
   run() {
     this.input.monitor.log('Logic: Entrances');
+
+    if (this.input.settings.erDungeons !== 'none') {
+      this.fixDungeons();
+      process.exit(0);
+    }
+
     if (this.input.settings.erBoss !== 'none') {
       this.fixBosses();
     }

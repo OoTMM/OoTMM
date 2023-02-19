@@ -1,4 +1,4 @@
-"Spirit Temple Entrance":
+"Spirit Temple":
   dungeon: Spirit
   exits:
     "Desert Colossus": "true"
@@ -10,7 +10,7 @@
 "Spirit Temple Child Entrance":
   dungeon: Spirit
   exits:
-    "Spirit Temple Entrance": "is_child"
+    "Spirit Temple": "is_child"
     "Spirit Temple Child Climb": "is_child && has(SMALL_KEY_SPIRIT)"
   locations:
     "Spirit Temple Child First Chest": "has_ranged_weapon_child"

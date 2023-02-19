@@ -1,7 +1,11 @@
-"Deku Tree Lobby":
+"Deku Tree":
   dungeon: DT
   exits:
     "Kokiri Forest": "true"
+    "Deku Tree Lobby": "true"
+"Deku Tree Lobby":
+  dungeon: DT
+  exits:
     "Deku Tree Slingshot Room": "has_shield"
     "Deku Tree Basement": "true"
   locations:
