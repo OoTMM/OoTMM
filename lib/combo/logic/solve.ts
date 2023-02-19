@@ -6,6 +6,7 @@ import { World } from './world';
 import { LogicSeedError } from './error';
 import { Items, addItem, combinedItems, itemsArray, removeItem, ITEMS_REQUIRED, isDungeonReward, isGoldToken, isHouseToken, isKey, isStrayFairy, isSmallKey, isGanonBossKey, isRegularBossKey, isTownStrayFairy, isDungeonStrayFairy, isSong, isJunk, isMapCompass } from './items';
 import { Settings } from '../settings';
+import { Monitor } from '../monitor';
 
 export const EXTRA_ITEMS = [
   'OOT_MASK_SKULL',
@@ -68,6 +69,7 @@ export class LogicPassSolver {
       world: World,
       settings: Settings,
       random: Random,
+      monitor: Monitor,
     }
   ) {
     this.pathfinder = new Pathfinder(this.state.world, this.state.settings);
@@ -77,6 +79,7 @@ export class LogicPassSolver {
     let error: any = null;
     for (let i = 0; i < 100; ++i) {
       try {
+        this.state.monitor.log(`Logic: Solver (attempt ${i + 1})`);
         const placement = this.solve();
         return { items: placement };
       } catch (e) {
