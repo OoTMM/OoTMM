@@ -1,5 +1,5 @@
 "Ocean Spider House Front":
-  region: SPIDER_HOUSE_OCEAN
+  dungeon: OSH
   exits:
     "Great Bay Coast": "true"
     "Ocean Spider House Back": "has_explosives && (has(HOOKSHOT) || can_goron_bomb_jump)"
@@ -9,7 +9,7 @@
     "Ocean Skulltula Entrance Left Wall": "has_explosives && has(HOOKSHOT)"
     "Ocean Skulltula Entrance Web": " has_explosives && (has(HOOKSHOT) || (can_use_fire_arrows && has(MASK_ZORA)))"
 "Ocean Spider House Back":
-  region: SPIDER_HOUSE_OCEAN
+  dungeon: OSH
   exits:
     "Ocean Spider House Front": "has(MASK_GORON) || can_play(SONG_SOARING)"
   locations:

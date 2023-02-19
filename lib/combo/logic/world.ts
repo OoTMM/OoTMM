@@ -73,6 +73,8 @@ export const DUNGEONS_REGIONS: {[k: string]: string} = {
   GB: "MM_TEMPLE_GREAT_BAY",
   ST: "MM_TEMPLE_STONE_TOWER",
   IST: "MM_TEMPLE_STONE_TOWER",
+  SSH: "MM_SPIDER_HOUSE_SWAMP",
+  OSH: "MM_SPIDER_HOUSE_OCEAN",
 };
 
 const mapExprs = (exprParser: ExprParser, game: Game, char: string, data: any) => {

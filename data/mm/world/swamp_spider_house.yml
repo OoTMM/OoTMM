@@ -1,5 +1,5 @@
 "Swamp Spider House":
-  region: SPIDER_HOUSE_SWAMP
+  dungeon: SSH
   exits:
     "Swamp Back": "true"
   locations:
