@@ -9,7 +9,7 @@ export type EntranceShuffleResult = {
   blueWarps: number[];
 };
 
-const DUNGEON_INDEX = {
+const BOSS_INDEX_BY_DUNGEON = {
   DT: 0,
   DC: 1,
   JJ: 2,
@@ -21,7 +21,7 @@ const DUNGEON_INDEX = {
   WF: 8,
   SH: 9,
   GB: 10,
-  ST: 11,
+  IST: 11,
 } as {[k: string]: number};
 
 export class LogicPassEntrances {
@@ -133,7 +133,7 @@ export class LogicPassEntrances {
       const dst = bossEntrancesByDungeon[dstDungeon];
 
       /* Mark the blue warp */
-      this.result.blueWarps[DUNGEON_INDEX[dstDungeon]] = DUNGEON_INDEX[srcDungeon];
+      this.result.blueWarps[BOSS_INDEX_BY_DUNGEON[dstDungeon]] = BOSS_INDEX_BY_DUNGEON[srcDungeon];
 
       /* Replace the entrance */
       const srcArea = this.input.world.areas[src.from];

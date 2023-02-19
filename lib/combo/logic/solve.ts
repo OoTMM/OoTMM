@@ -342,6 +342,16 @@ export class LogicPassSolver {
   }
 
   private fixDungeon(dungeon: string) {
+    /* handle IST and ST */
+    if (dungeon === 'IST') {
+      return;
+    }
+
+    let locations = this.state.world.dungeons[dungeon];
+    if (dungeon === 'ST') {
+      locations = new Set([...locations, ...this.state.world.dungeons['IST']]);
+    }
+
     const pool = combinedItems(this.pools.required, this.pools.nice);
 
     for (const game of GAMES) {
@@ -361,7 +371,7 @@ export class LogicPassSolver {
         }
 
         while (pool[item]) {
-          this.randomAssumed(pool, { restrictedLocations: this.state.world.dungeons[dungeon], forcedItem: item });
+          this.randomAssumed(pool, { restrictedLocations: locations, forcedItem: item });
           removeItemPools(this.pools, item);
         }
       }
