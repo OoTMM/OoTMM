@@ -191,6 +191,9 @@ const loadWorldGame = (world: World, game: Game, settings: Settings) => {
   loadWorldAreas(world, game, exprParser);
   loadWorldPool(world, game, settings);
   loadWorldEntrances(world, game);
+
+  /* Create a special black-hole area */
+  world.areas["VOID"] = { boss: false, dungeon: null, exits: {}, events: {}, locations: {}, gossip: {} };
 }
 
 export const createWorld = (settings: Settings) => {
