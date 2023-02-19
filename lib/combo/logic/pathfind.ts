@@ -21,6 +21,7 @@ export type PathfinderState = {
   uncollectedLocations: Set<string>;
   events: Set<string>;
   gossip: Set<string>;
+  goal: boolean;
 }
 
 const defaultState = (settings: Settings): PathfinderState => ({
@@ -34,6 +35,7 @@ const defaultState = (settings: Settings): PathfinderState => ({
   uncollectedLocations: new Set(),
   events: new Set(),
   gossip: new Set(),
+  goal: false,
 });
 
 export type EntranceOverrides = {[k: string]: {[k: string]: string | null}};
@@ -44,6 +46,7 @@ type PathfinderOptions = {
   ignoreItems?: boolean;
   recursive?: boolean;
   gossip?: boolean;
+  stopAtGoal?: boolean;
   restrictedLocations?: Set<string>;
   forbiddenLocations?: Set<string>;
 };
@@ -218,6 +221,10 @@ export class Pathfinder {
         if (this.opts.gossip) {
           changed ||= this.pathfindGossip(age);
         }
+      }
+      this.state.goal = this.state.events.has('OOT_GANON') && this.state.events.has('MM_MAJORA');
+      if (this.opts.stopAtGoal && this.state.goal) {
+        return false;
       }
       anyChange = anyChange || changed;
       if (!changed) {

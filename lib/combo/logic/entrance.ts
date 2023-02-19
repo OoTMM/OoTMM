@@ -2,6 +2,7 @@ import { Random, sample } from "../random";
 import { Settings } from "../settings";
 import { DUNGEONS_REGIONS, ExprMap, World, WorldEntrance } from "./world";
 import { Pathfinder, EntranceOverrides, PathfinderState } from './pathfind';
+import { Monitor } from "../monitor";
 
 export type EntranceShuffleResult = {
   overrides: {[k: string]: {[k:string]: { from: string, to: string }}};
@@ -31,6 +32,7 @@ export class LogicPassEntrances {
       world: World;
       settings: Settings;
       random: Random;
+      monitor: Monitor;
     },
   ) {
     this.pathfinder = new Pathfinder(input.world, input.settings);
@@ -164,6 +166,7 @@ export class LogicPassEntrances {
   }
 
   run() {
+    this.input.monitor.log('Logic: Entrances');
     if (this.input.settings.erBoss !== 'none') {
       this.fixBosses();
     }

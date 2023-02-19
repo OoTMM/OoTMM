@@ -229,6 +229,7 @@ export const isToken = (item: string) => isGoldToken(item) || isHouseToken(item)
 export const isJunk = (item: string) => ITEMS_JUNK.has(item);
 export const isMasterSword = (item: string) => item === 'OOT_SWORD_MASTER';
 export const isGerudoCard = (item: string) => item === 'OOT_GERUDO_CARD';
+export const isItemImportant = (item: string) => isItemMajor(item) || isDungeonReward(item) || isToken(item) || isStrayFairy(item) || isKey(item);
 
 export const itemsArray = (items: Items) => {
   const arr: string[] = [];

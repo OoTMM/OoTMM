@@ -45,7 +45,7 @@
     SAKON_BOMB_BAG: "can_fight"
   locations:
     "Clock Town Tree HP": "true"
-    "Clock Town Bomber Notebook": "event(BOMBER_CODE)"
+    "Clock Town Bomber Notebook": "event(BOMBER_CODE) || event(GUESS_BOMBER)"
     "Clock Town Blast Mask": "event(SAKON_BOMB_BAG)"
     "Clock Town Keaton HP": "has(MASK_KEATON)"
 "Clock Town West":
@@ -74,6 +74,8 @@
     "Stock Pot Inn": "true"
     "Milk Bar": "true"
     "Astral Observatory": "event(BOMBER_CODE) || trick(MM_BOMBER_SKIP)"
+  events:
+    GUESS_BOMBER: "trick(MM_BOMBER_SKIP)"
   locations:
     "Clock Town Silver Rupee Chest": "true"
     "Clock Town Postman Hat": "event(POSTMAN_FREEDOM)"

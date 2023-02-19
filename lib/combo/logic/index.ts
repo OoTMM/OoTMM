@@ -5,7 +5,7 @@ import { LogicPassSpoiler } from './spoiler';
 import { Options } from '../options';
 import { Hints, LogicPassHints } from './hints';
 import { alterWorld, configFromSettings } from './settings';
-import { LogicPassPlaythrough } from './playthrough';
+import { LogicPassAnalysis } from './analysis';
 import { Monitor } from '../monitor';
 import { LogicPassEntrances } from './entrance';
 import { LogicPassHash } from './hash';
@@ -50,7 +50,7 @@ export const logic = (monitor: Monitor, opts: Options) => {
     createState(monitor, opts)
   ).apply(LogicPassEntrances)
   .apply(LogicPassSolver)
-  .apply(LogicPassPlaythrough)
+  .apply(LogicPassAnalysis)
   .apply(LogicPassHints)
   .apply(LogicPassSpoiler)
   .apply(LogicPassHash)
