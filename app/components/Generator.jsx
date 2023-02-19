@@ -71,16 +71,11 @@ export const Generator = ({ onGenerate, error }) => {
   const pruneLocationList = (newSettings) => {
     const locList = makeLocationList(newSettings);
     const junkLocations = newSettings.junkLocations;
-    for (let i=0; i<junkLocations.length; i++) {
-      if (Object.keys(locList).indexOf(junkLocations[i]) === -1) {
-        delete junkLocations[i];
-      }
-    }
-    return [locList, junkLocations];
+    const newJunkLocations = junkLocations.filter((v) => Object.keys(locList).indexOf(v) !== -1);
+    return [locList, newJunkLocations];
   };
   
   const generateJunkItemsTab = () => {
-    console.log("display junk?", displayJunkItems)
     if (displayJunkItems) {
       return <Tab name="Junk Locations" component={<JunkLocations settings={settings} setSetting={setSetting} locList={locList}/>}/>;
     }
