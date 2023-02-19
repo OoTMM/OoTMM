@@ -1,7 +1,12 @@
+"Great Bay Temple":
+  dungeon: GB
+  exits:
+    "Great Bay Temple Entrance": "event(TIME_TRAVEL)"
+    "Zora Cape Peninsula": "has(HOOKSHOT)"
 "Great Bay Temple Entrance":
   dungeon: GB
   exits:
-    "Zora Cape Peninsula": "has(HOOKSHOT)"
+    "Great Bay Temple Entrance": "true"
     "Great Bay Temple Water Wheel": "true"
   locations:
     "Great Bay Temple Entrance Chest": "true"

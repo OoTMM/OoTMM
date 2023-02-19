@@ -1,7 +1,12 @@
+"Stone Tower Temple":
+  dungeon: ST
+  exits:
+    "Stone Tower Temple Entrance": "event(TIME_TRAVEL)"
+    "Stone Tower Front of Temple": "true"
 "Stone Tower Temple Entrance":
   dungeon: ST
   exits:
-    "Stone Tower Front of Temple": "true"
+    "Stone Tower Temple": "true"
     "Stone Tower Temple West": "true"
     "Stone Tower Temple Water Room": "can_use_light_arrows || event(STONE_TOWER_EAST_ENTRY_BLOCK)"
   locations:

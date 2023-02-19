@@ -308,7 +308,7 @@
   region: GRAVEYARD
   exits:
     "Graveyard": "true"
-    "Shadow Temple": "is_adult && can_use_din"
+    "Shadow Temple": "can_use_din"
   gossip:
     "Graveyard Gossip": "true"
 "Graveyard Royal Tomb":

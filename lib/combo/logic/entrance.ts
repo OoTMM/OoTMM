@@ -60,8 +60,8 @@ export class LogicPassEntrances {
     dungeons: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
   };
 
-  private isBossAssignable(src: WorldEntrance, dst: WorldEntrance, overrides: EntranceOverrides) {
-    if (this.input.settings.erBoss === 'ownGame') {
+  private isAssignable(src: WorldEntrance, dst: WorldEntrance, overrides: EntranceOverrides, opts?: { mergeStoneTowers?: boolean, ownGame?: boolean }) {
+    if (opts?.ownGame) {
       /* Check that the entrances are from the same game */
       /* TODO: Ugly */
       const prefixA = src.from.split(' ')[0];
@@ -71,13 +71,19 @@ export class LogicPassEntrances {
       }
     }
 
+    const dungeon = this.input.world.areas[dst.to].dungeon!;
+    let locations: string[] = [];
+    if ((dungeon === 'ST' || dungeon === 'IST') && opts?.mergeStoneTowers) {
+      locations = [...this.input.world.dungeons['ST'], ...this.input.world.dungeons['IST']];
+    } else {
+      locations = [...this.input.world.dungeons[dungeon]];
+    }
+
     /* Pathfind with the override */
     overrides = { ...overrides, [src.from]: { [src.to]: dst.to } };
     const pathfinderState = this.pathfinder.run(null, { recursive: true, entranceOverrides: overrides, ignoreItems: true });
 
     /* Check if every location is reachable */
-    const dungeon = this.input.world.areas[dst.to].dungeon!;
-    const locations = [...this.input.world.dungeons[dungeon]];
     if (locations.some(l => !pathfinderState.locations.has(l))) {
       return false;
     }
@@ -124,7 +130,7 @@ export class LogicPassEntrances {
       for (const dungeonDst of dungeons) {
         const src = bossEntrancesByDungeon[dungeonSrc];
         const dst = bossEntrancesByDungeon[dungeonDst];
-        if (this.isBossAssignable(src, dst, overrides)) {
+        if (this.isAssignable(src, dst, overrides, { mergeStoneTowers: true, ownGame: this.input.settings.erBoss === 'ownGame' })) {
           const combination = combinations[dungeonDst] || [];
           combination.push(dungeonSrc);
           combinations[dungeonDst] = combination;
@@ -186,8 +192,45 @@ export class LogicPassEntrances {
   }
 
   private fixDungeons() {
-    const dungeonEntrances = this.input.world.entrances.filter(e => { console.log(e); return !this.input.world.areas[e.from].dungeon && this.input.world.areas[e.to].dungeon });
-    console.log(dungeonEntrances);
+    const dungeonEntrances = this.input.world.entrances.filter(e => !this.input.world.areas[e.from].dungeon && this.input.world.areas[e.to].dungeon);
+    const dungeonExits = this.input.world.entrances.filter(e => this.input.world.areas[e.from].dungeon && !this.input.world.areas[e.to].dungeon);
+    const entranceByDungeon: {[k: string]: WorldEntrance} = {};
+    const exitsByDungeon: {[k: string]: WorldEntrance} = {};
+    const overrides: EntranceOverrides = {};
+    const combinations: {[k: string]: string[]} = {};
+
+    /* Set up null overrides */
+    for (const e of dungeonEntrances) {
+      const override = overrides[e.from] || {};
+      override[e.to] = null;
+      overrides[e.from] = override;
+      const dungeon = this.input.world.areas[e.to].dungeon!;
+      entranceByDungeon[dungeon] = e;
+    }
+
+    for (const e of dungeonExits) {
+      const override = overrides[e.from] || {};
+      override[e.to] = null;
+      overrides[e.from] = override;
+      const dungeon = this.input.world.areas[e.from].dungeon!;
+      exitsByDungeon[dungeon] = e;
+    }
+
+    /* Set up base reachability */
+    const dungeons = Object.keys(entranceByDungeon);
+    for (const dungeonSrc of dungeons) {
+      for (const dungeonDst of dungeons) {
+        const src = entranceByDungeon[dungeonSrc];
+        const dst = entranceByDungeon[dungeonDst];
+        if (this.isAssignable(src, dst, overrides, { ownGame: this.input.settings.erDungeons === 'ownGame' })) {
+          const combination = combinations[dungeonDst] || [];
+          combination.push(dungeonSrc);
+          combinations[dungeonDst] = combination;
+        }
+      }
+    }
+
+    console.log(combinations);
   }
 
   run() {
