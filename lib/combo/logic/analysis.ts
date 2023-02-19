@@ -384,9 +384,11 @@ export class LogicPassAnalysis {
     case 'OOT_BOW':
     case 'OOT_SLINGSHOT':
     case 'OOT_WALLET':
+    case 'OOT_MAGIC_UPGRADE':
     case 'MM_SWORD':
     case 'MM_BOW':
     case 'MM_BOMB_BAG':
+    case 'MM_MAGIC_UPGRADE':
       maximumRequired = 1;
       break;
     }
