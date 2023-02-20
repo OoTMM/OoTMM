@@ -25,7 +25,7 @@ Spirit Temple,                  Desert Colossus,                  0x082
 Desert Colossus,                Spirit Temple,                    0x1e1
 Bottom of the Well,             Kakariko,                         0x098
 Kakariko,                       Bottom of the Well,               0x2a6
-Ice Cavern,                     Zora Fountain,                    0x088
-Zora Fountain,                  Ice Cavern,                       0x3d4
-Gerudo Training Grounds,        Gerudo Fortress,                  0x008
-Gerudo Fortress,                Gerudo Training Grounds,          0x3a8
+Ice Cavern,                     Zora Fountain Frozen,             0x088
+Zora Fountain Frozen,           Ice Cavern,                       0x3d4
+Gerudo Training Grounds,        Gerudo Fortress Exterior,         0x008
+Gerudo Fortress Exterior,       Gerudo Training Grounds,          0x3a8

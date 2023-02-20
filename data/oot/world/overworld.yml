@@ -485,7 +485,7 @@
   exits:
     "Zora Domain Back": "true"
     "Jabu-Jabu": "is_child && has_bottle"
-    "Ice Cavern": "is_adult"
+    "Zora Fountain Frozen": "is_adult"
   locations:
     "Great Fairy Farore's Wind": "has_explosives && can_play(SONG_ZELDA)"
     "Zora Fountain Iceberg HP": "is_adult"
@@ -496,6 +496,11 @@
   gossip:
     "Zora Fountain Gossip Northwest": "true"
     "Zora Fountain Gossip Near Fairy": "true"
+"Zora Fountain Frozen":
+  region: ZORA_FOUNTAIN
+  exits:
+    "Zora Fountain": "true"
+    "Ice Cavern": "true"
 "Temple of Time":
   region: TEMPLE_OF_TIME
   exits:

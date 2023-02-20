@@ -132,6 +132,15 @@ void comboTriggerWarp(GameState_Play* play, int bossId)
         isMmEntrance = 1;
         entrance = 0x6880;
         break;
+    case DUNGEONID_BOTTOM_OF_THE_WELL:
+        entrance = 0x2a6;
+        break;
+    case DUNGEONID_ICE_CAVERN:
+        entrance = 0x3d4;
+        break;
+    case DUNGEONID_GERUDO_TRAINING_GROUNDS:
+        entrance = 0x3a8;
+        break;
     default:
         UNREACHABLE();
         break;

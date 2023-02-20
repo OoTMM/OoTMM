@@ -85,6 +85,9 @@
 #define DUNGEONID_TEMPLE_STONE_TOWER                0x0c
 #define DUNGEONID_SPIDER_HOUSE_SWAMP                0x0d
 #define DUNGEONID_SPIDER_HOUSE_OCEAN                0x0e
+#define DUNGEONID_BOTTOM_OF_THE_WELL                0x0f
+#define DUNGEONID_ICE_CAVERN                        0x10
+#define DUNGEONID_GERUDO_TRAINING_GROUNDS           0x11
 
 
 #if !defined(__ASSEMBLER__)
@@ -116,7 +119,7 @@ typedef struct PACKED ALIGNED(4)
     u8              config[0x40];
     ComboDataHints  hints;
     u8              boss[12];
-    u8              dungeons[15];
+    u8              dungeons[18];
 }
 ComboData;
 
