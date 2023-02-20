@@ -276,7 +276,7 @@
   exits:
     "Road to Southern Swamp": "true"
     "Tourist Information": "true"
-    "Swamp Back": "event(BOAT_RIDE) || (has(MASK_DEKU) && (has(BOW) || has(HOOKSHOT))) || has(MASK_ZORA)"
+    "Swamp Back": "event(BOAT_RIDE) || has(MASK_ZORA) || event(CLEAN_SWAMP) || (has(MASK_DEKU) && (has(BOW) || has(HOOKSHOT)))"
     "Swamp Potion Shop": "true"
     "Woods of Mystery": "true"
   events:
@@ -291,9 +291,10 @@
 "Swamp Back":
   region: SOUTHERN_SWAMP
   exits:
-    "Swamp Front": "event(BOAT_RIDE) || (has(BOW) && (has(MASK_DEKU) || has(MASK_ZORA)))"
+    "Swamp Front": "event(BOAT_RIDE) || event(CLEAN_SWAMP) || (has(BOW) && (has(MASK_DEKU) || has(MASK_ZORA) || has(MASK_GORON)))"
     "Deku Palace": "true"
     "Swamp Spider House": "has(MASK_DEKU) || has(MASK_ZORA)"
+    "Swamp Canopy Back": "event(CLEAN_SWAMP)"
   locations:
     "Southern Swamp Grotto": "has(MASK_DEKU) || has(MASK_ZORA)"
 "Tourist Information":
@@ -327,7 +328,7 @@
   region: DEKU_PALACE
   exits:
     "Swamp Back": "true"
-    "Swamp Canopy": "has(MASK_DEKU)"
+    "Swamp Canopy Front": "has(MASK_DEKU)"
     "Deku Shrine": "has(MASK_DEKU) && event(DEKU_PRINCESS)"
   events:
     MAGIC_BEANS_PALACE: "has(MASK_DEKU)"
@@ -335,44 +336,52 @@
     "Deku Palace HP": "has(MASK_DEKU)"
     "Deku Palace Grotto Chest": "has(MASK_DEKU) && (can_use_beans || has(HOOKSHOT))"
     "Deku Palace Sonata of Awakening": "has(MASK_DEKU) && has(OCARINA) && can_use_beans"
-"Swamp Canopy":
+"Swamp Canopy Front":
   region: SOUTHERN_SWAMP
   exits:
     "Swamp Back": "true"
     "Deku Palace": "true"
-    "Woodfall": "has(MASK_DEKU)"
+    "Swamp Canopy Back": "has(MASK_DEKU)"
+"Swamp Canopy Back":
+  region: SOUTHERN_SWAMP
+  exits:
+    "Swamp Back": "has(MASK_DEKU) || has(MASK_ZORA) || event(CLEAN_SWAMP)"
+    "Woodfall": "true"
+    "Swamp Canopy Front": "has(MASK_DEKU)"
   locations:
     "Southern Swamp Song of Soaring": "has(MASK_DEKU)"
 "Woodfall":
   region: WOODFALL
   exits:
-    "Swamp Canopy": "true"
+    "Swamp Canopy Back": "true"
     "Woodfall Shrine": "has(MASK_DEKU)"
-    "Woodfall Near Great Fairy Fountain": "has(HOOKSHOT) && has(MASK_DEKU)"
+    "Woodfall Near Great Fairy Fountain": "(has(HOOKSHOT) && has(MASK_DEKU)) || event(CLEAN_SWAMP)"
     "Woodfall Temple Princess Jail": "event(CLEAN_SWAMP) && event(OPEN_WOODFALL_TEMPLE)"
   locations:
     "Woodfall Entrance Chest": "has(MASK_DEKU) || has(HOOKSHOT)"
     "Woodfall HP Chest": "has(MASK_DEKU) || has(HOOKSHOT)"
+    "Woodfall Near Owl Chest": "has(HOOKSHOT) && event(CLEAN_SWAMP)"
 "Woodfall Front of Temple":
   region: WOODFALL
   exits:
     "Woodfall Temple": "has_weapon"
     "Woodfall Shrine": "has(MASK_DEKU)"
+    "Woodfall": "event(CLEAN_SWAMP)"
 "Woodfall Shrine":
   region: WOODFALL
   exits:
-    "Woodfall": "has(MASK_DEKU)"
-    "Woodfall Near Great Fairy Fountain": "has(MASK_DEKU)"
+    "Woodfall": "has(MASK_DEKU) || event(CLEAN_SWAMP)"
+    "Woodfall Near Great Fairy Fountain": "has(MASK_DEKU) || event(CLEAN_SWAMP)"
     "Woodfall Front of Temple": "event(OPEN_WOODFALL_TEMPLE)"
   events:
     WOODFALL_OWL: "true"
     OPEN_WOODFALL_TEMPLE: "has(MASK_DEKU) && can_play(SONG_AWAKENING)"
   locations:
-    "Woodfall Near Owl Chest": "has(MASK_DEKU) || (has(HOOKSHOT) && can_play(SONG_SOARING))"
+    "Woodfall Near Owl Chest": "has(MASK_DEKU) || has(HOOKSHOT)"
 "Woodfall Near Great Fairy Fountain":
   region: WOODFALL
   exits:
-    "Woodfall": "has(MASK_DEKU)"
+    "Woodfall": "has(MASK_DEKU) || event(CLEAN_SWAMP)"
     "Woodfall Shrine": "has(MASK_DEKU)"
     "Woodfall Great Fairy Fountain": "has(MASK_DEKU)"
 "Woodfall Great Fairy Fountain":
@@ -391,13 +400,13 @@
   region: PATH_TO_MOUNTAIN_VILLAGE
   exits:
     "Termina Field": "has(BOW)"
-    "Mountain Village Path Upper": "can_break_boulders || can_use_fire_arrows"
+    "Mountain Village Path Upper": "can_break_boulders || can_use_fire_arrows || event(BOSS_SNOWHEAD)"
   gossip:
     "Mountain Village Path Gossip": "true"
 "Mountain Village Path Upper":
   region: PATH_TO_MOUNTAIN_VILLAGE
   exits:
-    "Mountain Village Path Lower": "can_break_boulders || can_use_fire_arrows"
+    "Mountain Village Path Lower": "can_break_boulders || can_use_fire_arrows || event(BOSS_SNOWHEAD)"
     "Mountain Village": "true"
 "Mountain Village":
   region: MOUNTAIN_VILLAGE
@@ -511,7 +520,7 @@
     "Snowhead Near Great Fairy Fountain": "event(OPEN_SNOWHEAD_TEMPLE)"
   events:
     SNOWHEAD_OWL: "true"
-    OPEN_SNOWHEAD_TEMPLE: "can_lullaby"
+    OPEN_SNOWHEAD_TEMPLE: "can_lullaby || event(BOSS_SNOWHEAD)"
 "Snowhead":
   region: SNOWHEAD
   exits:
