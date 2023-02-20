@@ -1,5 +1,5 @@
-Standard:
-  songs: anywhere
+Standard Race:
+  songs: songLocations
   goldSkulltulaTokens: none
   housesSkulltulaTokens: none
   mapCompassShuffle: starting
@@ -41,7 +41,25 @@ Standard:
     - MM_NO_SEAHORSE
     - MM_ONE_MASK_STONE_TOWER
   junkLocations:
+    - MM Ocean Spider House Wallet
+    - MM Swamp Spider House Mask of Truth
+    - OOT Skulltula House 40 Tokens
+    - OOT Skulltula House 50 Tokens
+    - OOT Fishing Pond Child
+    - OOT Fishing Pond Adult
+    - MM Laboratory Zora Song
     - MM Woodfall Great Fairy
     - MM Snowhead Great Fairy
     - MM Great Bay Great Fairy
     - MM Ikana Great Fairy
+    - MM Goron Race Reward
+    - MM Beneath The Graveyard Dampe Chest
+    - MM Moon Fierce Deity Mask
+    - OOT Gerudo Training Water
+    - OOT Hyrule Field Song of Time
+    - OOT Hyrule Field Ocarina of Time
+    - MM Town Archery Reward 2
+    - MM Honey & Darling Reward 2
+    - MM Deku Playground Reward 2
+    - MM Swamp Archery Reward 2
+    - MM Waterfall Rapids Beaver Race 2
