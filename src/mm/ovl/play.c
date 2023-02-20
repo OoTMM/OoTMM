@@ -144,6 +144,12 @@ void hookPlay_Init(GameState_Play* play)
     gLastEntrance = gSave.entranceIndex;
     comboSpawnItemGivers(play);
 
+    if (gNoTimeFlow)
+    {
+        play->envCtx.sceneTimeSpeed = 0;
+        gGameData->clockSpeed = 0;
+    }
+
     if (isEndOfGame)
     {
         /* End game */
