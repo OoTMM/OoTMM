@@ -132,7 +132,7 @@ export const SETTINGS = [{
 }, {
   key: 'erBoss',
   name: 'Boss Entrance Shuffle',
-  category: 'main',
+  category: 'entrances',
   type: 'enum',
   values: [
     { value: 'none', name: 'None' },
@@ -143,7 +143,7 @@ export const SETTINGS = [{
 }, {
   key: 'erDungeons',
   name: 'Dungeon Entrance Shuffle',
-  category: 'main',
+  category: 'entrances',
   type: 'enum',
   values: [
     { value: 'none', name: 'None' },
@@ -154,13 +154,13 @@ export const SETTINGS = [{
 }, {
   key: 'erSpiderHouses',
   name: 'Shuffle Spider Houses with Dungeons',
-  category: 'main',
+  category: 'entrances',
   type: 'boolean',
   default: false
 }, {
   key: 'erMinorDungeons',
   name: 'Shuffle OoT Minor Dungeons with Dungeons',
-  category: 'main',
+  category: 'entrances',
   type: 'boolean',
   default: false
 }, {
@@ -225,6 +225,9 @@ export const SETTINGS_CATEGORIES = [{
 }, {
   name: "Progressive Items",
   key: "progressive",
+}, {
+  name: "Entrances",
+  key: "entrances",
 }, {
   name: "Misc",
   key: "misc",
