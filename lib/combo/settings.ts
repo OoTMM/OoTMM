@@ -141,6 +141,29 @@ export const SETTINGS = [{
   ],
   default: 'none'
 }, {
+  key: 'erDungeons',
+  name: 'Dungeon Entrance Shuffle',
+  category: 'main',
+  type: 'enum',
+  values: [
+    { value: 'none', name: 'None' },
+    { value: 'ownGame', name: 'Own Game' },
+    { value: 'full', name: 'Full' },
+  ],
+  default: 'none'
+}, {
+  key: 'erSpiderHouses',
+  name: 'Shuffle Spider Houses with Dungeons',
+  category: 'main',
+  type: 'boolean',
+  default: false
+}, {
+  key: 'erMinorDungeons',
+  name: 'Shuffle OoT Minor Dungeons with Dungeons',
+  category: 'main',
+  type: 'boolean',
+  default: false
+}, {
   key: 'progressiveShieldsOot',
   name: 'OoT Shields',
   category: 'progressive',

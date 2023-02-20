@@ -19,7 +19,7 @@
     "Mido's House": "true"
     "Lost Woods": "true"
     "Lost Woods Bridge": "true"
-    "Deku Tree Lobby": "is_child"
+    "Deku Tree": "is_child"
   locations:
     "Kokiri Forest Kokiri Sword Chest": "is_child"
     "Kokiri Forest Storms Grotto": "hidden_grotto_storms"
@@ -237,7 +237,7 @@
   region: SACRED_MEADOW
   exits:
     "Lost Woods Deep": "true"
-    "Forest Temple Entrance": "can_hookshot"
+    "Forest Temple": "can_hookshot"
   locations:
     "Saria's Song": "event(MEET_ZELDA)"
     "Sacred Meadow Sheik Song": "is_adult"
@@ -308,7 +308,7 @@
   region: GRAVEYARD
   exits:
     "Graveyard": "true"
-    "Shadow Temple Entrance": "is_adult && can_use_din"
+    "Shadow Temple": "can_use_din"
   gossip:
     "Graveyard Gossip": "true"
 "Graveyard Royal Tomb":
@@ -332,7 +332,7 @@
   region: DEATH_MOUNTAIN_TRAIL
   exits:
     "Goron City": "true"
-    "Dodongo Cavern Entrance": "has_bombflowers || is_adult"
+    "Dodongo Cavern": "has_bombflowers || is_adult"
     "Kakariko": "has(ZELDA_LETTER) || is_adult"
     "Death Mountain Summit": "event(BOULDER_DEATH_MOUNTAIN) || can_ride_bean(BEAN_DEATH_MOUNTAIN)"
   events:
@@ -447,7 +447,7 @@
     "Hyrule Field": "true"
     "Zora Domain": "is_child && has(SCALE)"
     "Laboratory": "true"
-    "Water Temple Entrance": "has_iron_boots && has_tunic_zora && can_hookshot"
+    "Water Temple": "has_iron_boots && has_tunic_zora && can_hookshot"
     "Fishing Pond": "is_child || event(WATER_TEMPLE_CLEARED) || scarecrow_hookshot || can_ride_bean(BEAN_LAKE_HYLIA)"
   events:
     SCARECROW_CHILD: "is_child && has(OCARINA)"
@@ -484,8 +484,8 @@
   region: ZORA_FOUNTAIN
   exits:
     "Zora Domain Back": "true"
-    "Jabu-Jabu Entrance": "is_child && has_bottle"
-    "Ice Cavern Entrance": "is_adult"
+    "Jabu-Jabu": "is_child && has_bottle"
+    "Zora Fountain Frozen": "is_adult"
   locations:
     "Great Fairy Farore's Wind": "has_explosives && can_play(SONG_ZELDA)"
     "Zora Fountain Iceberg HP": "is_adult"
@@ -496,6 +496,11 @@
   gossip:
     "Zora Fountain Gossip Northwest": "true"
     "Zora Fountain Gossip Near Fairy": "true"
+"Zora Fountain Frozen":
+  region: ZORA_FOUNTAIN
+  exits:
+    "Zora Fountain": "true"
+    "Ice Cavern": "true"
 "Temple of Time":
   region: TEMPLE_OF_TIME
   exits:
@@ -539,7 +544,7 @@
 "Death Mountain Crater Warp":
   region: DEATH_MOUNTAIN_CRATER
   exits:
-    "Fire Temple Entrance": "has_tunic_goron"
+    "Fire Temple": "has_tunic_goron"
     "Death Mountain Crater Bottom": "can_hookshot || has_hover_boots || can_ride_bean(BEAN_DEATH_MOUNTAIN_CRATER)"
   events:
     BEAN_DEATH_MOUNTAIN_CRATER: "can_use_beans"
@@ -576,7 +581,7 @@
     "Gerudo Fortress": "true"
     "Gerudo Valley After Bridge": "true"
     "Haunted Wasteland Start": "has(GERUDO_CARD) && is_adult"
-    "Gerudo Training Grounds Entrance": "has(GERUDO_CARD) && is_adult"
+    "Gerudo Training Grounds": "has(GERUDO_CARD) && is_adult"
   locations:
     "Gerudo Fortress Chest": "has_hover_boots || can_longshot || scarecrow_hookshot"
     "Gerudo Fortress Archery Reward 1": "event(EPONA) && can_use_bow && has(GERUDO_CARD)"
@@ -598,7 +603,7 @@
 "Desert Colossus":
   region: DESERT_COLOSSUS
   exits:
-    "Spirit Temple Entrance": "true"
+    "Spirit Temple": "true"
     "Haunted Wasteland Structure": "trick(OOT_BLIND_WASTELAND)"
   events:
     BEAN_DESERT_COLOSSUS: "can_use_beans"

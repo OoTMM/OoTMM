@@ -1,5 +1,19 @@
-to,                         from,                                   id
-Woodfall Temple Boss,       Woodfall Temple Pre-Boss,               0x3800
-Snowhead Temple Boss,       Snowhead Temple Center Level 4,         0x8200
-Great Bay Temple Boss,      Great Bay Temple Pre-Boss,              0xb800
-Stone Tower Temple Boss,    Stone Tower Temple Inverted Bridge 2,   0x6600
+to,                                 from,                                   id
+Woodfall Temple Boss,               Woodfall Temple Pre-Boss,               0x3800
+Snowhead Temple Boss,               Snowhead Temple Center Level 4,         0x8200
+Great Bay Temple Boss,              Great Bay Temple Pre-Boss,              0xb800
+Stone Tower Temple Boss,            Stone Tower Temple Inverted Bridge 2,   0x6600
+Woodfall Temple,                    Woodfall Front of Temple,               0x3000
+Woodfall Front of Temple,           Woodfall Temple,                        0x8610
+Snowhead Temple,                    Snowhead,                               0x3c00
+Snowhead,                           Snowhead Temple,                        0xb210
+Great Bay Temple,                   Zora Cape Peninsula,                    0x8c00
+Zora Cape Peninsula,                Great Bay Temple,                       0x6a70
+Stone Tower Temple Inverted,        Stone Tower Top Inverted,               0x2a00
+Stone Tower Top Inverted,           Stone Tower Temple Inverted,            0xac10
+Stone Tower Temple,                 Stone Tower Front of Temple,            0x2600
+Stone Tower Front of Temple,        Stone Tower Temple,                     0xaa20
+Swamp Spider House,                 Swamp Back,                             0x4800
+Swamp Back,                         Swamp Spider House,                     0x8480
+Ocean Spider House,                 Great Bay Coast,                        0x4a00
+Great Bay Coast,                    Ocean Spider House,                     0x6880

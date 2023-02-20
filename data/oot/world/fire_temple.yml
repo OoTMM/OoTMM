@@ -1,7 +1,7 @@
-Fire Temple Entrance:
+"Fire Temple":
   dungeon: Fire
   exits:
-    "Death Mountain Crater Bottom": "true"
+    "Death Mountain Crater Warp": "true"
     "Fire Temple Lava Room": "has_small_keys_fire(1)"
     "Fire Temple Boss": "has(BOSS_KEY_FIRE) && (event(FIRE_TEMPLE_PILLAR_HAMMER) || has_hover_boots) && has_tunic_goron_strict"
     "Fire Temple Boss Key Loop": "cond(setting(smallKeyShuffle, anywhere), has(SMALL_KEY_FIRE, 8), true) && can_hammer"
@@ -24,7 +24,7 @@ Fire Temple Entrance:
 "Fire Temple After Elevator":
   dungeon: Fire
   exits:
-    "Fire Temple Entrance": "true"
+    "Fire Temple": "true"
     "Fire Temple Ring": "has_small_keys_fire(6)"
     "Fire Temple Scarecrow": "has_small_keys_fire(5) && scarecrow_hookshot"
   locations:

@@ -356,7 +356,7 @@
 "Woodfall Front of Temple":
   region: WOODFALL
   exits:
-    "Woodfall Temple Entrance": "has_weapon"
+    "Woodfall Temple": "has_weapon"
     "Woodfall Shrine": "has(MASK_DEKU)"
 "Woodfall Shrine":
   region: WOODFALL
@@ -516,7 +516,7 @@
   region: SNOWHEAD
   exits:
     "Snowhead Entrance": "event(OPEN_SNOWHEAD_TEMPLE)"
-    "Snowhead Temple Entrance": "true"
+    "Snowhead Temple": "true"
 "Snowhead Near Great Fairy Fountain":
   region: SNOWHEAD
   exits:
@@ -598,7 +598,7 @@
     "Pinnacle Rock Entrance": "has(MASK_ZORA)"
     "Laboratory": "true"
     "Zora Cape": "true"
-    "Ocean Spider House Front": "true"
+    "Ocean Spider House": "true"
   events:
     GREAT_BAY_OWL: "true"
   locations:
@@ -702,7 +702,7 @@
   exits:
     "Zora Cape": "has(MASK_ZORA) || trick(MM_ZORA_HALL_HUMAN)"
     "Zora Hall": "true"
-    "Great Bay Temple Entrance": "has(MASK_ZORA) && has(HOOKSHOT) && can_play(SONG_ZORA)"
+    "Great Bay Temple": "has(MASK_ZORA) && has(HOOKSHOT) && can_play(SONG_ZORA)"
   events:
     ZORA_CAPE_OWL: "true"
 "Gorman Track":
@@ -844,11 +844,11 @@
     "Stone Tower": "true"
     "Stone Tower Top": "can_use_elegy3"
     "Stone Tower Top Inverted": "can_use_elegy && can_use_light_arrows"
-    "Stone Tower Temple Entrance": "true"
+    "Stone Tower Temple": "true"
 "Stone Tower Top Inverted":
   region: STONE_TOWER
   exits:
-    "Stone Tower Temple Inverted Entrance": "true"
+    "Stone Tower Temple Inverted": "true"
     "Stone Tower Top": "can_use_light_arrows"
     "Stone Tower Top Inverted Upper": "can_use_beans"
 "Stone Tower Top Inverted Upper":

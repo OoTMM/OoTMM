@@ -1,7 +1,7 @@
-"Gerudo Training Grounds Entrance":
+"Gerudo Training Grounds":
   dungeon: GTG
   exits:
-    "Gerudo Fortress": "true"
+    "Gerudo Fortress Exterior": "true"
     "Gerudo Training Grounds Left Side": "can_hookshot && has_weapon"
     "Gerudo Training Grounds Right Side": "has_explosives && has_weapon"
     "Gerudo Training Grounds Maze": "true"

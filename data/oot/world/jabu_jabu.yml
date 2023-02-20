@@ -1,4 +1,4 @@
-"Jabu-Jabu Entrance":
+"Jabu-Jabu":
   dungeon: JJ
   exits:
     "Zora Fountain": "true"
@@ -6,7 +6,7 @@
 "Jabu-Jabu Main":
   dungeon: JJ
   exits:
-    "Jabu-Jabu Entrance": "true"
+    "Jabu-Jabu": "true"
     "Jabu-Jabu Boss": "can_boomerang"
   locations:
     "Jabu-Jabu Map Chest": "can_boomerang"

@@ -1,4 +1,4 @@
-"Water Temple Entrance":
+"Water Temple":
   dungeon: Water
   exits:
     "Lake Hylia": "true"
@@ -6,6 +6,7 @@
 "Water Temple Main":
   dungeon: Water
   exits:
+    "Water Temple": "true"
     "Water Temple Ruto Room": "has_iron_boots"
     "Water Temple Center": "event(WATER_LEVEL_LOW) && (has(SMALL_KEY_WATER, 5) || can_use_din || can_use_bow)"
     "Water Temple Compass Room": "(can_play(SONG_ZELDA) || has_iron_boots) && can_hookshot"

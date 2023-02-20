@@ -1,7 +1,12 @@
-"Ocean Spider House Front":
-  region: SPIDER_HOUSE_OCEAN
+"Ocean Spider House":
+  dungeon: OSH
   exits:
+    "Ocean Spider House Front": "event(TIME_TRAVEL)"
     "Great Bay Coast": "true"
+"Ocean Spider House Front":
+  dungeon: OSH
+  exits:
+    "Ocean Spider House": "true"
     "Ocean Spider House Back": "has_explosives && (has(HOOKSHOT) || can_goron_bomb_jump)"
   locations:
     "Ocean Spider House Wallet": "has(GS_TOKEN_OCEAN, 30)"
@@ -9,9 +14,9 @@
     "Ocean Skulltula Entrance Left Wall": "has_explosives && has(HOOKSHOT)"
     "Ocean Skulltula Entrance Web": " has_explosives && (has(HOOKSHOT) || (can_use_fire_arrows && has(MASK_ZORA)))"
 "Ocean Spider House Back":
-  region: SPIDER_HOUSE_OCEAN
+  dungeon: OSH
   exits:
-    "Ocean Spider House Front": "has(MASK_GORON) || can_play(SONG_SOARING)"
+    "Ocean Spider House": "has(MASK_GORON) || can_play(SONG_SOARING)"
   locations:
     "Ocean Skulltula 2nd Room Ceiling Edge": "has(HOOKSHOT) || has(MASK_ZORA)"
     "Ocean Skulltula 2nd Room Ceiling Plank": "has(HOOKSHOT) || has(MASK_ZORA)"

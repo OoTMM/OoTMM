@@ -1,4 +1,4 @@
-"Forest Temple Entrance":
+"Forest Temple":
   dungeon: Forest
   exits:
     "Sacred Meadow": "true"
@@ -9,7 +9,7 @@
 "Forest Temple Main":
   dungeon: Forest
   exits:
-    "Forest Temple Entrance": "true"
+    "Forest Temple": "true"
     "Forest Temple Mini-Boss": "true"
     "Forest Temple Garden West": "can_play(SONG_TIME)"
     "Forest Temple Garden East": "can_hit_triggers_distance"
