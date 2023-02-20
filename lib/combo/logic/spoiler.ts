@@ -8,7 +8,7 @@ import { itemName } from '../names';
 import { Monitor } from '../monitor';
 import { Analysis } from './analysis';
 import { regionName } from '../regions';
-import { isShuffled } from './settings';
+import { isShuffled } from './is-shuffled'
 
 const VERSION = process.env.VERSION || 'XXX';
 

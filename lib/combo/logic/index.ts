@@ -1,14 +1,16 @@
 import { Random } from '../random';
 import { LogicPassSolver } from './solve';
-import { createWorld, WorldCheck } from './world';
+import { LogicPassWorld } from './world';
 import { LogicPassSpoiler } from './spoiler';
 import { Options } from '../options';
-import { Hints, LogicPassHints } from './hints';
-import { alterWorld, configFromSettings } from './settings';
+import { LogicPassHints } from './hints';
 import { LogicPassAnalysis } from './analysis';
 import { Monitor } from '../monitor';
 import { LogicPassEntrances } from './entrance';
 import { LogicPassHash } from './hash';
+import { LogicPassConfig } from './config';
+import { LogicPassWorldTransform } from './world-transform';
+import { Settings } from '../settings';
 
 interface LogicPass<Out> {
   run: () => Out;
@@ -35,28 +37,31 @@ function pipeline<State>(state: State): LogicPipeline<State> {
   return new LogicPipeline(state);
 }
 
-const createState = (monitor: Monitor, opts: Options) => {
-  const random = new Random();
-  random.seed(opts.seed);
-  const world = createWorld(opts.settings);
-  const config = configFromSettings(opts.settings);
-  alterWorld(world, opts.settings, config);
+export const worldState = (monitor: Monitor, settings: Settings) => {
+  const state = { monitor, settings }
 
-  return { opts, monitor, random, world, config, settings: opts.settings };
+  return pipeline(state)
+    .apply(LogicPassConfig)
+    .apply(LogicPassWorld)
+    .apply(LogicPassWorldTransform)
+    .exec();
 };
 
 export const logic = (monitor: Monitor, opts: Options) => {
-  const state = pipeline(
-    createState(monitor, opts)
-  ).apply(LogicPassEntrances)
-  .apply(LogicPassSolver)
-  .apply(LogicPassAnalysis)
-  .apply(LogicPassHints)
-  .apply(LogicPassSpoiler)
-  .apply(LogicPassHash)
-  .exec();
+  const random = new Random();
+  random.seed(opts.seed);
 
-  return state;
+  const ws = worldState(monitor, opts.settings);
+  const state = { ...ws, opts, random };
+
+  return pipeline(state)
+    .apply(LogicPassEntrances)
+    .apply(LogicPassSolver)
+    .apply(LogicPassAnalysis)
+    .apply(LogicPassHints)
+    .apply(LogicPassSpoiler)
+    .apply(LogicPassHash)
+    .exec();
 };
 
 export type LogicResult = ReturnType<typeof logic>;

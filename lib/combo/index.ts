@@ -2,13 +2,13 @@ import { Buffer } from 'buffer';
 
 import { options, OptionsInput } from './options';
 import { Generator } from './generator';
-import { MonitorCallbacks } from './monitor';
+import { Monitor, MonitorCallbacks } from './monitor';
 import { SETTINGS, DEFAULT_SETTINGS, SETTINGS_CATEGORIES, Settings, TRICKS } from './settings';
-import { createWorld } from './logic/world';
-import { alterWorld, configFromSettings, isShuffled } from './logic/settings';
+import { worldState } from './logic';
 import { itemName } from './names';
 import { addItem, isDungeonItem, isDungeonReward, isJunk, isStrayFairy, isToken, Items } from './logic/items';
 import { EXTRA_ITEMS } from './logic/solve';
+import { isShuffled } from './logic/is-shuffled';
 
 type GeneratorParams = {
   oot: Buffer,
@@ -30,9 +30,8 @@ export { SETTINGS, DEFAULT_SETTINGS, SETTINGS_CATEGORIES, TRICKS, itemName };
 
 export const itemPool = (aSettings: Partial<Settings>) => {
   const settings: Settings = { ...DEFAULT_SETTINGS, ...aSettings };
-  const world = createWorld(settings);
-  const config = configFromSettings(settings);
-  alterWorld(world, settings, config);
+  const monitor = new Monitor({ onLog: () => {} });
+  const { world } = worldState(monitor, settings);
 
   /* Extract relevant items from the world */
   const items: Items = {};
@@ -56,9 +55,8 @@ export const itemPool = (aSettings: Partial<Settings>) => {
 
 export const locationList = (aSettings: Partial<Settings>) => {
   const settings: Settings = { ...DEFAULT_SETTINGS, ...aSettings };
-  const world = createWorld(settings);
-  const config = configFromSettings(settings);
-  alterWorld(world, settings, config);
+  const monitor = new Monitor({ onLog: () => {} });
+  const { world, config } = worldState(monitor, settings);
 
   // Precalculate this to avoid doing it more than once in the gui
   const dungeonLocations = Object.values(world.dungeons).reduce((acc, x) => new Set([...acc, ...x]));
