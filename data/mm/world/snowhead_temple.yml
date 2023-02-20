@@ -189,7 +189,7 @@
   boss: true
   dungeon: SH
   exits:
-    "Snowhead Temple After Boss": "event(TIME_TRAVEL) && can_use_fire_arrows"
+    "Snowhead Temple After Boss": "can_use_fire_arrows"
 "Snowhead Temple After Boss":
   boss: true
   dungeon: SH

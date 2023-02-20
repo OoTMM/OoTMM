@@ -165,6 +165,8 @@ void comboTriggerWarp(GameState_Play* play, int bossId)
 #if defined(GAME_MM)
     if (isMmEntrance)
     {
+        gNoTimeFlow = 0;
+
         gSave.playerForm = MM_PLAYER_FORM_HUMAN;
         gSave.equippedMask = 0;
 
