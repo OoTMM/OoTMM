@@ -201,6 +201,7 @@ void hookPlay_Init(GameState_Play* play)
             {
                 gSave.entrance = gLastEntrance;
                 Play_Init(play);
+                gComboCtx.shuffledEntrance = 1;
                 comboGameSwitch(play, override);
                 return;
             }
@@ -247,6 +248,7 @@ void hookPlay_Init(GameState_Play* play)
 
     if (gSave.entrance == 0x0530)
     {
+        gComboCtx.shuffledEntrance = 0;
         comboGameSwitch(play, -1);
         return;
     }
@@ -265,6 +267,7 @@ void hookPlay_Init(GameState_Play* play)
 #if defined(DEBUG)
     if (play->gs.input[0].current.buttons & R_TRIG)
     {
+        gComboCtx.shuffledEntrance = 0;
         comboGameSwitch(play, -1);
         return;
     }

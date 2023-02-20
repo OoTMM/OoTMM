@@ -101,6 +101,7 @@ typedef struct PACKED ALIGNED(4)
     u32  valid;
     u32  saveIndex;
     s32  entrance;
+    s32  shuffledEntrance;
 }
 ComboContext;
 
@@ -346,6 +347,10 @@ void comboTriggerWarp(GameState_Play* play, int index);
 /* Menu */
 void comboMenuKeysUpdate(GameState_Play* play);
 void comboMenuKeysDraw(GameState_Play* play);
+
+#if defined(GAME_MM)
+extern int gNoTimeFlow;
+#endif
 
 #else
 # include <combo/asm.h>

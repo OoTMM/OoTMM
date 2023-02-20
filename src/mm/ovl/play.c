@@ -1,5 +1,7 @@
 #include <combo.h>
 
+int gNoTimeFlow;
+
 static void debugCheat(GameState_Play* play)
 {
 #if defined(DEBUG)
