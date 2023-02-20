@@ -113,7 +113,14 @@ void comboTriggerWarp(GameState_Play* play, int bossId)
         break;
     case DUNGEONID_TEMPLE_SNOWHEAD:
         isMmEntrance = 1;
-        entrance = 0xae70;
+        if (MM_GET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_SH))
+        {
+            entrance = 0xae70;
+        }
+        else
+        {
+            entrance = 0x9a80;
+        }
         break;
     case DUNGEONID_TEMPLE_GREAT_BAY:
         isMmEntrance = 1;
