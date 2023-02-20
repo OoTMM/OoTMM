@@ -54,6 +54,16 @@ export const SETTINGS = [{
   ],
   default: 'ownDungeon'
 }, {
+  key: 'smallKeyShuffleHideout',
+  name: 'Hideout Small Key Shuffle',
+  category: 'main',
+  type: 'enum',
+  values: [
+    { value: 'ownDungeon', name: 'Own Dungeon' },
+    { value: 'anywhere', name: 'Anywhere' },
+  ],
+  default: 'ownDungeon'
+}, {
   key: 'bossKeyShuffle',
   name: 'Boss Key Shuffle',
   category: 'main',

@@ -212,6 +212,8 @@ export const isSong = (item: string) => !!item.match(/^(OOT|MM)_SONG_/);
 export const isCompass = (item: string) => !!item.match(/^(OOT|MM)_COMPASS_/);
 export const isMap = (item: string) => !!item.match(/^(OOT|MM)_MAP_/);
 export const isSmallKey = (item: string) => !!item.match(/^(OOT|MM)_SMALL_KEY_/);
+export const isSmallKeyHideout = (item: string) => item === 'OOT_SMALL_KEY_GF';
+export const isSmallKeyRegular = (item: string) => isSmallKey(item) && !isSmallKeyHideout(item);
 export const isGanonBossKey = (item: string) => item === 'OOT_BOSS_KEY_GANON';
 export const isBossKey = (item: string) => !!item.match(/^(OOT|MM)_BOSS_KEY_/);
 export const isRegularBossKey = (item: string) => isBossKey(item) && !isGanonBossKey(item);

@@ -9,5 +9,6 @@ test("Can make a seed - allsanity", () => {
     townFairyShuffle: 'anywhere',
     bossKeyShuffle: 'anywhere',
     smallKeyShuffle: 'anywhere',
+    smallKeyShuffleHideout: 'anywhere',
   });
 });
