@@ -8,8 +8,19 @@ import { itemName } from '../names';
 import { Monitor } from '../monitor';
 import { Analysis } from './analysis';
 import { regionName } from '../regions';
+import { isShuffled } from './settings';
 
 const VERSION = process.env.VERSION || 'XXX';
+
+const spoilerSectionHeader = (buffer: string[]) => {
+  const lineLength = 75;
+  const delimiter = '=';
+  let line = '';
+  for (let x=0; x<lineLength; x++) {
+    line += delimiter;
+  }
+  buffer.push(line);
+}
 
 const spoilerHeader = (buffer: string[], seed: string) => {
   buffer.push(`Seed: ${seed}`);
@@ -112,11 +123,17 @@ const spoilerHints = (buffer: string[], hints: Hints, placement: ItemPlacement) 
   buffer.push('');
 };
 
-const spoilerRaw = (buffer: string[], world: World, placement: ItemPlacement) => {
-  const regionNames = new Set(Object.values(world.regions))
+const spoilerRaw = (buffer: string[], settings: Settings, world: World, placement: ItemPlacement) => {
+  spoilerSectionHeader(buffer);
+  buffer.push('Location List');
+  const regionNames = new Set(Object.values(world.regions));
+  const dungeonLocations = Object.values(world.dungeons).reduce((acc, x) => new Set([...acc, ...x]));
   regionNames.forEach(region => {
-    const regionalLocations = Object.keys(world.regions).filter(location => world.regions[location] == region).map(loc => `  ${loc}: ${itemName(placement[loc])}`);
-    buffer.push(`${regionName(region)}:`);
+    const regionalLocations = Object.keys(world.regions)
+      .filter(location => world.regions[location] === region)
+      .filter(location => isShuffled(settings, world, location, dungeonLocations))
+      .map(loc => `    ${loc}: ${itemName(placement[loc])}`);
+    buffer.push(`  ${regionName(region)}:`);
     buffer.push(regionalLocations.join('\n'));
     buffer.push('')
     }
@@ -124,11 +141,13 @@ const spoilerRaw = (buffer: string[], world: World, placement: ItemPlacement) =>
 };
 
 const spoilerSpheres = (buffer: string[], world: World, placement: ItemPlacement, spheres: string[][]) => {
+  spoilerSectionHeader(buffer);
+  buffer.push('Spheres');
   for (const i in spheres) {
-    buffer.push(`Sphere ${i}`);
+    buffer.push(`  Sphere ${i}`);
     const sphere = spheres[i];
     for (const loc of sphere) {
-      buffer.push(`  ${loc}: ${itemName(placement[loc])}`);
+      buffer.push(`    ${loc}: ${itemName(placement[loc])}`);
     }
     buffer.push('');
   }
@@ -163,7 +182,7 @@ export class LogicPassSpoiler {
     if (!this.state.opts.settings.noLogic) {
       spoilerSpheres(buffer, this.state.world, this.state.items, this.state.analysis.spheres);
     }
-    spoilerRaw(buffer, this.state.world, this.state.items);
+    spoilerRaw(buffer, this.state.opts.settings, this.state.world, this.state.items);
     const log = buffer.join("\n");
     return { log };
   };
