@@ -329,13 +329,13 @@
   exits:
     "Swamp Back": "true"
     "Swamp Canopy Front": "has(MASK_DEKU)"
-    "Deku Shrine": "has(MASK_DEKU) && event(DEKU_PRINCESS)"
+    "Deku Shrine": "event(CLEAN_SWAMP)"
   events:
     MAGIC_BEANS_PALACE: "has(MASK_DEKU)"
   locations:
-    "Deku Palace HP": "has(MASK_DEKU)"
-    "Deku Palace Grotto Chest": "has(MASK_DEKU) && (can_use_beans || has(HOOKSHOT))"
-    "Deku Palace Sonata of Awakening": "has(MASK_DEKU) && has(OCARINA) && can_use_beans"
+    "Deku Palace HP": "has(MASK_DEKU) || (event(CLEAN_SWAMP) && can_use_beans)"
+    "Deku Palace Grotto Chest": "(has(MASK_DEKU) && (can_use_beans || has(HOOKSHOT))) || (event(CLEAN_SWAMP) && can_use_beans)"
+    "Deku Palace Sonata of Awakening": "has(MASK_DEKU) && has(OCARINA) && (can_use_beans || trick(MM_PALACE_BEAN_SKIP))"
 "Swamp Canopy Front":
   region: SOUTHERN_SWAMP
   exits:
@@ -395,7 +395,7 @@
   exits:
     "Deku Palace": "true"
   locations:
-    "Deku Shrine Mask of Scents": "true"
+    "Deku Shrine Mask of Scents": "event(DEKU_PRINCESS) && has_weapon_range"
 "Mountain Village Path Lower":
   region: PATH_TO_MOUNTAIN_VILLAGE
   exits:
