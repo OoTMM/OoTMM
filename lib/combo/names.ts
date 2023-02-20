@@ -2,6 +2,7 @@ const ITEM_NAMES: {[k: string]: string} = {
   MM_ARROW_FIRE: "Fire Arrows (MM)",
   MM_ARROW_ICE: "Ice Arrows (MM)",
   MM_ARROW_LIGHT: "Light Arrows (MM)",
+  MM_ARROWS_30: "30 Arrows (MM)",
   MM_BOMBCHU: "1 Bombchu (MM)",
   MM_BOMBCHU_10: "10 Bombchu (MM)",
   MM_BOMBCHU_5: "5 Bombchu (MM)",
