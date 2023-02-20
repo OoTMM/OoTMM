@@ -11,7 +11,7 @@ import { randomize } from "./randomizer";
 
 type GeneratorOutput = {
   rom: Buffer;
-  log: string;
+  log: string | null;
   hash: string;
 };
 
@@ -36,6 +36,10 @@ export class Generator {
     const buildResult = await build(this.opts);
     const rom = await pack(this.monitor, roms, buildResult, customData, this.opts);
     const { log, hash } = randomize(this.monitor, rom, this.opts);
-    return { rom, log, hash };
+    if (this.opts.settings.generateSpoilerLog) {
+      return { rom, log, hash };
+    } else {
+      return { rom, log: null, hash };
+    }
   }
 };

@@ -40,10 +40,15 @@ const main = async () => {
   const gen = generate({ oot, mm, opts });
   const { rom, log } = await gen.run();
   await fs.mkdir('out', { recursive: true });
-  return Promise.all([
-    fs.writeFile('out/OoTMM.z64', rom),
-    fs.writeFile('out/spoiler.txt', log),
-  ]);
+
+  if (log === null) {
+    return fs.writeFile('out/OoTMM.z64', rom);
+  } else {
+    return Promise.all([
+      fs.writeFile('out/OoTMM.z64', rom),
+      fs.writeFile('out/spoiler.txt', log),
+    ]);
+  }
 }
 
 main().catch((err) => {

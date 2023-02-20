@@ -37,7 +37,7 @@ function pipeline<State>(state: State): LogicPipeline<State> {
 
 const createState = (monitor: Monitor, opts: Options) => {
   const random = new Random();
-  random.seed(opts.seed);
+  random.seed(opts.seed + opts.settings.generateSpoilerLog);
   const world = createWorld(opts.settings);
   const config = configFromSettings(opts.settings);
   alterWorld(world, opts.settings, config);

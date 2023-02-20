@@ -217,6 +217,12 @@ export const SETTINGS = [{
   category: 'advanced',
   type: 'boolean',
   default: false
+}, {
+  key: 'generateSpoilerLog',
+  name: 'Generate Spoiler Log',
+  category: 'advanced',
+  type: 'boolean',
+  default: true
 }] as const;
 
 export const SETTINGS_CATEGORIES = [{
