@@ -39,7 +39,7 @@
 "Gerudo Training Grounds Lava":
   dungeon: GTG
   exits:
-    "Gerudo Training Grounds Maze Side": "can_play(SONG_TIME)"
+    "Gerudo Training Grounds Maze Side": "can_play(SONG_TIME) || is_child"
     "Gerudo Training Grounds Hammer": "can_hookshot && (can_longshot || has_hover_boots || can_play(SONG_TIME))"
     "Gerudo Training Grounds Water": "can_hookshot && (has_hover_boots || can_play(SONG_TIME))"
 "Gerudo Training Grounds Maze Side":
@@ -74,3 +74,6 @@
     "Gerudo Training Maze Chest 2": "has(SMALL_KEY_GTG, 6)"
     "Gerudo Training Maze Chest 3": "has(SMALL_KEY_GTG, 7)"
     "Gerudo Training Maze Chest 4": "has(SMALL_KEY_GTG, 9)"
+    "Gerudo Training Freestanding Key": "has(SMALL_KEY_GTG, 9)"
+    "Gerudo Training Maze Side Chest 1": "has(SMALL_KEY_GTG, 9)"
+    "Gerudo Training Maze Side Chest 2": "has(SMALL_KEY_GTG, 9)"

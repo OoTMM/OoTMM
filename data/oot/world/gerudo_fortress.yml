@@ -3,7 +3,7 @@
   exits:
     "Gerudo Fortress Exterior": "true"
   events:
-    CARPENTERS_RESCUE: "has(SMALL_KEY_GF, 4)"
+    CARPENTERS_RESCUE: "has(SMALL_KEY_GF, 4) && (can_hookshot || can_use_bow || has_hover_boots || has(GERUDO_CARD))"
   locations:
     "Gerudo Fortress Jail 1": "true"
     "Gerudo Fortress Jail 2": "true"
