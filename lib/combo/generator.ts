@@ -36,10 +36,6 @@ export class Generator {
     const buildResult = await build(this.opts);
     const rom = await pack(this.monitor, roms, buildResult, customData, this.opts);
     const { log, hash } = randomize(this.monitor, rom, this.opts);
-    if (this.opts.settings.generateSpoilerLog) {
-      return { rom, log, hash };
-    } else {
-      return { rom, log: null, hash };
-    }
+    return { rom, log, hash };
   }
 };
