@@ -25,11 +25,11 @@
   exits:
     "Deku Tree Lobby": "true"
     "Deku Tree Basement Back Room": "can_hit_triggers_distance"
-    "Deku Tree Basement Ledge": "trick(OOT_DEKU_SKIP)"
+    "Deku Tree Basement Ledge": "trick(OOT_DEKU_SKIP) || is_adult"
   locations:
     "Deku Tree Basement Chest": "true"
     "Deku Tree GS Basement Gate": "true"
-    "Deku Tree GS Basement Vines": "has_ranged_weapon || can_use_din"
+    "Deku Tree GS Basement Vines": "has_ranged_weapon || can_use_din || has(BOMB_BAG)"
 "Deku Tree Basement Back Room":
   dungeon: DT
   exits:
@@ -40,7 +40,7 @@
   dungeon: DT
   exits:
     "Deku Tree Basement Back Room": "is_child"
-    "Deku Tree Before Boss": "true"
+    "Deku Tree Before Boss": "is_child || can_use_din || has_fire_arrows"
 "Deku Tree Before Boss":
   dungeon: DT
   exits:
