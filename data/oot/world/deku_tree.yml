@@ -40,7 +40,7 @@
   dungeon: DT
   exits:
     "Deku Tree Basement Back Room": "is_child"
-    "Deku Tree Before Boss": "is_child || can_use_din"
+    "Deku Tree Before Boss": "is_child || can_use_din || has_fire_arrows"
 "Deku Tree Before Boss":
   dungeon: DT
   exits:
