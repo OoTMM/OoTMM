@@ -224,7 +224,7 @@ export const SETTINGS = [{
 }, {
   key: 'logic',
   name: 'Logic',
-  category: 'progressive',
+  category: 'advanced',
   type: 'enum',
   values: [
     { value: 'allLocations', name: 'All Locations' },
