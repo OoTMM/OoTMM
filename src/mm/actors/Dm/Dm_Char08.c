@@ -11,6 +11,13 @@ void DmChar08_WarpToTemple(Actor* this, GameState_Play* play)
 
 PATCH_FUNC(0x80aafa18, DmChar08_WarpToTemple);
 
+static void DmChar08_AfterWarpFromTemple(Actor* this, GameState_Play* play)
+{
+    gIsEntranceOverride = 1;
+}
+
+PATCH_FUNC(0x80aafb94, DmChar08_AfterWarpFromTemple);
+
 void DmChar08_Emerge(GameState_Play* play, Actor* this)
 {
     this->position.x = -6480.f;

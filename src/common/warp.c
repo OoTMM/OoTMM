@@ -123,7 +123,7 @@ void comboTriggerWarp(GameState_Play* play, int bossId)
         break;
     case DUNGEONID_TEMPLE_GREAT_BAY:
         isMmEntrance = 1;
-        entrance = 0x6a90;
+        entrance = 0x6a70;
         break;
     case DUNGEONID_TEMPLE_STONE_TOWER:
     case DUNGEONID_TEMPLE_STONE_TOWER_INVERTED:
