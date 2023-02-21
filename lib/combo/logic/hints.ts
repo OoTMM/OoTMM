@@ -2,7 +2,7 @@ import { ItemPlacement } from './solve';
 import { World } from './world';
 import { Analysis } from './analysis';
 import { Random, sample, shuffle } from '../random';
-import { DUNGEON_REWARDS_ORDERED, isDungeonItem, isDungeonReward, isItemMajor, isGoldToken, itemsArray, isKey, isHouseToken, isSmallKey, isGanonBossKey, isRegularBossKey, DUNGEON_REWARDS, isStrayFairy, isToken, isTownStrayFairy, isSong } from './items';
+import { DUNGEON_REWARDS_ORDERED, isDungeonItem, isDungeonReward, isItemMajor, isGoldToken, itemsArray, isKey, isHouseToken, isSmallKey, isGanonBossKey, isRegularBossKey, DUNGEON_REWARDS, isStrayFairy, isToken, isTownStrayFairy, isSong, isSmallKeyRegular, isSmallKeyHideout } from './items';
 import { Settings } from '../settings';
 import { Game } from '../config';
 import { Monitor } from '../monitor';
@@ -142,7 +142,10 @@ export class LogicPassHints {
     if (loc === 'OOT Temple of Time Master Sword' && !this.state.settings.shuffleMasterSword) {
       return false;
     }
-    if (isSmallKey(item) && this.state.settings.smallKeyShuffle === 'anywhere') {
+    if (isSmallKeyHideout(item) && this.state.settings.smallKeyShuffleHideout === 'anywhere') {
+      return true;
+    }
+    if (isSmallKeyRegular(item) && this.state.settings.smallKeyShuffle === 'anywhere') {
       return true;
     }
     if (isGanonBossKey(item) && this.state.settings.ganonBossKey === 'anywhere') {

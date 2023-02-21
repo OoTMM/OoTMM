@@ -4,7 +4,7 @@ import { gameId } from '../util';
 import { Pathfinder, PathfinderState } from './pathfind';
 import { World } from './world';
 import { LogicSeedError } from './error';
-import { Items, addItem, combinedItems, itemsArray, removeItem, ITEMS_REQUIRED, isDungeonReward, isGoldToken, isHouseToken, isKey, isStrayFairy, isSmallKey, isGanonBossKey, isRegularBossKey, isTownStrayFairy, isDungeonStrayFairy, isSong, isJunk, isMapCompass } from './items';
+import { Items, addItem, combinedItems, itemsArray, removeItem, ITEMS_REQUIRED, isDungeonReward, isGoldToken, isHouseToken, isKey, isStrayFairy, isSmallKey, isGanonBossKey, isRegularBossKey, isTownStrayFairy, isDungeonStrayFairy, isSong, isJunk, isMapCompass, isSmallKeyRegular, isSmallKeyHideout } from './items';
 import { Settings } from '../settings';
 import { Monitor } from '../monitor';
 
@@ -358,7 +358,9 @@ export class LogicPassSolver {
       for (const baseItem of ['SMALL_KEY', 'BOSS_KEY', 'STRAY_FAIRY', 'MAP', 'COMPASS']) {
         const item = gameId(game, baseItem + '_' + dungeon.toUpperCase(), '_');
 
-        if (isSmallKey(item) && this.state.settings.smallKeyShuffle === 'anywhere') {
+        if (isSmallKeyHideout(item) && this.state.settings.smallKeyShuffleHideout === 'anywhere') {
+          continue;
+        } else if (isSmallKeyRegular(item) && this.state.settings.smallKeyShuffle === 'anywhere') {
           continue;
         } else if (isGanonBossKey(item) && this.state.settings.ganonBossKey === 'anywhere') {
           continue;

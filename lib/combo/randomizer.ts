@@ -8,7 +8,7 @@ import { Options } from './options';
 import { Settings } from './settings';
 import { HintGossip, Hints } from './logic/hints';
 import { Monitor } from './monitor';
-import { isDungeonStrayFairy, isGanonBossKey, isMap, isCompass, isRegularBossKey, isSmallKey, isTownStrayFairy } from './logic/items';
+import { isDungeonStrayFairy, isGanonBossKey, isMap, isCompass, isRegularBossKey, isSmallKeyRegular, isTownStrayFairy, isSmallKeyHideout } from './logic/items';
 import { gameId } from './util';
 import { EntranceShuffleResult } from './logic/entrance';
 
@@ -46,7 +46,9 @@ const SUBSTITUTIONS: {[k: string]: string} = {
 
 const gi = (settings: Settings, game: Game, item: string, generic: boolean) => {
   if (generic) {
-    if (isSmallKey(item) && settings.smallKeyShuffle === 'ownDungeon' && settings.erBoss === 'none') {
+    if (isSmallKeyHideout(item) && settings.smallKeyShuffleHideout !== 'anywhere') {
+      item = gameId(game, 'SMALL_KEY', '_');
+    } else if (isSmallKeyRegular(item) && settings.smallKeyShuffle === 'ownDungeon' && settings.erBoss === 'none') {
       item = gameId(game, 'SMALL_KEY', '_');
     } else if (isGanonBossKey(item) && settings.ganonBossKey !== 'anywhere') {
       item = gameId(game, 'BOSS_KEY', '_');

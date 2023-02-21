@@ -17,7 +17,7 @@
     "Woodfall Temple": "true"
     "Woodfall Temple Water Room": "true"
     "Woodfall Temple Maze": "has(SMALL_KEY_WF, 1)"
-    "Woodfall Temple Main Ledge": "event(WOODFALL_TEMPLE_MAIN_FLOWER) || event(WOODFALL_TEMPLE_MAIN_LADDER) || (trick(MM_WFT_HOOKSHOT) && has(HOOKSHOT))"
+    "Woodfall Temple Main Ledge": "event(WOODFALL_TEMPLE_MAIN_FLOWER) || event(WOODFALL_TEMPLE_MAIN_LADDER) || has(HOOKSHOT)"
   events:
     WOODFALL_TEMPLE_MAIN_FLOWER: "can_use_fire_arrows"
   locations:
