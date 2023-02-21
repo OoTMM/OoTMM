@@ -318,12 +318,12 @@ export class LogicPassAnalysis {
     }
   }
 
-  private makeSpheresRaw() {
+  private makeSpheresRaw(restrictedLocations?: Set<string>) {
     const spheres: string[][] = [];
     let pathfinderState: PathfinderState | null = null;
 
     do {
-      pathfinderState = this.pathfinder.run(pathfinderState, { items: this.state.items, stopAtGoal: true });
+      pathfinderState = this.pathfinder.run(pathfinderState, { items: this.state.items, stopAtGoal: true, restrictedLocations });
       const sphere = Array.from(pathfinderState.newLocations).filter(x => isItemImportant(this.state.items[x]));
       if (sphere.length !== 0) {
         spheres.push(shuffle(this.state.random, sphere));
@@ -353,7 +353,8 @@ export class LogicPassAnalysis {
       }
     }
 
-    this.spheres = spheres.reverse();
+    /* Recompute spheres to ensure correct order */
+    this.spheres = this.makeSpheresRaw(spheresLocs);
   }
 
   private makeRequiredLocs() {
