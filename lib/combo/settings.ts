@@ -222,11 +222,16 @@ export const SETTINGS = [{
   type: 'boolean',
   default: false
 }, {
-  key: 'noLogic',
-  name: 'No Logic',
-  category: 'advanced',
-  type: 'boolean',
-  default: false
+  key: 'logic',
+  name: 'Logic',
+  category: 'progressive',
+  type: 'enum',
+  values: [
+    { value: 'allLocations', name: 'All Locations' },
+    { value: 'beatable', name: 'Beatable Only' },
+    { value: 'none', name: 'No Logic' },
+  ],
+  default: 'allLocations'
 }] as const;
 
 export const SETTINGS_CATEGORIES = [{

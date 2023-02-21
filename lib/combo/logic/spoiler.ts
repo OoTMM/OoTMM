@@ -179,7 +179,7 @@ export class LogicPassSpoiler {
     spoilerEntrances(buffer, this.state.entrances);
     spoilerFoolish(buffer, this.state.hints.foolish);
     spoilerHints(buffer, this.state.hints, this.state.items);
-    if (!this.state.opts.settings.noLogic) {
+    if (this.state.opts.settings.logic !== 'none') {
       spoilerSpheres(buffer, this.state.world, this.state.items, this.state.analysis.spheres);
     }
     spoilerRaw(buffer, this.state.opts.settings, this.state.world, this.state.items);

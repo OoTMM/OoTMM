@@ -436,6 +436,10 @@ export class LogicPassAnalysis {
   }
 
   private makeUselessLocs() {
+    if (this.state.settings.logic === 'beatable') {
+      this.makeUnreachable();
+    }
+
     for (const loc in this.state.world.checks) {
       if (this.requiredLocs.has(loc)) {
         continue;
@@ -446,9 +450,19 @@ export class LogicPassAnalysis {
     }
   }
 
+  private makeUnreachable() {
+    const pathfinderState = this.pathfinder.run(null, { items: this.state.items, recursive: true });
+    for (const loc in this.state.world.checks) {
+      if (isItemImportant(this.state.items[loc]) && !pathfinderState.locations.has(loc)) {
+        this.state.monitor.debug("Analysis - makeUnreachable: " + this.state.items[loc]);
+        this.uselessLocs.add(loc);
+      }
+    }
+  }
+
   run() {
     this.state.monitor.log('Logic: Analysis');
-    if (!this.state.settings.noLogic) {
+    if (this.state.settings.logic !== 'none') {
       this.makeDependencies();
       this.makeSpheres();
       this.makeRequiredLocs();

@@ -243,7 +243,7 @@ export class Pathfinder {
     }
 
     /* Handle no logic */
-    if (this.settings.noLogic) {
+    if (this.settings.logic === 'none') {
       this.state.locations = new Set(Object.keys(this.world.checks));
       this.state.events = new Set(Object.values(this.world.areas).map(x => Object.keys(x.events || {})).flat());
       const allAreas = new Set(Object.keys(this.world.areas));

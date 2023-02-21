@@ -113,13 +113,13 @@ export class LogicPassSolver {
     this.fixFairies();
     this.fixLocations();
 
+    /* Place songs */
+    this.fixSongs();
+
     /* Place the required reward items */
     if (this.state.settings.dungeonRewardShuffle === 'dungeonBlueWarps') {
       this.fixRewards();
     }
-
-    /* Place songs */
-    this.fixSongs();
 
     /* Handle dungeon items */
     for (const dungeon in this.state.world.dungeons) {
@@ -130,6 +130,13 @@ export class LogicPassSolver {
     for (;;) {
       /* Pathfind */
       this.pathfinderState = this.pathfinder.run(this.pathfinderState, { recursive: true, items: this.items });
+
+      /* Stop cond */
+      if (this.state.settings.logic === 'beatable') {
+        if (this.pathfinderState.goal) {
+          break;
+        }
+      }
       if (this.pathfinderState.locations.size === checksCount) {
         break;
       }
@@ -443,27 +450,49 @@ export class LogicPassSolver {
     /* Remove the selected item from the required pool */
     removeItem(pool, requiredItem);
 
-    /* Get all assumed reachable locations */
-    const result = this.pathfinder.run(this.pathfinderState, { recursive: true, items: this.items, assumedItems: pool });
+    let unplacedLocs: string[] = [];
+    if (this.state.settings.logic === 'allLocations') {
+      /* Get all assumed reachable locations */
+      const result = this.pathfinder.run(this.pathfinderState, { recursive: true, items: this.items, assumedItems: pool });
 
-    /* Get all assumed reachable locations that have not been placed */
-    let unplacedLocs = Array.from(result.locations)
-      .filter(location => !this.items[location]);
+      /* Get all assumed reachable locations that have not been placed */
+      unplacedLocs = Array.from(result.locations)
+        .filter(location => !this.items[location]);
 
-    if (options.restrictedLocations) {
-      unplacedLocs = unplacedLocs.filter(x => options.restrictedLocations!.has(x));
-    }
+      if (options.restrictedLocations) {
+        unplacedLocs = unplacedLocs.filter(x => options.restrictedLocations!.has(x));
+      }
 
-    /* If there is nowhere to place an item, raise an error */
-    if (unplacedLocs.length === 0) {
+      /* If there is nowhere to place an item, raise an error */
+      if (unplacedLocs.length === 0) {
+        throw new LogicSeedError(`No reachable locations for item ${requiredItem}`);
+      }
+
+      /* Select a random location from the assumed reachable locations */
+      const location = sample(this.state.random, unplacedLocs);
+
+      /* Place the selected item at the selected location */
+      this.place(location, requiredItem);
+    } else {
+      /* Get all remainig locations */
+      if (options.restrictedLocations) {
+        unplacedLocs = Array.from(options.restrictedLocations);
+      } else {
+        unplacedLocs = Object.keys(this.state.world.checks);
+      }
+      unplacedLocs = shuffle(this.state.random, unplacedLocs.filter(x => !this.items[x]));
+
+      while (unplacedLocs.length) {
+        const loc = unplacedLocs.pop()!;
+        const result = this.pathfinder.run(this.pathfinderState, { recursive: true, stopAtGoal: true, items: { ...this.items, [loc]: requiredItem }, assumedItems: pool });
+        if (result.goal) {
+          this.place(loc, requiredItem);
+          return;
+        }
+      }
+
       throw new LogicSeedError(`No reachable locations for item ${requiredItem}`);
     }
-
-    /* Select a random location from the assumed reachable locations */
-    const location = sample(this.state.random, unplacedLocs);
-
-    /* Place the selected item at the selected location */
-    this.place(location, requiredItem);
   }
 
   private fill() {
