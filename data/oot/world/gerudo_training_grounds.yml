@@ -68,12 +68,11 @@
     "Gerudo Training Grounds Eye Statue": "can_use_bow"
 "Gerudo Training Grounds Maze":
   dungeon: GTG
+  exits:
+    "Gerudo Training Grounds Lava": "has(SMALL_KEY_GTG, 9)"
   locations:
     "Gerudo Training Maze Upper Fake Ceiling": "has(SMALL_KEY_GTG, 3) && has_lens"
     "Gerudo Training Maze Chest 1": "has(SMALL_KEY_GTG, 4)"
     "Gerudo Training Maze Chest 2": "has(SMALL_KEY_GTG, 6)"
     "Gerudo Training Maze Chest 3": "has(SMALL_KEY_GTG, 7)"
     "Gerudo Training Maze Chest 4": "has(SMALL_KEY_GTG, 9)"
-    "Gerudo Training Freestanding Key": "has(SMALL_KEY_GTG, 9)"
-    "Gerudo Training Maze Side Chest 1": "has(SMALL_KEY_GTG, 9)"
-    "Gerudo Training Maze Side Chest 2": "has(SMALL_KEY_GTG, 9)"
