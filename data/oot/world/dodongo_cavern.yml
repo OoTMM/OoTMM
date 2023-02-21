@@ -80,11 +80,15 @@
     "Dodongo Cavern Bomb Bag Side Room": "has_explosives_or_hammer"
   locations:
     "Dodongo Cavern Bomb Bag Side Chest": "true"
+"Dodongo Cavern Bomb Bag Side Room":
+  dungeon: DC
+  exits:
+    "Dodongo Cavern Bomb Bag Room 1": "true"
 "Dodongo Cavern Miniboss 2":
   dungeon: DC
   exits:
     "Dodongo Cavern Bomb Bag Room 1": "true"
-    "Dodongo Cavern Bomb Bag Room 2": "can_hit_triggers_distance"
+    "Dodongo Cavern Bomb Bag Room 2": "true"
 "Dodongo Cavern Bomb Bag Room 2":
   dungeon: DC
   exits:
