@@ -1,7 +1,7 @@
 "Ice Cavern":
   dungeon: IC
   exits:
-    "Zora Fountain": "true"
+    "Zora Fountain Frozen": "true"
   events:
     BLUE_FIRE: "has_bottle"
   locations:
