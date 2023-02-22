@@ -22,14 +22,13 @@
 # define SAVE_EXTRA_RECORD(type, index) (gOotSave + 0xd4 + 0x1c * (index) + 0x10)
 #else
 # define SAVE_EXTRA_RECORD(type, index) (*((type*)(gOotSave.perm[index].raw + 0x10)))
-#endif
-
 typedef struct
 {
     u32 erSpring:1;
     u32 unused:31;
 }
 MiscFlags;
+#endif
 
 #define gOotExtraTrade SAVE_EXTRA_RECORD(OotExtraTrade, 0)
 #define gOotExtraItems SAVE_EXTRA_RECORD(OotExtraItems, 1)

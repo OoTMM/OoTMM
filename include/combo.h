@@ -36,7 +36,6 @@
 #  include <combo/mm/actor_enfsn.h>
 # endif
 
-# include <combo/common/actor.h>
 # include <combo/common/actors/En_Item00.h>
 # include <combo/common/actor_init.h>
 # include <combo/common/actor_item_custom.h>
@@ -45,7 +44,7 @@
 
 /* Shared with assembler */
 #include <PR/gbi.h>
-
+#include <combo/common/actor.h>
 #include <combo/save.h>
 #include <combo/gi.h>
 #include <combo/items.h>
