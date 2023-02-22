@@ -132,25 +132,6 @@ PATCH_START 0x80143d98
   nop
 PATCH_END
 
-/* Do not reset perm unk_14/room (will be done later) */
-PATCH_START 0x80143c58
-  nop
-PATCH_END
-
-PATCH_START 0x80143c78
-  nop
-PATCH_END
-
-PATCH_START 0x80143cc8
-  nop
-  nop
-PATCH_END
-
-PATCH_START 0x80143d14
-  nop
-  nop
-PATCH_END
-
 /* Skip razor sword check */
 PATCH_START 0x80144174
   li at,0
