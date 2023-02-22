@@ -79,6 +79,7 @@ static void debugCheat(GameState_Play* play)
 
         //gSave.skullCountOcean = 0x10;
     }
+
 #endif
 }
 
@@ -142,6 +143,17 @@ void hookPlay_Init(GameState_Play* play)
     Play_Init(play);
     gLastEntrance = gSave.entranceIndex;
     comboSpawnItemGivers(play);
+
+#if defined(DEBUG)
+    SpawnActor(
+        (char*)play + 0x1ca0,
+        play,
+        AC_CUSTOM_WARP,
+        -1200.f, 8.f, 600.f,
+        0, 0, 0,
+        0
+    );
+#endif
 
     if (gNoTimeFlow)
     {

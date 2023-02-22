@@ -146,3 +146,5 @@ Enemy_StartFinishingBlow = 0x80025b4c;
 Interface_LoadItemIconImpl = 0x8006fb50;
 
 DeathWarp = 0x8009da10;
+
+DrawSimpleOpa = 0x80028048;

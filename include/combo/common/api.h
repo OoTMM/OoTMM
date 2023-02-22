@@ -176,4 +176,6 @@ void DrawDungeonUnk1(void* unk);
 void DrawDungeonUnk2(void* unk);
 #endif
 
+void DrawSimpleOpa(GameState_Play* play, u32 segAddr);
+
 #endif

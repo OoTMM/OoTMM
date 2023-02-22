@@ -143,3 +143,5 @@ DrawDungeonUnk1 = 0x8012c8ac;
 DrawDungeonUnk2 = 0x801091f0;
 
 gGameData = 0x801f3f60;
+
+DrawSimpleOpa = 0x800bdfc0;
