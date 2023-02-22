@@ -44,6 +44,8 @@
     "Gerudo Training Grounds Water": "can_hookshot && (has_hover_boots || can_play(SONG_TIME))"
 "Gerudo Training Grounds Maze Side":
   dungeon: GTG
+  exits:
+    "Gerudo Training Grounds Maze Side": "true"
   locations:
     "Gerudo Training Freestanding Key": "true"
     "Gerudo Training Maze Side Chest 1": "true"
@@ -69,7 +71,7 @@
 "Gerudo Training Grounds Maze":
   dungeon: GTG
   exits:
-    "Gerudo Training Grounds Lava": "has(SMALL_KEY_GTG, 9)"
+    "Gerudo Training Grounds Maze Side": "has(SMALL_KEY_GTG, 9)"
   locations:
     "Gerudo Training Maze Upper Fake Ceiling": "has(SMALL_KEY_GTG, 3) && has_lens"
     "Gerudo Training Maze Chest 1": "has(SMALL_KEY_GTG, 4)"
