@@ -184,11 +184,15 @@ static void endGame(void)
     }
 }
 
+static u8 sInGrotto;
+
 void hookPlay_Init(GameState_Play* play)
 {
     s32 override;
 
     /* Handle transition override */
+    if (sInGrotto)
+        gIsEntranceOverride = 0;
     if (gIsEntranceOverride)
     {
         gIsEntranceOverride = 0;
@@ -244,6 +248,7 @@ void hookPlay_Init(GameState_Play* play)
 
     Play_Init(play);
     gLastEntrance = gSave.entrance;
+    sInGrotto = (play->sceneId == SCE_OOT_GROTTOS);
     comboSpawnItemGivers(play);
 
     if (gSave.entrance == 0x0530)
