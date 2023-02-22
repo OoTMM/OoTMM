@@ -3,41 +3,51 @@
   exits:
     "Death Mountain Crater Warp": "true"
     "Fire Temple Lava Room": "has_small_keys_fire(1)"
-    "Fire Temple Boss": "has(BOSS_KEY_FIRE) && (event(FIRE_TEMPLE_PILLAR_HAMMER) || has_hover_boots) && has_tunic_goron_strict"
+    "Fire Temple Boss": "has(BOSS_KEY_FIRE) && (event(FIRE_TEMPLE_PILLAR_HAMMER) || has_hover_boots) && has_tunic_goron"
     "Fire Temple Boss Key Loop": "cond(setting(smallKeyShuffle, anywhere), has(SMALL_KEY_FIRE, 8), true) && can_hammer"
   locations:
-    "Fire Temple Jail 1 Chest": "true"
+    "Fire Temple Jail 1 Chest": "has_tunic_goron"
 "Fire Temple Boss Key Loop":
   dungeon: Fire
   locations:
-    "Fire Temple Boss Key Side Chest": "can_hammer"
-    "Fire Temple Boss Key Chest": "can_hammer"
-    "Fire Temple GS Hammer Statues": "can_hammer"
+    "Fire Temple Boss Key Side Chest": "true"
+    "Fire Temple Boss Key Chest": "true"
+    "Fire Temple GS Hammer Statues": "true"
 "Fire Temple Lava Room":
   dungeon: Fire
   exits:
-    "Fire Temple After Elevator": "has_small_keys_fire(3) && has(STRENGTH) && (has_ranged_weapon_adult || has_explosives) && has_tunic_goron_strict"
+    "Fire Temple Maze": "has_small_keys_fire(3) && has_tunic_goron_strict && has(STRENGTH) && (has_ranged_weapon_adult || has_explosives)"
   locations:
-    "Fire Temple Jail 2 Chest": "true"
-    "Fire Temple Jail 3 Chest": "has_explosives"
-    "Fire Temple GS Lava Side Room": "can_play(SONG_TIME)"
-"Fire Temple After Elevator":
+    "Fire Temple Jail 2 Chest": "has_tunic_goron"
+    "Fire Temple Jail 3 Chest": "has_tunic_goron && has_explosives"
+    "Fire Temple GS Lava Side Room": "has_tunic_goron && can_play(SONG_TIME)"
+"Fire Temple Maze":
   dungeon: Fire
   exits:
-    "Fire Temple": "true"
-    "Fire Temple Ring": "has_small_keys_fire(6)"
-    "Fire Temple Scarecrow": "has_small_keys_fire(5) && scarecrow_hookshot"
+    "Fire Temple Maze Upper": "has_small_keys_fire(5)"
   locations:
     "Fire Temple Maze Chest": "true"
     "Fire Temple Jail 4 Chest": "true"
-    "Fire Temple Map": "has_small_keys_fire(4) && (can_use_bow || has_small_keys_fire(5))"
-    "Fire Temple Above Maze Chest": "has_small_keys_fire(5)"
-    "Fire Temple Below Maze Chest": "has_small_keys_fire(5) && has_explosives"
     "Fire Temple GS Maze": "has_explosives"
+    "Fire Temple Map": "can_use_bow && has_small_keys_fire(4)"
+"Fire Temple Maze Upper":
+  dungeon: Fire
+  exits:
+    "Fire Temple Ring": "has_small_keys_fire(6)"
+    "Fire Temple Scarecrow": "scarecrow_hookshot"
+  locations:
+    "Fire Temple Map": "true"
+    "Fire Temple Above Maze Chest": "true"
+    "Fire Temple Below Maze Chest": "has_explosives"
+"Fire Temple Scarecrow":
+  dungeon: Fire
+  locations:
+    "Fire Temple Scarecrow Chest": "true"
+    "Fire Temple GS Scarecrow Wall": "true"
+    "Fire Temple GS Scarecrow Top": "true"
 "Fire Temple Ring":
   dungeon: Fire
   exits:
-    "Fire Temple After Elevator": "true"
     "Fire Temple Before Miniboss": "has_small_keys_fire(7)"
     "Fire Temple Pillar Ledge": "has_hover_boots"
   locations:
@@ -48,7 +58,7 @@
     "Fire Temple After Miniboss": "has_explosives"
     "Fire Temple Pillar Ledge": "can_play(SONG_TIME)"
   locations:
-    "Fire Temple Ring Jail": "can_hammer && (can_play(SONG_TIME) || (trick(OOT_HAMMER_WALLS) && has_hover_boots))"
+    "Fire Temple Ring Jail": "can_hammer && can_play(SONG_TIME)"
 "Fire Temple Pillar Ledge":
   dungeon: Fire
   exits:
@@ -56,23 +66,19 @@
     "Fire Temple Ring": "true"
   events:
     FIRE_TEMPLE_PILLAR_HAMMER: "can_hammer"
+  locations:
+    "Fire Temple Ring Jail": "can_hammer && trick(OOT_HAMMER_WALLS)"
 "Fire Temple After Miniboss":
   dungeon: Fire
   exits:
-    "Fire Temple Pillar Ledge": "true"
+    "Fire Temple Pillar Ledge": "can_hammer"
   locations:
     "Fire Temple Hammer": "true"
-"Fire Temple Scarecrow":
-  dungeon: Fire
-  locations:
-    "Fire Temple Scarecrow Chest": "true"
-    "Fire Temple GS Scarecrow Wall": "has_ranged_weapon_adult"
-    "Fire Temple GS Scarecrow Top": "can_collect_distance"
 "Fire Temple Boss":
   boss: true
   dungeon: Fire
   exits:
-    "Fire Temple After Boss": "can_hammer"
+    "Fire Temple After Boss": "can_hammer && has_tunic_goron_strict"
 "Fire Temple After Boss":
   boss: true
   dungeon: Fire

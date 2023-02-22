@@ -40,7 +40,7 @@
 "has_sword_kokiri": "cond(setting(progressiveSwordsOot, progressive), has(SWORD), has(SWORD_KOKIRI))"
 "has_sword_master": "cond(setting(progressiveSwordsOot, progressive), has(SWORD, 2), has(SWORD_MASTER))"
 "has_weapon": "(is_child && has_sword_kokiri) || is_adult"
-"has_tunic_goron": "is_adult && (has(TUNIC_GORON) || trick(OOT_TUNICS))"
+"has_tunic_goron": "(is_adult && has(TUNIC_GORON)) || trick(OOT_TUNICS)"
 "has_tunic_goron_strict": "is_adult && has(TUNIC_GORON)"
 "has_tunic_zora": "is_adult && (has(TUNIC_ZORA) || trick(OOT_TUNICS))"
 "has_tunic_zora_strict": "is_adult && has(TUNIC_ZORA)"
