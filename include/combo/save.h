@@ -28,9 +28,8 @@
 #define gOotExtraItems SAVE_EXTRA_RECORD(OotExtraItems, 1)
 #define gOotExtraFlags SAVE_EXTRA_RECORD(OotExtraFlags, 2)
 #define gMmExtraBoss   SAVE_EXTRA_RECORD(MmExtraBoss,   3)
-
-#define gMmExtraTrade   (*((MmExtraTrade*)(gMmSave.permanentSceneFlags[2].raw + 0x14)))
-#define gMmExtraFlags   (*((MmExtraFlags*)(gMmSave.permanentSceneFlags[3].raw + 0x14)))
-#define gMmExtraFlags2  (*((MmExtraFlags2*)(gMmSave.permanentSceneFlags[4].raw + 0x14)))
+#define gMmExtraTrade  SAVE_EXTRA_RECORD(MmExtraTrade,  4)
+#define gMmExtraFlags  SAVE_EXTRA_RECORD(MmExtraFlags,  5)
+#define gMmExtraFlags2 SAVE_EXTRA_RECORD(MmExtraFlags2, 6)
 
 #endif
