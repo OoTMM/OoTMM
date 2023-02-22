@@ -45,7 +45,7 @@
 "Gerudo Training Grounds Maze Side":
   dungeon: GTG
   exits:
-    "Gerudo Training Grounds Maze Side": "true"
+    "Gerudo Training Grounds Lava": "true"
   locations:
     "Gerudo Training Freestanding Key": "true"
     "Gerudo Training Maze Side Chest 1": "true"
