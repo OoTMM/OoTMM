@@ -5,10 +5,9 @@ int gNoTimeFlow;
 static void debugCheat(GameState_Play* play)
 {
 #if defined(DEBUG)
+    MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_WF);
     /*if (play->gs.input[0].current.buttons & 0x20)*/
     {
-        gMmExtraBoss.boss = 0xff;
-
         gSave.itemEquips.sword = 1;
         gSave.itemEquips.shield = 2;
         gMmExtraFlags2.progressiveShield = 1;
