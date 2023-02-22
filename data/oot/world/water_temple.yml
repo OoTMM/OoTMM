@@ -33,7 +33,7 @@
   events:
     WATER_LEVEL_LOW: "can_play(SONG_ZELDA)"
   locations:
-    "Water Temple Bombable Chest": "(event(WATER_LEVEL_MIDDLE) || has_hover_boots) && has_explosives"
+    "Water Temple Bombable Chest": "event(WATER_LEVEL_MIDDLE) && has_explosives"
 "Water Temple Map Room":
   dungeon: Water
   locations:
