@@ -18,9 +18,9 @@
   exits:
     "Fire Temple Maze": "has_small_keys_fire(3) && has_tunic_goron_strict && has(STRENGTH) && (has_ranged_weapon_adult || has_explosives)"
   locations:
-    "Fire Temple Jail 2 Chest": "has_tunic_goron"
+    "Fire Temple Jail 2 Chest": "(is_adult && has_tunic_goron) || (is_child && trick(OOT_TUNICS) && can_play(SONG_TIME))"
     "Fire Temple Jail 3 Chest": "has_tunic_goron && has_explosives"
-    "Fire Temple GS Lava Side Room": "has_tunic_goron && can_play(SONG_TIME)"
+    "Fire Temple GS Lava Side Room": "is_adult && has_tunic_goron && can_play(SONG_TIME)"
 "Fire Temple Maze":
   dungeon: Fire
   exits:
@@ -55,7 +55,7 @@
 "Fire Temple Before Miniboss":
   dungeon: Fire
   exits:
-    "Fire Temple After Miniboss": "has_explosives"
+    "Fire Temple After Miniboss": "has_explosives_or_hammer"
     "Fire Temple Pillar Ledge": "can_play(SONG_TIME)"
   locations:
     "Fire Temple Ring Jail": "can_hammer && can_play(SONG_TIME)"
