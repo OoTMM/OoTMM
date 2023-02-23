@@ -28,6 +28,8 @@ const limitStartingItems = (startingItems, itemPool) => {
 export const Generator = ({ onGenerate, error }) => {
   const [roms, setRoms] = useState({ oot: null, mm: null });
   const [seed, setSeed] = useState("");
+  const [usePatch, setUsePatch] = useState(false);
+  const [patch, setPatch] = useState(null);
   const [locList, setLocList] = useState(() => {
     if (displayJunkItems) {
       return makeLocationList(settings);
@@ -53,7 +55,7 @@ export const Generator = ({ onGenerate, error }) => {
     startingItems = limitStartingItems(startingItems, ip);
     return startingItems;
   };
-  
+
   const setSetting = (setting) => {
     if (!(setting.startingItems || setting.junkLocations)) {
       setting = { ...setting, startingItems: limitItemPool(setting) };
@@ -74,23 +76,29 @@ export const Generator = ({ onGenerate, error }) => {
     const newJunkLocations = junkLocations.filter((v) => Object.keys(locList).indexOf(v) !== -1);
     return [locList, newJunkLocations];
   };
-  
-  const generateJunkItemsTab = () => {
-    if (displayJunkItems) {
-      return <Tab name="Junk Locations" component={<JunkLocations settings={settings} setSetting={setSetting} locList={locList}/>}/>;
-    }
-    return null;
-  };
 
   return (
     <TabBar>
-      <Tab name="ROM Config" component={<RomConfig roms={roms} setRom={setRom} seed={seed} setSeed={setSeed} error={error} onGenerate={() => onGenerate({ roms, settings, seed })}/>}/>
-      {SETTINGS_CATEGORIES.map(category =>
+      <Tab name="ROM Config" component={
+        <RomConfig
+          roms={roms}
+          setRom={setRom}
+          usePatch={usePatch}
+          setUsePatch={setUsePatch}
+          patch={patch}
+          setPatch={setPatch}
+          seed={seed}
+          setSeed={setSeed}
+          error={error}
+          onGenerate={() => onGenerate({ roms, opts: { settings, seed, patch: usePatch ? patch : null } })}
+        />
+      }/>
+      {!usePatch && SETTINGS_CATEGORIES.map(category =>
         <Tab key={category.key} name={category.name} component={<Settings category={category.key} settings={settings} setSetting={setSetting}/>}/>
       )}
-      <Tab name="Tricks" component={<Tricks settings={settings} setSetting={setSetting}/>}/>
-      <Tab name="Starting Items" component={<StartingItems settings={settings} setSetting={setSetting} itemPool={itemPool}/>}/>
-      {generateJunkItemsTab()}
+      {!usePatch && <Tab name="Tricks" component={<Tricks settings={settings} setSetting={setSetting}/>}/>}
+      {!usePatch && <Tab name="Starting Items" component={<StartingItems settings={settings} setSetting={setSetting} itemPool={itemPool}/>}/>}
+      {!usePatch && displayJunkItems && <Tab name="Junk Locations" component={<JunkLocations settings={settings} setSetting={setSetting} locList={locList}/>}/>}
     </TabBar>
   );
 };

@@ -16,12 +16,21 @@
   flex-direction: column;
   align-items: center;
   cursor: pointer;
-  width: 10em;
   border: 1px solid #aaa;
   border-radius: 5%;
   background: #eee;
   padding: 1em;
   margin: 1em;
+}
+
+.file-select-box-img-container {
+  display: flex;
+  width: 8em;
+  height: 8em;
+}
+
+.file-select-box-img-container img {
+  object-fit: contain;
 }
 
 .file-select-box p {

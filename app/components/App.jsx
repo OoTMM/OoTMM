@@ -10,13 +10,16 @@ export const App = () => {
   const [message, setMessage] = useState('');
   const [result, setResult] = useState(null);
 
-  const generate = async ({ roms, settings, seed }) => {
+  const generate = async ({ roms, opts }) => {
     const [oot, mm] = await Promise.all([
       roms.oot.arrayBuffer(),
       roms.mm.arrayBuffer(),
     ]);
     const ootBuffer = Buffer.from(oot);
     const mmBuffer = Buffer.from(mm);
+    if (opts.patch) {
+      opts.patch = Buffer.from(await opts.patch.arrayBuffer());
+    }
     const worker = new Worker(new URL('../worker.js', import.meta.url));
     worker.onmessage = ({ data }) => {
       if (data.type === 'log') {
@@ -27,7 +30,7 @@ export const App = () => {
         setIsGenerating(false);
         worker.terminate();
       } else if (data.type === 'end') {
-        setResult(data);
+        setResult(data.result);
         setIsGenerating(false);
         worker.terminate();
       }
@@ -37,7 +40,7 @@ export const App = () => {
     setMessage('Generating');
     worker.postMessage({
       type: 'start',
-      params: { oot: ootBuffer, mm: mmBuffer, opts: { settings, seed } },
+      params: { oot: ootBuffer, mm: mmBuffer, opts },
     });
   };
 
@@ -46,7 +49,7 @@ export const App = () => {
       <h1>OoTMM Web Generator</h1>
       <h2>Version: {process.env.VERSION}</h2>
       {result && (
-        <Result rom={result.rom} log={result.log} hash={result.hash} />
+        <Result data={result} />
       )}
       {!result && isGenerating && <Progress message={message} />}
       {!result && !isGenerating && (
