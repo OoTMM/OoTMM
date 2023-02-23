@@ -1,52 +1,11 @@
 import { Buffer } from 'buffer';
 
-import { compressGame } from './compress';
-import { Game, GAMES, CONFIG, CUSTOM_ADDR } from './config';
-import { patchGame } from './patch';
-import { DmaData } from './dma';
-import { Options } from './options';
-import { BuildOutput } from './build';
+import { compress } from './compress';
+import { CONFIG } from './config';
 import { DecompressedRoms } from './decompress';
+import { DmaData } from './dma';
 import { Monitor } from './monitor';
-
-const combineRoms = async (monitor: Monitor, roms: DecompressedRoms, build: BuildOutput, opts: Options) => {
-  monitor.log("Patching");
-  const [patchedOot, patchedMm] = await Promise.all(GAMES.map(async (g) => {
-    const rom = roms[g].rom;
-    const patchedRom = await patchGame(rom, build[g].patches, opts, g);
-    return patchedRom;
-  }));
-  const patchedRoms = {
-    oot: patchedOot,
-    mm: patchedMm,
-  };
-
-  monitor.log("Compressing");
-  const [oot, mm] = await Promise.all(GAMES.map(async (g) => {
-    const patchedRom = patchedRoms[g];
-    const compressedRom = await compressGame(g, patchedRom, roms[g].dma);
-    return compressedRom;
-  }));
-  return Buffer.concat([oot, mm]);
-};
-
-const packPayload = async (monitor: Monitor, rom: Buffer, build: BuildOutput, game: Game) => {
-  monitor.log("Packing payload for " + game);
-  const payload = build[game].payload;
-  if (payload.length > 0x30000) {
-    throw new Error("Payload too large");
-  }
-  const addr = CONFIG[game].payloadAddr;
-  payload.copy(rom, addr);
-};
-
-const packCustom = async (monitor: Monitor, rom: Buffer, custom: Buffer) => {
-  monitor.log("Packing custom data");
-  if (custom.length > 0x20000) {
-    throw new Error("Custom data too large");
-  }
-  custom.copy(rom, CUSTOM_ADDR);
-};
+import { Patchfile } from './patch-build/patchfile';
 
 const fixDMA = (monitor: Monitor, rom: Buffer) => {
   monitor.log("Fixing DMA");
@@ -65,14 +24,6 @@ const fixDMA = (monitor: Monitor, rom: Buffer) => {
     }
     dma.write(i, entry);
   }
-};
-
-const fixHeader = (monitor: Monitor, rom: Buffer) => {
-  monitor.log("Fixing the header");
-  const romName = Buffer.from('OOT+MM COMBO       ');
-  romName.copy(rom, 0x20);
-  const romCode = Buffer.from('ZZE');
-  romCode.copy(rom, 0x3c);
 };
 
 const rol = (v: number, b: number) => (((v << b) | (v >>> (32 - b))) & 0xffffffff) >>> 0;
@@ -116,15 +67,22 @@ const fixChecksum = (monitor: Monitor, rom: Buffer) => {
   rom.writeUInt32BE(c2, 0x14);
 };
 
-export const pack = async (monitor: Monitor, roms: DecompressedRoms, build: BuildOutput, custom: Buffer, opts: Options): Promise<Buffer> => {
-  const rom = await combineRoms(monitor, roms, build, opts);
+export async function pack(monitor: Monitor, roms: DecompressedRoms, patchfile: Patchfile): Promise<Buffer> {
+  /* Apply patches and compress */
+  const romOot = roms.oot.rom;
+  const romMm = roms.mm.rom;
+  monitor.log("Pack: Pre-compress patches");
+  patchfile.apply(romOot, 'oot');
+  patchfile.apply(romMm, 'mm');
+  monitor.log("Pack: Compress");
+  const compressedRoms = await compress(monitor, roms);
+  const compressedRom = Buffer.concat(compressedRoms);
+  monitor.log("Pack: Post-compress patches");
+  patchfile.apply(compressedRom, 'global');
 
-  for (const g of GAMES) {
-    await packPayload(monitor, rom, build, g);
-  }
-  await packCustom(monitor, rom, custom);
-  fixDMA(monitor, rom);
-  fixHeader(monitor, rom);
-  fixChecksum(monitor, rom);
-  return rom;
-};
+  monitor.log("Pack: Fixes");
+  fixDMA(monitor, compressedRom);
+  fixChecksum(monitor, compressedRom);
+
+  return compressedRom;
+}
