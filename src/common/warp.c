@@ -63,6 +63,7 @@ void comboTriggerWarp(GameState_Play* play, int bossId)
     case DUNGEONID_TEMPLE_GREAT_BAY:
         gMmExtraBoss.boss |= (1 << 2);
         MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_GB);
+        gMiscFlags.erCoastClear = 1;
         break;
     case DUNGEONID_TEMPLE_STONE_TOWER_INVERTED:
         gMmExtraBoss.boss |= (1 << 3);

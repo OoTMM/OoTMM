@@ -16,6 +16,7 @@ static void CustomWarp_OnTrigger(Actor_CustomWarp* this, GameState_Play* play)
 
 #define SWITCH_SPRING       0
 #define SWITCH_SWAMP_CLEAR  1
+#define SWITCH_COAST_CLEAR  2
 
 static void CustomWarp_OnTrigger(Actor_CustomWarp* this, GameState_Play* play)
 {
@@ -31,6 +32,10 @@ static void CustomWarp_OnTrigger(Actor_CustomWarp* this, GameState_Play* play)
     case SWITCH_SWAMP_CLEAR:
         MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_WF);
         play->nextEntrance = 0x8600;
+        break;
+    case SWITCH_COAST_CLEAR:
+        MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_GB);
+        play->nextEntrance = 0x6a70;
         break;
     }
 }
@@ -132,6 +137,14 @@ void comboSpawnCustomWarps(GameState_Play* play)
         x = 70.f;
         y = 35.f;
         z = -1320.f;
+    }
+
+    if (play->sceneId == SCE_MM_ZORA_CAPE && !MM_GET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_GB) && gMiscFlags.erCoastClear)
+    {
+        variable = SWITCH_COAST_CLEAR;
+        x = -5500.f;
+        y = 43.f;
+        z = 1200.f;
     }
 #endif
 
