@@ -316,6 +316,16 @@ export class LogicPassAnalysis {
     if (!this.state.settings.tricks['OOT_NIGHT_GS']) {
       delete this.dependencies['OOT_SONG_SUN'];
     }
+
+    if (this.state.settings.erBoss) {
+      delete this.dependencies['OOT_BOSS_KEY_FOREST'];
+      delete this.dependencies['OOT_BOSS_KEY_SPIRIT'];
+    }
+
+    if (this.state.settings.erBoss || this.state.settings.erDungeons) {
+      delete this.dependencies['OOT_SMALL_KEY_FOREST'];
+      delete this.dependencies['OOT_SMALL_KEY_SPIRIT'];
+    }
   }
 
   private makeSpheresRaw(restrictedLocations?: Set<string>) {
@@ -442,7 +452,7 @@ export class LogicPassAnalysis {
     }
 
     for (const loc in this.state.world.checks) {
-      if (this.requiredLocs.has(loc)) {
+      if (this.requiredLocs.has(loc) || this.uselessLocs.has(loc)) {
         continue;
       }
       if (!isItemImportant(this.state.items[loc]) || this.isLocUselessHeuristicCount(loc) || this.isLocUselessHeuristicDependencies(loc)) {
