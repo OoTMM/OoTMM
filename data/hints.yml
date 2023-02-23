@@ -26,4 +26,4 @@ MM_OSH_CHEST:                 0x8a
 MM_PINNACLE_ROCK_HP:          0x8b
 MM_FISHERMAN_GAME:            0x8c
 MM_SONG_ELEGY:                0x8d
-MM_SECRET_SHRINE_HP:          0x8e
+MM_SECRET_SHRINE_WART_HP:     0x8e
