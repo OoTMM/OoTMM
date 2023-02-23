@@ -2,7 +2,7 @@ import { Buffer } from 'buffer';
 
 import { compressGame } from './compress';
 import { Game, GAMES, CONFIG, CUSTOM_ADDR } from './config';
-import { patchGame } from './patch';
+import { patchGame } from './patch-build/patcher';
 import { DmaData } from './dma';
 import { Options } from './options';
 import { BuildOutput } from './build';
@@ -10,17 +10,6 @@ import { DecompressedRoms } from './decompress';
 import { Monitor } from './monitor';
 
 const combineRoms = async (monitor: Monitor, roms: DecompressedRoms, build: BuildOutput, opts: Options) => {
-  monitor.log("Patching");
-  const [patchedOot, patchedMm] = await Promise.all(GAMES.map(async (g) => {
-    const rom = roms[g].rom;
-    const patchedRom = await patchGame(rom, build[g].patches, opts, g);
-    return patchedRom;
-  }));
-  const patchedRoms = {
-    oot: patchedOot,
-    mm: patchedMm,
-  };
-
   monitor.log("Compressing");
   const [oot, mm] = await Promise.all(GAMES.map(async (g) => {
     const patchedRom = patchedRoms[g];
@@ -28,24 +17,6 @@ const combineRoms = async (monitor: Monitor, roms: DecompressedRoms, build: Buil
     return compressedRom;
   }));
   return Buffer.concat([oot, mm]);
-};
-
-const packPayload = async (monitor: Monitor, rom: Buffer, build: BuildOutput, game: Game) => {
-  monitor.log("Packing payload for " + game);
-  const payload = build[game].payload;
-  if (payload.length > 0x30000) {
-    throw new Error("Payload too large");
-  }
-  const addr = CONFIG[game].payloadAddr;
-  payload.copy(rom, addr);
-};
-
-const packCustom = async (monitor: Monitor, rom: Buffer, custom: Buffer) => {
-  monitor.log("Packing custom data");
-  if (custom.length > 0x20000) {
-    throw new Error("Custom data too large");
-  }
-  custom.copy(rom, CUSTOM_ADDR);
 };
 
 const fixDMA = (monitor: Monitor, rom: Buffer) => {
@@ -117,7 +88,7 @@ const fixChecksum = (monitor: Monitor, rom: Buffer) => {
 };
 
 export const pack = async (monitor: Monitor, roms: DecompressedRoms, build: BuildOutput, custom: Buffer, opts: Options): Promise<Buffer> => {
-  const rom = await combineRoms(monitor, roms, build, opts);
+  const rom = Buffer.concat([roms.oot.rom, roms.mm.rom]);
 
   for (const g of GAMES) {
     await packPayload(monitor, rom, build, g);

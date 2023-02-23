@@ -7,6 +7,7 @@ import { decompressGames } from "./decompress";
 import { Monitor, MonitorCallbacks } from './monitor';
 import { Options } from "./options";
 import { pack } from "./pack";
+import { buildPatchfile } from './patch-build';
 import { randomize } from "./randomizer";
 
 type GeneratorOutput = {
@@ -34,8 +35,18 @@ export class Generator {
     }
     const customData = await custom(this.monitor, roms);
     const buildResult = await build(this.opts);
-    const rom = await pack(this.monitor, roms, buildResult, customData, this.opts);
-    const { log, hash } = randomize(this.monitor, rom, this.opts);
-    return { rom, log, hash };
+    const rom = Buffer.concat([roms.oot.rom, roms.mm.rom]);
+    const patchfile = buildPatchfile({
+      monitor: this.monitor,
+      rom,
+      dma: { oot: roms.oot.dma, mm: roms.mm.dma },
+      build: buildResult,
+      custom: customData,
+    });
+    console.log(patchfile);
+    process.exit(0);
+    //const rom = await pack(this.monitor, roms, buildResult, customData, this.opts);
+    //const { log, hash } = randomize(this.monitor, rom, this.opts);
+    //return { rom, log, hash };
   }
 };
