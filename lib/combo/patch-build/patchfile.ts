@@ -1,4 +1,4 @@
-export type PatchType = 'pre-compress' | 'post-compress';
+export type PatchType = 'oot' | 'mm' | 'global';
 
 type Patch = {
   type: PatchType;
@@ -33,9 +33,6 @@ export class Patchfile {
     for (const patch of this.patches) {
       const patchHeader = Buffer.alloc(8);
       let addr = patch.romAddr;
-      if (patch.type === 'post-compress') {
-        addr = (addr | 0x80000000) >>> 0;
-      }
       patchHeader.writeUInt32LE(addr, 0x0);
       patchHeader.writeUInt32LE(patch.data.length, 0x4);
       buffers.push(patchHeader);

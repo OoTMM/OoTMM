@@ -2,9 +2,9 @@ import { Buffer } from 'buffer';
 
 import { compress } from './compress';
 import { CONFIG } from './config';
+import { DecompressedRoms } from './decompress';
 import { DmaData } from './dma';
 import { Monitor } from './monitor';
-import { RomsDMA } from './patch-build';
 import { Patchfile } from './patch-build/patchfile';
 
 const fixDMA = (monitor: Monitor, rom: Buffer) => {
@@ -75,14 +75,18 @@ const fixChecksum = (monitor: Monitor, rom: Buffer) => {
   rom.writeUInt32BE(c2, 0x14);
 };
 
-export async function pack(monitor: Monitor, rom: Buffer, romsDma: RomsDMA, patchfile: Patchfile): Promise<Buffer> {
+export async function pack(monitor: Monitor, roms: DecompressedRoms, patchfile: Patchfile): Promise<Buffer> {
   /* Apply patches and compress */
+  const romOot = roms.oot.rom;
+  const romMm = roms.mm.rom;
   monitor.log("Pack: Pre-compress patches");
-  patchfile.apply(rom, 'pre-compress');
+  patchfile.apply(romOot, 'oot');
+  patchfile.apply(romMm, 'mm');
   monitor.log("Pack: Compress");
-  const compressedRom = await compress(monitor, rom, romsDma);
+  const compressedRoms = await compress(monitor, roms);
+  const compressedRom = Buffer.concat(compressedRoms);
   monitor.log("Pack: Post-compress patches");
-  patchfile.apply(compressedRom, 'post-compress');
+  patchfile.apply(compressedRom, 'global');
 
   monitor.log("Pack: Fixes");
   fixDMA(monitor, compressedRom);

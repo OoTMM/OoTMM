@@ -39,18 +39,16 @@ export class Generator {
     /* Run logic */
     const logicResult = logic(this.monitor, this.opts);
 
-    const rom = Buffer.concat([roms.oot.rom, roms.mm.rom]);
     const dma = { oot: roms.oot.dma, mm: roms.mm.dma };
     const patchfile = buildPatchfile({
       monitor: this.monitor,
-      rom,
-      dma,
+      roms,
       build: buildResult,
       custom: customData,
       logic: logicResult,
       settings: this.opts.settings,
     });
-    const packedRom = await pack(this.monitor, rom, dma, patchfile);
+    const packedRom = await pack(this.monitor, roms, patchfile);
     const hash = "XXX";
     const log = "TODO";
     //const rom = await pack(this.monitor, roms, buildResult, customData, this.opts);
