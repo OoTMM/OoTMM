@@ -70,39 +70,18 @@ export class LogicPassSolver {
       settings: Settings,
       random: Random,
       monitor: Monitor,
+      attempts: number,
     }
   ) {
     this.pathfinder = new Pathfinder(this.state.world, this.state.settings);
-  }
-
-  run() {
-    let error: any = null;
-    for (let i = 0; i < 100; ++i) {
-      try {
-        this.state.monitor.log(`Logic: Solver (attempt ${i + 1})`);
-        const placement = this.solve();
-        return { items: placement };
-      } catch (e) {
-        if (!(e instanceof LogicSeedError)) {
-          throw e;
-        }
-        error = e;
-      }
-    }
-    if (error) {
-      throw error;
-    }
-  }
-
-  private initSolver() {
     this.items = {};
     this.junkLocations = new Set<string>(this.state.settings.junkLocations);
     this.pools = this.makeItemPools();
     this.pathfinderState = this.pathfinder.run(null);
   }
 
-  private solve() {
-    this.initSolver();
+  run() {
+    this.state.monitor.log(`Logic: Solver (attempt ${this.state.attempts})`);
     const checksCount = Object.keys(this.state.world.checks).length;
 
     /* Place junk into junkLocations */
@@ -148,7 +127,7 @@ export class LogicPassSolver {
     /* At this point we have a beatable game */
     this.fill();
 
-    return this.items;
+    return { items: this.items };
   }
 
   private fixLocations() {
