@@ -6,7 +6,7 @@ static void debugCheat(GameState_Play* play)
 {
 #if defined(DEBUG)
     gMiscFlags.erSpring = 1;
-    MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_WF);
+    gMiscFlags.erSwampClear = 1;
     /*if (play->gs.input[0].current.buttons & 0x20)*/
     {
         gSave.itemEquips.sword = 1;

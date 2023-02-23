@@ -25,7 +25,8 @@
 typedef struct
 {
     u32 erSpring:1;
-    u32 unused:31;
+    u32 erSwampClear:1;
+    u32 unused:30;
 }
 MiscFlags;
 #endif

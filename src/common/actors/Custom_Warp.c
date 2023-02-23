@@ -14,7 +14,8 @@ static void CustomWarp_OnTrigger(Actor_CustomWarp* this, GameState_Play* play)
 
 #if defined(GAME_MM)
 
-#define SWITCH_SPRING 0
+#define SWITCH_SPRING       0
+#define SWITCH_SWAMP_CLEAR  1
 
 static void CustomWarp_OnTrigger(Actor_CustomWarp* this, GameState_Play* play)
 {
@@ -26,6 +27,10 @@ static void CustomWarp_OnTrigger(Actor_CustomWarp* this, GameState_Play* play)
     case SWITCH_SPRING:
         MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_SH);
         play->nextEntrance = 0xae70;
+        break;
+    case SWITCH_SWAMP_CLEAR:
+        MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_WF);
+        play->nextEntrance = 0x8600;
         break;
     }
 }
@@ -119,6 +124,14 @@ void comboSpawnCustomWarps(GameState_Play* play)
         x = -1200.f;
         y = 30.f;
         z = 600.f;
+    }
+
+    if (play->sceneId == SCE_MM_WOODFALL && !MM_GET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_WF) && gMiscFlags.erSwampClear)
+    {
+        variable = SWITCH_SWAMP_CLEAR;
+        x = 70.f;
+        y = 35.f;
+        z = -1320.f;
     }
 #endif
 
