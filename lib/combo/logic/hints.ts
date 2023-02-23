@@ -58,7 +58,7 @@ const HINTS_ITEMS_SOMETIMES = [
   'MM_PINNACLE_ROCK_HP',
   'MM_FISHERMAN_GAME',
   'MM_SONG_ELEGY',
-  'MM_SECRET_SHRINE_HP',
+  'MM_SECRET_SHRINE_WART_HP',
 ];
 
 export type HintGossipHero = {
