@@ -97,7 +97,7 @@ static void addBombBag(int index)
     gMmSave.inventory.ammo[ITS_MM_BOMBS] = kMaxBombs[index];
 }
 
-static void addBowQuiver(int index)
+void comboAddQuiverMm(int index)
 {
     gMmSave.inventory.items[ITS_MM_BOW] = ITEM_MM_BOW;
     gMmSave.inventory.upgrades.quiver = index;
@@ -254,9 +254,30 @@ static void refillMagic(int level)
     gMmSave.playerData.magic = level * 0x30;
 }
 
+static void addItemShared(s16 gi, int noEffect)
+{
+    if (comboConfig(CFG_SHARED_BOWS))
+    {
+        switch (gi)
+        {
+        case GI_MM_BOW:
+            comboAddQuiverOot(1);
+            break;
+        case GI_MM_QUIVER2:
+            comboAddQuiverOot(2);
+            break;
+        case GI_MM_QUIVER3:
+            comboAddQuiverOot(3);
+            break;
+        }
+    }
+}
+
 int comboAddItemMm(s16 gi, int noEffect)
 {
     int count;
+
+    addItemShared(gi, noEffect);
 
     count = 0;
     switch (gi)
@@ -513,13 +534,13 @@ int comboAddItemMm(s16 gi, int noEffect)
         addBombBag(3);
         break;
     case GI_MM_BOW:
-        addBowQuiver(1);
+        comboAddQuiverMm(1);
         break;
     case GI_MM_QUIVER2:
-        addBowQuiver(2);
+        comboAddQuiverMm(2);
         break;
     case GI_MM_QUIVER3:
-        addBowQuiver(3);
+        comboAddQuiverMm(3);
         break;
     case GI_MM_WALLET2:
         gMmSave.inventory.upgrades.wallet = 1;

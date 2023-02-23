@@ -193,7 +193,7 @@ static void addBombBag(u8 level)
     gOotSave.ammo[ITS_OOT_BOMBS] = kMaxBombs[level];
 }
 
-static void addQuiver(u8 level)
+void comboAddQuiverOot(int level)
 {
     gOotSave.inventory[ITS_OOT_BOW] = ITEM_OOT_BOW;
     gOotSave.upgrades.quiver = level;
@@ -295,10 +295,31 @@ static void addOcarina(int level)
     reloadSlot(ITS_OOT_OCARINA);
 }
 
+static void addItemShared(s16 gi, int noEffect)
+{
+    if (comboConfig(CFG_SHARED_BOWS))
+    {
+        switch (gi)
+        {
+        case GI_OOT_BOW:
+            comboAddQuiverMm(1);
+            break;
+        case GI_OOT_QUIVER2:
+            comboAddQuiverMm(2);
+            break;
+        case GI_OOT_QUIVER3:
+            comboAddQuiverMm(3);
+            break;
+        }
+    }
+}
+
 int comboAddItemOot(s16 gi, int noEffect)
 {
     int count;
     u16 dungeonId;
+
+    addItemShared(gi, noEffect);
 
     count = 0;
     (void)dungeonId;
@@ -336,7 +357,7 @@ int comboAddItemOot(s16 gi, int noEffect)
         addBombs(30);
         break;
     case GI_OOT_BOW:
-        addQuiver(1);
+        comboAddQuiverOot(1);
         break;
     case GI_OOT_ARROWS_5:
         addArrows(5);
@@ -504,10 +525,10 @@ int comboAddItemOot(s16 gi, int noEffect)
         addBulletBag(3);
         break;
     case GI_OOT_QUIVER2:
-        addQuiver(2);
+        comboAddQuiverOot(2);
         break;
     case GI_OOT_QUIVER3:
-        addQuiver(3);
+        comboAddQuiverOot(3);
         break;
     case GI_OOT_BOMB_BAG:
         addBombBag(1);

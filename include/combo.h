@@ -235,6 +235,9 @@ int  comboAddStrayFairyMm(u16 dungeonId);
 void comboAddMapMm(u16 dungeonId);
 void comboAddCompassMm(u16 dungeonId);
 
+void comboAddQuiverOot(int level);
+void comboAddQuiverMm(int level);
+
 int  comboAddItem(GameState_Play* play, s16 gi);
 int  comboAddItemNoEffect(s16 gi);
 
