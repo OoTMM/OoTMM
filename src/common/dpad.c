@@ -202,7 +202,7 @@ static void dpadUseItem(GameState_Play* play, int index, int flags)
 void comboDpadUpdate(GameState_Play* play)
 {
     /* Update the items */
-    sDpadItems[DPAD_DOWN] = gSave.inventory[ITS_OOT_OCARINA];
+    sDpadItems[DPAD_DOWN] = gSave.inventory.items[ITS_OOT_OCARINA];
 
     if (gSave.age == AGE_CHILD)
     {
@@ -211,8 +211,8 @@ void comboDpadUpdate(GameState_Play* play)
     }
     else
     {
-        sDpadItems[DPAD_LEFT] = (gSave.equipment.boots & EQ_OOT_BOOTS_IRON) ? ITEM_OOT_IRON_BOOTS : ITEM_NONE;
-        sDpadItems[DPAD_RIGHT] = (gSave.equipment.boots & EQ_OOT_BOOTS_HOVER) ? ITEM_OOT_HOVER_BOOTS : ITEM_NONE;
+        sDpadItems[DPAD_LEFT] = (gSave.inventory.equipment.boots & EQ_OOT_BOOTS_IRON) ? ITEM_OOT_IRON_BOOTS : ITEM_NONE;
+        sDpadItems[DPAD_RIGHT] = (gSave.inventory.equipment.boots & EQ_OOT_BOOTS_HOVER) ? ITEM_OOT_HOVER_BOOTS : ITEM_NONE;
     }
 }
 #endif

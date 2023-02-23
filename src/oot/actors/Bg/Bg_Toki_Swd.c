@@ -45,7 +45,7 @@ void BgTokiSwd_Handler(Actor* this, GameState_Play* play)
     else
     {
         /* Needs the Master Sword to become adult */
-        if (gSave.equipment.swords & EQ_OOT_SWORD_MASTER)
+        if (gSave.inventory.equipment.swords & EQ_OOT_SWORD_MASTER)
             ActorEnableGrab(this, play);
     }
 }

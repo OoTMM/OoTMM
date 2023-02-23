@@ -141,6 +141,7 @@ export const ITEMS_REQUIRED = new Set<string>([
   'MM_WALLET',
   'MM_GREAT_FAIRY_SWORD',
   'MM_SPIN_UPGRADE',
+  'SHARED_BOW',
 ]);
 
 export const ITEMS_SOMETIMES_REQUIRED = new Set<string>([
@@ -206,6 +207,10 @@ const ITEMS_JUNK = new Set<string>([
   'MM_BOMBS_10',
   'MM_BOMBS_20',
   'MM_BOMBS_30',
+  'SHARED_ARROWS_5',
+  'SHARED_ARROWS_10',
+  'SHARED_ARROWS_30',
+  'SHARED_ARROWS_40',
 ]);
 
 export const isSong = (item: string) => !!item.match(/^(OOT|MM)_SONG_/);

@@ -2,19 +2,19 @@
 
 void comboToggleTradeAdult(void)
 {
-    comboToggleTrade(gSave.inventory + ITS_OOT_TRADE_ADULT, gOotExtraTrade.adult, kOotTradeAdult, 11);
+    comboToggleTrade(gSave.inventory.items + ITS_OOT_TRADE_ADULT, gOotExtraTrade.adult, kOotTradeAdult, 11);
 }
 
 void comboToggleTradeChild(void)
 {
-    comboToggleTrade(gSave.inventory + ITS_OOT_TRADE_CHILD, gOotExtraTrade.child, kOotTradeChild, 11);
+    comboToggleTrade(gSave.inventory.items + ITS_OOT_TRADE_CHILD, gOotExtraTrade.child, kOotTradeChild, 11);
 }
 
 void comboToggleOcarina(void)
 {
     u8* slot;
 
-    slot = gOotSave.inventory + ITS_OOT_OCARINA;
+    slot = gSave.inventory.items + ITS_OOT_OCARINA;
     if (*slot == ITEM_OOT_OCARINA_FAIRY)
     {
         *slot = ITEM_OOT_OCARINA_TIME;
@@ -29,7 +29,7 @@ void comboToggleHookshot(void)
 {
     u8* slot;
 
-    slot = gOotSave.inventory + ITS_OOT_HOOKSHOT;
+    slot = gSave.inventory.items + ITS_OOT_HOOKSHOT;
     if (*slot == ITEM_OOT_HOOKSHOT)
     {
         *slot = ITEM_OOT_LONGSHOT;
@@ -63,7 +63,7 @@ void comboRemoveTradeItemAdult(u16 xitemId)
         if (gOotExtraTrade.adult)
             comboToggleTradeAdult();
         else
-            gSave.inventory[ITS_OOT_TRADE_ADULT] = ITEM_NONE;
+            gSave.inventory.items[ITS_OOT_TRADE_ADULT] = ITEM_NONE;
         removeButtonItem(kOotTradeAdult[xitemId]);
     }
 }
@@ -79,7 +79,7 @@ void comboRemoveTradeItemChild(u16 xitemId)
         if (gOotExtraTrade.child)
             comboToggleTradeChild();
         else
-            gSave.inventory[ITS_OOT_TRADE_CHILD] = ITEM_NONE;
+            gSave.inventory.items[ITS_OOT_TRADE_CHILD] = ITEM_NONE;
         removeButtonItem(kOotTradeChild[xitemId]);
     }
 }

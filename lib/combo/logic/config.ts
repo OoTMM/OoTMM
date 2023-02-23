@@ -55,6 +55,10 @@ export class LogicPassConfig {
       config.add('ER_DUNGEONS');
     }
 
+    if (this.state.settings.sharedBows) {
+      config.add('SHARED_BOWS');
+    }
+
     return { config };
   }
 }

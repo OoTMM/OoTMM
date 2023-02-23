@@ -404,4 +404,15 @@
 #define XITEM_MM_TRADE3_LETTER_TO_KAFEI     0x0
 #define XITEM_MM_TRADE3_PENDANT_OF_MEMORIES 0x1
 
+/* Shared defs */
+#if defined(GAME_OOT)
+# define ITS_NATIVE_BOW             ITS_OOT_BOW
+# define ITS_FOREIGN_BOW            ITS_MM_BOW
+#endif
+
+#if defined(GAME_MM)
+# define ITS_NATIVE_BOW             ITS_MM_BOW
+# define ITS_FOREIGN_BOW            ITS_OOT_BOW
+#endif
+
 #endif

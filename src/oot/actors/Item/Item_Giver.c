@@ -107,7 +107,7 @@ void comboSpawnItemGivers(GameState_Play* play)
     }
 
     /* Sheik in Kakariko */
-    if (play->sceneId == SCE_OOT_KAKARIKO_VILLAGE && gSave.quest.medallionForest && gSave.quest.medallionFire && gSave.quest.medallionWater && gSave.age == AGE_ADULT && !GetEventChk(EV_OOT_CHK_SONG_TP_SHADOW))
+    if (play->sceneId == SCE_OOT_KAKARIKO_VILLAGE && gSave.inventory.quest.medallionForest && gSave.inventory.quest.medallionFire && gSave.inventory.quest.medallionWater && gSave.age == AGE_ADULT && !GetEventChk(EV_OOT_CHK_SONG_TP_SHADOW))
     {
         comboSpawnItemGiver(play, NPC_OOT_SHEIK_SHADOW);
     }
@@ -119,7 +119,7 @@ void comboSpawnItemGivers(GameState_Play* play)
     }
 
     /* Zelda Light Arrows */
-    if (play->sceneId == SCE_OOT_TEMPLE_OF_TIME && gSave.quest.medallionShadow && gSave.quest.medallionSpirit && gSave.age == AGE_ADULT && !GetEventChk(EV_OOT_CHK_LIGHT_ARROW))
+    if (play->sceneId == SCE_OOT_TEMPLE_OF_TIME && gSave.inventory.quest.medallionShadow && gSave.inventory.quest.medallionSpirit && gSave.age == AGE_ADULT && !GetEventChk(EV_OOT_CHK_LIGHT_ARROW))
     {
         comboSpawnItemGiver(play, NPC_OOT_ZELDA_LIGHT_ARROW);
     }

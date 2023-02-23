@@ -89,7 +89,7 @@ static void EnXc_Update_TempleOfTime(Actor* this, GameState_Play* play)
 {
     s16 gi;
 
-    if (!gSave.quest.medallionForest || GetEventChk(EV_OOT_CHK_SONG_TP_LIGHT))
+    if (!gSave.inventory.quest.medallionForest || GetEventChk(EV_OOT_CHK_SONG_TP_LIGHT))
         ActorDestroy(this);
 
     if (checkSetEvent(this, EV_OOT_CHK_SONG_TP_LIGHT))

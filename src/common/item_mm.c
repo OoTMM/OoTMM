@@ -97,7 +97,7 @@ static void addBombBag(int index)
     gMmSave.inventory.ammo[ITS_MM_BOMBS] = kMaxBombs[index];
 }
 
-static void addBowQuiver(int index)
+void comboAddQuiverMm(int index)
 {
     gMmSave.inventory.items[ITS_MM_BOW] = ITEM_MM_BOW;
     gMmSave.inventory.upgrades.quiver = index;
@@ -115,9 +115,9 @@ static void addBombs(int count)
         gMmSave.inventory.ammo[ITS_MM_BOMBS] = max;
 }
 
-static void addArrows(int count)
+void comboAddArrowsMm(int count)
 {
-    u16 max;
+    int max;
 
     max = kMaxArrows[gMmSave.inventory.upgrades.quiver];
     gMmSave.inventory.items[ITS_MM_BOW] = ITEM_MM_BOW;
@@ -254,9 +254,39 @@ static void refillMagic(int level)
     gMmSave.playerData.magic = level * 0x30;
 }
 
+static void addItemShared(s16 gi, int noEffect)
+{
+    if (comboConfig(CFG_SHARED_BOWS))
+    {
+        switch (gi)
+        {
+        case GI_MM_BOW:
+            comboAddQuiverOot(1);
+            break;
+        case GI_MM_QUIVER2:
+            comboAddQuiverOot(2);
+            break;
+        case GI_MM_QUIVER3:
+            comboAddQuiverOot(3);
+            break;
+        case GI_MM_ARROWS_10:
+            comboAddArrowsOot(10);
+            break;
+        case GI_MM_ARROWS_30:
+            comboAddArrowsOot(30);
+            break;
+        case GI_MM_ARROWS_40:
+            comboAddArrowsOot(40);
+            break;
+        }
+    }
+}
+
 int comboAddItemMm(s16 gi, int noEffect)
 {
     int count;
+
+    addItemShared(gi, noEffect);
 
     count = 0;
     switch (gi)
@@ -343,13 +373,13 @@ int comboAddItemMm(s16 gi, int noEffect)
         addBombs(30);
         break;
     case GI_MM_ARROWS_10:
-        addArrows(10);
+        comboAddArrowsMm(10);
         break;
     case GI_MM_ARROWS_30:
-        addArrows(30);
+        comboAddArrowsMm(30);
         break;
     case GI_MM_ARROWS_40:
-        addArrows(40);
+        comboAddArrowsMm(40);
         break;
     case GI_MM_DEKU_NUT:
         addNuts(1);
@@ -513,13 +543,13 @@ int comboAddItemMm(s16 gi, int noEffect)
         addBombBag(3);
         break;
     case GI_MM_BOW:
-        addBowQuiver(1);
+        comboAddQuiverMm(1);
         break;
     case GI_MM_QUIVER2:
-        addBowQuiver(2);
+        comboAddQuiverMm(2);
         break;
     case GI_MM_QUIVER3:
-        addBowQuiver(3);
+        comboAddQuiverMm(3);
         break;
     case GI_MM_WALLET2:
         gMmSave.inventory.upgrades.wallet = 1;
