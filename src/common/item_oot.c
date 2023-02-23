@@ -123,9 +123,9 @@ static void addBombs(u8 count)
     addAmmo(ITS_OOT_BOMBS, ITEM_OOT_BOMB, max, count);
 }
 
-static void addArrows(u8 count)
+void comboAddArrowsOot(int count)
 {
-    u8 max;
+    int max;
 
     if (gOotSave.upgrades.quiver == 0)
         return;
@@ -310,6 +310,15 @@ static void addItemShared(s16 gi, int noEffect)
         case GI_OOT_QUIVER3:
             comboAddQuiverMm(3);
             break;
+        case GI_OOT_ARROWS_5:
+            comboAddArrowsMm(5);
+            break;
+        case GI_OOT_ARROWS_10:
+            comboAddArrowsMm(10);
+            break;
+        case GI_OOT_ARROWS_30:
+            comboAddArrowsMm(30);
+            break;
         }
     }
 }
@@ -360,13 +369,13 @@ int comboAddItemOot(s16 gi, int noEffect)
         comboAddQuiverOot(1);
         break;
     case GI_OOT_ARROWS_5:
-        addArrows(5);
+        comboAddArrowsOot(5);
         break;
     case GI_OOT_ARROWS_10:
-        addArrows(10);
+        comboAddArrowsOot(10);
         break;
     case GI_OOT_ARROWS_30:
-        addArrows(30);
+        comboAddArrowsOot(30);
         break;
     case GI_OOT_ARROW_FIRE:
         gOotSave.inventory[ITS_OOT_ARROW_FIRE] = ITEM_OOT_ARROW_FIRE;

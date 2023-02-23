@@ -235,8 +235,9 @@ ASSERT_OFFSET(MmSaveContext, dungeonId,     0x48c8);
 
 #if defined(GAME_MM)
 ALIGNED(16) extern MmSaveContext gSaveContext;
-# define gMmSave    (gSaveContext.save)
-# define gSave      gMmSave
+# define gMmSave        (gSaveContext.save)
+# define gSave          gMmSave
+# define gForeignSave   gOotSave
 #else
 ALIGNED(16) extern MmSave gMmSave;
 #endif

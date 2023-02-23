@@ -115,9 +115,9 @@ static void addBombs(int count)
         gMmSave.inventory.ammo[ITS_MM_BOMBS] = max;
 }
 
-static void addArrows(int count)
+void comboAddArrowsMm(int count)
 {
-    u16 max;
+    int max;
 
     max = kMaxArrows[gMmSave.inventory.upgrades.quiver];
     gMmSave.inventory.items[ITS_MM_BOW] = ITEM_MM_BOW;
@@ -269,6 +269,15 @@ static void addItemShared(s16 gi, int noEffect)
         case GI_MM_QUIVER3:
             comboAddQuiverOot(3);
             break;
+        case GI_MM_ARROWS_10:
+            comboAddArrowsOot(10);
+            break;
+        case GI_MM_ARROWS_30:
+            comboAddArrowsOot(30);
+            break;
+        case GI_MM_ARROWS_40:
+            comboAddArrowsOot(40);
+            break;
         }
     }
 }
@@ -364,13 +373,13 @@ int comboAddItemMm(s16 gi, int noEffect)
         addBombs(30);
         break;
     case GI_MM_ARROWS_10:
-        addArrows(10);
+        comboAddArrowsMm(10);
         break;
     case GI_MM_ARROWS_30:
-        addArrows(30);
+        comboAddArrowsMm(30);
         break;
     case GI_MM_ARROWS_40:
-        addArrows(40);
+        comboAddArrowsMm(40);
         break;
     case GI_MM_DEKU_NUT:
         addNuts(1);

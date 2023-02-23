@@ -189,8 +189,9 @@ _Static_assert(sizeof(OotSaveContext) == 0x1450, "OotSaveContext size is wrong")
 
 #if defined(GAME_OOT)
 ALIGNED(16) extern OotSaveContext gSaveContext;
-# define gOotSave   (gSaveContext.save)
-# define gSave      gOotSave
+# define gOotSave       (gSaveContext.save)
+# define gSave          gOotSave
+# define gForeignSave   gMmSave
 #else
 ALIGNED(16) extern OotSave gOotSave;
 #endif

@@ -157,3 +157,8 @@ int comboIsItemMinor(s16 gi)
     else
         return isItemMinorOot(gi);
 }
+
+void comboSyncItems(void)
+{
+
+}
