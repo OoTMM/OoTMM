@@ -1,8 +1,11 @@
 import { BuildOutput } from "../build";
 import { CONFIG, CUSTOM_ADDR, GAMES } from "../config";
+import { LogicResult } from "../logic";
 import { Monitor } from "../monitor";
+import { Settings } from "../settings";
 import { Patcher } from "./patcher";
 import { Patchfile } from "./patchfile";
+import { patchRandomizer } from "./randomizer";
 
 export type RomsDMA = {
   oot: Buffer;
@@ -15,6 +18,8 @@ export type BuildPatchfileIn = {
   dma: RomsDMA;
   build: BuildOutput;
   custom: Buffer;
+  logic: LogicResult;
+  settings: Settings;
 };
 
 export function buildPatchfile(args: BuildPatchfileIn): Patchfile {
@@ -43,6 +48,9 @@ export function buildPatchfile(args: BuildPatchfileIn): Patchfile {
   /* Patch rom header */
   file.addPatch('post-compress', 0x20, Buffer.from('OOT+MM COMBO       '));
   file.addPatch('post-compress', 0x3c, Buffer.from('ZZE'));
+
+  /* Patch the randomized data */
+  patchRandomizer(args.logic, args.settings, file);
 
   return file;
 };

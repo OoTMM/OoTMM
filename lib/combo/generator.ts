@@ -4,11 +4,11 @@ import { build } from "./build";
 import { codegen } from "./codegen";
 import { custom } from "./custom";
 import { decompressGames } from "./decompress";
+import { logic } from './logic';
 import { Monitor, MonitorCallbacks } from './monitor';
 import { Options } from "./options";
 import { pack } from "./pack";
 import { buildPatchfile } from './patch-build';
-import { randomize } from "./randomizer";
 
 type GeneratorOutput = {
   rom: Buffer;
@@ -35,6 +35,10 @@ export class Generator {
     }
     const customData = await custom(this.monitor, roms);
     const buildResult = await build(this.opts);
+
+    /* Run logic */
+    const logicResult = logic(this.monitor, this.opts);
+
     const rom = Buffer.concat([roms.oot.rom, roms.mm.rom]);
     const dma = { oot: roms.oot.dma, mm: roms.mm.dma };
     const patchfile = buildPatchfile({
@@ -43,6 +47,8 @@ export class Generator {
       dma,
       build: buildResult,
       custom: customData,
+      logic: logicResult,
+      settings: this.opts.settings,
     });
     const packedRom = await pack(this.monitor, rom, dma, patchfile);
     const hash = "XXX";

@@ -42,12 +42,14 @@ export class Patcher {
   private vram: VRamEntry[];
   private objectTable: number[];
   private cursor: number;
+  private offset: number;
 
   constructor(game: Game, rom: Buffer, patches: Buffer, patchfile: Patchfile) {
     this.game = game;
     this.rom = rom;
     this.patches = patches;
     this.patchfile = patchfile;
+    this.offset = game === 'mm' ? 1024 * 1024 * 64 : 0;
     this.vram = this.makeVramTable();
     this.objectTable = this.makeObjectTable();
     this.cursor = 0;
@@ -56,7 +58,7 @@ export class Patcher {
   private makeVramTable() {
     const vram = [...DATA_VRAM[this.game]];
     const meta = CONFIG[this.game];
-    let addr = meta.actorsOvlAddr;
+    let addr = meta.actorsOvlAddr + this.offset;
     for (let i = 0; i < meta.actorsOvlCount; ++i) {
       const base = this.rom.readUInt32BE(addr + 0x00);
       const vstart = this.rom.readUInt32BE(addr + 0x08);
@@ -82,10 +84,7 @@ export class Patcher {
   }
 
   private vromToPhysical(addr: number) {
-    if (this.game === 'mm') {
-      addr += 1024 * 1024 * 64;
-    }
-    return addr;
+    return addr + this.offset;
   }
 
   private virtualToPhysical(addr: number) {

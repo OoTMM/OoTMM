@@ -1,16 +1,17 @@
 import { Buffer } from 'buffer';
 
-import { logic, LogicResult } from './logic';
-import { DATA_GI, DATA_NPC, DATA_SCENES, DATA_REGIONS, DATA_CONFIG, DATA_HINTS_POOL, DATA_HINTS, DATA_ENTRANCES } from './data';
-import { Game, GAMES } from "./config";
-import { WorldCheck } from './logic/world';
-import { Options } from './options';
-import { Settings } from './settings';
-import { HintGossip, Hints } from './logic/hints';
-import { Monitor } from './monitor';
-import { isDungeonStrayFairy, isGanonBossKey, isMap, isCompass, isRegularBossKey, isSmallKeyRegular, isTownStrayFairy, isSmallKeyHideout } from './logic/items';
-import { gameId } from './util';
-import { EntranceShuffleResult } from './logic/entrance';
+import { logic, LogicResult } from '../logic';
+import { DATA_GI, DATA_NPC, DATA_SCENES, DATA_REGIONS, DATA_CONFIG, DATA_HINTS_POOL, DATA_HINTS, DATA_ENTRANCES } from '../data';
+import { Game, GAMES } from "../config";
+import { WorldCheck } from '../logic/world';
+import { Options } from '../options';
+import { Settings } from '../settings';
+import { HintGossip, Hints } from '../logic/hints';
+import { Monitor } from '../monitor';
+import { isDungeonStrayFairy, isGanonBossKey, isMap, isCompass, isRegularBossKey, isSmallKeyRegular, isTownStrayFairy, isSmallKeyHideout } from '../logic/items';
+import { gameId } from '../util';
+import { EntranceShuffleResult } from '../logic/entrance';
+import { Patchfile } from './patchfile';
 
 const GAME_DATA_OFFSETS = {
   oot: 0x1000,
@@ -316,7 +317,7 @@ export const randomizerHints = (logic: LogicResult): Buffer => {
 const randomizerBoss = (logic: LogicResult): Buffer => toU8Buffer(logic.entrances.boss);
 const randomizerDungeons = (logic: LogicResult): Buffer => toU8Buffer(logic.entrances.dungeons);
 
-export const randomizerData = (logic: LogicResult, options: Options): Buffer => {
+export const randomizerData = (logic: LogicResult): Buffer => {
   const buffers = [];
   buffers.push(randomizerConfig(logic.config));
   buffers.push(randomizerHints(logic));
@@ -389,22 +390,19 @@ const randomizerStartingItems = (settings: Settings): Buffer => {
   return buffer;
 };
 
-export const randomize = (monitor: Monitor, rom: Buffer, opts: Options) => {
-  monitor.log("Randomizing...");
-  const res = logic(monitor, opts);
+export function patchRandomizer(logic: LogicResult, settings: Settings, patchfile: Patchfile) {
   const buffer = Buffer.alloc(0x20000, 0xff);
   for (const g of GAMES) {
-    const checksBuffer = gameChecks(opts.settings, g, res);
-    const hintsBuffer = gameHints(opts.settings, g, res.hints);
-    const entrancesBuffer = gameEntrances(g, res.entrances);
+    const checksBuffer = gameChecks(settings, g, logic);
+    const hintsBuffer = gameHints(settings, g, logic.hints);
+    const entrancesBuffer = gameEntrances(g, logic.entrances);
     checksBuffer.copy(buffer, GAME_DATA_OFFSETS[g]);
     hintsBuffer.copy(buffer, HINTS_DATA_OFFSETS[g]);
     entrancesBuffer.copy(buffer, ENTRANCE_DATA_OFFSETS[g]);
   }
-  const data = randomizerData(res, opts);
+  const data = randomizerData(logic);
   data.copy(buffer, 0);
-  const startingItems = randomizerStartingItems(opts.settings);
+  const startingItems = randomizerStartingItems(settings);
   startingItems.copy(buffer, STARTING_ITEMS_DATA_OFFSET);
-  buffer.copy(rom, 0x03fe0000);
-  return { log: res.log , hash: res.hash };
+  patchfile.addPatch('post-compress', 0x03fe0000, buffer);
 }
