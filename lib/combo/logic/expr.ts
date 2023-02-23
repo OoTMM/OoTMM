@@ -1,5 +1,14 @@
 import { Settings, Trick, TRICKS } from '../settings';
-import type { Age, State } from './state';
+import { Items } from './items';
+import { Age } from './pathfind';
+
+type State = {
+  items: Items;
+  age: Age;
+  events: Set<string>;
+  ignoreItems: boolean;
+};
+
 
 const MASKS = [
   'MM_MASK_CAPTAIN',

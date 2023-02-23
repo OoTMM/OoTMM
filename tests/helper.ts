@@ -2,6 +2,7 @@ import fs from "fs";
 import YAML from 'yaml';
 import * as CSV from 'csv/sync';
 import * as glob from 'glob';
+import { merge } from 'lodash';
 
 const mockCSV = (filename: string) => {
   const data = fs.readFileSync(filename, "utf8");
@@ -18,13 +19,14 @@ const mockYAML = (filename: string) => {
 glob.sync(__dirname + "/../data/**/*.yml").forEach(mockYAML);
 glob.sync(__dirname + "/../data/**/*.csv").forEach(mockCSV);
 
-import { logic } from "../lib/combo/logic";
-import { DEFAULT_SETTINGS } from "../lib/combo/settings";
+import { Optional } from "../lib/combo/util";
+import { DEFAULT_SETTINGS, Settings } from "../lib/combo/settings";
 import { Monitor } from "../lib/combo/monitor";
+import { logic } from "../lib/combo/logic";
 
-for (let i = 0; i < 3; ++i) {
-  test("Can randomize a seed (" + (i + 1) + ")", () => {
-    const mon = new Monitor({});
-    logic(mon, { debug: false, seed: "TEST" + i, settings: DEFAULT_SETTINGS });
-  });
+const sharedMonitor = new Monitor({ onLog: () => {} });
+
+export const makeTestSeed = (seed: string, settings: Optional<Settings>) => {
+  const s = merge({}, DEFAULT_SETTINGS, settings);
+  return logic(sharedMonitor, { debug: false, seed, settings: s });
 }

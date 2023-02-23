@@ -54,6 +54,16 @@ export const SETTINGS = [{
   ],
   default: 'ownDungeon'
 }, {
+  key: 'smallKeyShuffleHideout',
+  name: 'Hideout Small Key Shuffle',
+  category: 'main',
+  type: 'enum',
+  values: [
+    { value: 'ownDungeon', name: 'Own Dungeon' },
+    { value: 'anywhere', name: 'Anywhere' },
+  ],
+  default: 'ownDungeon'
+}, {
   key: 'bossKeyShuffle',
   name: 'Boss Key Shuffle',
   category: 'main',
@@ -132,7 +142,7 @@ export const SETTINGS = [{
 }, {
   key: 'erBoss',
   name: 'Boss Entrance Shuffle',
-  category: 'main',
+  category: 'entrances',
   type: 'enum',
   values: [
     { value: 'none', name: 'None' },
@@ -140,6 +150,29 @@ export const SETTINGS = [{
     { value: 'full', name: 'Full' },
   ],
   default: 'none'
+}, {
+  key: 'erDungeons',
+  name: 'Dungeon Entrance Shuffle',
+  category: 'entrances',
+  type: 'enum',
+  values: [
+    { value: 'none', name: 'None' },
+    { value: 'ownGame', name: 'Own Game' },
+    { value: 'full', name: 'Full' },
+  ],
+  default: 'none'
+}, {
+  key: 'erSpiderHouses',
+  name: 'Shuffle Spider Houses with Dungeons',
+  category: 'entrances',
+  type: 'boolean',
+  default: false
+}, {
+  key: 'erMinorDungeons',
+  name: 'Shuffle OoT Minor Dungeons with Dungeons',
+  category: 'entrances',
+  type: 'boolean',
+  default: false
 }, {
   key: 'progressiveShieldsOot',
   name: 'OoT Shields',
@@ -189,11 +222,16 @@ export const SETTINGS = [{
   type: 'boolean',
   default: false
 }, {
-  key: 'noLogic',
-  name: 'No Logic',
+  key: 'logic',
+  name: 'Logic',
   category: 'advanced',
-  type: 'boolean',
-  default: false
+  type: 'enum',
+  values: [
+    { value: 'allLocations', name: 'All Locations' },
+    { value: 'beatable', name: 'Beatable Only' },
+    { value: 'none', name: 'No Logic' },
+  ],
+  default: 'allLocations'
 }] as const;
 
 export const SETTINGS_CATEGORIES = [{
@@ -202,6 +240,9 @@ export const SETTINGS_CATEGORIES = [{
 }, {
   name: "Progressive Items",
   key: "progressive",
+}, {
+  name: "Entrances",
+  key: "entrances",
 }, {
   name: "Misc",
   key: "misc",
@@ -217,13 +258,24 @@ export const TRICKS = {
   OOT_MIDO_SKIP: "Backflip Over Mido",
   OOT_MAN_ON_ROOF: "Man on Roof with Nothing",
   OOT_BLIND_WASTELAND: "Blind Wasteland Crossing",
+  OOT_DEKU_SKIP: "Deku Tree B1 Skip",
+  OOT_DC_JUMP: "Dodongo's Cavern Upper Adult Jump",
+  OOT_FOREST_HOOK: "Forest Temple Garden Vines with Hookshot",
+  OOT_HAMMER_WALLS: "Hammer Through Walls",
+  OOT_VOLCANO_HOVERS: "Volcano Item with Hover Boots",
   OOT_NIGHT_GS: "Nighttime Gold Skulltulas without Sun's Song",
   MM_LENS: "Fewer Lens Requirements (MM)",
-  MM_GORON_BOMB_JUMP: "Bomb Jump Fences as Goron",
+  MM_PALACE_BEAN_SKIP: "Skip Planting Beans in Deku Palace",
+  MM_DARMANI_WALL: "Climb Mountain Village Wall Blind",
   MM_NO_SEAHORSE: "Pinnacle Rock without Seahorse",
   MM_ZORA_HALL_HUMAN: "Swim to Zora Hall as Human",
   MM_ICELESS_IKANA: "Climb Ikana Canyon without Ice Arrows",
   MM_ONE_MASK_STONE_TOWER: "Climb Stone Tower with One Mask",
+  MM_ISTT_EYEGORE: "Inverted Stone Tower Temple Eyegore Skips",
+  MM_SCT_NOTHING: "South Clock Town Chest with Nothing",
+  MM_GORON_BOMB_JUMP: "Bomb Jump Fences as Goron",
+  MM_BOMBER_SKIP: "Guess Bomber Code",
+  MM_CAPTAIN_SKIP: "Guess Oceanside Spider House Code",
 };
 
 export type Tricks = {[k in keyof typeof TRICKS]: boolean};
@@ -235,6 +287,8 @@ const DEFAULT_TRICKS = Object.keys(TRICKS).reduce((tricks, trick) => {
   tricks[trick as Trick] = DEFAULT_ENABLED_TRICKS.has(trick as Trick);
   return tricks;
 }, {} as Tricks);
+
+const DEFAULT_JUNK_LOCATIONS: string[] = [];
 
 type SettingDataEnumValue = {
   readonly value: string;
@@ -273,11 +327,12 @@ type SettingsBase = UnionToIntersection<SettingShapes>;
 
 export type Settings = SettingsBase & {
   startingItems: {[k: string]: number},
+  junkLocations: string[],
   tricks: Tricks,
 };
 
 export const DEFAULT_SETTINGS: Settings = { ...SETTINGS.map(s => {
   return {[s.key]: s.default};
-}).reduce((a, b) => ({...a, ...b}), {}), startingItems: {}, tricks: { ...DEFAULT_TRICKS } } as Settings;
+}).reduce((a, b) => ({...a, ...b}), {}), startingItems: {}, junkLocations: DEFAULT_JUNK_LOCATIONS, tricks: { ...DEFAULT_TRICKS } } as Settings;
 
 export const settings = (s: Partial<Settings>): Settings => ({...DEFAULT_SETTINGS, ...s});

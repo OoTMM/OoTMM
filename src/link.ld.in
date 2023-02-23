@@ -16,15 +16,15 @@ SECTIONS
 
   . = PAYLOAD_RAM;
   .text : {
-    *(.text*);
-    *(.data*);
-    *(.rodata*);
-    *(.bss*);
+    SORT(*)(.text*);
+    SORT(*)(.data*);
+    SORT(*)(.rodata*);
+    SORT(*)(.bss*);
   }
 
   . = 0x80800000;
   .patch : {
-    *(.patch);
+    SORT(*)(.patch);
   }
   /DISCARD/ : { *(.*); }
 }

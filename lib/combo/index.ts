@@ -2,14 +2,13 @@ import { Buffer } from 'buffer';
 
 import { options, OptionsInput } from './options';
 import { Generator } from './generator';
-import { MonitorCallbacks } from './monitor';
+import { Monitor, MonitorCallbacks } from './monitor';
 import { SETTINGS, DEFAULT_SETTINGS, SETTINGS_CATEGORIES, Settings, TRICKS } from './settings';
-import { createWorld } from './logic/world';
-import { alterWorld, configFromSettings } from './logic/settings';
+import { worldState } from './logic';
 import { itemName } from './names';
-import { Items } from './logic/state';
-import { addItem, isDungeonItem, isDungeonReward, isJunk, isStrayFairy, isToken } from './logic/items';
+import { addItem, isDungeonItem, isDungeonReward, isJunk, isStrayFairy, isToken, Items } from './logic/items';
 import { EXTRA_ITEMS } from './logic/solve';
+import { isShuffled } from './logic/is-shuffled';
 
 type GeneratorParams = {
   oot: Buffer,
@@ -17,6 +16,10 @@ type GeneratorParams = {
   opts?: OptionsInput,
   monitor?: MonitorCallbacks
 };
+
+type LocInfo = {
+  [k: string]: string[]
+}
 
 export const generate = (params: GeneratorParams): Generator => {
   const opts = options(params.opts || {});
@@ -27,9 +30,8 @@ export { SETTINGS, DEFAULT_SETTINGS, SETTINGS_CATEGORIES, TRICKS, itemName };
 
 export const itemPool = (aSettings: Partial<Settings>) => {
   const settings: Settings = { ...DEFAULT_SETTINGS, ...aSettings };
-  const world = createWorld(settings);
-  const config = configFromSettings(settings);
-  alterWorld(world, settings, config);
+  const monitor = new Monitor({ onLog: () => {} });
+  const { world } = worldState(monitor, settings);
 
   /* Extract relevant items from the world */
   const items: Items = {};
@@ -49,4 +51,24 @@ export const itemPool = (aSettings: Partial<Settings>) => {
     addItem(items, item);
   }
   return items;
+}
+
+export const locationList = (aSettings: Partial<Settings>) => {
+  const settings: Settings = { ...DEFAULT_SETTINGS, ...aSettings };
+  const monitor = new Monitor({ onLog: () => {} });
+  const { world, config } = worldState(monitor, settings);
+
+  // Precalculate this to avoid doing it more than once in the gui
+  const dungeonLocations = Object.values(world.dungeons).reduce((acc, x) => new Set([...acc, ...x]));
+
+  /* Everywhere below Check.type is a placeholder for Check.flags that I am going to add to the item tables. */
+  const locations: LocInfo = {};
+  for (const loc in world.checks) {
+    if (!isShuffled(settings, world, loc, dungeonLocations)) {
+      continue;
+    }
+    locations[loc] = [world.checks[loc].type];
+  }
+
+  return locations;
 }

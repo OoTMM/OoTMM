@@ -36,7 +36,6 @@
 #  include <combo/mm/actor_enfsn.h>
 # endif
 
-# include <combo/common/actor.h>
 # include <combo/common/actors/En_Item00.h>
 # include <combo/common/actor_init.h>
 # include <combo/common/actor_item_custom.h>
@@ -45,7 +44,7 @@
 
 /* Shared with assembler */
 #include <PR/gbi.h>
-
+#include <combo/common/actor.h>
 #include <combo/save.h>
 #include <combo/gi.h>
 #include <combo/items.h>
@@ -54,6 +53,7 @@
 #include <combo/shader.h>
 #include <combo/config.h>
 
+/* Boss IDs */
 #define BOSSID_GOHMA                0x00
 #define BOSSID_KING_DODONGO         0x01
 #define BOSSID_BARINADE             0x02
@@ -67,6 +67,28 @@
 #define BOSSID_GYORG                0x0a
 #define BOSSID_TWINMOLD             0x0b
 
+/* Dungeon IDs */
+/* The first values should match the bosses */
+#define DUNGEONID_DEKU_TREE                         BOSSID_GOHMA
+#define DUNGEONID_DODONGOS_CAVERN                   BOSSID_KING_DODONGO
+#define DUNGEONID_JABU_JABU                         BOSSID_BARINADE
+#define DUNGEONID_TEMPLE_FOREST                     BOSSID_PHANTOM_GANON
+#define DUNGEONID_TEMPLE_FIRE                       BOSSID_VOLVAGIA
+#define DUNGEONID_TEMPLE_WATER                      BOSSID_MORPHA
+#define DUNGEONID_TEMPLE_SHADOW                     BOSSID_BONGO_BONGO
+#define DUNGEONID_TEMPLE_SPIRIT                     BOSSID_TWINROVA
+#define DUNGEONID_TEMPLE_WOODFALL                   BOSSID_ODOLWA
+#define DUNGEONID_TEMPLE_SNOWHEAD                   BOSSID_GOHT
+#define DUNGEONID_TEMPLE_GREAT_BAY                  BOSSID_GYORG
+#define DUNGEONID_TEMPLE_STONE_TOWER_INVERTED       BOSSID_TWINMOLD
+#define DUNGEONID_TEMPLE_STONE_TOWER                0x0c
+#define DUNGEONID_SPIDER_HOUSE_SWAMP                0x0d
+#define DUNGEONID_SPIDER_HOUSE_OCEAN                0x0e
+#define DUNGEONID_BOTTOM_OF_THE_WELL                0x0f
+#define DUNGEONID_ICE_CAVERN                        0x10
+#define DUNGEONID_GERUDO_TRAINING_GROUNDS           0x11
+
+
 #if !defined(__ASSEMBLER__)
 void comboDisableInterrupts(void);
 void comboDma(void* addr, u32 cartAddr, u32 size);
@@ -78,6 +100,7 @@ typedef struct PACKED ALIGNED(4)
     u32  valid;
     u32  saveIndex;
     s32  entrance;
+    s32  shuffledEntrance;
 }
 ComboContext;
 
@@ -93,9 +116,10 @@ ComboDataHints;
 
 typedef struct PACKED ALIGNED(4)
 {
-    u8             config[0x40];
-    ComboDataHints hints;
-    u8             boss[12];
+    u8              config[0x40];
+    ComboDataHints  hints;
+    u8              boss[12];
+    u8              dungeons[18];
 }
 ComboData;
 
@@ -140,7 +164,7 @@ s16 comboOverrideEx(int type, u16 sceneId, u16 id, s16 gi, int flags);
 
 /* Text */
 int  comboMultibyteCharSize(u8 c);
-void comboTextHijackItem(GameState_Play* play, s16 gi);
+void comboTextHijackItem(GameState_Play* play, s16 gi, int count);
 void comboTextHijackItemShop(GameState_Play* play, s16 gi, s16 price, int confirm);
 
 #if defined(GAME_OOT)
@@ -164,6 +188,9 @@ void    comboObjectsGC(void);
 void*   comboGetObject(u16 objectId);
 u32     comboLoadObject(void* buffer, u16 objectId);
 void    comboLoadCustomKeep(void);
+
+/* Custom_Warp */
+void comboSpawnCustomWarps(GameState_Play*);
 
 /* Draw */
 #define DRAW_NO_PRE1    0x01
@@ -194,16 +221,17 @@ extern const u8 kMmTrade1[];
 extern const u8 kMmTrade2[];
 extern const u8 kMmTrade3[];
 
-void comboAddItemMm(s16 gi, int noEffect);
-void comboAddItemOot(s16 gi, int noEffect);
-void comboAddItemEffect(GameState_Play* play, s16 gi);
-void comboAddSmallKeyOot(u16 dungeonId);
+int comboAddItemMm(s16 gi, int noEffect);
+int comboAddItemOot(s16 gi, int noEffect);
+int comboAddItemEffect(GameState_Play* play, s16 gi);
+
+int  comboAddSmallKeyOot(u16 dungeonId);
 void comboAddBossKeyOot(u16 dungeonId);
 void comboAddCompassOot(u16 dungeonId);
 void comboAddMapOot(u16 dungeonId);
-void comboAddSmallKeyMm(u16 dungeonId);
+int  comboAddSmallKeyMm(u16 dungeonId);
 void comboAddBossKeyMm(u16 dungeonId);
-void comboAddStrayFairyMm(u16 dungeonId);
+int  comboAddStrayFairyMm(u16 dungeonId);
 void comboAddMapMm(u16 dungeonId);
 void comboAddCompassMm(u16 dungeonId);
 
@@ -321,6 +349,10 @@ void comboTriggerWarp(GameState_Play* play, int index);
 /* Menu */
 void comboMenuKeysUpdate(GameState_Play* play);
 void comboMenuKeysDraw(GameState_Play* play);
+
+#if defined(GAME_MM)
+extern int gNoTimeFlow;
+#endif
 
 #else
 # include <combo/asm.h>

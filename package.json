@@ -5,11 +5,14 @@
     "build": "ts-node -T ./lib/rollup.ts",
     "start": "ts-node -T ./lib/index.ts",
     "start:debug": "ts-node -T ./lib/index.ts --debug --config config.yml",
-    "test": "cross-env NODE_ENV=test jest"
+    "profile": "TS_NODE_TRANSPILE_ONLY=true node -r ts-node/register --prof ./lib/index.ts --debug --config config.yml && node --prof-process isolate-0x*.log > processed.log && rm -rf isolate-0x*.log",
+    "test": "cross-env NODE_ENV=test jest",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "core-js": "^3.26.1",
     "crc-32": "^1.2.2",
+    "lodash": "^4.17.21",
     "pngjs": "^6.0.0",
     "randombytes": "^2.1.0",
     "yaz0": "^2.0.5"
@@ -24,6 +27,7 @@
     "@rollup/plugin-yaml": "^4.0.1",
     "@types/glob": "^8.0.0",
     "@types/jest": "^29.2.4",
+    "@types/lodash": "^4.14.191",
     "@types/node": "^18.7.13",
     "@types/pngjs": "^6.0.1",
     "@types/randombytes": "^2.0.0",

@@ -1,4 +1,4 @@
-import { Items } from './state';
+export type Items = {[k: string]: number};
 
 export const DUNGEON_REWARDS_ORDERED = [
   'OOT_STONE_EMERALD',
@@ -212,6 +212,8 @@ export const isSong = (item: string) => !!item.match(/^(OOT|MM)_SONG_/);
 export const isCompass = (item: string) => !!item.match(/^(OOT|MM)_COMPASS_/);
 export const isMap = (item: string) => !!item.match(/^(OOT|MM)_MAP_/);
 export const isSmallKey = (item: string) => !!item.match(/^(OOT|MM)_SMALL_KEY_/);
+export const isSmallKeyHideout = (item: string) => item === 'OOT_SMALL_KEY_GF';
+export const isSmallKeyRegular = (item: string) => isSmallKey(item) && !isSmallKeyHideout(item);
 export const isGanonBossKey = (item: string) => item === 'OOT_BOSS_KEY_GANON';
 export const isBossKey = (item: string) => !!item.match(/^(OOT|MM)_BOSS_KEY_/);
 export const isRegularBossKey = (item: string) => isBossKey(item) && !isGanonBossKey(item);
@@ -227,6 +229,9 @@ export const isGoldToken = (item: string) => !!item.match(/^OOT_GS_TOKEN/);
 export const isHouseToken = (item: string) => !!item.match(/^MM_GS_TOKEN/);
 export const isToken = (item: string) => isGoldToken(item) || isHouseToken(item);
 export const isJunk = (item: string) => ITEMS_JUNK.has(item);
+export const isMasterSword = (item: string) => item === 'OOT_SWORD_MASTER';
+export const isGerudoCard = (item: string) => item === 'OOT_GERUDO_CARD';
+export const isItemImportant = (item: string) => isItemMajor(item) || isDungeonReward(item) || isToken(item) || isStrayFairy(item) || isKey(item);
 
 export const itemsArray = (items: Items) => {
   const arr: string[] = [];

@@ -28,7 +28,7 @@ const u8 kOotTradeChild[] = {
     ITEM_OOT_MASK_OF_TRUTH,
 };
 
-void comboAddSmallKeyOot(u16 dungeonId)
+int comboAddSmallKeyOot(u16 dungeonId)
 {
     s8 keyCount;
 
@@ -38,7 +38,10 @@ void comboAddSmallKeyOot(u16 dungeonId)
     else
         keyCount++;
     gOotSave.dungeonKeys[dungeonId] = keyCount;
-    gOotSave.dungeonItems[dungeonId].maxKeys++;
+    if (dungeonId == SCE_OOT_TREASURE_SHOP)
+        return 0;
+    else
+        return ++gOotSave.dungeonItems[dungeonId].maxKeys;
 }
 
 void comboAddBossKeyOot(u16 dungeonId)
@@ -176,9 +179,9 @@ static void fillBottle(u16 itemId)
     gOotSave.inventory[ITS_OOT_BOTTLE + slot] = itemId;
     for (int i = 0; i < 3; ++i)
     {
-        if (gOotSave.buttons[4 + i] == ITS_OOT_BOTTLE + slot)
+        if (gOotSave.equips.cButtonSlots[i] == ITS_OOT_BOTTLE + slot)
         {
-            gOotSave.buttons[1 + i] = itemId;
+            gOotSave.equips.buttonItems[1 + i] = itemId;
         }
     }
 }
@@ -248,6 +251,24 @@ static void addRupees(u16 count)
         gOotSave.rupees = max;
 }
 
+static void reloadSlotEquips(OotItemEquips* equips, int slot)
+{
+    for (int i = 0; i < 3; ++i)
+    {
+        if (equips->cButtonSlots[i] == slot)
+        {
+            equips->buttonItems[1 + i] = gOotSave.inventory[slot];
+        }
+    }
+}
+
+static void reloadSlot(int slot)
+{
+    reloadSlotEquips(&gOotSave.equips, slot);
+    reloadSlotEquips(&gOotSave.childEquips, slot);
+    reloadSlotEquips(&gOotSave.adultEquips, slot);
+}
+
 static void addHookshot(int level)
 {
     u16 itemId;
@@ -258,15 +279,7 @@ static void addHookshot(int level)
         itemId = ITEM_OOT_HOOKSHOT;
     gOotSave.inventory[ITS_OOT_HOOKSHOT] = itemId;
     gOotExtraItems.hookshot |= (1 << (level - 1));
-
-    /* Reload the items */
-    for (int i = 0; i < 3; ++i)
-    {
-        if (gOotSave.buttons[4 + i] == ITS_OOT_HOOKSHOT)
-        {
-            gOotSave.buttons[1 + i] = itemId;
-        }
-    }
+    reloadSlot(ITS_OOT_HOOKSHOT);
 }
 
 static void addOcarina(int level)
@@ -279,21 +292,15 @@ static void addOcarina(int level)
         itemId = ITEM_OOT_OCARINA_FAIRY;
     gOotSave.inventory[ITS_OOT_OCARINA] = itemId;
     gOotExtraItems.ocarina |= (1 << (level - 1));
-
-    /* Reload the items */
-    for (int i = 0; i < 3; ++i)
-    {
-        if (gOotSave.buttons[4 + i] == ITS_OOT_OCARINA)
-        {
-            gOotSave.buttons[1 + i] = itemId;
-        }
-    }
+    reloadSlot(ITS_OOT_OCARINA);
 }
 
-void comboAddItemOot(s16 gi, int noEffect)
+int comboAddItemOot(s16 gi, int noEffect)
 {
+    int count;
     u16 dungeonId;
 
+    count = 0;
     (void)dungeonId;
     switch (gi)
     {
@@ -567,6 +574,7 @@ void comboAddItemOot(s16 gi, int noEffect)
     case GI_OOT_GS_TOKEN:
         gOotSave.quest.goldToken = 1;
         gOotSave.goldTokens++;
+        count = gOotSave.goldTokens;
         break;
     case GI_OOT_GERUDO_CARD:
         gOotSave.quest.gerudoCard = 1;
@@ -733,31 +741,31 @@ void comboAddItemOot(s16 gi, int noEffect)
         addTradeAdult(10);
         break;
     case GI_OOT_SMALL_KEY_FOREST:
-        comboAddSmallKeyOot(SCE_OOT_TEMPLE_FOREST);
+        count = comboAddSmallKeyOot(SCE_OOT_TEMPLE_FOREST);
         break;
     case GI_OOT_SMALL_KEY_FIRE:
-        comboAddSmallKeyOot(SCE_OOT_TEMPLE_FIRE);
+        count = comboAddSmallKeyOot(SCE_OOT_TEMPLE_FIRE);
         break;
     case GI_OOT_SMALL_KEY_WATER:
-        comboAddSmallKeyOot(SCE_OOT_TEMPLE_WATER);
+        count = comboAddSmallKeyOot(SCE_OOT_TEMPLE_WATER);
         break;
     case GI_OOT_SMALL_KEY_SPIRIT:
-        comboAddSmallKeyOot(SCE_OOT_TEMPLE_SPIRIT);
+        count = comboAddSmallKeyOot(SCE_OOT_TEMPLE_SPIRIT);
         break;
     case GI_OOT_SMALL_KEY_SHADOW:
-        comboAddSmallKeyOot(SCE_OOT_TEMPLE_SHADOW);
+        count = comboAddSmallKeyOot(SCE_OOT_TEMPLE_SHADOW);
         break;
     case GI_OOT_SMALL_KEY_GANON:
-        comboAddSmallKeyOot(SCE_OOT_INSIDE_GANON_CASTLE);
+        count = comboAddSmallKeyOot(SCE_OOT_INSIDE_GANON_CASTLE);
         break;
     case GI_OOT_SMALL_KEY_BOTW:
-        comboAddSmallKeyOot(SCE_OOT_BOTTOM_OF_THE_WELL);
+        count = comboAddSmallKeyOot(SCE_OOT_BOTTOM_OF_THE_WELL);
         break;
     case GI_OOT_SMALL_KEY_GF:
-        comboAddSmallKeyOot(SCE_OOT_THIEVES_HIDEOUT);
+        count = comboAddSmallKeyOot(SCE_OOT_THIEVES_HIDEOUT);
         break;
     case GI_OOT_SMALL_KEY_GTG:
-        comboAddSmallKeyOot(SCE_OOT_GERUDO_TRAINING_GROUND);
+        count = comboAddSmallKeyOot(SCE_OOT_GERUDO_TRAINING_GROUND);
         break;
     case GI_OOT_BOSS_KEY_FOREST:
         comboAddBossKeyOot(SCE_OOT_TEMPLE_FOREST);
@@ -838,4 +846,6 @@ void comboAddItemOot(s16 gi, int noEffect)
         comboAddCompassOot(SCE_OOT_ICE_CAVERN);
         break;
     }
+
+    return count;
 }

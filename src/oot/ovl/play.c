@@ -184,11 +184,15 @@ static void endGame(void)
     }
 }
 
+static u8 sInGrotto;
+
 void hookPlay_Init(GameState_Play* play)
 {
     s32 override;
 
     /* Handle transition override */
+    if (sInGrotto)
+        gIsEntranceOverride = 0;
     if (gIsEntranceOverride)
     {
         gIsEntranceOverride = 0;
@@ -201,6 +205,7 @@ void hookPlay_Init(GameState_Play* play)
             {
                 gSave.entrance = gLastEntrance;
                 Play_Init(play);
+                gComboCtx.shuffledEntrance = 1;
                 comboGameSwitch(play, override);
                 return;
             }
@@ -208,17 +213,17 @@ void hookPlay_Init(GameState_Play* play)
     }
 
     /* Handle swordless */
-    if (gSave.currentEquipment.swords == 0 || (gSave.equipment.swords & (1 << (gSave.currentEquipment.swords - 1))) == 0)
+    if (gSave.equips.equipment.swords == 0 || (gSave.equipment.swords & (1 << (gSave.equips.equipment.swords - 1))) == 0)
     {
         /* Set swordless */
-        gSave.currentEquipment.swords = 0;
-        switch (gSave.buttons[0])
+        gSave.equips.equipment.swords = 0;
+        switch (gSave.equips.buttonItems[0])
         {
         case ITEM_OOT_KOKIRI_SWORD:
         case ITEM_OOT_MASTER_SWORD:
         case ITEM_OOT_GIANT_KNIFE:
         case ITEM_OOT_GIANT_KNIFE_BROKEN:
-            gSave.buttons[0] = 0xff;
+            gSave.equips.buttonItems[0] = ITEM_NONE;
             break;
         }
         gSave.eventsMisc[29] = 1;
@@ -243,10 +248,12 @@ void hookPlay_Init(GameState_Play* play)
 
     Play_Init(play);
     gLastEntrance = gSave.entrance;
+    sInGrotto = (play->sceneId == SCE_OOT_GROTTOS);
     comboSpawnItemGivers(play);
 
     if (gSave.entrance == 0x0530)
     {
+        gComboCtx.shuffledEntrance = 0;
         comboGameSwitch(play, -1);
         return;
     }
@@ -265,6 +272,7 @@ void hookPlay_Init(GameState_Play* play)
 #if defined(DEBUG)
     if (play->gs.input[0].current.buttons & R_TRIG)
     {
+        gComboCtx.shuffledEntrance = 0;
         comboGameSwitch(play, -1);
         return;
     }

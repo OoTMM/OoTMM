@@ -23,8 +23,11 @@ static void reloadIconsC(GameState_Play* play)
         Interface_LoadItemIconImpl(play, i);
 }
 
-void comboAddItemEffect(GameState_Play* play, s16 gi)
+int comboAddItemEffect(GameState_Play* play, s16 gi)
 {
+    int count;
+
+    count = 0;
     switch (gi)
     {
     case GI_MM_SWORD_KOKIRI:
@@ -71,12 +74,12 @@ void comboAddItemEffect(GameState_Play* play, s16 gi)
         break;
     case GI_MM_STRAY_FAIRY:
         if (play->sceneId == SCE_MM_LAUNDRY_POOL || play->sceneId == SCE_MM_CLOCK_TOWN_EAST)
-            comboAddStrayFairyMm(4);
+            count = comboAddStrayFairyMm(4);
         else
-            comboAddStrayFairyMm(gSaveContext.dungeonId);
+            count = comboAddStrayFairyMm(gSaveContext.dungeonId);
         break;
     case GI_MM_SMALL_KEY:
-        comboAddSmallKeyMm(gSaveContext.dungeonId);
+        count = comboAddSmallKeyMm(gSaveContext.dungeonId);
         break;
     case GI_MM_BOSS_KEY:
         comboAddBossKeyMm(gSaveContext.dungeonId);
@@ -97,4 +100,6 @@ void comboAddItemEffect(GameState_Play* play, s16 gi)
         reloadIconsC(play);
         break;
     }
+
+    return count;
 }

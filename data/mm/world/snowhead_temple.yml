@@ -1,7 +1,12 @@
+"Snowhead Temple":
+  dungeon: SH
+  exits:
+    "Snowhead Temple Entrance": "event(TIME_TRAVEL)"
+    "Snowhead": "true"
 "Snowhead Temple Entrance":
   dungeon: SH
   exits:
-    "Snowhead": "true"
+    "Snowhead Temple": "true"
     "Snowhead Temple Main": "has(MASK_GORON) || has(MASK_ZORA)"
 "Snowhead Temple Main":
   dungeon: SH
@@ -184,7 +189,7 @@
   boss: true
   dungeon: SH
   exits:
-    "Snowhead Temple After Boss": "event(TIME_TRAVEL) && can_use_fire_arrows"
+    "Snowhead Temple After Boss": "can_use_fire_arrows"
 "Snowhead Temple After Boss":
   boss: true
   dungeon: SH

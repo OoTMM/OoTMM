@@ -2,6 +2,11 @@
   dungeon: BotW
   exits:
     "Kakariko": "true"
+    "Bottom of the Well Main": "is_child"
+"Bottom of the Well Main":
+  dungeon: BotW
+  exits:
+    "Bottom of the Well": "true"
   locations:
     "Bottom of the Well Compass": "has_lens"
     "Bottom of the Well Under Debris": "has_explosives"

@@ -1,7 +1,12 @@
-"Ocean Spider House Front":
-  region: SPIDER_HOUSE_OCEAN
+"Ocean Spider House":
+  dungeon: OSH
   exits:
+    "Ocean Spider House Front": "event(TIME_TRAVEL)"
     "Great Bay Coast": "true"
+"Ocean Spider House Front":
+  dungeon: OSH
+  exits:
+    "Ocean Spider House": "true"
     "Ocean Spider House Back": "has_explosives && (has(HOOKSHOT) || can_goron_bomb_jump)"
   locations:
     "Ocean Spider House Wallet": "has(GS_TOKEN_OCEAN, 30)"
@@ -9,9 +14,9 @@
     "Ocean Skulltula Entrance Left Wall": "has_explosives && has(HOOKSHOT)"
     "Ocean Skulltula Entrance Web": " has_explosives && (has(HOOKSHOT) || (can_use_fire_arrows && has(MASK_ZORA)))"
 "Ocean Spider House Back":
-  region: SPIDER_HOUSE_OCEAN
+  dungeon: OSH
   exits:
-    "Ocean Spider House Front": "has(MASK_GORON) || can_play(SONG_SOARING)"
+    "Ocean Spider House": "has(MASK_GORON) || can_play(SONG_SOARING)"
   locations:
     "Ocean Skulltula 2nd Room Ceiling Edge": "has(HOOKSHOT) || has(MASK_ZORA)"
     "Ocean Skulltula 2nd Room Ceiling Plank": "has(HOOKSHOT) || has(MASK_ZORA)"
@@ -35,7 +40,7 @@
     "Ocean Skulltula Colored Skulls Behind Picture": "has(HOOKSHOT) || has(MASK_ZORA) || (has(MASK_GORON) && (has(BOW) || can_use_deku_bubble))"
     "Ocean Skulltula Colored Skulls Pot": "true"
     "Ocean Skulltula Colored Skulls Ceiling Edge": "has(HOOKSHOT) || has(MASK_ZORA)"
-    "Ocean Spider House Chest HP": "has(BOW) && has(MASK_CAPTAIN)"
+    "Ocean Spider House Chest HP": "has(BOW) && (has(MASK_CAPTAIN) || trick(MM_CAPTAIN_SKIP))"
     "Ocean Skulltula Storage Room Behind Boat": "true"
     "Ocean Skulltula Storage Room Ceiling Web": "can_use_fire_arrows && (has(HOOKSHOT) || has(MASK_ZORA))"
     "Ocean Skulltula Storage Room Behind Crate": "has(HOOKSHOT) || has(MASK_ZORA) || (has(MASK_GORON) && (has(BOW) || can_use_deku_bubble || has_explosives))"

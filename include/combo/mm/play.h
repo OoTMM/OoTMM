@@ -77,6 +77,22 @@ ASSERT_OFFSET(PauseContext, unk_000,        0x000);
 ASSERT_OFFSET(PauseContext, screenIndex,    0x204);
 _Static_assert(sizeof(PauseContext) == 0x2d0, "MM PauseContext size is wrong");
 
+typedef struct
+{
+    int unk;
+}
+GameOverContext;
+
+typedef struct
+{
+    u16  unk_00;
+    u16  sceneTimeSpeed;
+    char unk_04[0xfc];
+}
+EnvironmentContext;
+
+_Static_assert(sizeof(EnvironmentContext) == 0x100, "MM EnvironmentContext size is wrong");
+
 typedef struct PACKED ALIGNED(4) GameState_Play
 {
     GameState           gs;
@@ -95,7 +111,9 @@ typedef struct PACKED ALIGNED(4) GameState_Play
     char                unk_16938[0x000b0];
     InterfaceContext    interfaceCtx;
     PauseContext        pauseCtx;
-    char                unk_17000[0x01875];
+    GameOverContext     gameOverCtx;
+    EnvironmentContext  envCtx;
+    char                unk_17104[0x01771];
     u8                  transitionType;
     char                unk_18876[0x00004];
     u16                 nextEntrance;
@@ -107,8 +125,18 @@ typedef struct PACKED ALIGNED(4) GameState_Play
 }
 GameState_Play;
 
+typedef struct
+{
+    char unk[0x32];
+    u16  clockSpeed;
+}
+GameData;
+
+extern GameData* gGameData;
+
 ASSERT_OFFSET(GameState_Play, unk_16938,    0x16938);
 ASSERT_OFFSET(GameState_Play, interfaceCtx, 0x169e8);
+ASSERT_OFFSET(GameState_Play, envCtx,       0x17004);
 
 #define TRANS_TYPE_NONE         0x00
 #define TRANS_TYPE_NORMAL       0x14

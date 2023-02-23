@@ -37,10 +37,12 @@ static void reloadIconsC(GameState_Play* play)
         Interface_LoadItemIconImpl(play, i);
 }
 
-void comboAddItemEffect(GameState_Play* play, s16 gi)
+int comboAddItemEffect(GameState_Play* play, s16 gi)
 {
+    int count;
     u16 dungeonId;
 
+    count = 0;
     switch (gi)
     {
     case GI_OOT_RUPEE_GREEN:
@@ -81,7 +83,7 @@ void comboAddItemEffect(GameState_Play* play, s16 gi)
     case GI_OOT_SMALL_KEY:
     case GI_OOT_TC_SMALL_KEY:
         dungeonId = dungeon(play, 0);
-        comboAddSmallKeyOot(dungeonId);
+        count = comboAddSmallKeyOot(dungeonId);
         break;
     case GI_OOT_MAP:
         dungeonId = dungeon(play, 0);
@@ -110,4 +112,6 @@ void comboAddItemEffect(GameState_Play* play, s16 gi)
         reloadIconsC(play);
         break;
     }
+
+    return count;
 }

@@ -17,17 +17,22 @@ const u16 kMaxRupees[] = { 99, 200, 500 };
 
 int comboAddItem(GameState_Play* play, s16 gi)
 {
+    int count;
+    int count2;
+
     if (gi & MASK_FOREIGN_GI)
     {
-        comboAddItemForeign(gi & ~MASK_FOREIGN_GI, 1);
+        count = comboAddItemForeign(gi & ~MASK_FOREIGN_GI, 1);
     }
     else
     {
-        comboAddItemNative(gi, 0);
-        comboAddItemEffect(play, gi);
+        count = comboAddItemNative(gi, 0);
+        count2 = comboAddItemEffect(play, gi);
+        if (!count)
+            count = count2;
     }
 
-    comboTextHijackItem(play, gi);
+    comboTextHijackItem(play, gi, count);
     return -1;
 }
 

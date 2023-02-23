@@ -31,15 +31,39 @@ void Sram_AfterOpenSave(void)
     gSave.entranceIndex = DEBUG_MM_ENTRANCE;
 #endif
 
-    if (gComboCtx.valid && gComboCtx.entrance != -1)
+    if (gComboCtx.valid)
     {
-        gSave.entranceIndex = gComboCtx.entrance;
-        gComboCtx.entrance = -1;
+        if (gComboCtx.entrance != -1)
+        {
+            gSave.entranceIndex = gComboCtx.entrance;
+            gComboCtx.entrance = -1;
+        }
+
+        if (gComboCtx.shuffledEntrance)
+        {
+            if (gSave.day == 0)
+            {
+                gSave.day = 1;
+                gSave.time = 0x4001;
+            }
+            switch (gSave.entranceIndex)
+            {
+            case 0x3800:
+            case 0x8200:
+            case 0xb800:
+            case 0x6600:
+                gNoTimeFlow = 1;
+                break;
+            }
+            gComboCtx.shuffledEntrance = 0;
+        }
     }
 }
 
 void Sram_SaveEndOfCycleWrapper(GameState_Play* play)
 {
+    gNoTimeFlow = 0;
+
     Sram_SaveEndOfCycle(play);
 
     /* Not an Owl save */

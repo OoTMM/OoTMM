@@ -68,6 +68,7 @@ import worldMmWoodfallTemple from '../../data/mm/world/woodfall_temple.yml';
 import worldMmSnowheadTemple from '../../data/mm/world/snowhead_temple.yml';
 import worldMmGreatBayTemple from '../../data/mm/world/great_bay_temple.yml';
 import worldMmStoneTowerTemple from '../../data/mm/world/stone_tower_temple.yml';
+import worldMmStoneTowerTempleInverted from '../../data/mm/world/stone_tower_temple_inverted.yml';
 import worldMmPirateFortress from '../../data/mm/world/pirate_fortress.yml';
 import worldMmAncientCastleOfIkana from '../../data/mm/world/ancient_castle_of_ikana.yml';
 import worldMmBeneathTheWell from '../../data/mm/world/beneath_the_well.yml';
@@ -80,6 +81,7 @@ const worldMm = {
   ...worldMmSnowheadTemple,
   ...worldMmGreatBayTemple,
   ...worldMmStoneTowerTemple,
+  ...worldMmStoneTowerTempleInverted,
   ...worldMmPirateFortress,
   ...worldMmAncientCastleOfIkana,
   ...worldMmBeneathTheWell,

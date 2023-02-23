@@ -384,6 +384,37 @@ void comboTextAppendNum(char** b, int num)
     }
 }
 
+static void comboTextAppendOrd(char** b, int num)
+{
+    const char* suffix;
+
+    if (num >= 11 && num <= 13)
+    {
+        suffix = "th";
+    }
+    else
+    {
+        switch (num % 10)
+        {
+        case 1:
+            suffix = "st";
+            break;
+        case 2:
+            suffix = "nd";
+            break;
+        case 3:
+            suffix = "rd";
+            break;
+        default:
+            suffix = "th";
+            break;
+        }
+    }
+
+    comboTextAppendNum(b, num);
+    comboTextAppendStr(b, suffix);
+}
+
 void comboTextAppendItemName(char** b, s16 gi, int flags)
 {
     char* start;
@@ -538,9 +569,10 @@ void comboTextAppendCheckName(char** b, u8 checkId)
     comboTextAppendClearColor(b);
 }
 
-void comboTextHijackItem(GameState_Play* play, s16 gi)
+void comboTextHijackItem(GameState_Play* play, s16 gi, int count)
 {
     char* b;
+    char* start;
 
 #if defined(GAME_OOT)
     b = play->msgCtx.textBuffer;
@@ -548,10 +580,19 @@ void comboTextHijackItem(GameState_Play* play, s16 gi)
     b = play->textBuffer;
 #endif
     comboTextAppendHeader(&b);
+    start = b;
     comboTextAppendStr(&b, "You got ");
     comboTextAppendItemName(&b, gi, 0);
     comboTextAppendStr(&b, "!");
+    if (count)
+    {
+        comboTextAppendStr(&b, TEXT_NL "This is your " TEXT_COLOR_RED);
+        comboTextAppendOrd(&b, count);
+        comboTextAppendClearColor(&b);
+        comboTextAppendStr(&b, ".");
+    }
     comboTextAppendStr(&b, TEXT_END);
+    comboTextAutoLineBreaks(start);
 }
 
 static int isSoldOut(s16 gi)

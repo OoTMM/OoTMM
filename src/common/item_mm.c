@@ -25,7 +25,7 @@ const u8 kMmTrade3[] = {
     ITEM_MM_PENDANT_OF_MEMORIES,
 };
 
-void comboAddSmallKeyMm(u16 dungeonId)
+int comboAddSmallKeyMm(u16 dungeonId)
 {
     s8 keyCount;
 
@@ -36,6 +36,8 @@ void comboAddSmallKeyMm(u16 dungeonId)
         keyCount++;
     gMmSave.inventory.dungeonKeys[dungeonId] = keyCount;
     gMmSave.inventory.dungeonItems[dungeonId].maxKeys++;
+
+    return gMmSave.inventory.dungeonItems[dungeonId].maxKeys;
 }
 
 void comboAddBossKeyMm(u16 dungeonId)
@@ -43,12 +45,18 @@ void comboAddBossKeyMm(u16 dungeonId)
     gMmSave.inventory.dungeonItems[dungeonId].bossKey = 1;
 }
 
-void comboAddStrayFairyMm(u16 dungeonId)
+int comboAddStrayFairyMm(u16 dungeonId)
 {
     if (dungeonId == 4)
+    {
         MM_SET_EVENT_WEEK(EV_MM_WEEK_TOWN_FAIRY);
+        return 0;
+    }
     else
+    {
         gMmSave.inventory.strayFairies[dungeonId]++;
+        return gMmSave.inventory.strayFairies[dungeonId];
+    }
 }
 
 void comboAddMapMm(u16 dungeonId)
@@ -246,8 +254,11 @@ static void refillMagic(int level)
     gMmSave.playerData.magic = level * 0x30;
 }
 
-void comboAddItemMm(s16 gi, int noEffect)
+int comboAddItemMm(s16 gi, int noEffect)
 {
+    int count;
+
+    count = 0;
     switch (gi)
     {
     case GI_MM_OCARINA_OF_TIME:
@@ -517,10 +528,10 @@ void comboAddItemMm(s16 gi, int noEffect)
         gMmSave.inventory.upgrades.wallet = 2;
         break;
     case GI_MM_GS_TOKEN_SWAMP:
-        gMmSave.skullCountSwamp++;
+        count = ++gMmSave.skullCountSwamp;
         break;
     case GI_MM_GS_TOKEN_OCEAN:
-        gMmSave.skullCountOcean++;
+        count = ++gMmSave.skullCountOcean;
         break;
     case GI_MM_SONG_AWAKENING:
         gMmSave.inventory.questItems.songAwakening = 1;
@@ -614,16 +625,16 @@ void comboAddItemMm(s16 gi, int noEffect)
             addRupees(200);
         break;
     case GI_MM_SMALL_KEY_WF:
-        comboAddSmallKeyMm(0);
+        count = comboAddSmallKeyMm(0);
         break;
     case GI_MM_SMALL_KEY_SH:
-        comboAddSmallKeyMm(1);
+        count = comboAddSmallKeyMm(1);
         break;
     case GI_MM_SMALL_KEY_GB:
-        comboAddSmallKeyMm(2);
+        count = comboAddSmallKeyMm(2);
         break;
     case GI_MM_SMALL_KEY_ST:
-        comboAddSmallKeyMm(3);
+        count = comboAddSmallKeyMm(3);
         break;
     case GI_MM_BOSS_KEY_WF:
         comboAddBossKeyMm(0);
@@ -638,19 +649,19 @@ void comboAddItemMm(s16 gi, int noEffect)
         comboAddBossKeyMm(3);
         break;
     case GI_MM_STRAY_FAIRY_WF:
-        comboAddStrayFairyMm(0);
+        count = comboAddStrayFairyMm(0);
         break;
     case GI_MM_STRAY_FAIRY_SH:
-        comboAddStrayFairyMm(1);
+        count = comboAddStrayFairyMm(1);
         break;
     case GI_MM_STRAY_FAIRY_GB:
-        comboAddStrayFairyMm(2);
+        count = comboAddStrayFairyMm(2);
         break;
     case GI_MM_STRAY_FAIRY_ST:
-        comboAddStrayFairyMm(3);
+        count = comboAddStrayFairyMm(3);
         break;
     case GI_MM_STRAY_FAIRY_TOWN:
-        comboAddStrayFairyMm(4);
+        count = comboAddStrayFairyMm(4);
         break;
     case GI_MM_DEFENSE_UPGRADE:
         gMmSave.playerData.doubleDefense = 1;
@@ -686,4 +697,6 @@ void comboAddItemMm(s16 gi, int noEffect)
         comboAddCompassMm(3);
         break;
     }
+
+    return count;
 }

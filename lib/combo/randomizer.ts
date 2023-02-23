@@ -8,7 +8,7 @@ import { Options } from './options';
 import { Settings } from './settings';
 import { HintGossip, Hints } from './logic/hints';
 import { Monitor } from './monitor';
-import { isDungeonStrayFairy, isGanonBossKey, isMap, isCompass, isRegularBossKey, isSmallKey, isTownStrayFairy } from './logic/items';
+import { isDungeonStrayFairy, isGanonBossKey, isMap, isCompass, isRegularBossKey, isSmallKeyRegular, isTownStrayFairy, isSmallKeyHideout } from './logic/items';
 import { gameId } from './util';
 import { EntranceShuffleResult } from './logic/entrance';
 
@@ -46,7 +46,9 @@ const SUBSTITUTIONS: {[k: string]: string} = {
 
 const gi = (settings: Settings, game: Game, item: string, generic: boolean) => {
   if (generic) {
-    if (isSmallKey(item) && settings.smallKeyShuffle === 'ownDungeon' && settings.erBoss === 'none') {
+    if (isSmallKeyHideout(item) && settings.smallKeyShuffleHideout !== 'anywhere') {
+      item = gameId(game, 'SMALL_KEY', '_');
+    } else if (isSmallKeyRegular(item) && settings.smallKeyShuffle === 'ownDungeon' && settings.erBoss === 'none') {
       item = gameId(game, 'SMALL_KEY', '_');
     } else if (isGanonBossKey(item) && settings.ganonBossKey !== 'anywhere') {
       item = gameId(game, 'BOSS_KEY', '_');
@@ -140,7 +142,10 @@ const toU32Buffer = (data: number[]) => {
 
 const gameChecks = (settings: Settings, game: Game, logic: LogicResult): Buffer => {
   const buf: number[] = [];
-  for (const c of logic.items) {
+  for (const loc in logic.world.checks) {
+    const c = logic.world.checks[loc];
+    const item = logic.items[loc];
+
     if (c.game !== game) {
       continue;
     }
@@ -165,8 +170,8 @@ const gameChecks = (settings: Settings, game: Game, logic: LogicResult): Buffer 
       break;
     }
     const key = (sceneId << 8) | id;
-    const item = gi(settings, game, c.item, true);
-    buf.push(key, item);
+    const itemGi = gi(settings, game, item, true);
+    buf.push(key, itemGi);
   }
   return toU16Buffer(buf);
 };
@@ -308,13 +313,15 @@ export const randomizerHints = (logic: LogicResult): Buffer => {
   return Buffer.concat(buffers);
 };
 
-const randomizerBlueWarps = (logic: LogicResult): Buffer => toU8Buffer(logic.entrances.blueWarps);
+const randomizerBoss = (logic: LogicResult): Buffer => toU8Buffer(logic.entrances.boss);
+const randomizerDungeons = (logic: LogicResult): Buffer => toU8Buffer(logic.entrances.dungeons);
 
 export const randomizerData = (logic: LogicResult, options: Options): Buffer => {
   const buffers = [];
   buffers.push(randomizerConfig(logic.config));
   buffers.push(randomizerHints(logic));
-  buffers.push(randomizerBlueWarps(logic));
+  buffers.push(randomizerBoss(logic));
+  buffers.push(randomizerDungeons(logic));
   return Buffer.concat(buffers);
 };
 

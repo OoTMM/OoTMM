@@ -1,16 +1,20 @@
 #include <combo.h>
 
+int gNoTimeFlow;
+
 static void debugCheat(GameState_Play* play)
 {
 #if defined(DEBUG)
+    gMiscFlags.erSpring = 1;
+    gMiscFlags.erSwampClear = 1;
+    gMiscFlags.erCoastClear = 1;
     /*if (play->gs.input[0].current.buttons & 0x20)*/
     {
-        gMmExtraBoss.boss = 0xff;
-
         gSave.itemEquips.sword = 1;
         gSave.itemEquips.shield = 2;
         gMmExtraFlags2.progressiveShield = 1;
         gSave.itemEquips.buttonItems[0][0] = ITEM_MM_SWORD_KOKIRI;
+        gSave.inventory.items[ITS_MM_STICKS] = ITEM_MM_STICK;
         gSave.inventory.items[ITS_MM_OCARINA] = ITEM_MM_OCARINA_OF_TIME;
         gSave.inventory.items[ITS_MM_MASK_DEKU] = ITEM_MM_MASK_DEKU;
         gSave.inventory.items[ITS_MM_MASK_ZORA] = ITEM_MM_MASK_ZORA;
@@ -38,6 +42,7 @@ static void debugCheat(GameState_Play* play)
         gMmSave.playerData.magicAcquired = 1;
         gSaveContext.magicTarget = 0x30;
         gSave.inventory.items[ITS_MM_MASK_GORON] = ITEM_MM_MASK_GORON;
+        gSave.inventory.ammo[ITS_MM_STICKS] = 10;
         gSave.inventory.ammo[ITS_MM_BOW] = 50;
         gSave.inventory.ammo[ITS_MM_BOMBS] = 40;
         gSave.inventory.items[ITS_MM_ARROW_FIRE] = ITEM_MM_ARROW_FIRE;
@@ -48,7 +53,7 @@ static void debugCheat(GameState_Play* play)
 
         gSave.inventory.items[ITS_MM_KEG] = ITEM_MM_POWDER_KEG;
         gSave.inventory.items[ITS_MM_MASK_CAPTAIN] = ITEM_MM_MASK_CAPTAIN;
-        //gSave.playerData.healthCapacity = 0x10 * 10;
+        gSave.playerData.healthCapacity = 0x10 * 10;
         gSave.playerData.health = gSave.playerData.healthCapacity;
 
         gSave.inventory.items[ITS_MM_TRADE1] = ITEM_MM_DEED_LAND;
@@ -76,6 +81,7 @@ static void debugCheat(GameState_Play* play)
 
         //gSave.skullCountOcean = 0x10;
     }
+
 #endif
 }
 
@@ -139,6 +145,13 @@ void hookPlay_Init(GameState_Play* play)
     Play_Init(play);
     gLastEntrance = gSave.entranceIndex;
     comboSpawnItemGivers(play);
+    comboSpawnCustomWarps(play);
+
+    if (gNoTimeFlow)
+    {
+        play->envCtx.sceneTimeSpeed = 0;
+        gGameData->clockSpeed = 0;
+    }
 
     if (isEndOfGame)
     {

@@ -1,7 +1,12 @@
-"Woodfall Temple Entrance":
+"Woodfall Temple":
   dungeon: WF
   exits:
     "Woodfall Front of Temple": "true"
+    "Woodfall Temple Entrance": "event(TIME_TRAVEL)"
+"Woodfall Temple Entrance":
+  dungeon: WF
+  exits:
+    "Woodfall Temple": "true"
     "Woodfall Temple Main": "has(MASK_DEKU) || has(HOOKSHOT)"
   locations:
     "Woodfall Temple Entrance Chest": "has(MASK_DEKU) || has(HOOKSHOT)"
@@ -9,10 +14,10 @@
 "Woodfall Temple Main":
   dungeon: WF
   exits:
-    "Woodfall Temple Entrance": "true"
+    "Woodfall Temple": "true"
     "Woodfall Temple Water Room": "true"
     "Woodfall Temple Maze": "has(SMALL_KEY_WF, 1)"
-    "Woodfall Temple Main Ledge": "event(WOODFALL_TEMPLE_MAIN_FLOWER) || event(WOODFALL_TEMPLE_MAIN_LADDER)"
+    "Woodfall Temple Main Ledge": "event(WOODFALL_TEMPLE_MAIN_FLOWER) || event(WOODFALL_TEMPLE_MAIN_LADDER) || has(HOOKSHOT)"
   events:
     WOODFALL_TEMPLE_MAIN_FLOWER: "can_use_fire_arrows"
   locations:
@@ -115,7 +120,7 @@
   boss: true
   dungeon: WF
   exits:
-    "Woodfall Temple After Boss": "event(TIME_TRAVEL) && (has(MASK_FIERCE_DEITY) || (has(BOW) && has_weapon))"
+    "Woodfall Temple After Boss": "(has(MASK_FIERCE_DEITY) || (has(BOW) && has_weapon))"
 "Woodfall Temple After Boss":
   boss: true
   dungeon: WF

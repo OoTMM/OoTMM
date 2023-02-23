@@ -5,8 +5,22 @@ import { Hints } from './hints';
 import { ItemPlacement } from './solve';
 import { World } from './world';
 import { itemName } from '../names';
+import { Monitor } from '../monitor';
+import { Analysis } from './analysis';
+import { regionName } from '../regions';
+import { isShuffled } from './is-shuffled'
 
 const VERSION = process.env.VERSION || 'XXX';
+
+const spoilerSectionHeader = (buffer: string[]) => {
+  const lineLength = 75;
+  const delimiter = '=';
+  let line = '';
+  for (let x=0; x<lineLength; x++) {
+    line += delimiter;
+  }
+  buffer.push(line);
+}
 
 const spoilerHeader = (buffer: string[], seed: string) => {
   buffer.push(`Seed: ${seed}`);
@@ -17,7 +31,7 @@ const spoilerHeader = (buffer: string[], seed: string) => {
 const spoilerSettings = (buffer: string[], settings: Settings) => {
   buffer.push('Settings');
   for (const s in settings) {
-    if (s === 'startingItems' || s === 'tricks') {
+    if (s === 'startingItems' || s === 'tricks' || s === 'junkLocations') {
       continue;
     }
     const v = (settings as any)[s];
@@ -47,6 +61,18 @@ const spoilerStartingItems = (buffer: string[], startingItems: {[k: string]: num
   for (const item in startingItems) {
     const count = startingItems[item];
     buffer.push(`  ${item}: ${count}`);
+  }
+  buffer.push('');
+};
+
+const spoilerJunkLocations = (buffer: string[], junkLocations: string[]) => {
+  if (junkLocations.length === 0) {
+    return;
+  }
+
+  buffer.push('Junk Locations');
+  for (const location of junkLocations) {
+    buffer.push(`  ${location}`);
   }
   buffer.push('');
 };
@@ -97,36 +123,67 @@ const spoilerHints = (buffer: string[], hints: Hints, placement: ItemPlacement) 
   buffer.push('');
 };
 
-const spoilerRaw = (buffer: string[], placement: ItemPlacement) => {
-  for (const loc in placement) {
-    buffer.push(`${loc}: ${itemName(placement[loc])}`);
-  }
-  buffer.push('');
+const spoilerRaw = (buffer: string[], settings: Settings, world: World, placement: ItemPlacement) => {
+  spoilerSectionHeader(buffer);
+  buffer.push('Location List');
+  const regionNames = new Set(Object.values(world.regions));
+  const dungeonLocations = Object.values(world.dungeons).reduce((acc, x) => new Set([...acc, ...x]));
+  regionNames.forEach(region => {
+    const regionalLocations = Object.keys(world.regions)
+      .filter(location => world.regions[location] === region)
+      .filter(location => isShuffled(settings, world, location, dungeonLocations))
+      .map(loc => `    ${loc}: ${itemName(placement[loc])}`);
+    buffer.push(`  ${regionName(region)}:`);
+    buffer.push(regionalLocations.join('\n'));
+    buffer.push('')
+    }
+  )
 };
 
 const spoilerSpheres = (buffer: string[], world: World, placement: ItemPlacement, spheres: string[][]) => {
+  spoilerSectionHeader(buffer);
+  buffer.push('Spheres');
   for (const i in spheres) {
-    buffer.push(`Sphere ${i}`);
+    buffer.push(`  Sphere ${i}`);
     const sphere = spheres[i];
     for (const loc of sphere) {
-      buffer.push(`  ${loc}: ${itemName(placement[loc])}`);
+      buffer.push(`    ${loc}: ${itemName(placement[loc])}`);
     }
     buffer.push('');
   }
 };
 
-export const spoiler = (world: World, placement: ItemPlacement, spheres: string[][], opts: Options, hints: Hints, entrances: EntranceShuffleResult) => {
-  const buffer: string[] = [];
-  spoilerHeader(buffer, opts.seed);
-  spoilerSettings(buffer, opts.settings);
-  spoilerTricks(buffer, opts.settings.tricks);
-  spoilerStartingItems(buffer, opts.settings.startingItems);
-  spoilerEntrances(buffer, entrances);
-  spoilerFoolish(buffer, hints.foolish);
-  spoilerHints(buffer, hints, placement);
-  if (!opts.settings.noLogic) {
-    spoilerSpheres(buffer, world, placement, spheres);
+export class LogicPassSpoiler {
+  constructor(
+    private readonly state: {
+      world: World,
+      items: ItemPlacement,
+      analysis: Analysis,
+      opts: Options,
+      hints: Hints,
+      entrances: EntranceShuffleResult,
+      monitor: Monitor,
+    }
+  ) {
   }
-  spoilerRaw(buffer, placement);
-  return buffer.join("\n");
-};
+
+  run() {
+    this.state.monitor.log('Logic: Spoiler');
+
+    const buffer: string[] = [];
+    spoilerHeader(buffer, this.state.opts.seed);
+    spoilerSettings(buffer, this.state.opts.settings);
+    spoilerTricks(buffer, this.state.opts.settings.tricks);
+    spoilerStartingItems(buffer, this.state.opts.settings.startingItems);
+    spoilerJunkLocations(buffer, this.state.opts.settings.junkLocations);
+    spoilerEntrances(buffer, this.state.entrances);
+    spoilerFoolish(buffer, this.state.hints.foolish);
+    spoilerHints(buffer, this.state.hints, this.state.items);
+    if (this.state.opts.settings.logic !== 'none') {
+      spoilerSpheres(buffer, this.state.world, this.state.items, this.state.analysis.spheres);
+    }
+    spoilerRaw(buffer, this.state.opts.settings, this.state.world, this.state.items);
+    const log = buffer.join("\n");
+    return { log };
+  };
+}

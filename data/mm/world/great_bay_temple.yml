@@ -1,7 +1,12 @@
+"Great Bay Temple":
+  dungeon: GB
+  exits:
+    "Great Bay Temple Entrance": "event(TIME_TRAVEL)"
+    "Zora Cape Peninsula": "has(HOOKSHOT)"
 "Great Bay Temple Entrance":
   dungeon: GB
   exits:
-    "Zora Cape Peninsula": "has(HOOKSHOT)"
+    "Great Bay Temple Entrance": "true"
     "Great Bay Temple Water Wheel": "true"
   locations:
     "Great Bay Temple Entrance Chest": "true"
@@ -115,7 +120,7 @@
   boss: true
   dungeon: GB
   exits:
-    "Great Bay Temple After Boss": "event(TIME_TRAVEL) && (has(MAGIC_UPGRADE) && (has(MASK_ZORA) || has(MASK_FIERCE_DEITY)) && has(BOW))"
+    "Great Bay Temple After Boss": "(has(MAGIC_UPGRADE) && (has(MASK_ZORA) || has(MASK_FIERCE_DEITY)) && has(BOW))"
 "Great Bay Temple After Boss":
   boss: true
   dungeon: GB

@@ -1,4 +1,4 @@
-"Shadow Temple Entrance":
+"Shadow Temple":
   dungeon: Shadow
   exits:
     "Graveyard Upper": "true"

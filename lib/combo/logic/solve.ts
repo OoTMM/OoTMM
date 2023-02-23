@@ -1,12 +1,12 @@
 import { GAMES } from '../config';
 import { Random, sample, shuffle } from '../random';
 import { gameId } from '../util';
-import { pathfind, Reachable } from './pathfind';
-import { Items } from './state';
+import { Pathfinder, PathfinderState } from './pathfind';
 import { World } from './world';
 import { LogicSeedError } from './error';
-import { Options } from '../options';
-import { addItem, combinedItems, itemsArray, removeItem, ITEMS_REQUIRED, isDungeonReward, isGoldToken, isHouseToken, isKey, isStrayFairy, isSmallKey, isGanonBossKey, isRegularBossKey, isTownStrayFairy, isDungeonStrayFairy, isSong, isJunk, isMapCompass } from './items';
+import { Items, addItem, combinedItems, itemsArray, removeItem, ITEMS_REQUIRED, isDungeonReward, isGoldToken, isHouseToken, isKey, isStrayFairy, isSmallKey, isGanonBossKey, isRegularBossKey, isTownStrayFairy, isDungeonStrayFairy, isSong, isJunk, isMapCompass, isSmallKeyRegular, isSmallKeyHideout } from './items';
+import { Settings } from '../settings';
+import { Monitor } from '../monitor';
 
 export const EXTRA_ITEMS = [
   'OOT_MASK_SKULL',
@@ -57,51 +57,87 @@ const maxRequired = (pools: ItemPools, item: string, count: number) => {
   pools.nice[item] = extra;
 };
 
-class Solver {
-  private placement: ItemPlacement = {};
-  private items: Items;
-  private reachable: Reachable;
-  private pools: ItemPools;
-  private reachedLocations = new Set<string>();
-  private fixedLocations = new Set<string>();
+export class LogicPassSolver {
+  private items!: ItemPlacement;
+  private pathfinder!: Pathfinder;
+  private pathfinderState!: PathfinderState;
+  private pools!: ItemPools;
+  private junkLocations!: Set<string>;
 
   constructor(
-    private opts: Options,
-    private world: World,
-    private random: Random,
+    private readonly state: {
+      world: World,
+      settings: Settings,
+      random: Random,
+      monitor: Monitor,
+    }
   ) {
-    this.items = { ...opts.settings.startingItems };
+    this.pathfinder = new Pathfinder(this.state.world, this.state.settings);
+  }
+
+  run() {
+    let error: any = null;
+    for (let i = 0; i < 100; ++i) {
+      try {
+        this.state.monitor.log(`Logic: Solver (attempt ${i + 1})`);
+        const placement = this.solve();
+        return { items: placement };
+      } catch (e) {
+        if (!(e instanceof LogicSeedError)) {
+          throw e;
+        }
+        error = e;
+      }
+    }
+    if (error) {
+      throw error;
+    }
+  }
+
+  private initSolver() {
+    this.items = {};
+    this.junkLocations = new Set<string>(this.state.settings.junkLocations);
+    this.pools = this.makeItemPools();
+    this.pathfinderState = this.pathfinder.run(null);
+  }
+
+  private solve() {
+    this.initSolver();
+    const checksCount = Object.keys(this.state.world.checks).length;
+
+    /* Place junk into junkLocations */
+    this.placeJunkLocations();
+
+    /* Place items fixed to default */
     this.fixTokens();
     this.fixFairies();
     this.fixLocations();
-    this.pools = this.makeItemPools();
-    if (this.opts.settings.noLogic) {
-      const allLocations = new Set<string>(Object.keys(this.world.checks));
-      this.reachable = { events: new Set<string>, areas: { child: new Set<string>(), adult: new Set<string>() }, locations: allLocations, gossip: new Set<string>() };
-    } else {
-      this.reachable = pathfind(this.world, {}, false);
-    }
-    this.propagate();
-  }
-
-  solve() {
-    const checksCount = Object.keys(this.world.checks).length;
-
-    /* Place the required reward items */
-    if (this.opts.settings.dungeonRewardShuffle === 'dungeonBlueWarps') {
-      this.fixRewards();
-    }
 
     /* Place songs */
     this.fixSongs();
 
+    /* Place the required reward items */
+    if (this.state.settings.dungeonRewardShuffle === 'dungeonBlueWarps') {
+      this.fixRewards();
+    }
+
     /* Handle dungeon items */
-    for (const dungeon in this.world.dungeons) {
+    for (const dungeon in this.state.world.dungeons) {
       this.fixDungeon(dungeon);
     }
 
+    /* Place required items */
     for (;;) {
-      if (this.reachable.locations.size === checksCount) {
+      /* Pathfind */
+      this.pathfinderState = this.pathfinder.run(this.pathfinderState, { recursive: true, items: this.items });
+
+      /* Stop cond */
+      if (this.state.settings.logic === 'beatable') {
+        if (this.pathfinderState.goal) {
+          break;
+        }
+      }
+      if (this.pathfinderState.locations.size === checksCount) {
         break;
       }
 
@@ -112,36 +148,40 @@ class Solver {
     /* At this point we have a beatable game */
     this.fill();
 
-    return this.placement;
+    return this.items;
   }
 
   private fixLocations() {
-    if (!this.opts.settings.shuffleGerudoCard) {
-      this.fixedLocations.add('OOT Gerudo Member Card');
+    if (!this.state.settings.shuffleGerudoCard) {
+      const location = 'OOT Gerudo Member Card';
+      const item = this.state.world.checks[location].item;
+      this.place(location, item);
+      removeItemPools(this.pools, item);
     }
 
-    if (!this.opts.settings.shuffleMasterSword) {
-      this.fixedLocations.add('OOT Temple of Time Master Sword');
+    if (!this.state.settings.shuffleMasterSword) {
+      const location = 'OOT Temple of Time Master Sword';
+      const item = this.state.world.checks[location].item;
+      this.place(location, item);
+      removeItemPools(this.pools, item);
     }
 
-    if (this.opts.settings.ganonBossKey === 'vanilla') {
-      this.fixedLocations.add('OOT Ganon Castle Boss Key');
+    if (this.state.settings.ganonBossKey === 'vanilla') {
+      const location = 'OOT Ganon Castle Boss Key';
+      const item = this.state.world.checks[location].item;
+      this.place(location, item);
+      removeItemPools(this.pools, item);
     }
   }
 
   private makeItemPools() {
     const pools: ItemPools = { required: {}, nice: {}, junk: {} };
 
-    for (const location in this.world.checks) {
-      const check = this.world.checks[location];
+    for (const location in this.state.world.checks) {
+      const check = this.state.world.checks[location];
       const { item } = check;
 
-      if (this.placement[location]) {
-        continue;
-      }
-
-      if (this.fixedLocations.has(location)) {
-        this.place(location, item);
+      if (this.items[location]) {
         continue;
       }
 
@@ -159,7 +199,7 @@ class Solver {
       this.insertItem(pools, item);
     }
 
-    if (this.opts.settings.progressiveSwordsOot === 'progressive') {
+    if (this.state.settings.progressiveSwordsOot === 'progressive') {
       maxRequired(pools, 'OOT_SWORD', 2);
     }
     maxRequired(pools, 'OOT_WALLET', 1);
@@ -175,8 +215,8 @@ class Solver {
     maxRequired(pools, 'MM_BOW', 1);
     maxRequired(pools, 'MM_MAGIC_UPGRADE', 1);
 
-    for (const item in this.opts.settings.startingItems) {
-      const count = this.opts.settings.startingItems[item];
+    for (const item in this.state.settings.startingItems) {
+      const count = this.state.settings.startingItems[item];
       for (let i = 0; i < count; ++i) {
         removeItemPools(pools, item);
         let junk = 'OOT_RUPEE_BLUE';
@@ -191,18 +231,18 @@ class Solver {
   };
 
   private insertItem(pools: ItemPools, item: string) {
-    const junkItem = sample(this.random, itemsArray(pools.junk));
+    const junkItem = sample(this.state.random, itemsArray(pools.junk));
     removeItem(pools.junk, junkItem);
     addItem(pools.required, item);
   }
 
   private goldTokenLocations() {
     const locations = new Set<string>();
-    const setting = this.opts.settings.goldSkulltulaTokens;
+    const setting = this.state.settings.goldSkulltulaTokens;
     const shuffleInDungeons = ['dungeons', 'all'].includes(setting);
     const shuffleInOverworld = ['overworld', 'all'].includes(setting);
-    const skullLocations = Object.keys(this.world.checks).filter(x => isGoldToken(this.world.checks[x].item));
-    const dungeonLocations = Object.values(this.world.dungeons).reduce((acc, x) => new Set([...acc, ...x]));
+    const skullLocations = Object.keys(this.state.world.checks).filter(x => isGoldToken(this.state.world.checks[x].item));
+    const dungeonLocations = Object.values(this.state.world.dungeons).reduce((acc, x) => new Set([...acc, ...x]));
 
     for (const location of skullLocations) {
       const isDungeon = dungeonLocations.has(location);
@@ -216,8 +256,8 @@ class Solver {
 
   private houseTokenLocations() {
     const locations = new Set<string>();
-    for (const location in this.world.checks) {
-      const { item } = this.world.checks[location];
+    for (const location in this.state.world.checks) {
+      const { item } = this.state.world.checks[location];
       if (isHouseToken(item)) {
         locations.add(location);
       }
@@ -226,14 +266,16 @@ class Solver {
   }
 
   private fixCrossTokens(gs: Set<string>, house: Set<string>) {
-    if (this.opts.settings.housesSkulltulaTokens !== 'cross') {
+    if (this.state.settings.housesSkulltulaTokens !== 'cross') {
       return;
     }
 
     const locations = new Set([...gs, ...house]);
-    const pool = shuffle(this.random, Array.from(locations).map(loc => this.world.checks[loc].item));
+    const pool = shuffle(this.state.random, Array.from(locations).map(loc => this.state.world.checks[loc].item));
     for (const location of locations) {
-      this.place(location, pool.pop()!);
+      const item = pool.pop();
+      this.place(location, item!);
+      removeItemPools(this.pools, item!);
     }
   }
 
@@ -246,34 +288,41 @@ class Solver {
 
     /* Fix the non-shuffled GS */
     for (const location of gsLocations) {
-      if (!this.placement[location]) {
-        this.place(location, this.world.checks[location].item);
+      if (!this.items[location]) {
+        const item = this.state.world.checks[location].item;
+        this.place(location, item);
+        removeItemPools(this.pools, item);
       }
     }
 
     /* Fix the non-shuffled house tokens */
-    if (this.opts.settings.housesSkulltulaTokens !== 'all') {
+    if (this.state.settings.housesSkulltulaTokens !== 'all') {
       for (const location of houseLocations) {
-        if (!this.placement[location]) {
-          this.place(location, this.world.checks[location].item);
+        if (!this.items[location]) {
+          const item = this.state.world.checks[location].item;
+          this.place(location, item);
+          removeItemPools(this.pools, item);
         }
       }
     }
   }
 
   private fixFairies() {
-    for (const location in this.world.checks) {
-      const check = this.world.checks[location];
-      if (isTownStrayFairy(check.item) && this.opts.settings.townFairyShuffle === 'vanilla') {
-        this.fixedLocations.add(location);
+    for (const location in this.state.world.checks) {
+      const check = this.state.world.checks[location];
+      if (isTownStrayFairy(check.item) && this.state.settings.townFairyShuffle === 'vanilla') {
+        this.place(location, check.item);
+        removeItemPools(this.pools, check.item);
       } else if (isDungeonStrayFairy(check.item)) {
         if (check.type === 'sf') {
-          if (this.opts.settings.strayFairyShuffle !== 'anywhere' && this.opts.settings.strayFairyShuffle !== 'ownDungeon') {
-            this.fixedLocations.add(location);
+          if (this.state.settings.strayFairyShuffle !== 'anywhere' && this.state.settings.strayFairyShuffle !== 'ownDungeon') {
+            this.place(location, check.item);
+            removeItemPools(this.pools, check.item);
           }
         } else {
-          if (this.opts.settings.strayFairyShuffle === 'vanilla') {
-            this.fixedLocations.add(location);
+          if (this.state.settings.strayFairyShuffle === 'vanilla') {
+            this.place(location, check.item);
+            removeItemPools(this.pools, check.item);
           }
         }
       }
@@ -284,15 +333,15 @@ class Solver {
     let rewards: string[] = [];
     const locations: string[] = [];
 
-    for (const location in this.world.checks) {
-      const item = this.world.checks[location].item;
+    for (const location in this.state.world.checks) {
+      const item = this.state.world.checks[location].item;
       if (isDungeonReward(item)) {
         rewards.push(item);
         locations.push(location);
       }
     }
 
-    rewards = shuffle(this.random, rewards);
+    rewards = shuffle(this.state.random, rewards);
     for (let i = 0; i < rewards.length; i++) {
       this.place(locations[i], rewards[i]);
       removeItem(this.pools.required, rewards[i]);
@@ -300,26 +349,38 @@ class Solver {
   }
 
   private fixDungeon(dungeon: string) {
+    /* handle IST and ST */
+    if (dungeon === 'IST') {
+      return;
+    }
+
+    let locations = this.state.world.dungeons[dungeon];
+    if (dungeon === 'ST') {
+      locations = new Set([...locations, ...this.state.world.dungeons['IST']]);
+    }
+
     const pool = combinedItems(this.pools.required, this.pools.nice);
 
     for (const game of GAMES) {
       for (const baseItem of ['SMALL_KEY', 'BOSS_KEY', 'STRAY_FAIRY', 'MAP', 'COMPASS']) {
         const item = gameId(game, baseItem + '_' + dungeon.toUpperCase(), '_');
 
-        if (isSmallKey(item) && this.opts.settings.smallKeyShuffle === 'anywhere') {
+        if (isSmallKeyHideout(item) && this.state.settings.smallKeyShuffleHideout === 'anywhere') {
           continue;
-        } else if (isGanonBossKey(item) && this.opts.settings.ganonBossKey === 'anywhere') {
+        } else if (isSmallKeyRegular(item) && this.state.settings.smallKeyShuffle === 'anywhere') {
           continue;
-        } else if (isRegularBossKey(item) && this.opts.settings.bossKeyShuffle === 'anywhere') {
+        } else if (isGanonBossKey(item) && this.state.settings.ganonBossKey === 'anywhere') {
           continue;
-        } else if (isDungeonStrayFairy(item) && this.opts.settings.strayFairyShuffle === 'anywhere') {
+        } else if (isRegularBossKey(item) && this.state.settings.bossKeyShuffle === 'anywhere') {
           continue;
-        } else if (isMapCompass(item) && this.opts.settings.mapCompassShuffle === 'anywhere') {
+        } else if (isDungeonStrayFairy(item) && this.state.settings.strayFairyShuffle === 'anywhere') {
+          continue;
+        } else if (isMapCompass(item) && this.state.settings.mapCompassShuffle === 'anywhere') {
           continue;
         }
 
         while (pool[item]) {
-          this.randomAssumed(pool, { restrictedLocations: this.world.dungeons[dungeon], forcedItem: item });
+          this.randomAssumed(pool, { restrictedLocations: locations, forcedItem: item });
           removeItemPools(this.pools, item);
         }
       }
@@ -327,13 +388,13 @@ class Solver {
   }
 
   private fixSongs() {
-    if (this.opts.settings.songs === 'anywhere') {
+    if (this.state.settings.songs === 'anywhere') {
       return;
     }
 
     const pool = combinedItems(this.pools.required, this.pools.nice);
-    const songs = shuffle(this.random, itemsArray(pool).filter(x => isSong(x)));
-    const locations = new Set(Object.keys(this.world.checks).filter(x => isSong(this.world.checks[x].item)));
+    const songs = shuffle(this.state.random, itemsArray(pool).filter(x => isSong(x)));
+    const locations = new Set(Object.keys(this.state.world.checks).filter(x => isSong(this.state.world.checks[x].item) && !this.items[x]));
 
     if (songs.length > locations.size) {
       throw new Error(`Not enough song locations for ${songs.length} songs`);
@@ -341,7 +402,7 @@ class Solver {
 
     if (songs.length < locations.size) {
       const count = locations.size - songs.length;
-      const junk = shuffle(this.random, itemsArray(this.pools.junk));
+      const junk = shuffle(this.state.random, itemsArray(this.pools.junk));
 
       for (let i = 0; i < count; i++) {
         songs.push(junk.pop()!);
@@ -355,13 +416,18 @@ class Solver {
     }
   }
 
-  private propagate() {
-    for (;;) {
-      this.reachable = pathfind(this.world, this.items, false, this.reachable);
-      const changed = this.markAccessible();
-      if (!changed) {
-        break;
-      }
+  private placeJunkLocations() {
+    const junkArray = shuffle(this.state.random, itemsArray(this.pools.junk));
+    const junkLocations = [ ...this.junkLocations ];
+
+    if (junkLocations.length > junkArray.length) {
+      throw new Error(`Too many junk locations, max=${junkArray.length}`);
+    }
+
+    for (let i = 0; i < junkLocations.length; i++) {
+      const junk = junkArray[i];
+      this.place(junkLocations[i], junk);
+      removeItemPools(this.pools, junk);
     }
   }
 
@@ -375,66 +441,64 @@ class Solver {
     } else {
       const items = itemsArray(pool);
       if (items.length === 0) {
-        const unreachableLocs = Object.keys(this.world.checks).filter(x => !this.reachable.locations.has(x));
+        const unreachableLocs = Object.keys(this.state.world.checks).filter(x => !this.pathfinderState.locations.has(x));
         throw new Error(`Unreachable locations: ${unreachableLocs.join(', ')}`);
       }
-      requiredItem = sample(this.random, items);
+      requiredItem = sample(this.state.random, items);
     }
 
     /* Remove the selected item from the required pool */
     removeItem(pool, requiredItem);
 
-    /* Get all assumed accessible items */
-    const assumedAccessibleItems = combinedItems(this.items, pool);
+    let unplacedLocs: string[] = [];
+    if (this.state.settings.logic !== 'beatable') {
+      /* Get all assumed reachable locations */
+      const result = this.pathfinder.run(this.pathfinderState, { recursive: true, items: this.items, assumedItems: pool });
 
-    /* Get all assumed reachable locations */
-    let reachable = this.reachable!;
-    const reachableLocations = new Set(reachable.locations);
-    for (;;) {
-      let changed = false;
-      reachable = pathfind(this.world, assumedAccessibleItems, false, reachable);
-      for (const l of reachable.locations.values()) {
-        if (!reachableLocations.has(l)) {
-          changed = true;
-          reachableLocations.add(l);
-          if (this.placement[l]) {
-            addItem(assumedAccessibleItems, this.placement[l]);
-          }
+      /* Get all assumed reachable locations that have not been placed */
+      unplacedLocs = Array.from(result.locations)
+        .filter(location => !this.items[location]);
+
+      if (options.restrictedLocations) {
+        unplacedLocs = unplacedLocs.filter(x => options.restrictedLocations!.has(x));
+      }
+
+      /* If there is nowhere to place an item, raise an error */
+      if (unplacedLocs.length === 0) {
+        throw new LogicSeedError(`No reachable locations for item ${requiredItem}`);
+      }
+
+      /* Select a random location from the assumed reachable locations */
+      const location = sample(this.state.random, unplacedLocs);
+
+      /* Place the selected item at the selected location */
+      this.place(location, requiredItem);
+    } else {
+      /* Get all remainig locations */
+      if (options.restrictedLocations) {
+        unplacedLocs = Array.from(options.restrictedLocations);
+      } else {
+        unplacedLocs = Object.keys(this.state.world.checks);
+      }
+      unplacedLocs = shuffle(this.state.random, unplacedLocs.filter(x => !this.items[x]));
+
+      while (unplacedLocs.length) {
+        const loc = unplacedLocs.pop()!;
+        const result = this.pathfinder.run(this.pathfinderState, { recursive: true, stopAtGoal: true, items: { ...this.items, [loc]: requiredItem }, assumedItems: pool });
+        if (result.goal) {
+          this.place(loc, requiredItem);
+          return;
         }
       }
-      if (!changed) {
-        break;
-      }
-    }
-    const assumedReachable = reachable.locations;
 
-    /* Get all assumed reachable locations that have not been placed */
-    let unplacedLocs = Array.from(assumedReachable)
-      .filter(location => !this.placement[location]);
-
-    if (options.restrictedLocations) {
-      unplacedLocs = unplacedLocs.filter(x => options.restrictedLocations!.has(x));
-    }
-
-    /* If there is nowhere to place an item, raise an error */
-    if (unplacedLocs.length === 0) {
       throw new LogicSeedError(`No reachable locations for item ${requiredItem}`);
     }
-
-    /* Select a random location from the assumed reachable locations */
-    const location = sample(this.random, unplacedLocs);
-
-    /* Place the selected item at the selected location */
-    this.place(location, requiredItem);
-
-    /* Propagate */
-    this.propagate();
   }
 
   private fill() {
     const pool = poolsArray(this.pools);
-    const shuffledPool = shuffle(this.random, pool);
-    const locations = Object.keys(this.world.checks).filter(loc => !this.placement[loc]);
+    const shuffledPool = shuffle(this.state.random, pool);
+    const locations = Object.keys(this.state.world.checks).filter(loc => !this.items[loc]);
 
     for (const item of shuffledPool) {
       const loc = locations.pop()!;
@@ -446,28 +510,13 @@ class Solver {
     }
   }
 
-  private markAccessible() {
-    let changed = false;
-    this.reachable!.locations.forEach(loc => {
-      if (this.placement[loc] && !this.reachedLocations.has(loc)) {
-        this.reachedLocations.add(loc);
-        const item = this.placement[loc];
-        addItem(this.items, item);
-        changed = true;
-      }
-    });
-    return changed;
-  }
-
   private place(location: string, item: string) {
-    if (this.world.checks[location] === undefined) {
+    if (this.state.world.checks[location] === undefined) {
       throw new Error('Invalid Location: ' + location);
     }
-    this.placement[location] = item;
+    if (!isJunk(item) && this.state.settings.junkLocations.includes(location)) {
+      throw new Error(`Unable to place ${item} at ${location}.`)
+    }
+    this.items[location] = item;
   }
-}
-
-export const solve = (opts: Options, world: World, random: Random) => {
-  const solver = new Solver(opts, world, random);
-  return solver.solve();
 }
