@@ -140,9 +140,12 @@ static int isItemAmbiguousOot(s16 gi)
 {
     switch (gi)
     {
+    case GI_OOT_BOW:
+    case GI_OOT_QUIVER2:
+    case GI_OOT_QUIVER3:
+        return !comboConfig(CFG_SHARED_BOWS);
     case GI_OOT_STICK:
     case GI_OOT_BOMB:
-    case GI_OOT_BOW:
     case GI_OOT_ARROW_FIRE:
     case GI_OOT_OCARINA_TIME:
     case GI_OOT_BOMBCHU_10:
@@ -160,8 +163,6 @@ static int isItemAmbiguousOot(s16 gi)
     case GI_OOT_MASK_TRUTH:
     case GI_OOT_SWORD_KOKIRI:
     case GI_OOT_SHIELD_HYLIAN:
-    case GI_OOT_QUIVER2:
-    case GI_OOT_QUIVER3:
     case GI_OOT_BOMB_BAG:
     case GI_OOT_BOMB_BAG2:
     case GI_OOT_BOMB_BAG3:
@@ -207,8 +208,11 @@ static int isItemAmbiguousMm(s16 gi)
 {
     switch (gi)
     {
-    case GI_MM_OCARINA_OF_TIME:
     case GI_MM_BOW:
+    case GI_MM_QUIVER2:
+    case GI_MM_QUIVER3:
+        return !comboConfig(CFG_SHARED_BOWS);
+    case GI_MM_OCARINA_OF_TIME:
     case GI_MM_ARROW_FIRE:
     case GI_MM_ARROW_ICE:
     case GI_MM_ARROW_LIGHT:
@@ -228,8 +232,6 @@ static int isItemAmbiguousMm(s16 gi)
     case GI_MM_MASK_KEATON:
     case GI_MM_SWORD_KOKIRI:
     case GI_MM_SHIELD_HERO:
-    case GI_MM_QUIVER2:
-    case GI_MM_QUIVER3:
     case GI_MM_BOMB_BAG:
     case GI_MM_BOMB_BAG2:
     case GI_MM_BOMB_BAG3:
