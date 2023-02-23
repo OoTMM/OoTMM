@@ -13,15 +13,7 @@ static void CustomWarp_Init(Actor_CustomWarp* this, GameState_Play* play)
 
 static void CustomWarp_Update(Actor_CustomWarp* this, GameState_Play* play)
 {
-
-}
-
-static void* dummySegment(GfxContext* gfx)
-{
-    Gfx* end = gfx->polyOpa.end - 1;
-    gfx->polyOpa.end = end;
-    gSPEndDisplayList(end);
-    return end;
+    Actor_SetCollisionCylinder(play, &this->base, 20.f, 20.f, 50.f, 4);
 }
 
 static void CustomWarp_Draw(Actor_CustomWarp* this, GameState_Play* play)
