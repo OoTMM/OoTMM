@@ -160,5 +160,6 @@ int comboIsItemMinor(s16 gi)
 
 void comboSyncItems(void)
 {
-
+    if (comboConfig(CFG_SHARED_BOWS))
+        gForeignSave.inventory.ammo[ITS_FOREIGN_BOW] = gSave.inventory.ammo[ITS_NATIVE_BOW];
 }
