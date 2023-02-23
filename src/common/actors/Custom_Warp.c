@@ -38,14 +38,13 @@ static void CustomWarp_Init(Actor_CustomWarp* this, GameState_Play* play)
 
 static void CustomWarp_Update(Actor_CustomWarp* this, GameState_Play* play)
 {
-    Actor_SetCollisionCylinder(play, &this->base, 20.f, 20.f, 50.f, 4);
     if (ActorTalkedTo(&this->base))
     {
         CustomWarp_OnTrigger(this, play);
     }
     else
     {
-        ActorEnableTalk(&this->base, play, 20.f);
+        ActorEnableTalk(&this->base, play, 30.f);
     }
 }
 
@@ -91,8 +90,8 @@ static void CustomWarp_Draw(Actor_CustomWarp* this, GameState_Play* play)
 
 ActorInit CustomWarp_gActorInit = {
     AC_CUSTOM_WARP,
-    0x4,
-    0x10,
+    0x7,
+    0x11,
     0x1,
     sizeof(Actor_CustomWarp),
     (ActorFunc)CustomWarp_Init,
@@ -118,7 +117,7 @@ void comboSpawnCustomWarps(GameState_Play* play)
     {
         variable = SWITCH_SPRING;
         x = -1200.f;
-        y = 8.f;
+        y = 30.f;
         z = 600.f;
     }
 #endif
