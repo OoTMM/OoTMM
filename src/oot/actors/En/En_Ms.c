@@ -3,7 +3,7 @@
 int EnMs_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
 {
     gi = comboOverride(OV_NPC, 0, NPC_OOT_BEAN_SELLER, gi);
-    gSave.beans = 1;
+    gSave.inventory.beans = 1;
     return GiveItem(actor, play, gi, a, b);
 }
 

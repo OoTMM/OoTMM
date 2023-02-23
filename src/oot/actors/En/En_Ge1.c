@@ -2,7 +2,7 @@
 
 int EnGe1_IsPeaceful(void)
 {
-    return gSave.quest.gerudoCard;
+    return gSave.inventory.quest.gerudoCard;
 }
 
 PATCH_FUNC(0x80a8f554, EnGe1_IsPeaceful);

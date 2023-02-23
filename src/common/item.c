@@ -58,14 +58,14 @@ static int isItemUnavailableOot(s32 gi)
     case GI_OOT_BOMBS_10:
     case GI_OOT_BOMBS_20:
     case GI_OOT_BOMBS_30:
-        return gOotSave.upgrades.bombBag == 0;
+        return gOotSave.inventory.upgrades.bombBag == 0;
     case GI_OOT_ARROWS_5:
     case GI_OOT_ARROWS_10:
     case GI_OOT_ARROWS_30:
-        return gOotSave.upgrades.quiver == 0;
+        return gOotSave.inventory.upgrades.quiver == 0;
     case GI_OOT_DEKU_SEEDS_5:
     case GI_OOT_DEKU_SEEDS_30:
-        return gOotSave.upgrades.bulletBag == 0;
+        return gOotSave.inventory.upgrades.bulletBag == 0;
     default:
         return 0;
     }

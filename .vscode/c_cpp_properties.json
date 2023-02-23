@@ -8,7 +8,8 @@
     ],
     "myDefines": [
       "_LANGUAGE_C=1",
-      "F3DEX_GBI_2 = 1"
+      "F3DEX_GBI_2 = 1",
+      "DEBUG = 1"
     ]
   },
   "configurations": [

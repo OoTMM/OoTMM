@@ -95,6 +95,22 @@ OotDungeonItems;
 
 typedef struct
 {
+    u8                      items[0x18];
+    u8                      ammo[0xf];
+    u8                      beans;
+    OotEquipment            equipment;
+    u16                     unk_9e;
+    OotSaveUpgrades         upgrades;
+    OotSaveQuest            quest;
+    OotDungeonItems         dungeonItems[0x14];
+    s8                      dungeonKeys[0x13];
+    u8                      doubleDefenseHearts;
+    u16                     goldTokens;
+}
+OotInventory;
+
+typedef struct
+{
     u32                     entrance;
     u32                     age;
     u32                     cutscene;
@@ -126,17 +142,7 @@ typedef struct
     u16                     sceneId;
     OotItemEquips           equips;
     char                    unk_72[0x2];
-    u8                      inventory[0x18];
-    u8                      ammo[0xf];
-    u8                      beans;
-    OotEquipment            equipment;
-    u16                     unk_9e;
-    OotSaveUpgrades         upgrades;
-    OotSaveQuest            quest;
-    OotDungeonItems         dungeonItems[0x14];
-    s8                      dungeonKeys[0x13];
-    u8                      doubleDefenseHearts;
-    u16                     goldTokens;
+    OotInventory            inventory;
     OotPermanentSceneFlags  perm[101];
     char                    unk_be0[0x2f4];
     u16                     eventsChk[14];
@@ -147,15 +153,15 @@ typedef struct
 }
 OotSave;
 
-ASSERT_OFFSET(OotSave, childEquips, 0x40);
-ASSERT_OFFSET(OotSave, adultEquips, 0x4a);
-ASSERT_OFFSET(OotSave, unk_54,      0x54);
-ASSERT_OFFSET(OotSave, sceneId,     0x66);
-ASSERT_OFFSET(OotSave, equips,      0x68);
-ASSERT_OFFSET(OotSave, equipment,   0x9c);
-ASSERT_OFFSET(OotSave, perm,        0xd4);
-ASSERT_OFFSET(OotSave, unk_be0,     0xbe0);
-ASSERT_OFFSET(OotSave, checksum,    0x1352);
+ASSERT_OFFSET(OotSave, childEquips,             0x40);
+ASSERT_OFFSET(OotSave, adultEquips,             0x4a);
+ASSERT_OFFSET(OotSave, unk_54,                  0x54);
+ASSERT_OFFSET(OotSave, sceneId,                 0x66);
+ASSERT_OFFSET(OotSave, equips,                  0x68);
+ASSERT_OFFSET(OotSave, inventory.equipment,     0x9c);
+ASSERT_OFFSET(OotSave, perm,                    0xd4);
+ASSERT_OFFSET(OotSave, unk_be0,                 0xbe0);
+ASSERT_OFFSET(OotSave, checksum,                0x1352);
 
 typedef struct
 {

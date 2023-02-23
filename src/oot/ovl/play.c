@@ -8,56 +8,56 @@ static void debugCheat(GameState_Play* play)
     gMmSave.inventory.strayFairies[0] = 15;
     if (play->gs.input[0].current.buttons & L_TRIG)
     {
-        gSave.inventory[ITS_OOT_STICKS] = ITEM_OOT_STICK;
-        gSave.inventory[ITS_OOT_NUTS] = ITEM_OOT_NUT;
-        gSave.inventory[ITS_OOT_BOMBS] = ITEM_OOT_BOMB;
-        gSave.inventory[ITS_OOT_BOW] = ITEM_OOT_BOW;
-        gSave.inventory[ITS_OOT_ARROW_FIRE] = ITEM_OOT_ARROW_FIRE;
-        gSave.inventory[ITS_OOT_ARROW_LIGHT] = ITEM_OOT_ARROW_LIGHT;
-        gSave.inventory[ITS_OOT_SLINGSHOT] = ITEM_OOT_SLINGSHOT;
-        gSave.inventory[ITS_OOT_OCARINA] = ITEM_OOT_OCARINA_TIME;
-        gSave.inventory[ITS_OOT_BOOMERANG] = ITEM_OOT_BOOMERANG;
-        gSave.inventory[ITS_OOT_BOTTLE] = ITEM_OOT_RUTO_LETTER;
-        gSave.inventory[ITS_OOT_BOTTLE2] = ITEM_OOT_FISH;
-        gSave.inventory[ITS_OOT_BOTTLE3] = ITEM_OOT_BIG_POE;
-        gSave.inventory[ITS_OOT_BOTTLE4] = ITEM_OOT_BIG_POE;
-        gSave.inventory[ITS_OOT_BOMBCHU] = ITEM_OOT_BOMBCHU_10;
-        gSave.inventory[ITS_OOT_TRADE_CHILD] = ITEM_OOT_ZELDA_LETTER;
-        gSave.inventory[ITS_OOT_HAMMER] = ITEM_OOT_HAMMER;
-        gSave.inventory[ITS_OOT_HOOKSHOT] = ITEM_OOT_LONGSHOT;
-        gSave.inventory[ITS_OOT_LENS] = ITEM_OOT_LENS;
-        gSave.equipment.swords = 0x3;
-        gSave.equipment.shields = 0x7;
-        gSave.equipment.tunics = 0x7;
-        gSave.equipment.boots = 0x7;
-        gSave.upgrades.dekuStick = 3;
-        gSave.upgrades.dekuNut = 3;
-        gSave.upgrades.bulletBag = 3;
-        gSave.upgrades.bombBag = 3;
-        gSave.upgrades.quiver = 3;
-        gSave.upgrades.dive = 2;
-        gSave.upgrades.wallet = 2;
-        gSave.upgrades.strength = 3;
-        gSave.ammo[ITS_OOT_STICKS] = 10;
-        gSave.ammo[ITS_OOT_SLINGSHOT] = 50;
-        gSave.ammo[ITS_OOT_BOMBS] = 40;
-        gSave.ammo[ITS_OOT_BOW] = 50;
-        gSave.quest.songZelda = 1;
-        gSave.quest.songSaria = 1;
-        gSave.quest.songTime = 1;
-        gSave.quest.songSun = 1;
-        gSave.quest.songEpona = 1;
-        gSave.quest.songStorms = 1;
-        gSave.quest.songTpLight = 1;
-        gSave.quest.songTpShadow = 1;
-        gSave.quest.songTpWater = 1;
-        gSave.quest.songTpFire = 1;
-        gSave.quest.songTpForest = 1;
-        gSave.quest.songTpSpirit = 1;
+        gSave.inventory.items[ITS_OOT_STICKS] = ITEM_OOT_STICK;
+        gSave.inventory.items[ITS_OOT_NUTS] = ITEM_OOT_NUT;
+        gSave.inventory.items[ITS_OOT_BOMBS] = ITEM_OOT_BOMB;
+        gSave.inventory.items[ITS_OOT_BOW] = ITEM_OOT_BOW;
+        gSave.inventory.items[ITS_OOT_ARROW_FIRE] = ITEM_OOT_ARROW_FIRE;
+        gSave.inventory.items[ITS_OOT_ARROW_LIGHT] = ITEM_OOT_ARROW_LIGHT;
+        gSave.inventory.items[ITS_OOT_SLINGSHOT] = ITEM_OOT_SLINGSHOT;
+        gSave.inventory.items[ITS_OOT_OCARINA] = ITEM_OOT_OCARINA_TIME;
+        gSave.inventory.items[ITS_OOT_BOOMERANG] = ITEM_OOT_BOOMERANG;
+        gSave.inventory.items[ITS_OOT_BOTTLE] = ITEM_OOT_RUTO_LETTER;
+        gSave.inventory.items[ITS_OOT_BOTTLE2] = ITEM_OOT_FISH;
+        gSave.inventory.items[ITS_OOT_BOTTLE3] = ITEM_OOT_BIG_POE;
+        gSave.inventory.items[ITS_OOT_BOTTLE4] = ITEM_OOT_BIG_POE;
+        gSave.inventory.items[ITS_OOT_BOMBCHU] = ITEM_OOT_BOMBCHU_10;
+        gSave.inventory.items[ITS_OOT_TRADE_CHILD] = ITEM_OOT_ZELDA_LETTER;
+        gSave.inventory.items[ITS_OOT_HAMMER] = ITEM_OOT_HAMMER;
+        gSave.inventory.items[ITS_OOT_HOOKSHOT] = ITEM_OOT_LONGSHOT;
+        gSave.inventory.items[ITS_OOT_LENS] = ITEM_OOT_LENS;
+        gSave.inventory.equipment.swords = 0x3;
+        gSave.inventory.equipment.shields = 0x7;
+        gSave.inventory.equipment.tunics = 0x7;
+        gSave.inventory.equipment.boots = 0x7;
+        gSave.inventory.upgrades.dekuStick = 3;
+        gSave.inventory.upgrades.dekuNut = 3;
+        gSave.inventory.upgrades.bulletBag = 3;
+        gSave.inventory.upgrades.bombBag = 3;
+        gSave.inventory.upgrades.quiver = 3;
+        gSave.inventory.upgrades.dive = 2;
+        gSave.inventory.upgrades.wallet = 2;
+        gSave.inventory.upgrades.strength = 3;
+        gSave.inventory.ammo[ITS_OOT_STICKS] = 10;
+        gSave.inventory.ammo[ITS_OOT_SLINGSHOT] = 50;
+        gSave.inventory.ammo[ITS_OOT_BOMBS] = 40;
+        gSave.inventory.ammo[ITS_OOT_BOW] = 50;
+        gSave.inventory.quest.songZelda = 1;
+        gSave.inventory.quest.songSaria = 1;
+        gSave.inventory.quest.songTime = 1;
+        gSave.inventory.quest.songSun = 1;
+        gSave.inventory.quest.songEpona = 1;
+        gSave.inventory.quest.songStorms = 1;
+        gSave.inventory.quest.songTpLight = 1;
+        gSave.inventory.quest.songTpShadow = 1;
+        gSave.inventory.quest.songTpWater = 1;
+        gSave.inventory.quest.songTpFire = 1;
+        gSave.inventory.quest.songTpForest = 1;
+        gSave.inventory.quest.songTpSpirit = 1;
 
-        gSave.quest.stoneEmerald = 0;
-        gSave.quest.stoneRuby = 0;
-        gSave.quest.stoneSapphire = 0;
+        gSave.inventory.quest.stoneEmerald = 0;
+        gSave.inventory.quest.stoneRuby = 0;
+        gSave.inventory.quest.stoneSapphire = 0;
 
         gMmExtraFlags2.majora = 1;
 
@@ -65,15 +65,15 @@ static void debugCheat(GameState_Play* play)
         gSave.magicUpgrade2 = 1;
         gSave.magicAmount = 0x60;
 
-        gSave.dungeonKeys[SCE_OOT_TEMPLE_FOREST] = 9;
-        gSave.dungeonKeys[SCE_OOT_INSIDE_GANON_CASTLE] = 9;
+        gSave.inventory.dungeonKeys[SCE_OOT_TEMPLE_FOREST] = 9;
+        gSave.inventory.dungeonKeys[SCE_OOT_INSIDE_GANON_CASTLE] = 9;
 
-        //gSave.quest.medallionShadow = 1;
-        //gSave.quest.medallionSpirit = 1;
-        //gSave.quest.medallionForest = 1;
-        //gSave.quest.medallionFire = 1;
-        //gSave.quest.medallionWater = 1;
-        //gSave.quest.medallionLight = 1;
+        //gSave.inventory.quest.medallionShadow = 1;
+        //gSave.inventory.quest.medallionSpirit = 1;
+        //gSave.inventory.quest.medallionForest = 1;
+        //gSave.inventory.quest.medallionFire = 1;
+        //gSave.inventory.quest.medallionWater = 1;
+        //gSave.inventory.quest.medallionLight = 1;
 
         //gSave.health = gSave.healthMax = 20 * 0x10;
 
@@ -84,7 +84,7 @@ static void debugCheat(GameState_Play* play)
         gOotExtraTrade.adult |= (1 << XITEM_OOT_ADULT_EYEBALL_FROG);
         gOotExtraTrade.adult |= (1 << XITEM_OOT_ADULT_EYE_DROPS);
         gOotExtraTrade.adult |= (1 << XITEM_OOT_ADULT_CLAIM_CHECK);
-        gSave.inventory[ITS_OOT_TRADE_ADULT] = ITEM_OOT_EYEBALL_FROG;
+        gSave.inventory.items[ITS_OOT_TRADE_ADULT] = ITEM_OOT_EYEBALL_FROG;
 
 #if defined(DEBUG_AGE)
         gSave.age = DEBUG_AGE;
@@ -120,14 +120,14 @@ static void eventFixes(GameState_Play* play)
     }
 
     /* Skip Zelda's cutscene when having all the spiritual stones */
-    if (gSave.quest.stoneEmerald && gSave.quest.stoneRuby && gSave.quest.stoneSapphire)
+    if (gSave.inventory.quest.stoneEmerald && gSave.inventory.quest.stoneRuby && gSave.inventory.quest.stoneSapphire)
     {
         SetEventChk(EV_OOT_CHK_ZELDA_FLED);
         SetEventChk(EV_OOT_CHK_ZELDA_FLED_BRIDGE);
     }
 
     /* Set the rainbow bridge flag */
-    if (gSave.quest.medallionLight && gSave.quest.medallionForest && gSave.quest.medallionFire && gSave.quest.medallionWater && gSave.quest.medallionShadow && gSave.quest.medallionSpirit)
+    if (gSave.inventory.quest.medallionLight && gSave.inventory.quest.medallionForest && gSave.inventory.quest.medallionFire && gSave.inventory.quest.medallionWater && gSave.inventory.quest.medallionShadow && gSave.inventory.quest.medallionSpirit)
     {
         SetEventChk(EV_OOT_CHK_RAINBOW_BRIDGE);
     }
@@ -213,7 +213,7 @@ void hookPlay_Init(GameState_Play* play)
     }
 
     /* Handle swordless */
-    if (gSave.equips.equipment.swords == 0 || (gSave.equipment.swords & (1 << (gSave.equips.equipment.swords - 1))) == 0)
+    if (gSave.equips.equipment.swords == 0 || (gSave.inventory.equipment.swords & (1 << (gSave.equips.equipment.swords - 1))) == 0)
     {
         /* Set swordless */
         gSave.equips.equipment.swords = 0;
