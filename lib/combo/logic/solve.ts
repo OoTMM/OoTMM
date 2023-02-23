@@ -451,7 +451,7 @@ export class LogicPassSolver {
     removeItem(pool, requiredItem);
 
     let unplacedLocs: string[] = [];
-    if (this.state.settings.logic === 'allLocations') {
+    if (this.state.settings.logic !== 'beatable') {
       /* Get all assumed reachable locations */
       const result = this.pathfinder.run(this.pathfinderState, { recursive: true, items: this.items, assumedItems: pool });
 
