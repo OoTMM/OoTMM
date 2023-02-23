@@ -36,17 +36,19 @@ export class Generator {
     const customData = await custom(this.monitor, roms);
     const buildResult = await build(this.opts);
     const rom = Buffer.concat([roms.oot.rom, roms.mm.rom]);
+    const dma = { oot: roms.oot.dma, mm: roms.mm.dma };
     const patchfile = buildPatchfile({
       monitor: this.monitor,
       rom,
-      dma: { oot: roms.oot.dma, mm: roms.mm.dma },
+      dma,
       build: buildResult,
       custom: customData,
     });
-    console.log(patchfile);
-    process.exit(0);
+    const packedRom = await pack(this.monitor, rom, dma, patchfile);
+    const hash = "XXX";
+    const log = "TODO";
     //const rom = await pack(this.monitor, roms, buildResult, customData, this.opts);
     //const { log, hash } = randomize(this.monitor, rom, this.opts);
-    //return { rom, log, hash };
+    return { rom: packedRom, log, hash };
   }
 };

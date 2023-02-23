@@ -40,5 +40,9 @@ export function buildPatchfile(args: BuildPatchfileIn): Patchfile {
   }
   file.addPatch('post-compress', CUSTOM_ADDR, args.custom);
 
+  /* Patch rom header */
+  file.addPatch('post-compress', 0x20, Buffer.from('OOT+MM COMBO       '));
+  file.addPatch('post-compress', 0x3c, Buffer.from('ZZE'));
+
   return file;
 };

@@ -1,23 +1,11 @@
 import { Buffer } from 'buffer';
 
-import { compressGame } from './compress';
-import { Game, GAMES, CONFIG, CUSTOM_ADDR } from './config';
-import { patchGame } from './patch-build/patcher';
+import { compress } from './compress';
+import { CONFIG } from './config';
 import { DmaData } from './dma';
-import { Options } from './options';
-import { BuildOutput } from './build';
-import { DecompressedRoms } from './decompress';
 import { Monitor } from './monitor';
-
-const combineRoms = async (monitor: Monitor, roms: DecompressedRoms, build: BuildOutput, opts: Options) => {
-  monitor.log("Compressing");
-  const [oot, mm] = await Promise.all(GAMES.map(async (g) => {
-    const patchedRom = patchedRoms[g];
-    const compressedRom = await compressGame(g, patchedRom, roms[g].dma);
-    return compressedRom;
-  }));
-  return Buffer.concat([oot, mm]);
-};
+import { RomsDMA } from './patch-build';
+import { Patchfile } from './patch-build/patchfile';
 
 const fixDMA = (monitor: Monitor, rom: Buffer) => {
   monitor.log("Fixing DMA");
@@ -87,15 +75,19 @@ const fixChecksum = (monitor: Monitor, rom: Buffer) => {
   rom.writeUInt32BE(c2, 0x14);
 };
 
-export const pack = async (monitor: Monitor, roms: DecompressedRoms, build: BuildOutput, custom: Buffer, opts: Options): Promise<Buffer> => {
-  const rom = Buffer.concat([roms.oot.rom, roms.mm.rom]);
+export async function pack(monitor: Monitor, rom: Buffer, romsDma: RomsDMA, patchfile: Patchfile): Promise<Buffer> {
+  /* Apply patches and compress */
+  monitor.log("Pack: Pre-compress patches");
+  patchfile.apply(rom, 'pre-compress');
+  monitor.log("Pack: Compress");
+  const compressedRom = await compress(monitor, rom, romsDma);
+  monitor.log("Pack: Post-compress patches");
+  patchfile.apply(compressedRom, 'post-compress');
 
-  for (const g of GAMES) {
-    await packPayload(monitor, rom, build, g);
-  }
-  await packCustom(monitor, rom, custom);
-  fixDMA(monitor, rom);
-  fixHeader(monitor, rom);
-  fixChecksum(monitor, rom);
-  return rom;
-};
+  monitor.log("Pack: Fixes");
+  fixDMA(monitor, compressedRom);
+  fixHeader(monitor, compressedRom);
+  fixChecksum(monitor, compressedRom);
+
+  return compressedRom;
+}
