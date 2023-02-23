@@ -5,6 +5,7 @@ int gNoTimeFlow;
 static void debugCheat(GameState_Play* play)
 {
 #if defined(DEBUG)
+    gMiscFlags.erSpring = 1;
     MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_WF);
     /*if (play->gs.input[0].current.buttons & 0x20)*/
     {
@@ -143,17 +144,7 @@ void hookPlay_Init(GameState_Play* play)
     Play_Init(play);
     gLastEntrance = gSave.entranceIndex;
     comboSpawnItemGivers(play);
-
-#if defined(DEBUG)
-    SpawnActor(
-        (char*)play + 0x1ca0,
-        play,
-        AC_CUSTOM_WARP,
-        -1200.f, 8.f, 600.f,
-        0, 0, 0,
-        0
-    );
-#endif
+    comboSpawnCustomWarps(play);
 
     if (gNoTimeFlow)
     {

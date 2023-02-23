@@ -189,6 +189,9 @@ void*   comboGetObject(u16 objectId);
 u32     comboLoadObject(void* buffer, u16 objectId);
 void    comboLoadCustomKeep(void);
 
+/* Custom_Warp */
+void comboSpawnCustomWarps(GameState_Play*);
+
 /* Draw */
 #define DRAW_NO_PRE1    0x01
 #define DRAW_NO_PRE2    0x02

@@ -57,6 +57,7 @@ void comboTriggerWarp(GameState_Play* play, int bossId)
     case DUNGEONID_TEMPLE_SNOWHEAD:
         gMmExtraBoss.boss |= (1 << 1);
         MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_SH);
+        gMiscFlags.erSpring = 1;
         break;
     case DUNGEONID_TEMPLE_GREAT_BAY:
         gMmExtraBoss.boss |= (1 << 2);
