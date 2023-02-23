@@ -5,9 +5,11 @@ import { Buffer } from 'buffer';
 
 import Yaz0 from 'yaz0';
 
-import { Game, CONFIG } from './config';
+import { Game, CONFIG, GAMES } from './config';
 import { DmaData } from './dma';
 import { fileExists } from './util';
+import { Monitor } from './monitor';
+import { DecompressedRoms } from './decompress';
 
 export const compressFile = async (data: Buffer): Promise<Buffer> => {
   let filename = "";
@@ -55,7 +57,7 @@ const compressFiles = async (rom: Buffer, dmaOld: DmaData) => {
   return Promise.all(promises);
 };
 
-export const compressGame = async (game: Game, rom: Buffer, dma: Buffer) => {
+const compressGame = async (game: Game, rom: Buffer, dma: Buffer) => {
   const conf = CONFIG[game];
   const dmaOld = new DmaData(Buffer.from(dma));
   const dmaNew = new DmaData(Buffer.from(rom.subarray(conf.dmaAddr, conf.dmaAddr + conf.dmaCount * 16)));
@@ -95,3 +97,10 @@ export const compressGame = async (game: Game, rom: Buffer, dma: Buffer) => {
 
   return newRom;
 };
+
+export async function compress(monitor: Monitor, roms: DecompressedRoms) {
+  return Promise.all(GAMES.map((game) => {
+    const { rom, dma } = roms[game];
+    return compressGame(game, rom, dma);
+  }));
+}
