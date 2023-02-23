@@ -404,5 +404,5 @@ export function patchRandomizer(logic: LogicResult, settings: Settings, patchfil
   data.copy(buffer, 0);
   const startingItems = randomizerStartingItems(settings);
   startingItems.copy(buffer, STARTING_ITEMS_DATA_OFFSET);
-  patchfile.addPatch('post-compress', 0x03fe0000, buffer);
+  patchfile.addPatch('global', 0x03fe0000, buffer);
 }

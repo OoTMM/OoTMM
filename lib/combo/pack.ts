@@ -26,14 +26,6 @@ const fixDMA = (monitor: Monitor, rom: Buffer) => {
   }
 };
 
-const fixHeader = (monitor: Monitor, rom: Buffer) => {
-  monitor.log("Fixing the header");
-  const romName = Buffer.from('OOT+MM COMBO       ');
-  romName.copy(rom, 0x20);
-  const romCode = Buffer.from('ZZE');
-  romCode.copy(rom, 0x3c);
-};
-
 const rol = (v: number, b: number) => (((v << b) | (v >>> (32 - b))) & 0xffffffff) >>> 0;
 
 const checksum = (rom: Buffer) => {
@@ -90,7 +82,6 @@ export async function pack(monitor: Monitor, roms: DecompressedRoms, patchfile: 
 
   monitor.log("Pack: Fixes");
   fixDMA(monitor, compressedRom);
-  fixHeader(monitor, compressedRom);
   fixChecksum(monitor, compressedRom);
 
   return compressedRom;

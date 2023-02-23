@@ -17,13 +17,17 @@ const makeOptions = async (args: string[]): Promise<OptionsInput> => {
     case "--seed":
       opts.seed = args[++i];
       break;
-    case "--config":
-      {
-        const configFile = await fs.readFile(args[++i]);
-        const settings = YAML.parse(configFile.toString());
-        opts.settings = settings;
-        break;
-      }
+    case "--config": {
+      const configFile = await fs.readFile(args[++i]);
+      const settings = YAML.parse(configFile.toString());
+      opts.settings = settings;
+      break;
+    }
+    case "--patch": {
+      const patch = await fs.readFile(args[++i]);
+      opts.patch = patch;
+      break;
+    }
     default:
       throw new Error(`Unknown option: ${opt}`);
     }
@@ -38,12 +42,15 @@ const main = async () => {
     fs.readFile('./roms/mm.z64'),
   ]);
   const gen = generate({ oot, mm, opts });
-  const { rom, log } = await gen.run();
+  const { rom, log, patch } = await gen.run();
   await fs.mkdir('out', { recursive: true });
-  return Promise.all([
-    fs.writeFile('out/OoTMM.z64', rom),
-    fs.writeFile('out/spoiler.txt', log),
-  ]);
+  const promises: Promise<unknown>[] = [];
+  promises.push(fs.writeFile('out/OoTMM.z64', rom));
+  if (log)
+    promises.push(fs.writeFile('out/spoiler.txt', log));
+  if (patch)
+    promises.push(fs.writeFile('out/OoTMM.ootmm', patch));
+  return Promise.all(promises);
 }
 
 main().catch((err) => {

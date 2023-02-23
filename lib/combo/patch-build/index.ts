@@ -19,7 +19,7 @@ export type BuildPatchfileIn = {
 
 export function buildPatchfile(args: BuildPatchfileIn): Patchfile {
   args.monitor.log("Building Patchfile");
-  const file = new Patchfile();
+  const file = new Patchfile(args.logic.hash);
 
   for (const game of GAMES) {
     /* Apply ASM patches */
