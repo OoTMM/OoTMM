@@ -29,8 +29,17 @@ export class LogicPassWorldTransform {
     const itemsToJunk = new Set<string>();
 
     if (config.has('SHARED_BOWS')) {
+      /* Bows and quivers */
       itemsToReplace.set('OOT_BOW', 'SHARED_BOW');
       itemsToJunk.add('MM_BOW');
+
+      /* Arrows */
+      itemsToReplace.set('OOT_ARROWS_5', 'SHARED_ARROWS_5');
+      itemsToReplace.set('OOT_ARROWS_10', 'SHARED_ARROWS_10');
+      itemsToReplace.set('OOT_ARROWS_30', 'SHARED_ARROWS_30');
+      itemsToReplace.set('MM_ARROWS_10', 'SHARED_ARROWS_10');
+      itemsToReplace.set('MM_ARROWS_30', 'SHARED_ARROWS_30');
+      itemsToReplace.set('MM_ARROWS_40', 'SHARED_ARROWS_40');
     }
 
     for (const loc in this.state.world.checks) {

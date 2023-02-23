@@ -143,6 +143,9 @@ static int isItemAmbiguousOot(s16 gi)
     case GI_OOT_BOW:
     case GI_OOT_QUIVER2:
     case GI_OOT_QUIVER3:
+    case GI_OOT_ARROWS_5:
+    case GI_OOT_ARROWS_10:
+    case GI_OOT_ARROWS_30:
         return !comboConfig(CFG_SHARED_BOWS);
     case GI_OOT_STICK:
     case GI_OOT_BOMB:
@@ -189,9 +192,6 @@ static int isItemAmbiguousOot(s16 gi)
     case GI_OOT_BOMBS_10:
     case GI_OOT_BOMBS_20:
     case GI_OOT_BOMBS_30:
-    case GI_OOT_ARROWS_5:
-    case GI_OOT_ARROWS_10:
-    case GI_OOT_ARROWS_30:
     case GI_OOT_BOMBCHU_5:
     case GI_OOT_BOMBCHU_20:
     case GI_OOT_MAGIC_UPGRADE:
@@ -211,6 +211,9 @@ static int isItemAmbiguousMm(s16 gi)
     case GI_MM_BOW:
     case GI_MM_QUIVER2:
     case GI_MM_QUIVER3:
+    case GI_MM_ARROWS_10:
+    case GI_MM_ARROWS_30:
+    case GI_MM_ARROWS_40:
         return !comboConfig(CFG_SHARED_BOWS);
     case GI_MM_OCARINA_OF_TIME:
     case GI_MM_ARROW_FIRE:
@@ -255,9 +258,6 @@ static int isItemAmbiguousMm(s16 gi)
     case GI_MM_BOMBS_10:
     case GI_MM_BOMBS_20:
     case GI_MM_BOMBS_30:
-    case GI_MM_ARROWS_10:
-    case GI_MM_ARROWS_30:
-    case GI_MM_ARROWS_40:
     case GI_MM_BOMBCHU_20:
     case GI_MM_BOMBCHU_10:
     case GI_MM_BOMBCHU_5:
