@@ -1,13 +1,11 @@
 import { Buffer } from 'buffer';
 
-import { logic, LogicResult } from '../logic';
+import { LogicResult } from '../logic';
 import { DATA_GI, DATA_NPC, DATA_SCENES, DATA_REGIONS, DATA_CONFIG, DATA_HINTS_POOL, DATA_HINTS, DATA_ENTRANCES } from '../data';
 import { Game, GAMES } from "../config";
 import { WorldCheck } from '../logic/world';
-import { Options } from '../options';
 import { Settings } from '../settings';
 import { HintGossip, Hints } from '../logic/hints';
-import { Monitor } from '../monitor';
 import { isDungeonStrayFairy, isGanonBossKey, isMap, isCompass, isRegularBossKey, isSmallKeyRegular, isTownStrayFairy, isSmallKeyHideout } from '../logic/items';
 import { gameId } from '../util';
 import { EntranceShuffleResult } from '../logic/entrance';
@@ -28,6 +26,19 @@ const STARTING_ITEMS_DATA_OFFSET = 0x7000;
 const ENTRANCE_DATA_OFFSETS = {
   oot: 0x8000,
   mm: 0x9000,
+};
+
+const SHARED_ITEMS_OOT = new Map([
+  ['SHARED_BOW', 'OOT_BOW'],
+]);
+
+const SHARED_ITEMS_MM = new Map([
+  ['SHARED_BOW', 'MM_BOW'],
+]);
+
+const SHARED_ITEMS = {
+  oot: SHARED_ITEMS_OOT,
+  mm: SHARED_ITEMS_MM,
 };
 
 const SUBSTITUTIONS: {[k: string]: string} = {
@@ -64,6 +75,12 @@ const gi = (settings: Settings, game: Game, item: string, generic: boolean) => {
     } else if (isCompass(item) && settings.mapCompassShuffle === 'ownDungeon' && settings.erBoss === 'none') {
       item = gameId(game, 'COMPASS', '_');
     }
+  }
+
+  const sharedItems = SHARED_ITEMS[game];
+  const sharedItem = sharedItems.get(item);
+  if (sharedItem) {
+    item = sharedItem;
   }
 
   const subst = SUBSTITUTIONS[item];

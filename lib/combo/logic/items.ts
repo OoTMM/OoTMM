@@ -141,6 +141,7 @@ export const ITEMS_REQUIRED = new Set<string>([
   'MM_WALLET',
   'MM_GREAT_FAIRY_SWORD',
   'MM_SPIN_UPGRADE',
+  'SHARED_BOW',
 ]);
 
 export const ITEMS_SOMETIMES_REQUIRED = new Set<string>([

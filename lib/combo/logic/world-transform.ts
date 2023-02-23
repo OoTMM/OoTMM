@@ -4,6 +4,8 @@ import { isGanonBossKey, isJunk, isMapCompass } from './items';
 import { World } from './world';
 
 export class LogicPassWorldTransform {
+  private junkToggle = false;
+
   constructor(
     private readonly state: {
       monitor: Monitor;
@@ -17,13 +19,32 @@ export class LogicPassWorldTransform {
   run() {
     this.state.monitor.log('Logic: World Transform');
 
+    const { config } = this.state;
+
     let fireTempleKeyRemoved = false;
     let mmExtraShield = false;
     let ootShields = 3;
 
+    const itemsToReplace = new Map<string, string>();
+    const itemsToJunk = new Set<string>();
+
+    if (config.has('SHARED_BOWS')) {
+      itemsToReplace.set('OOT_BOW', 'SHARED_BOW');
+      itemsToJunk.add('MM_BOW');
+    }
+
     for (const loc in this.state.world.checks) {
       const check = this.state.world.checks[loc];
       let item = check.item;
+
+      if (itemsToReplace.has(item)) {
+        item = itemsToReplace.get(item)!;
+      }
+
+      if (itemsToJunk.has(item)) {
+        item = this.junkToggle ? 'MM_RUPEE_BLUE' : 'OOT_RUPEE_BLUE';
+        this.junkToggle = !this.junkToggle;
+      }
 
       /* Maps/Compass */
       if (isMapCompass(item) && ['starting', 'removed'].includes(this.state.settings.mapCompassShuffle)) {

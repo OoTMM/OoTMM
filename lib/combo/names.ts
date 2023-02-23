@@ -242,6 +242,7 @@ const ITEM_NAMES: {[k: string]: string} = {
   OOT_TUNIC_ZORA: "Zora Tunic",
   OOT_WALLET: "Progressive Wallet (OoT)",
   OOT_ZELDA_LETTER: "Zelda's Letter",
+  SHARED_BOW: "Bow",
 };
 
 export const itemName = (item: string) => ITEM_NAMES[item] ?? item;
