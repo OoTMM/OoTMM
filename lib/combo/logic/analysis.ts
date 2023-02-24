@@ -191,9 +191,18 @@ const SIMPLE_DEPENDENCIES: {[k: string]: string[]} = {
   ],
   MM_MASK_GREAT_FAIRY: [
     'MM Moon Fierce Deity Mask',
-    'MM Woodfall Great Fairy',
-    'MM Snowhead Great Fairy',
-    'MM Great Bay Great Fairy',
+    'MM Woodfall Temple SF Water Room Beehive',
+    'MM Woodfall Temple SF Maze Bubble',
+    'MM Woodfall Temple SF Pre-Boss Left',
+    'MM Woodfall Temple SF Pre-Boss Pillar',
+    'MM Snowhead Temple SF Bridge Pillar',
+    'MM Snowhead Temple SF Bridge Under Platform',
+    'MM Snowhead Temple SF Compass Room Crate',
+    'MM Snowhead Temple SF Dual Switches',
+    'MM Snowhead Temple SF Snow Room',
+    'MM Great Bay Temple SF Water Wheel Platform',
+    'MM Great Bay Temple SF Central Room Underwater Pot',
+    //'MM Great Bay Temple SF Pre-Boss Above Water', #Uncomment this if a trick to reverse the water flow in Great Bay Temple without Ice Arrows is added.
   ],
   MM_MASK_DON_GERO: [
     'MM Moon Fierce Deity Mask',
