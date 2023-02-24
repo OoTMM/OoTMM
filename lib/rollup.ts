@@ -22,7 +22,6 @@ const VERSION = process.env.VERSION || 'XXX';
 
 async function build() {
   const inputOptions = {
-    sourcemap: true,
     input: 'lib/combo/index.ts',
     plugins: [
       replace({

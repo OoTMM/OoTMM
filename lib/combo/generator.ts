@@ -11,7 +11,7 @@ import { pack } from "./pack";
 import { buildPatchfile } from './patch-build';
 import { Patchfile } from './patch-build/patchfile';
 
-type GeneratorOutput = {
+export type GeneratorOutput = {
   rom: Buffer;
   log: string | null;
   hash: string;

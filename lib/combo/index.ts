@@ -1,7 +1,7 @@
 import { Buffer } from 'buffer';
 
 import { options, OptionsInput } from './options';
-import { Generator } from './generator';
+import { Generator, GeneratorOutput } from './generator';
 import { Monitor, MonitorCallbacks } from './monitor';
 import { SETTINGS, DEFAULT_SETTINGS, SETTINGS_CATEGORIES, Settings, TRICKS } from './settings';
 import { worldState } from './logic';
@@ -16,6 +16,8 @@ export type GeneratorParams = {
   opts?: OptionsInput,
   monitor?: MonitorCallbacks
 };
+
+export type { GeneratorOutput };
 
 type LocInfo = {
   [k: string]: string[]
