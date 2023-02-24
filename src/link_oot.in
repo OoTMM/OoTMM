@@ -72,7 +72,7 @@ PlaySound6 = 0x800c806c;
 Actor_HasParent = 0x80022bb0;
 ActorDestroy = 0x80020eb4;
 ActorUpdateVelocity = 0x8002121c;
-ActorSetCollisionCylinder = 0x80021e6c;
+Actor_SetCollisionCylinder = 0x80021e6c;
 
 GetEventChk = 0x800288b4;
 SetEventChk = 0x800288e0;
@@ -146,3 +146,5 @@ Enemy_StartFinishingBlow = 0x80025b4c;
 Interface_LoadItemIconImpl = 0x8006fb50;
 
 DeathWarp = 0x8009da10;
+
+DrawSimpleOpa = 0x80028048;

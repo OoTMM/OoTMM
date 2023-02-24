@@ -1,7 +1,7 @@
 import { Buffer } from 'buffer';
 
-import { Game, CONFIG } from "./config";
-import { Options } from './options';
+import { Game, CONFIG } from "../config";
+import { Patchfile } from '../patch-build/patchfile';
 
 type VRamEntry = {
   vstart: number;
@@ -33,20 +33,20 @@ const DATA_VRAM = {
   mm: DATA_VRAM_MM,
 };
 
-class Patcher {
+export class Patcher {
   private game: Game;
-  private opts: Options;
   private rom: Buffer;
   private patches: Buffer;
   private vram: VRamEntry[];
   private objectTable: number[];
+  private patchfile: Patchfile;
   private cursor: number;
 
-  constructor(game: Game, rom: Buffer, patches: Buffer, opts: Options) {
+  constructor(game: Game, rom: Buffer, patches: Buffer, patchfile: Patchfile) {
     this.game = game;
     this.rom = rom;
     this.patches = patches;
-    this.opts = opts;
+    this.patchfile = patchfile;
     this.vram = this.makeVramTable();
     this.objectTable = this.makeObjectTable();
     this.cursor = 0;
@@ -97,6 +97,10 @@ class Patcher {
     return vstart + offset;
   }
 
+  private patch(romAddr: number, data: Buffer) {
+    this.patchfile.addPatch(this.game, romAddr, data);
+  }
+
   patchASM(patch: Buffer) {
     const addr = patch.readUInt32BE(this.cursor + 0x00);
     const size = patch.readUInt32BE(this.cursor + 0x04);
@@ -104,7 +108,7 @@ class Patcher {
     const data = patch.subarray(this.cursor, this.cursor + size);
     this.cursor += size;
     const paddr = this.virtualToPhysical(addr);
-    data.copy(this.rom, paddr);
+    this.patch(paddr, data);
   }
 
   patchLoadStore(patch: Buffer) {
@@ -155,7 +159,9 @@ class Patcher {
         throw new Error(`Invalid load/store opcode ${op.toString(16)} at ${paddr.toString(16)}`);
       }
       instr = ((instr & 0x3ffffff) | (op << 26)) >>> 0;
-      this.rom.writeUInt32BE(instr, paddr);
+      const instrBuffer = Buffer.alloc(4);
+      instrBuffer.writeUInt32BE(instr, 0);
+      this.patch(paddr, instrBuffer);
     }
 
     this.cursor += count * 4;
@@ -184,7 +190,9 @@ class Patcher {
         value = target_hi;
       }
       instr = ((instr & 0xffff0000) | value) >>> 0;
-      this.rom.writeUInt32BE(instr, paddr);
+      const instrBuffer = Buffer.alloc(4);
+      instrBuffer.writeUInt32BE(instr, 0);
+      this.patch(paddr, instrBuffer);
     }
 
     this.cursor += count * 4;
@@ -203,7 +211,9 @@ class Patcher {
       const paddr = this.virtualToPhysical(addr);
       let instr = this.rom.readUInt32BE(paddr);
       instr = ((instr & 0xfc000000) | target) >>> 0;
-      this.rom.writeUInt32BE(instr, paddr);
+      const instrBuffer = Buffer.alloc(4);
+      instrBuffer.writeUInt32BE(instr, 0);
+      this.patch(paddr, instrBuffer);
     }
 
     this.cursor += count * 4;
@@ -211,6 +221,9 @@ class Patcher {
 
   patchWrite32(patch: Buffer) {
     const value = patch.readUInt32BE(this.cursor + 0x00);
+    const valueBuffer = Buffer.alloc(4);
+    valueBuffer.writeUInt32BE(value, 0);
+
     const count = patch.readUInt32BE(this.cursor + 0x04) / 4;
     this.cursor += 0x08;
 
@@ -218,7 +231,7 @@ class Patcher {
     for (let i = 0; i < count; ++i) {
       const addr = patch.readUInt32BE(this.cursor + i * 4);
       const paddr = this.virtualToPhysical(addr);
-      this.rom.writeUInt32BE(value, paddr);
+      this.patch(paddr, valueBuffer);
     }
 
     this.cursor += count * 4;
@@ -231,8 +244,10 @@ class Patcher {
 
     const paddr = this.virtualToPhysical(addr);
 
-    this.rom.writeUInt32BE((0x08000000 | (((func >>> 2) & 0x03ffffff) >>> 0)) >>> 0, paddr);
-    this.rom.writeUInt32BE(0x0, paddr + 4);
+    const buffer = Buffer.alloc(8);
+    buffer.writeUInt32BE((0x08000000 | (((func >>> 2) & 0x03ffffff) >>> 0)) >>> 0, 0);
+    buffer.writeUInt32BE(0x0, 4);
+    this.patch(paddr, buffer);
   }
 
   patchObject(patch: Buffer) {
@@ -244,7 +259,7 @@ class Patcher {
     const paddr = this.objectToPhysical(objectId, offset);
     const data = patch.subarray(this.cursor, this.cursor + size);
     this.cursor += size;
-    data.copy(this.rom, paddr);
+    this.patch(paddr, data);
   }
 
   patchCall = (patch: Buffer) => {
@@ -253,8 +268,10 @@ class Patcher {
     this.cursor += 0x08;
 
     const paddr = this.virtualToPhysical(addr);
-
-    this.rom.writeUInt32BE((0x0c000000 | (((func >>> 2) & 0x03ffffff) >>> 0)) >>> 0, paddr);
+    const instr = ((0x0c000000 | (((func >>> 2) & 0x03ffffff) >>> 0)) >>> 0);
+    const instrBuffer = Buffer.alloc(4);
+    instrBuffer.writeUInt32BE(instr, 0);
+    this.patch(paddr, instrBuffer);
   }
 
   patchVROM(patch: Buffer) {
@@ -263,10 +280,10 @@ class Patcher {
     this.cursor += 0x08;
     const data = patch.subarray(this.cursor, this.cursor + size);
     this.cursor += size;
-    data.copy(this.rom, paddr);
+    this.patch(paddr, data);
   }
 
-  async run() {
+  run() {
     this.cursor = 0;
     for (;;) {
       /* Align on a 8-byte boundary */
@@ -311,11 +328,5 @@ class Patcher {
         throw new Error("Invalid patch type: " + type);
       }
     }
-    return this.rom;
   }
 }
-
-export const patchGame = async (rom: Buffer, patches: Buffer, opts: Options, game: Game) => {
-  const patcher = new Patcher(game, rom, patches, opts);
-  return patcher.run();
-};

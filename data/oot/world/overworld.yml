@@ -544,7 +544,7 @@
 "Death Mountain Crater Warp":
   region: DEATH_MOUNTAIN_CRATER
   exits:
-    "Fire Temple": "has_tunic_goron"
+    "Fire Temple": "is_adult && has_tunic_goron"
     "Death Mountain Crater Bottom": "can_hookshot || has_hover_boots || can_ride_bean(BEAN_DEATH_MOUNTAIN_CRATER)"
   events:
     BEAN_DEATH_MOUNTAIN_CRATER: "can_use_beans"
@@ -580,31 +580,44 @@
   exits:
     "Gerudo Fortress": "true"
     "Gerudo Valley After Bridge": "true"
-    "Haunted Wasteland Start": "has(GERUDO_CARD) && is_adult"
+    "Fortress Near Wasteland": "event(OPEN_FORTRESS_GATE)"
     "Gerudo Training Grounds": "has(GERUDO_CARD) && is_adult"
+  events:
+    OPEN_FORTRESS_GATE: "has(GERUDO_CARD) && is_adult"
   locations:
     "Gerudo Fortress Chest": "has_hover_boots || can_longshot || scarecrow_hookshot"
     "Gerudo Fortress Archery Reward 1": "event(EPONA) && can_use_bow && has(GERUDO_CARD)"
     "Gerudo Fortress Archery Reward 2": "event(EPONA) && can_use_bow && has(GERUDO_CARD)"
     "Gerudo Fortress GS Wall": "can_hookshot && gs_night"
     "Gerudo Fortress GS Target": "can_hookshot && gs_night && has(GERUDO_CARD)"
+"Fortress Near Wasteland":
+  region: GERUDO_FORTRESS
+  exits:
+    "Gerudo Fortress Exterior": "event(OPEN_FORTRESS_GATE)"
+    "Haunted Wasteland Start": "true"
 "Haunted Wasteland Start":
   region: HAUNTED_WASTELAND
   exits:
-    "Gerudo Fortress Exterior": "true"
+    "Fortress Near Wasteland": "true"
     "Haunted Wasteland Structure": "can_longshot || has_hover_boots"
 "Haunted Wasteland Structure":
   region: HAUNTED_WASTELAND
   exits:
-    "Desert Colossus": "has_lens_strict || trick(OOT_BLIND_WASTELAND)"
+    "Haunted Wasteland Start": "can_longshot || has_hover_boots"
+    "Haunted Wasteland End": "has_lens_strict || trick(OOT_BLIND_WASTELAND)"
   locations:
     "Haunted Wasteland Chest": "has_fire"
     "Haunted Wasteland GS": "can_collect_distance"
+"Haunted Wasteland End":
+  region: HAUNTED_WASTELAND
+  exits:
+    "Haunted Wasteland Structure": "trick(OOT_BLIND_WASTELAND)"
+    "Desert Colossus": "true"
 "Desert Colossus":
   region: DESERT_COLOSSUS
   exits:
     "Spirit Temple": "true"
-    "Haunted Wasteland Structure": "trick(OOT_BLIND_WASTELAND)"
+    "Haunted Wasteland End": "true"
   events:
     BEAN_DESERT_COLOSSUS: "can_use_beans"
   locations:

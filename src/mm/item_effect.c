@@ -8,7 +8,7 @@ static void addHealth(u8 count)
 static void refillMagic(int level)
 {
     gSave.playerData.magicLevel = 0;
-    gSave.playerData.magic = level * 0x30;
+    gSave.playerData.magicAmount = level * 0x30;
     gSaveContext.magicTarget = level * 0x30;
 }
 

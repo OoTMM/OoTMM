@@ -25,9 +25,9 @@ static void addRupees(u16 count)
     gSaveContext.rupeesDelta += count;
 }
 
-static void addMagicUpgrade(int level)
+static void refillMagic(int level)
 {
-    gOotSave.magicSize = 0;
+    gOotSave.playerData.magicSize = 0;
     gSaveContext.magicTarget = 0x30 * level;
 }
 
@@ -65,10 +65,10 @@ int comboAddItemEffect(GameState_Play* play, s16 gi)
         addRupees(200);
         break;
     case GI_OOT_MAGIC_UPGRADE:
-        addMagicUpgrade(1);
+        refillMagic(1);
         break;
     case GI_OOT_MAGIC_UPGRADE2:
-        addMagicUpgrade(2);
+        refillMagic(2);
         break;
     case GI_OOT_RECOVERY_HEART:
         addHealth(1);

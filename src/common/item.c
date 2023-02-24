@@ -58,14 +58,14 @@ static int isItemUnavailableOot(s32 gi)
     case GI_OOT_BOMBS_10:
     case GI_OOT_BOMBS_20:
     case GI_OOT_BOMBS_30:
-        return gOotSave.upgrades.bombBag == 0;
+        return gOotSave.inventory.upgrades.bombBag == 0;
     case GI_OOT_ARROWS_5:
     case GI_OOT_ARROWS_10:
     case GI_OOT_ARROWS_30:
-        return gOotSave.upgrades.quiver == 0;
+        return gOotSave.inventory.upgrades.quiver == 0;
     case GI_OOT_DEKU_SEEDS_5:
     case GI_OOT_DEKU_SEEDS_30:
-        return gOotSave.upgrades.bulletBag == 0;
+        return gOotSave.inventory.upgrades.bulletBag == 0;
     default:
         return 0;
     }
@@ -156,4 +156,16 @@ int comboIsItemMinor(s16 gi)
         return isItemMinorMm(gi & ~MASK_FOREIGN_GI);
     else
         return isItemMinorOot(gi);
+}
+
+void comboSyncItems(void)
+{
+    if (comboConfig(CFG_SHARED_BOWS))
+        gForeignSave.inventory.ammo[ITS_FOREIGN_BOW] = gSave.inventory.ammo[ITS_NATIVE_BOW];
+
+    if (comboConfig(CFG_SHARED_BOMB_BAGS))
+        gForeignSave.inventory.ammo[ITS_FOREIGN_BOMBS] = gSave.inventory.ammo[ITS_NATIVE_BOMBS];
+
+    if (comboConfig(CFG_SHARED_MAGIC))
+       gForeignSave.playerData.magicAmount = gSave.playerData.magicAmount;
 }

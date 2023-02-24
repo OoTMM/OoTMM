@@ -38,11 +38,17 @@
   dungeon: DC
   exits:
     "Dodongo Cavern Miniboss 1": "true"
+    "Dodongo Cavern Green Side Room": "true"
     "Dodongo Cavern Main Ledge": "is_child || has_fire"
+"Dodongo Cavern Green Side Room":
+  dungeon: DC
+  exits:
+    "Dodongo Cavern Green Room": "true"
 "Dodongo Cavern Main Ledge":
   dungeon: DC
   exits:
     "Dodongo Cavern Main": "true"
+    "Dodongo Cavern Green Room": "true"
   events:
     DC_MAIN_SWITCH: "true"
 "Dodongo Cavern Stairs":
@@ -71,13 +77,18 @@
     "Dodongo Cavern Stairs Top": "true"
     "Dodongo Cavern Bomb Bag Room 2": "can_longshot || has_hover_boots || (is_adult && trick(OOT_DC_JUMP))"
     "Dodongo Cavern Miniboss 2": "can_hit_triggers_distance"
+    "Dodongo Cavern Bomb Bag Side Room": "has_explosives_or_hammer"
   locations:
     "Dodongo Cavern Bomb Bag Side Chest": "true"
+"Dodongo Cavern Bomb Bag Side Room":
+  dungeon: DC
+  exits:
+    "Dodongo Cavern Bomb Bag Room 1": "true"
 "Dodongo Cavern Miniboss 2":
   dungeon: DC
   exits:
     "Dodongo Cavern Bomb Bag Room 1": "true"
-    "Dodongo Cavern Bomb Bag Room 2": "can_hit_triggers_distance"
+    "Dodongo Cavern Bomb Bag Room 2": "true"
 "Dodongo Cavern Bomb Bag Room 2":
   dungeon: DC
   exits:

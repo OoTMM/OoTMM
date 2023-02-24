@@ -36,12 +36,10 @@ PATCH_START 0x80acdc84
 .int 0
 PATCH_END
 
-#define FLAGS2 (gSaveContext + 0xf8 + 0x1c * 4 + 0x14)
-
 /* Check for our flag to destroy the town fairy */
 PATCH_START 0x80acc5c0
-  lui  t0,%HI(FLAGS2)
-  lw   t0,%LO(FLAGS2)(t0)
+  lui  t0,%HI(gMmExtraFlags2)
+  lw   t0,%LO(gMmExtraFlags2)(t0)
   andi t1,t0,0x10
 PATCH_END
 

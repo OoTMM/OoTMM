@@ -84,25 +84,12 @@ void comboReadForeignSave(void)
 #endif
 }
 
-void comboWriteForeignSave(void)
-{
-    if (gSaveContext.fileIndex == 0xff)
-        return;
-
-#if !defined(GAME_OOT)
-    saveOot();
-#endif
-
-#if !defined(GAME_MM)
-    saveMm();
-#endif
-}
-
 void comboWriteSave(void)
 {
     if (gSaveContext.fileIndex == 0xff)
         return;
 
+    comboSyncItems();
     saveOot();
     saveMm();
 }

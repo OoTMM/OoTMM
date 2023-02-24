@@ -5,10 +5,11 @@ int gNoTimeFlow;
 static void debugCheat(GameState_Play* play)
 {
 #if defined(DEBUG)
+    gMiscFlags.erSpring = 1;
+    gMiscFlags.erSwampClear = 1;
+    gMiscFlags.erCoastClear = 1;
     /*if (play->gs.input[0].current.buttons & 0x20)*/
     {
-        gMmExtraBoss.boss = 0xff;
-
         gSave.itemEquips.sword = 1;
         gSave.itemEquips.shield = 2;
         gMmExtraFlags2.progressiveShield = 1;
@@ -37,7 +38,7 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.questItems.songAwakening = 1;
         gSave.inventory.items[ITS_MM_BOTTLE + 0] = ITEM_MM_BOTTLED_DEKU_PRINCESS;
         gSave.inventory.items[ITS_MM_BOTTLE + 1] = ITEM_MM_BOTTLED_SPRING_WATER_HOT;
-        gSave.playerData.magic = 0x30;
+        gSave.playerData.magicAmount = 0x30;
         gMmSave.playerData.magicAcquired = 1;
         gSaveContext.magicTarget = 0x30;
         gSave.inventory.items[ITS_MM_MASK_GORON] = ITEM_MM_MASK_GORON;
@@ -80,6 +81,7 @@ static void debugCheat(GameState_Play* play)
 
         //gSave.skullCountOcean = 0x10;
     }
+
 #endif
 }
 
@@ -143,6 +145,7 @@ void hookPlay_Init(GameState_Play* play)
     Play_Init(play);
     gLastEntrance = gSave.entranceIndex;
     comboSpawnItemGivers(play);
+    comboSpawnCustomWarps(play);
 
     if (gNoTimeFlow)
     {

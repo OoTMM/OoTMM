@@ -191,9 +191,18 @@ const SIMPLE_DEPENDENCIES: {[k: string]: string[]} = {
   ],
   MM_MASK_GREAT_FAIRY: [
     'MM Moon Fierce Deity Mask',
-    'MM Woodfall Great Fairy',
-    'MM Snowhead Great Fairy',
-    'MM Great Bay Great Fairy',
+    'MM Woodfall Temple SF Water Room Beehive',
+    'MM Woodfall Temple SF Maze Bubble',
+    'MM Woodfall Temple SF Pre-Boss Left',
+    'MM Woodfall Temple SF Pre-Boss Pillar',
+    'MM Snowhead Temple SF Bridge Pillar',
+    'MM Snowhead Temple SF Bridge Under Platform',
+    'MM Snowhead Temple SF Compass Room Crate',
+    'MM Snowhead Temple SF Dual Switches',
+    'MM Snowhead Temple SF Snow Room',
+    'MM Great Bay Temple SF Water Wheel Platform',
+    'MM Great Bay Temple SF Central Room Underwater Pot',
+    //'MM Great Bay Temple SF Pre-Boss Above Water', #Uncomment this if a trick to reverse the water flow in Great Bay Temple without Ice Arrows is added.
   ],
   MM_MASK_DON_GERO: [
     'MM Moon Fierce Deity Mask',
@@ -316,14 +325,24 @@ export class LogicPassAnalysis {
     if (!this.state.settings.tricks['OOT_NIGHT_GS']) {
       delete this.dependencies['OOT_SONG_SUN'];
     }
+
+    if (this.state.settings.erBoss) {
+      delete this.dependencies['OOT_BOSS_KEY_FOREST'];
+      delete this.dependencies['OOT_BOSS_KEY_SPIRIT'];
+    }
+
+    if (this.state.settings.erBoss || this.state.settings.erDungeons) {
+      delete this.dependencies['OOT_SMALL_KEY_FOREST'];
+      delete this.dependencies['OOT_SMALL_KEY_SPIRIT'];
+    }
   }
 
-  private makeSpheresRaw() {
+  private makeSpheresRaw(restrictedLocations?: Set<string>) {
     const spheres: string[][] = [];
     let pathfinderState: PathfinderState | null = null;
 
     do {
-      pathfinderState = this.pathfinder.run(pathfinderState, { items: this.state.items, stopAtGoal: true });
+      pathfinderState = this.pathfinder.run(pathfinderState, { items: this.state.items, stopAtGoal: true, restrictedLocations });
       const sphere = Array.from(pathfinderState.newLocations).filter(x => isItemImportant(this.state.items[x]));
       if (sphere.length !== 0) {
         spheres.push(shuffle(this.state.random, sphere));
@@ -353,7 +372,8 @@ export class LogicPassAnalysis {
       }
     }
 
-    this.spheres = spheres.reverse();
+    /* Recompute spheres to ensure correct order */
+    this.spheres = this.makeSpheresRaw(spheresLocs);
   }
 
   private makeRequiredLocs() {
@@ -389,6 +409,9 @@ export class LogicPassAnalysis {
     case 'MM_BOW':
     case 'MM_BOMB_BAG':
     case 'MM_MAGIC_UPGRADE':
+    case 'SHARED_BOW':
+    case 'SHARED_BOMB_BAG':
+    case 'SHARED_MAGIC_UPGRADE':
       maximumRequired = 1;
       break;
     }
@@ -436,8 +459,12 @@ export class LogicPassAnalysis {
   }
 
   private makeUselessLocs() {
+    if (this.state.settings.logic === 'beatable') {
+      this.makeUnreachable();
+    }
+
     for (const loc in this.state.world.checks) {
-      if (this.requiredLocs.has(loc)) {
+      if (this.requiredLocs.has(loc) || this.uselessLocs.has(loc)) {
         continue;
       }
       if (!isItemImportant(this.state.items[loc]) || this.isLocUselessHeuristicCount(loc) || this.isLocUselessHeuristicDependencies(loc)) {
@@ -446,9 +473,19 @@ export class LogicPassAnalysis {
     }
   }
 
+  private makeUnreachable() {
+    const pathfinderState = this.pathfinder.run(null, { items: this.state.items, recursive: true });
+    for (const loc in this.state.world.checks) {
+      if (isItemImportant(this.state.items[loc]) && !pathfinderState.locations.has(loc)) {
+        this.state.monitor.debug("Analysis - makeUnreachable: " + this.state.items[loc]);
+        this.uselessLocs.add(loc);
+      }
+    }
+  }
+
   run() {
     this.state.monitor.log('Logic: Analysis');
-    if (!this.state.settings.noLogic) {
+    if (this.state.settings.logic !== 'none') {
       this.makeDependencies();
       this.makeSpheres();
       this.makeRequiredLocs();

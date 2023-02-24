@@ -1,6 +1,6 @@
 #include <combo.h>
 
-#define BOSS_SPAWN_FLAGS_ADDR (gSaveContext + 0xf8 + 0x1c * 1 + 0x14 + 1)
+#define BOSS_SPAWN_FLAGS_ADDR (gMmExtraBoss + 1)
 /* Odolwa */
 
 /* Fix the spawn flag */

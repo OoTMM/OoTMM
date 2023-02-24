@@ -30,7 +30,7 @@ async function build() {
         'process.env.ROLLUP': JSON.stringify(true),
         'process.env.VERSION': JSON.stringify(VERSION),
       }),
-      typescript(),
+      typescript({ tsconfig: './tsconfig.json', declaration: true, declarationDir: 'dist' }),
       externals({ builtinsPrefix: 'strip' }),
       jsonPlugin(),
       yamlPlugin(),

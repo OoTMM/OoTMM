@@ -1,10 +1,13 @@
 #ifndef COMBO_COMMON_ACTOR_H
 #define COMBO_COMMON_ACTOR_H
 
+#if !defined(__ASSEMBLER__)
 #include <combo/types.h>
+#endif
 
 #if defined(GAME_OOT)
 # define AC_ITEM_GIVER      0x003
+# define AC_CUSTOM_WARP     0x005
 # define AC_EN_BOX          0x00a
 # define AC_ITEM00          0x015
 # define AC_EN_XC           0x048
@@ -35,8 +38,10 @@
 # define AC_DOOR_WARP1      0x038
 # define AC_ITEM_B_HEART    0x03a
 # define AC_DM_HINA         0x140
+# define AC_CUSTOM_WARP     0x023
 #endif
 
+#if !defined(__ASSEMBLER__)
 typedef struct GameState_Play GameState_Play;
 typedef struct Actor Actor;
 
@@ -106,6 +111,7 @@ _Static_assert(sizeof(Actor) == 0x13c, "OoT Actor size is wrong");
 
 #if defined(GAME_MM)
 _Static_assert(sizeof(Actor) == 0x144, "MM Actor size is wrong");
+#endif
 #endif
 
 #endif

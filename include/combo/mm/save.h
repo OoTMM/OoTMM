@@ -11,7 +11,7 @@ typedef struct
     s16     healthCapacity;
     s16     health;
     s8      magicLevel;
-    s8      magic;
+    s8      magicAmount;
     s16     rupees;
     u16     swordHealth;
     u16     tatlTimer;
@@ -235,8 +235,9 @@ ASSERT_OFFSET(MmSaveContext, dungeonId,     0x48c8);
 
 #if defined(GAME_MM)
 ALIGNED(16) extern MmSaveContext gSaveContext;
-# define gMmSave    (gSaveContext.save)
-# define gSave      gMmSave
+# define gMmSave        (gSaveContext.save)
+# define gSave          gMmSave
+# define gForeignSave   gOotSave
 #else
 ALIGNED(16) extern MmSave gMmSave;
 #endif
@@ -331,10 +332,5 @@ MmExtraFlags2;
 #define MM_PLAYER_FORM_GORON    1
 #define MM_PLAYER_FORM_ZORA     2
 #define MM_PLAYER_FORM_HUMAN    4
-
-#define gMmExtraBoss    (*((MmExtraBoss*)(gMmSave.permanentSceneFlags[1].raw + 0x14)))
-#define gMmExtraTrade   (*((MmExtraTrade*)(gMmSave.permanentSceneFlags[2].raw + 0x14)))
-#define gMmExtraFlags   (*((MmExtraFlags*)(gMmSave.permanentSceneFlags[3].raw + 0x14)))
-#define gMmExtraFlags2  (*((MmExtraFlags2*)(gMmSave.permanentSceneFlags[4].raw + 0x14)))
 
 #endif /* MM_SAVE_H */

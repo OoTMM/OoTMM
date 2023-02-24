@@ -36,7 +36,6 @@
 #  include <combo/mm/actor_enfsn.h>
 # endif
 
-# include <combo/common/actor.h>
 # include <combo/common/actors/En_Item00.h>
 # include <combo/common/actor_init.h>
 # include <combo/common/actor_item_custom.h>
@@ -45,7 +44,7 @@
 
 /* Shared with assembler */
 #include <PR/gbi.h>
-
+#include <combo/common/actor.h>
 #include <combo/save.h>
 #include <combo/gi.h>
 #include <combo/items.h>
@@ -140,7 +139,6 @@ void comboReadWriteFlash(u32 devAddr, void* dramAddr, u32 size, s32 direction);
 
 /* Save */
 void comboReadForeignSave(void);
-void comboWriteForeignSave(void);
 void comboWriteSave(void);
 void comboCopyMmSave(int dst, int src);
 
@@ -190,6 +188,9 @@ void*   comboGetObject(u16 objectId);
 u32     comboLoadObject(void* buffer, u16 objectId);
 void    comboLoadCustomKeep(void);
 
+/* Custom_Warp */
+void comboSpawnCustomWarps(GameState_Play*);
+
 /* Draw */
 #define DRAW_NO_PRE1    0x01
 #define DRAW_NO_PRE2    0x02
@@ -219,6 +220,8 @@ extern const u8 kMmTrade1[];
 extern const u8 kMmTrade2[];
 extern const u8 kMmTrade3[];
 
+void comboSyncItems(void);
+
 int comboAddItemMm(s16 gi, int noEffect);
 int comboAddItemOot(s16 gi, int noEffect);
 int comboAddItemEffect(GameState_Play* play, s16 gi);
@@ -232,6 +235,20 @@ void comboAddBossKeyMm(u16 dungeonId);
 int  comboAddStrayFairyMm(u16 dungeonId);
 void comboAddMapMm(u16 dungeonId);
 void comboAddCompassMm(u16 dungeonId);
+
+void comboAddQuiverOot(int level);
+void comboAddQuiverMm(int level);
+void comboAddArrowsOot(int count);
+void comboAddArrowsMm(int count);
+void comboAddBombBagOot(int level);
+void comboAddBombBagMm(int level);
+void comboAddBombsOot(int count);
+void comboAddBombsMm(int count);
+void comboAddMagicUpgradeOot(int level);
+void comboAddMagicUpgradeMm(int level);
+
+void comboAddCommonItemOot(int sid);
+void comboAddCommonItemMm(int sid);
 
 int  comboAddItem(GameState_Play* play, s16 gi);
 int  comboAddItemNoEffect(s16 gi);

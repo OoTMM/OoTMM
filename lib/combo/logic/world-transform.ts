@@ -4,6 +4,8 @@ import { isGanonBossKey, isJunk, isMapCompass } from './items';
 import { World } from './world';
 
 export class LogicPassWorldTransform {
+  private junkToggle = false;
+
   constructor(
     private readonly state: {
       monitor: Monitor;
@@ -17,13 +19,73 @@ export class LogicPassWorldTransform {
   run() {
     this.state.monitor.log('Logic: World Transform');
 
+    const { config } = this.state;
+
     let fireTempleKeyRemoved = false;
     let mmExtraShield = false;
     let ootShields = 3;
 
+    const itemsToReplace = new Map<string, string>();
+    const itemsToJunk = new Set<string>();
+
+    if (config.has('SHARED_BOWS')) {
+      /* Bows and quivers */
+      itemsToReplace.set('OOT_BOW', 'SHARED_BOW');
+      itemsToJunk.add('MM_BOW');
+
+      /* Arrows */
+      itemsToReplace.set('OOT_ARROWS_5', 'SHARED_ARROWS_5');
+      itemsToReplace.set('OOT_ARROWS_10', 'SHARED_ARROWS_10');
+      itemsToReplace.set('OOT_ARROWS_30', 'SHARED_ARROWS_30');
+      itemsToReplace.set('MM_ARROWS_10', 'SHARED_ARROWS_10');
+      itemsToReplace.set('MM_ARROWS_30', 'SHARED_ARROWS_30');
+      itemsToReplace.set('MM_ARROWS_40', 'SHARED_ARROWS_40');
+    }
+
+    if (config.has('SHARED_BOMB_BAGS')) {
+      /* Bomb Bags */
+      itemsToReplace.set('OOT_BOMB_BAG', 'SHARED_BOMB_BAG');
+      itemsToJunk.add('MM_BOMB_BAG');
+
+      /* Bombs */
+      itemsToReplace.set('OOT_BOMB',      'SHARED_BOMB');
+      itemsToReplace.set('OOT_BOMBS_5',   'SHARED_BOMBS_5');
+      itemsToReplace.set('OOT_BOMBS_10',  'SHARED_BOMBS_10');
+      itemsToReplace.set('OOT_BOMBS_20',  'SHARED_BOMBS_20');
+      itemsToReplace.set('OOT_BOMBS_30',  'SHARED_BOMBS_30');
+      itemsToReplace.set('MM_BOMB',       'SHARED_BOMB');
+      itemsToReplace.set('MM_BOMBS_5',    'SHARED_BOMBS_5');
+      itemsToReplace.set('MM_BOMBS_10',   'SHARED_BOMBS_10');
+      itemsToReplace.set('MM_BOMBS_20',   'SHARED_BOMBS_20');
+      itemsToReplace.set('MM_BOMBS_30',   'SHARED_BOMBS_30');
+    }
+
+    if (config.has('SHARED_MAGIC')) {
+      itemsToReplace.set('OOT_MAGIC_UPGRADE', 'SHARED_MAGIC_UPGRADE');
+      itemsToJunk.add('MM_MAGIC_UPGRADE');
+    }
+
+    if (config.has('SHARED_MAGIC_ARROWS')) {
+      itemsToReplace.set('OOT_ARROW_FIRE',  'SHARED_ARROW_FIRE');
+      itemsToReplace.set('OOT_ARROW_ICE',   'SHARED_ARROW_ICE');
+      itemsToReplace.set('OOT_ARROW_LIGHT', 'SHARED_ARROW_LIGHT');
+      itemsToJunk.add('MM_ARROW_FIRE');
+      itemsToJunk.add('MM_ARROW_ICE');
+      itemsToJunk.add('MM_ARROW_LIGHT');
+    }
+
     for (const loc in this.state.world.checks) {
       const check = this.state.world.checks[loc];
       let item = check.item;
+
+      if (itemsToReplace.has(item)) {
+        item = itemsToReplace.get(item)!;
+      }
+
+      if (itemsToJunk.has(item)) {
+        item = this.junkToggle ? 'MM_RUPEE_BLUE' : 'OOT_RUPEE_BLUE';
+        this.junkToggle = !this.junkToggle;
+      }
 
       /* Maps/Compass */
       if (isMapCompass(item) && ['starting', 'removed'].includes(this.state.settings.mapCompassShuffle)) {

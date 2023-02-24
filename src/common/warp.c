@@ -53,14 +53,17 @@ void comboTriggerWarp(GameState_Play* play, int bossId)
     case DUNGEONID_TEMPLE_WOODFALL:
         gMmExtraBoss.boss |= (1 << 0);
         MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_WF);
+        gMiscFlags.erSwampClear = 1;
         break;
     case DUNGEONID_TEMPLE_SNOWHEAD:
         gMmExtraBoss.boss |= (1 << 1);
         MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_SH);
+        gMiscFlags.erSpring = 1;
         break;
     case DUNGEONID_TEMPLE_GREAT_BAY:
         gMmExtraBoss.boss |= (1 << 2);
         MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_GB);
+        gMiscFlags.erCoastClear = 1;
         break;
     case DUNGEONID_TEMPLE_STONE_TOWER_INVERTED:
         gMmExtraBoss.boss |= (1 << 3);
@@ -123,7 +126,7 @@ void comboTriggerWarp(GameState_Play* play, int bossId)
         break;
     case DUNGEONID_TEMPLE_GREAT_BAY:
         isMmEntrance = 1;
-        entrance = 0x6a90;
+        entrance = 0x6a70;
         break;
     case DUNGEONID_TEMPLE_STONE_TOWER:
     case DUNGEONID_TEMPLE_STONE_TOWER_INVERTED:

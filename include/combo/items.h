@@ -404,4 +404,24 @@
 #define XITEM_MM_TRADE3_LETTER_TO_KAFEI     0x0
 #define XITEM_MM_TRADE3_PENDANT_OF_MEMORIES 0x1
 
+/* Shared defs */
+#if defined(GAME_OOT)
+# define ITS_NATIVE_BOW             ITS_OOT_BOW
+# define ITS_NATIVE_BOMBS           ITS_OOT_BOMBS
+# define ITS_FOREIGN_BOW            ITS_MM_BOW
+# define ITS_FOREIGN_BOMBS          ITS_MM_BOMBS
+#endif
+
+#if defined(GAME_MM)
+# define ITS_NATIVE_BOW             ITS_MM_BOW
+# define ITS_NATIVE_BOMBS           ITS_MM_BOMBS
+# define ITS_FOREIGN_BOW            ITS_OOT_BOW
+# define ITS_FOREIGN_BOMBS          ITS_OOT_BOMBS
+#endif
+
+/* Common shared item IDs */
+#define SITEM_ARROW_FIRE        0x00
+#define SITEM_ARROW_ICE         0x01
+#define SITEM_ARROW_LIGHT       0x02
+
 #endif

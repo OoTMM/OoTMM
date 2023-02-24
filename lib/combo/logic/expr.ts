@@ -45,7 +45,7 @@ export const exprOr = (exprs: Expr[]): Expr => state => exprs.some(expr => expr(
 export const exprNot = (expr: Expr): Expr => state => !expr(state);
 export const exprCond = (cond: Expr, then: Expr, otherwise: Expr): Expr => state => cond(state) ? then(state) : otherwise(state);
 export const exprAge = (age: Age): Expr => state => state.age === age;
-export const exprHas = (item: string, count: number): Expr => state => state.ignoreItems || (itemCount(state, item) >= count);
+export const exprHas = (item: string, itemShared: string, count: number): Expr => state => state.ignoreItems || ((itemCount(state, item) + itemCount(state, itemShared)) >= count);
 export const exprEvent = (event: string): Expr => state => state.events.has(event);
 export const exprMasks = (count: number): Expr => state => state.ignoreItems || (itemsCount(state, MASKS) >= count);
 export const exprHealth = (count: number): Expr => state => state.ignoreItems || ((3 + itemCount(state, 'MM_HEART_CONTAINER') + itemCount(state, 'MM_HEART_PIECE') / 4) >= count);

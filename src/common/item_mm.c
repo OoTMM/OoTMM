@@ -90,21 +90,21 @@ static void addShield(int index)
     gMmSave.itemEquips.shield = index;
 }
 
-static void addBombBag(int index)
+void comboAddBombBagMm(int index)
 {
     gMmSave.inventory.items[ITS_MM_BOMBS] = ITEM_MM_BOMB;
     gMmSave.inventory.upgrades.bombBag = index;
     gMmSave.inventory.ammo[ITS_MM_BOMBS] = kMaxBombs[index];
 }
 
-static void addBowQuiver(int index)
+void comboAddQuiverMm(int index)
 {
     gMmSave.inventory.items[ITS_MM_BOW] = ITEM_MM_BOW;
     gMmSave.inventory.upgrades.quiver = index;
     gMmSave.inventory.ammo[ITS_MM_BOW] = kMaxArrows[index];
 }
 
-static void addBombs(int count)
+void comboAddBombsMm(int count)
 {
     u16 max;
 
@@ -115,9 +115,9 @@ static void addBombs(int count)
         gMmSave.inventory.ammo[ITS_MM_BOMBS] = max;
 }
 
-static void addArrows(int count)
+void comboAddArrowsMm(int count)
 {
-    u16 max;
+    int max;
 
     max = kMaxArrows[gMmSave.inventory.upgrades.quiver];
     gMmSave.inventory.items[ITS_MM_BOW] = ITEM_MM_BOW;
@@ -241,7 +241,7 @@ static void addTrade3(u8 index)
     gMmExtraTrade.tradeObtained3 |= (1 << (u16)index);
 }
 
-static void addMagicUpgrade(int level)
+void comboAddMagicUpgradeMm(int level)
 {
     gMmSave.playerData.magicAcquired = 1;
     if (level >= 2)
@@ -251,12 +251,118 @@ static void addMagicUpgrade(int level)
 static void refillMagic(int level)
 {
     gMmSave.playerData.magicLevel = level;
-    gMmSave.playerData.magic = level * 0x30;
+    gMmSave.playerData.magicAmount = level * 0x30;
+}
+
+void comboAddCommonItemMm(int sid)
+{
+    switch (sid)
+    {
+    case SITEM_ARROW_FIRE:
+        gMmSave.inventory.items[ITS_MM_ARROW_FIRE] = ITEM_MM_ARROW_FIRE;
+        break;
+    case SITEM_ARROW_ICE:
+        gMmSave.inventory.items[ITS_MM_ARROW_ICE] = ITEM_MM_ARROW_ICE;
+        break;
+    case SITEM_ARROW_LIGHT:
+        gMmSave.inventory.items[ITS_MM_ARROW_LIGHT] = ITEM_MM_ARROW_LIGHT;
+        break;
+    }
+}
+
+static void addItemShared(s16 gi, int noEffect)
+{
+    if (comboConfig(CFG_SHARED_BOWS))
+    {
+        switch (gi)
+        {
+        case GI_MM_BOW:
+            comboAddQuiverOot(1);
+            break;
+        case GI_MM_QUIVER2:
+            comboAddQuiverOot(2);
+            break;
+        case GI_MM_QUIVER3:
+            comboAddQuiverOot(3);
+            break;
+        case GI_MM_ARROWS_10:
+            comboAddArrowsOot(10);
+            break;
+        case GI_MM_ARROWS_30:
+            comboAddArrowsOot(30);
+            break;
+        case GI_MM_ARROWS_40:
+            comboAddArrowsOot(40);
+            break;
+        }
+    }
+
+    if (comboConfig(CFG_SHARED_BOMB_BAGS))
+    {
+        switch (gi)
+        {
+        case GI_MM_BOMB_BAG:
+            comboAddBombBagOot(1);
+            break;
+        case GI_MM_BOMB_BAG2:
+            comboAddBombBagOot(2);
+            break;
+        case GI_MM_BOMB_BAG3:
+            comboAddBombBagOot(3);
+            break;
+        case GI_MM_BOMB:
+            comboAddBombsOot(1);
+            break;
+        case GI_MM_BOMBS_5:
+            comboAddBombsOot(5);
+            break;
+        case GI_MM_BOMBS_10:
+            comboAddBombsOot(10);
+            break;
+        case GI_MM_BOMBS_20:
+            comboAddBombsOot(20);
+            break;
+        case GI_MM_BOMBS_30:
+            comboAddBombsOot(30);
+            break;
+        }
+    }
+
+    if (comboConfig(CFG_SHARED_MAGIC))
+    {
+        switch (gi)
+        {
+        case GI_MM_MAGIC_UPGRADE:
+            comboAddMagicUpgradeOot(1);
+            break;
+        case GI_MM_MAGIC_UPGRADE2:
+            comboAddMagicUpgradeOot(2);
+            break;
+        }
+    }
+
+    if (comboConfig(CFG_SHARED_MAGIC_ARROWS))
+    {
+        switch (gi)
+        {
+        case GI_MM_ARROW_FIRE:
+            comboAddCommonItemOot(SITEM_ARROW_FIRE);
+            break;
+        case GI_MM_ARROW_ICE:
+            comboAddCommonItemOot(SITEM_ARROW_ICE);
+            break;
+        case GI_MM_ARROW_LIGHT:
+            comboAddCommonItemOot(SITEM_ARROW_LIGHT);
+            break;
+        }
+    }
 }
 
 int comboAddItemMm(s16 gi, int noEffect)
 {
     int count;
+
+    addItemShared(gi, noEffect);
 
     count = 0;
     switch (gi)
@@ -265,13 +371,13 @@ int comboAddItemMm(s16 gi, int noEffect)
         gMmSave.inventory.items[ITS_MM_OCARINA] = ITEM_MM_OCARINA_OF_TIME;
         break;
     case GI_MM_ARROW_FIRE:
-        gMmSave.inventory.items[ITS_MM_ARROW_FIRE] = ITEM_MM_ARROW_FIRE;
+        comboAddCommonItemMm(SITEM_ARROW_FIRE);
         break;
     case GI_MM_ARROW_ICE:
-        gMmSave.inventory.items[ITS_MM_ARROW_ICE] = ITEM_MM_ARROW_ICE;
+        comboAddCommonItemMm(SITEM_ARROW_ICE);
         break;
     case GI_MM_ARROW_LIGHT:
-        gMmSave.inventory.items[ITS_MM_ARROW_LIGHT] = ITEM_MM_ARROW_LIGHT;
+        comboAddCommonItemMm(SITEM_ARROW_LIGHT);
         break;
     case GI_MM_MAGIC_BEAN:
         gMmSave.inventory.items[ITS_MM_BEANS] = ITEM_MM_MAGIC_BEAN;
@@ -328,28 +434,28 @@ int comboAddItemMm(s16 gi, int noEffect)
         fillBottle(ITEM_MM_BOTTLED_CHATEAU_ROMANI);
         break;
     case GI_MM_BOMB:
-        addBombs(1);
+        comboAddBombsMm(1);
         break;
     case GI_MM_BOMBS_5:
-        addBombs(5);
+        comboAddBombsMm(5);
         break;
     case GI_MM_BOMBS_10:
-        addBombs(10);
+        comboAddBombsMm(10);
         break;
     case GI_MM_BOMBS_20:
-        addBombs(20);
+        comboAddBombsMm(20);
         break;
     case GI_MM_BOMBS_30:
-        addBombs(30);
+        comboAddBombsMm(30);
         break;
     case GI_MM_ARROWS_10:
-        addArrows(10);
+        comboAddArrowsMm(10);
         break;
     case GI_MM_ARROWS_30:
-        addArrows(30);
+        comboAddArrowsMm(30);
         break;
     case GI_MM_ARROWS_40:
-        addArrows(40);
+        comboAddArrowsMm(40);
         break;
     case GI_MM_DEKU_NUT:
         addNuts(1);
@@ -475,12 +581,12 @@ int comboAddItemMm(s16 gi, int noEffect)
         gMmSave.inventory.items[ITS_MM_MASK_FIERCE_DEITY] = ITEM_MM_MASK_FIERCE_DEITY;
         break;
     case GI_MM_MAGIC_UPGRADE:
-        addMagicUpgrade(1);
+        comboAddMagicUpgradeMm(1);
         if (noEffect)
             refillMagic(1);
         break;
     case GI_MM_MAGIC_UPGRADE2:
-        addMagicUpgrade(2);
+        comboAddMagicUpgradeMm(2);
         if (noEffect)
             refillMagic(2);
         break;
@@ -504,22 +610,22 @@ int comboAddItemMm(s16 gi, int noEffect)
         addShield(2);
         break;
     case GI_MM_BOMB_BAG:
-        addBombBag(1);
+        comboAddBombBagMm(1);
         break;
     case GI_MM_BOMB_BAG2:
-        addBombBag(2);
+        comboAddBombBagMm(2);
         break;
     case GI_MM_BOMB_BAG3:
-        addBombBag(3);
+        comboAddBombBagMm(3);
         break;
     case GI_MM_BOW:
-        addBowQuiver(1);
+        comboAddQuiverMm(1);
         break;
     case GI_MM_QUIVER2:
-        addBowQuiver(2);
+        comboAddQuiverMm(2);
         break;
     case GI_MM_QUIVER3:
-        addBowQuiver(3);
+        comboAddQuiverMm(3);
         break;
     case GI_MM_WALLET2:
         gMmSave.inventory.upgrades.wallet = 1;
