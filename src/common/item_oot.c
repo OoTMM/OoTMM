@@ -69,7 +69,7 @@ static void addHealth(u8 count)
         gOotSave.health = gOotSave.healthMax;
 }
 
-static void addMagicUpgrade(int level)
+void comboAddMagicUpgradeOot(int level)
 {
     gOotSave.magicUpgrade = 1;
     if (level >= 2)
@@ -352,6 +352,19 @@ static void addItemShared(s16 gi, int noEffect)
             break;
         }
     }
+
+    if (comboConfig(CFG_SHARED_MAGIC))
+    {
+        switch (gi)
+        {
+        case GI_OOT_MAGIC_UPGRADE:
+            comboAddMagicUpgradeMm(1);
+            break;
+        case GI_OOT_MAGIC_UPGRADE2:
+            comboAddMagicUpgradeMm(2);
+            break;
+        }
+    }
 }
 
 int comboAddItemOot(s16 gi, int noEffect)
@@ -586,12 +599,12 @@ int comboAddItemOot(s16 gi, int noEffect)
         gOotSave.inventory.upgrades.wallet = 2;
         break;
     case GI_OOT_MAGIC_UPGRADE:
-        addMagicUpgrade(1);
+        comboAddMagicUpgradeOot(1);
         if (noEffect)
             refillMagic(1);
         break;
     case GI_OOT_MAGIC_UPGRADE2:
-        addMagicUpgrade(2);
+        comboAddMagicUpgradeOot(2);
         if (noEffect)
             refillMagic(2);
         break;

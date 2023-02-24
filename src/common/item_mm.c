@@ -241,7 +241,7 @@ static void addTrade3(u8 index)
     gMmExtraTrade.tradeObtained3 |= (1 << (u16)index);
 }
 
-static void addMagicUpgrade(int level)
+void comboAddMagicUpgradeMm(int level)
 {
     gMmSave.playerData.magicAcquired = 1;
     if (level >= 2)
@@ -308,6 +308,19 @@ static void addItemShared(s16 gi, int noEffect)
             break;
         case GI_MM_BOMBS_30:
             comboAddBombsOot(30);
+            break;
+        }
+    }
+
+    if (comboConfig(CFG_SHARED_MAGIC))
+    {
+        switch (gi)
+        {
+        case GI_MM_MAGIC_UPGRADE:
+            comboAddMagicUpgradeOot(1);
+            break;
+        case GI_MM_MAGIC_UPGRADE2:
+            comboAddMagicUpgradeOot(2);
             break;
         }
     }
@@ -536,12 +549,12 @@ int comboAddItemMm(s16 gi, int noEffect)
         gMmSave.inventory.items[ITS_MM_MASK_FIERCE_DEITY] = ITEM_MM_MASK_FIERCE_DEITY;
         break;
     case GI_MM_MAGIC_UPGRADE:
-        addMagicUpgrade(1);
+        comboAddMagicUpgradeMm(1);
         if (noEffect)
             refillMagic(1);
         break;
     case GI_MM_MAGIC_UPGRADE2:
-        addMagicUpgrade(2);
+        comboAddMagicUpgradeMm(2);
         if (noEffect)
             refillMagic(2);
         break;
