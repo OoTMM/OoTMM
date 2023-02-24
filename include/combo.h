@@ -247,6 +247,9 @@ void comboAddBombsMm(int count);
 void comboAddMagicUpgradeOot(int level);
 void comboAddMagicUpgradeMm(int level);
 
+void comboAddCommonItemOot(int sid);
+void comboAddCommonItemMm(int sid);
+
 int  comboAddItem(GameState_Play* play, s16 gi);
 int  comboAddItemNoEffect(s16 gi);
 

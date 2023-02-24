@@ -419,4 +419,9 @@
 # define ITS_FOREIGN_BOMBS          ITS_OOT_BOMBS
 #endif
 
+/* Common shared item IDs */
+#define SITEM_ARROW_FIRE        0x00
+#define SITEM_ARROW_ICE         0x01
+#define SITEM_ARROW_LIGHT       0x02
+
 #endif

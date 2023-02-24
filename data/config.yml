@@ -11,3 +11,4 @@ ER_DUNGEONS:                    0x09
 SHARED_BOWS:                    0x0a
 SHARED_BOMB_BAGS:               0x0b
 SHARED_MAGIC:                   0x0c
+SHARED_MAGIC_ARROWS:            0x0d

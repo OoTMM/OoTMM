@@ -254,6 +254,22 @@ static void refillMagic(int level)
     gMmSave.playerData.magicAmount = level * 0x30;
 }
 
+void comboAddCommonItemMm(int sid)
+{
+    switch (sid)
+    {
+    case SITEM_ARROW_FIRE:
+        gMmSave.inventory.items[ITS_MM_ARROW_FIRE] = ITEM_MM_ARROW_FIRE;
+        break;
+    case SITEM_ARROW_ICE:
+        gMmSave.inventory.items[ITS_MM_ARROW_ICE] = ITEM_MM_ARROW_ICE;
+        break;
+    case SITEM_ARROW_LIGHT:
+        gMmSave.inventory.items[ITS_MM_ARROW_LIGHT] = ITEM_MM_ARROW_LIGHT;
+        break;
+    }
+}
+
 static void addItemShared(s16 gi, int noEffect)
 {
     if (comboConfig(CFG_SHARED_BOWS))
@@ -324,6 +340,22 @@ static void addItemShared(s16 gi, int noEffect)
             break;
         }
     }
+
+    if (comboConfig(CFG_SHARED_MAGIC_ARROWS))
+    {
+        switch (gi)
+        {
+        case GI_MM_ARROW_FIRE:
+            comboAddCommonItemOot(SITEM_ARROW_FIRE);
+            break;
+        case GI_MM_ARROW_ICE:
+            comboAddCommonItemOot(SITEM_ARROW_ICE);
+            break;
+        case GI_MM_ARROW_LIGHT:
+            comboAddCommonItemOot(SITEM_ARROW_LIGHT);
+            break;
+        }
+    }
 }
 
 int comboAddItemMm(s16 gi, int noEffect)
@@ -339,13 +371,13 @@ int comboAddItemMm(s16 gi, int noEffect)
         gMmSave.inventory.items[ITS_MM_OCARINA] = ITEM_MM_OCARINA_OF_TIME;
         break;
     case GI_MM_ARROW_FIRE:
-        gMmSave.inventory.items[ITS_MM_ARROW_FIRE] = ITEM_MM_ARROW_FIRE;
+        comboAddCommonItemMm(SITEM_ARROW_FIRE);
         break;
     case GI_MM_ARROW_ICE:
-        gMmSave.inventory.items[ITS_MM_ARROW_ICE] = ITEM_MM_ARROW_ICE;
+        comboAddCommonItemMm(SITEM_ARROW_ICE);
         break;
     case GI_MM_ARROW_LIGHT:
-        gMmSave.inventory.items[ITS_MM_ARROW_LIGHT] = ITEM_MM_ARROW_LIGHT;
+        comboAddCommonItemMm(SITEM_ARROW_LIGHT);
         break;
     case GI_MM_MAGIC_BEAN:
         gMmSave.inventory.items[ITS_MM_BEANS] = ITEM_MM_MAGIC_BEAN;
