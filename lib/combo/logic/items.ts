@@ -144,6 +144,9 @@ export const ITEMS_REQUIRED = new Set<string>([
   'SHARED_BOW',
   'SHARED_BOMB_BAG',
   'SHARED_MAGIC_UPGRADE',
+  'SHARED_ARROW_FIRE',
+  'SHARED_ARROW_ICE',
+  'SHARED_ARROW_LIGHT',
 ]);
 
 const ITEMS_JUNK = new Set<string>([

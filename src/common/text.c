@@ -159,15 +159,16 @@ static int isItemAmbiguousOot(s16 gi)
     case GI_OOT_MAGIC_UPGRADE:
     case GI_OOT_MAGIC_UPGRADE2:
         return !comboConfig(CFG_SHARED_MAGIC);
-    case GI_OOT_STICK:
     case GI_OOT_ARROW_FIRE:
+    case GI_OOT_ARROW_ICE:
+    case GI_OOT_ARROW_LIGHT:
+        return !comboConfig(CFG_SHARED_MAGIC_ARROWS);
+    case GI_OOT_STICK:
     case GI_OOT_OCARINA_TIME:
     case GI_OOT_BOMBCHU_10:
     case GI_OOT_HOOKSHOT:
-    case GI_OOT_ARROW_ICE:
     case GI_OOT_LENS:
     case GI_OOT_MAGIC_BEAN:
-    case GI_OOT_ARROW_LIGHT:
     case GI_OOT_EMPTY_BOTTLE:
     case GI_OOT_MILK_BOTTLE:
     case GI_OOT_MASK_KEATON:
@@ -229,10 +230,11 @@ static int isItemAmbiguousMm(s16 gi)
     case GI_MM_MAGIC_UPGRADE:
     case GI_MM_MAGIC_UPGRADE2:
         return !comboConfig(CFG_SHARED_MAGIC);
-    case GI_MM_OCARINA_OF_TIME:
     case GI_MM_ARROW_FIRE:
     case GI_MM_ARROW_ICE:
     case GI_MM_ARROW_LIGHT:
+        return !comboConfig(CFG_SHARED_MAGIC_ARROWS);
+    case GI_MM_OCARINA_OF_TIME:
     case GI_MM_BOMBCHU:
     case GI_MM_DEKU_STICK:
     case GI_MM_DEKU_NUT:

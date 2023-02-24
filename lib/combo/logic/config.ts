@@ -67,6 +67,10 @@ export class LogicPassConfig {
       config.add('SHARED_MAGIC');
     }
 
+    if (this.state.settings.sharedMagicArrows) {
+      config.add('SHARED_MAGIC_ARROWS');
+    }
+
     return { config };
   }
 }

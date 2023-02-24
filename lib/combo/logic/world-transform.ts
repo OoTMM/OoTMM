@@ -65,6 +65,15 @@ export class LogicPassWorldTransform {
       itemsToJunk.add('MM_MAGIC_UPGRADE');
     }
 
+    if (config.has('SHARED_MAGIC_ARROWS')) {
+      itemsToReplace.set('OOT_ARROW_FIRE',  'SHARED_ARROW_FIRE');
+      itemsToReplace.set('OOT_ARROW_ICE',   'SHARED_ARROW_ICE');
+      itemsToReplace.set('OOT_ARROW_LIGHT', 'SHARED_ARROW_LIGHT');
+      itemsToJunk.add('MM_ARROW_FIRE');
+      itemsToJunk.add('MM_ARROW_ICE');
+      itemsToJunk.add('MM_ARROW_LIGHT');
+    }
+
     for (const loc in this.state.world.checks) {
       const check = this.state.world.checks[loc];
       let item = check.item;

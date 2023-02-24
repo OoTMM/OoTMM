@@ -295,6 +295,22 @@ static void addOcarina(int level)
     reloadSlot(ITS_OOT_OCARINA);
 }
 
+void comboAddCommonItemOot(int sid)
+{
+    switch (sid)
+    {
+    case SITEM_ARROW_FIRE:
+        gOotSave.inventory.items[ITS_OOT_ARROW_FIRE] = ITEM_OOT_ARROW_FIRE;
+        break;
+    case SITEM_ARROW_ICE:
+        gOotSave.inventory.items[ITS_OOT_ARROW_ICE] = ITEM_OOT_ARROW_ICE;
+        break;
+    case SITEM_ARROW_LIGHT:
+        gOotSave.inventory.items[ITS_OOT_ARROW_LIGHT] = ITEM_OOT_ARROW_LIGHT;
+        break;
+    }
+}
+
 static void addItemShared(s16 gi, int noEffect)
 {
     if (comboConfig(CFG_SHARED_BOWS))
@@ -365,6 +381,22 @@ static void addItemShared(s16 gi, int noEffect)
             break;
         }
     }
+
+    if (comboConfig(CFG_SHARED_MAGIC_ARROWS))
+    {
+        switch (gi)
+        {
+        case GI_OOT_ARROW_FIRE:
+            comboAddCommonItemMm(SITEM_ARROW_FIRE);
+            break;
+        case GI_OOT_ARROW_ICE:
+            comboAddCommonItemMm(SITEM_ARROW_ICE);
+            break;
+        case GI_OOT_ARROW_LIGHT:
+            comboAddCommonItemMm(SITEM_ARROW_LIGHT);
+            break;
+        }
+    }
 }
 
 int comboAddItemOot(s16 gi, int noEffect)
@@ -422,7 +454,7 @@ int comboAddItemOot(s16 gi, int noEffect)
         comboAddArrowsOot(30);
         break;
     case GI_OOT_ARROW_FIRE:
-        gOotSave.inventory.items[ITS_OOT_ARROW_FIRE] = ITEM_OOT_ARROW_FIRE;
+        comboAddCommonItemOot(SITEM_ARROW_FIRE);
         break;
     case GI_OOT_SPELL_FIRE:
         gOotSave.inventory.items[ITS_OOT_SPELL_FIRE] = ITEM_OOT_SPELL_FIRE;
@@ -459,7 +491,7 @@ int comboAddItemOot(s16 gi, int noEffect)
         addHookshot(2);
         break;
     case GI_OOT_ARROW_ICE:
-        gOotSave.inventory.items[ITS_OOT_ARROW_ICE] = ITEM_OOT_ARROW_ICE;
+        comboAddCommonItemOot(SITEM_ARROW_ICE);
         break;
     case GI_OOT_SPELL_WIND:
         gOotSave.inventory.items[ITS_OOT_SPELL_WIND] = ITEM_OOT_SPELL_WIND;
@@ -478,7 +510,7 @@ int comboAddItemOot(s16 gi, int noEffect)
         gOotSave.inventory.items[ITS_OOT_HAMMER] = ITEM_OOT_HAMMER;
         break;
     case GI_OOT_ARROW_LIGHT:
-        gOotSave.inventory.items[ITS_OOT_ARROW_LIGHT] = ITEM_OOT_ARROW_LIGHT;
+        comboAddCommonItemOot(SITEM_ARROW_LIGHT);
         break;
     case GI_OOT_SPELL_LOVE:
         gOotSave.inventory.items[ITS_OOT_SPELL_LOVE] = ITEM_OOT_SPELL_LOVE;
