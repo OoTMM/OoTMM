@@ -113,7 +113,7 @@ static s32 progressiveWallet(void)
 
 static s32 progressiveMagic(void)
 {
-    if (gOotSave.magicUpgrade)
+    if (gOotSave.playerData.magicUpgrade)
         return GI_OOT_MAGIC_UPGRADE2;
     return GI_OOT_MAGIC_UPGRADE;
 }

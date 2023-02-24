@@ -11,7 +11,7 @@ typedef struct
     s16     healthCapacity;
     s16     health;
     s8      magicLevel;
-    s8      magic;
+    s8      magicAmount;
     s16     rupees;
     u16     swordHealth;
     u16     tatlTimer;

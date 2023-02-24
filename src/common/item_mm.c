@@ -251,7 +251,7 @@ void comboAddMagicUpgradeMm(int level)
 static void refillMagic(int level)
 {
     gMmSave.playerData.magicLevel = level;
-    gMmSave.playerData.magic = level * 0x30;
+    gMmSave.playerData.magicAmount = level * 0x30;
 }
 
 static void addItemShared(s16 gi, int noEffect)

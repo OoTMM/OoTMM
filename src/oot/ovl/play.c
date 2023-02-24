@@ -61,9 +61,9 @@ static void debugCheat(GameState_Play* play)
 
         gMmExtraFlags2.majora = 1;
 
-        gSave.magicUpgrade = 1;
-        gSave.magicUpgrade2 = 1;
-        gSave.magicAmount = 0x60;
+        gSave.playerData.magicUpgrade = 1;
+        gSave.playerData.magicUpgrade2 = 1;
+        gSave.playerData.magicAmount = 0x60;
 
         gSave.inventory.dungeonKeys[SCE_OOT_TEMPLE_FOREST] = 9;
         gSave.inventory.dungeonKeys[SCE_OOT_INSIDE_GANON_CASTLE] = 9;
@@ -77,7 +77,7 @@ static void debugCheat(GameState_Play* play)
 
         //gSave.health = gSave.healthMax = 20 * 0x10;
 
-        gSave.rupees = 500;
+        gSave.playerData.rupees = 500;
 
         gOotExtraTrade.child = 0xffff;
         gOotExtraTrade.adult = 0;

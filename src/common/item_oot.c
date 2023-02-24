@@ -64,22 +64,22 @@ static void addHealth(u8 count)
     u16 health;
 
     health = (u16)count * 0x10;
-    gOotSave.health += health;
-    if (gOotSave.health > gOotSave.healthMax)
-        gOotSave.health = gOotSave.healthMax;
+    gOotSave.playerData.health += health;
+    if (gOotSave.playerData.health > gOotSave.playerData.healthMax)
+        gOotSave.playerData.health = gOotSave.playerData.healthMax;
 }
 
 void comboAddMagicUpgradeOot(int level)
 {
-    gOotSave.magicUpgrade = 1;
+    gOotSave.playerData.magicUpgrade = 1;
     if (level >= 2)
-        gOotSave.magicUpgrade2 = 1;
+        gOotSave.playerData.magicUpgrade2 = 1;
 }
 
 static void refillMagic(int level)
 {
-    gOotSave.magicSize = level;
-    gOotSave.magicAmount = level * 0x30;
+    gOotSave.playerData.magicSize = level;
+    gOotSave.playerData.magicAmount = level * 0x30;
 }
 
 
@@ -246,9 +246,9 @@ static void addRupees(u16 count)
     u16 max;
 
     max = kMaxRupees[gOotSave.inventory.upgrades.wallet];
-    gOotSave.rupees += count;
-    if (gOotSave.rupees > max)
-        gOotSave.rupees = max;
+    gOotSave.playerData.rupees += count;
+    if (gOotSave.playerData.rupees > max)
+        gOotSave.playerData.rupees = max;
 }
 
 static void reloadSlotEquips(OotItemEquips* equips, int slot)
@@ -521,7 +521,7 @@ int comboAddItemOot(s16 gi, int noEffect)
         break;
     case GI_OOT_SWORD_KNIFE:
         gOotSave.inventory.equipment.swords |= EQ_OOT_SWORD_KNIFE;
-        gOotSave.swordHealth = 8;
+        gOotSave.playerData.swordHealth = 8;
         break;
     case GI_OOT_SWORD_BIGGORON:
         gOotSave.inventory.equipment.swords |= EQ_OOT_SWORD_KNIFE;
@@ -621,7 +621,7 @@ int comboAddItemOot(s16 gi, int noEffect)
         addStickUpgrade(3);
         break;
     case GI_OOT_DEFENSE_UPGRADE:
-        gOotSave.doubleDefense = 1;
+        gOotSave.playerData.doubleDefense = 1;
         gOotSave.inventory.doubleDefenseHearts = 20;
         if (noEffect)
             addHealth(20);
@@ -634,14 +634,14 @@ int comboAddItemOot(s16 gi, int noEffect)
             if (gOotSave.inventory.quest.heartPieces >= 4)
             {
                 gOotSave.inventory.quest.heartPieces -= 4;
-                gOotSave.healthMax += 0x10;
+                gOotSave.playerData.healthMax += 0x10;
             }
             addHealth(20);
         }
         break;
     case GI_OOT_HEART_CONTAINER:
     case GI_OOT_HEART_CONTAINER2:
-        gOotSave.healthMax += 0x10;
+        gOotSave.playerData.healthMax += 0x10;
         if (noEffect)
             addHealth(20);
         break;

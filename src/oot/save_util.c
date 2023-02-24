@@ -103,7 +103,7 @@ void comboCreateSaveMM(void)
     memcpy(gMmSave.playerData.newf, "ZELDA3", 6);
 
     /* Copy the player name */
-    copyName(gMmSave.playerData.playerName, gSave.playerName);
+    copyName(gMmSave.playerData.playerName, gSave.playerData.playerName);
 
     /* Set some events */
     MM_SET_EVENT_WEEK(EV_MM_WEEK_FIRST_CYCLE);

@@ -34,10 +34,10 @@ void BgDyYoseizo_Update(Actor* this, GameState_Play* play)
         if (Actor_HasParent(this) || gOotExtraFlags.greatFairies & mask)
         {
             /* Refill */
-            if (gSave.magicUpgrade)
+            if (gSave.playerData.magicUpgrade)
             {
-                gSave.magicSize = 0;
-                gSaveContext.magicTarget = gSave.magicUpgrade2 ? 0x60 : 0x30;
+                gSave.playerData.magicSize = 0;
+                gSaveContext.magicTarget = gSave.playerData.magicUpgrade2 ? 0x60 : 0x30;
             }
             gOotExtraFlags.greatFairies |= mask;
             ActorDestroy(this);
