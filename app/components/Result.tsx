@@ -1,6 +1,8 @@
 import React from 'react';
 
-const download = (data, name, mime) => {
+import type { GeneratorOutput } from '@ootmm/core';
+
+const download = (data: Buffer | string, name: string, mime: string) => {
   const a = document.createElement('a');
   const blob = new Blob([data], { type: mime });
   a.href = window.URL.createObjectURL(blob);
@@ -8,14 +10,14 @@ const download = (data, name, mime) => {
   a.click();
 };
 
-const appendHash = (str, hash, ext) => {
+const appendHash = (str: string, hash: string | null, ext: string) => {
   if (hash) {
     return `${str}-${hash}.${ext}`;
   }
   return `${str}.${ext}`;
 };
 
-export const Result = ({ data }) => {
+export const Result = ({ data }: { data: GeneratorOutput }) => {
   const { rom, hash, log, patch } = data;
   return (
     <div>

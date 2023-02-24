@@ -13,7 +13,7 @@ const VERSION = process.env.VERSION || "XXX";
 
 module.exports = {
   mode: dev ? 'development' : 'production',
-  entry: './app/index.js',
+  entry: './app/index.ts',
   output: {
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/',
@@ -22,7 +22,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
+        test: /\.(j|t)sx?$/,
         exclude: /node_modules/,
         use: 'babel-loader'
       },
@@ -43,7 +43,7 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.js', '.jsx', '.ts', '.tsx'],
     fallback: {
       buffer: require.resolve('buffer/'),
       crypto: require.resolve('crypto-browserify'),

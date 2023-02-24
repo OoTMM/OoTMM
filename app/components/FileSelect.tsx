@@ -10,7 +10,15 @@ const LOGOS = {
   ootmm: logoOotMm,
 };
 
-export const FileSelect = ({ logo, label, accept, file, onChange }) => {
+type FileSelectProps = {
+  logo: keyof typeof LOGOS;
+  label: string;
+  accept: string;
+  file: File | null;
+  onChange: (file: File) => void;
+}
+
+export const FileSelect = ({ logo, label, accept, file, onChange }: FileSelectProps) => {
   return (
     <label className="file-select">
       {label}
@@ -18,7 +26,7 @@ export const FileSelect = ({ logo, label, accept, file, onChange }) => {
         <div className='file-select-box-img-container'>
           <img src={LOGOS[logo]} width="100%"/>
         </div>
-        <input type="file" accept={accept} onChange={e => onChange(e.target.files[0])}/>
+        <input type="file" accept={accept} onChange={e => e.target.files && onChange(e.target.files[0])}/>
         {!file && <p>No file selected</p>}
         {file && <p>{file.name}</p>}
       </div>

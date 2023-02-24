@@ -1,11 +1,13 @@
 import { Buffer } from 'buffer';
-import { generate } from '@ootmm/core';
+import { generate, GeneratorParams } from '@ootmm/core';
 
 let generator = null;
-const startWorker = (params) => {
+const startWorker = (params: GeneratorParams) => {
   params.oot = Buffer.from(params.oot);
   params.mm = Buffer.from(params.mm);
-  params.opts.patch = params.opts.patch ? Buffer.from(params.opts.patch) : null;
+  if (params.opts) {
+    params.opts.patch = params.opts.patch ? Buffer.from(params.opts.patch) : undefined;
+  }
   params.monitor = {
     onLog: (message) => self.postMessage({ type: 'log', message: message }),
   };

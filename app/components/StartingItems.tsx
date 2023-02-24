@@ -1,9 +1,14 @@
 import React from 'react';
 
-import { itemName } from '@ootmm/core';
+import { itemName, Settings } from '@ootmm/core';
 
-export const StartingItems = ({ settings, setSetting, itemPool }) => {
-  const alterItem = (item, delta) => {
+type StartingItemsProps = {
+  settings: Settings;
+  setSetting: (settings: Partial<Settings>) => void;
+  itemPool: { [key: string]: number };
+};
+export const StartingItems = ({ settings, setSetting, itemPool }: StartingItemsProps) => {
+  const alterItem = (item: string, delta: number) => {
     const { startingItems } = settings;
     const count = startingItems[item] || 0;
     if (count + delta <= 0) {
@@ -22,12 +27,12 @@ export const StartingItems = ({ settings, setSetting, itemPool }) => {
   };
 
   // Valid gamePrefix are "MM" and "OOT"
-  const buildSingleTable = (gamePrefix) => {
+  const buildSingleTable = (gamePrefix: 'MM' | 'OOT') => {
     return (
       <table>
         <thead>
           <tr>
-            <th colSpan="2">
+            <th colSpan={2}>
               {gamePrefix === 'MM' ? "Majora's Mask" : 'Ocarina of Time'}
             </th>
           </tr>
@@ -66,7 +71,7 @@ export const StartingItems = ({ settings, setSetting, itemPool }) => {
   };
 
   return (
-    <React.Fragment>
+    <>
       <button className="btn-danger" onClick={() => resetItems()}>
         Reset Starting Items
       </button>
@@ -74,6 +79,6 @@ export const StartingItems = ({ settings, setSetting, itemPool }) => {
         {buildSingleTable('MM')}
         {buildSingleTable('OOT')}
       </div>
-    </React.Fragment>
+    </>
   );
 };

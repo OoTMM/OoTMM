@@ -1,7 +1,13 @@
 import React from 'react';
 import './transferlist.css';
 
-export const ListElement = ({ label, selected, onClick }) => {
+type ListElementProps = {
+  label: string;
+  selected: boolean;
+  onClick: () => void;
+}
+
+export const ListElement = ({ label, selected, onClick }: ListElementProps) => {
   return (
     <li
       onClick={onClick}

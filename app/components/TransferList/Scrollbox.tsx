@@ -1,7 +1,13 @@
 import React from 'react';
 import './transferlist.css';
 
-export const Scrollbox = ({ width, height, children }) => {
+type ScrollboxProps = {
+  width: string;
+  height: string;
+  children: React.ReactNode;
+};
+
+export const Scrollbox = ({ width, height, children }: ScrollboxProps) => {
   const boxStyle = {
     div: {
       width: width,

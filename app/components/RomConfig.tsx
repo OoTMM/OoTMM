@@ -3,6 +3,19 @@ import { Checkbox } from './Checkbox';
 
 import { FileSelect } from './FileSelect';
 
+type RomConfigProps = {
+  roms: { oot: File | null; mm: File | null };
+  setRom: (rom: 'oot' | 'mm', file: File) => void;
+  usePatch: boolean;
+  setUsePatch: (usePatch: boolean) => void;
+  patch: File | null;
+  setPatch: (file: File) => void;
+  seed: string;
+  setSeed: (seed: string) => void;
+  error: string | null;
+  onGenerate: () => void;
+};
+
 export const RomConfig = ({
   roms,
   setRom,
@@ -14,7 +27,7 @@ export const RomConfig = ({
   setSeed,
   error,
   onGenerate,
-}) => {
+}: RomConfigProps) => {
   return (
     <div>
       {error && <div className="generator-error">{error}</div>}

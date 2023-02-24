@@ -10,7 +10,7 @@ export const App = () => {
   const [message, setMessage] = useState('');
   const [result, setResult] = useState(null);
 
-  const generate = async ({ roms, opts }) => {
+  const generate = async ({ roms, opts }: { roms: any, opts: any }) => {
     const [oot, mm] = await Promise.all([
       roms.oot.arrayBuffer(),
       roms.mm.arrayBuffer(),
@@ -20,7 +20,7 @@ export const App = () => {
     if (opts.patch) {
       opts.patch = Buffer.from(await opts.patch.arrayBuffer());
     }
-    const worker = new Worker(new URL('../worker.js', import.meta.url));
+    const worker = new Worker(new URL('../worker.ts', import.meta.url));
     worker.onmessage = ({ data }) => {
       if (data.type === 'log') {
         console.log(data.message);

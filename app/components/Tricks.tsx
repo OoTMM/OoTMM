@@ -1,9 +1,14 @@
 import React from 'react';
-import { TRICKS } from '@ootmm/core';
+import { TRICKS, Settings } from '@ootmm/core';
 
 import { Checkbox } from './Checkbox';
 
-export const Tricks = ({ settings, setSetting }) => {
+type TricksProps = {
+  settings: Settings;
+  setSetting: (settings: Partial<Settings>) => void;
+};
+
+export const Tricks = ({ settings, setSetting }: TricksProps) => {
   const { tricks } = settings;
   const ootTricks = Object.keys(tricks).filter(
     (x) => x.substring(0, 3) === 'OOT'
@@ -19,8 +24,8 @@ export const Tricks = ({ settings, setSetting }) => {
         {ootTricks.map((trick) => (
           <Checkbox
             key={trick}
-            label={TRICKS[trick]}
-            checked={tricks[trick]}
+            label={(TRICKS as {[k: string]: string})[trick]}
+            checked={(tricks as {[k: string]: boolean})[trick]}
             onChange={(v) => setSetting({ tricks: { ...tricks, [trick]: v } })}
           />
         ))}
@@ -30,8 +35,8 @@ export const Tricks = ({ settings, setSetting }) => {
         {mmTricks.map((trick) => (
           <Checkbox
             key={trick}
-            label={TRICKS[trick]}
-            checked={tricks[trick]}
+            label={(TRICKS as {[k: string]: string})[trick]}
+            checked={(tricks as {[k: string]: boolean})[trick]}
             onChange={(v) => setSetting({ tricks: { ...tricks, [trick]: v } })}
           />
         ))}

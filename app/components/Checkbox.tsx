@@ -1,6 +1,12 @@
 import React from 'react';
 
-export const Checkbox = ({ label, checked, onChange }) => (
+type CheckboxProps = {
+  label: string;
+  checked: boolean;
+  onChange: (checked: boolean) => void;
+}
+
+export const Checkbox = ({ label, checked, onChange }: CheckboxProps) => (
   <label className="checkbox">
     <input
       type="checkbox"

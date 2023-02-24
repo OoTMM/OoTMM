@@ -1,6 +1,13 @@
 import React from 'react';
 
-export const Dropdown = ({ label, options, value, onChange }) => (
+type DropdownProps = {
+  label: string;
+  options: { value: string; name: string }[];
+  value: string;
+  onChange: (value: string) => void;
+}
+
+export const Dropdown = ({ label, options, value, onChange }: DropdownProps) => (
   <label>
     {label}
     <select value={value} onChange={(e) => onChange(e.target.value)}>
