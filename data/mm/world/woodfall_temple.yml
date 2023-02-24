@@ -109,7 +109,7 @@
     "Woodfall Temple SF Pre-Boss Bottom Right": "true"
     "Woodfall Temple SF Pre-Boss Left": "has(MASK_DEKU) || has(MASK_GREAT_FAIRY)"
     "Woodfall Temple SF Pre-Boss Top Right": "true"
-    "Woodfall Temple SF Pre-Boss Pillar": "has(MASK_DEKU) && has(BOW)"
+    "Woodfall Temple SF Pre-Boss Pillar": "has(MASK_DEKU) || has(MASK_GREAT_FAIRY)"
 "Woodfall Temple Princess Jail":
   dungeon: WF
   events:
