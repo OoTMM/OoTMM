@@ -42,6 +42,12 @@ export class LogicPassWorldTransform {
       itemsToReplace.set('MM_ARROWS_40', 'SHARED_ARROWS_40');
     }
 
+    if (config.has('SHARED_BOMB_BAGS')) {
+      /* Bomb Bags */
+      itemsToReplace.set('OOT_BOMB_BAG', 'SHARED_BOMB_BAG');
+      itemsToJunk.add('MM_BOMB_BAG');
+    }
+
     for (const loc in this.state.world.checks) {
       const check = this.state.world.checks[loc];
       let item = check.item;

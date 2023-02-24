@@ -113,7 +113,7 @@ static void addNuts(u8 count)
     addAmmo(ITS_OOT_NUTS, ITEM_OOT_NUT, max, count);
 }
 
-static void addBombs(u8 count)
+void addBombs(u8 count)
 {
     u8 max;
 
@@ -186,7 +186,7 @@ static void fillBottle(u16 itemId)
     }
 }
 
-static void addBombBag(u8 level)
+void comboAddBombBagOot(int level)
 {
     gOotSave.inventory.items[ITS_OOT_BOMBS] = ITEM_OOT_BOMB;
     gOotSave.inventory.upgrades.bombBag = level;
@@ -318,6 +318,15 @@ static void addItemShared(s16 gi, int noEffect)
             break;
         case GI_OOT_ARROWS_30:
             comboAddArrowsMm(30);
+            break;
+        case GI_OOT_BOMB_BAG:
+            comboAddBombBagMm(1);
+            break;
+        case GI_OOT_BOMB_BAG2:
+            comboAddBombBagMm(2);
+            break;
+        case GI_OOT_BOMB_BAG3:
+            comboAddBombBagMm(3);
             break;
         }
     }
@@ -540,13 +549,13 @@ int comboAddItemOot(s16 gi, int noEffect)
         comboAddQuiverOot(3);
         break;
     case GI_OOT_BOMB_BAG:
-        addBombBag(1);
+        comboAddBombBagOot(1);
         break;
     case GI_OOT_BOMB_BAG2:
-        addBombBag(2);
+        comboAddBombBagOot(2);
         break;
     case GI_OOT_BOMB_BAG3:
-        addBombBag(3);
+        comboAddBombBagOot(3);
         break;
     case GI_OOT_WALLET2:
         gOotSave.inventory.upgrades.wallet = 1;

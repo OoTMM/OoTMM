@@ -104,7 +104,7 @@ void comboAddQuiverMm(int index)
     gMmSave.inventory.ammo[ITS_MM_BOW] = kMaxArrows[index];
 }
 
-static void addBombs(int count)
+void comboAddBombBagMm(int count)
 {
     u16 max;
 
@@ -278,6 +278,15 @@ static void addItemShared(s16 gi, int noEffect)
         case GI_MM_ARROWS_40:
             comboAddArrowsOot(40);
             break;
+        case GI_MM_BOMB_BAG:
+            comboAddBombBagOot(1);
+            break;
+        case GI_MM_BOMB_BAG2:
+            comboAddBombBagOot(2);
+            break;
+        case GI_MM_BOMB_BAG3:
+            comboAddBombBagOot(3);
+            break;
         }
     }
 }
@@ -358,19 +367,19 @@ int comboAddItemMm(s16 gi, int noEffect)
         fillBottle(ITEM_MM_BOTTLED_CHATEAU_ROMANI);
         break;
     case GI_MM_BOMB:
-        addBombs(1);
+        comboAddBombBagMm(1);
         break;
     case GI_MM_BOMBS_5:
-        addBombs(5);
+        comboAddBombBagMm(5);
         break;
     case GI_MM_BOMBS_10:
-        addBombs(10);
+        comboAddBombBagMm(10);
         break;
     case GI_MM_BOMBS_20:
-        addBombs(20);
+        comboAddBombBagMm(20);
         break;
     case GI_MM_BOMBS_30:
-        addBombs(30);
+        comboAddBombBagMm(30);
         break;
     case GI_MM_ARROWS_10:
         comboAddArrowsMm(10);

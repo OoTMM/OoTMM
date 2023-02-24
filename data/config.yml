@@ -9,3 +9,4 @@ MM_PROGRESSIVE_LULLABY:         0x07
 DOOR_OF_TIME_OPEN:              0x08
 ER_DUNGEONS:                    0x09
 SHARED_BOWS:                    0x0a
+SHARED_BOMB_BAGS:               0x0b

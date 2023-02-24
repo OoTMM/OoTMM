@@ -29,19 +29,21 @@ const ENTRANCE_DATA_OFFSETS = {
 };
 
 const SHARED_ITEMS_OOT = new Map([
-  ['SHARED_BOW', 'OOT_BOW'],
-  ['SHARED_ARROWS_5',  'OOT_ARROWS_5'],
-  ['SHARED_ARROWS_10', 'OOT_ARROWS_10'],
-  ['SHARED_ARROWS_30', 'OOT_ARROWS_30'],
-  ['SHARED_ARROWS_40', 'MM_ARROWS_40'], /* OoT lacks 40 pack */
+  ['SHARED_BOW',        'OOT_BOW'],
+  ['SHARED_BOMB_BAG',   'OOT_BOMB_BAG'],
+  ['SHARED_ARROWS_5',   'OOT_ARROWS_5'],
+  ['SHARED_ARROWS_10',  'OOT_ARROWS_10'],
+  ['SHARED_ARROWS_30',  'OOT_ARROWS_30'],
+  ['SHARED_ARROWS_40',  'MM_ARROWS_40'], /* OoT lacks 40 pack */
 ]);
 
 const SHARED_ITEMS_MM = new Map([
-  ['SHARED_BOW', 'MM_BOW'],
-  ['SHARED_ARROWS_5',  'OOT_ARROWS_5'], /* MM lacks 5 pack */
-  ['SHARED_ARROWS_10', 'MM_ARROWS_10'],
-  ['SHARED_ARROWS_30', 'MM_ARROWS_30'],
-  ['SHARED_ARROWS_40', 'MM_ARROWS_40'],
+  ['SHARED_BOW',        'MM_BOW'],
+  ['SHARED_BOMB_BAG',   'MM_BOMB_BAG'],
+  ['SHARED_ARROWS_5',   'OOT_ARROWS_5'], /* MM lacks 5 pack */
+  ['SHARED_ARROWS_10',  'MM_ARROWS_10'],
+  ['SHARED_ARROWS_30',  'MM_ARROWS_30'],
+  ['SHARED_ARROWS_40',  'MM_ARROWS_40'],
 ]);
 
 const SHARED_ITEMS = {
