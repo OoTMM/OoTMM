@@ -319,6 +319,13 @@ static void addItemShared(s16 gi, int noEffect)
         case GI_OOT_ARROWS_30:
             comboAddArrowsMm(30);
             break;
+        }
+    }
+
+    if (comboConfig(CFG_SHARED_BOMB_BAGS))
+    {
+        switch (gi)
+        {
         case GI_OOT_BOMB_BAG:
             comboAddBombBagMm(1);
             break;
