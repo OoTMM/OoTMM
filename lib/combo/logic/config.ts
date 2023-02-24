@@ -59,6 +59,10 @@ export class LogicPassConfig {
       config.add('SHARED_BOWS');
     }
 
+    if (this.state.settings.sharedBombBags) {
+      config.add('SHARED_BOMB_BAGS');
+    }
+
     return { config };
   }
 }

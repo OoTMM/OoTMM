@@ -162,4 +162,7 @@ void comboSyncItems(void)
 {
     if (comboConfig(CFG_SHARED_BOWS))
         gForeignSave.inventory.ammo[ITS_FOREIGN_BOW] = gSave.inventory.ammo[ITS_NATIVE_BOW];
+
+    if (comboConfig(CFG_SHARED_BOMB_BAGS))
+        gForeignSave.inventory.ammo[ITS_FOREIGN_BOMBS] = gSave.inventory.ammo[ITS_NATIVE_BOMBS];
 }

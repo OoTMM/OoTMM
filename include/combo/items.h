@@ -407,12 +407,16 @@
 /* Shared defs */
 #if defined(GAME_OOT)
 # define ITS_NATIVE_BOW             ITS_OOT_BOW
+# define ITS_NATIVE_BOMBS           ITS_OOT_BOMBS
 # define ITS_FOREIGN_BOW            ITS_MM_BOW
+# define ITS_FOREIGN_BOMBS          ITS_MM_BOMBS
 #endif
 
 #if defined(GAME_MM)
 # define ITS_NATIVE_BOW             ITS_MM_BOW
+# define ITS_NATIVE_BOMBS           ITS_MM_BOMBS
 # define ITS_FOREIGN_BOW            ITS_OOT_BOW
+# define ITS_FOREIGN_BOMBS          ITS_OOT_BOMBS
 #endif
 
 #endif

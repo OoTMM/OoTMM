@@ -147,6 +147,10 @@ static int isItemAmbiguousOot(s16 gi)
     case GI_OOT_ARROWS_10:
     case GI_OOT_ARROWS_30:
         return !comboConfig(CFG_SHARED_BOWS);
+    case GI_OOT_BOMB_BAG:
+    case GI_OOT_BOMB_BAG2:
+    case GI_OOT_BOMB_BAG3:
+        return !comboConfig(CFG_SHARED_BOMB_BAGS);
     case GI_OOT_STICK:
     case GI_OOT_BOMB:
     case GI_OOT_ARROW_FIRE:
@@ -166,9 +170,6 @@ static int isItemAmbiguousOot(s16 gi)
     case GI_OOT_MASK_TRUTH:
     case GI_OOT_SWORD_KOKIRI:
     case GI_OOT_SHIELD_HYLIAN:
-    case GI_OOT_BOMB_BAG:
-    case GI_OOT_BOMB_BAG2:
-    case GI_OOT_BOMB_BAG3:
     case GI_OOT_WALLET2:
     case GI_OOT_WALLET3:
     case GI_OOT_SONG_EPONA:
@@ -215,6 +216,10 @@ static int isItemAmbiguousMm(s16 gi)
     case GI_MM_ARROWS_30:
     case GI_MM_ARROWS_40:
         return !comboConfig(CFG_SHARED_BOWS);
+    case GI_MM_BOMB_BAG:
+    case GI_MM_BOMB_BAG2:
+    case GI_MM_BOMB_BAG3:
+        return !comboConfig(CFG_SHARED_BOMB_BAGS);
     case GI_MM_OCARINA_OF_TIME:
     case GI_MM_ARROW_FIRE:
     case GI_MM_ARROW_ICE:
@@ -235,9 +240,6 @@ static int isItemAmbiguousMm(s16 gi)
     case GI_MM_MASK_KEATON:
     case GI_MM_SWORD_KOKIRI:
     case GI_MM_SHIELD_HERO:
-    case GI_MM_BOMB_BAG:
-    case GI_MM_BOMB_BAG2:
-    case GI_MM_BOMB_BAG3:
     case GI_MM_WALLET2:
     case GI_MM_WALLET3:
     case GI_MM_SONG_TIME:
