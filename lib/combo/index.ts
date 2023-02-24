@@ -10,7 +10,7 @@ import { addItem, isDungeonItem, isDungeonReward, isJunk, isStrayFairy, isToken,
 import { EXTRA_ITEMS } from './logic/solve';
 import { isShuffled } from './logic/is-shuffled';
 
-type GeneratorParams = {
+export type GeneratorParams = {
   oot: Buffer,
   mm: Buffer,
   opts?: OptionsInput,
