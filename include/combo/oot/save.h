@@ -4,6 +4,26 @@
 #include <combo/types.h>
 #include <combo/util.h>
 
+typedef struct
+{
+    char        newf[6];
+    s16         deathCount;
+    u8          playerName[8];
+    s16         ddOnlyFlag;
+    s16         healthMax;
+    s16         health;
+    s8          magicSize;
+    s8          magicAmount;
+    u16         rupees;
+    u16         swordHealth;
+    char        unk_38[2];
+    u8          magicUpgrade;
+    char        unk_3b[1];
+    u8          magicUpgrade2;
+    u8          doubleDefense;
+}
+OotSavePlayerData;
+
 typedef union
 {
     struct
@@ -119,21 +139,7 @@ typedef struct
     u32                     isNight;
     char                    unk_14[0x4];
     u32                     tradeQuestFlag;
-    char                    newf[6];
-    s16                     deathCount;
-    u8                      playerName[8];
-    s16                     ddOnlyFlag;
-    s16                     healthMax;
-    s16                     health;
-    s8                      magicSize;
-    s8                      magicAmount;
-    u16                     rupees;
-    u16                     swordHealth;
-    char                    unk_38[2];
-    u8                      magicUpgrade;
-    char                    unk_3b[1];
-    u8                      magicUpgrade2;
-    u8                      doubleDefense;
+    OotSavePlayerData       playerData;
     u8                      isBiggoronSword;
     u8                      ocarinaGameRound;
     OotItemEquips           childEquips;

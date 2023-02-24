@@ -165,4 +165,7 @@ void comboSyncItems(void)
 
     if (comboConfig(CFG_SHARED_BOMB_BAGS))
         gForeignSave.inventory.ammo[ITS_FOREIGN_BOMBS] = gSave.inventory.ammo[ITS_NATIVE_BOMBS];
+
+    if (comboConfig(CFG_SHARED_MAGIC))
+       gForeignSave.playerData.magicAmount = gSave.playerData.magicAmount;
 }

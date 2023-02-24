@@ -401,6 +401,8 @@ export class LogicPassAnalysis {
     case 'MM_BOMB_BAG':
     case 'MM_MAGIC_UPGRADE':
     case 'SHARED_BOW':
+    case 'SHARED_BOMB_BAG':
+    case 'SHARED_MAGIC_UPGRADE':
       maximumRequired = 1;
       break;
     }

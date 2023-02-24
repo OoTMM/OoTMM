@@ -38,7 +38,7 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.questItems.songAwakening = 1;
         gSave.inventory.items[ITS_MM_BOTTLE + 0] = ITEM_MM_BOTTLED_DEKU_PRINCESS;
         gSave.inventory.items[ITS_MM_BOTTLE + 1] = ITEM_MM_BOTTLED_SPRING_WATER_HOT;
-        gSave.playerData.magic = 0x30;
+        gSave.playerData.magicAmount = 0x30;
         gMmSave.playerData.magicAcquired = 1;
         gSaveContext.magicTarget = 0x30;
         gSave.inventory.items[ITS_MM_MASK_GORON] = ITEM_MM_MASK_GORON;

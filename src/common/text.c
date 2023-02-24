@@ -150,9 +150,16 @@ static int isItemAmbiguousOot(s16 gi)
     case GI_OOT_BOMB_BAG:
     case GI_OOT_BOMB_BAG2:
     case GI_OOT_BOMB_BAG3:
-        return !comboConfig(CFG_SHARED_BOMB_BAGS);
-    case GI_OOT_STICK:
     case GI_OOT_BOMB:
+    case GI_OOT_BOMBS_5:
+    case GI_OOT_BOMBS_10:
+    case GI_OOT_BOMBS_20:
+    case GI_OOT_BOMBS_30:
+        return !comboConfig(CFG_SHARED_BOMB_BAGS);
+    case GI_OOT_MAGIC_UPGRADE:
+    case GI_OOT_MAGIC_UPGRADE2:
+        return !comboConfig(CFG_SHARED_MAGIC);
+    case GI_OOT_STICK:
     case GI_OOT_ARROW_FIRE:
     case GI_OOT_OCARINA_TIME:
     case GI_OOT_BOMBCHU_10:
@@ -189,14 +196,8 @@ static int isItemAmbiguousOot(s16 gi)
     case GI_OOT_NUTS_5:
     case GI_OOT_NUTS_5_ALT:
     case GI_OOT_NUTS_10:
-    case GI_OOT_BOMBS_5:
-    case GI_OOT_BOMBS_10:
-    case GI_OOT_BOMBS_20:
-    case GI_OOT_BOMBS_30:
     case GI_OOT_BOMBCHU_5:
     case GI_OOT_BOMBCHU_20:
-    case GI_OOT_MAGIC_UPGRADE:
-    case GI_OOT_MAGIC_UPGRADE2:
     case GI_OOT_DEFENSE_UPGRADE:
     case GI_OOT_SHIELD_MIRROR:
         return 1;
@@ -219,12 +220,19 @@ static int isItemAmbiguousMm(s16 gi)
     case GI_MM_BOMB_BAG:
     case GI_MM_BOMB_BAG2:
     case GI_MM_BOMB_BAG3:
+    case GI_MM_BOMB:
+    case GI_MM_BOMBS_5:
+    case GI_MM_BOMBS_10:
+    case GI_MM_BOMBS_20:
+    case GI_MM_BOMBS_30:
         return !comboConfig(CFG_SHARED_BOMB_BAGS);
+    case GI_MM_MAGIC_UPGRADE:
+    case GI_MM_MAGIC_UPGRADE2:
+        return !comboConfig(CFG_SHARED_MAGIC);
     case GI_MM_OCARINA_OF_TIME:
     case GI_MM_ARROW_FIRE:
     case GI_MM_ARROW_ICE:
     case GI_MM_ARROW_LIGHT:
-    case GI_MM_BOMB:
     case GI_MM_BOMBCHU:
     case GI_MM_DEKU_STICK:
     case GI_MM_DEKU_NUT:
@@ -256,15 +264,9 @@ static int isItemAmbiguousMm(s16 gi)
     case GI_MM_RUPEE_GOLD:
     case GI_MM_DEKU_NUTS_5:
     case GI_MM_DEKU_NUTS_10:
-    case GI_MM_BOMBS_5:
-    case GI_MM_BOMBS_10:
-    case GI_MM_BOMBS_20:
-    case GI_MM_BOMBS_30:
     case GI_MM_BOMBCHU_20:
     case GI_MM_BOMBCHU_10:
     case GI_MM_BOMBCHU_5:
-    case GI_MM_MAGIC_UPGRADE:
-    case GI_MM_MAGIC_UPGRADE2:
     case GI_MM_DEFENSE_UPGRADE:
     case GI_MM_BOTTLED_MILK:
     case GI_MM_SHIELD_MIRROR:
