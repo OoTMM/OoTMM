@@ -228,6 +228,12 @@ export const SETTINGS = [{
   type: 'boolean',
   default: false
 }, {
+  key: 'sharedMagic',
+  name: 'Shared Magic',
+  category: 'items',
+  type: 'boolean',
+  default: false
+}, {
   key: 'csmc',
   name: 'Chest Size Matches Content',
   category: 'misc',

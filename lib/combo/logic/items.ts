@@ -143,6 +143,7 @@ export const ITEMS_REQUIRED = new Set<string>([
   'MM_SPIN_UPGRADE',
   'SHARED_BOW',
   'SHARED_BOMB_BAG',
+  'SHARED_MAGIC_UPGRADE',
 ]);
 
 const ITEMS_JUNK = new Set<string>([

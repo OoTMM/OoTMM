@@ -60,6 +60,11 @@ export class LogicPassWorldTransform {
       itemsToReplace.set('MM_BOMBS_30',   'SHARED_BOMBS_30');
     }
 
+    if (config.has('SHARED_MAGIC')) {
+      itemsToReplace.set('OOT_MAGIC_UPGRADE', 'SHARED_MAGIC_UPGRADE');
+      itemsToJunk.add('MM_MAGIC_UPGRADE');
+    }
+
     for (const loc in this.state.world.checks) {
       const check = this.state.world.checks[loc];
       let item = check.item;
