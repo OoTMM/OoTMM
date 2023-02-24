@@ -90,7 +90,7 @@ static void addShield(int index)
     gMmSave.itemEquips.shield = index;
 }
 
-static void addBombBag(int index)
+void comboAddBombBagMm(int index)
 {
     gMmSave.inventory.items[ITS_MM_BOMBS] = ITEM_MM_BOMB;
     gMmSave.inventory.upgrades.bombBag = index;
@@ -104,7 +104,7 @@ void comboAddQuiverMm(int index)
     gMmSave.inventory.ammo[ITS_MM_BOW] = kMaxArrows[index];
 }
 
-void comboAddBombBagMm(int count)
+void comboAddBombsMm(int count)
 {
     u16 max;
 
@@ -287,6 +287,21 @@ static void addItemShared(s16 gi, int noEffect)
         case GI_MM_BOMB_BAG3:
             comboAddBombBagOot(3);
             break;
+        case GI_MM_BOMB:
+            comboAddBombsOot(1);
+            break;
+        case GI_MM_BOMBS_5:
+            comboAddBombsOot(5);
+            break;
+        case GI_MM_BOMBS_10:
+            comboAddBombsOot(10);
+            break;
+        case GI_MM_BOMBS_20:
+            comboAddBombsOot(20);
+            break;
+        case GI_MM_BOMBS_30:
+            comboAddBombsOot(30);
+            break;
         }
     }
 }
@@ -367,19 +382,19 @@ int comboAddItemMm(s16 gi, int noEffect)
         fillBottle(ITEM_MM_BOTTLED_CHATEAU_ROMANI);
         break;
     case GI_MM_BOMB:
-        comboAddBombBagMm(1);
+        comboAddBombsMm(1);
         break;
     case GI_MM_BOMBS_5:
-        comboAddBombBagMm(5);
+        comboAddBombsMm(5);
         break;
     case GI_MM_BOMBS_10:
-        comboAddBombBagMm(10);
+        comboAddBombsMm(10);
         break;
     case GI_MM_BOMBS_20:
-        comboAddBombBagMm(20);
+        comboAddBombsMm(20);
         break;
     case GI_MM_BOMBS_30:
-        comboAddBombBagMm(30);
+        comboAddBombsMm(30);
         break;
     case GI_MM_ARROWS_10:
         comboAddArrowsMm(10);
@@ -543,13 +558,13 @@ int comboAddItemMm(s16 gi, int noEffect)
         addShield(2);
         break;
     case GI_MM_BOMB_BAG:
-        addBombBag(1);
+        comboAddBombBagMm(1);
         break;
     case GI_MM_BOMB_BAG2:
-        addBombBag(2);
+        comboAddBombBagMm(2);
         break;
     case GI_MM_BOMB_BAG3:
-        addBombBag(3);
+        comboAddBombBagMm(3);
         break;
     case GI_MM_BOW:
         comboAddQuiverMm(1);

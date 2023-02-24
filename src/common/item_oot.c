@@ -113,7 +113,7 @@ static void addNuts(u8 count)
     addAmmo(ITS_OOT_NUTS, ITEM_OOT_NUT, max, count);
 }
 
-void addBombs(u8 count)
+void comboAddBombsOot(int count)
 {
     u8 max;
 
@@ -328,6 +328,21 @@ static void addItemShared(s16 gi, int noEffect)
         case GI_OOT_BOMB_BAG3:
             comboAddBombBagMm(3);
             break;
+        case GI_OOT_BOMB:
+            comboAddBombsMm(1);
+            break;
+        case GI_OOT_BOMBS_5:
+            comboAddBombsMm(5);
+            break;
+        case GI_OOT_BOMBS_10:
+            comboAddBombsMm(10);
+            break;
+        case GI_OOT_BOMBS_20:
+            comboAddBombsMm(20);
+            break;
+        case GI_OOT_BOMBS_30:
+            comboAddBombsMm(30);
+            break;
         }
     }
 }
@@ -360,19 +375,19 @@ int comboAddItemOot(s16 gi, int noEffect)
         addNuts(10);
         break;
     case GI_OOT_BOMB:
-        addBombs(1);
+        comboAddBombsOot(1);
         break;
     case GI_OOT_BOMBS_5:
-        addBombs(5);
+        comboAddBombsOot(5);
         break;
     case GI_OOT_BOMBS_10:
-        addBombs(10);
+        comboAddBombsOot(10);
         break;
     case GI_OOT_BOMBS_20:
-        addBombs(20);
+        comboAddBombsOot(20);
         break;
     case GI_OOT_BOMBS_30:
-        addBombs(30);
+        comboAddBombsOot(30);
         break;
     case GI_OOT_BOW:
         comboAddQuiverOot(1);

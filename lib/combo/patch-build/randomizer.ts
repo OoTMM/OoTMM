@@ -35,6 +35,11 @@ const SHARED_ITEMS_OOT = new Map([
   ['SHARED_ARROWS_10',  'OOT_ARROWS_10'],
   ['SHARED_ARROWS_30',  'OOT_ARROWS_30'],
   ['SHARED_ARROWS_40',  'MM_ARROWS_40'], /* OoT lacks 40 pack */
+  ['SHARED_BOMB',       'OOT_BOMB'],
+  ['SHARED_BOMBS_5',    'OOT_BOMBS_5'],
+  ['SHARED_BOMBS_10',   'OOT_BOMBS_10'],
+  ['SHARED_BOMBS_20',   'OOT_BOMBS_20'],
+  ['SHARED_BOMBS_30',   'OOT_BOMBS_30'],
 ]);
 
 const SHARED_ITEMS_MM = new Map([
@@ -44,6 +49,11 @@ const SHARED_ITEMS_MM = new Map([
   ['SHARED_ARROWS_10',  'MM_ARROWS_10'],
   ['SHARED_ARROWS_30',  'MM_ARROWS_30'],
   ['SHARED_ARROWS_40',  'MM_ARROWS_40'],
+  ['SHARED_BOMB',       'MM_BOMB'],
+  ['SHARED_BOMBS_5',    'MM_BOMBS_5'],
+  ['SHARED_BOMBS_10',   'MM_BOMBS_10'],
+  ['SHARED_BOMBS_20',   'MM_BOMBS_20'],
+  ['SHARED_BOMBS_30',   'MM_BOMBS_30'],
 ]);
 
 const SHARED_ITEMS = {

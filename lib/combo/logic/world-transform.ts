@@ -46,6 +46,18 @@ export class LogicPassWorldTransform {
       /* Bomb Bags */
       itemsToReplace.set('OOT_BOMB_BAG', 'SHARED_BOMB_BAG');
       itemsToJunk.add('MM_BOMB_BAG');
+
+      /* Bombs */
+      itemsToReplace.set('OOT_BOMB',      'SHARED_BOMB');
+      itemsToReplace.set('OOT_BOMBS_5',   'SHARED_BOMBS_5');
+      itemsToReplace.set('OOT_BOMBS_10',  'SHARED_BOMBS_10');
+      itemsToReplace.set('OOT_BOMBS_20',  'SHARED_BOMBS_20');
+      itemsToReplace.set('OOT_BOMBS_30',  'SHARED_BOMBS_30');
+      itemsToReplace.set('MM_BOMB',       'SHARED_BOMB');
+      itemsToReplace.set('MM_BOMBS_5',    'SHARED_BOMBS_5');
+      itemsToReplace.set('MM_BOMBS_10',   'SHARED_BOMBS_10');
+      itemsToReplace.set('MM_BOMBS_20',   'SHARED_BOMBS_20');
+      itemsToReplace.set('MM_BOMBS_30',   'SHARED_BOMBS_30');
     }
 
     for (const loc in this.state.world.checks) {

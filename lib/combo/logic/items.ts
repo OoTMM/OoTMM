@@ -153,6 +153,11 @@ const ITEMS_JUNK = new Set<string>([
   'OOT_ARROWS_5',
   'OOT_ARROWS_10',
   'OOT_ARROWS_30',
+  'OOT_BOMB',
+  'OOT_BOMBS_5',
+  'OOT_BOMBS_10',
+  'OOT_BOMBS_20',
+  'OOT_BOMBS_30',
   'MM_RUPEE_GREEN',
   'MM_RUPEE_BLUE',
   'MM_RUPEE_RED',
@@ -169,6 +174,11 @@ const ITEMS_JUNK = new Set<string>([
   'SHARED_ARROWS_10',
   'SHARED_ARROWS_30',
   'SHARED_ARROWS_40',
+  'SHARED_BOMB',
+  'SHARED_BOMBS_5',
+  'SHARED_BOMBS_10',
+  'SHARED_BOMBS_20',
+  'SHARED_BOMBS_30',
 ]);
 
 export const isSong = (item: string) => !!item.match(/^(OOT|MM)_SONG_/);
