@@ -50,7 +50,7 @@ export const worldState = (monitor: Monitor, settings: Settings) => {
 
 const solvedWorldState = (monitor: Monitor, opts: Options) => {
   const random = new Random();
-  random.seed(opts.seed);
+  random.seed(opts.seed + opts.settings.generateSpoilerLog);
   let state = { ...worldState(monitor, opts.settings), attempts: 0, random, opts };
 
   for (;;) {

@@ -169,6 +169,10 @@ export class LogicPassSpoiler {
 
   run() {
     this.state.monitor.log('Logic: Spoiler');
+  
+    if (!this.state.opts.settings.generateSpoilerLog) {
+      return { log: null };
+    }
 
     const buffer: string[] = [];
     spoilerHeader(buffer, this.state.opts.seed);

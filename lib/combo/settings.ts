@@ -249,13 +249,19 @@ export const SETTINGS = [{
   key: 'logic',
   name: 'Logic',
   category: 'advanced',
-  type: 'enum',
-  values: [
-    { value: 'allLocations', name: 'All Locations' },
-    { value: 'beatable', name: 'Beatable Only' },
-    { value: 'none', name: 'No Logic' },
-  ],
-  default: 'allLocations'
+type: 'enum',
+values: [
+  { value: 'allLocations', name: 'All Locations' },
+  { value: 'beatable', name: 'Beatable Only' },
+  { value: 'none', name: 'No Logic' },
+],
+default: 'allLocations'
+}, {
+  key: 'generateSpoilerLog',
+  name: 'Generate Spoiler Log',
+  category: 'advanced',
+  type: 'boolean',
+  default: true
 }] as const;
 
 export const SETTINGS_CATEGORIES = [{
