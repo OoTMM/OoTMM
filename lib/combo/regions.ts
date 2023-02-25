@@ -71,7 +71,7 @@ const MM_REGION_NAMES: {[k: string]: string} = {
   'MM_TEMPLE_STONE_TOWER': 'Stone Tower Temple',
   'MM_PIRATE_FORTRESS_EXTERIOR': 'Pirates\' Fortress Exterior',
   'MM_PIRATE_FORTRESS_SEWERS': 'Pirates\' Fortress Sewers',
-  'MM_PIRATE_FORTRESS_INTERIOR': 'Pirates\' Fortess Interior',
+  'MM_PIRATE_FORTRESS_INTERIOR': 'Pirates\' Fortress Interior',
   'MM_IKANA_CASTLE': 'Ikana Castle',
   'MM_BENEATH_THE_WELL': 'Beneath the Well',
   'MM_SECRET_SHRINE': 'Secret Shrine',
