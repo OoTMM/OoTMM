@@ -17,7 +17,7 @@ export type GeneratorParams = {
   monitor?: MonitorCallbacks
 };
 
-export type { GeneratorOutput, Settings, OptionsInput };
+export type { GeneratorOutput, Settings, OptionsInput, Items };
 
 type LocInfo = {
   [k: string]: string[]
