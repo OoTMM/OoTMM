@@ -16,5 +16,5 @@ fi
 npm i || exit 1
 npm run build || exit 1
 cd ../..
-npm i || exit 1
-npm run build || exit 1
+yarn install || exit 1
+yarn build || exit 1
