@@ -282,6 +282,9 @@ void comboAddCommonItemMm(int sid)
     case SITEM_LENS:
         gMmSave.inventory.items[ITS_MM_LENS] = ITEM_MM_LENS_OF_TRUTH;
         break;
+    case SITEM_OCARINA_TIME:
+        gMmSave.inventory.items[ITS_MM_OCARINA] = ITEM_MM_OCARINA_OF_TIME;
+        break;
     }
 }
 
@@ -426,7 +429,7 @@ int comboAddItemMm(s16 gi, int noEffect)
     switch (gi)
     {
     case GI_MM_OCARINA_OF_TIME:
-        gMmSave.inventory.items[ITS_MM_OCARINA] = ITEM_MM_OCARINA_OF_TIME;
+        comboAddCommonItemMm(SITEM_OCARINA_TIME);
         break;
     case GI_MM_ARROW_FIRE:
         comboAddCommonItemMm(SITEM_ARROW_FIRE);

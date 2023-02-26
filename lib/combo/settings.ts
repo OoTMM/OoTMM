@@ -264,6 +264,12 @@ export const SETTINGS = [{
   type: 'boolean',
   default: false
 }, {
+  key: 'sharedOcarina',
+  name: 'Shared Ocarina of Time',
+  category: 'items',
+  type: 'boolean',
+  default: false
+}, {
   key: 'csmc',
   name: 'Chest Size Matches Content',
   category: 'misc',

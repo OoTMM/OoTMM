@@ -334,6 +334,9 @@ void comboAddCommonItemOot(int sid)
     case SITEM_LENS:
         gOotSave.inventory.items[ITS_OOT_LENS] = ITEM_OOT_LENS;
         break;
+    case SITEM_OCARINA_TIME:
+        addOcarina(2);
+        break;
     }
 }
 
@@ -484,6 +487,11 @@ void comboAddItemSharedOot(s16 gi, int noEffect)
     {
         comboAddCommonItemMm(SITEM_LENS);
     }
+
+    if (comboConfig(CFG_SHARED_OCARINA) && gi == GI_OOT_OCARINA_TIME)
+    {
+        comboAddCommonItemMm(SITEM_OCARINA_TIME);
+    }
 }
 
 int comboAddItemOot(s16 gi, int noEffect)
@@ -558,7 +566,7 @@ int comboAddItemOot(s16 gi, int noEffect)
         addOcarina(1);
         break;
     case GI_OOT_OCARINA_TIME:
-        addOcarina(2);
+        comboAddCommonItemOot(SITEM_OCARINA_TIME);
         break;
     case GI_OOT_BOMBCHU_5:
         addBombchu(5);

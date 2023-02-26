@@ -55,6 +55,7 @@ const SHARED_ITEMS_OOT = new Map([
   ['SHARED_STICKS_10',      'OOT_STICKS_10'],
   ['SHARED_HOOKSHOT',       'OOT_HOOKSHOT'],
   ['SHARED_LENS',           'OOT_LENS'],
+  ['SHARED_OCARINA',        'OOT_OCARINA'],
 ]);
 
 const SHARED_ITEMS_MM = new Map([
@@ -84,6 +85,7 @@ const SHARED_ITEMS_MM = new Map([
   ['SHARED_STICKS_10',      'OOT_STICKS_10'], /* MM lacks 10 pack */
   ['SHARED_HOOKSHOT',       'MM_HOOKSHOT'],
   ['SHARED_LENS',           'MM_LENS'],
+  ['SHARED_OCARINA',        'OOT_OCARINA'], /* Progressive */
 ]);
 
 const SHARED_ITEMS = {

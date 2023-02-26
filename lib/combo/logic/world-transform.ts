@@ -109,6 +109,11 @@ export class LogicPassWorldTransform {
       itemsToJunk.add('MM_LENS');
     }
 
+    if (config.has('SHARED_OCARINA')) {
+      itemsToReplace.set('OOT_OCARINA', 'SHARED_OCARINA');
+      itemsToJunk.add('MM_OCARINA');
+    }
+
     for (const loc in this.state.world.checks) {
       const check = this.state.world.checks[loc];
       let item = check.item;

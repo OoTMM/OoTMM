@@ -436,5 +436,6 @@
 #define SITEM_SONG_STORMS       0x05
 #define SITEM_HOOKSHOT          0x06
 #define SITEM_LENS              0x07
+#define SITEM_OCARINA_TIME      0x08
 
 #endif

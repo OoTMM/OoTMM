@@ -9,5 +9,7 @@ test("Can make a seed - Shared Items", () => {
     sharedSongs: true,
     sharedNutsSticks: true,
     sharedHookshot: true,
+    sharedLens: true,
+    sharedOcarina: true,
   });
 });

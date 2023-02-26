@@ -153,7 +153,7 @@
   exits:
     "Clock Town East": "true"
   locations:
-    "Milk Bar Troupe Leader Mask": "has(OCARINA) && has(MASK_DEKU) && has(MASK_ZORA) && has(MASK_GORON) && has(MASK_ROMANI)"
+    "Milk Bar Troupe Leader Mask": "has_ocarina && has(MASK_DEKU) && has(MASK_ZORA) && has(MASK_GORON) && has(MASK_ROMANI)"
     "Milk Bar Madame Aroma Bottle": "has(MASK_KAFEI) && has(LETTER_TO_MAMA)"
 "Town Archery":
   region: CLOCK_TOWN_EAST
@@ -240,7 +240,7 @@
     "Termina Field Dodongo Grotto": "has_weapon || has(BOMB_BAG) || has(MASK_GORON) || has(BOW)"
     "Termina Field Bio Baba Grotto": "can_break_boulders && has(MASK_ZORA)"
     "Termina Field Scrub": "event(SCRUB_TELESCOPE) && has(WALLET)"
-    "Termina Field Gossip Stones HP": "has(OCARINA) && ((has(MASK_GORON) && has_goron_song) || (has(MASK_DEKU) && has(SONG_AWAKENING)) || (has(MASK_ZORA) && has(SONG_ZORA))) && can_break_boulders"
+    "Termina Field Gossip Stones HP": "has_ocarina && ((has(MASK_GORON) && has_goron_song) || (has(MASK_DEKU) && has(SONG_AWAKENING)) || (has(MASK_ZORA) && has(SONG_ZORA))) && can_break_boulders"
 #    "Termina Field Log Grotto Cow 1": "has_explosives && can_play(SONG_EPONA)"
 #    "Termina Field Log Grotto Cow 2": "has_explosives && can_play(SONG_EPONA)"
   gossip:
@@ -335,7 +335,7 @@
   locations:
     "Deku Palace HP": "has(MASK_DEKU) || (event(CLEAN_SWAMP) && can_use_beans)"
     "Deku Palace Grotto Chest": "(has(MASK_DEKU) && (can_use_beans || has(HOOKSHOT))) || (event(CLEAN_SWAMP) && can_use_beans)"
-    "Deku Palace Sonata of Awakening": "has(MASK_DEKU) && has(OCARINA) && (can_use_beans || trick(MM_PALACE_BEAN_SKIP))"
+    "Deku Palace Sonata of Awakening": "has(MASK_DEKU) && has_ocarina && (can_use_beans || trick(MM_PALACE_BEAN_SKIP))"
 "Swamp Canopy Front":
   region: SOUTHERN_SWAMP
   exits:
@@ -449,7 +449,7 @@
     "Twin Islands Underwater Chest 2": "event(BOSS_SNOWHEAD) && has(MASK_ZORA)"
     "Twin Islands Frozen Grotto Chest": "(event(GORON_GRAVEYARD_HOT_WATER) || can_use_fire_arrows || event(BOSS_SNOWHEAD) || (event(WELL_HOT_WATER) && can_play(SONG_SOARING))) && has_explosives"
     "Twin Islands Ramp Grotto Chest": "has_explosives && (has(MASK_GORON) || scarecrow_hookshot)"
-    "Goron Elder": "has(MASK_GORON) && has(OCARINA) && (event(GORON_GRAVEYARD_HOT_WATER) || can_use_fire_arrows || (event(WELL_HOT_WATER) && can_play(SONG_SOARING)))"
+    "Goron Elder": "has(MASK_GORON) && (event(GORON_GRAVEYARD_HOT_WATER) || can_use_fire_arrows || (event(WELL_HOT_WATER) && can_play(SONG_SOARING)))"
 "Goron Village":
   region: GORON_VILLAGE
   exits:
@@ -649,7 +649,7 @@
   exits:
     "Great Bay Coast": "true"
   locations:
-    "Laboratory Zora Song": "event(ZORA_EGGS_HOOKSHOT_ROOM) && event(ZORA_EGGS_BARREL_MAZE) && event(ZORA_EGGS_LONE_GUARD) && event(ZORA_EGGS_TREASURE_ROOM) && event(ZORA_EGGS_PINNACLE_ROCK) && has(MASK_ZORA) && has(OCARINA)"
+    "Laboratory Zora Song": "event(ZORA_EGGS_HOOKSHOT_ROOM) && event(ZORA_EGGS_BARREL_MAZE) && event(ZORA_EGGS_LONE_GUARD) && event(ZORA_EGGS_TREASURE_ROOM) && event(ZORA_EGGS_PINNACLE_ROCK) && has(MASK_ZORA) && has_ocarina"
     "Laboratory Fish HP": "has_bottle"
 "Zora Cape":
   region: ZORA_CAPE
@@ -704,7 +704,7 @@
   locations:
     "Zora Hall Scrub HP": "has(DEED_MOUNTAIN) && has(MASK_GORON) && has(MASK_DEKU)"
     "Zora Hall Scrub Deed": "has(DEED_MOUNTAIN) && has(MASK_GORON)"
-    "Zora Hall Evan HP": "has(MASK_ZORA) && has(OCARINA)"
+    "Zora Hall Evan HP": "has(MASK_ZORA) && has_ocarina"
     "Zora Hall Scene Lights": "can_use_fire_arrows"
 "Zora Cape Peninsula":
   region: ZORA_CAPE

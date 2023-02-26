@@ -87,6 +87,10 @@ export class LogicPassConfig {
       config.add('SHARED_LENS');
     }
 
+    if (this.state.settings.sharedOcarina) {
+      config.add('SHARED_OCARINA');
+    }
+
     return { config };
   }
 }

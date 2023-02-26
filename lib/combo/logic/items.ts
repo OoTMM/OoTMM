@@ -152,6 +152,7 @@ export const ITEMS_REQUIRED = new Set<string>([
   'SHARED_SONG_STORMS',
   'SHARED_HOOKSHOT',
   'SHARED_LENS',
+  'SHARED_OCARINA',
 ]);
 
 const ITEMS_JUNK = new Set<string>([
