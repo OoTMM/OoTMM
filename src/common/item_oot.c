@@ -328,6 +328,9 @@ void comboAddCommonItemOot(int sid)
     case SITEM_SONG_STORMS:
         gOotSave.inventory.quest.songStorms = 1;
         break;
+    case SITEM_HOOKSHOT:
+        addHookshot(1);
+        break;
     }
 }
 
@@ -468,6 +471,11 @@ void comboAddItemSharedOot(s16 gi, int noEffect)
             break;
         }
     }
+
+    if (comboConfig(CFG_SHARED_HOOKSHOT) && gi == GI_OOT_HOOKSHOT)
+    {
+        comboAddCommonItemMm(SITEM_HOOKSHOT);
+    }
 }
 
 int comboAddItemOot(s16 gi, int noEffect)
@@ -554,7 +562,7 @@ int comboAddItemOot(s16 gi, int noEffect)
         addBombchu(20);
         break;
     case GI_OOT_HOOKSHOT:
-        addHookshot(1);
+        comboAddCommonItemOot(SITEM_HOOKSHOT);
         break;
     case GI_OOT_LONGSHOT:
         addHookshot(2);

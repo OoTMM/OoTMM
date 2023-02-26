@@ -79,6 +79,10 @@ export class LogicPassConfig {
       config.add('SHARED_NUTS_STICKS');
     }
 
+    if (this.state.settings.sharedHookshot) {
+      config.add('SHARED_HOOKSHOT');
+    }
+
     return { config };
   }
 }

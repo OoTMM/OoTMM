@@ -276,6 +276,9 @@ void comboAddCommonItemMm(int sid)
     case SITEM_SONG_STORMS:
         gMmSave.inventory.questItems.songStorms = 1;
         break;
+    case SITEM_HOOKSHOT:
+        gMmSave.inventory.items[ITS_MM_HOOKSHOT] = ITEM_MM_HOOKSHOT;
+        break;
     }
 }
 
@@ -400,6 +403,11 @@ void comboAddItemSharedMm(s16 gi, int noEffect)
             break;
         }
     }
+
+    if (comboConfig(CFG_SHARED_HOOKSHOT) && gi == GI_MM_HOOKSHOT)
+    {
+        comboAddCommonItemOot(SITEM_HOOKSHOT);
+    }
 }
 
 int comboAddItemMm(s16 gi, int noEffect)
@@ -436,7 +444,7 @@ int comboAddItemMm(s16 gi, int noEffect)
         gMmSave.inventory.items[ITS_MM_LENS] = ITEM_MM_LENS_OF_TRUTH;
         break;
     case GI_MM_HOOKSHOT:
-        gMmSave.inventory.items[ITS_MM_HOOKSHOT] = ITEM_MM_HOOKSHOT;
+        comboAddCommonItemMm(SITEM_HOOKSHOT);
         break;
     case GI_MM_GREAT_FAIRY_SWORD:
         gMmSave.inventory.items[ITS_MM_GREAT_FAIRY_SWORD] = ITEM_MM_GREAT_FAIRY_SWORD;

@@ -150,6 +150,7 @@ export const ITEMS_REQUIRED = new Set<string>([
   'SHARED_SONG_EPONA',
   'SHARED_SONG_TIME',
   'SHARED_SONG_STORMS',
+  'SHARED_HOOKSHOT',
 ]);
 
 const ITEMS_JUNK = new Set<string>([

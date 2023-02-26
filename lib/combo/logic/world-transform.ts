@@ -99,6 +99,11 @@ export class LogicPassWorldTransform {
       itemsToReplace.set('MM_STICK',        'SHARED_STICK');
     }
 
+    if (config.has('SHARED_HOOKSHOT')) {
+      itemsToReplace.set('OOT_HOOKSHOT', 'SHARED_HOOKSHOT');
+      itemsToJunk.add('MM_HOOKSHOT');
+    }
+
     for (const loc in this.state.world.checks) {
       const check = this.state.world.checks[loc];
       let item = check.item;

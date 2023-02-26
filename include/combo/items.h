@@ -434,5 +434,6 @@
 #define SITEM_SONG_EPONA        0x03
 #define SITEM_SONG_TIME         0x04
 #define SITEM_SONG_STORMS       0x05
+#define SITEM_HOOKSHOT          0x06
 
 #endif

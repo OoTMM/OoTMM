@@ -53,6 +53,7 @@ const SHARED_ITEMS_OOT = new Map([
   ['SHARED_STICK',          'OOT_STICK'],
   ['SHARED_STICKS_5',       'OOT_STICKS_5'],
   ['SHARED_STICKS_10',      'OOT_STICKS_10'],
+  ['SHARED_HOOKSHOT',       'OOT_HOOKSHOT'],
 ]);
 
 const SHARED_ITEMS_MM = new Map([
@@ -80,6 +81,7 @@ const SHARED_ITEMS_MM = new Map([
   ['SHARED_STICK',          'MM_STICK'],
   ['SHARED_STICKS_5',       'OOT_STICKS_5'],  /* MM lacks 5 pack */
   ['SHARED_STICKS_10',      'OOT_STICKS_10'], /* MM lacks 10 pack */
+  ['SHARED_HOOKSHOT',       'MM_HOOKSHOT'],
 ]);
 
 const SHARED_ITEMS = {
