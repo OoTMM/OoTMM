@@ -183,7 +183,7 @@ export class LogicPassSolver {
 
     if (!this.state.settings.sharedMasks) {
       /* Add the extra masks */
-      for (const item of EXTRA_OOT_MASKS) {
+      for (const item of EXTRA_MASKS_OOT) {
         this.insertItem(pools, item);
       }
     }
