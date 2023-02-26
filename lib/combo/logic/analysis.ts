@@ -335,6 +335,11 @@ export class LogicPassAnalysis {
       delete this.dependencies['OOT_SMALL_KEY_FOREST'];
       delete this.dependencies['OOT_SMALL_KEY_SPIRIT'];
     }
+
+    /* Shared items */
+    this.dependencies['SHARED_MASK_TRUTH'] = [...this.dependencies['MM_MASK_TRUTH'], ...this.dependencies['OOT_MASK_TRUTH']];
+    this.dependencies['SHARED_MASK_KEATON'] = [...this.dependencies['MM_MASK_KEATON']];
+    this.dependencies['SHARED_MASK_BUNNY'] = [...this.dependencies['MM_MASK_BUNNY']];
   }
 
   private makeSpheresRaw(restrictedLocations?: Set<string>) {

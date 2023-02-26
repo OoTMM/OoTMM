@@ -11,5 +11,6 @@ test("Can make a seed - Shared Items", () => {
     sharedHookshot: true,
     sharedLens: true,
     sharedOcarina: true,
+    sharedMasks: true,
   });
 });

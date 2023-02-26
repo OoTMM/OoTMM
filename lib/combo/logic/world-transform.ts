@@ -114,6 +114,19 @@ export class LogicPassWorldTransform {
       itemsToJunk.add('MM_OCARINA');
     }
 
+    if (config.has('SHARED_MASKS')) {
+      itemsToReplace.set('MM_MASK_ZORA', 'SHARED_MASK_ZORA');
+      itemsToReplace.set('MM_MASK_GORON', 'SHARED_MASK_GORON');
+      itemsToReplace.set('MM_MASK_TRUTH', 'SHARED_MASK_TRUTH');
+      itemsToReplace.set('MM_MASK_BUNNY', 'SHARED_MASK_BUNNY');
+      itemsToReplace.set('MM_MASK_KEATON', 'SHARED_MASK_KEATON');
+      itemsToJunk.add('OOT_MASK_ZORA');
+      itemsToJunk.add('OOT_MASK_GORON');
+      itemsToJunk.add('OOT_MASK_TRUTH');
+      itemsToJunk.add('OOT_MASK_BUNNY');
+      itemsToJunk.add('OOT_MASK_KEATON');
+    }
+
     for (const loc in this.state.world.checks) {
       const check = this.state.world.checks[loc];
       let item = check.item;

@@ -263,6 +263,11 @@ const ITEM_NAMES: {[k: string]: string} = {
   SHARED_HOOKSHOT: "Progressive Hookshot",
   SHARED_LENS: "Lens of Truth",
   SHARED_OCARINA: "Progressive Ocarina",
+  SHARED_MASK_BUNNY: "Bunny Hood",
+  SHARED_MASK_GORON: "Goron Mask",
+  SHARED_MASK_KEATON: "Keaton Mask",
+  SHARED_MASK_TRUTH: "Mask of Truth",
+  SHARED_MASK_ZORA: "Zora Mask",
 };
 
 export const itemName = (item: string) => ITEM_NAMES[item] ?? item;

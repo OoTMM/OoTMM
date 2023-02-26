@@ -337,6 +337,21 @@ void comboAddCommonItemOot(int sid)
     case SITEM_OCARINA_TIME:
         addOcarina(2);
         break;
+    case SITEM_MASK_KEATON:
+        addTradeChild(3);
+        break;
+    case SITEM_MASK_BUNNY:
+        addTradeChild(6);
+        break;
+    case SITEM_MASK_GORON:
+        addTradeChild(7);
+        break;
+    case SITEM_MASK_ZORA:
+        addTradeChild(8);
+        break;
+    case SITEM_MASK_TRUTH:
+        addTradeChild(10);
+        break;
     }
 }
 
@@ -491,6 +506,28 @@ void comboAddItemSharedOot(s16 gi, int noEffect)
     if (comboConfig(CFG_SHARED_OCARINA) && gi == GI_OOT_OCARINA_TIME)
     {
         comboAddCommonItemMm(SITEM_OCARINA_TIME);
+    }
+
+    if (comboConfig(CFG_SHARED_MASKS))
+    {
+        switch (gi)
+        {
+        case GI_OOT_MASK_KEATON:
+            comboAddCommonItemMm(SITEM_MASK_KEATON);
+            break;
+        case GI_OOT_MASK_BUNNY:
+            comboAddCommonItemMm(SITEM_MASK_BUNNY);
+            break;
+        case GI_OOT_MASK_TRUTH:
+            comboAddCommonItemMm(SITEM_MASK_TRUTH);
+            break;
+        case GI_OOT_MASK_GORON:
+            comboAddCommonItemMm(SITEM_MASK_GORON);
+            break;
+        case GI_OOT_MASK_ZORA:
+            comboAddCommonItemMm(SITEM_MASK_ZORA);
+            break;
+        }
     }
 }
 
@@ -881,7 +918,7 @@ int comboAddItemOot(s16 gi, int noEffect)
         addTradeChild(2);
         break;
     case GI_OOT_MASK_KEATON:
-        addTradeChild(3);
+        comboAddCommonItemOot(SITEM_MASK_KEATON);
         break;
     case GI_OOT_MASK_SKULL:
         addTradeChild(4);
@@ -890,19 +927,19 @@ int comboAddItemOot(s16 gi, int noEffect)
         addTradeChild(5);
         break;
     case GI_OOT_MASK_BUNNY:
-        addTradeChild(6);
+        comboAddCommonItemOot(SITEM_MASK_BUNNY);
         break;
     case GI_OOT_MASK_GORON:
-        addTradeChild(7);
+        comboAddCommonItemOot(SITEM_MASK_GORON);
         break;
     case GI_OOT_MASK_ZORA:
-        addTradeChild(8);
+        comboAddCommonItemOot(SITEM_MASK_ZORA);
         break;
     case GI_OOT_MASK_GERUDO:
         addTradeChild(9);
         break;
     case GI_OOT_MASK_TRUTH:
-        addTradeChild(10);
+        comboAddCommonItemOot(SITEM_MASK_TRUTH);
         break;
     case GI_OOT_POCKET_EGG:
         addTradeAdult(0);

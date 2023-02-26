@@ -91,6 +91,10 @@ export class LogicPassConfig {
       config.add('SHARED_OCARINA');
     }
 
+    if (this.state.settings.sharedMasks) {
+      config.add('SHARED_MASKS');
+    }
+
     return { config };
   }
 }

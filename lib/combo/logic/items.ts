@@ -153,6 +153,11 @@ export const ITEMS_REQUIRED = new Set<string>([
   'SHARED_HOOKSHOT',
   'SHARED_LENS',
   'SHARED_OCARINA',
+  'SHARED_MASK_GORON',
+  'SHARED_MASK_ZORA',
+  'SHARED_MASK_TRUTH',
+  'SHARED_MASK_BUNNY',
+  'SHARED_MASK_KEATON',
 ]);
 
 const ITEMS_JUNK = new Set<string>([

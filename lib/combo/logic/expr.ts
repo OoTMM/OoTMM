@@ -31,6 +31,9 @@ const MASKS = [
   'MM_MASK_BLAST',
   'MM_MASK_SCENTS',
   'MM_MASK_KAFEI',
+  'SHARED_MASK_TRUTH',
+  'SHARED_MASK_BUNNY',
+  'SHARED_MASK_KEATON',
 ];
 
 const itemCount = (state: State, item: string): number => state.items[item] || 0;

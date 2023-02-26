@@ -180,15 +180,16 @@ static int isItemAmbiguousOot(s16 gi)
         return !comboConfig(CFG_SHARED_LENS);
     case GI_OOT_OCARINA_TIME:
         return !comboConfig(CFG_SHARED_OCARINA);
-    case GI_OOT_BOMBCHU_10:
-    case GI_OOT_MAGIC_BEAN:
-    case GI_OOT_EMPTY_BOTTLE:
-    case GI_OOT_MILK_BOTTLE:
     case GI_OOT_MASK_KEATON:
     case GI_OOT_MASK_BUNNY:
     case GI_OOT_MASK_GORON:
     case GI_OOT_MASK_ZORA:
     case GI_OOT_MASK_TRUTH:
+        return !comboConfig(CFG_SHARED_MASKS);
+    case GI_OOT_BOMBCHU_10:
+    case GI_OOT_MAGIC_BEAN:
+    case GI_OOT_EMPTY_BOTTLE:
+    case GI_OOT_MILK_BOTTLE:
     case GI_OOT_SWORD_KOKIRI:
     case GI_OOT_SHIELD_HYLIAN:
     case GI_OOT_WALLET2:
@@ -254,15 +255,16 @@ static int isItemAmbiguousMm(s16 gi)
         return !comboConfig(CFG_SHARED_LENS);
     case GI_MM_OCARINA_OF_TIME:
         return !comboConfig(CFG_SHARED_OCARINA);
-    case GI_MM_BOMBCHU:
-    case GI_MM_MAGIC_BEAN:
-    case GI_MM_BOTTLED_POTION_RED:
-    case GI_MM_EMPTY_BOTTLE:
     case GI_MM_MASK_GORON:
     case GI_MM_MASK_ZORA:
     case GI_MM_MASK_TRUTH:
     case GI_MM_MASK_BUNNY:
     case GI_MM_MASK_KEATON:
+        return !comboConfig(CFG_SHARED_MASKS);
+    case GI_MM_BOMBCHU:
+    case GI_MM_MAGIC_BEAN:
+    case GI_MM_BOTTLED_POTION_RED:
+    case GI_MM_EMPTY_BOTTLE:
     case GI_MM_SWORD_KOKIRI:
     case GI_MM_SHIELD_HERO:
     case GI_MM_WALLET2:

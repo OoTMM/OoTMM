@@ -11,14 +11,17 @@ import { Monitor } from '../monitor';
 export const EXTRA_ITEMS = [
   'OOT_MASK_SKULL',
   'OOT_MASK_SPOOKY',
-  'OOT_MASK_KEATON',
-  'OOT_MASK_BUNNY',
-  'OOT_MASK_TRUTH',
-  'OOT_MASK_GORON',
-  'OOT_MASK_ZORA',
   'OOT_MASK_GERUDO',
   'MM_MASK_DEKU',
   'MM_SWORD',
+];
+
+export const EXTRA_MASKS_OOT = [
+  'OOT_MASK_KEATON',
+  'OOT_MASK_TRUTH',
+  'OOT_MASK_BUNNY',
+  'OOT_MASK_GORON',
+  'OOT_MASK_ZORA',
 ];
 
 export type ItemPlacement = {[k: string]: string};
@@ -176,6 +179,13 @@ export class LogicPassSolver {
     /* Add the extra items */
     for (const item of EXTRA_ITEMS) {
       this.insertItem(pools, item);
+    }
+
+    if (!this.state.settings.sharedMasks) {
+      /* Add the extra masks */
+      for (const item of EXTRA_OOT_MASKS) {
+        this.insertItem(pools, item);
+      }
     }
 
     if (this.state.settings.progressiveSwordsOot === 'progressive') {

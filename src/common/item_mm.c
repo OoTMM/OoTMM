@@ -285,6 +285,21 @@ void comboAddCommonItemMm(int sid)
     case SITEM_OCARINA_TIME:
         gMmSave.inventory.items[ITS_MM_OCARINA] = ITEM_MM_OCARINA_OF_TIME;
         break;
+    case SITEM_MASK_KEATON:
+        gMmSave.inventory.items[ITS_MM_MASK_KEATON] = ITEM_MM_MASK_KEATON;
+        break;
+    case SITEM_MASK_BUNNY:
+        gMmSave.inventory.items[ITS_MM_MASK_BUNNY] = ITEM_MM_MASK_BUNNY;
+        break;
+    case SITEM_MASK_TRUTH:
+        gMmSave.inventory.items[ITS_MM_MASK_TRUTH] = ITEM_MM_MASK_TRUTH;
+        break;
+    case SITEM_MASK_GORON:
+        gMmSave.inventory.items[ITS_MM_MASK_GORON] = ITEM_MM_MASK_GORON;
+        break;
+    case SITEM_MASK_ZORA:
+        gMmSave.inventory.items[ITS_MM_MASK_ZORA] = ITEM_MM_MASK_ZORA;
+        break;
     }
 }
 
@@ -418,6 +433,28 @@ void comboAddItemSharedMm(s16 gi, int noEffect)
     if (comboConfig(CFG_SHARED_LENS) && gi == GI_MM_LENS)
     {
         comboAddCommonItemOot(SITEM_LENS);
+    }
+
+    if (comboConfig(CFG_SHARED_MASKS))
+    {
+        switch (gi)
+        {
+        case GI_MM_MASK_BUNNY:
+            comboAddCommonItemOot(SITEM_MASK_BUNNY);
+            break;
+        case GI_MM_MASK_GORON:
+            comboAddCommonItemOot(SITEM_MASK_GORON);
+            break;
+        case GI_MM_MASK_KEATON:
+            comboAddCommonItemOot(SITEM_MASK_KEATON);
+            break;
+        case GI_MM_MASK_TRUTH:
+            comboAddCommonItemOot(SITEM_MASK_TRUTH);
+            break;
+        case GI_MM_MASK_ZORA:
+            comboAddCommonItemOot(SITEM_MASK_ZORA);
+            break;
+        }
     }
 }
 
@@ -588,13 +625,13 @@ int comboAddItemMm(s16 gi, int noEffect)
         gMmSave.inventory.items[ITS_MM_MASK_DEKU] = ITEM_MM_MASK_DEKU;
         break;
     case GI_MM_MASK_KEATON:
-        gMmSave.inventory.items[ITS_MM_MASK_KEATON] = ITEM_MM_MASK_KEATON;
+        comboAddCommonItemMm(SITEM_MASK_KEATON);
         break;
     case GI_MM_MASK_BREMEN:
         gMmSave.inventory.items[ITS_MM_MASK_BREMEN] = ITEM_MM_MASK_BREMEN;
         break;
     case GI_MM_MASK_BUNNY:
-        gMmSave.inventory.items[ITS_MM_MASK_BUNNY] = ITEM_MM_MASK_BUNNY;
+        comboAddCommonItemMm(SITEM_MASK_BUNNY);
         break;
     case GI_MM_MASK_DON_GERO:
         gMmSave.inventory.items[ITS_MM_MASK_DON_GERO] = ITEM_MM_MASK_DON_GERO;
@@ -603,7 +640,7 @@ int comboAddItemMm(s16 gi, int noEffect)
         gMmSave.inventory.items[ITS_MM_MASK_SCENTS] = ITEM_MM_MASK_SCENTS;
         break;
     case GI_MM_MASK_GORON:
-        gMmSave.inventory.items[ITS_MM_MASK_GORON] = ITEM_MM_MASK_GORON;
+        comboAddCommonItemMm(SITEM_MASK_GORON);
         break;
     case GI_MM_MASK_ROMANI:
         gMmSave.inventory.items[ITS_MM_MASK_ROMANI] = ITEM_MM_MASK_ROMANI;
@@ -618,10 +655,10 @@ int comboAddItemMm(s16 gi, int noEffect)
         gMmSave.inventory.items[ITS_MM_MASK_COUPLE] = ITEM_MM_MASK_COUPLE;
         break;
     case GI_MM_MASK_TRUTH:
-        gMmSave.inventory.items[ITS_MM_MASK_TRUTH] = ITEM_MM_MASK_TRUTH;
+        comboAddCommonItemMm(SITEM_MASK_TRUTH);
         break;
     case GI_MM_MASK_ZORA:
-        gMmSave.inventory.items[ITS_MM_MASK_ZORA] = ITEM_MM_MASK_ZORA;
+        comboAddCommonItemMm(SITEM_MASK_ZORA);
         break;
     case GI_MM_MASK_KAMARO:
         gMmSave.inventory.items[ITS_MM_MASK_KAMARO] = ITEM_MM_MASK_KAMARO;

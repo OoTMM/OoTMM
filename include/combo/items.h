@@ -437,5 +437,10 @@
 #define SITEM_HOOKSHOT          0x06
 #define SITEM_LENS              0x07
 #define SITEM_OCARINA_TIME      0x08
+#define SITEM_MASK_GORON        0x09
+#define SITEM_MASK_ZORA         0x0a
+#define SITEM_MASK_TRUTH        0x0b
+#define SITEM_MASK_KEATON       0x0c
+#define SITEM_MASK_BUNNY        0x0d
 
 #endif

@@ -17,3 +17,4 @@ SHARED_NUTS_STICKS:             0x0f
 SHARED_HOOKSHOT:                0x10
 SHARED_LENS:                    0x11
 SHARED_OCARINA:                 0x12
+SHARED_MASKS:                   0x13

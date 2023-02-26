@@ -56,6 +56,11 @@ const SHARED_ITEMS_OOT = new Map([
   ['SHARED_HOOKSHOT',       'OOT_HOOKSHOT'],
   ['SHARED_LENS',           'OOT_LENS'],
   ['SHARED_OCARINA',        'OOT_OCARINA'],
+  ['SHARED_MASK_KEATON',    'OOT_MASK_KEATON'],
+  ['SHARED_MASK_BUNNY',     'OOT_MASK_BUNNY'],
+  ['SHARED_MASK_TRUTH',     'OOT_MASK_TRUTH'],
+  ['SHARED_MASK_GORON',     'OOT_MASK_GORON'],
+  ['SHARED_MASK_ZORA',      'OOT_MASK_ZORA'],
 ]);
 
 const SHARED_ITEMS_MM = new Map([
@@ -86,6 +91,11 @@ const SHARED_ITEMS_MM = new Map([
   ['SHARED_HOOKSHOT',       'MM_HOOKSHOT'],
   ['SHARED_LENS',           'MM_LENS'],
   ['SHARED_OCARINA',        'OOT_OCARINA'], /* Progressive */
+  ['SHARED_MASK_KEATON',    'MM_MASK_KEATON'],
+  ['SHARED_MASK_BUNNY',     'MM_MASK_BUNNY'],
+  ['SHARED_MASK_TRUTH',     'MM_MASK_TRUTH'],
+  ['SHARED_MASK_GORON',     'MM_MASK_GORON'],
+  ['SHARED_MASK_ZORA',      'MM_MASK_ZORA'],
 ]);
 
 const SHARED_ITEMS = {
