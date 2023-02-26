@@ -761,7 +761,7 @@ int comboAddItemOot(s16 gi, int noEffect)
     case GI_OOT_RUTO_LETTER:
         addNewBottle(ITEM_OOT_RUTO_LETTER);
         break;
-    case GI_OOT_MILK_BOTTLE:
+    case GI_OOT_BOTTLE_MILK:
         addNewBottle(ITEM_OOT_MILK);
         break;
     case GI_OOT_POTION_RED:

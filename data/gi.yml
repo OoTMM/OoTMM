@@ -17,7 +17,7 @@ OOT_POTION_RED:           0x10
 OOT_POTION_GREEN:         0x11
 OOT_POTION_BLUE:          0x12
 OOT_BOTTLED_FAIRY:        0x13
-OOT_MILK_BOTTLE:          0x14
+OOT_BOTTLE_MILK:          0x14
 OOT_RUTO_LETTER:          0x15
 OOT_MAGIC_BEAN:           0x16
 OOT_MASK_SKULL:           0x17
@@ -248,7 +248,7 @@ MM_POTION_RED:                0x5b
 MM_POTION_GREEN:              0x5c
 MM_POTION_BLUE:               0x5d
 MM_BOTTLED_FAIRY:             0x5e
-MM_BOTTLED_MILK:              0x60
+MM_BOTTLE_MILK:               0x60
 MM_FISH:                      0x62
 MM_BUGS:                      0x63
 MM_BIG_POE:                   0x66

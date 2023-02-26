@@ -138,7 +138,7 @@ Path to Snowhead Grotto,                          chest,          NONE,         
 Snowhead Great Fairy,                             npc,            NONE,                   FAIRY_FOUNTAIN,             GREAT_FAIRY_MOUNTAIN,   MAGIC_UPGRADE
 Goron Race Reward,                                npc,            GORON_RACE,             GORON_RACETRACK,            GORON_RACE,             BOTTLED_GOLD_DUST
 Romani Ranch Epona Song,                          npc,            NONE,                   ROMANI_RANCH,               SONG_EPONA,             SONG_EPONA
-Romani Ranch Aliens,                              npc,            RANCH_DEFENSE,          ROMANI_RANCH,               ROMANI_BOTTLE,          BOTTLED_MILK
+Romani Ranch Aliens,                              npc,            RANCH_DEFENSE,          ROMANI_RANCH,               ROMANI_BOTTLE,          BOTTLE_MILK
 Romani Ranch Cremia Escort,                       npc,            RANCH_DEFENSE,          ROMANI_RANCH,               CREMIA_ESCORT,          MASK_ROMANI
 Cucco Shack Bunny Mask,                           npc,            NONE,                   CUCCO_SHACK,                MASK_BUNNY,             MASK_BUNNY
 Doggy Racetrack Chest,                            chest,          NONE,                   DOG_RACETRACK,              0x00,                   RUPEE_PURPLE

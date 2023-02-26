@@ -203,7 +203,7 @@ static int isItemAmbiguousOot(s16 gi)
     case GI_OOT_BOMBCHU_10:
     case GI_OOT_MAGIC_BEAN:
     case GI_OOT_EMPTY_BOTTLE:
-    case GI_OOT_MILK_BOTTLE:
+    case GI_OOT_BOTTLE_MILK:
     case GI_OOT_SWORD_KOKIRI:
     case GI_OOT_SHIELD_HYLIAN:
     case GI_OOT_BOMBCHU_5:
@@ -286,7 +286,7 @@ static int isItemAmbiguousMm(s16 gi)
     case GI_MM_BOMBCHU_20:
     case GI_MM_BOMBCHU_10:
     case GI_MM_BOMBCHU_5:
-    case GI_MM_BOTTLED_MILK:
+    case GI_MM_BOTTLE_MILK:
     case GI_MM_SHIELD_MIRROR:
         return 1;
     default:

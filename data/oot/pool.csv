@@ -114,7 +114,7 @@ Fishing Pond Child,                                   npc,            FISHING,  
 Fishing Pond Adult,                                   npc,            FISHING,              FISHING_POND,                   FISH_ADULT,                 SCALE
 Lon Lon Ranch Malon Song,                             npc,            NONE,                 LON_LON_RANCH,                  MALON_SONG,                 SONG_EPONA
 Lon Lon Ranch Silo HP,                                collectible,    NONE,                 RANCH_HOUSE_SILO,               0x01,                       HEART_PIECE
-Lon Lon Ranch Talon Bottle,                           npc,            NONE,                 RANCH_HOUSE_SILO,               TALON_BOTTLE,               MILK_BOTTLE
+Lon Lon Ranch Talon Bottle,                           npc,            NONE,                 RANCH_HOUSE_SILO,               TALON_BOTTLE,               BOTTLE_MILK
 Lon Lon Ranch GS Tree,                                gs,             NONE,                 LON_LON_RANCH,                  0x63,                       GS_TOKEN
 Lon Lon Ranch GS House,                               gs,             NONE,                 LON_LON_RANCH,                  0x62,                       GS_TOKEN
 Lon Lon Ranch GS Rain Shed,                           gs,             NONE,                 LON_LON_RANCH,                  0x61,                       GS_TOKEN

@@ -151,7 +151,7 @@ static int csmcFromItemOot(s16 gi)
     case GI_OOT_TUNIC_ZORA:
     case GI_OOT_ZELDA_LETTER:
     case GI_OOT_MAGIC_BEAN:
-    case GI_OOT_MILK_BOTTLE:
+    case GI_OOT_BOTTLE_MILK:
     case GI_OOT_STONE_OF_AGONY:
     case GI_OOT_WALLET2:
     case GI_OOT_WALLET3:
@@ -240,7 +240,7 @@ static int csmcFromItemMm(s16 gi)
     case GI_MM_BOTTLED_POTION_RED:
     case GI_MM_BOTTLED_GOLD_DUST:
     case GI_MM_EMPTY_BOTTLE:
-    case GI_MM_BOTTLED_MILK:
+    case GI_MM_BOTTLE_MILK:
     case GI_MM_MAGIC_UPGRADE:
     case GI_MM_MAGIC_UPGRADE2:
     case GI_MM_SONG_TIME:
