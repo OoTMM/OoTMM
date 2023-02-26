@@ -170,7 +170,7 @@
 #define ITEM_MM_POTION_RED                  0x13
 #define ITEM_MM_POTION_GREEN                0x14
 #define ITEM_MM_POTION_BLUE                 0x15
-#define ITEM_MM_BOTTLED_FAIRY               0x16
+#define ITEM_MM_FAIRY                       0x16
 #define ITEM_MM_BOTTLED_DEKU_PRINCESS       0x17
 #define ITEM_MM_MILK                        0x18
 #define ITEM_MM_MILK_HALF                   0x19

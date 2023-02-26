@@ -70,7 +70,7 @@ Southern Swamp Grotto,                            chest,          NONE,         
 Woods of Mystery Grotto,                          chest,          NONE,                   GROTTOS,                    0x1c,                   RUPEE_PURPLE
 Swamp Archery Reward 1,                           npc,            NONE,                   SHOOTING_GALLERY_SWAMP,     SHOOTING_GAME_SWAMP_1,  BOW
 Swamp Archery Reward 2,                           npc,            NONE,                   SHOOTING_GALLERY_SWAMP,     SHOOTING_GAME_SWAMP_2,  HEART_PIECE
-Swamp Potion Shop Kotake,                         npc,            NONE,                   POTION_SHOP,                KOTAKE_RED_POTION,      BOTTLED_POTION_RED
+Swamp Potion Shop Kotake,                         npc,            NONE,                   POTION_SHOP,                KOTAKE_RED_POTION,      BOTTLE_POTION_RED
 Tourist Information Pictobox,                     npc,            NONE,                   TOURIST_INFORMATION,        KOUME_PICTOGRAPH_BOX,   PICTOGRAPH_BOX
 Tourist Information Boat Cruise,                  npc,            BOAT_ARCHERY,           TOURIST_INFORMATION,        KOUME_HEART_PIECE,      HEART_PIECE
 Tourist Information Tingle Picture,               npc,            NONE,                   TOURIST_INFORMATION,        TOUR_GUIDE_HEART_PIECE, HEART_PIECE

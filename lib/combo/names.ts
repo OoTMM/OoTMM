@@ -15,7 +15,7 @@ const ITEM_NAMES: {[k: string]: string} = {
   MM_BOTTLED_CHATEAU_ROMANI: "Bottle - Chateau Romani (MM)",
   MM_BOTTLED_GOLD_DUST: "Bottle - Gold Dust (MM)",
   MM_BOTTLE_MILK: "Bottle - Milk (MM)",
-  MM_BOTTLED_POTION_RED: "Bottle - Red Potion (MM)",
+  MM_BOTTLE_POTION_RED: "Bottle - Red Potion (MM)",
   MM_BOW: "Bow (MM)",
   MM_COMPASS_GB: "Compass (Great Bay Temple)",
   MM_COMPASS_SH: "Compass (Snowhead Temple)",

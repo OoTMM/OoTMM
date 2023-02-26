@@ -620,7 +620,7 @@ int comboAddItemMm(s16 gi, int noEffect)
     case GI_MM_BOTTLED_CHATEAU_ROMANI:
         addNewBottle(ITEM_MM_BOTTLED_CHATEAU_ROMANI);
         break;
-    case GI_MM_BOTTLED_POTION_RED:
+    case GI_MM_BOTTLE_POTION_RED:
         addNewBottle(ITEM_MM_POTION_RED);
         break;
     case GI_MM_POTION_RED:

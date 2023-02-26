@@ -237,7 +237,7 @@ static int csmcFromItemMm(s16 gi)
     case GI_MM_MASK_SCENTS:
     case GI_MM_MASK_KAFEI:
     case GI_MM_MASK_FIERCE_DEITY:
-    case GI_MM_BOTTLED_POTION_RED:
+    case GI_MM_BOTTLE_POTION_RED:
     case GI_MM_BOTTLED_GOLD_DUST:
     case GI_MM_BOTTLE_EMPTY:
     case GI_MM_BOTTLE_MILK:

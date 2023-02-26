@@ -146,7 +146,7 @@ extern const Shader kShaders[256];
 #define DRAWGI_MM_LETTER_TO_MAMA            0x7d
 #define DRAWGI_MM_MASK_SUN                  0x7e
 #define DRAWGI_MM_MASK_BLAST                0x7f
-#define DRAWGI_MM_BOTTLED_FAIRY             0x80
+#define DRAWGI_MM_BOTTLE_FAIRY              0x80
 #define DRAWGI_MM_MASK_SCENTS               0x81
 #define DRAWGI_MM_MASK_CAPTAIN              0x82
 #define DRAWGI_MM_DEED_SWAMP                0x83

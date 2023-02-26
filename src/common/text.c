@@ -279,7 +279,7 @@ static int isItemAmbiguousMm(s16 gi)
         return !comboConfig(CFG_SHARED_HEALTH);
     case GI_MM_BOMBCHU:
     case GI_MM_MAGIC_BEAN:
-    case GI_MM_BOTTLED_POTION_RED:
+    case GI_MM_BOTTLE_POTION_RED:
     case GI_MM_BOTTLE_EMPTY:
     case GI_MM_SWORD_KOKIRI:
     case GI_MM_SHIELD_HERO:
