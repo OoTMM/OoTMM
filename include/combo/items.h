@@ -423,5 +423,8 @@
 #define SITEM_ARROW_FIRE        0x00
 #define SITEM_ARROW_ICE         0x01
 #define SITEM_ARROW_LIGHT       0x02
+#define SITEM_SONG_EPONA        0x03
+#define SITEM_SONG_TIME         0x04
+#define SITEM_SONG_STORMS       0x05
 
 #endif

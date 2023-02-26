@@ -257,6 +257,9 @@ const ITEM_NAMES: {[k: string]: string} = {
   SHARED_ARROW_FIRE: "Shared Fire Arrows",
   SHARED_ARROW_ICE: "Shared Ice Arrows",
   SHARED_ARROW_LIGHT: "Shared Light Arrows",
+  SHARED_SONG_EPONA: "Epona's Song",
+  SHARED_SONG_STORMS: "Song of Storms",
+  SHARED_SONG_TIME: "Song of Time",
 };
 
 export const itemName = (item: string) => ITEM_NAMES[item] ?? item;

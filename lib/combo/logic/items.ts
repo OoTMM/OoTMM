@@ -147,6 +147,9 @@ export const ITEMS_REQUIRED = new Set<string>([
   'SHARED_ARROW_FIRE',
   'SHARED_ARROW_ICE',
   'SHARED_ARROW_LIGHT',
+  'SHARED_SONG_EPONA',
+  'SHARED_SONG_TIME',
+  'SHARED_SONG_STORMS',
 ]);
 
 const ITEMS_JUNK = new Set<string>([
@@ -185,7 +188,7 @@ const ITEMS_JUNK = new Set<string>([
   'SHARED_BOMBS_30',
 ]);
 
-export const isSong = (item: string) => !!item.match(/^(OOT|MM)_SONG_/);
+export const isSong = (item: string) => !!item.match(/^(OOT|MM|SHARED)_SONG_/);
 export const isCompass = (item: string) => !!item.match(/^(OOT|MM)_COMPASS_/);
 export const isMap = (item: string) => !!item.match(/^(OOT|MM)_MAP_/);
 export const isSmallKey = (item: string) => !!item.match(/^(OOT|MM)_SMALL_KEY_/);

@@ -267,6 +267,15 @@ void comboAddCommonItemMm(int sid)
     case SITEM_ARROW_LIGHT:
         gMmSave.inventory.items[ITS_MM_ARROW_LIGHT] = ITEM_MM_ARROW_LIGHT;
         break;
+    case SITEM_SONG_EPONA:
+        gMmSave.inventory.questItems.songEpona = 1;
+        break;
+    case SITEM_SONG_TIME:
+        gMmSave.inventory.questItems.songTime = 1;
+        break;
+    case SITEM_SONG_STORMS:
+        gMmSave.inventory.questItems.songStorms = 1;
+        break;
     }
 }
 
@@ -353,6 +362,22 @@ static void addItemShared(s16 gi, int noEffect)
             break;
         case GI_MM_ARROW_LIGHT:
             comboAddCommonItemOot(SITEM_ARROW_LIGHT);
+            break;
+        }
+    }
+
+    if (comboConfig(CFG_SHARED_SONGS))
+    {
+        switch (gi)
+        {
+        case GI_MM_SONG_EPONA:
+            comboAddCommonItemOot(SITEM_SONG_EPONA);
+            break;
+        case GI_MM_SONG_TIME:
+            comboAddCommonItemOot(SITEM_SONG_TIME);
+            break;
+        case GI_MM_SONG_STORMS:
+            comboAddCommonItemOot(SITEM_SONG_STORMS);
             break;
         }
     }
@@ -655,19 +680,19 @@ int comboAddItemMm(s16 gi, int noEffect)
         gMmSave.inventory.questItems.songOrder = 1;
         break;
     case GI_MM_SONG_TIME:
-        gMmSave.inventory.questItems.songTime = 1;
+        comboAddCommonItemMm(SITEM_SONG_TIME);
         break;
     case GI_MM_SONG_HEALING:
         gMmSave.inventory.questItems.songHealing = 1;
         break;
     case GI_MM_SONG_EPONA:
-        gMmSave.inventory.questItems.songEpona = 1;
+        comboAddCommonItemMm(SITEM_SONG_EPONA);
         break;
     case GI_MM_SONG_SOARING:
         gMmSave.inventory.questItems.songSoaring = 1;
         break;
     case GI_MM_SONG_STORMS:
-        gMmSave.inventory.questItems.songStorms = 1;
+        comboAddCommonItemMm(SITEM_SONG_STORMS);
         break;
     case GI_MM_SONG_GORON_HALF:
         gMmSave.inventory.questItems.songLullabyIntro = 1;
