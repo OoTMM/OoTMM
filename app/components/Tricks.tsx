@@ -2,14 +2,12 @@ import React from 'react';
 import { TRICKS, Settings } from '@ootmm/core';
 
 import { Checkbox } from './Checkbox';
+import { useSettings } from '../contexts/GeneratorContext';
 
-type TricksProps = {
-  settings: Settings;
-  setSetting: (settings: Partial<Settings>) => void;
-};
-
-export const Tricks = ({ settings, setSetting }: TricksProps) => {
+export function Tricks() {
+  const [settings, setSettings] = useSettings();
   const { tricks } = settings;
+
   const ootTricks = Object.keys(tricks).filter(
     (x) => x.substring(0, 3) === 'OOT'
   );
@@ -26,7 +24,7 @@ export const Tricks = ({ settings, setSetting }: TricksProps) => {
             key={trick}
             label={(TRICKS as {[k: string]: string})[trick]}
             checked={(tricks as {[k: string]: boolean})[trick]}
-            onChange={(v) => setSetting({ tricks: { ...tricks, [trick]: v } })}
+            onChange={(v) => setSettings({ tricks: { ...tricks, [trick]: v } })}
           />
         ))}
       </div>
@@ -37,10 +35,10 @@ export const Tricks = ({ settings, setSetting }: TricksProps) => {
             key={trick}
             label={(TRICKS as {[k: string]: string})[trick]}
             checked={(tricks as {[k: string]: boolean})[trick]}
-            onChange={(v) => setSetting({ tricks: { ...tricks, [trick]: v } })}
+            onChange={(v) => setSettings({ tricks: { ...tricks, [trick]: v } })}
           />
         ))}
       </div>
     </form>
   );
-};
+}

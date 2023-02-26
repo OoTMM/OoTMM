@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 export type Tab = {
   name: string;
@@ -10,7 +10,7 @@ type TabProps = {
 }
 
 export const TabBar = ({ tabs }: TabProps) => {
-  const [activeTab, setActiveTab] = React.useState(0);
+  const [activeTab, setActiveTab] = useState(0);
 
   return (
     <div className="tab-bar">

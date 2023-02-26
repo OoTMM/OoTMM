@@ -1,28 +1,100 @@
 import { Buffer } from 'buffer';
-import { generate, GeneratorParams } from '@ootmm/core';
+import { Settings, itemPool, Items, OptionsInput, GeneratorOutput, generate } from '@ootmm/core';
 
-let generator = null;
-const startWorker = (params: GeneratorParams) => {
-  params.oot = Buffer.from(params.oot);
-  params.mm = Buffer.from(params.mm);
-  if (params.opts) {
-    params.opts.patch = params.opts.patch ? Buffer.from(params.opts.patch) : undefined;
+export type WorkerTaskItemPool = {
+  type: 'itemPool',
+  id: number,
+  settings: Settings,
+}
+
+export type WorkerTaskGenerate = {
+  type: 'generate',
+  id: number,
+  oot: Buffer,
+  mm: Buffer,
+  patch?: Buffer,
+  options: OptionsInput
+}
+
+export type WorkerResultItemPool = {
+  type: 'itemPool',
+  id: number,
+  itemPool: Items,
+}
+
+export type WorkerResultGenerate = {
+  type: 'generate',
+  id: number,
+  data: GeneratorOutput,
+}
+
+export type WorkerResultGenerateLog = {
+  type: 'generate-log',
+  id: number,
+  log: string
+}
+
+export type WorkerResultGenerateError = {
+  type: 'generate-error',
+  id: number,
+  error: any,
+}
+
+export type WorkerTask = WorkerTaskItemPool | WorkerTaskGenerate;
+export type WorkerResult = WorkerResultItemPool | WorkerResultGenerate | WorkerResultGenerateLog | WorkerResultGenerateError;
+
+function onTaskGenerate(task: WorkerTaskGenerate) {
+  let { oot, mm, patch } = task;
+  [oot, mm] = [oot, mm].map(b => Buffer.from(b));
+  if (patch) {
+    patch = Buffer.from(patch);
   }
-  params.monitor = {
-    onLog: (message) => self.postMessage({ type: 'log', message: message }),
+  const onLog = (msg: string) => {
+    postMessage({
+      type: 'generate-log',
+      id: task.id,
+      log: msg,
+    });
   };
-  generator = generate(params);
+  const generator = generate({ oot, mm, opts: { ...task.options, patch }, monitor: { onLog } });
   generator.run().then(result => {
-    self.postMessage({ type: 'end', result });
+    postMessage({
+      type: 'generate',
+      id: task.id,
+      data: result,
+    });
   }).catch((err) => {
-    self.postMessage({ type: 'error', message: err.message });
+    postMessage({
+      type: 'generate-error',
+      id: task.id,
+      error: err,
+    });
   });
-};
+}
 
-self.onmessage = ({ data }) => {
-  switch (data.type) {
-  case 'start':
-    startWorker(data.params);
+function onTaskItemPool(task: WorkerTaskItemPool) {
+  const result = itemPool(task.settings);
+  postMessage({
+    type: 'itemPool',
+    id: task.id,
+    itemPool: result,
+  });
+}
+
+function onMessage(event: MessageEvent<WorkerTask>) {
+  const task = event.data;
+  switch (task.type) {
+  case 'itemPool':
+    onTaskItemPool(task);
+    break;
+  case 'generate':
+    onTaskGenerate(task);
     break;
   }
-};
+}
+
+self.onmessage = onMessage;
+
+self.onerror = (event) => {
+  console.error(event);
+}

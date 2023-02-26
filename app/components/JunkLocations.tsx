@@ -1,17 +1,20 @@
-import { Settings } from '@ootmm/core';
-import React from 'react';
+import React, { useMemo } from 'react';
+import { locationList } from '@ootmm/core';
+
+import { useSettings } from '../contexts/GeneratorContext';
 import { TransferList } from './TransferList';
 
-type JunkLocationsProps = {
-  settings: Settings;
-  setSetting: (settings: Partial<Settings>) => void;
-  locList: any;
-};
+export function JunkLocations() {
+  const [settings, setSettings] = useSettings();
+  const locList = useMemo(() => locationList(settings), []);
 
-export const JunkLocations = ({ settings, setSetting, locList }: JunkLocationsProps) =>
-  <TransferList
-    label='junkLocations'
-    locList={locList}
-    settings={settings}
-    setSetting={setSetting}
-  />;
+  return (
+    <TransferList
+      label='junkLocations'
+      locList={locList}
+      settings={settings}
+      setSetting={setSettings}
+    />
+  );
+}
+

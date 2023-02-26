@@ -1,16 +1,16 @@
 import React from 'react';
-import { SETTINGS, Settings as CoreSettings } from '@ootmm/core';
+import { SETTINGS } from '@ootmm/core';
 
 import { Dropdown } from './Dropdown';
 import { Checkbox } from './Checkbox';
+import { useSettings } from '../contexts/GeneratorContext';
 
 type SettingsProps = {
   category: string;
-  settings: CoreSettings;
-  setSetting: (settings: Partial<CoreSettings>) => void;
 };
 
-export const Settings = ({ category, settings, setSetting }: SettingsProps) => {
+export function SettingsEditor({ category }: SettingsProps) {
+  const [settings, setSettings] = useSettings();
   const settingsData = SETTINGS.filter((s) => s.category === category);
   const enumList = settingsData.filter((x) => x.type === 'enum');
   const booleanList = settingsData.filter((x) => x.type === 'boolean');
@@ -24,7 +24,7 @@ export const Settings = ({ category, settings, setSetting }: SettingsProps) => {
               key={setting.key}
               label={setting.name}
               checked={settings[setting.key] as boolean}
-              onChange={(v) => setSetting({ [setting.key]: v })}
+              onChange={(v) => setSettings({ [setting.key]: v })}
             />
           ))}
         </div>
@@ -37,7 +37,7 @@ export const Settings = ({ category, settings, setSetting }: SettingsProps) => {
               key={setting.key}
               label={setting.name}
               options={(setting as any).values}
-              onChange={(v) => setSetting({ [setting.key]: v })}
+              onChange={(v) => setSettings({ [setting.key]: v })}
             />
           ))}
         </div>

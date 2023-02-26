@@ -1,83 +1,36 @@
 import React from 'react';
+import { useGenerator, useIsPatch, useRomConfig } from '../contexts/GeneratorContext';
 import { Checkbox } from './Checkbox';
 
 import { FileSelect } from './FileSelect';
 
-type RomConfigProps = {
-  roms: { oot: File | null; mm: File | null };
-  setRom: (rom: 'oot' | 'mm', file: File) => void;
-  usePatch: boolean;
-  setUsePatch: (usePatch: boolean) => void;
-  patch: File | null;
-  setPatch: (file: File) => void;
-  seed: string;
-  setSeed: (seed: string) => void;
-  error: string | null;
-  onGenerate: () => void;
-};
+export function RomConfig() {
+  const { romConfig, setFile, setSeed } = useRomConfig();
+  const [isPatch, setIsPatch] = useIsPatch();
+  const { error, generate } = useGenerator();
 
-export const RomConfig = ({
-  roms,
-  setRom,
-  usePatch,
-  setUsePatch,
-  patch,
-  setPatch,
-  seed,
-  setSeed,
-  error,
-  onGenerate,
-}: RomConfigProps) => {
-  return (
-    <div>
-      {error && <div className="generator-error">{error}</div>}
-      <form
-        target="_self"
-        onSubmit={(e) => {
-          e.preventDefault();
-          onGenerate();
-        }}
-      >
-        <div className="flex-h">
-          <FileSelect
-            logo="oot"
-            label="Ocarina of Time (1.0, U or J)"
-            accept=".z64, .n64, .v64"
-            file={roms.oot}
-            onChange={(f) => setRom('oot', f)}
-          />
-          <FileSelect
-            logo="mm"
-            label="Majora's Mask (U only)"
-            accept=".z64, .n64, .v64"
-            file={roms.mm}
-            onChange={(f) => setRom('mm', f)}
-          />
-          {usePatch &&
-            <FileSelect
-              logo="ootmm"
-              label="OoTMM Patch File"
-              accept=".ootmm"
-              file={patch}
-              onChange={(f) => setPatch(f)}
-            />
-          }
-        </div>
-        <Checkbox label="Use a patch file" checked={usePatch} onChange={setUsePatch}/>
-        {!usePatch &&
-          <label>
-            Seed (leave blank to auto-generate)
-            <input
-              type="text"
-              value={seed}
-              onChange={(e) => setSeed(e.target.value)}
-            />
-          </label>
-        }
-        <button className="btn-primary sm-margin-top" type="submit">
-          Generate
-        </button>
-      </form>
-    </div>
-  );
-};
+  return <>
+    <h1>OoTMM Web Generator</h1>
+    <h2>Version: {process.env.VERSION}</h2>
+    {error && <div className="generator-error">{error}</div>}
+    <form target="_self" onSubmit={(e) => { e.preventDefault(); generate(); }}>
+      <div className="flex-h">
+        <FileSelect logo="oot" label="Ocarina of Time (1.0, U or J)" accept=".z64, .n64, .v64" file={romConfig.files.oot} onChange={(f) => setFile('oot', f)}/>
+        <FileSelect logo="mm" label="Majora's Mask (U only)" accept=".z64, .n64, .v64" file={romConfig.files.mm} onChange={(f) => setFile('mm', f)} />
+        {isPatch && <FileSelect logo="ootmm" label="OoTMM Patch File" accept=".ootmm" file={romConfig.files.patch} onChange={(f) => setFile('patch', f)}/>}
+      </div>
+      <Checkbox label="Use a patch file" checked={isPatch} onChange={setIsPatch}/>
+      {!isPatch && <label>
+        Seed (leave blank to auto-generate)
+        <input
+          type="text"
+          value={romConfig.seed}
+          onChange={(e) => setSeed(e.target.value)}
+        />
+      </label>}
+      <button className="btn-primary sm-margin-top" type="submit">
+        Generate
+      </button>
+    </form>
+  </>
+}

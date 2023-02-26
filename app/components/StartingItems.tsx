@@ -1,30 +1,10 @@
 import React from 'react';
 
 import { itemName, Settings } from '@ootmm/core';
+import { useStartingItems } from '../contexts/GeneratorContext';
 
-type StartingItemsProps = {
-  settings: Settings;
-  setSetting: (settings: Partial<Settings>) => void;
-  itemPool: { [key: string]: number };
-};
-export const StartingItems = ({ settings, setSetting, itemPool }: StartingItemsProps) => {
-  const alterItem = (item: string, delta: number) => {
-    const { startingItems } = settings;
-    const count = startingItems[item] || 0;
-    if (count + delta <= 0) {
-      delete startingItems[item];
-    } else {
-      startingItems[item] = count + delta;
-      if (startingItems[item] > itemPool[item]) {
-        startingItems[item] = itemPool[item];
-      }
-    }
-    setSetting({ startingItems });
-  };
-
-  const resetItems = () => {
-    setSetting({ startingItems: {} });
-  };
+export function StartingItems() {
+  const { startingItems, itemPool, incr, decr, reset } = useStartingItems();
 
   // Valid gamePrefix are "MM" and "OOT"
   const buildSingleTable = (gamePrefix: 'MM' | 'OOT') => {
@@ -41,26 +21,11 @@ export const StartingItems = ({ settings, setSetting, itemPool }: StartingItemsP
           {Object.keys(itemPool)
             .filter((item) => item.startsWith(gamePrefix))
             .map((item) => (
-              <tr
-                key={item}
-                className={
-                  settings.startingItems[item] > 0 ? 'active' : 'inactive'
-                }
-              >
+              <tr key={item} className={startingItems[item] > 0 ? 'active' : 'inactive'}>
                 <td className="count">
-                  <button
-                    className="count-adjust"
-                    onClick={() => alterItem(item, -1)}
-                  >
-                    -
-                  </button>
-                  {settings.startingItems[item] || 0}
-                  <button
-                    className="count-adjust"
-                    onClick={() => alterItem(item, 1)}
-                  >
-                    +
-                  </button>
+                  <button className="count-adjust" onClick={() => decr(item)}>-</button>
+                  {startingItems[item] || 0}
+                  <button className="count-adjust" onClick={() => incr(item)}>+</button>
                 </td>
                 <td>{itemName(item)}</td>
               </tr>
@@ -72,7 +37,7 @@ export const StartingItems = ({ settings, setSetting, itemPool }: StartingItemsP
 
   return (
     <>
-      <button className="btn-danger" onClick={() => resetItems()}>
+      <button className="btn-danger" onClick={reset}>
         Reset Starting Items
       </button>
       <div className="starting-items section-margin-top">
@@ -81,4 +46,4 @@ export const StartingItems = ({ settings, setSetting, itemPool }: StartingItemsP
       </div>
     </>
   );
-};
+}
