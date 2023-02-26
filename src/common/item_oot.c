@@ -168,7 +168,7 @@ static void fillBottle(u16 itemId)
     slot = -1;
     for (int i = 0; i < 4; ++i)
     {
-        if (gOotSave.inventory.items[ITS_OOT_BOTTLE + i] == ITEM_OOT_EMPTY_BOTTLE)
+        if (gOotSave.inventory.items[ITS_OOT_BOTTLE + i] == ITEM_OOT_BOTTLE_EMPTY)
         {
             slot = i;
             break;
@@ -755,8 +755,8 @@ int comboAddItemOot(s16 gi, int noEffect)
     case GI_OOT_SPELL_LOVE:
         gOotSave.inventory.items[ITS_OOT_SPELL_LOVE] = ITEM_OOT_SPELL_LOVE;
         break;
-    case GI_OOT_EMPTY_BOTTLE:
-        addNewBottle(ITEM_OOT_EMPTY_BOTTLE);
+    case GI_OOT_BOTTLE_EMPTY:
+        addNewBottle(ITEM_OOT_BOTTLE_EMPTY);
         break;
     case GI_OOT_RUTO_LETTER:
         addNewBottle(ITEM_OOT_RUTO_LETTER);

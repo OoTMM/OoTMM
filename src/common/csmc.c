@@ -106,7 +106,7 @@ static int csmcFromItemOot(s16 gi)
     case GI_OOT_QUIVER2:
     case GI_OOT_QUIVER3:
     case GI_OOT_CHICKEN:
-    case GI_OOT_EMPTY_BOTTLE:
+    case GI_OOT_BOTTLE_EMPTY:
     case GI_OOT_GERUDO_CARD:
     case GI_OOT_HAMMER:
     case GI_OOT_HOOKSHOT:
@@ -239,7 +239,7 @@ static int csmcFromItemMm(s16 gi)
     case GI_MM_MASK_FIERCE_DEITY:
     case GI_MM_BOTTLED_POTION_RED:
     case GI_MM_BOTTLED_GOLD_DUST:
-    case GI_MM_EMPTY_BOTTLE:
+    case GI_MM_BOTTLE_EMPTY:
     case GI_MM_BOTTLE_MILK:
     case GI_MM_MAGIC_UPGRADE:
     case GI_MM_MAGIC_UPGRADE2:

@@ -19,7 +19,7 @@ extern const Shader kShaders[256];
 
 #define DRAWGI_NONE 0
 
-#define DRAWGI_EMPTY_BOTTLE                 0x01
+#define DRAWGI_BOTTLE_EMPTY                 0x01
 #define DRAWGI_SMALL_KEY                    0x02
 #define DRAWGI_RECOVERY_HEART               0x03
 #define DRAWGI_BOSS_KEY                     0x04

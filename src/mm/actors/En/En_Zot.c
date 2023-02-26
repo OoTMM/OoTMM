@@ -39,7 +39,7 @@ void EnZot_DisplayBeaverHint(Actor* this, GameState_Play* play)
     comboTextAppendHeader(&b);
     start = b;
     comboTextAppendStr(&b, "I've heared that the beavers are betting ");
-    appendTextNpcItem(&b, play, NPC_MM_BEAVER_1, GI_MM_EMPTY_BOTTLE);
+    appendTextNpcItem(&b, play, NPC_MM_BEAVER_1, GI_MM_BOTTLE_EMPTY);
     comboTextAppendStr(&b, " and ");
     appendTextNpcItem(&b, play, NPC_MM_BEAVER_2, GI_MM_HEART_PIECE);
     comboTextAppendStr(&b, "." TEXT_SIGNAL TEXT_END);

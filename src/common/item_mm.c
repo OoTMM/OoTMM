@@ -180,7 +180,7 @@ static void fillBottle(u16 itemId)
     slot = -1;
     for (int i = 0; i < 6; ++i)
     {
-        if (gMmSave.inventory.items[ITS_MM_BOTTLE + i] == ITEM_MM_EMPTY_BOTTLE)
+        if (gMmSave.inventory.items[ITS_MM_BOTTLE + i] == ITEM_MM_BOTTLE_EMPTY)
         {
             slot = i;
             break;
@@ -602,8 +602,8 @@ int comboAddItemMm(s16 gi, int noEffect)
     case GI_MM_GREAT_FAIRY_SWORD:
         gMmSave.inventory.items[ITS_MM_GREAT_FAIRY_SWORD] = ITEM_MM_GREAT_FAIRY_SWORD;
         break;
-    case GI_MM_EMPTY_BOTTLE:
-        addNewBottle(ITEM_MM_EMPTY_BOTTLE);
+    case GI_MM_BOTTLE_EMPTY:
+        addNewBottle(ITEM_MM_BOTTLE_EMPTY);
         break;
     case GI_MM_BOTTLE_MILK:
         addNewBottle(ITEM_MM_MILK);

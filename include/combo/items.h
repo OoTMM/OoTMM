@@ -21,11 +21,11 @@
 #define ITEM_OOT_HAMMER                 0x11
 #define ITEM_OOT_ARROW_LIGHT            0x12
 #define ITEM_OOT_SPELL_LOVE             0x13
-#define ITEM_OOT_EMPTY_BOTTLE           0x14
+#define ITEM_OOT_BOTTLE_EMPTY           0x14
 #define ITEM_OOT_POTION_RED             0x15
 #define ITEM_OOT_POTION_GREEN           0x16
 #define ITEM_OOT_POTION_BLUE            0x17
-#define ITEM_OOT_BOTTLED_FAIRY          0x18
+#define ITEM_OOT_FAIRY                  0x18
 #define ITEM_OOT_FISH                   0x19
 #define ITEM_OOT_MILK                   0x1a
 #define ITEM_OOT_RUTO_LETTER            0x1b
@@ -166,7 +166,7 @@
 #define ITEM_MM_HOOKSHOT                    0x0f
 #define ITEM_MM_GREAT_FAIRY_SWORD           0x10
 #define ITEM_MM_RED_POTION_WITH_BOTTLE      0x11
-#define ITEM_MM_EMPTY_BOTTLE                0x12
+#define ITEM_MM_BOTTLE_EMPTY                0x12
 #define ITEM_MM_POTION_RED                  0x13
 #define ITEM_MM_POTION_GREEN                0x14
 #define ITEM_MM_POTION_BLUE                 0x15
