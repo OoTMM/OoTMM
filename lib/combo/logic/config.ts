@@ -71,6 +71,10 @@ export class LogicPassConfig {
       config.add('SHARED_MAGIC_ARROWS');
     }
 
+    if (this.state.settings.sharedSongs) {
+      config.add('SHARED_SONGS');
+    }
+
     return { config };
   }
 }

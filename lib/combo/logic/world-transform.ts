@@ -74,6 +74,15 @@ export class LogicPassWorldTransform {
       itemsToJunk.add('MM_ARROW_LIGHT');
     }
 
+    if (config.has('SHARED_SONGS')) {
+      itemsToReplace.set('OOT_SONG_TIME',   'SHARED_SONG_TIME');
+      itemsToReplace.set('OOT_SONG_EPONA',  'SHARED_SONG_EPONA');
+      itemsToReplace.set('OOT_SONG_STORMS', 'SHARED_SONG_STORMS');
+      itemsToJunk.add('MM_SONG_TIME');
+      itemsToJunk.add('MM_SONG_EPONA');
+      itemsToJunk.add('MM_SONG_STORMS');
+    }
+
     for (const loc in this.state.world.checks) {
       const check = this.state.world.checks[loc];
       let item = check.item;
@@ -143,6 +152,7 @@ export class LogicPassWorldTransform {
           item = 'MM_SONG_GORON_HALF';
         } else {
           item = 'MM_RUPEE_BLUE';
+          this.state.world.songLocations.delete(loc);
         }
       } else if (item === 'MM_SONG_GORON_HALF' && !this.state.config.has('MM_PROGRESSIVE_LULLABY')) {
         item = 'MM_SONG_GORON';

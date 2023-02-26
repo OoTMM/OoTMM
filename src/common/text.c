@@ -163,6 +163,10 @@ static int isItemAmbiguousOot(s16 gi)
     case GI_OOT_ARROW_ICE:
     case GI_OOT_ARROW_LIGHT:
         return !comboConfig(CFG_SHARED_MAGIC_ARROWS);
+    case GI_OOT_SONG_EPONA:
+    case GI_OOT_SONG_TIME:
+    case GI_OOT_SONG_STORMS:
+        return !comboConfig(CFG_SHARED_SONGS);
     case GI_OOT_STICK:
     case GI_OOT_OCARINA_TIME:
     case GI_OOT_BOMBCHU_10:
@@ -180,9 +184,6 @@ static int isItemAmbiguousOot(s16 gi)
     case GI_OOT_SHIELD_HYLIAN:
     case GI_OOT_WALLET2:
     case GI_OOT_WALLET3:
-    case GI_OOT_SONG_EPONA:
-    case GI_OOT_SONG_TIME:
-    case GI_OOT_SONG_STORMS:
     case GI_OOT_HEART_CONTAINER:
     case GI_OOT_HEART_CONTAINER2:
     case GI_OOT_HEART_PIECE:
@@ -234,6 +235,10 @@ static int isItemAmbiguousMm(s16 gi)
     case GI_MM_ARROW_ICE:
     case GI_MM_ARROW_LIGHT:
         return !comboConfig(CFG_SHARED_MAGIC_ARROWS);
+    case GI_MM_SONG_TIME:
+    case GI_MM_SONG_EPONA:
+    case GI_MM_SONG_STORMS:
+        return !comboConfig(CFG_SHARED_SONGS);
     case GI_MM_OCARINA_OF_TIME:
     case GI_MM_BOMBCHU:
     case GI_MM_DEKU_STICK:
@@ -252,9 +257,6 @@ static int isItemAmbiguousMm(s16 gi)
     case GI_MM_SHIELD_HERO:
     case GI_MM_WALLET2:
     case GI_MM_WALLET3:
-    case GI_MM_SONG_TIME:
-    case GI_MM_SONG_EPONA:
-    case GI_MM_SONG_STORMS:
     case GI_MM_HEART_CONTAINER:
     case GI_MM_HEART_PIECE:
     case GI_MM_RECOVERY_HEART:

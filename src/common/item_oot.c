@@ -308,6 +308,16 @@ void comboAddCommonItemOot(int sid)
     case SITEM_ARROW_LIGHT:
         gOotSave.inventory.items[ITS_OOT_ARROW_LIGHT] = ITEM_OOT_ARROW_LIGHT;
         break;
+    case SITEM_SONG_EPONA:
+        gOotSave.inventory.quest.songEpona = 1;
+        BITMAP16_SET(gOotSave.eventsChk, EV_OOT_CHK_EPONA);
+        break;
+    case SITEM_SONG_TIME:
+        gOotSave.inventory.quest.songTime = 1;
+        break;
+    case SITEM_SONG_STORMS:
+        gOotSave.inventory.quest.songStorms = 1;
+        break;
     }
 }
 
@@ -394,6 +404,22 @@ static void addItemShared(s16 gi, int noEffect)
             break;
         case GI_OOT_ARROW_LIGHT:
             comboAddCommonItemMm(SITEM_ARROW_LIGHT);
+            break;
+        }
+    }
+
+    if (comboConfig(CFG_SHARED_SONGS))
+    {
+        switch (gi)
+        {
+        case GI_OOT_SONG_EPONA:
+            comboAddCommonItemMm(SITEM_SONG_EPONA);
+            break;
+        case GI_OOT_SONG_TIME:
+            comboAddCommonItemMm(SITEM_SONG_TIME);
+            break;
+        case GI_OOT_SONG_STORMS:
+            comboAddCommonItemMm(SITEM_SONG_STORMS);
             break;
         }
     }
@@ -697,10 +723,10 @@ int comboAddItemOot(s16 gi, int noEffect)
         gOotSave.inventory.quest.stoneEmerald = 1;
         break;
     case GI_OOT_SONG_STORMS:
-        gOotSave.inventory.quest.songStorms = 1;
+        comboAddCommonItemOot(SITEM_SONG_STORMS);
         break;
     case GI_OOT_SONG_TIME:
-        gOotSave.inventory.quest.songTime = 1;
+        comboAddCommonItemOot(SITEM_SONG_TIME);
         break;
     case GI_OOT_SONG_SUN:
         gOotSave.inventory.quest.songSun = 1;
@@ -709,8 +735,7 @@ int comboAddItemOot(s16 gi, int noEffect)
         gOotSave.inventory.quest.songSaria = 1;
         break;
     case GI_OOT_SONG_EPONA:
-        gOotSave.inventory.quest.songEpona = 1;
-        BITMAP16_SET(gOotSave.eventsChk, EV_OOT_CHK_EPONA);
+        comboAddCommonItemOot(SITEM_SONG_EPONA);
         break;
     case GI_OOT_SONG_ZELDA:
         gOotSave.inventory.quest.songZelda = 1;
