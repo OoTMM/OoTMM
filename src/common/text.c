@@ -168,6 +168,12 @@ static int isItemAmbiguousOot(s16 gi)
     case GI_OOT_SONG_STORMS:
         return !comboConfig(CFG_SHARED_SONGS);
     case GI_OOT_STICK:
+    case GI_OOT_STICKS_5:
+    case GI_OOT_STICKS_10:
+    case GI_OOT_NUTS_5:
+    case GI_OOT_NUTS_5_ALT:
+    case GI_OOT_NUTS_10:
+        return !comboConfig(CFG_SHARED_NUTS_STICKS);
     case GI_OOT_OCARINA_TIME:
     case GI_OOT_BOMBCHU_10:
     case GI_OOT_HOOKSHOT:
@@ -193,11 +199,6 @@ static int isItemAmbiguousOot(s16 gi)
     case GI_OOT_RUPEE_RED:
     case GI_OOT_RUPEE_PURPLE:
     case GI_OOT_RUPEE_HUGE:
-    case GI_OOT_STICKS_5:
-    case GI_OOT_STICKS_10:
-    case GI_OOT_NUTS_5:
-    case GI_OOT_NUTS_5_ALT:
-    case GI_OOT_NUTS_10:
     case GI_OOT_BOMBCHU_5:
     case GI_OOT_BOMBCHU_20:
     case GI_OOT_DEFENSE_UPGRADE:
@@ -239,10 +240,13 @@ static int isItemAmbiguousMm(s16 gi)
     case GI_MM_SONG_EPONA:
     case GI_MM_SONG_STORMS:
         return !comboConfig(CFG_SHARED_SONGS);
+    case GI_MM_STICK:
+    case GI_MM_NUT:
+    case GI_MM_NUTS_5:
+    case GI_MM_NUTS_10:
+        return !comboConfig(CFG_SHARED_NUTS_STICKS);
     case GI_MM_OCARINA_OF_TIME:
     case GI_MM_BOMBCHU:
-    case GI_MM_DEKU_STICK:
-    case GI_MM_DEKU_NUT:
     case GI_MM_MAGIC_BEAN:
     case GI_MM_LENS:
     case GI_MM_HOOKSHOT:
@@ -266,8 +270,6 @@ static int isItemAmbiguousMm(s16 gi)
     case GI_MM_RUPEE_PURPLE:
     case GI_MM_RUPEE_SILVER:
     case GI_MM_RUPEE_GOLD:
-    case GI_MM_DEKU_NUTS_5:
-    case GI_MM_DEKU_NUTS_10:
     case GI_MM_BOMBCHU_20:
     case GI_MM_BOMBCHU_10:
     case GI_MM_BOMBCHU_5:

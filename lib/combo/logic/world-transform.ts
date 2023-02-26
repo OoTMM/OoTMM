@@ -83,6 +83,22 @@ export class LogicPassWorldTransform {
       itemsToJunk.add('MM_SONG_STORMS');
     }
 
+    if (config.has('SHARED_NUTS_STICKS')) {
+      /* Nuts */
+      itemsToReplace.set('OOT_NUTS_5',      'SHARED_NUTS_5');
+      itemsToReplace.set('OOT_NUTS_5_ALT',  'SHARED_NUTS_5');
+      itemsToReplace.set('OOT_NUTS_10',     'SHARED_NUTS_10');
+      itemsToReplace.set('MM_NUT',          'SHARED_NUT');
+      itemsToReplace.set('MM_NUTS_5',       'SHARED_NUTS_5');
+      itemsToReplace.set('MM_NUTS_10',      'SHARED_NUTS_10');
+
+      /* Sticks */
+      itemsToReplace.set('OOT_STICK',       'SHARED_STICK');
+      itemsToReplace.set('OOT_STICKS_5',    'SHARED_STICKS_5');
+      itemsToReplace.set('OOT_STICKS_10',   'SHARED_STICKS_10');
+      itemsToReplace.set('MM_STICK',        'SHARED_STICK');
+    }
+
     for (const loc in this.state.world.checks) {
       const check = this.state.world.checks[loc];
       let item = check.item;

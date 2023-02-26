@@ -47,6 +47,12 @@ const SHARED_ITEMS_OOT = new Map([
   ['SHARED_SONG_TIME',      'OOT_SONG_TIME'],
   ['SHARED_SONG_EPONA',     'OOT_SONG_EPONA'],
   ['SHARED_SONG_STORMS',    'OOT_SONG_STORMS'],
+  ['SHARED_NUT',            'MM_NUT'] /* OoT lacks single nut */,
+  ['SHARED_NUTS_5',         'OOT_NUTS_5'],
+  ['SHARED_NUTS_10',        'OOT_NUTS_10'],
+  ['SHARED_STICK',          'OOT_STICK'],
+  ['SHARED_STICKS_5',       'OOT_STICKS_5'],
+  ['SHARED_STICKS_10',      'OOT_STICKS_10'],
 ]);
 
 const SHARED_ITEMS_MM = new Map([
@@ -68,6 +74,12 @@ const SHARED_ITEMS_MM = new Map([
   ['SHARED_SONG_TIME',      'MM_SONG_TIME'],
   ['SHARED_SONG_EPONA',     'MM_SONG_EPONA'],
   ['SHARED_SONG_STORMS',    'MM_SONG_STORMS'],
+  ['SHARED_NUT',            'MM_NUT'],
+  ['SHARED_NUTS_5',         'MM_NUTS_5'],
+  ['SHARED_NUTS_10',        'MM_NUTS_10'],
+  ['SHARED_STICK',          'MM_STICK'],
+  ['SHARED_STICKS_5',       'OOT_STICKS_5'],  /* MM lacks 5 pack */
+  ['SHARED_STICKS_10',      'OOT_STICKS_10'], /* MM lacks 10 pack */
 ]);
 
 const SHARED_ITEMS = {

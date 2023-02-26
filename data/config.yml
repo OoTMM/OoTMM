@@ -13,3 +13,4 @@ SHARED_BOMB_BAGS:               0x0b
 SHARED_MAGIC:                   0x0c
 SHARED_MAGIC_ARROWS:            0x0d
 SHARED_SONGS:                   0x0e
+SHARED_NUTS_STICKS:             0x0f

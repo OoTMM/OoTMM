@@ -216,6 +216,12 @@ export const SETTINGS = [{
   ],
   default: 'progressive'
 }, {
+  key: 'sharedNutsSticks',
+  name: 'Shared Nuts & Sticks',
+  category: 'items',
+  type: 'boolean',
+  default: false
+}, {
   key: 'sharedBows',
   name: 'Shared Bows',
   category: 'items',

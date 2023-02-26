@@ -168,4 +168,10 @@ void comboSyncItems(void)
 
     if (comboConfig(CFG_SHARED_MAGIC))
        gForeignSave.playerData.magicAmount = gSave.playerData.magicAmount;
+
+    if (comboConfig(CFG_SHARED_NUTS_STICKS))
+    {
+        gForeignSave.inventory.ammo[ITS_FOREIGN_NUTS] = gSave.inventory.ammo[ITS_NATIVE_NUTS];
+        gForeignSave.inventory.ammo[ITS_FOREIGN_STICKS] = gSave.inventory.ammo[ITS_NATIVE_STICKS];
+    }
 }

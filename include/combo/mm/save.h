@@ -38,8 +38,10 @@ MmItemEquips;
 
 typedef struct
 {
-    u32     unused:16;
-    u32     unused2:2;
+    u32     unused:9;
+    u32     dekuNut:3;
+    u32     dekuStick:3;
+    u32     unused2:3;
     u32     wallet:2;
     u32     unused3:6;
     u32     bombBag:3;

@@ -204,7 +204,7 @@ MM_BOMBS_5:                   0x15
 MM_BOMBS_10:                  0x16
 MM_BOMBS_20:                  0x17
 MM_BOMBS_30:                  0x18
-MM_DEKU_STICK:                0x19
+MM_STICK:                     0x19
 MM_BOMBCHU_10:                0x1a
 MM_BOMB_BAG:                  0x1b
 MM_BOMB_BAG2:                 0x1c
@@ -218,9 +218,9 @@ MM_QUIVER3:                   0x24
 MM_ARROW_FIRE:                0x25
 MM_ARROW_ICE:                 0x26
 MM_ARROW_LIGHT:               0x27
-MM_DEKU_NUT:                  0x28
-MM_DEKU_NUTS_5:               0x29
-MM_DEKU_NUTS_10:              0x2a
+MM_NUT:                       0x28
+MM_NUTS_5:                    0x29
+MM_NUTS_10:                   0x2a
 MM_BOMBCHU_20:                0x2e
 MM_SHIELD_HERO:               0x32
 MM_SHIELD_MIRROR:             0x33

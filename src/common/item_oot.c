@@ -91,7 +91,7 @@ static void addAmmo(u8 slot, u16 item, u8 max, u8 count)
         gOotSave.inventory.ammo[slot] = max;
 }
 
-static void addSticks(u8 count)
+void comboAddSticksOot(int count)
 {
     u8 max;
 
@@ -102,7 +102,7 @@ static void addSticks(u8 count)
     addAmmo(ITS_OOT_STICKS, ITEM_OOT_STICK, max, count);
 }
 
-static void addNuts(u8 count)
+void comboAddNutsOot(int count)
 {
     u8 max;
 
@@ -207,18 +207,28 @@ static void addBulletBag(u8 level)
     gOotSave.inventory.ammo[ITS_OOT_SLINGSHOT] = kMaxSeeds[level];
 }
 
-static void addNutUpgrade(u8 level)
+static void addNutUpgrade(int level)
 {
-    gOotSave.inventory.items[ITS_OOT_NUTS] = ITEM_OOT_NUT;
     gOotSave.inventory.upgrades.dekuNut = level;
-    gOotSave.inventory.ammo[ITS_OOT_NUTS] = kMaxNuts[level];
+    comboAddNutsOot(kMaxNuts[level]);
 }
 
-static void addStickUpgrade(u8 level)
+static void addStickUpgrade(int level)
 {
-    gOotSave.inventory.items[ITS_OOT_STICKS] = ITEM_OOT_STICK;
     gOotSave.inventory.upgrades.dekuStick = level;
-    gOotSave.inventory.ammo[ITS_OOT_STICKS] = kMaxSticks[level];
+    comboAddSticksOot(kMaxSticks[level]);
+}
+
+static void addNutUpgradeMm(int level)
+{
+    gMmSave.inventory.upgrades.dekuNut = level;
+    comboAddNutsMm(kMaxNuts[level]);
+}
+
+static void addStickUpgradeMm(int level)
+{
+    gMmSave.inventory.upgrades.dekuStick = level;
+    comboAddSticksMm(kMaxSticks[level]);
 }
 
 static void addTradeChild(u8 index)
@@ -423,6 +433,41 @@ static void addItemShared(s16 gi, int noEffect)
             break;
         }
     }
+
+    if (comboConfig(CFG_SHARED_NUTS_STICKS))
+    {
+        switch (gi)
+        {
+        case GI_OOT_NUTS_5:
+        case GI_OOT_NUTS_5_ALT:
+            comboAddNutsMm(5);
+            break;
+        case GI_OOT_NUTS_10:
+            comboAddNutsMm(10);
+            break;
+        case GI_OOT_STICK:
+            comboAddSticksMm(1);
+            break;
+        case GI_OOT_STICKS_5:
+            comboAddSticksMm(5);
+            break;
+        case GI_OOT_STICKS_10:
+            comboAddSticksMm(10);
+            break;
+        case GI_OOT_NUT_UPGRADE:
+            addNutUpgradeMm(2);
+            break;
+        case GI_OOT_NUT_UPGRADE2:
+            addNutUpgradeMm(3);
+            break;
+        case GI_OOT_STICK_UPGRADE:
+            addStickUpgradeMm(2);
+            break;
+        case GI_OOT_STICK_UPGRADE2:
+            addStickUpgradeMm(3);
+            break;
+        }
+    }
 }
 
 int comboAddItemOot(s16 gi, int noEffect)
@@ -437,20 +482,20 @@ int comboAddItemOot(s16 gi, int noEffect)
     switch (gi)
     {
     case GI_OOT_STICK:
-        addSticks(1);
+        comboAddSticksOot(1);
         break;
     case GI_OOT_STICKS_5:
-        addSticks(5);
+        comboAddSticksOot(5);
         break;
     case GI_OOT_STICKS_10:
-        addSticks(10);
+        comboAddSticksOot(10);
         break;
     case GI_OOT_NUTS_5:
     case GI_OOT_NUTS_5_ALT:
-        addNuts(5);
+        comboAddNutsOot(5);
         break;
     case GI_OOT_NUTS_10:
-        addNuts(10);
+        comboAddNutsOot(10);
         break;
     case GI_OOT_BOMB:
         comboAddBombsOot(1);

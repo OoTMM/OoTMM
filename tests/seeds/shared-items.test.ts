@@ -7,5 +7,6 @@ test("Can make a seed - Shared Items", () => {
     sharedMagic: true,
     sharedMagicArrows: true,
     sharedSongs: true,
+    sharedNutsSticks: true,
   });
 });

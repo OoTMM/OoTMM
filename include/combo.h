@@ -246,6 +246,10 @@ void comboAddBombsOot(int count);
 void comboAddBombsMm(int count);
 void comboAddMagicUpgradeOot(int level);
 void comboAddMagicUpgradeMm(int level);
+void comboAddSticksOot(int count);
+void comboAddSticksMm(int count);
+void comboAddNutsOot(int count);
+void comboAddNutsMm(int count);
 
 void comboAddCommonItemOot(int sid);
 void comboAddCommonItemMm(int sid);

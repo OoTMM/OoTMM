@@ -126,7 +126,7 @@ void comboAddArrowsMm(int count)
         gMmSave.inventory.ammo[ITS_MM_BOW] = max;
 }
 
-static void addNuts(int count)
+void comboAddNutsMm(int count)
 {
     u16 max;
 
@@ -137,7 +137,7 @@ static void addNuts(int count)
         gMmSave.inventory.ammo[ITS_MM_NUTS] = max;
 }
 
-static void addSticks(int count)
+void comboAddSticksMm(int count)
 {
     u16 max;
 
@@ -381,6 +381,25 @@ static void addItemShared(s16 gi, int noEffect)
             break;
         }
     }
+
+    if (comboConfig(CFG_SHARED_NUTS_STICKS))
+    {
+        switch (gi)
+        {
+        case GI_MM_NUT:
+            comboAddNutsOot(1);
+            break;
+        case GI_MM_NUTS_5:
+            comboAddNutsOot(5);
+            break;
+        case GI_MM_NUTS_10:
+            comboAddNutsOot(10);
+            break;
+        case GI_MM_STICK:
+            comboAddSticksOot(1);
+            break;
+        }
+    }
 }
 
 int comboAddItemMm(s16 gi, int noEffect)
@@ -482,17 +501,17 @@ int comboAddItemMm(s16 gi, int noEffect)
     case GI_MM_ARROWS_40:
         comboAddArrowsMm(40);
         break;
-    case GI_MM_DEKU_NUT:
-        addNuts(1);
+    case GI_MM_NUT:
+        comboAddNutsMm(1);
         break;
-    case GI_MM_DEKU_NUTS_5:
-        addNuts(5);
+    case GI_MM_NUTS_5:
+        comboAddNutsMm(5);
         break;
-    case GI_MM_DEKU_NUTS_10:
-        addNuts(10);
+    case GI_MM_NUTS_10:
+        comboAddNutsMm(10);
         break;
-    case GI_MM_DEKU_STICK:
-        addSticks(1);
+    case GI_MM_STICK:
+        comboAddSticksMm(1);
         break;
     case GI_MM_BOMBCHU:
         addBombchu(1);

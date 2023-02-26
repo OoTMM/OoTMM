@@ -75,6 +75,10 @@ export class LogicPassConfig {
       config.add('SHARED_SONGS');
     }
 
+    if (this.state.settings.sharedNutsSticks) {
+      config.add('SHARED_NUTS_STICKS');
+    }
+
     return { config };
   }
 }
