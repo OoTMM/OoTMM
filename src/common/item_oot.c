@@ -331,7 +331,7 @@ void comboAddCommonItemOot(int sid)
     }
 }
 
-static void addItemShared(s16 gi, int noEffect)
+void comboAddItemSharedOot(s16 gi, int noEffect)
 {
     if (comboConfig(CFG_SHARED_BOWS))
     {
@@ -474,8 +474,6 @@ int comboAddItemOot(s16 gi, int noEffect)
 {
     int count;
     u16 dungeonId;
-
-    addItemShared(gi, noEffect);
 
     count = 0;
     (void)dungeonId;

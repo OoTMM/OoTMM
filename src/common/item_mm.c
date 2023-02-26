@@ -279,7 +279,7 @@ void comboAddCommonItemMm(int sid)
     }
 }
 
-static void addItemShared(s16 gi, int noEffect)
+void comboAddItemSharedMm(s16 gi, int noEffect)
 {
     if (comboConfig(CFG_SHARED_BOWS))
     {
@@ -405,8 +405,6 @@ static void addItemShared(s16 gi, int noEffect)
 int comboAddItemMm(s16 gi, int noEffect)
 {
     int count;
-
-    addItemShared(gi, noEffect);
 
     count = 0;
     switch (gi)

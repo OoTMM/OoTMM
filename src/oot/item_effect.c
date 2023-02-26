@@ -37,6 +37,11 @@ static void reloadIconsC(GameState_Play* play)
         Interface_LoadItemIconImpl(play, i);
 }
 
+void comboAddItemSharedForeignEffect(GameState_Play* play, s16 gi)
+{
+
+}
+
 int comboAddItemEffect(GameState_Play* play, s16 gi)
 {
     int count;

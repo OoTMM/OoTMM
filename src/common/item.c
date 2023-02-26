@@ -1,11 +1,15 @@
 #include <combo.h>
 
 #if defined(GAME_OOT)
-# define comboAddItemNative     comboAddItemOot
-# define comboAddItemForeign    comboAddItemMm
+# define comboAddItemNative             comboAddItemOot
+# define comboAddItemSharedNative       comboAddItemSharedOot
+# define comboAddItemForeign            comboAddItemMm
+# define comboAddItemSharedForeign      comboAddItemSharedMm
 #else
-# define comboAddItemNative     comboAddItemMm
-# define comboAddItemForeign    comboAddItemOot
+# define comboAddItemNative             comboAddItemMm
+# define comboAddItemSharedNative       comboAddItemSharedMm
+# define comboAddItemForeign            comboAddItemOot
+# define comboAddItemSharedForeign      comboAddItemSharedOot
 #endif
 
 const u8 kMaxSticks[] = { 0, 10, 20, 30 };
@@ -23,10 +27,13 @@ int comboAddItem(GameState_Play* play, s16 gi)
     if (gi & MASK_FOREIGN_GI)
     {
         count = comboAddItemForeign(gi & ~MASK_FOREIGN_GI, 1);
+        comboAddItemSharedForeign(gi & ~MASK_FOREIGN_GI, 0);
+        comboAddItemSharedForeignEffect(play, gi & ~MASK_FOREIGN_GI);
     }
     else
     {
         count = comboAddItemNative(gi, 0);
+        comboAddItemSharedNative(gi, 0);
         count2 = comboAddItemEffect(play, gi);
         if (!count)
             count = count2;
@@ -41,10 +48,12 @@ int comboAddItemNoEffect(s16 gi)
     if (gi & MASK_FOREIGN_GI)
     {
         comboAddItemForeign(gi & ~MASK_FOREIGN_GI, 1);
+        comboAddItemSharedForeign(gi & ~MASK_FOREIGN_GI, 1);
     }
     else
     {
         comboAddItemNative(gi, 1);
+        comboAddItemSharedNative(gi, 1);
     }
     return -1;
 }

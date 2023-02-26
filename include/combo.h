@@ -222,9 +222,12 @@ extern const u8 kMmTrade3[];
 
 void comboSyncItems(void);
 
-int comboAddItemMm(s16 gi, int noEffect);
-int comboAddItemOot(s16 gi, int noEffect);
-int comboAddItemEffect(GameState_Play* play, s16 gi);
+int  comboAddItemMm(s16 gi, int noEffect);
+int  comboAddItemOot(s16 gi, int noEffect);
+void comboAddItemSharedMm(s16 gi, int noEffect);
+void comboAddItemSharedOot(s16 gi, int noEffect);
+int  comboAddItemEffect(GameState_Play* play, s16 gi);
+void comboAddItemSharedForeignEffect(GameState_Play* play, s16 gi);
 
 int  comboAddSmallKeyOot(u16 dungeonId);
 void comboAddBossKeyOot(u16 dungeonId);
