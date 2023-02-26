@@ -248,7 +248,7 @@ void hookPlay_Init(GameState_Play* play)
 
     Play_Init(play);
     gLastEntrance = gSave.entrance;
-    sInGrotto = (play->sceneId == SCE_OOT_GROTTOS);
+    sInGrotto = (play->sceneId == SCE_OOT_GROTTOS || play->sceneId == SCE_OOT_FAIRY_FOUNTAIN);
     comboSpawnItemGivers(play);
 
     if (gSave.entrance == 0x0530)
