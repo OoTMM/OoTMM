@@ -95,6 +95,10 @@ export class LogicPassConfig {
       config.add('SHARED_MASKS');
     }
 
+    if (this.state.settings.sharedWallets) {
+      config.add('SHARED_WALLETS');
+    }
+
     return { config };
   }
 }

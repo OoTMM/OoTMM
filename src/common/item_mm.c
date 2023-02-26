@@ -254,7 +254,7 @@ static void refillMagic(int level)
     gMmSave.playerData.magicAmount = level * 0x30;
 }
 
-void comboAddCommonItemMm(int sid)
+void comboAddCommonItemMm(int sid, int noEffect)
 {
     switch (sid)
     {
@@ -299,6 +299,36 @@ void comboAddCommonItemMm(int sid)
         break;
     case SITEM_MASK_ZORA:
         gMmSave.inventory.items[ITS_MM_MASK_ZORA] = ITEM_MM_MASK_ZORA;
+        break;
+    case SITEM_WALLET2:
+        gMmSave.inventory.upgrades.wallet = 1;
+        break;
+    case SITEM_WALLET3:
+        gMmSave.inventory.upgrades.wallet = 2;
+        break;
+    case SITEM_RUPEE_GREEN:
+        if (noEffect)
+            addRupees(1);
+        break;
+    case SITEM_RUPEE_BLUE:
+        if (noEffect)
+            addRupees(5);
+        break;
+    case SITEM_RUPEE_RED:
+        if (noEffect)
+            addRupees(20);
+        break;
+    case SITEM_RUPEE_PURPLE:
+        if (noEffect)
+            addRupees(50);
+        break;
+    case SITEM_RUPEE_SILVER:
+        if (noEffect)
+            addRupees(100);
+        break;
+    case SITEM_RUPEE_GOLD:
+        if (noEffect)
+            addRupees(200);
         break;
     }
 }
@@ -379,13 +409,13 @@ void comboAddItemSharedMm(s16 gi, int noEffect)
         switch (gi)
         {
         case GI_MM_ARROW_FIRE:
-            comboAddCommonItemOot(SITEM_ARROW_FIRE);
+            comboAddCommonItemOot(SITEM_ARROW_FIRE, noEffect);
             break;
         case GI_MM_ARROW_ICE:
-            comboAddCommonItemOot(SITEM_ARROW_ICE);
+            comboAddCommonItemOot(SITEM_ARROW_ICE, noEffect);
             break;
         case GI_MM_ARROW_LIGHT:
-            comboAddCommonItemOot(SITEM_ARROW_LIGHT);
+            comboAddCommonItemOot(SITEM_ARROW_LIGHT, noEffect);
             break;
         }
     }
@@ -395,13 +425,13 @@ void comboAddItemSharedMm(s16 gi, int noEffect)
         switch (gi)
         {
         case GI_MM_SONG_EPONA:
-            comboAddCommonItemOot(SITEM_SONG_EPONA);
+            comboAddCommonItemOot(SITEM_SONG_EPONA, noEffect);
             break;
         case GI_MM_SONG_TIME:
-            comboAddCommonItemOot(SITEM_SONG_TIME);
+            comboAddCommonItemOot(SITEM_SONG_TIME, noEffect);
             break;
         case GI_MM_SONG_STORMS:
-            comboAddCommonItemOot(SITEM_SONG_STORMS);
+            comboAddCommonItemOot(SITEM_SONG_STORMS, noEffect);
             break;
         }
     }
@@ -427,12 +457,12 @@ void comboAddItemSharedMm(s16 gi, int noEffect)
 
     if (comboConfig(CFG_SHARED_HOOKSHOT) && gi == GI_MM_HOOKSHOT)
     {
-        comboAddCommonItemOot(SITEM_HOOKSHOT);
+        comboAddCommonItemOot(SITEM_HOOKSHOT, noEffect);
     }
 
     if (comboConfig(CFG_SHARED_LENS) && gi == GI_MM_LENS)
     {
-        comboAddCommonItemOot(SITEM_LENS);
+        comboAddCommonItemOot(SITEM_LENS, noEffect);
     }
 
     if (comboConfig(CFG_SHARED_MASKS))
@@ -440,19 +470,50 @@ void comboAddItemSharedMm(s16 gi, int noEffect)
         switch (gi)
         {
         case GI_MM_MASK_BUNNY:
-            comboAddCommonItemOot(SITEM_MASK_BUNNY);
+            comboAddCommonItemOot(SITEM_MASK_BUNNY, noEffect);
             break;
         case GI_MM_MASK_GORON:
-            comboAddCommonItemOot(SITEM_MASK_GORON);
+            comboAddCommonItemOot(SITEM_MASK_GORON, noEffect);
             break;
         case GI_MM_MASK_KEATON:
-            comboAddCommonItemOot(SITEM_MASK_KEATON);
+            comboAddCommonItemOot(SITEM_MASK_KEATON, noEffect);
             break;
         case GI_MM_MASK_TRUTH:
-            comboAddCommonItemOot(SITEM_MASK_TRUTH);
+            comboAddCommonItemOot(SITEM_MASK_TRUTH, noEffect);
             break;
         case GI_MM_MASK_ZORA:
-            comboAddCommonItemOot(SITEM_MASK_ZORA);
+            comboAddCommonItemOot(SITEM_MASK_ZORA, noEffect);
+            break;
+        }
+    }
+
+    if (comboConfig(CFG_SHARED_WALLETS))
+    {
+        switch (gi)
+        {
+        case GI_MM_WALLET2:
+            comboAddCommonItemOot(SITEM_WALLET2, noEffect);
+            break;
+        case GI_MM_WALLET3:
+            comboAddCommonItemOot(SITEM_WALLET3, noEffect);
+            break;
+        case GI_MM_RUPEE_GREEN:
+            comboAddCommonItemOot(SITEM_RUPEE_GREEN, noEffect);
+            break;
+        case GI_MM_RUPEE_BLUE:
+            comboAddCommonItemOot(SITEM_RUPEE_BLUE, noEffect);
+            break;
+        case GI_MM_RUPEE_RED:
+            comboAddCommonItemOot(SITEM_RUPEE_RED, noEffect);
+            break;
+        case GI_MM_RUPEE_PURPLE:
+            comboAddCommonItemOot(SITEM_RUPEE_PURPLE, noEffect);
+            break;
+        case GI_MM_RUPEE_SILVER:
+            comboAddCommonItemOot(SITEM_RUPEE_SILVER, noEffect);
+            break;
+        case GI_MM_RUPEE_GOLD:
+            comboAddCommonItemOot(SITEM_RUPEE_GOLD, noEffect);
             break;
         }
     }
@@ -466,16 +527,16 @@ int comboAddItemMm(s16 gi, int noEffect)
     switch (gi)
     {
     case GI_MM_OCARINA_OF_TIME:
-        comboAddCommonItemMm(SITEM_OCARINA_TIME);
+        comboAddCommonItemMm(SITEM_OCARINA_TIME, noEffect);
         break;
     case GI_MM_ARROW_FIRE:
-        comboAddCommonItemMm(SITEM_ARROW_FIRE);
+        comboAddCommonItemMm(SITEM_ARROW_FIRE, noEffect);
         break;
     case GI_MM_ARROW_ICE:
-        comboAddCommonItemMm(SITEM_ARROW_ICE);
+        comboAddCommonItemMm(SITEM_ARROW_ICE, noEffect);
         break;
     case GI_MM_ARROW_LIGHT:
-        comboAddCommonItemMm(SITEM_ARROW_LIGHT);
+        comboAddCommonItemMm(SITEM_ARROW_LIGHT, noEffect);
         break;
     case GI_MM_MAGIC_BEAN:
         gMmSave.inventory.items[ITS_MM_BEANS] = ITEM_MM_MAGIC_BEAN;
@@ -489,10 +550,10 @@ int comboAddItemMm(s16 gi, int noEffect)
         gMmSave.inventory.items[ITS_MM_PICTOBOX] = ITEM_MM_PICTOGRAPH_BOX;
         break;
     case GI_MM_LENS:
-        comboAddCommonItemMm(SITEM_LENS);
+        comboAddCommonItemMm(SITEM_LENS, noEffect);
         break;
     case GI_MM_HOOKSHOT:
-        comboAddCommonItemMm(SITEM_HOOKSHOT);
+        comboAddCommonItemMm(SITEM_HOOKSHOT, noEffect);
         break;
     case GI_MM_GREAT_FAIRY_SWORD:
         gMmSave.inventory.items[ITS_MM_GREAT_FAIRY_SWORD] = ITEM_MM_GREAT_FAIRY_SWORD;
@@ -625,13 +686,13 @@ int comboAddItemMm(s16 gi, int noEffect)
         gMmSave.inventory.items[ITS_MM_MASK_DEKU] = ITEM_MM_MASK_DEKU;
         break;
     case GI_MM_MASK_KEATON:
-        comboAddCommonItemMm(SITEM_MASK_KEATON);
+        comboAddCommonItemMm(SITEM_MASK_KEATON, noEffect);
         break;
     case GI_MM_MASK_BREMEN:
         gMmSave.inventory.items[ITS_MM_MASK_BREMEN] = ITEM_MM_MASK_BREMEN;
         break;
     case GI_MM_MASK_BUNNY:
-        comboAddCommonItemMm(SITEM_MASK_BUNNY);
+        comboAddCommonItemMm(SITEM_MASK_BUNNY, noEffect);
         break;
     case GI_MM_MASK_DON_GERO:
         gMmSave.inventory.items[ITS_MM_MASK_DON_GERO] = ITEM_MM_MASK_DON_GERO;
@@ -640,7 +701,7 @@ int comboAddItemMm(s16 gi, int noEffect)
         gMmSave.inventory.items[ITS_MM_MASK_SCENTS] = ITEM_MM_MASK_SCENTS;
         break;
     case GI_MM_MASK_GORON:
-        comboAddCommonItemMm(SITEM_MASK_GORON);
+        comboAddCommonItemMm(SITEM_MASK_GORON, noEffect);
         break;
     case GI_MM_MASK_ROMANI:
         gMmSave.inventory.items[ITS_MM_MASK_ROMANI] = ITEM_MM_MASK_ROMANI;
@@ -655,10 +716,10 @@ int comboAddItemMm(s16 gi, int noEffect)
         gMmSave.inventory.items[ITS_MM_MASK_COUPLE] = ITEM_MM_MASK_COUPLE;
         break;
     case GI_MM_MASK_TRUTH:
-        comboAddCommonItemMm(SITEM_MASK_TRUTH);
+        comboAddCommonItemMm(SITEM_MASK_TRUTH, noEffect);
         break;
     case GI_MM_MASK_ZORA:
-        comboAddCommonItemMm(SITEM_MASK_ZORA);
+        comboAddCommonItemMm(SITEM_MASK_ZORA, noEffect);
         break;
     case GI_MM_MASK_KAMARO:
         gMmSave.inventory.items[ITS_MM_MASK_KAMARO] = ITEM_MM_MASK_KAMARO;
@@ -753,19 +814,19 @@ int comboAddItemMm(s16 gi, int noEffect)
         gMmSave.inventory.questItems.songOrder = 1;
         break;
     case GI_MM_SONG_TIME:
-        comboAddCommonItemMm(SITEM_SONG_TIME);
+        comboAddCommonItemMm(SITEM_SONG_TIME, noEffect);
         break;
     case GI_MM_SONG_HEALING:
         gMmSave.inventory.questItems.songHealing = 1;
         break;
     case GI_MM_SONG_EPONA:
-        comboAddCommonItemMm(SITEM_SONG_EPONA);
+        comboAddCommonItemMm(SITEM_SONG_EPONA, noEffect);
         break;
     case GI_MM_SONG_SOARING:
         gMmSave.inventory.questItems.songSoaring = 1;
         break;
     case GI_MM_SONG_STORMS:
-        comboAddCommonItemMm(SITEM_SONG_STORMS);
+        comboAddCommonItemMm(SITEM_SONG_STORMS, noEffect);
         break;
     case GI_MM_SONG_GORON_HALF:
         gMmSave.inventory.questItems.songLullabyIntro = 1;
@@ -805,28 +866,22 @@ int comboAddItemMm(s16 gi, int noEffect)
             addHealth(1);
         break;
     case GI_MM_RUPEE_GREEN:
-        if (noEffect)
-            addRupees(1);
+        comboAddCommonItemMm(SITEM_RUPEE_GREEN, noEffect);
         break;
     case GI_MM_RUPEE_BLUE:
-        if (noEffect)
-            addRupees(5);
+        comboAddCommonItemMm(SITEM_RUPEE_BLUE, noEffect);
         break;
     case GI_MM_RUPEE_RED:
-        if (noEffect)
-            addRupees(20);
+        comboAddCommonItemMm(SITEM_RUPEE_RED, noEffect);
         break;
     case GI_MM_RUPEE_PURPLE:
-        if (noEffect)
-            addRupees(50);
+        comboAddCommonItemMm(SITEM_RUPEE_PURPLE, noEffect);
         break;
     case GI_MM_RUPEE_SILVER:
-        if (noEffect)
-            addRupees(100);
+        comboAddCommonItemMm(SITEM_RUPEE_SILVER, noEffect);
         break;
     case GI_MM_RUPEE_GOLD:
-        if (noEffect)
-            addRupees(200);
+        comboAddCommonItemMm(SITEM_RUPEE_GOLD, noEffect);
         break;
     case GI_MM_SMALL_KEY_WF:
         count = comboAddSmallKeyMm(0);

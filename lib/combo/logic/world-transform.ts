@@ -127,6 +127,25 @@ export class LogicPassWorldTransform {
       itemsToJunk.add('OOT_MASK_KEATON');
     }
 
+    if (config.has('SHARED_WALLETS')) {
+      /* Wallets */
+      itemsToReplace.set('OOT_WALLET', 'SHARED_WALLET');
+      itemsToJunk.add('MM_WALLET');
+
+      /* Rupees */
+      itemsToReplace.set('OOT_RUPEE_GREEN',   'SHARED_RUPEE_GREEN');
+      itemsToReplace.set('OOT_RUPEE_BLUE',    'SHARED_RUPEE_BLUE');
+      itemsToReplace.set('OOT_RUPEE_RED',     'SHARED_RUPEE_RED');
+      itemsToReplace.set('OOT_RUPEE_PURPLE',  'SHARED_RUPEE_PURPLE');
+      itemsToReplace.set('OOT_RUPEE_HUGE',    'SHARED_RUPEE_GOLD');
+      itemsToReplace.set('MM_RUPEE_GREEN',    'SHARED_RUPEE_GREEN');
+      itemsToReplace.set('MM_RUPEE_BLUE',     'SHARED_RUPEE_BLUE');
+      itemsToReplace.set('MM_RUPEE_RED',      'SHARED_RUPEE_RED');
+      itemsToReplace.set('MM_RUPEE_PURPLE',   'SHARED_RUPEE_PURPLE');
+      itemsToReplace.set('MM_RUPEE_SILVER',   'SHARED_RUPEE_SILVER');
+      itemsToReplace.set('MM_RUPEE_GOLD',     'SHARED_RUPEE_GOLD');
+    }
+
     for (const loc in this.state.world.checks) {
       const check = this.state.world.checks[loc];
       let item = check.item;

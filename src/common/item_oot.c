@@ -305,7 +305,7 @@ static void addOcarina(int level)
     reloadSlot(ITS_OOT_OCARINA);
 }
 
-void comboAddCommonItemOot(int sid)
+void comboAddCommonItemOot(int sid, int noEffect)
 {
     switch (sid)
     {
@@ -351,6 +351,36 @@ void comboAddCommonItemOot(int sid)
         break;
     case SITEM_MASK_TRUTH:
         addTradeChild(10);
+        break;
+    case SITEM_WALLET2:
+        gOotSave.inventory.upgrades.wallet = 1;
+        break;
+    case SITEM_WALLET3:
+        gOotSave.inventory.upgrades.wallet = 2;
+        break;
+    case SITEM_RUPEE_GREEN:
+        if (noEffect)
+            addRupees(1);
+        break;
+    case SITEM_RUPEE_BLUE:
+        if (noEffect)
+            addRupees(5);
+        break;
+    case SITEM_RUPEE_RED:
+        if (noEffect)
+            addRupees(20);
+        break;
+    case SITEM_RUPEE_PURPLE:
+        if (noEffect)
+            addRupees(50);
+        break;
+    case SITEM_RUPEE_SILVER:
+        if (noEffect)
+            addRupees(100);
+        break;
+    case SITEM_RUPEE_GOLD:
+        if (noEffect)
+            addRupees(200);
         break;
     }
 }
@@ -431,13 +461,13 @@ void comboAddItemSharedOot(s16 gi, int noEffect)
         switch (gi)
         {
         case GI_OOT_ARROW_FIRE:
-            comboAddCommonItemMm(SITEM_ARROW_FIRE);
+            comboAddCommonItemMm(SITEM_ARROW_FIRE, noEffect);
             break;
         case GI_OOT_ARROW_ICE:
-            comboAddCommonItemMm(SITEM_ARROW_ICE);
+            comboAddCommonItemMm(SITEM_ARROW_ICE, noEffect);
             break;
         case GI_OOT_ARROW_LIGHT:
-            comboAddCommonItemMm(SITEM_ARROW_LIGHT);
+            comboAddCommonItemMm(SITEM_ARROW_LIGHT, noEffect);
             break;
         }
     }
@@ -447,13 +477,13 @@ void comboAddItemSharedOot(s16 gi, int noEffect)
         switch (gi)
         {
         case GI_OOT_SONG_EPONA:
-            comboAddCommonItemMm(SITEM_SONG_EPONA);
+            comboAddCommonItemMm(SITEM_SONG_EPONA, noEffect);
             break;
         case GI_OOT_SONG_TIME:
-            comboAddCommonItemMm(SITEM_SONG_TIME);
+            comboAddCommonItemMm(SITEM_SONG_TIME, noEffect);
             break;
         case GI_OOT_SONG_STORMS:
-            comboAddCommonItemMm(SITEM_SONG_STORMS);
+            comboAddCommonItemMm(SITEM_SONG_STORMS, noEffect);
             break;
         }
     }
@@ -495,17 +525,17 @@ void comboAddItemSharedOot(s16 gi, int noEffect)
 
     if (comboConfig(CFG_SHARED_HOOKSHOT) && gi == GI_OOT_HOOKSHOT)
     {
-        comboAddCommonItemMm(SITEM_HOOKSHOT);
+        comboAddCommonItemMm(SITEM_HOOKSHOT, noEffect);
     }
 
     if (comboConfig(CFG_SHARED_LENS) && gi == GI_OOT_LENS)
     {
-        comboAddCommonItemMm(SITEM_LENS);
+        comboAddCommonItemMm(SITEM_LENS, noEffect);
     }
 
     if (comboConfig(CFG_SHARED_OCARINA) && gi == GI_OOT_OCARINA_TIME)
     {
-        comboAddCommonItemMm(SITEM_OCARINA_TIME);
+        comboAddCommonItemMm(SITEM_OCARINA_TIME, noEffect);
     }
 
     if (comboConfig(CFG_SHARED_MASKS))
@@ -513,19 +543,51 @@ void comboAddItemSharedOot(s16 gi, int noEffect)
         switch (gi)
         {
         case GI_OOT_MASK_KEATON:
-            comboAddCommonItemMm(SITEM_MASK_KEATON);
+            comboAddCommonItemMm(SITEM_MASK_KEATON, noEffect);
             break;
         case GI_OOT_MASK_BUNNY:
-            comboAddCommonItemMm(SITEM_MASK_BUNNY);
+            comboAddCommonItemMm(SITEM_MASK_BUNNY, noEffect);
             break;
         case GI_OOT_MASK_TRUTH:
-            comboAddCommonItemMm(SITEM_MASK_TRUTH);
+            comboAddCommonItemMm(SITEM_MASK_TRUTH, noEffect);
             break;
         case GI_OOT_MASK_GORON:
-            comboAddCommonItemMm(SITEM_MASK_GORON);
+            comboAddCommonItemMm(SITEM_MASK_GORON, noEffect);
             break;
         case GI_OOT_MASK_ZORA:
-            comboAddCommonItemMm(SITEM_MASK_ZORA);
+            comboAddCommonItemMm(SITEM_MASK_ZORA, noEffect);
+            break;
+        }
+    }
+
+    if (comboConfig(CFG_SHARED_WALLETS))
+    {
+        switch (gi)
+        {
+        case GI_OOT_WALLET2:
+            comboAddCommonItemMm(SITEM_WALLET2, noEffect);
+            break;
+        case GI_OOT_WALLET3:
+            comboAddCommonItemMm(SITEM_WALLET3, noEffect);
+            break;
+        case GI_OOT_RUPEE_GREEN:
+        case GI_OOT_TC_RUPEE_GREEN:
+            comboAddCommonItemMm(SITEM_RUPEE_GREEN, noEffect);
+            break;
+        case GI_OOT_RUPEE_BLUE:
+        case GI_OOT_TC_RUPEE_BLUE:
+            comboAddCommonItemMm(SITEM_RUPEE_BLUE, noEffect);
+            break;
+        case GI_OOT_RUPEE_RED:
+        case GI_OOT_TC_RUPEE_RED:
+            comboAddCommonItemMm(SITEM_RUPEE_RED, noEffect);
+            break;
+        case GI_OOT_RUPEE_PURPLE:
+        case GI_OOT_TC_RUPEE_PURPLE:
+            comboAddCommonItemMm(SITEM_RUPEE_PURPLE, noEffect);
+            break;
+        case GI_OOT_RUPEE_HUGE:
+            comboAddCommonItemMm(SITEM_RUPEE_GOLD, noEffect);
             break;
         }
     }
@@ -584,7 +646,7 @@ int comboAddItemOot(s16 gi, int noEffect)
         comboAddArrowsOot(30);
         break;
     case GI_OOT_ARROW_FIRE:
-        comboAddCommonItemOot(SITEM_ARROW_FIRE);
+        comboAddCommonItemOot(SITEM_ARROW_FIRE, noEffect);
         break;
     case GI_OOT_SPELL_FIRE:
         gOotSave.inventory.items[ITS_OOT_SPELL_FIRE] = ITEM_OOT_SPELL_FIRE;
@@ -603,7 +665,7 @@ int comboAddItemOot(s16 gi, int noEffect)
         addOcarina(1);
         break;
     case GI_OOT_OCARINA_TIME:
-        comboAddCommonItemOot(SITEM_OCARINA_TIME);
+        comboAddCommonItemOot(SITEM_OCARINA_TIME, noEffect);
         break;
     case GI_OOT_BOMBCHU_5:
         addBombchu(5);
@@ -615,13 +677,13 @@ int comboAddItemOot(s16 gi, int noEffect)
         addBombchu(20);
         break;
     case GI_OOT_HOOKSHOT:
-        comboAddCommonItemOot(SITEM_HOOKSHOT);
+        comboAddCommonItemOot(SITEM_HOOKSHOT, noEffect);
         break;
     case GI_OOT_LONGSHOT:
         addHookshot(2);
         break;
     case GI_OOT_ARROW_ICE:
-        comboAddCommonItemOot(SITEM_ARROW_ICE);
+        comboAddCommonItemOot(SITEM_ARROW_ICE, noEffect);
         break;
     case GI_OOT_SPELL_WIND:
         gOotSave.inventory.items[ITS_OOT_SPELL_WIND] = ITEM_OOT_SPELL_WIND;
@@ -630,7 +692,7 @@ int comboAddItemOot(s16 gi, int noEffect)
         gOotSave.inventory.items[ITS_OOT_BOOMERANG] = ITEM_OOT_BOOMERANG;
         break;
     case GI_OOT_LENS:
-        comboAddCommonItemOot(SITEM_LENS);
+        comboAddCommonItemOot(SITEM_LENS, noEffect);
         break;
     case GI_OOT_MAGIC_BEAN:
         gOotSave.inventory.items[ITS_OOT_MAGIC_BEAN] = ITEM_OOT_MAGIC_BEAN;
@@ -640,7 +702,7 @@ int comboAddItemOot(s16 gi, int noEffect)
         gOotSave.inventory.items[ITS_OOT_HAMMER] = ITEM_OOT_HAMMER;
         break;
     case GI_OOT_ARROW_LIGHT:
-        comboAddCommonItemOot(SITEM_ARROW_LIGHT);
+        comboAddCommonItemOot(SITEM_ARROW_LIGHT, noEffect);
         break;
     case GI_OOT_SPELL_LOVE:
         gOotSave.inventory.items[ITS_OOT_SPELL_LOVE] = ITEM_OOT_SPELL_LOVE;
@@ -827,10 +889,10 @@ int comboAddItemOot(s16 gi, int noEffect)
         gOotSave.inventory.quest.stoneEmerald = 1;
         break;
     case GI_OOT_SONG_STORMS:
-        comboAddCommonItemOot(SITEM_SONG_STORMS);
+        comboAddCommonItemOot(SITEM_SONG_STORMS, noEffect);
         break;
     case GI_OOT_SONG_TIME:
-        comboAddCommonItemOot(SITEM_SONG_TIME);
+        comboAddCommonItemOot(SITEM_SONG_TIME, noEffect);
         break;
     case GI_OOT_SONG_SUN:
         gOotSave.inventory.quest.songSun = 1;
@@ -839,7 +901,7 @@ int comboAddItemOot(s16 gi, int noEffect)
         gOotSave.inventory.quest.songSaria = 1;
         break;
     case GI_OOT_SONG_EPONA:
-        comboAddCommonItemOot(SITEM_SONG_EPONA);
+        comboAddCommonItemOot(SITEM_SONG_EPONA, noEffect);
         break;
     case GI_OOT_SONG_ZELDA:
         gOotSave.inventory.quest.songZelda = 1;
@@ -882,27 +944,22 @@ int comboAddItemOot(s16 gi, int noEffect)
         break;
     case GI_OOT_RUPEE_GREEN:
     case GI_OOT_TC_RUPEE_GREEN:
-        if (noEffect)
-            addRupees(1);
+        comboAddCommonItemOot(SITEM_RUPEE_GREEN, noEffect);
         break;
     case GI_OOT_RUPEE_BLUE:
     case GI_OOT_TC_RUPEE_BLUE:
-        if (noEffect)
-            addRupees(5);
+        comboAddCommonItemOot(SITEM_RUPEE_BLUE, noEffect);
         break;
     case GI_OOT_RUPEE_RED:
     case GI_OOT_TC_RUPEE_RED:
-        if (noEffect)
-            addRupees(20);
+        comboAddCommonItemOot(SITEM_RUPEE_RED, noEffect);
         break;
     case GI_OOT_RUPEE_PURPLE:
     case GI_OOT_TC_RUPEE_PURPLE:
-        if (noEffect)
-            addRupees(50);
+        comboAddCommonItemOot(SITEM_RUPEE_PURPLE, noEffect);
         break;
     case GI_OOT_RUPEE_HUGE:
-        if (noEffect)
-            addRupees(200);
+        comboAddCommonItemOot(SITEM_RUPEE_GOLD, noEffect);
         break;
     case GI_OOT_RECOVERY_HEART:
         if (noEffect)
@@ -918,7 +975,7 @@ int comboAddItemOot(s16 gi, int noEffect)
         addTradeChild(2);
         break;
     case GI_OOT_MASK_KEATON:
-        comboAddCommonItemOot(SITEM_MASK_KEATON);
+        comboAddCommonItemOot(SITEM_MASK_KEATON, noEffect);
         break;
     case GI_OOT_MASK_SKULL:
         addTradeChild(4);
@@ -927,19 +984,19 @@ int comboAddItemOot(s16 gi, int noEffect)
         addTradeChild(5);
         break;
     case GI_OOT_MASK_BUNNY:
-        comboAddCommonItemOot(SITEM_MASK_BUNNY);
+        comboAddCommonItemOot(SITEM_MASK_BUNNY, noEffect);
         break;
     case GI_OOT_MASK_GORON:
-        comboAddCommonItemOot(SITEM_MASK_GORON);
+        comboAddCommonItemOot(SITEM_MASK_GORON, noEffect);
         break;
     case GI_OOT_MASK_ZORA:
-        comboAddCommonItemOot(SITEM_MASK_ZORA);
+        comboAddCommonItemOot(SITEM_MASK_ZORA, noEffect);
         break;
     case GI_OOT_MASK_GERUDO:
         addTradeChild(9);
         break;
     case GI_OOT_MASK_TRUTH:
-        comboAddCommonItemOot(SITEM_MASK_TRUTH);
+        comboAddCommonItemOot(SITEM_MASK_TRUTH, noEffect);
         break;
     case GI_OOT_POCKET_EGG:
         addTradeAdult(0);

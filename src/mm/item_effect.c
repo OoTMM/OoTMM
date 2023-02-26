@@ -25,7 +25,31 @@ static void reloadIconsC(GameState_Play* play)
 
 void comboAddItemSharedForeignEffect(GameState_Play* play, s16 gi)
 {
-
+    if (comboConfig(CFG_SHARED_WALLETS))
+    {
+        switch (gi)
+        {
+        case GI_OOT_RUPEE_GREEN:
+        case GI_OOT_TC_RUPEE_GREEN:
+            addRupees(1);
+            break;
+        case GI_OOT_RUPEE_BLUE:
+        case GI_OOT_TC_RUPEE_BLUE:
+            addRupees(5);
+            break;
+        case GI_OOT_RUPEE_RED:
+        case GI_OOT_TC_RUPEE_RED:
+            addRupees(20);
+            break;
+        case GI_OOT_RUPEE_PURPLE:
+        case GI_OOT_TC_RUPEE_PURPLE:
+            addRupees(50);
+            break;
+        case GI_OOT_RUPEE_HUGE:
+            addRupees(200);
+            break;
+        }
+    }
 }
 
 int comboAddItemEffect(GameState_Play* play, s16 gi)

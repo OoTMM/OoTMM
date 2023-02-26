@@ -186,23 +186,24 @@ static int isItemAmbiguousOot(s16 gi)
     case GI_OOT_MASK_ZORA:
     case GI_OOT_MASK_TRUTH:
         return !comboConfig(CFG_SHARED_MASKS);
+    case GI_OOT_WALLET2:
+    case GI_OOT_WALLET3:
+    case GI_OOT_RUPEE_GREEN:
+    case GI_OOT_RUPEE_BLUE:
+    case GI_OOT_RUPEE_RED:
+    case GI_OOT_RUPEE_PURPLE:
+    case GI_OOT_RUPEE_HUGE:
+        return !comboConfig(CFG_SHARED_WALLETS);
     case GI_OOT_BOMBCHU_10:
     case GI_OOT_MAGIC_BEAN:
     case GI_OOT_EMPTY_BOTTLE:
     case GI_OOT_MILK_BOTTLE:
     case GI_OOT_SWORD_KOKIRI:
     case GI_OOT_SHIELD_HYLIAN:
-    case GI_OOT_WALLET2:
-    case GI_OOT_WALLET3:
     case GI_OOT_HEART_CONTAINER:
     case GI_OOT_HEART_CONTAINER2:
     case GI_OOT_HEART_PIECE:
     case GI_OOT_RECOVERY_HEART:
-    case GI_OOT_RUPEE_GREEN:
-    case GI_OOT_RUPEE_BLUE:
-    case GI_OOT_RUPEE_RED:
-    case GI_OOT_RUPEE_PURPLE:
-    case GI_OOT_RUPEE_HUGE:
     case GI_OOT_BOMBCHU_5:
     case GI_OOT_BOMBCHU_20:
     case GI_OOT_DEFENSE_UPGRADE:
@@ -261,23 +262,24 @@ static int isItemAmbiguousMm(s16 gi)
     case GI_MM_MASK_BUNNY:
     case GI_MM_MASK_KEATON:
         return !comboConfig(CFG_SHARED_MASKS);
-    case GI_MM_BOMBCHU:
-    case GI_MM_MAGIC_BEAN:
-    case GI_MM_BOTTLED_POTION_RED:
-    case GI_MM_EMPTY_BOTTLE:
-    case GI_MM_SWORD_KOKIRI:
-    case GI_MM_SHIELD_HERO:
     case GI_MM_WALLET2:
     case GI_MM_WALLET3:
-    case GI_MM_HEART_CONTAINER:
-    case GI_MM_HEART_PIECE:
-    case GI_MM_RECOVERY_HEART:
     case GI_MM_RUPEE_GREEN:
     case GI_MM_RUPEE_BLUE:
     case GI_MM_RUPEE_RED:
     case GI_MM_RUPEE_PURPLE:
     case GI_MM_RUPEE_SILVER:
     case GI_MM_RUPEE_GOLD:
+        return !comboConfig(CFG_SHARED_WALLETS);
+    case GI_MM_BOMBCHU:
+    case GI_MM_MAGIC_BEAN:
+    case GI_MM_BOTTLED_POTION_RED:
+    case GI_MM_EMPTY_BOTTLE:
+    case GI_MM_SWORD_KOKIRI:
+    case GI_MM_SHIELD_HERO:
+    case GI_MM_HEART_CONTAINER:
+    case GI_MM_HEART_PIECE:
+    case GI_MM_RECOVERY_HEART:
     case GI_MM_BOMBCHU_20:
     case GI_MM_BOMBCHU_10:
     case GI_MM_BOMBCHU_5:

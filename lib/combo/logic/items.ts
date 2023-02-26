@@ -158,6 +158,7 @@ export const ITEMS_REQUIRED = new Set<string>([
   'SHARED_MASK_TRUTH',
   'SHARED_MASK_BUNNY',
   'SHARED_MASK_KEATON',
+  'SHARED_WALLET',
 ]);
 
 const ITEMS_JUNK = new Set<string>([
@@ -210,6 +211,9 @@ const ITEMS_JUNK = new Set<string>([
   'SHARED_STICK',
   'SHARED_STICKS_5',
   'SHARED_STICKS_10',
+  'SHARED_RUPEE_GREEN',
+  'SHARED_RUPEE_BLUE',
+  'SHARED_RUPEE_RED',
 ]);
 
 export const isSong = (item: string) => !!item.match(/^(OOT|MM|SHARED)_SONG_/);

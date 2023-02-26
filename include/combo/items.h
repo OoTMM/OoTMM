@@ -442,5 +442,13 @@
 #define SITEM_MASK_TRUTH        0x0b
 #define SITEM_MASK_KEATON       0x0c
 #define SITEM_MASK_BUNNY        0x0d
+#define SITEM_WALLET2           0x0e
+#define SITEM_WALLET3           0x0f
+#define SITEM_RUPEE_GREEN       0x10
+#define SITEM_RUPEE_BLUE        0x11
+#define SITEM_RUPEE_RED         0x12
+#define SITEM_RUPEE_PURPLE      0x13
+#define SITEM_RUPEE_SILVER      0x14
+#define SITEM_RUPEE_GOLD        0x15
 
 #endif

@@ -268,6 +268,13 @@ const ITEM_NAMES: {[k: string]: string} = {
   SHARED_MASK_KEATON: "Keaton Mask",
   SHARED_MASK_TRUTH: "Mask of Truth",
   SHARED_MASK_ZORA: "Zora Mask",
+  SHARED_WALLET: "Progressive Wallet",
+  SHARED_RUPEE_GREEN: "Green Rupee",
+  SHARED_RUPEE_BLUE: "Blue Rupee",
+  SHARED_RUPEE_RED: "Red Rupee",
+  SHARED_RUPEE_PURPLE: "Purple Rupee",
+  SHARED_RUPEE_SILVER: "Silver Rupee",
+  SHARED_RUPEE_GOLD: "Gold Rupee",
 };
 
 export const itemName = (item: string) => ITEM_NAMES[item] ?? item;

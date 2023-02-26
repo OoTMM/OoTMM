@@ -254,8 +254,8 @@ void comboAddSticksMm(int count);
 void comboAddNutsOot(int count);
 void comboAddNutsMm(int count);
 
-void comboAddCommonItemOot(int sid);
-void comboAddCommonItemMm(int sid);
+void comboAddCommonItemOot(int sid, int noEffect);
+void comboAddCommonItemMm(int sid, int noEffect);
 
 int  comboAddItem(GameState_Play* play, s16 gi);
 int  comboAddItemNoEffect(s16 gi);

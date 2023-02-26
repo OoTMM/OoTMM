@@ -183,4 +183,7 @@ void comboSyncItems(void)
         gForeignSave.inventory.ammo[ITS_FOREIGN_NUTS] = gSave.inventory.ammo[ITS_NATIVE_NUTS];
         gForeignSave.inventory.ammo[ITS_FOREIGN_STICKS] = gSave.inventory.ammo[ITS_NATIVE_STICKS];
     }
+
+    if (comboConfig(CFG_SHARED_WALLETS))
+        gForeignSave.playerData.rupees = gSave.playerData.rupees;
 }
