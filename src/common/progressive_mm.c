@@ -70,7 +70,7 @@ static s32 progressiveMagic(void)
 
 static s32 progressiveSongLullaby(void)
 {
-    switch (gMmSave.inventory.questItems.songLullabyIntro)
+    switch (gMmSave.inventory.quest.songLullabyIntro)
     {
     case 0:
         return GI_MM_SONG_GORON_HALF;

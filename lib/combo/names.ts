@@ -275,6 +275,10 @@ const ITEM_NAMES: {[k: string]: string} = {
   SHARED_RUPEE_PURPLE: "Purple Rupee",
   SHARED_RUPEE_SILVER: "Silver Rupee",
   SHARED_RUPEE_GOLD: "Gold Rupee",
+  SHARED_HEART_PIECE: "Heart Piece",
+  SHARED_HEART_CONTAINER: "Heart Container",
+  SHARED_DEFENSE_UPGRADE: "Double Defense",
+  SHARED_RECOVERY_HEART: "Recovery Heart",
 };
 
 export const itemName = (item: string) => ITEM_NAMES[item] ?? item;

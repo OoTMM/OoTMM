@@ -8,7 +8,7 @@ typedef struct
     char    newf[6];
     u16     deaths;
     u8      playerName[8];
-    s16     healthCapacity;
+    s16     healthMax;
     s16     health;
     s8      magicLevel;
     s8      magicAmount;
@@ -90,7 +90,7 @@ typedef struct
     u8              items[48];
     s8              ammo[24];
     MmUpgrades      upgrades;
-    MmQuestItems    questItems;
+    MmQuestItems    quest;
     MmDungeonItems  dungeonItems[10];
     s8              dungeonKeys[9];
     s8              defenseHearts;

@@ -63,6 +63,21 @@ void comboAddItemSharedForeignEffect(GameState_Play* play, s16 gi)
             break;
         }
     }
+
+    if (comboConfig(CFG_SHARED_HEALTH))
+    {
+        switch (gi)
+        {
+        case GI_MM_RECOVERY_HEART:
+            addHealth(1);
+            break;
+        case GI_MM_HEART_CONTAINER:
+        case GI_MM_HEART_PIECE:
+        case GI_MM_DEFENSE_UPGRADE:
+            addHealth(20);
+            break;
+        }
+    }
 }
 
 int comboAddItemEffect(GameState_Play* play, s16 gi)

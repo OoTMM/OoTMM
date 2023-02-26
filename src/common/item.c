@@ -186,4 +186,11 @@ void comboSyncItems(void)
 
     if (comboConfig(CFG_SHARED_WALLETS))
         gForeignSave.playerData.rupees = gSave.playerData.rupees;
+
+    if (comboConfig(CFG_SHARED_HEALTH))
+    {
+        gForeignSave.playerData.healthMax = gSave.playerData.healthMax;
+        gForeignSave.playerData.health = gSave.playerData.health;
+        gForeignSave.inventory.quest.heartPieces = gSave.inventory.quest.heartPieces;
+    }
 }

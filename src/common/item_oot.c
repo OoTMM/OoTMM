@@ -382,6 +382,33 @@ void comboAddCommonItemOot(int sid, int noEffect)
         if (noEffect)
             addRupees(200);
         break;
+    case SITEM_HEART_PIECE:
+        gOotSave.inventory.quest.heartPieces++;
+        if (noEffect)
+        {
+            if (gOotSave.inventory.quest.heartPieces >= 4)
+            {
+                gOotSave.inventory.quest.heartPieces -= 4;
+                gOotSave.playerData.healthMax += 0x10;
+            }
+            addHealth(20);
+        }
+        break;
+    case SITEM_HEART_CONTAINER:
+        gOotSave.playerData.healthMax += 0x10;
+        if (noEffect)
+            addHealth(20);
+        break;
+    case SITEM_RECOVERY_HEART:
+        if (noEffect)
+            addHealth(1);
+        break;
+    case SITEM_DEFENSE_UPGRADE:
+        gOotSave.playerData.doubleDefense = 1;
+        gOotSave.inventory.doubleDefenseHearts = 20;
+        if (noEffect)
+            addHealth(20);
+        break;
     }
 }
 
@@ -588,6 +615,27 @@ void comboAddItemSharedOot(s16 gi, int noEffect)
             break;
         case GI_OOT_RUPEE_HUGE:
             comboAddCommonItemMm(SITEM_RUPEE_GOLD, noEffect);
+            break;
+        }
+    }
+
+    if (comboConfig(CFG_SHARED_HEALTH))
+    {
+        switch (gi)
+        {
+        case GI_OOT_RECOVERY_HEART:
+            comboAddCommonItemMm(SITEM_RECOVERY_HEART, noEffect);
+            break;
+        case GI_OOT_HEART_CONTAINER:
+        case GI_OOT_HEART_CONTAINER2:
+            comboAddCommonItemMm(SITEM_HEART_CONTAINER, noEffect);
+            break;
+        case GI_OOT_HEART_PIECE:
+        case GI_OOT_TC_HEART_PIECE:
+            comboAddCommonItemMm(SITEM_HEART_PIECE, noEffect);
+            break;
+        case GI_OOT_DEFENSE_UPGRADE:
+            comboAddCommonItemMm(SITEM_DEFENSE_UPGRADE, noEffect);
             break;
         }
     }
@@ -845,29 +893,15 @@ int comboAddItemOot(s16 gi, int noEffect)
         addStickUpgrade(3);
         break;
     case GI_OOT_DEFENSE_UPGRADE:
-        gOotSave.playerData.doubleDefense = 1;
-        gOotSave.inventory.doubleDefenseHearts = 20;
-        if (noEffect)
-            addHealth(20);
+        comboAddCommonItemOot(SITEM_DEFENSE_UPGRADE, noEffect);
         break;
     case GI_OOT_HEART_PIECE:
     case GI_OOT_TC_HEART_PIECE:
-        gOotSave.inventory.quest.heartPieces++;
-        if (noEffect)
-        {
-            if (gOotSave.inventory.quest.heartPieces >= 4)
-            {
-                gOotSave.inventory.quest.heartPieces -= 4;
-                gOotSave.playerData.healthMax += 0x10;
-            }
-            addHealth(20);
-        }
+        comboAddCommonItemOot(SITEM_HEART_PIECE, noEffect);
         break;
     case GI_OOT_HEART_CONTAINER:
     case GI_OOT_HEART_CONTAINER2:
-        gOotSave.playerData.healthMax += 0x10;
-        if (noEffect)
-            addHealth(20);
+        comboAddCommonItemOot(SITEM_HEART_CONTAINER, noEffect);
         break;
     case GI_OOT_GS_TOKEN:
         gOotSave.inventory.quest.goldToken = 1;
@@ -962,8 +996,7 @@ int comboAddItemOot(s16 gi, int noEffect)
         comboAddCommonItemOot(SITEM_RUPEE_GOLD, noEffect);
         break;
     case GI_OOT_RECOVERY_HEART:
-        if (noEffect)
-            addHealth(1);
+        comboAddCommonItemOot(SITEM_RECOVERY_HEART, noEffect);
         break;
     case GI_OOT_WEIRD_EGG:
         addTradeChild(0);

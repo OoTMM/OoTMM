@@ -28,14 +28,14 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.upgrades.wallet = 2;
         gSave.inventory.upgrades.bombBag = 3;
         gSave.playerData.rupees = 500;
-        gSave.inventory.questItems.songHealing = 1;
-        gSave.inventory.questItems.songTime = 1;
-        gSave.inventory.questItems.songSoaring = 1;
-        //gSave.inventory.questItems.songEpona = 1;
-        gSave.inventory.questItems.songOrder = 1;
-        gSave.inventory.questItems.songStorms = 1;
-        gSave.inventory.questItems.songNewWave = 1;
-        gSave.inventory.questItems.songAwakening = 1;
+        gSave.inventory.quest.songHealing = 1;
+        gSave.inventory.quest.songTime = 1;
+        gSave.inventory.quest.songSoaring = 1;
+        //gSave.inventory.quest.songEpona = 1;
+        gSave.inventory.quest.songOrder = 1;
+        gSave.inventory.quest.songStorms = 1;
+        gSave.inventory.quest.songNewWave = 1;
+        gSave.inventory.quest.songAwakening = 1;
         gSave.inventory.items[ITS_MM_BOTTLE + 0] = ITEM_MM_BOTTLED_DEKU_PRINCESS;
         gSave.inventory.items[ITS_MM_BOTTLE + 1] = ITEM_MM_BOTTLED_SPRING_WATER_HOT;
         gSave.playerData.magicAmount = 0x30;
@@ -48,13 +48,13 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.items[ITS_MM_ARROW_FIRE] = ITEM_MM_ARROW_FIRE;
         gSave.inventory.items[ITS_MM_ARROW_LIGHT] = ITEM_MM_ARROW_LIGHT;
         gSave.inventory.items[ITS_MM_PICTOBOX] = ITEM_MM_PICTOGRAPH_BOX;
-        gSave.inventory.questItems.songLullabyIntro = 1;
-        gSave.inventory.questItems.songLullaby = 1;
+        gSave.inventory.quest.songLullabyIntro = 1;
+        gSave.inventory.quest.songLullaby = 1;
 
         gSave.inventory.items[ITS_MM_KEG] = ITEM_MM_POWDER_KEG;
         gSave.inventory.items[ITS_MM_MASK_CAPTAIN] = ITEM_MM_MASK_CAPTAIN;
-        gSave.playerData.healthCapacity = 0x10 * 10;
-        gSave.playerData.health = gSave.playerData.healthCapacity;
+        gSave.playerData.healthMax = 0x10 * 10;
+        gSave.playerData.health = gSave.playerData.healthMax;
 
         gSave.inventory.items[ITS_MM_TRADE1] = ITEM_MM_DEED_LAND;
         gSave.inventory.items[ITS_MM_TRADE3] = ITEM_MM_LETTER_TO_KAFEI;
@@ -72,7 +72,7 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.items[ITS_MM_MASK_TROUPE_LEADER] = ITEM_MM_MASK_TROUPE_LEADER;
         gSave.inventory.items[ITS_MM_MASK_FIERCE_DEITY] = ITEM_MM_MASK_FIERCE_DEITY;
 
-        //gSave.inventory.questItems.remainsOdolwa = 1;
+        //gSave.inventory.quest.remainsOdolwa = 1;
         //gMmExtraBoss.boss |= 0x01;
 
         //gSave.day = 3;

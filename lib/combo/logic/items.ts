@@ -214,6 +214,7 @@ const ITEMS_JUNK = new Set<string>([
   'SHARED_RUPEE_GREEN',
   'SHARED_RUPEE_BLUE',
   'SHARED_RUPEE_RED',
+  'SHARED_RECOVERY_HEART',
 ]);
 
 export const isSong = (item: string) => !!item.match(/^(OOT|MM|SHARED)_SONG_/);
