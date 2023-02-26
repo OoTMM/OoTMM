@@ -15,3 +15,4 @@ SHARED_MAGIC_ARROWS:            0x0d
 SHARED_SONGS:                   0x0e
 SHARED_NUTS_STICKS:             0x0f
 SHARED_HOOKSHOT:                0x10
+SHARED_LENS:                    0x11

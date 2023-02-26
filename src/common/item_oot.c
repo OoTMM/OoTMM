@@ -331,6 +331,9 @@ void comboAddCommonItemOot(int sid)
     case SITEM_HOOKSHOT:
         addHookshot(1);
         break;
+    case SITEM_LENS:
+        gOotSave.inventory.items[ITS_OOT_LENS] = ITEM_OOT_LENS;
+        break;
     }
 }
 
@@ -476,6 +479,11 @@ void comboAddItemSharedOot(s16 gi, int noEffect)
     {
         comboAddCommonItemMm(SITEM_HOOKSHOT);
     }
+
+    if (comboConfig(CFG_SHARED_LENS) && gi == GI_OOT_LENS)
+    {
+        comboAddCommonItemMm(SITEM_LENS);
+    }
 }
 
 int comboAddItemOot(s16 gi, int noEffect)
@@ -577,7 +585,7 @@ int comboAddItemOot(s16 gi, int noEffect)
         gOotSave.inventory.items[ITS_OOT_BOOMERANG] = ITEM_OOT_BOOMERANG;
         break;
     case GI_OOT_LENS:
-        gOotSave.inventory.items[ITS_OOT_LENS] = ITEM_OOT_LENS;
+        comboAddCommonItemOot(SITEM_LENS);
         break;
     case GI_OOT_MAGIC_BEAN:
         gOotSave.inventory.items[ITS_OOT_MAGIC_BEAN] = ITEM_OOT_MAGIC_BEAN;

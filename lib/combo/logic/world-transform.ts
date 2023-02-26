@@ -104,6 +104,11 @@ export class LogicPassWorldTransform {
       itemsToJunk.add('MM_HOOKSHOT');
     }
 
+    if (config.has('SHARED_LENS')) {
+      itemsToReplace.set('OOT_LENS', 'SHARED_LENS');
+      itemsToJunk.add('MM_LENS');
+    }
+
     for (const loc in this.state.world.checks) {
       const check = this.state.world.checks[loc];
       let item = check.item;

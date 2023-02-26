@@ -83,6 +83,10 @@ export class LogicPassConfig {
       config.add('SHARED_HOOKSHOT');
     }
 
+    if (this.state.settings.sharedLens) {
+      config.add('SHARED_LENS');
+    }
+
     return { config };
   }
 }

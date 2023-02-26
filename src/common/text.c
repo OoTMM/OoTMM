@@ -176,9 +176,10 @@ static int isItemAmbiguousOot(s16 gi)
         return !comboConfig(CFG_SHARED_NUTS_STICKS);
     case GI_OOT_HOOKSHOT:
         return !comboConfig(CFG_SHARED_HOOKSHOT);
+    case GI_OOT_LENS:
+        return !comboConfig(CFG_SHARED_LENS);
     case GI_OOT_OCARINA_TIME:
     case GI_OOT_BOMBCHU_10:
-    case GI_OOT_LENS:
     case GI_OOT_MAGIC_BEAN:
     case GI_OOT_EMPTY_BOTTLE:
     case GI_OOT_MILK_BOTTLE:
@@ -248,10 +249,11 @@ static int isItemAmbiguousMm(s16 gi)
         return !comboConfig(CFG_SHARED_NUTS_STICKS);
     case GI_MM_HOOKSHOT:
         return !comboConfig(CFG_SHARED_HOOKSHOT);
+    case GI_MM_LENS:
+        return !comboConfig(CFG_SHARED_LENS);
     case GI_MM_OCARINA_OF_TIME:
     case GI_MM_BOMBCHU:
     case GI_MM_MAGIC_BEAN:
-    case GI_MM_LENS:
     case GI_MM_BOTTLED_POTION_RED:
     case GI_MM_EMPTY_BOTTLE:
     case GI_MM_MASK_GORON:

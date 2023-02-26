@@ -279,6 +279,9 @@ void comboAddCommonItemMm(int sid)
     case SITEM_HOOKSHOT:
         gMmSave.inventory.items[ITS_MM_HOOKSHOT] = ITEM_MM_HOOKSHOT;
         break;
+    case SITEM_LENS:
+        gMmSave.inventory.items[ITS_MM_LENS] = ITEM_MM_LENS_OF_TRUTH;
+        break;
     }
 }
 
@@ -408,6 +411,11 @@ void comboAddItemSharedMm(s16 gi, int noEffect)
     {
         comboAddCommonItemOot(SITEM_HOOKSHOT);
     }
+
+    if (comboConfig(CFG_SHARED_LENS) && gi == GI_MM_LENS)
+    {
+        comboAddCommonItemOot(SITEM_LENS);
+    }
 }
 
 int comboAddItemMm(s16 gi, int noEffect)
@@ -441,7 +449,7 @@ int comboAddItemMm(s16 gi, int noEffect)
         gMmSave.inventory.items[ITS_MM_PICTOBOX] = ITEM_MM_PICTOGRAPH_BOX;
         break;
     case GI_MM_LENS:
-        gMmSave.inventory.items[ITS_MM_LENS] = ITEM_MM_LENS_OF_TRUTH;
+        comboAddCommonItemMm(SITEM_LENS);
         break;
     case GI_MM_HOOKSHOT:
         comboAddCommonItemMm(SITEM_HOOKSHOT);

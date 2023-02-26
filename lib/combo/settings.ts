@@ -258,6 +258,12 @@ export const SETTINGS = [{
   type: 'boolean',
   default: false
 }, {
+  key: 'sharedLens',
+  name: 'Shared Lens of Truth',
+  category: 'items',
+  type: 'boolean',
+  default: false
+}, {
   key: 'csmc',
   name: 'Chest Size Matches Content',
   category: 'misc',
