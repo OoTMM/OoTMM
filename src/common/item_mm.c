@@ -130,6 +130,9 @@ void comboAddNutsMm(int count)
 {
     u16 max;
 
+    if (gMmSave.inventory.upgrades.dekuNut == 0)
+        gMmSave.inventory.upgrades.dekuNut = 1;
+
     max = kMaxNuts[gMmSave.inventory.upgrades.dekuNut];
     gMmSave.inventory.items[ITS_MM_NUTS] = ITEM_MM_NUT;
     gMmSave.inventory.ammo[ITS_MM_NUTS] += count;
@@ -140,6 +143,9 @@ void comboAddNutsMm(int count)
 void comboAddSticksMm(int count)
 {
     u16 max;
+
+    if (gMmSave.inventory.upgrades.dekuStick == 0)
+        gMmSave.inventory.upgrades.dekuStick = 1;
 
     max = kMaxSticks[gMmSave.inventory.upgrades.dekuStick];
     gMmSave.inventory.items[ITS_MM_STICKS] = ITEM_MM_STICK;
