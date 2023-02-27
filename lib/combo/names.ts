@@ -12,7 +12,7 @@ const ITEM_NAMES: {[k: string]: string} = {
   MM_BOSS_KEY_SH: "Boss Key (Snowhead Temple)",
   MM_BOSS_KEY_ST: "Boss Key (Stone Tower Temple)",
   MM_BOSS_KEY_WF: "Boss Key (Woodfall Temple)",
-  MM_BOTTLED_CHATEAU_ROMANI: "Bottle - Chateau Romani (MM)",
+  MM_BOTTLE_CHATEAU: "Bottle - Chateau Romani (MM)",
   MM_BOTTLED_GOLD_DUST: "Bottle - Gold Dust (MM)",
   MM_BOTTLE_MILK: "Bottle - Milk (MM)",
   MM_BOTTLE_POTION_RED: "Bottle - Red Potion (MM)",

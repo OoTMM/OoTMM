@@ -24,7 +24,7 @@ Clock Tower Roof Skull Kid Song of Time,          npc,            NONE,         
 Mayor's Office Kafei's Mask,                      npc,            NONE,                   MAYOR_HOUSE,                MASK_KAFEI,             MASK_KAFEI
 Mayor's Office HP,                                npc,            NONE,                   MAYOR_HOUSE,                MAYOR_HEART_PIECE,      HEART_PIECE
 Milk Bar Troupe Leader Mask,                      npc,            SOUND_CHECK,            MILK_BAR,                   MASK_TROUPE_LEADER,     MASK_TROUPE_LEADER
-Milk Bar Madame Aroma Bottle,                     npc,            NONE,                   MILK_BAR,                   CHATEAU_ROMANI,         BOTTLED_CHATEAU_ROMANI
+Milk Bar Madame Aroma Bottle,                     npc,            NONE,                   MILK_BAR,                   CHATEAU_ROMANI,         BOTTLE_CHATEAU
 Town Archery Reward 1,                            npc,            NONE,                   SHOOTING_GALLERY,           SHOOTING_GAME_TOWN_1,   BOW
 Town Archery Reward 2,                            npc,            NONE,                   SHOOTING_GALLERY,           SHOOTING_GAME_TOWN_2,   HEART_PIECE
 Chest Game HP,                                    npc,            NONE,                   TREASURE_SHOP,              CHEST_GAME,             HEART_PIECE

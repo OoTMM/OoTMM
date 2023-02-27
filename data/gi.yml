@@ -257,7 +257,7 @@ MM_BOTTLED_GOLD_DUST:         0x6a
 MM_WEIRD_MUSHROOM:            0x6b
 MM_BOTTLE_EMPTY2:             0x6d
 MM_SEAHORSE:                  0x6e
-MM_BOTTLED_CHATEAU_ROMANI:    0x6f
+MM_BOTTLE_CHATEAU:            0x6f
 MM_MASK_DEKU:                 0x78
 MM_MASK_GORON:                0x79
 MM_MASK_ZORA:                 0x7a

@@ -617,8 +617,8 @@ int comboAddItemMm(s16 gi, int noEffect)
     case GI_MM_BOTTLED_GOLD_DUST:
         addNewBottle(ITEM_MM_BOTTLED_GOLD_DUST);
         break;
-    case GI_MM_BOTTLED_CHATEAU_ROMANI:
-        addNewBottle(ITEM_MM_BOTTLED_CHATEAU_ROMANI);
+    case GI_MM_BOTTLE_CHATEAU:
+        addNewBottle(ITEM_MM_BOTTLE_CHATEAU);
         break;
     case GI_MM_BOTTLE_POTION_RED:
         addNewBottle(ITEM_MM_POTION_RED);
@@ -640,7 +640,7 @@ int comboAddItemMm(s16 gi, int noEffect)
         fillBottle(ITEM_MM_MILK);
         break;
     case GI_MM_CHATEAU_ROMANI:
-        fillBottle(ITEM_MM_BOTTLED_CHATEAU_ROMANI);
+        fillBottle(ITEM_MM_BOTTLE_CHATEAU);
         break;
     case GI_MM_BOMB:
         comboAddBombsMm(1);

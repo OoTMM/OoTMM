@@ -165,7 +165,7 @@
 #define ITEM_MM_LENS_OF_TRUTH               0x0e
 #define ITEM_MM_HOOKSHOT                    0x0f
 #define ITEM_MM_GREAT_FAIRY_SWORD           0x10
-#define ITEM_MM_RED_POTION_WITH_BOTTLE      0x11
+#define ITEM_MM_BOTTLE_POTION_RED           0x11
 #define ITEM_MM_BOTTLE_EMPTY                0x12
 #define ITEM_MM_POTION_RED                  0x13
 #define ITEM_MM_POTION_GREEN                0x14
@@ -174,9 +174,9 @@
 #define ITEM_MM_BOTTLED_DEKU_PRINCESS       0x17
 #define ITEM_MM_MILK                        0x18
 #define ITEM_MM_MILK_HALF                   0x19
-#define ITEM_MM_BOTTLED_FISH                0x1a
-#define ITEM_MM_BOTTLED_BUG                 0x1b
-#define ITEM_MM_BOTTLED_POE                 0x1d
+#define ITEM_MM_FISH                        0x1a
+#define ITEM_MM_BUG                         0x1b
+#define ITEM_MM_POE                         0x1d
 #define ITEM_MM_BOTTLED_BIG_POE             0x1e
 #define ITEM_MM_BOTTLED_SPRING_WATER        0x1f
 #define ITEM_MM_BOTTLED_SPRING_WATER_HOT    0x20
@@ -184,7 +184,7 @@
 #define ITEM_MM_BOTTLED_GOLD_DUST           0x22
 #define ITEM_MM_BOTTLED_MAGIC_MUSHROOM      0x23
 #define ITEM_MM_BOTTLED_SEAHORSE            0x24
-#define ITEM_MM_BOTTLED_CHATEAU_ROMANI      0x25
+#define ITEM_MM_BOTTLE_CHATEAU              0x25
 #define ITEM_MM_MOON_TEAR                   0x28
 #define ITEM_MM_DEED_LAND                   0x29
 #define ITEM_MM_DEED_SWAMP                  0x2a
