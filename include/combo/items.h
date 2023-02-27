@@ -21,11 +21,11 @@
 #define ITEM_OOT_HAMMER                 0x11
 #define ITEM_OOT_ARROW_LIGHT            0x12
 #define ITEM_OOT_SPELL_LOVE             0x13
-#define ITEM_OOT_EMPTY_BOTTLE           0x14
+#define ITEM_OOT_BOTTLE_EMPTY           0x14
 #define ITEM_OOT_POTION_RED             0x15
 #define ITEM_OOT_POTION_GREEN           0x16
 #define ITEM_OOT_POTION_BLUE            0x17
-#define ITEM_OOT_BOTTLED_FAIRY          0x18
+#define ITEM_OOT_FAIRY                  0x18
 #define ITEM_OOT_FISH                   0x19
 #define ITEM_OOT_MILK                   0x1a
 #define ITEM_OOT_RUTO_LETTER            0x1b
@@ -124,7 +124,7 @@
 #define ITEM_OOT_MAGIC_JAR_SMALL        0x78
 #define ITEM_OOT_MAGIC_JAR_LARGE        0x79
 #define ITEM_OOT_HEART_PIECE            0x7a
-#define ITEM_OOT_BOTTLED_MILK           0x82
+#define ITEM_OOT_BOTTLE_MILK            0x82
 #define ITEM_OOT_RECOVERY_HEART         0x83
 #define ITEM_OOT_RUPEE_GREEN            0x84
 #define ITEM_OOT_RUPEE_BLUE             0x85
@@ -165,18 +165,18 @@
 #define ITEM_MM_LENS_OF_TRUTH               0x0e
 #define ITEM_MM_HOOKSHOT                    0x0f
 #define ITEM_MM_GREAT_FAIRY_SWORD           0x10
-#define ITEM_MM_RED_POTION_WITH_BOTTLE      0x11
-#define ITEM_MM_EMPTY_BOTTLE                0x12
+#define ITEM_MM_BOTTLE_POTION_RED           0x11
+#define ITEM_MM_BOTTLE_EMPTY                0x12
 #define ITEM_MM_POTION_RED                  0x13
 #define ITEM_MM_POTION_GREEN                0x14
 #define ITEM_MM_POTION_BLUE                 0x15
-#define ITEM_MM_BOTTLED_FAIRY               0x16
+#define ITEM_MM_FAIRY                       0x16
 #define ITEM_MM_BOTTLED_DEKU_PRINCESS       0x17
-#define ITEM_MM_BOTTLED_MILK                0x18
-#define ITEM_MM_BOTTLED_MILK_HALF           0x19
-#define ITEM_MM_BOTTLED_FISH                0x1a
-#define ITEM_MM_BOTTLED_BUG                 0x1b
-#define ITEM_MM_BOTTLED_POE                 0x1d
+#define ITEM_MM_MILK                        0x18
+#define ITEM_MM_MILK_HALF                   0x19
+#define ITEM_MM_FISH                        0x1a
+#define ITEM_MM_BUG                         0x1b
+#define ITEM_MM_POE                         0x1d
 #define ITEM_MM_BOTTLED_BIG_POE             0x1e
 #define ITEM_MM_BOTTLED_SPRING_WATER        0x1f
 #define ITEM_MM_BOTTLED_SPRING_WATER_HOT    0x20
@@ -184,7 +184,7 @@
 #define ITEM_MM_BOTTLED_GOLD_DUST           0x22
 #define ITEM_MM_BOTTLED_MAGIC_MUSHROOM      0x23
 #define ITEM_MM_BOTTLED_SEAHORSE            0x24
-#define ITEM_MM_BOTTLED_CHATEAU_ROMANI      0x25
+#define ITEM_MM_BOTTLE_CHATEAU              0x25
 #define ITEM_MM_MOON_TEAR                   0x28
 #define ITEM_MM_DEED_LAND                   0x29
 #define ITEM_MM_DEED_SWAMP                  0x2a
@@ -276,16 +276,16 @@
 #define ITEM_MM_ARROWS_10                   0x93
 #define ITEM_MM_ARROWS_30                   0x94
 #define ITEM_MM_ARROWS_40                   0x95
-#define ITEM_MM_BOMBCHU_20                 0x97
-#define ITEM_MM_BOMBCHU_10                 0x98
+#define ITEM_MM_BOMBCHU_20                  0x97
+#define ITEM_MM_BOMBCHU_10                  0x98
 #define ITEM_MM_BOMBCHU_ALT                 0x99
-#define ITEM_MM_BOMBCHU_5                  0x9a
+#define ITEM_MM_BOMBCHU_5                   0x9a
 #define ITEM_MM_STICKS_20                   0x9b
 #define ITEM_MM_STICKS_30                   0x9c
 #define ITEM_MM_NUTS_30                     0x9d
 #define ITEM_MM_NUTS_40                     0x9e
 #define ITEM_MM_CHATEAU_ROMANI              0x9f
-#define ITEM_MM_MILK                        0xa0
+#define ITEM_MM_BOTTLE_MILK                 0xa0
 #define ITEM_MM_GOLD_DUST                   0xa1
 #define ITEM_MM_SEAHORSE                    0xa3
 
@@ -450,5 +450,9 @@
 #define SITEM_RUPEE_PURPLE      0x13
 #define SITEM_RUPEE_SILVER      0x14
 #define SITEM_RUPEE_GOLD        0x15
+#define SITEM_HEART_PIECE       0x16
+#define SITEM_HEART_CONTAINER   0x17
+#define SITEM_RECOVERY_HEART    0x18
+#define SITEM_DEFENSE_UPGRADE   0x19
 
 #endif

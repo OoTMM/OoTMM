@@ -29,7 +29,7 @@ Saria's Song,                                         npc,            NONE,     
 Sacred Meadow Sheik Song,                             npc,            NONE,                 SACRED_FOREST_MEADOW,           SHEIK_FOREST,               SONG_TP_FOREST
 Sacred Meadow Grotto,                                 chest,          NONE,                 GROTTOS,                        0x11,                       RUPEE_PURPLE
 Sacred Meadow GS Night Adult,                         gs,             NONE,                 SACRED_FOREST_MEADOW,           0x73,                       GS_TOKEN
-Kakariko Anju Bottle,                                 npc,            NONE,                 KAKARIKO_VILLAGE,               ANJU_BOTTLE,                EMPTY_BOTTLE
+Kakariko Anju Bottle,                                 npc,            NONE,                 KAKARIKO_VILLAGE,               ANJU_BOTTLE,                BOTTLE_EMPTY
 Kakariko Anju Egg,                                    npc,            NONE,                 KAKARIKO_VILLAGE,               TRADE_POCKET_EGG,           POCKET_CUCCO
 Kakariko Anju Cojiro,                                 npc,            NONE,                 KAKARIKO_VILLAGE,               TRADE_COJIRO,               COJIRO
 Kakariko Song Shadow,                                 npc,            RAVAGED_VILLAGE,      KAKARIKO_VILLAGE,               SHEIK_SHADOW,               SONG_TP_SHADOW
@@ -114,7 +114,7 @@ Fishing Pond Child,                                   npc,            FISHING,  
 Fishing Pond Adult,                                   npc,            FISHING,              FISHING_POND,                   FISH_ADULT,                 SCALE
 Lon Lon Ranch Malon Song,                             npc,            NONE,                 LON_LON_RANCH,                  MALON_SONG,                 SONG_EPONA
 Lon Lon Ranch Silo HP,                                collectible,    NONE,                 RANCH_HOUSE_SILO,               0x01,                       HEART_PIECE
-Lon Lon Ranch Talon Bottle,                           npc,            NONE,                 RANCH_HOUSE_SILO,               TALON_BOTTLE,               MILK_BOTTLE
+Lon Lon Ranch Talon Bottle,                           npc,            NONE,                 RANCH_HOUSE_SILO,               TALON_BOTTLE,               BOTTLE_MILK
 Lon Lon Ranch GS Tree,                                gs,             NONE,                 LON_LON_RANCH,                  0x63,                       GS_TOKEN
 Lon Lon Ranch GS House,                               gs,             NONE,                 LON_LON_RANCH,                  0x62,                       GS_TOKEN
 Lon Lon Ranch GS Rain Shed,                           gs,             NONE,                 LON_LON_RANCH,                  0x61,                       GS_TOKEN
@@ -129,7 +129,7 @@ Hyrule Field Grotto Tektite HP,                       collectible,    NONE,     
 Hyrule Field Grotto Near Kakariko GS,                 gs,             NONE,                 GROTTOS,                        0x59,                       GS_TOKEN
 Hyrule Field Grotto Near Gerudo GS,                   gs,             NONE,                 GROTTOS,                        0x58,                       GS_TOKEN
 Market Dog Lady HP,                                   npc,            NONE,                 BACK_ALLEY_HOUSE,               DOG_LADY,                   HEART_PIECE
-Market Pot House Big Poes,                            npc,            NONE,                 GUARD_HOUSE,                    POE_COLLECTOR,              EMPTY_BOTTLE
+Market Pot House Big Poes,                            npc,            NONE,                 GUARD_HOUSE,                    POE_COLLECTOR,              BOTTLE_EMPTY
 Market Pot House GS,                                  gs,             NONE,                 GUARD_HOUSE,                    0x7b,                       GS_TOKEN
 Bombchu Bowling Reward 1,                             npc,            NONE,                 BOMBCHU_BOWLING_ALLEY,          BOMBCHU_BOWLING_1,          BOMB_BAG
 Bombchu Bowling Reward 2,                             npc,            NONE,                 BOMBCHU_BOWLING_ALLEY,          BOMBCHU_BOWLING_2,          HEART_PIECE

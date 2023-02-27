@@ -75,8 +75,8 @@ static void addHealth(u8 count)
 
     health = (u16)count * 0x10;
     gMmSave.playerData.health += health;
-    if (gMmSave.playerData.health > gMmSave.playerData.healthCapacity)
-        gMmSave.playerData.health = gMmSave.playerData.healthCapacity;
+    if (gMmSave.playerData.health > gMmSave.playerData.healthMax)
+        gMmSave.playerData.health = gMmSave.playerData.healthMax;
 }
 
 static void addSword(int index)
@@ -130,6 +130,9 @@ void comboAddNutsMm(int count)
 {
     u16 max;
 
+    if (gMmSave.inventory.upgrades.dekuNut == 0)
+        gMmSave.inventory.upgrades.dekuNut = 1;
+
     max = kMaxNuts[gMmSave.inventory.upgrades.dekuNut];
     gMmSave.inventory.items[ITS_MM_NUTS] = ITEM_MM_NUT;
     gMmSave.inventory.ammo[ITS_MM_NUTS] += count;
@@ -140,6 +143,9 @@ void comboAddNutsMm(int count)
 void comboAddSticksMm(int count)
 {
     u16 max;
+
+    if (gMmSave.inventory.upgrades.dekuStick == 0)
+        gMmSave.inventory.upgrades.dekuStick = 1;
 
     max = kMaxSticks[gMmSave.inventory.upgrades.dekuStick];
     gMmSave.inventory.items[ITS_MM_STICKS] = ITEM_MM_STICK;
@@ -180,7 +186,7 @@ static void fillBottle(u16 itemId)
     slot = -1;
     for (int i = 0; i < 6; ++i)
     {
-        if (gMmSave.inventory.items[ITS_MM_BOTTLE + i] == ITEM_MM_EMPTY_BOTTLE)
+        if (gMmSave.inventory.items[ITS_MM_BOTTLE + i] == ITEM_MM_BOTTLE_EMPTY)
         {
             slot = i;
             break;
@@ -268,13 +274,13 @@ void comboAddCommonItemMm(int sid, int noEffect)
         gMmSave.inventory.items[ITS_MM_ARROW_LIGHT] = ITEM_MM_ARROW_LIGHT;
         break;
     case SITEM_SONG_EPONA:
-        gMmSave.inventory.questItems.songEpona = 1;
+        gMmSave.inventory.quest.songEpona = 1;
         break;
     case SITEM_SONG_TIME:
-        gMmSave.inventory.questItems.songTime = 1;
+        gMmSave.inventory.quest.songTime = 1;
         break;
     case SITEM_SONG_STORMS:
-        gMmSave.inventory.questItems.songStorms = 1;
+        gMmSave.inventory.quest.songStorms = 1;
         break;
     case SITEM_HOOKSHOT:
         gMmSave.inventory.items[ITS_MM_HOOKSHOT] = ITEM_MM_HOOKSHOT;
@@ -329,6 +335,31 @@ void comboAddCommonItemMm(int sid, int noEffect)
     case SITEM_RUPEE_GOLD:
         if (noEffect)
             addRupees(200);
+        break;
+    case SITEM_HEART_PIECE:
+        gMmSave.inventory.quest.heartPieces += 1;
+        if (gMmSave.inventory.quest.heartPieces == 4)
+        {
+            gMmSave.inventory.quest.heartPieces = 0;
+            gMmSave.playerData.healthMax += 0x10;
+        }
+        if (noEffect)
+            addHealth(20);
+        break;
+    case SITEM_HEART_CONTAINER:
+        gMmSave.playerData.healthMax += 0x10;
+        if (noEffect)
+            addHealth(20);
+        break;
+    case SITEM_RECOVERY_HEART:
+        if (noEffect)
+            addHealth(1);
+        break;
+    case SITEM_DEFENSE_UPGRADE:
+        gMmSave.playerData.doubleDefense = 1;
+        gMmSave.inventory.defenseHearts = 20;
+        if (noEffect)
+            addHealth(20);
         break;
     }
 }
@@ -517,6 +548,25 @@ void comboAddItemSharedMm(s16 gi, int noEffect)
             break;
         }
     }
+
+    if (comboConfig(CFG_SHARED_HEALTH))
+    {
+        switch (gi)
+        {
+        case GI_MM_RECOVERY_HEART:
+            comboAddCommonItemOot(SITEM_RECOVERY_HEART, noEffect);
+            break;
+        case GI_MM_HEART_CONTAINER:
+            comboAddCommonItemOot(SITEM_HEART_CONTAINER, noEffect);
+            break;
+        case GI_MM_HEART_PIECE:
+            comboAddCommonItemOot(SITEM_HEART_PIECE, noEffect);
+            break;
+        case GI_MM_DEFENSE_UPGRADE:
+            comboAddCommonItemOot(SITEM_DEFENSE_UPGRADE, noEffect);
+            break;
+        }
+    }
 }
 
 int comboAddItemMm(s16 gi, int noEffect)
@@ -558,19 +608,19 @@ int comboAddItemMm(s16 gi, int noEffect)
     case GI_MM_GREAT_FAIRY_SWORD:
         gMmSave.inventory.items[ITS_MM_GREAT_FAIRY_SWORD] = ITEM_MM_GREAT_FAIRY_SWORD;
         break;
-    case GI_MM_EMPTY_BOTTLE:
-        addNewBottle(ITEM_MM_EMPTY_BOTTLE);
+    case GI_MM_BOTTLE_EMPTY:
+        addNewBottle(ITEM_MM_BOTTLE_EMPTY);
         break;
-    case GI_MM_BOTTLED_MILK:
-        addNewBottle(ITEM_MM_BOTTLED_MILK);
+    case GI_MM_BOTTLE_MILK:
+        addNewBottle(ITEM_MM_MILK);
         break;
     case GI_MM_BOTTLED_GOLD_DUST:
         addNewBottle(ITEM_MM_BOTTLED_GOLD_DUST);
         break;
-    case GI_MM_BOTTLED_CHATEAU_ROMANI:
-        addNewBottle(ITEM_MM_BOTTLED_CHATEAU_ROMANI);
+    case GI_MM_BOTTLE_CHATEAU:
+        addNewBottle(ITEM_MM_BOTTLE_CHATEAU);
         break;
-    case GI_MM_BOTTLED_POTION_RED:
+    case GI_MM_BOTTLE_POTION_RED:
         addNewBottle(ITEM_MM_POTION_RED);
         break;
     case GI_MM_POTION_RED:
@@ -587,10 +637,10 @@ int comboAddItemMm(s16 gi, int noEffect)
         fillBottle(ITEM_MM_BOTTLED_SEAHORSE);
         break;
     case GI_MM_MILK:
-        fillBottle(ITEM_MM_BOTTLED_MILK);
+        fillBottle(ITEM_MM_MILK);
         break;
-    case GI_MM_CHATEAU_ROMANI:
-        fillBottle(ITEM_MM_BOTTLED_CHATEAU_ROMANI);
+    case GI_MM_CHATEAU:
+        fillBottle(ITEM_MM_BOTTLE_CHATEAU);
         break;
     case GI_MM_BOMB:
         comboAddBombsMm(1);
@@ -799,71 +849,61 @@ int comboAddItemMm(s16 gi, int noEffect)
         count = ++gMmSave.skullCountOcean;
         break;
     case GI_MM_SONG_AWAKENING:
-        gMmSave.inventory.questItems.songAwakening = 1;
+        gMmSave.inventory.quest.songAwakening = 1;
         break;
     case GI_MM_SONG_GORON:
-        gMmSave.inventory.questItems.songLullaby = 1;
+        gMmSave.inventory.quest.songLullaby = 1;
         break;
     case GI_MM_SONG_ZORA:
-        gMmSave.inventory.questItems.songNewWave = 1;
+        gMmSave.inventory.quest.songNewWave = 1;
         break;
     case GI_MM_SONG_EMPTINESS:
-        gMmSave.inventory.questItems.songEmpty = 1;
+        gMmSave.inventory.quest.songEmpty = 1;
         break;
     case GI_MM_SONG_ORDER:
-        gMmSave.inventory.questItems.songOrder = 1;
+        gMmSave.inventory.quest.songOrder = 1;
         break;
     case GI_MM_SONG_TIME:
         comboAddCommonItemMm(SITEM_SONG_TIME, noEffect);
         break;
     case GI_MM_SONG_HEALING:
-        gMmSave.inventory.questItems.songHealing = 1;
+        gMmSave.inventory.quest.songHealing = 1;
         break;
     case GI_MM_SONG_EPONA:
         comboAddCommonItemMm(SITEM_SONG_EPONA, noEffect);
         break;
     case GI_MM_SONG_SOARING:
-        gMmSave.inventory.questItems.songSoaring = 1;
+        gMmSave.inventory.quest.songSoaring = 1;
         break;
     case GI_MM_SONG_STORMS:
         comboAddCommonItemMm(SITEM_SONG_STORMS, noEffect);
         break;
     case GI_MM_SONG_GORON_HALF:
-        gMmSave.inventory.questItems.songLullabyIntro = 1;
+        gMmSave.inventory.quest.songLullabyIntro = 1;
         break;
     case GI_MM_BOMBER_NOTEBOOK:
-        gMmSave.inventory.questItems.notebook = 1;
+        gMmSave.inventory.quest.notebook = 1;
         break;
     case GI_MM_REMAINS_ODOLWA:
-        gMmSave.inventory.questItems.remainsOdolwa = 1;
+        gMmSave.inventory.quest.remainsOdolwa = 1;
         break;
     case GI_MM_REMAINS_GOHT:
-        gMmSave.inventory.questItems.remainsGoht = 1;
+        gMmSave.inventory.quest.remainsGoht = 1;
         break;
     case GI_MM_REMAINS_GYORG:
-        gMmSave.inventory.questItems.remainsGyorg = 1;
+        gMmSave.inventory.quest.remainsGyorg = 1;
         break;
     case GI_MM_REMAINS_TWINMOLD:
-        gMmSave.inventory.questItems.remainsTwinmold = 1;
+        gMmSave.inventory.quest.remainsTwinmold = 1;
         break;
     case GI_MM_HEART_PIECE:
-        gMmSave.inventory.questItems.heartPieces += 1;
-        if (gMmSave.inventory.questItems.heartPieces == 4)
-        {
-            gMmSave.inventory.questItems.heartPieces = 0;
-            gMmSave.playerData.healthCapacity += 0x10;
-        }
-        if (noEffect)
-            addHealth(20);
+        comboAddCommonItemMm(SITEM_HEART_PIECE, noEffect);
         break;
     case GI_MM_HEART_CONTAINER:
-        gMmSave.playerData.healthCapacity += 0x10;
-        if (noEffect)
-            addHealth(20);
+        comboAddCommonItemMm(SITEM_HEART_CONTAINER, noEffect);
         break;
     case GI_MM_RECOVERY_HEART:
-        if (noEffect)
-            addHealth(1);
+        comboAddCommonItemMm(SITEM_RECOVERY_HEART, noEffect);
         break;
     case GI_MM_RUPEE_GREEN:
         comboAddCommonItemMm(SITEM_RUPEE_GREEN, noEffect);
@@ -923,10 +963,7 @@ int comboAddItemMm(s16 gi, int noEffect)
         count = comboAddStrayFairyMm(4);
         break;
     case GI_MM_DEFENSE_UPGRADE:
-        gMmSave.playerData.doubleDefense = 1;
-        gMmSave.inventory.defenseHearts = 20;
-        if (noEffect)
-            addHealth(20);
+        comboAddCommonItemMm(SITEM_DEFENSE_UPGRADE, noEffect);
         break;
     case GI_MM_SPIN_UPGRADE:
         MM_SET_EVENT_WEEK(EV_MM_WEEK_SPIN_UPGRADE);

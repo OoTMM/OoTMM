@@ -50,6 +50,23 @@ void comboAddItemSharedForeignEffect(GameState_Play* play, s16 gi)
             break;
         }
     }
+
+    if (comboConfig(CFG_SHARED_HEALTH))
+    {
+        switch (gi)
+        {
+        case GI_OOT_RECOVERY_HEART:
+            addHealth(1);
+            break;
+        case GI_OOT_HEART_PIECE:
+        case GI_OOT_TC_HEART_PIECE:
+        case GI_OOT_HEART_CONTAINER:
+        case GI_OOT_HEART_CONTAINER2:
+        case GI_OOT_DEFENSE_UPGRADE:
+            addHealth(20);
+            break;
+        }
+    }
 }
 
 int comboAddItemEffect(GameState_Play* play, s16 gi)
@@ -125,7 +142,7 @@ int comboAddItemEffect(GameState_Play* play, s16 gi)
     case GI_MM_SEAHORSE:
     case GI_MM_SEAHORSE2:
     case GI_MM_MILK:
-    case GI_MM_CHATEAU_ROMANI:
+    case GI_MM_CHATEAU:
         reloadIconsC(play);
         break;
     }

@@ -1,4 +1,4 @@
-"has_bottle": "has(EMPTY_BOTTLE) || has(BOTTLED_POTION_RED) || has(BOTTLED_MILK) || event(GOLD_DUST_USED) || has(BOTTLED_CHATEAU_ROMANI)"
+"has_bottle": "has(BOTTLE_EMPTY) || has(BOTTLE_POTION_RED) || has(BOTTLE_MILK) || event(GOLD_DUST_USED) || has(BOTTLE_CHATEAU)"
 "can_rescue_koume": "has_bottle"
 "has_ocarina": "cond(setting(sharedOcarina), has(OCARINA, 2), has(OCARINA))"
 "can_play(song)": "has_ocarina && has(song)"

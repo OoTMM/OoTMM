@@ -20,7 +20,7 @@ int EnNiwLady_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, floa
         Message_Close(play);
     switch (gi)
     {
-    case GI_OOT_EMPTY_BOTTLE:
+    case GI_OOT_BOTTLE_EMPTY:
         gi = comboOverride(OV_NPC, 0, NPC_OOT_ANJU_BOTTLE, gi);
         break;
     case GI_OOT_POCKET_EGG:

@@ -19,3 +19,4 @@ SHARED_LENS:                    0x11
 SHARED_OCARINA:                 0x12
 SHARED_MASKS:                   0x13
 SHARED_WALLETS:                 0x14
+SHARED_HEALTH:                  0x15

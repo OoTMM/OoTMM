@@ -2,8 +2,8 @@
 
 int comboCanAccessMoon(void)
 {
-    return (gSave.inventory.questItems.remainsOdolwa
-        && gSave.inventory.questItems.remainsGoht
-        && gSave.inventory.questItems.remainsGyorg
-        && gSave.inventory.questItems.remainsTwinmold);
+    return (gSave.inventory.quest.remainsOdolwa
+        && gSave.inventory.quest.remainsGoht
+        && gSave.inventory.quest.remainsGyorg
+        && gSave.inventory.quest.remainsTwinmold);
 }

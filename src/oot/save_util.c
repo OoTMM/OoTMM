@@ -85,7 +85,7 @@ void comboCreateSaveMM(void)
     gMmSave.playerForm = 4;
     gMmSave.time = 0x3fff;
     gMmSave.playerData.health = 0x30;
-    gMmSave.playerData.healthCapacity = 0x30;
+    gMmSave.playerData.healthMax = 0x30;
     gMmSave.playerData.unk_20 = 0xff00;
     gMmSave.playerData.unk_24 = 0xff00;
     gMmSave.playerData.savedSceneNum = 8;

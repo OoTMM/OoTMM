@@ -99,6 +99,10 @@ export class LogicPassConfig {
       config.add('SHARED_WALLETS');
     }
 
+    if (this.state.settings.sharedHealth) {
+      config.add('SHARED_HEALTH');
+    }
+
     return { config };
   }
 }

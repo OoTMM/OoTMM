@@ -24,7 +24,7 @@ Clock Tower Roof Skull Kid Song of Time,          npc,            NONE,         
 Mayor's Office Kafei's Mask,                      npc,            NONE,                   MAYOR_HOUSE,                MASK_KAFEI,             MASK_KAFEI
 Mayor's Office HP,                                npc,            NONE,                   MAYOR_HOUSE,                MAYOR_HEART_PIECE,      HEART_PIECE
 Milk Bar Troupe Leader Mask,                      npc,            SOUND_CHECK,            MILK_BAR,                   MASK_TROUPE_LEADER,     MASK_TROUPE_LEADER
-Milk Bar Madame Aroma Bottle,                     npc,            NONE,                   MILK_BAR,                   CHATEAU_ROMANI,         BOTTLED_CHATEAU_ROMANI
+Milk Bar Madame Aroma Bottle,                     npc,            NONE,                   MILK_BAR,                   CHATEAU_ROMANI,         BOTTLE_CHATEAU
 Town Archery Reward 1,                            npc,            NONE,                   SHOOTING_GALLERY,           SHOOTING_GAME_TOWN_1,   BOW
 Town Archery Reward 2,                            npc,            NONE,                   SHOOTING_GALLERY,           SHOOTING_GAME_TOWN_2,   HEART_PIECE
 Chest Game HP,                                    npc,            NONE,                   TREASURE_SHOP,              CHEST_GAME,             HEART_PIECE
@@ -70,7 +70,7 @@ Southern Swamp Grotto,                            chest,          NONE,         
 Woods of Mystery Grotto,                          chest,          NONE,                   GROTTOS,                    0x1c,                   RUPEE_PURPLE
 Swamp Archery Reward 1,                           npc,            NONE,                   SHOOTING_GALLERY_SWAMP,     SHOOTING_GAME_SWAMP_1,  BOW
 Swamp Archery Reward 2,                           npc,            NONE,                   SHOOTING_GALLERY_SWAMP,     SHOOTING_GAME_SWAMP_2,  HEART_PIECE
-Swamp Potion Shop Kotake,                         npc,            NONE,                   POTION_SHOP,                KOTAKE_RED_POTION,      BOTTLED_POTION_RED
+Swamp Potion Shop Kotake,                         npc,            NONE,                   POTION_SHOP,                KOTAKE_RED_POTION,      BOTTLE_POTION_RED
 Tourist Information Pictobox,                     npc,            NONE,                   TOURIST_INFORMATION,        KOUME_PICTOGRAPH_BOX,   PICTOGRAPH_BOX
 Tourist Information Boat Cruise,                  npc,            BOAT_ARCHERY,           TOURIST_INFORMATION,        KOUME_HEART_PIECE,      HEART_PIECE
 Tourist Information Tingle Picture,               npc,            NONE,                   TOURIST_INFORMATION,        TOUR_GUIDE_HEART_PIECE, HEART_PIECE
@@ -138,7 +138,7 @@ Path to Snowhead Grotto,                          chest,          NONE,         
 Snowhead Great Fairy,                             npc,            NONE,                   FAIRY_FOUNTAIN,             GREAT_FAIRY_MOUNTAIN,   MAGIC_UPGRADE
 Goron Race Reward,                                npc,            GORON_RACE,             GORON_RACETRACK,            GORON_RACE,             BOTTLED_GOLD_DUST
 Romani Ranch Epona Song,                          npc,            NONE,                   ROMANI_RANCH,               SONG_EPONA,             SONG_EPONA
-Romani Ranch Aliens,                              npc,            RANCH_DEFENSE,          ROMANI_RANCH,               ROMANI_BOTTLE,          BOTTLED_MILK
+Romani Ranch Aliens,                              npc,            RANCH_DEFENSE,          ROMANI_RANCH,               ROMANI_BOTTLE,          BOTTLE_MILK
 Romani Ranch Cremia Escort,                       npc,            RANCH_DEFENSE,          ROMANI_RANCH,               CREMIA_ESCORT,          MASK_ROMANI
 Cucco Shack Bunny Mask,                           npc,            NONE,                   CUCCO_SHACK,                MASK_BUNNY,             MASK_BUNNY
 Doggy Racetrack Chest,                            chest,          NONE,                   DOG_RACETRACK,              0x00,                   RUPEE_PURPLE
@@ -194,7 +194,7 @@ Ocean Skulltula Colored Skulls Chandelier 2,      chest,          NONE,         
 Ocean Skulltula Colored Skulls Chandelier 3,      chest,          NONE,                   SPIDER_HOUSE_OCEAN,         0x12,                   GS_TOKEN_OCEAN
 Ocean Skulltula Colored Skulls Behind Picture,    chest,          NONE,                   SPIDER_HOUSE_OCEAN,         0x13,                   GS_TOKEN_OCEAN
 Ocean Skulltula Colored Skulls Pot,               chest,          NONE,                   SPIDER_HOUSE_OCEAN,         0x19,                   GS_TOKEN_OCEAN
-Waterfall Rapids Beaver Race 1,                   npc,            NONE,                   WATERFALL_RAPIDS,           BEAVER_1,               EMPTY_BOTTLE
+Waterfall Rapids Beaver Race 1,                   npc,            NONE,                   WATERFALL_RAPIDS,           BEAVER_1,               BOTTLE_EMPTY
 Waterfall Rapids Beaver Race 2,                   npc,            NONE,                   WATERFALL_RAPIDS,           BEAVER_2,               HEART_PIECE
 Road to Ikana Chest,                              chest,          NONE,                   ROAD_IKANA,                 0x00,                   RUPEE_RED
 Road to Ikana Grotto,                             chest,          NONE,                   GROTTOS,                    0x16,                   BOMBCHU
@@ -205,7 +205,7 @@ Ikana Graveyard Grotto,                           chest,          NONE,         
 Beneath The Graveyard Chest,                      chest,          NONE,                   BENEATH_THE_GRAVEYARD,      0x03,                   RUPEE_PURPLE
 Beneath The Graveyard Song of Storms,             npc,            NONE,                   BENEATH_THE_GRAVEYARD,      SONG_STORMS,            SONG_STORMS
 Beneath The Graveyard HP,                         chest,          NONE,                   BENEATH_THE_GRAVEYARD,      0x00,                   HEART_PIECE
-Beneath The Graveyard Dampe Chest,                chest,          GRAVEYARD_NIGHT3,       DAMPE_HOUSE,                0x00,                   EMPTY_BOTTLE
+Beneath The Graveyard Dampe Chest,                chest,          GRAVEYARD_NIGHT3,       DAMPE_HOUSE,                0x00,                   BOTTLE_EMPTY
 Ikana Valley Scrub Rupee,                         npc,            NONE,                   IKANA_CANYON,               SCRUB_VALLEY,           RUPEE_GOLD
 Ikana Valley Scrub HP,                            collectible,    NONE,                   IKANA_CANYON,               0x1e,                   HEART_PIECE
 Ikana Valley Grotto,                              chest,          NONE,                   GROTTOS,                    0x14,                   BOMBCHU_5

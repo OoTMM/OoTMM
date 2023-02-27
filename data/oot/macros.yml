@@ -6,7 +6,7 @@
 "can_use_slingshot": "is_child && has(SLINGSHOT)"
 "can_use_bow": "is_adult && has(BOW)"
 "can_hit_triggers_distance": "can_use_slingshot || can_use_bow"
-"has_bottle": "has(EMPTY_BOTTLE) || has(MILK_BOTTLE) ||  event(KING_ZORA_LETTER)"
+"has_bottle": "has(BOTTLE_EMPTY) || has(BOTTLE_MILK) ||  event(KING_ZORA_LETTER)"
 "has_spiritual_stones": "has(STONE_EMERALD) && has(STONE_RUBY) && has(STONE_SAPPHIRE)"
 "can_hookshot": "is_adult && has(HOOKSHOT)"
 "can_longshot": "is_adult && has(HOOKSHOT, 2)"
