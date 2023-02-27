@@ -60,7 +60,7 @@ extern const Shader kShaders[256];
 #define DRAWGI_OOT_HOOKSHOT                 0x27
 #define DRAWGI_OOT_LONGSHOT                 0x28
 #define DRAWGI_OCARINA_TIME                 0x29
-#define DRAWGI_MILK                         0x2a
+#define DRAWGI_BOTTLE_MILK                  0x2a
 #define DRAWGI_MASK_KEATON                  0x2b
 #define DRAWGI_OOT_MASK_SPOOKY              0x2c
 #define DRAWGI_OOT_SLINGSHOT                0x2d
@@ -189,7 +189,7 @@ extern const Shader kShaders[256];
 #define DRAWGI_MM_MASK_ROMANI               0xa8
 #define DRAWGI_MM_MASK_POSTMAN              0xa9
 #define DRAWGI_MM_MASK_GIANT                0xaa
-#define DRAWGI_MM_CHATEAU_ROMANI            0xab
+#define DRAWGI_MM_BOTTLE_CHATEAU            0xab
 #define DRAWGI_MM_PICTOBOX                  0xac
 #define DRAWGI_MM_MASK_FIERCE_DEITY         0xad
 #define DRAWGI_MM_REMAINS_ODOLWA            0xae
@@ -222,5 +222,7 @@ extern const Shader kShaders[256];
 #define DRAWGI_MM_STRAY_FAIRY_GB            0xc9
 #define DRAWGI_MM_STRAY_FAIRY_ST            0xca
 #define DRAWGI_MM_STRAY_FAIRY_TOWN          0xcb
+#define DRAWGI_MILK                         0xcc
+#define DRAWGI_MM_CHATEAU                   0xcd
 
 #endif

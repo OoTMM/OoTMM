@@ -282,7 +282,7 @@ MM_MASK_BREMEN:               0x8c
 MM_MASK_BLAST:                0x8d
 MM_MASK_SCENTS:               0x8e
 MM_MASK_KAFEI:                0x8f
-MM_CHATEAU_ROMANI:            0x91
+MM_CHATEAU:                   0x91
 MM_MILK:                      0x92
 MM_GOLD_DUST:                 0x93
 MM_SEAHORSE2:                 0x95

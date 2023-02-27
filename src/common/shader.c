@@ -552,41 +552,55 @@ void Shader_CustomPotion(GameState_Play* play, s16 index)
         0x326400ff,
         0xdc3232ff,
         0x321edcff,
+        0xffffffff,
+        0x880088ff,
     };
 
     static const u32 kEnvColors1[] = {
         0x142800ff,
         0x320000ff,
         0x140a3cff,
+        0xddddddff,
+        0x440044ff,
     };
 
     static const u32 kPrimColors2[] = {
         0xffffaaff,
         0xffaaffff,
         0xaaffffff,
+        0xaaaaaaff,
+        0xaaaaaaff,
     };
 
     static const u32 kEnvColors2[] = {
         0x006400ff,
         0x96001eff,
         0x003296ff,
+        0xffffffff,
+        0xffffffff,
     };
 
     static const u32 kPrimColors3[] = {
         0x64c828ff,
         0xff8278ff,
         0x008278ff,
+        0x0000ffff,
+        0xffffffff,
     };
 
     static const u32 kEnvColors3[] = {
         0x3c7814ff,
         0xff4650ff,
         0x0046beff,
+        0x0000ffff,
+        0xffffffff,
     };
 
     static const u16 kTextureOffsets[] = {
         0x000,
         0x200,
+        0x400,
+        0x000,
         0x400,
     };
 

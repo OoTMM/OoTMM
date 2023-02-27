@@ -142,7 +142,7 @@ int comboAddItemEffect(GameState_Play* play, s16 gi)
     case GI_MM_SEAHORSE:
     case GI_MM_SEAHORSE2:
     case GI_MM_MILK:
-    case GI_MM_CHATEAU_ROMANI:
+    case GI_MM_CHATEAU:
         reloadIconsC(play);
         break;
     }

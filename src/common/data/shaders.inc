@@ -201,3 +201,5 @@
 /* MM        Custom: Stray Fairies Great Bay   */ { Shader_CustomStrayFairy,       { 3 }},
 /* MM        Custom: Stray Fairies Stone Tower */ { Shader_CustomStrayFairy,       { 4 }},
 /* MM        Custom: Stray Fairies Town        */ { Shader_CustomStrayFairy,       { 5 }},
+/* Common    Potion (Milk)                     */ { Shader_CustomPotion,           { 3 }},
+/* MM        Potion (Chateau)                  */ { Shader_CustomPotion,           { 4 }},
