@@ -546,6 +546,89 @@ void Shader_CustomGS(GameState_Play* play, s16 index)
     Shader_GS(play, index);
 }
 
+void Shader_CustomPotion(GameState_Play* play, s16 index)
+{
+    static const u32 kPrimColors1[] = {
+        0x326400ff,
+        0xdc3232ff,
+        0x321edcff,
+    };
+
+    static const u32 kEnvColors1[] = {
+        0x142800ff,
+        0x320000ff,
+        0x140a3cff,
+    };
+
+    static const u32 kPrimColors2[] = {
+        0xffffaaff,
+        0xffaaffff,
+        0xaaffffff,
+    };
+
+    static const u32 kEnvColors2[] = {
+        0x006400ff,
+        0x96001eff,
+        0x003296ff,
+    };
+
+    static const u32 kPrimColors3[] = {
+        0x64c828ff,
+        0xff8278ff,
+        0x008278ff,
+    };
+
+    static const u32 kEnvColors3[] = {
+        0x3c7814ff,
+        0xff4650ff,
+        0x0046beff,
+    };
+
+    static const u16 kTextureOffsets[] = {
+        0x000,
+        0x200,
+        0x400,
+    };
+
+    const Shader* shader;
+    int colorIndex;
+    s32 fc;
+    u8 r;
+    u8 g;
+    u8 b;
+    u8 a;
+
+    shader = &kShaders[index];
+    colorIndex = shader->lists[0];
+    fc = play->gs.frameCount;
+    OPEN_DISPS(play->gs.gfx);
+    /* Opa */
+    InitListPolyOpa(play->gs.gfx);
+    gSPSegment(POLY_OPA_DISP++, 0x08, GetSegment(play->gs.gfx, 0, -fc, fc, 0x20, 0x20, 1, -fc, fc, 0x20, 0x20));
+    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    color4(&r, &g, &b, &a, kPrimColors1[colorIndex]);
+    gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, r, g, b, a);
+    color4(&r, &g, &b, &a, kEnvColors1[colorIndex]);
+    gDPSetEnvColor(POLY_OPA_DISP++, r, g, b, a);
+    gSPDisplayList(POLY_OPA_DISP++, 0x06001438);
+    color4(&r, &g, &b, &a, kPrimColors2[colorIndex]);
+    gDPSetPrimColor(POLY_OPA_DISP++, 0, 0x80, r, g, b, a);
+    color4(&r, &g, &b, &a, kEnvColors2[colorIndex]);
+    gDPSetEnvColor(POLY_OPA_DISP++, r, g, b, a);
+    gSPDisplayList(POLY_OPA_DISP++, 0x06001790);
+
+    /* Xlu */
+    InitListPolyXlu(play->gs.gfx);
+    gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    color4(&r, &g, &b, &a, kPrimColors3[colorIndex]);
+    gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, r, g, b, a);
+    color4(&r, &g, &b, &a, kEnvColors3[colorIndex]);
+    gDPSetEnvColor(POLY_XLU_DISP++, r, g, b, a);
+    gDPLoadTextureBlock(POLY_XLU_DISP++, 0x06000000 | kTextureOffsets[colorIndex], G_IM_FMT_IA, G_IM_SIZ_8b, 16, 32, 0, G_TX_MIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_CLAMP, 4, 5, G_TX_NOLOD, G_TX_NOLOD);
+    gSPDisplayList(POLY_XLU_DISP++, 0x06001848);
+    CLOSE_DISPS();
+}
+
 const Shader kShaders[] = {
 #include "data/shaders.inc"
 };
