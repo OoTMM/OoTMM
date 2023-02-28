@@ -39,14 +39,6 @@ void comboTriggerWarp(GameState_Play* play, int bossId)
         BITMAP16_SET(gOotSave.eventsChk, EV_OOT_CHK_TREE_DEAD);
         BITMAP16_SET(gOotSave.eventsChk, EV_OOT_CHK_MIDO_TREE_DEAD);
         break;
-    case DUNGEONID_DODONGOS_CAVERN:
-        break;
-    case DUNGEONID_JABU_JABU:
-        break;
-    case DUNGEONID_TEMPLE_FOREST:
-        break;
-    case DUNGEONID_TEMPLE_FIRE:
-        break;
     case DUNGEONID_TEMPLE_WATER:
         BITMAP16_SET(gOotSave.eventsChk, EV_OOT_CHK_LAKE_HYLIA_WATER);
         break;
@@ -68,9 +60,6 @@ void comboTriggerWarp(GameState_Play* play, int bossId)
     case DUNGEONID_TEMPLE_STONE_TOWER_INVERTED:
         gMmExtraBoss.boss |= (1 << 3);
         MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_ST);
-        break;
-    default:
-        UNREACHABLE();
         break;
     }
 
