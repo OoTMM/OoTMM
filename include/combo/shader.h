@@ -19,7 +19,7 @@ extern const Shader kShaders[256];
 
 #define DRAWGI_NONE 0
 
-#define DRAWGI_EMPTY_BOTTLE                 0x01
+#define DRAWGI_BOTTLE_EMPTY                 0x01
 #define DRAWGI_SMALL_KEY                    0x02
 #define DRAWGI_RECOVERY_HEART               0x03
 #define DRAWGI_BOSS_KEY                     0x04
@@ -60,7 +60,7 @@ extern const Shader kShaders[256];
 #define DRAWGI_OOT_HOOKSHOT                 0x27
 #define DRAWGI_OOT_LONGSHOT                 0x28
 #define DRAWGI_OCARINA_TIME                 0x29
-#define DRAWGI_MILK                         0x2a
+#define DRAWGI_BOTTLE_MILK                  0x2a
 #define DRAWGI_MASK_KEATON                  0x2b
 #define DRAWGI_OOT_MASK_SPOOKY              0x2c
 #define DRAWGI_OOT_SLINGSHOT                0x2d
@@ -146,7 +146,7 @@ extern const Shader kShaders[256];
 #define DRAWGI_MM_LETTER_TO_MAMA            0x7d
 #define DRAWGI_MM_MASK_SUN                  0x7e
 #define DRAWGI_MM_MASK_BLAST                0x7f
-#define DRAWGI_MM_BOTTLED_FAIRY             0x80
+#define DRAWGI_MM_BOTTLE_FAIRY              0x80
 #define DRAWGI_MM_MASK_SCENTS               0x81
 #define DRAWGI_MM_MASK_CAPTAIN              0x82
 #define DRAWGI_MM_DEED_SWAMP                0x83
@@ -161,7 +161,7 @@ extern const Shader kShaders[256];
 #define DRAWGI_MM_RUPEE_PURPLE              0x8c
 #define DRAWGI_MM_RUPEE_SILVER              0x8d
 #define DRAWGI_MM_SWORD_KOKIRI              0x8e
-#define DRAWGI_MM_BOTTLED_RED_POTION        0x8f
+#define DRAWGI_MM_BOTTLE_POTION_RED         0x8f
 #define DRAWGI_MM_ZORA_EGG                  0x90
 #define DRAWGI_MM_MOON_TEAR                 0x91
 #define DRAWGI_MM_DEED_LAND                 0x92
@@ -189,7 +189,7 @@ extern const Shader kShaders[256];
 #define DRAWGI_MM_MASK_ROMANI               0xa8
 #define DRAWGI_MM_MASK_POSTMAN              0xa9
 #define DRAWGI_MM_MASK_GIANT                0xaa
-#define DRAWGI_MM_CHATEAU_ROMANI            0xab
+#define DRAWGI_MM_BOTTLE_CHATEAU            0xab
 #define DRAWGI_MM_PICTOBOX                  0xac
 #define DRAWGI_MM_MASK_FIERCE_DEITY         0xad
 #define DRAWGI_MM_REMAINS_ODOLWA            0xae
@@ -222,5 +222,7 @@ extern const Shader kShaders[256];
 #define DRAWGI_MM_STRAY_FAIRY_GB            0xc9
 #define DRAWGI_MM_STRAY_FAIRY_ST            0xca
 #define DRAWGI_MM_STRAY_FAIRY_TOWN          0xcb
+#define DRAWGI_MILK                         0xcc
+#define DRAWGI_MM_CHATEAU                   0xcd
 
 #endif

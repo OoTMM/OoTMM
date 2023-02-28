@@ -4,7 +4,7 @@ int EnAz_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
 {
     switch (gi)
     {
-    case GI_MM_EMPTY_BOTTLE:
+    case GI_MM_BOTTLE_EMPTY:
         gi = comboOverride(OV_NPC, 0, NPC_MM_BEAVER_1, gi);
         break;
     case GI_MM_HEART_PIECE:

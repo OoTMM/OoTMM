@@ -350,14 +350,14 @@ static void printNumColored(GameState_Play* play, int num, int max, int digits, 
 
 static void dungeonDataOot(DungeonData* out, const DungeonDef* def)
 {
-    out->keys = gOotSave.dungeonItems[def->id].maxKeys;
+    out->keys = gOotSave.inventory.dungeonItems[def->id].maxKeys;
     out->fairies = 0;
-    out->map = gOotSave.dungeonItems[def->id].map;
-    out->compass = gOotSave.dungeonItems[def->id].compass;
+    out->map = gOotSave.inventory.dungeonItems[def->id].map;
+    out->compass = gOotSave.inventory.dungeonItems[def->id].compass;
     if (def->id == SCE_OOT_INSIDE_GANON_CASTLE)
-        out->bossKey = gOotSave.dungeonItems[SCE_OOT_GANON_TOWER].bossKey;
+        out->bossKey = gOotSave.inventory.dungeonItems[SCE_OOT_GANON_TOWER].bossKey;
     else
-        out->bossKey = gOotSave.dungeonItems[def->id].bossKey;
+        out->bossKey = gOotSave.inventory.dungeonItems[def->id].bossKey;
 }
 
 static void dungeonDataMm(DungeonData* out, const DungeonDef* def)
@@ -401,7 +401,7 @@ static void printDungeonData(GameState_Play* play, int base, int index)
             /* OoT skulls */
             gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 255, 255, 0, 255);
             drawTexRGBA32(play, 0x06000000 | CUSTOM_KEEP_SMALL_ICON_SKULL, 12, 12, x + 104.f, y);
-            printNumColored(play, gOotSave.goldTokens, 100, 3, x + 116.f, y);
+            printNumColored(play, gOotSave.inventory.goldTokens, 100, 3, x + 116.f, y);
 
             /* MM skulls - swamp */
             gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 0, 255, 0, 255);

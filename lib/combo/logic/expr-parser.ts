@@ -162,7 +162,9 @@ export class ExprParser {
     }
     this.accept('identifier');
     this.expect('(');
-    const item = gameId(this.game, this.expect('identifier'), '_');
+    const itemName = this.expect('identifier');
+    const item = gameId(this.game, itemName, '_');
+    const itemShared = gameId('shared', itemName, '_');
     let count = 1;
     if (this.accept(',')) {
       const n = this.parseNumeric();
@@ -172,7 +174,7 @@ export class ExprParser {
       count = n;
     }
     this.expect(')');
-    return exprHas(item, count);
+    return exprHas(item, itemShared, count);
   }
 
   private parseExprEvent(): Expr | undefined {

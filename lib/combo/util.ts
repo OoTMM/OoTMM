@@ -29,7 +29,7 @@ export const align = (n: number, alignment: number) => {
   return n + missing;
 }
 
-export const gameId = (game: Game, id: string, char: string) => {
+export const gameId = (game: Game | 'shared', id: string, char: string) => {
   if (!char) {
     char = '_';
   }

@@ -6,7 +6,7 @@ int comboShopPrecond(GameState_Play* play, Actor_EnGirlA* girlA)
     if (comboIsItemUnavailable(girlA->gi))
         return SC_ERR_CANNOTBUY;
 
-    if (gSave.rupees < girlA->price)
+    if (gSave.playerData.rupees < girlA->price)
         return SC_ERR_NORUPEES;
 
     if (comboIsItemMinor(girlA->gi))

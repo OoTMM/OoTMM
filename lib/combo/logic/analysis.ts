@@ -191,9 +191,18 @@ const SIMPLE_DEPENDENCIES: {[k: string]: string[]} = {
   ],
   MM_MASK_GREAT_FAIRY: [
     'MM Moon Fierce Deity Mask',
-    'MM Woodfall Great Fairy',
-    'MM Snowhead Great Fairy',
-    'MM Great Bay Great Fairy',
+    'MM Woodfall Temple SF Water Room Beehive',
+    'MM Woodfall Temple SF Maze Bubble',
+    'MM Woodfall Temple SF Pre-Boss Left',
+    'MM Woodfall Temple SF Pre-Boss Pillar',
+    'MM Snowhead Temple SF Bridge Pillar',
+    'MM Snowhead Temple SF Bridge Under Platform',
+    'MM Snowhead Temple SF Compass Room Crate',
+    'MM Snowhead Temple SF Dual Switches',
+    'MM Snowhead Temple SF Snow Room',
+    'MM Great Bay Temple SF Water Wheel Platform',
+    'MM Great Bay Temple SF Central Room Underwater Pot',
+    //'MM Great Bay Temple SF Pre-Boss Above Water', #Uncomment this if a trick to reverse the water flow in Great Bay Temple without Ice Arrows is added.
   ],
   MM_MASK_DON_GERO: [
     'MM Moon Fierce Deity Mask',
@@ -316,6 +325,21 @@ export class LogicPassAnalysis {
     if (!this.state.settings.tricks['OOT_NIGHT_GS']) {
       delete this.dependencies['OOT_SONG_SUN'];
     }
+
+    if (this.state.settings.erBoss) {
+      delete this.dependencies['OOT_BOSS_KEY_FOREST'];
+      delete this.dependencies['OOT_BOSS_KEY_SPIRIT'];
+    }
+
+    if (this.state.settings.erBoss || this.state.settings.erDungeons) {
+      delete this.dependencies['OOT_SMALL_KEY_FOREST'];
+      delete this.dependencies['OOT_SMALL_KEY_SPIRIT'];
+    }
+
+    /* Shared items */
+    this.dependencies['SHARED_MASK_TRUTH'] = [...this.dependencies['MM_MASK_TRUTH'], ...this.dependencies['OOT_MASK_TRUTH']];
+    this.dependencies['SHARED_MASK_KEATON'] = [...this.dependencies['MM_MASK_KEATON']];
+    this.dependencies['SHARED_MASK_BUNNY'] = [...this.dependencies['MM_MASK_BUNNY']];
   }
 
   private makeSpheresRaw(restrictedLocations?: Set<string>) {
@@ -390,6 +414,9 @@ export class LogicPassAnalysis {
     case 'MM_BOW':
     case 'MM_BOMB_BAG':
     case 'MM_MAGIC_UPGRADE':
+    case 'SHARED_BOW':
+    case 'SHARED_BOMB_BAG':
+    case 'SHARED_MAGIC_UPGRADE':
       maximumRequired = 1;
       break;
     }
@@ -442,7 +469,7 @@ export class LogicPassAnalysis {
     }
 
     for (const loc in this.state.world.checks) {
-      if (this.requiredLocs.has(loc)) {
+      if (this.requiredLocs.has(loc) || this.uselessLocs.has(loc)) {
         continue;
       }
       if (!isItemImportant(this.state.items[loc]) || this.isLocUselessHeuristicCount(loc) || this.isLocUselessHeuristicDependencies(loc)) {

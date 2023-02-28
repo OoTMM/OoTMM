@@ -25,9 +25,9 @@ static void addRupees(u16 count)
     gSaveContext.rupeesDelta += count;
 }
 
-static void addMagicUpgrade(int level)
+static void refillMagic(int level)
 {
-    gOotSave.magicSize = 0;
+    gOotSave.playerData.magicSize = 0;
     gSaveContext.magicTarget = 0x30 * level;
 }
 
@@ -35,6 +35,49 @@ static void reloadIconsC(GameState_Play* play)
 {
     for (int i = 1; i < 4; i++)
         Interface_LoadItemIconImpl(play, i);
+}
+
+void comboAddItemSharedForeignEffect(GameState_Play* play, s16 gi)
+{
+    if (comboConfig(CFG_SHARED_WALLETS))
+    {
+        switch (gi)
+        {
+        case GI_MM_RUPEE_GREEN:
+            addRupees(1);
+            break;
+        case GI_MM_RUPEE_BLUE:
+            addRupees(5);
+            break;
+        case GI_MM_RUPEE_RED:
+            addRupees(20);
+            break;
+        case GI_MM_RUPEE_PURPLE:
+            addRupees(50);
+            break;
+        case GI_MM_RUPEE_SILVER:
+            addRupees(100);
+            break;
+        case GI_MM_RUPEE_GOLD:
+            addRupees(200);
+            break;
+        }
+    }
+
+    if (comboConfig(CFG_SHARED_HEALTH))
+    {
+        switch (gi)
+        {
+        case GI_MM_RECOVERY_HEART:
+            addHealth(1);
+            break;
+        case GI_MM_HEART_CONTAINER:
+        case GI_MM_HEART_PIECE:
+        case GI_MM_DEFENSE_UPGRADE:
+            addHealth(20);
+            break;
+        }
+    }
 }
 
 int comboAddItemEffect(GameState_Play* play, s16 gi)
@@ -65,10 +108,10 @@ int comboAddItemEffect(GameState_Play* play, s16 gi)
         addRupees(200);
         break;
     case GI_OOT_MAGIC_UPGRADE:
-        addMagicUpgrade(1);
+        refillMagic(1);
         break;
     case GI_OOT_MAGIC_UPGRADE2:
-        addMagicUpgrade(2);
+        refillMagic(2);
         break;
     case GI_OOT_RECOVERY_HEART:
         addHealth(1);
@@ -104,11 +147,11 @@ int comboAddItemEffect(GameState_Play* play, s16 gi)
     case GI_OOT_POTION_RED:
     case GI_OOT_POTION_BLUE:
     case GI_OOT_POTION_GREEN:
-    case GI_OOT_MILK_BOTTLE:
+    case GI_OOT_BOTTLE_MILK:
     case GI_OOT_FISH:
     case GI_OOT_BLUE_FIRE:
     case GI_OOT_BUG:
-    case GI_OOT_LON_LON_MILK:
+    case GI_OOT_MILK:
         reloadIconsC(play);
         break;
     }

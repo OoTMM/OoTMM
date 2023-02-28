@@ -176,7 +176,7 @@ export const SETTINGS = [{
 }, {
   key: 'progressiveShieldsOot',
   name: 'OoT Shields',
-  category: 'progressive',
+  category: 'items',
   type: 'enum',
   values: [
     { value: 'separate', name: 'Separate' },
@@ -186,7 +186,7 @@ export const SETTINGS = [{
 }, {
   key: 'progressiveSwordsOot',
   name: 'OoT Swords',
-  category: 'progressive',
+  category: 'items',
   type: 'enum',
   values: [
     { value: 'separate', name: 'Separate' },
@@ -197,7 +197,7 @@ export const SETTINGS = [{
 }, {
   key: 'progressiveShieldsMm',
   name: 'MM Shields',
-  category: 'progressive',
+  category: 'items',
   type: 'enum',
   values: [
     { value: 'separate', name: 'Separate' },
@@ -208,13 +208,85 @@ export const SETTINGS = [{
 }, {
   key: 'progressiveGoronLullaby',
   name: 'MM Goron Lullaby',
-  category: 'progressive',
+  category: 'items',
   type: 'enum',
   values: [
     { value: 'single', name: 'Full Lullaby Only' },
     { value: 'progressive', name: 'Progressive' },
   ],
   default: 'progressive'
+}, {
+  key: 'sharedNutsSticks',
+  name: 'Shared Nuts & Sticks',
+  category: 'items',
+  type: 'boolean',
+  default: false
+}, {
+  key: 'sharedBows',
+  name: 'Shared Bows',
+  category: 'items',
+  type: 'boolean',
+  default: false
+}, {
+  key: 'sharedBombBags',
+  name: 'Shared Bomb Bags',
+  category: 'items',
+  type: 'boolean',
+  default: false
+}, {
+  key: 'sharedMagic',
+  name: 'Shared Magic',
+  category: 'items',
+  type: 'boolean',
+  default: false
+}, {
+  key: 'sharedMagicArrows',
+  name: 'Shared Magic Arrows',
+  category: 'items',
+  type: 'boolean',
+  default: false
+}, {
+  key: 'sharedSongs',
+  name: 'Shared Songs',
+  category: 'items',
+  type: 'boolean',
+  default: false
+}, {
+  key: 'sharedHookshot',
+  name: 'Shared Hookshots',
+  category: 'items',
+  type: 'boolean',
+  default: false
+}, {
+  key: 'sharedLens',
+  name: 'Shared Lens of Truth',
+  category: 'items',
+  type: 'boolean',
+  default: false
+}, {
+  key: 'sharedOcarina',
+  name: 'Shared Ocarina of Time',
+  category: 'items',
+  type: 'boolean',
+  default: false
+}, {
+  key: 'sharedMasks',
+  name: 'Shared Masks',
+  category: 'items',
+  type: 'boolean',
+  default: false
+}, {
+  key: 'sharedWallets',
+  name: 'Shared Wallets',
+  category: 'items',
+  type: 'boolean',
+  default: false
+}, {
+  key: 'sharedHealth',
+  name: 'Shared Health',
+  category: 'items',
+  type: 'boolean',
+  default: false
 }, {
   key: 'csmc',
   name: 'Chest Size Matches Content',
@@ -225,21 +297,27 @@ export const SETTINGS = [{
   key: 'logic',
   name: 'Logic',
   category: 'advanced',
-  type: 'enum',
-  values: [
-    { value: 'allLocations', name: 'All Locations' },
-    { value: 'beatable', name: 'Beatable Only' },
-    { value: 'none', name: 'No Logic' },
-  ],
-  default: 'allLocations'
+type: 'enum',
+values: [
+  { value: 'allLocations', name: 'All Locations' },
+  { value: 'beatable', name: 'Beatable Only' },
+  { value: 'none', name: 'No Logic' },
+],
+default: 'allLocations'
+}, {
+  key: 'generateSpoilerLog',
+  name: 'Generate Spoiler Log',
+  category: 'advanced',
+  type: 'boolean',
+  default: true
 }] as const;
 
 export const SETTINGS_CATEGORIES = [{
   name: "Main Settings",
   key: "main",
 }, {
-  name: "Progressive Items",
-  key: "progressive",
+  name: "Items",
+  key: "items",
 }, {
   name: "Entrances",
   key: "entrances",

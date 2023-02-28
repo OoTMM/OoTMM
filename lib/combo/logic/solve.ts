@@ -11,14 +11,17 @@ import { Monitor } from '../monitor';
 export const EXTRA_ITEMS = [
   'OOT_MASK_SKULL',
   'OOT_MASK_SPOOKY',
-  'OOT_MASK_KEATON',
-  'OOT_MASK_BUNNY',
-  'OOT_MASK_TRUTH',
-  'OOT_MASK_GORON',
-  'OOT_MASK_ZORA',
   'OOT_MASK_GERUDO',
   'MM_MASK_DEKU',
   'MM_SWORD',
+];
+
+export const EXTRA_MASKS_OOT = [
+  'OOT_MASK_KEATON',
+  'OOT_MASK_TRUTH',
+  'OOT_MASK_BUNNY',
+  'OOT_MASK_GORON',
+  'OOT_MASK_ZORA',
 ];
 
 export type ItemPlacement = {[k: string]: string};
@@ -70,39 +73,18 @@ export class LogicPassSolver {
       settings: Settings,
       random: Random,
       monitor: Monitor,
+      attempts: number,
     }
   ) {
     this.pathfinder = new Pathfinder(this.state.world, this.state.settings);
-  }
-
-  run() {
-    let error: any = null;
-    for (let i = 0; i < 100; ++i) {
-      try {
-        this.state.monitor.log(`Logic: Solver (attempt ${i + 1})`);
-        const placement = this.solve();
-        return { items: placement };
-      } catch (e) {
-        if (!(e instanceof LogicSeedError)) {
-          throw e;
-        }
-        error = e;
-      }
-    }
-    if (error) {
-      throw error;
-    }
-  }
-
-  private initSolver() {
     this.items = {};
     this.junkLocations = new Set<string>(this.state.settings.junkLocations);
     this.pools = this.makeItemPools();
     this.pathfinderState = this.pathfinder.run(null);
   }
 
-  private solve() {
-    this.initSolver();
+  run() {
+    this.state.monitor.log(`Logic: Solver (attempt ${this.state.attempts})`);
     const checksCount = Object.keys(this.state.world.checks).length;
 
     /* Place junk into junkLocations */
@@ -148,7 +130,7 @@ export class LogicPassSolver {
     /* At this point we have a beatable game */
     this.fill();
 
-    return this.items;
+    return { items: this.items };
   }
 
   private fixLocations() {
@@ -197,6 +179,13 @@ export class LogicPassSolver {
     /* Add the extra items */
     for (const item of EXTRA_ITEMS) {
       this.insertItem(pools, item);
+    }
+
+    if (!this.state.settings.sharedMasks) {
+      /* Add the extra masks */
+      for (const item of EXTRA_MASKS_OOT) {
+        this.insertItem(pools, item);
+      }
     }
 
     if (this.state.settings.progressiveSwordsOot === 'progressive') {
@@ -394,7 +383,7 @@ export class LogicPassSolver {
 
     const pool = combinedItems(this.pools.required, this.pools.nice);
     const songs = shuffle(this.state.random, itemsArray(pool).filter(x => isSong(x)));
-    const locations = new Set(Object.keys(this.state.world.checks).filter(x => isSong(this.state.world.checks[x].item) && !this.items[x]));
+    const locations = new Set([...this.state.world.songLocations].filter(x => !this.items[x]));
 
     if (songs.length > locations.size) {
       throw new Error(`Not enough song locations for ${songs.length} songs`);

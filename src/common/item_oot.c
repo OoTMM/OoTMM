@@ -32,31 +32,31 @@ int comboAddSmallKeyOot(u16 dungeonId)
 {
     s8 keyCount;
 
-    keyCount = gOotSave.dungeonKeys[dungeonId];
+    keyCount = gOotSave.inventory.dungeonKeys[dungeonId];
     if (keyCount < 0)
         keyCount = 1;
     else
         keyCount++;
-    gOotSave.dungeonKeys[dungeonId] = keyCount;
+    gOotSave.inventory.dungeonKeys[dungeonId] = keyCount;
     if (dungeonId == SCE_OOT_TREASURE_SHOP)
         return 0;
     else
-        return ++gOotSave.dungeonItems[dungeonId].maxKeys;
+        return ++gOotSave.inventory.dungeonItems[dungeonId].maxKeys;
 }
 
 void comboAddBossKeyOot(u16 dungeonId)
 {
-    gOotSave.dungeonItems[dungeonId].bossKey = 1;
+    gOotSave.inventory.dungeonItems[dungeonId].bossKey = 1;
 }
 
 void comboAddCompassOot(u16 dungeonId)
 {
-    gOotSave.dungeonItems[dungeonId].compass = 1;
+    gOotSave.inventory.dungeonItems[dungeonId].compass = 1;
 }
 
 void comboAddMapOot(u16 dungeonId)
 {
-    gOotSave.dungeonItems[dungeonId].map = 1;
+    gOotSave.inventory.dungeonItems[dungeonId].map = 1;
 }
 
 static void addHealth(u8 count)
@@ -64,72 +64,72 @@ static void addHealth(u8 count)
     u16 health;
 
     health = (u16)count * 0x10;
-    gOotSave.health += health;
-    if (gOotSave.health > gOotSave.healthMax)
-        gOotSave.health = gOotSave.healthMax;
+    gOotSave.playerData.health += health;
+    if (gOotSave.playerData.health > gOotSave.playerData.healthMax)
+        gOotSave.playerData.health = gOotSave.playerData.healthMax;
 }
 
-static void addMagicUpgrade(int level)
+void comboAddMagicUpgradeOot(int level)
 {
-    gOotSave.magicUpgrade = 1;
+    gOotSave.playerData.magicUpgrade = 1;
     if (level >= 2)
-        gOotSave.magicUpgrade2 = 1;
+        gOotSave.playerData.magicUpgrade2 = 1;
 }
 
 static void refillMagic(int level)
 {
-    gOotSave.magicSize = level;
-    gOotSave.magicAmount = level * 0x30;
+    gOotSave.playerData.magicSize = level;
+    gOotSave.playerData.magicAmount = level * 0x30;
 }
 
 
 static void addAmmo(u8 slot, u16 item, u8 max, u8 count)
 {
-    gOotSave.inventory[slot] = item;
-    gOotSave.ammo[slot] += count;
-    if (gOotSave.ammo[slot] > max)
-        gOotSave.ammo[slot] = max;
+    gOotSave.inventory.items[slot] = item;
+    gOotSave.inventory.ammo[slot] += count;
+    if (gOotSave.inventory.ammo[slot] > max)
+        gOotSave.inventory.ammo[slot] = max;
 }
 
-static void addSticks(u8 count)
+void comboAddSticksOot(int count)
 {
     u8 max;
 
-    if (gOotSave.upgrades.dekuStick == 0)
-        gOotSave.upgrades.dekuStick = 1;
+    if (gOotSave.inventory.upgrades.dekuStick == 0)
+        gOotSave.inventory.upgrades.dekuStick = 1;
 
-    max = kMaxSticks[gOotSave.upgrades.dekuStick];
+    max = kMaxSticks[gOotSave.inventory.upgrades.dekuStick];
     addAmmo(ITS_OOT_STICKS, ITEM_OOT_STICK, max, count);
 }
 
-static void addNuts(u8 count)
+void comboAddNutsOot(int count)
 {
     u8 max;
 
-    if (gOotSave.upgrades.dekuNut == 0)
-        gOotSave.upgrades.dekuNut = 1;
+    if (gOotSave.inventory.upgrades.dekuNut == 0)
+        gOotSave.inventory.upgrades.dekuNut = 1;
 
-    max = kMaxNuts[gOotSave.upgrades.dekuNut];
+    max = kMaxNuts[gOotSave.inventory.upgrades.dekuNut];
     addAmmo(ITS_OOT_NUTS, ITEM_OOT_NUT, max, count);
 }
 
-static void addBombs(u8 count)
+void comboAddBombsOot(int count)
 {
     u8 max;
 
-    if (gOotSave.upgrades.bombBag == 0)
+    if (gOotSave.inventory.upgrades.bombBag == 0)
         return;
-    max = kMaxBombs[gOotSave.upgrades.bombBag];
+    max = kMaxBombs[gOotSave.inventory.upgrades.bombBag];
     addAmmo(ITS_OOT_BOMBS, ITEM_OOT_BOMB, max, count);
 }
 
-static void addArrows(u8 count)
+void comboAddArrowsOot(int count)
 {
-    u8 max;
+    int max;
 
-    if (gOotSave.upgrades.quiver == 0)
+    if (gOotSave.inventory.upgrades.quiver == 0)
         return;
-    max = kMaxArrows[gOotSave.upgrades.quiver];
+    max = kMaxArrows[gOotSave.inventory.upgrades.quiver];
     addAmmo(ITS_OOT_BOW, ITEM_OOT_BOW, max, count);
 }
 
@@ -137,9 +137,9 @@ static void addSeeds(u8 count)
 {
     u8 max;
 
-    if (gOotSave.upgrades.bulletBag == 0)
+    if (gOotSave.inventory.upgrades.bulletBag == 0)
         return;
-    max = kMaxSeeds[gOotSave.upgrades.bulletBag];
+    max = kMaxSeeds[gOotSave.inventory.upgrades.bulletBag];
     addAmmo(ITS_OOT_SLINGSHOT, ITEM_OOT_SLINGSHOT, max, count);
     BITMAP16_SET(gOotSave.eventsItem, EV_OOT_ITEM_DEKU_SEEDS);
 }
@@ -153,9 +153,9 @@ static void addNewBottle(u16 itemId)
 {
     for (int i = 0; i < 4; ++i)
     {
-        if (gOotSave.inventory[ITS_OOT_BOTTLE + i] == ITEM_NONE)
+        if (gOotSave.inventory.items[ITS_OOT_BOTTLE + i] == ITEM_NONE)
         {
-            gOotSave.inventory[ITS_OOT_BOTTLE + i] = itemId;
+            gOotSave.inventory.items[ITS_OOT_BOTTLE + i] = itemId;
             return;
         }
     }
@@ -168,7 +168,7 @@ static void fillBottle(u16 itemId)
     slot = -1;
     for (int i = 0; i < 4; ++i)
     {
-        if (gOotSave.inventory[ITS_OOT_BOTTLE + i] == ITEM_OOT_EMPTY_BOTTLE)
+        if (gOotSave.inventory.items[ITS_OOT_BOTTLE + i] == ITEM_OOT_BOTTLE_EMPTY)
         {
             slot = i;
             break;
@@ -176,7 +176,7 @@ static void fillBottle(u16 itemId)
     }
     if (slot == -1)
         return;
-    gOotSave.inventory[ITS_OOT_BOTTLE + slot] = itemId;
+    gOotSave.inventory.items[ITS_OOT_BOTTLE + slot] = itemId;
     for (int i = 0; i < 3; ++i)
     {
         if (gOotSave.equips.cButtonSlots[i] == ITS_OOT_BOTTLE + slot)
@@ -186,39 +186,49 @@ static void fillBottle(u16 itemId)
     }
 }
 
-static void addBombBag(u8 level)
+void comboAddBombBagOot(int level)
 {
-    gOotSave.inventory[ITS_OOT_BOMBS] = ITEM_OOT_BOMB;
-    gOotSave.upgrades.bombBag = level;
-    gOotSave.ammo[ITS_OOT_BOMBS] = kMaxBombs[level];
+    gOotSave.inventory.items[ITS_OOT_BOMBS] = ITEM_OOT_BOMB;
+    gOotSave.inventory.upgrades.bombBag = level;
+    gOotSave.inventory.ammo[ITS_OOT_BOMBS] = kMaxBombs[level];
 }
 
-static void addQuiver(u8 level)
+void comboAddQuiverOot(int level)
 {
-    gOotSave.inventory[ITS_OOT_BOW] = ITEM_OOT_BOW;
-    gOotSave.upgrades.quiver = level;
-    gOotSave.ammo[ITS_OOT_BOW] = kMaxArrows[level];
+    gOotSave.inventory.items[ITS_OOT_BOW] = ITEM_OOT_BOW;
+    gOotSave.inventory.upgrades.quiver = level;
+    gOotSave.inventory.ammo[ITS_OOT_BOW] = kMaxArrows[level];
 }
 
 static void addBulletBag(u8 level)
 {
-    gOotSave.inventory[ITS_OOT_SLINGSHOT] = ITEM_OOT_SLINGSHOT;
-    gOotSave.upgrades.bulletBag = level;
-    gOotSave.ammo[ITS_OOT_SLINGSHOT] = kMaxSeeds[level];
+    gOotSave.inventory.items[ITS_OOT_SLINGSHOT] = ITEM_OOT_SLINGSHOT;
+    gOotSave.inventory.upgrades.bulletBag = level;
+    gOotSave.inventory.ammo[ITS_OOT_SLINGSHOT] = kMaxSeeds[level];
 }
 
-static void addNutUpgrade(u8 level)
+static void addNutUpgrade(int level)
 {
-    gOotSave.inventory[ITS_OOT_NUTS] = ITEM_OOT_NUT;
-    gOotSave.upgrades.dekuNut = level;
-    gOotSave.ammo[ITS_OOT_NUTS] = kMaxNuts[level];
+    gOotSave.inventory.upgrades.dekuNut = level;
+    comboAddNutsOot(kMaxNuts[level]);
 }
 
-static void addStickUpgrade(u8 level)
+static void addStickUpgrade(int level)
 {
-    gOotSave.inventory[ITS_OOT_STICKS] = ITEM_OOT_STICK;
-    gOotSave.upgrades.dekuStick = level;
-    gOotSave.ammo[ITS_OOT_STICKS] = kMaxSticks[level];
+    gOotSave.inventory.upgrades.dekuStick = level;
+    comboAddSticksOot(kMaxSticks[level]);
+}
+
+static void addNutUpgradeMm(int level)
+{
+    gMmSave.inventory.upgrades.dekuNut = level;
+    comboAddNutsMm(kMaxNuts[level]);
+}
+
+static void addStickUpgradeMm(int level)
+{
+    gMmSave.inventory.upgrades.dekuStick = level;
+    comboAddSticksMm(kMaxSticks[level]);
 }
 
 static void addTradeChild(u8 index)
@@ -226,8 +236,8 @@ static void addTradeChild(u8 index)
     u16 itemId;
 
     itemId = kOotTradeChild[index];
-    if (gOotSave.inventory[ITS_OOT_TRADE_CHILD] == ITEM_NONE)
-        gOotSave.inventory[ITS_OOT_TRADE_CHILD] = itemId;
+    if (gOotSave.inventory.items[ITS_OOT_TRADE_CHILD] == ITEM_NONE)
+        gOotSave.inventory.items[ITS_OOT_TRADE_CHILD] = itemId;
     gOotExtraTrade.child |= (1 << (u16)index);
 }
 
@@ -236,8 +246,8 @@ static void addTradeAdult(u8 index)
     u16 itemId;
 
     itemId = kOotTradeAdult[index];
-    if (gOotSave.inventory[ITS_OOT_TRADE_ADULT] == ITEM_NONE)
-        gOotSave.inventory[ITS_OOT_TRADE_ADULT] = itemId;
+    if (gOotSave.inventory.items[ITS_OOT_TRADE_ADULT] == ITEM_NONE)
+        gOotSave.inventory.items[ITS_OOT_TRADE_ADULT] = itemId;
     gOotExtraTrade.adult |= (1 << (u16)index);
 }
 
@@ -245,10 +255,10 @@ static void addRupees(u16 count)
 {
     u16 max;
 
-    max = kMaxRupees[gOotSave.upgrades.wallet];
-    gOotSave.rupees += count;
-    if (gOotSave.rupees > max)
-        gOotSave.rupees = max;
+    max = kMaxRupees[gOotSave.inventory.upgrades.wallet];
+    gOotSave.playerData.rupees += count;
+    if (gOotSave.playerData.rupees > max)
+        gOotSave.playerData.rupees = max;
 }
 
 static void reloadSlotEquips(OotItemEquips* equips, int slot)
@@ -257,7 +267,7 @@ static void reloadSlotEquips(OotItemEquips* equips, int slot)
     {
         if (equips->cButtonSlots[i] == slot)
         {
-            equips->buttonItems[1 + i] = gOotSave.inventory[slot];
+            equips->buttonItems[1 + i] = gOotSave.inventory.items[slot];
         }
     }
 }
@@ -277,7 +287,7 @@ static void addHookshot(int level)
         itemId = ITEM_OOT_LONGSHOT;
     else
         itemId = ITEM_OOT_HOOKSHOT;
-    gOotSave.inventory[ITS_OOT_HOOKSHOT] = itemId;
+    gOotSave.inventory.items[ITS_OOT_HOOKSHOT] = itemId;
     gOotExtraItems.hookshot |= (1 << (level - 1));
     reloadSlot(ITS_OOT_HOOKSHOT);
 }
@@ -290,9 +300,345 @@ static void addOcarina(int level)
         itemId = ITEM_OOT_OCARINA_TIME;
     else
         itemId = ITEM_OOT_OCARINA_FAIRY;
-    gOotSave.inventory[ITS_OOT_OCARINA] = itemId;
+    gOotSave.inventory.items[ITS_OOT_OCARINA] = itemId;
     gOotExtraItems.ocarina |= (1 << (level - 1));
     reloadSlot(ITS_OOT_OCARINA);
+}
+
+void comboAddCommonItemOot(int sid, int noEffect)
+{
+    switch (sid)
+    {
+    case SITEM_ARROW_FIRE:
+        gOotSave.inventory.items[ITS_OOT_ARROW_FIRE] = ITEM_OOT_ARROW_FIRE;
+        break;
+    case SITEM_ARROW_ICE:
+        gOotSave.inventory.items[ITS_OOT_ARROW_ICE] = ITEM_OOT_ARROW_ICE;
+        break;
+    case SITEM_ARROW_LIGHT:
+        gOotSave.inventory.items[ITS_OOT_ARROW_LIGHT] = ITEM_OOT_ARROW_LIGHT;
+        break;
+    case SITEM_SONG_EPONA:
+        gOotSave.inventory.quest.songEpona = 1;
+        BITMAP16_SET(gOotSave.eventsChk, EV_OOT_CHK_EPONA);
+        break;
+    case SITEM_SONG_TIME:
+        gOotSave.inventory.quest.songTime = 1;
+        break;
+    case SITEM_SONG_STORMS:
+        gOotSave.inventory.quest.songStorms = 1;
+        break;
+    case SITEM_HOOKSHOT:
+        addHookshot(1);
+        break;
+    case SITEM_LENS:
+        gOotSave.inventory.items[ITS_OOT_LENS] = ITEM_OOT_LENS;
+        break;
+    case SITEM_OCARINA_TIME:
+        addOcarina(2);
+        break;
+    case SITEM_MASK_KEATON:
+        addTradeChild(3);
+        break;
+    case SITEM_MASK_BUNNY:
+        addTradeChild(6);
+        break;
+    case SITEM_MASK_GORON:
+        addTradeChild(7);
+        break;
+    case SITEM_MASK_ZORA:
+        addTradeChild(8);
+        break;
+    case SITEM_MASK_TRUTH:
+        addTradeChild(10);
+        break;
+    case SITEM_WALLET2:
+        gOotSave.inventory.upgrades.wallet = 1;
+        break;
+    case SITEM_WALLET3:
+        gOotSave.inventory.upgrades.wallet = 2;
+        break;
+    case SITEM_RUPEE_GREEN:
+        if (noEffect)
+            addRupees(1);
+        break;
+    case SITEM_RUPEE_BLUE:
+        if (noEffect)
+            addRupees(5);
+        break;
+    case SITEM_RUPEE_RED:
+        if (noEffect)
+            addRupees(20);
+        break;
+    case SITEM_RUPEE_PURPLE:
+        if (noEffect)
+            addRupees(50);
+        break;
+    case SITEM_RUPEE_SILVER:
+        if (noEffect)
+            addRupees(100);
+        break;
+    case SITEM_RUPEE_GOLD:
+        if (noEffect)
+            addRupees(200);
+        break;
+    case SITEM_HEART_PIECE:
+        gOotSave.inventory.quest.heartPieces++;
+        if (noEffect)
+        {
+            if (gOotSave.inventory.quest.heartPieces >= 4)
+            {
+                gOotSave.inventory.quest.heartPieces -= 4;
+                gOotSave.playerData.healthMax += 0x10;
+            }
+            addHealth(20);
+        }
+        break;
+    case SITEM_HEART_CONTAINER:
+        gOotSave.playerData.healthMax += 0x10;
+        if (noEffect)
+            addHealth(20);
+        break;
+    case SITEM_RECOVERY_HEART:
+        if (noEffect)
+            addHealth(1);
+        break;
+    case SITEM_DEFENSE_UPGRADE:
+        gOotSave.playerData.doubleDefense = 1;
+        gOotSave.inventory.doubleDefenseHearts = 20;
+        if (noEffect)
+            addHealth(20);
+        break;
+    }
+}
+
+void comboAddItemSharedOot(s16 gi, int noEffect)
+{
+    if (comboConfig(CFG_SHARED_BOWS))
+    {
+        switch (gi)
+        {
+        case GI_OOT_BOW:
+            comboAddQuiverMm(1);
+            break;
+        case GI_OOT_QUIVER2:
+            comboAddQuiverMm(2);
+            break;
+        case GI_OOT_QUIVER3:
+            comboAddQuiverMm(3);
+            break;
+        case GI_OOT_ARROWS_5:
+            comboAddArrowsMm(5);
+            break;
+        case GI_OOT_ARROWS_10:
+            comboAddArrowsMm(10);
+            break;
+        case GI_OOT_ARROWS_30:
+            comboAddArrowsMm(30);
+            break;
+        }
+    }
+
+    if (comboConfig(CFG_SHARED_BOMB_BAGS))
+    {
+        switch (gi)
+        {
+        case GI_OOT_BOMB_BAG:
+            comboAddBombBagMm(1);
+            break;
+        case GI_OOT_BOMB_BAG2:
+            comboAddBombBagMm(2);
+            break;
+        case GI_OOT_BOMB_BAG3:
+            comboAddBombBagMm(3);
+            break;
+        case GI_OOT_BOMB:
+            comboAddBombsMm(1);
+            break;
+        case GI_OOT_BOMBS_5:
+            comboAddBombsMm(5);
+            break;
+        case GI_OOT_BOMBS_10:
+            comboAddBombsMm(10);
+            break;
+        case GI_OOT_BOMBS_20:
+            comboAddBombsMm(20);
+            break;
+        case GI_OOT_BOMBS_30:
+            comboAddBombsMm(30);
+            break;
+        }
+    }
+
+    if (comboConfig(CFG_SHARED_MAGIC))
+    {
+        switch (gi)
+        {
+        case GI_OOT_MAGIC_UPGRADE:
+            comboAddMagicUpgradeMm(1);
+            break;
+        case GI_OOT_MAGIC_UPGRADE2:
+            comboAddMagicUpgradeMm(2);
+            break;
+        }
+    }
+
+    if (comboConfig(CFG_SHARED_MAGIC_ARROWS))
+    {
+        switch (gi)
+        {
+        case GI_OOT_ARROW_FIRE:
+            comboAddCommonItemMm(SITEM_ARROW_FIRE, noEffect);
+            break;
+        case GI_OOT_ARROW_ICE:
+            comboAddCommonItemMm(SITEM_ARROW_ICE, noEffect);
+            break;
+        case GI_OOT_ARROW_LIGHT:
+            comboAddCommonItemMm(SITEM_ARROW_LIGHT, noEffect);
+            break;
+        }
+    }
+
+    if (comboConfig(CFG_SHARED_SONGS))
+    {
+        switch (gi)
+        {
+        case GI_OOT_SONG_EPONA:
+            comboAddCommonItemMm(SITEM_SONG_EPONA, noEffect);
+            break;
+        case GI_OOT_SONG_TIME:
+            comboAddCommonItemMm(SITEM_SONG_TIME, noEffect);
+            break;
+        case GI_OOT_SONG_STORMS:
+            comboAddCommonItemMm(SITEM_SONG_STORMS, noEffect);
+            break;
+        }
+    }
+
+    if (comboConfig(CFG_SHARED_NUTS_STICKS))
+    {
+        switch (gi)
+        {
+        case GI_OOT_NUTS_5:
+        case GI_OOT_NUTS_5_ALT:
+            comboAddNutsMm(5);
+            break;
+        case GI_OOT_NUTS_10:
+            comboAddNutsMm(10);
+            break;
+        case GI_OOT_STICK:
+            comboAddSticksMm(1);
+            break;
+        case GI_OOT_STICKS_5:
+            comboAddSticksMm(5);
+            break;
+        case GI_OOT_STICKS_10:
+            comboAddSticksMm(10);
+            break;
+        case GI_OOT_NUT_UPGRADE:
+            addNutUpgradeMm(2);
+            break;
+        case GI_OOT_NUT_UPGRADE2:
+            addNutUpgradeMm(3);
+            break;
+        case GI_OOT_STICK_UPGRADE:
+            addStickUpgradeMm(2);
+            break;
+        case GI_OOT_STICK_UPGRADE2:
+            addStickUpgradeMm(3);
+            break;
+        }
+    }
+
+    if (comboConfig(CFG_SHARED_HOOKSHOT) && gi == GI_OOT_HOOKSHOT)
+    {
+        comboAddCommonItemMm(SITEM_HOOKSHOT, noEffect);
+    }
+
+    if (comboConfig(CFG_SHARED_LENS) && gi == GI_OOT_LENS)
+    {
+        comboAddCommonItemMm(SITEM_LENS, noEffect);
+    }
+
+    if (comboConfig(CFG_SHARED_OCARINA) && gi == GI_OOT_OCARINA_TIME)
+    {
+        comboAddCommonItemMm(SITEM_OCARINA_TIME, noEffect);
+    }
+
+    if (comboConfig(CFG_SHARED_MASKS))
+    {
+        switch (gi)
+        {
+        case GI_OOT_MASK_KEATON:
+            comboAddCommonItemMm(SITEM_MASK_KEATON, noEffect);
+            break;
+        case GI_OOT_MASK_BUNNY:
+            comboAddCommonItemMm(SITEM_MASK_BUNNY, noEffect);
+            break;
+        case GI_OOT_MASK_TRUTH:
+            comboAddCommonItemMm(SITEM_MASK_TRUTH, noEffect);
+            break;
+        case GI_OOT_MASK_GORON:
+            comboAddCommonItemMm(SITEM_MASK_GORON, noEffect);
+            break;
+        case GI_OOT_MASK_ZORA:
+            comboAddCommonItemMm(SITEM_MASK_ZORA, noEffect);
+            break;
+        }
+    }
+
+    if (comboConfig(CFG_SHARED_WALLETS))
+    {
+        switch (gi)
+        {
+        case GI_OOT_WALLET2:
+            comboAddCommonItemMm(SITEM_WALLET2, noEffect);
+            break;
+        case GI_OOT_WALLET3:
+            comboAddCommonItemMm(SITEM_WALLET3, noEffect);
+            break;
+        case GI_OOT_RUPEE_GREEN:
+        case GI_OOT_TC_RUPEE_GREEN:
+            comboAddCommonItemMm(SITEM_RUPEE_GREEN, noEffect);
+            break;
+        case GI_OOT_RUPEE_BLUE:
+        case GI_OOT_TC_RUPEE_BLUE:
+            comboAddCommonItemMm(SITEM_RUPEE_BLUE, noEffect);
+            break;
+        case GI_OOT_RUPEE_RED:
+        case GI_OOT_TC_RUPEE_RED:
+            comboAddCommonItemMm(SITEM_RUPEE_RED, noEffect);
+            break;
+        case GI_OOT_RUPEE_PURPLE:
+        case GI_OOT_TC_RUPEE_PURPLE:
+            comboAddCommonItemMm(SITEM_RUPEE_PURPLE, noEffect);
+            break;
+        case GI_OOT_RUPEE_HUGE:
+            comboAddCommonItemMm(SITEM_RUPEE_GOLD, noEffect);
+            break;
+        }
+    }
+
+    if (comboConfig(CFG_SHARED_HEALTH))
+    {
+        switch (gi)
+        {
+        case GI_OOT_RECOVERY_HEART:
+            comboAddCommonItemMm(SITEM_RECOVERY_HEART, noEffect);
+            break;
+        case GI_OOT_HEART_CONTAINER:
+        case GI_OOT_HEART_CONTAINER2:
+            comboAddCommonItemMm(SITEM_HEART_CONTAINER, noEffect);
+            break;
+        case GI_OOT_HEART_PIECE:
+        case GI_OOT_TC_HEART_PIECE:
+            comboAddCommonItemMm(SITEM_HEART_PIECE, noEffect);
+            break;
+        case GI_OOT_DEFENSE_UPGRADE:
+            comboAddCommonItemMm(SITEM_DEFENSE_UPGRADE, noEffect);
+            break;
+        }
+    }
 }
 
 int comboAddItemOot(s16 gi, int noEffect)
@@ -305,53 +651,53 @@ int comboAddItemOot(s16 gi, int noEffect)
     switch (gi)
     {
     case GI_OOT_STICK:
-        addSticks(1);
+        comboAddSticksOot(1);
         break;
     case GI_OOT_STICKS_5:
-        addSticks(5);
+        comboAddSticksOot(5);
         break;
     case GI_OOT_STICKS_10:
-        addSticks(10);
+        comboAddSticksOot(10);
         break;
     case GI_OOT_NUTS_5:
     case GI_OOT_NUTS_5_ALT:
-        addNuts(5);
+        comboAddNutsOot(5);
         break;
     case GI_OOT_NUTS_10:
-        addNuts(10);
+        comboAddNutsOot(10);
         break;
     case GI_OOT_BOMB:
-        addBombs(1);
+        comboAddBombsOot(1);
         break;
     case GI_OOT_BOMBS_5:
-        addBombs(5);
+        comboAddBombsOot(5);
         break;
     case GI_OOT_BOMBS_10:
-        addBombs(10);
+        comboAddBombsOot(10);
         break;
     case GI_OOT_BOMBS_20:
-        addBombs(20);
+        comboAddBombsOot(20);
         break;
     case GI_OOT_BOMBS_30:
-        addBombs(30);
+        comboAddBombsOot(30);
         break;
     case GI_OOT_BOW:
-        addQuiver(1);
+        comboAddQuiverOot(1);
         break;
     case GI_OOT_ARROWS_5:
-        addArrows(5);
+        comboAddArrowsOot(5);
         break;
     case GI_OOT_ARROWS_10:
-        addArrows(10);
+        comboAddArrowsOot(10);
         break;
     case GI_OOT_ARROWS_30:
-        addArrows(30);
+        comboAddArrowsOot(30);
         break;
     case GI_OOT_ARROW_FIRE:
-        gOotSave.inventory[ITS_OOT_ARROW_FIRE] = ITEM_OOT_ARROW_FIRE;
+        comboAddCommonItemOot(SITEM_ARROW_FIRE, noEffect);
         break;
     case GI_OOT_SPELL_FIRE:
-        gOotSave.inventory[ITS_OOT_SPELL_FIRE] = ITEM_OOT_SPELL_FIRE;
+        gOotSave.inventory.items[ITS_OOT_SPELL_FIRE] = ITEM_OOT_SPELL_FIRE;
         break;
     case GI_OOT_SLINGSHOT:
     case GI_OOT_BULLET_BAG:
@@ -367,7 +713,7 @@ int comboAddItemOot(s16 gi, int noEffect)
         addOcarina(1);
         break;
     case GI_OOT_OCARINA_TIME:
-        addOcarina(2);
+        comboAddCommonItemOot(SITEM_OCARINA_TIME, noEffect);
         break;
     case GI_OOT_BOMBCHU_5:
         addBombchu(5);
@@ -379,43 +725,43 @@ int comboAddItemOot(s16 gi, int noEffect)
         addBombchu(20);
         break;
     case GI_OOT_HOOKSHOT:
-        addHookshot(1);
+        comboAddCommonItemOot(SITEM_HOOKSHOT, noEffect);
         break;
     case GI_OOT_LONGSHOT:
         addHookshot(2);
         break;
     case GI_OOT_ARROW_ICE:
-        gOotSave.inventory[ITS_OOT_ARROW_ICE] = ITEM_OOT_ARROW_ICE;
+        comboAddCommonItemOot(SITEM_ARROW_ICE, noEffect);
         break;
     case GI_OOT_SPELL_WIND:
-        gOotSave.inventory[ITS_OOT_SPELL_WIND] = ITEM_OOT_SPELL_WIND;
+        gOotSave.inventory.items[ITS_OOT_SPELL_WIND] = ITEM_OOT_SPELL_WIND;
         break;
     case GI_OOT_BOOMERANG:
-        gOotSave.inventory[ITS_OOT_BOOMERANG] = ITEM_OOT_BOOMERANG;
+        gOotSave.inventory.items[ITS_OOT_BOOMERANG] = ITEM_OOT_BOOMERANG;
         break;
     case GI_OOT_LENS:
-        gOotSave.inventory[ITS_OOT_LENS] = ITEM_OOT_LENS;
+        comboAddCommonItemOot(SITEM_LENS, noEffect);
         break;
     case GI_OOT_MAGIC_BEAN:
-        gOotSave.inventory[ITS_OOT_MAGIC_BEAN] = ITEM_OOT_MAGIC_BEAN;
-        gOotSave.ammo[ITS_OOT_MAGIC_BEAN] = 10;
+        gOotSave.inventory.items[ITS_OOT_MAGIC_BEAN] = ITEM_OOT_MAGIC_BEAN;
+        gOotSave.inventory.ammo[ITS_OOT_MAGIC_BEAN] = 10;
         break;
     case GI_OOT_HAMMER:
-        gOotSave.inventory[ITS_OOT_HAMMER] = ITEM_OOT_HAMMER;
+        gOotSave.inventory.items[ITS_OOT_HAMMER] = ITEM_OOT_HAMMER;
         break;
     case GI_OOT_ARROW_LIGHT:
-        gOotSave.inventory[ITS_OOT_ARROW_LIGHT] = ITEM_OOT_ARROW_LIGHT;
+        comboAddCommonItemOot(SITEM_ARROW_LIGHT, noEffect);
         break;
     case GI_OOT_SPELL_LOVE:
-        gOotSave.inventory[ITS_OOT_SPELL_LOVE] = ITEM_OOT_SPELL_LOVE;
+        gOotSave.inventory.items[ITS_OOT_SPELL_LOVE] = ITEM_OOT_SPELL_LOVE;
         break;
-    case GI_OOT_EMPTY_BOTTLE:
-        addNewBottle(ITEM_OOT_EMPTY_BOTTLE);
+    case GI_OOT_BOTTLE_EMPTY:
+        addNewBottle(ITEM_OOT_BOTTLE_EMPTY);
         break;
     case GI_OOT_RUTO_LETTER:
         addNewBottle(ITEM_OOT_RUTO_LETTER);
         break;
-    case GI_OOT_MILK_BOTTLE:
+    case GI_OOT_BOTTLE_MILK:
         addNewBottle(ITEM_OOT_MILK);
         break;
     case GI_OOT_POTION_RED:
@@ -436,66 +782,66 @@ int comboAddItemOot(s16 gi, int noEffect)
     case GI_OOT_BUG:
         fillBottle(ITEM_OOT_BUG);
         break;
-    case GI_OOT_LON_LON_MILK:
+    case GI_OOT_MILK:
         fillBottle(ITEM_OOT_MILK);
         break;
     case GI_OOT_SWORD_KOKIRI:
-        gOotSave.equipment.swords |= EQ_OOT_SWORD_KOKIRI;
+        gOotSave.inventory.equipment.swords |= EQ_OOT_SWORD_KOKIRI;
         break;
     case GI_OOT_SWORD_MASTER:
-        gOotSave.equipment.swords |= EQ_OOT_SWORD_MASTER;
+        gOotSave.inventory.equipment.swords |= EQ_OOT_SWORD_MASTER;
         break;
     case GI_OOT_SWORD_KNIFE:
-        gOotSave.equipment.swords |= EQ_OOT_SWORD_KNIFE;
-        gOotSave.swordHealth = 8;
+        gOotSave.inventory.equipment.swords |= EQ_OOT_SWORD_KNIFE;
+        gOotSave.playerData.swordHealth = 8;
         break;
     case GI_OOT_SWORD_BIGGORON:
-        gOotSave.equipment.swords |= EQ_OOT_SWORD_KNIFE;
-        gOotSave.equipment.swords &= ~(EQ_OOT_SWORD_KNIFE_BROKEN);
+        gOotSave.inventory.equipment.swords |= EQ_OOT_SWORD_KNIFE;
+        gOotSave.inventory.equipment.swords &= ~(EQ_OOT_SWORD_KNIFE_BROKEN);
         gOotSave.isBiggoronSword = 1;
         break;
     case GI_OOT_PROGRESSIVE_SHIELD_DEKU:
         gOotExtraItems.shield |= EQ_OOT_SHIELD_DEKU;
         /* Fallthrough */
     case GI_OOT_SHIELD_DEKU:
-        gOotSave.equipment.shields |= EQ_OOT_SHIELD_DEKU;
+        gOotSave.inventory.equipment.shields |= EQ_OOT_SHIELD_DEKU;
         break;
     case GI_OOT_PROGRESSIVE_SHIELD_HYLIAN:
         gOotExtraItems.shield |= EQ_OOT_SHIELD_HYLIAN;
         /* Fallthrough */
     case GI_OOT_SHIELD_HYLIAN:
-        gOotSave.equipment.shields |= EQ_OOT_SHIELD_HYLIAN;
+        gOotSave.inventory.equipment.shields |= EQ_OOT_SHIELD_HYLIAN;
         break;
     case GI_OOT_SHIELD_MIRROR:
-        gOotSave.equipment.shields |= EQ_OOT_SHIELD_MIRROR;
+        gOotSave.inventory.equipment.shields |= EQ_OOT_SHIELD_MIRROR;
         gOotExtraItems.shield |= EQ_OOT_SHIELD_MIRROR;
         break;
     case GI_OOT_TUNIC_GORON:
-        gOotSave.equipment.tunics |= EQ_OOT_TUNIC_GORON;
+        gOotSave.inventory.equipment.tunics |= EQ_OOT_TUNIC_GORON;
         break;
     case GI_OOT_TUNIC_ZORA:
-        gOotSave.equipment.tunics |= EQ_OOT_TUNIC_ZORA;
+        gOotSave.inventory.equipment.tunics |= EQ_OOT_TUNIC_ZORA;
         break;
     case GI_OOT_BOOTS_IRON:
-        gOotSave.equipment.boots |= EQ_OOT_BOOTS_IRON;
+        gOotSave.inventory.equipment.boots |= EQ_OOT_BOOTS_IRON;
         break;
     case GI_OOT_BOOTS_HOVER:
-        gOotSave.equipment.boots |= EQ_OOT_BOOTS_HOVER;
+        gOotSave.inventory.equipment.boots |= EQ_OOT_BOOTS_HOVER;
         break;
     case GI_OOT_GORON_BRACELET:
-        gOotSave.upgrades.strength = 1;
+        gOotSave.inventory.upgrades.strength = 1;
         break;
     case GI_OOT_SILVER_GAUNTLETS:
-        gOotSave.upgrades.strength = 2;
+        gOotSave.inventory.upgrades.strength = 2;
         break;
     case GI_OOT_GOLDEN_GAUNTLETS:
-        gOotSave.upgrades.strength = 3;
+        gOotSave.inventory.upgrades.strength = 3;
         break;
     case GI_OOT_SCALE_SILVER:
-        gOotSave.upgrades.dive = 1;
+        gOotSave.inventory.upgrades.dive = 1;
         break;
     case GI_OOT_SCALE_GOLDEN:
-        gOotSave.upgrades.dive = 2;
+        gOotSave.inventory.upgrades.dive = 2;
         break;
     case GI_OOT_BULLET_BAG2:
         addBulletBag(2);
@@ -504,33 +850,33 @@ int comboAddItemOot(s16 gi, int noEffect)
         addBulletBag(3);
         break;
     case GI_OOT_QUIVER2:
-        addQuiver(2);
+        comboAddQuiverOot(2);
         break;
     case GI_OOT_QUIVER3:
-        addQuiver(3);
+        comboAddQuiverOot(3);
         break;
     case GI_OOT_BOMB_BAG:
-        addBombBag(1);
+        comboAddBombBagOot(1);
         break;
     case GI_OOT_BOMB_BAG2:
-        addBombBag(2);
+        comboAddBombBagOot(2);
         break;
     case GI_OOT_BOMB_BAG3:
-        addBombBag(3);
+        comboAddBombBagOot(3);
         break;
     case GI_OOT_WALLET2:
-        gOotSave.upgrades.wallet = 1;
+        gOotSave.inventory.upgrades.wallet = 1;
         break;
     case GI_OOT_WALLET3:
-        gOotSave.upgrades.wallet = 2;
+        gOotSave.inventory.upgrades.wallet = 2;
         break;
     case GI_OOT_MAGIC_UPGRADE:
-        addMagicUpgrade(1);
+        comboAddMagicUpgradeOot(1);
         if (noEffect)
             refillMagic(1);
         break;
     case GI_OOT_MAGIC_UPGRADE2:
-        addMagicUpgrade(2);
+        comboAddMagicUpgradeOot(2);
         if (noEffect)
             refillMagic(2);
         break;
@@ -547,132 +893,110 @@ int comboAddItemOot(s16 gi, int noEffect)
         addStickUpgrade(3);
         break;
     case GI_OOT_DEFENSE_UPGRADE:
-        gOotSave.doubleDefense = 1;
-        gOotSave.doubleDefenseHearts = 20;
-        if (noEffect)
-            addHealth(20);
+        comboAddCommonItemOot(SITEM_DEFENSE_UPGRADE, noEffect);
         break;
     case GI_OOT_HEART_PIECE:
     case GI_OOT_TC_HEART_PIECE:
-        gOotSave.quest.heartPieces++;
-        if (noEffect)
-        {
-            if (gOotSave.quest.heartPieces >= 4)
-            {
-                gOotSave.quest.heartPieces -= 4;
-                gOotSave.healthMax += 0x10;
-            }
-            addHealth(20);
-        }
+        comboAddCommonItemOot(SITEM_HEART_PIECE, noEffect);
         break;
     case GI_OOT_HEART_CONTAINER:
     case GI_OOT_HEART_CONTAINER2:
-        gOotSave.healthMax += 0x10;
-        if (noEffect)
-            addHealth(20);
+        comboAddCommonItemOot(SITEM_HEART_CONTAINER, noEffect);
         break;
     case GI_OOT_GS_TOKEN:
-        gOotSave.quest.goldToken = 1;
-        gOotSave.goldTokens++;
-        count = gOotSave.goldTokens;
+        gOotSave.inventory.quest.goldToken = 1;
+        count = ++gOotSave.inventory.goldTokens;
         break;
     case GI_OOT_GERUDO_CARD:
-        gOotSave.quest.gerudoCard = 1;
+        gOotSave.inventory.quest.gerudoCard = 1;
         break;
     case GI_OOT_STONE_OF_AGONY:
-        gOotSave.quest.agonyStone = 1;
+        gOotSave.inventory.quest.agonyStone = 1;
         break;
     case GI_OOT_STONE_SAPPHIRE:
-        gOotSave.quest.stoneSapphire = 1;
+        gOotSave.inventory.quest.stoneSapphire = 1;
         break;
     case GI_OOT_STONE_RUBY:
-        gOotSave.quest.stoneRuby = 1;
+        gOotSave.inventory.quest.stoneRuby = 1;
         break;
     case GI_OOT_STONE_EMERALD:
-        gOotSave.quest.stoneEmerald = 1;
+        gOotSave.inventory.quest.stoneEmerald = 1;
         break;
     case GI_OOT_SONG_STORMS:
-        gOotSave.quest.songStorms = 1;
+        comboAddCommonItemOot(SITEM_SONG_STORMS, noEffect);
         break;
     case GI_OOT_SONG_TIME:
-        gOotSave.quest.songTime = 1;
+        comboAddCommonItemOot(SITEM_SONG_TIME, noEffect);
         break;
     case GI_OOT_SONG_SUN:
-        gOotSave.quest.songSun = 1;
+        gOotSave.inventory.quest.songSun = 1;
         break;
     case GI_OOT_SONG_SARIA:
-        gOotSave.quest.songSaria = 1;
+        gOotSave.inventory.quest.songSaria = 1;
         break;
     case GI_OOT_SONG_EPONA:
-        gOotSave.quest.songEpona = 1;
-        BITMAP16_SET(gOotSave.eventsChk, EV_OOT_CHK_EPONA);
+        comboAddCommonItemOot(SITEM_SONG_EPONA, noEffect);
         break;
     case GI_OOT_SONG_ZELDA:
-        gOotSave.quest.songZelda = 1;
+        gOotSave.inventory.quest.songZelda = 1;
         break;
     case GI_OOT_SONG_TP_LIGHT:
-        gOotSave.quest.songTpLight = 1;
+        gOotSave.inventory.quest.songTpLight = 1;
         break;
     case GI_OOT_SONG_TP_SHADOW:
-        gOotSave.quest.songTpShadow = 1;
+        gOotSave.inventory.quest.songTpShadow = 1;
         break;
     case GI_OOT_SONG_TP_SPIRIT:
-        gOotSave.quest.songTpSpirit = 1;
+        gOotSave.inventory.quest.songTpSpirit = 1;
         break;
     case GI_OOT_SONG_TP_WATER:
-        gOotSave.quest.songTpWater = 1;
+        gOotSave.inventory.quest.songTpWater = 1;
         break;
     case GI_OOT_SONG_TP_FIRE:
-        gOotSave.quest.songTpFire = 1;
+        gOotSave.inventory.quest.songTpFire = 1;
         break;
     case GI_OOT_SONG_TP_FOREST:
-        gOotSave.quest.songTpForest = 1;
+        gOotSave.inventory.quest.songTpForest = 1;
         break;
     case GI_OOT_MEDALLION_LIGHT:
-        gOotSave.quest.medallionLight = 1;
+        gOotSave.inventory.quest.medallionLight = 1;
         break;
     case GI_OOT_MEDALLION_SHADOW:
-        gOotSave.quest.medallionShadow = 1;
+        gOotSave.inventory.quest.medallionShadow = 1;
         break;
     case GI_OOT_MEDALLION_SPIRIT:
-        gOotSave.quest.medallionSpirit = 1;
+        gOotSave.inventory.quest.medallionSpirit = 1;
         break;
     case GI_OOT_MEDALLION_WATER:
-        gOotSave.quest.medallionWater = 1;
+        gOotSave.inventory.quest.medallionWater = 1;
         break;
     case GI_OOT_MEDALLION_FIRE:
-        gOotSave.quest.medallionFire = 1;
+        gOotSave.inventory.quest.medallionFire = 1;
         break;
     case GI_OOT_MEDALLION_FOREST:
-        gOotSave.quest.medallionForest = 1;
+        gOotSave.inventory.quest.medallionForest = 1;
         break;
     case GI_OOT_RUPEE_GREEN:
     case GI_OOT_TC_RUPEE_GREEN:
-        if (noEffect)
-            addRupees(1);
+        comboAddCommonItemOot(SITEM_RUPEE_GREEN, noEffect);
         break;
     case GI_OOT_RUPEE_BLUE:
     case GI_OOT_TC_RUPEE_BLUE:
-        if (noEffect)
-            addRupees(5);
+        comboAddCommonItemOot(SITEM_RUPEE_BLUE, noEffect);
         break;
     case GI_OOT_RUPEE_RED:
     case GI_OOT_TC_RUPEE_RED:
-        if (noEffect)
-            addRupees(20);
+        comboAddCommonItemOot(SITEM_RUPEE_RED, noEffect);
         break;
     case GI_OOT_RUPEE_PURPLE:
     case GI_OOT_TC_RUPEE_PURPLE:
-        if (noEffect)
-            addRupees(50);
+        comboAddCommonItemOot(SITEM_RUPEE_PURPLE, noEffect);
         break;
     case GI_OOT_RUPEE_HUGE:
-        if (noEffect)
-            addRupees(200);
+        comboAddCommonItemOot(SITEM_RUPEE_GOLD, noEffect);
         break;
     case GI_OOT_RECOVERY_HEART:
-        if (noEffect)
-            addHealth(1);
+        comboAddCommonItemOot(SITEM_RECOVERY_HEART, noEffect);
         break;
     case GI_OOT_WEIRD_EGG:
         addTradeChild(0);
@@ -684,7 +1008,7 @@ int comboAddItemOot(s16 gi, int noEffect)
         addTradeChild(2);
         break;
     case GI_OOT_MASK_KEATON:
-        addTradeChild(3);
+        comboAddCommonItemOot(SITEM_MASK_KEATON, noEffect);
         break;
     case GI_OOT_MASK_SKULL:
         addTradeChild(4);
@@ -693,19 +1017,19 @@ int comboAddItemOot(s16 gi, int noEffect)
         addTradeChild(5);
         break;
     case GI_OOT_MASK_BUNNY:
-        addTradeChild(6);
+        comboAddCommonItemOot(SITEM_MASK_BUNNY, noEffect);
         break;
     case GI_OOT_MASK_GORON:
-        addTradeChild(7);
+        comboAddCommonItemOot(SITEM_MASK_GORON, noEffect);
         break;
     case GI_OOT_MASK_ZORA:
-        addTradeChild(8);
+        comboAddCommonItemOot(SITEM_MASK_ZORA, noEffect);
         break;
     case GI_OOT_MASK_GERUDO:
         addTradeChild(9);
         break;
     case GI_OOT_MASK_TRUTH:
-        addTradeChild(10);
+        comboAddCommonItemOot(SITEM_MASK_TRUTH, noEffect);
         break;
     case GI_OOT_POCKET_EGG:
         addTradeAdult(0);

@@ -85,7 +85,7 @@ void comboCreateSaveMM(void)
     gMmSave.playerForm = 4;
     gMmSave.time = 0x3fff;
     gMmSave.playerData.health = 0x30;
-    gMmSave.playerData.healthCapacity = 0x30;
+    gMmSave.playerData.healthMax = 0x30;
     gMmSave.playerData.unk_20 = 0xff00;
     gMmSave.playerData.unk_24 = 0xff00;
     gMmSave.playerData.savedSceneNum = 8;
@@ -103,7 +103,7 @@ void comboCreateSaveMM(void)
     memcpy(gMmSave.playerData.newf, "ZELDA3", 6);
 
     /* Copy the player name */
-    copyName(gMmSave.playerData.playerName, gSave.playerName);
+    copyName(gMmSave.playerData.playerName, gSave.playerData.playerName);
 
     /* Set some events */
     MM_SET_EVENT_WEEK(EV_MM_WEEK_FIRST_CYCLE);

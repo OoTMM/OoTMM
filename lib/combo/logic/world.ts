@@ -5,6 +5,7 @@ import { ExprParser } from './expr-parser';
 import { DATA_POOL, DATA_MACROS, DATA_WORLD, DATA_REGIONS, DATA_ENTRANCES } from '../data';
 import { Settings } from '../settings';
 import { Monitor } from '../monitor';
+import { isSong } from './items';
 
 export type ExprMap = {
   [k: string]: Expr;
@@ -53,6 +54,7 @@ export type World = {
   gossip: {[k: string]: WorldGossip};
   checkHints: {[k: string]: string[]};
   entrances: WorldEntrance[];
+  songLocations: Set<string>;
 };
 
 export const DUNGEONS_REGIONS: {[k: string]: string} = {
@@ -99,7 +101,7 @@ export class LogicPassWorld {
       settings: Settings,
     }
   ) {
-    this.world = { areas: {}, checks: {}, dungeons: {}, regions: {}, gossip: {}, checkHints: {}, entrances: [] };
+    this.world = { areas: {}, checks: {}, dungeons: {}, regions: {}, gossip: {}, checkHints: {}, entrances: [], songLocations: new Set() };
   }
 
   run() {
@@ -211,6 +213,10 @@ export class LogicPassWorld {
 
       const check = { game, type, scene, id, item, hint } as WorldCheck;
       this.world.checks[location] = check;
+
+      if (isSong(item)) {
+        this.world.songLocations.add(location);
+      }
     }
   }
 

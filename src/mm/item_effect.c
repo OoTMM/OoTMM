@@ -8,7 +8,7 @@ static void addHealth(u8 count)
 static void refillMagic(int level)
 {
     gSave.playerData.magicLevel = 0;
-    gSave.playerData.magic = level * 0x30;
+    gSave.playerData.magicAmount = level * 0x30;
     gSaveContext.magicTarget = level * 0x30;
 }
 
@@ -21,6 +21,52 @@ static void reloadIconsC(GameState_Play* play)
 {
     for (int i = 1; i < 4; i++)
         Interface_LoadItemIconImpl(play, i);
+}
+
+void comboAddItemSharedForeignEffect(GameState_Play* play, s16 gi)
+{
+    if (comboConfig(CFG_SHARED_WALLETS))
+    {
+        switch (gi)
+        {
+        case GI_OOT_RUPEE_GREEN:
+        case GI_OOT_TC_RUPEE_GREEN:
+            addRupees(1);
+            break;
+        case GI_OOT_RUPEE_BLUE:
+        case GI_OOT_TC_RUPEE_BLUE:
+            addRupees(5);
+            break;
+        case GI_OOT_RUPEE_RED:
+        case GI_OOT_TC_RUPEE_RED:
+            addRupees(20);
+            break;
+        case GI_OOT_RUPEE_PURPLE:
+        case GI_OOT_TC_RUPEE_PURPLE:
+            addRupees(50);
+            break;
+        case GI_OOT_RUPEE_HUGE:
+            addRupees(200);
+            break;
+        }
+    }
+
+    if (comboConfig(CFG_SHARED_HEALTH))
+    {
+        switch (gi)
+        {
+        case GI_OOT_RECOVERY_HEART:
+            addHealth(1);
+            break;
+        case GI_OOT_HEART_PIECE:
+        case GI_OOT_TC_HEART_PIECE:
+        case GI_OOT_HEART_CONTAINER:
+        case GI_OOT_HEART_CONTAINER2:
+        case GI_OOT_DEFENSE_UPGRADE:
+            addHealth(20);
+            break;
+        }
+    }
 }
 
 int comboAddItemEffect(GameState_Play* play, s16 gi)
@@ -96,7 +142,7 @@ int comboAddItemEffect(GameState_Play* play, s16 gi)
     case GI_MM_SEAHORSE:
     case GI_MM_SEAHORSE2:
     case GI_MM_MILK:
-    case GI_MM_CHATEAU_ROMANI:
+    case GI_MM_CHATEAU:
         reloadIconsC(play);
         break;
     }

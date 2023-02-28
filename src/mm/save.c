@@ -107,7 +107,7 @@ void Sram_SaveEndOfCycleWrapper(GameState_Play* play)
         case ITEM_MM_BOTTLED_GOLD_DUST:
             break;
         default:
-            *slot = ITEM_MM_EMPTY_BOTTLE;
+            *slot = ITEM_MM_BOTTLE_EMPTY;
             break;
         }
     }

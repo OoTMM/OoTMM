@@ -1,11 +1,15 @@
 #include <combo.h>
 
 #if defined(GAME_OOT)
-# define comboAddItemNative     comboAddItemOot
-# define comboAddItemForeign    comboAddItemMm
+# define comboAddItemNative             comboAddItemOot
+# define comboAddItemSharedNative       comboAddItemSharedOot
+# define comboAddItemForeign            comboAddItemMm
+# define comboAddItemSharedForeign      comboAddItemSharedMm
 #else
-# define comboAddItemNative     comboAddItemMm
-# define comboAddItemForeign    comboAddItemOot
+# define comboAddItemNative             comboAddItemMm
+# define comboAddItemSharedNative       comboAddItemSharedMm
+# define comboAddItemForeign            comboAddItemOot
+# define comboAddItemSharedForeign      comboAddItemSharedOot
 #endif
 
 const u8 kMaxSticks[] = { 0, 10, 20, 30 };
@@ -23,10 +27,13 @@ int comboAddItem(GameState_Play* play, s16 gi)
     if (gi & MASK_FOREIGN_GI)
     {
         count = comboAddItemForeign(gi & ~MASK_FOREIGN_GI, 1);
+        comboAddItemSharedForeign(gi & ~MASK_FOREIGN_GI, 0);
+        comboAddItemSharedForeignEffect(play, gi & ~MASK_FOREIGN_GI);
     }
     else
     {
         count = comboAddItemNative(gi, 0);
+        comboAddItemSharedNative(gi, 0);
         count2 = comboAddItemEffect(play, gi);
         if (!count)
             count = count2;
@@ -41,10 +48,12 @@ int comboAddItemNoEffect(s16 gi)
     if (gi & MASK_FOREIGN_GI)
     {
         comboAddItemForeign(gi & ~MASK_FOREIGN_GI, 1);
+        comboAddItemSharedForeign(gi & ~MASK_FOREIGN_GI, 1);
     }
     else
     {
         comboAddItemNative(gi, 1);
+        comboAddItemSharedNative(gi, 1);
     }
     return -1;
 }
@@ -58,14 +67,14 @@ static int isItemUnavailableOot(s32 gi)
     case GI_OOT_BOMBS_10:
     case GI_OOT_BOMBS_20:
     case GI_OOT_BOMBS_30:
-        return gOotSave.upgrades.bombBag == 0;
+        return gOotSave.inventory.upgrades.bombBag == 0;
     case GI_OOT_ARROWS_5:
     case GI_OOT_ARROWS_10:
     case GI_OOT_ARROWS_30:
-        return gOotSave.upgrades.quiver == 0;
+        return gOotSave.inventory.upgrades.quiver == 0;
     case GI_OOT_DEKU_SEEDS_5:
     case GI_OOT_DEKU_SEEDS_30:
-        return gOotSave.upgrades.bulletBag == 0;
+        return gOotSave.inventory.upgrades.bulletBag == 0;
     default:
         return 0;
     }
@@ -156,4 +165,32 @@ int comboIsItemMinor(s16 gi)
         return isItemMinorMm(gi & ~MASK_FOREIGN_GI);
     else
         return isItemMinorOot(gi);
+}
+
+void comboSyncItems(void)
+{
+    if (comboConfig(CFG_SHARED_BOWS))
+        gForeignSave.inventory.ammo[ITS_FOREIGN_BOW] = gSave.inventory.ammo[ITS_NATIVE_BOW];
+
+    if (comboConfig(CFG_SHARED_BOMB_BAGS))
+        gForeignSave.inventory.ammo[ITS_FOREIGN_BOMBS] = gSave.inventory.ammo[ITS_NATIVE_BOMBS];
+
+    if (comboConfig(CFG_SHARED_MAGIC))
+       gForeignSave.playerData.magicAmount = gSave.playerData.magicAmount;
+
+    if (comboConfig(CFG_SHARED_NUTS_STICKS))
+    {
+        gForeignSave.inventory.ammo[ITS_FOREIGN_NUTS] = gSave.inventory.ammo[ITS_NATIVE_NUTS];
+        gForeignSave.inventory.ammo[ITS_FOREIGN_STICKS] = gSave.inventory.ammo[ITS_NATIVE_STICKS];
+    }
+
+    if (comboConfig(CFG_SHARED_WALLETS))
+        gForeignSave.playerData.rupees = gSave.playerData.rupees;
+
+    if (comboConfig(CFG_SHARED_HEALTH))
+    {
+        gForeignSave.playerData.healthMax = gSave.playerData.healthMax;
+        gForeignSave.playerData.health = gSave.playerData.health;
+        gForeignSave.inventory.quest.heartPieces = gSave.inventory.quest.heartPieces;
+    }
 }

@@ -1,7 +1,7 @@
 import { Buffer } from 'buffer';
 
 import { options, OptionsInput } from './options';
-import { Generator } from './generator';
+import { Generator, GeneratorOutput } from './generator';
 import { Monitor, MonitorCallbacks } from './monitor';
 import { SETTINGS, DEFAULT_SETTINGS, SETTINGS_CATEGORIES, Settings, TRICKS } from './settings';
 import { worldState } from './logic';
@@ -10,12 +10,14 @@ import { addItem, isDungeonItem, isDungeonReward, isJunk, isStrayFairy, isToken,
 import { EXTRA_ITEMS } from './logic/solve';
 import { isShuffled } from './logic/is-shuffled';
 
-type GeneratorParams = {
+export type GeneratorParams = {
   oot: Buffer,
   mm: Buffer,
   opts?: OptionsInput,
   monitor?: MonitorCallbacks
 };
+
+export type { GeneratorOutput, Settings, OptionsInput, Items };
 
 type LocInfo = {
   [k: string]: string[]

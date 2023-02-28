@@ -4,6 +4,26 @@
 #include <combo/types.h>
 #include <combo/util.h>
 
+typedef struct
+{
+    char        newf[6];
+    s16         deathCount;
+    u8          playerName[8];
+    s16         ddOnlyFlag;
+    s16         healthMax;
+    s16         health;
+    s8          magicSize;
+    s8          magicAmount;
+    u16         rupees;
+    u16         swordHealth;
+    char        unk_38[2];
+    u8          magicUpgrade;
+    char        unk_3b[1];
+    u8          magicUpgrade2;
+    u8          doubleDefense;
+}
+OotSavePlayerData;
+
 typedef union
 {
     struct
@@ -95,38 +115,7 @@ OotDungeonItems;
 
 typedef struct
 {
-    u32                     entrance;
-    u32                     age;
-    u32                     cutscene;
-    u16                     worldTime;
-    u16                     unk_0e;
-    u32                     isNight;
-    char                    unk_14[0x4];
-    u32                     tradeQuestFlag;
-    char                    newf[6];
-    s16                     deathCount;
-    u8                      playerName[8];
-    s16                     ddOnlyFlag;
-    s16                     healthMax;
-    s16                     health;
-    s8                      magicSize;
-    s8                      magicAmount;
-    u16                     rupees;
-    u16                     swordHealth;
-    char                    unk_38[2];
-    u8                      magicUpgrade;
-    char                    unk_3b[1];
-    u8                      magicUpgrade2;
-    u8                      doubleDefense;
-    u8                      isBiggoronSword;
-    u8                      ocarinaGameRound;
-    OotItemEquips           childEquips;
-    OotItemEquips           adultEquips;
-    char                    unk_54[0x12];
-    u16                     sceneId;
-    OotItemEquips           equips;
-    char                    unk_72[0x2];
-    u8                      inventory[0x18];
+    u8                      items[0x18];
     u8                      ammo[0xf];
     u8                      beans;
     OotEquipment            equipment;
@@ -137,6 +126,29 @@ typedef struct
     s8                      dungeonKeys[0x13];
     u8                      doubleDefenseHearts;
     u16                     goldTokens;
+}
+OotInventory;
+
+typedef struct
+{
+    u32                     entrance;
+    u32                     age;
+    u32                     cutscene;
+    u16                     worldTime;
+    u16                     unk_0e;
+    u32                     isNight;
+    char                    unk_14[0x4];
+    u32                     tradeQuestFlag;
+    OotSavePlayerData       playerData;
+    u8                      isBiggoronSword;
+    u8                      ocarinaGameRound;
+    OotItemEquips           childEquips;
+    OotItemEquips           adultEquips;
+    char                    unk_54[0x12];
+    u16                     sceneId;
+    OotItemEquips           equips;
+    char                    unk_72[0x2];
+    OotInventory            inventory;
     OotPermanentSceneFlags  perm[101];
     char                    unk_be0[0x2f4];
     u16                     eventsChk[14];
@@ -147,15 +159,15 @@ typedef struct
 }
 OotSave;
 
-ASSERT_OFFSET(OotSave, childEquips, 0x40);
-ASSERT_OFFSET(OotSave, adultEquips, 0x4a);
-ASSERT_OFFSET(OotSave, unk_54,      0x54);
-ASSERT_OFFSET(OotSave, sceneId,     0x66);
-ASSERT_OFFSET(OotSave, equips,      0x68);
-ASSERT_OFFSET(OotSave, equipment,   0x9c);
-ASSERT_OFFSET(OotSave, perm,        0xd4);
-ASSERT_OFFSET(OotSave, unk_be0,     0xbe0);
-ASSERT_OFFSET(OotSave, checksum,    0x1352);
+ASSERT_OFFSET(OotSave, childEquips,             0x40);
+ASSERT_OFFSET(OotSave, adultEquips,             0x4a);
+ASSERT_OFFSET(OotSave, unk_54,                  0x54);
+ASSERT_OFFSET(OotSave, sceneId,                 0x66);
+ASSERT_OFFSET(OotSave, equips,                  0x68);
+ASSERT_OFFSET(OotSave, inventory.equipment,     0x9c);
+ASSERT_OFFSET(OotSave, perm,                    0xd4);
+ASSERT_OFFSET(OotSave, unk_be0,                 0xbe0);
+ASSERT_OFFSET(OotSave, checksum,                0x1352);
 
 typedef struct
 {
@@ -189,8 +201,9 @@ _Static_assert(sizeof(OotSaveContext) == 0x1450, "OotSaveContext size is wrong")
 
 #if defined(GAME_OOT)
 ALIGNED(16) extern OotSaveContext gSaveContext;
-# define gOotSave   (gSaveContext.save)
-# define gSave      gOotSave
+# define gOotSave       (gSaveContext.save)
+# define gSave          gOotSave
+# define gForeignSave   gMmSave
 #else
 ALIGNED(16) extern OotSave gOotSave;
 #endif

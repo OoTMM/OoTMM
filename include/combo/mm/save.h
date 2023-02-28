@@ -8,10 +8,10 @@ typedef struct
     char    newf[6];
     u16     deaths;
     u8      playerName[8];
-    s16     healthCapacity;
+    s16     healthMax;
     s16     health;
     s8      magicLevel;
-    s8      magic;
+    s8      magicAmount;
     s16     rupees;
     u16     swordHealth;
     u16     tatlTimer;
@@ -38,8 +38,10 @@ MmItemEquips;
 
 typedef struct
 {
-    u32     unused:16;
-    u32     unused2:2;
+    u32     unused:9;
+    u32     dekuNut:3;
+    u32     dekuStick:3;
+    u32     unused2:3;
     u32     wallet:2;
     u32     unused3:6;
     u32     bombBag:3;
@@ -88,7 +90,7 @@ typedef struct
     u8              items[48];
     s8              ammo[24];
     MmUpgrades      upgrades;
-    MmQuestItems    questItems;
+    MmQuestItems    quest;
     MmDungeonItems  dungeonItems[10];
     s8              dungeonKeys[9];
     s8              defenseHearts;
@@ -235,8 +237,9 @@ ASSERT_OFFSET(MmSaveContext, dungeonId,     0x48c8);
 
 #if defined(GAME_MM)
 ALIGNED(16) extern MmSaveContext gSaveContext;
-# define gMmSave    (gSaveContext.save)
-# define gSave      gMmSave
+# define gMmSave        (gSaveContext.save)
+# define gSave          gMmSave
+# define gForeignSave   gOotSave
 #else
 ALIGNED(16) extern MmSave gMmSave;
 #endif

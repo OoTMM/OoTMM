@@ -70,13 +70,20 @@ static s32 progressiveMagic(void)
 
 static s32 progressiveSongLullaby(void)
 {
-    switch (gMmSave.inventory.questItems.songLullabyIntro)
+    switch (gMmSave.inventory.quest.songLullabyIntro)
     {
     case 0:
         return GI_MM_SONG_GORON_HALF;
     default:
         return GI_MM_SONG_GORON;
     }
+}
+
+static s32 progressiveHookshot(void)
+{
+    if (!gOotExtraItems.hookshot)
+        return GI_MM_HOOKSHOT;
+    return GI_OOT_LONGSHOT | MASK_FOREIGN_GI;
 }
 
 s32 comboProgressiveMm(s32 gi)
@@ -115,6 +122,10 @@ s32 comboProgressiveMm(s32 gi)
     case GI_MM_SONG_GORON_HALF:
         if (comboConfig(CFG_MM_PROGRESSIVE_LULLABY))
             gi = progressiveSongLullaby();
+        break;
+    case GI_MM_HOOKSHOT:
+        if (comboConfig(CFG_SHARED_HOOKSHOT))
+            gi = progressiveHookshot();
         break;
     }
 

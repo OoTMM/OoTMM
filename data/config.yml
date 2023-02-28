@@ -8,3 +8,15 @@ MM_PROGRESSIVE_SHIELDS:         0x06
 MM_PROGRESSIVE_LULLABY:         0x07
 DOOR_OF_TIME_OPEN:              0x08
 ER_DUNGEONS:                    0x09
+SHARED_BOWS:                    0x0a
+SHARED_BOMB_BAGS:               0x0b
+SHARED_MAGIC:                   0x0c
+SHARED_MAGIC_ARROWS:            0x0d
+SHARED_SONGS:                   0x0e
+SHARED_NUTS_STICKS:             0x0f
+SHARED_HOOKSHOT:                0x10
+SHARED_LENS:                    0x11
+SHARED_OCARINA:                 0x12
+SHARED_MASKS:                   0x13
+SHARED_WALLETS:                 0x14
+SHARED_HEALTH:                  0x15
