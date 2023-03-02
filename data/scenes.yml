@@ -205,3 +205,4 @@ MM_LAUNDRY_POOL:                        0x70
 
 NPC:     0xf0
 GS:      0xf1
+COW:     0xf2

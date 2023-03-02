@@ -40,5 +40,6 @@ MiscFlags;
 #define gMmExtraFlags  SAVE_EXTRA_RECORD(MmExtraFlags,  5)
 #define gMmExtraFlags2 SAVE_EXTRA_RECORD(MmExtraFlags2, 6)
 #define gMiscFlags     SAVE_EXTRA_RECORD(MiscFlags,     7)
+#define gCowFlags      SAVE_EXTRA_RECORD(u32,           8)
 
 #endif

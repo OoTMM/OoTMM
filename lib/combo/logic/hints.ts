@@ -175,6 +175,9 @@ export class LogicPassHints {
     if (isHouseToken(item) && this.state.settings.housesSkulltulaTokens === 'none') {
       return false;
     }
+    if (this.state.world.checks[loc].type === 'cow' && this.state.settings.cowShuffle === 'none') {
+      return false;
+    }
     return true;
   }
 

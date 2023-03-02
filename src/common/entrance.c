@@ -8,6 +8,7 @@
 
 s8  gIsEntranceOverride;
 s32 gLastEntrance;
+s32 gLastScene;
 
 typedef struct PACKED ALIGNED(4)
 {

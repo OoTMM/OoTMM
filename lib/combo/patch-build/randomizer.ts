@@ -264,6 +264,9 @@ const gameChecks = (settings: Settings, game: Game, logic: LogicResult): Buffer 
     case 'gs':
       sceneId = 0xf1;
       break;
+    case 'cow':
+      sceneId = 0xf2;
+      break;
     case 'collectible':
       id |= 0x40;
       break;

@@ -21,6 +21,7 @@
     WELL_BIG_POE: "has(MASK_GIBDO) && has_bottle && has(BOMB_BAG) && (has(BOW) || has(ZORA))"
   locations:
     "Beneath the Well Skulltulla Chest": "has(MASK_GIBDO) && has_bottle"
+    "Beneath the Well Cow": "has(MASK_GIBDO) && has_bottle && can_play(SONG_EPONA)"
 "Beneath the Well End":
   region: BENEATH_THE_WELL
   exits:

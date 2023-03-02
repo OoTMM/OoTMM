@@ -8,6 +8,7 @@ Kokiri Forest Storms Grotto,                          chest,          NONE,     
 Kokiri Forest GS Soil,                                gs,             NONE,                 KOKIRI_FOREST,                  0x68,                       GS_TOKEN
 Kokiri Forest GS Night Child,                         gs,             NONE,                 KOKIRI_FOREST,                  0x69,                       GS_TOKEN
 Kokiri Forest GS Night Adult,                         gs,             NONE,                 KOKIRI_FOREST,                  0x6a,                       GS_TOKEN
+Kokiri Forest Cow,                                    cow,            NONE,                 KOKIRI_FOREST,                  0x00,                       MILK
 Malon Egg,                                            npc,            NONE,                 HYRULE_CASTLE,                  MALON_EGG,                  CHICKEN
 Zelda's Letter,                                       npc,            NONE,                 CASTLE_COURTYARD,               ZELDA_LETTER,               ZELDA_LETTER
 Zelda's Song,                                         npc,            NONE,                 CASTLE_COURTYARD,               ZELDA_SONG,                 SONG_ZELDA
@@ -44,6 +45,7 @@ Kakariko GS House of Skulltula,                       gs,             NONE,     
 Kakariko GS Bazaar,                                   gs,             NONE,                 KAKARIKO_VILLAGE,               0x89,                       GS_TOKEN
 Kakariko GS Ladder,                                   gs,             NONE,                 KAKARIKO_VILLAGE,               0x8a,                       GS_TOKEN
 Kakariko Potion Shop Odd Potion,                      npc,            NONE,                 KAKARIKO_POTION_SHOP,           TRADE_ODD_POTION,           ODD_POTION
+Kakariko Cow,                                         cow,            NONE,                 KAKARIKO_VILLAGE,               0x06,                       MILK
 Graveyard Dampe Game,                                 collectible,    NONE,                 GRAVEYARD,                      0x1f,                       HEART_PIECE
 Graveyard ReDead Tomb,                                chest,          NONE,                 TOMB_REDEAD,                    0x00,                       HEART_PIECE
 Graveyard Royal Tomb Song,                            npc,            NONE,                 TOMB_ROYAL,                     ROYAL_TOMB_SONG,            SONG_SUN
@@ -64,6 +66,7 @@ Death Mountain GS Entrance,                           gs,             NONE,     
 Death Mountain GS Soil,                               gs,             NONE,                 DEATH_MOUNTAIN_TRAIL,           0x81,                       GS_TOKEN
 Death Mountain GS Above Dodongo,                      gs,             NONE,                 DEATH_MOUNTAIN_TRAIL,           0x83,                       GS_TOKEN
 Death Mountain GS Before Climb,                       gs,             NONE,                 DEATH_MOUNTAIN_TRAIL,           0x84,                       GS_TOKEN
+Death Mountain Cow,                                   cow,            NONE,                 DEATH_MOUNTAIN_TRAIL,           0x07,                       MILK
 Darunia,                                              npc,            NONE,                 GORON_CITY,                     DARUNIA_BRACELET,           STRENGTH
 Goron City Maze Center 1,                             chest,          NONE,                 GORON_CITY,                     0x02,                       RUPEE_PURPLE
 Goron City Maze Center 2,                             chest,          NONE,                 GORON_CITY,                     0x01,                       RUPEE_PURPLE
@@ -119,6 +122,10 @@ Lon Lon Ranch GS Tree,                                gs,             NONE,     
 Lon Lon Ranch GS House,                               gs,             NONE,                 LON_LON_RANCH,                  0x62,                       GS_TOKEN
 Lon Lon Ranch GS Rain Shed,                           gs,             NONE,                 LON_LON_RANCH,                  0x61,                       GS_TOKEN
 Lon Lon Ranch GS Back Wall,                           gs,             NONE,                 LON_LON_RANCH,                  0x60,                       GS_TOKEN
+Lon Lon Ranch Stables Cow Left,                       cow,            NONE,                 LON_LON_RANCH,                  0x02,                       MILK
+Lon Lon Ranch Stables Cow Right,                      cow,            NONE,                 LON_LON_RANCH,                  0x03,                       MILK
+Lon Lon Ranch Silo Cow Front,                         cow,            NONE,                 LON_LON_RANCH,                  0x04,                       MILK
+Lon Lon Ranch Silo Cow Back,                          cow,            NONE,                 LON_LON_RANCH,                  0x05,                       MILK
 Hyrule Field Ocarina of Time,                         npc,            NONE,                 HYRULE_FIELD,                   OCARINA_TIME_ITEM,          OCARINA
 Hyrule Field Song of Time,                            npc,            NONE,                 HYRULE_FIELD,                   OCARINA_TIME_SONG,          SONG_TIME
 Hyrule Field Grotto Scrub HP,                         npc,            NONE,                 GROTTOS,                        SCRUB_HP,                   HEART_PIECE
@@ -128,6 +135,7 @@ Hyrule Field Grotto Market,                           chest,          NONE,     
 Hyrule Field Grotto Tektite HP,                       collectible,    NONE,                 GROTTOS,                        0x01,                       HEART_PIECE
 Hyrule Field Grotto Near Kakariko GS,                 gs,             NONE,                 GROTTOS,                        0x59,                       GS_TOKEN
 Hyrule Field Grotto Near Gerudo GS,                   gs,             NONE,                 GROTTOS,                        0x58,                       GS_TOKEN
+Hyrule Field Cow,                                     cow,            NONE,                 HYRULE_FIELD,                   0x01,                       MILK
 Market Dog Lady HP,                                   npc,            NONE,                 BACK_ALLEY_HOUSE,               DOG_LADY,                   HEART_PIECE
 Market Pot House Big Poes,                            npc,            NONE,                 GUARD_HOUSE,                    POE_COLLECTOR,              BOTTLE_EMPTY
 Market Pot House GS,                                  gs,             NONE,                 GUARD_HOUSE,                    0x7b,                       GS_TOKEN
@@ -153,6 +161,7 @@ Gerudo Valley GS Soil,                                gs,             NONE,     
 Gerudo Valley GS Wall,                                gs,             NONE,                 GERUDO_VALLEY,                  0xa1,                       GS_TOKEN
 Gerudo Valley GS Tent,                                gs,             NONE,                 GERUDO_VALLEY,                  0xa3,                       GS_TOKEN
 Gerudo Valley GS Pillar,                              gs,             NONE,                 GERUDO_VALLEY,                  0xa2,                       GS_TOKEN
+Gerudo Valley Cow,                                    cow,            NONE,                 GERUDO_VALLEY,                  0x08,                       MILK
 Gerudo Fortress Chest,                                chest,          NONE,                 GERUDO_FORTRESS,                0x00,                       HEART_PIECE
 Gerudo Fortress Archery Reward 1,                     npc,            GERUDO_ARCHERY,       GERUDO_FORTRESS,                GERUDO_ARCHERY_1,           HEART_PIECE
 Gerudo Fortress Archery Reward 2,                     npc,            GERUDO_ARCHERY,       GERUDO_FORTRESS,                GERUDO_ARCHERY_2,           BOW

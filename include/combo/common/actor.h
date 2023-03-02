@@ -28,6 +28,7 @@
 # define AC_EN_OWL          0x14d
 # define AC_EN_EX_ITEM      0x168
 # define AC_EN_GO2          0x1ae
+# define AC_EN_COW          0x1c6
 #endif
 
 #if defined(GAME_MM)
@@ -35,10 +36,11 @@
 # define AC_EN_BOX          0x006
 # define AC_ITEM00          0x00e
 # define AC_ITEM_GIVER      0x01f
+# define AC_CUSTOM_WARP     0x023
 # define AC_DOOR_WARP1      0x038
 # define AC_ITEM_B_HEART    0x03a
+# define AC_EN_COW          0x0f3
 # define AC_DM_HINA         0x140
-# define AC_CUSTOM_WARP     0x023
 #endif
 
 #if !defined(__ASSEMBLER__)

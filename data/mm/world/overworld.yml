@@ -241,8 +241,8 @@
     "Termina Field Bio Baba Grotto": "can_break_boulders && has(MASK_ZORA)"
     "Termina Field Scrub": "event(SCRUB_TELESCOPE) && has(WALLET)"
     "Termina Field Gossip Stones HP": "has_ocarina && ((has(MASK_GORON) && has_goron_song) || (has(MASK_DEKU) && has(SONG_AWAKENING)) || (has(MASK_ZORA) && has(SONG_ZORA))) && can_break_boulders"
-#    "Termina Field Log Grotto Cow 1": "has_explosives && can_play(SONG_EPONA)"
-#    "Termina Field Log Grotto Cow 2": "has_explosives && can_play(SONG_EPONA)"
+    "Termina Field Cow Front": "has_explosives && can_play(SONG_EPONA)"
+    "Termina Field Cow Back": "has_explosives && can_play(SONG_EPONA)"
   gossip:
     "Termina Field Gossip Southeast": "true"
     "Termina Field Gossip Southwest": "true"
@@ -589,10 +589,10 @@
   region: ROMANI_RANCH
   exits:
     "Romani Ranch": "true"
-#  locations":
-#    "Stables Cow 1": "can_use_keg && can_play(SONG_EPONA)"
-#    "Stables Cow 2": "can_use_keg && can_play(SONG_EPONA)"
-#    "Stables Cow 3": "can_use_keg && can_play(SONG_EPONA)"
+  locations:
+    "Romani Ranch Barn Cow Left": "can_use_keg && can_play(SONG_EPONA)"
+    "Romani Ranch Barn Cow Right Front": "can_use_keg && can_play(SONG_EPONA)"
+    "Romani Ranch Barn Cow Right Back": "can_use_keg && can_play(SONG_EPONA)"
 "Great Bay Fence":
   region: TERMINA_FIELD
   exits:
@@ -615,8 +615,8 @@
     "Great Bay Coast HP": "can_use_beans && scarecrow_hookshot"
     "Great Bay Coast Fisherman HP": "has(HOOKSHOT) && event(BOSS_GREAT_BAY)"
     "Great Bay Coast Fisherman Grotto": "true"
-#    "Great Bay Coast Ledge Cow 1": "has(HOOKSHOT) && can_play(SONG_EPONA)"
-#    "Great Bay Coard Ledge Cow 2": "has(HOOKSHOT) && can_play(SONG_EPONA)"
+    "Great Bay Coast Cow Front": "has(HOOKSHOT) && can_play(SONG_EPONA)"
+    "Great Bay Coast Cow Back": "has(HOOKSHOT) && can_play(SONG_EPONA)"
   gossip:
     "Great Bay Coast Gossip": "true"
 "Great Bay Coast Captured":
