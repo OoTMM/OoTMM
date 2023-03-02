@@ -8,7 +8,7 @@ s32 comboProgressive(s32 gi)
 
     if (gi & MASK_FOREIGN_GI)
     {
-        gi = MASK_FOREIGN_GI | comboProgressiveMm(gi & (MASK_FOREIGN_GI - 1));
+        gi = MASK_FOREIGN_GI ^ comboProgressiveMm(gi ^ MASK_FOREIGN_GI);
     }
     else
     {
