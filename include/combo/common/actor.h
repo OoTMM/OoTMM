@@ -28,6 +28,7 @@
 # define AC_EN_OWL          0x14d
 # define AC_EN_EX_ITEM      0x168
 # define AC_EN_GO2          0x1ae
+# define AC_EN_COW          0x1c6
 #endif
 
 #if defined(GAME_MM)
