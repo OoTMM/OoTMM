@@ -144,6 +144,10 @@ void hookPlay_Init(GameState_Play* play)
 
     Play_Init(play);
     gLastEntrance = gSave.entranceIndex;
+    if (play->sceneId != SCE_MM_GROTTOS)
+    {
+        gLastScene = play->sceneId;
+    }
     comboSpawnItemGivers(play);
     comboSpawnCustomWarps(play);
 

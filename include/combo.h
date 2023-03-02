@@ -365,6 +365,7 @@ int comboBossLairIndex();
 
 extern s8 gIsEntranceOverride;
 extern s32 gLastEntrance;
+extern s32 gLastScene;
 
 /* Warp */
 void comboTriggerWarp(GameState_Play* play, int index);
