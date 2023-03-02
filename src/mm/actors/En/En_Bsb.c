@@ -8,10 +8,6 @@ static void EnBsb_OnDeath(Actor* this, GameState_Play* play)
     /* Mark Keeta as dead */
     MM_SET_EVENT_WEEK(EV_MM_WEEK_KEETA_DEAD);
 
-    /* Remove bunny hood if set to prevent the player from running off the bridge */
-    if (gSave.equippedMask == PLAYER_MASK_BUNNY)
-        gSave.equippedMask = PLAYER_MASK_NONE;
-
     /* Warp on top of the bridge */
     play->nextEntrance = ((SCE_MM_IKANA_GRAVEYARD - 3) << 9) | (5 << 4);
     play->transitionType = TRANS_TYPE_NORMAL;
