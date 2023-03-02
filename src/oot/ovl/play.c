@@ -11,7 +11,6 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.items[ITS_OOT_STICKS] = ITEM_OOT_STICK;
         gSave.inventory.items[ITS_OOT_NUTS] = ITEM_OOT_NUT;
         gSave.inventory.items[ITS_OOT_BOMBS] = ITEM_OOT_BOMB;
-        gSave.inventory.items[ITS_OOT_BOW] = ITEM_OOT_BOW;
         gSave.inventory.items[ITS_OOT_ARROW_FIRE] = ITEM_OOT_ARROW_FIRE;
         gSave.inventory.items[ITS_OOT_ARROW_LIGHT] = ITEM_OOT_ARROW_LIGHT;
         gSave.inventory.items[ITS_OOT_SLINGSHOT] = ITEM_OOT_SLINGSHOT;
@@ -26,7 +25,7 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.items[ITS_OOT_HAMMER] = ITEM_OOT_HAMMER;
         gSave.inventory.items[ITS_OOT_HOOKSHOT] = ITEM_OOT_LONGSHOT;
         gSave.inventory.items[ITS_OOT_LENS] = ITEM_OOT_LENS;
-        gSave.inventory.equipment.swords = 0x3;
+        gSave.inventory.equipment.swords = 0x2;
         gSave.inventory.equipment.shields = 0x7;
         gSave.inventory.equipment.tunics = 0x7;
         gSave.inventory.equipment.boots = 0x7;
@@ -41,7 +40,6 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.ammo[ITS_OOT_STICKS] = 10;
         gSave.inventory.ammo[ITS_OOT_SLINGSHOT] = 50;
         gSave.inventory.ammo[ITS_OOT_BOMBS] = 40;
-        gSave.inventory.ammo[ITS_OOT_BOW] = 50;
         gSave.inventory.quest.songZelda = 1;
         gSave.inventory.quest.songSaria = 1;
         gSave.inventory.quest.songTime = 1;
@@ -85,6 +83,8 @@ static void debugCheat(GameState_Play* play)
         gOotExtraTrade.adult |= (1 << XITEM_OOT_ADULT_EYE_DROPS);
         gOotExtraTrade.adult |= (1 << XITEM_OOT_ADULT_CLAIM_CHECK);
         gSave.inventory.items[ITS_OOT_TRADE_ADULT] = ITEM_OOT_EYEBALL_FROG;
+
+        SetEventChk(EV_OOT_CHK_EPONA);
 
 #if defined(DEBUG_AGE)
         gSave.age = DEBUG_AGE;
@@ -227,6 +227,11 @@ void hookPlay_Init(GameState_Play* play)
             break;
         }
         gSave.eventsMisc[29] = 1;
+    }
+    else
+    {
+        /* Set sworded */
+        gSave.eventsMisc[29] = 0;
     }
 
     if (gSave.entrance == 0x007a)
