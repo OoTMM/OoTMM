@@ -204,6 +204,10 @@ export class LogicPassSolver {
     maxRequired(pools, 'MM_BOW', 1);
     maxRequired(pools, 'MM_MAGIC_UPGRADE', 1);
 
+    maxRequired(pools, 'SHARED_BOW', 1);
+    maxRequired(pools, 'SHARED_BOMB_BAG', 1);
+    maxRequired(pools, 'SHARED_MAGIC_UPGRADE', 1);
+
     for (const item in this.state.settings.startingItems) {
       const count = this.state.settings.startingItems[item];
       for (let i = 0; i < count; ++i) {
