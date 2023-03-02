@@ -107,6 +107,9 @@ s16 comboOverrideEx(int type, u16 sceneId, u16 id, s16 gi, int flags)
     case OV_GS:
         sceneId = SCE_GS;
         break;
+    case OV_COW:
+        sceneId = SCE_COW;
+        break;
     }
     return comboOverrideImpl(sceneId, id, gi, flags);
 }

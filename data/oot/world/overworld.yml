@@ -12,6 +12,8 @@
   region: KOKIRI_FOREST
   exits:
     "Kokiri Forest": "true"
+  locations:
+    "Kokiri Forest Cow": "is_adult && event(MALON_COW) && can_play(SONG_EPONA)"
 "Kokiri Forest":
   region: KOKIRI_FOREST
   exits:
@@ -63,6 +65,7 @@
     "Hyrule Field Grotto Tektite HP": "hidden_grotto_bomb && can_dive_big"
     "Hyrule Field Grotto Near Kakariko GS": "hidden_grotto_bomb && can_collect_distance"
     "Hyrule Field Grotto Near Gerudo GS": "((is_child && hidden_grotto_bomb) || can_hammer) && can_collect_distance && has_fire"
+    "Hyrule Field Cow": "((is_child && hidden_grotto_bomb) || can_hammer) && has_fire && can_play(SONG_EPONA)"
   gossip:
     "Hyrule Field Gossip Near Castle Town": "has_explosives_or_hammer"
     "Hyrule Field Gossip Near Lake Hylia": "true"
@@ -135,21 +138,32 @@
   exits:
     "Hyrule Field": "true"
     "Lon Lon Ranch Silo": "true"
+    "Lon Lon Ranch Stables": "true"
     "Lon Lon Ranch House": "true"
   events:
     EPONA: "is_adult && can_play(SONG_EPONA)"
+    MALON_COW: "is_adult && event(EPONA)"
   locations:
     "Lon Lon Ranch Malon Song": "is_child && has(OCARINA) && event(MALON)"
     "Lon Lon Ranch GS Tree": "is_child"
     "Lon Lon Ranch GS House": "can_boomerang && gs_night"
     "Lon Lon Ranch GS Rain Shed": "is_child && gs_night"
     "Lon Lon Ranch GS Back Wall": "can_boomerang && gs_night"
+"Lon Lon Ranch Stables":
+  region: LON_LON_RANCH
+  exits:
+    "Lon Lon Ranch": "true"
+  locations:
+    "Lon Lon Ranch Stables Cow Left": "can_play(SONG_EPONA)"
+    "Lon Lon Ranch Stables Cow Right": "can_play(SONG_EPONA)"
 "Lon Lon Ranch Silo":
   region: LON_LON_RANCH
   exits:
     "Lon Lon Ranch": "true"
   locations:
     "Lon Lon Ranch Silo HP": "is_child"
+    "Lon Lon Ranch Silo Cow Front": "can_play(SONG_EPONA)"
+    "Lon Lon Ranch Silo Cow Back": "can_play(SONG_EPONA)"
 "Lon Lon Ranch House":
   region: LON_LON_RANCH
   exits:
@@ -274,6 +288,7 @@
     "Kakariko GS House of Skulltula": "gs_night && is_child"
     "Kakariko GS Bazaar": "gs_night && is_child"
     "Kakariko GS Ladder": "gs_night && is_child && (can_use_slingshot || has_explosives)"
+    "Kakariko Cow": "can_play(SONG_EPONA)"
   gossip:
     "Kakariko Gossip Grotto": "true"
 "Kakariko Rooftop":
@@ -345,6 +360,7 @@
     "Death Mountain GS Entrance": "has_explosives_or_hammer"
     "Death Mountain GS Soil": "gs_soil && has_bombflowers"
     "Death Mountain GS Above Dodongo":  "gs_night && can_hammer"
+    "Death Mountain Cow": "has_explosives_or_hammer && can_play(SONG_EPONA)"
   gossip:
     "Death Mountain Gossip Grotto": "hidden_grotto_storms"
 "Death Mountain Summit":
@@ -563,6 +579,7 @@
     "Gerudo Valley Waterfall HP": "true"
     "Gerudo Valley GS Soil": "gs_soil"
     "Gerudo Valley GS Wall": "can_boomerang && gs_night"
+    "Gerudo Valley Cow": "is_child && can_play(SONG_EPONA)"
   gossip:
     "Gerudo Valley Gossip": "true"
 "Gerudo Valley After Bridge":
