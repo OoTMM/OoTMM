@@ -91,6 +91,7 @@ export class LogicPassSolver {
     this.placeJunkLocations();
 
     /* Place items fixed to default */
+    this.fixCows();
     this.fixTokens();
     this.fixFairies();
     this.fixLocations();
@@ -269,6 +270,21 @@ export class LogicPassSolver {
       const item = pool.pop();
       this.place(location, item!);
       removeItemPools(this.pools, item!);
+    }
+  }
+
+  private fixCows() {
+    if (this.state.settings.cowShuffle === 'full') {
+      return;
+    }
+
+    for (const loc in this.state.world.checks) {
+      const c = this.state.world.checks[loc];
+      if (c.type === 'cow') {
+        const item = this.state.world.checks[loc].item;
+        this.place(loc, item);
+        removeItemPools(this.pools, item);
+      }
     }
   }
 

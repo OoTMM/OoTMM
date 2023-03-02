@@ -17,7 +17,7 @@ static Actor* EnCow_GetNearestCow(GameState_Play* play)
         tmp = play->actors[i].first;
         while (tmp && count)
         {
-            if (tmp->id == AC_EN_COW && tmp->variable == 0 && (!cow || cowDist > tmp->xzDistanceFromLink))
+            if (tmp->id == AC_EN_COW && tmp->variable != 1 && (!cow || cowDist > tmp->xzDistanceFromLink))
             {
                 cow = tmp;
                 cowDist = tmp->xzDistanceFromLink;
@@ -31,22 +31,24 @@ static Actor* EnCow_GetNearestCow(GameState_Play* play)
 
 static int EnCow_GetCowID(Actor* cow, GameState_Play* play)
 {
-    switch (play->sceneId)
+    s32 sceneId;
+
+    sceneId = play->sceneId;
+    if (sceneId == SCE_MM_GROTTOS)
+        sceneId = gLastScene;
+    switch (sceneId)
     {
-    case SCE_OOT_LINK_HOUSE:
-        return 0;
-    case SCE_OOT_GROTTOS:
-        return cow->position.x > 3000.f ? 1 : 7;
-    case SCE_OOT_STABLE:
+    case SCE_MM_TERMINA_FIELD:
         cow = EnCow_GetNearestCow(play);
-        return cow->position.x < -50.f ? 2 : 3;
-    case SCE_OOT_RANCH_HOUSE_SILO:
+        return cow->position.z > 930.f ? 0x13 : 0x14;
+    case SCE_MM_GREAT_BAY_COAST:
         cow = EnCow_GetNearestCow(play);
-        return cow->position.z > -100.f ? 4 : 5;
-    case SCE_OOT_IMPA_HOUSE:
-        return 6;
-    case SCE_OOT_GERUDO_VALLEY:
-        return 8;
+        return cow->position.z > 930.f ? 0x15 : 0x16;
+    case SCE_MM_RANCH_HOUSE_BARN:
+        cow = EnCow_GetNearestCow(play);
+        return cow->position.x < -100.f ? 0x10 : cow->position.z < -100.f ? 0x12 : 0x11;
+    case SCE_MM_BENEATH_THE_WELL:
+        return 0x17;
     }
     return -1;
 }
@@ -64,8 +66,8 @@ static void EnCow_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, f
     GiveItem(this, play, gi, a, b);
 }
 
-PATCH_CALL(0x80b77fcc, EnCow_GiveItem);
-PATCH_CALL(0x80b77f30, EnCow_GiveItem);
+PATCH_CALL(0x8099cc50, EnCow_GiveItem);
+PATCH_CALL(0x8099cbb4, EnCow_GiveItem);
 
 static int EnCow_HasGivenItem(Actor* this)
 {
@@ -81,4 +83,4 @@ static int EnCow_HasGivenItem(Actor* this)
     return 0;
 }
 
-PATCH_CALL(0x80b77ef4, EnCow_HasGivenItem);
+PATCH_CALL(0x8099cb78, EnCow_HasGivenItem);
