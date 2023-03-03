@@ -337,6 +337,10 @@ export class LogicPassAnalysis {
       delete this.dependencies['OOT_SMALL_KEY_SPIRIT'];
     }
 
+    if (this.state.settings.shopShuffleOot !== 'none') {
+      delete this.dependencies['OOT_WALLET'];
+    }
+
     /* Shared items */
     this.dependencies['SHARED_MASK_TRUTH'] = [...this.dependencies['MM_MASK_TRUTH'], ...this.dependencies['OOT_MASK_TRUTH']];
     this.dependencies['SHARED_MASK_KEATON'] = [...this.dependencies['MM_MASK_KEATON']];
@@ -406,7 +410,6 @@ export class LogicPassAnalysis {
     case 'OOT_BOMB_BAG':
     case 'OOT_BOW':
     case 'OOT_SLINGSHOT':
-    case 'OOT_WALLET':
     case 'OOT_MAGIC_UPGRADE':
     case 'MM_SWORD':
     case 'MM_BOW':
@@ -418,6 +421,11 @@ export class LogicPassAnalysis {
       maximumRequired = 1;
       break;
     }
+
+    if (item === 'OOT_WALLET' && this.state.settings.shopShuffleOot === 'none') {
+      maximumRequired = 1;
+    }
+
     if (maximumRequired === -1) {
       return false;
     }
