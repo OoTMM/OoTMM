@@ -86,7 +86,24 @@ int comboShopItemSlot(GameState_Play* play, Actor_EnGirlA* girlA)
         }
     }
 
-    return 7;
+    if (play->sceneId == SCE_OOT_BAZAAR)
+    {
+        if (gSave.age == AGE_CHILD)
+        {
+            /* Market Bazaar */
+            switch (girlA->base.variable)
+            {
+            case SHOP_ARROWS_10:        return 0x08;
+            case SHOP_ARROWS_30:        return 0x09;
+            case SHOP_ARROWS_50:        return 0x0a;
+            case SHOP_STICK:            return 0x0b;
+            case SHOP_BOMBS_5:          return 0x0c;
+            case SHOP_RECOVERY_HEART:   return 0x0d;
+            case SHOP_NUTS_5:           return 0x0e;
+            case SHOP_SHIELD_HYLIAN:    return 0x0f;
+            }
+        }
+    }
 
     UNREACHABLE();
 }
