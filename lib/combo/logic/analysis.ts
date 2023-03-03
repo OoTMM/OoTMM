@@ -1,11 +1,12 @@
 import { Random, shuffle } from '../random';
 import { Settings } from '../settings';
-import { isItemImportant } from './items';
+import { isItemConsumable, isItemImportant } from './items';
 import { ItemPlacement } from './solve';
 import { World } from './world';
 import { Pathfinder, PathfinderState } from './pathfind';
 import { Monitor } from '../monitor';
 import { cloneDeep } from 'lodash';
+import { isLocationRenewable } from './helpers';
 
 const SIMPLE_DEPENDENCIES: {[k: string]: string[]} = {
   OOT_CHICKEN: [
@@ -48,9 +49,6 @@ const SIMPLE_DEPENDENCIES: {[k: string]: string[]} = {
   ],
   OOT_CLAIM_CHECK: [
     'OOT Death Mountain Biggoron Sword'
-  ],
-  OOT_WALLET: [
-    'OOT Goron City Medigoron Giant Knife'
   ],
   OOT_SONG_SUN: [
     'OOT Graveyard ReDead Tomb',
@@ -358,22 +356,14 @@ export class LogicPassAnalysis {
   }
 
   private makeSpheres() {
-    const spheres: string[][] = [];
-    const rawSpheres = this.makeSpheresRaw().reverse();
-    const spheresLocs = new Set(rawSpheres.flat());
+    const locs = this.makeSpheresRaw().reverse().flat();
+    const spheresLocs = new Set(locs);
 
-    for (const sphere of rawSpheres) {
-      const filteredSphere: string[] = [];
-      for (const loc of sphere) {
-        spheresLocs.delete(loc);
-        const pathfinderState = this.pathfinder.run(null, { items: this.state.items, restrictedLocations: spheresLocs, recursive: true, stopAtGoal: true });
-        if (!pathfinderState.goal) {
-          spheresLocs.add(loc);
-          filteredSphere.push(loc);
-        }
-      }
-      if (filteredSphere.length !== 0) {
-        spheres.push(filteredSphere);
+    for (const loc of locs) {
+      spheresLocs.delete(loc);
+      const pathfinderState = this.pathfinder.run(null, { items: this.state.items, restrictedLocations: spheresLocs, recursive: true, stopAtGoal: true });
+      if (!pathfinderState.goal) {
+        spheresLocs.add(loc);
       }
     }
 
@@ -396,6 +386,11 @@ export class LogicPassAnalysis {
     }
   }
 
+  private isLocUselessNonRenewable(loc: string) {
+    const item = this.state.items[loc];
+    return (isItemConsumable(item) && !isLocationRenewable(this.state.world, loc));
+  }
+
   private isLocUselessHeuristicCount(loc: string) {
     /* TODO: this is fragile */
     const item = this.state.items[loc];
@@ -408,7 +403,6 @@ export class LogicPassAnalysis {
     case 'OOT_BOMB_BAG':
     case 'OOT_BOW':
     case 'OOT_SLINGSHOT':
-    case 'OOT_WALLET':
     case 'OOT_MAGIC_UPGRADE':
     case 'MM_SWORD':
     case 'MM_BOW':
@@ -420,6 +414,7 @@ export class LogicPassAnalysis {
       maximumRequired = 1;
       break;
     }
+
     if (maximumRequired === -1) {
       return false;
     }
@@ -472,7 +467,7 @@ export class LogicPassAnalysis {
       if (this.requiredLocs.has(loc) || this.uselessLocs.has(loc)) {
         continue;
       }
-      if (!isItemImportant(this.state.items[loc]) || this.isLocUselessHeuristicCount(loc) || this.isLocUselessHeuristicDependencies(loc)) {
+      if (!isItemImportant(this.state.items[loc]) || this.isLocUselessNonRenewable(loc) || this.isLocUselessHeuristicCount(loc) || this.isLocUselessHeuristicDependencies(loc)) {
         this.uselessLocs.add(loc);
       }
     }

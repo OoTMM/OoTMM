@@ -1,11 +1,10 @@
-#ifndef COMBO_OOT_ACTOR_ENGIRLA_H
-#define COMBO_OOT_ACTOR_ENGIRLA_H
+#ifndef COMBO_COMMON_ACTOR_ENGIRLA_H
+#define COMBO_COMMON_ACTOR_ENGIRLA_H
 
 #include <combo/common/actor.h>
 #include <combo/util.h>
 #include <combo/types.h>
 
-/* Seems to be the same in MM? */
 typedef struct Actor_EnGirlA Actor_EnGirlA;
 
 typedef int  (*ShopPrecondFn)(GameState_Play*, Actor_EnGirlA*);
@@ -31,6 +30,10 @@ struct Actor_EnGirlA
     void*           func1;
 };
 
+#if defined(GAME_OOT)
 _Static_assert(sizeof(Actor_EnGirlA) == 0x1c4, "OoT Actor_EnGirlA size is wrong");
+#else
+_Static_assert(sizeof(Actor_EnGirlA) == 0x1cc, "MM Actor_EnGirlA size is wrong");
+#endif
 
 #endif

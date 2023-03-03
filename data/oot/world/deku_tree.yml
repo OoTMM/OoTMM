@@ -6,7 +6,7 @@
 "Deku Tree Lobby":
   dungeon: DT
   exits:
-    "Deku Tree Slingshot Room": "has_shield"
+    "Deku Tree Slingshot Room": "has_shield_for_scrubs"
     "Deku Tree Basement": "true"
   locations:
     "Deku Tree Map Chest": "true"
@@ -40,12 +40,12 @@
   dungeon: DT
   exits:
     "Deku Tree Basement Back Room": "is_child"
-    "Deku Tree Before Boss": "is_child || can_use_din || has_fire_arrows"
+    "Deku Tree Before Boss": "has_fire_or_sticks"
 "Deku Tree Before Boss":
   dungeon: DT
   exits:
     "Deku Tree Basement Ledge": "true"
-    "Deku Tree Boss": "has_shield"
+    "Deku Tree Boss": "has_shield_for_scrubs"
 "Deku Tree Boss":
   boss: true
   dungeon: DT

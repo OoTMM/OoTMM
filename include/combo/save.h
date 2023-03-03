@@ -32,14 +32,16 @@ typedef struct
 MiscFlags;
 #endif
 
-#define gOotExtraTrade SAVE_EXTRA_RECORD(OotExtraTrade, 0)
-#define gOotExtraItems SAVE_EXTRA_RECORD(OotExtraItems, 1)
-#define gOotExtraFlags SAVE_EXTRA_RECORD(OotExtraFlags, 2)
-#define gMmExtraBoss   SAVE_EXTRA_RECORD(MmExtraBoss,   3)
-#define gMmExtraTrade  SAVE_EXTRA_RECORD(MmExtraTrade,  4)
-#define gMmExtraFlags  SAVE_EXTRA_RECORD(MmExtraFlags,  5)
-#define gMmExtraFlags2 SAVE_EXTRA_RECORD(MmExtraFlags2, 6)
-#define gMiscFlags     SAVE_EXTRA_RECORD(MiscFlags,     7)
-#define gCowFlags      SAVE_EXTRA_RECORD(u32,           8)
+#define gOotExtraTrade      SAVE_EXTRA_RECORD(OotExtraTrade, 0)
+#define gOotExtraItems      SAVE_EXTRA_RECORD(OotExtraItems, 1)
+#define gOotExtraFlags      SAVE_EXTRA_RECORD(OotExtraFlags, 2)
+#define gMmExtraBoss        SAVE_EXTRA_RECORD(MmExtraBoss,   3)
+#define gMmExtraTrade       SAVE_EXTRA_RECORD(MmExtraTrade,  4)
+#define gMmExtraFlags       SAVE_EXTRA_RECORD(MmExtraFlags,  5)
+#define gMmExtraFlags2      SAVE_EXTRA_RECORD(MmExtraFlags2, 6)
+#define gMiscFlags          SAVE_EXTRA_RECORD(MiscFlags,     7)
+#define gCowFlags           SAVE_EXTRA_RECORD(u32,           8)
+#define gOotExtraShopsLo    SAVE_EXTRA_RECORD(u32,           9)
+#define gOotExtraShopsHi    SAVE_EXTRA_RECORD(u32,          10)
 
 #endif

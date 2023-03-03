@@ -25,18 +25,18 @@
 #  include <combo/oot/play.h>
 #  include <combo/oot/player.h>
 #  include <combo/oot/actors/Item_Etcetera.h>
-#  include <combo/oot/actor_engirla.h>
+#  include <combo/oot/actors/En_Ossan.h>
 # endif
 
 # if defined(GAME_MM)
 #  include <combo/mm/play.h>
 #  include <combo/mm/player.h>
-#  include <combo/mm/actor_engirla.h>
 #  include <combo/mm/actor_ensob1.h>
 #  include <combo/mm/actor_enfsn.h>
 # endif
 
 # include <combo/common/actors/En_Item00.h>
+# include <combo/common/actors/En_GirlA.h>
 # include <combo/common/actor_init.h>
 # include <combo/common/actor_item_custom.h>
 # include <combo/common/api.h>
@@ -155,6 +155,7 @@ void comboGameSwitch(GameState_Play* play, s32 entrance);
 #define OV_GS           3
 #define OV_SF           4
 #define OV_COW          5
+#define OV_SHOP         6
 
 #define OVF_PROGRESSIVE       (1 << 0)
 #define OVF_DOWNGRADE         (1 << 1)
@@ -263,6 +264,7 @@ int  comboAddItemNoEffect(s16 gi);
 
 int comboIsItemUnavailable(s16 gi);
 int comboIsItemMinor(s16 gi);
+int comboIsItemConsumable(s16 gi);
 
 void comboToggleTrade(u8* slot, u32 flags, const u8* table, u32 tableSize);
 
@@ -286,8 +288,6 @@ void comboRemoveTradeItem3(u16 xitemId);
 
 # if defined(GAME_MM)
 void comboAfterBuy(Actor_EnGirlA* girlA, GameState_Play* play);
-void comboShopDisplayTextBox(GameState_Play* play, Actor_EnGirlA* girlA, int price);
-void comboShopDisplayTextBoxConfirm(GameState_Play* play, Actor_EnGirlA* girlA, int price);
 # endif
 
 void comboSpawnItemGiver(GameState_Play* play, u16 npcId);
@@ -356,7 +356,12 @@ int  comboCsmcChestSize(s16 gi);
 #define SC_ERR_CANNOTBUY    0x02
 #define SC_ERR_NORUPEES     0x04
 
-int comboShopPrecond(GameState_Play* play, Actor_EnGirlA* girlA);
+int  comboShopItemSlot(GameState_Play* play, Actor_EnGirlA* girlA);
+int  comboShopPrecond(GameState_Play* play, Actor_EnGirlA* girlA);
+void comboShopDisplayTextBox(GameState_Play* play, Actor_EnGirlA* girlA);
+void comboShopDisplayTextBoxConfirm(GameState_Play* play, Actor_EnGirlA* girlA);
+void comboShopAfterBuy(GameState_Play* play, Actor_EnGirlA* girlA);
+void comboShopSetupItem(GameState_Play* play, Actor_EnGirlA* girlA);
 
 /* Entrance */
 void comboInitEntrances(void);

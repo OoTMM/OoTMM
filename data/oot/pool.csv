@@ -9,6 +9,14 @@ Kokiri Forest GS Soil,                                gs,             NONE,     
 Kokiri Forest GS Night Child,                         gs,             NONE,                 KOKIRI_FOREST,                  0x69,                       GS_TOKEN
 Kokiri Forest GS Night Adult,                         gs,             NONE,                 KOKIRI_FOREST,                  0x6a,                       GS_TOKEN
 Kokiri Forest Cow,                                    cow,            NONE,                 KOKIRI_FOREST,                  0x00,                       MILK
+Kokiri Shop Item 1,                                   shop,           NONE,                 KOKIRI_FOREST,                  0x00,                       RECOVERY_HEART
+Kokiri Shop Item 2,                                   shop,           NONE,                 KOKIRI_FOREST,                  0x01,                       ARROWS_10
+Kokiri Shop Item 3,                                   shop,           NONE,                 KOKIRI_FOREST,                  0x02,                       ARROWS_30
+Kokiri Shop Item 4,                                   shop,           NONE,                 KOKIRI_FOREST,                  0x03,                       DEKU_SEEDS_30
+Kokiri Shop Item 5,                                   shop,           NONE,                 KOKIRI_FOREST,                  0x04,                       NUTS_5
+Kokiri Shop Item 6,                                   shop,           NONE,                 KOKIRI_FOREST,                  0x05,                       NUTS_10
+Kokiri Shop Item 7,                                   shop,           NONE,                 KOKIRI_FOREST,                  0x06,                       STICK
+Kokiri Shop Item 8,                                   shop,           NONE,                 KOKIRI_FOREST,                  0x07,                       SHIELD_DEKU
 Malon Egg,                                            npc,            NONE,                 HYRULE_CASTLE,                  MALON_EGG,                  CHICKEN
 Zelda's Letter,                                       npc,            NONE,                 CASTLE_COURTYARD,               ZELDA_LETTER,               ZELDA_LETTER
 Zelda's Song,                                         npc,            NONE,                 CASTLE_COURTYARD,               ZELDA_SONG,                 SONG_ZELDA
@@ -46,6 +54,22 @@ Kakariko GS Bazaar,                                   gs,             NONE,     
 Kakariko GS Ladder,                                   gs,             NONE,                 KAKARIKO_VILLAGE,               0x8a,                       GS_TOKEN
 Kakariko Potion Shop Odd Potion,                      npc,            NONE,                 KAKARIKO_POTION_SHOP,           TRADE_ODD_POTION,           ODD_POTION
 Kakariko Cow,                                         cow,            NONE,                 KAKARIKO_VILLAGE,               0x06,                       MILK
+Kakariko Bazaar Item 1,                               shop,           NONE,                 BAZAAR,                         0x30,                       ARROWS_5
+Kakariko Bazaar Item 2,                               shop,           NONE,                 BAZAAR,                         0x31,                       ARROWS_10
+Kakariko Bazaar Item 3,                               shop,           NONE,                 BAZAAR,                         0x32,                       ARROWS_30
+Kakariko Bazaar Item 4,                               shop,           NONE,                 BAZAAR,                         0x33,                       STICK
+Kakariko Bazaar Item 5,                               shop,           NONE,                 BAZAAR,                         0x34,                       BOMBS_5
+Kakariko Bazaar Item 6,                               shop,           NONE,                 BAZAAR,                         0x35,                       RECOVERY_HEART
+Kakariko Bazaar Item 7,                               shop,           NONE,                 BAZAAR,                         0x36,                       NUTS_5
+Kakariko Bazaar Item 8,                               shop,           NONE,                 BAZAAR,                         0x37,                       SHIELD_HYLIAN
+Kakariko Potion Shop Item 1,                          shop,           NONE,                 KAKARIKO_POTION_SHOP,           0x38,                       FISH
+Kakariko Potion Shop Item 2,                          shop,           NONE,                 KAKARIKO_POTION_SHOP,           0x39,                       BUG
+Kakariko Potion Shop Item 3,                          shop,           NONE,                 KAKARIKO_POTION_SHOP,           0x3a,                       POE
+Kakariko Potion Shop Item 4,                          shop,           NONE,                 KAKARIKO_POTION_SHOP,           0x3b,                       NUTS_5
+Kakariko Potion Shop Item 5,                          shop,           NONE,                 KAKARIKO_POTION_SHOP,           0x3c,                       BLUE_FIRE
+Kakariko Potion Shop Item 6,                          shop,           NONE,                 KAKARIKO_POTION_SHOP,           0x3d,                       FAIRY
+Kakariko Potion Shop Item 7,                          shop,           NONE,                 KAKARIKO_POTION_SHOP,           0x3e,                       POTION_GREEN
+Kakariko Potion Shop Item 8,                          shop,           NONE,                 KAKARIKO_POTION_SHOP,           0x3f,                       POTION_RED
 Graveyard Dampe Game,                                 collectible,    NONE,                 GRAVEYARD,                      0x1f,                       HEART_PIECE
 Graveyard ReDead Tomb,                                chest,          NONE,                 TOMB_REDEAD,                    0x00,                       HEART_PIECE
 Graveyard Royal Tomb Song,                            npc,            NONE,                 TOMB_ROYAL,                     ROYAL_TOMB_SONG,            SONG_SUN
@@ -77,6 +101,14 @@ Goron City Bomb Bag,                                  npc,            NONE,     
 Goron City Medigoron Giant Knife,                     npc,            NONE,                 GORON_CITY,                     MEDIGORON,                  SWORD_KNIFE
 Goron City GS Platform,                               gs,             NONE,                 GORON_CITY,                     0x85,                       GS_TOKEN
 Goron City GS Maze,                                   gs,             NONE,                 GORON_CITY,                     0x86,                       GS_TOKEN
+Goron Shop Item 1,                                    shop,           NONE,                 GORON_CITY,                     0x18,                       RECOVERY_HEART
+Goron Shop Item 2,                                    shop,           NONE,                 GORON_CITY,                     0x19,                       RECOVERY_HEART
+Goron Shop Item 3,                                    shop,           NONE,                 GORON_CITY,                     0x1a,                       POTION_RED
+Goron Shop Item 4,                                    shop,           NONE,                 GORON_CITY,                     0x1b,                       TUNIC_GORON
+Goron Shop Item 5,                                    shop,           NONE,                 GORON_CITY,                     0x1c,                       BOMBS_5
+Goron Shop Item 6,                                    shop,           NONE,                 GORON_CITY,                     0x1d,                       BOMBS_10
+Goron Shop Item 7,                                    shop,           NONE,                 GORON_CITY,                     0x1e,                       BOMBS_20
+Goron Shop Item 8,                                    shop,           NONE,                 GORON_CITY,                     0x1f,                       BOMBS_30
 Death Mountain Crater Alcove HP,                      collectible,    NONE,                 DEATH_MOUNTAIN_CRATER,          0x02,                       HEART_PIECE
 Death Mountain Crater Volcano HP,                     collectible,    NONE,                 DEATH_MOUNTAIN_CRATER,          0x08,                       HEART_PIECE
 Death Mountain Crater Sheik Song,                     npc,            NONE,                 DEATH_MOUNTAIN_CRATER,          SHEIK_FIRE,                 SONG_TP_FIRE
@@ -98,6 +130,14 @@ Zora Domain Diving Game,                              npc,            NONE,     
 Zora Domain Tunic,                                    npc,            ZORA_KING,            ZORA_DOMAIN,                    ZORA_KING_TUNIC,            TUNIC_ZORA
 Zora Domain Eyeball Frog,                             npc,            ZORA_KING,            ZORA_DOMAIN,                    TRADE_EYEBALL_FROG,         EYEBALL_FROG
 Zora Domain GS Waterfall,                             gs,             NONE,                 ZORA_DOMAIN,                    0x96,                       GS_TOKEN
+Zora Shop Item 1,                                     shop,           NONE,                 ZORA_SHOP,                      0x10,                       POTION_RED
+Zora Shop Item 2,                                     shop,           NONE,                 ZORA_SHOP,                      0x11,                       ARROWS_30
+Zora Shop Item 3,                                     shop,           NONE,                 ZORA_SHOP,                      0x12,                       FISH
+Zora Shop Item 4,                                     shop,           NONE,                 ZORA_SHOP,                      0x13,                       NUTS_5
+Zora Shop Item 5,                                     shop,           NONE,                 ZORA_SHOP,                      0x14,                       ARROWS_5
+Zora Shop Item 6,                                     shop,           NONE,                 ZORA_SHOP,                      0x15,                       ARROWS_10
+Zora Shop Item 7,                                     shop,           NONE,                 ZORA_SHOP,                      0x16,                       TUNIC_ZORA
+Zora Shop Item 8,                                     shop,           NONE,                 ZORA_SHOP,                      0x17,                       RECOVERY_HEART
 Zora Fountain Iceberg HP,                             collectible,    NONE,                 ZORA_FOUNTAIN,                  0x01,                       HEART_PIECE
 Zora Fountain Bottom HP,                              collectible,    NONE,                 ZORA_FOUNTAIN,                  0x14,                       HEART_PIECE
 Zora Fountain GS Wall,                                gs,             NONE,                 ZORA_FOUNTAIN,                  0x92,                       GS_TOKEN
@@ -139,6 +179,30 @@ Hyrule Field Cow,                                     cow,            NONE,     
 Market Dog Lady HP,                                   npc,            NONE,                 BACK_ALLEY_HOUSE,               DOG_LADY,                   HEART_PIECE
 Market Pot House Big Poes,                            npc,            NONE,                 GUARD_HOUSE,                    POE_COLLECTOR,              BOTTLE_EMPTY
 Market Pot House GS,                                  gs,             NONE,                 GUARD_HOUSE,                    0x7b,                       GS_TOKEN
+Market Bazaar Item 1,                                 shop,           NONE,                 BAZAAR,                         0x20,                       ARROWS_5
+Market Bazaar Item 2,                                 shop,           NONE,                 BAZAAR,                         0x21,                       ARROWS_10
+Market Bazaar Item 3,                                 shop,           NONE,                 BAZAAR,                         0x22,                       ARROWS_30
+Market Bazaar Item 4,                                 shop,           NONE,                 BAZAAR,                         0x23,                       STICK
+Market Bazaar Item 5,                                 shop,           NONE,                 BAZAAR,                         0x24,                       BOMBS_5
+Market Bazaar Item 6,                                 shop,           NONE,                 BAZAAR,                         0x25,                       RECOVERY_HEART
+Market Bazaar Item 7,                                 shop,           NONE,                 BAZAAR,                         0x26,                       NUTS_5
+Market Bazaar Item 8,                                 shop,           NONE,                 BAZAAR,                         0x27,                       SHIELD_HYLIAN
+Market Potion Shop Item 1,                            shop,           NONE,                 MARKET_POTION_SHOP,             0x28,                       FISH
+Market Potion Shop Item 2,                            shop,           NONE,                 MARKET_POTION_SHOP,             0x29,                       BUG
+Market Potion Shop Item 3,                            shop,           NONE,                 MARKET_POTION_SHOP,             0x2a,                       POE
+Market Potion Shop Item 4,                            shop,           NONE,                 MARKET_POTION_SHOP,             0x2b,                       NUTS_5
+Market Potion Shop Item 5,                            shop,           NONE,                 MARKET_POTION_SHOP,             0x2c,                       BLUE_FIRE
+Market Potion Shop Item 6,                            shop,           NONE,                 MARKET_POTION_SHOP,             0x2d,                       FAIRY
+Market Potion Shop Item 7,                            shop,           NONE,                 MARKET_POTION_SHOP,             0x2e,                       POTION_GREEN
+Market Potion Shop Item 8,                            shop,           NONE,                 MARKET_POTION_SHOP,             0x2f,                       POTION_RED
+Market Bombchu Shop Item 1,                           shop,           NONE,                 BOMBCHU_SHOP,                   0x08,                       BOMBCHU_20
+Market Bombchu Shop Item 2,                           shop,           NONE,                 BOMBCHU_SHOP,                   0x09,                       BOMBCHU_20
+Market Bombchu Shop Item 3,                           shop,           NONE,                 BOMBCHU_SHOP,                   0x0a,                       BOMBCHU_20
+Market Bombchu Shop Item 4,                           shop,           NONE,                 BOMBCHU_SHOP,                   0x0b,                       BOMBCHU_20
+Market Bombchu Shop Item 5,                           shop,           NONE,                 BOMBCHU_SHOP,                   0x0c,                       BOMBCHU_10
+Market Bombchu Shop Item 6,                           shop,           NONE,                 BOMBCHU_SHOP,                   0x0d,                       BOMBCHU_10
+Market Bombchu Shop Item 7,                           shop,           NONE,                 BOMBCHU_SHOP,                   0x0e,                       BOMBCHU_10
+Market Bombchu Shop Item 8,                           shop,           NONE,                 BOMBCHU_SHOP,                   0x0f,                       BOMBCHU_10
 Bombchu Bowling Reward 1,                             npc,            NONE,                 BOMBCHU_BOWLING_ALLEY,          BOMBCHU_BOWLING_1,          BOMB_BAG
 Bombchu Bowling Reward 2,                             npc,            NONE,                 BOMBCHU_BOWLING_ALLEY,          BOMBCHU_BOWLING_2,          HEART_PIECE
 Treasure Game HP,                                     chest,          NONE,                 TREASURE_SHOP,                  0x0a,                       HEART_PIECE

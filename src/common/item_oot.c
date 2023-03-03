@@ -782,6 +782,12 @@ int comboAddItemOot(s16 gi, int noEffect)
     case GI_OOT_BUG:
         fillBottle(ITEM_OOT_BUG);
         break;
+    case GI_OOT_FAIRY:
+        fillBottle(ITEM_OOT_FAIRY);
+        break;
+    case GI_OOT_POE:
+        fillBottle(ITEM_OOT_POE);
+        break;
     case GI_OOT_MILK:
         fillBottle(ITEM_OOT_MILK);
         break;

@@ -115,6 +115,9 @@ void ModelViewRotateZ(float angle, int mode);
 void ModelViewTranslate(float tx, float ty, float tz, int mode);
 void ModelViewScale(float sx, float sy, float sz, int mode);
 
+void MatrixStackDup(void);
+void MatrixStackPop(void);
+
 float RandFloat(void);
 
 int GetActiveItem(GameState_Play* play);

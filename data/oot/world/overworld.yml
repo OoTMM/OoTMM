@@ -21,6 +21,7 @@
     "Mido's House": "true"
     "Lost Woods": "true"
     "Lost Woods Bridge": "true"
+    "Kokiri Shop": "true"
     "Deku Tree": "is_child"
   locations:
     "Kokiri Forest Kokiri Sword Chest": "is_child"
@@ -33,6 +34,19 @@
     "Kokiri Gossip Near Lost Woods Grotto": "hidden_grotto_storms"
     "Kokiri Gossip Left of Deku Tree": "true"
     "Kokiri Gossip Right of Deku Tree": "true"
+"Kokiri Shop":
+  region: KOKIRI_FOREST
+  exits:
+    "Kokiri Forest": "true"
+  locations:
+    "Kokiri Shop Item 1": "true"
+    "Kokiri Shop Item 2": "true"
+    "Kokiri Shop Item 3": "true"
+    "Kokiri Shop Item 4": "true"
+    "Kokiri Shop Item 5": "true"
+    "Kokiri Shop Item 6": "true"
+    "Kokiri Shop Item 7": "true"
+    "Kokiri Shop Item 8": "true"
 "Mido's House":
   region: KOKIRI_FOREST
   exits:
@@ -82,12 +96,54 @@
     "Bombchu Bowling": "true"
     "Treasure Game": "true"
     "Shooting Gallery Child": "true"
+    "Market Bazaar": "true"
+    "Market Potion Shop": "true"
+    "Market Bombchu Shop": "true"
     "MM SPAWN": "is_child"
   gossip:
     "Market Gossip Outside Temple Leftmost": "true"
     "Market Gossip Outside Temple Left-Center": "true"
     "Market Gossip Outside Temple Right-Center": "true"
     "Market Gossip Outside Temple Rightmost": "true"
+"Market Bazaar":
+  region: MARKET
+  exits:
+    "Market": "is_child"
+  locations:
+    "Market Bazaar Item 1": "true"
+    "Market Bazaar Item 2": "true"
+    "Market Bazaar Item 3": "true"
+    "Market Bazaar Item 4": "true"
+    "Market Bazaar Item 5": "true"
+    "Market Bazaar Item 6": "true"
+    "Market Bazaar Item 7": "true"
+    "Market Bazaar Item 8": "true"
+"Market Potion Shop":
+  region: MARKET
+  exits:
+    "Market": "is_child"
+  locations:
+    "Market Potion Shop Item 1": "has(WALLET, 1)"
+    "Market Potion Shop Item 2": "true"
+    "Market Potion Shop Item 3": "true"
+    "Market Potion Shop Item 4": "true"
+    "Market Potion Shop Item 5": "has(WALLET, 2)"
+    "Market Potion Shop Item 6": "true"
+    "Market Potion Shop Item 7": "true"
+    "Market Potion Shop Item 8": "true"
+"Market Bombchu Shop":
+  region: MARKET
+  exits:
+    "Market": "is_child"
+  locations:
+    "Market Bombchu Shop Item 1": "has(WALLET, 1)"
+    "Market Bombchu Shop Item 2": "has(WALLET, 1)"
+    "Market Bombchu Shop Item 3": "has(WALLET, 1)"
+    "Market Bombchu Shop Item 4": "has(WALLET, 1)"
+    "Market Bombchu Shop Item 5": "has(WALLET, 1)"
+    "Market Bombchu Shop Item 6": "has(WALLET, 1)"
+    "Market Bombchu Shop Item 7": "has(WALLET, 1)"
+    "Market Bombchu Shop Item 8": "has(WALLET, 1)"
 "Market Pot House":
   region: MARKET
   exits:
@@ -271,6 +327,8 @@
     "Skulltula House": "true"
     "Shooting Gallery Adult": "is_adult"
     "Kakariko Rooftop": "is_child || can_hookshot"
+    "Kakariko Bazaar": "is_adult"
+    "Kakariko Potion Shop": "is_adult"
   locations:
     "Kakariko Anju Bottle": "is_child"
     "Kakariko Anju Egg": "is_adult"
@@ -297,6 +355,32 @@
     "Kakariko": "true"
   locations:
     "Kakariko Impa House HP": "true"
+"Kakariko Bazaar":
+  region: KAKARIKO
+  exits:
+    "Kakariko": "is_adult"
+  locations:
+    "Kakariko Bazaar Item 1": "true"
+    "Kakariko Bazaar Item 2": "true"
+    "Kakariko Bazaar Item 3": "true"
+    "Kakariko Bazaar Item 4": "true"
+    "Kakariko Bazaar Item 5": "true"
+    "Kakariko Bazaar Item 6": "true"
+    "Kakariko Bazaar Item 7": "true"
+    "Kakariko Bazaar Item 8": "true"
+"Kakariko Potion Shop":
+  region: KAKARIKO
+  exits:
+    "Kakariko": "is_adult"
+  locations:
+    "Kakariko Potion Shop Item 1": "has(WALLET, 1)"
+    "Kakariko Potion Shop Item 2": "true"
+    "Kakariko Potion Shop Item 3": "true"
+    "Kakariko Potion Shop Item 4": "true"
+    "Kakariko Potion Shop Item 5": "has(WALLET, 2)"
+    "Kakariko Potion Shop Item 6": "true"
+    "Kakariko Potion Shop Item 7": "true"
+    "Kakariko Potion Shop Item 8": "true"
 "Shooting Gallery Adult":
   region: KAKARIKO
   exits:
@@ -393,6 +477,7 @@
     "Goron City Shortcut": "event(GORON_CITY_SHORTCUT)"
     "Death Mountain": "true"
     "Death Mountain Crater Bottom": "is_adult && (has_explosives || can_use_bow || has(STRENGTH))"
+    "Goron Shop": "cond(is_adult, has_explosives || can_use_bow || has(STRENGTH), has_bombflowers)"
   event:
     GORON_CITY_SHORTCUT: "has_bombflowers || can_hammer || can_use_bow || can_use_din"
   locations:
@@ -409,6 +494,19 @@
   gossip:
     "Goron City Gossip Boulder Maze": "has_explosives_or_hammer || can_lift_silver"
     "Goron City Gossip Near Medigoron": "has_bombflowers || can_hammer"
+"Goron Shop":
+  region: GORON_CITY
+  exits:
+    "Goron City": "true"
+  locations:
+    "Goron Shop Item 1": "true"
+    "Goron Shop Item 2": "true"
+    "Goron Shop Item 3": "true"
+    "Goron Shop Item 4": "has(WALLET, 1)"
+    "Goron Shop Item 5": "true"
+    "Goron Shop Item 6": "true"
+    "Goron Shop Item 7": "true"
+    "Goron Shop Item 8": "has(WALLET, 1)"
 "Zora River Front":
   region: ZORA_RIVER
   exits:
@@ -442,6 +540,7 @@
     "Zora River": "true"
     "Lake Hylia": "is_child && has(SCALE)"
     "Zora Domain Back": "event(KING_ZORA_LETTER)"
+    "Zora Shop": "is_child || has_blue_fire"
   events:
     KING_ZORA_LETTER: "is_child && has(RUTO_LETTER)"
   locations:
@@ -457,6 +556,19 @@
   exits:
     "Zora Fountain": "true"
     "Zora Domain": "event(KING_ZORA_LETTER)"
+"Zora Shop":
+  region: ZORA_DOMAIN
+  exits:
+    "Zora Domain": "true"
+  locations:
+    "Zora Shop Item 1": "true"
+    "Zora Shop Item 2": "true"
+    "Zora Shop Item 3": "has(WALLET, 1)"
+    "Zora Shop Item 4": "true"
+    "Zora Shop Item 5": "true"
+    "Zora Shop Item 6": "true"
+    "Zora Shop Item 7": "has(WALLET, 2)"
+    "Zora Shop Item 8": "true"
 "Lake Hylia":
   region: LAKE_HYLIA
   exits:

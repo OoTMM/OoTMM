@@ -95,5 +95,24 @@ void Shader_SoldOut(GameState_Play* play, s16 index)
 
 void Shader_BlueFire(GameState_Play* play, s16 index)
 {
+    const Shader* shader;
+    s32 fc;
 
+    shader = &kShaders[index];
+    fc = play->gs.frameCount;
+
+    OPEN_DISPS(play->gs.gfx);
+    InitListPolyOpa(play->gs.gfx);
+    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPDisplayList(POLY_OPA_DISP++, shader->lists[0]);
+
+    InitListPolyXlu(play->gs.gfx);
+    gSPSegment(POLY_XLU_DISP++, 8, GetSegment(play->gs.gfx, 0, 0, 0, 0x10, 0x20, 1, fc, -8 * fc, 0x10, 0x20));
+    MatrixStackDup();
+    ModelViewTranslate(-8.f, -2.f, 0.f, MAT_MUL);
+    ModelViewUnkTransform((float*)((char*)play + 0x187fc));
+    gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPDisplayList(POLY_XLU_DISP++, shader->lists[1]);
+    MatrixStackPop();
+    CLOSE_DISPS();
 }

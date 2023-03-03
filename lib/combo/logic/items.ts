@@ -18,6 +18,8 @@ export const DUNGEON_REWARDS_ORDERED = [
 export const DUNGEON_REWARDS = new Set(DUNGEON_REWARDS_ORDERED);
 
 export const ITEMS_REQUIRED = new Set<string>([
+  'OOT_SHIELD_DEKU',
+  'OOT_SHIELD_HYLIAN',
   'OOT_GS_TOKEN',
   'OOT_ARROW_FIRE',
   'OOT_ARROW_LIGHT',
@@ -217,6 +219,82 @@ const ITEMS_JUNK = new Set<string>([
   'SHARED_RECOVERY_HEART',
 ]);
 
+const CONSUMABLES = new Set<string>([
+  'OOT_RECOVERY_HEART',
+  'OOT_STICK',
+  'OOT_STICKS_5',
+  'OOT_STICKS_10',
+  'OOT_NUTS_5',
+  'OOT_NUTS_10',
+  'OOT_BOMB',
+  'OOT_BOMBS_5',
+  'OOT_BOMBS_10',
+  'OOT_BOMBS_20',
+  'OOT_BOMBS_30',
+  'OOT_ARROWS_5',
+  'OOT_ARROWS_10',
+  'OOT_ARROWS_30',
+  'OOT_DEKU_SEEDS_5',
+  'OOT_DEKU_SEEDS_30',
+  'OOT_BOMBCHU_5',
+  'OOT_BOMBCHU_10',
+  'OOT_BOMBCHU_20',
+  'OOT_SHIELD_DEKU',
+  'OOT_SHIELD_HYLIAN',
+  'OOT_MILK',
+  'OOT_POTION_RED',
+  'OOT_POTION_GREEN',
+  'OOT_POTION_BLUE',
+  'OOT_FAIRY',
+  'OOT_FISH',
+  'OOT_BUG',
+  'OOT_BLUE_FIRE',
+  'OOT_POE',
+  'MM_RECOVERY_HEART',
+  'MM_STICK',
+  'MM_NUT',
+  'MM_NUTS_5',
+  'MM_NUTS_10',
+  'MM_BOMB',
+  'MM_BOMBS_5',
+  'MM_BOMBS_10',
+  'MM_BOMBS_20',
+  'MM_BOMBS_30',
+  'MM_BOMBCHU',
+  'MM_BOMBCHU_5',
+  'MM_BOMBCHU_10',
+  'MM_BOMBCHU_20',
+  'MM_ARROWS_10',
+  'MM_ARROWS_30',
+  'MM_ARROWS_40',
+  'MM_SHIELD_HERO',
+  'MM_MILK',
+  'MM_CHATEAU',
+  'MM_FISH',
+  'MM_BUGS',
+  'MM_FAIRY',
+  'SHARED_RECOVERY_HEART',
+  'SHARED_STICK',
+  'SHARED_STICKS_5',
+  'SHARED_STICKS_10',
+  'SHARED_NUT',
+  'SHARED_NUTS_5',
+  'SHARED_NUTS_10',
+  'SHARED_BOMB',
+  'SHARED_BOMBS_5',
+  'SHARED_BOMBS_10',
+  'SHARED_BOMBS_20',
+  'SHARED_BOMBS_30',
+  'SHARED_ARROWS_5',
+  'SHARED_ARROWS_10',
+  'SHARED_ARROWS_30',
+  'SHARED_ARROWS_40',
+  'SHARED_BOMBCHU',
+  'SHARED_BOMBCHU_5',
+  'SHARED_BOMBCHU_10',
+  'SHARED_BOMBCHU_20',
+]);
+
 export const isSong = (item: string) => !!item.match(/^(OOT|MM|SHARED)_SONG_/);
 export const isCompass = (item: string) => !!item.match(/^(OOT|MM)_COMPASS_/);
 export const isMap = (item: string) => !!item.match(/^(OOT|MM)_MAP_/);
@@ -240,7 +318,8 @@ export const isToken = (item: string) => isGoldToken(item) || isHouseToken(item)
 export const isJunk = (item: string) => ITEMS_JUNK.has(item);
 export const isMasterSword = (item: string) => item === 'OOT_SWORD_MASTER';
 export const isGerudoCard = (item: string) => item === 'OOT_GERUDO_CARD';
-export const isItemImportant = (item: string) => isItemMajor(item) || isDungeonReward(item) || isToken(item) || isStrayFairy(item) || isKey(item);
+export const isItemImportant = (item: string) => isItemMajor(item) || isDungeonReward(item) || isToken(item) || isStrayFairy(item) || isKey(item) || isItemConsumable(item) || isMasterSword(item) || isGerudoCard(item);
+export const isItemConsumable = (item: string) => CONSUMABLES.has(item);
 
 export const itemsArray = (items: Items) => {
   const arr: string[] = [];

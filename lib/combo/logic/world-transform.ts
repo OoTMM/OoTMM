@@ -213,7 +213,7 @@ export class LogicPassWorldTransform {
       }
 
       /* OoT shields */
-      if (['OOT_SHIELD_DEKU', 'OOT_SHIELD_HYLIAN', 'OOT_SHIELD_MIRROR'].includes(item) && this.state.config.has('OOT_PROGRESSIVE_SHIELDS')) {
+      if (['OOT_SHIELD_DEKU', 'OOT_SHIELD_HYLIAN', 'OOT_SHIELD_MIRROR'].includes(item) && check.type !== 'shop' && this.state.config.has('OOT_PROGRESSIVE_SHIELDS')) {
         if (ootShields > 0) {
           ootShields -= 1;
           item = 'OOT_SHIELD';
