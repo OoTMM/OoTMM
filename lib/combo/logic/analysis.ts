@@ -50,9 +50,6 @@ const SIMPLE_DEPENDENCIES: {[k: string]: string[]} = {
   OOT_CLAIM_CHECK: [
     'OOT Death Mountain Biggoron Sword'
   ],
-  OOT_WALLET: [
-    'OOT Goron City Medigoron Giant Knife'
-  ],
   OOT_SONG_SUN: [
     'OOT Graveyard ReDead Tomb',
     'OOT Zora River Frogs Game'
@@ -337,10 +334,6 @@ export class LogicPassAnalysis {
       delete this.dependencies['OOT_SMALL_KEY_SPIRIT'];
     }
 
-    if (this.state.settings.shopShuffleOot !== 'none') {
-      delete this.dependencies['OOT_WALLET'];
-    }
-
     /* Shared items */
     this.dependencies['SHARED_MASK_TRUTH'] = [...this.dependencies['MM_MASK_TRUTH'], ...this.dependencies['OOT_MASK_TRUTH']];
     this.dependencies['SHARED_MASK_KEATON'] = [...this.dependencies['MM_MASK_KEATON']];
@@ -420,10 +413,6 @@ export class LogicPassAnalysis {
     case 'SHARED_MAGIC_UPGRADE':
       maximumRequired = 1;
       break;
-    }
-
-    if (item === 'OOT_WALLET' && this.state.settings.shopShuffleOot === 'none') {
-      maximumRequired = 1;
     }
 
     if (maximumRequired === -1) {
