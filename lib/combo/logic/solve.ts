@@ -51,15 +51,6 @@ const removeItemPools = (pools: ItemPools, item: string) => {
   }
 };
 
-const maxRequired = (pools: ItemPools, item: string, count: number) => {
-  if ((pools.required[item] || 0) <= count) {
-    return;
-  }
-  const extra = pools.required[item] - count;
-  pools.required[item] = count;
-  pools.nice[item] = extra;
-};
-
 export class LogicPassSolver {
   private items!: ItemPlacement;
   private pathfinder!: Pathfinder;
@@ -188,26 +179,6 @@ export class LogicPassSolver {
         this.insertItem(pools, item);
       }
     }
-
-    if (this.state.settings.progressiveSwordsOot === 'progressive') {
-      maxRequired(pools, 'OOT_SWORD', 2);
-    }
-    maxRequired(pools, 'OOT_WALLET', 1);
-    maxRequired(pools, 'OOT_BOMB_BAG', 1);
-    maxRequired(pools, 'OOT_BOW', 1);
-    maxRequired(pools, 'OOT_SLINGSHOT', 1);
-    maxRequired(pools, 'OOT_MAGIC_UPGRADE', 1);
-    maxRequired(pools, 'OOT_OCARINA', 1);
-    maxRequired(pools, 'OOT_BOMBCHU_10', 1);
-    maxRequired(pools, 'OOT_GS_TOKEN', 50);
-
-    maxRequired(pools, 'MM_BOMB_BAG', 1);
-    maxRequired(pools, 'MM_BOW', 1);
-    maxRequired(pools, 'MM_MAGIC_UPGRADE', 1);
-
-    maxRequired(pools, 'SHARED_BOW', 1);
-    maxRequired(pools, 'SHARED_BOMB_BAG', 1);
-    maxRequired(pools, 'SHARED_MAGIC_UPGRADE', 1);
 
     for (const item in this.state.settings.startingItems) {
       const count = this.state.settings.startingItems[item];
