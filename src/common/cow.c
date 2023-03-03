@@ -1,5 +1,11 @@
 #include <combo.h>
 
+#if defined(GAME_OOT)
+# define RECOVERY_HEART GI_OOT_RECOVERY_HEART
+#else
+# define RECOVERY_HEART GI_MM_RECOVERY_HEART
+#endif
+
 static int sCowID;
 
 static Actor* EnCow_GetNearestCow(GameState_Play* play)
@@ -89,10 +95,14 @@ static void EnCow_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, f
 
     /* Get the cow ID and attached item */
     id = EnCow_GetCowID(this, play);
-    if (id != -1 && (gCowFlags & (1 << id)) == 0)
+    if (id != -1)
     {
         sCowID = id;
         gi = comboOverride(OV_COW, 0, id, gi);
+        if ((gCowFlags & (1 << id)) && !comboIsItemConsumable(gi))
+        {
+            gi = RECOVERY_HEART;
+        }
     }
 
     /* Give the item */
