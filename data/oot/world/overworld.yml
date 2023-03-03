@@ -98,6 +98,7 @@
     "Shooting Gallery Child": "true"
     "Market Bazaar": "true"
     "Market Potion Shop": "true"
+    "Market Bombchu Shop": "true"
     "MM SPAWN": "is_child"
   gossip:
     "Market Gossip Outside Temple Leftmost": "true"
@@ -130,6 +131,19 @@
     "Market Potion Shop Item 6": "true"
     "Market Potion Shop Item 7": "true"
     "Market Potion Shop Item 8": "true"
+"Market Bombchu Shop":
+  region: MARKET
+  exits:
+    "Market": "is_child"
+  locations:
+    "Market Bombchu Shop Item 1": "has(WALLET, 1)"
+    "Market Bombchu Shop Item 2": "has(WALLET, 1)"
+    "Market Bombchu Shop Item 3": "has(WALLET, 1)"
+    "Market Bombchu Shop Item 4": "has(WALLET, 1)"
+    "Market Bombchu Shop Item 5": "has(WALLET, 1)"
+    "Market Bombchu Shop Item 6": "has(WALLET, 1)"
+    "Market Bombchu Shop Item 7": "has(WALLET, 1)"
+    "Market Bombchu Shop Item 8": "has(WALLET, 1)"
 "Market Pot House":
   region: MARKET
   exits:

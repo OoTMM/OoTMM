@@ -73,6 +73,8 @@ static void debugCheat(GameState_Play* play)
         //gSave.inventory.quest.medallionWater = 1;
         //gSave.inventory.quest.medallionLight = 1;
 
+        gSave.inventory.quest.stoneRuby = 1;
+
         //gSave.health = gSave.healthMax = 20 * 0x10;
 
         gSave.playerData.rupees = 500;

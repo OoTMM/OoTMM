@@ -49,6 +49,10 @@
 
 int comboShopItemSlot(GameState_Play* play, Actor_EnGirlA* girlA)
 {
+    int ageMask;
+
+    ageMask = (gSave.age == AGE_ADULT) ? 0x10 : 0x00;
+
     if (play->sceneId == SCE_OOT_KOKIRI_SHOP)
     {
         /* Kokiri shop */
@@ -65,41 +69,51 @@ int comboShopItemSlot(GameState_Play* play, Actor_EnGirlA* girlA)
         }
     }
 
+    if (play->sceneId == SCE_OOT_BOMBCHU_SHOP)
+    {
+        /* Bombchu shop */
+        switch (girlA->base.variable)
+        {
+        case SHOP_BOMBCHU_20_1:     return 0x08;
+        case SHOP_BOMBCHU_20_2:     return 0x09;
+        case SHOP_BOMBCHU_20_3:     return 0x0a;
+        case SHOP_BOMBCHU_20_4:     return 0x0b;
+        case SHOP_BOMBCHU_10_1:     return 0x0c;
+        case SHOP_BOMBCHU_10_2:     return 0x0d;
+        case SHOP_BOMBCHU_10_3:     return 0x0e;
+        case SHOP_BOMBCHU_10_4:     return 0x0f;
+        }
+    }
+
     if (play->sceneId == SCE_OOT_BAZAAR)
     {
-        if (gSave.age == AGE_CHILD)
+        /* Market / Kakariko Bazaar */
+        switch (girlA->base.variable)
         {
-            /* Market Bazaar */
-            switch (girlA->base.variable)
-            {
-            case SHOP_ARROWS_10:        return 0x20;
-            case SHOP_ARROWS_30:        return 0x21;
-            case SHOP_ARROWS_50:        return 0x22;
-            case SHOP_STICK:            return 0x23;
-            case SHOP_BOMBS_5:          return 0x24;
-            case SHOP_RECOVERY_HEART:   return 0x25;
-            case SHOP_NUTS_5:           return 0x26;
-            case SHOP_SHIELD_HYLIAN:    return 0x27;
-            }
+        case SHOP_ARROWS_10:        return 0x20 | ageMask;
+        case SHOP_ARROWS_30:        return 0x21 | ageMask;
+        case SHOP_ARROWS_50:        return 0x22 | ageMask;
+        case SHOP_STICK:            return 0x23 | ageMask;
+        case SHOP_BOMBS_5:          return 0x24 | ageMask;
+        case SHOP_RECOVERY_HEART:   return 0x25 | ageMask;
+        case SHOP_NUTS_5:           return 0x26 | ageMask;
+        case SHOP_SHIELD_HYLIAN:    return 0x27 | ageMask;
         }
     }
 
     if (play->sceneId == SCE_OOT_MARKET_POTION_SHOP || play->sceneId == SCE_OOT_KAKARIKO_POTION_SHOP)
     {
-        if (gSave.age == AGE_CHILD)
+        /* Market / Kakriko Potion Shop */
+        switch (girlA->base.variable)
         {
-            /* Market Potion Shop */
-            switch (girlA->base.variable)
-            {
-            case SHOP_FISH:         return 0x28;
-            case SHOP_BUG:          return 0x29;
-            case SHOP_POE:          return 0x2a;
-            case SHOP_NUTS_5:       return 0x2b;
-            case SHOP_BLUE_FIRE:    return 0x2c;
-            case SHOP_FAIRY:        return 0x2d;
-            case SHOP_POTION_GREEN: return 0x2e;
-            case SHOP_POTION_RED:   return 0x2f;
-            }
+        case SHOP_FISH:         return 0x28 | ageMask;
+        case SHOP_BUG:          return 0x29 | ageMask;
+        case SHOP_POE:          return 0x2a | ageMask;
+        case SHOP_NUTS_5:       return 0x2b | ageMask;
+        case SHOP_BLUE_FIRE:    return 0x2c | ageMask;
+        case SHOP_FAIRY:        return 0x2d | ageMask;
+        case SHOP_POTION_GREEN: return 0x2e | ageMask;
+        case SHOP_POTION_RED:   return 0x2f | ageMask;
         }
     }
 

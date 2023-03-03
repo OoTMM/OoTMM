@@ -5,6 +5,11 @@ PATCH_START 0x808d1528
   li t8,1
 PATCH_END
 
+/* Disable DC clear check for bombchu */
+PATCH_START 0x808cf67c
+  li t3,1
+PATCH_END
+
 /* Override first textbox */
 PATCH_START 0x808d04fc
   jal comboShopDisplayTextBox
@@ -80,4 +85,9 @@ PATCH_END
 PATCH_START 0x808d08b4
   jal comboShopDisplayTextBoxConfirm
    move a1,t6
+PATCH_END
+
+/* Don't set the flag for bombchu shop */
+PATCH_START 0x808640c0
+  li t6,0
 PATCH_END
