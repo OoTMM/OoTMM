@@ -1,11 +1,12 @@
 import { Random, shuffle } from '../random';
 import { Settings } from '../settings';
-import { isItemImportant } from './items';
+import { isItemConsumable, isItemImportant } from './items';
 import { ItemPlacement } from './solve';
 import { World } from './world';
 import { Pathfinder, PathfinderState } from './pathfind';
 import { Monitor } from '../monitor';
 import { cloneDeep } from 'lodash';
+import { isLocationRenewable } from './helpers';
 
 const SIMPLE_DEPENDENCIES: {[k: string]: string[]} = {
   OOT_CHICKEN: [
@@ -396,6 +397,11 @@ export class LogicPassAnalysis {
     }
   }
 
+  private isLocUselessNonRenewable(loc: string) {
+    const item = this.state.items[loc];
+    return (isItemConsumable(item) && !isLocationRenewable(this.state.world, loc));
+  }
+
   private isLocUselessHeuristicCount(loc: string) {
     /* TODO: this is fragile */
     const item = this.state.items[loc];
@@ -472,7 +478,7 @@ export class LogicPassAnalysis {
       if (this.requiredLocs.has(loc) || this.uselessLocs.has(loc)) {
         continue;
       }
-      if (!isItemImportant(this.state.items[loc]) || this.isLocUselessHeuristicCount(loc) || this.isLocUselessHeuristicDependencies(loc)) {
+      if (!isItemImportant(this.state.items[loc]) || this.isLocUselessNonRenewable(loc) || this.isLocUselessHeuristicCount(loc) || this.isLocUselessHeuristicDependencies(loc)) {
         this.uselessLocs.add(loc);
       }
     }

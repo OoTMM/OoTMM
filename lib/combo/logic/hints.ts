@@ -138,6 +138,7 @@ export class LogicPassHints {
     if (loc === 'OOT Temple of Time Medallion' || loc === 'MM Oath to Order') {
       return false;
     }
+    const check = this.state.world.checks[loc];
     const item = this.state.items[loc];
     if (loc === 'OOT Temple of Time Master Sword' && !this.state.settings.shuffleMasterSword) {
       return false;
@@ -175,7 +176,10 @@ export class LogicPassHints {
     if (isHouseToken(item) && this.state.settings.housesSkulltulaTokens === 'none') {
       return false;
     }
-    if (this.state.world.checks[loc].type === 'cow' && this.state.settings.cowShuffle === 'none') {
+    if (check.type === 'cow' && this.state.settings.cowShuffle === 'none') {
+      return false;
+    }
+    if (check.type === 'shop' && check.game === 'oot' && this.state.settings.shopShuffleOot === 'none') {
       return false;
     }
     return true;

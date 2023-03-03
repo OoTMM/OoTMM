@@ -5,6 +5,7 @@ import { Expr } from './expr';
 import { addItem, combinedItems, isItemConsumable, Items } from './items';
 import { ItemPlacement } from './solve';
 import { World } from './world';
+import { isLocationRenewable } from './helpers';
 
 export const AGES = ['child', 'adult'] as const;
 
@@ -31,11 +32,6 @@ export type PathfinderState = {
     child: PathfinderStateAge;
     adult: PathfinderStateAge;
   }
-}
-
-function isLocationRenewable(world: World, loc: string) {
-  const check = world.checks[loc];
-  return ['shop', 'cow'].includes(check.type);
 }
 
 function filterStartingItems(items: Items) {
