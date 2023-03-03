@@ -3,7 +3,7 @@ import { Random, sample, shuffle } from '../random';
 import { gameId } from '../util';
 import { Pathfinder, PathfinderState } from './pathfind';
 import { World } from './world';
-import { LogicSeedError } from './error';
+import { LogicError, LogicSeedError } from './error';
 import { Items, addItem, combinedItems, itemsArray, removeItem, ITEMS_REQUIRED, isDungeonReward, isGoldToken, isHouseToken, isKey, isStrayFairy, isSmallKey, isGanonBossKey, isRegularBossKey, isTownStrayFairy, isDungeonStrayFairy, isSong, isJunk, isMapCompass, isSmallKeyRegular, isSmallKeyHideout } from './items';
 import { Settings } from '../settings';
 import { Monitor } from '../monitor';
@@ -422,7 +422,7 @@ export class LogicPassSolver {
       const items = itemsArray(pool);
       if (items.length === 0) {
         const unreachableLocs = Object.keys(this.state.world.checks).filter(x => !this.pathfinderState.locations.has(x));
-        throw new Error(`Unreachable locations: ${unreachableLocs.join(', ')}`);
+        throw new LogicError(`Unreachable locations: ${unreachableLocs.join(', ')}`);
       }
       requiredItem = sample(this.state.random, items);
     }
