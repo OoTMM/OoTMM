@@ -11,5 +11,6 @@ test("Can make a seed - allsanity", () => {
     smallKeyShuffle: 'anywhere',
     smallKeyShuffleHideout: 'anywhere',
     cowShuffle: 'full',
+    shopShuffleOot: "full",
   });
 });
