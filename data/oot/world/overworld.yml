@@ -498,6 +498,7 @@
     "Zora River": "true"
     "Lake Hylia": "is_child && has(SCALE)"
     "Zora Domain Back": "event(KING_ZORA_LETTER)"
+    "Zora Shop": "is_child || has_blue_fire"
   events:
     KING_ZORA_LETTER: "is_child && has(RUTO_LETTER)"
   locations:
@@ -513,6 +514,19 @@
   exits:
     "Zora Fountain": "true"
     "Zora Domain": "event(KING_ZORA_LETTER)"
+"Zora Shop":
+  region: ZORA_DOMAIN
+  exits:
+    "Zora Domain": "true"
+  locations:
+    "Zora Shop Item 1": "true"
+    "Zora Shop Item 2": "true"
+    "Zora Shop Item 3": "has(WALLET, 1)"
+    "Zora Shop Item 4": "true"
+    "Zora Shop Item 5": "true"
+    "Zora Shop Item 6": "true"
+    "Zora Shop Item 7": "has(WALLET, 2)"
+    "Zora Shop Item 8": "true"
 "Lake Hylia":
   region: LAKE_HYLIA
   exits:

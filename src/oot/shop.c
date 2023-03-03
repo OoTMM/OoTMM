@@ -85,6 +85,22 @@ int comboShopItemSlot(GameState_Play* play, Actor_EnGirlA* girlA)
         }
     }
 
+    if (play->sceneId == SCE_OOT_ZORA_SHOP)
+    {
+        /* Zora shop */
+        switch (girlA->base.variable)
+        {
+        case SHOP_POTION_RED_ALT2:  return 0x10;
+        case SHOP_ARROWS_50:        return 0x11;
+        case SHOP_FISH:             return 0x12;
+        case SHOP_NUTS_5:           return 0x13;
+        case SHOP_ARROWS_10:        return 0x14;
+        case SHOP_ARROWS_30:        return 0x15;
+        case SHOP_TUNIC_ZORA:       return 0x16;
+        case SHOP_RECOVERY_HEART:   return 0x17;
+        }
+    }
+
     if (play->sceneId == SCE_OOT_BAZAAR)
     {
         /* Market / Kakariko Bazaar */

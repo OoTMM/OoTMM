@@ -59,3 +59,4 @@
 "trick_mido": "trick(OOT_MIDO_SKIP) && (has(BOW) || has(HOOKSHOT) || has(ARROW_FIRE) || has(ARROW_LIGHT))"
 "has_sticks": "event(STICKS) || has(STICK) || has(STICKS_5) || has(STICKS_10)"
 "can_use_sticks": "is_child && has_sticks"
+"has_blue_fire": "has_bottle && (event(BLUE_FIRE) || has(BLUE_FIRE))"

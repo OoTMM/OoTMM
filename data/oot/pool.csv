@@ -106,6 +106,14 @@ Zora Domain Diving Game,                              npc,            NONE,     
 Zora Domain Tunic,                                    npc,            ZORA_KING,            ZORA_DOMAIN,                    ZORA_KING_TUNIC,            TUNIC_ZORA
 Zora Domain Eyeball Frog,                             npc,            ZORA_KING,            ZORA_DOMAIN,                    TRADE_EYEBALL_FROG,         EYEBALL_FROG
 Zora Domain GS Waterfall,                             gs,             NONE,                 ZORA_DOMAIN,                    0x96,                       GS_TOKEN
+Zora Shop Item 1,                                     shop,           NONE,                 ZORA_SHOP,                      0x10,                       POTION_RED
+Zora Shop Item 2,                                     shop,           NONE,                 ZORA_SHOP,                      0x11,                       ARROWS_30
+Zora Shop Item 3,                                     shop,           NONE,                 ZORA_SHOP,                      0x12,                       FISH
+Zora Shop Item 4,                                     shop,           NONE,                 ZORA_SHOP,                      0x13,                       NUTS_5
+Zora Shop Item 5,                                     shop,           NONE,                 ZORA_SHOP,                      0x14,                       ARROWS_5
+Zora Shop Item 6,                                     shop,           NONE,                 ZORA_SHOP,                      0x15,                       ARROWS_10
+Zora Shop Item 7,                                     shop,           NONE,                 ZORA_SHOP,                      0x16,                       TUNIC_ZORA
+Zora Shop Item 8,                                     shop,           NONE,                 ZORA_SHOP,                      0x17,                       RECOVERY_HEART
 Zora Fountain Iceberg HP,                             collectible,    NONE,                 ZORA_FOUNTAIN,                  0x01,                       HEART_PIECE
 Zora Fountain Bottom HP,                              collectible,    NONE,                 ZORA_FOUNTAIN,                  0x14,                       HEART_PIECE
 Zora Fountain GS Wall,                                gs,             NONE,                 ZORA_FOUNTAIN,                  0x92,                       GS_TOKEN
