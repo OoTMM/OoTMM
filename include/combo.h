@@ -25,6 +25,7 @@
 #  include <combo/oot/play.h>
 #  include <combo/oot/player.h>
 #  include <combo/oot/actors/Item_Etcetera.h>
+#  include <combo/oot/actors/En_Ossan.h>
 # endif
 
 # if defined(GAME_MM)
@@ -354,6 +355,7 @@ int  comboCsmcChestSize(s16 gi);
 #define SC_ERR_CANNOTBUY    0x02
 #define SC_ERR_NORUPEES     0x04
 
+int  comboShopItemSlot(GameState_Play* play, Actor_EnGirlA* girlA);
 int  comboShopPrecond(GameState_Play* play, Actor_EnGirlA* girlA);
 void comboShopDisplayTextBox(GameState_Play* play, Actor_EnGirlA* girlA);
 void comboShopDisplayTextBoxConfirm(GameState_Play* play, Actor_EnGirlA* girlA);

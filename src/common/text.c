@@ -622,7 +622,7 @@ void comboTextHijackItem(GameState_Play* play, s16 gi, int count)
 static int isSoldOut(s16 gi)
 {
 #if defined(GAME_OOT)
-    return 0;
+    return gi == (GI_MM_SOLD_OUT | MASK_FOREIGN_GI);
 #else
     return gi == GI_MM_SOLD_OUT;
 #endif
