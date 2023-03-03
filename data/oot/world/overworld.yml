@@ -21,6 +21,7 @@
     "Mido's House": "true"
     "Lost Woods": "true"
     "Lost Woods Bridge": "true"
+    "Kokiri Shop": "true"
     "Deku Tree": "is_child"
   locations:
     "Kokiri Forest Kokiri Sword Chest": "is_child"
@@ -33,6 +34,19 @@
     "Kokiri Gossip Near Lost Woods Grotto": "hidden_grotto_storms"
     "Kokiri Gossip Left of Deku Tree": "true"
     "Kokiri Gossip Right of Deku Tree": "true"
+"Kokiri Shop":
+  region: KOKIRI_FOREST
+  exits:
+    "Kokiri Forest": "true"
+  locations:
+    "Kokiri Shop Item 1": "true"
+    "Kokiri Shop Item 2": "true"
+    "Kokiri Shop Item 3": "true"
+    "Kokiri Shop Item 4": "true"
+    "Kokiri Shop Item 5": "true"
+    "Kokiri Shop Item 6": "true"
+    "Kokiri Shop Item 7": "true"
+    "Kokiri Shop Item 8": "true"
 "Mido's House":
   region: KOKIRI_FOREST
   exits:

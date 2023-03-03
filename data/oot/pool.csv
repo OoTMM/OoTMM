@@ -9,6 +9,14 @@ Kokiri Forest GS Soil,                                gs,             NONE,     
 Kokiri Forest GS Night Child,                         gs,             NONE,                 KOKIRI_FOREST,                  0x69,                       GS_TOKEN
 Kokiri Forest GS Night Adult,                         gs,             NONE,                 KOKIRI_FOREST,                  0x6a,                       GS_TOKEN
 Kokiri Forest Cow,                                    cow,            NONE,                 KOKIRI_FOREST,                  0x00,                       MILK
+Kokiri Shop Item 1,                                   shop,           NONE,                 KOKIRI_FOREST,                  0x01,                       RECOVERY_HEART
+Kokiri Shop Item 2,                                   shop,           NONE,                 KOKIRI_FOREST,                  0x02,                       ARROWS_10
+Kokiri Shop Item 3,                                   shop,           NONE,                 KOKIRI_FOREST,                  0x03,                       ARROWS_30
+Kokiri Shop Item 4,                                   shop,           NONE,                 KOKIRI_FOREST,                  0x04,                       DEKU_SEEDS_30
+Kokiri Shop Item 5,                                   shop,           NONE,                 KOKIRI_FOREST,                  0x05,                       NUTS_5
+Kokiri Shop Item 6,                                   shop,           NONE,                 KOKIRI_FOREST,                  0x06,                       NUTS_10
+Kokiri Shop Item 7,                                   shop,           NONE,                 KOKIRI_FOREST,                  0x07,                       STICK
+Kokiri Shop Item 8,                                   shop,           NONE,                 KOKIRI_FOREST,                  0x08,                       SHIELD_DEKU
 Malon Egg,                                            npc,            NONE,                 HYRULE_CASTLE,                  MALON_EGG,                  CHICKEN
 Zelda's Letter,                                       npc,            NONE,                 CASTLE_COURTYARD,               ZELDA_LETTER,               ZELDA_LETTER
 Zelda's Song,                                         npc,            NONE,                 CASTLE_COURTYARD,               ZELDA_SONG,                 SONG_ZELDA

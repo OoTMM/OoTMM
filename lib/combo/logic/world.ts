@@ -21,7 +21,7 @@ type WorldArea = {
 };
 
 type WorldCheckNumeric = {
-  type: 'chest' | 'collectible' | 'gs' | 'sf' | 'cow';
+  type: 'chest' | 'collectible' | 'gs' | 'sf' | 'cow' | 'shop';
   id: number;
 };
 

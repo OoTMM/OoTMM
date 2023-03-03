@@ -155,6 +155,7 @@ void comboGameSwitch(GameState_Play* play, s32 entrance);
 #define OV_GS           3
 #define OV_SF           4
 #define OV_COW          5
+#define OV_SHOP         6
 
 #define OVF_PROGRESSIVE       (1 << 0)
 #define OVF_DOWNGRADE         (1 << 1)
