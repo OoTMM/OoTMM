@@ -146,15 +146,12 @@ void comboShopSetupItem(GameState_Play* play, Actor_EnGirlA* girlA)
 
     slotId = comboShopItemSlot(play, girlA);
     girlA->precond = comboShopPrecond;
+    girlA->gi = comboOverrideEx(OV_SHOP, 0, slotId, girlA->gi, OVF_PROGRESSIVE);
 
-    if (shopReadFlag(slotId))
+    if (!comboIsItemConsumable(girlA->gi) && shopReadFlag(slotId))
     {
         girlA->gi = SOLD_OUT;
         girlA->disabled = 1;
-    }
-    else
-    {
-        girlA->gi = comboOverrideEx(OV_SHOP, 0, slotId, girlA->gi, OVF_PROGRESSIVE);
     }
 }
 
