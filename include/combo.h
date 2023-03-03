@@ -25,18 +25,17 @@
 #  include <combo/oot/play.h>
 #  include <combo/oot/player.h>
 #  include <combo/oot/actors/Item_Etcetera.h>
-#  include <combo/oot/actor_engirla.h>
 # endif
 
 # if defined(GAME_MM)
 #  include <combo/mm/play.h>
 #  include <combo/mm/player.h>
-#  include <combo/mm/actor_engirla.h>
 #  include <combo/mm/actor_ensob1.h>
 #  include <combo/mm/actor_enfsn.h>
 # endif
 
 # include <combo/common/actors/En_Item00.h>
+# include <combo/common/actors/En_GirlA.h>
 # include <combo/common/actor_init.h>
 # include <combo/common/actor_item_custom.h>
 # include <combo/common/api.h>
@@ -287,8 +286,6 @@ void comboRemoveTradeItem3(u16 xitemId);
 
 # if defined(GAME_MM)
 void comboAfterBuy(Actor_EnGirlA* girlA, GameState_Play* play);
-void comboShopDisplayTextBox(GameState_Play* play, Actor_EnGirlA* girlA, int price);
-void comboShopDisplayTextBoxConfirm(GameState_Play* play, Actor_EnGirlA* girlA, int price);
 # endif
 
 void comboSpawnItemGiver(GameState_Play* play, u16 npcId);
@@ -357,7 +354,9 @@ int  comboCsmcChestSize(s16 gi);
 #define SC_ERR_CANNOTBUY    0x02
 #define SC_ERR_NORUPEES     0x04
 
-int comboShopPrecond(GameState_Play* play, Actor_EnGirlA* girlA);
+int  comboShopPrecond(GameState_Play* play, Actor_EnGirlA* girlA);
+void comboShopDisplayTextBox(GameState_Play* play, Actor_EnGirlA* girlA);
+void comboShopDisplayTextBoxConfirm(GameState_Play* play, Actor_EnGirlA* girlA);
 
 /* Entrance */
 void comboInitEntrances(void);

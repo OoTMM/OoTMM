@@ -3,7 +3,6 @@
 void EnGirlA_AfterHandler(Actor_EnGirlA* this, GameState_Play* play)
 {
     this->precond = comboShopPrecond;
-    this->gi = GI_OOT_HOOKSHOT;
 }
 
 void EnGirlA_Draw(Actor_EnGirlA* this, GameState_Play* play)
