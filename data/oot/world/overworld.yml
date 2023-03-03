@@ -449,6 +449,7 @@
     "Goron City Shortcut": "event(GORON_CITY_SHORTCUT)"
     "Death Mountain": "true"
     "Death Mountain Crater Bottom": "is_adult && (has_explosives || can_use_bow || has(STRENGTH))"
+    "Goron Shop": "cond(is_adult, has_explosives || can_use_bow || has(STRENGTH), has_bombflowers)"
   event:
     GORON_CITY_SHORTCUT: "has_bombflowers || can_hammer || can_use_bow || can_use_din"
   locations:
@@ -465,6 +466,19 @@
   gossip:
     "Goron City Gossip Boulder Maze": "has_explosives_or_hammer || can_lift_silver"
     "Goron City Gossip Near Medigoron": "has_bombflowers || can_hammer"
+"Goron Shop":
+  region: GORON_CITY
+  exits:
+    "Goron City": "true"
+  locations:
+    "Goron Shop Item 1": "true"
+    "Goron Shop Item 2": "true"
+    "Goron Shop Item 3": "true"
+    "Goron Shop Item 4": "has(WALLET, 1)"
+    "Goron Shop Item 5": "true"
+    "Goron Shop Item 6": "true"
+    "Goron Shop Item 7": "true"
+    "Goron Shop Item 8": "has(WALLET, 1)"
 "Zora River Front":
   region: ZORA_RIVER
   exits:
