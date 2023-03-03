@@ -1,17 +1,14 @@
 #include <combo.h>
 
-void comboAfterBuy(Actor_EnGirlA* girlA, GameState_Play* play)
-{
-    girlA->gi = GI_MM_SOLD_OUT | MASK_FOREIGN_GI;
-}
-
 static int EnOssan_HasGivenItem(Actor_EnOssan* this, GameState_Play* play)
 {
     if (!Actor_HasParent(&this->base))
         return 0;
 
-    comboAfterBuy(this->items[this->itemIndex], play);
+    comboShopAfterBuy(play, this->items[this->itemIndex]);
     this->base.attachedA = NULL;
+    for (int i = 0; i < 8; ++i)
+        comboShopSetupItem(play, this->items[i]);
     return 1;
 }
 

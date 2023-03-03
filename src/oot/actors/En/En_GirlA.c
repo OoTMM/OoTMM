@@ -2,11 +2,7 @@
 
 void EnGirlA_AfterHandler(Actor_EnGirlA* this, GameState_Play* play)
 {
-    int slotId;
-
-    slotId = comboShopItemSlot(play, this);
-    this->precond = comboShopPrecond;
-    this->gi = comboOverrideEx(OV_SHOP, 0, slotId, this->gi, OVF_PROGRESSIVE);
+    comboShopSetupItem(play, this);
 }
 
 void EnGirlA_Draw(Actor_EnGirlA* this, GameState_Play* play)

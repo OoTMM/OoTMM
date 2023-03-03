@@ -359,6 +359,8 @@ int  comboShopItemSlot(GameState_Play* play, Actor_EnGirlA* girlA);
 int  comboShopPrecond(GameState_Play* play, Actor_EnGirlA* girlA);
 void comboShopDisplayTextBox(GameState_Play* play, Actor_EnGirlA* girlA);
 void comboShopDisplayTextBoxConfirm(GameState_Play* play, Actor_EnGirlA* girlA);
+void comboShopAfterBuy(GameState_Play* play, Actor_EnGirlA* girlA);
+void comboShopSetupItem(GameState_Play* play, Actor_EnGirlA* girlA);
 
 /* Entrance */
 void comboInitEntrances(void);
