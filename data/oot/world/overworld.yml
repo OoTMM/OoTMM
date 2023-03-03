@@ -123,11 +123,11 @@
   exits:
     "Market": "is_child"
   locations:
-    "Market Potion Shop Item 1": "true"
+    "Market Potion Shop Item 1": "has(WALLET, 1)"
     "Market Potion Shop Item 2": "true"
     "Market Potion Shop Item 3": "true"
     "Market Potion Shop Item 4": "true"
-    "Market Potion Shop Item 5": "true"
+    "Market Potion Shop Item 5": "has(WALLET, 2)"
     "Market Potion Shop Item 6": "true"
     "Market Potion Shop Item 7": "true"
     "Market Potion Shop Item 8": "true"
@@ -327,6 +327,8 @@
     "Skulltula House": "true"
     "Shooting Gallery Adult": "is_adult"
     "Kakariko Rooftop": "is_child || can_hookshot"
+    "Kakariko Bazaar": "is_adult"
+    "Kakariko Potion Shop": "is_adult"
   locations:
     "Kakariko Anju Bottle": "is_child"
     "Kakariko Anju Egg": "is_adult"
@@ -353,6 +355,32 @@
     "Kakariko": "true"
   locations:
     "Kakariko Impa House HP": "true"
+"Kakariko Bazaar":
+  region: KAKARIKO
+  exits:
+    "Kakariko": "is_adult"
+  locations:
+    "Kakariko Bazaar Item 1": "true"
+    "Kakariko Bazaar Item 2": "true"
+    "Kakariko Bazaar Item 3": "true"
+    "Kakariko Bazaar Item 4": "true"
+    "Kakariko Bazaar Item 5": "true"
+    "Kakariko Bazaar Item 6": "true"
+    "Kakariko Bazaar Item 7": "true"
+    "Kakariko Bazaar Item 8": "true"
+"Kakariko Potion Shop":
+  region: KAKARIKO
+  exits:
+    "Kakariko": "is_adult"
+  locations:
+    "Kakariko Potion Shop Item 1": "has(WALLET, 1)"
+    "Kakariko Potion Shop Item 2": "true"
+    "Kakariko Potion Shop Item 3": "true"
+    "Kakariko Potion Shop Item 4": "true"
+    "Kakariko Potion Shop Item 5": "has(WALLET, 2)"
+    "Kakariko Potion Shop Item 6": "true"
+    "Kakariko Potion Shop Item 7": "true"
+    "Kakariko Potion Shop Item 8": "true"
 "Shooting Gallery Adult":
   region: KAKARIKO
   exits:

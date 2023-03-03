@@ -54,6 +54,22 @@ Kakariko GS Bazaar,                                   gs,             NONE,     
 Kakariko GS Ladder,                                   gs,             NONE,                 KAKARIKO_VILLAGE,               0x8a,                       GS_TOKEN
 Kakariko Potion Shop Odd Potion,                      npc,            NONE,                 KAKARIKO_POTION_SHOP,           TRADE_ODD_POTION,           ODD_POTION
 Kakariko Cow,                                         cow,            NONE,                 KAKARIKO_VILLAGE,               0x06,                       MILK
+Kakariko Bazaar Item 1,                               shop,           NONE,                 BAZAAR,                         0x30,                       ARROWS_5
+Kakariko Bazaar Item 2,                               shop,           NONE,                 BAZAAR,                         0x31,                       ARROWS_10
+Kakariko Bazaar Item 3,                               shop,           NONE,                 BAZAAR,                         0x32,                       ARROWS_30
+Kakariko Bazaar Item 4,                               shop,           NONE,                 BAZAAR,                         0x33,                       STICK
+Kakariko Bazaar Item 5,                               shop,           NONE,                 BAZAAR,                         0x34,                       BOMBS_5
+Kakariko Bazaar Item 6,                               shop,           NONE,                 BAZAAR,                         0x35,                       RECOVERY_HEART
+Kakariko Bazaar Item 7,                               shop,           NONE,                 BAZAAR,                         0x36,                       NUTS_5
+Kakariko Bazaar Item 8,                               shop,           NONE,                 BAZAAR,                         0x37,                       SHIELD_HYLIAN
+Kakariko Potion Shop Item 1,                          shop,           NONE,                 KAKARIKO_POTION_SHOP,           0x38,                       FISH
+Kakariko Potion Shop Item 2,                          shop,           NONE,                 KAKARIKO_POTION_SHOP,           0x39,                       BUG
+Kakariko Potion Shop Item 3,                          shop,           NONE,                 KAKARIKO_POTION_SHOP,           0x3a,                       POE
+Kakariko Potion Shop Item 4,                          shop,           NONE,                 KAKARIKO_POTION_SHOP,           0x3b,                       NUTS_5
+Kakariko Potion Shop Item 5,                          shop,           NONE,                 KAKARIKO_POTION_SHOP,           0x3c,                       BLUE_FIRE
+Kakariko Potion Shop Item 6,                          shop,           NONE,                 KAKARIKO_POTION_SHOP,           0x3d,                       FAIRY
+Kakariko Potion Shop Item 7,                          shop,           NONE,                 KAKARIKO_POTION_SHOP,           0x3e,                       POTION_GREEN
+Kakariko Potion Shop Item 8,                          shop,           NONE,                 KAKARIKO_POTION_SHOP,           0x3f,                       POTION_RED
 Graveyard Dampe Game,                                 collectible,    NONE,                 GRAVEYARD,                      0x1f,                       HEART_PIECE
 Graveyard ReDead Tomb,                                chest,          NONE,                 TOMB_REDEAD,                    0x00,                       HEART_PIECE
 Graveyard Royal Tomb Song,                            npc,            NONE,                 TOMB_ROYAL,                     ROYAL_TOMB_SONG,            SONG_SUN
