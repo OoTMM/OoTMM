@@ -29,6 +29,30 @@ static Actor* EnCow_GetNearestCow(GameState_Play* play)
     return cow;
 }
 
+#if defined(GAME_OOT)
+static int EnCow_GetCowID(Actor* cow, GameState_Play* play)
+{
+    cow = EnCow_GetNearestCow(play);
+    switch (play->sceneId)
+    {
+    case SCE_OOT_LINK_HOUSE:
+        return 0;
+    case SCE_OOT_GROTTOS:
+        return cow->position.x > 3000.f ? 1 : 7;
+    case SCE_OOT_STABLE:
+        return cow->position.x < -50.f ? 2 : 3;
+    case SCE_OOT_RANCH_HOUSE_SILO:
+        return cow->position.z > -100.f ? 4 : 5;
+    case SCE_OOT_IMPA_HOUSE:
+        return 6;
+    case SCE_OOT_GERUDO_VALLEY:
+        return 8;
+    }
+    return -1;
+}
+#endif
+
+#if defined(GAME_MM)
 static int EnCow_GetCowID(Actor* cow, GameState_Play* play)
 {
     s32 sceneId;
@@ -36,38 +60,44 @@ static int EnCow_GetCowID(Actor* cow, GameState_Play* play)
     sceneId = play->sceneId;
     if (sceneId == SCE_MM_GROTTOS)
         sceneId = gLastScene;
+    cow = EnCow_GetNearestCow(play);
     switch (sceneId)
     {
     case SCE_MM_TERMINA_FIELD:
-        cow = EnCow_GetNearestCow(play);
         return cow->position.z > 930.f ? 0x13 : 0x14;
     case SCE_MM_GREAT_BAY_COAST:
-        cow = EnCow_GetNearestCow(play);
         return cow->position.z > 930.f ? 0x15 : 0x16;
     case SCE_MM_RANCH_HOUSE_BARN:
-        cow = EnCow_GetNearestCow(play);
         return cow->position.x < -100.f ? 0x10 : cow->position.z < -100.f ? 0x12 : 0x11;
     case SCE_MM_BENEATH_THE_WELL:
         return 0x17;
     }
     return -1;
 }
+#endif
 
 static void EnCow_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
 {
     int id;
+    Actor_Player* link;
 
+    /* Make sure any dialog is closed */
+    link = GET_LINK(play);
+    if (link->state & PLAYER_ACTOR_STATE_GET_ITEM)
+        return;
+    Message_Close(play);
+
+    /* Get the cow ID and attached item */
     id = EnCow_GetCowID(this, play);
     if (id != -1 && (gCowFlags & (1 << id)) == 0)
     {
         sCowID = id;
         gi = comboOverride(OV_COW, 0, id, gi);
     }
-    GiveItem(this, play, gi, a, b);
-}
 
-PATCH_CALL(0x8099cc50, EnCow_GiveItem);
-PATCH_CALL(0x8099cbb4, EnCow_GiveItem);
+    /* Give the item */
+    GiveItem(this, play, gi, 10000.f, 10000.f);
+}
 
 static int EnCow_HasGivenItem(Actor* this)
 {
@@ -83,4 +113,22 @@ static int EnCow_HasGivenItem(Actor* this)
     return 0;
 }
 
+
+static int EnCow_TalkedTo(Actor* this, GameState_Play* play)
+{
+    return 1;
+}
+
+#if defined(GAME_OOT)
+PATCH_CALL(0x80b77fcc, EnCow_GiveItem);
+PATCH_CALL(0x80b77f30, EnCow_GiveItem);
+PATCH_CALL(0x80b77ef4, EnCow_HasGivenItem);
+PATCH_CALL(0x80b78084, EnCow_TalkedTo);
+#endif
+
+#if defined(GAME_MM)
+PATCH_CALL(0x8099cc50, EnCow_GiveItem);
+PATCH_CALL(0x8099cbb4, EnCow_GiveItem);
 PATCH_CALL(0x8099cb78, EnCow_HasGivenItem);
+PATCH_CALL(0x8099cd08, EnCow_TalkedTo);
+#endif

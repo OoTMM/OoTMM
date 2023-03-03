@@ -9,6 +9,15 @@ PATCH_START 0x8099cca0
   li v0,1
 PATCH_END
 
+/* Disable talk */
+PATCH_START 0x8099ce74
+  nop
+PATCH_END
+
+PATCH_START 0x8099cd74
+  nop
+PATCH_END
+
 /* Disable text boxes */
 PATCH_START 0x8099ccb4
   nop
