@@ -154,13 +154,13 @@ export class LogicPassSolver {
 
     for (const location in this.state.world.checks) {
       const check = this.state.world.checks[location];
-      const { item } = check;
+      const { item, type } = check;
 
       if (this.items[location]) {
         continue;
       }
 
-      if (isDungeonReward(item) || isKey(item) || isStrayFairy(item) || ITEMS_REQUIRED.has(item)) {
+      if (isDungeonReward(item) || isKey(item) || isStrayFairy(item) || ITEMS_REQUIRED.has(item) || type == 'shop') {
         addItem(pools.required, item);
       } else if (isJunk(item)) {
         addItem(pools.junk, item);
@@ -267,8 +267,8 @@ export class LogicPassSolver {
 
     for (const loc in this.state.world.checks) {
       const c = this.state.world.checks[loc];
-      if (c.type === 'shop' && c.game === 'oot') {
-        const item = this.state.world.checks[loc].item;
+      const { type, game, item } = c;
+      if (type === 'shop' && game === 'oot') {
         this.place(loc, item);
         removeItemPools(this.pools, item);
       }

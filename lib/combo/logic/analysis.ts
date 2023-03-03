@@ -359,22 +359,14 @@ export class LogicPassAnalysis {
   }
 
   private makeSpheres() {
-    const spheres: string[][] = [];
-    const rawSpheres = this.makeSpheresRaw().reverse();
-    const spheresLocs = new Set(rawSpheres.flat());
+    const locs = this.makeSpheresRaw().reverse().flat();
+    const spheresLocs = new Set(locs);
 
-    for (const sphere of rawSpheres) {
-      const filteredSphere: string[] = [];
-      for (const loc of sphere) {
-        spheresLocs.delete(loc);
-        const pathfinderState = this.pathfinder.run(null, { items: this.state.items, restrictedLocations: spheresLocs, recursive: true, stopAtGoal: true });
-        if (!pathfinderState.goal) {
-          spheresLocs.add(loc);
-          filteredSphere.push(loc);
-        }
-      }
-      if (filteredSphere.length !== 0) {
-        spheres.push(filteredSphere);
+    for (const loc of locs) {
+      spheresLocs.delete(loc);
+      const pathfinderState = this.pathfinder.run(null, { items: this.state.items, restrictedLocations: spheresLocs, recursive: true, stopAtGoal: true });
+      if (!pathfinderState.goal) {
+        spheresLocs.add(loc);
       }
     }
 
