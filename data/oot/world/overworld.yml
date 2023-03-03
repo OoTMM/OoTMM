@@ -97,6 +97,7 @@
     "Treasure Game": "true"
     "Shooting Gallery Child": "true"
     "Market Bazaar": "true"
+    "Market Potion Shop": "true"
     "MM SPAWN": "is_child"
   gossip:
     "Market Gossip Outside Temple Leftmost": "true"
@@ -116,6 +117,19 @@
     "Market Bazaar Item 6": "true"
     "Market Bazaar Item 7": "true"
     "Market Bazaar Item 8": "true"
+"Market Potion Shop":
+  region: MARKET
+  exits:
+    "Market": "is_child"
+  locations:
+    "Market Potion Shop Item 1": "true"
+    "Market Potion Shop Item 2": "true"
+    "Market Potion Shop Item 3": "true"
+    "Market Potion Shop Item 4": "true"
+    "Market Potion Shop Item 5": "true"
+    "Market Potion Shop Item 6": "true"
+    "Market Potion Shop Item 7": "true"
+    "Market Potion Shop Item 8": "true"
 "Market Pot House":
   region: MARKET
   exits:

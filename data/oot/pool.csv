@@ -147,14 +147,22 @@ Hyrule Field Cow,                                     cow,            NONE,     
 Market Dog Lady HP,                                   npc,            NONE,                 BACK_ALLEY_HOUSE,               DOG_LADY,                   HEART_PIECE
 Market Pot House Big Poes,                            npc,            NONE,                 GUARD_HOUSE,                    POE_COLLECTOR,              BOTTLE_EMPTY
 Market Pot House GS,                                  gs,             NONE,                 GUARD_HOUSE,                    0x7b,                       GS_TOKEN
-Market Bazaar Item 1,                                 shop,           NONE,                 BAZAAR,                         0x08,                       ARROWS_5
-Market Bazaar Item 2,                                 shop,           NONE,                 BAZAAR,                         0x09,                       ARROWS_10
-Market Bazaar Item 3,                                 shop,           NONE,                 BAZAAR,                         0x0a,                       ARROWS_30
-Market Bazaar Item 4,                                 shop,           NONE,                 BAZAAR,                         0x0b,                       STICK
-Market Bazaar Item 5,                                 shop,           NONE,                 BAZAAR,                         0x0c,                       BOMBS_5
-Market Bazaar Item 6,                                 shop,           NONE,                 BAZAAR,                         0x0d,                       RECOVERY_HEART
-Market Bazaar Item 7,                                 shop,           NONE,                 BAZAAR,                         0x0e,                       NUTS_5
-Market Bazaar Item 8,                                 shop,           NONE,                 BAZAAR,                         0x0f,                       SHIELD_HYLIAN
+Market Bazaar Item 1,                                 shop,           NONE,                 BAZAAR,                         0x20,                       ARROWS_5
+Market Bazaar Item 2,                                 shop,           NONE,                 BAZAAR,                         0x21,                       ARROWS_10
+Market Bazaar Item 3,                                 shop,           NONE,                 BAZAAR,                         0x22,                       ARROWS_30
+Market Bazaar Item 4,                                 shop,           NONE,                 BAZAAR,                         0x23,                       STICK
+Market Bazaar Item 5,                                 shop,           NONE,                 BAZAAR,                         0x24,                       BOMBS_5
+Market Bazaar Item 6,                                 shop,           NONE,                 BAZAAR,                         0x25,                       RECOVERY_HEART
+Market Bazaar Item 7,                                 shop,           NONE,                 BAZAAR,                         0x26,                       NUTS_5
+Market Bazaar Item 8,                                 shop,           NONE,                 BAZAAR,                         0x27,                       SHIELD_HYLIAN
+Market Potion Shop Item 1,                            shop,           NONE,                 MARKET_POTION_SHOP,             0x28,                       FISH
+Market Potion Shop Item 2,                            shop,           NONE,                 MARKET_POTION_SHOP,             0x29,                       BUG
+Market Potion Shop Item 3,                            shop,           NONE,                 MARKET_POTION_SHOP,             0x2a,                       POE
+Market Potion Shop Item 4,                            shop,           NONE,                 MARKET_POTION_SHOP,             0x2b,                       NUTS_5
+Market Potion Shop Item 5,                            shop,           NONE,                 MARKET_POTION_SHOP,             0x2c,                       BLUE_FIRE
+Market Potion Shop Item 6,                            shop,           NONE,                 MARKET_POTION_SHOP,             0x2d,                       FAIRY
+Market Potion Shop Item 7,                            shop,           NONE,                 MARKET_POTION_SHOP,             0x2e,                       POTION_GREEN
+Market Potion Shop Item 8,                            shop,           NONE,                 MARKET_POTION_SHOP,             0x2f,                       POTION_RED
 Bombchu Bowling Reward 1,                             npc,            NONE,                 BOMBCHU_BOWLING_ALLEY,          BOMBCHU_BOWLING_1,          BOMB_BAG
 Bombchu Bowling Reward 2,                             npc,            NONE,                 BOMBCHU_BOWLING_ALLEY,          BOMBCHU_BOWLING_2,          HEART_PIECE
 Treasure Game HP,                                     chest,          NONE,                 TREASURE_SHOP,                  0x0a,                       HEART_PIECE
