@@ -380,6 +380,9 @@ void comboTriggerWarp(GameState_Play* play, int index);
 void comboMenuKeysUpdate(GameState_Play* play);
 void comboMenuKeysDraw(GameState_Play* play);
 
+/* Custom Shaders */
+void Shader_Xlu0(GameState_Play* play, s16 shaderId);
+
 #if defined(GAME_MM)
 extern int gNoTimeFlow;
 #endif

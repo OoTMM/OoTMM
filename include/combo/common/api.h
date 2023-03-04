@@ -183,4 +183,34 @@ void DrawSimpleOpa(GameState_Play* play, u32 segAddr);
 
 void AddRupees(s16 delta);
 
+/* Shaders */
+void Shader_Opa0_Xlu1(GameState_Play*, s16);
+void Shader_Opa0_Xlu12(GameState_Play*, s16);
+void Shader_Opa0(GameState_Play*, s16);
+void Shader_Opa01(GameState_Play*, s16);
+void Shader_Opa1023(GameState_Play*, s16);
+void Shader_Opa10_Xlu2(GameState_Play*, s16);
+void Shader_Opa10_Xlu234(GameState_Play*, s16);
+void Shader_Opa10_Xlu32(GameState_Play*, s16);
+void Shader_Opa10234567(GameState_Play*, s16);
+void Shader_Xlu01(GameState_Play*, s16);
+void Shader_BlueFire(GameState_Play*, s16);
+void Shader_BombchuMask(GameState_Play*, s16);
+void Shader_Compass(GameState_Play*, s16);
+void Shader_DekuNut(GameState_Play*, s16);
+void Shader_Fairy(GameState_Play*, s16);
+void Shader_Fish(GameState_Play*, s16);
+void Shader_GiantKnife(GameState_Play*, s16);
+void Shader_GS(GameState_Play*, s16);
+void Shader_Heart(GameState_Play*, s16);
+void Shader_Medallion(GameState_Play*, s16);
+void Shader_MirrorShield(GameState_Play*, s16);
+void Shader_Poe(GameState_Play*, s16);
+void Shader_Potion(GameState_Play*, s16);
+void Shader_Rupee(GameState_Play*, s16);
+void Shader_Scale(GameState_Play*, s16);
+void Shader_SoldOut(GameState_Play*, s16);
+void Shader_Spell(GameState_Play*, s16);
+void Shader_MoonTear(GameState_Play*, s16);
+
 #endif

@@ -90,7 +90,7 @@ void Shader_MirrorShield(GameState_Play* play, s16 index)
 
 void Shader_SoldOut(GameState_Play* play, s16 index)
 {
-
+    Shader_Xlu0(play, index);
 }
 
 void Shader_BlueFire(GameState_Play* play, s16 index)
