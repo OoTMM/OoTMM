@@ -23,11 +23,13 @@
     "Lost Woods Bridge": "true"
     "Kokiri Shop": "true"
     "Deku Tree": "is_child"
+  events:
+    STICKS: "can_boomerang || (is_child && has_weapon)"
   locations:
     "Kokiri Forest Kokiri Sword Chest": "is_child"
     "Kokiri Forest Storms Grotto": "hidden_grotto_storms"
-    "Kokiri Forest GS Soil": "gs_soil"
-    "Kokiri Forest GS Night Child": "is_child && gs_night"
+    "Kokiri Forest GS Soil": "gs_soil && can_damage_skull"
+    "Kokiri Forest GS Night Child": "is_child && gs_night && can_damage_skull"
     "Kokiri Forest GS Night Adult": "can_hookshot && gs_night"
   gossip:
     "Kokiri Gossip Near Lost Woods Open": "true"
@@ -70,7 +72,7 @@
   events:
     BIG_POE: "event(EPONA) && can_use_bow && has_bottle"
   locations:
-    "Hyrule Field Grotto Scrub HP": "hidden_grotto_bomb"
+    "Hyrule Field Grotto Scrub HP": "hidden_grotto_bomb && (has_nuts || has_shield_for_scrubs || can_hammer)"
     "Hyrule Field Ocarina of Time": "has_spiritual_stones"
     "Hyrule Field Song of Time": "has_spiritual_stones"
     "Hyrule Field Grotto Southeast": "has_explosives_or_hammer"
@@ -239,7 +241,7 @@
     "Zelda's Letter": "event(MEET_ZELDA)"
     "Zelda's Song": "event(MEET_ZELDA)"
     "Great Fairy Din's Fire": "has_explosives && can_play(SONG_ZELDA)"
-    "Hyrule Castle GS Tree": "true"
+    "Hyrule Castle GS Tree": "can_damage_skull"
     "Hyrule Castle GS Grotto": "hidden_grotto_storms && has_explosives && can_boomerang"
   gossip:
     "Hyrule Castle Gossip After Climb": "true"
@@ -267,11 +269,11 @@
     "Lost Woods Target": "can_use_slingshot"
     "Lost Woods Skull Kid": "is_child && can_play(SONG_SARIA)"
     "Lost Woods Memory Game": "is_child && has(OCARINA)"
-    "Lost Woods Scrub Sticks Upgrade": "is_child"
+    "Lost Woods Scrub Sticks Upgrade": "is_child && (has_nuts || has_shield_for_scrubs)"
     "Lost Woods Odd Mushroom": "adult_trade(COJIRO)"
     "Lost Woods Poacher's Saw": "adult_trade(ODD_POTION)"
     "Lost Woods Grotto Generic": "has_explosives_or_hammer"
-    "Lost Woods GS Soil Bridge": "gs_soil"
+    "Lost Woods GS Soil Bridge": "gs_soil && can_damage_skull"
   gossip:
     "Lost Woods Gossip Under Bridge": "true"
     "Lost Woods Gossip Grotto": "has_explosives_or_hammer"
@@ -293,8 +295,8 @@
   events:
     BEAN_LOST_WOODS_LATE: "can_use_beans"
   locations:
-    "Lost Woods Grotto Scrub Nuts Upgrade": "has_explosives_or_hammer"
-    "Lost Woods GS Soil Theater": "gs_soil"
+    "Lost Woods Grotto Scrub Nuts Upgrade": "has_explosives_or_hammer && (has_nuts || has_shield_for_scrubs || can_hammer)"
+    "Lost Woods GS Soil Theater": "gs_soil && can_damage_skull"
     "Lost Woods GS Bean Ride": "gs_night && can_ride_bean(BEAN_LOST_WOODS_LATE)"
 "Deku Theater":
   region: LOST_WOODS
@@ -309,7 +311,7 @@
     "Lost Woods Deep": "true"
     "Forest Temple": "can_hookshot"
   locations:
-    "Saria's Song": "event(MEET_ZELDA)"
+    "Saria's Song": "event(MEET_ZELDA) && is_child && (can_play(SONG_TP_FOREST) || can_damage)"
     "Sacred Meadow Sheik Song": "is_adult"
     "Sacred Meadow Grotto": "hidden_grotto_bomb"
     "Sacred Meadow GS Night Adult": "can_hookshot && gs_night"
@@ -401,7 +403,7 @@
     "Graveyard Dampe Tomb Reward 1": "is_adult"
     "Graveyard Dampe Tomb Reward 2": "is_adult"
     "Graveyard Crate HP": "can_ride_bean(BEAN_GRAVEYARD) || can_longshot"
-    "Graveyard GS Soil": "gs_soil"
+    "Graveyard GS Soil": "gs_soil && can_damage_skull"
     "Graveyard GS Wall": "can_boomerang && gs_night"
 "Graveyard Upper":
   region: GRAVEYARD
@@ -442,7 +444,7 @@
     "Death Mountain HP": "true"
     "Death Mountain Grotto": "hidden_grotto_storms"
     "Death Mountain GS Entrance": "has_explosives_or_hammer"
-    "Death Mountain GS Soil": "gs_soil && has_bombflowers"
+    "Death Mountain GS Soil": "gs_soil && has_bombflowers && can_damage_skull"
     "Death Mountain GS Above Dodongo":  "gs_night && can_hammer"
     "Death Mountain Cow": "has_explosives_or_hammer && can_play(SONG_EPONA)"
   gossip:
@@ -480,6 +482,7 @@
     "Goron Shop": "cond(is_adult, has_explosives || can_use_bow || has(STRENGTH), has_bombflowers)"
   event:
     GORON_CITY_SHORTCUT: "has_bombflowers || can_hammer || can_use_bow || can_use_din"
+    STICKS: "is_child"
   locations:
     "Darunia": "can_play(SONG_ZELDA) && can_play(SONG_SARIA)"
     "Goron City Maze Center 1": "has_explosives_or_hammer || can_lift_silver"
@@ -513,7 +516,7 @@
     "Hyrule Field": "true"
     "Zora River": "is_adult || (is_child && has_explosives)"
   locations:
-    "Zora River GS Tree": "is_child"
+    "Zora River GS Tree": "is_child && can_damage_skull"
 "Zora River":
   region: ZORA_RIVER
   exits:
@@ -527,7 +530,7 @@
     "Zora River Frogs Storms": "is_child && can_play(SONG_STORMS)"
     "Zora River Frogs Game": "is_child && can_play(SONG_ZELDA) && can_play(SONG_SARIA) && can_play(SONG_EPONA) && can_play(SONG_SUN) && can_play(SONG_TIME) && can_play(SONG_STORMS)"
     "Zora River Grotto": "true"
-    "Zora River GS Ladder": "is_child && gs_night"
+    "Zora River GS Ladder": "is_child && gs_night && can_damage_skull"
     "Zora River GS Near Grotto": "is_adult && gs_night && can_hookshot"
     "Zora River GS Near Bridge": "is_adult && gs_night && can_hookshot"
   gossip:
@@ -543,6 +546,8 @@
     "Zora Shop": "is_child || has_blue_fire"
   events:
     KING_ZORA_LETTER: "is_child && has(RUTO_LETTER)"
+    STICKS: "is_child"
+    NUTS: "true"
   locations:
     "Zora Domain Waterfall Chest": "is_child"
     "Zora Domain Diving Game": "is_child"
@@ -586,8 +591,8 @@
     "Lake Hylia Fire Arrow": "can_use_bow && (event(WATER_TEMPLE_CLEARED) || scarecrow_longshot)"
     "Lake Hylia HP": "can_ride_bean(BEAN_LAKE_HYLIA) || scarecrow_hookshot"
     "Lake Hylia GS Lab Wall": "gs_night && can_boomerang"
-    "Lake Hylia GS Island": "is_child && gs_night"
-    "Lake Hylia GS Soil": "gs_soil"
+    "Lake Hylia GS Island": "is_child && gs_night && can_damage_skull"
+    "Lake Hylia GS Soil": "gs_soil && can_damage_skull"
     "Lake Hylia GS Big Tree": "gs_night && can_longshot"
   gossip:
     "Lake Hylia Gossip Near River": "true"
@@ -619,7 +624,7 @@
     "Zora Fountain Iceberg HP": "is_adult"
     "Zora Fountain Bottom HP": "has_tunic_zora && has_iron_boots"
     "Zora Fountain GS Wall": "gs_night && can_boomerang"
-    "Zora Fountain GS Tree": "is_child"
+    "Zora Fountain GS Tree": "is_child && can_damage_skull"
     "Zora Fountain GS Upper": "gs_night && has_explosives_or_hammer && can_hookshot && can_lift_silver"
   gossip:
     "Zora Fountain Gossip Northwest": "true"
@@ -653,7 +658,7 @@
     "Death Mountain Crater Bottom": "event(RED_BOULDER_BROKEN) || has_hover_boots"
     "Death Mountain Crater Warp": "has_tunic_goron_strict && scarecrow_longshot"
   locations:
-    "Death Mountain Crater GS Crate": "is_child"
+    "Death Mountain Crater GS Crate": "is_child && can_damage_skull"
     "Death Mountain Crater Grotto": "has_explosives_or_hammer"
     "Death Mountain Crater Alcove HP": "true"
   gossip:
@@ -679,7 +684,7 @@
   locations:
     "Death Mountain Crater Volcano HP": "can_ride_bean(BEAN_DEATH_MOUNTAIN_CRATER) || (trick(OOT_VOLCANO_HOVERS) && has_hover_boots)"
     "Death Mountain Crater Sheik Song": "is_adult"
-    "Death Mountain Crater GS Soil": "gs_soil"
+    "Death Mountain Crater GS Soil": "gs_soil && can_damage_skull"
 "Gerudo Valley":
   region: GERUDO_VALLEY
   exits:
@@ -689,7 +694,7 @@
   locations:
     "Gerudo Valley Crate HP": "is_child || can_longshot"
     "Gerudo Valley Waterfall HP": "true"
-    "Gerudo Valley GS Soil": "gs_soil"
+    "Gerudo Valley GS Soil": "gs_soil && can_damage_skull"
     "Gerudo Valley GS Wall": "can_boomerang && gs_night"
     "Gerudo Valley Cow": "is_child && can_play(SONG_EPONA)"
   gossip:
@@ -753,7 +758,7 @@
     "Desert Colossus HP": "can_ride_bean(BEAN_DESERT_COLOSSUS)"
     "Desert Colossus Song Spirit": "true"
     "Great Fairy Nayru's Love": "has_explosives && can_play(SONG_ZELDA)"
-    "Desert Colossus GS Soil": "gs_soil"
+    "Desert Colossus GS Soil": "gs_soil && can_damage_skull"
     "Desert Colossus GS Tree": "can_hookshot && gs_night"
     "Desert Colossus GS Plateau": "gs_night && (can_longshot || can_ride_bean(BEAN_DESERT_COLOSSUS))"
   gossip:
