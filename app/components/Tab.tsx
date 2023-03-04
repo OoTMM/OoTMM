@@ -16,7 +16,7 @@ export function TabBar({ tabs }: TabProps) {
     <>
       <nav className="tab-bar-left">
         {tabs.map((tab, i) =>
-          <a key={i} className={["tab", i === activeTab ? "active" : "inactive"].join(" ")} href="#" onClick={() => setActiveTab(i)}>{tab.name}</a>
+          <a key={i} className={["tab", i === activeTab ? "active" : "inactive"].join(" ")} href="#" onClick={(e) => { e.preventDefault(); setActiveTab(i)}}>{tab.name}</a>
         )}
       </nav>
       <div className="tab-bar-right">
