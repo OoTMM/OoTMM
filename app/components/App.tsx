@@ -9,10 +9,10 @@ function AppContent() {
   const { isGenerating, message, result } = useGenerator();
 
   if (result) {
-    return <Result result={result}/>
+    return <div className="container"><Result result={result}/></div>;
   }
   if (isGenerating) {
-    return <Progress message={message || ''}/>
+    return <div className="container"><Progress message={message || ''}/></div>;
   }
 
   return <Generator/>;
