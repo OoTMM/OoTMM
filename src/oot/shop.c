@@ -49,8 +49,6 @@
 
 int comboShopItemSlot(GameState_Play* play, Actor_EnGirlA* girlA)
 {
-    static int rhBit;
-
     int slot;
     int ageMask;
 
@@ -92,7 +90,7 @@ int comboShopItemSlot(GameState_Play* play, Actor_EnGirlA* girlA)
         /* Goron shop */
         switch (girlA->base.variable)
         {
-        case SHOP_RECOVERY_HEART:   slot = rhBit ? 0x19 : 0x18; rhBit = !rhBit; break;
+        case SHOP_RECOVERY_HEART:   slot = girlA->base.position.x < -60.f ? 0x18 : 0x19; break;
         case SHOP_POTION_RED_ALT:   slot = 0x1a; break;
         case SHOP_TUNIC_GORON:      slot = 0x1b; break;
         case SHOP_BOMBS_5_ALT:      slot = 0x1c; break;
