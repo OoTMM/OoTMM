@@ -34,7 +34,7 @@
     "Spirit Temple Statue": "true"
     "Spirit Temple Child Hand": "has(SMALL_KEY_SPIRIT, 5)"
   locations:
-    "Spirit Temple Sun Block Room Torches": "(event(SPIRIT_CHILD_DOOR) && can_use_sticks) || has_fire_spirit"
+    "Spirit Temple Sun Block Room Torches": "(event(SPIRIT_CHILD_DOOR) && can_use_sticks && has_explosives) || has_fire_spirit || (has_fire_arrows && has(SMALL_KEY_SPIRIT, 4))"
     "Spirit Temple GS Iron Knuckle": "(event(SPIRIT_CHILD_DOOR) && can_boomerang) || (event(SPIRIT_ADULT_DOOR) && can_hookshot) || (can_collect_ageless && (has_explosives || has(SMALL_KEY_SPIRIT, 2)))"
 "Spirit Temple Child Hand":
   dungeon: Spirit
@@ -66,7 +66,7 @@
     "Spirit Temple Child Upper": "true"
     "Spirit Temple Boss": "has(BOSS_KEY_SPIRIT) && event(SPIRIT_LIGHT_STATUE) && can_hookshot"
   locations:
-    "Spirit Temple Statue Base": "(event(SPIRIT_CHILD_DOOR) && has_explosives && can_use_sticks) || has_fire_spirit"
+    "Spirit Temple Statue Base": "(event(SPIRIT_CHILD_DOOR) && has_explosives && can_use_sticks) || has_fire_spirit || (has_fire_arrows && has(SMALL_KEY_SPIRIT, 4))"
     "Spirit Temple GS Statue": "event(SPIRIT_ADULT_DOOR) && (can_hookshot || has_hover_boots)"
     "Spirit Temple Silver Gauntlets": "has(SMALL_KEY_SPIRIT, 3) && has(HOOKSHOT, 2) && has_explosives"
 "Spirit Temple Statue Adult":
