@@ -68,28 +68,28 @@ void comboTriggerWarp(GameState_Play* play, int bossId)
     switch (dungeonEntranceId)
     {
     case DUNGEONID_DEKU_TREE:
-        entrance = 0x0457;
+        entrance = 0x0457; // Works OK as adult
         break;
     case DUNGEONID_DODONGOS_CAVERN:
-        entrance = 0x0242;
+        entrance = 0x0242; // Works OK as adult
         break;
     case DUNGEONID_JABU_JABU:
-        entrance = 0x0221;
+        entrance = 0x0221; // Works OK as adult
         break;
     case DUNGEONID_TEMPLE_FOREST:
-        entrance = 0x0608;
+        entrance = 0x0600; // Normal exit WW as child
         break;
     case DUNGEONID_TEMPLE_FIRE:
-        entrance = 0x0564;
+        entrance = 0x04f6; // Normal exit WW as child
         break;
     case DUNGEONID_TEMPLE_WATER:
-        entrance = 0x060C;
+        entrance = 0x0604; // Normal exit WW as child
         break;
     case DUNGEONID_TEMPLE_SHADOW:
-        entrance = 0x0580;
+        entrance = 0x0568; // Normal exit crashes as child
         break;
     case DUNGEONID_TEMPLE_SPIRIT:
-        entrance = 0x0610;
+        entrance = 0x01e1; // Normal exit crashes as child
         break;
     case DUNGEONID_TEMPLE_WOODFALL:
         isMmEntrance = 1;
