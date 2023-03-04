@@ -8,7 +8,7 @@ static int EnOssan_HasGivenItem(Actor_EnOssan* this, GameState_Play* play)
     comboShopAfterBuy(play, this->items[this->itemIndex]);
     this->base.attachedA = NULL;
     for (int i = 0; i < 8; ++i)
-        comboShopSetupItem(play, this->items[i]);
+        comboShopUpdateItem(play, this->items[i]);
     return 1;
 }
 

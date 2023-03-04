@@ -28,12 +28,15 @@ struct Actor_EnGirlA
     s16             shaderId;
     s16             unk;
     void*           func1;
+
+    /* Custom fields */
+    u8 shopId;
 };
 
 #if defined(GAME_OOT)
-_Static_assert(sizeof(Actor_EnGirlA) == 0x1c4, "OoT Actor_EnGirlA size is wrong");
+_Static_assert(sizeof(Actor_EnGirlA) == 0x1c8, "OoT Actor_EnGirlA size is wrong");
 #else
-_Static_assert(sizeof(Actor_EnGirlA) == 0x1cc, "MM Actor_EnGirlA size is wrong");
+_Static_assert(sizeof(Actor_EnGirlA) == 0x1d0, "MM Actor_EnGirlA size is wrong");
 #endif
 
 #endif

@@ -49,7 +49,7 @@ int shopReadFlag(int flag)
 #endif
 
 #if defined(GAME_MM)
-int comboShopItemSlot(GameState_Play* play, Actor_EnGirlA* girlA)
+u8 comboShopItemSlot(GameState_Play* play, Actor_EnGirlA* girlA)
 {
     return 0;
 }
@@ -66,8 +66,7 @@ int shopReadFlag(int flag)
 
 void comboShopAfterBuy(GameState_Play* play, Actor_EnGirlA* girlA)
 {
-    int slotId = comboShopItemSlot(play, girlA);
-    shopWriteFlag(slotId);
+    shopWriteFlag(girlA->shopId);
 }
 
 static void quickBuyItem(GameState_Play* play, Actor_EnGirlA* girlA)
@@ -81,21 +80,24 @@ static void postBuyItem(GameState_Play* play, Actor_EnGirlA* girlA)
     AddRupees(-girlA->price);
 }
 
-void comboShopSetupItem(GameState_Play* play, Actor_EnGirlA* girlA)
+void comboShopUpdateItem(GameState_Play* play, Actor_EnGirlA* girlA)
 {
-    int slotId;
-
-    slotId = comboShopItemSlot(play, girlA);
     girlA->precond = comboShopPrecond;
     girlA->quickBuy = quickBuyItem;
     girlA->postBuy = postBuyItem;
-    girlA->gi = comboOverrideEx(OV_SHOP, 0, slotId, girlA->gi, OVF_PROGRESSIVE);
+    girlA->gi = comboOverrideEx(OV_SHOP, 0, girlA->shopId, girlA->gi, OVF_PROGRESSIVE);
 
-    if (!comboIsItemConsumable(girlA->gi) && shopReadFlag(slotId))
+    if (!comboIsItemConsumable(girlA->gi) && shopReadFlag(girlA->shopId))
     {
         girlA->gi = SOLD_OUT;
         girlA->disabled = 1;
     }
+}
+
+void comboShopSetupItem(GameState_Play* play, Actor_EnGirlA* girlA)
+{
+    girlA->shopId = comboShopItemSlot(play, girlA);
+    comboShopUpdateItem(play, girlA);
 }
 
 void comboShopDisplayTextBox(GameState_Play* play, Actor_EnGirlA* girlA)

@@ -47,12 +47,10 @@
 #define SHOP_POTION_RED_ALT         0x30
 #define SHOP_POTION_RED_ALT2        0x31
 
-int comboShopItemSlot(GameState_Play* play, Actor_EnGirlA* girlA)
+u8 comboShopItemSlot(GameState_Play* play, Actor_EnGirlA* girlA)
 {
-    int slot;
     int ageMask;
 
-    slot = 0;
     ageMask = (gSave.age == AGE_ADULT) ? 0x10 : 0x00;
 
     if (play->sceneId == SCE_OOT_KOKIRI_SHOP)
@@ -60,14 +58,14 @@ int comboShopItemSlot(GameState_Play* play, Actor_EnGirlA* girlA)
         /* Kokiri shop */
         switch (girlA->base.variable)
         {
-        case SHOP_RECOVERY_HEART:   slot = 0x00; break;
-        case SHOP_ARROWS_10:        slot = 0x01; break;
-        case SHOP_ARROWS_30:        slot = 0x02; break;
-        case SHOP_SEEDS_30:         slot = 0x03; break;
-        case SHOP_NUTS_5:           slot = 0x04; break;
-        case SHOP_NUTS_10:          slot = 0x05; break;
-        case SHOP_STICK:            slot = 0x06; break;
-        case SHOP_SHIELD_DEKU:      slot = 0x07; break;
+        case SHOP_RECOVERY_HEART:   return 0x00;
+        case SHOP_ARROWS_10:        return 0x01;
+        case SHOP_ARROWS_30:        return 0x02;
+        case SHOP_SEEDS_30:         return 0x03;
+        case SHOP_NUTS_5:           return 0x04;
+        case SHOP_NUTS_10:          return 0x05;
+        case SHOP_STICK:            return 0x06;
+        case SHOP_SHIELD_DEKU:      return 0x07;
         }
     }
     else if (play->sceneId == SCE_OOT_BOMBCHU_SHOP)
@@ -75,14 +73,14 @@ int comboShopItemSlot(GameState_Play* play, Actor_EnGirlA* girlA)
         /* Bombchu shop */
         switch (girlA->base.variable)
         {
-        case SHOP_BOMBCHU_20_1:     slot = 0x08; break;
-        case SHOP_BOMBCHU_20_2:     slot = 0x09; break;
-        case SHOP_BOMBCHU_20_3:     slot = 0x0a; break;
-        case SHOP_BOMBCHU_20_4:     slot = 0x0b; break;
-        case SHOP_BOMBCHU_10_1:     slot = 0x0c; break;
-        case SHOP_BOMBCHU_10_2:     slot = 0x0d; break;
-        case SHOP_BOMBCHU_10_3:     slot = 0x0e; break;
-        case SHOP_BOMBCHU_10_4:     slot = 0x0f; break;
+        case SHOP_BOMBCHU_20_1:     return 0x08;
+        case SHOP_BOMBCHU_20_2:     return 0x09;
+        case SHOP_BOMBCHU_20_3:     return 0x0a;
+        case SHOP_BOMBCHU_20_4:     return 0x0b;
+        case SHOP_BOMBCHU_10_1:     return 0x0c;
+        case SHOP_BOMBCHU_10_2:     return 0x0d;
+        case SHOP_BOMBCHU_10_3:     return 0x0e;
+        case SHOP_BOMBCHU_10_4:     return 0x0f;
         }
     }
     else if (play->sceneId == SCE_OOT_GORON_SHOP)
@@ -90,13 +88,13 @@ int comboShopItemSlot(GameState_Play* play, Actor_EnGirlA* girlA)
         /* Goron shop */
         switch (girlA->base.variable)
         {
-        case SHOP_RECOVERY_HEART:   slot = girlA->base.position.x < -60.f ? 0x18 : 0x19; break;
-        case SHOP_POTION_RED_ALT:   slot = 0x1a; break;
-        case SHOP_TUNIC_GORON:      slot = 0x1b; break;
-        case SHOP_BOMBS_5_ALT:      slot = 0x1c; break;
-        case SHOP_BOMBS_10:         slot = 0x1d; break;
-        case SHOP_BOMBS_20:         slot = 0x1e; break;
-        case SHOP_BOMBS_30:         slot = 0x1f; break;
+        case SHOP_RECOVERY_HEART:   return girlA->base.position.x < -60.f ? 0x18 : 0x19;
+        case SHOP_POTION_RED_ALT:   return 0x1a;
+        case SHOP_TUNIC_GORON:      return 0x1b;
+        case SHOP_BOMBS_5_ALT:      return 0x1c;
+        case SHOP_BOMBS_10:         return 0x1d;
+        case SHOP_BOMBS_20:         return 0x1e;
+        case SHOP_BOMBS_30:         return 0x1f;
         }
     }
     else if (play->sceneId == SCE_OOT_ZORA_SHOP)
@@ -104,14 +102,14 @@ int comboShopItemSlot(GameState_Play* play, Actor_EnGirlA* girlA)
         /* Zora shop */
         switch (girlA->base.variable)
         {
-        case SHOP_POTION_RED_ALT2:  slot = 0x10; break;
-        case SHOP_ARROWS_50:        slot = 0x11; break;
-        case SHOP_FISH:             slot = 0x12; break;
-        case SHOP_NUTS_5:           slot = 0x13; break;
-        case SHOP_ARROWS_10:        slot = 0x14; break;
-        case SHOP_ARROWS_30:        slot = 0x15; break;
-        case SHOP_TUNIC_ZORA:       slot = 0x16; break;
-        case SHOP_RECOVERY_HEART:   slot = 0x17; break;
+        case SHOP_POTION_RED_ALT2:  return 0x10;
+        case SHOP_ARROWS_50:        return 0x11;
+        case SHOP_FISH:             return 0x12;
+        case SHOP_NUTS_5:           return 0x13;
+        case SHOP_ARROWS_10:        return 0x14;
+        case SHOP_ARROWS_30:        return 0x15;
+        case SHOP_TUNIC_ZORA:       return 0x16;
+        case SHOP_RECOVERY_HEART:   return 0x17;
         }
     }
     else if (play->sceneId == SCE_OOT_BAZAAR)
@@ -119,14 +117,14 @@ int comboShopItemSlot(GameState_Play* play, Actor_EnGirlA* girlA)
         /* Market / Kakariko Bazaar */
         switch (girlA->base.variable)
         {
-        case SHOP_ARROWS_10:        slot = 0x20 | ageMask; break;
-        case SHOP_ARROWS_30:        slot = 0x21 | ageMask; break;
-        case SHOP_ARROWS_50:        slot = 0x22 | ageMask; break;
-        case SHOP_STICK:            slot = 0x23 | ageMask; break;
-        case SHOP_BOMBS_5:          slot = 0x24 | ageMask; break;
-        case SHOP_RECOVERY_HEART:   slot = 0x25 | ageMask; break;
-        case SHOP_NUTS_5:           slot = 0x26 | ageMask; break;
-        case SHOP_SHIELD_HYLIAN:    slot = 0x27 | ageMask; break;
+        case SHOP_ARROWS_10:        return 0x20 | ageMask;
+        case SHOP_ARROWS_30:        return 0x21 | ageMask;
+        case SHOP_ARROWS_50:        return 0x22 | ageMask;
+        case SHOP_STICK:            return 0x23 | ageMask;
+        case SHOP_BOMBS_5:          return 0x24 | ageMask;
+        case SHOP_RECOVERY_HEART:   return 0x25 | ageMask;
+        case SHOP_NUTS_5:           return 0x26 | ageMask;
+        case SHOP_SHIELD_HYLIAN:    return 0x27 | ageMask;
         }
     }
     else if (play->sceneId == SCE_OOT_MARKET_POTION_SHOP || play->sceneId == SCE_OOT_KAKARIKO_POTION_SHOP)
@@ -134,16 +132,16 @@ int comboShopItemSlot(GameState_Play* play, Actor_EnGirlA* girlA)
         /* Market / Kakriko Potion Shop */
         switch (girlA->base.variable)
         {
-        case SHOP_FISH:         slot = 0x28 | ageMask; break;
-        case SHOP_BUG:          slot = 0x29 | ageMask; break;
-        case SHOP_POE:          slot = 0x2a | ageMask; break;
-        case SHOP_NUTS_5:       slot = 0x2b | ageMask; break;
-        case SHOP_BLUE_FIRE:    slot = 0x2c | ageMask; break;
-        case SHOP_FAIRY:        slot = 0x2d | ageMask; break;
-        case SHOP_POTION_GREEN: slot = 0x2e | ageMask; break;
-        case SHOP_POTION_RED:   slot = 0x2f | ageMask; break;
+        case SHOP_FISH:         return 0x28 | ageMask;
+        case SHOP_BUG:          return 0x29 | ageMask;
+        case SHOP_POE:          return 0x2a | ageMask;
+        case SHOP_NUTS_5:       return 0x2b | ageMask;
+        case SHOP_BLUE_FIRE:    return 0x2c | ageMask;
+        case SHOP_FAIRY:        return 0x2d | ageMask;
+        case SHOP_POTION_GREEN: return 0x2e | ageMask;
+        case SHOP_POTION_RED:   return 0x2f | ageMask;
         }
     }
 
-    return slot;
+    UNREACHABLE();
 }
