@@ -181,4 +181,6 @@ void DrawDungeonUnk2(void* unk);
 
 void DrawSimpleOpa(GameState_Play* play, u32 segAddr);
 
+void AddRupees(s16 delta);
+
 #endif

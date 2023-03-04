@@ -5,6 +5,10 @@ PATCH_START 0x808d1528
   li t8,1
 PATCH_END
 
+PATCH_START 0x808d18d8
+  nop
+PATCH_END
+
 /* Disable DC clear check for bombchu */
 PATCH_START 0x808cf67c
   li t3,1

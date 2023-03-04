@@ -21,8 +21,8 @@ struct Actor_EnGirlA
     u16             angle;
     char            unk_1aa[2];
     ShopPrecondFn   precond;
-    ShopBuyFn       buy;
-    void*           func4;
+    ShopBuyFn       quickBuy;
+    ShopBuyFn       postBuy;
     s16             price;
     s16             count;
     s16             shaderId;

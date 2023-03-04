@@ -149,3 +149,5 @@ Interface_LoadItemIconImpl = 0x8006fb50;
 DeathWarp = 0x8009da10;
 
 DrawSimpleOpa = 0x80028048;
+
+AddRupees = 0x800721cc;

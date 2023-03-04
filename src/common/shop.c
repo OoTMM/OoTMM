@@ -70,12 +70,25 @@ void comboShopAfterBuy(GameState_Play* play, Actor_EnGirlA* girlA)
     shopWriteFlag(slotId);
 }
 
+static void quickBuyItem(GameState_Play* play, Actor_EnGirlA* girlA)
+{
+    comboAddItem(play, girlA->gi);
+    AddRupees(-girlA->price);
+}
+
+static void postBuyItem(GameState_Play* play, Actor_EnGirlA* girlA)
+{
+    AddRupees(-girlA->price);
+}
+
 void comboShopSetupItem(GameState_Play* play, Actor_EnGirlA* girlA)
 {
     int slotId;
 
     slotId = comboShopItemSlot(play, girlA);
     girlA->precond = comboShopPrecond;
+    girlA->quickBuy = quickBuyItem;
+    girlA->postBuy = postBuyItem;
     girlA->gi = comboOverrideEx(OV_SHOP, 0, slotId, girlA->gi, OVF_PROGRESSIVE);
 
     if (!comboIsItemConsumable(girlA->gi) && shopReadFlag(slotId))
