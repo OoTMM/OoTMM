@@ -6,6 +6,7 @@
 typedef struct
 {
     Actor base;
+    int   trigger;
 }
 Actor_CustomTriggers;
 
