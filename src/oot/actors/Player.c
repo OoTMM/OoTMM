@@ -15,6 +15,7 @@ int Player_DpadHook(Actor_Player* this, GameState_Play* play)
 }
 
 void EnGs_TalkedTo(Actor*, GameState_Play*);
+void EnGm_TalkedTo(Actor*, GameState_Play*);
 
 void Player_TalkDisplayTextBox(GameState_Play* play, s16 textId, Actor* actor)
 {
@@ -25,6 +26,9 @@ void Player_TalkDisplayTextBox(GameState_Play* play, s16 textId, Actor* actor)
         {
         case AC_EN_GS:
             EnGs_TalkedTo(actor, play);
+            break;
+        case AC_EN_GM:
+            EnGm_TalkedTo(actor, play);
             break;
         }
     }
