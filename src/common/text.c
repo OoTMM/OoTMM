@@ -59,6 +59,7 @@ const RegionName kRegionNamesOot[] = {
     { "around",     TEXT_COLOR_ORANGE "Gerudo Fortress" },
     { "in",         "the " TEXT_COLOR_YELLOW "Haunted Wastelands" },
     { "around",     "the " TEXT_COLOR_ORANGE "Desert Colossus" },
+    { "inside",     "an " TEXT_COLOR_YELLOW "Egg" },
 };
 
 const RegionName kRegionNamesMm[] = {
