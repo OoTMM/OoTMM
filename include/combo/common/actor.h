@@ -6,32 +6,33 @@
 #endif
 
 #if defined(GAME_OOT)
-# define AC_ITEM_GIVER      0x003
-# define AC_CUSTOM_WARP     0x005
-# define AC_EN_BOX          0x00a
-# define AC_ITEM00          0x015
-# define AC_EN_XC           0x048
-# define AC_DOOR_WARP1      0x05d
-# define AC_ITEM_B_HEART    0x05f
-# define AC_BG_TOKI_SWD     0x06c
-# define AC_EN_DU           0x098
-# define AC_EN_MA1          0x0e7
-# define AC_ITEM_OCARINA    0x0f1
-# define AC_ITEM_ETCETERA   0x10f
-# define AC_EN_SKJ          0x115
-# define AC_BG_SPOT03_TAKI  0x11f
-# define AC_EN_DIVING_GAME  0x124
-# define AC_EN_NIW_LADY     0x13c
-# define AC_EN_GM           0x13d
-# define AC_EN_MS           0x13e
-# define AC_EN_SA           0x146
-# define AC_EN_BOM_BOWL_MAN 0x14b
-# define AC_EN_BOM_BOWL_PIT 0x14c
-# define AC_EN_OWL          0x14d
-# define AC_EN_EX_ITEM      0x168
-# define AC_EN_GO2          0x1ae
-# define AC_EN_COW          0x1c6
-# define AC_EN_GS           0x1b9
+# define AC_ITEM_GIVER              0x003
+# define AC_CUSTOM_WARP             0x005
+# define AC_CUSTOM_TRIGGERS         0x006
+# define AC_EN_BOX                  0x00a
+# define AC_ITEM00                  0x015
+# define AC_EN_XC                   0x048
+# define AC_DOOR_WARP1              0x05d
+# define AC_ITEM_B_HEART            0x05f
+# define AC_BG_TOKI_SWD             0x06c
+# define AC_EN_DU                   0x098
+# define AC_EN_MA1                  0x0e7
+# define AC_ITEM_OCARINA            0x0f1
+# define AC_ITEM_ETCETERA           0x10f
+# define AC_EN_SKJ                  0x115
+# define AC_BG_SPOT03_TAKI          0x11f
+# define AC_EN_DIVING_GAME          0x124
+# define AC_EN_NIW_LADY             0x13c
+# define AC_EN_GM                   0x13d
+# define AC_EN_MS                   0x13e
+# define AC_EN_SA                   0x146
+# define AC_EN_BOM_BOWL_MAN         0x14b
+# define AC_EN_BOM_BOWL_PIT         0x14c
+# define AC_EN_OWL                  0x14d
+# define AC_EN_EX_ITEM              0x168
+# define AC_EN_GO2                  0x1ae
+# define AC_EN_COW                  0x1c6
+# define AC_EN_GS                   0x1b9
 #endif
 
 #if defined(GAME_MM)

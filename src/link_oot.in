@@ -151,3 +151,5 @@ DeathWarp = 0x8009da10;
 DrawSimpleOpa = 0x80028048;
 
 AddRupees = 0x800721cc;
+
+SpawnRoomActors = 0x80025488;

@@ -39,6 +39,7 @@
 # include <combo/common/actors/En_GirlA.h>
 # include <combo/common/actor_init.h>
 # include <combo/common/actor_item_custom.h>
+# include <combo/common/actors/Custom_Triggers.h>
 # include <combo/common/api.h>
 #endif
 

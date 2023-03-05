@@ -214,4 +214,6 @@ void Shader_SoldOut(GameState_Play*, s16);
 void Shader_Spell(GameState_Play*, s16);
 void Shader_MoonTear(GameState_Play*, s16);
 
+void SpawnRoomActors(GameState_Play* play, int id);
+
 #endif
