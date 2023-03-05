@@ -187,40 +187,48 @@ PATCH_START 0x8014452c
   nop
 PATCH_END
 
-/* Disable reset of dungeons */
+/*
+ * Disable reset of dungeons
+ *
+ * Structure is:
+ * - switch0
+ * - switch1
+ * - chest
+ * - collectible
+ */
 PATCH_START 0x801c5fc0 + 0x10 * SCE_MM_TEMPLE_WOODFALL
-.int 0xffffffff
-.int 0xffffffff
-.int 0xffffffff
-.int 0xffffffff
+.int 0x0070b000                             /* Vanilla */
+.int 0x0007fc00 | 0x20000000 | 0x40000000   /* Fairies | Doors | Boss Door */
+.int 0xffffffff                             /* Chests  */
+.int 0x70000000                             /* Fairies */
 PATCH_END
 
 PATCH_START 0x801c5fc0 + 0x10 * SCE_MM_TEMPLE_SNOWHEAD
-.int 0xffffffff
-.int 0xffffffff
-.int 0xffffffff
-.int 0xffffffff
+.int 0x01a00020                             /* Vanilla */
+.int 0x0007b800 | 0x38000000 | 0x40000000   /* Fairies | Doors | Boss Door */
+.int 0xffffffff                             /* Chests */
+.int 0x40000000                             /* Fairies */
 PATCH_END
 
 PATCH_START 0x801c5fc0 + 0x10 * SCE_MM_TEMPLE_GREAT_BAY
-.int 0xffffffff
-.int 0xffffffff
-.int 0xffffffff
-.int 0xffffffff
+.int 0x00000070                             /* Vanilla */
+.int 0x00078000 | 0x20000000 | 0x40000000   /* Fairies | Doors | Boss Door */
+.int 0xffffffff                             /* Chests */
+.int 0x7c000000                             /* Fairies */
 PATCH_END
 
 PATCH_START 0x801c5fc0 + 0x10 * SCE_MM_TEMPLE_STONE_TOWER
-.int 0xffffffff
-.int 0xffffffff
-.int 0xffffffff
-.int 0xffffffff
+.int 0x04000000               /* Vanilla */
+.int 0x30180000 | 0x40000000  /* Doors | Boss Door */
+.int 0xffffffff               /* Chests */
+.int 0x00000000
 PATCH_END
 
 PATCH_START 0x801c5fc0 + 0x10 * SCE_MM_TEMPLE_STONE_TOWER_INVERTED
-.int 0xffffffff
-.int 0xffffffff
-.int 0xffffffff
-.int 0xffffffff
+.int 0x04000000               /* Vanilla */
+.int 0x30180000 | 0x40000000  /* Doors | Boss Door */
+.int 0xffffffff               /* Chests */
+.int 0x00000000
 PATCH_END
 
 /* Disable save options write */
