@@ -82,7 +82,6 @@ export class LogicPassSolver {
     this.placeJunkLocations();
 
     /* Place items fixed to default */
-    this.fixEggs();
     this.fixCows();
     this.fixShops();
     this.fixTokens();
@@ -243,18 +242,6 @@ export class LogicPassSolver {
       const item = pool.pop();
       this.place(location, item!);
       removeItemPools(this.pools, item!);
-    }
-  }
-
-  private fixEggs() {
-    if (this.state.settings.eggShuffle) {
-      return;
-    }
-
-    for (const loc of ['OOT Hatch Chicken', 'OOT Hatch Pocket Cucco']) {
-      const item = this.state.world.checks[loc].item;
-      this.place(loc, item);
-      removeItemPools(this.pools, item);
     }
   }
 
