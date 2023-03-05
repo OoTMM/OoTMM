@@ -1,6 +1,7 @@
 "SPAWN":
   region: NONE
   exits:
+    "EGGS": "true"
     "Link's House": "is_child"
     "Temple of Time": "(is_adult && event(TIME_TRAVEL)) || (is_child && can_play(SONG_TP_LIGHT))"
     "Sacred Meadow": "(is_child || event(TIME_TRAVEL)) && can_play(SONG_TP_FOREST)"
@@ -8,6 +9,11 @@
     "Lake Hylia": "(is_child || event(TIME_TRAVEL)) && can_play(SONG_TP_WATER)"
     "Graveyard Upper": "(is_child || event(TIME_TRAVEL)) && can_play(SONG_TP_SHADOW)"
     "Desert Colossus": "(is_child || event(TIME_TRAVEL)) && can_play(SONG_TP_SPIRIT)"
+"EGGS":
+  region: EGGS
+  locations:
+    "Hatch Chicken": "is_child && has(WEIRD_EGG)"
+    "Hatch Pocket Cucco": "is_adult && has(POCKET_EGG)"
 "Link's House":
   region: KOKIRI_FOREST
   exits:

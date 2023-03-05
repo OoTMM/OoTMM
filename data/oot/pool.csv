@@ -1,4 +1,6 @@
 location,                                             type,           hint,                 scene,                          id,                         item
+Hatch Chicken,                                        npc,            NONE,                 GROTTOS,                        WEIRD_EGG,                  CHICKEN
+Hatch Pocket Cucco,                                   npc,            NONE,                 GROTTOS,                        POCKET_EGG,                 POCKET_CUCCO
 Kokiri Forest Mido Top Left,                          chest,          NONE,                 KOKIRI_MIDO,                    0x00,                       RUPEE_BLUE
 Kokiri Forest Mido Top Right,                         chest,          NONE,                 KOKIRI_MIDO,                    0x01,                       RUPEE_BLUE
 Kokiri Forest Mido Bottom Left,                       chest,          NONE,                 KOKIRI_MIDO,                    0x02,                       RUPEE_GREEN
@@ -17,7 +19,7 @@ Kokiri Shop Item 5,                                   shop,           NONE,     
 Kokiri Shop Item 6,                                   shop,           NONE,                 KOKIRI_FOREST,                  0x05,                       NUTS_10
 Kokiri Shop Item 7,                                   shop,           NONE,                 KOKIRI_FOREST,                  0x06,                       STICK
 Kokiri Shop Item 8,                                   shop,           NONE,                 KOKIRI_FOREST,                  0x07,                       SHIELD_DEKU
-Malon Egg,                                            npc,            NONE,                 HYRULE_CASTLE,                  MALON_EGG,                  CHICKEN
+Malon Egg,                                            npc,            NONE,                 HYRULE_CASTLE,                  MALON_EGG,                  WEIRD_EGG
 Zelda's Letter,                                       npc,            NONE,                 CASTLE_COURTYARD,               ZELDA_LETTER,               ZELDA_LETTER
 Zelda's Song,                                         npc,            NONE,                 CASTLE_COURTYARD,               ZELDA_SONG,                 SONG_ZELDA
 Lost Woods Gift from Saria,                           npc,            NONE,                 LOST_WOODS,                     SARIA_OCARINA,              OCARINA
@@ -39,7 +41,7 @@ Sacred Meadow Sheik Song,                             npc,            NONE,     
 Sacred Meadow Grotto,                                 chest,          NONE,                 GROTTOS,                        0x11,                       RUPEE_PURPLE
 Sacred Meadow GS Night Adult,                         gs,             NONE,                 SACRED_FOREST_MEADOW,           0x73,                       GS_TOKEN
 Kakariko Anju Bottle,                                 npc,            NONE,                 KAKARIKO_VILLAGE,               ANJU_BOTTLE,                BOTTLE_EMPTY
-Kakariko Anju Egg,                                    npc,            NONE,                 KAKARIKO_VILLAGE,               TRADE_POCKET_EGG,           POCKET_CUCCO
+Kakariko Anju Egg,                                    npc,            NONE,                 KAKARIKO_VILLAGE,               TRADE_POCKET_EGG,           POCKET_EGG
 Kakariko Anju Cojiro,                                 npc,            NONE,                 KAKARIKO_VILLAGE,               TRADE_COJIRO,               COJIRO
 Kakariko Song Shadow,                                 npc,            RAVAGED_VILLAGE,      KAKARIKO_VILLAGE,               SHEIK_SHADOW,               SONG_TP_SHADOW
 Kakariko Man on Roof,                                 npc,            NONE,                 KAKARIKO_VILLAGE,               KAKARIKO_ROOF_MAN,          HEART_PIECE

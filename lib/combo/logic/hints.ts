@@ -135,7 +135,7 @@ export class LogicPassHints {
   }
 
   private isLocationHintable(loc: string) {
-    if (loc === 'OOT Temple of Time Medallion' || loc === 'MM Oath to Order') {
+    if (['OOT Temple of Time Medallion', 'MM Oath to Order', 'OOT Hatch Chicken', 'OOT Hatch Pocket Cucco'].includes(loc)) {
       return false;
     }
     const check = this.state.world.checks[loc];

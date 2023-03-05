@@ -105,6 +105,8 @@ static int csmcFromItemOot(s16 gi)
     case GI_OOT_BOW:
     case GI_OOT_QUIVER2:
     case GI_OOT_QUIVER3:
+    case GI_OOT_WEIRD_EGG:
+    case GI_OOT_POCKET_EGG:
     case GI_OOT_CHICKEN:
     case GI_OOT_BOTTLE_EMPTY:
     case GI_OOT_GERUDO_CARD:
