@@ -1,8 +1,10 @@
 #include <combo.h>
 
-#define TRIGGER_NONE            0
-#define TRIGGER_SHEIK_COLOSSUS  1
-
+#define TRIGGER_NONE                    0
+#define TRIGGER_SHEIK_COLOSSUS          1
+#define TRIGGER_SHEIK_KAKARIKO          2
+#define TRIGGER_SARIA_OCARINA           3
+#define TRIGGER_ZELDA_LIGHT_ARROW       4
 
 Actor_CustomTriggers* gActorCustomTriggers;
 
@@ -13,7 +15,7 @@ static int CustomTriggers_GiveItem(Actor_CustomTriggers* this, GameState_Play* p
     link = GET_LINK(play);
     if (link->state & PLAYER_ACTOR_STATE_GET_ITEM)
         return 0;
-    if (Actor_HasParent(this))
+    if (Actor_HasParent(&this->base))
     {
         this->base.attachedA = NULL;
         return 1;
@@ -45,6 +47,28 @@ static void CustomTriggers_HandleTrigger(Actor_CustomTriggers* this, GameState_P
             this->trigger = TRIGGER_NONE;
         }
         break;
+    case TRIGGER_SHEIK_KAKARIKO:
+        if (CustomTriggers_GiveItemNpc(this, play, GI_OOT_SONG_TP_SHADOW, NPC_OOT_SHEIK_SHADOW))
+        {
+            SetEventChk(EV_OOT_CHK_SONG_TP_SHADOW);
+            SetEventChk(EV_OOT_CHK_BONGO_ESCAPE);
+            this->trigger = TRIGGER_NONE;
+        }
+        break;
+    case TRIGGER_SARIA_OCARINA:
+        if (CustomTriggers_GiveItemNpc(this, play, GI_OOT_OCARINA_FAIRY, NPC_OOT_SARIA_OCARINA))
+        {
+            SetEventChk(EV_OOT_CHK_SARIA_OCARINA);
+            this->trigger = TRIGGER_NONE;
+        }
+        break;
+    case TRIGGER_ZELDA_LIGHT_ARROW:
+        if (CustomTriggers_GiveItemNpc(this, play, GI_OOT_ARROW_LIGHT, NPC_OOT_ZELDA_LIGHT_ARROW))
+        {
+            SetEventChk(EV_OOT_CHK_LIGHT_ARROW);
+            this->trigger = TRIGGER_NONE;
+        }
+        break;
     }
 }
 
@@ -54,6 +78,27 @@ static void CustomTriggers_CheckTrigger(Actor_CustomTriggers* this, GameState_Pl
     if (gSave.entrance == 0x1e1 && !GetEventChk(EV_OOT_CHK_SONG_TP_SPIRIT))
     {
         this->trigger = TRIGGER_SHEIK_COLOSSUS;
+        return;
+    }
+
+    /* Sheik in Kakariko */
+    if (play->sceneId == SCE_OOT_KAKARIKO_VILLAGE && gSave.inventory.quest.medallionForest && gSave.inventory.quest.medallionFire && gSave.inventory.quest.medallionWater && gSave.age == AGE_ADULT && !GetEventChk(EV_OOT_CHK_SONG_TP_SHADOW))
+    {
+        this->trigger = TRIGGER_SHEIK_KAKARIKO;
+        return;
+    }
+
+    /* Saria's Ocarina */
+    if (gSave.entrance == 0x05e0 && !GetEventChk(EV_OOT_CHK_SARIA_OCARINA))
+    {
+        this->trigger = TRIGGER_SARIA_OCARINA;
+        return;
+    }
+
+    /* Zelda Light Arrows */
+    if (play->sceneId == SCE_OOT_TEMPLE_OF_TIME && gSave.inventory.quest.medallionShadow && gSave.inventory.quest.medallionSpirit && gSave.age == AGE_ADULT && !GetEventChk(EV_OOT_CHK_LIGHT_ARROW))
+    {
+        this->trigger = TRIGGER_ZELDA_LIGHT_ARROW;
         return;
     }
 }
