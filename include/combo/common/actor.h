@@ -23,6 +23,7 @@
 # define AC_EN_DIVING_GAME  0x124
 # define AC_EN_NIW_LADY     0x13c
 # define AC_EN_GM           0x13d
+# define AC_EN_MS           0x13e
 # define AC_EN_SA           0x146
 # define AC_EN_BOM_BOWL_MAN 0x14b
 # define AC_EN_BOM_BOWL_PIT 0x14c
