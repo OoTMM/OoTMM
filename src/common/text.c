@@ -210,6 +210,13 @@ static int isItemAmbiguousOot(s16 gi)
     case GI_OOT_BOMBCHU_5:
     case GI_OOT_BOMBCHU_20:
     case GI_OOT_SHIELD_MIRROR:
+    case GI_OOT_MILK:
+    case GI_OOT_POTION_RED:
+    case GI_OOT_POTION_GREEN:
+    case GI_OOT_POTION_BLUE:
+    case GI_OOT_FAIRY:
+    case GI_OOT_BUG:
+    case GI_OOT_FISH:
         return 1;
     default:
         return 0;
@@ -289,6 +296,13 @@ static int isItemAmbiguousMm(s16 gi)
     case GI_MM_BOMBCHU_5:
     case GI_MM_BOTTLE_MILK:
     case GI_MM_SHIELD_MIRROR:
+    case GI_MM_MILK:
+    case GI_MM_POTION_RED:
+    case GI_MM_POTION_GREEN:
+    case GI_MM_POTION_BLUE:
+    case GI_MM_FAIRY:
+    case GI_MM_BUGS:
+    case GI_MM_FISH:
         return 1;
     default:
         return 0;
