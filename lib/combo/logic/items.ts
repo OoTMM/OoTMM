@@ -18,6 +18,8 @@ export const DUNGEON_REWARDS_ORDERED = [
 export const DUNGEON_REWARDS = new Set(DUNGEON_REWARDS_ORDERED);
 
 export const ITEMS_REQUIRED = new Set<string>([
+  'OOT_WEIRD_EGG',
+  'OOT_POCKET_EGG',
   'OOT_SHIELD_DEKU',
   'OOT_SHIELD_HYLIAN',
   'OOT_GS_TOKEN',

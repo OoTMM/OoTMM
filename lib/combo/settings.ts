@@ -150,6 +150,12 @@ export const SETTINGS = [{
   type: 'boolean',
   default: true
 }, {
+  key: 'eggShuffle',
+  name: 'Weird / Pocket Egg Content Shuffle',
+  category: 'main',
+  type: 'boolean',
+  default: false
+}, {
   key: 'doorOfTime',
   name: 'Door of Time',
   category: 'main',

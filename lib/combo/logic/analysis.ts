@@ -9,6 +9,12 @@ import { cloneDeep } from 'lodash';
 import { isLocationRenewable } from './helpers';
 
 const SIMPLE_DEPENDENCIES: {[k: string]: string[]} = {
+  OOT_WEIRD_EGG: [
+    'OOT Hatch Chicken',
+  ],
+  OOT_POCKET_EGG: [
+    'OOT Hatch Pocket Cucco',
+  ],
   OOT_CHICKEN: [
     'OOT Lost Woods Gift from Saria',
     'OOT Zelda\'s Letter',

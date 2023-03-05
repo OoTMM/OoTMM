@@ -1,4 +1,6 @@
 location,                                             type,           hint,                 scene,                          id,                         item
+Hatch Chicken,                                        npc,            NONE,                 GROTTOS,                        WEIRD_EGG,                  WEIRD_EGG
+Hatch Pocket Cucco,                                   npc,            NONE,                 GROTTOS,                        POCKET_EGG,                 POCKET_EGG
 Kokiri Forest Mido Top Left,                          chest,          NONE,                 KOKIRI_MIDO,                    0x00,                       RUPEE_BLUE
 Kokiri Forest Mido Top Right,                         chest,          NONE,                 KOKIRI_MIDO,                    0x01,                       RUPEE_BLUE
 Kokiri Forest Mido Bottom Left,                       chest,          NONE,                 KOKIRI_MIDO,                    0x02,                       RUPEE_GREEN

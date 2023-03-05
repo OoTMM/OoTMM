@@ -5,6 +5,8 @@
 #define TRIGGER_SHEIK_KAKARIKO          2
 #define TRIGGER_SARIA_OCARINA           3
 #define TRIGGER_ZELDA_LIGHT_ARROW       4
+#define TRIGGER_WEIRD_EGG               5
+#define TRIGGER_POCKET_EGG              6
 
 Actor_CustomTriggers* gActorCustomTriggers;
 
@@ -69,6 +71,20 @@ static void CustomTriggers_HandleTrigger(Actor_CustomTriggers* this, GameState_P
             this->trigger = TRIGGER_NONE;
         }
         break;
+    case TRIGGER_WEIRD_EGG:
+        if (CustomTriggers_GiveItemNpc(this, play, GI_OOT_CHICKEN, NPC_OOT_WEIRD_EGG))
+        {
+            comboRemoveTradeItemChild(XITEM_OOT_CHILD_WEIRD_EGG);
+            this->trigger = TRIGGER_NONE;
+        }
+        break;
+    case TRIGGER_POCKET_EGG:
+        if (CustomTriggers_GiveItemNpc(this, play, GI_OOT_POCKET_CUCCO, NPC_OOT_POCKET_EGG))
+        {
+            comboRemoveTradeItemAdult(XITEM_OOT_ADULT_POCKET_EGG);
+            this->trigger = TRIGGER_NONE;
+        }
+        break;
     }
 }
 
@@ -101,6 +117,22 @@ static void CustomTriggers_CheckTrigger(Actor_CustomTriggers* this, GameState_Pl
         this->trigger = TRIGGER_ZELDA_LIGHT_ARROW;
         return;
     }
+
+    /* Weird egg */
+    if (this->events.weirdEgg)
+    {
+        this->trigger = TRIGGER_WEIRD_EGG;
+        this->events.weirdEgg = 0;
+        return;
+    }
+
+    /* Pocket egg */
+    if (this->events.pocketEgg)
+    {
+        this->trigger = TRIGGER_POCKET_EGG;
+        this->events.pocketEgg = 0;
+        return;
+    }
 }
 
 static void CustomTriggers_Update(Actor_CustomTriggers* this, GameState_Play* play)
@@ -113,7 +145,7 @@ static void CustomTriggers_Update(Actor_CustomTriggers* this, GameState_Play* pl
 
 ActorInit CustomTriggers_gActorInit = {
     AC_CUSTOM_TRIGGERS,
-    0x6,
+    0x8,
     0x10,
     0x1,
     sizeof(Actor_CustomTriggers),

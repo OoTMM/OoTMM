@@ -28,3 +28,12 @@ PATCH_END
 PATCH_START 0x8006f888
   li t2,0xff
 PATCH_END
+
+/* Prevent eggs from hatching */
+PATCH_START 0x80061bfc
+  li v0,0
+PATCH_END
+
+PATCH_START 0x80061c10
+  li v0,0
+PATCH_END

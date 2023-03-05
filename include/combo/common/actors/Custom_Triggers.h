@@ -7,6 +7,12 @@ typedef struct
 {
     Actor base;
     int   trigger;
+    union
+    {
+        u8 weirdEgg:1;
+        u8 pocketEgg:1;
+    }
+    events;
 }
 Actor_CustomTriggers;
 
