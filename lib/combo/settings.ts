@@ -394,14 +394,27 @@ const DEFAULT_TRICKS = Object.keys(TRICKS).reduce((tricks, trick) => {
 
 const DEFAULT_JUNK_LOCATIONS: string[] = [];
 
-export const MQ = ['DT'] as const;
+export const MQ = {
+  DT: "Deku Tree",
+  DC: "Dodongo's Cavern",
+  JJ: "Jabu-Jabu",
+  Forest: "Forest Temple",
+  Fire: "Fire Temple",
+  Water: "Water Temple",
+  Spirit: "Spirit Temple",
+  Shadow: "Shadow Temple",
+  BotW: "Bottom of the Well",
+  IC: "Ice Cavern",
+  GTG: "Gerudo Training Grounds",
+  Ganon: "Ganon's Castle",
+} as const;
 
-export type MqSettings = {[k in typeof MQ[number]]: boolean};
+export type MqSettings = {[k in keyof typeof MQ]: boolean};
 
-const DEFAULT_MQ = MQ.reduce((mqs, mq) => {
+const DEFAULT_MQ = Object.keys(MQ).reduce((mqs, mq) => {
   mqs[mq] = false;
   return mqs;
-}, {} as MqSettings);
+}, {} as any) as MqSettings;
 
 type SettingDataEnumValue = {
   readonly value: string;
