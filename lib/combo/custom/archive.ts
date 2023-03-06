@@ -27,9 +27,13 @@ export class CustomArchive {
     return padding;
   }
 
-  async addBuffer(buffer: Buffer) {
+  async addBuffer(buffer: Buffer, shouldCompress: boolean) {
     /* Compress the custom file */
-    let compressed = await compressFile(buffer);
+    let compressed: Buffer = buffer;
+
+    if (shouldCompress) {
+      compressed = await compressFile(buffer);
+    }
     const paddingBuf = this.paddingBuffer(compressed.length);
     if (paddingBuf) {
       compressed = Buffer.concat([compressed, paddingBuf]);
@@ -42,20 +46,20 @@ export class CustomArchive {
       virtStart: this.vaddr,
       virtEnd: this.vaddr + buffer.length,
       physStart: this.paddr,
-      physEnd: this.paddr + compressed.length,
+      physEnd: shouldCompress ? this.paddr + compressed.length : 0,
     });
     this.dma.push(dmaBuffer);
 
     /* Add the actual data */
     this.data.push(compressed);
     this.paddr += compressed.length;
-    this.vaddr += buffer.length;
+    this.vaddr += Math.floor((buffer.length + 15) / 16) * 16;
 
     return dma.read(0);
   }
 
-  async addObject(buffer: Buffer) {
-    const dma = await this.addBuffer(buffer);
+  async addObject(buffer: Buffer, shouldCompress: boolean) {
+    const dma = await this.addBuffer(buffer, shouldCompress);
     const objEntry = Buffer.alloc(0x8);
     objEntry.writeUInt32BE(dma.virtStart, 0);
     objEntry.writeUInt32BE(dma.virtEnd, 4);
