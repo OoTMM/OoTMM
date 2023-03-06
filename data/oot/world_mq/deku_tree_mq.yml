@@ -6,45 +6,20 @@
 "Deku Tree Lobby":
   dungeon: DT
   exits:
-    "Deku Tree Slingshot Room": "has_shield_for_scrubs"
-    "Deku Tree Basement": "has_fire || has_nuts || has_weapon || has_explosives || has_ranged_weapon_child"
-  events:
-    STICKS: "can_kill_baba_sticks"
-    NUTS: "can_kill_baba_nuts"
+    "Deku Tree Before Boss": "true"
   locations:
-    "Deku Tree Map Chest": "true"
-    "Deku Tree Compass Chest": "true"
-    "Deku Tree Compass Room Side Chest": "true"
-    "Deku Tree GS Compass": "can_damage_skull"
-"Deku Tree Basement":
-  dungeon: DT
-  exits:
-    "Deku Tree Lobby": "true"
-    "Deku Tree Basement Back Room": "can_hit_triggers_distance"
-    "Deku Tree Basement Ledge": "trick(OOT_DEKU_SKIP) || is_adult"
-  locations:
-    "Deku Tree Basement Chest": "true"
-    "Deku Tree GS Basement Gate": "can_damage_skull"
-    "Deku Tree GS Basement Vines": "has_ranged_weapon || can_use_din || has(BOMB_BAG)"
-"Deku Tree Basement Back Room":
-  dungeon: DT
-  exits:
-    "Deku Tree Basement Ledge": "is_child"
-  locations:
-    "Deku Tree GS Basement Back Room": "has_explosives_or_hammer && can_collect_distance"
-"Deku Tree Basement Ledge":
-  dungeon: DT
-  exits:
-    "Deku Tree Basement Back Room": "is_child"
-    "Deku Tree Before Boss": "has_fire_or_sticks"
+    "MQ Deku Tree Map Chest": "true"
+    "MQ Deku Tree Compass Chest": "true"
+    "MQ Deku Tree Slingshot Chest": "true"
+    "MQ Deku Tree Slingshot Room Far Chest": "true"
+    "MQ Deku Tree Basement Chest": "true"
+    "MQ Deku Tree Before Water Platform Chest": "true"
+    "MQ Deku Tree After Water Platform Chest": "true"
+    "MQ Deku Tree GS Back Room": "true"
+    "MQ Deku Tree GS Lobby Crate": "true"
+    "MQ Deku Tree GS Song of Time Blocks": "true"
+    "MQ Deku Tree GS Compass Room": "true"
 "Deku Tree Before Boss":
   dungeon: DT
   exits:
-    "Deku Tree Basement Ledge": "true"
-    "Deku Tree Boss": "has_shield_for_scrubs"
-"Deku Tree Boss":
-  boss: true
-  dungeon: DT
-  locations:
-    "Deku Tree Boss Container": "true"
     "Deku Tree Boss": "true"
