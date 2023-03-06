@@ -2,9 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import { argv } from 'process';
 
-const DUNGEONS = {
-  'ydan': 0,
-} as {[k: string]: number};
+import { DUNGEONS } from './make_mq_common';
 
 type Entry = {
   size: number;

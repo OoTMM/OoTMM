@@ -144,6 +144,10 @@ export const custom = async (monitor: Monitor, roms: DecompressedRoms) => {
   const mqRoomsAddr = await archive.addData(mqRooms);
   cg.define('CUSTOM_MQ_ROOMS_ADDR', mqRoomsAddr);
 
+  const mqScenes = await raw('mq_scenes');
+  const mqScenesAddr = await archive.addData(mqScenes);
+  cg.define('CUSTOM_MQ_SCENES_ADDR', mqScenesAddr);
+
   /* Emit the custom header and data */
   const pack = archive.pack();
   cg.define('CUSTOM_DMA_ADDR', pack.dmaAddr);
