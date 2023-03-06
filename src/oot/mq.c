@@ -24,7 +24,7 @@ MqDataHeader;
 
 #define ROOM_ACTORS_MAX     64
 #define ROOM_OBJECTS_MAX    15
-#define ROOM_BUFFER_SIZE    (0x10 * ROOM_ACTORS_MAX + 0x10 * ROOM_OBJECTS_MAX)
+#define ROOM_BUFFER_SIZE    (0x10 * ROOM_ACTORS_MAX + 2 * ROOM_OBJECTS_MAX)
 
 ALIGNED(16) static char sMqBufferMisc[0x1000];
 ALIGNED(16) static char sMqBufferRoom[ROOM_BUFFER_SIZE];
@@ -57,6 +57,7 @@ static void loadMqRoomMaybe(GameState_Play* play)
 {
     MqDataHeader mqHeader;
     SceneRoomHeader* roomHeader;
+    int parseEnd;
 
     if (play->sceneId != SCE_OOT_INSIDE_DEKU_TREE)
         return;
@@ -68,15 +69,23 @@ static void loadMqRoomMaybe(GameState_Play* play)
     DMARomToRam((CUSTOM_MQ_ROOMS_ADDR + mqHeader.offset) | PI_DOM1_ADDR2, sMqBufferRoom, mqHeader.size);
 
     /* Patch the room */
+    parseEnd = 0;
     roomHeader = (SceneRoomHeader*)(gSegments[3] + 0x80000000);
-    for (;;)
+    while (!parseEnd)
     {
-        if (roomHeader->op == 0x14)
-            break;
-        if (roomHeader->op == 0x01)
+        switch (roomHeader->op)
         {
+        case 0x14:
+            parseEnd = 1;
+            break;
+        case 0x01:
             roomHeader->data1 = (u8)mqHeader.actorCount;
             roomHeader->data2 = (((u32)sMqBufferRoom) + mqHeader.actorOffset) - 0x80000000;
+            break;
+        case 0x0b:
+            roomHeader->data1 = (u8)mqHeader.objectCount;
+            roomHeader->data2 = (((u32)sMqBufferRoom) + mqHeader.objectOffset) - 0x80000000;
+            break;
         }
         roomHeader++;
     }
