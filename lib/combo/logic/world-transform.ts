@@ -16,6 +16,21 @@ export class LogicPassWorldTransform {
   ){
   }
 
+  private removeLocations(locs: string[]) {
+    const { world } = this.state;
+    for (const loc of locs) {
+      delete world.checks[loc];
+      delete world.regions[loc];
+    }
+    for (const areaName in world.areas) {
+      const area = world.areas[areaName];
+      const locations = area.locations;
+      for (const loc of locs) {
+        delete locations[loc];
+      }
+    }
+  }
+
   run() {
     this.state.monitor.log('Logic: World Transform');
 
@@ -29,6 +44,10 @@ export class LogicPassWorldTransform {
 
     const itemsToReplace = new Map<string, string>();
     const itemsToJunk = new Set<string>();
+
+    if (!this.state.settings.eggShuffle) {
+      this.removeLocations(['OOT Hatch Chicken', 'OOT Hatch Pocket Cucco']);
+    }
 
     if (config.has('SHARED_BOWS')) {
       /* Bows and quivers */
@@ -213,7 +232,7 @@ export class LogicPassWorldTransform {
       }
 
       /* OoT shields */
-      if (['OOT_SHIELD_DEKU', 'OOT_SHIELD_HYLIAN', 'OOT_SHIELD_MIRROR'].includes(item) && this.state.config.has('OOT_PROGRESSIVE_SHIELDS')) {
+      if (['OOT_SHIELD_DEKU', 'OOT_SHIELD_HYLIAN', 'OOT_SHIELD_MIRROR'].includes(item) && check.type !== 'shop' && this.state.config.has('OOT_PROGRESSIVE_SHIELDS')) {
         if (ootShields > 0) {
           ootShields -= 1;
           item = 'OOT_SHIELD';

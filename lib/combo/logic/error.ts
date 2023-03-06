@@ -5,6 +5,13 @@ export class LogicError extends Error {
   }
 };
 
+export class LogicEntranceError extends LogicError {
+  constructor(message: string) {
+    super(message);
+    this.name = "LogicEntranceError";
+  }
+};
+
 export class LogicSeedError extends LogicError {
   constructor(message: string) {
     super(message);

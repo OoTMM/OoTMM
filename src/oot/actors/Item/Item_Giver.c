@@ -29,21 +29,6 @@ static void ItemGiver_Update(Actor* this, GameState_Play* play)
 {
     switch (this->variable)
     {
-    case NPC_OOT_SARIA_OCARINA:
-        ItemGiver_Common(this, play, GI_OOT_OCARINA_FAIRY, EV_OOT_CHK_SARIA_OCARINA);
-        break;
-    case NPC_OOT_SHEIK_SHADOW:
-        if (ItemGiver_Common(this, play, GI_OOT_SONG_TP_SHADOW, EV_OOT_CHK_SONG_TP_SHADOW))
-        {
-            SetEventChk(EV_OOT_CHK_BONGO_ESCAPE);
-        }
-        break;
-    case NPC_OOT_SHEIK_SPIRIT:
-        ItemGiver_Common(this, play, GI_OOT_SONG_TP_SPIRIT, EV_OOT_CHK_SONG_TP_SPIRIT);
-        break;
-    case NPC_OOT_ZELDA_LIGHT_ARROW:
-        ItemGiver_Common(this, play, GI_OOT_ARROW_LIGHT, EV_OOT_CHK_LIGHT_ARROW);
-        break;
     case NPC_OOT_BLUE_WARP_GOHMA:
         ItemGiver_Common(this, play, GI_OOT_STONE_EMERALD, EV_OOT_CHK_STONE_EMERALD);
         break;
@@ -96,31 +81,4 @@ void comboSpawnItemGiver(GameState_Play* play, u16 npcId)
         0, 0, 0,
         npcId
     );
-}
-
-void comboSpawnItemGivers(GameState_Play* play)
-{
-    /* Saria's Ocarina */
-    if (gSave.entrance == 0x05e0 && !GetEventChk(EV_OOT_CHK_SARIA_OCARINA))
-    {
-        comboSpawnItemGiver(play, NPC_OOT_SARIA_OCARINA);
-    }
-
-    /* Sheik in Kakariko */
-    if (play->sceneId == SCE_OOT_KAKARIKO_VILLAGE && gSave.inventory.quest.medallionForest && gSave.inventory.quest.medallionFire && gSave.inventory.quest.medallionWater && gSave.age == AGE_ADULT && !GetEventChk(EV_OOT_CHK_SONG_TP_SHADOW))
-    {
-        comboSpawnItemGiver(play, NPC_OOT_SHEIK_SHADOW);
-    }
-
-    /* Sheik in colossus */
-    if (gSave.entrance == 0x1e1 && !GetEventChk(EV_OOT_CHK_SONG_TP_SPIRIT))
-    {
-        comboSpawnItemGiver(play, NPC_OOT_SHEIK_SPIRIT);
-    }
-
-    /* Zelda Light Arrows */
-    if (play->sceneId == SCE_OOT_TEMPLE_OF_TIME && gSave.inventory.quest.medallionShadow && gSave.inventory.quest.medallionSpirit && gSave.age == AGE_ADULT && !GetEventChk(EV_OOT_CHK_LIGHT_ARROW))
-    {
-        comboSpawnItemGiver(play, NPC_OOT_ZELDA_LIGHT_ARROW);
-    }
 }

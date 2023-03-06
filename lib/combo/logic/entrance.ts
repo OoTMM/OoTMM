@@ -5,6 +5,7 @@ import { Settings } from "../settings";
 import { DUNGEONS_REGIONS, ExprMap, World, WorldEntrance } from "./world";
 import { Pathfinder, EntranceOverrides } from './pathfind';
 import { Monitor } from "../monitor";
+import { LogicEntranceError } from "./error";
 
 export type EntranceShuffleResult = {
   overrides: {[k: string]: {[k:string]: { from: string, to: string }}};
@@ -171,7 +172,11 @@ export class LogicPassEntrances {
       }
       const sorted = keys.sort((a, b) => combinations[a].length - combinations[b].length);
       const boss = sorted[0];
-      const src = sample(this.input.random, combinations[boss]);
+      const comb = combinations[boss];
+      if (comb.length === 0) {
+        throw new LogicEntranceError(`Nowhere to place boss ${boss}`);
+      }
+      const src = sample(this.input.random, comb);
       placed[src] = boss;
       delete combinations[boss];
       for (const k of Object.keys(combinations)) {
@@ -274,7 +279,11 @@ export class LogicPassEntrances {
       }
       const sorted = keys.sort((a, b) => combinations[a].length - combinations[b].length);
       const dungeon = sorted[0];
-      const src = sample(this.input.random, combinations[dungeon]);
+      const comb = combinations[dungeon];
+      if (comb.length === 0) {
+        throw new LogicEntranceError(`Nowhere to place ${dungeon}`);
+      }
+      const src = sample(this.input.random, comb);
       placed[src] = dungeon;
       delete combinations[dungeon];
       for (const k of Object.keys(combinations)) {

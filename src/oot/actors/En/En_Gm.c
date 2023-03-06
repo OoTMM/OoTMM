@@ -49,27 +49,8 @@ static void hintMedigoron(GameState_Play* play)
     comboTextAutoLineBreaks(start);
 }
 
-int EnGm_TalkedTo(Actor* this, GameState_Play* play)
+void EnGm_TalkedTo(Actor* this, GameState_Play* play)
 {
-    static u8 sInMessage;
-
-    if (sInMessage)
-    {
-        sInMessage = 0;
+    if (this->messageId == 0x304f)
         hintMedigoron(play);
-        return 1;
-    }
-
-    if (ActorTalkedTo(this))
-    {
-        if (this->messageId == 0x304f)
-        {
-            sInMessage = 1;
-            return 0;
-        }
-        return 1;
-    }
-    return 0;
 }
-
-PATCH_CALL(0x80a9fda4, EnGm_TalkedTo);

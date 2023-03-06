@@ -11,33 +11,33 @@ PATCH_END
 
 /* Override the first textbox */
 PATCH_START 0x80ae26b4
-  jal EnFsn_DisplayTextBox
+  jal comboShopDisplayTextBox
    move a1,t2
 PATCH_END
 
 PATCH_START 0x80ae3ffc
-  jal EnFsn_DisplayTextBox
+  jal comboShopDisplayTextBox
    move a1,t3
 PATCH_END
 
 PATCH_START 0x80ae4104
-  jal EnFsn_DisplayTextBox
+  jal comboShopDisplayTextBox
    move a1,t7
 PATCH_END
 
 PATCH_START 0x80ae45a8
-  jal EnFsn_DisplayTextBox
+  jal comboShopDisplayTextBox
    move a1,t1
 PATCH_END
 
 PATCH_START 0x80ae4620
-  jal EnFsn_DisplayTextBox
+  jal comboShopDisplayTextBox
    move a1,t0
 PATCH_END
 
 /* Override the second textbox */
 PATCH_START 0x80ae291c
-  jal EnFsn_DisplayTextBoxConfirm
+  jal comboShopDisplayTextBoxConfirm
    move a1,t1
 PATCH_END
 

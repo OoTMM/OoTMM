@@ -3,7 +3,7 @@ import { Random, sample, shuffle } from '../random';
 import { gameId } from '../util';
 import { Pathfinder, PathfinderState } from './pathfind';
 import { World } from './world';
-import { LogicSeedError } from './error';
+import { LogicError, LogicSeedError } from './error';
 import { Items, addItem, combinedItems, itemsArray, removeItem, ITEMS_REQUIRED, isDungeonReward, isGoldToken, isHouseToken, isKey, isStrayFairy, isSmallKey, isGanonBossKey, isRegularBossKey, isTownStrayFairy, isDungeonStrayFairy, isSong, isJunk, isMapCompass, isSmallKeyRegular, isSmallKeyHideout } from './items';
 import { Settings } from '../settings';
 import { Monitor } from '../monitor';
@@ -51,15 +51,6 @@ const removeItemPools = (pools: ItemPools, item: string) => {
   }
 };
 
-const maxRequired = (pools: ItemPools, item: string, count: number) => {
-  if ((pools.required[item] || 0) <= count) {
-    return;
-  }
-  const extra = pools.required[item] - count;
-  pools.required[item] = count;
-  pools.nice[item] = extra;
-};
-
 export class LogicPassSolver {
   private items!: ItemPlacement;
   private pathfinder!: Pathfinder;
@@ -91,6 +82,8 @@ export class LogicPassSolver {
     this.placeJunkLocations();
 
     /* Place items fixed to default */
+    this.fixCows();
+    this.fixShops();
     this.fixTokens();
     this.fixFairies();
     this.fixLocations();
@@ -161,13 +154,13 @@ export class LogicPassSolver {
 
     for (const location in this.state.world.checks) {
       const check = this.state.world.checks[location];
-      const { item } = check;
+      const { item, type } = check;
 
       if (this.items[location]) {
         continue;
       }
 
-      if (isDungeonReward(item) || isKey(item) || isStrayFairy(item) || ITEMS_REQUIRED.has(item)) {
+      if (isDungeonReward(item) || isKey(item) || isStrayFairy(item) || ITEMS_REQUIRED.has(item) || type == 'shop') {
         addItem(pools.required, item);
       } else if (isJunk(item)) {
         addItem(pools.junk, item);
@@ -187,22 +180,6 @@ export class LogicPassSolver {
         this.insertItem(pools, item);
       }
     }
-
-    if (this.state.settings.progressiveSwordsOot === 'progressive') {
-      maxRequired(pools, 'OOT_SWORD', 2);
-    }
-    maxRequired(pools, 'OOT_WALLET', 1);
-    maxRequired(pools, 'OOT_BOMB_BAG', 1);
-    maxRequired(pools, 'OOT_BOW', 1);
-    maxRequired(pools, 'OOT_SLINGSHOT', 1);
-    maxRequired(pools, 'OOT_MAGIC_UPGRADE', 1);
-    maxRequired(pools, 'OOT_OCARINA', 1);
-    maxRequired(pools, 'OOT_BOMBCHU_10', 1);
-    maxRequired(pools, 'OOT_GS_TOKEN', 50);
-
-    maxRequired(pools, 'MM_BOMB_BAG', 1);
-    maxRequired(pools, 'MM_BOW', 1);
-    maxRequired(pools, 'MM_MAGIC_UPGRADE', 1);
 
     for (const item in this.state.settings.startingItems) {
       const count = this.state.settings.startingItems[item];
@@ -265,6 +242,36 @@ export class LogicPassSolver {
       const item = pool.pop();
       this.place(location, item!);
       removeItemPools(this.pools, item!);
+    }
+  }
+
+  private fixCows() {
+    if (this.state.settings.cowShuffle === 'full') {
+      return;
+    }
+
+    for (const loc in this.state.world.checks) {
+      const c = this.state.world.checks[loc];
+      if (c.type === 'cow') {
+        const item = this.state.world.checks[loc].item;
+        this.place(loc, item);
+        removeItemPools(this.pools, item);
+      }
+    }
+  }
+
+  private fixShops() {
+    if (this.state.settings.shopShuffleOot === 'full') {
+      return;
+    }
+
+    for (const loc in this.state.world.checks) {
+      const c = this.state.world.checks[loc];
+      const { type, game, item } = c;
+      if (type === 'shop' && game === 'oot') {
+        this.place(loc, item);
+        removeItemPools(this.pools, item);
+      }
     }
   }
 
@@ -431,7 +438,7 @@ export class LogicPassSolver {
       const items = itemsArray(pool);
       if (items.length === 0) {
         const unreachableLocs = Object.keys(this.state.world.checks).filter(x => !this.pathfinderState.locations.has(x));
-        throw new Error(`Unreachable locations: ${unreachableLocs.join(', ')}`);
+        throw new LogicError(`Unreachable locations: ${unreachableLocs.join(', ')}`);
       }
       requiredItem = sample(this.state.random, items);
     }

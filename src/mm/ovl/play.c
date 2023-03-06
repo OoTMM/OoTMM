@@ -31,7 +31,7 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.quest.songHealing = 1;
         gSave.inventory.quest.songTime = 1;
         gSave.inventory.quest.songSoaring = 1;
-        //gSave.inventory.quest.songEpona = 1;
+        gSave.inventory.quest.songEpona = 1;
         gSave.inventory.quest.songOrder = 1;
         gSave.inventory.quest.songStorms = 1;
         gSave.inventory.quest.songNewWave = 1;
@@ -144,6 +144,10 @@ void hookPlay_Init(GameState_Play* play)
 
     Play_Init(play);
     gLastEntrance = gSave.entranceIndex;
+    if (play->sceneId != SCE_MM_GROTTOS)
+    {
+        gLastScene = play->sceneId;
+    }
     comboSpawnItemGivers(play);
     comboSpawnCustomWarps(play);
 

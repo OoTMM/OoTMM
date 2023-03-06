@@ -39,14 +39,6 @@ void comboTriggerWarp(GameState_Play* play, int bossId)
         BITMAP16_SET(gOotSave.eventsChk, EV_OOT_CHK_TREE_DEAD);
         BITMAP16_SET(gOotSave.eventsChk, EV_OOT_CHK_MIDO_TREE_DEAD);
         break;
-    case DUNGEONID_DODONGOS_CAVERN:
-        break;
-    case DUNGEONID_JABU_JABU:
-        break;
-    case DUNGEONID_TEMPLE_FOREST:
-        break;
-    case DUNGEONID_TEMPLE_FIRE:
-        break;
     case DUNGEONID_TEMPLE_WATER:
         BITMAP16_SET(gOotSave.eventsChk, EV_OOT_CHK_LAKE_HYLIA_WATER);
         break;
@@ -69,9 +61,6 @@ void comboTriggerWarp(GameState_Play* play, int bossId)
         gMmExtraBoss.boss |= (1 << 3);
         MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_ST);
         break;
-    default:
-        UNREACHABLE();
-        break;
     }
 
     /* Set entrance */
@@ -79,28 +68,28 @@ void comboTriggerWarp(GameState_Play* play, int bossId)
     switch (dungeonEntranceId)
     {
     case DUNGEONID_DEKU_TREE:
-        entrance = 0x0457;
+        entrance = 0x0457; // Works OK as adult
         break;
     case DUNGEONID_DODONGOS_CAVERN:
-        entrance = 0x0242;
+        entrance = 0x0242; // Works OK as adult
         break;
     case DUNGEONID_JABU_JABU:
-        entrance = 0x0221;
+        entrance = 0x0221; // Works OK as adult
         break;
     case DUNGEONID_TEMPLE_FOREST:
-        entrance = 0x0608;
+        entrance = 0x0600; // Normal exit WW as child
         break;
     case DUNGEONID_TEMPLE_FIRE:
-        entrance = 0x0564;
+        entrance = 0x04f6; // Normal exit WW as child
         break;
     case DUNGEONID_TEMPLE_WATER:
-        entrance = 0x060C;
+        entrance = 0x0604; // Normal exit WW as child
         break;
     case DUNGEONID_TEMPLE_SHADOW:
-        entrance = 0x0580;
+        entrance = 0x0568; // Normal exit crashes as child
         break;
     case DUNGEONID_TEMPLE_SPIRIT:
-        entrance = 0x0610;
+        entrance = 0x01e1; // Normal exit crashes as child
         break;
     case DUNGEONID_TEMPLE_WOODFALL:
         isMmEntrance = 1;
@@ -121,7 +110,7 @@ void comboTriggerWarp(GameState_Play* play, int bossId)
         }
         else
         {
-            entrance = 0x9a80;
+            entrance = 0x9a70;
         }
         break;
     case DUNGEONID_TEMPLE_GREAT_BAY:
@@ -131,7 +120,7 @@ void comboTriggerWarp(GameState_Play* play, int bossId)
     case DUNGEONID_TEMPLE_STONE_TOWER:
     case DUNGEONID_TEMPLE_STONE_TOWER_INVERTED:
         isMmEntrance = 1;
-        entrance = 0x20f0;
+        entrance = 0x2070;
         break;
     case DUNGEONID_SPIDER_HOUSE_SWAMP:
         isMmEntrance = 1;

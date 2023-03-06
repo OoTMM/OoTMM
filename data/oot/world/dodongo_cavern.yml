@@ -28,7 +28,7 @@
   exits:
     "Dodongo Cavern Right Corridor": "true"
   locations:
-    "Dodongo Cavern GS Side Room": "true"
+    "Dodongo Cavern GS Side Room": "can_damage_skull"
 "Dodongo Cavern Miniboss 1":
   dungeon: DC
   exits:

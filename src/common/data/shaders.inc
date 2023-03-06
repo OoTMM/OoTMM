@@ -145,16 +145,16 @@
 /* MM        Moon's Tear                       */ { Shader_MoonTear,               { 0x6000d78, 0x6000c80 }},
 /* MM        Land Title Deed                   */ { Shader_Opa01,                  { 0x6000a08, 0x6000968 }},
 /* MM        Deku Mask                         */ { Shader_Opa0_Xlu1,              { 0x6000f20, 0x6000b50 }},
-/* MM        Remains - Odolwa                  */ { (void*)0x800efd44,             { 0x6000690, 0x6000690 }}, /* Missing shader in OoT */
+/* MM        Remains - Odolwa                  */ { Shader_BossRemains,            { CUSTOM_OBJECT_GI_REMAINS_ODOLWA_0 } },
 /* MM        Powder Keg                        */ { Shader_Opa0_Xlu1,              { 0x6000da0, 0x6000bc0 }},
 /* MM        Gold Dust                         */ { Shader_Opa01,                  { 0x6000888, 0x6000880 }},
 /* MM        Gold Dust in a bottle             */ { Shader_Opa0_Xlu1,              { 0x6000d18, 0x60009a0 }},
 /* MM        ???                               */ { Shader_Opa0_Xlu1,              { 0x6000fb8, 0x6000c90 }},
 /* MM        ???                               */ { Shader_Opa0_Xlu1,              { 0x6000d30, 0x60007f0 }},
 /* MM        Seahorse                          */ { (void*)0x800ef364,             { 0x6000f08, 0x6000b20, 0x6000a90, 0x6000a50 }}, /* Missing shader in OoT */
-/* MM        Remains - Goht                    */ { (void*)0x800efd44,             { 0x6003ad0, 0x6003ad0 }}, /* Missing shader in OoT */
-/* MM        Remains - Gyorg                   */ { (void*)0x800efd44,             { 0x6001d80, 0x6001d80 }}, /* Missing shader in OoT */
-/* MM        Remains - Twinmold                */ { (void*)0x800efd44,             { 0x6005020, 0x6005020 }}, /* Missing shader in OoT */
+/* MM        Remains - Goht                    */ { Shader_BossRemains,            { CUSTOM_OBJECT_GI_REMAINS_GOHT_0 } },
+/* MM        Remains - Gyorg                   */ { Shader_BossRemains,            { CUSTOM_OBJECT_GI_REMAINS_GYORG_0 } },
+/* MM        Remains - Twinmold                */ { Shader_BossRemains,            { CUSTOM_OBJECT_GI_REMAINS_TWINMOLD_0 } },
 /* MM        Razor Sword                       */ { Shader_Opa01,                  { 0x6000c08, 0x6000c00 }},
 /* MM        Gilded Sword                      */ { Shader_Opa01,                  { 0x60009e8, 0x60009e0 }},
 /* MM        Great Fairy Sword                 */ { Shader_Opa0_Xlu1,              { 0x6000ad8, 0x6000940 }},
@@ -171,11 +171,6 @@
 /* MM        Chateau Romani                    */ { Shader_Opa0_Xlu1,              { 0x6000e90, 0x6000a50 }},
 /* MM        Pictograph                        */ { Shader_Opa0_Xlu1,              { 0x6000ec8, 0x6000bc0 }},
 /* MM        Fierce Deity Mask                 */ { Shader_Opa01,                  { 0x6000b90, 0x60009b0 }},
-/* MM        Custom: Remains Odolwa            */ { Shader_BossRemains,            { CUSTOM_OBJECT_GI_REMAINS_ODOLWA_0 } },
-/* MM        Custom: Remains Goht              */ { Shader_BossRemains,            { CUSTOM_OBJECT_GI_REMAINS_GOHT_0 } },
-/* MM        Custom: Remains Gyorg             */ { Shader_BossRemains,            { CUSTOM_OBJECT_GI_REMAINS_GYORG_0 } },
-/* MM        Custom: Remains Twinmold          */ { Shader_BossRemains,            { CUSTOM_OBJECT_GI_REMAINS_TWINMOLD_0 } },
-/* MM        Custom: SOLD OUT                  */ { Shader_Xlu0,                   { 0x6000440 } },
 /* Common:   Custom: Note (Purple)             */ { Shader_CustomNote,             { 0x6000ae0, 0x00 } },
 /* Common:   Custom: Note (Blue)               */ { Shader_CustomNote,             { 0x6000ae0, 0x01 } },
 /* Common:   Custom: Note (Green)              */ { Shader_CustomNote,             { 0x6000ae0, 0x02 } },

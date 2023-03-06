@@ -1,5 +1,10 @@
 #include <combo.h>
 
+/* Enlarge the actor */
+PATCH_START 0x80864a3c
+.int 0x1d0
+PATCH_END
+
 EnGirlA_PostHandler_Trampoline:
   /* girlA is in s0 */
   move a0,s0

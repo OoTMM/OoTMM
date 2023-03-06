@@ -135,9 +135,10 @@ export class LogicPassHints {
   }
 
   private isLocationHintable(loc: string) {
-    if (loc === 'OOT Temple of Time Medallion' || loc === 'MM Oath to Order') {
+    if (['OOT Temple of Time Medallion', 'MM Oath to Order', 'OOT Hatch Chicken', 'OOT Hatch Pocket Cucco'].includes(loc)) {
       return false;
     }
+    const check = this.state.world.checks[loc];
     const item = this.state.items[loc];
     if (loc === 'OOT Temple of Time Master Sword' && !this.state.settings.shuffleMasterSword) {
       return false;
@@ -173,6 +174,12 @@ export class LogicPassHints {
       return false;
     }
     if (isHouseToken(item) && this.state.settings.housesSkulltulaTokens === 'none') {
+      return false;
+    }
+    if (check.type === 'cow' && this.state.settings.cowShuffle === 'none') {
+      return false;
+    }
+    if (check.type === 'shop' && check.game === 'oot' && this.state.settings.shopShuffleOot === 'none') {
       return false;
     }
     return true;

@@ -61,6 +61,8 @@ Termina Field Dodongo Grotto,                     chest,          NONE,         
 Termina Field Bio Baba Grotto,                    collectible,    NONE,                   GROTTOS,                    0x02,                   HEART_PIECE
 Termina Field Scrub,                              npc,            NONE,                   GROTTOS,                    SCRUB_TELESCOPE,        HEART_PIECE
 Termina Field Gossip Stones HP,                   npc,            NONE,                   GROTTOS,                    GOSSIP_HEART_PIECE,     HEART_PIECE
+Termina Field Cow Front,                          cow,            NONE,                   GROTTOS,                    0x13,                   MILK
+Termina Field Cow Back,                           cow,            NONE,                   GROTTOS,                    0x14,                   MILK
 Road to Southern Swamp HP,                        collectible,    NONE,                   ROAD_SOUTHERN_SWAMP,        0x01,                   HEART_PIECE
 Road to Southern Swamp Grotto,                    chest,          NONE,                   GROTTOS,                    0x1e,                   RUPEE_RED
 Southern Swamp HP,                                collectible,    NONE,                   SOUTHERN_SWAMP,             0x1e,                   HEART_PIECE
@@ -140,6 +142,9 @@ Goron Race Reward,                                npc,            GORON_RACE,   
 Romani Ranch Epona Song,                          npc,            NONE,                   ROMANI_RANCH,               SONG_EPONA,             SONG_EPONA
 Romani Ranch Aliens,                              npc,            RANCH_DEFENSE,          ROMANI_RANCH,               ROMANI_BOTTLE,          BOTTLE_MILK
 Romani Ranch Cremia Escort,                       npc,            RANCH_DEFENSE,          ROMANI_RANCH,               CREMIA_ESCORT,          MASK_ROMANI
+Romani Ranch Barn Cow Left,                       cow,            NONE,                   ROMANI_RANCH,               0x10,                   MILK
+Romani Ranch Barn Cow Right Front,                cow,            NONE,                   ROMANI_RANCH,               0x11,                   MILK
+Romani Ranch Barn Cow Right Back,                 cow,            NONE,                   ROMANI_RANCH,               0x12,                   MILK
 Cucco Shack Bunny Mask,                           npc,            NONE,                   CUCCO_SHACK,                MASK_BUNNY,             MASK_BUNNY
 Doggy Racetrack Chest,                            chest,          NONE,                   DOG_RACETRACK,              0x00,                   RUPEE_PURPLE
 Doggy Racetrack HP,                               npc,            NONE,                   DOG_RACETRACK,              DOG_LADY_HEART_PIECE,   HEART_PIECE
@@ -147,6 +152,8 @@ Great Bay Coast Zora Mask,                        npc,            NONE,         
 Great Bay Coast HP,                               collectible,    NONE,                   GREAT_BAY_COAST,            0x05,                   HEART_PIECE
 Great Bay Coast Fisherman HP,                     npc,            FISHERMAN_GAME,         GREAT_BAY_COAST,            FISHERMAN_HEART_PIECE,  HEART_PIECE
 Great Bay Coast Fisherman Grotto,                 chest,          NONE,                   GROTTOS,                    0x17,                   RUPEE_RED
+Great Bay Coast Cow Front,                        cow,            NONE,                   GREAT_BAY_COAST,            0x15,                   MILK
+Great Bay Coast Cow Back,                         cow,            NONE,                   GREAT_BAY_COAST,            0x16,                   MILK
 Zora Cape Ledge Chest 1,                          chest,          NONE,                   ZORA_CAPE,                  0x01,                   RUPEE_RED
 Zora Cape Ledge Chest 2,                          chest,          NONE,                   ZORA_CAPE,                  0x02,                   RUPEE_RED
 Zora Cape Underwater Chest,                       chest,          NONE,                   ZORA_CAPE,                  0x00,                   RUPEE_PURPLE
@@ -299,6 +306,7 @@ Great Bay Temple Boss,                            npc,            NONE,         
 Beneath the Well Skulltulla Chest,                chest,          NONE,                   BENEATH_THE_WELL,           0x01,                   RUPEE_PURPLE
 Beneath the Well Keese Chest,                     chest,          NONE,                   BENEATH_THE_WELL,           0x02,                   RUPEE_PURPLE
 Beneath the Well Mirror Shield,                   chest,          NONE,                   BENEATH_THE_WELL,           0x1b,                   SHIELD_MIRROR
+Beneath the Well Cow,                             cow,            NONE,                   BENEATH_THE_WELL,           0x17,                   MILK
 Ancient Castle of Ikana HP,                       collectible,    NONE,                   CASTLE_IKANA,               0x0a,                   HEART_PIECE
 Ancient Castle of Ikana Song Emptiness,           npc,            SONG_ELEGY,             LAIR_IKANA,                 SONG_EMPTINESS,         SONG_EMPTINESS
 Stone Tower Temple Entrance Chest,                chest,          NONE,                   TEMPLE_STONE_TOWER,         0x16,                   STRAY_FAIRY_ST

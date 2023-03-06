@@ -2,9 +2,10 @@ import { cloneDeep } from 'lodash';
 import { Settings } from '../settings';
 import { Expr } from './expr';
 
-import { addItem, combinedItems, Items } from './items';
+import { addItem, combinedItems, isItemConsumable, Items } from './items';
 import { ItemPlacement } from './solve';
 import { World } from './world';
+import { isLocationRenewable } from './helpers';
 
 export const AGES = ['child', 'adult'] as const;
 
@@ -33,8 +34,18 @@ export type PathfinderState = {
   }
 }
 
+function filterStartingItems(items: Items) {
+  const newItems = {...items};
+  for (const item of Object.keys(items)) {
+    if (isItemConsumable(item)) {
+      delete newItems[item];
+    }
+  }
+  return newItems;
+}
+
 const defaultState = (settings: Settings): PathfinderState => ({
-  items: { ...settings.startingItems },
+  items: filterStartingItems(settings.startingItems),
   areas: {
     child: new Set(),
     adult: new Set(),
@@ -261,7 +272,9 @@ export class Pathfinder {
     for (const location of this.state.uncollectedLocations) {
       const item = this.opts.items?.[location];
       if (item) {
-        addItem(this.state.items, item);
+        if (!isItemConsumable(item) || isLocationRenewable(this.world, location)) {
+          addItem(this.state.items, item);
+        }
         this.state.uncollectedLocations.delete(location);
       }
     }
@@ -319,7 +332,9 @@ export class Pathfinder {
     for (const location of this.state.newLocations) {
       const item = this.opts.items?.[location];
       if (item) {
-        addItem(this.state.items, item);
+        if (!isItemConsumable(item) || isLocationRenewable(this.world, location)) {
+          addItem(this.state.items, item);
+        }
       } else {
         this.state.uncollectedLocations.add(location);
       }

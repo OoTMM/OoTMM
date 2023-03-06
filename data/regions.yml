@@ -36,6 +36,7 @@ OOT_GERUDO_VALLEY:            0x21
 OOT_GERUDO_FORTRESS:          0x22
 OOT_HAUNTED_WASTELAND:        0x23
 OOT_DESERT_COLOSSUS:          0x24
+OOT_EGGS:                     0x25
 
 MM_TEMPLE_WOODFALL:           0x81
 MM_TEMPLE_SNOWHEAD:           0x82

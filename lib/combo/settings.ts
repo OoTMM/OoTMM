@@ -118,6 +118,26 @@ export const SETTINGS = [{
   ],
   default: 'dungeonBlueWarps'
 }, {
+  key: 'cowShuffle',
+  name: 'Cow Shuffle',
+  category: 'main',
+  type: 'enum',
+  values: [
+    { value: 'none', name: 'None' },
+    { value: 'full', name: 'Full' },
+  ],
+  default: 'none'
+}, {
+  key: 'shopShuffleOot',
+  name: 'Shop Shuffle (OoT, EXPERIMENTAL)',
+  category: 'main',
+  type: 'enum',
+  values: [
+    { value: 'none', name: 'None' },
+    { value: 'full', name: 'Full' },
+  ],
+  default: 'none'
+}, {
   key: 'shuffleMasterSword',
   name: 'Master Sword Shuffle',
   category: 'main',
@@ -129,6 +149,12 @@ export const SETTINGS = [{
   category: 'main',
   type: 'boolean',
   default: true
+}, {
+  key: 'eggShuffle',
+  name: 'Weird / Pocket Egg Content Shuffle',
+  category: 'main',
+  type: 'boolean',
+  default: false
 }, {
   key: 'doorOfTime',
   name: 'Door of Time',

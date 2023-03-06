@@ -2,7 +2,7 @@
   dungeon: Forest
   exits:
     "Sacred Meadow": "true"
-    "Forest Temple Main": "true"
+    "Forest Temple Main": "is_adult || (has_nuts || has_weapon || has_explosives || has_ranged_weapon_child)"
   locations:
     "Forest Temple Tree Small Key": "true"
     "Forest Temple GS Entrance": "has_ranged_weapon || has_explosives || can_use_din"
@@ -29,6 +29,9 @@
     "Forest Temple Main": "true"
     "Forest Temple Map Room": "true"
     "Forest Temple Well": "event(FOREST_WELL) || can_dive_big"
+  events:
+    STICKS: "can_hookshot || can_hammer || can_boomerang || (has_nuts && has_weapon)"
+    NUTS: "is_adult || has_weapon || has_explosives || can_use_slingshot"
   locations:
     "Forest Temple GS Garden West": "can_longshot || (event(FOREST_LEDGE_REACHED) && can_collect_distance)"
 "Forest Temple Garden West Ledge":
@@ -46,10 +49,10 @@
 "Forest Temple Map Room":
   dungeon: Forest
   exits:
-    "Forest Temple Main": "true"
-    "Forest Temple Garden East Ledge": "true"
+    "Forest Temple Garden West": "can_use_bow || has_explosives || ((can_hookshot || has_nuts || can_boomerang || has_shield) && (has_weapon || can_use_slingshot || can_use_sticks))"
+    "Forest Temple Garden East Ledge": "can_use_bow || has_explosives || ((can_hookshot || has_nuts || can_boomerang || has_shield) && (has_weapon || can_use_slingshot || can_use_sticks))"
   locations:
-    "Forest Temple Map": "true"
+    "Forest Temple Map": "can_use_bow || has_explosives || ((can_hookshot || has_nuts || can_boomerang || has_shield) && (has_weapon || can_use_slingshot || can_use_sticks))"
 "Forest Temple Garden East Ledge":
   dungeon: Forest
   exits:
@@ -61,6 +64,9 @@
   exits:
     "Forest Temple Well": "event(FOREST_WELL) || can_dive_big"
     "Forest Temple Garden East Ledge": "can_longshot || (can_hookshot && trick(OOT_FOREST_HOOK))"
+  events:
+    STICKS: "can_hookshot || can_hammer || can_boomerang || (has_nuts && has_weapon)"
+    NUTS: "is_adult || has_weapon || has_explosives || can_use_slingshot"
   locations:
     "Forest Temple Garden": "can_hookshot"
     "Forest Temple GS Garden East": "can_hookshot"

@@ -1,11 +1,10 @@
-#ifndef COMBO_OOT_ACTOR_ENGIRLA_H
-#define COMBO_OOT_ACTOR_ENGIRLA_H
+#ifndef COMBO_COMMON_ACTOR_ENGIRLA_H
+#define COMBO_COMMON_ACTOR_ENGIRLA_H
 
 #include <combo/common/actor.h>
 #include <combo/util.h>
 #include <combo/types.h>
 
-/* Seems to be the same in MM? */
 typedef struct Actor_EnGirlA Actor_EnGirlA;
 
 typedef int  (*ShopPrecondFn)(GameState_Play*, Actor_EnGirlA*);
@@ -22,15 +21,22 @@ struct Actor_EnGirlA
     u16             angle;
     char            unk_1aa[2];
     ShopPrecondFn   precond;
-    ShopBuyFn       buy;
-    void*           func4;
+    ShopBuyFn       quickBuy;
+    ShopBuyFn       postBuy;
     s16             price;
     s16             count;
     s16             shaderId;
     s16             unk;
     void*           func1;
+
+    /* Custom fields */
+    u8 shopId;
 };
 
-_Static_assert(sizeof(Actor_EnGirlA) == 0x1c4, "OoT Actor_EnGirlA size is wrong");
+#if defined(GAME_OOT)
+_Static_assert(sizeof(Actor_EnGirlA) == 0x1c8, "OoT Actor_EnGirlA size is wrong");
+#else
+_Static_assert(sizeof(Actor_EnGirlA) == 0x1d0, "MM Actor_EnGirlA size is wrong");
+#endif
 
 #endif

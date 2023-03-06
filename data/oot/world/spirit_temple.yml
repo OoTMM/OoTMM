@@ -12,9 +12,12 @@
   exits:
     "Spirit Temple": "is_child"
     "Spirit Temple Child Climb": "is_child && has(SMALL_KEY_SPIRIT)"
+    "Spirit Temple Child Back": can_use_sticks || has_explosives || ((can_boomerang || has_nuts) && (has_weapon || can_use_slingshot))
+"Spirit Temple Child Back":
+  dungeon: Spirit
   locations:
     "Spirit Temple Child First Chest": "has_ranged_weapon_child"
-    "Spirit Temple Child Second Chest": "has_ranged_weapon_child"
+    "Spirit Temple Child Second Chest": "has_ranged_weapon_child && (can_use_sticks || can_use_din)"
     "Spirit Temple GS Child Fence": "has_ranged_weapon_child"
 "Spirit Temple Child Climb":
   dungeon: Spirit
@@ -24,14 +27,14 @@
   locations:
     "Spirit Temple Child Climb 1": "has_ranged_weapon_both || (event(SPIRIT_CHILD_DOOR) && has_ranged_weapon_child) || (event(SPIRIT_ADULT_DOOR) && has_ranged_weapon_adult)"
     "Spirit Temple Child Climb 2": "has_ranged_weapon_both || (event(SPIRIT_CHILD_DOOR) && has_ranged_weapon_child) || (event(SPIRIT_ADULT_DOOR) && has_ranged_weapon_adult)"
-    "Spirit Temple GS Child Climb": "true"
+    "Spirit Temple GS Child Climb": "can_damage_skull"
 "Spirit Temple Child Upper":
   dungeon: Spirit
   exits:
     "Spirit Temple Statue": "true"
     "Spirit Temple Child Hand": "has(SMALL_KEY_SPIRIT, 5)"
   locations:
-    "Spirit Temple Sun Block Room Torches": "(event(SPIRIT_CHILD_DOOR) && is_child) || has_fire_spirit"
+    "Spirit Temple Sun Block Room Torches": "(event(SPIRIT_CHILD_DOOR) && can_use_sticks && has_explosives) || has_fire_spirit || (has_fire_arrows && has(SMALL_KEY_SPIRIT, 4))"
     "Spirit Temple GS Iron Knuckle": "(event(SPIRIT_CHILD_DOOR) && can_boomerang) || (event(SPIRIT_ADULT_DOOR) && can_hookshot) || (can_collect_ageless && (has_explosives || has(SMALL_KEY_SPIRIT, 2)))"
 "Spirit Temple Child Hand":
   dungeon: Spirit
@@ -63,7 +66,7 @@
     "Spirit Temple Child Upper": "true"
     "Spirit Temple Boss": "has(BOSS_KEY_SPIRIT) && event(SPIRIT_LIGHT_STATUE) && can_hookshot"
   locations:
-    "Spirit Temple Statue Base": "(event(SPIRIT_CHILD_DOOR) && has_explosives) || has_fire_spirit"
+    "Spirit Temple Statue Base": "(event(SPIRIT_CHILD_DOOR) && has_explosives && can_use_sticks) || has_fire_spirit || (has_fire_arrows && has(SMALL_KEY_SPIRIT, 4))"
     "Spirit Temple GS Statue": "event(SPIRIT_ADULT_DOOR) && (can_hookshot || has_hover_boots)"
     "Spirit Temple Silver Gauntlets": "has(SMALL_KEY_SPIRIT, 3) && has(HOOKSHOT, 2) && has_explosives"
 "Spirit Temple Statue Adult":
