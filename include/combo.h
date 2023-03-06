@@ -118,6 +118,7 @@ ComboDataHints;
 
 typedef struct PACKED ALIGNED(4)
 {
+    u32             mq;
     u8              config[0x40];
     ComboDataHints  hints;
     u8              boss[12];

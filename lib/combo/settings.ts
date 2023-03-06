@@ -413,6 +413,15 @@ const DEFAULT_TRICKS = Object.keys(TRICKS).reduce((tricks, trick) => {
 
 const DEFAULT_JUNK_LOCATIONS: string[] = [];
 
+export const MQ = ['DT'] as const;
+
+export type MqSettings = {[k in typeof MQ[number]]: boolean};
+
+const DEFAULT_MQ = MQ.reduce((mqs, mq) => {
+  mqs[mq] = false;
+  return mqs;
+}, {} as MqSettings);
+
 type SettingDataEnumValue = {
   readonly value: string;
   readonly name: string;
@@ -452,10 +461,11 @@ export type Settings = SettingsBase & {
   startingItems: {[k: string]: number},
   junkLocations: string[],
   tricks: Tricks,
+  mq: MqSettings,
 };
 
 export const DEFAULT_SETTINGS: Settings = { ...SETTINGS.map(s => {
   return {[s.key]: s.default};
-}).reduce((a, b) => ({...a, ...b}), {}), startingItems: {}, junkLocations: DEFAULT_JUNK_LOCATIONS, tricks: { ...DEFAULT_TRICKS } } as Settings;
+}).reduce((a, b) => ({...a, ...b}), {}), startingItems: {}, junkLocations: DEFAULT_JUNK_LOCATIONS, tricks: { ...DEFAULT_TRICKS }, mq: { ...DEFAULT_MQ } } as Settings;
 
 export const settings = (s: Partial<Settings>): Settings => ({...DEFAULT_SETTINGS, ...s});

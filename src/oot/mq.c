@@ -47,6 +47,39 @@ ALIGNED(16) static char sMqBufferScene[SCENE_BUFFER_SIZE];
 static char* sMqBufferRoomPtr = sMqBufferRoom;
 static char* sMqBufferRoom2Ptr = sMqBufferRoom2;
 
+static int mqDungeonId(GameState_Play* play)
+{
+    switch (play->sceneId)
+    {
+    case SCE_OOT_INSIDE_DEKU_TREE:
+        return 0;
+    case SCE_OOT_DODONGO_CAVERN:
+        return 1;
+    case SCE_OOT_INSIDE_JABU_JABU:
+        return 2;
+    case SCE_OOT_TEMPLE_FOREST:
+        return 3;
+    case SCE_OOT_TEMPLE_FIRE:
+        return 4;
+    case SCE_OOT_TEMPLE_WATER:
+        return 5;
+    case SCE_OOT_TEMPLE_SPIRIT:
+        return 6;
+    case SCE_OOT_TEMPLE_SHADOW:
+        return 7;
+    case SCE_OOT_BOTTOM_OF_THE_WELL:
+        return 8;
+    case SCE_OOT_ICE_CAVERN:
+        return 9;
+    case SCE_OOT_GERUDO_TRAINING_GROUND:
+        return 10;
+    case SCE_OOT_INSIDE_GANON_CASTLE:
+        return 11;
+    default:
+        return -1;
+    }
+}
+
 static void swapMqRooms(void)
 {
     char* tmp = sMqBufferRoomPtr;
@@ -54,20 +87,30 @@ static void swapMqRooms(void)
     sMqBufferRoom2Ptr = tmp;
 }
 
+static int isEnabledMq(int dungeonId)
+{
+    return gComboData.mq & (1 << dungeonId);
+}
+
 static int findMqOverrideScene(GameState_Play* play, MqSceneHeader* dst)
 {
     u32             headerCount;
     MqSceneHeader*  header;
-    u8              dungeonId;
+    int             dungeonId;
+
+    dungeonId = mqDungeonId(play);
+    if (dungeonId < 0)
+        return 0;
+    if (!isEnabledMq(dungeonId))
+        return 0;
 
     DMARomToRam(CUSTOM_MQ_SCENES_ADDR | PI_DOM1_ADDR2, sMqBufferMisc, sizeof(sMqBufferMisc));
     headerCount = *(u32*)sMqBufferMisc;
-    dungeonId = 0;
 
     for (int i = 0; i < headerCount; ++i)
     {
         header = (MqSceneHeader*)(sMqBufferMisc + 0x20 + i * 0x20);
-        if (header->dungeonId == dungeonId)
+        if (header->dungeonId == (u8)dungeonId)
         {
             *dst = *header;
             return 1;
@@ -81,16 +124,21 @@ static int findMqOverrideRoom(GameState_Play* play, MqRoomHeader* dst)
 {
     u32             headerCount;
     MqRoomHeader*   header;
-    u8              dungeonId;
+    int             dungeonId;
+
+    dungeonId = mqDungeonId(play);
+    if (dungeonId < 0)
+        return 0;
+    if (!isEnabledMq(dungeonId))
+        return 0;
 
     DMARomToRam(CUSTOM_MQ_ROOMS_ADDR | PI_DOM1_ADDR2, sMqBufferMisc, sizeof(sMqBufferMisc));
     headerCount = *(u32*)sMqBufferMisc;
-    dungeonId = 0;
 
     for (int i = 0; i < headerCount; ++i)
     {
         header = (MqRoomHeader*)(sMqBufferMisc + 0x20 + i * 0x20);
-        if (header->dungeonId == dungeonId && header->roomId == play->roomCtx.curRoom.num)
+        if (header->dungeonId == (u8)dungeonId && header->roomId == play->roomCtx.curRoom.num)
         {
             *dst = *header;
             return 1;
@@ -105,9 +153,6 @@ static void loadMqSceneMaybe(GameState_Play* play)
     MqSceneHeader mqHeader;
     SceneRoomHeader* sceneHeader;
     int parseEnd;
-
-    if (play->sceneId != SCE_OOT_INSIDE_DEKU_TREE)
-        return;
 
     if (!findMqOverrideScene(play, &mqHeader))
         return;
@@ -141,9 +186,6 @@ static void loadMqRoomMaybe(GameState_Play* play)
     int parseEnd;
 
     swapMqRooms();
-
-    if (play->sceneId != SCE_OOT_INSIDE_DEKU_TREE)
-        return;
 
     if (!findMqOverrideRoom(play, &mqHeader))
         return;
