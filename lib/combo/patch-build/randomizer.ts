@@ -398,9 +398,10 @@ const gameEntrances = (game: Game, entrances: EntranceShuffleResult) => {
 
 export const randomizerMq = (settings: Settings): Buffer => {
   let mq = 0;
-  for (let i = 0; i < MQ.length; ++i) {
-    const dungeon = MQ[i];
-    if (settings.mq[dungeon]) {
+  const dungeons = Object.keys(MQ);
+  for (let i = 0; i < dungeons.length; ++i) {
+    const dungeon = dungeons[i];
+    if ((settings.mq as any)[dungeon]) {
       mq |= 1 << i;
     }
   }

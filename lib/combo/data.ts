@@ -66,9 +66,31 @@ const worldOot = {
 };
 
 import worldMqDekuTree from '../../data/oot/world_mq/deku_tree_mq.yml';
+import worldMqDodongoCavern from '../../data/oot/world_mq/dodongo_cavern_mq.yml';
+import worldMqJabuJabu from '../../data/oot/world_mq/jabu_jabu_mq.yml';
+import worldMqForestTemple from '../../data/oot/world_mq/forest_temple_mq.yml';
+import worldMqFireTemple from '../../data/oot/world_mq/fire_temple_mq.yml';
+import worldMqWaterTemple from '../../data/oot/world_mq/water_temple_mq.yml';
+import worldMqSpiritTemple from '../../data/oot/world_mq/spirit_temple_mq.yml';
+import worldMqShadowTemple from '../../data/oot/world_mq/shadow_temple_mq.yml';
+import worldMqBottomOfTheWell from '../../data/oot/world_mq/bottom_of_the_well_mq.yml';
+import worldMqIceCavern from '../../data/oot/world_mq/ice_cavern_mq.yml';
+import worldMqGerudoTrainingGrounds from '../../data/oot/world_mq/gerudo_training_grounds_mq.yml';
+import worldMqGanonCastle from '../../data/oot/world_mq/ganon_castle_mq.yml';
 
 const worldMq = {
   DT: worldMqDekuTree,
+  DC: worldMqDodongoCavern,
+  JJ: worldMqJabuJabu,
+  Forest: worldMqForestTemple,
+  Fire: worldMqFireTemple,
+  Water: worldMqWaterTemple,
+  Spirit: worldMqSpiritTemple,
+  Shadow: worldMqShadowTemple,
+  BotW: worldMqBottomOfTheWell,
+  IC: worldMqIceCavern,
+  GTG: worldMqGerudoTrainingGrounds,
+  Ganon: worldMqGanonCastle,
 };
 
 import worldMmOverworld from '../../data/mm/world/overworld.yml';
