@@ -160,6 +160,38 @@ typedef struct PACKED
 }
 TransitionContext;
 
+typedef struct
+{
+    s8      num;
+    u8      unk_01;
+    u8      behaviorType2;
+    u8      behaviorType1;
+    s8      echo;
+    u8      lensMode;
+    void*   roomShape;
+    void*   segment;
+    char    unk_10[0x4];
+}
+Room; // size = 0x14
+
+_Static_assert(sizeof(Room) == 0x14, "OoT Room size is wrong");
+
+typedef struct
+{
+    Room            curRoom;
+    Room            prevRoom;
+    void*           bufPtrs[2];
+    u8              unk_30;
+    s8              status;
+    void*           unk_34;
+    char            dmaRequest[0x20];
+    OSMesgQueue     loadQueue;
+    OSMesg          loadMsg;
+}
+RoomContext;
+
+_Static_assert(sizeof(RoomContext) == 0x74, "OoT Room size is wrong");
+
 #define TRANS_TYPE_NONE     0x00
 #define TRANS_TYPE_NORMAL   0x14
 
@@ -183,16 +215,18 @@ typedef struct GameState_Play
     PauseContext        pauseCtx;
     char                unk_10a14[0xd90];
     char                objTable[4]; /* Real size unknown */
-    char                unk_117a8[0x588];
+    char                unk_117a8[0x514];
+    RoomContext         roomCtx;
     TransitionContext   transition;
     char                unk_11e60[0x6b8];
 }
 GameState_Play;
 
-ASSERT_OFFSET(GameState_Play, cutscene, 0x1d64);
-ASSERT_OFFSET(GameState_Play, transition, 0x11d30);
-ASSERT_OFFSET(GameState_Play, transition.type, 0x11e15);
-ASSERT_OFFSET(GameState_Play, transition.entrance, 0x11e1a);
+ASSERT_OFFSET(GameState_Play, cutscene,             0x1d64);
+ASSERT_OFFSET(GameState_Play, roomCtx,              0x11cbc);
+ASSERT_OFFSET(GameState_Play, transition,           0x11d30);
+ASSERT_OFFSET(GameState_Play, transition.type,      0x11e15);
+ASSERT_OFFSET(GameState_Play, transition.entrance,  0x11e1a);
 
 _Static_assert(sizeof(TransitionContext) == 0x130, "OoT TransitionContext size is wrong");
 _Static_assert(sizeof(GameState_Play) == 0x12518, "OoT GameState_Play size is wrong");
