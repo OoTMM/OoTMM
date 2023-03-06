@@ -60,7 +60,22 @@ for (const dungeon in DUNGEONS) {
         size += actorData.length;
       }
 
+      if (headerOp === 0x0b) {
+        const objectListPos = headerData2 & 0xffffff;
+        objectCount = headerData1;
+        objectOffset = size;
+        const objectData = roomData.subarray(objectListPos, objectListPos + objectCount * 0x2);
+        buffers.push(objectData);
+        size += objectData.length;
+      }
+
       headerCursor++;
+    }
+
+    if (size % 16 !== 0) {
+      const padding = Buffer.alloc(16 - (size % 16));
+      buffers.push(padding);
+      size += padding.length;
     }
 
     entries.push({
