@@ -7,11 +7,14 @@ const DUNGEONS = {
 } as {[k: string]: number};
 
 type Entry = {
+  size: number;
+  offset: number;
   dungeon: number;
   room: number;
   actorCount: number;
-  actorsOffset: number;
-  extraSize: number;
+  actorOffset: number;
+  objectCount: number;
+  objectOffset: number;
 }
 
 let offset = 0;
@@ -32,9 +35,11 @@ for (const dungeon in DUNGEONS) {
     }
 
     let headerCursor = 0;
+    let size = 0;
     let actorCount = 0;
     let actorOffset = 0;
-    let extraSize = 0;
+    let objectCount = 0;
+    let objectOffset = 0;
     for (;;) {
       console.log(`room ${roomId} header ${headerCursor}`);
       const headerOp = roomData.readUInt8(headerCursor * 8 + 0);
@@ -49,42 +54,48 @@ for (const dungeon in DUNGEONS) {
         /* Actor list */
         const actorListPos = headerData2 & 0xffffff;
         actorCount = headerData1;
-        actorOffset = offset;
+        actorOffset = size;
         const actorData = roomData.subarray(actorListPos, actorListPos + actorCount * 0x10);
         buffers.push(actorData);
-        offset += actorData.length;
-        extraSize += actorData.length;
+        size += actorData.length;
       }
 
       headerCursor++;
     }
 
     entries.push({
+      size,
+      offset,
       dungeon: DUNGEONS[dungeon],
       room: roomId,
       actorCount,
-      actorsOffset: actorOffset,
-      extraSize,
+      actorOffset,
+      objectCount,
+      objectOffset,
     });
 
+    offset += size;
     roomId++;
   }
 }
 
 /* Make the file */
-const globalHeader = Buffer.alloc(0x10);
+const globalHeader = Buffer.alloc(0x20);
 globalHeader.writeInt32BE(entries.length, 0);
-const headerSize = entries.length * 0x10;
+const headerSize = entries.length * 0x20;
 const headerBuffer = Buffer.alloc(headerSize);
-const dataOffset = headerSize + 0x10;
+const dataOffset = headerSize + 0x20;
 for (let i = 0; i < entries.length; i++) {
   const entry = entries[i];
-  const base = i * 0x10;
-  headerBuffer.writeUInt8(entry.dungeon, base + 0);
-  headerBuffer.writeUInt8(entry.room, base + 1);
-  headerBuffer.writeUInt16BE(entry.actorCount, base + 2);
-  headerBuffer.writeUInt32BE(entry.extraSize, base + 4);
-  headerBuffer.writeUInt32BE(entry.actorsOffset + dataOffset, base + 8);
+  const base = i * 0x20;
+  headerBuffer.writeUInt32BE(entry.size, base + 0x00);
+  headerBuffer.writeUInt32BE(entry.offset + dataOffset, base + 0x04);
+  headerBuffer.writeUInt8(entry.dungeon, base + 0x08);
+  headerBuffer.writeUInt8(entry.room, base + 0x09);
+  headerBuffer.writeUInt16BE(entry.actorCount, base + 0x0a);
+  headerBuffer.writeUInt16BE(entry.actorOffset, base + 0x0c);
+  headerBuffer.writeUInt16BE(entry.objectCount, base + 0x0e);
+  headerBuffer.writeUInt16BE(entry.objectOffset, base + 0x10);
 }
 
 const fileBuffer = Buffer.concat([globalHeader, headerBuffer, ...buffers]);

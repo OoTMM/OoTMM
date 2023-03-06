@@ -27,6 +27,13 @@ export class CustomArchive {
     return padding;
   }
 
+  async addData(buffer: Buffer) {
+    const paddr = this.paddr;
+    this.paddr = Math.floor((this.paddr + buffer.length + 15) / 16) * 16;
+    this.data.push(buffer);
+    return paddr;
+  }
+
   async addBuffer(buffer: Buffer, shouldCompress: boolean) {
     /* Compress the custom file */
     let compressed: Buffer = buffer;

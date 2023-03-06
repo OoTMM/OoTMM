@@ -140,10 +140,9 @@ export const custom = async (monitor: Monitor, roms: DecompressedRoms) => {
   await customKeepFiles(roms, archive, cg);
 
   /* Load MQ data */
-  const mqData = await raw('mq');
-  const mqId = await archive.addBuffer(mqData, false);
-  console.log(mqId);
-  cg.define('CUSTOM_MQ_ADDR', mqId.physStart);
+  const mqRooms = await raw('mq_rooms');
+  const mqRoomsAddr = await archive.addData(mqRooms);
+  cg.define('CUSTOM_MQ_ROOMS_ADDR', mqRoomsAddr);
 
   /* Emit the custom header and data */
   const pack = archive.pack();
