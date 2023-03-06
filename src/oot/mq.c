@@ -39,7 +39,6 @@ MqRoomHeader;
 #define SCENE_TRANSITION_ACTORS_MAX     64
 #define SCENE_BUFFER_SIZE               (0x10 * SCENE_TRANSITION_ACTORS_MAX)
 
-ALIGNED(16) static char sMqBufferMisc[0x1000];
 ALIGNED(16) static char sMqBufferRoom[ROOM_BUFFER_SIZE];
 ALIGNED(16) static char sMqBufferRoom2[ROOM_BUFFER_SIZE];
 ALIGNED(16) static char sMqBufferScene[SCENE_BUFFER_SIZE];
@@ -97,6 +96,9 @@ static int findMqOverrideScene(GameState_Play* play, MqSceneHeader* dst)
     u32             headerCount;
     MqSceneHeader*  header;
     int             dungeonId;
+    int             headerIndex;
+    int             headerPage;
+    ALIGNED(16)     char buffer[0x400];
 
     dungeonId = mqDungeonId(play);
     if (dungeonId < 0)
@@ -104,16 +106,25 @@ static int findMqOverrideScene(GameState_Play* play, MqSceneHeader* dst)
     if (!isEnabledMq(dungeonId))
         return 0;
 
-    DMARomToRam(CUSTOM_MQ_SCENES_ADDR | PI_DOM1_ADDR2, sMqBufferMisc, sizeof(sMqBufferMisc));
-    headerCount = *(u32*)sMqBufferMisc;
+    DMARomToRam(CUSTOM_MQ_SCENES_ADDR | PI_DOM1_ADDR2, buffer, sizeof(buffer));
+    headerCount = *(u32*)buffer;
+    headerPage = 0;
+    headerIndex = 1;
 
-    for (int i = 0; i < headerCount; ++i)
+    while (headerCount--)
     {
-        header = (MqSceneHeader*)(sMqBufferMisc + 0x20 + i * 0x20);
+        header = (MqSceneHeader*)(buffer + headerIndex * 0x20);
         if (header->dungeonId == (u8)dungeonId)
         {
             *dst = *header;
             return 1;
+        }
+        headerIndex++;
+        if (headerIndex == sizeof(buffer) / 0x20)
+        {
+            headerIndex = 0;
+            headerPage++;
+            DMARomToRam((CUSTOM_MQ_SCENES_ADDR + headerPage * sizeof(buffer)) | PI_DOM1_ADDR2, buffer, sizeof(buffer));
         }
     }
 
@@ -125,6 +136,9 @@ static int findMqOverrideRoom(GameState_Play* play, MqRoomHeader* dst)
     u32             headerCount;
     MqRoomHeader*   header;
     int             dungeonId;
+    int             headerIndex;
+    int             headerPage;
+    ALIGNED(16)     char buffer[0x400];
 
     dungeonId = mqDungeonId(play);
     if (dungeonId < 0)
@@ -132,16 +146,25 @@ static int findMqOverrideRoom(GameState_Play* play, MqRoomHeader* dst)
     if (!isEnabledMq(dungeonId))
         return 0;
 
-    DMARomToRam(CUSTOM_MQ_ROOMS_ADDR | PI_DOM1_ADDR2, sMqBufferMisc, sizeof(sMqBufferMisc));
-    headerCount = *(u32*)sMqBufferMisc;
+    DMARomToRam(CUSTOM_MQ_ROOMS_ADDR | PI_DOM1_ADDR2, buffer, sizeof(buffer));
+    headerCount = *(u32*)buffer;
+    headerPage = 0;
+    headerIndex = 1;
 
-    for (int i = 0; i < headerCount; ++i)
+    while (headerCount--)
     {
-        header = (MqRoomHeader*)(sMqBufferMisc + 0x20 + i * 0x20);
+        header = (MqRoomHeader*)(buffer + headerIndex * 0x20);
         if (header->dungeonId == (u8)dungeonId && header->roomId == play->roomCtx.curRoom.num)
         {
             *dst = *header;
             return 1;
+        }
+        headerIndex++;
+        if (headerIndex == sizeof(buffer) / 0x20)
+        {
+            headerIndex = 0;
+            headerPage++;
+            DMARomToRam((CUSTOM_MQ_ROOMS_ADDR + headerPage * sizeof(buffer)) | PI_DOM1_ADDR2, buffer, sizeof(buffer));
         }
     }
 
