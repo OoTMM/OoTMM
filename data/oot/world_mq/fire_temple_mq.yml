@@ -1,0 +1,5 @@
+"Fire Temple":
+  dungeon: Fire
+  exits:
+    "Death Mountain Crater Warp": "true"
+    "Fire Temple Boss": "true"

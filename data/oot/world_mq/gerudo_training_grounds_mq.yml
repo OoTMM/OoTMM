@@ -1,0 +1,4 @@
+"Gerudo Training Grounds":
+  dungeon: GTG
+  exits:
+    "Gerudo Fortress Exterior": "true"

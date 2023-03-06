@@ -1,0 +1,15 @@
+"Forest Temple":
+  dungeon: Forest
+  exits:
+    "Sacred Meadow": "true"
+    "Forest Temple Main": "true"
+"Forest Temple Main":
+  dungeon: Forest
+  exits:
+    "Forest Temple": "true"
+    "Forest Temple Antichamber": "true"
+"Forest Temple Antichamber":
+  dungeon: Forest
+  exits:
+    "Forest Temple Boss": "true"
+

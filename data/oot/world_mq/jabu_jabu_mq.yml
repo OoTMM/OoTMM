@@ -1,0 +1,10 @@
+"Jabu-Jabu":
+  dungeon: JJ
+  exits:
+    "Zora Fountain": "true"
+    "Jabu-Jabu Main": "true"
+"Jabu-Jabu Main":
+  dungeon: JJ
+  exits:
+    "Jabu-Jabu": "true"
+    "Jabu-Jabu Boss": "true"

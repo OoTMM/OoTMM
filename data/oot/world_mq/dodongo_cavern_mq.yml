@@ -1,0 +1,17 @@
+"Dodongo Cavern":
+  dungeon: DC
+  exits:
+    "Death Mountain": "true"
+    "Dodongo Cavern Main": "true"
+"Dodongo Cavern Main":
+  dungeon: DC
+  exits:
+    "Dodongo Cavern": "true"
+    "Dodongo Cavern Skull": "true"
+"Dodongo Cavern Skull":
+  dungeon: DC
+  exits:
+    "Dodongo Cavern Main": "true"
+    "Dodongo Cavern Boss": "true"
+  locations:
+    "Dodongo Cavern GS Near Boss": "true"

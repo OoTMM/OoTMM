@@ -1,0 +1,9 @@
+"Spirit Temple":
+  dungeon: Spirit
+  exits:
+    "Desert Colossus": "true"
+    "Spirit Temple Statue": "true"
+"Spirit Temple Statue":
+  dungeon: Spirit
+  exits:
+    "Spirit Temple Boss": "true"

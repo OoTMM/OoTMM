@@ -1,0 +1,4 @@
+"Ganon Castle Main":
+  dungeon: Ganon
+  exits:
+    "Ganon Castle Tower": "true"
