@@ -99,7 +99,6 @@ static void debugCheat(GameState_Play* play)
 
 static void eventFixes(GameState_Play* play)
 {
-
     /* Skip forest temple cutscene */
     if (gSave.entrance == 0x169)
     {

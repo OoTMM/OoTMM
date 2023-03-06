@@ -13,6 +13,7 @@ import { CustomArchive } from './archive';
 import { KeepFile } from './keep';
 import { png } from './png';
 import { font } from './font';
+import { raw } from './raw';
 
 const FILES_TO_INDEX_OOT = arrayToIndexMap(DATA_FILES.oot);
 const FILES_TO_INDEX_MM = arrayToIndexMap(DATA_FILES.mm);
@@ -75,7 +76,7 @@ const makeSplitObject = async (roms: DecompressedRoms, entry: CustomEntry) => {
 const customExtractedObjects = async (roms: DecompressedRoms, archive: CustomArchive, cg: CodeGen) => {
   for (const entry of ENTRIES) {
     const obj = await makeSplitObject(roms, entry);
-    const objectId = await archive.addObject(obj.data);
+    const objectId = await archive.addObject(obj.data, true);
     cg.define('CUSTOM_OBJECT_ID_' + entry.name, objectId);
     for (let i = 0; i < obj.offsets.length; ++i) {
       cg.define('CUSTOM_OBJECT_' + entry.name + '_' + i, obj.offsets[i]);
@@ -122,7 +123,7 @@ const customKeepFiles = async (roms: DecompressedRoms, archive: CustomArchive, c
     const off = await keep.addData(assets[k]);
     cg.define('CUSTOM_KEEP_' + k, off);
   }
-  const custonKeepId = await archive.addObject(keep.pack());
+  const custonKeepId = await archive.addObject(keep.pack(), true);
   cg.define('CUSTOM_OBJECT_ID_KEEP', custonKeepId);
 };
 
@@ -137,6 +138,12 @@ export const custom = async (monitor: Monitor, roms: DecompressedRoms) => {
 
   /* Setup custom keep */
   await customKeepFiles(roms, archive, cg);
+
+  /* Load MQ data */
+  const mqData = await raw('mq');
+  const mqId = await archive.addBuffer(mqData, false);
+  console.log(mqId);
+  cg.define('CUSTOM_MQ_ADDR', mqId.physStart);
 
   /* Emit the custom header and data */
   const pack = archive.pack();
