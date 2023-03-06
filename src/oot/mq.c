@@ -11,15 +11,23 @@ SceneRoomHeader;
 
 typedef struct
 {
+    u32 size;
+    u32 offset;
     u8  dungeonId;
     u8  roomId;
     u16 actorCount;
-    u32 extraSize;
-    u32 actorOffset;
+    u16 actorOffset;
+    u16 objectCount;
+    u16 objectOffset;
 }
 MqDataHeader;
 
-ALIGNED(16) static char sMqBuffer[0x2000];
+#define ROOM_ACTORS_MAX     64
+#define ROOM_OBJECTS_MAX    15
+#define ROOM_BUFFER_SIZE    (0x10 * ROOM_ACTORS_MAX + 0x10 * ROOM_OBJECTS_MAX)
+
+ALIGNED(16) static char sMqBufferMisc[0x1000];
+ALIGNED(16) static char sMqBufferRoom[ROOM_BUFFER_SIZE];
 
 static int findMqOverride(GameState_Play* play, MqDataHeader* dst)
 {
@@ -27,13 +35,13 @@ static int findMqOverride(GameState_Play* play, MqDataHeader* dst)
     MqDataHeader*   header;
     u8              dungeonId;
 
-    DMARomToRam(CUSTOM_MQ_ADDR | PI_DOM1_ADDR2, sMqBuffer, sizeof(sMqBuffer));
-    headerCount = *(u32*)sMqBuffer;
+    DMARomToRam(CUSTOM_MQ_ROOMS_ADDR | PI_DOM1_ADDR2, sMqBufferMisc, sizeof(sMqBufferMisc));
+    headerCount = *(u32*)sMqBufferMisc;
     dungeonId = 0;
 
     for (int i = 0; i < headerCount; ++i)
     {
-        header = (MqDataHeader*)(sMqBuffer + 0x10 + i * 0x10);
+        header = (MqDataHeader*)(sMqBufferMisc + 0x20 + i * 0x20);
         if (header->dungeonId == dungeonId && header->roomId == play->roomCtx.curRoom.num)
         {
             *dst = *header;
@@ -57,7 +65,7 @@ static void loadMqRoomMaybe(GameState_Play* play)
         return;
 
     /* Load the MQ room data */
-    DMARomToRam((CUSTOM_MQ_ADDR + mqHeader.actorOffset) | PI_DOM1_ADDR2, sMqBuffer, mqHeader.extraSize);
+    DMARomToRam((CUSTOM_MQ_ROOMS_ADDR + mqHeader.offset) | PI_DOM1_ADDR2, sMqBufferRoom, mqHeader.size);
 
     /* Patch the room */
     roomHeader = (SceneRoomHeader*)(gSegments[3] + 0x80000000);
@@ -68,7 +76,7 @@ static void loadMqRoomMaybe(GameState_Play* play)
         if (roomHeader->op == 0x01)
         {
             roomHeader->data1 = (u8)mqHeader.actorCount;
-            roomHeader->data2 = ((u32)sMqBuffer) - 0x80000000;
+            roomHeader->data2 = (((u32)sMqBufferRoom) + mqHeader.actorOffset) - 0x80000000;
         }
         roomHeader++;
     }
