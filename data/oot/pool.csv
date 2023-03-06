@@ -461,3 +461,15 @@ Ganon Castle Shadow Chest 2,                          chest,          NONE,     
 Ganon Castle Spirit Chest 1,                          chest,          NONE,                 INSIDE_GANON_CASTLE,            0x12,                       BOMBCHU_20
 Ganon Castle Spirit Chest 2,                          chest,          NONE,                 INSIDE_GANON_CASTLE,            0x14,                       ARROWS_10
 Ganon Castle Boss Key,                                chest,          NONE,                 GANON_TOWER,                    0x0b,                       BOSS_KEY_GANON
+MQ Deku Tree Map Chest,                               chest,          NONE,                 INSIDE_DEKU_TREE,               0x03,                       MAP_DT
+MQ Deku Tree Compass Chest,                           chest,          NONE,                 INSIDE_DEKU_TREE,               0x01,                       COMPASS_DT
+MQ Deku Tree Slingshot Chest,                         chest,          NONE,                 INSIDE_DEKU_TREE,               0x06,                       SLINGSHOT
+MQ Deku Tree Slingshot Room Far Chest,                chest,          NONE,                 INSIDE_DEKU_TREE,               0x02,                       RUPEE_BLUE
+MQ Deku Tree Basement Chest,                          chest,          NONE,                 INSIDE_DEKU_TREE,               0x04,                       RUPEE_BLUE
+MQ Deku Tree Before Water Platform Chest,             chest,          NONE,                 INSIDE_DEKU_TREE,               0x05,                       RECOVERY_HEART
+MQ Deku Tree After Water Platform Chest,              chest,          NONE,                 INSIDE_DEKU_TREE,               0x00,                       RUPEE_PURPLE
+MQ Deku Tree GS Back Room,                            gs,             NONE,                 INSIDE_DEKU_TREE,               0x08,                       GS_TOKEN
+MQ Deku Tree GS Lobby Crate,                          gs,             NONE,                 INSIDE_DEKU_TREE,               0x09,                       GS_TOKEN
+MQ Deku Tree GS Song of Time Blocks,                  gs,             NONE,                 INSIDE_DEKU_TREE,               0x0a,                       GS_TOKEN
+MQ Deku Tree GS Compass Room,                         gs,             NONE,                 INSIDE_DEKU_TREE,               0x0b,                       GS_TOKEN
+
