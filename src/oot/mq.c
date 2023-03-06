@@ -28,6 +28,17 @@ MqDataHeader;
 
 ALIGNED(16) static char sMqBufferMisc[0x1000];
 ALIGNED(16) static char sMqBufferRoom[ROOM_BUFFER_SIZE];
+ALIGNED(16) static char sMqBufferRoom2[ROOM_BUFFER_SIZE];
+
+static char* sMqBufferRoomPtr = sMqBufferRoom;
+static char* sMqBufferRoom2Ptr = sMqBufferRoom2;
+
+static void swapMqRooms(void)
+{
+    char* tmp = sMqBufferRoomPtr;
+    sMqBufferRoomPtr = sMqBufferRoom2Ptr;
+    sMqBufferRoom2Ptr = tmp;
+}
 
 static int findMqOverride(GameState_Play* play, MqDataHeader* dst)
 {
@@ -59,6 +70,8 @@ static void loadMqRoomMaybe(GameState_Play* play)
     SceneRoomHeader* roomHeader;
     int parseEnd;
 
+    swapMqRooms();
+
     if (play->sceneId != SCE_OOT_INSIDE_DEKU_TREE)
         return;
 
@@ -66,7 +79,7 @@ static void loadMqRoomMaybe(GameState_Play* play)
         return;
 
     /* Load the MQ room data */
-    DMARomToRam((CUSTOM_MQ_ROOMS_ADDR + mqHeader.offset) | PI_DOM1_ADDR2, sMqBufferRoom, mqHeader.size);
+    DMARomToRam((CUSTOM_MQ_ROOMS_ADDR + mqHeader.offset) | PI_DOM1_ADDR2, sMqBufferRoomPtr, mqHeader.size);
 
     /* Patch the room */
     parseEnd = 0;
@@ -80,11 +93,11 @@ static void loadMqRoomMaybe(GameState_Play* play)
             break;
         case 0x01:
             roomHeader->data1 = (u8)mqHeader.actorCount;
-            roomHeader->data2 = (((u32)sMqBufferRoom) + mqHeader.actorOffset) - 0x80000000;
+            roomHeader->data2 = (((u32)sMqBufferRoomPtr) + mqHeader.actorOffset) - 0x80000000;
             break;
         case 0x0b:
             roomHeader->data1 = (u8)mqHeader.objectCount;
-            roomHeader->data2 = (((u32)sMqBufferRoom) + mqHeader.objectOffset) - 0x80000000;
+            roomHeader->data2 = (((u32)sMqBufferRoomPtr) + mqHeader.objectOffset) - 0x80000000;
             break;
         }
         roomHeader++;
