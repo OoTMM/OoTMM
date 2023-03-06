@@ -74,14 +74,3 @@
     "Fire Temple Pillar Ledge": "can_hammer"
   locations:
     "Fire Temple Hammer": "true"
-"Fire Temple Boss":
-  boss: true
-  dungeon: Fire
-  exits:
-    "Fire Temple After Boss": "can_hammer && has_tunic_goron_strict"
-"Fire Temple After Boss":
-  boss: true
-  dungeon: Fire
-  locations:
-    "Fire Temple Boss Container": "true"
-    "Fire Temple Boss": "true"

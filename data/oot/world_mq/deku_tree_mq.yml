@@ -16,13 +16,6 @@
     "Deku Tree Compass Chest": "true"
     "Deku Tree Compass Room Side Chest": "true"
     "Deku Tree GS Compass": "can_damage_skull"
-"Deku Tree Slingshot Room":
-  dungeon: DT
-  exits:
-    "Deku Tree Lobby": "true"
-  locations:
-    "Deku Tree Slingshot Chest": "true"
-    "Deku Tree Slingshot Side Chest": "true"
 "Deku Tree Basement":
   dungeon: DT
   exits:
@@ -49,3 +42,9 @@
   exits:
     "Deku Tree Basement Ledge": "true"
     "Deku Tree Boss": "has_shield_for_scrubs"
+"Deku Tree Boss":
+  boss: true
+  dungeon: DT
+  locations:
+    "Deku Tree Boss Container": "true"
+    "Deku Tree Boss": "true"
