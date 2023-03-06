@@ -9,19 +9,21 @@ type TabProps = {
   tabs: Tab[];
 }
 
-export const TabBar = ({ tabs }: TabProps) => {
+export function TabBar({ tabs }: TabProps) {
   const [activeTab, setActiveTab] = useState(0);
 
   return (
-    <div className="tab-bar">
-      <nav className="tab-bar-header">
+    <>
+      <nav className="tab-bar-left">
         {tabs.map((tab, i) =>
-          <a key={i} className={["tab-bar-header-tab", i === activeTab ? "active" : "inactive"].join(" ")} href="#" onClick={() => setActiveTab(i)}>{tab.name}</a>
+          <a key={i} className={["tab", i === activeTab ? "active" : "inactive"].join(" ")} href="#" onClick={(e) => { e.preventDefault(); setActiveTab(i)}}>{tab.name}</a>
         )}
       </nav>
-      <div className="tab-bar-body">
-        {tabs[activeTab].component}
+      <div className="tab-bar-right">
+        <div className="tab-bar-right-content">
+          {tabs[activeTab].component}
+        </div>
       </div>
-    </div>
+    </>
   );
 };

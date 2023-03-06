@@ -69,8 +69,12 @@ button {
   border-radius: 2px;
 }
 
-button:active {
+button:active, button:hover {
   opacity: 0.7;
+}
+
+button, .btn {
+  cursor: pointer;
 }
 
 .btn-primary {

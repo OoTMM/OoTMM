@@ -1,12 +1,7 @@
-.main {
-  width: 90%;
-  min-width: 1024px;
-  border: 1px solid #ccc;
-  padding: 1em;
-  background: #f4f4f4;
-  margin: 0 auto;
-  margin-top: 5em;
-  border-radius: 0.5em;
+#root {
+  display: flex;
+  min-height: 100vh;
+  min-width: 100vw;
 }
 
 .flex-h {
@@ -21,7 +16,7 @@
   gap: 0.5rem;
   width: 100%;
 }
- 
+
 .three-column-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -33,4 +28,8 @@
   flex-flow: row wrap;
   gap: 15px;
   margin-bottom: 8px;
+}
+
+.container {
+  margin: 3em;
 }

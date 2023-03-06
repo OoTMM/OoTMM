@@ -1,25 +1,29 @@
-.tab-bar-header {
-  display: flex;
+.tab-bar-left {
+  background: #333;
+  color: white;
 }
 
-.tab-bar-header-tab {
-  display: block;
+.tab {
+  min-width: 230px;
+  font-size: 1.3em;
   padding: 1em;
-  margin-bottom: -1px;
-  color: #222;
+  display: block;
   text-decoration: none;
-  border: 1px solid transparent;
+  color: inherit;
 }
 
-.tab-bar-header-tab.active {
-  background: white;
-  border: 1px solid #999;
-  border-bottom: none;
+.tab.active, .tab:hover {
+  background: #111;
 }
 
-.tab-bar-body {
-  background: white;
-  padding: 2em 1em;
-  border: 1px solid #999;
+.tab-bar-right {
+  display: flex;
+  flex: 1;
+}
+
+.tab-bar-right-content {
   width: 100%;
+  height: 100%;
+  padding: 2em;
+  overflow: auto;
 }

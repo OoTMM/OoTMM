@@ -1,35 +1,44 @@
 import React from 'react';
 
-import { itemName, Settings } from '@ootmm/core';
+import { itemName } from '@ootmm/core';
 import { useStartingItems } from '../contexts/GeneratorContext';
+
+const NAMES = {
+  MM: "Majora's Mask",
+  OOT: 'Ocarina of Time',
+  SHARED: 'Shared',
+}
 
 export function StartingItems() {
   const { startingItems, itemPool, incr, decr, reset } = useStartingItems();
 
-  // Valid gamePrefix are "MM" and "OOT"
-  const buildSingleTable = (gamePrefix: 'MM' | 'OOT') => {
+  const buildSingleTable = (gamePrefix: 'OOT' | 'MM' | 'SHARED') => {
+    const items = Object.keys(itemPool).filter((item) => item.startsWith(gamePrefix));
+
+    if (items.length === 0) {
+      return null;
+    }
+
     return (
       <table>
         <thead>
           <tr>
             <th colSpan={2}>
-              {gamePrefix === 'MM' ? "Majora's Mask" : 'Ocarina of Time'}
+              {NAMES[gamePrefix]}
             </th>
           </tr>
         </thead>
         <tbody>
-          {Object.keys(itemPool)
-            .filter((item) => item.startsWith(gamePrefix))
-            .map((item) => (
-              <tr key={item} className={startingItems[item] > 0 ? 'active' : 'inactive'}>
-                <td className="count">
-                  <button className="count-adjust" onClick={() => decr(item)}>-</button>
-                  {startingItems[item] || 0}
-                  <button className="count-adjust" onClick={() => incr(item)}>+</button>
-                </td>
-                <td>{itemName(item)}</td>
-              </tr>
-            ))}
+          {items.map((item) => (
+            <tr key={item} className={startingItems[item] > 0 ? 'active' : 'inactive'}>
+              <td className="count">
+                <button className="count-adjust" onClick={() => decr(item)}>-</button>
+                {startingItems[item] || 0}
+                <button className="count-adjust" onClick={() => incr(item)}>+</button>
+              </td>
+              <td>{itemName(item)}</td>
+            </tr>
+          ))}
         </tbody>
       </table>
     );
@@ -41,8 +50,9 @@ export function StartingItems() {
         Reset Starting Items
       </button>
       <div className="starting-items section-margin-top">
-        {buildSingleTable('MM')}
         {buildSingleTable('OOT')}
+        {buildSingleTable('MM')}
+        {buildSingleTable('SHARED')}
       </div>
     </>
   );
