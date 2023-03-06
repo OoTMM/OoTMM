@@ -25,18 +25,16 @@ static int findMqOverride(GameState_Play* play, MqDataHeader* dst)
 {
     u32             headerCount;
     MqDataHeader*   header;
-    u8              roomId;
     u8              dungeonId;
 
     DMARomToRam(CUSTOM_MQ_ADDR | PI_DOM1_ADDR2, sMqBuffer, sizeof(sMqBuffer));
     headerCount = *(u32*)sMqBuffer;
-    roomId = 0;
     dungeonId = 0;
 
     for (int i = 0; i < headerCount; ++i)
     {
         header = (MqDataHeader*)(sMqBuffer + 0x10 + i * 0x10);
-        if (header->dungeonId == dungeonId && header->roomId == roomId)
+        if (header->dungeonId == dungeonId && header->roomId == play->roomCtx.curRoom.num)
         {
             *dst = *header;
             return 1;
@@ -59,7 +57,7 @@ static void loadMqRoomMaybe(GameState_Play* play)
         return;
 
     /* Load the MQ room data */
-    DMARomToRam(CUSTOM_MQ_ADDR + mqHeader.actorOffset | PI_DOM1_ADDR2, sMqBuffer, mqHeader.extraSize);
+    DMARomToRam((CUSTOM_MQ_ADDR + mqHeader.actorOffset) | PI_DOM1_ADDR2, sMqBuffer, mqHeader.extraSize);
 
     /* Patch the room */
     roomHeader = (SceneRoomHeader*)(gSegments[3] + 0x80000000);
