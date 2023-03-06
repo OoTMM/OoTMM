@@ -1,0 +1,9 @@
+"Shadow Temple":
+  dungeon: Shadow
+  exits:
+    "Graveyard Upper": "true"
+    "Shadow Temple Boat": "true"
+"Shadow Temple Boat":
+  dungeon: Shadow
+  exits:
+    "Shadow Temple Boss": "true"

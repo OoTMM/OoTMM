@@ -1,0 +1,14 @@
+"Water Temple":
+  dungeon: Water
+  exits:
+    "Lake Hylia": "true"
+    "Water Temple Main": "true"
+"Water Temple Main":
+  dungeon: Water
+  exits:
+    "Water Temple": "true"
+    "Water Temple Antichamber": "true"
+"Water Temple Antichamber":
+  dungeon: Water
+  exits:
+    "Water Temple Boss": "true"

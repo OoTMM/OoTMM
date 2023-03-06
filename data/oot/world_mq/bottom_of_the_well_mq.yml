@@ -1,0 +1,4 @@
+"Bottom of the Well":
+  dungeon: BotW
+  exits:
+    "Kakariko": "true"
