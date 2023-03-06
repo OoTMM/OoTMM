@@ -53,13 +53,3 @@
   locations:
     "Ganon Castle Shadow Chest 1": "can_play(SONG_TIME) || can_hookshot || has_hover_boots || has_fire_arrows"
     "Ganon Castle Shadow Chest 2": "(can_longshot || has_fire_arrows) && (has_hover_boots || has_fire)"
-"Ganon Castle Tower":
-  dungeon: Ganon
-  locations:
-    "Ganon Castle Boss Key": "has_weapon"
-  exits:
-    "Ganon Castle Tower Boss": "setting(ganonBossKey, removed) || has(BOSS_KEY_GANON)"
-"Ganon Castle Tower Boss":
-  dungeon: Ganon
-  events:
-    GANON: "has_light_arrows"

@@ -147,14 +147,3 @@
   locations:
     "Forest Temple Antichamber": "true"
     "Forest Temple GS Antichamber": "can_collect_distance"
-"Forest Temple Boss":
-  boss: true
-  dungeon: Forest
-  exits:
-    "Forest Temple After Boss": "(has_ranged_weapon_adult || can_use_slingshot) && has_weapon"
-"Forest Temple After Boss":
-  boss: true
-  dungeon: Forest
-  locations:
-    "Forest Temple Boss": "true"
-    "Forest Temple Boss Container": "true"

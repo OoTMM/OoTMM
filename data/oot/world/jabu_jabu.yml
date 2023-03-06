@@ -16,14 +16,3 @@
     "Jabu-Jabu GS Bottom Upper": "can_collect_distance"
     "Jabu-Jabu GS Water Switch": "true"
     "Jabu-Jabu GS Near Boss": "can_boomerang"
-"Jabu-Jabu Boss":
-  boss: true
-  dungeon: JJ
-  exits:
-    "Jabu-Jabu After Boss": "can_boomerang"
-"Jabu-Jabu After Boss":
-  boss: true
-  dungeon: JJ
-  locations:
-    "Jabu-Jabu Boss Container": "true"
-    "Jabu-Jabu Boss": "true"
