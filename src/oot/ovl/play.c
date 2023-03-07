@@ -5,7 +5,6 @@ extern void* gMmMag;
 static void debugCheat(GameState_Play* play)
 {
 #if defined(DEBUG)
-    gMmSave.inventory.strayFairies[0] = 15;
     if (play->gs.input[0].current.buttons & L_TRIG)
     {
         gSave.inventory.items[ITS_OOT_STICKS] = ITEM_OOT_STICK;
@@ -25,7 +24,7 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.items[ITS_OOT_HAMMER] = ITEM_OOT_HAMMER;
         gSave.inventory.items[ITS_OOT_HOOKSHOT] = ITEM_OOT_LONGSHOT;
         gSave.inventory.items[ITS_OOT_LENS] = ITEM_OOT_LENS;
-        gSave.inventory.equipment.swords = 0x2;
+        gSave.inventory.equipment.swords = 0x7;
         gSave.inventory.equipment.shields = 0x7;
         gSave.inventory.equipment.tunics = 0x7;
         gSave.inventory.equipment.boots = 0x7;
@@ -75,7 +74,7 @@ static void debugCheat(GameState_Play* play)
 
         gSave.inventory.quest.stoneRuby = 1;
 
-        //gSave.health = gSave.healthMax = 20 * 0x10;
+        gSave.playerData.health = gSave.playerData.healthMax = 20 * 0x10;
 
         gSave.playerData.rupees = 500;
 
