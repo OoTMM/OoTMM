@@ -16,6 +16,7 @@ typedef struct
     u8  dungeonId;
     u16 transitionActorCount;
     u16 transitionActorOffset;
+    u16 pathOffset;
 }
 MqSceneHeader;
 
@@ -176,6 +177,7 @@ static void loadMqSceneMaybe(GameState_Play* play)
     MqSceneHeader mqHeader;
     SceneRoomHeader* sceneHeader;
     int parseEnd;
+    int needsPathPatch;
 
     if (!findMqOverrideScene(play, &mqHeader))
         return;
@@ -183,8 +185,9 @@ static void loadMqSceneMaybe(GameState_Play* play)
     /* Load the MQ scene data */
     DMARomToRam((CUSTOM_MQ_SCENES_ADDR + mqHeader.offset) | PI_DOM1_ADDR2, sMqBufferScene, mqHeader.size);
 
-    /* Patch the room */
+    /* Patch the scene */
     parseEnd = 0;
+    needsPathPatch = 0;
     sceneHeader = (SceneRoomHeader*)(gSegments[2] + 0x80000000);
     while (!parseEnd)
     {
@@ -197,8 +200,30 @@ static void loadMqSceneMaybe(GameState_Play* play)
             sceneHeader->data1 = (u8)mqHeader.transitionActorCount;
             sceneHeader->data2 = (((u32)sMqBufferScene) + mqHeader.transitionActorOffset) - 0x80000000;
             break;
+        case 0x18:
+            /* Alternate headers */
+            if (play->sceneId != SCE_OOT_ICE_CAVERN)
+                break;
+            /* fallthrough */
+        case 0x0d:
+            if (mqHeader.pathOffset == 0xffff)
+                break;
+            sceneHeader->data2 = (((u32)sMqBufferScene) + mqHeader.pathOffset) - 0x80000000;
+            needsPathPatch = 1;
+            break;
         }
         sceneHeader++;
+    }
+
+    /* Patch the paths */
+    if (needsPathPatch)
+    {
+        u8* pathData = (u8*)(sMqBufferScene + mqHeader.pathOffset);
+        while (*pathData)
+        {
+            ((u32*)pathData)[1] = (((u32)sMqBufferScene) + ((u32*)pathData)[1]) - 0x80000000;
+            pathData += 8;
+        }
     }
 }
 
