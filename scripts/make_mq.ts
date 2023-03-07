@@ -2,6 +2,15 @@ import fs from 'fs';
 import path from 'path';
 import { argv } from 'process';
 
+const PATHS = {
+  HIDAN: 4,
+  MIZUsin: 2,
+  jyasinzou: 5,
+  HAKAdanCH: 2,
+  ice_doukutu: 5,
+  ganontika: 6,
+}
+
 const DUNGEONS = {
   'ydan': 0,
   'ddan': 1,
@@ -34,6 +43,7 @@ type SceneEntry = {
   dungeon: number;
   transitionActorCount: number;
   transitionActorOffset: number;
+  pathOffset: number;
 }
 
 function makeRooms() {
@@ -61,7 +71,6 @@ function makeRooms() {
       let objectCount = 0;
       let objectOffset = 0;
       for (;;) {
-        console.log(`room ${roomId} header ${headerCursor}`);
         const headerOp = roomData.readUInt8(headerCursor * 8 + 0);
         const headerData1 = roomData.readUInt8(headerCursor * 8 + 1);
         const headerData2 = roomData.readUInt32BE(headerCursor * 8 + 4);
@@ -151,6 +160,7 @@ function makeScenes() {
     let size = 0;
     let transitionActorCount = 0;
     let transitionActorOffset = 0;
+    let pathOffset = 0xffff;
     for (;;) {
       const headerOp = sceneData.readUInt8(headerCursor * 8 + 0);
       const headerData1 = sceneData.readUInt8(headerCursor * 8 + 1);
@@ -170,6 +180,37 @@ function makeScenes() {
         size += actorData.length;
       }
 
+      if (headerOp === 0x0d) {
+        /* Path list */
+        let pathListPos = headerData2 & 0xffffff;
+        const pathBuffers: Buffer[] = [];
+        let pathsCount = (PATHS as {[k: string]: number})[dungeon] || 0;
+        while (pathsCount--) {
+          const count = sceneData.readUInt8(pathListPos);
+          const singlePathBuffer = Buffer.alloc(8);
+          singlePathBuffer.writeUint8(count, 0);
+          singlePathBuffer.writeUInt32BE(size, 4);
+          const dataPos = sceneData.readUInt32BE(pathListPos + 4) & 0xffffff;
+          const data = sceneData.subarray(dataPos, dataPos + count * 6);
+          buffers.push(data);
+          size += data.length;
+          pathListPos += 8;
+          pathBuffers.push(singlePathBuffer);
+        }
+        const pad = Buffer.alloc(4);
+        buffers.push(pad);
+        size += 4;
+        if (size % 4 !== 0) {
+          const padding = Buffer.alloc(4 - (size % 4));
+          buffers.push(padding);
+          size += padding.length;
+        }
+        pathOffset = size;
+        const pathHeader = Buffer.concat(pathBuffers);
+        buffers.push(pathHeader);
+        size += pathHeader.length;
+      }
+
       headerCursor++;
     }
 
@@ -185,6 +226,7 @@ function makeScenes() {
       dungeon: DUNGEONS[dungeon],
       transitionActorCount,
       transitionActorOffset,
+      pathOffset,
     });
 
     offset += size;
@@ -204,6 +246,7 @@ function makeScenes() {
     headerBuffer.writeUInt8(entry.dungeon, base + 0x08);
     headerBuffer.writeUInt16BE(entry.transitionActorCount, base + 0x0a);
     headerBuffer.writeUInt16BE(entry.transitionActorOffset, base + 0x0c);
+    headerBuffer.writeUInt16BE(entry.pathOffset, base + 0x0e);
   }
 
   const fileBuffer = Buffer.concat([globalHeader, headerBuffer, ...buffers]);
