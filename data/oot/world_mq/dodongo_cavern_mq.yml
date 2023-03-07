@@ -77,4 +77,4 @@
     "Dodongo Cavern Boss": "true"
   locations:
     "MQ Dodongo Cavern Chest Under Grave": "true"
-    "MQ Dodongo Cavern GS Near Boss": "is_adult || can_boomerang"
+    "MQ Dodongo Cavern GS Near Boss": "true"
