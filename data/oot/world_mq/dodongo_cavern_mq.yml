@@ -31,7 +31,7 @@
     "MQ Dodongo Cavern Compass Chest": "true"
     "MQ Dodongo Cavern Larvae Room Chest": "can_use_sticks || has_fire"
     "MQ Dodongo Cavern GS Larve Room": "can_use_sticks || has_fire"
-    #"MQ Dodongo Cavern Staircase Scrub": "(has_shield_for_scrub || has_ranged_weapon || can_hammer || has_nuts) && event(DC_MQ_SHORTCUT)"
+    #"MQ Dodongo Cavern Staircase Scrub": "has_shield_for_scrub || has_ranged_weapon || can_hammer || has_nuts"
 "Dodongo Cavern Upper Lizalfos":
   dungeon: DC
   exits:
