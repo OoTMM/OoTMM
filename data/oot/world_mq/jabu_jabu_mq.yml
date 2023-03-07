@@ -42,7 +42,7 @@
   exits:
     "Jabu-Jabu Main": "true"
   locations:
-    "MQ Jabu-Jabu GS Basement Side Room": "has_lens || (has_hover_boots && can_hookshot) || (can_use_fire_arrows && can_longshot)"
+    "MQ Jabu-Jabu GS Basement Side Room": "has_lens || (has_hover_boots && can_hookshot) || (has_fire_arrows && can_longshot)"
 "Jabu-Jabu Pre-Boss":
   dungeon: JJ
   exits:
