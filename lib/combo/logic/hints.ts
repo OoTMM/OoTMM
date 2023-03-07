@@ -217,7 +217,7 @@ export class LogicPassHints {
   }
 
   private locationFoolish(loc: string) {
-    if (!this.isLocationHintable(loc)) {
+    if (!this.isLocationHintable(loc) || this.state.analysis.unreachable.has(loc)) {
       return 0;
     }
     if (!this.state.analysis.useless.has(loc)) {

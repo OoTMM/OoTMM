@@ -310,6 +310,7 @@ export class LogicPassAnalysis {
   private requiredLocs = new Set<string>();
   private requiredlocsByItem: { [item: string]: Set<string> } = {};
   private uselessLocs = new Set<string>();
+  private unreachableLocs = new Set<string>();
   private dependencies: typeof SIMPLE_DEPENDENCIES = {};
 
   constructor(
@@ -445,7 +446,7 @@ export class LogicPassAnalysis {
     while (locsToCheck.length > 0) {
       const l = locsToCheck.pop()!;
       const item = this.state.items[l];
-      if (isItemImportant(item) && !this.uselessLocs.has(l)) {
+      if (isItemImportant(item) && !this.uselessLocs.has(l) && !this.unreachableLocs.has(l)) {
         /* May be a progression item - need to check other locations */
         const dependencies = this.dependencies[item];
         if (dependencies === undefined) {
@@ -465,12 +466,8 @@ export class LogicPassAnalysis {
   }
 
   private makeUselessLocs() {
-    if (this.state.settings.logic === 'beatable') {
-      this.makeUnreachable();
-    }
-
     for (const loc in this.state.world.checks) {
-      if (this.requiredLocs.has(loc) || this.uselessLocs.has(loc)) {
+      if (this.requiredLocs.has(loc) || this.uselessLocs.has(loc) || this.unreachableLocs.has(loc)) {
         continue;
       }
       if (!isItemImportant(this.state.items[loc]) || this.isLocUselessNonRenewable(loc) || this.isLocUselessHeuristicCount(loc) || this.isLocUselessHeuristicDependencies(loc)) {
@@ -484,7 +481,7 @@ export class LogicPassAnalysis {
     for (const loc in this.state.world.checks) {
       if (isItemImportant(this.state.items[loc]) && !pathfinderState.locations.has(loc)) {
         this.state.monitor.debug("Analysis - makeUnreachable: " + this.state.items[loc]);
-        this.uselessLocs.add(loc);
+        this.unreachableLocs.add(loc);
       }
     }
   }
@@ -496,12 +493,16 @@ export class LogicPassAnalysis {
       this.makeSpheres();
       this.makeRequiredLocs();
     }
+    if (this.state.settings.logic === 'beatable') {
+      this.makeUnreachable();
+    }
     this.makeUselessLocs();
 
     const analysis = {
       spheres: this.spheres,
       required: this.requiredLocs,
       useless: this.uselessLocs,
+      unreachable: this.unreachableLocs,
     }
 
     return { analysis };
