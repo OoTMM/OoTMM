@@ -208,6 +208,8 @@ static void loadMqSceneMaybe(GameState_Play* play)
         case 0x0d:
             if (mqHeader.pathOffset == 0xffff)
                 break;
+            sceneHeader->op = 0x0d;
+            sceneHeader->data1 = 0;
             sceneHeader->data2 = (((u32)sMqBufferScene) + mqHeader.pathOffset) - 0x80000000;
             needsPathPatch = 1;
             break;
@@ -244,6 +246,7 @@ static void loadMqRoomMaybe(GameState_Play* play)
     /* Patch the room */
     parseEnd = 0;
     roomHeader = (SceneRoomHeader*)(gSegments[3] + 0x80000000);
+
     while (!parseEnd)
     {
         switch (roomHeader->op)
