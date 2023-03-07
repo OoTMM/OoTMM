@@ -472,4 +472,14 @@ MQ Deku Tree GS Back Room,                            gs,             NONE,     
 MQ Deku Tree GS Lobby Crate,                          gs,             NONE,                 INSIDE_DEKU_TREE,               0x09,                       GS_TOKEN
 MQ Deku Tree GS Song of Time Blocks,                  gs,             NONE,                 INSIDE_DEKU_TREE,               0x0a,                       GS_TOKEN
 MQ Deku Tree GS Compass Room,                         gs,             NONE,                 INSIDE_DEKU_TREE,               0x0b,                       GS_TOKEN
-
+MQ Dodongo Cavern Map Chest,                          chest,          NONE,                 DODONGO_CAVERN,                 0x00,                       MAP_DC
+MQ Dodongo Cavern Compass Chest,                      chest,          NONE,                 DODONGO_CAVERN,                 0x05,                       COMPASS_DC
+MQ Dodongo Cavern Larvae Room Chest,                  chest,          NONE,                 DODONGO_CAVERN,                 0x02,                       RUPEE_BLUE
+MQ Dodongo Cavern Upper Ledge Chest,                  chest,          NONE,                 DODONGO_CAVERN,                 0x03,                       RUPEE_BLUE
+MQ Dodongo Cavern Bomb Bag Chest,                     chest,          NONE,                 DODONGO_CAVERN,                 0x04,                       BOMB_BAG
+MQ Dodongo Cavern Chest Under Grave,                  chest,          NONE,                 DODONGO_CAVERN,                 0x01,                       RUPEE_BLUE
+MQ Dodongo Cavern GS Time Blocks,                     gs,             NONE,                 DODONGO_CAVERN,                 0x13,                       GS_TOKEN
+MQ Dodongo Cavern GS Larve Room,                      gs,             NONE,                 DODONGO_CAVERN,                 0x14,                       GS_TOKEN
+MQ Dodongo Cavern GS Upper Lizalfos,                  gs,             NONE,                 DODONGO_CAVERN,                 0x12,                       GS_TOKEN
+MQ Dodongo Cavern GS Poe Room Side,                   gs,             NONE,                 DODONGO_CAVERN,                 0x11,                       GS_TOKEN
+MQ Dodongo Cavern GS Near Boss,                       gs,             NONE,                 DODONGO_CAVERN,                 0x10,                       GS_TOKEN
