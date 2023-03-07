@@ -76,6 +76,7 @@ static void CustomTriggers_HandleTrigger(Actor_CustomTriggers* this, GameState_P
         {
             comboRemoveTradeItemChild(XITEM_OOT_CHILD_WEIRD_EGG);
             this->trigger = TRIGGER_NONE;
+            this->events.weirdEgg = 0;
         }
         break;
     case TRIGGER_POCKET_EGG:
@@ -83,6 +84,7 @@ static void CustomTriggers_HandleTrigger(Actor_CustomTriggers* this, GameState_P
         {
             comboRemoveTradeItemAdult(XITEM_OOT_ADULT_POCKET_EGG);
             this->trigger = TRIGGER_NONE;
+            this->events.pocketEgg = 0;
         }
         break;
     }
