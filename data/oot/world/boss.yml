@@ -2,8 +2,8 @@
   boss: true
   dungeon: DT
   locations:
-    "Deku Tree Boss Container": "true"
-    "Deku Tree Boss": "true"
+    "Deku Tree Boss Container": "(has_nuts || can_use_slingshot) && (can_use_sticks || has_weapon)"
+    "Deku Tree Boss": "(has_nuts || can_use_slingshot) && (can_use_sticks || has_weapon)"
 "Dodongo Cavern Boss":
   boss: true
   dungeon: DC
@@ -15,13 +15,13 @@
   boss: true
   dungeon: DC
   locations:
-    "Dodongo Cavern Boss Container": "true"
-    "Dodongo Cavern Boss": "true"
+    "Dodongo Cavern Boss Container": "can_use_sticks || has_weapon"
+    "Dodongo Cavern Boss": "can_use_sticks || has_weapon"
 "Jabu-Jabu Boss":
   boss: true
   dungeon: JJ
   exits:
-    "Jabu-Jabu After Boss": "can_boomerang"
+    "Jabu-Jabu After Boss": "can_boomerang && (can_use_sticks || has_weapon)"
 "Jabu-Jabu After Boss":
   boss: true
   dungeon: JJ
