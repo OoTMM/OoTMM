@@ -76,7 +76,7 @@ const MM_REGION_NAMES: {[k: string]: string} = {
   'MM_BENEATH_THE_WELL': 'Beneath the Well',
   'MM_SECRET_SHRINE': 'Secret Shrine',
   'MM_SPIDER_HOUSE_SWAMP': 'Swamp Spider House',
-  'MM_SPIDER_HOUSE_OCEAN': 'Oceanside Spider House',
+  'MM_SPIDER_HOUSE_OCEAN': 'Ocean Spider House',
   'MM_MOON': 'The Moon'
 }
 
