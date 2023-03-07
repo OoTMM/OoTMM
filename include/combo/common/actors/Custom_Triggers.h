@@ -7,7 +7,7 @@ typedef struct
 {
     Actor base;
     int   trigger;
-    union
+    struct
     {
         u8 weirdEgg:1;
         u8 pocketEgg:1;

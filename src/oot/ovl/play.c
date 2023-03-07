@@ -80,7 +80,7 @@ static void debugCheat(GameState_Play* play)
         gSave.playerData.rupees = 500;
 
         gOotExtraTrade.child = 0xffff;
-        gOotExtraTrade.adult = 0;
+        gOotExtraTrade.adult = 0xffff;
         gOotExtraTrade.adult |= (1 << XITEM_OOT_ADULT_EYEBALL_FROG);
         gOotExtraTrade.adult |= (1 << XITEM_OOT_ADULT_EYE_DROPS);
         gOotExtraTrade.adult |= (1 << XITEM_OOT_ADULT_CLAIM_CHECK);
