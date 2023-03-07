@@ -50,7 +50,7 @@
 "Dodongo Cavern Lower Tunnel":
   dungeon: DC
   exits:
-    "Dodongo Cavern Lower Lizalfos": "can_use_bow || ((has_bombflower || can_use_din) && can_use_slingshot)"
+    "Dodongo Cavern Lower Lizalfos": "can_use_bow || ((has_bombflowers || can_use_din) && can_use_slingshot)"
   #locations:
     #"MQ Dodongo Cavern Tunnel Side Scrub": "has_shield_for_scrub || has_ranged_weapon || can_hammer || has_nuts"
 "Dodongo Cavern Lower Lizalfos":
@@ -59,11 +59,12 @@
     "Dodongo Cavern Lower Tunnel": "can_use_sticks || has_weapon || can_use_slingshot"
     "Dodongo Cavern Poe Room": "can_use_sticks || has_weapon || can_use_slingshot"
 "Dodongo Cavern Poe Room":
+  dungeon: DC
   exits:
     "Dodongo Cavern Lower Lizalfos": "true"
-    "Dodongo Cavern Bomb Bag Ledge": "can_use_bow || has_bombflower || can_use_din"
+    "Dodongo Cavern Bomb Bag Ledge": "can_use_bow || has_bombflowers || can_use_din"
   locations:
-    "MQ Dodongo Cavern GS Poe Room Side": "can_collect_distance && (can_use_bow || has_bombflower || can_use_din)"
+    "MQ Dodongo Cavern GS Poe Room Side": "can_collect_distance && (can_use_bow || has_bombflowers || can_use_din)"
 "Dodongo Cavern Bomb Bag Ledge":
   dungeon: DC
   exits:
