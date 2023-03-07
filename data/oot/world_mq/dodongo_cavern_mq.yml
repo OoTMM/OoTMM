@@ -50,7 +50,7 @@
 "Dodongo Cavern Lower Tunnel":
   dungeon: DC
   exits:
-    "Dodongo Cavern Lower Lizalfos": "can_use_bow || ((has_bombflower s|| can_use_din) && can_use_slingshot)"
+    "Dodongo Cavern Lower Lizalfos": "can_use_bow || ((has_bombflowers || can_use_din) && can_use_slingshot)"
   #locations:
     #"MQ Dodongo Cavern Tunnel Side Scrub": "has_shield_for_scrub || has_ranged_weapon || can_hammer || has_nuts"
 "Dodongo Cavern Lower Lizalfos":
