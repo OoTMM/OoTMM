@@ -8,7 +8,7 @@
   exits:
     "Deku Tree Compass Room": "can_use_bow || (can_use_slingshot && (can_use_sticks || can_use_din))"
     "Deku Tree Water Room": "(can_use_slingshot || can_use_bow) && (can_use_sticks || has_fire)"
-    "Deku Tree Basement Ledge": "is_adult || event(DEKU_BLOCK)"
+    "Deku Tree Basement Ledge": "is_adult || event(DEKU_BLOCK) || trick(OOT_DEKU_SKIP)"
   events:
     STICKS: "has_weapon || can_boomerang"
     NUTS: "can_kill_baba_nuts"
@@ -29,23 +29,24 @@
   dungeon: DT
   exits:
     "Deku Tree Lobby": "true"
-    "Deku Tree Water Room Back": "is_child"
+    "Deku Tree Water Room Back": "is_child || can_longshot || (can_hookshot && has_iron_boots)"
   locations:
     "MQ Deku Tree Before Water Platform Chest": "true"
 "Deku Tree Water Room Back":
   dungeon: DT
   exits:
-    "Deku Tree Backrooms": "can_use_sticks || can_use_din"
+    "Deku Tree Backrooms": "can_use_sticks || has_fire"
   locations:
     "MQ Deku Tree After Water Platform Chest": "can_play(SONG_TIME)"
+    "MQ Deku Tree Before Water Platform Chest": "true"
 "Deku Tree Backrooms":
   dungeon: DT
   exits:
     "Deku Tree Water Room Back": "has_weapon || has_ranged_weapon_child" #Judgment call, this fight is way too big for sticks and nuts to be forced.
     "Deku Tree Basement Ledge": "can_use_sticks || can_use_din"
   locations:
-    "MQ Deku Tree GS Song of Time Blocks": "can_play(SONG_TIME) && can_boomerang"
-    "MQ Deku Tree GS Back Room": "(can_use_sticks || can_use_din) && can_boomerang"
+    "MQ Deku Tree GS Song of Time Blocks": "(can_play(SONG_TIME) && can_collect_distance) || can_longshot"
+    "MQ Deku Tree GS Back Room": "(can_use_sticks || has_fire) && can_collect_distance"
 "Deku Tree Basement Ledge":
   dungeon: DT
   exits:
@@ -54,7 +55,7 @@
   events:
     DEKU_BLOCK: "true"
   #locations:
-    #"MQ Deku Tree Scrub": "has_shield_for_scrub || has_ranged_weapon || can_hammer"
+    #"MQ Deku Tree Scrub": "has_shield_for_scrub || has_ranged_weapon || can_hammer || has_nuts"
 "Deku Tree Before Boss":
   dungeon: DT
   exits:
