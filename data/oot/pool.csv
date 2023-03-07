@@ -483,3 +483,19 @@ MQ Dodongo Cavern GS Larve Room,                      gs,             NONE,     
 MQ Dodongo Cavern GS Upper Lizalfos,                  gs,             NONE,                 DODONGO_CAVERN,                 0x12,                       GS_TOKEN
 MQ Dodongo Cavern GS Poe Room Side,                   gs,             NONE,                 DODONGO_CAVERN,                 0x11,                       GS_TOKEN
 MQ Dodongo Cavern GS Near Boss,                       gs,             NONE,                 DODONGO_CAVERN,                 0x10,                       GS_TOKEN
+MQ Jabu-Jabu Map Chest,                               chest,          NONE,                 INSIDE_JABU_JABU,               0x03,                       MAP_JJ
+MQ Jabu-Jabu Entry Chest,                             chest,          NONE,                 INSIDE_JABU_JABU,               0x05,                       NUTS_5
+MQ Jabu-Jabu Compass Chest,                           chest,          NONE,                 INSIDE_JABU_JABU,               0x00,                       COMPASS_JJ
+MQ Jabu-Jabu Second Room B1 Chest,                    chest,          NONE,                 INSIDE_JABU_JABU,               0x02,                       NUTS_5
+MQ Jabu-Jabu Second Room 1F Chest,                    chest,          NONE,                 INSIDE_JABU_JABU,               0x07,                       RECOVERY_HEART
+MQ Jabu-Jabu Third Room West Chest,                   chest,          NONE,                 INSIDE_JABU_JABU,               0x04,                       BOMBCHU_5
+MQ Jabu-Jabu Third Room East Chest,                   chest,          NONE,                 INSIDE_JABU_JABU,               0x08,                       NUTS_5
+MQ Jabu-Jabu SoT Room Lower Chest,                    chest,          NONE,                 INSIDE_JABU_JABU,               0x09,                       STICK
+MQ Jabu-Jabu Boomerang Chest,                         chest,          NONE,                 INSIDE_JABU_JABU,               0x06,                       BOOMERANG
+MQ Jabu-Jabu Back Chest,                              chest,          NONE,                 INSIDE_JABU_JABU,               0x01,                       NUTS_5
+MQ Jabu-Jabu Pre-Boss Chest,                          chest,          NONE,                 INSIDE_JABU_JABU,               0x0a,                       RUPEE_BLUE
+MQ Jabu-Jabu GS SoT Block,                            gs,             NONE,                 INSIDE_JABU_JABU,               0x1a,                       GS_TOKEN
+MQ Jabu-Jabu GS Back,                                 gs,             NONE,                 INSIDE_JABU_JABU,               0x18,                       GS_TOKEN
+MQ Jabu-Jabu GS Basement Side Room,                   gs,             NONE,                 INSIDE_JABU_JABU,               0x1b,                       GS_TOKEN
+MQ Jabu-Jabu GS Pre-Boss,                             gs,             NONE,                 INSIDE_JABU_JABU,               0x19,                       GS_TOKEN
+MQ Jabu-Jabu Cow,                                     cow,            NONE,                 INSIDE_JABU_JABU,               0x09,                       MILK
