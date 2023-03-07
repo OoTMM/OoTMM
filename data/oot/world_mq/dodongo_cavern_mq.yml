@@ -36,7 +36,6 @@
   dungeon: DC
   exits:
     "Dodongo Cavern Upper Ledges": "can_use_sticks || has_weapon || can_use_slingshot"
-    "Dodongo Cavern Lower Lizalfos": "has_explosives_or_hammer"
   locations:
     "MQ Dodongo Cavern GS Upper Lizalfos": "has_explosives_or_hammer"
 "Dodongo Cavern Upper Ledges":
