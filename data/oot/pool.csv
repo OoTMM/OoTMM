@@ -499,3 +499,11 @@ MQ Jabu-Jabu GS Back,                                 gs,             NONE,     
 MQ Jabu-Jabu GS Basement Side Room,                   gs,             NONE,                 INSIDE_JABU_JABU,               0x1b,                       GS_TOKEN
 MQ Jabu-Jabu GS Pre-Boss,                             gs,             NONE,                 INSIDE_JABU_JABU,               0x19,                       GS_TOKEN
 MQ Jabu-Jabu Cow,                                     cow,            NONE,                 INSIDE_JABU_JABU,               0x09,                       MILK
+MQ Bottom of the Well Map Chest,                      chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x03,                       MAP_BOTW
+MQ Bottom of the Well Compass Chest,                  chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x02,                       COMPASS_BOTW
+MQ Bottom of the Well Lens Chest,                     chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x01,                       LENS
+MQ Bottom of the Well Dead Hand Key,                  collectible,    NONE,                 BOTTOM_OF_THE_WELL,             0x02,                       SMALL_KEY_BOTW
+MQ Bottom of the Well East Middle Room Key,           collectible,    NONE,                 BOTTOM_OF_THE_WELL,             0x01,                       SMALL_KEY_BOTW
+MQ Bottom of the Well GS Basement,                    gs,             NONE,                 BOTTOM_OF_THE_WELL,             0x48,                       GS_TOKEN
+MQ Bottom of the Well GS West Middle Room,            gs,             NONE,                 BOTTOM_OF_THE_WELL,             0x49,                       GS_TOKEN
+MQ Bottom of the Well GS Coffin Room,                 gs,             NONE,                 BOTTOM_OF_THE_WELL,             0x4a,                       GS_TOKEN
