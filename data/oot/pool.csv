@@ -532,3 +532,20 @@ MQ Forest Temple GS Climb Room,                       gs,             NONE,     
 MQ Forest Temple GS West Garden,                      gs,             NONE,                 TEMPLE_FOREST,                  0x22,                       GS_TOKEN
 MQ Forest Temple GS East Garden,                      gs,             NONE,                 TEMPLE_FOREST,                  0x20,                       GS_TOKEN
 MQ Forest Temple GS Well,                             gs,             NONE,                 TEMPLE_FOREST,                  0x23,                       GS_TOKEN
+MQ Fire Temple Early Lower Left Chest,                chest,          NONE,                 TEMPLE_FIRE,                    0x02,                       RUPEE_BLUE
+MQ Fire Temple Pre-Boss Chest,                        chest,          NONE,                 TEMPLE_FIRE,                    0x07,                       SMALL_KEY_FIRE
+MQ Fire Temple Hammer Chest,                          chest,          NONE,                 TEMPLE_FIRE,                    0x00,                       HAMMER
+MQ Fire Temple Map Chest,                             chest,          NONE,                 TEMPLE_FIRE,                    0x0c,                       MAP_FIRE
+MQ Fire Temple Boss Key Chest,                        chest,          NONE,                 TEMPLE_FIRE,                    0x04,                       BOSS_KEY_FIRE
+MQ Fire Temple 1f Lava Room Goron Chest,              chest,          NONE,                 TEMPLE_FIRE,                    0x01,                       SMALL_KEY_FIRE
+MQ Fire Temple Maze Lower Chest,                      chest,          NONE,                 TEMPLE_FIRE,                    0x03,                       BOMBS_5
+MQ Fire Temple Maze Upper Chest,                      chest,          NONE,                 TEMPLE_FIRE,                    0x06,                       BOMBS_5
+MQ Fire Temple Maze Side Room Chest,                  chest,          NONE,                 TEMPLE_FIRE,                    0x08,                       SMALL_KEY_FIRE
+MQ Fire Temple Compass Chest,                         chest,          NONE,                 TEMPLE_FIRE,                    0x0b,                       COMPASS_FIRE
+MQ Fire Temple Topmost Chest,                         chest,          NONE,                 TEMPLE_FIRE,                    0x05,                       SMALL_KEY_FIRE
+MQ Fire Temple Flare Dancer Key,                      collectible,    NONE,                 TEMPLE_FIRE,                    0x1c,                       SMALL_KEY_FIRE
+MQ Fire Temple GS Burning Block,                      gs,             NONE,                 TEMPLE_FIRE,                    0x2a,                       GS_TOKEN
+MQ Fire Temple GS 1f Lava Room,                       gs,             NONE,                 TEMPLE_FIRE,                    0x28,                       GS_TOKEN
+MQ Fire Temple GS Fire Walls Side Room,               gs,             NONE,                 TEMPLE_FIRE,                    0x2c,                       GS_TOKEN
+MQ Fire Temple GS Fire Walls Middle,                  gs,             NONE,                 TEMPLE_FIRE,                    0x2b,                       GS_TOKEN
+MQ Fire Temple GS Topmost,                            gs,             NONE,                 TEMPLE_FIRE,                    0x29,                       GS_TOKEN
