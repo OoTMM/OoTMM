@@ -93,7 +93,7 @@
 "Forest Temple Falling Ceiling":
   dungeon: Forest
   events:
-    FOREST_POE_3: has(SMALL_KEY_FOREST, 6) && can_use_bow
+    FOREST_POE_3: "has(SMALL_KEY_FOREST, 6) && can_use_bow"
   locations:
     "MQ Forest Temple Falling Ceiling Chest": "true"
 "Forest Temple Antichamber":
