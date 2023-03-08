@@ -52,29 +52,29 @@ static int mqDungeonId(GameState_Play* play)
     switch (play->sceneId)
     {
     case SCE_OOT_INSIDE_DEKU_TREE:
-        return 0;
+        return MQ_DEKU_TREE;
     case SCE_OOT_DODONGO_CAVERN:
-        return 1;
+        return MQ_DODONGOS_CAVERN;
     case SCE_OOT_INSIDE_JABU_JABU:
-        return 2;
+        return MQ_JABU_JABU;
     case SCE_OOT_TEMPLE_FOREST:
-        return 3;
+        return MQ_TEMPLE_FOREST;
     case SCE_OOT_TEMPLE_FIRE:
-        return 4;
+        return MQ_TEMPLE_FIRE;
     case SCE_OOT_TEMPLE_WATER:
-        return 5;
+        return MQ_TEMPLE_WATER;
     case SCE_OOT_TEMPLE_SPIRIT:
-        return 6;
+        return MQ_TEMPLE_SPIRIT;
     case SCE_OOT_TEMPLE_SHADOW:
-        return 7;
+        return MQ_TEMPLE_SHADOW;
     case SCE_OOT_BOTTOM_OF_THE_WELL:
-        return 8;
+        return MQ_BOTTOM_OF_THE_WELL;
     case SCE_OOT_ICE_CAVERN:
-        return 9;
+        return MQ_ICE_CAVERN;
     case SCE_OOT_GERUDO_TRAINING_GROUND:
-        return 10;
+        return MQ_GERUDO_TRAINING_GROUNDS;
     case SCE_OOT_INSIDE_GANON_CASTLE:
-        return 11;
+        return MQ_GANON_CASTLE;
     default:
         return -1;
     }
