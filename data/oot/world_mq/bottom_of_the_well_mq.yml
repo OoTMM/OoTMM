@@ -15,4 +15,4 @@
     "MQ Bottom of the Well East Middle Room Key": can_play(SONG_ZELDA)
     "MQ Bottom of the Well GS Basement": "can_damage_skull"
     "MQ Bottom of the Well GS West Middle Room": "can_play(SONG_ZELDA) && has_explosives"
-    "MQ Botto mof the Well GS Coffin Room": "can_damage_skull && has(SMALL_KEY_BOTW, 2)"
+    "MQ Bottom of the Well GS Coffin Room": "can_damage_skull && has(SMALL_KEY_BOTW, 2)"
