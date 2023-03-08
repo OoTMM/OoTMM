@@ -7,11 +7,11 @@ int comboDoorIsUnlocked(GameState_Play* play, int flag)
     sceneId = play->sceneId;
 
     /* Fire temple 1st door */
-    if (sceneId == SCE_OOT_TEMPLE_FIRE && flag == 0x17 && !comboConfig(CFG_SMALL_KEY_SHUFFLE))
+    if (sceneId == SCE_OOT_TEMPLE_FIRE && flag == 0x17 && !comboConfig(CFG_SMALL_KEY_SHUFFLE) && !(gComboData.mq & (1 << MQ_TEMPLE_FIRE)))
         return 1;
 
     /* Water temple water raise door */
-    if (sceneId == SCE_OOT_TEMPLE_WATER && flag == 0x15)
+    if (sceneId == SCE_OOT_TEMPLE_WATER && flag == 0x15 && !(gComboData.mq & (1 << MQ_TEMPLE_WATER)))
         return 1;
 
     /* Ganondorf boss door */
