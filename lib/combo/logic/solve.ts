@@ -4,7 +4,7 @@ import { gameId } from '../util';
 import { Pathfinder, PathfinderState } from './pathfind';
 import { World } from './world';
 import { LogicError, LogicSeedError } from './error';
-import { Items, addItem, combinedItems, itemsArray, removeItem, ITEMS_REQUIRED, isDungeonReward, isGoldToken, isHouseToken, isKey, isStrayFairy, isSmallKey, isGanonBossKey, isRegularBossKey, isTownStrayFairy, isDungeonStrayFairy, isSong, isJunk, isMapCompass, isSmallKeyRegular, isSmallKeyHideout } from './items';
+import { Items, addItem, combinedItems, itemsArray, removeItem, ITEMS_REQUIRED, isDungeonReward, isGoldToken, isHouseToken, isKey, isStrayFairy, isSmallKey, isGanonBossKey, isRegularBossKey, isTownStrayFairy, isDungeonStrayFairy, isSong, isJunk, isMapCompass, isSmallKeyRegular, isSmallKeyHideout, isItemUnlimitedStarting } from './items';
 import { Settings } from '../settings';
 import { Monitor } from '../monitor';
 
@@ -182,6 +182,8 @@ export class LogicPassSolver {
     }
 
     for (const item in this.state.settings.startingItems) {
+      if (isItemUnlimitedStarting(item))
+        continue;
       const count = this.state.settings.startingItems[item];
       for (let i = 0; i < count; ++i) {
         removeItemPools(pools, item);

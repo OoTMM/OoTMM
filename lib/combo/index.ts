@@ -6,7 +6,7 @@ import { Monitor, MonitorCallbacks } from './monitor';
 import { SETTINGS, DEFAULT_SETTINGS, SETTINGS_CATEGORIES, Settings, TRICKS } from './settings';
 import { worldState } from './logic';
 import { itemName } from './names';
-import { addItem, isDungeonItem, isDungeonReward, isJunk, isStrayFairy, isToken, Items } from './logic/items';
+import { addItem, isDungeonItem, isDungeonReward, isItemUnlimitedStarting, isJunk, isStrayFairy, isToken, Items } from './logic/items';
 import { EXTRA_ITEMS } from './logic/solve';
 import { isShuffled } from './logic/is-shuffled';
 
@@ -52,6 +52,16 @@ export const itemPool = (aSettings: Partial<Settings>) => {
   for (const item of rawItems) {
     addItem(items, item);
   }
+
+  /* Add unlimited consumables */
+  for (const loc in world.checks) {
+    const check = world.checks[loc];
+    const item = check.item;
+    if (isItemUnlimitedStarting(item)) {
+      items[item] = 999;
+    }
+  }
+
   return items;
 }
 
