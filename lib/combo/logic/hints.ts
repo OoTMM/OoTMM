@@ -46,9 +46,9 @@ const HINTS_ITEMS_SOMETIMES = [
   'OOT_RAVAGED_VILLAGE',
   'OOT_ZORA_KING',
   'OOT_GANON_FAIRY',
-  //'OOT_TEMPLE_FIRE_HAMMER',
-  //'OOT_TEMPLE_FIRE_SCARECROW',
-  //'OOT_GTG_WATER',
+  'OOT_TEMPLE_FIRE_HAMMER',
+  'OOT_TEMPLE_FIRE_SCARECROW',
+  'OOT_GTG_WATER',
   'OOT_HAUNTED_WASTELAND',
   'OOT_GERUDO_ARCHERY',
   'MM_BANK_3',
@@ -280,6 +280,9 @@ export class LogicPassHints {
         break;
       }
       const locations = this.state.world.checkHints[checkHint];
+      if (!locations) {
+        continue;
+      }
       if (locations.every(l => this.state.settings.junkLocations.includes(l))) {
         continue;
       }
