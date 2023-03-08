@@ -17,7 +17,7 @@
     "Fire Temple Upper Lobby": "true"
     "Fire Temple Boss": "has(BOSS_KEY_FIRE) && (event(FIRE_TEMPLE_PILLAR_HAMMER) || has_hover_boots)"
   locations:
-    "MQ Fire Temple Pre-Boss Chest": "has_fire && can_use_bow"
+    "MQ Fire Temple Pre-Boss Chest": "has_fire && (can_use_bow || has_tunic_goron_strict)"
 "Fire Temple Vanilla Hammer Loop":
   dungeon: Fire
   locations:
@@ -29,7 +29,7 @@
     "Fire Temple Upper Lobby": "true"
     "Fire Temple Maze Lower": "has_tunic_goron_strict && has(SMALL_KEY_FIRE, 2) && has_fire"
   locations:
-    "MQ Fire Temple Boss Key Chest": "has_fire && can_use_bow && can_hookshot"
+    "MQ Fire Temple Boss Key Chest": "has_fire && can_hookshot"
     "MQ Fire Temple 1f Lava Room Goron Chest": "has_fire && can_hookshot && has_explosives"
     "MQ Fire Temple GS 1f Lava Room": "true"
 "Fire Temple Maze Lower":
