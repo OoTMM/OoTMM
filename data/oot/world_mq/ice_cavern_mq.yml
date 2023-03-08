@@ -12,7 +12,7 @@
 "Ice Cavern Map Room":
   dungeon: IC
   events:
-    "BLUE_FIRE": "has_bottle"
+    BLUE_FIRE: "has_bottle"
   locations:
     "MQ Ice Cavern Map Chest": "event(BLUE_FIRE)"
 "Ice Cavern Compass Room":
