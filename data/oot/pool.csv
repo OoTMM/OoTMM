@@ -515,3 +515,20 @@ MQ Ice Cavern Sheik Song,                             npc,            NONE,     
 MQ Ice Cavern GS Compass Room,                        gs,             NONE,                 ICE_CAVERN,                     0x51,                       GS_TOKEN
 MQ Ice Cavern GS Scarecrow,                           gs,             NONE,                 ICE_CAVERN,                     0x50,                       GS_TOKEN
 MQ Ice Cavern GS Clear Blocks,                        gs,             NONE,                 ICE_CAVERN,                     0x52,                       GS_TOKEN
+MQ Forest Temple First Room Chest,                    chest,          NONE,                 TEMPLE_FOREST,                  0x03,                       SMALL_KEY_FOREST
+MQ Forest Temple Wolfos Chest,                        chest,          NONE,                 TEMPLE_FOREST,                  0x00,                       SMALL_KEY_FOREST
+MQ Forest Temple Boss Key Chest,                      chest,          NONE,                 TEMPLE_FOREST,                  0x0e,                       BOSS_KEY_FOREST
+MQ Forest Temple ReDead Chest,                        chest,          NONE,                 TEMPLE_FOREST,                  0x02,                       SMALL_KEY_FOREST
+MQ Forest Temple Well Chest,                          chest,          NONE,                 TEMPLE_FOREST,                  0x09,                       SMALL_KEY_FOREST
+MQ Forest Temple East Garden High Ledge Chest,        chest,          NONE,                 TEMPLE_FOREST,                  0x05,                       SMALL_KEY_FOREST
+MQ Forest Temple East Garden Ledge Chest,             chest,          NONE,                 TEMPLE_FOREST,                  0x01,                       SMALL_KEY_FOREST
+MQ Forest Temple Map Chest,                           chest,          NONE,                 TEMPLE_FOREST,                  0x0d,                       MAP_FOREST
+MQ Forest Temple Bow Chest,                           chest,          NONE,                 TEMPLE_FOREST,                  0x0c,                       BOW
+MQ Forest Temple Compass Chest,                       chest,          NONE,                 TEMPLE_FOREST,                  0x0f,                       COMPASS_FOREST
+MQ Forest Temple Falling Ceiling Chest,               chest,          NONE,                 TEMPLE_FOREST,                  0x06,                       ARROWS_5
+MQ Forest Temple Antichamber,                         chest,          NONE,                 TEMPLE_FOREST,                  0x0b,                       ARROWS_5
+MQ Forest Temple GS Entryway,                         gs,             NONE,                 TEMPLE_FOREST,                  0x21,                       GS_TOKEN
+MQ Forest Temple GS Climb Room,                       gs,             NONE,                 TEMPLE_FOREST,                  0x24,                       GS_TOKEN
+MQ Forest Temple GS West Garden,                      gs,             NONE,                 TEMPLE_FOREST,                  0x22,                       GS_TOKEN
+MQ Forest Temple GS East Garden,                      gs,             NONE,                 TEMPLE_FOREST,                  0x20,                       GS_TOKEN
+MQ Forest Temple GS Well,                             gs,             NONE,                 TEMPLE_FOREST,                  0x23,                       GS_TOKEN
