@@ -1,14 +1,29 @@
 "SPAWN":
   region: NONE
   exits:
-    "EGGS": "(is_child || event(TIME_TRAVEL))"
-    "Link's House": "is_child"
-    "Temple of Time": "(is_adult && event(TIME_TRAVEL)) || (is_child && can_play(SONG_TP_LIGHT))"
-    "Sacred Meadow": "(is_child || event(TIME_TRAVEL)) && can_play(SONG_TP_FOREST)"
-    "Death Mountain Crater Warp": "(is_child || event(TIME_TRAVEL)) && can_play(SONG_TP_FIRE)"
-    "Lake Hylia": "(is_child || event(TIME_TRAVEL)) && can_play(SONG_TP_WATER)"
-    "Graveyard Upper": "(is_child || event(TIME_TRAVEL)) && can_play(SONG_TP_SHADOW)"
-    "Desert Colossus": "(is_child || event(TIME_TRAVEL)) && can_play(SONG_TP_SPIRIT)"
+    "SPAWN CHILD": "is_child"
+    "SPAWN ADULT": "is_adult && event(TIME_TRAVEL)"
+"SPAWN CHILD":
+  region: NONE
+  exits:
+    "SONGS": "true"
+    "EGGS": "true"
+    "Link's House": "true"
+"SPAWN ADULT":
+  region: NONE
+  exits:
+    "SONGS": "true"
+    "EGGS": "true"
+    "Temple of Time": "true"
+"SONGS":
+  region: NONE
+  exits:
+    "Temple of Time": "can_play(SONG_TP_LIGHT)"
+    "Sacred Meadow": "can_play(SONG_TP_FOREST)"
+    "Death Mountain Crater Warp": "can_play(SONG_TP_FIRE)"
+    "Lake Hylia": "can_play(SONG_TP_WATER)"
+    "Graveyard Upper": "can_play(SONG_TP_SHADOW)"
+    "Desert Colossus": "can_play(SONG_TP_SPIRIT)"
 "EGGS":
   region: EGGS
   locations:
