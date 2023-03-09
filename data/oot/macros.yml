@@ -50,7 +50,7 @@
 "can_dive_small": "has(SCALE) || has_iron_boots"
 "can_dive_big": "has(SCALE, 2) || has_iron_boots"
 "has_shield_for_scrubs": "cond(is_adult, has(SHIELD_HYLIAN), has(SHIELD_DEKU))"
-"has_shield": "has(SHIELD_HYLIAN) || has_mirror_shield || (is_child && has(SHIELD_DEKU))" #should this also have cond for progressive?
+"has_shield": "has(SHIELD_HYLIAN) || has_mirror_shield || (is_child && has(SHIELD_DEKU))"
 "can_lift_silver": "is_adult && has(STRENGTH, 2)"
 "can_lift_gold": "is_adult && has(STRENGTH, 3)"
 "can_ride_bean(x)": "is_adult && event(x)"
@@ -62,6 +62,6 @@
 "can_use_sticks": "is_child && has_sticks"
 "has_blue_fire": "has_bottle && (event(BLUE_FIRE) || has(BLUE_FIRE))"
 "can_kill_baba_sticks": "can_boomerang || (has_weapon && (is_child || has_nuts || can_hookshot || can_hammer))"
-"can_kill_baba_nuts": "has_weapon || has_explosives || can_use_slingshot || can_use_din"
+"can_kill_baba_nuts": "has_weapon || has_explosives || can_use_slingshot"
 "can_damage": "has_weapon || can_use_sticks || has_explosives || can_use_slingshot || can_use_din"
 "can_damage_skull": "can_damage || can_collect_distance"
