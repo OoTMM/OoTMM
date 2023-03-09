@@ -11,7 +11,9 @@ typedef struct PACKED ALIGNED(4)
     OSMesgQueue objMsgQueue;
     OSMesg      objMsg;
     void*       objBuffer;
-    char        unk_1fc[0x870];
+    char        unk_1fc[0x198];
+    u8          csMode;
+    char        unk_395[0x6D7];
     u32         state;
     u32         state2;
     u32         state3;

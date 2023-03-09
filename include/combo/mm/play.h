@@ -17,7 +17,9 @@ _Static_assert(sizeof(SramContext) == 0x28, "MM SramContext size is wrong");
 
 typedef struct PACKED
 {
-    char unk_000[0x264];
+    char unk_000[0x222];
+    s16 unk_222;
+    char unk_224[0x40];
     struct PACKED
     {
         s16 screenFill;
@@ -93,6 +95,27 @@ EnvironmentContext;
 
 _Static_assert(sizeof(EnvironmentContext) == 0x100, "MM EnvironmentContext size is wrong");
 
+typedef enum {
+    /*  0 */ OCARINA_BTN_A,
+    /*  1 */ OCARINA_BTN_C_DOWN,
+    /*  2 */ OCARINA_BTN_C_RIGHT,
+    /*  3 */ OCARINA_BTN_C_LEFT,
+    /*  4 */ OCARINA_BTN_C_UP,
+    /*  5 */ OCARINA_BTN_C_RIGHT_OR_C_LEFT,
+    /* -1 */ OCARINA_BTN_INVALID = 0xFF
+} OcarinaButtonIndex;
+
+typedef struct {
+    /* 0x0 */ u8 numButtons;
+    /* 0x1 */ u8 buttonIndex[8];
+} OcarinaSongButtons; // size = 0x9
+
+typedef struct OcarinaStaff {
+    /* 0x0 */ u8 buttonIndex;
+    /* 0x1 */ u8 state;   // original name: "status"
+    /* 0x2 */ u8 pos;     // original name: "locate"
+} OcarinaStaff; // size = 0x3
+
 typedef struct PACKED ALIGNED(4) GameState_Play
 {
     GameState           gs;
@@ -103,7 +126,9 @@ typedef struct PACKED ALIGNED(4) GameState_Play
     SramContext         sramCtx;
     char                unk_046e0[0x11c10];
     char                textBuffer[4]; /* Real size unknown */
-    char                unk_162f4[0x0063e];
+    char                unk_162f4[0x00514];
+    OcarinaStaff*       ocarinaStaff;
+    char                unk_1680C[0x00126];
     u16                 ocarinaMode;
     char                unk_16934[2];
     s16                 ocarinaSong;
@@ -113,7 +138,9 @@ typedef struct PACKED ALIGNED(4) GameState_Play
     PauseContext        pauseCtx;
     GameOverContext     gameOverCtx;
     EnvironmentContext  envCtx;
-    char                unk_17104[0x01771];
+    char                unk_17104[0x01698];
+    s16                 playerActorCsIds[10];
+    char                unk_187B0[0x000C5];
     u8                  transitionType;
     char                unk_18876[0x00004];
     u16                 nextEntrance;
