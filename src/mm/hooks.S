@@ -115,9 +115,9 @@ PATCH_END
 Ocarina_CheckCustomSongs_Hook:
     addiu   sp, sp, -0x18
     sw      ra, 0x0014 (sp)
-
-    jal     Ocarina_CheckCustomSongs
     sw      a0, 0x0018 (sp)
+
+    HOOK_CALL Ocarina_CheckCustomSongs
 
     lw      v0, 0x0018 (sp)
 
@@ -139,10 +139,10 @@ Ocarina_CheckCustomSongs_Hook:
 ;   LUI     S5, 0x801D
 */
 PATCH_START 0x8019BD6C
-    or      a0, ra, zero
-    jal     Ocarina_CheckCustomSongs_Hook
-    nop
-    or      ra, v0, zero
+  or      a0, ra, zero
+  jal     Ocarina_CheckCustomSongs_Hook
+  nop
+  or      ra, v0, zero
 PATCH_END
 
 /*
