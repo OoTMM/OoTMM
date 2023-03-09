@@ -549,3 +549,14 @@ MQ Fire Temple GS 1f Lava Room,                       gs,             NONE,     
 MQ Fire Temple GS Fire Walls Side Room,               gs,             NONE,                 TEMPLE_FIRE,                    0x2c,                       GS_TOKEN
 MQ Fire Temple GS Fire Walls Middle,                  gs,             NONE,                 TEMPLE_FIRE,                    0x2b,                       GS_TOKEN
 MQ Fire Temple GS Topmost,                            gs,             NONE,                 TEMPLE_FIRE,                    0x29,                       GS_TOKEN
+MQ Water Temple Map Chest,                            chest,          NONE,                 TEMPLE_WATER,                   0x02,                       MAP_WATER
+MQ Water Temple Compass Chest,                        chest,          NONE,                 TEMPLE_WATER,                   0x01,                       COMPASS_WATER
+MQ Water Temple Longshot Chest,                       chest,          NONE,                 TEMPLE_WATER,                   0x00,                       HOOKSHOT
+MQ Water Temple Central Pillar Chest,                 chest,          NONE,                 TEMPLE_WATER,                   0x06,                       SMALL_KEY_WATER
+MQ Water Temple Boss Key Chest,                       chest,          NONE,                 TEMPLE_WATER,                   0x05,                       BOSS_KEY_WATER
+MQ Water Temple Side Loop Key,                        collectible,    NONE,                 TEMPLE_WATER,                   0x01,                       SMALL_KEY_WATER
+MQ Water Temple GS Lizalfos Hallway,                  gs,             NONE,                 TEMPLE_WATER,                   0x30,                       GS_TOKEN
+MQ Water Temple GS High Water Changer,                gs,             NONE,                 TEMPLE_WATER,                   0x32,                       GS_TOKEN
+MQ Water Temple GS River,                             gs,             NONE,                 TEMPLE_WATER,                   0x31,                       GS_TOKEN
+MQ Water Temple GS Three Torch,                       gs,             NONE,                 TEMPLE_WATER,                   0x34,                       GS_TOKEN
+MQ Water Temple GS Side Loop,                         gs,             NONE,                 TEMPLE_WATER,                   0x33,                       GS_TOKEN
