@@ -4,6 +4,7 @@
     "TIME_TRAVEL": "can_play(SONG_TIME)"
   exits:
     "INITIAL": "event(TIME_TRAVEL)"
+    "OOT SONGS": "setting(crossWarpOot) && has_ocarina"
 "INITIAL":
   region: CLOCK_TOWN_SOUTH
   exits:

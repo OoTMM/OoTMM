@@ -73,34 +73,37 @@ typedef struct
 }
 OotSaveUpgrades;
 
-typedef struct
+typedef union
 {
-    u32  heartPieces:4;
-    u32  unused:4;
-    u32  goldToken:1;
-    u32  gerudoCard:1;
-    u32  agonyStone:1;
-    u32  stoneSapphire:1;
-    u32  stoneRuby:1;
-    u32  stoneEmerald:1;
-    u32  songStorms:1;
-    u32  songTime:1;
-    u32  songSun:1;
-    u32  songSaria:1;
-    u32  songEpona:1;
-    u32  songZelda:1;
-    u32  songTpLight:1;
-    u32  songTpShadow:1;
-    u32  songTpSpirit:1;
-    u32  songTpWater:1;
-    u32  songTpFire:1;
-    u32  songTpForest:1;
-    u32  medallionLight:1;
-    u32  medallionShadow:1;
-    u32  medallionSpirit:1;
-    u32  medallionWater:1;
-    u32  medallionFire:1;
-    u32  medallionForest:1;
+    struct {
+        u32  heartPieces:4;
+        u32  unused:4;
+        u32  goldToken:1;
+        u32  gerudoCard:1;
+        u32  agonyStone:1;
+        u32  stoneSapphire:1;
+        u32  stoneRuby:1;
+        u32  stoneEmerald:1;
+        u32  songStorms:1;
+        u32  songTime:1;
+        u32  songSun:1;
+        u32  songSaria:1;
+        u32  songEpona:1;
+        u32  songZelda:1;
+        u32  songTpLight:1;
+        u32  songTpShadow:1;
+        u32  songTpSpirit:1;
+        u32  songTpWater:1;
+        u32  songTpFire:1;
+        u32  songTpForest:1;
+        u32  medallionLight:1;
+        u32  medallionShadow:1;
+        u32  medallionSpirit:1;
+        u32  medallionWater:1;
+        u32  medallionFire:1;
+        u32  medallionForest:1;
+    };
+    u32 value;
 }
 OotSaveQuest;
 
