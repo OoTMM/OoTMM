@@ -18,16 +18,16 @@ u8 Ocarina_BeforeSongPlayingProcessed(GameState_Play* ctxt) {
         PlaySound(0x4807); // NA_SE_SY_TRE_BOX_APPEAR
 
         if (ctxt->interfaceCtx.restrictions.songOfSoaring) {
-            DisplayTextBox2(ctxt, 0x1B95);
+            PlayerDisplayTextBox(ctxt, 0x1B95, NULL);
             ctxt->ocarinaMode = 0x27; // OCARINA_MODE_PROCESS_RESTRICTED_SONG
             return 0xFE;
         }
 
         u8 songIndex = songPlayed - 0x80;
 
-        DisplayTextBox2(ctxt, 0x1B93); // Soar to X?
+        PlayerDisplayTextBox(ctxt, 0x1B93, NULL); // Soar to X?
         b = ctxt->textBuffer;
-        comboTextAppendHeader(&b);
+        b += 11;
         comboTextAppendStr(&b, warpTexts[songIndex]);
         if (songIndex != 1) {
             comboTextAppendStr(&b, TEXT_NL " ");
