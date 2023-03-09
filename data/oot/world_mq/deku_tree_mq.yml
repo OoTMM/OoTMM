@@ -31,7 +31,9 @@
   dungeon: DT
   exits:
     "Deku Tree Lobby": "true"
-    "Deku Tree Water Room Back": "is_child || can_longshot || (can_hookshot && has_iron_boots)" # is_child also requires deku or hylian shield, if you consider rolling a trick
+    "Deku Tree Water Room Back": "is_child || can_longshot || (can_hookshot && has_iron_boots)"
+    # "Deku Tree Water Room Back": "(is_child && (has(SHIELD_DEKU) || has(SHIELD_HYLIAN) || can_longshot || (can_hookshot && has_iron_boots)"
+    # Rolling below the log might not be as intuitive, if so crouching with shield is a better option.
   locations:
     "MQ Deku Tree Before Water Platform Chest": "true"
 "Deku Tree Water Room Back":
