@@ -41,7 +41,7 @@
 "Shadow Temple Invisible Spike Floor":
   dungeon: Shadow
   exits:
-    "Shadow Temple Wind Tunnel": "has(SMALL_KEY_SHADOW, 4), && can_hookshot"
+    "Shadow Temple Wind Tunnel": "has(SMALL_KEY_SHADOW, 4) && can_hookshot"
   locations:
     "MQ Shadow Temple Invisible Spike Floor Chest": "true"
     "MQ Shadow Temple Stalfos Room Chest": "can_hookshot"
