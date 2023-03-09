@@ -6,24 +6,27 @@
 "SPAWN CHILD":
   region: NONE
   exits:
-    "SONGS": "true"
-    "EGGS": "true"
+    "SPAWN COMMON": "true"
     "Link's House": "true"
 "SPAWN ADULT":
   region: NONE
   exits:
-    "SONGS": "true"
-    "EGGS": "true"
+    "SPAWN COMMON": "true"
     "Temple of Time": "true"
+"SPAWN COMMON":
+  region: NONE
+  exits:
+    "SONGS": "has(OCARINA)"
+    "EGGS": "true"
 "SONGS":
   region: NONE
   exits:
-    "Temple of Time": "can_play(SONG_TP_LIGHT)"
-    "Sacred Meadow": "can_play(SONG_TP_FOREST)"
-    "Death Mountain Crater Warp": "can_play(SONG_TP_FIRE)"
-    "Lake Hylia": "can_play(SONG_TP_WATER)"
-    "Graveyard Upper": "can_play(SONG_TP_SHADOW)"
-    "Desert Colossus": "can_play(SONG_TP_SPIRIT)"
+    "Temple of Time": "has(SONG_TP_LIGHT)"
+    "Sacred Meadow": "has(SONG_TP_FOREST)"
+    "Death Mountain Crater Warp": "has(SONG_TP_FIRE)"
+    "Lake Hylia": "has(SONG_TP_WATER)"
+    "Graveyard Upper": "has(SONG_TP_SHADOW)"
+    "Desert Colossus": "has(SONG_TP_SPIRIT)"
 "EGGS":
   region: EGGS
   locations:

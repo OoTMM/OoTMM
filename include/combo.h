@@ -147,7 +147,7 @@ void comboCopyMmSave(int dst, int src);
 void comboCreateSaveMM(void);
 
 /* Switch */
-void comboGameSwitch(GameState_Play* play, s32 entrance);
+NORETURN void comboGameSwitch(GameState_Play* play, s32 entrance);
 
 /* Override */
 #define OV_CHEST        0

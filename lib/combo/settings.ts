@@ -166,6 +166,12 @@ export const SETTINGS = [{
   ],
   default: 'closed'
 }, {
+  key: 'crossWarpOot',
+  name: 'Cross-Games OoT Warp Songs',
+  category: 'main',
+  type: 'boolean',
+  default: false
+}, {
   key: 'erBoss',
   name: 'Boss Entrance Shuffle',
   category: 'entrances',
