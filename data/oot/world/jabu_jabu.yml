@@ -7,7 +7,7 @@
   dungeon: JJ
   exits:
     "Jabu-Jabu": "true"
-    "Jabu-Jabu Boss": "can_boomerang"
+    "Jabu-Jabu Pre-Boss": "can_boomerang"
   locations:
     "Jabu-Jabu Map Chest": "can_boomerang"
     "Jabu-Jabu Compass Chest": "can_boomerang"
@@ -16,3 +16,8 @@
     "Jabu-Jabu GS Bottom Upper": "can_collect_distance"
     "Jabu-Jabu GS Water Switch": "true"
     "Jabu-Jabu GS Near Boss": "can_boomerang"
+"Jabu-Jabu Pre-Boss":
+  dungeon: JJ
+  exits:
+    "Jabu-Jabu Boss": "true"
+    "Jabu-Jabu Main": "true"
