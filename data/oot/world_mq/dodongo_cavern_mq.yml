@@ -8,7 +8,7 @@
   exits:
     "Dodongo Cavern": "true"
     "Dodongo Cavern Skull": "has_explosives"
-    "Dodongo Cavern Upper Staircase": "has_bombflowers && (is_adult || (has_nuts || has_weapon || has_explosives || has_ranged_weapon_child))"
+    "Dodongo Cavern Upper Staircase": "can_use_din || has_explosives || has(STRENGTH) && (can_use_sticks || (has_weapon && is_child) || can_boomerang)"
     "Dodongo Cavern Upper Ledges": "has_explosives_or_hammer"
     "Dodongo Cavern Lower Tunnel": "has_explosives_or_hammer || event(DC_MQ_SHORTCUT)"
     "Dodongo Cavern Bomb Bag Ledge": "is_adult"
@@ -16,7 +16,7 @@
     STICKS: "has_weapon || can_boomerang"
   locations:
     "MQ Dodongo Cavern Map Chest": "has_bombflowers || can_hammer"
-    "MQ Dodongo Cavern GS Time Blocks": "can_play(SONG_TIME)"
+    "MQ Dodongo Cavern GS Time Blocks": "can_play(SONG_TIME) && can_damage"
     #"MQ Dodongo Cavern Lobby Scrub Front": "has_shield_for_scrub || has_ranged_weapon || can_hammer || has_nuts"
     #"MQ Dodongo Cavern Lobby Scrub Back": "has_shield_for_scrub || has_ranged_weapon || can_hammer || has_nuts"
   gossip:
