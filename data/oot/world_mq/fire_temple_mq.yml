@@ -5,7 +5,7 @@
     "Fire Temple Upper Lobby": "is_adult && has_tunic_goron"
     "Fire Temple Vanilla Hammer Loop": "has(SMALL_KEY_FIRE, 5) && has_weapon && (has_explosives_or_hammer || can_hookshot)"
   locations:
-    "MQ Fire Temple Early Lower Left Chest": "has_weapon || can_use_sticks || can_use_slingshot || has_explosives || can_use_din"
+    "MQ Fire Temple Early Lower Left Chest": "can_damage"
 "Fire Temple Upper Lobby":
   dungeon: Fire
   exits:
