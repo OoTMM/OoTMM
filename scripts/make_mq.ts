@@ -176,6 +176,12 @@ function makeScenes() {
         transitionActorCount = headerData1;
         transitionActorOffset = size;
         const actorData = sceneData.subarray(actorListPos, actorListPos + transitionActorCount * 0x10);
+
+        /* Water temple door fix */
+        if (dungeon === 'MIZUsin') {
+          actorData.writeUInt16BE(0x0082, 0x16 * 0x10 + 0xe);
+        }
+
         buffers.push(actorData);
         size += actorData.length;
       }
