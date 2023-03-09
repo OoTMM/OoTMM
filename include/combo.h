@@ -385,6 +385,10 @@ void comboMenuKeysDraw(GameState_Play* play);
 void Shader_Xlu0(GameState_Play* play, s16 shaderId);
 
 #if defined(GAME_MM)
+void Ocarina_HandleWarp(Actor_Player* player, GameState_Play* ctxt);
+#endif
+
+#if defined(GAME_MM)
 extern int gNoTimeFlow;
 #endif
 
