@@ -8,7 +8,7 @@
   exits:
     "Dodongo Cavern": "true"
     "Dodongo Cavern Skull": "has_explosives"
-    "Dodongo Cavern Upper Staircase": "can_use_din || has_explosives || can_hammer || (has_bombflowers && (is_adult || can_boomerang || can_use_slingshot || can_use_sticks || has_nuts))"
+    "Dodongo Cavern Upper Staircase": "has_bombflowers && (is_adult || (has_nuts || has_weapon || has_explosives || has_ranged_weapon_child))"
     "Dodongo Cavern Upper Ledges": "has_explosives_or_hammer"
     "Dodongo Cavern Lower Tunnel": "has_explosives_or_hammer || event(DC_MQ_SHORTCUT)"
     "Dodongo Cavern Bomb Bag Ledge": "is_adult"
@@ -42,6 +42,7 @@
   dungeon: DC
   exits:
     "Dodongo Cavern Upper Lizalfos": "true"
+    "Dodongo Cavern Upper Staircase": "true"
   events:
     "DC_MQ_SHORTCUT": "has_bombflowers || can_hammer"
   locations:
