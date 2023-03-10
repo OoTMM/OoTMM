@@ -15,7 +15,7 @@
   locations:
     "MQ Deku Tree Map Chest": "true"
     "MQ Deku Tree Slingshot Chest": "has_weapon || can_use_sticks || has_ranged_weapon_child" #Bombs and Din's work, but it's horrible.
-    "MQ Deku Tree Slingshot Room Far Chest": "can_use_sticks || has_fire || can_use_bow"
+    "MQ Deku Tree Slingshot Room Far Chest": "can_use_sticks || has_fire || can_use_bow" # yeah, this is not that intuitive
     "MQ Deku Tree Basement Chest": "has_fire_or_sticks || can_use_bow"
     "MQ Deku Tree GS Lobby Crate": "can_damage_skull"
 "Deku Tree Compass Room":
