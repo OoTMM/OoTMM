@@ -161,17 +161,8 @@ static OcarinaSongButtons sWarpSongs[6] = {
 
 void Ocarina_CheckCustomSongs(void)
 {
-    s32* sOcarinaFlags = (s32*)0x801D6FEC;
-    u8* sCurOcarinaSongWithoutMusicStaff = (u8*)0x801D7020;
-    u8* sButtonToPitchMap = (u8*)0x801D7030;
-    u8* sPlayedOcarinaSongIndexPlusOne = (u8*)0x801D8528;
-    u8* sIsOcarinaInputEnabled = (u8*)0x801D6FB4;
-    u32 enabledWarpSongs = (gOotSave.inventory.quest.value >> 6) & 0x3F;
-    u32 pitch;
+    u32 enabledWarpSongs = (gOotSave.inventory.quest.value >> 6) & 0x3f;
     u8 songIndex;
-    u8 j;
-    u8 k;
-    u8 sOcarinaWithoutMusicStaffPos = *(u8*)0x801D7028;
 
     if (!comboConfig(CFG_OOT_CROSS_WARP))
         return;
@@ -179,26 +170,6 @@ void Ocarina_CheckCustomSongs(void)
     for (songIndex = 0; songIndex < 6; songIndex++)
     {
         if (enabledWarpSongs & (1 << songIndex))
-        {
-            for (j = 0, k = 0; j < sWarpSongs[songIndex].numButtons && k == 0 && sOcarinaWithoutMusicStaffPos >= sWarpSongs[songIndex].numButtons;)
-            {
-                pitch = sCurOcarinaSongWithoutMusicStaff[(sOcarinaWithoutMusicStaffPos - sWarpSongs[songIndex].numButtons) + j];
-                if (pitch == sButtonToPitchMap[sWarpSongs[songIndex].buttonIndex[j]])
-                {
-                    j++;
-                }
-                else
-                {
-                    k++;
-                }
-            }
-
-            if (j == sWarpSongs[songIndex].numButtons)
-            {
-                *sPlayedOcarinaSongIndexPlusOne = songIndex + 0x80 + 1;
-                *sIsOcarinaInputEnabled = 0;
-                *sOcarinaFlags = 0;
-            }
-        }
+            comboCheckSong(&sWarpSongs[songIndex], songIndex);
     }
 }

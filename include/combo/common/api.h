@@ -217,4 +217,11 @@ void Shader_MoonTear(GameState_Play*, s16);
 
 void SpawnRoomActors(GameState_Play* play, int id);
 
+extern u8 gPlayedOcarinaSong;
+extern u8 gIsOcarinaEnabled;
+extern u32 gOcarinaFlags;
+extern u8 gOcarinaButtonPitchMap[];
+extern u8 gOcarinaSongBuffer[];
+extern u8 gOcarinaSongBufferCursor;
+
 #endif

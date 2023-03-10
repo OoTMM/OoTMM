@@ -154,3 +154,10 @@ MatrixStackPop = 0x801801cc;
 AddRupees = 0x801159ec;
 
 PlayStoreFlags = 0x80169d40;
+
+gPlayedOcarinaSong = 0x801d8528;
+gIsOcarinaEnabled = 0x801d6fb4;
+gOcarinaFlags = 0x801d6fec;
+gOcarinaButtonPitchMap = 0x801d7030;
+gOcarinaSongBuffer = 0x801d7020;
+gOcarinaSongBufferCursor = 0x801d7028;

@@ -20,6 +20,7 @@
 # include <combo/patch.h>
 # include <combo/npc.h>
 # include <combo/text.h>
+# include <combo/common/ocarina.h>
 
 # if defined(GAME_OOT)
 #  include <combo/oot/play.h>
@@ -391,6 +392,9 @@ void Ocarina_HandleWarp(Actor_Player* player, GameState_Play* ctxt);
 #if defined(GAME_MM)
 extern int gNoTimeFlow;
 #endif
+
+/* Ocarina */
+void comboCheckSong(const OcarinaSongButtons* songButtons, int songIndex);
 
 #else
 # include <combo/asm.h>

@@ -4,6 +4,7 @@
 #include <combo/util.h>
 #include <combo/game_state.h>
 #include <combo/common/actor.h>
+#include <combo/common/ocarina.h>
 
 typedef struct
 {
@@ -94,27 +95,6 @@ typedef struct
 EnvironmentContext;
 
 _Static_assert(sizeof(EnvironmentContext) == 0x100, "MM EnvironmentContext size is wrong");
-
-typedef enum {
-    /*  0 */ OCARINA_BTN_A,
-    /*  1 */ OCARINA_BTN_C_DOWN,
-    /*  2 */ OCARINA_BTN_C_RIGHT,
-    /*  3 */ OCARINA_BTN_C_LEFT,
-    /*  4 */ OCARINA_BTN_C_UP,
-    /*  5 */ OCARINA_BTN_C_RIGHT_OR_C_LEFT,
-    /* -1 */ OCARINA_BTN_INVALID = 0xFF
-} OcarinaButtonIndex;
-
-typedef struct {
-    /* 0x0 */ u8 numButtons;
-    /* 0x1 */ u8 buttonIndex[8];
-} OcarinaSongButtons; // size = 0x9
-
-typedef struct OcarinaStaff {
-    /* 0x0 */ u8 buttonIndex;
-    /* 0x1 */ u8 state;   // original name: "status"
-    /* 0x2 */ u8 pos;     // original name: "locate"
-} OcarinaStaff; // size = 0x3
 
 typedef struct PACKED ALIGNED(4) GameState_Play
 {
