@@ -560,3 +560,28 @@ MQ Water Temple GS High Water Changer,                gs,             NONE,     
 MQ Water Temple GS River,                             gs,             NONE,                 TEMPLE_WATER,                   0x31,                       GS_TOKEN
 MQ Water Temple GS Three Torch,                       gs,             NONE,                 TEMPLE_WATER,                   0x34,                       GS_TOKEN
 MQ Water Temple GS Side Loop,                         gs,             NONE,                 TEMPLE_WATER,                   0x33,                       GS_TOKEN
+MQ Shadow Temple Compass Chest,                       chest,          NONE,                 TEMPLE_SHADOW,                  0x01,                       COMPASS_SHADOW
+MQ Shadow Temple Hover Boots Chest,                   chest,          NONE,                 TEMPLE_SHADOW,                  0x07,                       BOOTS_HOVER
+MQ Shadow Temple First Gibdos Chest,                  chest,          NONE,                 TEMPLE_SHADOW,                  0x03,                       SMALL_KEY_SHADOW
+MQ Shadow Temple Map Chest,                           chest,          NONE,                 TEMPLE_SHADOW,                  0x02,                       MAP_SHADOW
+MQ Shadow Temple Boat Passage Chest,                  chest,          NONE,                 TEMPLE_SHADOW,                  0x0e,                       SMALL_KEY_SHADOW
+MQ Shadow Temple Second Silver Rupee Visible Chest,   chest,          NONE,                 TEMPLE_SHADOW,                  0x0c,                       RUPEE_BLUE
+MQ Shadow Temple Second Silver Rupee Invisible Chest, chest,          NONE,                 TEMPLE_SHADOW,                  0x16,                       SMALL_KEY_SHADOW
+MQ Shadow Temple Huge Pit Silver Rupee Chest,         chest,          NONE,                 TEMPLE_SHADOW,                  0x0f,                       RUPEE_BLUE
+MQ Shadow Temple Spike Curtain Ground Chest,          chest,          NONE,                 TEMPLE_SHADOW,                  0x05,                       ARROWS_10
+MQ Shadow Temple Spike Curtain Upper Cage Chest,      chest,          NONE,                 TEMPLE_SHADOW,                  0x06,                       RUPEE_BLUE
+MQ Shadow Temple Spike Curtain Upper Switch Chest,    chest,          NONE,                 TEMPLE_SHADOW,                  0x04,                       SMALL_KEY_SHADOW
+MQ Shadow Temple Invisible Spike Floor Chest,         chest,          NONE,                 TEMPLE_SHADOW,                  0x09,                       RUPEE_BLUE
+MQ Shadow Temple Stalfos Room Chest,                  chest,          NONE,                 TEMPLE_SHADOW,                  0x10,                       RUPEE_RED
+MQ Shadow Temple Wind Hint Chest,                     chest,          NONE,                 TEMPLE_SHADOW,                  0x15,                       SMALL_KEY_SHADOW
+MQ Shadow Temple After Wind Gibdos Chest,             chest,          NONE,                 TEMPLE_SHADOW,                  0x08,                       RUPEE_BLUE
+MQ Shadow Temple After Wind Bomb Chest,               chest,          NONE,                 TEMPLE_SHADOW,                  0x14,                       ARROWS_5
+MQ Shadow Temple Hidden Dead Hand Chest,              chest,          NONE,                 TEMPLE_SHADOW,                  0x0d,                       ARROWS_10
+MQ Shadow Temple Crushing Wall Left Chest,            chest,          NONE,                 TEMPLE_SHADOW,                  0x0a,                       RUPEE_BLUE
+MQ Shadow Temple Boss Key Chest,                      chest,          NONE,                 TEMPLE_SHADOW,                  0x0b,                       BOSS_KEY_SHADOW
+MQ Shadow Temple Triple Pot Key,                      collectible,    NONE,                 TEMPLE_SHADOW,                  0x06,                       SMALL_KEY_SHADOW
+MQ Shadow Temple GS Spike Curtain,                    gs,             NONE,                 TEMPLE_SHADOW,                  0x41,                       GS_TOKEN
+MQ Shadow Temple GS Wind Hint,                        gs,             NONE,                 TEMPLE_SHADOW,                  0x40,                       GS_TOKEN
+MQ Shadow Temple GS After Wind Bomb,                  gs,             NONE,                 TEMPLE_SHADOW,                  0x43,                       GS_TOKEN
+MQ Shadow Temple GS After Boat,                       gs,             NONE,                 TEMPLE_SHADOW,                  0x44,                       GS_TOKEN
+MQ Shadow Temple GS Pre-Boss,                         gs,             NONE,                 TEMPLE_SHADOW,                  0x42,                       GS_TOKEN
