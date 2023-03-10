@@ -16,7 +16,7 @@
     STICKS: "has_weapon || can_boomerang"
   locations:
     "MQ Dodongo Cavern Map Chest": "has_bombflowers || can_hammer"
-    "MQ Dodongo Cavern GS Time Blocks": "can_play(SONG_TIME)" # not sure about this
+    "MQ Dodongo Cavern GS Time Blocks": "can_play(SONG_TIME) && can_damage_skull"
     #"MQ Dodongo Cavern Lobby Scrub Front": "has_shield_for_scrub || has_ranged_weapon || can_hammer || has_nuts"
     #"MQ Dodongo Cavern Lobby Scrub Back": "has_shield_for_scrub || has_ranged_weapon || can_hammer || has_nuts"
   gossip:
