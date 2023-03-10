@@ -15,8 +15,8 @@
   locations:
     "MQ Deku Tree Map Chest": "true"
     "MQ Deku Tree Slingshot Chest": "has_weapon || can_use_sticks || has_ranged_weapon_child" #Bombs and Din's work, but it's horrible.
-    "MQ Deku Tree Slingshot Room Far Chest": "can_use_sticks || has_fire || can_use_bow" # I think this bow angle is quite intuitive
-    "MQ Deku Tree Basement Chest": "has_fire_or_sticks" # || can_bow, but the angle is quite strict
+    "MQ Deku Tree Slingshot Room Far Chest": "can_use_sticks || has_fire || can_use_bow"
+    "MQ Deku Tree Basement Chest": "has_fire_or_sticks || can_use_bow"
     "MQ Deku Tree GS Lobby Crate": "can_damage_skull"
 "Deku Tree Compass Room":
   dungeon: DT
@@ -24,19 +24,12 @@
     "Deku Tree Lobby": "true"
   locations:
     "MQ Deku Tree Compass Chest": "true"
-    "MQ Deku Tree GS Compass Room": (can_hookshot || can_boomerang) && (has_bombchu || (has_explosives && (is_adult || can_play(SONG_TIME))) || (can_hammer && can_play(SONG_TIME)))
-    # in more readable format:
-    # (hook || boomerang) && (chus || (bomb && (adult || time)) || (hammer && time))
-    # even more readable:
-    # *(collect) && (destroyBoulders)
+    "MQ Deku Tree GS Compass Room": (can_hookshot || can_boomerang) && (has_explosives || (can_hammer && can_play(SONG_TIME)))
 "Deku Tree Water Room":
   dungeon: DT
   exits:
     "Deku Tree Lobby": "true"
-    "Deku Tree Water Room Back": "is_child || can_longshot || (can_hookshot && has_iron_boots)"
-    # We should consider this:
-    # "Deku Tree Water Room Back": "(is_child && (has(SHIELD_DEKU) || has(SHIELD_HYLIAN) || can_longshot || (can_hookshot && has_iron_boots)"
-    # as rolling below the log might not be as intuitive. If so, crouching with either shield is a better option.
+    "Deku Tree Water Room Back": "(is_child && (has(SHIELD_DEKU) || has(SHIELD_HYLIAN) || can_longshot || (can_hookshot && has_iron_boots)"
   locations:
     "MQ Deku Tree Before Water Platform Chest": "true"
 "Deku Tree Water Room Back":
@@ -45,6 +38,7 @@
     "Deku Tree Backrooms": "has_fire_or_sticks"
   locations:
     "MQ Deku Tree After Water Platform Chest": "can_play(SONG_TIME)"
+    "MQ Deku Tree Before Water Platform Chest": "true"
 "Deku Tree Backrooms":
   dungeon: DT
   exits:
@@ -59,7 +53,7 @@
     "Deku Tree Before Boss": "has_fire_or_sticks"
     "Deku Tree Backrooms": "is_child"
   events:
-    DEKU_BLOCK: "true" # Either I don't understand this event, or it is [currently] unnecessary
+    DEKU_BLOCK: "true"
   #locations:
     #"MQ Deku Tree Scrub": "has_shield_for_scrub || has_ranged_weapon || can_hammer || has_nuts"
 "Deku Tree Before Boss":
