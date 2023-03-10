@@ -12,154 +12,16 @@ import { isShuffled } from './is-shuffled'
 
 const VERSION = process.env.VERSION || 'XXX';
 
-const spoilerSectionHeader = (buffer: string[]) => {
-  const lineLength = 75;
-  const delimiter = '=';
-  let line = '';
-  for (let x=0; x<lineLength; x++) {
-    line += delimiter;
-  }
-  buffer.push(line);
-}
-
-const spoilerHeader = (buffer: string[], seed: string) => {
-  buffer.push(`Seed: ${seed}`);
-  buffer.push(`Version: ${VERSION}`);
-  buffer.push('');
-};
-
-const spoilerSettings = (buffer: string[], settings: Settings) => {
-  buffer.push('Settings');
-  for (const s in settings) {
-    if (s === 'startingItems' || s === 'tricks' || s === 'junkLocations') {
-      continue;
-    }
-    const v = (settings as any)[s];
-    buffer.push(`  ${s}: ${v}`);
-  }
-  buffer.push('');
-};
-
-const spoilerTricks = (buffer: string[], tricks: Tricks) => {
-  const tt = Object.keys(tricks).filter(t => tricks[t as Trick]);
-  if (tt.length === 0) {
-    return;
-  }
-  buffer.push('Tricks');
-  for (const t of tt) {
-    buffer.push(`  ${t}`);
-  }
-  buffer.push('');
-};
-
-const spoilerStartingItems = (buffer: string[], startingItems: {[k: string]: number}) => {
-  if (Object.keys(startingItems).length === 0) {
-    return;
-  }
-
-  buffer.push('Starting Items');
-  for (const item in startingItems) {
-    const count = startingItems[item];
-    buffer.push(`  ${item}: ${count}`);
-  }
-  buffer.push('');
-};
-
-const spoilerJunkLocations = (buffer: string[], junkLocations: string[]) => {
-  if (junkLocations.length === 0) {
-    return;
-  }
-
-  buffer.push('Junk Locations');
-  for (const location of junkLocations) {
-    buffer.push(`  ${location}`);
-  }
-  buffer.push('');
-};
-
-const spoilerEntrances = (buffer: string[], entrances: EntranceShuffleResult) => {
-  if (Object.keys(entrances).length === 0) {
-    return;
-  }
-
-  buffer.push('Entrances');
-  for (const srcFrom in entrances.overrides) {
-    const e = entrances.overrides[srcFrom];
-    for (const srcTo in e) {
-      const dest = e[srcTo];
-      buffer.push(`  ${srcFrom}/${srcTo} -> ${dest.from}/${dest.to}`);
-    }
-  }
-  buffer.push('');
-};
-
-const spoilerFoolish = (buffer: string[], foolish: {[k: string]: number}) => {
-  buffer.push('Foolish Regions');
-  for (const region in foolish) {
-    const weight = foolish[region];
-    buffer.push(`  ${region}: ${weight}`);
-  }
-  buffer.push('');
-};
-
-const spoilerHints = (buffer: string[], hints: Hints, placement: ItemPlacement) => {
-  buffer.push('Hints');
-  for (const gossip in hints.gossip) {
-    const h = hints.gossip[gossip];
-    if (h.type === 'hero') {
-      buffer.push(`  ${gossip}: Hero, ${h.region} (${h.location}: ${itemName(placement[h.location])})`);
-    }
-    if (h.type === 'foolish') {
-      buffer.push(`  ${gossip}: Foolish, ${h.region}`);
-    }
-    if (h.type === 'item-exact') {
-      const newNames = h.items.map(itemName);
-      buffer.push(`  ${gossip}: Item-Exact, ${h.check} (${newNames.join(', ')})`);
-    }
-    if (h.type === 'item-region') {
-      buffer.push(`  ${gossip}: Item-Region, ${h.region} (${itemName(h.item)})`);
-    }
-  }
-  buffer.push('');
-};
-
-const spoilerRaw = (buffer: string[], settings: Settings, world: World, placement: ItemPlacement) => {
-  spoilerSectionHeader(buffer);
-  buffer.push('Location List');
-  const regionNames = new Set(Object.values(world.regions));
-  const dungeonLocations = Object.values(world.dungeons).reduce((acc, x) => new Set([...acc, ...x]));
-  regionNames.forEach(region => {
-    const regionalLocations = Object.keys(world.regions)
-      .filter(location => world.regions[location] === region)
-      .filter(location => isShuffled(settings, world, location, dungeonLocations))
-      .map(loc => `    ${loc}: ${itemName(placement[loc])}`);
-    buffer.push(`  ${regionName(region)}:`);
-    buffer.push(regionalLocations.join('\n'));
-    buffer.push('')
-    }
-  )
-};
-
-const spoilerSpheres = (buffer: string[], world: World, placement: ItemPlacement, spheres: string[][]) => {
-  spoilerSectionHeader(buffer);
-  buffer.push('Spheres');
-  for (const i in spheres) {
-    buffer.push(`  Sphere ${i}`);
-    const sphere = spheres[i];
-    for (const loc of sphere) {
-      buffer.push(`    ${loc}: ${itemName(placement[loc])}`);
-    }
-    buffer.push('');
-  }
-};
-
 export class LogicPassSpoiler {
+  private buffer: string[] = [];
+
   constructor(
     private readonly state: {
       world: World,
       items: ItemPlacement,
       analysis: Analysis,
       opts: Options,
+      settings: Settings,
       hints: Hints,
       entrances: EntranceShuffleResult,
       monitor: Monitor,
@@ -167,27 +29,168 @@ export class LogicPassSpoiler {
   ) {
   }
 
+  private writeSectionHeader() {
+    this.buffer.push('='.repeat(75));
+  }
+
+  private writeHeader() {
+    this.buffer.push(`Seed: ${this.state.opts.seed}`);
+    this.buffer.push(`Version: ${VERSION}`);
+    this.buffer.push('');
+  }
+
+  private writeSettings() {
+    this.buffer.push('Settings');
+    for (const s in this.state.settings) {
+      if (s === 'startingItems' || s === 'tricks' || s === 'junkLocations' || s === 'mq') {
+        continue;
+      }
+      const v = (this.state.settings as any)[s];
+      this.buffer.push(`  ${s}: ${v}`);
+    }
+    this.buffer.push('');
+  }
+
+  private writeTricks() {
+    const tt = Object.keys(this.state.settings.tricks).filter(t => this.state.settings.tricks[t as Trick]);
+    if (tt.length === 0) {
+      return;
+    }
+    this.buffer.push('Tricks');
+    for (const t of tt) {
+      this.buffer.push(`  ${t}`);
+    }
+    this.buffer.push('');
+  }
+
+  private writeStartingItems() {
+    const { startingItems } = this.state.settings;
+    if (Object.keys(startingItems).length === 0) {
+      return;
+    }
+
+    this.buffer.push('Starting Items');
+    for (const item in startingItems) {
+      const count = startingItems[item];
+      this.buffer.push(`  ${item}: ${count}`);
+    }
+    this.buffer.push('');
+  }
+
+  private writeJunkLocations() {
+    const { junkLocations } = this.state.settings;
+    if (junkLocations.length === 0) {
+      return;
+    }
+
+    this.buffer.push('Junk Locations');
+    for (const location of junkLocations) {
+      this.buffer.push(`  ${location}`);
+    }
+    this.buffer.push('');
+  }
+
+  private writeEntrances() {
+    const { entrances } = this.state;
+    if (Object.keys(entrances).length === 0) {
+      return;
+    }
+
+    this.buffer.push('Entrances');
+    for (const srcFrom in entrances.overrides) {
+      const e = entrances.overrides[srcFrom];
+      for (const srcTo in e) {
+        const dest = e[srcTo];
+        this.buffer.push(`  ${srcFrom}/${srcTo} -> ${dest.from}/${dest.to}`);
+      }
+    }
+    this.buffer.push('');
+  }
+
+  private writeFoolish() {
+    const { foolish } = this.state.hints;
+    this.buffer.push('Foolish Regions');
+    for (const region in foolish) {
+      const weight = foolish[region];
+      this.buffer.push(`  ${region}: ${weight}`);
+    }
+    this.buffer.push('');
+  };
+
+  private writeHints() {
+    const { hints } = this.state;
+    this.buffer.push('Hints');
+    for (const gossip in hints.gossip) {
+      const h = hints.gossip[gossip];
+      if (h.type === 'hero') {
+        this.buffer.push(`  ${gossip}: Hero, ${h.region} (${h.location}: ${itemName(this.state.items[h.location])})`);
+      }
+      if (h.type === 'foolish') {
+        this.buffer.push(`  ${gossip}: Foolish, ${h.region}`);
+      }
+      if (h.type === 'item-exact') {
+        const newNames = h.items.map(itemName);
+        this.buffer.push(`  ${gossip}: Item-Exact, ${h.check} (${newNames.join(', ')})`);
+      }
+      if (h.type === 'item-region') {
+        this.buffer.push(`  ${gossip}: Item-Region, ${h.region} (${itemName(h.item)})`);
+      }
+    }
+    this.buffer.push('');
+  }
+
+  private writeRaw() {
+    const { world, items: placement, settings } = this.state;
+    this.writeSectionHeader();
+    this.buffer.push('Location List');
+    const regionNames = new Set(Object.values(world.regions));
+    const dungeonLocations = Object.values(world.dungeons).reduce((acc, x) => new Set([...acc, ...x]));
+    regionNames.forEach(region => {
+      const regionalLocations = Object.keys(world.regions)
+        .filter(location => world.regions[location] === region)
+        .filter(location => isShuffled(settings, world, location, dungeonLocations))
+        .map(loc => `    ${loc}: ${itemName(placement[loc])}`);
+      this.buffer.push(`  ${regionName(region)}:`);
+      this.buffer.push(regionalLocations.join('\n'));
+      this.buffer.push('')
+      }
+    )
+  }
+
+  private writeSpheres() {
+    const { spheres } = this.state.analysis;
+    this.writeSectionHeader();
+    this.buffer.push('Spheres');
+    for (const i in spheres) {
+      this.buffer.push(`  Sphere ${i}`);
+      const sphere = spheres[i];
+      for (const loc of sphere) {
+        this.buffer.push(`    ${loc}: ${itemName(this.state.items[loc])}`);
+      }
+      this.buffer.push('');
+    }
+  }
+
   run() {
     this.state.monitor.log('Logic: Spoiler');
-  
+
     if (!this.state.opts.settings.generateSpoilerLog) {
       return { log: null };
     }
 
-    const buffer: string[] = [];
-    spoilerHeader(buffer, this.state.opts.seed);
-    spoilerSettings(buffer, this.state.opts.settings);
-    spoilerTricks(buffer, this.state.opts.settings.tricks);
-    spoilerStartingItems(buffer, this.state.opts.settings.startingItems);
-    spoilerJunkLocations(buffer, this.state.opts.settings.junkLocations);
-    spoilerEntrances(buffer, this.state.entrances);
-    spoilerFoolish(buffer, this.state.hints.foolish);
-    spoilerHints(buffer, this.state.hints, this.state.items);
+    this.writeHeader();
+    this.writeSettings();
+    this.writeTricks();
+    this.writeStartingItems();
+    this.writeJunkLocations();
+    this.writeEntrances();
+    this.writeFoolish();
+    this.writeHints();
     if (this.state.opts.settings.logic !== 'none') {
-      spoilerSpheres(buffer, this.state.world, this.state.items, this.state.analysis.spheres);
+      this.writeSpheres();
     }
-    spoilerRaw(buffer, this.state.opts.settings, this.state.world, this.state.items);
-    const log = buffer.join("\n");
+    this.writeRaw();
+    const log = this.buffer.join("\n");
     return { log };
   };
 }
