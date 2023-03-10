@@ -24,12 +24,12 @@
     "Deku Tree Lobby": "true"
   locations:
     "MQ Deku Tree Compass Chest": "true"
-    "MQ Deku Tree GS Compass Room": (can_collect_distance) && (has_explosives || (can_hammer && can_play(SONG_TIME)))
+    "MQ Deku Tree GS Compass Room": "(can_collect_distance) && (has_explosives || (can_hammer && can_play(SONG_TIME)))"
 "Deku Tree Water Room":
   dungeon: DT
   exits:
     "Deku Tree Lobby": "true"
-    "Deku Tree Water Room Back": "(is_child && (has(SHIELD_DEKU) || has(SHIELD_HYLIAN) || can_longshot || (can_hookshot && has_iron_boots)"
+    "Deku Tree Water Room Back": "(is_child && (has(SHIELD_DEKU) || has(SHIELD_HYLIAN))) || can_longshot || (can_hookshot && has_iron_boots)"
   locations:
     "MQ Deku Tree Before Water Platform Chest": "true"
 "Deku Tree Water Room Back":
@@ -46,7 +46,7 @@
     "Deku Tree Basement Ledge": "can_use_sticks || can_use_din"
   locations:
     "MQ Deku Tree GS Song of Time Blocks": "(can_play(SONG_TIME) && can_collect_distance) || can_longshot"
-    "MQ Deku Tree GS Back Room": "(has_fire_or_sticks) && can_collect_distance"
+    "MQ Deku Tree GS Back Room": "has_fire_or_sticks && can_collect_distance"
 "Deku Tree Basement Ledge":
   dungeon: DT
   exits:
