@@ -15,7 +15,7 @@
   locations:
     "MQ Deku Tree Map Chest": "true"
     "MQ Deku Tree Slingshot Chest": "has_weapon || can_use_sticks || has_ranged_weapon_child" #Bombs and Din's work, but it's horrible.
-    "MQ Deku Tree Slingshot Room Far Chest": "can_use_sticks || has_fire"
+    "MQ Deku Tree Slingshot Room Far Chest": "can_use_sticks || has_fire || can_use_bow"
     "MQ Deku Tree Basement Chest": "has_fire_or_sticks || can_use_bow"
     "MQ Deku Tree GS Lobby Crate": "can_damage_skull"
 "Deku Tree Compass Room":
@@ -24,7 +24,7 @@
     "Deku Tree Lobby": "true"
   locations:
     "MQ Deku Tree Compass Chest": "true"
-    "MQ Deku Tree GS Compass Room": "has_explosives && can_collect_distance"
+    "MQ Deku Tree GS Compass Room": "(can_collect_distance) && (has_explosives || (can_hammer && can_play(SONG_TIME)))"
 "Deku Tree Water Room":
   dungeon: DT
   exits:
