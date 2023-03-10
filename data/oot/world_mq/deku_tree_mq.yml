@@ -24,7 +24,7 @@
     "Deku Tree Lobby": "true"
   locations:
     "MQ Deku Tree Compass Chest": "true"
-    "MQ Deku Tree GS Compass Room": "(has_explosives || (can_play(SONG_TIME) && can_hammer) && can_collect_distance"
+    "MQ Deku Tree GS Compass Room": "(has_explosives || (can_play(SONG_TIME) && can_hammer)) && can_collect_distance"
 "Deku Tree Water Room":
   dungeon: DT
   exits:
