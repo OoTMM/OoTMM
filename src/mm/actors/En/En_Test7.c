@@ -1,8 +1,12 @@
 #include <combo.h>
 
-u16 EnTest7_TriggerWarp(Actor* actor, GameState_Play* play) {
-    if (actor->variable & 0x8000) {
-        u8 warpId = actor->variable & 0xff;
+u16 EnTest7_TriggerWarp(Actor* actor, GameState_Play* play)
+{
+    u8 warpId;
+
+    if (actor->variable & 0x8000)
+    {
+        warpId = actor->variable & 0xff;
         switch (warpId) {
             case 0: // Minuet
                 comboGameSwitch(play, 0x600);

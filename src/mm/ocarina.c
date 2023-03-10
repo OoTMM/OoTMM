@@ -46,14 +46,14 @@ u8 Ocarina_BeforeSongPlayingProcessed(GameState_Play* ctxt)
     return songPlayed;
 }
 
-void Ocarina_HandleWarp(Actor_Player* player, GameState_Play* ctxt)
+void Ocarina_HandleWarp(Actor_Player* player, GameState_Play* play)
 {
-    if (ctxt->ocarinaMode == 2 && sWarpSongPlayed >= 0 && sWarpSongPlayed <= 5)
+    if (play->ocarinaMode == 2 && sWarpSongPlayed >= 0 && sWarpSongPlayed <= 5)
     { // WARP
-        ctxt->interfaceCtx.unk_222 = 0;
-        ActorCutscene_Stop(ctxt->playerActorCsIds[0]);
+        play->interfaceCtx.unk_222 = 0;
+        ActorCutscene_Stop(play->playerActorCsIds[0]);
         player->base.flags &= ~0x20000000; // ACTOR_FLAG_20000000
-        Actor* actor = SpawnActor((char*)ctxt + 0x1ca0, ctxt, 0x1CE, player->base.position.x, player->base.position.y, player->base.position.z, 0, 0, 0, 0x8000 | sWarpSongPlayed);
+        Actor* actor = SpawnActor((char*)play + 0x1ca0, play, 0x1CE, player->base.position.x, player->base.position.y, player->base.position.z, 0, 0, 0, 0x8000 | sWarpSongPlayed);
         if (actor)
         {
             player->state &= ~0x20000000; // PLAYER_STATE1_TIME_STOP
@@ -61,7 +61,7 @@ void Ocarina_HandleWarp(Actor_Player* player, GameState_Play* ctxt)
 
             void (*Player_func_8085B28C)(GameState_Play* play, Actor_Player* link, s32 csMode);
             Player_func_8085B28C = OverlayAddr(0x8085B28C);
-            Player_func_8085B28C(ctxt, NULL, 19);
+            Player_func_8085B28C(play, NULL, 19);
 
             player->state |= 0x30000000; // PLAYER_STATE1_SPECIAL_2 | PLAYER_STATE1_TIME_STOP
         }

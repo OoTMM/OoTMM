@@ -152,3 +152,5 @@ MatrixStackDup = 0x8018019c;
 MatrixStackPop = 0x801801cc;
 
 AddRupees = 0x801159ec;
+
+PlayStoreFlags = 0x80169d40;

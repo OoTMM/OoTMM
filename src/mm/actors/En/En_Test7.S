@@ -25,7 +25,7 @@ Replaces:
   ADDIU   T9, R0, 0x2060
   BNE     T8, AT, 0x80AF2350 + 0x88
 */
-PATCH_START 0x80AF2350 + 0x68
+PATCH_START 0x80af2350 + 0x68
   move    a0, s0
   jal     Ocarina_TriggerWarp_Hook
   move    a1, s1

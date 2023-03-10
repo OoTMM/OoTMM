@@ -23,8 +23,6 @@ PATCH_CALL(0x8083212c, Player_UseItemWrapper);
 
 void Player_UpdateWrapper(Actor_Player* this, GameState_Play* play)
 {
-    int activeItem;
-
     Player_Update(this, play);
     comboDpadUpdate(play);
     comboDpadUse(play, DPF_EQUIP);
