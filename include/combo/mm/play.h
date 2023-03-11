@@ -112,7 +112,6 @@ typedef struct PACKED ALIGNED(4) GameState_Play
     u16                 ocarinaMode;
     char                unk_16934[2];
     s16                 ocarinaSong;
-    /* char             unk_16938[0x003f8]; */
     char                unk_16938[0x000b0];
     InterfaceContext    interfaceCtx;
     PauseContext        pauseCtx;
