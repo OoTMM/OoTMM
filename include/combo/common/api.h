@@ -224,4 +224,6 @@ extern u8 gOcarinaButtonPitchMap[];
 extern u8 gOcarinaSongBuffer[];
 extern u8 gOcarinaSongBufferCursor;
 
+void HandleMessages(GameState_Play* play, void* unk);
+
 #endif

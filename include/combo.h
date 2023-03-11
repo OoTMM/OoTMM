@@ -396,6 +396,8 @@ extern int gNoTimeFlow;
 /* Ocarina */
 void comboCheckSong(const OcarinaSongButtons* songButtons, int songIndex);
 
+extern u8 gCustomOcarinaSong;
+
 #else
 # include <combo/asm.h>
 #endif
