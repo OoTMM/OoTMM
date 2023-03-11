@@ -13,7 +13,15 @@ static void soaringMessage(GameState_Play* play)
 
 static void SetupSoaring(GameState_Play* play)
 {
-    soaringMessage(play);
+    if (play->interfaceCtx.restrictions.warpSongs)
+    {
+        PlayerDisplayTextBox(play, 0x88c, NULL);
+    }
+    else
+    {
+        PlayerDisplayTextBox(play, 0x88d, NULL);
+        soaringMessage(play);
+    }
 }
 
 static void HandleSoaring(GameState_Play* play)
@@ -28,7 +36,7 @@ static void HandleSoaring(GameState_Play* play)
         sInCustomSong = 0;
 
         /* Check the selected option */
-        if (play->msgCtx.choice == 0)
+        if (play->msgCtx.choice == 0 && !play->interfaceCtx.restrictions.warpSongs)
         {
             comboGameSwitch(play, -1);
         }
@@ -40,7 +48,6 @@ void HandleMessagesWrapper(GameState_Play* play, void* unk)
     if (gCustomOcarinaSong)
     {
         PlaySound(0x4807);
-        PlayerDisplayTextBox(play, 0x88d, NULL);
         sInCustomSong = gCustomOcarinaSong;
         gCustomOcarinaSong = 0;
         gPlayedOcarinaSong = 0;
@@ -61,6 +68,7 @@ void HandleMessagesWrapper(GameState_Play* play, void* unk)
             break;
         }
     }
+
     HandleMessages(play, unk);
 }
 

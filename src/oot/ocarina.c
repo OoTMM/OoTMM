@@ -14,5 +14,14 @@ static OcarinaSongButtons sSongSoaring = {
 
 void Ocarina_CheckCustomSongs(void)
 {
+    if (!gMmSave.inventory.quest.songSoaring)
+        return;
+
+    if (!comboConfig(CFG_MM_CROSS_WARP))
+        return;
+
+    if (!comboConfig(CFG_MM_CROSS_WARP_ADULT) && gSave.age == AGE_ADULT)
+        return;
+
     comboCheckSong(&sSongSoaring, 0);
 }
