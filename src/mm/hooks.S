@@ -156,5 +156,5 @@ PATCH_END
 ;   BEQZ    V1, 0x8019D398
 */
 PATCH_START 0x8019D2D8
-    b       . + 0xC0 //0x8019D398
+    nop
 PATCH_END
