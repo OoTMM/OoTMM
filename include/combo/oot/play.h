@@ -27,7 +27,9 @@ typedef struct PACKED
     char view[0x128];
     char unk_0128[0xdc88];
     char textBuffer[0x556]; /* Probably smaller */
-    char unk_e306[0xe6];
+    char unk_e306[0xdf];
+    u8   choice;
+    char unk_e3e6[0x06];
     u16  lastSongPlayed;
     u16  ocarinaMode;
     char unk_e3f0[0x28];

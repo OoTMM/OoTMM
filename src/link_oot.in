@@ -153,3 +153,12 @@ DrawSimpleOpa = 0x80028048;
 AddRupees = 0x800721cc;
 
 SpawnRoomActors = 0x80025488;
+
+gPlayedOcarinaSong = 0x80102b74;
+gIsOcarinaEnabled = 0x80102208;
+gOcarinaFlags = 0x80102238;
+gOcarinaButtonPitchMap = 0x80102268;
+gOcarinaSongBuffer = 0x80121f38;
+gOcarinaSongBufferCursor = 0x80121f40;
+
+HandleMessages = 0x800dda6c;

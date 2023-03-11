@@ -1,3 +1,7 @@
+"SOARING":
+  region: NONE
+  exits:
+    "SPAWN": "has(SONG_SOARING)"
 "SPAWN":
   region: CLOCK_TOWN_SOUTH
   events:

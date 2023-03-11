@@ -102,8 +102,8 @@ PATCH_END
 ;   LBU     V0, 0x0001 (T4)
 */
 PATCH_START 0x80154A68
-    jal     Ocarina_BeforeSongPlayingProcessed
-    move    a0, s2
+  jal     Ocarina_BeforeSongPlayingProcessed
+   move   a0, s2
 PATCH_END
 
 /*
