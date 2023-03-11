@@ -1,4 +1,4 @@
-import { GAMES } from '../config';
+import { Game, GAMES } from '../config';
 import { Random, sample, shuffle } from '../random';
 import { gameId } from '../util';
 import { Pathfinder, PathfinderState } from './pathfind';
@@ -248,13 +248,15 @@ export class LogicPassSolver {
   }
 
   private fixCows() {
-    if (this.state.settings.cowShuffle === 'full') {
-      return;
-    }
+    const fixedGames = new Set<Game>();
+    if (!this.state.settings.cowShuffleOot)
+      fixedGames.add('oot');
+    if (!this.state.settings.cowShuffleMm)
+      fixedGames.add('mm');
 
     for (const loc in this.state.world.checks) {
       const c = this.state.world.checks[loc];
-      if (c.type === 'cow') {
+      if (c.type === 'cow' && fixedGames.has(c.game)) {
         const item = this.state.world.checks[loc].item;
         this.place(loc, item);
         removeItemPools(this.pools, item);

@@ -118,15 +118,17 @@ export const SETTINGS = [{
   ],
   default: 'dungeonBlueWarps'
 }, {
-  key: 'cowShuffle',
-  name: 'Cow Shuffle',
+  key: 'cowShuffleOot',
+  name: 'Cow Shuffle (OoT)',
   category: 'main',
-  type: 'enum',
-  values: [
-    { value: 'none', name: 'None' },
-    { value: 'full', name: 'Full' },
-  ],
-  default: 'none'
+  type: 'boolean',
+  default: false
+}, {
+  key: 'cowShuffleMm',
+  name: 'Cow Shuffle (MM)',
+  category: 'main',
+  type: 'boolean',
+  default: false
 }, {
   key: 'shopShuffleOot',
   name: 'Shop Shuffle (OoT, EXPERIMENTAL)',

@@ -176,8 +176,11 @@ export class LogicPassHints {
     if (isHouseToken(item) && this.state.settings.housesSkulltulaTokens === 'none') {
       return false;
     }
-    if (check.type === 'cow' && this.state.settings.cowShuffle === 'none') {
-      return false;
+    if (check.type === 'cow') {
+      if (check.game === 'oot' && !this.state.settings.cowShuffleOot)
+        return false;
+      if (check.game === 'mm' && !this.state.settings.cowShuffleMm)
+        return false;
     }
     if (check.type === 'shop' && check.game === 'oot' && this.state.settings.shopShuffleOot === 'none') {
       return false;
