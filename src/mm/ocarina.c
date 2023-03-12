@@ -102,14 +102,15 @@ u8 Ocarina_BeforeSongPlayingProcessed(GameState_Play* ctxt)
     {
         PlaySound(0x4807); // NA_SE_SY_TRE_BOX_APPEAR
 
+        u8 songIndex = songPlayed - 0x80;
+        sWarpSongPlayed = songIndex;
+
         if (ctxt->interfaceCtx.restrictions.songOfSoaring)
         {
             PlayerDisplayTextBox(ctxt, 0x1B95, NULL);
             ctxt->ocarinaMode = 0x27; // OCARINA_MODE_PROCESS_RESTRICTED_SONG
             return 0xFE;
         }
-
-        u8 songIndex = songPlayed - 0x80;
 
         PlayerDisplayTextBox(ctxt, 0x1B93, NULL); // Soar to X?
         b = ctxt->textBuffer;
@@ -122,7 +123,6 @@ u8 Ocarina_BeforeSongPlayingProcessed(GameState_Play* ctxt)
         comboTextAppendStr(&b, TEXT_NL TEXT_COLOR_GREEN TEXT_CHOICE2 "     OK" TEXT_NL "     No" TEXT_END);
 
         ctxt->ocarinaMode = 1; // OCARINA_MODE_ACTIVE
-        sWarpSongPlayed = songPlayed - 0x80;
         return 0xfe;
     }
 
@@ -131,32 +131,51 @@ u8 Ocarina_BeforeSongPlayingProcessed(GameState_Play* ctxt)
 
 void Ocarina_HandleWarp(Actor_Player* player, GameState_Play* play)
 {
-    if (play->ocarinaMode == 2 && sWarpSongPlayed >= 0 && sWarpSongPlayed <= 5)
-    { // WARP
-        play->interfaceCtx.unk_222 = 0;
-        ActorCutscene_Stop(play->playerActorCsIds[0]);
-        player->base.flags &= ~0x20000000; // ACTOR_FLAG_20000000
-        Actor* actor = SpawnActor((char*)play + 0x1ca0, play, 0x1CE, player->base.position.x, player->base.position.y, player->base.position.z, 0, 0, 0, 0x8000 | sWarpSongPlayed);
-        if (actor)
+    int messageState;
+    if (sWarpSongPlayed >= 0 && sWarpSongPlayed <= 5)
+    {
+        messageState = Message_GetState((char*)play + 0x4908);
+        if (messageState == 4) // TEXT_STATE_CHOICE
         {
-            player->state &= ~0x20000000; // PLAYER_STATE1_TIME_STOP
-            player->csMode = 0; // csMode = PLAYER_CSMODE_0;
-
-            void (*Player_func_8085B28C)(GameState_Play* play, Actor_Player* link, s32 csMode);
-            Player_func_8085B28C = OverlayAddr(0x8085B28C);
-            Player_func_8085B28C(play, NULL, 19);
-
-            player->state |= 0x30000000; // PLAYER_STATE1_SPECIAL_2 | PLAYER_STATE1_TIME_STOP
+            AudioOcarina_SetInstrument(0);
         }
-        else
+
+        if (play->ocarinaMode == 0x27) // OCARINA_MODE_PROCESS_RESTRICTED_SONG
         {
-            // TODO not sure what this is for in the vanilla code. perhaps to prevent the player softlocking in the case the soaring actor fails to spawn?
-            /*
-            func_80836A5C(this, play);
-            Player_AnimationPlayOnceReverse(play, this, D_8085D17C[this->transformation]);
-            */
+            if (messageState == 6) // TEXT_STATE_DONE
+            {
+                AudioOcarina_SetInstrument(0);
+                sWarpSongPlayed = 0xFF;
+            }
         }
-        sWarpSongPlayed = 0xFF;
+
+        if (play->ocarinaMode == 2) // OCARINA_MODE_WARP
+        {
+            play->interfaceCtx.unk_222 = 0;
+            ActorCutscene_Stop(play->playerActorCsIds[0]);
+            player->base.flags &= ~0x20000000; // ACTOR_FLAG_20000000
+            Actor* actor = SpawnActor((char*)play + 0x1ca0, play, 0x1CE, player->base.position.x, player->base.position.y, player->base.position.z, 0, 0, 0, 0x8000 | sWarpSongPlayed);
+            if (actor)
+            {
+                player->state &= ~0x20000000; // PLAYER_STATE1_TIME_STOP
+                player->csMode = 0; // csMode = PLAYER_CSMODE_0;
+
+                void (*Player_func_8085B28C)(GameState_Play* play, Actor_Player* link, s32 csMode);
+                Player_func_8085B28C = OverlayAddr(0x8085B28C);
+                Player_func_8085B28C(play, NULL, 19);
+
+                player->state |= 0x30000000; // PLAYER_STATE1_SPECIAL_2 | PLAYER_STATE1_TIME_STOP
+            }
+            else
+            {
+                // TODO not sure what this is for in the vanilla code. perhaps to prevent the player softlocking in the case the soaring actor fails to spawn?
+                /*
+                func_80836A5C(this, play);
+                Player_AnimationPlayOnceReverse(play, this, D_8085D17C[this->transformation]);
+                */
+            }
+            sWarpSongPlayed = 0xFF;
+        }
     }
 }
 

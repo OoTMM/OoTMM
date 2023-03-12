@@ -87,6 +87,7 @@ ModelViewTranslate = 0x8018029c;
 ModelViewUnkTransform = 0x801820a0;
 
 PrepareSave = 0x8014546c;
+AudioOcarina_SetInstrument = 0x8019C300;
 PlaySound = 0x8019f0c8;
 Message_Close = 0x801477b4;
 
