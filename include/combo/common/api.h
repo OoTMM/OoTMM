@@ -171,6 +171,10 @@ void PlaySound(u16 soundId);
 void PlaySoundSpecial(u16 soundId);
 void PlayMusic(int arg0, int arg1, int arg2, int arg3, int arg4);
 
+#if defined(GAME_MM)
+void AudioOcarina_SetInstrument(u8 ocarinaInstrumentId);
+#endif
+
 int Actor_RunByteCode(Actor* this, GameState_Play* play, void* bytecode, void* unk1, void* unk2);
 void Enemy_StartFinishingBlow(GameState_Play* play, Actor* this);
 
