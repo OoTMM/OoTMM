@@ -118,6 +118,28 @@ export const SETTINGS = [{
   ],
   default: 'dungeonBlueWarps'
 }, {
+  key: 'cowShuffleOot',
+  name: 'Cow Shuffle (OoT)',
+  category: 'main',
+  type: 'boolean',
+  default: false
+}, {
+  key: 'cowShuffleMm',
+  name: 'Cow Shuffle (MM)',
+  category: 'main',
+  type: 'boolean',
+  default: false
+}, {
+  key: 'shopShuffleOot',
+  name: 'Shop Shuffle (OoT)',
+  category: 'main',
+  type: 'enum',
+  values: [
+    { value: 'none', name: 'None' },
+    { value: 'full', name: 'Full' },
+  ],
+  default: 'none'
+}, {
   key: 'shuffleMasterSword',
   name: 'Master Sword Shuffle',
   category: 'main',
@@ -130,6 +152,12 @@ export const SETTINGS = [{
   type: 'boolean',
   default: true
 }, {
+  key: 'eggShuffle',
+  name: 'Weird / Pocket Egg Content Shuffle',
+  category: 'main',
+  type: 'boolean',
+  default: false
+}, {
   key: 'doorOfTime',
   name: 'Door of Time',
   category: 'main',
@@ -139,6 +167,23 @@ export const SETTINGS = [{
     { value: 'open', name: 'Open' },
   ],
   default: 'closed'
+}, {
+  key: 'crossWarpOot',
+  name: 'Cross-Games OoT Warp Songs',
+  category: 'main',
+  type: 'boolean',
+  default: false
+}, {
+  key: 'crossWarpMm',
+  name: 'Cross-Games MM Song of Soaring',
+  category: 'main',
+  type: 'enum',
+  values: [
+    { value: 'none', name: 'None' },
+    { value: 'childOnly', name: 'Child Only' },
+    { value: 'full', name: 'Child & Adult' },
+  ],
+  default: 'none'
 }, {
   key: 'erBoss',
   name: 'Boss Entrance Shuffle',

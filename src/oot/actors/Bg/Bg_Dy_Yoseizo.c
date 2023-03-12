@@ -39,6 +39,7 @@ void BgDyYoseizo_Update(Actor* this, GameState_Play* play)
                 gSave.playerData.magicSize = 0;
                 gSaveContext.magicTarget = gSave.playerData.magicUpgrade2 ? 0x60 : 0x30;
             }
+            gSaveContext.healthDelta += 20 * 0x10;
             gOotExtraFlags.greatFairies |= mask;
             ActorDestroy(this);
             return;

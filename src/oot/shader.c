@@ -1,6 +1,6 @@
 #include <combo.h>
 
-void Shader_Opa01(GameState_Play* play, u16 shaderId)
+void Shader_Opa01(GameState_Play* play, s16 shaderId)
 {
     const Shader* shader;
     shader = &kShaders[shaderId];
@@ -18,7 +18,7 @@ static Gfx kDummyList[] = {
 };
 
 /* Halo isn't animated */
-void Shader_MoonTear(GameState_Play* play, u16 shaderId)
+void Shader_MoonTear(GameState_Play* play, s16 shaderId)
 {
     const Shader* shader;
     shader = &kShaders[shaderId];

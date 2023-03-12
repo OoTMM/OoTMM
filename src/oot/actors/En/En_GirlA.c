@@ -1,13 +1,14 @@
 #include <combo.h>
 
-void EnGirlA_AfterInit2(Actor_EnGirlA* this)
+void EnGirlA_AfterHandler(Actor_EnGirlA* this, GameState_Play* play)
 {
-    this->precond = comboShopPrecond;
+    comboShopSetupItem(play, this);
 }
 
 void EnGirlA_Draw(Actor_EnGirlA* this, GameState_Play* play)
 {
-    ModelViewRotateY(((this->angle * 360.f) / 65536.f) * 0.017453292f, MAT_MUL);
+    if (this->gi != (GI_MM_SOLD_OUT | MASK_FOREIGN_GI))
+        ModelViewRotateY(((this->angle * 360.f) / 65536.f) * 0.017453292f, MAT_MUL);
     comboDrawGI(play, &this->base, this->gi, 0);
 }
 

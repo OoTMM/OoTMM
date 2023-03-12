@@ -92,6 +92,7 @@ NORETURN void comboGameSwitch(GameState_Play* play, s32 entrance)
 
 #if defined(GAME_MM)
     gSave.isOwlSave = 1;
+    PlayStoreFlags(play);
     PrepareSave(&play->sramCtx);
 #endif
 

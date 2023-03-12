@@ -4,6 +4,7 @@
 #include <combo/util.h>
 #include <combo/game_state.h>
 #include <combo/common/actor.h>
+#include <combo/common/ocarina.h>
 
 typedef struct
 {
@@ -17,7 +18,9 @@ _Static_assert(sizeof(SramContext) == 0x28, "MM SramContext size is wrong");
 
 typedef struct PACKED
 {
-    char unk_000[0x264];
+    char unk_000[0x222];
+    s16 unk_222;
+    char unk_224[0x40];
     struct PACKED
     {
         s16 screenFill;
@@ -103,17 +106,20 @@ typedef struct PACKED ALIGNED(4) GameState_Play
     SramContext         sramCtx;
     char                unk_046e0[0x11c10];
     char                textBuffer[4]; /* Real size unknown */
-    char                unk_162f4[0x0063e];
+    char                unk_162f4[0x00514];
+    OcarinaStaff*       ocarinaStaff;
+    char                unk_1680C[0x00126];
     u16                 ocarinaMode;
     char                unk_16934[2];
     s16                 ocarinaSong;
-    /* char             unk_16938[0x003f8]; */
     char                unk_16938[0x000b0];
     InterfaceContext    interfaceCtx;
     PauseContext        pauseCtx;
     GameOverContext     gameOverCtx;
     EnvironmentContext  envCtx;
-    char                unk_17104[0x01771];
+    char                unk_17104[0x01698];
+    s16                 playerActorCsIds[10];
+    char                unk_187B0[0x000C5];
     u8                  transitionType;
     char                unk_18876[0x00004];
     u16                 nextEntrance;

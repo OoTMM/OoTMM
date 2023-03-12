@@ -59,6 +59,7 @@ const RegionName kRegionNamesOot[] = {
     { "around",     TEXT_COLOR_ORANGE "Gerudo Fortress" },
     { "in",         "the " TEXT_COLOR_YELLOW "Haunted Wastelands" },
     { "around",     "the " TEXT_COLOR_ORANGE "Desert Colossus" },
+    { "inside",     "an " TEXT_COLOR_YELLOW "Egg" },
 };
 
 const RegionName kRegionNamesMm[] = {
@@ -209,6 +210,13 @@ static int isItemAmbiguousOot(s16 gi)
     case GI_OOT_BOMBCHU_5:
     case GI_OOT_BOMBCHU_20:
     case GI_OOT_SHIELD_MIRROR:
+    case GI_OOT_MILK:
+    case GI_OOT_POTION_RED:
+    case GI_OOT_POTION_GREEN:
+    case GI_OOT_POTION_BLUE:
+    case GI_OOT_FAIRY:
+    case GI_OOT_BUG:
+    case GI_OOT_FISH:
         return 1;
     default:
         return 0;
@@ -288,6 +296,13 @@ static int isItemAmbiguousMm(s16 gi)
     case GI_MM_BOMBCHU_5:
     case GI_MM_BOTTLE_MILK:
     case GI_MM_SHIELD_MIRROR:
+    case GI_MM_MILK:
+    case GI_MM_POTION_RED:
+    case GI_MM_POTION_GREEN:
+    case GI_MM_POTION_BLUE:
+    case GI_MM_FAIRY:
+    case GI_MM_BUGS:
+    case GI_MM_FISH:
         return 1;
     default:
         return 0;
@@ -622,7 +637,7 @@ void comboTextHijackItem(GameState_Play* play, s16 gi, int count)
 static int isSoldOut(s16 gi)
 {
 #if defined(GAME_OOT)
-    return 0;
+    return gi == (GI_MM_SOLD_OUT | MASK_FOREIGN_GI);
 #else
     return gi == GI_MM_SOLD_OUT;
 #endif

@@ -1,13 +1,20 @@
 import { Random, shuffle } from '../random';
 import { Settings } from '../settings';
-import { isItemImportant } from './items';
+import { isItemConsumable, isItemImportant } from './items';
 import { ItemPlacement } from './solve';
 import { World } from './world';
 import { Pathfinder, PathfinderState } from './pathfind';
 import { Monitor } from '../monitor';
 import { cloneDeep } from 'lodash';
+import { isLocationRenewable } from './helpers';
 
 const SIMPLE_DEPENDENCIES: {[k: string]: string[]} = {
+  OOT_WEIRD_EGG: [
+    'OOT Hatch Chicken',
+  ],
+  OOT_POCKET_EGG: [
+    'OOT Hatch Pocket Cucco',
+  ],
   OOT_CHICKEN: [
     'OOT Lost Woods Gift from Saria',
     'OOT Zelda\'s Letter',
@@ -48,9 +55,6 @@ const SIMPLE_DEPENDENCIES: {[k: string]: string[]} = {
   ],
   OOT_CLAIM_CHECK: [
     'OOT Death Mountain Biggoron Sword'
-  ],
-  OOT_WALLET: [
-    'OOT Goron City Medigoron Giant Knife'
   ],
   OOT_SONG_SUN: [
     'OOT Graveyard ReDead Tomb',
@@ -306,6 +310,7 @@ export class LogicPassAnalysis {
   private requiredLocs = new Set<string>();
   private requiredlocsByItem: { [item: string]: Set<string> } = {};
   private uselessLocs = new Set<string>();
+  private unreachableLocs = new Set<string>();
   private dependencies: typeof SIMPLE_DEPENDENCIES = {};
 
   constructor(
@@ -358,22 +363,14 @@ export class LogicPassAnalysis {
   }
 
   private makeSpheres() {
-    const spheres: string[][] = [];
-    const rawSpheres = this.makeSpheresRaw().reverse();
-    const spheresLocs = new Set(rawSpheres.flat());
+    const locs = this.makeSpheresRaw().reverse().flat();
+    const spheresLocs = new Set(locs);
 
-    for (const sphere of rawSpheres) {
-      const filteredSphere: string[] = [];
-      for (const loc of sphere) {
-        spheresLocs.delete(loc);
-        const pathfinderState = this.pathfinder.run(null, { items: this.state.items, restrictedLocations: spheresLocs, recursive: true, stopAtGoal: true });
-        if (!pathfinderState.goal) {
-          spheresLocs.add(loc);
-          filteredSphere.push(loc);
-        }
-      }
-      if (filteredSphere.length !== 0) {
-        spheres.push(filteredSphere);
+    for (const loc of locs) {
+      spheresLocs.delete(loc);
+      const pathfinderState = this.pathfinder.run(null, { items: this.state.items, restrictedLocations: spheresLocs, recursive: true, stopAtGoal: true });
+      if (!pathfinderState.goal) {
+        spheresLocs.add(loc);
       }
     }
 
@@ -396,6 +393,11 @@ export class LogicPassAnalysis {
     }
   }
 
+  private isLocUselessNonRenewable(loc: string) {
+    const item = this.state.items[loc];
+    return (isItemConsumable(item) && !isLocationRenewable(this.state.world, loc));
+  }
+
   private isLocUselessHeuristicCount(loc: string) {
     /* TODO: this is fragile */
     const item = this.state.items[loc];
@@ -408,7 +410,6 @@ export class LogicPassAnalysis {
     case 'OOT_BOMB_BAG':
     case 'OOT_BOW':
     case 'OOT_SLINGSHOT':
-    case 'OOT_WALLET':
     case 'OOT_MAGIC_UPGRADE':
     case 'MM_SWORD':
     case 'MM_BOW':
@@ -420,6 +421,7 @@ export class LogicPassAnalysis {
       maximumRequired = 1;
       break;
     }
+
     if (maximumRequired === -1) {
       return false;
     }
@@ -444,7 +446,7 @@ export class LogicPassAnalysis {
     while (locsToCheck.length > 0) {
       const l = locsToCheck.pop()!;
       const item = this.state.items[l];
-      if (isItemImportant(item) && !this.uselessLocs.has(l)) {
+      if (isItemImportant(item) && !this.uselessLocs.has(l) && !this.unreachableLocs.has(l)) {
         /* May be a progression item - need to check other locations */
         const dependencies = this.dependencies[item];
         if (dependencies === undefined) {
@@ -464,15 +466,11 @@ export class LogicPassAnalysis {
   }
 
   private makeUselessLocs() {
-    if (this.state.settings.logic === 'beatable') {
-      this.makeUnreachable();
-    }
-
     for (const loc in this.state.world.checks) {
-      if (this.requiredLocs.has(loc) || this.uselessLocs.has(loc)) {
+      if (this.requiredLocs.has(loc) || this.uselessLocs.has(loc) || this.unreachableLocs.has(loc)) {
         continue;
       }
-      if (!isItemImportant(this.state.items[loc]) || this.isLocUselessHeuristicCount(loc) || this.isLocUselessHeuristicDependencies(loc)) {
+      if (!isItemImportant(this.state.items[loc]) || this.isLocUselessNonRenewable(loc) || this.isLocUselessHeuristicCount(loc) || this.isLocUselessHeuristicDependencies(loc)) {
         this.uselessLocs.add(loc);
       }
     }
@@ -483,7 +481,7 @@ export class LogicPassAnalysis {
     for (const loc in this.state.world.checks) {
       if (isItemImportant(this.state.items[loc]) && !pathfinderState.locations.has(loc)) {
         this.state.monitor.debug("Analysis - makeUnreachable: " + this.state.items[loc]);
-        this.uselessLocs.add(loc);
+        this.unreachableLocs.add(loc);
       }
     }
   }
@@ -495,12 +493,16 @@ export class LogicPassAnalysis {
       this.makeSpheres();
       this.makeRequiredLocs();
     }
+    if (this.state.settings.logic === 'beatable') {
+      this.makeUnreachable();
+    }
     this.makeUselessLocs();
 
     const analysis = {
       spheres: this.spheres,
       required: this.requiredLocs,
       useless: this.uselessLocs,
+      unreachable: this.unreachableLocs,
     }
 
     return { analysis };

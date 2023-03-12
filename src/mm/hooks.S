@@ -89,3 +89,72 @@ PATCH_END
 PATCH_START 0x80096aa4
   li s0,1
 PATCH_END
+
+/*
+;==================================================================================================
+; Show Warp message when OoT Warp Song is played
+;==================================================================================================
+*/
+
+/*
+; Replaces:
+;   LW      T4, 0x1F00 (S1)
+;   LBU     V0, 0x0001 (T4)
+*/
+PATCH_START 0x80154A68
+  jal     Ocarina_BeforeSongPlayingProcessed
+   move   a0, s2
+PATCH_END
+
+/*
+;==================================================================================================
+; Check if OoT Warp Song is played.
+;==================================================================================================
+*/
+
+Ocarina_CheckCustomSongs_Hook:
+    addiu   sp, sp, -0x18
+    sw      ra, 0x0014 (sp)
+    sw      a0, 0x0018 (sp)
+
+    HOOK_CALL Ocarina_CheckCustomSongs
+
+    lw      v0, 0x0018 (sp)
+
+    // Displaced code
+    lbu     t3, 0x801FD463
+    lbu     t5, 0x801FD464
+    lui     s0, 0x8020
+    lui     s5, 0x801D
+
+    lw      ra, 0x0014 (sp)
+    jr      ra
+    addiu   sp, sp, 0x18
+
+/*
+; Replaces:
+;   LBU     T3, 0xD463 (T3)
+;   LBU     T5, 0xD464 (T5)
+;   LUI     S0, 0x8020
+;   LUI     S5, 0x801D
+*/
+PATCH_START 0x8019BD6C
+  or      a0, ra, zero
+  jal     Ocarina_CheckCustomSongs_Hook
+  nop
+  or      ra, v0, zero
+PATCH_END
+
+/*
+;==================================================================================================
+; Prevent OoT songs on Termina Field song wall
+;==================================================================================================
+*/
+
+/*
+; Replaces:
+;   BEQZ    V1, 0x8019D398
+*/
+PATCH_START 0x8019D2D8
+    nop
+PATCH_END

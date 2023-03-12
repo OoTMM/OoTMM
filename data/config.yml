@@ -20,3 +20,6 @@ SHARED_OCARINA:                 0x12
 SHARED_MASKS:                   0x13
 SHARED_WALLETS:                 0x14
 SHARED_HEALTH:                  0x15
+OOT_CROSS_WARP:                 0x16
+MM_CROSS_WARP:                  0x17
+MM_CROSS_WARP_ADULT:            0x18

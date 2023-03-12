@@ -110,7 +110,7 @@ void comboTriggerWarp(GameState_Play* play, int bossId)
         }
         else
         {
-            entrance = 0x9a80;
+            entrance = 0x9a70;
         }
         break;
     case DUNGEONID_TEMPLE_GREAT_BAY:

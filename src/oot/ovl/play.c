@@ -73,12 +73,14 @@ static void debugCheat(GameState_Play* play)
         //gSave.inventory.quest.medallionWater = 1;
         //gSave.inventory.quest.medallionLight = 1;
 
+        gSave.inventory.quest.stoneRuby = 1;
+
         //gSave.health = gSave.healthMax = 20 * 0x10;
 
         gSave.playerData.rupees = 500;
 
         gOotExtraTrade.child = 0xffff;
-        gOotExtraTrade.adult = 0;
+        gOotExtraTrade.adult = 0xffff;
         gOotExtraTrade.adult |= (1 << XITEM_OOT_ADULT_EYEBALL_FROG);
         gOotExtraTrade.adult |= (1 << XITEM_OOT_ADULT_EYE_DROPS);
         gOotExtraTrade.adult |= (1 << XITEM_OOT_ADULT_CLAIM_CHECK);
@@ -254,7 +256,6 @@ void hookPlay_Init(GameState_Play* play)
     Play_Init(play);
     gLastEntrance = gSave.entrance;
     sInGrotto = (play->sceneId == SCE_OOT_GROTTOS || play->sceneId == SCE_OOT_FAIRY_FOUNTAIN);
-    comboSpawnItemGivers(play);
 
     if (gSave.entrance == 0x0530)
     {

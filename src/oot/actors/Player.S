@@ -80,3 +80,8 @@ PATCH_START 0x808372ac
   jal Player_WriteTransitionFlagHook
    nop
 PATCH_END
+
+/* Remove reloc for some UseItem call */
+PATCH_START 0x80853520
+.int 0
+PATCH_END

@@ -11,6 +11,7 @@
 #define PLAYER_ACTOR_STATE_FROZEN               0x00000200
 #define PLAYER_ACTOR_STATE_GET_ITEM             0x00000400
 #define PLAYER_ACTOR_STATE_HOLD_ITEM            0x00000800
+#define PLAYER_ACTOR_STATE_CLIMB2               0x00200000
 #define PLAYER_ACTOR_STATE_EPONA                0x00800000
 #define PLAYER_ACTOR_STATE_WATER                0x08000000
 #define PLAYER_ACTOR_STATE_USE_ITEM             0x10000000
@@ -115,6 +116,9 @@ void ModelViewRotateZ(float angle, int mode);
 void ModelViewTranslate(float tx, float ty, float tz, int mode);
 void ModelViewScale(float sx, float sy, float sz, int mode);
 
+void MatrixStackDup(void);
+void MatrixStackPop(void);
+
 float RandFloat(void);
 
 int GetActiveItem(GameState_Play* play);
@@ -152,6 +156,7 @@ void Play_Draw(GameState_Play*);
 
 void Interface_LoadItemIconImpl(GameState_Play* play, int slot);
 void UpdateEquipment(GameState_Play* play, Actor_Player* link);
+
 void PlayStoreFlags(GameState_Play* play);
 
 void Player_Update(Actor_Player* this, GameState_Play* play);
@@ -166,6 +171,10 @@ void PlaySound(u16 soundId);
 void PlaySoundSpecial(u16 soundId);
 void PlayMusic(int arg0, int arg1, int arg2, int arg3, int arg4);
 
+#if defined(GAME_MM)
+void AudioOcarina_SetInstrument(u8 ocarinaInstrumentId);
+#endif
+
 int Actor_RunByteCode(Actor* this, GameState_Play* play, void* bytecode, void* unk1, void* unk2);
 void Enemy_StartFinishingBlow(GameState_Play* play, Actor* this);
 
@@ -177,5 +186,48 @@ void DrawDungeonUnk2(void* unk);
 #endif
 
 void DrawSimpleOpa(GameState_Play* play, u32 segAddr);
+
+void AddRupees(s16 delta);
+
+/* Shaders */
+void Shader_Opa0_Xlu1(GameState_Play*, s16);
+void Shader_Opa0_Xlu12(GameState_Play*, s16);
+void Shader_Opa0(GameState_Play*, s16);
+void Shader_Opa01(GameState_Play*, s16);
+void Shader_Opa1023(GameState_Play*, s16);
+void Shader_Opa10_Xlu2(GameState_Play*, s16);
+void Shader_Opa10_Xlu234(GameState_Play*, s16);
+void Shader_Opa10_Xlu32(GameState_Play*, s16);
+void Shader_Opa10234567(GameState_Play*, s16);
+void Shader_Xlu01(GameState_Play*, s16);
+void Shader_BlueFire(GameState_Play*, s16);
+void Shader_BombchuMask(GameState_Play*, s16);
+void Shader_Compass(GameState_Play*, s16);
+void Shader_DekuNut(GameState_Play*, s16);
+void Shader_Fairy(GameState_Play*, s16);
+void Shader_Fish(GameState_Play*, s16);
+void Shader_GiantKnife(GameState_Play*, s16);
+void Shader_GS(GameState_Play*, s16);
+void Shader_Heart(GameState_Play*, s16);
+void Shader_Medallion(GameState_Play*, s16);
+void Shader_MirrorShield(GameState_Play*, s16);
+void Shader_Poe(GameState_Play*, s16);
+void Shader_Potion(GameState_Play*, s16);
+void Shader_Rupee(GameState_Play*, s16);
+void Shader_Scale(GameState_Play*, s16);
+void Shader_SoldOut(GameState_Play*, s16);
+void Shader_Spell(GameState_Play*, s16);
+void Shader_MoonTear(GameState_Play*, s16);
+
+void SpawnRoomActors(GameState_Play* play, int id);
+
+extern u8 gPlayedOcarinaSong;
+extern u8 gIsOcarinaEnabled;
+extern u32 gOcarinaFlags;
+extern u8 gOcarinaButtonPitchMap[];
+extern u8 gOcarinaSongBuffer[];
+extern u8 gOcarinaSongBufferCursor;
+
+void HandleMessages(GameState_Play* play, void* unk);
 
 #endif

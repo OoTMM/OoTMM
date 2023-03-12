@@ -135,9 +135,10 @@ export class LogicPassHints {
   }
 
   private isLocationHintable(loc: string) {
-    if (loc === 'OOT Temple of Time Medallion' || loc === 'MM Oath to Order') {
+    if (['OOT Temple of Time Medallion', 'MM Oath to Order', 'OOT Hatch Chicken', 'OOT Hatch Pocket Cucco'].includes(loc)) {
       return false;
     }
+    const check = this.state.world.checks[loc];
     const item = this.state.items[loc];
     if (loc === 'OOT Temple of Time Master Sword' && !this.state.settings.shuffleMasterSword) {
       return false;
@@ -175,6 +176,15 @@ export class LogicPassHints {
     if (isHouseToken(item) && this.state.settings.housesSkulltulaTokens === 'none') {
       return false;
     }
+    if (check.type === 'cow') {
+      if (check.game === 'oot' && !this.state.settings.cowShuffleOot)
+        return false;
+      if (check.game === 'mm' && !this.state.settings.cowShuffleMm)
+        return false;
+    }
+    if (check.type === 'shop' && check.game === 'oot' && this.state.settings.shopShuffleOot === 'none') {
+      return false;
+    }
     return true;
   }
 
@@ -196,7 +206,7 @@ export class LogicPassHints {
     if (typeof locs === 'string') {
       locs = new Set([locs]);
     }
-    const pathfinderState = this.pathfinder.run(null, { recursive: true, gossip: true, items: this.state.items });
+    const pathfinderState = this.pathfinder.run(null, { recursive: true, gossip: true, items: this.state.items, forbiddenLocations: locs });
     const gossips = Array.from(pathfinderState.gossip).filter(x => !this.gossip[x]);
     if (gossips.length === 0) {
       return null;
@@ -210,7 +220,7 @@ export class LogicPassHints {
   }
 
   private locationFoolish(loc: string) {
-    if (!this.isLocationHintable(loc)) {
+    if (!this.isLocationHintable(loc) || this.state.analysis.unreachable.has(loc)) {
       return 0;
     }
     if (!this.state.analysis.useless.has(loc)) {

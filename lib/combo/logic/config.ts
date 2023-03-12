@@ -103,6 +103,17 @@ export class LogicPassConfig {
       config.add('SHARED_HEALTH');
     }
 
+    if (this.state.settings.crossWarpOot) {
+      config.add('OOT_CROSS_WARP');
+    }
+
+    if (this.state.settings.crossWarpMm !== 'none') {
+      config.add('MM_CROSS_WARP');
+      if (this.state.settings.crossWarpMm === 'full') {
+        config.add('MM_CROSS_WARP_ADULT');
+      }
+    }
+
     return { config };
   }
 }

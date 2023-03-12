@@ -6,7 +6,7 @@ import { Game, GAMES } from "../config";
 import { WorldCheck } from '../logic/world';
 import { Settings } from '../settings';
 import { HintGossip, Hints } from '../logic/hints';
-import { isDungeonStrayFairy, isGanonBossKey, isMap, isCompass, isRegularBossKey, isSmallKeyRegular, isTownStrayFairy, isSmallKeyHideout } from '../logic/items';
+import { isDungeonStrayFairy, isGanonBossKey, isMap, isCompass, isRegularBossKey, isSmallKeyRegular, isTownStrayFairy, isSmallKeyHideout, isItemUnlimitedStarting } from '../logic/items';
 import { gameId } from '../util';
 import { EntranceShuffleResult } from '../logic/entrance';
 import { Patchfile } from './patchfile';
@@ -264,6 +264,12 @@ const gameChecks = (settings: Settings, game: Game, logic: LogicResult): Buffer 
     case 'gs':
       sceneId = 0xf1;
       break;
+    case 'cow':
+      sceneId = 0xf2;
+      break;
+    case 'shop':
+      sceneId = 0xf3;
+      break;
     case 'collectible':
       id |= 0x40;
       break;
@@ -476,6 +482,7 @@ const effectiveStartingItems = (settings: Settings): {[k: string]: number} => {
 const randomizerStartingItems = (settings: Settings): Buffer => {
   const buffer = Buffer.alloc(0x1000, 0xff);
   const ids: number[] = [];
+  const ids2: number[] = [];
   const items = effectiveStartingItems(settings);
   for (const item in items) {
     const count = items[item];
@@ -483,10 +490,16 @@ const randomizerStartingItems = (settings: Settings): Buffer => {
     if (gi === undefined) {
       throw new Error(`Unknown item ${item}`);
     }
-    ids.push(id);
-    ids.push(count);
+    /* Consumables need to be added late */
+    if (isItemUnlimitedStarting(item)) {
+      ids2.push(id);
+      ids2.push(count);
+    } else {
+      ids.push(id);
+      ids.push(count);
+    }
   }
-  const data = toU16Buffer(ids);
+  const data = toU16Buffer([...ids, ...ids2]);
   data.copy(buffer, 0);
   return buffer;
 };
