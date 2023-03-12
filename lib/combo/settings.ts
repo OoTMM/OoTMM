@@ -131,7 +131,7 @@ export const SETTINGS = [{
   default: false
 }, {
   key: 'shopShuffleOot',
-  name: 'Shop Shuffle (OoT, EXPERIMENTAL)',
+  name: 'Shop Shuffle (OoT)',
   category: 'main',
   type: 'enum',
   values: [
