@@ -332,3 +332,22 @@ void comboMqKaleidoHook(GameState_Play* play)
         }
     }
 }
+
+static void LoadMapMarkWrapper(void* unk)
+{
+    void** mapMark;
+    int dungeonId;
+    LoadMapMark(unk);
+
+    dungeonId = mqDungeonId(gPlay);
+    if (dungeonId < 0)
+        return;
+    if (!isEnabledMq(dungeonId))
+        return;
+
+    /* Load the alt maps */
+    mapMark = (void**)0x800f1bf8;
+    DMARomToRam(CUSTOM_MQ_MINIMAPS_ADDR | PI_DOM1_ADDR2, *mapMark, 0x6aec);
+}
+
+PATCH_CALL(0x8006c608, LoadMapMarkWrapper);

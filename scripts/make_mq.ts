@@ -268,6 +268,14 @@ function makeMaps() {
   fs.writeFileSync(__dirname + '/../data/static/mq_maps.bin', mapData);
 }
 
+function makeMinimaps() {
+  const size = 0x6aec;
+  const file = fs.readFileSync(path.join(argv[2], `ovl_map_mark_data.bin`));
+  const data = file.subarray(0, size);
+  fs.writeFileSync(__dirname + '/../data/static/mq_minimaps.bin', data);
+}
+
 makeRooms();
 makeScenes();
 makeMaps();
+makeMinimaps();
