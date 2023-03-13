@@ -33,7 +33,7 @@ export { SETTINGS, DEFAULT_SETTINGS, SETTINGS_CATEGORIES, TRICKS, itemName };
 export const itemPool = (aSettings: Partial<Settings>) => {
   const settings: Settings = { ...DEFAULT_SETTINGS, ...aSettings };
   const monitor = new Monitor({ onLog: () => {} });
-  const { world } = worldState(monitor, settings);
+  const { world, fixedLocations } = worldState(monitor, settings);
 
   /* Extract relevant items from the world */
   const items: Items = {};
@@ -41,7 +41,7 @@ export const itemPool = (aSettings: Partial<Settings>) => {
   for (const loc in world.checks) {
     const check = world.checks[loc];
     const item = check.item;
-    if (!isJunk(item) && !isDungeonReward(item) && !isDungeonItem(item) && !isToken(item) && !isStrayFairy(item)) {
+    if (!fixedLocations.has(loc) && !isJunk(item) && !isDungeonReward(item) && !isDungeonItem(item) && !isToken(item) && !isStrayFairy(item)) {
       rawItems.push(item);
     }
   }
