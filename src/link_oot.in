@@ -154,3 +154,4 @@ AddRupees = 0x800721cc;
 
 SpawnRoomActors = 0x80025488;
 Play_LoadKaleidoOverlay = 0x80099c60;
+LoadMapMark = 0x80066df0;

@@ -149,6 +149,7 @@ export const custom = async (monitor: Monitor, roms: DecompressedRoms) => {
   await addRawData(archive, cg, 'mq_rooms');
   await addRawData(archive, cg, 'mq_scenes');
   await addRawData(archive, cg, 'mq_maps');
+  await addRawData(archive, cg, 'mq_minimaps');
 
   /* Emit the custom header and data */
   const pack = archive.pack();
