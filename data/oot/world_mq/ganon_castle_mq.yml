@@ -16,10 +16,10 @@
     #"MQ Ganon Castle Rightmost Scrub": "has_lens && (can_hammer || has_ranged_weapon_adult || has_nuts || has_shield_for_scrubs)"
 "Ganon Castle Light":
   dungeon: Ganon
-events:
-  GANON_TRIAL_LIGHT: "has_light_arrows && has_lens && can_hookshot && has(SMALL_KEY_GANON, 3)"
-locations:
-  "MQ Ganon Castle Light Trial Chest": "can_play(SONG_ZELDA)"
+  events:
+    GANON_TRIAL_LIGHT: "has_light_arrows && has_lens && can_hookshot && has(SMALL_KEY_GANON, 3)"
+  locations:
+    "MQ Ganon Castle Light Trial Chest": "can_play(SONG_ZELDA)"
 "Ganon Castle Forest":
   dungeon: Ganon
   events:
