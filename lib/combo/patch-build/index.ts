@@ -36,7 +36,7 @@ export function buildPatchfile(args: BuildPatchfileIn): Patchfile {
   }
 
   /* Pack the custom data */
-  if (args.custom.length > 0x20000) {
+  if (args.custom.length > 0x40000) {
     throw new Error("Custom data too large");
   }
   file.addPatch('global', CUSTOM_ADDR, args.custom);

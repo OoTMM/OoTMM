@@ -127,6 +127,12 @@ const customKeepFiles = async (roms: DecompressedRoms, archive: CustomArchive, c
   cg.define('CUSTOM_OBJECT_ID_KEEP', custonKeepId);
 };
 
+async function addRawData(archive: CustomArchive, cg: CodeGen, filename: string) {
+  const file = await raw(filename);
+  const addr = await archive.addData(file);
+  cg.define('CUSTOM_' + filename.toUpperCase() + '_ADDR', addr);
+}
+
 export const custom = async (monitor: Monitor, roms: DecompressedRoms) => {
   monitor.log("Building custom objects");
   const cgPath = process.env.ROLLUP ? '' : path.resolve('include', 'combo', 'custom.h');
@@ -140,13 +146,9 @@ export const custom = async (monitor: Monitor, roms: DecompressedRoms) => {
   await customKeepFiles(roms, archive, cg);
 
   /* Load MQ data */
-  const mqRooms = await raw('mq_rooms');
-  const mqRoomsAddr = await archive.addData(mqRooms);
-  cg.define('CUSTOM_MQ_ROOMS_ADDR', mqRoomsAddr);
-
-  const mqScenes = await raw('mq_scenes');
-  const mqScenesAddr = await archive.addData(mqScenes);
-  cg.define('CUSTOM_MQ_SCENES_ADDR', mqScenesAddr);
+  await addRawData(archive, cg, 'mq_rooms');
+  await addRawData(archive, cg, 'mq_scenes');
+  await addRawData(archive, cg, 'mq_maps');
 
   /* Emit the custom header and data */
   const pack = archive.pack();
