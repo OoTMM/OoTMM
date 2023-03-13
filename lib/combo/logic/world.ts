@@ -34,6 +34,7 @@ export type WorldCheck = {
   game: Game;
   scene: string;
   item: string;
+  originalItem: string;
   hint: string;
 } & (WorldCheckNumeric | WorldCheckSymbolic);
 
@@ -211,7 +212,7 @@ export class LogicPassWorld {
         this.world.checkHints[hint].push(location);
       }
 
-      const check = { game, type, scene, id, item, hint } as WorldCheck;
+      const check = { game, type, scene, id, item, originalItem: item, hint } as WorldCheck;
       this.world.checks[location] = check;
 
       if (isSong(item)) {

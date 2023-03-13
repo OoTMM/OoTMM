@@ -1,10 +1,9 @@
 import { Settings } from "../settings";
-import { isDungeonStrayFairy, isGanonBossKey, isGerudoCard, isGoldToken, isHouseToken, isMasterSword, isTownStrayFairy } from "./items";
+import { isDungeonStrayFairy, isGoldToken, isHouseToken, isTownStrayFairy } from "./items";
 import { World } from "./world";
 
 // When adding new settings, add in order of how many checks there are to minimize average runtime
 export const isShuffled = (settings: Settings, world: World, loc: string, dungLocations?: Set<string>) => {
-  const dungeonLocations = Object.values(world.dungeons).reduce((acc, x) => new Set([...acc, ...x]));
 
   const check = world.checks[loc];
   // Gold Skulltulas - 100
@@ -39,15 +38,6 @@ export const isShuffled = (settings: Settings, world: World, loc: string, dungLo
 
   // Single Item shuffles - 1 each
   if (isTownStrayFairy(check.item) && settings.townFairyShuffle === 'vanilla') {
-    return false;
-  }
-  if (isGanonBossKey(check.item) && settings.ganonBossKey === 'vanilla') {
-    return false;
-  }
-  if (isMasterSword(check.item) && !settings.shuffleMasterSword) {
-    return false;
-  }
-  if (isGerudoCard(check.item) && !settings.shuffleGerudoCard) {
     return false;
   }
 

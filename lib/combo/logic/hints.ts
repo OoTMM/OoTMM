@@ -109,6 +109,7 @@ export class LogicPassHints {
       world: World,
       items: ItemPlacement,
       analysis: Analysis,
+      fixedLocations: Set<string>,
     },
   ){
     this.pathfinder = new Pathfinder(state.world, state.settings);
@@ -140,16 +141,13 @@ export class LogicPassHints {
     }
     const check = this.state.world.checks[loc];
     const item = this.state.items[loc];
-    if (loc === 'OOT Temple of Time Master Sword' && !this.state.settings.shuffleMasterSword) {
+    if (this.state.fixedLocations.has(loc)) {
       return false;
     }
     if (isSmallKeyHideout(item) && this.state.settings.smallKeyShuffleHideout === 'anywhere') {
       return true;
     }
     if (isSmallKeyRegular(item) && this.state.settings.smallKeyShuffle === 'anywhere') {
-      return true;
-    }
-    if (isGanonBossKey(item) && this.state.settings.ganonBossKey === 'anywhere') {
       return true;
     }
     if (isRegularBossKey(item) && this.state.settings.bossKeyShuffle === 'anywhere') {
@@ -167,22 +165,10 @@ export class LogicPassHints {
     if (isDungeonReward(item) && this.state.settings.dungeonRewardShuffle !== 'anywhere') {
       return false;
     }
-    if (!this.state.settings.shuffleGerudoCard && item == 'OOT_GERUDO_CARD') {
-      return false;
-    }
     if (isGoldToken(item)) {
       return false;
     }
     if (isHouseToken(item) && this.state.settings.housesSkulltulaTokens === 'none') {
-      return false;
-    }
-    if (check.type === 'cow') {
-      if (check.game === 'oot' && !this.state.settings.cowShuffleOot)
-        return false;
-      if (check.game === 'mm' && !this.state.settings.cowShuffleMm)
-        return false;
-    }
-    if (check.type === 'shop' && check.game === 'oot' && this.state.settings.shopShuffleOot === 'none') {
       return false;
     }
     return true;

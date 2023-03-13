@@ -68,7 +68,7 @@ export const itemPool = (aSettings: Partial<Settings>) => {
 export const locationList = (aSettings: Partial<Settings>) => {
   const settings: Settings = { ...DEFAULT_SETTINGS, ...aSettings };
   const monitor = new Monitor({ onLog: () => {} });
-  const { world, config } = worldState(monitor, settings);
+  const { world, fixedLocations } = worldState(monitor, settings);
 
   // Precalculate this to avoid doing it more than once in the gui
   const dungeonLocations = Object.values(world.dungeons).reduce((acc, x) => new Set([...acc, ...x]));
@@ -76,7 +76,7 @@ export const locationList = (aSettings: Partial<Settings>) => {
   /* Everywhere below Check.type is a placeholder for Check.flags that I am going to add to the item tables. */
   const locations: LocInfo = {};
   for (const loc in world.checks) {
-    if (!isShuffled(settings, world, loc, dungeonLocations)) {
+    if (fixedLocations.has(loc) || !isShuffled(settings, world, loc, dungeonLocations)) {
       continue;
     }
     locations[loc] = [world.checks[loc].type];
