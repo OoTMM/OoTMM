@@ -260,5 +260,14 @@ function makeScenes() {
   fs.writeFileSync(__dirname + '/../data/static/mq_scenes.bin', fileBuffer);
 }
 
+function makeMaps() {
+  const offset = 0x18570;
+  const size = 34 * 0x1ec;
+  const kaleido = fs.readFileSync(path.join(argv[2], `ovl_kaleido_scope.bin`));
+  const mapData = kaleido.subarray(offset, offset + size);
+  fs.writeFileSync(__dirname + '/../data/static/mq_maps.bin', mapData);
+}
+
 makeRooms();
 makeScenes();
+makeMaps();
