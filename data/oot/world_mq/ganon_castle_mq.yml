@@ -56,5 +56,5 @@
   events:
     GANON_TRIAL_SHADOW: "has_lens && has_light_arrows && (has_hover_boots || (can_hookshot && has_fire))"
   locations:
-    "MQ Ganon Castle Shadow Trial Bomb Flower Chest": "(can_hookshot || has_hover_boots) && (can_use_bow || (has_lens && (can_use_din || has_explosives || has(STRENGTH)))"
+    "MQ Ganon Castle Shadow Trial Bomb Flower Chest": "(can_hookshot || has_hover_boots) && (can_use_bow || (has_lens && (can_use_din || has_explosives || has(STRENGTH))))"
     "MQ Ganon Castle Shadow Trial Switch Chest": "can_use_bow && has_lens && (has_hover_boots || (can_hookshot && has_fire))"

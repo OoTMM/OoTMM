@@ -602,3 +602,16 @@ MQ Gerudo Training Grounds Torch Slug Room Switch Chest,    chest,          NONE
 MQ Gerudo Training Grounds Maze Right Side Middle Chest,    chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x05,                       RUPEE_BLUE
 MQ Gerudo Training Grounds Maze Right Side Right Chest,     chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x08,                       RUPEE_GREEN
 MQ Gerudo Training Grounds Ice Arrows Chest,                chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x04,                       ARROW_ICE
+MQ Ganon Castle Light Trial Chest,                          chest,          NONE,                 INSIDE_GANON_CASTLE,            0x04,                       RECOVERY_HEART
+MQ Ganon Castle Forest Trial First Chest,                   chest,          NONE,                 INSIDE_GANON_CASTLE,            0x02,                       ARROWS_10
+MQ Ganon Castle Forest Trial Second Chest,                  chest,          NONE,                 INSIDE_GANON_CASTLE,            0x03,                       BOMBS_5
+MQ Ganon Castle Water Trial Chest,                          chest,          NONE,                 INSIDE_GANON_CASTLE,            0x01,                       RUPEE_RED
+MQ Ganon Castle Spirit Trial First Chest,                   chest,          NONE,                 INSIDE_GANON_CASTLE,            0x0a,                       BOMBCHU_5
+MQ Ganon Castle Spirit Trial Second Chest,                  chest,          NONE,                 INSIDE_GANON_CASTLE,            0x14,                       ARROWS_10
+MQ Ganon Castle Spirit Trial Back Right Sun Chest,          chest,          NONE,                 INSIDE_GANON_CASTLE,            0x09,                       RECOVERY_HEART
+MQ Ganon Castle Spirit Trial Back Left Sun Chest,           chest,          NONE,                 INSIDE_GANON_CASTLE,            0x08,                       SMALL_KEY_GANON
+MQ Ganon Castle Spirit Trial Front Left Sun Chest,          chest,          NONE,                 INSIDE_GANON_CASTLE,            0x07,                       RECOVERY_HEART
+MQ Ganon Castle Spirit Trial Gold Gauntlets Chest,          chest,          NONE,                 INSIDE_GANON_CASTLE,            0x06,                       STRENGTH
+MQ Ganon Castle Shadow Trial Bomb Flower Chest,             chest,          NONE,                 INSIDE_GANON_CASTLE,            0x00,                       ARROWS_10
+MQ Ganon Castle Shadow Trial Switch Chest,                  chest,          NONE,                 INSIDE_GANON_CASTLE,            0x05,                       SMALL_KEY_GANON
+MQ Ganon Castle Forest Trial Key,                           collectible,    NONE,                 INSIDE_GANON_CASTLE,            0x01,                       SMALL_KEY_GANON
