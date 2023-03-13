@@ -216,4 +216,6 @@ void Shader_MoonTear(GameState_Play*, s16);
 
 void SpawnRoomActors(GameState_Play* play, int id);
 
+void Play_LoadKaleidoOverlay(void*);
+
 #endif
