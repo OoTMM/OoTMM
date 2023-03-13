@@ -261,7 +261,7 @@ function makeScenes() {
 }
 
 function makeMaps() {
-  const offset = 0x18570;
+  const offset = 0x17aa0;
   const size = 34 * 0x1ec;
   const kaleido = fs.readFileSync(path.join(argv[2], `ovl_kaleido_scope.bin`));
   const mapData = kaleido.subarray(offset, offset + size);

@@ -1,6 +1,7 @@
 #include <combo.h>
 
 extern void* gMmMag;
+GameState_Play* gPlay;
 
 static void debugCheat(GameState_Play* play)
 {
@@ -190,6 +191,9 @@ void hookPlay_Init(GameState_Play* play)
 {
     s32 override;
 
+    /* Register play */
+    gPlay = play;
+
     /* Handle transition override */
     if (sInGrotto)
         gIsEntranceOverride = 0;
@@ -303,3 +307,11 @@ void Play_DrawWrapper(GameState_Play* play)
         comboDpadDraw(play);
     }
 }
+
+static void Play_LoadKaleidoScopeHook(void* unk)
+{
+    Play_LoadKaleidoOverlay(unk);
+    comboMqKaleidoHook(gPlay);
+}
+
+PATCH_CALL(0x8009a06c, Play_LoadKaleidoScopeHook);

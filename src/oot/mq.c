@@ -292,3 +292,43 @@ static void Play_LoadScene_Hook(GameState_Play* play, void* unk)
 }
 
 PATCH_CALL(0x8009cfd8, Play_LoadScene_Hook);
+
+typedef struct
+{
+    s16     icon;
+    s32     unk_04;
+    void*   vertexBuffer;
+    int     vertexCount;
+    s32     chestCount;
+    char    data[0x90];
+}
+DungeonMapFloor;
+
+_Static_assert(sizeof(DungeonMapFloor) == 0xa4, "DungeonMapFloor size mismatch");
+
+void comboMqKaleidoHook(GameState_Play* play)
+{
+    static const int kMapCount = 34 * 3;
+
+    int dungeonId;
+    DungeonMapFloor* maps;
+
+    dungeonId = mqDungeonId(play);
+    if (dungeonId < 0)
+        return;
+    if (!isEnabledMq(dungeonId))
+        return;
+
+    /* Load the alternate maps */
+    maps = OverlayAddr(0x8082a3e0);
+    DMARomToRam(CUSTOM_MQ_MAPS_ADDR | PI_DOM1_ADDR2, maps, kMapCount * sizeof(DungeonMapFloor));
+
+    /* Patch the vertex buffer */
+    for (int i = 0; i < kMapCount; ++i)
+    {
+        if (maps[i].vertexBuffer)
+        {
+            maps[i].vertexBuffer = OverlayAddr(0x8082ea00);
+        }
+    }
+}

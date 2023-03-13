@@ -399,6 +399,11 @@ void comboMenuKeysDraw(GameState_Play* play);
 /* Custom Shaders */
 void Shader_Xlu0(GameState_Play* play, s16 shaderId);
 
+/* MQ */
+void comboMqKaleidoHook(GameState_Play* play);
+
+extern GameState_Play* gPlay;
+
 #if defined(GAME_MM)
 void Ocarina_HandleWarp(Actor_Player* player, GameState_Play* ctxt);
 #endif
