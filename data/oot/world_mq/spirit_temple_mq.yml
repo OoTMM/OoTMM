@@ -20,7 +20,7 @@
     "Spirit Temple Child Upper": "has_explosives && has(SMALL_KEY_SPIRIT, 6)" #Everything in this room that kid can do adult can do too, only 6 keys is safe.
   locations:
     "MQ Spirit Temple Map Chest": "can_use_sticks || has_weapon || (has_explosives && has_nuts)"
-    "MQ Spirit Temple Map Room Back Chest": "has_weapon && has_explosives && can_use_slingshot"
+    "MQ Spirit Temple Map Room Back Chest": "has_weapon && has_explosives && can_use_slingshot && can_use_din"
     "MQ Spirit Temple Paradox Chest": "event(SPIRIT_PARADOX)"
 "Spirit Temple Child Upper":
 #All paths into this room guarantee explosives.
