@@ -9,7 +9,7 @@
   locations:
     "MQ Spirit Temple Entrance Initial Chest": "true"
     "MQ Spirit Temple Lobby Back-Left Chest": "event(SPIRIT_LOBBY_BOULDERS) && can_hit_triggers_distance"
-    "MQ Spirit Temple Lobby Back-Right Chest": "can_hit_triggers_distance || has_explosives"
+    "MQ Spirit Temple Lobby Back-Right Chest": "can_hit_triggers_distance || has_explosives || can_hookshot"
     #The following three chests are here to allow for an age indeterminate path. This is the only age indeterminate content in Spirit MQ.
     "MQ Spirit Temple Compass Chest": "can_use_slingshot && has(BOW) && has(SMALL_KEY_SPIRIT, 2) && has_explosives"
     "MQ Spirit Temple Sun Block Room Chest": "has(SMALL_KEY_SPIRIT, 2) && has_explosives && can_play(SONG_TIME) && is_child"
@@ -39,7 +39,7 @@
     "Spirit Temple Sun Block Room": "is_adult || can_play(SONG_TIME)" #Adult's long legs make the jumps easy
     "Spirit Temple Adult Lower": "has_fire_arrows && has_mirror_shield"
     "Spirit Temple Adult Upper": "has(SMALL_KEY_SPIRIT, 5)"
-    "Spirit Temple Boss": "event(SPIRIT_TEMPLE_LIGHT) || has_mirror_shield"
+    "Spirit Temple Boss": "event(SPIRIT_TEMPLE_LIGHT) && has_mirror_shield && has(BOSS_KEY_SPIRIT)"
   events:
     SPIRIT_STATUE_FIRE: "has_fire" #This allows for adult to open the shortcut for kid with Fire Arrows.
   locations:
@@ -50,7 +50,8 @@
 "Spirit Temple Sun Block Room":
   dungeon: Spirit
   exits:
-    "Spirit Temple Child Hand": "has(SMALL_KEY_SPIRIT, 7) && (has_weapon || can_use_sticks)"
+    #This looks weird but is the last way to account for a very specific scenario involving adult access to the Silver Gauntlets chest and the Colossus drop.
+    "Spirit Temple Child Hand": "(has(SMALL_KEY_SPIRIT, 7) && (has_weapon || can_use_sticks)) || (is_adult && has(SMALL_KEY_SPIRIT, 4) && has_lens && can_play(SONG_TIME))"
   locations:
     "MQ Spirit Temple Sun Block Room Chest": "true"
     "MQ Spirit Temple GS Sun Block Room": "is_adult"
