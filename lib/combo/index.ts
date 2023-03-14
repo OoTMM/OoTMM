@@ -33,7 +33,7 @@ export { SETTINGS, DEFAULT_SETTINGS, SETTINGS_CATEGORIES, TRICKS, itemName };
 export const itemPool = (aSettings: Partial<Settings>) => {
   const settings: Settings = { ...DEFAULT_SETTINGS, ...aSettings };
   const monitor = new Monitor({ onLog: () => {} });
-  const { world } = worldState(monitor, settings);
+  const { world, fixedLocations } = worldState(monitor, settings);
 
   /* Extract relevant items from the world */
   const items: Items = {};
@@ -41,7 +41,7 @@ export const itemPool = (aSettings: Partial<Settings>) => {
   for (const loc in world.checks) {
     const check = world.checks[loc];
     const item = check.item;
-    if (!isJunk(item) && !isDungeonReward(item) && !isDungeonItem(item) && !isToken(item) && !isStrayFairy(item)) {
+    if (!fixedLocations.has(loc) && !isJunk(item) && !isDungeonReward(item) && !isDungeonItem(item) && !isToken(item) && !isStrayFairy(item)) {
       rawItems.push(item);
     }
   }
@@ -68,7 +68,7 @@ export const itemPool = (aSettings: Partial<Settings>) => {
 export const locationList = (aSettings: Partial<Settings>) => {
   const settings: Settings = { ...DEFAULT_SETTINGS, ...aSettings };
   const monitor = new Monitor({ onLog: () => {} });
-  const { world, config } = worldState(monitor, settings);
+  const { world, fixedLocations } = worldState(monitor, settings);
 
   // Precalculate this to avoid doing it more than once in the gui
   const dungeonLocations = Object.values(world.dungeons).reduce((acc, x) => new Set([...acc, ...x]));
@@ -76,7 +76,7 @@ export const locationList = (aSettings: Partial<Settings>) => {
   /* Everywhere below Check.type is a placeholder for Check.flags that I am going to add to the item tables. */
   const locations: LocInfo = {};
   for (const loc in world.checks) {
-    if (!isShuffled(settings, world, loc, dungeonLocations)) {
+    if (fixedLocations.has(loc) || !isShuffled(settings, world, loc, dungeonLocations)) {
       continue;
     }
     locations[loc] = [world.checks[loc].type];

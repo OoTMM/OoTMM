@@ -281,7 +281,7 @@
     "Swamp Potion Shop": "true"
     "Woods of Mystery": "true"
   events:
-    MAGIC_BEANS_SWAMP: "has(MAGIC_BEAN) && (has(MASK_DEKU) || (has(MOON_TEAR) && has(DEED_LAND)))"
+    MAGIC_BEANS_SWAMP: "has(MAGIC_BEAN) && has(MASK_DEKU)"
     FROG_3: "has(MASK_DON_GERO)"
     SWAMP_OWL: "true"
   locations:

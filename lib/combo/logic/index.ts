@@ -12,6 +12,7 @@ import { LogicPassConfig } from './config';
 import { LogicPassWorldTransform } from './world-transform';
 import { Settings } from '../settings';
 import { LogicError } from './error';
+import { LogicPassFixer } from './fixer';
 
 interface LogicPass<Out> {
   run: () => Out;
@@ -45,6 +46,7 @@ export const worldState = (monitor: Monitor, settings: Settings) => {
     .apply(LogicPassConfig)
     .apply(LogicPassWorld)
     .apply(LogicPassWorldTransform)
+    .apply(LogicPassFixer)
     .exec();
 };
 
