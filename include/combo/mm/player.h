@@ -27,7 +27,7 @@ typedef struct PACKED ALIGNED(4)
     /* 0x155 */ u8 prevMask;
     /* 0x156 */ s8 pad_156; // unused padding
     /* 0x157 */ s8 pad_157; // unused padding
-    char        unk_156[0x84];
+    char        unk_158[0x84];
     OSMesgQueue objMsgQueue;
     OSMesg      objMsg;
     void*       objBuffer;
