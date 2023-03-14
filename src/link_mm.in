@@ -101,6 +101,7 @@ GiveItemDefaultRange = 0x800b8b84;
 ActorEnableTalk = 0x800b8614;
 ActorTalkedTo = 0x800b84d0;
 
+Message_ShowMessageAtYPosition = 0x801514b0;
 PlayerDisplayTextBox = 0x801518b0;
 
 Cutscene_End = 0x800ea0ec;
@@ -135,6 +136,7 @@ OverlayAddr = 0x801638d8;
 PlayMusic = 0x801a3238;
 
 Player_UsingItem = 0x801240dc;
+Player_DrawHookshotReticle = 0x80124cc4;
 SetChestFlag = 0x800b5c90;
 PlaySoundSpecial = 0x801a3098;
 

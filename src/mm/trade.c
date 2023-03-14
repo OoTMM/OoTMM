@@ -76,3 +76,18 @@ void comboRemoveTradeItem3(u16 xitemId)
         removeButtonItem(kMmTrade3[xitemId]);
     }
 }
+
+void comboToggleHookshot(void)
+{
+    u8* slot;
+
+    slot = gSave.inventory.items + ITS_MM_HOOKSHOT;
+    if (*slot == ITEM_MM_HOOKSHOT)
+    {
+        *slot = 0x11; // ITEM_MM_BOTTLE_POTION_RED but that enum is wrong
+    }
+    else
+    {
+        *slot = ITEM_MM_HOOKSHOT;
+    }
+}

@@ -328,8 +328,11 @@ void comboAddCommonItemOot(int sid, int noEffect)
     case SITEM_SONG_STORMS:
         gOotSave.inventory.quest.songStorms = 1;
         break;
-    case SITEM_HOOKSHOT:
+    case SITEM_OOTHOOKSHOT:
         addHookshot(1);
+        break;
+    case SITEM_HOOKSHOT:
+        addHookshot(2);
         break;
     case SITEM_LENS:
         gOotSave.inventory.items[ITS_OOT_LENS] = ITEM_OOT_LENS;
@@ -550,9 +553,17 @@ void comboAddItemSharedOot(s16 gi, int noEffect)
         }
     }
 
-    if (comboConfig(CFG_SHARED_HOOKSHOT) && gi == GI_OOT_HOOKSHOT)
+    if (comboConfig(CFG_SHARED_HOOKSHOT))
     {
-        comboAddCommonItemMm(SITEM_HOOKSHOT, noEffect);
+        switch (gi)
+        {
+        case GI_OOT_HOOKSHOT:
+            comboAddCommonItemMm(SITEM_OOTHOOKSHOT, noEffect);
+            break;
+        case GI_OOT_LONGSHOT:
+            comboAddCommonItemMm(SITEM_HOOKSHOT, noEffect);
+            break;
+        }
     }
 
     if (comboConfig(CFG_SHARED_LENS) && gi == GI_OOT_LENS)
@@ -725,10 +736,10 @@ int comboAddItemOot(s16 gi, int noEffect)
         addBombchu(20);
         break;
     case GI_OOT_HOOKSHOT:
-        comboAddCommonItemOot(SITEM_HOOKSHOT, noEffect);
+        comboAddCommonItemOot(SITEM_OOTHOOKSHOT, noEffect);
         break;
     case GI_OOT_LONGSHOT:
-        addHookshot(2);
+        comboAddCommonItemOot(SITEM_HOOKSHOT, noEffect);
         break;
     case GI_OOT_ARROW_ICE:
         comboAddCommonItemOot(SITEM_ARROW_ICE, noEffect);

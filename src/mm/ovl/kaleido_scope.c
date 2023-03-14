@@ -38,10 +38,40 @@ void KaleidoScope_AfterSetCutsorColor(GameState_Play* play)
         }
     }
 
+    if (play->pauseCtx.cursorSlot[0] == ITS_MM_HOOKSHOT && popcount(gMmExtraTrade.hookshot) > 1)
+    {
+        play->pauseCtx.cursorColorIndex = 4;
+        if (press)
+        {
+            comboToggleHookshot();
+            effect = 1;
+        }
+    }
+
     if (effect)
     {
         PlaySound(0x4809);
     }
+}
+
+void KaleidoScope_LoadNamedItemCustom(void* segment, u32 texIndex)
+{
+    if (texIndex == 0x11)
+    {
+        texIndex = 0xF; // Load Hookshot instead of OoT Hookshot
+    }
+    void (*KaleidoScope_LoadNamedItem)(void* segment, u32 texIndex);
+    KaleidoScope_LoadNamedItem = OverlayAddr(0x80821958);
+    KaleidoScope_LoadNamedItem(segment, texIndex);
+}
+
+void KaleidoScope_ShowItemMessage(GameState_Play* play, u16 messageId, u8 yPosition)
+{
+    if (messageId == 0x1711)
+    {
+        messageId = 0x170f; // Use Hookshot message instead of broken OoT Hookshot message
+    }
+    Message_ShowMessageAtYPosition(play, messageId, yPosition);
 }
 
 static int isKeysMenu;

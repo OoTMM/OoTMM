@@ -247,6 +247,35 @@ static void addTrade3(u8 index)
     gMmExtraTrade.tradeObtained3 |= (1 << (u16)index);
 }
 
+static void reloadSlotEquips(MmItemEquips* equips, int slot)
+{
+    for (int i = 0; i < 3; ++i)
+    {
+        if (equips->cButtonSlots[i] == slot)
+        {
+            equips->buttonItems[1 + i] = gMmSave.inventory.items[slot];
+        }
+    }
+}
+
+static void reloadSlot(int slot)
+{
+    reloadSlotEquips(&gMmSave.itemEquips, slot);
+}
+
+static void addHookshot(int level)
+{
+    u8 itemId;
+
+    if (level >= 2)
+        itemId = ITEM_MM_HOOKSHOT;
+    else
+        itemId = 0x11; // ITEM_MM_BOTTLE_POTION_RED but that enum is wrong
+    gMmSave.inventory.items[ITS_MM_HOOKSHOT] = itemId;
+    gMmExtraTrade.hookshot |= (1 << (level - 1));
+    reloadSlot(ITS_MM_HOOKSHOT);
+}
+
 void comboAddMagicUpgradeMm(int level)
 {
     gMmSave.playerData.magicAcquired = 1;
@@ -282,8 +311,11 @@ void comboAddCommonItemMm(int sid, int noEffect)
     case SITEM_SONG_STORMS:
         gMmSave.inventory.quest.songStorms = 1;
         break;
+    case SITEM_OOTHOOKSHOT:
+        addHookshot(1);
+        break;
     case SITEM_HOOKSHOT:
-        gMmSave.inventory.items[ITS_MM_HOOKSHOT] = ITEM_MM_HOOKSHOT;
+        addHookshot(2);
         break;
     case SITEM_LENS:
         gMmSave.inventory.items[ITS_MM_LENS] = ITEM_MM_LENS_OF_TRUTH;
@@ -486,9 +518,14 @@ void comboAddItemSharedMm(s16 gi, int noEffect)
         }
     }
 
-    if (comboConfig(CFG_SHARED_HOOKSHOT) && gi == GI_MM_HOOKSHOT)
+    if (comboConfig(CFG_SHARED_HOOKSHOT))
     {
-        comboAddCommonItemOot(SITEM_HOOKSHOT, noEffect);
+        switch (gi)
+        {
+        case GI_MM_HOOKSHOT:
+            comboAddCommonItemOot(SITEM_HOOKSHOT, noEffect);
+            break;
+        }
     }
 
     if (comboConfig(CFG_SHARED_LENS) && gi == GI_MM_LENS)

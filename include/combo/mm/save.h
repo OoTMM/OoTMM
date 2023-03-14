@@ -262,6 +262,7 @@ typedef struct
     u32 tradeObtained1:5;
     u32 tradeObtained2:2;
     u32 tradeObtained3:2;
+    u32 hookshot:1;
 }
 MmExtraTrade;
 

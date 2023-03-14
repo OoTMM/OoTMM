@@ -31,3 +31,26 @@ PATCH_END
 PATCH_START 0x8082d8fc
 .int 0
 PATCH_END
+
+/*
+==================================================================================================
+ Handle OoT Hookshot name
+==================================================================================================
+*/
+
+PATCH_START 0x80824738 + 0xe0
+  jal   KaleidoScope_LoadNamedItemCustom
+PATCH_END
+
+// Reloc for above line
+PATCH_START 0x808160A0 + 0x1703c
+.int 0
+PATCH_END
+
+PATCH_START 0x8081c604
+  jal   KaleidoScope_ShowItemMessage
+PATCH_END
+
+PATCH_START 0x8081c5e4
+  jal   KaleidoScope_ShowItemMessage
+PATCH_END

@@ -454,5 +454,6 @@
 #define SITEM_HEART_CONTAINER   0x17
 #define SITEM_RECOVERY_HEART    0x18
 #define SITEM_DEFENSE_UPGRADE   0x19
+#define SITEM_OOTHOOKSHOT       0x1a
 
 #endif
