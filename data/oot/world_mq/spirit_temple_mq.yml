@@ -81,6 +81,7 @@
   exits:
     "Spirit Temple Child Hand": "has_lens"
   locations:
+    "MQ Spirit Temple Dinolfos Room Chest": "true"
     "MQ Spirit Temple Boss Key Chest": "has_mirror_shield"
     "Spirit Temple Mirror Shield": "has_lens"
 "Spirit Temple Top Floor":
