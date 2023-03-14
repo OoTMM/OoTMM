@@ -393,6 +393,7 @@ extern s32 gLastScene;
 void comboTriggerWarp(GameState_Play* play, int index);
 
 /* Menu */
+void comboMenuInit(void);
 void comboMenuKeysUpdate(GameState_Play* play);
 void comboMenuKeysDraw(GameState_Play* play);
 

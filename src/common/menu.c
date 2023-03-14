@@ -450,6 +450,61 @@ static void printDungeonData(GameState_Play* play, int base, int index)
 
 static int menuCursor;
 
+void comboMenuInit(void)
+{
+    /* MQ Forest */
+    if (gComboData.mq & (1 << MQ_TEMPLE_FOREST))
+    {
+        gDungeonDefs[3].maxKeys = 6;
+    }
+
+    /* MQ Fire / keysanity */
+    if (gComboData.mq & (1 << MQ_TEMPLE_FIRE))
+    {
+        gDungeonDefs[4].maxKeys = 5;
+    }
+    else if (comboConfig(CFG_SMALL_KEY_SHUFFLE))
+    {
+        gDungeonDefs[4].maxKeys = 8;
+    }
+
+    /* MQ Water */
+    if (gComboData.mq & (1 << MQ_TEMPLE_WATER))
+    {
+        gDungeonDefs[5].maxKeys = 2;
+    }
+
+    /* MQ Shadow */
+    if (gComboData.mq & (1 << MQ_TEMPLE_SHADOW))
+    {
+        gDungeonDefs[6].maxKeys = 6;
+    }
+
+    /* MQ Spirit */
+    if (gComboData.mq & (1 << MQ_TEMPLE_SPIRIT))
+    {
+        gDungeonDefs[7].maxKeys = 7;
+    }
+
+    /* MQ Well */
+    if (gComboData.mq & (1 << MQ_BOTTOM_OF_THE_WELL))
+    {
+        gDungeonDefs[8].maxKeys = 2;
+    }
+
+    /* MQ GTG */
+    if (gComboData.mq & (1 << MQ_GERUDO_TRAINING_GROUNDS))
+    {
+        gDungeonDefs[11].maxKeys = 3;
+    }
+
+    /* MQ Ganon */
+    if (gComboData.mq & (1 << MQ_GANON_CASTLE))
+    {
+        gDungeonDefs[12].maxKeys = 3;
+    }
+}
+
 void comboMenuKeysUpdate(GameState_Play* play)
 {
     static int delay;
@@ -485,12 +540,6 @@ void comboMenuKeysUpdate(GameState_Play* play)
 
 void comboMenuKeysDraw(GameState_Play* play)
 {
-    /* Handle fire temple keys */
-    if (comboConfig(CFG_SMALL_KEY_SHUFFLE))
-    {
-        gDungeonDefs[4].maxKeys = 8;
-    }
-
     OPEN_DISPS(play->gs.gfx);
     gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 0, 0, 0, 255);
     gDPSetCombineMode(POLY_OPA_DISP++, G_CC_PRIMITIVE, G_CC_PRIMITIVE);
