@@ -585,6 +585,30 @@ MQ Shadow Temple GS Wind Hint,                              gs,             NONE
 MQ Shadow Temple GS After Wind Bomb,                        gs,             NONE,                 TEMPLE_SHADOW,                  0x43,                       GS_TOKEN
 MQ Shadow Temple GS After Boat,                             gs,             NONE,                 TEMPLE_SHADOW,                  0x44,                       GS_TOKEN
 MQ Shadow Temple GS Pre-Boss,                               gs,             NONE,                 TEMPLE_SHADOW,                  0x42,                       GS_TOKEN
+MQ Spirit Temple Entrance Initial Chest,                    chest,          NONE,                 TEMPLE_SPIRIT,                  0x1a,                       BOMBCHU_5
+MQ Spirit Temple Lobby Back-Left Chest,                     chest,          NONE,                 TEMPLE_SPIRIT,                  0x1e,                       SMALL_KEY_SPIRIT
+MQ Spirit Temple Lobby Back-Right Chest,                    chest,          NONE,                 TEMPLE_SPIRIT,                  0x1b,                       SMALL_KEY_SPIRIT
+MQ Spirit Temple Compass Chest,                             chest,          NONE,                 TEMPLE_SPIRIT,                  0x03,                       COMPASS_SPIRIT
+MQ Spirit Temple Sun Block Room Chest,                      chest,          NONE,                 TEMPLE_SPIRIT,                  0x01,                       RECOVERY_HEART
+MQ Spirit Temple Map Chest,                                 chest,          NONE,                 TEMPLE_SPIRIT,                  0x00,                       MAP_SPIRIT
+MQ Spirit Temple Map Room Back Chest,                       chest,          NONE,                 TEMPLE_SPIRIT,                  0x08,                       SMALL_KEY_SPIRIT
+MQ Spirit Temple Paradox Chest,                             chest,          NONE,                 TEMPLE_SPIRIT,                  0x1d,                       SMALL_KEY_SPIRIT
+MQ Spirit Temple Child Upper Ground Chest,                  chest,          NONE,                 TEMPLE_SPIRIT,                  0x06,                       BOMBCHU_5
+MQ Spirit Temple Child Upper Ledge Chest,                   chest,          NONE,                 TEMPLE_SPIRIT,                  0x0c,                       SMALL_KEY_SPIRIT
+MQ Spirit Temple Silver Block Room Target Chest,            chest,          NONE,                 TEMPLE_SPIRIT,                  0x1c,                       SMALL_KEY_SPIRIT
+MQ Spirit Temple Chest in Box,                              chest,          NONE,                 TEMPLE_SPIRIT,                  0x0f,                       RUPEE_BLUE
+MQ Spirit Temple Statue Room Ledge Chest,                   chest,          NONE,                 TEMPLE_SPIRIT,                  0x02,                       RECOVERY_HEART
+MQ Spirit Temple Lobby Front-Right Chest,                   chest,          NONE,                 TEMPLE_SPIRIT,                  0x1f,                       BOMBCHU_5
+MQ Spirit Temple Purple Leever Chest,                       chest,          NONE,                 TEMPLE_SPIRIT,                  0x04,                       RUPEE_PURPLE
+MQ Spirit Temple Symphony Room Chest,                       chest,          NONE,                 TEMPLE_SPIRIT,                  0x07,                       RUPEE_PURPLE
+MQ Spirit Temple Beamos Room Chest,                         chest,          NONE,                 TEMPLE_SPIRIT,                  0x19,                       ARROWS_30
+MQ Spirit Temple Boss Key Chest,                            chest,          NONE,                 TEMPLE_SPIRIT,                  0x05,                       BOSS_KEY_SPIRIT
+MQ Spirit Temple Topmost Chest,                             chest,          NONE,                 TEMPLE_SPIRIT,                  0x12,                       SMALL_KEY_SPIRIT
+MQ Spirit Temple GS Sun Block Room,                         gs,             NONE,                 TEMPLE_SPIRIT,                  0x38,                       GS_TOKEN
+MQ Spirit Temple GS Leever Room,                            gs,             NONE,                 TEMPLE_SPIRIT,                  0x39,                       GS_TOKEN
+MQ Spirit Temple GS Symphony Room,                          gs,             NONE,                 TEMPLE_SPIRIT,                  0x3b,                       GS_TOKEN
+MQ Spirit Temple GS Top Floor Left Wall,                    gs,             NONE,                 TEMPLE_SPIRIT,                  0x3a,                       GS_TOKEN
+MQ Spirit Temple GS Top Floor Back Wall,                    gs,             NONE,                 TEMPLE_SPIRIT,                  0x3c,                       GS_TOKEN
 MQ Gerudo Training Grounds Entryway Left Chest,             chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x13,                       ARROWS_10
 MQ Gerudo Training Grounds Entryway Right Chest,            chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x07,                       BOMBCHU_10
 MQ Gerudo Training Grounds Maze First Chest,                chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x0b,                       RUPEE_PURPLE
