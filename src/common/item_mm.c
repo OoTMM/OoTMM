@@ -251,9 +251,9 @@ static void reloadSlotEquips(MmItemEquips* equips, int slot)
 {
     for (int i = 0; i < 3; ++i)
     {
-        if (equips->cButtonSlots[i] == slot)
+        if (equips->cButtonSlots[0][1 + i] == slot)
         {
-            equips->buttonItems[1 + i] = gMmSave.inventory.items[slot];
+            equips->buttonItems[0][1 + i] = gMmSave.inventory.items[slot];
         }
     }
 }
