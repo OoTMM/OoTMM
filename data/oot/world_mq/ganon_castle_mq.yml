@@ -31,7 +31,7 @@
 "Ganon Castle Fire":
   dungeon: Ganon
   events:
-    GANON_TRIAL_FIRE: "has_tunic_goron_strict && can_lift_gold && (can_longshot || has_hover_boots)"
+    GANON_TRIAL_FIRE: "has_light_arrows && has_tunic_goron_strict && can_lift_gold && (can_longshot || has_hover_boots)"
 "Ganon Castle Water":
   dungeon: Ganon
   events:
