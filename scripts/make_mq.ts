@@ -251,6 +251,18 @@ function makeScenes() {
       const dataOffset = MINIMAPS_OFFSET[sceneId];
       const dataSize = MINIMAPS_OFFSET[sceneId + 1] - dataOffset;
       const data = minimapFile.subarray(dataOffset, dataOffset + dataSize);
+
+      /* Fire Temple fix */
+      if (sceneId === 4) {
+        const recordAddr = 0x72 * 3;
+        data.writeUint8(0x00, recordAddr + 0x00);
+        data.writeUint8(0x01, recordAddr + 0x01);
+        data.writeUint8(0x00, recordAddr + 0x02);
+        data.writeUint8(0x48, recordAddr + 0x03);
+        data.writeUint8(0x3c, recordAddr + 0x04);
+        data.writeUint8(0xff, recordAddr + 0x26);
+      }
+
       buffers.push(data);
       minimapSize = dataSize;
       minimapOffset = size;
