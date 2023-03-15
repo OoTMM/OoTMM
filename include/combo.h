@@ -301,6 +301,7 @@ void comboToggleTrade3(void);
 void comboRemoveTradeItem1(u16 xitemId);
 void comboRemoveTradeItem2(u16 xitemId);
 void comboRemoveTradeItem3(u16 xitemId);
+void comboToggleOcarina(void);
 void comboToggleHookshot(void);
 #endif
 
