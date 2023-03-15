@@ -305,6 +305,17 @@ function makeMaps() {
   const size = 34 * 0x1ec;
   const kaleido = fs.readFileSync(path.join(argv[2], `ovl_kaleido_scope.bin`));
   const mapData = kaleido.subarray(offset, offset + size);
+
+  /* PATCH FIRE TEMPLE MISSING CHEST */
+  const fireMissingChestId = 5;
+
+  const recordAddr = 0x20ac;
+  mapData.writeUInt32BE(6, recordAddr + 0x10);
+  const chestRecordAddr = recordAddr + 0x14 + fireMissingChestId * 0x0c;
+  mapData.writeUInt16BE(0x00, chestRecordAddr + 0x00);
+  mapData.writeFloatBE(46.5, chestRecordAddr + 0x04);
+  mapData.writeFloatBE(-17.5, chestRecordAddr + 0x08);
+
   fs.writeFileSync(__dirname + '/../data/static/mq_maps.bin', mapData);
 }
 
