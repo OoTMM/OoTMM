@@ -1,0 +1,18 @@
+"Bottom of the Well":
+  dungeon: BotW
+  exits:
+    "Kakariko": "true"
+    "Bottom of the Well Main": "is_child"
+"Bottom of the Well Main":
+  dungeon: BotW
+  exits:
+    "Bottom of the Well": "true"
+  locations:
+    "MQ Bottom of the Well Map Chest": "can_play(SONG_ZELDA)"
+    "MQ Bottom of the Well Compass Chest": "has_weapon && (has_ranged_weapon_child || has_explosives || can_play(SONG_ZELDA))"
+    "MQ Bottom of the Well Lens Chest": "can_play(SONG_ZELDA) && has(SMALL_KEY_BOTW, 2) && has_explosives && (has_weapon || can_use_sticks || can_play(SONG_SUN))" #Trying to get past these ReDeads/Wallmaster with actually nothing isn't fair.'
+    "MQ Bottom of the Well Dead Hand Key": "has_explosives"
+    "MQ Bottom of the Well East Middle Room Key": can_play(SONG_ZELDA)
+    "MQ Bottom of the Well GS Basement": "can_damage_skull"
+    "MQ Bottom of the Well GS West Middle Room": "can_play(SONG_ZELDA) && has_explosives"
+    "MQ Bottom of the Well GS Coffin Room": "can_damage_skull && has(SMALL_KEY_BOTW, 2)"

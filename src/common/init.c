@@ -11,6 +11,7 @@ void comboInit(void)
     comboInitOverride();
     comboInitHints();
     comboInitEntrances();
+    comboMenuInit();
 }
 
 ALIGNED(16) ComboData gComboData;

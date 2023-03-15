@@ -1,0 +1,73 @@
+"Fire Temple":
+  dungeon: Fire
+  exits:
+    "Death Mountain Crater Warp": "true"
+    "Fire Temple Upper Lobby": "is_adult && has_tunic_goron"
+    "Fire Temple Vanilla Hammer Loop": "has(SMALL_KEY_FIRE, 5) && has_weapon && (has_explosives_or_hammer || can_hookshot)"
+  locations:
+    "MQ Fire Temple Early Lower Left Chest": "can_damage"
+"Fire Temple Upper Lobby":
+  dungeon: Fire
+  exits:
+    "Fire Temple Pre-Boss": "has_fire"
+    "Fire Temple 1f Lava Room": "can_hammer"
+"Fire Temple Pre-Boss":
+  dungeon: Fire
+  exits:
+    "Fire Temple Upper Lobby": "true"
+    "Fire Temple Boss": "has(BOSS_KEY_FIRE) && (event(FIRE_TEMPLE_PILLAR_HAMMER) || has_hover_boots)"
+  locations:
+    "MQ Fire Temple Pre-Boss Chest": "has_fire && (can_use_bow || has_tunic_goron_strict)"
+"Fire Temple Vanilla Hammer Loop":
+  dungeon: Fire
+  locations:
+    "MQ Fire Temple Hammer Chest": "true"
+    "MQ Fire Temple Map Chest": "can_hammer"
+"Fire Temple 1f Lava Room":
+  dungeon: Fire
+  exits:
+    "Fire Temple Upper Lobby": "true"
+    "Fire Temple Maze Lower": "has_tunic_goron_strict && has(SMALL_KEY_FIRE, 2) && has_fire"
+  locations:
+    "MQ Fire Temple Boss Key Chest": "has_fire && can_hookshot"
+    "MQ Fire Temple 1f Lava Room Goron Chest": "has_fire && can_hookshot && has_explosives"
+    "MQ Fire Temple GS 1f Lava Room": "true"
+"Fire Temple Maze Lower":
+  dungeon: Fire
+  exits:
+    "Fire Temple 1f Lava Room": "true"
+    "Fire Temple Maze Upper": "can_hookshot && (trick(OOT_HAMMER_WALLS) || has_explosives)"
+  locations:
+    "MQ Fire Temple Maze Lower Chest": "true"
+"Fire Temple Maze Upper":
+  dungeon: Fire
+  exits:
+    "Fire Temple Burning Block": "can_play(SONG_TIME) || can_longshot"
+    "Fire Temple 3f Lava Room": "has(SMALL_KEY_FIRE, 3)"
+  locations:
+    "MQ Fire Temple Maze Upper Chest": "true"
+    "MQ Fire Temple Maze Side Room Chest": "true"
+    "MQ Fire Temple Compass Chest": "has_explosives"
+"Fire Temple Burning Block":
+  dungeon: Fire
+  locations:
+    "MQ Fire Temple GS Burning Block": "true"
+"Fire Temple 3f Lava Room":
+  dungeon: Fire
+  exits:
+    "Fire Temple Fire Walls": "can_use_bow" #With tricks, there's more logic here
+"Fire Temple Fire Walls":
+  dungeon: Fire
+  exits:
+    "Fire Temple Top": "has(SMALL_KEY_FIRE, 4)"
+  events:
+    FIRE_TEMPLE_PILLAR_HAMMER: "true"
+  locations:
+    "MQ Fire Temple Flare Dancer Key": "true"
+    "MQ Fire Temple GS Fire Walls Side Room": "has_hover_boots || can_play(SONG_TIME)"
+    "MQ Fire Temple GS Fire Walls Middle": "has_explosives"
+"Fire Temple Top":
+  dungeon: Fire
+  locations:
+    "MQ Fire Temple Topmost Chest": "true"
+    "MQ Fire Temple GS Topmost": "has(SMALL_KEY_FIRE, 5)"

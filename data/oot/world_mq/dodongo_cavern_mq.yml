@@ -1,0 +1,81 @@
+"Dodongo Cavern":
+  dungeon: DC
+  exits:
+    "Death Mountain": "true"
+    "Dodongo Cavern Main": "has_bombflowers || can_hammer"
+"Dodongo Cavern Main":
+  dungeon: DC
+  exits:
+    "Dodongo Cavern": "true"
+    "Dodongo Cavern Skull": "has_explosives"
+    "Dodongo Cavern Upper Staircase": "has_bombflowers && (is_adult || (has_nuts || has_weapon || has_explosives || has_ranged_weapon_child || can_use_sticks))"
+    "Dodongo Cavern Upper Ledges": "has_explosives_or_hammer || can_use_din"
+    "Dodongo Cavern Lower Tunnel": "has_explosives_or_hammer || event(DC_MQ_SHORTCUT)"
+    "Dodongo Cavern Bomb Bag Ledge": "is_adult"
+  event:
+    STICKS: "has_weapon || can_boomerang"
+  locations:
+    "MQ Dodongo Cavern Map Chest": "has_bombflowers || can_hammer"
+    "MQ Dodongo Cavern GS Time Blocks": "can_play(SONG_TIME) && can_damage_skull"
+    #"MQ Dodongo Cavern Lobby Scrub Front": "has_shield_for_scrub || has_ranged_weapon || can_hammer || has_nuts"
+    #"MQ Dodongo Cavern Lobby Scrub Back": "has_shield_for_scrub || has_ranged_weapon || can_hammer || has_nuts"
+  gossip:
+    "Dodongo Cavern Gossip": "has_bombflowers || can_hammer"
+"Dodongo Cavern Upper Staircase":
+  dungeon: DC
+  exits:
+    "Dodongo Cavern Main": "true"
+    "Dodongo Cavern Upper Ledges": "can_hookshot || has_hover_boots || (is_adult && trick(OOT_DC_JUMP))"
+    "Dodongo Cavern Upper Lizalfos": "can_use_sticks || (has_fire && has_explosives_or_hammer)"
+  locations:
+    "MQ Dodongo Cavern Compass Chest": "true"
+    "MQ Dodongo Cavern Larvae Room Chest": "can_use_sticks || has_fire"
+    "MQ Dodongo Cavern GS Larve Room": "can_use_sticks || has_fire"
+    #"MQ Dodongo Cavern Staircase Scrub": "has_shield_for_scrub || has_ranged_weapon || can_hammer || has_nuts"
+"Dodongo Cavern Upper Lizalfos":
+  dungeon: DC
+  exits:
+    "Dodongo Cavern Upper Ledges": "can_use_sticks || has_weapon || can_use_slingshot"
+  locations:
+    "MQ Dodongo Cavern GS Upper Lizalfos": "has_explosives_or_hammer"
+"Dodongo Cavern Upper Ledges":
+  dungeon: DC
+  exits:
+    "Dodongo Cavern Upper Lizalfos": "true"
+    "Dodongo Cavern Upper Staircase": "true"
+  events:
+    "DC_MQ_SHORTCUT": "has_bombflowers || can_hammer"
+  locations:
+    "MQ Dodongo Cavern Upper Ledge Chest": "true"
+"Dodongo Cavern Lower Tunnel":
+  dungeon: DC
+  exits:
+    "Dodongo Cavern Lower Lizalfos": "can_use_bow || ((has_bombflowers || can_use_din) && can_use_slingshot)"
+  #locations:
+    #"MQ Dodongo Cavern Tunnel Side Scrub": "has_shield_for_scrub || has_ranged_weapon || can_hammer || has_nuts"
+"Dodongo Cavern Lower Lizalfos":
+  dungeon: DC
+  exits:
+    "Dodongo Cavern Lower Tunnel": "can_use_sticks || has_weapon || can_use_slingshot"
+    "Dodongo Cavern Poe Room": "can_use_sticks || has_weapon || can_use_slingshot"
+"Dodongo Cavern Poe Room":
+  dungeon: DC
+  exits:
+    "Dodongo Cavern Lower Lizalfos": "true"
+    "Dodongo Cavern Bomb Bag Ledge": "can_use_bow || has_bombflowers || can_use_din"
+  locations:
+    "MQ Dodongo Cavern GS Poe Room Side": "can_collect_distance && (can_use_bow || has_bombflowers || can_use_din)"
+"Dodongo Cavern Bomb Bag Ledge":
+  dungeon: DC
+  exits:
+    "Dodongo Cavern Poe Room": "true"
+  locations:
+    "MQ Dodongo Cavern Bomb Bag Chest": "true"
+"Dodongo Cavern Skull":
+  dungeon: DC
+  exits:
+    "Dodongo Cavern Main": "true"
+    "Dodongo Cavern Boss": "true"
+  locations:
+    "MQ Dodongo Cavern Chest Under Grave": "true"
+    "MQ Dodongo Cavern GS Near Boss": "true"

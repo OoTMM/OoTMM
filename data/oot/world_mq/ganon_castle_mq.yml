@@ -1,0 +1,60 @@
+"Ganon Castle Main":
+  dungeon: Ganon
+  exits:
+    "Ganon Castle Light": "can_lift_gold"
+    "Ganon Castle Forest": "true"
+    "Ganon Castle Fire": "true"
+    "Ganon Castle Water": "true"
+    "Ganon Castle Spirit": "true"
+    "Ganon Castle Shadow": "true"
+    "Ganon Castle Tower": "true"
+  #locations:
+    #"MQ Ganon Castle Leftmost Scrub": "has_lens && (can_hammer || has_ranged_weapon_adult || has_nuts || has_shield_for_scrubs)"
+    #"MQ Ganon Castle Left-Center Scrub": "has_lens && (can_hammer || has_ranged_weapon_adult || has_nuts || has_shield_for_scrubs)"
+    #"MQ Ganon Castle Center Scrub": "has_lens && (can_hammer || has_ranged_weapon_adult || has_nuts || has_shield_for_scrubs)"
+    #"MQ Ganon Castle Right-Center Scrub": "has_lens && (can_hammer || has_ranged_weapon_adult || has_nuts || has_shield_for_scrubs)"
+    #"MQ Ganon Castle Rightmost Scrub": "has_lens && (can_hammer || has_ranged_weapon_adult || has_nuts || has_shield_for_scrubs)"
+"Ganon Castle Light":
+  dungeon: Ganon
+  events:
+    GANON_TRIAL_LIGHT: "has_light_arrows && has_lens && can_hookshot && has(SMALL_KEY_GANON, 3)"
+  locations:
+    "MQ Ganon Castle Light Trial Chest": "can_play(SONG_ZELDA)"
+"Ganon Castle Forest":
+  dungeon: Ganon
+  events:
+    GANON_TRIAL_FOREST: "can_play(SONG_TIME) && has_light_arrows"
+  locations:
+    "MQ Ganon Castle Forest Trial Key": "can_hookshot"
+    "MQ Ganon Castle Forest Trial First Chest": "can_use_bow"
+    "MQ Ganon Castle Forest Trial Second Chest": "has_fire"
+"Ganon Castle Fire":
+  dungeon: Ganon
+  events:
+    GANON_TRIAL_FIRE: "has_light_arrows && has_tunic_goron_strict && can_lift_gold && (can_longshot || has_hover_boots)"
+"Ganon Castle Water":
+  dungeon: Ganon
+  events:
+    BLUE_FIRE: "has_bottle"
+    GANON_TRIAL_WATER: "event(BLUE_FIRE) && has(SMALL_KEY_GANON, 3) && has_light_arrows"
+  locations:
+    "MQ Ganon Castle Water Trial Chest": "event(BLUE_FIRE)"
+"Ganon Castle Spirit":
+  dungeon: Ganon
+  events:
+    GANON_TRIAL_SPIRIT: "has_light_arrows && has_fire_arrows && has_mirror_shield && can_hammer && has_explosives"
+  locations:
+    "MQ Ganon Castle Spirit Trial First Chest": "can_hammer && (can_use_bow || trick(OOT_HAMMER_WALLS))"
+    "MQ Ganon Castle Spirit Trial Second Chest": "can_hammer && (can_use_bow || trick(OOT_HAMMER_WALLS)) && has_explosives && has_lens"
+    #Chests are named relative to facing the door to the end of the trial
+    "MQ Ganon Castle Spirit Trial Back Right Sun Chest": "can_hammer && has_fire_arrows && has_mirror_shield && has_explosives"
+    "MQ Ganon Castle Spirit Trial Back Left Sun Chest": "can_hammer && has_fire_arrows && has_mirror_shield && has_explosives"
+    "MQ Ganon Castle Spirit Trial Front Left Sun Chest": "can_hammer && has_fire_arrows && has_mirror_shield && has_explosives"
+    "MQ Ganon Castle Spirit Trial Gold Gauntlets Chest": "can_hammer && has_fire_arrows && has_mirror_shield && has_explosives"
+"Ganon Castle Shadow":
+  dungeon: Ganon
+  events:
+    GANON_TRIAL_SHADOW: "has_lens && has_light_arrows && (has_hover_boots || (can_hookshot && has_fire))"
+  locations:
+    "MQ Ganon Castle Shadow Trial Bomb Flower Chest": "(can_hookshot || has_hover_boots) && (can_use_bow || (has_lens && has_hover_boots && (can_use_din || has_bombflowers)))"
+    "MQ Ganon Castle Shadow Trial Switch Chest": "can_use_bow && has_lens && (has_hover_boots || (can_hookshot && has_fire))"

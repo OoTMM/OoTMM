@@ -72,6 +72,7 @@ const SIMPLE_DEPENDENCIES: {[k: string]: string[]} = {
     'OOT Hyrule Field Ocarina of Time',
     'OOT Hyrule Field Song of Time',
   ],
+  /*
   OOT_SMALL_KEY_FOREST: [
     'OOT Forest Temple Map',
     'OOT Forest Temple Maze',
@@ -122,13 +123,6 @@ const SIMPLE_DEPENDENCIES: {[k: string]: string[]} = {
     'OOT Spirit Temple Boss HC',
     'OOT Spirit Temple Boss',
   ],
-  OOT_GS_TOKEN: [
-    'OOT Skulltula House 10 Tokens',
-    'OOT Skulltula House 20 Tokens',
-    'OOT Skulltula House 30 Tokens',
-    'OOT Skulltula House 40 Tokens',
-    'OOT Skulltula House 50 Tokens',
-  ],
   OOT_SMALL_KEY_GF: [
     'OOT Gerudo Member Card',
   ],
@@ -156,6 +150,14 @@ const SIMPLE_DEPENDENCIES: {[k: string]: string[]} = {
   ],
   OOT_SMALL_KEY_GANON: [
     'OOT Ganon Castle Light Chest Lullaby',
+  ],
+  */
+  OOT_GS_TOKEN: [
+    'OOT Skulltula House 10 Tokens',
+    'OOT Skulltula House 20 Tokens',
+    'OOT Skulltula House 30 Tokens',
+    'OOT Skulltula House 40 Tokens',
+    'OOT Skulltula House 50 Tokens',
   ],
   MM_MASK_CAPTAIN: [
     'MM Moon Fierce Deity Mask',

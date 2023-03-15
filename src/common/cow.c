@@ -53,6 +53,8 @@ static int EnCow_GetCowID(Actor* cow, GameState_Play* play)
         return 6;
     case SCE_OOT_GERUDO_VALLEY:
         return 8;
+    case SCE_OOT_INSIDE_JABU_JABU:
+        return 9;
     }
     return -1;
 }

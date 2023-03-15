@@ -1,13 +1,14 @@
 #include <combo.h>
 
 extern void* gMmMag;
+GameState_Play* gPlay;
 
 static void debugCheat(GameState_Play* play)
 {
 #if defined(DEBUG)
-    gMmSave.inventory.strayFairies[0] = 15;
     if (play->gs.input[0].current.buttons & L_TRIG)
     {
+        gSave.inventory.dungeonKeys[SCE_OOT_TEMPLE_FIRE] = 8;
         gSave.inventory.items[ITS_OOT_STICKS] = ITEM_OOT_STICK;
         gSave.inventory.items[ITS_OOT_NUTS] = ITEM_OOT_NUT;
         gSave.inventory.items[ITS_OOT_BOMBS] = ITEM_OOT_BOMB;
@@ -25,7 +26,7 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.items[ITS_OOT_HAMMER] = ITEM_OOT_HAMMER;
         gSave.inventory.items[ITS_OOT_HOOKSHOT] = ITEM_OOT_LONGSHOT;
         gSave.inventory.items[ITS_OOT_LENS] = ITEM_OOT_LENS;
-        gSave.inventory.equipment.swords = 0x2;
+        gSave.inventory.equipment.swords = 0x7;
         gSave.inventory.equipment.shields = 0x7;
         gSave.inventory.equipment.tunics = 0x7;
         gSave.inventory.equipment.boots = 0x7;
@@ -75,7 +76,7 @@ static void debugCheat(GameState_Play* play)
 
         gSave.inventory.quest.stoneRuby = 1;
 
-        //gSave.health = gSave.healthMax = 20 * 0x10;
+        gSave.playerData.health = gSave.playerData.healthMax = 20 * 0x10;
 
         gSave.playerData.rupees = 500;
 
@@ -99,7 +100,6 @@ static void debugCheat(GameState_Play* play)
 
 static void eventFixes(GameState_Play* play)
 {
-
     /* Skip forest temple cutscene */
     if (gSave.entrance == 0x169)
     {
@@ -191,6 +191,9 @@ static u8 sInGrotto;
 void hookPlay_Init(GameState_Play* play)
 {
     s32 override;
+
+    /* Register play */
+    gPlay = play;
 
     /* Handle transition override */
     if (sInGrotto)
@@ -305,3 +308,11 @@ void Play_DrawWrapper(GameState_Play* play)
         comboDpadDraw(play);
     }
 }
+
+static void Play_LoadKaleidoScopeHook(void* unk)
+{
+    Play_LoadKaleidoOverlay(unk);
+    comboMqKaleidoHook(gPlay);
+}
+
+PATCH_CALL(0x8009a06c, Play_LoadKaleidoScopeHook);

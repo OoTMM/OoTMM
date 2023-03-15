@@ -230,4 +230,7 @@ extern u8 gOcarinaSongBufferCursor;
 
 void HandleMessages(GameState_Play* play, void* unk);
 
+void Play_LoadKaleidoOverlay(void*);
+void LoadMapMark(void*);
+
 #endif

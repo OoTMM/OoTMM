@@ -1,0 +1,55 @@
+"Jabu-Jabu":
+  dungeon: JJ
+  exits:
+    "Zora Fountain": "true"
+    "Jabu-Jabu Main": "event(JABU_MQ_START)"
+  events:
+    "JABU_MQ_START": "can_use_slingshot"
+  locations:
+    "MQ Jabu-Jabu Map Chest": "has_explosives_or_hammer"
+    "MQ Jabu-Jabu Entry Chest": "can_use_slingshot"
+"Jabu-Jabu Main":
+  dungeon: JJ
+  exits:
+    "Jabu-Jabu": "true"
+    "Jabu-Jabu Back": "can_boomerang && can_use_slingshot && has_explosives"
+    "Jabu-Jabu Pre-Boss": "event(JABU_TENTACLE_RED) && (event(JABU_BIG_OCTO) || can_hookshot || has_hover_boots)"
+    "Jabu-Jabu Basement Side Room": "event(JABU_TENTACLE_RED)"
+  events:
+    "JABU_BIG_OCTO": "event(JABU_TENTACLE_GREEN) && is_child && (can_use_sticks || has_weapon)"
+  locations:
+    "MQ Jabu-Jabu Compass Chest": "can_use_slingshot"
+    "MQ Jabu-Jabu Second Room B1 Chest": "true"
+    "MQ Jabu-Jabu Second Room 1F Chest": "has_hover_boots || can_hookshot || event(JABU_BIG_OCTO)"
+    "MQ Jabu-Jabu Third Room West Chest": "can_use_slingshot"
+    "MQ Jabu-Jabu Third Room East Chest": "can_use_slingshot"
+    "MQ Jabu-Jabu SoT Room Lower Chest": "true"
+    "MQ Jabu-Jabu Boomerang Chest": "true" #You will always have an acceptable weapon for this.
+    "MQ Jabu-Jabu GS SoT Block": "can_play(SONG_TIME)"
+    "MQ Jabu-Jabu Cow": "can_play(SONG_EPONA) && event(JABU_BIG_OCTO) && is_child"
+"Jabu-Jabu Back":
+  dungeon: JJ
+  exits:
+    "Jabu-Jabu Main": "can_boomerang"
+  events:
+    "JABU_TENTACLE_GREEN": "can_use_sticks || can_use_din"
+    "JABU_TENTACLE_RED": "true"
+  locations:
+    "MQ Jabu-Jabu Back Chest": "true"
+    "MQ Jabu-Jabu GS Back": "event(JABU_TENTACLE_GREEN)"
+"Jabu-Jabu Basement Side Room":
+  dungeon: JJ
+  exits:
+    "Jabu-Jabu Main": "true"
+  locations:
+    "MQ Jabu-Jabu GS Basement Side Room": "has_lens || (has_hover_boots && can_hookshot) || (has_fire_arrows && can_longshot)"
+"Jabu-Jabu Pre-Boss":
+  dungeon: JJ
+  exits:
+    "Jabu-Jabu Boss": "event(JABU_MQ_END)"
+    "Jabu-Jabu Main": "true"
+  events:
+    "JABU_MQ_END": "can_use_slingshot"
+  locations:
+    "MQ Jabu-Jabu Pre-Boss Chest": "can_use_slingshot"
+    "MQ Jabu-Jabu GS Pre-Boss": "can_boomerang" #Adult probably has some solutions here, but it doesn't matter

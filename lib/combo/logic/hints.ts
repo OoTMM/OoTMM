@@ -280,6 +280,9 @@ export class LogicPassHints {
         break;
       }
       const locations = this.state.world.checkHints[checkHint];
+      if (!locations) {
+        continue;
+      }
       if (locations.every(l => this.state.settings.junkLocations.includes(l))) {
         continue;
       }

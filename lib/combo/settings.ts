@@ -413,6 +413,28 @@ const DEFAULT_TRICKS = Object.keys(TRICKS).reduce((tricks, trick) => {
 
 const DEFAULT_JUNK_LOCATIONS: string[] = [];
 
+export const DUNGEONS = {
+  DT: "Deku Tree",
+  DC: "Dodongo's Cavern",
+  JJ: "Jabu-Jabu",
+  Forest: "Forest Temple",
+  Fire: "Fire Temple",
+  Water: "Water Temple",
+  Spirit: "Spirit Temple",
+  Shadow: "Shadow Temple",
+  BotW: "Bottom of the Well",
+  IC: "Ice Cavern",
+  GTG: "Gerudo Training Grounds",
+  Ganon: "Ganon's Castle",
+} as const;
+
+export type DungeonSettings = {[k in keyof typeof DUNGEONS]: 'vanilla' | 'mq' | 'random'};
+
+const DEFAULT_DUNGEONS = Object.keys(DUNGEONS).reduce((dungeons, dungeon) => {
+  dungeons[dungeon] = 'vanilla';
+  return dungeons;
+}, {} as any) as DungeonSettings;
+
 type SettingDataEnumValue = {
   readonly value: string;
   readonly name: string;
@@ -452,10 +474,11 @@ export type Settings = SettingsBase & {
   startingItems: {[k: string]: number},
   junkLocations: string[],
   tricks: Tricks,
+  dungeon: DungeonSettings,
 };
 
 export const DEFAULT_SETTINGS: Settings = { ...SETTINGS.map(s => {
   return {[s.key]: s.default};
-}).reduce((a, b) => ({...a, ...b}), {}), startingItems: {}, junkLocations: DEFAULT_JUNK_LOCATIONS, tricks: { ...DEFAULT_TRICKS } } as Settings;
+}).reduce((a, b) => ({...a, ...b}), {}), startingItems: {}, junkLocations: DEFAULT_JUNK_LOCATIONS, tricks: { ...DEFAULT_TRICKS }, dungeon: { ...DEFAULT_DUNGEONS } } as Settings;
 
 export const settings = (s: Partial<Settings>): Settings => ({...DEFAULT_SETTINGS, ...s});

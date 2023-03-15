@@ -74,6 +74,9 @@ async function copyData() {
   glob.sync('build/assets/*.bin').forEach((filename) => {
     promises.push(fs.copyFile(filename, `dist/data/${path.basename(filename)}`));
   });
+  glob.sync('data/static/*.bin').forEach((filename) => {
+    promises.push(fs.copyFile(filename, `dist/data/${path.basename(filename)}`));
+  });
   await Promise.all(promises);
 }
 

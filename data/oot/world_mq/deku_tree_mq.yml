@@ -1,0 +1,63 @@
+"Deku Tree":
+  dungeon: DT
+  exits:
+    "Kokiri Forest": "true"
+    "Deku Tree Lobby": "true"
+"Deku Tree Lobby":
+  dungeon: DT
+  exits:
+    "Deku Tree Compass Room": "can_use_bow || (can_use_slingshot && (can_use_sticks || can_use_din))"
+    "Deku Tree Water Room": "(can_use_slingshot || can_use_bow) && (can_use_sticks || has_fire)"
+    "Deku Tree Basement Ledge": "is_adult || event(DEKU_BLOCK) || trick(OOT_DEKU_SKIP)"
+  events:
+    STICKS: "has_weapon || can_boomerang"
+    NUTS: "can_kill_baba_nuts"
+  locations:
+    "MQ Deku Tree Map Chest": "true"
+    "MQ Deku Tree Slingshot Chest": "has_weapon || can_use_sticks || has_ranged_weapon_child" #Bombs and Din's work, but it's horrible.
+    "MQ Deku Tree Slingshot Room Far Chest": "can_use_sticks || has_fire"
+    "MQ Deku Tree Basement Chest": "can_use_sticks || has_fire"
+    "MQ Deku Tree GS Lobby Crate": "can_damage_skull"
+"Deku Tree Compass Room":
+  dungeon: DT
+  exits:
+    "Deku Tree Lobby": "true"
+  locations:
+    "MQ Deku Tree Compass Chest": "true"
+    "MQ Deku Tree GS Compass Room": "(has_explosives || (can_play(SONG_TIME) && can_hammer)) && can_collect_distance"
+"Deku Tree Water Room":
+  dungeon: DT
+  exits:
+    "Deku Tree Lobby": "true"
+    "Deku Tree Water Room Back": "(is_child && has_shield) || can_longshot || (can_hookshot && has_iron_boots)"
+  locations:
+    "MQ Deku Tree Before Water Platform Chest": "true"
+"Deku Tree Water Room Back":
+  dungeon: DT
+  exits:
+    "Deku Tree Backrooms": "can_use_sticks || has_fire"
+  locations:
+    "MQ Deku Tree After Water Platform Chest": "can_play(SONG_TIME)"
+    "MQ Deku Tree Before Water Platform Chest": "true"
+"Deku Tree Backrooms":
+  dungeon: DT
+  exits:
+    "Deku Tree Water Room Back": "has_weapon || has_ranged_weapon_child" #Judgment call, this fight is way too big for sticks and nuts to be forced.
+    "Deku Tree Basement Ledge": "can_use_sticks || can_use_din"
+  locations:
+    "MQ Deku Tree GS Song of Time Blocks": "(can_play(SONG_TIME) && can_collect_distance) || can_longshot"
+    "MQ Deku Tree GS Back Room": "(can_use_sticks || has_fire) && can_collect_distance"
+"Deku Tree Basement Ledge":
+  dungeon: DT
+  exits:
+    "Deku Tree Before Boss": "can_use_sticks || has_fire"
+    "Deku Tree Backrooms": "is_child"
+  events:
+    DEKU_BLOCK: "true"
+  #locations:
+    #"MQ Deku Tree Scrub": "has_shield_for_scrub || has_ranged_weapon || can_hammer || has_nuts"
+"Deku Tree Before Boss":
+  dungeon: DT
+  exits:
+    "Deku Tree Basement Ledge": "true"
+    "Deku Tree Boss": "has_shield_for_scrubs"

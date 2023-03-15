@@ -1,0 +1,10 @@
+"Ganon Castle Tower":
+  dungeon: Ganon
+  locations:
+    "Ganon Castle Boss Key": "has_weapon"
+  exits:
+    "Ganon Castle Tower Boss": "setting(ganonBossKey, removed) || has(BOSS_KEY_GANON)"
+"Ganon Castle Tower Boss":
+  dungeon: Ganon
+  events:
+    GANON: "has_light_arrows"

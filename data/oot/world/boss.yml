@@ -1,0 +1,87 @@
+"Deku Tree Boss":
+  boss: true
+  dungeon: DT
+  locations:
+    "Deku Tree Boss Container": "(has_nuts || can_use_slingshot) && (can_use_sticks || has_weapon)"
+    "Deku Tree Boss": "(has_nuts || can_use_slingshot) && (can_use_sticks || has_weapon)"
+"Dodongo Cavern Boss":
+  boss: true
+  dungeon: DC
+  exits:
+    "Dodongo Cavern After Boss": "has_explosives"
+  locations:
+    "Dodongo Cavern Boss Chest": "true"
+"Dodongo Cavern After Boss":
+  boss: true
+  dungeon: DC
+  locations:
+    "Dodongo Cavern Boss Container": "can_use_sticks || has_weapon"
+    "Dodongo Cavern Boss": "can_use_sticks || has_weapon"
+"Jabu-Jabu Boss":
+  boss: true
+  dungeon: JJ
+  exits:
+    "Jabu-Jabu After Boss": "can_boomerang && (can_use_sticks || has_weapon)"
+"Jabu-Jabu After Boss":
+  boss: true
+  dungeon: JJ
+  locations:
+    "Jabu-Jabu Boss Container": "true"
+    "Jabu-Jabu Boss": "true"
+"Forest Temple Boss":
+  boss: true
+  dungeon: Forest
+  exits:
+    "Forest Temple After Boss": "(has_ranged_weapon_adult || can_use_slingshot) && has_weapon"
+"Forest Temple After Boss":
+  boss: true
+  dungeon: Forest
+  locations:
+    "Forest Temple Boss": "true"
+    "Forest Temple Boss Container": "true"
+"Fire Temple Boss":
+  boss: true
+  dungeon: Fire
+  exits:
+    "Fire Temple After Boss": "can_hammer && has_tunic_goron_strict"
+"Fire Temple After Boss":
+  boss: true
+  dungeon: Fire
+  locations:
+    "Fire Temple Boss Container": "true"
+    "Fire Temple Boss": "true"
+"Water Temple Boss":
+  boss: true
+  dungeon: Water
+  exits:
+    "Water Temple After Boss": "can_hookshot && has_weapon"
+"Water Temple After Boss":
+  boss: true
+  dungeon: Water
+  events:
+    WATER_TEMPLE_CLEARED: "true"
+  locations:
+    "Water Temple Boss HC": "true"
+    "Water Temple Boss": "true"
+"Spirit Temple Boss":
+  boss: true
+  dungeon: Spirit
+  exits:
+    "Spirit Temple After Boss": "has_mirror_shield"
+"Spirit Temple After Boss":
+  boss: true
+  dungeon: Spirit
+  locations:
+    "Spirit Temple Boss HC": "true"
+    "Spirit Temple Boss": "true"
+"Shadow Temple Boss":
+  boss: true
+  dungeon: Shadow
+  exits:
+    "Shadow Temple After Boss": "has_weapon && has_lens && (can_use_bow || can_use_slingshot)"
+"Shadow Temple After Boss":
+  boss: true
+  dungeon: Shadow
+  locations:
+    "Shadow Temple Boss HC": "true"
+    "Shadow Temple Boss": "true"

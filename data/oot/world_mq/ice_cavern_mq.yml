@@ -1,0 +1,30 @@
+"Ice Cavern":
+  dungeon: IC
+  exits:
+    "Zora Fountain Frozen": "true"
+    "Ice Cavern Main": "has_ranged_weapon || has_explosives" #The pot carry is very trick territory; this crystal switch is a problem.
+"Ice Cavern Main":
+  dungeon: IC
+  exits:
+    "Ice Cavern Map Room": "is_adult || can_use_sticks || has_explosives"
+    "Ice Cavern Compass Room": "is_adult && event(BLUE_FIRE)"
+    "Ice Cavern Big Room": "event(BLUE_FIRE)"
+"Ice Cavern Map Room":
+  dungeon: IC
+  events:
+    BLUE_FIRE: "has_bottle"
+  locations:
+    "MQ Ice Cavern Map Chest": "event(BLUE_FIRE)"
+"Ice Cavern Compass Room":
+  dungeon: IC
+  locations:
+    "MQ Ice Cavern Compass Chest": "true"
+    "MQ Ice Cavern Piece of Heart": "has_explosives"
+    "MQ Ice Cavern GS Compass Room": "can_play(SONG_TIME)"
+"Ice Cavern Big Room":
+  dungeon: IC
+  locations:
+    "MQ Ice Cavern Iron Boots": "is_adult"
+    "MQ Ice Cavern Sheik Song": "is_adult"
+    "MQ Ice Cavern GS Scarecrow": "scarecrow_hookshot"
+    "MQ Ice Cavern GS Clear Blocks": "has_ranged_weapon || has_explosives" #Again, I'm not making people carry pots through boulder hell. Biggoron Sword also works here.

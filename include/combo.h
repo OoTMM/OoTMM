@@ -90,6 +90,19 @@
 #define DUNGEONID_ICE_CAVERN                        0x10
 #define DUNGEONID_GERUDO_TRAINING_GROUNDS           0x11
 
+/* MQ IDs */
+#define MQ_DEKU_TREE                0
+#define MQ_DODONGOS_CAVERN          1
+#define MQ_JABU_JABU                2
+#define MQ_TEMPLE_FOREST            3
+#define MQ_TEMPLE_FIRE              4
+#define MQ_TEMPLE_WATER             5
+#define MQ_TEMPLE_SPIRIT            6
+#define MQ_TEMPLE_SHADOW            7
+#define MQ_BOTTOM_OF_THE_WELL       8
+#define MQ_ICE_CAVERN               9
+#define MQ_GERUDO_TRAINING_GROUNDS  10
+#define MQ_GANON_CASTLE             11
 
 #if !defined(__ASSEMBLER__)
 void comboDisableInterrupts(void);
@@ -118,6 +131,7 @@ ComboDataHints;
 
 typedef struct PACKED ALIGNED(4)
 {
+    u32             mq;
     u8              config[0x40];
     ComboDataHints  hints;
     u8              boss[12];
@@ -379,11 +393,17 @@ extern s32 gLastScene;
 void comboTriggerWarp(GameState_Play* play, int index);
 
 /* Menu */
+void comboMenuInit(void);
 void comboMenuKeysUpdate(GameState_Play* play);
 void comboMenuKeysDraw(GameState_Play* play);
 
 /* Custom Shaders */
 void Shader_Xlu0(GameState_Play* play, s16 shaderId);
+
+/* MQ */
+void comboMqKaleidoHook(GameState_Play* play);
+
+extern GameState_Play* gPlay;
 
 #if defined(GAME_MM)
 void Ocarina_HandleWarp(Actor_Player* player, GameState_Play* ctxt);

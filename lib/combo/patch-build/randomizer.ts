@@ -4,7 +4,7 @@ import { LogicResult } from '../logic';
 import { DATA_GI, DATA_NPC, DATA_SCENES, DATA_REGIONS, DATA_CONFIG, DATA_HINTS_POOL, DATA_HINTS, DATA_ENTRANCES } from '../data';
 import { Game, GAMES } from "../config";
 import { WorldCheck } from '../logic/world';
-import { Settings } from '../settings';
+import { DUNGEONS, Settings } from '../settings';
 import { HintGossip, Hints } from '../logic/hints';
 import { isDungeonStrayFairy, isGanonBossKey, isMap, isCompass, isRegularBossKey, isSmallKeyRegular, isTownStrayFairy, isSmallKeyHideout, isItemUnlimitedStarting } from '../logic/items';
 import { gameId } from '../util';
@@ -396,6 +396,20 @@ const gameEntrances = (game: Game, entrances: EntranceShuffleResult) => {
   return toU32Buffer(data);
 };
 
+export const randomizerMq = (logic: LogicResult): Buffer => {
+  let mq = 0;
+  const dungeons = Object.keys(DUNGEONS);
+  for (let i = 0; i < dungeons.length; ++i) {
+    const dungeon = dungeons[i];
+    if (logic.mq.has(dungeon)) {
+      mq |= 1 << i;
+    }
+  }
+  const buffer = Buffer.alloc(4);
+  buffer.writeUInt32BE(mq);
+  return buffer;
+}
+
 export const randomizerConfig = (config: Set<string>): Buffer => {
   const bits = Array.from(config).map((c) => {
     const bit = DATA_CONFIG[c];
@@ -426,6 +440,7 @@ const randomizerDungeons = (logic: LogicResult): Buffer => toU8Buffer(logic.entr
 
 export const randomizerData = (logic: LogicResult): Buffer => {
   const buffers = [];
+  buffers.push(randomizerMq(logic));
   buffers.push(randomizerConfig(logic.config));
   buffers.push(randomizerHints(logic));
   buffers.push(randomizerBoss(logic));

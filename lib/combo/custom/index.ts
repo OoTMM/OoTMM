@@ -13,6 +13,7 @@ import { CustomArchive } from './archive';
 import { KeepFile } from './keep';
 import { png } from './png';
 import { font } from './font';
+import { raw } from './raw';
 
 const FILES_TO_INDEX_OOT = arrayToIndexMap(DATA_FILES.oot);
 const FILES_TO_INDEX_MM = arrayToIndexMap(DATA_FILES.mm);
@@ -75,7 +76,7 @@ const makeSplitObject = async (roms: DecompressedRoms, entry: CustomEntry) => {
 const customExtractedObjects = async (roms: DecompressedRoms, archive: CustomArchive, cg: CodeGen) => {
   for (const entry of ENTRIES) {
     const obj = await makeSplitObject(roms, entry);
-    const objectId = await archive.addObject(obj.data);
+    const objectId = await archive.addObject(obj.data, true);
     cg.define('CUSTOM_OBJECT_ID_' + entry.name, objectId);
     for (let i = 0; i < obj.offsets.length; ++i) {
       cg.define('CUSTOM_OBJECT_' + entry.name + '_' + i, obj.offsets[i]);
@@ -122,9 +123,15 @@ const customKeepFiles = async (roms: DecompressedRoms, archive: CustomArchive, c
     const off = await keep.addData(assets[k]);
     cg.define('CUSTOM_KEEP_' + k, off);
   }
-  const custonKeepId = await archive.addObject(keep.pack());
+  const custonKeepId = await archive.addObject(keep.pack(), true);
   cg.define('CUSTOM_OBJECT_ID_KEEP', custonKeepId);
 };
+
+async function addRawData(archive: CustomArchive, cg: CodeGen, filename: string) {
+  const file = await raw(filename);
+  const addr = await archive.addData(file);
+  cg.define('CUSTOM_' + filename.toUpperCase() + '_ADDR', addr);
+}
 
 export const custom = async (monitor: Monitor, roms: DecompressedRoms) => {
   monitor.log("Building custom objects");
@@ -137,6 +144,11 @@ export const custom = async (monitor: Monitor, roms: DecompressedRoms) => {
 
   /* Setup custom keep */
   await customKeepFiles(roms, archive, cg);
+
+  /* Load MQ data */
+  await addRawData(archive, cg, 'mq_rooms');
+  await addRawData(archive, cg, 'mq_scenes');
+  await addRawData(archive, cg, 'mq_maps');
 
   /* Emit the custom header and data */
   const pack = archive.pack();

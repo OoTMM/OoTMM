@@ -30,6 +30,7 @@ export const DATA_ENTRANCES = {
 };
 
 import worldOotOverworld from '../../data/oot/world/overworld.yml';
+import worldOotBoss from '../../data/oot/world/boss.yml';
 import worldOotDekuTree from '../../data/oot/world/deku_tree.yml';
 import worldOotDodongoCavern from '../../data/oot/world/dodongo_cavern.yml';
 import worldOotJabuJabu from '../../data/oot/world/jabu_jabu.yml';
@@ -43,22 +44,53 @@ import worldOotIceCavern from '../../data/oot/world/ice_cavern.yml';
 import worldOotGerudoFortress from '../../data/oot/world/gerudo_fortress.yml';
 import worldOotGerudoTrainingGrounds from '../../data/oot/world/gerudo_training_grounds.yml';
 import worldOotGanonCastle from '../../data/oot/world/ganon_castle.yml';
+import worldOotGanonTower from '../../data/oot/world/ganon_tower.yml';
 
 const worldOot = {
-  ...worldOotOverworld,
-  ...worldOotDekuTree,
-  ...worldOotDodongoCavern,
-  ...worldOotJabuJabu,
-  ...worldOotForestTemple,
-  ...worldOotFireTemple,
-  ...worldOotWaterTemple,
-  ...worldOotSpiritTemple,
-  ...worldOotShadowTemple,
-  ...worldOotBottomOfTheWell,
-  ...worldOotIceCavern,
-  ...worldOotGerudoFortress,
-  ...worldOotGerudoTrainingGrounds,
-  ...worldOotGanonCastle,
+  overworld: worldOotOverworld,
+  boss: worldOotBoss,
+  DT: worldOotDekuTree,
+  DC: worldOotDodongoCavern,
+  JJ: worldOotJabuJabu,
+  Forest: worldOotForestTemple,
+  Fire: worldOotFireTemple,
+  Water: worldOotWaterTemple,
+  Spirit: worldOotSpiritTemple,
+  Shadow: worldOotShadowTemple,
+  BotW: worldOotBottomOfTheWell,
+  IC: worldOotIceCavern,
+  Gerudo: worldOotGerudoFortress,
+  GTG: worldOotGerudoTrainingGrounds,
+  Ganon: worldOotGanonCastle,
+  Ganon2: worldOotGanonTower,
+};
+
+import worldMqDekuTree from '../../data/oot/world_mq/deku_tree_mq.yml';
+import worldMqDodongoCavern from '../../data/oot/world_mq/dodongo_cavern_mq.yml';
+import worldMqJabuJabu from '../../data/oot/world_mq/jabu_jabu_mq.yml';
+import worldMqForestTemple from '../../data/oot/world_mq/forest_temple_mq.yml';
+import worldMqFireTemple from '../../data/oot/world_mq/fire_temple_mq.yml';
+import worldMqWaterTemple from '../../data/oot/world_mq/water_temple_mq.yml';
+import worldMqSpiritTemple from '../../data/oot/world_mq/spirit_temple_mq.yml';
+import worldMqShadowTemple from '../../data/oot/world_mq/shadow_temple_mq.yml';
+import worldMqBottomOfTheWell from '../../data/oot/world_mq/bottom_of_the_well_mq.yml';
+import worldMqIceCavern from '../../data/oot/world_mq/ice_cavern_mq.yml';
+import worldMqGerudoTrainingGrounds from '../../data/oot/world_mq/gerudo_training_grounds_mq.yml';
+import worldMqGanonCastle from '../../data/oot/world_mq/ganon_castle_mq.yml';
+
+const worldMq = {
+  DT: worldMqDekuTree,
+  DC: worldMqDodongoCavern,
+  JJ: worldMqJabuJabu,
+  Forest: worldMqForestTemple,
+  Fire: worldMqFireTemple,
+  Water: worldMqWaterTemple,
+  Spirit: worldMqSpiritTemple,
+  Shadow: worldMqShadowTemple,
+  BotW: worldMqBottomOfTheWell,
+  IC: worldMqIceCavern,
+  GTG: worldMqGerudoTrainingGrounds,
+  Ganon: worldMqGanonCastle,
 };
 
 import worldMmOverworld from '../../data/mm/world/overworld.yml';
@@ -76,23 +108,24 @@ import worldMmSecretShrine from '../../data/mm/world/secret_shrine.yml';
 import worldMmMoon from '../../data/mm/world/moon.yml';
 
 const worldMm = {
-  ...worldMmOverworld,
-  ...worldMmWoodfallTemple,
-  ...worldMmSnowheadTemple,
-  ...worldMmGreatBayTemple,
-  ...worldMmStoneTowerTemple,
-  ...worldMmStoneTowerTempleInverted,
-  ...worldMmPirateFortress,
-  ...worldMmAncientCastleOfIkana,
-  ...worldMmBeneathTheWell,
-  ...worldMmSecretShrine,
-  ...worldMmSwampSpiderHouse,
-  ...worldMmOceanSpiderHouse,
-  ...worldMmMoon,
+  overworld: worldMmOverworld,
+  WF: worldMmWoodfallTemple,
+  SH: worldMmSnowheadTemple,
+  GB: worldMmGreatBayTemple,
+  ST: worldMmStoneTowerTemple,
+  IST: worldMmStoneTowerTempleInverted,
+  PF: worldMmPirateFortress,
+  IkanaCastle: worldMmAncientCastleOfIkana,
+  BtW: worldMmBeneathTheWell,
+  SS: worldMmSecretShrine,
+  SSH: worldMmSwampSpiderHouse,
+  OSH: worldMmOceanSpiderHouse,
+  Moon: worldMmMoon,
 };
 
 export const DATA_WORLD = {
   oot: worldOot,
+  mq: worldMq,
   mm: worldMm,
 };
 

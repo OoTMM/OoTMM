@@ -1,463 +1,642 @@
-location,                                             type,           hint,                 scene,                          id,                         item
-Hatch Chicken,                                        npc,            NONE,                 GROTTOS,                        WEIRD_EGG,                  WEIRD_EGG
-Hatch Pocket Cucco,                                   npc,            NONE,                 GROTTOS,                        POCKET_EGG,                 POCKET_EGG
-Kokiri Forest Mido Top Left,                          chest,          NONE,                 KOKIRI_MIDO,                    0x00,                       RUPEE_BLUE
-Kokiri Forest Mido Top Right,                         chest,          NONE,                 KOKIRI_MIDO,                    0x01,                       RUPEE_BLUE
-Kokiri Forest Mido Bottom Left,                       chest,          NONE,                 KOKIRI_MIDO,                    0x02,                       RUPEE_GREEN
-Kokiri Forest Mido Bottom Right,                      chest,          NONE,                 KOKIRI_MIDO,                    0x03,                       RECOVERY_HEART
-Kokiri Forest Kokiri Sword Chest,                     chest,          NONE,                 KOKIRI_FOREST,                  0x00,                       SWORD_KOKIRI
-Kokiri Forest Storms Grotto,                          chest,          NONE,                 GROTTOS,                        0x0c,                       RUPEE_RED
-Kokiri Forest GS Soil,                                gs,             NONE,                 KOKIRI_FOREST,                  0x68,                       GS_TOKEN
-Kokiri Forest GS Night Child,                         gs,             NONE,                 KOKIRI_FOREST,                  0x69,                       GS_TOKEN
-Kokiri Forest GS Night Adult,                         gs,             NONE,                 KOKIRI_FOREST,                  0x6a,                       GS_TOKEN
-Kokiri Forest Cow,                                    cow,            NONE,                 KOKIRI_FOREST,                  0x00,                       MILK
-Kokiri Shop Item 1,                                   shop,           NONE,                 KOKIRI_FOREST,                  0x00,                       RECOVERY_HEART
-Kokiri Shop Item 2,                                   shop,           NONE,                 KOKIRI_FOREST,                  0x01,                       ARROWS_10
-Kokiri Shop Item 3,                                   shop,           NONE,                 KOKIRI_FOREST,                  0x02,                       ARROWS_30
-Kokiri Shop Item 4,                                   shop,           NONE,                 KOKIRI_FOREST,                  0x03,                       DEKU_SEEDS_30
-Kokiri Shop Item 5,                                   shop,           NONE,                 KOKIRI_FOREST,                  0x04,                       NUTS_5
-Kokiri Shop Item 6,                                   shop,           NONE,                 KOKIRI_FOREST,                  0x05,                       NUTS_10
-Kokiri Shop Item 7,                                   shop,           NONE,                 KOKIRI_FOREST,                  0x06,                       STICK
-Kokiri Shop Item 8,                                   shop,           NONE,                 KOKIRI_FOREST,                  0x07,                       SHIELD_DEKU
-Malon Egg,                                            npc,            NONE,                 HYRULE_CASTLE,                  MALON_EGG,                  CHICKEN
-Zelda's Letter,                                       npc,            NONE,                 CASTLE_COURTYARD,               ZELDA_LETTER,               ZELDA_LETTER
-Zelda's Song,                                         npc,            NONE,                 CASTLE_COURTYARD,               ZELDA_SONG,                 SONG_ZELDA
-Lost Woods Gift from Saria,                           npc,            NONE,                 LOST_WOODS,                     SARIA_OCARINA,              OCARINA
-Lost Woods Target,                                    npc,            NONE,                 LOST_WOODS,                     LOST_WOODS_TARGET,          SLINGSHOT
-Lost Woods Skull Kid,                                 npc,            NONE,                 LOST_WOODS,                     LOST_WOODS_SKULL_KID,       HEART_PIECE
-Lost Woods Memory Game,                               npc,            NONE,                 LOST_WOODS,                     LOST_WOODS_MEMORY,          HEART_PIECE
-Lost Woods Scrub Sticks Upgrade,                      npc,            NONE,                 LOST_WOODS,                     SCRUB_STICKS,               STICK_UPGRADE
-Lost Woods Odd Mushroom,                              npc,            NONE,                 LOST_WOODS,                     TRADE_ODD_MUSHROOM,         ODD_MUSHROOM
-Lost Woods Poacher's Saw,                             npc,            NONE,                 LOST_WOODS,                     TRADE_POACHER_SAW,          POACHER_SAW
-Lost Woods Grotto Scrub Nuts Upgrade,                 npc,            NONE,                 GROTTOS,                        SCRUB_NUTS,                 NUT_UPGRADE
-Lost Woods Grotto Generic,                            chest,          NONE,                 GROTTOS,                        0x14,                       RUPEE_BLUE
-Lost Woods GS Soil Bridge,                            gs,             NONE,                 LOST_WOODS,                     0x70,                       GS_TOKEN
-Lost Woods GS Soil Theater,                           gs,             NONE,                 LOST_WOODS,                     0x71,                       GS_TOKEN
-Lost Woods GS Bean Ride,                              gs,             NONE,                 LOST_WOODS,                     0x72,                       GS_TOKEN
-Deku Theater Sticks Upgrade,                          npc,            NONE,                 GROTTOS,                        THEATER_STICKS,             STICK_UPGRADE
-Deku Theater Nuts Upgrade,                            npc,            NONE,                 GROTTOS,                        THEATER_NUTS,               NUT_UPGRADE
-Saria's Song,                                         npc,            NONE,                 SACRED_FOREST_MEADOW,           SARIA_SONG,                 SONG_SARIA
-Sacred Meadow Sheik Song,                             npc,            NONE,                 SACRED_FOREST_MEADOW,           SHEIK_FOREST,               SONG_TP_FOREST
-Sacred Meadow Grotto,                                 chest,          NONE,                 GROTTOS,                        0x11,                       RUPEE_PURPLE
-Sacred Meadow GS Night Adult,                         gs,             NONE,                 SACRED_FOREST_MEADOW,           0x73,                       GS_TOKEN
-Kakariko Anju Bottle,                                 npc,            NONE,                 KAKARIKO_VILLAGE,               ANJU_BOTTLE,                BOTTLE_EMPTY
-Kakariko Anju Egg,                                    npc,            NONE,                 KAKARIKO_VILLAGE,               TRADE_POCKET_EGG,           POCKET_CUCCO
-Kakariko Anju Cojiro,                                 npc,            NONE,                 KAKARIKO_VILLAGE,               TRADE_COJIRO,               COJIRO
-Kakariko Song Shadow,                                 npc,            RAVAGED_VILLAGE,      KAKARIKO_VILLAGE,               SHEIK_SHADOW,               SONG_TP_SHADOW
-Kakariko Man on Roof,                                 npc,            NONE,                 KAKARIKO_VILLAGE,               KAKARIKO_ROOF_MAN,          HEART_PIECE
-Kakariko Impa House HP,                               collectible,    NONE,                 IMPA_HOUSE,                     0x01,                       HEART_PIECE
-Kakariko Grotto Front,                                chest,          NONE,                 GROTTOS,                        0x0a,                       RUPEE_HUGE
-Kakariko Grotto Back,                                 chest,          NONE,                 GROTTOS,                        0x08,                       RUPEE_RED
-Kakariko GS Roof,                                     gs,             NONE,                 KAKARIKO_VILLAGE,               0x8e,                       GS_TOKEN
-Kakariko GS Shooting Gallery,                         gs,             NONE,                 KAKARIKO_VILLAGE,               0x8b,                       GS_TOKEN
-Kakariko GS Tree,                                     gs,             NONE,                 KAKARIKO_VILLAGE,               0x8d,                       GS_TOKEN
-Kakariko GS House of Skulltula,                       gs,             NONE,                 KAKARIKO_VILLAGE,               0x8c,                       GS_TOKEN
-Kakariko GS Bazaar,                                   gs,             NONE,                 KAKARIKO_VILLAGE,               0x89,                       GS_TOKEN
-Kakariko GS Ladder,                                   gs,             NONE,                 KAKARIKO_VILLAGE,               0x8a,                       GS_TOKEN
-Kakariko Potion Shop Odd Potion,                      npc,            NONE,                 KAKARIKO_POTION_SHOP,           TRADE_ODD_POTION,           ODD_POTION
-Kakariko Cow,                                         cow,            NONE,                 KAKARIKO_VILLAGE,               0x06,                       MILK
-Kakariko Bazaar Item 1,                               shop,           NONE,                 BAZAAR,                         0x30,                       ARROWS_5
-Kakariko Bazaar Item 2,                               shop,           NONE,                 BAZAAR,                         0x31,                       ARROWS_10
-Kakariko Bazaar Item 3,                               shop,           NONE,                 BAZAAR,                         0x32,                       ARROWS_30
-Kakariko Bazaar Item 4,                               shop,           NONE,                 BAZAAR,                         0x33,                       STICK
-Kakariko Bazaar Item 5,                               shop,           NONE,                 BAZAAR,                         0x34,                       BOMBS_5
-Kakariko Bazaar Item 6,                               shop,           NONE,                 BAZAAR,                         0x35,                       RECOVERY_HEART
-Kakariko Bazaar Item 7,                               shop,           NONE,                 BAZAAR,                         0x36,                       NUTS_5
-Kakariko Bazaar Item 8,                               shop,           NONE,                 BAZAAR,                         0x37,                       SHIELD_HYLIAN
-Kakariko Potion Shop Item 1,                          shop,           NONE,                 KAKARIKO_POTION_SHOP,           0x38,                       FISH
-Kakariko Potion Shop Item 2,                          shop,           NONE,                 KAKARIKO_POTION_SHOP,           0x39,                       BUG
-Kakariko Potion Shop Item 3,                          shop,           NONE,                 KAKARIKO_POTION_SHOP,           0x3a,                       POE
-Kakariko Potion Shop Item 4,                          shop,           NONE,                 KAKARIKO_POTION_SHOP,           0x3b,                       NUTS_5
-Kakariko Potion Shop Item 5,                          shop,           NONE,                 KAKARIKO_POTION_SHOP,           0x3c,                       BLUE_FIRE
-Kakariko Potion Shop Item 6,                          shop,           NONE,                 KAKARIKO_POTION_SHOP,           0x3d,                       FAIRY
-Kakariko Potion Shop Item 7,                          shop,           NONE,                 KAKARIKO_POTION_SHOP,           0x3e,                       POTION_GREEN
-Kakariko Potion Shop Item 8,                          shop,           NONE,                 KAKARIKO_POTION_SHOP,           0x3f,                       POTION_RED
-Graveyard Dampe Game,                                 collectible,    NONE,                 GRAVEYARD,                      0x1f,                       HEART_PIECE
-Graveyard ReDead Tomb,                                chest,          NONE,                 TOMB_REDEAD,                    0x00,                       HEART_PIECE
-Graveyard Royal Tomb Song,                            npc,            NONE,                 TOMB_ROYAL,                     ROYAL_TOMB_SONG,            SONG_SUN
-Graveyard Royal Tomb Chest,                           chest,          NONE,                 TOMB_ROYAL,                     0x00,                       BOMBS_5
-Graveyard Fairy Tomb,                                 chest,          NONE,                 TOMB_FAIRY,                     0x00,                       SHIELD_HYLIAN
-Graveyard Dampe Tomb Reward 1,                        chest,          NONE,                 TOMB_DAMPE_WINDMILL,            0x00,                       HOOKSHOT
-Graveyard Dampe Tomb Reward 2,                        collectible,    NONE,                 TOMB_DAMPE_WINDMILL,            0x07,                       HEART_PIECE
-Graveyard Crate HP,                                   collectible,    NONE,                 GRAVEYARD,                      0x04,                       HEART_PIECE
-Graveyard GS Soil,                                    gs,             NONE,                 GRAVEYARD,                      0x88,                       GS_TOKEN
-Graveyard GS Wall,                                    gs,             NONE,                 GRAVEYARD,                      0x8f,                       GS_TOKEN
-Death Mountain Chest,                                 chest,          NONE,                 DEATH_MOUNTAIN_TRAIL,           0x01,                       RUPEE_PURPLE
-Death Mountain HP,                                    collectible,    NONE,                 DEATH_MOUNTAIN_TRAIL,           0x1e,                       HEART_PIECE
-Death Mountain Prescription,                          npc,            NONE,                 DEATH_MOUNTAIN_TRAIL,           TRADE_PRESCRIPTION,         PRESCRIPTION
-Death Mountain Claim Check,                           npc,            NONE,                 DEATH_MOUNTAIN_TRAIL,           TRADE_CLAIM_CHECK,          CLAIM_CHECK
-Death Mountain Biggoron Sword,                        npc,            NONE,                 DEATH_MOUNTAIN_TRAIL,           TRADE_BIGGORON_SWORD,       SWORD_BIGGORON
-Death Mountain Grotto,                                chest,          NONE,                 GROTTOS,                        0x17,                       RUPEE_HUGE
-Death Mountain GS Entrance,                           gs,             NONE,                 DEATH_MOUNTAIN_TRAIL,           0x82,                       GS_TOKEN
-Death Mountain GS Soil,                               gs,             NONE,                 DEATH_MOUNTAIN_TRAIL,           0x81,                       GS_TOKEN
-Death Mountain GS Above Dodongo,                      gs,             NONE,                 DEATH_MOUNTAIN_TRAIL,           0x83,                       GS_TOKEN
-Death Mountain GS Before Climb,                       gs,             NONE,                 DEATH_MOUNTAIN_TRAIL,           0x84,                       GS_TOKEN
-Death Mountain Cow,                                   cow,            NONE,                 DEATH_MOUNTAIN_TRAIL,           0x07,                       MILK
-Darunia,                                              npc,            NONE,                 GORON_CITY,                     DARUNIA_BRACELET,           STRENGTH
-Goron City Maze Center 1,                             chest,          NONE,                 GORON_CITY,                     0x02,                       RUPEE_PURPLE
-Goron City Maze Center 2,                             chest,          NONE,                 GORON_CITY,                     0x01,                       RUPEE_PURPLE
-Goron City Maze Left,                                 chest,          NONE,                 GORON_CITY,                     0x00,                       RUPEE_HUGE
-Goron City Big Pot HP,                                collectible,    NONE,                 GORON_CITY,                     0x1f,                       HEART_PIECE
-Goron City Tunic,                                     npc,            NONE,                 GORON_CITY,                     GORON_LINK_TUNIC,           TUNIC_GORON
-Goron City Bomb Bag,                                  npc,            NONE,                 GORON_CITY,                     GORON_BOMB_BAG,             BOMB_BAG
-Goron City Medigoron Giant Knife,                     npc,            NONE,                 GORON_CITY,                     MEDIGORON,                  SWORD_KNIFE
-Goron City GS Platform,                               gs,             NONE,                 GORON_CITY,                     0x85,                       GS_TOKEN
-Goron City GS Maze,                                   gs,             NONE,                 GORON_CITY,                     0x86,                       GS_TOKEN
-Goron Shop Item 1,                                    shop,           NONE,                 GORON_CITY,                     0x18,                       RECOVERY_HEART
-Goron Shop Item 2,                                    shop,           NONE,                 GORON_CITY,                     0x19,                       RECOVERY_HEART
-Goron Shop Item 3,                                    shop,           NONE,                 GORON_CITY,                     0x1a,                       POTION_RED
-Goron Shop Item 4,                                    shop,           NONE,                 GORON_CITY,                     0x1b,                       TUNIC_GORON
-Goron Shop Item 5,                                    shop,           NONE,                 GORON_CITY,                     0x1c,                       BOMBS_5
-Goron Shop Item 6,                                    shop,           NONE,                 GORON_CITY,                     0x1d,                       BOMBS_10
-Goron Shop Item 7,                                    shop,           NONE,                 GORON_CITY,                     0x1e,                       BOMBS_20
-Goron Shop Item 8,                                    shop,           NONE,                 GORON_CITY,                     0x1f,                       BOMBS_30
-Death Mountain Crater Alcove HP,                      collectible,    NONE,                 DEATH_MOUNTAIN_CRATER,          0x02,                       HEART_PIECE
-Death Mountain Crater Volcano HP,                     collectible,    NONE,                 DEATH_MOUNTAIN_CRATER,          0x08,                       HEART_PIECE
-Death Mountain Crater Sheik Song,                     npc,            NONE,                 DEATH_MOUNTAIN_CRATER,          SHEIK_FIRE,                 SONG_TP_FIRE
-Death Mountain Crater Grotto,                         chest,          NONE,                 GROTTOS,                        0x1a,                       BOMBS_20
-Death Mountain Crater GS Soil,                        gs,             NONE,                 DEATH_MOUNTAIN_CRATER,          0x80,                       GS_TOKEN
-Death Mountain Crater GS Crate,                       gs,             NONE,                 DEATH_MOUNTAIN_CRATER,          0x87,                       GS_TOKEN
-Zora River HP Pillar,                                 collectible,    NONE,                 ZORA_RIVER,                     0x04,                       HEART_PIECE
-Zora River HP Platform,                               collectible,    NONE,                 ZORA_RIVER,                     0x0b,                       HEART_PIECE
-Zora River Bean Seller,                               npc,            NONE,                 ZORA_RIVER,                     BEAN_SELLER,                MAGIC_BEAN
-Zora River Frogs Storms,                              npc,            NONE,                 ZORA_RIVER,                     FROGS_STORMS,               HEART_PIECE
-Zora River Frogs Game,                                npc,            FROGS_FINAL,          ZORA_RIVER,                     FROGS_GAME,                 HEART_PIECE
-Zora River Grotto,                                    chest,          NONE,                 GROTTOS,                        0x09,                       RUPEE_RED
-Zora River GS Tree,                                   gs,             NONE,                 ZORA_RIVER,                     0x91,                       GS_TOKEN
-Zora River GS Ladder,                                 gs,             NONE,                 ZORA_RIVER,                     0x90,                       GS_TOKEN
-Zora River GS Near Grotto,                            gs,             NONE,                 ZORA_RIVER,                     0x94,                       GS_TOKEN
-Zora River GS Near Bridge,                            gs,             NONE,                 ZORA_RIVER,                     0x93,                       GS_TOKEN
-Zora Domain Waterfall Chest,                          chest,          NONE,                 ZORA_DOMAIN,                    0x00,                       HEART_PIECE
-Zora Domain Diving Game,                              npc,            NONE,                 ZORA_DOMAIN,                    ZORA_DIVING_GAME,           SCALE
-Zora Domain Tunic,                                    npc,            ZORA_KING,            ZORA_DOMAIN,                    ZORA_KING_TUNIC,            TUNIC_ZORA
-Zora Domain Eyeball Frog,                             npc,            ZORA_KING,            ZORA_DOMAIN,                    TRADE_EYEBALL_FROG,         EYEBALL_FROG
-Zora Domain GS Waterfall,                             gs,             NONE,                 ZORA_DOMAIN,                    0x96,                       GS_TOKEN
-Zora Shop Item 1,                                     shop,           NONE,                 ZORA_SHOP,                      0x10,                       POTION_RED
-Zora Shop Item 2,                                     shop,           NONE,                 ZORA_SHOP,                      0x11,                       ARROWS_30
-Zora Shop Item 3,                                     shop,           NONE,                 ZORA_SHOP,                      0x12,                       FISH
-Zora Shop Item 4,                                     shop,           NONE,                 ZORA_SHOP,                      0x13,                       NUTS_5
-Zora Shop Item 5,                                     shop,           NONE,                 ZORA_SHOP,                      0x14,                       ARROWS_5
-Zora Shop Item 6,                                     shop,           NONE,                 ZORA_SHOP,                      0x15,                       ARROWS_10
-Zora Shop Item 7,                                     shop,           NONE,                 ZORA_SHOP,                      0x16,                       TUNIC_ZORA
-Zora Shop Item 8,                                     shop,           NONE,                 ZORA_SHOP,                      0x17,                       RECOVERY_HEART
-Zora Fountain Iceberg HP,                             collectible,    NONE,                 ZORA_FOUNTAIN,                  0x01,                       HEART_PIECE
-Zora Fountain Bottom HP,                              collectible,    NONE,                 ZORA_FOUNTAIN,                  0x14,                       HEART_PIECE
-Zora Fountain GS Wall,                                gs,             NONE,                 ZORA_FOUNTAIN,                  0x92,                       GS_TOKEN
-Zora Fountain GS Tree,                                gs,             NONE,                 ZORA_FOUNTAIN,                  0x97,                       GS_TOKEN
-Zora Fountain GS Upper,                               gs,             NONE,                 ZORA_FOUNTAIN,                  0x95,                       GS_TOKEN
-Lake Hylia Underwater Bottle,                         npc,            NONE,                 LAKE_HYLIA,                     RUTO_LETTER,                RUTO_LETTER
-Lake Hylia Fire Arrow,                                npc,            NONE,                 LAKE_HYLIA,                     FIRE_ARROW,                 ARROW_FIRE
-Lake Hylia HP,                                        collectible,    NONE,                 LAKE_HYLIA,                     0x1e,                       HEART_PIECE
-Lake Hylia GS Lab Wall,                               gs,             NONE,                 LAKE_HYLIA,                     0x9a,                       GS_TOKEN
-Lake Hylia GS Island,                                 gs,             NONE,                 LAKE_HYLIA,                     0x99,                       GS_TOKEN
-Lake Hylia GS Soil,                                   gs,             NONE,                 LAKE_HYLIA,                     0x98,                       GS_TOKEN
-Lake Hylia GS Big Tree,                               gs,             NONE,                 LAKE_HYLIA,                     0x9c,                       GS_TOKEN
-Laboratory Dive,                                      npc,            NONE,                 LABORATORY,                     LABORATORY_DIVE,            HEART_PIECE
-Laboratory Eye Drops,                                 npc,            NONE,                 LABORATORY,                     TRADE_EYE_DROPS,            EYE_DROPS
-Laboratory GS Crate,                                  gs,             NONE,                 LABORATORY,                     0x9b,                       GS_TOKEN
-Fishing Pond Child,                                   npc,            FISHING,              FISHING_POND,                   FISH_CHILD,                 HEART_PIECE
-Fishing Pond Adult,                                   npc,            FISHING,              FISHING_POND,                   FISH_ADULT,                 SCALE
-Lon Lon Ranch Malon Song,                             npc,            NONE,                 LON_LON_RANCH,                  MALON_SONG,                 SONG_EPONA
-Lon Lon Ranch Silo HP,                                collectible,    NONE,                 RANCH_HOUSE_SILO,               0x01,                       HEART_PIECE
-Lon Lon Ranch Talon Bottle,                           npc,            NONE,                 RANCH_HOUSE_SILO,               TALON_BOTTLE,               BOTTLE_MILK
-Lon Lon Ranch GS Tree,                                gs,             NONE,                 LON_LON_RANCH,                  0x63,                       GS_TOKEN
-Lon Lon Ranch GS House,                               gs,             NONE,                 LON_LON_RANCH,                  0x62,                       GS_TOKEN
-Lon Lon Ranch GS Rain Shed,                           gs,             NONE,                 LON_LON_RANCH,                  0x61,                       GS_TOKEN
-Lon Lon Ranch GS Back Wall,                           gs,             NONE,                 LON_LON_RANCH,                  0x60,                       GS_TOKEN
-Lon Lon Ranch Stables Cow Left,                       cow,            NONE,                 LON_LON_RANCH,                  0x02,                       MILK
-Lon Lon Ranch Stables Cow Right,                      cow,            NONE,                 LON_LON_RANCH,                  0x03,                       MILK
-Lon Lon Ranch Silo Cow Front,                         cow,            NONE,                 LON_LON_RANCH,                  0x04,                       MILK
-Lon Lon Ranch Silo Cow Back,                          cow,            NONE,                 LON_LON_RANCH,                  0x05,                       MILK
-Hyrule Field Ocarina of Time,                         npc,            NONE,                 HYRULE_FIELD,                   OCARINA_TIME_ITEM,          OCARINA
-Hyrule Field Song of Time,                            npc,            NONE,                 HYRULE_FIELD,                   OCARINA_TIME_SONG,          SONG_TIME
-Hyrule Field Grotto Scrub HP,                         npc,            NONE,                 GROTTOS,                        SCRUB_HP,                   HEART_PIECE
-Hyrule Field Grotto Southeast,                        chest,          NONE,                 GROTTOS,                        0x02,                       RUPEE_RED
-Hyrule Field Grotto Open,                             chest,          NONE,                 GROTTOS,                        0x03,                       RUPEE_BLUE
-Hyrule Field Grotto Market,                           chest,          NONE,                 GROTTOS,                        0x00,                       RUPEE_BLUE
-Hyrule Field Grotto Tektite HP,                       collectible,    NONE,                 GROTTOS,                        0x01,                       HEART_PIECE
-Hyrule Field Grotto Near Kakariko GS,                 gs,             NONE,                 GROTTOS,                        0x59,                       GS_TOKEN
-Hyrule Field Grotto Near Gerudo GS,                   gs,             NONE,                 GROTTOS,                        0x58,                       GS_TOKEN
-Hyrule Field Cow,                                     cow,            NONE,                 HYRULE_FIELD,                   0x01,                       MILK
-Market Dog Lady HP,                                   npc,            NONE,                 BACK_ALLEY_HOUSE,               DOG_LADY,                   HEART_PIECE
-Market Pot House Big Poes,                            npc,            NONE,                 GUARD_HOUSE,                    POE_COLLECTOR,              BOTTLE_EMPTY
-Market Pot House GS,                                  gs,             NONE,                 GUARD_HOUSE,                    0x7b,                       GS_TOKEN
-Market Bazaar Item 1,                                 shop,           NONE,                 BAZAAR,                         0x20,                       ARROWS_5
-Market Bazaar Item 2,                                 shop,           NONE,                 BAZAAR,                         0x21,                       ARROWS_10
-Market Bazaar Item 3,                                 shop,           NONE,                 BAZAAR,                         0x22,                       ARROWS_30
-Market Bazaar Item 4,                                 shop,           NONE,                 BAZAAR,                         0x23,                       STICK
-Market Bazaar Item 5,                                 shop,           NONE,                 BAZAAR,                         0x24,                       BOMBS_5
-Market Bazaar Item 6,                                 shop,           NONE,                 BAZAAR,                         0x25,                       RECOVERY_HEART
-Market Bazaar Item 7,                                 shop,           NONE,                 BAZAAR,                         0x26,                       NUTS_5
-Market Bazaar Item 8,                                 shop,           NONE,                 BAZAAR,                         0x27,                       SHIELD_HYLIAN
-Market Potion Shop Item 1,                            shop,           NONE,                 MARKET_POTION_SHOP,             0x28,                       FISH
-Market Potion Shop Item 2,                            shop,           NONE,                 MARKET_POTION_SHOP,             0x29,                       BUG
-Market Potion Shop Item 3,                            shop,           NONE,                 MARKET_POTION_SHOP,             0x2a,                       POE
-Market Potion Shop Item 4,                            shop,           NONE,                 MARKET_POTION_SHOP,             0x2b,                       NUTS_5
-Market Potion Shop Item 5,                            shop,           NONE,                 MARKET_POTION_SHOP,             0x2c,                       BLUE_FIRE
-Market Potion Shop Item 6,                            shop,           NONE,                 MARKET_POTION_SHOP,             0x2d,                       FAIRY
-Market Potion Shop Item 7,                            shop,           NONE,                 MARKET_POTION_SHOP,             0x2e,                       POTION_GREEN
-Market Potion Shop Item 8,                            shop,           NONE,                 MARKET_POTION_SHOP,             0x2f,                       POTION_RED
-Market Bombchu Shop Item 1,                           shop,           NONE,                 BOMBCHU_SHOP,                   0x08,                       BOMBCHU_20
-Market Bombchu Shop Item 2,                           shop,           NONE,                 BOMBCHU_SHOP,                   0x09,                       BOMBCHU_20
-Market Bombchu Shop Item 3,                           shop,           NONE,                 BOMBCHU_SHOP,                   0x0a,                       BOMBCHU_20
-Market Bombchu Shop Item 4,                           shop,           NONE,                 BOMBCHU_SHOP,                   0x0b,                       BOMBCHU_20
-Market Bombchu Shop Item 5,                           shop,           NONE,                 BOMBCHU_SHOP,                   0x0c,                       BOMBCHU_10
-Market Bombchu Shop Item 6,                           shop,           NONE,                 BOMBCHU_SHOP,                   0x0d,                       BOMBCHU_10
-Market Bombchu Shop Item 7,                           shop,           NONE,                 BOMBCHU_SHOP,                   0x0e,                       BOMBCHU_10
-Market Bombchu Shop Item 8,                           shop,           NONE,                 BOMBCHU_SHOP,                   0x0f,                       BOMBCHU_10
-Bombchu Bowling Reward 1,                             npc,            NONE,                 BOMBCHU_BOWLING_ALLEY,          BOMBCHU_BOWLING_1,          BOMB_BAG
-Bombchu Bowling Reward 2,                             npc,            NONE,                 BOMBCHU_BOWLING_ALLEY,          BOMBCHU_BOWLING_2,          HEART_PIECE
-Treasure Game HP,                                     chest,          NONE,                 TREASURE_SHOP,                  0x0a,                       HEART_PIECE
-Shooting Gallery Child,                               npc,            NONE,                 SHOOTING_GALLERY,               SHOOTING_GAME_CHILD,        SLINGSHOT
-Shooting Gallery Adult,                               npc,            NONE,                 SHOOTING_GALLERY,               SHOOTING_GAME_ADULT,        BOW
-Hyrule Castle GS Tree,                                gs,             NONE,                 HYRULE_CASTLE,                  0x7a,                       GS_TOKEN
-Hyrule Castle GS Grotto,                              gs,             NONE,                 GROTTOS,                        0x79,                       GS_TOKEN
-Ganon Castle Exterior GS,                             gs,             NONE,                 GANON_CASTLE_EXTERIOR,          0x78,                       GS_TOKEN
-Temple of Time Master Sword,                          npc,            NONE,                 TEMPLE_OF_TIME,                 MASTER_SWORD,               SWORD_MASTER
-Temple of Time Medallion,                             npc,            NONE,                 TEMPLE_OF_TIME,                 LIGHT_MEDALLION,            MEDALLION_LIGHT
-Temple of Time Sheik Song,                            npc,            NONE,                 TEMPLE_OF_TIME,                 SHEIK_LIGHT,                SONG_TP_LIGHT
-Temple of Time Light Arrows,                          npc,            NONE,                 TEMPLE_OF_TIME,                 ZELDA_LIGHT_ARROW,          ARROW_LIGHT
-Windmill HP,                                          collectible,    NONE,                 TOMB_DAMPE_WINDMILL,            0x01,                       HEART_PIECE
-Windmill Song of Storms,                              npc,            NONE,                 TOMB_DAMPE_WINDMILL,            SONG_STORMS,                SONG_STORMS
-Gerudo Valley Chest,                                  chest,          NONE,                 GERUDO_VALLEY,                  0x00,                       RUPEE_PURPLE
-Gerudo Valley Crate HP,                               collectible,    NONE,                 GERUDO_VALLEY,                  0x02,                       HEART_PIECE
-Gerudo Valley Waterfall HP,                           collectible,    NONE,                 GERUDO_VALLEY,                  0x01,                       HEART_PIECE
-Gerudo Valley Broken Goron Sword,                     npc,            NONE,                 GERUDO_VALLEY,                  TRADE_BROKEN_GORON_SWORD,   BROKEN_GORON_SWORD
-Gerudo Valley GS Soil,                                gs,             NONE,                 GERUDO_VALLEY,                  0xa0,                       GS_TOKEN
-Gerudo Valley GS Wall,                                gs,             NONE,                 GERUDO_VALLEY,                  0xa1,                       GS_TOKEN
-Gerudo Valley GS Tent,                                gs,             NONE,                 GERUDO_VALLEY,                  0xa3,                       GS_TOKEN
-Gerudo Valley GS Pillar,                              gs,             NONE,                 GERUDO_VALLEY,                  0xa2,                       GS_TOKEN
-Gerudo Valley Cow,                                    cow,            NONE,                 GERUDO_VALLEY,                  0x08,                       MILK
-Gerudo Fortress Chest,                                chest,          NONE,                 GERUDO_FORTRESS,                0x00,                       HEART_PIECE
-Gerudo Fortress Archery Reward 1,                     npc,            GERUDO_ARCHERY,       GERUDO_FORTRESS,                GERUDO_ARCHERY_1,           HEART_PIECE
-Gerudo Fortress Archery Reward 2,                     npc,            GERUDO_ARCHERY,       GERUDO_FORTRESS,                GERUDO_ARCHERY_2,           BOW
-Gerudo Fortress GS Wall,                              gs,             NONE,                 GERUDO_FORTRESS,                0xa9,                       GS_TOKEN
-Gerudo Fortress GS Target,                            gs,             NONE,                 GERUDO_FORTRESS,                0xa8,                       GS_TOKEN
-Haunted Wasteland Chest,                              chest,          HAUNTED_WASTELAND,    HAUNTED_WASTELAND,              0x00,                       RUPEE_PURPLE
-Haunted Wasteland GS,                                 gs,             NONE,                 HAUNTED_WASTELAND,              0xb1,                       GS_TOKEN
-Desert Colossus HP,                                   collectible,    NONE,                 DESERT_COLOSSUS,                0x0d,                       HEART_PIECE
-Desert Colossus Song Spirit,                          npc,            NONE,                 DESERT_COLOSSUS,                SHEIK_SPIRIT,               SONG_TP_SPIRIT
-Desert Colossus GS Soil,                              gs,             NONE,                 DESERT_COLOSSUS,                0xb0,                       GS_TOKEN
-Desert Colossus GS Tree,                              gs,             NONE,                 DESERT_COLOSSUS,                0xb3,                       GS_TOKEN
-Desert Colossus GS Plateau,                           gs,             NONE,                 DESERT_COLOSSUS,                0xb2,                       GS_TOKEN
-Skulltula House 10 Tokens,                            npc,            NONE,                 HOUSE_OF_SKULLTULA,             GS_10,                      WALLET
-Skulltula House 20 Tokens,                            npc,            NONE,                 HOUSE_OF_SKULLTULA,             GS_20,                      STONE_OF_AGONY
-Skulltula House 30 Tokens,                            npc,            NONE,                 HOUSE_OF_SKULLTULA,             GS_30,                      WALLET
-Skulltula House 40 Tokens,                            npc,            NONE,                 HOUSE_OF_SKULLTULA,             GS_40,                      BOMBCHU_10
-Skulltula House 50 Tokens,                            npc,            NONE,                 HOUSE_OF_SKULLTULA,             GS_50,                      HEART_PIECE
-Great Fairy Magic Upgrade,                            npc,            NONE,                 GREAT_FAIRY_FOUNTAIN_UPGRADES,  FAIRY_MAGIC_UPGRADE,        MAGIC_UPGRADE
-Great Fairy Magic Upgrade 2,                          npc,            NONE,                 GREAT_FAIRY_FOUNTAIN_UPGRADES,  FAIRY_MAGIC_UPGRADE2,       MAGIC_UPGRADE
-Great Fairy Defense Upgrade,                          npc,            GANON_FAIRY,          GREAT_FAIRY_FOUNTAIN_UPGRADES,  FAIRY_DEFENSE_UPGRADE,      DEFENSE_UPGRADE
-Great Fairy Din's Fire,                               npc,            NONE,                 GREAT_FAIRY_FOUNTAIN_SPELLS,    FAIRY_SPELL_FIRE,           SPELL_FIRE
-Great Fairy Farore's Wind,                            npc,            NONE,                 GREAT_FAIRY_FOUNTAIN_SPELLS,    FAIRY_SPELL_WIND,           SPELL_WIND
-Great Fairy Nayru's Love,                             npc,            NONE,                 GREAT_FAIRY_FOUNTAIN_SPELLS,    FAIRY_SPELL_LOVE,           SPELL_LOVE
-Deku Tree Map Chest,                                  chest,          NONE,                 INSIDE_DEKU_TREE,               0x03,                       MAP_DT
-Deku Tree Compass Chest,                              chest,          NONE,                 INSIDE_DEKU_TREE,               0x02,                       COMPASS_DT
-Deku Tree Compass Room Side Chest,                    chest,          NONE,                 INSIDE_DEKU_TREE,               0x06,                       RECOVERY_HEART
-Deku Tree Slingshot Chest,                            chest,          NONE,                 INSIDE_DEKU_TREE,               0x01,                       SLINGSHOT
-Deku Tree Slingshot Side Chest,                       chest,          NONE,                 INSIDE_DEKU_TREE,               0x05,                       RECOVERY_HEART
-Deku Tree Basement Chest,                             chest,          NONE,                 INSIDE_DEKU_TREE,               0x04,                       RECOVERY_HEART
-Deku Tree GS Compass,                                 gs,             NONE,                 INSIDE_DEKU_TREE,               0x0b,                       GS_TOKEN
-Deku Tree GS Basement Vines,                          gs,             NONE,                 INSIDE_DEKU_TREE,               0x0a,                       GS_TOKEN
-Deku Tree GS Basement Gate,                           gs,             NONE,                 INSIDE_DEKU_TREE,               0x09,                       GS_TOKEN
-Deku Tree GS Basement Back Room,                      gs,             NONE,                 INSIDE_DEKU_TREE,               0x08,                       GS_TOKEN
-Deku Tree Boss Container,                             collectible,    NONE,                 LAIR_GOHMA,                     0x1f,                       HEART_CONTAINER
-Deku Tree Boss,                                       npc,            NONE,                 LAIR_GOHMA,                     BLUE_WARP_GOHMA,            STONE_EMERALD
-Dodongo Cavern Map Chest,                             chest,          NONE,                 DODONGO_CAVERN,                 0x08,                       MAP_DC
-Dodongo Cavern Compass Chest,                         chest,          NONE,                 DODONGO_CAVERN,                 0x05,                       COMPASS_DC
-Dodongo Cavern Bomb Bag Side Chest,                   chest,          NONE,                 DODONGO_CAVERN,                 0x06,                       RUPEE_RED
-Dodongo Cavern Bomb Bag Chest,                        chest,          NONE,                 DODONGO_CAVERN,                 0x04,                       BOMB_BAG
-Dodongo Cavern Bridge Chest,                          chest,          NONE,                 DODONGO_CAVERN,                 0x0a,                       SHIELD_DEKU
-Dodongo Cavern GS Side Room,                          gs,             NONE,                 DODONGO_CAVERN,                 0x14,                       GS_TOKEN
-Dodongo Cavern GS Stairs Vines,                       gs,             NONE,                 DODONGO_CAVERN,                 0x10,                       GS_TOKEN
-Dodongo Cavern GS Stairs Top,                         gs,             NONE,                 DODONGO_CAVERN,                 0x12,                       GS_TOKEN
-Dodongo Cavern GS Scarecrow,                          gs,             NONE,                 DODONGO_CAVERN,                 0x11,                       GS_TOKEN
-Dodongo Cavern GS Near Boss,                          gs,             NONE,                 DODONGO_CAVERN,                 0x13,                       GS_TOKEN
-Dodongo Cavern Boss Chest,                            chest,          NONE,                 LAIR_KING_DODONGO,              0x00,                       BOMBS_10
-Dodongo Cavern Boss Container,                        collectible,    NONE,                 LAIR_KING_DODONGO,              0x1f,                       HEART_CONTAINER
-Dodongo Cavern Boss,                                  npc,            NONE,                 LAIR_KING_DODONGO,              BLUE_WARP_KING_DODONGO,     STONE_RUBY
-Jabu-Jabu Map Chest,                                  chest,          NONE,                 INSIDE_JABU_JABU,               0x02,                       MAP_JJ
-Jabu-Jabu Compass Chest,                              chest,          NONE,                 INSIDE_JABU_JABU,               0x04,                       COMPASS_JJ
-Jabu-Jabu Boomerang Chest,                            chest,          NONE,                 INSIDE_JABU_JABU,               0x01,                       BOOMERANG
-Jabu-Jabu GS Water Switch,                            gs,             NONE,                 INSIDE_JABU_JABU,               0x1b,                       GS_TOKEN
-Jabu-Jabu GS Bottom Lower,                            gs,             NONE,                 INSIDE_JABU_JABU,               0x18,                       GS_TOKEN
-Jabu-Jabu GS Bottom Upper,                            gs,             NONE,                 INSIDE_JABU_JABU,               0x19,                       GS_TOKEN
-Jabu-Jabu GS Near Boss,                               gs,             NONE,                 INSIDE_JABU_JABU,               0x1a,                       GS_TOKEN
-Jabu-Jabu Boss Container,                             collectible,    NONE,                 LAIR_BARINADE,                  0x1f,                       HEART_CONTAINER
-Jabu-Jabu Boss,                                       npc,            NONE,                 LAIR_BARINADE,                  BLUE_WARP_BARINADE,         STONE_SAPPHIRE
-Forest Temple Tree Small Key,                         chest,          NONE,                 TEMPLE_FOREST,                  0x03,                       SMALL_KEY_FOREST
-Forest Temple Mini-Boss Key,                          chest,          NONE,                 TEMPLE_FOREST,                  0x00,                       SMALL_KEY_FOREST
-Forest Temple Map,                                    chest,          NONE,                 TEMPLE_FOREST,                  0x01,                       MAP_FOREST
-Forest Temple Maze,                                   chest,          NONE,                 TEMPLE_FOREST,                  0x04,                       ARROWS_30
-Forest Temple Garden,                                 chest,          NONE,                 TEMPLE_FOREST,                  0x05,                       RECOVERY_HEART
-Forest Temple Well,                                   chest,          NONE,                 TEMPLE_FOREST,                  0x09,                       SMALL_KEY_FOREST
-Forest Temple Poe Key,                                chest,          NONE,                 TEMPLE_FOREST,                  0x0d,                       SMALL_KEY_FOREST
-Forest Temple Bow,                                    chest,          NONE,                 TEMPLE_FOREST,                  0x0c,                       BOW
-Forest Temple Compass,                                chest,          NONE,                 TEMPLE_FOREST,                  0x0f,                       COMPASS_FOREST
-Forest Temple Checkerboard,                           chest,          NONE,                 TEMPLE_FOREST,                  0x07,                       ARROWS_10
-Forest Temple Boss Key,                               chest,          NONE,                 TEMPLE_FOREST,                  0x0e,                       BOSS_KEY_FOREST
-Forest Temple Floormaster,                            chest,          NONE,                 TEMPLE_FOREST,                  0x02,                       SMALL_KEY_FOREST
-Forest Temple Antichamber,                            chest,          NONE,                 TEMPLE_FOREST,                  0x0b,                       ARROWS_5
-Forest Temple GS Entrance,                            gs,             NONE,                 TEMPLE_FOREST,                  0x21,                       GS_TOKEN
-Forest Temple GS Main,                                gs,             NONE,                 TEMPLE_FOREST,                  0x23,                       GS_TOKEN
-Forest Temple GS Garden West,                         gs,             NONE,                 TEMPLE_FOREST,                  0x22,                       GS_TOKEN
-Forest Temple GS Garden East,                         gs,             NONE,                 TEMPLE_FOREST,                  0x20,                       GS_TOKEN
-Forest Temple GS Antichamber,                         gs,             NONE,                 TEMPLE_FOREST,                  0x24,                       GS_TOKEN
-Forest Temple Boss Container,                         collectible,    NONE,                 LAIR_PHANTOM_GANON,             0x1f,                       HEART_CONTAINER
-Forest Temple Boss,                                   npc,            NONE,                 LAIR_PHANTOM_GANON,             BLUE_WARP_PHANTOM_GANON,    MEDALLION_FOREST
-Fire Temple Jail 1 Chest,                             chest,          NONE,                 TEMPLE_FIRE,                    0x01,                       SMALL_KEY_FIRE
-Fire Temple Boss Key Side Chest,                      chest,          NONE,                 TEMPLE_FIRE,                    0x00,                       BOMBS_10
-Fire Temple Boss Key Chest,                           chest,          NONE,                 TEMPLE_FIRE,                    0x0c,                       BOSS_KEY_FIRE
-Fire Temple Jail 2 Chest,                             chest,          NONE,                 TEMPLE_FIRE,                    0x04,                       SMALL_KEY_FIRE
-Fire Temple Jail 3 Chest,                             chest,          NONE,                 TEMPLE_FIRE,                    0x02,                       SMALL_KEY_FIRE
-Fire Temple Maze Chest,                               chest,          NONE,                 TEMPLE_FIRE,                    0x03,                       SMALL_KEY_FIRE
-Fire Temple Jail 4 Chest,                             chest,          NONE,                 TEMPLE_FIRE,                    0x08,                       SMALL_KEY_FIRE
-Fire Temple Map,                                      chest,          NONE,                 TEMPLE_FIRE,                    0x0a,                       MAP_FIRE
-Fire Temple Above Maze Chest,                         chest,          NONE,                 TEMPLE_FIRE,                    0x06,                       SMALL_KEY_FIRE
-Fire Temple Below Maze Chest,                         chest,          NONE,                 TEMPLE_FIRE,                    0x0b,                       SMALL_KEY_FIRE
-Fire Temple Compass,                                  chest,          NONE,                 TEMPLE_FIRE,                    0x07,                       COMPASS_FIRE
-Fire Temple Hammer,                                   chest,          TEMPLE_FIRE_HAMMER,   TEMPLE_FIRE,                    0x05,                       HAMMER
-Fire Temple Ring Jail,                                chest,          NONE,                 TEMPLE_FIRE,                    0x09,                       SMALL_KEY_FIRE
-Fire Temple Scarecrow Chest,                          chest,          TEMPLE_FIRE_SCARECROW,TEMPLE_FIRE,                    0x0d,                       RUPEE_HUGE
-Fire Temple GS Lava Side Room,                        gs,             NONE,                 TEMPLE_FIRE,                    0x28,                       GS_TOKEN
-Fire Temple GS Hammer Statues,                        gs,             NONE,                 TEMPLE_FIRE,                    0x29,                       GS_TOKEN
-Fire Temple GS Maze,                                  gs,             NONE,                 TEMPLE_FIRE,                    0x2a,                       GS_TOKEN
-Fire Temple GS Scarecrow Wall,                        gs,             NONE,                 TEMPLE_FIRE,                    0x2c,                       GS_TOKEN
-Fire Temple GS Scarecrow Top,                         gs,             NONE,                 TEMPLE_FIRE,                    0x2b,                       GS_TOKEN
-Fire Temple Boss Container,                           collectible,    NONE,                 LAIR_VOLVAGIA,                  0x1f,                       HEART_CONTAINER
-Fire Temple Boss,                                     npc,            NONE,                 LAIR_VOLVAGIA,                  BLUE_WARP_VOLVAGIA,         MEDALLION_FIRE
-Ice Cavern Iron Boots,                                chest,          NONE,                 ICE_CAVERN,                     0x02,                       BOOTS_IRON
-Ice Cavern Map,                                       chest,          NONE,                 ICE_CAVERN,                     0x00,                       MAP_IC
-Ice Cavern Compass,                                   chest,          NONE,                 ICE_CAVERN,                     0x01,                       COMPASS_IC
-Ice Cavern HP,                                        collectible,    NONE,                 ICE_CAVERN,                     0x01,                       HEART_PIECE
-Ice Cavern Sheik Song,                                npc,            NONE,                 ICE_CAVERN,                     SHEIK_WATER,                SONG_TP_WATER
-Ice Cavern GS Scythe Room,                            gs,             NONE,                 ICE_CAVERN,                     0x51,                       GS_TOKEN
-Ice Cavern GS HP Room,                                gs,             NONE,                 ICE_CAVERN,                     0x52,                       GS_TOKEN
-Ice Cavern GS Block Room,                             gs,             NONE,                 ICE_CAVERN,                     0x50,                       GS_TOKEN
-Water Temple Under Center,                            chest,          NONE,                 TEMPLE_WATER,                   0x06,                       RUPEE_BLUE
-Water Temple Compass,                                 chest,          NONE,                 TEMPLE_WATER,                   0x09,                       COMPASS_WATER
-Water Temple Longshot,                                chest,          NONE,                 TEMPLE_WATER,                   0x07,                       HOOKSHOT
-Water Temple Dragon Chest,                            chest,          NONE,                 TEMPLE_WATER,                   0x0a,                       SMALL_KEY_WATER
-Water Temple Boss Key Chest,                          chest,          NONE,                 TEMPLE_WATER,                   0x05,                       BOSS_KEY_WATER
-Water Temple Bombable Chest,                          chest,          NONE,                 TEMPLE_WATER,                   0x00,                       SMALL_KEY_WATER
-Water Temple Shell Chest,                             chest,          NONE,                 TEMPLE_WATER,                   0x01,                       SMALL_KEY_WATER
-Water Temple Map,                                     chest,          NONE,                 TEMPLE_WATER,                   0x02,                       MAP_WATER
-Water Temple Corridor Chest,                          chest,          NONE,                 TEMPLE_WATER,                   0x08,                       SMALL_KEY_WATER
-Water Temple River Chest,                             chest,          NONE,                 TEMPLE_WATER,                   0x03,                       SMALL_KEY_WATER
-Water Temple GS River,                                gs,             NONE,                 TEMPLE_WATER,                   0x34,                       GS_TOKEN
-Water Temple GS Center,                               gs,             NONE,                 TEMPLE_WATER,                   0x32,                       GS_TOKEN
-Water Temple GS Large Pit,                            gs,             NONE,                 TEMPLE_WATER,                   0x31,                       GS_TOKEN
-Water Temple GS Waterfalls,                           gs,             NONE,                 TEMPLE_WATER,                   0x33,                       GS_TOKEN
-Water Temple GS Cage,                                 gs,             NONE,                 TEMPLE_WATER,                   0x30,                       GS_TOKEN
-Water Temple Boss HC,                                 collectible,    NONE,                 LAIR_MORPHA,                    0x1f,                       HEART_CONTAINER
-Water Temple Boss,                                    npc,            NONE,                 LAIR_MORPHA,                    BLUE_WARP_MORPHA,           MEDALLION_WATER
-Bottom of the Well Compass,                           chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x01,                       COMPASS_BOTW
-Bottom of the Well Under Debris,                      chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x02,                       BOMBCHU_10
-Bottom of the Well Back West,                         chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x04,                       NUTS_10
-Bottom of the Well East,                              chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x05,                       SMALL_KEY_BOTW
-Bottom of the Well Front West,                        chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x08,                       SMALL_KEY_BOTW
-Bottom of the Well Underwater,                        chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x09,                       RECOVERY_HEART
-Bottom of the Well East Cage,                         chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x0c,                       SHIELD_DEKU
-Bottom of the Well Blood Chest,                       chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x0e,                       NUTS_10
-Bottom of the Well Underwater 2,                      chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x10,                       BOMBS_10
-Bottom of the Well Map,                               chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x07,                       MAP_BOTW
-Bottom of the Well Coffin,                            collectible,    NONE,                 BOTTOM_OF_THE_WELL,             0x01,                       SMALL_KEY_BOTW
-Bottom of the Well Pits,                              chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x0a,                       SHIELD_HYLIAN
-Bottom of the Well Lens,                              chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x03,                       LENS
-Bottom of the Well Lens Side Chest,                   chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x14,                       RUPEE_HUGE
-Bottom of the Well GS East Cage,                      gs,             NONE,                 BOTTOM_OF_THE_WELL,             0x48,                       GS_TOKEN
-Bottom of the Well GS Inner West,                     gs,             NONE,                 BOTTOM_OF_THE_WELL,             0x4a,                       GS_TOKEN
-Bottom of the Well GS Inner East,                     gs,             NONE,                 BOTTOM_OF_THE_WELL,             0x49,                       GS_TOKEN
-Shadow Temple Map,                                    chest,          NONE,                 TEMPLE_SHADOW,                  0x01,                       MAP_SHADOW
-Shadow Temple Hover Boots,                            chest,          NONE,                 TEMPLE_SHADOW,                  0x07,                       BOOTS_HOVER
-Shadow Temple Silver Rupees,                          chest,          NONE,                 TEMPLE_SHADOW,                  0x02,                       SMALL_KEY_SHADOW
-Shadow Temple Compass,                                chest,          NONE,                 TEMPLE_SHADOW,                  0x03,                       COMPASS_SHADOW
-Shadow Temple Falling Spikes Lower,                   chest,          NONE,                 TEMPLE_SHADOW,                  0x05,                       ARROWS_10
-Shadow Temple Falling Spikes Upper 1,                 chest,          NONE,                 TEMPLE_SHADOW,                  0x04,                       SMALL_KEY_SHADOW
-Shadow Temple Falling Spikes Upper 2,                 chest,          NONE,                 TEMPLE_SHADOW,                  0x06,                       RUPEE_BLUE
-Shadow Temple Invisible Spike Room,                   chest,          NONE,                 TEMPLE_SHADOW,                  0x09,                       RUPEE_BLUE
-Shadow Temple Boss Key Room 1,                        chest,          NONE,                 TEMPLE_SHADOW,                  0x0a,                       RUPEE_BLUE
-Shadow Temple Boss Key Room 2,                        chest,          NONE,                 TEMPLE_SHADOW,                  0x0b,                       BOSS_KEY_SHADOW
-Shadow Temple Skull,                                  collectible,    NONE,                 TEMPLE_SHADOW,                  0x01,                       SMALL_KEY_SHADOW
-Shadow Temple Spinning Blades Visible,                chest,          NONE,                 TEMPLE_SHADOW,                  0x0c,                       RUPEE_BLUE
-Shadow Temple Spinning Blades Invisible,              chest,          NONE,                 TEMPLE_SHADOW,                  0x16,                       ARROWS_30
-Shadow Temple Invisible Floormaster,                  chest,          NONE,                 TEMPLE_SHADOW,                  0x0d,                       SMALL_KEY_SHADOW
-Shadow Temple Wind Room Hint,                         chest,          NONE,                 TEMPLE_SHADOW,                  0x15,                       ARROWS_10
-Shadow Temple After Wind,                             chest,          NONE,                 TEMPLE_SHADOW,                  0x08,                       RUPEE_BLUE
-Shadow Temple After Wind Invisible,                   chest,          NONE,                 TEMPLE_SHADOW,                  0x14,                       SMALL_KEY_SHADOW
-Shadow Temple GS Invisible Scythe,                    gs,             NONE,                 TEMPLE_SHADOW,                  0x43,                       GS_TOKEN
-Shadow Temple GS Skull Pot,                           gs,             NONE,                 TEMPLE_SHADOW,                  0x40,                       GS_TOKEN
-Shadow Temple GS Triple Skull Pot,                    gs,             NONE,                 TEMPLE_SHADOW,                  0x42,                       GS_TOKEN
-Shadow Temple GS Near Boat,                           gs,             NONE,                 TEMPLE_SHADOW,                  0x44,                       GS_TOKEN
-Shadow Temple GS Falling Spikes,                      gs,             NONE,                 TEMPLE_SHADOW,                  0x41,                       GS_TOKEN
-Shadow Temple Boss HC,                                collectible,    NONE,                 LAIR_BONGO_BONGO,               0x1f,                       HEART_CONTAINER
-Shadow Temple Boss,                                   npc,            NONE,                 LAIR_BONGO_BONGO,               BLUE_WARP_BONGO_BONGO,      MEDALLION_SHADOW
-Gerudo Fortress Jail 1,                               collectible,    NONE,                 THIEVES_HIDEOUT,                0x0c,                       SMALL_KEY_GF
-Gerudo Fortress Jail 2,                               collectible,    NONE,                 THIEVES_HIDEOUT,                0x0f,                       SMALL_KEY_GF
-Gerudo Fortress Jail 3,                               collectible,    NONE,                 THIEVES_HIDEOUT,                0x0a,                       SMALL_KEY_GF
-Gerudo Fortress Jail 4,                               collectible,    NONE,                 THIEVES_HIDEOUT,                0x0e,                       SMALL_KEY_GF
-Gerudo Member Card,                                   npc,            NONE,                 THIEVES_HIDEOUT,                GERUDO_CARD,                GERUDO_CARD
-Spirit Temple Child First Chest,                      chest,          NONE,                 TEMPLE_SPIRIT,                  0x08,                       SHIELD_DEKU
-Spirit Temple Child Second Chest,                     chest,          NONE,                 TEMPLE_SPIRIT,                  0x00,                       SMALL_KEY_SPIRIT
-Spirit Temple Child Climb 1,                          chest,          NONE,                 TEMPLE_SPIRIT,                  0x0c,                       SHIELD_DEKU
-Spirit Temple Child Climb 2,                          chest,          NONE,                 TEMPLE_SPIRIT,                  0x06,                       BOMBCHU_10
-Spirit Temple Statue Base,                            chest,          NONE,                 TEMPLE_SPIRIT,                  0x03,                       MAP_SPIRIT
-Spirit Temple Statue Hands,                           chest,          NONE,                 TEMPLE_SPIRIT,                  0x02,                       SMALL_KEY_SPIRIT
-Spirit Temple Statue Upper Right,                     chest,          NONE,                 TEMPLE_SPIRIT,                  0x0f,                       RUPEE_BLUE
-Spirit Temple Sun Block Room Torches,                 chest,          NONE,                 TEMPLE_SPIRIT,                  0x01,                       SMALL_KEY_SPIRIT
-Spirit Temple Adult Silver Rupees,                    chest,          NONE,                 TEMPLE_SPIRIT,                  0x07,                       SMALL_KEY_SPIRIT
-Spirit Temple Adult Lullaby,                          chest,          NONE,                 TEMPLE_SPIRIT,                  0x04,                       COMPASS_SPIRIT
-Spirit Temple Adult Suns on Wall 1,                   chest,          NONE,                 TEMPLE_SPIRIT,                  0x0d,                       RECOVERY_HEART
-Spirit Temple Adult Suns on Wall 2,                   chest,          NONE,                 TEMPLE_SPIRIT,                  0x0e,                       ICE_TRAP
-Spirit Temple Adult Invisible 1,                      chest,          NONE,                 TEMPLE_SPIRIT,                  0x14,                       RECOVERY_HEART
-Spirit Temple Adult Invisible 2,                      chest,          NONE,                 TEMPLE_SPIRIT,                  0x15,                       RECOVERY_HEART
-Spirit Temple Adult Late Sun on Wall,                 chest,          NONE,                 TEMPLE_SPIRIT,                  0x05,                       SMALL_KEY_SPIRIT
-Spirit Temple Adult Boss Key Chest,                   chest,          NONE,                 TEMPLE_SPIRIT,                  0x0a,                       BOSS_KEY_SPIRIT
-Spirit Temple Adult Topmost Sun on Wall,              chest,          NONE,                 TEMPLE_SPIRIT,                  0x12,                       BOMBS_20
-Spirit Temple GS Child Climb,                         gs,             NONE,                 TEMPLE_SPIRIT,                  0x3b,                       GS_TOKEN
-Spirit Temple GS Child Fence,                         gs,             NONE,                 TEMPLE_SPIRIT,                  0x3c,                       GS_TOKEN
-Spirit Temple GS Iron Knuckle,                        gs,             NONE,                 TEMPLE_SPIRIT,                  0x38,                       GS_TOKEN
-Spirit Temple GS Boulders,                            gs,             NONE,                 TEMPLE_SPIRIT,                  0x39,                       GS_TOKEN
-Spirit Temple GS Statue,                              gs,             NONE,                 TEMPLE_SPIRIT,                  0x3a,                       GS_TOKEN
-Spirit Temple Silver Gauntlets,                       chest,          NONE,                 DESERT_COLOSSUS,                0x0b,                       STRENGTH
-Spirit Temple Mirror Shield,                          chest,          NONE,                 DESERT_COLOSSUS,                0x09,                       SHIELD_MIRROR
-Spirit Temple Boss HC,                                collectible,    NONE,                 LAIR_TWINROVA,                  0x1f,                       HEART_CONTAINER
-Spirit Temple Boss,                                   npc,            NONE,                 LAIR_TWINROVA,                  BLUE_WARP_TWINROVA,         MEDALLION_SPIRIT
-Gerudo Training Grounds Entrance 1,                   chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x07,                       ARROWS_10
-Gerudo Training Grounds Entrance 2,                   chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x13,                       RUPEE_BLUE
-Gerudo Training Grounds Stalfos,                      chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x00,                       SMALL_KEY_GTG
-Gerudo Training Grounds Near Block,                   chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x11,                       ARROWS_30
-Gerudo Training Grounds Behind Block Invisible,       chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x14,                       SMALL_KEY_GTG
-Gerudo Training Grounds Behind Block Visible 1,       chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x02,                       ICE_TRAP
-Gerudo Training Grounds Behind Block Visible 2,       chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x0e,                       RUPEE_BLUE
-Gerudo Training Grounds Behind Block Visible 3,       chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x0f,                       RUPEE_HUGE
-Gerudo Training Grounds Eye Statue,                   chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x03,                       SMALL_KEY_GTG
-Gerudo Training Grounds Hammer Room Switch,           chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x10,                       SMALL_KEY_GTG
-Gerudo Training Grounds Hammer Room,                  chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x12,                       ARROWS_10
-Gerudo Training Grounds Lizalfos,                     chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x01,                       SMALL_KEY_GTG
-Gerudo Training Water,                                chest,          GTG_WATER,            GERUDO_TRAINING_GROUND,         0x0d,                       SMALL_KEY_GTG
-Gerudo Training Freestanding Key,                     collectible,    NONE,                 GERUDO_TRAINING_GROUND,         0x01,                       SMALL_KEY_GTG
-Gerudo Training Maze Upper Cage,                      chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x04,                       SMALL_KEY_GTG
-Gerudo Training Maze Upper Fake Ceiling,              chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x0b,                       SMALL_KEY_GTG
-Gerudo Training Maze Side Chest 1,                    chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x05,                       BOMBCHU_5
-Gerudo Training Maze Side Chest 2,                    chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x08,                       ARROWS_30
-Gerudo Training Maze Chest 1,                         chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x06,                       RUPEE_PURPLE
-Gerudo Training Maze Chest 2,                         chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x0a,                       RUPEE_RED
-Gerudo Training Maze Chest 3,                         chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x09,                       ARROWS_30
-Gerudo Training Maze Chest 4,                         chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x0c,                       ARROW_ICE
-Ganon Castle Water Chest 1,                           chest,          NONE,                 INSIDE_GANON_CASTLE,            0x06,                       RECOVERY_HEART
-Ganon Castle Water Chest 2,                           chest,          NONE,                 INSIDE_GANON_CASTLE,            0x07,                       ICE_TRAP
-Ganon Castle Forest Chest,                            chest,          NONE,                 INSIDE_GANON_CASTLE,            0x09,                       RUPEE_BLUE
-Ganon Castle Light Chest Center,                      chest,          NONE,                 INSIDE_GANON_CASTLE,            0x10,                       SMALL_KEY_GANON
-Ganon Castle Light Chest Around 1,                    chest,          NONE,                 INSIDE_GANON_CASTLE,            0x0a,                       ARROWS_30
-Ganon Castle Light Chest Around 2,                    chest,          NONE,                 INSIDE_GANON_CASTLE,            0x0b,                       ICE_TRAP
-Ganon Castle Light Chest Around 3,                    chest,          NONE,                 INSIDE_GANON_CASTLE,            0x0c,                       RUPEE_BLUE
-Ganon Castle Light Chest Around 4,                    chest,          NONE,                 INSIDE_GANON_CASTLE,            0x0d,                       RECOVERY_HEART
-Ganon Castle Light Chest Around 5,                    chest,          NONE,                 INSIDE_GANON_CASTLE,            0x0e,                       ICE_TRAP
-Ganon Castle Light Chest Around 6,                    chest,          NONE,                 INSIDE_GANON_CASTLE,            0x0f,                       ICE_TRAP
-Ganon Castle Light Chest Lullaby,                     chest,          NONE,                 INSIDE_GANON_CASTLE,            0x11,                       SMALL_KEY_GANON
-Ganon Castle Shadow Chest 1,                          chest,          NONE,                 INSIDE_GANON_CASTLE,            0x08,                       RUPEE_BLUE
-Ganon Castle Shadow Chest 2,                          chest,          NONE,                 INSIDE_GANON_CASTLE,            0x05,                       STRENGTH
-Ganon Castle Spirit Chest 1,                          chest,          NONE,                 INSIDE_GANON_CASTLE,            0x12,                       BOMBCHU_20
-Ganon Castle Spirit Chest 2,                          chest,          NONE,                 INSIDE_GANON_CASTLE,            0x14,                       ARROWS_10
-Ganon Castle Boss Key,                                chest,          NONE,                 GANON_TOWER,                    0x0b,                       BOSS_KEY_GANON
+location,                                                   type,           hint,                 scene,                          id,                         item
+Hatch Chicken,                                              npc,            NONE,                 GROTTOS,                        WEIRD_EGG,                  WEIRD_EGG
+Hatch Pocket Cucco,                                         npc,            NONE,                 GROTTOS,                        POCKET_EGG,                 POCKET_EGG
+Kokiri Forest Mido Top Left,                                chest,          NONE,                 KOKIRI_MIDO,                    0x00,                       RUPEE_BLUE
+Kokiri Forest Mido Top Right,                               chest,          NONE,                 KOKIRI_MIDO,                    0x01,                       RUPEE_BLUE
+Kokiri Forest Mido Bottom Left,                             chest,          NONE,                 KOKIRI_MIDO,                    0x02,                       RUPEE_GREEN
+Kokiri Forest Mido Bottom Right,                            chest,          NONE,                 KOKIRI_MIDO,                    0x03,                       RECOVERY_HEART
+Kokiri Forest Kokiri Sword Chest,                           chest,          NONE,                 KOKIRI_FOREST,                  0x00,                       SWORD_KOKIRI
+Kokiri Forest Storms Grotto,                                chest,          NONE,                 GROTTOS,                        0x0c,                       RUPEE_RED
+Kokiri Forest GS Soil,                                      gs,             NONE,                 KOKIRI_FOREST,                  0x68,                       GS_TOKEN
+Kokiri Forest GS Night Child,                               gs,             NONE,                 KOKIRI_FOREST,                  0x69,                       GS_TOKEN
+Kokiri Forest GS Night Adult,                               gs,             NONE,                 KOKIRI_FOREST,                  0x6a,                       GS_TOKEN
+Kokiri Forest Cow,                                          cow,            NONE,                 KOKIRI_FOREST,                  0x00,                       MILK
+Kokiri Shop Item 1,                                         shop,           NONE,                 KOKIRI_FOREST,                  0x00,                       RECOVERY_HEART
+Kokiri Shop Item 2,                                         shop,           NONE,                 KOKIRI_FOREST,                  0x01,                       ARROWS_10
+Kokiri Shop Item 3,                                         shop,           NONE,                 KOKIRI_FOREST,                  0x02,                       ARROWS_30
+Kokiri Shop Item 4,                                         shop,           NONE,                 KOKIRI_FOREST,                  0x03,                       DEKU_SEEDS_30
+Kokiri Shop Item 5,                                         shop,           NONE,                 KOKIRI_FOREST,                  0x04,                       NUTS_5
+Kokiri Shop Item 6,                                         shop,           NONE,                 KOKIRI_FOREST,                  0x05,                       NUTS_10
+Kokiri Shop Item 7,                                         shop,           NONE,                 KOKIRI_FOREST,                  0x06,                       STICK
+Kokiri Shop Item 8,                                         shop,           NONE,                 KOKIRI_FOREST,                  0x07,                       SHIELD_DEKU
+Malon Egg,                                                  npc,            NONE,                 HYRULE_CASTLE,                  MALON_EGG,                  CHICKEN
+Zelda's Letter,                                             npc,            NONE,                 CASTLE_COURTYARD,               ZELDA_LETTER,               ZELDA_LETTER
+Zelda's Song,                                               npc,            NONE,                 CASTLE_COURTYARD,               ZELDA_SONG,                 SONG_ZELDA
+Lost Woods Gift from Saria,                                 npc,            NONE,                 LOST_WOODS,                     SARIA_OCARINA,              OCARINA
+Lost Woods Target,                                          npc,            NONE,                 LOST_WOODS,                     LOST_WOODS_TARGET,          SLINGSHOT
+Lost Woods Skull Kid,                                       npc,            NONE,                 LOST_WOODS,                     LOST_WOODS_SKULL_KID,       HEART_PIECE
+Lost Woods Memory Game,                                     npc,            NONE,                 LOST_WOODS,                     LOST_WOODS_MEMORY,          HEART_PIECE
+Lost Woods Scrub Sticks Upgrade,                            npc,            NONE,                 LOST_WOODS,                     SCRUB_STICKS,               STICK_UPGRADE
+Lost Woods Odd Mushroom,                                    npc,            NONE,                 LOST_WOODS,                     TRADE_ODD_MUSHROOM,         ODD_MUSHROOM
+Lost Woods Poacher's Saw,                                   npc,            NONE,                 LOST_WOODS,                     TRADE_POACHER_SAW,          POACHER_SAW
+Lost Woods Grotto Scrub Nuts Upgrade,                       npc,            NONE,                 GROTTOS,                        SCRUB_NUTS,                 NUT_UPGRADE
+Lost Woods Grotto Generic,                                  chest,          NONE,                 GROTTOS,                        0x14,                       RUPEE_BLUE
+Lost Woods GS Soil Bridge,                                  gs,             NONE,                 LOST_WOODS,                     0x70,                       GS_TOKEN
+Lost Woods GS Soil Theater,                                 gs,             NONE,                 LOST_WOODS,                     0x71,                       GS_TOKEN
+Lost Woods GS Bean Ride,                                    gs,             NONE,                 LOST_WOODS,                     0x72,                       GS_TOKEN
+Deku Theater Sticks Upgrade,                                npc,            NONE,                 GROTTOS,                        THEATER_STICKS,             STICK_UPGRADE
+Deku Theater Nuts Upgrade,                                  npc,            NONE,                 GROTTOS,                        THEATER_NUTS,               NUT_UPGRADE
+Saria's Song,                                               npc,            NONE,                 SACRED_FOREST_MEADOW,           SARIA_SONG,                 SONG_SARIA
+Sacred Meadow Sheik Song,                                   npc,            NONE,                 SACRED_FOREST_MEADOW,           SHEIK_FOREST,               SONG_TP_FOREST
+Sacred Meadow Grotto,                                       chest,          NONE,                 GROTTOS,                        0x11,                       RUPEE_PURPLE
+Sacred Meadow GS Night Adult,                               gs,             NONE,                 SACRED_FOREST_MEADOW,           0x73,                       GS_TOKEN
+Kakariko Anju Bottle,                                       npc,            NONE,                 KAKARIKO_VILLAGE,               ANJU_BOTTLE,                BOTTLE_EMPTY
+Kakariko Anju Egg,                                          npc,            NONE,                 KAKARIKO_VILLAGE,               TRADE_POCKET_EGG,           POCKET_CUCCO
+Kakariko Anju Cojiro,                                       npc,            NONE,                 KAKARIKO_VILLAGE,               TRADE_COJIRO,               COJIRO
+Kakariko Song Shadow,                                       npc,            RAVAGED_VILLAGE,      KAKARIKO_VILLAGE,               SHEIK_SHADOW,               SONG_TP_SHADOW
+Kakariko Man on Roof,                                       npc,            NONE,                 KAKARIKO_VILLAGE,               KAKARIKO_ROOF_MAN,          HEART_PIECE
+Kakariko Impa House HP,                                     collectible,    NONE,                 IMPA_HOUSE,                     0x01,                       HEART_PIECE
+Kakariko Grotto Front,                                      chest,          NONE,                 GROTTOS,                        0x0a,                       RUPEE_HUGE
+Kakariko Grotto Back,                                       chest,          NONE,                 GROTTOS,                        0x08,                       RUPEE_RED
+Kakariko GS Roof,                                           gs,             NONE,                 KAKARIKO_VILLAGE,               0x8e,                       GS_TOKEN
+Kakariko GS Shooting Gallery,                               gs,             NONE,                 KAKARIKO_VILLAGE,               0x8b,                       GS_TOKEN
+Kakariko GS Tree,                                           gs,             NONE,                 KAKARIKO_VILLAGE,               0x8d,                       GS_TOKEN
+Kakariko GS House of Skulltula,                             gs,             NONE,                 KAKARIKO_VILLAGE,               0x8c,                       GS_TOKEN
+Kakariko GS Bazaar,                                         gs,             NONE,                 KAKARIKO_VILLAGE,               0x89,                       GS_TOKEN
+Kakariko GS Ladder,                                         gs,             NONE,                 KAKARIKO_VILLAGE,               0x8a,                       GS_TOKEN
+Kakariko Potion Shop Odd Potion,                            npc,            NONE,                 KAKARIKO_POTION_SHOP,           TRADE_ODD_POTION,           ODD_POTION
+Kakariko Cow,                                               cow,            NONE,                 KAKARIKO_VILLAGE,               0x06,                       MILK
+Kakariko Bazaar Item 1,                                     shop,           NONE,                 BAZAAR,                         0x30,                       ARROWS_5
+Kakariko Bazaar Item 2,                                     shop,           NONE,                 BAZAAR,                         0x31,                       ARROWS_10
+Kakariko Bazaar Item 3,                                     shop,           NONE,                 BAZAAR,                         0x32,                       ARROWS_30
+Kakariko Bazaar Item 4,                                     shop,           NONE,                 BAZAAR,                         0x33,                       STICK
+Kakariko Bazaar Item 5,                                     shop,           NONE,                 BAZAAR,                         0x34,                       BOMBS_5
+Kakariko Bazaar Item 6,                                     shop,           NONE,                 BAZAAR,                         0x35,                       RECOVERY_HEART
+Kakariko Bazaar Item 7,                                     shop,           NONE,                 BAZAAR,                         0x36,                       NUTS_5
+Kakariko Bazaar Item 8,                                     shop,           NONE,                 BAZAAR,                         0x37,                       SHIELD_HYLIAN
+Kakariko Potion Shop Item 1,                                shop,           NONE,                 KAKARIKO_POTION_SHOP,           0x38,                       FISH
+Kakariko Potion Shop Item 2,                                shop,           NONE,                 KAKARIKO_POTION_SHOP,           0x39,                       BUG
+Kakariko Potion Shop Item 3,                                shop,           NONE,                 KAKARIKO_POTION_SHOP,           0x3a,                       POE
+Kakariko Potion Shop Item 4,                                shop,           NONE,                 KAKARIKO_POTION_SHOP,           0x3b,                       NUTS_5
+Kakariko Potion Shop Item 5,                                shop,           NONE,                 KAKARIKO_POTION_SHOP,           0x3c,                       BLUE_FIRE
+Kakariko Potion Shop Item 6,                                shop,           NONE,                 KAKARIKO_POTION_SHOP,           0x3d,                       FAIRY
+Kakariko Potion Shop Item 7,                                shop,           NONE,                 KAKARIKO_POTION_SHOP,           0x3e,                       POTION_GREEN
+Kakariko Potion Shop Item 8,                                shop,           NONE,                 KAKARIKO_POTION_SHOP,           0x3f,                       POTION_RED
+Graveyard Dampe Game,                                       collectible,    NONE,                 GRAVEYARD,                      0x1f,                       HEART_PIECE
+Graveyard ReDead Tomb,                                      chest,          NONE,                 TOMB_REDEAD,                    0x00,                       HEART_PIECE
+Graveyard Royal Tomb Song,                                  npc,            NONE,                 TOMB_ROYAL,                     ROYAL_TOMB_SONG,            SONG_SUN
+Graveyard Royal Tomb Chest,                                 chest,          NONE,                 TOMB_ROYAL,                     0x00,                       BOMBS_5
+Graveyard Fairy Tomb,                                       chest,          NONE,                 TOMB_FAIRY,                     0x00,                       SHIELD_HYLIAN
+Graveyard Dampe Tomb Reward 1,                              chest,          NONE,                 TOMB_DAMPE_WINDMILL,            0x00,                       HOOKSHOT
+Graveyard Dampe Tomb Reward 2,                              collectible,    NONE,                 TOMB_DAMPE_WINDMILL,            0x07,                       HEART_PIECE
+Graveyard Crate HP,                                         collectible,    NONE,                 GRAVEYARD,                      0x04,                       HEART_PIECE
+Graveyard GS Soil,                                          gs,             NONE,                 GRAVEYARD,                      0x88,                       GS_TOKEN
+Graveyard GS Wall,                                          gs,             NONE,                 GRAVEYARD,                      0x8f,                       GS_TOKEN
+Death Mountain Chest,                                       chest,          NONE,                 DEATH_MOUNTAIN_TRAIL,           0x01,                       RUPEE_PURPLE
+Death Mountain HP,                                          collectible,    NONE,                 DEATH_MOUNTAIN_TRAIL,           0x1e,                       HEART_PIECE
+Death Mountain Prescription,                                npc,            NONE,                 DEATH_MOUNTAIN_TRAIL,           TRADE_PRESCRIPTION,         PRESCRIPTION
+Death Mountain Claim Check,                                 npc,            NONE,                 DEATH_MOUNTAIN_TRAIL,           TRADE_CLAIM_CHECK,          CLAIM_CHECK
+Death Mountain Biggoron Sword,                              npc,            NONE,                 DEATH_MOUNTAIN_TRAIL,           TRADE_BIGGORON_SWORD,       SWORD_BIGGORON
+Death Mountain Grotto,                                      chest,          NONE,                 GROTTOS,                        0x17,                       RUPEE_HUGE
+Death Mountain GS Entrance,                                 gs,             NONE,                 DEATH_MOUNTAIN_TRAIL,           0x82,                       GS_TOKEN
+Death Mountain GS Soil,                                     gs,             NONE,                 DEATH_MOUNTAIN_TRAIL,           0x81,                       GS_TOKEN
+Death Mountain GS Above Dodongo,                            gs,             NONE,                 DEATH_MOUNTAIN_TRAIL,           0x83,                       GS_TOKEN
+Death Mountain GS Before Climb,                             gs,             NONE,                 DEATH_MOUNTAIN_TRAIL,           0x84,                       GS_TOKEN
+Death Mountain Cow,                                         cow,            NONE,                 DEATH_MOUNTAIN_TRAIL,           0x07,                       MILK
+Darunia,                                                    npc,            NONE,                 GORON_CITY,                     DARUNIA_BRACELET,           STRENGTH
+Goron City Maze Center 1,                                   chest,          NONE,                 GORON_CITY,                     0x02,                       RUPEE_PURPLE
+Goron City Maze Center 2,                                   chest,          NONE,                 GORON_CITY,                     0x01,                       RUPEE_PURPLE
+Goron City Maze Left,                                       chest,          NONE,                 GORON_CITY,                     0x00,                       RUPEE_HUGE
+Goron City Big Pot HP,                                      collectible,    NONE,                 GORON_CITY,                     0x1f,                       HEART_PIECE
+Goron City Tunic,                                           npc,            NONE,                 GORON_CITY,                     GORON_LINK_TUNIC,           TUNIC_GORON
+Goron City Bomb Bag,                                        npc,            NONE,                 GORON_CITY,                     GORON_BOMB_BAG,             BOMB_BAG
+Goron City Medigoron Giant Knife,                           npc,            NONE,                 GORON_CITY,                     MEDIGORON,                  SWORD_KNIFE
+Goron City GS Platform,                                     gs,             NONE,                 GORON_CITY,                     0x85,                       GS_TOKEN
+Goron City GS Maze,                                         gs,             NONE,                 GORON_CITY,                     0x86,                       GS_TOKEN
+Goron Shop Item 1,                                          shop,           NONE,                 GORON_CITY,                     0x18,                       RECOVERY_HEART
+Goron Shop Item 2,                                          shop,           NONE,                 GORON_CITY,                     0x19,                       RECOVERY_HEART
+Goron Shop Item 3,                                          shop,           NONE,                 GORON_CITY,                     0x1a,                       POTION_RED
+Goron Shop Item 4,                                          shop,           NONE,                 GORON_CITY,                     0x1b,                       TUNIC_GORON
+Goron Shop Item 5,                                          shop,           NONE,                 GORON_CITY,                     0x1c,                       BOMBS_5
+Goron Shop Item 6,                                          shop,           NONE,                 GORON_CITY,                     0x1d,                       BOMBS_10
+Goron Shop Item 7,                                          shop,           NONE,                 GORON_CITY,                     0x1e,                       BOMBS_20
+Goron Shop Item 8,                                          shop,           NONE,                 GORON_CITY,                     0x1f,                       BOMBS_30
+Death Mountain Crater Alcove HP,                            collectible,    NONE,                 DEATH_MOUNTAIN_CRATER,          0x02,                       HEART_PIECE
+Death Mountain Crater Volcano HP,                           collectible,    NONE,                 DEATH_MOUNTAIN_CRATER,          0x08,                       HEART_PIECE
+Death Mountain Crater Sheik Song,                           npc,            NONE,                 DEATH_MOUNTAIN_CRATER,          SHEIK_FIRE,                 SONG_TP_FIRE
+Death Mountain Crater Grotto,                               chest,          NONE,                 GROTTOS,                        0x1a,                       BOMBS_20
+Death Mountain Crater GS Soil,                              gs,             NONE,                 DEATH_MOUNTAIN_CRATER,          0x80,                       GS_TOKEN
+Death Mountain Crater GS Crate,                             gs,             NONE,                 DEATH_MOUNTAIN_CRATER,          0x87,                       GS_TOKEN
+Zora River HP Pillar,                                       collectible,    NONE,                 ZORA_RIVER,                     0x04,                       HEART_PIECE
+Zora River HP Platform,                                     collectible,    NONE,                 ZORA_RIVER,                     0x0b,                       HEART_PIECE
+Zora River Bean Seller,                                     npc,            NONE,                 ZORA_RIVER,                     BEAN_SELLER,                MAGIC_BEAN
+Zora River Frogs Storms,                                    npc,            NONE,                 ZORA_RIVER,                     FROGS_STORMS,               HEART_PIECE
+Zora River Frogs Game,                                      npc,            FROGS_FINAL,          ZORA_RIVER,                     FROGS_GAME,                 HEART_PIECE
+Zora River Grotto,                                          chest,          NONE,                 GROTTOS,                        0x09,                       RUPEE_RED
+Zora River GS Tree,                                         gs,             NONE,                 ZORA_RIVER,                     0x91,                       GS_TOKEN
+Zora River GS Ladder,                                       gs,             NONE,                 ZORA_RIVER,                     0x90,                       GS_TOKEN
+Zora River GS Near Grotto,                                  gs,             NONE,                 ZORA_RIVER,                     0x94,                       GS_TOKEN
+Zora River GS Near Bridge,                                  gs,             NONE,                 ZORA_RIVER,                     0x93,                       GS_TOKEN
+Zora Domain Waterfall Chest,                                chest,          NONE,                 ZORA_DOMAIN,                    0x00,                       HEART_PIECE
+Zora Domain Diving Game,                                    npc,            NONE,                 ZORA_DOMAIN,                    ZORA_DIVING_GAME,           SCALE
+Zora Domain Tunic,                                          npc,            ZORA_KING,            ZORA_DOMAIN,                    ZORA_KING_TUNIC,            TUNIC_ZORA
+Zora Domain Eyeball Frog,                                   npc,            ZORA_KING,            ZORA_DOMAIN,                    TRADE_EYEBALL_FROG,         EYEBALL_FROG
+Zora Domain GS Waterfall,                                   gs,             NONE,                 ZORA_DOMAIN,                    0x96,                       GS_TOKEN
+Zora Shop Item 1,                                           shop,           NONE,                 ZORA_SHOP,                      0x10,                       POTION_RED
+Zora Shop Item 2,                                           shop,           NONE,                 ZORA_SHOP,                      0x11,                       ARROWS_30
+Zora Shop Item 3,                                           shop,           NONE,                 ZORA_SHOP,                      0x12,                       FISH
+Zora Shop Item 4,                                           shop,           NONE,                 ZORA_SHOP,                      0x13,                       NUTS_5
+Zora Shop Item 5,                                           shop,           NONE,                 ZORA_SHOP,                      0x14,                       ARROWS_5
+Zora Shop Item 6,                                           shop,           NONE,                 ZORA_SHOP,                      0x15,                       ARROWS_10
+Zora Shop Item 7,                                           shop,           NONE,                 ZORA_SHOP,                      0x16,                       TUNIC_ZORA
+Zora Shop Item 8,                                           shop,           NONE,                 ZORA_SHOP,                      0x17,                       RECOVERY_HEART
+Zora Fountain Iceberg HP,                                   collectible,    NONE,                 ZORA_FOUNTAIN,                  0x01,                       HEART_PIECE
+Zora Fountain Bottom HP,                                    collectible,    NONE,                 ZORA_FOUNTAIN,                  0x14,                       HEART_PIECE
+Zora Fountain GS Wall,                                      gs,             NONE,                 ZORA_FOUNTAIN,                  0x92,                       GS_TOKEN
+Zora Fountain GS Tree,                                      gs,             NONE,                 ZORA_FOUNTAIN,                  0x97,                       GS_TOKEN
+Zora Fountain GS Upper,                                     gs,             NONE,                 ZORA_FOUNTAIN,                  0x95,                       GS_TOKEN
+Lake Hylia Underwater Bottle,                               npc,            NONE,                 LAKE_HYLIA,                     RUTO_LETTER,                RUTO_LETTER
+Lake Hylia Fire Arrow,                                      npc,            NONE,                 LAKE_HYLIA,                     FIRE_ARROW,                 ARROW_FIRE
+Lake Hylia HP,                                              collectible,    NONE,                 LAKE_HYLIA,                     0x1e,                       HEART_PIECE
+Lake Hylia GS Lab Wall,                                     gs,             NONE,                 LAKE_HYLIA,                     0x9a,                       GS_TOKEN
+Lake Hylia GS Island,                                       gs,             NONE,                 LAKE_HYLIA,                     0x99,                       GS_TOKEN
+Lake Hylia GS Soil,                                         gs,             NONE,                 LAKE_HYLIA,                     0x98,                       GS_TOKEN
+Lake Hylia GS Big Tree,                                     gs,             NONE,                 LAKE_HYLIA,                     0x9c,                       GS_TOKEN
+Laboratory Dive,                                            npc,            NONE,                 LABORATORY,                     LABORATORY_DIVE,            HEART_PIECE
+Laboratory Eye Drops,                                       npc,            NONE,                 LABORATORY,                     TRADE_EYE_DROPS,            EYE_DROPS
+Laboratory GS Crate,                                        gs,             NONE,                 LABORATORY,                     0x9b,                       GS_TOKEN
+Fishing Pond Child,                                         npc,            FISHING,              FISHING_POND,                   FISH_CHILD,                 HEART_PIECE
+Fishing Pond Adult,                                         npc,            FISHING,              FISHING_POND,                   FISH_ADULT,                 SCALE
+Lon Lon Ranch Malon Song,                                   npc,            NONE,                 LON_LON_RANCH,                  MALON_SONG,                 SONG_EPONA
+Lon Lon Ranch Silo HP,                                      collectible,    NONE,                 RANCH_HOUSE_SILO,               0x01,                       HEART_PIECE
+Lon Lon Ranch Talon Bottle,                                 npc,            NONE,                 RANCH_HOUSE_SILO,               TALON_BOTTLE,               BOTTLE_MILK
+Lon Lon Ranch GS Tree,                                      gs,             NONE,                 LON_LON_RANCH,                  0x63,                       GS_TOKEN
+Lon Lon Ranch GS House,                                     gs,             NONE,                 LON_LON_RANCH,                  0x62,                       GS_TOKEN
+Lon Lon Ranch GS Rain Shed,                                 gs,             NONE,                 LON_LON_RANCH,                  0x61,                       GS_TOKEN
+Lon Lon Ranch GS Back Wall,                                 gs,             NONE,                 LON_LON_RANCH,                  0x60,                       GS_TOKEN
+Lon Lon Ranch Stables Cow Left,                             cow,            NONE,                 LON_LON_RANCH,                  0x02,                       MILK
+Lon Lon Ranch Stables Cow Right,                            cow,            NONE,                 LON_LON_RANCH,                  0x03,                       MILK
+Lon Lon Ranch Silo Cow Front,                               cow,            NONE,                 LON_LON_RANCH,                  0x04,                       MILK
+Lon Lon Ranch Silo Cow Back,                                cow,            NONE,                 LON_LON_RANCH,                  0x05,                       MILK
+Hyrule Field Ocarina of Time,                               npc,            NONE,                 HYRULE_FIELD,                   OCARINA_TIME_ITEM,          OCARINA
+Hyrule Field Song of Time,                                  npc,            NONE,                 HYRULE_FIELD,                   OCARINA_TIME_SONG,          SONG_TIME
+Hyrule Field Grotto Scrub HP,                               npc,            NONE,                 GROTTOS,                        SCRUB_HP,                   HEART_PIECE
+Hyrule Field Grotto Southeast,                              chest,          NONE,                 GROTTOS,                        0x02,                       RUPEE_RED
+Hyrule Field Grotto Open,                                   chest,          NONE,                 GROTTOS,                        0x03,                       RUPEE_BLUE
+Hyrule Field Grotto Market,                                 chest,          NONE,                 GROTTOS,                        0x00,                       RUPEE_BLUE
+Hyrule Field Grotto Tektite HP,                             collectible,    NONE,                 GROTTOS,                        0x01,                       HEART_PIECE
+Hyrule Field Grotto Near Kakariko GS,                       gs,             NONE,                 GROTTOS,                        0x59,                       GS_TOKEN
+Hyrule Field Grotto Near Gerudo GS,                         gs,             NONE,                 GROTTOS,                        0x58,                       GS_TOKEN
+Hyrule Field Cow,                                           cow,            NONE,                 HYRULE_FIELD,                   0x01,                       MILK
+Market Dog Lady HP,                                         npc,            NONE,                 BACK_ALLEY_HOUSE,               DOG_LADY,                   HEART_PIECE
+Market Pot House Big Poes,                                  npc,            NONE,                 GUARD_HOUSE,                    POE_COLLECTOR,              BOTTLE_EMPTY
+Market Pot House GS,                                        gs,             NONE,                 GUARD_HOUSE,                    0x7b,                       GS_TOKEN
+Market Bazaar Item 1,                                       shop,           NONE,                 BAZAAR,                         0x20,                       ARROWS_5
+Market Bazaar Item 2,                                       shop,           NONE,                 BAZAAR,                         0x21,                       ARROWS_10
+Market Bazaar Item 3,                                       shop,           NONE,                 BAZAAR,                         0x22,                       ARROWS_30
+Market Bazaar Item 4,                                       shop,           NONE,                 BAZAAR,                         0x23,                       STICK
+Market Bazaar Item 5,                                       shop,           NONE,                 BAZAAR,                         0x24,                       BOMBS_5
+Market Bazaar Item 6,                                       shop,           NONE,                 BAZAAR,                         0x25,                       RECOVERY_HEART
+Market Bazaar Item 7,                                       shop,           NONE,                 BAZAAR,                         0x26,                       NUTS_5
+Market Bazaar Item 8,                                       shop,           NONE,                 BAZAAR,                         0x27,                       SHIELD_HYLIAN
+Market Potion Shop Item 1,                                  shop,           NONE,                 MARKET_POTION_SHOP,             0x28,                       FISH
+Market Potion Shop Item 2,                                  shop,           NONE,                 MARKET_POTION_SHOP,             0x29,                       BUG
+Market Potion Shop Item 3,                                  shop,           NONE,                 MARKET_POTION_SHOP,             0x2a,                       POE
+Market Potion Shop Item 4,                                  shop,           NONE,                 MARKET_POTION_SHOP,             0x2b,                       NUTS_5
+Market Potion Shop Item 5,                                  shop,           NONE,                 MARKET_POTION_SHOP,             0x2c,                       BLUE_FIRE
+Market Potion Shop Item 6,                                  shop,           NONE,                 MARKET_POTION_SHOP,             0x2d,                       FAIRY
+Market Potion Shop Item 7,                                  shop,           NONE,                 MARKET_POTION_SHOP,             0x2e,                       POTION_GREEN
+Market Potion Shop Item 8,                                  shop,           NONE,                 MARKET_POTION_SHOP,             0x2f,                       POTION_RED
+Market Bombchu Shop Item 1,                                 shop,           NONE,                 BOMBCHU_SHOP,                   0x08,                       BOMBCHU_20
+Market Bombchu Shop Item 2,                                 shop,           NONE,                 BOMBCHU_SHOP,                   0x09,                       BOMBCHU_20
+Market Bombchu Shop Item 3,                                 shop,           NONE,                 BOMBCHU_SHOP,                   0x0a,                       BOMBCHU_20
+Market Bombchu Shop Item 4,                                 shop,           NONE,                 BOMBCHU_SHOP,                   0x0b,                       BOMBCHU_20
+Market Bombchu Shop Item 5,                                 shop,           NONE,                 BOMBCHU_SHOP,                   0x0c,                       BOMBCHU_10
+Market Bombchu Shop Item 6,                                 shop,           NONE,                 BOMBCHU_SHOP,                   0x0d,                       BOMBCHU_10
+Market Bombchu Shop Item 7,                                 shop,           NONE,                 BOMBCHU_SHOP,                   0x0e,                       BOMBCHU_10
+Market Bombchu Shop Item 8,                                 shop,           NONE,                 BOMBCHU_SHOP,                   0x0f,                       BOMBCHU_10
+Bombchu Bowling Reward 1,                                   npc,            NONE,                 BOMBCHU_BOWLING_ALLEY,          BOMBCHU_BOWLING_1,          BOMB_BAG
+Bombchu Bowling Reward 2,                                   npc,            NONE,                 BOMBCHU_BOWLING_ALLEY,          BOMBCHU_BOWLING_2,          HEART_PIECE
+Treasure Game HP,                                           chest,          NONE,                 TREASURE_SHOP,                  0x0a,                       HEART_PIECE
+Shooting Gallery Child,                                     npc,            NONE,                 SHOOTING_GALLERY,               SHOOTING_GAME_CHILD,        SLINGSHOT
+Shooting Gallery Adult,                                     npc,            NONE,                 SHOOTING_GALLERY,               SHOOTING_GAME_ADULT,        BOW
+Hyrule Castle GS Tree,                                      gs,             NONE,                 HYRULE_CASTLE,                  0x7a,                       GS_TOKEN
+Hyrule Castle GS Grotto,                                    gs,             NONE,                 GROTTOS,                        0x79,                       GS_TOKEN
+Ganon Castle Exterior GS,                                   gs,             NONE,                 GANON_CASTLE_EXTERIOR,          0x78,                       GS_TOKEN
+Temple of Time Master Sword,                                npc,            NONE,                 TEMPLE_OF_TIME,                 MASTER_SWORD,               SWORD_MASTER
+Temple of Time Medallion,                                   npc,            NONE,                 TEMPLE_OF_TIME,                 LIGHT_MEDALLION,            MEDALLION_LIGHT
+Temple of Time Sheik Song,                                  npc,            NONE,                 TEMPLE_OF_TIME,                 SHEIK_LIGHT,                SONG_TP_LIGHT
+Temple of Time Light Arrows,                                npc,            NONE,                 TEMPLE_OF_TIME,                 ZELDA_LIGHT_ARROW,          ARROW_LIGHT
+Windmill HP,                                                collectible,    NONE,                 TOMB_DAMPE_WINDMILL,            0x01,                       HEART_PIECE
+Windmill Song of Storms,                                    npc,            NONE,                 TOMB_DAMPE_WINDMILL,            SONG_STORMS,                SONG_STORMS
+Gerudo Valley Chest,                                        chest,          NONE,                 GERUDO_VALLEY,                  0x00,                       RUPEE_PURPLE
+Gerudo Valley Crate HP,                                     collectible,    NONE,                 GERUDO_VALLEY,                  0x02,                       HEART_PIECE
+Gerudo Valley Waterfall HP,                                 collectible,    NONE,                 GERUDO_VALLEY,                  0x01,                       HEART_PIECE
+Gerudo Valley Broken Goron Sword,                           npc,            NONE,                 GERUDO_VALLEY,                  TRADE_BROKEN_GORON_SWORD,   BROKEN_GORON_SWORD
+Gerudo Valley GS Soil,                                      gs,             NONE,                 GERUDO_VALLEY,                  0xa0,                       GS_TOKEN
+Gerudo Valley GS Wall,                                      gs,             NONE,                 GERUDO_VALLEY,                  0xa1,                       GS_TOKEN
+Gerudo Valley GS Tent,                                      gs,             NONE,                 GERUDO_VALLEY,                  0xa3,                       GS_TOKEN
+Gerudo Valley GS Pillar,                                    gs,             NONE,                 GERUDO_VALLEY,                  0xa2,                       GS_TOKEN
+Gerudo Valley Cow,                                          cow,            NONE,                 GERUDO_VALLEY,                  0x08,                       MILK
+Gerudo Fortress Chest,                                      chest,          NONE,                 GERUDO_FORTRESS,                0x00,                       HEART_PIECE
+Gerudo Fortress Archery Reward 1,                           npc,            GERUDO_ARCHERY,       GERUDO_FORTRESS,                GERUDO_ARCHERY_1,           HEART_PIECE
+Gerudo Fortress Archery Reward 2,                           npc,            GERUDO_ARCHERY,       GERUDO_FORTRESS,                GERUDO_ARCHERY_2,           BOW
+Gerudo Fortress GS Wall,                                    gs,             NONE,                 GERUDO_FORTRESS,                0xa9,                       GS_TOKEN
+Gerudo Fortress GS Target,                                  gs,             NONE,                 GERUDO_FORTRESS,                0xa8,                       GS_TOKEN
+Haunted Wasteland Chest,                                    chest,          HAUNTED_WASTELAND,    HAUNTED_WASTELAND,              0x00,                       RUPEE_PURPLE
+Haunted Wasteland GS,                                       gs,             NONE,                 HAUNTED_WASTELAND,              0xb1,                       GS_TOKEN
+Desert Colossus HP,                                         collectible,    NONE,                 DESERT_COLOSSUS,                0x0d,                       HEART_PIECE
+Desert Colossus Song Spirit,                                npc,            NONE,                 DESERT_COLOSSUS,                SHEIK_SPIRIT,               SONG_TP_SPIRIT
+Desert Colossus GS Soil,                                    gs,             NONE,                 DESERT_COLOSSUS,                0xb0,                       GS_TOKEN
+Desert Colossus GS Tree,                                    gs,             NONE,                 DESERT_COLOSSUS,                0xb3,                       GS_TOKEN
+Desert Colossus GS Plateau,                                 gs,             NONE,                 DESERT_COLOSSUS,                0xb2,                       GS_TOKEN
+Skulltula House 10 Tokens,                                  npc,            NONE,                 HOUSE_OF_SKULLTULA,             GS_10,                      WALLET
+Skulltula House 20 Tokens,                                  npc,            NONE,                 HOUSE_OF_SKULLTULA,             GS_20,                      STONE_OF_AGONY
+Skulltula House 30 Tokens,                                  npc,            NONE,                 HOUSE_OF_SKULLTULA,             GS_30,                      WALLET
+Skulltula House 40 Tokens,                                  npc,            NONE,                 HOUSE_OF_SKULLTULA,             GS_40,                      BOMBCHU_10
+Skulltula House 50 Tokens,                                  npc,            NONE,                 HOUSE_OF_SKULLTULA,             GS_50,                      HEART_PIECE
+Great Fairy Magic Upgrade,                                  npc,            NONE,                 GREAT_FAIRY_FOUNTAIN_UPGRADES,  FAIRY_MAGIC_UPGRADE,        MAGIC_UPGRADE
+Great Fairy Magic Upgrade 2,                                npc,            NONE,                 GREAT_FAIRY_FOUNTAIN_UPGRADES,  FAIRY_MAGIC_UPGRADE2,       MAGIC_UPGRADE
+Great Fairy Defense Upgrade,                                npc,            GANON_FAIRY,          GREAT_FAIRY_FOUNTAIN_UPGRADES,  FAIRY_DEFENSE_UPGRADE,      DEFENSE_UPGRADE
+Great Fairy Din's Fire,                                     npc,            NONE,                 GREAT_FAIRY_FOUNTAIN_SPELLS,    FAIRY_SPELL_FIRE,           SPELL_FIRE
+Great Fairy Farore's Wind,                                  npc,            NONE,                 GREAT_FAIRY_FOUNTAIN_SPELLS,    FAIRY_SPELL_WIND,           SPELL_WIND
+Great Fairy Nayru's Love,                                   npc,            NONE,                 GREAT_FAIRY_FOUNTAIN_SPELLS,    FAIRY_SPELL_LOVE,           SPELL_LOVE
+Deku Tree Map Chest,                                        chest,          NONE,                 INSIDE_DEKU_TREE,               0x03,                       MAP_DT
+Deku Tree Compass Chest,                                    chest,          NONE,                 INSIDE_DEKU_TREE,               0x02,                       COMPASS_DT
+Deku Tree Compass Room Side Chest,                          chest,          NONE,                 INSIDE_DEKU_TREE,               0x06,                       RECOVERY_HEART
+Deku Tree Slingshot Chest,                                  chest,          NONE,                 INSIDE_DEKU_TREE,               0x01,                       SLINGSHOT
+Deku Tree Slingshot Side Chest,                             chest,          NONE,                 INSIDE_DEKU_TREE,               0x05,                       RECOVERY_HEART
+Deku Tree Basement Chest,                                   chest,          NONE,                 INSIDE_DEKU_TREE,               0x04,                       RECOVERY_HEART
+Deku Tree GS Compass,                                       gs,             NONE,                 INSIDE_DEKU_TREE,               0x0b,                       GS_TOKEN
+Deku Tree GS Basement Vines,                                gs,             NONE,                 INSIDE_DEKU_TREE,               0x0a,                       GS_TOKEN
+Deku Tree GS Basement Gate,                                 gs,             NONE,                 INSIDE_DEKU_TREE,               0x09,                       GS_TOKEN
+Deku Tree GS Basement Back Room,                            gs,             NONE,                 INSIDE_DEKU_TREE,               0x08,                       GS_TOKEN
+Deku Tree Boss Container,                                   collectible,    NONE,                 LAIR_GOHMA,                     0x1f,                       HEART_CONTAINER
+Deku Tree Boss,                                             npc,            NONE,                 LAIR_GOHMA,                     BLUE_WARP_GOHMA,            STONE_EMERALD
+Dodongo Cavern Map Chest,                                   chest,          NONE,                 DODONGO_CAVERN,                 0x08,                       MAP_DC
+Dodongo Cavern Compass Chest,                               chest,          NONE,                 DODONGO_CAVERN,                 0x05,                       COMPASS_DC
+Dodongo Cavern Bomb Bag Side Chest,                         chest,          NONE,                 DODONGO_CAVERN,                 0x06,                       RUPEE_RED
+Dodongo Cavern Bomb Bag Chest,                              chest,          NONE,                 DODONGO_CAVERN,                 0x04,                       BOMB_BAG
+Dodongo Cavern Bridge Chest,                                chest,          NONE,                 DODONGO_CAVERN,                 0x0a,                       SHIELD_DEKU
+Dodongo Cavern GS Side Room,                                gs,             NONE,                 DODONGO_CAVERN,                 0x14,                       GS_TOKEN
+Dodongo Cavern GS Stairs Vines,                             gs,             NONE,                 DODONGO_CAVERN,                 0x10,                       GS_TOKEN
+Dodongo Cavern GS Stairs Top,                               gs,             NONE,                 DODONGO_CAVERN,                 0x12,                       GS_TOKEN
+Dodongo Cavern GS Scarecrow,                                gs,             NONE,                 DODONGO_CAVERN,                 0x11,                       GS_TOKEN
+Dodongo Cavern GS Near Boss,                                gs,             NONE,                 DODONGO_CAVERN,                 0x13,                       GS_TOKEN
+Dodongo Cavern Boss Chest,                                  chest,          NONE,                 LAIR_KING_DODONGO,              0x00,                       BOMBS_10
+Dodongo Cavern Boss Container,                              collectible,    NONE,                 LAIR_KING_DODONGO,              0x1f,                       HEART_CONTAINER
+Dodongo Cavern Boss,                                        npc,            NONE,                 LAIR_KING_DODONGO,              BLUE_WARP_KING_DODONGO,     STONE_RUBY
+Jabu-Jabu Map Chest,                                        chest,          NONE,                 INSIDE_JABU_JABU,               0x02,                       MAP_JJ
+Jabu-Jabu Compass Chest,                                    chest,          NONE,                 INSIDE_JABU_JABU,               0x04,                       COMPASS_JJ
+Jabu-Jabu Boomerang Chest,                                  chest,          NONE,                 INSIDE_JABU_JABU,               0x01,                       BOOMERANG
+Jabu-Jabu GS Water Switch,                                  gs,             NONE,                 INSIDE_JABU_JABU,               0x1b,                       GS_TOKEN
+Jabu-Jabu GS Bottom Lower,                                  gs,             NONE,                 INSIDE_JABU_JABU,               0x18,                       GS_TOKEN
+Jabu-Jabu GS Bottom Upper,                                  gs,             NONE,                 INSIDE_JABU_JABU,               0x19,                       GS_TOKEN
+Jabu-Jabu GS Near Boss,                                     gs,             NONE,                 INSIDE_JABU_JABU,               0x1a,                       GS_TOKEN
+Jabu-Jabu Boss Container,                                   collectible,    NONE,                 LAIR_BARINADE,                  0x1f,                       HEART_CONTAINER
+Jabu-Jabu Boss,                                             npc,            NONE,                 LAIR_BARINADE,                  BLUE_WARP_BARINADE,         STONE_SAPPHIRE
+Forest Temple Tree Small Key,                               chest,          NONE,                 TEMPLE_FOREST,                  0x03,                       SMALL_KEY_FOREST
+Forest Temple Mini-Boss Key,                                chest,          NONE,                 TEMPLE_FOREST,                  0x00,                       SMALL_KEY_FOREST
+Forest Temple Map,                                          chest,          NONE,                 TEMPLE_FOREST,                  0x01,                       MAP_FOREST
+Forest Temple Maze,                                         chest,          NONE,                 TEMPLE_FOREST,                  0x04,                       ARROWS_30
+Forest Temple Garden,                                       chest,          NONE,                 TEMPLE_FOREST,                  0x05,                       RECOVERY_HEART
+Forest Temple Well,                                         chest,          NONE,                 TEMPLE_FOREST,                  0x09,                       SMALL_KEY_FOREST
+Forest Temple Poe Key,                                      chest,          NONE,                 TEMPLE_FOREST,                  0x0d,                       SMALL_KEY_FOREST
+Forest Temple Bow,                                          chest,          NONE,                 TEMPLE_FOREST,                  0x0c,                       BOW
+Forest Temple Compass,                                      chest,          NONE,                 TEMPLE_FOREST,                  0x0f,                       COMPASS_FOREST
+Forest Temple Checkerboard,                                 chest,          NONE,                 TEMPLE_FOREST,                  0x07,                       ARROWS_10
+Forest Temple Boss Key,                                     chest,          NONE,                 TEMPLE_FOREST,                  0x0e,                       BOSS_KEY_FOREST
+Forest Temple Floormaster,                                  chest,          NONE,                 TEMPLE_FOREST,                  0x02,                       SMALL_KEY_FOREST
+Forest Temple Antichamber,                                  chest,          NONE,                 TEMPLE_FOREST,                  0x0b,                       ARROWS_5
+Forest Temple GS Entrance,                                  gs,             NONE,                 TEMPLE_FOREST,                  0x21,                       GS_TOKEN
+Forest Temple GS Main,                                      gs,             NONE,                 TEMPLE_FOREST,                  0x23,                       GS_TOKEN
+Forest Temple GS Garden West,                               gs,             NONE,                 TEMPLE_FOREST,                  0x22,                       GS_TOKEN
+Forest Temple GS Garden East,                               gs,             NONE,                 TEMPLE_FOREST,                  0x20,                       GS_TOKEN
+Forest Temple GS Antichamber,                               gs,             NONE,                 TEMPLE_FOREST,                  0x24,                       GS_TOKEN
+Forest Temple Boss Container,                               collectible,    NONE,                 LAIR_PHANTOM_GANON,             0x1f,                       HEART_CONTAINER
+Forest Temple Boss,                                         npc,            NONE,                 LAIR_PHANTOM_GANON,             BLUE_WARP_PHANTOM_GANON,    MEDALLION_FOREST
+Fire Temple Jail 1 Chest,                                   chest,          NONE,                 TEMPLE_FIRE,                    0x01,                       SMALL_KEY_FIRE
+Fire Temple Boss Key Side Chest,                            chest,          NONE,                 TEMPLE_FIRE,                    0x00,                       BOMBS_10
+Fire Temple Boss Key Chest,                                 chest,          NONE,                 TEMPLE_FIRE,                    0x0c,                       BOSS_KEY_FIRE
+Fire Temple Jail 2 Chest,                                   chest,          NONE,                 TEMPLE_FIRE,                    0x04,                       SMALL_KEY_FIRE
+Fire Temple Jail 3 Chest,                                   chest,          NONE,                 TEMPLE_FIRE,                    0x02,                       SMALL_KEY_FIRE
+Fire Temple Maze Chest,                                     chest,          NONE,                 TEMPLE_FIRE,                    0x03,                       SMALL_KEY_FIRE
+Fire Temple Jail 4 Chest,                                   chest,          NONE,                 TEMPLE_FIRE,                    0x08,                       SMALL_KEY_FIRE
+Fire Temple Map,                                            chest,          NONE,                 TEMPLE_FIRE,                    0x0a,                       MAP_FIRE
+Fire Temple Above Maze Chest,                               chest,          NONE,                 TEMPLE_FIRE,                    0x06,                       SMALL_KEY_FIRE
+Fire Temple Below Maze Chest,                               chest,          NONE,                 TEMPLE_FIRE,                    0x0b,                       SMALL_KEY_FIRE
+Fire Temple Compass,                                        chest,          NONE,                 TEMPLE_FIRE,                    0x07,                       COMPASS_FIRE
+Fire Temple Hammer,                                         chest,          TEMPLE_FIRE_HAMMER,   TEMPLE_FIRE,                    0x05,                       HAMMER
+Fire Temple Ring Jail,                                      chest,          NONE,                 TEMPLE_FIRE,                    0x09,                       SMALL_KEY_FIRE
+Fire Temple Scarecrow Chest,                                chest,          TEMPLE_FIRE_SCARECROW,TEMPLE_FIRE,                    0x0d,                       RUPEE_HUGE
+Fire Temple GS Lava Side Room,                              gs,             NONE,                 TEMPLE_FIRE,                    0x28,                       GS_TOKEN
+Fire Temple GS Hammer Statues,                              gs,             NONE,                 TEMPLE_FIRE,                    0x29,                       GS_TOKEN
+Fire Temple GS Maze,                                        gs,             NONE,                 TEMPLE_FIRE,                    0x2a,                       GS_TOKEN
+Fire Temple GS Scarecrow Wall,                              gs,             NONE,                 TEMPLE_FIRE,                    0x2c,                       GS_TOKEN
+Fire Temple GS Scarecrow Top,                               gs,             NONE,                 TEMPLE_FIRE,                    0x2b,                       GS_TOKEN
+Fire Temple Boss Container,                                 collectible,    NONE,                 LAIR_VOLVAGIA,                  0x1f,                       HEART_CONTAINER
+Fire Temple Boss,                                           npc,            NONE,                 LAIR_VOLVAGIA,                  BLUE_WARP_VOLVAGIA,         MEDALLION_FIRE
+Ice Cavern Iron Boots,                                      chest,          NONE,                 ICE_CAVERN,                     0x02,                       BOOTS_IRON
+Ice Cavern Map,                                             chest,          NONE,                 ICE_CAVERN,                     0x00,                       MAP_IC
+Ice Cavern Compass,                                         chest,          NONE,                 ICE_CAVERN,                     0x01,                       COMPASS_IC
+Ice Cavern HP,                                              collectible,    NONE,                 ICE_CAVERN,                     0x01,                       HEART_PIECE
+Ice Cavern Sheik Song,                                      npc,            NONE,                 ICE_CAVERN,                     SHEIK_WATER,                SONG_TP_WATER
+Ice Cavern GS Scythe Room,                                  gs,             NONE,                 ICE_CAVERN,                     0x51,                       GS_TOKEN
+Ice Cavern GS HP Room,                                      gs,             NONE,                 ICE_CAVERN,                     0x52,                       GS_TOKEN
+Ice Cavern GS Block Room,                                   gs,             NONE,                 ICE_CAVERN,                     0x50,                       GS_TOKEN
+Water Temple Under Center,                                  chest,          NONE,                 TEMPLE_WATER,                   0x06,                       RUPEE_BLUE
+Water Temple Compass,                                       chest,          NONE,                 TEMPLE_WATER,                   0x09,                       COMPASS_WATER
+Water Temple Longshot,                                      chest,          NONE,                 TEMPLE_WATER,                   0x07,                       HOOKSHOT
+Water Temple Dragon Chest,                                  chest,          NONE,                 TEMPLE_WATER,                   0x0a,                       SMALL_KEY_WATER
+Water Temple Boss Key Chest,                                chest,          NONE,                 TEMPLE_WATER,                   0x05,                       BOSS_KEY_WATER
+Water Temple Bombable Chest,                                chest,          NONE,                 TEMPLE_WATER,                   0x00,                       SMALL_KEY_WATER
+Water Temple Shell Chest,                                   chest,          NONE,                 TEMPLE_WATER,                   0x01,                       SMALL_KEY_WATER
+Water Temple Map,                                           chest,          NONE,                 TEMPLE_WATER,                   0x02,                       MAP_WATER
+Water Temple Corridor Chest,                                chest,          NONE,                 TEMPLE_WATER,                   0x08,                       SMALL_KEY_WATER
+Water Temple River Chest,                                   chest,          NONE,                 TEMPLE_WATER,                   0x03,                       SMALL_KEY_WATER
+Water Temple GS River,                                      gs,             NONE,                 TEMPLE_WATER,                   0x34,                       GS_TOKEN
+Water Temple GS Center,                                     gs,             NONE,                 TEMPLE_WATER,                   0x32,                       GS_TOKEN
+Water Temple GS Large Pit,                                  gs,             NONE,                 TEMPLE_WATER,                   0x31,                       GS_TOKEN
+Water Temple GS Waterfalls,                                 gs,             NONE,                 TEMPLE_WATER,                   0x33,                       GS_TOKEN
+Water Temple GS Cage,                                       gs,             NONE,                 TEMPLE_WATER,                   0x30,                       GS_TOKEN
+Water Temple Boss HC,                                       collectible,    NONE,                 LAIR_MORPHA,                    0x1f,                       HEART_CONTAINER
+Water Temple Boss,                                          npc,            NONE,                 LAIR_MORPHA,                    BLUE_WARP_MORPHA,           MEDALLION_WATER
+Bottom of the Well Compass,                                 chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x01,                       COMPASS_BOTW
+Bottom of the Well Under Debris,                            chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x02,                       BOMBCHU_10
+Bottom of the Well Back West,                               chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x04,                       NUTS_10
+Bottom of the Well East,                                    chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x05,                       SMALL_KEY_BOTW
+Bottom of the Well Front West,                              chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x08,                       SMALL_KEY_BOTW
+Bottom of the Well Underwater,                              chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x09,                       RECOVERY_HEART
+Bottom of the Well East Cage,                               chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x0c,                       SHIELD_DEKU
+Bottom of the Well Blood Chest,                             chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x0e,                       NUTS_10
+Bottom of the Well Underwater 2,                            chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x10,                       BOMBS_10
+Bottom of the Well Map,                                     chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x07,                       MAP_BOTW
+Bottom of the Well Coffin,                                  collectible,    NONE,                 BOTTOM_OF_THE_WELL,             0x01,                       SMALL_KEY_BOTW
+Bottom of the Well Pits,                                    chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x0a,                       SHIELD_HYLIAN
+Bottom of the Well Lens,                                    chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x03,                       LENS
+Bottom of the Well Lens Side Chest,                         chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x14,                       RUPEE_HUGE
+Bottom of the Well GS East Cage,                            gs,             NONE,                 BOTTOM_OF_THE_WELL,             0x48,                       GS_TOKEN
+Bottom of the Well GS Inner West,                           gs,             NONE,                 BOTTOM_OF_THE_WELL,             0x4a,                       GS_TOKEN
+Bottom of the Well GS Inner East,                           gs,             NONE,                 BOTTOM_OF_THE_WELL,             0x49,                       GS_TOKEN
+Shadow Temple Map,                                          chest,          NONE,                 TEMPLE_SHADOW,                  0x01,                       MAP_SHADOW
+Shadow Temple Hover Boots,                                  chest,          NONE,                 TEMPLE_SHADOW,                  0x07,                       BOOTS_HOVER
+Shadow Temple Silver Rupees,                                chest,          NONE,                 TEMPLE_SHADOW,                  0x02,                       SMALL_KEY_SHADOW
+Shadow Temple Compass,                                      chest,          NONE,                 TEMPLE_SHADOW,                  0x03,                       COMPASS_SHADOW
+Shadow Temple Falling Spikes Lower,                         chest,          NONE,                 TEMPLE_SHADOW,                  0x05,                       ARROWS_10
+Shadow Temple Falling Spikes Upper 1,                       chest,          NONE,                 TEMPLE_SHADOW,                  0x04,                       SMALL_KEY_SHADOW
+Shadow Temple Falling Spikes Upper 2,                       chest,          NONE,                 TEMPLE_SHADOW,                  0x06,                       RUPEE_BLUE
+Shadow Temple Invisible Spike Room,                         chest,          NONE,                 TEMPLE_SHADOW,                  0x09,                       RUPEE_BLUE
+Shadow Temple Boss Key Room 1,                              chest,          NONE,                 TEMPLE_SHADOW,                  0x0a,                       RUPEE_BLUE
+Shadow Temple Boss Key Room 2,                              chest,          NONE,                 TEMPLE_SHADOW,                  0x0b,                       BOSS_KEY_SHADOW
+Shadow Temple Skull,                                        collectible,    NONE,                 TEMPLE_SHADOW,                  0x01,                       SMALL_KEY_SHADOW
+Shadow Temple Spinning Blades Visible,                      chest,          NONE,                 TEMPLE_SHADOW,                  0x0c,                       RUPEE_BLUE
+Shadow Temple Spinning Blades Invisible,                    chest,          NONE,                 TEMPLE_SHADOW,                  0x16,                       ARROWS_30
+Shadow Temple Invisible Floormaster,                        chest,          NONE,                 TEMPLE_SHADOW,                  0x0d,                       SMALL_KEY_SHADOW
+Shadow Temple Wind Room Hint,                               chest,          NONE,                 TEMPLE_SHADOW,                  0x15,                       ARROWS_10
+Shadow Temple After Wind,                                   chest,          NONE,                 TEMPLE_SHADOW,                  0x08,                       RUPEE_BLUE
+Shadow Temple After Wind Invisible,                         chest,          NONE,                 TEMPLE_SHADOW,                  0x14,                       SMALL_KEY_SHADOW
+Shadow Temple GS Invisible Scythe,                          gs,             NONE,                 TEMPLE_SHADOW,                  0x43,                       GS_TOKEN
+Shadow Temple GS Skull Pot,                                 gs,             NONE,                 TEMPLE_SHADOW,                  0x40,                       GS_TOKEN
+Shadow Temple GS Triple Skull Pot,                          gs,             NONE,                 TEMPLE_SHADOW,                  0x42,                       GS_TOKEN
+Shadow Temple GS Near Boat,                                 gs,             NONE,                 TEMPLE_SHADOW,                  0x44,                       GS_TOKEN
+Shadow Temple GS Falling Spikes,                            gs,             NONE,                 TEMPLE_SHADOW,                  0x41,                       GS_TOKEN
+Shadow Temple Boss HC,                                      collectible,    NONE,                 LAIR_BONGO_BONGO,               0x1f,                       HEART_CONTAINER
+Shadow Temple Boss,                                         npc,            NONE,                 LAIR_BONGO_BONGO,               BLUE_WARP_BONGO_BONGO,      MEDALLION_SHADOW
+Gerudo Fortress Jail 1,                                     collectible,    NONE,                 THIEVES_HIDEOUT,                0x0c,                       SMALL_KEY_GF
+Gerudo Fortress Jail 2,                                     collectible,    NONE,                 THIEVES_HIDEOUT,                0x0f,                       SMALL_KEY_GF
+Gerudo Fortress Jail 3,                                     collectible,    NONE,                 THIEVES_HIDEOUT,                0x0a,                       SMALL_KEY_GF
+Gerudo Fortress Jail 4,                                     collectible,    NONE,                 THIEVES_HIDEOUT,                0x0e,                       SMALL_KEY_GF
+Gerudo Member Card,                                         npc,            NONE,                 THIEVES_HIDEOUT,                GERUDO_CARD,                GERUDO_CARD
+Spirit Temple Child First Chest,                            chest,          NONE,                 TEMPLE_SPIRIT,                  0x08,                       SHIELD_DEKU
+Spirit Temple Child Second Chest,                           chest,          NONE,                 TEMPLE_SPIRIT,                  0x00,                       SMALL_KEY_SPIRIT
+Spirit Temple Child Climb 1,                                chest,          NONE,                 TEMPLE_SPIRIT,                  0x0c,                       SHIELD_DEKU
+Spirit Temple Child Climb 2,                                chest,          NONE,                 TEMPLE_SPIRIT,                  0x06,                       BOMBCHU_10
+Spirit Temple Statue Base,                                  chest,          NONE,                 TEMPLE_SPIRIT,                  0x03,                       MAP_SPIRIT
+Spirit Temple Statue Hands,                                 chest,          NONE,                 TEMPLE_SPIRIT,                  0x02,                       SMALL_KEY_SPIRIT
+Spirit Temple Statue Upper Right,                           chest,          NONE,                 TEMPLE_SPIRIT,                  0x0f,                       RUPEE_BLUE
+Spirit Temple Sun Block Room Torches,                       chest,          NONE,                 TEMPLE_SPIRIT,                  0x01,                       SMALL_KEY_SPIRIT
+Spirit Temple Adult Silver Rupees,                          chest,          NONE,                 TEMPLE_SPIRIT,                  0x07,                       SMALL_KEY_SPIRIT
+Spirit Temple Adult Lullaby,                                chest,          NONE,                 TEMPLE_SPIRIT,                  0x04,                       COMPASS_SPIRIT
+Spirit Temple Adult Suns on Wall 1,                         chest,          NONE,                 TEMPLE_SPIRIT,                  0x0d,                       RECOVERY_HEART
+Spirit Temple Adult Suns on Wall 2,                         chest,          NONE,                 TEMPLE_SPIRIT,                  0x0e,                       ICE_TRAP
+Spirit Temple Adult Invisible 1,                            chest,          NONE,                 TEMPLE_SPIRIT,                  0x14,                       RECOVERY_HEART
+Spirit Temple Adult Invisible 2,                            chest,          NONE,                 TEMPLE_SPIRIT,                  0x15,                       RECOVERY_HEART
+Spirit Temple Adult Late Sun on Wall,                       chest,          NONE,                 TEMPLE_SPIRIT,                  0x05,                       SMALL_KEY_SPIRIT
+Spirit Temple Adult Boss Key Chest,                         chest,          NONE,                 TEMPLE_SPIRIT,                  0x0a,                       BOSS_KEY_SPIRIT
+Spirit Temple Adult Topmost Sun on Wall,                    chest,          NONE,                 TEMPLE_SPIRIT,                  0x12,                       BOMBS_20
+Spirit Temple GS Child Climb,                               gs,             NONE,                 TEMPLE_SPIRIT,                  0x3b,                       GS_TOKEN
+Spirit Temple GS Child Fence,                               gs,             NONE,                 TEMPLE_SPIRIT,                  0x3c,                       GS_TOKEN
+Spirit Temple GS Iron Knuckle,                              gs,             NONE,                 TEMPLE_SPIRIT,                  0x38,                       GS_TOKEN
+Spirit Temple GS Boulders,                                  gs,             NONE,                 TEMPLE_SPIRIT,                  0x39,                       GS_TOKEN
+Spirit Temple GS Statue,                                    gs,             NONE,                 TEMPLE_SPIRIT,                  0x3a,                       GS_TOKEN
+Spirit Temple Silver Gauntlets,                             chest,          NONE,                 DESERT_COLOSSUS,                0x0b,                       STRENGTH
+Spirit Temple Mirror Shield,                                chest,          NONE,                 DESERT_COLOSSUS,                0x09,                       SHIELD_MIRROR
+Spirit Temple Boss HC,                                      collectible,    NONE,                 LAIR_TWINROVA,                  0x1f,                       HEART_CONTAINER
+Spirit Temple Boss,                                         npc,            NONE,                 LAIR_TWINROVA,                  BLUE_WARP_TWINROVA,         MEDALLION_SPIRIT
+Gerudo Training Grounds Entrance 1,                         chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x07,                       ARROWS_10
+Gerudo Training Grounds Entrance 2,                         chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x13,                       RUPEE_BLUE
+Gerudo Training Grounds Stalfos,                            chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x00,                       SMALL_KEY_GTG
+Gerudo Training Grounds Near Block,                         chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x11,                       ARROWS_30
+Gerudo Training Grounds Behind Block Invisible,             chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x14,                       SMALL_KEY_GTG
+Gerudo Training Grounds Behind Block Visible 1,             chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x02,                       ICE_TRAP
+Gerudo Training Grounds Behind Block Visible 2,             chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x0e,                       RUPEE_BLUE
+Gerudo Training Grounds Behind Block Visible 3,             chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x0f,                       RUPEE_HUGE
+Gerudo Training Grounds Eye Statue,                         chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x03,                       SMALL_KEY_GTG
+Gerudo Training Grounds Hammer Room Switch,                 chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x10,                       SMALL_KEY_GTG
+Gerudo Training Grounds Hammer Room,                        chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x12,                       ARROWS_10
+Gerudo Training Grounds Lizalfos,                           chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x01,                       SMALL_KEY_GTG
+Gerudo Training Water,                                      chest,          GTG_WATER,            GERUDO_TRAINING_GROUND,         0x0d,                       SMALL_KEY_GTG
+Gerudo Training Freestanding Key,                           collectible,    NONE,                 GERUDO_TRAINING_GROUND,         0x01,                       SMALL_KEY_GTG
+Gerudo Training Maze Upper Cage,                            chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x04,                       SMALL_KEY_GTG
+Gerudo Training Maze Upper Fake Ceiling,                    chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x0b,                       SMALL_KEY_GTG
+Gerudo Training Maze Side Chest 1,                          chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x05,                       BOMBCHU_5
+Gerudo Training Maze Side Chest 2,                          chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x08,                       ARROWS_30
+Gerudo Training Maze Chest 1,                               chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x06,                       RUPEE_PURPLE
+Gerudo Training Maze Chest 2,                               chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x0a,                       RUPEE_RED
+Gerudo Training Maze Chest 3,                               chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x09,                       ARROWS_30
+Gerudo Training Maze Chest 4,                               chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x0c,                       ARROW_ICE
+Ganon Castle Water Chest 1,                                 chest,          NONE,                 INSIDE_GANON_CASTLE,            0x06,                       RECOVERY_HEART
+Ganon Castle Water Chest 2,                                 chest,          NONE,                 INSIDE_GANON_CASTLE,            0x07,                       ICE_TRAP
+Ganon Castle Forest Chest,                                  chest,          NONE,                 INSIDE_GANON_CASTLE,            0x09,                       RUPEE_BLUE
+Ganon Castle Light Chest Center,                            chest,          NONE,                 INSIDE_GANON_CASTLE,            0x10,                       SMALL_KEY_GANON
+Ganon Castle Light Chest Around 1,                          chest,          NONE,                 INSIDE_GANON_CASTLE,            0x0a,                       ARROWS_30
+Ganon Castle Light Chest Around 2,                          chest,          NONE,                 INSIDE_GANON_CASTLE,            0x0b,                       ICE_TRAP
+Ganon Castle Light Chest Around 3,                          chest,          NONE,                 INSIDE_GANON_CASTLE,            0x0c,                       RUPEE_BLUE
+Ganon Castle Light Chest Around 4,                          chest,          NONE,                 INSIDE_GANON_CASTLE,            0x0d,                       RECOVERY_HEART
+Ganon Castle Light Chest Around 5,                          chest,          NONE,                 INSIDE_GANON_CASTLE,            0x0e,                       ICE_TRAP
+Ganon Castle Light Chest Around 6,                          chest,          NONE,                 INSIDE_GANON_CASTLE,            0x0f,                       ICE_TRAP
+Ganon Castle Light Chest Lullaby,                           chest,          NONE,                 INSIDE_GANON_CASTLE,            0x11,                       SMALL_KEY_GANON
+Ganon Castle Shadow Chest 1,                                chest,          NONE,                 INSIDE_GANON_CASTLE,            0x08,                       RUPEE_BLUE
+Ganon Castle Shadow Chest 2,                                chest,          NONE,                 INSIDE_GANON_CASTLE,            0x05,                       STRENGTH
+Ganon Castle Spirit Chest 1,                                chest,          NONE,                 INSIDE_GANON_CASTLE,            0x12,                       BOMBCHU_20
+Ganon Castle Spirit Chest 2,                                chest,          NONE,                 INSIDE_GANON_CASTLE,            0x14,                       ARROWS_10
+Ganon Castle Boss Key,                                      chest,          NONE,                 GANON_TOWER,                    0x0b,                       BOSS_KEY_GANON
+MQ Deku Tree Map Chest,                                     chest,          NONE,                 INSIDE_DEKU_TREE,               0x03,                       MAP_DT
+MQ Deku Tree Compass Chest,                                 chest,          NONE,                 INSIDE_DEKU_TREE,               0x01,                       COMPASS_DT
+MQ Deku Tree Slingshot Chest,                               chest,          NONE,                 INSIDE_DEKU_TREE,               0x06,                       SLINGSHOT
+MQ Deku Tree Slingshot Room Far Chest,                      chest,          NONE,                 INSIDE_DEKU_TREE,               0x02,                       RUPEE_BLUE
+MQ Deku Tree Basement Chest,                                chest,          NONE,                 INSIDE_DEKU_TREE,               0x04,                       RUPEE_BLUE
+MQ Deku Tree Before Water Platform Chest,                   chest,          NONE,                 INSIDE_DEKU_TREE,               0x05,                       RECOVERY_HEART
+MQ Deku Tree After Water Platform Chest,                    chest,          NONE,                 INSIDE_DEKU_TREE,               0x00,                       RUPEE_PURPLE
+MQ Deku Tree GS Back Room,                                  gs,             NONE,                 INSIDE_DEKU_TREE,               0x08,                       GS_TOKEN
+MQ Deku Tree GS Lobby Crate,                                gs,             NONE,                 INSIDE_DEKU_TREE,               0x09,                       GS_TOKEN
+MQ Deku Tree GS Song of Time Blocks,                        gs,             NONE,                 INSIDE_DEKU_TREE,               0x0a,                       GS_TOKEN
+MQ Deku Tree GS Compass Room,                               gs,             NONE,                 INSIDE_DEKU_TREE,               0x0b,                       GS_TOKEN
+MQ Dodongo Cavern Map Chest,                                chest,          NONE,                 DODONGO_CAVERN,                 0x00,                       MAP_DC
+MQ Dodongo Cavern Compass Chest,                            chest,          NONE,                 DODONGO_CAVERN,                 0x05,                       COMPASS_DC
+MQ Dodongo Cavern Larvae Room Chest,                        chest,          NONE,                 DODONGO_CAVERN,                 0x02,                       RUPEE_BLUE
+MQ Dodongo Cavern Upper Ledge Chest,                        chest,          NONE,                 DODONGO_CAVERN,                 0x03,                       RUPEE_BLUE
+MQ Dodongo Cavern Bomb Bag Chest,                           chest,          NONE,                 DODONGO_CAVERN,                 0x04,                       BOMB_BAG
+MQ Dodongo Cavern Chest Under Grave,                        chest,          NONE,                 DODONGO_CAVERN,                 0x01,                       RUPEE_BLUE
+MQ Dodongo Cavern GS Time Blocks,                           gs,             NONE,                 DODONGO_CAVERN,                 0x13,                       GS_TOKEN
+MQ Dodongo Cavern GS Larve Room,                            gs,             NONE,                 DODONGO_CAVERN,                 0x14,                       GS_TOKEN
+MQ Dodongo Cavern GS Upper Lizalfos,                        gs,             NONE,                 DODONGO_CAVERN,                 0x12,                       GS_TOKEN
+MQ Dodongo Cavern GS Poe Room Side,                         gs,             NONE,                 DODONGO_CAVERN,                 0x11,                       GS_TOKEN
+MQ Dodongo Cavern GS Near Boss,                             gs,             NONE,                 DODONGO_CAVERN,                 0x10,                       GS_TOKEN
+MQ Jabu-Jabu Map Chest,                                     chest,          NONE,                 INSIDE_JABU_JABU,               0x03,                       MAP_JJ
+MQ Jabu-Jabu Entry Chest,                                   chest,          NONE,                 INSIDE_JABU_JABU,               0x05,                       NUTS_5
+MQ Jabu-Jabu Compass Chest,                                 chest,          NONE,                 INSIDE_JABU_JABU,               0x00,                       COMPASS_JJ
+MQ Jabu-Jabu Second Room B1 Chest,                          chest,          NONE,                 INSIDE_JABU_JABU,               0x02,                       NUTS_5
+MQ Jabu-Jabu Second Room 1F Chest,                          chest,          NONE,                 INSIDE_JABU_JABU,               0x07,                       RECOVERY_HEART
+MQ Jabu-Jabu Third Room West Chest,                         chest,          NONE,                 INSIDE_JABU_JABU,               0x04,                       BOMBCHU_5
+MQ Jabu-Jabu Third Room East Chest,                         chest,          NONE,                 INSIDE_JABU_JABU,               0x08,                       NUTS_5
+MQ Jabu-Jabu SoT Room Lower Chest,                          chest,          NONE,                 INSIDE_JABU_JABU,               0x09,                       STICK
+MQ Jabu-Jabu Boomerang Chest,                               chest,          NONE,                 INSIDE_JABU_JABU,               0x06,                       BOOMERANG
+MQ Jabu-Jabu Back Chest,                                    chest,          NONE,                 INSIDE_JABU_JABU,               0x01,                       NUTS_5
+MQ Jabu-Jabu Pre-Boss Chest,                                chest,          NONE,                 INSIDE_JABU_JABU,               0x0a,                       RUPEE_BLUE
+MQ Jabu-Jabu GS SoT Block,                                  gs,             NONE,                 INSIDE_JABU_JABU,               0x1a,                       GS_TOKEN
+MQ Jabu-Jabu GS Back,                                       gs,             NONE,                 INSIDE_JABU_JABU,               0x18,                       GS_TOKEN
+MQ Jabu-Jabu GS Basement Side Room,                         gs,             NONE,                 INSIDE_JABU_JABU,               0x1b,                       GS_TOKEN
+MQ Jabu-Jabu GS Pre-Boss,                                   gs,             NONE,                 INSIDE_JABU_JABU,               0x19,                       GS_TOKEN
+MQ Jabu-Jabu Cow,                                           cow,            NONE,                 INSIDE_JABU_JABU,               0x09,                       MILK
+MQ Bottom of the Well Map Chest,                            chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x03,                       MAP_BOTW
+MQ Bottom of the Well Compass Chest,                        chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x02,                       COMPASS_BOTW
+MQ Bottom of the Well Lens Chest,                           chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x01,                       LENS
+MQ Bottom of the Well Dead Hand Key,                        collectible,    NONE,                 BOTTOM_OF_THE_WELL,             0x02,                       SMALL_KEY_BOTW
+MQ Bottom of the Well East Middle Room Key,                 collectible,    NONE,                 BOTTOM_OF_THE_WELL,             0x01,                       SMALL_KEY_BOTW
+MQ Bottom of the Well GS Basement,                          gs,             NONE,                 BOTTOM_OF_THE_WELL,             0x48,                       GS_TOKEN
+MQ Bottom of the Well GS West Middle Room,                  gs,             NONE,                 BOTTOM_OF_THE_WELL,             0x49,                       GS_TOKEN
+MQ Bottom of the Well GS Coffin Room,                       gs,             NONE,                 BOTTOM_OF_THE_WELL,             0x4a,                       GS_TOKEN
+MQ Ice Cavern Map Chest,                                    chest,          NONE,                 ICE_CAVERN,                     0x01,                       MAP_IC
+MQ Ice Cavern Compass Chest,                                chest,          NONE,                 ICE_CAVERN,                     0x00,                       COMPASS_IC
+MQ Ice Cavern Iron Boots,                                   chest,          NONE,                 ICE_CAVERN,                     0x02,                       BOOTS_IRON
+MQ Ice Cavern Piece of Heart,                               collectible,    NONE,                 ICE_CAVERN,                     0x01,                       HEART_PIECE
+MQ Ice Cavern Sheik Song,                                   npc,            NONE,                 ICE_CAVERN,                     SHEIK_WATER,                SONG_TP_WATER
+MQ Ice Cavern GS Compass Room,                              gs,             NONE,                 ICE_CAVERN,                     0x51,                       GS_TOKEN
+MQ Ice Cavern GS Scarecrow,                                 gs,             NONE,                 ICE_CAVERN,                     0x50,                       GS_TOKEN
+MQ Ice Cavern GS Clear Blocks,                              gs,             NONE,                 ICE_CAVERN,                     0x52,                       GS_TOKEN
+MQ Forest Temple First Room Chest,                          chest,          NONE,                 TEMPLE_FOREST,                  0x03,                       SMALL_KEY_FOREST
+MQ Forest Temple Wolfos Chest,                              chest,          NONE,                 TEMPLE_FOREST,                  0x00,                       SMALL_KEY_FOREST
+MQ Forest Temple Boss Key Chest,                            chest,          NONE,                 TEMPLE_FOREST,                  0x0e,                       BOSS_KEY_FOREST
+MQ Forest Temple ReDead Chest,                              chest,          NONE,                 TEMPLE_FOREST,                  0x02,                       SMALL_KEY_FOREST
+MQ Forest Temple Well Chest,                                chest,          NONE,                 TEMPLE_FOREST,                  0x09,                       SMALL_KEY_FOREST
+MQ Forest Temple East Garden High Ledge Chest,              chest,          NONE,                 TEMPLE_FOREST,                  0x05,                       SMALL_KEY_FOREST
+MQ Forest Temple East Garden Ledge Chest,                   chest,          NONE,                 TEMPLE_FOREST,                  0x01,                       SMALL_KEY_FOREST
+MQ Forest Temple Map Chest,                                 chest,          NONE,                 TEMPLE_FOREST,                  0x0d,                       MAP_FOREST
+MQ Forest Temple Bow Chest,                                 chest,          NONE,                 TEMPLE_FOREST,                  0x0c,                       BOW
+MQ Forest Temple Compass Chest,                             chest,          NONE,                 TEMPLE_FOREST,                  0x0f,                       COMPASS_FOREST
+MQ Forest Temple Falling Ceiling Chest,                     chest,          NONE,                 TEMPLE_FOREST,                  0x06,                       ARROWS_5
+MQ Forest Temple Antichamber,                               chest,          NONE,                 TEMPLE_FOREST,                  0x0b,                       ARROWS_5
+MQ Forest Temple GS Entryway,                               gs,             NONE,                 TEMPLE_FOREST,                  0x21,                       GS_TOKEN
+MQ Forest Temple GS Climb Room,                             gs,             NONE,                 TEMPLE_FOREST,                  0x24,                       GS_TOKEN
+MQ Forest Temple GS West Garden,                            gs,             NONE,                 TEMPLE_FOREST,                  0x22,                       GS_TOKEN
+MQ Forest Temple GS East Garden,                            gs,             NONE,                 TEMPLE_FOREST,                  0x20,                       GS_TOKEN
+MQ Forest Temple GS Well,                                   gs,             NONE,                 TEMPLE_FOREST,                  0x23,                       GS_TOKEN
+MQ Fire Temple Early Lower Left Chest,                      chest,          NONE,                 TEMPLE_FIRE,                    0x02,                       RUPEE_BLUE
+MQ Fire Temple Pre-Boss Chest,                              chest,          NONE,                 TEMPLE_FIRE,                    0x07,                       SMALL_KEY_FIRE
+MQ Fire Temple Hammer Chest,                                chest,          NONE,                 TEMPLE_FIRE,                    0x00,                       HAMMER
+MQ Fire Temple Map Chest,                                   chest,          NONE,                 TEMPLE_FIRE,                    0x0c,                       MAP_FIRE
+MQ Fire Temple Boss Key Chest,                              chest,          NONE,                 TEMPLE_FIRE,                    0x04,                       BOSS_KEY_FIRE
+MQ Fire Temple 1f Lava Room Goron Chest,                    chest,          NONE,                 TEMPLE_FIRE,                    0x01,                       SMALL_KEY_FIRE
+MQ Fire Temple Maze Lower Chest,                            chest,          NONE,                 TEMPLE_FIRE,                    0x03,                       BOMBS_5
+MQ Fire Temple Maze Upper Chest,                            chest,          NONE,                 TEMPLE_FIRE,                    0x06,                       BOMBS_5
+MQ Fire Temple Maze Side Room Chest,                        chest,          NONE,                 TEMPLE_FIRE,                    0x08,                       SMALL_KEY_FIRE
+MQ Fire Temple Compass Chest,                               chest,          NONE,                 TEMPLE_FIRE,                    0x0b,                       COMPASS_FIRE
+MQ Fire Temple Topmost Chest,                               chest,          NONE,                 TEMPLE_FIRE,                    0x05,                       SMALL_KEY_FIRE
+MQ Fire Temple Flare Dancer Key,                            collectible,    NONE,                 TEMPLE_FIRE,                    0x1c,                       SMALL_KEY_FIRE
+MQ Fire Temple GS Burning Block,                            gs,             NONE,                 TEMPLE_FIRE,                    0x2a,                       GS_TOKEN
+MQ Fire Temple GS 1f Lava Room,                             gs,             NONE,                 TEMPLE_FIRE,                    0x28,                       GS_TOKEN
+MQ Fire Temple GS Fire Walls Side Room,                     gs,             NONE,                 TEMPLE_FIRE,                    0x2c,                       GS_TOKEN
+MQ Fire Temple GS Fire Walls Middle,                        gs,             NONE,                 TEMPLE_FIRE,                    0x2b,                       GS_TOKEN
+MQ Fire Temple GS Topmost,                                  gs,             NONE,                 TEMPLE_FIRE,                    0x29,                       GS_TOKEN
+MQ Water Temple Map Chest,                                  chest,          NONE,                 TEMPLE_WATER,                   0x02,                       MAP_WATER
+MQ Water Temple Compass Chest,                              chest,          NONE,                 TEMPLE_WATER,                   0x01,                       COMPASS_WATER
+MQ Water Temple Longshot Chest,                             chest,          NONE,                 TEMPLE_WATER,                   0x00,                       HOOKSHOT
+MQ Water Temple Central Pillar Chest,                       chest,          NONE,                 TEMPLE_WATER,                   0x06,                       SMALL_KEY_WATER
+MQ Water Temple Boss Key Chest,                             chest,          NONE,                 TEMPLE_WATER,                   0x05,                       BOSS_KEY_WATER
+MQ Water Temple Side Loop Key,                              collectible,    NONE,                 TEMPLE_WATER,                   0x01,                       SMALL_KEY_WATER
+MQ Water Temple GS Lizalfos Hallway,                        gs,             NONE,                 TEMPLE_WATER,                   0x30,                       GS_TOKEN
+MQ Water Temple GS High Water Changer,                      gs,             NONE,                 TEMPLE_WATER,                   0x32,                       GS_TOKEN
+MQ Water Temple GS River,                                   gs,             NONE,                 TEMPLE_WATER,                   0x31,                       GS_TOKEN
+MQ Water Temple GS Three Torch,                             gs,             NONE,                 TEMPLE_WATER,                   0x34,                       GS_TOKEN
+MQ Water Temple GS Side Loop,                               gs,             NONE,                 TEMPLE_WATER,                   0x33,                       GS_TOKEN
+MQ Shadow Temple Compass Chest,                             chest,          NONE,                 TEMPLE_SHADOW,                  0x01,                       COMPASS_SHADOW
+MQ Shadow Temple Hover Boots Chest,                         chest,          NONE,                 TEMPLE_SHADOW,                  0x07,                       BOOTS_HOVER
+MQ Shadow Temple First Gibdos Chest,                        chest,          NONE,                 TEMPLE_SHADOW,                  0x03,                       SMALL_KEY_SHADOW
+MQ Shadow Temple Map Chest,                                 chest,          NONE,                 TEMPLE_SHADOW,                  0x02,                       MAP_SHADOW
+MQ Shadow Temple Boat Passage Chest,                        chest,          NONE,                 TEMPLE_SHADOW,                  0x0e,                       SMALL_KEY_SHADOW
+MQ Shadow Temple Second Silver Rupee Visible Chest,         chest,          NONE,                 TEMPLE_SHADOW,                  0x0c,                       RUPEE_BLUE
+MQ Shadow Temple Second Silver Rupee Invisible Chest,       chest,          NONE,                 TEMPLE_SHADOW,                  0x16,                       SMALL_KEY_SHADOW
+MQ Shadow Temple Huge Pit Silver Rupee Chest,               chest,          NONE,                 TEMPLE_SHADOW,                  0x0f,                       RUPEE_BLUE
+MQ Shadow Temple Spike Curtain Ground Chest,                chest,          NONE,                 TEMPLE_SHADOW,                  0x05,                       ARROWS_10
+MQ Shadow Temple Spike Curtain Upper Cage Chest,            chest,          NONE,                 TEMPLE_SHADOW,                  0x06,                       RUPEE_BLUE
+MQ Shadow Temple Spike Curtain Upper Switch Chest,          chest,          NONE,                 TEMPLE_SHADOW,                  0x04,                       SMALL_KEY_SHADOW
+MQ Shadow Temple Invisible Spike Floor Chest,               chest,          NONE,                 TEMPLE_SHADOW,                  0x09,                       RUPEE_BLUE
+MQ Shadow Temple Stalfos Room Chest,                        chest,          NONE,                 TEMPLE_SHADOW,                  0x10,                       RUPEE_RED
+MQ Shadow Temple Wind Hint Chest,                           chest,          NONE,                 TEMPLE_SHADOW,                  0x15,                       SMALL_KEY_SHADOW
+MQ Shadow Temple After Wind Gibdos Chest,                   chest,          NONE,                 TEMPLE_SHADOW,                  0x08,                       RUPEE_BLUE
+MQ Shadow Temple After Wind Bomb Chest,                     chest,          NONE,                 TEMPLE_SHADOW,                  0x14,                       ARROWS_5
+MQ Shadow Temple Hidden Dead Hand Chest,                    chest,          NONE,                 TEMPLE_SHADOW,                  0x0d,                       ARROWS_10
+MQ Shadow Temple Crushing Wall Left Chest,                  chest,          NONE,                 TEMPLE_SHADOW,                  0x0a,                       RUPEE_BLUE
+MQ Shadow Temple Boss Key Chest,                            chest,          NONE,                 TEMPLE_SHADOW,                  0x0b,                       BOSS_KEY_SHADOW
+MQ Shadow Temple Triple Pot Key,                            collectible,    NONE,                 TEMPLE_SHADOW,                  0x06,                       SMALL_KEY_SHADOW
+MQ Shadow Temple GS Spike Curtain,                          gs,             NONE,                 TEMPLE_SHADOW,                  0x41,                       GS_TOKEN
+MQ Shadow Temple GS Wind Hint,                              gs,             NONE,                 TEMPLE_SHADOW,                  0x40,                       GS_TOKEN
+MQ Shadow Temple GS After Wind Bomb,                        gs,             NONE,                 TEMPLE_SHADOW,                  0x43,                       GS_TOKEN
+MQ Shadow Temple GS After Boat,                             gs,             NONE,                 TEMPLE_SHADOW,                  0x44,                       GS_TOKEN
+MQ Shadow Temple GS Pre-Boss,                               gs,             NONE,                 TEMPLE_SHADOW,                  0x42,                       GS_TOKEN
+MQ Spirit Temple Entrance Initial Chest,                    chest,          NONE,                 TEMPLE_SPIRIT,                  0x1a,                       BOMBCHU_5
+MQ Spirit Temple Lobby Back-Left Chest,                     chest,          NONE,                 TEMPLE_SPIRIT,                  0x1e,                       SMALL_KEY_SPIRIT
+MQ Spirit Temple Lobby Back-Right Chest,                    chest,          NONE,                 TEMPLE_SPIRIT,                  0x1b,                       SMALL_KEY_SPIRIT
+MQ Spirit Temple Compass Chest,                             chest,          NONE,                 TEMPLE_SPIRIT,                  0x03,                       COMPASS_SPIRIT
+MQ Spirit Temple Sun Block Room Chest,                      chest,          NONE,                 TEMPLE_SPIRIT,                  0x01,                       RECOVERY_HEART
+MQ Spirit Temple Map Chest,                                 chest,          NONE,                 TEMPLE_SPIRIT,                  0x00,                       MAP_SPIRIT
+MQ Spirit Temple Map Room Back Chest,                       chest,          NONE,                 TEMPLE_SPIRIT,                  0x08,                       SMALL_KEY_SPIRIT
+MQ Spirit Temple Paradox Chest,                             chest,          NONE,                 TEMPLE_SPIRIT,                  0x1d,                       SMALL_KEY_SPIRIT
+MQ Spirit Temple Child Upper Ground Chest,                  chest,          NONE,                 TEMPLE_SPIRIT,                  0x06,                       BOMBCHU_5
+MQ Spirit Temple Child Upper Ledge Chest,                   chest,          NONE,                 TEMPLE_SPIRIT,                  0x0c,                       SMALL_KEY_SPIRIT
+MQ Spirit Temple Silver Block Room Target Chest,            chest,          NONE,                 TEMPLE_SPIRIT,                  0x1c,                       SMALL_KEY_SPIRIT
+MQ Spirit Temple Chest in Box,                              chest,          NONE,                 TEMPLE_SPIRIT,                  0x0f,                       RUPEE_BLUE
+MQ Spirit Temple Statue Room Ledge Chest,                   chest,          NONE,                 TEMPLE_SPIRIT,                  0x02,                       RECOVERY_HEART
+MQ Spirit Temple Lobby Front-Right Chest,                   chest,          NONE,                 TEMPLE_SPIRIT,                  0x1f,                       BOMBCHU_5
+MQ Spirit Temple Purple Leever Chest,                       chest,          NONE,                 TEMPLE_SPIRIT,                  0x04,                       RUPEE_PURPLE
+MQ Spirit Temple Symphony Room Chest,                       chest,          NONE,                 TEMPLE_SPIRIT,                  0x07,                       RUPEE_PURPLE
+MQ Spirit Temple Beamos Room Chest,                         chest,          NONE,                 TEMPLE_SPIRIT,                  0x19,                       ARROWS_30
+MQ Spirit Temple Dinolfos Room Chest,                       chest,          NONE,                 TEMPLE_SPIRIT,                  0x18,                       ICE_TRAP
+MQ Spirit Temple Boss Key Chest,                            chest,          NONE,                 TEMPLE_SPIRIT,                  0x05,                       BOSS_KEY_SPIRIT
+MQ Spirit Temple Topmost Chest,                             chest,          NONE,                 TEMPLE_SPIRIT,                  0x12,                       SMALL_KEY_SPIRIT
+MQ Spirit Temple GS Sun Block Room,                         gs,             NONE,                 TEMPLE_SPIRIT,                  0x38,                       GS_TOKEN
+MQ Spirit Temple GS Leever Room,                            gs,             NONE,                 TEMPLE_SPIRIT,                  0x39,                       GS_TOKEN
+MQ Spirit Temple GS Symphony Room,                          gs,             NONE,                 TEMPLE_SPIRIT,                  0x3b,                       GS_TOKEN
+MQ Spirit Temple GS Top Floor Left Wall,                    gs,             NONE,                 TEMPLE_SPIRIT,                  0x3a,                       GS_TOKEN
+MQ Spirit Temple GS Top Floor Back Wall,                    gs,             NONE,                 TEMPLE_SPIRIT,                  0x3c,                       GS_TOKEN
+MQ Gerudo Training Grounds Entryway Left Chest,             chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x13,                       ARROWS_10
+MQ Gerudo Training Grounds Entryway Right Chest,            chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x07,                       BOMBCHU_10
+MQ Gerudo Training Grounds Maze First Chest,                chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x0b,                       RUPEE_PURPLE
+MQ Gerudo Training Grounds Maze Second Chest,               chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x06,                       RUPEE_GREEN
+MQ Gerudo Training Grounds Maze Third Chest,                chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x0a,                       RUPEE_RED
+MQ Gerudo Training Grounds Maze Fourth Chest,               chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x09,                       RUPEE_GREEN
+MQ Gerudo Training Grounds Right Side Dinolfos Chest,       chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x01,                       SMALL_KEY_GTG
+MQ Gerudo Training Grounds Water Room Chest,                chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x0d,                       SMALL_KEY_GTG
+MQ Gerudo Training Grounds Left Side Iron Knuckle Chest,    chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x00,                       RUPEE_BLUE
+MQ Gerudo Training Grounds Stalfos Room Chest,              chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x11,                       ARROWS_10
+MQ Gerudo Training Grounds Silver Block Room Chest,         chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x02,                       RUPEE_PURPLE
+MQ Gerudo Training Grounds Spinning Statue Chest,           chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x03,                       BOMBCHU_5
+MQ Gerudo Training Grounds Torch Slug Room Clear Chest,     chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x12,                       ARROWS_10
+MQ Gerudo Training Grounds Torch Slug Room Switch Chest,    chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x0e,                       SMALL_KEY_GTG
+MQ Gerudo Training Grounds Maze Right Side Middle Chest,    chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x05,                       RUPEE_BLUE
+MQ Gerudo Training Grounds Maze Right Side Right Chest,     chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x08,                       RUPEE_GREEN
+MQ Gerudo Training Grounds Ice Arrows Chest,                chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x04,                       ARROW_ICE
+MQ Ganon Castle Light Trial Chest,                          chest,          NONE,                 INSIDE_GANON_CASTLE,            0x04,                       RECOVERY_HEART
+MQ Ganon Castle Forest Trial First Chest,                   chest,          NONE,                 INSIDE_GANON_CASTLE,            0x02,                       ARROWS_10
+MQ Ganon Castle Forest Trial Second Chest,                  chest,          NONE,                 INSIDE_GANON_CASTLE,            0x03,                       BOMBS_5
+MQ Ganon Castle Water Trial Chest,                          chest,          NONE,                 INSIDE_GANON_CASTLE,            0x01,                       RUPEE_RED
+MQ Ganon Castle Spirit Trial First Chest,                   chest,          NONE,                 INSIDE_GANON_CASTLE,            0x0a,                       BOMBCHU_5
+MQ Ganon Castle Spirit Trial Second Chest,                  chest,          NONE,                 INSIDE_GANON_CASTLE,            0x14,                       ARROWS_10
+MQ Ganon Castle Spirit Trial Back Right Sun Chest,          chest,          NONE,                 INSIDE_GANON_CASTLE,            0x09,                       RECOVERY_HEART
+MQ Ganon Castle Spirit Trial Back Left Sun Chest,           chest,          NONE,                 INSIDE_GANON_CASTLE,            0x08,                       SMALL_KEY_GANON
+MQ Ganon Castle Spirit Trial Front Left Sun Chest,          chest,          NONE,                 INSIDE_GANON_CASTLE,            0x07,                       RECOVERY_HEART
+MQ Ganon Castle Spirit Trial Gold Gauntlets Chest,          chest,          NONE,                 INSIDE_GANON_CASTLE,            0x06,                       STRENGTH
+MQ Ganon Castle Shadow Trial Bomb Flower Chest,             chest,          NONE,                 INSIDE_GANON_CASTLE,            0x00,                       ARROWS_10
+MQ Ganon Castle Shadow Trial Switch Chest,                  chest,          NONE,                 INSIDE_GANON_CASTLE,            0x05,                       SMALL_KEY_GANON
+MQ Ganon Castle Forest Trial Key,                           collectible,    NONE,                 INSIDE_GANON_CASTLE,            0x01,                       SMALL_KEY_GANON

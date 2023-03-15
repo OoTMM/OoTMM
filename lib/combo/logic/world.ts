@@ -55,6 +55,7 @@ export type World = {
   gossip: {[k: string]: WorldGossip};
   checkHints: {[k: string]: string[]};
   entrances: WorldEntrance[];
+  locations: Set<string>;
   songLocations: Set<string>;
 };
 
@@ -100,9 +101,10 @@ export class LogicPassWorld {
     private readonly state: {
       monitor: Monitor,
       settings: Settings,
+      mq: Set<string>;
     }
   ) {
-    this.world = { areas: {}, checks: {}, dungeons: {}, regions: {}, gossip: {}, checkHints: {}, entrances: [], songLocations: new Set() };
+    this.world = { areas: {}, checks: {}, dungeons: {}, regions: {}, gossip: {}, checkHints: {}, entrances: [], songLocations: new Set(), locations: new Set() };
   }
 
   run() {
@@ -146,54 +148,66 @@ export class LogicPassWorld {
 
   private loadAreas(game: Game, exprParser: ExprParser) {
     const data = DATA_WORLD[game];
-    for (let name in data) {
-      const area = data[name];
-      name = gameId(game, name, ' ');
-      const boss = area.boss || false;
-      const dungeon = area.dungeon || null;
-      let region = area.region;
-      if (region !== 'NONE') {
-        region = region ? gameId(game, region, '_') : undefined;
+    for (let areaSetName in data) {
+      let areaSet = (data as any)[areaSetName];
+      /* Handle MQ */
+      if (game === 'oot' && this.state.mq.has(areaSetName)) {
+        areaSet = (DATA_WORLD.mq as any)[areaSetName];
       }
-      if (dungeon) {
-        region = DUNGEONS_REGIONS[dungeon];
-      }
-      const locations = mapExprs(exprParser, game, ' ', area.locations || {});
-      const exits = mapExprs(exprParser, game, ' ', area.exits || {});
-      const events = mapExprs(exprParser, game, '_', area.events || {});
-      const gossip = mapExprs(exprParser, game, ' ', area.gossip || {});
-
-      if (name === undefined) {
-        throw new Error(`Area name is undefined`);
-      }
-
-      if (region === undefined) {
-        throw new Error(`Undefined region for area ${name}`);
-      }
-
-      if (DATA_REGIONS[region] === undefined) {
-        throw new Error(`Unknown region ${region}`);
-      }
-
-      this.world.areas[name] = { boss, dungeon, exits, events, locations, gossip };
-
-      if (dungeon) {
-        if (this.world.dungeons[dungeon] === undefined) {
-          this.world.dungeons[dungeon] = new Set();
+      for (let name in areaSet) {
+        const area = areaSet[name];
+        name = gameId(game, name, ' ');
+        const boss = area.boss || false;
+        const dungeon = area.dungeon || null;
+        let region = area.region;
+        if (region !== 'NONE') {
+          region = region ? gameId(game, region, '_') : undefined;
         }
-        const d = this.world.dungeons[dungeon];
-        Object.keys(locations).forEach(x => d.add(x));
-      }
+        if (dungeon) {
+          region = DUNGEONS_REGIONS[dungeon];
+        }
+        const locations = mapExprs(exprParser, game, ' ', area.locations || {});
+        const exits = mapExprs(exprParser, game, ' ', area.exits || {});
+        const events = mapExprs(exprParser, game, '_', area.events || {});
+        const gossip = mapExprs(exprParser, game, ' ', area.gossip || {});
 
-      const worldGossip = { game };
-      Object.keys(locations).forEach(x => this.world.regions[x] = region);
-      Object.keys(gossip).forEach(x => this.world.gossip[x] = worldGossip);
+        if (name === undefined) {
+          throw new Error(`Area name is undefined`);
+        }
+
+        if (region === undefined) {
+          throw new Error(`Undefined region for area ${name}`);
+        }
+
+        if (DATA_REGIONS[region] === undefined) {
+          throw new Error(`Unknown region ${region}`);
+        }
+
+        this.world.areas[name] = { boss, dungeon, exits, events, locations, gossip };
+
+        if (dungeon) {
+          if (this.world.dungeons[dungeon] === undefined) {
+            this.world.dungeons[dungeon] = new Set();
+          }
+          const d = this.world.dungeons[dungeon];
+          Object.keys(locations).forEach(x => d.add(x));
+        }
+
+        const worldGossip = { game };
+        for (const loc in locations) {
+          this.world.regions[loc] = region;
+          this.world.locations.add(loc);
+        }
+        Object.keys(gossip).forEach(x => this.world.gossip[x] = worldGossip);
+      }
     }
   }
 
   private loadPool(game: Game) {
     for (const record of DATA_POOL[game]) {
       const location = gameId(game, String(record.location), ' ');
+      if (!this.world.locations.has(location))
+        continue;
       const type = String(record.type);
       const scene = gameId(game, String(record.scene), '_');
       let id = null;

@@ -39,8 +39,10 @@ function pipeline<State>(state: State): LogicPipeline<State> {
   return new LogicPipeline(state);
 }
 
-export const worldState = (monitor: Monitor, settings: Settings) => {
-  const state = { monitor, settings }
+export const worldState = (monitor: Monitor, opts: Options) => {
+  const random = new Random();
+  random.seed(opts.seed + opts.settings.generateSpoilerLog);
+  const state = { monitor, opts, settings: opts.settings, random, attempts: 0 };
 
   return pipeline(state)
     .apply(LogicPassConfig)
@@ -51,9 +53,7 @@ export const worldState = (monitor: Monitor, settings: Settings) => {
 };
 
 const solvedWorldState = (monitor: Monitor, opts: Options) => {
-  const random = new Random();
-  random.seed(opts.seed + opts.settings.generateSpoilerLog);
-  let state = { ...worldState(monitor, opts.settings), attempts: 0, random, opts };
+  let state = worldState(monitor, opts);
 
   for (;;) {
     state.attempts++;

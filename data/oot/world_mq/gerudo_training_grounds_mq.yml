@@ -1,0 +1,51 @@
+"Gerudo Training Grounds":
+  dungeon: GTG
+  exits:
+    "Gerudo Fortress Exterior": "true"
+    "Gerudo Training Grounds Right Path": "event(GTG_RIGHT_SIDE) && is_adult"
+    "Gerudo Training Grounds Left Path": "event(GTG_LEFT_SIDE)"
+  events:
+    GTG_RIGHT_SIDE: "can_hit_triggers_distance"
+    GTG_LEFT_SIDE: "has_fire"
+    GTG_ICE_ARROWS: "has(SMALL_KEY_GTG, 3) && can_hammer"
+  locations:
+    "MQ Gerudo Training Grounds Entryway Left Chest": "true"
+    "MQ Gerudo Training Grounds Entryway Right Chest": "true"
+    "MQ Gerudo Training Grounds Maze First Chest": "has_lens"
+    "MQ Gerudo Training Grounds Maze Second Chest": "true"
+    "MQ Gerudo Training Grounds Maze Third Chest": "true"
+    "MQ Gerudo Training Grounds Maze Fourth Chest": "has(SMALL_KEY_GTG)"
+"Gerudo Training Grounds Right Path":
+  dungeon: GTG
+  exits:
+    "Gerudo Training Grounds": "true"
+  locations:
+    "MQ Gerudo Training Grounds Right Side Dinolfos Chest": "is_adult"
+    "MQ Gerudo Training Grounds Water Room Chest": "has_hover_boots && (can_use_bow || can_longshot) && has_fire && has_iron_boots && has_tunic_zora"
+"Gerudo Training Grounds Left Path":
+  dungeon: GTG
+  exits:
+    "Gerudo Training Grounds": "true"
+    "Gerudo Training Grounds Stalfos Room": "can_longshot"
+  locations:
+   "MQ Gerudo Training Grounds Left Side Iron Knuckle Chest": "(has_weapon || can_use_sticks) && (has_shield || is_adult)" #Kid's size, the sand, and the time limit together make this fight unreasonable without shield, mountains of health, or Nayru's.
+"Gerudo Training Grounds Stalfos Room":
+  dungeon: GTG
+  exits:
+    "Gerudo Training Grounds Spinning Statue Room": "event(BLUE_FIRE) && can_play(SONG_TIME) && has_lens"
+  events:
+    BLUE_FIRE: "has_bottle"
+  locations:
+    "MQ Gerudo Training Grounds Stalfos Room Chest": "true"
+    "MQ Gerudo Training Grounds Silver Block Room Chest": "can_lift_silver"
+"Gerudo Training Grounds Spinning Statue Room":
+  dungeon: GTG
+  exits:
+    "Gerudo Training Grounds Right Path": "true"
+  locations:
+    "MQ Gerudo Training Grounds Spinning Statue Chest": "can_use_bow"
+    "MQ Gerudo Training Grounds Torch Slug Room Clear Chest": "is_adult"
+    "MQ Gerudo Training Grounds Torch Slug Room Switch Chest": "true" #You have Longshot to reach this room.
+    "MQ Gerudo Training Grounds Maze Right Side Middle Chest": "can_hammer"
+    "MQ Gerudo Training Grounds Maze Right Side Right Chest": "can_hammer"
+    "MQ Gerudo Training Grounds Ice Arrows Chest": "event(GTG_ICE_ARROWS)"

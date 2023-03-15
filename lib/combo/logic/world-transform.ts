@@ -12,6 +12,7 @@ export class LogicPassWorldTransform {
       world: World;
       settings: Settings;
       config: Set<string>;
+      mq: Set<string>;
     }
   ){
   }
@@ -36,7 +37,7 @@ export class LogicPassWorldTransform {
 
     const { config } = this.state;
 
-    let fireTempleKeyRemoved = false;
+    let shouldRemoveKeyFire = false;
     let mmExtraShield = false;
     let ootShields = 3;
     let sharedHc = 0;
@@ -44,6 +45,11 @@ export class LogicPassWorldTransform {
 
     const itemsToReplace = new Map<string, string>();
     const itemsToJunk = new Set<string>();
+
+    /* Remove one key from fire in non-MQ, non keysanity */
+    if (!this.state.config.has('SMALL_KEY_SHUFFLE') && !this.state.mq.has('Fire')) {
+      shouldRemoveKeyFire = true;
+    }
 
     if (!this.state.settings.eggShuffle) {
       this.removeLocations(['OOT Hatch Chicken', 'OOT Hatch Pocket Cucco']);
@@ -226,8 +232,8 @@ export class LogicPassWorldTransform {
       }
 
       /* Fire temple key */
-      if (item === 'OOT_SMALL_KEY_FIRE' && !this.state.config.has('SMALL_KEY_SHUFFLE') && !fireTempleKeyRemoved) {
-        fireTempleKeyRemoved = true;
+      if (item === 'OOT_SMALL_KEY_FIRE' && shouldRemoveKeyFire) {
+        shouldRemoveKeyFire = false;
         item = 'OOT_RUPEE_BLUE';
       }
 

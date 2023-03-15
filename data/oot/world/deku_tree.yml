@@ -49,9 +49,3 @@
   exits:
     "Deku Tree Basement Ledge": "true"
     "Deku Tree Boss": "has_shield_for_scrubs"
-"Deku Tree Boss":
-  boss: true
-  dungeon: DT
-  locations:
-    "Deku Tree Boss Container": "true"
-    "Deku Tree Boss": "true"
