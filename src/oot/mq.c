@@ -17,6 +17,8 @@ typedef struct
     u16 transitionActorCount;
     u16 transitionActorOffset;
     u16 pathOffset;
+    u32 minimapSize;
+    u32 minimapOffset;
 }
 MqSceneHeader;
 
@@ -335,19 +337,21 @@ void comboMqKaleidoHook(GameState_Play* play)
 
 static void LoadMapMarkWrapper(void* unk)
 {
-    void** mapMark;
-    int dungeonId;
+    MqSceneHeader sceneHeader;
+    char* mapMark;
+    void** minimaps;
     LoadMapMark(unk);
 
-    dungeonId = mqDungeonId(gPlay);
-    if (dungeonId < 0)
+    if (gPlay->sceneId >= 10)
         return;
-    if (!isEnabledMq(dungeonId))
+    if (!findMqOverrideScene(gPlay, &sceneHeader))
         return;
 
-    /* Load the alt maps */
-    mapMark = (void**)0x800f1bf8;
-    DMARomToRam(CUSTOM_MQ_MINIMAPS_ADDR | PI_DOM1_ADDR2, *mapMark, 0x6aec);
+    /* Load the minimap */
+    mapMark = *((char**)0x800f1bf8);
+    DMARomToRam((CUSTOM_MQ_SCENES_ADDR + sceneHeader.minimapOffset) | PI_DOM1_ADDR2, mapMark, sceneHeader.minimapSize);
+    minimaps = (void**)(mapMark + 0x6aec);
+    minimaps[gPlay->sceneId] = mapMark;
 }
 
 PATCH_CALL(0x8006c608, LoadMapMarkWrapper);

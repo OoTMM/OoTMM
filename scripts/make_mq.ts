@@ -26,6 +26,20 @@ const DUNGEONS = {
   'ganontika': 11,
 } as {[k: string]: number};
 
+const MINIMAPS_OFFSET = [
+  0x0000,
+  0x05cc,
+  0x0e44,
+  0x1564,
+  0x216c,
+  0x3258,
+  0x45f0,
+  0x54a4,
+  0x60ac,
+  0x6520,
+  0x6a78,
+];
+
 type RoomEntry = {
   size: number;
   offset: number;
@@ -44,6 +58,8 @@ type SceneEntry = {
   transitionActorCount: number;
   transitionActorOffset: number;
   pathOffset: number;
+  minimapSize: number;
+  minimapOffset: number;
 }
 
 function makeRooms() {
@@ -161,6 +177,8 @@ function makeScenes() {
     let transitionActorCount = 0;
     let transitionActorOffset = 0;
     let pathOffset = 0xffff;
+    let minimapSize = 0;
+    let minimapOffset = 0;
     for (;;) {
       const headerOp = sceneData.readUInt8(headerCursor * 8 + 0);
       const headerData1 = sceneData.readUInt8(headerCursor * 8 + 1);
@@ -226,6 +244,23 @@ function makeScenes() {
       size += padding.length;
     }
 
+    /* Extract minimap if required */
+    const sceneId = DUNGEONS[dungeon];
+    if (sceneId < 10) {
+      const minimapFile = fs.readFileSync(path.join(argv[2], `ovl_map_mark_data.bin`));
+      const dataOffset = MINIMAPS_OFFSET[sceneId];
+      const dataSize = MINIMAPS_OFFSET[sceneId + 1] - dataOffset;
+      const data = minimapFile.subarray(dataOffset, dataOffset + dataSize);
+      buffers.push(data);
+      minimapSize = dataSize;
+      minimapOffset = size;
+      if (dataSize % 16 !== 0) {
+        const padding = Buffer.alloc(16 - (dataSize % 16));
+        buffers.push(padding);
+        minimapSize += padding.length;
+      }
+    }
+
     entries.push({
       size,
       offset,
@@ -233,9 +268,12 @@ function makeScenes() {
       transitionActorCount,
       transitionActorOffset,
       pathOffset,
+      minimapSize,
+      minimapOffset,
     });
 
     offset += size;
+    offset += minimapSize;
   }
 
   /* Make the file */
@@ -253,6 +291,8 @@ function makeScenes() {
     headerBuffer.writeUInt16BE(entry.transitionActorCount, base + 0x0a);
     headerBuffer.writeUInt16BE(entry.transitionActorOffset, base + 0x0c);
     headerBuffer.writeUInt16BE(entry.pathOffset, base + 0x0e);
+    headerBuffer.writeUInt32BE(entry.minimapSize, base + 0x10);
+    headerBuffer.writeUInt32BE(entry.minimapOffset + dataOffset + entry.offset, base + 0x14);
   }
 
   const fileBuffer = Buffer.concat([globalHeader, headerBuffer, ...buffers]);
@@ -268,14 +308,6 @@ function makeMaps() {
   fs.writeFileSync(__dirname + '/../data/static/mq_maps.bin', mapData);
 }
 
-function makeMinimaps() {
-  const size = 0x6aec;
-  const file = fs.readFileSync(path.join(argv[2], `ovl_map_mark_data.bin`));
-  const data = file.subarray(0, size);
-  fs.writeFileSync(__dirname + '/../data/static/mq_minimaps.bin', data);
-}
-
 makeRooms();
 makeScenes();
 makeMaps();
-makeMinimaps();
