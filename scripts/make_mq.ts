@@ -101,6 +101,17 @@ function makeRooms() {
           actorCount = headerData1;
           actorOffset = size;
           const actorData = roomData.subarray(actorListPos, actorListPos + actorCount * 0x10);
+
+          /* Shadow fixes */
+          if (dungeon === 'HAKAdan') {
+            if (roomId === 0x07) {
+              actorData.writeUInt16BE(0xffff, 4 * 0x10 + 0x0e);
+            }
+            else if (roomId === 0x06) {
+              actorData.writeUInt16BE(0xffff, 11 * 0x10 + 0x0e);
+            }
+          }
+
           buffers.push(actorData);
           size += actorData.length;
         }

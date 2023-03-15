@@ -123,6 +123,11 @@ static void applyStartingEvents(void)
     {
         SetEventChk(EV_OOT_CHK_DOOR_TIME);
     }
+
+    if (gComboData.mq & (1 << MQ_TEMPLE_SHADOW))
+    {
+        gSave.perm[SCE_OOT_TEMPLE_SHADOW].switches |= (1 << 7);
+    }
 }
 
 void comboCreateSave(void* unk, void* buffer)
