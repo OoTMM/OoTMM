@@ -23,6 +23,7 @@ export function Dungeons() {
       <div className="three-column-grid">
         {Object.keys(DUNGEONS).map(d =>
           <Dropdown
+            key={d}
             label={(DUNGEONS as any)[d]}
             options={options}
             value={(dungeon as any)[d]}
