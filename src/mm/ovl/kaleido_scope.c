@@ -48,6 +48,16 @@ void KaleidoScope_AfterSetCutsorColor(GameState_Play* play)
         }
     }
 
+    if (play->pauseCtx.cursorSlot[0] == ITS_MM_OCARINA && popcount(gMmExtraTrade.ocarina) > 1)
+    {
+        play->pauseCtx.cursorColorIndex = 4;
+        if (press)
+        {
+            comboToggleOcarina();
+            effect = 1;
+        }
+    }
+
     if (effect)
     {
         PlaySound(0x4809);

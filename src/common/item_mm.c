@@ -283,7 +283,7 @@ static void addOcarina(int level)
     if (level >= 2)
         itemId = ITEM_MM_OCARINA_OF_TIME;
     else
-        itemId = ITEM_MM_FAIRY_OCARINA;
+        itemId = ITEM_MM_OCARINA_FAIRY;
     gMmSave.inventory.items[ITS_MM_OCARINA] = itemId;
     gMmExtraTrade.ocarina |= (1 << (level - 1));
     reloadSlot(ITS_MM_OCARINA);

@@ -155,7 +155,7 @@
 #define ITEM_MM_ARROW_FIRE                  0x02
 #define ITEM_MM_ARROW_ICE                   0x03
 #define ITEM_MM_ARROW_LIGHT                 0x04
-#define ITEM_MM_FAIRY_OCARINA               0x05
+#define ITEM_MM_OCARINA_FAIRY               0x05
 #define ITEM_MM_BOMB                        0x06
 #define ITEM_MM_BOMBCHU                     0x07
 #define ITEM_MM_STICK                       0x08

@@ -91,3 +91,18 @@ void comboToggleHookshot(void)
         *slot = ITEM_MM_HOOKSHOT;
     }
 }
+
+void comboToggleOcarina(void)
+{
+    u8* slot;
+
+    slot = gSave.inventory.items + ITS_MM_OCARINA;
+    if (*slot == ITEM_MM_OCARINA_OF_TIME)
+    {
+        *slot = ITEM_MM_OCARINA_FAIRY;
+    }
+    else
+    {
+        *slot = ITEM_MM_OCARINA_OF_TIME;
+    }
+}
