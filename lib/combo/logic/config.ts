@@ -1,5 +1,6 @@
 import { Monitor } from '../monitor';
-import { Settings } from '../settings';
+import { Random } from '../random';
+import { DUNGEONS, Settings } from '../settings';
 
 /* This pass pre-computes things from the settings */
 export class LogicPassConfig {
@@ -7,6 +8,7 @@ export class LogicPassConfig {
     private readonly state: {
       monitor: Monitor,
       settings: Settings,
+      random: Random,
     }
   ) {
   }
@@ -14,6 +16,19 @@ export class LogicPassConfig {
   run() {
     this.state.monitor.log('Logic: Config');
     const config = new Set<string>;
+    const mq = new Set<string>;
+
+    /* MQ dungeons */
+    let d: keyof typeof DUNGEONS;
+    for (d in DUNGEONS) {
+      if (this.state.settings.dungeon[d] === 'mq') {
+        mq.add(d);
+      } else if (this.state.settings.dungeon[d] === 'random') {
+        if (this.state.random.next() & 0x10000) {
+          mq.add(d);
+        }
+      }
+    }
 
     if (this.state.settings.ganonBossKey === 'removed') {
       config.add('GANON_NO_BOSS_KEY');
@@ -114,6 +129,6 @@ export class LogicPassConfig {
       }
     }
 
-    return { config };
+    return { mq, config };
   }
 }

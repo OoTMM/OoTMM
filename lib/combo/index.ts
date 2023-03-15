@@ -33,7 +33,7 @@ export { SETTINGS, DEFAULT_SETTINGS, SETTINGS_CATEGORIES, TRICKS, itemName };
 export const itemPool = (aSettings: Partial<Settings>) => {
   const settings: Settings = { ...DEFAULT_SETTINGS, ...aSettings };
   const monitor = new Monitor({ onLog: () => {} });
-  const { world, fixedLocations } = worldState(monitor, settings);
+  const { world, fixedLocations } = worldState(monitor, { settings, debug: false, seed: "--- INTERNAL ---" });
 
   /* Extract relevant items from the world */
   const items: Items = {};
@@ -68,7 +68,7 @@ export const itemPool = (aSettings: Partial<Settings>) => {
 export const locationList = (aSettings: Partial<Settings>) => {
   const settings: Settings = { ...DEFAULT_SETTINGS, ...aSettings };
   const monitor = new Monitor({ onLog: () => {} });
-  const { world, fixedLocations } = worldState(monitor, settings);
+  const { world, fixedLocations } = worldState(monitor, { settings, debug: false, seed: "--- INTERNAL ---" });
 
   // Precalculate this to avoid doing it more than once in the gui
   const dungeonLocations = Object.values(world.dungeons).reduce((acc, x) => new Set([...acc, ...x]));

@@ -101,6 +101,7 @@ export class LogicPassWorld {
     private readonly state: {
       monitor: Monitor,
       settings: Settings,
+      mq: Set<string>;
     }
   ) {
     this.world = { areas: {}, checks: {}, dungeons: {}, regions: {}, gossip: {}, checkHints: {}, entrances: [], songLocations: new Set(), locations: new Set() };
@@ -150,7 +151,7 @@ export class LogicPassWorld {
     for (let areaSetName in data) {
       let areaSet = (data as any)[areaSetName];
       /* Handle MQ */
-      if (game === 'oot' && (this.state.settings.mq as any)[areaSetName]) {
+      if (game === 'oot' && this.state.mq.has(areaSetName)) {
         areaSet = (DATA_WORLD.mq as any)[areaSetName];
       }
       for (let name in areaSet) {

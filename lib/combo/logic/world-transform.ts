@@ -12,6 +12,7 @@ export class LogicPassWorldTransform {
       world: World;
       settings: Settings;
       config: Set<string>;
+      mq: Set<string>;
     }
   ){
   }
@@ -46,7 +47,7 @@ export class LogicPassWorldTransform {
     const itemsToJunk = new Set<string>();
 
     /* Remove one key from fire in non-MQ, non keysanity */
-    if (!this.state.config.has('SMALL_KEY_SHUFFLE') && !this.state.settings.mq.Fire) {
+    if (!this.state.config.has('SMALL_KEY_SHUFFLE') && !this.state.mq.has('Fire')) {
       shouldRemoveKeyFire = true;
     }
 
