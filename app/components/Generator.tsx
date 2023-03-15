@@ -8,6 +8,7 @@ import { SettingsEditor } from './SettingsEditor';
 import { StartingItems } from './StartingItems';
 import { Tricks } from './Tricks';
 import { JunkLocations } from './JunkLocations';
+import { Dungeons } from './Dungeons';
 
 export function Generator() {
   const tabs: Tab[] = [];
@@ -23,6 +24,9 @@ export function Generator() {
       tabs.push({ name: category.name, component: <SettingsEditor category={category.key}/>});
     });
     tabs.push({
+      name: "Dungeons",
+      component: <Dungeons/>
+    }, {
       name: "Tricks",
       component: <Tricks/>
     }, {
