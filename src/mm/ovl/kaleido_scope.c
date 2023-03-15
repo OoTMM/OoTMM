@@ -56,22 +56,48 @@ void KaleidoScope_AfterSetCutsorColor(GameState_Play* play)
 
 void KaleidoScope_LoadNamedItemCustom(void* segment, u32 texIndex)
 {
-    if (texIndex == 0x11)
+    u32 isForeign = 0;
+    switch (texIndex)
     {
-        texIndex = 0xF; // Load Hookshot instead of OoT Hookshot
+    case 0x5: // MM Fairy Ocarina
+        isForeign = 1;
+        texIndex = 0x7b + 0x7; // OoT Fairy Ocarina
+        break;
+    case 0x11: // MM OoT Hookshot
+        isForeign = 1;
+        texIndex = 0x7b + 0xA; // OoT OoT Hookshot
+        break;
     }
-    void (*KaleidoScope_LoadNamedItem)(void* segment, u32 texIndex);
-    KaleidoScope_LoadNamedItem = OverlayAddr(0x80821958);
-    KaleidoScope_LoadNamedItem(segment, texIndex);
+    if (isForeign)
+    {
+        u32 textureOffset = 0x400 * texIndex;
+        u32 textureFileAddress = kComboDmaData[0x61f].pstart;
+        DMARomToRam((textureFileAddress + textureOffset) | PI_DOM1_ADDR2, segment, 0x400);
+    }
+    else
+    {
+        LoadIcon(0x00A27660, texIndex, segment, 0x400);
+    }
+
 }
 
 void KaleidoScope_ShowItemMessage(GameState_Play* play, u16 messageId, u8 yPosition)
 {
+    char* b;
     if (messageId == 0x1711)
     {
         messageId = 0x170f; // Use Hookshot message instead of broken OoT Hookshot message
     }
     Message_ShowMessageAtYPosition(play, messageId, yPosition);
+    if (messageId == 0x1705)
+    {
+        b = play->textBuffer;
+        b[2] = 0x4C; // Use Ocarina of Time icon.
+        b += 11;
+        comboTextAppendStr(&b, TEXT_COLOR_RED "Fairy Ocarina" TEXT_NL);
+        comboTextAppendClearColor(&b);
+        comboTextAppendStr(&b, "This is a memento from" TEXT_NL "Saria." TEXT_NL TEXT_BOX_BREAK_2 "Play it with \xB0 and the four \xB2" TEXT_NL "Buttons. Press \xB1 to stop." TEXT_END);
+    }
 }
 
 static int isKeysMenu;

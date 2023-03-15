@@ -276,6 +276,19 @@ static void addHookshot(int level)
     reloadSlot(ITS_MM_HOOKSHOT);
 }
 
+static void addOcarina(int level)
+{
+    u8 itemId;
+
+    if (level >= 2)
+        itemId = ITEM_MM_OCARINA_OF_TIME;
+    else
+        itemId = ITEM_MM_FAIRY_OCARINA;
+    gMmSave.inventory.items[ITS_MM_OCARINA] = itemId;
+    gMmExtraTrade.ocarina |= (1 << (level - 1));
+    reloadSlot(ITS_MM_OCARINA);
+}
+
 void comboAddMagicUpgradeMm(int level)
 {
     gMmSave.playerData.magicAcquired = 1;
@@ -320,8 +333,11 @@ void comboAddCommonItemMm(int sid, int noEffect)
     case SITEM_LENS:
         gMmSave.inventory.items[ITS_MM_LENS] = ITEM_MM_LENS_OF_TRUTH;
         break;
+    case SITEM_OCARINA_FAIRY:
+        addOcarina(1);
+        break;
     case SITEM_OCARINA_TIME:
-        gMmSave.inventory.items[ITS_MM_OCARINA] = ITEM_MM_OCARINA_OF_TIME;
+        addOcarina(2);
         break;
     case SITEM_MASK_KEATON:
         gMmSave.inventory.items[ITS_MM_MASK_KEATON] = ITEM_MM_MASK_KEATON;

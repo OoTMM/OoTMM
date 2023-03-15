@@ -263,6 +263,7 @@ typedef struct
     u32 tradeObtained2:2;
     u32 tradeObtained3:2;
     u32 hookshot:1;
+    u32 ocarina:1;
 }
 MmExtraTrade;
 
