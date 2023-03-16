@@ -12,6 +12,7 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.items[ITS_OOT_STICKS] = ITEM_OOT_STICK;
         gSave.inventory.items[ITS_OOT_NUTS] = ITEM_OOT_NUT;
         gSave.inventory.items[ITS_OOT_BOMBS] = ITEM_OOT_BOMB;
+        gSave.inventory.items[ITS_OOT_BOW] = ITEM_OOT_BOW;
         gSave.inventory.items[ITS_OOT_ARROW_FIRE] = ITEM_OOT_ARROW_FIRE;
         gSave.inventory.items[ITS_OOT_ARROW_LIGHT] = ITEM_OOT_ARROW_LIGHT;
         gSave.inventory.items[ITS_OOT_SLINGSHOT] = ITEM_OOT_SLINGSHOT;
@@ -41,6 +42,7 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.ammo[ITS_OOT_STICKS] = 10;
         gSave.inventory.ammo[ITS_OOT_SLINGSHOT] = 50;
         gSave.inventory.ammo[ITS_OOT_BOMBS] = 40;
+        gSave.inventory.ammo[ITS_OOT_BOW] = 50;
         gSave.inventory.quest.songZelda = 1;
         gSave.inventory.quest.songSaria = 1;
         gSave.inventory.quest.songTime = 1;

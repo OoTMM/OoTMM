@@ -94,6 +94,40 @@ static int isEnabledMq(int dungeonId)
     return gComboData.mq & (1 << dungeonId);
 }
 
+#define PATCH_POLY(ptr, index, type, flags) \
+    *(s16*)((ptr) + 0x10 * (index) + 0x00) = (type); \
+    *(s16*)((ptr) + 0x10 * (index) + 0x02) &= 0x1fff; \
+    *(s16*)((ptr) + 0x10 * (index) + 0x02) |= ((flags) << 13);
+
+static void mqPatchCollisions(GameState_Play* play, void* collisions)
+{
+    u32 segPolys;
+    char* polys;
+
+    segPolys = *(u32*)((char*)collisions + 0x18);
+    polys = (char*)(gSegments[2] + 0x80000000 + (segPolys & 0xffffff));
+
+    if (play->sceneId == SCE_OOT_INSIDE_GANON_CASTLE)
+    {
+        PATCH_POLY(polys, 2403, 57, 4);
+        PATCH_POLY(polys, 2404, 57, 4);
+        PATCH_POLY(polys, 2405, 57, 4);
+        PATCH_POLY(polys, 2406, 57, 4);
+        PATCH_POLY(polys, 2407, 57, 4);
+        PATCH_POLY(polys, 2408, 57, 4);
+        PATCH_POLY(polys, 2409, 57, 4);
+        PATCH_POLY(polys, 2410, 57, 4);
+        PATCH_POLY(polys, 2473, 57, 4);
+        PATCH_POLY(polys, 2474, 57, 4);
+        PATCH_POLY(polys, 2475, 57, 4);
+        PATCH_POLY(polys, 2476, 57, 4);
+        PATCH_POLY(polys, 2477, 57, 4);
+        PATCH_POLY(polys, 2478, 57, 4);
+        PATCH_POLY(polys, 2479, 57, 4);
+        PATCH_POLY(polys, 2480, 57, 4);
+    }
+}
+
 static int findMqOverrideScene(GameState_Play* play, MqSceneHeader* dst)
 {
     u32             headerCount;
@@ -214,6 +248,10 @@ static void loadMqSceneMaybe(GameState_Play* play)
             sceneHeader->data1 = 0;
             sceneHeader->data2 = (((u32)sMqBufferScene) + mqHeader.pathOffset) - 0x80000000;
             needsPathPatch = 1;
+            break;
+        case 0x03:
+            /* Collision */
+            mqPatchCollisions(play, (void*)(gSegments[2] + 0x80000000 + (sceneHeader->data2 & 0xffffff)));
             break;
         }
         sceneHeader++;
