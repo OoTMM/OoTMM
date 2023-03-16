@@ -8,22 +8,6 @@ import { Items, addItem, combinedItems, itemsArray, removeItem, ITEMS_REQUIRED, 
 import { Settings } from '../settings';
 import { Monitor } from '../monitor';
 
-export const EXTRA_ITEMS = [
-  'OOT_MASK_SKULL',
-  'OOT_MASK_SPOOKY',
-  'OOT_MASK_GERUDO',
-  'MM_MASK_DEKU',
-  'MM_SWORD',
-];
-
-export const EXTRA_MASKS_OOT = [
-  'OOT_MASK_KEATON',
-  'OOT_MASK_TRUTH',
-  'OOT_MASK_BUNNY',
-  'OOT_MASK_GORON',
-  'OOT_MASK_ZORA',
-];
-
 export type ItemPlacement = {[k: string]: string};
 
 type ItemPools = {
@@ -156,18 +140,6 @@ export class LogicPassSolver {
       }
     }
 
-    /* Add the extra items */
-    for (const item of EXTRA_ITEMS) {
-      this.insertItem(pools, item);
-    }
-
-    if (!this.state.settings.sharedMasks) {
-      /* Add the extra masks */
-      for (const item of EXTRA_MASKS_OOT) {
-        this.insertItem(pools, item);
-      }
-    }
-
     for (const item in this.state.settings.startingItems) {
       if (isItemUnlimitedStarting(item))
         continue;
@@ -183,12 +155,6 @@ export class LogicPassSolver {
     }
 
     return pools;
-  };
-
-  private insertItem(pools: ItemPools, item: string) {
-    const junkItem = sample(this.state.random, itemsArray(pools.junk));
-    removeItem(pools.junk, junkItem);
-    addItem(pools.required, item);
   }
 
   private goldTokenLocations() {

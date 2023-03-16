@@ -166,7 +166,7 @@ export const ITEMS_REQUIRED = new Set<string>([
 ]);
 
 const ITEMS_JUNK = new Set<string>([
-  'OOT_RUPEE_GREEN',
+  /* 'OOT_RUPEE_GREEN', Not junk to prevent it from being removed */
   'OOT_RUPEE_BLUE',
   'OOT_RUPEE_RED',
   'OOT_RECOVERY_HEART',
@@ -340,6 +340,8 @@ export const addItem = (items: Items, item: string) => {
 };
 
 export const removeItem = (items: Items, item: string) => {
+  if (items[item] === undefined)
+    return;
   items[item] -= 1;
   if (items[item] === 0) {
     delete items[item];

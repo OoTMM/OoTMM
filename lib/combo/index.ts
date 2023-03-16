@@ -7,7 +7,6 @@ import { SETTINGS, DEFAULT_SETTINGS, SETTINGS_CATEGORIES, Settings, TRICKS, DUNG
 import { worldState } from './logic';
 import { itemName } from './names';
 import { addItem, isDungeonItem, isDungeonReward, isItemUnlimitedStarting, isJunk, isStrayFairy, isToken, Items } from './logic/items';
-import { EXTRA_ITEMS } from './logic/solve';
 import { isShuffled } from './logic/is-shuffled';
 
 export type GeneratorParams = {
@@ -44,9 +43,6 @@ export const itemPool = (aSettings: Partial<Settings>) => {
     if (!fixedLocations.has(loc) && !isJunk(item) && !isDungeonReward(item) && !isDungeonItem(item) && !isToken(item) && !isStrayFairy(item)) {
       rawItems.push(item);
     }
-  }
-  for (const extraItem of EXTRA_ITEMS) {
-    rawItems.push(extraItem);
   }
   rawItems.sort();
   for (const item of rawItems) {
