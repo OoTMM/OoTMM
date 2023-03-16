@@ -292,28 +292,37 @@ export class Pathfinder {
     this.state.newLocations = new Set();
     let anyChange = false;
 
-    /* Propagate to areas */
-    for (const age of AGES) {
-      this.pathfindAreas(age);
-    }
-
-    /* Reach all areas & events */
     for (;;) {
-      let changed = false;
+      let eventChange = false;
+
+      /* Propagate to areas */
       for (const age of AGES) {
-        changed ||= this.pathfindEvents(age);
-        if (this.opts.gossip) {
-          changed ||= this.pathfindGossip(age);
+        this.pathfindAreas(age);
+      }
+
+      /* Reach all areas & events */
+      for (;;) {
+        let changed = false;
+        for (const age of AGES) {
+          const newEvents = this.pathfindEvents(age);
+          changed ||= newEvents;
+          eventChange ||= newEvents;
+          if (this.opts.gossip) {
+            changed ||= this.pathfindGossip(age);
+          }
+        }
+        this.state.goal = this.state.events.has('OOT_GANON') && this.state.events.has('MM_MAJORA');
+        if (this.opts.stopAtGoal && this.state.goal) {
+          return false;
+        }
+        anyChange = anyChange || changed;
+        if (!changed) {
+          break;
         }
       }
-      this.state.goal = this.state.events.has('OOT_GANON') && this.state.events.has('MM_MAJORA');
-      if (this.opts.stopAtGoal && this.state.goal) {
-        return false;
-      }
-      anyChange = anyChange || changed;
-      if (!changed) {
+
+      if (!eventChange)
         break;
-      }
     }
 
     /* Reach all locations */
