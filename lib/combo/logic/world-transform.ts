@@ -65,7 +65,7 @@ export class LogicPassWorldTransform {
 
     if (config.has('SHARED_BOMB_BAGS')) {
       /* Bomb Bags */
-      itemsToReplace.set('OOT_BOMB_BAG', 'SHARED_BOMB_BAG');
+      itemsToReplace.set('OOT_BOMB_BAG', 'SHARED_BOMB_BAGS');
       itemsToJunk.add('MM_BOMB_BAG');
 
       /* Bombs */

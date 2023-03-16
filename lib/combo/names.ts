@@ -265,7 +265,7 @@ const ITEM_NAMES: {[k: string]: string} = {
   SHARED_ARROWS_40: "40 Arrows",
   SHARED_ARROWS_5: "5 Arrows",
   SHARED_BOMB: "1 Bomb",
-  SHARED_BOMB_BAG: "Shared Bomb Bag",
+  SHARED_BOMB_BAGS: "Shared Bomb Bag",
   SHARED_BOMBS_10: "10 Bombs",
   SHARED_BOMBS_20: "20 Bombs",
   SHARED_BOMBS_30: "30 Bombs",
