@@ -272,7 +272,7 @@ static void addHookshot(int level)
     else
         itemId = 0x11; // ITEM_MM_BOTTLE_POTION_RED but that enum is wrong
     gMmSave.inventory.items[ITS_MM_HOOKSHOT] = itemId;
-    gMmExtraTrade.hookshot |= (1 << (level - 1));
+    gMmExtraItems.hookshot |= (1 << (level - 1));
     reloadSlot(ITS_MM_HOOKSHOT);
 }
 
@@ -285,7 +285,7 @@ static void addOcarina(int level)
     else
         itemId = ITEM_MM_OCARINA_FAIRY;
     gMmSave.inventory.items[ITS_MM_OCARINA] = itemId;
-    gMmExtraTrade.ocarina |= (1 << (level - 1));
+    gMmExtraItems.ocarina |= (1 << (level - 1));
     reloadSlot(ITS_MM_OCARINA);
 }
 

@@ -38,7 +38,7 @@ void KaleidoScope_AfterSetCutsorColor(GameState_Play* play)
         }
     }
 
-    if (play->pauseCtx.cursorSlot[0] == ITS_MM_HOOKSHOT && popcount(gMmExtraTrade.hookshot) > 1)
+    if (play->pauseCtx.cursorSlot[0] == ITS_MM_HOOKSHOT && popcount(gMmExtraItems.hookshot) > 1)
     {
         play->pauseCtx.cursorColorIndex = 4;
         if (press)
@@ -48,7 +48,7 @@ void KaleidoScope_AfterSetCutsorColor(GameState_Play* play)
         }
     }
 
-    if (play->pauseCtx.cursorSlot[0] == ITS_MM_OCARINA && popcount(gMmExtraTrade.ocarina) > 1)
+    if (play->pauseCtx.cursorSlot[0] == ITS_MM_OCARINA && play->pauseCtx.cursorItem[0] != 0x3e7 && popcount(gMmExtraItems.ocarina) > 1)
     {
         play->pauseCtx.cursorColorIndex = 4;
         if (press)
