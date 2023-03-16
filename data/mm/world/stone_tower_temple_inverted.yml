@@ -22,7 +22,7 @@
   locations:
     "Stone Tower Temple Inverted East Lower Chest": "has(MASK_DEKU) && can_use_fire_arrows"
     "Stone Tower Temple Inverted East Middle Chest": "has(MASK_DEKU)"
-    "Stone Tower Temple Inverted East Upper Chest": "has(MASK_DEKU) && can_use_elegy"
+    "Stone Tower Temple Inverted East Upper Chest": "has(MASK_DEKU) && can_use_elegy && event(STONE_TOWER_WATER_CHEST_SWITCH)"
 "Stone Tower Temple Inverted Wizzrobe":
   dungeon: IST
   exits:
