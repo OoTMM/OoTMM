@@ -337,9 +337,14 @@ void comboMqKaleidoHook(GameState_Play* play)
 
 static void LoadMapMarkWrapper(void* unk)
 {
+    ALIGNED(16) char buffer[0x400];
     MqSceneHeader sceneHeader;
     char* mapMark;
     void** minimaps;
+    void* minimapAddr;
+    int minimapSize;
+    int minimapOffset;
+    int size;
     LoadMapMark(unk);
 
     if (gPlay->sceneId >= 10)
@@ -347,11 +352,25 @@ static void LoadMapMarkWrapper(void* unk)
     if (!findMqOverrideScene(gPlay, &sceneHeader))
         return;
 
-    /* Load the minimap */
+    /* Get the dest addr */
     mapMark = *((char**)0x800f1bf8);
-    DMARomToRam((CUSTOM_MQ_SCENES_ADDR + sceneHeader.minimapOffset) | PI_DOM1_ADDR2, mapMark, sceneHeader.minimapSize);
     minimaps = (void**)(mapMark + 0x6aec);
-    minimaps[gPlay->sceneId] = mapMark;
+    minimapAddr = minimaps[gPlay->sceneId];
+    minimapSize = sceneHeader.minimapSize;
+    minimapOffset = (CUSTOM_MQ_SCENES_ADDR + sceneHeader.minimapOffset) | PI_DOM1_ADDR2;
+
+    /* Load the minimap */
+    while (minimapSize)
+    {
+        DMARomToRam(minimapOffset, buffer, sizeof(buffer));
+        size = sizeof(buffer);
+        if (size > minimapSize)
+            size = minimapSize;
+        memcpy(minimapAddr, buffer, size);
+        minimapAddr += size;
+        minimapOffset += size;
+        minimapSize -= size;
+    }
 }
 
 PATCH_CALL(0x8006c608, LoadMapMarkWrapper);
