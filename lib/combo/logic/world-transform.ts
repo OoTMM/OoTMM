@@ -1,8 +1,7 @@
-import { Items } from '../../../dist/lib/combo';
 import { Monitor } from '../monitor';
 import { Random, sample, shuffle } from '../random';
 import { Settings } from '../settings';
-import { addItem, isGanonBossKey, isJunk, isMapCompass, itemsArray, removeItem } from './items';
+import { Items, addItem, isGanonBossKey, isJunk, isMapCompass, itemsArray, removeItem } from './items';
 import { World } from './world';
 
 const EXTRA_ITEMS = [
