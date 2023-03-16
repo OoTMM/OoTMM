@@ -25,6 +25,7 @@ export class LogicPassSpoiler {
       hints: Hints,
       entrances: EntranceShuffleResult,
       monitor: Monitor,
+      mq: Set<string>,
     }
   ) {
   }
@@ -42,7 +43,7 @@ export class LogicPassSpoiler {
   private writeSettings() {
     this.buffer.push('Settings');
     for (const s in this.state.settings) {
-      if (s === 'startingItems' || s === 'tricks' || s === 'junkLocations' || s === 'mq') {
+      if (s === 'startingItems' || s === 'tricks' || s === 'junkLocations' || s === 'dungeon') {
         continue;
       }
       const v = (this.state.settings as any)[s];
@@ -90,9 +91,22 @@ export class LogicPassSpoiler {
     this.buffer.push('');
   }
 
+  private writeMQ() {
+    const { mq } = this.state;
+    if (mq.size === 0) {
+      return;
+    }
+
+    this.buffer.push('MQ Dungeons');
+    for (const d of mq) {
+      this.buffer.push(`  ${d}`);
+    }
+    this.buffer.push('');
+  }
+
   private writeEntrances() {
     const { entrances } = this.state;
-    if (Object.keys(entrances).length === 0) {
+    if (Object.keys(entrances.overrides).length === 0) {
       return;
     }
 
@@ -183,6 +197,7 @@ export class LogicPassSpoiler {
     this.writeTricks();
     this.writeStartingItems();
     this.writeJunkLocations();
+    this.writeMQ();
     this.writeEntrances();
     this.writeFoolish();
     this.writeHints();
