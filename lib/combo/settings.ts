@@ -387,6 +387,10 @@ export const TRICKS = {
   OOT_HAMMER_WALLS: "Hammer Through Walls",
   OOT_VOLCANO_HOVERS: "Volcano Item with Hover Boots",
   OOT_NIGHT_GS: "Nighttime Gold Skulltulas without Sun's Song",
+  OOT_CHILD_DOMAIN: "Enter Child Zora's Domain with Cucco",
+  OOT_ADULT_DOMAIN: "Enter Adult Zora's Domain using Hover Boots",
+  OOT_WATER_LONGSHOT: "Drain Water Temple using Longshot"
+  OOT_SAND_RIVER_NOTHING: "Cross the River of Sand with Nothing"
   MM_LENS: "Fewer Lens Requirements (MM)",
   MM_PALACE_BEAN_SKIP: "Skip Planting Beans in Deku Palace",
   MM_DARMANI_WALL: "Climb Mountain Village Wall Blind",
@@ -399,6 +403,10 @@ export const TRICKS = {
   MM_GORON_BOMB_JUMP: "Bomb Jump Fences as Goron",
   MM_BOMBER_SKIP: "Guess Bomber Code",
   MM_CAPTAIN_SKIP: "Guess Oceanside Spider House Code",
+  MM_SCT_NOTHING: "South Clock Town chest with Jump Slash",
+  MM_ROAD_IKANA_SHORT_HOOK: "Road to Ikana chest using Short Hookshot",
+  MM_PFI_BOAT_HOOK: "Enter Pirate Fortress Interior using Hookshot from the Boats",
+  MM_PALACE_GUARD_SKIP: "Backflip over Deku Palace Guards",
 };
 
 export type Tricks = {[k in keyof typeof TRICKS]: boolean};

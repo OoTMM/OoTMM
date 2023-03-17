@@ -7,17 +7,18 @@
   dungeon: Water
   exits:
     "Water Temple": "true"
-    "Water Temple Ruto Room": "(has_tunic_zora && has_iron_boots) || event(WATER_LEVEL_LOW)"
+    "Water Temple Ruto Room Top": "has_tunic_zora && (has_iron_boots || (can_longshot && trick(OOT_WATER_LONGSHOT)))"
+    "Water Temple Ruto Room Bottom": "event(WATER_LEVEL_LOW)"
     "Water Temple Center Bottom": "event(WATER_LEVEL_LOW) && has(SMALL_KEY_WATER, 5)"
     "Water Temple Center Middle": "event(WATER_LEVEL_LOW) && (can_use_din || can_use_bow)"
     "Water Temple Compass Room": "((has_tunic_zora && has_iron_boots) || event(WATER_LEVEL_LOW)) && can_hookshot"
     "Water Temple Dragon Room": "event(WATER_LEVEL_LOW) && has(STRENGTH) && can_dive_small"
     "Water Temple Elevator": "(has(SMALL_KEY_WATER, 5) && can_hookshot) || can_use_bow || can_use_din"
     "Water Temple Corridor": "(can_longshot || has_hover_boots) && can_use_bow && event(WATER_LEVEL_LOW)"
-    "Water Temple Waterfalls": "has_tunic_zora && has(SMALL_KEY_WATER, 4) && can_longshot && has_iron_boots"
+    "Water Temple Waterfalls": "has_tunic_zora && has(SMALL_KEY_WATER, 4) && can_longshot && (has_iron_boots || event(WATER_LEVEL_LOW))"
     "Water Temple Large Pit": "has(SMALL_KEY_WATER, 4) && event(WATER_LEVEL_RESET)"
     "Water Temple Antichamber": "can_longshot && event(WATER_LEVEL_RESET)"
-    "Water Temple Cage Room": "event(WATER_LEVEL_LOW) && has_explosives && can_dive_small"
+    "Water Temple Cage Room": "has_tunic_zora && event(WATER_LEVEL_LOW) && has_explosives && can_dive_small"
     "Water Temple Main Ledge": "has_hover_boots"
 "Water Temple Main Ledge":
   dungeon: Water
@@ -25,15 +26,20 @@
     WATER_LEVEL_RESET: "true"
   exits:
     "Water Temple Main": "true"
-"Water Temple Ruto Room":
+"Water Temple Ruto Room Top":
   dungeon: Water
   exits:
     "Water Temple Map Room": "event(WATER_LEVEL_RESET)"
-    "Water Temple Shell Room": "event(WATER_LEVEL_LOW) && (can_use_bow || has_fire)"
+    "Water Temple Ruto Room Bottom": "event(WATER_LEVEL_LOW)"
+    "Water Temple Room Bottom": "event(WATER_LEVEL_LOW) && (can_use_bow || has_fire)"
   events:
     WATER_LEVEL_LOW: "can_play(SONG_ZELDA)"
   locations:
     "Water Temple Bombable Chest": "event(WATER_LEVEL_MIDDLE) && has_explosives"
+"Water Temple Ruto Room Bottom":
+  dungeon: Water
+  exits:
+    "Water Temple Shell Room": "can_use_bow || has_fire"
 "Water Temple Map Room":
   dungeon: Water
   locations:
@@ -117,10 +123,14 @@
 "Water Temple River":
   dungeon: Water
   exits:
-    "Water Temple Dragon Room": "can_use_bow"
+    "Water Temple Dragon Room Ledge": "can_use_bow"
   locations:
     "Water Temple River Chest": "can_use_bow"
     "Water Temple GS River": "has_iron_boots"
+"Water Temple Dragon Room Ledge":
+  dungeon: Water
+  exits:
+    "Water Temple Dragon Room": "true"
 "Water Temple Cage Room":
   dungeon: Water
   locations:

@@ -4,7 +4,8 @@
     "Great Bay Coast": "has(MASK_ZORA)"
     "Great Bay Coast Captured": "true"
     "Pirate Fortress Sewers": "has(MASK_ZORA) && has(MASK_GORON)"
-    "Pirate Fortress Entrance Balcony": "has(HOOKSHOT)"
+    "Pirate Fortress Entrance Balcony": "can_hookshot || (can_hookshot_short && trick(MM_PFI_BOAT_HOOK))"
+    "Pirate Fortress Entrance Lookout": can_hookshot_short && trick(MM_PFI_BOAT_HOOK)
   events:
     PHOTO_GERUDO: "has(PICTOGRAPH_BOX)"
   locations:
@@ -38,12 +39,12 @@
     "Pirate Fortress Entrance Balcony": "true"
     "Pirate Fortress Hookshot Room Upper": "can_evade_gerudo"
     "Pirate Fortress Hookshot Room Lower": "true"
-    "Pirate Fortress Lone Guard Entry": "has(HOOKSHOT)"
-    "Pirate Fortress Barrel Maze Entry": "has(HOOKSHOT)"
+    "Pirate Fortress Lone Guard Entry": "can_hookshot_short"
+    "Pirate Fortress Barrel Maze Entry": "can_hookshot_short"
     "Pirate Fortress Entrance Captured": "true"
   locations:
     "Pirate Fortress Interior Lower Chest": "true"
-    "Pirate Fortress Interior Upper Chest": "has(HOOKSHOT)"
+    "Pirate Fortress Interior Upper Chest": "can_hookshot"
 "Pirate Fortress Hookshot Room Upper":
   region: PIRATE_FORTRESS_INTERIOR
   exits:
@@ -56,8 +57,8 @@
     "Pirate Fortress Interior": "true"
     "Pirate Fortress Entrance Captured": "true"
   events:
-    FORTRESS_BEEHIVE: "has(MASK_STONE) && has(HOOKSHOT) && (has(BOW) || can_use_deku_bubble)"
-    ZORA_EGGS_HOOKSHOT_ROOM: "has(HOOKSHOT) && has(MASK_ZORA) && has_bottle && (has(MASK_STONE) || event(FORTRESS_BEEHIVE))"
+    FORTRESS_BEEHIVE: "has(MASK_STONE) && can_hookshot_short && (has(BOW) || can_use_deku_bubble)"
+    ZORA_EGGS_HOOKSHOT_ROOM: "can_hookshot_short && has(MASK_ZORA) && has_bottle && event(FORTRESS_BEEHIVE)"
   locations:
     "Pirate Fortress Interior Hookshot": "event(FORTRESS_BEEHIVE)"
 "Pirate Fortress Barrel Maze Entry":
@@ -83,7 +84,7 @@
     "Pirate Fortress Barrel Maze": "has_weapon"
     "Pirate Fortress Barrel Maze Exit": "true"
   events:
-    ZORA_EGGS_BARREL_MAZE: "has(HOOKSHOT) && has(MASK_ZORA) && has_bottle"
+    ZORA_EGGS_BARREL_MAZE: "can_hookshot_short && has(MASK_ZORA) && has_bottle"
 "Pirate Fortress Barrel Maze Exit":
   region: PIRATE_FORTRESS_INTERIOR
   exits:
@@ -94,7 +95,7 @@
   exits:
     "Pirate Fortress Interior": "true"
     "Pirate Fortress Lone Guard": "true"
-    "Pirate Fortress Treasure Room Entry": "has(HOOKSHOT)"
+    "Pirate Fortress Treasure Room Entry": "can_hookshot"
 "Pirate Fortress Lone Guard":
   region: PIRATE_FORTRESS_INTERIOR
   exits:
@@ -107,9 +108,9 @@
     "Pirate Fortress Lone Guard": "has_weapon"
     "Pirate Fortress Lone Guard Exit": "true"
   events:
-    ZORA_EGGS_LONE_GUARD: "has(HOOKSHOT) && has(MASK_ZORA) && has_bottle"
+    ZORA_EGGS_LONE_GUARD: "can_hookshot_short && has(MASK_ZORA) && has_bottle"
   locations:
-    "Pirate Fortress Interior Aquarium": "has(MASK_ZORA) && has(HOOKSHOT)"
+    "Pirate Fortress Interior Aquarium": "has(MASK_ZORA) && can_hookshot_short"
 "Pirate Fortress Lone Guard Exit":
   region: PIRATE_FORTRESS_INTERIOR
   exits:
@@ -135,7 +136,7 @@
     "Pirate Fortress Treasure Room": "has_weapon"
     "Pirate Fortress Treasure Room Exit": "true"
   events:
-    ZORA_EGGS_TREASURE_ROOM: "has(HOOKSHOT) && has(MASK_ZORA) && has_bottle"
+    ZORA_EGGS_TREASURE_ROOM: "can_hookshot_short && has(MASK_ZORA) && has_bottle"
 "Pirate Fortress Treasure Room Exit":
   region: PIRATE_FORTRESS_INTERIOR
   exits:

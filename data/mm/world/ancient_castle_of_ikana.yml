@@ -36,7 +36,7 @@
   events:
     IKANA_CASTLE_LIGHT: "has(MASK_DEKU)"
   locations:
-    "Ancient Castle of Ikana HP": "(has(BOW) || has(HOOKSHOT)) && has(MASK_DEKU)"
+    "Ancient Castle of Ikana HP": "(has(BOW) || can_hookshot_short) && has(MASK_DEKU)"
 "Ancient Castle of Ikana Interior South":
   region: IKANA_CASTLE
   exits:

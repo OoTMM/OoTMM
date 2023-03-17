@@ -21,7 +21,7 @@
   dungeon: ST
   exits:
     "Stone Tower Temple Under West Garden": "true"
-    "Stone Tower Temple Center": "has(SMALL_KEY_ST, 4) || (has(SMALL_KEY_ST, 3) && has(MASK_ZORA))"
+    "Stone Tower Temple Center Ledge": "has(SMALL_KEY_ST, 4) || (has(SMALL_KEY_ST, 3) && has(MASK_ZORA))"
   events:
     STONE_TOWER_WEST_GARDEN_LIGHT: "has_explosives"
 "Stone Tower Temple Under West Garden":
@@ -29,17 +29,25 @@
   exits:
     "Stone Tower Temple West Garden": "true"
   locations:
-    "Stone Tower Temple Under West Garden Ledge Chest": "has(HOOKSHOT)"
+    "Stone Tower Temple Under West Garden Ledge Chest": "can_hookshot"
     "Stone Tower Temple Under West Garden Lava Chest": "((event(STONE_TOWER_WEST_GARDEN_LIGHT) && has_mirror_shield) || can_use_light_arrows)"
     "Stone Tower Temple Map": "((event(STONE_TOWER_WEST_GARDEN_LIGHT) && has_mirror_shield) || can_use_light_arrows)"
-"Stone Tower Temple Center":
+"Stone Tower Temple Center Ledge":
   dungeon: ST
   exits:
     "Stone Tower Temple West Garden": "has(SMALL_KEY_ST, 4) || (has(SMALL_KEY_ST, 3) && has(MASK_GORON) && has_explosives && can_play(SONG_EMPTINESS))"
-    "Stone Tower Temple Water Room": "has(MASK_ZORA)"
+    "Stone Tower Temple Center": "true"
   locations:
     "Stone Tower Temple Center Across Water Chest": "true"
-    "Stone Tower Temple Center Sun Block Chest": "(has(MASK_ZORA) || has(MASK_DEKU) || has_explosives || (has(MAGIC_UPGRADE) && ((has_weapon && has(SPIN_UPGRADE)) || has(SWORD, 3) || has(GREAT_FAIRY_SWORD)))) && can_use_light_arrows"
+    "Stone Tower Temple Center Sun Block Chest": "(has(MASK_ZORA) || has(MASK_DEKU) || has_explosives || (has(MAGIC_UPGRADE) && (has_weapon && has(SPIN_UPGRADE))) || has(SWORD, 3) || has(GREAT_FAIRY_SWORD) || can_use_ice_arrows) && can_use_light_arrows"
+"Stone Tower Temple Center":
+  dungeon: ST
+  exits:
+    "Stone Tower Temple Water Room": "has(MASK_ZORA)"
+    "Stone Tower Temple Center Ledge": "has(MASK_ZORA)"
+    "Stone Tower Temple Water Bridge": "can_goron_bomb_jump && can_use_ice_arrows"
+  locations:
+    "Stone Tower Temple Center Across Water Chest": "true"
 "Stone Tower Temple Water Room":
   dungeon: ST
   exits:
@@ -84,5 +92,7 @@
   dungeon: ST
   exits:
     "Stone Tower Temple Entrance": "true"
+    "Stone Tower Temple Center": "can_goron_bomb_jump"
+    "Stone Tower Temple Center Ledge": "can_goron_bomb_jump && can_use_ice_arrows"    
   locations:
     "Stone Tower Temple Water Bridge Chest": "true"
