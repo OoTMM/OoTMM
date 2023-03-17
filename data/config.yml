@@ -23,3 +23,5 @@ SHARED_HEALTH:                  0x15
 OOT_CROSS_WARP:                 0x16
 MM_CROSS_WARP:                  0x17
 MM_CROSS_WARP_ADULT:            0x18
+MM_OCARINA_FAIRY:               0x19
+MM_HOOKSHOT_SHORT:              0x1a

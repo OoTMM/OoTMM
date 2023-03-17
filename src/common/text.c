@@ -260,9 +260,11 @@ static int isItemAmbiguousMm(s16 gi)
     case GI_MM_NUTS_10:
         return !comboConfig(CFG_SHARED_NUTS_STICKS);
     case GI_MM_HOOKSHOT:
+    case GI_MM_HOOKSHOT_SHORT:
         return !comboConfig(CFG_SHARED_HOOKSHOT);
     case GI_MM_LENS:
         return !comboConfig(CFG_SHARED_LENS);
+    case GI_MM_OCARINA_FAIRY:
     case GI_MM_OCARINA_OF_TIME:
         return !comboConfig(CFG_SHARED_OCARINA);
     case GI_MM_MASK_GORON:
@@ -502,17 +504,19 @@ void comboTextAppendItemName(char** b, s16 gi, int flags)
             ambiguous = 1;
             break;
         case GI_OOT_OCARINA_FAIRY:
+        case GI_MM_OCARINA_FAIRY | MASK_FOREIGN_GI:
             itemName = "a " C1 "Progressive Ocarina";
-            ambiguous = 1;
+            ambiguous = !comboConfig(CFG_SHARED_OCARINA);
             break;
         case GI_OOT_HOOKSHOT:
+        case GI_MM_HOOKSHOT_SHORT | MASK_FOREIGN_GI:
             itemName = "a " C1 "Progressive Hookshot";
-            ambiguous = 1;
+            ambiguous = !comboConfig(CFG_SHARED_HOOKSHOT);
             break;
         case GI_OOT_WALLET2:
         case GI_MM_WALLET2 | MASK_FOREIGN_GI:
             itemName = "a " C1 "Progressive Wallet";
-            ambiguous = 1;
+            ambiguous = !comboConfig(CFG_SHARED_WALLETS);
             break;
         case GI_MM_SONG_GORON_HALF | MASK_FOREIGN_GI:
             itemName = "a " C2 "Progressive Goron Lullaby";
@@ -522,6 +526,14 @@ void comboTextAppendItemName(char** b, s16 gi, int flags)
             break;
         case GI_OOT_GORON_BRACELET:
             itemName = "a " C1 "Progressive Strength";
+            break;
+        case GI_OOT_BOW:
+        case GI_MM_BOW | MASK_FOREIGN_GI:
+            if (comboConfig(CFG_SHARED_BOWS))
+            {
+                itemName = "a " C1 "Bow";
+                ambiguous = 0;
+            }
             break;
         }
     }

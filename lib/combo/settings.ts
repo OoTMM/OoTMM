@@ -261,6 +261,18 @@ export const SETTINGS = [{
   ],
   default: 'progressive'
 }, {
+  key: 'fairyOcarinaMm',
+  name: 'Fairy Ocarina in MM',
+  category: 'items',
+  type: 'boolean',
+  default: false
+}, {
+  key: 'shortHookshotMm',
+  name: 'Short Hookshot in MM',
+  category: 'items',
+  type: 'boolean',
+  default: false
+}, {
   key: 'sharedNutsSticks',
   name: 'Shared Nuts & Sticks',
   category: 'items',

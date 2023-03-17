@@ -35,10 +35,10 @@
 "Ganon Castle Water":
   dungeon: Ganon
   events:
-    BLUE_FIRE: "has_bottle"
-    GANON_TRIAL_WATER: "event(BLUE_FIRE) && has(SMALL_KEY_GANON, 3) && has_light_arrows"
+    BLUE_FIRE: "true"
+    GANON_TRIAL_WATER: "has_blue_fire && has(SMALL_KEY_GANON, 3) && has_light_arrows"
   locations:
-    "MQ Ganon Castle Water Trial Chest": "event(BLUE_FIRE)"
+    "MQ Ganon Castle Water Trial Chest": "has_blue_fire"
 "Ganon Castle Spirit":
   dungeon: Ganon
   events:

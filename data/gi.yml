@@ -346,3 +346,5 @@ MM_COMPASS_WF:                0xe3
 MM_COMPASS_SH:                0xe4
 MM_COMPASS_GB:                0xe5
 MM_COMPASS_ST:                0xe6
+MM_OCARINA_FAIRY:             0xe7
+MM_HOOKSHOT_SHORT:            0xe8

@@ -85,10 +85,7 @@ export const DUNGEONS_REGIONS: {[k: string]: string} = {
 const mapExprs = (exprParser: ExprParser, game: Game, char: string, data: any) => {
   const result: ExprMap = {};
   for (const [k, v] of Object.entries(data)) {
-    let name = k;
-    if (!(/^(MM|OOT) /.test(name))) {
-      name = gameId(game, k, char);
-    }
+    const name = gameId(game, k, char);
     result[name] = exprParser.parse(v as string);
   }
   return result;

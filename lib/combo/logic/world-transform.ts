@@ -153,6 +153,8 @@ export class LogicPassWorldTransform {
     if (config.has('SHARED_HOOKSHOT')) {
       this.itemsToReplace.set('OOT_HOOKSHOT', 'SHARED_HOOKSHOT');
       this.itemsToJunk.add('MM_HOOKSHOT');
+    } else if (this.state.settings.shortHookshotMm) {
+      addItem(this.extraItems, 'MM_HOOKSHOT');
     }
 
     if (config.has('SHARED_LENS')) {
@@ -163,6 +165,8 @@ export class LogicPassWorldTransform {
     if (config.has('SHARED_OCARINA')) {
       this.itemsToReplace.set('OOT_OCARINA', 'SHARED_OCARINA');
       this.itemsToJunk.add('MM_OCARINA');
+    } else if (this.state.settings.fairyOcarinaMm) {
+      addItem(this.extraItems, 'MM_OCARINA');
     }
 
     if (config.has('SHARED_MASKS')) {
@@ -237,9 +241,12 @@ export class LogicPassWorldTransform {
 
     let shouldRemoveKeyFire = false;
     let mmExtraShield = false;
-    let ootShields = 3;
     let sharedHc = 0;
     let sharedHp = 0;
+
+    if (this.state.settings.progressiveShieldsOot) {
+      this.extraItems['OOT_SHIELD'] = 2;
+    }
 
     /* Remove one key from fire in non-MQ, non keysanity */
     if (!this.state.config.has('SMALL_KEY_SHUFFLE') && !this.state.mq.has('Fire')) {
@@ -307,13 +314,8 @@ export class LogicPassWorldTransform {
       }
 
       /* OoT shields */
-      if (['OOT_SHIELD_DEKU', 'OOT_SHIELD_HYLIAN', 'OOT_SHIELD_MIRROR'].includes(item) && check.type !== 'shop' && this.state.config.has('OOT_PROGRESSIVE_SHIELDS')) {
-        if (ootShields > 0) {
-          ootShields -= 1;
-          item = 'OOT_SHIELD';
-        } else {
-          item = 'OOT_RUPEE_BLUE';
-        }
+      if (item === 'OOT_SHIELD_MIRROR' && this.state.config.has('OOT_PROGRESSIVE_SHIELDS')) {
+        item = 'OOT_SHIELD';
       }
 
       /* MM shields */

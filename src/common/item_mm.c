@@ -247,6 +247,48 @@ static void addTrade3(u8 index)
     gMmExtraTrade.tradeObtained3 |= (1 << (u16)index);
 }
 
+static void reloadSlotEquips(MmItemEquips* equips, int slot)
+{
+    for (int i = 0; i < 3; ++i)
+    {
+        if (equips->cButtonSlots[0][1 + i] == slot)
+        {
+            equips->buttonItems[0][1 + i] = gMmSave.inventory.items[slot];
+        }
+    }
+}
+
+static void reloadSlot(int slot)
+{
+    reloadSlotEquips(&gMmSave.itemEquips, slot);
+}
+
+static void addHookshot(int level)
+{
+    u8 itemId;
+
+    if (level >= 2)
+        itemId = ITEM_MM_HOOKSHOT;
+    else
+        itemId = 0x11; // ITEM_MM_BOTTLE_POTION_RED but that enum is wrong
+    gMmSave.inventory.items[ITS_MM_HOOKSHOT] = itemId;
+    gMmExtraItems.hookshot |= (1 << (level - 1));
+    reloadSlot(ITS_MM_HOOKSHOT);
+}
+
+static void addOcarina(int level)
+{
+    u8 itemId;
+
+    if (level >= 2)
+        itemId = ITEM_MM_OCARINA_OF_TIME;
+    else
+        itemId = ITEM_MM_OCARINA_FAIRY;
+    gMmSave.inventory.items[ITS_MM_OCARINA] = itemId;
+    gMmExtraItems.ocarina |= (1 << (level - 1));
+    reloadSlot(ITS_MM_OCARINA);
+}
+
 void comboAddMagicUpgradeMm(int level)
 {
     gMmSave.playerData.magicAcquired = 1;
@@ -283,13 +325,19 @@ void comboAddCommonItemMm(int sid, int noEffect)
         gMmSave.inventory.quest.songStorms = 1;
         break;
     case SITEM_HOOKSHOT:
-        gMmSave.inventory.items[ITS_MM_HOOKSHOT] = ITEM_MM_HOOKSHOT;
+        addHookshot(1);
+        break;
+    case SITEM_LONGSHOT:
+        addHookshot(2);
         break;
     case SITEM_LENS:
         gMmSave.inventory.items[ITS_MM_LENS] = ITEM_MM_LENS_OF_TRUTH;
         break;
+    case SITEM_OCARINA_FAIRY:
+        addOcarina(1);
+        break;
     case SITEM_OCARINA_TIME:
-        gMmSave.inventory.items[ITS_MM_OCARINA] = ITEM_MM_OCARINA_OF_TIME;
+        addOcarina(2);
         break;
     case SITEM_MASK_KEATON:
         gMmSave.inventory.items[ITS_MM_MASK_KEATON] = ITEM_MM_MASK_KEATON;
@@ -486,14 +534,38 @@ void comboAddItemSharedMm(s16 gi, int noEffect)
         }
     }
 
-    if (comboConfig(CFG_SHARED_HOOKSHOT) && gi == GI_MM_HOOKSHOT)
+    if (comboConfig(CFG_SHARED_HOOKSHOT))
     {
-        comboAddCommonItemOot(SITEM_HOOKSHOT, noEffect);
+        switch (gi)
+        {
+        case GI_MM_HOOKSHOT_SHORT:
+            comboAddCommonItemOot(SITEM_HOOKSHOT, noEffect);
+            break;
+        case GI_MM_HOOKSHOT:
+            if (comboConfig(CFG_MM_HOOKSHOT_SHORT))
+                comboAddCommonItemOot(SITEM_LONGSHOT, noEffect);
+            else
+                comboAddCommonItemOot(SITEM_HOOKSHOT, noEffect);
+            break;
+        }
     }
 
     if (comboConfig(CFG_SHARED_LENS) && gi == GI_MM_LENS)
     {
         comboAddCommonItemOot(SITEM_LENS, noEffect);
+    }
+
+    if (comboConfig(CFG_SHARED_OCARINA))
+    {
+        switch (gi)
+        {
+        case GI_MM_OCARINA_FAIRY:
+            comboAddCommonItemOot(SITEM_OCARINA_FAIRY, noEffect);
+            break;
+        case GI_MM_OCARINA_OF_TIME:
+            comboAddCommonItemOot(SITEM_OCARINA_TIME, noEffect);
+            break;
+        }
     }
 
     if (comboConfig(CFG_SHARED_MASKS))
@@ -576,6 +648,9 @@ int comboAddItemMm(s16 gi, int noEffect)
     count = 0;
     switch (gi)
     {
+    case GI_MM_OCARINA_FAIRY:
+        comboAddCommonItemMm(SITEM_OCARINA_FAIRY, noEffect);
+        break;
     case GI_MM_OCARINA_OF_TIME:
         comboAddCommonItemMm(SITEM_OCARINA_TIME, noEffect);
         break;
@@ -602,8 +677,11 @@ int comboAddItemMm(s16 gi, int noEffect)
     case GI_MM_LENS:
         comboAddCommonItemMm(SITEM_LENS, noEffect);
         break;
-    case GI_MM_HOOKSHOT:
+    case GI_MM_HOOKSHOT_SHORT:
         comboAddCommonItemMm(SITEM_HOOKSHOT, noEffect);
+        break;
+    case GI_MM_HOOKSHOT:
+        comboAddCommonItemMm(SITEM_LONGSHOT, noEffect);
         break;
     case GI_MM_GREAT_FAIRY_SWORD:
         gMmSave.inventory.items[ITS_MM_GREAT_FAIRY_SWORD] = ITEM_MM_GREAT_FAIRY_SWORD;

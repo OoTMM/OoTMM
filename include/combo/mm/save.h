@@ -199,7 +199,7 @@ typedef struct
 }
 SaveOptions;
 
-typedef struct PACKED
+typedef struct
 {
     MmSave          save;
     u32             fileIndex;
@@ -221,7 +221,7 @@ typedef struct PACKED
 MmSaveContext;
 
 _Static_assert(sizeof(MmSave) == 0x3ca0, "MmSave size is wrong");
-_Static_assert(sizeof(MmSaveContext) == 0x48ca, "MmSaveContext size is wrong");
+_Static_assert(sizeof(MmSaveContext) == 0x48cc, "MmSaveContext size is wrong");
 
 ASSERT_OFFSET(MmSaveContext, fileIndex,     0x3ca0);
 ASSERT_OFFSET(MmSaveContext, unk_3ca4,      0x3ca4);
@@ -253,6 +253,15 @@ typedef struct
     u8 unused;
 }
 MmExtraBoss;
+
+typedef struct
+{
+    u8 hookshot;
+    u8 ocarina;
+    u8 unused;
+    u8 unused2;
+}
+MmExtraItems;
 
 typedef struct
 {

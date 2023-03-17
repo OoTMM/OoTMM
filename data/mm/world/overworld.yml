@@ -614,7 +614,7 @@
     GREAT_BAY_OWL: "true"
   locations:
     "Great Bay Coast Zora Mask": "can_play(SONG_HEALING)"
-    "Great Bay Coast HP": "can_use_beans && scarecrow_longshot"
+    "Great Bay Coast HP": "can_use_beans && scarecrow_hookshot"
     "Great Bay Coast Fisherman HP": "can_hookshot_short && event(BOSS_GREAT_BAY)"
     "Great Bay Coast Fisherman Grotto": "true"
     "Great Bay Coast Cow Front": "can_hookshot && can_play(SONG_EPONA)"

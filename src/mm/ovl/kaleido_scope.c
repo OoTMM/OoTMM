@@ -38,9 +38,75 @@ void KaleidoScope_AfterSetCutsorColor(GameState_Play* play)
         }
     }
 
+    if (play->pauseCtx.cursorSlot[0] == ITS_MM_HOOKSHOT && popcount(gMmExtraItems.hookshot) > 1)
+    {
+        play->pauseCtx.cursorColorIndex = 4;
+        if (press)
+        {
+            comboToggleHookshot();
+            effect = 1;
+        }
+    }
+
+    if (play->pauseCtx.cursorSlot[0] == ITS_MM_OCARINA && play->pauseCtx.cursorItem[0] != 0x3e7 && popcount(gMmExtraItems.ocarina) > 1)
+    {
+        play->pauseCtx.cursorColorIndex = 4;
+        if (press)
+        {
+            comboToggleOcarina();
+            effect = 1;
+        }
+    }
+
     if (effect)
     {
         PlaySound(0x4809);
+    }
+}
+
+void KaleidoScope_LoadNamedItemCustom(void* segment, u32 texIndex)
+{
+    u32 isForeign = 0;
+    switch (texIndex)
+    {
+    case 0x5: // MM Fairy Ocarina
+        isForeign = 1;
+        texIndex = 0x7b + 0x7; // OoT Fairy Ocarina
+        break;
+    case 0x11: // MM OoT Hookshot
+        isForeign = 1;
+        texIndex = 0x7b + 0xA; // OoT OoT Hookshot
+        break;
+    }
+    if (isForeign)
+    {
+        u32 textureOffset = 0x400 * texIndex;
+        u32 textureFileAddress = kComboDmaData[0x61f].pstart;
+        DMARomToRam((textureFileAddress + textureOffset) | PI_DOM1_ADDR2, segment, 0x400);
+    }
+    else
+    {
+        LoadIcon(0x00A27660, texIndex, segment, 0x400);
+    }
+
+}
+
+void KaleidoScope_ShowItemMessage(GameState_Play* play, u16 messageId, u8 yPosition)
+{
+    char* b;
+    if (messageId == 0x1711)
+    {
+        messageId = 0x170f; // Use Hookshot message instead of broken OoT Hookshot message
+    }
+    Message_ShowMessageAtYPosition(play, messageId, yPosition);
+    if (messageId == 0x1705)
+    {
+        b = play->textBuffer;
+        b[2] = 0x4C; // Use Ocarina of Time icon.
+        b += 11;
+        comboTextAppendStr(&b, TEXT_COLOR_RED "Fairy Ocarina" TEXT_NL);
+        comboTextAppendClearColor(&b);
+        comboTextAppendStr(&b, "This is a memento from" TEXT_NL "Saria." TEXT_NL TEXT_BOX_BREAK_2 "Play it with \xB0 and the four \xB2" TEXT_NL "Buttons. Press \xB1 to stop." TEXT_END);
     }
 }
 

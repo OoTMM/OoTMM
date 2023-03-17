@@ -34,8 +34,8 @@
 "Ganon Castle Water":
   dungeon: Ganon
   events:
-    BLUE_FIRE: "has_bottle"
-    GANON_TRIAL_WATER: "event(BLUE_FIRE) && can_hammer && has_light_arrows"
+    BLUE_FIRE: "true"
+    GANON_TRIAL_WATER: "has_blue_fire && can_hammer && has_light_arrows"
   locations:
     "Ganon Castle Water Chest 1": "true"
     "Ganon Castle Water Chest 2": "true"

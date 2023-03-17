@@ -7,14 +7,14 @@
   dungeon: IC
   exits:
     "Ice Cavern Map Room": "is_adult || can_use_sticks || has_explosives"
-    "Ice Cavern Compass Room": "is_adult && event(BLUE_FIRE)"
-    "Ice Cavern Big Room": "event(BLUE_FIRE)"
+    "Ice Cavern Compass Room": "is_adult && has_blue_fire"
+    "Ice Cavern Big Room": "has_blue_fire"
 "Ice Cavern Map Room":
   dungeon: IC
   events:
-    BLUE_FIRE: "has_bottle"
+    BLUE_FIRE: "true"
   locations:
-    "MQ Ice Cavern Map Chest": "event(BLUE_FIRE)"
+    "MQ Ice Cavern Map Chest": "has_blue_fire"
 "Ice Cavern Compass Room":
   dungeon: IC
   locations:

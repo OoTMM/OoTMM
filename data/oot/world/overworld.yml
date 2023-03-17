@@ -576,8 +576,8 @@
   locations:
     "Zora Domain Waterfall Chest": "is_child"
     "Zora Domain Diving Game": "is_child"
-    "Zora Domain Tunic": "is_adult && event(BLUE_FIRE)"
-    "Zora Domain Eyeball Frog": "event(BLUE_FIRE) && adult_trade(PRESCRIPTION)"
+    "Zora Domain Tunic": "is_adult && has_blue_fire"
+    "Zora Domain Eyeball Frog": "has_blue_fire && adult_trade(PRESCRIPTION)"
     "Zora Domain GS Waterfall": "is_adult && gs_night && (has_ranged_weapon_adult || has(MAGIC_UPGRADE))"
   gossip:
     "Zora Domain Gossip": "true"

@@ -161,15 +161,27 @@ const gi = (settings: Settings, game: Game, item: string, generic: boolean) => {
     }
   }
 
-  const sharedItems = SHARED_ITEMS[game];
-  const sharedItem = sharedItems.get(item);
-  if (sharedItem) {
-    item = sharedItem;
+  /* Resolve shared item */
+  if (item === 'SHARED_OCARINA' && settings.fairyOcarinaMm && game === 'mm') {
+    item = 'MM_OCARINA';
+  } else {
+    const sharedItems = SHARED_ITEMS[game];
+    const sharedItem = sharedItems.get(item);
+    if (sharedItem) {
+      item = sharedItem;
+    }
   }
 
-  const subst = SUBSTITUTIONS[item];
-  if (subst) {
-    item = subst;
+  /* Resolve substitutions */
+  if (item === 'MM_OCARINA' && settings.fairyOcarinaMm) {
+    item = 'MM_OCARINA_FAIRY';
+  } else if (item === 'MM_HOOKSHOT' && settings.shortHookshotMm) {
+    item = 'MM_HOOKSHOT_SHORT';
+  } else {
+    const subst = SUBSTITUTIONS[item];
+    if (subst) {
+      item = subst;
+    }
   }
 
   if (!DATA_GI.hasOwnProperty(item)) {
