@@ -8,7 +8,7 @@
   exits:
     "Stone Tower Temple Inverted": "true"
     "Stone Tower Temple Inverted East": "can_use_light_arrows"
-    "Stone Tower Temple Inverted Entrance Ledge": "trick(MM_ISTT_ENTRY_JUMP)"
+    "Stone Tower Temple Inverted Entrance Ledge": "trick(MM_ISTT_ENTRY_JUMP) && has(BOMB_BAG)"
   locations:
     "Stone Tower Temple Inverted Entrance Chest": "can_use_light_arrows"
 "Stone Tower Temple Inverted East":
