@@ -450,7 +450,7 @@
     "Twin Islands Underwater Chest 1": "event(BOSS_SNOWHEAD) && has(MASK_ZORA)"
     "Twin Islands Underwater Chest 2": "event(BOSS_SNOWHEAD) && has(MASK_ZORA)"
     "Twin Islands Frozen Grotto Chest": "(event(GORON_GRAVEYARD_HOT_WATER) || can_use_fire_arrows || event(BOSS_SNOWHEAD) || (event(WELL_HOT_WATER) && can_play(SONG_SOARING))) && has_explosives"
-    "Twin Islands Ramp Grotto Chest": "has_explosives && (has(MASK_GORON) || scarecrow_longshot)"
+    "Twin Islands Ramp Grotto Chest": "has_explosives && (has(MASK_GORON) || scarecrow_hookshot)"
     "Goron Elder": "has(MASK_GORON) && (event(GORON_GRAVEYARD_HOT_WATER) || can_use_fire_arrows || (event(WELL_HOT_WATER) && can_play(SONG_SOARING)))"
 "Goron Village":
   region: GORON_VILLAGE
@@ -506,7 +506,7 @@
     "Path to Snowhead Front": "true"
     "Path to Snowhead Back": "true"
   locations:
-    "Path to Snowhead HP": "can_use_lens && scarecrow_longshot"
+    "Path to Snowhead HP": "can_use_lens && scarecrow_hookshot"
 "Path to Snowhead Back":
   region: PATH_TO_SNOWHEAD
   exits:
