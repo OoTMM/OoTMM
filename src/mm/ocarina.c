@@ -176,6 +176,10 @@ void Ocarina_HandleWarp(Actor_Player* player, GameState_Play* play)
             }
             sWarpSongPlayed = 0xFF;
         }
+        else if (play->ocarinaMode == 4) // OCARINA_MODE_END
+        {
+            sWarpSongPlayed = 0xFF;
+        }
     }
 }
 
