@@ -163,6 +163,8 @@ export class LogicPassWorldTransform {
     if (config.has('SHARED_OCARINA')) {
       this.itemsToReplace.set('OOT_OCARINA', 'SHARED_OCARINA');
       this.itemsToJunk.add('MM_OCARINA');
+    } else if (this.state.settings.fairyOcarinaMm) {
+      addItem(this.extraItems, 'MM_OCARINA');
     }
 
     if (config.has('SHARED_MASKS')) {
