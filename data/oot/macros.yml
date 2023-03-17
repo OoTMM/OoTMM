@@ -27,7 +27,6 @@
 "has_ranged_weapon": "has_ranged_weapon_child || has_ranged_weapon_adult"
 "has_ranged_weapon_both": "has_explosives || ((has(SLINGSHOT) || has(BOOMERANG)) && (has(HOOKSHOT) || has(BOW)))"
 "has_mirror_shield": "is_adult && cond(setting(progressiveShieldsOot, progressive), has(SHIELD, 3), has(SHIELD_MIRROR))"
-"has_medallions": "has(MEDALLION_LIGHT) && has(MEDALLION_FOREST) && has(MEDALLION_FIRE) && has(MEDALLION_WATER) && has(MEDALLION_SPIRIT) && has(MEDALLION_SHADOW)"
 "has_light_arrows": "can_use_bow && has(ARROW_LIGHT) && has(MAGIC_UPGRADE)"
 "has_fire_arrows": "can_use_bow && has(ARROW_FIRE) && has(MAGIC_UPGRADE)"
 "can_use_beans": "is_child && has(MAGIC_BEAN)"

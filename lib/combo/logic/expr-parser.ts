@@ -1,7 +1,7 @@
 import { Game } from '../config';
 import { Settings } from '../settings';
 import { gameId } from '../util';
-import { Expr, exprTrue, exprFalse, exprAnd, exprOr, exprAge, exprHas, exprEvent, exprMasks, exprHealth, exprSetting, exprNot, exprCond, exprTrick } from './expr';
+import { Expr, exprTrue, exprFalse, exprAnd, exprOr, exprAge, exprHas, exprEvent, exprMasks, exprHealth, exprSetting, exprNot, exprCond, exprTrick, exprSpecial } from './expr';
 
 const SIMPLE_TOKENS = ['||', '&&', '(', ')', ',', 'true', 'false', '!', '+', '-'] as const;
 
@@ -232,7 +232,6 @@ export class ExprParser {
   }
 
   private parseExprTrick(): Expr | undefined {
-    let value: string | boolean = true;
     if (this.peek('identifier') !== 'trick') {
       return undefined;
     }
@@ -241,6 +240,17 @@ export class ExprParser {
     const trick = this.expect('identifier');
     this.expect(')');
     return exprTrick(this.settings, trick);
+  }
+
+  private parseExprSpecial(): Expr | undefined {
+    if (this.peek('identifier') !== 'special') {
+      return undefined;
+    }
+    this.accept('identifier');
+    this.expect('(');
+    const special = this.expect('identifier');
+    this.expect(')');
+    return exprSpecial(this.settings, special);
   }
 
   private parseMacro(): Expr | undefined {
@@ -314,6 +324,7 @@ export class ExprParser {
       || this.parseExprHealth()
       || this.parseExprSetting()
       || this.parseExprTrick()
+      || this.parseExprSpecial()
       || this.parseMacro();
   }
 

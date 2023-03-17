@@ -100,7 +100,7 @@
 "Clock Tower Roof":
   region: CLOCK_TOWER_ROOF
   exits:
-    "Moon": "can_play(SONG_ORDER) && has(REMAINS_ODOLWA) && has(REMAINS_GOHT) && has(REMAINS_GYORG) && has(REMAINS_TWINMOLD)"
+    "Moon": "can_play(SONG_ORDER) && special(MOON)"
   locations:
     "Clock Tower Roof Skull Kid Ocarina": "has_weapon_range"
     "Clock Tower Roof Skull Kid Song of Time": "has_weapon_range"

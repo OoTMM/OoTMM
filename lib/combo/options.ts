@@ -1,4 +1,4 @@
-import { Settings, settings } from './settings';
+import { makeSettings, Settings } from './settings';
 import { randString } from './random';
 
 export type Options = {
@@ -26,7 +26,7 @@ export const options = (opts: OptionsInput): Options => {
     }
   }
 
-  newOpts.settings = settings(opts.settings || {});
+  newOpts.settings = makeSettings(opts.settings || {});
 
   return newOpts as Options;
 };
