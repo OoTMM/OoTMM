@@ -14,7 +14,7 @@ const ExtendedItemTable kExtendedGetItemsTable = {
 },
 
 # undef Y
-# define Y(x)               ((((x) < 0x2000) * ((x) | MASK_FOREIGN_OBJECT)) | ((x) >= 0x2000) * (x))
+# define Y(x)               ((((x) < 0x2000) * ((x) ^ MASK_FOREIGN_OBJECT)) | ((x) >= 0x2000) * (x))
 
 {
 #if defined(GAME_OOT)

@@ -259,6 +259,7 @@ static int csmcFromItemMm(s16 gi)
     case GI_MM_BOW:
     case GI_MM_QUIVER2:
     case GI_MM_QUIVER3:
+    case GI_MM_OCARINA_FAIRY:
     case GI_MM_OCARINA_OF_TIME:
     case GI_MM_SWORD_KOKIRI:
     case GI_MM_SWORD_RAZOR:
@@ -273,6 +274,7 @@ static int csmcFromItemMm(s16 gi)
     case GI_MM_ARROW_ICE:
     case GI_MM_ARROW_LIGHT:
     case GI_MM_POWDER_KEG:
+    case GI_MM_HOOKSHOT_SHORT:
     case GI_MM_HOOKSHOT:
     case GI_MM_PICTOGRAPH_BOX:
     case GI_MM_MAGIC_BEAN:

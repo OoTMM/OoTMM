@@ -256,6 +256,15 @@ MmExtraBoss;
 
 typedef struct
 {
+    u8 hookshot;
+    u8 ocarina;
+    u8 unused;
+    u8 unused2;
+}
+MmExtraItems;
+
+typedef struct
+{
     u32 trade1:5;
     u32 trade2:2;
     u32 trade3:2;

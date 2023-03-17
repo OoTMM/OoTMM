@@ -87,6 +87,10 @@ int GiveItemDefaultRange(Actor* actor, GameState_Play* play, s16 itemId);
 
 void PlayerDisplayTextBox(GameState_Play* play, u16 messageId, void* unk);
 
+#if defined(GAME_MM)
+void Message_ShowMessageAtYPosition(GameState_Play* play, u16 messageId, u8 yPosition);
+#endif
+
 #define TEXT_STATE_NONE     0
 #define TEXT_STATE_CLOSING  2
 
@@ -173,6 +177,7 @@ void PlayMusic(int arg0, int arg1, int arg2, int arg3, int arg4);
 
 #if defined(GAME_MM)
 void AudioOcarina_SetInstrument(u8 ocarinaInstrumentId);
+void Player_DrawHookshotReticle(GameState_Play* play, Actor_Player* player, f32 distance);
 #endif
 
 int Actor_RunByteCode(Actor* this, GameState_Play* play, void* bytecode, void* unk1, void* unk2);

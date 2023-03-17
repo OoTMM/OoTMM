@@ -331,8 +331,14 @@ void comboAddCommonItemOot(int sid, int noEffect)
     case SITEM_HOOKSHOT:
         addHookshot(1);
         break;
+    case SITEM_LONGSHOT:
+        addHookshot(2);
+        break;
     case SITEM_LENS:
         gOotSave.inventory.items[ITS_OOT_LENS] = ITEM_OOT_LENS;
+        break;
+    case SITEM_OCARINA_FAIRY:
+        addOcarina(1);
         break;
     case SITEM_OCARINA_TIME:
         addOcarina(2);
@@ -550,9 +556,20 @@ void comboAddItemSharedOot(s16 gi, int noEffect)
         }
     }
 
-    if (comboConfig(CFG_SHARED_HOOKSHOT) && gi == GI_OOT_HOOKSHOT)
+    if (comboConfig(CFG_SHARED_HOOKSHOT))
     {
-        comboAddCommonItemMm(SITEM_HOOKSHOT, noEffect);
+        switch (gi)
+        {
+        case GI_OOT_HOOKSHOT:
+            if (comboConfig(CFG_MM_HOOKSHOT_SHORT))
+                comboAddCommonItemMm(SITEM_HOOKSHOT, noEffect);
+            else
+                comboAddCommonItemMm(SITEM_LONGSHOT, noEffect);
+            break;
+        case GI_OOT_LONGSHOT:
+            comboAddCommonItemMm(SITEM_LONGSHOT, noEffect);
+            break;
+        }
     }
 
     if (comboConfig(CFG_SHARED_LENS) && gi == GI_OOT_LENS)
@@ -560,9 +577,18 @@ void comboAddItemSharedOot(s16 gi, int noEffect)
         comboAddCommonItemMm(SITEM_LENS, noEffect);
     }
 
-    if (comboConfig(CFG_SHARED_OCARINA) && gi == GI_OOT_OCARINA_TIME)
+    if (comboConfig(CFG_SHARED_OCARINA))
     {
-        comboAddCommonItemMm(SITEM_OCARINA_TIME, noEffect);
+        switch (gi)
+        {
+        case GI_OOT_OCARINA_FAIRY:
+            if (comboConfig(CFG_MM_OCARINA_FAIRY))
+                comboAddCommonItemMm(SITEM_OCARINA_FAIRY, noEffect);
+            break;
+        case GI_OOT_OCARINA_TIME:
+            comboAddCommonItemMm(SITEM_OCARINA_TIME, noEffect);
+            break;
+        }
     }
 
     if (comboConfig(CFG_SHARED_MASKS))
@@ -728,7 +754,7 @@ int comboAddItemOot(s16 gi, int noEffect)
         comboAddCommonItemOot(SITEM_HOOKSHOT, noEffect);
         break;
     case GI_OOT_LONGSHOT:
-        addHookshot(2);
+        comboAddCommonItemOot(SITEM_LONGSHOT, noEffect);
         break;
     case GI_OOT_ARROW_ICE:
         comboAddCommonItemOot(SITEM_ARROW_ICE, noEffect);

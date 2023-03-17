@@ -34,6 +34,7 @@
 #  include <combo/mm/player.h>
 #  include <combo/mm/actor_ensob1.h>
 #  include <combo/mm/actor_enfsn.h>
+#  include <combo/mm/actor_arms_hook.h>
 # endif
 
 # include <combo/common/actors/En_Item00.h>
@@ -300,6 +301,8 @@ void comboToggleTrade3(void);
 void comboRemoveTradeItem1(u16 xitemId);
 void comboRemoveTradeItem2(u16 xitemId);
 void comboRemoveTradeItem3(u16 xitemId);
+void comboToggleOcarina(void);
+void comboToggleHookshot(void);
 #endif
 
 # if defined(GAME_MM)
