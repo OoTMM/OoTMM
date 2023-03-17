@@ -129,6 +129,10 @@ export class LogicPassConfig {
       }
     }
 
+    if (this.state.settings.fairyOcarinaMm) {
+      config.add('MM_OCARINA_FAIRY');
+    }
+
     return { mq, config };
   }
 }

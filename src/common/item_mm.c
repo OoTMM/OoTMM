@@ -549,6 +549,19 @@ void comboAddItemSharedMm(s16 gi, int noEffect)
         comboAddCommonItemOot(SITEM_LENS, noEffect);
     }
 
+    if (comboConfig(CFG_SHARED_OCARINA))
+    {
+        switch (gi)
+        {
+        case GI_MM_OCARINA_FAIRY:
+            comboAddCommonItemOot(SITEM_OCARINA_FAIRY, noEffect);
+            break;
+        case GI_MM_OCARINA_OF_TIME:
+            comboAddCommonItemOot(SITEM_OCARINA_TIME, noEffect);
+            break;
+        }
+    }
+
     if (comboConfig(CFG_SHARED_MASKS))
     {
         switch (gi)
@@ -629,6 +642,9 @@ int comboAddItemMm(s16 gi, int noEffect)
     count = 0;
     switch (gi)
     {
+    case GI_MM_OCARINA_FAIRY:
+        comboAddCommonItemMm(SITEM_OCARINA_FAIRY, noEffect);
+        break;
     case GI_MM_OCARINA_OF_TIME:
         comboAddCommonItemMm(SITEM_OCARINA_TIME, noEffect);
         break;

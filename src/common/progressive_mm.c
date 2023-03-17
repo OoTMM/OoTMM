@@ -87,10 +87,22 @@ static s32 progressiveHookshot(void)
     return GI_OOT_LONGSHOT | MASK_FOREIGN_GI;
 }
 
+static s32 progressiveOcarina(void)
+{
+    if (!gMmExtraItems.ocarina)
+        return GI_MM_OCARINA_FAIRY;
+    return GI_MM_OCARINA_OF_TIME;
+}
+
 s32 comboProgressiveMm(s32 gi)
 {
     switch (gi)
     {
+    case GI_MM_OCARINA_FAIRY:
+    case GI_MM_OCARINA_OF_TIME:
+        if (comboConfig(CFG_MM_OCARINA_FAIRY))
+            gi = progressiveOcarina();
+        break;
     case GI_MM_SWORD_KOKIRI:
     case GI_MM_SWORD_RAZOR:
     case GI_MM_SWORD_GILDED:

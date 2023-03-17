@@ -263,6 +263,7 @@ static int isItemAmbiguousMm(s16 gi)
         return !comboConfig(CFG_SHARED_HOOKSHOT);
     case GI_MM_LENS:
         return !comboConfig(CFG_SHARED_LENS);
+    case GI_MM_OCARINA_FAIRY:
     case GI_MM_OCARINA_OF_TIME:
         return !comboConfig(CFG_SHARED_OCARINA);
     case GI_MM_MASK_GORON:
@@ -502,6 +503,7 @@ void comboTextAppendItemName(char** b, s16 gi, int flags)
             ambiguous = 1;
             break;
         case GI_OOT_OCARINA_FAIRY:
+        case GI_MM_OCARINA_FAIRY | MASK_FOREIGN_GI:
             itemName = "a " C1 "Progressive Ocarina";
             ambiguous = 1;
             break;

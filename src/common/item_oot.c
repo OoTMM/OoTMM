@@ -579,7 +579,8 @@ void comboAddItemSharedOot(s16 gi, int noEffect)
         switch (gi)
         {
         case GI_OOT_OCARINA_FAIRY:
-            comboAddCommonItemMm(SITEM_OCARINA_FAIRY, noEffect);
+            if (comboConfig(CFG_MM_OCARINA_FAIRY))
+                comboAddCommonItemMm(SITEM_OCARINA_FAIRY, noEffect);
             break;
         case GI_OOT_OCARINA_TIME:
             comboAddCommonItemMm(SITEM_OCARINA_TIME, noEffect);
