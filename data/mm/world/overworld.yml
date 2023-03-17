@@ -728,7 +728,7 @@
     "Termina Field": "true"
     "Road to Ikana Center": "can_play(SONG_EPONA) || can_goron_bomb_jump"
   locations:
-    "Road to Ikana Chest": "can_hookshot || (can_hookshot_short && trick(ROAD_IKANA_SHORT_HOOK))"
+    "Road to Ikana Chest": "can_hookshot || (can_hookshot_short && trick(MM_ROAD_IKANA_SHORT_HOOK))"
     "Road to Ikana Grotto": "has(MASK_GORON)"
 "Road to Ikana Center":
   region: ROAD_TO_IKANA
