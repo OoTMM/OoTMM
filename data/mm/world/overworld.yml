@@ -734,7 +734,7 @@
   region: ROAD_TO_IKANA
   exits:
     "Road to Ikana Front": "can_play(SONG_EPONA) || can_goron_bomb_jump"
-    "Road to Ikana Top": "(has(MASK_GARO) || has(MASK_GIBDO)) && can_hookshot"
+    "Road to Ikana Top": "(has(MASK_GARO) || has(MASK_GIBDO)) && (can_hookshot || (can_hookshot_short && trick(MM_SHORT_HOOK_HARD)))"
     "Ikana Graveyard": "true"
   locations:
     "Road to Ikana Stone Mask": "can_use_lens_strict && has_bottle"
