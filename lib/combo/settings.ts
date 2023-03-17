@@ -415,7 +415,7 @@ export const TRICKS = {
   MM_GORON_BOMB_JUMP: "Bomb Jump Fences as Goron",
   MM_BOMBER_SKIP: "Guess Bomber Code",
   MM_CAPTAIN_SKIP: "Guess Oceanside Spider House Code",
-  MM_SCT_NOTHING: "South Clock Town chest with Jump Slash",
+  MM_ISTT_ENTRY_JUMP: "Inverted Stone Tower Temple Long Jump to Death Armos",
   MM_ROAD_IKANA_SHORT_HOOK: "Road to Ikana chest using Short Hookshot",
   MM_PFI_BOAT_HOOK: "Enter Pirate Fortress Interior using Hookshot from the Boats",
   MM_PALACE_GUARD_SKIP: "Backflip over Deku Palace Guards",
