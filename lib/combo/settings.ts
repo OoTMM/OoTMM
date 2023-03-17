@@ -401,8 +401,8 @@ export const TRICKS = {
   OOT_NIGHT_GS: "Nighttime Gold Skulltulas without Sun's Song",
   OOT_CHILD_DOMAIN: "Enter Child Zora's Domain with Cucco",
   OOT_ADULT_DOMAIN: "Enter Adult Zora's Domain using Hover Boots",
-  OOT_WATER_LONGSHOT: "Drain Water Temple using Longshot"
-  OOT_SAND_RIVER_NOTHING: "Cross the River of Sand with Nothing"
+  OOT_WATER_LONGSHOT: "Drain Water Temple using Longshot",
+  OOT_SAND_RIVER_NOTHING: "Cross the River of Sand with Nothing",
   MM_LENS: "Fewer Lens Requirements (MM)",
   MM_PALACE_BEAN_SKIP: "Skip Planting Beans in Deku Palace",
   MM_DARMANI_WALL: "Climb Mountain Village Wall Blind",
