@@ -385,7 +385,7 @@
     "Woodfall Shrine": "has(MASK_DEKU)"
     "Woodfall Great Fairy Fountain": "has(MASK_DEKU)"
   locations:
-    "Woodfall Near Owl Chest": "can_hookshot
+    "Woodfall Near Owl Chest": "can_hookshot"
 "Woodfall Great Fairy Fountain":
   region: WOODFALL
   exits:
