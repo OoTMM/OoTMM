@@ -7,7 +7,27 @@
 typedef struct PACKED ALIGNED(4)
 {
     Actor       base;
-    char        unk_144[0x98];
+    /* 0x144 */ s8 currentShield;
+    /* 0x145 */ s8 currentBoots;
+    /* 0x146 */ s8 heldItemButton;
+    /* 0x147 */ s8 heldItemAction; // PlayerItemAction enum
+    /* 0x148 */ u8 heldItemId; // ItemId enum
+    /* 0x149 */ s8 prevBoots;
+    /* 0x14A */ s8 itemAction; // PlayerItemAction enum
+    /* 0x14B */ u8 transformation; // PlayerTransformation enum
+    /* 0x14C */ u8 modelGroup; // PlayerModelGroup enum
+    /* 0x14D */ u8 nextModelGroup;
+    /* 0x14E */ s8 unk_14E;
+    /* 0x14F */ u8 modelAnimType; // PlayerAnimType enum
+    /* 0x150 */ u8 leftHandType;
+    /* 0x151 */ u8 rightHandType;
+    /* 0x152 */ u8 sheathType;
+    /* 0x153 */ u8 currentMask; // PlayerMask enum
+    /* 0x154 */ s8 unk_154;
+    /* 0x155 */ u8 prevMask;
+    /* 0x156 */ s8 pad_156; // unused padding
+    /* 0x157 */ s8 pad_157; // unused padding
+    char        unk_158[0x84];
     OSMesgQueue objMsgQueue;
     OSMesg      objMsg;
     void*       objBuffer;

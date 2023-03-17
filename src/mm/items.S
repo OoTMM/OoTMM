@@ -51,3 +51,13 @@ PATCH_END
 PATCH_START 0x80852c8c
   li v0,0
 PATCH_END
+
+/* Enable OoT Hookshot in sItemActionParams */
+PATCH_START 0x8085C99C + 0x11
+  .byte 0x0D
+PATCH_END
+
+/* Enable Fairy Ocarina in sItemActionParams */
+PATCH_START 0x8085C99C + 0x05
+  .byte 0x14
+PATCH_END

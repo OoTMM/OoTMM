@@ -158,3 +158,13 @@ PATCH_END
 PATCH_START 0x8019D2D8
     nop
 PATCH_END
+
+/*
+;==================================================================================================
+; Handle different hookshot reticle distances
+;==================================================================================================
+*/
+
+PATCH_START 0x80129160
+    jal     Player_DrawHookshotReticleCustom
+PATCH_END
