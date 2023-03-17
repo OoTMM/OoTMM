@@ -324,10 +324,10 @@ void comboAddCommonItemMm(int sid, int noEffect)
     case SITEM_SONG_STORMS:
         gMmSave.inventory.quest.songStorms = 1;
         break;
-    case SITEM_OOTHOOKSHOT:
+    case SITEM_HOOKSHOT:
         addHookshot(1);
         break;
-    case SITEM_HOOKSHOT:
+    case SITEM_LONGSHOT:
         addHookshot(2);
         break;
     case SITEM_LENS:
@@ -538,8 +538,14 @@ void comboAddItemSharedMm(s16 gi, int noEffect)
     {
         switch (gi)
         {
-        case GI_MM_HOOKSHOT:
+        case GI_MM_HOOKSHOT_SHORT:
             comboAddCommonItemOot(SITEM_HOOKSHOT, noEffect);
+            break;
+        case GI_MM_HOOKSHOT:
+            if (comboConfig(CFG_MM_HOOKSHOT_SHORT))
+                comboAddCommonItemOot(SITEM_LONGSHOT, noEffect);
+            else
+                comboAddCommonItemOot(SITEM_HOOKSHOT, noEffect);
             break;
         }
     }
@@ -671,8 +677,11 @@ int comboAddItemMm(s16 gi, int noEffect)
     case GI_MM_LENS:
         comboAddCommonItemMm(SITEM_LENS, noEffect);
         break;
-    case GI_MM_HOOKSHOT:
+    case GI_MM_HOOKSHOT_SHORT:
         comboAddCommonItemMm(SITEM_HOOKSHOT, noEffect);
+        break;
+    case GI_MM_HOOKSHOT:
+        comboAddCommonItemMm(SITEM_LONGSHOT, noEffect);
         break;
     case GI_MM_GREAT_FAIRY_SWORD:
         gMmSave.inventory.items[ITS_MM_GREAT_FAIRY_SWORD] = ITEM_MM_GREAT_FAIRY_SWORD;

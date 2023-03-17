@@ -80,11 +80,26 @@ static s32 progressiveSongLullaby(void)
 }
 
 // This is only called when hookshots are shared
-static s32 progressiveHookshot(void)
+static s32 progressiveHookshot(s32 gi)
 {
-    if (!gOotExtraItems.hookshot)
-        return GI_OOT_HOOKSHOT | MASK_FOREIGN_GI;
-    return GI_OOT_LONGSHOT | MASK_FOREIGN_GI;
+    /* Short hookshot enabled - ignore shared items */
+    if (comboConfig(CFG_MM_HOOKSHOT_SHORT))
+    {
+        if (!gMmExtraItems.hookshot)
+            return GI_MM_HOOKSHOT_SHORT;
+        return GI_MM_HOOKSHOT;
+    }
+
+    /* No short hook but shared hookshots */
+    if (comboConfig(CFG_SHARED_HOOKSHOT))
+    {
+        if (!gOotExtraItems.hookshot)
+            return GI_MM_HOOKSHOT;
+        return GI_OOT_LONGSHOT | MASK_FOREIGN_GI;
+    }
+
+    /* Not progressive */
+    return gi;
 }
 
 static s32 progressiveOcarina(void)
@@ -136,9 +151,9 @@ s32 comboProgressiveMm(s32 gi)
         if (comboConfig(CFG_MM_PROGRESSIVE_LULLABY))
             gi = progressiveSongLullaby();
         break;
+    case GI_MM_HOOKSHOT_SHORT:
     case GI_MM_HOOKSHOT:
-        if (comboConfig(CFG_SHARED_HOOKSHOT))
-            gi = progressiveHookshot();
+        gi = progressiveHookshot(gi);
         break;
     }
 

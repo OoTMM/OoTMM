@@ -175,6 +175,8 @@ const gi = (settings: Settings, game: Game, item: string, generic: boolean) => {
   /* Resolve substitutions */
   if (item === 'MM_OCARINA' && settings.fairyOcarinaMm) {
     item = 'MM_OCARINA_FAIRY';
+  } else if (item === 'MM_HOOKSHOT' && settings.shortHookshotMm) {
+    item = 'MM_HOOKSHOT_SHORT';
   } else {
     const subst = SUBSTITUTIONS[item];
     if (subst) {

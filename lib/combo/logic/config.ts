@@ -133,6 +133,10 @@ export class LogicPassConfig {
       config.add('MM_OCARINA_FAIRY');
     }
 
+    if (this.state.settings.shortHookshotMm) {
+      config.add('MM_HOOKSHOT_SHORT');
+    }
+
     return { mq, config };
   }
 }

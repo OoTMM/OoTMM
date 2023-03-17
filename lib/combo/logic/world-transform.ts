@@ -153,6 +153,8 @@ export class LogicPassWorldTransform {
     if (config.has('SHARED_HOOKSHOT')) {
       this.itemsToReplace.set('OOT_HOOKSHOT', 'SHARED_HOOKSHOT');
       this.itemsToJunk.add('MM_HOOKSHOT');
+    } else if (this.state.settings.shortHookshotMm) {
+      addItem(this.extraItems, 'MM_HOOKSHOT');
     }
 
     if (config.has('SHARED_LENS')) {

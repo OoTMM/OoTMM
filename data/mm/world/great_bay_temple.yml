@@ -2,7 +2,7 @@
   dungeon: GB
   exits:
     "Great Bay Temple Entrance": "event(TIME_TRAVEL)"
-    "Zora Cape Peninsula": "has(HOOKSHOT)"
+    "Zora Cape Peninsula": "can_hookshot"
 "Great Bay Temple Entrance":
   dungeon: GB
   exits:
@@ -13,12 +13,12 @@
 "Great Bay Temple Water Wheel":
   dungeon: GB
   events:
-    GB_WATER_WHEEL: "event(GB_PIPE_RED) && event(GB_PIPE_RED2) && has(HOOKSHOT)"
+    GB_WATER_WHEEL: "event(GB_PIPE_RED) && event(GB_PIPE_RED2) && can_hookshot"
   exits:
     "Great Bay Temple Entrance": "true"
     "Great Bay Temple Central Room": "has(MASK_ZORA)"
   locations:
-    "Great Bay Temple SF Water Wheel Platform": "has(MASK_ZORA) || (has(MASK_GREAT_FAIRY) && (has(BOW) || has(HOOKSHOT)))"
+    "Great Bay Temple SF Water Wheel Platform": "has(MASK_ZORA) || (has(MASK_GREAT_FAIRY) && (has(BOW) || can_hookshot))"
     "Great Bay Temple SF Water Wheel Skulltula": "true"
 "Great Bay Temple Central Room":
   dungeon: GB
@@ -38,7 +38,7 @@
     "Great Bay Temple Baba Room": "true"
     "Great Bay Temple Red Pipe 2": "can_use_ice_arrows"
   locations:
-    "Great Bay Temple Map": "has(HOOKSHOT) || can_use_ice_arrows"
+    "Great Bay Temple Map": "can_hookshot || can_use_ice_arrows"
     "Great Bay Temple SF Map Room Pot": "true"
 "Great Bay Temple Baba Room":
   dungeon: GB
@@ -90,14 +90,14 @@
   events:
     GB_PIPE_GREEN: "true"
   locations:
-    "Great Bay Temple Green Pipe 1 Chest": "has(HOOKSHOT)"
+    "Great Bay Temple Green Pipe 1 Chest": "can_hookshot"
 "Great Bay Temple Green Pipe 2":
   dungeon: GB
   exits:
     "Great Bay Temple Green Pipe 3": "can_use_ice_arrows && can_use_fire_arrows"
   locations:
-    "Great Bay Temple Green Pipe 2 Lower Chest": "has(HOOKSHOT)"
-    "Great Bay Temple Green Pipe 2 Upper Chest": "has(HOOKSHOT) && can_use_ice_arrows && can_use_fire_arrows"
+    "Great Bay Temple Green Pipe 2 Lower Chest": "can_hookshot"
+    "Great Bay Temple Green Pipe 2 Upper Chest": "can_hookshot && can_use_ice_arrows && can_use_fire_arrows"
 "Great Bay Temple Green Pipe 3":
   dungeon: GB
   exits:
@@ -106,7 +106,7 @@
   events:
     GB_PIPE_GREEN2: "can_use_ice_arrows && can_use_fire_arrows"
   locations:
-    "Great Bay Temple Green Pipe 3 Chest": "can_use_ice_arrows && can_use_fire_arrows && has(HOOKSHOT)"
+    "Great Bay Temple Green Pipe 3 Chest": "can_use_ice_arrows && can_use_fire_arrows && can_hookshot"
     "Great Bay Temple SF Green Pipe 3 Barrel": "has(MASK_ZORA)"
 "Great Bay Temple Pre-Boss":
   dungeon: GB
@@ -114,7 +114,7 @@
     "Great Bay Temple Central Room": "true"
     "Great Bay Temple Boss": "has(BOSS_KEY_GB) && event(GB_PIPE_GREEN) && event(GB_PIPE_GREEN2)"
   locations:
-    "Great Bay Temple SF Pre-Boss Above Water": "can_use_ice_arrows || (has(MASK_GREAT_FAIRY) && (has(BOW) || has(HOOKSHOT)))"
+    "Great Bay Temple SF Pre-Boss Above Water": "can_use_ice_arrows || (has(MASK_GREAT_FAIRY) && (has(BOW) || can_hookshot))"
     "Great Bay Temple SF Pre-Boss Underwater": "true"
 "Great Bay Temple Boss":
   boss: true

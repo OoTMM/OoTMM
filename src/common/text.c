@@ -260,6 +260,7 @@ static int isItemAmbiguousMm(s16 gi)
     case GI_MM_NUTS_10:
         return !comboConfig(CFG_SHARED_NUTS_STICKS);
     case GI_MM_HOOKSHOT:
+    case GI_MM_HOOKSHOT_SHORT:
         return !comboConfig(CFG_SHARED_HOOKSHOT);
     case GI_MM_LENS:
         return !comboConfig(CFG_SHARED_LENS);
@@ -508,6 +509,7 @@ void comboTextAppendItemName(char** b, s16 gi, int flags)
             ambiguous = 1;
             break;
         case GI_OOT_HOOKSHOT:
+        case GI_MM_HOOKSHOT_SHORT | MASK_FOREIGN_GI:
             itemName = "a " C1 "Progressive Hookshot";
             ambiguous = 1;
             break;
