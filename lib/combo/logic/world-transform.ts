@@ -241,9 +241,12 @@ export class LogicPassWorldTransform {
 
     let shouldRemoveKeyFire = false;
     let mmExtraShield = false;
-    let ootShields = 3;
     let sharedHc = 0;
     let sharedHp = 0;
+
+    if (this.state.settings.progressiveShieldsOot) {
+      this.extraItems['OOT_SHIELD'] = 2;
+    }
 
     /* Remove one key from fire in non-MQ, non keysanity */
     if (!this.state.config.has('SMALL_KEY_SHUFFLE') && !this.state.mq.has('Fire')) {
@@ -311,13 +314,8 @@ export class LogicPassWorldTransform {
       }
 
       /* OoT shields */
-      if (['OOT_SHIELD_DEKU', 'OOT_SHIELD_HYLIAN', 'OOT_SHIELD_MIRROR'].includes(item) && check.type !== 'shop' && this.state.config.has('OOT_PROGRESSIVE_SHIELDS')) {
-        if (ootShields > 0) {
-          ootShields -= 1;
-          item = 'OOT_SHIELD';
-        } else {
-          item = 'OOT_RUPEE_BLUE';
-        }
+      if (item === 'OOT_SHIELD_MIRROR' && this.state.config.has('OOT_PROGRESSIVE_SHIELDS')) {
+        item = 'OOT_SHIELD';
       }
 
       /* MM shields */

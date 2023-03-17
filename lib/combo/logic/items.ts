@@ -297,6 +297,11 @@ const CONSUMABLES = new Set<string>([
   'SHARED_BOMBCHU_20',
 ]);
 
+const CRITICAL_RENEWABLE_ITEMS = new Set<string>([
+  'OOT_SHIELD_DEKU',
+  'OOT_SHIELD_HYLIAN',
+]);
+
 export const isSong = (item: string) => !!item.match(/^(OOT|MM|SHARED)_SONG_/);
 export const isCompass = (item: string) => !!item.match(/^(OOT|MM)_COMPASS_/);
 export const isMap = (item: string) => !!item.match(/^(OOT|MM)_MAP_/);
@@ -324,6 +329,7 @@ export const isItemImportant = (item: string) => isItemMajor(item) || isDungeonR
 export const isItemConsumable = (item: string) => CONSUMABLES.has(item);
 export const isRupees = (item: string) => !!item.match(/^(OOT|MM|SHARED)_RUPEE_/);
 export const isItemUnlimitedStarting = (item: string) => isRupees(item) || isItemConsumable(item);
+export const isItemCriticalRenewable = (item: string) => CRITICAL_RENEWABLE_ITEMS.has(item);
 
 export const itemsArray = (items: Items) => {
   const arr: string[] = [];

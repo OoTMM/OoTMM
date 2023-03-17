@@ -4,9 +4,10 @@ import { gameId } from '../util';
 import { Pathfinder, PathfinderState } from './pathfind';
 import { World } from './world';
 import { LogicError, LogicSeedError } from './error';
-import { Items, addItem, combinedItems, itemsArray, removeItem, ITEMS_REQUIRED, isDungeonReward, isGoldToken, isHouseToken, isKey, isStrayFairy, isSmallKey, isGanonBossKey, isRegularBossKey, isTownStrayFairy, isDungeonStrayFairy, isSong, isJunk, isMapCompass, isSmallKeyRegular, isSmallKeyHideout, isItemUnlimitedStarting } from './items';
+import { Items, addItem, combinedItems, itemsArray, removeItem, ITEMS_REQUIRED, isDungeonReward, isGoldToken, isHouseToken, isKey, isStrayFairy, isSmallKey, isGanonBossKey, isRegularBossKey, isTownStrayFairy, isDungeonStrayFairy, isSong, isJunk, isMapCompass, isSmallKeyRegular, isSmallKeyHideout, isItemUnlimitedStarting, isItemCriticalRenewable } from './items';
 import { Settings } from '../settings';
 import { Monitor } from '../monitor';
+import { isLocationRenewable } from './helpers';
 
 export type ItemPlacement = {[k: string]: string};
 
@@ -41,6 +42,7 @@ export class LogicPassSolver {
   private pathfinderState!: PathfinderState;
   private pools!: ItemPools;
   private junkLocations!: Set<string>;
+  private criticalRenewables!: Set<string>;
 
   constructor(
     private readonly state: {
@@ -57,6 +59,7 @@ export class LogicPassSolver {
     this.junkLocations = new Set<string>(this.state.settings.junkLocations);
     this.pools = this.makeItemPools();
     this.pathfinderState = this.pathfinder.run(null);
+    this.criticalRenewables = new Set<string>();
   }
 
   run() {
@@ -384,6 +387,11 @@ export class LogicPassSolver {
         unplacedLocs = unplacedLocs.filter(x => options.restrictedLocations!.has(x));
       }
 
+      /* If the item is a critical renewable and it's all locations, ensure it lands correctly */
+      if (this.state.settings.logic === 'allLocations' && isItemCriticalRenewable(requiredItem) && !this.criticalRenewables.has(requiredItem)) {
+        unplacedLocs = unplacedLocs.filter(x => isLocationRenewable(this.state.world, x));
+      }
+
       /* If there is nowhere to place an item, raise an error */
       if (unplacedLocs.length === 0) {
         throw new LogicSeedError(`No reachable locations for item ${requiredItem}`);
@@ -439,5 +447,8 @@ export class LogicPassSolver {
       throw new Error(`Unable to place ${item} at ${location}.`)
     }
     this.items[location] = item;
+    if (isLocationRenewable(this.state.world, location) && isItemCriticalRenewable(item)) {
+      this.criticalRenewables.add(item);
+    }
   }
 }
