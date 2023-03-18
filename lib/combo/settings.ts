@@ -462,6 +462,9 @@ export const SPECIAL_CONDS_KEYS = {
   fairiesGB: "Stray Fairies (Great Bay)",
   fairiesST: "Stray Fairies (Stone Tower)",
   fairyTown: "Stray Fairy (Clock Town)",
+  masksRegular: "Regular Masks (MM)",
+  masksTransform: "Transformation Masks (MM)",
+  masksOot: "Masks (OoT)",
 };
 
 export type SpecialCond = {[k in keyof typeof SPECIAL_CONDS_KEYS]: boolean} & { count: number };

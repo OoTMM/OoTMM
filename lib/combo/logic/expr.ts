@@ -1,5 +1,5 @@
 import { Settings, Trick, TRICKS } from '../settings';
-import { Items, ITEMS_MEDALLIONS, ITEMS_REMAINS, ITEMS_STONES } from './items';
+import { Items, ITEMS_MASKS_OOT, ITEMS_MASKS_REGULAR, ITEMS_MASKS_TRANSFORM, ITEMS_MEDALLIONS, ITEMS_REMAINS, ITEMS_STONES } from './items';
 import { Age } from './pathfind';
 
 type State = {
@@ -9,33 +9,6 @@ type State = {
   ignoreItems: boolean;
 };
 
-
-const MASKS = [
-  'MM_MASK_CAPTAIN',
-  'MM_MASK_GIANT',
-  'MM_MASK_ALL_NIGHT',
-  'MM_MASK_BUNNY',
-  'MM_MASK_KEATON',
-  'MM_MASK_GARO',
-  'MM_MASK_ROMANI',
-  'MM_MASK_TROUPE_LEADER',
-  'MM_MASK_POSTMAN',
-  'MM_MASK_COUPLE',
-  'MM_MASK_GREAT_FAIRY',
-  'MM_MASK_GIBDO',
-  'MM_MASK_DON_GERO',
-  'MM_MASK_KAMARO',
-  'MM_MASK_TRUTH',
-  'MM_MASK_STONE',
-  'MM_MASK_BREMEN',
-  'MM_MASK_BLAST',
-  'MM_MASK_SCENTS',
-  'MM_MASK_KAFEI',
-  'SHARED_MASK_TRUTH',
-  'SHARED_MASK_BUNNY',
-  'SHARED_MASK_KEATON',
-];
-
 const itemCount = (state: State, item: string): number => state.items[item] || 0;
 const itemsCount = (state: State, items: string[]): number => items.reduce((acc, item) => acc + itemCount(state, item), 0);
 
@@ -44,22 +17,25 @@ function resolveSpecialCond(settings: Settings, state: State, special: string) {
   if (!specialConds.hasOwnProperty(special)) {
     throw new Error(`Unknown special condition: ${special}`);
   }
-  let count = 0;
+  let items = new Set<string>();
   const cond = specialConds[special as keyof typeof specialConds];
 
-  if (cond.stones) count += itemsCount(state, ITEMS_STONES);
-  if (cond.medallions) count += itemsCount(state, ITEMS_MEDALLIONS);
-  if (cond.remains) count += itemsCount(state, ITEMS_REMAINS);
-  if (cond.skullsGold) count += itemCount(state, 'OOT_GS_TOKEN');
-  if (cond.skullsSwamp) count += itemCount(state, 'MM_GS_TOKEN_SWAMP');
-  if (cond.skullsOcean) count += itemCount(state, 'MM_GS_TOKEN_OCEAN');
-  if (cond.fairiesWF) count += itemCount(state, 'MM_STRAY_FAIRY_WF');
-  if (cond.fairiesSH) count += itemCount(state, 'MM_STRAY_FAIRY_SH');
-  if (cond.fairiesGB) count += itemCount(state, 'MM_STRAY_FAIRY_GB');
-  if (cond.fairiesST) count += itemCount(state, 'MM_STRAY_FAIRY_ST');
-  if (cond.fairyTown) count += itemCount(state, 'MM_STRAY_FAIRY_TOWN');
+  if (cond.stones) items = new Set([...items, ...ITEMS_STONES]);
+  if (cond.medallions) items = new Set([...items, ...ITEMS_MEDALLIONS]);
+  if (cond.remains) items = new Set([...items, ...ITEMS_REMAINS]);
+  if (cond.skullsGold) items.add('OOT_GS_TOKEN');
+  if (cond.skullsSwamp) items.add('MM_GS_TOKEN_SWAMP');
+  if (cond.skullsOcean) items.add('MM_GS_TOKEN_OCEAN');
+  if (cond.fairiesWF) items.add('MM_STRAY_FAIRY_WF');
+  if (cond.fairiesSH) items.add('MM_STRAY_FAIRY_SH');
+  if (cond.fairiesGB) items.add('MM_STRAY_FAIRY_GB');
+  if (cond.fairiesST) items.add('MM_STRAY_FAIRY_ST');
+  if (cond.fairyTown) items.add('MM_STRAY_FAIRY_TOWN');
+  if (cond.masksRegular) items = new Set([...items, ...ITEMS_MASKS_REGULAR]);
+  if (cond.masksTransform) items = new Set([...items, ...ITEMS_MASKS_TRANSFORM]);
+  if (cond.masksOot) items = new Set([...items, ...ITEMS_MASKS_OOT]);
 
-  return count >= cond.count;
+  return itemsCount(state, [...items]) >= cond.count;
 }
 
 export type Expr = (state: State) => boolean;
@@ -73,7 +49,7 @@ export const exprCond = (cond: Expr, then: Expr, otherwise: Expr): Expr => state
 export const exprAge = (age: Age): Expr => state => state.age === age;
 export const exprHas = (item: string, itemShared: string, count: number): Expr => state => state.ignoreItems || ((itemCount(state, item) + itemCount(state, itemShared)) >= count);
 export const exprEvent = (event: string): Expr => state => state.events.has(event);
-export const exprMasks = (count: number): Expr => state => state.ignoreItems || (itemsCount(state, MASKS) >= count);
+export const exprMasks = (count: number): Expr => state => state.ignoreItems || (itemsCount(state, ITEMS_MASKS_REGULAR) >= count);
 export const exprHealth = (count: number): Expr => state => state.ignoreItems || ((3 + itemCount(state, 'MM_HEART_CONTAINER') + itemCount(state, 'MM_HEART_PIECE') / 4) >= count);
 export const exprSpecial = (settings: Settings, special: string): Expr => state => resolveSpecialCond(settings, state, special);
 
