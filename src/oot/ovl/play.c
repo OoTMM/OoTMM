@@ -131,7 +131,7 @@ static void eventFixes(GameState_Play* play)
     }
 
     /* Set the rainbow bridge flag */
-    if (gSave.inventory.quest.medallionLight && gSave.inventory.quest.medallionForest && gSave.inventory.quest.medallionFire && gSave.inventory.quest.medallionWater && gSave.inventory.quest.medallionShadow && gSave.inventory.quest.medallionSpirit)
+    if (comboSpecialCond(SPECIAL_BRIDGE))
     {
         SetEventChk(EV_OOT_CHK_RAINBOW_BRIDGE);
     }

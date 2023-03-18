@@ -130,6 +130,16 @@ typedef struct PACKED
 }
 ComboDataHints;
 
+#define SPECIAL_BRIDGE  0
+#define SPECIAL_MOON    1
+
+typedef struct
+{
+    u16 flags;
+    u16 count;
+}
+SpecialCond;
+
 typedef struct PACKED ALIGNED(4)
 {
     u32             mq;
@@ -137,6 +147,7 @@ typedef struct PACKED ALIGNED(4)
     ComboDataHints  hints;
     u8              boss[12];
     u8              dungeons[18];
+    SpecialCond     special[2];
 }
 ComboData;
 
@@ -349,9 +360,6 @@ DmaEntry;
 
 extern DmaEntry kComboDmaData[];
 
-/* Misc */
-int comboCanAccessMoon(void);
-
 /* Hints */
 #define HINT_GOSSIP         0x00
 #define HINT_GOSSIP_GROTTO  0x01
@@ -420,6 +428,9 @@ extern int gNoTimeFlow;
 void comboCheckSong(const OcarinaSongButtons* songButtons, int songIndex);
 
 extern u8 gCustomOcarinaSong;
+
+/* Special */
+int comboSpecialCond(int special);
 
 #else
 # include <combo/asm.h>

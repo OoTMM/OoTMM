@@ -4,7 +4,7 @@ import { LogicResult } from '../logic';
 import { DATA_GI, DATA_NPC, DATA_SCENES, DATA_REGIONS, DATA_CONFIG, DATA_HINTS_POOL, DATA_HINTS, DATA_ENTRANCES } from '../data';
 import { Game, GAMES } from "../config";
 import { WorldCheck } from '../logic/world';
-import { DUNGEONS, Settings } from '../settings';
+import { DUNGEONS, Settings, SPECIAL_CONDS, SPECIAL_CONDS_KEYS } from '../settings';
 import { HintGossip, Hints } from '../logic/hints';
 import { isDungeonStrayFairy, isGanonBossKey, isMap, isCompass, isRegularBossKey, isSmallKeyRegular, isTownStrayFairy, isSmallKeyHideout, isItemUnlimitedStarting } from '../logic/items';
 import { gameId } from '../util';
@@ -450,6 +450,26 @@ export const randomizerHints = (logic: LogicResult): Buffer => {
 const randomizerBoss = (logic: LogicResult): Buffer => toU8Buffer(logic.entrances.boss);
 const randomizerDungeons = (logic: LogicResult): Buffer => toU8Buffer(logic.entrances.dungeons);
 
+function specialConds(settings: Settings) {
+  const buffers: Buffer[] = [];
+  const flagsKeys: keyof typeof SPECIAL_CONDS_KEYS = Object.keys(SPECIAL_CONDS_KEYS) as any;
+  for (const special in SPECIAL_CONDS) {
+    const cond = settings.specialConds[special as keyof typeof SPECIAL_CONDS];
+    let flags = 0;
+    for (let i = 0; i < flagsKeys.length; ++i) {
+      const key = flagsKeys[i];
+      if ((cond as any)[key]) {
+        flags |= 1 << i;
+      }
+    }
+    const buffer = Buffer.alloc(4);
+    buffer.writeUInt16BE(flags, 0);
+    buffer.writeUInt16BE(cond.count, 2);
+    buffers.push(buffer);
+  }
+  return Buffer.concat(buffers);
+}
+
 export const randomizerData = (logic: LogicResult): Buffer => {
   const buffers = [];
   buffers.push(randomizerMq(logic));
@@ -457,6 +477,7 @@ export const randomizerData = (logic: LogicResult): Buffer => {
   buffers.push(randomizerHints(logic));
   buffers.push(randomizerBoss(logic));
   buffers.push(randomizerDungeons(logic));
+  buffers.push(specialConds(logic.settings));
   return Buffer.concat(buffers);
 };
 
