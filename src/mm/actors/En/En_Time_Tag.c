@@ -47,7 +47,7 @@ PATCH_FUNC(0x80aca268, EnTimeTag_HandlerSoaring);
 
 void EnTimeTag_MoonCutscene(Actor* this, GameState_Play* play)
 {
-    if (comboCanAccessMoon())
+    if (comboSpecialCond(SPECIAL_MOON))
     {
         /* Skip to Moon */
         gSave.day = 3;
