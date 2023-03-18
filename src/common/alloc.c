@@ -3,7 +3,7 @@
 #if defined(GAME_OOT)
 static void* gHeap = (void*)0x80700000;
 #else
-static void* gHeap = (void*)0x80740000;
+static void* gHeap = (void*)0x80730000;
 #endif
 
 /* Dumb slab allocator */

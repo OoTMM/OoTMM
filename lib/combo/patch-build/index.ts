@@ -29,7 +29,7 @@ export function buildPatchfile(args: BuildPatchfileIn): Patchfile {
 
     /* Pack the payload */
     const payload = args.build[game].payload;
-    if (payload.length > 0x30000) {
+    if (payload.length > 0x40000) {
       throw new Error("Payload too large");
     }
     file.addPatch('global', CONFIG[game].payloadAddr, payload);
