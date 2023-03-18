@@ -244,7 +244,7 @@ export class LogicPassWorldTransform {
     let sharedHc = 0;
     let sharedHp = 0;
 
-    if (this.state.settings.progressiveShieldsOot) {
+    if (this.state.settings.progressiveShieldsOot === 'progressive') {
       this.extraItems['OOT_SHIELD'] = 2;
     }
 
