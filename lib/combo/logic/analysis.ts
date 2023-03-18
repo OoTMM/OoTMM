@@ -343,6 +343,21 @@ export class LogicPassAnalysis {
       delete this.dependencies['OOT_SMALL_KEY_SPIRIT'];
     }
 
+    const conds = Object.values(this.state.settings.specialConds);
+    if (conds.some(x => x.count && x.skullsGold))  delete this.dependencies['OOT_GS_TOKEN'];
+    if (conds.some(x => x.count && x.skullsSwamp)) delete this.dependencies['MM_GS_TOKEN_SWAMP'];
+    if (conds.some(x => x.count && x.skullsOcean)) delete this.dependencies['MM_GS_TOKEN_OCEAN'];
+    if (conds.some(x => x.count && x.fairiesWF)) delete this.dependencies['MM_STRAY_FAIRY_WF'];
+    if (conds.some(x => x.count && x.fairiesSH)) delete this.dependencies['MM_STRAY_FAIRY_SH'];
+    if (conds.some(x => x.count && x.fairiesGB)) delete this.dependencies['MM_STRAY_FAIRY_GB'];
+    if (conds.some(x => x.count && x.fairiesST)) delete this.dependencies['MM_STRAY_FAIRY_ST'];
+    if (conds.some(x => x.count && x.fairyTown)) delete this.dependencies['MM_STRAY_FAIRY_TOWN'];
+    if (conds.some(x => x.count && x.stones)) {
+      delete this.dependencies['OOT_STONE_EMERALD'];
+      delete this.dependencies['OOT_STONE_RUBY'];
+      delete this.dependencies['OOT_STONE_SAPPHIRE'];
+    }
+
     /* Shared items */
     this.dependencies['SHARED_MASK_TRUTH'] = [...this.dependencies['MM_MASK_TRUTH'], ...this.dependencies['OOT_MASK_TRUTH']];
     this.dependencies['SHARED_MASK_KEATON'] = [...this.dependencies['MM_MASK_KEATON']];
