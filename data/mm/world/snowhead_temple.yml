@@ -96,12 +96,12 @@
   dungeon: SH
   exits:
     "Snowhead Temple Main": "has(SMALL_KEY_SH, 3) || (has_explosives && has(SMALL_KEY_SH, 2))"
-    "Snowhead Temple Block Room Upper": "can_use_fire_arrows || can_hookshot_short || has(MASK_ZORA)"
+    "Snowhead Temple Block Room Upper": "can_use_fire_arrows || can_hookshot_short || can_goron_bomb_jump"
     "Snowhead Temple Icicles": "has_explosives"
   locations:
     "Snowhead Temple Compass": "true"
     "Snowhead Temple Compass Room Ledge": "can_use_fire_arrows"
-    "Snowhead Temple SF Compass Room Crate": "((can_use_fire_arrows || has(MASK_ZORA) || can_hookshot_short) && (has_explosives || has(MASK_GORON))) || (has(MASK_GREAT_FAIRY) && has(BOMB_BAG))"
+    "Snowhead Temple SF Compass Room Crate": "((can_use_fire_arrows || can_hookshot_short) && (has_explosives || has(MASK_GORON))) || (has(MASK_GREAT_FAIRY) && has(BOMB_BAG)) || can_goron_bomb_jump"
 "Snowhead Temple Icicles":
   dungeon: SH
   exits:

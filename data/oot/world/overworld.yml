@@ -546,7 +546,7 @@
   region: ZORA_RIVER
   exits:
     "Zora River Front": "true"
-    "Zora Domain": "can_play(SONG_ZELDA) || (is_child && trick(OOT_CHILD_DOMAIN)) || (is_adult && trick(OOT_ADULT_DOMAIN))"
+    "Zora Domain": "can_play(SONG_ZELDA) || (is_child && trick(OOT_CHILD_DOMAIN)) || (has_hover_boots && trick(OOT_ADULT_DOMAIN))"
     "Lost Woods": "can_dive_small"
   locations:
     "Zora River Bean Seller": "is_child"
