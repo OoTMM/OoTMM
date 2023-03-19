@@ -47,8 +47,8 @@ export const worldState = (monitor: Monitor, opts: Options) => {
   return pipeline(state)
     .apply(LogicPassConfig)
     .apply(LogicPassWorld)
-    .apply(LogicPassWorldTransform)
     .apply(LogicPassFixer)
+    .apply(LogicPassWorldTransform)
     .exec();
 };
 

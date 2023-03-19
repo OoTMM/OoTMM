@@ -19,7 +19,7 @@ export class LogicPassFixer {
 
     for (const loc in this.state.world.checks) {
       const check = this.state.world.checks[loc];
-      const { type, originalItem, game } = check;
+      const { type, item, game } = check;
 
       if (type === 'cow') {
         if (game === 'oot' && !this.state.settings.cowShuffleOot) {
@@ -36,15 +36,15 @@ export class LogicPassFixer {
         }
       }
 
-      if (originalItem === 'OOT_GERUDO_CARD' && !this.state.settings.shuffleGerudoCard) {
+      if (item === 'OOT_GERUDO_CARD' && !this.state.settings.shuffleGerudoCard) {
         this.fixedLocations.add(loc);
       }
 
-      if (originalItem === 'OOT_SWORD_MASTER' && !this.state.settings.shuffleMasterSword) {
+      if (item === 'OOT_SWORD_MASTER' && !this.state.settings.shuffleMasterSword) {
         this.fixedLocations.add(loc);
       }
 
-      if (originalItem === 'OOT_BOSS_KEY_GANON' && this.state.settings.ganonBossKey === 'vanilla') {
+      if (item === 'OOT_BOSS_KEY_GANON' && this.state.settings.ganonBossKey === 'vanilla') {
         this.fixedLocations.add(loc);
       }
     }
