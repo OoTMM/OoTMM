@@ -55,6 +55,7 @@
     "Termina Field": "true"
     "Clock Town South": "true"
     "Bomb Shop": "true"
+    "Trading Post": "true"
     "Curiosity Shop": "true"
     "Post Office": "true"
     "Swordsman School": "true"
@@ -113,6 +114,19 @@
     "Bomb Shop Item 2": "true"
     "Bomb Shop Bomb Bag": "true"
     "Bomb Shop Bomb Bag 2": "event(SAKON_BOMB_BAG)"
+"Trading Post":
+  region: CLOCK_TOWN_WEST
+  exits:
+    "Clock Town West": "true"
+  locations:
+    "Trading Post Item 1": "true"
+    "Trading Post Item 2": "true"
+    "Trading Post Item 3": "true"
+    "Trading Post Item 4": "true"
+    "Trading Post Item 5": "true"
+    "Trading Post Item 6": "true"
+    "Trading Post Item 7": "true"
+    "Trading Post Item 8": "true"
 "Curiosity Shop":
   region: CLOCK_TOWN_WEST
   exits:

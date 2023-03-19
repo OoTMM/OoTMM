@@ -40,6 +40,14 @@ Stock Pot Inn Grandma HP 2,                       npc,            NONE,         
 Stock Pot Inn ??? HP,                             npc,            NONE,                   STOCK_POT_INN,              TOILET_HEART_PIECE,     HEART_PIECE
 Astral Observatory Passage Chest,                 chest,          NONE,                   OBSERVATORY,                0x00,                   RUPEE_SILVER
 Astral Observatory Moon Tear,                     npc,            NONE,                   OBSERVATORY,                MOON_TEAR,              MOON_TEAR
+Trading Post Item 1,                              shop,           NONE,                   TRADING_POST,               0x10,                   POTION_RED
+Trading Post Item 2,                              shop,           NONE,                   TRADING_POST,               0x11,                   POTION_GREEN
+Trading Post Item 3,                              shop,           NONE,                   TRADING_POST,               0x12,                   SHIELD_HERO
+Trading Post Item 4,                              shop,           NONE,                   TRADING_POST,               0x13,                   FAIRY
+Trading Post Item 5,                              shop,           NONE,                   TRADING_POST,               0x14,                   STICK
+Trading Post Item 6,                              shop,           NONE,                   TRADING_POST,               0x15,                   ARROWS_10
+Trading Post Item 7,                              shop,           NONE,                   TRADING_POST,               0x16,                   NUTS_10
+Trading Post Item 8,                              shop,           NONE,                   TRADING_POST,               0x17,                   ARROWS_30
 Bomb Shop Item 1,                                 shop,           NONE,                   BOMB_SHOP,                  0x00,                   BOMBS_10
 Bomb Shop Item 2,                                 shop,           NONE,                   BOMB_SHOP,                  0x01,                   BOMBCHU_10
 Bomb Shop Bomb Bag,                               shop,           NONE,                   BOMB_SHOP,                  0x02,                   BOMB_BAG
