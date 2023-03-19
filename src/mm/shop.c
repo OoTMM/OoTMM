@@ -33,6 +33,14 @@ u8 comboShopItemSlot(GameState_Play* play, Actor_EnGirlA* girlA)
         case SHOP_BOMB_BAG2_ALT: return 0x03;
         }
         break;
+    case SCE_MM_CURIOSITY_SHOP:
+        switch (girlA->base.variable)
+        {
+        case SHOP_MASK_ALL_NIGHT: return 0x04;
+        case SHOP_BOMB_BAG2: return 0x03;
+        case SHOP_BOMB_BAG2_ALT: return 0x03;
+        }
+        break;
     }
 
     UNREACHABLE();

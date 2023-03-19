@@ -44,7 +44,7 @@ Bomb Shop Item 1,                                 shop,           NONE,         
 Bomb Shop Item 2,                                 shop,           NONE,                   BOMB_SHOP,                  0x01,                   BOMBCHU_10
 Bomb Shop Bomb Bag,                               shop,           NONE,                   BOMB_SHOP,                  0x02,                   BOMB_BAG
 Bomb Shop Bomb Bag 2,                             shop,           NONE,                   BOMB_SHOP,                  0x03,                   BOMB_BAG
-Curiosity Shop All-Night Mask,                    npc,            NONE,                   CURIOSITY_SHOP,             MASK_ALL_NIGHT,         MASK_ALL_NIGHT
+Curiosity Shop All-Night Mask,                    shop,           NONE,                   CURIOSITY_SHOP,             0x04,                   MASK_ALL_NIGHT
 Curiosity Shop Back Room Pendant of Memories,     npc,            NONE,                   CURIOSITY_SHOP,             PENDANT_OF_MEMORIES,    PENDANT_OF_MEMORIES
 Curiosity Shop Back Room Owner Reward 1,          npc,            NONE,                   CURIOSITY_SHOP,             MASK_KEATON,            MASK_KEATON
 Curiosity Shop Back Room Owner Reward 2,          npc,            NONE,                   CURIOSITY_SHOP,             LETTER_TO_MAMA,         LETTER_TO_MAMA
