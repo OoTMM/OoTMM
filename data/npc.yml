@@ -88,8 +88,8 @@ OOT_POCKET_EGG:                 0x55
 MM_KOTAKE_RED_POTION:         0x00
 MM_KOUME_PICTOGRAPH_BOX:      0x01
 MM_SONG_AWAKENING:            0x02
-MM_SHOP_BOMB_BAG:             0x03
-MM_SHOP_BOMB_BAG2:            0x04
+#MM_SHOP_BOMB_BAG:             0x03
+#MM_SHOP_BOMB_BAG2:            0x04
 MM_MASK_GORON:                0x05
 MM_GORON_ELDER:               0x06
 MM_GORON_BABY:                0x07

@@ -6,6 +6,9 @@
 # define SOLD_OUT GI_MM_SOLD_OUT
 #endif
 
+int shopReadFlag(int);
+void shopWriteFlag(int);
+
 int comboShopPrecond(GameState_Play* play, Actor_EnGirlA* girlA)
 {
     if (comboIsItemUnavailable(girlA->gi))
@@ -19,50 +22,6 @@ int comboShopPrecond(GameState_Play* play, Actor_EnGirlA* girlA)
 
     return SC_OK;
 }
-
-#if defined(GAME_OOT)
-void shopWriteFlag(int flag)
-{
-    u32* ptr;
-
-    ptr = &gOotExtraShopsLo;
-    if (flag >= 32)
-    {
-        ptr = &gOotExtraShopsHi;
-        flag -= 32;
-    }
-    (*ptr) |= (1 << flag);
-}
-
-int shopReadFlag(int flag)
-{
-    u32* ptr;
-
-    ptr = &gOotExtraShopsLo;
-    if (flag >= 32)
-    {
-        ptr = &gOotExtraShopsHi;
-        flag -= 32;
-    }
-    return ((*ptr) & (1 << flag)) != 0;
-}
-#endif
-
-#if defined(GAME_MM)
-u8 comboShopItemSlot(GameState_Play* play, Actor_EnGirlA* girlA)
-{
-    return 0;
-}
-
-void shopWriteFlag(int flag)
-{
-}
-
-int shopReadFlag(int flag)
-{
-    return 0;
-}
-#endif
 
 void comboShopAfterBuy(GameState_Play* play, Actor_EnGirlA* girlA)
 {

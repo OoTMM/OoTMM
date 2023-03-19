@@ -34,6 +34,9 @@ export class LogicPassFixer {
         if (game === 'oot' && this.state.settings.shopShuffleOot === 'none') {
           this.fixedLocations.add(loc);
         }
+        else if (game === 'mm' && this.state.settings.shopShuffleMm === 'none') {
+          this.fixedLocations.add(loc);
+        }
       }
 
       if (item === 'OOT_GERUDO_CARD' && !this.state.settings.shuffleGerudoCard) {

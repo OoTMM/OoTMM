@@ -143,6 +143,16 @@ export const SETTINGS = [{
   ],
   default: 'none'
 }, {
+  key: 'shopShuffleMm',
+  name: 'Shop Shuffle (MM)',
+  category: 'main',
+  type: 'enum',
+  values: [
+    { value: 'none', name: 'None' },
+    { value: 'full', name: 'Full' },
+  ],
+  default: 'none'
+}, {
   key: 'shuffleMasterSword',
   name: 'Master Sword Shuffle',
   category: 'main',

@@ -40,8 +40,10 @@ Stock Pot Inn Grandma HP 2,                       npc,            NONE,         
 Stock Pot Inn ??? HP,                             npc,            NONE,                   STOCK_POT_INN,              TOILET_HEART_PIECE,     HEART_PIECE
 Astral Observatory Passage Chest,                 chest,          NONE,                   OBSERVATORY,                0x00,                   RUPEE_SILVER
 Astral Observatory Moon Tear,                     npc,            NONE,                   OBSERVATORY,                MOON_TEAR,              MOON_TEAR
-Bomb Shop Bomb Bag,                               npc,            NONE,                   BOMB_SHOP,                  SHOP_BOMB_BAG,          BOMB_BAG
-Bomb Shop Bomb Bag 2,                             npc,            NONE,                   BOMB_SHOP,                  SHOP_BOMB_BAG2,         BOMB_BAG
+Bomb Shop Item 1,                                 shop,           NONE,                   BOMB_SHOP,                  0x00,                   BOMBS_10
+Bomb Shop Item 2,                                 shop,           NONE,                   BOMB_SHOP,                  0x01,                   BOMBCHU_10
+Bomb Shop Bomb Bag,                               shop,           NONE,                   BOMB_SHOP,                  0x02,                   BOMB_BAG
+Bomb Shop Bomb Bag 2,                             shop,           NONE,                   BOMB_SHOP,                  0x03,                   BOMB_BAG
 Curiosity Shop All-Night Mask,                    npc,            NONE,                   CURIOSITY_SHOP,             MASK_ALL_NIGHT,         MASK_ALL_NIGHT
 Curiosity Shop Back Room Pendant of Memories,     npc,            NONE,                   CURIOSITY_SHOP,             PENDANT_OF_MEMORIES,    PENDANT_OF_MEMORIES
 Curiosity Shop Back Room Owner Reward 1,          npc,            NONE,                   CURIOSITY_SHOP,             MASK_KEATON,            MASK_KEATON

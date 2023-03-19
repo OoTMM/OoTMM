@@ -109,6 +109,8 @@
   exits:
     "Clock Town West": "true"
   locations:
+    "Bomb Shop Item 1": "true"
+    "Bomb Shop Item 2": "true"
     "Bomb Shop Bomb Bag": "true"
     "Bomb Shop Bomb Bag 2": "event(SAKON_BOMB_BAG)"
 "Curiosity Shop":
@@ -116,7 +118,7 @@
   exits:
     "Clock Town West": "true"
   locations:
-    "Bomb Shop Bomb Bag 2": "has(WALLET, 1)"
+    #"Bomb Shop Bomb Bag 2": "has(WALLET, 1)"
     "Curiosity Shop All-Night Mask": "event(SAKON_BOMB_BAG) && has(WALLET, 2)"
 "Curiosity Shop Back Room":
   region: LAUNDRY_POOL

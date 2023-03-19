@@ -308,9 +308,7 @@ MmExtraFlags;
 
 typedef struct
 {
-    u32 shopBombBag:1;
-    u32 shopBombBag2:1;
-    u32 maskAllNight:1;
+    u32 unused:3;
     u32 maskKafei:1;
     u32 honeyDarling:1;
     u32 roomKey:1;
@@ -336,7 +334,7 @@ typedef struct
     u32 moonTear:1;
     u32 songHealing:1;
     u32 townStrayFairy:1;
-    u32 unused:4;
+    u32 unused2:4;
 }
 MmExtraFlags2;
 

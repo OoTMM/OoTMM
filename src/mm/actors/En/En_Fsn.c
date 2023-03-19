@@ -37,9 +37,7 @@ int EnFsn_HasGivenShopItem(Actor_EnFsn* this, GameState_Play* play)
 {
     if (Actor_HasParent(&this->base))
     {
-        if (this->mode == 1)
-            comboAfterBuy(this->items[this->itemIndex], play);
-        else if (sIsSecondReward)
+        if (sIsSecondReward)
         {
             sIsSecondReward = 0;
             gMmExtraFlags2.letterMama = 1;
