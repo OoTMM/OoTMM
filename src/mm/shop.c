@@ -43,5 +43,6 @@ u8 comboShopItemSlot(GameState_Play* play, Actor_EnGirlA* girlA)
         break;
     }
 
-    UNREACHABLE();
+    /* UNREACHABLE(); */
+    return 0;
 }
