@@ -26,6 +26,7 @@ int comboShopPrecond(GameState_Play* play, Actor_EnGirlA* girlA)
 void comboShopAfterBuy(GameState_Play* play, Actor_EnGirlA* girlA)
 {
     shopWriteFlag(girlA->shopId);
+    comboShopUpdateItem(play, girlA);
 }
 
 static void quickBuyItem(GameState_Play* play, Actor_EnGirlA* girlA)
