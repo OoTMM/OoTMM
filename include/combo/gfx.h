@@ -33,8 +33,11 @@ DisplayListBuffer;
 #define POLY_XLU_DISP   (__gfx->polyXlu.append)
 #define OVERLAY_DISP    (__gfx->overlay.append)
 
+#define GRAPH_ALLOC(gfxCtx, size) ((void*)((gfxCtx)->polyOpa.end = (Gfx*)((u8*)(gfxCtx)->polyOpa.end - ALIGN16(size))))
+
 void    InitListPolyOpa(GfxContext* gfx);
 void    InitListPolyXlu(GfxContext* gfx);
+void    Gfx_SetupDL_42Opa(GfxContext* gfx);
 void*   GetMatrixMV(GfxContext* gfx);
 u32     GetSegment(GfxContext* gfx, int, int, int, int, int, int, int, int, int, int);
 

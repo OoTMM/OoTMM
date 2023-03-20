@@ -183,7 +183,7 @@ PATCH_CALL(0x8082adf0, KaleidoScope_UpdateDungeonMenu);
 static void KaleidoScope_DrawDungeonUnk1(void* unk)
 {
     if (!isKeysMenu)
-        DrawDungeonUnk1(unk);
+        Gfx_SetupDL_42Opa(unk);
 }
 
 PATCH_CALL(0x808229d4, KaleidoScope_DrawDungeonUnk1);

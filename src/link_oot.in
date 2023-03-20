@@ -10,6 +10,7 @@ osInvalICache = 0x800041a0;
 osWritebackDCache = 0x80003440;
 osWritebackDCacheAll = 0x800d5aa0;
 DMARomToRam = 0x8000085c;
+Yaz0_Decompress = 0x80001254;
 InitDom2Addr2 = 0x80091310;
 
 __osPiTable = 0x800fc0b0;
@@ -58,6 +59,7 @@ Shader_Spell            = 0x80058698;
 
 InitListPolyOpa         = 0x8007e298;
 InitListPolyXlu         = 0x8007e2c0;
+Gfx_SetupDL_42Opa       = 0x8007e868;
 GetMatrixMV             = 0x800ab900;
 
 SpawnActor = 0x80025110;
@@ -110,6 +112,8 @@ OcarinaAction2 = 0x800dd430;
 
 gModelView = 0x80121204;
 
+MatrixStackDup = 0x800AA6EC;
+MatrixStackPop = 0x800AA724;
 ModelViewUnkTransform = 0x800abe54;
 ModelViewRotateX = 0x800aa9e0;
 ModelViewRotateY = 0x800aab94;
@@ -124,7 +128,11 @@ GetActiveItem = 0x80022b04;
 AddItem = 0x8006fdcc;
 Player_AddItemWithIcon = 0x8083c590;
 GetItemCollectBehavior = 0x80071420;
+Interface_SetDoAction = 0x80071E6C;
+Interface_LoadActionLabelB = 0x80071FF8;
 
+Math_CosS = 0x80063684;
+Math_SinS = 0x800636C4;
 RandIntRange = 0x80063bf0;
 gSegments = 0x80120c38;
 osSetIntMask = 0x80003cc0;
@@ -162,6 +170,10 @@ gOcarinaSongBuffer = 0x80121f38;
 gOcarinaSongBufferCursor = 0x80121f40;
 
 HandleMessages = 0x800dda6c;
+
+func_800C7200 = 0x800C7200;
+Letterbox_SetSizeTarget = 0x80099620;
+Letterbox_GetSizeTarget = 0x80099630;
 
 Play_LoadKaleidoOverlay = 0x80099c60;
 LoadMapMark = 0x80066df0;

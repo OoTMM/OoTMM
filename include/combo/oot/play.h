@@ -4,6 +4,7 @@
 #include <combo/util.h>
 #include <combo/game_state.h>
 #include <combo/common/actor.h>
+#include <combo/oot/regs.h>
 
 #define AGE_ADULT 0
 #define AGE_CHILD 1
@@ -26,7 +27,10 @@ typedef struct PACKED
 {
     char view[0x128];
     char unk_0128[0xdc88];
-    char textBuffer[0x556]; /* Probably smaller */
+    char textBuffer[0x550]; /* Probably smaller */
+    /* 0xE300 */ s32 msgLength;
+    /* 0xE304 */ u8 msgMode;
+    /* 0xE305 */ u8 unk_e305;
     char unk_e306[0xdf];
     u8   choice;
     char unk_e3e6[0x06];
@@ -100,45 +104,92 @@ ASSERT_OFFSET(InterfaceContext, unk_26e,      0x26e);
 
 typedef struct PACKED
 {
-    char    unk_0[0x128];
-    void*   icon_item;
-    void*   icon_item_24;
-    void*   icon_item_s;
-    void*   icon_item_lang;
-    void*   name_texture;
-    void*   unk_13c;
-    char    unk_140[0x94];
-    u16     state;
-    char    unk_1d6[0xe];
-    u16     changing;
-    u16     screen_prev_idx;
-    u16     screen_idx;
-    char    unk_1ea[0x2e];
-    s16     item_cursor;
-    char    unk_21a[2];
-    s16     quest_cursor;
-    s16     equip_cursor;
-    s16     map_cursor;
-    s16     item_x;
-    char    unk_05_[0x0004];
-    s16     equipment_x;
-    char    unk_06_[0x0002];
-    s16     item_y;
-    char    unk_07_[0x0004];
-    s16     equipment_y;
-    char    unk_08_[0x0004];
-    s16     cursor_pos;
-    char    unk_09_[0x0002];
-    s16     item_id;
-    s16     item_item;
-    s16     map_item;
-    s16     quest_item;
-    s16     equip_item;
-    char    unk_0A_[0x0004];
-    s16     quest_hilite;
-    char    unk_0B_[0x0018];
-    s16     quest_song;
-    char    unk_0C_[0x0016];
+    /* 0x0000 */ char view[0x128]; // View view;
+    /* 0x0128 */ u8* iconItemSegment;
+    /* 0x012C */ u8* iconItem24Segment;
+    /* 0x0130 */ u8* iconItemAltSegment;
+    /* 0x0134 */ u8* iconItemLangSegment;
+    /* 0x0138 */ u8* nameSegment;
+    /* 0x013C */ u8* playerSegment;
+    /* 0x0140 */ char unk_140[0x04];
+    /* 0x0144 */ Vtx* itemPageVtx;
+    /* 0x0148 */ Vtx* equipPageVtx;
+    /* 0x014C */ Vtx* mapPageVtx;
+    /* 0x0150 */ Vtx* questPageVtx;
+    /* 0x0154 */ Vtx* infoPanelVtx;
+    /* 0x0158 */ Vtx* itemVtx;
+    /* 0x015C */ Vtx* equipVtx;
+    /* 0x0160 */ char unk_160[0x04];
+    /* 0x0164 */ Vtx* questVtx;
+    /* 0x0168 */ Vtx* cursorVtx;
+    /* 0x016C */ Vtx* saveVtx;
+    /* 0x0170 */ char unk_170[0x24];
+    /* 0x0194 */ struct OcarinaStaff* ocarinaStaff;
+    /* 0x0198 */ char unk_198[0x20];
+    /* 0x01B8 */ OSMesgQueue loadQueue;
+    /* 0x01D0 */ OSMesg loadMsg;
+    /* 0x01D4 */ u16 state;
+    /* 0x01D6 */ u16 debugState;
+    /* 0x01D8 */ Vector3f eye;
+    /* 0x01E4 */ u16 changing;
+    /* 0x01E6 */ u16 screen_prev_idx;
+    /* 0x01E8 */ u16 screen_idx;
+    /* 0x01EA */ u16 switchPageTimer;
+    /* 0x01EC */ u16 savePromptState;
+    /* 0x01EE */ char pad_1ee[0x2];
+    /* 0x01F0 */ f32 unk_1F0;
+    /* 0x01F4 */ f32 itemPageRoll; // rotation (-z) of the item page into the screen
+    /* 0x01F8 */ f32 mapPageRoll; // rotation (+x) of the map page into the screen
+    /* 0x01FC */ f32 questPageRoll; // rotation (+z) of the quest page into the screen
+    /* 0x0200 */ f32 maskPageRoll; // rotation (-z) of the mask page into the screen
+    /* 0x0204 */ f32 roll;
+    /* 0x0208 */ u16 alpha;
+    /* 0x020A */ s16 offsetY;
+    /* 0x020C */ char unk_228[0x8];
+    /* 0x0214 */ s16 stickAdjX;
+    /* 0x0216 */ s16 stickAdjY;
+    /* 0x0218 */ s16 item_cursor;
+    /* 0x021A */ s16 map_cursor;
+    /* 0x021C */ s16 quest_cursor;
+    /* 0x021E */ s16 equip_cursor;
+    /* 0x0220 */ s16 world_map_cursor;
+    /* 0x0222 */ s16 item_x;
+    /* 0x0224 */ s16 map_x;
+    /* 0x0226 */ s16 quest_x;
+    /* 0x0228 */ s16 equipment_x;
+    /* 0x022A */ s16 world_map_x;
+    /* 0x022C */ s16 item_y;
+    /* 0x022E */ s16 map_y;
+    /* 0x0230 */ s16 quest_y;
+    /* 0x0232 */ s16 equipment_y;
+    /* 0x0234 */ s16 world_map_y;
+    /* 0x0236 */ s16 dungeonMapSlot;
+    /* 0x0238 */ s16 cursor_pos;
+    /* 0x023A */ char unk_09_[0x0002];
+    /* 0x023C */ s16 item_id;
+    /* 0x023E */ s16 item_item;
+    /* 0x0240 */ s16 map_item;
+    /* 0x0242 */ s16 quest_item;
+    /* 0x0244 */ s16 equip_item;
+    /* 0x0246 */ s16 item_hilite;
+    /* 0x0248 */ s16 map_hilite;
+    /* 0x024A */ s16 quest_hilite;
+    /* 0x024C */ s16 equipment_hilite;
+    /* 0x024E */ u16 equipTargetItem; // "sl_item_no"
+    /* 0x0250 */ u16 equipTargetSlot; // "sl_number"
+    /* 0x0252 */ u16 equipTargetCBtn;
+    /* 0x0254 */ s16 equipAnimX;
+    /* 0x0256 */ s16 equipAnimY;
+    /* 0x0258 */ s16 equipAnimAlpha;
+    /* 0x025A */ s16 infoPanelOffsetY;
+    /* 0x025C */ u16 nameDisplayTimer;
+    /* 0x025E */ u16 nameColorSet; // 0 = white; 1 = grey
+    /* 0x0260 */ s16 cursorColorSet; // 0 = white; 4 = yellow; 8 = green
+    /* 0x0262 */ s16 promptChoice; // save/continue choice: 0 = yes; 4 = no
+    /* 0x0264 */ s16 quest_song;
+    /* 0x0266 */ u8 worldMapPoints[20]; // 0 = hidden; 1 = displayed; 2 = highlighted
+    /* 0x027A */ u8 tradeQuestLocation;
+    /* 0x027B */ char    pad_27B;
     char    s27C[0x0038];
 }
 PauseContext;
@@ -192,6 +243,28 @@ RoomContext;
 
 _Static_assert(sizeof(RoomContext) == 0x74, "OoT Room size is wrong");
 
+#define OBJECT_EXCHANGE_BANK_MAX 19
+
+typedef struct {
+    /* 0x00 */ s16         id;
+    /* 0x04 */ void*       segment;
+    /* 0x08 */ char        dmaRequest[0x20]; // DmaRequest  dmaRequest;
+    /* 0x28 */ OSMesgQueue loadQueue;
+    /* 0x40 */ OSMesg      loadMsg;
+} ObjectStatus; // size = 0x44
+
+typedef struct {
+    /* 0x0000 */ void*  spaceStart;
+    /* 0x0004 */ void*  spaceEnd; // original name: "endSegment"
+    /* 0x0008 */ u8     num; // number of objects in bank
+    /* 0x0009 */ u8     unk_09;
+    /* 0x000A */ u8     mainKeepIndex; // "gameplay_keep" index in bank
+    /* 0x000B */ u8     subKeepIndex; // "gameplay_field_keep" or "gameplay_dangeon_keep" index in bank
+    /* 0x000C */ ObjectStatus status[OBJECT_EXCHANGE_BANK_MAX];
+} ObjectContext; // size = 0x518
+
+_Static_assert(sizeof(ObjectContext) == 0x518, "ObjectContext size is wrong");
+
 #define TRANS_TYPE_NONE     0x00
 #define TRANS_TYPE_NORMAL   0x14
 
@@ -214,8 +287,7 @@ typedef struct GameState_Play
     InterfaceContext    interfaceCtx;
     PauseContext        pauseCtx;
     char                unk_10a14[0xd90];
-    char                objTable[4]; /* Real size unknown */
-    char                unk_117a8[0x514];
+    /* 0x117A4 */ ObjectContext objectCtx;
     RoomContext         roomCtx;
     TransitionContext   transition;
     char                unk_11e60[0x6b8];
@@ -230,5 +302,14 @@ ASSERT_OFFSET(GameState_Play, transition.entrance,  0x11e1a);
 
 _Static_assert(sizeof(TransitionContext) == 0x130, "OoT TransitionContext size is wrong");
 _Static_assert(sizeof(GameState_Play) == 0x12518, "OoT GameState_Play size is wrong");
+
+typedef struct {
+    /* 0x00 */ s32  regPage; // 0: no page selected (reg editor is not active); 1: first page; `REG_PAGES`: last page
+    /* 0x04 */ s32  regGroup; // Indexed from 0 to `REG_GROUPS`-1. Each group has its own character to identify it.
+    /* 0x08 */ s32  regCur; // Selected reg, indexed from 0 as the page start
+    /* 0x0C */ s32  dPadInputPrev;
+    /* 0x10 */ s32  inputRepeatTimer;
+    /* 0x14 */ s16  data[REG_GROUPS * REGS_PER_GROUP]; // Accessed through *REG macros, see regs.h
+} RegEditor; // size = 0x15D4
 
 #endif

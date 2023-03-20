@@ -76,6 +76,10 @@ Actor*  SpawnActorEx(void* const_1, GameState_Play* play, s16 actorId, float x, 
 
 void DMARomToRam(u32 romAddr, void* dramAddr, u32 size);
 
+#if defined(GAME_OOT)
+void Yaz0_Decompress(u32 romStart, void* dst, u32 size);
+#endif
+
 void ConvertMatrix(const float* in, u16* out);
 void MatrixRotation(u16 angle, int unk_1);
 
@@ -120,6 +124,9 @@ void ModelViewRotateZ(float angle, int mode);
 void ModelViewTranslate(float tx, float ty, float tz, int mode);
 void ModelViewScale(float sx, float sy, float sz, int mode);
 
+f32 Math_CosS(s16 angle);
+f32 Math_SinS(s16 angle);
+
 void MatrixStackDup(void);
 void MatrixStackPop(void);
 
@@ -130,6 +137,8 @@ int GetActiveItem(GameState_Play* play);
 u8 AddItem(GameState_Play* play, u8 itemId);
 u8 AddItemWithIcon(GameState_Play* play, Actor_Player* link, const GetItem* giEntry);
 u8 GetItemCollectBehavior(s16 itemId);
+void Interface_SetDoAction(GameState_Play* play, u16 action);
+void Interface_LoadActionLabelB(GameState_Play* play, u16 action);
 
 #if defined(GAME_MM)
 void PrepareSave(SramContext* sram);
@@ -186,7 +195,6 @@ void Enemy_StartFinishingBlow(GameState_Play* play, Actor* this);
 void DeathWarp(GameState_Play* play);
 
 #if defined(GAME_MM)
-void DrawDungeonUnk1(void* unk);
 void DrawDungeonUnk2(void* unk);
 #endif
 
@@ -234,6 +242,12 @@ extern u8 gOcarinaSongBuffer[];
 extern u8 gOcarinaSongBufferCursor;
 
 void HandleMessages(GameState_Play* play, void* unk);
+
+#if defined(GAME_OOT)
+void func_800C7200(u8 arg0);
+void Letterbox_SetSizeTarget(s32 target);
+u32 Letterbox_GetSizeTarget(void);
+#endif
 
 void Play_LoadKaleidoOverlay(void*);
 void LoadMapMark(void*);

@@ -49,6 +49,7 @@ Shader_MoonTear             = 0x800ef65c;
 
 InitListPolyOpa = 0x8012c28c;
 InitListPolyXlu = 0x8012c2dc;
+Gfx_SetupDL_42Opa = 0x8012c8ac;
 GetMatrixMV     = 0x80181a40;
 GetSegment      = 0x8012cbd0;
 
@@ -142,7 +143,6 @@ PlaySoundSpecial = 0x801a3098;
 
 Actor_RunByteCode = 0x8010bf58;
 
-DrawDungeonUnk1 = 0x8012c8ac;
 DrawDungeonUnk2 = 0x801091f0;
 
 gGameData = 0x801f3f60;

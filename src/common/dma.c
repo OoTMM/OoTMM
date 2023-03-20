@@ -78,3 +78,21 @@ void comboDma_NoCacheInval(void* dramAddr, u32 cartAddr, u32 size)
         cartAddr += tmp;
     }
 }
+
+u32 comboLoadFile(void* dest, s32 fileIndex)
+{
+    u32 src = kComboDmaData[fileIndex].vstart;
+    u32 size = kComboDmaData[fileIndex].vend - src;
+    LoadFile(dest, src, size);
+    return size;
+}
+
+u32 comboLoadForeignFile(void* dest, s32 foreignFileIndex)
+{
+#if defined(GAME_OOT)
+    u32 fileIndexOffset = 0x5E6;
+#else
+    u32 fileIndexOffset = 0x610;
+#endif
+    return comboLoadFile(dest, fileIndexOffset + foreignFileIndex);
+}

@@ -182,7 +182,22 @@ typedef struct
     u8      grottoChestFlag;
     char    unk_1398[0x34];
     s16     rupeesDelta;
-    char    unk_13ce[0x28];
+    /* 0x13CE */ s16 timerState; // See `TimerState`
+    /* 0x13D0 */ s16 timerSeconds;
+    /* 0x13D2 */ s16 subTimerState; // See `SubTimerState`
+    /* 0x13D4 */ s16 subTimerSeconds;
+    /* 0x13D6 */ s16 timerX[2]; // TIMER_ID_MAX
+    /* 0x13DA */ s16 timerY[2]; // TIMER_ID_MAX
+    /* 0x13DE */ char unk_13DE[0x0002];
+    /* 0x13E0 */ u8 seqId;
+    /* 0x13E1 */ u8 natureAmbienceId;
+    /* 0x13E2 */ u8 buttonStatus[5];
+    /* 0x13E7 */ u8 forceRisingButtonAlphas; // if btn alphas are updated through Interface_DimButtonAlphas, instead update them through Interface_RaiseButtonAlphas
+    /* 0x13E8 */ u16 nextHudVisibilityMode; // triggers the hud to change visibility mode to the requested value. Reset to HUD_VISIBILITY_NO_CHANGE when target is reached
+    /* 0x13EA */ u16 hudVisibilityMode; // current hud visibility mode
+    /* 0x13EC */ u16 hudVisibilityModeTimer; // number of frames in the transition to a new hud visibility mode. Used to step alpha
+    /* 0x13EE */ u16 prevHudVisibilityMode; // used to store and recover hud visibility mode for pause menu and text boxes
+    char    unk_13f0[0x06];
     s16     magicTarget;
     char    unk_13f8[0x0a];
     u16     mapIndex;
