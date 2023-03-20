@@ -239,6 +239,9 @@ static int isItemConsumableMm(s16 gi)
     case GI_MM_FISH:
     case GI_MM_BUGS:
     case GI_MM_FAIRY:
+    case GI_MM_POTION_RED:
+    case GI_MM_POTION_GREEN:
+    case GI_MM_POTION_BLUE:
         return 1;
     default:
         return 0;
