@@ -1,7 +1,7 @@
 "Fire Temple":
   dungeon: Fire
   exits:
-    "Death Mountain Crater Warp": "true"
+    "Fire Temple Entry": "true"
     "Fire Temple Lava Room": "has_small_keys_fire(1)"
     "Fire Temple Boss Key Loop": "cond(setting(smallKeyShuffle, anywhere), has(SMALL_KEY_FIRE, 8), true) && can_hammer"
     "Fire Temple Pre-Boss": "true"

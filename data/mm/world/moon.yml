@@ -71,7 +71,7 @@
   region: MOON
   exits:
     "Moon Trial Link Entrance": "can_fight || can_use_deku_bubble || has(BOW)"
-    "Moon Trial Link Rest 2": "can_hookshot && (can_fight || has(BOW))"
+    "Moon Trial Link Rest 2": "can_hookshot_short && (can_fight || has(BOW))"
 #  gossips:
 #    "Moon Trial Link Gossip 1": "true"
 "Moon Trial Link Rest 2":

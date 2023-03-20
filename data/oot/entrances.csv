@@ -15,8 +15,8 @@ Jabu-Jabu,                      Zora Fountain,                    0x028
 Zora Fountain,                  Jabu-Jabu,                        0x221
 Forest Temple,                  Sacred Meadow,                    0x169
 Sacred Meadow,                  Forest Temple,                    0x215
-Fire Temple,                    Death Mountain Crater Warp,       0x165
-Death Mountain Crater Warp,     Fire Temple,                      0x24a
+Fire Temple,                    Fire Temple Entry,                0x165
+Fire Temple Entry,              Fire Temple,                      0x24a
 Water Temple,                   Lake Hylia,                       0x010
 Lake Hylia,                     Water Temple,                     0x21d
 Shadow Temple,                  Graveyard Upper,                  0x037

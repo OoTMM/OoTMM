@@ -546,7 +546,7 @@
   region: ZORA_RIVER
   exits:
     "Zora River Front": "true"
-    "Zora Domain": "can_play(SONG_ZELDA)"
+    "Zora Domain": "can_play(SONG_ZELDA) || (is_child && trick(OOT_CHILD_DOMAIN)) || (has_hover_boots && trick(OOT_ADULT_DOMAIN))"
     "Lost Woods": "can_dive_small"
   locations:
     "Zora River Bean Seller": "is_child"
@@ -702,7 +702,7 @@
 "Death Mountain Crater Warp":
   region: DEATH_MOUNTAIN_CRATER
   exits:
-    "Fire Temple": "is_adult && has_tunic_goron"
+    "Fire Temple Entry": "is_adult && has_tunic_goron"
     "Death Mountain Crater Bottom": "can_hookshot || has_hover_boots || can_ride_bean(BEAN_DEATH_MOUNTAIN_CRATER)"
   events:
     BEAN_DEATH_MOUNTAIN_CRATER: "can_use_beans"
@@ -710,6 +710,11 @@
     "Death Mountain Crater Volcano HP": "can_ride_bean(BEAN_DEATH_MOUNTAIN_CRATER) || (trick(OOT_VOLCANO_HOVERS) && has_hover_boots)"
     "Death Mountain Crater Sheik Song": "is_adult"
     "Death Mountain Crater GS Soil": "gs_soil && can_damage_skull"
+"Fire Temple Entry":
+  region: DEATH_MOUNTAIN_CRATER
+  exits:
+    "Fire Temple": "true"
+    "Death Mountain Crater Warp": "has_tunic_goron_strict"
 "Gerudo Valley":
   region: GERUDO_VALLEY
   exits:
@@ -758,11 +763,11 @@
   region: HAUNTED_WASTELAND
   exits:
     "Fortress Near Wasteland": "true"
-    "Haunted Wasteland Structure": "can_longshot || has_hover_boots"
+    "Haunted Wasteland Structure": "can_longshot || has_hover_boots || trick(OOT_SAND_RIVER_NOTHING)"
 "Haunted Wasteland Structure":
   region: HAUNTED_WASTELAND
   exits:
-    "Haunted Wasteland Start": "can_longshot || has_hover_boots"
+    "Haunted Wasteland Start": "can_longshot || has_hover_boots || trick(OOT_SAND_RIVER_NOTHING)"
     "Haunted Wasteland End": "has_lens_strict || trick(OOT_BLIND_WASTELAND)"
   locations:
     "Haunted Wasteland Chest": "has_fire"

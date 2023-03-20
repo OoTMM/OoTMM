@@ -21,9 +21,9 @@
     "Snowhead Temple Main": "true"
     "Snowhead Temple Bridge Back": "goron_fast_roll || can_hookshot"
   locations:
-    "Snowhead Temple Bridge Room": "can_hookshot"
+    "Snowhead Temple Bridge Room": "can_hookshot_short"
     "Snowhead Temple SF Bridge Under Platform": "(has(BOW) || can_hookshot) && has(MASK_GREAT_FAIRY)"
-    "Snowhead Temple SF Bridge Pillar": "can_use_lens && (has(BOW) || can_hookshot) && has(MASK_GREAT_FAIRY)"
+    "Snowhead Temple SF Bridge Pillar": "can_use_lens && (has(BOW) || can_hookshot_short) && has(MASK_GREAT_FAIRY)"
 "Snowhead Temple Bridge Back":
   dungeon: SH
   exits:
@@ -80,7 +80,7 @@
   dungeon: SH
   exits:
     "Snowhead Temple Center Level 1": "true"
-    "Snowhead Temple Block Room Upper": "can_hookshot || (event(SNOWHEAD_PUSH_BLOCK) && has(MASK_ZORA))"
+    "Snowhead Temple Block Room Upper": "can_hookshot_short || (event(SNOWHEAD_PUSH_BLOCK) && has(MASK_ZORA))"
   events:
     SNOWHEAD_PUSH_BLOCK: "true"
   locations:
@@ -96,12 +96,12 @@
   dungeon: SH
   exits:
     "Snowhead Temple Main": "has(SMALL_KEY_SH, 3) || (has_explosives && has(SMALL_KEY_SH, 2))"
-    "Snowhead Temple Block Room Upper": "can_use_fire_arrows || can_hookshot"
+    "Snowhead Temple Block Room Upper": "can_use_fire_arrows || can_hookshot_short || can_goron_bomb_jump"
     "Snowhead Temple Icicles": "has_explosives"
   locations:
     "Snowhead Temple Compass": "true"
     "Snowhead Temple Compass Room Ledge": "can_use_fire_arrows"
-    "Snowhead Temple SF Compass Room Crate": "(can_use_fire_arrows && (has_explosives || has(MASK_GORON))) || (has(MASK_GREAT_FAIRY) && has(BOMB_BAG))"
+    "Snowhead Temple SF Compass Room Crate": "((can_use_fire_arrows || can_hookshot_short) && (has_explosives || has(MASK_GORON))) || (has(MASK_GREAT_FAIRY) && has(BOMB_BAG)) || can_goron_bomb_jump"
 "Snowhead Temple Icicles":
   dungeon: SH
   exits:
@@ -109,7 +109,7 @@
     "Snowhead Temple Dual Switches": "has(SMALL_KEY_SH, 3) || (has_explosives && has(SMALL_KEY_SH, 2))"
   locations:
     "Snowhead Temple Icicle Room Alcove": "can_use_lens"
-    "Snowhead Temple Icicle Room": "((has(BOW) || has(MASK_ZORA) || can_use_lens) && can_break_boulders) || (can_hookshot && has_explosives)"
+    "Snowhead Temple Icicle Room": "((has(BOW) || has(MASK_ZORA) || can_use_lens) && can_break_boulders) || (can_hookshot_short && has_explosives)"
 "Snowhead Temple Dual Switches":
   dungeon: SH
   exits:
@@ -158,7 +158,7 @@
     "Snowhead Temple Center Level 3 Snow": "has(SMALL_KEY_SH, 3)"
     "Snowhead Temple Dinolfos Room": "can_use_fire_arrows"
   locations:
-    "Snowhead Temple SF Snow Room": "can_use_lens && (has(BOW) || can_hookshot) && has(MASK_GREAT_FAIRY)"
+    "Snowhead Temple SF Snow Room": "can_use_lens && (has(BOW) || can_hookshot_short) && has(MASK_GREAT_FAIRY)"
 "Snowhead Temple Dinolfos Room":
   dungeon: SH
   exits:
