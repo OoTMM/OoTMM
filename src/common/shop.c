@@ -6,6 +6,9 @@
 # define SOLD_OUT GI_MM_SOLD_OUT
 #endif
 
+int shopReadFlag(int);
+void shopWriteFlag(int);
+
 int comboShopPrecond(GameState_Play* play, Actor_EnGirlA* girlA)
 {
     if (comboIsItemUnavailable(girlA->gi))
@@ -20,53 +23,10 @@ int comboShopPrecond(GameState_Play* play, Actor_EnGirlA* girlA)
     return SC_OK;
 }
 
-#if defined(GAME_OOT)
-void shopWriteFlag(int flag)
-{
-    u32* ptr;
-
-    ptr = &gOotExtraShopsLo;
-    if (flag >= 32)
-    {
-        ptr = &gOotExtraShopsHi;
-        flag -= 32;
-    }
-    (*ptr) |= (1 << flag);
-}
-
-int shopReadFlag(int flag)
-{
-    u32* ptr;
-
-    ptr = &gOotExtraShopsLo;
-    if (flag >= 32)
-    {
-        ptr = &gOotExtraShopsHi;
-        flag -= 32;
-    }
-    return ((*ptr) & (1 << flag)) != 0;
-}
-#endif
-
-#if defined(GAME_MM)
-u8 comboShopItemSlot(GameState_Play* play, Actor_EnGirlA* girlA)
-{
-    return 0;
-}
-
-void shopWriteFlag(int flag)
-{
-}
-
-int shopReadFlag(int flag)
-{
-    return 0;
-}
-#endif
-
 void comboShopAfterBuy(GameState_Play* play, Actor_EnGirlA* girlA)
 {
     shopWriteFlag(girlA->shopId);
+    comboShopUpdateItem(play, girlA);
 }
 
 static void quickBuyItem(GameState_Play* play, Actor_EnGirlA* girlA)
@@ -80,6 +40,26 @@ static void postBuyItem(GameState_Play* play, Actor_EnGirlA* girlA)
     AddRupees(-girlA->price);
 }
 
+static int isItemInStock(Actor_EnGirlA* this)
+{
+    if (!shopReadFlag(this->shopId))
+        return 1;
+
+#if defined(GAME_MM)
+    switch (this->shopId)
+    {
+    case 0x02:
+    case 0x03:
+    case 0x04:
+        return 0;
+    }
+#endif
+
+    if (comboIsItemConsumable(this->gi))
+        return 1;
+    return 0;
+}
+
 void comboShopUpdateItem(GameState_Play* play, Actor_EnGirlA* girlA)
 {
     girlA->precond = comboShopPrecond;
@@ -87,7 +67,7 @@ void comboShopUpdateItem(GameState_Play* play, Actor_EnGirlA* girlA)
     girlA->postBuy = postBuyItem;
     girlA->gi = comboOverrideEx(OV_SHOP, 0, girlA->shopId, girlA->gi, OVF_PROGRESSIVE);
 
-    if (!comboIsItemConsumable(girlA->gi) && shopReadFlag(girlA->shopId))
+    if (!isItemInStock(girlA))
     {
         girlA->gi = SOLD_OUT;
         girlA->disabled = 1;
@@ -96,6 +76,11 @@ void comboShopUpdateItem(GameState_Play* play, Actor_EnGirlA* girlA)
 
 void comboShopSetupItem(GameState_Play* play, Actor_EnGirlA* girlA)
 {
+#if defined(GAME_MM)
+    if (girlA->base.variable == 2)
+        girlA->disabled = !(MM_GET_EVENT_WEEK(EV_MM_WEEK_WITCH_MUSHROOM));
+#endif
+
     girlA->shopId = comboShopItemSlot(play, girlA);
     comboShopUpdateItem(play, girlA);
 }

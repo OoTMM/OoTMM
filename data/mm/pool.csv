@@ -40,9 +40,19 @@ Stock Pot Inn Grandma HP 2,                       npc,            NONE,         
 Stock Pot Inn ??? HP,                             npc,            NONE,                   STOCK_POT_INN,              TOILET_HEART_PIECE,     HEART_PIECE
 Astral Observatory Passage Chest,                 chest,          NONE,                   OBSERVATORY,                0x00,                   RUPEE_SILVER
 Astral Observatory Moon Tear,                     npc,            NONE,                   OBSERVATORY,                MOON_TEAR,              MOON_TEAR
-Bomb Shop Bomb Bag,                               npc,            NONE,                   BOMB_SHOP,                  SHOP_BOMB_BAG,          BOMB_BAG
-Bomb Shop Bomb Bag 2,                             npc,            NONE,                   BOMB_SHOP,                  SHOP_BOMB_BAG2,         BOMB_BAG
-Curiosity Shop All-Night Mask,                    npc,            NONE,                   CURIOSITY_SHOP,             MASK_ALL_NIGHT,         MASK_ALL_NIGHT
+Trading Post Item 1,                              shop,           NONE,                   TRADING_POST,               0x05,                   POTION_RED
+Trading Post Item 2,                              shop,           NONE,                   TRADING_POST,               0x06,                   POTION_GREEN
+Trading Post Item 3,                              shop,           NONE,                   TRADING_POST,               0x07,                   SHIELD_HERO
+Trading Post Item 4,                              shop,           NONE,                   TRADING_POST,               0x08,                   FAIRY
+Trading Post Item 5,                              shop,           NONE,                   TRADING_POST,               0x09,                   STICK
+Trading Post Item 6,                              shop,           NONE,                   TRADING_POST,               0x0a,                   ARROWS_10
+Trading Post Item 7,                              shop,           NONE,                   TRADING_POST,               0x0b,                   NUTS_10
+Trading Post Item 8,                              shop,           NONE,                   TRADING_POST,               0x0c,                   ARROWS_30
+Bomb Shop Item 1,                                 shop,           NONE,                   BOMB_SHOP,                  0x00,                   BOMBS_10
+Bomb Shop Item 2,                                 shop,           NONE,                   BOMB_SHOP,                  0x01,                   BOMBCHU_10
+Bomb Shop Bomb Bag,                               shop,           NONE,                   BOMB_SHOP,                  0x02,                   BOMB_BAG
+Bomb Shop Bomb Bag 2,                             shop,           NONE,                   BOMB_SHOP,                  0x03,                   BOMB_BAG
+Curiosity Shop All-Night Mask,                    shop,           NONE,                   CURIOSITY_SHOP,             0x04,                   MASK_ALL_NIGHT
 Curiosity Shop Back Room Pendant of Memories,     npc,            NONE,                   CURIOSITY_SHOP,             PENDANT_OF_MEMORIES,    PENDANT_OF_MEMORIES
 Curiosity Shop Back Room Owner Reward 1,          npc,            NONE,                   CURIOSITY_SHOP,             MASK_KEATON,            MASK_KEATON
 Curiosity Shop Back Room Owner Reward 2,          npc,            NONE,                   CURIOSITY_SHOP,             LETTER_TO_MAMA,         LETTER_TO_MAMA
@@ -73,6 +83,9 @@ Woods of Mystery Grotto,                          chest,          NONE,         
 Swamp Archery Reward 1,                           npc,            NONE,                   SHOOTING_GALLERY_SWAMP,     SHOOTING_GAME_SWAMP_1,  BOW
 Swamp Archery Reward 2,                           npc,            NONE,                   SHOOTING_GALLERY_SWAMP,     SHOOTING_GAME_SWAMP_2,  HEART_PIECE
 Swamp Potion Shop Kotake,                         npc,            NONE,                   POTION_SHOP,                KOTAKE_RED_POTION,      BOTTLE_POTION_RED
+Swamp Potion Shop Item 1,                         shop,           NONE,                   POTION_SHOP,                0x0d,                   POTION_BLUE
+Swamp Potion Shop Item 2,                         shop,           NONE,                   POTION_SHOP,                0x0e,                   POTION_GREEN
+Swamp Potion Shop Item 3,                         shop,           NONE,                   POTION_SHOP,                0x0f,                   POTION_RED
 Tourist Information Pictobox,                     npc,            NONE,                   TOURIST_INFORMATION,        KOUME_PICTOGRAPH_BOX,   PICTOGRAPH_BOX
 Tourist Information Boat Cruise,                  npc,            BOAT_ARCHERY,           TOURIST_INFORMATION,        KOUME_HEART_PIECE,      HEART_PIECE
 Tourist Information Tingle Picture,               npc,            NONE,                   TOURIST_INFORMATION,        TOUR_GUIDE_HEART_PIECE, HEART_PIECE
@@ -131,6 +144,9 @@ Twin Islands Frozen Grotto Chest,                 chest,          NONE,         
 Twin Islands Ramp Grotto Chest,                   chest,          NONE,                   GROTTOS,                    0x19,                   BOMBCHU
 Goron Elder,                                      npc,            NONE,                   TWIN_ISLANDS_WINTER,        GORON_ELDER,            SONG_GORON_HALF
 Goron Baby,                                       npc,            NONE,                   GORON_SHRINE,               GORON_BABY,             SONG_GORON
+Goron Shop Item 1,                                shop,           NONE,                   GORON_SHOP,                 0x10,                   ARROWS_10
+Goron Shop Item 2,                                shop,           NONE,                   GORON_SHOP,                 0x11,                   BOMBS_10
+Goron Shop Item 3,                                shop,           NONE,                   GORON_SHOP,                 0x12,                   POTION_RED
 Goron Village HP,                                 collectible,    NONE,                   GORON_VILLAGE_WINTER,       0x1e,                   HEART_PIECE
 Goron Village Scrub Deed,                         npc,            NONE,                   GORON_VILLAGE_WINTER,       SCRUB_MOUNTAIN,         DEED_MOUNTAIN
 Goron Village Scrub Bomb Bag,                     npc,            NONE,                   GORON_VILLAGE_WINTER,       SCRUB_BOMB_BAG,         BOMB_BAG
@@ -164,6 +180,9 @@ Zora Hall Scrub Deed,                             npc,            NONE,         
 Zora Hall Scrub HP,                               collectible,    NONE,                   ZORA_HALL_ROOMS,            0x1e,                   HEART_PIECE
 Zora Hall Evan HP,                                npc,            NONE,                   ZORA_HALL_ROOMS,            ZORA_EVAN,              HEART_PIECE
 Zora Hall Scene Lights,                           npc,            NONE,                   ZORA_HALL,                  ZORA_HALL_LIGHTS,       RUPEE_BLUE
+Zora Shop Item 1,                                 shop,           NONE,                   ZORA_HALL_ROOMS,            0x13,                   SHIELD_HERO
+Zora Shop Item 2,                                 shop,           NONE,                   ZORA_HALL_ROOMS,            0x14,                   ARROWS_10
+Zora Shop Item 3,                                 shop,           NONE,                   ZORA_HALL_ROOMS,            0x15,                   POTION_RED
 Pinnacle Rock Chest 1,                            chest,          NONE,                   PINNACLE_ROCK,              0x01,                   RUPEE_RED
 Pinnacle Rock Chest 2,                            chest,          NONE,                   PINNACLE_ROCK,              0x02,                   RUPEE_RED
 Pinnacle Rock HP,                                 npc,            PINNACLE_ROCK_HP,       PINNACLE_ROCK,              SEAHORSE_HEART_PIECE,   HEART_PIECE

@@ -38,7 +38,7 @@ int EnFsn_HasGivenShopItem(Actor_EnFsn* this, GameState_Play* play)
     if (Actor_HasParent(&this->base))
     {
         if (this->mode == 1)
-            comboAfterBuy(this->items[this->itemIndex], play);
+            comboShopAfterBuy(play, this->items[this->itemIndex]);
         else if (sIsSecondReward)
         {
             sIsSecondReward = 0;

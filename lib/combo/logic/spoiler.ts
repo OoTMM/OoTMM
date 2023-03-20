@@ -43,11 +43,23 @@ export class LogicPassSpoiler {
   private writeSettings() {
     this.buffer.push('Settings');
     for (const s in this.state.settings) {
-      if (s === 'startingItems' || s === 'tricks' || s === 'junkLocations' || s === 'dungeon') {
+      if (s === 'startingItems' || s === 'tricks' || s === 'junkLocations' || s === 'dungeon' || s === 'specialConds') {
         continue;
       }
       const v = (this.state.settings as any)[s];
       this.buffer.push(`  ${s}: ${v}`);
+    }
+    this.buffer.push('');
+  }
+
+  private writeSpecialConds() {
+    this.buffer.push('Special Conditions');
+    for (const s in this.state.settings.specialConds) {
+      const cond = this.state.settings.specialConds[s as keyof typeof this.state.settings.specialConds];
+      this.buffer.push(`  ${s}:`);
+      for (const key in cond) {
+        this.buffer.push(`    ${key}: ${cond[key as keyof typeof cond]}`);
+      }
     }
     this.buffer.push('');
   }
@@ -194,6 +206,7 @@ export class LogicPassSpoiler {
 
     this.writeHeader();
     this.writeSettings();
+    this.writeSpecialConds();
     this.writeTricks();
     this.writeStartingItems();
     this.writeJunkLocations();

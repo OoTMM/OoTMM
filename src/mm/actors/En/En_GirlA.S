@@ -5,7 +5,7 @@ PATCH_START 0x80864a3c
 .int 0x1d0
 PATCH_END
 
-EnGirlA_PostHandler_Trampoline:
+EnGirlA_AfterHandler_Trampoline:
   /* girlA is in s0 */
   move a0,s0
 
@@ -17,7 +17,7 @@ EnGirlA_PostHandler_Trampoline:
   addiu sp,0x30
 
   /* Call our code */
-  j EnGirlA_PostHandler
+  j EnGirlA_AfterHandler
    nop
 
 /* Use our own draw func */
@@ -28,7 +28,7 @@ PATCH_END
 
 /* Hook after EnGirlA_Handler */
 PATCH_START 0x808648e8
-  j EnGirlA_PostHandler_Trampoline
+  j EnGirlA_AfterHandler_Trampoline
    nop
 PATCH_END
 

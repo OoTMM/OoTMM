@@ -1,5 +1,6 @@
 #include <combo.h>
 
+GameState_Play* gPlay;
 int gNoTimeFlow;
 
 static void debugCheat(GameState_Play* play)
@@ -21,12 +22,12 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.items[ITS_MM_MASK_GORON] = ITEM_MM_MASK_GORON;
         gSave.inventory.items[ITS_MM_BOW] = ITEM_MM_BOW;
         gSave.inventory.items[ITS_MM_LENS] = ITEM_MM_LENS_OF_TRUTH;
-        gSave.inventory.items[ITS_MM_BOMBS] = ITEM_MM_BOMB;
+        //gSave.inventory.items[ITS_MM_BOMBS] = ITEM_MM_BOMB;
         gSave.inventory.items[ITS_MM_HOOKSHOT] = ITEM_MM_HOOKSHOT;
         gSave.inventory.items[ITS_MM_GREAT_FAIRY_SWORD] = ITEM_MM_GREAT_FAIRY_SWORD;
         gSave.inventory.upgrades.quiver = 3;
         gSave.inventory.upgrades.wallet = 2;
-        gSave.inventory.upgrades.bombBag = 3;
+        //gSave.inventory.upgrades.bombBag = 3;
         gSave.playerData.rupees = 500;
         gSave.inventory.quest.songHealing = 1;
         gSave.inventory.quest.songTime = 1;
@@ -44,7 +45,7 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.items[ITS_MM_MASK_GORON] = ITEM_MM_MASK_GORON;
         gSave.inventory.ammo[ITS_MM_STICKS] = 10;
         gSave.inventory.ammo[ITS_MM_BOW] = 50;
-        gSave.inventory.ammo[ITS_MM_BOMBS] = 40;
+        //gSave.inventory.ammo[ITS_MM_BOMBS] = 40;
         gSave.inventory.items[ITS_MM_ARROW_FIRE] = ITEM_MM_ARROW_FIRE;
         gSave.inventory.items[ITS_MM_ARROW_LIGHT] = ITEM_MM_ARROW_LIGHT;
         gSave.inventory.items[ITS_MM_PICTOBOX] = ITEM_MM_PICTOGRAPH_BOX;
@@ -143,6 +144,7 @@ void hookPlay_Init(GameState_Play* play)
     MM_SET_EVENT_WEEK(MM_EV(82, 1));
 
     Play_Init(play);
+    gPlay = play;
     gLastEntrance = gSave.entranceIndex;
     if (play->sceneId != SCE_MM_GROTTOS)
     {

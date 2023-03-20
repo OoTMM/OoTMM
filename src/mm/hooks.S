@@ -6,10 +6,10 @@ PATCH_START(0x80080d14)
   lui t6, ((0x00020000 | MM_BASE) >> 16)
 PATCH_END
 
-/* Downsize the heap by 0x30000 + 0x10000 malloc zone */
+/* Downsize the heap by 0x40000 + 0x10000 malloc zone */
 /* DEBUG */
 PATCH_START 0x80174c4c
-  lui t8,0x8074
+  lui t8,0x8073
 PATCH_END
 
 /* Not sure about this

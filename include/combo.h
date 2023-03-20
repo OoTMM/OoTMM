@@ -34,6 +34,8 @@
 #  include <combo/mm/player.h>
 #  include <combo/mm/actor_ensob1.h>
 #  include <combo/mm/actor_enfsn.h>
+#  include <combo/mm/actor_entrt.h>
+#  include <combo/mm/actor_enossan.h>
 #  include <combo/mm/actor_arms_hook.h>
 # endif
 
@@ -130,6 +132,16 @@ typedef struct PACKED
 }
 ComboDataHints;
 
+#define SPECIAL_BRIDGE  0
+#define SPECIAL_MOON    1
+
+typedef struct
+{
+    u16 flags;
+    u16 count;
+}
+SpecialCond;
+
 typedef struct PACKED ALIGNED(4)
 {
     u32             mq;
@@ -137,6 +149,7 @@ typedef struct PACKED ALIGNED(4)
     ComboDataHints  hints;
     u8              boss[12];
     u8              dungeons[18];
+    SpecialCond     special[2];
 }
 ComboData;
 
@@ -305,10 +318,6 @@ void comboToggleOcarina(void);
 void comboToggleHookshot(void);
 #endif
 
-# if defined(GAME_MM)
-void comboAfterBuy(Actor_EnGirlA* girlA, GameState_Play* play);
-# endif
-
 void comboSpawnItemGiver(GameState_Play* play, u16 npcId);
 void comboSpawnItemGivers(GameState_Play* play);
 
@@ -348,9 +357,6 @@ typedef struct
 DmaEntry;
 
 extern DmaEntry kComboDmaData[];
-
-/* Misc */
-int comboCanAccessMoon(void);
 
 /* Hints */
 #define HINT_GOSSIP         0x00
@@ -420,6 +426,9 @@ extern int gNoTimeFlow;
 void comboCheckSong(const OcarinaSongButtons* songButtons, int songIndex);
 
 extern u8 gCustomOcarinaSong;
+
+/* Special */
+int comboSpecialCond(int special);
 
 #else
 # include <combo/asm.h>

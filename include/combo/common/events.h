@@ -91,6 +91,7 @@
 #define EV_MM_WEEK_DUNGEON_SH                   MM_EV(33,   7)
 #define EV_MM_WEEK_DUNGEON_GB                   MM_EV(55,   7)
 #define EV_MM_WEEK_DUNGEON_ST                   MM_EV(52,   5)
+#define EV_MM_WEEK_WITCH_MUSHROOM               MM_EV(53,   3)
 
 #if !defined(__ASSEMBLER__)
 # define MM_SET_EVENT_WEEK(x)       (gMmSave.weekEventReg[(x) / 8] |= (1 << ((x) % 8)))

@@ -88,8 +88,8 @@ OOT_POCKET_EGG:                 0x55
 MM_KOTAKE_RED_POTION:         0x00
 MM_KOUME_PICTOGRAPH_BOX:      0x01
 MM_SONG_AWAKENING:            0x02
-MM_SHOP_BOMB_BAG:             0x03
-MM_SHOP_BOMB_BAG2:            0x04
+#MM_SHOP_BOMB_BAG:             0x03
+#MM_SHOP_BOMB_BAG2:            0x04
 MM_MASK_GORON:                0x05
 MM_GORON_ELDER:               0x06
 MM_GORON_BABY:                0x07
@@ -148,7 +148,7 @@ MM_GREAT_FAIRY_VALLEY:        0x3b
 MM_BANK_1:                    0x3c
 MM_BANK_2:                    0x3d
 MM_BANK_3:                    0x3e
-MM_MASK_ALL_NIGHT:            0x3f
+#MM_MASK_ALL_NIGHT:            0x3f
 MM_POSTMAN_HEART_PIECE:       0x40
 MM_ROSA_HEART_PIECE:          0x41
 MM_SWORDSMAN_HEART_PIECE:     0x42

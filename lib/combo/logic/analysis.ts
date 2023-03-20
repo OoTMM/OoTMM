@@ -1,6 +1,6 @@
 import { Random, shuffle } from '../random';
 import { Settings } from '../settings';
-import { isItemConsumable, isItemImportant } from './items';
+import { isItemConsumable, isItemImportant, ITEMS_MASKS_OOT, ITEMS_MASKS_REGULAR, ITEMS_MASKS_TRANSFORM } from './items';
 import { ItemPlacement } from './solve';
 import { World } from './world';
 import { Pathfinder, PathfinderState } from './pathfind';
@@ -303,7 +303,14 @@ const SIMPLE_DEPENDENCIES: {[k: string]: string[]} = {
   ],
   MM_STRAY_FAIRY_ST: [
     'MM Ikana Great Fairy',
-  ]
+  ],
+  /* 0 check items that can be required by special conditions */
+  OOT_MASK_SPOOKY: [],
+  OOT_MASK_GERUDO: [],
+  OOT_MASK_ZORA: [],
+  OOT_MASK_GORON: [],
+  OOT_MASK_BUNNY: [],
+  OOT_MASK_KEATON: [],
 };
 
 export class LogicPassAnalysis {
@@ -347,6 +354,39 @@ export class LogicPassAnalysis {
     this.dependencies['SHARED_MASK_TRUTH'] = [...this.dependencies['MM_MASK_TRUTH'], ...this.dependencies['OOT_MASK_TRUTH']];
     this.dependencies['SHARED_MASK_KEATON'] = [...this.dependencies['MM_MASK_KEATON']];
     this.dependencies['SHARED_MASK_BUNNY'] = [...this.dependencies['MM_MASK_BUNNY']];
+
+    const conds = Object.values(this.state.settings.specialConds);
+    if (conds.some(x => x.count && x.skullsGold))  delete this.dependencies['OOT_GS_TOKEN'];
+    if (conds.some(x => x.count && x.skullsSwamp)) delete this.dependencies['MM_GS_TOKEN_SWAMP'];
+    if (conds.some(x => x.count && x.skullsOcean)) delete this.dependencies['MM_GS_TOKEN_OCEAN'];
+    if (conds.some(x => x.count && x.fairiesWF)) delete this.dependencies['MM_STRAY_FAIRY_WF'];
+    if (conds.some(x => x.count && x.fairiesSH)) delete this.dependencies['MM_STRAY_FAIRY_SH'];
+    if (conds.some(x => x.count && x.fairiesGB)) delete this.dependencies['MM_STRAY_FAIRY_GB'];
+    if (conds.some(x => x.count && x.fairiesST)) delete this.dependencies['MM_STRAY_FAIRY_ST'];
+    if (conds.some(x => x.count && x.fairyTown)) delete this.dependencies['MM_STRAY_FAIRY_TOWN'];
+    if (conds.some(x => x.count && x.stones)) {
+      delete this.dependencies['OOT_STONE_EMERALD'];
+      delete this.dependencies['OOT_STONE_RUBY'];
+      delete this.dependencies['OOT_STONE_SAPPHIRE'];
+    }
+
+    if (conds.some(x => x.count && x.masksRegular)) {
+      for (const y of ITEMS_MASKS_REGULAR) {
+        delete this.dependencies[y];
+      }
+    }
+
+    if (conds.some(x => x.count && x.masksTransform)) {
+      for (const y of ITEMS_MASKS_TRANSFORM) {
+        delete this.dependencies[y];
+      }
+    }
+
+    if (conds.some(x => x.count && x.masksOot)) {
+      for (const y of ITEMS_MASKS_OOT) {
+        delete this.dependencies[y];
+      }
+    }
   }
 
   private makeSpheresRaw(restrictedLocations?: Set<string>) {

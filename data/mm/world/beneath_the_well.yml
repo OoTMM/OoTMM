@@ -2,7 +2,7 @@
   region: BENEATH_THE_WELL
   exits:
     "Ikana Canyon": "true"
-    "Beneath the Well North Section": "has(MASK_GIBDO) && event(BLUE_POTION)"
+    "Beneath the Well North Section": "has(MASK_GIBDO) && has_blue_potion"
     "Beneath the Well East Section": "has(MASK_GIBDO) && has_beans"
 "Beneath the Well North Section":
   region: BENEATH_THE_WELL
@@ -16,7 +16,7 @@
   region: BENEATH_THE_WELL
   exits:
     "Beneath the Well Entrance": "true"
-    "Beneath the Well End": "event(WELL_BIG_POE)"
+    "Beneath the Well End": "event(WELL_BIG_POE) && has_milk"
   events:
     WELL_BIG_POE: "has(MASK_GIBDO) && has_bottle && has(BOMB_BAG) && (has(BOW) || has(ZORA))"
   locations:

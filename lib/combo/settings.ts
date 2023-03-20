@@ -1,3 +1,6 @@
+import { merge } from 'lodash';
+import type { PartialDeep } from 'type-fest';
+
 export const SETTINGS = [{
   key: 'songs',
   name: 'Song Shuffle',
@@ -132,6 +135,16 @@ export const SETTINGS = [{
 }, {
   key: 'shopShuffleOot',
   name: 'Shop Shuffle (OoT)',
+  category: 'main',
+  type: 'enum',
+  values: [
+    { value: 'none', name: 'None' },
+    { value: 'full', name: 'Full' },
+  ],
+  default: 'none'
+}, {
+  key: 'shopShuffleMm',
+  name: 'Shop Shuffle (MM)',
   category: 'main',
   type: 'enum',
   values: [
@@ -455,6 +468,42 @@ const DEFAULT_DUNGEONS = Object.keys(DUNGEONS).reduce((dungeons, dungeon) => {
   return dungeons;
 }, {} as any) as DungeonSettings;
 
+export const SPECIAL_CONDS_KEYS = {
+  stones: "Spiritual Stones",
+  medallions: "Medallions",
+  remains: "Boss Remains",
+  skullsGold: "Gold Skulltulas Tokens",
+  skullsSwamp: "Swamp Skulltulas Tokens",
+  skullsOcean: "Ocean Skulltulas Tokens",
+  fairiesWF: "Stray Fairies (Woodfall)",
+  fairiesSH: "Stray Fairies (Snowhead)",
+  fairiesGB: "Stray Fairies (Great Bay)",
+  fairiesST: "Stray Fairies (Stone Tower)",
+  fairyTown: "Stray Fairy (Clock Town)",
+  masksRegular: "Regular Masks (MM)",
+  masksTransform: "Transformation Masks (MM)",
+  masksOot: "Masks (OoT)",
+};
+
+export type SpecialCond = {[k in keyof typeof SPECIAL_CONDS_KEYS]: boolean} & { count: number };
+
+const DEFAULT_SPECIAL_COND = Object.keys(SPECIAL_CONDS_KEYS).reduce((conds, cond) => {
+  conds[cond] = false;
+  return conds;
+}, { count: 0 } as any) as SpecialCond;
+
+export const SPECIAL_CONDS = {
+  BRIDGE: "Rainbow Bridge",
+  MOON: "Moon Access",
+};
+
+const DEFAULT_SPECIAL_CONDS: SpecialConds = {
+  BRIDGE: { ...DEFAULT_SPECIAL_COND, medallions: true, count: 6 },
+  MOON: { ...DEFAULT_SPECIAL_COND, remains: true, count: 4 },
+};
+
+export type SpecialConds = {[k in keyof typeof SPECIAL_CONDS]: SpecialCond };
+
 type SettingDataEnumValue = {
   readonly value: string;
   readonly name: string;
@@ -495,10 +544,24 @@ export type Settings = SettingsBase & {
   junkLocations: string[],
   tricks: Tricks,
   dungeon: DungeonSettings,
+  specialConds: SpecialConds,
 };
 
 export const DEFAULT_SETTINGS: Settings = { ...SETTINGS.map(s => {
   return {[s.key]: s.default};
-}).reduce((a, b) => ({...a, ...b}), {}), startingItems: {}, junkLocations: DEFAULT_JUNK_LOCATIONS, tricks: { ...DEFAULT_TRICKS }, dungeon: { ...DEFAULT_DUNGEONS } } as Settings;
+}).reduce((a, b) => ({...a, ...b}), {}),
+  startingItems: {},
+  junkLocations: DEFAULT_JUNK_LOCATIONS,
+  tricks: { ...DEFAULT_TRICKS },
+  dungeon: { ...DEFAULT_DUNGEONS },
+  specialConds: { ...DEFAULT_SPECIAL_CONDS },
+} as Settings;
 
-export const settings = (s: Partial<Settings>): Settings => ({...DEFAULT_SETTINGS, ...s});
+export function mergeSettings(base: Settings, arg: PartialDeep<Settings>): Settings {
+  return merge({}, base, arg);
+}
+
+export function makeSettings(arg: PartialDeep<Settings>): Settings {
+  return mergeSettings(DEFAULT_SETTINGS, arg);
+}
+

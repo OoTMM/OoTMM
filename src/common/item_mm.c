@@ -87,7 +87,8 @@ static void addSword(int index)
 
 static void addShield(int index)
 {
-    gMmSave.itemEquips.shield = index;
+    if (index > gMmSave.itemEquips.shield)
+        gMmSave.itemEquips.shield = index;
 }
 
 void comboAddBombBagMm(int index)

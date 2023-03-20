@@ -276,7 +276,7 @@
   region: GANON_CASTLE_EXTERIOR
   exits:
     "Market Destroyed": "true"
-    "Ganon Castle Main": "has_medallions"
+    "Ganon Castle Main": "special(BRIDGE)"
   locations:
     "Great Fairy Defense Upgrade": "can_lift_gold && can_play(SONG_ZELDA)"
     "Ganon Castle Exterior GS": "true"

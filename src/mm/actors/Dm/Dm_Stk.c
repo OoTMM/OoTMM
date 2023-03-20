@@ -4,7 +4,7 @@
 
 static void DmStk_Start(Actor* this, GameState_Play* play)
 {
-    if (comboCanAccessMoon())
+    if (comboSpecialCond(SPECIAL_MOON))
     {
         PlayerDisplayTextBox(play, 0x2013, this);
         comboTextHijackOathToOrder(play);

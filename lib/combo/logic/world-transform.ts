@@ -33,6 +33,7 @@ export class LogicPassWorldTransform {
       settings: Settings;
       config: Set<string>;
       mq: Set<string>;
+      fixedLocations: Set<string>;
       random: Random;
     }
   ) {
@@ -224,7 +225,7 @@ export class LogicPassWorldTransform {
 
   private placeExtraItems() {
     const { checks } = this.state.world;
-    const junkLocs = shuffle(this.state.random, Object.keys(checks).filter(x => isJunk(checks[x].item)));
+    const junkLocs = shuffle(this.state.random, Object.keys(checks).filter(x => isJunk(checks[x].item) && !this.state.fixedLocations.has(x)));
 
     for (;;) {
       const extraItem = this.takeExtraItem();
@@ -244,7 +245,7 @@ export class LogicPassWorldTransform {
     let sharedHc = 0;
     let sharedHp = 0;
 
-    if (this.state.settings.progressiveShieldsOot) {
+    if (this.state.settings.progressiveShieldsOot === 'progressive') {
       this.extraItems['OOT_SHIELD'] = 2;
     }
 
