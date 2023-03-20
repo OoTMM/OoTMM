@@ -617,23 +617,23 @@ void KaleidoScope_BeforeUpdate(GameState_Play* play)
             WREG(16) = -175;
             WREG(17) = 155;
 
-            u32 dest = ALIGN16((u32)play->objectCtx.spaceStart);
+            u8* dest = PALIGN(play->objectCtx.spaceStart, 16);
 
-            pauseCtx->iconItemSegment = (u8*) dest;
+            pauseCtx->iconItemSegment = dest;
             size = comboLoadFile(dest, 8); // icon_item_static
-            dest = ALIGN16(dest + size);
+            dest = PALIGN(dest + size, 16);
 
-            pauseCtx->iconItemAltSegment = (u8*) dest;
+            pauseCtx->iconItemAltSegment = dest;
             size = comboLoadForeignFile(dest, 10); // icon_item_field_static
-            dest = ALIGN16(dest + size);
+            dest = PALIGN(dest + size, 16);
 
-            pauseCtx->iconItemLangSegment = (u8*) dest;
+            pauseCtx->iconItemLangSegment = dest;
             size = comboLoadForeignFile(dest, 13); // icon_item_jpn_static
-            dest = ALIGN16(dest + size);
+            dest = PALIGN(dest + size, 16);
 
-            pauseCtx->nameSegment = (u8*) dest;
-            LoadMapName((void*)dest, pauseCtx->world_map_cursor);
-            dest = ALIGN16(dest + 0xA00);
+            pauseCtx->nameSegment = dest;
+            LoadMapName(dest, pauseCtx->world_map_cursor);
+            dest = PALIGN(dest + 0xA00, 16);
 
             u32* srcMapPageBgTextures = (u32*)OverlayAddr(0x80829B74);
             for (u8 i = 0; i < ARRAY_SIZE(sMapPageBgTextures); i++)
