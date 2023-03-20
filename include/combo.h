@@ -34,6 +34,7 @@
 #  include <combo/mm/player.h>
 #  include <combo/mm/actor_ensob1.h>
 #  include <combo/mm/actor_enfsn.h>
+#  include <combo/mm/actor_entrt.h>
 #  include <combo/mm/actor_enossan.h>
 #  include <combo/mm/actor_arms_hook.h>
 # endif

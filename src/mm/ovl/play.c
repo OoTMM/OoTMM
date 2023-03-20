@@ -1,5 +1,6 @@
 #include <combo.h>
 
+GameState_Play* gPlay;
 int gNoTimeFlow;
 
 static void debugCheat(GameState_Play* play)
@@ -143,6 +144,7 @@ void hookPlay_Init(GameState_Play* play)
     MM_SET_EVENT_WEEK(MM_EV(82, 1));
 
     Play_Init(play);
+    gPlay = play;
     gLastEntrance = gSave.entranceIndex;
     if (play->sceneId != SCE_MM_GROTTOS)
     {
