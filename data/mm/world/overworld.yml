@@ -337,10 +337,11 @@
   region: SOUTHERN_SWAMP
   exits:
     "Swamp Front": "true"
-  events:
-    BLUE_POTION: "has_bottle && has(MASK_SCENTS)"
   locations:
     "Swamp Potion Shop Kotake": "true"
+    "Swamp Potion Shop Item 1": "has_bottle && has(MASK_SCENTS)"
+    "Swamp Potion Shop Item 2": "true"
+    "Swamp Potion Shop Item 3": "true"
 "Deku Palace":
   region: DEKU_PALACE
   exits:

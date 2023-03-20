@@ -35,3 +35,4 @@
 "can_goron_bomb_jump": "trick(MM_GORON_BOMB_JUMP) && has(MASK_GORON) && has(BOMB_BAG)"
 "can_hookshot": "cond(setting(shortHookshotMm), has(HOOKSHOT, 2), has(HOOKSHOT))"
 "can_hookshot_short": "has(HOOKSHOT)"
+"has_blue_potion": "has_bottle && (event(BLUE_POTION) || has(POTION_BLUE))"
