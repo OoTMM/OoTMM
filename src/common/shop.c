@@ -40,6 +40,26 @@ static void postBuyItem(GameState_Play* play, Actor_EnGirlA* girlA)
     AddRupees(-girlA->price);
 }
 
+static int isItemInStock(Actor_EnGirlA* this)
+{
+    if (!shopReadFlag(this->shopId))
+        return 1;
+
+#if defined(GAME_MM)
+    switch (this->shopId)
+    {
+    case 0x02:
+    case 0x03:
+    case 0x04:
+        return 0;
+    }
+#endif
+
+    if (comboIsItemConsumable(this->gi))
+        return 1;
+    return 0;
+}
+
 void comboShopUpdateItem(GameState_Play* play, Actor_EnGirlA* girlA)
 {
     girlA->precond = comboShopPrecond;
@@ -47,7 +67,7 @@ void comboShopUpdateItem(GameState_Play* play, Actor_EnGirlA* girlA)
     girlA->postBuy = postBuyItem;
     girlA->gi = comboOverrideEx(OV_SHOP, 0, girlA->shopId, girlA->gi, OVF_PROGRESSIVE);
 
-    if (!comboIsItemConsumable(girlA->gi) && shopReadFlag(girlA->shopId))
+    if (!isItemInStock(girlA))
     {
         girlA->gi = SOLD_OUT;
         girlA->disabled = 1;
