@@ -44,5 +44,6 @@ MiscFlags;
 #define gCowFlags           SAVE_EXTRA_RECORD(u32,           9)
 #define gOotExtraShopsLo    SAVE_EXTRA_RECORD(u32,          10)
 #define gOotExtraShopsHi    SAVE_EXTRA_RECORD(u32,          11)
+#define gMmExtraShops       SAVE_EXTRA_RECORD(u32,          12)
 
 #endif

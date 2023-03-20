@@ -148,6 +148,7 @@ export const ITEMS_REQUIRED = new Set<string>([
   'OOT_MASK_KEATON',
   'MM_GS_TOKEN_SWAMP',
   'MM_GS_TOKEN_OCEAN',
+  'MM_SHIELD_HERO',
   'MM_MASK_DEKU',
   'MM_MASK_GORON',
   'MM_MASK_ZORA',
@@ -214,6 +215,9 @@ export const ITEMS_REQUIRED = new Set<string>([
   'MM_WALLET',
   'MM_GREAT_FAIRY_SWORD',
   'MM_SPIN_UPGRADE',
+  'MM_POTION_BLUE',
+  'MM_POTION_RED',
+  'MM_MILK',
   'SHARED_BOW',
   'SHARED_BOMB_BAG',
   'SHARED_MAGIC_UPGRADE',
@@ -344,6 +348,9 @@ const CONSUMABLES = new Set<string>([
   'MM_FISH',
   'MM_BUGS',
   'MM_FAIRY',
+  'MM_POTION_RED',
+  'MM_POTION_GREEN',
+  'MM_POTION_BLUE',
   'SHARED_RECOVERY_HEART',
   'SHARED_STICK',
   'SHARED_STICKS_5',
@@ -367,6 +374,7 @@ const CONSUMABLES = new Set<string>([
 ]);
 
 const CRITICAL_RENEWABLE_ITEMS = new Set<string>([
+  'MM_SHIELD_HERO',
   'OOT_SHIELD_DEKU',
   'OOT_SHIELD_HYLIAN',
 ]);

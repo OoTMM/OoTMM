@@ -34,6 +34,8 @@
 #  include <combo/mm/player.h>
 #  include <combo/mm/actor_ensob1.h>
 #  include <combo/mm/actor_enfsn.h>
+#  include <combo/mm/actor_entrt.h>
+#  include <combo/mm/actor_enossan.h>
 #  include <combo/mm/actor_arms_hook.h>
 # endif
 
@@ -315,10 +317,6 @@ void comboRemoveTradeItem3(u16 xitemId);
 void comboToggleOcarina(void);
 void comboToggleHookshot(void);
 #endif
-
-# if defined(GAME_MM)
-void comboAfterBuy(Actor_EnGirlA* girlA, GameState_Play* play);
-# endif
 
 void comboSpawnItemGiver(GameState_Play* play, u16 npcId);
 void comboSpawnItemGivers(GameState_Play* play);
