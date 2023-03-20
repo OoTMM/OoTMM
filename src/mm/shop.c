@@ -111,6 +111,7 @@ u8 comboShopItemSlot(GameState_Play* play, Actor_EnGirlA* girlA)
         case SHOP_ARROWS_50_ALT:
             return 0x0c;
         }
+        break;
     case SCE_MM_POTION_SHOP:
         switch (girlA->base.variable)
         {
@@ -149,8 +150,27 @@ u8 comboShopItemSlot(GameState_Play* play, Actor_EnGirlA* girlA)
             return 0x12;
         }
         break;
+    case SCE_MM_ZORA_HALL_ROOMS:
+        switch (girlA->base.variable)
+        {
+        case SHOP_SHIELD_HERO:
+        case SHOP_SHIELD_HERO_ALT:
+        case SHOP_SHIELD_HERO_ALT2:
+            return 0x13;
+        case SHOP_ARROWS_10:
+        case SHOP_ARROWS_10_ALT:
+        case SHOP_ARROWS_10_ALT2:
+            return 0x14;
+        case SHOP_POTION_RED:
+        case SHOP_POTION_RED_ALT:
+        case SHOP_POTION_RED_ALT2:
+        case SHOP_POTION_RED_ALT3:
+        case SHOP_POTION_RED_ALT4:
+        case SHOP_POTION_RED_ALT5:
+            return 0x15;
+        }
+        break;
     }
 
-    /* UNREACHABLE(); */
-    return 0;
+    UNREACHABLE();
 }

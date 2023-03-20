@@ -20,6 +20,9 @@ static s16 kitemPrices[] = {
     40,
     40,
     80,
+    90,
+    20,
+    60,
 };
 
 static int itemPrice(GameState_Play* play, Actor_EnGirlA* girlA)

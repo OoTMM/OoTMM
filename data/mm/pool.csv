@@ -180,6 +180,9 @@ Zora Hall Scrub Deed,                             npc,            NONE,         
 Zora Hall Scrub HP,                               collectible,    NONE,                   ZORA_HALL_ROOMS,            0x1e,                   HEART_PIECE
 Zora Hall Evan HP,                                npc,            NONE,                   ZORA_HALL_ROOMS,            ZORA_EVAN,              HEART_PIECE
 Zora Hall Scene Lights,                           npc,            NONE,                   ZORA_HALL,                  ZORA_HALL_LIGHTS,       RUPEE_BLUE
+Zora Shop Item 1,                                 shop,           NONE,                   ZORA_HALL_ROOMS,            0x13,                   SHIELD_HERO
+Zora Shop Item 2,                                 shop,           NONE,                   ZORA_HALL_ROOMS,            0x14,                   ARROWS_10
+Zora Shop Item 3,                                 shop,           NONE,                   ZORA_HALL_ROOMS,            0x15,                   POTION_RED
 Pinnacle Rock Chest 1,                            chest,          NONE,                   PINNACLE_ROCK,              0x01,                   RUPEE_RED
 Pinnacle Rock Chest 2,                            chest,          NONE,                   PINNACLE_ROCK,              0x02,                   RUPEE_RED
 Pinnacle Rock HP,                                 npc,            PINNACLE_ROCK_HP,       PINNACLE_ROCK,              SEAHORSE_HEART_PIECE,   HEART_PIECE

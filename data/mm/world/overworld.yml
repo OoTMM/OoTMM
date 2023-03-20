@@ -728,11 +728,20 @@
   exits:
     "Zora Hall Entrance": "has(MASK_ZORA)"
     "Zora Cape Peninsula": "true"
+    "Zora Shop": "true"
   locations:
     "Zora Hall Scrub HP": "has(DEED_MOUNTAIN) && has(MASK_GORON) && has(MASK_DEKU)"
     "Zora Hall Scrub Deed": "has(DEED_MOUNTAIN) && has(MASK_GORON)"
     "Zora Hall Evan HP": "has(MASK_ZORA) && has_ocarina"
     "Zora Hall Scene Lights": "can_use_fire_arrows"
+"Zora Shop":
+  region: ZORA_HALL
+  exits:
+    "Zora Hall": "true"
+  locations:
+    "Zora Shop Item 1": "true"
+    "Zora Shop Item 2": "true"
+    "Zora Shop Item 3": "true"
 "Zora Cape Peninsula":
   region: ZORA_CAPE
   exits:
