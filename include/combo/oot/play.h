@@ -30,7 +30,7 @@ typedef struct PACKED
     char textBuffer[0x550]; /* Probably smaller */
     /* 0xE300 */ s32 msgLength;
     /* 0xE304 */ u8 msgMode;
-    /* 0xE306 */ u8 unk_e305;
+    /* 0xE305 */ u8 unk_e305;
     char unk_e306[0xdf];
     u8   choice;
     char unk_e3e6[0x06];

@@ -170,7 +170,7 @@ static u16 sOwlWarpPauseItems[] = {
     0xAE, // OWL_WARP_STONE_TOWER
 };
 
-s16 sVtxPageMapWorldQuadsX[VTX_PAGE_MAP_WORLD_QUADS] = {
+static s16 sVtxPageMapWorldQuadsX[VTX_PAGE_MAP_WORLD_QUADS] = {
     -41,  // mapPageVtx[60] QUAD_MAP_WORLD_CLOUDS_CLOCK_TOWN_1
     9,    // mapPageVtx[64] QUAD_MAP_WORLD_CLOUDS_CLOCK_TOWN_2
     43,   // mapPageVtx[68] QUAD_MAP_WORLD_CLOUDS_WOODFALL_1
@@ -209,7 +209,7 @@ s16 sVtxPageMapWorldQuadsX[VTX_PAGE_MAP_WORLD_QUADS] = {
     54,   // mapPageVtx[200] QUAD_MAP_OWL_WARP_STONE_TOWER
 };
 
-s16 gVtxPageMapWorldQuadsWidth[VTX_PAGE_MAP_WORLD_QUADS] = {
+static s16 gVtxPageMapWorldQuadsWidth[VTX_PAGE_MAP_WORLD_QUADS] = {
     80,  // mapPageVtx[60]  QUAD_MAP_WORLD_CLOUDS_CLOCK_TOWN_1
     64,  // mapPageVtx[64]  QUAD_MAP_WORLD_CLOUDS_CLOCK_TOWN_2
     64,  // mapPageVtx[68]  QUAD_MAP_WORLD_CLOUDS_WOODFALL_1
@@ -247,7 +247,7 @@ s16 gVtxPageMapWorldQuadsWidth[VTX_PAGE_MAP_WORLD_QUADS] = {
     24,  // mapPageVtx[196] QUAD_MAP_OWL_WARP_IKANA_CANYON
     24,  // mapPageVtx[200] QUAD_MAP_OWL_WARP_STONE_TOWER
 };
-s16 sVtxPageMapWorldQuadsY[VTX_PAGE_MAP_WORLD_QUADS] = {
+static s16 sVtxPageMapWorldQuadsY[VTX_PAGE_MAP_WORLD_QUADS] = {
     11,  // mapPageVtx[60] QUAD_MAP_WORLD_CLOUDS_CLOCK_TOWN_1
     22,  // mapPageVtx[64] QUAD_MAP_WORLD_CLOUDS_CLOCK_TOWN_2
     -16, // mapPageVtx[68] QUAD_MAP_WORLD_CLOUDS_WOODFALL_1
@@ -285,7 +285,7 @@ s16 sVtxPageMapWorldQuadsY[VTX_PAGE_MAP_WORLD_QUADS] = {
     -1,  // mapPageVtx[196] QUAD_MAP_OWL_WARP_IKANA_CANYON
     24,  // mapPageVtx[200] QUAD_MAP_OWL_WARP_STONE_TOWER
 };
-s16 gVtxPageMapWorldQuadsHeight[VTX_PAGE_MAP_WORLD_QUADS] = {
+static s16 gVtxPageMapWorldQuadsHeight[VTX_PAGE_MAP_WORLD_QUADS] = {
     40, // mapPageVtx[60] QUAD_MAP_WORLD_CLOUDS_CLOCK_TOWN_1
     31, // mapPageVtx[64] QUAD_MAP_WORLD_CLOUDS_CLOCK_TOWN_2
     53, // mapPageVtx[68] QUAD_MAP_WORLD_CLOUDS_WOODFALL_1
@@ -324,39 +324,39 @@ s16 gVtxPageMapWorldQuadsHeight[VTX_PAGE_MAP_WORLD_QUADS] = {
     12, // mapPageVtx[200] QUAD_MAP_OWL_WARP_STONE_TOWER
 };
 
-s16* sVtxPageQuadsX[VTX_PAGE_MAX] = {
+static s16* sVtxPageQuadsX[VTX_PAGE_MAX] = {
     sVtxPageMapWorldQuadsX,   // VTX_PAGE_MAP_WORLD
 };
 
-s16* sVtxPageQuadsWidth[VTX_PAGE_MAX] = {
+static s16* sVtxPageQuadsWidth[VTX_PAGE_MAX] = {
     gVtxPageMapWorldQuadsWidth,   // VTX_PAGE_MAP_WORLD
 };
 
-s16* sVtxPageQuadsY[VTX_PAGE_MAX] = {
+static s16* sVtxPageQuadsY[VTX_PAGE_MAX] = {
     sVtxPageMapWorldQuadsY,   // VTX_PAGE_MAP_WORLD
 };
 
-s16* sVtxPageQuadsHeight[VTX_PAGE_MAX] = {
+static s16* sVtxPageQuadsHeight[VTX_PAGE_MAX] = {
     gVtxPageMapWorldQuadsHeight,   // VTX_PAGE_MAP_WORLD
 };
 
-const u32 sWorldMapClockTownCloud1Tex = 0x0C008418;
-const u32 sWorldMapClockTownCloud2Tex = 0x0C009098;
-const u32 sWorldMapRomaniRanchCloudTex = 0x0C009858;
-const u32 sWorldMapGreatBayCloud1Tex = 0x0C009E58;
-const u32 sWorldMapGreatBayCloud2Tex = 0x0C00AE58;
-const u32 sWorldMapGreatBayCloud3Tex = 0x0C00BE58;
-const u32 sWorldMapGreatBayCloud4Tex = 0x0C00CE58;
-const u32 sWorldMapSnowheadCloud1Tex = 0x0C00DE58;
-const u32 sWorldMapSnowheadCloud2Tex = 0x0C00EB58;
-const u32 sWorldMapSnowheadCloud3Tex = 0x0C00FAA8;
-const u32 sWorldMapStoneTowerCloud1Tex = 0x0C0109F8;
-const u32 sWorldMapStoneTowerCloud2Tex = 0x0C011958;
-const u32 sWorldMapWoodfallCloud1Tex = 0x0C012898;
-const u32 sWorldMapWoodfallCloud2Tex = 0x0C0135D8;
-const u32 sWorldMapWoodfallCloud3Tex = 0x0C014318;
+static const u32 sWorldMapClockTownCloud1Tex = 0x0C008418;
+static const u32 sWorldMapClockTownCloud2Tex = 0x0C009098;
+static const u32 sWorldMapRomaniRanchCloudTex = 0x0C009858;
+static const u32 sWorldMapGreatBayCloud1Tex = 0x0C009E58;
+static const u32 sWorldMapGreatBayCloud2Tex = 0x0C00AE58;
+static const u32 sWorldMapGreatBayCloud3Tex = 0x0C00BE58;
+static const u32 sWorldMapGreatBayCloud4Tex = 0x0C00CE58;
+static const u32 sWorldMapSnowheadCloud1Tex = 0x0C00DE58;
+static const u32 sWorldMapSnowheadCloud2Tex = 0x0C00EB58;
+static const u32 sWorldMapSnowheadCloud3Tex = 0x0C00FAA8;
+static const u32 sWorldMapStoneTowerCloud1Tex = 0x0C0109F8;
+static const u32 sWorldMapStoneTowerCloud2Tex = 0x0C011958;
+static const u32 sWorldMapWoodfallCloud1Tex = 0x0C012898;
+static const u32 sWorldMapWoodfallCloud2Tex = 0x0C0135D8;
+static const u32 sWorldMapWoodfallCloud3Tex = 0x0C014318;
 
-u32 sCloudTextures[] = {
+static u32 sCloudTextures[] = {
     sWorldMapClockTownCloud1Tex,  // TINGLE_MAP_CLOCK_TOWN
     sWorldMapClockTownCloud2Tex,  // TINGLE_MAP_CLOCK_TOWN
     sWorldMapWoodfallCloud1Tex,   // TINGLE_MAP_WOODFALL
@@ -399,29 +399,29 @@ static f32 sOwlWarpWorldMapCursorsY[OWL_WARP_MAX - 1] = {
     11.0f,  // OWL_WARP_STONE_TOWER
 };
 
-s16 sCursorPrimColorTarget[][3] = {
+static s16 sCursorPrimColorTarget[][3] = {
     { 255, 255, 255 }, { 255, 255, 255 }, { 255, 255, 0 }, { 255, 255, 0 }, { 100, 150, 255 }, { 100, 255, 255 },
 };
-s16 sCursorEnvColorTarget[][3] = {
+static s16 sCursorEnvColorTarget[][3] = {
     { 0, 0, 0 }, { 170, 170, 170 }, { 0, 0, 0 }, { 255, 160, 0 }, { 0, 0, 100 }, { 0, 150, 255 },
 };
 
-f32 sCursorX;
-f32 sCursorY;
-f32 sCursorWidth;
-f32 sCursorHeight;
-f32 sCursorShrinkRate;
-s16 sCursorSpinPhase = 0xE000;
-s16 sCursorPrimR = 0;
-s16 sCursorPrimG = 0;
-s16 sCursorPrimB = 0;
-s16 sCursorEnvR = 0;
-s16 sCursorEnvG = 0;
-s16 sCursorEnvB = 0;
-f32 sCursorCirclesX[4];
-f32 sCursorCirclesY[4];
+static f32 sCursorX;
+static f32 sCursorY;
+static f32 sCursorWidth;
+static f32 sCursorHeight;
+static f32 sCursorShrinkRate;
+static s16 sCursorSpinPhase = 0xE000;
+static s16 sCursorPrimR = 0;
+static s16 sCursorPrimG = 0;
+static s16 sCursorPrimB = 0;
+static s16 sCursorEnvR = 0;
+static s16 sCursorEnvG = 0;
+static s16 sCursorEnvB = 0;
+static f32 sCursorCirclesX[4];
+static f32 sCursorCirclesY[4];
 
-u32 sCursorTexs[] = {
+static u32 sCursorTexs[] = {
     0x08000000 + 0x5C1C0,
     0x08000000 + 0x5C240,
     0x08000000 + 0x5C340,
@@ -466,7 +466,7 @@ static void KaleidoScope_UpdateSoaringMapCursor(GameState_Play* play)
     }
 }
 
-void LoadMapName(void* dst, u32 mapNameId)
+static void LoadMapName(void* dst, u32 mapNameId)
 {
     u32 vromAddr = kComboDmaData[0x5E6 + 18].vstart;
     // u32 size = 0x400;
@@ -487,7 +487,7 @@ void LoadMapName(void* dst, u32 mapNameId)
     Yaz0_Decompress(romAddr + headerSize + offsets[0], dst, size);
 }
 
-void KaleidoScope_UpdateOwlWarpNamePanel(GameState_Play* play)
+static void KaleidoScope_UpdateOwlWarpNamePanel(GameState_Play* play)
 {
     PauseContext* pauseCtx = &play->pauseCtx;
     u16 texIndex;
@@ -513,7 +513,7 @@ void KaleidoScope_UpdateOwlWarpNamePanel(GameState_Play* play)
     }
 }
 
-u32 sMapPageBgTextures[15];
+static u32 sMapPageBgTextures[15];
 
 void KaleidoScope_BeforeUpdate(GameState_Play* play)
 {
@@ -617,33 +617,23 @@ void KaleidoScope_BeforeUpdate(GameState_Play* play)
             WREG(16) = -175;
             WREG(17) = 155;
 
-            u32 src = 0x7BD000;
-            u32 dst = ALIGN16((u32)play->objectCtx.spaceStart);
+            u32 dest = ALIGN16((u32)play->objectCtx.spaceStart);
 
-            pauseCtx->iconItemSegment = (u8*) dst;
-            size = 0x888A0;
-            // CmpDma_LoadAllFiles(SEGMENT_ROM_START(icon_item_static_test), pauseCtx->iconItemSegment, size);
-            LoadFile((void*)dst, src, size);
-            dst = ALIGN16(dst + size);
+            pauseCtx->iconItemSegment = (u8*) dest;
+            size = comboLoadFile(dest, 8); // icon_item_static
+            dest = ALIGN16(dest + size);
 
-            pauseCtx->iconItemAltSegment = (u8*) dst;
-            // sInDungeonScene = false;
-            src = kComboDmaData[0x5E6 + 10].vstart; // icon_item_field_static
-            size = 0x14AF0;
-            LoadFile((void*)dst, src, size);
-            dst = ALIGN16(dst + size);
+            pauseCtx->iconItemAltSegment = (u8*) dest;
+            size = comboLoadForeignFile(dest, 10); // icon_item_field_static
+            dest = ALIGN16(dest + size);
 
-            pauseCtx->iconItemLangSegment = (u8*) dst;
-            src = kComboDmaData[0x5E6 + 13].vstart; // icon_item_jpn_static
-            size = 0x8A00;
-            LoadFile((void*)dst, src, size);
-            dst = ALIGN16(dst + size);
+            pauseCtx->iconItemLangSegment = (u8*) dest;
+            size = comboLoadForeignFile(dest, 13); // icon_item_jpn_static
+            dest = ALIGN16(dest + size);
 
-            pauseCtx->nameSegment = (u8*) dst;
-            LoadMapName((void*)dst, pauseCtx->world_map_cursor);
-            Interface_SetDoAction(play, 0x06); // DO_ACTION_DECIDE
-            Interface_LoadActionLabelB(play, 0x12); // DO_ACTION_STOP
-            dst = ALIGN16(dst + 0xA00);
+            pauseCtx->nameSegment = (u8*) dest;
+            LoadMapName((void*)dest, pauseCtx->world_map_cursor);
+            dest = ALIGN16(dest + 0xA00);
 
             u32* srcMapPageBgTextures = (u32*)OverlayAddr(0x80829B74);
             for (u8 i = 0; i < ARRAY_SIZE(sMapPageBgTextures); i++)
@@ -652,6 +642,8 @@ void KaleidoScope_BeforeUpdate(GameState_Play* play)
             }
             sMapPageBgTextures[5] = 0x0D006200;
 
+            Interface_SetDoAction(play, 0x06); // DO_ACTION_DECIDE
+            Interface_LoadActionLabelB(play, 0x12); // DO_ACTION_STOP
             pauseCtx->state = PAUSE_STATE_OWLWARP_3;
             VREG(88) = 98;
             pauseCtx->promptChoice = 0; // PAUSE_PROMPT_YES
@@ -736,7 +728,7 @@ void KaleidoScope_BeforeUpdate(GameState_Play* play)
     }
 }
 
-void KaleidoScope_DrawWorldMap(GameState_Play* play) {
+static void KaleidoScope_DrawWorldMap(GameState_Play* play) {
     s16 n;
     s16 j;
     s16 k;
@@ -1101,7 +1093,7 @@ static void KaleidoScope_DrawOwlWarpInfoPanel(GameState_Play* play)
     CLOSE_DISPS();
 }
 
-void KaleidoScope_DrawCursor(GameState_Play* play) {
+static void KaleidoScope_DrawCursor(GameState_Play* play) {
     PauseContext* pauseCtx = &play->pauseCtx;
     s16 i;
     s16 stepR;
@@ -1267,7 +1259,7 @@ static void KaleidoScope_UpdateCursorSize(GameState_Play* play)
     sCursorCirclesY[3] = Math_CosS(sCursorSpinPhase + 0xC000) * sCursorHeight;
 }
 
-s16 KaleidoScope_SetPageVertices(GameState_Play* play, Vtx* vtx, s16 vtxPage, s16 numQuads) {
+static s16 KaleidoScope_SetPageVertices(GameState_Play* play, Vtx* vtx, s16 vtxPage, s16 numQuads) {
     PauseContext* pauseCtx = &play->pauseCtx;
     s16* quadsX;
     s16* quadsWidth;
@@ -1476,7 +1468,6 @@ s32 KaleidoScope_BeforeDraw(GameState_Play* play)
 
         if (pauseCtx->state == PAUSE_STATE_OWLWARP_SELECT)
         {
-            // KaleidoScope_DrawCursor_Func KaleidoScope_DrawCursor = OverlayAddr(0x80394B00 + 0x48AC60);
             KaleidoScope_DrawCursor(play);
         }
 

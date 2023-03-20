@@ -115,6 +115,8 @@
 void comboDisableInterrupts(void);
 void comboDma(void* addr, u32 cartAddr, u32 size);
 void comboDma_NoCacheInval(void* addr, u32 cartAddr, u32 size);
+u32 comboLoadFile(void* dest, s32 fileIndex);
+u32 comboLoadForeignFile(void* dest, s32 foreignFileIndex);
 
 typedef struct PACKED ALIGNED(4)
 {
