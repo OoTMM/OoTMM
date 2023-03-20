@@ -329,7 +329,7 @@
   exits:
     "Swamp Front": "true"
   events:
-    KOUME: "has_bottle"
+    KOUME: "has_red_or_blue_potion"
   locations:
     "Woods of Mystery Grotto": "true"
     "Swamp Potion Shop Kotake": "true"
@@ -754,6 +754,8 @@
   region: MILK_ROAD
   exits:
     "Milk Road": "true"
+  events:
+    MILK: "true"
   locations:
     "Gorman Track Garo Mask": "can_play(SONG_EPONA)"
 "Road to Ikana Front":
@@ -771,7 +773,7 @@
     "Road to Ikana Top": "(has(MASK_GARO) || has(MASK_GIBDO)) && can_hookshot"
     "Ikana Graveyard": "true"
   locations:
-    "Road to Ikana Stone Mask": "can_use_lens_strict && has_bottle"
+    "Road to Ikana Stone Mask": "can_use_lens_strict && has_red_or_blue_potion"
   gossip:
     "Road to Ikana Gossip": "true"
 "Ikana Graveyard":

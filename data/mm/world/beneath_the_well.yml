@@ -16,7 +16,7 @@
   region: BENEATH_THE_WELL
   exits:
     "Beneath the Well Entrance": "true"
-    "Beneath the Well End": "event(WELL_BIG_POE)"
+    "Beneath the Well End": "event(WELL_BIG_POE) && has_milk"
   events:
     WELL_BIG_POE: "has(MASK_GIBDO) && has_bottle && has(BOMB_BAG) && (has(BOW) || has(ZORA))"
   locations:

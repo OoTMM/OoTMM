@@ -1,5 +1,6 @@
 import { Monitor } from '../monitor';
 import { Settings } from '../settings';
+import { ONE_TIME_SHOP_CHECKS } from './helpers';
 import { World } from './world';
 
 export class LogicPassFixer {
@@ -34,7 +35,7 @@ export class LogicPassFixer {
         if (game === 'oot' && this.state.settings.shopShuffleOot === 'none') {
           this.fixedLocations.add(loc);
         }
-        else if (game === 'mm' && this.state.settings.shopShuffleMm === 'none') {
+        else if (game === 'mm' && this.state.settings.shopShuffleMm === 'none' && !ONE_TIME_SHOP_CHECKS.includes(loc)) {
           this.fixedLocations.add(loc);
         }
       }
