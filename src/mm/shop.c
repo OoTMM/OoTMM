@@ -129,6 +129,26 @@ u8 comboShopItemSlot(GameState_Play* play, Actor_EnGirlA* girlA)
             return 0x0f;
         }
         break;
+    case SCE_MM_GORON_SHOP:
+        switch (girlA->base.variable)
+        {
+        case SHOP_ARROWS_10:
+        case SHOP_ARROWS_10_ALT:
+        case SHOP_ARROWS_10_ALT2:
+            return 0x10;
+        case SHOP_BOMBS_10:
+        case SHOP_BOMBS_10_ALT:
+        case SHOP_BOMBS_10_ALT2:
+            return 0x11;
+        case SHOP_POTION_RED:
+        case SHOP_POTION_RED_ALT:
+        case SHOP_POTION_RED_ALT2:
+        case SHOP_POTION_RED_ALT3:
+        case SHOP_POTION_RED_ALT4:
+        case SHOP_POTION_RED_ALT5:
+            return 0x12;
+        }
+        break;
     }
 
     /* UNREACHABLE(); */

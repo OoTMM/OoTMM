@@ -29,3 +29,13 @@ PATCH_END
 PATCH_START 0x80a8cab4
   nop
 PATCH_END
+
+/* Rework the blue potion mushroom check */
+PATCH_START 0x80a8ca80
+  lh t1,0x1a0(t0)
+  li at,0x1
+PATCH_END
+
+PATCH_START 0x80a8ca94
+  li t3,0
+PATCH_END

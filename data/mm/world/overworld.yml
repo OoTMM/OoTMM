@@ -507,10 +507,19 @@
   region: GORON_VILLAGE
   exits:
     "Goron Village": "true"
+    "Goron Shop": "true"
   events:
     GORON_FOOD: "has(MASK_GORON) && has(MAGIC_UPGRADE) && (can_use_fire_arrows || can_lullaby_half)"
   locations:
     "Goron Baby": "has(MASK_GORON) && can_lullaby_half"
+"Goron Shop":
+  region: GORON_VILLAGE
+  exits:
+    "Goron Shrine": "true"
+  locations:
+    "Goron Shop Item 1": "true"
+    "Goron Shop Item 2": "true"
+    "Goron Shop Item 3": "true"
 "Path to Snowhead Front":
   region: PATH_TO_SNOWHEAD
   exits:

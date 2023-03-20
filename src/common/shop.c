@@ -56,6 +56,11 @@ void comboShopUpdateItem(GameState_Play* play, Actor_EnGirlA* girlA)
 
 void comboShopSetupItem(GameState_Play* play, Actor_EnGirlA* girlA)
 {
+#if defined(GAME_MM)
+    if (girlA->base.variable == 2)
+        girlA->disabled = !(MM_GET_EVENT_WEEK(EV_MM_WEEK_WITCH_MUSHROOM));
+#endif
+
     girlA->shopId = comboShopItemSlot(play, girlA);
     comboShopUpdateItem(play, girlA);
 }

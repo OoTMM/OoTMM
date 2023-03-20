@@ -1,5 +1,16 @@
 #include <combo.h>
 
+static int EnTrt_HasGivenItem(Actor_EnTrt* this, GameState_Play* play)
+{
+    if (!Actor_HasParent(&this->base))
+        return 0;
+
+    comboShopAfterBuy(play, this->items[this->itemIndex]);
+    return 1;
+}
+
+PATCH_CALL(0x80a8dfcc, EnTrt_HasGivenItem);
+
 static void EnTrt_DisplayShopTextBoxConfirm(Actor_EnTrt* this)
 {
     comboShopDisplayTextBoxConfirm(gPlay, this->items[this->itemIndex]);
