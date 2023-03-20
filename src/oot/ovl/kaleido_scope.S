@@ -142,3 +142,95 @@ PATCH_START 0x8082f694
 .int 0
 .int 0
 PATCH_END
+
+PATCH_START 0x80099F80
+  ADDIU   a2, zero, 0x0008
+  BEQ     a2, a0, .LstartPause
+  ADDIU   at, zero, 0x0001
+  BEQ     at, a0, .LcheckLetterbox
+  ADDIU   at, zero, PAUSE_STATE_OWLWARP_0
+  BNE     at, a0, .LcheckPreReady
+  OR      v0, a0, zero
+.LcheckLetterbox:
+  JAL     0x80099650
+  SW      v1, 0x001C (sp)
+  LW      v1, 0x001C (sp)
+  BNEZ    v0, . + 0x130 // return
+.LstartPause:
+  ADDIU   a2, zero, 0x0001
+  LW      t2, 0x8011BA00
+  SH      a2, 0x0190 (t2)
+  LHU     t4, 0x01D4 (v1)
+  SH      zero, 0x01E4 (v1)
+  SH      zero, 0x01EC (v1)
+  ADDIU   t5, t4, 0x0001
+  B       . + 0x10C // return
+  SH      t5, 0x01D4 (v1)
+  NOP
+  NOP
+  NOP
+  NOP
+  NOP
+.LcheckPreReady:
+  ADDIU   at, zero, PAUSE_STATE_OWLWARP_1
+  BEQ     v0, at, . + 0x1C
+  LUI     t6, 0x8012
+  ADDIU   at, zero, 0x0002
+  BEQ     v0, at, . + 0x10
+PATCH_END
+
+KaleidoScope_BeforeUpdate_Hook:
+  ADDIU   sp, sp, -0x18
+  SW      ra, 0x0014 (sp)
+  JAL     KaleidoScope_BeforeUpdate
+  NOP
+  LA      t0, 0x8011BA00
+  LW      ra, 0x0014 (sp)
+  JR      ra
+  ADDIU   sp, sp, 0x18
+
+PATCH_START 0x808263C8
+  OR      s1, a0, zero
+  SW      ra, 0x0024 (sp)
+  JAL     KaleidoScope_BeforeUpdate_Hook
+  NOP
+PATCH_END
+
+KaleidoScope_BeforeDraw_Hook:
+  ADDIU   sp, sp, -0x18
+  SW      ra, 0x0014 (sp)
+  SW      t0, 0x0010 (sp)
+
+  JAL     KaleidoScope_BeforeDraw
+  OR      a0, s1, zero
+
+  OR      t5, v0, zero
+  OR      a0, s0, zero
+  LHU     v0, 0x01D4 (s0)
+
+  LW      t0, 0x0010 (sp)
+  LW      ra, 0x0014 (sp)
+  JR      ra
+  ADDIU   sp, sp, 0x18
+
+PATCH_START 0x8039AEC0 + 0x48AC60 // RAM + VRAM Offset
+  JAL     KaleidoScope_BeforeDraw_Hook
+  NOP
+  BNEZ    t5, . + 0xA0
+PATCH_END
+
+PATCH_START 0x8009A110
+  LBU     v0, 0x0935 (v0)
+PATCH_END
+
+PATCH_START 0x80398BE4 + 0x48AC60 // RAM + VRAM Offset
+  LBU     t6, 0x0935 (v0)
+PATCH_END
+
+PATCH_START 0x80398C00 + 0x48AC60 // RAM + VRAM Offset
+  LBU     v0, 0x01d5 (t0)
+PATCH_END
+
+PATCH_START 0x80394B6C + 0x48AC60 // RAM + VRAM Offset
+  LBU     t8, 0x01d5 (v1)
+PATCH_END

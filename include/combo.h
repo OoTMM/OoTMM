@@ -25,6 +25,7 @@
 # if defined(GAME_OOT)
 #  include <combo/oot/play.h>
 #  include <combo/oot/player.h>
+#  include <combo/oot/pause_state.h>
 #  include <combo/oot/actors/Item_Etcetera.h>
 #  include <combo/oot/actors/En_Ossan.h>
 # endif
@@ -57,6 +58,9 @@
 #include <combo/scenes.h>
 #include <combo/shader.h>
 #include <combo/config.h>
+#if defined (GAME_OOT)
+# include <combo/oot/pause_state_defs.h>
+#endif
 
 /* Boss IDs */
 #define BOSSID_GOHMA                0x00
@@ -429,6 +433,12 @@ extern u8 gCustomOcarinaSong;
 
 /* Special */
 int comboSpecialCond(int special);
+
+#if defined (GAME_OOT)
+extern u16 gPrevPageIndex;
+extern s16 gPrevCursorPoint;
+extern s8 gSoaringIndexSelected;
+#endif
 
 #else
 # include <combo/asm.h>
