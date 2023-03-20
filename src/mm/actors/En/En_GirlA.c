@@ -32,11 +32,14 @@ static int itemPrice(GameState_Play* play, Actor_EnGirlA* girlA)
     return kitemPrices[girlA->shopId];
 }
 
-void EnGirlA_Draw(Actor_EnGirlA* girlA, GameState_Play* play)
+void EnGirlA_Draw(Actor_EnGirlA* this, GameState_Play* play)
 {
-    if (girlA->gi != GI_MM_SOLD_OUT)
-        MatrixRotation(girlA->angle, 1);
-    comboDrawGI(play, &girlA->base, girlA->gi, 0);
+    /* KLUDGE: Should not be here but the update func is annoying to patch */
+    comboShopUpdateItem(play, this);
+
+    if (this->gi != GI_MM_SOLD_OUT)
+        MatrixRotation(this->angle, 1);
+    comboDrawGI(play, &this->base, this->gi, 0);
 }
 
 void EnGirlA_AfterHandler(Actor_EnGirlA* this, GameState_Play* play)
