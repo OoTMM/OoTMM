@@ -303,6 +303,7 @@
   locations:
     "Southern Swamp HP": "has(DEED_LAND) && has(MASK_DEKU)"
     "Southern Swamp Scrub Deed": "has(DEED_LAND)"
+    #"Southern Swamp Scrub Purchase": "has(MASK_DEKU)"
   gossip:
     "Southern Swamp Gossip": "true"
 "Swamp Back":
@@ -731,8 +732,9 @@
     "Zora Cape Peninsula": "true"
     "Zora Shop": "true"
   locations:
-    "Zora Hall Scrub HP": "has(DEED_MOUNTAIN) && has(MASK_GORON) && has(MASK_DEKU)"
-    "Zora Hall Scrub Deed": "has(DEED_MOUNTAIN) && has(MASK_GORON)"
+    "Zora Hall Scrub HP": "has(DEED_MOUNTAIN) && has(MASK_GORON) && has(MASK_DEKU) && has(MASK_ZORA)"
+    "Zora Hall Scrub Deed": "has(DEED_MOUNTAIN) && has(MASK_GORON) && has(MASK_ZORA)"
+    #"Zora Hall Scrub Purchase": "has(MASK_ZORA)"
     "Zora Hall Evan HP": "has(MASK_ZORA) && has_ocarina"
     "Zora Hall Scene Lights": "can_use_fire_arrows"
 "Zora Shop":
@@ -824,6 +826,7 @@
   locations:
     "Ikana Valley Scrub Rupee": "has(DEED_OCEAN) && has(MASK_ZORA)"
     "Ikana Valley Scrub HP": "has(DEED_OCEAN) && has(MASK_ZORA) && has(MASK_DEKU)"
+    #"Ikana Valley Scrub Purchase": "has(WALLET)"
     "Ikana Valley Grotto": "true"
   gossip:
     "Ikana Valley Gossip Lower": "true"
