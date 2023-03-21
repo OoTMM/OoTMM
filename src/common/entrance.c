@@ -1,9 +1,9 @@
 #include <combo.h>
 
 #if defined(GAME_OOT)
-# define ENTRANCES_ADDR 0x03fe8000
+# define ENTRANCES_ADDR 0x03fec000
 #else
-# define ENTRANCES_ADDR 0x03fe9000
+# define ENTRANCES_ADDR 0x03fed000
 #endif
 
 s8  gIsEntranceOverride;

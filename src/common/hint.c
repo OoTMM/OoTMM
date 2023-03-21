@@ -1,9 +1,9 @@
 #include <combo.h>
 
 #if defined(GAME_OOT)
-# define HINTS_ADDR 0x03fe5000
+# define HINTS_ADDR 0x03fe9000
 #else
-# define HINTS_ADDR 0x03fe6000
+# define HINTS_ADDR 0x03fea000
 #endif
 
 typedef struct PACKED ALIGNED(2)

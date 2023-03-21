@@ -3,10 +3,10 @@
 #if defined(GAME_OOT)
 # define OVERRIDE_ADDR 0x03fe1000
 #else
-# define OVERRIDE_ADDR 0x03fe3000
+# define OVERRIDE_ADDR 0x03fe5000
 #endif
 
-#define OVERRIDE_MAX 512
+#define OVERRIDE_MAX 1024
 
 typedef struct PACKED
 {

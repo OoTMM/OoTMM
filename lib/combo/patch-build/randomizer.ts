@@ -13,19 +13,19 @@ import { Patchfile } from './patchfile';
 
 const GAME_DATA_OFFSETS = {
   oot: 0x1000,
-  mm: 0x3000,
+  mm: 0x5000,
 };
 
 const HINTS_DATA_OFFSETS = {
-  oot: 0x5000,
-  mm: 0x6000,
+  oot: 0x9000,
+  mm: 0xa000,
 };
 
-const STARTING_ITEMS_DATA_OFFSET = 0x7000;
+const STARTING_ITEMS_DATA_OFFSET = 0xb000;
 
 const ENTRANCE_DATA_OFFSETS = {
-  oot: 0x8000,
-  mm: 0x9000,
+  oot: 0xc000,
+  mm: 0xd000,
 };
 
 const SHARED_ITEMS_OOT = new Map([
