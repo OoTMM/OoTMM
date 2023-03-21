@@ -31,18 +31,18 @@
 #define SHOP_ARROWS_10              0x1c
 #define SHOP_POTION_RED_ALT3        0x1d
 #define SHOP_BOMBS_10_ALT           0x1e
-#define SHOP_ARROWS_10_ALT          0x20
-#define SHOP_POTION_RED_ALT4        0x21
-#define SHOP_BOMBS_10_ALT2          0x22
-#define SHOP_ARROWS_10_ALT2         0x23
-#define SHOP_POTION_RED_ALT5        0x24
-#define SHOP_ITEM_A9                0x25
-#define SHOP_ITEM_9B                0x26
-#define SHOP_ITEM_9C                0x27
-#define SHOP_ITEM_9D                0x28
-#define SHOP_ITEM_9E                0x29
-#define SHOP_ITEM_9F                0x2a
-#define SHOP_ITEM_SHIELD_MIRROR     0x2b
+#define SHOP_ARROWS_10_ALT          0x1f
+#define SHOP_POTION_RED_ALT4        0x20
+#define SHOP_BOMBS_10_ALT2          0x21
+#define SHOP_ARROWS_10_ALT2         0x22
+#define SHOP_POTION_RED_ALT5        0x23
+#define SHOP_ITEM_A9                0x24
+#define SHOP_ITEM_9B                0x25
+#define SHOP_ITEM_9C                0x26
+#define SHOP_ITEM_9D                0x27
+#define SHOP_ITEM_9E                0x28
+#define SHOP_ITEM_9F                0x29
+#define SHOP_ITEM_SHIELD_MIRROR     0x2a
 
 void shopWriteFlag(int flag)
 {
@@ -133,13 +133,13 @@ u8 comboShopItemSlot(GameState_Play* play, Actor_EnGirlA* girlA)
     case SCE_MM_GORON_SHOP:
         switch (girlA->base.variable)
         {
-        case SHOP_ARROWS_10:
-        case SHOP_ARROWS_10_ALT:
-        case SHOP_ARROWS_10_ALT2:
-            return 0x10;
         case SHOP_BOMBS_10:
         case SHOP_BOMBS_10_ALT:
         case SHOP_BOMBS_10_ALT2:
+            return 0x10;
+        case SHOP_ARROWS_10:
+        case SHOP_ARROWS_10_ALT:
+        case SHOP_ARROWS_10_ALT2:
             return 0x11;
         case SHOP_POTION_RED:
         case SHOP_POTION_RED_ALT:
