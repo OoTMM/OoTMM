@@ -138,23 +138,23 @@ int comboSpecialCond(int special)
     {
         if (comboConfig(CFG_SHARED_MASKS))
         {
-            if (gOotExtraTrade.child & XITEM_OOT_CHILD_KEATON_MASK) hasMaskKeaton = 1;
-            if (gOotExtraTrade.child & XITEM_OOT_CHILD_BUNNY_HOOD) hasMaskBunny = 1;
-            if (gOotExtraTrade.child & XITEM_OOT_CHILD_MASK_OF_TRUTH) hasMaskTruth = 1;
-            if (gOotExtraTrade.child & XITEM_OOT_CHILD_ZORA_MASK) hasMaskZora = 1;
-            if (gOotExtraTrade.child & XITEM_OOT_CHILD_GORON_MASK) hasMaskGoron = 1;
+            if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_KEATON_MASK)) hasMaskKeaton = 1;
+            if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_BUNNY_HOOD)) hasMaskBunny = 1;
+            if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_MASK_OF_TRUTH)) hasMaskTruth = 1;
+            if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_ZORA_MASK)) hasMaskZora = 1;
+            if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_GORON_MASK)) hasMaskGoron = 1;
         }
         else
         {
-            if (gOotExtraTrade.child & XITEM_OOT_CHILD_KEATON_MASK) count++;
-            if (gOotExtraTrade.child & XITEM_OOT_CHILD_BUNNY_HOOD) count++;
-            if (gOotExtraTrade.child & XITEM_OOT_CHILD_MASK_OF_TRUTH) count++;
-            if (gOotExtraTrade.child & XITEM_OOT_CHILD_ZORA_MASK) count++;
-            if (gOotExtraTrade.child & XITEM_OOT_CHILD_GORON_MASK) count++;
+            if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_KEATON_MASK)) count++;
+            if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_BUNNY_HOOD)) count++;
+            if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_MASK_OF_TRUTH)) count++;
+            if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_ZORA_MASK)) count++;
+            if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_GORON_MASK)) count++;
         }
-        if (gOotExtraTrade.child & XITEM_OOT_CHILD_GERUDO_MASK) count++;
-        if (gOotExtraTrade.child & XITEM_OOT_CHILD_SPOOKY_MASK) count++;
-        if (gOotExtraTrade.child & XITEM_OOT_CHILD_SKULL_MASK) count++;
+        if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_GERUDO_MASK)) count++;
+        if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_SPOOKY_MASK)) count++;
+        if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_SKULL_MASK)) count++;
     }
 
     count += hasMaskKeaton;
