@@ -26,7 +26,7 @@
     "Clock Tower Roof": "true"
   events:
     CLOCK_TOWN_SCRUB: "has(MOON_TEAR)"
-    CLOCK_TOWN_OWL: "true"
+    CLOCK_TOWN_OWL: "can_play(SONG_SOARING)"
   locations:
     "Clock Town South Chest Lower": "can_hookshot || (has(MASK_DEKU) && event(CLOCK_TOWN_SCRUB)) || trick(MM_SCT_NOTHING) || can_goron_bomb_jump"
     "Clock Town South Chest Upper": "can_hookshot || (has(MASK_DEKU) && event(CLOCK_TOWN_SCRUB)) || (can_goron_bomb_jump && can_hookshot_short)"
@@ -223,7 +223,7 @@
     SCRUB_TELESCOPE: "true"
     TEAR_TELESCOPE: "true"
   locations:
-    "Astral Observatory Passage Chest": "has_explosives"
+    "Astral Observatory Passage Chest": "(has_explosives || (trick_keg_explosives && (has(MASK_DEKU) || event(GUESS_BOMBER) || event(BOMBER_CODE))))"
 "Astral Observatory Balcony":
   region: TERMINA_FIELD
   exits:
@@ -254,12 +254,12 @@
     "Termina Field Tall Grass Grotto": "true"
     "Termina Field Pillar Grotto": "true"
     "Termina Field Peahat Grotto": "can_fight || has(BOW) || has(MASK_DEKU)"
-    "Termina Field Dodongo Grotto": "has_weapon || has(BOMB_BAG) || has(MASK_GORON) || has(BOW)"
+    "Termina Field Dodongo Grotto": "has_weapon || has_explosives || has(MASK_GORON) || has(BOW)"
     "Termina Field Bio Baba Grotto": "can_break_boulders && has(MASK_ZORA)"
     "Termina Field Scrub": "event(SCRUB_TELESCOPE) && has(WALLET)"
     "Termina Field Gossip Stones HP": "has_ocarina && ((has(MASK_GORON) && has_goron_song) || (has(MASK_DEKU) && has(SONG_AWAKENING)) || (has(MASK_ZORA) && has(SONG_ZORA))) && can_break_boulders"
-    "Termina Field Cow Front": "has_explosives && can_play(SONG_EPONA)"
-    "Termina Field Cow Back": "has_explosives && can_play(SONG_EPONA)"
+    "Termina Field Cow Front": "(has_explosives || trick_keg_explosives) && can_play(SONG_EPONA)"
+    "Termina Field Cow Back": "(has_explosives || trick_keg_explosives) && can_play(SONG_EPONA)"
   gossip:
     "Termina Field Gossip Southeast": "true"
     "Termina Field Gossip Southwest": "true"
@@ -299,7 +299,7 @@
   events:
     MAGIC_BEANS_SWAMP: "has(MAGIC_BEAN) && has(MASK_DEKU)"
     FROG_3: "has(MASK_DON_GERO)"
-    SWAMP_OWL: "true"
+    SWAMP_OWL: "can_play(SONG_SOARING)"
   locations:
     "Southern Swamp HP": "has(DEED_LAND) && has(MASK_DEKU)"
     "Southern Swamp Scrub Deed": "has(DEED_LAND)"
@@ -391,7 +391,7 @@
     "Woodfall Near Great Fairy Fountain": "has(MASK_DEKU) || event(CLEAN_SWAMP)"
     "Woodfall Front of Temple": "event(OPEN_WOODFALL_TEMPLE)"
   events:
-    WOODFALL_OWL: "true"
+    WOODFALL_OWL: "can_play(SONG_SOARING)"
     OPEN_WOODFALL_TEMPLE: "has(MASK_DEKU) && can_play(SONG_AWAKENING)"
   locations:
     "Woodfall Near Owl Chest": "has(MASK_DEKU) || can_hookshot"
@@ -439,7 +439,7 @@
     "Mountain Village Gossip Outside": "event(BOSS_SNOWHEAD)"
     "Mountain Village Gossip Tunnel": "event(BOSS_SNOWHEAD) && (has(MASK_GORON) || has(MASK_ZORA))"
   events:
-    MOUNTAIN_VILLAGE_OWL: "true"
+    MOUNTAIN_VILLAGE_OWL: "can_play(SONG_SOARING)"
   locations:
     "Mountain Village Waterfall Chest": "event(BOSS_SNOWHEAD) && can_use_lens"
     "Mountain Village Don Gero Mask": "event(GORON_FOOD)"
@@ -466,8 +466,8 @@
   locations:
     "Twin Islands Underwater Chest 1": "event(BOSS_SNOWHEAD) && has(MASK_ZORA)"
     "Twin Islands Underwater Chest 2": "event(BOSS_SNOWHEAD) && has(MASK_ZORA)"
-    "Twin Islands Frozen Grotto Chest": "(event(GORON_GRAVEYARD_HOT_WATER) || can_use_fire_arrows || event(BOSS_SNOWHEAD) || (event(WELL_HOT_WATER) && can_play(SONG_SOARING))) && has_explosives"
-    "Twin Islands Ramp Grotto Chest": "has_explosives && (has(MASK_GORON) || scarecrow_hookshot)"
+    "Twin Islands Frozen Grotto Chest": "(event(GORON_GRAVEYARD_HOT_WATER) || can_use_fire_arrows || event(BOSS_SNOWHEAD) || (event(WELL_HOT_WATER) && can_play(SONG_SOARING))) && (has_explosives || trick_keg_explosives || (trick(MM_KEG_EXPLOSIVES) && event(POWDER_KEG_TRIAL)))"
+    "Twin Islands Ramp Grotto Chest": "(has_explosives || trick_keg_explosives || (trick(MM_KEG_EXPLOSIVES) && event(POWDER_KEG_TRIAL))) && (has(MASK_GORON) || scarecrow_hookshot)"
     "Goron Elder": "has(MASK_GORON) && (event(GORON_GRAVEYARD_HOT_WATER) || can_use_fire_arrows || (event(WELL_HOT_WATER) && can_play(SONG_SOARING)))"
 "Goron Village":
   region: GORON_VILLAGE
@@ -494,7 +494,7 @@
     "Front of Lone Peak Shrine": "true"
   locations:
     "Lone Peak Shrine Lens Chest": "true"
-    "Lone Peak Shrine Boulder Chest": "has_explosives"
+    "Lone Peak Shrine Boulder Chest": "has_explosives || trick_keg_explosives"
     "Lone Peak Shrine Invisible Chest": "can_use_lens"
 "Goron Graveyard":
   region: MOUNTAIN_VILLAGE
@@ -539,7 +539,7 @@
     "Path to Snowhead Middle": "goron_fast_roll"
     "Snowhead Entrance": "true"
   locations:
-    "Path to Snowhead Grotto": "has_explosives"
+    "Path to Snowhead Grotto": "has_explosives || trick_keg_explosives"
 "Snowhead Entrance":
   region: SNOWHEAD
   exits:
@@ -547,7 +547,7 @@
     "Snowhead": "event(OPEN_SNOWHEAD_TEMPLE)"
     "Snowhead Near Great Fairy Fountain": "event(OPEN_SNOWHEAD_TEMPLE)"
   events:
-    SNOWHEAD_OWL: "true"
+    SNOWHEAD_OWL: "can_play(SONG_SOARING)"
     OPEN_SNOWHEAD_TEMPLE: "can_lullaby || event(BOSS_SNOWHEAD)"
 "Snowhead":
   region: SNOWHEAD
@@ -578,7 +578,7 @@
     "Termina Field": "true"
     "Gorman Track": "true"
   events:
-    MILK_ROAD_OWL: "true"
+    MILK_ROAD_OWL: "can_play(SONG_SOARING)"
   gossip:
     "Milk Road Gossip": "true"
 "Romani Ranch":
@@ -637,7 +637,7 @@
     "Zora Cape": "true"
     "Ocean Spider House": "true"
   events:
-    GREAT_BAY_OWL: "true"
+    GREAT_BAY_OWL: "can_play(SONG_SOARING)"
   locations:
     "Great Bay Coast Zora Mask": "can_play(SONG_HEALING)"
     "Great Bay Coast HP": "can_use_beans && scarecrow_hookshot"
@@ -697,7 +697,7 @@
   region: ZORA_CAPE
   exits:
     "Zora Cape": "true"
-    "Great Bay Fairy Fountain": "has_explosives"
+    "Great Bay Fairy Fountain": "has_explosives || trick_keg_explosives"
 "Great Bay Fairy Fountain":
   region: ZORA_CAPE
   exits:
@@ -750,7 +750,7 @@
     "Zora Hall": "true"
     "Great Bay Temple": "has(MASK_ZORA) && can_hookshot && can_play(SONG_ZORA)"
   events:
-    ZORA_CAPE_OWL: "true"
+    ZORA_CAPE_OWL: "can_play(SONG_SOARING)"
 "Gorman Track":
   region: MILK_ROAD
   exits:
@@ -763,14 +763,14 @@
   region: ROAD_TO_IKANA
   exits:
     "Termina Field": "true"
-    "Road to Ikana Center": "can_play(SONG_EPONA) || can_goron_bomb_jump"
+    "Road to Ikana Center": "can_play(SONG_EPONA) || (can_goron_bomb_jump && has(BOMB_BAG))"
   locations:
     "Road to Ikana Chest": "can_hookshot || (can_hookshot_short && trick(MM_SHORT_HOOK_HARD))"
     "Road to Ikana Grotto": "has(MASK_GORON)"
 "Road to Ikana Center":
   region: ROAD_TO_IKANA
   exits:
-    "Road to Ikana Front": "can_play(SONG_EPONA) || can_goron_bomb_jump"
+    "Road to Ikana Front": "can_play(SONG_EPONA) || (can_goron_bomb_jump && has(BOMB_BAG))"
     "Road to Ikana Top": "(has(MASK_GARO) || has(MASK_GIBDO)) && (can_hookshot || (can_hookshot_short && trick(MM_SHORT_HOOK_HARD)))"
     "Ikana Graveyard": "true"
   locations:
@@ -786,7 +786,7 @@
     "Beneath The Graveyard Night 3": "has(MASK_CAPTAIN)"
   locations:
     "Ikana Graveyard Captain Mask": "can_play(SONG_AWAKENING) && has(BOW) && can_fight"
-    "Ikana Graveyard Grotto": "has_explosives"
+    "Ikana Graveyard Grotto": "has_explosives || (trick_keg_explosives && (can_play(SONG_EPONA) || event(IKANA_CANYON_OWL)))"
 "Beneath The Graveyard Night 1":
   region: IKANA_GRAVEYARD
   exits:
@@ -799,7 +799,7 @@
   exits:
     "Ikana Graveyard": "true"
   locations:
-    "Beneath The Graveyard HP": "can_fight && has_explosives && can_use_lens"
+    "Beneath The Graveyard HP": "(has_explosives || (trick_keg_explosives && can_fight)) && can_use_lens"
 "Beneath The Graveyard Night 3":
   region: IKANA_GRAVEYARD
   exits:
@@ -846,7 +846,7 @@
     "Ancient Castle of Ikana Entrance": "true"
     "Stone Tower": "true"
   events:
-    IKANA_CANYON_OWL: "true"
+    IKANA_CANYON_OWL: "can_play(SONG_SOARING)"
   gossip:
     "Ikana Canyon Gossip Upper": "true"
 "Ikana Fairy Fountain":
@@ -885,7 +885,7 @@
     "Stone Tower Front of Temple": "can_use_elegy"
     "Stone Tower Top Inverted": "can_use_elegy && can_use_light_arrows"
   events:
-    STONE_TOWER_OWL: "true"
+    STONE_TOWER_OWL: "can_play(SONG_SOARING)"
 "Stone Tower Front of Temple":
   region: STONE_TOWER
   exits:

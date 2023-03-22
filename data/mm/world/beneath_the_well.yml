@@ -9,7 +9,7 @@
   exits:
     "Beneath the Well Entrance": "true"
   events:
-    WELL_HOT_WATER: "has_bottle && (has_explosives || has(MASK_ZORA))"
+    WELL_HOT_WATER: "has_bottle && (has_explosives || has(MASK_ZORA) || trick_keg_explosives)"
   locations:
     "Beneath the Well Keese Chest": "can_use_lens"
 "Beneath the Well East Section":
