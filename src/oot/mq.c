@@ -19,6 +19,10 @@ typedef struct
     u16 pathOffset;
     u32 minimapSize;
     u32 minimapOffset;
+    u32 polyCount;
+    u32 polyOffset;
+    u32 polyTypeCount;
+    u32 polyTypeOffset;
 }
 MqSceneHeader;
 
@@ -34,6 +38,23 @@ typedef struct
     u16 objectOffset;
 }
 MqRoomHeader;
+
+typedef struct
+{
+    u16 id;
+    u8  type;
+    u8  flags;
+}
+MqPolyPatch;
+
+typedef struct
+{
+    u32 id;
+    u32 hi;
+    u32 lo;
+    u32 unused;
+}
+MqPolyTypePatch;
 
 #define ROOM_ACTORS_MAX     64
 #define ROOM_OBJECTS_MAX    15
@@ -99,13 +120,24 @@ static int isEnabledMq(int dungeonId)
     *(s16*)((ptr) + 0x10 * (index) + 0x02) &= 0x1fff; \
     *(s16*)((ptr) + 0x10 * (index) + 0x02) |= ((flags) << 13);
 
-static void mqPatchCollisions(GameState_Play* play, void* collisions)
+#define PATCH_POLY_TYPE(ptr, index, hi, lo) \
+    *(u32*)((ptr) + 8 * (index) + 0x00) = (hi); \
+    *(u32*)((ptr) + 8 * (index) + 0x04) = (lo);
+
+static void mqPatchCollisions(GameState_Play* play, MqSceneHeader* scene, void* collisions)
 {
     u32 segPolys;
+    u32 segPolyTypes;
     char* polys;
+    char* polyTypes;
+    ALIGNED(16) char buffer[0x400];
+    int count;
+    int chunk;
 
     segPolys = *(u32*)((char*)collisions + 0x18);
+    segPolyTypes = *(u32*)((char*)collisions + 0x1c);
     polys = (char*)(gSegments[2] + 0x80000000 + (segPolys & 0xffffff));
+    polyTypes = (char*)(gSegments[2] + 0x80000000 + (segPolyTypes & 0xffffff));
 
     if (play->sceneId == SCE_OOT_INSIDE_GANON_CASTLE)
     {
@@ -125,6 +157,48 @@ static void mqPatchCollisions(GameState_Play* play, void* collisions)
         PATCH_POLY(polys, 2478, 57, 4);
         PATCH_POLY(polys, 2479, 57, 4);
         PATCH_POLY(polys, 2480, 57, 4);
+    }
+
+    if (scene->polyCount)
+    {
+        count = scene->polyCount;
+        chunk = 0;
+        while (count)
+        {
+            DMARomToRam((CUSTOM_MQ_SCENES_ADDR + (scene->polyOffset + chunk * sizeof(buffer))) | PI_DOM1_ADDR2, buffer, sizeof(buffer));
+            for (int i = 0; i < sizeof(buffer) / sizeof(MqPolyPatch); ++i)
+            {
+                MqPolyPatch* p;
+
+                p = (MqPolyPatch*)&buffer[i * sizeof(MqPolyPatch)];
+                PATCH_POLY(polys, p->id, p->type, p->flags);
+                count--;
+                if (count == 0)
+                    break;
+            }
+            chunk++;
+        }
+    }
+
+    if (scene->polyTypeCount)
+    {
+        count = scene->polyTypeCount;
+        chunk = 0;
+        while (count)
+        {
+            DMARomToRam((CUSTOM_MQ_SCENES_ADDR + (scene->polyTypeOffset + chunk * sizeof(buffer))) | PI_DOM1_ADDR2, buffer, sizeof(buffer));
+            for (int i = 0; i < sizeof(buffer) / sizeof(MqPolyTypePatch); ++i)
+            {
+                MqPolyTypePatch* p;
+
+                p = (MqPolyTypePatch*)&buffer[i * sizeof(MqPolyTypePatch)];
+                PATCH_POLY_TYPE(polyTypes, p->id, p->hi, p->lo);
+                count--;
+                if (count == 0)
+                    break;
+            }
+            chunk++;
+        }
     }
 }
 
@@ -146,18 +220,18 @@ static int findMqOverrideScene(GameState_Play* play, MqSceneHeader* dst)
     DMARomToRam(CUSTOM_MQ_SCENES_ADDR | PI_DOM1_ADDR2, buffer, sizeof(buffer));
     headerCount = *(u32*)buffer;
     headerPage = 0;
-    headerIndex = 1;
+    headerIndex = 2;
 
     while (headerCount--)
     {
-        header = (MqSceneHeader*)(buffer + headerIndex * 0x20);
+        header = (MqSceneHeader*)(buffer + headerIndex * 0x40);
         if (header->dungeonId == (u8)dungeonId)
         {
             *dst = *header;
             return 1;
         }
         headerIndex++;
-        if (headerIndex == sizeof(buffer) / 0x20)
+        if (headerIndex == sizeof(buffer) / 0x40)
         {
             headerIndex = 0;
             headerPage++;
@@ -251,7 +325,7 @@ static void loadMqSceneMaybe(GameState_Play* play)
             break;
         case 0x03:
             /* Collision */
-            mqPatchCollisions(play, (void*)(gSegments[2] + 0x80000000 + (sceneHeader->data2 & 0xffffff)));
+            mqPatchCollisions(play, &mqHeader, (void*)(gSegments[2] + 0x80000000 + (sceneHeader->data2 & 0xffffff)));
             break;
         }
         sceneHeader++;

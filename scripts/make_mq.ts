@@ -2,6 +2,8 @@ import fs from 'fs';
 import path from 'path';
 import { argv } from 'process';
 
+import fireData from './mqdata_fire.json';
+
 const PATHS = {
   HIDAN: 4,
   MIZUsin: 2,
@@ -60,6 +62,10 @@ type SceneEntry = {
   pathOffset: number;
   minimapSize: number;
   minimapOffset: number;
+  polyCount: number;
+  polyOffset: number;
+  polyTypeCount: number;
+  polyTypeOffset: number;
 }
 
 function makeRooms() {
@@ -255,6 +261,8 @@ function makeScenes() {
       size += padding.length;
     }
 
+    let extraOffset = size;
+
     /* Extract minimap if required */
     const sceneId = DUNGEONS[dungeon];
     if (sceneId < 10) {
@@ -276,12 +284,55 @@ function makeScenes() {
 
       buffers.push(data);
       minimapSize = dataSize;
-      minimapOffset = size;
+      minimapOffset = extraOffset;
       if (dataSize % 16 !== 0) {
         const padding = Buffer.alloc(16 - (dataSize % 16));
         buffers.push(padding);
         minimapSize += padding.length;
       }
+      extraOffset += minimapSize;
+    }
+
+    /* Poly data */
+    let polyCount = 0;
+    let polyOffset = extraOffset;
+
+    if (dungeon === 'HIDAN') {
+      const polys = fireData.ColDelta.Polys;
+      polyCount = polys.length;
+      polyOffset = extraOffset;
+      const polyBuffer = Buffer.alloc(polyCount * 4);
+      for (let i = 0; i < polyCount; i++) {
+        polyBuffer.writeUInt16BE(polys[i].Id, i * 4 + 0);
+        polyBuffer.writeUInt8(polys[i].Type, i * 4 + 2);
+        polyBuffer.writeUInt8(polys[i].Flags, i * 4 + 3);
+      }
+      extraOffset += polyCount * 4;
+      buffers.push(polyBuffer);
+
+      if (extraOffset % 16 !== 0) {
+        const padding = Buffer.alloc(16 - (extraOffset % 16));
+        buffers.push(padding);
+        extraOffset += padding.length;
+      }
+    }
+
+    /* Poly type data */
+    let polyTypeCount = 0;
+    let polyTypeOffset = extraOffset;
+
+    if (dungeon === 'HIDAN') {
+      const polys = fireData.ColDelta.PolyTypes;
+      polyTypeCount = polys.length;
+      polyTypeOffset = extraOffset;
+      const polyBuffer = Buffer.alloc(polyTypeCount * 0x10);
+      for (let i = 0; i < polyTypeCount; i++) {
+        polyBuffer.writeUInt32BE(polys[i].Id, i * 0x10 + 0);
+        polyBuffer.writeUInt32BE(polys[i].High, i * 0x10 + 4);
+        polyBuffer.writeUInt32BE(polys[i].Low, i * 0x10 + 8);
+      }
+      extraOffset += polyTypeCount * 0x10;
+      buffers.push(polyBuffer);
     }
 
     entries.push({
@@ -293,21 +344,24 @@ function makeScenes() {
       pathOffset,
       minimapSize,
       minimapOffset,
+      polyCount,
+      polyOffset,
+      polyTypeCount,
+      polyTypeOffset,
     });
 
-    offset += size;
-    offset += minimapSize;
+    offset += extraOffset;
   }
 
   /* Make the file */
-  const globalHeader = Buffer.alloc(0x20);
+  const globalHeader = Buffer.alloc(0x40);
   globalHeader.writeInt32BE(entries.length, 0);
-  const headerSize = entries.length * 0x20;
+  const headerSize = entries.length * 0x40;
   const headerBuffer = Buffer.alloc(headerSize);
-  const dataOffset = headerSize + 0x20;
+  const dataOffset = headerSize + 0x40;
   for (let i = 0; i < entries.length; i++) {
     const entry = entries[i];
-    const base = i * 0x20;
+    const base = i * 0x40;
     headerBuffer.writeUInt32BE(entry.size, base + 0x00);
     headerBuffer.writeUInt32BE(entry.offset + dataOffset, base + 0x04);
     headerBuffer.writeUInt8(entry.dungeon, base + 0x08);
@@ -316,6 +370,10 @@ function makeScenes() {
     headerBuffer.writeUInt16BE(entry.pathOffset, base + 0x0e);
     headerBuffer.writeUInt32BE(entry.minimapSize, base + 0x10);
     headerBuffer.writeUInt32BE(entry.minimapOffset + dataOffset + entry.offset, base + 0x14);
+    headerBuffer.writeUInt32BE(entry.polyCount, base + 0x18);
+    headerBuffer.writeUInt32BE(entry.polyOffset + dataOffset + entry.offset, base + 0x1c);
+    headerBuffer.writeUInt32BE(entry.polyTypeCount, base + 0x20);
+    headerBuffer.writeUInt32BE(entry.polyTypeOffset + dataOffset + entry.offset, base + 0x24);
   }
 
   const fileBuffer = Buffer.concat([globalHeader, headerBuffer, ...buffers]);
