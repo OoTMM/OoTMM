@@ -18,7 +18,7 @@
     "Beneath the Well Entrance": "true"
     "Beneath the Well End": "event(WELL_BIG_POE) && has_milk"
   events:
-    WELL_BIG_POE: "has(MASK_GIBDO) && has_bottle && has(BOMB_BAG) && (has(BOW) || has(ZORA))"
+    WELL_BIG_POE: "has(MASK_GIBDO) && has_bottle && has(BOMB_BAG) && (has_weapon_range)"
   locations:
     "Beneath the Well Skulltulla Chest": "has(MASK_GIBDO) && has_bottle"
     "Beneath the Well Cow": "has(MASK_GIBDO) && (event(WELL_HOT_WATER) || has_hot_water_distance) && can_play(SONG_EPONA)"
