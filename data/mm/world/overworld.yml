@@ -450,7 +450,7 @@
   exits:
     "Mountain Village": "true"
   events:
-    BLACKSMITH_ENABLED: "event(BOSS_SNOWHEAD) || can_use_fire_arrows || event(GORON_GRAVEYARD_HOT_WATER) || (event(WELL_HOT_WATER) && can_play(SONG_SOARING))"
+    BLACKSMITH_ENABLED: "event(BOSS_SNOWHEAD) || can_use_fire_arrows || has_hot_water || has_hot_water_distance"
     GOLD_DUST_USED: "has(WALLET) && has(BOTTLED_GOLD_DUST) && event(BLACKSMITH_ENABLED)"
   locations:
     "Blacksmith Razor Blade": "event(BLACKSMITH_ENABLED) && has(WALLET)"
@@ -462,13 +462,13 @@
     "Goron Village": "true"
     "Goron Race": "can_use_keg || event(POWDER_KEG_TRIAL)"
   events:
-    TWIN_ISLANDS_HOT_WATER: "(event(GORON_GRAVEYARD_HOT_WATER) || can_use_fire_arrows || event(BOSS_SNOWHEAD) || (event(WELL_HOT_WATER) && can_play(SONG_SOARING))) && has_bottle"
+    TWIN_ISLANDS_HOT_WATER: "(can_use_fire_arrows || event(BOSS_SNOWHEAD) || has_hot_water || has_hot_water_distance) && has_bottle"
   locations:
     "Twin Islands Underwater Chest 1": "event(BOSS_SNOWHEAD) && has(MASK_ZORA)"
     "Twin Islands Underwater Chest 2": "event(BOSS_SNOWHEAD) && has(MASK_ZORA)"
-    "Twin Islands Frozen Grotto Chest": "(event(GORON_GRAVEYARD_HOT_WATER) || can_use_fire_arrows || event(BOSS_SNOWHEAD) || (event(WELL_HOT_WATER) && can_play(SONG_SOARING))) && (has_explosives || trick_keg_explosives || (trick(MM_KEG_EXPLOSIVES) && event(POWDER_KEG_TRIAL)))"
+    "Twin Islands Frozen Grotto Chest": "(can_use_fire_arrows || event(BOSS_SNOWHEAD) || has_hot_water || has_hot_water_distance) && (has_explosives || trick_keg_explosives || (trick(MM_KEG_EXPLOSIVES) && event(POWDER_KEG_TRIAL)))"
     "Twin Islands Ramp Grotto Chest": "(has_explosives || trick_keg_explosives || (trick(MM_KEG_EXPLOSIVES) && event(POWDER_KEG_TRIAL))) && (has(MASK_GORON) || scarecrow_hookshot)"
-    "Goron Elder": "has(MASK_GORON) && (event(GORON_GRAVEYARD_HOT_WATER) || can_use_fire_arrows || (event(WELL_HOT_WATER) && can_play(SONG_SOARING)))"
+    "Goron Elder": "has(MASK_GORON) && (can_use_fire_arrows || has_hot_water || has_hot_water_distance)"
 "Goron Village":
   region: GORON_VILLAGE
   exits:
