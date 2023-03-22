@@ -139,7 +139,6 @@ export class LogicPassHints {
     if (['OOT Temple of Time Medallion', 'MM Oath to Order', 'OOT Hatch Chicken', 'OOT Hatch Pocket Cucco'].includes(loc)) {
       return false;
     }
-    const check = this.state.world.checks[loc];
     const item = this.state.items[loc];
     if (this.state.fixedLocations.has(loc)) {
       return false;
@@ -165,7 +164,7 @@ export class LogicPassHints {
     if (isDungeonReward(item) && this.state.settings.dungeonRewardShuffle !== 'anywhere') {
       return false;
     }
-    if (isGoldToken(item)) {
+    if (isGoldToken(item) && this.state.settings.goldSkulltulaTokens === 'none') {
       return false;
     }
     if (isHouseToken(item) && this.state.settings.housesSkulltulaTokens === 'none') {
