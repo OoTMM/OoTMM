@@ -204,6 +204,10 @@ const SIMPLE_DEPENDENCIES: {[k: string]: string[]} = {
   MM_MASK_TROUPE_LEADER: [
     'MM Moon Fierce Deity Mask'
   ],
+  MM_MASK_SCENTS: [
+    'MM Moon Fierce Deity Mask',
+    'MM Swamp Potion Shop Item 1',
+  ],
   MM_MASK_POSTMAN: [
     'MM Moon Fierce Deity Mask',
     'MM Clock Town Post Box'
