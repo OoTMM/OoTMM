@@ -220,7 +220,7 @@ static int findMqOverrideScene(GameState_Play* play, MqSceneHeader* dst)
     DMARomToRam(CUSTOM_MQ_SCENES_ADDR | PI_DOM1_ADDR2, buffer, sizeof(buffer));
     headerCount = *(u32*)buffer;
     headerPage = 0;
-    headerIndex = 2;
+    headerIndex = 1;
 
     while (headerCount--)
     {
