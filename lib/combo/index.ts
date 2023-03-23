@@ -32,30 +32,29 @@ export { SETTINGS, DEFAULT_SETTINGS, SETTINGS_CATEGORIES, TRICKS, itemName, DUNG
 export const itemPool = (aSettings: Partial<Settings>) => {
   const settings: Settings = { ...DEFAULT_SETTINGS, ...aSettings };
   const monitor = new Monitor({ onLog: () => {} });
-  const { world, fixedLocations } = worldState(monitor, { settings, debug: false, seed: "--- INTERNAL ---" });
+  const { pool, world } = worldState(monitor, { settings, debug: false, seed: "--- INTERNAL ---" });
 
-  /* Extract relevant items from the world */
-  const items: Items = {};
-  const rawItems: string[] = [];
-  for (const loc in world.checks) {
-    const check = world.checks[loc];
-    const item = check.item;
-    if (!fixedLocations.has(loc) && !isJunk(item) && !isDungeonReward(item) && !isDungeonItem(item) && !isToken(item) && !isStrayFairy(item)) {
-      rawItems.push(item);
+  /* Extract relevant items from the pool */
+  for (const item of Object.keys(pool)) {
+    if (isJunk(item) || isDungeonReward(item) || isDungeonItem(item) || isToken(item) || isStrayFairy(item)) {
+      delete pool[item];
     }
-  }
-  rawItems.sort();
-  for (const item of rawItems) {
-    addItem(items, item);
   }
 
   /* Add unlimited consumables */
   for (const loc in world.checks) {
     const check = world.checks[loc];
-    const item = check.item;
+    const { item } = check;
     if (isItemUnlimitedStarting(item)) {
-      items[item] = 999;
+      pool[item] = 999;
     }
+  }
+
+  /* Sort items */
+  const items: Items = {};
+  const sortedItems = Object.keys(pool).sort((a, b) => itemName(a).localeCompare(itemName(b)));
+  for (const item of sortedItems) {
+    items[item] = pool[item];
   }
 
   return items;

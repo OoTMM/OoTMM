@@ -238,6 +238,40 @@ export const ITEMS_REQUIRED = new Set<string>([
   'SHARED_WALLET',
 ]);
 
+export const ITEMS_MAPS = new Set([
+  'OOT_MAP_DT',
+  'OOT_MAP_DC',
+  'OOT_MAP_JJ',
+  'OOT_MAP_FOREST',
+  'OOT_MAP_FIRE',
+  'OOT_MAP_WATER',
+  'OOT_MAP_SPIRIT',
+  'OOT_MAP_SHADOW',
+  'OOT_MAP_BOTW',
+  'OOT_MAP_IC',
+  'MM_MAP_WF',
+  'MM_MAP_SH',
+  'MM_MAP_GB',
+  'MM_MAP_ST',
+]);
+
+export const ITEMS_COMPASSES = new Set([
+  'OOT_COMPASS_DT',
+  'OOT_COMPASS_DC',
+  'OOT_COMPASS_JJ',
+  'OOT_COMPASS_FOREST',
+  'OOT_COMPASS_FIRE',
+  'OOT_COMPASS_WATER',
+  'OOT_COMPASS_SPIRIT',
+  'OOT_COMPASS_SHADOW',
+  'OOT_COMPASS_BOTW',
+  'OOT_COMPASS_IC',
+  'MM_COMPASS_WF',
+  'MM_COMPASS_SH',
+  'MM_COMPASS_GB',
+  'MM_COMPASS_ST',
+]);
+
 const ITEMS_JUNK = new Set<string>([
   /* 'OOT_RUPEE_GREEN', Not junk to prevent it from being removed */
   'OOT_RUPEE_BLUE',
@@ -379,9 +413,10 @@ const CRITICAL_RENEWABLE_ITEMS = new Set<string>([
   'OOT_SHIELD_HYLIAN',
 ]);
 
+export const isCompass = (item: string) => ITEMS_COMPASSES.has(item);
+export const isMap = (item: string) => ITEMS_MAPS.has(item);
+export const isMapCompass = (item: string) => isMap(item) || isCompass(item);
 export const isSong = (item: string) => !!item.match(/^(OOT|MM|SHARED)_SONG_/);
-export const isCompass = (item: string) => !!item.match(/^(OOT|MM)_COMPASS_/);
-export const isMap = (item: string) => !!item.match(/^(OOT|MM)_MAP_/);
 export const isSmallKey = (item: string) => !!item.match(/^(OOT|MM)_SMALL_KEY_/);
 export const isSmallKeyHideout = (item: string) => item === 'OOT_SMALL_KEY_GF';
 export const isSmallKeyRegular = (item: string) => isSmallKey(item) && !isSmallKeyHideout(item);
@@ -391,7 +426,6 @@ export const isRegularBossKey = (item: string) => isBossKey(item) && !isGanonBos
 export const isStrayFairy = (item: string) => !!item.match(/^(OOT|MM)_STRAY_FAIRY_/);
 export const isTownStrayFairy = (item: string) => item === 'MM_STRAY_FAIRY_TOWN';
 export const isDungeonStrayFairy = (item: string) => isStrayFairy(item) && !isTownStrayFairy(item);
-export const isMapCompass = (item: string) => isMap(item) || isCompass(item);
 export const isKey = (item: string) => isSmallKey(item) || isBossKey(item);
 export const isDungeonItem = (item: string) => isMapCompass(item) || isKey(item) || isStrayFairy(item);
 export const isDungeonReward = (item: string) => DUNGEON_REWARDS.has(item);

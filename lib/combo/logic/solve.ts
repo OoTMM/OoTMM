@@ -4,7 +4,7 @@ import { gameId } from '../util';
 import { Pathfinder, PathfinderState } from './pathfind';
 import { World } from './world';
 import { LogicError, LogicSeedError } from './error';
-import { Items, addItem, combinedItems, itemsArray, removeItem, ITEMS_REQUIRED, isDungeonReward, isGoldToken, isHouseToken, isKey, isStrayFairy, isSmallKey, isGanonBossKey, isRegularBossKey, isTownStrayFairy, isDungeonStrayFairy, isSong, isJunk, isMapCompass, isSmallKeyRegular, isSmallKeyHideout, isItemUnlimitedStarting, isItemCriticalRenewable } from './items';
+import { Items, addItem, combinedItems, itemsArray, removeItem, ITEMS_REQUIRED, isDungeonReward, isGoldToken, isHouseToken, isKey, isStrayFairy, isSmallKey, isGanonBossKey, isRegularBossKey, isTownStrayFairy, isDungeonStrayFairy, isSong, isJunk, isMapCompass, isSmallKeyRegular, isSmallKeyHideout, isItemUnlimitedStarting, isItemCriticalRenewable, isRupees, isItemConsumable } from './items';
 import { Settings } from '../settings';
 import { Monitor } from '../monitor';
 import { isLocationRenewable } from './helpers';
@@ -52,6 +52,7 @@ export class LogicPassSolver {
       random: Random,
       monitor: Monitor,
       attempts: number,
+      pool: Items;
     }
   ) {
     this.pathfinder = new Pathfinder(this.state.world, this.state.settings);
@@ -109,7 +110,7 @@ export class LogicPassSolver {
     }
 
     /* At this point we have a beatable game */
-    this.fill();
+    this.fillAll();
 
     return { items: this.items };
   }
@@ -126,34 +127,26 @@ export class LogicPassSolver {
   private makeItemPools() {
     const pools: ItemPools = { required: {}, nice: {}, junk: {} };
 
-    for (const location in this.state.world.checks) {
-      const check = this.state.world.checks[location];
-      const { item, type } = check;
-
-      if (this.items[location] || this.state.fixedLocations.has(location)) {
-        continue;
-      }
-
-      if (isDungeonReward(item) || isKey(item) || isStrayFairy(item) || ITEMS_REQUIRED.has(item) || type == 'shop') {
-        addItem(pools.required, item);
+    /* Assign every item to its sub-pool */
+    for (const item in this.state.pool) {
+      let dst: Items;
+      if (isDungeonReward(item) || isKey(item) || isStrayFairy(item) || ITEMS_REQUIRED.has(item)) {
+        dst = pools.required;
       } else if (isJunk(item)) {
-        addItem(pools.junk, item);
+        dst = pools.junk;
       } else {
-        addItem(pools.nice, item);
+        dst = pools.nice;
       }
+      dst[item] = this.state.pool[item];
     }
 
+    /* Remove starting items */
     for (const item in this.state.settings.startingItems) {
       if (isItemUnlimitedStarting(item))
         continue;
       const count = this.state.settings.startingItems[item];
       for (let i = 0; i < count; ++i) {
         removeItemPools(pools, item);
-        let junk = 'OOT_RUPEE_BLUE';
-        if (item.startsWith('MM_')) {
-          junk = 'MM_RUPEE_BLUE';
-        }
-        addItem(pools.junk, junk);
       }
     }
 
@@ -424,18 +417,34 @@ export class LogicPassSolver {
     }
   }
 
-  private fill() {
-    const pool = poolsArray(this.pools);
-    const shuffledPool = shuffle(this.state.random, pool);
-    const locations = Object.keys(this.state.world.checks).filter(loc => !this.items[loc]);
+  private fillAll() {
+    /* Fill using every pool */
+    this.fill(this.pools.required, true);
+    this.fill(this.pools.nice, true);
+    this.fill(this.pools.junk, false);
 
-    for (const item of shuffledPool) {
-      const loc = locations.pop()!;
+    /* If there are still locations, fill with junk */
+    const locs = Object.keys(this.state.world.checks).filter(loc => !this.items[loc]);
+    const junkDistribution = itemsArray(this.pools.junk);
+    for (const loc of locs) {
+      const item = sample(this.state.random, junkDistribution);
       this.place(loc, item);
     }
+  }
 
-    if (locations.length > 0) {
-      throw new Error('Item Count Error');
+  private fill(pool: Items, required: boolean) {
+    const items = shuffle(this.state.random, itemsArray(pool));
+    const locations = Object.keys(this.state.world.checks).filter(loc => !this.items[loc]);
+
+    for (const item of items) {
+      if (locations.length === 0) {
+        if (required) {
+          throw new Error('Item Count Error');
+        }
+        break;
+      }
+      const loc = locations.pop()!;
+      this.place(loc, item);
     }
   }
 

@@ -6,7 +6,7 @@ import { Game, GAMES } from "../config";
 import { WorldCheck } from '../logic/world';
 import { DUNGEONS, Settings, SPECIAL_CONDS, SPECIAL_CONDS_KEYS } from '../settings';
 import { HintGossip, Hints } from '../logic/hints';
-import { isDungeonStrayFairy, isGanonBossKey, isMap, isCompass, isRegularBossKey, isSmallKeyRegular, isTownStrayFairy, isSmallKeyHideout, isItemUnlimitedStarting } from '../logic/items';
+import { isDungeonStrayFairy, isGanonBossKey, isMap, isCompass, isRegularBossKey, isSmallKeyRegular, isTownStrayFairy, isSmallKeyHideout, isItemUnlimitedStarting, ITEMS_MAPS, ITEMS_COMPASSES } from '../logic/items';
 import { gameId } from '../util';
 import { EntranceShuffleResult } from '../logic/entrance';
 import { Patchfile } from './patchfile';
@@ -482,46 +482,11 @@ export const randomizerData = (logic: LogicResult): Buffer => {
 };
 
 const effectiveStartingItems = (settings: Settings): {[k: string]: number} => {
-  const MAPS_AND_COMPASSES = [
-    'OOT_MAP_DT',
-    'OOT_MAP_DC',
-    'OOT_MAP_JJ',
-    'OOT_MAP_FOREST',
-    'OOT_MAP_FIRE',
-    'OOT_MAP_WATER',
-    'OOT_MAP_SPIRIT',
-    'OOT_MAP_SHADOW',
-    'OOT_MAP_BOTW',
-    'OOT_MAP_IC',
-    'OOT_COMPASS_DT',
-    'OOT_COMPASS_DC',
-    'OOT_COMPASS_JJ',
-    'OOT_COMPASS_FOREST',
-    'OOT_COMPASS_FIRE',
-    'OOT_COMPASS_WATER',
-    'OOT_COMPASS_SPIRIT',
-    'OOT_COMPASS_SHADOW',
-    'OOT_COMPASS_BOTW',
-    'OOT_COMPASS_IC',
-    'MM_MAP_WF',
-    'MM_MAP_SH',
-    'MM_MAP_GB',
-    'MM_MAP_ST',
-    'MM_COMPASS_WF',
-    'MM_COMPASS_SH',
-    'MM_COMPASS_GB',
-    'MM_COMPASS_ST',
-  ];
-
   const items = {...settings.startingItems};
   if (settings.mapCompassShuffle === 'starting') {
-    for (const item of MAPS_AND_COMPASSES) {
+    for (const item of [...ITEMS_MAPS, ...ITEMS_COMPASSES]) {
       items[item] = 1;
     }
-  }
-
-  if (settings.progressiveShieldsMm === 'start') {
-    items['MM_SHIELD_HERO'] = 1;
   }
 
   return items;

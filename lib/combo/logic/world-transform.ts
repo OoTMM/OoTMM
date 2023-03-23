@@ -1,30 +1,24 @@
 import { Monitor } from '../monitor';
-import { Random, sample, shuffle } from '../random';
 import { Settings } from '../settings';
-import { Items, addItem, isGanonBossKey, isJunk, isMapCompass, itemsArray, removeItem } from './items';
+import { Items, addItem, ITEMS_MAPS, ITEMS_COMPASSES } from './items';
 import { World } from './world';
 
 const EXTRA_ITEMS = [
   'OOT_MASK_SKULL',
   'OOT_MASK_SPOOKY',
   'OOT_MASK_GERUDO',
-  'MM_MASK_DEKU',
-  'MM_SWORD',
-];
-
-const EXTRA_MASKS_OOT = [
   'OOT_MASK_KEATON',
   'OOT_MASK_TRUTH',
   'OOT_MASK_BUNNY',
   'OOT_MASK_GORON',
   'OOT_MASK_ZORA',
+  'MM_MASK_DEKU',
+  'MM_SWORD',
 ];
 
 export class LogicPassWorldTransform {
-  private junkToggle = false;
-  private itemsToReplace = new Map<string, string>();
-  private itemsToJunk = new Set<string>();
-  private extraItems: Items = {};
+  private pool: Items = {};
+  private locsByItem = new Map<string, Set<string>>();
 
   constructor(
     private readonly state: {
@@ -34,22 +28,232 @@ export class LogicPassWorldTransform {
       config: Set<string>;
       mq: Set<string>;
       fixedLocations: Set<string>;
-      random: Random;
     }
   ) {
-    for (const item of EXTRA_ITEMS) {
-      addItem(this.extraItems, item);
+  }
+
+  private makePool() {
+    const { world } = this.state;
+    for (const loc in world.checks) {
+      const check = world.checks[loc];
+      addItem(this.pool, check.item);
+      const set = this.locsByItem.get(check.item) || new Set();
+      set.add(loc);
+      this.locsByItem.set(check.item, set);
     }
   }
 
-  private takeExtraItem() {
-    const items = itemsArray(this.extraItems);
-    if (items.length === 0) {
-      return null;
+  /**
+   * Replace an item in the pool with another item.
+   */
+  private replaceItem(from: string, to: string) {
+    const prevCount = this.pool[from] || 0;
+    delete this.pool[from];
+    const newCount = (this.pool[to] || 0) + prevCount;
+    if (newCount > 0) {
+      this.pool[to] = newCount;
+    } else {
+      delete this.pool[to];
     }
-    const item = sample(this.state.random, items);
-    removeItem(this.extraItems, item);
-    return item;
+    const oldSet = this.locsByItem.get(from) || new Set();
+    const newSet = this.locsByItem.get(to) || new Set();
+    for (const loc of oldSet) {
+      const check = this.state.world.checks[loc];
+      check.item = to;
+      newSet.add(loc);
+    }
+    this.locsByItem.set(to, newSet);
+    this.locsByItem.delete(from);
+  }
+
+  /**
+   * Remove an item from the pool.
+   * Optionally, limit the number of items removed.
+   */
+  private removeItem(item: string, amount?: number) {
+    const count = this.pool[item] || 0;
+    if (amount === undefined || amount >= count) {
+      delete this.pool[item];
+    } else {
+      this.pool[item] = count - amount;
+    }
+  }
+
+  private addItem(item: string, amount?: number) {
+    const count = this.pool[item] || 0;
+    if (amount === undefined) {
+      amount = 1;
+    }
+    this.pool[item] = count + amount;
+  }
+
+  /**
+   * Setup the shared items.
+   */
+  private setupSharedItems() {
+    const { config } = this.state;
+    if (config.has('SHARED_BOWS')) {
+      /* Bows and quivers */
+      this.replaceItem('OOT_BOW', 'SHARED_BOW');
+      this.replaceItem('MM_BOW', 'SHARED_BOW');
+      this.removeItem('SHARED_BOW', 3);
+
+      /* Arrows */
+      this.replaceItem('OOT_ARROWS_5', 'SHARED_ARROWS_5');
+      this.replaceItem('OOT_ARROWS_10', 'SHARED_ARROWS_10');
+      this.replaceItem('OOT_ARROWS_30', 'SHARED_ARROWS_30');
+      this.replaceItem('MM_ARROWS_10', 'SHARED_ARROWS_10');
+      this.replaceItem('MM_ARROWS_30', 'SHARED_ARROWS_30');
+      this.replaceItem('MM_ARROWS_40', 'SHARED_ARROWS_40');
+    }
+
+    if (config.has('SHARED_BOMB_BAGS')) {
+      /* Bomb Bags */
+      this.replaceItem('OOT_BOMB_BAG', 'SHARED_BOMB_BAG');
+      this.replaceItem('MM_BOMB_BAG', 'SHARED_BOMB_BAG');
+      this.removeItem('SHARED_BOMB_BAG', 3);
+
+      /* Bombs */
+      this.replaceItem('OOT_BOMB',      'SHARED_BOMB');
+      this.replaceItem('OOT_BOMBS_5',   'SHARED_BOMBS_5');
+      this.replaceItem('OOT_BOMBS_10',  'SHARED_BOMBS_10');
+      this.replaceItem('OOT_BOMBS_20',  'SHARED_BOMBS_20');
+      this.replaceItem('OOT_BOMBS_30',  'SHARED_BOMBS_30');
+      this.replaceItem('MM_BOMB',       'SHARED_BOMB');
+      this.replaceItem('MM_BOMBS_5',    'SHARED_BOMBS_5');
+      this.replaceItem('MM_BOMBS_10',   'SHARED_BOMBS_10');
+      this.replaceItem('MM_BOMBS_20',   'SHARED_BOMBS_20');
+      this.replaceItem('MM_BOMBS_30',   'SHARED_BOMBS_30');
+    }
+
+    if (config.has('SHARED_MAGIC')) {
+      this.replaceItem('OOT_MAGIC_UPGRADE', 'SHARED_MAGIC_UPGRADE');
+      this.replaceItem('MM_MAGIC_UPGRADE',  'SHARED_MAGIC_UPGRADE');
+      this.removeItem('SHARED_MAGIC_UPGRADE', 2);
+    }
+
+    if (config.has('SHARED_MAGIC_ARROWS')) {
+      this.replaceItem('OOT_ARROW_FIRE',  'SHARED_ARROW_FIRE');
+      this.replaceItem('OOT_ARROW_ICE',   'SHARED_ARROW_ICE');
+      this.replaceItem('OOT_ARROW_LIGHT', 'SHARED_ARROW_LIGHT');
+      this.replaceItem('MM_ARROW_FIRE',   'SHARED_ARROW_FIRE');
+      this.replaceItem('MM_ARROW_ICE',    'SHARED_ARROW_ICE');
+      this.replaceItem('MM_ARROW_LIGHT',  'SHARED_ARROW_LIGHT');
+
+      this.removeItem('SHARED_ARROW_FIRE', 1);
+      this.removeItem('SHARED_ARROW_ICE', 1);
+      this.removeItem('SHARED_ARROW_LIGHT', 1);
+    }
+
+    if (config.has('SHARED_SONGS')) {
+      this.replaceItem('OOT_SONG_TIME',    'SHARED_SONG_TIME');
+      this.replaceItem('OOT_SONG_EPONA',   'SHARED_SONG_EPONA');
+      this.replaceItem('OOT_SONG_STORMS',  'SHARED_SONG_STORMS');
+      this.replaceItem('MM_SONG_TIME',     'SHARED_SONG_TIME');
+      this.replaceItem('MM_SONG_EPONA',    'SHARED_SONG_EPONA');
+      this.replaceItem('MM_SONG_STORMS',   'SHARED_SONG_STORMS');
+
+      this.removeItem('SHARED_SONG_TIME', 1);
+      this.removeItem('SHARED_SONG_EPONA', 1);
+      this.removeItem('SHARED_SONG_STORMS', 1);
+    }
+
+    if (config.has('SHARED_NUTS_STICKS')) {
+      /* Nuts */
+      this.replaceItem('OOT_NUTS_5',      'SHARED_NUTS_5');
+      this.replaceItem('OOT_NUTS_5_ALT',  'SHARED_NUTS_5');
+      this.replaceItem('OOT_NUTS_10',     'SHARED_NUTS_10');
+      this.replaceItem('MM_NUT',          'SHARED_NUT');
+      this.replaceItem('MM_NUTS_5',       'SHARED_NUTS_5');
+      this.replaceItem('MM_NUTS_10',      'SHARED_NUTS_10');
+
+      /* Sticks */
+      this.replaceItem('OOT_STICK',       'SHARED_STICK');
+      this.replaceItem('OOT_STICKS_5',    'SHARED_STICKS_5');
+      this.replaceItem('OOT_STICKS_10',   'SHARED_STICKS_10');
+      this.replaceItem('MM_STICK',        'SHARED_STICK');
+    }
+
+    if (config.has('SHARED_HOOKSHOT')) {
+      this.replaceItem('OOT_HOOKSHOT', 'SHARED_HOOKSHOT');
+      this.replaceItem('MM_HOOKSHOT',  'SHARED_HOOKSHOT');
+      this.removeItem('SHARED_HOOKSHOT', 1);
+    } else if (this.state.settings.shortHookshotMm) {
+      this.addItem('MM_HOOKSHOT');
+    }
+
+    if (config.has('SHARED_LENS')) {
+      this.replaceItem('OOT_LENS', 'SHARED_LENS');
+      this.replaceItem('MM_LENS',  'SHARED_LENS');
+      this.removeItem('SHARED_LENS', 1);
+    }
+
+    if (config.has('SHARED_OCARINA')) {
+      this.replaceItem('OOT_OCARINA', 'SHARED_OCARINA');
+      this.replaceItem('MM_OCARINA',  'SHARED_OCARINA');
+      this.removeItem('SHARED_OCARINA', 1);
+    } else if (this.state.settings.fairyOcarinaMm) {
+      this.addItem('MM_OCARINA');
+    }
+
+    if (config.has('SHARED_MASKS')) {
+      this.replaceItem('OOT_MASK_ZORA',   'SHARED_MASK_ZORA');
+      this.replaceItem('OOT_MASK_GORON',  'SHARED_MASK_GORON');
+      this.replaceItem('OOT_MASK_TRUTH',  'SHARED_MASK_TRUTH');
+      this.replaceItem('OOT_MASK_BUNNY',  'SHARED_MASK_BUNNY');
+      this.replaceItem('OOT_MASK_KEATON', 'SHARED_MASK_KEATON');
+      this.replaceItem('MM_MASK_ZORA',    'SHARED_MASK_ZORA');
+      this.replaceItem('MM_MASK_GORON',   'SHARED_MASK_GORON');
+      this.replaceItem('MM_MASK_TRUTH',   'SHARED_MASK_TRUTH');
+      this.replaceItem('MM_MASK_BUNNY',   'SHARED_MASK_BUNNY');
+      this.replaceItem('MM_MASK_KEATON',  'SHARED_MASK_KEATON');
+
+      this.removeItem('SHARED_MASK_ZORA', 1);
+      this.removeItem('SHARED_MASK_GORON', 1);
+      this.removeItem('SHARED_MASK_TRUTH', 1);
+      this.removeItem('SHARED_MASK_BUNNY', 1);
+      this.removeItem('SHARED_MASK_KEATON', 1);
+    }
+
+    if (config.has('SHARED_WALLETS')) {
+      /* Wallets */
+      this.replaceItem('OOT_WALLET',  'SHARED_WALLET');
+      this.replaceItem('MM_WALLET',   'SHARED_WALLET');
+      this.removeItem('SHARED_WALLET', 2);
+
+      /* Rupees */
+      this.replaceItem('OOT_RUPEE_GREEN',   'SHARED_RUPEE_GREEN');
+      this.replaceItem('OOT_RUPEE_BLUE',    'SHARED_RUPEE_BLUE');
+      this.replaceItem('OOT_RUPEE_RED',     'SHARED_RUPEE_RED');
+      this.replaceItem('OOT_RUPEE_PURPLE',  'SHARED_RUPEE_PURPLE');
+      this.replaceItem('OOT_RUPEE_HUGE',    'SHARED_RUPEE_GOLD');
+      this.replaceItem('MM_RUPEE_GREEN',    'SHARED_RUPEE_GREEN');
+      this.replaceItem('MM_RUPEE_BLUE',     'SHARED_RUPEE_BLUE');
+      this.replaceItem('MM_RUPEE_RED',      'SHARED_RUPEE_RED');
+      this.replaceItem('MM_RUPEE_PURPLE',   'SHARED_RUPEE_PURPLE');
+      this.replaceItem('MM_RUPEE_SILVER',   'SHARED_RUPEE_SILVER');
+      this.replaceItem('MM_RUPEE_GOLD',     'SHARED_RUPEE_GOLD');
+    }
+
+    if (config.has('SHARED_HEALTH')) {
+      /* Pieces and containers */
+      this.replaceItem('OOT_HEART_CONTAINER', 'SHARED_HEART_CONTAINER');
+      this.replaceItem('MM_HEART_CONTAINER',  'SHARED_HEART_CONTAINER');
+      this.replaceItem('MM_HEART_PIECE',      'SHARED_HEART_PIECE');
+      this.replaceItem('OOT_HEART_PIECE',     'SHARED_HEART_PIECE');
+
+      this.pool['SHARED_HEART_CONTAINER'] = 6;
+      this.pool['SHARED_HEART_PIECE'] = 44;
+
+      /* Defense */
+      this.replaceItem('OOT_DEFENSE_UPGRADE', 'SHARED_DEFENSE_UPGRADE');
+      this.replaceItem('MM_DEFENSE_UPGRADE',  'SHARED_DEFENSE_UPGRADE');
+      this.removeItem('SHARED_DEFENSE_UPGRADE', 1);
+
+      /* Recovery */
+      this.replaceItem('OOT_RECOVERY_HEART', 'SHARED_RECOVERY_HEART');
+      this.replaceItem('MM_RECOVERY_HEART',  'SHARED_RECOVERY_HEART');
+    }
   }
 
   private removeLocations(locs: string[]) {
@@ -67,295 +271,81 @@ export class LogicPassWorldTransform {
     }
   }
 
-  private filterExtraItems() {
-    for (const item in this.state.settings.startingItems) {
-      const count = this.state.settings.startingItems[item];
-      if (count > 0) {
-        for (let i = 0; i < count; ++i) {
-          removeItem(this.extraItems, item);
-        }
-      }
-    }
-  }
-
-  private setupSharedItems() {
-    const { config } = this.state;
-    if (config.has('SHARED_BOWS')) {
-      /* Bows and quivers */
-      this.itemsToReplace.set('OOT_BOW', 'SHARED_BOW');
-      this.itemsToJunk.add('MM_BOW');
-
-      /* Arrows */
-      this.itemsToReplace.set('OOT_ARROWS_5', 'SHARED_ARROWS_5');
-      this.itemsToReplace.set('OOT_ARROWS_10', 'SHARED_ARROWS_10');
-      this.itemsToReplace.set('OOT_ARROWS_30', 'SHARED_ARROWS_30');
-      this.itemsToReplace.set('MM_ARROWS_10', 'SHARED_ARROWS_10');
-      this.itemsToReplace.set('MM_ARROWS_30', 'SHARED_ARROWS_30');
-      this.itemsToReplace.set('MM_ARROWS_40', 'SHARED_ARROWS_40');
-    }
-
-    if (config.has('SHARED_BOMB_BAGS')) {
-      /* Bomb Bags */
-      this.itemsToReplace.set('OOT_BOMB_BAG', 'SHARED_BOMB_BAG');
-      this.itemsToJunk.add('MM_BOMB_BAG');
-
-      /* Bombs */
-      this.itemsToReplace.set('OOT_BOMB',      'SHARED_BOMB');
-      this.itemsToReplace.set('OOT_BOMBS_5',   'SHARED_BOMBS_5');
-      this.itemsToReplace.set('OOT_BOMBS_10',  'SHARED_BOMBS_10');
-      this.itemsToReplace.set('OOT_BOMBS_20',  'SHARED_BOMBS_20');
-      this.itemsToReplace.set('OOT_BOMBS_30',  'SHARED_BOMBS_30');
-      this.itemsToReplace.set('MM_BOMB',       'SHARED_BOMB');
-      this.itemsToReplace.set('MM_BOMBS_5',    'SHARED_BOMBS_5');
-      this.itemsToReplace.set('MM_BOMBS_10',   'SHARED_BOMBS_10');
-      this.itemsToReplace.set('MM_BOMBS_20',   'SHARED_BOMBS_20');
-      this.itemsToReplace.set('MM_BOMBS_30',   'SHARED_BOMBS_30');
-    }
-
-    if (config.has('SHARED_MAGIC')) {
-      this.itemsToReplace.set('OOT_MAGIC_UPGRADE', 'SHARED_MAGIC_UPGRADE');
-      this.itemsToJunk.add('MM_MAGIC_UPGRADE');
-    }
-
-    if (config.has('SHARED_MAGIC_ARROWS')) {
-      this.itemsToReplace.set('OOT_ARROW_FIRE',  'SHARED_ARROW_FIRE');
-      this.itemsToReplace.set('OOT_ARROW_ICE',   'SHARED_ARROW_ICE');
-      this.itemsToReplace.set('OOT_ARROW_LIGHT', 'SHARED_ARROW_LIGHT');
-      this.itemsToJunk.add('MM_ARROW_FIRE');
-      this.itemsToJunk.add('MM_ARROW_ICE');
-      this.itemsToJunk.add('MM_ARROW_LIGHT');
-    }
-
-    if (config.has('SHARED_SONGS')) {
-      this.itemsToReplace.set('OOT_SONG_TIME',   'SHARED_SONG_TIME');
-      this.itemsToReplace.set('OOT_SONG_EPONA',  'SHARED_SONG_EPONA');
-      this.itemsToReplace.set('OOT_SONG_STORMS', 'SHARED_SONG_STORMS');
-      this.itemsToJunk.add('MM_SONG_TIME');
-      this.itemsToJunk.add('MM_SONG_EPONA');
-      this.itemsToJunk.add('MM_SONG_STORMS');
-    }
-
-    if (config.has('SHARED_NUTS_STICKS')) {
-      /* Nuts */
-      this.itemsToReplace.set('OOT_NUTS_5',      'SHARED_NUTS_5');
-      this.itemsToReplace.set('OOT_NUTS_5_ALT',  'SHARED_NUTS_5');
-      this.itemsToReplace.set('OOT_NUTS_10',     'SHARED_NUTS_10');
-      this.itemsToReplace.set('MM_NUT',          'SHARED_NUT');
-      this.itemsToReplace.set('MM_NUTS_5',       'SHARED_NUTS_5');
-      this.itemsToReplace.set('MM_NUTS_10',      'SHARED_NUTS_10');
-
-      /* Sticks */
-      this.itemsToReplace.set('OOT_STICK',       'SHARED_STICK');
-      this.itemsToReplace.set('OOT_STICKS_5',    'SHARED_STICKS_5');
-      this.itemsToReplace.set('OOT_STICKS_10',   'SHARED_STICKS_10');
-      this.itemsToReplace.set('MM_STICK',        'SHARED_STICK');
-    }
-
-    if (config.has('SHARED_HOOKSHOT')) {
-      this.itemsToReplace.set('OOT_HOOKSHOT', 'SHARED_HOOKSHOT');
-      this.itemsToJunk.add('MM_HOOKSHOT');
-    } else if (this.state.settings.shortHookshotMm) {
-      addItem(this.extraItems, 'MM_HOOKSHOT');
-    }
-
-    if (config.has('SHARED_LENS')) {
-      this.itemsToReplace.set('OOT_LENS', 'SHARED_LENS');
-      this.itemsToJunk.add('MM_LENS');
-    }
-
-    if (config.has('SHARED_OCARINA')) {
-      this.itemsToReplace.set('OOT_OCARINA', 'SHARED_OCARINA');
-      this.itemsToJunk.add('MM_OCARINA');
-    } else if (this.state.settings.fairyOcarinaMm) {
-      addItem(this.extraItems, 'MM_OCARINA');
-    }
-
-    if (config.has('SHARED_MASKS')) {
-      this.itemsToReplace.set('MM_MASK_ZORA', 'SHARED_MASK_ZORA');
-      this.itemsToReplace.set('MM_MASK_GORON', 'SHARED_MASK_GORON');
-      this.itemsToReplace.set('MM_MASK_TRUTH', 'SHARED_MASK_TRUTH');
-      this.itemsToReplace.set('MM_MASK_BUNNY', 'SHARED_MASK_BUNNY');
-      this.itemsToReplace.set('MM_MASK_KEATON', 'SHARED_MASK_KEATON');
-      this.itemsToJunk.add('OOT_MASK_ZORA');
-      this.itemsToJunk.add('OOT_MASK_GORON');
-      this.itemsToJunk.add('OOT_MASK_TRUTH');
-      this.itemsToJunk.add('OOT_MASK_BUNNY');
-      this.itemsToJunk.add('OOT_MASK_KEATON');
-    } else {
-      for (const item of EXTRA_MASKS_OOT) {
-        addItem(this.extraItems, item);
-      }
-    }
-
-    if (config.has('SHARED_WALLETS')) {
-      /* Wallets */
-      this.itemsToReplace.set('OOT_WALLET', 'SHARED_WALLET');
-      this.itemsToJunk.add('MM_WALLET');
-
-      /* Rupees */
-      this.itemsToReplace.set('OOT_RUPEE_GREEN',   'SHARED_RUPEE_GREEN');
-      this.itemsToReplace.set('OOT_RUPEE_BLUE',    'SHARED_RUPEE_BLUE');
-      this.itemsToReplace.set('OOT_RUPEE_RED',     'SHARED_RUPEE_RED');
-      this.itemsToReplace.set('OOT_RUPEE_PURPLE',  'SHARED_RUPEE_PURPLE');
-      this.itemsToReplace.set('OOT_RUPEE_HUGE',    'SHARED_RUPEE_GOLD');
-      this.itemsToReplace.set('MM_RUPEE_GREEN',    'SHARED_RUPEE_GREEN');
-      this.itemsToReplace.set('MM_RUPEE_BLUE',     'SHARED_RUPEE_BLUE');
-      this.itemsToReplace.set('MM_RUPEE_RED',      'SHARED_RUPEE_RED');
-      this.itemsToReplace.set('MM_RUPEE_PURPLE',   'SHARED_RUPEE_PURPLE');
-      this.itemsToReplace.set('MM_RUPEE_SILVER',   'SHARED_RUPEE_SILVER');
-      this.itemsToReplace.set('MM_RUPEE_GOLD',     'SHARED_RUPEE_GOLD');
-    }
-
-    if (config.has('SHARED_HEALTH')) {
-      /* Pieces and containers */
-      this.itemsToReplace.set('OOT_HEART_CONTAINER', 'SHARED_HEART_CONTAINER');
-      this.itemsToReplace.set('MM_HEART_PIECE',      'SHARED_HEART_PIECE');
-      this.itemsToJunk.add('MM_HEART_CONTAINER');
-      this.itemsToJunk.add('OOT_HEART_PIECE');
-
-      /* Defense */
-      this.itemsToReplace.set('OOT_DEFENSE_UPGRADE', 'SHARED_DEFENSE_UPGRADE');
-      this.itemsToJunk.add('MM_DEFENSE_UPGRADE');
-
-      /* Recovery */
-      this.itemsToReplace.set('OOT_RECOVERY_HEART', 'SHARED_RECOVERY_HEART');
-      this.itemsToReplace.set('MM_RECOVERY_HEART',  'SHARED_RECOVERY_HEART');
-    }
-  }
-
-  private placeExtraItems() {
-    const { checks } = this.state.world;
-    const junkLocs = shuffle(this.state.random, Object.keys(checks).filter(x => isJunk(checks[x].item) && !this.state.fixedLocations.has(x)));
-
-    for (;;) {
-      const extraItem = this.takeExtraItem();
-      if (!extraItem) {
-        break;
-      }
-      const loc = junkLocs.pop()!;
-      checks[loc].item = extraItem;
-    }
-  }
-
   run() {
     this.state.monitor.log('Logic: World Transform');
 
-    let shouldRemoveKeyFire = false;
-    let mmExtraShield = false;
-    let sharedHc = 0;
-    let sharedHp = 0;
+    /* Make the basic item pool */
+    this.makePool();
 
+    /* Add extra items */
+    for (const item of EXTRA_ITEMS) {
+      this.addItem(item);
+    }
+
+    /* Setup shared items */
+    this.setupSharedItems();
+
+    /* Handle progressive shields */
     if (this.state.settings.progressiveShieldsOot === 'progressive') {
-      this.extraItems['OOT_SHIELD'] = 2;
+      this.replaceItem('OOT_SHIELD_MIRROR', 'OOT_SHIELD');
+      this.addItem('OOT_SHIELD', 2);
     }
 
-    /* Remove one key from fire in non-MQ, non keysanity */
+    if (this.state.config.has('MM_PROGRESSIVE_SHIELDS')) {
+      this.replaceItem('MM_SHIELD_MIRROR', 'MM_SHIELD');
+      this.addItem('MM_SHIELD');
+    }
+
+    /* Handle non-MQ Fire */
     if (!this.state.config.has('SMALL_KEY_SHUFFLE') && !this.state.mq.has('Fire')) {
-      shouldRemoveKeyFire = true;
+      this.removeItem('OOT_SMALL_KEY_FIRE', 1);
     }
 
+    /* Handle maps/compasses */
+    if (['starting', 'removed'].includes(this.state.settings.mapCompassShuffle)) {
+      for (const item of [...ITEMS_MAPS, ...ITEMS_COMPASSES]) {
+        this.removeItem(item);
+      }
+    }
+
+    /* Handle eggs */
     if (!this.state.settings.eggShuffle) {
+      this.removeItem('OOT_WEIRD_EGG');
+      this.removeItem('OOT_POCKET_EGG');
       this.removeLocations(['OOT Hatch Chicken', 'OOT Hatch Pocket Cucco']);
     }
 
-    this.setupSharedItems();
-    this.filterExtraItems();
-
-    for (const loc in this.state.world.checks) {
-      const check = this.state.world.checks[loc];
-      let item = check.item;
-
-      if (this.itemsToReplace.has(item)) {
-        item = this.itemsToReplace.get(item)!;
-        if (item === 'SHARED_HEART_CONTAINER') {
-          sharedHc++;
-          if (sharedHc === 6) {
-            this.itemsToReplace.delete('OOT_HEART_CONTAINER');
-            this.itemsToJunk.add('OOT_HEART_CONTAINER');
-          }
-        }
-
-        if (item === 'SHARED_HEART_PIECE') {
-          sharedHp++;
-          if (sharedHp === 44) {
-            this.itemsToReplace.delete('MM_HEART_PIECE');
-            this.itemsToJunk.add('MM_HEART_PIECE');
-          }
-        }
-      }
-
-      if (this.itemsToJunk.has(item)) {
-        const extraItem = this.takeExtraItem();
-        if (extraItem) {
-          item = extraItem;
-        } else {
-          item = this.junkToggle ? 'MM_RUPEE_BLUE' : 'OOT_RUPEE_BLUE';
-          this.junkToggle = !this.junkToggle;
-        }
-      }
-
-      /* Maps/Compass */
-      if (isMapCompass(item) && ['starting', 'removed'].includes(this.state.settings.mapCompassShuffle)) {
-        if (check.game === 'oot') {
-          item = 'OOT_RUPEE_BLUE';
-        } else {
-          item = 'MM_RUPEE_BLUE';
-        }
-      }
-
-      /* Ganon BK */
-      if (isGanonBossKey(item) && this.state.config.has('GANON_NO_BOSS_KEY')) {
-        item = 'OOT_RUPEE_BLUE';
-      }
-
-      /* Fire temple key */
-      if (item === 'OOT_SMALL_KEY_FIRE' && shouldRemoveKeyFire) {
-        shouldRemoveKeyFire = false;
-        item = 'OOT_RUPEE_BLUE';
-      }
-
-      /* OoT shields */
-      if (item === 'OOT_SHIELD_MIRROR' && this.state.config.has('OOT_PROGRESSIVE_SHIELDS')) {
-        item = 'OOT_SHIELD';
-      }
-
-      /* MM shields */
-      if (item === 'MM_SHIELD_MIRROR' && this.state.config.has('MM_PROGRESSIVE_SHIELDS')) {
-        item = 'MM_SHIELD';
-      }
-
-      if (isJunk(item) && this.state.config.has('MM_PROGRESSIVE_SHIELDS') && !mmExtraShield) {
-        mmExtraShield = true;
-        item = 'MM_SHIELD';
-      }
-
-      /* OoT swords */
-      if (['OOT_SWORD_KOKIRI', 'OOT_SWORD_MASTER', 'OOT_SWORD_KNIFE', 'OOT_SWORD_BIGGORON'].includes(item) && this.state.config.has('OOT_PROGRESSIVE_SWORDS')) {
-        item = 'OOT_SWORD';
-      }
-
-      /* OoT swords (Goron) */
-      if (['OOT_SWORD_KNIFE', 'OOT_SWORD_BIGGORON'].includes(item) && this.state.config.has('OOT_PROGRESSIVE_SWORDS_GORON')) {
-        item = 'OOT_SWORD_GORON';
-      }
-
-      /* MM lullaby */
-      if (item === 'MM_SONG_GORON') {
-        if (this.state.config.has('MM_PROGRESSIVE_LULLABY')) {
-          item = 'MM_SONG_GORON_HALF';
-        } else {
-          item = 'MM_RUPEE_BLUE';
-          this.state.world.songLocations.delete(loc);
-        }
-      } else if (item === 'MM_SONG_GORON_HALF' && !this.state.config.has('MM_PROGRESSIVE_LULLABY')) {
-        item = 'MM_SONG_GORON';
-      }
-
-      check.item = item;
+    /* Handle Ganon BK */
+    if (this.state.config.has('GANON_NO_BOSS_KEY')) {
+      this.removeItem('OOT_BOSS_KEY_GANON');
     }
 
-    this.placeExtraItems();
+    /* Handle OoT swords */
+    if (this.state.config.has('OOT_PROGRESSIVE_SWORDS')) {
+      this.replaceItem('OOT_SWORD_KOKIRI',    'OOT_SWORD');
+      this.replaceItem('OOT_SWORD_MASTER',    'OOT_SWORD');
+      this.replaceItem('OOT_SWORD_KNIFE',     'OOT_SWORD');
+      this.replaceItem('OOT_SWORD_BIGGORON',  'OOT_SWORD');
+    } else if (this.state.config.has('OOT_PROGRESSIVE_SWORDS_GORON')) {
+      this.replaceItem('OOT_SWORD_KNIFE',     'OOT_SWORD_GORON');
+      this.replaceItem('OOT_SWORD_BIGGORON',  'OOT_SWORD_GORON');
+    }
 
-    return {};
+    /* Handle MM Lullaby */
+    if (this.state.config.has('MM_PROGRESSIVE_LULLABY')) {
+      this.replaceItem('MM_SONG_GORON', 'MM_SONG_GORON_HALF');
+    } else {
+      this.removeItem('MM_SONG_GORON_HALF');
+      this.state.world.songLocations.delete('MM Goron Elder');
+    }
+
+    /* Handle fixed locations */
+    for (const loc of this.state.fixedLocations) {
+      const check = this.state.world.checks[loc];
+      const { item } = check;
+      this.removeItem(item, 1);
+    }
+
+    return { pool: this.pool };
   }
 }

@@ -259,7 +259,6 @@ export const SETTINGS = [{
   type: 'enum',
   values: [
     { value: 'separate', name: 'Separate' },
-    { value: 'start', name: 'Start with Hero Shield' },
     { value: 'progressive', name: 'Progressive' },
   ],
   default: 'start'
