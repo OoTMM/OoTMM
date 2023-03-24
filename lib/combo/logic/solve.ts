@@ -434,7 +434,7 @@ export class LogicPassSolver {
 
   private fill(pool: Items, required: boolean) {
     const items = shuffle(this.state.random, itemsArray(pool));
-    const locations = Object.keys(this.state.world.checks).filter(loc => !this.items[loc]);
+    const locations = shuffle(this.state.random, Object.keys(this.state.world.checks).filter(loc => !this.items[loc]));
 
     for (const item of items) {
       if (locations.length === 0) {
