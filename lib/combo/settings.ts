@@ -554,7 +554,7 @@ type UnionToIntersection<U> =
 type SettingsBase = UnionToIntersection<SettingShapes>;
 
 type SettingsPlando = {
-  locations: {[k: string]: string},
+  locations: {[k: string]: string | null},
 };
 export type Settings = SettingsBase & {
   startingItems: {[k: string]: number};

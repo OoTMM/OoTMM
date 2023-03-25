@@ -1,10 +1,10 @@
-import { Game, GAMES } from '../config';
+import { GAMES } from '../config';
 import { Random, sample, shuffle } from '../random';
 import { gameId } from '../util';
 import { Pathfinder, PathfinderState } from './pathfind';
 import { World } from './world';
 import { LogicError, LogicSeedError } from './error';
-import { Items, addItem, combinedItems, itemsArray, removeItem, ITEMS_REQUIRED, isDungeonReward, isGoldToken, isHouseToken, isKey, isStrayFairy, isSmallKey, isGanonBossKey, isRegularBossKey, isTownStrayFairy, isDungeonStrayFairy, isSong, isJunk, isMapCompass, isSmallKeyRegular, isSmallKeyHideout, isItemUnlimitedStarting, isItemCriticalRenewable, isRupees, isItemConsumable, isItemMajor } from './items';
+import { Items, combinedItems, itemsArray, removeItem, ITEMS_REQUIRED, isDungeonReward, isGoldToken, isHouseToken, isKey, isStrayFairy, isSmallKey, isGanonBossKey, isRegularBossKey, isTownStrayFairy, isDungeonStrayFairy, isSong, isJunk, isMapCompass, isSmallKeyRegular, isSmallKeyHideout, isItemUnlimitedStarting, isItemCriticalRenewable, isRupees, isItemConsumable, isItemMajor } from './items';
 import { Settings } from '../settings';
 import { Monitor } from '../monitor';
 import { isLocationRenewable } from './helpers';
@@ -15,14 +15,6 @@ type ItemPools = {
   required: Items,
   nice: Items,
   junk: Items,
-};
-
-const poolsArray = (pools: ItemPools) => {
-  return [
-    ...itemsArray(pools.required),
-    ...itemsArray(pools.nice),
-    ...itemsArray(pools.junk),
-  ];
 };
 
 const removeItemPools = (pools: ItemPools, item: string) => {
@@ -120,8 +112,10 @@ export class LogicPassSolver {
   private placePlando() {
     for (const loc in this.state.settings.plando.locations) {
       const item = this.state.settings.plando.locations[loc];
-      this.place(loc, item);
-      removeItemPools(this.pools, item);
+      if (item) {
+        this.place(loc, item);
+        removeItemPools(this.pools, item);
+      }
     }
   }
 
