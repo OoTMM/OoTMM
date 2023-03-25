@@ -117,22 +117,21 @@ export class LogicPassHints {
   }
 
   private findItem(item: string) {
+    for (const sphere of this.state.analysis.spheres) {
+      for (const loc of sphere) {
+        if (this.state.items[loc] === item) {
+          return loc;
+        }
+      }
+    }
+
     for (const loc in this.state.items) {
       if (this.state.items[loc] === item) {
         return loc;
       }
     }
-    return null;
-  }
 
-  private findItems(item: string) {
-    const locs: string[] = [];
-    for (const loc in this.state.items) {
-      if (this.state.items[loc] === item) {
-        locs.push(loc);
-      }
-    }
-    return locs;
+    return null;
   }
 
   private isLocationHintable(loc: string) {
