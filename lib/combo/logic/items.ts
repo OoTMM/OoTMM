@@ -146,6 +146,10 @@ export const ITEMS_REQUIRED = new Set<string>([
   'OOT_MASK_GORON',
   'OOT_MASK_BUNNY',
   'OOT_MASK_KEATON',
+  'OOT_BLUE_FIRE',
+  'OOT_STICK',
+  'OOT_STICKS_5',
+  'OOT_STICKS_10',
   'MM_GS_TOKEN_SWAMP',
   'MM_GS_TOKEN_OCEAN',
   'MM_SHIELD_HERO',
@@ -236,6 +240,9 @@ export const ITEMS_REQUIRED = new Set<string>([
   'SHARED_MASK_BUNNY',
   'SHARED_MASK_KEATON',
   'SHARED_WALLET',
+  'SHARED_STICK',
+  'SHARED_STICKS_5',
+  'SHARED_STICKS_10',
 ]);
 
 export const ITEMS_MAPS = new Set([

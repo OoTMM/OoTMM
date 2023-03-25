@@ -4,7 +4,7 @@ import { gameId } from '../util';
 import { Pathfinder, PathfinderState } from './pathfind';
 import { World } from './world';
 import { LogicError, LogicSeedError } from './error';
-import { Items, addItem, combinedItems, itemsArray, removeItem, ITEMS_REQUIRED, isDungeonReward, isGoldToken, isHouseToken, isKey, isStrayFairy, isSmallKey, isGanonBossKey, isRegularBossKey, isTownStrayFairy, isDungeonStrayFairy, isSong, isJunk, isMapCompass, isSmallKeyRegular, isSmallKeyHideout, isItemUnlimitedStarting, isItemCriticalRenewable, isRupees, isItemConsumable } from './items';
+import { Items, addItem, combinedItems, itemsArray, removeItem, ITEMS_REQUIRED, isDungeonReward, isGoldToken, isHouseToken, isKey, isStrayFairy, isSmallKey, isGanonBossKey, isRegularBossKey, isTownStrayFairy, isDungeonStrayFairy, isSong, isJunk, isMapCompass, isSmallKeyRegular, isSmallKeyHideout, isItemUnlimitedStarting, isItemCriticalRenewable, isRupees, isItemConsumable, isItemMajor } from './items';
 import { Settings } from '../settings';
 import { Monitor } from '../monitor';
 import { isLocationRenewable } from './helpers';
@@ -41,8 +41,8 @@ export class LogicPassSolver {
   private pathfinder!: Pathfinder;
   private pathfinderState!: PathfinderState;
   private pools!: ItemPools;
-  private junkLocations!: Set<string>;
   private criticalRenewables!: Set<string>;
+  private junkDistribution!: Items;
 
   constructor(
     private readonly state: {
@@ -57,8 +57,7 @@ export class LogicPassSolver {
   ) {
     this.pathfinder = new Pathfinder(this.state.world, this.state.settings);
     this.items = {};
-    this.junkLocations = new Set<string>(this.state.settings.junkLocations);
-    this.pools = this.makeItemPools();
+    this.makeItemPools();
     this.pathfinderState = this.pathfinder.run(null);
     this.criticalRenewables = new Set<string>();
   }
@@ -67,11 +66,11 @@ export class LogicPassSolver {
     this.state.monitor.log(`Logic: Solver (attempt ${this.state.attempts})`);
     const checksCount = Object.keys(this.state.world.checks).length;
 
-    /* Fix vanilla items */
-    this.fixItems();
-
     /* Place junk into junkLocations */
     this.placeJunkLocations();
+
+    /* Fix vanilla items */
+    this.fixItems();
 
     /* Place items fixed to default */
     this.fixTokens();
@@ -125,19 +124,30 @@ export class LogicPassSolver {
   }
 
   private makeItemPools() {
-    const pools: ItemPools = { required: {}, nice: {}, junk: {} };
+    this.pools = { required: {}, nice: {}, junk: {} };
+    this.junkDistribution = {};
 
     /* Assign every item to its sub-pool */
     for (const item in this.state.pool) {
+      /*
+       * Some items are both junk and important.
+       * Right now it only concerns sticks.
+       */
+      const junk = isJunk(item);
+
       let dst: Items;
       if (isDungeonReward(item) || isKey(item) || isStrayFairy(item) || ITEMS_REQUIRED.has(item)) {
-        dst = pools.required;
-      } else if (isJunk(item)) {
-        dst = pools.junk;
+        dst = this.pools.required;
+      } else if (junk) {
+        dst = this.pools.junk;
       } else {
-        dst = pools.nice;
+        dst = this.pools.nice;
       }
       dst[item] = this.state.pool[item];
+
+      if (junk) {
+        this.junkDistribution[item] = this.state.pool[item];
+      }
     }
 
     /* Remove starting items */
@@ -146,11 +156,9 @@ export class LogicPassSolver {
         continue;
       const count = this.state.settings.startingItems[item];
       for (let i = 0; i < count; ++i) {
-        removeItemPools(pools, item);
+        removeItemPools(this.pools, item);
       }
     }
-
-    return pools;
   }
 
   private goldTokenLocations() {
@@ -334,18 +342,9 @@ export class LogicPassSolver {
   }
 
   private placeJunkLocations() {
-    const junkArray = shuffle(this.state.random, itemsArray(this.pools.junk));
-    const junkLocations = [ ...this.junkLocations ];
-
-    if (junkLocations.length > junkArray.length) {
-      throw new Error(`Too many junk locations, max=${junkArray.length}`);
-    }
-
-    for (let i = 0; i < junkLocations.length; i++) {
-      const junk = junkArray[i];
-      this.place(junkLocations[i], junk);
-      removeItemPools(this.pools, junk);
-    }
+    const locs = [...this.state.settings.junkLocations];
+    this.fill(locs, this.pools.junk, false);
+    this.fillExtraJunk(locs);
   }
 
   private randomAssumed(pool: Items, opts?: { restrictedLocations?: Set<string>, forcedItem?: string }) {
@@ -418,23 +417,19 @@ export class LogicPassSolver {
   }
 
   private fillAll() {
-    /* Fill using every pool */
-    this.fill(this.pools.required, true);
-    this.fill(this.pools.nice, true);
-    this.fill(this.pools.junk, false);
+    /* Get all unplaced locs */
+    let locs = Object.keys(this.state.world.checks).filter(loc => !this.items[loc]);
 
-    /* If there are still locations, fill with junk */
-    const locs = Object.keys(this.state.world.checks).filter(loc => !this.items[loc]);
-    const junkDistribution = itemsArray(this.pools.junk);
-    for (const loc of locs) {
-      const item = sample(this.state.random, junkDistribution);
-      this.place(loc, item);
-    }
+    /* Fill using every pool */
+    this.fill(locs, this.pools.required, true);
+    this.fill(locs, this.pools.nice, true);
+    this.fill(locs, this.pools.junk, false);
+    this.fillExtraJunk(locs);
   }
 
-  private fill(pool: Items, required: boolean) {
+  private fill(locs: string[], pool: Items, required: boolean) {
     const items = shuffle(this.state.random, itemsArray(pool));
-    const locations = shuffle(this.state.random, Object.keys(this.state.world.checks).filter(loc => !this.items[loc]));
+    const locations = shuffle(this.state.random, locs.filter(loc => !this.items[loc]));
 
     for (const item of items) {
       if (locations.length === 0) {
@@ -448,12 +443,23 @@ export class LogicPassSolver {
     }
   }
 
+  private fillExtraJunk(locs: string[]) {
+    locs = shuffle(this.state.random, locs.filter(loc => !this.items[loc]));
+    const junkDistribution = itemsArray(this.junkDistribution);
+    const junkDistributionRenewable = itemsArray(this.junkDistribution).filter(x => !isItemMajor(x));
+    for (const loc of locs) {
+      const junkPool = isLocationRenewable(this.state.world, loc) ? junkDistributionRenewable : junkDistribution;
+      const item = sample(this.state.random, junkPool);
+      this.place(loc, item);
+    }
+  }
+
   private place(location: string, item: string) {
     if (this.state.world.checks[location] === undefined) {
       throw new Error('Invalid Location: ' + location);
     }
-    if (!isJunk(item) && this.state.settings.junkLocations.includes(location)) {
-      throw new Error(`Unable to place ${item} at ${location}.`)
+    if (this.items[location]) {
+      throw new Error('Location already placed: ' + location);
     }
     this.items[location] = item;
     if (isLocationRenewable(this.state.world, location) && isItemCriticalRenewable(item)) {
