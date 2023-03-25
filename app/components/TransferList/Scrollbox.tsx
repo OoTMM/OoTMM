@@ -19,7 +19,7 @@ export const Scrollbox = ({ width, height, children }: ScrollboxProps) => {
     <div className='no-overflow' style={boxStyle.div}>
       <ol style={{ height: height }}>
         {children}
-      </ ol>
+      </ol>
     </div>
   );
 }

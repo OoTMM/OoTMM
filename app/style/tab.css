@@ -17,13 +17,8 @@
 }
 
 .tab-bar-right {
-  display: flex;
   flex: 1;
-}
-
-.tab-bar-right-content {
-  width: 100%;
-  height: 100%;
-  padding: 2em;
+  max-height: 100vh;
   overflow: auto;
+  padding: 2em;
 }

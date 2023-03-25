@@ -20,9 +20,7 @@ export function TabBar({ tabs }: TabProps) {
         )}
       </nav>
       <div className="tab-bar-right">
-        <div className="tab-bar-right-content">
-          {tabs[activeTab].component}
-        </div>
+        {tabs[activeTab].component}
       </div>
     </>
   );

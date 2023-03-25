@@ -59,10 +59,9 @@ button {
   transition: all 300ms ease-in-out 0s;
   text-decoration: none;
   text-align: center;
-  padding: 0px 16px;
+  padding: 0.5em 1em;
   min-width: 48px;
   line-height: 1.6;
-  height: 48px;
   font-weight: 700;
   font-size: 1em;
   border: none;

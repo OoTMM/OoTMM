@@ -1,4 +1,4 @@
-li {
+.transfer-list li {
   display: block;
   padding: 2px 2px 2px 10px;
   line-height: 1.25;
@@ -11,16 +11,16 @@ li {
   user-select: none;
 }
 
-li:hover {
+.transfer-list li:hover {
   background-color: #a0a0a0;
 }
 
-li.selected {
+.transfer-list li.selected {
   background-color: #7504c9;
   color: white;
 }
 
-ol {
+.transfer-list  ol {
   list-style: none;
   overflow-y: auto;
   background-color: #f4f4f4;

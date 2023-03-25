@@ -37,3 +37,53 @@
 .settings-group {
   margin-bottom: 2.5em;
 }
+
+.select-list {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.select-list li {
+  background: #eee;
+  padding: 0.5em;
+  user-select: none;
+
+}
+
+.select-list li:hover {
+  background: #ddd;
+  cursor: pointer;
+}
+
+.select-list li:active, .select-list li.selected {
+  background: #bbb;
+  cursor: pointer;
+}
+
+.plando {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.plando-search {
+  display: flex;
+}
+
+.plando-search > *:not(:last-child) {
+  margin-right: 1.5em;
+}
+
+.plando-select {
+  flex: 1;
+  display: inline-block;
+}
+
+.plando-remove {
+  margin-right: 0.5em;
+}
+
+.plando-remove:hover {
+  cursor: pointer;
+  color: rgb(151, 7, 7);
+}

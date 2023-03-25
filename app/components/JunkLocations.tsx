@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { locationList } from '@ootmm/core';
 
 import { useSettings } from '../contexts/GeneratorContext';
@@ -6,7 +6,7 @@ import { TransferList } from './TransferList';
 
 export function JunkLocations() {
   const [settings, setSettings] = useSettings();
-  const locList = useMemo(() => locationList(settings), []);
+  const locList = locationList(settings);
 
   return (
     <TransferList

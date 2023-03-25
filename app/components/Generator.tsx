@@ -10,6 +10,7 @@ import { Tricks } from './Tricks';
 import { JunkLocations } from './JunkLocations';
 import { Dungeons } from './Dungeons';
 import { SpecialConds } from './SpecialConds';
+import { Plando } from './Plando';
 
 export function Generator() {
   const tabs: Tab[] = [];
@@ -39,6 +40,9 @@ export function Generator() {
     }, {
       name: "Junk Locations",
       component: <JunkLocations/>
+    }, {
+      name: "Plando",
+      component: <Plando/>
     });
   }
 

@@ -152,6 +152,11 @@ export function useSettings() {
   return [ctx.state.settings, setSettings] as const;
 }
 
+export function useItemPool() {
+  const { state } = useContext(GeneratorContext);
+  return state.itemPool;
+}
+
 export function useStartingItems() {
   const { state, setState } = useContext(GeneratorContext);
   const { itemPool, settings } = state;
