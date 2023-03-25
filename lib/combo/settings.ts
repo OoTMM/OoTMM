@@ -553,12 +553,16 @@ type UnionToIntersection<U> =
 
 type SettingsBase = UnionToIntersection<SettingShapes>;
 
+type SettingsPlando = {
+  locations: {[k: string]: string},
+};
 export type Settings = SettingsBase & {
-  startingItems: {[k: string]: number},
-  junkLocations: string[],
-  tricks: Tricks,
-  dungeon: DungeonSettings,
-  specialConds: SpecialConds,
+  startingItems: {[k: string]: number};
+  junkLocations: string[];
+  tricks: Tricks;
+  dungeon: DungeonSettings;
+  specialConds: SpecialConds;
+  plando: SettingsPlando;
 };
 
 export const DEFAULT_SETTINGS: Settings = { ...SETTINGS.map(s => {
@@ -569,6 +573,7 @@ export const DEFAULT_SETTINGS: Settings = { ...SETTINGS.map(s => {
   tricks: { ...DEFAULT_TRICKS },
   dungeon: { ...DEFAULT_DUNGEONS },
   specialConds: { ...DEFAULT_SPECIAL_CONDS },
+  plando: { locations: {} },
 } as Settings;
 
 export function mergeSettings(base: Settings, arg: PartialDeep<Settings>): Settings {

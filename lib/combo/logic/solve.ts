@@ -66,6 +66,9 @@ export class LogicPassSolver {
     this.state.monitor.log(`Logic: Solver (attempt ${this.state.attempts})`);
     const checksCount = Object.keys(this.state.world.checks).length;
 
+    /* Place plando items */
+    this.placePlando();
+
     /* Place junk into junkLocations */
     this.placeJunkLocations();
 
@@ -112,6 +115,14 @@ export class LogicPassSolver {
     this.fillAll();
 
     return { items: this.items };
+  }
+
+  private placePlando() {
+    for (const loc in this.state.settings.plando.locations) {
+      const item = this.state.settings.plando.locations[loc];
+      this.place(loc, item);
+      removeItemPools(this.pools, item);
+    }
   }
 
   private fixItems() {
