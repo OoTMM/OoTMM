@@ -1,15 +1,14 @@
 import React from 'react';
-import { SETTINGS } from '@ootmm/core';
+import { SETTINGS, SETTINGS_CATEGORIES } from '@ootmm/core';
 
 import { Dropdown } from './Dropdown';
 import { Checkbox } from './Checkbox';
 import { useSettings } from '../contexts/GeneratorContext';
 
-type SettingsProps = {
+type SettingsPanelProps = {
   category: string;
 };
-
-export function SettingsEditor({ category }: SettingsProps) {
+export function SettingsPanel({ category }: SettingsPanelProps) {
   const [settings, setSettings] = useSettings();
   const settingsData = SETTINGS.filter((s) => s.category === category);
   const enumList = settingsData.filter((x) => x.type === 'enum');
@@ -45,3 +44,20 @@ export function SettingsEditor({ category }: SettingsProps) {
     </form>
   );
 };
+
+type SettingsEditorProps = {
+  category: string;
+};
+export function SettingsEditor({ category }: SettingsEditorProps) {
+  const cat = SETTINGS_CATEGORIES.find(x => x.key === category)!;
+  const subcategories = cat.subcategories || [];
+  return (
+    <>
+      <SettingsPanel category={category}/>
+      {subcategories.map(sub => <div className='settings-group'>
+        <h2>{sub.name}</h2>
+        <SettingsPanel key={sub.key} category={`${category}.${sub.key}`}/>
+      </div>)}
+    </>
+  )
+}
