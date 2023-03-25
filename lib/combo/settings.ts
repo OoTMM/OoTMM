@@ -2,9 +2,26 @@ import { merge } from 'lodash';
 import type { PartialDeep } from 'type-fest';
 
 export const SETTINGS = [{
+  key: 'logic',
+  name: 'Logic',
+  category: 'main',
+  type: 'enum',
+  values: [
+    { value: 'allLocations', name: 'All Locations' },
+    { value: 'beatable', name: 'Beatable Only' },
+    { value: 'none', name: 'No Logic' },
+  ],
+  default: 'allLocations'
+}, {
+  key: 'generateSpoilerLog',
+  name: 'Generate Spoiler Log',
+  category: 'main',
+  type: 'boolean',
+  default: true
+}, {
   key: 'songs',
   name: 'Song Shuffle',
-  category: 'main',
+  category: 'main.shuffle',
   type: 'enum',
   values: [
     { value: 'songLocations', name: 'Song Locations' },
@@ -14,7 +31,7 @@ export const SETTINGS = [{
 }, {
   key: 'goldSkulltulaTokens',
   name: 'Gold Skulltula Tokens Shuffle',
-  category: 'main',
+  category: 'main.shuffle',
   type: 'enum',
   values: [
     { value: 'none', name: 'No Shuffle' },
@@ -26,7 +43,7 @@ export const SETTINGS = [{
 }, {
   key: 'housesSkulltulaTokens',
   name: 'Houses Skulltula Tokens Shuffle',
-  category: 'main',
+  category: 'main.shuffle',
   type: 'enum',
   values: [
     { value: 'none', name: 'No Shuffle' },
@@ -37,7 +54,7 @@ export const SETTINGS = [{
 }, {
   key: 'mapCompassShuffle',
   name: 'Map / Compass Shuffle',
-  category: 'main',
+  category: 'main.shuffle',
   type: 'enum',
   values: [
     { value: 'ownDungeon', name: 'Own Dungeon' },
@@ -49,7 +66,7 @@ export const SETTINGS = [{
 }, {
   key: 'smallKeyShuffle',
   name: 'Small Key Shuffle',
-  category: 'main',
+  category: 'main.shuffle',
   type: 'enum',
   values: [
     { value: 'ownDungeon', name: 'Own Dungeon' },
@@ -59,7 +76,7 @@ export const SETTINGS = [{
 }, {
   key: 'smallKeyShuffleHideout',
   name: 'Hideout Small Key Shuffle',
-  category: 'main',
+  category: 'main.shuffle',
   type: 'enum',
   values: [
     { value: 'ownDungeon', name: 'Own Dungeon' },
@@ -69,7 +86,7 @@ export const SETTINGS = [{
 }, {
   key: 'bossKeyShuffle',
   name: 'Boss Key Shuffle',
-  category: 'main',
+  category: 'main.shuffle',
   type: 'enum',
   values: [
     { value: 'ownDungeon', name: 'Own Dungeon' },
@@ -79,7 +96,7 @@ export const SETTINGS = [{
 }, {
   key: 'townFairyShuffle',
   name: 'Town Stray Fairy Shuffle',
-  category: 'main',
+  category: 'main.shuffle',
   type: 'enum',
   values: [
     { value: 'vanilla', name: 'Vanilla' },
@@ -89,7 +106,7 @@ export const SETTINGS = [{
 }, {
   key: 'strayFairyShuffle',
   name: 'Dungeon Stray Fairy Shuffle',
-  category: 'main',
+  category: 'main.shuffle',
   type: 'enum',
   values: [
     { value: 'vanilla', name: 'Vanilla' },
@@ -101,7 +118,7 @@ export const SETTINGS = [{
 }, {
   key: 'ganonBossKey',
   name: 'Ganon Boss Key Shuffle',
-  category: 'main',
+  category: 'main.shuffle',
   type: 'enum',
   values: [
     { value: 'removed', name: 'Removed' },
@@ -113,7 +130,7 @@ export const SETTINGS = [{
 }, {
   key: 'dungeonRewardShuffle',
   name: 'Dungeon Reward Shuffle',
-  category: 'main',
+  category: 'main.shuffle',
   type: 'enum',
   values: [
     { value: 'dungeonBlueWarps', name: 'Dungeon Blue Warps' },
@@ -123,19 +140,19 @@ export const SETTINGS = [{
 }, {
   key: 'cowShuffleOot',
   name: 'Cow Shuffle (OoT)',
-  category: 'main',
+  category: 'main.shuffle',
   type: 'boolean',
   default: false
 }, {
   key: 'cowShuffleMm',
   name: 'Cow Shuffle (MM)',
-  category: 'main',
+  category: 'main.shuffle',
   type: 'boolean',
   default: false
 }, {
   key: 'shopShuffleOot',
   name: 'Shop Shuffle (OoT)',
-  category: 'main',
+  category: 'main.shuffle',
   type: 'enum',
   values: [
     { value: 'none', name: 'None' },
@@ -145,7 +162,7 @@ export const SETTINGS = [{
 }, {
   key: 'shopShuffleMm',
   name: 'Shop Shuffle (MM)',
-  category: 'main',
+  category: 'main.shuffle',
   type: 'enum',
   values: [
     { value: 'none', name: 'None' },
@@ -155,25 +172,25 @@ export const SETTINGS = [{
 }, {
   key: 'shuffleMasterSword',
   name: 'Master Sword Shuffle',
-  category: 'main',
+  category: 'main.shuffle',
   type: 'boolean',
   default: true
 }, {
   key: 'shuffleGerudoCard',
   name: 'Gerudo Card Shuffle',
-  category: 'main',
+  category: 'main.shuffle',
   type: 'boolean',
   default: true
 }, {
   key: 'eggShuffle',
   name: 'Weird / Pocket Egg Content Shuffle',
-  category: 'main',
+  category: 'main.shuffle',
   type: 'boolean',
   default: false
 }, {
   key: 'doorOfTime',
   name: 'Door of Time',
-  category: 'main',
+  category: 'main.events',
   type: 'enum',
   values: [
     { value: 'closed', name: 'Closed' },
@@ -183,13 +200,13 @@ export const SETTINGS = [{
 }, {
   key: 'crossWarpOot',
   name: 'Cross-Games OoT Warp Songs',
-  category: 'main',
+  category: 'main.cross',
   type: 'boolean',
   default: false
 }, {
   key: 'crossWarpMm',
   name: 'Cross-Games MM Song of Soaring',
-  category: 'main',
+  category: 'main.cross',
   type: 'enum',
   values: [
     { value: 'none', name: 'None' },
@@ -197,6 +214,12 @@ export const SETTINGS = [{
     { value: 'full', name: 'Child & Adult' },
   ],
   default: 'none'
+}, {
+  key: 'csmc',
+  name: 'Chest Size Matches Content',
+  category: 'main.misc',
+  type: 'boolean',
+  default: false
 }, {
   key: 'erBoss',
   name: 'Boss Entrance Shuffle',
@@ -356,29 +379,6 @@ export const SETTINGS = [{
   category: 'items.shared',
   type: 'boolean',
   default: false
-}, {
-  key: 'csmc',
-  name: 'Chest Size Matches Content',
-  category: 'misc',
-  type: 'boolean',
-  default: false
-}, {
-  key: 'logic',
-  name: 'Logic',
-  category: 'advanced',
-type: 'enum',
-values: [
-  { value: 'allLocations', name: 'All Locations' },
-  { value: 'beatable', name: 'Beatable Only' },
-  { value: 'none', name: 'No Logic' },
-],
-default: 'allLocations'
-}, {
-  key: 'generateSpoilerLog',
-  name: 'Generate Spoiler Log',
-  category: 'advanced',
-  type: 'boolean',
-  default: true
 }] as const;
 
 export type SettingCategory = {
@@ -389,6 +389,19 @@ export type SettingCategory = {
 export const SETTINGS_CATEGORIES: SettingCategory[] = [{
   name: "Main Settings",
   key: "main",
+  subcategories: [{
+    name: "Shuffle",
+    key: "shuffle",
+  }, {
+    name: "Events",
+    key: "events",
+  }, {
+    name: "Cross-Game",
+    key: "cross",
+  }, {
+    name: "Misc.",
+    key: "misc",
+  }]
 }, {
   name: "Items",
   key: "items",
@@ -405,12 +418,6 @@ export const SETTINGS_CATEGORIES: SettingCategory[] = [{
 }, {
   name: "Entrances",
   key: "entrances",
-}, {
-  name: "Misc",
-  key: "misc",
-}, {
-  name: "Advanced",
-  key: "advanced",
 }];
 
 export const TRICKS = {
