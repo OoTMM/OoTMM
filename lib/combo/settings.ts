@@ -431,6 +431,7 @@ export const TRICKS = {
   MM_SHORT_HOOK_HARD: "Precise Short Hookshot Usage",
   MM_PFI_BOAT_HOOK: "Enter Pirate Fortress Interior using Hookshot from the Boats",
   MM_PALACE_GUARD_SKIP: "Backflip over Deku Palace Guards",
+  MM_DOG_RACE_CHEST_NOTHING: "Doggy Racetrack Chest with Nothing",
 };
 
 export type Tricks = {[k in keyof typeof TRICKS]: boolean};
