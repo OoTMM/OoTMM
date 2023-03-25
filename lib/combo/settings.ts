@@ -234,7 +234,7 @@ export const SETTINGS = [{
 }, {
   key: 'progressiveShieldsOot',
   name: 'OoT Shields',
-  category: 'items',
+  category: 'items.progressive',
   type: 'enum',
   values: [
     { value: 'separate', name: 'Separate' },
@@ -244,7 +244,7 @@ export const SETTINGS = [{
 }, {
   key: 'progressiveSwordsOot',
   name: 'OoT Swords',
-  category: 'items',
+  category: 'items.progressive',
   type: 'enum',
   values: [
     { value: 'separate', name: 'Separate' },
@@ -255,7 +255,7 @@ export const SETTINGS = [{
 }, {
   key: 'progressiveShieldsMm',
   name: 'MM Shields',
-  category: 'items',
+  category: 'items.progressive',
   type: 'enum',
   values: [
     { value: 'separate', name: 'Separate' },
@@ -265,7 +265,7 @@ export const SETTINGS = [{
 }, {
   key: 'progressiveGoronLullaby',
   name: 'MM Goron Lullaby',
-  category: 'items',
+  category: 'items.progressive',
   type: 'enum',
   values: [
     { value: 'single', name: 'Full Lullaby Only' },
@@ -275,85 +275,85 @@ export const SETTINGS = [{
 }, {
   key: 'fairyOcarinaMm',
   name: 'Fairy Ocarina in MM',
-  category: 'items',
+  category: 'items.extensions',
   type: 'boolean',
   default: false
 }, {
   key: 'shortHookshotMm',
   name: 'Short Hookshot in MM',
-  category: 'items',
+  category: 'items.extensions',
   type: 'boolean',
   default: false
 }, {
   key: 'sharedNutsSticks',
   name: 'Shared Nuts & Sticks',
-  category: 'items',
+  category: 'items.shared',
   type: 'boolean',
   default: false
 }, {
   key: 'sharedBows',
   name: 'Shared Bows',
-  category: 'items',
+  category: 'items.shared',
   type: 'boolean',
   default: false
 }, {
   key: 'sharedBombBags',
   name: 'Shared Bomb Bags',
-  category: 'items',
+  category: 'items.shared',
   type: 'boolean',
   default: false
 }, {
   key: 'sharedMagic',
   name: 'Shared Magic',
-  category: 'items',
+  category: 'items.shared',
   type: 'boolean',
   default: false
 }, {
   key: 'sharedMagicArrows',
   name: 'Shared Magic Arrows',
-  category: 'items',
+  category: 'items.shared',
   type: 'boolean',
   default: false
 }, {
   key: 'sharedSongs',
   name: 'Shared Songs',
-  category: 'items',
+  category: 'items.shared',
   type: 'boolean',
   default: false
 }, {
   key: 'sharedHookshot',
   name: 'Shared Hookshots',
-  category: 'items',
+  category: 'items.shared',
   type: 'boolean',
   default: false
 }, {
   key: 'sharedLens',
   name: 'Shared Lens of Truth',
-  category: 'items',
+  category: 'items.shared',
   type: 'boolean',
   default: false
 }, {
   key: 'sharedOcarina',
   name: 'Shared Ocarina of Time',
-  category: 'items',
+  category: 'items.shared',
   type: 'boolean',
   default: false
 }, {
   key: 'sharedMasks',
   name: 'Shared Masks',
-  category: 'items',
+  category: 'items.shared',
   type: 'boolean',
   default: false
 }, {
   key: 'sharedWallets',
   name: 'Shared Wallets',
-  category: 'items',
+  category: 'items.shared',
   type: 'boolean',
   default: false
 }, {
   key: 'sharedHealth',
   name: 'Shared Health',
-  category: 'items',
+  category: 'items.shared',
   type: 'boolean',
   default: false
 }, {
@@ -381,12 +381,27 @@ default: 'allLocations'
   default: true
 }] as const;
 
-export const SETTINGS_CATEGORIES = [{
+export type SettingCategory = {
+  name: string;
+  key: string;
+  subcategories?: SettingCategory[];
+};
+export const SETTINGS_CATEGORIES: SettingCategory[] = [{
   name: "Main Settings",
   key: "main",
 }, {
   name: "Items",
   key: "items",
+  subcategories: [{
+    name: "Progressive Items",
+    key: "progressive",
+  }, {
+    name: "Shared Items",
+    key: "shared",
+  }, {
+    name: "Item Extensions",
+    key: "extensions",
+  }],
 }, {
   name: "Entrances",
   key: "entrances",
@@ -563,4 +578,3 @@ export function mergeSettings(base: Settings, arg: PartialDeep<Settings>): Setti
 export function makeSettings(arg: PartialDeep<Settings>): Settings {
   return mergeSettings(DEFAULT_SETTINGS, arg);
 }
-
