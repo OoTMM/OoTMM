@@ -8,6 +8,11 @@
     "Ganon Castle Spirit": "true"
     "Ganon Castle Shadow": "true"
     "Ganon Castle Tower": "true"
+  #locations:
+    #"Ganon Castle Leftmost Scrub": "has_lens && can_hit_scrub"
+    #"Ganon Castle Left-Center Scrub": "has_lens && can_hit_scrub"
+    #"Ganon Castle Right-Center Scrub": "has_lens && can_hit_scrub"
+    #"Ganon Castle Rightmost Scrub": "has_lens && can_hit_scrub"
 "Ganon Castle Light":
   dungeon: Ganon
   events:
