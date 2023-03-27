@@ -45,11 +45,12 @@ const main = async () => {
   const { rom, log, hash, patch } = await gen.run();
   await fs.mkdir('out', { recursive: true });
   const promises: Promise<unknown>[] = [];
-  promises.push(fs.writeFile(`out/OoTMM_${hash}.z64`, rom));
+  const suffix =  opts.debug ? "" : `-${hash}`
+  promises.push(fs.writeFile(`out/OoTMM${suffix}.z64`, rom));
   if (log)
-    promises.push(fs.writeFile(`out/spoiler_${hash}.txt`, log));
-  if (patch && !opts.debug)
-    promises.push(fs.writeFile(`out/OoTMM-Patch-${hash}.ootmm`, patch));
+    promises.push(fs.writeFile(`out/OoTMM-spoiler${suffix}.txt`, log));
+  if (patch)
+    promises.push(fs.writeFile(`out/OoTMM-Patch${suffix}.ootmm`, patch));
   return Promise.all(promises);
 }
 
