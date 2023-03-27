@@ -437,6 +437,8 @@ export const TRICKS = {
   OOT_ADULT_DOMAIN: "Enter Adult Zora's Domain using Hover Boots",
   OOT_WATER_LONGSHOT: "Drain Water Temple using Longshot",
   OOT_SAND_RIVER_NOTHING: "Cross the River of Sand with Nothing",
+  OOT_SHADOW_FIRE_ARROW: "Enter Shadow Temple using Fire Arrows",
+  OOT_KZ_SKIP: "Skip King Zora as Adult",
   MM_LENS: "Fewer Lens Requirements (MM)",
   MM_PALACE_BEAN_SKIP: "Skip Planting Beans in Deku Palace",
   MM_DARMANI_WALL: "Climb Mountain Village Wall Blind",
@@ -453,6 +455,8 @@ export const TRICKS = {
   MM_SHORT_HOOK_HARD: "Precise Short Hookshot Usage",
   MM_PFI_BOAT_HOOK: "Enter Pirate Fortress Interior using Hookshot from the Boats",
   MM_PALACE_GUARD_SKIP: "Backflip over Deku Palace Guards",
+  MM_SHT_FIRELESS: "Complete Snowhead Temple without Fire Arrows",
+  MM_KEG_EXPLOSIVES: "Use Powder Kegs as Explosives"
 };
 
 export type Tricks = {[k in keyof typeof TRICKS]: boolean};
