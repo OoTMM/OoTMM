@@ -610,7 +610,7 @@
   exits:
     "Romani Ranch": "true"
   locations:
-    "Doggy Racetrack Chest": "can_use_beans || has(MASK_ZORA) || can_hookshot_short"
+    "Doggy Racetrack Chest": "can_use_beans || has(MASK_ZORA) || can_hookshot_short || trick(MM_DOG_RACE_CHEST_NOTHING)"
     "Doggy Racetrack HP": "has(MASK_TRUTH)"
   gossip:
     "Doggy Racetrack Gossip": "true"
