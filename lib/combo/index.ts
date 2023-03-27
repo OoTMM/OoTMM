@@ -36,7 +36,7 @@ export const itemPool = (aSettings: Partial<Settings>) => {
 
   /* Extract relevant items from the pool */
   for (const item of Object.keys(pool)) {
-    if (isJunk(item) || isDungeonReward(item) || isDungeonItem(item) || isToken(item) || isStrayFairy(item)) {
+    if (isJunk(item) || isDungeonItem(item) || isToken(item) || isStrayFairy(item)) {
       delete pool[item];
     }
   }
