@@ -48,8 +48,8 @@ const main = async () => {
   promises.push(fs.writeFile(`out/OoTMM_${hash}.z64`, rom));
   if (log)
     promises.push(fs.writeFile(`out/spoiler_${hash}.txt`, log));
-  if (patch)
-    promises.push(fs.writeFile(`out/OoTMM_${hash}.ootmm`, patch));
+  if (patch && !opts.debug)
+    promises.push(fs.writeFile(`out/OoTMM-Patch-${hash}.ootmm`, patch));
   return Promise.all(promises);
 }
 
