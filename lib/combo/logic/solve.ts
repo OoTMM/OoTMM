@@ -71,13 +71,8 @@ export class LogicPassSolver {
     this.fixTokens();
     this.fixFairies();
 
-    /* Place songs */
-    this.fixSongs();
-
-    /* Place the required reward items */
-    if (this.state.settings.dungeonRewardShuffle === 'dungeonBlueWarps') {
-      this.fixRewards();
-    }
+    /* Place semi-shuffled items */
+    this.placeSemiShuffled();
 
     /* Handle dungeon items */
     for (const dungeon in this.state.world.dungeons) {
@@ -259,25 +254,6 @@ export class LogicPassSolver {
     }
   }
 
-  private fixRewards() {
-    let rewards: string[] = [];
-    const locations: string[] = [];
-
-    for (const location in this.state.world.checks) {
-      const item = this.state.world.checks[location].item;
-      if (isDungeonReward(item)) {
-        rewards.push(item);
-        locations.push(location);
-      }
-    }
-
-    rewards = shuffle(this.state.random, rewards);
-    for (let i = 0; i < rewards.length; i++) {
-      this.place(locations[i], rewards[i]);
-      removeItem(this.pools.required, rewards[i]);
-    }
-  }
-
   private fixDungeon(dungeon: string) {
     /* handle IST and ST */
     if (dungeon === 'IST') {
@@ -317,39 +293,60 @@ export class LogicPassSolver {
     }
   }
 
-  private fixSongs() {
-    if (this.state.settings.songs === 'anywhere') {
-      return;
+  private placeSemiShuffled() {
+    const assumedPool = combinedItems(this.pools.required, this.pools.nice);
+    const pool = itemsArray(assumedPool);
+    let songLocations: string[] = [];
+    let rewardsLocations: string[] = [];
+    let items: string[] = [];
+
+    if (this.state.settings.songs === 'songLocations') {
+      const songs = pool.filter(x => isSong(x));
+      songLocations = [ ...this.state.world.songLocations ];
+      items = [ ...items, ...songs ];
     }
 
-    const pool = combinedItems(this.pools.required, this.pools.nice);
-    const songs = shuffle(this.state.random, itemsArray(pool).filter(x => isSong(x)));
-    const locations = new Set([...this.state.world.songLocations].filter(x => !this.items[x]));
-
-    if (songs.length > locations.size) {
-      throw new Error(`Not enough song locations for ${songs.length} songs`);
+    if (this.state.settings.dungeonRewardShuffle === 'dungeonBlueWarps') {
+      const rewards = pool.filter(x => isDungeonReward(x));
+      rewardsLocations = [ ...this.state.world.warpLocations ];
+      items = [ ...items, ...rewards ];
     }
 
-    if (songs.length < locations.size) {
-      const count = locations.size - songs.length;
-      const junk = shuffle(this.state.random, itemsArray(this.pools.junk));
+    const locations = [...songLocations, ...rewardsLocations];
 
-      for (let i = 0; i < count; i++) {
-        songs.push(junk.pop()!);
+    if (items.length > locations.length) {
+      throw new Error(`Not enough locations for songs/dungeon rewards`);
+    }
+
+    /* Place items */
+    items = shuffle(this.state.random, items);
+    for (;;) {
+      /* Get an item */
+      const item = items.pop();
+      if (!item) {
+        break;
       }
+
+      /* Get available locations */
+      let restrictedLocations: string[];
+      if (isSong(item)) {
+        restrictedLocations = songLocations;
+      } else {
+        restrictedLocations = rewardsLocations;
+      }
+
+      /* Place the item */
+      this.randomAssumed(assumedPool, { restrictedLocations: new Set(restrictedLocations), forcedItem: item });
+      removeItemPools(this.pools, item);
     }
 
-    for (let i = 0; i < songs.length; i++) {
-      const song = songs[i];
-      this.randomAssumed(pool, { restrictedLocations: locations, forcedItem: song });
-      removeItemPools(this.pools, song);
-    }
+    /* Fill extra locations with junk */
+    this.fillJunk(locations);
   }
 
   private placeJunkLocations() {
     const locs = [...this.state.settings.junkLocations];
-    this.fill(locs, this.pools.junk, false);
-    this.fillExtraJunk(locs);
+    this.fillJunk(locs);
   }
 
   private randomAssumed(pool: Items, opts?: { restrictedLocations?: Set<string>, forcedItem?: string }) {
@@ -428,8 +425,22 @@ export class LogicPassSolver {
     /* Fill using every pool */
     this.fill(locs, this.pools.required, true);
     this.fill(locs, this.pools.nice, true);
+    this.fillJunk(locs);
+  }
+
+  private fillJunk(locs: string[]) {
+    /* Fill using the junk pool */
     this.fill(locs, this.pools.junk, false);
-    this.fillExtraJunk(locs);
+
+    /* Junk pool empty - fill with extra junk */
+    locs = shuffle(this.state.random, locs.filter(loc => !this.items[loc]));
+    const junkDistribution = itemsArray(this.junkDistribution);
+    const junkDistributionRenewable = itemsArray(this.junkDistribution).filter(x => !isItemMajor(x));
+    for (const loc of locs) {
+      const junkPool = isLocationRenewable(this.state.world, loc) ? junkDistributionRenewable : junkDistribution;
+      const item = sample(this.state.random, junkPool);
+      this.place(loc, item);
+    }
   }
 
   private fill(locs: string[], pool: Items, required: boolean) {
@@ -444,17 +455,6 @@ export class LogicPassSolver {
         break;
       }
       const loc = locations.pop()!;
-      this.place(loc, item);
-    }
-  }
-
-  private fillExtraJunk(locs: string[]) {
-    locs = shuffle(this.state.random, locs.filter(loc => !this.items[loc]));
-    const junkDistribution = itemsArray(this.junkDistribution);
-    const junkDistributionRenewable = itemsArray(this.junkDistribution).filter(x => !isItemMajor(x));
-    for (const loc of locs) {
-      const junkPool = isLocationRenewable(this.state.world, loc) ? junkDistributionRenewable : junkDistribution;
-      const item = sample(this.state.random, junkPool);
       this.place(loc, item);
     }
   }
