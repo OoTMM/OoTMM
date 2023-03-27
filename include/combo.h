@@ -130,11 +130,12 @@ ComboContext;
 
 extern ComboContext gComboCtx;
 
-typedef struct PACKED
+typedef struct
 {
     u8 dungeonRewards[13];
     u8 lightArrows;
     u8 oathToOrder;
+    u8 ganonBossKey;
 }
 ComboDataHints;
 
@@ -148,7 +149,7 @@ typedef struct
 }
 SpecialCond;
 
-typedef struct PACKED ALIGNED(4)
+typedef struct
 {
     u32             mq;
     u8              config[0x40];

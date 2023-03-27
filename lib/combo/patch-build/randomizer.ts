@@ -444,6 +444,7 @@ export const randomizerHints = (logic: LogicResult): Buffer => {
   buffers.push(regionsBuffer(logic.hints.dungeonRewards));
   buffers.push(regionsBuffer([logic.hints.lightArrow]));
   buffers.push(regionsBuffer([logic.hints.oathToOrder]));
+  buffers.push(regionsBuffer([logic.hints.ganonBossKey]));
   return Buffer.concat(buffers);
 };
 

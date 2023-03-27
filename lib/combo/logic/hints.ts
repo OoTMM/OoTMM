@@ -90,6 +90,7 @@ export type Hints = {
   dungeonRewards: string[];
   lightArrow: string;
   oathToOrder: string;
+  ganonBossKey: string;
   foolish: {[k: string]: number};
   gossip: {[k: string]: HintGossip};
 };
@@ -117,22 +118,21 @@ export class LogicPassHints {
   }
 
   private findItem(item: string) {
+    for (const sphere of this.state.analysis.spheres) {
+      for (const loc of sphere) {
+        if (this.state.items[loc] === item) {
+          return loc;
+        }
+      }
+    }
+
     for (const loc in this.state.items) {
       if (this.state.items[loc] === item) {
         return loc;
       }
     }
-    return null;
-  }
 
-  private findItems(item: string) {
-    const locs: string[] = [];
-    for (const loc in this.state.items) {
-      if (this.state.items[loc] === item) {
-        locs.push(loc);
-      }
-    }
-    return locs;
+    return null;
   }
 
   private isLocationHintable(loc: string) {
@@ -443,17 +443,20 @@ export class LogicPassHints {
     const dungeonRewardLocations = DUNGEON_REWARDS_ORDERED.map(item => this.findItem(item));
     const lightArrowLocation = this.findItem('OOT_ARROW_LIGHT') || this.findItem('SHARED_ARROW_LIGHT');
     const oathToOrderLocation = this.findItem('MM_SONG_ORDER');
+    const ganonBossKeyLocation = this.findItem('OOT_BOSS_KEY_GANON');
 
     dungeonRewardLocations.forEach(x => this.markLocation(x));
     this.markLocation(lightArrowLocation);
     this.markLocation(oathToOrderLocation);
+    this.markLocation(ganonBossKeyLocation);
 
     const dungeonRewards = dungeonRewardLocations.map(x => this.locRegion(x));
     const lightArrow = this.locRegion(lightArrowLocation);
     const oathToOrder = this.locRegion(oathToOrderLocation);
+    const ganonBossKey = this.state.settings.ganonBossKey === 'anywhere' ? this.locRegion(ganonBossKeyLocation) : 'NONE';
 
     this.placeGossips();
-    const hints: Hints = { dungeonRewards, lightArrow, oathToOrder, foolish: this.foolish, gossip: this.gossip };
+    const hints: Hints = { dungeonRewards, lightArrow, oathToOrder, ganonBossKey, foolish: this.foolish, gossip: this.gossip };
     return { hints };
   }
 }

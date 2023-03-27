@@ -9,11 +9,11 @@
   dungeon: OSH
   exits:
     "Ocean Spider House": "true"
-    "Ocean Spider House Back": "has_explosives && (can_hookshot_short || can_goron_bomb_jump)"
+    "Ocean Spider House Back": "(has_explosives || trick_keg_explosives) && (can_hookshot_short || can_goron_bomb_jump)"
   locations:
-    "Ocean Skulltula Entrance Right Wall": "has_explosives && can_hookshot_short"
-    "Ocean Skulltula Entrance Left Wall": "has_explosives && can_hookshot_short"
-    "Ocean Skulltula Entrance Web": " has_explosives && (can_hookshot_short || (can_use_fire_arrows && has(MASK_ZORA)))"
+    "Ocean Skulltula Entrance Right Wall": "(has_explosives || trick_keg_explosives) && can_hookshot_short"
+    "Ocean Skulltula Entrance Left Wall": "(has_explosives || trick_keg_explosives) && can_hookshot_short"
+    "Ocean Skulltula Entrance Web": "(has_explosives || trick_keg_explosives) && (can_hookshot_short || (can_use_fire_arrows && has(MASK_ZORA)))"
 "Ocean Spider House Back":
   dungeon: OSH
   exits:
@@ -44,6 +44,6 @@
     "Ocean Spider House Chest HP": "has(BOW) && (has(MASK_CAPTAIN) || trick(MM_CAPTAIN_SKIP))"
     "Ocean Skulltula Storage Room Behind Boat": "true"
     "Ocean Skulltula Storage Room Ceiling Web": "can_use_fire_arrows && (can_hookshot_short || has(MASK_ZORA))"
-    "Ocean Skulltula Storage Room Behind Crate": "can_hookshot_short || has(MASK_ZORA) || (has(MASK_GORON) && (has(BOW) || can_use_deku_bubble || has_explosives))"
+    "Ocean Skulltula Storage Room Behind Crate": "can_hookshot_short || has(MASK_ZORA) || (has(MASK_GORON) && (has(BOW) || can_use_deku_bubble || has_explosives || trick_keg_explosives))"
     "Ocean Skulltula Storage Room Crate": "true"
     "Ocean Skulltula Storage Room Jar": "can_hookshot_short"

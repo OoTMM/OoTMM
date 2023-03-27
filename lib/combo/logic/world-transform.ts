@@ -336,7 +336,7 @@ export class LogicPassWorldTransform {
       this.replaceItem('MM_SONG_GORON', 'MM_SONG_GORON_HALF');
     } else {
       this.removeItem('MM_SONG_GORON_HALF');
-      this.state.world.songLocations.delete('MM Goron Elder');
+      this.state.world.songLocations.delete('MM Goron Baby');
     }
 
     /* Handle fixed locations */

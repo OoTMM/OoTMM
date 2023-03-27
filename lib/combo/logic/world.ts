@@ -5,7 +5,7 @@ import { ExprParser } from './expr-parser';
 import { DATA_POOL, DATA_MACROS, DATA_WORLD, DATA_REGIONS, DATA_ENTRANCES } from '../data';
 import { Settings } from '../settings';
 import { Monitor } from '../monitor';
-import { isSong } from './items';
+import { isDungeonReward, isSong } from './items';
 
 export type ExprMap = {
   [k: string]: Expr;
@@ -57,6 +57,7 @@ export type World = {
   entrances: WorldEntrance[];
   locations: Set<string>;
   songLocations: Set<string>;
+  warpLocations: Set<string>;
 };
 
 export const DUNGEONS_REGIONS: {[k: string]: string} = {
@@ -101,7 +102,18 @@ export class LogicPassWorld {
       mq: Set<string>;
     }
   ) {
-    this.world = { areas: {}, checks: {}, dungeons: {}, regions: {}, gossip: {}, checkHints: {}, entrances: [], songLocations: new Set(), locations: new Set() };
+    this.world = {
+      areas: {},
+      checks: {},
+      dungeons: {},
+      regions: {},
+      gossip: {},
+      checkHints: {},
+      entrances: [],
+      locations: new Set(),
+      songLocations: new Set(),
+      warpLocations: new Set(),
+    };
   }
 
   run() {
@@ -228,6 +240,8 @@ export class LogicPassWorld {
 
       if (isSong(item)) {
         this.world.songLocations.add(location);
+      } else if (isDungeonReward(item)) {
+        this.world.warpLocations.add(location);
       }
     }
   }

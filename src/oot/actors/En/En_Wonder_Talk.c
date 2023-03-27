@@ -35,32 +35,37 @@ static void hintDungeons(GameState_Play* play)
     count = isChild ? 3 : 6;
 
     comboTextAppendHeader(&b);
-    for (int i = 0; i < count; ++i)
+    hintSingleDungeon(&b, base);
+    for (int i = 1; i < count; ++i)
     {
+        comboTextAppendStr(&b, TEXT_BB);
         hintSingleDungeon(&b, base + i);
-
-        if ((i == (count - 1)) && !isChild)
-        {
-            comboTextAppendStr(&b, TEXT_SIGNAL TEXT_END);
-        }
-        else
-        {
-            comboTextAppendStr(&b, TEXT_BB);
-        }
     }
 
     if (isChild)
     {
         start = b;
-        comboTextAppendStr(&b, TEXT_ICON "\x08" TEXT_FAST "It is also written that reuniting the " TEXT_COLOR_YELLOW "Spiritual Stones ");
+        comboTextAppendStr(&b, TEXT_BB TEXT_ICON "\x08" TEXT_FAST "It is also written that reuniting the " TEXT_COLOR_YELLOW "Spiritual Stones ");
         comboTextAppendClearColor(&b);
         comboTextAppendStr(&b, "leads to ");
         comboTextAppendNpcReward(&b, NPC_OOT_OCARINA_TIME_ITEM, GI_OOT_OCARINA_TIME);
         comboTextAppendStr(&b, " and ");
         comboTextAppendNpcReward(&b, NPC_OOT_OCARINA_TIME_SONG, GI_OOT_SONG_TIME);
-        comboTextAppendStr(&b, "." TEXT_SIGNAL TEXT_END);
-        comboTextAutoLineBreaks(start);
+        comboTextAppendStr(&b, ".");
     }
+    else
+    {
+        /* Ganon BK hint */
+        if (gComboData.hints.ganonBossKey != 0)
+        {
+            comboTextAppendStr(&b, TEXT_BB TEXT_ICON "\x74" TEXT_FAST);
+            comboTextAppendRegionName(&b, gComboData.hints.ganonBossKey, TF_PREPOS | TF_CAPITALIZE);
+            comboTextAppendStr(&b, "...");
+        }
+    }
+
+    comboTextAppendStr(&b, TEXT_SIGNAL TEXT_END);
+    comboTextAutoLineBreaks(start);
 }
 
 int EnWonderTalk_TalkedTo(Actor* this, GameState_Play* play)

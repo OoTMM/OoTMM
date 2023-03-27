@@ -9,11 +9,11 @@
     "Ganon Castle Shadow": "true"
     "Ganon Castle Tower": "true"
   #locations:
-    #"MQ Ganon Castle Leftmost Scrub": "has_lens && (can_hammer || has_ranged_weapon_adult || has_nuts || has_shield_for_scrubs)"
-    #"MQ Ganon Castle Left-Center Scrub": "has_lens && (can_hammer || has_ranged_weapon_adult || has_nuts || has_shield_for_scrubs)"
-    #"MQ Ganon Castle Center Scrub": "has_lens && (can_hammer || has_ranged_weapon_adult || has_nuts || has_shield_for_scrubs)"
-    #"MQ Ganon Castle Right-Center Scrub": "has_lens && (can_hammer || has_ranged_weapon_adult || has_nuts || has_shield_for_scrubs)"
-    #"MQ Ganon Castle Rightmost Scrub": "has_lens && (can_hammer || has_ranged_weapon_adult || has_nuts || has_shield_for_scrubs)"
+    #"MQ Ganon Castle Leftmost Scrub": "has_lens && can_hit_scrub"
+    #"MQ Ganon Castle Left-Center Scrub": "has_lens && can_hit_scrub"
+    #"MQ Ganon Castle Center Scrub": "has_lens && can_hit_scrub"
+    #"MQ Ganon Castle Right-Center Scrub": "has_lens && can_hit_scrub"
+    #"MQ Ganon Castle Rightmost Scrub": "has_lens && can_hit_scrub"
 "Ganon Castle Light":
   dungeon: Ganon
   events:

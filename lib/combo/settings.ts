@@ -2,9 +2,26 @@ import { merge } from 'lodash';
 import type { PartialDeep } from 'type-fest';
 
 export const SETTINGS = [{
+  key: 'logic',
+  name: 'Logic',
+  category: 'main',
+  type: 'enum',
+  values: [
+    { value: 'allLocations', name: 'All Locations' },
+    { value: 'beatable', name: 'Beatable Only' },
+    { value: 'none', name: 'No Logic' },
+  ],
+  default: 'allLocations'
+}, {
+  key: 'generateSpoilerLog',
+  name: 'Generate Spoiler Log',
+  category: 'main',
+  type: 'boolean',
+  default: true
+}, {
   key: 'songs',
   name: 'Song Shuffle',
-  category: 'main',
+  category: 'main.shuffle',
   type: 'enum',
   values: [
     { value: 'songLocations', name: 'Song Locations' },
@@ -14,7 +31,7 @@ export const SETTINGS = [{
 }, {
   key: 'goldSkulltulaTokens',
   name: 'Gold Skulltula Tokens Shuffle',
-  category: 'main',
+  category: 'main.shuffle',
   type: 'enum',
   values: [
     { value: 'none', name: 'No Shuffle' },
@@ -26,7 +43,7 @@ export const SETTINGS = [{
 }, {
   key: 'housesSkulltulaTokens',
   name: 'Houses Skulltula Tokens Shuffle',
-  category: 'main',
+  category: 'main.shuffle',
   type: 'enum',
   values: [
     { value: 'none', name: 'No Shuffle' },
@@ -37,7 +54,7 @@ export const SETTINGS = [{
 }, {
   key: 'mapCompassShuffle',
   name: 'Map / Compass Shuffle',
-  category: 'main',
+  category: 'main.shuffle',
   type: 'enum',
   values: [
     { value: 'ownDungeon', name: 'Own Dungeon' },
@@ -49,7 +66,7 @@ export const SETTINGS = [{
 }, {
   key: 'smallKeyShuffle',
   name: 'Small Key Shuffle',
-  category: 'main',
+  category: 'main.shuffle',
   type: 'enum',
   values: [
     { value: 'ownDungeon', name: 'Own Dungeon' },
@@ -59,7 +76,7 @@ export const SETTINGS = [{
 }, {
   key: 'smallKeyShuffleHideout',
   name: 'Hideout Small Key Shuffle',
-  category: 'main',
+  category: 'main.shuffle',
   type: 'enum',
   values: [
     { value: 'ownDungeon', name: 'Own Dungeon' },
@@ -69,7 +86,7 @@ export const SETTINGS = [{
 }, {
   key: 'bossKeyShuffle',
   name: 'Boss Key Shuffle',
-  category: 'main',
+  category: 'main.shuffle',
   type: 'enum',
   values: [
     { value: 'ownDungeon', name: 'Own Dungeon' },
@@ -79,7 +96,7 @@ export const SETTINGS = [{
 }, {
   key: 'townFairyShuffle',
   name: 'Town Stray Fairy Shuffle',
-  category: 'main',
+  category: 'main.shuffle',
   type: 'enum',
   values: [
     { value: 'vanilla', name: 'Vanilla' },
@@ -89,7 +106,7 @@ export const SETTINGS = [{
 }, {
   key: 'strayFairyShuffle',
   name: 'Dungeon Stray Fairy Shuffle',
-  category: 'main',
+  category: 'main.shuffle',
   type: 'enum',
   values: [
     { value: 'vanilla', name: 'Vanilla' },
@@ -101,7 +118,7 @@ export const SETTINGS = [{
 }, {
   key: 'ganonBossKey',
   name: 'Ganon Boss Key Shuffle',
-  category: 'main',
+  category: 'main.shuffle',
   type: 'enum',
   values: [
     { value: 'removed', name: 'Removed' },
@@ -113,7 +130,7 @@ export const SETTINGS = [{
 }, {
   key: 'dungeonRewardShuffle',
   name: 'Dungeon Reward Shuffle',
-  category: 'main',
+  category: 'main.shuffle',
   type: 'enum',
   values: [
     { value: 'dungeonBlueWarps', name: 'Dungeon Blue Warps' },
@@ -123,19 +140,19 @@ export const SETTINGS = [{
 }, {
   key: 'cowShuffleOot',
   name: 'Cow Shuffle (OoT)',
-  category: 'main',
+  category: 'main.shuffle',
   type: 'boolean',
   default: false
 }, {
   key: 'cowShuffleMm',
   name: 'Cow Shuffle (MM)',
-  category: 'main',
+  category: 'main.shuffle',
   type: 'boolean',
   default: false
 }, {
   key: 'shopShuffleOot',
   name: 'Shop Shuffle (OoT)',
-  category: 'main',
+  category: 'main.shuffle',
   type: 'enum',
   values: [
     { value: 'none', name: 'None' },
@@ -145,7 +162,7 @@ export const SETTINGS = [{
 }, {
   key: 'shopShuffleMm',
   name: 'Shop Shuffle (MM)',
-  category: 'main',
+  category: 'main.shuffle',
   type: 'enum',
   values: [
     { value: 'none', name: 'None' },
@@ -155,25 +172,25 @@ export const SETTINGS = [{
 }, {
   key: 'shuffleMasterSword',
   name: 'Master Sword Shuffle',
-  category: 'main',
+  category: 'main.shuffle',
   type: 'boolean',
   default: true
 }, {
   key: 'shuffleGerudoCard',
   name: 'Gerudo Card Shuffle',
-  category: 'main',
+  category: 'main.shuffle',
   type: 'boolean',
   default: true
 }, {
   key: 'eggShuffle',
   name: 'Weird / Pocket Egg Content Shuffle',
-  category: 'main',
+  category: 'main.shuffle',
   type: 'boolean',
   default: false
 }, {
   key: 'doorOfTime',
   name: 'Door of Time',
-  category: 'main',
+  category: 'main.events',
   type: 'enum',
   values: [
     { value: 'closed', name: 'Closed' },
@@ -183,13 +200,13 @@ export const SETTINGS = [{
 }, {
   key: 'crossWarpOot',
   name: 'Cross-Games OoT Warp Songs',
-  category: 'main',
+  category: 'main.cross',
   type: 'boolean',
   default: false
 }, {
   key: 'crossWarpMm',
   name: 'Cross-Games MM Song of Soaring',
-  category: 'main',
+  category: 'main.cross',
   type: 'enum',
   values: [
     { value: 'none', name: 'None' },
@@ -197,6 +214,12 @@ export const SETTINGS = [{
     { value: 'full', name: 'Child & Adult' },
   ],
   default: 'none'
+}, {
+  key: 'csmc',
+  name: 'Chest Size Matches Content',
+  category: 'main.misc',
+  type: 'boolean',
+  default: false
 }, {
   key: 'erBoss',
   name: 'Boss Entrance Shuffle',
@@ -234,7 +257,7 @@ export const SETTINGS = [{
 }, {
   key: 'progressiveShieldsOot',
   name: 'OoT Shields',
-  category: 'items',
+  category: 'items.progressive',
   type: 'enum',
   values: [
     { value: 'separate', name: 'Separate' },
@@ -244,7 +267,7 @@ export const SETTINGS = [{
 }, {
   key: 'progressiveSwordsOot',
   name: 'OoT Swords',
-  category: 'items',
+  category: 'items.progressive',
   type: 'enum',
   values: [
     { value: 'separate', name: 'Separate' },
@@ -255,7 +278,7 @@ export const SETTINGS = [{
 }, {
   key: 'progressiveShieldsMm',
   name: 'MM Shields',
-  category: 'items',
+  category: 'items.progressive',
   type: 'enum',
   values: [
     { value: 'separate', name: 'Separate' },
@@ -265,7 +288,7 @@ export const SETTINGS = [{
 }, {
   key: 'progressiveGoronLullaby',
   name: 'MM Goron Lullaby',
-  category: 'items',
+  category: 'items.progressive',
   type: 'enum',
   values: [
     { value: 'single', name: 'Full Lullaby Only' },
@@ -275,127 +298,126 @@ export const SETTINGS = [{
 }, {
   key: 'fairyOcarinaMm',
   name: 'Fairy Ocarina in MM',
-  category: 'items',
+  category: 'items.extensions',
   type: 'boolean',
   default: false
 }, {
   key: 'shortHookshotMm',
   name: 'Short Hookshot in MM',
-  category: 'items',
+  category: 'items.extensions',
   type: 'boolean',
   default: false
 }, {
   key: 'sharedNutsSticks',
   name: 'Shared Nuts & Sticks',
-  category: 'items',
+  category: 'items.shared',
   type: 'boolean',
   default: false
 }, {
   key: 'sharedBows',
   name: 'Shared Bows',
-  category: 'items',
+  category: 'items.shared',
   type: 'boolean',
   default: false
 }, {
   key: 'sharedBombBags',
   name: 'Shared Bomb Bags',
-  category: 'items',
+  category: 'items.shared',
   type: 'boolean',
   default: false
 }, {
   key: 'sharedMagic',
   name: 'Shared Magic',
-  category: 'items',
+  category: 'items.shared',
   type: 'boolean',
   default: false
 }, {
   key: 'sharedMagicArrows',
   name: 'Shared Magic Arrows',
-  category: 'items',
+  category: 'items.shared',
   type: 'boolean',
   default: false
 }, {
   key: 'sharedSongs',
   name: 'Shared Songs',
-  category: 'items',
+  category: 'items.shared',
   type: 'boolean',
   default: false
 }, {
   key: 'sharedHookshot',
   name: 'Shared Hookshots',
-  category: 'items',
+  category: 'items.shared',
   type: 'boolean',
   default: false
 }, {
   key: 'sharedLens',
   name: 'Shared Lens of Truth',
-  category: 'items',
+  category: 'items.shared',
   type: 'boolean',
   default: false
 }, {
   key: 'sharedOcarina',
   name: 'Shared Ocarina of Time',
-  category: 'items',
+  category: 'items.shared',
   type: 'boolean',
   default: false
 }, {
   key: 'sharedMasks',
   name: 'Shared Masks',
-  category: 'items',
+  category: 'items.shared',
   type: 'boolean',
   default: false
 }, {
   key: 'sharedWallets',
   name: 'Shared Wallets',
-  category: 'items',
+  category: 'items.shared',
   type: 'boolean',
   default: false
 }, {
   key: 'sharedHealth',
   name: 'Shared Health',
-  category: 'items',
+  category: 'items.shared',
   type: 'boolean',
   default: false
-}, {
-  key: 'csmc',
-  name: 'Chest Size Matches Content',
-  category: 'misc',
-  type: 'boolean',
-  default: false
-}, {
-  key: 'logic',
-  name: 'Logic',
-  category: 'advanced',
-type: 'enum',
-values: [
-  { value: 'allLocations', name: 'All Locations' },
-  { value: 'beatable', name: 'Beatable Only' },
-  { value: 'none', name: 'No Logic' },
-],
-default: 'allLocations'
-}, {
-  key: 'generateSpoilerLog',
-  name: 'Generate Spoiler Log',
-  category: 'advanced',
-  type: 'boolean',
-  default: true
 }] as const;
 
-export const SETTINGS_CATEGORIES = [{
+export type SettingCategory = {
+  name: string;
+  key: string;
+  subcategories?: SettingCategory[];
+};
+export const SETTINGS_CATEGORIES: SettingCategory[] = [{
   name: "Main Settings",
   key: "main",
+  subcategories: [{
+    name: "Shuffle",
+    key: "shuffle",
+  }, {
+    name: "Events",
+    key: "events",
+  }, {
+    name: "Cross-Game",
+    key: "cross",
+  }, {
+    name: "Misc.",
+    key: "misc",
+  }]
 }, {
   name: "Items",
   key: "items",
+  subcategories: [{
+    name: "Progressive Items",
+    key: "progressive",
+  }, {
+    name: "Shared Items",
+    key: "shared",
+  }, {
+    name: "Item Extensions",
+    key: "extensions",
+  }],
 }, {
   name: "Entrances",
   key: "entrances",
-}, {
-  name: "Misc",
-  key: "misc",
-}, {
-  name: "Advanced",
-  key: "advanced",
 }];
 
 export const TRICKS = {
@@ -415,6 +437,8 @@ export const TRICKS = {
   OOT_ADULT_DOMAIN: "Enter Adult Zora's Domain using Hover Boots",
   OOT_WATER_LONGSHOT: "Drain Water Temple using Longshot",
   OOT_SAND_RIVER_NOTHING: "Cross the River of Sand with Nothing",
+  OOT_SHADOW_FIRE_ARROW: "Enter Shadow Temple using Fire Arrows",
+  OOT_KZ_SKIP: "Skip King Zora as Adult",
   MM_LENS: "Fewer Lens Requirements (MM)",
   MM_PALACE_BEAN_SKIP: "Skip Planting Beans in Deku Palace",
   MM_DARMANI_WALL: "Climb Mountain Village Wall Blind",
@@ -431,6 +455,8 @@ export const TRICKS = {
   MM_SHORT_HOOK_HARD: "Precise Short Hookshot Usage",
   MM_PFI_BOAT_HOOK: "Enter Pirate Fortress Interior using Hookshot from the Boats",
   MM_PALACE_GUARD_SKIP: "Backflip over Deku Palace Guards",
+  MM_SHT_FIRELESS: "Complete Snowhead Temple without Fire Arrows",
+  MM_KEG_EXPLOSIVES: "Use Powder Kegs as Explosives",
   MM_DOG_RACE_CHEST_NOTHING: "Doggy Racetrack Chest with Nothing",
 };
 
@@ -539,12 +565,16 @@ type UnionToIntersection<U> =
 
 type SettingsBase = UnionToIntersection<SettingShapes>;
 
+type SettingsPlando = {
+  locations: {[k: string]: string | null},
+};
 export type Settings = SettingsBase & {
-  startingItems: {[k: string]: number},
-  junkLocations: string[],
-  tricks: Tricks,
-  dungeon: DungeonSettings,
-  specialConds: SpecialConds,
+  startingItems: {[k: string]: number};
+  junkLocations: string[];
+  tricks: Tricks;
+  dungeon: DungeonSettings;
+  specialConds: SpecialConds;
+  plando: SettingsPlando;
 };
 
 export const DEFAULT_SETTINGS: Settings = { ...SETTINGS.map(s => {
@@ -555,6 +585,7 @@ export const DEFAULT_SETTINGS: Settings = { ...SETTINGS.map(s => {
   tricks: { ...DEFAULT_TRICKS },
   dungeon: { ...DEFAULT_DUNGEONS },
   specialConds: { ...DEFAULT_SPECIAL_CONDS },
+  plando: { locations: {} },
 } as Settings;
 
 export function mergeSettings(base: Settings, arg: PartialDeep<Settings>): Settings {
@@ -564,4 +595,3 @@ export function mergeSettings(base: Settings, arg: PartialDeep<Settings>): Setti
 export function makeSettings(arg: PartialDeep<Settings>): Settings {
   return mergeSettings(DEFAULT_SETTINGS, arg);
 }
-
