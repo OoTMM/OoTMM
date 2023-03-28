@@ -30,6 +30,7 @@ static void hintDungeons(GameState_Play* play)
     int isChild;
 
     b = play->msgCtx.textBuffer;
+    start = b;
     isChild = gSave.age == AGE_CHILD;
     base = isChild ? 0 : 3;
     count = isChild ? 3 : 6;
@@ -44,7 +45,6 @@ static void hintDungeons(GameState_Play* play)
 
     if (isChild)
     {
-        start = b;
         comboTextAppendStr(&b, TEXT_BB TEXT_ICON "\x08" TEXT_FAST "It is also written that reuniting the " TEXT_COLOR_YELLOW "Spiritual Stones ");
         comboTextAppendClearColor(&b);
         comboTextAppendStr(&b, "leads to ");
