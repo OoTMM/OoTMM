@@ -123,6 +123,10 @@ Death Mountain Crater Alcove HP,                            collectible,    NONE
 Death Mountain Crater Volcano HP,                           collectible,    NONE,                 DEATH_MOUNTAIN_CRATER,          0x08,                       HEART_PIECE
 Death Mountain Crater Sheik Song,                           npc,            NONE,                 DEATH_MOUNTAIN_CRATER,          SHEIK_FIRE,                 SONG_TP_FIRE
 Death Mountain Crater Grotto,                               chest,          NONE,                 GROTTOS,                        0x1a,                       BOMBS_20
+Death Mountain Crater Scrub Child,                          scrub,          NONE,                 DEATH_MOUNTAIN_CRATER,          0x0e,                       BOMBS_5
+Death Mountain Crater Grotto Left Scrub,                    scrub,          NONE,                 GROTTOS,                        0x0f,                       NUTS_5
+Death Mountain Crater Grotto Center Scrub,                  scrub,          NONE,                 GROTTOS,                        0x10,                       DEKU_SEEDS_30
+Death Mountain Crater Grotto Right Scrub,                   scrub,          NONE,                 GROTTOS,                        0x11,                       BOMBS_5
 Death Mountain Crater GS Soil,                              gs,             NONE,                 DEATH_MOUNTAIN_CRATER,          0x80,                       GS_TOKEN
 Death Mountain Crater GS Crate,                             gs,             NONE,                 DEATH_MOUNTAIN_CRATER,          0x87,                       GS_TOKEN
 Zora River HP Pillar,                                       collectible,    NONE,                 ZORA_RIVER,                     0x04,                       HEART_PIECE

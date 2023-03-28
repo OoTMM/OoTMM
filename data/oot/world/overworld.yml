@@ -702,7 +702,7 @@
     "Death Mountain Crater GS Crate": "is_child && can_damage_skull"
     "Death Mountain Crater Grotto": "has_explosives_or_hammer"
     "Death Mountain Crater Alcove HP": "true"
-    #"Death Mountain Crater Scrub Child": "is_child && can_hit_scrub"
+    "Death Mountain Crater Scrub Child": "is_child && can_hit_scrub"
   gossip:
     "Death Mountain Crater Gossip Grotto": "has_explosives_or_hammer"
     "Death Mountain Crater Gossip Wall": "has_explosives"
@@ -716,9 +716,9 @@
     RED_BOULDER_BROKEN: "can_hammer"
   locations:
     "Great Fairy Magic Upgrade 2": "can_hammer && can_play(SONG_ZELDA)"
-    #"Death Mountain Crater Grotto Left Scrub": "can_hammer"
-    #"Death Mountain Crater Grotto Center Scrub": "can_hammer"
-    #"Death Mountain Crater Grotto Right Scrub": "can_hammer"
+    "Death Mountain Crater Grotto Left Scrub": "can_hammer"
+    "Death Mountain Crater Grotto Center Scrub": "can_hammer"
+    "Death Mountain Crater Grotto Right Scrub": "can_hammer"
 "Death Mountain Crater Warp":
   region: DEATH_MOUNTAIN_CRATER
   exits:

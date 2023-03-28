@@ -51,9 +51,44 @@ static int EnDns_GetID(Actor* this)
     case KEY(SCE_OOT_GORON_CITY, 1, SCRUB_ITEM_NUTS):            return 0x0b;
     case KEY(SCE_OOT_GORON_CITY, 1, SCRUB_ITEM_SEEDS_ARROWS):    return 0x0c;
     case KEY(SCE_OOT_GORON_CITY, 1, SCRUB_ITEM_BOMBS):           return 0x0d;
+
+    /* DMC */
+    case KEY(SCE_OOT_DEATH_MOUNTAIN_CRATER, 0, SCRUB_ITEM_BOMBS):           return 0x0e;
+    case KEY(SCE_OOT_DEATH_MOUNTAIN_CRATER, 1, SCRUB_ITEM_NUTS):            return 0x0f;
+    case KEY(SCE_OOT_DEATH_MOUNTAIN_CRATER, 1, SCRUB_ITEM_SEEDS_ARROWS):    return 0x10;
+    case KEY(SCE_OOT_DEATH_MOUNTAIN_CRATER, 1, SCRUB_ITEM_BOMBS):           return 0x11;
     }
 
     return 0;
+}
+
+static int EnDns_GetFlag(int flag)
+{
+    u32 flags;
+
+    if (flag >= 32)
+    {
+        flags = gOotExtraScrubsHi;
+        flag -= 32;
+    }
+    else
+    {
+        flags = gOotExtraScrubsLo;
+    }
+
+    return !!(flags & (1 << flag));
+}
+
+static void EnDns_SetFlag(int flag)
+{
+    if (flag >= 32)
+    {
+        gOotExtraScrubsHi |= (1 << (flag - 32));
+    }
+    else
+    {
+        gOotExtraScrubsLo |= (1 << flag);
+    }
 }
 
 static s16 EnDns_GetPrice(Actor* this)
@@ -84,7 +119,7 @@ void EnDns_MaybeDestroy(Actor* this)
 {
     s16 gi;
 
-    if (gOotExtraScrubs & (1 << EnDns_GetID(this)))
+    if (EnDns_GetFlag(EnDns_GetID(this)))
     {
         /* Already bought from scrub */
         /* Use dummy GI to avoid having to look up the scrub data, as Shopnuts lack it */
@@ -160,7 +195,7 @@ static int EnDns_HasGivenItem(Actor* this, GameState_Play* play)
     if (Actor_HasParent(this))
     {
         id = EnDns_GetID(this);
-        gOotExtraScrubs |= (1 << id);
+        EnDns_SetFlag(id);
         return 1;
     }
     return 0;
