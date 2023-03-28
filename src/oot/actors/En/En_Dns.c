@@ -74,6 +74,26 @@ static int EnDns_GetID(Actor* this)
     /* Desert Colossus */
     case KEY(SCE_OOT_DESERT_COLOSSUS, 1, SCRUB_ITEM_POTION_GREEN):   return 0x19;
     case KEY(SCE_OOT_DESERT_COLOSSUS, 1, SCRUB_ITEM_POTION_RED):     return 0x1a;
+
+    /* Deku Tree */
+    case KEY(SCE_OOT_INSIDE_DEKU_TREE, 0, SCRUB_ITEM_SHIELD_DEKU):  return 0x1b;
+
+    /* Dodongo Cavern */
+    case KEY(SCE_OOT_DODONGO_CAVERN, 0, SCRUB_ITEM_SEEDS):          return 0x1c;
+    case KEY(SCE_OOT_DODONGO_CAVERN, 0, SCRUB_ITEM_STICK):          return 0x1d;
+    case KEY(SCE_OOT_DODONGO_CAVERN, 0, SCRUB_ITEM_NUTS):           return 0x1e;
+    case KEY(SCE_OOT_DODONGO_CAVERN, 0, SCRUB_ITEM_POTION_RED):     return 0x1e;
+    case KEY(SCE_OOT_DODONGO_CAVERN, 0, SCRUB_ITEM_SHIELD_DEKU):    return 0x1f;
+
+    /* Jabu-Jabu */
+    case KEY(SCE_OOT_INSIDE_JABU_JABU, 0, SCRUB_ITEM_NUTS): return 0x20;
+
+    /* Ganon */
+    case KEY(SCE_OOT_INSIDE_GANON_CASTLE, 0, SCRUB_ITEM_POTION_GREEN):  return 0x21;
+    case KEY(SCE_OOT_INSIDE_GANON_CASTLE, 0, SCRUB_ITEM_BOMBS):         return 0x22;
+    case KEY(SCE_OOT_INSIDE_GANON_CASTLE, 0, SCRUB_ITEM_SEEDS_ARROWS):  return 0x23;
+    case KEY(SCE_OOT_INSIDE_GANON_CASTLE, 0, SCRUB_ITEM_POTION_RED):    return 0x24;
+    case KEY(SCE_OOT_INSIDE_GANON_CASTLE, 0, SCRUB_ITEM_NUTS):          return 0x25;
     }
 
     return 0;

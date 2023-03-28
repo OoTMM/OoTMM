@@ -292,6 +292,10 @@ Dodongo Cavern Compass Chest,                               chest,          NONE
 Dodongo Cavern Bomb Bag Side Chest,                         chest,          NONE,                 DODONGO_CAVERN,                 0x06,                       RUPEE_RED
 Dodongo Cavern Bomb Bag Chest,                              chest,          NONE,                 DODONGO_CAVERN,                 0x04,                       BOMB_BAG
 Dodongo Cavern Bridge Chest,                                chest,          NONE,                 DODONGO_CAVERN,                 0x0a,                       SHIELD_DEKU
+Dodongo Cavern Lobby Scrub,                                 scrub,          NONE,                 DODONGO_CAVERN,                 0x1f,                       SHIELD_DEKU
+Dodongo Cavern Green Side Room Scrub,                       scrub,          NONE,                 DODONGO_CAVERN,                 0x1d,                       STICK
+Dodongo Cavern Bomb Bag Side Room Left Scrub,               scrub,          NONE,                 DODONGO_CAVERN,                 0x1e,                       NUTS_5
+Dodongo Cavern Bomb Bag Side Room Right Scrub,              scrub,          NONE,                 DODONGO_CAVERN,                 0x1c,                       DEKU_SEEDS_30
 Dodongo Cavern GS Side Room,                                gs,             NONE,                 DODONGO_CAVERN,                 0x14,                       GS_TOKEN
 Dodongo Cavern GS Stairs Vines,                             gs,             NONE,                 DODONGO_CAVERN,                 0x10,                       GS_TOKEN
 Dodongo Cavern GS Stairs Top,                               gs,             NONE,                 DODONGO_CAVERN,                 0x12,                       GS_TOKEN
@@ -303,6 +307,7 @@ Dodongo Cavern Boss,                                        npc,            NONE
 Jabu-Jabu Map Chest,                                        chest,          NONE,                 INSIDE_JABU_JABU,               0x02,                       MAP_JJ
 Jabu-Jabu Compass Chest,                                    chest,          NONE,                 INSIDE_JABU_JABU,               0x04,                       COMPASS_JJ
 Jabu-Jabu Boomerang Chest,                                  chest,          NONE,                 INSIDE_JABU_JABU,               0x01,                       BOOMERANG
+Jabu-Jabu Scrub,                                            scrub,          NONE,                 INSIDE_JABU_JABU,               0x20,                       NUTS_5
 Jabu-Jabu GS Water Switch,                                  gs,             NONE,                 INSIDE_JABU_JABU,               0x1b,                       GS_TOKEN
 Jabu-Jabu GS Bottom Lower,                                  gs,             NONE,                 INSIDE_JABU_JABU,               0x18,                       GS_TOKEN
 Jabu-Jabu GS Bottom Upper,                                  gs,             NONE,                 INSIDE_JABU_JABU,               0x19,                       GS_TOKEN
@@ -485,6 +490,10 @@ Ganon Castle Shadow Chest 2,                                chest,          NONE
 Ganon Castle Spirit Chest 1,                                chest,          NONE,                 INSIDE_GANON_CASTLE,            0x12,                       BOMBCHU_20
 Ganon Castle Spirit Chest 2,                                chest,          NONE,                 INSIDE_GANON_CASTLE,            0x14,                       ARROWS_10
 Ganon Castle Boss Key,                                      chest,          NONE,                 GANON_TOWER,                    0x0b,                       BOSS_KEY_GANON
+Ganon Castle Leftmost Scrub,                                scrub,          NONE,                 INSIDE_GANON_CASTLE,            0x21,                       POTION_GREEN
+Ganon Castle Left-Center Scrub,                             scrub,          NONE,                 INSIDE_GANON_CASTLE,            0x22,                       BOMBS_5
+Ganon Castle Right-Center Scrub,                            scrub,          NONE,                 INSIDE_GANON_CASTLE,            0x23,                       ARROWS_10
+Ganon Castle Rightmost Scrub,                               scrub,          NONE,                 INSIDE_GANON_CASTLE,            0x24,                       POTION_RED
 MQ Deku Tree Map Chest,                                     chest,          NONE,                 INSIDE_DEKU_TREE,               0x03,                       MAP_DT
 MQ Deku Tree Compass Chest,                                 chest,          NONE,                 INSIDE_DEKU_TREE,               0x01,                       COMPASS_DT
 MQ Deku Tree Slingshot Chest,                               chest,          NONE,                 INSIDE_DEKU_TREE,               0x06,                       SLINGSHOT
@@ -492,6 +501,7 @@ MQ Deku Tree Slingshot Room Far Chest,                      chest,          NONE
 MQ Deku Tree Basement Chest,                                chest,          NONE,                 INSIDE_DEKU_TREE,               0x04,                       RUPEE_BLUE
 MQ Deku Tree Before Water Platform Chest,                   chest,          NONE,                 INSIDE_DEKU_TREE,               0x05,                       RECOVERY_HEART
 MQ Deku Tree After Water Platform Chest,                    chest,          NONE,                 INSIDE_DEKU_TREE,               0x00,                       RUPEE_PURPLE
+MQ Deku Tree Scrub,                                         scrub,          NONE,                 INSIDE_DEKU_TREE,               0x1b,                       SHIELD_DEKU
 MQ Deku Tree GS Back Room,                                  gs,             NONE,                 INSIDE_DEKU_TREE,               0x08,                       GS_TOKEN
 MQ Deku Tree GS Lobby Crate,                                gs,             NONE,                 INSIDE_DEKU_TREE,               0x09,                       GS_TOKEN
 MQ Deku Tree GS Song of Time Blocks,                        gs,             NONE,                 INSIDE_DEKU_TREE,               0x0a,                       GS_TOKEN
@@ -502,6 +512,10 @@ MQ Dodongo Cavern Larvae Room Chest,                        chest,          NONE
 MQ Dodongo Cavern Upper Ledge Chest,                        chest,          NONE,                 DODONGO_CAVERN,                 0x03,                       RUPEE_BLUE
 MQ Dodongo Cavern Bomb Bag Chest,                           chest,          NONE,                 DODONGO_CAVERN,                 0x04,                       BOMB_BAG
 MQ Dodongo Cavern Chest Under Grave,                        chest,          NONE,                 DODONGO_CAVERN,                 0x01,                       RUPEE_BLUE
+MQ Dodongo Cavern Lobby Scrub Front,                        scrub,          NONE,                 DODONGO_CAVERN,                 0x1c,                       DEKU_SEEDS_30
+MQ Dodongo Cavern Lobby Scrub Back,                         scrub,          NONE,                 DODONGO_CAVERN,                 0x1d,                       STICK
+MQ Dodongo Cavern Staircase Scrub,                          scrub,          NONE,                 DODONGO_CAVERN,                 0x1f,                       POTION_RED
+MQ Dodongo Cavern Tunnel Side Scrub,                        scrub,          NONE,                 DODONGO_CAVERN,                 0x1e,                       SHIELD_DEKU
 MQ Dodongo Cavern GS Time Blocks,                           gs,             NONE,                 DODONGO_CAVERN,                 0x13,                       GS_TOKEN
 MQ Dodongo Cavern GS Larve Room,                            gs,             NONE,                 DODONGO_CAVERN,                 0x14,                       GS_TOKEN
 MQ Dodongo Cavern GS Upper Lizalfos,                        gs,             NONE,                 DODONGO_CAVERN,                 0x12,                       GS_TOKEN
@@ -664,3 +678,8 @@ MQ Ganon Castle Spirit Trial Gold Gauntlets Chest,          chest,          NONE
 MQ Ganon Castle Shadow Trial Bomb Flower Chest,             chest,          NONE,                 INSIDE_GANON_CASTLE,            0x00,                       ARROWS_10
 MQ Ganon Castle Shadow Trial Switch Chest,                  chest,          NONE,                 INSIDE_GANON_CASTLE,            0x05,                       SMALL_KEY_GANON
 MQ Ganon Castle Forest Trial Key,                           collectible,    NONE,                 INSIDE_GANON_CASTLE,            0x01,                       SMALL_KEY_GANON
+MQ Ganon Castle Leftmost Scrub,                             scrub,          NONE,                 INSIDE_GANON_CASTLE,            0x21,                       POTION_GREEN
+MQ Ganon Castle Left-Center Scrub,                          scrub,          NONE,                 INSIDE_GANON_CASTLE,            0x22,                       BOMBS_5
+MQ Ganon Castle Center Scrub,                               scrub,          NONE,                 INSIDE_GANON_CASTLE,            0x23,                       ARROWS_10
+MQ Ganon Castle Right-Center Scrub,                         scrub,          NONE,                 INSIDE_GANON_CASTLE,            0x24,                       POTION_RED
+MQ Ganon Castle Rightmost Scrub,                            scrub,          NONE,                 INSIDE_GANON_CASTLE,            0x25,                       NUTS_5
