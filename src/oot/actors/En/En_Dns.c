@@ -57,6 +57,15 @@ static int EnDns_GetID(Actor* this)
     case KEY(SCE_OOT_DEATH_MOUNTAIN_CRATER, 1, SCRUB_ITEM_NUTS):            return 0x0f;
     case KEY(SCE_OOT_DEATH_MOUNTAIN_CRATER, 1, SCRUB_ITEM_SEEDS_ARROWS):    return 0x10;
     case KEY(SCE_OOT_DEATH_MOUNTAIN_CRATER, 1, SCRUB_ITEM_BOMBS):           return 0x11;
+
+    /* Zora's River */
+    case KEY(SCE_OOT_ZORA_RIVER, 1, SCRUB_ITEM_POTION_GREEN):   return 0x12;
+    case KEY(SCE_OOT_ZORA_RIVER, 1, SCRUB_ITEM_POTION_RED):     return 0x13;
+
+    /* Lake Hylia */
+    case KEY(SCE_OOT_LAKE_HYLIA, 1, SCRUB_ITEM_NUTS):            return 0x14;
+    case KEY(SCE_OOT_LAKE_HYLIA, 1, SCRUB_ITEM_SEEDS_ARROWS):    return 0x15;
+    case KEY(SCE_OOT_LAKE_HYLIA, 1, SCRUB_ITEM_BOMBS):           return 0x16;
     }
 
     return 0;

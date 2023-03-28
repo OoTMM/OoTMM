@@ -135,6 +135,8 @@ Zora River Bean Seller,                                     npc,            NONE
 Zora River Frogs Storms,                                    npc,            NONE,                 ZORA_RIVER,                     FROGS_STORMS,               HEART_PIECE
 Zora River Frogs Game,                                      npc,            FROGS_FINAL,          ZORA_RIVER,                     FROGS_GAME,                 HEART_PIECE
 Zora River Grotto,                                          chest,          NONE,                 GROTTOS,                        0x09,                       RUPEE_RED
+Zora River Storms Grotto Front Scrub,                       scrub,          NONE,                 GROTTOS,                        0x12,                       POTION_GREEN
+Zora River Storms Grotto Back Scrub,                        scrub,          NONE,                 GROTTOS,                        0x13,                       POTION_RED
 Zora River GS Tree,                                         gs,             NONE,                 ZORA_RIVER,                     0x91,                       GS_TOKEN
 Zora River GS Ladder,                                       gs,             NONE,                 ZORA_RIVER,                     0x90,                       GS_TOKEN
 Zora River GS Near Grotto,                                  gs,             NONE,                 ZORA_RIVER,                     0x94,                       GS_TOKEN
@@ -160,6 +162,9 @@ Zora Fountain GS Upper,                                     gs,             NONE
 Lake Hylia Underwater Bottle,                               npc,            NONE,                 LAKE_HYLIA,                     RUTO_LETTER,                RUTO_LETTER
 Lake Hylia Fire Arrow,                                      npc,            NONE,                 LAKE_HYLIA,                     FIRE_ARROW,                 ARROW_FIRE
 Lake Hylia HP,                                              collectible,    NONE,                 LAKE_HYLIA,                     0x1e,                       HEART_PIECE
+Lake Hylia Grotto Left Scrub,                               scrub,          NONE,                 GROTTOS,                        0x14,                       NUTS_5
+Lake Hylia Grotto Center Scrub,                             scrub,          NONE,                 GROTTOS,                        0x15,                       DEKU_SEEDS_30
+Lake Hylia Grotto Right Scrub,                              scrub,          NONE,                 GROTTOS,                        0x16,                       BOMBS_5
 Lake Hylia GS Lab Wall,                                     gs,             NONE,                 LAKE_HYLIA,                     0x9a,                       GS_TOKEN
 Lake Hylia GS Island,                                       gs,             NONE,                 LAKE_HYLIA,                     0x99,                       GS_TOKEN
 Lake Hylia GS Soil,                                         gs,             NONE,                 LAKE_HYLIA,                     0x98,                       GS_TOKEN
