@@ -193,6 +193,7 @@ NORETURN void comboGameSwitch(GameState_Play* play, s32 entrance);
 #define OV_SF           4
 #define OV_COW          5
 #define OV_SHOP         6
+#define OV_SCRUB        7
 
 #define OVF_PROGRESSIVE       (1 << 0)
 #define OVF_DOWNGRADE         (1 << 1)
@@ -302,6 +303,8 @@ int  comboAddItemNoEffect(s16 gi);
 int comboIsItemUnavailable(s16 gi);
 int comboIsItemMinor(s16 gi);
 int comboIsItemConsumable(s16 gi);
+
+int comboItemPrecond(s16 gi, s16 price);
 
 void comboToggleTrade(u8* slot, u32 flags, const u8* table, u32 tableSize);
 

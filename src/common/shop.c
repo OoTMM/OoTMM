@@ -9,49 +9,9 @@
 int shopReadFlag(int);
 void shopWriteFlag(int);
 
-static int isItemBuyableOot(s16 gi)
-{
-    switch (gi)
-    {
-    case GI_OOT_BOMBCHU_5:
-    case GI_OOT_BOMBCHU_10:
-    case GI_OOT_BOMBCHU_20:
-        if (gOotSave.inventory.upgrades.bombBag == 0 && gOotSave.inventory.items[ITS_OOT_BOMBCHU] != ITEM_OOT_BOMBCHU_10)
-            return 0;
-        break;
-    }
-    return 1;
-}
-
-static int isItemBuyableMm(s16 gi)
-{
-    return 1;
-}
-
-static int isItemBuyable(s16 gi)
-{
-#if defined(GAME_MM)
-    gi ^= MASK_FOREIGN_GI;
-#endif
-
-    if (gi & MASK_FOREIGN_GI)
-        return isItemBuyableMm(gi ^ MASK_FOREIGN_GI);
-    else
-        return isItemBuyableOot(gi);
-}
-
 int comboShopPrecond(GameState_Play* play, Actor_EnGirlA* girlA)
 {
-    if (comboIsItemUnavailable(girlA->gi) || !isItemBuyable(girlA->gi))
-        return SC_ERR_CANNOTBUY;
-
-    if (gSave.playerData.rupees < girlA->price)
-        return SC_ERR_NORUPEES;
-
-    if (comboIsItemMinor(girlA->gi))
-        return SC_OK_NOCUTSCENE;
-
-    return SC_OK;
+    return comboItemPrecond(girlA->gi, girlA->price);
 }
 
 void comboShopAfterBuy(GameState_Play* play, Actor_EnGirlA* girlA)

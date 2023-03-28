@@ -26,10 +26,13 @@ Lost Woods Gift from Saria,                                 npc,            NONE
 Lost Woods Target,                                          npc,            NONE,                 LOST_WOODS,                     LOST_WOODS_TARGET,          SLINGSHOT
 Lost Woods Skull Kid,                                       npc,            NONE,                 LOST_WOODS,                     LOST_WOODS_SKULL_KID,       HEART_PIECE
 Lost Woods Memory Game,                                     npc,            NONE,                 LOST_WOODS,                     LOST_WOODS_MEMORY,          HEART_PIECE
-Lost Woods Scrub Sticks Upgrade,                            npc,            NONE,                 LOST_WOODS,                     SCRUB_STICKS,               STICK_UPGRADE
+Lost Woods Scrub Sticks Upgrade,                            scrub,          NONE,                 LOST_WOODS,                     0x00,                       STICK_UPGRADE
+Lost Woods Scrub Near Theater Left,                         scrub,          NONE,                 LOST_WOODS,                     0x01,                       STICK
+Lost Woods Scrub Near Theater Right,                        scrub,          NONE,                 LOST_WOODS,                     0x02,                       NUTS_5
 Lost Woods Odd Mushroom,                                    npc,            NONE,                 LOST_WOODS,                     TRADE_ODD_MUSHROOM,         ODD_MUSHROOM
 Lost Woods Poacher's Saw,                                   npc,            NONE,                 LOST_WOODS,                     TRADE_POACHER_SAW,          POACHER_SAW
-Lost Woods Grotto Scrub Nuts Upgrade,                       npc,            NONE,                 GROTTOS,                        SCRUB_NUTS,                 NUT_UPGRADE
+Lost Woods Grotto Scrub Nuts Upgrade,                       scrub,          NONE,                 GROTTOS,                        0x03,                       NUT_UPGRADE
+Lost Woods Grotto Scrub Back,                               scrub,          NONE,                 GROTTOS,                        0x04,                       DEKU_SEEDS_30
 Lost Woods Grotto Generic,                                  chest,          NONE,                 GROTTOS,                        0x14,                       RUPEE_BLUE
 Lost Woods GS Soil Bridge,                                  gs,             NONE,                 LOST_WOODS,                     0x70,                       GS_TOKEN
 Lost Woods GS Soil Theater,                                 gs,             NONE,                 LOST_WOODS,                     0x71,                       GS_TOKEN
@@ -40,6 +43,8 @@ Saria's Song,                                               npc,            NONE
 Sacred Meadow Sheik Song,                                   npc,            NONE,                 SACRED_FOREST_MEADOW,           SHEIK_FOREST,               SONG_TP_FOREST
 Sacred Meadow Grotto,                                       chest,          NONE,                 GROTTOS,                        0x11,                       RUPEE_PURPLE
 Sacred Meadow GS Night Adult,                               gs,             NONE,                 SACRED_FOREST_MEADOW,           0x73,                       GS_TOKEN
+Sacred Meadow Storms Grotto Front Scrub,                    scrub,          NONE,                 GROTTOS,                        0x05,                       POTION_GREEN
+Sacred Meadow Storms Grotto Back Scrub,                     scrub,          NONE,                 GROTTOS,                        0x06,                       POTION_RED
 Kakariko Anju Bottle,                                       npc,            NONE,                 KAKARIKO_VILLAGE,               ANJU_BOTTLE,                BOTTLE_EMPTY
 Kakariko Anju Egg,                                          npc,            NONE,                 KAKARIKO_VILLAGE,               TRADE_POCKET_EGG,           POCKET_CUCCO
 Kakariko Anju Cojiro,                                       npc,            NONE,                 KAKARIKO_VILLAGE,               TRADE_COJIRO,               COJIRO
@@ -103,6 +108,9 @@ Goron City Bomb Bag,                                        npc,            NONE
 Goron City Medigoron Giant Knife,                           npc,            NONE,                 GORON_CITY,                     MEDIGORON,                  SWORD_KNIFE
 Goron City GS Platform,                                     gs,             NONE,                 GORON_CITY,                     0x85,                       GS_TOKEN
 Goron City GS Maze,                                         gs,             NONE,                 GORON_CITY,                     0x86,                       GS_TOKEN
+Goron City Grotto Left Scrub,                               scrub,          NONE,                 GROTTOS,                        0x0b,                       NUTS_5
+Goron City Grotto Center Scrub,                             scrub,          NONE,                 GROTTOS,                        0x0c,                       DEKU_SEEDS_30
+Goron City Grotto Right Scrub,                              scrub,          NONE,                 GROTTOS,                        0x0d,                       BOMBS_5
 Goron Shop Item 1,                                          shop,           NONE,                 GORON_CITY,                     0x18,                       RECOVERY_HEART
 Goron Shop Item 2,                                          shop,           NONE,                 GORON_CITY,                     0x19,                       RECOVERY_HEART
 Goron Shop Item 3,                                          shop,           NONE,                 GORON_CITY,                     0x1a,                       POTION_RED
@@ -115,6 +123,10 @@ Death Mountain Crater Alcove HP,                            collectible,    NONE
 Death Mountain Crater Volcano HP,                           collectible,    NONE,                 DEATH_MOUNTAIN_CRATER,          0x08,                       HEART_PIECE
 Death Mountain Crater Sheik Song,                           npc,            NONE,                 DEATH_MOUNTAIN_CRATER,          SHEIK_FIRE,                 SONG_TP_FIRE
 Death Mountain Crater Grotto,                               chest,          NONE,                 GROTTOS,                        0x1a,                       BOMBS_20
+Death Mountain Crater Scrub Child,                          scrub,          NONE,                 DEATH_MOUNTAIN_CRATER,          0x0e,                       BOMBS_5
+Death Mountain Crater Grotto Left Scrub,                    scrub,          NONE,                 GROTTOS,                        0x0f,                       NUTS_5
+Death Mountain Crater Grotto Center Scrub,                  scrub,          NONE,                 GROTTOS,                        0x10,                       DEKU_SEEDS_30
+Death Mountain Crater Grotto Right Scrub,                   scrub,          NONE,                 GROTTOS,                        0x11,                       BOMBS_5
 Death Mountain Crater GS Soil,                              gs,             NONE,                 DEATH_MOUNTAIN_CRATER,          0x80,                       GS_TOKEN
 Death Mountain Crater GS Crate,                             gs,             NONE,                 DEATH_MOUNTAIN_CRATER,          0x87,                       GS_TOKEN
 Zora River HP Pillar,                                       collectible,    NONE,                 ZORA_RIVER,                     0x04,                       HEART_PIECE
@@ -123,6 +135,8 @@ Zora River Bean Seller,                                     npc,            NONE
 Zora River Frogs Storms,                                    npc,            NONE,                 ZORA_RIVER,                     FROGS_STORMS,               HEART_PIECE
 Zora River Frogs Game,                                      npc,            FROGS_FINAL,          ZORA_RIVER,                     FROGS_GAME,                 HEART_PIECE
 Zora River Grotto,                                          chest,          NONE,                 GROTTOS,                        0x09,                       RUPEE_RED
+Zora River Storms Grotto Front Scrub,                       scrub,          NONE,                 GROTTOS,                        0x12,                       POTION_GREEN
+Zora River Storms Grotto Back Scrub,                        scrub,          NONE,                 GROTTOS,                        0x13,                       POTION_RED
 Zora River GS Tree,                                         gs,             NONE,                 ZORA_RIVER,                     0x91,                       GS_TOKEN
 Zora River GS Ladder,                                       gs,             NONE,                 ZORA_RIVER,                     0x90,                       GS_TOKEN
 Zora River GS Near Grotto,                                  gs,             NONE,                 ZORA_RIVER,                     0x94,                       GS_TOKEN
@@ -148,6 +162,9 @@ Zora Fountain GS Upper,                                     gs,             NONE
 Lake Hylia Underwater Bottle,                               npc,            NONE,                 LAKE_HYLIA,                     RUTO_LETTER,                RUTO_LETTER
 Lake Hylia Fire Arrow,                                      npc,            NONE,                 LAKE_HYLIA,                     FIRE_ARROW,                 ARROW_FIRE
 Lake Hylia HP,                                              collectible,    NONE,                 LAKE_HYLIA,                     0x1e,                       HEART_PIECE
+Lake Hylia Grotto Left Scrub,                               scrub,          NONE,                 GROTTOS,                        0x14,                       NUTS_5
+Lake Hylia Grotto Center Scrub,                             scrub,          NONE,                 GROTTOS,                        0x15,                       DEKU_SEEDS_30
+Lake Hylia Grotto Right Scrub,                              scrub,          NONE,                 GROTTOS,                        0x16,                       BOMBS_5
 Lake Hylia GS Lab Wall,                                     gs,             NONE,                 LAKE_HYLIA,                     0x9a,                       GS_TOKEN
 Lake Hylia GS Island,                                       gs,             NONE,                 LAKE_HYLIA,                     0x99,                       GS_TOKEN
 Lake Hylia GS Soil,                                         gs,             NONE,                 LAKE_HYLIA,                     0x98,                       GS_TOKEN
@@ -168,9 +185,12 @@ Lon Lon Ranch Stables Cow Left,                             cow,            NONE
 Lon Lon Ranch Stables Cow Right,                            cow,            NONE,                 LON_LON_RANCH,                  0x03,                       MILK
 Lon Lon Ranch Silo Cow Front,                               cow,            NONE,                 LON_LON_RANCH,                  0x04,                       MILK
 Lon Lon Ranch Silo Cow Back,                                cow,            NONE,                 LON_LON_RANCH,                  0x05,                       MILK
+Lon Lon Ranch Grotto Left Scrub,                            scrub,          NONE,                 GROTTOS,                        0x08,                       NUTS_5
+Lon Lon Ranch Grotto Center Scrub,                          scrub,          NONE,                 GROTTOS,                        0x09,                       DEKU_SEEDS_30
+Lon Lon Ranch Grotto Right Scrub,                           scrub,          NONE,                 GROTTOS,                        0x0a,                       BOMBS_5
 Hyrule Field Ocarina of Time,                               npc,            NONE,                 HYRULE_FIELD,                   OCARINA_TIME_ITEM,          OCARINA
 Hyrule Field Song of Time,                                  npc,            NONE,                 HYRULE_FIELD,                   OCARINA_TIME_SONG,          SONG_TIME
-Hyrule Field Grotto Scrub HP,                               npc,            NONE,                 GROTTOS,                        SCRUB_HP,                   HEART_PIECE
+Hyrule Field Grotto Scrub HP,                               scrub,          NONE,                 GROTTOS,                        0x07,                       HEART_PIECE
 Hyrule Field Grotto Southeast,                              chest,          NONE,                 GROTTOS,                        0x02,                       RUPEE_RED
 Hyrule Field Grotto Open,                                   chest,          NONE,                 GROTTOS,                        0x03,                       RUPEE_BLUE
 Hyrule Field Grotto Market,                                 chest,          NONE,                 GROTTOS,                        0x00,                       RUPEE_BLUE
@@ -223,6 +243,8 @@ Gerudo Valley Chest,                                        chest,          NONE
 Gerudo Valley Crate HP,                                     collectible,    NONE,                 GERUDO_VALLEY,                  0x02,                       HEART_PIECE
 Gerudo Valley Waterfall HP,                                 collectible,    NONE,                 GERUDO_VALLEY,                  0x01,                       HEART_PIECE
 Gerudo Valley Broken Goron Sword,                           npc,            NONE,                 GERUDO_VALLEY,                  TRADE_BROKEN_GORON_SWORD,   BROKEN_GORON_SWORD
+Gerudo Valley Grotto Front Scrub,                           scrub,          NONE,                 GROTTOS,                        0x17,                       POTION_GREEN
+Gerudo Valley Grotto Back Scrub,                            scrub,          NONE,                 GROTTOS,                        0x18,                       POTION_RED
 Gerudo Valley GS Soil,                                      gs,             NONE,                 GERUDO_VALLEY,                  0xa0,                       GS_TOKEN
 Gerudo Valley GS Wall,                                      gs,             NONE,                 GERUDO_VALLEY,                  0xa1,                       GS_TOKEN
 Gerudo Valley GS Tent,                                      gs,             NONE,                 GERUDO_VALLEY,                  0xa3,                       GS_TOKEN
@@ -237,6 +259,8 @@ Haunted Wasteland Chest,                                    chest,          HAUN
 Haunted Wasteland GS,                                       gs,             NONE,                 HAUNTED_WASTELAND,              0xb1,                       GS_TOKEN
 Desert Colossus HP,                                         collectible,    NONE,                 DESERT_COLOSSUS,                0x0d,                       HEART_PIECE
 Desert Colossus Song Spirit,                                npc,            NONE,                 DESERT_COLOSSUS,                SHEIK_SPIRIT,               SONG_TP_SPIRIT
+Desert Colossus Grotto Front Scrub,                         scrub,          NONE,                 GROTTOS,                        0x19,                       POTION_GREEN
+Desert Colossus Grotto Back Scrub,                          scrub,          NONE,                 GROTTOS,                        0x1a,                       POTION_RED
 Desert Colossus GS Soil,                                    gs,             NONE,                 DESERT_COLOSSUS,                0xb0,                       GS_TOKEN
 Desert Colossus GS Tree,                                    gs,             NONE,                 DESERT_COLOSSUS,                0xb3,                       GS_TOKEN
 Desert Colossus GS Plateau,                                 gs,             NONE,                 DESERT_COLOSSUS,                0xb2,                       GS_TOKEN
@@ -268,6 +292,10 @@ Dodongo Cavern Compass Chest,                               chest,          NONE
 Dodongo Cavern Bomb Bag Side Chest,                         chest,          NONE,                 DODONGO_CAVERN,                 0x06,                       RUPEE_RED
 Dodongo Cavern Bomb Bag Chest,                              chest,          NONE,                 DODONGO_CAVERN,                 0x04,                       BOMB_BAG
 Dodongo Cavern Bridge Chest,                                chest,          NONE,                 DODONGO_CAVERN,                 0x0a,                       SHIELD_DEKU
+Dodongo Cavern Lobby Scrub,                                 scrub,          NONE,                 DODONGO_CAVERN,                 0x1f,                       SHIELD_DEKU
+Dodongo Cavern Green Side Room Scrub,                       scrub,          NONE,                 DODONGO_CAVERN,                 0x1d,                       STICK
+Dodongo Cavern Bomb Bag Side Room Left Scrub,               scrub,          NONE,                 DODONGO_CAVERN,                 0x1e,                       NUTS_5
+Dodongo Cavern Bomb Bag Side Room Right Scrub,              scrub,          NONE,                 DODONGO_CAVERN,                 0x1c,                       DEKU_SEEDS_30
 Dodongo Cavern GS Side Room,                                gs,             NONE,                 DODONGO_CAVERN,                 0x14,                       GS_TOKEN
 Dodongo Cavern GS Stairs Vines,                             gs,             NONE,                 DODONGO_CAVERN,                 0x10,                       GS_TOKEN
 Dodongo Cavern GS Stairs Top,                               gs,             NONE,                 DODONGO_CAVERN,                 0x12,                       GS_TOKEN
@@ -279,6 +307,7 @@ Dodongo Cavern Boss,                                        npc,            NONE
 Jabu-Jabu Map Chest,                                        chest,          NONE,                 INSIDE_JABU_JABU,               0x02,                       MAP_JJ
 Jabu-Jabu Compass Chest,                                    chest,          NONE,                 INSIDE_JABU_JABU,               0x04,                       COMPASS_JJ
 Jabu-Jabu Boomerang Chest,                                  chest,          NONE,                 INSIDE_JABU_JABU,               0x01,                       BOOMERANG
+Jabu-Jabu Scrub,                                            scrub,          NONE,                 INSIDE_JABU_JABU,               0x20,                       NUTS_5
 Jabu-Jabu GS Water Switch,                                  gs,             NONE,                 INSIDE_JABU_JABU,               0x1b,                       GS_TOKEN
 Jabu-Jabu GS Bottom Lower,                                  gs,             NONE,                 INSIDE_JABU_JABU,               0x18,                       GS_TOKEN
 Jabu-Jabu GS Bottom Upper,                                  gs,             NONE,                 INSIDE_JABU_JABU,               0x19,                       GS_TOKEN
@@ -461,6 +490,10 @@ Ganon Castle Shadow Chest 2,                                chest,          NONE
 Ganon Castle Spirit Chest 1,                                chest,          NONE,                 INSIDE_GANON_CASTLE,            0x12,                       BOMBCHU_20
 Ganon Castle Spirit Chest 2,                                chest,          NONE,                 INSIDE_GANON_CASTLE,            0x14,                       ARROWS_10
 Ganon Castle Boss Key,                                      chest,          NONE,                 GANON_TOWER,                    0x0b,                       BOSS_KEY_GANON
+Ganon Castle Leftmost Scrub,                                scrub,          NONE,                 INSIDE_GANON_CASTLE,            0x21,                       POTION_GREEN
+Ganon Castle Left-Center Scrub,                             scrub,          NONE,                 INSIDE_GANON_CASTLE,            0x22,                       BOMBS_5
+Ganon Castle Right-Center Scrub,                            scrub,          NONE,                 INSIDE_GANON_CASTLE,            0x23,                       ARROWS_10
+Ganon Castle Rightmost Scrub,                               scrub,          NONE,                 INSIDE_GANON_CASTLE,            0x24,                       POTION_RED
 MQ Deku Tree Map Chest,                                     chest,          NONE,                 INSIDE_DEKU_TREE,               0x03,                       MAP_DT
 MQ Deku Tree Compass Chest,                                 chest,          NONE,                 INSIDE_DEKU_TREE,               0x01,                       COMPASS_DT
 MQ Deku Tree Slingshot Chest,                               chest,          NONE,                 INSIDE_DEKU_TREE,               0x06,                       SLINGSHOT
@@ -468,6 +501,7 @@ MQ Deku Tree Slingshot Room Far Chest,                      chest,          NONE
 MQ Deku Tree Basement Chest,                                chest,          NONE,                 INSIDE_DEKU_TREE,               0x04,                       RUPEE_BLUE
 MQ Deku Tree Before Water Platform Chest,                   chest,          NONE,                 INSIDE_DEKU_TREE,               0x05,                       RECOVERY_HEART
 MQ Deku Tree After Water Platform Chest,                    chest,          NONE,                 INSIDE_DEKU_TREE,               0x00,                       RUPEE_PURPLE
+MQ Deku Tree Scrub,                                         scrub,          NONE,                 INSIDE_DEKU_TREE,               0x1b,                       SHIELD_DEKU
 MQ Deku Tree GS Back Room,                                  gs,             NONE,                 INSIDE_DEKU_TREE,               0x08,                       GS_TOKEN
 MQ Deku Tree GS Lobby Crate,                                gs,             NONE,                 INSIDE_DEKU_TREE,               0x09,                       GS_TOKEN
 MQ Deku Tree GS Song of Time Blocks,                        gs,             NONE,                 INSIDE_DEKU_TREE,               0x0a,                       GS_TOKEN
@@ -478,6 +512,10 @@ MQ Dodongo Cavern Larvae Room Chest,                        chest,          NONE
 MQ Dodongo Cavern Upper Ledge Chest,                        chest,          NONE,                 DODONGO_CAVERN,                 0x03,                       RUPEE_BLUE
 MQ Dodongo Cavern Bomb Bag Chest,                           chest,          NONE,                 DODONGO_CAVERN,                 0x04,                       BOMB_BAG
 MQ Dodongo Cavern Chest Under Grave,                        chest,          NONE,                 DODONGO_CAVERN,                 0x01,                       RUPEE_BLUE
+MQ Dodongo Cavern Lobby Scrub Front,                        scrub,          NONE,                 DODONGO_CAVERN,                 0x1c,                       DEKU_SEEDS_30
+MQ Dodongo Cavern Lobby Scrub Back,                         scrub,          NONE,                 DODONGO_CAVERN,                 0x1d,                       STICK
+MQ Dodongo Cavern Staircase Scrub,                          scrub,          NONE,                 DODONGO_CAVERN,                 0x1f,                       POTION_RED
+MQ Dodongo Cavern Tunnel Side Scrub,                        scrub,          NONE,                 DODONGO_CAVERN,                 0x1e,                       SHIELD_DEKU
 MQ Dodongo Cavern GS Time Blocks,                           gs,             NONE,                 DODONGO_CAVERN,                 0x13,                       GS_TOKEN
 MQ Dodongo Cavern GS Larve Room,                            gs,             NONE,                 DODONGO_CAVERN,                 0x14,                       GS_TOKEN
 MQ Dodongo Cavern GS Upper Lizalfos,                        gs,             NONE,                 DODONGO_CAVERN,                 0x12,                       GS_TOKEN
@@ -640,3 +678,8 @@ MQ Ganon Castle Spirit Trial Gold Gauntlets Chest,          chest,          NONE
 MQ Ganon Castle Shadow Trial Bomb Flower Chest,             chest,          NONE,                 INSIDE_GANON_CASTLE,            0x00,                       ARROWS_10
 MQ Ganon Castle Shadow Trial Switch Chest,                  chest,          NONE,                 INSIDE_GANON_CASTLE,            0x05,                       SMALL_KEY_GANON
 MQ Ganon Castle Forest Trial Key,                           collectible,    NONE,                 INSIDE_GANON_CASTLE,            0x01,                       SMALL_KEY_GANON
+MQ Ganon Castle Leftmost Scrub,                             scrub,          NONE,                 INSIDE_GANON_CASTLE,            0x21,                       POTION_GREEN
+MQ Ganon Castle Left-Center Scrub,                          scrub,          NONE,                 INSIDE_GANON_CASTLE,            0x22,                       BOMBS_5
+MQ Ganon Castle Center Scrub,                               scrub,          NONE,                 INSIDE_GANON_CASTLE,            0x23,                       ARROWS_10
+MQ Ganon Castle Right-Center Scrub,                         scrub,          NONE,                 INSIDE_GANON_CASTLE,            0x24,                       POTION_RED
+MQ Ganon Castle Rightmost Scrub,                            scrub,          NONE,                 INSIDE_GANON_CASTLE,            0x25,                       NUTS_5
