@@ -19,3 +19,8 @@ PATCH_START 0x80b4019c
   j     EnShopnuts_AfterInit_Trampoline
    nop
 PATCH_END
+
+/* Disable downgrading arrows to seeds */
+PATCH_START 0x80a74cc4
+  nop
+PATCH_END

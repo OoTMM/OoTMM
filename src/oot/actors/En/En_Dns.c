@@ -25,7 +25,7 @@ static int EnDns_GetID(Actor* this)
     int inGrotto;
 
     inGrotto = (gPlay->sceneId == SCE_OOT_GROTTOS);
-    key = KEY(inGrotto ? gPlay->sceneId : gLastScene, inGrotto, this->variable & 0xff);
+    key = KEY(inGrotto ? gLastScene : gPlay->sceneId, inGrotto, this->variable & 0xff);
     switch (key)
     {
     /* Lost Woods */
@@ -225,7 +225,7 @@ static int EnDns_TalkedTo(Actor* this, GameState_Play* play)
 
 PATCH_CALL(0x80a75510, EnDns_TalkedTo);
 
-static int EnDns_HasGivenItem(Actor* this, GameState_Play* play)
+static int EnDns_HasGivenItem(Actor* this)
 {
     int id;
 
