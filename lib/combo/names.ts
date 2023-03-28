@@ -160,7 +160,7 @@ const ITEM_NAMES: {[k: string]: string} = {
   OOT_COMPASS_SPIRIT: "Compass (Spirit Temple)",
   OOT_COMPASS_WATER: "Compass (Water Temple)",
   OOT_DEFENSE_UPGRADE: "Double Defense (OoT)",
-  OOT_DEKU_SEEDS_30: "Deku Seeds Bullet Bag",
+  OOT_DEKU_SEEDS_30: "30 Deku Seeds",
   OOT_EYE_DROPS: "Eye Drops",
   OOT_EYEBALL_FROG: "Eyeball Frog",
   OOT_FAIRY: "Fairy (OoT)",

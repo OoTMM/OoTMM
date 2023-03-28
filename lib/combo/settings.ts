@@ -138,6 +138,12 @@ export const SETTINGS = [{
   ],
   default: 'dungeonBlueWarps'
 }, {
+  key: 'scrubShuffleOot',
+  name: 'Scrub Shuffle (OoT)',
+  category: 'main.shuffle',
+  type: 'boolean',
+  default: false
+}, {
   key: 'cowShuffleOot',
   name: 'Cow Shuffle (OoT)',
   category: 'main.shuffle',

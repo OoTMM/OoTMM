@@ -6,6 +6,12 @@ export const ONE_TIME_SHOP_CHECKS = [
   'MM Curiosity Shop All-Night Mask',
 ];
 
+export const OOT_ONE_TIME_SCRUBS = [
+  'OOT Lost Woods Scrub Sticks Upgrade',
+  'OOT Lost Woods Grotto Scrub Nuts Upgrade',
+  'OOT Hyrule Field Grotto Scrub HP',
+];
+
 export function isLocationRenewable(world: World, loc: string) {
   if (ONE_TIME_SHOP_CHECKS.includes(loc))
     return false;
