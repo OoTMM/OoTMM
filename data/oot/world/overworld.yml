@@ -324,9 +324,9 @@
     BEAN_LOST_WOODS_LATE: "can_use_beans"
   locations:
     "Lost Woods Grotto Scrub Nuts Upgrade": "has_explosives_or_hammer && can_hit_scrub"
-    #"Lost Woods Grotto Scrub Back": "has_explosives_or_hammer && can_hit_scrub"
-    #"Lost Woods Near Theater Left Scrub": "is_child && can_hit_scrub"
-    #"Lost Woods Near Theater Right Scrub": "is_child && can_hit_scrub"
+    "Lost Woods Grotto Scrub Back": "has_explosives_or_hammer && can_hit_scrub"
+    "Lost Woods Scrub Near Theater Left": "is_child && can_hit_scrub"
+    "Lost Woods Scrub Near Theater Right": "is_child && can_hit_scrub"
     "Lost Woods GS Soil Theater": "gs_soil && can_damage_skull"
     "Lost Woods GS Bean Ride": "gs_night && can_ride_bean(BEAN_LOST_WOODS_LATE)"
 "Deku Theater":
@@ -345,8 +345,8 @@
     "Saria's Song": "event(MEET_ZELDA) && is_child && (can_play(SONG_TP_FOREST) || can_damage)"
     "Sacred Meadow Sheik Song": "is_adult"
     "Sacred Meadow Grotto": "hidden_grotto_bomb"
-    #"Sacred Meadow Storms Grotto Front Scrub": "hidden_grotto_storms && can_hit_scrub && (is_adult || can_damage || can_play(SONG_TP_FOREST))"
-    #"Sacred Meadow Storms Grotto Back Scrub": "hidden_grotto_storms && can_hit_scrub && (is_adult || can_damage || can_play(SONG_TP_FOREST))"
+    "Sacred Meadow Storms Grotto Front Scrub": "hidden_grotto_storms && can_hit_scrub && (is_adult || can_damage || can_play(SONG_TP_FOREST))"
+    "Sacred Meadow Storms Grotto Back Scrub": "hidden_grotto_storms && can_hit_scrub && (is_adult || can_damage || can_play(SONG_TP_FOREST))"
     "Sacred Meadow GS Night Adult": "can_hookshot && gs_night"
   gossip:
     "Sacred Meadow Gossip Near Forest Temple": "true"

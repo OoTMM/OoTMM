@@ -10,5 +10,5 @@ export function isLocationRenewable(world: World, loc: string) {
   if (ONE_TIME_SHOP_CHECKS.includes(loc))
     return false;
   const check = world.checks[loc];
-  return ['shop', 'cow'].includes(check.type);
+  return ['shop', 'cow', 'scrub'].includes(check.type);
 }

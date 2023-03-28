@@ -26,10 +26,13 @@ Lost Woods Gift from Saria,                                 npc,            NONE
 Lost Woods Target,                                          npc,            NONE,                 LOST_WOODS,                     LOST_WOODS_TARGET,          SLINGSHOT
 Lost Woods Skull Kid,                                       npc,            NONE,                 LOST_WOODS,                     LOST_WOODS_SKULL_KID,       HEART_PIECE
 Lost Woods Memory Game,                                     npc,            NONE,                 LOST_WOODS,                     LOST_WOODS_MEMORY,          HEART_PIECE
-Lost Woods Scrub Sticks Upgrade,                            npc,            NONE,                 LOST_WOODS,                     SCRUB_STICKS,               STICK_UPGRADE
+Lost Woods Scrub Sticks Upgrade,                            scrub,          NONE,                 LOST_WOODS,                     0x00,                       STICK_UPGRADE
+Lost Woods Scrub Near Theater Left,                         scrub,          NONE,                 LOST_WOODS,                     0x01,                       STICK
+Lost Woods Scrub Near Theater Right,                        scrub,          NONE,                 LOST_WOODS,                     0x02,                       NUTS_5
 Lost Woods Odd Mushroom,                                    npc,            NONE,                 LOST_WOODS,                     TRADE_ODD_MUSHROOM,         ODD_MUSHROOM
 Lost Woods Poacher's Saw,                                   npc,            NONE,                 LOST_WOODS,                     TRADE_POACHER_SAW,          POACHER_SAW
-Lost Woods Grotto Scrub Nuts Upgrade,                       npc,            NONE,                 GROTTOS,                        SCRUB_NUTS,                 NUT_UPGRADE
+Lost Woods Grotto Scrub Nuts Upgrade,                       scrub,          NONE,                 GROTTOS,                        0x03,                       NUT_UPGRADE
+Lost Woods Grotto Scrub Back,                               scrub,          NONE,                 GROTTOS,                        0x04,                       DEKU_SEEDS_30
 Lost Woods Grotto Generic,                                  chest,          NONE,                 GROTTOS,                        0x14,                       RUPEE_BLUE
 Lost Woods GS Soil Bridge,                                  gs,             NONE,                 LOST_WOODS,                     0x70,                       GS_TOKEN
 Lost Woods GS Soil Theater,                                 gs,             NONE,                 LOST_WOODS,                     0x71,                       GS_TOKEN
@@ -40,6 +43,8 @@ Saria's Song,                                               npc,            NONE
 Sacred Meadow Sheik Song,                                   npc,            NONE,                 SACRED_FOREST_MEADOW,           SHEIK_FOREST,               SONG_TP_FOREST
 Sacred Meadow Grotto,                                       chest,          NONE,                 GROTTOS,                        0x11,                       RUPEE_PURPLE
 Sacred Meadow GS Night Adult,                               gs,             NONE,                 SACRED_FOREST_MEADOW,           0x73,                       GS_TOKEN
+Sacred Meadow Storms Grotto Front Scrub,                    scrub,          NONE,                 GROTTOS,                        0x05,                       POTION_GREEN
+Sacred Meadow Storms Grotto Back Scrub,                     scrub,          NONE,                 GROTTOS,                        0x06,                       POTION_RED
 Kakariko Anju Bottle,                                       npc,            NONE,                 KAKARIKO_VILLAGE,               ANJU_BOTTLE,                BOTTLE_EMPTY
 Kakariko Anju Egg,                                          npc,            NONE,                 KAKARIKO_VILLAGE,               TRADE_POCKET_EGG,           POCKET_CUCCO
 Kakariko Anju Cojiro,                                       npc,            NONE,                 KAKARIKO_VILLAGE,               TRADE_COJIRO,               COJIRO
@@ -170,7 +175,7 @@ Lon Lon Ranch Silo Cow Front,                               cow,            NONE
 Lon Lon Ranch Silo Cow Back,                                cow,            NONE,                 LON_LON_RANCH,                  0x05,                       MILK
 Hyrule Field Ocarina of Time,                               npc,            NONE,                 HYRULE_FIELD,                   OCARINA_TIME_ITEM,          OCARINA
 Hyrule Field Song of Time,                                  npc,            NONE,                 HYRULE_FIELD,                   OCARINA_TIME_SONG,          SONG_TIME
-Hyrule Field Grotto Scrub HP,                               npc,            NONE,                 GROTTOS,                        SCRUB_HP,                   HEART_PIECE
+Hyrule Field Grotto Scrub HP,                               scrub,          NONE,                 GROTTOS,                        0x07,                       HEART_PIECE
 Hyrule Field Grotto Southeast,                              chest,          NONE,                 GROTTOS,                        0x02,                       RUPEE_RED
 Hyrule Field Grotto Open,                                   chest,          NONE,                 GROTTOS,                        0x03,                       RUPEE_BLUE
 Hyrule Field Grotto Market,                                 chest,          NONE,                 GROTTOS,                        0x00,                       RUPEE_BLUE

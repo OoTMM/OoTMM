@@ -113,6 +113,9 @@ s16 comboOverrideEx(int type, u16 sceneId, u16 id, s16 gi, int flags)
     case OV_SHOP:
         sceneId = SCE_SHOP;
         break;
+    case OV_SCRUB:
+        sceneId = SCE_SCRUB;
+        break;
     }
     return comboOverrideImpl(sceneId, id, gi, flags);
 }

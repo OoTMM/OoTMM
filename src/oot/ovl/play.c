@@ -261,6 +261,10 @@ void hookPlay_Init(GameState_Play* play)
     Play_Init(play);
     gLastEntrance = gSave.entrance;
     sInGrotto = (play->sceneId == SCE_OOT_GROTTOS || play->sceneId == SCE_OOT_FAIRY_FOUNTAIN);
+    if (!sInGrotto)
+    {
+        gLastScene = play->sceneId;
+    }
 
     if (gSave.entrance == 0x0530)
     {

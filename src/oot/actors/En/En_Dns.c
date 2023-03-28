@@ -1,23 +1,48 @@
 #include <combo.h>
 
-#define SCRUB_ITEM_NUTS              0x00
-#define SCRUB_ITEM_STICKS            0x01
-#define SCRUB_ITEM_HEART_PIECE       0x02
-#define SCRUB_ITEM_SEEDS             0x03
-#define SCRUB_ITEM_SHIELD_DEKU       0x04
-#define SCRUB_ITEM_BOMBS             0x05
-#define SCRUB_ITEM_ARROWS            0x06
-#define SCRUB_ITEM_POTION_RED        0x07
-#define SCRUB_ITEM_POTION_GREEN      0x08
-#define SCRUB_ITEM_STICKS_UPGRADE    0x09
-#define SCRUB_ITEM_NUTS_UPGRADE      0x0a
+#define SCRUB_ITEM_NUTS             0x00
+#define SCRUB_ITEM_STICK            0x01
+#define SCRUB_ITEM_HEART_PIECE      0x02
+#define SCRUB_ITEM_SEEDS            0x03
+#define SCRUB_ITEM_SHIELD_DEKU      0x04
+#define SCRUB_ITEM_BOMBS            0x05
+#define SCRUB_ITEM_SEEDS_ARROWS     0x06
+#define SCRUB_ITEM_POTION_RED       0x07
+#define SCRUB_ITEM_POTION_GREEN     0x08
+#define SCRUB_ITEM_STICKS_UPGRADE   0x09
+#define SCRUB_ITEM_NUTS_UPGRADE     0x0a
 
 #define SCRUB_COND_NORUPEES          0x00
-#define SCRUB_COND_OK                0x01
-#define SCRUB_COND_CANTBUY           0x02
+#define SCRUB_COND_CANTBUY           0x01
+#define SCRUB_COND_OK                0x02
+
+#define KEY(sceneId, inGrotto, item) \
+    (((inGrotto) << 24) | ((sceneId) << 16) | (item))
 
 static int EnDns_GetID(Actor* this)
 {
+    int key;
+    int inGrotto;
+
+    inGrotto = (gPlay->sceneId == SCE_OOT_GROTTOS);
+    key = KEY(inGrotto ? gPlay->sceneId : gLastScene, inGrotto, this->variable & 0xff);
+    switch (key)
+    {
+    /* Lost Woods */
+    case KEY(SCE_OOT_LOST_WOODS, 0, SCRUB_ITEM_STICKS_UPGRADE): return 0x00;
+    case KEY(SCE_OOT_LOST_WOODS, 0, SCRUB_ITEM_STICK):          return 0x01;
+    case KEY(SCE_OOT_LOST_WOODS, 0, SCRUB_ITEM_NUTS):           return 0x02;
+    case KEY(SCE_OOT_LOST_WOODS, 1, SCRUB_ITEM_NUTS_UPGRADE):   return 0x03;
+    case KEY(SCE_OOT_LOST_WOODS, 1, SCRUB_ITEM_SEEDS_ARROWS):   return 0x04;
+
+    /* Sacred Meadow */
+    case KEY(SCE_OOT_SACRED_FOREST_MEADOW, 1, SCRUB_ITEM_POTION_GREEN):   return 0x05;
+    case KEY(SCE_OOT_SACRED_FOREST_MEADOW, 1, SCRUB_ITEM_POTION_RED):     return 0x06;
+
+    /* Hyrule Field */
+    case KEY(SCE_OOT_HYRULE_FIELD, 1, SCRUB_ITEM_HEART_PIECE):   return 0x07;
+    }
+
     return 0;
 }
 
@@ -35,45 +60,29 @@ static s16 EnDns_GetPrice(Actor* this)
 static s16 EnDns_GetGi(Actor* this, int flags)
 {
     void* scrubData;
+    int id;
     s16 gi;
-    int npc;
 
     scrubData = *(void**)((char*)this + 0x2b0);
     gi = (s16)*(s32*)((char*)scrubData + 0x4);
-    npc = -1;
-    switch (this->variable)
-    {
-    case SCRUB_ITEM_HEART_PIECE:
-        npc = NPC_OOT_SCRUB_HP;
-        break;
-    case SCRUB_ITEM_STICKS_UPGRADE:
-        npc = NPC_OOT_SCRUB_STICKS;
-        break;
-    case SCRUB_ITEM_NUTS_UPGRADE:
-        npc = NPC_OOT_SCRUB_NUTS;
-        break;
-    }
-    if (npc >= 0)
-    {
-        gi = comboOverrideEx(OV_NPC, 0, npc, gi, flags);
-    }
+    id = EnDns_GetID(this);
+    gi = comboOverrideEx(OV_SCRUB, 0, id, gi, flags);
     return gi;
 }
 
-static void EnDns_MaybeDestroy(Actor* this)
+void EnDns_MaybeDestroy(Actor* this)
 {
     s16 gi;
 
     if (gOotExtraScrubs & (1 << EnDns_GetID(this)))
     {
         /* Already bought from scrub */
-        gi = EnDns_GetGi(this, 0);
+        /* Use dummy GI to avoid having to look up the scrub data, as Shopnuts lack it */
+        gi = comboOverrideEx(OV_SCRUB, 0, EnDns_GetID(this), 1, 0);
         if (!comboIsItemConsumable(gi))
             ActorDestroy(this);
     }
 }
-
-PATCH_CALL(0x80b40180, EnDns_MaybeDestroy);
 
 static int EnDns_CanBuy(Actor* this)
 {
@@ -133,6 +142,21 @@ static int EnDns_TalkedTo(Actor* this, GameState_Play* play)
 }
 
 PATCH_CALL(0x80a75510, EnDns_TalkedTo);
+
+static int EnDns_HasGivenItem(Actor* this, GameState_Play* play)
+{
+    int id;
+
+    if (Actor_HasParent(this))
+    {
+        id = EnDns_GetID(this);
+        gOotExtraScrubs |= (1 << id);
+        return 1;
+    }
+    return 0;
+}
+
+PATCH_CALL(0x80a75878, EnDns_HasGivenItem);
 
 static int EnDns_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
 {
