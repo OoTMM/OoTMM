@@ -66,6 +66,14 @@ static int EnDns_GetID(Actor* this)
     case KEY(SCE_OOT_LAKE_HYLIA, 1, SCRUB_ITEM_NUTS):            return 0x14;
     case KEY(SCE_OOT_LAKE_HYLIA, 1, SCRUB_ITEM_SEEDS_ARROWS):    return 0x15;
     case KEY(SCE_OOT_LAKE_HYLIA, 1, SCRUB_ITEM_BOMBS):           return 0x16;
+
+    /* Gerudo Valley */
+    case KEY(SCE_OOT_GERUDO_VALLEY, 1, SCRUB_ITEM_POTION_GREEN):   return 0x17;
+    case KEY(SCE_OOT_GERUDO_VALLEY, 1, SCRUB_ITEM_POTION_RED):     return 0x18;
+
+    /* Desert Colossus */
+    case KEY(SCE_OOT_DESERT_COLOSSUS, 1, SCRUB_ITEM_POTION_GREEN):   return 0x19;
+    case KEY(SCE_OOT_DESERT_COLOSSUS, 1, SCRUB_ITEM_POTION_RED):     return 0x1a;
     }
 
     return 0;

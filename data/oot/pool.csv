@@ -243,6 +243,8 @@ Gerudo Valley Chest,                                        chest,          NONE
 Gerudo Valley Crate HP,                                     collectible,    NONE,                 GERUDO_VALLEY,                  0x02,                       HEART_PIECE
 Gerudo Valley Waterfall HP,                                 collectible,    NONE,                 GERUDO_VALLEY,                  0x01,                       HEART_PIECE
 Gerudo Valley Broken Goron Sword,                           npc,            NONE,                 GERUDO_VALLEY,                  TRADE_BROKEN_GORON_SWORD,   BROKEN_GORON_SWORD
+Gerudo Valley Grotto Front Scrub,                           scrub,          NONE,                 GROTTOS,                        0x17,                       POTION_GREEN
+Gerudo Valley Grotto Back Scrub,                            scrub,          NONE,                 GROTTOS,                        0x18,                       POTION_RED
 Gerudo Valley GS Soil,                                      gs,             NONE,                 GERUDO_VALLEY,                  0xa0,                       GS_TOKEN
 Gerudo Valley GS Wall,                                      gs,             NONE,                 GERUDO_VALLEY,                  0xa1,                       GS_TOKEN
 Gerudo Valley GS Tent,                                      gs,             NONE,                 GERUDO_VALLEY,                  0xa3,                       GS_TOKEN
@@ -257,6 +259,8 @@ Haunted Wasteland Chest,                                    chest,          HAUN
 Haunted Wasteland GS,                                       gs,             NONE,                 HAUNTED_WASTELAND,              0xb1,                       GS_TOKEN
 Desert Colossus HP,                                         collectible,    NONE,                 DESERT_COLOSSUS,                0x0d,                       HEART_PIECE
 Desert Colossus Song Spirit,                                npc,            NONE,                 DESERT_COLOSSUS,                SHEIK_SPIRIT,               SONG_TP_SPIRIT
+Desert Colossus Grotto Front Scrub,                         scrub,          NONE,                 GROTTOS,                        0x19,                       POTION_GREEN
+Desert Colossus Grotto Back Scrub,                          scrub,          NONE,                 GROTTOS,                        0x1a,                       POTION_RED
 Desert Colossus GS Soil,                                    gs,             NONE,                 DESERT_COLOSSUS,                0xb0,                       GS_TOKEN
 Desert Colossus GS Tree,                                    gs,             NONE,                 DESERT_COLOSSUS,                0xb3,                       GS_TOKEN
 Desert Colossus GS Plateau,                                 gs,             NONE,                 DESERT_COLOSSUS,                0xb2,                       GS_TOKEN
