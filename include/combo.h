@@ -303,6 +303,8 @@ int comboIsItemUnavailable(s16 gi);
 int comboIsItemMinor(s16 gi);
 int comboIsItemConsumable(s16 gi);
 
+int comboItemPrecond(s16 gi, s16 price);
+
 void comboToggleTrade(u8* slot, u32 flags, const u8* table, u32 tableSize);
 
 #if defined(GAME_OOT)
