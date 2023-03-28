@@ -41,6 +41,16 @@ static int EnDns_GetID(Actor* this)
 
     /* Hyrule Field */
     case KEY(SCE_OOT_HYRULE_FIELD, 1, SCRUB_ITEM_HEART_PIECE):   return 0x07;
+
+    /* Lon Lon Ranch */
+    case KEY(SCE_OOT_LON_LON_RANCH, 1, SCRUB_ITEM_NUTS):            return 0x08;
+    case KEY(SCE_OOT_LON_LON_RANCH, 1, SCRUB_ITEM_SEEDS_ARROWS):    return 0x09;
+    case KEY(SCE_OOT_LON_LON_RANCH, 1, SCRUB_ITEM_BOMBS):           return 0x0a;
+
+    /* Goron City */
+    case KEY(SCE_OOT_GORON_CITY, 1, SCRUB_ITEM_NUTS):            return 0x0b;
+    case KEY(SCE_OOT_GORON_CITY, 1, SCRUB_ITEM_SEEDS_ARROWS):    return 0x0c;
+    case KEY(SCE_OOT_GORON_CITY, 1, SCRUB_ITEM_BOMBS):           return 0x0d;
     }
 
     return 0;
