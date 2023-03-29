@@ -464,6 +464,8 @@ export const TRICKS = {
   MM_SHT_FIRELESS: "Complete Snowhead Temple without Fire Arrows",
   MM_KEG_EXPLOSIVES: "Use Powder Kegs as Explosives",
   MM_DOG_RACE_CHEST_NOTHING: "Doggy Racetrack Chest with Nothing",
+  MM_SOUTHERN_SWAMP_SCRUB_HP_GORON: "Southern Swamp Scrub HP as Goron",
+  MM_ZORA_HALL_SCRUB_HP_GORON: "Zora Hall Scrub HP as Goron",
 };
 
 export type Tricks = {[k in keyof typeof TRICKS]: boolean};
