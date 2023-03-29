@@ -464,6 +464,7 @@ export const TRICKS = {
   MM_SHT_FIRELESS: "Complete Snowhead Temple without Fire Arrows",
   MM_KEG_EXPLOSIVES: "Use Powder Kegs as Explosives",
   MM_DOG_RACE_CHEST_NOTHING: "Doggy Racetrack Chest with Nothing",
+  #MM_MAJORA_LOGIC: "Fight Majora to Reset Time",
 };
 
 export type Tricks = {[k in keyof typeof TRICKS]: boolean};
