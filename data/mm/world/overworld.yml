@@ -302,7 +302,7 @@
     FROG_3: "has(MASK_DON_GERO)"
     SWAMP_OWL: "can_play(SONG_SOARING)"
   locations:
-    "Southern Swamp HP": "has(DEED_LAND) && has(MASK_DEKU)"
+    "Southern Swamp HP": "(has(DEED_LAND) && has(MASK_DEKU)) || (trick(MM_SOUTHERN_SWAMP_SCRUB_HP_GORON) && has(MASK_GORON))"
     "Southern Swamp Scrub Deed": "has(DEED_LAND)"
     #"Southern Swamp Scrub Purchase": "has(MASK_DEKU)"
   gossip:
@@ -733,7 +733,7 @@
     "Zora Cape Peninsula": "true"
     "Zora Shop": "true"
   locations:
-    "Zora Hall Scrub HP": "has(DEED_MOUNTAIN) && has(MASK_GORON) && has(MASK_DEKU) && has(MASK_ZORA)"
+    "Zora Hall Scrub HP": "(has(DEED_MOUNTAIN) && has(MASK_GORON) && has(MASK_DEKU) && has(MASK_ZORA)) || (trick(MM_ZORA_HALL_SCRUB_HP_GORON) && has(MASK_GORON) && has(MASK_ZORA))"
     "Zora Hall Scrub Deed": "has(DEED_MOUNTAIN) && has(MASK_GORON) && has(MASK_ZORA)"
     #"Zora Hall Scrub Purchase": "has(MASK_ZORA)"
     "Zora Hall Evan HP": "has(MASK_ZORA) && has_ocarina"
