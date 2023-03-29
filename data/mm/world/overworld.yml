@@ -732,7 +732,7 @@
     "Zora Cape Peninsula": "true"
     "Zora Shop": "true"
   locations:
-    "Zora Hall Scrub HP": "has(MASK_ZORA && (trick(MM_ZORA_HALL_HP_NO_DEKU) || (has(MASK_GORON) && has(MASK_DEKU) && has(DEED_MOUNTAIN)))"
+    "Zora Hall Scrub HP": "has(MASK_ZORA) && (trick(MM_ZORA_HALL_HP_NO_DEKU) || (has(MASK_GORON) && has(MASK_DEKU) && has(DEED_MOUNTAIN)))"
     "Zora Hall Scrub Deed": "has(DEED_MOUNTAIN) && has(MASK_GORON) && has(MASK_ZORA)"
     #"Zora Hall Scrub Purchase": "has(MASK_ZORA)"
     "Zora Hall Evan HP": "has(MASK_ZORA) && has_ocarina"
