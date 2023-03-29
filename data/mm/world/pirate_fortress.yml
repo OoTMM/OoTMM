@@ -1,7 +1,12 @@
-"Pirate Fortress Entrance":
+"Pirate Fortress":
   region: PIRATE_FORTRESS_EXTERIOR
   exits:
     "Great Bay Coast": "has(MASK_ZORA)"
+    "Pirate Fortress Entrance": "can_reset_time"
+"Pirate Fortress Entrance":
+  region: PIRATE_FORTRESS_EXTERIOR
+  exits:
+    "Pirate Fortress": "true"
     "Great Bay Coast Captured": "true"
     "Pirate Fortress Sewers": "has(MASK_ZORA) && has(MASK_GORON)"
     "Pirate Fortress Entrance Balcony": "can_hookshot || (can_hookshot_short && trick(MM_PFI_BOAT_HOOK))"

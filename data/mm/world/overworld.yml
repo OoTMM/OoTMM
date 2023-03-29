@@ -633,7 +633,7 @@
   exits:
     "Fisher's Hut": "true"
     "Great Bay Fence": "true"
-    "Pirate Fortress Entrance": "has(MASK_ZORA)"
+    "Pirate Fortress": "has(MASK_ZORA)"
     "Pinnacle Rock Entrance": "has(MASK_ZORA)"
     "Laboratory": "true"
     "Zora Cape": "true"

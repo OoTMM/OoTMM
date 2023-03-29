@@ -1,7 +1,7 @@
 "Stone Tower Temple":
   dungeon: ST
   exits:
-    "Stone Tower Temple Entrance": "event(TIME_TRAVEL)"
+    "Stone Tower Temple Entrance": "can_reset_time"
     "Stone Tower Front of Temple": "true"
 "Stone Tower Temple Entrance":
   dungeon: ST
