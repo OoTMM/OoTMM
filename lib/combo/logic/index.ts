@@ -10,7 +10,6 @@ import { LogicPassEntrances } from './entrance';
 import { LogicPassHash } from './hash';
 import { LogicPassConfig } from './config';
 import { LogicPassWorldTransform } from './world-transform';
-import { Settings } from '../settings';
 import { LogicError } from './error';
 import { LogicPassFixer } from './fixer';
 

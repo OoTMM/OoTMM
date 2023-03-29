@@ -179,6 +179,8 @@ static int isItemAmbiguousOot(s16 gi)
         return !comboConfig(CFG_SHARED_HOOKSHOT);
     case GI_OOT_LENS:
         return !comboConfig(CFG_SHARED_LENS);
+    case GI_OOT_OCARINA_FAIRY:
+        return (comboConfig(CFG_MM_OCARINA_FAIRY) && !comboConfig(CFG_SHARED_OCARINA));
     case GI_OOT_OCARINA_TIME:
         return !comboConfig(CFG_SHARED_OCARINA);
     case GI_OOT_MASK_KEATON:

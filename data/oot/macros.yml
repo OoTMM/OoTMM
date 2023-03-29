@@ -21,6 +21,7 @@
 "has_lens_strict": "has(MAGIC_UPGRADE) && has(LENS)"
 "has_bombchu": "has(BOMBCHU_10) || has(BOMBCHU_20) || has(BOMBCHU_5)"
 "can_use_din": "has(MAGIC_UPGRADE) && has(SPELL_FIRE)"
+"can_use_nayru": "has(MAGIC_UPGRADE) && has(SPELL_LOVE)"
 "can_boomerang": "is_child && has(BOOMERANG)"
 "has_ranged_weapon_child": "can_use_slingshot || can_boomerang"
 "has_ranged_weapon_adult": "can_use_bow || can_hookshot"
@@ -64,3 +65,4 @@
 "can_kill_baba_nuts": "has_weapon || has_explosives || can_use_slingshot"
 "can_damage": "has_weapon || can_use_sticks || has_explosives || can_use_slingshot || can_use_din"
 "can_damage_skull": "can_damage || can_collect_distance"
+"can_hit_scrub": "has_nuts || can_hit_triggers_distance || has_shield_for_scrubs || can_collect_distance || can_hammer"

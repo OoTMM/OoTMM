@@ -97,7 +97,7 @@
   events:
     BIG_POE: "event(EPONA) && can_use_bow && has_bottle"
   locations:
-    "Hyrule Field Grotto Scrub HP": "hidden_grotto_bomb && (has_nuts || has_shield_for_scrubs || can_hammer)"
+    "Hyrule Field Grotto Scrub HP": "hidden_grotto_bomb && can_hit_scrub"
     "Hyrule Field Ocarina of Time": "has_spiritual_stones"
     "Hyrule Field Song of Time": "has_spiritual_stones"
     "Hyrule Field Grotto Southeast": "has_explosives_or_hammer"
@@ -228,6 +228,9 @@
     MALON_COW: "is_adult && event(EPONA)"
   locations:
     "Lon Lon Ranch Malon Song": "is_child && has(OCARINA) && event(MALON)"
+    "Lon Lon Ranch Grotto Left Scrub": "is_child && can_hit_scrub"
+    "Lon Lon Ranch Grotto Center Scrub": "is_child && can_hit_scrub"
+    "Lon Lon Ranch Grotto Right Scrub": "is_child && can_hit_scrub"
     "Lon Lon Ranch GS Tree": "is_child"
     "Lon Lon Ranch GS House": "can_boomerang && gs_night"
     "Lon Lon Ranch GS Rain Shed": "is_child && gs_night"
@@ -294,7 +297,7 @@
     "Lost Woods Target": "can_use_slingshot"
     "Lost Woods Skull Kid": "is_child && can_play(SONG_SARIA)"
     "Lost Woods Memory Game": "is_child && has(OCARINA)"
-    "Lost Woods Scrub Sticks Upgrade": "is_child && (has_nuts || has_shield_for_scrubs)"
+    "Lost Woods Scrub Sticks Upgrade": "is_child && can_hit_scrub"
     "Lost Woods Odd Mushroom": "adult_trade(COJIRO)"
     "Lost Woods Poacher's Saw": "adult_trade(ODD_POTION)"
     "Lost Woods Grotto Generic": "has_explosives_or_hammer"
@@ -320,7 +323,10 @@
   events:
     BEAN_LOST_WOODS_LATE: "can_use_beans"
   locations:
-    "Lost Woods Grotto Scrub Nuts Upgrade": "has_explosives_or_hammer && (has_nuts || has_shield_for_scrubs || can_hammer)"
+    "Lost Woods Grotto Scrub Nuts Upgrade": "has_explosives_or_hammer && can_hit_scrub"
+    "Lost Woods Grotto Scrub Back": "has_explosives_or_hammer && can_hit_scrub"
+    "Lost Woods Scrub Near Theater Left": "is_child && can_hit_scrub"
+    "Lost Woods Scrub Near Theater Right": "is_child && can_hit_scrub"
     "Lost Woods GS Soil Theater": "gs_soil && can_damage_skull"
     "Lost Woods GS Bean Ride": "gs_night && can_ride_bean(BEAN_LOST_WOODS_LATE)"
 "Deku Theater":
@@ -339,6 +345,8 @@
     "Saria's Song": "event(MEET_ZELDA) && is_child && (can_play(SONG_TP_FOREST) || can_damage)"
     "Sacred Meadow Sheik Song": "is_adult"
     "Sacred Meadow Grotto": "hidden_grotto_bomb"
+    "Sacred Meadow Storms Grotto Front Scrub": "hidden_grotto_storms && can_hit_scrub && (is_adult || can_damage || can_play(SONG_TP_FOREST))"
+    "Sacred Meadow Storms Grotto Back Scrub": "hidden_grotto_storms && can_hit_scrub && (is_adult || can_damage || can_play(SONG_TP_FOREST))"
     "Sacred Meadow GS Night Adult": "can_hookshot && gs_night"
   gossip:
     "Sacred Meadow Gossip Near Forest Temple": "true"
@@ -517,6 +525,9 @@
     "Goron City Tunic": "is_adult && (has_explosives || can_use_bow || has(STRENGTH))"
     "Goron City Bomb Bag": "is_child && has_explosives"
     "Goron City Medigoron Giant Knife": "is_adult && has(WALLET) && (has_bombflowers || can_hammer)"
+    "Goron City Grotto Left Scrub": "is_adult && (can_play(SONG_TIME) || (can_hookshot && (has_tunic_goron_strict || can_use_nayru)))"
+    "Goron City Grotto Center Scrub": "is_adult && (can_play(SONG_TIME) || (can_hookshot && (has_tunic_goron_strict || can_use_nayru)))"
+    "Goron City Grotto Right Scrub": "is_adult && (can_play(SONG_TIME) || (can_hookshot && (has_tunic_goron_strict || can_use_nayru)))"
     "Goron City GS Platform": "is_adult"
     "Goron City GS Maze": "is_child && has_explosives"
   gossip:
@@ -555,6 +566,8 @@
     "Zora River Frogs Storms": "is_child && can_play(SONG_STORMS)"
     "Zora River Frogs Game": "is_child && can_play(SONG_ZELDA) && can_play(SONG_SARIA) && can_play(SONG_EPONA) && can_play(SONG_SUN) && can_play(SONG_TIME) && can_play(SONG_STORMS)"
     "Zora River Grotto": "true"
+    "Zora River Storms Grotto Front Scrub": "hidden_grotto_storms && can_hit_scrub"
+    "Zora River Storms Grotto Back Scrub": "hidden_grotto_storms && can_hit_scrub"
     "Zora River GS Ladder": "is_child && gs_night && can_damage_skull"
     "Zora River GS Near Grotto": "is_adult && gs_night && can_hookshot"
     "Zora River GS Near Bridge": "is_adult && gs_night && can_hookshot"
@@ -615,6 +628,9 @@
     "Lake Hylia Underwater Bottle": "is_child && has(SCALE)"
     "Lake Hylia Fire Arrow": "can_use_bow && (event(WATER_TEMPLE_CLEARED) || scarecrow_longshot)"
     "Lake Hylia HP": "can_ride_bean(BEAN_LAKE_HYLIA) || scarecrow_hookshot"
+    "Lake Hylia Grotto Left Scrub": "can_hit_scrub"
+    "Lake Hylia Grotto Center Scrub": "can_hit_scrub"
+    "Lake Hylia Grotto Right Scrub": "can_hit_scrub"
     "Lake Hylia GS Lab Wall": "gs_night && can_boomerang"
     "Lake Hylia GS Island": "is_child && gs_night && can_damage_skull"
     "Lake Hylia GS Soil": "gs_soil && can_damage_skull"
@@ -686,6 +702,7 @@
     "Death Mountain Crater GS Crate": "is_child && can_damage_skull"
     "Death Mountain Crater Grotto": "has_explosives_or_hammer"
     "Death Mountain Crater Alcove HP": "true"
+    "Death Mountain Crater Scrub Child": "is_child && can_hit_scrub"
   gossip:
     "Death Mountain Crater Gossip Grotto": "has_explosives_or_hammer"
     "Death Mountain Crater Gossip Wall": "has_explosives"
@@ -699,6 +716,9 @@
     RED_BOULDER_BROKEN: "can_hammer"
   locations:
     "Great Fairy Magic Upgrade 2": "can_hammer && can_play(SONG_ZELDA)"
+    "Death Mountain Crater Grotto Left Scrub": "can_hammer"
+    "Death Mountain Crater Grotto Center Scrub": "can_hammer"
+    "Death Mountain Crater Grotto Right Scrub": "can_hammer"
 "Death Mountain Crater Warp":
   region: DEATH_MOUNTAIN_CRATER
   exits:
@@ -737,6 +757,8 @@
   locations:
     "Gerudo Valley Chest": "can_hammer"
     "Gerudo Valley Broken Goron Sword": "adult_trade(POACHER_SAW)"
+    "Gerudo Valley Grotto Front Scrub": "hidden_grotto_storms && can_hit_scrub"
+    "Gerudo Valley Grotto Back Scrub": "hidden_grotto_storms && can_hit_scrub"
     "Gerudo Valley GS Tent": "can_hookshot && gs_night"
     "Gerudo Valley GS Pillar": "can_hookshot && gs_night"
 "Gerudo Fortress Exterior":
@@ -788,6 +810,8 @@
     "Desert Colossus HP": "can_ride_bean(BEAN_DESERT_COLOSSUS)"
     "Desert Colossus Song Spirit": "true"
     "Great Fairy Nayru's Love": "has_explosives && can_play(SONG_ZELDA)"
+    "Desert Colossus Grotto Front Scrub": "can_lift_silver && can_hit_scrub"
+    "Desert Colossus Grotto Back Scrub": "can_lift_silver && can_hit_scrub"
     "Desert Colossus GS Soil": "gs_soil && can_damage_skull"
     "Desert Colossus GS Tree": "can_hookshot && gs_night"
     "Desert Colossus GS Plateau": "gs_night && (can_longshot || can_ride_bean(BEAN_DESERT_COLOSSUS))"

@@ -1,6 +1,6 @@
 import { Random, shuffle } from '../random';
 import { Settings } from '../settings';
-import { isItemConsumable, isItemImportant, ITEMS_MASKS_OOT, ITEMS_MASKS_REGULAR, ITEMS_MASKS_TRANSFORM } from './items';
+import { isItemConsumable, isItemImportant, ITEMS_MASKS_OOT, ITEMS_MASKS_REGULAR, ITEMS_MASKS_TRANSFORM, ITEMS_MEDALLIONS, ITEMS_REMAINS, ITEMS_STONES } from './items';
 import { ItemPlacement } from './solve';
 import { World } from './world';
 import { Pathfinder, PathfinderState } from './pathfind';
@@ -71,6 +71,23 @@ const SIMPLE_DEPENDENCIES: {[k: string]: string[]} = {
   OOT_STONE_SAPPHIRE: [
     'OOT Hyrule Field Ocarina of Time',
     'OOT Hyrule Field Song of Time',
+  ],
+  OOT_MEDALLION_LIGHT: [],
+  OOT_MEDALLION_FOREST: [
+    'OOT Temple of Time Sheik Song',
+    'OOT Kakariko Song Shadow',
+  ],
+  OOT_MEDALLION_FIRE: [
+    'OOT Kakariko Song Shadow',
+  ],
+  OOT_MEDALLION_WATER: [
+    'OOT Kakariko Song Shadow',
+  ],
+  OOT_MEDALLION_SPIRIT: [
+    'OOT Temple of Time Light Arrows',
+  ],
+  OOT_MEDALLION_SHADOW: [
+    'OOT Temple of Time Light Arrows',
   ],
   /*
   OOT_SMALL_KEY_FOREST: [
@@ -186,6 +203,10 @@ const SIMPLE_DEPENDENCIES: {[k: string]: string[]} = {
   ],
   MM_MASK_TROUPE_LEADER: [
     'MM Moon Fierce Deity Mask'
+  ],
+  MM_MASK_SCENTS: [
+    'MM Moon Fierce Deity Mask',
+    'MM Swamp Potion Shop Item 1',
   ],
   MM_MASK_POSTMAN: [
     'MM Moon Fierce Deity Mask',
@@ -311,6 +332,12 @@ const SIMPLE_DEPENDENCIES: {[k: string]: string[]} = {
   OOT_MASK_GORON: [],
   OOT_MASK_BUNNY: [],
   OOT_MASK_KEATON: [],
+
+  /* MM remains - for special conds */
+  MM_REMAINS_ODOLWA: [],
+  MM_REMAINS_GOHT: [],
+  MM_REMAINS_GYORG: [],
+  MM_REMAINS_TWINMOLD: [],
 };
 
 export class LogicPassAnalysis {
@@ -364,10 +391,23 @@ export class LogicPassAnalysis {
     if (conds.some(x => x.count && x.fairiesGB)) delete this.dependencies['MM_STRAY_FAIRY_GB'];
     if (conds.some(x => x.count && x.fairiesST)) delete this.dependencies['MM_STRAY_FAIRY_ST'];
     if (conds.some(x => x.count && x.fairyTown)) delete this.dependencies['MM_STRAY_FAIRY_TOWN'];
+
     if (conds.some(x => x.count && x.stones)) {
-      delete this.dependencies['OOT_STONE_EMERALD'];
-      delete this.dependencies['OOT_STONE_RUBY'];
-      delete this.dependencies['OOT_STONE_SAPPHIRE'];
+      for (const s of ITEMS_STONES) {
+        delete this.dependencies[s];
+      }
+    }
+
+    if (conds.some(x => x.count && x.medallions)) {
+      for (const m of ITEMS_MEDALLIONS) {
+        delete this.dependencies[m];
+      }
+    }
+
+    if (conds.some(x => x.count && x.remains)) {
+      for (const r of ITEMS_REMAINS) {
+        delete this.dependencies[r];
+      }
     }
 
     if (conds.some(x => x.count && x.masksRegular)) {

@@ -1,7 +1,7 @@
 import { Options } from '../options';
-import { Settings, Trick, Tricks } from '../settings';
+import { Settings, Trick, TRICKS, Tricks } from '../settings';
 import { EntranceShuffleResult } from './entrance';
-import { Hints } from './hints';
+import { HintGossipFoolish, HintGossipHero, HintGossipItemExact, HintGossipItemRegion, Hints } from './hints';
 import { ItemPlacement } from './solve';
 import { World } from './world';
 import { itemName } from '../names';
@@ -43,7 +43,7 @@ export class LogicPassSpoiler {
   private writeSettings() {
     this.buffer.push('Settings');
     for (const s in this.state.settings) {
-      if (s === 'startingItems' || s === 'tricks' || s === 'junkLocations' || s === 'dungeon' || s === 'specialConds') {
+      if (s === 'startingItems' || s === 'tricks' || s === 'junkLocations' || s === 'dungeon' || s === 'specialConds' || s === 'plando') {
         continue;
       }
       const v = (this.state.settings as any)[s];
@@ -65,13 +65,13 @@ export class LogicPassSpoiler {
   }
 
   private writeTricks() {
-    const tt = Object.keys(this.state.settings.tricks).filter(t => this.state.settings.tricks[t as Trick]);
-    if (tt.length === 0) {
+    const enabledTricks = Object.keys(this.state.settings.tricks).filter(t => this.state.settings.tricks[t as Trick]);
+    if (enabledTricks.length === 0) {
       return;
     }
     this.buffer.push('Tricks');
-    for (const t of tt) {
-      this.buffer.push(`  ${t}`);
+    for (const trick of enabledTricks) {
+      this.buffer.push(`  ${TRICKS[trick as Trick]}`);
     }
     this.buffer.push('');
   }
@@ -85,7 +85,7 @@ export class LogicPassSpoiler {
     this.buffer.push('Starting Items');
     for (const item in startingItems) {
       const count = startingItems[item];
-      this.buffer.push(`  ${item}: ${count}`);
+      this.buffer.push(`  ${itemName(item)}: ${count}`);
     }
     this.buffer.push('');
   }
@@ -138,7 +138,7 @@ export class LogicPassSpoiler {
     this.buffer.push('Foolish Regions');
     for (const region in foolish) {
       const weight = foolish[region];
-      this.buffer.push(`  ${region}: ${weight}`);
+      this.buffer.push(`  ${regionName(region)}: ${weight}`);
     }
     this.buffer.push('');
   };
@@ -146,21 +146,35 @@ export class LogicPassSpoiler {
   private writeHints() {
     const { hints } = this.state;
     this.buffer.push('Hints');
-    for (const gossip in hints.gossip) {
-      const h = hints.gossip[gossip];
-      if (h.type === 'hero') {
-        this.buffer.push(`  ${gossip}: Hero, ${h.region} (${h.location}: ${itemName(this.state.items[h.location])})`);
-      }
-      if (h.type === 'foolish') {
-        this.buffer.push(`  ${gossip}: Foolish, ${h.region}`);
-      }
-      if (h.type === 'item-exact') {
-        const newNames = h.items.map(itemName);
-        this.buffer.push(`  ${gossip}: Item-Exact, ${h.check} (${newNames.join(', ')})`);
-      }
-      if (h.type === 'item-region') {
-        this.buffer.push(`  ${gossip}: Item-Region, ${h.region} (${itemName(h.item)})`);
-      }
+    const gossipStones = Object.entries(hints.gossip)
+    let sortedHints = {
+      hero: <[string, HintGossipHero][]><unknown>gossipStones.filter(stone => stone[1].type === 'hero').sort(),
+      foolish: <[string, HintGossipFoolish][]><unknown>gossipStones.filter(stone => stone[1].type === 'foolish').sort(),
+      exact: <[string, HintGossipItemExact][]><unknown>gossipStones.filter(stone => stone[1].type === 'item-exact').sort(),
+      region: <[string, HintGossipItemRegion][]><unknown>gossipStones.filter(stone => stone[1].type === 'item-region').sort()
+    }
+    let type: keyof typeof sortedHints
+    for (type in sortedHints) {
+      sortedHints[type].forEach(gossipStone => {
+        const stone = gossipStone[0]
+        const hint = gossipStone[1]
+        if (hint.type === 'hero') {
+          if(sortedHints.hero[0][0] === stone)this.buffer.push('  Way of the Hero:')
+          this.buffer.push(`    ${stone}\n      ${regionName(hint.region)}    ${hint.location} - ${itemName(this.state.items[hint.location])}`)
+        }
+        if (hint.type === 'foolish') {
+          if(sortedHints.foolish[0][0] === stone) this.buffer.push('\n  Foolish:')
+          this.buffer.push(`    ${stone}\n      ${regionName(hint.region)}`)
+        }
+        if (hint.type === 'item-exact') {
+          if(sortedHints.exact[0][0] === stone) this.buffer.push('\n  Specific Hints:')
+          this.buffer.push(`    ${stone}\n      ${this.state.world.checkHints[hint.check].join(', ')} (${hint.items.map(itemName).join(', ')})`)
+        }
+        if (hint.type === 'item-region') {
+          if(sortedHints.foolish[0][0] === stone) this.buffer.push('\n  Regional Hints:')
+          this.buffer.push(`    ${stone}\n      ${regionName(hint.region)} (${itemName(hint.item)})`)
+        }
+      })
     }
     this.buffer.push('');
   }
