@@ -1,7 +1,7 @@
 "Ocean Spider House":
   dungeon: OSH
   exits:
-    "Ocean Spider House Front": "event(TIME_TRAVEL)"
+    "Ocean Spider House Front": "can_reset_time"
     "Great Bay Coast": "true"
   locations:
     "Ocean Spider House Wallet": "has(GS_TOKEN_OCEAN, 30)"

@@ -43,3 +43,4 @@
 "has_red_or_blue_potion": "has_red_potion || has_blue_potion"
 "trick_keg_explosives": "can_use_keg && trick(MM_KEG_EXPLOSIVES)"
 "trick_sht_fireless": "has_hot_water_distance && trick(MM_SHT_FIRELESS)"
+"can_reset_time": "event(TIME_TRAVEL) || (event(MAJORA) && trick(MM_MAJORA_LOGIC))"

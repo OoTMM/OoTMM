@@ -464,6 +464,7 @@ export const TRICKS = {
   MM_SHT_FIRELESS: "Complete Snowhead Temple without Fire Arrows",
   MM_KEG_EXPLOSIVES: "Use Powder Kegs as Explosives",
   MM_DOG_RACE_CHEST_NOTHING: "Doggy Racetrack Chest with Nothing",
+  MM_MAJORA_LOGIC: "Fight Majora to Reset Time",
   MM_SOUTHERN_SWAMP_SCRUB_HP_GORON: "Southern Swamp Scrub HP as Goron",
   MM_ZORA_HALL_SCRUB_HP_NO_DEKU: "Zora Hall Scrub HP without Deku",
 };

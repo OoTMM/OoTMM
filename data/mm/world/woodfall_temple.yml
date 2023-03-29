@@ -2,7 +2,7 @@
   dungeon: WF
   exits:
     "Woodfall Front of Temple": "true"
-    "Woodfall Temple Entrance": "event(TIME_TRAVEL)"
+    "Woodfall Temple Entrance": "can_reset_time"
 "Woodfall Temple Entrance":
   dungeon: WF
   exits:

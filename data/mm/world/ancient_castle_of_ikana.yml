@@ -1,7 +1,7 @@
 "Ancient Castle of Ikana Exterior":
   region: IKANA_CASTLE
   exits:
-    "Beneath the Well End": "can_use_light_arrows"
+    "Ancient Castle of Ikana Well": "true"
     "Ancient Castle of Ikana Entrance": "can_use_light_arrows"
     "Ancient Castle of Ikana Interior": "true"
 "Ancient Castle of Ikana Entrance":
@@ -11,13 +11,18 @@
     "Ikana Canyon": "true"
   events:
     IKANA_CASTLE_LIGHT_ENTRANCE: "can_activate_crystal"
+"Ancient Castle of Ikana Well":
+  region: IKANA_CASTLE
+  exits:
+    "Beneath the Well End": "true"
+    "Ancient Castle of Ikana Exterior": "can_reset_time"
 "Ancient Castle of Ikana Interior":
   region: IKANA_CASTLE
   exits:
     "Ancient Castle of Ikana Exterior": "true"
-    "Ancient Castle of Ikana Interior North": "can_use_fire_arrows"
-    "Ancient Castle of Ikana Interior South": "can_use_fire_arrows"
-    "Ancient Castle of Ikana Pre-Boss": "(has_mirror_shield && event(IKANA_CASTLE_LIGHT2)) || can_use_light_arrows"
+    "Ancient Castle of Ikana Interior North": "can_reset_time && can_use_fire_arrows"
+    "Ancient Castle of Ikana Interior South": "can_reset_time && can_use_fire_arrows"
+    "Ancient Castle of Ikana Pre-Boss": "can_reset_time && ((has_mirror_shield && event(IKANA_CASTLE_LIGHT2)) || can_use_light_arrows)"
 "Ancient Castle of Ikana Interior North":
   region: IKANA_CASTLE
   exits:

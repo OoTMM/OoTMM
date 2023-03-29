@@ -1,7 +1,7 @@
 "Snowhead Temple":
   dungeon: SH
   exits:
-    "Snowhead Temple Entrance": "event(TIME_TRAVEL)"
+    "Snowhead Temple Entrance": "can_reset_time"
     "Snowhead": "true"
 "Snowhead Temple Entrance":
   dungeon: SH

@@ -1,7 +1,7 @@
 "Great Bay Temple":
   dungeon: GB
   exits:
-    "Great Bay Temple Entrance": "event(TIME_TRAVEL)"
+    "Great Bay Temple Entrance": "can_reset_time"
     "Zora Cape Peninsula": "can_hookshot"
 "Great Bay Temple Entrance":
   dungeon: GB

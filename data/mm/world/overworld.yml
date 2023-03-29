@@ -7,8 +7,9 @@
   events:
     "TIME_TRAVEL": "can_play(SONG_TIME)"
   exits:
-    "Clock Town South": "event(TIME_TRAVEL)"
+    "Clock Town South": "can_reset_time"
     "OOT SONGS": "setting(crossWarpOot) && has_ocarina"
+    "Moon": "can_play(SONG_ORDER) && special(MOON)"
   locations:
     "Initial Song of Healing": "true"
 "Oath to Order":
@@ -632,7 +633,7 @@
   exits:
     "Fisher's Hut": "true"
     "Great Bay Fence": "true"
-    "Pirate Fortress Entrance": "has(MASK_ZORA)"
+    "Pirate Fortress": "has(MASK_ZORA)"
     "Pinnacle Rock Entrance": "has(MASK_ZORA)"
     "Laboratory": "true"
     "Zora Cape": "true"
