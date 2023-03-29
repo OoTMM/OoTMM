@@ -366,11 +366,13 @@ void comboCsmcInit(Actor* this, GameState_Play* play, s16 gi)
         ActorSetScale(this, 0.01f);
         ActorSetUnk(this, 40.f);
 
+
 #if defined(GAME_OOT)
         /* Fix for IGT chest */
-        if (play->sceneId == SCE_OOT_INSIDE_GANON_CASTLE && (this->variable & 0x1f) == 0x11)
+        if (play->sceneId == SCE_OOT_INSIDE_GANON_CASTLE)
         {
-            this->position.z -= 10.f;
+            if ((this->variable & 0x1f) == (gComboData.mq & (1 << MQ_GANON_CASTLE) ? 0x04 : 0x11))
+                this->position.z -= 10.f;
         }
 #endif
     }
