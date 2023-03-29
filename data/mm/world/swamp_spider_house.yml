@@ -2,7 +2,7 @@
   dungeon: SSH
   exits:
     "Swamp Back": "true"
-    "Swamp Spider House Main": "event(TIME_TRAVEL)"
+    "Swamp Spider House Main": "can_reset_time"
   locations:
     "Swamp Spider House Mask of Truth": "has(GS_TOKEN_SWAMP, 30)"
 "Swamp Spider House Main":
