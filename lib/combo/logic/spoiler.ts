@@ -171,7 +171,7 @@ export class LogicPassSpoiler {
           this.buffer.push(`    ${stone}\n      ${this.state.world.checkHints[hint.check].join(', ')} (${hint.items.map(itemName).join(', ')})`)
         }
         if (hint.type === 'item-region') {
-          if(sortedHints.foolish[0][0] === stone) this.buffer.push('\n  Regional Hints:')
+          if(sortedHints.region[0][0] === stone) this.buffer.push('\n  Regional Hints:')
           this.buffer.push(`    ${stone}\n      ${regionName(hint.region)} (${itemName(hint.item)})`)
         }
       })
