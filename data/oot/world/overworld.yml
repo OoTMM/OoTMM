@@ -368,7 +368,7 @@
     "Kakariko Anju Bottle": "is_child"
     "Kakariko Anju Egg": "is_adult"
     "Kakariko Anju Cojiro": "adult_trade(POCKET_CUCCO)"
-    "Windmill HP": "can_boomerang || (is_adult && can_play(SONG_TIME))"
+    "Windmill HP": "can_boomerang || (is_adult && (can_play(SONG_TIME) || trick(OOT_WINDMILL_HP_NOTHING)))"
     "Windmill Song of Storms": "is_adult && has(OCARINA)"
     "Kakariko Song Shadow": "is_adult && has(MEDALLION_FOREST) && has(MEDALLION_FIRE) && has(MEDALLION_WATER)"
     "Kakariko Man on Roof": "can_hookshot || trick(OOT_MAN_ON_ROOF)"
