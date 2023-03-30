@@ -554,12 +554,12 @@
 "Snowhead":
   region: SNOWHEAD
   exits:
-    "Snowhead Entrance": "event(OPEN_SNOWHEAD_TEMPLE)"
+    "Snowhead Entrance": "true"
     "Snowhead Temple": "true"
 "Snowhead Near Great Fairy Fountain":
   region: SNOWHEAD
   exits:
-    "Snowhead Entrance": "event(OPEN_SNOWHEAD_TEMPLE)"
+    "Snowhead Entrance": "true"
     "Snowhead Great Fairy Fountain": "true"
 "Snowhead Great Fairy Fountain":
   region: SNOWHEAD
