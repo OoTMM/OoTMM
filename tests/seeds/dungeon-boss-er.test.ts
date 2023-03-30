@@ -7,8 +7,8 @@ test("Can make a seed - Dungeon + Boss ER", () => {
     erBoss: 'full',
     erMinorDungeons: true,
     erSpiderHouses: true,
-	erBeneathWell: true,
-	erIkanaCastle: true,
-	erSecretShrine: true,
+	  erBeneathWell: true,
+	  erIkanaCastle: true,
+	  erSecretShrine: true,
   });
 });
