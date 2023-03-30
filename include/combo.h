@@ -96,6 +96,10 @@
 #define DUNGEONID_BOTTOM_OF_THE_WELL                0x0f
 #define DUNGEONID_ICE_CAVERN                        0x10
 #define DUNGEONID_GERUDO_TRAINING_GROUNDS           0x11
+#define DUNGEONID_BENEATH_THE_WELL                  0x12
+#define DUNGEONID_IKANA_CASTLE                      0x13
+#define DUNGEONID_SECRET_SHRINE                     0x14
+#define DUNGEONID_BENEATH_THE_WELL_END              0x15
 
 /* MQ IDs */
 #define MQ_DEKU_TREE                0
@@ -155,7 +159,7 @@ typedef struct
     u8              config[0x40];
     ComboDataHints  hints;
     u8              boss[12];
-    u8              dungeons[18];
+    u8              dungeons[22];
     SpecialCond     special[2];
 }
 ComboData;

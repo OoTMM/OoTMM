@@ -118,6 +118,9 @@ void comboTriggerWarp(GameState_Play* play, int bossId)
         entrance = 0x6a70;
         break;
     case DUNGEONID_TEMPLE_STONE_TOWER:
+        isMmEntrance = 1;
+        entrance = 0xaa20;
+        break;
     case DUNGEONID_TEMPLE_STONE_TOWER_INVERTED:
         isMmEntrance = 1;
         entrance = 0x2070;
@@ -138,6 +141,22 @@ void comboTriggerWarp(GameState_Play* play, int bossId)
         break;
     case DUNGEONID_GERUDO_TRAINING_GROUNDS:
         entrance = 0x3a8;
+        break;
+    case DUNGEONID_BENEATH_THE_WELL:
+        isMmEntrance = 1;
+        entrance = 0x2050;
+        break;
+    case DUNGEONID_IKANA_CASTLE:
+        isMmEntrance = 1;
+        entrance = 0x3420;
+        break;
+    case DUNGEONID_SECRET_SHRINE:
+        isMmEntrance = 1;
+        entrance = 0x2060;
+        break;
+    case DUNGEONID_BENEATH_THE_WELL_END:
+        isMmEntrance = 1;
+        entrance = 0x3400;
         break;
     default:
         UNREACHABLE();

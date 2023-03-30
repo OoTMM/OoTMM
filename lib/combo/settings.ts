@@ -255,6 +255,12 @@ export const SETTINGS = [{
   type: 'boolean',
   default: false
 }, {
+  key: 'erMmMinorDungeons',
+  name: 'Shuffle MM Minor Dungeons with Dungeons',
+  category: 'entrances',
+  type: 'boolean',
+  default: false
+}, {
   key: 'erMinorDungeons',
   name: 'Shuffle OoT Minor Dungeons with Dungeons',
   category: 'entrances',
