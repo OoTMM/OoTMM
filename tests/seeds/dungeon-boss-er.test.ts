@@ -7,6 +7,7 @@ test("Can make a seed - Dungeon + Boss ER", () => {
     erBoss: 'full',
     erMinorDungeons: true,
     erSpiderHouses: true,
+	  erPirateFortress: true,
 	  erBeneathWell: true,
 	  erIkanaCastle: true,
 	  erSecretShrine: true,

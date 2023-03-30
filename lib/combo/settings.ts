@@ -261,6 +261,12 @@ export const SETTINGS = [{
   type: 'boolean',
   default: false
 }, {
+  key: 'erPirateFortress',
+  name: 'Shuffle Pirate Fortress with Dungeons',
+  category: 'entrances',
+  type: 'boolean',
+  default: false
+}, {
   key: 'erBeneathWell',
   name: 'Shuffle Beneath the Well with Dungeons',
   category: 'entrances',

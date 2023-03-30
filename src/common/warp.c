@@ -155,6 +155,10 @@ void comboTriggerWarp(GameState_Play* play, int bossId)
         isMmEntrance = 1;
         entrance = 0x3400;
         break;
+    case DUNGEONID_PIRATE_FORTRESS:
+        isMmEntrance = 1;
+        entrance = 0x6850;
+        break;
     default:
         UNREACHABLE();
         break;
