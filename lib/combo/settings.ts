@@ -445,6 +445,7 @@ export const TRICKS = {
   OOT_SAND_RIVER_NOTHING: "Cross the River of Sand with Nothing",
   OOT_SHADOW_FIRE_ARROW: "Enter Shadow Temple using Fire Arrows",
   OOT_KZ_SKIP: "Skip King Zora as Adult",
+  OOT_LOST_WOODS_ADULT_GS: "Lost Woods Adult GS without Bean",
   MM_LENS: "Fewer Lens Requirements (MM)",
   MM_PALACE_BEAN_SKIP: "Skip Planting Beans in Deku Palace",
   MM_DARMANI_WALL: "Climb Mountain Village Wall Blind",
