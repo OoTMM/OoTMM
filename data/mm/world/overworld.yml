@@ -244,7 +244,7 @@
     "Road to Southern Swamp": "true"
     "Mountain Village Path Lower": "has(BOW)"
     "Milk Road": "true"
-    "Great Bay Fence": "can_play(SONG_EPONA) || can_goron_bomb_jump"
+    "Great Bay Fence": "can_play(SONG_EPONA) || (can_goron_bomb_jump && has(BOMB_BAG))"
     "Road to Ikana Front": "true"
     "Astral Observatory Balcony": "has(MASK_DEKU) || can_goron_bomb_jump"
   locations:
