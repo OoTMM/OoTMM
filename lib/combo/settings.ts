@@ -447,7 +447,7 @@ export const TRICKS = {
   OOT_KZ_SKIP: "Skip King Zora as Adult",
   OOT_LOST_WOODS_ADULT_GS: "Lost Woods Adult GS without Bean",
   OOT_WINDMILL_HP_NOTHING: "Windmill HP as Adult with Nothing",
-  OOT_LAB_DIVE_NO_GOLD_SCALE: "Lab Dive without Gold Scale",
+  OOT_LAB_DIVE_NO_GOLD_SCALE: "Laboratory Dive without Gold Scale",
   MM_LENS: "Fewer Lens Requirements (MM)",
   MM_PALACE_BEAN_SKIP: "Skip Planting Beans in Deku Palace",
   MM_DARMANI_WALL: "Climb Mountain Village Wall Blind",
