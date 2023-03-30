@@ -38,8 +38,10 @@
   exits:
     "Ancient Castle of Ikana Interior North 2": "true"
     "Ancient Castle of Ikana Exterior": "true"
+    "Ancient Castle of Ikana Roof Interior": "can_goron_bomb_jump"
   events:
-    IKANA_CASTLE_LIGHT: "has(MASK_DEKU)"
+    IKANA_CASTLE_LIGHT: "has(MASK_DEKU)" #|| (has(MASK_ZORA) && can_gainer) Can press the switch trivially, but can't get back to the roof without these.
+    IKANA_CASTLE_LIGHT2: "can_use_keg"
   locations:
     "Ancient Castle of Ikana HP": "(has(BOW) || can_hookshot_short) && has(MASK_DEKU)"
 "Ancient Castle of Ikana Interior South":
@@ -57,6 +59,7 @@
   exits:
     "Ancient Castle of Ikana Interior": "event(IKANA_CASTLE_LIGHT2)"
     "Ancient Castle of Ikana Wizzrobe": "true"
+    "Ancient Castle of Ikana Roof Exterior": "trick(MM_IKANA_ROOF_PARKOUR)"
   events:
     IKANA_CASTLE_LIGHT2: "can_use_keg"
 "Ancient Castle of Ikana Pre-Boss":
