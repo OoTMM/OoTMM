@@ -1,40 +1,40 @@
 "Ancient Castle of Ikana Exterior":
-  region: IKANA_CASTLE
+  dungeon: ACoI
   exits:
     "Ancient Castle of Ikana Well": "true"
     "Ancient Castle of Ikana Entrance": "can_use_light_arrows"
     "Ancient Castle of Ikana Interior": "true"
 "Ancient Castle of Ikana Entrance":
-  region: IKANA_CASTLE
+  dungeon: ACoI
   exits:
     "Ancient Castle of Ikana Exterior": "(has_mirror_shield && event(IKANA_CASTLE_LIGHT_ENTRANCE)) || can_use_light_arrows"
     "Ikana Canyon": "true"
   events:
     IKANA_CASTLE_LIGHT_ENTRANCE: "can_activate_crystal"
 "Ancient Castle of Ikana Well":
-  region: IKANA_CASTLE
+  dungeon: ACoI
   exits:
     "Beneath the Well End": "true"
     "Ancient Castle of Ikana Exterior": "can_reset_time"
 "Ancient Castle of Ikana Interior":
-  region: IKANA_CASTLE
+  dungeon: ACoI
   exits:
     "Ancient Castle of Ikana Exterior": "true"
     "Ancient Castle of Ikana Interior North": "can_reset_time && can_use_fire_arrows"
     "Ancient Castle of Ikana Interior South": "can_reset_time && can_use_fire_arrows"
     "Ancient Castle of Ikana Pre-Boss": "can_reset_time && ((has_mirror_shield && event(IKANA_CASTLE_LIGHT2)) || can_use_light_arrows)"
 "Ancient Castle of Ikana Interior North":
-  region: IKANA_CASTLE
+  dungeon: ACoI
   exits:
     "Ancient Castle of Ikana Interior": "true"
     "Ancient Castle of Ikana Interior North 2": "has(MASK_DEKU)"
 "Ancient Castle of Ikana Interior North 2":
-  region: IKANA_CASTLE
+  dungeon: ACoI
   exits:
     "Ancient Castle of Ikana Interior North": "has(MASK_DEKU)"
     "Ancient Castle of Ikana Roof Exterior": "can_use_lens"
 "Ancient Castle of Ikana Roof Exterior":
-  region: IKANA_CASTLE
+  dungeon: ACoI
   exits:
     "Ancient Castle of Ikana Interior North 2": "true"
     "Ancient Castle of Ikana Exterior": "true"
@@ -43,33 +43,33 @@
   locations:
     "Ancient Castle of Ikana HP": "(has(BOW) || can_hookshot_short) && has(MASK_DEKU)"
 "Ancient Castle of Ikana Interior South":
-  region: IKANA_CASTLE
+  dungeon: ACoI
   exits:
     "Ancient Castle of Ikana Interior": "true"
     "Ancient Castle of Ikana Wizzrobe": "(has_mirror_shield && event(IKANA_CASTLE_LIGHT)) || can_use_light_arrows"
 "Ancient Castle of Ikana Wizzrobe":
-  region: IKANA_CASTLE
+  dungeon: ACoI
   exits:
     "Ancient Castle of Ikana Interior South": "can_use_light_arrows"
     "Ancient Castle of Ikana Roof Interior": "can_fight || has(BOW)"
 "Ancient Castle of Ikana Roof Interior":
-  region: IKANA_CASTLE
+  dungeon: ACoI
   exits:
     "Ancient Castle of Ikana Interior": "event(IKANA_CASTLE_LIGHT2)"
     "Ancient Castle of Ikana Wizzrobe": "true"
   events:
     IKANA_CASTLE_LIGHT2: "can_use_keg"
 "Ancient Castle of Ikana Pre-Boss":
-  region: IKANA_CASTLE
+  dungeon: ACoI
   exits:
     "Ancient Castle of Ikana Interior": "true"
     "Ancient Castle of Ikana Throne Room": "true"
 "Ancient Castle of Ikana Throne Room":
-  region: IKANA_CASTLE
+  dungeon: ACoI
   exits:
     "Ancient Castle of Ikana After Boss": "has_mirror_shield && can_use_fire_arrows && can_fight"
 "Ancient Castle of Ikana After Boss":
-  region: IKANA_CASTLE
+  dungeon: ACoI
   exits:
     "Ancient Castle of Ikana Pre-Boss": "true"
   locations:

@@ -5,7 +5,10 @@ test("Can make a seed - Dungeon + Boss ER", () => {
     songs: 'anywhere',
     erDungeons: 'full',
     erBoss: 'full',
-    erSpiderHouses: true,
     erMinorDungeons: true,
+    erSpiderHouses: true,
+	  erBeneathWell: true,
+	  erIkanaCastle: true,
+	  erSecretShrine: true,
   });
 });

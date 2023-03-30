@@ -789,7 +789,7 @@
     "Beneath The Graveyard Night 3": "has(MASK_CAPTAIN)"
   locations:
     "Ikana Graveyard Captain Mask": "can_play(SONG_AWAKENING) && has(BOW) && can_fight"
-    "Ikana Graveyard Grotto": "has_explosives || (trick_keg_explosives && (can_play(SONG_EPONA) || event(IKANA_CANYON_OWL)))"
+    "Ikana Graveyard Grotto": "has_explosives || trick_keg_explosives"
 "Beneath The Graveyard Night 1":
   region: IKANA_GRAVEYARD
   exits:

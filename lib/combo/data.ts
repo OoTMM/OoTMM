@@ -115,7 +115,7 @@ const worldMm = {
   ST: worldMmStoneTowerTemple,
   IST: worldMmStoneTowerTempleInverted,
   PF: worldMmPirateFortress,
-  IkanaCastle: worldMmAncientCastleOfIkana,
+  ACoI: worldMmAncientCastleOfIkana,
   BtW: worldMmBeneathTheWell,
   SS: worldMmSecretShrine,
   SSH: worldMmSwampSpiderHouse,

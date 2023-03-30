@@ -47,6 +47,10 @@ const DUNGEON_INDEX = {
   BotW: 15,
   IC: 16,
   GTG: 17,
+  BtW: 18,
+  ACoI: 19,
+  SS: 20,
+  BtWE: 21,
 } as {[k: string]: number};;
 
 export class LogicPassEntrances {
@@ -68,7 +72,7 @@ export class LogicPassEntrances {
   private result: EntranceShuffleResult = {
     overrides: {},
     boss: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
-    dungeons: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17],
+    dungeons: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21],
   };
 
   private isAssignable(src: WorldEntrance, dst: WorldEntrance, overrides: EntranceOverrides, opts?: { mergeStoneTowers?: boolean, ownGame?: boolean }) {
@@ -225,11 +229,20 @@ export class LogicPassEntrances {
   private fixDungeons() {
     /* Set the dungeon list */
     const validDungeons = new Set(['DT', 'DC', 'JJ', 'Forest', 'Fire', 'Water', 'Shadow', 'Spirit', 'WF', 'SH', 'GB', 'ST', 'IST']);
+    if (this.input.settings.erMinorDungeons) {
+      ['BotW', 'IC', 'GTG'].forEach(d => validDungeons.add(d));
+    }
     if (this.input.settings.erSpiderHouses) {
       ['SSH', 'OSH'].forEach(d => validDungeons.add(d));
     }
-    if (this.input.settings.erMinorDungeons) {
-      ['BotW', 'IC', 'GTG'].forEach(d => validDungeons.add(d));
+    if (this.input.settings.erBeneathWell) {
+      ['BtW', 'BtWE'].forEach(d => validDungeons.add(d));
+    }
+    if (this.input.settings.erIkanaCastle) {
+      ['ACoI'].forEach(d => validDungeons.add(d));
+    }
+    if (this.input.settings.erSecretShrine) {
+      ['SS'].forEach(d => validDungeons.add(d));
     }
 
     const dungeonEntrances = this.world.entrances.filter(e => !this.world.areas[e.from].dungeon && this.world.areas[e.to].dungeon && validDungeons.has(this.world.areas[e.to].dungeon!));
