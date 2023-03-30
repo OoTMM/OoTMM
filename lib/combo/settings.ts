@@ -448,6 +448,7 @@ export const TRICKS = {
   OOT_LOST_WOODS_ADULT_GS: "Lost Woods Adult GS without Bean",
   OOT_WINDMILL_HP_NOTHING: "Windmill HP as Adult with Nothing",
   OOT_LAB_DIVE_NO_GOLD_SCALE: "Laboratory Dive without Gold Scale",
+  OOT_LAB_WALL_GS: "Laboratory Wall GS with Jump Slash",
   MM_LENS: "Fewer Lens Requirements (MM)",
   MM_PALACE_BEAN_SKIP: "Skip Planting Beans in Deku Palace",
   MM_DARMANI_WALL: "Climb Mountain Village Wall Blind",
