@@ -249,20 +249,32 @@ export const SETTINGS = [{
   ],
   default: 'none'
 }, {
+  key: 'erMinorDungeons',
+  name: 'Shuffle OoT Minor Dungeons with Dungeons',
+  category: 'entrances',
+  type: 'boolean',
+  default: false
+}, {
   key: 'erSpiderHouses',
   name: 'Shuffle Spider Houses with Dungeons',
   category: 'entrances',
   type: 'boolean',
   default: false
 }, {
-  key: 'erMmMinorDungeons',
-  name: 'Shuffle MM Minor Dungeons with Dungeons',
+  key: 'erBeneathWell',
+  name: 'Shuffle Beneath the Well with Dungeons',
   category: 'entrances',
   type: 'boolean',
   default: false
 }, {
-  key: 'erMinorDungeons',
-  name: 'Shuffle OoT Minor Dungeons with Dungeons',
+  key: 'erIkanaCastle',
+  name: 'Shuffle Ikana Castle Interior with Dungeons',
+  category: 'entrances',
+  type: 'boolean',
+  default: false
+}, {
+  key: 'erSecretShrine',
+  name: 'Shuffle Secret Shrine with Dungeons',
   category: 'entrances',
   type: 'boolean',
   default: false

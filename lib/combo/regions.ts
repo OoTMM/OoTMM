@@ -74,7 +74,6 @@ const MM_REGION_NAMES: {[k: string]: string} = {
   'MM_PIRATE_FORTRESS_INTERIOR': 'Pirates\' Fortress Interior',
   'MM_IKANA_CASTLE': 'Ikana Castle',
   'MM_BENEATH_THE_WELL': 'Beneath the Well',
-  'MM_BENEATH_THE_WELL_END': 'Beneath the Well',
   'MM_SECRET_SHRINE': 'Secret Shrine',
   'MM_SPIDER_HOUSE_SWAMP': 'Swamp Spider House',
   'MM_SPIDER_HOUSE_OCEAN': 'Ocean Spider House',

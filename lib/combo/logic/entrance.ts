@@ -48,9 +48,9 @@ const DUNGEON_INDEX = {
   IC: 16,
   GTG: 17,
   BtW: 18,
-  IkanaCastle: 19,
+  ACoI: 19,
   SS: 20,
-  BtWE: 22,
+  BtWE: 21,
 } as {[k: string]: number};;
 
 export class LogicPassEntrances {
@@ -229,14 +229,20 @@ export class LogicPassEntrances {
   private fixDungeons() {
     /* Set the dungeon list */
     const validDungeons = new Set(['DT', 'DC', 'JJ', 'Forest', 'Fire', 'Water', 'Shadow', 'Spirit', 'WF', 'SH', 'GB', 'ST', 'IST']);
+    if (this.input.settings.erMinorDungeons) {
+      ['BotW', 'IC', 'GTG'].forEach(d => validDungeons.add(d));
+    }
     if (this.input.settings.erSpiderHouses) {
       ['SSH', 'OSH'].forEach(d => validDungeons.add(d));
     }
-    if (this.input.settings.erMmMinorDungeons) {
-      ['BtW', 'IkanaCastle', 'SS', 'BtWE'].forEach(d => validDungeons.add(d));
+    if (this.input.settings.erBeneathWell) {
+      ['BtW', 'BtWE'].forEach(d => validDungeons.add(d));
     }
-    if (this.input.settings.erMinorDungeons) {
-      ['BotW', 'IC', 'GTG'].forEach(d => validDungeons.add(d));
+    if (this.input.settings.erIkanaCastle) {
+      ['ACoI'].forEach(d => validDungeons.add(d));
+    }
+    if (this.input.settings.erSecretShrine) {
+      ['SS'].forEach(d => validDungeons.add(d));
     }
 
     const dungeonEntrances = this.world.entrances.filter(e => !this.world.areas[e.from].dungeon && this.world.areas[e.to].dungeon && validDungeons.has(this.world.areas[e.to].dungeon!));
