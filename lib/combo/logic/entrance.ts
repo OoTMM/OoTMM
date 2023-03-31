@@ -71,8 +71,8 @@ export class LogicPassEntrances {
   }
   private result: EntranceShuffleResult = {
     overrides: {},
-    boss: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
-    dungeons: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21],
+    boss: Object.values(BOSS_INDEX_BY_DUNGEON),
+    dungeons: Object.values(DUNGEON_INDEX),
   };
 
   private isAssignable(src: WorldEntrance, dst: WorldEntrance, overrides: EntranceOverrides, opts?: { mergeStoneTowers?: boolean, ownGame?: boolean }) {

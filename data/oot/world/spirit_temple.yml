@@ -1,7 +1,7 @@
 "Spirit Temple":
   dungeon: Spirit
   exits:
-    "Desert Colossus": "true"
+    "Desert Colossus Spirit Exit": "true"
     "Spirit Temple Child Entrance": "is_child"
     "Spirit Temple Adult Entrance": "can_lift_silver"
   events:
