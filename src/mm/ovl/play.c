@@ -129,6 +129,15 @@ void hookPlay_Init(GameState_Play* play)
         comboReadForeignSave();
     }
 
+    if (gSave.entranceIndex == 0x8610)
+    {
+        /* Woodfall from temple */
+        if (!MM_GET_EVENT_WEEK(EV_MM_WEEK_WOODFALL_TEMPLE_RISE))
+        {
+            gSave.entranceIndex = 0x8640;
+        }
+    }
+
     comboObjectsReset();
     debugCheat(play);
 
