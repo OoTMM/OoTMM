@@ -11,7 +11,7 @@ export type ExprMap = {
   [k: string]: Expr;
 }
 
-type WorldArea = {
+export type WorldArea = {
   boss: boolean;
   dungeon: string | null;
   exits: ExprMap;

@@ -1,11 +1,18 @@
 import { cloneDeep } from "lodash";
 
-import { Random, sample } from "../random";
+import { Random, sample, shuffle } from "../random";
 import { Settings } from "../settings";
-import { DUNGEONS_REGIONS, ExprMap, World, WorldEntrance } from "./world";
+import { DUNGEONS_REGIONS, ExprMap, World, WorldArea, WorldEntrance } from "./world";
 import { Pathfinder, EntranceOverrides } from './pathfind';
 import { Monitor } from "../monitor";
-import { LogicEntranceError } from "./error";
+import { LogicEntranceError, LogicError } from "./error";
+import { Expr, exprTrue } from "./expr";
+
+type Entrance = {
+  from: string;
+  to: string;
+  expr: Expr;
+};
 
 export type EntranceShuffleResult = {
   overrides: {[k: string]: {[k:string]: { from: string, to: string }}};
@@ -67,7 +74,7 @@ export class LogicPassEntrances {
     },
   ) {
     this.world = cloneDeep(input.world);
-    this.pathfinder = new Pathfinder(input.world, input.settings);
+    this.pathfinder = new Pathfinder(this.world, input.settings);
   }
   private result: EntranceShuffleResult = {
     overrides: {},
@@ -226,114 +233,171 @@ export class LogicPassEntrances {
     }
   }
 
+  private isDungeonTransition(e: WorldEntrance) {
+    const from = this.world.areas[e.from];
+    const to = this.world.areas[e.to];
+
+    /* Overworld to overworld */
+    if (!from.dungeon && !to.dungeon) {
+      return false;
+    }
+
+    /* Same dungeon */
+    if (from.dungeon === to.dungeon) {
+      return false;
+    }
+
+    /* BtW/BtWE */
+    if (from.dungeon === 'BtW' && to.dungeon === 'BtWE') {
+      return false;
+    }
+    if (from.dungeon === 'BtWE' && to.dungeon === 'BtW') {
+      return false;
+    }
+
+    return true;
+  }
+
+  private isAssignableNew(from: Entrance, to: Entrance, opts?: { ownGame: boolean }) {
+    const dungeon = this.world.areas[to.to].dungeon!;
+
+    /* Reject wrong game */
+    if (opts?.ownGame) {
+      /* TODO: Ugly */
+      const prefixA = from.from.split(' ')[0];
+      const prefixB = to.to.split(' ')[0];
+      if (prefixA !== prefixB) {
+        return false;
+      }
+    }
+
+    /* Beatable only */
+    if (this.input.settings.logic === 'beatable') {
+      return true;
+    }
+
+    /* Apply an override */
+    this.world.areas[from.from].exits[to.to] = from.expr;
+
+    /* If the dungeon is ST or IST, we need to allow the other dungeon */
+    if (dungeon === 'ST') {
+      this.world.areas['OOT SPAWN'].exits['MM Stone Tower Temple Inverted'] = exprTrue();
+    }
+    if (dungeon === 'IST') {
+      this.world.areas['OOT SPAWN'].exits['MM Stone Tower Temple'] = exprTrue();
+    }
+
+    /* Check if the new world is valid */
+    const pathfinderState = this.pathfinder.run(null, { ignoreItems: true, recursive: true });
+
+    /* Restore the override */
+    delete this.world.areas[from.from].exits[to.to];
+    delete this.world.areas['OOT SPAWN'].exits['MM Stone Tower Temple Inverted'];
+    delete this.world.areas['OOT SPAWN'].exits['MM Stone Tower Temple'];
+
+    /* Get the list of required locations */
+    let locations: string[];
+    if (['ST', 'IST'].includes(dungeon)) {
+      locations = [...this.world.dungeons['ST'], ...this.world.dungeons['IST']];
+    } else {
+      locations = Array.from(this.world.dungeons[dungeon]);
+    }
+
+    /* Check if the new world is valid */
+    if (locations.every(l => pathfinderState.locations.has(l))) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   private fixDungeons() {
     /* Set the dungeon list */
-    const validDungeons = new Set(['DT', 'DC', 'JJ', 'Forest', 'Fire', 'Water', 'Shadow', 'Spirit', 'WF', 'SH', 'GB', 'ST', 'IST']);
+    let shuffledDungeons = new Set(['DT', 'DC', 'JJ', 'Forest', 'Fire', 'Water', 'Shadow', 'Spirit', 'WF', 'SH', 'GB', 'ST', 'IST']);
     if (this.input.settings.erMinorDungeons) {
-      ['BotW', 'IC', 'GTG'].forEach(d => validDungeons.add(d));
+      ['BotW', 'IC', 'GTG'].forEach(d => shuffledDungeons.add(d));
     }
     if (this.input.settings.erSpiderHouses) {
-      ['SSH', 'OSH'].forEach(d => validDungeons.add(d));
+      ['SSH', 'OSH'].forEach(d => shuffledDungeons.add(d));
     }
     if (this.input.settings.erBeneathWell) {
-      ['BtW', 'BtWE'].forEach(d => validDungeons.add(d));
+      ['BtW', 'BtWE'].forEach(d => shuffledDungeons.add(d));
     }
     if (this.input.settings.erIkanaCastle) {
-      ['ACoI'].forEach(d => validDungeons.add(d));
+      ['ACoI'].forEach(d => shuffledDungeons.add(d));
     }
     if (this.input.settings.erSecretShrine) {
-      ['SS'].forEach(d => validDungeons.add(d));
+      ['SS'].forEach(d => shuffledDungeons.add(d));
     }
 
-    const dungeonEntrances = this.world.entrances.filter(e => !this.world.areas[e.from].dungeon && this.world.areas[e.to].dungeon && validDungeons.has(this.world.areas[e.to].dungeon!));
-    const dungeonExits = this.world.entrances.filter(e => this.world.areas[e.from].dungeon && !this.world.areas[e.to].dungeon && validDungeons.has(this.world.areas[e.from].dungeon!));
-    const entranceByDungeon: {[k: string]: WorldEntrance} = {};
-    const exitsByDungeon: {[k: string]: WorldEntrance} = {};
-    const overrides: EntranceOverrides = {};
-    const combinations: {[k: string]: string[]} = {};
-    const placed: {[k: string]: string} = {};
+    /* Get the transitions and exprs */
+    const dungeonTransitions = this.world.entrances
+      .filter(e => this.isDungeonTransition(e))
+      .filter(e => shuffledDungeons.has(this.world.areas[e.from].dungeon!) || shuffledDungeons.has(this.world.areas[e.to].dungeon!));
 
-    /* Set up null overrides */
-    for (const e of dungeonEntrances) {
-      const override = overrides[e.from] || {};
-      override[e.to] = null;
-      overrides[e.from] = override;
-      const dungeon = this.world.areas[e.to].dungeon!;
-      entranceByDungeon[dungeon] = e;
+    const dungeonEntrances: {[k: string]: Entrance} = {};
+    const dungeonExits: {[k: string]: Entrance} = {};
+
+    for (const e of dungeonTransitions) {
+      /* Get the transition exprs */
+      const from = this.world.areas[e.from];
+      const to = this.world.areas[e.to];
+      const expr = from.exits[e.to];
+
+      /* Entrance */
+      if (to.dungeon) {
+        dungeonEntrances[to.dungeon] = { from: e.from, to: e.to, expr };
+      }
+
+      /* Exit */
+      if (from.dungeon) {
+        dungeonExits[from.dungeon] = { from: e.from, to: e.to, expr };
+      }
+
+      /* Remove the transition */
+      delete from.exits[e.to];
     }
 
-    for (const e of dungeonExits) {
-      const override = overrides[e.from] || {};
-      override[e.to] = null;
-      overrides[e.from] = override;
-      const dungeon = this.world.areas[e.from].dungeon!;
-      exitsByDungeon[dungeon] = e;
-    }
+    /* Assign the dungeons */
+    const dungeons = shuffle(this.input.random, Array.from(shuffledDungeons));
+    const dungeonsDest = new Set(dungeons);
+    while (dungeons.length > 0) {
+      const dungeon = dungeons.pop()!;
+      const candidates = shuffle(this.input.random, Array.from(dungeonsDest));
+      let destDungeon: string | null = null;
 
-    /* Set up base reachability */
-    const dungeons = Object.keys(entranceByDungeon);
-    for (const dungeonSrc of dungeons) {
-      for (const dungeonDst of dungeons) {
-        const src = entranceByDungeon[dungeonSrc];
-        const dst = entranceByDungeon[dungeonDst];
-        const combination = combinations[dungeonDst] || [];
-        if (this.isAssignable(src, dst, overrides, { ownGame: this.input.settings.erDungeons === 'ownGame' })) {
-          combination.push(dungeonSrc);
+      for (const c of candidates) {
+        const assignable = this.isAssignableNew(dungeonEntrances[dungeon], dungeonEntrances[c], { ownGame: this.input.settings.erDungeons === 'ownGame' });
+        if (assignable) {
+          destDungeon = c;
+          break;
         }
-        combinations[dungeonDst] = combination;
       }
-    }
 
-    /* Place dungeons */
-    for (;;) {
-      const keys = Object.keys(combinations);
-      if (keys.length === 0) {
-        break;
+      if (!destDungeon) {
+        throw new LogicError('Unable to assign a dungeon to location: ' + dungeon);
       }
-      const sorted = keys.sort((a, b) => combinations[a].length - combinations[b].length);
-      const dungeon = sorted[0];
-      const comb = combinations[dungeon];
-      if (comb.length === 0) {
-        throw new LogicEntranceError(`Nowhere to place ${dungeon}`);
-      }
-      const src = sample(this.input.random, comb);
-      placed[src] = dungeon;
-      delete combinations[dungeon];
-      for (const k of Object.keys(combinations)) {
-        combinations[k] = combinations[k].filter(s => s !== src);
-      }
-    }
 
-    /* Alter the world */
-    for (const srcDungeon in placed) {
-      const dstDungeon = placed[srcDungeon];
-      const srcEntrance = entranceByDungeon[srcDungeon];
-      const dstEntrance = entranceByDungeon[dstDungeon];
-      const srcExit = exitsByDungeon[dstDungeon];
-      const dstExit = exitsByDungeon[srcDungeon];
-
-      /* Mark the dungeon */
-      this.result.dungeons[DUNGEON_INDEX[dstDungeon]] = DUNGEON_INDEX[srcDungeon];
-
-      /* Replace the entrance */
-      const entranceArea = this.world.areas[srcEntrance.from];
-      const entranceExpr = entranceArea.exits[srcEntrance.to];
-      delete entranceArea.exits[srcEntrance.to];
-      entranceArea.exits[dstEntrance.to] = entranceExpr;
-
-      const exitArea = this.world.areas[srcExit.from];
-      const exitExpr = exitArea.exits[srcExit.to];
-      delete exitArea.exits[srcExit.to];
-      exitArea.exits[dstExit.to] = exitExpr;
+      /* Change the world */
+      dungeonsDest.delete(destDungeon);
+      const sourceEntrance = dungeonEntrances[dungeon];
+      const sourceExit = dungeonExits[dungeon];
+      const destEntrance = dungeonEntrances[destDungeon];
+      const destExit = dungeonExits[destDungeon];
+      this.world.areas[sourceEntrance.from].exits[destEntrance.to] = sourceEntrance.expr;
+      this.world.areas[destExit.from].exits[sourceExit.to] = destExit.expr;
 
       /* Mark the overrides */
-      const entranceOverride = this.result.overrides[srcEntrance.from] || {};
-      entranceOverride[srcEntrance.to] = { from: dstEntrance.from, to: dstEntrance.to };
-      this.result.overrides[srcEntrance.from] = entranceOverride;
+      const entranceOverride = this.result.overrides[sourceEntrance.from] || {};
+      entranceOverride[sourceEntrance.to] = { from: destEntrance.from, to: destEntrance.to };
+      this.result.overrides[sourceEntrance.from] = entranceOverride;
 
-      const exitOverride = this.result.overrides[srcExit.from] || {};
-      exitOverride[srcExit.to] = { from: dstExit.from, to: dstExit.to };
-      this.result.overrides[srcExit.from] = exitOverride;
+      const exitOverride = this.result.overrides[destExit.from] || {};
+      exitOverride[destExit.to] = { from: sourceExit.from, to: sourceExit.to };
+      this.result.overrides[destExit.from] = exitOverride;
+
+      /* Store the dungeon */
+      this.result.dungeons[DUNGEON_INDEX[destDungeon]] = DUNGEON_INDEX[dungeon];
     }
   }
 
