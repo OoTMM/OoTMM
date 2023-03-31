@@ -847,7 +847,7 @@
     "Music Box House": "event(IKANA_CURSE_LIFTED)"
     "Ghost Hut": "true"
     "Beneath the Well Entrance": "true"
-    "Ancient Castle of Ikana Entrance": "true"
+    "Ikana Castle Entrance": "true"
     "Stone Tower": "true"
   events:
     IKANA_CANYON_OWL: "can_play(SONG_SOARING)"
@@ -877,6 +877,19 @@
     "Ikana Canyon": "true"
   locations:
     "Ghost Hut HP": "has(BOW) || can_hookshot_short || can_use_deku_bubble"
+"Ikana Castle Entrance":
+  region: IKANA_CASTLE
+  exits:
+    "Ikana Castle Exterior": "(has_mirror_shield && event(IKANA_CASTLE_LIGHT_ENTRANCE)) || can_use_light_arrows"
+    "Ikana Canyon": "true"
+  events:
+    IKANA_CASTLE_LIGHT_ENTRANCE: "can_activate_crystal"
+"Ikana Castle Exterior":
+  region: IKANA_CASTLE
+  exits:
+    "Beneath the Well End": "true"
+    "Ikana Castle Entrance": "can_use_light_arrows"
+    "Ancient Castle of Ikana": "true"
 "Stone Tower":
   region: STONE_TOWER
   exits:
