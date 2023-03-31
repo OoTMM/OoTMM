@@ -808,7 +808,6 @@
     BEAN_DESERT_COLOSSUS: "can_use_beans"
   locations:
     "Desert Colossus HP": "can_ride_bean(BEAN_DESERT_COLOSSUS)"
-    "Desert Colossus Song Spirit": "true"
     "Great Fairy Nayru's Love": "has_explosives && can_play(SONG_ZELDA)"
     "Desert Colossus Grotto Front Scrub": "can_lift_silver && can_hit_scrub"
     "Desert Colossus Grotto Back Scrub": "can_lift_silver && can_hit_scrub"
@@ -817,3 +816,9 @@
     "Desert Colossus GS Plateau": "gs_night && (can_longshot || can_ride_bean(BEAN_DESERT_COLOSSUS))"
   gossip:
     "Desert Colossus Gossip": "true"
+"Desert Colossus Spirit Exit":
+  region: DESERT_COLOSSUS
+  exits:
+    "Desert Colossus": "true"
+  locations:
+    "Desert Colossus Song Spirit": "true"

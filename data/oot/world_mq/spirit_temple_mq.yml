@@ -1,7 +1,7 @@
 "Spirit Temple":
   dungeon: Spirit
   exits:
-    "Desert Colossus": "true"
+    "Desert Colossus Spirit Exit": "true"
     "Spirit Temple Child Side": "is_child"
     "Spirit Temple Statue": "can_longshot && has_explosives && can_lift_silver"
   events:
