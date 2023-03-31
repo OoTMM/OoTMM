@@ -100,3 +100,12 @@ PATCH_START 0x808354d8
   jal Player_WriteTransitionFlag
    nop
 PATCH_END
+
+/* Reset deku form on void */
+PATCH_START 0x8083bda0
+  nop
+  nop
+  nop
+  nop
+  nop
+PATCH_END
