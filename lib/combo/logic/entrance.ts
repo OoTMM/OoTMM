@@ -322,7 +322,7 @@ export class LogicPassEntrances {
       ['SSH', 'OSH'].forEach(d => shuffledDungeons.add(d));
     }
     if (this.input.settings.erPirateFortress) {
-      ['PF'].forEach(d => validDungeons.add(d));
+      ['PF'].forEach(d => shuffledDungeons.add(d));
     }
     if (this.input.settings.erBeneathWell) {
       ['BtW', 'BtWE'].forEach(d => shuffledDungeons.add(d));
