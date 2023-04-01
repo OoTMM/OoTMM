@@ -328,7 +328,7 @@
     "Lost Woods Scrub Near Theater Left": "is_child && can_hit_scrub"
     "Lost Woods Scrub Near Theater Right": "is_child && can_hit_scrub"
     "Lost Woods GS Soil Theater": "gs_soil && can_damage_skull"
-    "Lost Woods GS Bean Ride": "gs_night && can_ride_bean(BEAN_LOST_WOODS_LATE)"
+    "Lost Woods GS Bean Ride": "gs_night && (can_ride_bean(BEAN_LOST_WOODS_LATE) || (trick(OOT_LOST_WOODS_ADULT_GS) && can_hookshot && (can_longshot || can_use_bow || has_bombchu || can_use_din)))"
 "Deku Theater":
   region: LOST_WOODS
   exits:
@@ -368,7 +368,7 @@
     "Kakariko Anju Bottle": "is_child"
     "Kakariko Anju Egg": "is_adult"
     "Kakariko Anju Cojiro": "adult_trade(POCKET_CUCCO)"
-    "Windmill HP": "can_boomerang || (is_adult && can_play(SONG_TIME))"
+    "Windmill HP": "can_boomerang || (is_adult && (can_play(SONG_TIME) || trick(OOT_WINDMILL_HP_NOTHING)))"
     "Windmill Song of Storms": "is_adult && has(OCARINA)"
     "Kakariko Song Shadow": "is_adult && has(MEDALLION_FOREST) && has(MEDALLION_FIRE) && has(MEDALLION_WATER)"
     "Kakariko Man on Roof": "can_hookshot || trick(OOT_MAN_ON_ROOF)"
@@ -631,7 +631,7 @@
     "Lake Hylia Grotto Left Scrub": "can_hit_scrub"
     "Lake Hylia Grotto Center Scrub": "can_hit_scrub"
     "Lake Hylia Grotto Right Scrub": "can_hit_scrub"
-    "Lake Hylia GS Lab Wall": "gs_night && can_boomerang"
+    "Lake Hylia GS Lab Wall": "gs_night && (can_boomerang || (trick(OOT_LAB_WALL_GS) && (has_sword_kokiri || has_sticks)))"
     "Lake Hylia GS Island": "is_child && gs_night && can_damage_skull"
     "Lake Hylia GS Soil": "gs_soil && can_damage_skull"
     "Lake Hylia GS Big Tree": "gs_night && can_longshot"
@@ -644,7 +644,7 @@
   exits:
     "Lake Hylia": "true"
   locations:
-    "Laboratory Dive": "has(SCALE, 2)"
+    "Laboratory Dive": "has(SCALE, 2) || (trick(OOT_LAB_DIVE_NO_GOLD_SCALE) && has_iron_boots && can_hookshot)"
     "Laboratory Eye Drops": "adult_trade(EYEBALL_FROG)"
     "Laboratory GS Crate": "has_iron_boots && can_hookshot"
 "Fishing Pond":
