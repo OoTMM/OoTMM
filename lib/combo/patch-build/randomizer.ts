@@ -187,8 +187,12 @@ const gi = (settings: Settings, game: Game, item: string, generic: boolean) => {
   if (!DATA_GI.hasOwnProperty(item)) {
     throw new Error(`Unknown item ${item}`);
   }
-  let value = DATA_GI[item];
 
+  if (settings.zoraMaskInOot) {
+    item = 'OOT_MASK_ZORA';
+  }
+
+  let value = DATA_GI[item];
   if ((/^OOT_/.test(item) && game === 'mm') || (/^MM_/.test(item) && game === 'oot')) {
     value |= 0x100;
   }

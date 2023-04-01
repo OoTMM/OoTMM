@@ -221,6 +221,12 @@ export const SETTINGS = [{
   ],
   default: 'none'
 }, {
+  key: 'zoraMaskInOot',
+  name: 'Zora Transformation in OoT',
+  category: 'main.cross',
+  type: 'boolean',
+  default: false
+}, {
   key: 'csmc',
   name: 'Chest Size Matches Content',
   category: 'main.misc',
