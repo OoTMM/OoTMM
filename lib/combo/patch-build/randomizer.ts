@@ -194,7 +194,7 @@ const gi = (settings: Settings, game: Game, item: string, generic: boolean) => {
 
   let value = DATA_GI[item];
   if ((/^OOT_/.test(item) && game === 'mm') || (/^MM_/.test(item) && game === 'oot')) {
-    value |= 0x100;
+    value |= 0x200;
   }
 
   return value;
