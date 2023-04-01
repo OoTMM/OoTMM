@@ -273,6 +273,12 @@ export const SETTINGS = [{
   type: 'boolean',
   default: false
 }, {
+  key: 'erPirateFortress',
+  name: 'Shuffle Pirate Fortress with Dungeons',
+  category: 'entrances',
+  type: 'boolean',
+  default: false
+}, {
   key: 'erBeneathWell',
   name: 'Shuffle Beneath the Well with Dungeons',
   category: 'entrances',
@@ -501,6 +507,7 @@ export const TRICKS = {
   MM_MAJORA_LOGIC: "Fight Majora to Reset Time",
   MM_SOUTHERN_SWAMP_SCRUB_HP_GORON: "Southern Swamp Scrub HP as Goron",
   MM_ZORA_HALL_SCRUB_HP_NO_DEKU: "Zora Hall Scrub HP without Deku",
+  MM_IKANA_ROOF_PARKOUR: "Jump from Ikana Castle's Roof Interior to Exterior",
 };
 
 export type Tricks = {[k in keyof typeof TRICKS]: boolean};
