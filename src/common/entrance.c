@@ -90,8 +90,8 @@ void comboTransition(GameState_Play* play, const EntranceDescr* descr)
     if (descr->isMM)
     {
         play->nextEntrance = descr->id;
-        play->transitionType = TRANS_TYPE_NORMAL;
-        play->transitionGfx = TRANS_GFX_BLACK;
+        play->transitionTrigger = TRANS_TRIGGER_NORMAL;
+        play->transitionType = TRANS_TYPE_BLACK;
     }
     else
     {

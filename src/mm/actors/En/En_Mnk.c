@@ -13,8 +13,8 @@ static void EnMnk_SongCutscene(Actor* actor, GameState_Play* play)
     {
         MM_SET_EVENT_WEEK(EV_MM_WEEK_MONKEY_PUNISHED);
         play->nextEntrance = ((SCE_MM_DEKU_PALACE - 3) << 9) | (1 << 4);
-        play->transitionType = TRANS_TYPE_NORMAL;
-        play->transitionGfx = TRANS_GFX_BLACK;
+        play->transitionTrigger = TRANS_TRIGGER_NORMAL;
+        play->transitionType = TRANS_TYPE_BLACK;
     }
     else
     {

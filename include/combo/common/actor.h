@@ -59,33 +59,33 @@ typedef struct PACKED ALIGNED(0x4) Actor
     u8          type;
     u8          room;
     s32         flags;
-    Vector3f    initPos;
-    Vector3s    initRot;
+    Vec3f       initPos;
+    Vec3s       initRot;
     char        unk2[0x02];
     u16         variable;
     s8          objTableIndex;
     char        unk3[5];
-    Vector3f    position;
-    Vector3s    speedRot;
+    Vec3f       position;
+    Vec3s       speedRot;
     u16         unk_36;
 #if defined(GAME_MM)
     u32         unk_mm0;
 #endif
-    Vector3f    pos3;
-    Vector3s    rot1;
+    Vec3f       pos3;
+    Vec3s       rot1;
 #if defined(GAME_MM)
     u32         unk_mm1;
 #endif
     char        unk_4a[0x06];
-    Vector3f    scale;
-    Vector3f    velocity;
+    Vec3f       scale;
+    Vec3f       velocity;
     float       speedXZ;
     float       gravity;
     float       minVelocityY;
     char        unk_74[0x1c];
     float       xzDistanceFromLink;
     char        unk_94[0x20];
-    Vector3s    rot2;
+    Vec3s       rot2;
     char        unk_ba[2];
     float       modelOffsetY;
     char        unk_c0[0x4e];
