@@ -158,10 +158,10 @@ typedef struct
 {
     u32             mq;
     u8              config[0x40];
+    SpecialCond     special[2];
     ComboDataHints  hints;
     u8              boss[12];
     u8              dungeons[23];
-    SpecialCond     special[2];
 }
 ComboData;
 
