@@ -382,6 +382,9 @@ export class LogicPassAnalysis {
     this.dependencies['SHARED_MASK_KEATON'] = [...this.dependencies['MM_MASK_KEATON']];
     this.dependencies['SHARED_MASK_BUNNY'] = [...this.dependencies['MM_MASK_BUNNY']];
 
+    if (this.dependencies.hasOwnProperty('OOT_SONG_SUN'))
+      this.dependencies['SHARED_SONG_SUN'] = [...this.dependencies['OOT_SONG_SUN']];
+
     const conds = Object.values(this.state.settings.specialConds);
     if (conds.some(x => x.count && x.skullsGold))  delete this.dependencies['OOT_GS_TOKEN'];
     if (conds.some(x => x.count && x.skullsSwamp)) delete this.dependencies['MM_GS_TOKEN_SWAMP'];

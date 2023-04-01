@@ -227,6 +227,12 @@ export const SETTINGS = [{
   type: 'boolean',
   default: false
 }, {
+  key: 'sunSongMm',
+  name: 'Sun\'s Song in MM',
+  category: 'main.cross',
+  type: 'boolean',
+  default: false
+}, {
   key: 'csmc',
   name: 'Chest Size Matches Content',
   category: 'main.misc',

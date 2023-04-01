@@ -410,6 +410,9 @@ void comboAddCommonItemMm(int sid, int noEffect)
         if (noEffect)
             addHealth(20);
         break;
+    case SITEM_SONG_SUN:
+        gMmSave.inventory.quest.songSun = 1;
+        break;
     }
 }
 
@@ -512,6 +515,9 @@ void comboAddItemSharedMm(s16 gi, int noEffect)
             break;
         case GI_MM_SONG_STORMS:
             comboAddCommonItemOot(SITEM_SONG_STORMS, noEffect);
+            break;
+        case GI_MM_SONG_SUN:
+            comboAddCommonItemOot(SITEM_SONG_SUN, noEffect);
             break;
         }
     }
@@ -959,6 +965,9 @@ int comboAddItemMm(s16 gi, int noEffect)
         break;
     case GI_MM_SONG_GORON_HALF:
         gMmSave.inventory.quest.songLullabyIntro = 1;
+        break;
+    case GI_MM_SONG_SUN:
+        comboAddCommonItemMm(SITEM_SONG_SUN, noEffect);
         break;
     case GI_MM_BOMBER_NOTEBOOK:
         gMmSave.inventory.quest.notebook = 1;

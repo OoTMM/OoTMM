@@ -153,6 +153,10 @@ export class LogicPassWorldTransform {
       this.replaceItem('MM_SONG_EPONA',    'SHARED_SONG_EPONA');
       this.replaceItem('MM_SONG_STORMS',   'SHARED_SONG_STORMS');
 
+      if (config.has('MM_SONG_SUN')) {
+        this.replaceItem('OOT_SONG_SUN', 'SHARED_SONG_SUN');
+      }
+
       this.removeItem('SHARED_SONG_TIME', 1);
       this.removeItem('SHARED_SONG_EPONA', 1);
       this.removeItem('SHARED_SONG_STORMS', 1);
@@ -337,6 +341,11 @@ export class LogicPassWorldTransform {
     } else {
       this.removeItem('MM_SONG_GORON_HALF');
       this.state.world.songLocations.delete('MM Goron Baby');
+    }
+
+    /* Handle MM sun song */
+    if (this.state.config.has('MM_SONG_SUN') && !this.state.config.has('SHARED_SONGS')) {
+      this.addItem('MM_SONG_SUN');
     }
 
     /* Handle fixed locations */

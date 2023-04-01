@@ -137,6 +137,10 @@ export class LogicPassConfig {
       config.add('MM_HOOKSHOT_SHORT');
     }
 
+    if (this.state.settings.sunSongMm) {
+      config.add('MM_SONG_SUN');
+    }
+
     return { mq, config };
   }
 }
