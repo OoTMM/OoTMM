@@ -20,3 +20,10 @@ void Player_DrawHookshotReticleCustom(GameState_Play* play, Actor_Player* player
 }
 
 PATCH_CALL(0x8082fe58, Player_DpadHook);
+
+void Player_TalkDisplayTextBox(GameState_Play* play, s16 textId, Actor* actor)
+{
+    PlayerDisplayTextBox(play, textId, actor);
+}
+
+PATCH_CALL(0x80837bb0, Player_TalkDisplayTextBox);
