@@ -180,8 +180,8 @@ void hookPlay_Init(GameState_Play* play)
             gSave.time = 0x3fff;
             Sram_SaveNewDay(play);
             play->nextEntrance = 0xd800;
-            play->transitionType = TRANS_TYPE_NORMAL;
-            play->transitionGfx = TRANS_GFX_BLACK;
+            play->transitionTrigger = TRANS_TRIGGER_NORMAL;
+            play->transitionType = TRANS_TYPE_BLACK;
             return;
         }
     }

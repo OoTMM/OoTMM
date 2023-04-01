@@ -1,11 +1,11 @@
 #include <combo.h>
+#include <combo/entrance.h>
 
 void comboTriggerWarp(GameState_Play* play, int bossId)
 {
-    s32 entrance;
+    EntranceDescr descr;
     int dungeonId;
     int dungeonEntranceId;
-    int isMmEntrance;
 
 #if defined(GAME_MM)
     /* Flag the actual boss as dead (MM) */
@@ -63,134 +63,68 @@ void comboTriggerWarp(GameState_Play* play, int bossId)
         break;
     }
 
-    /* Set entrance */
-    isMmEntrance = 0;
+    /* Set entrance - need special case for warp dungeons */
+    comboGetDungeonExit(&descr, dungeonEntranceId);
     switch (dungeonEntranceId)
     {
     case DUNGEONID_DEKU_TREE:
-        entrance = 0x0457; // Works OK as adult
+        descr.id = 0x0457; // Works OK as adult
         break;
     case DUNGEONID_DODONGOS_CAVERN:
-        entrance = 0x0242; // Works OK as adult
+        descr.id = 0x0242; // Works OK as adult
         break;
     case DUNGEONID_JABU_JABU:
-        entrance = 0x0221; // Works OK as adult
+        descr.id = 0x0221; // Works OK as adult
         break;
     case DUNGEONID_TEMPLE_FOREST:
-        entrance = 0x0600; // Normal exit WW as child
+        descr.id = 0x0600; // Normal exit WW as child
         break;
     case DUNGEONID_TEMPLE_FIRE:
-        entrance = 0x04f6; // Normal exit WW as child
+        descr.id = 0x04f6; // Normal exit WW as child
         break;
     case DUNGEONID_TEMPLE_WATER:
-        entrance = 0x0604; // Normal exit WW as child
+        descr.id = 0x0604; // Normal exit WW as child
         break;
     case DUNGEONID_TEMPLE_SHADOW:
-        entrance = 0x0568; // Normal exit crashes as child
+        descr.id = 0x0568; // Normal exit crashes as child
         break;
     case DUNGEONID_TEMPLE_SPIRIT:
-        entrance = 0x01e1; // Normal exit crashes as child
+        descr.id = 0x01e1; // Normal exit crashes as child
         break;
     case DUNGEONID_TEMPLE_WOODFALL:
-        isMmEntrance = 1;
         if (MM_GET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_WF) && MM_GET_EVENT_WEEK(EV_MM_WEEK_WOODFALL_TEMPLE_RISE))
         {
-            entrance = 0x3010;
+            descr.id = 0x3010;
         }
         else
         {
-            entrance = 0x8600;
+            descr.id = 0x8600;
         }
         break;
     case DUNGEONID_TEMPLE_SNOWHEAD:
-        isMmEntrance = 1;
         if (MM_GET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_SH))
         {
-            entrance = 0xae70;
+            descr.id = 0xae70;
         }
         else
         {
-            entrance = 0x9a70;
+            descr.id = 0x9a70;
         }
         break;
     case DUNGEONID_TEMPLE_GREAT_BAY:
-        isMmEntrance = 1;
-        entrance = 0x6a70;
+        descr.id = 0x6a70;
         break;
     case DUNGEONID_TEMPLE_STONE_TOWER:
     case DUNGEONID_TEMPLE_STONE_TOWER_INVERTED:
-        isMmEntrance = 1;
-        entrance = 0x2070;
-        break;
-    case DUNGEONID_SPIDER_HOUSE_SWAMP:
-        isMmEntrance = 1;
-        entrance = 0x8480;
-        break;
-    case DUNGEONID_SPIDER_HOUSE_OCEAN:
-        isMmEntrance = 1;
-        entrance = 0x6880;
-        break;
-    case DUNGEONID_BOTTOM_OF_THE_WELL:
-        entrance = 0x2a6;
-        break;
-    case DUNGEONID_ICE_CAVERN:
-        entrance = 0x3d4;
-        break;
-    case DUNGEONID_GERUDO_TRAINING_GROUNDS:
-        entrance = 0x3a8;
-        break;
-    case DUNGEONID_BENEATH_THE_WELL:
-        isMmEntrance = 1;
-        entrance = 0x2050;
-        break;
-    case DUNGEONID_IKANA_CASTLE:
-        isMmEntrance = 1;
-        entrance = 0x3420;
-        break;
-    case DUNGEONID_SECRET_SHRINE:
-        isMmEntrance = 1;
-        entrance = 0x2060;
-        break;
-    case DUNGEONID_BENEATH_THE_WELL_END:
-        isMmEntrance = 1;
-        entrance = 0x3400;
-        break;
-    default:
-        UNREACHABLE();
+        descr.id = 0x2070;
         break;
     }
-
-#if defined(GAME_OOT)
-    if (!isMmEntrance)
-    {
-        TransitionContext* t;
-
-        t = &play->transition;
-        t->type = TRANS_TYPE_NORMAL;
-        t->gfx = TRANS_GFX_BLACK;
-        t->entrance = entrance;
-    }
-    else
-    {
-        comboGameSwitch(play, entrance);
-    }
-#endif
 
 #if defined(GAME_MM)
-    if (isMmEntrance)
-    {
-        gNoTimeFlow = 0;
-
-        gSave.playerForm = MM_PLAYER_FORM_HUMAN;
-        gSave.equippedMask = 0;
-
-        play->nextEntrance = entrance;
-        play->transitionType = TRANS_TYPE_NORMAL;
-        play->transitionGfx = TRANS_GFX_BLACK;
-    }
-    else
-    {
-        comboGameSwitch(play, entrance);
-    }
+    gNoTimeFlow = 0;
+    gSave.playerForm = MM_PLAYER_FORM_HUMAN;
+    gSave.equippedMask = 0;
 #endif
+
+    comboTransition(play, &descr);
 }

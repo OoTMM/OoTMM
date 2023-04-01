@@ -100,6 +100,7 @@
 #define DUNGEONID_IKANA_CASTLE                      0x13
 #define DUNGEONID_SECRET_SHRINE                     0x14
 #define DUNGEONID_BENEATH_THE_WELL_END              0x15
+#define DUNGEONID_PIRATE_FORTRESS                   0x16
 
 /* MQ IDs */
 #define MQ_DEKU_TREE                0
@@ -157,10 +158,10 @@ typedef struct
 {
     u32             mq;
     u8              config[0x40];
+    SpecialCond     special[2];
     ComboDataHints  hints;
     u8              boss[12];
-    u8              dungeons[22];
-    SpecialCond     special[2];
+    u8              dungeons[23];
 }
 ComboData;
 

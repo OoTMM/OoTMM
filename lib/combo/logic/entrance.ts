@@ -58,6 +58,7 @@ const DUNGEON_INDEX = {
   ACoI: 19,
   SS: 20,
   BtWE: 21,
+  PF: 22,
 } as {[k: string]: number};;
 
 export class LogicPassEntrances {
@@ -320,14 +321,17 @@ export class LogicPassEntrances {
     if (this.input.settings.erSpiderHouses) {
       ['SSH', 'OSH'].forEach(d => shuffledDungeons.add(d));
     }
+    if (this.input.settings.erPirateFortress) {
+      shuffledDungeons.add('PF');
+    }
     if (this.input.settings.erBeneathWell) {
       ['BtW', 'BtWE'].forEach(d => shuffledDungeons.add(d));
     }
     if (this.input.settings.erIkanaCastle) {
-      ['ACoI'].forEach(d => shuffledDungeons.add(d));
+      shuffledDungeons.add('ACoI');
     }
     if (this.input.settings.erSecretShrine) {
-      ['SS'].forEach(d => shuffledDungeons.add(d));
+      shuffledDungeons.add('SS');
     }
 
     /* Get the transitions and exprs */

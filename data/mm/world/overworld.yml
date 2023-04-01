@@ -244,7 +244,7 @@
     "Road to Southern Swamp": "true"
     "Mountain Village Path Lower": "has(BOW)"
     "Milk Road": "true"
-    "Great Bay Fence": "can_play(SONG_EPONA) || can_goron_bomb_jump"
+    "Great Bay Fence": "can_play(SONG_EPONA) || (can_goron_bomb_jump && has(BOMB_BAG))"
     "Road to Ikana Front": "true"
     "Astral Observatory Balcony": "has(MASK_DEKU) || can_goron_bomb_jump"
   locations:
@@ -554,12 +554,12 @@
 "Snowhead":
   region: SNOWHEAD
   exits:
-    "Snowhead Entrance": "event(OPEN_SNOWHEAD_TEMPLE)"
+    "Snowhead Entrance": "true"
     "Snowhead Temple": "true"
 "Snowhead Near Great Fairy Fountain":
   region: SNOWHEAD
   exits:
-    "Snowhead Entrance": "event(OPEN_SNOWHEAD_TEMPLE)"
+    "Snowhead Entrance": "true"
     "Snowhead Great Fairy Fountain": "true"
 "Snowhead Great Fairy Fountain":
   region: SNOWHEAD
@@ -633,8 +633,8 @@
   exits:
     "Fisher's Hut": "true"
     "Great Bay Fence": "true"
-    "Pirate Fortress": "has(MASK_ZORA)"
-    "Pinnacle Rock Entrance": "has(MASK_ZORA)"
+    "Great Bay Coast Fortress": "has(MASK_ZORA)"
+    "Pinnacle Rock Entrance": "true"
     "Laboratory": "true"
     "Zora Cape": "true"
     "Ocean Spider House": "true"
@@ -649,10 +649,11 @@
     "Great Bay Coast Cow Back": "can_hookshot && can_play(SONG_EPONA)"
   gossip:
     "Great Bay Coast Gossip": "true"
-"Great Bay Coast Captured":
+"Great Bay Coast Fortress":
   region: GREAT_BAY_COAST
   exits:
-    "Great Bay Coast": "true"
+    "Great Bay Coast": "has(MASK_ZORA)"
+    "Pirate Fortress": "true"
 "Fisher's Hut":
   region: GREAT_BAY_COAST
   exits:

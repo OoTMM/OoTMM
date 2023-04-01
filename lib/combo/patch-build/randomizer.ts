@@ -484,10 +484,10 @@ export const randomizerData = (logic: LogicResult): Buffer => {
   const buffers = [];
   buffers.push(randomizerMq(logic));
   buffers.push(randomizerConfig(logic.config));
+  buffers.push(specialConds(logic.settings));
   buffers.push(randomizerHints(logic));
   buffers.push(randomizerBoss(logic));
   buffers.push(randomizerDungeons(logic));
-  buffers.push(specialConds(logic.settings));
   return Buffer.concat(buffers);
 };
 

@@ -118,7 +118,7 @@ MmPermanentSceneFlags;
 typedef struct
 {
     s16         scene;
-    Vector3s    pos;
+    Vec3s       pos;
     s16         yaw;
 }
 MmHorseData;

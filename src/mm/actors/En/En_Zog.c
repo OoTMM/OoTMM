@@ -10,8 +10,8 @@ void EnZog_GiveItem(Actor* this, GameState_Play* play)
         if (!(GET_LINK(play)->state & PLAYER_ACTOR_STATE_GET_ITEM))
         {
             play->nextEntrance = 0x68a0;
-            play->transitionType = TRANS_TYPE_NORMAL;
-            play->transitionGfx = TRANS_GFX_BLACK;
+            play->transitionTrigger = TRANS_TRIGGER_NORMAL;
+            play->transitionType = TRANS_TYPE_BLACK;
             ActorDestroy(this);
         }
     }

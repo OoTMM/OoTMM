@@ -17,11 +17,13 @@ Swamp Spider House,                 Swamp Back,                             0x48
 Swamp Back,                         Swamp Spider House,                     0x8480
 Ocean Spider House,                 Great Bay Coast,                        0x4a00
 Great Bay Coast,                    Ocean Spider House,                     0x6880
-Beneath the Well End,               Ikana Castle Exterior,                  0x9010
-Ikana Castle Exterior,              Beneath the Well End,                   0x3400
-Ikana Canyon,                       Beneath the Well Entrance,              0x2050
 Beneath the Well Entrance,          Ikana Canyon,                           0x9000
-Ikana Valley,                       Secret Shrine Entrance,                 0x20c0
-Secret Shrine Entrance,             Ikana Valley,                           0xba00
+Ikana Canyon,                       Beneath the Well Entrance,              0x2050
 Ancient Castle of Ikana,            Ikana Castle Exterior,                  0x3430
 Ikana Castle Exterior,              Ancient Castle of Ikana,                0x3420
+Secret Shrine Entrance,             Ikana Valley,                           0xba00
+Ikana Valley,                       Secret Shrine Entrance,                 0x20c0
+Beneath the Well End,               Ikana Castle Exterior,                  0x9010
+Ikana Castle Exterior,              Beneath the Well End,                   0x3400
+Pirate Fortress,                    Great Bay Coast Fortress,               0x7000
+Great Bay Coast Fortress,           Pirate Fortress,                        0x6850

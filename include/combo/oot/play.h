@@ -130,7 +130,7 @@ typedef struct PACKED
     /* 0x01D0 */ OSMesg loadMsg;
     /* 0x01D4 */ u16 state;
     /* 0x01D6 */ u16 debugState;
-    /* 0x01D8 */ Vector3f eye;
+    /* 0x01D8 */ Vec3f eye;
     /* 0x01E4 */ u16 changing;
     /* 0x01E6 */ u16 screen_prev_idx;
     /* 0x01E8 */ u16 screen_idx;
