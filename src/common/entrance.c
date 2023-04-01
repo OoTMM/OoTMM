@@ -67,3 +67,35 @@ void comboGetDungeonExit(EntranceDescr* dst, int dungeonId)
 
     memcpy(dst, &kDungeonExits[dungeonId], sizeof(EntranceDescr));
 }
+
+void comboTransition(GameState_Play* play, const EntranceDescr* descr)
+{
+#if defined(GAME_OOT)
+    if (!descr->isMM)
+    {
+        TransitionContext* t;
+
+        t = &play->transition;
+        t->type = TRANS_TYPE_NORMAL;
+        t->gfx = TRANS_GFX_BLACK;
+        t->entrance = descr->id;
+    }
+    else
+    {
+        comboGameSwitch(play, descr->id);
+    }
+#endif
+
+#if defined(GAME_MM)
+    if (descr->isMM)
+    {
+        play->nextEntrance = descr->id;
+        play->transitionType = TRANS_TYPE_NORMAL;
+        play->transitionGfx = TRANS_GFX_BLACK;
+    }
+    else
+    {
+        comboGameSwitch(play, descr->id);
+    }
+#endif
+}

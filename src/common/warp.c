@@ -120,37 +120,11 @@ void comboTriggerWarp(GameState_Play* play, int bossId)
         break;
     }
 
-#if defined(GAME_OOT)
-    if (!descr.isMM)
-    {
-        TransitionContext* t;
-
-        t = &play->transition;
-        t->type = TRANS_TYPE_NORMAL;
-        t->gfx = TRANS_GFX_BLACK;
-        t->entrance = descr.id;
-    }
-    else
-    {
-        comboGameSwitch(play, descr.id);
-    }
-#endif
-
 #if defined(GAME_MM)
-    if (descr.isMM)
-    {
-        gNoTimeFlow = 0;
-
-        gSave.playerForm = MM_PLAYER_FORM_HUMAN;
-        gSave.equippedMask = 0;
-
-        play->nextEntrance = descr.id;
-        play->transitionType = TRANS_TYPE_NORMAL;
-        play->transitionGfx = TRANS_GFX_BLACK;
-    }
-    else
-    {
-        comboGameSwitch(play, descr.id);
-    }
+    gNoTimeFlow = 0;
+    gSave.playerForm = MM_PLAYER_FORM_HUMAN;
+    gSave.equippedMask = 0;
 #endif
+
+    comboTransition(play, &descr);
 }

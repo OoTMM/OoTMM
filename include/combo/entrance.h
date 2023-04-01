@@ -3,6 +3,8 @@
 
 #include <combo/types.h>
 
+typedef struct GameState_Play GameState_Play;
+
 typedef struct
 {
     u16 id;
@@ -11,5 +13,6 @@ typedef struct
 EntranceDescr;
 
 void comboGetDungeonExit(EntranceDescr* dst, int dungeonId);
+void comboTransition(GameState_Play* play, const EntranceDescr* descr);
 
 #endif
