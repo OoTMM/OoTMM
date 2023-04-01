@@ -322,16 +322,16 @@ export class LogicPassEntrances {
       ['SSH', 'OSH'].forEach(d => shuffledDungeons.add(d));
     }
     if (this.input.settings.erPirateFortress) {
-      ['PF'].forEach(d => shuffledDungeons.add(d));
+      shuffledDungeons.add('PF');
     }
     if (this.input.settings.erBeneathWell) {
       ['BtW', 'BtWE'].forEach(d => shuffledDungeons.add(d));
     }
     if (this.input.settings.erIkanaCastle) {
-      ['ACoI'].forEach(d => shuffledDungeons.add(d));
+      shuffledDungeons.add('ACoI');
     }
     if (this.input.settings.erSecretShrine) {
-      ['SS'].forEach(d => shuffledDungeons.add(d));
+      shuffledDungeons.add('SS');
     }
 
     /* Get the transitions and exprs */
