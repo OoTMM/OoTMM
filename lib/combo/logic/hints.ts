@@ -143,6 +143,10 @@ export class LogicPassHints {
     if (this.state.fixedLocations.has(loc)) {
       return false;
     }
+    const region = this.state.world.regions[loc];
+    if (!region || region === 'NONE') {
+      return false;
+    }
     if (isSmallKeyHideout(item) && this.state.settings.smallKeyShuffleHideout === 'anywhere') {
       return true;
     }
@@ -175,6 +179,7 @@ export class LogicPassHints {
 
   private isLocationHintableHero(loc: string) {
     const item = this.state.items[loc];
+    const region = this.state.world.regions[loc];
     if (!this.isLocationHintable(loc)) {
       return false;
     }
