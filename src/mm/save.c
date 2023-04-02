@@ -68,7 +68,7 @@ void Sram_SaveEndOfCycleWrapper(GameState_Play* play)
 
     /* Store a dummy scene/entrance in OoT (prevents reloading into a temple - could lead to softlocks) */
     gOotSave.sceneId = SCE_OOT_LINK_HOUSE;
-    gOotSave.entranceId = 0x00bb;
+    gOotSave.entrance = 0x00bb;
 
     Sram_SaveEndOfCycle(play);
 
