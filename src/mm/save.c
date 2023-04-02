@@ -36,6 +36,7 @@ void Sram_AfterOpenSave(void)
         if (gComboCtx.entrance != -1)
         {
             gSave.entranceIndex = gComboCtx.entrance;
+            g.initialEntrance = gComboCtx.entrance;
             gComboCtx.entrance = -1;
         }
 

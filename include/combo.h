@@ -445,6 +445,15 @@ extern u8 gCustomOcarinaSong;
 /* Special */
 int comboSpecialCond(int special);
 
+/* Global data */
+typedef struct
+{
+    u16 initialEntrance;
+}
+ComboGlobal;
+
+extern ComboGlobal g;
+
 #if defined (GAME_OOT)
 extern u16 gPrevPageIndex;
 extern s16 gPrevCursorPoint;
