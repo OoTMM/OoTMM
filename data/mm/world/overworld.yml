@@ -242,6 +242,8 @@
     "Termina Field Gossip Near Observatory": "true"
 "Termina Field":
   region: TERMINA_FIELD
+  events:
+    STICKS: "true"
   exits:
     "Clock Town South": "true"
     "Clock Town North": "true"
