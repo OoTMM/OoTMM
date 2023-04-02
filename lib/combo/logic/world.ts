@@ -46,6 +46,7 @@ export type WorldEntrance = {
   type: 'boss' | 'dungeon' | 'overworld';
   from: string;
   to: string;
+  game: Game;
 };
 
 export type World = {
@@ -257,7 +258,7 @@ export class LogicPassWorld {
       const from = gameId(game, String(record.from), ' ');
       const to = gameId(game, String(record.to), ' ');
       const type = String(record.type) as WorldEntrance['type'];
-      this.world.entrances.push({ from, to, type });
+      this.world.entrances.push({ from, to, type, game });
     }
   }
 }

@@ -1,17 +1,19 @@
-import { cloneDeep } from "lodash";
+import { cloneDeep } from 'lodash';
 
-import { Random, sample, shuffle } from "../random";
-import { Settings } from "../settings";
-import { DUNGEONS_REGIONS, ExprMap, World, WorldArea, WorldEntrance } from "./world";
+import { Random, sample, shuffle } from '../random';
+import { Settings } from '../settings';
+import { DUNGEONS_REGIONS, ExprMap, World, WorldEntrance } from './world';
 import { Pathfinder, EntranceOverrides } from './pathfind';
-import { Monitor } from "../monitor";
-import { LogicEntranceError, LogicError } from "./error";
-import { Expr, exprTrue } from "./expr";
+import { Monitor } from '../monitor';
+import { LogicEntranceError, LogicError } from './error';
+import { Expr, exprTrue } from './expr';
+import { Game } from '../config';
 
 type Entrance = {
   from: string;
   to: string;
   expr: Expr;
+  game: Game;
 };
 
 export type EntranceShuffleResult = {
@@ -350,12 +352,12 @@ export class LogicPassEntrances {
 
       /* Entrance */
       if (to.dungeon) {
-        dungeonEntrances[to.dungeon] = { from: e.from, to: e.to, expr };
+        dungeonEntrances[to.dungeon] = { from: e.from, to: e.to, expr, game: e.game };
       }
 
       /* Exit */
       if (from.dungeon) {
-        dungeonExits[from.dungeon] = { from: e.from, to: e.to, expr };
+        dungeonExits[from.dungeon] = { from: e.from, to: e.to, expr, game: e.game };
       }
 
       /* Remove the transition */
@@ -411,6 +413,7 @@ export class LogicPassEntrances {
       from: e.from,
       to: e.to,
       expr: this.world.areas[e.from].exits[e.to],
+      game: e.game,
     }));
 
     /* Delete the overworld entrances from the world */
