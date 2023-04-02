@@ -126,7 +126,7 @@
     "Market Bazaar": "true"
     "Market Potion Shop": "true"
     "Market Bombchu Shop": "true"
-    "MM SPAWN": "is_child"
+    "MM Clock Town": "is_child"
   gossip:
     "Market Gossip Outside Temple Leftmost": "true"
     "Market Gossip Outside Temple Left-Center": "true"
