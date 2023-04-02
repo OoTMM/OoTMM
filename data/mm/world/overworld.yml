@@ -19,6 +19,8 @@
 "Clock Town South":
   region: CLOCK_TOWN_SOUTH
   exits:
+    "OOT Market": "age(child)"
+    "OOT Market Destroyed": "age(adult)"
     "Termina Field": "true"
     "Clock Town North": "true"
     "Clock Town West": "true"

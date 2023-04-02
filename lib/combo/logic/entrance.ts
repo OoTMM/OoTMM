@@ -405,8 +405,43 @@ export class LogicPassEntrances {
     }
   }
 
+  private placeOverworld() {
+    /* Get overworld entrances */
+    const entrances: Entrance[] = this.world.entrances.filter(e => e.type === 'overworld').map(e => ({
+      from: e.from,
+      to: e.to,
+      expr: this.world.areas[e.from].exits[e.to],
+    }));
+
+    /* Delete the overworld entrances from the world */
+    for (const e of entrances) {
+      delete this.world.areas[e.from].exits[e.to];
+    }
+
+    /* Shuffle the entrances */
+    const indices = shuffle(this.input.random, [...Array(entrances.length / 2).keys()]);
+
+    /* Apply the entrances */
+    for (let i = 0; i < indices.length; ++i) {
+      const entranceSrc = entrances[i * 2 + 0];
+      const entranceDst = entrances[indices[i] * 2 + 0];
+      const exitSrc = entrances[i * 2 + 1];
+      const exitDst = entrances[indices[i] * 2 + 1];
+
+      /* Change the world */
+      this.world.areas[entranceSrc.from].exits[entranceDst.to] = entranceSrc.expr;
+      this.world.areas[exitDst.from].exits[exitSrc.to] = exitDst.expr;
+
+      /* Mark the overrides */
+      this.result.overrides[entranceSrc.from] = { [entranceSrc.to]: { from: entranceDst.from, to: entranceDst.to } };
+      this.result.overrides[exitDst.from] = { [exitDst.to]: { from: exitSrc.from, to: exitSrc.to } };
+    }
+  }
+
   run() {
     this.input.monitor.log(`Logic: Entrances (attempt ${this.input.attempts})`);
+
+    this.placeOverworld();
 
     if (this.input.settings.erDungeons !== 'none') {
       this.fixDungeons();

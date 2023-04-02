@@ -29,13 +29,13 @@ Ice Cavern,                     Zora Fountain Frozen,             dungeon,    0x
 Zora Fountain Frozen,           Ice Cavern,                       dungeon,    0x3d4
 Gerudo Training Grounds,        Gerudo Fortress Exterior,         dungeon,    0x008
 Gerudo Fortress Exterior,       Gerudo Training Grounds,          dungeon,    0x3a8
-Hyrule Field,                   Lost Woods Bridge,                overworld,  0x185
 Lost Woods Bridge,              Hyrule Field,                     overworld,  0x4de
-Hyrule Field,                   Zora River Front,                 overworld,  0x181
+Hyrule Field,                   Lost Woods Bridge,                overworld,  0x185
 Zora River Front,               Hyrule Field,                     overworld,  0x0ea
-Hyrule Field,                   Kakariko,                         overworld,  0x17d
+Hyrule Field,                   Zora River Front,                 overworld,  0x181
 Kakariko,                       Hyrule Field,                     overworld,  0x0db
-Hyrule Field,                   Lon Lon Ranch,                    overworld,  0x1f9
+Hyrule Field,                   Kakariko,                         overworld,  0x17d
 Lon Lon Ranch,                  Hyrule Field,                     overworld,  0x157
-Hyrule Field,                   Lake Hylia,                       overworld,  0x189
+Hyrule Field,                   Lon Lon Ranch,                    overworld,  0x1f9
 Lake Hylia,                     Hyrule Field,                     overworld,  0x102
+Hyrule Field,                   Lake Hylia,                       overworld,  0x189

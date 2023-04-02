@@ -6,6 +6,7 @@ GameState_Play* gPlay;
 static void debugCheat(GameState_Play* play)
 {
 #if defined(DEBUG)
+    MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_SH);
     if (play->gs.input[0].current.buttons & L_TRIG)
     {
         gSave.inventory.dungeonKeys[SCE_OOT_TEMPLE_FIRE] = 8;

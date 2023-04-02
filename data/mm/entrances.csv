@@ -27,11 +27,11 @@ Beneath the Well End,               Ikana Castle Exterior,                  dung
 Ikana Castle Exterior,              Beneath the Well End,                   dungeon,    0x3400
 Pirate Fortress,                    Great Bay Coast Fortress,               dungeon,    0x7000
 Great Bay Coast Fortress,           Pirate Fortress,                        dungeon,    0x6850
-Road to Swamp,                      Swamp Front,                            overworld,  0x7a10
-Swamp Front,                        Road to Swamp,                          overworld,  0x8400
-Mountain Village Path Upper,        Mountain Village,                       overworld,  0x3210
+Swamp Front,                        Road to Southern Swamp,                 overworld,  0x8400
+Road to Southern Swamp,             Swamp Front,                            overworld,  0x7a10
 Mountain Village,                   Mountain Village Path Upper,            overworld,  0x9a60
-Great Bay Fence,                    Great Bay Coast,                        overworld,  0x5420
+Mountain Village Path Upper,        Mountain Village,                       overworld,  0x3210
 Great Bay Coast,                    Great Bay Fence,                        overworld,  0x6800
-Road to Ikana Top,                  Ikana Valley,                           overworld,  0xa010
+Great Bay Fence,                    Great Bay Coast,                        overworld,  0x5420
 Ikana Valley,                       Road to Ikana Top,                      overworld,  0x2000
+Road to Ikana Top,                  Ikana Valley,                           overworld,  0xa010
