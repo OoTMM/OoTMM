@@ -18,7 +18,7 @@ typedef struct PACKED ALIGNED(4)
 }
 Entrance;
 
-ALIGNED(16) static Entrance gEntrances[0x20];
+ALIGNED(16) static Entrance gEntrances[0x100];
 
 void comboInitEntrances(void)
 {
