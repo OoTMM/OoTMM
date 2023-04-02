@@ -221,12 +221,6 @@ export const SETTINGS = [{
   ],
   default: 'none'
 }, {
-  key: 'zoraMaskInOot',
-  name: 'Zora Transformation in OoT',
-  category: 'main.cross',
-  type: 'boolean',
-  default: false
-}, {
   key: 'sunSongMm',
   name: 'Sun\'s Song in MM',
   category: 'main.cross',
