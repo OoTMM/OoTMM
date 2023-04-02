@@ -21,8 +21,6 @@
     "Oath to Order": "true"
 "Clock Town":
   region: CLOCK_TOWN_SOUTH
-  events:
-    CLOCK_TOWN: "true"
   exits:
     "GLOBAL": "true"
     "Clock Town South": "can_reset_time"
