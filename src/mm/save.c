@@ -67,8 +67,8 @@ void Sram_SaveEndOfCycleWrapper(GameState_Play* play)
     gNoTimeFlow = 0;
 
     /* Store a dummy scene/entrance in OoT (prevents reloading into a temple - could lead to softlocks) */
-    gOotSave.sceneId = SCE_OOT_LINK_HOUSE;
-    gOotSave.entrance = 0x00bb;
+    gOotSave.sceneId = SCE_OOT_TEMPLE_OF_TIME;
+    gOotSave.entrance = 0x05f4;
 
     Sram_SaveEndOfCycle(play);
 
