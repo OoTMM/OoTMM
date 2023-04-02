@@ -189,8 +189,6 @@ static void endGame(void)
     }
 }
 
-static u8 sInGrotto;
-
 static u32 entranceForOverride(u32 entrance)
 {
     switch (entrance)
@@ -214,7 +212,7 @@ void hookPlay_Init(GameState_Play* play)
     gPlay = play;
 
     /* Handle transition override */
-    if (sInGrotto)
+    if (g.inGrotto)
         gIsEntranceOverride = 0;
     if (gIsEntranceOverride)
     {
@@ -276,8 +274,8 @@ void hookPlay_Init(GameState_Play* play)
 
     Play_Init(play);
     gLastEntrance = gSave.entrance;
-    sInGrotto = (play->sceneId == SCE_OOT_GROTTOS || play->sceneId == SCE_OOT_FAIRY_FOUNTAIN);
-    if (!sInGrotto)
+    g.inGrotto = (play->sceneId == SCE_OOT_GROTTOS || play->sceneId == SCE_OOT_FAIRY_FOUNTAIN);
+    if (!g.inGrotto)
     {
         gLastScene = play->sceneId;
     }

@@ -94,6 +94,8 @@ void hookPlay_Init(GameState_Play* play)
     isEndOfGame = 0;
 
     /* Handle transition override */
+    if (g.inGrotto)
+        gIsEntranceOverride = 0;
     if (gIsEntranceOverride)
     {
         gIsEntranceOverride = 0;
@@ -161,7 +163,8 @@ void hookPlay_Init(GameState_Play* play)
     Play_Init(play);
     gPlay = play;
     gLastEntrance = gSave.entranceIndex;
-    if (play->sceneId != SCE_MM_GROTTOS)
+    g.inGrotto = (play->sceneId == SCE_MM_GROTTOS);
+    if (!g.inGrotto)
     {
         gLastScene = play->sceneId;
     }

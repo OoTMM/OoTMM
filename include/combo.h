@@ -449,6 +449,7 @@ int comboSpecialCond(int special);
 typedef struct
 {
     u16 initialEntrance;
+    u8  inGrotto;
 }
 ComboGlobal;
 
