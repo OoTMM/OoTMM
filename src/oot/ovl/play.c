@@ -191,6 +191,21 @@ static void endGame(void)
 
 static u8 sInGrotto;
 
+static u32 entranceForOverride(u32 entrance)
+{
+    switch (entrance)
+    {
+    case 0x1d9:
+        /* Water entrance to zora river */
+        return 0x0ea;
+    case 0x311:
+        /* Water entrance to hyrule */
+        return 0x181;
+    default:
+        return entrance;
+    }
+}
+
 void hookPlay_Init(GameState_Play* play)
 {
     s32 override;
@@ -204,7 +219,7 @@ void hookPlay_Init(GameState_Play* play)
     if (gIsEntranceOverride)
     {
         gIsEntranceOverride = 0;
-        override = comboEntranceOverride(gSave.entrance);
+        override = comboEntranceOverride(entranceForOverride(gSave.entrance));
         if (override != -1)
         {
             if (override >= 0)

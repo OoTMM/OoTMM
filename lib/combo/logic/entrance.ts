@@ -433,8 +433,8 @@ export class LogicPassEntrances {
       this.world.areas[exitDst.from].exits[exitSrc.to] = exitDst.expr;
 
       /* Mark the overrides */
-      this.result.overrides[entranceSrc.from] = { [entranceSrc.to]: { from: entranceDst.from, to: entranceDst.to } };
-      this.result.overrides[exitDst.from] = { [exitDst.to]: { from: exitSrc.from, to: exitSrc.to } };
+      this.result.overrides[entranceSrc.from] = { ...this.result.overrides[entranceSrc.from], [entranceSrc.to]: { from: entranceDst.from, to: entranceDst.to } };
+      this.result.overrides[exitDst.from] = { ...this.result.overrides[exitDst.from], [exitDst.to]: { from: exitSrc.from, to: exitSrc.to } };
     }
   }
 
