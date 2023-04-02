@@ -576,7 +576,7 @@
   region: PATH_TO_SNOWHEAD
   events:
     STICKS: "has_explosives || trick_keg_explosives"
-    STICKS: "has_explosives || trick_keg_explosives"
+    NUTS: "has_explosives || trick_keg_explosives"
   exits:
     "Path to Snowhead Middle": "goron_fast_roll"
     "Snowhead Entrance": "true"
