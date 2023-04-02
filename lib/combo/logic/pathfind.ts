@@ -5,7 +5,7 @@ import { Expr } from './expr';
 import { addItem, combinedItems, isItemConsumable, Items } from './items';
 import { ItemPlacement } from './solve';
 import { World } from './world';
-import { isLocationRenewable } from './helpers';
+import { isLocationRenewable } from './locations';
 
 export const AGES = ['child', 'adult'] as const;
 

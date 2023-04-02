@@ -141,6 +141,10 @@ export class LogicPassConfig {
       config.add('MM_SONG_SUN');
     }
 
+    if (this.state.settings.skipZelda) {
+      config.add('OOT_SKIP_ZELDA');
+    }
+
     return { mq, config };
   }
 }

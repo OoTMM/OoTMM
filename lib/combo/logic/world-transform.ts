@@ -1,6 +1,8 @@
 import { Monitor } from '../monitor';
 import { Settings } from '../settings';
+import { exprTrue } from './expr';
 import { Items, addItem, ITEMS_MAPS, ITEMS_COMPASSES } from './items';
+import { LOCATIONS_ZELDA } from './locations';
 import { World } from './world';
 
 const EXTRA_ITEMS = [
@@ -346,6 +348,16 @@ export class LogicPassWorldTransform {
     /* Handle MM sun song */
     if (this.state.config.has('MM_SONG_SUN') && !this.state.config.has('SHARED_SONGS')) {
       this.addItem('MM_SONG_SUN');
+    }
+
+    /* Handle Skip Zelda */
+    if (this.state.settings.skipZelda) {
+      this.removeItem('OOT_CHICKEN');
+
+      for (const loc of LOCATIONS_ZELDA) {
+        this.state.world.areas['OOT SPAWN'].locations[loc] = exprTrue();
+        this.state.world.regions[loc] = 'NONE';
+      }
     }
 
     /* Handle fixed locations */

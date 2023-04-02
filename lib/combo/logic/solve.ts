@@ -7,7 +7,7 @@ import { LogicError, LogicSeedError } from './error';
 import { Items, combinedItems, itemsArray, removeItem, ITEMS_REQUIRED, isDungeonReward, isGoldToken, isHouseToken, isKey, isStrayFairy, isSmallKey, isGanonBossKey, isRegularBossKey, isTownStrayFairy, isDungeonStrayFairy, isSong, isJunk, isMapCompass, isSmallKeyRegular, isSmallKeyHideout, isItemUnlimitedStarting, isItemCriticalRenewable, isRupees, isItemConsumable, isItemMajor } from './items';
 import { Settings } from '../settings';
 import { Monitor } from '../monitor';
-import { isLocationRenewable } from './helpers';
+import { isLocationRenewable } from './locations';
 
 export type ItemPlacement = {[k: string]: string};
 

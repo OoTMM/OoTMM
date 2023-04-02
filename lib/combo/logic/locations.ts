@@ -12,6 +12,11 @@ export const OOT_ONE_TIME_SCRUBS = [
   'OOT Hyrule Field Grotto Scrub HP',
 ];
 
+export const LOCATIONS_ZELDA = [
+  'OOT Zelda\'s Letter',
+  'OOT Zelda\'s Song',
+];
+
 export function isLocationRenewable(world: World, loc: string) {
   if (ONE_TIME_SHOP_CHECKS.includes(loc))
     return false;

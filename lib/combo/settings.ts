@@ -204,6 +204,12 @@ export const SETTINGS = [{
   ],
   default: 'closed'
 }, {
+  key: 'skipZelda',
+  name: 'Skip Child Zelda',
+  category: 'main.events',
+  type: 'boolean',
+  default: false,
+}, {
   key: 'crossWarpOot',
   name: 'Cross-Games OoT Warp Songs',
   category: 'main.cross',

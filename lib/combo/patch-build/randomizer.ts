@@ -6,10 +6,11 @@ import { Game, GAMES } from "../config";
 import { WorldCheck } from '../logic/world';
 import { DUNGEONS, Settings, SPECIAL_CONDS, SPECIAL_CONDS_KEYS } from '../settings';
 import { HintGossip, Hints } from '../logic/hints';
-import { isDungeonStrayFairy, isGanonBossKey, isMap, isCompass, isRegularBossKey, isSmallKeyRegular, isTownStrayFairy, isSmallKeyHideout, isItemUnlimitedStarting, ITEMS_MAPS, ITEMS_COMPASSES } from '../logic/items';
+import { isDungeonStrayFairy, isGanonBossKey, isMap, isCompass, isRegularBossKey, isSmallKeyRegular, isTownStrayFairy, isSmallKeyHideout, isItemUnlimitedStarting, ITEMS_MAPS, ITEMS_COMPASSES, addItem } from '../logic/items';
 import { gameId } from '../util';
 import { EntranceShuffleResult } from '../logic/entrance';
 import { Patchfile } from './patchfile';
+import { LOCATIONS_ZELDA } from '../logic/locations';
 
 const GAME_DATA_OFFSETS = {
   oot: 0x1000,
@@ -487,22 +488,31 @@ export const randomizerData = (logic: LogicResult): Buffer => {
   return Buffer.concat(buffers);
 };
 
-const effectiveStartingItems = (settings: Settings): {[k: string]: number} => {
-  const items = {...settings.startingItems};
+const effectiveStartingItems = (logic: LogicResult): {[k: string]: number} => {
+  const { settings, items } = logic;
+  const startingItems = {...settings.startingItems};
+
   if (settings.mapCompassShuffle === 'starting') {
     for (const item of [...ITEMS_MAPS, ...ITEMS_COMPASSES]) {
-      items[item] = 1;
+      startingItems[item] = 1;
     }
   }
 
-  return items;
+  if (settings.skipZelda) {
+    for (const loc of LOCATIONS_ZELDA) {
+      addItem(startingItems, items[loc]);
+    }
+  }
+
+  return startingItems;
 }
 
-const randomizerStartingItems = (settings: Settings): Buffer => {
+const randomizerStartingItems = (logic: LogicResult): Buffer => {
+  const { settings } = logic;
   const buffer = Buffer.alloc(0x1000, 0xff);
   const ids: number[] = [];
   const ids2: number[] = [];
-  const items = effectiveStartingItems(settings);
+  const items = effectiveStartingItems(logic);
   for (const item in items) {
     const count = items[item];
     const id = gi(settings, 'oot', item, false);
@@ -535,7 +545,7 @@ export function patchRandomizer(logic: LogicResult, settings: Settings, patchfil
   }
   const data = randomizerData(logic);
   data.copy(buffer, 0);
-  const startingItems = randomizerStartingItems(settings);
+  const startingItems = randomizerStartingItems(logic);
   startingItems.copy(buffer, STARTING_ITEMS_DATA_OFFSET);
   patchfile.addPatch('global', 0x03fe0000, buffer);
 }

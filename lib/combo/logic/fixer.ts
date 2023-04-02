@@ -1,6 +1,6 @@
 import { Monitor } from '../monitor';
 import { Settings } from '../settings';
-import { ONE_TIME_SHOP_CHECKS, OOT_ONE_TIME_SCRUBS } from './helpers';
+import { ONE_TIME_SHOP_CHECKS, OOT_ONE_TIME_SCRUBS } from './locations';
 import { World } from './world';
 
 export class LogicPassFixer {

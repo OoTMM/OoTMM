@@ -255,7 +255,7 @@
   exits:
     "Lon Lon Ranch": "true"
   locations:
-    "Lon Lon Ranch Talon Bottle": "is_child && event(TALON_CHILD)"
+    "Lon Lon Ranch Talon Bottle": "is_child && woke_talon_child"
 "Hyrule Castle":
   region: HYRULE_CASTLE
   exits:
@@ -263,11 +263,11 @@
   events:
     MALON: "true"
     TALON_CHILD: "has(CHICKEN)"
-    MEET_ZELDA: "event(TALON_CHILD)"
+    MEET_ZELDA: "woke_talon_child"
   locations:
     "Malon Egg": "event(MALON)"
-    "Zelda's Letter": "event(MEET_ZELDA)"
-    "Zelda's Song": "event(MEET_ZELDA)"
+    "Zelda's Letter": "met_zelda"
+    "Zelda's Song": "met_zelda"
     "Great Fairy Din's Fire": "has_explosives && can_play(SONG_ZELDA)"
     "Hyrule Castle GS Tree": "can_damage_skull"
     "Hyrule Castle GS Grotto": "hidden_grotto_storms && has_explosives && can_boomerang"
@@ -342,7 +342,7 @@
     "Lost Woods Deep": "true"
     "Forest Temple": "can_hookshot"
   locations:
-    "Saria's Song": "event(MEET_ZELDA) && is_child && (can_play(SONG_TP_FOREST) || can_damage)"
+    "Saria's Song": "met_zelda && is_child && (can_play(SONG_TP_FOREST) || can_damage)"
     "Sacred Meadow Sheik Song": "is_adult"
     "Sacred Meadow Grotto": "hidden_grotto_bomb"
     "Sacred Meadow Storms Grotto Front Scrub": "hidden_grotto_storms && can_hit_scrub && (is_adult || can_damage || can_play(SONG_TP_FOREST))"

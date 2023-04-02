@@ -66,3 +66,5 @@
 "can_damage": "has_weapon || can_use_sticks || has_explosives || can_use_slingshot || can_use_din"
 "can_damage_skull": "can_damage || can_collect_distance"
 "can_hit_scrub": "has_nuts || can_hit_triggers_distance || has_shield_for_scrubs || can_collect_distance || can_hammer"
+"met_zelda": "event(MEET_ZELDA) || setting(skipZelda)"
+"woke_talon_child": "event(TALON_CHILD) || setting(skipZelda)"

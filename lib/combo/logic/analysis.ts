@@ -6,7 +6,7 @@ import { World } from './world';
 import { Pathfinder, PathfinderState } from './pathfind';
 import { Monitor } from '../monitor';
 import { cloneDeep } from 'lodash';
-import { isLocationRenewable } from './helpers';
+import { isLocationRenewable } from './locations';
 
 const SIMPLE_DEPENDENCIES: {[k: string]: string[]} = {
   OOT_WEIRD_EGG: [
