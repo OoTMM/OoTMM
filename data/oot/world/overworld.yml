@@ -356,7 +356,7 @@
   region: KAKARIKO
   exits:
     "Hyrule Field": "true"
-    "Death Mountain": "has(ZELDA_LETTER) || is_adult"
+    "Death Mountain": "setting(kakarikoGate, open) || has(ZELDA_LETTER) || is_adult"
     "Graveyard": "true"
     "Bottom of the Well": "is_child && can_play(SONG_STORMS)"
     "Skulltula House": "true"
@@ -467,7 +467,7 @@
   exits:
     "Goron City": "true"
     "Dodongo Cavern": "has_bombflowers || is_adult"
-    "Kakariko": "has(ZELDA_LETTER) || is_adult"
+    "Kakariko": "setting(kakarikoGate, open) || has(ZELDA_LETTER) || is_adult"
     "Death Mountain Summit": "event(BOULDER_DEATH_MOUNTAIN) || can_ride_bean(BEAN_DEATH_MOUNTAIN)"
   events:
     BEAN_DEATH_MOUNTAIN: "can_use_beans && has_bombflowers"

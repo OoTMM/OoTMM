@@ -360,6 +360,11 @@ export class LogicPassWorldTransform {
       }
     }
 
+    /* Handle open gate */
+    if (this.state.settings.kakarikoGate === 'open') {
+      this.removeItem('OOT_ZELDA_LETTER');
+    }
+
     /* Handle fixed locations */
     for (const loc of this.state.fixedLocations) {
       const check = this.state.world.checks[loc];

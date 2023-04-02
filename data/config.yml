@@ -27,3 +27,4 @@ MM_OCARINA_FAIRY:               0x19
 MM_HOOKSHOT_SHORT:              0x1a
 MM_SONG_SUN:                    0x1b
 OOT_SKIP_ZELDA:                 0x1c
+OOT_OPEN_KAKARIKO_GATE:         0x1d

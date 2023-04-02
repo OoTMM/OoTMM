@@ -204,6 +204,16 @@ export const SETTINGS = [{
   ],
   default: 'closed'
 }, {
+  key: 'kakarikoGate',
+  name: 'Kakariko Gate',
+  category: 'main.events',
+  type: 'enum',
+  values: [
+    { value: 'closed', name: 'Closed' },
+    { value: 'open', name: 'Open' },
+  ],
+  default: 'closed'
+}, {
   key: 'skipZelda',
   name: 'Skip Child Zelda',
   category: 'main.events',

@@ -60,6 +60,7 @@
 #define EV_OOT_ITEM_DAMPE_GRAVEYARD_HP      0x1c
 #define EV_OOT_ITEM_ANJU_POCKET_EGG         0x2c
 
+#define EV_OOT_INF_KAKARIKO_GATE_OPEN       0x076
 #define EV_OOT_INF_KING_ZORA_THAWED         0x138
 #define EV_OOT_INF_MAGIC_JAR                0x198
 
