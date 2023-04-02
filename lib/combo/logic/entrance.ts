@@ -441,7 +441,9 @@ export class LogicPassEntrances {
   run() {
     this.input.monitor.log(`Logic: Entrances (attempt ${this.input.attempts})`);
 
-    this.placeOverworld();
+    if (this.input.settings.erOverworld) {
+      this.placeOverworld();
+    }
 
     if (this.input.settings.erDungeons !== 'none') {
       this.fixDungeons();
