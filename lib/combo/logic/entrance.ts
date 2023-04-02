@@ -2,11 +2,11 @@ import { cloneDeep } from 'lodash';
 
 import { Random, sample, shuffle } from '../random';
 import { Settings } from '../settings';
-import { DUNGEONS_REGIONS, ExprMap, World, WorldEntrance } from './world';
+import { DUNGEONS_REGIONS, ExprMap, ExprParsers, World, WorldEntrance } from './world';
 import { Pathfinder, EntranceOverrides } from './pathfind';
 import { Monitor } from '../monitor';
 import { LogicEntranceError, LogicError } from './error';
-import { Expr, exprTrue } from './expr';
+import { Expr, exprAnd, exprTrue } from './expr';
 import { Game } from '../config';
 
 type Entrance = {
@@ -70,6 +70,7 @@ export class LogicPassEntrances {
   constructor(
     private readonly input: {
       world: World;
+      exprParsers: ExprParsers;
       settings: Settings;
       random: Random;
       monitor: Monitor;
@@ -407,6 +408,24 @@ export class LogicPassEntrances {
     }
   }
 
+  private songOfTime(e: Expr): Expr {
+    const subcond = this.input.exprParsers.mm.parse('can_reset_time');
+    return exprAnd([e, subcond]);
+  }
+
+  private place(src: Entrance, dst: Entrance) {
+    /* Change the world */
+    let expr = src.expr;
+    if (src.game === 'oot' && dst.game === 'mm') {
+      this.world.areas[src.from].exits['MM GLOBAL'] = expr;
+      expr = this.songOfTime(expr);
+    }
+    this.world.areas[src.from].exits[dst.to] = expr;
+
+    /* Mark the override */
+    this.result.overrides[src.from] = { ...this.result.overrides[src.from], [src.to]: { from: dst.from, to: dst.to } };
+  }
+
   private placeOverworld() {
     /* Get overworld entrances */
     const entrances: Entrance[] = this.world.entrances.filter(e => e.type === 'overworld').map(e => ({
@@ -431,13 +450,8 @@ export class LogicPassEntrances {
       const exitSrc = entrances[i * 2 + 1];
       const exitDst = entrances[indices[i] * 2 + 1];
 
-      /* Change the world */
-      this.world.areas[entranceSrc.from].exits[entranceDst.to] = entranceSrc.expr;
-      this.world.areas[exitDst.from].exits[exitSrc.to] = exitDst.expr;
-
-      /* Mark the overrides */
-      this.result.overrides[entranceSrc.from] = { ...this.result.overrides[entranceSrc.from], [entranceSrc.to]: { from: entranceDst.from, to: entranceDst.to } };
-      this.result.overrides[exitDst.from] = { ...this.result.overrides[exitDst.from], [exitDst.to]: { from: exitSrc.from, to: exitSrc.to } };
+      this.place(entranceSrc, entranceDst);
+      this.place(exitDst, exitSrc);
     }
   }
 

@@ -5,7 +5,6 @@
 "SOARING":
   region: NONE
   exits:
-    "GLOBAL": "has(SONG_SOARING) && event(CLOCK_TOWN)"
     "Clock Town": "has(SONG_SOARING) && event(CLOCK_TOWN)"
 "Oath to Order":
   region: GIANT_DREAM
@@ -16,6 +15,7 @@
   events:
     CLOCK_TOWN: "true"
   exits:
+    "GLOBAL": "true"
     "Clock Town South": "can_reset_time"
     "Moon": "can_play(SONG_ORDER) && special(MOON)"
   locations:

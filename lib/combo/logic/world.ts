@@ -99,8 +99,14 @@ const mapExprs = (exprParser: ExprParser, game: Game, char: string, data: any) =
   return result;
 }
 
+export type ExprParsers = {
+  oot: ExprParser;
+  mm: ExprParser;
+}
+
 export class LogicPassWorld {
   private world: World;
+  private exprParsers: Partial<ExprParsers> = {};
 
   constructor(
     private readonly state: {
@@ -133,12 +139,13 @@ export class LogicPassWorld {
     /* Create a special black-hole area */
     this.world.areas["VOID"] = { boss: false, dungeon: null, exits: {}, events: {}, locations: {}, gossip: {} };
 
-    return { world: this.world };
+    return { world: this.world, exprParsers: this.exprParsers as ExprParsers };
   }
 
   private loadGame(game: Game) {
     /* Create the expr parser */
     const exprParser = new ExprParser(this.state.settings, game);
+    this.exprParsers[game] = exprParser;
     this.loadMacros(game, exprParser);
     this.loadAreas(game, exprParser);
     this.loadPool(game);
