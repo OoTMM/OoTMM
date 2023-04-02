@@ -577,9 +577,9 @@ void comboTextAppendRegionName(char** b, u8 regionId, int flags)
     {
         if (flags & TF_PREPOS)
         {
-            comboTextAppendStr(b, "in ");
+            comboTextAppendStr(b, "inside ");
         }
-        comboTextAppendStr(b, "the " TEXT_COLOR_RED "Void");
+        comboTextAppendStr(b, TEXT_COLOR_YELLOW "Link's Pocket");
         comboTextAppendClearColor(b);
         return;
     }
