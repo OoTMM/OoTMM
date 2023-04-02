@@ -354,9 +354,11 @@
     "Sacred Meadow Gossip Atop Maze Temple Side": "true"
 "Kakariko":
   region: KAKARIKO
+  events:
+    KAKARIKO_GATE_OPEN: "is_child && has(ZELDA_LETTER)"
   exits:
     "Hyrule Field": "true"
-    "Death Mountain": "setting(kakarikoGate, open) || has(ZELDA_LETTER) || is_adult"
+    "Death Mountain": "setting(kakarikoGate, open) || event(KAKARIKO_GATE_OPEN)"
     "Graveyard": "true"
     "Bottom of the Well": "is_child && can_play(SONG_STORMS)"
     "Skulltula House": "true"
@@ -467,7 +469,7 @@
   exits:
     "Goron City": "true"
     "Dodongo Cavern": "has_bombflowers || is_adult"
-    "Kakariko": "setting(kakarikoGate, open) || has(ZELDA_LETTER) || is_adult"
+    "Kakariko": "setting(kakarikoGate, open) || event(KAKARIKO_GATE_OPEN)"
     "Death Mountain Summit": "event(BOULDER_DEATH_MOUNTAIN) || can_ride_bean(BEAN_DEATH_MOUNTAIN)"
   events:
     BEAN_DEATH_MOUNTAIN: "can_use_beans && has_bombflowers"
