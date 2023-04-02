@@ -1,31 +1,41 @@
-to,                             from,                             id
-Deku Tree Boss,                 Deku Tree Before Boss,            0x40f
-Dodongo Cavern Boss,            Dodongo Cavern Skull,             0x40b
-Jabu-Jabu Boss,                 Jabu-Jabu Pre-Boss,               0x301
-Forest Temple Boss,             Forest Temple Antichamber,        0x00c
-Fire Temple Boss,               Fire Temple Pre-Boss,             0x305
-Water Temple Boss,              Water Temple Antichamber,         0x417
-Spirit Temple Boss,             Spirit Temple Statue,             0x08d
-Shadow Temple Boss,             Shadow Temple Boat,               0x413
-Deku Tree,                      Kokiri Forest,                    0x000
-Kokiri Forest,                  Deku Tree,                        0x209
-Dodongo Cavern,                 Death Mountain,                   0x004
-Death Mountain,                 Dodongo Cavern,                   0x242
-Jabu-Jabu,                      Zora Fountain,                    0x028
-Zora Fountain,                  Jabu-Jabu,                        0x221
-Forest Temple,                  Sacred Meadow,                    0x169
-Sacred Meadow,                  Forest Temple,                    0x215
-Fire Temple,                    Fire Temple Entry,                0x165
-Fire Temple Entry,              Fire Temple,                      0x24a
-Water Temple,                   Lake Hylia,                       0x010
-Lake Hylia,                     Water Temple,                     0x21d
-Shadow Temple,                  Graveyard Upper,                  0x037
-Graveyard Upper,                Shadow Temple,                    0x205
-Spirit Temple,                  Desert Colossus,                  0x082
-Desert Colossus Spirit Exit,    Spirit Temple,                    0x1e1
-Bottom of the Well,             Kakariko,                         0x098
-Kakariko,                       Bottom of the Well,               0x2a6
-Ice Cavern,                     Zora Fountain Frozen,             0x088
-Zora Fountain Frozen,           Ice Cavern,                       0x3d4
-Gerudo Training Grounds,        Gerudo Fortress Exterior,         0x008
-Gerudo Fortress Exterior,       Gerudo Training Grounds,          0x3a8
+to,                             from,                             type,       id
+Deku Tree Boss,                 Deku Tree Before Boss,            boss,       0x40f
+Dodongo Cavern Boss,            Dodongo Cavern Skull,             boss,       0x40b
+Jabu-Jabu Boss,                 Jabu-Jabu Pre-Boss,               boss,       0x301
+Forest Temple Boss,             Forest Temple Antichamber,        boss,       0x00c
+Fire Temple Boss,               Fire Temple Pre-Boss,             boss,       0x305
+Water Temple Boss,              Water Temple Antichamber,         boss,       0x417
+Spirit Temple Boss,             Spirit Temple Statue,             boss,       0x08d
+Shadow Temple Boss,             Shadow Temple Boat,               boss,       0x413
+Deku Tree,                      Kokiri Forest,                    dungeon,    0x000
+Kokiri Forest,                  Deku Tree,                        dungeon,    0x209
+Dodongo Cavern,                 Death Mountain,                   dungeon,    0x004
+Death Mountain,                 Dodongo Cavern,                   dungeon,    0x242
+Jabu-Jabu,                      Zora Fountain,                    dungeon,    0x028
+Zora Fountain,                  Jabu-Jabu,                        dungeon,    0x221
+Forest Temple,                  Sacred Meadow,                    dungeon,    0x169
+Sacred Meadow,                  Forest Temple,                    dungeon,    0x215
+Fire Temple,                    Fire Temple Entry,                dungeon,    0x165
+Fire Temple Entry,              Fire Temple,                      dungeon,    0x24a
+Water Temple,                   Lake Hylia,                       dungeon,    0x010
+Lake Hylia,                     Water Temple,                     dungeon,    0x21d
+Shadow Temple,                  Graveyard Upper,                  dungeon,    0x037
+Graveyard Upper,                Shadow Temple,                    dungeon,    0x205
+Spirit Temple,                  Desert Colossus,                  dungeon,    0x082
+Desert Colossus Spirit Exit,    Spirit Temple,                    dungeon,    0x1e1
+Bottom of the Well,             Kakariko,                         dungeon,    0x098
+Kakariko,                       Bottom of the Well,               dungeon,    0x2a6
+Ice Cavern,                     Zora Fountain Frozen,             dungeon,    0x088
+Zora Fountain Frozen,           Ice Cavern,                       dungeon,    0x3d4
+Gerudo Training Grounds,        Gerudo Fortress Exterior,         dungeon,    0x008
+Gerudo Fortress Exterior,       Gerudo Training Grounds,          dungeon,    0x3a8
+Lost Woods Bridge,              Hyrule Field,                     overworld,  0x4de
+Hyrule Field,                   Lost Woods Bridge,                overworld,  0x185
+Zora River Front,               Hyrule Field,                     overworld,  0x0ea
+Hyrule Field,                   Zora River Front,                 overworld,  0x181
+Kakariko,                       Hyrule Field,                     overworld,  0x0db
+Hyrule Field,                   Kakariko,                         overworld,  0x17d
+Lon Lon Ranch,                  Hyrule Field,                     overworld,  0x157
+Hyrule Field,                   Lon Lon Ranch,                    overworld,  0x1f9
+Lake Hylia,                     Hyrule Field,                     overworld,  0x102
+Hyrule Field,                   Lake Hylia,                       overworld,  0x189

@@ -6,6 +6,7 @@ GameState_Play* gPlay;
 static void debugCheat(GameState_Play* play)
 {
 #if defined(DEBUG)
+    MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_SH);
     if (play->gs.input[0].current.buttons & L_TRIG)
     {
         gSave.inventory.dungeonKeys[SCE_OOT_TEMPLE_FIRE] = 8;
@@ -190,6 +191,21 @@ static void endGame(void)
 
 static u8 sInGrotto;
 
+static u32 entranceForOverride(u32 entrance)
+{
+    switch (entrance)
+    {
+    case 0x1d9:
+        /* Water entrance to zora river */
+        return 0x0ea;
+    case 0x311:
+        /* Water entrance to hyrule */
+        return 0x181;
+    default:
+        return entrance;
+    }
+}
+
 void hookPlay_Init(GameState_Play* play)
 {
     s32 override;
@@ -203,7 +219,7 @@ void hookPlay_Init(GameState_Play* play)
     if (gIsEntranceOverride)
     {
         gIsEntranceOverride = 0;
-        override = comboEntranceOverride(gSave.entrance);
+        override = comboEntranceOverride(entranceForOverride(gSave.entrance));
         if (override != -1)
         {
             if (override >= 0)
@@ -269,7 +285,7 @@ void hookPlay_Init(GameState_Play* play)
     if (gSave.entrance == 0x0530)
     {
         gComboCtx.shuffledEntrance = 0;
-        comboGameSwitch(play, -1);
+        comboGameSwitch(play, 0xd800);
         return;
     }
 
@@ -288,7 +304,7 @@ void hookPlay_Init(GameState_Play* play)
     if (play->gs.input[0].current.buttons & R_TRIG)
     {
         gComboCtx.shuffledEntrance = 0;
-        comboGameSwitch(play, -1);
+        comboGameSwitch(play, 0xd800);
         return;
     }
 #endif

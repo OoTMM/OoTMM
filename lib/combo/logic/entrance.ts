@@ -1,17 +1,19 @@
-import { cloneDeep } from "lodash";
+import { cloneDeep } from 'lodash';
 
-import { Random, sample, shuffle } from "../random";
-import { Settings } from "../settings";
-import { DUNGEONS_REGIONS, ExprMap, World, WorldArea, WorldEntrance } from "./world";
+import { Random, sample, shuffle } from '../random';
+import { Settings } from '../settings';
+import { DUNGEONS_REGIONS, ExprMap, ExprParsers, World, WorldEntrance } from './world';
 import { Pathfinder, EntranceOverrides } from './pathfind';
-import { Monitor } from "../monitor";
-import { LogicEntranceError, LogicError } from "./error";
-import { Expr, exprTrue } from "./expr";
+import { Monitor } from '../monitor';
+import { LogicEntranceError, LogicError } from './error';
+import { Expr, exprAnd, exprTrue } from './expr';
+import { Game } from '../config';
 
 type Entrance = {
   from: string;
   to: string;
   expr: Expr;
+  game: Game;
 };
 
 export type EntranceShuffleResult = {
@@ -68,6 +70,7 @@ export class LogicPassEntrances {
   constructor(
     private readonly input: {
       world: World;
+      exprParsers: ExprParsers;
       settings: Settings;
       random: Random;
       monitor: Monitor;
@@ -350,12 +353,12 @@ export class LogicPassEntrances {
 
       /* Entrance */
       if (to.dungeon) {
-        dungeonEntrances[to.dungeon] = { from: e.from, to: e.to, expr };
+        dungeonEntrances[to.dungeon] = { from: e.from, to: e.to, expr, game: e.game };
       }
 
       /* Exit */
       if (from.dungeon) {
-        dungeonExits[from.dungeon] = { from: e.from, to: e.to, expr };
+        dungeonExits[from.dungeon] = { from: e.from, to: e.to, expr, game: e.game };
       }
 
       /* Remove the transition */
@@ -405,8 +408,59 @@ export class LogicPassEntrances {
     }
   }
 
+  private songOfTime(e: Expr): Expr {
+    const subcond = this.input.exprParsers.mm.parse('can_reset_time');
+    return exprAnd([e, subcond]);
+  }
+
+  private place(src: Entrance, dst: Entrance) {
+    /* Change the world */
+    let expr = src.expr;
+    if (src.game === 'oot' && dst.game === 'mm') {
+      this.world.areas[src.from].exits['MM GLOBAL'] = expr;
+      expr = this.songOfTime(expr);
+    }
+    this.world.areas[src.from].exits[dst.to] = expr;
+
+    /* Mark the override */
+    this.result.overrides[src.from] = { ...this.result.overrides[src.from], [src.to]: { from: dst.from, to: dst.to } };
+  }
+
+  private placeOverworld() {
+    /* Get overworld entrances */
+    const entrances: Entrance[] = this.world.entrances.filter(e => e.type === 'overworld').map(e => ({
+      from: e.from,
+      to: e.to,
+      expr: this.world.areas[e.from].exits[e.to],
+      game: e.game,
+    }));
+
+    /* Delete the overworld entrances from the world */
+    for (const e of entrances) {
+      delete this.world.areas[e.from].exits[e.to];
+    }
+
+    /* Shuffle the entrances */
+    const indices = shuffle(this.input.random, [...Array(entrances.length / 2).keys()]);
+
+    /* Apply the entrances */
+    for (let i = 0; i < indices.length; ++i) {
+      const entranceSrc = entrances[i * 2 + 0];
+      const entranceDst = entrances[indices[i] * 2 + 0];
+      const exitSrc = entrances[i * 2 + 1];
+      const exitDst = entrances[indices[i] * 2 + 1];
+
+      this.place(entranceSrc, entranceDst);
+      this.place(exitDst, exitSrc);
+    }
+  }
+
   run() {
     this.input.monitor.log(`Logic: Entrances (attempt ${this.input.attempts})`);
+
+    if (this.input.settings.erOverworld) {
+      this.placeOverworld();
+    }
 
     if (this.input.settings.erDungeons !== 'none') {
       this.fixDungeons();

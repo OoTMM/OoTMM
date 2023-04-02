@@ -1,5 +1,7 @@
 #include <combo.h>
 
+ComboGlobal g;
+
 void comboInitObjects(void);
 
 void comboInit(void)

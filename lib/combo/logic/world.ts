@@ -43,8 +43,10 @@ export type WorldGossip = {
 };
 
 export type WorldEntrance = {
+  type: 'boss' | 'dungeon' | 'overworld';
   from: string;
   to: string;
+  game: Game;
 };
 
 export type World = {
@@ -97,8 +99,14 @@ const mapExprs = (exprParser: ExprParser, game: Game, char: string, data: any) =
   return result;
 }
 
+export type ExprParsers = {
+  oot: ExprParser;
+  mm: ExprParser;
+}
+
 export class LogicPassWorld {
   private world: World;
+  private exprParsers: Partial<ExprParsers> = {};
 
   constructor(
     private readonly state: {
@@ -131,12 +139,13 @@ export class LogicPassWorld {
     /* Create a special black-hole area */
     this.world.areas["VOID"] = { boss: false, dungeon: null, exits: {}, events: {}, locations: {}, gossip: {} };
 
-    return { world: this.world };
+    return { world: this.world, exprParsers: this.exprParsers as ExprParsers };
   }
 
   private loadGame(game: Game) {
     /* Create the expr parser */
     const exprParser = new ExprParser(this.state.settings, game);
+    this.exprParsers[game] = exprParser;
     this.loadMacros(game, exprParser);
     this.loadAreas(game, exprParser);
     this.loadPool(game);
@@ -255,7 +264,8 @@ export class LogicPassWorld {
     for (const record of DATA_ENTRANCES[game]) {
       const from = gameId(game, String(record.from), ' ');
       const to = gameId(game, String(record.to), ' ');
-      this.world.entrances.push({ from, to });
+      const type = String(record.type) as WorldEntrance['type'];
+      this.world.entrances.push({ from, to, type, game });
     }
   }
 }

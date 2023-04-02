@@ -1,24 +1,30 @@
+"GLOBAL":
+  region: NONE
+  exits:
+    "OOT SONGS": "setting(crossWarpOot) && has_ocarina"
 "SOARING":
   region: NONE
   exits:
-    "SPAWN": "has(SONG_SOARING)"
-"SPAWN":
-  region: CLOCK_TOWN_SOUTH
-  events:
-    "TIME_TRAVEL": "can_play(SONG_TIME)"
-  exits:
-    "Clock Town South": "can_reset_time"
-    "OOT SONGS": "setting(crossWarpOot) && has_ocarina"
-    "Moon": "can_play(SONG_ORDER) && special(MOON)"
-  locations:
-    "Initial Song of Healing": "true"
+    "Clock Town": "has(SONG_SOARING) && event(CLOCK_TOWN)"
 "Oath to Order":
   region: GIANT_DREAM
   locations:
     "Oath to Order": "true"
+"Clock Town":
+  region: CLOCK_TOWN_SOUTH
+  events:
+    CLOCK_TOWN: "true"
+  exits:
+    "GLOBAL": "true"
+    "Clock Town South": "can_reset_time"
+    "Moon": "can_play(SONG_ORDER) && special(MOON)"
+  locations:
+    "Initial Song of Healing": "true"
 "Clock Town South":
   region: CLOCK_TOWN_SOUTH
   exits:
+    "OOT Market": "age(child)"
+    "OOT Market Destroyed": "age(adult)"
     "Termina Field": "true"
     "Clock Town North": "true"
     "Clock Town West": "true"

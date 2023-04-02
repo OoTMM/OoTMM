@@ -291,6 +291,12 @@ export const SETTINGS = [{
   type: 'boolean',
   default: false
 }, {
+  key: 'erOverworld',
+  name: 'Basic Overworld Shuffle',
+  category: 'entrances',
+  type: 'boolean',
+  default: false
+}, {
   key: 'progressiveShieldsOot',
   name: 'OoT Shields',
   category: 'items.progressive',
