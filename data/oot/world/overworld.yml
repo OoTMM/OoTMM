@@ -355,15 +355,15 @@
 "Kakariko":
   region: KAKARIKO
   events:
-    KAKARIKO_GATE_OPEN: "is_child && has(ZELDA_LETTER)"
+    KAKARIKO_GATE_OPEN: "(is_child && has(ZELDA_LETTER)) || setting(kakarikoGate, open)"
   exits:
     "Hyrule Field": "true"
-    "Death Mountain": "setting(kakarikoGate, open) || event(KAKARIKO_GATE_OPEN)"
+    "Death Mountain": "event(KAKARIKO_GATE_OPEN)"
     "Graveyard": "true"
     "Bottom of the Well": "is_child && can_play(SONG_STORMS)"
     "Skulltula House": "true"
     "Shooting Gallery Adult": "is_adult"
-    "Kakariko Rooftop": "is_child || can_hookshot"
+    "Kakariko Rooftop": "is_child || can_hookshot || (is_adult && trick(OOT_PASS_COLLISION))"
     "Kakariko Bazaar": "is_adult"
     "Kakariko Potion Shop": "is_adult"
   locations:
@@ -375,7 +375,7 @@
     "Kakariko Song Shadow": "is_adult && has(MEDALLION_FOREST) && has(MEDALLION_FIRE) && has(MEDALLION_WATER)"
     "Kakariko Man on Roof": "can_hookshot || trick(OOT_MAN_ON_ROOF)"
     "Kakariko Potion Shop Odd Potion": "adult_trade(ODD_MUSHROOM)"
-    "Kakariko Grotto Front": "hidden_grotto_bomb"
+    "Kakariko Grotto Front": "hidden_grotto_bomb && (has_weapon || can_use_sticks)"
     "Kakariko Grotto Back": "true"
     "Kakariko GS Roof": "gs_night && can_hookshot"
     "Kakariko GS Shooting Gallery": "gs_night && is_child"
@@ -469,7 +469,7 @@
   exits:
     "Goron City": "true"
     "Dodongo Cavern": "has_bombflowers || is_adult"
-    "Kakariko": "setting(kakarikoGate, open) || event(KAKARIKO_GATE_OPEN)"
+    "Kakariko": "event(KAKARIKO_GATE_OPEN) || trick(OOT_PASS_COLLISION)"
     "Death Mountain Summit": "event(BOULDER_DEATH_MOUNTAIN) || can_ride_bean(BEAN_DEATH_MOUNTAIN)"
   events:
     BEAN_DEATH_MOUNTAIN: "can_use_beans && has_bombflowers"
@@ -633,7 +633,7 @@
     "Lake Hylia Grotto Left Scrub": "can_hit_scrub"
     "Lake Hylia Grotto Center Scrub": "can_hit_scrub"
     "Lake Hylia Grotto Right Scrub": "can_hit_scrub"
-    "Lake Hylia GS Lab Wall": "gs_night && (can_boomerang || (trick(OOT_LAB_WALL_GS) && (has_sword_kokiri || has_sticks)))"
+    "Lake Hylia GS Lab Wall": "gs_night && (can_boomerang || (trick(OOT_LAB_WALL_GS) && (has_sword_kokiri || can_use_sticks)))"
     "Lake Hylia GS Island": "is_child && gs_night && can_damage_skull"
     "Lake Hylia GS Soil": "gs_soil && can_damage_skull"
     "Lake Hylia GS Big Tree": "gs_night && can_longshot"

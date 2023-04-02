@@ -9,7 +9,7 @@
     "Great Bay Temple Entrance": "true"
     "Great Bay Temple Water Wheel": "true"
   locations:
-    "Great Bay Temple Entrance Chest": "true"
+    "Great Bay Temple Entrance Chest": "has_sticks || can_use_fire_arrows"
 "Great Bay Temple Water Wheel":
   dungeon: GB
   events:

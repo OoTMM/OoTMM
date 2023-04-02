@@ -66,7 +66,7 @@
   exits:
     "Snowhead Temple Center Level 1": "true"
   events:
-    SNOWHEAD_RAISE_PILLAR: "has(MASK_GORON)"
+    SNOWHEAD_RAISE_PILLAR: "has(MASK_GORON) && (can_use_fire_arrows || event(SHT_STICK_RUN))"
   locations:
     "Snowhead Temple Pillars Room": "true"
 "Snowhead Temple Center Level 0":
@@ -143,6 +143,8 @@
     "Snowhead Temple Central Room Alcove": "can_use_lens"
 "Snowhead Temple Center Level 3 Iced":
   dungeon: SH
+  events:
+    SHT_STICK_RUN: "has_sticks"
   exits:
     "Snowhead Temple Map Room Upper": "true"
     "Snowhead Temple Center Level 2 Dual": "has_weapon || has(MASK_ZORA) || has(MASK_GORON)"
