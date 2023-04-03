@@ -63,7 +63,7 @@ const solvedWorldState = (monitor: Monitor, opts: Options) => {
         .exec();
       return newState;
     } catch (e) {
-      if (!(e instanceof LogicError) || state.attempts >= 1000) {
+      if (!(e instanceof LogicError) || state.attempts >= 5) {
         throw e;
       }
     }

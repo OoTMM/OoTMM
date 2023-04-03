@@ -1,14 +1,15 @@
-import { merge } from 'lodash';
 import { Settings, Trick, TRICKS } from '../settings';
 import { Items, ITEMS_MASKS_OOT, ITEMS_MASKS_REGULAR, ITEMS_MASKS_TRANSFORM, ITEMS_MEDALLIONS, ITEMS_REMAINS, ITEMS_STONES } from './items';
 import { Age } from './pathfind';
 
+export type ExprDependencies = {
+  items: Set<string>;
+  events: Set<string>;
+};
+
 type ExprResultFalse = {
   result: false;
-  dependencies: {
-    items: Set<string>;
-    events: Set<string>;
-  }
+  dependencies: ExprDependencies;
 }
 
 type ExprResultTrue = {
@@ -22,6 +23,21 @@ type State = {
   age: Age;
   events: Set<string>;
   ignoreItems: boolean;
+};
+
+export const exprDependencies = (exprs: ExprResult[]): ExprDependencies => {
+  const deps: ExprDependencies = {
+    items: new Set(),
+    events: new Set(),
+  };
+
+  for (const expr of exprs) {
+    if (expr.result) continue;
+    deps.items = new Set([...deps.items, ...expr.dependencies.items]);
+    deps.events = new Set([...deps.events, ...expr.dependencies.events]);
+  }
+
+  return deps;
 };
 
 const itemCount = (state: State, item: string): number => state.items[item] || 0;
@@ -77,7 +93,7 @@ export const exprAnd = (exprs: Expr[]): Expr => state => {
   if (results.every(x => x.result)) {
     return { result: true };
   } else {
-    return merge({}, ...results);
+    return { result: false, dependencies: exprDependencies(results) };
   }
 };
 
@@ -86,7 +102,7 @@ export const exprOr = (exprs: Expr[]): Expr => state => {
   if (results.some(x => x.result)) {
     return { result: true };
   } else {
-    return merge({}, ...results);
+    return { result: false, dependencies: exprDependencies(results) };
   }
 };
 
