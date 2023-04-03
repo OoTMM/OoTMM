@@ -625,7 +625,7 @@ MQ Shadow Temple GS After Boat,                             gs,             NONE
 MQ Shadow Temple GS Pre-Boss,                               gs,             NONE,                 TEMPLE_SHADOW,                  0x42,                       GS_TOKEN
 MQ Spirit Temple Entrance Initial Chest,                    chest,          NONE,                 TEMPLE_SPIRIT,                  0x1a,                       BOMBCHU_5
 MQ Spirit Temple Lobby Back-Left Chest,                     chest,          NONE,                 TEMPLE_SPIRIT,                  0x1e,                       SMALL_KEY_SPIRIT
-MQ Spirit Temple Lobby Back-Right Chest,                    chest,          NONE,                 TEMPLE_SPIRIT,                  0x1b,                       SMALL_KEY_SPIRIT
+MQ Spirit Temple Lobby Back-Right Chest,                    chest,          NONE,                 TEMPLE_SPIRIT,                  0x1f,                       BOMBCHU_5
 MQ Spirit Temple Compass Chest,                             chest,          NONE,                 TEMPLE_SPIRIT,                  0x03,                       COMPASS_SPIRIT
 MQ Spirit Temple Sun Block Room Chest,                      chest,          NONE,                 TEMPLE_SPIRIT,                  0x01,                       RECOVERY_HEART
 MQ Spirit Temple Map Chest,                                 chest,          NONE,                 TEMPLE_SPIRIT,                  0x00,                       MAP_SPIRIT
@@ -636,7 +636,7 @@ MQ Spirit Temple Child Upper Ledge Chest,                   chest,          NONE
 MQ Spirit Temple Silver Block Room Target Chest,            chest,          NONE,                 TEMPLE_SPIRIT,                  0x1c,                       SMALL_KEY_SPIRIT
 MQ Spirit Temple Chest in Box,                              chest,          NONE,                 TEMPLE_SPIRIT,                  0x0f,                       RUPEE_BLUE
 MQ Spirit Temple Statue Room Ledge Chest,                   chest,          NONE,                 TEMPLE_SPIRIT,                  0x02,                       RECOVERY_HEART
-MQ Spirit Temple Lobby Front-Right Chest,                   chest,          NONE,                 TEMPLE_SPIRIT,                  0x1f,                       BOMBCHU_5
+MQ Spirit Temple Lobby Front-Right Chest,                   chest,          NONE,                 TEMPLE_SPIRIT,                  0x1b,                       SMALL_KEY_SPIRIT
 MQ Spirit Temple Purple Leever Chest,                       chest,          NONE,                 TEMPLE_SPIRIT,                  0x04,                       RUPEE_PURPLE
 MQ Spirit Temple Symphony Room Chest,                       chest,          NONE,                 TEMPLE_SPIRIT,                  0x07,                       RUPEE_PURPLE
 MQ Spirit Temple Beamos Room Chest,                         chest,          NONE,                 TEMPLE_SPIRIT,                  0x19,                       ARROWS_30
