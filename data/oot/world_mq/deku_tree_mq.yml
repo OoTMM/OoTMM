@@ -55,7 +55,7 @@
   events:
     DEKU_BLOCK: "true"
   locations:
-    "MQ Deku Tree Scrub": "can_hit_scrub"
+    "MQ Deku Tree Scrub": "can_hit_scrub && event(RUPEES)"
 "Deku Tree Before Boss":
   dungeon: DT
   exits:

@@ -9,11 +9,11 @@
     "Ganon Castle Shadow": "true"
     "Ganon Castle Tower": "true"
   locations:
-    "MQ Ganon Castle Leftmost Scrub": "has_lens && can_hit_scrub"
-    "MQ Ganon Castle Left-Center Scrub": "has_lens && can_hit_scrub"
-    "MQ Ganon Castle Center Scrub": "has_lens && can_hit_scrub"
-    "MQ Ganon Castle Right-Center Scrub": "has_lens && can_hit_scrub"
-    "MQ Ganon Castle Rightmost Scrub": "has_lens && can_hit_scrub"
+    "MQ Ganon Castle Leftmost Scrub": "has_lens && can_hit_scrub && event(RUPEES)"
+    "MQ Ganon Castle Left-Center Scrub": "has_lens && can_hit_scrub && event(RUPEES)"
+    "MQ Ganon Castle Center Scrub": "has_lens && can_hit_scrub && event(RUPEES)"
+    "MQ Ganon Castle Right-Center Scrub": "has_lens && can_hit_scrub && event(RUPEES)"
+    "MQ Ganon Castle Rightmost Scrub": "has_lens && can_hit_scrub && event(RUPEES)"
 "Ganon Castle Light":
   dungeon: Ganon
   events:
@@ -42,15 +42,15 @@
 "Ganon Castle Spirit":
   dungeon: Ganon
   events:
-    GANON_TRIAL_SPIRIT: "has_light_arrows && has_fire_arrows && has_mirror_shield && can_hammer && has_explosives"
+    GANON_TRIAL_SPIRIT: "has_light_arrows && has_fire_arrows && has_mirror_shield && can_hammer && has_bombchu"
   locations:
     "MQ Ganon Castle Spirit Trial First Chest": "can_hammer && (can_use_bow || trick(OOT_HAMMER_WALLS))"
-    "MQ Ganon Castle Spirit Trial Second Chest": "can_hammer && (can_use_bow || trick(OOT_HAMMER_WALLS)) && has_explosives && has_lens"
+    "MQ Ganon Castle Spirit Trial Second Chest": "can_hammer && (can_use_bow || trick(OOT_HAMMER_WALLS)) && has_bombchu && has_lens"
     #Chests are named relative to facing the door to the end of the trial
-    "MQ Ganon Castle Spirit Trial Back Right Sun Chest": "can_hammer && has_fire_arrows && has_mirror_shield && has_explosives"
-    "MQ Ganon Castle Spirit Trial Back Left Sun Chest": "can_hammer && has_fire_arrows && has_mirror_shield && has_explosives"
-    "MQ Ganon Castle Spirit Trial Front Left Sun Chest": "can_hammer && has_fire_arrows && has_mirror_shield && has_explosives"
-    "MQ Ganon Castle Spirit Trial Gold Gauntlets Chest": "can_hammer && has_fire_arrows && has_mirror_shield && has_explosives"
+    "MQ Ganon Castle Spirit Trial Back Right Sun Chest": "can_hammer && has_fire_arrows && has_mirror_shield && has_bombchu"
+    "MQ Ganon Castle Spirit Trial Back Left Sun Chest": "can_hammer && has_fire_arrows && has_mirror_shield && has_bombchu"
+    "MQ Ganon Castle Spirit Trial Front Left Sun Chest": "can_hammer && has_fire_arrows && has_mirror_shield && has_bombchu"
+    "MQ Ganon Castle Spirit Trial Gold Gauntlets Chest": "can_hammer && has_fire_arrows && has_mirror_shield && has_bombchu"
 "Ganon Castle Shadow":
   dungeon: Ganon
   events:

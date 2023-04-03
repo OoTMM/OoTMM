@@ -8,6 +8,10 @@
   exits:
     "Shadow Temple First Locked Door": "has_explosives && has(SMALL_KEY_SHADOW, 6)"
     "Shadow Temple First Beamos": "has_fire_arrows || has_hover_boots"
+  events:
+    ARROWS: "true"
+    BOMBS: "true"
+    MAGIC: "true"
 "Shadow Temple First Locked Door":
   dungeon: Shadow
   locations:
