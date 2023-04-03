@@ -101,7 +101,7 @@ export class Pathfinder {
   }
 
   private evalExpr(expr: Expr, age: Age) {
-    return expr({ items: this.state.items, age, events: this.state.events, ignoreItems: this.opts.ignoreItems || false });
+    return expr({ items: this.state.items, age, events: this.state.events, ignoreItems: this.opts.ignoreItems || false }).result;
   }
 
   private exploreArea(area: string, age: Age) {
