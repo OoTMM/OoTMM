@@ -6,6 +6,8 @@
     "Spirit Temple Statue": "can_longshot && has_explosives && can_lift_silver"
   events:
     SPIRIT_LOBBY_BOULDERS: "has_explosives_or_hammer"
+    BOMBS: "true"
+    MAGIC: "true"
   locations:
     "MQ Spirit Temple Entrance Initial Chest": "true"
     "MQ Spirit Temple Lobby Back-Left Chest": "event(SPIRIT_LOBBY_BOULDERS) && can_hit_triggers_distance"

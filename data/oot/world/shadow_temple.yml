@@ -7,6 +7,9 @@
   dungeon: Shadow
   exits:
     "Shadow Temple Main": "has_hover_boots && has_lens"
+  events:
+    #There are a lot of ways this works, but it always needs this trick.
+    MAGIC: "trick(OOT_LENS)"
   locations:
     "Shadow Temple Map": "has_lens"
     "Shadow Temple Hover Boots": "has_lens"
