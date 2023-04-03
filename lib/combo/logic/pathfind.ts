@@ -14,6 +14,7 @@ export type Age = typeof AGES[number];
 type PathfinderDependencyList = {
   locations: Set<string>;
   events: Set<string>;
+  gossips: Set<string>;
   exits: {
     child: Set<string>;
     adult: Set<string>;
@@ -30,6 +31,7 @@ type PathfinderDependencies = {
 type PathfinderQueue = {
   locations: Map<string, Set<string>>;
   events: Map<string, Set<string>>;
+  gossips: Map<string, Set<string>>;
   exits: {
     child: Map<string, Set<string>>;
     adult: Map<string, Set<string>>;
@@ -56,6 +58,7 @@ export type PathfinderState = {
 const emptyDepList = (): PathfinderDependencyList => ({
   locations: new Set(),
   events: new Set(),
+  gossips: new Set(),
   exits: {
     child: new Set(),
     adult: new Set(),
@@ -88,6 +91,7 @@ const defaultState = (settings: Settings): PathfinderState => ({
   queue: {
     locations: new Map(),
     events: new Map(),
+    gossips: new Map(),
     exits: {
       child: new Map(),
       adult: new Map(),
@@ -106,7 +110,6 @@ type PathfinderOptions = {
   entranceOverrides?: EntranceOverrides;
   ignoreItems?: boolean;
   recursive?: boolean;
-  gossip?: boolean;
   stopAtGoal?: boolean;
   restrictedLocations?: Set<string>;
   forbiddenLocations?: Set<string>;
@@ -158,6 +161,15 @@ export class Pathfinder {
     }
   }
 
+  private queueGossip(gossip: string, area: string) {
+    const queue = this.state.queue.gossips;
+    if (!queue.has(gossip)) {
+      queue.set(gossip, new Set([area]));
+    } else {
+      queue.get(gossip)!.add(area);
+    }
+  }
+
   /**
    * Explore an area, adding all locations and events to the queue
    */
@@ -175,6 +187,7 @@ export class Pathfinder {
     Object.keys(a.events).filter(x => !this.state.events.has(x)).forEach(x => this.queueEvent(x, area));
     const exits = Object.keys(a.exits).filter(x => !this.state.areas[age].has(x));
     exits.forEach(x => this.queueExit(age, x, area));
+    Object.keys(a.gossip).forEach(x => this.queueGossip(x, area));
   }
 
   private evalExpr(expr: Expr, age: Age) {
@@ -218,6 +231,13 @@ export class Pathfinder {
     }
   }
 
+  private addGossipDependencies(set: PathfinderDependencySet, gossip: string, areaFrom: string, dependents: Set<string>) {
+    for (const dep of dependents) {
+      const data = this.dependenciesLookup(set, dep, areaFrom);
+      data.gossips.add(gossip);
+    }
+  }
+
   private requeueItem(item: string) {
     const deps = this.state.dependencies.items.get(item);
     if (deps) {
@@ -227,6 +247,7 @@ export class Pathfinder {
         d.exits.adult.forEach(x => this.queueExit('adult', x, area));
         d.events.forEach(x => this.queueEvent(x, area));
         d.locations.forEach(x => this.queueLocation(x, area));
+        d.gossips.forEach(x => this.queueGossip(x, area));
       }
     }
   }
@@ -309,6 +330,7 @@ export class Pathfinder {
               d.exits.adult.forEach(x => this.queueExit('adult', x, area));
               d.events.forEach(x => this.queueEvent(x, area));
               d.locations.forEach(x => this.queueLocation(x, area));
+              d.gossips.forEach(x => this.queueGossip(x, area));
             }
           }
         } else {
@@ -352,6 +374,42 @@ export class Pathfinder {
           /* Track dependencies */
           this.addLocationDependencies(this.state.dependencies.items, location, area, deps.items);
           this.addLocationDependencies(this.state.dependencies.events, location, area, deps.events);
+        }
+      }
+    }
+  }
+
+  private evalGossips() {
+    /* Extract the queue */
+    const queue = this.state.queue.gossips;
+    this.state.queue.gossips = new Map();
+
+    /* Evaluate all the gossips */
+    for (const [gossip, areas] of queue) {
+      for (const area of areas) {
+        if (this.state.gossip.has(gossip)) {
+          continue;
+        }
+
+        /* Evaluate the location */
+        const expr = this.world.areas[area].gossip[gossip];
+        const results: ExprResult[] = [];
+        if (this.state.areas.child.has(area)) {
+          results.push(this.evalExpr(expr, 'child'));
+        }
+        if (this.state.areas.adult.has(area)) {
+          results.push(this.evalExpr(expr, 'adult'));
+        }
+
+        /* If any of the results are true, add the location to the state and queue up everything */
+        /* Otherwise, track dependencies */
+        if (results.some(x => x.result)) {
+          this.state.gossip.add(gossip);
+        } else {
+          const deps = exprDependencies(results);
+          /* Track dependencies */
+          this.addGossipDependencies(this.state.dependencies.items, gossip, area, deps.items);
+          this.addGossipDependencies(this.state.dependencies.events, gossip, area, deps.events);
         }
       }
     }
@@ -405,9 +463,8 @@ export class Pathfinder {
         child: allAreas,
         adult: allAreas,
       };
-      if (this.opts.gossip) {
-        this.state.gossip = new Set(Object.values(this.world.areas).map(x => Object.keys(x.gossip || {})).flat());
-      }
+      this.state.gossip = new Set(Object.values(this.world.areas).map(x => Object.keys(x.gossip || {})).flat());
+      this.state.goal = true;
       return;
     }
 
@@ -431,6 +488,7 @@ export class Pathfinder {
       }
     }
 
-    //console.log(this.state.locations);
+    /* Check for gossips */
+    this.evalGossips();
   }
 }
