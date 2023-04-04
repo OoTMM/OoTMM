@@ -1,9 +1,9 @@
 #Generic Utility Macros
 "is_child": "age(child)"
 "is_adult": "age(adult)"
-"is_day": "true"
-"is_night": "true"
-"is_dusk": "true"
+"is_day": "oot_time(day) || can_play(SONG_SUN)"
+"is_night": "oot_time(night) || can_play(SONG_SUN)"
+"is_dusk": "oot_time(day) && oot_time(night)" # If day and night can be true at the same time, then you have access to a local time-flow zone
 #Standard Single Item Use Macros
 "can_play(x)": "has(OCARINA) && has(x)"
 "has_sticks": "event(STICKS) || has(STICK) || has(STICKS_5) || has(STICKS_10) || (setting(sharedNutsSticks) && event(MM_STICKS))"
@@ -69,7 +69,7 @@
 "can_hit_scrub": "has_nuts || can_hit_triggers_distance || has_shield_for_scrubs || can_collect_distance || can_hammer"
 "has_shield_for_scrubs": "(is_adult && has(SHIELD_HYLIAN)) || (is_child && has(SHIELD_DEKU))"
 #Trick Macros
-"gs_night": "trick(OOT_NIGHT_GS) || can_play(SONG_SUN)"
+"gs_night": "is_night && (trick(OOT_NIGHT_GS) || can_play(SONG_SUN))"
 "has_lens": "has_lens_strict || trick(OOT_LENS)"
 "has_tunic_goron": "has_tunic_goron_strict || trick(OOT_TUNICS)"
 "has_tunic_zora": "has_tunic_zora_strict || trick(OOT_TUNICS)"

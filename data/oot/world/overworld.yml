@@ -119,6 +119,7 @@
     "Kokiri Forest Storms Grotto": "true"
 "Hyrule Field":
   region: HYRULE_FIELD
+  time: flow
   exits:
     "Lost Woods Bridge": "true"
     "Market Entryway": "true"

@@ -1,10 +1,10 @@
-import { cloneDeep, merge } from 'lodash';
+import { cloneDeep, merge, result } from 'lodash';
 import { Settings } from '../settings';
-import { Expr, exprDependencies, ExprResult } from './expr';
+import { AreaData, Expr, exprDependencies, ExprResult } from './expr';
 
 import { addItem, combinedItems, isItemConsumable, Items } from './items';
 import { ItemPlacement } from './solve';
-import { World } from './world';
+import { World, WorldArea } from './world';
 import { isLocationRenewable } from './locations';
 
 export const AGES = ['child', 'adult'] as const;
@@ -41,8 +41,8 @@ type PathfinderQueue = {
 export type PathfinderState = {
   items: Items;
   areas: {
-    child: Set<string>;
-    adult: Set<string>;
+    child: Map<string, AreaData>;
+    adult: Map<string, AreaData>;
   },
   locations: Set<string>;
   newLocations: Set<string>;
@@ -78,8 +78,8 @@ function filterStartingItems(items: Items) {
 const defaultState = (settings: Settings): PathfinderState => ({
   items: filterStartingItems(settings.startingItems),
   areas: {
-    child: new Set(),
-    adult: new Set(),
+    child: new Map(),
+    adult: new Map(),
   },
   locations: new Set(),
   newLocations: new Set(),
@@ -100,6 +100,32 @@ const defaultState = (settings: Settings): PathfinderState => ({
   dependencies: {
     items: new Map(),
     events: new Map(),
+  },
+});
+
+const defaultAreaData = (): AreaData => ({
+  oot: {
+    day: false,
+    night: false,
+  },
+});
+
+const mergeAreaData = (a: AreaData, b: AreaData): AreaData => ({
+  oot: {
+    day: a.oot.day || b.oot.day,
+    night: a.oot.night || b.oot.night,
+  },
+});
+
+const compareAreaData = (a: AreaData, b: AreaData): boolean => (
+  a.oot.day === b.oot.day &&
+  a.oot.night === b.oot.night
+);
+
+const cloneAreaData = (a: AreaData): AreaData => ({
+  oot: {
+    day: a.oot.day,
+    night: a.oot.night,
   },
 });
 
@@ -173,8 +199,23 @@ export class Pathfinder {
   /**
    * Explore an area, adding all locations and events to the queue
    */
-  private exploreArea(age: Age, area: string) {
-    this.state.areas[age].add(area);
+  private exploreArea(age: Age, area: string, sourceAreaData: AreaData) {
+    /* Compute the previous area data and compare it to the old one */
+    const previousAreaData = this.state.areas[age].get(area);
+    const newAreaData = previousAreaData ? mergeAreaData(previousAreaData, sourceAreaData) : sourceAreaData;
+    const worldArea = this.world.areas[area];
+    if (worldArea.game === 'oot') {
+      if (['day', 'flow'].includes(worldArea.time)) {
+        newAreaData.oot.day = true;
+      }
+      if (['night', 'flow'].includes(worldArea.time)) {
+        newAreaData.oot.night = true;
+      }
+    }
+    if (previousAreaData && compareAreaData(previousAreaData, newAreaData)) {
+      return;
+    }
+    this.state.areas[age].set(area, newAreaData);
     const a = this.world.areas[area];
     let locs = Object.keys(a.locations).filter(x => !this.state.locations.has(x));
     if (this.opts.restrictedLocations) {
@@ -190,8 +231,9 @@ export class Pathfinder {
     Object.keys(a.gossip).forEach(x => this.queueGossip(x, area));
   }
 
-  private evalExpr(expr: Expr, age: Age) {
-    return expr({ items: this.state.items, age, events: this.state.events, ignoreItems: this.opts.ignoreItems || false });
+  private evalExpr(expr: Expr, age: Age, area: string) {
+    const areaData = this.state.areas[age].get(area)!;
+    return expr({ areaData, items: this.state.items, age, events: this.state.events, ignoreItems: this.opts.ignoreItems || false });
   }
 
   private dependenciesLookup(set: PathfinderDependencySet, dependency: string, areaFrom: string) {
@@ -279,11 +321,19 @@ export class Pathfinder {
       }
 
       for (const area of areas) {
-        const expr = this.world.areas[area].exits[exit];
-        const exprResult = this.evalExpr(expr, age);
+        const a = this.world.areas[area];
+        const expr = a.exits[exit];
+        const exprResult = this.evalExpr(expr, age, area);
 
         if (exprResult.result) {
-          this.exploreArea(age, exit);
+          const areaData = cloneAreaData(this.state.areas[age].get(area)!);
+          if (exprResult.restrictions?.oot.day) {
+            areaData.oot.day = false;
+          }
+          if (exprResult.restrictions?.oot.night) {
+            areaData.oot.night = false;
+          }
+          this.exploreArea(age, exit, this.state.areas[age].get(area)!);
         } else {
           /* Track dependencies */
           this.addExitsDependencies(this.state.dependencies.items, age, exit, area, exprResult.dependencies.items);
@@ -312,10 +362,10 @@ export class Pathfinder {
         }
         const results: ExprResult[] = [];
         if (this.state.areas.child.has(area)) {
-          results.push(this.evalExpr(expr, 'child'));
+          results.push(this.evalExpr(expr, 'child', area));
         }
         if (this.state.areas.adult.has(area)) {
-          results.push(this.evalExpr(expr, 'adult'));
+          results.push(this.evalExpr(expr, 'adult', area));
         }
 
         /* If any of the results are true, add the event to the state and queue up everything */
@@ -359,10 +409,10 @@ export class Pathfinder {
         const expr = this.world.areas[area].locations[location];
         const results: ExprResult[] = [];
         if (this.state.areas.child.has(area)) {
-          results.push(this.evalExpr(expr, 'child'));
+          results.push(this.evalExpr(expr, 'child', area));
         }
         if (this.state.areas.adult.has(area)) {
-          results.push(this.evalExpr(expr, 'adult'));
+          results.push(this.evalExpr(expr, 'adult', area));
         }
 
         /* If any of the results are true, add the location to the state and queue up everything */
@@ -395,10 +445,10 @@ export class Pathfinder {
         const expr = this.world.areas[area].gossip[gossip];
         const results: ExprResult[] = [];
         if (this.state.areas.child.has(area)) {
-          results.push(this.evalExpr(expr, 'child'));
+          results.push(this.evalExpr(expr, 'child', area));
         }
         if (this.state.areas.adult.has(area)) {
-          results.push(this.evalExpr(expr, 'adult'));
+          results.push(this.evalExpr(expr, 'adult', area));
         }
 
         /* If any of the results are true, add the location to the state and queue up everything */
@@ -443,8 +493,8 @@ export class Pathfinder {
     /* Handle initial state */
     if (!this.state.started) {
       this.state.started = true;
-      this.exploreArea('child', 'OOT SPAWN');
-      this.exploreArea('adult', 'OOT SPAWN');
+      this.exploreArea('child', 'OOT SPAWN', defaultAreaData());
+      this.exploreArea('adult', 'OOT SPAWN', defaultAreaData());
     }
 
     /* Requeue assumed items */
@@ -458,7 +508,10 @@ export class Pathfinder {
     if (this.settings.logic === 'none') {
       this.state.locations = new Set(Object.keys(this.world.checks));
       this.state.events = new Set(Object.values(this.world.areas).map(x => Object.keys(x.events || {})).flat());
-      const allAreas = new Set(Object.keys(this.world.areas));
+      const allAreas = new Map<string, AreaData>;
+      for (const area of Object.keys(this.world.areas)) {
+        allAreas.set(area, { oot: { day: true, night: true } });
+      }
       this.state.areas = {
         child: allAreas,
         adult: allAreas,
