@@ -119,6 +119,7 @@
     "Kokiri Forest Storms Grotto": "true"
 "Hyrule Field":
   region: HYRULE_FIELD
+  time: "flow"
   exits:
     "Lost Woods Bridge": "true"
     "Market Entryway": "true"
@@ -234,24 +235,25 @@
 "Market Entryway":
   region: MARKET
   exits:
-    "Hyrule Field": "true"
+    "Hyrule Field": "is_day"
     "Market": "is_child"
     "Market Destroyed": "is_adult"
     "Market Pot House": "true"
 "Market":
   region: MARKET
   exits:
-    "Hyrule Field": "true"
+    "Market Entryway": "true"
     "Back Alley": "true"
     "Hyrule Castle": "is_child"
     "Temple of Time Entryway": "true"
     "Bombchu Bowling": "true"
-    "Treasure Game": "true"
-    "Shooting Gallery Child": "true"
-    "Market Bazaar": "true"
-    "Market Potion Shop": "true"
-    "MM Clock Town": "is_child"
+    "Treasure Game": "is_night"
+    "Shooting Gallery Child": "is_day"
+    "Market Bazaar": "is_day"
+    "Market Potion Shop": "is_day"
+    "MM Clock Town": "is_child && is_day"
   events:
+    RICHARD: "is_night"
     RUPEES: "true"
 "Market Bazaar":
   region: MARKET
@@ -295,8 +297,7 @@
 "Market Pot House":
   region: MARKET
   exits:
-    "Market": "is_child"
-    "Market Destroyed": "is_adult"
+    "Market Entryway": "true"
   events:
     RUPEES: "true"
   locations:
@@ -308,14 +309,14 @@
     "Market": "is_child"
     "Market Destroyed": "is_adult"
     "Dog Lady House": "true"
-    "Market Bombchu Shop": "true"
-    "Market Back Alley East Home": "true"
+    "Market Bombchu Shop": "is_night"
+    "Market Back Alley East Home": "is_night"
 "Dog Lady House":
   region: MARKET
   exits:
     "Back Alley": "true"
   locations:
-    "Market Dog Lady HP": "true"
+    "Market Dog Lady HP": "event(RICHARD) && is_night"
 "Market Back Alley East Home":
   region: MARKET
   exits:
@@ -366,14 +367,14 @@
     "Hyrule Field": "true"
     "Lon Lon Ranch Silo": "true"
     "Lon Lon Ranch Stables": "true"
-    "Lon Lon Ranch House": "true"
+    "Lon Lon Ranch House": "is_day"
     "Lon Lon Ranch Grotto": "is_child"
   events:
-    EPONA: "is_adult && can_play(SONG_EPONA) && event(RUPEES)"
-    MALON_COW: "is_adult && event(EPONA)"
+    EPONA: "is_adult && can_play(SONG_EPONA) && event(RUPEES) && is_day"
+    MALON_COW: "is_adult && event(EPONA) && is_day"
     RUPEES: "is_child"
   locations:
-    "Lon Lon Ranch Malon Song": "is_child && has(OCARINA) && event(MALON)"
+    "Lon Lon Ranch Malon Song": "is_child && has(OCARINA) && event(MALON) && is_day"
     "Lon Lon Ranch GS Tree": "is_child"
     "Lon Lon Ranch GS House": "can_boomerang && gs_night"
     "Lon Lon Ranch GS Rain Shed": "is_child && gs_night"
@@ -398,7 +399,7 @@
   exits:
     "Lon Lon Ranch": "true"
   locations:
-    "Lon Lon Ranch Talon Bottle": "is_child && woke_talon_child && event(RUPEES)"
+    "Lon Lon Ranch Talon Bottle": "is_child && woke_talon_child && event(RUPEES) && is_day"
 "Lon Lon Ranch Grotto":
   region: LON_LON_RANCH
   exits:
@@ -409,6 +410,7 @@
     "Lon Lon Ranch Grotto Right Scrub": "is_child && can_hit_scrub"
 "Hyrule Castle":
   region: HYRULE_CASTLE
+  time: "flow"
   exits:
     "Market": "true"
     "Fairy Fountain Din": "has_explosives"
@@ -455,6 +457,7 @@
     "Hyrule Castle Gossip Grotto": "has_explosives_or_hammer"
 "Ganon Castle Exterior":
   region: GANON_CASTLE_EXTERIOR
+  time: "night"
   exits:
     "Market Destroyed": "true"
     "Ganon Castle Main": "special(BRIDGE)"
@@ -606,19 +609,20 @@
     "Graveyard": "true"
     "Bottom of the Well": "is_child && event(WELL_DRAIN)"
     "Skulltula House": "true"
-    "Shooting Gallery Adult": "is_adult"
-    "Kakariko Rooftop": "is_child || can_hookshot"
-    "Kakariko Bazaar": "is_adult"
-    "Kakariko Potion Shop": "is_adult"
+    "Shooting Gallery Adult": "is_adult && is_day"
+    "Kakariko Rooftop": "(is_child && is_day) || can_hookshot || (is_adult && trick(OOT_PASS_COLLISION))"
+    "Kakariko Bazaar": "is_adult && is_day"
+    "Kakariko Potion Shop": "is_adult && is_day"
     "Kakariko Granny Shop": "is_adult"
     "Windmill": "true"
+    "Kakariko Carpenter House": "true"
     "Impa House Front": "true"
     "ReDead Grotto": "hidden_grotto_bomb"
     "Kakariko Generic Grotto": "true"
   locations:
-    "Kakariko Anju Bottle": "is_child"
-    "Kakariko Anju Egg": "is_adult"
-    "Kakariko Anju Cojiro": "adult_trade(POCKET_CUCCO)"
+    "Kakariko Anju Bottle": "is_child && is_day"
+    "Kakariko Anju Egg": "is_adult && is_day"
+    "Kakariko Anju Cojiro": "event(TALON_AWAKE) && is_day"
     "Kakariko Song Shadow": "is_adult && has(MEDALLION_FOREST) && has(MEDALLION_FIRE) && has(MEDALLION_WATER)"
     "Kakariko Man on Roof": "can_hookshot || trick(OOT_MAN_ON_ROOF)"
     "Kakariko GS Roof": "gs_night && can_hookshot"
@@ -635,7 +639,7 @@
 "Kakariko Trail Start":
   region: KAKARIKO
   exits:
-    "Kakariko": "setting(kakarikoGate, open) || event(KAKARIKO_GATE_OPEN) || is_adult"
+    "Kakariko": "setting(kakarikoGate, open) || event(KAKARIKO_GATE_OPEN) || is_adult || trick(OOT_PASS_COLLISION)"
     "Death Mountain": "true"
 "Kakariko Bazaar":
   region: KAKARIKO
@@ -697,6 +701,12 @@
   locations:
     "Windmill HP": "can_boomerang || event(WINDMILL_TOP) || trick(OOT_WINDMILL_HP_NOTHING)"
     "Windmill Song of Storms": "is_adult && has(OCARINA)"
+"Kakariko Carpenter House":
+  region: KAKARIKO
+  exits:
+    "Kakariko": "true"
+  events:
+    TALON_AWAKE: adult_trade(POCKET_CUCCO)
 "Skulltula House":
   region: KAKARIKO
   exits:
@@ -734,10 +744,10 @@
   exits:
     "Kakariko": "true"
     "Graveyard Royal Tomb": "can_play(SONG_ZELDA)"
-    "Graveyard Shield Grave": "true"
-    "Graveyard ReDead Grave": "true"
+    "Graveyard Shield Grave": "is_adult || is_night"
+    "Graveyard ReDead Grave": "is_adult || is_night"
     "Dampe Grave": "is_adult"
-    "Dampe House": "true"
+    "Dampe House": "is_adult || is_dusk"
   events:
     BEAN_GRAVEYARD: "can_use_beans"
     BUGS: "has_bottle"
@@ -747,7 +757,7 @@
     ARROWS: "is_adult"
     MAGIC: "can_cut_grass"
   locations:
-    "Graveyard Dampe Game": "is_child && event(RUPEES)"
+    "Graveyard Dampe Game": "is_child && event(RUPEES) && is_dusk"
     "Graveyard Crate HP": "can_ride_bean(BEAN_GRAVEYARD) || can_longshot"
     "Graveyard GS Soil": "gs_soil && can_damage_skull"
     "Graveyard GS Wall": "can_boomerang && gs_night"
@@ -799,6 +809,7 @@
     "Graveyard": "true"
 "Death Mountain":
   region: DEATH_MOUNTAIN_TRAIL
+  time: "flow"
   exits:
     "Goron City": "true"
     "Dodongo Cavern": "has_bombflowers || is_adult"
@@ -818,6 +829,7 @@
     "Death Mountain GS Above Dodongo":  "gs_night && can_hammer"
 "Death Mountain Summit":
   region: DEATH_MOUNTAIN_TRAIL
+  time: "flow"
   exits:
     "Death Mountain": "true"
     "Kakariko Rooftop": "is_child"
@@ -891,7 +903,7 @@
     "Goron City Maze Center 1": "has_explosives_or_hammer || can_lift_silver"
     "Goron City Maze Center 2": "has_explosives_or_hammer || can_lift_silver"
     "Goron City Maze Left": "can_hammer || can_lift_silver"
-    "Goron City Big Pot HP": "is_child && has_explosives && (can_play(SONG_ZELDA) || has_fire)"
+    "Goron City Big Pot HP": "is_child && has_bombs && (can_play(SONG_ZELDA) || has_fire)"
     "Goron City Tunic": "is_adult && (has_explosives || can_use_bow || has(STRENGTH))"
     "Goron City Bomb Bag": "is_child && has_explosives"
     "Goron City Medigoron Giant Knife": "is_adult && has(WALLET) && (has_bombflowers || can_hammer) && event(RUPEES)"
@@ -923,6 +935,7 @@
     "Goron City Grotto Right Scrub": "can_hit_scrub && event(RUPEES)"
 "Zora River Front":
   region: ZORA_RIVER
+  time: "flow"
   exits:
     "Hyrule Field": "true"
     "Zora River": "is_adult || (is_child && has_explosives)"
@@ -936,6 +949,7 @@
     "Zora River GS Tree": "is_child && can_damage_skull"
 "Zora River":
   region: ZORA_RIVER
+  time: "flow"
   exits:
     "Zora River Front": "true"
     "Zora Domain": "can_play(SONG_ZELDA) || (is_child && trick(OOT_CHILD_DOMAIN)) || (has_hover_boots && trick(OOT_ADULT_DOMAIN))"
@@ -1034,10 +1048,10 @@
     "Zora Domain": "true"
 "Lake Hylia":
   region: LAKE_HYLIA
+  time: "flow"
   exits:
     "Hyrule Field": "true"
     "Zora Domain": "is_child && has(SCALE)"
-
     "Laboratory": "true"
     "Water Temple": "has_iron_boots && has_tunic_zora && can_hookshot"
     "Fishing Pond": "is_child || event(WATER_TEMPLE_CLEARED) || scarecrow_hookshot || can_ride_bean(BEAN_LAKE_HYLIA)"
@@ -1056,7 +1070,7 @@
     "Lake Hylia Underwater Bottle": "is_child && has(SCALE)"
     "Lake Hylia Fire Arrow": "can_use_bow && (event(WATER_TEMPLE_CLEARED) || scarecrow_longshot)"
     "Lake Hylia HP": "can_ride_bean(BEAN_LAKE_HYLIA) || scarecrow_hookshot"
-    "Lake Hylia GS Lab Wall": "gs_night && (can_boomerang || (trick(OOT_LAB_WALL_GS) && (has_sword_kokiri || has_sticks)))"
+    "Lake Hylia GS Lab Wall": "gs_night && (can_boomerang || (trick(OOT_LAB_WALL_GS) && (has_sword_kokiri || can_use_sticks)))"
     "Lake Hylia GS Island": "is_child && gs_night && can_damage_skull"
     "Lake Hylia GS Soil": "gs_soil && can_damage_skull"
     "Lake Hylia GS Big Tree": "gs_night && can_longshot"
@@ -1121,8 +1135,7 @@
 "Temple of Time":
   region: TEMPLE_OF_TIME
   exits:
-    "Market": "is_child"
-    "Market Destroyed": "is_adult"
+    "Temple of Time Entryway": "true"
     "Sacred Realm": "is_adult && event(DOOR_OF_TIME_OPEN)"
   events:
     DOOR_OF_TIME_OPEN: "setting(doorOfTime, open) || can_play(SONG_TIME)"
@@ -1214,6 +1227,7 @@
     "Great Fairy Magic Upgrade 2": "can_play(SONG_ZELDA)"
 "Gerudo Valley":
   region: GERUDO_VALLEY
+  time: "flow"
   exits:
     "Lake Hylia": "true"
     "Hyrule Field": "true"
@@ -1235,6 +1249,7 @@
     "Gerudo Valley Gossip": "true"
 "Gerudo Valley After Bridge":
   region: GERUDO_VALLEY
+  time: "flow"
   exits:
     "Lake Hylia": "true"
     "Gerudo Fortress Exterior": "true"
@@ -1275,8 +1290,8 @@
     OPEN_FORTRESS_GATE: "has(GERUDO_CARD) && is_adult"
   locations:
     "Gerudo Fortress Chest": "has_hover_boots || can_longshot || scarecrow_hookshot"
-    "Gerudo Fortress Archery Reward 1": "event(EPONA) && can_use_bow && has(GERUDO_CARD) && event(RUPEES)"
-    "Gerudo Fortress Archery Reward 2": "event(EPONA) && can_use_bow && has(GERUDO_CARD) && event(RUPEES)"
+    "Gerudo Fortress Archery Reward 1": "event(EPONA) && can_use_bow && has(GERUDO_CARD) && event(RUPEES) && is_day"
+    "Gerudo Fortress Archery Reward 2": "event(EPONA) && can_use_bow && has(GERUDO_CARD) && event(RUPEES) && is_day"
     "Gerudo Fortress GS Wall": "can_hookshot && gs_night"
     "Gerudo Fortress GS Target": "can_hookshot && gs_night && has(GERUDO_CARD)"
 "Fortress Near Wasteland":
@@ -1310,6 +1325,7 @@
     "Desert Colossus": "true"
 "Desert Colossus":
   region: DESERT_COLOSSUS
+  time: "flow"
   exits:
     "Spirit Temple": "true"
     "Haunted Wasteland End": "true"
@@ -1326,6 +1342,7 @@
     "Desert Colossus Gossip": "true"
 "Desert Colossus Spirit Exit":
   region: DESERT_COLOSSUS
+  time: "flow"
   exits:
     "Desert Colossus": "true"
   locations:

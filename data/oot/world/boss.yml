@@ -15,8 +15,8 @@
   boss: true
   dungeon: DC
   locations:
-    "Dodongo Cavern Boss Container": "can_use_sticks || has_weapon"
-    "Dodongo Cavern Boss": "can_use_sticks || has_weapon"
+    "Dodongo Cavern Boss Container": "(has_bombs || has(STRENGTH)) && (can_use_sticks || has_weapon)"
+    "Dodongo Cavern Boss": "(has_bombs || has(STRENGTH)) && (can_use_sticks || has_weapon)"
 "Jabu-Jabu Boss":
   boss: true
   dungeon: JJ
