@@ -13,8 +13,8 @@ Stone Tower Temple Inverted,        Stone Tower Top Inverted,               dung
 Stone Tower Top Inverted,           Stone Tower Temple Inverted,            dungeon,    0xac10
 Stone Tower Temple,                 Stone Tower Front of Temple,            dungeon,    0x2600
 Stone Tower Front of Temple,        Stone Tower Temple,                     dungeon,    0xaa20
-Swamp Spider House,                 Swamp Back,                             dungeon,    0x4800
-Swamp Back,                         Swamp Spider House,                     dungeon,    0x8480
+Swamp Spider House,                 Near Swamp Spider House,                dungeon,    0x4800
+Near Swamp Spider House,            Swamp Spider House,                     dungeon,    0x8480
 Ocean Spider House,                 Great Bay Coast,                        dungeon,    0x4a00
 Great Bay Coast,                    Ocean Spider House,                     dungeon,    0x6880
 Beneath the Well Entrance,          Ikana Canyon,                           dungeon,    0x9000

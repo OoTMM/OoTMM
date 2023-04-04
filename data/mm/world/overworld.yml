@@ -168,7 +168,7 @@
 "Bomb Shop":
   region: CLOCK_TOWN_WEST
   events:
-    BUY_KEG: "can_use_keg && has_rupees"
+    BUY_KEG: "has(MASK_GORON) && has(POWDER_KEG) && has_rupees"
   exits:
     "Clock Town West": "true"
   locations:
@@ -270,7 +270,7 @@
   exits:
     "Clock Town East": "true"
   locations:
-    "Honey & Darling Reward 1": "has(BOW) || has(BOMB_BAG) || can_use_deku_bubble && has_rupees"
+    "Honey & Darling Reward 1": "(has(BOW) || has(BOMB_BAG) || can_use_deku_bubble) && has_rupees"
     "Honey & Darling Reward 2": "has(BOW) && has(BOMB_BAG) && has_rupees"
 "Stock Pot Inn":
   region: STOCK_POT_INN
@@ -589,10 +589,8 @@
   exits:
     "Swamp Front": "event(BOAT_RIDE) || event(CLEAN_SWAMP) || has(MASK_ZORA) || ((has_arrows || can_hookshot) && (has(MASK_DEKU) || has(MASK_GORON)))"
     "Deku Palace Front": "true"
-    "Near Swamp Spider House": "(has(MASK_DEKU) || has(MASK_ZORA) || event(CLEAN_SWAMP)) && (has_sticks || has_arrows)"
+    "Near Swamp Spider House": "has(MASK_DEKU) || has(MASK_ZORA) || event(CLEAN_SWAMP)"
     "Swamp Canopy Back": "event(CLEAN_SWAMP)"
-  locations:
-    "Southern Swamp Grotto": "has(MASK_DEKU) || has(MASK_ZORA) || event(CLEAN_SWAMP)"
 "Near Swamp Spider House":
   region: SOUTHERN_SWAMP
   exits:
@@ -606,6 +604,7 @@
   exits:
     "Swamp Front": "(has_arrows || can_hookshot) && has(MASK_GORON)"
     "Near Swamp Spider House": "has(MASK_DEKU) || has(MASK_ZORA) || event(CLEAN_SWAMP)"
+    "Southern Swamp Grotto": "true"
 "Southern Swamp Grotto":
   region: SOUTHERN_SWAMP
   events:
@@ -803,7 +802,7 @@
 "Deku Shrine":
   region: DEKU_PALACE
   exits:
-    "Deku Palace": "true"
+    "Near Deku Shrine": "true"
   locations:
     "Deku Shrine Mask of Scents": "event(RETURN_PRINCESS) && has_weapon_range"
 "Behind Large Icicles":
