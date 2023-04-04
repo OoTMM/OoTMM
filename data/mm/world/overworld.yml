@@ -801,7 +801,7 @@
 "Deku Shrine":
   region: DEKU_PALACE
   exits:
-    "Deku Palace": "true"
+    "Near Deku Shrine": "true"
   locations:
     "Deku Shrine Mask of Scents": "event(RETURN_PRINCESS) && has_weapon_range"
 "Behind Large Icicles":
