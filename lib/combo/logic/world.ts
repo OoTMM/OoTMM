@@ -12,12 +12,14 @@ export type ExprMap = {
 }
 
 export type WorldArea = {
+  game: Game;
   boss: boolean;
   dungeon: string | null;
   exits: ExprMap;
   events: ExprMap;
   locations: ExprMap;
   gossip: ExprMap;
+  time: 'still' | 'day' | 'night' | 'flow';
 };
 
 type WorldCheckNumeric = {
@@ -136,9 +138,6 @@ export class LogicPassWorld {
       this.loadGame(g);
     }
 
-    /* Create a special black-hole area */
-    this.world.areas["VOID"] = { boss: false, dungeon: null, exits: {}, events: {}, locations: {}, gossip: {} };
-
     return { world: this.world, exprParsers: this.exprParsers as ExprParsers };
   }
 
@@ -193,6 +192,7 @@ export class LogicPassWorld {
         const exits = mapExprs(exprParser, game, ' ', area.exits || {});
         const events = mapExprs(exprParser, game, '_', area.events || {});
         const gossip = mapExprs(exprParser, game, ' ', area.gossip || {});
+        const time = area.time || 'still';
 
         if (name === undefined) {
           throw new Error(`Area name is undefined`);
@@ -206,7 +206,7 @@ export class LogicPassWorld {
           throw new Error(`Unknown region ${region}`);
         }
 
-        this.world.areas[name] = { boss, dungeon, exits, events, locations, gossip };
+        this.world.areas[name] = { game, boss, dungeon, exits, events, locations, gossip, time };
 
         if (dungeon) {
           if (this.world.dungeons[dungeon] === undefined) {
