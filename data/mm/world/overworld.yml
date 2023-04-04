@@ -270,7 +270,7 @@
   exits:
     "Clock Town East": "true"
   locations:
-    "Honey & Darling Reward 1": "has(BOW) || has(BOMB_BAG) || can_use_deku_bubble && has_rupees"
+    "Honey & Darling Reward 1": "(has(BOW) || has(BOMB_BAG) || can_use_deku_bubble) && has_rupees"
     "Honey & Darling Reward 2": "has(BOW) && has(BOMB_BAG) && has_rupees"
 "Stock Pot Inn":
   region: STOCK_POT_INN
