@@ -16,27 +16,16 @@
   dungeon: BtW
   exits:
     "Beneath the Well Entrance": "true"
-    "Beneath the Well Middle Section": "has(MASK_GIBDO) && has_bottle"
     "Beneath the Well Sun Block": "event(WELL_BIG_POE) && has_milk"
   events:
     WELL_BIG_POE: "has(MASK_GIBDO) && has_bottle && has(BOMB_BAG) && (has_weapon_range)"
-    STICKS: "true"
-  locations:
-    "Beneath the Well Cow": "has(MASK_GIBDO) && (event(WELL_HOT_WATER) || has_hot_water_distance) && can_play(SONG_EPONA) && has_nuts"
-"Beneath the Well Middle Section":
-  dungeon: BtW
-  exits:
-    "Beneath the Well East Section": "true"
-    "Beneath the Well Sun Block": "event(WELL_BIG_POE) && has_milk"
-  events:
-    STICKS: "true"
-    NUTS: "true"
   locations:
     "Beneath the Well Skulltulla Chest": "has(MASK_GIBDO) && has_bottle"
+    "Beneath the Well Cow": "has(MASK_GIBDO) && (event(WELL_HOT_WATER) || has_hot_water_distance) && can_play(SONG_EPONA)"
 "Beneath the Well Sun Block":
   dungeon: BtW
   exits:
-    "Beneath the Well Middle Section": "true"
+    "Beneath the Well East Section": "true"
     "Beneath the Well End": "has_mirror_shield || can_use_light_arrows"
   locations:
     "Beneath the Well Mirror Shield": "can_use_fire_arrows || event(WELL_BIG_POE)"

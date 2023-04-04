@@ -607,7 +607,7 @@
     "Bottom of the Well": "is_child && event(WELL_DRAIN)"
     "Skulltula House": "true"
     "Shooting Gallery Adult": "is_adult"
-    "Kakariko Rooftop": "is_child || can_hookshot || (is_adult && trick(OOT_PASS_COLLISION))"
+    "Kakariko Rooftop": "is_child || can_hookshot"
     "Kakariko Bazaar": "is_adult"
     "Kakariko Potion Shop": "is_adult"
     "Kakariko Granny Shop": "is_adult"
@@ -635,7 +635,7 @@
 "Kakariko Trail Start":
   region: KAKARIKO
   exits:
-    "Kakariko": "setting(kakarikoGate, open) || event(KAKARIKO_GATE_OPEN) || is_adult || trick(OOT_PASS_COLLISION)"
+    "Kakariko": "setting(kakarikoGate, open) || event(KAKARIKO_GATE_OPEN) || is_adult"
     "Death Mountain": "true"
 "Kakariko Bazaar":
   region: KAKARIKO
@@ -1037,6 +1037,7 @@
   exits:
     "Hyrule Field": "true"
     "Zora Domain": "is_child && has(SCALE)"
+
     "Laboratory": "true"
     "Water Temple": "has_iron_boots && has_tunic_zora && can_hookshot"
     "Fishing Pond": "is_child || event(WATER_TEMPLE_CLEARED) || scarecrow_hookshot || can_ride_bean(BEAN_LAKE_HYLIA)"
@@ -1055,7 +1056,7 @@
     "Lake Hylia Underwater Bottle": "is_child && has(SCALE)"
     "Lake Hylia Fire Arrow": "can_use_bow && (event(WATER_TEMPLE_CLEARED) || scarecrow_longshot)"
     "Lake Hylia HP": "can_ride_bean(BEAN_LAKE_HYLIA) || scarecrow_hookshot"
-    "Lake Hylia GS Lab Wall": "gs_night && (can_boomerang || (trick(OOT_LAB_WALL_GS) && (has_sword_kokiri || can_use_sticks)))"
+    "Lake Hylia GS Lab Wall": "gs_night && (can_boomerang || (trick(OOT_LAB_WALL_GS) && (has_sword_kokiri || has_sticks)))"
     "Lake Hylia GS Island": "is_child && gs_night && can_damage_skull"
     "Lake Hylia GS Soil": "gs_soil && can_damage_skull"
     "Lake Hylia GS Big Tree": "gs_night && can_longshot"
