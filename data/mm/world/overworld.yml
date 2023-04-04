@@ -694,7 +694,7 @@
 "Deku Palace Upper":
   region: DEKU_PALACE
   events:
-    MAGIC: 'has(MASK_DEKU)"
+    MAGIC: "has(MASK_DEKU)"
   exits:
     "Deku Palace Main": "true"
     "Deku Palace Near Cage": "has(MASK_DEKU)"
