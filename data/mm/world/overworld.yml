@@ -163,8 +163,8 @@
   exits:
     "Moon": "can_play(SONG_ORDER) && special(MOON)"
   locations:
-    "Clock Tower Roof Skull Kid Ocarina": "has_weapon_range"
-    "Clock Tower Roof Skull Kid Song of Time": "has_weapon_range"
+    "Clock Tower Roof Skull Kid Ocarina": "has_weapon_range || (has(MASK_DEKU) && has(MAGIC_UPGRADE))"
+    "Clock Tower Roof Skull Kid Song of Time": "has_weapon_range || (has(MASK_DEKU) && has(MAGIC_UPGRADE))"
 "Bomb Shop":
   region: CLOCK_TOWN_WEST
   events:
@@ -196,8 +196,8 @@
   locations:
     "Bomb Shop Bomb Bag 2": "has(WALLET, 1) && has_rupees"
     "Curiosity Shop All-Night Mask": "event(SAKON_BOMB_BAG) && has(WALLET, 2) && has_rupees"
-    #"Curiostiy Shop 5r Trade": "has_milk"
-    #"Curiostiy Shop 20r Trade": "event(WATER) || event(BUGS) || event(FISH) || event(MUSHROOM) || has_milk || has_red_or_blue_potion || has_green_potion || has_zora_egg"
+    #"Curiostiy Shop 5r Trade": "has_milk || event(MUSHROOM)"
+    #"Curiostiy Shop 20r Trade": "event(WATER) || event(BUGS) || event(FISH) || has_milk || has_red_or_blue_potion || has_green_potion || has_zora_egg"
     #"Curiostiy Shop 50r Trade": "event(POE)"
     #"Curiostiy Shop 200r Trade": "has_chateau || has_big_poe"
 "Curiosity Shop Back Room":
@@ -327,7 +327,7 @@
 "Termina Field":
   region: TERMINA_FIELD
   events:
-    STICKS: "true"
+    STICKS: "can_kill_baba_both_sticks"
     NUTS: "true"
     MAGIC: "true"
     RUPEES: "true"
@@ -694,7 +694,7 @@
 "Deku Palace Upper":
   region: DEKU_PALACE
   events:
-    MAGIC: 'has(MASK_DEKU)"
+    MAGIC: "has(MASK_DEKU)"
   exits:
     "Deku Palace Main": "true"
     "Deku Palace Near Cage": "has(MASK_DEKU)"
@@ -820,6 +820,8 @@
     "Mountain Village Path Gossip": "true"
 "Mountain Village Path Upper":
   region: PATH_TO_MOUNTAIN_VILLAGE
+  events:
+    MAGIC: "true"
   exits:
     "Mountain Village Path Lower": "can_break_boulders || can_use_fire_arrows || event(BOSS_SNOWHEAD)"
     "Mountain Village": "true"
@@ -828,48 +830,102 @@
   exits:
     "Mountain Village Path Upper": "true"
     "Twin Islands": "true"
-    "Goron Graveyard": "can_use_lens_strict || trick(MM_DARMANI_WALL) || (event(BOSS_SNOWHEAD) && (has(MASK_GORON) || has(MASK_ZORA)))"
+    "Near Goron Graveyard": "can_use_lens_strict || trick(MM_DARMANI_WALL) || (event(BOSS_SNOWHEAD) && (has(MASK_GORON) || has(MASK_ZORA)))"
     "Path to Snowhead Front": "true"
     "Blacksmith": "true"
+    "Mountain Village Grotto": "event(BOSS_SNOWHEAD) && has(MASK_GORON)"
   gossip:
     "Mountain Village Gossip Outside": "event(BOSS_SNOWHEAD)"
-    "Mountain Village Gossip Tunnel": "event(BOSS_SNOWHEAD) && (has(MASK_GORON) || has(MASK_ZORA))"
+    "Mountain Village Gossip Tunnel": "event(BOSS_SNOWHEAD) && has(MASK_GORON)"
   events:
     MOUNTAIN_VILLAGE_OWL: "has(SONG_SOARING) && (has_sticks || has_weapon)"
-    STICKS: "event(BOSS_SNOWHEAD) && (has(MASK_GORON) || has(MASK_ZORA))"
-    NUTS: "event(BOSS_SNOWHEAD) && (has(MASK_GORON) || has(MASK_ZORA))"
+    MAGIC: "true"
+    ARROWS: "true"
+    BOMBS: "true"
+    RUPEES: "can_break_boulders || can_use_fire_arrows"
   locations:
     "Mountain Village Waterfall Chest": "event(BOSS_SNOWHEAD) && can_use_lens"
     "Mountain Village Don Gero Mask": "event(GORON_FOOD)"
     "Mountain Village Frog Choir HP": "event(BOSS_SNOWHEAD) && event(FROG_1) && event(FROG_2) && event(FROG_3) && event(FROG_4)"
-    "Mountain Village Tunnel Grotto": "event(BOSS_SNOWHEAD) && (has(MASK_GORON) || has(MASK_ZORA))"
+"Mountain Village Grotto":
+  region: MOUNTAIN_VILLAGE
+  exits:
+    "Mountain Village": "true"
+  events:
+    MAGIC: "true"
+    ARROWS: "true"
+    BOMBS: "true"
+    RUPEES: "true"
+    STICKS: "true"
+    NUTS: "true"
+    BUGS: "has_bottle"
+    FISH: "has_bottle"
+    MUSHROOM: "has_bottle && has(MASK_SCENTS)"
+  locations:
+    "Mountain Village Tunnel Grotto": "true"
 "Blacksmith":
   region: MOUNTAIN_VILLAGE
   exits:
     "Mountain Village": "true"
   events:
     BLACKSMITH_ENABLED: "event(BOSS_SNOWHEAD) || can_use_fire_arrows || has_hot_water || has_hot_water_distance"
-    GOLD_DUST_USED: "has(WALLET) && has(BOTTLED_GOLD_DUST) && event(BLACKSMITH_ENABLED)"
+    GOLD_DUST_USED: "has_rupees && has(WALLET) && has(BOTTLED_GOLD_DUST) && event(BLACKSMITH_ENABLED)"
   locations:
-    "Blacksmith Razor Blade": "event(BLACKSMITH_ENABLED) && has(WALLET)"
+    "Blacksmith Razor Blade": "has_rupees && event(BLACKSMITH_ENABLED) && has(WALLET)"
     "Blacksmith Gilded Sword": "event(GOLD_DUST_USED)"
 "Twin Islands":
   region: TWIN_ISLANDS
+  events:
+    MAGIC: "true"
+#    TINGLE_MOUNTAIN: "has_weapon_range && has_rupees"
   exits:
     "Mountain Village": "true"
     "Goron Village": "true"
-    "Goron Race": "can_use_keg || event(POWDER_KEG_TRIAL)"
-  events:
-    TWIN_ISLANDS_HOT_WATER: "(can_use_fire_arrows || event(BOSS_SNOWHEAD) || has_hot_water || has_hot_water_distance) && has_bottle"
-    WATER: "(can_use_fire_arrows || event(BOSS_SNOWHEAD) || has_hot_water || has_hot_water_distance) && has_bottle"
-    STICKS: "(has_explosives || trick_keg_explosives || (trick(MM_KEG_EXPLOSIVES) && event(POWDER_KEG_TRIAL))) && (has(MASK_GORON) || scarecrow_hookshot)"
-    NUTS: "(has_explosives || trick_keg_explosives || (trick(MM_KEG_EXPLOSIVES) && event(POWDER_KEG_TRIAL))) && (has(MASK_GORON) || scarecrow_hookshot)"
+    "Near Goron Race": "has(MASK_GORON) || scarecrow_hookshot"
+    "Near Ramp Grotto": "has(MASK_GORON)"
+    "Twin Islands Frozen Grotto": "can_use_fire_arrows || event(BOSS_SNOWHEAD) || has_hot_water || has_hot_water_distance"
   locations:
     "Twin Islands Underwater Chest 1": "event(BOSS_SNOWHEAD) && has(MASK_ZORA)"
     "Twin Islands Underwater Chest 2": "event(BOSS_SNOWHEAD) && has(MASK_ZORA)"
-    "Twin Islands Frozen Grotto Chest": "(can_use_fire_arrows || event(BOSS_SNOWHEAD) || has_hot_water || has_hot_water_distance) && (has_explosives || trick_keg_explosives || (trick(MM_KEG_EXPLOSIVES) && event(POWDER_KEG_TRIAL)))"
-    "Twin Islands Ramp Grotto Chest": "(has_explosives || trick_keg_explosives || (trick(MM_KEG_EXPLOSIVES) && event(POWDER_KEG_TRIAL))) && (has(MASK_GORON) || scarecrow_hookshot)"
     "Goron Elder": "has(MASK_GORON) && (can_use_fire_arrows || has_hot_water || has_hot_water_distance)"
+"Twin Islands Ramp Grotto":
+  region: TWIN_ISLANDS
+  exits:
+    "Near Ramp Grotto": "true"
+  events:
+    MAGIC: "true"
+    ARROWS: "true"
+    BOMBS: "true"
+    RUPEES: "true"
+    STICKS: "true"
+    NUTS: "true"
+    BUGS: "has_bottle"
+    FISH: "has_bottle"
+    MUSHROOM: "has_bottle && has(MASK_SCENTS)"
+  locations:
+    "Twin Islands Ramp Grotto Chest": "true"
+"Twin Islands Frozen Grotto":
+  region: TWIN_ISLANDS
+  exits:
+    "Twin Islands": "true"
+  events:
+    TWIN_ISLANDS_HOT_WATER: "has_bottle"
+    WATER: "has_bottle"
+    STICKS: "can_kill_baba_sticks"
+    MUSHROOM: "has_bottle && has(MASK_SCENTS)"
+  locations:
+    "Twin Islands Frozen Grotto Chest": "(has_explosives || trick_keg_explosives || (trick(MM_KEG_EXPLOSIVES) && event(POWDER_KEG_TRIAL)))"
+"Near Goron Race":
+  region: TWIN_ISLANDS
+  exits:
+    "Twin Islands": "true"
+    "Goron Race": "can_use_keg || event(POWDER_KEG_TRIAL)"
+    "Near Ramp Grotto": "true"(has_explosives || trick_keg_explosives || (trick(MM_KEG_EXPLOSIVES) && event(POWDER_KEG_TRIAL)))
+"Near Ramp Grotto":
+  region: TWIN_ISLANDS
+  exits:
+    "Twin Islands": "true"
+    "Twin Islands Ramp Grotto": "has_explosives || trick_keg_explosives || (trick(MM_KEG_EXPLOSIVES) && event(POWDER_KEG_TRIAL))"
 "Goron Village":
   region: GORON_VILLAGE
   exits:
@@ -897,6 +953,14 @@
     "Lone Peak Shrine Lens Chest": "true"
     "Lone Peak Shrine Boulder Chest": "has_explosives || trick_keg_explosives"
     "Lone Peak Shrine Invisible Chest": "can_use_lens"
+"Near Goron Graveyard":
+  region: MOUNTAIN_VILLAGE
+  exits:
+    "Mountain Village": "true"
+    "Goron Gravveyard": "true"
+    "Mountain Village Grotto": "event(BOSS_SNOWHEAD)"
+  events:
+    MAGIC: "true"
 "Goron Graveyard":
   region: MOUNTAIN_VILLAGE
   exits:
@@ -939,13 +1003,27 @@
 "Path to Snowhead Back":
   region: PATH_TO_SNOWHEAD
   events:
-    STICKS: "has_explosives || trick_keg_explosives"
-    NUTS: "has_explosives || trick_keg_explosives"
+    MAGIC: "can_break_boulders"
   exits:
     "Path to Snowhead Middle": "goron_fast_roll"
     "Snowhead Entrance": "true"
+    "Path to Snowhead Grotto": "has_explosives"
+"Path to Snowhead Grotto":
+  region: PATH_TO_SNOWHEAD
+  exits:
+    "Path to Snowhead Back": "true"
+  events:
+    MAGIC: "true"
+    ARROWS: "true"
+    BOMBS: "true"
+    RUPEES: "true"
+    STICKS: "true"
+    NUTS: "true"
+    BUGS: "has_bottle"
+    FISH: "has_bottle"
+    MUSHROOM: "has_bottle && has(MASK_SCENTS)"
   locations:
-    "Path to Snowhead Grotto": "has_explosives || trick_keg_explosives"
+    "Path to Snowhead Grotto": "true"
 "Snowhead Entrance":
   region: SNOWHEAD
   exits:
@@ -974,7 +1052,7 @@
 "Goron Race":
   region: TWIN_ISLANDS
   exits:
-    "Twin Islands": "true"
+    "Near Goron Race": "true"
   locations:
     "Goron Race Reward": "event(BOSS_SNOWHEAD) && goron_fast_roll"
 "Milk Road":
