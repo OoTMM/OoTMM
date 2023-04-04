@@ -1,6 +1,6 @@
-import { cloneDeep } from 'lodash';
+import { cloneDeep, merge } from 'lodash';
 import { Settings } from '../settings';
-import { Expr } from './expr';
+import { Expr, exprDependencies, ExprResult } from './expr';
 
 import { addItem, combinedItems, isItemConsumable, Items } from './items';
 import { ItemPlacement } from './solve';
@@ -11,9 +11,32 @@ export const AGES = ['child', 'adult'] as const;
 
 export type Age = typeof AGES[number];
 
-type PathfinderStateAge = {
-  queueExits: {[k: string]: Set<string>};
-}
+type PathfinderDependencyList = {
+  locations: Set<string>;
+  events: Set<string>;
+  gossips: Set<string>;
+  exits: {
+    child: Set<string>;
+    adult: Set<string>;
+  };
+};
+
+type PathfinderDependencySet = Map<string, Map<string, PathfinderDependencyList>>;
+
+type PathfinderDependencies = {
+  items: PathfinderDependencySet;
+  events: PathfinderDependencySet;
+};
+
+type PathfinderQueue = {
+  locations: Map<string, Set<string>>;
+  events: Map<string, Set<string>>;
+  gossips: Map<string, Set<string>>;
+  exits: {
+    child: Map<string, Set<string>>;
+    adult: Map<string, Set<string>>;
+  }
+};
 
 export type PathfinderState = {
   items: Items;
@@ -28,11 +51,19 @@ export type PathfinderState = {
   gossip: Set<string>;
   goal: boolean;
   started: boolean;
-  ageStates: {
-    child: PathfinderStateAge;
-    adult: PathfinderStateAge;
-  }
+  queue: PathfinderQueue;
+  dependencies: PathfinderDependencies;
 }
+
+const emptyDepList = (): PathfinderDependencyList => ({
+  locations: new Set(),
+  events: new Set(),
+  gossips: new Set(),
+  exits: {
+    child: new Set(),
+    adult: new Set(),
+  },
+});
 
 function filterStartingItems(items: Items) {
   const newItems = {...items};
@@ -57,14 +88,19 @@ const defaultState = (settings: Settings): PathfinderState => ({
   gossip: new Set(),
   goal: false,
   started: false,
-  ageStates: {
-    child: {
-      queueExits: {},
+  queue: {
+    locations: new Map(),
+    events: new Map(),
+    gossips: new Map(),
+    exits: {
+      child: new Map(),
+      adult: new Map(),
     },
-    adult: {
-      queueExits: {},
-    },
-  }
+  },
+  dependencies: {
+    items: new Map(),
+    events: new Map(),
+  },
 });
 
 export type EntranceOverrides = {[k: string]: {[k: string]: string | null}};
@@ -74,7 +110,6 @@ type PathfinderOptions = {
   entranceOverrides?: EntranceOverrides;
   ignoreItems?: boolean;
   recursive?: boolean;
-  gossip?: boolean;
   stopAtGoal?: boolean;
   restrictedLocations?: Set<string>;
   forbiddenLocations?: Set<string>;
@@ -84,7 +119,6 @@ type PathfinderOptions = {
 export class Pathfinder {
   private opts!: PathfinderOptions;
   private state!: PathfinderState;
-  private resolveOverride!: (area: string, exit: string) => string;
 
   constructor(
     private readonly world: World,
@@ -100,156 +134,323 @@ export class Pathfinder {
     return this.state;
   }
 
+  private queueLocation(loc: string, areaFrom: string) {
+    const queue = this.state.queue.locations;
+    if (!queue.has(loc)) {
+      queue.set(loc, new Set([areaFrom]));
+    } else {
+      queue.get(loc)!.add(areaFrom);
+    }
+  }
+
+  private queueEvent(event: string, areaFrom: string) {
+    const queue = this.state.queue.events;
+    if (!queue.has(event)) {
+      queue.set(event, new Set([areaFrom]));
+    } else {
+      queue.get(event)!.add(areaFrom);
+    }
+  }
+
+  private queueExit(age: Age, exit: string, area: string) {
+    const queue = this.state.queue.exits[age];
+    if (!queue.has(exit)) {
+      queue.set(exit, new Set([area]));
+    } else {
+      queue.get(exit)!.add(area);
+    }
+  }
+
+  private queueGossip(gossip: string, area: string) {
+    const queue = this.state.queue.gossips;
+    if (!queue.has(gossip)) {
+      queue.set(gossip, new Set([area]));
+    } else {
+      queue.get(gossip)!.add(area);
+    }
+  }
+
+  /**
+   * Explore an area, adding all locations and events to the queue
+   */
+  private exploreArea(age: Age, area: string) {
+    this.state.areas[age].add(area);
+    const a = this.world.areas[area];
+    let locs = Object.keys(a.locations).filter(x => !this.state.locations.has(x));
+    if (this.opts.restrictedLocations) {
+      locs = locs.filter(x => this.opts.restrictedLocations!.has(x));
+    }
+    if (this.opts.forbiddenLocations) {
+      locs = locs.filter(x => !this.opts.forbiddenLocations!.has(x));
+    }
+    locs.forEach(x => this.queueLocation(x, area));
+    Object.keys(a.events).filter(x => !this.state.events.has(x)).forEach(x => this.queueEvent(x, area));
+    const exits = Object.keys(a.exits).filter(x => !this.state.areas[age].has(x));
+    exits.forEach(x => this.queueExit(age, x, area));
+    Object.keys(a.gossip).forEach(x => this.queueGossip(x, area));
+  }
+
   private evalExpr(expr: Expr, age: Age) {
     return expr({ items: this.state.items, age, events: this.state.events, ignoreItems: this.opts.ignoreItems || false });
   }
 
-  private exploreArea(area: string, age: Age) {
-    const a = this.world.areas[area];
-    const exits = Object.keys(a.exits).filter(x => !this.state.areas[age].has(x));
-    if (exits.length > 0) {
-      this.state.ageStates[age].queueExits[area] = new Set(exits);
+  private dependenciesLookup(set: PathfinderDependencySet, dependency: string, areaFrom: string) {
+    let data1 = set.get(dependency);
+    if (!data1) {
+      data1 = new Map();
+      set.set(dependency, data1);
     }
-    this.state.areas[age].add(area);
+
+    let data2 = data1.get(areaFrom);
+    if (!data2) {
+      data2 = emptyDepList();
+      data1.set(areaFrom, data2);
+    }
+
+    return data2;
   }
 
-  private pathfindSingleArea(area: string, age: Age) {
-    const remainingExits = this.state.ageStates[age].queueExits[area];
-    const remainigExitsDup = new Set(remainingExits);
-    const newExits = new Set<string>();
-    if (!remainingExits) {
-      return;
+  private addExitsDependencies(set: PathfinderDependencySet, age: Age, exit: string, areaFrom: string, dependents: Set<string>) {
+    for (const dep of dependents) {
+      const data = this.dependenciesLookup(set, dep, areaFrom);
+      data.exits[age].add(exit);
     }
-    const a = this.world.areas[area];
-    for (const originalExitArea of remainigExitsDup) {
-      const expr = a.exits[originalExitArea];
-      const exitArea = this.resolveOverride(area, originalExitArea);
-      if (this.state.areas[age].has(exitArea)) {
-        remainingExits.delete(originalExitArea);
+  }
+
+  private addEventsDependencies(set: PathfinderDependencySet, event: string, areaFrom: string, dependents: Set<string>) {
+    for (const dep of dependents) {
+      const data = this.dependenciesLookup(set, dep, areaFrom);
+      data.events.add(event);
+    }
+  }
+
+  private addLocationDependencies(set: PathfinderDependencySet, location: string, areaFrom: string, dependents: Set<string>) {
+    for (const dep of dependents) {
+      const data = this.dependenciesLookup(set, dep, areaFrom);
+      data.locations.add(location);
+    }
+  }
+
+  private addGossipDependencies(set: PathfinderDependencySet, gossip: string, areaFrom: string, dependents: Set<string>) {
+    for (const dep of dependents) {
+      const data = this.dependenciesLookup(set, dep, areaFrom);
+      data.gossips.add(gossip);
+    }
+  }
+
+  private requeueItem(item: string) {
+    const deps = this.state.dependencies.items.get(item);
+    if (deps) {
+      this.state.dependencies.items.delete(item);
+      for (const [area, d] of deps) {
+        d.exits.child.forEach(x => this.queueExit('child', x, area));
+        d.exits.adult.forEach(x => this.queueExit('adult', x, area));
+        d.events.forEach(x => this.queueEvent(x, area));
+        d.locations.forEach(x => this.queueLocation(x, area));
+        d.gossips.forEach(x => this.queueGossip(x, area));
+      }
+    }
+  }
+
+  private addLocation(loc: string) {
+    this.state.locations.add(loc);
+    this.state.newLocations.add(loc);
+    const item = this.opts.items?.[loc];
+    if (item) {
+      this.state.uncollectedLocations.delete(loc);
+      if (!isItemConsumable(item) || isLocationRenewable(this.world, loc)) {
+        addItem(this.state.items, item);
+        this.requeueItem(item);
+      }
+    } else {
+      this.state.uncollectedLocations.add(loc);
+    }
+  }
+
+  private evalExits(age: Age) {
+    /* Extract the queue */
+    const queue = this.state.queue.exits[age];
+    this.state.queue.exits[age] = new Map();
+
+    /* Evaluate all the exits */
+    for (const [exit, areas] of queue) {
+      if (this.state.areas[age].has(exit)) {
         continue;
       }
-      if (this.evalExpr(expr, age)) {
-        remainingExits.delete(originalExitArea);
-        newExits.add(exitArea);
+
+      for (const area of areas) {
+        const expr = this.world.areas[area].exits[exit];
+        const exprResult = this.evalExpr(expr, age);
+
+        if (exprResult.result) {
+          this.exploreArea(age, exit);
+        } else {
+          /* Track dependencies */
+          this.addExitsDependencies(this.state.dependencies.items, age, exit, area, exprResult.dependencies.items);
+          this.addExitsDependencies(this.state.dependencies.events, age, exit, area, exprResult.dependencies.events);
+        }
       }
     }
-    if (remainingExits.size === 0) {
-      delete this.state.ageStates[age].queueExits[area];
-    }
-    for (const exitArea of newExits) {
-      this.exploreArea(exitArea, age);
-      this.pathfindSingleArea(exitArea, age);
-    }
   }
 
-  private resolveOverrideImpl(area: string, exitName: string) {
-    const overrides = this.opts.entranceOverrides?.[area] || {};
-    const override = overrides[exitName];
-    if (override === null) {
-      return "VOID";
-    }
-    if (override !== undefined) {
-      return override;
-    }
-    return exitName;
-  }
+  private evalEvents() {
+    /* Extract the queue */
+    const queue = this.state.queue.events;
+    this.state.queue.events = new Map();
 
-  private resolveOverrideIdentity(area: string, exitName: string) {
-    return exitName;
-  }
-
-  private pathfindAreas(age: Age) {
-    const areas = Object.keys(this.state.ageStates[age].queueExits);
-    for (const area of areas) {
-      this.pathfindSingleArea(area, age);
-    }
-  }
-
-  private pathfindEvents(age: Age) {
-    let changed = false;
-    for (const area of this.state.areas[age]) {
-      const events = this.world.areas[area].events;
-      for (const event in events) {
+    /* Evaluate all the events */
+    for (const [event, areas] of queue) {
+      for (const area of areas) {
         if (this.state.events.has(event)) {
           continue;
         }
-        const expr = events[event];
-        if (this.evalExpr(expr, age)) {
+
+        /* Evaluate the event */
+        const expr = this.world.areas[area].events[event];
+        if (!expr) {
+          throw new Error(`Event ${event} not found in area ${area}`);
+        }
+        const results: ExprResult[] = [];
+        if (this.state.areas.child.has(area)) {
+          results.push(this.evalExpr(expr, 'child'));
+        }
+        if (this.state.areas.adult.has(area)) {
+          results.push(this.evalExpr(expr, 'adult'));
+        }
+
+        /* If any of the results are true, add the event to the state and queue up everything */
+        /* Otherwise, track dependencies */
+        if (results.some(x => x.result)) {
           this.state.events.add(event);
-          changed = true;
+          const deps = this.state.dependencies.events.get(event);
+          if (deps) {
+            this.state.dependencies.events.delete(event);
+            for (const [area, d] of deps) {
+              d.exits.child.forEach(x => this.queueExit('child', x, area));
+              d.exits.adult.forEach(x => this.queueExit('adult', x, area));
+              d.events.forEach(x => this.queueEvent(x, area));
+              d.locations.forEach(x => this.queueLocation(x, area));
+              d.gossips.forEach(x => this.queueGossip(x, area));
+            }
+          }
+        } else {
+          const deps = exprDependencies(results);
+          /* Track dependencies */
+          this.addEventsDependencies(this.state.dependencies.items, event, area, deps.items);
+          this.addEventsDependencies(this.state.dependencies.events, event, area, deps.events);
         }
       }
     }
-    return changed;
   }
 
-  private pathfindGossip(age: Age) {
-    let changed = false;
-    for (const area of this.state.areas[age]) {
-      const gossips = this.world.areas[area].gossip;
-      for (const gossip in gossips) {
+  private evalLocations() {
+    /* Extract the queue */
+    const queue = this.state.queue.locations;
+    this.state.queue.locations = new Map();
+
+    /* Evaluate all the locations */
+    for (const [location, areas] of queue) {
+      for (const area of areas) {
+        if (this.state.locations.has(location)) {
+          continue;
+        }
+
+        /* Evaluate the location */
+        const expr = this.world.areas[area].locations[location];
+        const results: ExprResult[] = [];
+        if (this.state.areas.child.has(area)) {
+          results.push(this.evalExpr(expr, 'child'));
+        }
+        if (this.state.areas.adult.has(area)) {
+          results.push(this.evalExpr(expr, 'adult'));
+        }
+
+        /* If any of the results are true, add the location to the state and queue up everything */
+        /* Otherwise, track dependencies */
+        if (results.some(x => x.result)) {
+          this.addLocation(location);
+        } else {
+          const deps = exprDependencies(results);
+          /* Track dependencies */
+          this.addLocationDependencies(this.state.dependencies.items, location, area, deps.items);
+          this.addLocationDependencies(this.state.dependencies.events, location, area, deps.events);
+        }
+      }
+    }
+  }
+
+  private evalGossips() {
+    /* Extract the queue */
+    const queue = this.state.queue.gossips;
+    this.state.queue.gossips = new Map();
+
+    /* Evaluate all the gossips */
+    for (const [gossip, areas] of queue) {
+      for (const area of areas) {
         if (this.state.gossip.has(gossip)) {
           continue;
         }
-        const expr = gossips[gossip];
-        if (this.evalExpr(expr, age)) {
+
+        /* Evaluate the location */
+        const expr = this.world.areas[area].gossip[gossip];
+        const results: ExprResult[] = [];
+        if (this.state.areas.child.has(area)) {
+          results.push(this.evalExpr(expr, 'child'));
+        }
+        if (this.state.areas.adult.has(area)) {
+          results.push(this.evalExpr(expr, 'adult'));
+        }
+
+        /* If any of the results are true, add the location to the state and queue up everything */
+        /* Otherwise, track dependencies */
+        if (results.some(x => x.result)) {
           this.state.gossip.add(gossip);
-          changed = true;
+        } else {
+          const deps = exprDependencies(results);
+          /* Track dependencies */
+          this.addGossipDependencies(this.state.dependencies.items, gossip, area, deps.items);
+          this.addGossipDependencies(this.state.dependencies.events, gossip, area, deps.events);
         }
       }
     }
-    return changed;
   }
 
-  private pathfindLocations(age: Age) {
-    const newLocations = new Set<string>();
-    const oldLocations = this.state.locations;
-    for (const area of this.state.areas[age]) {
-      const locations = this.world.areas[area].locations;
-      for (const location in locations) {
-        if (this.opts.restrictedLocations && !this.opts.restrictedLocations.has(location)) {
-          continue;
-        }
-        if (this.opts.forbiddenLocations && this.opts.forbiddenLocations.has(location)) {
-          continue;
-        }
-        if (oldLocations.has(location) || newLocations.has(location)) {
-          continue;
-        }
-        const expr = locations[location];
-        if (this.evalExpr(expr, age)) {
-          newLocations.add(location);
-        }
+  private pathfindStep() {
+    for (;;) {
+      /* Expand as much as possible */
+      this.evalExits('child');
+      this.evalExits('adult');
+      this.evalEvents();
+
+      const { queue } = this.state;
+      if (!queue.events.size && !queue.exits.child.size && !queue.exits.adult.size) {
+        break;
       }
     }
-    if (newLocations.size > 0) {
-      for (const loc of newLocations) {
-        this.state.locations.add(loc);
-        this.state.newLocations.add(loc);
-      }
-      return true;
-    }
-    return false;
+
+    /* Get locations */
+    this.evalLocations();
+
+    /* Return true if there is more to do */
+    const { queue } = this.state;
+    return (queue.events.size || queue.exits.child.size || queue.exits.adult.size || queue.locations.size);
   }
 
   private pathfind() {
-    /* Bind resolver */
-    if (this.opts.entranceOverrides) {
-      this.resolveOverride = this.resolveOverrideImpl;
-    } else {
-      this.resolveOverride = this.resolveOverrideIdentity;
-    }
+    /* Clear new locations */
+    this.state.newLocations = new Set();
 
     /* Handle initial state */
     if (!this.state.started) {
       this.state.started = true;
-      this.exploreArea('OOT SPAWN', 'child');
-      this.exploreArea('OOT SPAWN', 'adult');
+      this.exploreArea('child', 'OOT SPAWN');
+      this.exploreArea('adult', 'OOT SPAWN');
+    }
 
-      const extraStartAreas = Array.from(this.opts.extraStartAreas || []);
-      for (const area of extraStartAreas) {
-        this.exploreArea(area, 'child');
-        this.exploreArea(area, 'adult');
+    /* Requeue assumed items */
+    if (this.opts.assumedItems) {
+      for (const item in this.opts.assumedItems) {
+        this.requeueItem(item);
       }
     }
 
@@ -262,93 +463,32 @@ export class Pathfinder {
         child: allAreas,
         adult: allAreas,
       };
-      if (this.opts.gossip) {
-        this.state.gossip = new Set(Object.values(this.world.areas).map(x => Object.keys(x.gossip || {})).flat());
-      }
+      this.state.gossip = new Set(Object.values(this.world.areas).map(x => Object.keys(x.gossip || {})).flat());
+      this.state.goal = true;
       return;
     }
 
     /* Collect previous locations */
-    for (const location of this.state.uncollectedLocations) {
-      const item = this.opts.items?.[location];
-      if (item) {
-        if (!isItemConsumable(item) || isLocationRenewable(this.world, location)) {
-          addItem(this.state.items, item);
-        }
-        this.state.uncollectedLocations.delete(location);
-      }
+    const uncollected = [...this.state.uncollectedLocations];
+    for (const location of uncollected) {
+      this.addLocation(location);
     }
 
     /* Pathfind */
     for (;;) {
       const changed = this.pathfindStep();
+      if (this.state.events.has('OOT_GANON') && this.state.events.has('MM_MAJORA')) {
+        this.state.goal = true;
+        if (this.opts.stopAtGoal) {
+          break;
+        }
+      }
       if (!changed || !this.opts.recursive) {
         break;
       }
     }
-  }
 
-  private pathfindStep() {
-    this.state.newLocations = new Set();
-    let anyChange = false;
-
-    for (;;) {
-      let eventChange = false;
-
-      /* Propagate to areas */
-      for (const age of AGES) {
-        this.pathfindAreas(age);
-      }
-
-      /* Reach all areas & events */
-      for (;;) {
-        let changed = false;
-        for (const age of AGES) {
-          const newEvents = this.pathfindEvents(age);
-          changed ||= newEvents;
-          eventChange ||= newEvents;
-          if (this.opts.gossip) {
-            changed ||= this.pathfindGossip(age);
-          }
-        }
-        this.state.goal = this.state.events.has('OOT_GANON') && this.state.events.has('MM_MAJORA');
-        if (this.opts.stopAtGoal && this.state.goal) {
-          return false;
-        }
-        anyChange = anyChange || changed;
-        if (!changed) {
-          break;
-        }
-      }
-
-      if (!eventChange)
-        break;
-    }
-
-    /* Reach all locations */
-    for (;;) {
-      let changed = false;
-      for (const age of AGES) {
-        changed ||= this.pathfindLocations(age);
-      }
-      anyChange = anyChange || changed;
-      if (!changed) {
-        break;
-      }
-    }
-
-    /* Collect items */
-    for (const location of this.state.newLocations) {
-      const item = this.opts.items?.[location];
-      if (item) {
-        if (!isItemConsumable(item) || isLocationRenewable(this.world, location)) {
-          addItem(this.state.items, item);
-        }
-      } else {
-        this.state.uncollectedLocations.add(location);
-      }
-    }
-
-    return anyChange;
+    /* Check for gossips */
+    this.evalGossips();
   }
 }

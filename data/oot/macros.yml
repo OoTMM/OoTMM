@@ -67,7 +67,7 @@
 "can_kill_baba_sticks": "can_boomerang || (has_weapon && (is_child || has_nuts || can_hookshot || can_hammer))"
 "can_kill_baba_nuts": "has_weapon || has_explosives || can_use_slingshot"
 "can_hit_scrub": "has_nuts || can_hit_triggers_distance || has_shield_for_scrubs || can_collect_distance || can_hammer"
-"has_shield_for_scrubs": "cond(is_adult, has(SHIELD_HYLIAN), has(SHIELD_DEKU))"
+"has_shield_for_scrubs": "(is_adult && has(SHIELD_HYLIAN)) || (is_child && has(SHIELD_DEKU))"
 #Trick Macros
 "gs_night": "trick(OOT_NIGHT_GS) || can_play(SONG_SUN)"
 "has_lens": "has_lens_strict || trick(OOT_LENS)"
