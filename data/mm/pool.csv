@@ -82,7 +82,7 @@ Southern Swamp Grotto,                            chest,          NONE,         
 Woods of Mystery Grotto,                          chest,          NONE,                   GROTTOS,                    0x1c,                   RUPEE_PURPLE
 Swamp Archery Reward 1,                           npc,            NONE,                   SHOOTING_GALLERY_SWAMP,     SHOOTING_GAME_SWAMP_1,  BOW
 Swamp Archery Reward 2,                           npc,            NONE,                   SHOOTING_GALLERY_SWAMP,     SHOOTING_GAME_SWAMP_2,  HEART_PIECE
-Swamp Potion Shop Kotake,                         npc,            NONE,                   POTION_SHOP,                KOTAKE_RED_POTION,      BOTTLE_POTION_RED
+Swamp Potion Shop Kotake,                         npc,            NONE,                   WOODS_MYSTERY,              KOTAKE_RED_POTION,      BOTTLE_POTION_RED
 Swamp Potion Shop Item 1,                         shop,           NONE,                   POTION_SHOP,                0x0d,                   POTION_BLUE
 Swamp Potion Shop Item 2,                         shop,           NONE,                   POTION_SHOP,                0x0e,                   POTION_GREEN
 Swamp Potion Shop Item 3,                         shop,           NONE,                   POTION_SHOP,                0x0f,                   POTION_RED
