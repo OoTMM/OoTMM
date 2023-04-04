@@ -224,6 +224,7 @@ export const ITEMS_REQUIRED = new Set<string>([
   'MM_POTION_BLUE',
   'MM_POTION_RED',
   'MM_MILK',
+  'MM_STICK',
   'SHARED_BOW',
   'SHARED_BOMB_BAG',
   'SHARED_MAGIC_UPGRADE',
