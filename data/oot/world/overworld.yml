@@ -410,7 +410,7 @@
     "Lon Lon Ranch Grotto Right Scrub": "is_child && can_hit_scrub"
 "Hyrule Castle":
   region: HYRULE_CASTLE
-  time: "flow"
+  time: flow
   exits:
     "Market": "true"
     "Fairy Fountain Din": "has_explosives"
@@ -457,7 +457,7 @@
     "Hyrule Castle Gossip Grotto": "has_explosives_or_hammer"
 "Ganon Castle Exterior":
   region: GANON_CASTLE_EXTERIOR
-  time: "night"
+  time: night
   exits:
     "Market Destroyed": "true"
     "Ganon Castle Main": "special(BRIDGE)"
@@ -811,7 +811,7 @@
     "Graveyard": "true"
 "Death Mountain":
   region: DEATH_MOUNTAIN_TRAIL
-  time: "flow"
+  time: flow
   exits:
     "Goron City": "true"
     "Dodongo Cavern": "has_bombflowers || is_adult"
@@ -831,7 +831,7 @@
     "Death Mountain GS Above Dodongo":  "gs_night && can_hammer"
 "Death Mountain Summit":
   region: DEATH_MOUNTAIN_TRAIL
-  time: "flow"
+  time: flow
   exits:
     "Death Mountain": "true"
     "Kakariko Rooftop": "is_child"
@@ -937,7 +937,7 @@
     "Goron City Grotto Right Scrub": "can_hit_scrub && has_rupees"
 "Zora River Front":
   region: ZORA_RIVER
-  time: "flow"
+  time: flow
   exits:
     "Hyrule Field": "true"
     "Zora River": "is_adult || (is_child && has_explosives)"
@@ -951,7 +951,7 @@
     "Zora River GS Tree": "is_child && can_damage_skull"
 "Zora River":
   region: ZORA_RIVER
-  time: "flow"
+  time: flow
   exits:
     "Zora River Front": "true"
     "Zora Domain": "can_play(SONG_ZELDA) || (is_child && trick(OOT_CHILD_DOMAIN)) || (has_hover_boots && trick(OOT_ADULT_DOMAIN))"
@@ -1050,7 +1050,7 @@
     "Zora Domain": "true"
 "Lake Hylia":
   region: LAKE_HYLIA
-  time: "flow"
+  time: flow
   exits:
     "Hyrule Field": "true"
     "Zora Domain": "is_child && has(SCALE)"
@@ -1229,7 +1229,7 @@
     "Great Fairy Magic Upgrade 2": "can_play(SONG_ZELDA)"
 "Gerudo Valley":
   region: GERUDO_VALLEY
-  time: "flow"
+  time: flow
   exits:
     "Lake Hylia": "true"
     "Hyrule Field": "true"
@@ -1251,7 +1251,7 @@
     "Gerudo Valley Gossip": "true"
 "Gerudo Valley After Bridge":
   region: GERUDO_VALLEY
-  time: "flow"
+  time: flow
   exits:
     "Lake Hylia": "true"
     "Gerudo Fortress Exterior": "true"
@@ -1327,7 +1327,7 @@
     "Desert Colossus": "true"
 "Desert Colossus":
   region: DESERT_COLOSSUS
-  time: "flow"
+  time: flow
   exits:
     "Spirit Temple": "true"
     "Haunted Wasteland End": "true"
@@ -1344,7 +1344,7 @@
     "Desert Colossus Gossip": "true"
 "Desert Colossus Spirit Exit":
   region: DESERT_COLOSSUS
-  time: "flow"
+  time: flow
   exits:
     "Desert Colossus": "true"
   locations:
