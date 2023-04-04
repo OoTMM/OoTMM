@@ -168,7 +168,7 @@
 "Bomb Shop":
   region: CLOCK_TOWN_WEST
   events:
-    BUY_KEG: "can_use_keg && has_rupees"
+    BUY_KEG: "has(MASK_GORON) && has(POWDER_KEG) && has_rupees"
   exits:
     "Clock Town West": "true"
   locations:
@@ -604,6 +604,7 @@
   exits:
     "Swamp Front": "(has_arrows || can_hookshot) && has(MASK_GORON)"
     "Near Swamp Spider House": "has(MASK_DEKU) || has(MASK_ZORA) || event(CLEAN_SWAMP)"
+    "Southern Swamp Grotto": "true"
 "Southern Swamp Grotto":
   region: SOUTHERN_SWAMP
   events:
