@@ -86,7 +86,7 @@ export class LogicPassEntrances {
     dungeons: Object.values(DUNGEON_INDEX),
   };
 
-  private isAssignableNew(from: Entrance, to: Entrance, opts?: { ownGame: boolean }) {
+  private isAssignableNew(from: Entrance, to: Entrance, opts?: { ownGame?: boolean, locations?: string[] }) {
     const dungeon = this.world.areas[to.to].dungeon!;
 
     /* Reject wrong game */
@@ -125,7 +125,9 @@ export class LogicPassEntrances {
 
     /* Get the list of required locations */
     let locations: string[];
-    if (['ST', 'IST'].includes(dungeon)) {
+    if (opts?.locations) {
+      locations = opts.locations;
+    } else if (['ST', 'IST'].includes(dungeon)) {
       locations = [...this.world.dungeons['ST'], ...this.world.dungeons['IST']];
     } else {
       locations = Array.from(this.world.dungeons[dungeon]);
@@ -144,6 +146,7 @@ export class LogicPassEntrances {
     const bossEntrancesByDungeon: {[k: string]: Entrance} = {};
     const bossEvents: {[k: string]: ExprMap} = {};
     const bossAreas: {[k: string]: string[]} = {};
+    const bossLocations: {[k: string]: string[]} = {};
 
     /* Collect every boss event */
     for (const a in this.world.areas) {
@@ -152,6 +155,7 @@ export class LogicPassEntrances {
       if (area.boss) {
         bossEvents[dungeon!] = { ...bossEvents[dungeon!], ...area.events };
         bossAreas[dungeon!] = [...(bossAreas[dungeon!] || []), a];
+        bossLocations[dungeon!] = [...(bossLocations[dungeon!] || []), ...Object.keys(area.locations)];
 
         /* Remove the event */
         area.events = {};
@@ -179,7 +183,7 @@ export class LogicPassEntrances {
       let dstBoss: string | null = null;
       for (const boss of candidates) {
         const dst = bossEntrancesByDungeon[boss];
-        if (this.isAssignableNew(src, dst, { ownGame: this.input.settings.erBoss === 'ownGame' })) {
+        if (this.isAssignableNew(src, dst, { ownGame: this.input.settings.erBoss === 'ownGame', locations: bossLocations[boss] })) {
           dstBoss = boss;
           break;
         }
@@ -187,6 +191,7 @@ export class LogicPassEntrances {
       if (dstBoss === null) {
         throw new LogicEntranceError(`Nowhere to place boss ${srcBoss}`);
       }
+      bossesToPlace.delete(dstBoss);
 
       /* We found a boss - place it */
       const dst = bossEntrancesByDungeon[dstBoss];
