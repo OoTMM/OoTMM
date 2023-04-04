@@ -591,8 +591,6 @@
     "Deku Palace Front": "true"
     "Near Swamp Spider House": "(has(MASK_DEKU) || has(MASK_ZORA) || event(CLEAN_SWAMP)) && (has_sticks || has_arrows)"
     "Swamp Canopy Back": "event(CLEAN_SWAMP)"
-  locations:
-    "Southern Swamp Grotto": "has(MASK_DEKU) || has(MASK_ZORA) || event(CLEAN_SWAMP)"
 "Near Swamp Spider House":
   region: SOUTHERN_SWAMP
   exits:
