@@ -20,6 +20,7 @@
 "has_bottle": "has(BOTTLE_EMPTY) || has(BOTTLE_MILK) || event(KING_ZORA_LETTER)"
 "can_use_beans": "is_child && has(MAGIC_BEAN)"
 #Equipment Use Macros
+"has_rupees": "event(RUPEES) || (setting(sharedWallets) && event(MM_RUPEES))"
 "stone_of_agony": "has(STONE_OF_AGONY) || trick(OOT_HIDDEN_GROTTOS)"
 "has_sword_kokiri": "cond(setting(progressiveSwordsOot, progressive), has(SWORD), has(SWORD_KOKIRI))"
 "has_sword_master": "cond(setting(progressiveSwordsOot, progressive), has(SWORD, 2), has(SWORD_MASTER))"
