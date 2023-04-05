@@ -132,6 +132,7 @@
     "Honey & Darling Game": "true"
     "Stock Pot Inn": "true"
     "Stock Pot Inn Roof": "has(MASK_DEKU)"
+    "Stock Pot Inn Night": "has(ROOM_KEY)"
     "Milk Bar": "true"
     "Astral Observatory": "event(BOMBER_CODE) || trick(MM_BOMBER_SKIP)"
   events:
@@ -277,8 +278,10 @@
   exits:
     "Clock Town East": "true"
     "Stock Pot Inn Roof": "true"
+    "Stock Pot Inn Night": "has(ROOM_KEY)"
   events:
-    MEET_ANJU: "has(MASK_KAFEI) && (has(ROOM_KEY) || has(MASK_DEKU))"
+    SETUP_MEET: "has(MASK_KAFEI)"
+    MEET_ANJU: "event(SETUP_MEET) && event(NIGHT_INN)"
     BUGS: "has_bottle"
     FISH: "has_bottle"
     MUSHROOM: "has_bottle && has(MASK_SCENTS)"
@@ -291,11 +294,18 @@
     "Stock Pot Inn Grandma HP 1": "has(MASK_ALL_NIGHT)"
     "Stock Pot Inn Grandma HP 2": "has(MASK_ALL_NIGHT)"
     "Stock Pot Inn ??? HP": "has_paper"
+"Stock Pot Inn Night":
+  region: STOCK_POT_INN
+  exits:
+    "Stock Pot Inn": "true"
+  events:
+    NIGHT_INN: "true"
 "Stock Pot Inn Roof":
   region: CLOCK_TOWN_EAST
   exits:
     "Clock Town East": "true"
     "Stock Pot Inn": "true"
+    "Stock Pot Inn Night": "has(MASK_DEKU)"
 "Deku Playground":
   region: CLOCK_TOWN_NORTH
   exits:
