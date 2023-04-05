@@ -875,6 +875,7 @@
 "Twin Islands":
   region: TWIN_ISLANDS
   events:
+    PICTURE_TINGLE: "has(PICTOGRAPH_BOX)"
     MAGIC: "true"
 #    TINGLE_MOUNTAIN: "has_weapon_range && has_rupees"
   exits:
