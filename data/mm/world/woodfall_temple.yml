@@ -5,6 +5,9 @@
     "Woodfall Temple Entrance": "can_reset_time"
 "Woodfall Temple Entrance":
   dungeon: WF
+  events:
+    MAGIC: "true"
+    RUPEES: "has_weapon_range"
   exits:
     "Woodfall Temple": "true"
     "Woodfall Temple Main": "has(MASK_DEKU) || can_hookshot_short"
@@ -14,12 +17,16 @@
 "Woodfall Temple Main":
   dungeon: WF
   exits:
-    "Woodfall Temple": "true"
+    "Woodfall Temple Entrance": "true"
     "Woodfall Temple Water Room": "true"
     "Woodfall Temple Maze": "has(SMALL_KEY_WF, 1)"
     "Woodfall Temple Main Ledge": "event(WOODFALL_TEMPLE_MAIN_FLOWER) || event(WOODFALL_TEMPLE_MAIN_LADDER) || can_hookshot_short"
   events:
     WOODFALL_TEMPLE_MAIN_FLOWER: "can_use_fire_arrows"
+    STICKS: "true"
+    NUTS: "has(MASK_DEKU) || has_arrows || has_explosives || can_fight"
+    BOMBS: "true"
+    ARROWS: "true"
   locations:
     "Woodfall Temple SF Main Pot": "true"
     "Woodfall Temple SF Main Deku Baba": "true"
@@ -42,8 +49,8 @@
   dungeon: WF
   exits:
     "Woodfall Temple Main": "true"
-    "Woodfall Temple Compass Room": "true"
-    "Woodfall Temple Dark Room": "true"
+    "Woodfall Temple Compass Room": "has_sticks || can_use_fire_arrows"
+    "Woodfall Temple Dark Room": "has_sticks || can_use_fire_arrows"
   locations:
     "Woodfall Temple SF Maze Skulltula": "can_fight || has(BOW) || can_use_deku_bubble || has_explosives"
     "Woodfall Temple SF Maze Beehive": "has_weapon_range"
@@ -57,12 +64,14 @@
 "Woodfall Temple Dark Room":
   dungeon: WF
   exits:
-    "Woodfall Temple Maze": "true"
+    "Woodfall Temple Maze": "has_sticks || has(BOW)"
     "Woodfall Temple Pits Room": "true"
   locations:
     "Woodfall Temple Dark Chest": "true"
 "Woodfall Temple Pits Room":
   dungeon: WF
+  events:
+    RUPEES: "true"
   exits:
     "Woodfall Temple Main": "true"
     "Woodfall Temple Dark Room": "true"
@@ -120,7 +129,7 @@
   boss: true
   dungeon: WF
   exits:
-    "Woodfall Temple After Boss": "(has(MASK_FIERCE_DEITY) || (has(BOW) && has_weapon))"
+    "Woodfall Temple After Boss": "(has(MASK_FIERCE_DEITY) && has_magic) || (has(BOW) && has_weapon)"
 "Woodfall Temple After Boss":
   boss: true
   dungeon: WF

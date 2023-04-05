@@ -1,12 +1,16 @@
 "Swamp Spider House":
   dungeon: SSH
   exits:
-    "Swamp Back": "true"
+    "Near Swamp Spider House": "true"
     "Swamp Spider House Main": "can_reset_time"
   locations:
     "Swamp Spider House Mask of Truth": "has(GS_TOKEN_SWAMP, 30)"
 "Swamp Spider House Main":
   dungeon: SSH
+  events:
+    MAGIC: "true"
+    RUPEES: "has_arrows"
+    BUGS: "has_bottle"
   exits:
     "Swamp Spider House": "true"
   locations:
