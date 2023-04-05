@@ -3,12 +3,13 @@ import { Items, ITEMS_MASKS_OOT, ITEMS_MASKS_REGULAR, ITEMS_MASKS_TRANSFORM, ITE
 import { Age } from './pathfind';
 
 export const MM_TIME_SLICES = [
-  'DAY1_06_00',
-  'NIGHT1_06_00',
-  'DAY2_06_00',
-  'NIGHT2_06_00',
-  'DAY3_06_00',
-  'NIGHT3_06_00',
+  'DAY1_AM_06_00',
+  'NIGHT1_PM_06_00',
+  'NIGHT1_AM_02_30',
+  'DAY2_AM_06_00',
+  'NIGHT2_PM_06_00',
+  'DAY3_AM_06_00',
+  'NIGHT3_PM_06_00',
 ];
 
 export type ExprDependencies = {
@@ -252,6 +253,10 @@ export const exprOotTime = (time: string): Expr => {
 export const exprMmTime = (operator: string, sliceName: string): Expr => {
   const slice = MM_TIME_SLICES.indexOf(sliceName);
   let value = 0;
+
+  if (slice === -1) {
+    throw new Error(`Invalid MM time slice: ${sliceName}`);
+  }
 
   switch (operator) {
   case 'before':

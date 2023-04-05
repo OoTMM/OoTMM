@@ -980,7 +980,7 @@
 "Milk Road":
   region: MILK_ROAD
   exits:
-    "Romani Ranch": "after(DAY3_06_00) || can_use_keg"
+    "Romani Ranch": "after(DAY3_AM_06_00) || can_use_keg"
     "Termina Field": "true"
     "Gorman Track": "true"
   events:
@@ -995,9 +995,9 @@
     "Doggy Racetrack": "true"
     "Stables": "true"
   locations:
-    "Romani Ranch Epona Song": "before(NIGHT1_06_00)"
-    "Romani Ranch Aliens": "before(NIGHT1_06_00) && has_arrows"
-    "Romani Ranch Cremia Escort": "before(NIGHT1_06_00) && has_arrows"
+    "Romani Ranch Epona Song": "before(NIGHT1_PM_06_00)"
+    "Romani Ranch Aliens": "before(NIGHT1_AM_02_30) && has_arrows"
+    "Romani Ranch Cremia Escort": "before(NIGHT1_AM_02_30) && has_arrows"
   gossip:
     "Romani Ranch Gossip Entrance": "true"
     "Romani Ranch Gossip Behind House": "true"
