@@ -1,10 +1,10 @@
-import { cloneDeep, merge, result } from 'lodash';
+import { cloneDeep } from 'lodash';
 import { Settings } from '../settings';
-import { AreaData, Expr, exprDependencies, ExprResult } from './expr';
+import { AreaData, Expr, exprDependencies, ExprResult, isDefaultRestrictions, MM_TIME_SLICES } from './expr';
 
 import { addItem, combinedItems, isItemConsumable, Items } from './items';
 import { ItemPlacement } from './solve';
-import { World, WorldArea } from './world';
+import { World } from './world';
 import { isLocationRenewable } from './locations';
 
 export const AGES = ['child', 'adult'] as const;
@@ -108,6 +108,7 @@ const defaultAreaData = (): AreaData => ({
     day: false,
     night: false,
   },
+  mmTime: 0,
 });
 
 const mergeAreaData = (a: AreaData, b: AreaData): AreaData => ({
@@ -115,11 +116,13 @@ const mergeAreaData = (a: AreaData, b: AreaData): AreaData => ({
     day: a.oot.day || b.oot.day,
     night: a.oot.night || b.oot.night,
   },
+  mmTime: a.mmTime | b.mmTime,
 });
 
 const compareAreaData = (a: AreaData, b: AreaData): boolean => (
   a.oot.day === b.oot.day &&
-  a.oot.night === b.oot.night
+  a.oot.night === b.oot.night &&
+  a.mmTime === b.mmTime
 );
 
 const cloneAreaData = (a: AreaData): AreaData => ({
@@ -127,6 +130,7 @@ const cloneAreaData = (a: AreaData): AreaData => ({
     day: a.oot.day,
     night: a.oot.night,
   },
+  mmTime: a.mmTime,
 });
 
 export type EntranceOverrides = {[k: string]: {[k: string]: string | null}};
@@ -199,7 +203,7 @@ export class Pathfinder {
   /**
    * Explore an area, adding all locations and events to the queue
    */
-  private exploreArea(age: Age, area: string, sourceAreaData: AreaData) {
+  private exploreArea(age: Age, area: string, sourceAreaData: AreaData, fromArea: string) {
     /* Compute the previous area data and compare it to the old one */
     const previousAreaData = this.state.areas[age].get(area);
     const newAreaData = previousAreaData ? mergeAreaData(previousAreaData, sourceAreaData) : sourceAreaData;
@@ -211,7 +215,25 @@ export class Pathfinder {
       if (['night', 'flow'].includes(worldArea.time)) {
         newAreaData.oot.night = true;
       }
+    } else {
+      /* MM: Expand the time range */
+      if (newAreaData.mmTime === 0) {
+        return;
+      }
+
+      /* If we come from OoT, we can song of time to get back to day 1 */
+      const fa = this.world.areas[fromArea];
+      if (fa.game === 'oot') {
+        newAreaData.mmTime |= (1 << 0);
+      }
+
+      /* We can wait to reach later time slices */
+      const earliest = Math.floor(Math.log2(newAreaData.mmTime));
+      for (let i = earliest; i < MM_TIME_SLICES.length; ++i) {
+        newAreaData.mmTime |= (1 << i);
+      }
     }
+
     if (previousAreaData && compareAreaData(previousAreaData, newAreaData)) {
       return;
     }
@@ -233,7 +255,13 @@ export class Pathfinder {
 
   private evalExpr(expr: Expr, age: Age, area: string) {
     const areaData = this.state.areas[age].get(area)!;
-    return expr({ areaData, items: this.state.items, age, events: this.state.events, ignoreItems: this.opts.ignoreItems || false });
+    const result = expr({ areaData, items: this.state.items, age, events: this.state.events, ignoreItems: this.opts.ignoreItems || false });
+    if (result.result) {
+      if (!result.restrictions || isDefaultRestrictions(result.restrictions)) {
+        delete result.dependencies;
+      }
+    }
+    return result;
   }
 
   private dependenciesLookup(set: PathfinderDependencySet, dependency: string, areaFrom: string) {
@@ -316,28 +344,29 @@ export class Pathfinder {
 
     /* Evaluate all the exits */
     for (const [exit, areas] of queue) {
-      if (this.state.areas[age].has(exit)) {
-        continue;
-      }
-
       for (const area of areas) {
         const a = this.world.areas[area];
         const expr = a.exits[exit];
         const exprResult = this.evalExpr(expr, age, area);
 
+        /* Track dependencies */
+        if (exprResult.dependencies) {
+          const d = exprResult.dependencies;
+          if (d.items) this.addExitsDependencies(this.state.dependencies.items, age, exit, area, d.items);
+          if (d.events) this.addExitsDependencies(this.state.dependencies.events, age, exit, area, d.events);
+        }
+
         if (exprResult.result) {
           const areaData = cloneAreaData(this.state.areas[age].get(area)!);
-          if (exprResult.restrictions?.oot.day) {
-            areaData.oot.day = false;
+          const r = exprResult.restrictions;
+          if (r) {
+            if (r.oot.day) areaData.oot.day = false;
+            if (r.oot.night) areaData.oot.night = false;
+            if (r.mmTime) {
+              areaData.mmTime = areaData.mmTime & ~(r.mmTime);
+            }
           }
-          if (exprResult.restrictions?.oot.night) {
-            areaData.oot.night = false;
-          }
-          this.exploreArea(age, exit, this.state.areas[age].get(area)!);
-        } else {
-          /* Track dependencies */
-          this.addExitsDependencies(this.state.dependencies.items, age, exit, area, exprResult.dependencies.items);
-          this.addExitsDependencies(this.state.dependencies.events, age, exit, area, exprResult.dependencies.events);
+          this.exploreArea(age, exit, areaData, area);
         }
       }
     }
@@ -384,10 +413,10 @@ export class Pathfinder {
             }
           }
         } else {
-          const deps = exprDependencies(results);
           /* Track dependencies */
-          this.addEventsDependencies(this.state.dependencies.items, event, area, deps.items);
-          this.addEventsDependencies(this.state.dependencies.events, event, area, deps.events);
+          const d = exprDependencies(results);
+          if (d.items) this.addEventsDependencies(this.state.dependencies.items, event, area, d.items);
+          if (d.events) this.addEventsDependencies(this.state.dependencies.events, event, area, d.events);
         }
       }
     }
@@ -420,10 +449,10 @@ export class Pathfinder {
         if (results.some(x => x.result)) {
           this.addLocation(location);
         } else {
-          const deps = exprDependencies(results);
           /* Track dependencies */
-          this.addLocationDependencies(this.state.dependencies.items, location, area, deps.items);
-          this.addLocationDependencies(this.state.dependencies.events, location, area, deps.events);
+          const d = exprDependencies(results);
+          if (d.items) this.addLocationDependencies(this.state.dependencies.items, location, area, d.items);
+          if (d.events) this.addLocationDependencies(this.state.dependencies.events, location, area, d.events);
         }
       }
     }
@@ -456,10 +485,10 @@ export class Pathfinder {
         if (results.some(x => x.result)) {
           this.state.gossip.add(gossip);
         } else {
-          const deps = exprDependencies(results);
           /* Track dependencies */
-          this.addGossipDependencies(this.state.dependencies.items, gossip, area, deps.items);
-          this.addGossipDependencies(this.state.dependencies.events, gossip, area, deps.events);
+          const d = exprDependencies(results);
+          if (d.items) this.addGossipDependencies(this.state.dependencies.items, gossip, area, d.items);
+          if (d.events) this.addGossipDependencies(this.state.dependencies.events, gossip, area, d.events);
         }
       }
     }
@@ -493,8 +522,10 @@ export class Pathfinder {
     /* Handle initial state */
     if (!this.state.started) {
       this.state.started = true;
-      this.exploreArea('child', 'OOT SPAWN', defaultAreaData());
-      this.exploreArea('adult', 'OOT SPAWN', defaultAreaData());
+      const initAreaData = defaultAreaData();
+      initAreaData.mmTime = 1;
+      this.exploreArea('child', 'OOT SPAWN', initAreaData, 'OOT SPAWN');
+      this.exploreArea('adult', 'OOT SPAWN', initAreaData, 'OOT SPAWN');
     }
 
     /* Requeue assumed items */
@@ -510,7 +541,7 @@ export class Pathfinder {
       this.state.events = new Set(Object.values(this.world.areas).map(x => Object.keys(x.events || {})).flat());
       const allAreas = new Map<string, AreaData>;
       for (const area of Object.keys(this.world.areas)) {
-        allAreas.set(area, { oot: { day: true, night: true } });
+        allAreas.set(area, { oot: { day: true, night: true }, mmTime: 0xffffffff });
       }
       this.state.areas = {
         child: allAreas,

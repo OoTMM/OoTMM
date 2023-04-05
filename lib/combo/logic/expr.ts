@@ -2,32 +2,58 @@ import { Settings, Trick, TRICKS } from '../settings';
 import { Items, ITEMS_MASKS_OOT, ITEMS_MASKS_REGULAR, ITEMS_MASKS_TRANSFORM, ITEMS_MEDALLIONS, ITEMS_REMAINS, ITEMS_STONES } from './items';
 import { Age } from './pathfind';
 
+export const MM_TIME_SLICES = [
+  'DAY1_06_00',
+  'NIGHT1_06_00',
+  'DAY2_06_00',
+  'NIGHT2_06_00',
+  'DAY3_06_00',
+  'NIGHT3_06_00',
+];
+
 export type ExprDependencies = {
-  items: Set<string>;
-  events: Set<string>;
+  items?: Set<string>;
+  events?: Set<string>;
 };
 
 type ExprResultFalse = {
   result: false;
-  dependencies: ExprDependencies;
+  dependencies?: ExprDependencies;
 }
 
 type ExprRestrictions = {
   oot: {
     day: boolean;
     night: boolean;
-  }
+  },
+  mmTime: number;
 };
 
-export const defaultRestrictions = ():ExprRestrictions => ({
+export const defaultRestrictions = (): ExprRestrictions => ({
   oot: {
     day: false,
     night: false,
-  }
+  },
+  mmTime: 0,
 });
+
+export const maxRestrictions = (): ExprRestrictions => ({
+  oot: {
+    day: true,
+    night: true,
+  },
+  mmTime: 0xffffffff,
+});
+
+export const isDefaultRestrictions = (r: ExprRestrictions): boolean => {
+  return r.oot.day === false &&
+    r.oot.night === false &&
+    r.mmTime === 0;
+};
 
 type ExprResultTrue = {
   result: true;
+  dependencies?: ExprDependencies;
   restrictions?: ExprRestrictions;
 }
 
@@ -37,7 +63,8 @@ export type AreaData = {
   oot: {
     day: boolean;
     night: boolean;
-  }
+  },
+  mmTime: number;
 };
 
 type State = {
@@ -49,15 +76,13 @@ type State = {
 };
 
 export const exprDependencies = (exprs: ExprResult[]): ExprDependencies => {
-  const deps: ExprDependencies = {
-    items: new Set(),
-    events: new Set(),
-  };
+  const deps: ExprDependencies = {};
 
   for (const expr of exprs) {
-    if (expr.result) continue;
-    deps.items = new Set([...deps.items, ...expr.dependencies.items]);
-    deps.events = new Set([...deps.events, ...expr.dependencies.events]);
+    const d = expr.dependencies;
+    if (!d) continue;
+    if (d.items) deps.items = new Set([...(deps.items || []), ...d.items]);
+    if (d.events) deps.events = new Set([...(deps.events || []), ...d.events]);
   }
 
   return deps;
@@ -73,19 +98,22 @@ export const exprRestrictionsAnd = (exprs: ExprResult[]): ExprRestrictions => {
     if (!expr.restrictions) continue;
     restrictions.oot.day = restrictions.oot.day || expr.restrictions.oot.day;
     restrictions.oot.night = restrictions.oot.night || expr.restrictions.oot.night;
+    restrictions.mmTime = (restrictions.mmTime | expr.restrictions.mmTime) >>> 0;
   }
 
   return restrictions;
 };
 
 export const exprRestrictionsOr = (exprs: ExprResult[]): ExprRestrictions => {
-  const restrictions = defaultRestrictions();
+  const restrictions = maxRestrictions();
 
   for (const expr of exprs) {
     if (!expr.result) continue;
-    if (!expr.restrictions) continue;
+    if (!expr.restrictions)
+      return defaultRestrictions();
     restrictions.oot.day = restrictions.oot.day && expr.restrictions.oot.day;
     restrictions.oot.night = restrictions.oot.night && expr.restrictions.oot.night;
+    restrictions.mmTime = (restrictions.mmTime & expr.restrictions.mmTime) >>> 0;
   }
 
   return restrictions;
@@ -118,20 +146,9 @@ function resolveSpecialCond(settings: Settings, state: State, special: string): 
   if (cond.masksOot) items = new Set([...items, ...ITEMS_MASKS_OOT]);
 
   const result = itemsCount(state, [...items]) >= cond.count;
+  const dependencies = { items };
 
-  if (result) {
-    return {
-      result: true,
-    };
-  } else {
-    return {
-      result: false,
-      dependencies: {
-        items,
-        events: new Set(),
-      },
-    };
-  }
+  return { result, dependencies };
 }
 
 export type Expr = (state: State) => ExprResult;
@@ -141,19 +158,35 @@ export const exprFalse = (): Expr => state => ({ result: false, dependencies: { 
 
 export const exprAnd = (exprs: Expr[]): Expr => state => {
   const results: ExprResult[] = exprs.map(expr => expr(state));
-  if (results.every(x => x.result)) {
-    return { result: true, restrictions: exprRestrictionsAnd(results) };
+  const dependencies = exprDependencies(results);
+  const result = results.every(x => x.result);
+
+  if (result) {
+    const restrictions = exprRestrictionsAnd(results);
+    if (isDefaultRestrictions(restrictions)) {
+      return { result: true };
+    } else {
+      return { result: true, dependencies, restrictions };
+    }
   } else {
-    return { result: false, dependencies: exprDependencies(results) };
+    return { result: false, dependencies };
   }
 };
 
 export const exprOr = (exprs: Expr[]): Expr => state => {
   const results: ExprResult[] = exprs.map(expr => expr(state));
-  if (results.some(x => x.result)) {
-    return { result: true, restrictions: exprRestrictionsOr(results) };
+  const dependencies = exprDependencies(results);
+  const result = results.some(x => x.result);
+
+  if (result) {
+    const restrictions = exprRestrictionsOr(results);
+    if (isDefaultRestrictions(restrictions)) {
+      return { result: true };
+    } else {
+      return { result: true, dependencies, restrictions };
+    }
   } else {
-    return { result: false, dependencies: exprDependencies(results) };
+    return { result: false, dependencies };
   }
 };
 
@@ -163,46 +196,20 @@ export const exprAge = (age: Age): Expr => state => state.age === age ? exprTrue
 
 export const exprHas = (item: string, itemShared: string, count: number): Expr => state => {
   const result = (state.ignoreItems || ((itemCount(state, item) + itemCount(state, itemShared)) >= count));
-  if (result) {
-    return { result: true };
-  } else {
-    return {
-      result: false,
-      dependencies: {
-        items: new Set([item, itemShared]),
-        events: new Set(),
-      },
-    };
-  }
+  const dependencies = { items: new Set([item, itemShared]) };
+  return { result, dependencies };
 };
 
 export const exprEvent = (event: string): Expr => state => {
-  if (state.events.has(event)) {
-    return { result: true };
-  } else {
-    return {
-      result: false,
-      dependencies: {
-        items: new Set(),
-        events: new Set([event]),
-      },
-    };
-  }
+  const dependencies = { events: new Set([event]) };
+  const result = state.events.has(event);
+  return { result, dependencies };
 };
 
 export const exprMasks = (count: number): Expr => state => {
   const result = state.ignoreItems || (itemsCount(state, ITEMS_MASKS_REGULAR) >= count);
-  if (result) {
-    return { result: true };
-  } else {
-    return {
-      result: false,
-      dependencies: {
-        items: new Set(ITEMS_MASKS_REGULAR),
-        events: new Set(),
-      },
-    };
-  }
+  const dependencies = { items: new Set(ITEMS_MASKS_REGULAR) };
+  return { result, dependencies };
 };
 
 export const exprSpecial = (settings: Settings, special: string): Expr => state => resolveSpecialCond(settings, state, special);
@@ -237,10 +244,42 @@ export const exprOotTime = (time: string): Expr => {
     } else {
       return {
         result: false,
-        dependencies: {
-          items: new Set(),
-          events: new Set(),
-        },
+      };
+    }
+  };
+}
+
+export const exprMmTime = (operator: string, sliceName: string): Expr => {
+  const slice = MM_TIME_SLICES.indexOf(sliceName);
+  let value = 0;
+
+  switch (operator) {
+  case 'before':
+    /* Time < slice */
+    for (let i = 0; i < slice; ++i)
+      value = (value | (1 << i)) >>> 0;
+    break;
+  case 'after':
+    /* Time >= slice */
+    for (let i = slice; i < MM_TIME_SLICES.length; ++i)
+      value = (value | (1 << i)) >>> 0;
+    break;
+  case 'at':
+    /* Time == slice */
+    value = (1 << slice) >>> 0;
+    break;
+  default:
+    throw new Error(`Invalid MM time operator: ${operator}`);
+  }
+
+  return state => {
+    if (state.areaData.mmTime & value) {
+      const restrictions = defaultRestrictions();
+      restrictions.mmTime = ~value >>> 0;
+      return { result: true, restrictions };
+    } else {
+      return {
+        result: false,
       };
     }
   };

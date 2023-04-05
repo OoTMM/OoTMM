@@ -1,3 +1,8 @@
+# Time
+"at(x)": "mm_time(at, x)"
+"after(x)": "mm_time(after, x)"
+"before(x)": "mm_time(before, x)"
+
 "has_bottle": "has(BOTTLE_EMPTY) || has(BOTTLE_POTION_RED) || has(BOTTLE_MILK) || event(GOLD_DUST_USED) || has(BOTTLE_CHATEAU)"
 "has_ocarina": "cond(setting(sharedOcarina), cond(setting(fairyOcarinaMm), has(OCARINA), has(OCARINA, 2)), has(OCARINA))"
 "can_play(song)": "has_ocarina && has(song)"
