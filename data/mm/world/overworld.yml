@@ -15,7 +15,7 @@
 "SOARING":
   region: NONE
   exits:
-    "South Clock Town": "event(CLOCK_TOWN_OWL)"
+    "Clock Town South": "event(CLOCK_TOWN_OWL)"
     "Milk Road": "event(MILK_ROAD_OWL)"
     "Swamp Front": "event(SWAMP_OWL)"
     "Woodfall Shrine": "event(WOODFALL_OWL)"
