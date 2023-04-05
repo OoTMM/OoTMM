@@ -1,7 +1,7 @@
 import { Game } from '../config';
 import { Settings } from '../settings';
 import { gameId } from '../util';
-import { Expr, exprTrue, exprFalse, exprAnd, exprOr, exprAge, exprHas, exprEvent, exprMasks, exprHealth, exprSetting, exprNot, exprCond, exprTrick, exprSpecial } from './expr';
+import { Expr, exprTrue, exprFalse, exprAnd, exprOr, exprAge, exprHas, exprEvent, exprMasks, exprSetting, exprNot, exprCond, exprTrick, exprSpecial, exprOotTime, exprMmTime } from './expr';
 
 const SIMPLE_TOKENS = ['||', '&&', '(', ')', ',', 'true', 'false', '!', '+', '-'] as const;
 
@@ -202,20 +202,6 @@ export class ExprParser {
     return exprMasks(count);
   }
 
-  private parseExprHealth(): Expr | undefined {
-    if (this.peek('identifier') !== 'health') {
-      return undefined;
-    }
-    this.accept('identifier');
-    this.expect('(');
-    const count = this.parseNumeric();
-    if (count === undefined) {
-      throw this.error("Expected number");
-    }
-    this.expect(')');
-    return exprHealth(count);
-  }
-
   private parseExprSetting(): Expr | undefined {
     let value: string | boolean = true;
     if (this.peek('identifier') !== 'setting') {
@@ -251,6 +237,30 @@ export class ExprParser {
     const special = this.expect('identifier');
     this.expect(')');
     return exprSpecial(this.settings, special);
+  }
+
+  private parseExprOotTime(): Expr | undefined {
+    if (this.peek('identifier') !== 'oot_time') {
+      return undefined;
+    }
+    this.accept('identifier');
+    this.expect('(');
+    const time = this.expect('identifier');
+    this.expect(')');
+    return exprOotTime(time);
+  }
+
+  private parseExprMmTime(): Expr | undefined {
+    if (this.peek('identifier') !== 'mm_time') {
+      return undefined;
+    }
+    this.accept('identifier');
+    this.expect('(');
+    const operator = this.expect('identifier');
+    this.expect(',');
+    const slice = this.expect('identifier');
+    this.expect(')');
+    return exprMmTime(operator, slice);
   }
 
   private parseMacro(): Expr | undefined {
@@ -321,10 +331,11 @@ export class ExprParser {
       || this.parseExprHas()
       || this.parseExprEvent()
       || this.parseExprMasks()
-      || this.parseExprHealth()
       || this.parseExprSetting()
       || this.parseExprTrick()
       || this.parseExprSpecial()
+      || this.parseExprOotTime()
+      || this.parseExprMmTime()
       || this.parseMacro();
   }
 

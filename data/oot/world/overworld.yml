@@ -74,14 +74,14 @@
   exits:
     "Kokiri Forest": "true"
   locations:
-    "Kokiri Shop Item 1": "event(RUPEES)"
-    "Kokiri Shop Item 2": "event(RUPEES)"
-    "Kokiri Shop Item 3": "event(RUPEES)"
-    "Kokiri Shop Item 4": "event(RUPEES)"
-    "Kokiri Shop Item 5": "event(RUPEES)"
-    "Kokiri Shop Item 6": "event(RUPEES)"
-    "Kokiri Shop Item 7": "event(RUPEES)"
-    "Kokiri Shop Item 8": "event(RUPEES)"
+    "Kokiri Shop Item 1": "has_rupees"
+    "Kokiri Shop Item 2": "has_rupees"
+    "Kokiri Shop Item 3": "has_rupees"
+    "Kokiri Shop Item 4": "has_rupees"
+    "Kokiri Shop Item 5": "has_rupees"
+    "Kokiri Shop Item 6": "has_rupees"
+    "Kokiri Shop Item 7": "has_rupees"
+    "Kokiri Shop Item 8": "has_rupees"
 "Mido's House":
   region: KOKIRI_FOREST
   exits:
@@ -119,6 +119,7 @@
     "Kokiri Forest Storms Grotto": "true"
 "Hyrule Field":
   region: HYRULE_FIELD
+  time: flow
   exits:
     "Lost Woods Bridge": "true"
     "Market Entryway": "true"
@@ -151,7 +152,7 @@
   exits:
     "Hyrule Field": "true"
   locations:
-    "Hyrule Field Grotto Scrub HP": "can_hit_scrub && event(RUPEES)"
+    "Hyrule Field Grotto Scrub HP": "can_hit_scrub && has_rupees"
 "Hyrule Field Open Grotto":
   region: HYRULE_FIELD
   exits:
@@ -234,69 +235,69 @@
 "Market Entryway":
   region: MARKET
   exits:
-    "Hyrule Field": "true"
+    "Hyrule Field": "is_day"
     "Market": "is_child"
     "Market Destroyed": "is_adult"
     "Market Pot House": "true"
 "Market":
   region: MARKET
   exits:
-    "Hyrule Field": "true"
+    "Market Entryway": "true"
     "Back Alley": "true"
     "Hyrule Castle": "is_child"
     "Temple of Time Entryway": "true"
     "Bombchu Bowling": "true"
-    "Treasure Game": "true"
-    "Shooting Gallery Child": "true"
-    "Market Bazaar": "true"
-    "Market Potion Shop": "true"
-    "MM Clock Town": "is_child"
+    "Treasure Game": "is_night"
+    "Shooting Gallery Child": "is_day"
+    "Market Bazaar": "is_day"
+    "Market Potion Shop": "is_day"
+    "MM Clock Town": "is_child && is_day"
   events:
+    RICHARD: "is_night"
     RUPEES: "true"
 "Market Bazaar":
   region: MARKET
   exits:
     "Market": "is_child"
   locations:
-    "Market Bazaar Item 1": "event(RUPEES)"
-    "Market Bazaar Item 2": "event(RUPEES)"
-    "Market Bazaar Item 3": "event(RUPEES)"
-    "Market Bazaar Item 4": "event(RUPEES)"
-    "Market Bazaar Item 5": "event(RUPEES)"
-    "Market Bazaar Item 6": "event(RUPEES)"
-    "Market Bazaar Item 7": "event(RUPEES)"
-    "Market Bazaar Item 8": "event(RUPEES)"
+    "Market Bazaar Item 1": "has_rupees"
+    "Market Bazaar Item 2": "has_rupees"
+    "Market Bazaar Item 3": "has_rupees"
+    "Market Bazaar Item 4": "has_rupees"
+    "Market Bazaar Item 5": "has_rupees"
+    "Market Bazaar Item 6": "has_rupees"
+    "Market Bazaar Item 7": "has_rupees"
+    "Market Bazaar Item 8": "has_rupees"
 "Market Potion Shop":
   region: MARKET
   exits:
     "Market": "is_child"
   locations:
-    "Market Potion Shop Item 1": "has(WALLET, 1) && event(RUPEES)"
-    "Market Potion Shop Item 2": "event(RUPEES)"
-    "Market Potion Shop Item 3": "event(RUPEES)"
-    "Market Potion Shop Item 4": "event(RUPEES)"
-    "Market Potion Shop Item 5": "has(WALLET, 2) && event(RUPEES)"
-    "Market Potion Shop Item 6": "event(RUPEES)"
-    "Market Potion Shop Item 7": "event(RUPEES)"
-    "Market Potion Shop Item 8": "event(RUPEES)"
+    "Market Potion Shop Item 1": "has(WALLET, 1) && has_rupees"
+    "Market Potion Shop Item 2": "has_rupees"
+    "Market Potion Shop Item 3": "has_rupees"
+    "Market Potion Shop Item 4": "has_rupees"
+    "Market Potion Shop Item 5": "has(WALLET, 2) && has_rupees"
+    "Market Potion Shop Item 6": "has_rupees"
+    "Market Potion Shop Item 7": "has_rupees"
+    "Market Potion Shop Item 8": "has_rupees"
 "Market Bombchu Shop":
   region: MARKET
   exits:
     "Market": "is_child"
   locations:
-    "Market Bombchu Shop Item 1": "has(WALLET, 1) && event(RUPEES)"
-    "Market Bombchu Shop Item 2": "has(WALLET, 1) && event(RUPEES)"
-    "Market Bombchu Shop Item 3": "has(WALLET, 1) && event(RUPEES)"
-    "Market Bombchu Shop Item 4": "has(WALLET, 1) && event(RUPEES)"
-    "Market Bombchu Shop Item 5": "has(WALLET, 1) && event(RUPEES)"
-    "Market Bombchu Shop Item 6": "has(WALLET, 1) && event(RUPEES)"
-    "Market Bombchu Shop Item 7": "has(WALLET, 1) && event(RUPEES)"
-    "Market Bombchu Shop Item 8": "has(WALLET, 1) && event(RUPEES)"
+    "Market Bombchu Shop Item 1": "has(WALLET, 1) && has_rupees"
+    "Market Bombchu Shop Item 2": "has(WALLET, 1) && has_rupees"
+    "Market Bombchu Shop Item 3": "has(WALLET, 1) && has_rupees"
+    "Market Bombchu Shop Item 4": "has(WALLET, 1) && has_rupees"
+    "Market Bombchu Shop Item 5": "has(WALLET, 1) && has_rupees"
+    "Market Bombchu Shop Item 6": "has(WALLET, 1) && has_rupees"
+    "Market Bombchu Shop Item 7": "has(WALLET, 1) && has_rupees"
+    "Market Bombchu Shop Item 8": "has(WALLET, 1) && has_rupees"
 "Market Pot House":
   region: MARKET
   exits:
-    "Market": "is_child"
-    "Market Destroyed": "is_adult"
+    "Market Entryway": "true"
   events:
     RUPEES: "true"
   locations:
@@ -308,14 +309,14 @@
     "Market": "is_child"
     "Market Destroyed": "is_adult"
     "Dog Lady House": "true"
-    "Market Bombchu Shop": "true"
-    "Market Back Alley East Home": "true"
+    "Market Bombchu Shop": "is_night"
+    "Market Back Alley East Home": "is_night"
 "Dog Lady House":
   region: MARKET
   exits:
     "Back Alley": "true"
   locations:
-    "Market Dog Lady HP": "true"
+    "Market Dog Lady HP": "event(RICHARD) && is_night"
 "Market Back Alley East Home":
   region: MARKET
   exits:
@@ -325,23 +326,23 @@
   exits:
     "Market": "true"
   events:
-    BOMBS: "event(RUPEES) && has(WALLET)"
-    BOMBCHUS: "event(RUPEES)"
+    BOMBS: "has_rupees && has(WALLET)"
+    BOMBCHUS: "has_rupees"
   locations:
-    "Bombchu Bowling Reward 1": "has(BOMB_BAG) && event(RUPEES)"
-    "Bombchu Bowling Reward 2": "has(BOMB_BAG) && event(RUPEES)"
+    "Bombchu Bowling Reward 1": "has(BOMB_BAG) && has_rupees"
+    "Bombchu Bowling Reward 2": "has(BOMB_BAG) && has_rupees"
 "Shooting Gallery Child":
   region: MARKET
   exits:
     "Market": "is_child"
   locations:
-    "Shooting Gallery Child": "is_child && event(RUPEES)"
+    "Shooting Gallery Child": "is_child && has_rupees"
 "Treasure Game":
   region: MARKET
   exits:
     "Market": "true"
   locations:
-    "Treasure Game HP": "has_lens_strict && event(RUPEES)"
+    "Treasure Game HP": "has_lens_strict && has_rupees"
 "Market Destroyed":
   region: MARKET
   exits:
@@ -366,14 +367,14 @@
     "Hyrule Field": "true"
     "Lon Lon Ranch Silo": "true"
     "Lon Lon Ranch Stables": "true"
-    "Lon Lon Ranch House": "true"
+    "Lon Lon Ranch House": "is_day"
     "Lon Lon Ranch Grotto": "is_child"
   events:
-    EPONA: "is_adult && can_play(SONG_EPONA) && event(RUPEES)"
-    MALON_COW: "is_adult && event(EPONA)"
+    EPONA: "is_adult && can_play(SONG_EPONA) && has_rupees && is_day"
+    MALON_COW: "is_adult && event(EPONA) && is_day"
     RUPEES: "is_child"
   locations:
-    "Lon Lon Ranch Malon Song": "is_child && has(OCARINA) && event(MALON)"
+    "Lon Lon Ranch Malon Song": "is_child && has(OCARINA) && event(MALON) && is_day"
     "Lon Lon Ranch GS Tree": "is_child"
     "Lon Lon Ranch GS House": "can_boomerang && gs_night"
     "Lon Lon Ranch GS Rain Shed": "is_child && gs_night"
@@ -398,7 +399,7 @@
   exits:
     "Lon Lon Ranch": "true"
   locations:
-    "Lon Lon Ranch Talon Bottle": "is_child && woke_talon_child && event(RUPEES)"
+    "Lon Lon Ranch Talon Bottle": "is_child && woke_talon_child && has_rupees && is_day"
 "Lon Lon Ranch Grotto":
   region: LON_LON_RANCH
   exits:
@@ -409,6 +410,7 @@
     "Lon Lon Ranch Grotto Right Scrub": "is_child && can_hit_scrub"
 "Hyrule Castle":
   region: HYRULE_CASTLE
+  time: flow
   exits:
     "Market": "true"
     "Fairy Fountain Din": "has_explosives"
@@ -455,6 +457,7 @@
     "Hyrule Castle Gossip Grotto": "has_explosives_or_hammer"
 "Ganon Castle Exterior":
   region: GANON_CASTLE_EXTERIOR
+  time: night
   exits:
     "Market Destroyed": "true"
     "Ganon Castle Main": "special(BRIDGE)"
@@ -490,7 +493,7 @@
     "Lost Woods Target": "can_use_slingshot"
     "Lost Woods Skull Kid": "is_child && can_play(SONG_SARIA)"
     "Lost Woods Memory Game": "is_child && has(OCARINA)"
-    "Lost Woods Scrub Sticks Upgrade": "is_child && can_hit_scrub && event(RUPEES)"
+    "Lost Woods Scrub Sticks Upgrade": "is_child && can_hit_scrub && has_rupees"
     "Lost Woods Odd Mushroom": "adult_trade(COJIRO)"
     "Lost Woods Poacher's Saw": "adult_trade(ODD_POTION)"
     "Lost Woods GS Soil Bridge": "gs_soil && can_damage_skull"
@@ -537,8 +540,8 @@
     MAGIC: "can_cut_grass"
     BUGS: "has_bottle && can_cut_grass"
   locations:
-    "Lost Woods Scrub Near Theater Left": "is_child && can_hit_scrub && event(RUPEES)"
-    "Lost Woods Scrub Near Theater Right": "is_child && can_hit_scrub && event(RUPEES)"
+    "Lost Woods Scrub Near Theater Left": "is_child && can_hit_scrub && has_rupees"
+    "Lost Woods Scrub Near Theater Right": "is_child && can_hit_scrub && has_rupees"
     "Lost Woods GS Soil Theater": "gs_soil && can_damage_skull"
     "Lost Woods GS Bean Ride": "gs_night && (can_ride_bean(BEAN_LOST_WOODS_LATE) || (trick(OOT_LOST_WOODS_ADULT_GS) && can_hookshot && (can_longshot || can_use_bow || has_bombchu || can_use_din)))"
 "Deku Theater":
@@ -553,8 +556,8 @@
   exits:
     "Lost Woods Deep": "true"
   locations:
-    "Lost Woods Grotto Scrub Nuts Upgrade": "can_hit_scrub && event(RUPEES)"
-    "Lost Woods Grotto Scrub Back": "can_hit_scrub && event(RUPEES)"
+    "Lost Woods Grotto Scrub Nuts Upgrade": "can_hit_scrub && has_rupees"
+    "Lost Woods Grotto Scrub Back": "can_hit_scrub && has_rupees"
 "Sacred Meadow Entryway":
   region: SACRED_MEADOW
   exits:
@@ -588,8 +591,8 @@
   exits:
     "Sacred Meadow": "true"
   locations:
-    "Sacred Meadow Storms Grotto Front Scrub": "can_hit_scrub && event(RUPEES)"
-    "Sacred Meadow Storms Grotto Back Scrub": "can_hit_scrub && event(RUPEES)"
+    "Sacred Meadow Storms Grotto Front Scrub": "can_hit_scrub && has_rupees"
+    "Sacred Meadow Storms Grotto Back Scrub": "can_hit_scrub && has_rupees"
 "Kakariko":
   region: KAKARIKO
   events:
@@ -606,19 +609,20 @@
     "Graveyard": "true"
     "Bottom of the Well": "is_child && event(WELL_DRAIN)"
     "Skulltula House": "true"
-    "Shooting Gallery Adult": "is_adult"
-    "Kakariko Rooftop": "is_child || can_hookshot || (is_adult && trick(OOT_PASS_COLLISION))"
-    "Kakariko Bazaar": "is_adult"
-    "Kakariko Potion Shop": "is_adult"
+    "Shooting Gallery Adult": "is_adult && is_day"
+    "Kakariko Rooftop": "(is_child && is_day) || can_hookshot || (is_adult && trick(OOT_PASS_COLLISION))"
+    "Kakariko Bazaar": "is_adult && is_day"
+    "Kakariko Potion Shop": "is_adult && is_day"
     "Kakariko Granny Shop": "is_adult"
     "Windmill": "true"
+    "Kakariko Carpenter House": "true"
     "Impa House Front": "true"
     "ReDead Grotto": "hidden_grotto_bomb"
     "Kakariko Generic Grotto": "true"
   locations:
-    "Kakariko Anju Bottle": "is_child"
-    "Kakariko Anju Egg": "is_adult"
-    "Kakariko Anju Cojiro": "adult_trade(POCKET_CUCCO)"
+    "Kakariko Anju Bottle": "is_child && is_day"
+    "Kakariko Anju Egg": "is_adult && is_day"
+    "Kakariko Anju Cojiro": "event(TALON_AWAKE) && is_day"
     "Kakariko Song Shadow": "is_adult && has(MEDALLION_FOREST) && has(MEDALLION_FIRE) && has(MEDALLION_WATER)"
     "Kakariko Man on Roof": "can_hookshot || trick(OOT_MAN_ON_ROOF)"
     "Kakariko GS Roof": "gs_night && can_hookshot"
@@ -642,31 +646,33 @@
   exits:
     "Kakariko": "is_adult"
   locations:
-    "Kakariko Bazaar Item 1": "true && event(RUPEES)"
-    "Kakariko Bazaar Item 2": "true && event(RUPEES)"
-    "Kakariko Bazaar Item 3": "true && event(RUPEES)"
-    "Kakariko Bazaar Item 4": "true && event(RUPEES)"
-    "Kakariko Bazaar Item 5": "true && event(RUPEES)"
-    "Kakariko Bazaar Item 6": "true && event(RUPEES)"
-    "Kakariko Bazaar Item 7": "true && event(RUPEES)"
-    "Kakariko Bazaar Item 8": "true && event(RUPEES)"
+    "Kakariko Bazaar Item 1": "has_rupees"
+    "Kakariko Bazaar Item 2": "has_rupees"
+    "Kakariko Bazaar Item 3": "has_rupees"
+    "Kakariko Bazaar Item 4": "has_rupees"
+    "Kakariko Bazaar Item 5": "has_rupees"
+    "Kakariko Bazaar Item 6": "has_rupees"
+    "Kakariko Bazaar Item 7": "has_rupees"
+    "Kakariko Bazaar Item 8": "has_rupees"
 "Kakariko Potion Shop":
   region: KAKARIKO
   exits:
     "Kakariko": "is_adult"
   locations:
-    "Kakariko Potion Shop Item 1": "has(WALLET, 1) && event(RUPEES)"
-    "Kakariko Potion Shop Item 2": "true && event(RUPEES)"
-    "Kakariko Potion Shop Item 3": "true && event(RUPEES)"
-    "Kakariko Potion Shop Item 4": "true && event(RUPEES)"
-    "Kakariko Potion Shop Item 5": "has(WALLET, 2) && event(RUPEES)"
-    "Kakariko Potion Shop Item 6": "true && event(RUPEES)"
-    "Kakariko Potion Shop Item 7": "true && event(RUPEES)"
-    "Kakariko Potion Shop Item 8": "true && event(RUPEES)"
+    "Kakariko Potion Shop Item 1": "has(WALLET, 1) && has_rupees"
+    "Kakariko Potion Shop Item 2": "has_rupees"
+    "Kakariko Potion Shop Item 3": "has_rupees"
+    "Kakariko Potion Shop Item 4": "has_rupees"
+    "Kakariko Potion Shop Item 5": "has(WALLET, 2) && has_rupees"
+    "Kakariko Potion Shop Item 6": "has_rupees"
+    "Kakariko Potion Shop Item 7": "has_rupees"
+    "Kakariko Potion Shop Item 8": "has_rupees"
 "Kakariko Granny Shop":
   region: KAKARIKO
   exits:
     "Kakariko": "true"
+  events:
+    MAGIC: "adult_trade(ODD_MUSHROOM) && has_rupees && has(WALLET) && has_bottle"
   locations:
     "Kakariko Potion Shop Odd Potion": "adult_trade(ODD_MUSHROOM)"
 "Shooting Gallery Adult":
@@ -674,7 +680,7 @@
   exits:
     "Kakariko": "is_adult"
   locations:
-    "Shooting Gallery Adult": "can_use_bow && event(RUPEES)"
+    "Shooting Gallery Adult": "can_use_bow && has_rupees"
 "Impa House Front":
   region: KAKARIKO
   exits:
@@ -697,6 +703,12 @@
   locations:
     "Windmill HP": "can_boomerang || event(WINDMILL_TOP) || trick(OOT_WINDMILL_HP_NOTHING)"
     "Windmill Song of Storms": "is_adult && has(OCARINA)"
+"Kakariko Carpenter House":
+  region: KAKARIKO
+  exits:
+    "Kakariko": "true"
+  events:
+    TALON_AWAKE: adult_trade(POCKET_CUCCO)
 "Skulltula House":
   region: KAKARIKO
   exits:
@@ -734,10 +746,10 @@
   exits:
     "Kakariko": "true"
     "Graveyard Royal Tomb": "can_play(SONG_ZELDA)"
-    "Graveyard Shield Grave": "true"
-    "Graveyard ReDead Grave": "true"
+    "Graveyard Shield Grave": "is_adult || is_night"
+    "Graveyard ReDead Grave": "is_adult || is_night"
     "Dampe Grave": "is_adult"
-    "Dampe House": "true"
+    "Dampe House": "is_adult || is_dusk"
   events:
     BEAN_GRAVEYARD: "can_use_beans"
     BUGS: "has_bottle"
@@ -747,7 +759,7 @@
     ARROWS: "is_adult"
     MAGIC: "can_cut_grass"
   locations:
-    "Graveyard Dampe Game": "is_child && event(RUPEES)"
+    "Graveyard Dampe Game": "is_child && has_rupees && is_dusk"
     "Graveyard Crate HP": "can_ride_bean(BEAN_GRAVEYARD) || can_longshot"
     "Graveyard GS Soil": "gs_soil && can_damage_skull"
     "Graveyard GS Wall": "can_boomerang && gs_night"
@@ -799,6 +811,7 @@
     "Graveyard": "true"
 "Death Mountain":
   region: DEATH_MOUNTAIN_TRAIL
+  time: flow
   exits:
     "Goron City": "true"
     "Dodongo Cavern": "has_bombflowers || is_adult"
@@ -818,6 +831,7 @@
     "Death Mountain GS Above Dodongo":  "gs_night && can_hammer"
 "Death Mountain Summit":
   region: DEATH_MOUNTAIN_TRAIL
+  time: flow
   exits:
     "Death Mountain": "true"
     "Kakariko Rooftop": "is_child"
@@ -878,7 +892,7 @@
     "Goron City Shortcut": "event(GORON_CITY_SHORTCUT)"
     "Death Mountain": "true"
     "Death Mountain Crater Bottom": "is_adult && (has_explosives || can_use_bow || has(STRENGTH))"
-    "Goron Shop": "cond(is_adult, has_explosives || can_use_bow || has(STRENGTH), has_bombflowers)"
+    "Goron Shop": "(is_adult && (has_explosives || can_use_bow || has(STRENGTH))) || (is_child && has_bombflowers)"
     "Goron City Grotto": "is_adult && (can_play(SONG_TIME) || (can_hookshot && (has_tunic_goron_strict || can_use_nayru)))"
   event:
     GORON_CITY_SHORTCUT: "has_bombflowers || can_hammer || can_use_bow || can_use_din"
@@ -891,10 +905,10 @@
     "Goron City Maze Center 1": "has_explosives_or_hammer || can_lift_silver"
     "Goron City Maze Center 2": "has_explosives_or_hammer || can_lift_silver"
     "Goron City Maze Left": "can_hammer || can_lift_silver"
-    "Goron City Big Pot HP": "is_child && has_explosives && (can_play(SONG_ZELDA) || has_fire)"
+    "Goron City Big Pot HP": "is_child && has_bombs && (can_play(SONG_ZELDA) || has_fire)"
     "Goron City Tunic": "is_adult && (has_explosives || can_use_bow || has(STRENGTH))"
     "Goron City Bomb Bag": "is_child && has_explosives"
-    "Goron City Medigoron Giant Knife": "is_adult && has(WALLET) && (has_bombflowers || can_hammer) && event(RUPEES)"
+    "Goron City Medigoron Giant Knife": "is_adult && has(WALLET) && (has_bombflowers || can_hammer) && has_rupees"
     "Goron City GS Platform": "is_adult"
     "Goron City GS Maze": "is_child && has_explosives"
   gossip:
@@ -905,24 +919,25 @@
   exits:
     "Goron City": "true"
   locations:
-    "Goron Shop Item 1": "true && event(RUPEES)"
-    "Goron Shop Item 2": "true && event(RUPEES)"
-    "Goron Shop Item 3": "true && event(RUPEES)"
-    "Goron Shop Item 4": "has(WALLET, 1) && event(RUPEES)"
-    "Goron Shop Item 5": "true && event(RUPEES)"
-    "Goron Shop Item 6": "true && event(RUPEES)"
-    "Goron Shop Item 7": "true && event(RUPEES)"
-    "Goron Shop Item 8": "has(WALLET, 1) && event(RUPEES)"
+    "Goron Shop Item 1": "has_rupees"
+    "Goron Shop Item 2": "has_rupees"
+    "Goron Shop Item 3": "has_rupees"
+    "Goron Shop Item 4": "has(WALLET, 1) && has_rupees"
+    "Goron Shop Item 5": "has_rupees"
+    "Goron Shop Item 6": "has_rupees"
+    "Goron Shop Item 7": "has_rupees"
+    "Goron Shop Item 8": "has(WALLET, 1) && has_rupees"
 "Goron City Grotto":
   region: GORON_CITY
   exits:
     "Goron City": "true"
   locations:
-    "Goron City Grotto Left Scrub": "can_hit_scrub && event(RUPEES)"
-    "Goron City Grotto Center Scrub": "can_hit_scrub && event(RUPEES)"
-    "Goron City Grotto Right Scrub": "can_hit_scrub && event(RUPEES)"
+    "Goron City Grotto Left Scrub": "can_hit_scrub && has_rupees"
+    "Goron City Grotto Center Scrub": "can_hit_scrub && has_rupees"
+    "Goron City Grotto Right Scrub": "can_hit_scrub && has_rupees"
 "Zora River Front":
   region: ZORA_RIVER
+  time: flow
   exits:
     "Hyrule Field": "true"
     "Zora River": "is_adult || (is_child && has_explosives)"
@@ -936,6 +951,7 @@
     "Zora River GS Tree": "is_child && can_damage_skull"
 "Zora River":
   region: ZORA_RIVER
+  time: flow
   exits:
     "Zora River Front": "true"
     "Zora Domain": "can_play(SONG_ZELDA) || (is_child && trick(OOT_CHILD_DOMAIN)) || (has_hover_boots && trick(OOT_ADULT_DOMAIN))"
@@ -950,7 +966,7 @@
     ARROWS: "is_adult"
     MAGIC: "true"
   locations:
-    "Zora River Bean Seller": "is_child && event(RUPEES)"
+    "Zora River Bean Seller": "is_child && has_rupees"
     "Zora River HP Pillar": "is_child || has_hover_boots"
     "Zora River HP Platform": "is_child || has_hover_boots"
     "Zora River Frogs Storms": "is_child && can_play(SONG_STORMS)"
@@ -966,8 +982,8 @@
   exits:
     "Zora River": "true"
   locations:
-    "Zora River Storms Grotto Front Scrub": "can_hit_scrub && event(RUPEES)"
-    "Zora River Storms Grotto Back Scrub": "can_hit_scrub && event(RUPEES)"
+    "Zora River Storms Grotto Front Scrub": "can_hit_scrub && has_rupees"
+    "Zora River Storms Grotto Back Scrub": "can_hit_scrub && has_rupees"
 "Zora River Open Grotto":
   region: ZORA_RIVER
   exits:
@@ -1004,7 +1020,7 @@
     FISH: "is_child && has_bottle"
   locations:
     "Zora Domain Waterfall Chest": "is_child"
-    "Zora Domain Diving Game": "is_child && event(RUPEES)"
+    "Zora Domain Diving Game": "is_child && has_rupees"
     "Zora Domain Tunic": "is_adult && has_blue_fire"
     "Zora Domain Eyeball Frog": "has_blue_fire && adult_trade(PRESCRIPTION)"
     "Zora Domain GS Waterfall": "is_adult && gs_night && (has_ranged_weapon_adult || has(MAGIC_UPGRADE))"
@@ -1020,20 +1036,21 @@
   exits:
     "Zora Domain": "true"
   locations:
-    "Zora Shop Item 1": "true && event(RUPEES)"
-    "Zora Shop Item 2": "true && event(RUPEES)"
-    "Zora Shop Item 3": "has(WALLET, 1) && event(RUPEES)"
-    "Zora Shop Item 4": "true && event(RUPEES)"
-    "Zora Shop Item 5": "true && event(RUPEES)"
-    "Zora Shop Item 6": "true && event(RUPEES)"
-    "Zora Shop Item 7": "has(WALLET, 2) && event(RUPEES)"
-    "Zora Shop Item 8": "true && event(RUPEES)"
+    "Zora Shop Item 1": "has_rupees"
+    "Zora Shop Item 2": "has_rupees"
+    "Zora Shop Item 3": "has(WALLET, 1) && has_rupees"
+    "Zora Shop Item 4": "has_rupees"
+    "Zora Shop Item 5": "has_rupees"
+    "Zora Shop Item 6": "has_rupees"
+    "Zora Shop Item 7": "has(WALLET, 2) && has_rupees"
+    "Zora Shop Item 8": "has_rupees"
 "Zora Domain Grotto":
   region: ZORA_DOMAIN
   exits:
     "Zora Domain": "true"
 "Lake Hylia":
   region: LAKE_HYLIA
+  time: flow
   exits:
     "Hyrule Field": "true"
     "Zora Domain": "is_child && has(SCALE)"
@@ -1076,16 +1093,16 @@
   exits:
     "Lake Hylia": "true"
   locations:
-    "Fishing Pond Child": "is_child && event(RUPEES)"
-    "Fishing Pond Adult": "is_adult && event(RUPEES)"
+    "Fishing Pond Child": "is_child && has_rupees"
+    "Fishing Pond Adult": "is_adult && has_rupees"
 "Lake Hylia Grotto":
   region: LAKE_HYLIA
   exits:
     "Lake Hylia": "true"
   locations:
-    "Lake Hylia Grotto Left Scrub": "can_hit_scrub && event(RUPEES)"
-    "Lake Hylia Grotto Center Scrub": "can_hit_scrub && event(RUPEES)"
-    "Lake Hylia Grotto Right Scrub": "can_hit_scrub && event(RUPEES)"
+    "Lake Hylia Grotto Left Scrub": "can_hit_scrub && has_rupees"
+    "Lake Hylia Grotto Center Scrub": "can_hit_scrub && has_rupees"
+    "Lake Hylia Grotto Right Scrub": "can_hit_scrub && has_rupees"
 "Zora Fountain":
   region: ZORA_FOUNTAIN
   exits:
@@ -1120,8 +1137,7 @@
 "Temple of Time":
   region: TEMPLE_OF_TIME
   exits:
-    "Market": "is_child"
-    "Market Destroyed": "is_adult"
+    "Temple of Time Entryway": "true"
     "Sacred Realm": "is_adult && event(DOOR_OF_TIME_OPEN)"
   events:
     DOOR_OF_TIME_OPEN: "setting(doorOfTime, open) || can_play(SONG_TIME)"
@@ -1150,7 +1166,7 @@
   locations:
     "Death Mountain Crater GS Crate": "is_child && can_damage_skull"
     "Death Mountain Crater Alcove HP": "true"
-    "Death Mountain Crater Scrub Child": "is_child && can_hit_scrub"
+    "Death Mountain Crater Scrub Child": "is_child && can_hit_scrub && has_rupees"
   gossip:
     "Death Mountain Crater Gossip Wall": "has_explosives"
 "Death Mountain Crater Bottom":
@@ -1200,9 +1216,9 @@
   exits:
     "Death Mountain Crater Bottom": "true"
   locations:
-    "Death Mountain Crater Grotto Left Scrub": "can_hit_scrub && event(RUPEES)"
-    "Death Mountain Crater Grotto Center Scrub": "can_hit_scrub && event(RUPEES)"
-    "Death Mountain Crater Grotto Right Scrub": "can_hit_scrub && event(RUPEES)"
+    "Death Mountain Crater Grotto Left Scrub": "can_hit_scrub && has_rupees"
+    "Death Mountain Crater Grotto Center Scrub": "can_hit_scrub && has_rupees"
+    "Death Mountain Crater Grotto Right Scrub": "can_hit_scrub && has_rupees"
 "Fairy Fountain Double Magic":
   region: DEATH_MOUNTAIN_CRATER
   exits:
@@ -1213,6 +1229,7 @@
     "Great Fairy Magic Upgrade 2": "can_play(SONG_ZELDA)"
 "Gerudo Valley":
   region: GERUDO_VALLEY
+  time: flow
   exits:
     "Lake Hylia": "true"
     "Hyrule Field": "true"
@@ -1234,6 +1251,7 @@
     "Gerudo Valley Gossip": "true"
 "Gerudo Valley After Bridge":
   region: GERUDO_VALLEY
+  time: flow
   exits:
     "Lake Hylia": "true"
     "Gerudo Fortress Exterior": "true"
@@ -1256,8 +1274,8 @@
   exits:
     "Gerudo Valley After Bridge": "true"
   locations:
-    "Gerudo Valley Grotto Front Scrub": "can_hit_scrub && event(RUPEES)"
-    "Gerudo Valley Grotto Back Scrub": "can_hit_scrub && event(RUPEES)"
+    "Gerudo Valley Grotto Front Scrub": "can_hit_scrub && has_rupees"
+    "Gerudo Valley Grotto Back Scrub": "can_hit_scrub && has_rupees"
 "Gerudo Valley Tent":
   region: GERUDO_VALLEY
   exits:
@@ -1268,14 +1286,14 @@
     "Gerudo Fortress": "true"
     "Gerudo Valley After Bridge": "true"
     "Fortress Near Wasteland": "event(OPEN_FORTRESS_GATE)"
-    "Gerudo Training Grounds": "has(GERUDO_CARD) && is_adult && event(RUPEES)"
+    "Gerudo Training Grounds": "has(GERUDO_CARD) && is_adult && has_rupees"
     "Gerudo Fortress Grotto": "is_adult && hidden_grotto_storms"
   events:
     OPEN_FORTRESS_GATE: "has(GERUDO_CARD) && is_adult"
   locations:
     "Gerudo Fortress Chest": "has_hover_boots || can_longshot || scarecrow_hookshot"
-    "Gerudo Fortress Archery Reward 1": "event(EPONA) && can_use_bow && has(GERUDO_CARD) && event(RUPEES)"
-    "Gerudo Fortress Archery Reward 2": "event(EPONA) && can_use_bow && has(GERUDO_CARD) && event(RUPEES)"
+    "Gerudo Fortress Archery Reward 1": "event(EPONA) && can_use_bow && has(GERUDO_CARD) && has_rupees && is_day"
+    "Gerudo Fortress Archery Reward 2": "event(EPONA) && can_use_bow && has(GERUDO_CARD) && has_rupees && is_day"
     "Gerudo Fortress GS Wall": "can_hookshot && gs_night"
     "Gerudo Fortress GS Target": "can_hookshot && gs_night && has(GERUDO_CARD)"
 "Fortress Near Wasteland":
@@ -1298,7 +1316,7 @@
     "Haunted Wasteland Start": "can_longshot || has_hover_boots || trick(OOT_SAND_RIVER_NOTHING)"
     "Haunted Wasteland End": "has_lens_strict || trick(OOT_BLIND_WASTELAND)"
   events:
-    BOMBCHUS: "has(WALLET) && event(RUPEES)"
+    BOMBCHUS: "has(WALLET) && has_rupees"
   locations:
     "Haunted Wasteland Chest": "has_fire"
     "Haunted Wasteland GS": "can_collect_distance"
@@ -1309,6 +1327,7 @@
     "Desert Colossus": "true"
 "Desert Colossus":
   region: DESERT_COLOSSUS
+  time: flow
   exits:
     "Spirit Temple": "true"
     "Haunted Wasteland End": "true"
@@ -1325,6 +1344,7 @@
     "Desert Colossus Gossip": "true"
 "Desert Colossus Spirit Exit":
   region: DESERT_COLOSSUS
+  time: flow
   exits:
     "Desert Colossus": "true"
   locations:
@@ -1342,5 +1362,5 @@
   exits:
     "Desert Colossus": "true"
   locations:
-    "Desert Colossus Grotto Front Scrub": "can_hit_scrub && event(RUPEES)"
-    "Desert Colossus Grotto Back Scrub": "can_hit_scrub && event(RUPEES)"
+    "Desert Colossus Grotto Front Scrub": "can_hit_scrub && has_rupees"
+    "Desert Colossus Grotto Back Scrub": "can_hit_scrub && has_rupees"

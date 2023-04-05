@@ -62,7 +62,7 @@
 "Fire Temple Before Miniboss":
   dungeon: Fire
   exits:
-    "Fire Temple After Miniboss": "has_explosives_or_hammer"
+    "Fire Temple After Miniboss": "has_explosives && (has_bombs || can_hammer || can_hookshot)"
     "Fire Temple Pillar Ledge": "can_play(SONG_TIME)"
   locations:
     "Fire Temple Ring Jail": "can_hammer && can_play(SONG_TIME)"

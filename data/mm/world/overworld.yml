@@ -278,7 +278,8 @@
     "Clock Town East": "true"
     "Stock Pot Inn Roof": "true"
   events:
-    MEET_ANJU: "has(MASK_KAFEI) && (has(ROOM_KEY) || has(MASK_DEKU))"
+    SETUP_MEET: "has(MASK_KAFEI)"
+    MEET_ANJU: "event(SETUP_MEET) && (has(MASK_DEKU) || has(ROOM_KEY))"
     BUGS: "has_bottle"
     FISH: "has_bottle"
     MUSHROOM: "has_bottle && has(MASK_SCENTS)"
@@ -381,7 +382,7 @@
   exits:
     "Termina Field": "true"
   locations:
-    "Termina Field Tall Grass Grotto": "true"  
+    "Termina Field Tall Grass Grotto": "true"
 "Peahat Grotto":
   region: TERMINA_FIELD
   events:
@@ -1058,7 +1059,7 @@
 "Milk Road":
   region: MILK_ROAD
   exits:
-    "Romani Ranch": "true"
+    "Romani Ranch": "after(DAY3_AM_06_00) || can_use_keg"
     "Termina Field": "true"
     "Gorman Track": "true"
   events:
@@ -1073,9 +1074,9 @@
     "Doggy Racetrack": "true"
     "Stables": "true"
   locations:
-    "Romani Ranch Epona Song": "can_use_keg"
-    "Romani Ranch Aliens": "can_use_keg && has_arrows"
-    "Romani Ranch Cremia Escort": "can_use_keg && has_arrows"
+    "Romani Ranch Epona Song": "before(NIGHT1_PM_06_00)"
+    "Romani Ranch Aliens": "before(NIGHT1_AM_02_30) && has_arrows"
+    "Romani Ranch Cremia Escort": "before(NIGHT1_AM_02_30) && has_arrows"
   gossip:
     "Romani Ranch Gossip Entrance": "true"
     "Romani Ranch Gossip Behind House": "true"

@@ -3,7 +3,7 @@
   exits:
     "Fire Temple Entry": "true"
     "Fire Temple Upper Lobby": "is_adult && has_tunic_goron"
-    "Fire Temple Vanilla Hammer Loop": "has(SMALL_KEY_FIRE, 5) && has_weapon && (has_explosives_or_hammer || can_hookshot)"
+    "Fire Temple Vanilla Hammer Loop": "has(SMALL_KEY_FIRE, 5) && has_weapon && (has_bombs || can_hammer || can_hookshot)"
   locations:
     "MQ Fire Temple Early Lower Left Chest": "can_damage"
 "Fire Temple Upper Lobby":

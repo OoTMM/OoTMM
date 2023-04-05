@@ -196,7 +196,7 @@ export class LogicPassHints {
     if (typeof locs === 'string') {
       locs = new Set([locs]);
     }
-    const pathfinderState = this.pathfinder.run(null, { recursive: true, gossip: true, items: this.state.items, forbiddenLocations: locs });
+    const pathfinderState = this.pathfinder.run(null, { recursive: true, items: this.state.items, forbiddenLocations: locs });
     const gossips = Array.from(pathfinderState.gossip).filter(x => !this.gossip[x]);
     if (gossips.length === 0) {
       return null;
