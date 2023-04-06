@@ -209,7 +209,7 @@
   exits:
     "Clock Town Laundry Pool": "true"
   events:
-    MEET_KAFEI: "true"
+    MEET_KAFEI: "before(DAY3_AM_06_00)"
   locations:
     "Curiosity Shop Back Room Pendant of Memories": "before(DAY3_AM_06_00) || event(SAKON_BOMB_BAG) || event(SAKON_BOOM)"
     "Curiosity Shop Back Room Owner Reward 1": "after(DAY3_AM_06_00) && before(NIGHT3_PM_10_00)"
