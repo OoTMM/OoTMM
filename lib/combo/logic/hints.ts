@@ -145,6 +145,11 @@ export class LogicPassHints {
       return true;
     }
 
+    /* Non-shuffled items are ignored */
+    if (this.state.fixedLocations.has(loc)) {
+      return true;
+    }
+
     /* CHecks with no region are ignored (skip zelda) */
     if (!region || region === 'NONE') {
       return true;
@@ -204,13 +209,9 @@ export class LogicPassHints {
     return false;
   }
 
-  private isLocationHintable(loc: string) {
-    return (!(this.state.fixedLocations.has(loc) || this.isLocationIgnored(loc)));
-  }
-
   private isLocationHintableHero(loc: string) {
     const item = this.state.items[loc];
-    if (!this.isLocationHintable(loc)) {
+    if (this.isLocationIgnored(loc)) {
       return false;
     }
     if (isKey(item) || isStrayFairy(item) || isToken(item) || isDungeonReward(item)) {
@@ -235,7 +236,7 @@ export class LogicPassHints {
   }
 
   private playthroughLocations() {
-    const locations = this.state.analysis.spheres.flat().filter(loc => this.isLocationHintable(loc));
+    const locations = this.state.analysis.spheres.flat().filter(loc => !this.isLocationIgnored(loc));
     return shuffle(this.state.random, locations);
   }
 
@@ -246,7 +247,7 @@ export class LogicPassHints {
     if (!this.state.analysis.useless.has(loc)) {
       return -1;
     }
-    if (this.hintedLocations.has(loc) || !this.isLocationHintable(loc) || this.state.settings.junkLocations.includes(loc)) {
+    if (this.hintedLocations.has(loc) || this.state.settings.junkLocations.includes(loc)) {
       return 0;
     }
     return 1;
