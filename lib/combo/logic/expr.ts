@@ -19,7 +19,7 @@ export const MM_TIME_SLICES = [
   'NIGHT1_AM_04_00',
   'NIGHT1_AM_05_00',
   'DAY2_AM_06_00',
-  'DAY1_AM_07_00',
+  'DAY2_AM_07_00',
   'DAY2_AM_10_00',
   'DAY2_AM_11_30',
   'DAY2_PM_02_00',
