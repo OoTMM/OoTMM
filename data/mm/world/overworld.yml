@@ -982,7 +982,7 @@
   region: MOUNTAIN_VILLAGE
   exits:
     "Mountain Village": "true"
-    "Goron Gravveyard": "true"
+    "Goron Graveyard": "true"
     "Near Village Grotto": "event(BOSS_SNOWHEAD)"
   events:
     MAGIC: "true"
