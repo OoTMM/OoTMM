@@ -207,14 +207,13 @@ export class LogicPassEntrances {
 
       /* Change the associated dungeon */
       for (const a of bossAreas[dstBoss]) {
-        this.world.dungeons[dstBoss].delete(a);
-        this.world.dungeons[srcBoss].add(a);
-
         const area = this.world.areas[a];
         area.dungeon = srcBoss;
 
         for (const loc in area.locations) {
           this.world.regions[loc] = DUNGEONS_REGIONS[srcBoss];
+          this.world.dungeons[dstBoss].delete(loc);
+          this.world.dungeons[srcBoss].add(loc);
         }
       }
     }
