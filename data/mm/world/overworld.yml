@@ -1362,7 +1362,7 @@
     "Road to Ikana Top": "true"
     "Ikana Canyon": "(can_use_ice_arrows || trick(MM_ICELESS_IKANA)) && can_hookshot"
     "Secret Shrine Entrance": "true"
-    "Sakon Hideout": "event(MEET_KAFEI)"
+    "Sakon Hideout": "event(MEET_KAFEI) && at(NIGHT3_PM_06_00)"
     "Swamp Front": "true"
   events:
     BLUE_POTION: "has_bottle && has(WALLET)"
