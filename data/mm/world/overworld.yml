@@ -944,7 +944,7 @@
   exits:
     "Twin Islands": "true"
     "Goron Race": "can_use_keg || event(POWDER_KEG_TRIAL)"
-    "Near Ramp Grotto": "true"(has_explosives || trick_keg_explosives || (trick(MM_KEG_EXPLOSIVES) && event(POWDER_KEG_TRIAL)))
+    "Near Ramp Grotto": "true"
 "Near Ramp Grotto":
   region: TWIN_ISLANDS
   exits:
