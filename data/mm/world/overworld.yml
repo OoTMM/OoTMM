@@ -958,7 +958,7 @@
     "Goron Shrine": "first_day || has(MASK_GORON)"
   events:
     POWDER_KEG_TRIAL: "(event(BOSS_SNOWHEAD) || can_use_fire_arrows) && has(MASK_GORON)"
-    BUY_KEG: "event(POWDER_KEG_TRIAL) && has(POWDER_KEG) && has(WALLET) && has_rupees'
+    BUY_KEG: "event(POWDER_KEG_TRIAL) && has(POWDER_KEG) && has(WALLET) && has_rupees"
   locations:
     "Goron Village HP": "has(DEED_SWAMP) && has(MASK_DEKU)"
     "Goron Village Scrub Deed": "has(DEED_SWAMP) && has(MASK_DEKU)"
