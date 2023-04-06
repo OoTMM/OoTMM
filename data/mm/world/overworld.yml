@@ -290,7 +290,7 @@
   events:
     SETUP_MEET: "has(MASK_KAFEI) && after(DAY1_PM_01_45) && before(NIGHT1_PM_09_00)"
     MEET_ANJU: "event(SETUP_MEET) && (has(MASK_DEKU) || has(ROOM_KEY))" #after(NIGHT1_AM_12_00) && before(DAY2_AM_06_00)
-    DELIVER_PENDANT: "has(PENDANT_OF_MEMORIES) && ((after(DAY2_AM_06_00) && before(NIGHT2_PM_09_00)) || (after(DAY3_AM_06_00) && before(DAY3_AM_11_30)))
+    DELIVER_PENDANT: "has(PENDANT_OF_MEMORIES) && ((after(DAY2_AM_06_00) && before(NIGHT2_PM_09_00)) || (after(DAY3_AM_06_00) && before(DAY3_AM_11_30)))"
     BUGS: "has_bottle"
     FISH: "has_bottle"
     MUSHROOM: "has_bottle && has(MASK_SCENTS)"
@@ -311,9 +311,9 @@
 "Deku Playground":
   region: CLOCK_TOWN_NORTH
   events:
-    DEKU_REWARD_1: after(DAY1_AM_06_00) && before(NIGHT1_AM_12_00)
-    DEKU_REWARD_2: after(DAY2_AM_06_00) && before(NIGHT2_AM_12_00)
-    DEKU_REWARD_3: after(DAY3_AM_06_00) && before(NIGHT3_AM_12_00)
+    DEKU_REWARD_1: "after(DAY1_AM_06_00) && before(NIGHT1_AM_12_00)"
+    DEKU_REWARD_2: "after(DAY2_AM_06_00) && before(NIGHT2_AM_12_00)"
+    DEKU_REWARD_3: "after(DAY3_AM_06_00) && before(NIGHT3_AM_12_00)"
   exits:
     "Clock Town North": "true"
   locations:
