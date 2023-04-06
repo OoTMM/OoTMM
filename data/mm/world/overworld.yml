@@ -1117,7 +1117,7 @@
   locations:
     "Romani Ranch Epona Song": "before(NIGHT1_PM_06_00)"
     "Romani Ranch Aliens": "before(NIGHT1_AM_02_30) && has_arrows"
-    "Romani Ranch Cremia Escort": "evvent(ALIENS)"
+    "Romani Ranch Cremia Escort": "event(ALIENS)"
   gossip:
     "Romani Ranch Gossip Entrance": "true"
     "Romani Ranch Gossip Behind House": "true"
