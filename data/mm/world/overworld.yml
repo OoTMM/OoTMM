@@ -318,7 +318,7 @@
     "Clock Town North": "true"
   locations:
     "Deku Playground Reward 1": "has(MASK_DEKU) && has_rupees && (event(DEKU_REWARD_1) || event(DEKU_REWARD_2) || event(DEKU_REWARD_3))"
-    "Deku Playground Reward 2": "has(MASK_DEKU) && has_rupees && event(DEKU_REWARD_1) && event(DEKU_REWARD_2) && evvent(DEKU_REWARD_3)"
+    "Deku Playground Reward 2": "has(MASK_DEKU) && has_rupees && event(DEKU_REWARD_1) && event(DEKU_REWARD_2) && event(DEKU_REWARD_3)"
 "Astral Observatory":
   region: CLOCK_TOWN_EAST
   exits:
