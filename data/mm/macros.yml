@@ -13,7 +13,7 @@
 "first_day": "before(DAY2_AM_06_00)"
 "second_day": "after(DAY2_AM_06_00) && before(DAY3_AM_06_00)"
 "final_day": "after(DAY3_AM_06_00)"
-"midnight": "(after(NIGHT1_AM_12_00) && before(DAY2_AM_06_00)) || (after(NIGHT2_AM_12_00) && before(DAY3_AM_06_00)) || after(NIGHT3_AM_12_00)
+"midnight": "(after(NIGHT1_AM_12_00) && before(DAY2_AM_06_00)) || (after(NIGHT2_AM_12_00) && before(DAY3_AM_06_00)) || after(NIGHT3_AM_12_00)"
 
 "has_bottle": "has(BOTTLE_EMPTY) || has(BOTTLE_POTION_RED) || has(BOTTLE_MILK) || event(GOLD_DUST_USED) || has(BOTTLE_CHATEAU)"
 "has_ocarina": "cond(setting(sharedOcarina), cond(setting(fairyOcarinaMm), has(OCARINA), has(OCARINA, 2)), has(OCARINA))"
