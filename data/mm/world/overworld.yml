@@ -1093,26 +1093,31 @@
     "Near Goron Race": "true"
   locations:
     "Goron Race Reward": "event(BOSS_SNOWHEAD) && goron_fast_roll"
-"Milk Road":
+"Milk Road Front":
+  region: MILK_ROAD
+  exits:
+    "Milk Road Back": "true" #notevent(ALIENS) || (is_night2 && (can_play(SONG_EPONA) || (can_goron_bomb_jump && has_bombs)))
+    "Termina Field": "true"
+    "Gorman Track Front": "true"
+  events:
+    MILK_ROAD_OWL: "has(SONG_SOARING) && (has_sticks || has_weapon)"
+    MAGIC: "true"
+    ARROWS: "true"
+"Milk Road Back":
   region: MILK_ROAD
   exits:
     "Near Romani Ranch": "after(DAY3_AM_06_00) || can_use_keg"
-    "Termina Field": "true"
-    "Gorman Track Front": "true"
-    "Behind Gorman Fence": "can_goron_bomb_jump && has_bombs"
+    "Milk Road Front": "true" #notevent(ALIENS) || (is_night2 && (can_play(SONG_EPONA) || (can_goron_bomb_jump && has_bombs)))
+    "Behind Gorman Fence": "(can_goron_bomb_jump && has_bombs) || (is_night2 && event(ALIENS)) || final_day"
   events:
-    MILK_ROAD_OWL: "has(SONG_SOARING) && (has_sticks || has_weapon)"
     PICTURE_TINGLE: "has(PICTOGRAPH_BOX)"
-    MAGIC: "true"
-    BOMBS: "true"
-    ARROWS: "true"
     RUPEES: "true"
   gossip:
     "Milk Road Gossip": "true"
 "Near Romani Ranch":
   region: MILK_ROAD
   exits:
-    "Milk Road": "after(DAY3_AM_06_00) || can_use_keg"
+    "Milk Road Back": "after(DAY3_AM_06_00) || can_use_keg"
     "Romani Ranch": "true"
 "Romani Ranch":
   region: ROMANI_RANCH
@@ -1123,6 +1128,7 @@
     "Cucco Shack": "(after(DAY1_AM_06_00) && before(NIGHT1_PM_08_00)) || (after(DAY2_AM_06_00) && before(NIGHT2_PM_08_00)) || (after(DAY3_AM_06_00) && before(NIGHT3_PM_08_00))"
     "Doggy Racetrack": "(after(DAY1_AM_06_00) && before(NIGHT1_PM_08_00)) || (after(DAY2_AM_06_00) && before(NIGHT2_PM_08_00)) || (after(DAY3_AM_06_00) && before(NIGHT3_PM_08_00))"
     "Stables": "true"
+    "Ranch House": "(after(DAY1_AM_06_00) && before(NIGHT1_PM_08_00)) || (after(DAY2_AM_06_00) && before(NIGHT2_PM_08_00)) || (after(DAY3_AM_06_00) && before(NIGHT3_PM_08_00))"
   locations:
     "Romani Ranch Epona Song": "before(NIGHT1_PM_06_00)"
     "Romani Ranch Aliens": "before(NIGHT1_AM_02_30) && has_arrows"
@@ -1156,6 +1162,10 @@
     "Romani Ranch Barn Cow Left": "(before(NIGHT1_AM_02_30) || event(ALIENS))&& can_play(SONG_EPONA)"
     "Romani Ranch Barn Cow Right Front": "(before(NIGHT1_AM_02_30) || event(ALIENS)) && can_play(SONG_EPONA)"
     "Romani Ranch Barn Cow Right Back": "(before(NIGHT1_AM_02_30) || event(ALIENS)) && can_play(SONG_EPONA)"
+"Ranch House":
+  region: ROMANI_RANCH
+  exits:
+    "Romani Ranch": "true"
 "Great Bay Fence":
   region: TERMINA_FIELD
   exits:
@@ -1296,13 +1306,13 @@
 "Behind Gorman Fence":
   region: MILK_ROAD
   exits:
-    "Milk Road": "can_goron_bomb_jump && has_bombs"
+    "Milk Road": "(can_goron_bomb_jump && has_bombs) || (is_night2 && event(ALIENS)) || final_day"
     "Gorman Track Back": "true"
 "Gorman Track Front":
   region: MILK_ROAD
   exits:
     "Milk Road": "true"
-    "Gorman Track Back": "can_goron_bomb_jump && has_bombs"
+    "Gorman Track Back": "(can_goron_bomb_jump && has_bombs) || (is_night2 && event(ALIENS))"
   events:
     MILK: "has_rupees && is_day"
   locations:
@@ -1311,7 +1321,7 @@
   region: MILK_ROAD
   exits:
     "Behind Gorman Fence": "true"
-    "Gorman Track Front": "can_goron_bomb_jump && has_bombs"
+    "Gorman Track Front": "(can_goron_bomb_jump && has_bombs) || (is_night2 && event(ALIENS))
 "Road to Ikana Front":
   region: ROAD_TO_IKANA
   events:
