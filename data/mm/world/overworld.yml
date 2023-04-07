@@ -89,8 +89,13 @@
     "Clock Town Fairy Fountain": "true"
     "Deku Playground": "true"
   events:
-    BOMBER_CODE: "has_weapon_range && (first_day || second_day || final_day)"
-    BOMBERS_NORTH: "event(BOMBER_CODE)"
+    HIDE_SEEK1: "has_weapon_range && first_day"
+    HIDE_SEEK2: "has_weapon_range && second_day"
+    HIDE_SEEK3: "has_weapon_range && final_day"
+    BOMBERS_NORTH1: "event(HIDE_SEEK1)"
+    BOMBERS_NORTH2: "event(HIDE_SEEK2)"
+    BOMBERS_NORTH3: "event(HIDE_SEEK3)"
+    BOMBER_CODE: "bombers1 || bombers2 || bombers3"
     SAKON_BOMB_BAG: "can_fight && before(NIGHT1_AM_12_00)"
     SAKON_BOOM: "(has_arrows || can_hookshot_short) && before(NIGHT1_AM_12_00)"
     MAIL_LETTER: "has(LETTER_TO_KAFEI) && before(DAY2_AM_11_30)"
@@ -99,13 +104,15 @@
     #TINGLE_NCT: "has_weapon_range && has_rupees && is_day"
   locations:
     "Clock Town Tree HP": "true"
-    "Clock Town Bomber Notebook": "(event(BOMBERS_NORTH) && event(BOMBERS_EAST) && event(BOMBERS_WEST)) || event(GUESS_BOMBER)"
+    "Clock Town Bomber Notebook": "event(BOMBER_CODE) || event(GUESS_BOMBER)"
     "Clock Town Blast Mask": "event(SAKON_BOMB_BAG)"
     "Clock Town Keaton HP": "has(MASK_KEATON)"
 "Clock Town West":
   region: CLOCK_TOWN_WEST
   events:
-    BOMBERS_WEST: "event(BOMBER_CODE)"
+    BOMBERS_WEST1: "event(HIDE_SEEK1)"
+    BOMBERS_WEST2: "event(HIDE_SEEK2)"
+    BOMBERS_WEST3: "event(HIDE_SEEK3)"
   exits:
     "Termina Field": "true"
     "Clock Town South Upper West": "true"
@@ -137,7 +144,9 @@
     "Astral Observatory": "event(BOMBER_CODE) || trick(MM_BOMBER_SKIP)"
   events:
     GUESS_BOMBER: "trick(MM_BOMBER_SKIP)"
-    BOMBERS_EAST: "event(BOMBER_CODE)"
+    BOMBERS_EAST1: "event(HIDE_SEEK1)"
+    BOMBERS_EAST2: "event(HIDE_SEEK2)"
+    BOMBERS_EAST3: "event(HIDE_SEEK3)"
     MAIL_LETTER: "has(LETTER_TO_KAFEI) && before(DAY2_AM_11_30)"
   locations:
     "Clock Town Silver Rupee Chest": "true"
@@ -1090,7 +1099,7 @@
     "Near Romani Ranch": "after(DAY3_AM_06_00) || can_use_keg"
     "Termina Field": "true"
     "Gorman Track Front": "true"
-    "Gorman Track Back": "true"
+    "Behind Gorman Fence": "can_goron_bomb_jump && has_bombs"
   events:
     MILK_ROAD_OWL: "has(SONG_SOARING) && (has_sticks || has_weapon)"
     PICTURE_TINGLE: "has(PICTOGRAPH_BOX)"
@@ -1284,6 +1293,11 @@
     "Great Bay Temple": "has(MASK_ZORA) && can_hookshot && can_play(SONG_ZORA)"
   events:
     ZORA_CAPE_OWL: "has(SONG_SOARING) && (has_sticks || has_weapon)"
+"Behind Gorman Fence":
+  region: MILK_ROAD
+  exits:
+    "Milk Road": "can_goron_bomb_jump && has_bombs"
+    "Gorman Track Back": "true"
 "Gorman Track Front":
   region: MILK_ROAD
   exits:
@@ -1296,7 +1310,7 @@
 "Gorman Track Back":
   region: MILK_ROAD
   exits:
-    "Milk Road": "true"
+    "Behind Gorman Fence": "true"
     "Gorman Track Front": "can_goron_bomb_jump && has_bombs"
 "Road to Ikana Front":
   region: ROAD_TO_IKANA
