@@ -47,6 +47,7 @@ export type PathfinderState = {
   locations: Set<string>;
   newLocations: Set<string>;
   uncollectedLocations: Set<string>;
+  forbiddenReachableLocations: Set<string>;
   events: Set<string>;
   gossip: Set<string>;
   goal: boolean;
@@ -84,6 +85,7 @@ const defaultState = (settings: Settings): PathfinderState => ({
   locations: new Set(),
   newLocations: new Set(),
   uncollectedLocations: new Set(),
+  forbiddenReachableLocations: new Set(),
   events: new Set(),
   gossip: new Set(),
   goal: false,
@@ -137,13 +139,12 @@ export type EntranceOverrides = {[k: string]: {[k: string]: string | null}};
 type PathfinderOptions = {
   assumedItems?: Items;
   items?: ItemPlacement;
-  entranceOverrides?: EntranceOverrides;
   ignoreItems?: boolean;
   recursive?: boolean;
   stopAtGoal?: boolean;
   restrictedLocations?: Set<string>;
   forbiddenLocations?: Set<string>;
-  extraStartAreas?: Set<string>;
+  includeForbiddenReachable?: boolean;
 };
 
 export class Pathfinder {
@@ -243,10 +244,10 @@ export class Pathfinder {
     this.state.areas[age].set(area, newAreaData);
     const a = this.world.areas[area];
     let locs = Object.keys(a.locations).filter(x => !this.state.locations.has(x));
-    if (this.opts.restrictedLocations) {
+    if (this.opts.restrictedLocations && !this.opts.includeForbiddenReachable) {
       locs = locs.filter(x => this.opts.restrictedLocations!.has(x));
     }
-    if (this.opts.forbiddenLocations) {
+    if (this.opts.forbiddenLocations && !this.opts.includeForbiddenReachable) {
       locs = locs.filter(x => !this.opts.forbiddenLocations!.has(x));
     }
     locs.forEach(x => this.queueLocation(x, area));
@@ -432,6 +433,15 @@ export class Pathfinder {
 
     /* Evaluate all the locations */
     for (const [location, areas] of queue) {
+      let isAllowed = true;
+      if (this.opts.includeForbiddenReachable) {
+        if (this.opts.restrictedLocations && !this.opts.restrictedLocations.has(location)) {
+          isAllowed = false;
+        } else if (this.opts.forbiddenLocations && this.opts.forbiddenLocations.has(location)) {
+          isAllowed = false;
+        }
+      }
+
       for (const area of areas) {
         if (this.state.locations.has(location)) {
           continue;
@@ -450,7 +460,11 @@ export class Pathfinder {
         /* If any of the results are true, add the location to the state and queue up everything */
         /* Otherwise, track dependencies */
         if (results.some(x => x.result)) {
-          this.addLocation(location);
+          if (isAllowed) {
+            this.addLocation(location);
+          } else {
+            this.state.forbiddenReachableLocations.add(location);
+          }
         } else {
           /* Track dependencies */
           const d = exprDependencies(results);
@@ -559,6 +573,20 @@ export class Pathfinder {
     const uncollected = [...this.state.uncollectedLocations];
     for (const location of uncollected) {
       this.addLocation(location);
+    }
+
+    /* Collect previously forbidden locations */
+    for (const loc of this.state.forbiddenReachableLocations) {
+      let isAllowed = true;
+      if (this.opts.restrictedLocations && !this.opts.restrictedLocations.has(loc)) {
+        isAllowed = false;
+      } else if (this.opts.forbiddenLocations && this.opts.forbiddenLocations.has(loc)) {
+        isAllowed = false;
+      }
+      if (isAllowed) {
+        this.addLocation(loc);
+        this.state.forbiddenReachableLocations.delete(loc);
+      }
     }
 
     /* Pathfind */

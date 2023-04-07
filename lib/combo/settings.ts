@@ -249,70 +249,6 @@ export const SETTINGS = [{
   type: 'boolean',
   default: false
 }, {
-  key: 'erBoss',
-  name: 'Boss Entrance Shuffle',
-  category: 'entrances',
-  type: 'enum',
-  values: [
-    { value: 'none', name: 'None' },
-    { value: 'ownGame', name: 'Own Game' },
-    { value: 'full', name: 'Full' },
-  ],
-  default: 'none'
-}, {
-  key: 'erDungeons',
-  name: 'Dungeon Entrance Shuffle',
-  category: 'entrances',
-  type: 'enum',
-  values: [
-    { value: 'none', name: 'None' },
-    { value: 'ownGame', name: 'Own Game' },
-    { value: 'full', name: 'Full' },
-  ],
-  default: 'none'
-}, {
-  key: 'erMinorDungeons',
-  name: 'Shuffle OoT Minor Dungeons with Dungeons',
-  category: 'entrances',
-  type: 'boolean',
-  default: false
-}, {
-  key: 'erSpiderHouses',
-  name: 'Shuffle Spider Houses with Dungeons',
-  category: 'entrances',
-  type: 'boolean',
-  default: false
-}, {
-  key: 'erPirateFortress',
-  name: 'Shuffle Pirate Fortress with Dungeons',
-  category: 'entrances',
-  type: 'boolean',
-  default: false
-}, {
-  key: 'erBeneathWell',
-  name: 'Shuffle Beneath the Well with Dungeons',
-  category: 'entrances',
-  type: 'boolean',
-  default: false
-}, {
-  key: 'erIkanaCastle',
-  name: 'Shuffle Ikana Castle Interior with Dungeons',
-  category: 'entrances',
-  type: 'boolean',
-  default: false
-}, {
-  key: 'erSecretShrine',
-  name: 'Shuffle Secret Shrine with Dungeons',
-  category: 'entrances',
-  type: 'boolean',
-  default: false
-}, {
-  key: 'erOverworld',
-  name: 'Basic Overworld Shuffle',
-  category: 'entrances',
-  type: 'boolean',
-  default: false
-}, {
   key: 'progressiveShieldsOot',
   name: 'OoT Shields',
   category: 'items.progressive',
@@ -437,6 +373,76 @@ export const SETTINGS = [{
   category: 'items.shared',
   type: 'boolean',
   default: false
+}, {
+  key: 'probabilisticFoolish',
+  name: 'Probabilistic Foolish Hints (If you don\'t know what this is, leave it ON)',
+  category: 'hints',
+  type: 'boolean',
+  default: true
+}, {
+  key: 'erBoss',
+  name: 'Boss Entrance Shuffle',
+  category: 'entrances',
+  type: 'enum',
+  values: [
+    { value: 'none', name: 'None' },
+    { value: 'ownGame', name: 'Own Game' },
+    { value: 'full', name: 'Full' },
+  ],
+  default: 'none'
+}, {
+  key: 'erDungeons',
+  name: 'Dungeon Entrance Shuffle',
+  category: 'entrances',
+  type: 'enum',
+  values: [
+    { value: 'none', name: 'None' },
+    { value: 'ownGame', name: 'Own Game' },
+    { value: 'full', name: 'Full' },
+  ],
+  default: 'none'
+}, {
+  key: 'erMinorDungeons',
+  name: 'Shuffle OoT Minor Dungeons with Dungeons',
+  category: 'entrances',
+  type: 'boolean',
+  default: false
+}, {
+  key: 'erSpiderHouses',
+  name: 'Shuffle Spider Houses with Dungeons',
+  category: 'entrances',
+  type: 'boolean',
+  default: false
+}, {
+  key: 'erPirateFortress',
+  name: 'Shuffle Pirate Fortress with Dungeons',
+  category: 'entrances',
+  type: 'boolean',
+  default: false
+}, {
+  key: 'erBeneathWell',
+  name: 'Shuffle Beneath the Well with Dungeons',
+  category: 'entrances',
+  type: 'boolean',
+  default: false
+}, {
+  key: 'erIkanaCastle',
+  name: 'Shuffle Ikana Castle Interior with Dungeons',
+  category: 'entrances',
+  type: 'boolean',
+  default: false
+}, {
+  key: 'erSecretShrine',
+  name: 'Shuffle Secret Shrine with Dungeons',
+  category: 'entrances',
+  type: 'boolean',
+  default: false
+}, {
+  key: 'erOverworld',
+  name: 'Basic Overworld Shuffle',
+  category: 'entrances',
+  type: 'boolean',
+  default: false
 }] as const;
 
 export type SettingCategory = {
@@ -473,6 +479,9 @@ export const SETTINGS_CATEGORIES: SettingCategory[] = [{
     name: "Item Extensions",
     key: "extensions",
   }],
+}, {
+  name: "Hints",
+  key: "hints",
 }, {
   name: "Entrances",
   key: "entrances",
