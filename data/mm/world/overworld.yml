@@ -1306,7 +1306,7 @@
 "Behind Gorman Fence":
   region: MILK_ROAD
   exits:
-    "Milk Road": "(can_goron_bomb_jump && has_bombs) || (is_night2 && event(ALIENS)) || final_day"
+    "Milk Road Back": "(can_goron_bomb_jump && has_bombs) || (is_night2 && event(ALIENS)) || final_day"
     "Gorman Track Back": "true"
 "Gorman Track Front":
   region: MILK_ROAD
