@@ -1311,7 +1311,7 @@
 "Gorman Track Front":
   region: MILK_ROAD
   exits:
-    "Milk Road": "true"
+    "Milk Road Front": "true"
     "Gorman Track Back": "(can_goron_bomb_jump && has_bombs) || (is_night2 && event(ALIENS))"
   events:
     MILK: "has_rupees && is_day"
