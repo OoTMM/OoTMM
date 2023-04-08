@@ -366,7 +366,7 @@
     "Clock Town West": "true"
     "Road to Southern Swamp": "true"
     "Behind Large Icicles": "has_arrows || has_hot_water_distance"
-    "Milk Road": "true"
+    "Milk Road Front": "true"
     "Great Bay Fence": "can_play(SONG_EPONA) || (can_goron_bomb_jump && has_bombs)"
     "Road to Ikana Front": "true"
     "Astral Observatory Balcony": "has(MASK_DEKU) || (can_goron_bomb_jump && has_bombs)"
