@@ -27,6 +27,8 @@ import { logic } from "../lib/combo/logic";
 const sharedMonitor = new Monitor({ onLog: () => {} });
 
 export const makeTestSeed = (seed: string, settings: Optional<Settings>) => {
-  const s = merge({}, DEFAULT_SETTINGS, settings);
+  const s = merge({}, DEFAULT_SETTINGS, settings, {
+    probabilisticFoolish: false,
+  });
   return logic(sharedMonitor, { debug: false, seed, settings: s });
 }

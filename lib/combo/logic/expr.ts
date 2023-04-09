@@ -28,6 +28,7 @@ type ExprRestrictions = {
     night: boolean;
   },
   mmTime: number;
+  mmTime2: number;
 };
 
 export const defaultRestrictions = (): ExprRestrictions => ({
@@ -36,6 +37,7 @@ export const defaultRestrictions = (): ExprRestrictions => ({
     night: false,
   },
   mmTime: 0,
+  mmTime2: 0,
 });
 
 export const maxRestrictions = (): ExprRestrictions => ({
@@ -44,12 +46,14 @@ export const maxRestrictions = (): ExprRestrictions => ({
     night: true,
   },
   mmTime: 0xffffffff,
+  mmTime2: 0xffffffff,
 });
 
 export const isDefaultRestrictions = (r: ExprRestrictions): boolean => {
   return r.oot.day === false &&
     r.oot.night === false &&
-    r.mmTime === 0;
+    r.mmTime === 0 &&
+    r.mmTime2 === 0;
 };
 
 type ExprResultTrue = {
@@ -66,6 +70,7 @@ export type AreaData = {
     night: boolean;
   },
   mmTime: number;
+  mmTime2: number;
 };
 
 type State = {
@@ -100,6 +105,7 @@ export const exprRestrictionsAnd = (exprs: ExprResult[]): ExprRestrictions => {
     restrictions.oot.day = restrictions.oot.day || expr.restrictions.oot.day;
     restrictions.oot.night = restrictions.oot.night || expr.restrictions.oot.night;
     restrictions.mmTime = (restrictions.mmTime | expr.restrictions.mmTime) >>> 0;
+    restrictions.mmTime2 = (restrictions.mmTime2 | expr.restrictions.mmTime2) >>> 0;
   }
 
   return restrictions;
@@ -115,6 +121,7 @@ export const exprRestrictionsOr = (exprs: ExprResult[]): ExprRestrictions => {
     restrictions.oot.day = restrictions.oot.day && expr.restrictions.oot.day;
     restrictions.oot.night = restrictions.oot.night && expr.restrictions.oot.night;
     restrictions.mmTime = (restrictions.mmTime & expr.restrictions.mmTime) >>> 0;
+    restrictions.mmTime2 = (restrictions.mmTime2 & expr.restrictions.mmTime2) >>> 0;
   }
 
   return restrictions;
@@ -253,6 +260,7 @@ export const exprOotTime = (time: string): Expr => {
 export const exprMmTime = (operator: string, sliceName: string): Expr => {
   const slice = MM_TIME_SLICES.indexOf(sliceName);
   let value = 0;
+  let value2 = 0;
 
   if (slice === -1) {
     throw new Error(`Invalid MM time slice: ${sliceName}`);
@@ -262,25 +270,38 @@ export const exprMmTime = (operator: string, sliceName: string): Expr => {
   case 'before':
     /* Time < slice */
     for (let i = 0; i < slice; ++i)
-      value = (value | (1 << i)) >>> 0;
+      if (i < 32) {
+        value = (value | (1 << i)) >>> 0;
+      } else {
+        value2 = (value2 | (1 << (i - 32))) >>> 0;
+      }
     break;
   case 'after':
     /* Time >= slice */
     for (let i = slice; i < MM_TIME_SLICES.length; ++i)
-      value = (value | (1 << i)) >>> 0;
+      if (i < 32) {
+        value = (value | (1 << i)) >>> 0;
+      } else {
+        value2 = (value2 | (1 << (i - 32))) >>> 0;
+      }
     break;
   case 'at':
     /* Time == slice */
-    value = (1 << slice) >>> 0;
+    if (slice < 32) {
+      value = (1 << slice) >>> 0;
+    } else {
+      value2 = (1 << (slice - 32)) >>> 0;
+    }
     break;
   default:
     throw new Error(`Invalid MM time operator: ${operator}`);
   }
 
   return state => {
-    if (state.areaData.mmTime & value) {
+    if ((state.areaData.mmTime & value) || (state.areaData.mmTime2 & value2)) {
       const restrictions = defaultRestrictions();
       restrictions.mmTime = ~value >>> 0;
+      restrictions.mmTime2 = ~value2 >>> 0;
       return { result: true, restrictions };
     } else {
       return {

@@ -111,6 +111,7 @@ const defaultAreaData = (): AreaData => ({
     night: false,
   },
   mmTime: 0,
+  mmTime2: 0,
 });
 
 const mergeAreaData = (a: AreaData, b: AreaData): AreaData => ({
@@ -119,12 +120,14 @@ const mergeAreaData = (a: AreaData, b: AreaData): AreaData => ({
     night: a.oot.night || b.oot.night,
   },
   mmTime: a.mmTime | b.mmTime,
+  mmTime2: a.mmTime2 | b.mmTime2,
 });
 
 const compareAreaData = (a: AreaData, b: AreaData): boolean => (
   a.oot.day === b.oot.day &&
   a.oot.night === b.oot.night &&
-  a.mmTime === b.mmTime
+  a.mmTime === b.mmTime &&
+  a.mmTime2 === b.mmTime2
 );
 
 const cloneAreaData = (a: AreaData): AreaData => ({
@@ -133,6 +136,7 @@ const cloneAreaData = (a: AreaData): AreaData => ({
     night: a.oot.night,
   },
   mmTime: a.mmTime,
+  mmTime2: a.mmTime2,
 });
 
 export type EntranceOverrides = {[k: string]: {[k: string]: string | null}};
@@ -221,7 +225,7 @@ export class Pathfinder {
       }
     } else {
       /* MM: Expand the time range */
-      if (newAreaData.mmTime === 0) {
+      if (newAreaData.mmTime === 0 && newAreaData.mmTime2 === 0) {
         return;
       }
 
@@ -232,9 +236,18 @@ export class Pathfinder {
       }
 
       /* We can wait to reach later time slices */
-      const earliest = Math.floor(Math.log2(newAreaData.mmTime));
+      let earliest: number;
+      if (newAreaData.mmTime) {
+        earliest = Math.floor(Math.log2(newAreaData.mmTime));
+      } else {
+        earliest = Math.floor(Math.log2(newAreaData.mmTime2)) + 32;
+      }
       for (let i = earliest; i < MM_TIME_SLICES.length; ++i) {
-        newAreaData.mmTime |= (1 << i);
+        if (i < 32) {
+          newAreaData.mmTime |= (1 << i);
+        } else {
+          newAreaData.mmTime2 |= (1 << (i - 32));
+        }
       }
     }
 
@@ -368,6 +381,9 @@ export class Pathfinder {
             if (r.oot.night) areaData.oot.night = false;
             if (r.mmTime) {
               areaData.mmTime = areaData.mmTime & ~(r.mmTime);
+            }
+            if (r.mmTime2) {
+              areaData.mmTime2 = areaData.mmTime2 & ~(r.mmTime2);
             }
           }
           this.exploreArea(age, exit, areaData, area);
@@ -558,7 +574,7 @@ export class Pathfinder {
       this.state.events = new Set(Object.values(this.world.areas).map(x => Object.keys(x.events || {})).flat());
       const allAreas = new Map<string, AreaData>;
       for (const area of Object.keys(this.world.areas)) {
-        allAreas.set(area, { oot: { day: true, night: true }, mmTime: 0xffffffff });
+        allAreas.set(area, { oot: { day: true, night: true }, mmTime: 0xffffffff, mmTime2: 0xffffffff });
       }
       this.state.areas = {
         child: allAreas,
