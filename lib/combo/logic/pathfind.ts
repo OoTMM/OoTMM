@@ -119,8 +119,8 @@ const mergeAreaData = (a: AreaData, b: AreaData): AreaData => ({
     day: a.oot.day || b.oot.day,
     night: a.oot.night || b.oot.night,
   },
-  mmTime: a.mmTime | b.mmTime,
-  mmTime2: a.mmTime2 | b.mmTime2,
+  mmTime: (a.mmTime | b.mmTime) >>> 0,
+  mmTime2: (a.mmTime2 | b.mmTime2) >>> 0,
 });
 
 const compareAreaData = (a: AreaData, b: AreaData): boolean => (
@@ -232,7 +232,7 @@ export class Pathfinder {
       /* If we come from OoT, we can song of time to get back to day 1 */
       const fa = this.world.areas[fromArea];
       if (fa.game === 'oot') {
-        newAreaData.mmTime |= (1 << 0);
+        newAreaData.mmTime = (newAreaData.mmTime | (1 << 0)) >>> 0;
       }
 
       /* We can wait to reach later time slices */
@@ -244,9 +244,9 @@ export class Pathfinder {
       }
       for (let i = earliest; i < MM_TIME_SLICES.length; ++i) {
         if (i < 32) {
-          newAreaData.mmTime |= (1 << i);
+          newAreaData.mmTime = (newAreaData.mmTime | (1 << i)) >>> 0;
         } else {
-          newAreaData.mmTime2 |= (1 << (i - 32));
+          newAreaData.mmTime2 = (newAreaData.mmTime2 | (1 << (i - 32))) >>> 0;
         }
       }
     }
@@ -265,7 +265,7 @@ export class Pathfinder {
     }
     locs.forEach(x => this.queueLocation(x, area));
     Object.keys(a.events).filter(x => !this.state.events.has(x)).forEach(x => this.queueEvent(x, area));
-    const exits = Object.keys(a.exits).filter(x => !this.state.areas[age].has(x));
+    const exits = Object.keys(a.exits);
     exits.forEach(x => this.queueExit(age, x, area));
     Object.keys(a.gossip).forEach(x => this.queueGossip(x, area));
   }
@@ -380,10 +380,10 @@ export class Pathfinder {
             if (r.oot.day) areaData.oot.day = false;
             if (r.oot.night) areaData.oot.night = false;
             if (r.mmTime) {
-              areaData.mmTime = areaData.mmTime & ~(r.mmTime);
+              areaData.mmTime = (areaData.mmTime & ~(r.mmTime)) >>> 0;
             }
             if (r.mmTime2) {
-              areaData.mmTime2 = areaData.mmTime2 & ~(r.mmTime2);
+              areaData.mmTime2 = (areaData.mmTime2 & ~(r.mmTime2)) >>> 0;
             }
           }
           this.exploreArea(age, exit, areaData, area);
