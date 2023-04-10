@@ -16,7 +16,7 @@
   region: NONE
   exits:
     "Clock Town South": "event(CLOCK_TOWN_OWL)"
-    "Milk Road": "event(MILK_ROAD_OWL)"
+    "Milk Road Front": "event(MILK_ROAD_OWL)"
     "Swamp Front": "event(SWAMP_OWL)"
     "Woodfall Shrine": "event(WOODFALL_OWL)"
     "Mountain Village": "event(MOUNTAIN_VILLAGE_OWL)"
