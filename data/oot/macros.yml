@@ -59,6 +59,7 @@
 "hidden_grotto_storms": "stone_of_agony && can_play(SONG_STORMS)"
 "has_spiritual_stones": "has(STONE_EMERALD) && has(STONE_RUBY) && has(STONE_SAPPHIRE)"
 #Specific Interaction Macros:
+"can_ride_epona": "is_adult && can_play(SONG_EPONA)"
 "gs_soil": "is_child && has_bottle && (has(BUGS) || event(BUGS))"
 "adult_trade(x)": "is_adult && has(x)"
 "has_blue_fire": "has_bottle && (event(BLUE_FIRE) || has(BLUE_FIRE))"
@@ -70,6 +71,7 @@
 "can_kill_baba_nuts": "has_weapon || has_explosives || can_use_slingshot"
 "can_hit_scrub": "has_nuts || can_hit_triggers_distance || has_shield_for_scrubs || can_collect_distance || can_hammer"
 "has_shield_for_scrubs": "(is_adult && has(SHIELD_HYLIAN)) || (is_child && has(SHIELD_DEKU))"
+"can_rescue_carpenter": "has(SMALL_KEY_GF, 4) && (has_weapon || ((can_boomerang || has_nuts) && can_use_sticks))"
 #Trick Macros
 "gs_night": "is_night && (trick(OOT_NIGHT_GS) || can_play(SONG_SUN))"
 "has_lens": "has_lens_strict || trick(OOT_LENS)"

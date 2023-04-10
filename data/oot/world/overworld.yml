@@ -137,7 +137,7 @@
     "Hyrule Field Grotto Near Kak": "hidden_grotto_bomb"
     "Hyrule Field Fairy Grotto": "has_explosives_or_hammer"
   events:
-    BIG_POE: "event(EPONA) && can_use_bow && has_bottle"
+    BIG_POE: "can_ride_epona && can_use_bow && has_bottle"
     #There are rocks near Gerudo Valley you can farm for drops
     BOMBS: "true"
     RUPEES: "true"
@@ -370,8 +370,9 @@
     "Lon Lon Ranch House": "is_day"
     "Lon Lon Ranch Grotto": "is_child"
   events:
-    EPONA: "is_adult && can_play(SONG_EPONA) && has_rupees && is_day"
-    MALON_COW: "is_adult && event(EPONA) && is_day"
+    #EPONA: "is_adult && can_play(SONG_EPONA) && has_rupees && is_day"
+    EPONA: "true" #If fast Epona becomes a setting, we need a check here... this is "Ingo deposed".
+    MALON_COW: "can_ride_epona && event(EPONA) && is_day"
     RUPEES: "is_child"
   locations:
     "Lon Lon Ranch Malon Song": "is_child && has(OCARINA) && event(MALON) && is_day"
@@ -612,7 +613,8 @@
     "Shooting Gallery Adult": "is_adult && is_day"
     "Kakariko Rooftop": "(is_child && is_day) || can_hookshot || (is_adult && trick(OOT_PASS_COLLISION))"
     "Kakariko Bazaar": "is_adult && is_day"
-    "Kakariko Potion Shop": "is_adult && is_day"
+    "Kakariko Potion Shop": "is_day"
+    "Kakariko Potion Shop Back": "is_adult && is_day"
     "Kakariko Granny Shop": "is_adult"
     "Windmill": "true"
     "Kakariko Carpenter House": "true"
@@ -658,15 +660,21 @@
   region: KAKARIKO
   exits:
     "Kakariko": "is_adult"
+    "Kakariko Potion Shop Back": "is_adult"
   locations:
-    "Kakariko Potion Shop Item 1": "has(WALLET, 1) && has_rupees"
-    "Kakariko Potion Shop Item 2": "has_rupees"
-    "Kakariko Potion Shop Item 3": "has_rupees"
-    "Kakariko Potion Shop Item 4": "has_rupees"
-    "Kakariko Potion Shop Item 5": "has(WALLET, 2) && has_rupees"
-    "Kakariko Potion Shop Item 6": "has_rupees"
-    "Kakariko Potion Shop Item 7": "has_rupees"
-    "Kakariko Potion Shop Item 8": "has_rupees"
+    "Kakariko Potion Shop Item 1": "has(WALLET, 1) && has_rupees && is_adult"
+    "Kakariko Potion Shop Item 2": "has_rupees && is_adult"
+    "Kakariko Potion Shop Item 3": "has_rupees && is_adult"
+    "Kakariko Potion Shop Item 4": "has_rupees && is_adult"
+    "Kakariko Potion Shop Item 5": "has(WALLET, 2) && has_rupees && is_adult"
+    "Kakariko Potion Shop Item 6": "has_rupees && is_adult"
+    "Kakariko Potion Shop Item 7": "has_rupees && is_adult"
+    "Kakariko Potion Shop Item 8": "has_rupees && is_adult"
+"Kakariko Potion Shop Back":
+  region: KAKARIKO
+  exits:
+    "Kakariko": "true"
+    "Kakariko Potion Shop": "true"
 "Kakariko Granny Shop":
   region: KAKARIKO
   exits:
@@ -1233,7 +1241,7 @@
   exits:
     "Lake Hylia": "true"
     "Hyrule Field": "true"
-    "Gerudo Valley After Bridge": "can_longshot || (is_adult && event(EPONA)) || (is_adult && event(CARPENTERS_RESCUE))"
+    "Gerudo Valley After Bridge": "can_longshot || can_ride_epona || (is_adult && event(CARPENTERS_RESCUE))"
     "Octorok Grotto": "can_lift_silver"
   events:
     RUPEES: "true"
@@ -1255,7 +1263,7 @@
   exits:
     "Lake Hylia": "true"
     "Gerudo Fortress Exterior": "true"
-    "Gerudo Valley": "can_longshot || (is_adult && event(EPONA)) || (is_adult && event(CARPENTERS_RESCUE))"
+    "Gerudo Valley": "can_longshot || can_ride_epona || (is_adult && event(CARPENTERS_RESCUE))"
     "Gerudo Valley Storms Grotto": "hidden_grotto_storms && is_adult"
     "Gerudo Valley Tent": "is_adult"
   locations:
@@ -1283,19 +1291,78 @@
 "Gerudo Fortress Exterior":
   region: GERUDO_FORTRESS
   exits:
-    "Gerudo Fortress": "true"
+    "Gerudo Fortress Carpenter 1 Left": "true"
+    "Gerudo Fortress Carpenter 1 Right": "true"
+    "Gerudo Fortress Kitchen Tunnel End": "true"
+    "Gerudo Fortress Carpenter 2 Bottom": "true"
     "Gerudo Valley After Bridge": "true"
     "Fortress Near Wasteland": "event(OPEN_FORTRESS_GATE)"
     "Gerudo Training Grounds": "has(GERUDO_CARD) && is_adult && has_rupees"
     "Gerudo Fortress Grotto": "is_adult && hidden_grotto_storms"
+    "Gerudo Fortress Lower-Right Ledge": "is_child || can_use_bow || has(GERUDO_CARD)"
   events:
     OPEN_FORTRESS_GATE: "has(GERUDO_CARD) && is_adult"
   locations:
-    "Gerudo Fortress Chest": "has_hover_boots || can_longshot || scarecrow_hookshot"
-    "Gerudo Fortress Archery Reward 1": "event(EPONA) && can_use_bow && has(GERUDO_CARD) && has_rupees && is_day"
-    "Gerudo Fortress Archery Reward 2": "event(EPONA) && can_use_bow && has(GERUDO_CARD) && has_rupees && is_day"
-    "Gerudo Fortress GS Wall": "can_hookshot && gs_night"
+    "Gerudo Fortress Archery Reward 1": "can_ride_epona && can_use_bow && has(GERUDO_CARD) && has_rupees && is_day"
+    "Gerudo Fortress Archery Reward 2": "can_ride_epona && can_use_bow && has(GERUDO_CARD) && has_rupees && is_day"
     "Gerudo Fortress GS Target": "can_hookshot && gs_night && has(GERUDO_CARD)"
+"Gerudo Fortress Lower-Right Ledge":
+  region: GERUDO_FORTRESS
+  exits:
+    "Gerudo Fortress Exterior": "true"
+    "Gerudo Fortress Lower-Center Ledge": "true" #This jump is a little tight as kid, but kid has infinite tries.
+    "Gerudo Fortress Kitchen Tunnel Mid": "true"
+    "Gerudo Fortress Carpenter 3 Bottom": "true"
+"Gerudo Fortress Lower-Center Ledge":
+  region: GERUDO_FORTRESS
+  exits:
+    "Gerudo Fortress Exterior": "true"
+    "Gerudo Fortress Lower-Right Ledge": "true"
+    "Gerudo Fortress Carpenter 2 Top": "true"
+    "Gerudo Fortress Carpenter 3 Top": "true"
+    "Gerudo Fortress Kitchen Ledge Near Tunnel": "true"
+    "Gerudo Fortress Upper-Right Ledge": "false" #Placeholder for trick jump later
+"Gerudo Fortress Upper-Center Ledge":
+  region: GERUDO_FORTRESS
+  exits:
+    "Gerudo Fortress Kitchen Ledge Away from Tunnel": "true"
+    "Gerudo Fortress Lower-Center Ledge": "true"
+    "Gerudo Fortress Upper-Right Ledge": "is_adult" #Kid is too short to climb the ledge.
+    "Gerudo Fortress Upper-Left Ledge": "can_longshot"
+    "Gerudo Fortress Center Ledge": "true"
+"Gerudo Fortress Upper-Right Ledge":
+  region: GERUDO_FORTRESS
+  exits:
+    "Gerudo Fortress Lower-Center Ledge": "true"
+    "Gerudo Fortress Lower-Right Ledge": "true"
+    "Gerudo Fortress Upper-Left Ledge": "scarecrow_hookshot || can_longshot || has_hover_boots"
+    "Gerudo Fortress Center Ledge": "true"
+  locations:
+    "Gerudo Fortress GS Wall": "can_hookshot && gs_night"
+"Gerudo Fortress Upper-Left Ledge":
+  region: GERUDO_FORTRESS
+  exits:
+    "Gerudo Fortress Lower-Left Ledge": "true"
+    "Gerudo Fortress Center Ledge": "true"
+  locations:
+    "Gerudo Fortress Chest": "true"
+"Gerudo Fortress Center Ledge":
+  region: GERUDO_FORTRESS
+  exits:
+    "Gerudo Fortress Carpenter 4": "true"
+    "Gerudo Fortress Lower-Center Ledge": "true"
+"Gerudo Fortress Lower-Left Ledge":
+  region: GERUDO_FORTRESS
+  exits:
+    "Gerudo Fortress Exterior": "true"
+    "Gerudo Fortress Break Room Bottom": "true"
+"Gerudo Fortress Above Prison":
+  region: GERUDO_FORTRESS
+  exits:
+    "Gerudo Fortress Exterior": "true"
+    "Gerudo Fortress Lower-Left Ledge": "true"
+  #locations:
+    #"Gerudo Fortress Unintended PoH": "is_child"
 "Fortress Near Wasteland":
   region: GERUDO_FORTRESS
   exits:
@@ -1304,7 +1371,7 @@
 "Gerudo Fortress Grotto":
   region: GERUDO_FORTRESS
   exits:
-    "Gerudo Fortress": "true"
+    "Gerudo Fortress Exterior": "true"
 "Haunted Wasteland Start":
   region: HAUNTED_WASTELAND
   exits:
