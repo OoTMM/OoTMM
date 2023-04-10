@@ -439,7 +439,7 @@ export const SETTINGS = [{
   default: false
 }, {
   key: 'erOverworld',
-  name: 'Basic Overworld Shuffle',
+  name: 'Shuffle Major Regions',
   category: 'entrances',
   type: 'boolean',
   default: false
