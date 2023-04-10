@@ -612,15 +612,13 @@
     "Skulltula House": "true"
     "Shooting Gallery Adult": "is_adult && is_day"
     "Kakariko Rooftop": "(is_child && is_day) || can_hookshot || (is_adult && trick(OOT_PASS_COLLISION))"
+    "Kakariko Back": "can_hookshot || has_hover_boots || (is_day && is_child) || (trick(OOT_MAN_ON_ROOF) && (is_adult || can_use_slingshot || has_bombchu))"
     "Kakariko Bazaar": "is_adult && is_day"
     "Kakariko Potion Shop": "is_day"
-    "Kakariko Potion Shop Back": "is_adult && is_day"
-    "Kakariko Granny Shop": "is_adult"
     "Windmill": "true"
     "Kakariko Carpenter House": "true"
     "Impa House Front": "true"
     "ReDead Grotto": "hidden_grotto_bomb"
-    "Kakariko Generic Grotto": "true"
   locations:
     "Kakariko Anju Bottle": "is_child && is_day"
     "Kakariko Anju Egg": "is_adult && is_day"
@@ -643,6 +641,13 @@
   exits:
     "Kakariko": "setting(kakarikoGate, open) || event(KAKARIKO_GATE_OPEN) || is_adult || trick(OOT_PASS_COLLISION)"
     "Death Mountain": "true"
+"Kakariko Back":
+  region: KAKARIKO
+  exits:
+    "Kakariko": "true"
+    "Kakariko Potion Shop Back": "is_adult && is_day"
+    "Kakariko Granny Shop": "is_adult"
+    "Kakariko Generic Grotto": "true"
 "Kakariko Bazaar":
   region: KAKARIKO
   exits:
@@ -1299,7 +1304,7 @@
     "Fortress Near Wasteland": "event(OPEN_FORTRESS_GATE)"
     "Gerudo Training Grounds": "has(GERUDO_CARD) && is_adult && has_rupees"
     "Gerudo Fortress Grotto": "is_adult && hidden_grotto_storms"
-    "Gerudo Fortress Lower-Right Ledge": "is_child || can_use_bow || has(GERUDO_CARD)"
+    "Gerudo Fortress Lower-Right Ledge": "is_child || can_use_bow || can_hookshot || has(GERUDO_CARD)"
   events:
     OPEN_FORTRESS_GATE: "has(GERUDO_CARD) && is_adult"
   locations:
