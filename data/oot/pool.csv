@@ -528,9 +528,9 @@ MQ Jabu-Jabu Second Room B1 Chest,                          chest,          NONE
 MQ Jabu-Jabu Second Room 1F Chest,                          chest,          NONE,                 INSIDE_JABU_JABU,               0x07,                       RECOVERY_HEART
 MQ Jabu-Jabu Third Room West Chest,                         chest,          NONE,                 INSIDE_JABU_JABU,               0x04,                       BOMBCHU_5
 MQ Jabu-Jabu Third Room East Chest,                         chest,          NONE,                 INSIDE_JABU_JABU,               0x08,                       NUTS_5
-MQ Jabu-Jabu SoT Room Lower Chest,                          chest,          NONE,                 INSIDE_JABU_JABU,               0x09,                       STICK
+MQ Jabu-Jabu SoT Room Lower Chest,                          chest,          NONE,                 INSIDE_JABU_JABU,               0x01,                       STICK
 MQ Jabu-Jabu Boomerang Chest,                               chest,          NONE,                 INSIDE_JABU_JABU,               0x06,                       BOOMERANG
-MQ Jabu-Jabu Back Chest,                                    chest,          NONE,                 INSIDE_JABU_JABU,               0x01,                       NUTS_5
+MQ Jabu-Jabu Back Chest,                                    chest,          NONE,                 INSIDE_JABU_JABU,               0x09,                       NUTS_5
 MQ Jabu-Jabu Pre-Boss Chest,                                chest,          NONE,                 INSIDE_JABU_JABU,               0x0a,                       RUPEE_BLUE
 MQ Jabu-Jabu GS SoT Block,                                  gs,             NONE,                 INSIDE_JABU_JABU,               0x18,                       GS_TOKEN
 MQ Jabu-Jabu GS Back,                                       gs,             NONE,                 INSIDE_JABU_JABU,               0x1a,                       GS_TOKEN
