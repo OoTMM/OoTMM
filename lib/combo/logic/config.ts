@@ -1,6 +1,7 @@
 import { Monitor } from '../monitor';
 import { Random } from '../random';
 import { DUNGEONS, Settings } from '../settings';
+import { isEntranceShuffle } from './helpers';
 
 /* This pass pre-computes things from the settings */
 export class LogicPassConfig {
@@ -68,6 +69,10 @@ export class LogicPassConfig {
 
     if (this.state.settings.erDungeons !== 'none') {
       config.add('ER_DUNGEONS');
+    }
+
+    if (isEntranceShuffle(this.state.settings)) {
+      config.add('ER_ANY');
     }
 
     if (this.state.settings.sharedBows) {
