@@ -86,6 +86,21 @@ static void debugCheat(GameState_Play* play)
 #endif
 }
 
+static u32 entranceForOverride(u32 entrance)
+{
+    switch (entrance)
+    {
+    case 0x0c00:
+        /* To Clear Swamp from road */
+        return 0x8400;
+    case 0xae60:
+        /* To Spring Mountain Village from Path */
+        return 0x9a60;
+    default:
+        return entrance;
+    }
+}
+
 void hookPlay_Init(GameState_Play* play)
 {
     int isEndOfGame;
@@ -99,7 +114,7 @@ void hookPlay_Init(GameState_Play* play)
     if (gIsEntranceOverride)
     {
         gIsEntranceOverride = 0;
-        override = comboEntranceOverride(gSave.entranceIndex);
+        override = comboEntranceOverride(entranceForOverride(gSave.entranceIndex));
         if (override != -1)
         {
             if (override >= 0)
