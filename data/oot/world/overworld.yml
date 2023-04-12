@@ -678,12 +678,12 @@
 "Kakariko Potion Shop Back":
   region: KAKARIKO
   exits:
-    "Kakariko": "true"
+    "Kakariko Back": "is_adult"
     "Kakariko Potion Shop": "true"
 "Kakariko Granny Shop":
   region: KAKARIKO
   exits:
-    "Kakariko": "true"
+    "Kakariko Back": "true"
   events:
     MAGIC: "adult_trade(ODD_MUSHROOM) && has_rupees && has(WALLET) && has_bottle"
   locations:
@@ -741,7 +741,7 @@
 "Kakariko Generic Grotto":
   region: KAKARIKO
   exits:
-    "Kakariko": "true"
+    "Kakariko Back": "true"
   events:
     BOMBS: "can_cut_grass"
     RUPEES: "can_cut_grass"
