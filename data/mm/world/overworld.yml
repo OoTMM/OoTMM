@@ -1094,11 +1094,11 @@
   exits:
     "Snowhead Entrance": "true"
     "Snowhead Temple": "true"
-    "Snowhead near Great Fairy Fountain": "event(BOSS_SNOWHEAD)"
+    "Snowhead Near Great Fairy Fountain": "event(BOSS_SNOWHEAD)"
 "Snowhead Near Great Fairy Fountain":
   region: SNOWHEAD
   events:
-    MAGIC: "(event(OPEN_SNOWHEAD_TEMPLE) || event(BOSS_SNOWHEAD)) && can_break_boulders"
+    MAGIC: "(event(OPEN_SNOWHEAD_TEMPLE) && can_break_boulders) || event(BOSS_SNOWHEAD)"
     RUPEES: "(event(OPEN_SNOWHEAD_TEMPLE) || event(BOSS_SNOWHEAD)) && can_use_light_arrows"
   exits:
     "Snowhead Entrance": "true"
