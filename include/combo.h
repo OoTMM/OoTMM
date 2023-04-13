@@ -53,7 +53,7 @@
 #include <combo/common/actor.h>
 #include <combo/save.h>
 #include <combo/gi.h>
-#include <combo/items.h>
+#include <combo/data/items.h>
 #include <combo/common/events.h>
 #include <combo/scenes.h>
 #include <combo/shader.h>
@@ -251,65 +251,6 @@ void comboDrawBlit2D_IA4(Gfx** dl, u32 segAddr, int w, int h, float x, float y, 
 /* Event */
 void comboOotSetEventChk(u16 flag);
 void comboMmSetEventWeek(u16 flag);
-
-/* Item */
-extern const u8 kMaxSticks[];
-extern const u8 kMaxNuts[];
-extern const u8 kMaxBombs[];
-extern const u8 kMaxArrows[];
-extern const u8 kMaxSeeds[];
-extern const u16 kMaxRupees[];
-extern const u8 kOotTradeChild[];
-extern const u8 kOotTradeAdult[];
-extern const u8 kMmTrade1[];
-extern const u8 kMmTrade2[];
-extern const u8 kMmTrade3[];
-
-void comboSyncItems(void);
-
-int  comboAddItemMm(s16 gi, int noEffect);
-int  comboAddItemOot(s16 gi, int noEffect);
-void comboAddItemSharedMm(s16 gi, int noEffect);
-void comboAddItemSharedOot(s16 gi, int noEffect);
-int  comboAddItemEffect(GameState_Play* play, s16 gi);
-void comboAddItemSharedForeignEffect(GameState_Play* play, s16 gi);
-
-int  comboAddSmallKeyOot(u16 dungeonId);
-void comboAddBossKeyOot(u16 dungeonId);
-void comboAddCompassOot(u16 dungeonId);
-void comboAddMapOot(u16 dungeonId);
-int  comboAddSmallKeyMm(u16 dungeonId);
-void comboAddBossKeyMm(u16 dungeonId);
-int  comboAddStrayFairyMm(u16 dungeonId);
-void comboAddMapMm(u16 dungeonId);
-void comboAddCompassMm(u16 dungeonId);
-
-void comboAddQuiverOot(int level);
-void comboAddQuiverMm(int level);
-void comboAddArrowsOot(int count);
-void comboAddArrowsMm(int count);
-void comboAddBombBagOot(int level);
-void comboAddBombBagMm(int level);
-void comboAddBombsOot(int count);
-void comboAddBombsMm(int count);
-void comboAddMagicUpgradeOot(int level);
-void comboAddMagicUpgradeMm(int level);
-void comboAddSticksOot(int count);
-void comboAddSticksMm(int count);
-void comboAddNutsOot(int count);
-void comboAddNutsMm(int count);
-
-void comboAddCommonItemOot(int sid, int noEffect);
-void comboAddCommonItemMm(int sid, int noEffect);
-
-int  comboAddItem(GameState_Play* play, s16 gi);
-int  comboAddItemNoEffect(s16 gi);
-
-int comboIsItemUnavailable(s16 gi);
-int comboIsItemMinor(s16 gi);
-int comboIsItemConsumable(s16 gi);
-
-int comboItemPrecond(s16 gi, s16 price);
 
 void comboToggleTrade(u8* slot, u32 flags, const u8* table, u32 tableSize);
 

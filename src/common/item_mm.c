@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/item.h>
 
 static const u16 kSwords[] = {
     ITEM_NONE,

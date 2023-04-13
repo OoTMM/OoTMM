@@ -1,5 +1,5 @@
-#ifndef COMBO_ITEMS_H
-#define COMBO_ITEMS_H
+#ifndef COMBO_DATA_ITEMS_H
+#define COMBO_DATA_ITEMS_H
 
 #define ITEM_OOT_STICK                  0x00
 #define ITEM_OOT_NUT                    0x01

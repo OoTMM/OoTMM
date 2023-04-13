@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/item.h>
 
 #define ENTRANCE_MARKET       0x1d1
 

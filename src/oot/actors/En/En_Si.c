@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/item.h>
 
 static s16 EnSi_Override(Actor* this)
 {

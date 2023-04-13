@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/item.h>
 
 s32 comboProgressive(s32 gi)
 {

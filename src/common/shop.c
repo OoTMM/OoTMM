@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/item.h>
 
 #if defined(GAME_OOT)
 # define SOLD_OUT (GI_MM_SOLD_OUT | MASK_FOREIGN_GI)

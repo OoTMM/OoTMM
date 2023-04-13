@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/item.h>
 
 #define SCRUB_ITEM_NUTS             0x00
 #define SCRUB_ITEM_STICK            0x01
