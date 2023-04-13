@@ -840,6 +840,9 @@
     "Mountain Village Path Lower": "true"
 "Mountain Village Path Lower":
   region: PATH_TO_MOUNTAIN_VILLAGE
+  events:
+    RUPEES: "can_use_light_arrows"
+    MAGIC: "event(BOSS_SNOWHEAD)"
   exits:
     "Behind Large Icicles": "true"
     "Mountain Village Path Upper": "can_break_boulders || can_use_fire_arrows || event(BOSS_SNOWHEAD)"
@@ -849,6 +852,7 @@
   region: PATH_TO_MOUNTAIN_VILLAGE
   events:
     MAGIC: "true"
+    RUPEES: "can_use_light_arrows"
   exits:
     "Mountain Village Path Lower": "can_break_boulders || can_use_fire_arrows || event(BOSS_SNOWHEAD)"
     "Mountain Village": "true"
@@ -869,7 +873,7 @@
     MAGIC: "true"
     ARROWS: "true"
     BOMBS: "true"
-    RUPEES: "can_break_boulders || can_use_fire_arrows"
+    RUPEES: "event(BOSS_SNOWHEAD) || ((can_break_boulders || can_use_fire_arrows) && (second_day || final_day)) || ((can_break_boulders || can_use_fire_arrows) && can_use_light_arrows && first_day)"
   locations:
     "Mountain Village Waterfall Chest": "event(BOSS_SNOWHEAD) && can_use_lens"
     "Mountain Village Don Gero Mask": "event(GORON_FOOD)"
@@ -911,6 +915,7 @@
   events:
     PICTURE_TINGLE: "has(PICTOGRAPH_BOX)"
     MAGIC: "true"
+    RUPEES: "can_use_light_arrows || event(BOSS_SNOWHEAD)"
 #    TINGLE_MOUNTAIN: "has_weapon_range && has_rupees"
   exits:
     "Mountain Village": "true"
@@ -957,6 +962,8 @@
     "Near Ramp Grotto": "true"
 "Near Ramp Grotto":
   region: TWIN_ISLANDS
+  events:
+    MAGIC: "true"
   exits:
     "Twin Islands": "true"
     "Twin Islands Ramp Grotto": "has_explosives || trick_keg_explosives || (trick(MM_KEG_EXPLOSIVES) && event(POWDER_KEG_TRIAL))"
@@ -969,6 +976,12 @@
   events:
     POWDER_KEG_TRIAL: "(event(BOSS_SNOWHEAD) || can_use_fire_arrows) && has(MASK_GORON)"
     BUY_KEG: "event(POWDER_KEG_TRIAL) && has(POWDER_KEG) && has(WALLET) && has_rupees"
+    MAGIC: "true"
+    ARROWS: "true"
+    BOMBS: "true"
+    NUTS: "true"
+    STICKS: "true"
+    RUPEES: "can_break_boulders || can_use_fire_arrows || can_use_light_arrows"
   locations:
     "Goron Village HP": "has(DEED_SWAMP) && has(MASK_DEKU)"
     "Goron Village Scrub Deed": "has(DEED_SWAMP) && has(MASK_DEKU)"
@@ -982,6 +995,10 @@
     "Lone Peak Shrine": "true"
 "Lone Peak Shrine":
   region: GORON_VILLAGE
+  events:
+    MAGIC: "true"
+    BOMBS: "true"
+    BUGS: "has_bottle"
   exits:
     "Front of Lone Peak Shrine": "true"
   locations:
@@ -996,6 +1013,7 @@
     "Near Village Grotto": "event(BOSS_SNOWHEAD)"
   events:
     MAGIC: "true"
+    ARROWS: "event(BOSS_SNOWHEAD)"
 "Goron Graveyard":
   region: MOUNTAIN_VILLAGE
   exits:
@@ -1077,10 +1095,15 @@
   exits:
     "Snowhead Entrance": "true"
     "Snowhead Temple": "true"
+    "Snowhead Near Great Fairy Fountain": "event(BOSS_SNOWHEAD)"
 "Snowhead Near Great Fairy Fountain":
   region: SNOWHEAD
+  events:
+    MAGIC: "(event(OPEN_SNOWHEAD_TEMPLE) && can_break_boulders) || event(BOSS_SNOWHEAD)"
+    RUPEES: "(event(OPEN_SNOWHEAD_TEMPLE) || event(BOSS_SNOWHEAD)) && can_use_light_arrows"
   exits:
     "Snowhead Entrance": "true"
+    "Snowhead": "event(BOSS_SNOWHEAD)"
     "Snowhead Great Fairy Fountain": "true"
 "Snowhead Great Fairy Fountain":
   region: SNOWHEAD
@@ -1090,6 +1113,8 @@
     "Snowhead Great Fairy": "has(STRAY_FAIRY_SH, 15)"
 "Goron Race":
   region: TWIN_ISLANDS
+  events:
+    MAGIC: "true"
   exits:
     "Near Goron Race": "true"
   locations:
