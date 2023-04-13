@@ -7,6 +7,7 @@
 #define TRIGGER_ZELDA_LIGHT_ARROW       4
 #define TRIGGER_WEIRD_EGG               5
 #define TRIGGER_POCKET_EGG              6
+#define TRIGGER_GANON_BK                7
 
 Actor_CustomTriggers* gActorCustomTriggers;
 
@@ -87,6 +88,13 @@ static void CustomTriggers_HandleTrigger(Actor_CustomTriggers* this, GameState_P
             this->events.pocketEgg = 0;
         }
         break;
+    case TRIGGER_GANON_BK:
+        if (CustomTriggers_GiveItem(this, play, GI_OOT_BOSS_KEY_GANON))
+        {
+            gOotExtraFlags.ganonBossKey = 1;
+            this->trigger = TRIGGER_NONE;
+        }
+        break;
     }
 }
 
@@ -140,6 +148,13 @@ static void CustomTriggers_CheckTrigger(Actor_CustomTriggers* this, GameState_Pl
     {
         this->trigger = TRIGGER_POCKET_EGG;
         this->events.pocketEgg = 0;
+        return;
+    }
+
+    /* Ganon BK */
+    if (comboConfig(CFG_OOT_GANON_BK_CUSTOM) && !gOotExtraFlags.ganonBossKey && comboSpecialCond(SPECIAL_GANON_BK))
+    {
+        this->trigger = TRIGGER_GANON_BK;
         return;
     }
 }

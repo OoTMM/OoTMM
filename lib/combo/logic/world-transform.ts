@@ -333,7 +333,7 @@ export class LogicPassWorldTransform {
     }
 
     /* Handle Ganon BK */
-    if (this.state.config.has('GANON_NO_BOSS_KEY')) {
+    if (settings.ganonBossKey === 'removed' || settings.ganonBossKey === 'custom') {
       this.removeItem('OOT_BOSS_KEY_GANON');
     }
 

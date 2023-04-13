@@ -253,7 +253,8 @@ typedef struct
     u32 biggoron:1;
     u32 tunicZora:1;
     u32 fireArrow:1;
-    u32 unused:19;
+    u32 ganonBossKey:1;
+    u32 unused:18;
 }
 OotExtraFlags;
 

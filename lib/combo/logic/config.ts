@@ -178,6 +178,10 @@ export class LogicPassConfig {
       config.add('OOT_LACS_CUSTOM');
     }
 
+    if (this.state.settings.ganonBossKey === 'custom') {
+      config.add('OOT_GANON_BK_CUSTOM');
+    }
+
     return { mq, config };
   }
 }

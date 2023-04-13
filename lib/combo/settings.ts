@@ -125,6 +125,7 @@ export const SETTINGS = [{
     { value: 'vanilla', name: 'Vanilla' },
     { value: 'ganon', name: 'Ganon\'s Castle' },
     { value: 'anywhere', name: 'Anywhere' },
+    { value: 'custom', name: 'Custom' },
   ],
   default: 'removed'
 }, {
@@ -645,12 +646,14 @@ export const SPECIAL_CONDS: {[k: string]: SpecialCondDefiniton} = {
   BRIDGE: { name: "Rainbow Bridge" },
   MOON: { name: "Moon Access" },
   LACS: { name: "Light Arrow Cutscene", cond: s => s.lacs === 'custom' },
+  GANON_BK: { name: "Ganon Boss Key", cond: s => s.ganonBossKey === 'custom' },
 };
 
 const DEFAULT_SPECIAL_CONDS: SpecialConds = {
   BRIDGE: { ...DEFAULT_SPECIAL_COND, medallions: true, count: 6 },
   MOON: { ...DEFAULT_SPECIAL_COND, remains: true, count: 4 },
   LACS: { ...DEFAULT_SPECIAL_COND },
+  GANON_BK: { ...DEFAULT_SPECIAL_COND },
 };
 
 export type SpecialConds = {[k in keyof typeof SPECIAL_CONDS]: SpecialCond };
