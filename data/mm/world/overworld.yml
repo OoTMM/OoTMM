@@ -2,6 +2,7 @@
   region: NONE
   exits:
     "OOT SONGS": "setting(crossWarpOot) && has_ocarina"
+    "SOARING": "can_play(SONG_TIME) && can_play(SONG_SOARING)"
 #    "Tingle": "true"
 #"Tingle":
 #  region: TINGLE
