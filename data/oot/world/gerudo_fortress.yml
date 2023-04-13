@@ -1,12 +1,106 @@
-"Gerudo Fortress":
+"Gerudo Fortress Carpenter 1 Left":
   dungeon: "GF"
   exits:
     "Gerudo Fortress Exterior": "true"
+    "Gerudo Fortress Carpenter 1 Right": "true"
   events:
-    CARPENTERS_RESCUE: "has_weapon && has(SMALL_KEY_GF, 4) && (can_hookshot || can_use_bow || has_hover_boots || has(GERUDO_CARD))"
+    RUPEES: "true"
+    ARROWS: "is_adult"
+    SEEDS: "is_child"
+    CARPENTER_1: can_rescue_carpenter
+    CARPENTERS_RESCUE: "event(CARPENTER_1) && event(CARPENTER_2) && event(CARPENTER_3) && event(CARPENTER_4)"
   locations:
-    "Gerudo Fortress Jail 1": "has_weapon"
-    "Gerudo Fortress Jail 2": "has_weapon"
-    "Gerudo Fortress Jail 3": "has_weapon"
-    "Gerudo Fortress Jail 4": "has_weapon && (can_hookshot || can_use_bow || has_hover_boots || has(GERUDO_CARD))"
+    "Gerudo Fortress Jail 1": "has_weapon || ((can_boomerang || has_nuts) && can_use_sticks)"
     "Gerudo Member Card": "event(CARPENTERS_RESCUE)"
+"Gerudo Fortress Carpenter 1 Right":
+  dungeon: "GF"
+  exits:
+    "Gerudo Fortress Exterior": "true"
+    "Gerudo Fortress Carpenter 1 Left": "true"
+"Gerudo Fortress Carpenter 2 Bottom":
+  dungeon: "GF"
+  exits:
+    "Gerudo Fortress Exterior": "true"
+    "Gerudo Fortress Carpenter 2 Top": "true"
+  events:
+    RUPEES: "true"
+    CARPENTER_2: can_rescue_carpenter
+    CARPENTERS_RESCUE: "event(CARPENTER_1) && event(CARPENTER_2) && event(CARPENTER_3) && event(CARPENTER_4)"
+  locations:
+    "Gerudo Fortress Jail 2": "has_weapon || ((can_boomerang || has_nuts) && can_use_sticks)"
+    "Gerudo Member Card": "event(CARPENTERS_RESCUE)"
+"Gerudo Fortress Carpenter 2 Top":
+  dungeon: "GF"
+  exits:
+    "Gerudo Fortress Lower-Center Ledge": "true"
+    "Gerudo Fortress Carpenter 2 Bottom": "true"
+"Gerudo Fortress Carpenter 3 Bottom":
+  dungeon: "GF"
+  exits:
+    "Gerudo Fortress Lower-Right Ledge": "true"
+    "Gerudo Fortress Carpenter 3 Top": "true"
+"Gerudo Fortress Carpenter 3 Top":
+  dungeon: "GF"
+  exits:
+    "Gerudo Fortress Lower-Center Ledge": "true"
+    "Gerudo Fortress Carpenter 3 Bottom": "true"
+  events:
+    RUPEES: "true"
+    CARPENTER_3: can_rescue_carpenter
+    CARPENTERS_RESCUE: "event(CARPENTER_1) && event(CARPENTER_2) && event(CARPENTER_3) && event(CARPENTER_4)"
+  locations:
+    "Gerudo Fortress Jail 3": "has_weapon || ((can_boomerang || has_nuts) && can_use_sticks)"
+    "Gerudo Member Card": "event(CARPENTERS_RESCUE)"
+"Gerudo Fortress Kitchen Tunnel End":
+  dungeon: "GF"
+  exits:
+    "Gerudo Fortress Exterior": "true"
+    "Gerudo Fortress Kitchen Tunnel Mid": "true"
+"Gerudo Fortress Kitchen Tunnel Mid":
+  dungeon: "GF"
+  exits:
+    "Gerudo Fortress Lower-Right Ledge": "true"
+    "Gerudo Fortress Kitchen Tunnel End": "true"
+    "Gerudo Fortress Kitchen Bottom": "can_use_bow || has(GERUDO_CARD)"
+"Gerudo Fortress Kitchen Bottom":
+  dungeon: "GF"
+  exits:
+    "Gerudo Fortress Kitchen Tunnel Mid": "can_use_bow || has(GERUDO_CARD)"
+    "Gerudo Fortress Kitchen Ledge Near Tunnel": "can_use_bow || has(GERUDO_CARD)"
+    "Gerudo Fortress Kitchen Ledge Away from Tunnel": "can_use_bow || has(GERUDO_CARD)"
+"Gerudo Fortress Kitchen Ledge Near Tunnel":
+  dungeon: "GF"
+  exits:
+    "Gerudo Fortress Lower-Center Ledge": "true"
+    "Gerudo Fortress Kitchen Bottom": "can_use_bow || has(GERUDO_CARD)"
+    "Gerudo Fortress Kitchen Ledge Away from Tunnel": "can_hookshot || has_hover_boots"
+"Gerudo Fortress Kitchen Ledge Away from Tunnel":
+  dungeon: "GF"
+  exits:
+    "Gerudo Fortress Upper-Center Ledge": "true"
+    "Gerudo Fortress Kitchen Bottom": "can_use_bow || has(GERUDO_CARD)"
+    "Gerudo Fortress Kitchen Ledge Near Tunnel": "can_hookshot || has_hover_boots"
+"Gerudo Fortress Carpenter 4":
+  dungeon: "GF"
+  exits:
+    "Gerudo Fortress Center Ledge": "true"
+  events:
+    CARPENTER_4: can_rescue_carpenter
+    CARPENTERS_RESCUE: "event(CARPENTER_1) && event(CARPENTER_2) && event(CARPENTER_3) && event(CARPENTER_4)"
+  locations:
+    "Gerudo Fortress Jail 4": "has_weapon || ((can_boomerang || has_nuts) && can_use_sticks)"
+    "Gerudo Member Card": "event(CARPENTERS_RESCUE)"
+"Gerudo Fortress Break Room Bottom":
+  dungeon: "GF"
+  exits:
+    "Gerudo Fortress Lower-Left Ledge": "true"
+    "Gerudo Fortress Break Room Top": "can_hookshot"
+  events:
+    MAGIC: "can_use_bow || can_hookshot || has(GERUDO_CARD)"
+    ARROWS: "is_adult && (has(GERUDO_CARD) || can_hookshot)"
+    SEEDS: "is_child && has(GERUDO_CARD)"
+"Gerudo Fortress Break Room Top":
+  dungeon: "GF"
+  exits:
+    "Gerudo Fortress Above Prison": "true"
+    "Gerudo Fortress Break Room Bottom": "can_hookshot"
