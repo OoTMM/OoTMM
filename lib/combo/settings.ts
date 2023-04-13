@@ -326,8 +326,20 @@ export const SETTINGS = [{
   type: 'boolean',
   default: false
 }, {
-  key: 'sharedMagicArrows',
-  name: 'Shared Magic Arrows',
+  key: 'sharedMagicArrowFire',
+  name: 'Shared Fire Arrow',
+  category: 'items.shared',
+  type: 'boolean',
+  default: false
+}, {
+  key: 'sharedMagicArrowIce',
+  name: 'Shared Ice Arrow',
+  category: 'items.shared',
+  type: 'boolean',
+  default: false
+}, {
+  key: 'sharedMagicArrowLight',
+  name: 'Shared Light Arrow',
   category: 'items.shared',
   type: 'boolean',
   default: false

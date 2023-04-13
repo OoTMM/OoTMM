@@ -488,20 +488,19 @@ void comboAddItemSharedMm(s16 gi, int noEffect)
         }
     }
 
-    if (comboConfig(CFG_SHARED_MAGIC_ARROWS))
+    if (comboConfig(CFG_SHARED_MAGIC_ARROW_FIRE) && gi == GI_MM_ARROW_FIRE)
     {
-        switch (gi)
-        {
-        case GI_MM_ARROW_FIRE:
-            comboAddCommonItemOot(SITEM_ARROW_FIRE, noEffect);
-            break;
-        case GI_MM_ARROW_ICE:
-            comboAddCommonItemOot(SITEM_ARROW_ICE, noEffect);
-            break;
-        case GI_MM_ARROW_LIGHT:
-            comboAddCommonItemOot(SITEM_ARROW_LIGHT, noEffect);
-            break;
-        }
+        comboAddCommonItemOot(SITEM_ARROW_FIRE, noEffect);
+    }
+
+    if (comboConfig(CFG_SHARED_MAGIC_ARROW_ICE) && gi == GI_MM_ARROW_ICE)
+    {
+        comboAddCommonItemOot(SITEM_ARROW_ICE, noEffect);
+    }
+
+    if (comboConfig(CFG_SHARED_MAGIC_ARROW_LIGHT) && gi == GI_MM_ARROW_LIGHT)
+    {
+        comboAddCommonItemOot(SITEM_ARROW_LIGHT, noEffect);
     }
 
     if (comboConfig(CFG_SHARED_SONGS))

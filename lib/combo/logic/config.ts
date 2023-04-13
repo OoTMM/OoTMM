@@ -87,8 +87,16 @@ export class LogicPassConfig {
       config.add('SHARED_MAGIC');
     }
 
-    if (this.state.settings.sharedMagicArrows) {
-      config.add('SHARED_MAGIC_ARROWS');
+    if (this.state.settings.sharedMagicArrowFire) {
+      config.add('SHARED_MAGIC_ARROW_FIRE');
+    }
+
+    if (this.state.settings.sharedMagicArrowIce) {
+      config.add('SHARED_MAGIC_ARROW_ICE');
+    }
+
+    if (this.state.settings.sharedMagicArrowLight) {
+      config.add('SHARED_MAGIC_ARROW_LIGHT');
     }
 
     if (this.state.settings.sharedSongs) {
