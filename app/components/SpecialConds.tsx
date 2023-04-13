@@ -9,12 +9,19 @@ type SpecialCondsPanelProps = {
   cond: string;
 };
 function SpecialCondsPanel({ cond }: SpecialCondsPanelProps) {
-  const [{ specialConds }, setSettings] = useSettings();
+  const [settings, setSettings] = useSettings();
+  const { specialConds } = settings;
   const c = specialConds[cond as keyof typeof SPECIAL_CONDS];
+  const enableCond = SPECIAL_CONDS[cond].cond || (() => true);
+  const enabled = enableCond(settings);
+
+  if (!enabled) {
+    return null;
+  }
 
   return (
     <form>
-      <h2>{(SPECIAL_CONDS as any)[cond]}</h2>
+      <h2>{SPECIAL_CONDS[cond].name}</h2>
       {Object.keys(SPECIAL_CONDS_KEYS).map(key =>
         <Checkbox
           key={key}
