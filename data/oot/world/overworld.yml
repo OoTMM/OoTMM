@@ -1158,7 +1158,7 @@
   locations:
     "Temple of Time Master Sword": "is_child && event(DOOR_OF_TIME_OPEN)"
     "Temple of Time Sheik Song": "is_adult && event(DOOR_OF_TIME_OPEN) && has(MEDALLION_FOREST)"
-    "Temple of Time Light Arrows": "is_adult && has(MEDALLION_SPIRIT) && has(MEDALLION_SHADOW)"
+    "Temple of Time Light Arrows": "is_adult && ((setting(lacs, vanilla) && has(MEDALLION_SPIRIT) && has(MEDALLION_SHADOW)) || (setting(lacs, custom) && special(LACS)))"
 "Sacred Realm":
   region: SACRED_REALM
   locations:

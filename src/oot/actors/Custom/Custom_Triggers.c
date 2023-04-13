@@ -114,9 +114,16 @@ static void CustomTriggers_CheckTrigger(Actor_CustomTriggers* this, GameState_Pl
     }
 
     /* Zelda Light Arrows */
-    if (play->sceneId == SCE_OOT_TEMPLE_OF_TIME && gSave.inventory.quest.medallionShadow && gSave.inventory.quest.medallionSpirit && gSave.age == AGE_ADULT && !GetEventChk(EV_OOT_CHK_LIGHT_ARROW))
+    if (play->sceneId == SCE_OOT_TEMPLE_OF_TIME && gSave.age == AGE_ADULT && !GetEventChk(EV_OOT_CHK_LIGHT_ARROW))
     {
-        this->trigger = TRIGGER_ZELDA_LIGHT_ARROW;
+        int shouldTrigger;
+        if (comboConfig(CFG_OOT_LACS_CUSTOM))
+            shouldTrigger = comboSpecialCond(SPECIAL_LACS);
+        else
+            shouldTrigger = (gSave.inventory.quest.medallionSpirit && gSave.inventory.quest.medallionShadow);
+
+        if (shouldTrigger)
+            this->trigger = TRIGGER_ZELDA_LIGHT_ARROW;
         return;
     }
 

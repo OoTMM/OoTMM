@@ -220,6 +220,16 @@ export const SETTINGS = [{
   type: 'boolean',
   default: false,
 }, {
+  key: 'lacs',
+  name: 'Light Arrow Cutscene',
+  category: 'main.events',
+  type: 'enum',
+  values: [
+    { value: 'vanilla', name: 'Vanilla' },
+    { value: 'custom', name: 'Custom' },
+  ],
+  default: 'vanilla'
+}, {
   key: 'crossWarpOot',
   name: 'Cross-Games OoT Warp Songs',
   category: 'main.cross',
@@ -624,14 +634,23 @@ const DEFAULT_SPECIAL_COND = Object.keys(SPECIAL_CONDS_KEYS).reduce((conds, cond
   return conds;
 }, { count: 0 } as any) as SpecialCond;
 
-export const SPECIAL_CONDS = {
-  BRIDGE: "Rainbow Bridge",
-  MOON: "Moon Access",
+type SettingCond = (s: Settings) => boolean;
+
+type SpecialCondDefiniton = {
+  name: string;
+  cond?: SettingCond;
+};
+
+export const SPECIAL_CONDS: {[k: string]: SpecialCondDefiniton} = {
+  BRIDGE: { name: "Rainbow Bridge" },
+  MOON: { name: "Moon Access" },
+  LACS: { name: "Light Arrow Cutscene", cond: s => s.lacs === 'custom' },
 };
 
 const DEFAULT_SPECIAL_CONDS: SpecialConds = {
   BRIDGE: { ...DEFAULT_SPECIAL_COND, medallions: true, count: 6 },
   MOON: { ...DEFAULT_SPECIAL_COND, remains: true, count: 4 },
+  LACS: { ...DEFAULT_SPECIAL_COND },
 };
 
 export type SpecialConds = {[k in keyof typeof SPECIAL_CONDS]: SpecialCond };

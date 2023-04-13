@@ -34,3 +34,4 @@ MM_SONG_SUN:                    0x20
 OOT_SKIP_ZELDA:                 0x21
 OOT_OPEN_KAKARIKO_GATE:         0x22
 ER_ANY:                         0x23
+OOT_LACS_CUSTOM:                0x24

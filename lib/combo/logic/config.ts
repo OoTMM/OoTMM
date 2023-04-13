@@ -174,6 +174,10 @@ export class LogicPassConfig {
       config.add('OOT_OPEN_KAKARIKO_GATE');
     }
 
+    if (this.state.settings.lacs === 'custom') {
+      config.add('OOT_LACS_CUSTOM');
+    }
+
     return { mq, config };
   }
 }
