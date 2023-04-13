@@ -99,8 +99,20 @@ export class LogicPassConfig {
       config.add('SHARED_MAGIC_ARROW_LIGHT');
     }
 
-    if (this.state.settings.sharedSongs) {
-      config.add('SHARED_SONGS');
+    if (this.state.settings.sharedSongEpona) {
+      config.add('SHARED_SONG_EPONA');
+    }
+
+    if (this.state.settings.sharedSongStorms) {
+      config.add('SHARED_SONG_STORMS');
+    }
+
+    if (this.state.settings.sharedSongTime) {
+      config.add('SHARED_SONG_TIME');
+    }
+
+    if (this.state.settings.sharedSongSun) {
+      config.add('SHARED_SONG_SUN');
     }
 
     if (this.state.settings.sharedNutsSticks) {

@@ -167,11 +167,13 @@ static int isItemAmbiguousOot(s16 gi)
     case GI_OOT_ARROW_LIGHT:
         return !comboConfig(CFG_SHARED_MAGIC_ARROW_LIGHT);
     case GI_OOT_SONG_EPONA:
-    case GI_OOT_SONG_TIME:
+        return !comboConfig(CFG_SHARED_SONG_EPONA);
     case GI_OOT_SONG_STORMS:
-        return !comboConfig(CFG_SHARED_SONGS);
+        return !comboConfig(CFG_SHARED_SONG_STORMS);
+    case GI_OOT_SONG_TIME:
+        return !comboConfig(CFG_SHARED_SONG_TIME);
     case GI_OOT_SONG_SUN:
-        return !(comboConfig(CFG_SHARED_SONGS) || !comboConfig(CFG_MM_SONG_SUN));
+        return !(comboConfig(CFG_SHARED_SONG_SUN) || !comboConfig(CFG_MM_SONG_SUN));
     case GI_OOT_STICK:
     case GI_OOT_STICKS_5:
     case GI_OOT_STICKS_10:
@@ -258,11 +260,14 @@ static int isItemAmbiguousMm(s16 gi)
         return !comboConfig(CFG_SHARED_MAGIC_ARROW_ICE);
     case GI_MM_ARROW_LIGHT:
         return !comboConfig(CFG_SHARED_MAGIC_ARROW_LIGHT);
-    case GI_MM_SONG_TIME:
     case GI_MM_SONG_EPONA:
+        return !comboConfig(CFG_SHARED_SONG_EPONA);
     case GI_MM_SONG_STORMS:
+        return !comboConfig(CFG_SHARED_SONG_STORMS);
+    case GI_MM_SONG_TIME:
+        return !comboConfig(CFG_SHARED_SONG_TIME);
     case GI_MM_SONG_SUN:
-        return !comboConfig(CFG_SHARED_SONGS);
+        return !comboConfig(CFG_SHARED_SONG_SUN);
     case GI_MM_STICK:
     case GI_MM_NUT:
     case GI_MM_NUTS_5:

@@ -93,7 +93,7 @@ export class LogicPassWorldTransform {
    * Setup the shared items.
    */
   private setupSharedItems() {
-    const { config } = this.state;
+    const { config, settings } = this.state;
     if (config.has('SHARED_BOWS')) {
       /* Bows and quivers */
       this.replaceItem('OOT_BOW', 'SHARED_BOW');
@@ -134,34 +134,44 @@ export class LogicPassWorldTransform {
       this.removeItem('SHARED_MAGIC_UPGRADE', 2);
     }
 
-    if (config.has('SHARED_MAGIC_ARROWS')) {
+    if (settings.sharedMagicArrowFire) {
       this.replaceItem('OOT_ARROW_FIRE',  'SHARED_ARROW_FIRE');
-      this.replaceItem('OOT_ARROW_ICE',   'SHARED_ARROW_ICE');
-      this.replaceItem('OOT_ARROW_LIGHT', 'SHARED_ARROW_LIGHT');
       this.replaceItem('MM_ARROW_FIRE',   'SHARED_ARROW_FIRE');
-      this.replaceItem('MM_ARROW_ICE',    'SHARED_ARROW_ICE');
-      this.replaceItem('MM_ARROW_LIGHT',  'SHARED_ARROW_LIGHT');
-
       this.removeItem('SHARED_ARROW_FIRE', 1);
+    }
+
+    if (settings.sharedMagicArrowIce) {
+      this.replaceItem('OOT_ARROW_ICE',   'SHARED_ARROW_ICE');
+      this.replaceItem('MM_ARROW_ICE',    'SHARED_ARROW_ICE');
       this.removeItem('SHARED_ARROW_ICE', 1);
+    }
+
+    if (settings.sharedMagicArrowLight) {
+      this.replaceItem('OOT_ARROW_LIGHT', 'SHARED_ARROW_LIGHT');
+      this.replaceItem('MM_ARROW_LIGHT',  'SHARED_ARROW_LIGHT');
       this.removeItem('SHARED_ARROW_LIGHT', 1);
     }
 
-    if (config.has('SHARED_SONGS')) {
-      this.replaceItem('OOT_SONG_TIME',    'SHARED_SONG_TIME');
+    if (settings.sharedSongEpona) {
       this.replaceItem('OOT_SONG_EPONA',   'SHARED_SONG_EPONA');
-      this.replaceItem('OOT_SONG_STORMS',  'SHARED_SONG_STORMS');
-      this.replaceItem('MM_SONG_TIME',     'SHARED_SONG_TIME');
       this.replaceItem('MM_SONG_EPONA',    'SHARED_SONG_EPONA');
-      this.replaceItem('MM_SONG_STORMS',   'SHARED_SONG_STORMS');
-
-      if (config.has('MM_SONG_SUN')) {
-        this.replaceItem('OOT_SONG_SUN', 'SHARED_SONG_SUN');
-      }
-
-      this.removeItem('SHARED_SONG_TIME', 1);
       this.removeItem('SHARED_SONG_EPONA', 1);
+    }
+
+    if (settings.sharedSongStorms) {
+      this.replaceItem('OOT_SONG_STORMS',  'SHARED_SONG_STORMS');
+      this.replaceItem('MM_SONG_STORMS',   'SHARED_SONG_STORMS');
       this.removeItem('SHARED_SONG_STORMS', 1);
+    }
+
+    if (settings.sharedSongTime) {
+      this.replaceItem('OOT_SONG_TIME',    'SHARED_SONG_TIME');
+      this.replaceItem('MM_SONG_TIME',     'SHARED_SONG_TIME');
+      this.removeItem('SHARED_SONG_TIME', 1);
+    }
+
+    if (settings.sharedSongSun && settings.sunSongMm) {
+      this.replaceItem('OOT_SONG_SUN', 'SHARED_SONG_SUN');
     }
 
     if (config.has('SHARED_NUTS_STICKS')) {
@@ -278,6 +288,7 @@ export class LogicPassWorldTransform {
   }
 
   run() {
+    const { settings } = this.state;
     this.state.monitor.log('Logic: World Transform');
 
     /* Make the basic item pool */
@@ -346,7 +357,7 @@ export class LogicPassWorldTransform {
     }
 
     /* Handle MM sun song */
-    if (this.state.config.has('MM_SONG_SUN') && !this.state.config.has('SHARED_SONGS')) {
+    if (settings.sunSongMm && !settings.sharedSongSun) {
       this.addItem('MM_SONG_SUN');
     }
 

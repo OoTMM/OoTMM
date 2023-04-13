@@ -503,23 +503,24 @@ void comboAddItemSharedMm(s16 gi, int noEffect)
         comboAddCommonItemOot(SITEM_ARROW_LIGHT, noEffect);
     }
 
-    if (comboConfig(CFG_SHARED_SONGS))
+    if (comboConfig(CFG_SHARED_SONG_EPONA) && gi == GI_MM_SONG_EPONA)
     {
-        switch (gi)
-        {
-        case GI_MM_SONG_EPONA:
-            comboAddCommonItemOot(SITEM_SONG_EPONA, noEffect);
-            break;
-        case GI_MM_SONG_TIME:
-            comboAddCommonItemOot(SITEM_SONG_TIME, noEffect);
-            break;
-        case GI_MM_SONG_STORMS:
-            comboAddCommonItemOot(SITEM_SONG_STORMS, noEffect);
-            break;
-        case GI_MM_SONG_SUN:
-            comboAddCommonItemOot(SITEM_SONG_SUN, noEffect);
-            break;
-        }
+        comboAddCommonItemOot(SITEM_SONG_EPONA, noEffect);
+    }
+
+    if (comboConfig(CFG_SHARED_SONG_STORMS) && gi == GI_MM_SONG_STORMS)
+    {
+        comboAddCommonItemOot(SITEM_SONG_STORMS, noEffect);
+    }
+
+    if (comboConfig(CFG_SHARED_SONG_TIME) && gi == GI_MM_SONG_TIME)
+    {
+        comboAddCommonItemOot(SITEM_SONG_TIME, noEffect);
+    }
+
+    if (comboConfig(CFG_SHARED_SONG_SUN) && gi == GI_MM_SONG_SUN)
+    {
+        comboAddCommonItemOot(SITEM_SONG_SUN, noEffect);
     }
 
     if (comboConfig(CFG_SHARED_NUTS_STICKS))

@@ -344,8 +344,26 @@ export const SETTINGS = [{
   type: 'boolean',
   default: false
 }, {
-  key: 'sharedSongs',
-  name: 'Shared Songs',
+  key: 'sharedSongEpona',
+  name: 'Shared Epona\'s Song',
+  category: 'items.shared',
+  type: 'boolean',
+  default: false
+}, {
+  key: 'sharedSongStorms',
+  name: 'Shared Song of Storms',
+  category: 'items.shared',
+  type: 'boolean',
+  default: false
+}, {
+  key: 'sharedSongTime',
+  name: 'Shared Song of Time',
+  category: 'items.shared',
+  type: 'boolean',
+  default: false
+}, {
+  key: 'sharedSongSun',
+  name: 'Shared Sun\'s Song',
   category: 'items.shared',
   type: 'boolean',
   default: false
