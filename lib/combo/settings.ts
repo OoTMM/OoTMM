@@ -215,6 +215,17 @@ export const SETTINGS = [{
   ],
   default: 'closed'
 }, {
+  key: 'zoraKing',
+  name: 'Zora King',
+  category: 'main.events',
+  type: 'enum',
+  values: [
+    { value: 'vanilla', name: 'Vanilla' },
+    { value: 'adult', name: 'Open (Adult Only)' },
+    { value: 'open', name: 'Open' },
+  ],
+  default: 'vanilla'
+}, {
   key: 'skipZelda',
   name: 'Skip Child Zelda',
   category: 'main.events',

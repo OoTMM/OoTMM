@@ -36,3 +36,5 @@ OOT_OPEN_KAKARIKO_GATE:         0x22
 ER_ANY:                         0x23
 OOT_LACS_CUSTOM:                0x24
 OOT_GANON_BK_CUSTOM:            0x25
+OOT_ZK_OPEN:                    0x26
+OOT_ZK_OPEN_ADULT:              0x27

@@ -16,7 +16,8 @@
 #define EV_OOT_CHK_MIDO_TREE_DEAD           0x1c
 #define EV_OOT_CHK_BOMBCHU_BOWLING          0x22
 #define EV_OOT_CHK_STONE_RUBY               0x25
-#define EV_OOT_CHK_RUTO_LETTER              0x32
+#define EV_OOT_CHK_RUTO_LETTER              0x31
+#define EV_OOT_CHK_KING_ZORA_MOVED          0x33
 #define EV_OOT_CHK_STONE_SAPPHIRE           0x37
 #define EV_OOT_CHK_ZELDA_LETTER             0x40
 #define EV_OOT_CHK_OCARINA_OF_TIME          0x43

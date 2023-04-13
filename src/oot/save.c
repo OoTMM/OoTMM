@@ -139,6 +139,11 @@ static void applyStartingEvents(void)
         BITMAP16_SET(gSave.eventsMisc, EV_OOT_INF_KAKARIKO_GATE_OPEN);
     }
 
+    if (comboConfig(CFG_OOT_ZK_OPEN))
+    {
+        SetEventChk(EV_OOT_CHK_KING_ZORA_MOVED);
+    }
+
     if (gComboData.mq & (1 << MQ_TEMPLE_SHADOW))
     {
         gSave.perm[SCE_OOT_TEMPLE_SHADOW].switches |= (1 << 7);

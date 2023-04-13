@@ -182,6 +182,12 @@ export class LogicPassConfig {
       config.add('OOT_GANON_BK_CUSTOM');
     }
 
+    if (this.state.settings.zoraKing === 'open') {
+      config.add('OOT_ZK_OPEN');
+    } else if (this.state.settings.zoraKing === 'adult') {
+      config.add('OOT_ZK_OPEN_ADULT');
+    }
+
     return { mq, config };
   }
 }

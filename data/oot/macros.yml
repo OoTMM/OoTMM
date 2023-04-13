@@ -85,3 +85,4 @@
 "has_ranged_weapon_both": "has_explosives || (((has(SLINGSHOT) && (event(SEEDS) || has(DEKU_SEEDS_30))) || has(BOOMERANG)) && (has(HOOKSHOT) || (has(BOW) || (event(ARROWS) || has(ARROWS_5) || has(ARROWS_10) || has(ARROWS_30) || has(ARROWS_40) || (setting(sharedBows) && event(MM_ARROWS))))))"
 "can_collect_ageless": "has(HOOKSHOT) && has(BOOMERANG)"
 "has_small_keys_fire(x)": "cond(setting(smallKeyShuffle, anywhere), has(SMALL_KEY_FIRE, x + 1), has(SMALL_KEY_FIRE, x))"
+"king_zora_moved": "event(KING_ZORA_LETTER) || setting(zoraKing, open) || (setting(zoraKing, adult) && is_adult)"

@@ -1,5 +1,11 @@
 #include <combo.h>
 
+/* Use our own handler for the position */
+PATCH_START 0x80ad679c
+  nop
+  nop
+PATCH_END
+
 /* Disable the message check for zora tunic */
 PATCH_START 0x80ad6454
   li t3,0x4012
@@ -40,6 +46,10 @@ PATCH_START 0x80ad6ac4
 PATCH_END
 
 /* Disable relocs */
+PATCH_START 0x80ad7180
+.int 0
+PATCH_END
+
 PATCH_START 0x80ad71c4
 .int 0
 PATCH_END

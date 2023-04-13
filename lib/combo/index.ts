@@ -6,7 +6,7 @@ import { Monitor, MonitorCallbacks } from './monitor';
 import { SETTINGS, DEFAULT_SETTINGS, SETTINGS_CATEGORIES, Settings, TRICKS, DUNGEONS, SPECIAL_CONDS, makeSettings, mergeSettings, SPECIAL_CONDS_KEYS, SettingCategory } from './settings';
 import { worldState } from './logic';
 import { itemName } from './names';
-import { isDungeonItem, isDungeonReward, isItemUnlimitedStarting, isJunk, isStrayFairy, isToken, Items } from './logic/items';
+import { isDungeonItem, isItemUnlimitedStarting, isJunk, isStrayFairy, isToken, Items } from './logic/items';
 import { isShuffled } from './logic/is-shuffled';
 
 export type GeneratorParams = {

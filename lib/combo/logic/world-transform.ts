@@ -337,6 +337,11 @@ export class LogicPassWorldTransform {
       this.removeItem('OOT_BOSS_KEY_GANON');
     }
 
+    if (settings.zoraKing === 'open') {
+      this.removeItem('OOT_RUTO_LETTER');
+      this.addItem('OOT_BOTTLE_EMPTY');
+    }
+
     /* Handle OoT swords */
     if (this.state.config.has('OOT_PROGRESSIVE_SWORDS')) {
       this.replaceItem('OOT_SWORD_KOKIRI',    'OOT_SWORD');
