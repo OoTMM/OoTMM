@@ -148,6 +148,7 @@ ComboDataHints;
 #define SPECIAL_MOON        1
 #define SPECIAL_LACS        2
 #define SPECIAL_GANON_BK    3
+#define SPECIAL_MAJORA      4
 
 typedef struct
 {
@@ -160,7 +161,7 @@ typedef struct
 {
     u32             mq;
     u8              config[0x40];
-    SpecialCond     special[4];
+    SpecialCond     special[5];
     ComboDataHints  hints;
     u8              boss[12];
     u8              dungeons[23];

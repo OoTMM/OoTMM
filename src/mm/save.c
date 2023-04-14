@@ -27,10 +27,6 @@ void Sram_AfterOpenSave(void)
         gSave.time = 0x3e20;
     }
 
-#if defined(DEBUG) && defined(DEBUG_MM_ENTRANCE)
-    gSave.entranceIndex = DEBUG_MM_ENTRANCE;
-#endif
-
     if (gComboCtx.valid)
     {
         if (gComboCtx.entrance != -1)
@@ -63,6 +59,10 @@ void Sram_AfterOpenSave(void)
             gComboCtx.shuffledEntrance = 0;
         }
     }
+
+#if defined(DEBUG) && defined(DEBUG_MM_ENTRANCE)
+    gSave.entranceIndex = DEBUG_MM_ENTRANCE;
+#endif
 }
 
 void Sram_SaveEndOfCycleWrapper(GameState_Play* play)

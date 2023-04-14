@@ -198,6 +198,10 @@ export class LogicPassConfig {
       config.add('GOAL_MAJORA');
     }
 
+    if (settings.majoraChild === 'custom') {
+      config.add('MM_MAJORA_CHILD_CUSTOM');
+    }
+
     return { mq, config };
   }
 }

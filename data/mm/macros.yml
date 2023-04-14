@@ -60,6 +60,7 @@
 "has_red_or_blue_potion": "has_red_potion || has_blue_potion"
 "trick_keg_explosives": "can_use_keg && trick(MM_KEG_EXPLOSIVES)"
 "trick_sht_fireless": "has_hot_water_distance && trick(MM_SHT_FIRELESS)"
+"can_reset_time_on_moon": "can_play(SONG_TIME) || (setting(majoraChild, none) && event(MAJORA) && trick(MM_MAJORA_LOGIC))"
 "can_reset_time": "can_play(SONG_TIME) || (event(MAJORA) && trick(MM_MAJORA_LOGIC))"
 "has_sticks": "event(STICKS) || has(STICK) || has(STICKS_5) || has(STICKS_10) || (setting(sharedNutsSticks) && event(OOT_STICKS))"
 "has_nuts": "event(NUTS) || has(NUT) || has(NUTS_5) || has(NUTS_10) || (setting(sharedNutsSticks) && event(OOT_NUTS))"

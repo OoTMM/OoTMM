@@ -254,6 +254,16 @@ export const SETTINGS = [{
   ],
   default: 'vanilla'
 }, {
+  key: 'majoraChild',
+  name: 'Majora Child Requirements',
+  category: 'main.events',
+  type: 'enum',
+  values: [
+    { value: 'none', name: 'None' },
+    { value: 'custom', name: 'Custom' },
+  ],
+  default: 'none'
+}, {
   key: 'crossWarpOot',
   name: 'Cross-Games OoT Warp Songs',
   category: 'main.cross',
@@ -670,6 +680,7 @@ export const SPECIAL_CONDS: {[k: string]: SpecialCondDefiniton} = {
   MOON: { name: "Moon Access" },
   LACS: { name: "Light Arrow Cutscene", cond: s => s.lacs === 'custom' },
   GANON_BK: { name: "Ganon Boss Key", cond: s => s.ganonBossKey === 'custom' },
+  MAJORA: { name: "Majora Child Requirements", cond: s => s.majoraChild === 'custom' },
 };
 
 const DEFAULT_SPECIAL_CONDS: SpecialConds = {
@@ -677,6 +688,7 @@ const DEFAULT_SPECIAL_CONDS: SpecialConds = {
   MOON: { ...DEFAULT_SPECIAL_COND, remains: true, count: 4 },
   LACS: { ...DEFAULT_SPECIAL_COND },
   GANON_BK: { ...DEFAULT_SPECIAL_COND },
+  MAJORA: { ...DEFAULT_SPECIAL_COND },
 };
 
 export type SpecialConds = {[k in keyof typeof SPECIAL_CONDS]: SpecialCond };
