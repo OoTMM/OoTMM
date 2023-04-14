@@ -202,6 +202,10 @@ export class LogicPassConfig {
       config.add('MM_MAJORA_CHILD_CUSTOM');
     }
 
+    if (settings.fillWallets) {
+      config.add('FILL_WALLETS');
+    }
+
     return { mq, config };
   }
 }

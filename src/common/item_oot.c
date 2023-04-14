@@ -262,6 +262,13 @@ static void addRupees(u16 count)
         gOotSave.playerData.rupees = max;
 }
 
+static void addWallet(int index, int noEffect)
+{
+    gOotSave.inventory.upgrades.wallet = index;
+    if (!noEffect && comboConfig(CFG_FILL_WALLETS))
+        addRupees(999);
+}
+
 static void reloadSlotEquips(OotItemEquips* equips, int slot)
 {
     for (int i = 0; i < 3; ++i)
@@ -363,10 +370,10 @@ void comboAddCommonItemOot(int sid, int noEffect)
         addTradeChild(10);
         break;
     case SITEM_WALLET2:
-        gOotSave.inventory.upgrades.wallet = 1;
+        addWallet(1, noEffect);
         break;
     case SITEM_WALLET3:
-        gOotSave.inventory.upgrades.wallet = 2;
+        addWallet(2, noEffect);
         break;
     case SITEM_RUPEE_GREEN:
         if (noEffect)
@@ -904,10 +911,10 @@ int comboAddItemOot(s16 gi, int noEffect)
         comboAddBombBagOot(3);
         break;
     case GI_OOT_WALLET2:
-        gOotSave.inventory.upgrades.wallet = 1;
+        comboAddCommonItemOot(SITEM_WALLET2, noEffect);
         break;
     case GI_OOT_WALLET3:
-        gOotSave.inventory.upgrades.wallet = 2;
+        comboAddCommonItemOot(SITEM_WALLET3, noEffect);
         break;
     case GI_OOT_MAGIC_UPGRADE:
         comboAddMagicUpgradeOot(1);

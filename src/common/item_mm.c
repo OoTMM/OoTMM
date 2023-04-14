@@ -216,6 +216,13 @@ static void addRupees(s16 count)
         gMmSave.playerData.rupees = max;
 }
 
+static void addWallet(int index, int noEffect)
+{
+    gMmSave.inventory.upgrades.wallet = index;
+    if (!noEffect && comboConfig(CFG_FILL_WALLETS))
+        addRupees(999);
+}
+
 static void addTrade1(u8 index)
 {
     u16 itemId;
@@ -357,10 +364,10 @@ void comboAddCommonItemMm(int sid, int noEffect)
         gMmSave.inventory.items[ITS_MM_MASK_ZORA] = ITEM_MM_MASK_ZORA;
         break;
     case SITEM_WALLET2:
-        gMmSave.inventory.upgrades.wallet = 1;
+        addWallet(1, noEffect);
         break;
     case SITEM_WALLET3:
-        gMmSave.inventory.upgrades.wallet = 2;
+        addWallet(2, noEffect);
         break;
     case SITEM_RUPEE_GREEN:
         if (noEffect)
@@ -923,10 +930,10 @@ int comboAddItemMm(s16 gi, int noEffect)
         comboAddQuiverMm(3);
         break;
     case GI_MM_WALLET2:
-        gMmSave.inventory.upgrades.wallet = 1;
+        comboAddCommonItemMm(SITEM_WALLET2, noEffect);
         break;
     case GI_MM_WALLET3:
-        gMmSave.inventory.upgrades.wallet = 2;
+        comboAddCommonItemMm(SITEM_WALLET3, noEffect);
         break;
     case GI_MM_GS_TOKEN_SWAMP:
         count = ++gMmSave.skullCountSwamp;

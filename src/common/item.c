@@ -18,7 +18,7 @@ const u8 kMaxNuts[] = { 0, 20, 30, 40 };
 const u8 kMaxBombs[] = { 0, 20, 30, 40 };
 const u8 kMaxArrows[] = { 0, 30, 40, 50 };
 const u8 kMaxSeeds[] = { 0, 30, 40, 50 };
-const u16 kMaxRupees[] = { 99, 200, 500 };
+const u16 kMaxRupees[] = { 99, 200, 500, 999 };
 
 int comboAddItem(GameState_Play* play, s16 gi)
 {

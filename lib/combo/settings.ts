@@ -293,6 +293,12 @@ export const SETTINGS = [{
   type: 'boolean',
   default: false
 }, {
+  key: 'fillWallets',
+  name: 'Fill Wallets',
+  category: 'items',
+  type: 'boolean',
+  default: false
+}, {
   key: 'progressiveShieldsOot',
   name: 'OoT Shields',
   category: 'items.progressive',

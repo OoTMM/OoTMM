@@ -148,5 +148,16 @@ int comboAddItemEffect(GameState_Play* play, s16 gi)
         break;
     }
 
+    if (comboConfig(CFG_FILL_WALLETS))
+    {
+        switch (gi)
+        {
+        case GI_MM_WALLET2:
+        case GI_MM_WALLET3:
+            addRupees(kMaxRupees[gSave.inventory.upgrades.wallet]);
+            break;
+        }
+    }
+
     return count;
 }
