@@ -196,7 +196,7 @@ void hookPlay_Init(GameState_Play* play)
     {
         /* End game */
         gMmExtraFlags2.majora = 1;
-        if (!gOotExtraFlags.ganon)
+        if (!comboGoalCond())
         {
             gSave.playerForm = MM_PLAYER_FORM_HUMAN;
             gSave.equippedMask = 0;

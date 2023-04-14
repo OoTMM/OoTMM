@@ -548,6 +548,18 @@ export class Pathfinder {
     return (queue.events.size || queue.exits.child.size || queue.exits.adult.size || queue.locations.size);
   }
 
+  private isGoalReached() {
+    const ganon = this.state.events.has('OOT_GANON');
+    const majora = this.state.events.has('MM_MAJORA');
+
+    switch (this.settings.goal) {
+    case 'any': return ganon || majora;
+    case 'ganon': return ganon;
+    case 'majora': return majora;
+    case 'both': return ganon && majora;
+    }
+  }
+
   private pathfind() {
     /* Clear new locations */
     this.state.newLocations = new Set();
@@ -608,7 +620,7 @@ export class Pathfinder {
     /* Pathfind */
     for (;;) {
       const changed = this.pathfindStep();
-      if (this.state.events.has('OOT_GANON') && this.state.events.has('MM_MAJORA')) {
+      if (this.isGoalReached()) {
         this.state.goal = true;
         if (this.opts.stopAtGoal) {
           break;

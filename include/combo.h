@@ -385,8 +385,9 @@ void comboCheckSong(const OcarinaSongButtons* songButtons, int songIndex);
 
 extern u8 gCustomOcarinaSong;
 
-/* Special */
+/* Conds */
 int comboSpecialCond(int special);
+int comboGoalCond(void);
 
 /* Global data */
 typedef struct

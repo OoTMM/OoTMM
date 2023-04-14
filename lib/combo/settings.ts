@@ -2,6 +2,18 @@ import { merge } from 'lodash';
 import type { PartialDeep } from 'type-fest';
 
 export const SETTINGS = [{
+  key: 'goal',
+  name: 'Goal',
+  category: 'main',
+  type: 'enum',
+  values: [
+    { value: 'any', name: 'Any Final Boss' },
+    { value: 'ganon', name: 'Ganon' },
+    { value: 'majora', name: 'Majora' },
+    { value: 'both', name: 'Ganon & Majora' },
+  ],
+  default: 'both'
+}, {
   key: 'logic',
   name: 'Logic',
   category: 'main',

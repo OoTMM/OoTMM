@@ -15,6 +15,15 @@
 #define SPF_MASKS_TRANSFORM         (1 << 12)
 #define SPF_MASKS_OOT               (1 << 13)
 
+int comboGoalCond(void)
+{
+    if (comboConfig(CFG_GOAL_GANON) && !gOotExtraFlags.ganon)
+        return 0;
+    if (comboConfig(CFG_GOAL_MAJORA) && !gMmExtraFlags2.majora)
+        return 0;
+    return 1;
+}
+
 int comboSpecialCond(int special)
 {
     SpecialCond* cond;

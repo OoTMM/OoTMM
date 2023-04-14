@@ -61,8 +61,6 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.quest.stoneRuby = 0;
         gSave.inventory.quest.stoneSapphire = 0;
 
-        gMmExtraFlags2.majora = 1;
-
         gSave.playerData.magicUpgrade = 1;
         gSave.playerData.magicUpgrade2 = 1;
         gSave.playerData.magicAmount = 0x60;
@@ -179,7 +177,7 @@ static void endGame(void)
     comboWriteSave();
 
     /* Restore gameplay values to play the cutscene if majora was beaten too */
-    if (gMmExtraFlags2.majora)
+    if (comboGoalCond())
     {
         gSave.age = tmpAge;
         *(u16*)((char*)&gSaveContext + 0x1412) = tmpNextCutscene;

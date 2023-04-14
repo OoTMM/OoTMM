@@ -19,6 +19,8 @@ export class LogicPassConfig {
     const config = new Set<string>;
     const mq = new Set<string>;
 
+    const { settings } = this.state;
+
     /* MQ dungeons */
     let d: keyof typeof DUNGEONS;
     for (d in DUNGEONS) {
@@ -186,6 +188,14 @@ export class LogicPassConfig {
       config.add('OOT_ZK_OPEN');
     } else if (this.state.settings.zoraKing === 'adult') {
       config.add('OOT_ZK_OPEN_ADULT');
+    }
+
+    if (settings.goal === 'both' || settings.goal === 'ganon') {
+      config.add('GOAL_GANON');
+    }
+
+    if (settings.goal === 'both' || settings.goal === 'majora') {
+      config.add('GOAL_MAJORA');
     }
 
     return { mq, config };
