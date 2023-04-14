@@ -841,7 +841,7 @@
     "Death Mountain HP": "true"
     "Death Mountain GS Entrance": "has_explosives_or_hammer"
     "Death Mountain GS Soil": "gs_soil && has_bombflowers && can_damage_skull"
-    "Death Mountain GS Above Dodongo":  "gs_night && (can_hammer || (can_hookshot && (trick(OOT_DMT_LOWER_ROCK_GS_HOOKSHOT))) || (has_hover_boots && (trick(OOT_DMT_LOWER_ROCK_GS_HOVER_BOOTS))) || (can_ride_bean(BEAN_DEATH_MOUNTAIN) && (trick(OOT_DMT_LOWER_ROCK_GS_BEAN))))"
+    "Death Mountain GS Above Dodongo":  "gs_night && (can_hammer || (can_hookshot && trick(OOT_DMT_LOWER_ROCK_GS_HOOKSHOT)) || (has_hover_boots && trick(OOT_DMT_LOWER_ROCK_GS_HOVER_BOOTS)) || (can_ride_bean(BEAN_DEATH_MOUNTAIN) && trick(OOT_DMT_LOWER_ROCK_GS_BEAN)))"
 "Death Mountain Summit":
   region: DEATH_MOUNTAIN_TRAIL
   time: flow
