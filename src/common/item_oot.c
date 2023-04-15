@@ -256,7 +256,7 @@ static void addRupees(u16 count)
 {
     u16 max;
 
-    max = gMaxRupees[gOotSave.inventory.upgrades.wallet];
+    max = gOotMaxRupees[gOotSave.inventory.upgrades.wallet];
     gOotSave.playerData.rupees += count;
     if (gOotSave.playerData.rupees > max)
         gOotSave.playerData.rupees = max;

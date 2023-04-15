@@ -65,6 +65,13 @@ void Sram_AfterOpenSave(void)
     gSave.entrance = DEBUG_OOT_ENTRANCE;
 #endif
 
+    /* Read the other save */
+    comboReadForeignSave();
+
+    /* Skip early game (Mido out of the way, deku tree open) */
+    gSave.eventsChk[0] |= 0x103c;
+    gSave.eventsMisc[0] |= 0x000b;
+
     comboOnSaveLoad();
 
     /* Dungeon shuffle override */

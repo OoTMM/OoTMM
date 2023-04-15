@@ -21,8 +21,3 @@ PATCH_END
 PATCH_START(0x808124a8)
   jal hook_FileChoose_Init
 PATCH_END
-
-/* Load foreign save */
-PATCH_START(0x80811368)
-  j hookAfter_FileChoose_OpenSave
-PATCH_END

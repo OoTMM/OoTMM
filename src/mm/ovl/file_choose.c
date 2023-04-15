@@ -8,8 +8,3 @@ void hook_FileChoose_Update(void* fc)
     *(u16*)((char*)fc + 0x2448c) = 7;
     *(u16*)((char*)fc + 0x24484) = 2;
 }
-
-void hookAfter_FileChoose_OpenSave(void)
-{
-    comboReadForeignSave();
-}

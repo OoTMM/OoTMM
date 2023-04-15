@@ -21,8 +21,3 @@ PATCH_END
 PATCH_START(0x80813dd0)
   nop
 PATCH_END
-
-/* After file choose */
-PATCH_START(0x80812e8c)
-  j hookAfter_FileChoose_OpenSave
-PATCH_END

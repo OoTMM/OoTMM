@@ -210,7 +210,7 @@ static void addRupees(s16 count)
 {
     u16 max;
 
-    max = gMaxRupees[gMmSave.inventory.upgrades.wallet];
+    max = gMmMaxRupees[gMmSave.inventory.upgrades.wallet];
     gMmSave.playerData.rupees += count;
     if (gMmSave.playerData.rupees > max)
         gMmSave.playerData.rupees = max;

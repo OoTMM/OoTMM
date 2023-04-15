@@ -48,12 +48,13 @@ static s32 progressiveBombBag(void)
 
 static s32 progressiveWallet(void)
 {
+    if (!gMmExtraFlags2.childWallet)
+        return GI_MM_WALLET;
     switch (gMmSave.inventory.upgrades.wallet)
     {
-    case 0:
-        return GI_MM_WALLET2;
-    default:
-        return GI_MM_WALLET3;
+    case 0: return GI_MM_WALLET2;
+    case 1: return GI_MM_WALLET3;
+    default: return GI_MM_WALLET4;
     }
 }
 
@@ -138,8 +139,10 @@ s32 comboProgressiveMm(s32 gi)
     case GI_MM_QUIVER3:
         gi = progressiveBow();
         break;
+    case GI_MM_WALLET:
     case GI_MM_WALLET2:
     case GI_MM_WALLET3:
+    case GI_MM_WALLET4:
         gi = progressiveWallet();
         break;
     case GI_MM_MAGIC_UPGRADE:

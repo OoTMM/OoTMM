@@ -21,13 +21,3 @@ void hook_FileChoose_Init(void)
         PlayMusic(0, 0x57, 0, 7, 1);
     }
 }
-
-void hookAfter_FileChoose_OpenSave(void)
-{
-    /* Read the other save */
-    comboReadForeignSave();
-
-    /* Skip early game (Mido out of the way, deku tree open) */
-    gSave.eventsChk[0] |= 0x103c;
-    gSave.eventsMisc[0] |= 0x000b;
-}
