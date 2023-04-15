@@ -6,7 +6,7 @@ import { Game, GAMES } from "../config";
 import { WorldCheck } from '../logic/world';
 import { DUNGEONS, Settings, SPECIAL_CONDS, SPECIAL_CONDS_KEYS } from '../settings';
 import { HintGossip, Hints } from '../logic/hints';
-import { isDungeonStrayFairy, isGanonBossKey, isMap, isCompass, isRegularBossKey, isSmallKeyRegular, isTownStrayFairy, isSmallKeyHideout, isItemUnlimitedStarting, ITEMS_MAPS, ITEMS_COMPASSES, addItem } from '../logic/items';
+import { isDungeonStrayFairy, isGanonBossKey, isMap, isCompass, isRegularBossKey, isSmallKeyRegular, isTownStrayFairy, isSmallKeyHideout, isItemUnlimitedStarting, ITEMS_MAPS, ITEMS_COMPASSES, addItem, ITEMS_TINGLE_MAPS } from '../logic/items';
 import { gameId } from '../util';
 import { EntranceShuffleResult } from '../logic/entrance';
 import { Patchfile } from './patchfile';
@@ -489,6 +489,12 @@ export const randomizerData = (logic: LogicResult): Buffer => {
 const effectiveStartingItems = (logic: LogicResult): {[k: string]: number} => {
   const { settings, items } = logic;
   const startingItems = {...settings.startingItems};
+
+  if (settings.tingleShuffle === 'starting') {
+    for (const item of ITEMS_TINGLE_MAPS) {
+      startingItems[item] = 1;
+    }
+  }
 
   if (settings.mapCompassShuffle === 'starting') {
     for (const item of [...ITEMS_MAPS, ...ITEMS_COMPASSES]) {
