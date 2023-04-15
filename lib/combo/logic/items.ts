@@ -475,6 +475,7 @@ const CONSUMABLES = new Set<string>([
 
 const CRITICAL_RENEWABLE_ITEMS = new Set<string>([
   'MM_SHIELD_HERO',
+  'MM_BOMBCHU_10',
   'OOT_SHIELD_DEKU',
   'OOT_SHIELD_HYLIAN',
 ]);
