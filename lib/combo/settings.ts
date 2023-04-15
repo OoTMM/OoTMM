@@ -352,6 +352,18 @@ export const SETTINGS = [{
   type: 'boolean',
   default: false
 }, {
+  key: 'childWallets',
+  name: 'Child Wallets',
+  category: 'items.extensions',
+  type: 'boolean',
+  default: false
+}, {
+  key: 'colossalWallets',
+  name: 'Colossal Wallets',
+  category: 'items.extensions',
+  type: 'boolean',
+  default: false
+}, {
   key: 'sharedNutsSticks',
   name: 'Shared Nuts & Sticks',
   category: 'items.shared',

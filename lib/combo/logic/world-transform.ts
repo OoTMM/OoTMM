@@ -235,7 +235,8 @@ export class LogicPassWorldTransform {
       /* Wallets */
       this.replaceItem('OOT_WALLET',  'SHARED_WALLET');
       this.replaceItem('MM_WALLET',   'SHARED_WALLET');
-      this.removeItem('SHARED_WALLET', 2);
+
+      this.pool['SHARED_WALLET'] = this.pool['SHARED_WALLET'] / 2;
 
       /* Rupees */
       this.replaceItem('OOT_RUPEE_GREEN',   'SHARED_RUPEE_GREEN');
@@ -297,6 +298,17 @@ export class LogicPassWorldTransform {
     /* Add extra items */
     for (const item of EXTRA_ITEMS) {
       this.addItem(item);
+    }
+
+    /* Handle extra wallets */
+    if (this.state.settings.childWallets) {
+      this.addItem('OOT_WALLET');
+      this.addItem('MM_WALLET');
+    }
+
+    if (this.state.settings.colossalWallets) {
+      this.addItem('OOT_WALLET');
+      this.addItem('MM_WALLET');
     }
 
     /* Setup shared items */

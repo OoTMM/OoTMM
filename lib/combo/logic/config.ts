@@ -206,6 +206,10 @@ export class LogicPassConfig {
       config.add('FILL_WALLETS');
     }
 
+    if (settings.childWallets) {
+      config.add('CHILD_WALLET');
+    }
+
     return { mq, config };
   }
 }
