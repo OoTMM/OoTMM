@@ -6,9 +6,9 @@
 "Great Bay Temple Entrance":
   dungeon: GB
   events:
-    ARROWS: "can_hookshot"
-    BOMBS: "can_hookshot"
-    RUPEES: "can_hookshot"
+    ARROWS: "can_hookshot || can_oot_warp"
+    BOMBS: "can_hookshot || can_oot_warp"
+    RUPEES: "can_hookshot || can_oot_warp"
   exits:
     "Great Bay Temple Entrance": "true"
     "Great Bay Temple Water Wheel": "true"
@@ -39,7 +39,7 @@
 "Great Bay Temple Map Room":
   dungeon: GB
   events:
-    MAGIC: "true"
+    MAGIC: "can_hookshot || can_oot_warp"
   exits:
     "Great Bay Temple Baba Room": "true"
     "Great Bay Temple Red Pipe 2": "can_use_ice_arrows"
@@ -55,7 +55,7 @@
 "Great Bay Temple Compass Room":
   dungeon: GB
   events:
-    MAGIC: "true"
+    MAGIC: "can_hookshot || can_oot_warp"
   exits:
     "Great Bay Temple Baba Room": "true"
     "Great Bay Temple Central Room": "true"
@@ -74,7 +74,7 @@
 "Great Bay Temple Ice Arrow Room":
   dungeon: GB
   events:
-    MAGIC: "has_weapon || has(MASK_ZORA) || has(MASK_DEKU) || has_explosives"
+    MAGIC: "(has_weapon || has(MASK_ZORA) || has(MASK_DEKU) || has_explosives) && (can_hookshot || can_oot_warp)"
   exits:
     "Great Bay Temple Red Pipe 1": "true"
   locations:
@@ -85,7 +85,7 @@
     "Great Bay Temple Map Room": "true"
   events:
     GB_PIPE_RED2: "can_use_ice_arrows"
-    MAGIC: "true"
+    MAGIC: "can_hookshot || can_oot_warp"
 "Great Bay Temple Boss Key Room":
   dungeon: GB
   exits:
