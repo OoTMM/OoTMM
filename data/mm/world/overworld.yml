@@ -1390,7 +1390,7 @@
     "Zora Hall Entrance": "true"
     "Zora Cape Peninsula": "true"
     "Zora Shop": "true"
-    "Drummer Room" "has(MASK_ZORA)"
+    "Drummer Room": "has(MASK_ZORA)"
     "Japas' Room": "has(MASK_ZORA)"
     "Evan's Room": "has(MASK_ZORA)"
     "Lulu's Room": "has(MASK_ZORA)"
