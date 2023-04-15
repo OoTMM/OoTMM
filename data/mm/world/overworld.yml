@@ -1380,7 +1380,7 @@
     "Zora Cape": "has(MASK_ZORA)"
     "Zora Hall Entrance": "has(MASK_ZORA)"
 "Zora Hall Entrance":
-  region: ZORA_CAPE
+  region: ZORA_HALL
   exits:
     "Zora Cape Near Hall": "has(MASK_ZORA)"
     "Zora Hall": "true"
