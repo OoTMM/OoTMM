@@ -252,4 +252,12 @@ u32 Letterbox_GetSizeTarget(void);
 void Play_LoadKaleidoOverlay(void*);
 void LoadMapMark(void*);
 
+#define TINGLE_MAP_CLOCK_TOWN       0
+#define TINGLE_MAP_WOODFALL         1
+#define TINGLE_MAP_SNOWHEAD         2
+#define TINGLE_MAP_ROMANI_RANCH     3
+#define TINGLE_MAP_GREAT_BAY        4
+#define TINGLE_MAP_STONE_TOWER      5
+void Inventory_SetWorldMapCloudVisibility(s16 tingleId);
+
 #endif

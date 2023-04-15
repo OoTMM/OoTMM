@@ -169,7 +169,7 @@ typedef struct
     u32                     shootingGalleryHighScore;
     u8                      weekEventReg[100];
     u32                     mapsVisited;
-    u32                     mapsVisible;
+    u32                     worldMapCloudVisibility;
     u8                      unk_F64;
     u8                      unk_F65;
     u8                      scarecrowSpawnSong[128];

@@ -813,7 +813,7 @@ static void KaleidoScope_DrawWorldMap(GameState_Play* play) {
     // Draw clouds over the world map
     // Iterate over cloud bits (n)
     for (n = 0; n < WORLD_MAP_NUM_CLOUDS; n++) {
-        if (!(((void)0, gMmSave.mapsVisible) & (1 << n))) {
+        if (!(((void)0, gMmSave.worldMapCloudVisibility) & (1 << n))) {
 
             gSPVertex(POLY_OPA_DISP++, &pauseCtx->mapPageVtx[(QUAD_MAP_PAGE_WORLD_CLOUDS_FIRST + n) * 4], 4, 0);
 
