@@ -1145,7 +1145,6 @@
     "Milk Road Back": "true" #notevent(ALIENS) || (is_night2 && (can_play(SONG_EPONA) || (can_goron_bomb_jump && has_bombs)))"
     "Termina Field": "true"
     "Gorman Track Front": "true"
-    "Tingle Ranch": "has_weapon_range"
   events:
     MILK_ROAD_OWL: "has(SONG_SOARING) && (has_sticks || has_weapon)"
     MAGIC: "true"
@@ -1156,6 +1155,7 @@
     "Near Romani Ranch": "after(DAY3_AM_06_00) || can_use_keg"
     "Milk Road Front": "true" #notevent(ALIENS) || (is_night2 && (can_play(SONG_EPONA) || (can_goron_bomb_jump && has_bombs)))"
     "Behind Gorman Fence": "(can_goron_bomb_jump && has_bombs) || (is_night2 && event(ALIENS)) || final_day"
+    "Tingle Ranch": "has_weapon_range"
   events:
     PICTURE_TINGLE: "has(PICTOGRAPH_BOX)"
     RUPEES: "true"

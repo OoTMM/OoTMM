@@ -395,6 +395,16 @@ void comboTextAppendShopHeader(char** b, s16 price)
     comboTextAppendStr(b, TEXT_FAST);
 }
 
+void comboTextAppendShopHeader2(char** b, s16 price1, s16 price2)
+{
+#if defined(GAME_MM)
+    memcpy((*b) + 5, &price1, 2);
+    memcpy((*b) + 7, &price2, 2);
+    *b += 11;
+#endif
+    comboTextAppendStr(b, TEXT_FAST);
+}
+
 #if defined(GAME_MM)
 static void appendBossRewardHeader(char** b, char icon)
 {

@@ -6,7 +6,7 @@ int gNoTimeFlow;
 static void debugCheat(GameState_Play* play)
 {
 #if defined(DEBUG)
-    if (play->gs.input[0].current.buttons & L_TRIG)
+    //if (play->gs.input[0].current.buttons & L_TRIG)
     {
         gSave.itemEquips.sword = 1;
         gSave.itemEquips.shield = 2;
