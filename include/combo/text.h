@@ -51,6 +51,7 @@ void comboTextAutoLineBreaks(char* buffer);
 void comboTextAppendStr(char** dst, const char* src);
 void comboTextAppendHeader(char** b);
 void comboTextAppendShopHeader(char** b, s16 price);
+void comboTextAppendShopHeader2(char** b, s16 price, s16 price2);
 void comboTextAppendClearColor(char** b);
 void comboTextAppendNum(char** b, int num);
 void comboTextAppendItemName(char** b, s16 gi, int flags);

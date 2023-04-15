@@ -3,16 +3,36 @@
   exits:
     "OOT SONGS": "setting(crossWarpOot) && has_ocarina"
     "SOARING": "can_play(SONG_TIME) && can_play(SONG_SOARING)"
-#    "Tingle": "true"
-#"Tingle":
-#  region: TINGLE
-#  locations:
-#    "Clock Town Map": "event(TINGLE_CANYON) || event(TINGLE_NCT)"
-#    "Southern Swamp Map": "event(TINGLE_NCT) || event(TINGLE_SWAMP)"
-#    "Mountain Village Map": "event(TINGLE_SWAMP) || event(TINGLE_MOUNTAIN)"
-#    "Romani Ranch Map": "event(TINGLE_MOUNTAIN) || event(TINGLE_RANCH)"
-#    "Great Bay Map": "event(TINGLE_RANCH) || event(TINGLE_OCEAN)"
-#    "Ikana Canyon Map": "event(TINGLE_OCEAN) || event(TINGLE_CANYON)"
+"Tingle Town":
+  region: TINGLE
+  locations:
+    "Tingle Map Clock Town": "can_use_wallet(1)"
+    "Tingle Map Woodfall": "can_use_wallet(1)"
+"Tingle Swamp":
+  region: TINGLE
+  locations:
+    "Tingle Map Woodfall": "can_use_wallet(1)"
+    "Tingle Map Snowhead": "can_use_wallet(1)"
+"Tingle Mountain":
+  region: TINGLE
+  locations:
+    "Tingle Map Snowhead": "can_use_wallet(1)"
+    "Tingle Map Ranch": "can_use_wallet(1)"
+"Tingle Ranch":
+  region: TINGLE
+  locations:
+    "Tingle Map Ranch": "can_use_wallet(1)"
+    "Tingle Map Great Bay": "can_use_wallet(1)"
+"Tingle Great Bay":
+  region: TINGLE
+  locations:
+    "Tingle Map Great Bay": "can_use_wallet(1)"
+    "Tingle Map Ikana": "can_use_wallet(1)"
+"Tingle Ikana":
+  region: TINGLE
+  locations:
+    "Tingle Map Ikana": "can_use_wallet(1)"
+    "Tingle Map Clock Town": "can_use_wallet(1)"
 "SOARING":
   region: NONE
   exits:
@@ -89,6 +109,7 @@
     "Clock Town East": "true"
     "Clock Town Fairy Fountain": "true"
     "Deku Playground": "true"
+    "Tingle Town": "has_weapon_range && is_day"
   events:
     HIDE_SEEK1: "has_weapon_range && first_day"
     HIDE_SEEK2: "has_weapon_range && second_day"
@@ -102,7 +123,6 @@
     MAIL_LETTER: "has(LETTER_TO_KAFEI) && before(DAY2_AM_11_30)"
     PICTURE_TINGLE: "has(PICTOGRAPH_BOX) && is_day"
     RUPEES: "true"
-    #TINGLE_NCT: "has_weapon_range && can_use_wallet(1) && is_day"
   locations:
     "Clock Town Tree HP": "true"
     "Clock Town Bomber Notebook": "event(BOMBER_CODE) || event(GUESS_BOMBER)"
@@ -286,7 +306,7 @@
   events:
     HD_REWARD_1: "has(BOMB_BAG) && before(NIGHT1_PM_10_00)"
     HD_REWARD_2: "has(BOMB_BAG) && after(DAY2_AM_06_00) && before(NIGHT2_PM_10_00)"
-    HD_REWARD_3: "(has(bow) || can_use_deku_bubble) && is_day3"
+    HD_REWARD_3: "(has(BOW) || can_use_deku_bubble) && is_day3"
   exits:
     "Clock Town East": "true"
   locations:
@@ -550,12 +570,12 @@
     MUSHROOM: "has_bottle && has(MASK_SCENTS)"
     WATER: "has_bottle"
     PICTURE_TINGLE: "has(PICTOGRAPH_BOX)"
-    #TINGLE_SWAMP: "has_weapon_range && can_use_wallet(1)"
   exits:
     "Swamp Front": "true"
     "Termina Field": "true"
     "Swamp Archery": "before(NIGHT1_PM_10_00) || (after(DAY2_AM_06_00) && before(NIGHT2_PM_10_00)) || (after(DAY3_AM_06_00) && before(NIGHT3_PM_10_00))"
     "Road to Southern Swamp Grotto": "true"
+    "Tingle Swamp": "has_weapon_range"
   locations:
     "Road to Southern Swamp HP": "has_weapon_range"
   gossip:
@@ -916,13 +936,13 @@
     PICTURE_TINGLE: "has(PICTOGRAPH_BOX)"
     MAGIC: "true"
     RUPEES: "can_use_light_arrows || event(BOSS_SNOWHEAD)"
-#    TINGLE_MOUNTAIN: "has_weapon_range && can_use_wallet(1)"
   exits:
     "Mountain Village": "true"
     "Goron Village": "true"
     "Near Goron Race": "has(MASK_GORON) || scarecrow_hookshot"
     "Near Ramp Grotto": "has(MASK_GORON)"
     "Twin Islands Frozen Grotto": "can_use_fire_arrows || event(BOSS_SNOWHEAD) || has_hot_water || has_hot_water_distance"
+    "Tingle Mountain": "has_weapon_range"
   locations:
     "Twin Islands Underwater Chest 1": "event(BOSS_SNOWHEAD) && has(MASK_ZORA)"
     "Twin Islands Underwater Chest 2": "event(BOSS_SNOWHEAD) && has(MASK_ZORA)"
@@ -1135,6 +1155,7 @@
     "Near Romani Ranch": "after(DAY3_AM_06_00) || can_use_keg"
     "Milk Road Front": "true" #notevent(ALIENS) || (is_night2 && (can_play(SONG_EPONA) || (can_goron_bomb_jump && has_bombs)))"
     "Behind Gorman Fence": "(can_goron_bomb_jump && has_bombs) || (is_night2 && event(ALIENS)) || final_day"
+    "Tingle Ranch": "has_weapon_range"
   events:
     PICTURE_TINGLE: "has(PICTOGRAPH_BOX)"
     RUPEES: "true"
@@ -1207,6 +1228,7 @@
     "Laboratory": "true"
     "Zora Cape": "true"
     "Ocean Spider House": "true"
+    "Tingle Great Bay": "can_hookshot || has(BOW)"
   events:
     GREAT_BAY_OWL: "has(SONG_SOARING) && (has_sticks || has_weapon)"
     STICKS: "true"
@@ -1443,6 +1465,7 @@
     "Beneath the Well Entrance": "true"
     "Ikana Castle Entrance": "true"
     "Stone Tower": "true"
+    "Tingle Ikana": "has_weapon_range"
   events:
     IKANA_CANYON_OWL: "has(SONG_SOARING) && (has_sticks || has_weapon)"
     NUTS: "true"

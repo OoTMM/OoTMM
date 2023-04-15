@@ -480,6 +480,15 @@ const CRITICAL_RENEWABLE_ITEMS = new Set<string>([
   'OOT_SHIELD_HYLIAN',
 ]);
 
+export const ITEMS_TINGLE_MAPS = new Set<string>([
+  'MM_WORLD_MAP_CLOCK_TOWN',
+  'MM_WORLD_MAP_WOODFALL',
+  'MM_WORLD_MAP_SNOWHEAD',
+  'MM_WORLD_MAP_ROMANI_RANCH',
+  'MM_WORLD_MAP_GREAT_BAY',
+  'MM_WORLD_MAP_STONE_TOWER',
+]);
+
 export const isCompass = (item: string) => ITEMS_COMPASSES.has(item);
 export const isMap = (item: string) => ITEMS_MAPS.has(item);
 export const isMapCompass = (item: string) => isMap(item) || isCompass(item);
@@ -508,6 +517,7 @@ export const isItemConsumable = (item: string) => CONSUMABLES.has(item);
 export const isRupees = (item: string) => !!item.match(/^(OOT|MM|SHARED)_RUPEE_/);
 export const isItemUnlimitedStarting = (item: string) => isRupees(item) || isItemConsumable(item);
 export const isItemCriticalRenewable = (item: string) => CRITICAL_RENEWABLE_ITEMS.has(item);
+export const isTingleMap = (item: string) => ITEMS_TINGLE_MAPS.has(item);
 
 export const itemsArray = (items: Items) => {
   const arr: string[] = [];

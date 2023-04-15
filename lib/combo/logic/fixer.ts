@@ -1,5 +1,6 @@
 import { Monitor } from '../monitor';
 import { Settings } from '../settings';
+import { isTingleMap } from './items';
 import { ONE_TIME_SHOP_CHECKS, OOT_ONE_TIME_SCRUBS } from './locations';
 import { World } from './world';
 
@@ -18,9 +19,15 @@ export class LogicPassFixer {
   run() {
     this.state.monitor.log("Logic: Fixing");
 
+    const { settings } = this.state;
+
     for (const loc in this.state.world.checks) {
       const check = this.state.world.checks[loc];
       const { type, item, game } = check;
+
+      if (isTingleMap(item) && settings.tingleShuffle === 'vanilla') {
+        this.fixedLocations.add(loc);
+      }
 
       if (type === 'cow') {
         if (game === 'oot' && !this.state.settings.cowShuffleOot) {

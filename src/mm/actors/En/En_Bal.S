@@ -16,3 +16,13 @@ PATCH_END
 PATCH_START 0x80a62614
   li t6,1
 PATCH_END
+
+/* Do not run the map update */
+PATCH_START 0x80a62ee0
+  nop
+PATCH_END
+
+/* Relocs */
+PATCH_START 0x80a64284
+.int 0
+PATCH_END

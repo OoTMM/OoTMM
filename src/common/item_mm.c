@@ -1112,6 +1112,24 @@ int comboAddItemMm(s16 gi, int noEffect)
     case GI_MM_COMPASS_ST:
         comboAddCompassMm(3);
         break;
+    case GI_MM_WORLD_MAP_CLOCK_TOWN:
+        Inventory_SetWorldMapCloudVisibility(TINGLE_MAP_CLOCK_TOWN);
+        break;
+    case GI_MM_WORLD_MAP_WOODFALL:
+        Inventory_SetWorldMapCloudVisibility(TINGLE_MAP_WOODFALL);
+        break;
+    case GI_MM_WORLD_MAP_SNOWHEAD:
+        Inventory_SetWorldMapCloudVisibility(TINGLE_MAP_SNOWHEAD);
+        break;
+    case GI_MM_WORLD_MAP_ROMANI_RANCH:
+        Inventory_SetWorldMapCloudVisibility(TINGLE_MAP_ROMANI_RANCH);
+        break;
+    case GI_MM_WORLD_MAP_GREAT_BAY:
+        Inventory_SetWorldMapCloudVisibility(TINGLE_MAP_GREAT_BAY);
+        break;
+    case GI_MM_WORLD_MAP_STONE_TOWER:
+        Inventory_SetWorldMapCloudVisibility(TINGLE_MAP_STONE_TOWER);
+        break;
     }
 
     return count;

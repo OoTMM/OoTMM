@@ -1,7 +1,7 @@
 import { Monitor } from '../monitor';
 import { Settings } from '../settings';
 import { exprTrue } from './expr';
-import { Items, addItem, ITEMS_MAPS, ITEMS_COMPASSES } from './items';
+import { Items, addItem, ITEMS_MAPS, ITEMS_COMPASSES, ITEMS_TINGLE_MAPS } from './items';
 import { LOCATIONS_ZELDA } from './locations';
 import { World } from './world';
 
@@ -328,6 +328,13 @@ export class LogicPassWorldTransform {
     /* Handle non-MQ Fire */
     if (!this.state.config.has('SMALL_KEY_SHUFFLE') && !this.state.mq.has('Fire')) {
       this.removeItem('OOT_SMALL_KEY_FIRE', 1);
+    }
+
+    /* Handle tingle maps */
+    if (['starting', 'removed'].includes(this.state.settings.tingleShuffle)) {
+      for (const item of ITEMS_TINGLE_MAPS) {
+        this.removeItem(item);
+      }
     }
 
     /* Handle maps/compasses */

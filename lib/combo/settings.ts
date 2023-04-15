@@ -64,6 +64,18 @@ export const SETTINGS = [{
   ],
   default: 'none'
 }, {
+  key: 'tingleShuffle',
+  name: 'Tingle Maps Shuffle',
+  category: 'main.shuffle',
+  type: 'enum',
+  values: [
+    { value: 'vanilla', name: 'Vanilla' },
+    { value: 'anywhere', name: 'Anywhere' },
+    { value: 'starting', name: 'Starting Items' },
+    { value: 'removed', name: 'Removed' },
+  ],
+  default: 'vanilla'
+}, {
   key: 'mapCompassShuffle',
   name: 'Map / Compass Shuffle',
   category: 'main.shuffle',
