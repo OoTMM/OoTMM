@@ -308,7 +308,8 @@ MmExtraFlags;
 
 typedef struct
 {
-    u32 unused:3;
+    u32 childWallet:1;
+    u32 unused:2;
     u32 maskKafei:1;
     u32 honeyDarling:1;
     u32 roomKey:1;

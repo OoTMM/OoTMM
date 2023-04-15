@@ -14,3 +14,8 @@ PATCH_END
 PATCH_START 0x80130154
   li t9,0
 PATCH_END
+
+/* Colossal wallet has 3 digits */
+PATCH_START 0x801bfd2a
+.short 3
+PATCH_END

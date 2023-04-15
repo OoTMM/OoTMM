@@ -236,10 +236,16 @@ export const exprNot = (expr: Expr): Expr => state => expr(state).result ? exprF
 export const exprCond = (cond: Expr, then: Expr, otherwise: Expr): Expr => state => cond(state).result ? then(state) : otherwise(state);
 export const exprAge = (age: Age): Expr => state => state.age === age ? exprTrue()(state) : exprFalse()(state);
 
-export const exprHas = (item: string, itemShared: string, count: number): Expr => state => {
-  const result = (state.ignoreItems || ((itemCount(state, item) + itemCount(state, itemShared)) >= count));
-  const dependencies = { items: new Set([item, itemShared]) };
-  return { result, dependencies };
+export const exprHas = (item: string, itemShared: string, count: number): Expr => {
+  if (count <= 0) {
+    return exprTrue();
+  }
+
+  return state => {
+    const result = (state.ignoreItems || ((itemCount(state, item) + itemCount(state, itemShared)) >= count));
+    const dependencies = { items: new Set([item, itemShared]) };
+    return { result, dependencies };
+  }
 };
 
 export const exprEvent = (event: string): Expr => state => {

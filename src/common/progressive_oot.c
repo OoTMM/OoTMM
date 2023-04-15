@@ -106,9 +106,14 @@ static s32 progressiveDive(void)
 
 static s32 progressiveWallet(void)
 {
-    if (gOotSave.inventory.upgrades.wallet)
-        return GI_OOT_WALLET3;
-    return GI_OOT_WALLET2;
+    if (!gOotExtraFlags.childWallet)
+        return GI_OOT_WALLET;
+    switch (gOotSave.inventory.upgrades.wallet)
+    {
+    case 0: return GI_OOT_WALLET2;
+    case 1: return GI_OOT_WALLET3;
+    default: return GI_OOT_WALLET4;
+    }
 }
 
 static s32 progressiveMagic(void)
@@ -188,8 +193,10 @@ s32 comboProgressiveOot(s32 gi)
     case GI_OOT_SCALE_GOLDEN:
         gi = progressiveDive();
         break;
+    case GI_OOT_WALLET:
     case GI_OOT_WALLET2:
     case GI_OOT_WALLET3:
+    case GI_OOT_WALLET4:
         gi = progressiveWallet();
         break;
     case GI_OOT_MAGIC_UPGRADE:

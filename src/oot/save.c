@@ -65,6 +65,8 @@ void Sram_AfterOpenSave(void)
     gSave.entrance = DEBUG_OOT_ENTRANCE;
 #endif
 
+    comboOnSaveLoad();
+
     /* Dungeon shuffle override */
     dungeonRespawn(gSave.sceneId);
 
@@ -156,6 +158,16 @@ void comboCreateSave(void* unk, void* buffer)
 
     /* Create MM save */
     comboCreateSaveMM();
+
+    /* Apply some early settings */
+    if (!comboConfig(CFG_CHILD_WALLET))
+    {
+        gOotExtraFlags.childWallet = 1;
+        gMmExtraFlags2.childWallet = 1;
+
+        gOotMaxRupees[0] = 99;
+        gMmMaxRupees[0] = 99;
+    }
 
     /* Apply starting items */
     applyStartingItems();

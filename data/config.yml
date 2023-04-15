@@ -42,3 +42,4 @@ GOAL_GANON:                     0x28
 GOAL_MAJORA:                    0x29
 MM_MAJORA_CHILD_CUSTOM:         0x2a
 FILL_WALLETS:                   0x2b
+CHILD_WALLET:                   0x2c

@@ -77,3 +77,7 @@
 "bombers1": "event(BOMBERS_NORTH1) && event(BOMBERS_EAST1) && event(BOMBERS_WEST1)"
 "bombers2": "event(BOMBERS_NORTH2) && event(BOMBERS_EAST2) && event(BOMBERS_WEST2)"
 "bombers3": "event(BOMBERS_NORTH3) && event(BOMBERS_EAST3) && event(BOMBERS_WEST3)"
+
+# Wallets
+"has_wallet(n)": "cond(setting(childWallets), has(WALLET, n), has(WALLET, n - 1))"
+"can_use_wallet(n)": "event(RUPEES) && has_wallet(n)"

@@ -17,6 +17,9 @@ static void Sram_LoadOptions(void)
 void Sram_AfterOpenSave(void)
 {
     Sram_LoadOptions();
+
+    comboOnSaveLoad();
+
     gSave.playerForm = MM_PLAYER_FORM_HUMAN;
     gSave.equippedMask = 0;
     gSave.entranceIndex = ENTRANCE_CLOCKTOWN;

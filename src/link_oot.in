@@ -177,3 +177,5 @@ Letterbox_GetSizeTarget = 0x80099630;
 
 Play_LoadKaleidoOverlay = 0x80099c60;
 LoadMapMark = 0x80066df0;
+
+gMaxRupees = 0x800f8cec;

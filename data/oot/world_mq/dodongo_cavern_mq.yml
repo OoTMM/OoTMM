@@ -17,8 +17,8 @@
   locations:
     "MQ Dodongo Cavern Map Chest": "has_bombflowers || can_hammer"
     "MQ Dodongo Cavern GS Time Blocks": "can_play(SONG_TIME) && can_damage_skull"
-    "MQ Dodongo Cavern Lobby Scrub Front": "can_hit_scrub && has_rupees"
-    "MQ Dodongo Cavern Lobby Scrub Back": "can_hit_scrub && has_rupees"
+    "MQ Dodongo Cavern Lobby Scrub Front": "can_hit_scrub && can_use_wallet(1)"
+    "MQ Dodongo Cavern Lobby Scrub Back": "can_hit_scrub && can_use_wallet(1)"
   gossip:
     "Dodongo Cavern Gossip": "has_bombflowers || can_hammer"
 "Dodongo Cavern Upper Staircase":
@@ -31,7 +31,7 @@
     "MQ Dodongo Cavern Compass Chest": "true"
     "MQ Dodongo Cavern Larvae Room Chest": "can_use_sticks || has_fire"
     "MQ Dodongo Cavern GS Larve Room": "can_use_sticks || has_fire"
-    "MQ Dodongo Cavern Staircase Scrub": "can_hit_scrub && has_rupees"
+    "MQ Dodongo Cavern Staircase Scrub": "can_hit_scrub && can_use_wallet(1)"
 "Dodongo Cavern Upper Lizalfos":
   dungeon: DC
   exits:
@@ -52,7 +52,7 @@
   exits:
     "Dodongo Cavern Lower Lizalfos": "can_use_bow || ((has_bombflowers || can_use_din) && can_use_slingshot)"
   locations:
-    "MQ Dodongo Cavern Tunnel Side Scrub": "can_hit_scrub && has_rupees"
+    "MQ Dodongo Cavern Tunnel Side Scrub": "can_hit_scrub && can_use_wallet(1)"
 "Dodongo Cavern Lower Lizalfos":
   dungeon: DC
   exits:

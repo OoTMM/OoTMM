@@ -155,8 +155,10 @@ static int csmcFromItemOot(s16 gi)
     case GI_OOT_MAGIC_BEAN:
     case GI_OOT_BOTTLE_MILK:
     case GI_OOT_STONE_OF_AGONY:
+    case GI_OOT_WALLET:
     case GI_OOT_WALLET2:
     case GI_OOT_WALLET3:
+    case GI_OOT_WALLET4:
     case GI_OOT_POCKET_CUCCO:
     case GI_OOT_COJIRO:
     case GI_OOT_ODD_MUSHROOM:
@@ -287,8 +289,10 @@ static int csmcFromItemMm(s16 gi)
     case GI_MM_LETTER_TO_KAFEI:
     case GI_MM_PENDANT_OF_MEMORIES:
     case GI_MM_LETTER_TO_MAMA:
+    case GI_MM_WALLET:
     case GI_MM_WALLET2:
     case GI_MM_WALLET3:
+    case GI_MM_WALLET4:
     case GI_MM_GREAT_FAIRY_SWORD:
     case GI_MM_SPIN_UPGRADE:
     case GI_MM_BOMBER_NOTEBOOK:

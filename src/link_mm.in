@@ -164,3 +164,5 @@ gOcarinaFlags = 0x801d6fec;
 gOcarinaButtonPitchMap = 0x801d7030;
 gOcarinaSongBuffer = 0x801d7020;
 gOcarinaSongBufferCursor = 0x801d7028;
+
+gMaxRupees = 0x801c1e2c;

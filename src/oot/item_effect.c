@@ -161,9 +161,11 @@ int comboAddItemEffect(GameState_Play* play, s16 gi)
     {
         switch (gi)
         {
+        case GI_OOT_WALLET:
         case GI_OOT_WALLET2:
         case GI_OOT_WALLET3:
-            addRupees(kMaxRupees[gSave.inventory.upgrades.wallet]);
+        case GI_OOT_WALLET4:
+            addRupees(gMaxRupees[gSave.inventory.upgrades.wallet]);
             break;
         }
     }

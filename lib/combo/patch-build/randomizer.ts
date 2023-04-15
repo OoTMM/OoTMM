@@ -136,11 +136,9 @@ const SUBSTITUTIONS: {[k: string]: string} = {
   OOT_SCALE: "OOT_SCALE_SILVER",
   OOT_SHIELD: "OOT_PROGRESSIVE_SHIELD_DEKU",
   OOT_ICE_TRAP: "OOT_RUPEE_BLUE",
-  OOT_WALLET: "OOT_WALLET2",
   MM_SWORD: "MM_SWORD_KOKIRI",
   MM_SHIELD: "MM_PROGRESSIVE_SHIELD_HERO",
   MM_OCARINA: "MM_OCARINA_OF_TIME",
-  MM_WALLET: "MM_WALLET2",
 };
 
 const gi = (settings: Settings, game: Game, item: string, generic: boolean) => {

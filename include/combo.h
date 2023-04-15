@@ -186,6 +186,7 @@ void comboReadWriteFlash(u32 devAddr, void* dramAddr, u32 size, s32 direction);
 void comboReadForeignSave(void);
 void comboWriteSave(void);
 void comboCopyMmSave(int dst, int src);
+void comboOnSaveLoad(void);
 
 /* Save util */
 void comboCreateSaveMM(void);

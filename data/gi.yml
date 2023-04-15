@@ -185,6 +185,8 @@ OOT_COMPASS_SPIRIT:               0xba
 OOT_COMPASS_SHADOW:               0xbb
 OOT_COMPASS_BOTW:                 0xbc
 OOT_COMPASS_IC:                   0xbd
+OOT_WALLET:                       0xbe
+OOT_WALLET4:                      0xbf
 
 MM_RUPEE_GREEN:               0x01
 MM_RUPEE_BLUE:                0x02
@@ -349,3 +351,5 @@ MM_COMPASS_ST:                0xe6
 MM_OCARINA_FAIRY:             0xe7
 MM_HOOKSHOT_SHORT:            0xe8
 MM_SONG_SUN:                  0xe9
+MM_WALLET:                    0xea
+MM_WALLET4:                   0xeb

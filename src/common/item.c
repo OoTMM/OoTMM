@@ -13,12 +13,17 @@
 # define comboAddItemSharedForeign      comboAddItemSharedOot
 #endif
 
+#if defined(GAME_OOT)
+u16 gMmMaxRupees[] = { 0, 200, 500, 999 };
+#else
+u16 gOotMaxRupees[] = { 0, 200, 500, 999 };
+#endif
+
 const u8 kMaxSticks[] = { 0, 10, 20, 30 };
 const u8 kMaxNuts[] = { 0, 20, 30, 40 };
 const u8 kMaxBombs[] = { 0, 20, 30, 40 };
 const u8 kMaxArrows[] = { 0, 30, 40, 50 };
 const u8 kMaxSeeds[] = { 0, 30, 40, 50 };
-const u16 kMaxRupees[] = { 99, 200, 500, 999 };
 
 int comboAddItem(GameState_Play* play, s16 gi)
 {
