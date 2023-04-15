@@ -55,7 +55,7 @@
   events:
     DEKU_BLOCK: "true"
   locations:
-    "MQ Deku Tree Scrub": "can_hit_scrub && has_rupees"
+    "MQ Deku Tree Scrub": "can_hit_scrub && can_use_wallet(1)"
 "Deku Tree Before Boss":
   dungeon: DT
   exits:

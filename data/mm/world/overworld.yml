@@ -102,7 +102,7 @@
     MAIL_LETTER: "has(LETTER_TO_KAFEI) && before(DAY2_AM_11_30)"
     PICTURE_TINGLE: "has(PICTOGRAPH_BOX) && is_day"
     RUPEES: "true"
-    #TINGLE_NCT: "has_weapon_range && has_rupees && is_day"
+    #TINGLE_NCT: "has_weapon_range && can_use_wallet(1) && is_day"
   locations:
     "Clock Town Tree HP": "true"
     "Clock Town Bomber Notebook": "event(BOMBER_CODE) || event(GUESS_BOMBER)"
@@ -125,9 +125,9 @@
     "Swordsman School": "first_day || second_day || (after(DAY3_AM_06_00) && before(NIGHT3_PM_11_00)) || after(NIGHT3_AM_12_00)"
     "Lottery": "is_day || (event(PLAY_LOTTERY) && (before(NIGHT1_PM_11_00) || (after(NIGHT2_PM_06_00) && before(NIGHT2_PM_11_00)) || (after(NIGHT3_PM_06_00) && before(NIGHT3_PM_11_00))))"
   locations:
-    "Clock Town Bank Reward 1": "has_rupees"
-    "Clock Town Bank Reward 2": "has(WALLET, 1) && has_rupees"
-    "Clock Town Bank Reward 3": "has(WALLET, 2) && has_rupees"
+    "Clock Town Bank Reward 1": "can_use_wallet(1)"
+    "Clock Town Bank Reward 2": "can_use_wallet(2)"
+    "Clock Town Bank Reward 3": "can_use_wallet(3)"
     "Clock Town Rosa Sisters HP": "has(MASK_KAMARO) && (is_night1 || is_night2)"
 "Clock Town East":
   region: CLOCK_TOWN_EAST
@@ -180,14 +180,14 @@
 "Bomb Shop":
   region: CLOCK_TOWN_WEST
   events:
-    BUY_KEG: "has(MASK_GORON) && has(POWDER_KEG) && has_rupees"
+    BUY_KEG: "has(MASK_GORON) && has(POWDER_KEG) && can_use_wallet(1)"
   exits:
     "Clock Town West": "true"
   locations:
-    "Bomb Shop Item 1": "has_rupees"
-    "Bomb Shop Item 2": "has_rupees"
-    "Bomb Shop Bomb Bag": "has_rupees"
-    "Bomb Shop Bomb Bag 2": "event(SAKON_BOMB_BAG) && has_rupees"
+    "Bomb Shop Item 1": "can_use_wallet(1)"
+    "Bomb Shop Item 2": "can_use_wallet(1)"
+    "Bomb Shop Bomb Bag": "can_use_wallet(1)"
+    "Bomb Shop Bomb Bag 2": "event(SAKON_BOMB_BAG) && can_use_wallet(1)"
 "Trading Post":
   region: CLOCK_TOWN_WEST
   events:
@@ -195,21 +195,21 @@
   exits:
     "Clock Town West": "true"
   locations:
-    "Trading Post Item 1": "has_rupees && before(NIGHT3_PM_09_00)"
-    "Trading Post Item 2": "has_rupees && before(NIGHT3_PM_09_00)"
-    "Trading Post Item 3": "has_rupees && before(NIGHT3_PM_09_00)"
-    "Trading Post Item 4": "has_rupees && before(NIGHT3_PM_09_00)"
-    "Trading Post Item 5": "has_rupees && before(NIGHT3_PM_09_00)"
-    "Trading Post Item 6": "has_rupees && before(NIGHT3_PM_09_00)"
-    "Trading Post Item 7": "has_rupees && before(NIGHT3_PM_09_00)"
-    "Trading Post Item 8": "has_rupees && before(NIGHT3_PM_09_00)"
+    "Trading Post Item 1": "can_use_wallet(1) && before(NIGHT3_PM_09_00)"
+    "Trading Post Item 2": "can_use_wallet(1) && before(NIGHT3_PM_09_00)"
+    "Trading Post Item 3": "can_use_wallet(1) && before(NIGHT3_PM_09_00)"
+    "Trading Post Item 4": "can_use_wallet(1) && before(NIGHT3_PM_09_00)"
+    "Trading Post Item 5": "can_use_wallet(1) && before(NIGHT3_PM_09_00)"
+    "Trading Post Item 6": "can_use_wallet(1) && before(NIGHT3_PM_09_00)"
+    "Trading Post Item 7": "can_use_wallet(1) && before(NIGHT3_PM_09_00)"
+    "Trading Post Item 8": "can_use_wallet(1) && before(NIGHT3_PM_09_00)"
 "Curiosity Shop":
   region: CLOCK_TOWN_WEST
   exits:
     "Clock Town West": "true"
   locations:
-    "Bomb Shop Bomb Bag 2": "has(WALLET, 1) && has_rupees && is_night3"
-    "Curiosity Shop All-Night Mask": "(event(SAKON_BOMB_BAG) || event(SAKON_BOOM)) && has(WALLET, 2) && has_rupees && is_night3"
+    "Bomb Shop Bomb Bag 2": "can_use_wallet(2) && is_night3"
+    "Curiosity Shop All-Night Mask": "(event(SAKON_BOMB_BAG) || event(SAKON_BOOM)) && can_use_wallet(3) && is_night3"
     #"Curiostiy Shop 5r Trade": "(has_milk || event(MUSHROOM)) && is_night"
     #"Curiostiy Shop 20r Trade": "(event(WATER) || event(BUGS) || event(FISH) || has_milk || has_red_or_blue_potion || has_green_potion || has_zora_egg) && is_night"
     #"Curiostiy Shop 50r Trade": "(event(POE)) && is_night"
@@ -237,11 +237,11 @@
   exits:
     "Clock Town West": "true"
   locations:
-    "Swordsman School HP": "has(SWORD) && has_rupees && before(NIGHT3_PM_11_00)"
+    "Swordsman School HP": "has(SWORD) && can_use_wallet(1) && before(NIGHT3_PM_11_00)"
 "Lottery":
   region: CLOCK_TOWN_WEST
   events:
-    PLAY_LOTTERY: "is_day && has_rupees"
+    PLAY_LOTTERY: "is_day && can_use_wallet(1)"
   exits:
     "Clock Town West": "true"
 #  locations:
@@ -256,31 +256,31 @@
 "Milk Bar":
   region: CLOCK_TOWN_EAST
   events:
-    MILK: "has(MASK_ROMANI) && has_rupees && ((after(NIGHT1_PM_10_00) && before(DAY2_AM_06_00)) || (after(NIGHT2_PM_10_00) && before(DAY3_AM_06_00)) || (after(NIGHT3_PM_06_00) && before(NIGHT3_PM_09_00)) || after(NIGHT3_PM_10_00))"
-    CHATEAU: "has(MASK_ROMANI) && has(WALLET) && has_rupees && ((after(NIGHT1_PM_10_00) && before(DAY2_AM_06_00)) || (after(NIGHT2_PM_10_00) && before(DAY3_AM_06_00)) || (after(NIGHT3_PM_06_00) && before(NIGHT3_PM_09_00)) || after(NIGHT3_PM_10_00))"
+    MILK: "has(MASK_ROMANI) && can_use_wallet(1) && ((after(NIGHT1_PM_10_00) && before(DAY2_AM_06_00)) || (after(NIGHT2_PM_10_00) && before(DAY3_AM_06_00)) || (after(NIGHT3_PM_06_00) && before(NIGHT3_PM_09_00)) || after(NIGHT3_PM_10_00))"
+    CHATEAU: "has(MASK_ROMANI) && can_use_wallet(2) && ((after(NIGHT1_PM_10_00) && before(DAY2_AM_06_00)) || (after(NIGHT2_PM_10_00) && before(DAY3_AM_06_00)) || (after(NIGHT3_PM_06_00) && before(NIGHT3_PM_09_00)) || after(NIGHT3_PM_10_00))"
   exits:
     "Clock Town East": "true"
   locations:
     "Milk Bar Troupe Leader Mask": "has_ocarina && has(MASK_DEKU) && has(MASK_ZORA) && has(MASK_GORON) && ((after(NIGHT1_PM_10_00) && before(NIGHT1_AM_05_00)) || (after(NIGHT2_PM_10_00) && before(NIGHT2_AM_05_00)))"
     "Milk Bar Madame Aroma Bottle": "has(MASK_KAFEI) && has(LETTER_TO_MAMA) && ((after(NIGHT3_PM_06_00) && before(NIGHT3_PM_09_00)) || after(NIGHT3_PM_10_00))"
-    #Milk Bar Milk Purchase": "has(MASK_ROMANI) && has_rupees && ((after(NIGHT1_PM_10_00) && before(NIGHT1_AM_06_00)) || (after(NIGHT2_PM_10_00) && before(NIGHT2_AM_06_00)) || (after(NIGHT3_PM_06_00) && before(NIGHT3_PM_09_00)) || after(NIGHT3_PM_10_00))"
-    #Milk Bar Chateau Purchase": "has(MASK_ROMANI) && has_rupees && has(WALLET) && ((after(NIGHT1_PM_10_00) && before(NIGHT1_AM_06_00)) || (after(NIGHT2_PM_10_00) && before(NIGHT2_AM_06_00)) || (after(NIGHT3_PM_06_00) && before(NIGHT3_PM_09_00)) || after(NIGHT3_PM_10_00))"
+    #Milk Bar Milk Purchase": "has(MASK_ROMANI) && can_use_wallet(1) && ((after(NIGHT1_PM_10_00) && before(NIGHT1_AM_06_00)) || (after(NIGHT2_PM_10_00) && before(NIGHT2_AM_06_00)) || (after(NIGHT3_PM_06_00) && before(NIGHT3_PM_09_00)) || after(NIGHT3_PM_10_00))"
+    #Milk Bar Chateau Purchase": "has(MASK_ROMANI) && can_use_wallet(2) && ((after(NIGHT1_PM_10_00) && before(NIGHT1_AM_06_00)) || (after(NIGHT2_PM_10_00) && before(NIGHT2_AM_06_00)) || (after(NIGHT3_PM_06_00) && before(NIGHT3_PM_09_00)) || after(NIGHT3_PM_10_00))"
 "Town Archery":
   region: CLOCK_TOWN_EAST
   exits:
     "Clock Town East": "true"
   locations:
-    "Town Archery Reward 1": "has(BOW) && has_rupees && (before(NIGHT1_PM_10_00) || (after(DAY2_AM_06_00) && before(NIGHT2_PM_10_00)) || (after(DAY3_AM_06_00) && before(NIGHT3_PM_10_00)))"
-    "Town Archery Reward 2": "has(BOW) && has_rupees && (before(NIGHT1_PM_10_00) || (after(DAY2_AM_06_00) && before(NIGHT2_PM_10_00)) || (after(DAY3_AM_06_00) && before(NIGHT3_PM_10_00)))"
+    "Town Archery Reward 1": "has(BOW) && can_use_wallet(1) && (before(NIGHT1_PM_10_00) || (after(DAY2_AM_06_00) && before(NIGHT2_PM_10_00)) || (after(DAY3_AM_06_00) && before(NIGHT3_PM_10_00)))"
+    "Town Archery Reward 2": "has(BOW) && can_use_wallet(1) && (before(NIGHT1_PM_10_00) || (after(DAY2_AM_06_00) && before(NIGHT2_PM_10_00)) || (after(DAY3_AM_06_00) && before(NIGHT3_PM_10_00)))"
 "Chest Game":
   region: CLOCK_TOWN_EAST
   exits:
     "Clock Town East": "true"
   locations:
-    "Chest Game HP": "has(MASK_GORON) && has_rupees && (before(NIGHT1_PM_10_00) || (after(DAY2_AM_06_00) && before(NIGHT2_PM_10_00)) || is_day3)"
-    #Chest Game Reward Human": "has_rupees && (before(NIGHT1_PM_10_00) || (after(DAY2_AM_06_00) && before(NIGHT2_PM_10_00)) || is_day3)"
-    #Chest Game Reward Zora": "has_rupees && has(MASK_ZORA) && (before(NIGHT1_PM_10_00) || (after(DAY2_AM_06_00) && before(NIGHT2_PM_10_00)) || is_day3)"
-    #Chest Game Reward Deku": "has_rupees && has(MASK_DEKU) && (before(NIGHT1_PM_10_00) || (after(DAY2_AM_06_00) && before(NIGHT2_PM_10_00)) || is_day3)"
+    "Chest Game HP": "has(MASK_GORON) && can_use_wallet(1) && (before(NIGHT1_PM_10_00) || (after(DAY2_AM_06_00) && before(NIGHT2_PM_10_00)) || is_day3)"
+    #Chest Game Reward Human": "can_use_wallet(1) && (before(NIGHT1_PM_10_00) || (after(DAY2_AM_06_00) && before(NIGHT2_PM_10_00)) || is_day3)"
+    #Chest Game Reward Zora": "can_use_wallet(1) && has(MASK_ZORA) && (before(NIGHT1_PM_10_00) || (after(DAY2_AM_06_00) && before(NIGHT2_PM_10_00)) || is_day3)"
+    #Chest Game Reward Deku": "can_use_wallet(1) && has(MASK_DEKU) && (before(NIGHT1_PM_10_00) || (after(DAY2_AM_06_00) && before(NIGHT2_PM_10_00)) || is_day3)"
 "Honey & Darling Game":
   region: CLOCK_TOWN_EAST
   events:
@@ -290,8 +290,8 @@
   exits:
     "Clock Town East": "true"
   locations:
-    "Honey & Darling Reward 1": "has_rupees && (event(HD_REWARD_1) || event(HD_REWARD_2) || event(HD_REWARD_3))"
-    "Honey & Darling Reward 2": "has_rupees && event(HD_REWARD_1) && event(HD_REWARD_2) && event(HD_REWARD_3)"
+    "Honey & Darling Reward 1": "can_use_wallet(1) && (event(HD_REWARD_1) || event(HD_REWARD_2) || event(HD_REWARD_3))"
+    "Honey & Darling Reward 2": "can_use_wallet(1) && event(HD_REWARD_1) && event(HD_REWARD_2) && event(HD_REWARD_3)"
 "Stock Pot Inn":
   region: STOCK_POT_INN
   exits:
@@ -327,8 +327,8 @@
   exits:
     "Clock Town North": "true"
   locations:
-    "Deku Playground Reward 1": "has(MASK_DEKU) && has_rupees && (event(DEKU_REWARD_1) || event(DEKU_REWARD_2) || event(DEKU_REWARD_3))"
-    "Deku Playground Reward 2": "has(MASK_DEKU) && has_rupees && event(DEKU_REWARD_1) && event(DEKU_REWARD_2) && event(DEKU_REWARD_3)"
+    "Deku Playground Reward 1": "has(MASK_DEKU) && can_use_wallet(1) && (event(DEKU_REWARD_1) || event(DEKU_REWARD_2) || event(DEKU_REWARD_3))"
+    "Deku Playground Reward 2": "has(MASK_DEKU) && can_use_wallet(1) && event(DEKU_REWARD_1) && event(DEKU_REWARD_2) && event(DEKU_REWARD_3)"
 "Astral Observatory":
   region: CLOCK_TOWN_EAST
   exits:
@@ -456,7 +456,7 @@
   exits:
     "Termina Field": "true"
   locations:
-    "Termina Field Scrub": "event(SCRUB_TELESCOPE) && has(WALLET) && has_rupees"
+    "Termina Field Scrub": "event(SCRUB_TELESCOPE) && can_use_wallet(2)"
 "Termina Field Cow Grotto":
   region: TERMINA_FIELD
   events:
@@ -550,7 +550,7 @@
     MUSHROOM: "has_bottle && has(MASK_SCENTS)"
     WATER: "has_bottle"
     PICTURE_TINGLE: "has(PICTOGRAPH_BOX)"
-    #TINGLE_SWAMP: "has_weapon_range && has_rupees"
+    #TINGLE_SWAMP: "has_weapon_range && can_use_wallet(1)"
   exits:
     "Swamp Front": "true"
     "Termina Field": "true"
@@ -565,8 +565,8 @@
   exits:
     "Road to Southern Swamp": "true"
   locations:
-    "Swamp Archery Reward 1": "has(BOW) && has_rupees && (before(NIGHT1_PM_10_00) || (after(DAY2_AM_06_00) && before(NIGHT2_PM_10_00)) || (after(DAY3_AM_06_00) && before(NIGHT3_PM_10_00)))"
-    "Swamp Archery Reward 2": "has(BOW) && has_rupees && (before(NIGHT1_PM_10_00) || (after(DAY2_AM_06_00) && before(NIGHT2_PM_10_00)) || (after(DAY3_AM_06_00) && before(NIGHT3_PM_10_00)))"
+    "Swamp Archery Reward 1": "has(BOW) && can_use_wallet(1) && (before(NIGHT1_PM_10_00) || (after(DAY2_AM_06_00) && before(NIGHT2_PM_10_00)) || (after(DAY3_AM_06_00) && before(NIGHT3_PM_10_00)))"
+    "Swamp Archery Reward 2": "has(BOW) && can_use_wallet(1) && (before(NIGHT1_PM_10_00) || (after(DAY2_AM_06_00) && before(NIGHT2_PM_10_00)) || (after(DAY3_AM_06_00) && before(NIGHT3_PM_10_00)))"
 "Road to Southern Swamp Grotto":
   region: ROAD_TO_SWAMP
   events:
@@ -591,7 +591,7 @@
     "Swamp Potion Shop": "true"
     "Woods of Mystery": "true"
   events:
-    MAGIC_BEANS_SWAMP: "has(MAGIC_BEAN) && has(MASK_DEKU) && has_rupees"
+    MAGIC_BEANS_SWAMP: "has(MAGIC_BEAN) && has(MASK_DEKU) && can_use_wallet(1)"
     FROG_3: "has(MASK_DON_GERO)"
     SWAMP_OWL: "has(SONG_SOARING) && (has_sticks || has_weapon)"
     PICTURE_SWAMP: "has(PICTOGRAPH_BOX)"
@@ -605,7 +605,7 @@
   locations:
     "Southern Swamp HP": "(has(DEED_LAND) && has(MASK_DEKU)) || (trick(MM_SOUTHERN_SWAMP_SCRUB_HP_GORON) && has(MASK_GORON))"
     "Southern Swamp Scrub Deed": "has(DEED_LAND)"
-    #"Southern Swamp Scrub Purchase": "has(MASK_DEKU) && has_rupees"
+    #"Southern Swamp Scrub Purchase": "has(MASK_DEKU) && can_use_wallet(1)"
   gossip:
     "Southern Swamp Gossip": "true"
 "Swamp Back":
@@ -695,9 +695,9 @@
   exits:
     "Swamp Front": "true"
   locations:
-    "Swamp Potion Shop Item 1": "event(MUSHROOM) && has_rupees && (first_day || event(MEET_KOUME))"
-    "Swamp Potion Shop Item 2": "has_rupees && (first_day || event(MEET_KOUME))"
-    "Swamp Potion Shop Item 3": "has_rupees && (first_day || event(MEET_KOUME))"
+    "Swamp Potion Shop Item 1": "event(MUSHROOM) && can_use_wallet(1) && (first_day || event(MEET_KOUME))"
+    "Swamp Potion Shop Item 2": "can_use_wallet(1) && (first_day || event(MEET_KOUME))"
+    "Swamp Potion Shop Item 3": "can_use_wallet(1) && (first_day || event(MEET_KOUME))"
 "Deku Palace Front":
   region: DEKU_PALACE
   exits:
@@ -749,7 +749,7 @@
   exits:
     "Deku Palace Main": "true"
   events:
-    MAGIC_BEANS_PALACE: "has_rupees"
+    MAGIC_BEANS_PALACE: "can_use_wallet(1)"
     ARROWS: "true"
     MAGIC: "true"
     RUPEES: "true"
@@ -757,7 +757,7 @@
   locations:
     "Deku Palace Grotto Chest": "can_use_beans || can_hookshot || (can_hookshot_short && trick(MM_SHORT_HOOK_HARD))"
 #    "Deku Palace Free Bean": "true"
-#    "Deku Palace Bean Purchase": "has_rupees"
+#    "Deku Palace Bean Purchase": "can_use_wallet(1)"
 "Deku Palace Cliff":
   region: DEKU_PALACE
   exits:
@@ -906,9 +906,9 @@
     "Mountain Village": "true"
   events:
     BLACKSMITH_ENABLED: "event(BOSS_SNOWHEAD) || can_use_fire_arrows || has_hot_water || has_hot_water_distance"
-    GOLD_DUST_USED: "has_rupees && has(WALLET) && has(BOTTLED_GOLD_DUST) && event(BLACKSMITH_ENABLED)"
+    GOLD_DUST_USED: "can_use_wallet(2) && has(BOTTLED_GOLD_DUST) && event(BLACKSMITH_ENABLED)"
   locations:
-    "Blacksmith Razor Blade": "has_rupees && event(BLACKSMITH_ENABLED) && has(WALLET)"
+    "Blacksmith Razor Blade": "can_use_wallet(2) && event(BLACKSMITH_ENABLED)"
     "Blacksmith Gilded Sword": "event(GOLD_DUST_USED)"
 "Twin Islands":
   region: TWIN_ISLANDS
@@ -916,7 +916,7 @@
     PICTURE_TINGLE: "has(PICTOGRAPH_BOX)"
     MAGIC: "true"
     RUPEES: "can_use_light_arrows || event(BOSS_SNOWHEAD)"
-#    TINGLE_MOUNTAIN: "has_weapon_range && has_rupees"
+#    TINGLE_MOUNTAIN: "has_weapon_range && can_use_wallet(1)"
   exits:
     "Mountain Village": "true"
     "Goron Village": "true"
@@ -975,7 +975,7 @@
     "Goron Shrine": "first_day || has(MASK_GORON)"
   events:
     POWDER_KEG_TRIAL: "(event(BOSS_SNOWHEAD) || can_use_fire_arrows) && has(MASK_GORON)"
-    BUY_KEG: "event(POWDER_KEG_TRIAL) && has(POWDER_KEG) && has(WALLET) && has_rupees"
+    BUY_KEG: "event(POWDER_KEG_TRIAL) && has(POWDER_KEG) && can_use_wallet(2)"
     MAGIC: "true"
     ARROWS: "true"
     BOMBS: "true"
@@ -985,8 +985,8 @@
   locations:
     "Goron Village HP": "has(DEED_SWAMP) && has(MASK_DEKU)"
     "Goron Village Scrub Deed": "has(DEED_SWAMP) && has(MASK_DEKU)"
-    "Goron Village Scrub Bomb Bag": "has(MASK_GORON) && has(WALLET)"
-#    "Goron Village Scrub Bomb Bag": "(has(MASK_GORON) || (has(MOON_TEAR) && has(DEED_LAND) && has(DEED_SWAMP))) && has(WALLET)"
+    "Goron Village Scrub Bomb Bag": "has(MASK_GORON) && can_use_wallet(2)"
+#    "Goron Village Scrub Bomb Bag": "(has(MASK_GORON) || (has(MOON_TEAR) && has(DEED_LAND) && has(DEED_SWAMP))) && can_use_wallet(2)"
     "Goron Powder Keg": "event(POWDER_KEG_TRIAL)"
 "Front of Lone Peak Shrine":
   region: GORON_VILLAGE
@@ -1039,9 +1039,9 @@
   exits:
     "Goron Shrine": "true"
   locations:
-    "Goron Shop Item 1": "has_rupees"
-    "Goron Shop Item 2": "has_rupees"
-    "Goron Shop Item 3": "has_rupees"
+    "Goron Shop Item 1": "can_use_wallet(1)"
+    "Goron Shop Item 2": "can_use_wallet(1)"
+    "Goron Shop Item 3": "can_use_wallet(1)"
 "Path to Snowhead Front":
   region: PATH_TO_SNOWHEAD
   exits:
@@ -1340,9 +1340,9 @@
     "Milk Road Front": "true"
     "Gorman Track Back": "(can_goron_bomb_jump && has_bombs) || (is_night2 && event(ALIENS))"
   events:
-    MILK: "has_rupees && is_day"
+    MILK: "can_use_wallet(1) && is_day"
   locations:
-    "Gorman Track Garo Mask": "can_play(SONG_EPONA) && has_rupees && is_day"
+    "Gorman Track Garo Mask": "can_play(SONG_EPONA) && can_use_wallet(1) && is_day"
 "Gorman Track Back":
   region: MILK_ROAD
   exits:
@@ -1415,13 +1415,13 @@
     "Sakon Hideout": "event(MEET_KAFEI) && at(NIGHT3_PM_06_00)"
     "Swamp Front": "true"
   events:
-    BLUE_POTION: "has_bottle && has(WALLET)"
+    BLUE_POTION: "has_bottle && can_use_wallet(2)"
     STICKS: "true"
     NUTS: "true"
   locations:
     "Ikana Valley Scrub Rupee": "has(DEED_OCEAN) && has(MASK_ZORA)"
     "Ikana Valley Scrub HP": "has(DEED_OCEAN) && has(MASK_ZORA) && has(MASK_DEKU)"
-    #"Ikana Valley Scrub Purchase": "has(WALLET)"
+    #"Ikana Valley Scrub Purchase": "can_use_wallet(2)"
     "Ikana Valley Grotto": "true"
   gossip:
     "Ikana Valley Gossip Lower": "true"

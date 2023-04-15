@@ -86,3 +86,7 @@
 "can_collect_ageless": "has(HOOKSHOT) && has(BOOMERANG)"
 "has_small_keys_fire(x)": "cond(setting(smallKeyShuffle, anywhere), has(SMALL_KEY_FIRE, x + 1), has(SMALL_KEY_FIRE, x))"
 "king_zora_moved": "event(KING_ZORA_LETTER) || setting(zoraKing, open) || (setting(zoraKing, adult) && is_adult)"
+
+# Wallets
+"has_wallet(n)": "cond(setting(childWallets), has(WALLET, n), has(WALLET, n - 1))"
+"can_use_wallet(n)": "has_rupees && has_wallet(n)"

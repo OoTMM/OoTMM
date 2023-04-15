@@ -9,11 +9,11 @@
     "Ganon Castle Shadow": "true"
     "Ganon Castle Tower": "true"
   locations:
-    "MQ Ganon Castle Leftmost Scrub": "has_lens && can_hit_scrub && has_rupees"
-    "MQ Ganon Castle Left-Center Scrub": "has_lens && can_hit_scrub && has_rupees"
-    "MQ Ganon Castle Center Scrub": "has_lens && can_hit_scrub && has_rupees"
-    "MQ Ganon Castle Right-Center Scrub": "has_lens && can_hit_scrub && has_rupees"
-    "MQ Ganon Castle Rightmost Scrub": "has_lens && can_hit_scrub && has_rupees"
+    "MQ Ganon Castle Leftmost Scrub": "has_lens && can_hit_scrub && can_use_wallet(1)"
+    "MQ Ganon Castle Left-Center Scrub": "has_lens && can_hit_scrub && can_use_wallet(1)"
+    "MQ Ganon Castle Center Scrub": "has_lens && can_hit_scrub && can_use_wallet(1)"
+    "MQ Ganon Castle Right-Center Scrub": "has_lens && can_hit_scrub && can_use_wallet(1)"
+    "MQ Ganon Castle Rightmost Scrub": "has_lens && can_hit_scrub && can_use_wallet(1)"
 "Ganon Castle Light":
   dungeon: Ganon
   events:
