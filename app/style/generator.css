@@ -40,3 +40,7 @@
 .file-select-box.empty img {
   filter: grayscale(100%);
 }
+
+.settings-string {
+  min-height: 10em;
+}

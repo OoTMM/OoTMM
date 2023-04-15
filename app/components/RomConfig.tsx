@@ -4,6 +4,7 @@ import { Checkbox } from './Checkbox';
 
 import { FileSelect } from './FileSelect';
 import { PresetSelector } from './PresetSelector';
+import { SettingsImportExport } from './SettingsImportExport';
 
 export function RomConfig() {
   const { romConfig, setFile, setSeed } = useRomConfig();
@@ -20,7 +21,10 @@ export function RomConfig() {
         <FileSelect logo="mm" label="Majora's Mask (U only)" accept=".z64, .n64, .v64" file={romConfig.files.mm} onChange={(f) => setFile('mm', f)} />
         {isPatch && <FileSelect logo="ootmm" label="OoTMM Patch File" accept=".ootmm" file={romConfig.files.patch} onChange={(f) => setFile('patch', f)}/>}
       </div>
-      {!isPatch && <PresetSelector/>}
+      {!isPatch && <>
+        <PresetSelector/>
+        <SettingsImportExport/>
+      </>}
       <Checkbox label="Use a patch file" checked={isPatch} onChange={setIsPatch}/>
       {!isPatch && <label>
         Seed (leave blank to auto-generate)
