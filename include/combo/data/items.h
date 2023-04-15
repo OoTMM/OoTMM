@@ -458,5 +458,7 @@
 #define SITEM_RECOVERY_HEART    0x1a
 #define SITEM_DEFENSE_UPGRADE   0x1b
 #define SITEM_SONG_SUN          0x1c
+#define SITEM_WALLET            0x1d
+#define SITEM_WALLET4           0x1e
 
 #endif

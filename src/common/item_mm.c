@@ -210,7 +210,7 @@ static void addRupees(s16 count)
 {
     u16 max;
 
-    max = kMaxRupees[gMmSave.inventory.upgrades.wallet];
+    max = gMaxRupees[gMmSave.inventory.upgrades.wallet];
     gMmSave.playerData.rupees += count;
     if (gMmSave.playerData.rupees > max)
         gMmSave.playerData.rupees = max;
@@ -218,7 +218,13 @@ static void addRupees(s16 count)
 
 static void addWallet(int index, int noEffect)
 {
-    gMmSave.inventory.upgrades.wallet = index;
+    if (index == 0)
+    {
+        gMmExtraFlags2.childWallet = 1;
+        gMmMaxRupees[0] = 99;
+    }
+    else
+        gMmSave.inventory.upgrades.wallet = index;
     if (!noEffect && comboConfig(CFG_FILL_WALLETS))
         addRupees(999);
 }
@@ -363,11 +369,17 @@ void comboAddCommonItemMm(int sid, int noEffect)
     case SITEM_MASK_ZORA:
         gMmSave.inventory.items[ITS_MM_MASK_ZORA] = ITEM_MM_MASK_ZORA;
         break;
+    case SITEM_WALLET:
+        addWallet(0, noEffect);
+        break;
     case SITEM_WALLET2:
         addWallet(1, noEffect);
         break;
     case SITEM_WALLET3:
         addWallet(2, noEffect);
+        break;
+    case SITEM_WALLET4:
+        addWallet(3, noEffect);
         break;
     case SITEM_RUPEE_GREEN:
         if (noEffect)
@@ -609,11 +621,17 @@ void comboAddItemSharedMm(s16 gi, int noEffect)
     {
         switch (gi)
         {
+        case GI_MM_WALLET:
+            comboAddCommonItemOot(SITEM_WALLET, noEffect);
+            break;
         case GI_MM_WALLET2:
             comboAddCommonItemOot(SITEM_WALLET2, noEffect);
             break;
         case GI_MM_WALLET3:
             comboAddCommonItemOot(SITEM_WALLET3, noEffect);
+            break;
+        case GI_MM_WALLET4:
+            comboAddCommonItemOot(SITEM_WALLET4, noEffect);
             break;
         case GI_MM_RUPEE_GREEN:
             comboAddCommonItemOot(SITEM_RUPEE_GREEN, noEffect);
@@ -929,11 +947,17 @@ int comboAddItemMm(s16 gi, int noEffect)
     case GI_MM_QUIVER3:
         comboAddQuiverMm(3);
         break;
+    case GI_MM_WALLET:
+        comboAddCommonItemMm(SITEM_WALLET, noEffect);
+        break;
     case GI_MM_WALLET2:
         comboAddCommonItemMm(SITEM_WALLET2, noEffect);
         break;
     case GI_MM_WALLET3:
         comboAddCommonItemMm(SITEM_WALLET3, noEffect);
+        break;
+    case GI_MM_WALLET4:
+        comboAddCommonItemMm(SITEM_WALLET4, noEffect);
         break;
     case GI_MM_GS_TOKEN_SWAMP:
         count = ++gMmSave.skullCountSwamp;

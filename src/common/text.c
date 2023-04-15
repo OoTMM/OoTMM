@@ -195,8 +195,10 @@ static int isItemAmbiguousOot(s16 gi)
     case GI_OOT_MASK_ZORA:
     case GI_OOT_MASK_TRUTH:
         return !comboConfig(CFG_SHARED_MASKS);
+    case GI_OOT_WALLET:
     case GI_OOT_WALLET2:
     case GI_OOT_WALLET3:
+    case GI_OOT_WALLET4:
     case GI_OOT_RUPEE_GREEN:
     case GI_OOT_RUPEE_BLUE:
     case GI_OOT_RUPEE_RED:
@@ -287,8 +289,10 @@ static int isItemAmbiguousMm(s16 gi)
     case GI_MM_MASK_BUNNY:
     case GI_MM_MASK_KEATON:
         return !comboConfig(CFG_SHARED_MASKS);
+    case GI_MM_WALLET:
     case GI_MM_WALLET2:
     case GI_MM_WALLET3:
+    case GI_MM_WALLET4:
     case GI_MM_RUPEE_GREEN:
     case GI_MM_RUPEE_BLUE:
     case GI_MM_RUPEE_RED:
@@ -527,8 +531,8 @@ void comboTextAppendItemName(char** b, s16 gi, int flags)
             itemName = "a " C1 "Progressive Hookshot";
             ambiguous = !comboConfig(CFG_SHARED_HOOKSHOT);
             break;
-        case GI_OOT_WALLET2:
-        case GI_MM_WALLET2 | MASK_FOREIGN_GI:
+        case GI_OOT_WALLET:
+        case GI_MM_WALLET | MASK_FOREIGN_GI:
             itemName = "a " C1 "Progressive Wallet";
             ambiguous = !comboConfig(CFG_SHARED_WALLETS);
             break;

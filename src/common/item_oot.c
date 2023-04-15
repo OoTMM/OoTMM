@@ -256,7 +256,7 @@ static void addRupees(u16 count)
 {
     u16 max;
 
-    max = kMaxRupees[gOotSave.inventory.upgrades.wallet];
+    max = gMaxRupees[gOotSave.inventory.upgrades.wallet];
     gOotSave.playerData.rupees += count;
     if (gOotSave.playerData.rupees > max)
         gOotSave.playerData.rupees = max;
@@ -264,6 +264,11 @@ static void addRupees(u16 count)
 
 static void addWallet(int index, int noEffect)
 {
+    if (index == 0)
+    {
+        gOotExtraFlags.childWallet = 1;
+        gOotMaxRupees[0] = 99;
+    }
     gOotSave.inventory.upgrades.wallet = index;
     if (!noEffect && comboConfig(CFG_FILL_WALLETS))
         addRupees(999);
@@ -369,11 +374,17 @@ void comboAddCommonItemOot(int sid, int noEffect)
     case SITEM_MASK_TRUTH:
         addTradeChild(10);
         break;
+    case SITEM_WALLET:
+        addWallet(0, noEffect);
+        break;
     case SITEM_WALLET2:
         addWallet(1, noEffect);
         break;
     case SITEM_WALLET3:
         addWallet(2, noEffect);
+        break;
+    case SITEM_WALLET4:
+        addWallet(3, noEffect);
         break;
     case SITEM_RUPEE_GREEN:
         if (noEffect)
@@ -631,11 +642,17 @@ void comboAddItemSharedOot(s16 gi, int noEffect)
     {
         switch (gi)
         {
+        case GI_OOT_WALLET:
+            comboAddCommonItemMm(SITEM_WALLET, noEffect);
+            break;
         case GI_OOT_WALLET2:
             comboAddCommonItemMm(SITEM_WALLET2, noEffect);
             break;
         case GI_OOT_WALLET3:
             comboAddCommonItemMm(SITEM_WALLET3, noEffect);
+            break;
+        case GI_OOT_WALLET4:
+            comboAddCommonItemMm(SITEM_WALLET4, noEffect);
             break;
         case GI_OOT_RUPEE_GREEN:
         case GI_OOT_TC_RUPEE_GREEN:
@@ -910,11 +927,17 @@ int comboAddItemOot(s16 gi, int noEffect)
     case GI_OOT_BOMB_BAG3:
         comboAddBombBagOot(3);
         break;
+    case GI_OOT_WALLET:
+        comboAddCommonItemOot(SITEM_WALLET, noEffect);
+        break;
     case GI_OOT_WALLET2:
         comboAddCommonItemOot(SITEM_WALLET2, noEffect);
         break;
     case GI_OOT_WALLET3:
         comboAddCommonItemOot(SITEM_WALLET3, noEffect);
+        break;
+    case GI_OOT_WALLET4:
+        comboAddCommonItemOot(SITEM_WALLET4, noEffect);
         break;
     case GI_OOT_MAGIC_UPGRADE:
         comboAddMagicUpgradeOot(1);

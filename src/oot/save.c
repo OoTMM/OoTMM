@@ -65,6 +65,8 @@ void Sram_AfterOpenSave(void)
     gSave.entrance = DEBUG_OOT_ENTRANCE;
 #endif
 
+    comboOnSaveLoad();
+
     /* Dungeon shuffle override */
     dungeonRespawn(gSave.sceneId);
 

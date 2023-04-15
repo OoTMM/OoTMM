@@ -9,6 +9,12 @@ ALIGNED(16) OotSave gOotSave;
 ALIGNED(16) MmSave gMmSave;
 #endif
 
+void comboOnSaveLoad(void)
+{
+    gOotMaxRupees[0] = gOotExtraFlags.childWallet ? 99 : 0;
+    gMmMaxRupees[0] = gMmExtraFlags2.childWallet ? 99 : 0;
+}
+
 static u16 computeChecksumOot(void* data, int len)
 {
     u16 checksum;

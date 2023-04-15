@@ -187,3 +187,5 @@ X(ITEM_CUSTOM,              0x80,  DRAWGI_COMPASS,                      0x67, 0x
 X(ITEM_CUSTOM,              0x80,  DRAWGI_COMPASS,                      0x67, 0x00b8, "the " C0 "Compass (Shadow)"),
 X(ITEM_CUSTOM,              0x80,  DRAWGI_COMPASS,                      0x67, 0x00b8, "the " C0 "Compass (Well)"),
 X(ITEM_CUSTOM,              0x80,  DRAWGI_COMPASS,                      0x67, 0x00b8, "the " C0 "Compass (Ice)"),
+X(ITEM_CUSTOM,              0x80,  DRAWGI_WALLET2,                      0x5e, 0x00d1, "the " C1 "Child's Wallet"),
+X(ITEM_CUSTOM,              0x80,  DRAWGI_WALLET3,                      0x5f, 0x00d1, "the " C1 "Colossal Wallet"),

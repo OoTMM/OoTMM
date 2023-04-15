@@ -6,12 +6,23 @@
 
 typedef struct GameState_Play GameState_Play;
 
+extern u16 gMaxRupees[];
+
+#if defined(GAME_OOT)
+# define gOotMaxRupees gMaxRupees
+extern u16 gMmMaxRupees[];
+#endif
+
+#if defined(GAME_MM)
+# define gMmMaxRupees gMaxRupees
+extern u16 gOotMaxRupees[];
+#endif
+
 extern const u8 kMaxSticks[];
 extern const u8 kMaxNuts[];
 extern const u8 kMaxBombs[];
 extern const u8 kMaxArrows[];
 extern const u8 kMaxSeeds[];
-extern const u16 kMaxRupees[];
 extern const u8 kOotTradeChild[];
 extern const u8 kOotTradeAdult[];
 extern const u8 kMmTrade1[];

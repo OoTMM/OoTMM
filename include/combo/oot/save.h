@@ -254,7 +254,8 @@ typedef struct
     u32 tunicZora:1;
     u32 fireArrow:1;
     u32 ganonBossKey:1;
-    u32 unused:18;
+    u32 childWallet:1;
+    u32 unused:17;
 }
 OotExtraFlags;
 
