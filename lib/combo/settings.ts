@@ -603,6 +603,8 @@ export const TRICKS = {
   OOT_LAB_DIVE_NO_GOLD_SCALE: "Laboratory Dive without Gold Scale",
   OOT_LAB_WALL_GS: "Laboratory Wall GS with Jump Slash",
   OOT_PASS_COLLISION: "Pass through Visible One-Way Collisions",
+  OOT_DMT_RED_ROCK_GS: "DMT Red Rock Skulls without Hammer",
+  OOT_DEAD_HAND_STICKS: "Child Dead Hand without Kokiri Sword",
   MM_LENS: "Fewer Lens Requirements (MM)",
   MM_PALACE_BEAN_SKIP: "Skip Planting Beans in Deku Palace",
   MM_DARMANI_WALL: "Climb Mountain Village Wall Blind",
@@ -626,6 +628,7 @@ export const TRICKS = {
   MM_SOUTHERN_SWAMP_SCRUB_HP_GORON: "Southern Swamp Scrub HP as Goron",
   MM_ZORA_HALL_SCRUB_HP_NO_DEKU: "Zora Hall Scrub HP without Deku",
   MM_IKANA_ROOF_PARKOUR: "Jump from Ikana Castle's Roof Interior to Exterior",
+  MM_POST_OFFICE_GAME: "Post Office Timing Game without Bunny Hood",
 };
 
 export type Tricks = {[k in keyof typeof TRICKS]: boolean};

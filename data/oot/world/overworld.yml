@@ -841,7 +841,7 @@
     "Death Mountain HP": "true"
     "Death Mountain GS Entrance": "has_explosives_or_hammer"
     "Death Mountain GS Soil": "gs_soil && has_bombflowers && can_damage_skull"
-    "Death Mountain GS Above Dodongo":  "gs_night && can_hammer"
+    "Death Mountain GS Above Dodongo":  "gs_night && (can_hammer || trick(OOT_DMT_RED_ROCK_GS))"
 "Death Mountain Summit":
   region: DEATH_MOUNTAIN_TRAIL
   time: flow
@@ -857,7 +857,7 @@
     "Death Mountain Prescription": "adult_trade(BROKEN_GORON_SWORD)"
     "Death Mountain Claim Check": "adult_trade(EYE_DROPS)"
     "Death Mountain Biggoron Sword": "adult_trade(CLAIM_CHECK)"
-    "Death Mountain GS Before Climb": "gs_night && can_hammer"
+    "Death Mountain GS Before Climb": "gs_night && (can_hammer || trick(OOT_DMT_RED_ROCK_GS))"
   gossip:
     "Death Mountain Gossip on Climb": "true"
 "Death Mountain Storms Grotto":

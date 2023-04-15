@@ -231,7 +231,7 @@
   events:
     POSTMAN_FREEDOM: "has(LETTER_TO_MAMA) && is_night3"
   locations:
-    "Post Office HP": "has(MASK_BUNNY) && ((after(DAY1_PM_03_00) && before(NIGHT1_AM_12_00)) || (event(MAIL_LETTER) && after(NIGHT2_PM_06_00) && before(NIGHT2_AM_12_00)))"
+    "Post Office HP": "(has(MASK_BUNNY) || trick(MM_POST_OFFICE_GAME)) && ((after(DAY1_PM_03_00) && before(NIGHT1_AM_12_00)) || (event(MAIL_LETTER) && after(NIGHT2_PM_06_00) && before(NIGHT2_AM_12_00)))"
 "Swordsman School":
   region: CLOCK_TOWN_WEST
   exits:
