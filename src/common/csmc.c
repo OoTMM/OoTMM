@@ -258,6 +258,7 @@ static int csmcFromItemMm(s16 gi)
     case GI_MM_SONG_STORMS:
     case GI_MM_SONG_EMPTINESS:
     case GI_MM_SONG_ORDER:
+    case GI_MM_SONG_SUN:
     case GI_MM_BOW:
     case GI_MM_QUIVER2:
     case GI_MM_QUIVER3:
