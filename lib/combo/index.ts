@@ -9,6 +9,8 @@ import { itemName } from './names';
 import { isDungeonItem, isItemUnlimitedStarting, isJunk, isStrayFairy, isToken, Items } from './logic/items';
 import { isShuffled } from './logic/is-shuffled';
 
+export { Presets, PRESETS } from './presets';
+
 export type GeneratorParams = {
   oot: Buffer,
   mm: Buffer,
