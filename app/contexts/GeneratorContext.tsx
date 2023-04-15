@@ -1,6 +1,5 @@
 import React, { createContext, useContext, useState } from 'react';
-import { GeneratorOutput, Items, Settings, itemPool, OptionsInput } from '@ootmm/core';
-import { merge } from 'lodash';
+import { GeneratorOutput, Items, Settings, itemPool, OptionsInput, mergeSettings } from '@ootmm/core';
 import { Buffer } from 'buffer';
 
 import * as API from '../api';
@@ -32,6 +31,7 @@ type GeneratorContext = {
   setSeed: (seed: string) => void;
   setIsPatch: (isPatch: boolean) => void;
   setSettings: (settings: Partial<Settings>) => Settings;
+  overrideSettings: (settings: Settings) => Settings;
 }
 
 export const GeneratorContext = createContext<GeneratorContext>(null as any);
@@ -61,14 +61,6 @@ function createState(): GeneratorState {
   };
 }
 
-function mergeSettings(oldSettings: Settings, newSettings: Partial<Settings>): Settings {
-  const settings = merge({}, oldSettings, newSettings);
-  if (newSettings.junkLocations) {
-    settings.junkLocations = [...newSettings.junkLocations];
-  }
-  return settings;
-}
-
 export function GeneratorContextProvider({ children }: { children: React.ReactNode }) {
   const [state, setState] = useState(createState);
 
@@ -90,8 +82,13 @@ export function GeneratorContextProvider({ children }: { children: React.ReactNo
     return newSettings;
   };
 
+  const overrideSettings = (settings: Settings) => {
+    setState({ ...state, settings });
+    return settings;
+  };
+
   return (
-    <GeneratorContext.Provider value={{ state, setState, setFile, setSeed, setIsPatch, setSettings }}>
+    <GeneratorContext.Provider value={{ state, setState, setFile, setSeed, setIsPatch, setSettings, overrideSettings }}>
       {children}
     </GeneratorContext.Provider>
   );
@@ -150,6 +147,11 @@ export function useSettings() {
     });
   };
   return [ctx.state.settings, setSettings] as const;
+}
+
+export function useOverrideSettings() {
+  const ctx = useContext(GeneratorContext);
+  return ctx.overrideSettings;
 }
 
 export function useItemPool() {

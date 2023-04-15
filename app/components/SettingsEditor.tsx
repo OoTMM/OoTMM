@@ -54,9 +54,9 @@ export function SettingsEditor({ category }: SettingsEditorProps) {
   return (
     <>
       <SettingsPanel category={category}/>
-      {subcategories.map(sub => <div className='settings-group'>
+      {subcategories.map(sub => <div key={sub.key} className='settings-group'>
         <h2>{sub.name}</h2>
-        <SettingsPanel key={sub.key} category={`${category}.${sub.key}`}/>
+        <SettingsPanel category={`${category}.${sub.key}`}/>
       </div>)}
     </>
   )
