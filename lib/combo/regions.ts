@@ -75,9 +75,10 @@ const MM_REGION_NAMES: {[k: string]: string} = {
   'MM_IKANA_CASTLE': 'Ikana Castle',
   'MM_BENEATH_THE_WELL': 'Beneath the Well',
   'MM_SECRET_SHRINE': 'Secret Shrine',
+  'MM_MOON': 'The Moon',
   'MM_SPIDER_HOUSE_SWAMP': 'Swamp Spider House',
   'MM_SPIDER_HOUSE_OCEAN': 'Ocean Spider House',
-  'MM_MOON': 'The Moon'
+  'MM_TINGLE': 'Tingle',
 }
 
 export const regionName = (region: string) => OOT_REGION_NAMES[region] ?? MM_REGION_NAMES[region] ?? region;

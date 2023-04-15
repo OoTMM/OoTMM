@@ -1112,7 +1112,7 @@ int comboAddItemMm(s16 gi, int noEffect)
     case GI_MM_COMPASS_ST:
         comboAddCompassMm(3);
         break;
-    case GI_MM_WORLD_MAP_CLOCKTOWN:
+    case GI_MM_WORLD_MAP_CLOCK_TOWN:
         Inventory_SetWorldMapCloudVisibility(TINGLE_MAP_CLOCK_TOWN);
         break;
     case GI_MM_WORLD_MAP_WOODFALL:

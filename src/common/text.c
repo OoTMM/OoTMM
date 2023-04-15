@@ -105,6 +105,7 @@ const RegionName kRegionNamesMm[] = {
     { "on",         "the " TEXT_COLOR_RED "Moon" },
     { "in",         "the " TEXT_COLOR_GREEN "Swamp Spider House" },
     { "in",         "the " TEXT_COLOR_BLUE "Ocean Spider House" },
+    { "from",       TEXT_COLOR_GREEN "Tingle" },
 };
 
 static const char* const kCheckNamesOot[] = {
