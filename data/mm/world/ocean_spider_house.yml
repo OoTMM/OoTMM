@@ -1,23 +1,24 @@
 "Ocean Spider House":
   dungeon: OSH
   exits:
-    "Ocean Spider House Front": "can_reset_time"
+    "Ocean Spider House Front": "(can_play(SONG_TIME) || ((has(MASK_GORON) || can_warp) && event(MAJORA) && trick(MM_MAJORA_LOGIC))) && (has_explosives || trick_keg_explosives)"
     "Great Bay Coast": "true"
   locations:
     "Ocean Spider House Wallet": "has(GS_TOKEN_OCEAN, 30)"
 "Ocean Spider House Front":
   dungeon: OSH
+  events:
+    MAGIC: "has(MASK_GORON) || can_warp"
+    ARROWS: "has(MASK_GORON) || can_warp"
   exits:
     "Ocean Spider House": "true"
-    "Ocean Spider House Back": "(has_explosives || trick_keg_explosives) && (can_hookshot_short || can_goron_bomb_jump)"
+    "Ocean Spider House Back": "can_hookshot_short || can_goron_bomb_jump"
   locations:
-    "Ocean Skulltula Entrance Right Wall": "(has_explosives || trick_keg_explosives) && can_hookshot_short"
-    "Ocean Skulltula Entrance Left Wall": "(has_explosives || trick_keg_explosives) && can_hookshot_short"
-    "Ocean Skulltula Entrance Web": "(has_explosives || trick_keg_explosives) && (can_hookshot_short || (can_use_fire_arrows && has(MASK_ZORA)))"
+    "Ocean Skulltula Entrance Right Wall": "can_hookshot_short"
+    "Ocean Skulltula Entrance Left Wall": "can_hookshot_short"
+    "Ocean Skulltula Entrance Web": "can_hookshot_short || (can_use_fire_arrows && has(MASK_ZORA))"
 "Ocean Spider House Back":
   dungeon: OSH
-  exits:
-    "Ocean Spider House": "has(MASK_GORON) || can_play(SONG_SOARING)"
   locations:
     "Ocean Skulltula 2nd Room Ceiling Edge": "can_hookshot_short || has(MASK_ZORA)"
     "Ocean Skulltula 2nd Room Ceiling Plank": "can_hookshot_short || has(MASK_ZORA)"

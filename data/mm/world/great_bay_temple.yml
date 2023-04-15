@@ -1,10 +1,14 @@
 "Great Bay Temple":
   dungeon: GB
   exits:
-    "Great Bay Temple Entrance": "can_play(SONG_TIME)"
+    "Great Bay Temple Entrance": "can_play(SONG_TIME) || ((can_hookshot || can_oot_warp) && event(MAJORA) && trick(MM_MAJORA_LOGIC))"
     "Zora Cape Peninsula": "can_hookshot"
 "Great Bay Temple Entrance":
   dungeon: GB
+  events:
+    ARROWS: "can_hookshot"
+    BOMBS: "can_hookshot"
+    RUPEES: "can_hookshot"
   exits:
     "Great Bay Temple Entrance": "true"
     "Great Bay Temple Water Wheel": "true"
@@ -34,6 +38,8 @@
     "Great Bay Temple SF Central Room Underwater Pot": "has(MASK_ZORA) || (has(BOW) && has(MASK_GREAT_FAIRY))"
 "Great Bay Temple Map Room":
   dungeon: GB
+  events:
+    MAGIC: "true"
   exits:
     "Great Bay Temple Baba Room": "true"
     "Great Bay Temple Red Pipe 2": "can_use_ice_arrows"
@@ -48,6 +54,8 @@
     "Great Bay Temple Baba Chest": "true"
 "Great Bay Temple Compass Room":
   dungeon: GB
+  events:
+    MAGIC: "true"
   exits:
     "Great Bay Temple Baba Room": "true"
     "Great Bay Temple Central Room": "true"
@@ -65,6 +73,8 @@
     GB_PIPE_RED: "can_use_ice_arrows"
 "Great Bay Temple Ice Arrow Room":
   dungeon: GB
+  events:
+    MAGIC: "has_weapon || has(MASK_ZORA) || has(MASK_DEKU) || has_explosives"
   exits:
     "Great Bay Temple Red Pipe 1": "true"
   locations:
@@ -75,6 +85,7 @@
     "Great Bay Temple Map Room": "true"
   events:
     GB_PIPE_RED2: "can_use_ice_arrows"
+    MAGIC: "true"
 "Great Bay Temple Boss Key Room":
   dungeon: GB
   exits:
