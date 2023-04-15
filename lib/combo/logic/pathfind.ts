@@ -213,9 +213,6 @@ export class Pathfinder {
     const previousAreaData = this.state.areas[age].get(area);
     const newAreaData = previousAreaData ? mergeAreaData(previousAreaData, sourceAreaData) : sourceAreaData;
     const worldArea = this.world.areas[area];
-    if (!worldArea) {
-      throw new Error(`Area ${area} not found`);
-    }
     if (worldArea.game === 'oot') {
       if (['day', 'flow'].includes(worldArea.time)) {
         newAreaData.oot.day = true;
