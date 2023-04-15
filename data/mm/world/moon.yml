@@ -1,13 +1,13 @@
 "Moon":
   region: MOON
   exits:
-    "Moon Trial Deku Entrance":  "masks(1)"
-    "Moon Trial Goron Entrance": "masks(2)"
-    "Moon Trial Zora":  "masks(3)"
-    "Moon Trial Link Entrance":  "masks(4)"
+    "Moon Trial Deku Entrance":  "can_reset_time && masks(1)"
+    "Moon Trial Goron Entrance": "can_reset_time && masks(2)"
+    "Moon Trial Zora": "can_reset_time && masks(3)"
+    "Moon Trial Link Entrance": "can_reset_time && masks(4)"
     "Moon Boss": "true"
   locations:
-    "Moon Fierce Deity Mask": "masks(20) && event(MOON_TRIAL_DEKU) && event(MOON_TRIAL_GORON) && event(MOON_TRIAL_ZORA) && event(MOON_TRIAL_LINK)"
+    "Moon Fierce Deity Mask": "can_reset_time && masks(20) && event(MOON_TRIAL_DEKU) && event(MOON_TRIAL_GORON) && event(MOON_TRIAL_ZORA) && event(MOON_TRIAL_LINK)"
 "Moon Trial Deku Entrance":
   region: MOON
   exits:

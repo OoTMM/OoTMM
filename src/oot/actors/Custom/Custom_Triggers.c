@@ -139,6 +139,16 @@ static void CustomTriggers_CheckTrigger(Actor_CustomTriggers* this, GameState_Pl
 
 static void CustomTriggers_Update(Actor_CustomTriggers* this, GameState_Play* play)
 {
+    /* Always be near link */
+    Actor_Player* link;
+    link = GET_LINK(play);
+    if (link)
+    {
+        this->base.position.x = link->base.position.x;
+        this->base.position.y = link->base.position.y;
+        this->base.position.z = link->base.position.z;
+    }
+
     if (this->trigger == TRIGGER_NONE)
         CustomTriggers_CheckTrigger(this, play);
     if (this->trigger != TRIGGER_NONE)

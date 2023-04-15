@@ -1,6 +1,8 @@
 import { Monitor } from '../monitor';
 import { Settings } from '../settings';
+import { exprTrue } from './expr';
 import { Items, addItem, ITEMS_MAPS, ITEMS_COMPASSES } from './items';
+import { LOCATIONS_ZELDA } from './locations';
 import { World } from './world';
 
 const EXTRA_ITEMS = [
@@ -91,7 +93,7 @@ export class LogicPassWorldTransform {
    * Setup the shared items.
    */
   private setupSharedItems() {
-    const { config } = this.state;
+    const { config, settings } = this.state;
     if (config.has('SHARED_BOWS')) {
       /* Bows and quivers */
       this.replaceItem('OOT_BOW', 'SHARED_BOW');
@@ -132,30 +134,44 @@ export class LogicPassWorldTransform {
       this.removeItem('SHARED_MAGIC_UPGRADE', 2);
     }
 
-    if (config.has('SHARED_MAGIC_ARROWS')) {
+    if (settings.sharedMagicArrowFire) {
       this.replaceItem('OOT_ARROW_FIRE',  'SHARED_ARROW_FIRE');
-      this.replaceItem('OOT_ARROW_ICE',   'SHARED_ARROW_ICE');
-      this.replaceItem('OOT_ARROW_LIGHT', 'SHARED_ARROW_LIGHT');
       this.replaceItem('MM_ARROW_FIRE',   'SHARED_ARROW_FIRE');
-      this.replaceItem('MM_ARROW_ICE',    'SHARED_ARROW_ICE');
-      this.replaceItem('MM_ARROW_LIGHT',  'SHARED_ARROW_LIGHT');
-
       this.removeItem('SHARED_ARROW_FIRE', 1);
+    }
+
+    if (settings.sharedMagicArrowIce) {
+      this.replaceItem('OOT_ARROW_ICE',   'SHARED_ARROW_ICE');
+      this.replaceItem('MM_ARROW_ICE',    'SHARED_ARROW_ICE');
       this.removeItem('SHARED_ARROW_ICE', 1);
+    }
+
+    if (settings.sharedMagicArrowLight) {
+      this.replaceItem('OOT_ARROW_LIGHT', 'SHARED_ARROW_LIGHT');
+      this.replaceItem('MM_ARROW_LIGHT',  'SHARED_ARROW_LIGHT');
       this.removeItem('SHARED_ARROW_LIGHT', 1);
     }
 
-    if (config.has('SHARED_SONGS')) {
-      this.replaceItem('OOT_SONG_TIME',    'SHARED_SONG_TIME');
+    if (settings.sharedSongEpona) {
       this.replaceItem('OOT_SONG_EPONA',   'SHARED_SONG_EPONA');
-      this.replaceItem('OOT_SONG_STORMS',  'SHARED_SONG_STORMS');
-      this.replaceItem('MM_SONG_TIME',     'SHARED_SONG_TIME');
       this.replaceItem('MM_SONG_EPONA',    'SHARED_SONG_EPONA');
-      this.replaceItem('MM_SONG_STORMS',   'SHARED_SONG_STORMS');
-
-      this.removeItem('SHARED_SONG_TIME', 1);
       this.removeItem('SHARED_SONG_EPONA', 1);
+    }
+
+    if (settings.sharedSongStorms) {
+      this.replaceItem('OOT_SONG_STORMS',  'SHARED_SONG_STORMS');
+      this.replaceItem('MM_SONG_STORMS',   'SHARED_SONG_STORMS');
       this.removeItem('SHARED_SONG_STORMS', 1);
+    }
+
+    if (settings.sharedSongTime) {
+      this.replaceItem('OOT_SONG_TIME',    'SHARED_SONG_TIME');
+      this.replaceItem('MM_SONG_TIME',     'SHARED_SONG_TIME');
+      this.removeItem('SHARED_SONG_TIME', 1);
+    }
+
+    if (settings.sharedSongSun && settings.sunSongMm) {
+      this.replaceItem('OOT_SONG_SUN', 'SHARED_SONG_SUN');
     }
 
     if (config.has('SHARED_NUTS_STICKS')) {
@@ -272,6 +288,7 @@ export class LogicPassWorldTransform {
   }
 
   run() {
+    const { settings } = this.state;
     this.state.monitor.log('Logic: World Transform');
 
     /* Make the basic item pool */
@@ -337,6 +354,26 @@ export class LogicPassWorldTransform {
     } else {
       this.removeItem('MM_SONG_GORON_HALF');
       this.state.world.songLocations.delete('MM Goron Baby');
+    }
+
+    /* Handle MM sun song */
+    if (settings.sunSongMm && !settings.sharedSongSun) {
+      this.addItem('MM_SONG_SUN');
+    }
+
+    /* Handle Skip Zelda */
+    if (this.state.settings.skipZelda) {
+      this.removeItem('OOT_CHICKEN');
+
+      for (const loc of LOCATIONS_ZELDA) {
+        this.state.world.areas['OOT SPAWN'].locations[loc] = exprTrue();
+        this.state.world.regions[loc] = 'NONE';
+      }
+    }
+
+    /* Handle open gate */
+    if (this.state.settings.kakarikoGate === 'open') {
+      this.removeItem('OOT_ZELDA_LETTER');
     }
 
     /* Handle fixed locations */

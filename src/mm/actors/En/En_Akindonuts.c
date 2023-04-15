@@ -6,6 +6,55 @@
 #define SCRUB_VALLEY    4
 #define SCRUB_BOMB_BAG  5
 
+static void EnAkindonuts_AlterMessageMountainIntro(GameState_Play* play)
+{
+    s16 gi;
+    char* b;
+    char* start;
+
+    gi = comboOverrideEx(OV_NPC, 0, NPC_MM_SCRUB_BOMB_BAG, GI_MM_BOMB_BAG3, 0);
+    b = play->textBuffer;
+    comboTextAppendHeader(&b);
+    start = b;
+    comboTextAppendStr(&b, "I sell ");
+    comboTextAppendItemName(&b, gi, TF_PREPOS | TF_PROGRESSIVE);
+    comboTextAppendStr(&b,
+        " but I'm focusing my marketing efforts on Gorons..."
+        TEXT_BB
+        "What I'd really like to do is go back home and do business where I'm surrounded by trees and grass."
+        TEXT_SIGNAL TEXT_END
+    );
+    comboTextAutoLineBreaks(start);
+}
+
+static void EnAkindonuts_AlterMessageMountainBuy(GameState_Play* play)
+{
+    s16 gi;
+    char* b;
+    char* start;
+
+    gi = comboOverrideEx(OV_NPC, 0, NPC_MM_SCRUB_BOMB_BAG, GI_MM_BOMB_BAG3, 0);
+    b = play->textBuffer;
+    comboTextAppendHeader(&b);
+    start = b;
+    comboTextAppendStr(&b, "I'll give you ");
+    comboTextAppendItemName(&b, gi, TF_PREPOS | TF_PROGRESSIVE);
+    comboTextAppendStr(&b, " for 200 Rupees!" TEXT_SIGNAL TEXT_END);
+    comboTextAutoLineBreaks(start);
+}
+
+static void EnAkindonuts_DisplayTextBox(GameState_Play* play, s16 messageId, Actor* this)
+{
+    PlayerDisplayTextBox(play, messageId, this);
+
+    if (messageId == 0x15f5)
+        EnAkindonuts_AlterMessageMountainIntro(play);
+    else if (messageId == 0x1600)
+        EnAkindonuts_AlterMessageMountainBuy(play);
+}
+
+PATCH_CALL(0x80bedb70, EnAkindonuts_DisplayTextBox);
+
 static u8 sScrubFlag;
 
 int EnAkindonuts_HasGivenItem(Actor* this)

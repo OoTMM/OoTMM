@@ -5,23 +5,25 @@ import { ExprParser } from './expr-parser';
 import { DATA_POOL, DATA_MACROS, DATA_WORLD, DATA_REGIONS, DATA_ENTRANCES } from '../data';
 import { Settings } from '../settings';
 import { Monitor } from '../monitor';
-import { isSong } from './items';
+import { isDungeonReward, isSong } from './items';
 
 export type ExprMap = {
   [k: string]: Expr;
 }
 
-type WorldArea = {
+export type WorldArea = {
+  game: Game;
   boss: boolean;
   dungeon: string | null;
   exits: ExprMap;
   events: ExprMap;
   locations: ExprMap;
   gossip: ExprMap;
+  time: 'still' | 'day' | 'night' | 'flow';
 };
 
 type WorldCheckNumeric = {
-  type: 'chest' | 'collectible' | 'gs' | 'sf' | 'cow' | 'shop';
+  type: 'chest' | 'collectible' | 'gs' | 'sf' | 'cow' | 'shop' | 'scrub';
   id: number;
 };
 
@@ -43,8 +45,10 @@ export type WorldGossip = {
 };
 
 export type WorldEntrance = {
+  type: 'boss' | 'dungeon' | 'overworld';
   from: string;
   to: string;
+  game: Game;
 };
 
 export type World = {
@@ -57,6 +61,7 @@ export type World = {
   entrances: WorldEntrance[];
   locations: Set<string>;
   songLocations: Set<string>;
+  warpLocations: Set<string>;
 };
 
 export const DUNGEONS_REGIONS: {[k: string]: string} = {
@@ -80,6 +85,11 @@ export const DUNGEONS_REGIONS: {[k: string]: string} = {
   IST: "MM_TEMPLE_STONE_TOWER",
   SSH: "MM_SPIDER_HOUSE_SWAMP",
   OSH: "MM_SPIDER_HOUSE_OCEAN",
+  BtW: "MM_BENEATH_THE_WELL",
+  ACoI: "MM_IKANA_CASTLE",
+  SS: "MM_SECRET_SHRINE",
+  BtWE: "MM_BENEATH_THE_WELL",
+  PF: "MM_PIRATE_FORTRESS_EXTERIOR",
 };
 
 const mapExprs = (exprParser: ExprParser, game: Game, char: string, data: any) => {
@@ -91,8 +101,14 @@ const mapExprs = (exprParser: ExprParser, game: Game, char: string, data: any) =
   return result;
 }
 
+export type ExprParsers = {
+  oot: ExprParser;
+  mm: ExprParser;
+}
+
 export class LogicPassWorld {
   private world: World;
+  private exprParsers: Partial<ExprParsers> = {};
 
   constructor(
     private readonly state: {
@@ -101,7 +117,18 @@ export class LogicPassWorld {
       mq: Set<string>;
     }
   ) {
-    this.world = { areas: {}, checks: {}, dungeons: {}, regions: {}, gossip: {}, checkHints: {}, entrances: [], songLocations: new Set(), locations: new Set() };
+    this.world = {
+      areas: {},
+      checks: {},
+      dungeons: {},
+      regions: {},
+      gossip: {},
+      checkHints: {},
+      entrances: [],
+      locations: new Set(),
+      songLocations: new Set(),
+      warpLocations: new Set(),
+    };
   }
 
   run() {
@@ -111,15 +138,13 @@ export class LogicPassWorld {
       this.loadGame(g);
     }
 
-    /* Create a special black-hole area */
-    this.world.areas["VOID"] = { boss: false, dungeon: null, exits: {}, events: {}, locations: {}, gossip: {} };
-
-    return { world: this.world };
+    return { world: this.world, exprParsers: this.exprParsers as ExprParsers };
   }
 
   private loadGame(game: Game) {
     /* Create the expr parser */
     const exprParser = new ExprParser(this.state.settings, game);
+    this.exprParsers[game] = exprParser;
     this.loadMacros(game, exprParser);
     this.loadAreas(game, exprParser);
     this.loadPool(game);
@@ -167,6 +192,7 @@ export class LogicPassWorld {
         const exits = mapExprs(exprParser, game, ' ', area.exits || {});
         const events = mapExprs(exprParser, game, '_', area.events || {});
         const gossip = mapExprs(exprParser, game, ' ', area.gossip || {});
+        const time = area.time || 'still';
 
         if (name === undefined) {
           throw new Error(`Area name is undefined`);
@@ -180,7 +206,7 @@ export class LogicPassWorld {
           throw new Error(`Unknown region ${region}`);
         }
 
-        this.world.areas[name] = { boss, dungeon, exits, events, locations, gossip };
+        this.world.areas[name] = { game, boss, dungeon, exits, events, locations, gossip, time };
 
         if (dungeon) {
           if (this.world.dungeons[dungeon] === undefined) {
@@ -228,6 +254,8 @@ export class LogicPassWorld {
 
       if (isSong(item)) {
         this.world.songLocations.add(location);
+      } else if (isDungeonReward(item)) {
+        this.world.warpLocations.add(location);
       }
     }
   }
@@ -236,7 +264,8 @@ export class LogicPassWorld {
     for (const record of DATA_ENTRANCES[game]) {
       const from = gameId(game, String(record.from), ' ');
       const to = gameId(game, String(record.to), ' ');
-      this.world.entrances.push({ from, to });
+      const type = String(record.type) as WorldEntrance['type'];
+      this.world.entrances.push({ from, to, type, game });
     }
   }
 }

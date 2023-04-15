@@ -36,6 +36,11 @@ void Sram_AfterOpenSave(void)
         if (gComboCtx.entrance != -1)
         {
             gSave.entranceIndex = gComboCtx.entrance;
+
+            if (comboConfig(CFG_ER_ANY))
+                g.initialEntrance = gComboCtx.entrance;
+            else
+                g.initialEntrance = 0xd800;
             gComboCtx.entrance = -1;
         }
 
@@ -62,7 +67,12 @@ void Sram_AfterOpenSave(void)
 
 void Sram_SaveEndOfCycleWrapper(GameState_Play* play)
 {
+    /* Re-enable time */
     gNoTimeFlow = 0;
+
+    /* Store a dummy scene/entrance in OoT (prevents reloading into a temple - could lead to softlocks) */
+    gOotSave.sceneId = SCE_OOT_TEMPLE_OF_TIME;
+    gOotSave.entrance = 0x05f4;
 
     Sram_SaveEndOfCycle(play);
 

@@ -6,7 +6,7 @@ import { World } from './world';
 import { Pathfinder, PathfinderState } from './pathfind';
 import { Monitor } from '../monitor';
 import { cloneDeep } from 'lodash';
-import { isLocationRenewable } from './helpers';
+import { isLocationRenewable } from './locations';
 
 const SIMPLE_DEPENDENCIES: {[k: string]: string[]} = {
   OOT_WEIRD_EGG: [
@@ -381,6 +381,9 @@ export class LogicPassAnalysis {
     this.dependencies['SHARED_MASK_TRUTH'] = [...this.dependencies['MM_MASK_TRUTH'], ...this.dependencies['OOT_MASK_TRUTH']];
     this.dependencies['SHARED_MASK_KEATON'] = [...this.dependencies['MM_MASK_KEATON']];
     this.dependencies['SHARED_MASK_BUNNY'] = [...this.dependencies['MM_MASK_BUNNY']];
+
+    if (this.dependencies.hasOwnProperty('OOT_SONG_SUN'))
+      this.dependencies['SHARED_SONG_SUN'] = [...this.dependencies['OOT_SONG_SUN']];
 
     const conds = Object.values(this.state.settings.specialConds);
     if (conds.some(x => x.count && x.skullsGold))  delete this.dependencies['OOT_GS_TOKEN'];

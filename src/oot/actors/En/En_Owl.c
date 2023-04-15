@@ -14,26 +14,23 @@ void EnOwl_AfterInit(Actor* this)
     }
 }
 
-static void EnOwl_StartCutscene(Actor* this, GameState_Play* play)
+static void EnOwl_StartCutscene(void)
 {
     TransitionContext* t;
 
-    if (this->xzDistanceFromLink < 50.f)
+    t = &gPlay->transition;
+    t->type = TRANS_TYPE_NORMAL;
+    t->gfx = TRANS_GFX_SHORTCUT;
+
+    switch (gPlay->sceneId)
     {
-        t = &play->transition;
-        t->type = TRANS_TYPE_NORMAL;
-        t->gfx = TRANS_GFX_SHORTCUT;
-        switch ((this->variable & 0xfc0) >> 6)
-        {
-        case 7:
-            t->entrance = 0x27e;
-            break;
-        case 8:
-        case 9:
-            t->entrance = 0x554;
-            break;
-        }
+    case SCE_OOT_LAKE_HYLIA:
+        t->entrance = 0x27e;
+        break;
+    case SCE_OOT_DEATH_MOUNTAIN_TRAIL:
+        t->entrance = 0x554;
+        break;
     }
 }
 
-PATCH_FUNC(0x80ab1414, EnOwl_StartCutscene);
+PATCH_CALL(0x80ab1548, EnOwl_StartCutscene);

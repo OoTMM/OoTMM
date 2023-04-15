@@ -65,13 +65,13 @@ typedef struct
     u32 songLullabyIntro:1;
     u32 unused2:5;
     u32 notebook:1;
-    u32 songGlitch1:1;
+    u32 songSun:1;
     u32 songStorms:1;
     u32 songSoaring:1;
     u32 songEpona:1;
     u32 songHealing:1;
     u32 songTime:1;
-    u32 songGlitch2:1;
+    u32 songSaria:1;
     u32 songOrder:1;
     u32 songEmpty:1;
     u32 songNewWave:1;
@@ -118,7 +118,7 @@ MmPermanentSceneFlags;
 typedef struct
 {
     s16         scene;
-    Vector3s    pos;
+    Vec3s       pos;
     s16         yaw;
 }
 MmHorseData;

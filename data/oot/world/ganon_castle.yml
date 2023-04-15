@@ -8,6 +8,11 @@
     "Ganon Castle Spirit": "true"
     "Ganon Castle Shadow": "true"
     "Ganon Castle Tower": "true"
+  locations:
+    "Ganon Castle Leftmost Scrub": "has_lens && can_hit_scrub && has_rupees"
+    "Ganon Castle Left-Center Scrub": "has_lens && can_hit_scrub && has_rupees"
+    "Ganon Castle Right-Center Scrub": "has_lens && can_hit_scrub && has_rupees"
+    "Ganon Castle Rightmost Scrub": "has_lens && can_hit_scrub && has_rupees"
 "Ganon Castle Light":
   dungeon: Ganon
   events:
@@ -42,10 +47,10 @@
 "Ganon Castle Spirit":
   dungeon: Ganon
   events:
-    GANON_TRIAL_SPIRIT: "can_hookshot && has_explosives && has_light_arrows"
+    GANON_TRIAL_SPIRIT: "can_hookshot && has_bombchu && has_light_arrows"
   locations:
     "Ganon Castle Spirit Chest 1": "can_hookshot"
-    "Ganon Castle Spirit Chest 2": "can_hookshot && has_explosives && has_lens"
+    "Ganon Castle Spirit Chest 2": "can_hookshot && has_bombchu && has_lens"
 "Ganon Castle Shadow":
   dungeon: Ganon
   events:

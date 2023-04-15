@@ -2,7 +2,7 @@ import { ItemPlacement } from './solve';
 import { World } from './world';
 import { Analysis } from './analysis';
 import { Random, sample, shuffle } from '../random';
-import { DUNGEON_REWARDS_ORDERED, isDungeonItem, isDungeonReward, isItemMajor, isGoldToken, itemsArray, isKey, isHouseToken, isSmallKey, isGanonBossKey, isRegularBossKey, DUNGEON_REWARDS, isStrayFairy, isToken, isTownStrayFairy, isSong, isSmallKeyRegular, isSmallKeyHideout } from './items';
+import { DUNGEON_REWARDS_ORDERED, isDungeonItem, isDungeonReward, isItemMajor, isGoldToken, itemsArray, isKey, isHouseToken, isSmallKey, isGanonBossKey, isRegularBossKey, DUNGEON_REWARDS, isStrayFairy, isToken, isTownStrayFairy, isSong, isSmallKeyRegular, isSmallKeyHideout, isMapCompass } from './items';
 import { Settings } from '../settings';
 import { Game } from '../config';
 import { Monitor } from '../monitor';
@@ -135,47 +135,83 @@ export class LogicPassHints {
     return null;
   }
 
-  private isLocationHintable(loc: string) {
-    if (['OOT Temple of Time Medallion', 'MM Oath to Order', 'OOT Hatch Chicken', 'OOT Hatch Pocket Cucco'].includes(loc)) {
-      return false;
-    }
+  private isLocationIgnored(loc: string) {
+    /* Get the item and region  */
     const item = this.state.items[loc];
+    const region = this.state.world.regions[loc];
+
+    /* These specific locations are always ignored */
+    if (['OOT Temple of Time Medallion', 'MM Oath to Order', 'OOT Hatch Chicken', 'OOT Hatch Pocket Cucco'].includes(loc)) {
+      return true;
+    }
+
+    /* Non-shuffled items are ignored */
     if (this.state.fixedLocations.has(loc)) {
-      return false;
-    }
-    if (isSmallKeyHideout(item) && this.state.settings.smallKeyShuffleHideout === 'anywhere') {
       return true;
     }
-    if (isSmallKeyRegular(item) && this.state.settings.smallKeyShuffle === 'anywhere') {
+
+    /* CHecks with no region are ignored (skip zelda) */
+    if (!region || region === 'NONE') {
       return true;
     }
-    if (isRegularBossKey(item) && this.state.settings.bossKeyShuffle === 'anywhere') {
+
+    /* Non-shuffled hideout keys */
+    if (isSmallKeyHideout(item) && this.state.settings.smallKeyShuffleHideout === 'ownDungeon') {
       return true;
     }
-    if (isTownStrayFairy(item) && this.state.settings.townFairyShuffle === 'anywhere') {
+
+    /* Non-shuffled regular keys */
+    if (isSmallKeyRegular(item) && this.state.settings.smallKeyShuffle === 'ownDungeon') {
       return true;
     }
-    if (isStrayFairy(item) && this.state.settings.strayFairyShuffle === 'anywhere') {
+
+    /* Non-shuffled Ganon BK (doesn't really matter) */
+    if (isGanonBossKey(item) && this.state.settings.ganonBossKey !== 'anywhere') {
       return true;
     }
-    if (isDungeonItem(item)) {
-      return false;
+
+    /* Non shuffled boss keys */
+    if (isRegularBossKey(item) && this.state.settings.bossKeyShuffle === 'ownDungeon') {
+      return true;
     }
+
+    /* Non shuffled town fairy */
+    if (isTownStrayFairy(item) && this.state.settings.townFairyShuffle === 'vanilla') {
+      return true;
+    }
+
+    /* Non shuffled stray fairy */
+    if (isStrayFairy(item) && this.state.settings.strayFairyShuffle !== 'anywhere') {
+      return true;
+    }
+
+    /* Non-shuffled map/compass (doesn't really matter) */
+    if (isMapCompass(item) && this.state.settings.mapCompassShuffle !== 'anywhere') {
+      return true;
+    }
+
+    /* Non-shuffled dungeon reward */
     if (isDungeonReward(item) && this.state.settings.dungeonRewardShuffle !== 'anywhere') {
-      return false;
+      return true;
     }
+
+    /* Non shuffled GS token */
+    /* TODO: Handle dungeon/overworld better */
     if (isGoldToken(item) && this.state.settings.goldSkulltulaTokens === 'none') {
-      return false;
+      return true;
     }
+
+    /* Non shuffled House tokens */
     if (isHouseToken(item) && this.state.settings.housesSkulltulaTokens === 'none') {
-      return false;
+      return true;
     }
-    return true;
+
+    return false;
   }
 
   private isLocationHintableHero(loc: string) {
     const item = this.state.items[loc];
-    if (!this.isLocationHintable(loc)) {
+    if (this.isLocationIgnored(loc)) {
       return false;
     }
     if (isKey(item) || isStrayFairy(item) || isToken(item) || isDungeonReward(item)) {
@@ -191,7 +227,7 @@ export class LogicPassHints {
     if (typeof locs === 'string') {
       locs = new Set([locs]);
     }
-    const pathfinderState = this.pathfinder.run(null, { recursive: true, gossip: true, items: this.state.items, forbiddenLocations: locs });
+    const pathfinderState = this.pathfinder.run(null, { recursive: true, items: this.state.items, forbiddenLocations: locs });
     const gossips = Array.from(pathfinderState.gossip).filter(x => !this.gossip[x]);
     if (gossips.length === 0) {
       return null;
@@ -200,12 +236,12 @@ export class LogicPassHints {
   }
 
   private playthroughLocations() {
-    const locations = this.state.analysis.spheres.flat().filter(loc => this.isLocationHintable(loc));
+    const locations = this.state.analysis.spheres.flat().filter(loc => !this.isLocationIgnored(loc));
     return shuffle(this.state.random, locations);
   }
 
   private locationFoolish(loc: string) {
-    if (!this.isLocationHintable(loc) || this.state.analysis.unreachable.has(loc)) {
+    if (this.isLocationIgnored(loc) || this.state.analysis.unreachable.has(loc)) {
       return 0;
     }
     if (!this.state.analysis.useless.has(loc)) {

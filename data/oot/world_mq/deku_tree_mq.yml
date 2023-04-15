@@ -54,8 +54,8 @@
     "Deku Tree Backrooms": "is_child"
   events:
     DEKU_BLOCK: "true"
-  #locations:
-    #"MQ Deku Tree Scrub": "has_shield_for_scrub || has_ranged_weapon || can_hammer || has_nuts"
+  locations:
+    "MQ Deku Tree Scrub": "can_hit_scrub && has_rupees"
 "Deku Tree Before Boss":
   dungeon: DT
   exits:

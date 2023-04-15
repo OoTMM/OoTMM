@@ -1,7 +1,7 @@
 "Snowhead Temple":
   dungeon: SH
   exits:
-    "Snowhead Temple Entrance": "event(TIME_TRAVEL)"
+    "Snowhead Temple Entrance": "can_reset_time"
     "Snowhead": "true"
 "Snowhead Temple Entrance":
   dungeon: SH
@@ -10,13 +10,21 @@
     "Snowhead Temple Main": "has(MASK_GORON) || has(MASK_ZORA)"
 "Snowhead Temple Main":
   dungeon: SH
+  events:
+    MAGIC: "true"
+    ARROWS: "true"
+    RUPEES: "true"
   exits:
     "Snowhead Temple Entrance": "true"
-    "Snowhead Temple Compass Room": "has(SMALL_KEY_SH, 3) || (has_explosives && has(SMALL_KEY_SH, 2))"
+    "Snowhead Temple Compass Room": "has(SMALL_KEY_SH, 3) || ((has_explosives || trick_keg_explosives) && has(SMALL_KEY_SH, 2))"
     "Snowhead Temple Bridge Front": "true"
-    "Snowhead Temple Center Level 1": "can_use_fire_arrows || has_hot_water"
+    "Snowhead Temple Center Level 1": "can_use_fire_arrows || trick_sht_fireless"
 "Snowhead Temple Bridge Front":
   dungeon: SH
+  events:
+    MAGIC: "true"
+    BOMBS: "true"
+    RUPEES: "true"
   exits:
     "Snowhead Temple Main": "true"
     "Snowhead Temple Bridge Back": "goron_fast_roll || can_hookshot"
@@ -48,7 +56,7 @@
     "Snowhead Temple Center Level 1": "true"
     "Snowhead Temple Center Level 2 Dual": "goron_fast_roll"
     "Snowhead Temple Fire Arrow": "goron_fast_roll || (can_use_lens && scarecrow_hookshot && has(MASK_DEKU))"
-    "Snowhead Temple Center Level 3 Iced": "can_use_fire_arrows"
+    "Snowhead Temple Center Level 3 Iced": "can_use_fire_arrows || (trick_sht_fireless && scarecrow_hookshot && has(MASK_GORON))"
     "Snowhead Temple Center Level 3 Snow": "can_use_lens && scarecrow_hookshot"
   locations:
     "Snowhead Temple Map Alcove": "can_use_lens || can_hookshot"
@@ -59,15 +67,14 @@
     "Snowhead Temple Bridge Back": "true"
     "Snowhead Temple Center Level 0": "true"
     "Snowhead Temple Block Room": "true"
-    "Snowhead Temple Pillars Room": "can_use_fire_arrows"
-    "Snowhead Temple Main": "can_use_fire_arrows"
+    "Snowhead Temple Pillars Room": "can_use_fire_arrows || trick_sht_fireless"
     "Snowhead Temple Map Room Upper": "scarecrow_hookshot"
 "Snowhead Temple Pillars Room":
   dungeon: SH
   exits:
     "Snowhead Temple Center Level 1": "true"
   events:
-    SNOWHEAD_RAISE_PILLAR: "has(MASK_GORON)"
+    SNOWHEAD_RAISE_PILLAR: "has(MASK_GORON) && (can_use_fire_arrows || event(SHT_STICK_RUN))"
   locations:
     "Snowhead Temple Pillars Room": "true"
 "Snowhead Temple Center Level 0":
@@ -95,26 +102,26 @@
 "Snowhead Temple Compass Room":
   dungeon: SH
   exits:
-    "Snowhead Temple Main": "has(SMALL_KEY_SH, 3) || (has_explosives && has(SMALL_KEY_SH, 2))"
-    "Snowhead Temple Block Room Upper": "can_use_fire_arrows || can_hookshot_short || can_goron_bomb_jump"
-    "Snowhead Temple Icicles": "has_explosives"
+    "Snowhead Temple Main": "has(SMALL_KEY_SH, 3) || ((has_explosives || trick_keg_explosives) && has(SMALL_KEY_SH, 2))"
+    "Snowhead Temple Block Room Upper": "can_use_fire_arrows || trick_sht_fireless || can_hookshot_short || can_goron_bomb_jump"
+    "Snowhead Temple Icicles": "has_explosives || trick_keg_explosives"
   locations:
     "Snowhead Temple Compass": "true"
-    "Snowhead Temple Compass Room Ledge": "can_use_fire_arrows"
-    "Snowhead Temple SF Compass Room Crate": "((can_use_fire_arrows || can_hookshot_short) && (has_explosives || has(MASK_GORON))) || (has(MASK_GREAT_FAIRY) && has(BOMB_BAG)) || can_goron_bomb_jump"
+    "Snowhead Temple Compass Room Ledge": "can_use_fire_arrows || trick_sht_fireless"
+    "Snowhead Temple SF Compass Room Crate": "(((can_use_fire_arrows || trick_sht_fireless) || can_hookshot_short) && (has_explosives || has(MASK_GORON))) || (has(MASK_GREAT_FAIRY) && (has(BOMB_BAG) || trick_keg_explosives)) || can_goron_bomb_jump"
 "Snowhead Temple Icicles":
   dungeon: SH
   exits:
-    "Snowhead Temple Compass Room": "has_explosives"
-    "Snowhead Temple Dual Switches": "has(SMALL_KEY_SH, 3) || (has_explosives && has(SMALL_KEY_SH, 2))"
+    "Snowhead Temple Compass Room": "has_explosives || trick_keg_explosives"
+    "Snowhead Temple Dual Switches": "has(SMALL_KEY_SH, 3) || ((has_explosives || trick_keg_explosives) && has(SMALL_KEY_SH, 2))"
   locations:
     "Snowhead Temple Icicle Room Alcove": "can_use_lens"
-    "Snowhead Temple Icicle Room": "((has(BOW) || has(MASK_ZORA) || can_use_lens) && can_break_boulders) || (can_hookshot_short && has_explosives)"
+    "Snowhead Temple Icicle Room": "((has(BOW) || has(MASK_ZORA) || can_use_lens) && can_break_boulders) || (can_hookshot_short && (has_explosives || trick_keg_explosives))"
 "Snowhead Temple Dual Switches":
   dungeon: SH
   exits:
-    "Snowhead Temple Icicles": "has(SMALL_KEY_SH, 3) || (has_explosives && has(SMALL_KEY_SH, 2))"
-    "Snowhead Temple Center Level 2 Dual": "can_use_fire_arrows || has(MASK_GORON)"
+    "Snowhead Temple Icicles": "has(SMALL_KEY_SH, 3) || ((has_explosives || trick_keg_explosives) && has(SMALL_KEY_SH, 2))"
+    "Snowhead Temple Center Level 2 Dual": "true"
   locations:
     "Snowhead Temple SF Dual Switches": "can_use_lens && has(BOW) && has(MASK_GREAT_FAIRY)"
 "Snowhead Temple Center Level 2 Dual":
@@ -144,6 +151,8 @@
     "Snowhead Temple Central Room Alcove": "can_use_lens"
 "Snowhead Temple Center Level 3 Iced":
   dungeon: SH
+  events:
+    SHT_STICK_RUN: "has_sticks"
   exits:
     "Snowhead Temple Map Room Upper": "true"
     "Snowhead Temple Center Level 2 Dual": "has_weapon || has(MASK_ZORA) || has(MASK_GORON)"
@@ -188,6 +197,9 @@
 "Snowhead Temple Boss":
   boss: true
   dungeon: SH
+  events:
+    MAGIC: "true"
+    ARROWS: "true"
   exits:
     "Snowhead Temple After Boss": "can_use_fire_arrows"
 "Snowhead Temple After Boss":
@@ -197,6 +209,8 @@
     "Oath to Order": "true"
   events:
     BOSS_SNOWHEAD: "true"
+    MAGIC: "true"
+    ARROWS: "true"
   locations:
     "Snowhead Temple Boss HC": "true"
     "Snowhead Temple Boss": "true"

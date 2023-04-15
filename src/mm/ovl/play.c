@@ -22,12 +22,12 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.items[ITS_MM_MASK_GORON] = ITEM_MM_MASK_GORON;
         gSave.inventory.items[ITS_MM_BOW] = ITEM_MM_BOW;
         gSave.inventory.items[ITS_MM_LENS] = ITEM_MM_LENS_OF_TRUTH;
-        //gSave.inventory.items[ITS_MM_BOMBS] = ITEM_MM_BOMB;
+        gSave.inventory.items[ITS_MM_BOMBS] = ITEM_MM_BOMB;
         gSave.inventory.items[ITS_MM_HOOKSHOT] = ITEM_MM_HOOKSHOT;
         gSave.inventory.items[ITS_MM_GREAT_FAIRY_SWORD] = ITEM_MM_GREAT_FAIRY_SWORD;
         gSave.inventory.upgrades.quiver = 3;
         gSave.inventory.upgrades.wallet = 2;
-        //gSave.inventory.upgrades.bombBag = 3;
+        gSave.inventory.upgrades.bombBag = 3;
         gSave.playerData.rupees = 500;
         gSave.inventory.quest.songHealing = 1;
         gSave.inventory.quest.songTime = 1;
@@ -45,7 +45,7 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.items[ITS_MM_MASK_GORON] = ITEM_MM_MASK_GORON;
         gSave.inventory.ammo[ITS_MM_STICKS] = 10;
         gSave.inventory.ammo[ITS_MM_BOW] = 50;
-        //gSave.inventory.ammo[ITS_MM_BOMBS] = 40;
+        gSave.inventory.ammo[ITS_MM_BOMBS] = 40;
         gSave.inventory.items[ITS_MM_ARROW_FIRE] = ITEM_MM_ARROW_FIRE;
         gSave.inventory.items[ITS_MM_ARROW_LIGHT] = ITEM_MM_ARROW_LIGHT;
         gSave.inventory.items[ITS_MM_PICTOBOX] = ITEM_MM_PICTOGRAPH_BOX;
@@ -86,6 +86,21 @@ static void debugCheat(GameState_Play* play)
 #endif
 }
 
+static u32 entranceForOverride(u32 entrance)
+{
+    switch (entrance)
+    {
+    case 0x0c00:
+        /* To Clear Swamp from road */
+        return 0x8400;
+    case 0xae60:
+        /* To Spring Mountain Village from Path */
+        return 0x9a60;
+    default:
+        return entrance;
+    }
+}
+
 void hookPlay_Init(GameState_Play* play)
 {
     int isEndOfGame;
@@ -94,10 +109,12 @@ void hookPlay_Init(GameState_Play* play)
     isEndOfGame = 0;
 
     /* Handle transition override */
+    if (g.inGrotto)
+        gIsEntranceOverride = 0;
     if (gIsEntranceOverride)
     {
         gIsEntranceOverride = 0;
-        override = comboEntranceOverride(gSave.entranceIndex);
+        override = comboEntranceOverride(entranceForOverride(gSave.entranceIndex));
         if (override != -1)
         {
             if (override >= 0)
@@ -125,8 +142,23 @@ void hookPlay_Init(GameState_Play* play)
     if (gSave.entranceIndex == 0xc030)
     {
         /* Moon crash */
-        gSave.entranceIndex = 0xd800;
+        gSave.entranceIndex = g.initialEntrance;
         comboReadForeignSave();
+    }
+
+    if (gSave.entranceIndex == 0xd800 && gLastEntrance == 0x1c00)
+    {
+        /* Song of Time */
+        gSave.entranceIndex = g.initialEntrance;
+    }
+
+    if (gSave.entranceIndex == 0x8610)
+    {
+        /* Woodfall from temple */
+        if (!MM_GET_EVENT_WEEK(EV_MM_WEEK_WOODFALL_TEMPLE_RISE))
+        {
+            gSave.entranceIndex = 0x8640;
+        }
     }
 
     comboObjectsReset();
@@ -146,7 +178,8 @@ void hookPlay_Init(GameState_Play* play)
     Play_Init(play);
     gPlay = play;
     gLastEntrance = gSave.entranceIndex;
-    if (play->sceneId != SCE_MM_GROTTOS)
+    g.inGrotto = (play->sceneId == SCE_MM_GROTTOS);
+    if (!g.inGrotto)
     {
         gLastScene = play->sceneId;
     }
@@ -170,9 +203,9 @@ void hookPlay_Init(GameState_Play* play)
             gSave.day = 0;
             gSave.time = 0x3fff;
             Sram_SaveNewDay(play);
-            play->nextEntrance = 0xd800;
-            play->transitionType = TRANS_TYPE_NORMAL;
-            play->transitionGfx = TRANS_GFX_BLACK;
+            play->nextEntrance = g.initialEntrance;
+            play->transitionTrigger = TRANS_TRIGGER_NORMAL;
+            play->transitionType = TRANS_TYPE_BLACK;
             return;
         }
     }

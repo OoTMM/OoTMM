@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/item.h>
 
 const u8 kOotTradeAdult[] = {
     ITEM_OOT_POCKET_EGG,
@@ -328,6 +329,9 @@ void comboAddCommonItemOot(int sid, int noEffect)
     case SITEM_SONG_STORMS:
         gOotSave.inventory.quest.songStorms = 1;
         break;
+    case SITEM_SONG_SUN:
+        gOotSave.inventory.quest.songSun = 1;
+        break;
     case SITEM_HOOKSHOT:
         addHookshot(1);
         break;
@@ -489,36 +493,39 @@ void comboAddItemSharedOot(s16 gi, int noEffect)
         }
     }
 
-    if (comboConfig(CFG_SHARED_MAGIC_ARROWS))
+    if (comboConfig(CFG_SHARED_MAGIC_ARROW_FIRE) && gi == GI_OOT_ARROW_FIRE)
     {
-        switch (gi)
-        {
-        case GI_OOT_ARROW_FIRE:
-            comboAddCommonItemMm(SITEM_ARROW_FIRE, noEffect);
-            break;
-        case GI_OOT_ARROW_ICE:
-            comboAddCommonItemMm(SITEM_ARROW_ICE, noEffect);
-            break;
-        case GI_OOT_ARROW_LIGHT:
-            comboAddCommonItemMm(SITEM_ARROW_LIGHT, noEffect);
-            break;
-        }
+        comboAddCommonItemMm(SITEM_ARROW_FIRE, noEffect);
     }
 
-    if (comboConfig(CFG_SHARED_SONGS))
+    if (comboConfig(CFG_SHARED_MAGIC_ARROW_ICE) && gi == GI_OOT_ARROW_ICE)
     {
-        switch (gi)
-        {
-        case GI_OOT_SONG_EPONA:
-            comboAddCommonItemMm(SITEM_SONG_EPONA, noEffect);
-            break;
-        case GI_OOT_SONG_TIME:
-            comboAddCommonItemMm(SITEM_SONG_TIME, noEffect);
-            break;
-        case GI_OOT_SONG_STORMS:
-            comboAddCommonItemMm(SITEM_SONG_STORMS, noEffect);
-            break;
-        }
+        comboAddCommonItemMm(SITEM_ARROW_ICE, noEffect);
+    }
+
+    if (comboConfig(CFG_SHARED_MAGIC_ARROW_LIGHT) && gi == GI_OOT_ARROW_LIGHT)
+    {
+        comboAddCommonItemMm(SITEM_ARROW_LIGHT, noEffect);
+    }
+
+    if (comboConfig(CFG_SHARED_SONG_EPONA) && gi == GI_OOT_SONG_EPONA)
+    {
+        comboAddCommonItemMm(SITEM_SONG_EPONA, noEffect);
+    }
+
+    if (comboConfig(CFG_SHARED_SONG_STORMS) && gi == GI_OOT_SONG_STORMS)
+    {
+        comboAddCommonItemMm(SITEM_SONG_STORMS, noEffect);
+    }
+
+    if (comboConfig(CFG_SHARED_SONG_TIME) && gi == GI_OOT_SONG_TIME)
+    {
+        comboAddCommonItemMm(SITEM_SONG_TIME, noEffect);
+    }
+
+    if (comboConfig(CFG_SHARED_SONG_SUN) && comboConfig(CFG_MM_SONG_SUN) && gi == GI_OOT_SONG_SUN)
+    {
+        comboAddCommonItemMm(SITEM_SONG_SUN, noEffect);
     }
 
     if (comboConfig(CFG_SHARED_NUTS_STICKS))
@@ -961,7 +968,7 @@ int comboAddItemOot(s16 gi, int noEffect)
         comboAddCommonItemOot(SITEM_SONG_TIME, noEffect);
         break;
     case GI_OOT_SONG_SUN:
-        gOotSave.inventory.quest.songSun = 1;
+        comboAddCommonItemOot(SITEM_SONG_SUN, noEffect);
         break;
     case GI_OOT_SONG_SARIA:
         gOotSave.inventory.quest.songSaria = 1;

@@ -53,7 +53,7 @@
 #include <combo/common/actor.h>
 #include <combo/save.h>
 #include <combo/gi.h>
-#include <combo/items.h>
+#include <combo/data/items.h>
 #include <combo/common/events.h>
 #include <combo/scenes.h>
 #include <combo/shader.h>
@@ -96,6 +96,11 @@
 #define DUNGEONID_BOTTOM_OF_THE_WELL                0x0f
 #define DUNGEONID_ICE_CAVERN                        0x10
 #define DUNGEONID_GERUDO_TRAINING_GROUNDS           0x11
+#define DUNGEONID_BENEATH_THE_WELL                  0x12
+#define DUNGEONID_IKANA_CASTLE                      0x13
+#define DUNGEONID_SECRET_SHRINE                     0x14
+#define DUNGEONID_BENEATH_THE_WELL_END              0x15
+#define DUNGEONID_PIRATE_FORTRESS                   0x16
 
 /* MQ IDs */
 #define MQ_DEKU_TREE                0
@@ -153,10 +158,10 @@ typedef struct
 {
     u32             mq;
     u8              config[0x40];
+    SpecialCond     special[2];
     ComboDataHints  hints;
     u8              boss[12];
-    u8              dungeons[18];
-    SpecialCond     special[2];
+    u8              dungeons[23];
 }
 ComboData;
 
@@ -193,6 +198,7 @@ NORETURN void comboGameSwitch(GameState_Play* play, s32 entrance);
 #define OV_SF           4
 #define OV_COW          5
 #define OV_SHOP         6
+#define OV_SCRUB        7
 
 #define OVF_PROGRESSIVE       (1 << 0)
 #define OVF_DOWNGRADE         (1 << 1)
@@ -245,63 +251,6 @@ void comboDrawBlit2D_IA4(Gfx** dl, u32 segAddr, int w, int h, float x, float y, 
 /* Event */
 void comboOotSetEventChk(u16 flag);
 void comboMmSetEventWeek(u16 flag);
-
-/* Item */
-extern const u8 kMaxSticks[];
-extern const u8 kMaxNuts[];
-extern const u8 kMaxBombs[];
-extern const u8 kMaxArrows[];
-extern const u8 kMaxSeeds[];
-extern const u16 kMaxRupees[];
-extern const u8 kOotTradeChild[];
-extern const u8 kOotTradeAdult[];
-extern const u8 kMmTrade1[];
-extern const u8 kMmTrade2[];
-extern const u8 kMmTrade3[];
-
-void comboSyncItems(void);
-
-int  comboAddItemMm(s16 gi, int noEffect);
-int  comboAddItemOot(s16 gi, int noEffect);
-void comboAddItemSharedMm(s16 gi, int noEffect);
-void comboAddItemSharedOot(s16 gi, int noEffect);
-int  comboAddItemEffect(GameState_Play* play, s16 gi);
-void comboAddItemSharedForeignEffect(GameState_Play* play, s16 gi);
-
-int  comboAddSmallKeyOot(u16 dungeonId);
-void comboAddBossKeyOot(u16 dungeonId);
-void comboAddCompassOot(u16 dungeonId);
-void comboAddMapOot(u16 dungeonId);
-int  comboAddSmallKeyMm(u16 dungeonId);
-void comboAddBossKeyMm(u16 dungeonId);
-int  comboAddStrayFairyMm(u16 dungeonId);
-void comboAddMapMm(u16 dungeonId);
-void comboAddCompassMm(u16 dungeonId);
-
-void comboAddQuiverOot(int level);
-void comboAddQuiverMm(int level);
-void comboAddArrowsOot(int count);
-void comboAddArrowsMm(int count);
-void comboAddBombBagOot(int level);
-void comboAddBombBagMm(int level);
-void comboAddBombsOot(int count);
-void comboAddBombsMm(int count);
-void comboAddMagicUpgradeOot(int level);
-void comboAddMagicUpgradeMm(int level);
-void comboAddSticksOot(int count);
-void comboAddSticksMm(int count);
-void comboAddNutsOot(int count);
-void comboAddNutsMm(int count);
-
-void comboAddCommonItemOot(int sid, int noEffect);
-void comboAddCommonItemMm(int sid, int noEffect);
-
-int  comboAddItem(GameState_Play* play, s16 gi);
-int  comboAddItemNoEffect(s16 gi);
-
-int comboIsItemUnavailable(s16 gi);
-int comboIsItemMinor(s16 gi);
-int comboIsItemConsumable(s16 gi);
 
 void comboToggleTrade(u8* slot, u32 flags, const u8* table, u32 tableSize);
 
@@ -436,6 +385,16 @@ extern u8 gCustomOcarinaSong;
 
 /* Special */
 int comboSpecialCond(int special);
+
+/* Global data */
+typedef struct
+{
+    u16 initialEntrance;
+    u8  inGrotto;
+}
+ComboGlobal;
+
+extern ComboGlobal g;
 
 #if defined (GAME_OOT)
 extern u16 gPrevPageIndex;

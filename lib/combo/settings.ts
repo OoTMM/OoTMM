@@ -138,6 +138,12 @@ export const SETTINGS = [{
   ],
   default: 'dungeonBlueWarps'
 }, {
+  key: 'scrubShuffleOot',
+  name: 'Scrub Shuffle (OoT)',
+  category: 'main.shuffle',
+  type: 'boolean',
+  default: false
+}, {
   key: 'cowShuffleOot',
   name: 'Cow Shuffle (OoT)',
   category: 'main.shuffle',
@@ -198,6 +204,22 @@ export const SETTINGS = [{
   ],
   default: 'closed'
 }, {
+  key: 'kakarikoGate',
+  name: 'Kakariko Gate',
+  category: 'main.events',
+  type: 'enum',
+  values: [
+    { value: 'closed', name: 'Closed' },
+    { value: 'open', name: 'Open' },
+  ],
+  default: 'closed'
+}, {
+  key: 'skipZelda',
+  name: 'Skip Child Zelda',
+  category: 'main.events',
+  type: 'boolean',
+  default: false,
+}, {
   key: 'crossWarpOot',
   name: 'Cross-Games OoT Warp Songs',
   category: 'main.cross',
@@ -215,43 +237,15 @@ export const SETTINGS = [{
   ],
   default: 'none'
 }, {
+  key: 'sunSongMm',
+  name: 'Sun\'s Song in MM',
+  category: 'main.cross',
+  type: 'boolean',
+  default: false
+}, {
   key: 'csmc',
   name: 'Chest Size Matches Content',
   category: 'main.misc',
-  type: 'boolean',
-  default: false
-}, {
-  key: 'erBoss',
-  name: 'Boss Entrance Shuffle',
-  category: 'entrances',
-  type: 'enum',
-  values: [
-    { value: 'none', name: 'None' },
-    { value: 'ownGame', name: 'Own Game' },
-    { value: 'full', name: 'Full' },
-  ],
-  default: 'none'
-}, {
-  key: 'erDungeons',
-  name: 'Dungeon Entrance Shuffle',
-  category: 'entrances',
-  type: 'enum',
-  values: [
-    { value: 'none', name: 'None' },
-    { value: 'ownGame', name: 'Own Game' },
-    { value: 'full', name: 'Full' },
-  ],
-  default: 'none'
-}, {
-  key: 'erSpiderHouses',
-  name: 'Shuffle Spider Houses with Dungeons',
-  category: 'entrances',
-  type: 'boolean',
-  default: false
-}, {
-  key: 'erMinorDungeons',
-  name: 'Shuffle OoT Minor Dungeons with Dungeons',
-  category: 'entrances',
   type: 'boolean',
   default: false
 }, {
@@ -332,14 +326,44 @@ export const SETTINGS = [{
   type: 'boolean',
   default: false
 }, {
-  key: 'sharedMagicArrows',
-  name: 'Shared Magic Arrows',
+  key: 'sharedMagicArrowFire',
+  name: 'Shared Fire Arrow',
   category: 'items.shared',
   type: 'boolean',
   default: false
 }, {
-  key: 'sharedSongs',
-  name: 'Shared Songs',
+  key: 'sharedMagicArrowIce',
+  name: 'Shared Ice Arrow',
+  category: 'items.shared',
+  type: 'boolean',
+  default: false
+}, {
+  key: 'sharedMagicArrowLight',
+  name: 'Shared Light Arrow',
+  category: 'items.shared',
+  type: 'boolean',
+  default: false
+}, {
+  key: 'sharedSongEpona',
+  name: 'Shared Epona\'s Song',
+  category: 'items.shared',
+  type: 'boolean',
+  default: false
+}, {
+  key: 'sharedSongStorms',
+  name: 'Shared Song of Storms',
+  category: 'items.shared',
+  type: 'boolean',
+  default: false
+}, {
+  key: 'sharedSongTime',
+  name: 'Shared Song of Time',
+  category: 'items.shared',
+  type: 'boolean',
+  default: false
+}, {
+  key: 'sharedSongSun',
+  name: 'Shared Sun\'s Song',
   category: 'items.shared',
   type: 'boolean',
   default: false
@@ -379,6 +403,76 @@ export const SETTINGS = [{
   category: 'items.shared',
   type: 'boolean',
   default: false
+}, {
+  key: 'probabilisticFoolish',
+  name: 'Probabilistic Foolish Hints (If you don\'t know what this is, leave it ON)',
+  category: 'hints',
+  type: 'boolean',
+  default: true
+}, {
+  key: 'erBoss',
+  name: 'Boss Entrance Shuffle',
+  category: 'entrances',
+  type: 'enum',
+  values: [
+    { value: 'none', name: 'None' },
+    { value: 'ownGame', name: 'Own Game' },
+    { value: 'full', name: 'Full' },
+  ],
+  default: 'none'
+}, {
+  key: 'erDungeons',
+  name: 'Dungeon Entrance Shuffle',
+  category: 'entrances',
+  type: 'enum',
+  values: [
+    { value: 'none', name: 'None' },
+    { value: 'ownGame', name: 'Own Game' },
+    { value: 'full', name: 'Full' },
+  ],
+  default: 'none'
+}, {
+  key: 'erMinorDungeons',
+  name: 'Shuffle OoT Minor Dungeons with Dungeons',
+  category: 'entrances',
+  type: 'boolean',
+  default: false
+}, {
+  key: 'erSpiderHouses',
+  name: 'Shuffle Spider Houses with Dungeons',
+  category: 'entrances',
+  type: 'boolean',
+  default: false
+}, {
+  key: 'erPirateFortress',
+  name: 'Shuffle Pirate Fortress with Dungeons',
+  category: 'entrances',
+  type: 'boolean',
+  default: false
+}, {
+  key: 'erBeneathWell',
+  name: 'Shuffle Beneath the Well with Dungeons',
+  category: 'entrances',
+  type: 'boolean',
+  default: false
+}, {
+  key: 'erIkanaCastle',
+  name: 'Shuffle Ikana Castle Interior with Dungeons',
+  category: 'entrances',
+  type: 'boolean',
+  default: false
+}, {
+  key: 'erSecretShrine',
+  name: 'Shuffle Secret Shrine with Dungeons',
+  category: 'entrances',
+  type: 'boolean',
+  default: false
+}, {
+  key: 'erOverworld',
+  name: 'Shuffle Major Regions',
+  category: 'entrances',
+  type: 'boolean',
+  default: false
 }] as const;
 
 export type SettingCategory = {
@@ -416,6 +510,9 @@ export const SETTINGS_CATEGORIES: SettingCategory[] = [{
     key: "extensions",
   }],
 }, {
+  name: "Hints",
+  key: "hints",
+}, {
   name: "Entrances",
   key: "entrances",
 }];
@@ -437,6 +534,13 @@ export const TRICKS = {
   OOT_ADULT_DOMAIN: "Enter Adult Zora's Domain using Hover Boots",
   OOT_WATER_LONGSHOT: "Drain Water Temple using Longshot",
   OOT_SAND_RIVER_NOTHING: "Cross the River of Sand with Nothing",
+  OOT_SHADOW_FIRE_ARROW: "Enter Shadow Temple using Fire Arrows",
+  OOT_KZ_SKIP: "Skip King Zora as Adult",
+  OOT_LOST_WOODS_ADULT_GS: "Lost Woods Adult GS without Bean",
+  OOT_WINDMILL_HP_NOTHING: "Windmill HP as Adult with Nothing",
+  OOT_LAB_DIVE_NO_GOLD_SCALE: "Laboratory Dive without Gold Scale",
+  OOT_LAB_WALL_GS: "Laboratory Wall GS with Jump Slash",
+  OOT_PASS_COLLISION: "Pass through Visible One-Way Collisions",
   MM_LENS: "Fewer Lens Requirements (MM)",
   MM_PALACE_BEAN_SKIP: "Skip Planting Beans in Deku Palace",
   MM_DARMANI_WALL: "Climb Mountain Village Wall Blind",
@@ -453,6 +557,13 @@ export const TRICKS = {
   MM_SHORT_HOOK_HARD: "Precise Short Hookshot Usage",
   MM_PFI_BOAT_HOOK: "Enter Pirate Fortress Interior using Hookshot from the Boats",
   MM_PALACE_GUARD_SKIP: "Backflip over Deku Palace Guards",
+  MM_SHT_FIRELESS: "Complete Snowhead Temple without Fire Arrows",
+  MM_KEG_EXPLOSIVES: "Use Powder Kegs as Explosives",
+  MM_DOG_RACE_CHEST_NOTHING: "Doggy Racetrack Chest with Nothing",
+  MM_MAJORA_LOGIC: "Fight Majora to Reset Time",
+  MM_SOUTHERN_SWAMP_SCRUB_HP_GORON: "Southern Swamp Scrub HP as Goron",
+  MM_ZORA_HALL_SCRUB_HP_NO_DEKU: "Zora Hall Scrub HP without Deku",
+  MM_IKANA_ROOF_PARKOUR: "Jump from Ikana Castle's Roof Interior to Exterior",
 };
 
 export type Tricks = {[k in keyof typeof TRICKS]: boolean};

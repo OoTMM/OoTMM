@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/item.h>
 
 static void addHealth(u8 count)
 {

@@ -20,8 +20,8 @@ static void CustomWarp_OnTrigger(Actor_CustomWarp* this, GameState_Play* play)
 
 static void CustomWarp_OnTrigger(Actor_CustomWarp* this, GameState_Play* play)
 {
-    play->transitionType = TRANS_TYPE_NORMAL;
-    play->transitionGfx = TRANS_GFX_BLACK;
+    play->transitionTrigger = TRANS_TRIGGER_NORMAL;
+    play->transitionType = TRANS_TYPE_BLACK;
 
     switch (this->base.variable)
     {

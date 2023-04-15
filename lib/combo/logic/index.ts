@@ -12,6 +12,7 @@ import { LogicPassConfig } from './config';
 import { LogicPassWorldTransform } from './world-transform';
 import { LogicError } from './error';
 import { LogicPassFixer } from './fixer';
+import { LogicPassAnalysisFoolish } from './analysis-foolish';
 
 interface LogicPass<Out> {
   run: () => Out;
@@ -75,6 +76,7 @@ export const logic = (monitor: Monitor, opts: Options) => {
 
   return pipeline(state)
     .apply(LogicPassAnalysis)
+    .apply(LogicPassAnalysisFoolish)
     .apply(LogicPassHints)
     .apply(LogicPassSpoiler)
     .apply(LogicPassHash)

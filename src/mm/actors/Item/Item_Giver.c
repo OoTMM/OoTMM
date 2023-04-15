@@ -74,7 +74,7 @@ void comboSpawnItemGiver(GameState_Play* play, u16 npcId)
 void comboSpawnItemGivers(GameState_Play* play)
 {
     /* Song of Healing */
-    if (!gMmExtraFlags2.songHealing)
+    if (!gMmExtraFlags2.songHealing && gSave.entranceIndex == 0xd800)
     {
         comboSpawnItemGiver(play, NPC_MM_SONG_HEALING);
     }

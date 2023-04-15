@@ -1,16 +1,20 @@
 "Swamp Spider House":
   dungeon: SSH
   exits:
-    "Swamp Back": "true"
-    "Swamp Spider House Main": "event(TIME_TRAVEL)"
+    "Near Swamp Spider House": "true"
+    "Swamp Spider House Main": "can_reset_time"
   locations:
     "Swamp Spider House Mask of Truth": "has(GS_TOKEN_SWAMP, 30)"
 "Swamp Spider House Main":
   dungeon: SSH
+  events:
+    MAGIC: "true"
+    RUPEES: "has_arrows"
+    BUGS: "has_bottle"
   exits:
     "Swamp Spider House": "true"
   locations:
-    "Swamp Skulltula Main Room Near Ceiling": "can_hookshot_short || has(MASK_ZORA) || (has(MASK_DEKU) && (has(BOW) || has(MAGIC_UPGRADE) || has(BOMB_BAG)))"
+    "Swamp Skulltula Main Room Near Ceiling": "can_hookshot_short || has(MASK_ZORA) || (has(MASK_DEKU) && (has(BOW) || has(MAGIC_UPGRADE) || (has(BOMB_BAG) || trick_keg_explosives)))"
     "Swamp Skulltula Main Room Lower Right Soft Soil": "has_bottle"
     "Swamp Skulltula Main Room Lower Left Soft Soil": "has_bottle"
     "Swamp Skulltula Main Room Upper Soft Soil": "has_bottle"

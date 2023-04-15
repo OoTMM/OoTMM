@@ -96,7 +96,7 @@ EnvironmentContext;
 
 _Static_assert(sizeof(EnvironmentContext) == 0x100, "MM EnvironmentContext size is wrong");
 
-typedef struct PACKED ALIGNED(4) GameState_Play
+typedef struct GameState_Play
 {
     GameState           gs;
     u16                 sceneId;
@@ -119,12 +119,34 @@ typedef struct PACKED ALIGNED(4) GameState_Play
     EnvironmentContext  envCtx;
     char                unk_17104[0x01698];
     s16                 playerActorCsIds[10];
-    char                unk_187B0[0x000C5];
-    u8                  transitionType;
-    char                unk_18876[0x00004];
+    float               viewProjectionMtxF[16];
+    Vec3f               projectionMtxFDiagonal;
+    float               billboardMtxF[16];
+    void*               billboardMtx;
+    u32                 gameplayFrames;
+    u8                  unk_18844;
+    u8                  haltAllActors;
+    s16                 numSetupActors;
+    u8                  numRooms;
+    void*               roomList;
+    void*               linkActorEntry;
+    void*               setupActorList;
+    void*               actorCsCamList;
+    void*               setupEntranceList;
+    u16*                setupExitList;
+    void*               setupPathList;
+    void*               naviQuestHints;
+    void*               sceneMaterialAnims;
+    void*               specialEffects;
+    u8                  skyboxId;
+    u8                  transitionTrigger;
+    s16                 worldCoverAlpha;
+    s16                 bgCoverAlpha;
     u16                 nextEntrance;
-    char                unk_1887c[3];
-    u8                  transitionGfx;
+    s8                  unk_1887c;
+    s8                  unk_1887d;
+    s8                  unk_1887e;
+    u8                  transitionType;
     char                unk_18880[0x2ca];
     u8                  transitionMode;
     char                unk_18b4b[0x70d];
@@ -140,14 +162,18 @@ GameData;
 
 extern GameData* gGameData;
 
-ASSERT_OFFSET(GameState_Play, unk_16938,    0x16938);
-ASSERT_OFFSET(GameState_Play, interfaceCtx, 0x169e8);
-ASSERT_OFFSET(GameState_Play, envCtx,       0x17004);
+ASSERT_OFFSET(GameState_Play, unk_16938,        0x16938);
+ASSERT_OFFSET(GameState_Play, interfaceCtx,     0x169e8);
+ASSERT_OFFSET(GameState_Play, envCtx,           0x17004);
+ASSERT_OFFSET(GameState_Play, gameplayFrames,   0x18840);
+ASSERT_OFFSET(GameState_Play, setupExitList,    0x18860);
+ASSERT_OFFSET(GameState_Play, transitionType,   0x1887f);
+ASSERT_OFFSET(GameState_Play, transitionMode,   0x18b4a);
 
-#define TRANS_TYPE_NONE         0x00
-#define TRANS_TYPE_NORMAL       0x14
+#define TRANS_TRIGGER_NONE          0x00
+#define TRANS_TRIGGER_NORMAL        0x14
 
-#define TRANS_GFX_BLACK     0x02
+#define TRANS_TYPE_BLACK     0x02
 
 _Static_assert(sizeof(GameState_Play) == 0x19258, "MM GameState_Play size is wrong");
 

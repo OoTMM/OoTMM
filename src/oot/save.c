@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/item.h>
 
 #define ENTRANCE_MARKET       0x1d1
 
@@ -111,6 +112,7 @@ static void applyStartingItems(void)
             for (u16 j = 0; j < count; ++j)
             {
                 gi = comboProgressive(gi);
+                gi = comboDowngrade(gi);
                 comboAddItemNoEffect(gi);
             }
         }
@@ -122,6 +124,19 @@ static void applyStartingEvents(void)
     if (comboConfig(CFG_DOOR_OF_TIME_OPEN))
     {
         SetEventChk(EV_OOT_CHK_DOOR_TIME);
+    }
+
+    if (comboConfig(CFG_OOT_SKIP_ZELDA))
+    {
+        SetEventChk(EV_OOT_CHK_ZELDA_LETTER);
+        SetEventChk(EV_OOT_CHK_SONG_ZELDA);
+        SetEventChk(EV_OOT_CHK_CHILD_TALON_WOKEN);
+        SetEventChk(EV_OOT_CHK_CHILD_TALON_FLED);
+    }
+
+    if (comboConfig(CFG_OOT_OPEN_KAKARIKO_GATE))
+    {
+        BITMAP16_SET(gSave.eventsMisc, EV_OOT_INF_KAKARIKO_GATE_OPEN);
     }
 
     if (gComboData.mq & (1 << MQ_TEMPLE_SHADOW))

@@ -7,6 +7,9 @@
   dungeon: Shadow
   exits:
     "Shadow Temple Main": "has_hover_boots && has_lens"
+  events:
+    #There are a lot of ways this works, but it always needs this trick.
+    MAGIC: "trick(OOT_LENS)"
   locations:
     "Shadow Temple Map": "has_lens"
     "Shadow Temple Hover Boots": "has_lens"
@@ -28,7 +31,7 @@
     "Shadow Temple Falling Spikes Upper 1": "has(STRENGTH) && has_lens"
     "Shadow Temple Falling Spikes Upper 2": "has(STRENGTH) && has_lens"
     "Shadow Temple Invisible Spike Room": "has(SMALL_KEY_SHADOW, 2) && can_hookshot && has_lens"
-    "Shadow Temple Skull": "has(SMALL_KEY_SHADOW, 2) && can_hookshot && has_explosives && has_lens"
+    "Shadow Temple Skull": "has(SMALL_KEY_SHADOW, 2) && can_hookshot && has_bombs && has_lens"
     "Shadow Temple GS Skull Pot": "has(SMALL_KEY_SHADOW, 2) && can_hookshot && has_lens"
     "Shadow Temple GS Falling Spikes": "can_hookshot"
     "Shadow Temple GS Invisible Scythe": "true"

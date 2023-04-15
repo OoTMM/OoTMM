@@ -1,8 +1,12 @@
-"Pirate Fortress Entrance":
-  region: PIRATE_FORTRESS_EXTERIOR
+"Pirate Fortress":
+  dungeon: PF
   exits:
-    "Great Bay Coast": "has(MASK_ZORA)"
-    "Great Bay Coast Captured": "true"
+    "Great Bay Coast Fortress": "has(MASK_ZORA)"
+    "Pirate Fortress Entrance": "can_reset_time"
+"Pirate Fortress Entrance":
+  dungeon: PF
+  exits:
+    "Pirate Fortress": "true"
     "Pirate Fortress Sewers": "has(MASK_ZORA) && has(MASK_GORON)"
     "Pirate Fortress Entrance Balcony": "can_hookshot || (can_hookshot_short && trick(MM_PFI_BOAT_HOOK))"
     "Pirate Fortress Entrance Lookout": can_hookshot_short && trick(MM_PFI_BOAT_HOOK)
@@ -13,7 +17,7 @@
     "Pirate Fortress Entrance Chest 2": "has(MASK_ZORA)"
     "Pirate Fortress Entrance Chest 3": "has(MASK_ZORA)"
 "Pirate Fortress Entrance Balcony":
-  region: PIRATE_FORTRESS_EXTERIOR
+  dungeon: PF
   exits:
     "Pirate Fortress Entrance": "true"
     "Pirate Fortress Sewers End": "true"
@@ -68,7 +72,7 @@
     "Pirate Fortress Entrance Lookout": "true"
     "Pirate Fortress Barrel Maze": "true"
 "Pirate Fortress Entrance Lookout":
-  region: PIRATE_FORTRESS_EXTERIOR
+  dungeon: PF
   exits:
     "Pirate Fortress Barrel Maze Entry": "true"
     "Pirate Fortress Entrance": "true"
@@ -143,6 +147,6 @@
     "Pirate Fortress Treasure Room Aquarium": "true"
     "Pirate Fortress Interior": "true"
 "Pirate Fortress Entrance Captured":
-  region: PIRATE_FORTRESS_EXTERIOR
+  dungeon: PF
   exits:
     "Pirate Fortress Entrance Balcony": "true"

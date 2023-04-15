@@ -1,5 +1,5 @@
-#ifndef COMBO_ITEMS_H
-#define COMBO_ITEMS_H
+#ifndef COMBO_DATA_ITEMS_H
+#define COMBO_DATA_ITEMS_H
 
 #define ITEM_OOT_STICK                  0x00
 #define ITEM_OOT_NUT                    0x01
@@ -457,5 +457,6 @@
 #define SITEM_HEART_CONTAINER   0x19
 #define SITEM_RECOVERY_HEART    0x1a
 #define SITEM_DEFENSE_UPGRADE   0x1b
+#define SITEM_SONG_SUN          0x1c
 
 #endif
