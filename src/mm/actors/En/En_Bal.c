@@ -41,16 +41,66 @@ static int EnBal_GetTingleId(GameState_Play* play)
     }
 }
 
-static void EnBal_OverrideTextMapName(char** b, int mapId, int price)
+static s16 EnBal_GetGI(int mapId, int checkSoldOut, int flags)
 {
-    u16 gi;
+    s16 gi;
     u8 npcId;
     u8 soldOut;
 
     npcId = kTingleNpc[mapId];
-    gi = comboOverrideEx(OV_NPC, 0, npcId, kTingleMaps[mapId], 0);
-    soldOut = MM_GET_EVENT_WEEK(0x118 + mapId);
-    if (soldOut && !comboIsItemConsumable(gi))
+    gi = comboOverrideEx(OV_NPC, 0, npcId, kTingleMaps[mapId], flags);
+    if (checkSoldOut)
+    {
+        soldOut = MM_GET_EVENT_WEEK(0x118 + mapId);
+        if (soldOut && !comboIsItemConsumable(gi))
+            return -1;
+    }
+    return gi;
+}
+
+static void EnBal_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
+{
+    s16 mapId;
+
+    mapId = *(s16*)((char*)this + 0x3ac);
+    gi = EnBal_GetGI(mapId, 0, OVF_PROGRESSIVE);
+    GiveItem(this, play, gi, a, b);
+}
+
+PATCH_CALL(0x80a635c4, EnBal_GiveItem);
+
+static int EnBal_AlreadyBoughtItemWrapper(Actor* this, GameState_Play* play)
+{
+    int (*EnBal_AlreadyBoughtItem)(Actor*, GameState_Play*);
+    int precond;
+    s16 mapId;
+    s16 gi;
+
+    /* Precompte the mapId */
+    EnBal_AlreadyBoughtItem = actorAddr(0x176, 0x80a62dcc);
+    EnBal_AlreadyBoughtItem(this, play);
+    mapId = *(s16*)((char*)this + 0x3ac);
+
+    /* Get the item */
+    gi = EnBal_GetGI(mapId, 1, 0);
+    if (gi == -1)
+        return 1;
+
+    /* Check for preconds (rupees are checked separately) */
+    precond = comboItemPrecond(gi, 0);
+    if (precond == SC_OK || precond == SC_OK_NOCUTSCENE)
+        return 0;
+    return 1;
+}
+
+PATCH_CALL(0x80a63050, EnBal_AlreadyBoughtItemWrapper);
+
+static void EnBal_OverrideTextMapName(char** b, int mapId, int price)
+{
+    s16 gi;
+
+    gi = EnBal_GetGI(mapId, 1, 0);
+    if (gi == -1)
     {
         comboTextAppendStr(b, TEXT_COLOR_RED "SOLD OUT");
         comboTextAppendClearColor(b);

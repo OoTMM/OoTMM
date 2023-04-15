@@ -1,3 +1,4 @@
+import { isTingleMap } from './items';
 import { World } from './world';
 
 export const ONE_TIME_SHOP_CHECKS = [
@@ -21,5 +22,9 @@ export function isLocationRenewable(world: World, loc: string) {
   if (ONE_TIME_SHOP_CHECKS.includes(loc))
     return false;
   const check = world.checks[loc];
-  return ['shop', 'cow', 'scrub'].includes(check.type);
+  if (['shop', 'cow', 'scrub'].includes(check.type))
+    return true;
+  if (isTingleMap(check.item))
+    return true;
+  return false;
 }
