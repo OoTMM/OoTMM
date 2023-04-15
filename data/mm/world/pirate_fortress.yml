@@ -118,7 +118,7 @@
     "Pirate Fortress Lone Guard Exit": "true"
   events:
     ZORA_EGGS_LONE_GUARD: "can_hookshot_short && has(MASK_ZORA) && has_bottle"
-    ARROWS: 'true"
+    ARROWS: "true"
   locations:
     "Pirate Fortress Interior Aquarium": "has(MASK_ZORA) && can_hookshot_short"
 "Pirate Fortress Lone Guard Exit":
