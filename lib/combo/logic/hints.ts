@@ -191,7 +191,7 @@ export class LogicPassHints {
     }
 
     /* Non-shuffled dungeon reward */
-    if (isDungeonReward(item) && this.state.settings.dungeonRewardShuffle !== 'anywhere') {
+    if (isDungeonReward(item) && this.state.settings.dungeonRewardShuffle === 'dungeonBlueWarps') {
       return true;
     }
 

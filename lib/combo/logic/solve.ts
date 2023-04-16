@@ -4,12 +4,36 @@ import { gameId } from '../util';
 import { Pathfinder, PathfinderState } from './pathfind';
 import { World } from './world';
 import { LogicError, LogicSeedError } from './error';
-import { Items, combinedItems, itemsArray, removeItem, ITEMS_REQUIRED, isDungeonReward, isGoldToken, isHouseToken, isKey, isStrayFairy, isSmallKey, isGanonBossKey, isRegularBossKey, isTownStrayFairy, isDungeonStrayFairy, isSong, isJunk, isMapCompass, isSmallKeyRegular, isSmallKeyHideout, isItemUnlimitedStarting, isItemCriticalRenewable, isRupees, isItemConsumable, isItemMajor } from './items';
+import { Items, combinedItems, itemsArray, removeItem, ITEMS_REQUIRED, isDungeonReward, isGoldToken, isHouseToken, isKey, isStrayFairy, isGanonBossKey, isRegularBossKey, isTownStrayFairy, isDungeonStrayFairy, isSong, isJunk, isMapCompass, isSmallKeyRegular, isSmallKeyHideout, isItemUnlimitedStarting, isItemCriticalRenewable, isRupees, isItemConsumable, isItemMajor } from './items';
 import { Settings } from '../settings';
 import { Monitor } from '../monitor';
 import { isLocationRenewable } from './locations';
 
 export type ItemPlacement = {[k: string]: string};
+
+const REWARDS_DUNGEONS = [
+  'DT',
+  'DC',
+  'JJ',
+  'Forest',
+  'Fire',
+  'Water',
+  'Shadow',
+  'Spirit',
+  'WF',
+  'SH',
+  'GB',
+  'ST',
+  'BotW',
+  'IC',
+  'GTG',
+  'SSH',
+  'OSH',
+  'PF',
+  'BtW',
+  'ACoI',
+  'SS',
+];
 
 type ItemPools = {
   required: Items,
@@ -70,6 +94,11 @@ export class LogicPassSolver {
     /* Place items fixed to default */
     this.fixTokens();
     this.fixFairies();
+
+    /* Place dungeon rewards (when set to dungeon locs) */
+    if (['dungeons', 'dungeonsLimited'].includes(this.state.settings.dungeonRewardShuffle)) {
+      this.placeDungeonRewardsInDungeons();
+    }
 
     /* Place semi-shuffled items */
     this.placeSemiShuffled();
@@ -342,6 +371,46 @@ export class LogicPassSolver {
 
     /* Fill extra locations with junk */
     this.fillJunk(locations);
+  }
+
+  private placeDungeonRewardsInDungeons() {
+    const allDungeons = new Set([...REWARDS_DUNGEONS]);
+    const rewards = shuffle(this.state.random, itemsArray(this.pools.required).filter(x => isDungeonReward(x)));
+
+    for (const reward of rewards) {
+      const pool = { ...this.pools.required };
+      const dungeons = shuffle(this.state.random, [...allDungeons]);
+      let error: LogicSeedError | null = null;
+
+      for (const dungeon of dungeons) {
+        /* We have a reward and a dungeon - try to place it */
+        let locations = this.state.world.dungeons[dungeon];
+        if (dungeon === 'ST') {
+          locations = new Set([...locations, ...this.state.world.dungeons['IST']]);
+        }
+        error = null;
+        try {
+          this.randomAssumed(pool, { restrictedLocations: locations, forcedItem: reward });
+        } catch (err) {
+          if (err instanceof LogicSeedError) {
+            error = err;
+          } else {
+            throw err;
+          }
+        }
+
+        if (!error) {
+          /* We placed the reward */
+          removeItemPools(this.pools, reward);
+          if (this.state.settings.dungeonRewardShuffle === 'dungeonsLimited') {
+            allDungeons.delete(dungeon);
+          }
+          break;
+        }
+      }
+
+      if (error) throw error;
+    }
   }
 
   private placeJunkLocations() {

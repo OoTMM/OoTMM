@@ -159,6 +159,8 @@ export const SETTINGS = [{
   type: 'enum',
   values: [
     { value: 'dungeonBlueWarps', name: 'Dungeon Blue Warps' },
+    { value: 'dungeonsLimited', name: 'Dungeons (Max one per dungeon)' },
+    { value: 'dungeons', name: 'Dungeons (Unrestricted)' },
     { value: 'anywhere', name: 'Anywhere' },
   ],
   default: 'dungeonBlueWarps'
