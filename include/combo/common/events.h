@@ -1,6 +1,9 @@
 #ifndef COMBO_COMMON_EVENTS_H
 #define COMBO_COMMON_EVENTS_H
 
+#define OOT_EV_INF(a, b)    (((a) << 4) | (b))
+#define MM_EV(a, b)         (((a) << 3) | (b))
+
 #define EV_OOT_CHK_DEKU_MIDO_MEET           0x02
 #define EV_OOT_CHK_DEKU_MIDO_SWORD_SHIELD   0x04
 #define EV_OOT_CHK_EMERALD_TREE_DEAD        0x07
@@ -64,6 +67,14 @@
 #define EV_OOT_INF_KAKARIKO_GATE_OPEN       0x076
 #define EV_OOT_INF_KING_ZORA_THAWED         0x138
 #define EV_OOT_INF_MAGIC_JAR                0x198
+#define EV_OOT_INF_RUTO_ON_BLUE_SWITCH      OOT_EV_INF(20, 0)
+#define EV_OOT_INF_RUTO_MET                 OOT_EV_INF(20, 1)
+#define EV_OOT_INF_RUTO_TALKED              OOT_EV_INF(20, 2)
+#define EV_OOT_INF_RUTO_ESCORT              OOT_EV_INF(20, 3)
+#define EV_OOT_INF_RUTO_ASK_SAPPHIRE        OOT_EV_INF(20, 4)
+#define EV_OOT_INF_RUTO_GOT_SAPPHIRE        OOT_EV_INF(20, 5)
+#define EV_OOT_INF_RUTO_KIDNAPPED           OOT_EV_INF(20, 6)
+#define EV_OOT_INF_RUTO_TOP_FLOOR           OOT_EV_INF(20, 7)
 
 /* Custom flags that seems unused */
 #define EV_OOT_CHK_SONG_SARIA               0x58
@@ -71,8 +82,6 @@
 #define EV_OOT_CHK_SONG_EPONA               0x62
 #define EV_OOT_ITEM_GORON_BRACELET          0x20
 #define EV_OOT_INF_MEDIGORON                0xb2
-
-#define MM_EV(a, b) (((a) << 3) | (b))
 
 #define EV_MM_WEEK_ENTERED_TERMINA              MM_EV(0x00, 1)
 #define EV_MM_WEEK_ENTERED_CLOCK_TOWN_EAST      MM_EV(0x02, 3)

@@ -123,6 +123,14 @@ static void eventFixes(GameState_Play* play)
         if (!(tmp & 0xff))
             tmp |= 0x1e;
         gSave.eventsMisc[20] = tmp;
+
+        /* Ruto kidnap fixes */
+        if (BITMAP16_GET(gSave.eventsMisc, EV_OOT_INF_RUTO_KIDNAPPED) || BITMAP16_GET(gSave.eventsMisc, EV_OOT_INF_RUTO_GOT_SAPPHIRE))
+        {
+            /* Un-kidnap ruto */
+            BITMAP16_CLEAR(gSave.eventsMisc, EV_OOT_INF_RUTO_KIDNAPPED);
+            BITMAP16_CLEAR(gSave.eventsMisc, EV_OOT_INF_RUTO_GOT_SAPPHIRE);
+        }
     }
 
     /* Skip Zelda's cutscene when having all the spiritual stones */

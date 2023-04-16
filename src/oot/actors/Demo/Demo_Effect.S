@@ -34,6 +34,24 @@ PATCH_START 0x8092ad3c
   la t6, DemoEffect_DrawSpiritualLoader
 PATCH_END
 
+/* Check for big octo clear to delete the stone in jabu */
+CheckSpiritualStoneJabu:
+  /* Replaced code (checks for ruto event) */
+  lhu   t8,-0x4b10(t8)
+  andi  t9,t8,0x20
+
+  /* Check for big octo clear */
+  la    t8,(gOotSave + 0xd4 + 0x1c * SCE_OOT_INSIDE_JABU_JABU + 0x08)
+  andi  t8,(1 << 6)
+
+  jr    ra
+    or  t9,t8
+
+PATCH_START 0x8092b5bc
+  jal CheckSpiritualStoneJabu
+   nop
+PATCH_END
+
 /* Relocs */
 PATCH_START 0x80930364
 .int 0
