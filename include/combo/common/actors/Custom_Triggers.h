@@ -5,8 +5,9 @@
 
 typedef struct
 {
-    Actor base;
-    int   trigger;
+    Actor   base;
+    int     trigger;
+    int     acc;
     struct
     {
         u8 weirdEgg:1;

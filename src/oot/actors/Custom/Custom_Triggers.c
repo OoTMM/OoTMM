@@ -39,6 +39,22 @@ static void CustomTriggers_Init(Actor_CustomTriggers* this, GameState_Play* play
     gActorCustomTriggers = this;
 }
 
+static int CustomTrigger_ItemSafe(Actor_CustomTriggers* this, GameState_Play* play)
+{
+    Actor_Player* link;
+
+    link = GET_LINK(play);
+    if (link->state & (PLAYER_ACTOR_STATE_GET_ITEM | PLAYER_ACTOR_STATE_CUTSCENE_FROZEN))
+    {
+        this->acc = 0;
+        return 0;
+    }
+    this->acc++;
+    if (this->acc > 3)
+        return 1;
+    return 0;
+}
+
 static void CustomTriggers_HandleTrigger(Actor_CustomTriggers* this, GameState_Play* play)
 {
     switch (this->trigger)
@@ -89,7 +105,7 @@ static void CustomTriggers_HandleTrigger(Actor_CustomTriggers* this, GameState_P
         }
         break;
     case TRIGGER_GANON_BK:
-        if (CustomTriggers_GiveItem(this, play, GI_OOT_BOSS_KEY_GANON))
+        if (CustomTrigger_ItemSafe(this, play) && CustomTriggers_GiveItem(this, play, GI_OOT_BOSS_KEY_GANON))
         {
             gOotExtraFlags.ganonBossKey = 1;
             this->trigger = TRIGGER_NONE;
@@ -154,6 +170,7 @@ static void CustomTriggers_CheckTrigger(Actor_CustomTriggers* this, GameState_Pl
     /* Ganon BK */
     if (comboConfig(CFG_OOT_GANON_BK_CUSTOM) && !gOotExtraFlags.ganonBossKey && comboSpecialCond(SPECIAL_GANON_BK))
     {
+        this->acc = 0;
         this->trigger = TRIGGER_GANON_BK;
         return;
     }
