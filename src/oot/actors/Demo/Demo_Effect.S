@@ -42,6 +42,7 @@ CheckSpiritualStoneJabu:
 
   /* Check for big octo clear */
   la    t8,(gOotSave + 0xd4 + 0x1c * SCE_OOT_INSIDE_JABU_JABU + 0x08)
+  lw    t8,(t8)
   andi  t8,(1 << 6)
 
   jr    ra
