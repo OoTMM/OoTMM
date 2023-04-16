@@ -49,7 +49,7 @@
 "can_activate_crystal": "can_break_boulders || has_weapon || has_arrows || can_hookshot_short || has(MASK_DEKU) || has(MASK_ZORA)"
 "can_evade_gerudo": "has_arrows || can_hookshot_short || has(MASK_ZORA) || has(MASK_STONE)"
 "has_hot_water": "event(GORON_GRAVEYARD_HOT_WATER) || event(TWIN_ISLANDS_HOT_WATER)"
-"has_hot_water_distance": "has(SONG_SOARING) && (event(GORON_GRAVEYARD_HOT_WATER) || event(TWIN_ISLANDS_HOT_WATER) || event(WELL_HOT_WATER))"
+"has_hot_water_distance": "can_soar && (event(GORON_GRAVEYARD_HOT_WATER) || event(TWIN_ISLANDS_HOT_WATER) || event(WELL_HOT_WATER))"
 "can_goron_bomb_jump": "trick(MM_GORON_BOMB_JUMP) && has(MASK_GORON) && (has_bombs || trick_keg_explosives)"
 "can_hookshot_short": "has(HOOKSHOT)"
 "can_hookshot": "cond(setting(shortHookshotMm), has(HOOKSHOT, 2), has(HOOKSHOT))"
@@ -77,6 +77,9 @@
 "bombers1": "event(BOMBERS_NORTH1) && event(BOMBERS_EAST1) && event(BOMBERS_WEST1)"
 "bombers2": "event(BOMBERS_NORTH2) && event(BOMBERS_EAST2) && event(BOMBERS_WEST2)"
 "bombers3": "event(BOMBERS_NORTH3) && event(BOMBERS_EAST3) && event(BOMBERS_WEST3)"
+"can_soar": "has(SONG_SOARING) && (event(CLOCK_TOWN_OWL) || event(SWAMP_OWL) || event(WOODFALL_OWL) || event(MOUNTIAN_VILLAGE_OWL) || event(SNOWHEAD_OWL) || event(MILK_ROAD_OWL) || event(GREAT_BAY_OWL) || event(ZORA_CAPE_OWL) || event(IKANA_CANYON_OWL) || event(STONE_TOWER_OWL))"
+"can_oot_warp": "setting(crossWarpOot) && has_ocarina && (has(OOT_SONG_TP_LIGHT) || has(OOT_SONG_TP_FOREST) || has(OOT_SONG_TP_FIRE) || has(OOT_SONG_TP_WATER) || has(OOT_SONG_TP_SPIRIT) || has(OOT_SONG_TP_SHADOW))"
+"can_warp": "can_soar || can_oot_warp"
 
 # Wallets
 "has_wallet(n)": "cond(setting(childWallets), has(WALLET, n), has(WALLET, n - 1))"

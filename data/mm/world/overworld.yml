@@ -2,7 +2,7 @@
   region: NONE
   exits:
     "OOT SONGS": "setting(crossWarpOot) && has_ocarina"
-    "SOARING": "can_play(SONG_TIME) && can_play(SONG_SOARING)"
+    "SOARING": "can_play(SONG_TIME) && has(SONG_SOARING)"
 "Tingle Town":
   region: TINGLE
   locations:
@@ -1170,6 +1170,8 @@
   region: ROMANI_RANCH
   events:
     ALIENS: "before(NIGHT1_AM_02_30) && has_arrows"
+    ARROWS: "true"
+    MAGIC: "true"
   exits:
     "Near Romani Ranch": "true"
     "Cucco Shack": "(after(DAY1_AM_06_00) && before(NIGHT1_PM_08_00)) || (after(DAY2_AM_06_00) && before(NIGHT2_PM_08_00)) || (after(DAY3_AM_06_00) && before(NIGHT3_PM_08_00))"
@@ -1186,6 +1188,8 @@
     "Romani Ranch Gossip Near Tree": "true"
 "Cucco Shack":
   region: ROMANI_RANCH
+  events:
+    RUPEES: "has_weapon_range || has_weapon || can_break_boulders"
   exits:
     "Romani Ranch": "true"
   locations:
@@ -1229,17 +1233,20 @@
     "Zora Cape": "true"
     "Ocean Spider House": "true"
     "Tingle Great Bay": "can_hookshot || has(BOW)"
+    "Great Bay Grotto": "true"
+    "GBC Near Cow Grotto": "can_hookshot"
   events:
     GREAT_BAY_OWL: "has(SONG_SOARING) && (has_sticks || has_weapon)"
-    STICKS: "true"
-    NUTS: "true"
+    MAGIC: "true"
+    BOMBS: "true"
+    ARROWS: "true"
+    RUPEES: "true"
+    BUGS: "has_bottle"
+    FISH: "has_bottle"
   locations:
     "Great Bay Coast Zora Mask": "can_play(SONG_HEALING)"
     "Great Bay Coast HP": "can_use_beans && scarecrow_hookshot"
-    "Great Bay Coast Fisherman HP": "can_hookshot_short && event(BOSS_GREAT_BAY) && ((after(DAY1_AM_07_00) && before(NIGHT1_AM_04_00)) || (after(DAY2_AM_07_00) && before(NIGHT2_AM_04_00)) || (after(DAY3_AM_07_00) && before(NIGHT3_AM_04_00)))"
-    "Great Bay Coast Fisherman Grotto": "true"
-    "Great Bay Coast Cow Front": "can_hookshot && can_play(SONG_EPONA)"
-    "Great Bay Coast Cow Back": "can_hookshot && can_play(SONG_EPONA)"
+    "Great Bay Coast Fisherman HP": "can_use_wallet(1) && can_hookshot_short && event(BOSS_GREAT_BAY) && ((after(DAY1_AM_07_00) && before(NIGHT1_AM_04_00)) || (after(DAY2_AM_07_00) && before(NIGHT2_AM_04_00)) || (after(DAY3_AM_07_00) && before(NIGHT3_AM_04_00)))"
   gossip:
     "Great Bay Coast Gossip": "true"
 "Great Bay Coast Fortress":
@@ -1247,6 +1254,38 @@
   exits:
     "Great Bay Coast": "has(MASK_ZORA)"
     "Pirate Fortress": "true"
+"Great Bay Grotto":
+  region: GREAT_BAY_COAST
+  events:
+    MAGIC: "true"
+    BOMBS: "true"
+    ARROWS: "true"
+    RUPEES: "true"
+    STICKS: "true"
+    NUTS: "true"
+    BUGS: "has_bottle"
+    FISH: "has_bottle"
+  exits:
+    "Great Bay Coast": "true"
+  locations:
+    "Great Bay Coast Fisherman Grotto": "true"
+"GBC Near Cow Grotto":
+  region: GREAT_BAY_COAST
+  exits:
+    "Great Bay Coast": "true"
+    "Great Bay Cow Grotto": "true"
+"Great Bay Cow Grotto":
+  region: GREAT_BAY_COAST
+  events:
+    MAGIC: "true"
+    BOMBS: "true"
+    ARROWS: "true"
+    RUPEES: "true"
+  exits:
+    "Great Bay Coast": "true"
+  locations:
+    "Great Bay Coast Cow Front": "can_play(SONG_EPONA)"
+    "Great Bay Coast Cow Back": "can_play(SONG_EPONA)"
 "Fisher's Hut":
   region: GREAT_BAY_COAST
   exits:
@@ -1264,6 +1303,7 @@
     "Pinnacle Rock Entrance": "true"
   events:
     ZORA_EGGS_PINNACLE_ROCK: "has(MASK_ZORA) && has_bottle"
+    MAGIC: "true"
   locations:
     "Pinnacle Rock Chest 1": "has(MASK_ZORA)"
     "Pinnacle Rock Chest 2": "has(MASK_ZORA)"
@@ -1278,18 +1318,34 @@
 "Zora Cape":
   region: ZORA_CAPE
   events:
-    STICKS: "can_break_boulders"
-    NUTS: "can_break_boulders"
+    MAGIC: "true"
   exits:
     "Great Bay Coast": "true"
-    "Zora Hall Entrance": "has(MASK_ZORA)"
+    "Zora Cape Near Hall": "has(MASK_ZORA)"
     "Zora Cape Peninsula": "has(MASK_ZORA) || trick(MM_ZORA_HALL_HUMAN)"
     "Waterfall Cliffs": "can_hookshot"
     "Great Bay Near Fairy Fountain": "can_hookshot" #|| (can_use_ice_arrows && (has(MASK_ZORA) || can_hookshot_short))
+    "Zora Cape Grotto": "can_break_boulders"
   locations:
     "Zora Cape Underwater Chest": "has(MASK_ZORA)"
     "Zora Cape Waterfall HP": "has(MASK_ZORA)"
-    "Zora Cape Grotto": "can_break_boulders"
+  gossip:
+    "Zora Cape Gossip": "true"
+"Zora Cape Grotto":
+  region: ZORA_CAPE
+  events:
+    MAGIC: "true"
+    ARROWS: "true"
+    BOMBS: "true"
+    RUPEES: "true"
+    STICKS: "true"
+    NUTS: "true"
+    FISH: "has_bottle"
+    BUGS: "has_bottle"
+  exits:
+    "Great Bay Coast": "true"
+  locations:
+    "Zora Cape Grotto": "true"
   gossip:
     "Zora Cape Gossip": "true"
 "Great Bay Near Fairy Fountain":
@@ -1307,7 +1363,7 @@
   region: ZORA_CAPE
   exits:
     "Zora Cape": "true"
-    "Waterfall Rapids": "can_hookshot"
+    "Waterfall Rapids": "true"
   locations:
     "Zora Cape Ledge Chest 1": "can_hookshot"
     "Zora Cape Ledge Chest 2": "can_hookshot"
@@ -1318,31 +1374,58 @@
   locations:
     "Waterfall Rapids Beaver Race 1": "has(MASK_ZORA)"
     "Waterfall Rapids Beaver Race 2": "has(MASK_ZORA)"
-"Zora Hall Entrance":
+"Zora Cape Near Hall":
   region: ZORA_CAPE
   exits:
     "Zora Cape": "has(MASK_ZORA)"
-    "Zora Hall": "has(MASK_ZORA)"
+    "Zora Hall Entrance": "has(MASK_ZORA)"
+"Zora Hall Entrance":
+  region: ZORA_HALL
+  exits:
+    "Zora Cape Near Hall": "has(MASK_ZORA)"
+    "Zora Hall": "true"
 "Zora Hall":
   region: ZORA_HALL
   exits:
-    "Zora Hall Entrance": "has(MASK_ZORA)"
+    "Zora Hall Entrance": "true"
     "Zora Cape Peninsula": "true"
     "Zora Shop": "true"
+    "Drummer Room": "has(MASK_ZORA)"
+    "Japas' Room": "has(MASK_ZORA)"
+    "Evan's Room": "has(MASK_ZORA)"
+    "Lulu's Room": "has(MASK_ZORA)"
   locations:
-    "Zora Hall Scrub HP": "has(MASK_ZORA) && (trick(MM_ZORA_HALL_SCRUB_HP_NO_DEKU) || (has(MASK_GORON) && has(MASK_DEKU) && has(DEED_MOUNTAIN)))"
-    "Zora Hall Scrub Deed": "has(DEED_MOUNTAIN) && has(MASK_GORON) && has(MASK_ZORA)"
-    #"Zora Hall Scrub Purchase": "has(MASK_ZORA)"
-    "Zora Hall Evan HP": "has(MASK_ZORA) && has_ocarina"
     "Zora Hall Scene Lights": "can_use_fire_arrows"
 "Zora Shop":
   region: ZORA_HALL
   exits:
     "Zora Hall": "true"
   locations:
-    "Zora Shop Item 1": "true"
-    "Zora Shop Item 2": "true"
-    "Zora Shop Item 3": "true"
+    "Zora Shop Item 1": "can_use_wallet(1)"
+    "Zora Shop Item 2": "can_use_wallet(1)"
+    "Zora Shop Item 3": "can_use_wallet(1)"
+"Drummer Room":
+  region: ZORA_HALL
+  exits:
+    "Zora Hall": "true"
+"Japas' Room":
+  region: ZORA_HALL
+  exits:
+    "Zora Hall": "true"
+"Evan's Room":
+  region: ZORA_HALL
+  exits:
+    "Zora Hall": "true"
+  locations:
+    "Zora Hall Evan HP": "has_ocarina"
+"Lulu's Room":
+  region: ZORA_HALL
+  exits:
+    "Zora Hall": "true"
+  locations:
+    "Zora Hall Scrub HP": "(trick(MM_ZORA_HALL_SCRUB_HP_NO_DEKU) && (has(MASK_GORON) || has(MASK_ZORA))) || (has(MASK_GORON) && has(MASK_DEKU) && has(DEED_MOUNTAIN))"
+    "Zora Hall Scrub Deed": "has(DEED_MOUNTAIN) && has(MASK_GORON)"
+    #"Zora Hall Scrub Purchase": "has(MASK_ZORA)"
 "Zora Cape Peninsula":
   region: ZORA_CAPE
   exits:
