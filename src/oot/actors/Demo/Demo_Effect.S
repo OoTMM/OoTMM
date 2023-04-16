@@ -28,3 +28,14 @@ PATCH_END
 PATCH_START 0x8092b498
   li t1,(DRAWGI_ARROW_LIGHT - 1)
 PATCH_END
+
+/* Use our own draw wrapper */
+PATCH_START 0x8092ad3c
+  la t6, DemoEffect_DrawSpiritualLoader
+PATCH_END
+
+/* Relocs */
+PATCH_START 0x80930364
+.int 0
+.int 0
+PATCH_END

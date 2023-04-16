@@ -39,6 +39,8 @@ void EnGs_TalkedTo(Actor*, GameState_Play*);
 void EnGm_TalkedTo(Actor*, GameState_Play*);
 void EnMs_TalkedTo(Actor*, GameState_Play*);
 
+void DemoEffect_TextRutoSapphire(GameState_Play*);
+
 void Player_TalkDisplayTextBox(GameState_Play* play, s16 textId, Actor* actor)
 {
     PlayerDisplayTextBox(play, textId, actor);
@@ -57,6 +59,11 @@ void Player_TalkDisplayTextBox(GameState_Play* play, s16 textId, Actor* actor)
             break;
         }
     }
+
+    /* Ruto's Sapphire */
+    if (textId == 0x4050)
+        DemoEffect_TextRutoSapphire(play);
 }
 
 PATCH_CALL(0x80838464, Player_TalkDisplayTextBox);
+PATCH_CALL(0x80055d50, Player_TalkDisplayTextBox);
