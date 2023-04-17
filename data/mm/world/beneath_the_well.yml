@@ -20,7 +20,7 @@
   exits:
     "Beneath the Well Entrance": "true"
     "Beneath the Well Middle Section": "has(MASK_GIBDO) && event(FISH)"
-    "Beneath the Well Cow Hall": "has_nuts"
+    "Beneath the Well Cow Hall": "has(MASK_GIBDO) && has_nuts"
   events:
     STICKS: "can_kill_baba_sticks"
     WATER: "has_bottle"
