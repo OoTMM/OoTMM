@@ -31,8 +31,6 @@
   dungeon: IST
   exits:
     "Stone Tower Temple Inverted East": "true"
-    "Stone Tower Temple Inverted East Bridge": "true"
-    "Stone Tower Temple Inverted Wizzrobe": "(can_use_light_arrows || (can_goron_bomb_jump && has_bombs)) && has(SMALL_KEY_ST, 3)"
     "Stone Tower Temple Inverted Center Bridge": "trick(MM_ISTT_EYEGORE) && (has_shield || has(MASK_ZORA)) && has_explosives"
     "Stone Tower Temple Inverted Boss Key Room": trick(MM_ISTT_EYEGORE)
 "Stone Tower Temple Inverted East Ledge":
