@@ -1519,7 +1519,7 @@
     FISH: "has_bottle"
     BUGS: "has_bottle"
   exits:
-    "Ikana Graveyard Grotto": "true"
+    "Ikana Graveyard": "true"
   locations:
     "Ikana Graveyard Grotto": "true"
 "Beneath The Graveyard Night 1":
