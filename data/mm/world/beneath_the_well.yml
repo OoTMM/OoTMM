@@ -7,7 +7,7 @@
 "Beneath the Well North Section":
   dungeon: BtW
   events:
-    WELL_HOT_WATER: "event(FISH) && (has_explosives || has(MASK_ZORA) || trick_keg_explosives || trick(WELL_HSW))"
+    WELL_HOT_WATER: "event(FISH) && (has_explosives || has(MASK_ZORA) || trick_keg_explosives || trick(MM_WELL_HSW))"
     WATER: "true"
     FISH: "true"
     BUGS: "event(WATER) && (can_use_fire_arrows || has_sticks)"
