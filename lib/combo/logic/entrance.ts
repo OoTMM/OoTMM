@@ -334,13 +334,11 @@ export class LogicPassEntrances {
     return exprAnd([e, subcond]);
   }
 
-  private place(src: Entrance, dst: Entrance, soaring: boolean) {
+  private place(src: Entrance, dst: Entrance, overworld: boolean) {
     /* Change the world */
     let expr = src.expr;
-    if (src.game === 'oot' && dst.game === 'mm') {
-      if (soaring) {
-        this.world.areas[src.from].exits['MM GLOBAL'] = expr;
-      }
+    if (overworld && src.game === 'oot' && dst.game === 'mm') {
+      this.world.areas[src.from].exits['MM GLOBAL'] = expr;
       expr = this.songOfTime(expr);
     }
     this.world.areas[src.from].exits[dst.to] = expr;
