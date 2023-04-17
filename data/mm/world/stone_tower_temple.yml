@@ -5,12 +5,16 @@
     "Stone Tower Front of Temple": "true"
 "Stone Tower Temple Entrance":
   dungeon: ST
+  events:
+    MAGIC: "true"
+    ARROWS: "true"
+    RUPEES: "true"
   exits:
     "Stone Tower Temple": "true"
     "Stone Tower Temple West": "true"
     "Stone Tower Temple Water Room": "can_use_light_arrows || event(STONE_TOWER_EAST_ENTRY_BLOCK)"
   locations:
-    "Stone Tower Temple Entrance Chest": "has(BOW)"
+    "Stone Tower Temple Entrance Chest": "has_arrows"
     "Stone Tower Temple Entrance Switch Chest": "event(STONE_TOWER_ENTRANCE_CHEST_SWITCH)"
 "Stone Tower Temple West":
   dungeon: ST
@@ -38,7 +42,7 @@
     "Stone Tower Temple West Garden": "has(SMALL_KEY_ST, 4) || (has(SMALL_KEY_ST, 3) && has(MASK_GORON) && (has_explosives || trick_keg_explosives) && can_play(SONG_EMPTINESS))"
     "Stone Tower Temple Center": "true"
   locations:
-    "Stone Tower Temple Center Sun Block Chest": "(has(MASK_ZORA) || has(MASK_DEKU) || has_explosives || (has(MAGIC_UPGRADE) && (has_weapon && has(SPIN_UPGRADE))) || has(SWORD, 3) || has(GREAT_FAIRY_SWORD) || can_use_ice_arrows) && can_use_light_arrows"
+    "Stone Tower Temple Center Sun Block Chest": "(has(MASK_ZORA) || has(MASK_DEKU) || has_explosives || (has_magic && (has_weapon && has(SPIN_UPGRADE))) || has(SWORD, 3) || has(GREAT_FAIRY_SWORD) || can_use_ice_arrows) && can_use_light_arrows"
 "Stone Tower Temple Center":
   dungeon: ST
   exits:
@@ -92,6 +96,6 @@
   exits:
     "Stone Tower Temple Entrance": "true"
     "Stone Tower Temple Center": "can_goron_bomb_jump"
-    "Stone Tower Temple Center Ledge": "(can_goron_bomb_jump && (has(BOMB_BAG) || (has(SMALL_KEY_ST, 3) && trick_keg_explosives))) && can_use_ice_arrows"    
+    "Stone Tower Temple Center Ledge": "(can_goron_bomb_jump && (has_bombs || (has(SMALL_KEY_ST, 3) && trick_keg_explosives))) && can_use_ice_arrows"    
   locations:
     "Stone Tower Temple Water Bridge Chest": "true"

@@ -6,37 +6,56 @@
     "Beneath the Well East Section": "can_reset_time && has(MASK_GIBDO) && has_beans"
 "Beneath the Well North Section":
   dungeon: BtW
-  exits:
-    "Beneath the Well Entrance": "true"
   events:
-    WELL_HOT_WATER: "has_bottle && (has_explosives || has(MASK_ZORA) || trick_keg_explosives)"
+    WELL_HOT_WATER: "event(FISH) && (has_explosives || has(MASK_ZORA) || trick_keg_explosives || trick(WELL_HSW))"
+    WATER: "true"
+    FISH: "true"
+    BUGS: "event(WATER) && (can_use_fire_arrows || has_sticks)"
+    BOMBS: "event(WATER) && (can_use_fire_arrows || has_sticks)"
+    RUPEES: "event(WATER) && (can_fight || has_weapon_range || has_explosives)"
   locations:
-    "Beneath the Well Keese Chest": "can_use_lens"
+    "Beneath the Well Keese Chest": "event(WATER) && event(BUGS) && can_use_lens"
 "Beneath the Well East Section":
   dungeon: BtW
   exits:
     "Beneath the Well Entrance": "true"
-    "Beneath the Well Middle Section": "has(MASK_GIBDO) && has_bottle"
-    "Beneath the Well Sun Block": "event(WELL_BIG_POE) && has_milk"
+    "Beneath the Well Middle Section": "has(MASK_GIBDO) && event(FISH)"
+    "Beneath the Well Cow Hall": "has_nuts"
   events:
-    WELL_BIG_POE: "has(MASK_GIBDO) && has_bottle && has(BOMB_BAG) && (has_weapon_range)"
-    STICKS: "true"
+    STICKS: "can_kill_baba_sticks"
+    WATER: "has_bottle"
+    RUPEES: "can_fight || has_weapon_range || has_explosives"
+"Beneath the Well Cow Hall":
+  dungeon: BtW
+  events:
+    WELL_BIG_POE: "has_bombs && has_weapon_range"
+    BUGS: "has_bottle"
   locations:
-    "Beneath the Well Cow": "has(MASK_GIBDO) && (event(WELL_HOT_WATER) || has_hot_water_distance) && can_play(SONG_EPONA) && has_nuts"
+    "Beneath the Well Cow": "(event(WELL_HOT_WATER) || has_hot_water_distance) && can_play(SONG_EPONA)"
 "Beneath the Well Middle Section":
   dungeon: BtW
   exits:
     "Beneath the Well East Section": "true"
-    "Beneath the Well Sun Block": "event(WELL_BIG_POE) && has_milk"
+    "Beneath the Well Final Hall": "event(WELL_BIG_POE)"
   events:
-    STICKS: "true"
+    STICKS: "can_kill_baba_both_sticks"
     NUTS: "true"
+  locations:
+    "Beneath the Well Skulltulla Chest": "has(MASK_GIBDO) && event(BUGS)"
+"Beneath the Well Final Hall":
+  dungeon: BtW
+  exits:
+    "Beneath the Well Middle Section": "true"
+    "Beneath the Well Sun Block": "has(MASK_GIBDO) && has_milk"
+  events:
+    RUPEES: "can_fight || has_weapon_range || has_explosives"
+    BUGS: "can_use_fire_arrows || (event(WELL_BIG_POE) && has_sticks)"
   locations:
     "Beneath the Well Skulltulla Chest": "has(MASK_GIBDO) && has_bottle"
 "Beneath the Well Sun Block":
   dungeon: BtW
   exits:
-    "Beneath the Well Middle Section": "true"
+    "Beneath the Well Final Hall": "true"
     "Beneath the Well End": "has_mirror_shield || can_use_light_arrows"
   locations:
     "Beneath the Well Mirror Shield": "can_use_fire_arrows || event(WELL_BIG_POE)"

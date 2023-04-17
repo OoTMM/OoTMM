@@ -21,8 +21,8 @@ Beneath the Well Entrance,          Ikana Canyon,                           dung
 Ikana Canyon,                       Beneath the Well Entrance,              dungeon,    0x2050
 Ancient Castle of Ikana,            Ikana Castle Exterior,                  dungeon,    0x3430
 Ikana Castle Exterior,              Ancient Castle of Ikana,                dungeon,    0x3420
-Secret Shrine Entrance,             Ikana Valley,                           dungeon,    0xba00
-Ikana Valley,                       Secret Shrine Entrance,                 dungeon,    0x20c0
+Secret Shrine,                      Ikana Valley,                           dungeon,    0xba00
+Ikana Valley,                       Secret Shrine,                          dungeon,    0x20c0
 Beneath the Well End,               Ikana Castle Exterior,                  dungeon,    0x9010
 Ikana Castle Exterior,              Beneath the Well End,                   dungeon,    0x3400
 Pirate Fortress,                    Great Bay Coast Fortress,               dungeon,    0x7000
