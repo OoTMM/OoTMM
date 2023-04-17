@@ -1524,6 +1524,8 @@
     "Ikana Graveyard Grotto": "true"
 "Beneath The Graveyard Night 1":
   region: IKANA_GRAVEYARD
+  events:
+    ARROWS: "true"
   exits:
     "Ikana Graveyard": "true"
   locations:
@@ -1531,6 +1533,9 @@
     "Beneath The Graveyard Song of Storms": "(can_fight || has_explosives) && (has_sticks || can_use_fire_arrows)"
 "Beneath The Graveyard Night 2":
   region: IKANA_GRAVEYARD
+  events:
+    MAGIC: "true"
+    ARROWS: "true"
   exits:
     "Ikana Graveyard": "true"
   locations:
