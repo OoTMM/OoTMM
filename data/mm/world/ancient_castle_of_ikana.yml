@@ -11,7 +11,7 @@
     "Ancient Castle of Ikana": "true"
     "Ancient Castle of Ikana Interior North": "can_use_fire_arrows"
     "Ancient Castle of Ikana Interior South": "can_use_fire_arrows"
-    "Ancient Castle of Ikana Behind Block": "(has_mirror_shield && event(IKANA_CASTLE_LIGHT2) || can_use_light_arrows"
+    "Ancient Castle of Ikana Behind Block": "(has_mirror_shield && event(IKANA_CASTLE_LIGHT2)) || can_use_light_arrows"
 "Ancient Castle of Ikana Interior North":
   dungeon: ACoI
   exits:
