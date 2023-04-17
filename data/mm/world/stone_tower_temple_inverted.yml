@@ -22,17 +22,19 @@
     "Stone Tower Temple Inverted East Bridge": "has(MASK_DEKU) || trick(MM_ISTT_EYEGORE)"
   events:
     STONE_TOWER_WATER_CHEST_SUN: "can_use_light_arrows"
-    ARROWS: "has(MASK_DEKU) || trick(MM_ISTT_EYEGORE)"
   locations:
     "Stone Tower Temple Inverted East Lower Chest": "has(MASK_DEKU) && can_use_fire_arrows"
-    "Stone Tower Temple Inverted East Middle Chest": "has(MASK_DEKU)"
     "Stone Tower Temple Inverted East Upper Chest": "has(MASK_DEKU) && can_use_elegy && event(STONE_TOWER_WATER_CHEST_SWITCH)"
 "Stone Tower Temple Inverted East Bridge":
   dungeon: IST
+  events:
+    ARROWS: "true"
   exits:
     "Stone Tower Temple Inverted East": "true"
     "Stone Tower Temple Inverted Center Bridge": "trick(MM_ISTT_EYEGORE) && (has_shield || has(MASK_ZORA)) && has_explosives"
     "Stone Tower Temple Inverted Boss Key Room": trick(MM_ISTT_EYEGORE)
+  locations:
+    "Stone Tower Temple Inverted East Middle Chest": "true"
 "Stone Tower Temple Inverted East Ledge":
   dungeon: IST
   exits:
