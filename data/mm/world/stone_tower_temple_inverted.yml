@@ -87,12 +87,12 @@
 "Stone Tower Temple Inverted Center Bridge":
   dungeon: IST
   exits:
-    "Stone Tower Temple Inverted Center Bridge 2": "true"
+    "Stone Tower Temple Inverted Pre-Boss": "true"
     "Stone Tower Temple Inverted Boss Key Room": "trick(MM_ISTT_EYEGORE) && (has(MASK_GORON) || (has_explosives || (trick_keg_explosives && can_hookshot && has(SMALL_KEY_ST, 4))))"
     "Stone Tower Temple Inverted Center": "trick(MM_ISTT_EYEGORE) && (has(MASK_GORON) || (has_explosives || (trick_keg_explosives && can_hookshot)))"
   locations:
     "Stone Tower Temple Inverted Giant Mask": "true"
-"Stone Tower Temple Inverted Center Bridge 2":
+"Stone Tower Temple Inverted Pre-Boss":
   dungeon: IST
   exits:
     "Stone Tower Temple Boss": "can_hookshot_short && has(BOSS_KEY_ST)"
