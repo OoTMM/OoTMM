@@ -307,7 +307,7 @@ export const SETTINGS = [{
   type: 'boolean',
   default: false
 }, {
-  key: 'blaskMaskCooldown',
+  key: 'blastMaskCooldown',
   name: 'Blast Mask Cooldown',
   category: 'main.misc',
   type: 'enum',
