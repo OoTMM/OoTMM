@@ -3,11 +3,11 @@ import { Buffer } from 'buffer';
 import { options, OptionsInput } from './options';
 import { Generator, GeneratorOutput } from './generator';
 import { Monitor, MonitorCallbacks } from './monitor';
-import { SETTINGS, DEFAULT_SETTINGS, SETTINGS_CATEGORIES, Settings, TRICKS, DUNGEONS, SPECIAL_CONDS, makeSettings, mergeSettings, SPECIAL_CONDS_KEYS, SettingCategory } from './settings';
 import { worldState } from './logic';
 import { itemName } from './names';
 import { isDungeonItem, isItemUnlimitedStarting, isJunk, isStrayFairy, isToken, Items } from './logic/items';
 import { isShuffled } from './logic/is-shuffled';
+import { DEFAULT_SETTINGS, DUNGEONS, makeSettings, mergeSettings, SettingCategory, SETTINGS, Settings, SETTINGS_CATEGORIES, SPECIAL_CONDS, SPECIAL_CONDS_KEYS, TRICKS } from './settings';
 
 export { Presets, PRESETS } from './presets';
 

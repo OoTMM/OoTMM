@@ -1,9 +1,9 @@
 import { cloneDeep } from 'lodash';
 
-import { Random, sample, shuffle } from '../random';
+import { Random, shuffle } from '../random';
 import { Settings } from '../settings';
 import { DUNGEONS_REGIONS, ExprMap, ExprParsers, World, WorldEntrance } from './world';
-import { Pathfinder, EntranceOverrides } from './pathfind';
+import { Pathfinder } from './pathfind';
 import { Monitor } from '../monitor';
 import { LogicEntranceError, LogicError } from './error';
 import { Expr, exprAnd, exprTrue } from './expr';

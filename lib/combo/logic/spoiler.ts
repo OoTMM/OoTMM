@@ -1,5 +1,5 @@
 import { Options } from '../options';
-import { Settings, Trick, TRICKS, Tricks } from '../settings';
+import { Settings, Trick, TRICKS } from '../settings';
 import { EntranceShuffleResult } from './entrance';
 import { HintGossipFoolish, HintGossipHero, HintGossipItemExact, HintGossipItemRegion, Hints } from './hints';
 import { ItemPlacement } from './solve';
