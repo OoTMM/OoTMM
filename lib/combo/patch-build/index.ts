@@ -2,6 +2,7 @@ import { BuildOutput } from "../build";
 import { CONFIG, CUSTOM_ADDR, GAMES } from "../config";
 import { DecompressedRoms } from "../decompress";
 import { LogicResult } from "../logic";
+import { writeBlastMaskCooldown } from "../misc-patches";
 import { Monitor } from "../monitor";
 import { Settings } from "../settings";
 import { Patcher } from "./patcher";
@@ -44,6 +45,9 @@ export function buildPatchfile(args: BuildPatchfileIn): Patchfile {
   /* Patch rom header */
   file.addPatch('global', 0x20, Buffer.from('OOT+MM COMBO       '));
   file.addPatch('global', 0x3c, Buffer.from('ZZE'));
+
+  /* Blast Mask Cooldown*/
+  writeBlastMaskCooldown(args.settings.blaskMaskCooldown, file)
 
   /* Patch the randomized data */
   patchRandomizer(args.logic, args.settings, file);

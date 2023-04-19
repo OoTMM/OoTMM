@@ -307,6 +307,20 @@ export const SETTINGS = [{
   type: 'boolean',
   default: false
 }, {
+  key: 'blaskMaskCooldown',
+  name: 'Blast Mask Cooldown',
+  category: 'main.misc',
+  type: 'enum',
+  values: [
+    { value: 'instant', name: 'Instant (0s)' },
+    { value: 'veryshort', name: 'Very Short (~2s)' },
+    { value: 'short', name: 'Short (~6s)' },
+    { value: 'default', name: 'Default (~15s)' },
+    { value: 'long', name: 'Long (~25s)' },
+    { value: 'verylong', name: 'Very Long (~51s)' },
+  ],
+  default: 'default'
+}, {
   key: 'fillWallets',
   name: 'Fill Wallets',
   category: 'items',
