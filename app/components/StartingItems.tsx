@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { itemName } from '@ootmm/core';
-import { useStartingItems } from '../contexts/GeneratorContext';
+import { useSettings, useStartingItems } from '../contexts/GeneratorContext';
 
 const NAMES = {
   MM: "Majora's Mask",

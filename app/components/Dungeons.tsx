@@ -27,7 +27,7 @@ export function Dungeons() {
             label={(DUNGEONS as any)[d]}
             options={options}
             value={(dungeon as any)[d]}
-            onChange={v => setSettings({ dungeon: { ...dungeon, [d as keyof typeof DUNGEONS]: v } })}
+            onChange={v => setSettings({ dungeon: { [d as keyof typeof DUNGEONS]: v } })}
           />
         )}
       </div>

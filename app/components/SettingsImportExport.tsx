@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Buffer } from 'buffer';
-import { useOverrideSettings, useSettings } from '../contexts/GeneratorContext';
+import { makeSettings } from '@ootmm/core';
 
-import { mergeSettings, DEFAULT_SETTINGS, Settings } from '@ootmm/core';
+import { useOverrideSettings, useSettings } from '../contexts/GeneratorContext';
 
 export const SettingsImportExport = () => {
   const [settings] = useSettings();
@@ -13,7 +13,7 @@ export const SettingsImportExport = () => {
   const onChange = (newStr: string) => {
     const newBuf = Buffer.from(newStr, 'base64');
     const newPartialSettings = JSON.parse(newBuf.toString());
-    const newSettings = mergeSettings(DEFAULT_SETTINGS, newPartialSettings as Partial<Settings>);
+    const newSettings = makeSettings(newPartialSettings);
     overrideSettings(newSettings);
   };
 

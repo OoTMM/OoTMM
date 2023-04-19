@@ -1,5 +1,5 @@
 import React from 'react';
-import { TRICKS, Settings } from '@ootmm/core';
+import { TRICKS } from '@ootmm/core';
 
 import { Checkbox } from './Checkbox';
 import { useSettings } from '../contexts/GeneratorContext';
@@ -8,12 +8,16 @@ export function Tricks() {
   const [settings, setSettings] = useSettings();
   const { tricks } = settings;
 
-  const ootTricks = Object.keys(tricks).filter(
-    (x) => x.substring(0, 3) === 'OOT'
-  );
-  const mmTricks = Object.keys(tricks).filter(
-    (x) => x.substring(0, 2) === 'MM'
-  );
+  const ootTricks = Object.keys(TRICKS).filter(x => x.startsWith('OOT'));
+  const mmTricks = Object.keys(TRICKS).filter(x => x.startsWith('MM'));
+
+  const changeTrick = (trick: string, value: boolean) => {
+    if (value) {
+      setSettings({ tricks: { add: [trick as any] } });
+    } else {
+      setSettings({ tricks: { remove: [trick as any] } });
+    }
+  };
 
   return (
     <form className="settings">
@@ -23,8 +27,8 @@ export function Tricks() {
           <Checkbox
             key={trick}
             label={(TRICKS as {[k: string]: string})[trick]}
-            checked={(tricks as {[k: string]: boolean})[trick]}
-            onChange={(v) => setSettings({ tricks: { ...tricks, [trick]: v } })}
+            checked={tricks.includes(trick as any)}
+            onChange={v => changeTrick(trick, v)}
           />
         ))}
       </div>
@@ -34,8 +38,8 @@ export function Tricks() {
           <Checkbox
             key={trick}
             label={(TRICKS as {[k: string]: string})[trick]}
-            checked={(tricks as {[k: string]: boolean})[trick]}
-            onChange={(v) => setSettings({ tricks: { ...tricks, [trick]: v } })}
+            checked={tricks.includes(trick as any)}
+            onChange={v => changeTrick(trick, v)}
           />
         ))}
       </div>

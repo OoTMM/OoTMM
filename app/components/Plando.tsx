@@ -28,11 +28,7 @@ export function Plando() {
   };
 
   const removeAll = () => {
-    const locations = { ...settings.plando.locations };
-    for (const loc of locs) {
-      locations[loc] = null;
-    }
-    setSettings({ plando: { locations }});
+    setSettings({ plando: { locations: null }});
   };
 
   return (

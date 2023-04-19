@@ -20,7 +20,7 @@ function SpecialCondsPanel({ cond }: SpecialCondsPanelProps) {
   }
 
   return (
-    <form>
+    <form onSubmit={e => e.preventDefault()}>
       <h2>{SPECIAL_CONDS[cond].name}</h2>
       {Object.keys(SPECIAL_CONDS_KEYS).map(key =>
         <Checkbox

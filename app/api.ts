@@ -1,4 +1,4 @@
-import { DEFAULT_SETTINGS, TRICKS, Items, Settings, OptionsInput } from '@ootmm/core';
+import { DEFAULT_SETTINGS, TRICKS, Items, Settings, OptionsInput, makeSettings } from '@ootmm/core';
 import { merge } from 'lodash';
 
 import type { WorkerResult, WorkerResultGenerate, WorkerResultGenerateError, WorkerResultItemPool } from './worker';
@@ -41,26 +41,8 @@ worker.onmessage = (event: MessageEvent<WorkerResult>) => {
 };
 
 export function initialSettings() {
-  /* Fetch the old settings */
   const oldSettings = JSON.parse(localStorage.getItem('settings') ?? "{}");
-
-  /* Filter different types */
-  for (const key in oldSettings) {
-    if (!DEFAULT_SETTINGS.hasOwnProperty(key) || typeof oldSettings[key] !== typeof DEFAULT_SETTINGS[key as keyof typeof DEFAULT_SETTINGS]) {
-      delete oldSettings[key];
-    }
-  }
-
-  /* Filter tricks */
-  if (oldSettings.tricks) {
-    for (const trick in oldSettings.tricks) {
-      if (!TRICKS.hasOwnProperty(trick)) {
-        delete oldSettings.tricks[trick];
-      }
-    }
-  }
-
-  return merge({}, DEFAULT_SETTINGS, oldSettings);
+  return makeSettings(oldSettings);
 };
 
 export async function itemPoolFromSettings(settings: Settings): Promise<Items> {

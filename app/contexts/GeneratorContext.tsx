@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState } from 'react';
-import { GeneratorOutput, Items, Settings, itemPool, OptionsInput, mergeSettings } from '@ootmm/core';
+import { GeneratorOutput, Items, Settings, itemPool, OptionsInput, mergeSettings, makeSettings, SettingsPatch } from '@ootmm/core';
 import { Buffer } from 'buffer';
 
 import * as API from '../api';
@@ -30,7 +30,7 @@ type GeneratorContext = {
   setFile: (key: keyof GeneratorState['romConfig']['files'], file: File) => void;
   setSeed: (seed: string) => void;
   setIsPatch: (isPatch: boolean) => void;
-  setSettings: (settings: Partial<Settings>) => Settings;
+  setSettings: (settings: SettingsPatch) => Settings;
   overrideSettings: (settings: Settings) => Settings;
 }
 
@@ -76,8 +76,8 @@ export function GeneratorContextProvider({ children }: { children: React.ReactNo
     setState({ ...state, isPatch });
   };
 
-  const setSettings = (settings: Partial<Settings>) => {
-    const newSettings = mergeSettings(state.settings, settings);
+  const setSettings = (patch: SettingsPatch) => {
+    const newSettings = mergeSettings(state.settings, patch);
     setState({ ...state, settings: newSettings });
     return newSettings;
   };
@@ -134,15 +134,15 @@ export function useGenerator() {
 
 export function useSettings() {
   const ctx = useContext(GeneratorContext);
-  const setSettings = (settings: Partial<Settings>) => {
-    const newSettings = ctx.setSettings(settings);
+  const setSettings = (patch: SettingsPatch) => {
+    const newSettings = ctx.setSettings(patch);
     localStorage.setItem('settings', JSON.stringify(newSettings));
     API.itemPoolFromSettings(newSettings).then((itemPool) => {
       ctx.setState((state) => {
         const startingItems = API.restrictItemsByPool(state.settings.startingItems, itemPool);
         const newSettings = { ...state.settings, startingItems };
         localStorage.setItem('settings', JSON.stringify(newSettings));
-        return { ...state, settings: newSettings, itemPool };
+        return { ...state, settings: makeSettings(newSettings), itemPool };
       });
     });
   };
