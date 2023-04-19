@@ -8,6 +8,7 @@ import { itemName } from './names';
 import { isDungeonItem, isItemUnlimitedStarting, isJunk, isStrayFairy, isToken, Items } from './logic/items';
 import { isShuffled } from './logic/is-shuffled';
 import { DEFAULT_SETTINGS, DUNGEONS, makeSettings, mergeSettings, SettingCategory, SETTINGS, Settings, SETTINGS_CATEGORIES, SPECIAL_CONDS, SPECIAL_CONDS_KEYS, TRICKS } from './settings';
+import { SettingsPatch } from './settings/patch';
 
 export { Presets, PRESETS } from './presets';
 
@@ -18,7 +19,7 @@ export type GeneratorParams = {
   monitor?: MonitorCallbacks
 };
 
-export type { GeneratorOutput, Settings, OptionsInput, Items, SettingCategory };
+export type { GeneratorOutput, Settings, OptionsInput, Items, SettingCategory, SettingsPatch };
 
 type LocInfo = {
   [k: string]: string[]

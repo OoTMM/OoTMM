@@ -50,12 +50,6 @@ export const TRICKS = {
   MM_POST_OFFICE_GAME: "Post Office Timing Game without Bunny Hood",
 };
 
-export type Tricks = {[k in keyof typeof TRICKS]: boolean};
-export type Trick = keyof Tricks;
+export type Trick = keyof typeof TRICKS;
 
-const DEFAULT_ENABLED_TRICKS = new Set<Trick>(['OOT_NIGHT_GS']);
-
-export const DEFAULT_TRICKS = Object.keys(TRICKS).reduce((tricks, trick) => {
-  tricks[trick as Trick] = DEFAULT_ENABLED_TRICKS.has(trick as Trick);
-  return tricks;
-}, {} as Tricks);
+export const DEFAULT_TRICKS: Trick[] = ['OOT_NIGHT_GS'];

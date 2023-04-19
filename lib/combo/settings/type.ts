@@ -1,7 +1,7 @@
 import { SETTINGS } from './data';
 import { DungeonSettings } from './dungeons';
 import { SpecialConds } from './special-conds';
-import { Tricks } from './tricks';
+import { Trick } from './tricks';
 
 type SettingDataEnumValue = {
   readonly value: string;
@@ -36,7 +36,7 @@ type SettingShapes = InputToShape<SettingDataEntry>;
 type UnionToIntersection<U> =
   (U extends any ? (k: U)=>void : never) extends ((k: infer I)=>void) ? I : never
 
-type SettingsBase = UnionToIntersection<SettingShapes>;
+export type SettingsBase = UnionToIntersection<SettingShapes>;
 
 type SettingsPlando = {
   locations: {[k: string]: string | null},
@@ -44,7 +44,7 @@ type SettingsPlando = {
 export type Settings = SettingsBase & {
   startingItems: {[k: string]: number};
   junkLocations: string[];
-  tricks: Tricks;
+  tricks: Trick[];
   dungeon: DungeonSettings;
   specialConds: SpecialConds;
   plando: SettingsPlando;

@@ -65,12 +65,12 @@ export class LogicPassSpoiler {
   }
 
   private writeTricks() {
-    const enabledTricks = Object.keys(this.state.settings.tricks).filter(t => this.state.settings.tricks[t as Trick]);
-    if (enabledTricks.length === 0) {
+    const { tricks } = this.state.settings;
+    if (tricks.length === 0) {
       return;
     }
     this.buffer.push('Tricks');
-    for (const trick of enabledTricks) {
+    for (const trick of tricks) {
       this.buffer.push(`  ${TRICKS[trick as Trick]}`);
     }
     this.buffer.push('');

@@ -363,7 +363,7 @@ export class LogicPassAnalysis {
 
   private makeDependencies() {
     this.dependencies = cloneDeep(SIMPLE_DEPENDENCIES);
-    if (!this.state.settings.tricks['OOT_NIGHT_GS']) {
+    if (!this.state.settings.tricks.includes('OOT_NIGHT_GS')) {
       delete this.dependencies['OOT_SONG_SUN'];
     }
 

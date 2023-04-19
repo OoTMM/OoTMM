@@ -19,7 +19,7 @@ export const SPECIAL_CONDS_KEYS = {
 
 export type SpecialCond = {[k in keyof typeof SPECIAL_CONDS_KEYS]: boolean} & { count: number };
 
-const DEFAULT_SPECIAL_COND = Object.keys(SPECIAL_CONDS_KEYS).reduce((conds, cond) => {
+export const DEFAULT_SPECIAL_COND = Object.keys(SPECIAL_CONDS_KEYS).reduce((conds, cond) => {
   conds[cond] = false;
   return conds;
 }, { count: 0 } as any) as SpecialCond;

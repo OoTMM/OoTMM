@@ -274,7 +274,7 @@ export const exprTrick = (settings: Settings, trick: string): Expr => {
   if (!TRICKS.hasOwnProperty(trick)) {
     throw new Error(`Trick ${trick} not found`);
   }
-  return settings.tricks[trick as Trick] ? exprTrue() : exprFalse();
+  return settings.tricks.includes(trick as keyof typeof TRICKS) ? exprTrue() : exprFalse();
 };
 
 export const exprOotTime = (time: string): Expr => {
