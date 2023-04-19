@@ -87,3 +87,33 @@
   cursor: pointer;
   color: rgb(151, 7, 7);
 }
+
+.tooltip-link {
+  display: inline-block;
+  color: inherit;
+  margin-left: 0.5em;
+}
+
+.tooltip {
+  max-width: 30em;
+}
+
+.tooltip p, .tooltip ul {
+  margin: 0.75em;
+}
+
+.tooltip ul {
+  list-style-position: outside;
+  list-style-type: disc;
+  margin-left: 2em;
+}
+
+.tooltip li {
+  margin: 0.25em;
+}
+
+.react-tooltip {
+  opacity: 100%;
+  background: black;
+  z-index: 9999;
+}

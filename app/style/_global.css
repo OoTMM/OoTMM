@@ -15,6 +15,10 @@ body {
   font-size: 1.6rem;
 }
 
+strong {
+  font-weight: 600;
+}
+
 h1 {
   font-size: 32px;
   line-height: 36px;
@@ -27,7 +31,7 @@ h2 {
   margin-bottom: 24px
 }
 
-label {
+label, .label-main {
   font-weight: 500 !important;
 }
 

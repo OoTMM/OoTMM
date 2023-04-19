@@ -28,6 +28,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-select": "^5.7.2",
+    "react-tooltip": "^5.11.1",
     "stream-browserify": "^3.0.0",
     "tmp": "^0.2.1"
   },

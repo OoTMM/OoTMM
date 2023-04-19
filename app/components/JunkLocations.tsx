@@ -39,7 +39,5 @@ export function JunkLocations() {
       </ol>
     </div>
   );
-
-  /* <span className="plando-remove" onClick={() => removeItem(loc)}><FontAwesomeIcon icon={solid('xmark')}/></span> */
 }
 
