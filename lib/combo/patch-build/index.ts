@@ -47,7 +47,7 @@ export function buildPatchfile(args: BuildPatchfileIn): Patchfile {
   file.addPatch('global', 0x3c, Buffer.from('ZZE'));
 
   /* Blast Mask Cooldown*/
-  writeBlastMaskCooldown(args.settings.blaskMaskCooldown, file)
+  writeBlastMaskCooldown(args.settings.blastMaskCooldown, file)
 
   /* Patch the randomized data */
   patchRandomizer(args.logic, args.settings, file);
