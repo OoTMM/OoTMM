@@ -3,11 +3,12 @@ export const SETTINGS = [{
   name: 'Goal',
   category: 'main',
   type: 'enum',
+  description: 'The objective of the seed. The game will end when the specified goal is reached.',
   values: [
-    { value: 'any', name: 'Any Final Boss' },
-    { value: 'ganon', name: 'Ganon' },
-    { value: 'majora', name: 'Majora' },
-    { value: 'both', name: 'Ganon & Majora' },
+    { value: 'any', name: 'Any Final Boss', description: 'You can beat either Ganon or Majora.' },
+    { value: 'ganon', name: 'Ganon', description: 'You must beat Ganon.' },
+    { value: 'majora', name: 'Majora', description: 'You must beat Majora.' },
+    { value: 'both', name: 'Ganon & Majora', description: 'You must beat Ganon AND Majora. You can do so in any order.' },
   ],
   default: 'both'
 }, {
@@ -15,10 +16,11 @@ export const SETTINGS = [{
   name: 'Logic',
   category: 'main',
   type: 'enum',
+  description: 'The guarantees you have regarding reachability of locations.',
   values: [
-    { value: 'allLocations', name: 'All Locations' },
-    { value: 'beatable', name: 'Beatable Only' },
-    { value: 'none', name: 'No Logic' },
+    { value: 'allLocations', name: 'All Locations', description: 'Every location in the game can be reached. The seed can always be completed.' },
+    { value: 'beatable', name: 'Beatable Only', description: 'Some items can be placed in locations that are never reacheable. The seed can always be completed.' },
+    { value: 'none', name: 'No Logic', description: 'Items are placed completely at random. The seed might be unbeatable.' },
   ],
   default: 'allLocations'
 }, {
@@ -26,15 +28,17 @@ export const SETTINGS = [{
   name: 'Generate Spoiler Log',
   category: 'main',
   type: 'boolean',
+  description: 'Generate an extra downloadable text file with the location of every item in the seed as well as other informations. It is recommended to enable this option.',
   default: true
 }, {
   key: 'songs',
   name: 'Song Shuffle',
   category: 'main.shuffle',
   type: 'enum',
+  description: 'Controls where songs can be obtained, in both games.',
   values: [
-    { value: 'songLocations', name: 'Song Locations' },
-    { value: 'anywhere', name: 'Anywhere' },
+    { value: 'songLocations', name: 'Song Locations', description: 'Only locations that contains songs in the vanilla game will have songs.' },
+    { value: 'anywhere', name: 'Anywhere', description: 'Songs can be placed anywhere.' },
   ],
   default: 'songLocations'
 }, {

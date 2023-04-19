@@ -6,12 +6,14 @@ import { Trick } from './tricks';
 type SettingDataEnumValue = {
   readonly value: string;
   readonly name: string;
+  readonly description?: string;
 };
 
 type SettingDataCommon = {
   readonly key: string;
   readonly name: string;
   readonly category: string;
+  readonly description?: string;
 };
 
 type SettingDataEnum = SettingDataCommon & {
