@@ -31,7 +31,7 @@
     ARROWS: "true"
   exits:
     "Stone Tower Temple Inverted East": "true"
-    "Stone Tower Temple Inverted Center Bridge": "trick(MM_ISTT_EYEGORE) && (has_shield || has(MASK_ZORA)) && has_explosives"
+    "Stone Tower Temple Inverted Center Bridge": "trick(MM_ISTT_EYEGORE) && ((has(MASK_ZORA) && has_bombs) || (has_shield && has_explosives))"
     "Stone Tower Temple Inverted Boss Key Room": trick(MM_ISTT_EYEGORE)
   locations:
     "Stone Tower Temple Inverted East Middle Chest": "true"
