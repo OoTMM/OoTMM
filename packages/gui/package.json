@@ -60,7 +60,15 @@
     "webpack-dev-server": "^4.11.1"
   },
   "nx": {
+    "namedInputs": {
+      "default": ["{projectRoot}/**/*"],
+      "version": [{"env": "VERSION"}]
+    },
     "targets": {
+      "build": {
+        "inputs": ["default", "version"],
+        "outputs": ["dist"]
+      },
       "serve": {
         "dependsOn": ["^build"]
       }

@@ -45,13 +45,23 @@
   "license": "MIT",
   "private": "true",
   "nx": {
+    "namedInputs": {
+      "default": ["{projectRoot}/**/*"],
+      "version": [{"env": "VERSION"}]
+    },
     "targets": {
       "build": {
+        "inputs": ["default", "version"],
         "outputs": [
           "build",
           "dist",
           "include/combo/custom.h"
         ]
+      },
+      "test": {
+        "inputs": ["default"],
+        "outputs": [],
+        "dependsOn": []
       }
     }
   }
