@@ -17,6 +17,12 @@
   width: 100%;
 }
 
+.two-column-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+
 .three-column-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

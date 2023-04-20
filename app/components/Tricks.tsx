@@ -1,48 +1,48 @@
 import React from 'react';
 import { TRICKS } from '@ootmm/core';
 
-import { Checkbox } from './Checkbox';
 import { useSettings } from '../contexts/GeneratorContext';
+import { ArrayList } from './ArrayList';
 
-export function Tricks() {
+const NAMES = {
+  OOT: 'Ocarina of Time',
+  MM: 'Majora\'s Mask',
+};
+
+export function GameTricks({ game }: { game: keyof typeof NAMES }) {
   const [settings, setSettings] = useSettings();
-  const { tricks } = settings;
+  const tricks = Object.keys(TRICKS).filter(x => x.startsWith(game));
+  const options = tricks.map(trick => ({ value: trick, label: TRICKS[trick as keyof typeof TRICKS] }));
 
-  const ootTricks = Object.keys(TRICKS).filter(x => x.startsWith('OOT'));
-  const mmTricks = Object.keys(TRICKS).filter(x => x.startsWith('MM'));
-
-  const changeTrick = (trick: string, value: boolean) => {
-    if (value) {
-      setSettings({ tricks: { add: [trick as any] } });
-    } else {
-      setSettings({ tricks: { remove: [trick as any] } });
-    }
+  const add = (trick: string) => {
+    setSettings({ tricks: { add: [trick as keyof typeof TRICKS] } });
   };
 
+  const remove = (trick: string) => {
+    setSettings({ tricks: { remove: [trick as keyof typeof TRICKS] } });
+  }
+
   return (
-    <form className="settings">
-      <h2>Ocarina of Time</h2>
-      <div className="three-column-grid">
-        {ootTricks.map((trick) => (
-          <Checkbox
-            key={trick}
-            label={(TRICKS as {[k: string]: string})[trick]}
-            checked={tricks.includes(trick as any)}
-            onChange={v => changeTrick(trick, v)}
-          />
-        ))}
-      </div>
-      <h2 className="section-margin-top">Majora's Mask</h2>
-      <div className="three-column-grid">
-        {mmTricks.map((trick) => (
-          <Checkbox
-            key={trick}
-            label={(TRICKS as {[k: string]: string})[trick]}
-            checked={tricks.includes(trick as any)}
-            onChange={v => changeTrick(trick, v)}
-          />
-        ))}
-      </div>
-    </form>
+    <div>
+      <h1>{NAMES[game]}</h1>
+      <ArrayList options={options} selected={settings.tricks.filter(x => tricks.includes(x))} add={add} remove={remove}/>
+    </div>
   );
+}
+
+export function Tricks() {
+  const [_, setSettings] = useSettings();
+  const clear = () => {
+    setSettings({ tricks: { set: [] } });
+  }
+
+  return (
+    <div>
+      <button className="btn-danger" onClick={clear}>Remove All</button>
+      <div className="two-column-grid">
+        <GameTricks game="OOT"/>
+        <GameTricks game="MM"/>
+      </div>
+    </div>
+  )
 }
