@@ -1,0 +1,46 @@
+.generator-error {
+  display: block;
+  margin: 1em;
+  padding: 1em;
+  color: #330000;
+  background: #ffcccc;
+}
+
+.file-select {
+  margin: 2em;
+  align-items: center;
+}
+
+.file-select-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  border: 1px solid #aaa;
+  border-radius: 5%;
+  background: #eee;
+  padding: 1em;
+  margin: 1em;
+}
+
+.file-select-box-img-container {
+  display: flex;
+  width: 8em;
+  height: 8em;
+}
+
+.file-select-box-img-container img {
+  object-fit: contain;
+}
+
+.file-select-box p {
+  margin-top: 1em;
+}
+
+.file-select-box.empty img {
+  filter: grayscale(100%);
+}
+
+.settings-string {
+  min-height: 10em;
+}

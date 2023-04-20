@@ -1,0 +1,125 @@
+#root {
+  display: flex;
+  min-height: 100vh;
+  min-width: 100vw;
+}
+
+.flex-h {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.settings {
+  display: flex;
+  flex-flow: column wrap;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.two-column-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+
+.three-column-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+.settings>.checkboxes-lowcount {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 15px;
+  margin-bottom: 8px;
+}
+
+.container {
+  margin: 3em;
+}
+
+.settings-group {
+  margin-bottom: 2.5em;
+}
+
+.select-list {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.select-list li {
+  background: #eee;
+  padding: 0.5em;
+  user-select: none;
+
+}
+
+.select-list li:hover {
+  background: #ddd;
+  cursor: pointer;
+}
+
+.select-list li:active, .select-list li.selected {
+  background: #bbb;
+  cursor: pointer;
+}
+
+.plando {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.plando-search {
+  display: flex;
+}
+
+.plando-search > *:not(:last-child) {
+  margin-right: 1.5em;
+}
+
+.plando-select {
+  flex: 1;
+  display: inline-block;
+}
+
+.plando-remove {
+  margin-right: 0.5em;
+}
+
+.plando-remove:hover {
+  cursor: pointer;
+  color: rgb(151, 7, 7);
+}
+
+.tooltip-link {
+  display: inline-block;
+  color: inherit;
+  margin-left: 0.5em;
+}
+
+.tooltip {
+  max-width: 30em;
+}
+
+.tooltip p, .tooltip ul {
+  margin: 0.75em;
+}
+
+.tooltip ul {
+  list-style-position: outside;
+  list-style-type: disc;
+  margin-left: 2em;
+}
+
+.tooltip li {
+  margin: 0.25em;
+}
+
+.react-tooltip {
+  opacity: 100%;
+  background: black;
+  z-index: 9999;
+}
