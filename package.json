@@ -7,14 +7,17 @@
   "scripts": {
     "start:core": "npm run start -w @ootmm/core",
     "start:core:debug": "npm run start:debug -w @ootmm/core",
-    "build:core": "npm run build -w @ootmm/core",
-    "test:core": "cross-env NODE_ENV=test jest"
+    "build": "nx run-many -t build",
+    "test": "nx run-many --target=test --output-style=stream-without-prefixes",
+    "serve": "nx run-many -t serve"
   },
   "devDependencies": {
+    "@nrwl/jest": "^15.9.2",
     "@types/jest": "^29.5.1",
     "@types/node": "^18.15.12",
     "cross-env": "^7.0.3",
     "jest": "^29.5.0",
+    "nx": "15.9.2",
     "ts-jest": "^29.1.0",
     "ts-node": "^10.9.1",
     "tslib": "^2.5.0",

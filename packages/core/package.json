@@ -43,5 +43,16 @@
     "dist/data"
   ],
   "license": "MIT",
-  "private": "true"
+  "private": "true",
+  "nx": {
+    "targets": {
+      "build": {
+        "outputs": [
+          "build",
+          "dist",
+          "include/combo/custom.h"
+        ]
+      }
+    }
+  }
 }
