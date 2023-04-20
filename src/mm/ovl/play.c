@@ -139,14 +139,14 @@ void hookPlay_Init(GameState_Play* play)
     if (gSave.entranceIndex == 0xc030)
     {
         /* Moon crash */
-        gSave.entranceIndex = g.initialEntrance;
+        gSave.entranceIndex = entranceForOverride(g.initialEntrance);
         comboReadForeignSave();
     }
 
     if (gSave.entranceIndex == 0xd800 && gLastEntrance == 0x1c00)
     {
         /* Song of Time */
-        gSave.entranceIndex = g.initialEntrance;
+        gSave.entranceIndex = entranceForOverride(g.initialEntrance);
     }
 
     if (gSave.entranceIndex == 0x8610)
@@ -200,7 +200,7 @@ void hookPlay_Init(GameState_Play* play)
             gSave.day = 0;
             gSave.time = 0x3fff;
             Sram_SaveNewDay(play);
-            play->nextEntrance = g.initialEntrance;
+            play->nextEntrance = entranceForOverride(g.initialEntrance);
             play->transitionTrigger = TRANS_TRIGGER_NORMAL;
             play->transitionType = TRANS_TYPE_BLACK;
             return;
