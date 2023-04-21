@@ -2,7 +2,7 @@ to,                                 from,                                   type
 Woodfall Temple Boss,               Woodfall Temple Pre-Boss,               boss,       0x3800
 Snowhead Temple Boss,               Snowhead Temple Center Level 4,         boss,       0x8200
 Great Bay Temple Boss,              Great Bay Temple Pre-Boss,              boss,       0xb800
-Stone Tower Temple Boss,            Stone Tower Temple Inverted Bridge 2,   boss,       0x6600
+Stone Tower Temple Boss,            Stone Tower Temple Inverted Pre-Boss,   boss,       0x6600
 Woodfall Temple,                    Woodfall Front of Temple,               dungeon,    0x3000
 Woodfall Front of Temple,           Woodfall Temple,                        dungeon,    0x8610
 Snowhead Temple,                    Snowhead,                               dungeon,    0x3c00
@@ -21,8 +21,8 @@ Beneath the Well Entrance,          Ikana Canyon,                           dung
 Ikana Canyon,                       Beneath the Well Entrance,              dungeon,    0x2050
 Ancient Castle of Ikana,            Ikana Castle Exterior,                  dungeon,    0x3430
 Ikana Castle Exterior,              Ancient Castle of Ikana,                dungeon,    0x3420
-Secret Shrine Entrance,             Ikana Valley,                           dungeon,    0xba00
-Ikana Valley,                       Secret Shrine Entrance,                 dungeon,    0x20c0
+Secret Shrine,                      Ikana Valley,                           dungeon,    0xba00
+Ikana Valley,                       Secret Shrine,                          dungeon,    0x20c0
 Beneath the Well End,               Ikana Castle Exterior,                  dungeon,    0x9010
 Ikana Castle Exterior,              Beneath the Well End,                   dungeon,    0x3400
 Pirate Fortress,                    Great Bay Coast Fortress,               dungeon,    0x7000
