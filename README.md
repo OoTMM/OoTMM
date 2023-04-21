@@ -1,8 +1,29 @@
-# OoTMM
+<p align="center">
+  <img alt="OoTMM Logo" with="256" height="256" src="https://raw.githubusercontent.com/OoTMM/OoTMM/master/packages/gui/app/assets/logo.png"/>
+  <p align="center">The Ocarina of Time/Majora's Mask Combo Randomizer</p>
+</p>
 
-A very (very) experimental Ocarina of Time/Majora's Mask combo randomizer.
+![badge-version](https://img.shields.io/github/v/tag/OoTMM/OoTMM?label=version&sort=semver)
+![badge-license](https://img.shields.io/github/license/OoTMM/OoTMM)
+![badge-build](https://img.shields.io/github/actions/workflow/status/OoTMM/OoTMM/ci.yml?branch=develop)
+![badge-stars](https://img.shields.io/github/stars/OoTMM/OoTMM)
+![badge-discord](https://discordapp.com/api/guilds/1004394204992118935/widget.png?style=shield)
 
-## Setup
+## Overview
+
+OoTMM is a randomizer for the N64 games Ocarina of Time and Majora's Mask.
+It combines both games into a single rom and randomizes the placement of most items in the games.
+A large number of settings are available to customize the experience.
+
+## Usage
+
+We **strongly** recommend that you use the [Web-based generator](https://ootmm.com).
+
+## Support
+
+If you need help, you can ask for help on our [Discord server](https://discord.gg/4QdtPBP6wf).
+
+## Manual Setup
 
 You need the following roms:
 
