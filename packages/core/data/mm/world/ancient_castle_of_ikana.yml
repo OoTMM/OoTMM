@@ -5,11 +5,13 @@
     "Ancient Castle of Ikana Interior": "can_reset_time"
 "Ancient Castle of Ikana Interior":
   dungeon: ACoI
+  events:
+    RUPEES: "true"
   exits:
     "Ancient Castle of Ikana": "true"
-    "Ancient Castle of Ikana Interior North": "can_reset_time && can_use_fire_arrows"
-    "Ancient Castle of Ikana Interior South": "can_reset_time && can_use_fire_arrows"
-    "Ancient Castle of Ikana Pre-Boss": "can_reset_time && ((has_mirror_shield && event(IKANA_CASTLE_LIGHT2)) || can_use_light_arrows)"
+    "Ancient Castle of Ikana Interior North": "can_use_fire_arrows"
+    "Ancient Castle of Ikana Interior South": "can_use_fire_arrows"
+    "Ancient Castle of Ikana Behind Block": "(has_mirror_shield && event(IKANA_CASTLE_LIGHT2)) || can_use_light_arrows"
 "Ancient Castle of Ikana Interior North":
   dungeon: ACoI
   exits:
@@ -27,10 +29,11 @@
     "Ancient Castle of Ikana Roof Interior": "can_goron_bomb_jump"
     "Ikana Castle Exterior": "true"
   events:
-    IKANA_CASTLE_LIGHT: "has(MASK_DEKU)" #|| (has(MASK_ZORA) && can_gainer) Can press the switch trivially, but can't get back to the roof without these.
+    IKANA_CASTLE_LIGHT: "cond(setting(erIkanaCastle), has(MASK_DEKU), true)" #|| (has(MASK_ZORA) && can_gainer) Can press the switch trivially, but can't get back to the roof without these.
     IKANA_CASTLE_LIGHT2: "can_use_keg"
+    NUTS: "true"
   locations:
-    "Ancient Castle of Ikana HP": "(has(BOW) || can_hookshot_short) && has(MASK_DEKU)"
+    "Ancient Castle of Ikana HP": "(has_arrows || can_hookshot_short) && has(MASK_DEKU)"
 "Ancient Castle of Ikana Interior South":
   dungeon: ACoI
   exits:
@@ -40,7 +43,7 @@
   dungeon: ACoI
   exits:
     "Ancient Castle of Ikana Interior South": "can_use_light_arrows"
-    "Ancient Castle of Ikana Roof Interior": "can_fight || has(BOW)"
+    "Ancient Castle of Ikana Roof Interior": "can_fight || has_arrows"
 "Ancient Castle of Ikana Roof Interior":
   dungeon: ACoI
   exits:
@@ -49,10 +52,18 @@
     "Ancient Castle of Ikana Roof Exterior": "trick(MM_IKANA_ROOF_PARKOUR)"
   events:
     IKANA_CASTLE_LIGHT2: "can_use_keg"
-"Ancient Castle of Ikana Pre-Boss":
+"Ancient Castle of Ikana Behind Block":
   dungeon: ACoI
   exits:
-    "Ancient Castle of Ikana Interior": "true"
+    "Ancient Castle of Ikana Interior": "can_use_light_arrows"
+    "Ancient Castle of Ikana Pre-Boss": "true"
+"Ancient Castle of Ikana Pre-Boss":
+  dungeon: ACoI
+  events:
+    MAGIC: "true"
+    ARROWS: "true"
+  exits:
+    "Ancient Castle of Ikana Behind Block": "true"
     "Ancient Castle of Ikana Throne Room": "true"
 "Ancient Castle of Ikana Throne Room":
   dungeon: ACoI

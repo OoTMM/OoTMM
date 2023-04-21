@@ -66,28 +66,28 @@
   region: MOON
   exits:
     "Moon": "true"
-    "Moon Trial Link Rest 1": "can_fight || has(BOW)"
+    "Moon Trial Link Rest 1": "can_fight || has_arrows"
 "Moon Trial Link Rest 1":
   region: MOON
   exits:
-    "Moon Trial Link Entrance": "can_fight || can_use_deku_bubble || has(BOW)"
-    "Moon Trial Link Rest 2": "can_hookshot_short && (can_fight || has(BOW))"
+    "Moon Trial Link Entrance": "can_fight || can_use_deku_bubble || has_arrows"
+    "Moon Trial Link Rest 2": "can_hookshot_short && (can_fight || has_arrows)"
 #  gossips:
 #    "Moon Trial Link Gossip 1": "true"
 "Moon Trial Link Rest 2":
   region: MOON
   exits:
-    "Moon Trial Link Rest 1": "can_fight || has(BOW)"
-    "Moon Trial Link Rest 3": "has_bombchu && has(BOW)"
+    "Moon Trial Link Rest 1": "can_fight || has_arrows"
+    "Moon Trial Link Rest 3": "has_bombchu && has_arrows"
   locations:
     "Moon Trial Link Chest 1": "true"
-    "Moon Trial Link Chest 2": "can_fight || has(BOMB_BAG)"
+    "Moon Trial Link Chest 2": "can_fight || has_bombs || has_bombchu"
 #  gossips:
 #    "Moon Trial Link Gossip 2": "true"
 "Moon Trial Link Rest 3":
   region: MOON
   exits:
-    "Moon Trial Link Rest 2": "can_fight || has(BOMB_BAG)"
+    "Moon Trial Link Rest 2": "can_fight || has_bombs || has_bombchu"
     "Moon Trial Link Exit": "has_bombchu && can_use_fire_arrows"
   locations:
     "Moon Trial Link HP": "true"
@@ -105,5 +105,5 @@
 "Moon Boss":
   region: MOON
   events:
-    MAJORA_PHASE_1: "has(BOW) || has(MASK_ZORA) || (has(MASK_FIERCE_DEITY) && has(MAGIC_UPGRADE))"
-    MAJORA: "event(MAJORA_PHASE_1) && (has_weapon || has(MASK_ZORA) || has(MASK_FIERCE_DEITY))"
+    MAJORA_PHASE_1: "has_arrows || has(MASK_ZORA) || (has(MASK_FIERCE_DEITY) && has_magic)"
+    MAJORA: "event(MAJORA_PHASE_1) && (has_weapon || has(MASK_ZORA) || (has(MASK_FIERCE_DEITY) && has_magic))"

@@ -66,7 +66,7 @@
 "has_nuts": "event(NUTS) || has(NUT) || has(NUTS_5) || has(NUTS_10) || (setting(sharedNutsSticks) && event(OOT_NUTS))"
 "has_arrows": "has(BOW) && (event(ARROWS) || has(ARROWS_5) || has(ARROWS_10) || has(ARROWS_30) || has(ARROWS_40))"
 "has_bombs": "has(BOMB_BAG) && (event(BOMBS) || has(BOMBS_5) || has(BOMBS_10) || has(BOMBS_20) || has(BOMBS_30))"
-"has_magic": "has(MAGIC_UPGRADE) && (event(MAGIC) || has_green_potion || has_blue_potion)"
+"has_magic": "has(MAGIC_UPGRADE) && (event(MAGIC) || has_green_potion || has_blue_potion || event(CHATEAU))"
 "has_rupees": "event(RUPEES)"
 "has_zora_egg": "event(ZORA_EGGS_HOOKSHOT_ROOM) || event(ZORA_EGGS_BARREL_MAZE) || event(ZORA_EGGS_LONE_GUARD) || event(ZORA_EGGS_TREASURE_ROOM) || event(ZORA_EGGS_PINNACLE_ROCK)"
 "has_chateau": "event(CHATEAU) || has(CHATEAU)"
