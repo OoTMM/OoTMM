@@ -1,14 +1,16 @@
 import { makeSettings, Settings } from './settings';
 import { randString } from './random';
+import { Cosmetics, makeCosmetics } from './cosmetics';
 
 export type Options = {
   debug: boolean;
   seed: string;
   settings: Settings;
+  cosmetics: Cosmetics;
   patch?: Buffer;
 };
 
-export type OptionsInput = Partial<Pick<Options, 'debug' | 'seed' | 'patch'> & { settings: Partial<Settings> }>;
+export type OptionsInput = Partial<Pick<Options, 'debug' | 'seed' | 'patch'> & { settings: Partial<Settings> } & { cosmetics: Partial<Cosmetics> }>;
 
 export const options = (opts: OptionsInput): Options => {
   const newOpts: Partial<Options> = {};
@@ -27,6 +29,7 @@ export const options = (opts: OptionsInput): Options => {
   }
 
   newOpts.settings = makeSettings(opts.settings || {});
+  newOpts.cosmetics = makeCosmetics(opts.cosmetics || {});
 
   return newOpts as Options;
 };

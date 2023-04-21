@@ -1,3 +1,4 @@
+import { GameAddresses } from "../addresses";
 import { BuildOutput } from "../build";
 import { CONFIG, CUSTOM_ADDR, GAMES } from "../config";
 import { DecompressedRoms } from "../decompress";
@@ -12,6 +13,7 @@ import { patchRandomizer } from "./randomizer";
 export type BuildPatchfileIn = {
   monitor: Monitor;
   roms: DecompressedRoms;
+  addresses: GameAddresses;
   build: BuildOutput;
   custom: Buffer;
   logic: LogicResult;
@@ -25,7 +27,7 @@ export function buildPatchfile(args: BuildPatchfileIn): Patchfile {
   for (const game of GAMES) {
     /* Apply ASM patches */
     const rom = args.roms[game].rom;
-    const patcher = new Patcher(game, rom, args.build[game].patches, file);
+    const patcher = new Patcher(game, rom, args.addresses, args.build[game].patches, file);
     patcher.run();
 
     /* Pack the payload */
