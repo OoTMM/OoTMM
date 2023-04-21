@@ -5,8 +5,8 @@
     "packages/*"
   ],
   "scripts": {
-    "start:core": "npm run start -w @ootmm/core",
-    "start:core:debug": "npm run start:debug -w @ootmm/core",
+    "start:core": "nx run @ootmm/core:start",
+    "start:core:debug": "nx run @ootmm/core:start:debug",
     "build": "nx run-many -t build",
     "test": "nx run-many --target=test --output-style=stream-without-prefixes",
     "serve": "nx run-many -t serve"
