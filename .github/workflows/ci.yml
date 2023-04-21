@@ -70,21 +70,25 @@ jobs:
       - name: Env Config - Stable
         if: ${{ contains(github.ref, 'refs/tags/') }}
         run: |
-          echo "DEPLOY_ENV=stable" >> $GITHUB_ENV
+          echo "VERSION=${{ github.ref_name }}" >> $GITHUB_ENV
           echo "NETLIFY_SITE_ID=${{ secrets.NETLIFY_SITE_ID_STABLE }}" >> $GITHUB_ENV
 
       - name: Env Config - Dev
         if: ${{ github.ref == 'refs/heads/develop' }}
         run: |
-          echo "DEPLOY_ENV=dev" >> $GITHUB_ENV
+          short_sha=$(echo ${{ github.sha }} | cut -c1-7)
+          echo "VERSION=dev-${short_sha}" >> $GITHUB_ENV
           echo "NETLIFY_SITE_ID=${{ secrets.NETLIFY_SITE_ID_DEV }}" >> $GITHUB_ENV
 
-      - name: Add n64 toolchain
+      - name: Add n64 toolchain repo
         uses: myci-actions/add-deb-repo@10
         with:
           repo: deb http://practicerom.com/public/packages/debian staging main
           repo-name: practicerom
           keys-asc: https://practicerom.com/public/packages/debian/pgp.pub
+
+      - name: Add n64 toolchain
+        run: sudo apt-get install n64-ultra
 
       - name: Use Node.js 18.x
         uses: actions/setup-node@v3
@@ -114,7 +118,6 @@ jobs:
 
       - name: Build
         run: |
-          ./env.sh $DEPLOY_ENV
           npm run build
 
       - name: Deploy to Netlify
