@@ -3,47 +3,126 @@ name: Continuous Integration Workflow
 on: [push, pull_request, workflow_dispatch]
 
 jobs:
-  test:
+  deps:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+
       - name: Use Node.js 18.x
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: 18.x
+
+      - name: Use cached node_modules
+        id: cache-node-modules
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-modules-
+
       - name: Install dependencies
+        if: steps.cache-node-modules.outputs.cache-hit != 'true'
         run: npm i
+
+  test:
+    needs: deps
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Use Node.js 18.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+
+      - name: Use cached node_modules
+        id: cache-node-modules
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-modules-
+
+      - name: Install dependencies
+        if: steps.cache-node-modules.outputs.cache-hit != 'true'
+        run: npm i
+
+      - name: Use cached node_modules cache dir
+        uses: actions/cache@v3
+        with:
+          path: node_modules/.cache
+          key: ${{ runner.os }}-node-cache-${{ github.run_id }}
+          restore-keys: |
+            ${{ runner.os }}-node-cache-
+
       - name: Test
         run: npm test
-  deploy-dev:
-    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/develop' }}
+  deploy:
+    if: ${{ github.event_name == 'push' && (github.ref == 'refs/heads/develop' || contains(github.ref, 'refs/tags/')) }}
     needs: test
     runs-on: ubuntu-latest
     steps:
-     - name: Deploy
-       uses: actions/github-script@v6
-       with:
-         github-token: ${{ secrets.PAT_TOKEN }}
-         script: |
-          await github.rest.actions.createWorkflowDispatch({
-            owner: 'OoTMM',
-            repo: 'gui',
-            workflow_id: 'dev.yml',
-            ref: 'develop'
-          })
-  deploy-stable:
-    if: ${{ github.event_name == 'push' && contains(github.ref, 'refs/tags/') }}
-    needs: test
-    runs-on: ubuntu-latest
-    steps:
-     - name: Deploy
-       uses: actions/github-script@v6
-       with:
-         github-token: ${{ secrets.PAT_TOKEN }}
-         script: |
-          await github.rest.actions.createWorkflowDispatch({
-            owner: 'OoTMM',
-            repo: 'gui',
-            workflow_id: 'stable.yml',
-            ref: 'master'
-          })
+      - uses: actions/checkout@v3
+
+      - name: Env Config - Stable
+        if: ${{ contains(github.ref, 'refs/tags/') }}
+        run: |
+          echo "VERSION=${{ github.ref_name }}" >> $GITHUB_ENV
+          echo "NETLIFY_SITE_ID=${{ secrets.NETLIFY_SITE_ID_STABLE }}" >> $GITHUB_ENV
+
+      - name: Env Config - Dev
+        if: ${{ github.ref == 'refs/heads/develop' }}
+        run: |
+          short_sha=$(echo ${{ github.sha }} | cut -c1-7)
+          echo "VERSION=dev-${short_sha}" >> $GITHUB_ENV
+          echo "NETLIFY_SITE_ID=${{ secrets.NETLIFY_SITE_ID_DEV }}" >> $GITHUB_ENV
+
+      - name: Add n64 toolchain repo
+        uses: myci-actions/add-deb-repo@10
+        with:
+          repo: deb http://practicerom.com/public/packages/debian staging main
+          repo-name: practicerom
+          keys-asc: https://practicerom.com/public/packages/debian/pgp.pub
+
+      - name: Add n64 toolchain
+        run: sudo apt-get install n64-ultra
+
+      - name: Use Node.js 18.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+
+      - name: Use cached node_modules
+        id: cache-node-modules
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-modules-
+
+      - name: Install dependencies
+        if: steps.cache-node-modules.outputs.cache-hit != 'true'
+        run: npm i
+
+      - name: Use cached node_modules cache dir
+        uses: actions/cache@v3
+        with:
+          path: node_modules/.cache
+          key: ${{ runner.os }}-node-cache-${{ github.run_id }}
+          restore-keys: |
+            ${{ runner.os }}-node-cache-
+
+      - name: Build
+        run: |
+          npm run build
+
+      - name: Deploy to Netlify
+        uses: netlify/actions/cli@master
+        with:
+          args: deploy --prod --dir=packages/gui/dist
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}

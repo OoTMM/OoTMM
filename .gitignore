@@ -10,3 +10,4 @@
 /config.yml
 /config*.yml
 /local
+/.env

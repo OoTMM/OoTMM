@@ -16,7 +16,7 @@
 	// "forwardPorts": [],
 
 	// Uncomment the next line to run commands after the container is created.
-	"postCreateCommand": "npm install && touch config.yml",
+	"postCreateCommand": "npm i && touch packages/core/config.yml",
 
 	// Configure tool-specific properties.
 	"customizations": {
@@ -31,6 +31,6 @@
 	// Uncomment to connect as an existing user other than the container default. More info: https://aka.ms/dev-containers-non-root.
 	// "remoteUser": "devcontainer"
 	"mounts": [
-		"source=${localEnv:HOME}${localEnv:USERPROFILE}/OoTMM,target=${containerWorkspaceFolder}/out,type=bind,consistency=cached"
+		"source=${localEnv:HOME}${localEnv:USERPROFILE}/OoTMM,target=${containerWorkspaceFolder}/packages/core/out,type=bind,consistency=cached"
 	]
 }

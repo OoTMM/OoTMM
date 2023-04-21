@@ -1,0 +1,68 @@
+{
+  "name": "@ootmm/core",
+  "version": "0.0.1",
+  "scripts": {
+    "build": "ts-node -T ./lib/rollup.ts",
+    "start": "ts-node -T ./lib/index.ts",
+    "start:debug": "ts-node -T ./lib/index.ts --debug --config config.yml",
+    "profile": "TS_NODE_TRANSPILE_ONLY=true node -r ts-node/register --prof ./lib/index.ts --debug --config config.yml && node --prof-process isolate-0x*.log > processed.log && rm -rf isolate-0x*.log",
+    "test": "cross-env NODE_ENV=test jest",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "core-js": "^3.29.1",
+    "crc-32": "^1.2.2",
+    "lodash": "^4.17.21",
+    "pngjs": "^7.0.0",
+    "randombytes": "^2.1.0",
+    "yaz0": "^2.0.5"
+  },
+  "main": "dist/index.node.min.js",
+  "types": "dist/lib/combo/index.d.ts",
+  "devDependencies": {
+    "@rollup/plugin-dsv": "^3.0.2",
+    "@rollup/plugin-json": "^6.0.0",
+    "@rollup/plugin-replace": "^5.0.2",
+    "@rollup/plugin-terser": "^0.4.0",
+    "@rollup/plugin-typescript": "^11.0.0",
+    "@rollup/plugin-yaml": "^4.0.1",
+    "@types/glob": "^8.1.0",
+    "@types/lodash": "^4.14.192",
+    "@types/pngjs": "^6.0.1",
+    "@types/randombytes": "^2.0.0",
+    "@types/webpack-env": "^1.18.0",
+    "cross-env": "^7.0.3",
+    "csv": "^6.2.8",
+    "glob": "^9.3.2",
+    "rollup": "^3.20.2",
+    "rollup-plugin-node-externals": "^5.1.2",
+    "type-fest": "^3.7.2",
+    "yaml": "^2.2.1"
+  },
+  "files": [
+    "dist/data"
+  ],
+  "license": "MIT",
+  "private": "true",
+  "nx": {
+    "namedInputs": {
+      "default": ["{projectRoot}/**/*"],
+      "version": [{"env": "VERSION"}]
+    },
+    "targets": {
+      "build": {
+        "inputs": ["default", "version"],
+        "outputs": [
+          "build",
+          "dist",
+          "include/combo/custom.h"
+        ]
+      },
+      "test": {
+        "inputs": ["default"],
+        "outputs": [],
+        "dependsOn": []
+      }
+    }
+  }
+}

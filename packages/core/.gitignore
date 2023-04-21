@@ -1,0 +1,7 @@
+/node_modules
+/third_party
+/out
+/build
+/config.yml
+/config*.yml
+/dist

@@ -4,18 +4,22 @@ services:
   combo:
     build: .
     volumes:
-      - /app/build
       - /app/node_modules
-      - /app/third_party
-      - ./data:/app/data
-      - ./dist:/app/dist
-      - ./include:/app/include
-      - ./lib:/app/lib
-      - ./out:/app/out
-      - ./roms:/app/roms
-      - ./src:/app/src
+      - /app/packages/core/build
+      - /app/packages/core/node_modules
+      - /app/packages/core/third_party
       - ./docker-entrypoint.sh:/app/docker-entrypoint.sh
+      - ./packages/core/data:/app/packages/core/data
+      - ./packages/core/dist:/app/packages/core/dist
+      - ./packages/core/include:/app/packages/core/include
+      - ./packages/core/lib:/app/packages/core/lib
+      - ./packages/core/out:/app/packages/core/out
+      - ./packages/core/src:/app/packages/core/src
+      - ./packages/core/package.json:/app/packages/core/package.json
+      - ./packages/core/Makefile:/app/packages/core/Makefile
+      - ./packages/core/tsconfig.json:/app/packages/core/tsconfig.json
       - ./package.json:/app/package.json
       - ./package-lock.json:/app/package-lock.json
-      - ./Makefile:/app/Makefile
       - ./tsconfig.json:/app/tsconfig.json
+      - ./jest.config.json:/app/jest.config.json
+      - ./roms:/app/roms

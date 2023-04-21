@@ -1,0 +1,121 @@
+"Dodongo Cavern":
+  dungeon: DC
+  exits:
+    "Death Mountain": "true"
+    "Dodongo Cavern Main": "has_bombflowers || can_hammer"
+"Dodongo Cavern Main":
+  dungeon: DC
+  exits:
+    "Dodongo Cavern": "true"
+    "Dodongo Cavern Right Corridor": "true"
+    "Dodongo Cavern Main Ledge": "is_adult"
+    "Dodongo Cavern Stairs": "event(DC_MAIN_SWITCH)"
+    "Dodongo Cavern Skull": "event(DC_BOMB_EYES)"
+  locations:
+    "Dodongo Cavern Map Chest": "has_bombflowers || can_hammer"
+    "Dodongo Cavern Lobby Scrub": "can_hit_scrub && can_use_wallet(1)"
+  gossip:
+    "Dodongo Cavern Gossip": "has_bombflowers || can_hammer"
+"Dodongo Cavern Right Corridor":
+  dungeon: DC
+  exits:
+    "Dodongo Cavern Main": "true"
+    "Dodongo Cavern Side Room": "true"
+    "Dodongo Cavern Miniboss 1": "true"
+  locations:
+    "Dodongo Cavern GS Scarecrow": "scarecrow_hookshot"
+"Dodongo Cavern Side Room":
+  dungeon: DC
+  exits:
+    "Dodongo Cavern Right Corridor": "true"
+  locations:
+    "Dodongo Cavern GS Side Room": "can_damage_skull"
+"Dodongo Cavern Miniboss 1":
+  dungeon: DC
+  exits:
+    "Dodongo Cavern Right Corridor": "can_use_sticks || has_weapon || can_use_slingshot"
+    "Dodongo Cavern Green Room": "can_use_sticks || has_weapon || can_use_slingshot"
+"Dodongo Cavern Green Room":
+  dungeon: DC
+  exits:
+    "Dodongo Cavern Miniboss 1": "true"
+    "Dodongo Cavern Green Side Room": "true"
+    "Dodongo Cavern Main Ledge": "is_child || has_fire"
+"Dodongo Cavern Green Side Room":
+  dungeon: DC
+  exits:
+    "Dodongo Cavern Green Room": "true"
+  locations:
+    "Dodongo Cavern Green Side Room Scrub": "can_hit_scrub && can_use_wallet(1)"
+"Dodongo Cavern Main Ledge":
+  dungeon: DC
+  exits:
+    "Dodongo Cavern Main": "true"
+    "Dodongo Cavern Green Room": "true"
+  events:
+    DC_MAIN_SWITCH: "true"
+"Dodongo Cavern Stairs":
+  dungeon: DC
+  exits:
+    "Dodongo Cavern Main": "true"
+    "Dodongo Cavern Compass Room": "true"
+    "Dodongo Cavern Stairs Top": "has_bombflowers || can_use_din"
+"Dodongo Cavern Stairs Top":
+  dungeon: DC
+  exits:
+    "Dodongo Cavern Stairs": "true"
+    "Dodongo Cavern Bomb Bag Room 1": "true"
+  locations:
+    "Dodongo Cavern GS Stairs Vines": "true"
+    "Dodongo Cavern GS Stairs Top": "(can_hookshot || can_boomerang) && event(DC_SHORTCUT)"
+"Dodongo Cavern Compass Room":
+  dungeon: DC
+  exits:
+    "Dodongo Cavern Stairs": "true"
+  locations:
+    "Dodongo Cavern Compass Chest": "true"
+"Dodongo Cavern Bomb Bag Room 1":
+  dungeon: DC
+  exits:
+    "Dodongo Cavern Stairs Top": "true"
+    "Dodongo Cavern Bomb Bag Room 2": "can_longshot || has_hover_boots || (is_adult && trick(OOT_DC_JUMP))"
+    "Dodongo Cavern Miniboss 2": "can_hit_triggers_distance"
+    "Dodongo Cavern Bomb Bag Side Room": "has_explosives_or_hammer"
+  locations:
+    "Dodongo Cavern Bomb Bag Side Chest": "true"
+"Dodongo Cavern Bomb Bag Side Room":
+  dungeon: DC
+  exits:
+    "Dodongo Cavern Bomb Bag Room 1": "true"
+  locations:
+    "Dodongo Cavern Bomb Bag Side Room Left Scrub": "can_hit_scrub && can_use_wallet(1)"
+    "Dodongo Cavern Bomb Bag Side Room Right Scrub": "can_hit_scrub && can_use_wallet(1)"
+"Dodongo Cavern Miniboss 2":
+  dungeon: DC
+  exits:
+    "Dodongo Cavern Bomb Bag Room 1": "can_use_sticks || has_weapon || can_use_slingshot"
+    "Dodongo Cavern Bomb Bag Room 2": "can_use_sticks || has_weapon || can_use_slingshot"
+"Dodongo Cavern Bomb Bag Room 2":
+  dungeon: DC
+  exits:
+    "Dodongo Cavern Miniboss 2": "true"
+    "Dodongo Cavern Bomb Bag Room 1": "true"
+    "Dodongo Cavern Main Bridge": "true"
+  locations:
+    "Dodongo Cavern Bomb Bag Chest": "true"
+"Dodongo Cavern Main Bridge":
+  dungeon: DC
+  exits:
+    "Dodongo Cavern Bomb Bag Room 2": "true"
+  events:
+    DC_SHORTCUT: "true"
+    DC_BOMB_EYES: "has_explosives"
+  locations:
+    "Dodongo Cavern Bridge Chest": "has_explosives_or_hammer"
+"Dodongo Cavern Skull":
+  dungeon: DC
+  exits:
+    "Dodongo Cavern Main": "true"
+    "Dodongo Cavern Boss": "true"
+  locations:
+    "Dodongo Cavern GS Near Boss": "true"

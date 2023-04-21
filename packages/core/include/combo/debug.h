@@ -1,0 +1,72 @@
+#define ENTRANCE_OOT_MIDO         0x433
+#define ENTRANCE_OOT_HCASTLE      0x138
+#define ENTRANCE_OOT_BOSS1        0x40f
+#define ENTRANCE_OOT_KAKARIKO     0x195
+#define ENTRANCE_OOT_SMEADOW      0x215
+#define ENTRANCE_OOT_GORON        0x14d
+#define ENTRANCE_OOT_GF           0x315
+#define ENTRANCE_OOT_ZWF          0x1dd
+#define ENTRANCE_OOT_ZRI          0x0ea
+#define ENTRANCE_OOT_HYLIA        0x560
+#define ENTRANCE_OOT_ZD           0x108
+#define ENTRANCE_OOT_BOSS3        0x301
+#define ENTRANCE_OOT_HYRULE       0x17d
+#define ENTRANCE_OOT_MARKET       0x1d1
+#define ENTRANCE_OOT_DEKUTREE     0x000
+#define ENTRANCE_OOT_TOT          0x053
+#define ENTRANCE_OOT_LAKE         0x4e6
+#define ENTRANCE_OOT_ZELDA        0x400
+#define ENTRANCE_OOT_RANCH        0x157
+#define ENTRANCE_OOT_RT           0x02d
+#define ENTRANCE_OOT_WINDMILL     0x453
+#define ENTRANCE_OOT_DMC          0x246
+#define ENTRANCE_OOT_FISH         0x45f
+#define ENTRANCE_OOT_COLOSSUS     0x1e1
+#define ENTRANCE_OOT_FIRE         0x165
+#define ENTRANCE_OOT_LW           0x11e
+#define ENTRANCE_OOT_POTION_SHOP  0x072
+#define ENTRANCE_OOT_VALLEY       0x3d0
+#define ENTRANCE_OOT_BIGGORON     0x1bd
+#define ENTRANCE_OOT_LAB          0x043
+#define ENTRANCE_OOT_BOSS2        0x40b
+#define ENTRANCE_OOT_BOSS4        0x00c
+#define ENTRANCE_OOT_BOSS5        0x305
+#define ENTRANCE_OOT_BOSS6        0x417
+#define ENTRANCE_OOT_BOSS7        0x413
+#define ENTRANCE_OOT_BOSS8        0x08d
+#define ENTRANCE_OOT_BOSS9        0x41f
+#define ENTRANCE_OOT_GANON        0x517
+#define ENTRANCE_OOT_SKULL        0x550
+#define ENTRANCE_OOT_PREGANON     0x427
+#define ENTRANCE_OOT_WATER        0x010
+#define ENTRANCE_OOT_ZF           0x225
+#define ENTRANCE_OOT_FOREST       0x169
+#define ENTRANCE_OOT_JJ           0x028
+#define ENTRANCE_OOT_IGT          0x467
+#define ENTRANCE_OOT_GSHOP        0x37c
+
+#if defined(GAME_MM)
+#define ENTRANCE(scene, id) ((((scene) - 3) << 9) | ((id) << 4))
+#define ENTRANCE_CLOCKTOWN  0xd800
+#define ENTRANCE_WOODS      0xc200
+#define ENTRANCE_DKING      0x7610
+#define ENTRANCE_TEMPLE1    0x3000
+#define ENTRANCE_BOSS1      0x3800
+#define ENTRANCE_SWAMP      0x8400
+#define ENTRANCE_RANCH      0x6400
+#define ENTRANCE_GREAT_BAY  0x6800
+#define ENTRANCE_BEAVER     0x8e00
+#define ENTRANCE_LAB        0x5800
+#define ENTRANCE_SMITH      0x5200
+#define ENTRANCE_GSHRINE    0x5e00
+#define ENTRANCE_ENDING     ((SCE_MM_MOON - 3) << 9) | 0
+#endif
+
+//#define DEBUG_OOT_ENTRANCE ENTRANCE_OOT_HYLIA
+#define DEBUG_OOT_ENTRANCE ENTRANCE_OOT_MIDO
+//#define DEBUG_MM_ENTRANCE  ENTRANCE(SCE_MM_STONE_TOWER, 0)
+//#define DEBUG_MM_ENTRANCE  ENTRANCE(SCE_MM_GORMAN_TRACK, 0)
+//#define DEBUG_MM_ENTRANCE  ENTRANCE(SCE_MM_CLOCK_TOWER_ROOFTOP, 0)
+//#define DEBUG_MM_ENTRANCE 0xce40
+//#define DEBUG_AGE AGE_CHILD
+//#define DEBUG_OVERRIDE      GI_OOT_SWORD_KOKIRI

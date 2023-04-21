@@ -3,15 +3,9 @@
 	"tasks": [
 		{
 			"type": "npm",
-			"script": "start:debug",
+			"script": "start:core:debug",
 			"problemMatcher": ["$gcc"],
-			"label": "Generate Seed (Debug)",
-		},
-		{
-			"type": "npm",
-			"script": "start",
-			"problemMatcher": ["$gcc"],
-			"label": "Generate Seed (Release)",
+			"label": "Generate Seed",
 		}
 	]
 }

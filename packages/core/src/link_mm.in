@@ -1,0 +1,170 @@
+bzero = 0x80089630;
+InitDmaManager = 0x80080d0c;
+Play_Init = 0x8016a2c8;
+gSaveContext = 0x801ef670;
+DMARomToRam = 0x80080790;
+
+osCreateMesgQueue = 0x8008f240;
+osEPiStartDma = 0x8008ee30;
+osRecvMesg = 0x80087ed0;
+osSendMesg = 0x80087b10;
+__osPiTable = 0x801fd080;
+osEPiWriteIo = 0x80093bb0;
+osEPiReadIo = 0x800920b0;
+osInvalDCache = 0x8008f2f0;
+osInvalICache = 0x8008f270;
+osWritebackDCache = 0x8008a5e0;
+osWritebackDCacheAll = 0x800955c0;
+
+gMemorySize = 0x80000318;
+ClearMemoryRange = 0x80080150;
+gDmaDataCount = 0x8009b2bc;
+
+RequestDma = 0x80080c04;
+kObjectsTable = 0x801c2740;
+GiveItem = 0x800b8a1c;
+
+DisplayTextBox2 = 0x80151938;
+
+Shader_Opa0_Xlu1            = 0x800ef0f0;
+Shader_Opa0_Xlu12           = 0x800ef780;
+Shader_Opa0                 = 0x800ef054;
+Shader_Opa01                = 0x800ef1f4;
+Shader_Opa1023              = 0x800ef89c;
+Shader_Opa10_Xlu32          = 0x800ef984;
+Shader_Opa10234567          = 0x800efbfc;
+Shader_Xlu01                = 0x800ef2ac;
+Shader_BombchuMask          = 0x800ee364;
+Shader_Compass              = 0x800ee940;
+Shader_DekuNut              = 0x800eed20;
+Shader_Fairy                = 0x800ee5fc;
+Shader_Fish                 = 0x800eef4c;
+Shader_GiantKnife           = 0x800eec18;
+Shader_GS                   = 0x800ee7d8;
+Shader_Heart                = 0x800eee34;
+Shader_Poe                  = 0x800ee400;
+Shader_Potion               = 0x800eea48;
+Shader_Rupee                = 0x800efab8;
+Shader_MoonTear             = 0x800ef65c;
+
+InitListPolyOpa = 0x8012c28c;
+InitListPolyXlu = 0x8012c2dc;
+Gfx_SetupDL_42Opa = 0x8012c8ac;
+GetMatrixMV     = 0x80181a40;
+GetSegment      = 0x8012cbd0;
+
+PreDraw1 = 0x800b8050;
+PreDraw2 = 0x800b8118;
+
+LoadFile = 0x80080c90;
+_malloc = 0x80086dd0;
+_free = 0x80086310;
+osSetIntMask = 0x80088010;
+ActorAlloc = 0x80102c60;
+ActorFree = 0x80102ce0;
+
+LoadObjectGi = 0x80838830;
+
+ActorSetScale = 0x800b67e0;
+ActorSetUnk = 0x800b675c;
+Actor_HasParent = 0x800b89f8;
+ActorDestroy = 0x800b670c;
+
+SetCollectibleFlag = 0x800b5db0;
+GetCollectibleFlag = 0x800b5d6c;
+
+SpawnActor = 0x800bac60;
+SpawnActorEx = 0x800bae14;
+ConvertMatrix = 0x801817fc;
+MatrixRotation = 0x801809ac;
+
+gModelView = 0x801fbe04;
+
+ModelViewScale = 0x8018039c;
+ModelViewRotateX = 0x80180610;
+ModelViewRotateY = 0x80180b48;
+ModelViewRotateZ = 0x80180e90;
+ModelViewTranslate = 0x8018029c;
+ModelViewUnkTransform = 0x801820a0;
+
+PrepareSave = 0x8014546c;
+AudioOcarina_SetInstrument = 0x8019C300;
+PlaySound = 0x8019f0c8;
+Message_Close = 0x801477b4;
+
+RandIntRange = 0x800ff450;
+
+gSegments = 0x801f8180;
+AddItem = 0x80112e80;
+Player_AddItemWithIcon = 0x8083d168;
+GiveItemDefaultRange = 0x800b8b84;
+
+ActorEnableTalk = 0x800b8614;
+ActorTalkedTo = 0x800b84d0;
+
+Message_ShowMessageAtYPosition = 0x801514b0;
+PlayerDisplayTextBox = 0x801518b0;
+
+Cutscene_End = 0x800ea0ec;
+ActorCutscene_GetCurrentIndex = 0x800f207c;
+ActorCutscene_Stop = 0x800f1fbc;
+ActorCutscene_GetCanPlayNext = 0x800f1be4;
+
+gActorOvl = 0x801aefd0;
+
+SetSwitchFlag = 0x800b5bf4;
+GetItemCollectBehavior = 0x801143cc;
+RemoveItem = 0x801149a0;
+
+Sram_SaveEndOfCycle = 0x80143b0c;
+Sram_SaveNewDay = 0x80146f5c;
+
+DisplayTextBox = 0x80150d08;
+Message_IsClosed = 0x800b867c;
+Message_GetState = 0x80152498;
+Message_ShouldAdvance = 0x80147624;
+
+Interface_LoadItemIconImpl = 0x80112b40;
+UpdateEquipment = 0x80123c90;
+
+Play_Draw = 0x80168f64;
+
+Player_Update = 0x80160b80;
+LoadIcon = 0x80178e3c;
+
+OverlayAddr = 0x801638d8;
+
+PlayMusic = 0x801a3238;
+
+Player_UsingItem = 0x801240dc;
+Player_DrawHookshotReticle = 0x80124cc4;
+SetChestFlag = 0x800b5c90;
+PlaySoundSpecial = 0x801a3098;
+
+Actor_RunByteCode = 0x8010bf58;
+
+DrawDungeonUnk2 = 0x801091f0;
+
+gGameData = 0x801f3f60;
+
+DrawSimpleOpa = 0x800bdfc0;
+
+Actor_SetCollisionCylinder = 0x800b78b8;
+
+MatrixStackDup = 0x8018019c;
+MatrixStackPop = 0x801801cc;
+
+AddRupees = 0x801159ec;
+
+PlayStoreFlags = 0x80169d40;
+
+gPlayedOcarinaSong = 0x801d8528;
+gIsOcarinaEnabled = 0x801d6fb4;
+gOcarinaFlags = 0x801d6fec;
+gOcarinaButtonPitchMap = 0x801d7030;
+gOcarinaSongBuffer = 0x801d7020;
+gOcarinaSongBufferCursor = 0x801d7028;
+
+gMaxRupees = 0x801c1e2c;
+
+Inventory_SetWorldMapCloudVisibility = 0x8012ef0c;
