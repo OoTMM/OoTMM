@@ -1,0 +1,24 @@
+.tab-bar-left {
+  background: #333;
+  color: white;
+}
+
+.tab {
+  min-width: 230px;
+  font-size: 1.3em;
+  padding: 1em;
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.tab.active, .tab:hover {
+  background: #111;
+}
+
+.tab-bar-right {
+  flex: 1;
+  max-height: 100vh;
+  overflow: auto;
+  padding: 2em;
+}

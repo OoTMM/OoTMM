@@ -1,0 +1,92 @@
+label {
+  display: flex;
+  flex-direction: column;
+  font-weight: bold;
+  font-size: 1em;
+}
+
+label > * {
+  font-weight: initial;
+}
+
+input[type=file] {
+  display: none;
+}
+
+input[type=checkbox] {
+  height: 20px;
+  width: 20px;
+  min-width: 20px;
+  margin-right: 6px;
+  opacity: 0.5;
+  transition: all 200ms ease-in 0s;
+}
+
+input[type=text] {
+  line-height: 24px;
+  font-size: 15px;
+  font-weight: 400;
+  transition: all 200ms ease-in 0s;
+  border-radius: 2px;
+  border-width: 1px;
+}
+
+select {
+  transition: border-color 200ms ease-in 0s, box-shadow 200ms ease-in 0s;
+  font-size: 1.5rem;
+  height: 30px;
+  min-height: 30px;
+  border-radius: 2px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(90, 103, 116);
+  background-color: transparent;
+  position: relative;
+}
+
+label > select {
+  margin-top: 8px;
+}
+
+label > input {
+  margin-top: 8px;
+}
+
+button {
+  white-space: nowrap;
+  vertical-align: middle;
+  user-select: none;
+  transition: all 300ms ease-in-out 0s;
+  text-decoration: none;
+  text-align: center;
+  padding: 0.5em 1em;
+  min-width: 48px;
+  line-height: 1.6;
+  font-weight: 700;
+  font-size: 1em;
+  border: none;
+  border-radius: 2px;
+}
+
+button:active, button:hover {
+  opacity: 0.7;
+}
+
+button, .btn {
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: linear-gradient(180deg, #43d857, #00bb19);
+  color: #fff;
+}
+
+.btn-danger {
+  background: #f44336;
+  color: #fff;
+}
+
+.checkbox {
+  align-items: center;
+  flex-direction: row;
+}

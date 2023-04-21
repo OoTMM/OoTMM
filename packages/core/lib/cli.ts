@@ -38,8 +38,8 @@ const makeOptions = async (args: string[]): Promise<OptionsInput> => {
 const main = async () => {
   const opts = await makeOptions(process.argv.slice(2));
   const [oot, mm] = await Promise.all([
-    fs.readFile('./roms/oot.z64'),
-    fs.readFile('./roms/mm.z64'),
+    fs.readFile('../../roms/oot.z64'),
+    fs.readFile('../../roms/mm.z64'),
   ]);
   const gen = generate({ oot, mm, opts });
   const { rom, log, hash, patch } = await gen.run();

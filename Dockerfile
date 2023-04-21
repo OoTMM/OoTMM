@@ -15,4 +15,4 @@ RUN apt-get update \
 
 WORKDIR /app
 ENTRYPOINT [ "/app/docker-entrypoint.sh" ]
-CMD [ "/usr/bin/npm", "start" ]
+CMD [ "/usr/bin/npm", "start:core" ]

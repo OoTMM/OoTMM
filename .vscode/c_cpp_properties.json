@@ -1,10 +1,10 @@
 {
   "env": {
     "myIncludePath": [
-      "${workspaceFolder}/third_party/ultralib/include/gcc",
-      "${workspaceFolder}/third_party/ultralib/include",
-      "${workspaceFolder}/build/include",
-      "${workspaceFolder}/include"
+      "${workspaceFolder}/packages/core/third_party/ultralib/include/gcc",
+      "${workspaceFolder}/packages/core/third_party/ultralib/include",
+      "${workspaceFolder}/packages/core/build/include",
+      "${workspaceFolder}/packages/core/include"
     ],
     "myDefines": [
       "_LANGUAGE_C=1",
