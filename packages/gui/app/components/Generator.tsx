@@ -11,6 +11,7 @@ import { JunkLocations } from './JunkLocations';
 import { Dungeons } from './Dungeons';
 import { SpecialConds } from './SpecialConds';
 import { Plando } from './Plando';
+import { Cosmetics } from './Cosmetics';
 
 export function Generator() {
   const tabs: Tab[] = [];
@@ -45,6 +46,11 @@ export function Generator() {
       component: <Plando/>
     });
   }
+
+  tabs.push({
+    name: "Cosmetics",
+    component: <Cosmetics/>
+  });
 
   return <TabBar tabs={tabs}/>
 }

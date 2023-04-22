@@ -10,6 +10,8 @@ import { Options } from "./options";
 import { pack } from "./pack";
 import { buildPatchfile } from './patch-build';
 import { Patchfile } from './patch-build/patchfile';
+import { makeAddresses } from './addresses';
+import { cosmetics, makeCosmetics } from './cosmetics';
 
 export type GeneratorOutput = {
   rom: Buffer;
@@ -32,6 +34,7 @@ export class Generator {
 
   async run(): Promise<GeneratorOutput> {
     const roms = await decompressGames(this.monitor, { oot: this.oot, mm: this.mm });
+    const addresses = makeAddresses(roms);
     let patchfile: Patchfile;
     let log: string | null = null;
 
@@ -46,6 +49,7 @@ export class Generator {
       patchfile = buildPatchfile({
         monitor: this.monitor,
         roms,
+        addresses,
         build: buildResult,
         custom: customData,
         logic: logicResult,
@@ -56,7 +60,9 @@ export class Generator {
       patchfile = new Patchfile(this.opts.patch);
     }
 
-    const packedRom = await pack(this.monitor, roms, patchfile);
+    const cosmeticsPatchfile = cosmetics(this.opts, addresses);
+
+    const packedRom = await pack(this.monitor, roms, [patchfile, cosmeticsPatchfile]);
     let patch: Buffer | null = null;
     if (!this.opts.patch) {
       patch = patchfile.toBuffer();

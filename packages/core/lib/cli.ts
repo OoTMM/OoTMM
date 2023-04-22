@@ -19,8 +19,13 @@ const makeOptions = async (args: string[]): Promise<OptionsInput> => {
       break;
     case "--config": {
       const configFile = await fs.readFile(args[++i]);
-      const settings = YAML.parse(configFile.toString());
-      opts.settings = settings;
+      const config = YAML.parse(configFile.toString());
+      if (config.settings) {
+        opts.settings = config.settings;
+      }
+      if (config.cosmetics) {
+        opts.cosmetics = config.cosmetics;
+      }
       break;
     }
     case "--patch": {

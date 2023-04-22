@@ -1,6 +1,4 @@
-import { DEFAULT_SETTINGS, TRICKS, Items, Settings, OptionsInput, makeSettings } from '@ootmm/core';
-import { merge } from 'lodash';
-
+import { Items, Settings, OptionsInput, makeSettings, makeCosmetics } from '@ootmm/core';
 import type { WorkerResult, WorkerResultGenerate, WorkerResultGenerateError, WorkerResultItemPool } from './worker';
 
 let workerTaskId = 0;
@@ -58,6 +56,11 @@ export async function itemPoolFromSettings(settings: Settings): Promise<Items> {
     });
   });
   return result.itemPool;
+}
+
+export function initialCosmetics() {
+  const oldCosmetics = JSON.parse(localStorage.getItem('cosmetics') ?? "{}");
+  return makeCosmetics(oldCosmetics);
 }
 
 export async function generate(files: { oot: Buffer, mm: Buffer, patch?: Buffer }, options: OptionsInput, log: (msg: string) => void) {

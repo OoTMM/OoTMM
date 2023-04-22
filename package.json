@@ -9,7 +9,8 @@
     "start:core:debug": "nx run @ootmm/core:start:debug",
     "build": "nx run-many -t build",
     "test": "nx run-many --target=test --output-style=stream-without-prefixes",
-    "serve": "nx run-many -t serve"
+    "serve": "nx run-many -t serve",
+    "typecheck": "nx run-many -t typecheck"
   },
   "devDependencies": {
     "@nrwl/jest": "^15.9.2",
