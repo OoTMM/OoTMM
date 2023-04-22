@@ -12,6 +12,12 @@ export type Cosmetics = {
   ootTunicZora: ColorRandom;
 };
 
+export const COSMETIC_NAMES: {[k in keyof Cosmetics]: string} = {
+  ootTunicKokiri: 'OoT Kokiri Tunic',
+  ootTunicGoron: 'OoT Goron Tunic',
+  ootTunicZora: 'OoT Zora Tunic',
+};
+
 export const DEFAULT_COSMETICS: Cosmetics = {
   ootTunicKokiri: 'kokirigreen',
   ootTunicGoron: 'goronred',

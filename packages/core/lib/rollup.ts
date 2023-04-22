@@ -17,6 +17,7 @@ import { codegen as comboCodegen } from './combo/codegen';
 import { customAssets } from './combo/custom';
 import { Monitor } from './combo/monitor';
 import { DEFAULT_SETTINGS } from './combo';
+import { DEFAULT_COSMETICS } from './combo/cosmetics';
 
 const VERSION = process.env.VERSION || 'XXX';
 
@@ -57,7 +58,7 @@ async function build() {
 
 async function copyData() {
   await comboCodegen(dummyMonitor);
-  const b = await comboBuild({ debug: false, seed: 'ROLLUP', settings: DEFAULT_SETTINGS });
+  const b = await comboBuild({ debug: false, seed: 'ROLLUP', settings: DEFAULT_SETTINGS, cosmetics: DEFAULT_COSMETICS });
   await fs.mkdir('dist/data', { recursive: true });
   await Promise.all(
     Object.entries(b).map(async ([game, { payload, patches }]) => {
