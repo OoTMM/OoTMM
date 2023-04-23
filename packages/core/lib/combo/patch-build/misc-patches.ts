@@ -142,10 +142,6 @@ export function easyFishingWithSinkingLure(patch: Patchfile) {
     patch.addPatch('oot', 0xDC6550, b) // replace 'swc1 f10, 0x01ac(s0)' with 'swc1 f6, 0x01ac(s0)'
 }
 
-export function makeGCCheckForFireCompletion(patch: Patchfile) {
-    patch.addPatch('oot', 0xED59DC, Buffer.from([0x80, 0xC9, 0x0E, 0xDC]))
-}
-
 export function removeOotSceneRestrictions(patch: Patchfile) {
     // Warp Songs
     patch.addPatch('oot', 0xB6D3D2, Buffer.from([0x00])) // Gerudo Training Grounds
