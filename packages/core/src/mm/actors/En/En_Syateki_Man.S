@@ -13,3 +13,9 @@ PATCH_END
 PATCH_START 0x809C64C0 + 0x21E0
   nop
 PATCH_END
+
+/* Fix for FD link */
+PATCH_START 0x809c6fb8
+  slti at,v0,2
+  bnez at,. + 0x25c
+PATCH_END

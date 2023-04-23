@@ -54,3 +54,9 @@ PATCH_START 0x80a0e2d4
   jal comboShopDisplayTextBoxConfirm
    move a1,t6
 PATCH_END
+
+/* Fix for FD link */
+PATCH_START 0x80a10ac0
+.int 0x80a0ca84
+.int 0x80a0ca84
+PATCH_END

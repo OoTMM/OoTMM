@@ -7,6 +7,7 @@
 
 #include <PR/rcp.h>
 #include <combo/defs.h>
+#include <combo/patch_group.h>
 
 /* N64 regdefs don't march ours */
 #define zero  $0
@@ -154,6 +155,16 @@ HOOK_SAVE
   jal \addr
   nop
 HOOK_RESTORE
+.endm
+
+.macro PATCH_GROUP groupId
+.section .patch, "awx"
+.int 0xffffffff
+.int \groupId
+.endm
+
+.macro PATCH_GROUP_END
+PATCH_GROUP 0
 .endm
 
 #endif /* COMBO_ASM_H */
