@@ -133,22 +133,6 @@ export function easyFishingWithSinkingLure(patch: Patchfile) {
     patch.addPatch('oot', 0xDC6550, b) // replace 'swc1 f10, 0x01ac(s0)' with 'swc1 f6, 0x01ac(s0)'
 }
 
-export function removeOotSceneRestrictions(patch: Patchfile) {
-    // Warp Songs
-    patch.addPatch('oot', 0xB6D3D2, Buffer.from([0x00])) // Gerudo Training Grounds
-    patch.addPatch('oot', 0xB6D42A, Buffer.from([0x00])) // Inside Ganon's Castle
-
-    // Farore's Wind
-    patch.addPatch('oot', 0xB6D3D3, Buffer.from([0x00])) // Gerudo Training Grounds
-    patch.addPatch('oot', 0xB6D42B, Buffer.from([0x00])) // Inside Ganon's Castle
-
-    // Ocarina
-    patch.addPatch('oot', 0xB6D346, Buffer.from([0x11])) // Granny's Shop
-    patch.addPatch('oot', 0xB6D33A, Buffer.from([0x51])) // Bombchu Bowling
-    patch.addPatch('oot', 0xB6D30A, Buffer.from([0x51])) // Archer
-}
-
-
 export function spawnFortressGateGuard(patch: Patchfile) {
     let new_gate_opening_guard: number[] = [0x0138, 0xFAC8, 0x005D, 0xF448, 0x0000, 0x95B0, 0x0000, 0x0301]
     let guard: Buffer = Buffer.alloc(new_gate_opening_guard.length * 2)

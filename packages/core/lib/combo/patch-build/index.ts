@@ -69,7 +69,6 @@ export function buildPatchfile(args: BuildPatchfileIn): Patchfile {
   miscPatches.easyFishingWithSinkingLure(file) // Guarantees the sinking lure and the Hylian Loach to spawn, and allows Link to receive reward despite using sinking lure
   miscPatches.fishingSpeedups(file) // Mostly working... at 2 exceptions. See related function
 
-  miscPatches.removeOotSceneRestrictions(file) // Allow Farore's Wind, Warp songs in Gerudo Training Grounds & Inside Ganon's Castle + allow Ocarina usage in a few places
   miscPatches.spawnFortressGateGuard(file) // Spawns a Gerudo Guard by the gate on Haunted Wasteland side
   miscPatches.moveSwitches(file) // Lowers Forest Temple Basement switches and Fire Temple Hammer Chest switch by 1 unit
   miscPatches.fixIceCavernAlcoveCamera(file)
