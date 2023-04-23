@@ -36,6 +36,7 @@ function asmPatchGroups(settings: Settings) {
     MM_CLOCK_SPEED_FAST: settings.clockSpeed === 'fast',
     MM_CLOCK_SPEED_VERYFAST: settings.clockSpeed === 'veryfast',
     MM_CLOCK_SPEED_SUPERFAST: settings.clockSpeed === 'superfast',
+    MM_BOSS_WARP_PADS_BEATEN: settings.bossWarpPads === 'bossBeaten',
   };
   const keys = Object.keys(groups) as PatchGroup[];
   return keys.filter((k) => groups[k]);

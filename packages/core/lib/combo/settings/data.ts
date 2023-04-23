@@ -304,6 +304,17 @@ export const SETTINGS = [{
   ],
   default: 'none'
 }, {
+  key: 'bossWarpPads',
+  name: 'Boss Warp Pads',
+  category: 'main.events',
+  type: 'enum',
+  description: 'Alters the behavior of the MM Boss Warp Pads.',
+  values: [
+    { value: 'bossBeaten', name: 'Boss Beaten', description: 'Enabled when the boss is beaten' },
+    { value: 'remains', name: 'Remains', description: 'Enabled when the matching remain is obtained' },
+  ],
+  default: 'bossBeaten'
+}, {
   key: 'crossWarpOot',
   name: 'Cross-Games OoT Warp Songs',
   category: 'main.cross',
