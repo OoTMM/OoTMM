@@ -1,35 +1,6 @@
 import { DecompressedRoms } from "../decompress";
 import { Patchfile } from "./patchfile";
 
-function bufferFromShort(value: number) {
-  return Buffer.from([value >>> 8, value & 0xFF]);
-}
-
-const validClockSpeeds: {[k: string]: [speed: number, invertedModifier: number]} = {
-  "veryslow":  [1, 0],
-  "slow":      [2, 1],
-  "default":   [3, -2],
-  "fast":      [6, -4],
-  "veryfast":  [9, -6],
-  "superfast": [18, -12],
-}
-
-export function writeClockSpeed(value: string, patch: Patchfile) {
-    const codeFileAddress = 0xB3C000;
-    const hackAddressOffset = 0x8A674;
-    const [sp, im] = validClockSpeeds[value];
-    const invertedModifier = bufferFromShort(im)
-    const hackFixClockSpeed = Buffer.from([
-      0x3C, 0x01, 0x00, 0x01, 0x14, 0xE2, 0x00, 0x02, 0x00, 0x26, 0x08, 0x21, 0x24, 0x02, 0x00, 0x00,
-      0x10, 0x40, 0x00, 0x02, 0x00, 0x00, 0x00, 0x00, 0x24, 0x02, 0x00,  sp , 0xA4, 0x22, 0x70, 0x06
-    ]);
-    patch.addPatch('mm', codeFileAddress+hackAddressOffset, hackFixClockSpeed)
-    const invertedModifierOffsets = [0xb1b8e, 0x7405e]
-    invertedModifierOffsets.forEach(offset => {
-      patch.addPatch('mm', codeFileAddress + offset, invertedModifier);
-    });
-}
-
 export function allowAnywhere(value: string[], patch: Patchfile, roms: DecompressedRoms) {
   if(value.includes('oot-climb')) {
     for (let idx = 0; idx < 32; ++idx) {

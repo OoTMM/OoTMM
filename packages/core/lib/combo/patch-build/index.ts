@@ -31,6 +31,11 @@ function asmPatchGroups(settings: Settings) {
     MM_BLAST_MASK_DELAY_SHORT: settings.blastMaskCooldown === 'short',
     MM_BLAST_MASK_DELAY_LONG: settings.blastMaskCooldown === 'long',
     MM_BLAST_MASK_DELAY_VERYLONG: settings.blastMaskCooldown === 'verylong',
+    MM_CLOCK_SPEED_VERYSLOW: settings.clockSpeed === 'veryslow',
+    MM_CLOCK_SPEED_SLOW: settings.clockSpeed === 'slow',
+    MM_CLOCK_SPEED_FAST: settings.clockSpeed === 'fast',
+    MM_CLOCK_SPEED_VERYFAST: settings.clockSpeed === 'veryfast',
+    MM_CLOCK_SPEED_SUPERFAST: settings.clockSpeed === 'superfast',
   };
   const keys = Object.keys(groups) as PatchGroup[];
   return keys.filter((k) => groups[k]);
@@ -68,9 +73,6 @@ export function buildPatchfile(args: BuildPatchfileIn): Patchfile {
   /* OOT patches */
   miscPatches.easyFishingWithSinkingLure(file) // Guarantees the sinking lure and the Hylian Loach to spawn, and allows Link to receive reward despite using sinking lure
   miscPatches.fishingSpeedups(file) // Mostly working... at 2 exceptions. See related function
-
-  /* MM patches */
-  miscPatches.writeClockSpeed(args.settings.clockSpeed, file) // Clock Speed modifier
 
   /* Fierce Deity + Hookshot + Climb Anywhere changes */
   let anywhere: string[] = []
