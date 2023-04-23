@@ -48,9 +48,16 @@ export function buildPatchfile(args: BuildPatchfileIn): Patchfile {
   file.addPatch('global', 0x20, Buffer.from('OOT+MM COMBO       '));
   file.addPatch('global', 0x3c, Buffer.from('ZZE'));
 
+  /* OOT patches */
+  miscPatches.arrowEquipSpeedUp(file) // In pause menu, shortens the animation of equipping an elemental arrow
+  miscPatches.bossCutscenesSpeedups(file) // Speeds up the intro cutscene of Ganon and the death cutscenes of Phantom Ganon, Twinrova and Ganondorf 
+  miscPatches.easyFishingWithSinkingLure(file) // Guarantees the sinking lure and the Hylian Loach to spawn, and allows Link to receive reward despite using sinking lure
+  miscPatches.fishingSpeedups(file)
+
   /* MM patches */
   miscPatches.writeBlastMaskCooldown(args.settings.blastMaskCooldown, file) // Blast Mask Cooldown settings
   miscPatches.writeClockSpeed(args.settings.clockSpeed, file) // Clock Speed modifier
+  miscPatches.speedupDogRace(file) // Dog Race RNG mostly removed
 
   /* Fierce Deity + Hookshot + Climb Anywhere changes */
   let anywhere: string[] = []
