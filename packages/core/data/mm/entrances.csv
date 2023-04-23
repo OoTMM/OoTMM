@@ -1,8 +1,12 @@
 to,                                 from,                                   type,       id
 Woodfall Temple Boss,               Woodfall Temple Pre-Boss,               boss,       0x3800
+Woodfall Temple Boss,               Woodfall Temple Entrance,               boss,       0x3800
 Snowhead Temple Boss,               Snowhead Temple Center Level 4,         boss,       0x8200
+Snowhead Temple Boss,               Snowhead Temple Entrance,               boss,       0x8200
 Great Bay Temple Boss,              Great Bay Temple Pre-Boss,              boss,       0xb800
+Great Bay Temple Boss,              Great Bay Temple Entrance,              boss,       0xb800
 Stone Tower Temple Boss,            Stone Tower Temple Inverted Pre-Boss,   boss,       0x6600
+Stone Tower Temple Boss,            Stone Tower Temple Inverted Entrance,   boss,       0x6600
 Woodfall Temple,                    Woodfall Front of Temple,               dungeon,    0x3000
 Woodfall Front of Temple,           Woodfall Temple,                        dungeon,    0x8610
 Snowhead Temple,                    Snowhead,                               dungeon,    0x3c00

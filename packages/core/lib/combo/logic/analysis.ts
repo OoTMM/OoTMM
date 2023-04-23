@@ -377,6 +377,13 @@ export class LogicPassAnalysis {
       delete this.dependencies['OOT_SMALL_KEY_SPIRIT'];
     }
 
+    if (this.state.settings.bossWarpPads === 'remains') {
+      delete this.dependencies['MM_REMAINS_ODOLWA'];
+      delete this.dependencies['MM_REMAINS_GOHT'];
+      delete this.dependencies['MM_REMAINS_GYORG'];
+      delete this.dependencies['MM_REMAINS_TWINMOLD'];
+    }
+
     /* Shared items */
     this.dependencies['SHARED_MASK_TRUTH'] = [...this.dependencies['MM_MASK_TRUTH'], ...this.dependencies['OOT_MASK_TRUTH']];
     this.dependencies['SHARED_MASK_KEATON'] = [...this.dependencies['MM_MASK_KEATON']];

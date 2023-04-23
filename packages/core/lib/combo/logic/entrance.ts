@@ -143,7 +143,7 @@ export class LogicPassEntrances {
 
   private fixBosses() {
     const bossEntrances = this.world.entrances.filter(e => e.type === 'boss');
-    const bossEntrancesByDungeon: {[k: string]: Entrance} = {};
+    const bossEntrancesByDungeon: {[k: string]: Entrance[]} = {};
     const bossEvents: {[k: string]: ExprMap} = {};
     const bossAreas: {[k: string]: string[]} = {};
     const bossLocations: {[k: string]: string[]} = {};
@@ -163,12 +163,14 @@ export class LogicPassEntrances {
     }
 
     for (const e of bossEntrances) {
-      /* Get the entrances */
       const from = this.world.areas[e.from];
       const to = this.world.areas[e.to];
+
+      /* We have a boss entrance */
       const dungeon = to.dungeon!;
       const entrance = { ...e, expr: from.exits[e.to] };
-      bossEntrancesByDungeon[dungeon] = entrance;
+      bossEntrancesByDungeon[dungeon] ||= [];
+      bossEntrancesByDungeon[dungeon].push(entrance);
 
       /* Remove the entrance */
       delete from.exits[e.to];
@@ -178,12 +180,12 @@ export class LogicPassEntrances {
     const bosses = shuffle(this.input.random, Object.keys(bossEntrancesByDungeon));
     const bossesToPlace = new Set(bosses);
     for (const srcBoss of bosses) {
-      const src = bossEntrancesByDungeon[srcBoss];
+      const srcs = bossEntrancesByDungeon[srcBoss];
       const candidates = shuffle(this.input.random, Array.from(bossesToPlace));
       let dstBoss: string | null = null;
       for (const boss of candidates) {
-        const dst = bossEntrancesByDungeon[boss];
-        if (this.isAssignableNew(src, dst, { ownGame: this.input.settings.erBoss === 'ownGame', locations: bossLocations[boss] })) {
+        const dst = bossEntrancesByDungeon[boss][0];
+        if (srcs.some(src => this.isAssignableNew(src, dst, { ownGame: this.input.settings.erBoss === 'ownGame', locations: bossLocations[boss] }))) {
           dstBoss = boss;
           break;
         }
@@ -194,8 +196,10 @@ export class LogicPassEntrances {
       bossesToPlace.delete(dstBoss);
 
       /* We found a boss - place it */
-      const dst = bossEntrancesByDungeon[dstBoss];
-      this.place(src, dst, false);
+      const dst = bossEntrancesByDungeon[dstBoss][0];
+      for (const src of srcs) {
+        this.place(src, dst, false);
+      }
 
       /* Mark the boss */
       this.result.boss[BOSS_INDEX_BY_DUNGEON[dstBoss]] = BOSS_INDEX_BY_DUNGEON[srcBoss];

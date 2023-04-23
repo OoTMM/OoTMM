@@ -12,6 +12,7 @@
   exits:
     "Great Bay Temple Entrance": "true"
     "Great Bay Temple Water Wheel": "true"
+    "Great Bay Temple Boss": "setting(bossWarpPads, remains) && has(REMAINS_GYORG)"
   locations:
     "Great Bay Temple Entrance Chest": "has_sticks || can_use_fire_arrows"
 "Great Bay Temple Water Wheel":

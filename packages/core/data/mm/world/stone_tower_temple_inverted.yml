@@ -12,6 +12,7 @@
     "Stone Tower Temple Inverted": "true"
     "Stone Tower Temple Inverted East": "can_use_light_arrows"
     "Stone Tower Temple Inverted Entrance Ledge": "trick(MM_ISTT_ENTRY_JUMP) && (has_bombs || trick_keg_explosives)"
+    "Stone Tower Temple Boss": "setting(bossWarpPads, remains) && has(REMAINS_TWINMOLD)"
   locations:
     "Stone Tower Temple Inverted Entrance Chest": "can_use_light_arrows"
 "Stone Tower Temple Inverted East":

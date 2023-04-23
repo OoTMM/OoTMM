@@ -11,6 +11,7 @@
   exits:
     "Woodfall Temple": "true"
     "Woodfall Temple Main": "has(MASK_DEKU) || can_hookshot_short"
+    "Woodfall Temple Boss": "setting(bossWarpPads, remains) && has(REMAINS_ODOLWA)"
   locations:
     "Woodfall Temple Entrance Chest": "has(MASK_DEKU) || can_hookshot_short"
     "Woodfall Temple SF Entrance": "true"
