@@ -64,15 +64,6 @@ export function allowAnywhere(value: string[], patch: Patchfile, roms: Decompres
   }
 }
 
-export function arrowEquipSpeedUp(patch: Patchfile) {
-  patch.addPatch('oot', 0xBB84CE, Buffer.alloc(2))
-  patch.addPatch('oot', 0xBB84B7, Buffer.from([0xFF]))
-  patch.addPatch('oot', 0xBB84CB, Buffer.from([0x01]))
-  patch.addPatch('oot', 0xBB7E67, Buffer.from([0x04]))
-  patch.addPatch('oot', 0xBB8957, Buffer.from([0x01]))
-  patch.addPatch('oot', 0xBB854B, Buffer.from([0x05]))
-}
-
 export function bossCutscenesSpeedups(patch: Patchfile) {
     /* Phantom Ganon */
     patch.addPatch('oot', 0xC944D8, Buffer.alloc(4))
