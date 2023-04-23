@@ -1,15 +1,6 @@
 import { DecompressedRoms } from "../decompress";
 import { Patchfile } from "./patchfile";
 
-const BLAST_MASK_COOLDOWN = {
-  instant: 0x1,
-  veryshort: 0x20,
-  short: 0x80,
-  default: 0x136,
-  long: 0x200,
-  verylong: 0x400,
-};
-
 function bufferFromShort(value: number) {
   return Buffer.from([value >>> 8, value & 0xFF]);
 }
@@ -21,14 +12,6 @@ const validClockSpeeds: {[k: string]: [speed: number, invertedModifier: number]}
   "fast":      [6, -4],
   "veryfast":  [9, -6],
   "superfast": [18, -12],
-}
-
-export function writeBlastMaskCooldown(value: keyof typeof BLAST_MASK_COOLDOWN, patch: Patchfile) {
-  const cooldown = Buffer.alloc(2);
-  cooldown.writeUInt16BE(BLAST_MASK_COOLDOWN[value]);
-  const addr = 0x00CA7F00;
-  const offset = 0x002766;
-  patch.addPatch('mm', addr + offset, cooldown);
 }
 
 export function writeClockSpeed(value: string, patch: Patchfile) {

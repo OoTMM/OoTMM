@@ -22,21 +22,18 @@ export type BuildPatchfileIn = {
 };
 
 function asmPatchGroups(settings: Settings) {
-  const groups: PatchGroup[] = [];
-
-  if (settings.fierceDeityAnywhere) {
-    groups.push('MM_FD_ANYWHERE');
-  }
-
-  if (settings.hookshotAnywhereOot) {
-    groups.push('OOT_HOOKSHOT_ANYWHERE');
-  }
-
-  if (settings.hookshotAnywhereMm) {
-    groups.push('MM_HOOKSHOT_ANYWHERE');
-  }
-
-  return groups;
+  const groups: {[k in PatchGroup]: boolean} = {
+    MM_FD_ANYWHERE: settings.fierceDeityAnywhere,
+    OOT_HOOKSHOT_ANYWHERE: settings.hookshotAnywhereOot,
+    MM_HOOKSHOT_ANYWHERE: settings.hookshotAnywhereMm,
+    MM_BLAST_MASK_DELAY_INSTANT: settings.blastMaskCooldown === 'instant',
+    MM_BLAST_MASK_DELAY_VERYSHORT: settings.blastMaskCooldown === 'veryshort',
+    MM_BLAST_MASK_DELAY_SHORT: settings.blastMaskCooldown === 'short',
+    MM_BLAST_MASK_DELAY_LONG: settings.blastMaskCooldown === 'long',
+    MM_BLAST_MASK_DELAY_VERYLONG: settings.blastMaskCooldown === 'verylong',
+  };
+  const keys = Object.keys(groups) as PatchGroup[];
+  return keys.filter((k) => groups[k]);
 }
 
 export function buildPatchfile(args: BuildPatchfileIn): Patchfile {
@@ -73,7 +70,6 @@ export function buildPatchfile(args: BuildPatchfileIn): Patchfile {
   miscPatches.fishingSpeedups(file) // Mostly working... at 2 exceptions. See related function
 
   /* MM patches */
-  miscPatches.writeBlastMaskCooldown(args.settings.blastMaskCooldown, file) // Blast Mask Cooldown settings
   miscPatches.writeClockSpeed(args.settings.clockSpeed, file) // Clock Speed modifier
 
   /* Fierce Deity + Hookshot + Climb Anywhere changes */
