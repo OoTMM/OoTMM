@@ -64,27 +64,6 @@ export function allowAnywhere(value: string[], patch: Patchfile, roms: Decompres
   }
 }
 
-export function bossCutscenesSpeedups(patch: Patchfile) {
-    /* Phantom Ganon */
-    patch.addPatch('oot', 0xC944D8, Buffer.alloc(4))
-    patch.addPatch('oot', 0xC94548, Buffer.alloc(4))
-    patch.addPatch('oot', 0xC94730, Buffer.alloc(4))
-    patch.addPatch('oot', 0xC945A8, Buffer.alloc(4))
-    patch.addPatch('oot', 0xC94594, Buffer.alloc(4))
-
-    /* Twinrova */
-    patch.addPatch('oot', 0xD678CC, Buffer.from([0x24, 0x01, 0x03, 0xA2, 0xA6, 0x01, 0x01, 0x42]))
-    patch.addPatch('oot', 0xD67BA4, Buffer.from([0x10, 0x00]))
-
-    /* Ganondorf */
-    patch.addPatch('oot', 0xD82047, Buffer.from([0x09]))
-
-    /* Ganon battle intro */
-    patch.addPatch('oot', 0xE83D28, Buffer.alloc(4))
-    patch.addPatch('oot', 0xE83B5C, Buffer.alloc(4))
-    patch.addPatch('oot', 0xE84C80, Buffer.from([0x10, 0x00]))
-}
-
 // Surprisingly both commented sections set all the fish to weigh 0 pounds.
 // Unsure what's going on, but they're both in OOTR for fishing speedup
 export function fishingSpeedups(patch: Patchfile) {

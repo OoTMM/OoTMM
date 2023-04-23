@@ -13,3 +13,8 @@ PATCH_END
 PATCH_START 0x809f5320
   li t6,0x517
 PATCH_END
+
+/* Faster cutscene */
+PATCH_START 0x809f4954
+  li t7,0x09
+PATCH_END
