@@ -95,3 +95,57 @@ PATCH_END
 PATCH_START 0x80A3ED08
   move at,t5
 PATCH_END
+
+/* Make sinking lure always available */
+PATCH_START 0x80a393e0
+  nop
+PATCH_END
+
+PATCH_START 0x80a393f0
+  nop
+PATCH_END
+
+/* Don't reset lure position */
+PATCH_START 0x80a42544
+  nop
+PATCH_END
+
+PATCH_START 0x80a4254c
+  nop
+PATCH_END
+
+PATCH_START 0x80a4260c
+  nop
+PATCH_END
+
+PATCH_START 0x80a42614
+  nop
+PATCH_END
+
+/* Ignore sinking lure for prizes */
+PATCH_START 0x80a4239c
+  nop
+  nop
+PATCH_END
+
+PATCH_START 0x80a423fc
+  nop
+  nop
+PATCH_END
+
+/* Display the normal text for the sinking lure */
+PATCH_START 0x80a420b8
+  li t8,0x4086
+PATCH_END
+
+PATCH_START 0x80A3CA0C
+  li at,0x00c8
+PATCH_END
+
+PATCH_START 0x80A3CA20
+  sh at,0x0192(s0)
+PATCH_END
+
+PATCH_START 0x80A3CA30
+  swc1 $f6,0x01ac(s0)
+PATCH_END
