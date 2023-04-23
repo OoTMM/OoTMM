@@ -71,7 +71,6 @@ export function buildPatchfile(args: BuildPatchfileIn): Patchfile {
 
   miscPatches.spawnFortressGateGuard(file) // Spawns a Gerudo Guard by the gate on Haunted Wasteland side
   miscPatches.moveSwitches(file) // Lowers Forest Temple Basement switches and Fire Temple Hammer Chest switch by 1 unit
-  miscPatches.fixIceCavernAlcoveCamera(file)
   miscPatches.makeOotCursedSkulltulasPeopleComeDownInstantly(file)
 
   // Only missing the proper ASM for the arrows, and we're good to add it as a setting

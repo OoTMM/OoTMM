@@ -159,11 +159,6 @@ export function moveSwitches(patch: Patchfile) {
     patch.addPatch('oot', 0x236C148, Buffer.from([0x11, 0x93])) // fire hammer room
 }
 
-export function fixIceCavernAlcoveCamera(patch: Patchfile) {
-    patch.addPatch('oot', 0x2BECA25, Buffer.from([0x01]))
-    patch.addPatch('oot', 0x2BECA2D, Buffer.from([0x01]))
-}
-
 export function makeOotCursedSkulltulasPeopleComeDownInstantly(patch: Patchfile) {
     let buf: Buffer = Buffer.alloc(2)
     buf.writeUInt16BE(0x44C8)
