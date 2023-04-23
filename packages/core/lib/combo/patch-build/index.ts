@@ -3,7 +3,7 @@ import { BuildOutput } from "../build";
 import { CONFIG, CUSTOM_ADDR, GAMES } from "../config";
 import { DecompressedRoms } from "../decompress";
 import { LogicResult } from "../logic";
-import { writeBlastMaskCooldown } from "../misc-patches";
+import * as miscPatches from "../misc-patches";
 import { Monitor } from "../monitor";
 import { Settings } from "../settings";
 import { Patcher } from "./patcher";
@@ -48,8 +48,22 @@ export function buildPatchfile(args: BuildPatchfileIn): Patchfile {
   file.addPatch('global', 0x20, Buffer.from('OOT+MM COMBO       '));
   file.addPatch('global', 0x3c, Buffer.from('ZZE'));
 
-  /* Blast Mask Cooldown*/
-  writeBlastMaskCooldown(args.settings.blastMaskCooldown, file)
+  /* MM patches */
+  miscPatches.writeBlastMaskCooldown(args.settings.blastMaskCooldown, file) // Blast Mask Cooldown settings
+  miscPatches.writeClockSpeed(args.settings.clockSpeed, file) // Clock Speed modifier
+
+  /* Fierce Deity + Hookshot + Climb Anywhere changes */
+  let anywhere: string[] = []
+  if(args.settings.hookshotAnywhere) {
+    anywhere.push('hookshot')
+  }
+  if(args.settings.fierceDeityAnywhere) {
+    anywhere.push('fd')
+  }
+  if(args.settings.climbMostSurfaces) {
+    anywhere.push('oot-climb')
+  }
+  miscPatches.allowAnywhere(anywhere, file, args.roms)
 
   /* Patch the randomized data */
   patchRandomizer(args.logic, args.settings, file);
