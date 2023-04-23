@@ -79,7 +79,6 @@ export function buildPatchfile(args: BuildPatchfileIn): Patchfile {
   /* MM patches */
   miscPatches.writeBlastMaskCooldown(args.settings.blastMaskCooldown, file) // Blast Mask Cooldown settings
   miscPatches.writeClockSpeed(args.settings.clockSpeed, file) // Clock Speed modifier
-  miscPatches.speedupDogRace(file) // Dog Race RNG mostly removed
   miscPatches.speedupDampeMM(file)
 
   /* Fierce Deity + Hookshot + Climb Anywhere changes */
