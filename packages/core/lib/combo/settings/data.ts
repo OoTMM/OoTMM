@@ -374,8 +374,15 @@ export const SETTINGS = [{
   description: 'Controls the ability to use Fierce Deity outside of boss lairs',
   default: false
 }, {
-  key: 'hookshotAnywhere',
-  name: 'Hookshot Anywhere (both OOT and MM)',
+  key: 'hookshotAnywhereOot',
+  name: 'Hookshot Anywhere (OOT)',
+  category: 'main.misc',
+  type: 'boolean',
+  description: 'Modifies all surfaces to be hooked onto',
+  default: false
+}, {
+  key: 'hookshotAnywhereMm',
+  name: 'Hookshot Anywhere (MM)',
   category: 'main.misc',
   type: 'boolean',
   description: 'Modifies all surfaces to be hooked onto',

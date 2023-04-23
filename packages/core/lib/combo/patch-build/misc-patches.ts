@@ -34,23 +34,21 @@ export function writeBlastMaskCooldown(value: keyof typeof BLAST_MASK_COOLDOWN, 
 export function writeClockSpeed(value: string, patch: Patchfile) {
     const codeFileAddress = 0xB3C000;
     const hackAddressOffset = 0x8A674;
-    const sp = validClockSpeeds[value][0]
-    const im = validClockSpeeds[value][1]
+    const [sp, im] = validClockSpeeds[value];
     const invertedModifier = bufferFromShort(im)
     const hackFixClockSpeed = Buffer.from([
-        0x3C, 0x01, 0x00, 0x01, 0x14, 0xE2, 0x00, 0x02, 0x00, 0x26, 0x08, 0x21, 0x24, 0x02, 0x00, 0x00,
-        0x10, 0x40, 0x00, 0x02, 0x00, 0x00, 0x00, 0x00, 0x24, 0x02, 0x00,  sp , 0xA4, 0x22, 0x70, 0x06
-    ])
+      0x3C, 0x01, 0x00, 0x01, 0x14, 0xE2, 0x00, 0x02, 0x00, 0x26, 0x08, 0x21, 0x24, 0x02, 0x00, 0x00,
+      0x10, 0x40, 0x00, 0x02, 0x00, 0x00, 0x00, 0x00, 0x24, 0x02, 0x00,  sp , 0xA4, 0x22, 0x70, 0x06
+    ]);
     patch.addPatch('mm', codeFileAddress+hackAddressOffset, hackFixClockSpeed)
     const invertedModifierOffsets = [0xb1b8e, 0x7405e]
     invertedModifierOffsets.forEach(offset => {
-     patch.addPatch('mm', codeFileAddress + offset, invertedModifier)
-    })
+      patch.addPatch('mm', codeFileAddress + offset, invertedModifier);
+    });
 }
 
 export function allowAnywhere(value: string[], patch: Patchfile, roms: DecompressedRoms) {
   if(value.includes('hookshot')) {
-    patch.addPatch('mm', 0xD3B220 + 0x810, Buffer.alloc(4));
     patch.addPatch('oot', 0xCADAF8, Buffer.alloc(4));
   }
   if(value.includes('oot-climb')) {
@@ -199,11 +197,4 @@ export function makeOotCursedSkulltulasPeopleComeDownInstantly(patch: Patchfile)
     let buf: Buffer = Buffer.alloc(2)
     buf.writeUInt16BE(0x44C8)
     patch.addPatch('oot', 0xEA185A, buf)
-}
-
-export function speedupDampeMM(patch: Patchfile) {
-    patch.addPatch('mm', 0xFC6760 + 0x1F6C, Buffer.from([
-        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-        0x24, 0x08, 0x00, 0x08
-    ]))
 }

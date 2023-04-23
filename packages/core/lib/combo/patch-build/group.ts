@@ -1,5 +1,6 @@
 export const PATCH_GROUPS = [
   'MM_FD_ANYWHERE',
+  'MM_HOOKSHOT_ANYWHERE',
 ] as const;
 
 export type PatchGroup = typeof PATCH_GROUPS[number];

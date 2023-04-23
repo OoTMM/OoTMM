@@ -28,6 +28,10 @@ function asmPatchGroups(settings: Settings) {
     groups.push('MM_FD_ANYWHERE');
   }
 
+  if (settings.hookshotAnywhereMm) {
+    groups.push('MM_HOOKSHOT_ANYWHERE');
+  }
+
   return groups;
 }
 
@@ -79,11 +83,10 @@ export function buildPatchfile(args: BuildPatchfileIn): Patchfile {
   /* MM patches */
   miscPatches.writeBlastMaskCooldown(args.settings.blastMaskCooldown, file) // Blast Mask Cooldown settings
   miscPatches.writeClockSpeed(args.settings.clockSpeed, file) // Clock Speed modifier
-  miscPatches.speedupDampeMM(file)
 
   /* Fierce Deity + Hookshot + Climb Anywhere changes */
   let anywhere: string[] = []
-  if(args.settings.hookshotAnywhere) {
+  if(args.settings.hookshotAnywhereOot) {
     anywhere.push('hookshot')
   }
   if(args.settings.climbMostSurfaces) {
