@@ -1,0 +1,32 @@
+#include <combo.h>
+
+/* Warp songs */
+PATCH_START 0x800f7472
+.byte 0x00
+PATCH_END
+
+PATCH_START 0x800f74ca
+.byte 0x00
+PATCH_END
+
+/* Farore's Wind */
+PATCH_START 0x800f7473
+.byte 0x00
+PATCH_END
+
+PATCH_START 0x800f74cb
+.byte 0x00
+PATCH_END
+
+/* Ocarina */
+PATCH_START 0x800f73e6
+.byte 0x11
+PATCH_END
+
+PATCH_START 0x800f73da
+.byte 0x51
+PATCH_END
+
+PATCH_START 0x800f73aa
+.byte 0x51
+PATCH_END

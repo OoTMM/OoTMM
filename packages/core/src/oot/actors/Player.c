@@ -38,6 +38,7 @@ int Player_DpadHook(Actor_Player* this, GameState_Play* play)
 void EnGs_TalkedTo(Actor*, GameState_Play*);
 void EnGm_TalkedTo(Actor*, GameState_Play*);
 void EnMs_TalkedTo(Actor*, GameState_Play*);
+void EnSsh_TalkedTo(Actor*, GameState_Play*);
 
 void DemoEffect_TextRutoSapphire(GameState_Play*);
 
@@ -56,6 +57,9 @@ void Player_TalkDisplayTextBox(GameState_Play* play, s16 textId, Actor* actor)
             break;
         case AC_EN_MS:
             EnMs_TalkedTo(actor, play);
+            break;
+        case AC_EN_SSH:
+            EnSsh_TalkedTo(actor, play);
             break;
         }
     }

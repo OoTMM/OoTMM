@@ -1,0 +1,10 @@
+#include <combo.h>
+
+/* FD anywhere */
+PATCH_GROUP PG_MM_FD_ANYWHERE
+
+PATCH_START 0x80111190
+  b .+0x40
+PATCH_END
+
+PATCH_GROUP_END

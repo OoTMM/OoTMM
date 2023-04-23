@@ -3,6 +3,7 @@ import { Buffer } from 'buffer';
 import { Game, CONFIG } from "../config";
 import { Patchfile } from '../patch-build/patchfile';
 import { Addresses, GameAddresses } from '../addresses';
+import { PATCH_GROUP_VALUES, PatchGroup } from './group';
 
 export class Patcher {
   private game: Game;
@@ -12,15 +13,19 @@ export class Patcher {
   private objectTable: number[];
   private patchfile: Patchfile;
   private cursor: number;
+  private patchGroups: Set<number>;
+  private enabled: boolean;
 
-  constructor(game: Game, rom: Buffer, addresses: GameAddresses, patches: Buffer, patchfile: Patchfile) {
+  constructor(game: Game, rom: Buffer, patchGroups: PatchGroup[], addresses: GameAddresses, patches: Buffer, patchfile: Patchfile) {
     this.game = game;
     this.rom = rom;
+    this.patchGroups = new Set(patchGroups.map(x => PATCH_GROUP_VALUES[x]));
     this.patches = patches;
     this.addresses = addresses[game];
     this.patchfile = patchfile;
     this.objectTable = this.makeObjectTable();
     this.cursor = 0;
+    this.enabled = true;
   }
 
   private makeObjectTable() {
@@ -44,7 +49,9 @@ export class Patcher {
   }
 
   private patch(romAddr: number, data: Buffer) {
-    this.patchfile.addPatch(this.game, romAddr, data);
+    if (this.enabled) {
+      this.patchfile.addPatch(this.game, romAddr, data);
+    }
   }
 
   patchASM(patch: Buffer) {
@@ -229,6 +236,12 @@ export class Patcher {
     this.patch(paddr, data);
   }
 
+  patchGroup(patch: Buffer) {
+    const groupId = patch.readUInt32BE(this.cursor + 0x00) >>> 0;
+    this.cursor += 0x04;
+    this.enabled = (groupId === 0 || this.patchGroups.has(groupId));
+  }
+
   run() {
     this.cursor = 0;
     for (;;) {
@@ -239,7 +252,7 @@ export class Patcher {
       }
 
       /* Read the patch type */
-      const type = this.patches.readUInt32BE(this.cursor);
+      const type = this.patches.readUInt32BE(this.cursor) >>> 0;
       this.cursor += 4;
 
       switch (type) {
@@ -269,6 +282,9 @@ export class Patcher {
         break;
       case 0x09:
         this.patchVROM(this.patches);
+        break;
+      case 0xffffffff:
+        this.patchGroup(this.patches);
         break;
       default:
         throw new Error("Invalid patch type: " + type);
