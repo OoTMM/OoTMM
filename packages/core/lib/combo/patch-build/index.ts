@@ -73,7 +73,6 @@ export function buildPatchfile(args: BuildPatchfileIn): Patchfile {
 
   /* OOT patches */
   miscPatches.easyFishingWithSinkingLure(file) // Guarantees the sinking lure and the Hylian Loach to spawn, and allows Link to receive reward despite using sinking lure
-  miscPatches.fishingSpeedups(file) // Mostly working... at 2 exceptions. See related function
 
   /* Patch the randomized data */
   patchRandomizer(args.logic, args.settings, file);
