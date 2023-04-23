@@ -1,0 +1,10 @@
+#include <combo.h>
+
+/* Hookshot anywhere */
+PATCH_GROUP PG_OOT_HOOKSHOT_ANYWHERE
+
+PATCH_START 0x80910378
+  nop
+PATCH_END
+
+PATCH_GROUP_END

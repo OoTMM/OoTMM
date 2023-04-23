@@ -1,4 +1,5 @@
 export const PATCH_GROUPS = [
+  'OOT_HOOKSHOT_ANYWHERE',
   'MM_FD_ANYWHERE',
   'MM_HOOKSHOT_ANYWHERE',
 ] as const;

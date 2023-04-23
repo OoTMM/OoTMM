@@ -28,6 +28,10 @@ function asmPatchGroups(settings: Settings) {
     groups.push('MM_FD_ANYWHERE');
   }
 
+  if (settings.hookshotAnywhereOot) {
+    groups.push('OOT_HOOKSHOT_ANYWHERE');
+  }
+
   if (settings.hookshotAnywhereMm) {
     groups.push('MM_HOOKSHOT_ANYWHERE');
   }
@@ -68,18 +72,12 @@ export function buildPatchfile(args: BuildPatchfileIn): Patchfile {
   miscPatches.easyFishingWithSinkingLure(file) // Guarantees the sinking lure and the Hylian Loach to spawn, and allows Link to receive reward despite using sinking lure
   miscPatches.fishingSpeedups(file) // Mostly working... at 2 exceptions. See related function
 
-  // Only missing the proper ASM for the arrows, and we're good to add it as a setting
-  // miscPatches.blueFireArrows(file)
-
   /* MM patches */
   miscPatches.writeBlastMaskCooldown(args.settings.blastMaskCooldown, file) // Blast Mask Cooldown settings
   miscPatches.writeClockSpeed(args.settings.clockSpeed, file) // Clock Speed modifier
 
   /* Fierce Deity + Hookshot + Climb Anywhere changes */
   let anywhere: string[] = []
-  if(args.settings.hookshotAnywhereOot) {
-    anywhere.push('hookshot')
-  }
   if(args.settings.climbMostSurfaces) {
     anywhere.push('oot-climb')
   }

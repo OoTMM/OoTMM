@@ -48,9 +48,6 @@ export function writeClockSpeed(value: string, patch: Patchfile) {
 }
 
 export function allowAnywhere(value: string[], patch: Patchfile, roms: DecompressedRoms) {
-  if(value.includes('hookshot')) {
-    patch.addPatch('oot', 0xCADAF8, Buffer.alloc(4));
-  }
   if(value.includes('oot-climb')) {
     for (let idx = 0; idx < 32; ++idx) {
       if (idx === 2) {
@@ -110,13 +107,4 @@ export function easyFishingWithSinkingLure(patch: Patchfile) {
     patch.addPatch('oot', 0xDC6540, b) // replace 'sh v0, 0x0192(s0)' with 'sh at, 0x0192(s0)'
     b.writeUInt32BE(0xE60601AC)
     patch.addPatch('oot', 0xDC6550, b) // replace 'swc1 f10, 0x01ac(s0)' with 'swc1 f6, 0x01ac(s0)'
-}
-
-export function blueFireArrows(patch: Patchfile) {
-    patch.addPatch('oot', 0xC230C1, Buffer.from([0x29])) // Adds AT_TYPE_OTHER to arrows to allow collision with red ice
-    // patch.addPatch('oot', 0xDB38FE, Buffer.from([0xEF])) // disables ice arrow collision on secondary cylinder for red ice crystals
-    patch.addPatch('oot', 0xC9F036, Buffer.from([0x10])) // enable ice arrow collision on mud walls
-    //increase cylinder radius/height for red ice sheets
-    patch.addPatch('oot', 0xDB391B, Buffer.from([0x50]))
-    patch.addPatch('oot', 0xDB3927, Buffer.from([0x5A]))
 }
