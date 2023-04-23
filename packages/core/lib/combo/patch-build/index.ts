@@ -23,8 +23,9 @@ export type BuildPatchfileIn = {
 
 function asmPatchGroups(settings: Settings) {
   const groups: {[k in PatchGroup]: boolean} = {
-    MM_FD_ANYWHERE: settings.fierceDeityAnywhere,
     OOT_HOOKSHOT_ANYWHERE: settings.hookshotAnywhereOot,
+    OOT_CLIMB_ANYWHERE: settings.climbMostSurfacesOot,
+    MM_FD_ANYWHERE: settings.fierceDeityAnywhere,
     MM_HOOKSHOT_ANYWHERE: settings.hookshotAnywhereMm,
     MM_BLAST_MASK_DELAY_INSTANT: settings.blastMaskCooldown === 'instant',
     MM_BLAST_MASK_DELAY_VERYSHORT: settings.blastMaskCooldown === 'veryshort',
@@ -73,13 +74,6 @@ export function buildPatchfile(args: BuildPatchfileIn): Patchfile {
   /* OOT patches */
   miscPatches.easyFishingWithSinkingLure(file) // Guarantees the sinking lure and the Hylian Loach to spawn, and allows Link to receive reward despite using sinking lure
   miscPatches.fishingSpeedups(file) // Mostly working... at 2 exceptions. See related function
-
-  /* Fierce Deity + Hookshot + Climb Anywhere changes */
-  let anywhere: string[] = []
-  if(args.settings.climbMostSurfaces) {
-    anywhere.push('oot-climb')
-  }
-  miscPatches.allowAnywhere(anywhere, file, args.roms)
 
   /* Patch the randomized data */
   patchRandomizer(args.logic, args.settings, file);

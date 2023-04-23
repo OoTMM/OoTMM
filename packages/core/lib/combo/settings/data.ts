@@ -388,7 +388,7 @@ export const SETTINGS = [{
   description: 'Modifies all surfaces to be hooked onto',
   default: false
 }, {
-  key: 'climbMostSurfaces',
+  key: 'climbMostSurfacesOot',
   name: 'Climb Most Surfaces (OOT)',
   category: 'main.misc',
   type: 'boolean',

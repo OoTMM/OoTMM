@@ -1,19 +1,4 @@
-import { DecompressedRoms } from "../decompress";
 import { Patchfile } from "./patchfile";
-
-export function allowAnywhere(value: string[], patch: Patchfile, roms: DecompressedRoms) {
-  if(value.includes('oot-climb')) {
-    for (let idx = 0; idx < 32; ++idx) {
-      if (idx === 2) {
-        continue;
-      }
-      let wallFlags = roms['oot'].rom.readUint32BE(0xB61F80 + idx*4);
-      let b = Buffer.alloc(4);
-      b.writeUint32BE(wallFlags | 0x00000008);
-      patch.addPatch('oot', 0xB61F80 + idx * 4, b);
-    }
-  }
-}
 
 // Surprisingly both commented sections set all the fish to weigh 0 pounds.
 // Unsure what's going on, but they're both in OOTR for fishing speedup
