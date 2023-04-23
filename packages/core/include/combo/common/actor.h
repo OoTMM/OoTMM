@@ -31,6 +31,7 @@
 # define AC_EN_OWL                  0x14d
 # define AC_EN_ZK                   0x164
 # define AC_EN_EX_ITEM              0x168
+# define AC_EN_SSH                  0x188
 # define AC_EN_GO2                  0x1ae
 # define AC_EN_COW                  0x1c6
 # define AC_EN_GS                   0x1b9
