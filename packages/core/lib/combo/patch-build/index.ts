@@ -52,7 +52,17 @@ export function buildPatchfile(args: BuildPatchfileIn): Patchfile {
   miscPatches.arrowEquipSpeedUp(file) // In pause menu, shortens the animation of equipping an elemental arrow
   miscPatches.bossCutscenesSpeedups(file) // Speeds up the intro cutscene of Ganon and the death cutscenes of Phantom Ganon, Twinrova and Ganondorf 
   miscPatches.easyFishingWithSinkingLure(file) // Guarantees the sinking lure and the Hylian Loach to spawn, and allows Link to receive reward despite using sinking lure
-  miscPatches.fishingSpeedups(file)
+  miscPatches.fishingSpeedups(file) // Mostly working... at 2 exceptions. See related function
+
+  miscPatches.makeGCCheckForFireCompletion(file) // Forces Goron to check for Fire Temple completion instead of Fire Medallion
+  miscPatches.removeOotSceneRestrictions(file) // Allow Farore's Wind, Warp songs in Gerudo Training Grounds & Inside Ganon's Castle + allow Ocarina usage in a few places  
+  miscPatches.spawnFortressGateGuard(file) // Spawns a Gerudo Guard by the gate on Haunted Wasteland side 
+  miscPatches.moveSwitches(file) // Lowers Forest Temple Basement switches and Fire Temple Hammer Chest switch by 1 unit
+  miscPatches.fixIceCavernAlcoveCamera(file)
+  miscPatches.makeOotCursedSkulltulasPeopleComeDownInstantly(file)
+  
+  // Only missing the proper ASM for the arrows, and we're good to add it as a setting
+  // miscPatches.blueFireArrows(file)
 
   /* MM patches */
   miscPatches.writeBlastMaskCooldown(args.settings.blastMaskCooldown, file) // Blast Mask Cooldown settings

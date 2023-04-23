@@ -169,3 +169,60 @@ export function speedupDogRace(patch: Patchfile) {
     ])
     patch.addPatch('mm', 0xE325D0 + 0x2038, speedup)
 }
+
+export function makeGCCheckForFireCompletion(patch: Patchfile) {
+    patch.addPatch('oot', 0xED59DC, Buffer.from([0x80, 0xC9, 0x0E, 0xDC]))
+}
+
+export function removeOotSceneRestrictions(patch: Patchfile) {
+    // Warp Songs
+    patch.addPatch('oot', 0xB6D3D2, Buffer.from([0x00])) // Gerudo Training Grounds
+    patch.addPatch('oot', 0xB6D42A, Buffer.from([0x00])) // Inside Ganon's Castle
+
+    // Farore's Wind
+    patch.addPatch('oot', 0xB6D3D3, Buffer.from([0x00])) // Gerudo Training Grounds
+    patch.addPatch('oot', 0xB6D42B, Buffer.from([0x00])) // Inside Ganon's Castle
+
+    // Ocarina
+    patch.addPatch('oot', 0xB6D346, Buffer.from([0x11])) // Granny's Shop
+    patch.addPatch('oot', 0xB6D33A, Buffer.from([0x51])) // Bombchu Bowling
+    patch.addPatch('oot', 0xB6D30A, Buffer.from([0x51])) // Archer
+}
+
+
+export function spawnFortressGateGuard(patch: Patchfile) {
+    let new_gate_opening_guard: number[] = [0x0138, 0xFAC8, 0x005D, 0xF448, 0x0000, 0x95B0, 0x0000, 0x0301]
+    let guard: Buffer = Buffer.alloc(new_gate_opening_guard.length * 2)
+    for (let i = 0; i < new_gate_opening_guard.length; i++) {
+        guard.writeUInt16BE(new_gate_opening_guard[i], i*2)
+    }
+    patch.addPatch('oot', 0x21BD3EC, guard) // Adult Day
+    patch.addPatch('oot', 0x21BD62C, guard) // Adult Night
+}
+
+export function blueFireArrows(patch: Patchfile) {
+    patch.addPatch('oot', 0xC230C1, Buffer.from([0x29])) // Adds AT_TYPE_OTHER to arrows to allow collision with red ice
+    // patch.addPatch('oot', 0xDB38FE, Buffer.from([0xEF])) // disables ice arrow collision on secondary cylinder for red ice crystals
+    patch.addPatch('oot', 0xC9F036, Buffer.from([0x10])) // enable ice arrow collision on mud walls
+    //increase cylinder radius/height for red ice sheets
+    patch.addPatch('oot', 0xDB391B, Buffer.from([0x50]))
+    patch.addPatch('oot', 0xDB3927, Buffer.from([0x5A]))
+}
+
+export function moveSwitches(patch: Patchfile) {
+    patch.addPatch('oot', 0x24860A8, Buffer.from([0xFC, 0xF4])) // forest basement 1
+    patch.addPatch('oot', 0x24860C8, Buffer.from([0xFC, 0xF4])) // forest basement 2
+    patch.addPatch('oot', 0x24860E8, Buffer.from([0xFC, 0xF4])) // forest basement 3
+    patch.addPatch('oot', 0x236C148, Buffer.from([0x11, 0x93])) // fire hammer room
+}
+
+export function fixIceCavernAlcoveCamera(patch: Patchfile) {
+    patch.addPatch('oot', 0x2BECA25, Buffer.from([0x01]))
+    patch.addPatch('oot', 0x2BECA2D, Buffer.from([0x01]))
+}
+
+export function makeOotCursedSkulltulasPeopleComeDownInstantly(patch: Patchfile) {
+    let buf: Buffer = Buffer.alloc(2)
+    buf.writeUInt16BE(0x44C8)
+    patch.addPatch('oot', 0xEA185A, buf)
+}
