@@ -68,8 +68,6 @@ export function buildPatchfile(args: BuildPatchfileIn): Patchfile {
   miscPatches.easyFishingWithSinkingLure(file) // Guarantees the sinking lure and the Hylian Loach to spawn, and allows Link to receive reward despite using sinking lure
   miscPatches.fishingSpeedups(file) // Mostly working... at 2 exceptions. See related function
 
-  miscPatches.makeOotCursedSkulltulasPeopleComeDownInstantly(file)
-
   // Only missing the proper ASM for the arrows, and we're good to add it as a setting
   // miscPatches.blueFireArrows(file)
 

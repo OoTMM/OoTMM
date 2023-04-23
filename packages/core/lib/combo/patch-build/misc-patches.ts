@@ -120,9 +120,3 @@ export function blueFireArrows(patch: Patchfile) {
     patch.addPatch('oot', 0xDB391B, Buffer.from([0x50]))
     patch.addPatch('oot', 0xDB3927, Buffer.from([0x5A]))
 }
-
-export function makeOotCursedSkulltulasPeopleComeDownInstantly(patch: Patchfile) {
-    let buf: Buffer = Buffer.alloc(2)
-    buf.writeUInt16BE(0x44C8)
-    patch.addPatch('oot', 0xEA185A, buf)
-}
