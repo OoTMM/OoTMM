@@ -5,3 +5,4 @@
 /config.yml
 /config*.yml
 /dist
+/include/combo/debug.h
