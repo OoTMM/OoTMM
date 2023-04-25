@@ -24,7 +24,14 @@ PATCH_START 0x80b5a2ac
   lb t1,0xedc(a2)
 PATCH_END
 
+/* Make the rolling goron check work without a bomb bag */
+PATCH_START 0x80b5715c
+  nop
+  nop
+PATCH_END
+
 /* Delete reloc */
 PATCH_START 0x80b5c7d4
 .int 0x0
 PATCH_END
+
