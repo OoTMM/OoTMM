@@ -134,6 +134,31 @@ OotInventory;
 
 typedef struct
 {
+    Vec3i   pos;
+    s32     yaw;
+    s32     playerParams;
+    s32     entranceIndex;
+    s32     roomIndex;
+    s32     set;
+    s32     tempSwitchFlags;
+    s32     tempCollectFlags;
+}
+OotFaroreWind;
+
+_Static_assert(sizeof(OotFaroreWind) == 0x28, "OotFaroreWind size is wrong");
+
+typedef struct
+{
+    s16 sceneId;
+    Vec3s pos;
+    s16 angle;
+}
+OotHorseData;
+
+_Static_assert(sizeof(OotHorseData) == 0x0a, "OotHorseData size is wrong");
+
+typedef struct
+{
     u32                     entrance;
     u32                     age;
     u32                     cutscene;
@@ -152,12 +177,25 @@ typedef struct
     OotItemEquips           equips;
     char                    unk_72[0x2];
     OotInventory            inventory;
-    OotPermanentSceneFlags  perm[101];
-    char                    unk_be0[0x2f4];
+    OotPermanentSceneFlags  perm[124];
+    OotFaroreWind           fw;
+    char                    unk_e8c[0x10];
+    s32                     gsFlags[6];
+    char                    unk_EB4[0x4];
+    s32                     highScores[7];
     u16                     eventsChk[14];
     u16                     eventsItem[4];
     u16                     eventsMisc[30];
-    char                    unk_f34[0x41e];
+    char                    unk_f34[0x4];
+    u32                     worldMapAreaData;
+    char                    unk_f3c[0x4];
+    u8                      scarecrowLongSongSet;
+    u8                      scarecrowLongSong[0x360];
+    char                    unk_12a1[0x24];
+    u8                      scarecrowSpawnSongSet;
+    u8                      scarecrowSpawnSong[0x80];
+    char                    unk_1346[0x02];
+    OotHorseData            horseData;
     u16                     checksum;
 }
 OotSave;
@@ -169,7 +207,11 @@ ASSERT_OFFSET(OotSave, sceneId,                 0x66);
 ASSERT_OFFSET(OotSave, equips,                  0x68);
 ASSERT_OFFSET(OotSave, inventory.equipment,     0x9c);
 ASSERT_OFFSET(OotSave, perm,                    0xd4);
-ASSERT_OFFSET(OotSave, unk_be0,                 0xbe0);
+ASSERT_OFFSET(OotSave, unk_f34,                 0xf34);
+ASSERT_OFFSET(OotSave, unk_f3c,                 0xf3c);
+ASSERT_OFFSET(OotSave, unk_12a1,                0x12a1);
+ASSERT_OFFSET(OotSave, unk_1346,                0x1346);
+ASSERT_OFFSET(OotSave, horseData,               0x1348);
 ASSERT_OFFSET(OotSave, checksum,                0x1352);
 
 typedef struct
