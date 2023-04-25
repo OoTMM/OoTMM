@@ -115,7 +115,8 @@ void comboCreateSaveMM(void)
     gMmSave.dekuPlaygroundHighScores[2] = 7600;
     gMmSave.unk_ee8 = 0x13000a;
     gMmSave.horseBackBalloonHighScore = 6000;
-    gMmSave.shootingGalleryHighScore = 0xa0027;
+    gMmSave.shootingGalleryHighScoreSwamp = 0x000a;
+    gMmSave.shootingGalleryHighScoreTown = 0x0027;
 
     /* Set the lottery codes */
     for (i = 0; i < 3; ++i)

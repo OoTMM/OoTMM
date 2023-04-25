@@ -97,7 +97,10 @@
 #define EV_MM_WEEK_BEAVER_RACE1_DONE            MM_EV(0x5d, 0)
 #define EV_MM_WEEK_KEETA_DEAD                   MM_EV(23,   2)
 #define EV_MM_WEEK_PRINCESS_RETURNED            MM_EV(23,   5)
+#define EV_MM_WEEK_ARCHERY_SWAMP_HP             MM_EV(32,   1)
 #define EV_MM_WEEK_BEAVER_RACE_ALT              MM_EV(24,   2)
+#define EV_MM_WEEK_ARCHERY_SWAMP_QUIVER         MM_EV(59,   4)
+#define EV_MM_WEEK_ARCHERY_TOWN_QUIVER          MM_EV(59,   5)
 #define EV_MM_WEEK_PAMELA_FATHER                MM_EV(75,   5)
 #define EV_MM_WEEK_TOWN_FAIRY                   MM_EV(8,    7)
 

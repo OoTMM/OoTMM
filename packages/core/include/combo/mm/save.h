@@ -166,7 +166,8 @@ typedef struct
     u32                     unk_ee8;
     u32                     horseBackBalloonHighScore;
     u32                     lotteryCodeGuess;
-    u32                     shootingGalleryHighScore;
+    u16                     shootingGalleryHighScoreSwamp;
+    u16                     shootingGalleryHighScoreTown;
     u8                      weekEventReg[100];
     u32                     mapsVisited;
     u32                     worldMapCloudVisibility;
