@@ -206,6 +206,7 @@ static void addBulletBag(u8 level)
     gOotSave.inventory.items[ITS_OOT_SLINGSHOT] = ITEM_OOT_SLINGSHOT;
     gOotSave.inventory.upgrades.bulletBag = level;
     gOotSave.inventory.ammo[ITS_OOT_SLINGSHOT] = kMaxSeeds[level];
+    BITMAP16_SET(gOotSave.eventsItem, EV_OOT_ITEM_DEKU_SEEDS);
 }
 
 static void addNutUpgrade(int level)
