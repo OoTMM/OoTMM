@@ -714,7 +714,7 @@
   events:
     WELL_DRAIN: "is_child && can_play(SONG_STORMS)"
   locations:
-    "Windmill HP": "can_boomerang || event(WINDMILL_TOP) || trick(OOT_WINDMILL_HP_NOTHING)"
+    "Windmill HP": "can_boomerang || event(WINDMILL_TOP) || (is_adult && trick(OOT_WINDMILL_HP_NOTHING))"
     "Windmill Song of Storms": "is_adult && has(OCARINA)"
 "Kakariko Carpenter House":
   region: KAKARIKO
