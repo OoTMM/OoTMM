@@ -283,7 +283,7 @@
   exits:
     "Clock Town East": "true"
   locations:
-    "Milk Bar Troupe Leader Mask": "has_ocarina && has(MASK_DEKU) && has(MASK_ZORA) && has(MASK_GORON) && ((after(NIGHT1_PM_10_00) && before(NIGHT1_AM_05_00)) || (after(NIGHT2_PM_10_00) && before(NIGHT2_AM_05_00)))"
+    "Milk Bar Troupe Leader Mask": "has(MASK_ROMANI) && has_ocarina && has(MASK_DEKU) && has(MASK_ZORA) && has(MASK_GORON) && ((after(NIGHT1_PM_10_00) && before(NIGHT1_AM_05_00)) || (after(NIGHT2_PM_10_00) && before(NIGHT2_AM_05_00)))"
     "Milk Bar Madame Aroma Bottle": "has(MASK_KAFEI) && has(LETTER_TO_MAMA) && ((after(NIGHT3_PM_06_00) && before(NIGHT3_PM_09_00)) || after(NIGHT3_PM_10_00))"
     #Milk Bar Milk Purchase": "has(MASK_ROMANI) && can_use_wallet(1) && ((after(NIGHT1_PM_10_00) && before(NIGHT1_AM_06_00)) || (after(NIGHT2_PM_10_00) && before(NIGHT2_AM_06_00)) || (after(NIGHT3_PM_06_00) && before(NIGHT3_PM_09_00)) || after(NIGHT3_PM_10_00))"
     #Milk Bar Chateau Purchase": "has(MASK_ROMANI) && can_use_wallet(2) && ((after(NIGHT1_PM_10_00) && before(NIGHT1_AM_06_00)) || (after(NIGHT2_PM_10_00) && before(NIGHT2_AM_06_00)) || (after(NIGHT3_PM_06_00) && before(NIGHT3_PM_09_00)) || after(NIGHT3_PM_10_00))"
