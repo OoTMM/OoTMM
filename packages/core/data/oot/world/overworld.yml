@@ -50,10 +50,9 @@
     "Lost Woods": "true"
     "Lost Woods Bridge": "true"
     "Kokiri Shop": "true"
-    "Deku Tree": "is_child"
     "Kokiri Forest Storms Grotto": "hidden_grotto_storms"
+    "Kokiri Forest Near Deku Tree": "setting(dekuTree, open) || is_adult || (has_sword_kokiri && has(SHIELD_DEKU))"
   events:
-    STICKS: "can_boomerang || (is_child && has_weapon)"
     BOMBS: "true"
     RUPEES: "true"
     SEEDS: "is_child"
@@ -67,6 +66,14 @@
   gossip:
     "Kokiri Gossip Near Lost Woods Open": "true"
     "Kokiri Gossip Near Lost Woods Grotto": "hidden_grotto_storms"
+"Kokiri Forest Near Deku Tree":
+  region: KOKIRI_FOREST
+  exits:
+    "Kokiri Forest": "true"
+    "Deku Tree": "is_child"
+  events:
+    STICKS: "can_boomerang || (is_child && has_weapon)"
+  gossip:
     "Kokiri Gossip Left of Deku Tree": "true"
     "Kokiri Gossip Right of Deku Tree": "true"
 "Kokiri Shop":

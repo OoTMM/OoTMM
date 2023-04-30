@@ -4,12 +4,13 @@
 #define OOT_EV(a, b)        (((a) << 4) | (b))
 #define MM_EV(a, b)         (((a) << 3) | (b))
 
-#define EV_OOT_CHK_DEKU_MIDO_MEET           0x02
-#define EV_OOT_CHK_DEKU_MIDO_SWORD_SHIELD   0x04
-#define EV_OOT_CHK_EMERALD_TREE_DEAD        0x07
-#define EV_OOT_CHK_GOHMA                    0x09
-#define EV_OOT_CHK_DEKU_TREE_MEET           0x0c
-#define EV_OOT_CHK_MALON_SPOKEN_HYRULE      0x10
+#define EV_OOT_CHK_DEKU_MIDO_MEET           OOT_EV(0,  2)
+#define EV_OOT_CHK_DEKU_MIDO_COMPLAIN       OOT_EV(0,  3)
+#define EV_OOT_CHK_DEKU_MIDO_SWORD_SHIELD   OOT_EV(0,  4)
+#define EV_OOT_CHK_EMERALD_TREE_DEAD        OOT_EV(0,  7)
+#define EV_OOT_CHK_GOHMA                    OOT_EV(0,  9)
+#define EV_OOT_CHK_DEKU_TREE_MEET           OOT_EV(0, 12)
+#define EV_OOT_CHK_MALON_SPOKEN_HYRULE      OOT_EV(1,  0)
 #define EV_OOT_CHK_MALON_EGG                0x12
 #define EV_OOT_CHK_CHILD_TALON_WOKEN        0x13
 #define EV_OOT_CHK_CHILD_TALON_FLED         0x14

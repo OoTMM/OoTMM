@@ -252,6 +252,17 @@ export const SETTINGS = [{
   ],
   default: 'closed'
 }, {
+  key: 'dekuTree',
+  name: 'Deku Tree',
+  category: 'main.events',
+  type: 'enum',
+  description: 'Alters the Deku Tree state',
+  values: [
+    { value: 'closed', name: 'Closed', description: 'Mido will block the way to the deku tree until you have a deku shield and the kokiri sword.' },
+    { value: 'open', name: 'Open', description: 'The deku tree will be open from the start' },
+  ],
+  default: 'open'
+}, {
   key: 'kakarikoGate',
   name: 'Kakariko Gate',
   category: 'main.events',

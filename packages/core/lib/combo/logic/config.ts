@@ -69,6 +69,10 @@ export class LogicPassConfig {
       config.add('DOOR_OF_TIME_OPEN');
     }
 
+    if (this.state.settings.dekuTree === 'open') {
+      config.add('OOT_OPEN_DEKU');
+    }
+
     if (this.state.settings.erDungeons !== 'none') {
       config.add('ER_DUNGEONS');
     }
