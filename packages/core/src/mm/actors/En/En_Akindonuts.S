@@ -41,3 +41,12 @@ PATCH_END
 PATCH_START 0x80bed014
   nop
 PATCH_END
+
+/* Disable the flying away cutscene lock */
+PATCH_START 0x80BEF6B8
+  nop
+PATCH_END
+
+PATCH_START 0x80ADC4FC
+  nop
+PATCH_END
