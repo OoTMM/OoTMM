@@ -1,6 +1,6 @@
 import { Game, GAMES } from '../config';
 import { gameId } from '../util';
-import { Expr } from './expr';
+import { Expr, exprTrue } from './expr';
 import { ExprParser } from './expr-parser';
 import { DATA_POOL, DATA_MACROS, DATA_WORLD, DATA_REGIONS, DATA_ENTRANCES } from '../data';
 import { Settings } from '../settings';
@@ -192,6 +192,11 @@ export class LogicPassWorld {
         const events = mapExprs(exprParser, game, '_', area.events || {});
         const gossip = mapExprs(exprParser, game, ' ', area.gossip || {});
         const time = area.time || 'still';
+
+        /* Hack to propagate time back to OoT GLOBAL */
+        if (time !== 'still') {
+          exits["OOT GLOBAL"] = exprTrue();
+        }
 
         if (name === undefined) {
           throw new Error(`Area name is undefined`);

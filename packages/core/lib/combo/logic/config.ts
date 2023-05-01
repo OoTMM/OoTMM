@@ -218,6 +218,10 @@ export class LogicPassConfig {
       config.add('OOT_ADULT_WELL');
     }
 
+    if (settings.colossalWallets) {
+      config.add('COLOSSAL_WALLET');
+    }
+
     return { mq, config };
   }
 }

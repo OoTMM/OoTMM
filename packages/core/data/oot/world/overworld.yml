@@ -6,14 +6,14 @@
 "SPAWN CHILD":
   region: NONE
   exits:
-    "SPAWN COMMON": "true"
+    "GLOBAL": "true"
     "Link's House": "true"
 "SPAWN ADULT":
   region: NONE
   exits:
-    "SPAWN COMMON": "true"
+    "GLOBAL": "true"
     "Temple of Time": "true"
-"SPAWN COMMON":
+"GLOBAL":
   region: NONE
   exits:
     "SONGS": "has(OCARINA)"
@@ -244,7 +244,7 @@
 "Market Entryway":
   region: MARKET
   exits:
-    "Hyrule Field": "is_day"
+    "Hyrule Field": "is_day || is_adult"
     "Market": "is_child"
     "Market Destroyed": "is_adult"
     "Market Pot House": "true"

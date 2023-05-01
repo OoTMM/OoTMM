@@ -69,6 +69,7 @@ export class LogicPassSolver {
       monitor: Monitor,
       attempts: number,
       pool: Items;
+      renewableJunks: Items;
     }
   ) {
     this.pathfinder = new Pathfinder(this.state.world, this.state.settings);
@@ -164,18 +165,26 @@ export class LogicPassSolver {
        */
       const junk = isJunk(item);
 
-      let dst: Items;
       if (isDungeonReward(item) || isKey(item) || isStrayFairy(item) || ITEMS_REQUIRED.has(item)) {
-        dst = this.pools.required;
-      } else if (junk) {
-        dst = this.pools.junk;
-      } else {
-        dst = this.pools.nice;
-      }
-      dst[item] = this.state.pool[item];
+        if (junk && isItemConsumable(item)) {
+          const renewableCount = this.state.renewableJunks[item] || 0;
+          const junkCount = this.state.pool[item] - renewableCount;
 
-      if (junk) {
+          if (renewableCount) {
+            this.pools.required[item] = renewableCount;
+          }
+          if (junkCount) {
+            this.pools.junk[item] = junkCount;
+            this.junkDistribution[item] = junkCount;
+          }
+        } else {
+          this.pools.required[item] = this.state.pool[item];
+        }
+      } else if (junk) {
+        this.pools.junk[item] = this.state.pool[item];
         this.junkDistribution[item] = this.state.pool[item];
+      } else {
+        this.pools.nice[item] = this.state.pool[item];
       }
     }
 
@@ -519,7 +528,7 @@ export class LogicPassSolver {
     for (const item of items) {
       if (locations.length === 0) {
         if (required) {
-          throw new Error('Item Count Error');
+          throw new Error('Too many items');
         }
         break;
       }

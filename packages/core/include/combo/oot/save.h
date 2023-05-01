@@ -278,7 +278,8 @@ OotExtraTrade;
 
 typedef struct
 {
-    u8 unused;
+    u8 rutoLetter:1;
+    u8 unused:7;
     u8 hookshot;
     u8 shield;
     u8 ocarina;

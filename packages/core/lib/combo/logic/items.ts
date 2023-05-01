@@ -304,6 +304,33 @@ export const ITEMS_REQUIRED = new Set<string>([
   'SHARED_BOMBCHU_20',
 ]);
 
+export const ITEMS_SMALL_KEY = new Set([
+  'OOT_SMALL_KEY_FOREST',
+  'OOT_SMALL_KEY_FIRE',
+  'OOT_SMALL_KEY_WATER',
+  'OOT_SMALL_KEY_SPIRIT',
+  'OOT_SMALL_KEY_SHADOW',
+  'OOT_SMALL_KEY_BOTW',
+  'OOT_SMALL_KEY_GTG',
+  'OOT_SMALL_KEY_GANON',
+  'MM_SMALL_KEY_WF',
+  'MM_SMALL_KEY_SH',
+  'MM_SMALL_KEY_GB',
+  'MM_SMALL_KEY_ST',
+]);
+
+export const ITEMS_BOSS_KEY = new Set([
+  'OOT_BOSS_KEY_FOREST',
+  'OOT_BOSS_KEY_FIRE',
+  'OOT_BOSS_KEY_WATER',
+  'OOT_BOSS_KEY_SPIRIT',
+  'OOT_BOSS_KEY_SHADOW',
+  'MM_BOSS_KEY_WF',
+  'MM_BOSS_KEY_SH',
+  'MM_BOSS_KEY_GB',
+  'MM_BOSS_KEY_ST',
+]);
+
 export const ITEMS_MAPS = new Set([
   'OOT_MAP_DT',
   'OOT_MAP_DC',
@@ -338,6 +365,37 @@ export const ITEMS_COMPASSES = new Set([
   'MM_COMPASS_ST',
 ]);
 
+export const ITEMS_SONGS = new Set([
+  'OOT_SONG_EPONA',
+  'OOT_SONG_SARIA',
+  'OOT_SONG_STORMS',
+  'OOT_SONG_SUN',
+  'OOT_SONG_TIME',
+  'OOT_SONG_ZELDA',
+  'OOT_SONG_TP_FOREST',
+  'OOT_SONG_TP_WATER',
+  'OOT_SONG_TP_FIRE',
+  'OOT_SONG_TP_SHADOW',
+  'OOT_SONG_TP_SPIRIT',
+  'OOT_SONG_TP_LIGHT',
+  'MM_SONG_TIME',
+  'MM_SONG_AWAKENING',
+  'MM_SONG_HEALING',
+  'MM_SONG_EPONA',
+  'MM_SONG_SOARING',
+  'MM_SONG_GORON_HALF',
+  'MM_SONG_GORON',
+  'MM_SONG_ZORA',
+  'MM_SONG_STORMS',
+  'MM_SONG_EMPTINESS',
+  'MM_SONG_ORDER',
+  'MM_SONG_SUN',
+  'SHARED_SONG_EPONA',
+  'SHARED_SONG_TIME',
+  'SHARED_SONG_STORMS',
+  'SHARED_SONG_SUN',
+]);
+
 const ITEMS_JUNK = new Set<string>([
   /* 'OOT_RUPEE_GREEN', Not junk to prevent it from being removed */
   'OOT_RUPEE_BLUE',
@@ -354,9 +412,16 @@ const ITEMS_JUNK = new Set<string>([
   'OOT_NUTS_5',
   'OOT_NUTS_5_ALT',
   'OOT_NUTS_10',
+  'OOT_DEKU_SEEDS_5',
+  'OOT_DEKU_SEEDS_30',
   'OOT_STICK',
   'OOT_STICKS_5',
   'OOT_STICKS_10',
+  'OOT_SHIELD_DEKU',
+  'OOT_SHIELD_HYLIAN',
+  'OOT_BOMBCHU_5',
+  'OOT_BOMBCHU_10',
+  'OOT_BOMBCHU_20',
   'MM_RUPEE_GREEN',
   'MM_RUPEE_BLUE',
   'MM_RUPEE_RED',
@@ -373,6 +438,11 @@ const ITEMS_JUNK = new Set<string>([
   'MM_NUTS_5',
   'MM_NUTS_10',
   'MM_STICK',
+  'MM_SHIELD_HERO',
+  'MM_BOMBCHU',
+  'MM_BOMBCHU_5',
+  'MM_BOMBCHU_10',
+  'MM_BOMBCHU_20',
   'SHARED_ARROWS_5',
   'SHARED_ARROWS_10',
   'SHARED_ARROWS_30',
@@ -392,6 +462,10 @@ const ITEMS_JUNK = new Set<string>([
   'SHARED_RUPEE_BLUE',
   'SHARED_RUPEE_RED',
   'SHARED_RECOVERY_HEART',
+  'SHARED_BOMBCHU',
+  'SHARED_BOMBCHU_5',
+  'SHARED_BOMBCHU_10',
+  'SHARED_BOMBCHU_20',
 ]);
 
 const CONSUMABLES = new Set<string>([
@@ -492,13 +566,13 @@ export const ITEMS_TINGLE_MAPS = new Set<string>([
 export const isCompass = (item: string) => ITEMS_COMPASSES.has(item);
 export const isMap = (item: string) => ITEMS_MAPS.has(item);
 export const isMapCompass = (item: string) => isMap(item) || isCompass(item);
-export const isSong = (item: string) => !!item.match(/^(OOT|MM|SHARED)_SONG_/);
-export const isSmallKey = (item: string) => !!item.match(/^(OOT|MM)_SMALL_KEY_/);
+export const isSong = (item: string) => ITEMS_SONGS.has(item);
+export const isSmallKey = (item: string) => isSmallKeyRegular(item) || isSmallKeyHideout(item);
 export const isSmallKeyHideout = (item: string) => item === 'OOT_SMALL_KEY_GF';
-export const isSmallKeyRegular = (item: string) => isSmallKey(item) && !isSmallKeyHideout(item);
+export const isSmallKeyRegular = (item: string) => ITEMS_SMALL_KEY.has(item);
 export const isGanonBossKey = (item: string) => item === 'OOT_BOSS_KEY_GANON';
-export const isBossKey = (item: string) => !!item.match(/^(OOT|MM)_BOSS_KEY_/);
-export const isRegularBossKey = (item: string) => isBossKey(item) && !isGanonBossKey(item);
+export const isBossKey = (item: string) => isRegularBossKey(item) || isGanonBossKey(item);
+export const isRegularBossKey = (item: string) => ITEMS_BOSS_KEY.has(item);
 export const isStrayFairy = (item: string) => !!item.match(/^(OOT|MM)_STRAY_FAIRY_/);
 export const isTownStrayFairy = (item: string) => item === 'MM_STRAY_FAIRY_TOWN';
 export const isDungeonStrayFairy = (item: string) => isStrayFairy(item) && !isTownStrayFairy(item);
