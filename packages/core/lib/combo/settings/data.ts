@@ -24,6 +24,19 @@ export const SETTINGS = [{
   ],
   default: 'allLocations'
 }, {
+  key: 'itemPool',
+  name: 'Item Pool',
+  category: 'main',
+  type: 'enum',
+  description: 'Change the item pool.',
+  values: [
+    //{ value: 'plentiful', name: 'Plentiful', description: 'One extra copy of every major item. Heart containers only.' },
+    { value: 'normal', name: 'Normal', description: 'The regular item count for each game.' },
+    { value: 'scarce', name: 'Scarce', description: 'One less of every major item. No Heart Containers.' },
+    { value: 'minimal', name: 'Minimal', description: 'Only one of each major item. No Heart Pieces or containers.' },
+  ],
+  default: 'normal'
+}, {
   key: 'generateSpoilerLog',
   name: 'Generate Spoiler Log',
   category: 'main',

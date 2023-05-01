@@ -18,6 +18,25 @@ const EXTRA_ITEMS = [
   'MM_SWORD',
 ];
 
+const ITEM_POOL_SCARCE = [
+  'OOT_BOMB_BAG',
+  'OOT_BOW',
+  'OOT_MAGIC_UPGRADE',
+  'OOT_OCARINA',
+  'OOT_SLINGSHOT',
+  'MM_MAGIC_UPGRADE',
+  'MM_BOW',
+  'MM_SWORD',
+  'MM_BOMB_BAG',
+  'SHARED_BOW',
+  'SHARED_BOMB_BAG',
+  'SHARED_MAGIC_UPGRADE',
+];
+
+const ITEM_POOL_PLENTIFUL = [
+
+];
+
 export class LogicPassWorldTransform {
   private pool: Items = {};
   private locsByItem = new Map<string, Set<string>>();
@@ -87,6 +106,39 @@ export class LogicPassWorldTransform {
       amount = 1;
     }
     this.pool[item] = count + amount;
+  }
+
+  private scarcifyPool(delta: number) {
+    const { settings } = this.state;
+    const items = [...ITEM_POOL_SCARCE];
+
+    /* Tunics - shopsanity */
+    if (settings.shopShuffleOot === 'full') {
+      items.push('OOT_TUNIC_GORON');
+      items.push('OOT_TUNIC_ZORA');
+    }
+
+    for (const item of items) {
+      const amount = this.pool[item];
+      if (amount) {
+        let newAmount = amount - delta;
+        if (newAmount < 1)
+          newAmount = 1;
+        this.pool[item] = newAmount;
+      }
+    }
+
+    /* Remove heart pieces */
+    this.removeItem('OOT_HEART_PIECE');
+    this.removeItem('MM_HEART_PIECE');
+    this.removeItem('SHARED_HEART_PIECE');
+
+    /* Minimal - remove heart containers */
+    if (delta >= 2) {
+      this.removeItem('OOT_HEART_CONTAINER');
+      this.removeItem('MM_HEART_CONTAINER');
+      this.removeItem('SHARED_HEART_CONTAINER');
+    }
   }
 
   /**
@@ -270,6 +322,15 @@ export class LogicPassWorldTransform {
       /* Recovery */
       this.replaceItem('OOT_RECOVERY_HEART', 'SHARED_RECOVERY_HEART');
       this.replaceItem('MM_RECOVERY_HEART',  'SHARED_RECOVERY_HEART');
+    }
+
+    switch (settings.itemPool) {
+    case 'scarce':
+      this.scarcifyPool(1);
+      break;
+    case 'minimal':
+      this.scarcifyPool(2);
+      break;
     }
   }
 
