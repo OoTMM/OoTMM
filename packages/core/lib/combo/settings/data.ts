@@ -270,6 +270,13 @@ export const SETTINGS = [{
   description: 'Allows access to the Deku Tree as adult.',
   default: false
 }, {
+  key: 'wellAdult',
+  name: 'Well as Adult',
+  category: 'main.events',
+  type: 'boolean',
+  description: 'Allows access to the Well as adult.',
+  default: false
+}, {
   key: 'kakarikoGate',
   name: 'Kakariko Gate',
   category: 'main.events',

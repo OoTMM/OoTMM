@@ -214,6 +214,10 @@ export class LogicPassConfig {
       config.add('CHILD_WALLET');
     }
 
+    if (settings.wellAdult) {
+      config.add('OOT_ADULT_WELL');
+    }
+
     return { mq, config };
   }
 }
