@@ -221,6 +221,9 @@ export class LogicPassConfig {
     if (settings.colossalWallets) {
       config.add('COLOSSAL_WALLET');
     }
+    if (settings.agelessItems) {
+      config.add('OOT_AGELESS_ITEMS')
+    }
 
     return { mq, config };
   }

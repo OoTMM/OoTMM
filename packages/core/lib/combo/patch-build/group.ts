@@ -17,6 +17,7 @@ export const PATCH_GROUPS = [
   'OOT_ADULT_DEKU_TREE',
   'OOT_FIRE_TEMPLE_CHILD',
   'OOT_FAST_BUNNY_HOOD',
+  'OOT_AGELESS_ITEMS',
 ] as const;
 
 export type PatchGroup = typeof PATCH_GROUPS[number];

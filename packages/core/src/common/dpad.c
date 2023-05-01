@@ -204,7 +204,7 @@ void comboDpadUpdate(GameState_Play* play)
     /* Update the items */
     sDpadItems[DPAD_DOWN] = gSave.inventory.items[ITS_OOT_OCARINA];
 
-    if (gSave.age == AGE_CHILD)
+    if (gSave.age == AGE_CHILD && !comboConfig(CFG_OOT_AGELESS_ITEMS))
     {
         sDpadItems[DPAD_LEFT] = ITEM_NONE;
         sDpadItems[DPAD_RIGHT] = ITEM_NONE;
