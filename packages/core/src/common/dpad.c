@@ -74,7 +74,7 @@ static int canUseDpadItem(GameState_Play* play, s16 itemId, int flags)
     if (link->state & PLAYER_ACTOR_STATE_WATER)
     {
 #if defined(GAME_MM)
-        if (itemId != ITEM_MM_MASK_ZORA)
+        if (itemId != ITEM_MM_MASK_ZORA && !(gSave.playerForm == MM_PLAYER_FORM_ZORA && (itemId == ITEM_MM_OCARINA_FAIRY || itemId == ITEM_MM_OCARINA_OF_TIME)))
 #endif
             return 0;
     }
