@@ -277,6 +277,13 @@ export const SETTINGS = [{
   description: 'Allows access to the Well as adult.',
   default: false
 }, {
+  key: 'fireChild',
+  name: 'Fire Temple as Child',
+  category: 'main.events',
+  type: 'boolean',
+  description: 'Allows access to the Fire Temple as child.',
+  default: false
+}, {
   key: 'kakarikoGate',
   name: 'Kakariko Gate',
   category: 'main.events',
