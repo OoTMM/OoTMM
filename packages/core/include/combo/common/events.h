@@ -7,6 +7,7 @@
 #define EV_OOT_CHK_DEKU_MIDO_MEET           OOT_EV(0,  2)
 #define EV_OOT_CHK_DEKU_MIDO_COMPLAIN       OOT_EV(0,  3)
 #define EV_OOT_CHK_DEKU_MIDO_SWORD_SHIELD   OOT_EV(0,  4)
+#define EV_OOT_CHK_DEKU_TREE_OPEN           OOT_EV(0,  5)
 #define EV_OOT_CHK_EMERALD_TREE_DEAD        OOT_EV(0,  7)
 #define EV_OOT_CHK_GOHMA                    OOT_EV(0,  9)
 #define EV_OOT_CHK_DEKU_TREE_MEET           OOT_EV(0, 12)

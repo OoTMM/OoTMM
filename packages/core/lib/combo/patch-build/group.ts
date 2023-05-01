@@ -14,6 +14,7 @@ export const PATCH_GROUPS = [
   'MM_CLOCK_SPEED_VERYFAST',
   'MM_CLOCK_SPEED_SUPERFAST',
   'MM_BOSS_WARP_PADS_BEATEN',
+  'OOT_ADULT_DEKU_TREE',
 ] as const;
 
 export type PatchGroup = typeof PATCH_GROUPS[number];

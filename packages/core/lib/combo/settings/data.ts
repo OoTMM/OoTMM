@@ -263,6 +263,13 @@ export const SETTINGS = [{
   ],
   default: 'open'
 }, {
+  key: 'dekuTreeAdult',
+  name: 'Deku Tree as Adult',
+  category: 'main.events',
+  type: 'boolean',
+  description: 'Allows access to the Deku Tree as adult.',
+  default: false
+}, {
   key: 'kakarikoGate',
   name: 'Kakariko Gate',
   category: 'main.events',

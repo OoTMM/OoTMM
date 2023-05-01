@@ -58,6 +58,7 @@
 "hidden_grotto_bomb": "stone_of_agony && has_explosives_or_hammer"
 "hidden_grotto_storms": "stone_of_agony && can_play(SONG_STORMS)"
 "has_spiritual_stones": "has(STONE_EMERALD) && has(STONE_RUBY) && has(STONE_SAPPHIRE)"
+
 #Specific Interaction Macros:
 "can_ride_epona": "is_adult && can_play(SONG_EPONA)"
 "gs_soil": "is_child && has_bottle && (has(BUGS) || event(BUGS))"
@@ -78,6 +79,7 @@
 "has_tunic_goron": "has_tunic_goron_strict || trick(OOT_TUNICS)"
 "has_tunic_zora": "has_tunic_zora_strict || trick(OOT_TUNICS)"
 "trick_mido": "trick(OOT_MIDO_SKIP) && (has(BOW) || has(HOOKSHOT) || has(ARROW_FIRE) || has(ARROW_LIGHT))"
+
 #Specialty Macros
 "met_zelda": "event(MEET_ZELDA) || setting(skipZelda)"
 "woke_talon_child": "event(TALON_CHILD) || setting(skipZelda)"
@@ -86,6 +88,8 @@
 "can_collect_ageless": "has(HOOKSHOT) && has(BOOMERANG)"
 "has_small_keys_fire(x)": "cond(setting(smallKeyShuffle, anywhere), has(SMALL_KEY_FIRE, x + 1), has(SMALL_KEY_FIRE, x))"
 "king_zora_moved": "event(KING_ZORA_LETTER) || setting(zoraKing, open) || (setting(zoraKing, adult) && is_adult)"
+"can_move_mido": "is_child && has_sword_kokiri && has(SHIELD_DEKU)"
+"mido_moved": "setting(dekuTree, open) || is_adult || event(MIDO_MOVED)"
 
 # Wallets
 "has_wallet(n)": "cond(setting(childWallets), has(WALLET, n), has(WALLET, n - 1))"
