@@ -1,0 +1,84 @@
+#include <combo.h>
+
+PATCH_GROUP PG_OOT_AGELESS_ITEMS
+    PATCH_START 0x80829D74
+    # 0x00 - Adult
+    # 0x01 - Child
+    # 0x09 - Both
+    .byte 0x01  # 0x00 - Deku Sticks
+    .byte 0x09  # 0x01 - Deku Nuts
+    .byte 0x09  # 0x02 - Bombs
+    .byte 0x00  # 0x03 - Bow
+    .byte 0x00  # 0x04 - Fire Arrows
+    .byte 0x09  # 0x05 - Din's Fire
+    .byte 0x01  # 0x06 - Slingshot
+    .byte 0x09  # 0x07 - Ocarina
+    .byte 0x09  # 0x08 - Bombchus
+    .byte 0x00  # 0x09 - Hookshot/Longshot
+    .byte 0x00  # 0x0A - Ice Arrows
+    .byte 0x09  # 0x0B - Farore's Wind
+    .byte 0x09  # 0x0C - Boomerang
+    .byte 0x09  # 0x0D - Lens of Truth
+    .byte 0x01  # 0x0E - Magic Beans
+    .byte 0x09  # 0x0F - Megaton Hammer
+    .byte 0x00  # 0x10 - Light Arrows
+    .byte 0x09  # 0x11 - Nayru's Love
+    .byte 0x09  # 0x12 - Bottle 1
+    .byte 0x09  # 0x13 - Bottle 2
+    .byte 0x09  # 0x14 - Bottle 3
+    .byte 0x09  # 0x15 - Bottle 4
+    .byte 0x00  # 0x16 - Adult Trade Slot
+    .byte 0x01  # 0x17 - Child Trade Slot 
+    .byte 0x09  # 0x18 - Unused (Bullet Bag / Quiver)
+    .byte 0x01  # 0x19 - Kokiri Sword
+    .byte 0x00  # 0x1A - Master Sword
+    .byte 0x09  # 0x1B - Biggoron Sword
+    .byte 0x09  # 0x1C - Bomb Bag
+    .byte 0x01  # 0x1D - Deku Shield
+    .byte 0x09  # 0x1E - Hylian Shield
+    .byte 0x09  # 0x1F - Mirror Shield
+    .byte 0x09  # 0x20 - Unused (Strength Upgrade)
+    .byte 0x09  # 0x21 - Kokiri Tunic
+    .byte 0x09  # 0x22 - Goron Tunic
+    .byte 0x09  # 0x23 - Zora Tunic
+    .byte 0x09  # 0x24 - Scale
+    .byte 0x09  # 0x25 - Kokiri Boots
+    .byte 0x09  # 0x26 - Iron Boots
+    .byte 0x09  # 0x27 - Hover Boots
+
+    # Menu Highlights
+    .byte 0x01  # 0x28 - Deku Sticks
+    .byte 0x09  # 0x29 - Deku Nuts
+    .byte 0x09  # 0x2A - Bombs
+    .byte 0x00  # 0x2B - Bow
+    .byte 0x00  # 0x2C - Fire Arrows
+    .byte 0x09  # 0x2D - Din's Fire
+    .byte 0x01  # 0x2E - Slingshot
+    .byte 0x09  # 0x2F - Fairy Ocarina
+    .byte 0x09  # 0x30 - Ocarina of Time
+    .byte 0x09  # 0x31 - Bombchus
+    .byte 0x00  # 0x32 - Hookshot
+    .byte 0x00  # 0x33 - Longshot
+    .byte 0x00  # 0x34 - Ice Arrows
+    .byte 0x09  # 0x35 - Farore's Wind
+    .byte 0x09  # 0x36 - Boomerang
+    .byte 0x09  # 0x37 - Lens of Truth
+    .byte 0x01  # 0x38 - Magic Beans
+    .byte 0x09  # 0x39 - Megaton Hammer
+    PATCH_END
+
+    PATCH_START 0x80829D74 + 0x63
+    .byte 0x09  # 0x63 - Kokiri Sword
+    .byte 0x00  # 0x64 - Master Sword
+    .byte 0x09  # 0x65 - Biggoron Sword
+    .byte 0x09  # 0x66 - Deku Shield
+    .byte 0x09  # 0x67 - Hylian Shield
+    .byte 0x09  # 0x68 - Mirror Shield
+    .byte 0x09  # 0x69 - Kokiri Tunic
+    .byte 0x09  # 0x6A - Goron Tunic
+    .byte 0x09  # 0x6B - Zora Tunic
+    .byte 0x09  # 0x6C - Kokiri Boots
+    .byte 0x09  # 0x6D - Iron Boots
+    .byte 0x09  # 0x6E - Hover Boots
+    PATCH_END
+PATCH_GROUP_END

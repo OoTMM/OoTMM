@@ -451,6 +451,20 @@ export const SETTINGS = [{
   description: 'Modifies most surface to be climbable in OOT',
   default: false
 }, {
+  key: 'fastBunnyHood',
+  name: 'Fast Bunny Hood',
+  category: 'main.misc',
+  type: 'boolean',
+  description: 'Modifies the Bunny Hood in OoT to give a speed increase',
+  default: false
+}, {
+  key: 'agelessItems',
+  name: 'Ageless Items (OoT)',
+  category: 'main.misc',
+  type: 'boolean',
+  description: 'Allows Link to use most items independently of his age',
+  default: false
+}, {
   key: 'fillWallets',
   name: 'Fill Wallets',
   category: 'items',

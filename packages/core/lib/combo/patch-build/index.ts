@@ -39,6 +39,8 @@ function asmPatchGroups(settings: Settings) {
     MM_BOSS_WARP_PADS_BEATEN: settings.bossWarpPads === 'bossBeaten',
     OOT_ADULT_DEKU_TREE: settings.dekuTreeAdult,
     OOT_FIRE_TEMPLE_CHILD: settings.fireChild,
+    OOT_FAST_BUNNY_HOOD: settings.fastBunnyHood,
+    OOT_AGELESS_ITEMS: settings.agelessItems,
   };
   const keys = Object.keys(groups) as PatchGroup[];
   return keys.filter((k) => groups[k]);
