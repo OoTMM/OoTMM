@@ -261,3 +261,7 @@ void LoadMapMark(void*);
 void Inventory_SetWorldMapCloudVisibility(s16 tingleId);
 
 #endif
+
+#if defined(GAME_MM)
+s16 ActorCutscene_StartAndSetFlag(s16 index, Actor* actor);
+#endif

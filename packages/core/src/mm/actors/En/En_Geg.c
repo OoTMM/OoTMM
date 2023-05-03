@@ -77,5 +77,7 @@ void DonGero_StartCutscene(s16 index, Actor* actor) {
         u8* address = (u8*)actor;
         u16* rollingAddress = (u16*)(address + 0x4AA);
         *rollingAddress = 0x180;
-    } 
+    } else {
+        ActorCutscene_StartAndSetFlag(index, actor);
+    }
 }
