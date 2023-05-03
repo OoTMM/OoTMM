@@ -415,9 +415,9 @@
   exits:
     "Lon Lon Ranch": "true"
   locations:
-    "Lon Lon Ranch Grotto Left Scrub": "is_child && can_hit_scrub"
-    "Lon Lon Ranch Grotto Center Scrub": "is_child && can_hit_scrub"
-    "Lon Lon Ranch Grotto Right Scrub": "is_child && can_hit_scrub"
+    "Lon Lon Ranch Grotto Left Scrub": "is_child && can_use_wallet(1) && can_hit_scrub"
+    "Lon Lon Ranch Grotto Center Scrub": "is_child && can_use_wallet(1) && can_hit_scrub"
+    "Lon Lon Ranch Grotto Right Scrub": "is_child && can_use_wallet(1) && can_hit_scrub"
 "Hyrule Castle":
   region: HYRULE_CASTLE
   time: flow
