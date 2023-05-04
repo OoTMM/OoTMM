@@ -161,6 +161,8 @@ HOOK_RESTORE
 .section .patch, "awx"
 .int 0xffffffff
 .int \groupId
+.balign 8
+.previous
 .endm
 
 .macro PATCH_GROUP_END
