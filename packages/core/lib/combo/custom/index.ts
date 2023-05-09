@@ -11,7 +11,7 @@ import { DecompressedRoms } from '../decompress';
 import { Monitor } from '../monitor';
 import { CustomArchive } from './archive';
 import { KeepFile } from './keep';
-import { png } from './png';
+import { png } from '../util/png';
 import { font } from './font';
 import { raw } from './raw';
 

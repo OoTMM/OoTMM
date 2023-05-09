@@ -60,7 +60,7 @@ export class Generator {
       patchfile = new Patchfile(this.opts.patch);
     }
 
-    const cosmeticsPatchfile = cosmetics(this.opts, addresses);
+    const cosmeticsPatchfile = await cosmetics(this.opts, addresses, roms);
 
     const packedRom = await pack(this.monitor, roms, [patchfile, cosmeticsPatchfile]);
     let patch: Buffer | null = null;
