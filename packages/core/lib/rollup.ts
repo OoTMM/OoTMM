@@ -75,12 +75,18 @@ async function copyData() {
   /* Copy the extra assets */
   await customAssets();
   let promises: Promise<void>[] = [];
-  glob.sync('build/assets/*.bin').forEach((filename) => {
-    promises.push(fs.copyFile(filename, `dist/data/${path.basename(filename)}`));
-  });
-  glob.sync('data/static/*.bin').forEach((filename) => {
-    promises.push(fs.copyFile(filename, `dist/data/${path.basename(filename)}`));
-  });
+  for (const basePath of ["build/assets", "data/static"]) {
+    const matches = glob.sync('**/*bin', { cwd: basePath });
+    for (const filename of matches) {
+      const outPath = `dist/data/${filename}`;
+      const dir = path.dirname(outPath);
+      const p = (async () => {
+        await fs.mkdir(dir, { recursive: true });
+        await fs.copyFile(path.join(basePath, filename), outPath);
+      })();
+      promises.push(p);
+    }
+  }
   await Promise.all(promises);
 }
 
