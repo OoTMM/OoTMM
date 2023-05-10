@@ -16,13 +16,16 @@ static void BgTokiSwd_GiveItem(Actor* this, GameState_Play* play, s16 gi, int np
 
 static void swapFarore(void)
 {
-    OotFaroreWind* ptr;
+    OotFaroreWind* current;
+    OotFaroreWind* prev;
     OotFaroreWind tmp;
 
-    ptr = &gOotSave.fw;
-    memcpy(&tmp, &ptr[0], sizeof(tmp));
-    memcpy(&ptr[0], &ptr[-1], sizeof(tmp));
-    memcpy(&ptr[-1], &tmp, sizeof(tmp));
+    current = &gOotSave.fw;
+    prev = current - 1;
+
+    memcpy(&tmp, current, sizeof(tmp));
+    memcpy(current, prev, sizeof(tmp));
+    memcpy(prev, &tmp, sizeof(tmp));
 }
 
 void BgTokiSwd_Handler(Actor* this, GameState_Play* play)
@@ -52,6 +55,8 @@ void BgTokiSwd_Handler(Actor* this, GameState_Play* play)
         t->gfx = TRANS_GFX_SHORTCUT;
         t->entrance = 0x02ca;
         t->age = !(gSave.age);
+
+        ActorDestroy(this);
     }
     else
     {

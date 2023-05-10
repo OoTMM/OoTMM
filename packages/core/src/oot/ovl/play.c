@@ -32,6 +32,7 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.items[ITS_OOT_HAMMER] = ITEM_OOT_HAMMER;
         gSave.inventory.items[ITS_OOT_HOOKSHOT] = ITEM_OOT_LONGSHOT;
         gSave.inventory.items[ITS_OOT_LENS] = ITEM_OOT_LENS;
+        gSave.inventory.items[ITS_OOT_SPELL_WIND] = ITEM_OOT_SPELL_WIND;
         gSave.inventory.equipment.swords = 0x7;
         gSave.inventory.equipment.shields = 0x7;
         gSave.inventory.equipment.tunics = 0x7;
