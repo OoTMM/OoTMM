@@ -61,7 +61,7 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.quest.songTpForest = 1;
         gSave.inventory.quest.songTpSpirit = 1;
 
-        gSave.inventory.quest.stoneEmerald = 0;
+        gSave.inventory.quest.stoneEmerald = 1;
         gSave.inventory.quest.stoneRuby = 0;
         gSave.inventory.quest.stoneSapphire = 0;
 

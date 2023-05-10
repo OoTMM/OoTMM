@@ -17,3 +17,9 @@ PATCH_START 0x80ae3350
   nop
   nop
 PATCH_END
+
+
+/* Ignore the emerald */
+PATCH_START 0x80ae3dfc
+  li t8,0
+PATCH_END
