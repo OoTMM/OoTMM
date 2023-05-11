@@ -43,3 +43,7 @@ GOAL_MAJORA:                    0x29
 MM_MAJORA_CHILD_CUSTOM:         0x2a
 FILL_WALLETS:                   0x2b
 CHILD_WALLET:                   0x2c
+OOT_OPEN_DEKU:                  0x2d
+OOT_ADULT_WELL:                 0x2e
+COLOSSAL_WALLET:                0x2f
+OOT_AGELESS_ITEMS:              0x30

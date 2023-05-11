@@ -14,7 +14,7 @@
   exits:
     "Swamp Spider House": "true"
   locations:
-    "Swamp Skulltula Main Room Near Ceiling": "can_hookshot_short || has(MASK_ZORA) || (has(MASK_DEKU) && (has(BOW) || has(MAGIC_UPGRADE) || (has(BOMB_BAG) || trick_keg_explosives)))"
+    "Swamp Skulltula Main Room Near Ceiling": "can_hookshot_short || has(MASK_ZORA) || (has(MASK_DEKU) && (has_arrows || has_magic || (has_bombs || has_bombchu || trick_keg_explosives)))"
     "Swamp Skulltula Main Room Lower Right Soft Soil": "has_bottle"
     "Swamp Skulltula Main Room Lower Left Soft Soil": "has_bottle"
     "Swamp Skulltula Main Room Upper Soft Soil": "has_bottle"

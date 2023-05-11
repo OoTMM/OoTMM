@@ -2,7 +2,7 @@
   region: NONE
   exits:
     "OOT SONGS": "setting(crossWarpOot) && has_ocarina"
-    "SOARING": "can_play(SONG_TIME) && has(SONG_SOARING)"
+    "SOARING": "can_reset_time && can_play(SONG_SOARING)"
 "Tingle Town":
   region: TINGLE
   locations:
@@ -55,7 +55,7 @@
   exits:
     "GLOBAL": "true"
     "Clock Town South": "can_reset_time"
-    "Moon": "can_play(SONG_ORDER) && special(MOON)"
+    "Clock Tower Roof": "true"
   locations:
     "Initial Song of Healing": "true"
 "Clock Town South":
@@ -192,11 +192,13 @@
     "Clock Town Great Fairy Alt": "has(STRAY_FAIRY_TOWN) && (has(MASK_DEKU) || has(MASK_GORON) || has(MASK_ZORA))"
 "Clock Tower Roof":
   region: CLOCK_TOWER_ROOF
+  events:
+    MAGIC: "can_play(SONG_TIME)"
   exits:
     "Moon": "can_play(SONG_ORDER) && special(MOON)"
   locations:
-    "Clock Tower Roof Skull Kid Ocarina": "has_weapon_range || (has(MASK_DEKU) && has(MAGIC_UPGRADE))"
-    "Clock Tower Roof Skull Kid Song of Time": "has_weapon_range || (has(MASK_DEKU) && has(MAGIC_UPGRADE))"
+    "Clock Tower Roof Skull Kid Ocarina": "has_weapon_range && can_play(SONG_TIME)"
+    "Clock Tower Roof Skull Kid Song of Time": "has_weapon_range && can_play(SONG_TIME)"
 "Bomb Shop":
   region: CLOCK_TOWN_WEST
   events:
@@ -281,7 +283,7 @@
   exits:
     "Clock Town East": "true"
   locations:
-    "Milk Bar Troupe Leader Mask": "has_ocarina && has(MASK_DEKU) && has(MASK_ZORA) && has(MASK_GORON) && ((after(NIGHT1_PM_10_00) && before(NIGHT1_AM_05_00)) || (after(NIGHT2_PM_10_00) && before(NIGHT2_AM_05_00)))"
+    "Milk Bar Troupe Leader Mask": "has(MASK_ROMANI) && has_ocarina && has(MASK_DEKU) && has(MASK_ZORA) && has(MASK_GORON) && ((after(NIGHT1_PM_10_00) && before(NIGHT1_AM_05_00)) || (after(NIGHT2_PM_10_00) && before(NIGHT2_AM_05_00)))"
     "Milk Bar Madame Aroma Bottle": "has(MASK_KAFEI) && has(LETTER_TO_MAMA) && ((after(NIGHT3_PM_06_00) && before(NIGHT3_PM_09_00)) || after(NIGHT3_PM_10_00))"
     #Milk Bar Milk Purchase": "has(MASK_ROMANI) && can_use_wallet(1) && ((after(NIGHT1_PM_10_00) && before(NIGHT1_AM_06_00)) || (after(NIGHT2_PM_10_00) && before(NIGHT2_AM_06_00)) || (after(NIGHT3_PM_06_00) && before(NIGHT3_PM_09_00)) || after(NIGHT3_PM_10_00))"
     #Milk Bar Chateau Purchase": "has(MASK_ROMANI) && can_use_wallet(2) && ((after(NIGHT1_PM_10_00) && before(NIGHT1_AM_06_00)) || (after(NIGHT2_PM_10_00) && before(NIGHT2_AM_06_00)) || (after(NIGHT3_PM_06_00) && before(NIGHT3_PM_09_00)) || after(NIGHT3_PM_10_00))"
@@ -1232,7 +1234,7 @@
     "Laboratory": "true"
     "Zora Cape": "true"
     "Ocean Spider House": "true"
-    "Tingle Great Bay": "can_hookshot || has(BOW)"
+    "Tingle Great Bay": "can_hookshot || has_arrows"
     "Great Bay Grotto": "true"
     "GBC Near Cow Grotto": "can_hookshot"
   events:
@@ -1319,6 +1321,7 @@
   region: ZORA_CAPE
   events:
     MAGIC: "true"
+    RUPEES: "(can_fight || has_explosives || has_arrows) && is_night"
   exits:
     "Great Bay Coast": "true"
     "Zora Cape Near Hall": "has(MASK_ZORA)"
@@ -1456,16 +1459,32 @@
 "Road to Ikana Front":
   region: ROAD_TO_IKANA
   events:
-    STICKS: "has(MASK_GORON)"
-    NUTS: "has(MASK_GORON)"
+    RUPEES: "can_use_light_arrows && is_night"
   exits:
     "Termina Field": "true"
+    "Road to Ikana Grotto": "has(MASK_GORON)"
     "Road to Ikana Center": "can_play(SONG_EPONA) || (can_goron_bomb_jump && has_bombs)"
   locations:
     "Road to Ikana Chest": "can_hookshot || (can_hookshot_short && trick(MM_SHORT_HOOK_HARD))"
-    "Road to Ikana Grotto": "has(MASK_GORON)"
+"Road to Ikana Grotto":
+  region: ROAD_TO_IKANA
+  events:
+    MAGIC: "true"
+    BOMBS: "true"
+    ARROWS: "true"
+    RUPEES: "true"
+    FISH: "has_bottle"
+    BUGS: "has_bottle"
+    STICKS: "true"
+    NUTS: "true"
+  exits:
+    "Road to Ikana Front": "true"
+  locations:
+    "Road to Ikana Grotto": "true"
 "Road to Ikana Center":
   region: ROAD_TO_IKANA
+  events:
+    RUPEES: "can_use_light_arrows && is_night"
   exits:
     "Road to Ikana Front": "can_play(SONG_EPONA) || (can_goron_bomb_jump && has_bombs)"
     "Road to Ikana Top": "(has(MASK_GARO) || has(MASK_GIBDO)) && (can_hookshot || (can_hookshot_short && trick(MM_SHORT_HOOK_HARD)))"
@@ -1477,18 +1496,36 @@
 "Ikana Graveyard":
   region: IKANA_GRAVEYARD
   events:
-    STICKS: "has_explosives || trick_keg_explosives"
-    NUTS: "has_explosives || trick_keg_explosives"
+    MAGIC: "true"
+    ARROWS: "true"
+    RUPEES: "true"
   exits:
     "Road to Ikana Center": "true"
+    "Ikana Graveyard Grotto": "has_explosives || trick_keg_explosives"
     "Beneath The Graveyard Night 1": "has(MASK_CAPTAIN) && is_night1"
     "Beneath The Graveyard Night 2": "has(MASK_CAPTAIN) && is_night2"
     "Beneath The Graveyard Night 3": "has(MASK_CAPTAIN) && is_night3"
   locations:
     "Ikana Graveyard Captain Mask": "can_play(SONG_AWAKENING) && has_arrows && can_fight"
-    "Ikana Graveyard Grotto": "has_explosives || trick_keg_explosives"
+"Ikana Graveyard Grotto":
+  region: IKANA_GRAVEYARD
+  events:
+    MAGIC: "true"
+    BOMBS: "true"
+    ARROWS: "true"
+    RUPEES: "true"
+    STICKS: "true"
+    NUTS: "true"
+    FISH: "has_bottle"
+    BUGS: "has_bottle"
+  exits:
+    "Ikana Graveyard": "true"
+  locations:
+    "Ikana Graveyard Grotto": "true"
 "Beneath The Graveyard Night 1":
   region: IKANA_GRAVEYARD
+  events:
+    ARROWS: "true"
   exits:
     "Ikana Graveyard": "true"
   locations:
@@ -1496,18 +1533,25 @@
     "Beneath The Graveyard Song of Storms": "(can_fight || has_explosives) && (has_sticks || can_use_fire_arrows)"
 "Beneath The Graveyard Night 2":
   region: IKANA_GRAVEYARD
+  events:
+    MAGIC: "true"
+    ARROWS: "true"
   exits:
     "Ikana Graveyard": "true"
   locations:
     "Beneath The Graveyard HP": "(has_explosives || (trick_keg_explosives && can_fight)) && can_use_lens"
 "Beneath The Graveyard Night 3":
   region: IKANA_GRAVEYARD
+  events:
+    RUPEES: "can_fight || has_weapon_range || has_explosives"
   exits:
     "Ikana Graveyard": "true"
   locations:
     "Beneath The Graveyard Dampe Chest": "has_weapon_range && is_night3"
 "Road to Ikana Top":
   region: ROAD_TO_IKANA
+  events:
+    RUPEES: "can_use_light_arrows && is_night"
   exits:
     "Road to Ikana Center": "true"
     "Ikana Valley": "true"
@@ -1516,21 +1560,34 @@
   exits:
     "Road to Ikana Top": "true"
     "Ikana Canyon": "(can_use_ice_arrows || trick(MM_ICELESS_IKANA)) && can_hookshot"
-    "Secret Shrine Entrance": "true"
+    "Secret Shrine": "true"
     "Sakon Hideout": "event(MEET_KAFEI) && at(NIGHT3_PM_06_00)"
+    "Ikana Valley Grotto": "true"
     "Swamp Front": "true"
   events:
     BLUE_POTION: "has_bottle && can_use_wallet(2)"
-    STICKS: "true"
-    NUTS: "true"
   locations:
     "Ikana Valley Scrub Rupee": "has(DEED_OCEAN) && has(MASK_ZORA)"
     "Ikana Valley Scrub HP": "has(DEED_OCEAN) && has(MASK_ZORA) && has(MASK_DEKU)"
     #"Ikana Valley Scrub Purchase": "can_use_wallet(2)"
-    "Ikana Valley Grotto": "true"
   gossip:
     "Ikana Valley Gossip Lower": "true"
     "Ikana Valley Gossip Scrub": "has(DEED_OCEAN) && has(MASK_ZORA) && has(MASK_DEKU)"
+"Ikana Valley Grotto":
+  region: IKANA_CANYON
+  exits:
+    "Ikana Valley": "true"
+  events:
+    MAGIC: "true"
+    BOMBS: "true"
+    ARROWS: "true"
+    RUPEES: "true"
+    STICKS: "true"
+    NUTS: "true"
+    FISH: "has_bottle"
+    BUGS: "has_bottle"
+  locations:
+    "Ikana Valley Grotto": "true"
 "Sakon Hideout":
   region: IKANA_CANYON
   exits:
@@ -1543,7 +1600,7 @@
     "Ikana Valley": "true"
     "Ikana Fairy Fountain": "true"
     "Ikana Spring Water Cave": "true"
-    "Music Box House": "event(IKANA_CURSE_LIFTED)"
+    "Music Box House": "event(IKANA_CURSE_LIFTED) || event(BOSS_STONE_TOWER)"
     "Ghost Hut": "true"
     "Beneath the Well Entrance": "true"
     "Ikana Castle Entrance": "true"
@@ -1551,7 +1608,10 @@
     "Tingle Ikana": "has_weapon_range"
   events:
     IKANA_CANYON_OWL: "has(SONG_SOARING) && (has_sticks || has_weapon)"
-    NUTS: "true"
+    MAGIC: "true"
+    BOMBS: "true"
+    ARROWS: "true"
+    RUPEES: "can_use_light_arrows && is_night"
   gossip:
     "Ikana Canyon Gossip Upper": "true"
 "Ikana Fairy Fountain":
@@ -1577,7 +1637,7 @@
   exits:
     "Ikana Canyon": "true"
   locations:
-    "Ghost Hut HP": "has_arrows || can_hookshot_short || can_use_deku_bubble"
+    "Ghost Hut HP": "(has_arrows || can_hookshot_short || can_use_deku_bubble) && can_use_wallet(1)"
 "Ikana Castle Entrance":
   region: IKANA_CASTLE
   exits:
@@ -1587,12 +1647,18 @@
     IKANA_CASTLE_LIGHT_ENTRANCE: "can_activate_crystal"
 "Ikana Castle Exterior":
   region: IKANA_CASTLE
+  events:
+    MAGIC: "true"
+    ARROWS: "true"
+    RUPEES: "true"
   exits:
     "Beneath the Well End": "true"
     "Ikana Castle Entrance": "can_use_light_arrows"
     "Ancient Castle of Ikana": "true"
 "Stone Tower":
   region: STONE_TOWER
+  events:
+    RUPEES: "(can_use_elegy3 || (can_use_elegy2 && trick(MM_ONE_MASK_STONE_TOWER))) && scarecrow_hookshot"
   exits:
     "Ikana Canyon": "true"
     "Stone Tower Top": "(can_use_elegy3 || (can_use_elegy2 && trick(MM_ONE_MASK_STONE_TOWER))) && can_hookshot"
@@ -1604,8 +1670,17 @@
     "Stone Tower Top Inverted": "can_use_elegy && can_use_light_arrows"
   events:
     STONE_TOWER_OWL: "has(SONG_SOARING) && (has_sticks || has_weapon)"
+    MAGIC: "true"
+    BOMBS: "true"
+    ARROWS: "true"
+    RUPEES: "has(MASK_GORON)"
 "Stone Tower Front of Temple":
   region: STONE_TOWER
+  events:
+    MAGIC: "has(MASK_GORON) || has(MASK_ZORA) || (scarecrow_hookshot && can_fight)"
+    BOMBS: "has(MASK_GORON) || has(MASK_ZORA) || (scarecrow_hookshot && can_fight)"
+    ARROWS: "has(MASK_GORON) || has(MASK_ZORA) || (scarecrow_hookshot && can_fight)"
+    RUPEES: "has(MASK_GORON) || has(MASK_ZORA) || (scarecrow_hookshot && can_fight)"
   exits:
     "Stone Tower": "true"
     "Stone Tower Top": "can_use_elegy3"
@@ -1619,6 +1694,11 @@
     "Stone Tower Top Inverted Upper": "can_use_beans"
 "Stone Tower Top Inverted Upper":
   region: STONE_TOWER
+  events:
+    MAGIC: "can_use_beans"
+    BOMBS: "can_use_beans"
+    RUPEES: "can_use_beans"
+    BUGS: "has_bottle"
   exits:
     "Stone Tower Top Inverted": "true"
   locations:

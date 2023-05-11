@@ -14,6 +14,20 @@ static void BgTokiSwd_GiveItem(Actor* this, GameState_Play* play, s16 gi, int np
     }
 }
 
+static void swapFarore(void)
+{
+    OotFaroreWind* current;
+    OotFaroreWind* prev;
+    OotFaroreWind tmp;
+
+    current = &gOotSave.fw;
+    prev = current - 1;
+
+    memcpy(&tmp, current, sizeof(tmp));
+    memcpy(current, prev, sizeof(tmp));
+    memcpy(prev, &tmp, sizeof(tmp));
+}
+
 void BgTokiSwd_Handler(Actor* this, GameState_Play* play)
 {
     TransitionContext* t;
@@ -32,8 +46,8 @@ void BgTokiSwd_Handler(Actor* this, GameState_Play* play)
 
     if (Actor_HasParent(this))
     {
-        /* Unset FW */
-        *(int*)((char*)&gSave + 0xe64 + 0x1c) = 0;
+        /* Swap farore */
+        swapFarore();
 
         /* Time Travel */
         t = &play->transition;
@@ -41,6 +55,8 @@ void BgTokiSwd_Handler(Actor* this, GameState_Play* play)
         t->gfx = TRANS_GFX_SHORTCUT;
         t->entrance = 0x02ca;
         t->age = !(gSave.age);
+
+        ActorDestroy(this);
     }
     else
     {

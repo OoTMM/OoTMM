@@ -67,18 +67,24 @@ const fixChecksum = (monitor: Monitor, rom: Buffer) => {
   rom.writeUInt32BE(c2, 0x14);
 };
 
-export async function pack(monitor: Monitor, roms: DecompressedRoms, patchfile: Patchfile): Promise<Buffer> {
+export async function pack(monitor: Monitor, roms: DecompressedRoms, patchfiles: Patchfile[]): Promise<Buffer> {
   /* Apply patches and compress */
   const romOot = roms.oot.rom;
   const romMm = roms.mm.rom;
   monitor.log("Pack: Pre-compress patches");
-  patchfile.apply(romOot, 'oot');
-  patchfile.apply(romMm, 'mm');
+  for (const p of patchfiles) {
+    p.apply(romOot, 'oot');
+    p.apply(romMm, 'mm');
+  }
+
   monitor.log("Pack: Compress");
   const compressedRoms = await compress(monitor, roms);
   const compressedRom = Buffer.concat(compressedRoms);
+
   monitor.log("Pack: Post-compress patches");
-  patchfile.apply(compressedRom, 'global');
+  for (const p of patchfiles) {
+    p.apply(compressedRom, 'global');
+  }
 
   monitor.log("Pack: Fixes");
   fixDMA(monitor, compressedRom);

@@ -7,8 +7,8 @@ Fire Temple Boss,               Fire Temple Pre-Boss,             boss,       0x
 Water Temple Boss,              Water Temple Antichamber,         boss,       0x417
 Spirit Temple Boss,             Spirit Temple Statue,             boss,       0x08d
 Shadow Temple Boss,             Shadow Temple Boat,               boss,       0x413
-Deku Tree,                      Kokiri Forest,                    dungeon,    0x000
-Kokiri Forest,                  Deku Tree,                        dungeon,    0x209
+Deku Tree,                      Kokiri Forest Near Deku Tree,     dungeon,    0x000
+Kokiri Forest Near Deku Tree,   Deku Tree,                        dungeon,    0x209
 Dodongo Cavern,                 Death Mountain,                   dungeon,    0x004
 Death Mountain,                 Dodongo Cavern,                   dungeon,    0x242
 Jabu-Jabu,                      Zora Fountain,                    dungeon,    0x028

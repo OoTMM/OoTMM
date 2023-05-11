@@ -17,6 +17,7 @@ import { codegen as comboCodegen } from './combo/codegen';
 import { customAssets } from './combo/custom';
 import { Monitor } from './combo/monitor';
 import { DEFAULT_SETTINGS } from './combo';
+import { DEFAULT_COSMETICS, cosmeticsAssets } from './combo/cosmetics';
 
 const VERSION = process.env.VERSION || 'XXX';
 
@@ -56,8 +57,11 @@ async function build() {
 }
 
 async function copyData() {
-  await comboCodegen(dummyMonitor);
-  const b = await comboBuild({ debug: false, seed: 'ROLLUP', settings: DEFAULT_SETTINGS });
+  await Promise.all([
+    comboCodegen(dummyMonitor),
+    cosmeticsAssets(),
+  ]);
+  const b = await comboBuild({ debug: false, seed: 'ROLLUP', settings: DEFAULT_SETTINGS, cosmetics: DEFAULT_COSMETICS });
   await fs.mkdir('dist/data', { recursive: true });
   await Promise.all(
     Object.entries(b).map(async ([game, { payload, patches }]) => {
@@ -71,12 +75,18 @@ async function copyData() {
   /* Copy the extra assets */
   await customAssets();
   let promises: Promise<void>[] = [];
-  glob.sync('build/assets/*.bin').forEach((filename) => {
-    promises.push(fs.copyFile(filename, `dist/data/${path.basename(filename)}`));
-  });
-  glob.sync('data/static/*.bin').forEach((filename) => {
-    promises.push(fs.copyFile(filename, `dist/data/${path.basename(filename)}`));
-  });
+  for (const basePath of ["build/assets", "data/static"]) {
+    const matches = glob.sync('**/*bin', { cwd: basePath });
+    for (const filename of matches) {
+      const outPath = `dist/data/${filename}`;
+      const dir = path.dirname(outPath);
+      const p = (async () => {
+        await fs.mkdir(dir, { recursive: true });
+        await fs.copyFile(path.join(basePath, filename), outPath);
+      })();
+      promises.push(p);
+    }
+  }
   await Promise.all(promises);
 }
 

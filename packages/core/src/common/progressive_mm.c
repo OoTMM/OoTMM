@@ -1,5 +1,12 @@
 #include <combo.h>
 
+static s32 progressiveGoldDustBottle(void)
+{
+    if (gMmExtraItems.goldDust)
+        return GI_MM_BOTTLE_EMPTY;
+    return GI_MM_BOTTLED_GOLD_DUST;
+}
+
 static s32 progressiveSword(void)
 {
     switch (gMmSave.itemEquips.sword)
@@ -54,7 +61,7 @@ static s32 progressiveWallet(void)
     {
     case 0: return GI_MM_WALLET2;
     case 1: return GI_MM_WALLET3;
-    default: return GI_MM_WALLET4;
+    default: return comboConfig(CFG_COLOSSAL_WALLET) ? GI_MM_WALLET4 : GI_MM_WALLET3;
     }
 }
 
@@ -114,6 +121,9 @@ s32 comboProgressiveMm(s32 gi)
 {
     switch (gi)
     {
+    case GI_MM_BOTTLED_GOLD_DUST:
+        gi = progressiveGoldDustBottle();
+        break;
     case GI_MM_OCARINA_FAIRY:
     case GI_MM_OCARINA_OF_TIME:
         if (comboConfig(CFG_MM_OCARINA_FAIRY))

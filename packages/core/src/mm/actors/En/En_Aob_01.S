@@ -1,0 +1,16 @@
+#include <combo.h>
+
+/* Dog Race QoL */
+PATCH_START 0x809c30e8
+  lui     t8,0x801f
+  lb      t8,-0x8f8(t8)
+  bltz    t8,.+0x1c
+  li      t8,9
+  li      a3,0xd
+  beql    t8,a1,.+0x1c
+  li      a3,0
+  andi    t8,a1,1
+  beqz    t8,.+0x58
+  nop
+  sra     v1,a1,1
+PATCH_END

@@ -206,6 +206,7 @@ static void addBulletBag(u8 level)
     gOotSave.inventory.items[ITS_OOT_SLINGSHOT] = ITEM_OOT_SLINGSHOT;
     gOotSave.inventory.upgrades.bulletBag = level;
     gOotSave.inventory.ammo[ITS_OOT_SLINGSHOT] = kMaxSeeds[level];
+    BITMAP16_SET(gOotSave.eventsItem, EV_OOT_ITEM_DEKU_SEEDS);
 }
 
 static void addNutUpgrade(int level)
@@ -235,21 +236,31 @@ static void addStickUpgradeMm(int level)
 static void addTradeChild(u8 index)
 {
     u16 itemId;
+    u16 mask;
 
     itemId = kOotTradeChild[index];
+    mask = 1 << (u16)index;
+    if (gOotExtraTradeSave.child & mask)
+        return;
     if (gOotSave.inventory.items[ITS_OOT_TRADE_CHILD] == ITEM_NONE)
         gOotSave.inventory.items[ITS_OOT_TRADE_CHILD] = itemId;
-    gOotExtraTrade.child |= (1 << (u16)index);
+    gOotExtraTrade.child |= mask;
+    gOotExtraTradeSave.child |= mask;
 }
 
 static void addTradeAdult(u8 index)
 {
     u16 itemId;
+    u16 mask;
 
     itemId = kOotTradeAdult[index];
+    mask = 1 << (u16)index;
+    if (gOotExtraTradeSave.adult & mask)
+        return;
     if (gOotSave.inventory.items[ITS_OOT_TRADE_ADULT] == ITEM_NONE)
         gOotSave.inventory.items[ITS_OOT_TRADE_ADULT] = itemId;
-    gOotExtraTrade.adult |= (1 << (u16)index);
+    gOotExtraTrade.adult |= mask;
+    gOotExtraTradeSave.adult |= mask;
 }
 
 static void addRupees(u16 count)
@@ -817,6 +828,7 @@ int comboAddItemOot(s16 gi, int noEffect)
         break;
     case GI_OOT_RUTO_LETTER:
         addNewBottle(ITEM_OOT_RUTO_LETTER);
+        gOotExtraItems.rutoLetter = 1;
         break;
     case GI_OOT_BOTTLE_MILK:
         addNewBottle(ITEM_OOT_MILK);

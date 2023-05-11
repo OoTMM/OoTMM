@@ -1,4 +1,5 @@
 import fs from 'fs/promises';
+import path from 'path';
 
 let PNG: any = null;
 if (!process.env.ROLLUP) {
@@ -54,7 +55,23 @@ const parsePngI4 = async (data: Buffer) => {
   return i4;
 };
 
-export const png = async (filename: string, mode: 'rgba32' | 'rgba16' | 'i4') => {
+const parsePngBitmask = async (data: Buffer) => {
+  const rgba32 = await rawPng(data);
+  const bitmask = Buffer.alloc(rgba32.length / 32);
+  for (let i = 0; i < rgba32.length; i += 32) {
+    let v = 0;
+    for (let j = 0; j < 8; ++j) {
+      const d = rgba32.readUInt32BE(i + j * 4);
+      const r = (d >> 24) & 0xff;
+      if (r >= 0x80)
+        v |= 1 << j;
+    }
+    bitmask.writeUInt8(v, i / 32);
+  }
+  return bitmask;
+};
+
+export const png = async (filename: string, mode: 'rgba32' | 'rgba16' | 'i4' | 'bitmask') => {
   if (process.env.ROLLUP) {
     return fetch(`/${filename}.bin`).then(x => x.arrayBuffer()).then(x => Buffer.from(x));
   } else {
@@ -70,9 +87,14 @@ export const png = async (filename: string, mode: 'rgba32' | 'rgba16' | 'i4') =>
     case 'i4':
       pngBuffer = await parsePngI4(data);
       break;
+    case 'bitmask':
+      pngBuffer = await parsePngBitmask(data);
+      break;
     }
-    await fs.mkdir(__dirname + '/../../../build/assets', { recursive: true });
-    await fs.writeFile(__dirname + '/../../../build/assets/' + filename + '.bin', pngBuffer);
+
+    const outPath = path.resolve(__dirname, '../../../build/assets', filename + '.bin');
+    await fs.mkdir(path.dirname(outPath), { recursive: true });
+    await fs.writeFile(outPath, pngBuffer);
     return pngBuffer;
   }
 };

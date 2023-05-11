@@ -4,6 +4,7 @@ import { DATA_GI, DATA_NPC, DATA_SCENES, DATA_CONFIG } from './data';
 import { Monitor } from './monitor';
 
 import { fileExists } from './util';
+import { PATCH_GROUP_VALUES } from './patch-build/group';
 
 export class CodeGen {
   private defines: string[] = [];
@@ -44,9 +45,10 @@ const codegenFile = async (data: {[k: string]: number}, prefix: string, filename
 export const codegen = async (monitor: Monitor) => {
   monitor.log("Codegen");
   return Promise.all([
-    codegenFile(DATA_GI,      "GI",  "gi_data.h", "GENERATED_GI_DATA_H"),
-    codegenFile(DATA_SCENES,  "SCE", "scenes.h",  "GENERATED_SCENES_H"),
-    codegenFile(DATA_NPC,     "NPC", "npc.h",     "GENERATED_NPC_H"),
-    codegenFile(DATA_CONFIG,  "CFG", "config.h",  "GENERATED_CONFIG_H"),
+    codegenFile(DATA_GI,              "GI",   "gi_data.h",      "GENERATED_GI_DATA_H"),
+    codegenFile(DATA_SCENES,          "SCE",  "scenes.h",       "GENERATED_SCENES_H"),
+    codegenFile(DATA_NPC,             "NPC",  "npc.h",          "GENERATED_NPC_H"),
+    codegenFile(DATA_CONFIG,          "CFG",  "config.h",       "GENERATED_CONFIG_H"),
+    codegenFile(PATCH_GROUP_VALUES,   "PG",   "patch_group.h",  "GENERATED_PATCH_GROUP_H"),
   ]);
 };

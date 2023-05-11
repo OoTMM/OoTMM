@@ -1,8 +1,8 @@
 import { Monitor } from '../monitor';
 import { Settings } from '../settings';
 import { exprTrue } from './expr';
-import { Items, addItem, ITEMS_MAPS, ITEMS_COMPASSES, ITEMS_TINGLE_MAPS } from './items';
-import { LOCATIONS_ZELDA } from './locations';
+import { Items, addItem, ITEMS_MAPS, ITEMS_COMPASSES, ITEMS_TINGLE_MAPS, ITEMS_SONGS, DUNGEON_REWARDS, ITEMS_SMALL_KEY, ITEMS_BOSS_KEY, isJunk, isItemConsumable } from './items';
+import { LOCATIONS_ZELDA, isLocationRenewable } from './locations';
 import { World } from './world';
 
 const EXTRA_ITEMS = [
@@ -16,6 +16,154 @@ const EXTRA_ITEMS = [
   'OOT_MASK_ZORA',
   'MM_MASK_DEKU',
   'MM_SWORD',
+];
+
+const ITEM_POOL_SCARCE = [
+  'OOT_BOMB_BAG',
+  'OOT_BOW',
+  'OOT_MAGIC_UPGRADE',
+  'OOT_OCARINA',
+  'OOT_SLINGSHOT',
+  'MM_MAGIC_UPGRADE',
+  'MM_BOW',
+  'MM_SWORD',
+  'MM_BOMB_BAG',
+  'MM_OCARINA',
+  'SHARED_BOW',
+  'SHARED_BOMB_BAG',
+  'SHARED_MAGIC_UPGRADE',
+];
+
+const ITEM_POOL_SCARCE_NOLIMIT = [
+  'OOT_STICK_UPGRADE',
+  'OOT_NUT_UPGRADE',
+  'OOT_SWORD',
+  'OOT_SWORD_GORON',
+];
+
+const ITEM_POOL_PLENTIFUL = [
+  'OOT_RUTO_LETTER',
+  'OOT_WEIRD_EGG',
+  'OOT_POCKET_EGG',
+  'OOT_ARROW_FIRE',
+  'OOT_ARROW_LIGHT',
+  'OOT_ARROW_ICE',
+  'OOT_BOMB_BAG',
+  'OOT_BOOMERANG',
+  'OOT_BOOTS_HOVER',
+  'OOT_BOOTS_IRON',
+  'OOT_BOW',
+  'OOT_CHICKEN',
+  'OOT_HAMMER',
+  'OOT_HOOKSHOT',
+  'OOT_LENS',
+  'OOT_MAGIC_UPGRADE',
+  'OOT_OCARINA',
+  'OOT_SCALE',
+  'OOT_SHIELD',
+  'OOT_SHIELD_MIRROR',
+  'OOT_SLINGSHOT',
+  'OOT_SPELL_FIRE',
+  'OOT_SPELL_WIND',
+  'OOT_SPELL_LOVE',
+  'OOT_STRENGTH',
+  'OOT_SWORD',
+  'OOT_SWORD_GORON',
+  'OOT_SWORD_KOKIRI',
+  'OOT_SWORD_KNIFE',
+  'OOT_SWORD_BIGGORON',
+  'OOT_TUNIC_GORON',
+  'OOT_TUNIC_ZORA',
+  'OOT_ZELDA_LETTER',
+  'OOT_MAGIC_BEAN',
+  'OOT_STONE_OF_AGONY',
+  'OOT_WALLET',
+  'OOT_POCKET_CUCCO',
+  'OOT_COJIRO',
+  'OOT_ODD_MUSHROOM',
+  'OOT_ODD_POTION',
+  'OOT_POACHER_SAW',
+  'OOT_BROKEN_GORON_SWORD',
+  'OOT_PRESCRIPTION',
+  'OOT_EYEBALL_FROG',
+  'OOT_EYE_DROPS',
+  'OOT_CLAIM_CHECK',
+  'OOT_MASK_TRUTH',
+  'OOT_MASK_SKULL',
+  'OOT_MASK_SPOOKY',
+  'OOT_MASK_GERUDO',
+  'OOT_MASK_ZORA',
+  'OOT_MASK_GORON',
+  'OOT_MASK_BUNNY',
+  'OOT_MASK_KEATON',
+  'MM_BOTTLED_GOLD_DUST',
+  'MM_MASK_DEKU',
+  'MM_MASK_GORON',
+  'MM_MASK_ZORA',
+  'MM_MASK_CAPTAIN',
+  'MM_MASK_GIANT',
+  'MM_MASK_ALL_NIGHT',
+  'MM_MASK_BUNNY',
+  'MM_MASK_KEATON',
+  'MM_MASK_GARO',
+  'MM_MASK_ROMANI',
+  'MM_MASK_TROUPE_LEADER',
+  'MM_MASK_POSTMAN',
+  'MM_MASK_COUPLE',
+  'MM_MASK_GREAT_FAIRY',
+  'MM_MASK_GIBDO',
+  'MM_MASK_DON_GERO',
+  'MM_MASK_KAMARO',
+  'MM_MASK_TRUTH',
+  'MM_MASK_STONE',
+  'MM_MASK_BREMEN',
+  'MM_MASK_BLAST',
+  'MM_MASK_SCENTS',
+  'MM_MASK_KAFEI',
+  'MM_MASK_FIERCE_DEITY',
+  'MM_MAGIC_UPGRADE',
+  'MM_BOMBER_NOTEBOOK',
+  'MM_BOW',
+  'MM_OCARINA',
+  'MM_SWORD',
+  'MM_SHIELD',
+  'MM_SHIELD_MIRROR',
+  'MM_BOMB_BAG',
+  'MM_LENS',
+  'MM_ARROW_FIRE',
+  'MM_ARROW_ICE',
+  'MM_ARROW_LIGHT',
+  'MM_POWDER_KEG',
+  'MM_HOOKSHOT',
+  'MM_PICTOGRAPH_BOX',
+  'MM_MAGIC_BEAN',
+  'MM_MOON_TEAR',
+  'MM_DEED_LAND',
+  'MM_DEED_SWAMP',
+  'MM_DEED_MOUNTAIN',
+  'MM_DEED_OCEAN',
+  'MM_ROOM_KEY',
+  'MM_LETTER_TO_KAFEI',
+  'MM_PENDANT_OF_MEMORIES',
+  'MM_LETTER_TO_MAMA',
+  'MM_WALLET',
+  'MM_GREAT_FAIRY_SWORD',
+  'MM_SPIN_UPGRADE',
+  'SHARED_BOW',
+  'SHARED_BOMB_BAG',
+  'SHARED_MAGIC_UPGRADE',
+  'SHARED_ARROW_FIRE',
+  'SHARED_ARROW_ICE',
+  'SHARED_ARROW_LIGHT',
+  'SHARED_HOOKSHOT',
+  'SHARED_LENS',
+  'SHARED_OCARINA',
+  'SHARED_MASK_GORON',
+  'SHARED_MASK_ZORA',
+  'SHARED_MASK_TRUTH',
+  'SHARED_MASK_BUNNY',
+  'SHARED_MASK_KEATON',
+  'SHARED_WALLET',
 ];
 
 export class LogicPassWorldTransform {
@@ -87,6 +235,122 @@ export class LogicPassWorldTransform {
       amount = 1;
     }
     this.pool[item] = count + amount;
+  }
+
+  private scarcifyPool(delta: number) {
+    const { settings } = this.state;
+    const items = [...ITEM_POOL_SCARCE];
+    const itemsNolimit = [...ITEM_POOL_SCARCE_NOLIMIT];
+
+    /* Tunics - shopsanity */
+    if (settings.shopShuffleOot === 'full') {
+      items.push('OOT_TUNIC_GORON');
+      items.push('OOT_TUNIC_ZORA');
+    }
+
+    /* MM shared + fairy oca */
+    if (settings.sharedOcarina && settings.fairyOcarinaMm) {
+      items.push('SHARED_OCARINA');
+    }
+
+    for (const item of items) {
+      const amount = this.pool[item];
+      if (amount) {
+        let newAmount = amount - delta;
+        if (newAmount < 1)
+          newAmount = 1;
+        this.pool[item] = newAmount;
+      }
+    }
+
+    for (const item of itemsNolimit) {
+      this.removeItem(item, delta);
+    }
+
+    /* Remove heart pieces */
+    this.removeItem('OOT_HEART_PIECE');
+    this.removeItem('MM_HEART_PIECE');
+    this.removeItem('SHARED_HEART_PIECE');
+
+    /* Minimal - remove heart containers */
+    if (delta >= 2) {
+      this.removeItem('OOT_HEART_CONTAINER');
+      this.removeItem('MM_HEART_CONTAINER');
+      this.removeItem('SHARED_HEART_CONTAINER');
+    }
+  }
+
+  private mergeHearts(prefix: string) {
+    const hp = prefix + '_HEART_PIECE';
+    const hc = prefix + '_HEART_CONTAINER';
+
+    const hpCount = this.pool[hp] || 0;
+    if (hpCount) {
+      this.removeItem(hp);
+      this.addItem(hc, hpCount / 4);
+    }
+  }
+
+  private plentifulPool() {
+    const { settings } = this.state;
+    let items = [...ITEM_POOL_PLENTIFUL];
+
+    if (settings.songs === 'anywhere') {
+      items = [...items, ...ITEMS_SONGS];
+    }
+
+    if (settings.dungeonRewardShuffle === 'anywhere' || settings.dungeonRewardShuffle === 'dungeonsLimited') {
+      items = [...items, ...DUNGEON_REWARDS];
+    }
+
+    if (settings.shuffleGerudoCard) {
+      items.push('OOT_GERUDO_CARD');
+    }
+
+    if (settings.shuffleMasterSword && settings.progressiveSwordsOot !== 'progressive') {
+      items.push('OOT_SWORD_MASTER');
+    }
+
+    if (settings.zoraKing === 'open') {
+      items.push('OOT_BOTTLE_EMPTY');
+    }
+
+    if (settings.smallKeyShuffle === 'anywhere') {
+      items = [...items, ...ITEMS_SMALL_KEY];
+    }
+
+    if (settings.bossKeyShuffle === 'anywhere') {
+      items = [...items, ...ITEMS_BOSS_KEY];
+    }
+
+    if (settings.ganonBossKey === 'anywhere') {
+      items.push('OOT_BOSS_KEY_GANON');
+    }
+
+    if (settings.smallKeyShuffleHideout === 'anywhere') {
+      items = [...items, 'OOT_SMALL_KEY_GF'];
+    }
+
+    if (settings.mapCompassShuffle === 'anywhere') {
+      items = [...items, ...ITEMS_MAPS, ...ITEMS_COMPASSES];
+    }
+
+    if (settings.tingleShuffle === 'anywhere') {
+      items = [...items, ...ITEMS_TINGLE_MAPS];
+    }
+
+    /* Add extra items */
+    for (const item of items) {
+      const amount = this.pool[item];
+      if (amount) {
+        this.addItem(item);
+      }
+    }
+
+    /* Merge pieces of hearts */
+    this.mergeHearts('OOT');
+    this.mergeHearts('MM');
+    this.mergeHearts('SHARED');
   }
 
   /**
@@ -271,6 +535,18 @@ export class LogicPassWorldTransform {
       this.replaceItem('OOT_RECOVERY_HEART', 'SHARED_RECOVERY_HEART');
       this.replaceItem('MM_RECOVERY_HEART',  'SHARED_RECOVERY_HEART');
     }
+
+    switch (settings.itemPool) {
+    case 'scarce':
+      this.scarcifyPool(1);
+      break;
+    case 'minimal':
+      this.scarcifyPool(2);
+      break;
+    case 'plentiful':
+      this.plentifulPool();
+      break;
+    }
   }
 
   private removeLocations(locs: string[]) {
@@ -407,6 +683,18 @@ export class LogicPassWorldTransform {
       this.removeItem(item, 1);
     }
 
-    return { pool: this.pool };
+    /* Handle required junks */
+    const renewableJunks: Items = {};
+    for (const item of Object.keys(this.pool)) {
+      if (isJunk(item) && isItemConsumable(item)) {
+        for (const loc of this.locsByItem.get(item) || []) {
+          if (isLocationRenewable(this.state.world, loc) && !this.state.fixedLocations.has(loc)) {
+            addItem(renewableJunks, item);
+          }
+        }
+      }
+    }
+
+    return { pool: this.pool, renewableJunks };
   }
 }

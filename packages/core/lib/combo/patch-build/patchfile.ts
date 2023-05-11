@@ -21,7 +21,7 @@ export class Patchfile {
   private patches: Patch[] = [];
   public readonly hash: string;
 
-  constructor(hashOrBuffer : string | Buffer) {
+  constructor(hashOrBuffer: string | Buffer) {
     if (typeof hashOrBuffer === 'string') {
       this.hash = hashOrBuffer;
     } else {

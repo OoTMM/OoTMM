@@ -69,6 +69,10 @@ export class LogicPassConfig {
       config.add('DOOR_OF_TIME_OPEN');
     }
 
+    if (this.state.settings.dekuTree === 'open') {
+      config.add('OOT_OPEN_DEKU');
+    }
+
     if (this.state.settings.erDungeons !== 'none') {
       config.add('ER_DUNGEONS');
     }
@@ -208,6 +212,17 @@ export class LogicPassConfig {
 
     if (settings.childWallets) {
       config.add('CHILD_WALLET');
+    }
+
+    if (settings.wellAdult) {
+      config.add('OOT_ADULT_WELL');
+    }
+
+    if (settings.colossalWallets) {
+      config.add('COLOSSAL_WALLET');
+    }
+    if (settings.agelessItems) {
+      config.add('OOT_AGELESS_ITEMS')
     }
 
     return { mq, config };

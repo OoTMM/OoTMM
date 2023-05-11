@@ -1,4 +1,4 @@
-import { png } from "./png";
+import { png } from "../util/png";
 
 export const font = async (filename: string) => {
   const original = await png(filename, 'i4');

@@ -6,14 +6,14 @@
 "SPAWN CHILD":
   region: NONE
   exits:
-    "SPAWN COMMON": "true"
+    "GLOBAL": "true"
     "Link's House": "true"
 "SPAWN ADULT":
   region: NONE
   exits:
-    "SPAWN COMMON": "true"
+    "GLOBAL": "true"
     "Temple of Time": "true"
-"SPAWN COMMON":
+"GLOBAL":
   region: NONE
   exits:
     "SONGS": "has(OCARINA)"
@@ -50,15 +50,15 @@
     "Lost Woods": "true"
     "Lost Woods Bridge": "true"
     "Kokiri Shop": "true"
-    "Deku Tree": "is_child"
     "Kokiri Forest Storms Grotto": "hidden_grotto_storms"
+    "Kokiri Forest Near Deku Tree": "mido_moved"
   events:
-    STICKS: "can_boomerang || (is_child && has_weapon)"
     BOMBS: "true"
     RUPEES: "true"
     SEEDS: "is_child"
     ARROWS: "is_adult"
     MAGIC: "true"
+    MIDO_MOVED: "can_move_mido"
   locations:
     "Kokiri Forest Kokiri Sword Chest": "is_child"
     "Kokiri Forest GS Soil": "gs_soil && can_damage_skull"
@@ -67,6 +67,15 @@
   gossip:
     "Kokiri Gossip Near Lost Woods Open": "true"
     "Kokiri Gossip Near Lost Woods Grotto": "hidden_grotto_storms"
+"Kokiri Forest Near Deku Tree":
+  region: KOKIRI_FOREST
+  exits:
+    "Kokiri Forest": "mido_moved"
+    "Deku Tree": "is_child || (is_adult && setting(dekuTreeAdult) && mido_moved)"
+  events:
+    STICKS: "can_boomerang || (is_child && has_weapon)"
+    MIDO_MOVED: "can_move_mido"
+  gossip:
     "Kokiri Gossip Left of Deku Tree": "true"
     "Kokiri Gossip Right of Deku Tree": "true"
 "Kokiri Shop":
@@ -235,7 +244,7 @@
 "Market Entryway":
   region: MARKET
   exits:
-    "Hyrule Field": "is_day"
+    "Hyrule Field": "is_day || is_adult"
     "Market": "is_child"
     "Market Destroyed": "is_adult"
     "Market Pot House": "true"
@@ -406,9 +415,9 @@
   exits:
     "Lon Lon Ranch": "true"
   locations:
-    "Lon Lon Ranch Grotto Left Scrub": "is_child && can_hit_scrub"
-    "Lon Lon Ranch Grotto Center Scrub": "is_child && can_hit_scrub"
-    "Lon Lon Ranch Grotto Right Scrub": "is_child && can_hit_scrub"
+    "Lon Lon Ranch Grotto Left Scrub": "is_child && can_use_wallet(1) && can_hit_scrub"
+    "Lon Lon Ranch Grotto Center Scrub": "is_child && can_use_wallet(1) && can_hit_scrub"
+    "Lon Lon Ranch Grotto Right Scrub": "is_child && can_use_wallet(1) && can_hit_scrub"
 "Hyrule Castle":
   region: HYRULE_CASTLE
   time: flow
@@ -608,7 +617,7 @@
     "Hyrule Field": "true"
     "Kakariko Trail Start": "setting(kakarikoGate, open) || event(KAKARIKO_GATE_OPEN) || is_adult"
     "Graveyard": "true"
-    "Bottom of the Well": "is_child && event(WELL_DRAIN)"
+    "Bottom of the Well": "(is_child || (is_adult && setting(wellAdult))) && event(WELL_DRAIN)"
     "Skulltula House": "true"
     "Shooting Gallery Adult": "is_adult && is_day"
     "Kakariko Rooftop": "(is_child && is_day) || can_hookshot || (is_adult && trick(OOT_PASS_COLLISION))"
@@ -714,7 +723,7 @@
   events:
     WELL_DRAIN: "is_child && can_play(SONG_STORMS)"
   locations:
-    "Windmill HP": "can_boomerang || event(WINDMILL_TOP) || trick(OOT_WINDMILL_HP_NOTHING)"
+    "Windmill HP": "can_boomerang || event(WINDMILL_TOP) || (is_adult && trick(OOT_WINDMILL_HP_NOTHING))"
     "Windmill Song of Storms": "is_adult && has(OCARINA)"
 "Kakariko Carpenter House":
   region: KAKARIKO
@@ -1195,7 +1204,7 @@
 "Death Mountain Crater Warp":
   region: DEATH_MOUNTAIN_CRATER
   exits:
-    "Fire Temple Entry": "is_adult && has_tunic_goron"
+    "Fire Temple Entry": "(is_adult && has_tunic_goron) || (is_child && setting(fireChild))"
     "Death Mountain Crater Bottom": "can_hookshot || has_hover_boots || can_ride_bean(BEAN_DEATH_MOUNTAIN_CRATER)"
   events:
     BEAN_DEATH_MOUNTAIN_CRATER: "can_use_beans"

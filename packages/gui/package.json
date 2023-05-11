@@ -67,7 +67,8 @@
     "targets": {
       "build": {
         "inputs": ["default", "version"],
-        "outputs": ["dist"]
+        "outputs": ["dist"],
+        "dependsOn": ["^build"]
       },
       "serve": {
         "dependsOn": ["^build"]

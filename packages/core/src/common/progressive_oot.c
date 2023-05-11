@@ -1,5 +1,12 @@
 #include <combo.h>
 
+static s32 progressiveRutoLetter(void)
+{
+    if (gOotExtraItems.rutoLetter)
+        return GI_OOT_BOTTLE_EMPTY;
+    return GI_OOT_RUTO_LETTER;
+}
+
 static s32 progressiveBombBag(void)
 {
     if (gOotSave.inventory.items[ITS_OOT_BOMBS] == ITEM_NONE)
@@ -112,7 +119,7 @@ static s32 progressiveWallet(void)
     {
     case 0: return GI_OOT_WALLET2;
     case 1: return GI_OOT_WALLET3;
-    default: return GI_OOT_WALLET4;
+    default: return comboConfig(CFG_COLOSSAL_WALLET) ? GI_OOT_WALLET4 : GI_OOT_WALLET3;;
     }
 }
 
@@ -210,6 +217,10 @@ s32 comboProgressiveOot(s32 gi)
     case GI_OOT_STICK_UPGRADE:
     case GI_OOT_STICK_UPGRADE2:
         gi = progressiveUpgradeStick();
+        break;
+    /* Misc */
+    case GI_OOT_RUTO_LETTER:
+        gi = progressiveRutoLetter();
         break;
     default:
         break;

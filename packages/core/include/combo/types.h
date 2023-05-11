@@ -22,6 +22,14 @@ Vec3s;
 
 typedef struct PACKED
 {
+    s32 x;
+    s32 y;
+    s32 z;
+}
+Vec3i;
+
+typedef struct PACKED
+{
     float x;
     float y;
     float z;

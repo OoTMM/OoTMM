@@ -19,7 +19,8 @@
       "defines": ["${myDefines}", "GAME_OOT=1"],
       "cStandard": "gnu17",
       "cppStandard": "gnu++17",
-      "intelliSenseMode": "linux-gcc-x86"
+      "intelliSenseMode": "linux-gcc-x86",
+      "compilerPath": ""
     },
     {
       "name": "MM",
@@ -27,7 +28,8 @@
       "defines": ["${myDefines}", "GAME_MM=1"],
       "cStandard": "gnu17",
       "cppStandard": "gnu++17",
-      "intelliSenseMode": "linux-gcc-x86"
+      "intelliSenseMode": "linux-gcc-x86",
+      "compilerPath": ""
     }
   ],
   "version": 4

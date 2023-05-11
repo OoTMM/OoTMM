@@ -20,6 +20,7 @@ PATCH_START 0x808bb8a4
 PATCH_END
 
 /* Check for boss beaten flag to enable warp pad */
+PATCH_GROUP PG_MM_BOSS_WARP_PADS_BEATEN
 PATCH_START 0x808b8d44
   lui a0,%HI(gMmExtraBoss)
 PATCH_END
@@ -51,6 +52,7 @@ PATCH_END
 PATCH_START 0x808b8dbc
   lbu v0,0(a0)
 PATCH_END
+PATCH_GROUP_END
 
 /* Skip boss shortcut cutscene */
 PATCH_START 0x808bab2c

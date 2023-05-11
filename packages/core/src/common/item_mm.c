@@ -727,6 +727,7 @@ int comboAddItemMm(s16 gi, int noEffect)
         break;
     case GI_MM_BOTTLED_GOLD_DUST:
         addNewBottle(ITEM_MM_BOTTLED_GOLD_DUST);
+        gMmExtraItems.goldDust = 1;
         break;
     case GI_MM_BOTTLE_CHATEAU:
         addNewBottle(ITEM_MM_BOTTLE_CHATEAU);

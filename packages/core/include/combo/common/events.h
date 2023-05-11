@@ -1,15 +1,17 @@
 #ifndef COMBO_COMMON_EVENTS_H
 #define COMBO_COMMON_EVENTS_H
 
-#define OOT_EV_INF(a, b)    (((a) << 4) | (b))
+#define OOT_EV(a, b)        (((a) << 4) | (b))
 #define MM_EV(a, b)         (((a) << 3) | (b))
 
-#define EV_OOT_CHK_DEKU_MIDO_MEET           0x02
-#define EV_OOT_CHK_DEKU_MIDO_SWORD_SHIELD   0x04
-#define EV_OOT_CHK_EMERALD_TREE_DEAD        0x07
-#define EV_OOT_CHK_GOHMA                    0x09
-#define EV_OOT_CHK_DEKU_TREE_MEET           0x0c
-#define EV_OOT_CHK_MALON_SPOKEN_HYRULE      0x10
+#define EV_OOT_CHK_DEKU_MIDO_MEET           OOT_EV(0,  2)
+#define EV_OOT_CHK_DEKU_MIDO_COMPLAIN       OOT_EV(0,  3)
+#define EV_OOT_CHK_DEKU_MIDO_SWORD_SHIELD   OOT_EV(0,  4)
+#define EV_OOT_CHK_DEKU_TREE_OPEN           OOT_EV(0,  5)
+#define EV_OOT_CHK_EMERALD_TREE_DEAD        OOT_EV(0,  7)
+#define EV_OOT_CHK_GOHMA                    OOT_EV(0,  9)
+#define EV_OOT_CHK_DEKU_TREE_MEET           OOT_EV(0, 12)
+#define EV_OOT_CHK_MALON_SPOKEN_HYRULE      OOT_EV(1,  0)
 #define EV_OOT_CHK_MALON_EGG                0x12
 #define EV_OOT_CHK_CHILD_TALON_WOKEN        0x13
 #define EV_OOT_CHK_CHILD_TALON_FLED         0x14
@@ -63,18 +65,20 @@
 #define EV_OOT_ITEM_DEKU_SEEDS              0x13
 #define EV_OOT_ITEM_DAMPE_GRAVEYARD_HP      0x1c
 #define EV_OOT_ITEM_ANJU_POCKET_EGG         0x2c
+#define EV_OOT_ITEM_HBA_1500                OOT_EV(0, 15)
 
 #define EV_OOT_INF_KAKARIKO_GATE_OPEN       0x076
 #define EV_OOT_INF_KING_ZORA_THAWED         0x138
 #define EV_OOT_INF_MAGIC_JAR                0x198
-#define EV_OOT_INF_RUTO_ON_BLUE_SWITCH      OOT_EV_INF(20, 0)
-#define EV_OOT_INF_RUTO_MET                 OOT_EV_INF(20, 1)
-#define EV_OOT_INF_RUTO_TALKED              OOT_EV_INF(20, 2)
-#define EV_OOT_INF_RUTO_ESCORT              OOT_EV_INF(20, 3)
-#define EV_OOT_INF_RUTO_ASK_SAPPHIRE        OOT_EV_INF(20, 4)
-#define EV_OOT_INF_RUTO_GOT_SAPPHIRE        OOT_EV_INF(20, 5)
-#define EV_OOT_INF_RUTO_KIDNAPPED           OOT_EV_INF(20, 6)
-#define EV_OOT_INF_RUTO_TOP_FLOOR           OOT_EV_INF(20, 7)
+#define EV_OOT_INF_RUTO_ON_BLUE_SWITCH      OOT_EV(20, 0)
+#define EV_OOT_INF_RUTO_MET                 OOT_EV(20, 1)
+#define EV_OOT_INF_RUTO_TALKED              OOT_EV(20, 2)
+#define EV_OOT_INF_RUTO_ESCORT              OOT_EV(20, 3)
+#define EV_OOT_INF_RUTO_ASK_SAPPHIRE        OOT_EV(20, 4)
+#define EV_OOT_INF_RUTO_GOT_SAPPHIRE        OOT_EV(20, 5)
+#define EV_OOT_INF_RUTO_KIDNAPPED           OOT_EV(20, 6)
+#define EV_OOT_INF_RUTO_TOP_FLOOR           OOT_EV(20, 7)
+#define EV_OOT_INF_HBA_1000                 OOT_EV(25, 0)
 
 /* Custom flags that seems unused */
 #define EV_OOT_CHK_SONG_SARIA               0x58
@@ -95,7 +99,10 @@
 #define EV_MM_WEEK_BEAVER_RACE1_DONE            MM_EV(0x5d, 0)
 #define EV_MM_WEEK_KEETA_DEAD                   MM_EV(23,   2)
 #define EV_MM_WEEK_PRINCESS_RETURNED            MM_EV(23,   5)
+#define EV_MM_WEEK_ARCHERY_SWAMP_HP             MM_EV(32,   1)
 #define EV_MM_WEEK_BEAVER_RACE_ALT              MM_EV(24,   2)
+#define EV_MM_WEEK_ARCHERY_SWAMP_QUIVER         MM_EV(59,   4)
+#define EV_MM_WEEK_ARCHERY_TOWN_QUIVER          MM_EV(59,   5)
 #define EV_MM_WEEK_PAMELA_FATHER                MM_EV(75,   5)
 #define EV_MM_WEEK_TOWN_FAIRY                   MM_EV(8,    7)
 

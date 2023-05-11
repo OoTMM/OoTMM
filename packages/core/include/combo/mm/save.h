@@ -166,7 +166,8 @@ typedef struct
     u32                     unk_ee8;
     u32                     horseBackBalloonHighScore;
     u32                     lotteryCodeGuess;
-    u32                     shootingGalleryHighScore;
+    u16                     shootingGalleryHighScoreSwamp;
+    u16                     shootingGalleryHighScoreTown;
     u8                      weekEventReg[100];
     u32                     mapsVisited;
     u32                     worldMapCloudVisibility;
@@ -258,7 +259,8 @@ typedef struct
 {
     u8 hookshot;
     u8 ocarina;
-    u8 unused;
+    u8 goldDust:1;
+    u8 unused:7;
     u8 unused2;
 }
 MmExtraItems;

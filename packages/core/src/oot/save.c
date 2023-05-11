@@ -68,9 +68,12 @@ void Sram_AfterOpenSave(void)
     /* Read the other save */
     comboReadForeignSave();
 
-    /* Skip early game (Mido out of the way, deku tree open) */
-    gSave.eventsChk[0] |= 0x103c;
+    /* Met deku tree - deku tree open - met mido */
+    gSave.eventsChk[0] |= 0x102c;
     gSave.eventsMisc[0] |= 0x000b;
+
+    if (comboConfig(CFG_OOT_OPEN_DEKU))
+        SetEventChk(EV_OOT_CHK_DEKU_MIDO_SWORD_SHIELD);
 
     comboOnSaveLoad();
 

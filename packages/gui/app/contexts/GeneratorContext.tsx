@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState } from 'react';
-import { GeneratorOutput, Items, Settings, itemPool, OptionsInput, mergeSettings, makeSettings, SettingsPatch } from '@ootmm/core';
+import { GeneratorOutput, Items, Settings, itemPool, OptionsInput, mergeSettings, makeSettings, SettingsPatch, Cosmetics } from '@ootmm/core';
 import { Buffer } from 'buffer';
+import { merge } from 'lodash';
 
 import * as API from '../api';
 
@@ -21,6 +22,7 @@ type GeneratorState = {
   },
   isPatch: boolean;
   settings: Settings;
+  cosmetics: Cosmetics;
   itemPool: Items;
 }
 
@@ -31,6 +33,7 @@ type GeneratorContext = {
   setSeed: (seed: string) => void;
   setIsPatch: (isPatch: boolean) => void;
   setSettings: (settings: SettingsPatch) => Settings;
+  setCosmetics: (cosmetics: Partial<Cosmetics>) => Cosmetics;
   overrideSettings: (settings: Settings) => Settings;
 }
 
@@ -38,6 +41,7 @@ export const GeneratorContext = createContext<GeneratorContext>(null as any);
 
 function createState(): GeneratorState {
   const settings = API.initialSettings();
+  const cosmetics = API.initialCosmetics();
   const ip = itemPool(settings);
   settings.startingItems = API.restrictItemsByPool(settings.startingItems, ip);
   return {
@@ -51,6 +55,7 @@ function createState(): GeneratorState {
     },
     isPatch: false,
     settings,
+    cosmetics,
     itemPool: ip,
     generator: {
       isGenerating: false,
@@ -87,8 +92,14 @@ export function GeneratorContextProvider({ children }: { children: React.ReactNo
     return settings;
   };
 
+  const setCosmetics = (patch: Partial<Cosmetics>) => {
+    const cosmetics = merge({}, state.cosmetics, patch);
+    setState({ ...state, cosmetics });
+    return cosmetics;
+  }
+
   return (
-    <GeneratorContext.Provider value={{ state, setState, setFile, setSeed, setIsPatch, setSettings, overrideSettings }}>
+    <GeneratorContext.Provider value={{ state, setState, setFile, setSeed, setIsPatch, setSettings, overrideSettings, setCosmetics }}>
       {children}
     </GeneratorContext.Provider>
   );
@@ -117,7 +128,7 @@ export function useGenerator() {
     if (state.isPatch) {
       patch = Buffer.from(await state.romConfig.files.patch!.arrayBuffer());
     }
-    const options: OptionsInput = { seed: state.romConfig.seed, settings: state.settings };
+    const options: OptionsInput = { seed: state.romConfig.seed, settings: state.settings, cosmetics: state.cosmetics };
     try {
       const result = await API.generate({ oot, mm, patch }, options, (message) => {
         console.log(message);
@@ -191,4 +202,15 @@ export function useStartingItems() {
   const decr = (item: string) => alterItem(item, -1);
 
   return { startingItems, itemPool, incr, decr, reset };
+}
+
+export function useCosmetics() {
+  const ctx = useContext(GeneratorContext);
+  const { cosmetics } = ctx.state;
+  const setCosmetics = (patch: Partial<Cosmetics>) => {
+    const newCosmetics = ctx.setCosmetics(patch);
+    localStorage.setItem('cosmetics', JSON.stringify(newCosmetics));
+    return newCosmetics;
+  }
+  return [cosmetics, setCosmetics] as const;
 }

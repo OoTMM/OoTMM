@@ -170,11 +170,12 @@ function resolveSpecialCond(settings: Settings, state: State, special: string): 
     throw new Error(`Unknown special condition: ${special}`);
   }
   let items = new Set<string>();
+  let itemsUnique = new Set<string>();
   const cond = specialConds[special as keyof typeof specialConds];
 
-  if (cond.stones) items = new Set([...items, ...ITEMS_STONES]);
-  if (cond.medallions) items = new Set([...items, ...ITEMS_MEDALLIONS]);
-  if (cond.remains) items = new Set([...items, ...ITEMS_REMAINS]);
+  if (cond.stones) itemsUnique = new Set([...itemsUnique, ...ITEMS_STONES]);
+  if (cond.medallions) itemsUnique = new Set([...itemsUnique, ...ITEMS_MEDALLIONS]);
+  if (cond.remains) itemsUnique = new Set([...itemsUnique, ...ITEMS_REMAINS]);
   if (cond.skullsGold) items.add('OOT_GS_TOKEN');
   if (cond.skullsSwamp) items.add('MM_GS_TOKEN_SWAMP');
   if (cond.skullsOcean) items.add('MM_GS_TOKEN_OCEAN');
@@ -183,12 +184,13 @@ function resolveSpecialCond(settings: Settings, state: State, special: string): 
   if (cond.fairiesGB) items.add('MM_STRAY_FAIRY_GB');
   if (cond.fairiesST) items.add('MM_STRAY_FAIRY_ST');
   if (cond.fairyTown) items.add('MM_STRAY_FAIRY_TOWN');
-  if (cond.masksRegular) items = new Set([...items, ...ITEMS_MASKS_REGULAR]);
-  if (cond.masksTransform) items = new Set([...items, ...ITEMS_MASKS_TRANSFORM]);
-  if (cond.masksOot) items = new Set([...items, ...ITEMS_MASKS_OOT]);
+  if (cond.masksRegular) itemsUnique = new Set([...itemsUnique, ...ITEMS_MASKS_REGULAR]);
+  if (cond.masksTransform) itemsUnique = new Set([...itemsUnique, ...ITEMS_MASKS_TRANSFORM]);
+  if (cond.masksOot) itemsUnique = new Set([...itemsUnique, ...ITEMS_MASKS_OOT]);
 
-  const result = itemsCount(state, [...items]) >= cond.count;
-  const dependencies = { items };
+  const countUnique = [...itemsUnique].filter(item => itemCount(state, item) > 0).length;
+  const result = (itemsCount(state, [...items]) + countUnique) >= cond.count;
+  const dependencies = { items: new Set([...items, ...itemsUnique]) };
 
   return { result, dependencies };
 }
