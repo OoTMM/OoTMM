@@ -12,7 +12,7 @@ static void debugCheat(GameState_Play* play)
         gSave.playerData.swordHealth = 8;
         gSave.isBiggoronSword = 1;
 
-        gSave.inventory.quest.gerudoCard = 1;
+        //gSave.inventory.quest.gerudoCard = 1;
         gSave.inventory.dungeonKeys[SCE_OOT_TEMPLE_FIRE] = 8;
         gSave.inventory.items[ITS_OOT_STICKS] = ITEM_OOT_STICK;
         gSave.inventory.items[ITS_OOT_NUTS] = ITEM_OOT_NUT;
@@ -30,7 +30,7 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.items[ITS_OOT_BOMBCHU] = ITEM_OOT_BOMBCHU_10;
         gSave.inventory.items[ITS_OOT_TRADE_CHILD] = ITEM_OOT_ZELDA_LETTER;
         gSave.inventory.items[ITS_OOT_HAMMER] = ITEM_OOT_HAMMER;
-        gSave.inventory.items[ITS_OOT_HOOKSHOT] = ITEM_OOT_LONGSHOT;
+        //gSave.inventory.items[ITS_OOT_HOOKSHOT] = ITEM_OOT_LONGSHOT;
         gSave.inventory.items[ITS_OOT_LENS] = ITEM_OOT_LENS;
         gSave.inventory.items[ITS_OOT_SPELL_WIND] = ITEM_OOT_SPELL_WIND;
         gSave.inventory.equipment.swords = 0x7;

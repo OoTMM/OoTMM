@@ -1,5 +1,19 @@
 #include <combo.h>
 
+void EnGe1_AfterCaught(void)
+{
+    s32 entrance;
+
+    if (gPlay->sceneId == SCE_OOT_GERUDO_VALLEY)
+        entrance = 0x1a5;
+    else if (gSave.age == AGE_CHILD || gSave.inventory.items[ITS_OOT_HOOKSHOT] == ITEM_NONE)
+        entrance = 0x129;
+    else
+        entrance = 0x5f8;
+
+    gPlay->transition.entrance = entrance;
+}
+
 int EnGe1_IsPeaceful(void)
 {
     return gSave.inventory.quest.gerudoCard;
