@@ -50,7 +50,7 @@ static int canUseDpadItem(GameState_Play* play, s16 itemId, int flags)
 
     /* Boots */
 #if defined(GAME_OOT)
-    if (itemId == ITEM_OOT_IRON_BOOTS || itemId == ITEM_OOT_HOVER_BOOTS)
+    if (itemId == ITEM_OOT_BOOTS_IRON || itemId == ITEM_OOT_BOOTS_HOVER)
         isEquip = 1;
     if ((itemId == ITEM_OOT_OCARINA_FAIRY || itemId == ITEM_OOT_OCARINA_TIME) && play->interfaceCtx.restrictions.ocarina)
         return 0;
@@ -153,7 +153,7 @@ static void toggleBoots(GameState_Play* play, s16 itemId)
 {
     u16 targetBoots;
 
-    targetBoots = (itemId == ITEM_OOT_HOVER_BOOTS) ? 3 : 2;
+    targetBoots = (itemId == ITEM_OOT_BOOTS_HOVER) ? 3 : 2;
     if (gSave.equips.equipment.boots == targetBoots)
         gSave.equips.equipment.boots = 1;
     else
@@ -172,7 +172,7 @@ static void dpadUseItem(GameState_Play* play, int index, int flags)
     itemId = sDpadItems[index];
     if (!canUseDpadItem(play, itemId, flags))
         return;
-    if (itemId == ITEM_OOT_HOVER_BOOTS || itemId == ITEM_OOT_IRON_BOOTS)
+    if (itemId == ITEM_OOT_BOOTS_HOVER || itemId == ITEM_OOT_BOOTS_IRON)
     {
         toggleBoots(play, itemId);
     }
@@ -211,8 +211,8 @@ void comboDpadUpdate(GameState_Play* play)
     }
     else
     {
-        sDpadItems[DPAD_LEFT] = (gSave.inventory.equipment.boots & EQ_OOT_BOOTS_IRON) ? ITEM_OOT_IRON_BOOTS : ITEM_NONE;
-        sDpadItems[DPAD_RIGHT] = (gSave.inventory.equipment.boots & EQ_OOT_BOOTS_HOVER) ? ITEM_OOT_HOVER_BOOTS : ITEM_NONE;
+        sDpadItems[DPAD_LEFT] = (gSave.inventory.equipment.boots & EQ_OOT_BOOTS_IRON) ? ITEM_OOT_BOOTS_IRON : ITEM_NONE;
+        sDpadItems[DPAD_RIGHT] = (gSave.inventory.equipment.boots & EQ_OOT_BOOTS_HOVER) ? ITEM_OOT_BOOTS_HOVER : ITEM_NONE;
     }
 }
 #endif

@@ -1,5 +1,9 @@
 #include <combo.h>
 
+ALIGNED(16) const Gfx kDListEmpty[] = {
+    gsSPEndDisplayList(),
+};
+
 void PreDraw1(Actor* actor, GameState_Play* play, int unk);
 void PreDraw2(Actor* actor, GameState_Play* play, int unk);
 

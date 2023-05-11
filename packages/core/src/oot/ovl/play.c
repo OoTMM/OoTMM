@@ -251,10 +251,10 @@ void hookPlay_Init(GameState_Play* play)
         gSave.equips.equipment.swords = 0;
         switch (gSave.equips.buttonItems[0])
         {
-        case ITEM_OOT_KOKIRI_SWORD:
-        case ITEM_OOT_MASTER_SWORD:
-        case ITEM_OOT_GIANT_KNIFE:
-        case ITEM_OOT_GIANT_KNIFE_BROKEN:
+        case ITEM_OOT_SWORD_KOKIRI:
+        case ITEM_OOT_SWORD_MASTER:
+        case ITEM_OOT_SWORD_KNIFE_BIGGORON:
+        case ITEM_OOT_SWORD_KNIFE_BROKEN:
             gSave.equips.buttonItems[0] = ITEM_NONE;
             break;
         }
