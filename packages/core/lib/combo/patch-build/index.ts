@@ -40,7 +40,14 @@ function asmPatchGroups(settings: Settings) {
     OOT_ADULT_DEKU_TREE: settings.dekuTreeAdult,
     OOT_FIRE_TEMPLE_CHILD: settings.fireChild,
     OOT_FAST_BUNNY_HOOD: settings.fastBunnyHood,
-    OOT_AGELESS_ITEMS: settings.agelessItems,
+    OOT_AGELESS_SWORDS: settings.agelessSwords,
+    OOT_AGELESS_SHIELDS: settings.agelessShields,
+    OOT_AGELESS_TUNICS: settings.agelessTunics,
+    OOT_AGELESS_BOOTS: settings.agelessBoots,
+    OOT_AGELESS_STICKS: settings.agelessSticks,
+    OOT_AGELESS_BOOMERANG: settings.agelessBoomerang,
+    OOT_AGELESS_HAMMER: settings.agelessHammer,
+    OOT_AGELESS_CHILD_TRADE: settings.agelessChildTrade,
   };
   const keys = Object.keys(groups) as PatchGroup[];
   return keys.filter((k) => groups[k]);
