@@ -368,6 +368,20 @@ void Shader_CustomSpin(GameState_Play* play, s16 shaderId)
     CLOSE_DISPS();
 }
 
+void Shader_CustomOwl(GameState_Play* play, s16 shaderId)
+{
+    const Shader* shader;
+    static const float scale = 0.01f;
+
+    shader = &kShaders[shaderId];
+    OPEN_DISPS(play->gs.gfx);
+    ModelViewScale(scale, scale, scale, MAT_MUL);
+    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    InitListPolyOpa(play->gs.gfx);
+    gSPDisplayList(POLY_OPA_DISP++, shader->lists[0]);
+    CLOSE_DISPS();
+}
+
 typedef struct
 {
     Vtx_t vertices[16];

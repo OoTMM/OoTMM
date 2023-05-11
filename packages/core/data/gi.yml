@@ -353,3 +353,4 @@ MM_HOOKSHOT_SHORT:            0xe8
 MM_SONG_SUN:                  0xe9
 MM_WALLET:                    0xea
 MM_WALLET4:                   0xeb
+MM_OWL_CLOCK_TOWN:            0xec

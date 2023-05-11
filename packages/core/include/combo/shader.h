@@ -219,5 +219,6 @@ extern const Shader kShaders[256];
 #define DRAWGI_MM_STRAY_FAIRY_TOWN          0xc6
 #define DRAWGI_MILK                         0xc7
 #define DRAWGI_MM_CHATEAU                   0xc8
+#define DRAWGI_MM_OWL                       0xc9
 
 #endif
