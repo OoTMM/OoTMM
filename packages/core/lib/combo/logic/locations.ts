@@ -7,6 +7,12 @@ export const ONE_TIME_SHOP_CHECKS = [
   'MM Curiosity Shop All-Night Mask',
 ];
 
+export const MM_SCRUBS = [
+  'MM Southern Swamp Scrub Shop',
+  'MM Zora Hall Scrub Shop',
+  'MM Ikana Valley Scrub Shop',
+];
+
 export const OOT_ONE_TIME_SCRUBS = [
   'OOT Lost Woods Scrub Sticks Upgrade',
   'OOT Lost Woods Grotto Scrub Nuts Upgrade',
@@ -19,6 +25,8 @@ export const LOCATIONS_ZELDA = [
 ];
 
 export function isLocationRenewable(world: World, loc: string) {
+  if (MM_SCRUBS.includes(loc))
+    return true;
   if (ONE_TIME_SHOP_CHECKS.includes(loc))
     return false;
   const check = world.checks[loc];

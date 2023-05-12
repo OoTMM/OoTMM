@@ -217,6 +217,11 @@ static int isItemBuyableOot(s16 gi)
 
 static int isItemBuyableMm(s16 gi)
 {
+    switch (gi)
+    {
+    case GI_MM_MAGIC_BEAN:
+        return (gMmSave.inventory.items[ITS_MM_BEANS] == ITEM_MM_MAGIC_BEAN);
+    }
     return 1;
 }
 

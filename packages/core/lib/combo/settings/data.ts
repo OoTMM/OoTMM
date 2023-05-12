@@ -197,6 +197,13 @@ export const SETTINGS = [{
   description: 'Should Business Scrubs in OOT shuffled? If not, the one in Hyrule Field by Lake Hylia fences, the one by the Bridge in Lost Woods and the front one in the grotto near Sacred Forest Meadow will still be shuffled',
   default: false
 }, {
+  key: 'scrubShuffleMm',
+  name: 'Scrub Shuffle (MM)',
+  category: 'main.shuffle',
+  type: 'boolean',
+  description: 'Shuffle the three business scrubs that sells regular items in MM',
+  default: false
+}, {
   key: 'cowShuffleOot',
   name: 'Cow Shuffle (OoT)',
   category: 'main.shuffle',
