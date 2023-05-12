@@ -1,6 +1,7 @@
 import { Monitor } from '../monitor';
 import { Settings } from '../settings';
 import { exprTrue } from './expr';
+import { ITEMS_OWLS } from './items';
 import { Items, addItem, ITEMS_MAPS, ITEMS_COMPASSES, ITEMS_TINGLE_MAPS, ITEMS_SONGS, DUNGEON_REWARDS, ITEMS_SMALL_KEY, ITEMS_BOSS_KEY, isJunk, isItemConsumable } from './items';
 import { LOCATIONS_ZELDA, isLocationRenewable } from './locations';
 import { World } from './world';
@@ -337,6 +338,10 @@ export class LogicPassWorldTransform {
 
     if (settings.tingleShuffle === 'anywhere') {
       items = [...items, ...ITEMS_TINGLE_MAPS];
+    }
+
+    if (settings.owlShuffle === 'anywhere') {
+      items = [...items, ...ITEMS_OWLS];
     }
 
     /* Add extra items */
