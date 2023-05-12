@@ -2,7 +2,7 @@
   region: NONE
   exits:
     "OOT SONGS": "setting(crossWarpOot) && has_ocarina"
-    "SOARING": "true"
+    "SOARING": "has_ocarina"
 "Tingle Town":
   region: TINGLE
   locations:
@@ -36,7 +36,7 @@
 "SOARING":
   region: NONE
   exits:
-    "SOARING2": "can_reset_time && can_play(SONG_SOARING)"
+    "SOARING2": "can_reset_time && has(SONG_SOARING)"
 "SOARING2":
   region: NONE
   exits:
