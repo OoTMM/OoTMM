@@ -630,8 +630,8 @@
   locations:
     "Southern Swamp HP": "(has(DEED_LAND) && has(MASK_DEKU)) || (trick(MM_SOUTHERN_SWAMP_SCRUB_HP_GORON) && has(MASK_GORON))"
     "Southern Swamp Scrub Deed": "has(DEED_LAND)"
+    "Southern Swamp Scrub Shop": "has(MASK_DEKU) && can_use_wallet(1)"
     "Southern Swamp Owl Statue": "has_sticks || has_weapon"
-    #"Southern Swamp Scrub Purchase": "has(MASK_DEKU) && can_use_wallet(1)"
   gossip:
     "Southern Swamp Gossip": "true"
 "Swamp Back":
@@ -1433,8 +1433,8 @@
     "Zora Hall": "true"
   locations:
     "Zora Hall Scrub HP": "(trick(MM_ZORA_HALL_SCRUB_HP_NO_DEKU) && (has(MASK_GORON) || has(MASK_ZORA))) || (has(MASK_GORON) && has(MASK_DEKU) && has(DEED_MOUNTAIN))"
+    "Zora Hall Scrub Shop": "has(MASK_ZORA) && can_use_wallet(1)"
     "Zora Hall Scrub Deed": "has(DEED_MOUNTAIN) && has(MASK_GORON)"
-    #"Zora Hall Scrub Purchase": "has(MASK_ZORA)"
 "Zora Cape Peninsula":
   region: ZORA_CAPE
   exits:
@@ -1575,7 +1575,7 @@
   locations:
     "Ikana Valley Scrub Rupee": "has(DEED_OCEAN) && has(MASK_ZORA)"
     "Ikana Valley Scrub HP": "has(DEED_OCEAN) && has(MASK_ZORA) && has(MASK_DEKU)"
-    #"Ikana Valley Scrub Purchase": "can_use_wallet(2)"
+    "Ikana Valley Scrub Shop": "can_use_wallet(2)"
   gossip:
     "Ikana Valley Gossip Lower": "true"
     "Ikana Valley Gossip Scrub": "has(DEED_OCEAN) && has(MASK_ZORA) && has(MASK_DEKU)"

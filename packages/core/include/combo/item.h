@@ -71,8 +71,8 @@ int  comboAddItemNoEffect(s16 gi);
 
 int comboIsItemUnavailable(s16 gi);
 int comboIsItemMinor(s16 gi);
-int comboIsItemConsumable(s16 gi);
 
 int comboItemPrecond(s16 gi, s16 price);
+s16 comboRenewable(s16 gi, s16 def);
 
 #endif
