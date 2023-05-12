@@ -5,7 +5,7 @@ import { AreaData, Expr, exprDependencies, ExprResult, isDefaultRestrictions, MM
 import { addItem, combinedItems, isItemConsumable, Items } from './items';
 import { ItemPlacement } from './solve';
 import { World } from './world';
-import { isLocationRenewable } from './locations';
+import { isLocationLicenseGranting, isLocationRenewable } from './locations';
 
 export const AGES = ['child', 'adult'] as const;
 
@@ -40,6 +40,8 @@ type PathfinderQueue = {
 
 export type PathfinderState = {
   items: Items;
+  licenses: Items;
+  renewables: Items;
   areas: {
     child: Map<string, AreaData>;
     adult: Map<string, AreaData>;
@@ -66,18 +68,10 @@ const emptyDepList = (): PathfinderDependencyList => ({
   },
 });
 
-function filterStartingItems(items: Items) {
-  const newItems = {...items};
-  for (const item of Object.keys(items)) {
-    if (isItemConsumable(item)) {
-      delete newItems[item];
-    }
-  }
-  return newItems;
-}
-
 const defaultState = (settings: Settings): PathfinderState => ({
-  items: filterStartingItems(settings.startingItems),
+  items: { ...settings.startingItems },
+  licenses: { ...settings.startingItems },
+  renewables: {},
   areas: {
     child: new Map(),
     adult: new Map(),
@@ -165,6 +159,8 @@ export class Pathfinder {
     this.opts = opts || {};
     this.state = state ? cloneDeep(state) : defaultState(this.settings);
     this.state.items = combinedItems(this.state.items, this.opts.assumedItems || {});
+    this.state.renewables = combinedItems(this.state.renewables, this.opts.assumedItems || {});
+    this.state.licenses = combinedItems(this.state.licenses, this.opts.assumedItems || {});
     this.pathfind();
     return this.state;
   }
@@ -269,7 +265,7 @@ export class Pathfinder {
 
   private evalExpr(expr: Expr, age: Age, area: string) {
     const areaData = this.state.areas[age].get(area)!;
-    const result = expr({ areaData, items: this.state.items, age, events: this.state.events, ignoreItems: this.opts.ignoreItems || false });
+    const result = expr({ areaData, items: this.state.items, renewables: this.state.renewables, licenses: this.state.licenses, age, events: this.state.events, ignoreItems: this.opts.ignoreItems || false });
     if (result.result) {
       if (!result.restrictions || isDefaultRestrictions(result.restrictions)) {
         delete result.dependencies;
@@ -346,10 +342,12 @@ export class Pathfinder {
     const item = this.opts.items?.[loc];
     if (item) {
       this.state.uncollectedLocations.delete(loc);
-      if (!isItemConsumable(item) || isLocationRenewable(this.world, loc)) {
-        addItem(this.state.items, item);
-        this.requeueItem(item);
-      }
+      addItem(this.state.items, item);
+      if (isLocationRenewable(this.world, loc))
+        addItem(this.state.renewables, item);
+      if (isLocationLicenseGranting(this.world, loc))
+        addItem(this.state.licenses, item);
+      this.requeueItem(item);
     } else {
       this.state.uncollectedLocations.add(loc);
     }

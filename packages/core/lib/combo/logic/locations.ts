@@ -28,3 +28,15 @@ export function isLocationRenewable(world: World, loc: string) {
     return true;
   return false;
 }
+
+export function isLocationLicenseGranting(world: World, loc: string) {
+  if (ONE_TIME_SHOP_CHECKS.includes(loc)) {
+    return false;
+  }
+  const check = world.checks[loc];
+  if (['cow'].includes(check.type))
+    return true;
+  if (isLocationRenewable(world, loc))
+    return false;
+  return true;
+}

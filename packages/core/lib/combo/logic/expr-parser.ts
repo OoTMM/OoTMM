@@ -1,7 +1,7 @@
 import { Game } from '../config';
 import { Settings } from '../settings';
 import { gameId } from '../util';
-import { Expr, exprTrue, exprFalse, exprAnd, exprOr, exprAge, exprHas, exprEvent, exprMasks, exprSetting, exprNot, exprCond, exprTrick, exprSpecial, exprOotTime, exprMmTime } from './expr';
+import { Expr, exprTrue, exprFalse, exprAnd, exprOr, exprAge, exprHas, exprRenewable, exprEvent, exprMasks, exprSetting, exprNot, exprCond, exprTrick, exprSpecial, exprOotTime, exprMmTime, exprLicense } from './expr';
 
 const SIMPLE_TOKENS = ['||', '&&', '(', ')', ',', 'true', 'false', '!', '+', '-'] as const;
 
@@ -177,6 +177,32 @@ export class ExprParser {
     return exprHas(item, itemShared, count);
   }
 
+  private parseExprRenewable(): Expr | undefined {
+    if (this.peek('identifier') !== 'renewable') {
+      return undefined;
+    }
+    this.accept('identifier');
+    this.expect('(');
+    const itemName = this.expect('identifier');
+    const item = gameId(this.game, itemName, '_');
+    const itemShared = gameId('shared', itemName, '_');
+    this.expect(')');
+    return exprRenewable(item, itemShared);
+  }
+
+  private parseExprLicense(): Expr | undefined {
+    if (this.peek('identifier') !== 'license') {
+      return undefined;
+    }
+    this.accept('identifier');
+    this.expect('(');
+    const itemName = this.expect('identifier');
+    const item = gameId(this.game, itemName, '_');
+    const itemShared = gameId('shared', itemName, '_');
+    this.expect(')');
+    return exprLicense(item, itemShared);
+  }
+
   private parseExprEvent(): Expr | undefined {
     if (this.peek('identifier') !== 'event') {
       return undefined;
@@ -329,6 +355,8 @@ export class ExprParser {
       || this.parseExprCond()
       || this.parseExprAge()
       || this.parseExprHas()
+      || this.parseExprRenewable()
+      || this.parseExprLicense()
       || this.parseExprEvent()
       || this.parseExprMasks()
       || this.parseExprSetting()

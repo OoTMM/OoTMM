@@ -617,7 +617,6 @@
     "Swamp Potion Shop": "true"
     "Woods of Mystery": "true"
   events:
-    MAGIC_BEANS_SWAMP: "has(MAGIC_BEAN) && has(MASK_DEKU) && can_use_wallet(1)"
     FROG_3: "has(MASK_DON_GERO)"
     PICTURE_SWAMP: "has(PICTOGRAPH_BOX)"
     PICTURE_BIG_OCTO: "has(PICTOGRAPH_BOX)"
@@ -1570,8 +1569,6 @@
     "Sakon Hideout": "event(MEET_KAFEI) && at(NIGHT3_PM_06_00)"
     "Ikana Valley Grotto": "true"
     "Swamp Front": "true"
-  events:
-    BLUE_POTION: "has_bottle && can_use_wallet(2)"
   locations:
     "Ikana Valley Scrub Rupee": "has(DEED_OCEAN) && has(MASK_ZORA)"
     "Ikana Valley Scrub HP": "has(DEED_OCEAN) && has(MASK_ZORA) && has(MASK_DEKU)"

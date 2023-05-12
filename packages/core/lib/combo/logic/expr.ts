@@ -109,6 +109,8 @@ export type AreaData = {
 
 type State = {
   items: Items;
+  renewables: Items;
+  licenses: Items;
   age: Age;
   events: Set<string>;
   ignoreItems: boolean;
@@ -245,6 +247,22 @@ export const exprHas = (item: string, itemShared: string, count: number): Expr =
 
   return state => {
     const result = (state.ignoreItems || ((itemCount(state, item) + itemCount(state, itemShared)) >= count));
+    const dependencies = { items: new Set([item, itemShared]) };
+    return { result, dependencies };
+  }
+};
+
+export const exprRenewable = (item: string, itemShared: string): Expr => {
+  return state => {
+    const result = (state.ignoreItems || state.renewables[item] > 0 || state.renewables[itemShared] > 0);
+    const dependencies = { items: new Set([item, itemShared]) };
+    return { result, dependencies };
+  }
+};
+
+export const exprLicense = (item: string, itemShared: string): Expr => {
+  return state => {
+    const result = (state.ignoreItems || state.licenses[item] > 0 || state.licenses[itemShared] > 0);
     const dependencies = { items: new Set([item, itemShared]) };
     return { result, dependencies };
   }
