@@ -11,6 +11,7 @@ Clock Town South Chest Upper,                     chest,          NONE,         
 Clock Town Platform HP,                           collectible,    NONE,                   CLOCK_TOWN_SOUTH,           0x0a,                       HEART_PIECE
 Clock Town Business Scrub,                        npc,            NONE,                   CLOCK_TOWN_SOUTH,           SCRUB_LAND,                 DEED_LAND
 Clock Town Post Box,                              npc,            NONE,                   CLOCK_TOWN_SOUTH,           POSTBOX,                    HEART_PIECE
+Clock Town Owl Statue,                            npc,            NONE,                   CLOCK_TOWN_SOUTH,           OWL_CLOCK_TOWN,             OWL_CLOCK_TOWN
 Clock Town Tree HP,                               collectible,    NONE,                   CLOCK_TOWN_NORTH,           0x0a,                       HEART_PIECE
 Clock Town Bomber Notebook,                       npc,            NONE,                   CLOCK_TOWN_NORTH,           BOMBER_NOTEBOOK,            BOMBER_NOTEBOOK
 Clock Town Blast Mask,                            npc,            NONE,                   CLOCK_TOWN_NORTH,           MASK_BLAST,                 MASK_BLAST
@@ -84,6 +85,7 @@ Road to Southern Swamp Grotto,                    chest,          NONE,         
 Southern Swamp HP,                                collectible,    NONE,                   SOUTHERN_SWAMP,             0x1e,                       HEART_PIECE
 Southern Swamp Scrub Deed,                        npc,            NONE,                   SOUTHERN_SWAMP,             SCRUB_SWAMP,                DEED_SWAMP
 Southern Swamp Song of Soaring,                   npc,            NONE,                   SOUTHERN_SWAMP,             SONG_SOARING,               SONG_SOARING
+Southern Swamp Owl Statue,                        npc,            NONE,                   SOUTHERN_SWAMP,             OWL_SOUTHERN_SWAMP,         OWL_SOUTHERN_SWAMP
 Southern Swamp Grotto,                            chest,          NONE,                   GROTTOS,                    0x1d,                       RUPEE_RED
 Woods of Mystery Grotto,                          chest,          NONE,                   GROTTOS,                    0x1c,                       RUPEE_PURPLE
 Swamp Archery Reward 1,                           npc,            NONE,                   SHOOTING_GALLERY_SWAMP,     SHOOTING_GAME_SWAMP_1,      BOW
@@ -99,6 +101,7 @@ Deku Palace HP,                                   collectible,    NONE,         
 Deku Palace Sonata of Awakening,                  npc,            NONE,                   DEKU_KING_CHAMBER,          SONG_AWAKENING,             SONG_AWAKENING
 Deku Palace Grotto Chest,                         chest,          NONE,                   GROTTOS,                    0x05,                       RUPEE_RED
 Deku Shrine Mask of Scents,                       npc,            BUTLER_RACE,            DEKU_SHRINE,                MASK_SCENTS,                MASK_SCENTS
+Woodfall Owl Statue,                              npc,            NONE,                   WOODFALL,                   OWL_WOODFALL,               OWL_WOODFALL
 Woodfall Near Owl Chest,                          chest,          NONE,                   WOODFALL,                   0x02,                       RUPEE_RED
 Woodfall Entrance Chest,                          chest,          NONE,                   WOODFALL,                   0x00,                       RUPEE_RED
 Woodfall HP Chest,                                chest,          NONE,                   WOODFALL,                   0x01,                       HEART_PIECE
@@ -138,6 +141,7 @@ Mountain Village Waterfall Chest,                 chest,          NONE,         
 Mountain Village Don Gero Mask,                   npc,            NONE,                   MOUNTAIN_VILLAGE_WINTER,    MASK_DON_GERO,              MASK_DON_GERO
 Mountain Village Frog Choir HP,                   npc,            DON_GERO_CHOIR,         MOUNTAIN_VILLAGE_WINTER,    FROG_HEART_PIECE,           HEART_PIECE
 Mountain Village Tunnel Grotto,                   chest,          NONE,                   GROTTOS,                    0x1b,                       RUPEE_RED
+Mountain Village Owl Statue,                      npc,            NONE,                   MOUNTAIN_VILLAGE_WINTER,    OWL_MOUNTAIN_VILLAGE,       OWL_MOUNTAIN_VILLAGE
 Blacksmith Razor Blade,                           npc,            NONE,                   BLACKSMITH,                 SWORD_RAZOR,                SWORD
 Blacksmith Gilded Sword,                          npc,            NONE,                   BLACKSMITH,                 SWORD_GILDED,               SWORD
 Lone Peak Shrine Lens Chest,                      chest,          NONE,                   GROTTOS,                    0x01,                       LENS
@@ -160,7 +164,9 @@ Goron Powder Keg,                                 npc,            NONE,         
 Path to Snowhead HP,                              collectible,    NONE,                   PATH_SNOWHEAD,              0x08,                       HEART_PIECE
 Path to Snowhead Grotto,                          chest,          NONE,                   GROTTOS,                    0x13,                       RUPEE_RED
 Snowhead Great Fairy,                             npc,            NONE,                   FAIRY_FOUNTAIN,             GREAT_FAIRY_MOUNTAIN,       MAGIC_UPGRADE
+Snowhead Owl Statue,                              npc,            NONE,                   FAIRY_FOUNTAIN,             OWL_SNOWHEAD,               OWL_SNOWHEAD
 Goron Race Reward,                                npc,            GORON_RACE,             GORON_RACETRACK,            GORON_RACE,                 BOTTLED_GOLD_DUST
+Milk Road Owl Statue,                             npc,            NONE,                   MILK_ROAD,                  OWL_MILK_ROAD,              OWL_MILK_ROAD
 Romani Ranch Epona Song,                          npc,            NONE,                   ROMANI_RANCH,               SONG_EPONA,                 SONG_EPONA
 Romani Ranch Aliens,                              npc,            RANCH_DEFENSE,          ROMANI_RANCH,               ROMANI_BOTTLE,              BOTTLE_MILK
 Romani Ranch Cremia Escort,                       npc,            RANCH_DEFENSE,          ROMANI_RANCH,               CREMIA_ESCORT,              MASK_ROMANI
@@ -176,10 +182,12 @@ Great Bay Coast Fisherman HP,                     npc,            FISHERMAN_GAME
 Great Bay Coast Fisherman Grotto,                 chest,          NONE,                   GROTTOS,                    0x17,                       RUPEE_RED
 Great Bay Coast Cow Front,                        cow,            NONE,                   GREAT_BAY_COAST,            0x15,                       MILK
 Great Bay Coast Cow Back,                         cow,            NONE,                   GREAT_BAY_COAST,            0x16,                       MILK
+Great Bay Coast Owl Statue,                       npc,            NONE,                   GREAT_BAY_COAST,            OWL_GREAT_BAY,              OWL_GREAT_BAY
 Zora Cape Ledge Chest 1,                          chest,          NONE,                   ZORA_CAPE,                  0x01,                       RUPEE_RED
 Zora Cape Ledge Chest 2,                          chest,          NONE,                   ZORA_CAPE,                  0x02,                       RUPEE_RED
 Zora Cape Underwater Chest,                       chest,          NONE,                   ZORA_CAPE,                  0x00,                       RUPEE_PURPLE
 Zora Cape Waterfall HP,                           collectible,    NONE,                   ZORA_CAPE,                  0x07,                       HEART_PIECE
+Zora Cape Owl Statue,                             npc,            NONE,                   ZORA_CAPE,                  OWL_ZORA_CAPE,              OWL_ZORA_CAPE
 Zora Cape Grotto,                                 chest,          NONE,                   GROTTOS,                    0x15,                       BOMBCHU
 Great Bay Great Fairy,                            npc,            NONE,                   FAIRY_FOUNTAIN,             GREAT_FAIRY_OCEAN,          DEFENSE_UPGRADE
 Zora Hall Scrub Deed,                             npc,            NONE,                   ZORA_HALL_ROOMS,            SCRUB_OCEAN,                DEED_OCEAN
@@ -241,9 +249,11 @@ Beneath The Graveyard Dampe Chest,                chest,          GRAVEYARD_NIGH
 Ikana Valley Scrub Rupee,                         npc,            NONE,                   IKANA_CANYON,               SCRUB_VALLEY,               RUPEE_GOLD
 Ikana Valley Scrub HP,                            collectible,    NONE,                   IKANA_CANYON,               0x1e,                       HEART_PIECE
 Ikana Valley Grotto,                              chest,          NONE,                   GROTTOS,                    0x14,                       BOMBCHU_5
+Ikana Canyon Owl Statue,                          npc,            NONE,                   IKANA_CANYON,               OWL_IKANA_CANYON,           OWL_IKANA_CANYON
 Ikana Great Fairy,                                npc,            NONE,                   FAIRY_FOUNTAIN,             GREAT_FAIRY_VALLEY,         GREAT_FAIRY_SWORD
 Ghost Hut HP,                                     npc,            NONE,                   GHOST_HUT,                  GHOST_HUT_HEART_PIECE,      HEART_PIECE
 Music Box House Gibdo Mask,                       npc,            NONE,                   MUSIC_BOX_HOUSE,            MASK_GIBDO,                 MASK_GIBDO
+Stone Tower Owl Statue,                           npc,            NONE,                   STONE_TOWER,                OWL_STONE_TOWER,            OWL_STONE_TOWER
 Stone Tower Inverted Chest 1,                     chest,          NONE,                   STONE_TOWER_INVERTED,       0x1d,                       RUPEE_SILVER
 Stone Tower Inverted Chest 2,                     chest,          NONE,                   STONE_TOWER_INVERTED,       0x1e,                       BOMBCHU_10
 Stone Tower Inverted Chest 3,                     chest,          NONE,                   STONE_TOWER_INVERTED,       0x1f,                       MAGIC_BEAN
