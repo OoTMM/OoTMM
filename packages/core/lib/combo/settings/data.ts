@@ -233,6 +233,17 @@ export const SETTINGS = [{
   ],
   default: 'none'
 }, {
+  key: 'owlShuffle',
+  name: 'Owl Statue Shuffle',
+  category: 'main.shuffle',
+  type: 'enum',
+  description: 'Make owl statue items that can be shuffled.',
+  values: [
+    { value: 'none', name: 'None', description: 'Owl statues are vanilla' },
+    { value: 'anywhere', name: 'Anywhere', description: 'Owl statues are shuffled in the item pool' },
+  ],
+  default: 'none'
+}, {
   key: 'shuffleMasterSword',
   name: 'Master Sword Shuffle',
   category: 'main.shuffle',

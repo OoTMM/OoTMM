@@ -6,14 +6,14 @@ PATCH_START 0x800f4ab4
 PATCH_END
 
 PATCH_START 0x800f4b00
-  lhu a0,%LO(gMmOwlFlags)(a0)
+  lw a0,%LO(gMmOwlFlags)(a0)
 PATCH_END
 
 PATCH_START 0x800f4b1c
-  lhu a0,(gMmOwlFlags)
+  lw a0,(gMmOwlFlags)
 PATCH_END
 
 PATCH_START 0x80157a5c
-  lhu t6,(gMmOwlFlags)
+  lw t6,(gMmOwlFlags)
   nop
 PATCH_END
