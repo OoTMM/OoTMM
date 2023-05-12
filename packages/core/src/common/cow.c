@@ -102,9 +102,9 @@ static void EnCow_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, f
     {
         sCowID = id;
         gi = comboOverride(OV_COW, 0, id, gi);
-        if ((gCowFlags & (1 << id)) && !comboIsItemConsumable(gi))
+        if (gCowFlags & (1 << id))
         {
-            gi = RECOVERY_HEART;
+            gi = comboRenewable(gi, RECOVERY_HEART);
         }
     }
 

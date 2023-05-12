@@ -70,7 +70,7 @@ static s16 comboOverrideImpl(u16 sceneId, u16 id, s16 gi, int flags)
 #if defined(DEBUG) && defined(DEBUG_OVERRIDE)
     override = DEBUG_OVERRIDE;
 #endif
-    absGi = gi > 0 ? gi : -gi;
+    absGi = gi >= 0 ? gi : -gi;
     if (override >= 0)
         absGi = override;
 
@@ -80,7 +80,7 @@ static s16 comboOverrideImpl(u16 sceneId, u16 id, s16 gi, int flags)
     if (flags & OVF_DOWNGRADE)
         absGi = comboDowngrade(absGi);
 
-    return gi > 0 ? absGi : -absGi;
+    return gi >= 0 ? absGi : -absGi;
 }
 
 s16 comboOverride(int type, u16 sceneId, u16 id, s16 gi)

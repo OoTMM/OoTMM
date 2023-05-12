@@ -1,7 +1,7 @@
 import { Monitor } from '../monitor';
 import { Settings } from '../settings';
 import { isOwlStatue, isTingleMap } from './items';
-import { ONE_TIME_SHOP_CHECKS, OOT_ONE_TIME_SCRUBS } from './locations';
+import { MM_SCRUBS, ONE_TIME_SHOP_CHECKS, OOT_ONE_TIME_SCRUBS } from './locations';
 import { World } from './world';
 
 export class LogicPassFixer {
@@ -55,6 +55,10 @@ export class LogicPassFixer {
         if (game === 'oot' && !this.state.settings.scrubShuffleOot && !OOT_ONE_TIME_SCRUBS.includes(loc)) {
           this.fixedLocations.add(loc);
         }
+      }
+
+      if (MM_SCRUBS.includes(loc) && !this.state.settings.scrubShuffleMm) {
+        this.fixedLocations.add(loc);
       }
 
       if (item === 'OOT_GERUDO_CARD' && !this.state.settings.shuffleGerudoCard) {

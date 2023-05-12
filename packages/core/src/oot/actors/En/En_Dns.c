@@ -150,6 +150,8 @@ static s16 EnDns_GetGi(Actor* this, int flags)
     gi = (s16)*(s32*)((char*)scrubData + 0x4);
     id = EnDns_GetID(this);
     gi = comboOverrideEx(OV_SCRUB, 0, id, gi, flags);
+    if (EnDns_GetFlag(id))
+        gi = comboRenewable(gi, 0);
     return gi;
 }
 
@@ -162,7 +164,7 @@ void EnDns_MaybeDestroy(Actor* this)
         /* Already bought from scrub */
         /* Use dummy GI to avoid having to look up the scrub data, as Shopnuts lack it */
         gi = comboOverrideEx(OV_SCRUB, 0, EnDns_GetID(this), 1, 0);
-        if (!comboIsItemConsumable(gi))
+        if (!comboRenewable(gi, 0))
             ActorDestroy(this);
     }
 }

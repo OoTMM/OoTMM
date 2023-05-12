@@ -485,6 +485,10 @@ const ITEMS_JUNK = new Set<string>([
   'SHARED_BOMBCHU_20',
 ]);
 
+const ITEMS_LICENSES = new Set<string>([
+  'MM_MAGIC_BEAN',
+]);
+
 const CONSUMABLES = new Set<string>([
   'OOT_RECOVERY_HEART',
   'OOT_STICK',
@@ -567,6 +571,7 @@ const CONSUMABLES = new Set<string>([
 const CRITICAL_RENEWABLE_ITEMS = new Set<string>([
   'MM_SHIELD_HERO',
   'MM_BOMBCHU_10',
+  'MM_MAGIC_BEAN',
   'OOT_SHIELD_DEKU',
   'OOT_SHIELD_HYLIAN',
 ]);
@@ -610,6 +615,7 @@ export const isItemUnlimitedStarting = (item: string) => isRupees(item) || isIte
 export const isItemCriticalRenewable = (item: string) => CRITICAL_RENEWABLE_ITEMS.has(item);
 export const isTingleMap = (item: string) => ITEMS_TINGLE_MAPS.has(item);
 export const isOwlStatue = (item: string) => ITEMS_OWLS.has(item);
+export const isItemLicense = (item: string) => ITEMS_LICENSES.has(item);
 
 export const itemsArray = (items: Items) => {
   const arr: string[] = [];
