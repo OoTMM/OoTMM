@@ -48,5 +48,6 @@ MiscFlags;
 #define gOotExtraScrubsLo   SAVE_EXTRA_RECORD(u32,              13)
 #define gOotExtraScrubsHi   SAVE_EXTRA_RECORD(u32,              14)
 #define gOotExtraTradeSave  SAVE_EXTRA_RECORD(OotExtraTrade,    15)
+#define gMmOwlFlags         SAVE_EXTRA_RECORD(u32,              16)
 
 #endif

@@ -353,3 +353,13 @@ MM_HOOKSHOT_SHORT:            0xe8
 MM_SONG_SUN:                  0xe9
 MM_WALLET:                    0xea
 MM_WALLET4:                   0xeb
+MM_OWL_GREAT_BAY:             0xec
+MM_OWL_ZORA_CAPE:             0xed
+MM_OWL_SNOWHEAD:              0xee
+MM_OWL_MOUNTAIN_VILLAGE:      0xef
+MM_OWL_CLOCK_TOWN:            0xf0
+MM_OWL_MILK_ROAD:             0xf1
+MM_OWL_WOODFALL:              0xf2
+MM_OWL_SOUTHERN_SWAMP:        0xf3
+MM_OWL_IKANA_CANYON:          0xf4
+MM_OWL_STONE_TOWER:           0xf5

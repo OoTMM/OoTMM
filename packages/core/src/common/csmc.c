@@ -299,6 +299,16 @@ static int csmcFromItemMm(s16 gi)
     case GI_MM_BOMBER_NOTEBOOK:
     case GI_MM_DEFENSE_UPGRADE:
     case GI_MM_BOTTLE_CHATEAU:
+    case GI_MM_OWL_GREAT_BAY:
+    case GI_MM_OWL_ZORA_CAPE:
+    case GI_MM_OWL_SNOWHEAD:
+    case GI_MM_OWL_MOUNTAIN_VILLAGE:
+    case GI_MM_OWL_CLOCK_TOWN:
+    case GI_MM_OWL_MILK_ROAD:
+    case GI_MM_OWL_WOODFALL:
+    case GI_MM_OWL_SOUTHERN_SWAMP:
+    case GI_MM_OWL_IKANA_CANYON:
+    case GI_MM_OWL_STONE_TOWER:
         return CSMC_MAJOR;
     case GI_MM_SMALL_KEY:
     case GI_MM_SMALL_KEY_WF:

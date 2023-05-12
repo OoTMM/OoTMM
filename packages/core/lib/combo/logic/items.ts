@@ -80,7 +80,21 @@ export const DUNGEON_REWARDS_ORDERED = [
 ];
 export const DUNGEON_REWARDS = new Set(DUNGEON_REWARDS_ORDERED);
 
+export const ITEMS_OWLS = new Set([
+  'MM_OWL_GREAT_BAY',
+  'MM_OWL_ZORA_CAPE',
+  'MM_OWL_SNOWHEAD',
+  'MM_OWL_MOUNTAIN_VILLAGE',
+  'MM_OWL_CLOCK_TOWN',
+  'MM_OWL_MILK_ROAD',
+  'MM_OWL_WOODFALL',
+  'MM_OWL_SOUTHERN_SWAMP',
+  'MM_OWL_IKANA_CANYON',
+  'MM_OWL_STONE_TOWER',
+]);
+
 export const ITEMS_REQUIRED = new Set<string>([
+  ...ITEMS_OWLS,
   'OOT_WEIRD_EGG',
   'OOT_POCKET_EGG',
   'OOT_SHIELD_DEKU',
@@ -595,6 +609,7 @@ export const isRupees = (item: string) => !!item.match(/^(OOT|MM|SHARED)_RUPEE_/
 export const isItemUnlimitedStarting = (item: string) => isRupees(item) || isItemConsumable(item);
 export const isItemCriticalRenewable = (item: string) => CRITICAL_RENEWABLE_ITEMS.has(item);
 export const isTingleMap = (item: string) => ITEMS_TINGLE_MAPS.has(item);
+export const isOwlStatue = (item: string) => ITEMS_OWLS.has(item);
 
 export const itemsArray = (items: Items) => {
   const arr: string[] = [];

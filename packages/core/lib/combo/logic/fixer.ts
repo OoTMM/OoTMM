@@ -1,6 +1,6 @@
 import { Monitor } from '../monitor';
 import { Settings } from '../settings';
-import { isTingleMap } from './items';
+import { isOwlStatue, isTingleMap } from './items';
 import { ONE_TIME_SHOP_CHECKS, OOT_ONE_TIME_SCRUBS } from './locations';
 import { World } from './world';
 
@@ -26,6 +26,10 @@ export class LogicPassFixer {
       const { type, item, game } = check;
 
       if (isTingleMap(item) && settings.tingleShuffle === 'vanilla') {
+        this.fixedLocations.add(loc);
+      }
+
+      if (isOwlStatue(item) && settings.owlShuffle === 'none') {
         this.fixedLocations.add(loc);
       }
 

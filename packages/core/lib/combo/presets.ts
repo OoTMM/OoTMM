@@ -102,6 +102,7 @@ const PRESET_ALLSANITY = makeSettings({
   colossalWallets: true,
   tingleShuffle: 'anywhere',
   dungeonRewardShuffle: 'anywhere',
+  owlShuffle: 'anywhere',
 });
 
 export const PRESETS: Presets = {

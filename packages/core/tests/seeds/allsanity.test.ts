@@ -19,5 +19,6 @@ test("Can make a seed - allsanity", () => {
     childWallets: true,
     colossalWallets: true,
     tingleShuffle: 'anywhere',
+    owlShuffle: 'anywhere',
   });
 });

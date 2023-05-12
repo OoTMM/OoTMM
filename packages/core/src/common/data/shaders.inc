@@ -198,3 +198,4 @@
 /* MM        Custom: Stray Fairies Town        */ { Shader_CustomStrayFairy,       { 5 }},
 /* Common    Potion (Milk)                     */ { Shader_CustomPotion,           { 3 }},
 /* MM        Potion (Chateau)                  */ { Shader_CustomPotion,           { 4 }},
+/* MM        Owl                               */ { Shader_CustomOwl,              { 0x6003770 }},

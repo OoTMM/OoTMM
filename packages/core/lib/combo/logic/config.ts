@@ -225,6 +225,10 @@ export class LogicPassConfig {
       config.add('OOT_AGELESS_BOOTS')
     }
 
+    if (settings.owlShuffle === 'anywhere') {
+      config.add('MM_OWL_SHUFFLE');
+    }
+
     return { mq, config };
   }
 }
