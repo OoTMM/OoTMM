@@ -31,7 +31,7 @@ void DmChar02_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float
 
     link = GET_LINK(play);
     if (link->state & PLAYER_ACTOR_STATE_GET_ITEM)
-        return 0;
+        return;
 
     if (!gMmExtraFlags2.ocarina)
         gi = comboOverride(OV_NPC, 0, NPC_MM_SKULL_KID_OCARINA, GI_MM_OCARINA_OF_TIME);

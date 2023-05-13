@@ -17,7 +17,7 @@ void EnTab_AfterTextBox(Actor* this, GameState_Play* play, s16 messageId);
 
 static Actor* sByteCodeActor;
 
-static int Actor_ByteCode_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
+static void Actor_ByteCode_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
 {
     void (*func)(Actor*, GameState_Play*, s16, float, float);
 
