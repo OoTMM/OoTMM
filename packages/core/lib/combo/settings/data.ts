@@ -265,6 +265,13 @@ export const SETTINGS = [{
   description: 'Controls whether or not the Gerudo Membership Card is shuffled amongst all the items',
   default: true
 }, {
+  key: 'shuffleMerchantsMm',
+  name: 'Merchants Shuffle (MM)',
+  category: 'main.shuffle',
+  type: 'boolean',
+  description: 'Shuffle extra merchants in MM',
+  default: false
+}, {
   key: 'eggShuffle',
   name: 'Weird / Pocket Egg Content Shuffle',
   category: 'main.shuffle',

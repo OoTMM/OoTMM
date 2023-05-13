@@ -230,18 +230,6 @@ static void EnAkindonuts_AlterMessageNoRupees(GameState_Play* play)
     comboTextAutoLineBreaks(start);
 }
 
-static void EnAkindonuts_AlterMessageCantBuy(GameState_Play* play)
-{
-    char* b;
-    char* start;
-
-    b = play->textBuffer;
-    comboTextAppendHeader(&b);
-    start = b;
-    comboTextAppendStr(&b, "You can't buy that right now!" TEXT_SIGNAL TEXT_END);
-    comboTextAutoLineBreaks(start);
-}
-
 static void EnAkindonuts_DisplayTextBox(GameState_Play* play, s16 messageId, Actor* this)
 {
     PlayerDisplayTextBox(play, messageId, this);
@@ -279,7 +267,7 @@ static void EnAkindonuts_DisplayTextBox(GameState_Play* play, s16 messageId, Act
     case 0x1601:
     case 0x1602:
     case 0x1613:
-        EnAkindonuts_AlterMessageCantBuy(play);
+        comboTextMessageCantBuy(play);
         break;
     }
 }

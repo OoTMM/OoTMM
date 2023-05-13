@@ -1452,10 +1452,9 @@
   exits:
     "Milk Road Front": "true"
     "Gorman Track Back": "(can_goron_bomb_jump && has_bombs) || (is_night2 && event(ALIENS))"
-  events:
-    MILK: "can_use_wallet(1) && is_day"
   locations:
     "Gorman Track Garo Mask": "can_play(SONG_EPONA) && can_use_wallet(1) && is_day"
+    "Gorman Track Milk Purchase": "can_use_wallet(1) && is_day"
 "Gorman Track Back":
   region: MILK_ROAD
   exits:

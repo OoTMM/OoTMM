@@ -242,6 +242,7 @@ Road to Ikana Chest,                              chest,          NONE,         
 Road to Ikana Grotto,                             chest,          NONE,                   GROTTOS,                    0x16,                       BOMBCHU
 Road to Ikana Stone Mask,                         npc,            NONE,                   ROAD_IKANA,                 MASK_STONE,                 MASK_STONE
 Gorman Track Garo Mask,                           npc,            NONE,                   GORMAN_TRACK,               MASK_GARO,                  MASK_GARO
+Gorman Track Milk Purchase,                       npc,            NONE,                   GORMAN_TRACK,               GORMAN_MILK,                MILK
 Ikana Graveyard Captain Mask,                     chest,          NONE,                   IKANA_GRAVEYARD,            0x00,                       MASK_CAPTAIN
 Ikana Graveyard Grotto,                           chest,          NONE,                   GROTTOS,                    0x18,                       BOMBCHU_5
 Beneath The Graveyard Chest,                      chest,          NONE,                   BENEATH_THE_GRAVEYARD,      0x03,                       RUPEE_PURPLE

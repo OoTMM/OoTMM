@@ -339,7 +339,8 @@ typedef struct
     u32 songHealing:1;
     u32 townStrayFairy:1;
     u32 scrubPotionBlue:1;
-    u32 unused2:3;
+    u32 gormanMilk:1;
+    u32 unused:2;
 }
 MmExtraFlags2;
 

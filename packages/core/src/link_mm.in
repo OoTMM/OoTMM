@@ -25,6 +25,7 @@ kObjectsTable = 0x801c2740;
 GiveItem = 0x800b8a1c;
 
 DisplayTextBox2 = 0x80151938;
+DisplayTextBox3 = 0x800e8ea0;
 
 Shader_Opa0_Xlu1            = 0x800ef0f0;
 Shader_Opa0_Xlu12           = 0x800ef780;

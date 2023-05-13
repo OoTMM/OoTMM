@@ -806,3 +806,20 @@ void comboTextAppendNpcReward(char** b, s16 npcId, s16 gi)
     gi = comboOverrideEx(OV_NPC, 0, npcId, gi, 0);
     comboTextAppendItemName(b, gi, TF_PREPOS | TF_PROGRESSIVE);
 }
+
+void comboTextMessageCantBuy(GameState_Play* play)
+{
+    char* b;
+    char* start;
+
+#if defined(GAME_OOT)
+    b = play->msgCtx.textBuffer;
+#else
+    b = play->textBuffer;
+#endif
+
+    comboTextAppendHeader(&b);
+    start = b;
+    comboTextAppendStr(&b, "You can't buy that right now!" TEXT_SIGNAL TEXT_END);
+    comboTextAutoLineBreaks(start);
+}

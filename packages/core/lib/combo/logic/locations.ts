@@ -13,6 +13,10 @@ export const MM_SCRUBS = [
   'MM Ikana Valley Scrub Shop',
 ];
 
+export const MM_MERCHANTS = [
+  'MM Gorman Track Milk Purchase',
+]
+
 export const OOT_ONE_TIME_SCRUBS = [
   'OOT Lost Woods Scrub Sticks Upgrade',
   'OOT Lost Woods Grotto Scrub Nuts Upgrade',
@@ -25,7 +29,7 @@ export const LOCATIONS_ZELDA = [
 ];
 
 export function isLocationRenewable(world: World, loc: string) {
-  if (MM_SCRUBS.includes(loc))
+  if (MM_SCRUBS.includes(loc) || MM_MERCHANTS.includes(loc))
     return true;
   if (ONE_TIME_SHOP_CHECKS.includes(loc))
     return false;
@@ -38,7 +42,7 @@ export function isLocationRenewable(world: World, loc: string) {
 }
 
 export function isLocationLicenseGranting(world: World, loc: string) {
-  if (ONE_TIME_SHOP_CHECKS.includes(loc)) {
+  if (ONE_TIME_SHOP_CHECKS.includes(loc) || MM_MERCHANTS.includes(loc)) {
     return false;
   }
   const check = world.checks[loc];

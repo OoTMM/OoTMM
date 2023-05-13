@@ -1,7 +1,7 @@
 import { Monitor } from '../monitor';
 import { Settings } from '../settings';
 import { isOwlStatue, isTingleMap } from './items';
-import { MM_SCRUBS, ONE_TIME_SHOP_CHECKS, OOT_ONE_TIME_SCRUBS } from './locations';
+import { MM_MERCHANTS, MM_SCRUBS, ONE_TIME_SHOP_CHECKS, OOT_ONE_TIME_SCRUBS } from './locations';
 import { World } from './world';
 
 export class LogicPassFixer {
@@ -30,6 +30,10 @@ export class LogicPassFixer {
       }
 
       if (isOwlStatue(item) && settings.owlShuffle === 'none') {
+        this.fixedLocations.add(loc);
+      }
+
+      if (!settings.shuffleMerchantsMm && MM_MERCHANTS.includes(loc)) {
         this.fixedLocations.add(loc);
       }
 
