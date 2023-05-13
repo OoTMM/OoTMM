@@ -267,7 +267,7 @@ static void EnAkindonuts_DisplayTextBox(GameState_Play* play, s16 messageId, Act
     case 0x1601:
     case 0x1602:
     case 0x1613:
-        comboTextMessageCantBuy(play);
+        comboTextMessageCantBuy(play, TF_SIGNAL);
         break;
     }
 }

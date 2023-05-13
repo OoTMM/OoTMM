@@ -281,9 +281,6 @@
     "Mayor's Office HP": "has(MASK_COUPLE) && ((after(DAY1_AM_10_00) && before(NIGHT1_PM_08_00)) || (after(DAY2_AM_10_00) && before(NIGHT2_PM_08_00)) || (after(DAY3_AM_10_00) && before(NIGHT3_PM_06_00)))"
 "Milk Bar":
   region: CLOCK_TOWN_EAST
-  events:
-    MILK: "has(MASK_ROMANI) && can_use_wallet(1) && ((after(NIGHT1_PM_10_00) && before(DAY2_AM_06_00)) || (after(NIGHT2_PM_10_00) && before(DAY3_AM_06_00)) || (after(NIGHT3_PM_06_00) && before(NIGHT3_PM_09_00)) || after(NIGHT3_PM_10_00))"
-    CHATEAU: "has(MASK_ROMANI) && can_use_wallet(2) && ((after(NIGHT1_PM_10_00) && before(DAY2_AM_06_00)) || (after(NIGHT2_PM_10_00) && before(DAY3_AM_06_00)) || (after(NIGHT3_PM_06_00) && before(NIGHT3_PM_09_00)) || after(NIGHT3_PM_10_00))"
   exits:
     "Clock Town East": "true"
   locations:

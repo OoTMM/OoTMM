@@ -13,6 +13,7 @@ void EnTab_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b
 
 typedef void (*TextBoxCallback)(Actor*, GameState_Play*, s16);
 void EnGo_AfterTextBox(Actor* this, GameState_Play* play, s16 messageId);
+void EnTab_AfterTextBox(Actor* this, GameState_Play* play, s16 messageId);
 
 static Actor* sByteCodeActor;
 
@@ -169,6 +170,9 @@ static void Actor_ByteCode_DispatchTextBox(GameState_Play* play, s16 messageId)
     {
     case 0x138:
         cb = EnGo_AfterTextBox;
+        break;
+    case AC_EN_TAB:
+        cb = EnTab_AfterTextBox;
         break;
     }
     if (cb)

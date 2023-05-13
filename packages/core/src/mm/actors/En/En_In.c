@@ -62,7 +62,7 @@ static void EnIn_DisplayTextBox3(GameState_Play* play, Actor* this, s16 textId)
         break;
     case 0x3469:
     case 0x347f:
-        comboTextMessageCantBuy(play);
+        comboTextMessageCantBuy(play, TF_SIGNAL);
         break;
     }
 }
