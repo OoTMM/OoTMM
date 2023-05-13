@@ -61,6 +61,7 @@ const DUNGEON_INDEX = {
   SS: 20,
   BtWE: 21,
   PF: 22,
+  Ganon: 23,
 } as {[k: string]: number};;
 
 export class LogicPassEntrances {
@@ -253,6 +254,9 @@ export class LogicPassEntrances {
     let shuffledDungeons = new Set(['DT', 'DC', 'JJ', 'Forest', 'Fire', 'Water', 'Shadow', 'Spirit', 'WF', 'SH', 'GB', 'ST', 'IST']);
     if (this.input.settings.erMinorDungeons) {
       ['BotW', 'IC', 'GTG'].forEach(d => shuffledDungeons.add(d));
+    }
+    if (this.input.settings.erGanonCastle) {
+      shuffledDungeons.add('Ganon');
     }
     if (this.input.settings.erSpiderHouses) {
       ['SSH', 'OSH'].forEach(d => shuffledDungeons.add(d));

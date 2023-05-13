@@ -470,10 +470,16 @@
   time: night
   exits:
     "Market Destroyed": "true"
-    "Ganon Castle Main": "special(BRIDGE)"
+    "Ganon Castle Exterior After Bridge": "special(BRIDGE)"
     "Fairy Fountain Defense": "can_lift_gold"
   locations:
     "Ganon Castle Exterior GS": "true"
+"Ganon Castle Exterior After Bridge":
+  region: GANON_CASTLE_EXTERIOR
+  exits:
+    "Ganon Castle Exterior": "is_adult && special(BRIDGE)"
+    "Hyrule Castle": "is_child"
+    "Ganon Castle": "true"
 "Fairy Fountain Defense":
   region: GANON_CASTLE_EXTERIOR
   exits:

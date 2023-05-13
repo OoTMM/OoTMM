@@ -1,6 +1,7 @@
-"Ganon Castle Main":
+"Ganon Castle":
   dungeon: Ganon
   exits:
+    "Ganon Castle Exterior After Bridge": "true"
     "Ganon Castle Light": "has(STRENGTH, 3)"
     "Ganon Castle Forest": "true"
     "Ganon Castle Fire": "true"

@@ -171,6 +171,11 @@ function resolveSpecialCond(settings: Settings, state: State, special: string): 
   if (!specialConds.hasOwnProperty(special)) {
     throw new Error(`Unknown special condition: ${special}`);
   }
+
+  if (state.ignoreItems) {
+    return { result: true };
+  }
+
   let items = new Set<string>();
   let itemsUnique = new Set<string>();
   const cond = specialConds[special as keyof typeof specialConds];

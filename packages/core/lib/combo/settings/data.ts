@@ -755,7 +755,13 @@ export const SETTINGS = [{
   name: 'Shuffle OoT Minor Dungeons with Dungeons',
   category: 'entrances',
   type: 'boolean',
-  description: 'If turned on, it meeans Bottom of the Well, Ice Cavern and Gerudo Training Grounds are also shuffled',
+  description: 'If turned on, it means Bottom of the Well, Ice Cavern and Gerudo Training Grounds are also shuffled',
+  default: false
+}, {
+  key: 'erGanonCastle',
+  name: 'Shuffle Ganon\'s Castle with Dungeons',
+  category: 'entrances',
+  type: 'boolean',
   default: false
 }, {
   key: 'erSpiderHouses',
