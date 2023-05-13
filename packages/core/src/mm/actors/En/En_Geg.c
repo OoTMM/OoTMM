@@ -12,13 +12,13 @@ int EnGeg_HasGivenItem(Actor* actor)
 
 PATCH_CALL(0x80bb3230, EnGeg_HasGivenItem);
 
-int EnGeg_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
+void EnGeg_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
 {
     if (!gMmExtraFlags.maskDonGero)
         gi = comboOverride(OV_NPC, 0, NPC_MM_MASK_DON_GERO, GI_MM_MASK_DON_GERO);
     else
         gi = GI_MM_RUPEE_PURPLE;
-    return GiveItem(actor, play, gi, a, b);
+    GiveItem(actor, play, gi, a, b);
 }
 
 PATCH_CALL(0x80bb3290, EnGeg_GiveItem);
@@ -73,7 +73,7 @@ Vec3f* DonGero_GetRollTarget(s16 index) {
  * Hook function used to override starting the cutscene.
  **/
 void DonGero_StartCutscene(s16 index, Actor* actor) {
-    if (index == 0x17) {   
+    if (index == 0x17) {
         u8* address = (u8*)actor;
         u16* rollingAddress = (u16*)(address + 0x4AA);
         *rollingAddress = 0x180;

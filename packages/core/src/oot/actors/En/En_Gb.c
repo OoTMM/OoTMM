@@ -1,9 +1,9 @@
 #include <combo.h>
 
-int EnGb_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
+void EnGb_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
 {
     gi = comboOverride(OV_NPC, 0, NPC_OOT_POE_COLLECTOR, gi);
-    return GiveItem(actor, play, gi, a, b);
+    GiveItem(actor, play, gi, a, b);
 }
 
 PATCH_CALL(0x80b6b364, EnGb_GiveItem);

@@ -7,10 +7,10 @@ static s16 EnBox_Item(Actor* this, GameState_Play* play, s16 gi, int progressive
     return gi;
 }
 
-int EnBox_GiveItem(Actor* actor, GameState_Play* play, s16 gi)
+void EnBox_GiveItem(Actor* actor, GameState_Play* play, s16 gi)
 {
     gi = EnBox_Item(actor, play, gi, 1);
-    return GiveItemDefaultRange(actor, play, gi);
+    GiveItemDefaultRange(actor, play, gi);
 }
 
 PATCH_CALL(0x808696bc, &EnBox_GiveItem);

@@ -12,7 +12,7 @@ int EnMaYto_HasGivenItem(Actor* this)
 
 PATCH_CALL(0x80b900d4, EnMaYto_HasGivenItem);
 
-int EnMaYto_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
+void EnMaYto_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
 {
     if (gMmExtraFlags.maskRomani)
     {
@@ -22,7 +22,7 @@ int EnMaYto_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b
     {
         gi = comboOverride(OV_NPC, 0, NPC_MM_CREMIA_ESCORT, GI_MM_MASK_ROMANI);
     }
-    return GiveItem(this, play, gi, a, b);
+    GiveItem(this, play, gi, a, b);
 }
 
 PATCH_CALL(0x80b9012c, EnMaYto_GiveItem);

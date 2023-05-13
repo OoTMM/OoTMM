@@ -18,13 +18,13 @@ int EnKgy_HasGivenItem(Actor* this)
 
 PATCH_CALL(0x80b41d84, EnKgy_HasGivenItem);
 
-int EnKgy_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
+void EnKgy_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
 {
     if (!gMmExtraFlags.swordRazor)
         gi = comboOverride(OV_NPC, 0, NPC_MM_SWORD_RAZOR, GI_MM_SWORD_RAZOR);
     else
         gi = comboOverride(OV_NPC, 0, NPC_MM_SWORD_GILDED, GI_MM_SWORD_GILDED);
-    return GiveItem(this, play, gi, a, b);
+    GiveItem(this, play, gi, a, b);
 }
 
 PATCH_CALL(0x80b41df0, EnKgy_GiveItem);

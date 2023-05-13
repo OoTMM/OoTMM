@@ -243,10 +243,10 @@ static int EnDns_HasGivenItem(Actor* this)
 
 PATCH_CALL(0x80a75878, EnDns_HasGivenItem);
 
-static int EnDns_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
+static void EnDns_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
 {
     gi = EnDns_GetGi(actor, OVF_PROGRESSIVE);
-    return GiveItem(actor, play, gi, a, b);
+    GiveItem(actor, play, gi, a, b);
 }
 
 PATCH_CALL(0x80a75734, EnDns_GiveItem);

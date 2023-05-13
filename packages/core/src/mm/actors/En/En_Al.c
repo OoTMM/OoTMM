@@ -1,6 +1,6 @@
 #include <combo.h>
 
-int EnAl_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
+void EnAl_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
 {
     switch (gi)
     {
@@ -12,5 +12,5 @@ int EnAl_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
         gi = comboOverride(OV_NPC, 0, NPC_MM_CHATEAU_ROMANI, gi);
         break;
     }
-    return GiveItem(this, play, gi, a, b);
+    GiveItem(this, play, gi, a, b);
 }

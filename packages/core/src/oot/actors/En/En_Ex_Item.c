@@ -72,10 +72,10 @@ void EnExItem_Draw(Actor* actor, GameState_Play* play)
     comboDrawGI(play, actor, EnExItem_Reward(actor), 0);
 }
 
-int EnExItem_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
+void EnExItem_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
 {
     gi = EnExItem_Reward(actor);
-    return GiveItem(actor, play, gi, a, b);
+    GiveItem(actor, play, gi, a, b);
 }
 
 PATCH_FUNC(0x80ad9f78, EnExItem_Draw);

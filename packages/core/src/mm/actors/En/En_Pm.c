@@ -11,7 +11,7 @@ void EnPm_AfterGivingItem(Actor* this)
     }
 }
 
-int EnPm_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
+void EnPm_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
 {
     if (gi == GI_MM_MASK_POSTMAN)
     {
@@ -23,5 +23,5 @@ int EnPm_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
             sIsMaksPostman = 1;
         }
     }
-    return GiveItem(this, play, gi, a, b);
+    GiveItem(this, play, gi, a, b);
 }

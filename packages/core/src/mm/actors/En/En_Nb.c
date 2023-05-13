@@ -11,7 +11,7 @@ void EnNb_AfterGivingItem(Actor* this)
     }
 }
 
-int EnNb_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
+void EnNb_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
 {
     if (gi == GI_MM_HEART_PIECE)
     {
@@ -21,5 +21,5 @@ int EnNb_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
         else
             gi = comboOverride(OV_NPC, 0, NPC_MM_GRANDMA_HEART_PIECE_2, gi);
     }
-    return GiveItem(this, play, gi, a, b);
+    GiveItem(this, play, gi, a, b);
 }

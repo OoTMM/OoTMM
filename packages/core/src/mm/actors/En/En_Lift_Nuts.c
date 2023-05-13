@@ -12,7 +12,7 @@ int EnLiftNuts_HasGivenItem(Actor* this)
 
 PATCH_CALL(0x80aeb5a4, EnLiftNuts_HasGivenItem);
 
-int EnLiftNuts_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
+void EnLiftNuts_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
 {
     if (gi == GI_MM_HEART_PIECE)
     {
@@ -22,7 +22,7 @@ int EnLiftNuts_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, floa
     {
         gi = comboOverride(OV_NPC, 0, NPC_MM_DEKU_PLAYGROUND_1, gi);
     }
-    return GiveItem(this, play, gi, a, b);
+    GiveItem(this, play, gi, a, b);
 }
 
 PATCH_CALL(0x80aeb64c, EnLiftNuts_GiveItem);

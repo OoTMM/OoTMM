@@ -11,7 +11,7 @@ void EnDnh_AfterGivingItem(Actor* actor)
     }
 }
 
-int EnDnh_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
+void EnDnh_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
 {
     sIsPictobox = 0;
     switch (gi)
@@ -27,5 +27,5 @@ int EnDnh_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
         gi = comboOverride(OV_NPC, 0, NPC_MM_KOUME_HEART_PIECE, gi);
         break;
     }
-    return GiveItem(actor, play, gi, a, b);
+    GiveItem(actor, play, gi, a, b);
 }

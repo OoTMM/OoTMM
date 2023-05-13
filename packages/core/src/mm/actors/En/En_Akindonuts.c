@@ -325,7 +325,7 @@ int EnAkindonuts_HasGivenItem(Actor* this)
 PATCH_CALL(0x80bef3f4, EnAkindonuts_HasGivenItem);
 PATCH_CALL(0x80bef38c, EnAkindonuts_HasGivenItem);
 
-int EnAkindonuts_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
+void EnAkindonuts_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
 {
     switch (gi)
     {
@@ -387,7 +387,7 @@ int EnAkindonuts_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, f
         break;
     }
 
-    return GiveItem(actor, play, gi, a, b);
+    GiveItem(actor, play, gi, a, b);
 }
 
 PATCH_CALL(0x80bef3e4, EnAkindonuts_GiveItem);

@@ -14,7 +14,7 @@ int EnHs_HasGivenItem(Actor* actor)
 
 PATCH_CALL(0x809530a4, EnHs_HasGivenItem);
 
-int EnHs_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
+void EnHs_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
 {
     if (gMmExtraFlags.maskBunny)
     {
@@ -25,7 +25,7 @@ int EnHs_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
         gi = comboOverride(OV_NPC, 0, NPC_MM_MASK_BUNNY, GI_MM_MASK_BUNNY);
     }
 
-    return GiveItem(actor, play, gi, a, b);
+    GiveItem(actor, play, gi, a, b);
 }
 
 PATCH_CALL(0x8095314c, EnHs_GiveItem);

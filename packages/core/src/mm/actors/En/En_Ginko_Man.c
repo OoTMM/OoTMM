@@ -20,7 +20,7 @@ int EnGinkoMan_HasGivenItem(Actor* this)
 
 PATCH_CALL(0x80a6559c, EnGinkoMan_HasGivenItem);
 
-int EnGinkoMan_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
+void EnGinkoMan_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
 {
     switch (gi)
     {
@@ -40,7 +40,7 @@ int EnGinkoMan_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, floa
         break;
     }
 
-    return GiveItem(this, play, gi, a, b);
+    GiveItem(this, play, gi, a, b);
 }
 
 PATCH_CALL(0x80a65618, EnGinkoMan_GiveItem);

@@ -27,10 +27,10 @@ static void EnScopenuts_DisplayTextBox(GameState_Play* play, s16 messageId, Acto
 PATCH_CALL(0x80bcb588, EnScopenuts_DisplayTextBox);
 PATCH_CALL(0x80bcb79c, EnScopenuts_DisplayTextBox);
 
-int EnScopenuts_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
+void EnScopenuts_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
 {
     gi = comboOverride(OV_NPC, 0, NPC_MM_SCRUB_TELESCOPE, gi);
-    return GiveItem(this, play, gi, a, b);
+    GiveItem(this, play, gi, a, b);
 }
 
 PATCH_CALL(0x80bcb968, EnScopenuts_GiveItem);

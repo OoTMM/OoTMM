@@ -1,6 +1,6 @@
 #include <combo.h>
 
-int EnSyatekiMan_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
+void EnSyatekiMan_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
 {
     switch (gi)
     {
@@ -13,7 +13,7 @@ int EnSyatekiMan_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, f
         gi = comboOverride(OV_NPC, 0, NPC_OOT_SHOOTING_GAME_ADULT, gi);
         break;
     }
-    return GiveItem(actor, play, gi, a, b);
+    GiveItem(actor, play, gi, a, b);
 }
 
 PATCH_CALL(0x809a130c, EnSyatekiMan_GiveItem);

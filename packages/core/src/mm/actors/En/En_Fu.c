@@ -17,7 +17,7 @@ int EnFu_HasGivenItem(Actor* this)
 
 PATCH_CALL(0x80963574, EnFu_HasGivenItem);
 
-int EnFu_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
+void EnFu_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
 {
     switch (gi)
     {
@@ -32,7 +32,7 @@ int EnFu_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
         gi = comboOverride(OV_NPC, 0, NPC_MM_HONEY_DARLING_2, gi);
         break;
     }
-    return GiveItem(this, play, gi, a, b);
+    GiveItem(this, play, gi, a, b);
 }
 
 PATCH_CALL(0x809635cc, EnFu_GiveItem);
