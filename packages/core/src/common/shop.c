@@ -44,22 +44,22 @@ void comboShopUpdateItem(GameState_Play* play, Actor_EnGirlA* girlA)
     if (shopReadFlag(girlA->shopId))
     {
 #if defined(GAME_MM)
-    switch (girlA->shopId)
-    {
-    case 0x02:
-    case 0x03:
-    case 0x04:
-        girlA->gi = SOLD_OUT;
-        break;
-    }
+        switch (girlA->shopId)
+        {
+        case 0x02:
+        case 0x03:
+        case 0x04:
+            girlA->gi = SOLD_OUT;
+            break;
+        }
 #endif
-    }
 
-    girlA->gi = comboRenewable(girlA->gi, SOLD_OUT);
+        girlA->gi = comboRenewable(girlA->gi, SOLD_OUT);
 
-    if (girlA->gi == SOLD_OUT)
-    {
-        girlA->disabled = 1;
+        if (girlA->gi == SOLD_OUT)
+        {
+            girlA->disabled = 1;
+        }
     }
 }
 
