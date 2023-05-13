@@ -32,6 +32,8 @@ Mayor's Office Kafei's Mask,                      npc,            NONE,         
 Mayor's Office HP,                                npc,            NONE,                   MAYOR_HOUSE,                MAYOR_HEART_PIECE,          HEART_PIECE
 Milk Bar Troupe Leader Mask,                      npc,            SOUND_CHECK,            MILK_BAR,                   MASK_TROUPE_LEADER,         MASK_TROUPE_LEADER
 Milk Bar Madame Aroma Bottle,                     npc,            NONE,                   MILK_BAR,                   CHATEAU_ROMANI,             BOTTLE_CHATEAU
+Milk Bar Purchase Milk,                           npc,            NONE,                   MILK_BAR,                   MILK_BAR_MILK,              MILK
+Milk Bar Purchase Chateau,                        npc,            NONE,                   MILK_BAR,                   MILK_BAR_CHATEAU,           CHATEAU
 Town Archery Reward 1,                            npc,            NONE,                   SHOOTING_GALLERY,           SHOOTING_GAME_TOWN_1,       BOW
 Town Archery Reward 2,                            npc,            NONE,                   SHOOTING_GALLERY,           SHOOTING_GAME_TOWN_2,       HEART_PIECE
 Chest Game HP,                                    npc,            NONE,                   TREASURE_SHOP,              CHEST_GAME,                 HEART_PIECE

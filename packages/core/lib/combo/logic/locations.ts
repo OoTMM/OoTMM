@@ -15,7 +15,9 @@ export const MM_SCRUBS = [
 
 export const MM_MERCHANTS = [
   'MM Gorman Track Milk Purchase',
-]
+  'MM Milk Bar Purchase Milk',
+  'MM Milk Bar Purchase Chateau',
+];
 
 export const OOT_ONE_TIME_SCRUBS = [
   'OOT Lost Woods Scrub Sticks Upgrade',

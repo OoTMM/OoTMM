@@ -47,6 +47,7 @@
 # define AC_ITEM_B_HEART    0x03a
 # define AC_EN_COW          0x0f3
 # define AC_DM_HINA         0x140
+# define AC_EN_TAB          0x263
 #endif
 
 #if !defined(__ASSEMBLER__)

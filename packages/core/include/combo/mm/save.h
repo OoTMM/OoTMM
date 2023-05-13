@@ -340,7 +340,8 @@ typedef struct
     u32 townStrayFairy:1;
     u32 scrubPotionBlue:1;
     u32 gormanMilk:1;
-    u32 unused:2;
+    u32 milkBarMilk:1;
+    u32 milkBarChateau:1;
 }
 MmExtraFlags2;
 
