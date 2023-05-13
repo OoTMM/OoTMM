@@ -41,8 +41,12 @@ export class LogicPassConfig {
       config.add('SMALL_KEY_SHUFFLE');
     }
 
-    if (this.state.settings.csmc) {
+    if (this.state.settings.csmc === 'always') {
       config.add('CSMC');
+    }
+
+    if (this.state.settings.csmc === 'agony') {
+      config.add('CSMC_AGONY');
     }
 
     if (this.state.settings.progressiveShieldsOot === 'progressive') {

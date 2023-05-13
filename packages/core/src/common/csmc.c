@@ -350,9 +350,14 @@ static int csmcFromItem(s16 gi)
         return csmcFromItemOot(gi);
 }
 
-static int csmcEnabled(Actor* this, GameState_Play* play)
+static int csmcEnabled(void)
 {
-    if (!comboConfig(CFG_CSMC))
+    return (comboConfig(CFG_CSMC) || (comboConfig(CFG_CSMC_AGONY) && gOotSave.inventory.quest.agonyStone));
+}
+
+static int csmcEnabledActor(Actor* this, GameState_Play* play)
+{
+    if (!csmcEnabled())
         return 0;
 
 #if defined(GAME_OOT)
@@ -372,7 +377,7 @@ void comboCsmcInit(Actor* this, GameState_Play* play, s16 gi)
 {
     int type;
 
-    if (!csmcEnabled(this, play))
+    if (!csmcEnabledActor(this, play))
         return;
 
     type = csmcFromItem(gi);
@@ -415,7 +420,7 @@ void comboCsmcPreDraw(Actor* this, GameState_Play* play, s16 gi)
     const void* listFront;
     const void* listSide;
 
-    if (csmcEnabled(this, play))
+    if (csmcEnabledActor(this, play))
         type = csmcFromItem(gi);
     else
         type = CSMC_NORMAL;
@@ -459,7 +464,7 @@ void comboCsmcPreDraw(Actor* this, GameState_Play* play, s16 gi)
 
 int comboCsmcChestSize(s16 gi)
 {
-    if (!comboConfig(CFG_CSMC))
+    if (!csmcEnabled())
         return -1;
     switch (csmcFromItem(gi))
     {

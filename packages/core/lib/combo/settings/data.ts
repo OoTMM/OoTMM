@@ -414,9 +414,14 @@ export const SETTINGS = [{
   key: 'csmc',
   name: 'Chest Size Matches Content',
   category: 'main.misc',
-  type: 'boolean',
+  type: 'enum',
+  values: [
+    { value: 'never',  name: 'Never', description: 'Chests will be vanilla' },
+    { value: 'agony',  name: 'Stone of Agony', description: 'Chests will match content when you have the stone of agony in OoT' },
+    { value: 'always', name: 'Always', description: 'Chests will always match content' },
+  ],
   description: 'Modifies the chests appearance so they match their content. Works for unique items, keys and fairies.',
-  default: false
+  default: 'never'
 }, {
   key: 'blastMaskCooldown',
   name: 'Blast Mask Cooldown',
