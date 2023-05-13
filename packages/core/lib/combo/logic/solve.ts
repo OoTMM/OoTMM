@@ -294,13 +294,16 @@ export class LogicPassSolver {
 
   private fixDungeon(dungeon: string) {
     /* handle IST and ST */
-    if (dungeon === 'IST') {
+    if (['IST', 'Tower'].includes(dungeon)) {
       return;
     }
 
     let locations = this.state.world.dungeons[dungeon];
     if (dungeon === 'ST') {
       locations = new Set([...locations, ...this.state.world.dungeons['IST']]);
+    }
+    if (dungeon === 'Ganon') {
+      locations = new Set([...locations, ...this.state.world.dungeons['Tower']]);
     }
 
     const pool = combinedItems(this.pools.required, this.pools.nice);

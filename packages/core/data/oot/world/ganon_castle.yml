@@ -8,7 +8,7 @@
     "Ganon Castle Water": "true"
     "Ganon Castle Spirit": "true"
     "Ganon Castle Shadow": "true"
-    "Ganon Castle Tower": "true"
+    "Ganon Castle Stairs": "true"
   locations:
     "Ganon Castle Leftmost Scrub": "has_lens && can_hit_scrub && can_use_wallet(1)"
     "Ganon Castle Left-Center Scrub": "has_lens && can_hit_scrub && can_use_wallet(1)"
@@ -59,3 +59,8 @@
   locations:
     "Ganon Castle Shadow Chest 1": "can_play(SONG_TIME) || can_hookshot || has_hover_boots || has_fire_arrows"
     "Ganon Castle Shadow Chest 2": "(can_longshot || has_fire_arrows) && (has_hover_boots || has_fire)"
+"Ganon Castle Stairs":
+  region: NONE
+  exits:
+    "Ganon Castle": "true"
+    "Ganon Castle Tower": "true"

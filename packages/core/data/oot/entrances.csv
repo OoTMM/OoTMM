@@ -31,6 +31,8 @@ Gerudo Training Grounds,                    Gerudo Fortress Exterior,           
 Gerudo Fortress Exterior,                   Gerudo Training Grounds,                    dungeon,    0x3a8
 Ganon Castle,                               Ganon Castle Exterior After Bridge,         dungeon,    0x467
 Ganon Castle Exterior After Bridge,         Ganon Castle,                               dungeon,    0x23d
+Ganon Castle Tower,                         Ganon Castle Stairs,                        dungeon,    0x41b
+Ganon Castle Stairs,                        Ganon Castle Tower,                         dungeon,    0x534
 Lost Woods Bridge,                          Hyrule Field,                               overworld,  0x4de
 Hyrule Field,                               Lost Woods Bridge,                          overworld,  0x185
 Zora River Front,                           Hyrule Field,                               overworld,  0x0ea

@@ -8,7 +8,7 @@
     "Ganon Castle Water": "true"
     "Ganon Castle Spirit": "true"
     "Ganon Castle Shadow": "true"
-    "Ganon Castle Tower": "true"
+    "Ganon Castle Stairs": "true"
   locations:
     "MQ Ganon Castle Leftmost Scrub": "has_lens && can_hit_scrub && can_use_wallet(1)"
     "MQ Ganon Castle Left-Center Scrub": "has_lens && can_hit_scrub && can_use_wallet(1)"
@@ -59,3 +59,8 @@
   locations:
     "MQ Ganon Castle Shadow Trial Bomb Flower Chest": "(can_hookshot || has_hover_boots) && (can_use_bow || (has_lens && has_hover_boots && (can_use_din || has_bombflowers)))"
     "MQ Ganon Castle Shadow Trial Switch Chest": "can_use_bow && has_lens && (has_hover_boots || (can_hookshot && has_fire))"
+"Ganon Castle Stairs":
+  region: NONE
+  exits:
+    "Ganon Castle": "true"
+    "Ganon Castle Tower": "true"
