@@ -123,6 +123,7 @@ export const SETTINGS = [{
   type: 'enum',
   description: 'Controls where Hideout (Gerudo Fortress) Small Keys can be',
   values: [
+    { value: 'vanilla', name: 'Vanilla', description: 'Hideout Small Keys are always on the guards' },
     { value: 'ownDungeon', name: 'Own Dungeon', description: 'Hideout Small Keys can only be found within Gerudo Fortress INTERIOR' },
     { value: 'anywhere', name: 'Anywhere', description: 'Hideout Small Keys can be found anywhere' },
   ],

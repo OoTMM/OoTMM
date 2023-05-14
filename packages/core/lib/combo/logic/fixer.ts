@@ -1,6 +1,6 @@
 import { Monitor } from '../monitor';
 import { Settings } from '../settings';
-import { isOwlStatue, isTingleMap } from './items';
+import { isOwlStatue, isSmallKeyHideout, isTingleMap } from './items';
 import { MM_MERCHANTS, MM_SCRUBS, ONE_TIME_SHOP_CHECKS, OOT_ONE_TIME_SCRUBS } from './locations';
 import { World } from './world';
 
@@ -74,6 +74,10 @@ export class LogicPassFixer {
       }
 
       if (item === 'OOT_BOSS_KEY_GANON' && this.state.settings.ganonBossKey === 'vanilla') {
+        this.fixedLocations.add(loc);
+      }
+
+      if (isSmallKeyHideout(item) && this.state.settings.smallKeyShuffleHideout === 'vanilla') {
         this.fixedLocations.add(loc);
       }
     }

@@ -156,7 +156,7 @@ export class LogicPassHints {
     }
 
     /* Non-shuffled hideout keys */
-    if (isSmallKeyHideout(item) && this.state.settings.smallKeyShuffleHideout === 'ownDungeon') {
+    if (isSmallKeyHideout(item) && this.state.settings.smallKeyShuffleHideout !== 'anywhere') {
       return true;
     }
 
