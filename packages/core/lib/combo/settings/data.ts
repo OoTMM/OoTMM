@@ -114,6 +114,7 @@ export const SETTINGS = [{
   values: [
     { value: 'ownDungeon', name: 'Own Dungeon', description: 'Dungeon Small Keys can only be found in their own dungeons' },
     { value: 'anywhere', name: 'Anywhere', description: 'Dungeon Small Keys can be found anywhere' },
+    { value: 'removed', name: 'Removed', description: 'Small keys are removed and boss doors are unlocked' },
   ],
   default: 'ownDungeon'
 }, {

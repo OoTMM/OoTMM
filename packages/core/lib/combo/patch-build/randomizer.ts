@@ -1,7 +1,7 @@
 import { Buffer } from 'buffer';
 
 import { LogicResult } from '../logic';
-import { DATA_GI, DATA_NPC, DATA_SCENES, DATA_REGIONS, DATA_CONFIG, DATA_HINTS_POOL, DATA_HINTS, DATA_ENTRANCES } from '../data';
+import { DATA_GI, DATA_NPC, DATA_SCENES, DATA_REGIONS, DATA_HINTS_POOL, DATA_HINTS, DATA_ENTRANCES } from '../data';
 import { Game, GAMES } from "../config";
 import { WorldCheck } from '../logic/world';
 import { DUNGEONS, Settings, SPECIAL_CONDS, SPECIAL_CONDS_KEYS } from '../settings';
@@ -11,6 +11,7 @@ import { gameId } from '../util';
 import { EntranceShuffleResult } from '../logic/entrance';
 import { Patchfile } from './patchfile';
 import { LOCATIONS_ZELDA } from '../logic/locations';
+import { CONFVARS_VALUES, Confvar } from '../confvars';
 
 const GAME_DATA_OFFSETS = {
   oot: 0x1000,
@@ -433,9 +434,9 @@ export const randomizerMq = (logic: LogicResult): Buffer => {
   return buffer;
 }
 
-export const randomizerConfig = (config: Set<string>): Buffer => {
+export const randomizerConfig = (config: Set<Confvar>): Buffer => {
   const bits = Array.from(config).map((c) => {
-    const bit = DATA_CONFIG[c];
+    const bit = CONFVARS_VALUES[c];
     if (bit === undefined) {
       throw new Error(`Unknown config ${c}`);
     }

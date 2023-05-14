@@ -64,10 +64,10 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
   base.housesSkulltulaTokens = sampleWeighted(random, { none: 5, all: 3 });
   base.tingleShuffle = sampleWeighted(random, { vanilla: 10, anywhere: 7, starting: 7, removed: 5 });
   base.mapCompassShuffle = sampleWeighted(random, { ownDungeon: 10, anywhere: 7, starting: 7, removed: 5 });
-  base.smallKeyShuffleOot = sampleWeighted(random, { ownDungeon: 10, anywhere: 8 });
+  base.smallKeyShuffleOot = sampleWeighted(random, { ownDungeon: 10, anywhere: 8, removed: 4 });
   base.smallKeyShuffleMm = sampleWeighted(random, { ownDungeon: 10, anywhere: 8 });
   base.smallKeyShuffleHideout = sampleWeighted(random, { ownDungeon: 10, anywhere: 7 });
-  base.bossKeyShuffleOot = sampleWeighted(random, { ownDungeon: 10, anywhere: 8 });
+  base.bossKeyShuffleOot = sampleWeighted(random, { ownDungeon: 10, anywhere: 8, removed: 4 });
   base.bossKeyShuffleMm = sampleWeighted(random, { ownDungeon: 10, anywhere: 8 });
   base.townFairyShuffle = sampleWeighted(random, { vanilla: 10, anywhere: 10 });
   base.strayFairyShuffle = sampleWeighted(random, { mixed: 10, anywhere: 7, vanilla: 3, ownDungeon: 5 });

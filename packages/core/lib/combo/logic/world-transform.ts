@@ -1,3 +1,4 @@
+import { Confvar } from '../confvars';
 import { Monitor } from '../monitor';
 import { Settings } from '../settings';
 import { exprTrue } from './expr';
@@ -176,7 +177,7 @@ export class LogicPassWorldTransform {
       monitor: Monitor;
       world: World;
       settings: Settings;
-      config: Set<string>;
+      config: Set<Confvar>;
       mq: Set<string>;
       fixedLocations: Set<string>;
     }
@@ -667,6 +668,11 @@ export class LogicPassWorldTransform {
     /* Handle other boss keys */
     if (settings.bossKeyShuffleOot === 'removed') {
       this.removeItems(ITEMS_BOSS_KEY_OOT);
+    }
+
+    /* Handle small keys */
+    if (settings.smallKeyShuffleOot === 'removed') {
+      this.removeItems(ITEMS_SMALL_KEY_OOT);
     }
 
     if (settings.zoraKing === 'open') {

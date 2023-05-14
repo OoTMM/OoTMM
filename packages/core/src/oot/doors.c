@@ -59,6 +59,14 @@ int comboDoorIsUnlocked(GameState_Play* play, Actor* actor)
                 return 1;
         }
     }
+    else if (type == DOOR_SMALL_KEY)
+    {
+        if (sceneId != SCE_OOT_GERUDO_FORTRESS && sceneId != SCE_OOT_TREASURE_SHOP)
+        {
+            if (comboConfig(CFG_OOT_NO_SMALL_KEY))
+                return 1;
+        }
+    }
 
     return GetSwitchFlag(play, flag);
 }

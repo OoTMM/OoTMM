@@ -17,7 +17,7 @@
 "Ganon Castle Light":
   dungeon: Ganon
   events:
-    GANON_TRIAL_LIGHT: "has(SMALL_KEY_GANON, 2) && can_hookshot && has_lens && has_light_arrows"
+    GANON_TRIAL_LIGHT: "small_keys(SMALL_KEY_GANON, 2) && can_hookshot && has_lens && has_light_arrows"
   locations:
     "Ganon Castle Light Chest Around 1": "true"
     "Ganon Castle Light Chest Around 2": "true"
@@ -26,7 +26,7 @@
     "Ganon Castle Light Chest Around 5": "true"
     "Ganon Castle Light Chest Around 6": "true"
     "Ganon Castle Light Chest Center": "has_lens"
-    "Ganon Castle Light Chest Lullaby": "has(SMALL_KEY_GANON, 1) && can_play(SONG_ZELDA)"
+    "Ganon Castle Light Chest Lullaby": "small_keys(SMALL_KEY_GANON, 1) && can_play(SONG_ZELDA)"
 "Ganon Castle Forest":
   dungeon: Ganon
   events:
