@@ -314,6 +314,9 @@ const hintBuffer = (settings: Settings, game: Game, gossip: string, hint: HintGo
   case 'gossip-grotto':
     id = gossipData.id | 0x20;
     break;
+  case 'gossip-moon':
+    id = gossipData.id | 0x40;
+    break;
   }
   switch (hint.type) {
   case 'hero':

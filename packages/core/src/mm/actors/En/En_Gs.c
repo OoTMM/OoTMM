@@ -25,6 +25,15 @@ void EnGs_MessageBox(GameState_Play* play, Actor* this)
     else
     {
         key = (*(u8*)((char*)this + 0x195) & 0x1f);
+        switch (play->sceneId)
+        {
+        case SCE_MM_MOON_DEKU:
+        case SCE_MM_MOON_GORON:
+        case SCE_MM_MOON_ZORA:
+        case SCE_MM_MOON_LINK:
+            key |= 0x40;
+            break;
+        }
     }
     PlayerDisplayTextBox(play, 0x20d0, this);
     comboHintGossip(key, play);
