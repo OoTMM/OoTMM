@@ -506,6 +506,12 @@ export class LogicPassHints {
   }
 
   private place(loc: string, hint: HintGossip) {
+    /* KLUDGE */
+    if (loc.startsWith('MM ')) {
+      hint.game = 'mm';
+    } else {
+      hint.game = 'oot';
+    }
     this.gossip[loc] = { ...hint };
   }
 
