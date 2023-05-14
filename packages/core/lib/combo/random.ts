@@ -38,7 +38,7 @@ export const randString = () => {
   return crypto.randomBytes(48).toString('hex');
 }
 
-const randomInt = (random: Random, max: number) => {
+export const randomInt = (random: Random, max: number) => {
   /* Create a mask that is all 1s up to the max value */
   let mask = max - 1;
   mask |= mask >> 1;

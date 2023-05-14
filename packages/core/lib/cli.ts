@@ -17,6 +17,9 @@ const makeOptions = async (args: string[]): Promise<OptionsInput> => {
     case "--seed":
       opts.seed = args[++i];
       break;
+    case "--random":
+      opts.random = { enabled: true };
+      break;
     case "--config": {
       const configFile = await fs.readFile(args[++i]);
       const config = YAML.parse(configFile.toString());

@@ -10,10 +10,12 @@ import { isShuffled } from './logic/is-shuffled';
 import { DEFAULT_SETTINGS, DUNGEONS, makeSettings, mergeSettings, SettingCategory, SETTINGS, Settings, SETTINGS_CATEGORIES, SPECIAL_CONDS, SPECIAL_CONDS_KEYS, TRICKS } from './settings';
 import { SettingsPatch } from './settings/patch';
 import { makeCosmetics } from './cosmetics';
+import { makeRandomSettings } from './settings/random';
 
 export { Presets, PRESETS } from './presets';
 export { Cosmetics, makeCosmetics, COSMETIC_NAMES } from './cosmetics';
 export { COLORS } from './cosmetics/color';
+export { OptionRandomSettings } from './settings/random';
 
 export type GeneratorParams = {
   oot: Buffer,
@@ -39,7 +41,8 @@ export const itemPool = (aSettings: Partial<Settings>) => {
   const settings: Settings = { ...DEFAULT_SETTINGS, ...aSettings };
   const cosmetics = makeCosmetics({});
   const monitor = new Monitor({ onLog: () => {} });
-  const { pool, world } = worldState(monitor, { settings, cosmetics, debug: false, seed: "--- INTERNAL ---" });
+  const random = makeRandomSettings({});
+  const { pool, world } = worldState(monitor, { settings, cosmetics, debug: false, seed: "--- INTERNAL ---", random });
 
   /* Extract relevant items from the pool */
   for (const item of Object.keys(pool)) {
@@ -71,7 +74,8 @@ export const locationList = (aSettings: Partial<Settings>) => {
   const settings: Settings = { ...DEFAULT_SETTINGS, ...aSettings };
   const cosmetics = makeCosmetics({});
   const monitor = new Monitor({ onLog: () => {} });
-  const { world, fixedLocations } = worldState(monitor, { settings, cosmetics, debug: false, seed: "--- INTERNAL ---" });
+  const random = makeRandomSettings({});
+  const { world, fixedLocations } = worldState(monitor, { settings, cosmetics, debug: false, seed: "--- INTERNAL ---", random });
 
   // Precalculate this to avoid doing it more than once in the gui
   const dungeonLocations = Object.values(world.dungeons).reduce((acc, x) => new Set([...acc, ...x]));

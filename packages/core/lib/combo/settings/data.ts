@@ -421,7 +421,7 @@ export const SETTINGS = [{
     { value: 'always', name: 'Always', description: 'Chests will always match content' },
   ],
   description: 'Modifies the chests appearance so they match their content. Works for unique items, keys and fairies.',
-  default: 'never'
+  default: 'always'
 }, {
   key: 'blastMaskCooldown',
   name: 'Blast Mask Cooldown',
@@ -486,7 +486,7 @@ export const SETTINGS = [{
   category: 'main.misc',
   type: 'boolean',
   description: 'Modifies the Bunny Hood in OoT to give a speed increase',
-  default: false
+  default: true
 }, {
   key: 'agelessSwords',
   name: 'Ageless Swords',
