@@ -69,7 +69,7 @@
 "Shadow Temple Boat":
   dungeon: Shadow
   exits:
-    "Shadow Temple Boss": "has(BOSS_KEY_SHADOW) && can_use_bow"
+    "Shadow Temple Boss": "boss_key(BOSS_KEY_SHADOW) && can_use_bow"
     "Shadow Temple Final Side Rooms": "can_use_bow && can_play(SONG_TIME) && can_longshot"
   locations:
     "MQ Shadow Temple GS After Boat": "true"

@@ -65,7 +65,7 @@
     "Spirit Temple Statue Adult": "can_hookshot"
     "Spirit Temple Child Climb": "true"
     "Spirit Temple Child Upper": "true"
-    "Spirit Temple Boss": "has(BOSS_KEY_SPIRIT) && event(SPIRIT_LIGHT_STATUE) && can_hookshot"
+    "Spirit Temple Boss": "boss_key(BOSS_KEY_SPIRIT) && event(SPIRIT_LIGHT_STATUE) && can_hookshot"
   locations:
     "Spirit Temple Statue Base": "(event(SPIRIT_CHILD_DOOR) && has_explosives && can_use_sticks) || has_fire_spirit || (has_fire_arrows && has(SMALL_KEY_SPIRIT, 4))"
     "Spirit Temple GS Statue": "event(SPIRIT_ADULT_DOOR) && (can_hookshot || has_hover_boots)"

@@ -41,7 +41,7 @@
     "Spirit Temple Sun Block Room": "is_adult || can_play(SONG_TIME)" #Adult's long legs make the jumps easy
     "Spirit Temple Adult Lower": "has_fire_arrows && has_mirror_shield"
     "Spirit Temple Adult Upper": "is_adult && has(SMALL_KEY_SPIRIT, 5)"
-    "Spirit Temple Boss": "event(SPIRIT_TEMPLE_LIGHT) && has_mirror_shield && has(BOSS_KEY_SPIRIT)"
+    "Spirit Temple Boss": "event(SPIRIT_TEMPLE_LIGHT) && has_mirror_shield && boss_key(BOSS_KEY_SPIRIT)"
   events:
     SPIRIT_STATUE_FIRE: "has_fire" #This allows for adult to open the shortcut for kid with Fire Arrows.
   locations:

@@ -47,7 +47,7 @@
 "Shadow Temple Boat":
   dungeon: Shadow
   exits:
-    "Shadow Temple Boss": "has(SMALL_KEY_SHADOW, 5) && has(BOSS_KEY_SHADOW) && (can_use_bow || scarecrow_longshot)"
+    "Shadow Temple Boss": "has(SMALL_KEY_SHADOW, 5) && boss_key(BOSS_KEY_SHADOW) && (can_use_bow || scarecrow_longshot)"
   locations:
     "Shadow Temple Boss Key Room 1": "can_use_din"
     "Shadow Temple Boss Key Room 2": "can_use_din"

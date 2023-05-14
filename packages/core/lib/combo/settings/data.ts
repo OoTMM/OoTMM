@@ -148,6 +148,7 @@ export const SETTINGS = [{
   values: [
     { value: 'ownDungeon', name: 'Own Dungeon', description: 'Boss Keys can only be in their own dungeons' },
     { value: 'anywhere', name: 'Anywhere', description: 'Boss Keys can be found anywhere' },
+    { value: 'removed', name: 'Removed', description: 'Boss keys are removed and boss doors are unlocked' },
   ],
   default: 'ownDungeon'
 }, {

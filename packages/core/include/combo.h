@@ -306,7 +306,7 @@ void comboDpadUpdate(GameState_Play* play);
 int  comboDpadUse(GameState_Play* play, int flags);
 
 int comboConfig(int flag);
-int comboDoorIsUnlocked(GameState_Play* play, int flag);
+int comboDoorIsUnlocked(GameState_Play* play, Actor* actor);
 
 /* DMA */
 typedef struct

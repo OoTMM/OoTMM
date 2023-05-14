@@ -40,4 +40,4 @@
 "Water Temple Antichamber":
   dungeon: Water
   exits:
-    "Water Temple Boss": "has(BOSS_KEY_WATER)"
+    "Water Temple Boss": "boss_key(BOSS_KEY_WATER)"

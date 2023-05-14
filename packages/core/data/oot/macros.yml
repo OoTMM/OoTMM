@@ -119,3 +119,6 @@
 # Wallets
 "has_wallet(n)": "cond(setting(childWallets), has(WALLET, n), has(WALLET, n - 1))"
 "can_use_wallet(n)": "has_rupees && has_wallet(n)"
+
+# Boss Keys
+"boss_key(x)": "setting(bossKeyShuffleOot, removed) || has(x)"

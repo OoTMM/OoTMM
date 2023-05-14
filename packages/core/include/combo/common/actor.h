@@ -9,8 +9,10 @@
 # define AC_ITEM_GIVER              0x003
 # define AC_CUSTOM_WARP             0x005
 # define AC_CUSTOM_TRIGGERS         0x006
+# define AC_EN_DOOR                 0x009
 # define AC_EN_BOX                  0x00a
 # define AC_ITEM00                  0x015
+# define AC_DOOR_SHUTTER            0x02e
 # define AC_EN_XC                   0x048
 # define AC_DOOR_WARP1              0x05d
 # define AC_ITEM_B_HEART            0x05f
@@ -39,8 +41,10 @@
 
 #if defined(GAME_MM)
 # define AC_EN_GIRLA        0x002
+# define AC_EN_DOOR         0x005
 # define AC_EN_BOX          0x006
 # define AC_ITEM00          0x00e
+# define AC_DOOR_SHUTTER    0x01e
 # define AC_ITEM_GIVER      0x01f
 # define AC_CUSTOM_WARP     0x023
 # define AC_DOOR_WARP1      0x038

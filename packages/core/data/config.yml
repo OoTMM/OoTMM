@@ -51,3 +51,4 @@ MM_OWL_SHUFFLE:                 0x31
 CSMC_AGONY:                     0x32
 OOT_CARPENTERS_ONE:             0x33
 OOT_CARPENTERS_NONE:            0x34
+OOT_NO_BOSS_KEY:                0x35

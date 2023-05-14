@@ -9,7 +9,7 @@
   dungeon: Fire
   exits:
     "Fire Temple": "true"
-    "Fire Temple Boss": "has(BOSS_KEY_FIRE) && (event(FIRE_TEMPLE_PILLAR_HAMMER) || has_hover_boots) && has_tunic_goron"
+    "Fire Temple Boss": "boss_key(BOSS_KEY_FIRE) && (event(FIRE_TEMPLE_PILLAR_HAMMER) || has_hover_boots) && has_tunic_goron"
   events:
     BOMBS: "has_tunic_goron"
   locations:

@@ -143,7 +143,7 @@
 "Forest Temple Antichamber":
   dungeon: Forest
   exits:
-    "Forest Temple Boss": "has(BOSS_KEY_FOREST)"
+    "Forest Temple Boss": "boss_key(BOSS_KEY_FOREST)"
   locations:
     "Forest Temple Antichamber": "true"
     "Forest Temple GS Antichamber": "can_collect_distance"

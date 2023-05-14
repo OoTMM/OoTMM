@@ -241,6 +241,10 @@ export class LogicPassConfig {
       config.add('OOT_CARPENTERS_NONE');
     }
 
+    if (settings.bossKeyShuffleOot === 'removed') {
+      config.add('OOT_NO_BOSS_KEY');
+    }
+
     return { mq, config };
   }
 }

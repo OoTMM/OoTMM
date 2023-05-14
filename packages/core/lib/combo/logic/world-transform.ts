@@ -230,6 +230,12 @@ export class LogicPassWorldTransform {
     }
   }
 
+  private removeItems(items: Set<string>, amount?: number) {
+    for (const item of items) {
+      this.removeItem(item, amount);
+    }
+  }
+
   private addItem(item: string, amount?: number) {
     const count = this.pool[item] || 0;
     if (amount === undefined) {
@@ -656,6 +662,11 @@ export class LogicPassWorldTransform {
     /* Handle Ganon BK */
     if (settings.ganonBossKey === 'removed' || settings.ganonBossKey === 'custom') {
       this.removeItem('OOT_BOSS_KEY_GANON');
+    }
+
+    /* Handle other boss keys */
+    if (settings.bossKeyShuffleOot === 'removed') {
+      this.removeItems(ITEMS_BOSS_KEY_OOT);
     }
 
     if (settings.zoraKing === 'open') {
