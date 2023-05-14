@@ -6,7 +6,7 @@ import { Game, GAMES } from "../config";
 import { WorldCheck } from '../logic/world';
 import { DUNGEONS, Settings, SPECIAL_CONDS, SPECIAL_CONDS_KEYS } from '../settings';
 import { HintGossip, Hints } from '../logic/hints';
-import { isDungeonStrayFairy, isGanonBossKey, isMap, isCompass, isRegularBossKey, isSmallKeyRegular, isTownStrayFairy, isSmallKeyHideout, isItemUnlimitedStarting, ITEMS_MAPS, ITEMS_COMPASSES, addItem, ITEMS_TINGLE_MAPS, isSmallKeyRegularOot, isSmallKeyRegularMm } from '../logic/items';
+import { isDungeonStrayFairy, isGanonBossKey, isMap, isCompass, isRegularBossKey, isSmallKeyRegular, isTownStrayFairy, isSmallKeyHideout, isItemUnlimitedStarting, ITEMS_MAPS, ITEMS_COMPASSES, addItem, ITEMS_TINGLE_MAPS, isSmallKeyRegularOot, isSmallKeyRegularMm, isRegularBossKeyOot, isRegularBossKeyMm } from '../logic/items';
 import { gameId } from '../util';
 import { EntranceShuffleResult } from '../logic/entrance';
 import { Patchfile } from './patchfile';
@@ -151,7 +151,9 @@ const gi = (settings: Settings, game: Game, item: string, generic: boolean) => {
       item = gameId(game, 'SMALL_KEY', '_');
     } else if (isGanonBossKey(item) && settings.ganonBossKey !== 'anywhere') {
       item = gameId(game, 'BOSS_KEY', '_');
-    } else if (isRegularBossKey(item) && settings.bossKeyShuffle === 'ownDungeon' && settings.erBoss === 'none') {
+    } else if (isRegularBossKeyOot(item) && settings.bossKeyShuffleOot === 'ownDungeon' && settings.erBoss === 'none') {
+      item = gameId(game, 'BOSS_KEY', '_');
+    } else if (isRegularBossKeyMm(item) && settings.bossKeyShuffleMm === 'ownDungeon' && settings.erBoss === 'none') {
       item = gameId(game, 'BOSS_KEY', '_');
     } else if (isTownStrayFairy(item) && settings.townFairyShuffle === 'vanilla') {
       item = gameId(game, 'STRAY_FAIRY', '_');

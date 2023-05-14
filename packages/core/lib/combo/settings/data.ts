@@ -140,11 +140,22 @@ export const SETTINGS = [{
   ],
   default: 'ownDungeon'
 }, {
-  key: 'bossKeyShuffle',
-  name: 'Boss Key Shuffle',
+  key: 'bossKeyShuffleOot',
+  name: 'Boss Key Shuffle (OoT)',
   category: 'main.shuffle',
   type: 'enum',
-  description: 'Controls where Boss Keys can be',
+  description: 'Controls where Boss Keys can be in OoT',
+  values: [
+    { value: 'ownDungeon', name: 'Own Dungeon', description: 'Boss Keys can only be in their own dungeons' },
+    { value: 'anywhere', name: 'Anywhere', description: 'Boss Keys can be found anywhere' },
+  ],
+  default: 'ownDungeon'
+}, {
+  key: 'bossKeyShuffleMm',
+  name: 'Boss Key Shuffle (MM)',
+  category: 'main.shuffle',
+  type: 'enum',
+  description: 'Controls where Boss Keys can be in MM',
   values: [
     { value: 'ownDungeon', name: 'Own Dungeon', description: 'Boss Keys can only be in their own dungeons' },
     { value: 'anywhere', name: 'Anywhere', description: 'Boss Keys can be found anywhere' },

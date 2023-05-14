@@ -4,7 +4,7 @@ import { gameId } from '../util';
 import { Pathfinder, PathfinderState } from './pathfind';
 import { World } from './world';
 import { LogicError, LogicSeedError } from './error';
-import { Items, combinedItems, itemsArray, removeItem, ITEMS_REQUIRED, isDungeonReward, isGoldToken, isHouseToken, isKey, isStrayFairy, isGanonBossKey, isRegularBossKey, isTownStrayFairy, isDungeonStrayFairy, isSong, isJunk, isMapCompass, isSmallKeyRegular, isSmallKeyHideout, isItemUnlimitedStarting, isItemCriticalRenewable, isRupees, isItemConsumable, isItemMajor, isSmallKeyRegularMm, isSmallKeyRegularOot } from './items';
+import { Items, combinedItems, itemsArray, removeItem, ITEMS_REQUIRED, isDungeonReward, isGoldToken, isHouseToken, isKey, isStrayFairy, isGanonBossKey, isRegularBossKey, isTownStrayFairy, isDungeonStrayFairy, isSong, isJunk, isMapCompass, isSmallKeyRegular, isSmallKeyHideout, isItemUnlimitedStarting, isItemCriticalRenewable, isRupees, isItemConsumable, isItemMajor, isSmallKeyRegularMm, isSmallKeyRegularOot, isRegularBossKeyOot, isRegularBossKeyMm } from './items';
 import { Settings } from '../settings';
 import { Monitor } from '../monitor';
 import { isLocationRenewable } from './locations';
@@ -320,7 +320,9 @@ export class LogicPassSolver {
           continue;
         } else if (isGanonBossKey(item) && this.state.settings.ganonBossKey === 'anywhere') {
           continue;
-        } else if (isRegularBossKey(item) && this.state.settings.bossKeyShuffle === 'anywhere') {
+        } else if (isRegularBossKeyOot(item) && this.state.settings.bossKeyShuffleOot === 'anywhere') {
+          continue;
+        } else if (isRegularBossKeyMm(item) && this.state.settings.bossKeyShuffleMm === 'anywhere') {
           continue;
         } else if (isDungeonStrayFairy(item) && this.state.settings.strayFairyShuffle === 'anywhere') {
           continue;

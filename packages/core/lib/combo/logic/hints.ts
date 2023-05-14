@@ -2,7 +2,7 @@ import { ItemPlacement } from './solve';
 import { World } from './world';
 import { Analysis } from './analysis';
 import { Random, sample, shuffle } from '../random';
-import { DUNGEON_REWARDS_ORDERED, isDungeonReward, isGoldToken, itemsArray, isKey, isHouseToken, isGanonBossKey, isRegularBossKey, isStrayFairy, isToken, isTownStrayFairy, isSong, isSmallKeyRegular, isSmallKeyHideout, isMapCompass, ITEMS_MASKS_REGULAR, isSmallKeyRegularOot, isSmallKeyRegularMm } from './items';
+import { DUNGEON_REWARDS_ORDERED, isDungeonReward, isGoldToken, itemsArray, isKey, isHouseToken, isGanonBossKey, isRegularBossKey, isStrayFairy, isToken, isTownStrayFairy, isSong, isSmallKeyRegular, isSmallKeyHideout, isMapCompass, ITEMS_MASKS_REGULAR, isSmallKeyRegularOot, isSmallKeyRegularMm, isRegularBossKeyOot, isRegularBossKeyMm } from './items';
 import { Settings } from '../settings';
 import { Game } from '../config';
 import { Monitor } from '../monitor';
@@ -174,7 +174,11 @@ export class LogicPassHints {
     }
 
     /* Non shuffled boss keys */
-    if (isRegularBossKey(item) && this.state.settings.bossKeyShuffle === 'ownDungeon') {
+    if (isRegularBossKeyOot(item) && this.state.settings.bossKeyShuffleOot !== 'anywhere') {
+      return true;
+    }
+
+    if (isRegularBossKeyMm(item) && this.state.settings.bossKeyShuffleMm !== 'anywhere') {
       return true;
     }
 
