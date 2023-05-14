@@ -101,6 +101,8 @@ export class LogicPassHints {
   private foolish: {[k: string]: number} = {};
   private woth: Set<string>;
   private pathfinder: Pathfinder;
+  private hintsAlways: string[];
+  private hintsSometimes: string[];
 
   constructor(
     private readonly state: {
@@ -113,8 +115,32 @@ export class LogicPassHints {
       fixedLocations: Set<string>,
     },
   ){
+    this.hintsAlways = this.alwaysHints();
+    this.hintsSometimes = this.sometimesHints();
     this.pathfinder = new Pathfinder(state.world, state.settings);
     this.woth = new Set(Array.from(this.state.analysis.required).filter(loc => this.isLocationHintableHero(loc)));
+  }
+
+  private alwaysHints() {
+    const { settings } = this.state;
+    const alwaysHints = [...HINTS_ITEMS_ALWAYS];
+
+    if (settings.cowShuffleOot) {
+      alwaysHints.push('OOT_COW_LINK');
+    }
+
+    return alwaysHints;
+  }
+
+  private sometimesHints() {
+    const { settings } = this.state;
+    const sometimesHints = [...HINTS_ITEMS_SOMETIMES];
+
+    if (settings.cowShuffleMm) {
+      sometimesHints.push('MM_COW_WELL');
+    }
+
+    return sometimesHints;
   }
 
   private findItem(item: string) {
@@ -459,10 +485,10 @@ export class LogicPassHints {
     let hints = 0;
 
     /* Place always hints */
-    hints += this.placeGossipItemExactPool(HINTS_ITEMS_ALWAYS);
+    hints += this.placeGossipItemExactPool(this.hintsAlways);
 
     /* Place 3 sometimes hints */
-    hints += this.placeGossipItemExactPool(HINTS_ITEMS_SOMETIMES, 3);
+    hints += this.placeGossipItemExactPool(this.hintsSometimes, 3);
 
     /* Place 5 foolish hints */
     const foolishHints = this.placeGossipFoolish(this.foolish, 5);
@@ -470,7 +496,7 @@ export class LogicPassHints {
 
     const missingFoolish = 5 - foolishHints;
     if (missingFoolish > 0) {
-      hints += this.placeGossipItemExactPool(HINTS_ITEMS_SOMETIMES, missingFoolish);
+      hints += this.placeGossipItemExactPool(this.hintsSometimes, missingFoolish);
     }
 
     /* Place Soaring spoiler */
@@ -487,7 +513,7 @@ export class LogicPassHints {
     /* Place remaining hints */
     const missingHints = 34 - hints;
     if (missingHints > 0) {
-      hints += this.placeGossipItemExactPool(HINTS_ITEMS_SOMETIMES, missingHints);
+      hints += this.placeGossipItemExactPool(this.hintsSometimes, missingHints);
     }
 
     /* Duplicate every hint */

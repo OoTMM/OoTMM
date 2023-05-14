@@ -347,7 +347,7 @@ Great Bay Temple Boss,                            npc,            NONE,         
 Beneath the Well Skulltulla Chest,                chest,          NONE,                   BENEATH_THE_WELL,           0x01,                       RUPEE_PURPLE
 Beneath the Well Keese Chest,                     chest,          NONE,                   BENEATH_THE_WELL,           0x02,                       RUPEE_PURPLE
 Beneath the Well Mirror Shield,                   chest,          NONE,                   BENEATH_THE_WELL,           0x1b,                       SHIELD_MIRROR
-Beneath the Well Cow,                             cow,            NONE,                   BENEATH_THE_WELL,           0x17,                       MILK
+Beneath the Well Cow,                             cow,            COW_WELL,               BENEATH_THE_WELL,           0x17,                       MILK
 Ancient Castle of Ikana HP,                       collectible,    NONE,                   CASTLE_IKANA,               0x0a,                       HEART_PIECE
 Ancient Castle of Ikana Song Emptiness,           npc,            SONG_ELEGY,             LAIR_IKANA,                 SONG_EMPTINESS,             SONG_EMPTINESS
 Stone Tower Temple Entrance Chest,                chest,          NONE,                   TEMPLE_STONE_TOWER,         0x16,                       STRAY_FAIRY_ST

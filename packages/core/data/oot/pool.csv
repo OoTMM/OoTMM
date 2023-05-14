@@ -10,7 +10,7 @@ Kokiri Forest Storms Grotto,                                chest,          NONE
 Kokiri Forest GS Soil,                                      gs,             NONE,                 KOKIRI_FOREST,                  0x68,                       GS_TOKEN
 Kokiri Forest GS Night Child,                               gs,             NONE,                 KOKIRI_FOREST,                  0x69,                       GS_TOKEN
 Kokiri Forest GS Night Adult,                               gs,             NONE,                 KOKIRI_FOREST,                  0x6a,                       GS_TOKEN
-Kokiri Forest Cow,                                          cow,            NONE,                 KOKIRI_FOREST,                  0x00,                       MILK
+Kokiri Forest Cow,                                          cow,            COW_LINK,             KOKIRI_FOREST,                  0x00,                       MILK
 Kokiri Shop Item 1,                                         shop,           NONE,                 KOKIRI_FOREST,                  0x00,                       RECOVERY_HEART
 Kokiri Shop Item 2,                                         shop,           NONE,                 KOKIRI_FOREST,                  0x01,                       ARROWS_10
 Kokiri Shop Item 3,                                         shop,           NONE,                 KOKIRI_FOREST,                  0x02,                       ARROWS_30
