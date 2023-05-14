@@ -40,7 +40,7 @@ export class Generator {
     let log: string | null = null;
 
     /* Apply random settings */
-    if (this.opts.random) {
+    if (this.opts.random.enabled) {
       this.opts.settings = applyRandomSettings(this.opts.random, this.opts.settings);
     }
 
