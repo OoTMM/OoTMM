@@ -4,9 +4,12 @@
 #define DOOR_SMALL_KEY  1
 #define DOOR_BOSS_KEY   2
 
-static int doorType(Actor* this)
+static int doorType(GameState_Play* play, Actor* this)
 {
     u8 tmp;
+
+    if (play->sceneId == SCE_OOT_GERUDO_FORTRESS || play->sceneId == SCE_OOT_TREASURE_SHOP)
+        return DOOR_NONE;
 
     switch (this->id)
     {
@@ -17,9 +20,9 @@ static int doorType(Actor* this)
         break;
     case AC_DOOR_SHUTTER:
         tmp = (this->variable >> 6) & 0xf;
-        if (tmp == 0x5)
+        if (tmp == 0x05)
             return DOOR_BOSS_KEY;
-        if (tmp == 0xb)
+        if (tmp == 0x0b)
             return DOOR_SMALL_KEY;
         break;
     }
@@ -34,7 +37,7 @@ int comboDoorIsUnlocked(GameState_Play* play, Actor* actor)
     int flag;
 
     sceneId = play->sceneId;
-    type = doorType(actor);
+    type = doorType(play, actor);
     flag = actor->variable & 0x3f;
 
     /* Fire temple 1st door */
@@ -45,7 +48,6 @@ int comboDoorIsUnlocked(GameState_Play* play, Actor* actor)
     if (sceneId == SCE_OOT_TEMPLE_WATER && flag == 0x15 && !(gComboData.mq & (1 << MQ_TEMPLE_WATER)))
         return 1;
 
-    /* Boss keysy */
     if (type == DOOR_BOSS_KEY)
     {
         if (sceneId == SCE_OOT_GANON_TOWER)
@@ -59,14 +61,8 @@ int comboDoorIsUnlocked(GameState_Play* play, Actor* actor)
                 return 1;
         }
     }
-    else if (type == DOOR_SMALL_KEY)
-    {
-        if (sceneId != SCE_OOT_GERUDO_FORTRESS && sceneId != SCE_OOT_TREASURE_SHOP)
-        {
-            if (comboConfig(CFG_OOT_NO_SMALL_KEY))
-                return 1;
-        }
-    }
+    else if (type == DOOR_SMALL_KEY && comboConfig(CFG_OOT_NO_SMALL_KEY))
+        return 1;
 
     return GetSwitchFlag(play, flag);
 }

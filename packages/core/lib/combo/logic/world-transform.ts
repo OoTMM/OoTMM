@@ -670,9 +670,17 @@ export class LogicPassWorldTransform {
       this.removeItems(ITEMS_BOSS_KEY_OOT);
     }
 
+    if (settings.bossKeyShuffleMm === 'removed') {
+      this.removeItems(ITEMS_BOSS_KEY_MM);
+    }
+
     /* Handle small keys */
     if (settings.smallKeyShuffleOot === 'removed') {
       this.removeItems(ITEMS_SMALL_KEY_OOT);
+    }
+
+    if (settings.smallKeyShuffleMm === 'removed') {
+      this.removeItems(ITEMS_SMALL_KEY_MM);
     }
 
     if (settings.zoraKing === 'open') {

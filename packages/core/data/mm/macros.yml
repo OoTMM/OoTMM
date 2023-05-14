@@ -84,3 +84,7 @@
 # Wallets
 "has_wallet(n)": "cond(setting(childWallets), has(WALLET, n), has(WALLET, n - 1))"
 "can_use_wallet(n)": "event(RUPEES) && has_wallet(n)"
+
+# Keys
+"boss_key(x)": "setting(bossKeyShuffleMm, removed) || has(x)"
+"small_keys(x, count)": "setting(smallKeyShuffleMm, removed) || has(x, count)"

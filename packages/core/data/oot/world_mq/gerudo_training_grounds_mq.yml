@@ -14,7 +14,7 @@
     "MQ Gerudo Training Grounds Maze First Chest": "has_lens"
     "MQ Gerudo Training Grounds Maze Second Chest": "true"
     "MQ Gerudo Training Grounds Maze Third Chest": "true"
-    "MQ Gerudo Training Grounds Maze Fourth Chest": "small_keys(SMALL_KEY_GTG)"
+    "MQ Gerudo Training Grounds Maze Fourth Chest": "small_keys(SMALL_KEY_GTG, 1)"
 "Gerudo Training Grounds Right Path":
   dungeon: GTG
   exits:

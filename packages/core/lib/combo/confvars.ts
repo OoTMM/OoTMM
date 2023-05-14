@@ -54,6 +54,8 @@ export const CONFVARS = [
   'OOT_CARPENTERS_NONE',
   'OOT_NO_BOSS_KEY',
   'OOT_NO_SMALL_KEY',
+  'MM_NO_BOSS_KEY',
+  'MM_NO_SMALL_KEY',
 ] as const;
 
 export type Confvar = typeof CONFVARS[number];

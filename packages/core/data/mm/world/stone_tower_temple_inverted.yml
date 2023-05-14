@@ -41,12 +41,12 @@
   exits:
     "Stone Tower Temple Inverted East": "true"
     "Stone Tower Temple Inverted East Bridge": "true"
-    "Stone Tower Temple Inverted Wizzrobe": "can_use_light_arrows && cond(trick(MM_ISTT_ENTRY_JUMP), has(SMALL_KEY_ST, 4), has(SMALL_KEY_ST, 3))"
+    "Stone Tower Temple Inverted Wizzrobe": "can_use_light_arrows && cond(trick(MM_ISTT_ENTRY_JUMP), small_keys(SMALL_KEY_ST, 4), small_keys(SMALL_KEY_ST, 3))"
 "Stone Tower Temple Inverted Wizzrobe":
   dungeon: IST
   exits:
     "Stone Tower Temple Inverted Wizzrobe Ledge": "can_hookshot_short"
-    "Stone Tower Temple Inverted East Ledge": "(can_use_light_arrows && has(SMALL_KEY_ST, 3)) || (can_goron_bomb_jump && has_bombs && has(SMALL_KEY_ST, 4))"
+    "Stone Tower Temple Inverted East Ledge": "(can_use_light_arrows && small_keys(SMALL_KEY_ST, 3)) || (can_goron_bomb_jump && has_bombs && small_keys(SMALL_KEY_ST, 4))"
 "Stone Tower Temple Inverted Wizzrobe Ledge":
   dungeon: IST
   exits:
@@ -81,7 +81,7 @@
 "Stone Tower Temple Inverted Entrance Ledge":
   dungeon: IST
   exits:
-    "Stone Tower Temple Inverted Center Bridge": "has(SMALL_KEY_ST, 4) && can_hookshot"
+    "Stone Tower Temple Inverted Center Bridge": "small_keys(SMALL_KEY_ST, 4) && can_hookshot"
     "Stone Tower Temple Inverted Center": "true"
   events:
     STONE_TOWER_ENTRANCE_CHEST_SWITCH: "true"
@@ -89,14 +89,14 @@
   dungeon: IST
   exits:
     "Stone Tower Temple Inverted Pre-Boss": "true"
-    "Stone Tower Temple Inverted Boss Key Room": "trick(MM_ISTT_EYEGORE) && (has(MASK_GORON) || (has_explosives || (trick_keg_explosives && can_hookshot && has(SMALL_KEY_ST, 4))))"
+    "Stone Tower Temple Inverted Boss Key Room": "trick(MM_ISTT_EYEGORE) && (has(MASK_GORON) || (has_explosives || (trick_keg_explosives && can_hookshot && small_keys(SMALL_KEY_ST, 4))))"
     "Stone Tower Temple Inverted Center": "trick(MM_ISTT_EYEGORE) && (has(MASK_GORON) || (has_explosives || (trick_keg_explosives && can_hookshot)))"
   locations:
     "Stone Tower Temple Inverted Giant Mask": "true"
 "Stone Tower Temple Inverted Pre-Boss":
   dungeon: IST
   exits:
-    "Stone Tower Temple Boss": "can_hookshot_short && has(BOSS_KEY_ST)"
+    "Stone Tower Temple Boss": "can_hookshot_short && boss_key(BOSS_KEY_ST)"
   events:
     STONE_TOWER_BRIDGE_CHEST_SWITCH: "can_activate_crystal"
     BOMBS: "can_hookshot_short"

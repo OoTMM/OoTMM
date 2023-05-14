@@ -90,6 +90,8 @@ export class LogicPassConfig {
       OOT_CARPENTERS_NONE: settings.gerudoFortress === 'open',
       OOT_NO_BOSS_KEY: settings.bossKeyShuffleOot === 'removed',
       OOT_NO_SMALL_KEY: settings.smallKeyShuffleOot === 'removed',
+      MM_NO_BOSS_KEY: settings.bossKeyShuffleMm === 'removed',
+      MM_NO_SMALL_KEY: settings.smallKeyShuffleMm === 'removed',
     };
 
     for (const v in exprs) {

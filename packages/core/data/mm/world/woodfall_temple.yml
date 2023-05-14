@@ -20,7 +20,7 @@
   exits:
     "Woodfall Temple Entrance": "true"
     "Woodfall Temple Water Room": "true"
-    "Woodfall Temple Maze": "has(SMALL_KEY_WF, 1)"
+    "Woodfall Temple Maze": "small_keys(SMALL_KEY_WF, 1)"
     "Woodfall Temple Main Ledge": "event(WOODFALL_TEMPLE_MAIN_FLOWER) || event(WOODFALL_TEMPLE_MAIN_LADDER) || can_hookshot_short"
   events:
     WOODFALL_TEMPLE_MAIN_FLOWER: "can_use_fire_arrows"
@@ -113,7 +113,7 @@
 "Woodfall Temple Pre-Boss":
   dungeon: WF
   exits:
-    "Woodfall Temple Boss": "has(BOSS_KEY_WF) && (can_hookshot || has(MASK_DEKU))"
+    "Woodfall Temple Boss": "boss_key(BOSS_KEY_WF) && (can_hookshot || has(MASK_DEKU))"
     "Woodfall Temple Main Ledge": "true"
   locations:
     "Woodfall Temple SF Pre-Boss Bottom Right": "true"
