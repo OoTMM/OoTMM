@@ -1,8 +1,8 @@
 import { Monitor } from '../monitor';
 import { Settings } from '../settings';
 import { exprTrue } from './expr';
-import { ITEMS_OWLS } from './items';
-import { Items, addItem, ITEMS_MAPS, ITEMS_COMPASSES, ITEMS_TINGLE_MAPS, ITEMS_SONGS, DUNGEON_REWARDS, ITEMS_SMALL_KEY, ITEMS_BOSS_KEY, isJunk, isItemConsumable } from './items';
+import { ITEMS_OWLS, ITEMS_SMALL_KEY_MM, ITEMS_SMALL_KEY_OOT } from './items';
+import { Items, addItem, ITEMS_MAPS, ITEMS_COMPASSES, ITEMS_TINGLE_MAPS, ITEMS_SONGS, DUNGEON_REWARDS, ITEMS_BOSS_KEY, isJunk, isItemConsumable } from './items';
 import { LOCATIONS_ZELDA, isLocationRenewable } from './locations';
 import { World } from './world';
 
@@ -316,8 +316,12 @@ export class LogicPassWorldTransform {
       items.push('OOT_BOTTLE_EMPTY');
     }
 
-    if (settings.smallKeyShuffle === 'anywhere') {
-      items = [...items, ...ITEMS_SMALL_KEY];
+    if (settings.smallKeyShuffleOot === 'anywhere') {
+      items = [...items, ...ITEMS_SMALL_KEY_OOT];
+    }
+
+    if (settings.smallKeyShuffleMm === 'anywhere') {
+      items = [...items, ...ITEMS_SMALL_KEY_MM];
     }
 
     if (settings.bossKeyShuffle === 'anywhere') {

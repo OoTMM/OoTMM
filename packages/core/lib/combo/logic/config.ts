@@ -37,7 +37,7 @@ export class LogicPassConfig {
       config.add('GANON_NO_BOSS_KEY');
     }
 
-    if (this.state.settings.smallKeyShuffle === 'anywhere') {
+    if (this.state.settings.smallKeyShuffleOot === 'anywhere') {
       config.add('SMALL_KEY_SHUFFLE');
     }
 

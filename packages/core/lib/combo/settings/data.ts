@@ -106,11 +106,22 @@ export const SETTINGS = [{
   ],
   default: 'ownDungeon'
 }, {
-  key: 'smallKeyShuffle',
-  name: 'Small Key Shuffle',
+  key: 'smallKeyShuffleOot',
+  name: 'Small Key Shuffle (OoT)',
   category: 'main.shuffle',
   type: 'enum',
-  description: 'Controls where Small Keys (for Dungeons) can be',
+  description: 'Controls where Small Keys (for Dungeons) can be in OoT',
+  values: [
+    { value: 'ownDungeon', name: 'Own Dungeon', description: 'Dungeon Small Keys can only be found in their own dungeons' },
+    { value: 'anywhere', name: 'Anywhere', description: 'Dungeon Small Keys can be found anywhere' },
+  ],
+  default: 'ownDungeon'
+}, {
+  key: 'smallKeyShuffleMm',
+  name: 'Small Key Shuffle (MM)',
+  category: 'main.shuffle',
+  type: 'enum',
+  description: 'Controls where Small Keys (for Dungeons) can be in MM',
   values: [
     { value: 'ownDungeon', name: 'Own Dungeon', description: 'Dungeon Small Keys can only be found in their own dungeons' },
     { value: 'anywhere', name: 'Anywhere', description: 'Dungeon Small Keys can be found anywhere' },

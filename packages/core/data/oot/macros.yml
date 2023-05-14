@@ -111,7 +111,7 @@
 "has_fire_spirit": "has_magic && ((has(BOW) && has(ARROW_FIRE) && has_sticks && (event(ARROWS) || renewable(ARROWS_5) || renewable(ARROWS_10) || renewable(ARROWS_30) || renewable(ARROWS_40) || (setting(sharedBows) && event(MM_ARROWS)))) || has(SPELL_FIRE)) && (has_explosives || has(SMALL_KEY_SPIRIT, 2))"
 "has_ranged_weapon_both": "has_explosives || (((has(SLINGSHOT) && (event(SEEDS) || renewable(DEKU_SEEDS_30))) || has(BOOMERANG)) && (has(HOOKSHOT) || (has(BOW) || (event(ARROWS) || renewable(ARROWS_5) || renewable(ARROWS_10) || renewable(ARROWS_30) || renewable(ARROWS_40) || (setting(sharedBows) && event(MM_ARROWS))))))"
 "can_collect_ageless": "has(HOOKSHOT) && has(BOOMERANG)"
-"has_small_keys_fire(x)": "cond(setting(smallKeyShuffle, anywhere), has(SMALL_KEY_FIRE, x + 1), has(SMALL_KEY_FIRE, x))"
+"has_small_keys_fire(x)": "cond(setting(smallKeyShuffleOot, anywhere), has(SMALL_KEY_FIRE, x + 1), has(SMALL_KEY_FIRE, x))"
 "king_zora_moved": "event(KING_ZORA_LETTER) || setting(zoraKing, open) || (setting(zoraKing, adult) && is_adult)"
 "can_move_mido": "is_child && has_sword_kokiri && renewable(SHIELD_DEKU)"
 "mido_moved": "setting(dekuTree, open) || is_adult || event(MIDO_MOVED)"
