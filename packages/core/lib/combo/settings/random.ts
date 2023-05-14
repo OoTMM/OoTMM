@@ -82,6 +82,7 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
   base.dekuTree = sampleWeighted(random, { open: 10, closed: 7 });
   base.kakarikoGate = sampleWeighted(random, { closed: 10, open: 7 });
   base.zoraKing = sampleWeighted(random, { vanilla: 10, open: 5, adult: 5 });
+  base.gerudoFortress = sampleWeighted(random, { vanilla: 1, single: 1, open: 1 });
   base.bossWarpPads = sampleWeighted(random, { bossBeaten: 10, remains: 4 });
   base.crossWarpOot = booleanWeighted(random, 0.5);
   base.sunSongMm = booleanWeighted(random, 0.5);

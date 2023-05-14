@@ -573,6 +573,19 @@ export class LogicPassWorldTransform {
     const { settings } = this.state;
     this.state.monitor.log('Logic: World Transform');
 
+    /* Carpenters */
+    if (['open', 'single'].includes(settings.gerudoFortress)) {
+      this.removeLocations(['OOT Gerudo Fortress Jail 2', 'OOT Gerudo Fortress Jail 3', 'OOT Gerudo Fortress Jail 4']);
+
+      if (settings.gerudoFortress === 'open') {
+        this.removeLocations(['OOT Gerudo Fortress Jail 1']);
+        const loc = 'OOT Gerudo Member Card';
+        this.state.world.areas['OOT SPAWN'].locations[loc] = exprTrue();
+        this.state.world.regions[loc] = 'NONE';
+        this.state.world.dungeons['GF'].delete(loc);
+      }
+    }
+
     /* Make the basic item pool */
     this.makePool();
 

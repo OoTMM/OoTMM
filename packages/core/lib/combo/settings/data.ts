@@ -345,6 +345,18 @@ export const SETTINGS = [{
   ],
   default: 'vanilla'
 }, {
+  key: 'gerudoFortress',
+  name: 'Gerudo Fortress',
+  category: 'main.events',
+  type: 'enum',
+  description: 'Alters the behavior of the Carpenters in Gerudo Fortress',
+  values: [
+    { value: 'vanilla', name: 'Vanilla', description: 'You will need to rescue all carpenters.' },
+    { value: 'single', name: 'One Carpenter', description: 'You will need to rescue only one carpenter.' },
+    { value: 'open', name: 'Open', description: 'Carpenters are rescued from the start.' },
+  ],
+  default: 'vanilla'
+}, {
   key: 'skipZelda',
   name: 'Skip Child Zelda',
   category: 'main.events',

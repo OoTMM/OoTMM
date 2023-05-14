@@ -96,7 +96,10 @@
 "can_kill_baba_sticks": "can_boomerang || (has_weapon && (is_child || has_nuts || can_hookshot || can_hammer))"
 "can_kill_baba_nuts": "has_weapon || has_explosives || can_use_slingshot"
 "can_hit_scrub": "has_nuts || can_hit_triggers_distance || has_shield_for_scrubs || can_collect_distance || can_hammer"
-"can_rescue_carpenter": "has(SMALL_KEY_GF, 4) && (has_weapon || ((can_boomerang || has_nuts) && can_use_sticks))"
+"has_small_key_gerudo": "setting(gerudoFortress, open) || cond(setting(gerudoFortress, single), has(SMALL_KEY_GF, 1), has(SMALL_KEY_GF, 4))"
+"can_rescue_carpenter": "has_small_key_gerudo && (has_weapon || ((can_boomerang || has_nuts) && can_use_sticks))"
+"carpenters_rescued": "setting(gerudoFortress, open) || (event(CARPENTER_1) && (setting(gerudoFortress, single) || (event(CARPENTER_2) || event(CARPENTER_3) || event(CARPENTER_4))))"
+
 #Trick Macros
 "gs_night": "is_night && (trick(OOT_NIGHT_GS) || can_play(SONG_SUN))"
 "has_lens": "has_lens_strict || trick(OOT_LENS)"

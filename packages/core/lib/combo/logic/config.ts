@@ -233,6 +233,14 @@ export class LogicPassConfig {
       config.add('MM_OWL_SHUFFLE');
     }
 
+    if (settings.gerudoFortress === 'single') {
+      config.add('OOT_CARPENTERS_ONE');
+    }
+
+    if (settings.gerudoFortress === 'open') {
+      config.add('OOT_CARPENTERS_NONE');
+    }
+
     return { mq, config };
   }
 }

@@ -511,6 +511,10 @@ const effectiveStartingItems = (logic: LogicResult): {[k: string]: number} => {
     }
   }
 
+  if (settings.gerudoFortress === 'open') {
+    addItem(startingItems, items['OOT Gerudo Member Card']);
+  }
+
   return startingItems;
 }
 

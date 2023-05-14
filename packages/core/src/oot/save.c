@@ -160,6 +160,24 @@ static void applyStartingEvents(void)
     {
         gSave.perm[SCE_OOT_TEMPLE_SHADOW].switches |= (1 << 7);
     }
+
+    /* Carpenters */
+    if (comboConfig(CFG_OOT_CARPENTERS_NONE) || comboConfig(CFG_OOT_CARPENTERS_ONE))
+    {
+        SetEventChk(EV_OOT_CHK_CARPENTER_2);
+        SetEventChk(EV_OOT_CHK_CARPENTER_3);
+        SetEventChk(EV_OOT_CHK_CARPENTER_4);
+
+        gSave.perm[SCE_OOT_THIEVES_HIDEOUT].switches |= (1 << 2);
+        gSave.perm[SCE_OOT_THIEVES_HIDEOUT].switches |= (1 << 3);
+        gSave.perm[SCE_OOT_THIEVES_HIDEOUT].switches |= (1 << 4);
+
+        if (comboConfig(CFG_OOT_CARPENTERS_NONE))
+        {
+            SetEventChk(EV_OOT_CHK_CARPENTER_1);
+            gSave.perm[SCE_OOT_THIEVES_HIDEOUT].switches |= (1 << 1);
+        }
+    }
 }
 
 void comboCreateSave(void* unk, void* buffer)

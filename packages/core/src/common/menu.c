@@ -503,6 +503,15 @@ void comboMenuInit(void)
     {
         gDungeonDefs[12].maxKeys = 3;
     }
+
+    if (comboConfig(CFG_OOT_CARPENTERS_NONE))
+    {
+        gDungeonDefs[10].maxKeys = 0;
+    }
+    else if (comboConfig(CFG_OOT_CARPENTERS_ONE))
+    {
+        gDungeonDefs[10].maxKeys = 1;
+    }
 }
 
 void comboMenuKeysUpdate(GameState_Play* play)
