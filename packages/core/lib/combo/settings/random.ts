@@ -124,7 +124,5 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
   base.childWallets = booleanWeighted(random, 0.25);
   base.colossalWallets = booleanWeighted(random, 0.5);
 
-  base.probabilisticFoolish = false; /* DEBUG */
-
   return base;
 }

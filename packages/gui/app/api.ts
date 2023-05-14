@@ -1,4 +1,4 @@
-import { Items, Settings, OptionsInput, makeSettings, makeCosmetics } from '@ootmm/core';
+import { Items, Settings, OptionsInput, makeSettings, makeCosmetics, makeRandomSettings } from '@ootmm/core';
 import type { WorkerResult, WorkerResultGenerate, WorkerResultGenerateError, WorkerResultItemPool } from './worker';
 
 let workerTaskId = 0;
@@ -42,6 +42,11 @@ export function initialSettings() {
   const oldSettings = JSON.parse(localStorage.getItem('settings') ?? "{}");
   return makeSettings(oldSettings);
 };
+
+export function initialRandomSettings() {
+  const oldRandomSettings = JSON.parse(localStorage.getItem('randomSettings') ?? "{}");
+  return makeRandomSettings(oldRandomSettings);
+}
 
 export async function itemPoolFromSettings(settings: Settings): Promise<Items> {
   const id = workerTaskId++;

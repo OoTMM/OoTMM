@@ -1,7 +1,7 @@
 import React from 'react';
 import { SETTINGS_CATEGORIES } from '@ootmm/core';
 
-import { useIsPatch } from '../contexts/GeneratorContext';
+import { useIsPatch, useRandomSettings } from '../contexts/GeneratorContext';
 import { RomConfig } from './RomConfig';
 import { Tab, TabBar } from './Tab';
 import { SettingsEditor } from './SettingsEditor';
@@ -16,6 +16,9 @@ import { Cosmetics } from './Cosmetics';
 export function Generator() {
   const tabs: Tab[] = [];
   const [isPatch] = useIsPatch();
+  const [randomSettings] = useRandomSettings();
+
+  const isRandom = randomSettings.enabled;
 
   tabs.push({
     name: "ROM Config",
@@ -23,28 +26,40 @@ export function Generator() {
   });
 
   if (!isPatch) {
-    SETTINGS_CATEGORIES.forEach(category => {
-      tabs.push({ name: category.name, component: <SettingsEditor category={category.key}/>});
-    });
+    if (!isRandom) {
+      SETTINGS_CATEGORIES.forEach(category => {
+        tabs.push({ name: category.name, component: <SettingsEditor category={category.key}/>});
+      });
+      tabs.push({
+        name: "Dungeons",
+        component: <Dungeons/>
+      });
+    }
     tabs.push({
-      name: "Dungeons",
-      component: <Dungeons/>
-    }, {
       name: "Tricks",
       component: <Tricks/>
-    }, {
-      name: "Special Conditions",
-      component: <SpecialConds/>
-    }, {
-      name: "Starting Items",
-      component: <StartingItems/>
-    }, {
+    });
+    if (!isRandom) {
+      tabs.push({
+        name: "Special Conditions",
+        component: <SpecialConds/>
+      });
+      tabs.push({
+        name: "Starting Items",
+        component: <StartingItems/>
+      });
+    }
+    tabs.push({
       name: "Junk Locations",
       component: <JunkLocations/>
-    }, {
-      name: "Plando",
-      component: <Plando/>
     });
+
+    if (!isRandom) {
+      tabs.push({
+        name: "Plando",
+        component: <Plando/>
+      });
+    }
   }
 
   tabs.push({

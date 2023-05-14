@@ -1,5 +1,5 @@
 import React from 'react';
-import { useGenerator, useIsPatch, useRomConfig } from '../contexts/GeneratorContext';
+import { useGenerator, useIsPatch, useRandomSettings, useRomConfig } from '../contexts/GeneratorContext';
 import { Checkbox } from './Checkbox';
 
 import { FileSelect } from './FileSelect';
@@ -10,6 +10,9 @@ export function RomConfig() {
   const { romConfig, setFile, setSeed } = useRomConfig();
   const [isPatch, setIsPatch] = useIsPatch();
   const { error, generate } = useGenerator();
+  const [randomSettings, setRandomSettings] = useRandomSettings();
+
+  const isRandomSettings = randomSettings.enabled;
 
   return <>
     <h1>OoTMM Web Generator</h1>
@@ -21,12 +24,13 @@ export function RomConfig() {
         <FileSelect logo="mm" label="Majora's Mask (U only)" accept=".z64, .n64, .v64" file={romConfig.files.mm} onChange={(f) => setFile('mm', f)} />
         {isPatch && <FileSelect logo="ootmm" label="OoTMM Patch File" accept=".ootmm" file={romConfig.files.patch} onChange={(f) => setFile('patch', f)}/>}
       </div>
-      {!isPatch && <>
+      {!isPatch && <Checkbox label="Random Settings" checked={isRandomSettings} onChange={x => setRandomSettings({ enabled: x })}/>}
+      {!isPatch && !isRandomSettings && <>
         <PresetSelector/>
         <SettingsImportExport/>
       </>}
-      <Checkbox label="Use a patch file" checked={isPatch} onChange={setIsPatch}/>
-      {!isPatch && <label>
+      {!isRandomSettings && <Checkbox label="Use a patch file" checked={isPatch} onChange={setIsPatch}/>}
+      {!isPatch && !isRandomSettings && <label>
         Seed (leave blank to auto-generate)
         <input
           type="text"

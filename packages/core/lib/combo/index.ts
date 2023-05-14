@@ -15,7 +15,7 @@ import { makeRandomSettings } from './settings/random';
 export { Presets, PRESETS } from './presets';
 export { Cosmetics, makeCosmetics, COSMETIC_NAMES } from './cosmetics';
 export { COLORS } from './cosmetics/color';
-export { OptionRandomSettings } from './settings/random';
+export { OptionRandomSettings, makeRandomSettings } from './settings/random';
 
 export type GeneratorParams = {
   oot: Buffer,
