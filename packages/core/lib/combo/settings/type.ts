@@ -1,5 +1,6 @@
 import { SETTINGS } from './data';
 import { DungeonSettings } from './dungeons';
+import { SettingHint } from './hints';
 import { SpecialConds } from './special-conds';
 import { Trick } from './tricks';
 
@@ -50,4 +51,5 @@ export type Settings = SettingsBase & {
   dungeon: DungeonSettings;
   specialConds: SpecialConds;
   plando: SettingsPlando;
+  hints: SettingHint[];
 };

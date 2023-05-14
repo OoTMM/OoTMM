@@ -34,9 +34,6 @@ export const SETTINGS_CATEGORIES: SettingCategory[] = [{
     key: "extensions",
   }],
 }, {
-  name: "Hints",
-  key: "hints",
-}, {
   name: "Entrances",
   key: "entrances",
 }];

@@ -44,6 +44,13 @@ export const SETTINGS = [{
   description: 'Generate an extra downloadable text file with the location of every item in the seed as well as other informations. It is recommended to enable this option.',
   default: true
 }, {
+  key: 'probabilisticFoolish',
+  name: 'Probabilistic Foolish Hints',
+  category: 'main',
+  type: 'boolean',
+  description: 'If you don\'t know what this is, leave it ON',
+  default: true
+}, {
   key: 'songs',
   name: 'Song Shuffle',
   category: 'main.shuffle',
@@ -761,12 +768,6 @@ export const SETTINGS = [{
   category: 'items.shared',
   type: 'boolean',
   default: false
-}, {
-  key: 'probabilisticFoolish',
-  name: 'Probabilistic Foolish Hints (If you don\'t know what this is, leave it ON)',
-  category: 'hints',
-  type: 'boolean',
-  default: true
 }, {
   key: 'erBoss',
   name: 'Boss Entrance Shuffle',

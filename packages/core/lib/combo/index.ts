@@ -16,6 +16,7 @@ export { Presets, PRESETS } from './presets';
 export { Cosmetics, makeCosmetics, COSMETIC_NAMES } from './cosmetics';
 export { COLORS } from './cosmetics/color';
 export { OptionRandomSettings, makeRandomSettings } from './settings/random';
+export { SettingHint, SettingHintType, SETTINGS_DEFAULT_HINTS } from './settings/hints';
 
 export type GeneratorParams = {
   oot: Buffer,
