@@ -12,6 +12,7 @@ import { Dungeons } from './Dungeons';
 import { SpecialConds } from './SpecialConds';
 import { Plando } from './Plando';
 import { Cosmetics } from './Cosmetics';
+import { Hints } from './Hints';
 
 export function Generator() {
   const tabs: Tab[] = [];
@@ -49,9 +50,14 @@ export function Generator() {
         component: <StartingItems/>
       });
     }
+
     tabs.push({
       name: "Junk Locations",
       component: <JunkLocations/>
+    });
+    tabs.push({
+      name: "Hints",
+      component: <Hints/>
     });
 
     if (!isRandom) {

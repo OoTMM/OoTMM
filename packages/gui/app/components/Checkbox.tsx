@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 
 type CheckboxProps = {
-  label: string;
+  label?: string;
   checked: boolean;
   tooltip?: string;
   onChange: (checked: boolean) => void;

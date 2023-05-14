@@ -42,3 +42,16 @@ label, .label-main {
 .section-margin-top {
   margin-top: 24px;
 }
+
+td {
+  vertical-align: middle;
+  padding: 0.5em 1em;
+}
+
+th {
+  font-weight: bold;
+}
+
+table {
+  margin: 1em 0;
+}

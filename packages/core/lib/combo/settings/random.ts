@@ -47,6 +47,7 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
   const base = makeSettings({});
   base.junkLocations = oldSettings.junkLocations;
   base.tricks = oldSettings.tricks;
+  base.hints = oldSettings.hints;
 
   /* Main Settings */
   base.logic = sampleWeighted(random, { allLocations: 10, beatable: 5 });
