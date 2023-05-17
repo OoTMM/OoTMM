@@ -2,7 +2,7 @@
   dungeon: Ganon
   exits:
     "Ganon Castle Exterior After Bridge": "true"
-    "Ganon Castle Light": "has(STRENGTH, 3)"
+    "Ganon Castle Light": "can_lift_gold"
     "Ganon Castle Forest": "true"
     "Ganon Castle Fire": "true"
     "Ganon Castle Water": "true"
@@ -36,7 +36,7 @@
 "Ganon Castle Fire":
   dungeon: Ganon
   events:
-    GANON_TRIAL_FIRE: "has_tunic_goron_strict && can_longshot && has(STRENGTH, 3) && has_light_arrows"
+    GANON_TRIAL_FIRE: "has_tunic_goron_strict && can_longshot && can_lift_gold && has_light_arrows"
 "Ganon Castle Water":
   dungeon: Ganon
   events:
