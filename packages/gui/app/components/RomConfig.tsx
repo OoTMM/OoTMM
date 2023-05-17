@@ -25,6 +25,10 @@ export function RomConfig() {
         {isPatch && <FileSelect logo="ootmm" label="OoTMM Patch File" accept=".ootmm" file={romConfig.files.patch} onChange={(f) => setFile('patch', f)}/>}
       </div>
       {!isPatch && <Checkbox label="Random Settings" checked={isRandomSettings} onChange={x => setRandomSettings({ enabled: x })}/>}
+      {isRandomSettings && <>
+        <Checkbox label="Random Settings: MQ" checked={randomSettings.mq} onChange={x => setRandomSettings({ mq: x })}/>
+        <Checkbox label="Random Settings: Entrances" checked={randomSettings.er} onChange={x => setRandomSettings({ er: x })}/>
+      </>}
       {!isPatch && !isRandomSettings && <>
         <PresetSelector/>
         <SettingsImportExport/>

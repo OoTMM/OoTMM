@@ -39,10 +39,8 @@ export class Generator {
     let patchfile: Patchfile;
     let log: string | null = null;
 
-    /* Apply random settings */
-    if (this.opts.random.enabled) {
-      this.opts.settings = applyRandomSettings(this.opts.random, this.opts.settings);
-    }
+    /* Apply random settings (if enabled) */
+    this.opts.settings = applyRandomSettings(this.opts.random, this.opts.settings);
 
     if (!this.opts.patch) {
       if (!process.env.ROLLUP) {

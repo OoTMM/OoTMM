@@ -4,10 +4,14 @@ import { makeSettings } from "./util";
 
 export type OptionRandomSettings = {
   enabled: boolean;
+  mq: boolean;
+  er: boolean;
 };
 
 export const DEFAULT_RANDOM_SETTINGS: OptionRandomSettings = {
   enabled: false,
+  mq: false,
+  er: false,
 };
 
 export function makeRandomSettings(arg: Partial<OptionRandomSettings>): OptionRandomSettings {
@@ -39,6 +43,10 @@ function booleanWeighted(rng: Random, chance: number): boolean {
 }
 
 export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Settings): Settings {
+  if (!rnd.enabled) {
+    return oldSettings;
+  }
+
   /* Get a new RNG */
   const random = new Random();
   random.seed(randString());
@@ -330,6 +338,68 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
   default:
     base.childWallets = booleanWeighted(random, 0.25);
     base.colossalWallets = booleanWeighted(random, 0.5);
+  }
+
+  /* MQ - 25% Disabled, 25% Enabled, 50% Individual */
+  if (rnd.mq) {
+    let f: () => 'vanilla' | 'mq';
+
+    switch (randomInt(random, 4)) {
+    case 0:
+      f = () => 'vanilla';
+      break;
+    case 1:
+      f = () => 'mq';
+      break;
+    default:
+      f = () => booleanWeighted(random, 0.5) ? 'vanilla' : 'mq';
+    }
+
+    for (let k in base.dungeon) {
+      base.dungeon[k as keyof typeof base.dungeon] = f();
+    }
+  }
+
+  if (rnd.er) {
+    /* ER Types: 25% Disabled, 25% Full, 50% Individual */
+    switch (randomInt(random, 4)) {
+    case 0:
+      break;
+    case 1:
+      base.erDungeons = 'full';
+      base.erBoss = 'full';
+      base.erOverworld = true;
+      break;
+    default:
+      base.erDungeons = sampleWeighted(random, { none: 10, full: 10, ownGame: 10 });
+      base.erBoss = sampleWeighted(random, { none: 10, full: 10, ownGame: 10 });
+      base.erOverworld = booleanWeighted(random, 0.5);
+    }
+
+    /* ER sub-settings - 25% all on, 25% all off, 50% individual */
+    switch (randomInt(random, 4)) {
+    case 0:
+      break;
+    case 1:
+      base.erBeneathWell = true;
+      base.erGanonCastle = true;
+      base.erGanonTower = true;
+      base.erIkanaCastle = true;
+      base.erMinorDungeons = true;
+      base.erPirateFortress = true;
+      base.erSecretShrine = true;
+      base.erSpiderHouses = true;
+      break;
+    default:
+      base.erBeneathWell = booleanWeighted(random, 0.5);
+      base.erGanonCastle = booleanWeighted(random, 0.5);
+      base.erGanonTower = booleanWeighted(random, 0.5);
+      base.erIkanaCastle = booleanWeighted(random, 0.5);
+      base.erMinorDungeons = booleanWeighted(random, 0.5);
+      base.erPirateFortress = booleanWeighted(random, 0.5);
+      base.erSecretShrine = booleanWeighted(random, 0.5);
+      base.erSpiderHouses = booleanWeighted(random, 0.5);
+    }
   }
 
   return base;
