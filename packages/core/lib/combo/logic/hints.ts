@@ -478,7 +478,7 @@ export class LogicPassHints {
     }
     let placed = 0;
     for (let i = 0; i < locations.length; ++i) {
-      if (placed > count)
+      if (placed >= count)
         break;
       const loc = locations[i];
       if (this.placeGossipItemRegion(loc, extra, false)) {
