@@ -251,7 +251,7 @@ export const exprHas = (item: string, itemShared: string, count: number): Expr =
   }
 
   return state => {
-    const result = (state.ignoreItems || ((itemCount(state, item) + itemCount(state, itemShared)) >= count));
+    const result = (state.ignoreItems || (itemCount(state, item) >= count) || (itemCount(state, itemShared) >= count));
     const dependencies = { items: new Set([item, itemShared]) };
     return { result, dependencies };
   }
