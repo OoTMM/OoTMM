@@ -9,6 +9,7 @@ export const SETTINGS = [{
     { value: 'ganon', name: 'Ganon', description: 'You must beat Ganon.' },
     { value: 'majora', name: 'Majora', description: 'You must beat Majora.' },
     { value: 'both', name: 'Ganon & Majora', description: 'You must beat Ganon AND Majora. You can do so in any order.' },
+    { value: 'triforce', name: 'Triforce', description: 'You must collect triforce pieces to win.' },
   ],
   default: 'both'
 }, {

@@ -187,6 +187,7 @@ OOT_COMPASS_BOTW:                 0xbc
 OOT_COMPASS_IC:                   0xbd
 OOT_WALLET:                       0xbe
 OOT_WALLET4:                      0xbf
+OOT_TRIFORCE:                     0xc0
 
 MM_RUPEE_GREEN:               0x01
 MM_RUPEE_BLUE:                0x02
