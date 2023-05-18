@@ -74,16 +74,25 @@ const makeSplitObject = async (roms: DecompressedRoms, entry: CustomEntry) => {
   return obj;
 };
 
+async function customObject(name: string, data: Buffer, archive: CustomArchive, cg: CodeGen, defines: number[]) {
+  const objectId = await archive.addObject(data, true);
+  cg.define('CUSTOM_OBJECT_ID_' + name, objectId);
+  for (let i = 0; i < defines.length; ++i) {
+    cg.define('CUSTOM_OBJECT_' + name + '_' + i, defines[i]);
+  }
+}
+
 const customExtractedObjects = async (roms: DecompressedRoms, archive: CustomArchive, cg: CodeGen) => {
   for (const entry of ENTRIES) {
     const obj = await makeSplitObject(roms, entry);
-    const objectId = await archive.addObject(obj.data, true);
-    cg.define('CUSTOM_OBJECT_ID_' + entry.name, objectId);
-    for (let i = 0; i < obj.offsets.length; ++i) {
-      cg.define('CUSTOM_OBJECT_' + entry.name + '_' + i, obj.offsets[i]);
-    }
+    await customObject(entry.name, obj.data, archive, cg, obj.offsets);
   }
 };
+
+async function customFileObject(name: string, filename: string, archive: CustomArchive, cg: CodeGen, defines: number[]) {
+  const file = await raw(filename);
+  await customObject(name, file, archive, cg, defines);
+}
 
 export const customAssets = async (): Promise<{[k: string]: Buffer}> => ({
   DPAD: await png('dpad', 'rgba32'),
@@ -131,7 +140,7 @@ const customKeepFiles = async (roms: DecompressedRoms, archive: CustomArchive, c
 async function addRawData(archive: CustomArchive, cg: CodeGen, filename: string) {
   const file = await raw(filename);
   const addr = await archive.addData(file);
-  cg.define('CUSTOM_' + filename.toUpperCase() + '_ADDR', addr);
+  cg.define('CUSTOM_' + path.basename(filename, '.bin').toUpperCase() + '_ADDR', addr);
 }
 
 export const custom = async (monitor: Monitor, roms: DecompressedRoms) => {
@@ -147,9 +156,12 @@ export const custom = async (monitor: Monitor, roms: DecompressedRoms) => {
   await customKeepFiles(roms, archive, cg);
 
   /* Load MQ data */
-  await addRawData(archive, cg, 'mq_rooms');
-  await addRawData(archive, cg, 'mq_scenes');
-  await addRawData(archive, cg, 'mq_maps');
+  await addRawData(archive, cg, 'mq_rooms.bin');
+  await addRawData(archive, cg, 'mq_scenes.bin');
+  await addRawData(archive, cg, 'mq_maps.bin');
+
+  /* Load custom objects */
+  await customFileObject('TRIFORCE', 'triforce.zobj', archive, cg, [0x06000a30]);
 
   /* Emit the custom header and data */
   const pack = archive.pack();

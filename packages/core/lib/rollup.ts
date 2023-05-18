@@ -77,7 +77,7 @@ async function copyData() {
   await customAssets();
   let promises: Promise<void>[] = [];
   for (const basePath of ["build/assets", "data/static"]) {
-    const matches = glob.sync('**/*bin', { cwd: basePath });
+    const matches = glob.sync(['**/*.bin', '**/*.zobj'], { cwd: basePath });
     for (const filename of matches) {
       const outPath = `dist/data/${filename}`;
       const dir = path.dirname(outPath);
