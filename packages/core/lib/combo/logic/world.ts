@@ -2,7 +2,7 @@ import { Game, GAMES } from '../config';
 import { gameId } from '../util';
 import { Expr, exprTrue } from './expr';
 import { ExprParser } from './expr-parser';
-import { DATA_POOL, DATA_MACROS, DATA_WORLD, DATA_REGIONS, DATA_ENTRANCES } from '../data';
+import { DATA_POOL, DATA_MACROS, DATA_WORLD, DATA_REGIONS, DATA_ENTRANCES, DATA_HINTS, DATA_HINTS_POOL } from '../data';
 import { Settings } from '../settings';
 import { Monitor } from '../monitor';
 import { isDungeonReward, isSong } from './items';
@@ -41,6 +41,7 @@ export type WorldCheck = {
 
 export type WorldGossip = {
   game: Game;
+  type: 'gossip' | 'gossip-grotto' | 'gossip-moon';
 };
 
 export type WorldEntrance = {
@@ -77,6 +78,7 @@ export const DUNGEONS_REGIONS: {[k: string]: string} = {
   GTG: "OOT_GERUDO_TRAINING_GROUNDS",
   GF: "OOT_THIEVES_HIDEOUT",
   Ganon: "OOT_GANON_CASTLE",
+  Tower: "OOT_GANON_CASTLE",
   WF: "MM_TEMPLE_WOODFALL",
   SH: "MM_TEMPLE_SNOWHEAD",
   GB: "MM_TEMPLE_GREAT_BAY",
@@ -220,12 +222,17 @@ export class LogicPassWorld {
           Object.keys(locations).forEach(x => d.add(x));
         }
 
-        const worldGossip = { game };
         for (const loc in locations) {
           this.world.regions[loc] = region;
           this.world.locations.add(loc);
         }
-        Object.keys(gossip).forEach(x => this.world.gossip[x] = worldGossip);
+
+        for (const g in gossip) {
+          const data = DATA_HINTS_POOL[game][g];
+          if (!data) throw new Error(`Unknown gossip stone ${g}`);
+          const worldGossip = { game, type: data.type } as WorldGossip;
+          this.world.gossip[g] = worldGossip;
+        }
       }
     }
   }

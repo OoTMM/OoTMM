@@ -1,7 +1,7 @@
 import { Monitor } from '../monitor';
 import { Settings } from '../settings';
-import { isTingleMap } from './items';
-import { ONE_TIME_SHOP_CHECKS, OOT_ONE_TIME_SCRUBS } from './locations';
+import { isOwlStatue, isSmallKeyHideout, isTingleMap } from './items';
+import { MM_MERCHANTS, MM_SCRUBS, ONE_TIME_SHOP_CHECKS, OOT_ONE_TIME_SCRUBS } from './locations';
 import { World } from './world';
 
 export class LogicPassFixer {
@@ -29,6 +29,14 @@ export class LogicPassFixer {
         this.fixedLocations.add(loc);
       }
 
+      if (isOwlStatue(item) && settings.owlShuffle === 'none') {
+        this.fixedLocations.add(loc);
+      }
+
+      if (!settings.shuffleMerchantsMm && MM_MERCHANTS.includes(loc)) {
+        this.fixedLocations.add(loc);
+      }
+
       if (type === 'cow') {
         if (game === 'oot' && !this.state.settings.cowShuffleOot) {
           this.fixedLocations.add(loc);
@@ -53,6 +61,10 @@ export class LogicPassFixer {
         }
       }
 
+      if (MM_SCRUBS.includes(loc) && !this.state.settings.scrubShuffleMm) {
+        this.fixedLocations.add(loc);
+      }
+
       if (item === 'OOT_GERUDO_CARD' && !this.state.settings.shuffleGerudoCard) {
         this.fixedLocations.add(loc);
       }
@@ -62,6 +74,10 @@ export class LogicPassFixer {
       }
 
       if (item === 'OOT_BOSS_KEY_GANON' && this.state.settings.ganonBossKey === 'vanilla') {
+        this.fixedLocations.add(loc);
+      }
+
+      if (isSmallKeyHideout(item) && this.state.settings.smallKeyShuffleHideout === 'vanilla') {
         this.fixedLocations.add(loc);
       }
     }

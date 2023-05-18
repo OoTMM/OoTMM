@@ -21,10 +21,10 @@ static s16 EnBox_GetGI(Actor* this)
     return (s16)(-raw);
 }
 
-int EnBox_GiveItemDefaultRange(Actor* actor, GameState_Play* play, s16 gi)
+void EnBox_GiveItemDefaultRange(Actor* actor, GameState_Play* play, s16 gi)
 {
     gi = EnBox_Item(actor, play, gi, 1);
-    return GiveItemDefaultRange(actor, play, gi);
+    GiveItemDefaultRange(actor, play, gi);
 }
 
 PATCH_CALL(0x80868fe0, EnBox_GiveItemDefaultRange);

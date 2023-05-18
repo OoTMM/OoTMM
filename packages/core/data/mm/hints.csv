@@ -27,3 +27,23 @@ Termina Field Gossip Grotto Leftmost,                 gossip-grotto,    0x00
 Termina Field Gossip Grotto Left-Center,              gossip-grotto,    0x01
 Termina Field Gossip Grotto Right-Center,             gossip-grotto,    0x02
 Termina Field Gossip Grotto Rightmost,                gossip-grotto,    0x03
+Moon Trial Link Gossip 1,                             gossip-moon,      0x01
+Moon Trial Link Gossip 2,                             gossip-moon,      0x02
+Moon Trial Link Gossip Left,                          gossip-moon,      0x03
+Moon Trial Link Gossip Right,                         gossip-moon,      0x04
+Moon Trial Link Gossip Last,                          gossip-moon,      0x05
+Moon Trial Deku Gossip Front-Left,                    gossip-moon,      0x06
+Moon Trial Deku Gossip Front-Right,                   gossip-moon,      0x07
+Moon Trial Deku Gossip Mid-Left,                      gossip-moon,      0x08
+Moon Trial Deku Gossip Mid-Right,                     gossip-moon,      0x09
+Moon Trial Deku Gossip Back,                          gossip-moon,      0x0a
+Moon Trial Goron Gossip Center Left,                  gossip-moon,      0x0b
+Moon Trial Goron Gossip Center Right,                 gossip-moon,      0x0c
+Moon Trial Goron Gossip West Left,                    gossip-moon,      0x0d
+Moon Trial Goron Gossip West Right,                   gossip-moon,      0x0e
+Moon Trial Goron Gossip By Heart Piece,               gossip-moon,      0x0f
+Moon Trial Zora Gossip Outer Left,                    gossip-moon,      0x10
+Moon Trial Zora Gossip Middle Left,                   gossip-moon,      0x11
+Moon Trial Zora Gossip Inner Right,                   gossip-moon,      0x12
+Moon Trial Zora Gossip Middle Right,                  gossip-moon,      0x13
+Moon Trial Zora Gossip Outer Right,                   gossip-moon,      0x14

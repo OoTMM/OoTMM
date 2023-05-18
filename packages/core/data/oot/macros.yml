@@ -6,33 +6,60 @@
 "is_dusk": "oot_time(day) && oot_time(night)" # If day and night can be true at the same time, then you have access to a local time-flow zone
 #Standard Single Item Use Macros
 "can_play(x)": "has(OCARINA) && has(x)"
-"has_sticks": "event(STICKS) || has(STICK) || has(STICKS_5) || has(STICKS_10) || (setting(sharedNutsSticks) && event(MM_STICKS))"
-"has_nuts": "event(NUTS) || has(NUT) || has(NUTS_5) || has(NUTS_10)  || (setting(sharedNutsSticks) && event(MM_NUTS))"
-"can_use_sticks": "is_child && has_sticks"
-"has_bombs": "has(BOMB_BAG) && (event(BOMBS) || has(BOMBS_5) || has(BOMBS_10) || has(BOMBS_20) || has(BOMBS_30) || (setting(sharedBombBags) && event(MM_BOMBS)))"
-"has_bombchu": "has(BOMB_BAG) && (event(BOMBCHUS) || has(BOMBCHU_1) || has(BOMBCHU_5) || has(BOMBCHU_10) || has(BOMBCHU_20))"
-"can_use_slingshot": "is_child && has(SLINGSHOT) && (event(SEEDS) || has(DEKU_SEEDS_30))"
-"can_use_bow": "is_adult && has(BOW) && (event(ARROWS) || has(ARROWS_5) || has(ARROWS_10) || has(ARROWS_30) || has(ARROWS_40) || (setting(sharedBows) && event(MM_ARROWS)))"
+"has_sticks": "event(STICKS) || renewable(STICK) || renewable(STICKS_5) || renewable(STICKS_10) || (setting(sharedNutsSticks) && event(MM_STICKS))"
+"has_nuts": "event(NUTS) || renewable(NUT) || renewable(NUTS_5) || renewable(NUTS_10)  || (setting(sharedNutsSticks) && event(MM_NUTS))"
+"can_use_sticks": "age_sticks && has_sticks"
+"has_bombs": "has(BOMB_BAG) && (event(BOMBS) || renewable(BOMBS_5) || renewable(BOMBS_10) || renewable(BOMBS_20) || renewable(BOMBS_30) || (setting(sharedBombBags) && event(MM_BOMBS)))"
+"has_bombchu": "has(BOMB_BAG) && (event(BOMBCHUS) || renewable(BOMBCHU_1) || renewable(BOMBCHU_5) || renewable(BOMBCHU_10) || renewable(BOMBCHU_20))"
+"can_use_slingshot": "is_child && has(SLINGSHOT) && (event(SEEDS) || renewable(DEKU_SEEDS_30))"
+"can_use_bow": "is_adult && has(BOW) && (event(ARROWS) || renewable(ARROWS_5) || renewable(ARROWS_10) || renewable(ARROWS_30) || renewable(ARROWS_40) || (setting(sharedBows) && event(MM_ARROWS)))"
 "can_hookshot": "is_adult && has(HOOKSHOT)"
 "can_longshot": "is_adult && has(HOOKSHOT, 2)"
-"can_boomerang": "is_child && has(BOOMERANG)"
-"can_hammer": "is_adult && has(HAMMER)"
+"can_boomerang": "age_boomerang && has(BOOMERANG)"
+"can_hammer": "age_hammer && has(HAMMER)"
 "has_bottle": "has(BOTTLE_EMPTY) || has(BOTTLE_MILK) || event(KING_ZORA_LETTER)"
 "can_use_beans": "is_child && has(MAGIC_BEAN)"
+
+# Age macros
+"age_sticks": "is_child || setting(agelessSticks)"
+"age_boomerang": "is_child || setting(agelessBoomerang)"
+"age_hammer": "is_adult || setting(agelessHammer)"
+"age_sword_child": "is_child || setting(agelessSwords)"
+"age_sword_adult": "is_adult || setting(agelessSwords)"
+"age_shield_child": "is_child || setting(agelessShields)"
+"age_shield_adult": "is_adult || setting(agelessShields)"
+"age_tunics": "is_adult || setting(agelessTunics)"
+"age_boots": "is_adult || setting(agelessBoots)"
+
+# Swords
+"has_sword_kokiri": "cond(setting(progressiveSwordsOot, progressive), has(SWORD), has(SWORD_KOKIRI))"
+"has_sword_master": "cond(setting(progressiveSwordsOot, progressive), has(SWORD, 2), has(SWORD_MASTER))"
+"has_sword_goron": "cond(setting(progressiveSwordsOot, progressive), has(SWORD, 3), cond(setting(progressiveSwordsOot, goron), has(SWORD_GORON), has(SWORD_KNIFE) || has(SWORD_BIGGORON)))"
+"has_weapon": "can_use_sword"
+"can_use_sword": "(age_sword_child && has_sword_kokiri) || (age_sword_adult && (has_sword_master || has_sword_goron))"
+
+# Shields
+"has_shield": "renewable(SHIELD_HYLIAN) || has_mirror_shield || (age_shield_child && renewable(SHIELD_DEKU))"
+"has_shield_for_scrubs": "(is_adult && renewable(SHIELD_HYLIAN)) || (age_shield_child && renewable(SHIELD_DEKU))"
+"has_mirror_shield": "age_shield_adult && cond(setting(progressiveShieldsOot, progressive), has(SHIELD, 3), has(SHIELD_MIRROR))"
+
 #Equipment Use Macros
 "has_rupees": "event(RUPEES) || (setting(sharedWallets) && event(MM_RUPEES))"
 "stone_of_agony": "has(STONE_OF_AGONY) || trick(OOT_HIDDEN_GROTTOS)"
-"has_sword_kokiri": "cond(setting(progressiveSwordsOot, progressive), has(SWORD), has(SWORD_KOKIRI))"
-"has_sword_master": "cond(setting(progressiveSwordsOot, progressive), has(SWORD, 2), has(SWORD_MASTER))"
-"has_mirror_shield": "is_adult && cond(setting(progressiveShieldsOot, progressive), has(SHIELD, 3), has(SHIELD_MIRROR))"
-"has_tunic_goron_strict": "is_adult && has(TUNIC_GORON)"
-"has_tunic_zora_strict": "is_adult && has(TUNIC_ZORA)"
-"has_iron_boots": "is_adult && has(BOOTS_IRON)"
-"has_hover_boots": "is_adult && has(BOOTS_HOVER)"
+
+"has_tunic_goron_strict": "age_tunics && has(TUNIC_GORON)"
+"has_tunic_zora_strict": "age_tunics && has(TUNIC_ZORA)"
+"has_tunic_goron": "has_tunic_goron_strict || trick(OOT_TUNICS)"
+"has_tunic_zora": "has_tunic_zora_strict || trick(OOT_TUNICS)"
+
+"has_iron_boots": "age_boots && has(BOOTS_IRON)"
+"has_hover_boots": "age_boots && has(BOOTS_HOVER)"
+
 "can_lift_silver": "is_adult && has(STRENGTH, 2)"
 "can_lift_gold": "is_adult && has(STRENGTH, 3)"
+
 #Magic Item Macros
-"has_magic": "has(MAGIC_UPGRADE) && (event(MAGIC) || (setting(sharedMagic) && event(MM_MAGIC)) || (has_bottle && (has(POTION_GREEN) || has(POTION_BLUE) || has(CHATEAU))))"
+"has_magic": "has(MAGIC_UPGRADE) && (event(MAGIC) || (setting(sharedMagic) && event(MM_MAGIC)) || (has_bottle && (renewable(POTION_GREEN) || renewable(POTION_BLUE) || renewable(CHATEAU))))"
 "can_use_din": "has_magic && has(SPELL_FIRE)"
 "can_use_nayru": "has_magic && has(SPELL_LOVE)"
 "has_light_arrows": "can_use_bow && has(ARROW_LIGHT) && has_magic"
@@ -51,8 +78,6 @@
 "scarecrow_longshot": "can_longshot && event(SCARECROW)"
 "has_fire": "has_fire_arrows || can_use_din"
 "has_fire_or_sticks": "can_use_sticks || has_fire"
-"has_weapon": "(is_child && has_sword_kokiri) || is_adult"
-"has_shield": "has(SHIELD_HYLIAN) || has_mirror_shield || (is_child && has(SHIELD_DEKU))"
 "can_dive_small": "has(SCALE) || has_iron_boots"
 "can_dive_big": "has(SCALE, 2) || has_iron_boots"
 "hidden_grotto_bomb": "stone_of_agony && has_explosives_or_hammer"
@@ -61,9 +86,9 @@
 
 #Specific Interaction Macros:
 "can_ride_epona": "is_adult && can_play(SONG_EPONA)"
-"gs_soil": "is_child && has_bottle && (has(BUGS) || event(BUGS))"
+"gs_soil": "is_child && has_bottle && (renewable(BUGS) || event(BUGS))"
 "adult_trade(x)": "is_adult && has(x)"
-"has_blue_fire": "has_bottle && (event(BLUE_FIRE) || has(BLUE_FIRE))"
+"has_blue_fire": "has_bottle && (event(BLUE_FIRE) || renewable(BLUE_FIRE))"
 "can_ride_bean(x)": "is_adult && event(x)"
 "can_damage": "has_weapon || can_use_sticks || has_explosives || can_use_slingshot || can_use_din"
 "can_damage_skull": "can_damage || can_collect_distance"
@@ -71,26 +96,30 @@
 "can_kill_baba_sticks": "can_boomerang || (has_weapon && (is_child || has_nuts || can_hookshot || can_hammer))"
 "can_kill_baba_nuts": "has_weapon || has_explosives || can_use_slingshot"
 "can_hit_scrub": "has_nuts || can_hit_triggers_distance || has_shield_for_scrubs || can_collect_distance || can_hammer"
-"has_shield_for_scrubs": "(is_adult && has(SHIELD_HYLIAN)) || (is_child && has(SHIELD_DEKU))"
-"can_rescue_carpenter": "has(SMALL_KEY_GF, 4) && (has_weapon || ((can_boomerang || has_nuts) && can_use_sticks))"
+"has_small_key_gerudo": "setting(gerudoFortress, open) || cond(setting(gerudoFortress, single), has(SMALL_KEY_GF, 1), has(SMALL_KEY_GF, 4))"
+"can_rescue_carpenter": "has_small_key_gerudo && (has_weapon || ((can_boomerang || has_nuts) && can_use_sticks))"
+"carpenters_rescued": "setting(gerudoFortress, open) || (event(CARPENTER_1) && (setting(gerudoFortress, single) || (event(CARPENTER_2) || event(CARPENTER_3) || event(CARPENTER_4))))"
+
 #Trick Macros
 "gs_night": "is_night && (trick(OOT_NIGHT_GS) || can_play(SONG_SUN))"
 "has_lens": "has_lens_strict || trick(OOT_LENS)"
-"has_tunic_goron": "has_tunic_goron_strict || trick(OOT_TUNICS)"
-"has_tunic_zora": "has_tunic_zora_strict || trick(OOT_TUNICS)"
 "trick_mido": "trick(OOT_MIDO_SKIP) && (has(BOW) || has(HOOKSHOT) || has(ARROW_FIRE) || has(ARROW_LIGHT))"
 
 #Specialty Macros
 "met_zelda": "event(MEET_ZELDA) || setting(skipZelda)"
 "woke_talon_child": "event(TALON_CHILD) || setting(skipZelda)"
-"has_fire_spirit": "has_magic && ((has(BOW) && has(ARROW_FIRE) && has_sticks && (event(ARROWS) || has(ARROWS_5) || has(ARROWS_10) || has(ARROWS_30) || has(ARROWS_40) || (setting(sharedBows) && event(MM_ARROWS)))) || has(SPELL_FIRE)) && (has_explosives || has(SMALL_KEY_SPIRIT, 2))"
-"has_ranged_weapon_both": "has_explosives || (((has(SLINGSHOT) && (event(SEEDS) || has(DEKU_SEEDS_30))) || has(BOOMERANG)) && (has(HOOKSHOT) || (has(BOW) || (event(ARROWS) || has(ARROWS_5) || has(ARROWS_10) || has(ARROWS_30) || has(ARROWS_40) || (setting(sharedBows) && event(MM_ARROWS))))))"
+"has_fire_spirit": "has_magic && ((has(BOW) && has(ARROW_FIRE) && has_sticks && (event(ARROWS) || renewable(ARROWS_5) || renewable(ARROWS_10) || renewable(ARROWS_30) || renewable(ARROWS_40) || (setting(sharedBows) && event(MM_ARROWS)))) || has(SPELL_FIRE)) && (has_explosives || small_keys(SMALL_KEY_SPIRIT, 2))"
+"has_ranged_weapon_both": "has_explosives || (((has(SLINGSHOT) && (event(SEEDS) || renewable(DEKU_SEEDS_30))) || has(BOOMERANG)) && (has(HOOKSHOT) || (has(BOW) || (event(ARROWS) || renewable(ARROWS_5) || renewable(ARROWS_10) || renewable(ARROWS_30) || renewable(ARROWS_40) || (setting(sharedBows) && event(MM_ARROWS))))))"
 "can_collect_ageless": "has(HOOKSHOT) && has(BOOMERANG)"
-"has_small_keys_fire(x)": "cond(setting(smallKeyShuffle, anywhere), has(SMALL_KEY_FIRE, x + 1), has(SMALL_KEY_FIRE, x))"
+"has_small_keys_fire(x)": "setting(smallKeyShuffleOot, removed) || cond(setting(smallKeyShuffleOot, anywhere), has(SMALL_KEY_FIRE, x + 1), has(SMALL_KEY_FIRE, x))"
 "king_zora_moved": "event(KING_ZORA_LETTER) || setting(zoraKing, open) || (setting(zoraKing, adult) && is_adult)"
-"can_move_mido": "is_child && has_sword_kokiri && has(SHIELD_DEKU)"
+"can_move_mido": "is_child && has_sword_kokiri && renewable(SHIELD_DEKU)"
 "mido_moved": "setting(dekuTree, open) || is_adult || event(MIDO_MOVED)"
 
 # Wallets
 "has_wallet(n)": "cond(setting(childWallets), has(WALLET, n), has(WALLET, n - 1))"
 "can_use_wallet(n)": "has_rupees && has_wallet(n)"
+
+# Keys
+"boss_key(x)": "setting(bossKeyShuffleOot, removed) || has(x)"
+"small_keys(x, count)": "setting(smallKeyShuffleOot, removed) || has(x, count)"

@@ -52,7 +52,9 @@ static s16 EnBal_GetGI(int mapId, int checkSoldOut, int flags)
     if (checkSoldOut)
     {
         soldOut = MM_GET_EVENT_WEEK(0x118 + mapId);
-        if (soldOut && !comboIsItemConsumable(gi))
+        if (soldOut)
+            gi = comboRenewable(gi, 0);
+        if (!gi)
             return -1;
     }
     return gi;

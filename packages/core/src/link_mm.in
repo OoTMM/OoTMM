@@ -16,6 +16,8 @@ osInvalICache = 0x8008f270;
 osWritebackDCache = 0x8008a5e0;
 osWritebackDCacheAll = 0x800955c0;
 
+GetSwitchFlag = 0x800b5bb0;
+
 gMemorySize = 0x80000318;
 ClearMemoryRange = 0x80080150;
 gDmaDataCount = 0x8009b2bc;
@@ -25,6 +27,7 @@ kObjectsTable = 0x801c2740;
 GiveItem = 0x800b8a1c;
 
 DisplayTextBox2 = 0x80151938;
+DisplayTextBox3 = 0x800e8ea0;
 
 Shader_Opa0_Xlu1            = 0x800ef0f0;
 Shader_Opa0_Xlu12           = 0x800ef780;

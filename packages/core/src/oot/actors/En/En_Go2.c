@@ -79,7 +79,7 @@ void EnGo2_SetBiggoronMessageId(Actor* this, GameState_Play* play, Actor* dst)
 
 PATCH_FUNC(0x80b58c8c, EnGo2_SetBiggoronMessageId);
 
-int EnGo2_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
+void EnGo2_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
 {
     switch (gi)
     {
@@ -93,7 +93,7 @@ int EnGo2_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
         break;
     }
 
-    return GiveItem(this, play, gi, a, b);
+    GiveItem(this, play, gi, a, b);
 }
 
 PATCH_CALL(0x80b56ff4, EnGo2_GiveItem);

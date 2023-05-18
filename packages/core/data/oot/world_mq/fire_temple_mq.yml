@@ -3,7 +3,7 @@
   exits:
     "Fire Temple Entry": "true"
     "Fire Temple Upper Lobby": "is_adult && has_tunic_goron"
-    "Fire Temple Vanilla Hammer Loop": "has(SMALL_KEY_FIRE, 5) && has_weapon && (has_bombs || can_hammer || can_hookshot)"
+    "Fire Temple Vanilla Hammer Loop": "small_keys(SMALL_KEY_FIRE, 5) && has_weapon && (has_bombs || can_hammer || can_hookshot)"
   locations:
     "MQ Fire Temple Early Lower Left Chest": "can_damage"
 "Fire Temple Upper Lobby":
@@ -15,7 +15,7 @@
   dungeon: Fire
   exits:
     "Fire Temple Upper Lobby": "true"
-    "Fire Temple Boss": "has(BOSS_KEY_FIRE) && (event(FIRE_TEMPLE_PILLAR_HAMMER) || has_hover_boots)"
+    "Fire Temple Boss": "boss_key(BOSS_KEY_FIRE) && (event(FIRE_TEMPLE_PILLAR_HAMMER) || has_hover_boots)"
   locations:
     "MQ Fire Temple Pre-Boss Chest": "has_fire && (can_use_bow || has_tunic_goron_strict)"
 "Fire Temple Vanilla Hammer Loop":
@@ -27,7 +27,7 @@
   dungeon: Fire
   exits:
     "Fire Temple Upper Lobby": "true"
-    "Fire Temple Maze Lower": "has_tunic_goron_strict && has(SMALL_KEY_FIRE, 2) && has_fire"
+    "Fire Temple Maze Lower": "has_tunic_goron_strict && small_keys(SMALL_KEY_FIRE, 2) && has_fire"
   locations:
     "MQ Fire Temple Boss Key Chest": "has_fire && can_hookshot"
     "MQ Fire Temple 1f Lava Room Goron Chest": "has_fire && can_hookshot && has_explosives"
@@ -43,7 +43,7 @@
   dungeon: Fire
   exits:
     "Fire Temple Burning Block": "can_play(SONG_TIME) || can_longshot"
-    "Fire Temple 3f Lava Room": "has(SMALL_KEY_FIRE, 3)"
+    "Fire Temple 3f Lava Room": "small_keys(SMALL_KEY_FIRE, 3)"
   locations:
     "MQ Fire Temple Maze Upper Chest": "true"
     "MQ Fire Temple Maze Side Room Chest": "true"
@@ -59,7 +59,7 @@
 "Fire Temple Fire Walls":
   dungeon: Fire
   exits:
-    "Fire Temple Top": "has(SMALL_KEY_FIRE, 4)"
+    "Fire Temple Top": "small_keys(SMALL_KEY_FIRE, 4)"
   events:
     FIRE_TEMPLE_PILLAR_HAMMER: "true"
   locations:
@@ -70,4 +70,4 @@
   dungeon: Fire
   locations:
     "MQ Fire Temple Topmost Chest": "true"
-    "MQ Fire Temple GS Topmost": "has(SMALL_KEY_FIRE, 5)"
+    "MQ Fire Temple GS Topmost": "small_keys(SMALL_KEY_FIRE, 5)"

@@ -12,6 +12,7 @@ import { buildPatchfile } from './patch-build';
 import { Patchfile } from './patch-build/patchfile';
 import { makeAddresses } from './addresses';
 import { cosmetics, makeCosmetics } from './cosmetics';
+import { applyRandomSettings } from './settings/random';
 
 export type GeneratorOutput = {
   rom: Buffer;
@@ -37,6 +38,9 @@ export class Generator {
     const addresses = makeAddresses(roms);
     let patchfile: Patchfile;
     let log: string | null = null;
+
+    /* Apply random settings (if enabled) */
+    this.opts.settings = applyRandomSettings(this.opts.random, this.opts.settings);
 
     if (!this.opts.patch) {
       if (!process.env.ROLLUP) {

@@ -14,7 +14,7 @@ int EnNiwLady_GetActiveItem(GameState_Play* play)
 
 PATCH_CALL(0x80a9eb04, EnNiwLady_GetActiveItem);
 
-int EnNiwLady_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
+void EnNiwLady_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
 {
     if (!(GET_LINK(play)->state & PLAYER_ACTOR_STATE_GET_ITEM))
         Message_Close(play);
@@ -32,7 +32,7 @@ int EnNiwLady_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, floa
         comboRemoveTradeItemAdult(XITEM_OOT_ADULT_POCKET_CUCCO);
         break;
     }
-    return GiveItem(actor, play, gi, a, b);
+    GiveItem(actor, play, gi, a, b);
 }
 
 PATCH_CALL(0x80a9e95c, EnNiwLady_GiveItem);

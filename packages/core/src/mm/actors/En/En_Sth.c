@@ -12,7 +12,7 @@ int EnSth_HasGivenItemMaskOfTruth(Actor* this)
 
 PATCH_CALL(0x80b67b70, EnSth_HasGivenItemMaskOfTruth);
 
-int EnSth_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
+void EnSth_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
 {
     switch (gi)
     {
@@ -28,7 +28,7 @@ int EnSth_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
         break;
     }
 
-    return GiveItem(this, play, gi, a, b);
+    GiveItem(this, play, gi, a, b);
 }
 
 PATCH_CALL(0x80b67524, EnSth_GiveItem);

@@ -2,7 +2,7 @@
 
 static u8 sIsSecondReward;
 
-int EnFsn_GiveNormalItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
+void EnFsn_GiveNormalItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
 {
     switch (gi)
     {
@@ -28,7 +28,7 @@ int EnFsn_GiveNormalItem(Actor* this, GameState_Play* play, s16 gi, float a, flo
         }
         break;
     }
-    return GiveItem(this, play, gi, a, b);
+    GiveItem(this, play, gi, a, b);
 }
 
 PATCH_CALL(0x80ae3cd4, EnFsn_GiveNormalItem);

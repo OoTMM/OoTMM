@@ -44,3 +44,12 @@
 .settings-string {
   min-height: 10em;
 }
+
+.hintZ {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: 1px solid #aaa;
+  padding: 1em;
+  margin: 0.5em;
+}

@@ -14,7 +14,7 @@ int EnStoneheishi_HasGivenItem(Actor* actor)
 
 PATCH_CALL(0x80bc9d4c, EnStoneheishi_HasGivenItem);
 
-int EnStoneheishi_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
+void EnStoneheishi_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
 {
     if (gMmExtraFlags.maskStone)
     {
@@ -24,7 +24,7 @@ int EnStoneheishi_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, 
     {
         gi = comboOverride(OV_NPC, 0, NPC_MM_MASK_STONE, GI_MM_MASK_STONE);
     }
-    return GiveItem(actor, play, gi, a, b);
+    GiveItem(actor, play, gi, a, b);
 }
 
 PATCH_CALL(0x80bc9cd4, EnStoneheishi_GiveItem);

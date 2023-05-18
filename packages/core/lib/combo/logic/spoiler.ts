@@ -43,7 +43,7 @@ export class LogicPassSpoiler {
   private writeSettings() {
     this.buffer.push('Settings');
     for (const s in this.state.settings) {
-      if (s === 'startingItems' || s === 'tricks' || s === 'junkLocations' || s === 'dungeon' || s === 'specialConds' || s === 'plando') {
+      if (s === 'startingItems' || s === 'tricks' || s === 'junkLocations' || s === 'dungeon' || s === 'specialConds' || s === 'plando' || s === 'hints') {
         continue;
       }
       const v = (this.state.settings as any)[s];

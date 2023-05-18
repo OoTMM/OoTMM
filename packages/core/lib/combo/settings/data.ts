@@ -44,6 +44,13 @@ export const SETTINGS = [{
   description: 'Generate an extra downloadable text file with the location of every item in the seed as well as other informations. It is recommended to enable this option.',
   default: true
 }, {
+  key: 'probabilisticFoolish',
+  name: 'Probabilistic Foolish Hints',
+  category: 'main',
+  type: 'boolean',
+  description: 'If you don\'t know what this is, leave it ON',
+  default: true
+}, {
   key: 'songs',
   name: 'Song Shuffle',
   category: 'main.shuffle',
@@ -106,14 +113,27 @@ export const SETTINGS = [{
   ],
   default: 'ownDungeon'
 }, {
-  key: 'smallKeyShuffle',
-  name: 'Small Key Shuffle',
+  key: 'smallKeyShuffleOot',
+  name: 'Small Key Shuffle (OoT)',
   category: 'main.shuffle',
   type: 'enum',
-  description: 'Controls where Small Keys (for Dungeons) can be',
+  description: 'Controls where Small Keys (for Dungeons) can be in OoT',
   values: [
     { value: 'ownDungeon', name: 'Own Dungeon', description: 'Dungeon Small Keys can only be found in their own dungeons' },
     { value: 'anywhere', name: 'Anywhere', description: 'Dungeon Small Keys can be found anywhere' },
+    { value: 'removed', name: 'Removed', description: 'Small keys are removed and small key doors are unlocked' },
+  ],
+  default: 'ownDungeon'
+}, {
+  key: 'smallKeyShuffleMm',
+  name: 'Small Key Shuffle (MM)',
+  category: 'main.shuffle',
+  type: 'enum',
+  description: 'Controls where Small Keys (for Dungeons) can be in MM',
+  values: [
+    { value: 'ownDungeon', name: 'Own Dungeon', description: 'Dungeon Small Keys can only be found in their own dungeons' },
+    { value: 'anywhere', name: 'Anywhere', description: 'Dungeon Small Keys can be found anywhere' },
+    { value: 'removed', name: 'Removed', description: 'Small keys are removed and small key doors are unlocked' },
   ],
   default: 'ownDungeon'
 }, {
@@ -123,19 +143,33 @@ export const SETTINGS = [{
   type: 'enum',
   description: 'Controls where Hideout (Gerudo Fortress) Small Keys can be',
   values: [
+    { value: 'vanilla', name: 'Vanilla', description: 'Hideout Small Keys are always on the guards' },
     { value: 'ownDungeon', name: 'Own Dungeon', description: 'Hideout Small Keys can only be found within Gerudo Fortress INTERIOR' },
     { value: 'anywhere', name: 'Anywhere', description: 'Hideout Small Keys can be found anywhere' },
   ],
   default: 'ownDungeon'
 }, {
-  key: 'bossKeyShuffle',
-  name: 'Boss Key Shuffle',
+  key: 'bossKeyShuffleOot',
+  name: 'Boss Key Shuffle (OoT)',
   category: 'main.shuffle',
   type: 'enum',
-  description: 'Controls where Boss Keys can be',
+  description: 'Controls where Boss Keys can be in OoT',
   values: [
     { value: 'ownDungeon', name: 'Own Dungeon', description: 'Boss Keys can only be in their own dungeons' },
     { value: 'anywhere', name: 'Anywhere', description: 'Boss Keys can be found anywhere' },
+    { value: 'removed', name: 'Removed', description: 'Boss keys are removed and boss doors are unlocked' },
+  ],
+  default: 'ownDungeon'
+}, {
+  key: 'bossKeyShuffleMm',
+  name: 'Boss Key Shuffle (MM)',
+  category: 'main.shuffle',
+  type: 'enum',
+  description: 'Controls where Boss Keys can be in MM',
+  values: [
+    { value: 'ownDungeon', name: 'Own Dungeon', description: 'Boss Keys can only be in their own dungeons' },
+    { value: 'anywhere', name: 'Anywhere', description: 'Boss Keys can be found anywhere' },
+    { value: 'removed', name: 'Removed', description: 'Boss keys are removed and boss doors are unlocked' },
   ],
   default: 'ownDungeon'
 }, {
@@ -197,6 +231,13 @@ export const SETTINGS = [{
   description: 'Should Business Scrubs in OOT shuffled? If not, the one in Hyrule Field by Lake Hylia fences, the one by the Bridge in Lost Woods and the front one in the grotto near Sacred Forest Meadow will still be shuffled',
   default: false
 }, {
+  key: 'scrubShuffleMm',
+  name: 'Scrub Shuffle (MM)',
+  category: 'main.shuffle',
+  type: 'boolean',
+  description: 'Shuffle the three business scrubs that sells regular items in MM',
+  default: false
+}, {
   key: 'cowShuffleOot',
   name: 'Cow Shuffle (OoT)',
   category: 'main.shuffle',
@@ -233,6 +274,17 @@ export const SETTINGS = [{
   ],
   default: 'none'
 }, {
+  key: 'owlShuffle',
+  name: 'Owl Statue Shuffle',
+  category: 'main.shuffle',
+  type: 'enum',
+  description: 'Make owl statue items that can be shuffled.',
+  values: [
+    { value: 'none', name: 'None', description: 'Owl statues are vanilla' },
+    { value: 'anywhere', name: 'Anywhere', description: 'Owl statues are shuffled in the item pool' },
+  ],
+  default: 'none'
+}, {
   key: 'shuffleMasterSword',
   name: 'Master Sword Shuffle',
   category: 'main.shuffle',
@@ -246,6 +298,13 @@ export const SETTINGS = [{
   type: 'boolean',
   description: 'Controls whether or not the Gerudo Membership Card is shuffled amongst all the items',
   default: true
+}, {
+  key: 'shuffleMerchantsMm',
+  name: 'Merchants Shuffle (MM)',
+  category: 'main.shuffle',
+  type: 'boolean',
+  description: 'Shuffle extra merchants in MM',
+  default: false
 }, {
   key: 'eggShuffle',
   name: 'Weird / Pocket Egg Content Shuffle',
@@ -320,6 +379,18 @@ export const SETTINGS = [{
   ],
   default: 'vanilla'
 }, {
+  key: 'gerudoFortress',
+  name: 'Gerudo Fortress',
+  category: 'main.events',
+  type: 'enum',
+  description: 'Alters the behavior of the Carpenters in Gerudo Fortress',
+  values: [
+    { value: 'vanilla', name: 'Vanilla', description: 'You will need to rescue all carpenters.' },
+    { value: 'single', name: 'One Carpenter', description: 'You will need to rescue only one carpenter.' },
+    { value: 'open', name: 'Open', description: 'Carpenters are rescued from the start.' },
+  ],
+  default: 'vanilla'
+}, {
   key: 'skipZelda',
   name: 'Skip Child Zelda',
   category: 'main.events',
@@ -389,9 +460,14 @@ export const SETTINGS = [{
   key: 'csmc',
   name: 'Chest Size Matches Content',
   category: 'main.misc',
-  type: 'boolean',
+  type: 'enum',
+  values: [
+    { value: 'never',  name: 'Never', description: 'Chests will be vanilla' },
+    { value: 'agony',  name: 'Stone of Agony', description: 'Chests will match content when you have the stone of agony in OoT' },
+    { value: 'always', name: 'Always', description: 'Chests will always match content' },
+  ],
   description: 'Modifies the chests appearance so they match their content. Works for unique items, keys and fairies.',
-  default: false
+  default: 'always'
 }, {
   key: 'blastMaskCooldown',
   name: 'Blast Mask Cooldown',
@@ -456,13 +532,62 @@ export const SETTINGS = [{
   category: 'main.misc',
   type: 'boolean',
   description: 'Modifies the Bunny Hood in OoT to give a speed increase',
-  default: false
+  default: true
 }, {
-  key: 'agelessItems',
-  name: 'Ageless Items (OoT)',
+  key: 'agelessSwords',
+  name: 'Ageless Swords',
   category: 'main.misc',
   type: 'boolean',
-  description: 'Allows Link to use most items independently of his age',
+  description: 'Allows Link to use swords independently of his age',
+  default: false
+}, {
+  key: 'agelessShields',
+  name: 'Ageless Shields',
+  category: 'main.misc',
+  type: 'boolean',
+  description: 'Allows Link to use shields independently of his age',
+  default: false
+}, {
+  key: 'agelessTunics',
+  name: 'Ageless Tunics',
+  category: 'main.misc',
+  type: 'boolean',
+  description: 'Allows Link to use tunics independently of his age',
+  default: false
+}, {
+  key: 'agelessBoots',
+  name: 'Ageless Boots',
+  category: 'main.misc',
+  type: 'boolean',
+  description: 'Allows Link to use boots independently of his age',
+  default: false
+}, {
+  key: 'agelessSticks',
+  name: 'Ageless Sticks',
+  category: 'main.misc',
+  type: 'boolean',
+  description: 'Allows Link to use deku sticks independently of his age',
+  default: false
+}, {
+  key: 'agelessBoomerang',
+  name: 'Ageless Boomerang',
+  category: 'main.misc',
+  type: 'boolean',
+  description: 'Allows Link to use the boomerang independently of his age',
+  default: false
+}, {
+  key: 'agelessHammer',
+  name: 'Ageless Hammer',
+  category: 'main.misc',
+  type: 'boolean',
+  description: 'Allows Link to use the hammer independently of his age',
+  default: false
+}, {
+  key: 'agelessChildTrade',
+  name: 'Ageless Child Trade',
+  category: 'main.misc',
+  type: 'boolean',
+  description: 'Allows Link to use the child trade items independently of his age',
   default: false
 }, {
   key: 'fillWallets',
@@ -644,12 +769,6 @@ export const SETTINGS = [{
   type: 'boolean',
   default: false
 }, {
-  key: 'probabilisticFoolish',
-  name: 'Probabilistic Foolish Hints (If you don\'t know what this is, leave it ON)',
-  category: 'hints',
-  type: 'boolean',
-  default: true
-}, {
   key: 'erBoss',
   name: 'Boss Entrance Shuffle',
   category: 'entrances',
@@ -676,7 +795,19 @@ export const SETTINGS = [{
   name: 'Shuffle OoT Minor Dungeons with Dungeons',
   category: 'entrances',
   type: 'boolean',
-  description: 'If turned on, it meeans Bottom of the Well, Ice Cavern and Gerudo Training Grounds are also shuffled',
+  description: 'If turned on, it means Bottom of the Well, Ice Cavern and Gerudo Training Grounds are also shuffled',
+  default: false
+}, {
+  key: 'erGanonCastle',
+  name: 'Shuffle Ganon\'s Castle with Dungeons',
+  category: 'entrances',
+  type: 'boolean',
+  default: false
+}, {
+  key: 'erGanonTower',
+  name: 'Shuffle Ganon\'s Tower with Dungeons',
+  category: 'entrances',
+  type: 'boolean',
   default: false
 }, {
   key: 'erSpiderHouses',

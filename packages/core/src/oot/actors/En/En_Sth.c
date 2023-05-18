@@ -1,6 +1,6 @@
 #include <combo.h>
 
-int EnSth_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
+void EnSth_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
 {
     switch (gi)
     {
@@ -21,7 +21,7 @@ int EnSth_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
         break;
     }
 
-    return GiveItem(actor, play, gi, a, b);
+    GiveItem(actor, play, gi, a, b);
 }
 
 PATCH_CALL(0x80b28268, EnSth_GiveItem);

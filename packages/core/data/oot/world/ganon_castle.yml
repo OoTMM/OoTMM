@@ -1,13 +1,14 @@
-"Ganon Castle Main":
+"Ganon Castle":
   dungeon: Ganon
   exits:
-    "Ganon Castle Light": "has(STRENGTH, 3)"
+    "Ganon Castle Exterior After Bridge": "true"
+    "Ganon Castle Light": "can_lift_gold"
     "Ganon Castle Forest": "true"
     "Ganon Castle Fire": "true"
     "Ganon Castle Water": "true"
     "Ganon Castle Spirit": "true"
     "Ganon Castle Shadow": "true"
-    "Ganon Castle Tower": "true"
+    "Ganon Castle Stairs": "true"
   locations:
     "Ganon Castle Leftmost Scrub": "has_lens && can_hit_scrub && can_use_wallet(1)"
     "Ganon Castle Left-Center Scrub": "has_lens && can_hit_scrub && can_use_wallet(1)"
@@ -16,7 +17,7 @@
 "Ganon Castle Light":
   dungeon: Ganon
   events:
-    GANON_TRIAL_LIGHT: "has(SMALL_KEY_GANON, 2) && can_hookshot && has_lens && has_light_arrows"
+    GANON_TRIAL_LIGHT: "small_keys(SMALL_KEY_GANON, 2) && can_hookshot && has_lens && has_light_arrows"
   locations:
     "Ganon Castle Light Chest Around 1": "true"
     "Ganon Castle Light Chest Around 2": "true"
@@ -25,7 +26,7 @@
     "Ganon Castle Light Chest Around 5": "true"
     "Ganon Castle Light Chest Around 6": "true"
     "Ganon Castle Light Chest Center": "has_lens"
-    "Ganon Castle Light Chest Lullaby": "has(SMALL_KEY_GANON, 1) && can_play(SONG_ZELDA)"
+    "Ganon Castle Light Chest Lullaby": "small_keys(SMALL_KEY_GANON, 1) && can_play(SONG_ZELDA)"
 "Ganon Castle Forest":
   dungeon: Ganon
   events:
@@ -35,7 +36,7 @@
 "Ganon Castle Fire":
   dungeon: Ganon
   events:
-    GANON_TRIAL_FIRE: "has_tunic_goron_strict && can_longshot && has(STRENGTH, 3) && has_light_arrows"
+    GANON_TRIAL_FIRE: "has_tunic_goron_strict && can_longshot && can_lift_gold && has_light_arrows"
 "Ganon Castle Water":
   dungeon: Ganon
   events:
@@ -58,3 +59,8 @@
   locations:
     "Ganon Castle Shadow Chest 1": "can_play(SONG_TIME) || can_hookshot || has_hover_boots || has_fire_arrows"
     "Ganon Castle Shadow Chest 2": "(can_longshot || has_fire_arrows) && (has_hover_boots || has_fire)"
+"Ganon Castle Stairs":
+  region: NONE
+  exits:
+    "Ganon Castle": "true"
+    "Ganon Castle Tower": "true"

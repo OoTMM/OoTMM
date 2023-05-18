@@ -19,7 +19,7 @@ void EnAn_AfterGivingItem(Actor* this)
     sAnjuFlag = 0;
 }
 
-int EnAn_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
+void EnAn_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
 {
     switch (gi)
     {
@@ -46,5 +46,5 @@ int EnAn_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
         }
         break;
     }
-    return GiveItem(this, play, gi, a, b);
+    GiveItem(this, play, gi, a, b);
 }

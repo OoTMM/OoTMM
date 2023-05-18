@@ -46,6 +46,9 @@
 #define TF_CAPITALIZE   (1 << 0)
 #define TF_PREPOS       (1 << 1)
 #define TF_PROGRESSIVE  (1 << 2)
+#define TF_SIGNAL       (1 << 3)
+
+typedef struct GameState_Play GameState_Play;
 
 void comboTextAutoLineBreaks(char* buffer);
 void comboTextAppendStr(char** dst, const char* src);
@@ -58,5 +61,6 @@ void comboTextAppendItemName(char** b, s16 gi, int flags);
 void comboTextAppendRegionName(char** b, u8 regionId, int flags);
 void comboTextAppendCheckName(char** b, u8 checkId);
 void comboTextAppendNpcReward(char** b, s16 npcId, s16 gi);
+void comboTextMessageCantBuy(GameState_Play* play, int flags);
 
 #endif

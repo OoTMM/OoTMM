@@ -1,6 +1,6 @@
 #include <combo.h>
 
-int EnItem00_GiveItem(Actor_EnItem00* this, GameState_Play* play, s16 gi, float a, float b)
+void EnItem00_GiveItem(Actor_EnItem00* this, GameState_Play* play, s16 gi, float a, float b)
 {
     Actor_Player* link;
     s16 itemId;
@@ -22,11 +22,11 @@ int EnItem00_GiveItem(Actor_EnItem00* this, GameState_Play* play, s16 gi, float 
     if (itemId >= 0)
     {
         this->base.attachedA = &link->base;
-        return AddItemWithIcon(play, link, &kExtendedGetItems[gi - 1]);
+        AddItemWithIcon(play, link, &kExtendedGetItems[gi - 1]);
     }
     else
     {
-        return GiveItem(&this->base, play, gi, a, b);
+        GiveItem(&this->base, play, gi, a, b);
     }
 }
 

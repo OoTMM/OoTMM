@@ -4,7 +4,7 @@ import { gameId } from '../util';
 import { Pathfinder, PathfinderState } from './pathfind';
 import { World } from './world';
 import { LogicError, LogicSeedError } from './error';
-import { Items, combinedItems, itemsArray, removeItem, ITEMS_REQUIRED, isDungeonReward, isGoldToken, isHouseToken, isKey, isStrayFairy, isGanonBossKey, isRegularBossKey, isTownStrayFairy, isDungeonStrayFairy, isSong, isJunk, isMapCompass, isSmallKeyRegular, isSmallKeyHideout, isItemUnlimitedStarting, isItemCriticalRenewable, isRupees, isItemConsumable, isItemMajor } from './items';
+import { Items, combinedItems, itemsArray, removeItem, ITEMS_REQUIRED, isDungeonReward, isGoldToken, isHouseToken, isKey, isStrayFairy, isGanonBossKey, isRegularBossKey, isTownStrayFairy, isDungeonStrayFairy, isSong, isJunk, isMapCompass, isSmallKeyRegular, isSmallKeyHideout, isItemUnlimitedStarting, isItemCriticalRenewable, isRupees, isItemConsumable, isItemMajor, isSmallKeyRegularMm, isSmallKeyRegularOot, isRegularBossKeyOot, isRegularBossKeyMm } from './items';
 import { Settings } from '../settings';
 import { Monitor } from '../monitor';
 import { isLocationRenewable } from './locations';
@@ -294,13 +294,16 @@ export class LogicPassSolver {
 
   private fixDungeon(dungeon: string) {
     /* handle IST and ST */
-    if (dungeon === 'IST') {
+    if (['IST', 'Tower'].includes(dungeon)) {
       return;
     }
 
     let locations = this.state.world.dungeons[dungeon];
     if (dungeon === 'ST') {
       locations = new Set([...locations, ...this.state.world.dungeons['IST']]);
+    }
+    if (dungeon === 'Ganon') {
+      locations = new Set([...locations, ...this.state.world.dungeons['Tower']]);
     }
 
     const pool = combinedItems(this.pools.required, this.pools.nice);
@@ -311,11 +314,15 @@ export class LogicPassSolver {
 
         if (isSmallKeyHideout(item) && this.state.settings.smallKeyShuffleHideout === 'anywhere') {
           continue;
-        } else if (isSmallKeyRegular(item) && this.state.settings.smallKeyShuffle === 'anywhere') {
+        } else if (isSmallKeyRegularOot(item) && this.state.settings.smallKeyShuffleOot === 'anywhere') {
+          continue;
+        } else if (isSmallKeyRegularMm(item) && this.state.settings.smallKeyShuffleMm === 'anywhere') {
           continue;
         } else if (isGanonBossKey(item) && this.state.settings.ganonBossKey === 'anywhere') {
           continue;
-        } else if (isRegularBossKey(item) && this.state.settings.bossKeyShuffle === 'anywhere') {
+        } else if (isRegularBossKeyOot(item) && this.state.settings.bossKeyShuffleOot === 'anywhere') {
+          continue;
+        } else if (isRegularBossKeyMm(item) && this.state.settings.bossKeyShuffleMm === 'anywhere') {
           continue;
         } else if (isDungeonStrayFairy(item) && this.state.settings.strayFairyShuffle === 'anywhere') {
           continue;

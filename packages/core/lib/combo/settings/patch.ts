@@ -7,12 +7,13 @@ type SettingsArrayRemove<T> = { remove: T[] };
 type SettingsArraySet<T> = { set: T[] };
 type SettingsArrayPatch<T> = SettingsArrayAdd<T> | SettingsArrayRemove<T> | SettingsArraySet<T>;
 
-export type SettingsPatch = PartialDeep<Omit<Settings, 'junkLocations' | 'tricks' | 'plando'>> & {
+export type SettingsPatch = PartialDeep<Omit<Settings, 'junkLocations' | 'tricks' | 'plando' | 'hints'>> & {
   junkLocations?: SettingsArrayPatch<string>;
   tricks?: SettingsArrayPatch<Trick>;
   plando?: {
     locations?: null | {[k: string]: string | null};
   };
+  hints?: SettingsArrayPatch<Settings['hints'][number]>;
 };
 
 export function patchArray<T>(arr: T[], patch: SettingsArrayPatch<T>): T[] {

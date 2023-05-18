@@ -36,7 +36,7 @@ int EnZk_HasGiveItem(Actor* this)
 
 PATCH_CALL(0x80ad6c5c, EnZk_HasGiveItem);
 
-int EnZk_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
+void EnZk_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
 {
     if (!(GET_LINK(play)->state & PLAYER_ACTOR_STATE_GET_ITEM))
         Message_Close(play);
@@ -51,7 +51,7 @@ int EnZk_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
         comboRemoveTradeItemAdult(XITEM_OOT_ADULT_PRESCRIPTION);
     }
 
-    return GiveItem(this, play, gi, a, b);
+    GiveItem(this, play, gi, a, b);
 }
 
 PATCH_CALL(0x80ad6cc8, EnZk_GiveItem);

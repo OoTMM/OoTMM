@@ -5,7 +5,7 @@ void EnGo_AfterGivingItem(Actor* actor)
     gMmExtraFlags.powderKeg = 1;
 }
 
-int EnGo_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
+void EnGo_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
 {
     if (!gMmExtraFlags.powderKeg)
     {
@@ -19,7 +19,7 @@ int EnGo_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
     {
         gi = GI_MM_RECOVERY_HEART;
     }
-    return GiveItem(this, play, gi, a, b);
+    GiveItem(this, play, gi, a, b);
 }
 
 static void powderKegHint(GameState_Play* play)

@@ -1,16 +1,17 @@
 import { Buffer } from 'buffer';
 
 import { LogicResult } from '../logic';
-import { DATA_GI, DATA_NPC, DATA_SCENES, DATA_REGIONS, DATA_CONFIG, DATA_HINTS_POOL, DATA_HINTS, DATA_ENTRANCES } from '../data';
+import { DATA_GI, DATA_NPC, DATA_SCENES, DATA_REGIONS, DATA_HINTS_POOL, DATA_HINTS, DATA_ENTRANCES } from '../data';
 import { Game, GAMES } from "../config";
 import { WorldCheck } from '../logic/world';
 import { DUNGEONS, Settings, SPECIAL_CONDS, SPECIAL_CONDS_KEYS } from '../settings';
 import { HintGossip, Hints } from '../logic/hints';
-import { isDungeonStrayFairy, isGanonBossKey, isMap, isCompass, isRegularBossKey, isSmallKeyRegular, isTownStrayFairy, isSmallKeyHideout, isItemUnlimitedStarting, ITEMS_MAPS, ITEMS_COMPASSES, addItem, ITEMS_TINGLE_MAPS } from '../logic/items';
+import { isDungeonStrayFairy, isGanonBossKey, isMap, isCompass, isRegularBossKey, isSmallKeyRegular, isTownStrayFairy, isSmallKeyHideout, isItemUnlimitedStarting, ITEMS_MAPS, ITEMS_COMPASSES, addItem, ITEMS_TINGLE_MAPS, isSmallKeyRegularOot, isSmallKeyRegularMm, isRegularBossKeyOot, isRegularBossKeyMm } from '../logic/items';
 import { gameId } from '../util';
 import { EntranceShuffleResult } from '../logic/entrance';
 import { Patchfile } from './patchfile';
 import { LOCATIONS_ZELDA } from '../logic/locations';
+import { CONFVARS_VALUES, Confvar } from '../confvars';
 
 const GAME_DATA_OFFSETS = {
   oot: 0x1000,
@@ -145,11 +146,15 @@ const gi = (settings: Settings, game: Game, item: string, generic: boolean) => {
   if (generic) {
     if (isSmallKeyHideout(item) && settings.smallKeyShuffleHideout !== 'anywhere') {
       item = gameId(game, 'SMALL_KEY', '_');
-    } else if (isSmallKeyRegular(item) && settings.smallKeyShuffle === 'ownDungeon' && settings.erBoss === 'none') {
+    } else if (isSmallKeyRegularOot(item) && settings.smallKeyShuffleOot === 'ownDungeon' && settings.erBoss === 'none') {
+      item = gameId(game, 'SMALL_KEY', '_');
+    } else if (isSmallKeyRegularMm(item) && settings.smallKeyShuffleMm === 'ownDungeon' && settings.erBoss === 'none') {
       item = gameId(game, 'SMALL_KEY', '_');
     } else if (isGanonBossKey(item) && settings.ganonBossKey !== 'anywhere') {
       item = gameId(game, 'BOSS_KEY', '_');
-    } else if (isRegularBossKey(item) && settings.bossKeyShuffle === 'ownDungeon' && settings.erBoss === 'none') {
+    } else if (isRegularBossKeyOot(item) && settings.bossKeyShuffleOot === 'ownDungeon' && settings.erBoss === 'none') {
+      item = gameId(game, 'BOSS_KEY', '_');
+    } else if (isRegularBossKeyMm(item) && settings.bossKeyShuffleMm === 'ownDungeon' && settings.erBoss === 'none') {
       item = gameId(game, 'BOSS_KEY', '_');
     } else if (isTownStrayFairy(item) && settings.townFairyShuffle === 'vanilla') {
       item = gameId(game, 'STRAY_FAIRY', '_');
@@ -314,6 +319,9 @@ const hintBuffer = (settings: Settings, game: Game, gossip: string, hint: HintGo
   case 'gossip-grotto':
     id = gossipData.id | 0x20;
     break;
+  case 'gossip-moon':
+    id = gossipData.id | 0x40;
+    break;
   }
   switch (hint.type) {
   case 'hero':
@@ -426,9 +434,9 @@ export const randomizerMq = (logic: LogicResult): Buffer => {
   return buffer;
 }
 
-export const randomizerConfig = (config: Set<string>): Buffer => {
+export const randomizerConfig = (config: Set<Confvar>): Buffer => {
   const bits = Array.from(config).map((c) => {
-    const bit = DATA_CONFIG[c];
+    const bit = CONFVARS_VALUES[c];
     if (bit === undefined) {
       throw new Error(`Unknown config ${c}`);
     }
@@ -506,6 +514,10 @@ const effectiveStartingItems = (logic: LogicResult): {[k: string]: number} => {
     for (const loc of LOCATIONS_ZELDA) {
       addItem(startingItems, items[loc]);
     }
+  }
+
+  if (settings.gerudoFortress === 'open') {
+    addItem(startingItems, items['OOT Gerudo Member Card']);
   }
 
   return startingItems;

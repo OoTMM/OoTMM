@@ -6,6 +6,7 @@ import { DEFAULT_TRICKS, TRICKS } from './tricks';
 import { DEFAULT_DUNGEONS } from './dungeons';
 import { DEFAULT_SPECIAL_COND, DEFAULT_SPECIAL_CONDS, SPECIAL_CONDS } from './special-conds';
 import { SettingsPatch, patchArray } from './patch';
+import { SETTINGS_DEFAULT_HINTS } from './hints';
 
 export const DEFAULT_SETTINGS: Settings = { ...SETTINGS.map(s => {
   return {[s.key]: s.default};
@@ -16,6 +17,7 @@ export const DEFAULT_SETTINGS: Settings = { ...SETTINGS.map(s => {
   dungeon: { ...DEFAULT_DUNGEONS },
   specialConds: { ...DEFAULT_SPECIAL_CONDS },
   plando: { locations: {} },
+  hints: [ ...SETTINGS_DEFAULT_HINTS ],
 } as Settings;
 
 const sortUnique = <T>(arr: T[]): T[] => {
@@ -116,6 +118,10 @@ export function makeSettings(arg: PartialDeep<Settings>): Settings {
     result.plando = { ...arg.plando } as Settings['plando'];
   }
 
+  if (arg.hints !== undefined) {
+    result.hints = [ ...arg.hints ];
+  }
+
   return validateSettings(result);
 }
 
@@ -169,6 +175,11 @@ export function mergeSettings(settings: Settings, patch: SettingsPatch): Setting
         }
       }
     }
+  }
+
+  /* Apply hints */
+  if (patch.hints !== undefined) {
+    s.hints = patchArray(s.hints, patch.hints);
   }
 
   return validateSettings(s);

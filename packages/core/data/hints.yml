@@ -11,6 +11,7 @@ OOT_TEMPLE_FIRE_SCARECROW:  0x07
 OOT_GTG_WATER:              0x08
 OOT_HAUNTED_WASTELAND:      0x09
 OOT_GERUDO_ARCHERY:         0x0a
+OOT_COW_LINK:               0x0b
 
 MM_RANCH_DEFENSE:     0x81
 MM_BUTLER_RACE:       0x82
@@ -27,3 +28,4 @@ MM_PINNACLE_ROCK_HP:          0x8b
 MM_FISHERMAN_GAME:            0x8c
 MM_SONG_ELEGY:                0x8d
 MM_SECRET_SHRINE_WART_HP:     0x8e
+MM_COW_WELL:                  0x8f

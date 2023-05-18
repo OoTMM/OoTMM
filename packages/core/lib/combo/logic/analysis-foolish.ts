@@ -1,5 +1,5 @@
 import { Settings } from '../settings';
-import { isItemConsumable } from './items';
+import { isItemConsumable, isItemLicense } from './items';
 import { isLocationRenewable } from './locations';
 import { Pathfinder, PathfinderState } from './pathfind';
 import { ItemPlacement } from './solve';
@@ -176,7 +176,7 @@ export class LogicPassAnalysisFoolish {
       if (this.state.analysis.unreachable.has(loc)) continue;
       if (this.state.analysis.useless.has(loc)) continue;
       const item = this.state.items[loc];
-      if (isItemConsumable(item) && !isLocationRenewable(this.state.world, loc)) continue;
+      if (isItemConsumable(item) && !isLocationRenewable(this.state.world, loc) && !isItemLicense(item)) continue;
       locsSet.add(loc);
     }
 

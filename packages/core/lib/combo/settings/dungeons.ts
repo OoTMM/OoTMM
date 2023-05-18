@@ -13,7 +13,7 @@ export const DUNGEONS = {
   Ganon: "Ganon's Castle",
 } as const;
 
-export type DungeonSettings = {[k in keyof typeof DUNGEONS]: 'vanilla' | 'mq' | 'random'};
+export type DungeonSettings = { -readonly [k in keyof typeof DUNGEONS]: 'vanilla' | 'mq' | 'random'};
 
 export const DEFAULT_DUNGEONS = Object.keys(DUNGEONS).reduce((dungeons, dungeon) => {
   dungeons[dungeon] = 'vanilla';

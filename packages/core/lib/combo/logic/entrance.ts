@@ -61,6 +61,8 @@ const DUNGEON_INDEX = {
   SS: 20,
   BtWE: 21,
   PF: 22,
+  Ganon: 23,
+  Tower: 24,
 } as {[k: string]: number};;
 
 export class LogicPassEntrances {
@@ -134,11 +136,14 @@ export class LogicPassEntrances {
     }
 
     /* Check if the new world is valid */
-    if (locations.every(l => pathfinderState.locations.has(l))) {
-      return true;
-    } else {
+    if (!(locations.every(l => pathfinderState.locations.has(l))))
       return false;
-    }
+
+    /* Ganon's tower check */
+    if (dungeon === 'Tower' && ['ganon', 'both'].includes(this.input.settings.goal) && !pathfinderState.events.has('OOT_GANON'))
+      return false;
+
+    return true;
   }
 
   private fixBosses() {
@@ -223,36 +228,17 @@ export class LogicPassEntrances {
     }
   }
 
-  private isDungeonTransition(e: WorldEntrance) {
-    const from = this.world.areas[e.from];
-    const to = this.world.areas[e.to];
-
-    /* Overworld to overworld */
-    if (!from.dungeon && !to.dungeon) {
-      return false;
-    }
-
-    /* Same dungeon */
-    if (from.dungeon === to.dungeon) {
-      return false;
-    }
-
-    /* BtW/BtWE */
-    if (from.dungeon === 'BtW' && to.dungeon === 'BtWE') {
-      return false;
-    }
-    if (from.dungeon === 'BtWE' && to.dungeon === 'BtW') {
-      return false;
-    }
-
-    return true;
-  }
-
   private fixDungeons() {
     /* Set the dungeon list */
     let shuffledDungeons = new Set(['DT', 'DC', 'JJ', 'Forest', 'Fire', 'Water', 'Shadow', 'Spirit', 'WF', 'SH', 'GB', 'ST', 'IST']);
     if (this.input.settings.erMinorDungeons) {
       ['BotW', 'IC', 'GTG'].forEach(d => shuffledDungeons.add(d));
+    }
+    if (this.input.settings.erGanonCastle) {
+      shuffledDungeons.add('Ganon');
+    }
+    if (this.input.settings.erGanonTower) {
+      shuffledDungeons.add('Tower');
     }
     if (this.input.settings.erSpiderHouses) {
       ['SSH', 'OSH'].forEach(d => shuffledDungeons.add(d));
@@ -272,7 +258,7 @@ export class LogicPassEntrances {
 
     /* Get the transitions and exprs */
     const dungeonTransitions = this.world.entrances
-      .filter(e => this.isDungeonTransition(e))
+      .filter(e => e.type === 'dungeon')
       .filter(e => shuffledDungeons.has(this.world.areas[e.from].dungeon!) || shuffledDungeons.has(this.world.areas[e.to].dungeon!));
 
     const dungeonEntrances: {[k: string]: Entrance} = {};
@@ -285,12 +271,12 @@ export class LogicPassEntrances {
       const expr = from.exits[e.to];
 
       /* Entrance */
-      if (to.dungeon) {
+      if (to.dungeon && !dungeonEntrances[to.dungeon]) {
         dungeonEntrances[to.dungeon] = { from: e.from, to: e.to, expr, game: e.game };
       }
 
       /* Exit */
-      if (from.dungeon) {
+      if (from.dungeon && !dungeonExits[from.dungeon]) {
         dungeonExits[from.dungeon] = { from: e.from, to: e.to, expr, game: e.game };
       }
 

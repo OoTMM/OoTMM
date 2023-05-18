@@ -29,10 +29,10 @@ int ObjMoonStone_HasGivenItem(Actor* this)
 
 PATCH_CALL(0x80c067ec, ObjMoonStone_HasGivenItem);
 
-int ObjMoonStone_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
+void ObjMoonStone_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
 {
     gi = moonTearGI(play);
-    return GiveItem(this, play, gi, a, b);
+    GiveItem(this, play, gi, a, b);
 }
 
 PATCH_CALL(0x80c06840, ObjMoonStone_GiveItem);

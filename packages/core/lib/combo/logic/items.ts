@@ -80,7 +80,21 @@ export const DUNGEON_REWARDS_ORDERED = [
 ];
 export const DUNGEON_REWARDS = new Set(DUNGEON_REWARDS_ORDERED);
 
+export const ITEMS_OWLS = new Set([
+  'MM_OWL_GREAT_BAY',
+  'MM_OWL_ZORA_CAPE',
+  'MM_OWL_SNOWHEAD',
+  'MM_OWL_MOUNTAIN_VILLAGE',
+  'MM_OWL_CLOCK_TOWN',
+  'MM_OWL_MILK_ROAD',
+  'MM_OWL_WOODFALL',
+  'MM_OWL_SOUTHERN_SWAMP',
+  'MM_OWL_IKANA_CANYON',
+  'MM_OWL_STONE_TOWER',
+]);
+
 export const ITEMS_REQUIRED = new Set<string>([
+  ...ITEMS_OWLS,
   'OOT_WEIRD_EGG',
   'OOT_POCKET_EGG',
   'OOT_SHIELD_DEKU',
@@ -123,6 +137,9 @@ export const ITEMS_REQUIRED = new Set<string>([
   'OOT_SWORD',
   'OOT_SWORD_KOKIRI',
   'OOT_SWORD_MASTER',
+  'OOT_SWORD_KNIFE',
+  'OOT_SWORD_BIGGORON',
+  'OOT_SWORD_GORON',
   'OOT_TUNIC_GORON',
   'OOT_TUNIC_ZORA',
   'OOT_ZELDA_LETTER',
@@ -304,7 +321,7 @@ export const ITEMS_REQUIRED = new Set<string>([
   'SHARED_BOMBCHU_20',
 ]);
 
-export const ITEMS_SMALL_KEY = new Set([
+export const ITEMS_SMALL_KEY_OOT = new Set([
   'OOT_SMALL_KEY_FOREST',
   'OOT_SMALL_KEY_FIRE',
   'OOT_SMALL_KEY_WATER',
@@ -313,18 +330,24 @@ export const ITEMS_SMALL_KEY = new Set([
   'OOT_SMALL_KEY_BOTW',
   'OOT_SMALL_KEY_GTG',
   'OOT_SMALL_KEY_GANON',
+]);
+
+export const ITEMS_SMALL_KEY_MM = new Set([
   'MM_SMALL_KEY_WF',
   'MM_SMALL_KEY_SH',
   'MM_SMALL_KEY_GB',
   'MM_SMALL_KEY_ST',
 ]);
 
-export const ITEMS_BOSS_KEY = new Set([
+export const ITEMS_BOSS_KEY_OOT = new Set([
   'OOT_BOSS_KEY_FOREST',
   'OOT_BOSS_KEY_FIRE',
   'OOT_BOSS_KEY_WATER',
   'OOT_BOSS_KEY_SPIRIT',
   'OOT_BOSS_KEY_SHADOW',
+]);
+
+export const ITEMS_BOSS_KEY_MM = new Set([
   'MM_BOSS_KEY_WF',
   'MM_BOSS_KEY_SH',
   'MM_BOSS_KEY_GB',
@@ -468,6 +491,10 @@ const ITEMS_JUNK = new Set<string>([
   'SHARED_BOMBCHU_20',
 ]);
 
+const ITEMS_LICENSES = new Set<string>([
+  'MM_MAGIC_BEAN',
+]);
+
 const CONSUMABLES = new Set<string>([
   'OOT_RECOVERY_HEART',
   'OOT_STICK',
@@ -550,6 +577,9 @@ const CONSUMABLES = new Set<string>([
 const CRITICAL_RENEWABLE_ITEMS = new Set<string>([
   'MM_SHIELD_HERO',
   'MM_BOMBCHU_10',
+  'MM_MAGIC_BEAN',
+  'MM_POTION_BLUE',
+  'MM_MILK',
   'OOT_SHIELD_DEKU',
   'OOT_SHIELD_HYLIAN',
 ]);
@@ -569,10 +599,14 @@ export const isMapCompass = (item: string) => isMap(item) || isCompass(item);
 export const isSong = (item: string) => ITEMS_SONGS.has(item);
 export const isSmallKey = (item: string) => isSmallKeyRegular(item) || isSmallKeyHideout(item);
 export const isSmallKeyHideout = (item: string) => item === 'OOT_SMALL_KEY_GF';
-export const isSmallKeyRegular = (item: string) => ITEMS_SMALL_KEY.has(item);
+export const isSmallKeyRegularOot = (item: string) => ITEMS_SMALL_KEY_OOT.has(item);
+export const isSmallKeyRegularMm = (item: string) => ITEMS_SMALL_KEY_MM.has(item);
+export const isSmallKeyRegular = (item: string) => isSmallKeyRegularOot(item) || isSmallKeyRegularMm(item);
 export const isGanonBossKey = (item: string) => item === 'OOT_BOSS_KEY_GANON';
 export const isBossKey = (item: string) => isRegularBossKey(item) || isGanonBossKey(item);
-export const isRegularBossKey = (item: string) => ITEMS_BOSS_KEY.has(item);
+export const isRegularBossKeyOot = (item: string) => ITEMS_BOSS_KEY_OOT.has(item);
+export const isRegularBossKeyMm = (item: string) => ITEMS_BOSS_KEY_MM.has(item);
+export const isRegularBossKey = (item: string) => isRegularBossKeyOot(item) || isRegularBossKeyMm(item);
 export const isStrayFairy = (item: string) => !!item.match(/^(OOT|MM)_STRAY_FAIRY_/);
 export const isTownStrayFairy = (item: string) => item === 'MM_STRAY_FAIRY_TOWN';
 export const isDungeonStrayFairy = (item: string) => isStrayFairy(item) && !isTownStrayFairy(item);
@@ -592,6 +626,8 @@ export const isRupees = (item: string) => !!item.match(/^(OOT|MM|SHARED)_RUPEE_/
 export const isItemUnlimitedStarting = (item: string) => isRupees(item) || isItemConsumable(item);
 export const isItemCriticalRenewable = (item: string) => CRITICAL_RENEWABLE_ITEMS.has(item);
 export const isTingleMap = (item: string) => ITEMS_TINGLE_MAPS.has(item);
+export const isOwlStatue = (item: string) => ITEMS_OWLS.has(item);
+export const isItemLicense = (item: string) => ITEMS_LICENSES.has(item);
 
 export const itemsArray = (items: Items) => {
   const arr: string[] = [];

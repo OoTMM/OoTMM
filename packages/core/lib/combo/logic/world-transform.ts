@@ -1,7 +1,9 @@
+import { Confvar } from '../confvars';
 import { Monitor } from '../monitor';
 import { Settings } from '../settings';
 import { exprTrue } from './expr';
-import { Items, addItem, ITEMS_MAPS, ITEMS_COMPASSES, ITEMS_TINGLE_MAPS, ITEMS_SONGS, DUNGEON_REWARDS, ITEMS_SMALL_KEY, ITEMS_BOSS_KEY, isJunk, isItemConsumable } from './items';
+import { ITEMS_BOSS_KEY_MM, ITEMS_BOSS_KEY_OOT, ITEMS_OWLS, ITEMS_SMALL_KEY_MM, ITEMS_SMALL_KEY_OOT } from './items';
+import { Items, addItem, ITEMS_MAPS, ITEMS_COMPASSES, ITEMS_TINGLE_MAPS, ITEMS_SONGS, DUNGEON_REWARDS, isJunk, isItemConsumable } from './items';
 import { LOCATIONS_ZELDA, isLocationRenewable } from './locations';
 import { World } from './world';
 
@@ -175,7 +177,7 @@ export class LogicPassWorldTransform {
       monitor: Monitor;
       world: World;
       settings: Settings;
-      config: Set<string>;
+      config: Set<Confvar>;
       mq: Set<string>;
       fixedLocations: Set<string>;
     }
@@ -226,6 +228,12 @@ export class LogicPassWorldTransform {
       delete this.pool[item];
     } else {
       this.pool[item] = count - amount;
+    }
+  }
+
+  private removeItems(items: Set<string>, amount?: number) {
+    for (const item of items) {
+      this.removeItem(item, amount);
     }
   }
 
@@ -315,12 +323,20 @@ export class LogicPassWorldTransform {
       items.push('OOT_BOTTLE_EMPTY');
     }
 
-    if (settings.smallKeyShuffle === 'anywhere') {
-      items = [...items, ...ITEMS_SMALL_KEY];
+    if (settings.smallKeyShuffleOot === 'anywhere') {
+      items = [...items, ...ITEMS_SMALL_KEY_OOT];
     }
 
-    if (settings.bossKeyShuffle === 'anywhere') {
-      items = [...items, ...ITEMS_BOSS_KEY];
+    if (settings.smallKeyShuffleMm === 'anywhere') {
+      items = [...items, ...ITEMS_SMALL_KEY_MM];
+    }
+
+    if (settings.bossKeyShuffleOot === 'anywhere') {
+      items = [...items, ...ITEMS_BOSS_KEY_OOT];
+    }
+
+    if (settings.bossKeyShuffleMm === 'anywhere') {
+      items = [...items, ...ITEMS_BOSS_KEY_MM];
     }
 
     if (settings.ganonBossKey === 'anywhere') {
@@ -337,6 +353,10 @@ export class LogicPassWorldTransform {
 
     if (settings.tingleShuffle === 'anywhere') {
       items = [...items, ...ITEMS_TINGLE_MAPS];
+    }
+
+    if (settings.owlShuffle === 'anywhere') {
+      items = [...items, ...ITEMS_OWLS];
     }
 
     /* Add extra items */
@@ -568,6 +588,19 @@ export class LogicPassWorldTransform {
     const { settings } = this.state;
     this.state.monitor.log('Logic: World Transform');
 
+    /* Carpenters */
+    if (['open', 'single'].includes(settings.gerudoFortress)) {
+      this.removeLocations(['OOT Gerudo Fortress Jail 2', 'OOT Gerudo Fortress Jail 3', 'OOT Gerudo Fortress Jail 4']);
+
+      if (settings.gerudoFortress === 'open') {
+        this.removeLocations(['OOT Gerudo Fortress Jail 1']);
+        const loc = 'OOT Gerudo Member Card';
+        this.state.world.areas['OOT SPAWN'].locations[loc] = exprTrue();
+        this.state.world.regions[loc] = 'NONE';
+        this.state.world.dungeons['GF'].delete(loc);
+      }
+    }
+
     /* Make the basic item pool */
     this.makePool();
 
@@ -630,6 +663,24 @@ export class LogicPassWorldTransform {
     /* Handle Ganon BK */
     if (settings.ganonBossKey === 'removed' || settings.ganonBossKey === 'custom') {
       this.removeItem('OOT_BOSS_KEY_GANON');
+    }
+
+    /* Handle other boss keys */
+    if (settings.bossKeyShuffleOot === 'removed') {
+      this.removeItems(ITEMS_BOSS_KEY_OOT);
+    }
+
+    if (settings.bossKeyShuffleMm === 'removed') {
+      this.removeItems(ITEMS_BOSS_KEY_MM);
+    }
+
+    /* Handle small keys */
+    if (settings.smallKeyShuffleOot === 'removed') {
+      this.removeItems(ITEMS_SMALL_KEY_OOT);
+    }
+
+    if (settings.smallKeyShuffleMm === 'removed') {
+      this.removeItems(ITEMS_SMALL_KEY_MM);
     }
 
     if (settings.zoraKing === 'open') {

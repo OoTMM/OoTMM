@@ -1,9 +1,9 @@
 #include <combo.h>
 
-int ItemBHeart_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
+void ItemBHeart_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
 {
     gi = comboOverride(OV_COLLECTIBLE, play->sceneId, 0x1f, gi);
-    return GiveItem(this, play, gi, a, b);
+    GiveItem(this, play, gi, a, b);
 }
 
 PATCH_CALL(0x808bcf38, ItemBHeart_GiveItem);

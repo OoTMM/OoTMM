@@ -12,13 +12,13 @@ int EnGuruguru_HasGivenItem(Actor* this)
 
 PATCH_CALL(0x80bc7460, EnGuruguru_HasGivenItem);
 
-int EnGuruguru_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
+void EnGuruguru_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
 {
     if (gMmExtraFlags2.maskBremen)
         gi = GI_MM_RECOVERY_HEART;
     else
         gi = comboOverride(OV_NPC, 0, NPC_MM_MASK_BREMEN, gi);
-    return GiveItem(actor, play, gi, a, b);
+    GiveItem(actor, play, gi, a, b);
 }
 
 PATCH_CALL(0x80bc7504, EnGuruguru_GiveItem);

@@ -12,13 +12,13 @@ int EnYb_HasGivenItem(Actor* this)
 
 PATCH_CALL(0x80bfa940, EnYb_HasGivenItem);
 
-int EnYb_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
+void EnYb_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
 {
     if (gMmExtraFlags2.maskKamaro)
         gi = GI_MM_RECOVERY_HEART;
     else
         gi = comboOverride(OV_NPC, 0, NPC_MM_MASK_KAMARO, gi);
-    return GiveItem(this, play, gi, a, b);
+    GiveItem(this, play, gi, a, b);
 }
 
 PATCH_CALL(0x80bfa9b0, EnYb_GiveItem);

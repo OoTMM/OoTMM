@@ -27,10 +27,10 @@ static int ItemEtcetera_HasGivenItem(Actor* this)
 PATCH_CALL(0x80a5e1cc, ItemEtcetera_HasGivenItem);
 PATCH_CALL(0x80a5e268, ItemEtcetera_HasGivenItem);
 
-int ItemEtcetera_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
+void ItemEtcetera_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
 {
     gi = ItemEtcetera_GetGI(this, gi);
-    return GiveItem(this, play, gi, a, b);
+    GiveItem(this, play, gi, a, b);
 }
 
 PATCH_CALL(0x80a5e230, ItemEtcetera_GiveItem);

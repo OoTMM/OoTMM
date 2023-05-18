@@ -31,3 +31,17 @@ PATCH_END
 PATCH_START 0x80b92e4c
 .byte 0x15
 PATCH_END
+
+/* Relocs */
+PATCH_START 0x80b92c10
+  lui a1,%HI(ObjWarpstone_GiveItem)
+PATCH_END
+
+PATCH_START 0x80b92c28
+  addiu a1,%LO(ObjWarpstone_GiveItem)
+PATCH_END
+
+PATCH_START 0x80b932ac
+.int 0
+.int 0
+PATCH_END

@@ -8,10 +8,9 @@
     ARROWS: "is_adult"
     SEEDS: "is_child"
     CARPENTER_1: can_rescue_carpenter
-    CARPENTERS_RESCUE: "event(CARPENTER_1) && event(CARPENTER_2) && event(CARPENTER_3) && event(CARPENTER_4)"
   locations:
     "Gerudo Fortress Jail 1": "has_weapon || ((can_boomerang || has_nuts) && can_use_sticks)"
-    "Gerudo Member Card": "event(CARPENTERS_RESCUE)"
+    "Gerudo Member Card": "carpenters_rescued"
 "Gerudo Fortress Carpenter 1 Right":
   dungeon: "GF"
   exits:
@@ -25,10 +24,9 @@
   events:
     RUPEES: "true"
     CARPENTER_2: can_rescue_carpenter
-    CARPENTERS_RESCUE: "event(CARPENTER_1) && event(CARPENTER_2) && event(CARPENTER_3) && event(CARPENTER_4)"
   locations:
     "Gerudo Fortress Jail 2": "has_weapon || ((can_boomerang || has_nuts) && can_use_sticks)"
-    "Gerudo Member Card": "event(CARPENTERS_RESCUE)"
+    "Gerudo Member Card": "carpenters_rescued"
 "Gerudo Fortress Carpenter 2 Top":
   dungeon: "GF"
   exits:
@@ -47,10 +45,9 @@
   events:
     RUPEES: "true"
     CARPENTER_3: can_rescue_carpenter
-    CARPENTERS_RESCUE: "event(CARPENTER_1) && event(CARPENTER_2) && event(CARPENTER_3) && event(CARPENTER_4)"
   locations:
     "Gerudo Fortress Jail 3": "has_weapon || ((can_boomerang || has_nuts) && can_use_sticks)"
-    "Gerudo Member Card": "event(CARPENTERS_RESCUE)"
+    "Gerudo Member Card": "carpenters_rescued"
 "Gerudo Fortress Kitchen Tunnel End":
   dungeon: "GF"
   exits:
@@ -86,10 +83,9 @@
     "Gerudo Fortress Center Ledge": "true"
   events:
     CARPENTER_4: can_rescue_carpenter
-    CARPENTERS_RESCUE: "event(CARPENTER_1) && event(CARPENTER_2) && event(CARPENTER_3) && event(CARPENTER_4)"
   locations:
     "Gerudo Fortress Jail 4": "has_weapon || ((can_boomerang || has_nuts) && can_use_sticks)"
-    "Gerudo Member Card": "event(CARPENTERS_RESCUE)"
+    "Gerudo Member Card": "carpenters_rescued"
 "Gerudo Fortress Break Room Bottom":
   dungeon: "GF"
   exits:

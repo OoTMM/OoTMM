@@ -89,8 +89,10 @@ const PRESET_ALLSANITY = makeSettings({
   housesSkulltulaTokens: 'all',
   strayFairyShuffle: 'anywhere',
   townFairyShuffle: 'anywhere',
-  bossKeyShuffle: 'anywhere',
-  smallKeyShuffle: 'anywhere',
+  bossKeyShuffleOot: 'anywhere',
+  bossKeyShuffleMm: 'anywhere',
+  smallKeyShuffleOot: 'anywhere',
+  smallKeyShuffleMm: 'anywhere',
   smallKeyShuffleHideout: 'anywhere',
   cowShuffleOot: true,
   cowShuffleMm: true,
@@ -102,6 +104,7 @@ const PRESET_ALLSANITY = makeSettings({
   colossalWallets: true,
   tingleShuffle: 'anywhere',
   dungeonRewardShuffle: 'anywhere',
+  owlShuffle: 'anywhere',
 });
 
 export const PRESETS: Presets = {

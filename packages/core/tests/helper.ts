@@ -24,13 +24,15 @@ import { DEFAULT_SETTINGS, Settings } from "../lib/combo/settings";
 import { Monitor } from "../lib/combo/monitor";
 import { logic } from "../lib/combo/logic";
 import { makeCosmetics } from "../lib/combo";
+import { makeRandomSettings } from "../lib/combo/settings/random";
 
 const sharedMonitor = new Monitor({ onLog: () => {} });
 
 export const makeTestSeed = (seed: string, settings: Optional<Settings>) => {
   const cosmetics = makeCosmetics({});
+  const random = makeRandomSettings({});
   const s = merge({}, DEFAULT_SETTINGS, settings, {
     probabilisticFoolish: false,
   });
-  return logic(sharedMonitor, { cosmetics, debug: false, seed, settings: s });
+  return logic(sharedMonitor, { cosmetics, debug: false, seed, settings: s, random });
 }

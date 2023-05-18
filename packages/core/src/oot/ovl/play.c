@@ -30,7 +30,7 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.items[ITS_OOT_BOMBCHU] = ITEM_OOT_BOMBCHU_10;
         gSave.inventory.items[ITS_OOT_TRADE_CHILD] = ITEM_OOT_ZELDA_LETTER;
         gSave.inventory.items[ITS_OOT_HAMMER] = ITEM_OOT_HAMMER;
-        //gSave.inventory.items[ITS_OOT_HOOKSHOT] = ITEM_OOT_LONGSHOT;
+        gSave.inventory.items[ITS_OOT_HOOKSHOT] = ITEM_OOT_LONGSHOT;
         gSave.inventory.items[ITS_OOT_LENS] = ITEM_OOT_LENS;
         gSave.inventory.items[ITS_OOT_SPELL_WIND] = ITEM_OOT_SPELL_WIND;
         gSave.inventory.equipment.swords = 0x7;
@@ -251,10 +251,10 @@ void hookPlay_Init(GameState_Play* play)
         gSave.equips.equipment.swords = 0;
         switch (gSave.equips.buttonItems[0])
         {
-        case ITEM_OOT_KOKIRI_SWORD:
-        case ITEM_OOT_MASTER_SWORD:
-        case ITEM_OOT_GIANT_KNIFE:
-        case ITEM_OOT_GIANT_KNIFE_BROKEN:
+        case ITEM_OOT_SWORD_KOKIRI:
+        case ITEM_OOT_SWORD_MASTER:
+        case ITEM_OOT_SWORD_KNIFE_BIGGORON:
+        case ITEM_OOT_SWORD_KNIFE_BROKEN:
             gSave.equips.buttonItems[0] = ITEM_NONE;
             break;
         }

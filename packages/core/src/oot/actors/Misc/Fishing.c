@@ -15,7 +15,7 @@ int Fishing_HasGivenItem(Actor* this)
 
 PATCH_CALL(0x80a427ac, Fishing_HasGivenItem);
 
-int Fishing_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
+void Fishing_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
 {
     if (gSave.age == AGE_CHILD)
     {
@@ -32,7 +32,7 @@ int Fishing_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b
             gi = comboOverride(OV_NPC, 0, NPC_OOT_FISH_ADULT, gi);
     }
 
-    return GiveItem(this, play, gi, a, b);
+    GiveItem(this, play, gi, a, b);
 }
 
 PATCH_CALL(0x80a42644, Fishing_GiveItem);

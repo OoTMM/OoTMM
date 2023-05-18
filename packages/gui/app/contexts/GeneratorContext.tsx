@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState } from 'react';
-import { GeneratorOutput, Items, Settings, itemPool, OptionsInput, mergeSettings, makeSettings, SettingsPatch, Cosmetics } from '@ootmm/core';
+import { GeneratorOutput, Items, Settings, itemPool, OptionsInput, mergeSettings, makeSettings, SettingsPatch, Cosmetics, OptionRandomSettings } from '@ootmm/core';
 import { Buffer } from 'buffer';
 import { merge } from 'lodash';
 
@@ -22,6 +22,7 @@ type GeneratorState = {
   },
   isPatch: boolean;
   settings: Settings;
+  random: OptionRandomSettings;
   cosmetics: Cosmetics;
   itemPool: Items;
 }
@@ -35,12 +36,14 @@ type GeneratorContext = {
   setSettings: (settings: SettingsPatch) => Settings;
   setCosmetics: (cosmetics: Partial<Cosmetics>) => Cosmetics;
   overrideSettings: (settings: Settings) => Settings;
+  setRandomSettings: (random: Partial<OptionRandomSettings>) => OptionRandomSettings;
 }
 
 export const GeneratorContext = createContext<GeneratorContext>(null as any);
 
 function createState(): GeneratorState {
   const settings = API.initialSettings();
+  const random = API.initialRandomSettings();
   const cosmetics = API.initialCosmetics();
   const ip = itemPool(settings);
   settings.startingItems = API.restrictItemsByPool(settings.startingItems, ip);
@@ -55,6 +58,7 @@ function createState(): GeneratorState {
     },
     isPatch: false,
     settings,
+    random,
     cosmetics,
     itemPool: ip,
     generator: {
@@ -96,10 +100,16 @@ export function GeneratorContextProvider({ children }: { children: React.ReactNo
     const cosmetics = merge({}, state.cosmetics, patch);
     setState({ ...state, cosmetics });
     return cosmetics;
-  }
+  };
+
+  const setRandomSettings = (patch: Partial<OptionRandomSettings>) => {
+    const random = merge({}, state.random, patch);
+    setState({ ...state, random });
+    return random;
+  };
 
   return (
-    <GeneratorContext.Provider value={{ state, setState, setFile, setSeed, setIsPatch, setSettings, overrideSettings, setCosmetics }}>
+    <GeneratorContext.Provider value={{ state, setState, setFile, setSeed, setIsPatch, setSettings, overrideSettings, setCosmetics, setRandomSettings }}>
       {children}
     </GeneratorContext.Provider>
   );
@@ -128,7 +138,7 @@ export function useGenerator() {
     if (state.isPatch) {
       patch = Buffer.from(await state.romConfig.files.patch!.arrayBuffer());
     }
-    const options: OptionsInput = { seed: state.romConfig.seed, settings: state.settings, cosmetics: state.cosmetics };
+    const options: OptionsInput = { seed: state.romConfig.seed, settings: state.settings, cosmetics: state.cosmetics, random: state.random };
     try {
       const result = await API.generate({ oot, mm, patch }, options, (message) => {
         console.log(message);
@@ -158,6 +168,16 @@ export function useSettings() {
     });
   };
   return [ctx.state.settings, setSettings] as const;
+}
+
+export function useRandomSettings() {
+  const ctx = useContext(GeneratorContext);
+  const setRandomSettings = (patch: Partial<OptionRandomSettings>) => {
+    const newRandomSettings = ctx.setRandomSettings(patch);
+    localStorage.setItem('randomSettings', JSON.stringify(newRandomSettings));
+    return newRandomSettings;
+  };
+  return [ctx.state.random, setRandomSettings] as const;
 }
 
 export function useOverrideSettings() {

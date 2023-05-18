@@ -2,7 +2,7 @@ import { ItemPlacement } from './solve';
 import { World } from './world';
 import { Analysis } from './analysis';
 import { Random, sample, shuffle } from '../random';
-import { DUNGEON_REWARDS_ORDERED, isDungeonReward, isGoldToken, itemsArray, isKey, isHouseToken, isGanonBossKey, isRegularBossKey, isStrayFairy, isToken, isTownStrayFairy, isSong, isSmallKeyRegular, isSmallKeyHideout, isMapCompass } from './items';
+import { DUNGEON_REWARDS_ORDERED, isDungeonReward, isGoldToken, itemsArray, isKey, isHouseToken, isGanonBossKey, isRegularBossKey, isStrayFairy, isToken, isTownStrayFairy, isSong, isSmallKeyRegular, isSmallKeyHideout, isMapCompass, ITEMS_MASKS_REGULAR, isSmallKeyRegularOot, isSmallKeyRegularMm, isRegularBossKeyOot, isRegularBossKeyMm } from './items';
 import { Settings } from '../settings';
 import { Game } from '../config';
 import { Monitor } from '../monitor';
@@ -101,6 +101,8 @@ export class LogicPassHints {
   private foolish: {[k: string]: number} = {};
   private woth: Set<string>;
   private pathfinder: Pathfinder;
+  private hintsAlways: string[];
+  private hintsSometimes: string[];
 
   constructor(
     private readonly state: {
@@ -113,26 +115,60 @@ export class LogicPassHints {
       fixedLocations: Set<string>,
     },
   ){
+    this.hintsAlways = this.alwaysHints();
+    this.hintsSometimes = this.sometimesHints();
     this.pathfinder = new Pathfinder(state.world, state.settings);
     this.woth = new Set(Array.from(this.state.analysis.required).filter(loc => this.isLocationHintableHero(loc)));
   }
 
-  private findItem(item: string) {
+  private alwaysHints() {
+    const { settings } = this.state;
+    const alwaysHints = [...HINTS_ITEMS_ALWAYS];
+
+    if (settings.cowShuffleOot) {
+      alwaysHints.push('OOT_COW_LINK');
+    }
+
+    return alwaysHints;
+  }
+
+  private sometimesHints() {
+    const { settings } = this.state;
+    const sometimesHints = [...HINTS_ITEMS_SOMETIMES];
+
+    if (settings.cowShuffleMm) {
+      sometimesHints.push('MM_COW_WELL');
+    }
+
+    return sometimesHints;
+  }
+
+  private findItems(item: string) {
+    const locs: string[] = [];
+
     for (const sphere of this.state.analysis.spheres) {
       for (const loc of sphere) {
         if (this.state.items[loc] === item) {
-          return loc;
+          locs.push(loc);
         }
       }
     }
 
     for (const loc in this.state.items) {
       if (this.state.items[loc] === item) {
-        return loc;
+        locs.push(loc);
       }
     }
 
-    return null;
+    return [...new Set(locs)];
+  }
+
+  private findItem(item: string) {
+    const items = this.findItems(item);
+    if (items.length === 0) {
+      return null;
+    }
+    return items[0];
   }
 
   private isLocationIgnored(loc: string) {
@@ -156,12 +192,15 @@ export class LogicPassHints {
     }
 
     /* Non-shuffled hideout keys */
-    if (isSmallKeyHideout(item) && this.state.settings.smallKeyShuffleHideout === 'ownDungeon') {
+    if (isSmallKeyHideout(item) && this.state.settings.smallKeyShuffleHideout !== 'anywhere') {
       return true;
     }
 
     /* Non-shuffled regular keys */
-    if (isSmallKeyRegular(item) && this.state.settings.smallKeyShuffle === 'ownDungeon') {
+    if (isSmallKeyRegularOot(item) && this.state.settings.smallKeyShuffleOot !== 'anywhere') {
+      return true;
+    }
+    if (isSmallKeyRegularMm(item) && this.state.settings.smallKeyShuffleMm !== 'anywhere') {
       return true;
     }
 
@@ -171,7 +210,11 @@ export class LogicPassHints {
     }
 
     /* Non shuffled boss keys */
-    if (isRegularBossKey(item) && this.state.settings.bossKeyShuffle === 'ownDungeon') {
+    if (isRegularBossKeyOot(item) && this.state.settings.bossKeyShuffleOot !== 'anywhere') {
+      return true;
+    }
+
+    if (isRegularBossKeyMm(item) && this.state.settings.bossKeyShuffleMm !== 'anywhere') {
       return true;
     }
 
@@ -228,7 +271,7 @@ export class LogicPassHints {
       locs = new Set([locs]);
     }
     const pathfinderState = this.pathfinder.run(null, { recursive: true, items: this.state.items, forbiddenLocations: locs });
-    const gossips = Array.from(pathfinderState.gossip).filter(x => !this.gossip[x]);
+    const gossips = Array.from(pathfinderState.gossip).filter(x => ['gossip', 'gossip-grotto'].includes(this.state.world.gossip[x].type)).filter(x => !this.gossip[x]);
     if (gossips.length === 0) {
       return null;
     }
@@ -279,7 +322,7 @@ export class LogicPassHints {
     return regions;
   }
 
-  private placeGossipItemExact(checkHint: string) {
+  private placeGossipItemExact(checkHint: string, extra: number, isMoon: boolean) {
     if (checkHint === 'NONE') {
       return false;
     }
@@ -293,19 +336,32 @@ export class LogicPassHints {
       }
     }
     const items = locations.map(l => this.state.items[l]);
-    const gossip = this.findValidGossip(new Set(locations));
+    let gossip;
+    if (isMoon) {
+      const candidates = Object.keys(this.state.world.gossip)
+        .filter(x => this.state.world.gossip[x].type === 'gossip-moon')
+        .filter(x => !this.gossip[x]);
+      if (candidates.length === 0)
+        return false;
+      gossip = sample(this.state.random, candidates);
+    } else {
+      gossip = this.findValidGossip(new Set(locations));
+    }
     if (!gossip) {
       return false;
     }
-    this.gossip[gossip] = { game: this.state.world.gossip[gossip].game, type: 'item-exact', items, check: checkHint };
+
+    /* Found a valid gossip */
     for (const l of locations) {
       this.hintedLocations.add(l);
     }
+    const hint: HintGossip = { game: this.state.world.gossip[gossip].game, type: 'item-exact', items, check: checkHint };
+    this.placeWithExtra(gossip, hint, extra);
     return true;
   }
 
-  private placeGossipItemExactPool(pool: string[], count?: number) {
-    if (count === undefined) {
+  private placeGossipItemExactPool(pool: string[], count: number | 'max', extra: number) {
+    if (count === 'max') {
       count = pool.length;
     }
     let placed = 0;
@@ -321,14 +377,17 @@ export class LogicPassHints {
       if (locations.every(l => this.state.settings.junkLocations.includes(l))) {
         continue;
       }
-      if (this.placeGossipItemExact(checkHint)) {
+      if (this.placeGossipItemExact(checkHint, extra, false)) {
         placed++;
       }
     }
     return placed;
   }
 
-  private placeGossipFoolish(regions: {[k: string]: number}, count: number) {
+  private placeGossipFoolish(regions: {[k: string]: number}, count: number | 'max', extra: number) {
+    if (count === 'max') {
+      count = 999;
+    }
     let placed = 0;
     regions = { ...regions };
     while (placed < count) {
@@ -338,22 +397,29 @@ export class LogicPassHints {
       }
       const region = sample(this.state.random, regionsArray);
       delete regions[region];
-      const gossip = sample(this.state.random, Object.keys(this.state.world.gossip).filter(x => !this.gossip[x]));
-      this.gossip[gossip] = { game: this.state.world.gossip[gossip].game, type: 'foolish', region: region };
+      const gossip = sample(this.state.random, Object.keys(this.state.world.gossip)
+        .filter(x => !this.gossip[x])
+        .filter(x => ['gossip', 'gossip-grotto'].includes(this.state.world.gossip[x].type)));
 
-      /* Mark everythibng in the region as hinted */
+      /* Found a gossip */
       for (const loc in this.state.world.checks) {
         if (this.state.world.regions[loc] === region) {
           this.hintedLocations.add(loc);
         }
       }
 
+      const hint: HintGossip = { game: this.state.world.gossip[gossip].game, type: 'foolish', region };
+      this.placeWithExtra(gossip, hint, extra);
+
       placed++;
     }
     return placed;
   }
 
-  private placeGossipHero(count: number) {
+  private placeGossipHero(count: number | 'max', extra: number) {
+    if (count === 'max') {
+      count = 999;
+    }
     let placed = 0;
     const locs = shuffle(this.state.random, Array.from(this.woth).filter(loc => !this.hintedLocations.has(loc)));
 
@@ -364,99 +430,147 @@ export class LogicPassHints {
       const loc = locs.pop()!;
       const gossip = this.findValidGossip(loc);
       if (gossip !== null) {
-        this.gossip[gossip] = { game: this.state.world.gossip[gossip].game, type: 'hero', region: this.state.world.regions[loc], location: loc };
         this.hintedLocations.add(loc);
+        const hint: HintGossip = { game: this.state.world.gossip[gossip].game, type: 'hero', region: this.state.world.regions[loc], location: loc };
+        this.placeWithExtra(gossip, hint, extra);
         placed++;
       }
     }
     return placed;
   }
 
-  private placeGossipItemRegion(location: string | null) {
-    if (location === null || this.hintedLocations.has(location)) {
+  private placeGossipItemRegion(location: string | null, extra: number, isMoon: boolean) {
+    if (location === null) {
+      return false;
+    }
+    if (this.hintedLocations.has(location) && !isMoon) {
       return false;
     }
     const item = this.state.items[location];
     const hint = this.state.world.checks[location].hint;
-    if (this.placeGossipItemExact(hint)) {
+    if (this.placeGossipItemExact(hint, extra, isMoon)) {
       return true;
     }
-    const gossip = this.findValidGossip(location);
+    let gossip;
+    if (isMoon) {
+      const candidates = Object.keys(this.state.world.gossip)
+        .filter(x => this.state.world.gossip[x].type === 'gossip-moon')
+        .filter(x => !this.gossip[x]);
+      if (candidates.length === 0)
+        return false;
+      gossip = sample(this.state.random, candidates);
+    } else {
+      gossip = this.findValidGossip(location);
+    }
     if (gossip === null) {
       return false;
     }
-    this.gossip[gossip] = { game: this.state.world.gossip[gossip].game, type: 'item-region', item, region: this.state.world.regions[location] };
     this.hintedLocations.add(location);
+    const h: HintGossip = { game: this.state.world.gossip[gossip].game, type: 'item-region', item, region: this.state.world.regions[location] };
+    this.placeWithExtra(gossip, h, extra);
     return true;
   }
 
-  private placeGossipItemRegionSpheres(count: number) {
+  private placeGossipItemName(item: string, count: number | 'max', extra: number) {
+    const locations = this.findItems(item);
+    if (count === 'max') {
+      count = locations.length;
+    }
+    let placed = 0;
+    for (let i = 0; i < locations.length; ++i) {
+      if (placed >= count)
+        break;
+      const loc = locations[i];
+      if (this.placeGossipItemRegion(loc, extra, false)) {
+        placed++;
+      }
+    }
+    return placed;
+  }
+
+  private placeGossipItemRegionSpheres(count: number | 'max', extra: number) {
+    if (count === 'max') {
+      count = 999;
+    }
     const locations = this.playthroughLocations();
     let placed = 0;
     for (const loc of locations) {
       if (placed >= count) {
         break;
       }
-      if (this.placeGossipItemRegion(loc)) {
+      if (this.placeGossipItemRegion(loc, extra, false)) {
         placed++;
       }
     }
     return placed;
   }
 
-  private duplicateHints() {
-    const hints = shuffle(this.state.random, Object.values(this.gossip).map(x => ({ ...x })));
-    const locs = new Set<string>(Object.keys(this.state.world.gossip));
-    for (const k in this.gossip) {
-      locs.delete(k);
+  private place(loc: string, hint: HintGossip) {
+    /* KLUDGE */
+    if (loc.startsWith('MM ')) {
+      hint.game = 'mm';
+    } else {
+      hint.game = 'oot';
     }
-    const unplacedLocs = shuffle(this.state.random, Array.from(locs));
-    for (let i = 0; i < hints.length; ++i) {
-      this.gossip[unplacedLocs[i]] = { ...hints[i], game: this.state.world.gossip[unplacedLocs[i]].game };
+    this.gossip[loc] = { ...hint };
+  }
+
+  private placeWithExtra(loc: string, hint: HintGossip, extra: number) {
+    this.place(loc, hint);
+
+    for (let i = 0; i < extra; ++i) {
+      const gossips = Object.keys(this.state.world.gossip)
+        .filter(x => !this.gossip[x])
+        .filter(x => ['gossip', 'gossip-grotto'].includes(this.state.world.gossip[x].type));
+      if (gossips.length === 0) {
+        break;
+      }
+      const gossip = sample(this.state.random, gossips);
+      this.place(gossip, hint);
+    }
+  }
+
+  private placeMoonGossip() {
+    for (const mask of ITEMS_MASKS_REGULAR) {
+      const location = this.findItem(mask);
+      this.placeGossipItemRegion(location, 0, true);
     }
   }
 
   private placeGossips() {
+    const settingsHints = this.state.settings.hints;
+
     /* Set the always hinted locations */
     FIXED_HINTS_LOCATIONS.forEach(x => this.hintedLocations.add(x));
 
+    /* Compute foolish regions */
     this.foolish = this.foolishRegions();
-    let hints = 0;
 
-    /* Place always hints */
-    hints += this.placeGossipItemExactPool(HINTS_ITEMS_ALWAYS);
-
-    /* Place 3 sometimes hints */
-    hints += this.placeGossipItemExactPool(HINTS_ITEMS_SOMETIMES, 3);
-
-    /* Place 5 foolish hints */
-    const foolishHints = this.placeGossipFoolish(this.foolish, 5);
-    hints += foolishHints;
-
-    const missingFoolish = 5 - foolishHints;
-    if (missingFoolish > 0) {
-      hints += this.placeGossipItemExactPool(HINTS_ITEMS_SOMETIMES, missingFoolish);
+    for (const s of settingsHints) {
+      switch (s.type) {
+      case 'always':
+        this.placeGossipItemExactPool(this.hintsAlways, s.amount, s.extra);
+        break;
+      case 'sometimes':
+        this.placeGossipItemExactPool(this.hintsSometimes, s.amount, s.extra);
+        break;
+      case 'foolish':
+        this.placeGossipFoolish(this.foolish, s.amount, s.extra);
+        break;
+      case 'item':
+        this.placeGossipItemName(s.item!, s.amount, s.extra);
+        break;
+      case 'playthrough':
+        this.placeGossipItemRegionSpheres(s.amount, s.extra);
+        break;
+      case 'woth':
+        this.placeGossipHero(s.amount, s.extra);
+        break;
+      }
     }
 
-    /* Place Soaring spoiler */
-    if (this.placeGossipItemRegion(this.findItem('MM_SONG_SOARING'))) {
-      hints++;
-    }
-
-    /* Place sphere spoilers */
-    hints += this.placeGossipItemRegionSpheres(4);
-
-    /* Place way of the hero hints */
-    hints += this.placeGossipHero(9);
-
-    /* Place remaining hints */
-    const missingHints = 34 - hints;
-    if (missingHints > 0) {
-      hints += this.placeGossipItemExactPool(HINTS_ITEMS_SOMETIMES, missingHints);
-    }
-
-    /* Duplicate every hint */
-    this.duplicateHints();
+    /* Place moon hints */
+    this.placeMoonGossip();
   }
 
   private locRegion(loc: string | null) {

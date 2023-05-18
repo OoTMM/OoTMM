@@ -1,45 +1,64 @@
 #include <combo.h>
 
-int EnGo_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b);
-int EnDnh_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b);
-int EnShn_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b);
-int EnPm_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b);
-int EnAn_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b);
-int EnPst_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b);
-int EnNb_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b);
-int EnAl_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b);
-int EnBjt_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b);
+void EnGo_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b);
+void EnDnh_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b);
+void EnShn_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b);
+void EnPm_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b);
+void EnAn_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b);
+void EnPst_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b);
+void EnNb_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b);
+void EnAl_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b);
+void EnBjt_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b);
+void EnTab_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b);
 
 typedef void (*TextBoxCallback)(Actor*, GameState_Play*, s16);
 void EnGo_AfterTextBox(Actor* this, GameState_Play* play, s16 messageId);
+void EnTab_AfterTextBox(Actor* this, GameState_Play* play, s16 messageId);
 
 static Actor* sByteCodeActor;
 
-static int Actor_ByteCode_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
+static void Actor_ByteCode_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
 {
+    void (*func)(Actor*, GameState_Play*, s16, float, float);
+
     switch (actor->id)
     {
     case 0x138:
-        return EnGo_GiveItem(actor, play, gi, a, b);
+        func = EnGo_GiveItem;
+        break;
     case 0x168:
-        return EnDnh_GiveItem(actor, play, gi, a, b);
+        func = EnDnh_GiveItem;
+        break;
     case 0x1c5:
-        return EnShn_GiveItem(actor, play, gi, a, b);
+        func = EnShn_GiveItem;
+        break;
     case 0x1d5:
-        return EnPm_GiveItem(actor, play, gi, a, b);
+        func = EnPm_GiveItem;
+        break;
     case 0x1f2:
-        return EnPst_GiveItem(actor, play, gi, a, b);
+        func = EnPst_GiveItem;
+        break;
     case 0x202:
-        return EnAn_GiveItem(actor, play, gi, a, b);
+        func = EnAn_GiveItem;
+        break;
     case 0x243:
-        return EnNb_GiveItem(actor, play, gi, a, b);
+        func = EnNb_GiveItem;
+        break;
     case 0x262:
-        return EnAl_GiveItem(actor, play, gi, a, b);
+        func = EnAl_GiveItem;
+        break;
+    case AC_EN_TAB:
+        func = EnTab_GiveItem;
+        break;
     case 0x27d:
-        return EnBjt_GiveItem(actor, play, gi, a, b);
+        func = EnBjt_GiveItem;
+        break;
     default:
-        return GiveItem(actor, play, gi, a, b);
+        func = GiveItem;
+        break;
     }
+
+    func(actor, play, gi, a, b);
 }
 
 PATCH_CALL(0x8010aa34, Actor_ByteCode_GiveItem);
@@ -49,10 +68,12 @@ void EnDnh_AfterGivingItem(Actor* actor);
 void EnPm_AfterGivingItem(Actor* actor);
 void EnAn_AfterGivingItem(Actor* actor);
 void EnNb_AfterGivingItem(Actor* actor);
+void EnTab_AfterGivingItem(Actor* actor);
 
 static int Actor_ByteCode_HasParent(Actor* actor)
 {
     int ret;
+    void (*func)(Actor*);
 
     ret = Actor_HasParent(actor);
     if (ret)
@@ -60,21 +81,30 @@ static int Actor_ByteCode_HasParent(Actor* actor)
         switch (actor->id)
         {
         case 0x138:
-            EnGo_AfterGivingItem(actor);
+            func = EnGo_AfterGivingItem;
             break;
         case 0x168:
-            EnDnh_AfterGivingItem(actor);
+            func = EnDnh_AfterGivingItem;
             break;
         case 0x1d5:
-            EnPm_AfterGivingItem(actor);
+            func = EnPm_AfterGivingItem;
             break;
         case 0x202:
-            EnAn_AfterGivingItem(actor);
+            func = EnAn_AfterGivingItem;
+            break;
+        case AC_EN_TAB:
+            func = EnTab_AfterGivingItem;
             break;
         case 0x243:
-            EnNb_AfterGivingItem(actor);
+            func = EnNb_AfterGivingItem;
+            break;
+        default:
+            func = NULL;
             break;
         }
+
+        if (func)
+            func(actor);
     }
     return ret;
 }
@@ -140,6 +170,9 @@ static void Actor_ByteCode_DispatchTextBox(GameState_Play* play, s16 messageId)
     {
     case 0x138:
         cb = EnGo_AfterTextBox;
+        break;
+    case AC_EN_TAB:
+        cb = EnTab_AfterTextBox;
         break;
     }
     if (cb)

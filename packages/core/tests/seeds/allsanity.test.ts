@@ -7,8 +7,10 @@ test("Can make a seed - allsanity", () => {
     housesSkulltulaTokens: 'all',
     strayFairyShuffle: 'anywhere',
     townFairyShuffle: 'anywhere',
-    bossKeyShuffle: 'anywhere',
-    smallKeyShuffle: 'anywhere',
+    bossKeyShuffleOot: 'anywhere',
+    bossKeyShuffleMm: 'anywhere',
+    smallKeyShuffleOot: 'anywhere',
+    smallKeyShuffleMm: 'anywhere',
     smallKeyShuffleHideout: 'anywhere',
     cowShuffleOot: true,
     cowShuffleMm: true,
@@ -19,5 +21,6 @@ test("Can make a seed - allsanity", () => {
     childWallets: true,
     colossalWallets: true,
     tingleShuffle: 'anywhere',
+    owlShuffle: 'anywhere',
   });
 });

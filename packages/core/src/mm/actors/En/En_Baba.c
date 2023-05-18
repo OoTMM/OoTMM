@@ -12,7 +12,7 @@ int EnBaba_HasGiveItem(Actor* this)
 
 PATCH_CALL(0x80ba9ac8, EnBaba_HasGiveItem);
 
-int EnBaba_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
+void EnBaba_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
 {
     if (gMmExtraFlags2.maskBlast)
     {
@@ -22,7 +22,7 @@ int EnBaba_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
     {
         gi = comboOverride(OV_NPC, 0, NPC_MM_MASK_BLAST, gi);
     }
-    return GiveItem(this, play, gi, a, b);
+    GiveItem(this, play, gi, a, b);
 }
 
 PATCH_CALL(0x80ba9b0c, EnBaba_GiveItem);

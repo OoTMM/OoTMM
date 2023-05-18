@@ -299,6 +299,16 @@ static int csmcFromItemMm(s16 gi)
     case GI_MM_BOMBER_NOTEBOOK:
     case GI_MM_DEFENSE_UPGRADE:
     case GI_MM_BOTTLE_CHATEAU:
+    case GI_MM_OWL_GREAT_BAY:
+    case GI_MM_OWL_ZORA_CAPE:
+    case GI_MM_OWL_SNOWHEAD:
+    case GI_MM_OWL_MOUNTAIN_VILLAGE:
+    case GI_MM_OWL_CLOCK_TOWN:
+    case GI_MM_OWL_MILK_ROAD:
+    case GI_MM_OWL_WOODFALL:
+    case GI_MM_OWL_SOUTHERN_SWAMP:
+    case GI_MM_OWL_IKANA_CANYON:
+    case GI_MM_OWL_STONE_TOWER:
         return CSMC_MAJOR;
     case GI_MM_SMALL_KEY:
     case GI_MM_SMALL_KEY_WF:
@@ -340,9 +350,14 @@ static int csmcFromItem(s16 gi)
         return csmcFromItemOot(gi);
 }
 
-static int csmcEnabled(Actor* this, GameState_Play* play)
+static int csmcEnabled(void)
 {
-    if (!comboConfig(CFG_CSMC))
+    return (comboConfig(CFG_CSMC) || (comboConfig(CFG_CSMC_AGONY) && gOotSave.inventory.quest.agonyStone));
+}
+
+static int csmcEnabledActor(Actor* this, GameState_Play* play)
+{
+    if (!csmcEnabled())
         return 0;
 
 #if defined(GAME_OOT)
@@ -362,7 +377,7 @@ void comboCsmcInit(Actor* this, GameState_Play* play, s16 gi)
 {
     int type;
 
-    if (!csmcEnabled(this, play))
+    if (!csmcEnabledActor(this, play))
         return;
 
     type = csmcFromItem(gi);
@@ -405,7 +420,7 @@ void comboCsmcPreDraw(Actor* this, GameState_Play* play, s16 gi)
     const void* listFront;
     const void* listSide;
 
-    if (csmcEnabled(this, play))
+    if (csmcEnabledActor(this, play))
         type = csmcFromItem(gi);
     else
         type = CSMC_NORMAL;
@@ -449,7 +464,7 @@ void comboCsmcPreDraw(Actor* this, GameState_Play* play, s16 gi)
 
 int comboCsmcChestSize(s16 gi)
 {
-    if (!comboConfig(CFG_CSMC))
+    if (!csmcEnabled())
         return -1;
     switch (csmcFromItem(gi))
     {

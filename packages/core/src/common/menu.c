@@ -503,6 +503,35 @@ void comboMenuInit(void)
     {
         gDungeonDefs[12].maxKeys = 3;
     }
+
+    if (comboConfig(CFG_OOT_CARPENTERS_NONE))
+    {
+        gDungeonDefs[10].maxKeys = 0;
+    }
+    else if (comboConfig(CFG_OOT_CARPENTERS_ONE))
+    {
+        gDungeonDefs[10].maxKeys = 1;
+    }
+
+    if (comboConfig(CFG_OOT_NO_SMALL_KEY))
+    {
+        gDungeonDefs[3].maxKeys = 0;
+        gDungeonDefs[4].maxKeys = 0;
+        gDungeonDefs[5].maxKeys = 0;
+        gDungeonDefs[6].maxKeys = 0;
+        gDungeonDefs[7].maxKeys = 0;
+        gDungeonDefs[8].maxKeys = 0;
+        gDungeonDefs[11].maxKeys = 0;
+        gDungeonDefs[12].maxKeys = 0;
+    }
+
+    if (comboConfig(CFG_MM_NO_SMALL_KEY))
+    {
+        gDungeonDefs[13].maxKeys = 0;
+        gDungeonDefs[14].maxKeys = 0;
+        gDungeonDefs[15].maxKeys = 0;
+        gDungeonDefs[16].maxKeys = 0;
+    }
 }
 
 void comboMenuKeysUpdate(GameState_Play* play)

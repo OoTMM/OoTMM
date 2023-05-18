@@ -69,7 +69,7 @@
 "Great Bay Temple Red Pipe 1":
   dungeon: GB
   exits:
-    "Great Bay Temple Ice Arrow Room": "has(SMALL_KEY_GB, 1)"
+    "Great Bay Temple Ice Arrow Room": "small_keys(SMALL_KEY_GB, 1)"
   events:
     GB_PIPE_RED: "can_use_ice_arrows"
 "Great Bay Temple Ice Arrow Room":
@@ -124,7 +124,7 @@
   dungeon: GB
   exits:
     "Great Bay Temple Central Room": "true"
-    "Great Bay Temple Boss": "has(BOSS_KEY_GB) && event(GB_PIPE_GREEN) && event(GB_PIPE_GREEN2)"
+    "Great Bay Temple Boss": "boss_key(BOSS_KEY_GB) && event(GB_PIPE_GREEN) && event(GB_PIPE_GREEN2)"
   locations:
     "Great Bay Temple SF Pre-Boss Above Water": "can_use_ice_arrows || (has(MASK_GREAT_FAIRY) && (has_arrows || can_hookshot))"
     "Great Bay Temple SF Pre-Boss Underwater": "true"

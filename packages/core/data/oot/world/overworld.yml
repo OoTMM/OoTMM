@@ -470,10 +470,16 @@
   time: night
   exits:
     "Market Destroyed": "true"
-    "Ganon Castle Main": "special(BRIDGE)"
+    "Ganon Castle Exterior After Bridge": "special(BRIDGE)"
     "Fairy Fountain Defense": "can_lift_gold"
   locations:
     "Ganon Castle Exterior GS": "true"
+"Ganon Castle Exterior After Bridge":
+  region: GANON_CASTLE_EXTERIOR
+  exits:
+    "Ganon Castle Exterior": "is_adult && special(BRIDGE)"
+    "Hyrule Castle": "is_child"
+    "Ganon Castle": "true"
 "Fairy Fountain Defense":
   region: GANON_CASTLE_EXTERIOR
   exits:
@@ -1255,7 +1261,7 @@
   exits:
     "Lake Hylia": "true"
     "Hyrule Field": "true"
-    "Gerudo Valley After Bridge": "can_longshot || can_ride_epona || (is_adult && event(CARPENTERS_RESCUE))"
+    "Gerudo Valley After Bridge": "can_longshot || can_ride_epona || (is_adult && carpenters_rescued)"
     "Octorok Grotto": "can_lift_silver"
   events:
     RUPEES: "true"
@@ -1277,7 +1283,7 @@
   exits:
     "Lake Hylia": "true"
     "Gerudo Fortress Exterior": "true"
-    "Gerudo Valley": "can_longshot || can_ride_epona || (is_adult && event(CARPENTERS_RESCUE))"
+    "Gerudo Valley": "can_longshot || can_ride_epona || (is_adult && carpenters_rescued)"
     "Gerudo Valley Storms Grotto": "hidden_grotto_storms && is_adult"
     "Gerudo Valley Tent": "is_adult"
   locations:

@@ -119,6 +119,7 @@ static const char* const kCheckNamesOot[] = {
     "the " TEXT_COLOR_YELLOW "Gerudo Training Grounds Water Room",
     "the " TEXT_COLOR_ORANGE "Haunted Wastelands Chest",
     "the " TEXT_COLOR_YELLOW "Gerudo Archery",
+    "the " TEXT_COLOR_GREEN "Cow in Link's house",
 };
 
 static const char* const kCheckNamesMm[] = {
@@ -136,6 +137,7 @@ static const char* const kCheckNamesMm[] = {
     "the " TEXT_COLOR_BLUE "Fisherman's Game",
     TEXT_COLOR_ORANGE "Igos du Ikana",
     "the " TEXT_COLOR_YELLOW "Secret Shrine Wart and Final Chest",
+    "the " TEXT_COLOR_PINK "Cow beneath the Well",
 };
 
 static int isItemAmbiguousOot(s16 gi)
@@ -805,4 +807,24 @@ void comboTextAppendNpcReward(char** b, s16 npcId, s16 gi)
 {
     gi = comboOverrideEx(OV_NPC, 0, npcId, gi, 0);
     comboTextAppendItemName(b, gi, TF_PREPOS | TF_PROGRESSIVE);
+}
+
+void comboTextMessageCantBuy(GameState_Play* play, int flags)
+{
+    char* b;
+    char* start;
+
+#if defined(GAME_OOT)
+    b = play->msgCtx.textBuffer;
+#else
+    b = play->textBuffer;
+#endif
+
+    comboTextAppendHeader(&b);
+    start = b;
+    comboTextAppendStr(&b, "You can't buy that right now!");
+    if (flags & TF_SIGNAL)
+        comboTextAppendStr(&b, TEXT_SIGNAL);
+    comboTextAppendStr(&b, TEXT_END);
+    comboTextAutoLineBreaks(start);
 }

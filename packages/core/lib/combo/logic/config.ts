@@ -1,3 +1,4 @@
+import { Confvar } from '../confvars';
 import { Monitor } from '../monitor';
 import { Random } from '../random';
 import { DUNGEONS, Settings } from '../settings';
@@ -16,7 +17,7 @@ export class LogicPassConfig {
 
   run() {
     this.state.monitor.log('Logic: Config');
-    const config = new Set<string>;
+    const config = new Set<Confvar>;
     const mq = new Set<string>;
 
     const { settings } = this.state;
@@ -33,196 +34,70 @@ export class LogicPassConfig {
       }
     }
 
-    if (this.state.settings.ganonBossKey === 'removed') {
-      config.add('GANON_NO_BOSS_KEY');
-    }
+    const exprs: {[k in Confvar]: boolean} = {
+      GANON_NO_BOSS_KEY: settings.ganonBossKey === 'removed',
+      SMALL_KEY_SHUFFLE: settings.smallKeyShuffleOot === 'anywhere',
+      CSMC: settings.csmc === 'always',
+      CSMC_AGONY: settings.csmc === 'agony',
+      OOT_PROGRESSIVE_SHIELDS: settings.progressiveShieldsOot === 'progressive',
+      OOT_PROGRESSIVE_SWORDS: settings.progressiveSwordsOot === 'progressive',
+      OOT_PROGRESSIVE_SWORDS_GORON: settings.progressiveSwordsOot === 'goron',
+      MM_PROGRESSIVE_SHIELDS: settings.progressiveShieldsMm === 'progressive',
+      MM_PROGRESSIVE_LULLABY: settings.progressiveGoronLullaby === 'progressive',
+      DOOR_OF_TIME_OPEN: settings.doorOfTime === 'open',
+      OOT_OPEN_DEKU: settings.dekuTree === 'open',
+      ER_DUNGEONS: settings.erDungeons !== 'none',
+      ER_ANY: isEntranceShuffle(settings),
+      SHARED_BOWS: settings.sharedBows,
+      SHARED_BOMB_BAGS: settings.sharedBombBags,
+      SHARED_MAGIC: settings.sharedMagic,
+      SHARED_MAGIC_ARROW_FIRE: settings.sharedMagicArrowFire,
+      SHARED_MAGIC_ARROW_ICE: settings.sharedMagicArrowIce,
+      SHARED_MAGIC_ARROW_LIGHT: settings.sharedMagicArrowLight,
+      SHARED_SONG_EPONA: settings.sharedSongEpona,
+      SHARED_SONG_STORMS: settings.sharedSongStorms,
+      SHARED_SONG_TIME: settings.sharedSongTime,
+      SHARED_SONG_SUN: settings.sharedSongSun,
+      SHARED_NUTS_STICKS: settings.sharedNutsSticks,
+      SHARED_HOOKSHOT: settings.sharedHookshot,
+      SHARED_LENS: settings.sharedLens,
+      SHARED_OCARINA: settings.sharedOcarina,
+      SHARED_MASKS: settings.sharedMasks,
+      SHARED_WALLETS: settings.sharedWallets,
+      SHARED_HEALTH: settings.sharedHealth,
+      OOT_CROSS_WARP: settings.crossWarpOot,
+      MM_CROSS_WARP: settings.crossWarpMm !== 'none',
+      MM_CROSS_WARP_ADULT: settings.crossWarpMm === 'full',
+      MM_OCARINA_FAIRY: settings.fairyOcarinaMm,
+      MM_HOOKSHOT_SHORT: settings.shortHookshotMm,
+      MM_SONG_SUN: settings.sunSongMm,
+      OOT_SKIP_ZELDA: settings.skipZelda,
+      OOT_OPEN_KAKARIKO_GATE: settings.kakarikoGate === 'open',
+      OOT_LACS_CUSTOM: settings.lacs === 'custom',
+      OOT_GANON_BK_CUSTOM: settings.ganonBossKey === 'custom',
+      OOT_ZK_OPEN: settings.zoraKing === 'open',
+      OOT_ZK_OPEN_ADULT: settings.zoraKing === 'adult',
+      GOAL_GANON: settings.goal === 'ganon' || settings.goal === 'both',
+      GOAL_MAJORA: settings.goal === 'majora' || settings.goal === 'both',
+      MM_MAJORA_CHILD_CUSTOM: settings.majoraChild === 'custom',
+      FILL_WALLETS: settings.fillWallets,
+      CHILD_WALLET: settings.childWallets,
+      OOT_ADULT_WELL: settings.wellAdult,
+      COLOSSAL_WALLET: settings.colossalWallets,
+      OOT_AGELESS_BOOTS: settings.agelessBoots,
+      MM_OWL_SHUFFLE: settings.owlShuffle === 'anywhere',
+      OOT_CARPENTERS_ONE: settings.gerudoFortress === 'single',
+      OOT_CARPENTERS_NONE: settings.gerudoFortress === 'open',
+      OOT_NO_BOSS_KEY: settings.bossKeyShuffleOot === 'removed',
+      OOT_NO_SMALL_KEY: settings.smallKeyShuffleOot === 'removed',
+      MM_NO_BOSS_KEY: settings.bossKeyShuffleMm === 'removed',
+      MM_NO_SMALL_KEY: settings.smallKeyShuffleMm === 'removed',
+    };
 
-    if (this.state.settings.smallKeyShuffle === 'anywhere') {
-      config.add('SMALL_KEY_SHUFFLE');
-    }
-
-    if (this.state.settings.csmc) {
-      config.add('CSMC');
-    }
-
-    if (this.state.settings.progressiveShieldsOot === 'progressive') {
-      config.add('OOT_PROGRESSIVE_SHIELDS');
-    }
-
-    if (this.state.settings.progressiveSwordsOot === 'progressive') {
-      config.add('OOT_PROGRESSIVE_SWORDS');
-    }
-
-    if (this.state.settings.progressiveSwordsOot === 'goron') {
-      config.add('OOT_PROGRESSIVE_SWORDS_GORON');
-    }
-
-    if (this.state.settings.progressiveShieldsMm === 'progressive') {
-      config.add('MM_PROGRESSIVE_SHIELDS');
-    }
-
-    if (this.state.settings.progressiveGoronLullaby === 'progressive') {
-      config.add('MM_PROGRESSIVE_LULLABY');
-    }
-
-    if (this.state.settings.doorOfTime === 'open') {
-      config.add('DOOR_OF_TIME_OPEN');
-    }
-
-    if (this.state.settings.dekuTree === 'open') {
-      config.add('OOT_OPEN_DEKU');
-    }
-
-    if (this.state.settings.erDungeons !== 'none') {
-      config.add('ER_DUNGEONS');
-    }
-
-    if (isEntranceShuffle(this.state.settings)) {
-      config.add('ER_ANY');
-    }
-
-    if (this.state.settings.sharedBows) {
-      config.add('SHARED_BOWS');
-    }
-
-    if (this.state.settings.sharedBombBags) {
-      config.add('SHARED_BOMB_BAGS');
-    }
-
-    if (this.state.settings.sharedMagic) {
-      config.add('SHARED_MAGIC');
-    }
-
-    if (this.state.settings.sharedMagicArrowFire) {
-      config.add('SHARED_MAGIC_ARROW_FIRE');
-    }
-
-    if (this.state.settings.sharedMagicArrowIce) {
-      config.add('SHARED_MAGIC_ARROW_ICE');
-    }
-
-    if (this.state.settings.sharedMagicArrowLight) {
-      config.add('SHARED_MAGIC_ARROW_LIGHT');
-    }
-
-    if (this.state.settings.sharedSongEpona) {
-      config.add('SHARED_SONG_EPONA');
-    }
-
-    if (this.state.settings.sharedSongStorms) {
-      config.add('SHARED_SONG_STORMS');
-    }
-
-    if (this.state.settings.sharedSongTime) {
-      config.add('SHARED_SONG_TIME');
-    }
-
-    if (this.state.settings.sharedSongSun) {
-      config.add('SHARED_SONG_SUN');
-    }
-
-    if (this.state.settings.sharedNutsSticks) {
-      config.add('SHARED_NUTS_STICKS');
-    }
-
-    if (this.state.settings.sharedHookshot) {
-      config.add('SHARED_HOOKSHOT');
-    }
-
-    if (this.state.settings.sharedLens) {
-      config.add('SHARED_LENS');
-    }
-
-    if (this.state.settings.sharedOcarina) {
-      config.add('SHARED_OCARINA');
-    }
-
-    if (this.state.settings.sharedMasks) {
-      config.add('SHARED_MASKS');
-    }
-
-    if (this.state.settings.sharedWallets) {
-      config.add('SHARED_WALLETS');
-    }
-
-    if (this.state.settings.sharedHealth) {
-      config.add('SHARED_HEALTH');
-    }
-
-    if (this.state.settings.crossWarpOot) {
-      config.add('OOT_CROSS_WARP');
-    }
-
-    if (this.state.settings.crossWarpMm !== 'none') {
-      config.add('MM_CROSS_WARP');
-      if (this.state.settings.crossWarpMm === 'full') {
-        config.add('MM_CROSS_WARP_ADULT');
+    for (const v in exprs) {
+      if (exprs[v as Confvar]) {
+        config.add(v as Confvar);
       }
-    }
-
-    if (this.state.settings.fairyOcarinaMm) {
-      config.add('MM_OCARINA_FAIRY');
-    }
-
-    if (this.state.settings.shortHookshotMm) {
-      config.add('MM_HOOKSHOT_SHORT');
-    }
-
-    if (this.state.settings.sunSongMm) {
-      config.add('MM_SONG_SUN');
-    }
-
-    if (this.state.settings.skipZelda) {
-      config.add('OOT_SKIP_ZELDA');
-    }
-
-    if (this.state.settings.kakarikoGate === 'open') {
-      config.add('OOT_OPEN_KAKARIKO_GATE');
-    }
-
-    if (this.state.settings.lacs === 'custom') {
-      config.add('OOT_LACS_CUSTOM');
-    }
-
-    if (this.state.settings.ganonBossKey === 'custom') {
-      config.add('OOT_GANON_BK_CUSTOM');
-    }
-
-    if (this.state.settings.zoraKing === 'open') {
-      config.add('OOT_ZK_OPEN');
-    } else if (this.state.settings.zoraKing === 'adult') {
-      config.add('OOT_ZK_OPEN_ADULT');
-    }
-
-    if (settings.goal === 'both' || settings.goal === 'ganon') {
-      config.add('GOAL_GANON');
-    }
-
-    if (settings.goal === 'both' || settings.goal === 'majora') {
-      config.add('GOAL_MAJORA');
-    }
-
-    if (settings.majoraChild === 'custom') {
-      config.add('MM_MAJORA_CHILD_CUSTOM');
-    }
-
-    if (settings.fillWallets) {
-      config.add('FILL_WALLETS');
-    }
-
-    if (settings.childWallets) {
-      config.add('CHILD_WALLET');
-    }
-
-    if (settings.wellAdult) {
-      config.add('OOT_ADULT_WELL');
-    }
-
-    if (settings.colossalWallets) {
-      config.add('COLOSSAL_WALLET');
-    }
-    if (settings.agelessItems) {
-      config.add('OOT_AGELESS_ITEMS')
     }
 
     return { mq, config };

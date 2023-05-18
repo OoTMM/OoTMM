@@ -52,7 +52,7 @@ void EnGk_CheckLullaby(Actor* this, GameState_Play* play)
 
 PATCH_FUNC(0x80b51410, EnGk_CheckLullaby);
 
-int EnGk_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
+void EnGk_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
 {
     if (gi == GI_MM_BOTTLED_GOLD_DUST)
     {
@@ -60,7 +60,7 @@ int EnGk_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
     }
     else
         gi = GI_MM_RECOVERY_HEART;
-    return GiveItem(actor, play, gi, a, b);
+    GiveItem(actor, play, gi, a, b);
 }
 
 PATCH_CALL(0x80b525c8, EnGk_GiveItem);
