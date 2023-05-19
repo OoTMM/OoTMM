@@ -298,7 +298,9 @@ typedef struct
     u32 fireArrow:1;
     u32 ganonBossKey:1;
     u32 childWallet:1;
-    u32 unused:17;
+    u32 triforceWin:1;
+    u8  triforceCount;
+    u32 unused:8;
 }
 OotExtraFlags;
 

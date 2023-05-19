@@ -567,6 +567,9 @@ export class LogicPassWorldTransform {
       this.plentifulPool();
       break;
     }
+
+    /* Triforce hunt */
+    this.pool['SHARED_TRIFORCE'] = 30;
   }
 
   private removeLocations(locs: string[]) {

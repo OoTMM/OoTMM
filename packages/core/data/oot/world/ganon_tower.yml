@@ -8,4 +8,4 @@
 "Ganon Castle Tower Boss":
   dungeon: Tower
   events:
-    GANON: "has_light_arrows"
+    GANON: "!setting(goal, triforce) && has_light_arrows"

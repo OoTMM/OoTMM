@@ -1,5 +1,7 @@
 export type Items = {[k: string]: number};
 
+const ITEM_TRIFORCE = 'SHARED_TRIFORCE';
+
 export const ITEMS_MASKS_REGULAR = [
   'MM_MASK_CAPTAIN',
   'MM_MASK_GIANT',
@@ -95,6 +97,7 @@ export const ITEMS_OWLS = new Set([
 
 export const ITEMS_REQUIRED = new Set<string>([
   ...ITEMS_OWLS,
+  ITEM_TRIFORCE,
   'OOT_WEIRD_EGG',
   'OOT_POCKET_EGG',
   'OOT_SHIELD_DEKU',
@@ -620,7 +623,7 @@ export const isToken = (item: string) => isGoldToken(item) || isHouseToken(item)
 export const isJunk = (item: string) => ITEMS_JUNK.has(item);
 export const isMasterSword = (item: string) => item === 'OOT_SWORD_MASTER';
 export const isGerudoCard = (item: string) => item === 'OOT_GERUDO_CARD';
-export const isItemImportant = (item: string) => isItemMajor(item) || isDungeonReward(item) || isToken(item) || isStrayFairy(item) || isKey(item) || isItemConsumable(item);
+export const isItemImportant = (item: string) => isItemMajor(item) || isDungeonReward(item) || isToken(item) || isStrayFairy(item) || isKey(item) || isItemConsumable(item) ||isItemTriforce(item) || isItemLicense(item);
 export const isItemConsumable = (item: string) => CONSUMABLES.has(item);
 export const isRupees = (item: string) => !!item.match(/^(OOT|MM|SHARED)_RUPEE_/);
 export const isItemUnlimitedStarting = (item: string) => isRupees(item) || isItemConsumable(item);
@@ -628,6 +631,7 @@ export const isItemCriticalRenewable = (item: string) => CRITICAL_RENEWABLE_ITEM
 export const isTingleMap = (item: string) => ITEMS_TINGLE_MAPS.has(item);
 export const isOwlStatue = (item: string) => ITEMS_OWLS.has(item);
 export const isItemLicense = (item: string) => ITEMS_LICENSES.has(item);
+export const isItemTriforce = (item: string) => item === ITEM_TRIFORCE;
 
 export const itemsArray = (items: Items) => {
   const arr: string[] = [];
