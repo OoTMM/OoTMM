@@ -95,6 +95,8 @@ export type Hints = {
   gossip: {[k: string]: HintGossip};
 };
 
+export type HintClass = 'woth' | 'item' | 'location';
+
 export class LogicPassHints {
   private hintedLocations = new Set<string>();
   private gossip: {[k: string]: HintGossip} = {};
@@ -118,7 +120,7 @@ export class LogicPassHints {
     this.hintsAlways = this.alwaysHints();
     this.hintsSometimes = this.sometimesHints();
     this.pathfinder = new Pathfinder(state.world, state.settings);
-    this.woth = new Set(Array.from(this.state.analysis.required).filter(loc => this.isLocationHintableHero(loc)));
+    this.woth = new Set(Array.from(this.state.analysis.required).filter(loc => this.isLocationHintable(loc, 'woth')));
   }
 
   private alwaysHints() {
@@ -171,103 +173,99 @@ export class LogicPassHints {
     return items[0];
   }
 
-  private isLocationIgnored(loc: string) {
+  private isLocationHintable(loc: string, klass: HintClass) {
     /* Get the item and region  */
     const item = this.state.items[loc];
     const region = this.state.world.regions[loc];
 
     /* These specific locations are always ignored */
     if (['OOT Temple of Time Medallion', 'MM Oath to Order', 'OOT Hatch Chicken', 'OOT Hatch Pocket Cucco'].includes(loc)) {
-      return true;
+      return false;
     }
 
     /* Non-shuffled items are ignored */
     if (this.state.fixedLocations.has(loc)) {
-      return true;
+      return false;
     }
 
     /* CHecks with no region are ignored (skip zelda) */
     if (!region || region === 'NONE') {
-      return true;
+      return false;
     }
 
     /* Non-shuffled hideout keys */
     if (isSmallKeyHideout(item) && this.state.settings.smallKeyShuffleHideout !== 'anywhere') {
-      return true;
+      return false;
     }
 
     /* Non-shuffled regular keys */
     if (isSmallKeyRegularOot(item) && this.state.settings.smallKeyShuffleOot !== 'anywhere') {
-      return true;
+      return false;
     }
     if (isSmallKeyRegularMm(item) && this.state.settings.smallKeyShuffleMm !== 'anywhere') {
-      return true;
+      return false;
     }
 
     /* Non-shuffled Ganon BK (doesn't really matter) */
     if (isGanonBossKey(item) && this.state.settings.ganonBossKey !== 'anywhere') {
-      return true;
+      return false;
     }
 
     /* Non shuffled boss keys */
     if (isRegularBossKeyOot(item) && this.state.settings.bossKeyShuffleOot !== 'anywhere') {
-      return true;
+      return false;
     }
 
     if (isRegularBossKeyMm(item) && this.state.settings.bossKeyShuffleMm !== 'anywhere') {
-      return true;
+      return false;
     }
 
     /* Non shuffled town fairy */
     if (isTownStrayFairy(item) && this.state.settings.townFairyShuffle === 'vanilla') {
-      return true;
+      return false;
     }
 
     /* Non shuffled stray fairy */
     if (isStrayFairy(item) && this.state.settings.strayFairyShuffle !== 'anywhere') {
-      return true;
+      return false;
     }
 
     /* Non-shuffled map/compass (doesn't really matter) */
     if (isMapCompass(item) && this.state.settings.mapCompassShuffle !== 'anywhere') {
-      return true;
+      return false;
     }
 
     /* Non-shuffled dungeon reward */
     if (isDungeonReward(item) && this.state.settings.dungeonRewardShuffle === 'dungeonBlueWarps') {
-      return true;
+      return false;
     }
 
     /* Non shuffled GS token */
     /* TODO: Handle dungeon/overworld better */
     if (isGoldToken(item) && this.state.settings.goldSkulltulaTokens === 'none') {
-      return true;
+      return false;
     }
 
     /* Non shuffled House tokens */
     if (isHouseToken(item) && this.state.settings.housesSkulltulaTokens === 'none') {
-      return true;
-    }
-
-    /* Triforce Piece - never hinted */
-    if (isItemTriforce(item)) {
-      return true;
-    }
-
-    return false;
-  }
-
-  private isLocationHintableHero(loc: string) {
-    const item = this.state.items[loc];
-    if (this.isLocationIgnored(loc)) {
       return false;
     }
-    if (isKey(item) || isStrayFairy(item) || isToken(item) || isDungeonReward(item)) {
+
+    /* Triforce Piece - never hinted outside of location */
+    if (isItemTriforce(item) && klass !== 'location') {
       return false;
     }
-    if (isSong(item) && this.state.settings.songs !== 'anywhere') {
-      return false;
+
+    /* Additional restrictions for WotH */
+    if (klass === 'woth') {
+      if (isKey(item) || isStrayFairy(item) || isToken(item) || isDungeonReward(item)) {
+        return false;
+      }
+      if (isSong(item) && this.state.settings.songs !== 'anywhere') {
+        return false;
+      }
     }
+
     return true;
   }
 
@@ -284,12 +282,12 @@ export class LogicPassHints {
   }
 
   private playthroughLocations() {
-    const locations = this.state.analysis.spheres.flat().filter(loc => !this.isLocationIgnored(loc));
+    const locations = this.state.analysis.spheres.flat().filter(loc => this.isLocationHintable(loc, 'item'));
     return shuffle(this.state.random, locations);
   }
 
   private locationFoolish(loc: string) {
-    if (this.isLocationIgnored(loc) || this.state.analysis.unreachable.has(loc)) {
+    if (!this.isLocationHintable(loc, 'location') || this.state.analysis.unreachable.has(loc)) {
       return 0;
     }
     if (!this.state.analysis.useless.has(loc)) {
