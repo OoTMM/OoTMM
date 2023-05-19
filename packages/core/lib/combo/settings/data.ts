@@ -9,6 +9,7 @@ export const SETTINGS = [{
     { value: 'ganon', name: 'Ganon', description: 'You must beat Ganon.' },
     { value: 'majora', name: 'Majora', description: 'You must beat Majora.' },
     { value: 'both', name: 'Ganon & Majora', description: 'You must beat Ganon AND Majora. You can do so in any order.' },
+    { value: 'triforce', name: 'Triforce', description: 'You must collect triforce pieces to win.' },
   ],
   default: 'both'
 }, {
@@ -209,7 +210,8 @@ export const SETTINGS = [{
     { value: 'anywhere', name: 'Anywhere', description: 'Ganon Boss Key can be found anywhere' },
     { value: 'custom', name: 'Custom', description: '' },
   ],
-  default: 'removed'
+  default: 'removed',
+  cond: (s: any) => s.goal !== 'triforce',
 }, {
   key: 'dungeonRewardShuffle',
   name: 'Dungeon Reward Shuffle',
@@ -418,7 +420,8 @@ export const SETTINGS = [{
     { value: 'none', name: 'None', description: 'As soon as you have access to the Moon you can go fight Majora' },
     { value: 'custom', name: 'Custom', description: 'You will need to meet a special condition to fight Majora' },
   ],
-  default: 'none'
+  default: 'none',
+  cond: (s: any) => s.goal !== 'triforce',
 }, {
   key: 'bossWarpPads',
   name: 'Boss Warp Pads',

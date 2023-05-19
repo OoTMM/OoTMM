@@ -24,11 +24,9 @@ static int doorType(GameState_Play* play, Actor* this)
 
 int comboDoorIsUnlocked(GameState_Play* play, Actor* actor)
 {
-    u16 sceneId;
     int type;
     int flag;
 
-    sceneId = play->sceneId;
     type = doorType(play, actor);
     flag = actor->variable & 0x7f;
 

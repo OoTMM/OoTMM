@@ -194,6 +194,7 @@ function resolveSpecialCond(settings: Settings, state: State, special: string): 
   if (cond.masksRegular) itemsUnique = new Set([...itemsUnique, ...ITEMS_MASKS_REGULAR]);
   if (cond.masksTransform) itemsUnique = new Set([...itemsUnique, ...ITEMS_MASKS_TRANSFORM]);
   if (cond.masksOot) itemsUnique = new Set([...itemsUnique, ...ITEMS_MASKS_OOT]);
+  if (cond.triforce) items.add('SHARED_TRIFORCE');
 
   const countUnique = [...itemsUnique].filter(item => itemCount(state, item) > 0).length;
   const result = (itemsCount(state, [...items]) + countUnique) >= cond.count;

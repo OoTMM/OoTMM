@@ -106,4 +106,4 @@
   region: MOON
   events:
     MAJORA_PHASE_1: "has_arrows || has(MASK_ZORA) || (has(MASK_FIERCE_DEITY) && has_magic)"
-    MAJORA: "event(MAJORA_PHASE_1) && (has_weapon || has(MASK_ZORA) || (has(MASK_FIERCE_DEITY) && has_magic))"
+    MAJORA: "!setting(goal, triforce) && event(MAJORA_PHASE_1) && (has_weapon || has(MASK_ZORA) || (has(MASK_FIERCE_DEITY) && has_magic))"

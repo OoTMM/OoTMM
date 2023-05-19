@@ -243,7 +243,10 @@ typedef struct
     s16     magicTarget;
     char    unk_13f8[0x0a];
     u16     mapIndex;
-    char    unk_1404[0x20];
+    char    unk_1404[0xe];
+    u16     nextCutscene;
+    u8      inCutscene;
+    char    unk_1415[0x0f];
     u16     healthDelta;
     char    unk_1426[0x2a];
 }
@@ -254,6 +257,9 @@ ASSERT_OFFSET(OotSaveContext, unk_1360,         0x1360);
 ASSERT_OFFSET(OotSaveContext, grottoChestFlag,  0x1397);
 ASSERT_OFFSET(OotSaveContext, unk_1398,         0x1398);
 ASSERT_OFFSET(OotSaveContext, unk_1404,         0x1404);
+ASSERT_OFFSET(OotSaveContext, nextCutscene,     0x1412);
+ASSERT_OFFSET(OotSaveContext, inCutscene,       0x1414);
+ASSERT_OFFSET(OotSaveContext, healthDelta,      0x1424);
 ASSERT_OFFSET(OotSaveContext, unk_1426,         0x1426);
 
 _Static_assert(sizeof(OotSave) == 0x1354, "OotSave size is wrong");
@@ -298,7 +304,9 @@ typedef struct
     u32 fireArrow:1;
     u32 ganonBossKey:1;
     u32 childWallet:1;
-    u32 unused:17;
+    u32 triforceWin:1;
+    u8  triforceCount;
+    u32 unused:8;
 }
 OotExtraFlags;
 

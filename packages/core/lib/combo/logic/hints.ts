@@ -2,7 +2,7 @@ import { ItemPlacement } from './solve';
 import { World } from './world';
 import { Analysis } from './analysis';
 import { Random, sample, shuffle } from '../random';
-import { DUNGEON_REWARDS_ORDERED, isDungeonReward, isGoldToken, itemsArray, isKey, isHouseToken, isGanonBossKey, isRegularBossKey, isStrayFairy, isToken, isTownStrayFairy, isSong, isSmallKeyRegular, isSmallKeyHideout, isMapCompass, ITEMS_MASKS_REGULAR, isSmallKeyRegularOot, isSmallKeyRegularMm, isRegularBossKeyOot, isRegularBossKeyMm } from './items';
+import { DUNGEON_REWARDS_ORDERED, isDungeonReward, isGoldToken, itemsArray, isKey, isHouseToken, isGanonBossKey, isRegularBossKey, isStrayFairy, isToken, isTownStrayFairy, isSong, isSmallKeyRegular, isSmallKeyHideout, isMapCompass, ITEMS_MASKS_REGULAR, isSmallKeyRegularOot, isSmallKeyRegularMm, isRegularBossKeyOot, isRegularBossKeyMm, isItemTriforce } from './items';
 import { Settings } from '../settings';
 import { Game } from '../config';
 import { Monitor } from '../monitor';
@@ -246,6 +246,11 @@ export class LogicPassHints {
 
     /* Non shuffled House tokens */
     if (isHouseToken(item) && this.state.settings.housesSkulltulaTokens === 'none') {
+      return true;
+    }
+
+    /* Triforce Piece - never hinted */
+    if (isItemTriforce(item)) {
       return true;
     }
 

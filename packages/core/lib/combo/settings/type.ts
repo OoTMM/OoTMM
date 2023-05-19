@@ -15,6 +15,7 @@ type SettingDataCommon = {
   readonly name: string;
   readonly category: string;
   readonly description?: string;
+  readonly cond?: (settings: any) => boolean;
 };
 
 type SettingDataEnum = SettingDataCommon & {

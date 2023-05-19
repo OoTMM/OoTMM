@@ -1250,6 +1250,9 @@ int comboAddItemOot(s16 gi, int noEffect)
     case GI_OOT_COMPASS_IC:
         comboAddCompassOot(SCE_OOT_ICE_CAVERN);
         break;
+    case GI_OOT_TRIFORCE:
+        count = ++gOotExtraFlags.triforceCount;
+        break;
     }
 
     return count;

@@ -14,6 +14,7 @@
 #define SPF_MASKS_REGULAR           (1 << 11)
 #define SPF_MASKS_TRANSFORM         (1 << 12)
 #define SPF_MASKS_OOT               (1 << 13)
+#define SPF_TRIFORCE                (1 << 14)
 
 int comboGoalCond(void)
 {
@@ -164,6 +165,11 @@ int comboSpecialCond(int special)
         if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_GERUDO_MASK)) count++;
         if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_SPOOKY_MASK)) count++;
         if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_SKULL_MASK)) count++;
+    }
+
+    if (cond->flags & SPF_TRIFORCE)
+    {
+        count += gOotExtraFlags.triforceCount;
     }
 
     count += hasMaskKeaton;

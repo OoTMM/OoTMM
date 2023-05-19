@@ -9,6 +9,11 @@ import { Tooltip } from './Tooltip';
 function SettingEnum({ setting }: { setting: string }) {
   const [settings, setSettings] = useSettings();
   const data = SETTINGS.find(x => x.key === setting)!;
+  const cond = (data as any).cond;
+
+  if (cond && !cond(settings)) {
+    return null;
+  }
 
   return (
     <Dropdown
@@ -24,6 +29,11 @@ function SettingEnum({ setting }: { setting: string }) {
 function SettingBoolean({ setting }: { setting: string }) {
   const [settings, setSettings] = useSettings();
   const data = SETTINGS.find(x => x.key === setting)!;
+  const cond = (data as any).cond;
+
+  if (cond && !cond(settings)) {
+    return null;
+  }
 
   return (
     <Checkbox

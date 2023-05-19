@@ -182,6 +182,7 @@ static int csmcFromItemOot(s16 gi)
     case GI_OOT_NUT_UPGRADE:
     case GI_OOT_NUT_UPGRADE2:
     case GI_OOT_DEFENSE_UPGRADE:
+    case GI_OOT_TRIFORCE:
         return CSMC_MAJOR;
     case GI_OOT_SMALL_KEY:
     case GI_OOT_SMALL_KEY_FOREST:

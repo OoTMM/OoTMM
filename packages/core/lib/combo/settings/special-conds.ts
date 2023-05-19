@@ -15,6 +15,7 @@ export const SPECIAL_CONDS_KEYS = {
   masksRegular: "Regular Masks (MM)",
   masksTransform: "Transformation Masks (MM)",
   masksOot: "Masks (OoT)",
+  triforce: "Triforce Pieces",
 };
 
 export type SpecialCond = {[k in keyof typeof SPECIAL_CONDS_KEYS]: boolean} & { count: number };

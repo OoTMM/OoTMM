@@ -55,7 +55,18 @@ static DungeonDef gDungeonDefs[] = {
     { "Stone Tower",    3,                              DD_MM  | DD_MAP_COMPASS | DD_BOSS_KEY | DD_FAIRIES, 4 },
     { "Clock Town",     0,                              DD_MISC, 0 },
     { "Tokens",         1,                              DD_MISC, 0 },
+    { "Triforce",       2,                              DD_MISC, 0 },
 };
+
+static int menuCount(void)
+{
+    int count;
+
+    count = ARRAY_SIZE(gDungeonDefs);
+    if (!comboConfig(CFG_GOAL_TRIFORCE))
+        count--;
+    return count;
+}
 
 static void color4(u8* r, u8* g, u8* b, u8* a, u32 color)
 {
@@ -413,6 +424,12 @@ static void printDungeonData(GameState_Play* play, int base, int index)
             drawTexRGBA32(play, 0x06000000 | CUSTOM_KEEP_SMALL_ICON_SKULL, 12, 12, x + 184.f, y);
             printNumColored(play, gMmSave.skullCountOcean, 30, 2, x + 196.f, y);
             break;
+        case 2:
+            /* Triforce */
+            gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 255, 255, 255, 255);
+            drawTexRGBA32(play, 0x06000000 | CUSTOM_KEEP_SMALL_ICON_TRIFORCE, 12, 12, x + 104.f, y);
+            printNumColored(play, gOotExtraFlags.triforceCount, 30, 3, x + 116.f, y);
+            break;
         }
     }
     else
@@ -553,7 +570,7 @@ void comboMenuKeysUpdate(GameState_Play* play)
             menuCursor--;
         }
 
-        if (stickY < -0.5f && menuCursor < ARRAY_SIZE(gDungeonDefs) - 10)
+        if (stickY < -0.5f && menuCursor < menuCount() - 10)
         {
             change = 1;
             menuCursor++;

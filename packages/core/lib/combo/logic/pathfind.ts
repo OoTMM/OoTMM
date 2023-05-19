@@ -564,6 +564,7 @@ export class Pathfinder {
     case 'ganon': return ganon;
     case 'majora': return majora;
     case 'both': return ganon && majora;
+    case 'triforce': return this.state.items['SHARED_TRIFORCE'] >= 20;
     }
   }
 

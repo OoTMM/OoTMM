@@ -140,6 +140,7 @@ const SUBSTITUTIONS: {[k: string]: string} = {
   MM_SWORD: "MM_SWORD_KOKIRI",
   MM_SHIELD: "MM_PROGRESSIVE_SHIELD_HERO",
   MM_OCARINA: "MM_OCARINA_OF_TIME",
+  SHARED_TRIFORCE: "OOT_TRIFORCE",
 };
 
 const gi = (settings: Settings, game: Game, item: string, generic: boolean) => {

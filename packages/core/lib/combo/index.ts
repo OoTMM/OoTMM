@@ -5,7 +5,7 @@ import { Generator, GeneratorOutput } from './generator';
 import { Monitor, MonitorCallbacks } from './monitor';
 import { worldState } from './logic';
 import { itemName } from './names';
-import { isDungeonItem, isItemUnlimitedStarting, isJunk, isStrayFairy, isToken, Items } from './logic/items';
+import { isDungeonItem, isItemTriforce, isItemUnlimitedStarting, isJunk, isStrayFairy, isToken, Items } from './logic/items';
 import { isShuffled } from './logic/is-shuffled';
 import { DEFAULT_SETTINGS, DUNGEONS, makeSettings, mergeSettings, SettingCategory, SETTINGS, Settings, SETTINGS_CATEGORIES, SPECIAL_CONDS, SPECIAL_CONDS_KEYS, TRICKS } from './settings';
 import { SettingsPatch } from './settings/patch';
@@ -47,7 +47,7 @@ export const itemPool = (aSettings: Partial<Settings>) => {
 
   /* Extract relevant items from the pool */
   for (const item of Object.keys(pool)) {
-    if (isJunk(item) || isDungeonItem(item) || isToken(item) || isStrayFairy(item)) {
+    if (isJunk(item) || isDungeonItem(item) || isToken(item) || isStrayFairy(item) || isItemTriforce(item)) {
       delete pool[item];
     }
   }

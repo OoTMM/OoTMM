@@ -71,9 +71,21 @@ static void EnJs_DisplayWeak(Actor* this, GameState_Play* play)
 
 void EnJs_TryStartFight(Actor* this)
 {
+    int canFight;
     void (*EnJs_SetFreeCamera)(Actor*, int);
 
-    if (!comboConfig(CFG_MM_MAJORA_CHILD_CUSTOM) || comboSpecialCond(SPECIAL_MAJORA))
+    canFight = 0;
+    if (comboConfig(CFG_GOAL_TRIFORCE))
+    {
+        if (gOotExtraFlags.triforceCount >= 30)
+            canFight = 1;
+    }
+    else if (!comboConfig(CFG_MM_MAJORA_CHILD_CUSTOM) || comboSpecialCond(SPECIAL_MAJORA))
+    {
+        canFight = 1;
+    }
+
+    if (canFight)
     {
         /* Start the fight*/
         DisplayTextBox2(gPlay, 0x2200);

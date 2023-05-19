@@ -193,7 +193,7 @@ void hookPlay_Init(GameState_Play* play)
     {
         /* End game */
         gMmExtraFlags2.majora = 1;
-        if (!comboGoalCond())
+        if (!comboGoalCond() && !g.isCreditWarp)
         {
             gSave.playerForm = MM_PLAYER_FORM_HUMAN;
             gSave.equippedMask = 0;

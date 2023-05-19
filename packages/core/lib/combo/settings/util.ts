@@ -52,6 +52,12 @@ export function validateSettings(settings: Settings): Settings {
     }
   }
 
+  /* Specific validation */
+  if (s.goal === 'triforce') {
+    s.majoraChild = 'none';
+    s.ganonBossKey = 'removed';
+  }
+
   return s;
 };
 
