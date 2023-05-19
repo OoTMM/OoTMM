@@ -47,6 +47,7 @@
 # define AC_DOOR_SHUTTER    0x01e
 # define AC_ITEM_GIVER      0x01f
 # define AC_CUSTOM_WARP     0x023
+# define AC_CUSTOM_TRIGGERS 0x025
 # define AC_DOOR_WARP1      0x038
 # define AC_ITEM_B_HEART    0x03a
 # define AC_EN_COW          0x0f3
