@@ -210,7 +210,8 @@ export const SETTINGS = [{
     { value: 'anywhere', name: 'Anywhere', description: 'Ganon Boss Key can be found anywhere' },
     { value: 'custom', name: 'Custom', description: '' },
   ],
-  default: 'removed'
+  default: 'removed',
+  cond: (s: any) => s.goal !== 'triforce',
 }, {
   key: 'dungeonRewardShuffle',
   name: 'Dungeon Reward Shuffle',
@@ -419,7 +420,8 @@ export const SETTINGS = [{
     { value: 'none', name: 'None', description: 'As soon as you have access to the Moon you can go fight Majora' },
     { value: 'custom', name: 'Custom', description: 'You will need to meet a special condition to fight Majora' },
   ],
-  default: 'none'
+  default: 'none',
+  cond: (s: any) => s.goal !== 'triforce',
 }, {
   key: 'bossWarpPads',
   name: 'Boss Warp Pads',

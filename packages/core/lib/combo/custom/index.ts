@@ -138,10 +138,10 @@ const customKeepFiles = async (roms: DecompressedRoms, archive: CustomArchive, c
   cg.define('CUSTOM_OBJECT_ID_KEEP', custonKeepId);
 };
 
-async function addRawData(archive: CustomArchive, cg: CodeGen, filename: string) {
+async function addRawData(archive: CustomArchive, cg: CodeGen, define: string, filename: string) {
   const file = await raw(filename);
   const addr = await archive.addData(file);
-  cg.define('CUSTOM_' + path.basename(filename, '.bin').toUpperCase() + '_ADDR', addr);
+  cg.define('CUSTOM_' + define + '_ADDR', addr);
 }
 
 export const custom = async (monitor: Monitor, roms: DecompressedRoms) => {
@@ -157,9 +157,9 @@ export const custom = async (monitor: Monitor, roms: DecompressedRoms) => {
   await customKeepFiles(roms, archive, cg);
 
   /* Load MQ data */
-  await addRawData(archive, cg, 'mq_rooms.bin');
-  await addRawData(archive, cg, 'mq_scenes.bin');
-  await addRawData(archive, cg, 'mq_maps.bin');
+  await addRawData(archive, cg, 'MQ_ROOMS', 'mq_rooms.bin');
+  await addRawData(archive, cg, 'MQ_SCENES', 'mq_scenes.bin');
+  await addRawData(archive, cg, 'MQ_MAPS', 'mq_maps.bin');
 
   /* Load custom objects */
   await customFileObject('TRIFORCE', 'triforce.zobj', archive, cg, [0x06000a30]);
