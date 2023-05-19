@@ -398,10 +398,13 @@ typedef struct
 {
     u16 initialEntrance;
     u8  inGrotto;
+    u8  isCreditWarp;
 }
 ComboGlobal;
 
 extern ComboGlobal g;
+
+void comboCreditWarp(GameState_Play* play);
 
 #if defined (GAME_OOT)
 extern u16 gPrevPageIndex;

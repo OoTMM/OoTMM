@@ -169,6 +169,10 @@ static void endGame(void)
     u16 tmpEntrance;
     u16 tmpSceneId;
 
+    /* Ignore credit warp */
+    if (g.isCreditWarp)
+        return;
+
     /* Flag ganon as beaten */
     gOotExtraFlags.ganon = 1;
 

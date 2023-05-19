@@ -2,6 +2,7 @@
 
 #define TRIGGER_NONE            0x00
 #define TRIGGER_GANON_BK        0x01
+#define TRIGGER_TRIFORCE        0x02
 
 #if defined(GAME_OOT)
 # define GI_OOT 0
@@ -65,6 +66,14 @@ static void CustomTriggers_HandleTrigger(Actor_CustomTriggers* this, GameState_P
             this->trigger = TRIGGER_NONE;
         }
         break;
+    case TRIGGER_TRIFORCE:
+        if (CustomTrigger_ItemSafe(this, play))
+        {
+            gOotExtraFlags.triforceWin = 1;
+            this->trigger = TRIGGER_NONE;
+            comboCreditWarp(play);
+        }
+        break;
     }
 
     CustomTriggers_HandleTriggerGame(this, play);
@@ -77,6 +86,14 @@ static void CustomTriggers_CheckTrigger(Actor_CustomTriggers* this, GameState_Pl
     {
         this->acc = 0;
         this->trigger = TRIGGER_GANON_BK;
+        return;
+    }
+
+    /* Triforce */
+    if (comboConfig(CFG_GOAL_TRIFORCE) && !gOotExtraFlags.triforceWin && gOotExtraFlags.triforceCount >= 1)
+    {
+        this->acc = 0;
+        this->trigger = TRIGGER_TRIFORCE;
         return;
     }
 
