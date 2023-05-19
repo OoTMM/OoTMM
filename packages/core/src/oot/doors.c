@@ -52,6 +52,8 @@ int comboDoorIsUnlocked(GameState_Play* play, Actor* actor)
     {
         if (sceneId == SCE_OOT_GANON_TOWER)
         {
+            if (comboConfig(CFG_GOAL_TRIFORCE))
+                return (gOotExtraFlags.triforceCount >= 30);
             if (comboConfig(CFG_GANON_NO_BOSS_KEY))
                 return 1;
         }
