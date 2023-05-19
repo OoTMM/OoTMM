@@ -610,6 +610,11 @@ void Shader_CustomPotion(GameState_Play* play, s16 index)
     color4(&r, &g, &b, &a, kEnvColors1[colorIndex]);
     gDPSetEnvColor(POLY_OPA_DISP++, r, g, b, a);
     gSPDisplayList(POLY_OPA_DISP++, 0x06001438);
+
+    /* We patched the list to separate the stick */
+    if (colorIndex < 3)
+        gSPDisplayList(POLY_OPA_DISP++, 0x060016a0);
+
     color4(&r, &g, &b, &a, kPrimColors2[colorIndex]);
     gDPSetPrimColor(POLY_OPA_DISP++, 0, 0x80, r, g, b, a);
     color4(&r, &g, &b, &a, kEnvColors2[colorIndex]);
