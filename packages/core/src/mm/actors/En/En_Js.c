@@ -77,7 +77,7 @@ void EnJs_TryStartFight(Actor* this)
     canFight = 0;
     if (comboConfig(CFG_GOAL_TRIFORCE))
     {
-        if (gOotExtraFlags.triforceCount >= 30)
+        if (gOotExtraFlags.triforceWin)
             canFight = 1;
     }
     else if (!comboConfig(CFG_MM_MAJORA_CHILD_CUSTOM) || comboSpecialCond(SPECIAL_MAJORA))
