@@ -111,6 +111,7 @@ export const customAssets = async (): Promise<{[k: string]: Buffer}> => ({
   SMALL_ICON_COMPASS: await png('small_icon_compass', 'rgba32'),
   SMALL_ICON_FAIRY: await png('small_icon_fairy', 'rgba32'),
   SMALL_ICON_SKULL: await png('small_icon_skull', 'rgba32'),
+  SMALL_ICON_TRIFORCE: await png('small_icon_triforce', 'rgba32'),
 });
 
 const extractRaw = async (roms: DecompressedRoms, game: Game, file: string, offset: number, size: number) => {
