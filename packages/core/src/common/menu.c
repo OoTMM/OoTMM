@@ -58,6 +58,15 @@ static DungeonDef gDungeonDefs[] = {
     { "Triforce",       2,                              DD_MISC, 0 },
 };
 
+static int digitCount(int v)
+{
+    if (v >= 100)
+        return 3;
+    if (v >= 10)
+        return 2;
+    return 1;
+}
+
 static int menuCount(void)
 {
     int count;
@@ -299,7 +308,7 @@ static void printDigit(GameState_Play* play, int digit, float x, float y)
     printChar(play, '0' + digit, x, y);
 }
 
-static void printNum(GameState_Play* play, int num, int digits, float x, float y)
+static void printNum(GameState_Play* play, int num, int max, int digits, float x, float y, int showMax)
 {
     int d;
     int denum;
@@ -307,28 +316,38 @@ static void printNum(GameState_Play* play, int num, int digits, float x, float y
 
     if (num == 0)
     {
-        printDigit(play, 0, x + 8.f * (digits - 1), y);
-        return;
+        x += 8.f * (digits - 1);
+        printDigit(play, 0, x, y);
+        x += 8.f;
+    }
+    else
+    {
+        denum = 1;
+        for (int i = 1; i < digits; ++i)
+            denum *= 10;
+        zero = 0;
+        while (denum)
+        {
+            d = (num / denum) % 10;
+            if (d || zero)
+            {
+                printDigit(play, d, x, y);
+                zero = 1;
+            }
+            denum /= 10;
+            x += 8.f;
+        }
     }
 
-    denum = 1;
-    for (int i = 1; i < digits; ++i)
-        denum *= 10;
-    zero = 0;
-    while (denum)
+    if (showMax)
     {
-        d = (num / denum) % 10;
-        if (d || zero)
-        {
-            printDigit(play, d, x, y);
-            zero = 1;
-        }
-        denum /= 10;
+        printChar(play, '/', x, y);
         x += 8.f;
+        printNum(play, max, max, digits, x, y, 0);
     }
 }
 
-static void printNumColored(GameState_Play* play, int num, int max, int digits, float x, float y)
+static void printNumColored(GameState_Play* play, int num, int max, int digits, float x, float y, int showMax)
 {
     u8 r;
     u8 g;
@@ -356,7 +375,7 @@ static void printNumColored(GameState_Play* play, int num, int max, int digits, 
     gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, r, g, b, 255);
     CLOSE_DISPS();
 
-    printNum(play, num, digits, x, y);
+    printNum(play, num, max, digits, x, y, showMax);
 }
 
 static void dungeonDataOot(DungeonData* out, const DungeonDef* def)
@@ -384,12 +403,17 @@ static void printDungeonData(GameState_Play* play, int base, int index)
 {
     const DungeonDef* def;
     DungeonData data;
+    int triforceMax;
+    int triforceDigits;
     float x;
     float y;
     u8 r;
     u8 g;
     u8 b;
     u8 a;
+
+    triforceMax = gOotExtraFlags.triforceWin ? gComboData.triforcePieces : gComboData.triforceGoal;
+    triforceDigits = digitCount(triforceMax);
 
     OPEN_DISPS(play->gs.gfx);
     def = gDungeonDefs + base + index;
@@ -406,29 +430,29 @@ static void printDungeonData(GameState_Play* play, int base, int index)
             color4(&r, &g, &b, &a, kFairyColors[4]);
             gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, r, g, b, a);
             drawTexRGBA32(play, 0x06000000 | CUSTOM_KEEP_SMALL_ICON_FAIRY, 12, 12, x + 174.f, y);
-            printNumColored(play, !!MM_GET_EVENT_WEEK(EV_MM_WEEK_TOWN_FAIRY), 1, 2, x + 186.f, y);
+            printNumColored(play, !!MM_GET_EVENT_WEEK(EV_MM_WEEK_TOWN_FAIRY), 1, 2, x + 186.f, y, 0);
             break;
         case 1:
             /* OoT skulls */
             gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 255, 255, 0, 255);
             drawTexRGBA32(play, 0x06000000 | CUSTOM_KEEP_SMALL_ICON_SKULL, 12, 12, x + 104.f, y);
-            printNumColored(play, gOotSave.inventory.goldTokens, 100, 3, x + 116.f, y);
+            printNumColored(play, gOotSave.inventory.goldTokens, 100, 3, x + 116.f, y, 0);
 
             /* MM skulls - swamp */
             gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 0, 255, 0, 255);
             drawTexRGBA32(play, 0x06000000 | CUSTOM_KEEP_SMALL_ICON_SKULL, 12, 12, x + 144.f, y);
-            printNumColored(play, gMmSave.skullCountSwamp, 30, 2, x + 156.f, y);
+            printNumColored(play, gMmSave.skullCountSwamp, 30, 2, x + 156.f, y, 0);
 
             /* MM skulls - ocean */
             gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 0, 0, 255, 255);
             drawTexRGBA32(play, 0x06000000 | CUSTOM_KEEP_SMALL_ICON_SKULL, 12, 12, x + 184.f, y);
-            printNumColored(play, gMmSave.skullCountOcean, 30, 2, x + 196.f, y);
+            printNumColored(play, gMmSave.skullCountOcean, 30, 2, x + 196.f, y, 0);
             break;
         case 2:
             /* Triforce */
             gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 255, 255, 255, 255);
             drawTexRGBA32(play, 0x06000000 | CUSTOM_KEEP_SMALL_ICON_TRIFORCE, 12, 12, x + 104.f, y);
-            printNumColored(play, gOotExtraFlags.triforceCount, 30, 3, x + 116.f, y);
+            printNumColored(play, gOotExtraFlags.triforceCount, triforceMax, triforceDigits, x + 116.f, y, 1);
             break;
         }
     }
@@ -452,14 +476,14 @@ static void printDungeonData(GameState_Play* play, int base, int index)
         if (def->maxKeys)
         {
             drawTexRGBA32(play, 0x06000000 | CUSTOM_KEEP_SMALL_ICON_KEY, 12, 12, x + 144.f, y);
-            printNumColored(play, data.keys, def->maxKeys, 1, x + 156.f, y);
+            printNumColored(play, data.keys, def->maxKeys, 1, x + 156.f, y, 0);
         }
         if (def->flags & DD_FAIRIES)
         {
             color4(&r, &g, &b, &a, kFairyColors[def->id]);
             gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, r, g, b, a);
             drawTexRGBA32(play, 0x06000000 | CUSTOM_KEEP_SMALL_ICON_FAIRY, 12, 12, x + 174.f, y);
-            printNumColored(play, data.fairies, 15, 2, x + 186.f, y);
+            printNumColored(play, data.fairies, 15, 2, x + 186.f, y, 0);
         }
     }
     CLOSE_DISPS();

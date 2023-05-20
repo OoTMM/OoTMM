@@ -1,4 +1,4 @@
-import { cloneDeep } from 'lodash';
+import { cloneDeep, isEqual } from 'lodash';
 import type { PartialDeep } from 'type-fest';
 import type { Settings, SettingsBase } from './type';
 import { SETTINGS } from './data';
@@ -24,7 +24,7 @@ const sortUnique = <T>(arr: T[]): T[] => {
   return [ ...new Set(arr.sort()) ];
 };
 
-export function validateSettings(settings: Settings): Settings {
+function validateSettingsStep(settings: Settings): Settings {
   const s = cloneDeep(settings);
 
   /* Validate tricks */
@@ -53,13 +53,42 @@ export function validateSettings(settings: Settings): Settings {
   }
 
   /* Specific validation */
-  if (s.goal === 'triforce') {
-    s.majoraChild = 'none';
-    s.ganonBossKey = 'removed';
+  for (const data of SETTINGS) {
+    const key = data.key;
+    const cond = (data as any).cond;
+    const min = (data as any).min;
+    const max = (data as any).max;
+
+    if (cond && !cond(s)) {
+      (s as any)[key] = data.default;
+    }
+
+    if (min !== undefined) {
+      const v = typeof min === 'function' ? min(s) : min;
+      if ((s as any)[key] < v) {
+        (s as any)[key] = v;
+      }
+    }
+    if (max !== undefined) {
+      const v = typeof max === 'function' ? max(s) : max;
+      if ((s as any)[key] > v) {
+        (s as any)[key] = v;
+      }
+    }
   }
 
   return s;
-};
+}
+
+export function validateSettings(settings: Settings) {
+  for (;;) {
+    const s = validateSettingsStep(settings);
+    if (isEqual(s, settings)) {
+      return s;
+    }
+    settings = s;
+  }
+}
 
 function applyBaseSettings(dest: SettingsBase, src: Partial<SettingsBase>) {
   for (const setting of SETTINGS) {
@@ -74,6 +103,11 @@ function applyBaseSettings(dest: SettingsBase, src: Partial<SettingsBase>) {
         break;
       case 'boolean':
         if (typeof newValue === 'boolean') {
+          (dest as any)[key] = newValue;
+        }
+        break;
+      case 'number':
+        if (typeof newValue === 'number') {
           (dest as any)[key] = newValue;
         }
         break;

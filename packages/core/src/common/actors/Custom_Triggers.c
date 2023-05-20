@@ -90,7 +90,7 @@ static void CustomTriggers_CheckTrigger(Actor_CustomTriggers* this, GameState_Pl
     }
 
     /* Triforce */
-    if (comboConfig(CFG_GOAL_TRIFORCE) && !gOotExtraFlags.triforceWin && gOotExtraFlags.triforceCount >= 20)
+    if (comboConfig(CFG_GOAL_TRIFORCE) && !gOotExtraFlags.triforceWin && gOotExtraFlags.triforceCount >= gComboData.triforceGoal)
     {
         this->acc = 0;
         this->trigger = TRIGGER_TRIFORCE;

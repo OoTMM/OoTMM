@@ -29,8 +29,16 @@ type SettingDataBoolean = SettingDataCommon & {
   readonly default: boolean;
 };
 
+type SettingDataNumber = SettingDataCommon & {
+  readonly type: 'number';
+  readonly default: number;
+  readonly min?: number | ((s: any) => number);
+  readonly max?: number | ((s: any) => number);
+};
+
 type InputToShape<T> = T extends SettingDataEnum ? { [K in T['key']]: T['values'][number]['value'] }
   : T extends SettingDataBoolean ? { [K in T['key']]: boolean }
+  : T extends SettingDataNumber ? { [K in T['key']]: number }
   : never;
 
 type SettingDataEntry = typeof SETTINGS[number];

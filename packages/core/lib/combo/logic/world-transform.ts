@@ -570,7 +570,7 @@ export class LogicPassWorldTransform {
 
     /* Triforce hunt */
     if (settings.goal === 'triforce') {
-      this.pool['SHARED_TRIFORCE'] = 30;
+      this.pool['SHARED_TRIFORCE'] = settings.triforcePieces;
     }
   }
 

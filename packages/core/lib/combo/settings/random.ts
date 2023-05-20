@@ -58,6 +58,11 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
   base.hints = oldSettings.hints;
 
   /* Main Settings */
+  base.goal = sampleWeighted(random, { both: 10, triforce: 3 });
+  if (base.goal === 'triforce') {
+    base.triforcePieces = randomInt(random, 48) + 2;
+    base.triforceGoal = randomInt(random, base.triforcePieces - 1) + 1;
+  }
   base.logic = sampleWeighted(random, { allLocations: 10, beatable: 5 });
   base.itemPool = sampleWeighted(random, { normal: 10, plentiful: 2, scarce: 2, minimal: 1 });
   base.shuffleMasterSword = booleanWeighted(random, 0.4);
@@ -137,10 +142,12 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
   }
 
   /* Ganon BK - 50% chance to follow OoT BK */
-  if (booleanWeighted(random, 0.5)) {
-    base.ganonBossKey = base.bossKeyShuffleOot === 'ownDungeon' ? 'ganon' : base.bossKeyShuffleOot;
-  } else {
-    base.ganonBossKey = sampleWeighted(random, { removed: 10, vanilla: 5, anywhere: 7, ganon: 5 });
+  if (base.goal !== 'triforce') {
+    if (booleanWeighted(random, 0.5)) {
+      base.ganonBossKey = base.bossKeyShuffleOot === 'ownDungeon' ? 'ganon' : base.bossKeyShuffleOot;
+    } else {
+      base.ganonBossKey = sampleWeighted(random, { removed: 10, vanilla: 5, anywhere: 7, ganon: 5 });
+    }
   }
 
   /* Stray fairies */

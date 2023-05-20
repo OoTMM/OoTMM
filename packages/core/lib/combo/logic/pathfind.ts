@@ -556,15 +556,17 @@ export class Pathfinder {
   }
 
   private isGoalReached() {
+    const { settings } = this;
+
     const ganon = this.state.events.has('OOT_GANON');
     const majora = this.state.events.has('MM_MAJORA');
 
-    switch (this.settings.goal) {
+    switch (settings.goal) {
     case 'any': return ganon || majora;
     case 'ganon': return ganon;
     case 'majora': return majora;
     case 'both': return ganon && majora;
-    case 'triforce': return this.state.items['SHARED_TRIFORCE'] >= 20;
+    case 'triforce': return this.state.items['SHARED_TRIFORCE'] >= settings.triforceGoal;
     }
   }
 

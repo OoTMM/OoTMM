@@ -22,16 +22,7 @@ input[type=checkbox] {
   transition: all 200ms ease-in 0s;
 }
 
-input[type=text] {
-  line-height: 24px;
-  font-size: 15px;
-  font-weight: 400;
-  transition: all 200ms ease-in 0s;
-  border-radius: 2px;
-  border-width: 1px;
-}
-
-select {
+select, input[type=text], input[type=number] {
   transition: border-color 200ms ease-in 0s, box-shadow 200ms ease-in 0s;
   font-size: 1.5rem;
   height: 30px;

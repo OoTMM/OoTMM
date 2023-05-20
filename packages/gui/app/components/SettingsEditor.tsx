@@ -5,8 +5,9 @@ import { Dropdown } from './Dropdown';
 import { Checkbox } from './Checkbox';
 import { useSettings } from '../contexts/GeneratorContext';
 import { Tooltip } from './Tooltip';
+import { InputNumber } from './InputNumber';
 
-function SettingEnum({ setting }: { setting: string }) {
+function Setting({ setting }: { setting: string }) {
   const [settings, setSettings] = useSettings();
   const data = SETTINGS.find(x => x.key === setting)!;
   const cond = (data as any).cond;
@@ -15,33 +16,104 @@ function SettingEnum({ setting }: { setting: string }) {
     return null;
   }
 
-  return (
-    <Dropdown
-      value={settings[data.key] as string}
-      label={data.name}
-      options={(data as any).values}
-      tooltip={(data as any).description ? data.key : undefined}
-      onChange={(v) => setSettings({ [data.key]: v })}
-    />
-  );
+  switch (data.type) {
+  case 'enum':
+    return (
+      <Dropdown
+        value={settings[data.key] as string}
+        label={data.name}
+        options={(data as any).values}
+        tooltip={(data as any).description ? data.key : undefined}
+        onChange={(v) => setSettings({ [data.key]: v })}
+      />
+    );
+  case 'boolean':
+    return (
+      <Checkbox
+        label={data.name}
+        tooltip={(data as any).description ? data.key : undefined}
+        checked={settings[data.key] as boolean}
+        onChange={(v) => setSettings({ [data.key]: v })}
+      />
+    );
+  case 'number':
+    const min = (data as any).min;
+    const max = (data as any).max;
+    let minValue: number | undefined;
+    let maxValue: number | undefined;
+
+    if (min !== undefined) {
+      minValue = typeof min === 'function' ? min(settings) : min;
+    }
+    if (max !== undefined) {
+      maxValue = typeof max === 'function' ? max(settings) : max;
+    }
+
+    return (
+      <InputNumber
+        label={data.name}
+        tooltip={(data as any).description ? data.key : undefined}
+        value={settings[data.key] as number}
+        onChange={(v) => setSettings({ [data.key]: v })}
+        min={minValue}
+        max={maxValue}
+      />
+    );
+  default:
+    return null;
+  }
 }
 
-function SettingBoolean({ setting }: { setting: string }) {
-  const [settings, setSettings] = useSettings();
+function SettingTooltip({ setting }: { setting: string }) {
+  const [settings] = useSettings();
   const data = SETTINGS.find(x => x.key === setting)!;
-  const cond = (data as any).cond;
+  const description = (data as any).description;
 
-  if (cond && !cond(settings)) {
+  const values: {[k: string]: string} = {};
+  let def = '';
+
+  if (!description) {
     return null;
   }
 
+  switch (data.type) {
+  case 'boolean':
+    def = data.default ? 'true' : 'false';
+    break;
+  case 'enum':
+    for (const v of (data as any).values) {
+      if (v.description) {
+        values[v.name] = v.description;
+      }
+    }
+    def = ((data as any).values as any[]).find(x => x.value === (data.default)).name;
+    break;
+  case 'number':
+    const min = (data as any).min;
+    const max = (data as any).max;
+
+    if (min !== undefined) {
+      const str: string = typeof min === 'function' ? `${min(settings)} (dynamic)` : `${min}`;
+      values['Minimum'] = str;
+    }
+
+    if (max !== undefined) {
+      const str: string = typeof max === 'function' ? `${max(settings)} (dynamic)` : `${max}`;
+      values['Maximum'] = str;
+    }
+
+    def = data.default.toString();
+    break;
+  }
+
   return (
-    <Checkbox
-      label={data.name}
-      tooltip={(data as any).description ? data.key : undefined}
-      checked={settings[data.key] as boolean}
-      onChange={(v) => setSettings({ [data.key]: v })}
-    />
+    <Tooltip id={data.key}>
+      <p>{description}</p>
+      <ul>
+        {Object.entries(values).map(x => <li key={x[0]}><strong>{x[0]}</strong>: {x[1]}</li>)}
+      </ul>
+      <p>Default: <strong>{def}</strong></p>
+    </Tooltip>
   );
 }
 
@@ -49,40 +121,14 @@ type SettingsPanelProps = {
   category: string;
 };
 export function SettingsPanel({ category }: SettingsPanelProps) {
-  const [settings, setSettings] = useSettings();
   const settingsData = SETTINGS.filter((s) => s.category === category);
-  const enumList = settingsData.filter((x) => x.type === 'enum');
-  const booleanList = settingsData.filter((x) => x.type === 'boolean');
 
   return (
     <form className="settings">
-      {booleanList.length > 0 && (
-        <div className="checkboxes-lowcount">
-          {booleanList.map(setting => <SettingBoolean key={setting.key} setting={setting.key}/>)}
-        </div>
-      )}
-      {enumList.length > 0 && (
-        <div className="three-column-grid">
-          {enumList.map(setting => <SettingEnum key={setting.key} setting={setting.key}/>)}
-        </div>
-      )}
-      {booleanList.filter(x => (x as any).description).map(setting => (
-        <Tooltip key={setting.key} id={setting.key}>
-          <p>{(setting as any).description}</p>
-          <p>Default: <strong>{setting.default ? 'True' : 'False'}</strong></p>
-        </Tooltip>
-      ))}
-      {enumList.filter(x => (x as any).description).map(setting => (
-        <Tooltip key={setting.key} id={setting.key}>
-          <p>{(setting as any).description}</p>
-          <ul>
-            {((setting as any).values as any[]).filter(x => x.description).map((v: any) => (
-              <li key={v.value}><strong>{v.name}</strong>: {v.description}</li>
-            ))}
-          </ul>
-          <p>Default: <strong>{((setting as any).values as any[]).find(x => x.value === (setting.default)).name}</strong></p>
-        </Tooltip>
-      ))}
+      <div className="three-column-grid">
+        {settingsData.map(setting => <Setting key={setting.key} setting={setting.key}/>)}
+      </div>
+      {settingsData.map(setting => <SettingTooltip key={setting.key} setting={setting.key}/>)}
     </form>
   );
 };

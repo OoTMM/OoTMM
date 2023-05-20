@@ -463,6 +463,7 @@ export const randomizerHints = (logic: LogicResult): Buffer => {
 
 const randomizerBoss = (logic: LogicResult): Buffer => toU8Buffer(logic.entrances.boss);
 const randomizerDungeons = (logic: LogicResult): Buffer => toU8Buffer(logic.entrances.dungeons);
+const randomizerTriforce = (logic: LogicResult): Buffer => toU8Buffer([logic.settings.triforcePieces, logic.settings.triforceGoal]);
 
 function specialConds(settings: Settings) {
   const buffers: Buffer[] = [];
@@ -492,6 +493,7 @@ export const randomizerData = (logic: LogicResult): Buffer => {
   buffers.push(randomizerHints(logic));
   buffers.push(randomizerBoss(logic));
   buffers.push(randomizerDungeons(logic));
+  buffers.push(randomizerTriforce(logic));
   return Buffer.concat(buffers);
 };
 

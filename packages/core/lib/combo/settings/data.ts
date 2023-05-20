@@ -13,6 +13,26 @@ export const SETTINGS = [{
   ],
   default: 'both'
 }, {
+  key: 'triforceGoal',
+  name: 'Triforce Goal',
+  category: 'main',
+  type: 'number',
+  description: 'The amount of Triforce Pieces that are required to win.',
+  default: 20,
+  cond: (s: any) => s.goal === 'triforce',
+  min: 1,
+  max: (s: any) => s.triforcePieces,
+}, {
+  key: 'triforcePieces',
+  name: 'Triforce Pieces',
+  category: 'main',
+  type: 'number',
+  description: 'The total amount of Triforce Pieces in the item pool.',
+  default: 30,
+  cond: (s: any) => s.goal === 'triforce',
+  min: 2,
+  max: 100
+}, {
   key: 'logic',
   name: 'Logic',
   category: 'main',
