@@ -171,6 +171,7 @@ const ITEM_POOL_PLENTIFUL = [
 export class LogicPassWorldTransform {
   private pool: Items = {};
   private locsByItem = new Map<string, Set<string>>();
+  private fixedLocations: Set<string>;
 
   constructor(
     private readonly state: {
@@ -182,6 +183,7 @@ export class LogicPassWorldTransform {
       fixedLocations: Set<string>;
     }
   ) {
+    this.fixedLocations = new Set(state.fixedLocations);
   }
 
   private makePool() {
@@ -579,6 +581,7 @@ export class LogicPassWorldTransform {
     for (const loc of locs) {
       delete world.checks[loc];
       delete world.regions[loc];
+      this.fixedLocations.delete(loc);
     }
     for (const areaName in world.areas) {
       const area = world.areas[areaName];
@@ -733,7 +736,7 @@ export class LogicPassWorldTransform {
     }
 
     /* Handle fixed locations */
-    for (const loc of this.state.fixedLocations) {
+    for (const loc of this.fixedLocations) {
       const check = this.state.world.checks[loc];
       const { item } = check;
       this.removeItem(item, 1);
@@ -744,13 +747,13 @@ export class LogicPassWorldTransform {
     for (const item of Object.keys(this.pool)) {
       if (isJunk(item) && isItemConsumable(item)) {
         for (const loc of this.locsByItem.get(item) || []) {
-          if (isLocationRenewable(this.state.world, loc) && !this.state.fixedLocations.has(loc)) {
+          if (isLocationRenewable(this.state.world, loc) && !this.fixedLocations.has(loc)) {
             addItem(renewableJunks, item);
           }
         }
       }
     }
 
-    return { pool: this.pool, renewableJunks };
+    return { pool: this.pool, renewableJunks, fixedLocations: this.fixedLocations };
   }
 }
