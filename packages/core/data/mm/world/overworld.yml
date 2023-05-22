@@ -50,6 +50,9 @@
   region: CLOCK_TOWN_SOUTH
   exits:
     "Clock Town South": "can_reset_time"
+    "OOT Market": "age(child)"
+    "OOT Market Destroyed": "age(adult)"
+    "Clock Tower Roof": "after(NIGHT3_AM_12_00)"
   locations:
     "Clock Town Owl Statue": "has_sticks || has_weapon"
 "Owl Milk Road":
