@@ -118,7 +118,7 @@
   exits:
     "GLOBAL": "true"
     "Clock Town South": "can_reset_time"
-    "Clock Tower Roof": "true"
+    "Clock Tower Roof": "after(NIGHT3_AM_12_00)"
   locations:
     "Initial Song of Healing": "true"
 "Clock Town South":
