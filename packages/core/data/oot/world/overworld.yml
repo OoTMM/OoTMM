@@ -27,7 +27,7 @@
     "Lake Hylia": "has(SONG_TP_WATER)"
     "Graveyard Upper": "has(SONG_TP_SHADOW)"
     "Desert Colossus": "has(SONG_TP_SPIRIT)"
-    "MM SOARING": "setting(crossWarpMm, full) || (setting(crossWarpMm, childOnly) && is_child)"
+    "MM SOARING": "(setting(crossWarpMm, full) || (setting(crossWarpMm, childOnly) && is_child)) && has(MM_SONG_SOARING)"
 "EGGS":
   region: EGGS
   locations:
