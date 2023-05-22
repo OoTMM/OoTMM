@@ -2,7 +2,7 @@
   region: NONE
   exits:
     "OOT SONGS": "setting(crossWarpOot) && has_ocarina"
-    "SOARING": "has_ocarina"
+    "SOARING": "can_play(SONG_SOARING)"
 "Tingle Town":
   region: TINGLE
   locations:
@@ -36,20 +36,76 @@
 "SOARING":
   region: NONE
   exits:
-    "SOARING2": "can_reset_time && has(SONG_SOARING)"
-"SOARING2":
-  region: NONE
+    "Owl Clock Town": "has(OWL_CLOCK_TOWN)"
+    "Owl Milk Road": "has(OWL_MILK_ROAD)"
+    "Owl Swamp": "has(OWL_SOUTHERN_SWAMP)"
+    "Owl Woodfall": "has(OWL_WOODFALL)"
+    "Owl Mountain": "has(OWL_MOUNTAIN_VILLAGE)"
+    "Owl Snowhead": "has(OWL_SNOWHEAD)"
+    "Owl Great Bay": "has(OWL_GREAT_BAY)"
+    "Owl Zora Cape": "has(OWL_ZORA_CAPE)"
+    "Owl Ikana": "has(OWL_IKANA_CANYON)"
+    "Owl Stone Tower": "has(OWL_STONE_TOWER)"
+"Owl Clock Town":
+  region: CLOCK_TOWN_SOUTH
   exits:
-    "Clock Town South": "has(OWL_CLOCK_TOWN)"
-    "Milk Road Front": "has(OWL_MILK_ROAD)"
-    "Swamp Front": "has(OWL_SOUTHERN_SWAMP)"
-    "Woodfall Shrine": "has(OWL_WOODFALL)"
-    "Mountain Village": "has(OWL_MOUNTAIN_VILLAGE)"
-    "Snowhead Entrance": "has(OWL_SNOWHEAD)"
-    "Great Bay Coast": "has(OWL_GREAT_BAY)"
-    "Zora Cape Peninsula": "has(OWL_ZORA_CAPE)"
-    "Ikana Canyon": "has(OWL_IKANA_CANYON)"
-    "Stone Tower Top": "has(OWL_STONE_TOWER)"
+    "Clock Town South": "can_reset_time"
+  locations:
+    "Clock Town Owl Statue": "has_sticks || has_weapon"
+"Owl Milk Road":
+  region: MILK_ROAD
+  exits:
+    "Milk Road Back": "can_reset_time"
+  locations:
+    "Milk Road Owl Statue": "has_sticks || has_weapon"
+"Owl Swamp":
+  region: SOUTHERN_SWAMP
+  exits:
+    "Swamp Front": "can_reset_time"
+  locations:
+    "Southern Swamp Owl Statue": "has_sticks || has_weapon"
+"Owl Woodfall":
+  region: WOODFALL
+  exits:
+    "Woodfall Shrine": "can_reset_time"
+  locations:
+    "Woodfall Owl Statue": "has_sticks || has_weapon"
+"Owl Mountain":
+  region: MOUNTAIN_VILLAGE
+  exits:
+    "Mountain Village": "can_reset_time"
+  locations:
+    "Mountain Village Owl Statue": "has_sticks || has_weapon"
+"Owl Snowhead":
+  region: SNOWHEAD
+  exits:
+    "Snowhead Entrance": "can_reset_time"
+  locations:
+    "Snowhead Owl Statue": "has_sticks || has_weapon"
+"Owl Great Bay":
+  region: GREAT_BAY_COAST
+  exits:
+    "Great Bay Coast": "can_reset_time"
+  locations:
+    "Great Bay Coast Owl Statue": "has_sticks || has_weapon"
+"Owl Zora Cape":
+  region: ZORA_CAPE
+  exits:
+    "Zora Cape Peninsula": "can_reset_time"
+  locations:
+    "Zora Cape Owl Statue": "has_sticks || has_weapon"
+"Owl Ikana":
+  region: IKANA_CANYON
+  exits:
+    "Ikana Canyon": "can_reset_time"
+  locations:
+    "Ikana Canyon Owl Statue": "has_sticks || has_weapon"
+"Owl Stone Tower":
+  region: STONE_TOWER
+  exits:
+    "Stone Tower Top": "can_reset_time"
+  locations:
+    "Stone Tower Owl Statue": "has_sticks || has_weapon"
 "Oath to Order":
   region: GIANT_DREAM
   locations:
@@ -75,6 +131,7 @@
     "Clock Town North": "true"
     "Clock Town Laundry Pool": "true"
     "Clock Tower Roof": "after(NIGHT3_AM_12_00)"
+    "Owl Clock Town": "true"
   events:
     CLOCK_TOWN_SCRUB: "has(MOON_TEAR)"
     MAIL_LETTER: "has(LETTER_TO_KAFEI) && before(DAY2_AM_11_30)"
@@ -84,7 +141,6 @@
     "Clock Town Platform HP": "true"
     "Clock Town Business Scrub": "event(CLOCK_TOWN_SCRUB)"
     "Clock Town Post Box": "has(MASK_POSTMAN)"
-    "Clock Town Owl Statue": "has_sticks || has_weapon"
 "Clock Town South Upper West":
   region: CLOCK_TOWN_SOUTH
   exits:
@@ -314,7 +370,7 @@
     "Clock Town East": "true"
   locations:
     "Honey & Darling Reward 1": "can_use_wallet(1) && (event(HD_REWARD_1) || event(HD_REWARD_2) || event(HD_REWARD_3))"
-    "Honey & Darling Reward 2": "can_use_wallet(1) && event(HD_REWARD_1) && event(HD_REWARD_2) && event(HD_REWARD_3)"
+    "Honey & Darling Reward 2": "can_use_wallet(1) && has(BOW) && event(HD_REWARD_1) && event(HD_REWARD_2) && event(HD_REWARD_3)"
 "Stock Pot Inn":
   region: STOCK_POT_INN
   exits:
@@ -613,6 +669,7 @@
     "Swamp Back": "event(BOAT_RIDE) || has(MASK_ZORA) || event(CLEAN_SWAMP) || (has(MASK_DEKU) && (has_arrows || can_hookshot_short))"
     "Swamp Potion Shop": "true"
     "Woods of Mystery": "true"
+    "Owl Swamp": "true"
   events:
     FROG_3: "has(MASK_DON_GERO)"
     PICTURE_SWAMP: "has(PICTOGRAPH_BOX)"
@@ -627,7 +684,6 @@
     "Southern Swamp HP": "(has(DEED_LAND) && has(MASK_DEKU)) || (trick(MM_SOUTHERN_SWAMP_SCRUB_HP_GORON) && has(MASK_GORON))"
     "Southern Swamp Scrub Deed": "has(DEED_LAND)"
     "Southern Swamp Scrub Shop": "has(MASK_DEKU) && can_use_wallet(1)"
-    "Southern Swamp Owl Statue": "has_sticks || has_weapon"
   gossip:
     "Southern Swamp Gossip": "true"
 "Swamp Back":
@@ -823,12 +879,12 @@
     "Woodfall": "has(MASK_DEKU) || event(CLEAN_SWAMP)"
     "Woodfall Near Great Fairy Fountain": "has(MASK_DEKU)"
     "Woodfall Front of Temple": "event(OPEN_WOODFALL_TEMPLE)"
+    "Owl Woodfall": "true"
   events:
     OPEN_WOODFALL_TEMPLE: "has(MASK_DEKU) && can_play(SONG_AWAKENING)"
     STICKS: "true"
     NUTS: "true"
   locations:
-    "Woodfall Owl Statue": "has_sticks || has_weapon"
     "Woodfall Near Owl Chest": "has(MASK_DEKU) || can_hookshot"
 "Woodfall Near Great Fairy Fountain":
   region: WOODFALL
@@ -887,6 +943,7 @@
     "Path to Snowhead Front": "true"
     "Blacksmith": "true"
     "Near Village Grotto": "event(BOSS_SNOWHEAD) && has(MASK_GORON)"
+    "Owl Mountain": "true"
   gossip:
     "Mountain Village Gossip Outside": "event(BOSS_SNOWHEAD)"
     "Mountain Village Gossip Tunnel": "event(BOSS_SNOWHEAD) && has(MASK_GORON)"
@@ -896,7 +953,6 @@
     BOMBS: "true"
     RUPEES: "event(BOSS_SNOWHEAD) || ((can_break_boulders || can_use_fire_arrows) && (second_day || final_day)) || ((can_break_boulders || can_use_fire_arrows) && can_use_light_arrows && first_day)"
   locations:
-    "Mountain Village Owl Statue": "has_sticks || has_weapon"
     "Mountain Village Waterfall Chest": "event(BOSS_SNOWHEAD) && can_use_lens"
     "Mountain Village Don Gero Mask": "event(GORON_FOOD)"
     "Mountain Village Frog Choir HP": "event(BOSS_SNOWHEAD) && event(FROG_1) && event(FROG_2) && event(FROG_3) && event(FROG_4)"
@@ -1106,13 +1162,12 @@
     "Path to Snowhead Back": "true"
     "Snowhead": "event(OPEN_SNOWHEAD_TEMPLE)"
     "Snowhead Near Great Fairy Fountain": "event(OPEN_SNOWHEAD_TEMPLE)"
+    "Owl Snowhead": "true"
   events:
     OPEN_SNOWHEAD_TEMPLE: "can_lullaby || event(BOSS_SNOWHEAD)"
     MAGIC: "true"
     BOMBS: "true"
     ARROWS: "true"
-  locations:
-    "Snowhead Owl Statue": "has_sticks || has_weapon"
 "Snowhead":
   region: SNOWHEAD
   exits:
@@ -1151,8 +1206,6 @@
   events:
     MAGIC: "true"
     ARROWS: "true"
-  locations:
-    "Milk Road Owl Statue": "has_sticks || has_weapon"
 "Milk Road Back":
   region: MILK_ROAD
   exits:
@@ -1160,6 +1213,7 @@
     "Milk Road Front": "true" #notevent(ALIENS) || (is_night2 && (can_play(SONG_EPONA) || (can_goron_bomb_jump && has_bombs)))"
     "Behind Gorman Fence": "(can_goron_bomb_jump && has_bombs) || (is_night2 && event(ALIENS)) || final_day"
     "Tingle Ranch": "has_weapon_range"
+    "Owl Milk Road": "true"
   events:
     PICTURE_TINGLE: "has(PICTOGRAPH_BOX)"
     RUPEES: "true"
@@ -1239,6 +1293,7 @@
     "Tingle Great Bay": "can_hookshot || has_arrows"
     "Great Bay Grotto": "true"
     "GBC Near Cow Grotto": "can_hookshot"
+    "Owl Great Bay": "true"
   events:
     MAGIC: "true"
     BOMBS: "true"
@@ -1247,7 +1302,6 @@
     BUGS: "has_bottle"
     FISH: "has_bottle"
   locations:
-    "Great Bay Coast Owl Statue": "has_sticks || has_weapon"
     "Great Bay Coast Zora Mask": "can_play(SONG_HEALING)"
     "Great Bay Coast HP": "can_use_beans && scarecrow_hookshot"
     "Great Bay Coast Fisherman HP": "can_use_wallet(1) && can_hookshot_short && event(BOSS_GREAT_BAY) && ((after(DAY1_AM_07_00) && before(NIGHT1_AM_04_00)) || (after(DAY2_AM_07_00) && before(NIGHT2_AM_04_00)) || (after(DAY3_AM_07_00) && before(NIGHT3_AM_04_00)))"
@@ -1437,8 +1491,7 @@
     "Zora Cape": "has(MASK_ZORA) || trick(MM_ZORA_HALL_HUMAN)"
     "Zora Hall": "true"
     "Great Bay Temple": "has(MASK_ZORA) && can_hookshot && can_play(SONG_ZORA)"
-  locations:
-    "Zora Cape Owl Statue": "has_sticks || has_weapon"
+    "Owl Zora Cape": "true"
 "Behind Gorman Fence":
   region: MILK_ROAD
   exits:
@@ -1605,6 +1658,7 @@
     "Ikana Castle Entrance": "true"
     "Stone Tower": "true"
     "Tingle Ikana": "has_weapon_range"
+    "Owl Ikana": "true"
   events:
     MAGIC: "true"
     BOMBS: "true"
@@ -1612,8 +1666,6 @@
     RUPEES: "can_use_light_arrows && is_night"
   gossip:
     "Ikana Canyon Gossip Upper": "true"
-  locations:
-    "Ikana Canyon Owl Statue": "has_sticks || has_weapon"
 "Ikana Fairy Fountain":
   region: IKANA_CANYON
   exits:
@@ -1668,13 +1720,12 @@
     "Stone Tower": "true"
     "Stone Tower Front of Temple": "can_use_elegy"
     "Stone Tower Top Inverted": "can_use_elegy && can_use_light_arrows"
+    "Owl Stone Tower": "true"
   events:
     MAGIC: "true"
     BOMBS: "true"
     ARROWS: "true"
     RUPEES: "has(MASK_GORON)"
-  locations:
-    "Stone Tower Owl Statue": "has_sticks || has_weapon"
 "Stone Tower Front of Temple":
   region: STONE_TOWER
   events:
