@@ -119,6 +119,7 @@
     "GLOBAL": "true"
     "Clock Town South": "can_reset_time"
     "Clock Tower Roof": "after(NIGHT3_AM_12_00)"
+    "Owl Clock Town": "true"
   locations:
     "Initial Song of Healing": "true"
 "Clock Town South":
