@@ -867,6 +867,6 @@ export const SETTINGS = [{
   name: 'Shuffle Major Regions',
   category: 'entrances',
   type: 'boolean',
-  description: 'Basic Overworld Shuffled',
+  description: '- Every entrance to Hyrule Field except Gerudo Valley and Market<br>- The entrance to Gerudo Fortress from Gerudo Valley<br>- The entrances to the four main regions in MM<br>- The entrance to Romani Ranch',
   default: false
 }] as const;

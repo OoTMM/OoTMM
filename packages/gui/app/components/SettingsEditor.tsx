@@ -108,7 +108,7 @@ function SettingTooltip({ setting }: { setting: string }) {
 
   return (
     <Tooltip id={data.key}>
-      <p>{description}</p>
+      <p style={{whiteSpace:"pre-line"}}>{description.split('<br>').join('\n')}</p>
       <ul>
         {Object.entries(values).map(x => <li key={x[0]}><strong>{x[0]}</strong>: {x[1]}</li>)}
       </ul>

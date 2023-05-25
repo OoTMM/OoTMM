@@ -4,7 +4,7 @@
   "scripts": {
     "build": "ts-node -T ./lib/rollup.ts",
     "start": "ts-node -T ./lib/index.ts",
-    "start:debug": "ts-node -T ./lib/index.ts --debug --config config.yml",
+    "start:debug": "ts-node -T ./lib/index.ts --debug",
     "profile": "TS_NODE_TRANSPILE_ONLY=true node -r ts-node/register --prof ./lib/index.ts --debug --config config.yml && node --prof-process isolate-0x*.log > processed.log && rm -rf isolate-0x*.log",
     "test": "cross-env NODE_ENV=test jest",
     "typecheck": "tsc --noEmit"
