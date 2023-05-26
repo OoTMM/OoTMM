@@ -26,7 +26,7 @@ export const Result = ({ result: { rom, hash, log, patch } }: Props) =>
   <div style={{border: "none", borderRadius:"2px", background: "#ff5722", fontWeight:"700", fontSize:"1em", padding: "0.5em 1em", textDecoration: "none", minWidth: "48px"}}>
     <div><span style={{textAlign:"left"}}><FontAwesomeIcon icon={solid("triangle-exclamation")}/> WARNING </span></div>
       <div>As this page is only a one-time access, it is extremely advised to save the spoiler log.</div>
-      <div>There are scenarios where you may encounter unbeatable seeds, in which case you would need to report them in the Discord.</div>
+      <div>There are a few scenarios where you may encounter unbeatable seeds, in which case, you would need to report them in the Discord.</div>
 
   </div>
   <div>
