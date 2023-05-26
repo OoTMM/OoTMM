@@ -77,6 +77,12 @@ button, .btn {
   color: #fff;
 }
 
+.btn-download {
+  background: linear-gradient(180deg, #43d857, #00bb19);
+  color: #fff;
+  margin: 0.25em;
+}
+
 .checkbox {
   align-items: center;
   flex-direction: row;

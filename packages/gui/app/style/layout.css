@@ -123,3 +123,11 @@
   background: black;
   z-index: 9999;
 }
+
+br {
+  content: '';
+}
+
+br:after {
+  content: ' ';
+}
