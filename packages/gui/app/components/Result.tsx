@@ -23,11 +23,11 @@ type Props = {
 }
 export const Result = ({ result: { rom, hash, log, patch } }: Props) => 
 <div>
-  <div style={{border: "none", borderRadius:"2px", background: "#ff5722", fontWeight:"700", fontSize:"1em", padding: "0.5em 1em", textDecoration: "none", minWidth: "48px"}}>
+  {log && <div style={{border: "none", borderRadius:"2px", background: "#ff5722", fontWeight:"700", fontSize:"1em", padding: "0.5em 1em", textDecoration: "none", minWidth: "48px"}}>
     <div><span style={{textAlign:"left"}}><FontAwesomeIcon icon={solid("triangle-exclamation")}/> WARNING </span></div>
       <div>Be advised that this page is only accessible ONCE, it is extremely recommended to save the spoiler log.</div>
       <div>There are a few scenarios where you may encounter unbeatable seeds, in which case, you would need to report them in the Discord.</div>
-  </div>
+  </div>}
   <div>
     <button className='btn-download' onClick={() => download(rom, appendHash('OoTMM', hash, 'z64'), 'application/octet-stream')}>Save ROM</button>
     {log && <button className='btn-download' onClick={() => download(log, appendHash('OoTMM-Spoiler', hash, 'txt'), 'text/plain')}>Save Spoiler Log</button>}
