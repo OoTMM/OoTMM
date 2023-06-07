@@ -58,7 +58,7 @@
 "Owl Milk Road":
   region: MILK_ROAD
   exits:
-    "Milk Road Back": "can_reset_time"
+    "Milk Road Front": "can_reset_time"
   locations:
     "Milk Road Owl Statue": "has_sticks || has_weapon"
 "Owl Swamp":
@@ -1168,7 +1168,7 @@
     "Snowhead Near Great Fairy Fountain": "event(OPEN_SNOWHEAD_TEMPLE)"
     "Owl Snowhead": "true"
   events:
-    OPEN_SNOWHEAD_TEMPLE: "can_lullaby || event(BOSS_SNOWHEAD)"
+    OPEN_SNOWHEAD_TEMPLE: "can_lullaby || (event(BOSS_SNOWHEAD) && has(MASK_GORON))"
     MAGIC: "true"
     BOMBS: "true"
     ARROWS: "true"
@@ -1207,6 +1207,7 @@
     "Milk Road Back": "true" #notevent(ALIENS) || (is_night2 && (can_play(SONG_EPONA) || (can_goron_bomb_jump && has_bombs)))"
     "Termina Field": "true"
     "Gorman Track Front": "true"
+    "Owl Milk Road": "true"
   events:
     MAGIC: "true"
     ARROWS: "true"
@@ -1217,7 +1218,6 @@
     "Milk Road Front": "true" #notevent(ALIENS) || (is_night2 && (can_play(SONG_EPONA) || (can_goron_bomb_jump && has_bombs)))"
     "Behind Gorman Fence": "(can_goron_bomb_jump && has_bombs) || (is_night2 && event(ALIENS)) || final_day"
     "Tingle Ranch": "has_weapon_range"
-    "Owl Milk Road": "true"
   events:
     PICTURE_TINGLE: "has(PICTOGRAPH_BOX)"
     RUPEES: "true"
