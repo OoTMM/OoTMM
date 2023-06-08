@@ -114,7 +114,7 @@
 "has_small_keys_fire(x)": "setting(smallKeyShuffleOot, removed) || cond(setting(smallKeyShuffleOot, anywhere), has(SMALL_KEY_FIRE, x + 1), has(SMALL_KEY_FIRE, x))"
 "king_zora_moved": "event(KING_ZORA_LETTER) || setting(zoraKing, open) || (setting(zoraKing, adult) && is_adult)"
 "can_move_mido": "is_child && has_sword_kokiri && renewable(SHIELD_DEKU)"
-"mido_moved": "setting(dekuTree, open) || is_adult || event(MIDO_MOVED)"
+"mido_moved": "setting(dekuTree, open) || event(MIDO_MOVED)"
 
 # Wallets
 "has_wallet(n)": "cond(setting(childWallets), has(WALLET, n), has(WALLET, n - 1))"
