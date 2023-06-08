@@ -51,7 +51,7 @@
     "Lost Woods Bridge": "true"
     "Kokiri Shop": "true"
     "Kokiri Forest Storms Grotto": "hidden_grotto_storms"
-    "Kokiri Forest Near Deku Tree": "mido_moved"
+    "Kokiri Forest Near Deku Tree": "mido_moved || is_adult"
   events:
     BOMBS: "true"
     RUPEES: "true"
@@ -70,7 +70,7 @@
 "Kokiri Forest Near Deku Tree":
   region: KOKIRI_FOREST
   exits:
-    "Kokiri Forest": "mido_moved"
+    "Kokiri Forest": "mido_moved || is_adult"
     "Deku Tree": "is_child || (is_adult && setting(dekuTreeAdult) && mido_moved)"
   events:
     STICKS: "can_boomerang || (is_child && has_weapon)"
