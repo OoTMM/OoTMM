@@ -492,6 +492,14 @@ export const SETTINGS = [{
   description: 'Modifies the chests appearance so they match their content. Works for unique items, keys and fairies.',
   default: 'always'
 }, {
+  key: 'csmcHearts',
+  name: 'CSMC for Heart Pieces/Containers',
+  category: 'main.misc',
+  type: 'boolean',
+  default: true,
+  description: 'Use a specific texture for heart pieces/containers',
+  cond: (x: any) => x.csmc !== 'never',
+}, {
   key: 'blastMaskCooldown',
   name: 'Blast Mask Cooldown',
   category: 'main.misc',

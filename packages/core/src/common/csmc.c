@@ -7,6 +7,7 @@
 #define CSMC_KEY        0x03
 #define CSMC_SPIDER     0x04
 #define CSMC_FAIRY      0x05
+#define CSMC_HEART      0x06
 
 #if defined(GAME_OOT)
 # define CHEST_TEX_NORMAL_FRONT     0x06001798
@@ -77,6 +78,16 @@ static const Gfx kListFairyFront[] = {
 
 static const Gfx kListFairySide[] = {
     gsDPLoadTextureBlock(0x09000000 | CUSTOM_KEEP_CHEST_FAIRY_SIDE, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_MIRROR | G_TX_WRAP, G_TX_MIRROR | G_TX_WRAP, 5, 5, 0, 0),
+    gsSPEndDisplayList(),
+};
+
+static const Gfx kListHeartFront[] = {
+    gsDPLoadTextureBlock(0x09000000 | CUSTOM_KEEP_CHEST_HEART_FRONT, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 64, 0, G_TX_MIRROR | G_TX_WRAP, G_TX_MIRROR | G_TX_WRAP, 5, 6, 0, 0),
+    gsSPEndDisplayList(),
+};
+
+static const Gfx kListHeartSide[] = {
+    gsDPLoadTextureBlock(0x09000000 | CUSTOM_KEEP_CHEST_HEART_SIDE, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_MIRROR | G_TX_WRAP, G_TX_MIRROR | G_TX_WRAP, 5, 5, 0, 0),
     gsSPEndDisplayList(),
 };
 
@@ -205,6 +216,11 @@ static int csmcFromItemOot(s16 gi)
         return CSMC_BOSS_KEY;
     case GI_OOT_GS_TOKEN:
         return CSMC_SPIDER;
+    case GI_OOT_HEART_PIECE:
+    case GI_OOT_HEART_CONTAINER:
+    case GI_OOT_HEART_CONTAINER2:
+    case GI_OOT_TC_HEART_PIECE:
+        return comboConfig(CFG_CSMC_HEARTS) ? CSMC_HEART : CSMC_NORMAL;
     }
 
     return CSMC_NORMAL;
@@ -334,6 +350,9 @@ static int csmcFromItemMm(s16 gi)
     case GI_MM_STRAY_FAIRY_ST:
     case GI_MM_STRAY_FAIRY_TOWN:
         return CSMC_FAIRY;
+    case GI_MM_HEART_PIECE:
+    case GI_MM_HEART_CONTAINER:
+        return comboConfig(CFG_CSMC_HEARTS) ? CSMC_HEART : CSMC_NORMAL;
     }
     return CSMC_NORMAL;
 }
@@ -450,6 +469,10 @@ void comboCsmcPreDraw(Actor* this, GameState_Play* play, s16 gi)
     case CSMC_FAIRY:
         listFront = kListFairyFront;
         listSide = kListFairySide;
+        break;
+    case CSMC_HEART:
+        listFront = kListHeartFront;
+        listSide = kListHeartSide;
         break;
     }
 

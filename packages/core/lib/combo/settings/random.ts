@@ -233,6 +233,9 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
 
   base.sunSongMm = booleanWeighted(random, 0.5);
   base.csmc = sampleWeighted(random, { always: 18, agony: 1, never: 1 });
+  if (base.csmc !== 'never') {
+    base.csmcHearts = booleanWeighted(random, 0.75);
+  }
 
   /* Ageless items - 50% disabled, 10% enabled, 40% individual */
   switch (randomInt(random, 4)) {

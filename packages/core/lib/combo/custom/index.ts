@@ -104,6 +104,8 @@ export const customAssets = async (): Promise<{[k: string]: Buffer}> => ({
   CHEST_SPIDER_SIDE: await png('chest_side_spider', 'rgba16'),
   CHEST_FAIRY_FRONT: await png('chest_front_fairy', 'rgba16'),
   CHEST_FAIRY_SIDE: await png('chest_side_fairy', 'rgba16'),
+  CHEST_HEART_FRONT: await png('chest_front_heart', 'rgba16'),
+  CHEST_HEART_SIDE: await png('chest_side_heart', 'rgba16'),
   FONT: await font('font_8x12'),
   SMALL_ICON_KEY: await png('small_icon_key', 'rgba32'),
   SMALL_ICON_BOSS_KEY: await png('small_icon_boss_key', 'rgba32'),

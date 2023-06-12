@@ -93,6 +93,7 @@ export class LogicPassConfig {
       OOT_NO_SMALL_KEY: settings.smallKeyShuffleOot === 'removed',
       MM_NO_BOSS_KEY: settings.bossKeyShuffleMm === 'removed',
       MM_NO_SMALL_KEY: settings.smallKeyShuffleMm === 'removed',
+      CSMC_HEARTS: settings.csmcHearts,
     };
 
     for (const v in exprs) {
