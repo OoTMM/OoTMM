@@ -104,6 +104,7 @@ export const ITEMS_REQUIRED = new Set<string>([
   'OOT_SHIELD_HYLIAN',
   'OOT_GS_TOKEN',
   'OOT_ARROW_FIRE',
+  'OOT_ARROW_ICE',
   'OOT_ARROW_LIGHT',
   'OOT_BOMB_BAG',
   'OOT_BOOMERANG',

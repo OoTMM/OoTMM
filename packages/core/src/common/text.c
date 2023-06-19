@@ -566,7 +566,13 @@ void comboTextAppendItemName(char** b, s16 gi, int flags)
                 ambiguous = 0;
             }
             break;
+        case GI_OOT_ARROW_ICE:
+            if (comboConfig(CFG_OOT_BLUE_FIRE_ARROWS))
+            {
+                itemName = "the " C1 "Blue Fire Arrows";
+            }
         }
+
     }
 
     start = *b;

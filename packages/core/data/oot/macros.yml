@@ -63,6 +63,7 @@
 "can_use_din": "has_magic && has(SPELL_FIRE)"
 "can_use_nayru": "has_magic && has(SPELL_LOVE)"
 "has_light_arrows": "can_use_bow && has(ARROW_LIGHT) && has_magic"
+"has_blue_fire_arrows": "can_use_bow && (setting(blueFireArrows) && has(ARROW_ICE)) && has_magic"
 "has_fire_arrows": "can_use_bow && has(ARROW_FIRE) && has_magic"
 "has_lens_strict": "has_magic && has(LENS)"
 #Item Combination Macros
@@ -88,7 +89,7 @@
 "can_ride_epona": "is_adult && can_play(SONG_EPONA)"
 "gs_soil": "is_child && has_bottle && (renewable(BUGS) || event(BUGS))"
 "adult_trade(x)": "is_adult && has(x)"
-"has_blue_fire": "has_bottle && (event(BLUE_FIRE) || renewable(BLUE_FIRE))"
+"has_blue_fire": "has_blue_fire_arrows || has_bottle && (event(BLUE_FIRE) || renewable(BLUE_FIRE))"
 "can_ride_bean(x)": "is_adult && event(x)"
 "can_damage": "has_weapon || can_use_sticks || has_explosives || can_use_slingshot || can_use_din"
 "can_damage_skull": "can_damage || can_collect_distance"

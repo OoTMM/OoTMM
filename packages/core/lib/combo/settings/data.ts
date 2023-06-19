@@ -565,6 +565,13 @@ export const SETTINGS = [{
   description: 'Modifies the Bunny Hood in OoT to give a speed increase',
   default: true
 }, {
+  key: 'blueFireArrows',
+  name: 'Blue Fire Arrows',
+  category: 'main.misc',
+  type: 'boolean',
+  description: 'Changes the OOT Ice Arrows to have Blue Fire properties',
+  default: true
+}, {
   key: 'agelessSwords',
   name: 'Ageless Swords',
   category: 'main.misc',

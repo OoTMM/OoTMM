@@ -94,6 +94,7 @@ export class LogicPassConfig {
       MM_NO_BOSS_KEY: settings.bossKeyShuffleMm === 'removed',
       MM_NO_SMALL_KEY: settings.smallKeyShuffleMm === 'removed',
       CSMC_HEARTS: settings.csmcHearts,
+      OOT_BLUE_FIRE_ARROWS: settings.blueFireArrows,
     };
 
     for (const v in exprs) {

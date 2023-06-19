@@ -46,6 +46,9 @@ export class LogicPassSpoiler {
       if (s === 'startingItems' || s === 'tricks' || s === 'junkLocations' || s === 'dungeon' || s === 'specialConds' || s === 'plando' || s === 'hints') {
         continue;
       }
+      if (this.state.settings.goal !== 'triforce' && (s === 'triforceGoal' || s === 'triforcePieces')) {
+        continue;
+      }
       const v = (this.state.settings as any)[s];
       this.buffer.push(`  ${s}: ${v}`);
     }
@@ -182,7 +185,7 @@ export class LogicPassSpoiler {
   private writeRaw() {
     const { world, items: placement, settings } = this.state;
     this.writeSectionHeader();
-    this.buffer.push('Location List');
+    this.buffer.push(`Location List (${Object.keys(world.regions).length})`);
     const regionNames = new Set(Object.values(world.regions));
     const dungeonLocations = Object.values(world.dungeons).reduce((acc, x) => new Set([...acc, ...x]));
     regionNames.forEach(region => {
@@ -190,7 +193,7 @@ export class LogicPassSpoiler {
         .filter(location => world.regions[location] === region)
         .filter(location => isShuffled(settings, world, location, dungeonLocations))
         .map(loc => `    ${loc}: ${itemName(placement[loc])}`);
-      this.buffer.push(`  ${regionName(region)}:`);
+      this.buffer.push(`  ${regionName(region)} (${regionalLocations.length}):`);
       this.buffer.push(regionalLocations.join('\n'));
       this.buffer.push('')
       }
