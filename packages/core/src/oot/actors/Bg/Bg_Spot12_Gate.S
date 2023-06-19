@@ -1,0 +1,16 @@
+#include <combo.h>
+/* Starts at 0x80B3D5B0 */
+
+PATCH_START 0x80B3D5B0 + 0x1F8
+  lui a1, 0x41A0
+  lui a2, 0x41A0
+PATCH_END
+
+PATCH_START 0x80B3D5B0 + 0x16C
+  nop
+PATCH_END
+
+PATCH_START 0x80B3D5B0 + 0x18C
+  li  t7, 0
+PATCH_END
+
