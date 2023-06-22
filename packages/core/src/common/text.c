@@ -507,7 +507,14 @@ void comboTextAppendItemName(char** b, s16 gi, int flags)
         itemName = kItemNamesOot[(gi & ~MASK_FOREIGN_GI) - 1];
         ambiguous = isItemAmbiguousOot(gi & ~MASK_FOREIGN_GI);
     }
-
+    if (gi == GI_OOT_ARROW_ICE)
+    {
+        if (comboConfig(CFG_OOT_BLUE_FIRE_ARROWS))
+        {
+            itemName = "the " C1 "Blue Fire Arrows";
+            ambiguous = 0;
+        }
+    }
     if (flags & TF_PROGRESSIVE)
     {
         switch (gi)
@@ -566,11 +573,6 @@ void comboTextAppendItemName(char** b, s16 gi, int flags)
                 ambiguous = 0;
             }
             break;
-        case GI_OOT_ARROW_ICE:
-            if (comboConfig(CFG_OOT_BLUE_FIRE_ARROWS))
-            {
-                itemName = "the " C1 "Blue Fire Arrows";
-            }
         }
 
     }
