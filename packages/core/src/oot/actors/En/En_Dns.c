@@ -129,6 +129,27 @@ static void EnDns_SetFlag(int flag)
     }
 }
 
+static void EnDns_ItemQuery(ComboItemQuery* q, int id, int flags)
+{
+    bzero(q, sizeof(*q));
+
+    q->ovType = OV_SCRUB;
+    q->gi = GI_OOT_STICK; /* Dummy */
+    q->ovFlags = flags | OVF_PRECOND;
+    q->id = id;
+
+    if (EnDns_GetFlag(id))
+        q->ovFlags |= OVF_RENEW;
+}
+
+static void EnDns_ItemOverride(ComboItemOverride* o, int id, int flags)
+{
+    ComboItemQuery q;
+
+    EnDns_ItemQuery(&q, id, flags);
+    comboItemOverride(o, &q);
+}
+
 static s16 EnDns_GetPrice(Actor* this)
 {
     void* scrubData;
@@ -140,44 +161,24 @@ static s16 EnDns_GetPrice(Actor* this)
     return price;
 }
 
-static s16 EnDns_GetGi(Actor* this, int flags)
-{
-    void* scrubData;
-    int id;
-    s16 gi;
-
-    scrubData = *(void**)((char*)this + 0x2b0);
-    gi = (s16)*(s32*)((char*)scrubData + 0x4);
-    id = EnDns_GetID(this);
-    gi = comboOverrideEx(OV_SCRUB, 0, id, gi, flags);
-    if (EnDns_GetFlag(id))
-        gi = comboRenewable(gi, 0);
-    return gi;
-}
-
 void EnDns_MaybeDestroy(Actor* this)
 {
-    s16 gi;
+    ComboItemOverride o;
 
-    if (EnDns_GetFlag(EnDns_GetID(this)))
-    {
-        /* Already bought from scrub */
-        /* Use dummy GI to avoid having to look up the scrub data, as Shopnuts lack it */
-        gi = comboOverrideEx(OV_SCRUB, 0, EnDns_GetID(this), 1, 0);
-        if (!comboRenewable(gi, 0))
-            ActorDestroy(this);
-    }
+    EnDns_ItemOverride(&o, EnDns_GetID(this), 0);
+    if (o.gi == 0)
+        ActorDestroy(this);
 }
 
 static int EnDns_CanBuy(Actor* this)
 {
-    s16 gi;
+    ComboItemQuery q;
     s16 price;
 
-    gi = EnDns_GetGi(this, 0);
+    EnDns_ItemQuery(&q, EnDns_GetID(this), 0);
     price = EnDns_GetPrice(this);
 
-    switch (comboItemPrecond(gi, price))
+    switch (comboItemPrecondEx(&q, price))
     {
     case SC_OK:
     case SC_OK_NOCUTSCENE:
@@ -193,19 +194,20 @@ PATCH_CALL(0x80a75620, EnDns_CanBuy);
 
 static void EnDns_ShopText(Actor* this, GameState_Play* play)
 {
+    ComboItemQuery q;
     char* b;
     char* start;
     s16 price;
-    s16 gi;
+
+    EnDns_ItemQuery(&q, EnDns_GetID(this), 0);
 
     b = play->msgCtx.textBuffer;
     start = b;
     price = EnDns_GetPrice(this);
-    gi = EnDns_GetGi(this, 0);
     comboTextAppendShopHeader(&b, price);
 
     comboTextAppendStr(&b, "Do you want ");
-    comboTextAppendItemName(&b, gi, TF_PROGRESSIVE);
+    comboTextAppendItemNameQuery(&b, &q, TF_PROGRESSIVE);
     comboTextAppendStr(&b, " for " TEXT_COLOR_RED);
     comboTextAppendNum(&b, price);
     comboTextAppendStr(&b, " Rupees");
@@ -245,8 +247,10 @@ PATCH_CALL(0x80a75878, EnDns_HasGivenItem);
 
 static void EnDns_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
 {
-    gi = EnDns_GetGi(actor, OVF_PROGRESSIVE);
-    GiveItem(actor, play, gi, a, b);
+    ComboItemQuery q;
+
+    EnDns_ItemQuery(&q, EnDns_GetID(actor), OVF_PROGRESSIVE);
+    comboGiveItem(actor, play, &q, a, b);
 }
 
 PATCH_CALL(0x80a75734, EnDns_GiveItem);

@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/item.h>
 
 #define SET_HANDLER(a, h) do { *(void**)(((char*)(a)) + 0x1ac) = (h); } while (0)
 
@@ -7,7 +8,6 @@ void ObjWarpstone_GiveItem(Actor* this, GameState_Play* play)
     Actor_Player* link;
     void (*next)(Actor*, GameState_Play*);
     s16 id;
-    s16 gi;
 
     id = this->variable & 0xf;
 
@@ -34,8 +34,7 @@ void ObjWarpstone_GiveItem(Actor* this, GameState_Play* play)
     }
 
     /* Give the check */
-    gi = comboOverride(OV_NPC, 0, NPC_MM_OWL_GREAT_BAY + id, GI_MM_OWL_GREAT_BAY + id);
-    GiveItem(this, play, gi, 9999.f, 9999.f);
+    comboGiveItemNpc(this, play, GI_MM_OWL_GREAT_BAY + id, NPC_MM_OWL_GREAT_BAY + id, 9999.f, 9999.f);
 }
 
 static void ObjWarpstone_Text(GameState_Play* play)

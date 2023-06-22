@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/item.h>
 
 static int EnOssan_HasGivenItem(Actor_EnOssan* this, GameState_Play* play)
 {
@@ -13,3 +14,15 @@ static int EnOssan_HasGivenItem(Actor_EnOssan* this, GameState_Play* play)
 }
 
 PATCH_CALL(0x808d1cac, EnOssan_HasGivenItem);
+
+static void EnOssan_GiveItem(Actor_EnOssan* this, GameState_Play* play, s16 gi, float a, float b)
+{
+    ComboItemQuery q;
+    Actor_EnGirlA* girlA;
+
+    girlA = this->items[this->itemIndex];
+    EnGirlA_ItemQuery(&q, girlA, OVF_PROGRESSIVE);
+    comboGiveItem(&this->base, play, &q, a, b);
+}
+
+PATCH_CALL(0x808d1cf0, EnOssan_GiveItem);

@@ -1,20 +1,40 @@
 #include <combo.h>
+#include <combo/item.h>
 
 static int sIsSmallChest;
 
+static void BgMoriHineri_ItemQuery(ComboItemQuery* q, int flags)
+{
+    bzero(q, sizeof(*q));
+
+    q->ovType = OV_CHEST;
+    q->sceneId = SCE_OOT_TEMPLE_FOREST;
+    q->gi = GI_OOT_BOSS_KEY;
+    q->id = 0x0e;
+    q->ovFlags = flags;
+}
+
+static void BgMoriHineri_ItemOverride(ComboItemOverride* o, int flags)
+{
+    ComboItemQuery q;
+
+    BgMoriHineri_ItemQuery(&q, flags);
+    comboItemOverride(o, &q);
+}
+
 void BgMoriHineri_DrawWrapper(Actor* this, GameState_Play* play)
 {
+    ComboItemOverride o;
     ActorCallback draw;
-    s16 gi;
     float* f;
 
     /* Init CSMC */
-    gi = comboOverrideEx(OV_CHEST, play->sceneId, 0xe, GI_OOT_BOSS_KEY, 0);
-    comboCsmcPreDraw(this, play, gi);
+    BgMoriHineri_ItemOverride(&o, 0);
+    comboCsmcPreDraw(this, play, o.gi);
 
     /* Check for CSMC and small chest */
     sIsSmallChest = 0;
-    if (comboCsmcChestSize(gi) == 0)
+    if (comboCsmcChestSize(o.gi) == 0)
     {
         sIsSmallChest = 1;
         f = actorAddr(0x068, 0x80913d74);

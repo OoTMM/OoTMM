@@ -1,4 +1,22 @@
 #include <combo.h>
+#include <combo/item.h>
+
+static void DmChar02_ItemQuery(ComboItemQuery* q, int npc, int flags)
+{
+    bzero(q, sizeof(*q));
+    q->ovType = OV_NPC;
+    q->gi = npc == NPC_MM_SKULL_KID_OCARINA ? GI_MM_OCARINA_OF_TIME : GI_MM_SONG_TIME;
+    q->id = npc;
+    q->ovFlags = flags;
+}
+
+static void DmChar02_ItemOverride(ComboItemOverride* o, int npc, int flags)
+{
+    ComboItemQuery q;
+
+    DmChar02_ItemQuery(&q, npc, flags);
+    comboItemOverride(o, &q);
+}
 
 void DmChar02_InitScaleHook(Actor* this, float scale)
 {
@@ -27,28 +45,31 @@ PATCH_CALL(0x80aab1d4, DmChar02_HasGivenItem);
 
 void DmChar02_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
 {
+    ComboItemQuery q;
     Actor_Player* link;
+    int npc;
 
     link = GET_LINK(play);
     if (link->state & PLAYER_ACTOR_STATE_GET_ITEM)
         return;
 
     if (!gMmExtraFlags2.ocarina)
-        gi = comboOverride(OV_NPC, 0, NPC_MM_SKULL_KID_OCARINA, GI_MM_OCARINA_OF_TIME);
+        npc = NPC_MM_SKULL_KID_OCARINA;
     else
-        gi = comboOverride(OV_NPC, 0, NPC_MM_SKULL_KID_SONG, GI_MM_SONG_TIME);
-    GiveItem(this, play, gi, a, b);
+        npc = NPC_MM_SKULL_KID_SONG;
+    DmChar02_ItemQuery(&q, npc, OVF_PROGRESSIVE | OVF_DOWNGRADE);
+    comboGiveItem(this, play, &q, a, b);
 }
 
 PATCH_CALL(0x80aab1fc, DmChar02_GiveItem);
 
 void DmChar02_DrawOcarina(Actor* this, GameState_Play* play)
 {
-    s16 gi;
     static const float scale = 25.0f;
+    ComboItemOverride o;
 
-    gi = comboOverride(OV_NPC, 0, NPC_MM_SKULL_KID_OCARINA, GI_MM_OCARINA_OF_TIME);
+    DmChar02_ItemOverride(&o, NPC_MM_SKULL_KID_OCARINA, OVF_PROGRESSIVE);
     ModelViewScale(scale, scale, scale, MAT_MUL);
     ModelViewTranslate(0.0f, 20.0f, 0.0f, MAT_MUL);
-    comboDrawGI(play, this, gi, DRAW_RAW);
+    comboDrawGI(play, this, o.gi, DRAW_RAW);
 }

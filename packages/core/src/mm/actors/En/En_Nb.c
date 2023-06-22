@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/item.h>
 
 static u8 sIsHeartPiece;
 
@@ -13,13 +14,16 @@ void EnNb_AfterGivingItem(Actor* this)
 
 void EnNb_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
 {
+    int npc;
+
+    npc = -1;
     if (gi == GI_MM_HEART_PIECE)
     {
         sIsHeartPiece = 1;
         if (!gMmExtraFlags2.grandma)
-            gi = comboOverride(OV_NPC, 0, NPC_MM_GRANDMA_HEART_PIECE_1, gi);
+            npc = NPC_MM_GRANDMA_HEART_PIECE_1;
         else
-            gi = comboOverride(OV_NPC, 0, NPC_MM_GRANDMA_HEART_PIECE_2, gi);
+            npc = NPC_MM_GRANDMA_HEART_PIECE_2;
     }
-    GiveItem(this, play, gi, a, b);
+    comboGiveItemNpc(this, play, gi, npc, a, b);
 }

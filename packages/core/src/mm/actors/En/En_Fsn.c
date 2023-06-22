@@ -1,9 +1,13 @@
 #include <combo.h>
+#include <combo/item.h>
 
 static u8 sIsSecondReward;
 
 void EnFsn_GiveNormalItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
 {
+    int npc;
+
+    npc = -1;
     switch (gi)
     {
     case GI_MM_MASK_KEATON:
@@ -13,7 +17,7 @@ void EnFsn_GiveNormalItem(Actor* this, GameState_Play* play, s16 gi, float a, fl
         }
         else
         {
-            gi = comboOverride(OV_NPC, 0, NPC_MM_MASK_KEATON, gi);
+            npc = NPC_MM_MASK_KEATON;
         }
         break;
     case GI_MM_LETTER_TO_MAMA:
@@ -23,12 +27,12 @@ void EnFsn_GiveNormalItem(Actor* this, GameState_Play* play, s16 gi, float a, fl
         }
         else
         {
-            gi = comboOverride(OV_NPC, 0, NPC_MM_LETTER_TO_MAMA, gi);
+            npc = NPC_MM_LETTER_TO_MAMA;
             sIsSecondReward = 1;
         }
         break;
     }
-    GiveItem(this, play, gi, a, b);
+    comboGiveItemNpc(this, play, gi, npc, a, b);
 }
 
 PATCH_CALL(0x80ae3cd4, EnFsn_GiveNormalItem);
@@ -50,3 +54,16 @@ int EnFsn_HasGivenShopItem(Actor_EnFsn* this, GameState_Play* play)
 }
 
 PATCH_CALL(0x80ae3be0, EnFsn_HasGivenShopItem);
+
+static void EnFsn_GiveItem(Actor_EnFsn* this, GameState_Play* play, s16 gi, float a, float b)
+{
+    ComboItemQuery q;
+    Actor_EnGirlA* girlA;
+
+    girlA = this->items[this->itemIndex];
+    EnGirlA_ItemQuery(&q, girlA, OVF_PROGRESSIVE);
+    comboGiveItem(&this->base, play, &q, a, b);
+}
+
+PATCH_CALL(0x80ae3cb0, EnFsn_GiveItem);
+PATCH_CALL(0x80ae42e4, EnFsn_GiveItem);

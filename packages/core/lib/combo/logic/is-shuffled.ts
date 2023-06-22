@@ -1,13 +1,13 @@
 import { Settings } from "../settings";
-import { isDungeonStrayFairy, isGoldToken, isHouseToken, isTownStrayFairy } from "./items";
+import { isDungeonStrayFairy, isGoldToken, isHouseToken, isTownStrayFairy, makeItem } from "./items";
 import { World } from "./world";
 
 // When adding new settings, add in order of how many checks there are to minimize average runtime
 export const isShuffled = (settings: Settings, world: World, loc: string, dungLocations?: Set<string>) => {
-
   const check = world.checks[loc];
+  const globalItem = makeItem(check.item);
   // Gold Skulltulas - 100
-  if (isGoldToken(check.item)) {
+  if (isGoldToken(globalItem)) {
     if (settings.goldSkulltulaTokens === 'none') {
       return false;
     }
@@ -21,7 +21,7 @@ export const isShuffled = (settings: Settings, world: World, loc: string, dungLo
   }
 
   // House Skulltulas - 60
-  if (isHouseToken(check.item)) {
+  if (isHouseToken(globalItem)) {
     if (settings.housesSkulltulaTokens === 'none') {
       return false;
     }
@@ -29,7 +29,7 @@ export const isShuffled = (settings: Settings, world: World, loc: string, dungLo
   }
 
   // Stray Fairy Shuffle - 60
-  if (isDungeonStrayFairy(check.item)) {
+  if (isDungeonStrayFairy(globalItem)) {
     if (settings.strayFairyShuffle === 'vanilla') {
       return false;
     }
@@ -37,7 +37,7 @@ export const isShuffled = (settings: Settings, world: World, loc: string, dungLo
   }
 
   // Single Item shuffles - 1 each
-  if (isTownStrayFairy(check.item) && settings.townFairyShuffle === 'vanilla') {
+  if (isTownStrayFairy(globalItem) && settings.townFairyShuffle === 'vanilla') {
     return false;
   }
 

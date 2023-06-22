@@ -1,18 +1,32 @@
 #include <combo.h>
+#include <combo/item.h>
 
-static s16 ItemEtcetera_GetGI(Actor* this, s16 gi)
+static void ItemEtcetera_ItemQuery(ComboItemQuery* q, Actor* this, s16 gi, int flags)
 {
-    switch (this->variable)
+    bzero(q, sizeof(ComboItemQuery));
+
+    q->gi = gi;
+    q->ovFlags = flags;
+
+    switch (this->variable & 0xff)
     {
     case 0x1:
-        gi = comboOverride(OV_NPC, 0, NPC_OOT_RUTO_LETTER, gi);
+        q->ovType = OV_NPC;
+        q->id = NPC_OOT_RUTO_LETTER;
         break;
     case 0x7:
-        gi = comboOverride(OV_NPC, 0, NPC_OOT_FIRE_ARROW, gi);
+        q->ovType = OV_NPC;
+        q->id = NPC_OOT_FIRE_ARROW;
+        q->gi = GI_OOT_ARROW_FIRE;
         break;
+    case 0xc:
+        q->ovType = OV_CHEST;
+        q->sceneId = SCE_OOT_TREASURE_SHOP;
+        q->id = 0x0a;
+        break;
+    default:
+        q->ovType = OV_NONE;
     }
-
-    return gi;
 }
 
 static int ItemEtcetera_HasGivenItem(Actor* this)
@@ -29,8 +43,10 @@ PATCH_CALL(0x80a5e268, ItemEtcetera_HasGivenItem);
 
 void ItemEtcetera_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
 {
-    gi = ItemEtcetera_GetGI(this, gi);
-    GiveItem(this, play, gi, a, b);
+    ComboItemQuery q;
+
+    ItemEtcetera_ItemQuery(&q, this, gi, OVF_PROGRESSIVE | OVF_DOWNGRADE);
+    comboGiveItem(this, play, &q, a, b);
 }
 
 PATCH_CALL(0x80a5e230, ItemEtcetera_GiveItem);
@@ -38,16 +54,20 @@ PATCH_CALL(0x80a5e2cc, ItemEtcetera_GiveItem);
 
 void ItemEtcetera_Draw(Actor_ItemEtcetera* this, GameState_Play* play)
 {
-    s16 gi;
+    ComboItemQuery q;
+    ComboItemOverride o;
 
-    gi = ItemEtcetera_GetGI(&this->base, this->gi);
-    comboDrawGI(play, &this->base, gi, 0);
+    ItemEtcetera_ItemQuery(&q, &this->base, this->gi, OVF_PROGRESSIVE);
+    comboItemOverride(&o, &q);
+    comboDrawGI(play, &this->base, o.gi, 0);
 }
 
 PATCH_FUNC(0x80a5e610, ItemEtcetera_Draw);
 
 void ItemEtcetera_DrawTreasureGame(Actor_ItemEtcetera* this, GameState_Play* play)
 {
+    ComboItemQuery q;
+    ComboItemOverride o;
     s16 gi;
 
     if (*(u8*)((char*)play + 0x1c27) == 0)
@@ -68,7 +88,7 @@ void ItemEtcetera_DrawTreasureGame(Actor_ItemEtcetera* this, GameState_Play* pla
         gi = GI_OOT_RUPEE_PURPLE;
         break;
     case 0xc:
-        gi = comboOverride(OV_CHEST, SCE_OOT_TREASURE_SHOP, 0x0a, GI_OOT_HEART_PIECE);
+        gi = GI_OOT_HEART_PIECE;
         break;
     case 0xd:
         gi = GI_OOT_SMALL_KEY;
@@ -78,7 +98,9 @@ void ItemEtcetera_DrawTreasureGame(Actor_ItemEtcetera* this, GameState_Play* pla
         break;
     }
 
-    comboDrawGI(play, &this->base, gi, 0);
+    ItemEtcetera_ItemQuery(&q, &this->base, gi, OVF_PROGRESSIVE);
+    comboItemOverride(&o, &q);
+    comboDrawGI(play, &this->base, o.gi, 0);
 }
 
 PATCH_FUNC(0x80a5e5b8, ItemEtcetera_DrawTreasureGame);

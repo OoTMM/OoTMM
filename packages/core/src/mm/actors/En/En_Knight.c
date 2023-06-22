@@ -1,11 +1,11 @@
 #include <combo.h>
+#include <combo/item.h>
 
 void EnKnight_OnDestroy(Actor* this, GameState_Play* play)
 {
     Actor* knightMain;
     Actor* knightSide1;
     Actor* knightSide2;
-    s16 gi;
 
     knightMain = *(Actor**)actorAddr(0x115, 0x809befd0);
 
@@ -22,9 +22,7 @@ void EnKnight_OnDestroy(Actor* this, GameState_Play* play)
         ActorDestroy(knightSide2);
         return;
     }
-
-    gi = comboOverride(OV_NPC, 0, NPC_MM_SONG_EMPTINESS, GI_MM_SONG_EMPTINESS);
-    GiveItem(this, play, gi, 9999.f, 9999.f);
+    comboGiveItemNpc(this, play, GI_MM_SONG_EMPTINESS, NPC_MM_SONG_EMPTINESS, 9999.f, 9999.f);
 }
 
 PATCH_FUNC(0x809b58d4, EnKnight_OnDestroy);

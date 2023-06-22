@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/item.h>
 
 static const s16 kGreatFairyRewards[] = {
     GI_MM_MASK_GREAT_FAIRY,
@@ -18,6 +19,16 @@ static const s16 kGreatFairyNPCs[] = {
     NPC_MM_GREAT_FAIRY_VALLEY,
 };
 
+static void EnElfgrp_ItemQuery(ComboItemQuery* q, int index, int flags)
+{
+    bzero(q, sizeof(*q));
+
+    q->ovType = OV_NPC;
+    q->gi = kGreatFairyRewards[index];
+    q->id = kGreatFairyNPCs[index];
+    q->ovFlags = flags;
+}
+
 static u8 EnElfgrp_GetFairyIndex(Actor* this)
 {
     u8 index;
@@ -30,9 +41,9 @@ static u8 EnElfgrp_GetFairyIndex(Actor* this)
 
 static void EnElfgrp_GiveReward(Actor* actor, GameState_Play* play)
 {
-    u8      fairyIndex;
-    u8      mask;
-    u16     gi;
+    ComboItemQuery q;
+    u8 fairyIndex;
+    u8 mask;
 
     fairyIndex = EnElfgrp_GetFairyIndex(actor);
     mask = (1 << fairyIndex);
@@ -48,8 +59,8 @@ static void EnElfgrp_GiveReward(Actor* actor, GameState_Play* play)
         return;
     }
 
-    gi = comboOverride(OV_NPC, 0, kGreatFairyNPCs[fairyIndex], kGreatFairyRewards[fairyIndex]);
-    GiveItem(actor, play, gi, 200.f, 200.f);
+    EnElfgrp_ItemQuery(&q, fairyIndex, OVF_PROGRESSIVE | OVF_DOWNGRADE);
+    comboGiveItem(actor, play, &q, 200.f, 200.f);
 }
 
 PATCH_FUNC(0x80a3a398, EnElfgrp_GiveReward);
@@ -65,60 +76,57 @@ static int EnElfgrp_GetFairyCount(GameState_Play* play, int type)
 
 PATCH_FUNC(0x80a39bd0, EnElfgrp_GetFairyCount);
 
-static void fairyHint(GameState_Play* play, s16 gi)
+static void fairyHint(GameState_Play* play, int index)
 {
+    ComboItemQuery q;
     char* b;
     char* start;
 
+    EnElfgrp_ItemQuery(&q, index, 0);
     b = play->textBuffer;
     comboTextAppendHeader(&b);
     start = b;
     comboTextAppendStr(&b, "Young one, please help us! If you bring the " TEXT_COLOR_PINK "15 Stray Fairies");
     comboTextAppendClearColor(&b);
     comboTextAppendStr(&b, " here, we will give you ");
-    comboTextAppendItemName(&b, gi, TF_PREPOS | TF_PROGRESSIVE);
+    comboTextAppendItemNameQuery(&b, &q, TF_PREPOS | TF_PROGRESSIVE);
     comboTextAppendStr(&b, "!" TEXT_END);
     comboTextAutoLineBreaks(start);
 }
 
-static void fairyHintTown(GameState_Play* play, s16 gi, s16 gi2)
+static void fairyHintTown(GameState_Play* play)
 {
+    ComboItemQuery q1;
+    ComboItemQuery q2;
     char* b;
     char* start;
 
+    EnElfgrp_ItemQuery(&q1, 0, 0);
+    EnElfgrp_ItemQuery(&q2, 1, 0);
     b = play->textBuffer;
     comboTextAppendHeader(&b);
     start = b;
     comboTextAppendStr(&b, "Young one, please help us! If you bring the missing " TEXT_COLOR_ORANGE "Stray Fairy");
     comboTextAppendClearColor(&b);
     comboTextAppendStr(&b, " here, we will give you ");
-    comboTextAppendItemName(&b, gi, TF_PREPOS | TF_PROGRESSIVE);
+    comboTextAppendItemNameQuery(&b, &q1, TF_PREPOS | TF_PROGRESSIVE);
     comboTextAppendStr(&b, " and ");
-    comboTextAppendItemName(&b, gi2, TF_PREPOS | TF_PROGRESSIVE);
+    comboTextAppendItemNameQuery(&b, &q2, TF_PREPOS | TF_PROGRESSIVE);
     comboTextAppendStr(&b, "!" TEXT_END);
     comboTextAutoLineBreaks(start);
 }
 
 static void EnElfgrp_DisplayTextBox(GameState_Play* play, s16 messageId, Actor* this)
 {
-    s16 gi;
-    s16 gi2;
     u8 fairyIndex;
 
     fairyIndex = EnElfgrp_GetFairyIndex(this);
     PlayerDisplayTextBox(play, messageId, this);
 
     if (fairyIndex <= 1)
-    {
-        gi = comboOverrideEx(OV_NPC, 0, kGreatFairyNPCs[0], kGreatFairyRewards[0], 0);
-        gi2 = comboOverrideEx(OV_NPC, 0, kGreatFairyNPCs[1], kGreatFairyRewards[1], 0);
-        fairyHintTown(play, gi, gi2);
-        return;
-    }
-
-    /* Hint */
-    gi = comboOverrideEx(OV_NPC, 0, kGreatFairyNPCs[fairyIndex], kGreatFairyRewards[fairyIndex], 0);
-    fairyHint(play, gi);
+        fairyHintTown(play);
+    else
+        fairyHint(play, fairyIndex);
 }
 
 PATCH_CALL(0x80a3a9f0, EnElfgrp_DisplayTextBox);

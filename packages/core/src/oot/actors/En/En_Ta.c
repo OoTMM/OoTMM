@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/item.h>
 
 int EnTa_GetActiveItem_Chicken(Actor* this, GameState_Play* play)
 {
@@ -14,8 +15,7 @@ PATCH_CALL(0x809223d4, EnTa_GetActiveItem_Chicken);
 
 void EnTa_GiveItem_MilkBottle(Actor* this, GameState_Play* play, s16 gi, float a, float b)
 {
-    gi = comboOverride(OV_NPC, 0, NPC_OOT_TALON_BOTTLE, gi);
-    GiveItem(this, play, gi, a, b);
+    comboGiveItemNpc(this, play, gi, NPC_OOT_TALON_BOTTLE, a, b);
 }
 
 PATCH_CALL(0x80923cd8, EnTa_GiveItem_MilkBottle);

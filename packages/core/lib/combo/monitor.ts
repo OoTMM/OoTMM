@@ -1,34 +1,45 @@
+type MonitorOnProgress = (progress: number, total: number) => void;
+type MonitorOnLog = (log: string) => void;
+
 export type MonitorCallbacks = {
-  onProgress?: (progress: number, total: number) => void;
-  onLog?: (log: string) => void;
+  onProgress?: MonitorOnProgress;
+  onLog?: MonitorOnLog;
 };
 
 export class Monitor {
-  private progress = 0;
-  private total = 0;
+  private onLog: MonitorOnLog;
+  private onProgress: MonitorOnProgress;
+  private percent = 0;
+  private lastMsg: string | null = null;
 
-  constructor(private callbacks: MonitorCallbacks, private isDebug?: boolean) {
+  constructor(callbacks: MonitorCallbacks, private isDebug?: boolean) {
+    this.onLog = callbacks.onLog || (x => console.log(x));
+    this.onProgress = callbacks.onProgress || ((progress: number, total: number) => { this.defaultProgress(progress, total); });
   }
 
   setProgress(progress: number, total: number) {
-    this.progress = progress;
-    this.total = total;
-    if (this.callbacks.onProgress) {
-      this.callbacks.onProgress(progress, total);
+    this.onProgress(progress, total);
+  }
+
+  defaultProgress(progress: number, total: number) {
+    const newPercent = Math.floor(progress / total * 100);
+    if (newPercent !== this.percent) {
+      this.percent = newPercent;
+      if (this.lastMsg) {
+        this.onLog(`${this.lastMsg} - ${this.percent}%`);
+      }
     }
   }
 
   log(message: string) {
-    if (this.callbacks.onLog) {
-      this.callbacks.onLog(message);
-    } else {
-      console.log(message);
-    }
+    this.percent = 0;
+    this.lastMsg = message;
+    this.onLog(message);
   }
 
   debug(message: string) {
     if (this.isDebug) {
-      this.log(message);
+      this.onLog(message);
     }
   }
 }

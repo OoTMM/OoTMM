@@ -1,40 +1,49 @@
 #include <combo.h>
+#include <combo/item.h>
 
 void EnGo_AfterGivingItem(Actor* actor)
 {
     gMmExtraFlags.powderKeg = 1;
 }
 
-void EnGo_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
+static void EnGo_ItemQuery(ComboItemQuery* q, int flags)
 {
+    bzero(q, sizeof(*q));
+
+    q->ovFlags = flags;
     if (!gMmExtraFlags.powderKeg)
     {
-        gi = comboOverride(OV_NPC, 0, NPC_MM_GORON_KEG, GI_MM_POWDER_KEG);
-    }
-    else if (gMmSave.inventory.items[ITS_MM_KEG] == ITEM_MM_POWDER_KEG)
-    {
-        gi = GI_MM_POWDER_KEG;
+        q->ovType = OV_NPC;
+        q->gi = GI_MM_POWDER_KEG;
+        q->id = NPC_MM_GORON_KEG;
     }
     else
     {
-        gi = GI_MM_RECOVERY_HEART;
+        q->ovType = OV_NONE;
+        q->gi = (gMmSave.inventory.items[ITS_MM_KEG] == ITEM_MM_POWDER_KEG) ? GI_MM_POWDER_KEG : GI_MM_RECOVERY_HEART;
     }
-    GiveItem(this, play, gi, a, b);
+}
+
+void EnGo_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
+{
+    ComboItemQuery q;
+
+    EnGo_ItemQuery(&q, OVF_PROGRESSIVE | OVF_DOWNGRADE);
+    comboGiveItem(this, play, &q, a, b);
 }
 
 static void powderKegHint(GameState_Play* play)
 {
-    s16 gi;
+    ComboItemQuery q;
     char* b;
     char* start;
 
-    gi = comboOverrideEx(OV_NPC, 0, NPC_MM_GORON_KEG, GI_MM_POWDER_KEG, 0);
-
+    EnGo_ItemQuery(&q, 0);
     b = play->textBuffer;
     comboTextAppendHeader(&b);
     start = b;
     comboTextAppendStr(&b, "If you pass my test, I will give you ");
-    comboTextAppendItemName(&b, gi, TF_PREPOS | TF_PROGRESSIVE);
+    comboTextAppendItemNameQuery(&b, &q, TF_PREPOS | TF_PROGRESSIVE);
     comboTextAppendStr(&b, "!" TEXT_SIGNAL TEXT_END);
     comboTextAutoLineBreaks(start);
 }

@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/item.h>
 
 static void hintBeanSeller(GameState_Play* play)
 {
@@ -24,9 +25,8 @@ void EnMs_TalkedTo(Actor* this, GameState_Play* play)
 
 void EnMs_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
 {
-    gi = comboOverride(OV_NPC, 0, NPC_OOT_BEAN_SELLER, gi);
     gSave.inventory.beans = 1;
-    GiveItem(actor, play, gi, a, b);
+    comboGiveItemNpc(actor, play, gi, NPC_OOT_BEAN_SELLER, a, b);
 }
 
 PATCH_CALL(0x80aa08dc, EnMs_GiveItem);

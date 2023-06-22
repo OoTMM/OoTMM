@@ -1,4 +1,6 @@
 #include <combo.h>
+#include <combo/text.h>
+#include <combo/item.h>
 
 #define C0   TEXT_COLOR_TEAL
 #define C1   TEXT_COLOR_RED
@@ -602,6 +604,32 @@ void comboTextAppendItemName(char** b, s16 gi, int flags)
     }
 }
 
+void comboTextAppendItemNameQuery(char** b, const ComboItemQuery* q, int flags)
+{
+    ComboItemOverride o;
+
+    comboItemOverride(&o, q);
+    comboTextAppendItemNameOverride(b, &o, flags);
+}
+
+void comboTextAppendItemNameOverride(char** b, const ComboItemOverride* o, int flags)
+{
+    comboTextAppendItemName(b, o->gi, flags);
+    if (o->player != PLAYER_SELF && o->player != PLAYER_ALL && o->player != gComboData.playerId)
+    {
+        comboTextAppendStr(b, " for " TEXT_COLOR_YELLOW "Player ");
+        comboTextAppendNum(b, o->player);
+        comboTextAppendClearColor(b);
+    }
+
+    if (o->playerFrom != PLAYER_SELF && o->playerFrom != PLAYER_ALL && o->playerFrom != gComboData.playerId)
+    {
+        comboTextAppendStr(b, " from " TEXT_COLOR_YELLOW "Player ");
+        comboTextAppendNum(b, o->playerFrom);
+        comboTextAppendClearColor(b);
+    }
+}
+
 void comboTextAppendRegionName(char** b, u8 regionId, int flags)
 {
     char* start;
@@ -659,10 +687,13 @@ void comboTextAppendCheckName(char** b, u8 checkId)
     comboTextAppendClearColor(b);
 }
 
-void comboTextHijackItem(GameState_Play* play, s16 gi, int count)
+void comboTextHijackItemEx(GameState_Play* play, const ComboItemOverride* o, int count)
 {
     char* b;
     char* start;
+    int isSelf;
+
+    isSelf = (o->player == PLAYER_SELF) || (o->player == PLAYER_ALL) || (o->player == gComboData.playerId);
 
 #if defined(GAME_OOT)
     b = play->msgCtx.textBuffer;
@@ -672,9 +703,9 @@ void comboTextHijackItem(GameState_Play* play, s16 gi, int count)
     comboTextAppendHeader(&b);
     start = b;
     comboTextAppendStr(&b, "You got ");
-    comboTextAppendItemName(&b, gi, 0);
+    comboTextAppendItemNameOverride(&b, o, 0);
     comboTextAppendStr(&b, "!");
-    if (count)
+    if (isSelf && count)
     {
         comboTextAppendStr(&b, TEXT_NL "This is your " TEXT_COLOR_RED);
         comboTextAppendOrd(&b, count);
@@ -683,6 +714,14 @@ void comboTextHijackItem(GameState_Play* play, s16 gi, int count)
     }
     comboTextAppendStr(&b, TEXT_END);
     comboTextAutoLineBreaks(start);
+}
+
+void comboTextHijackItem(GameState_Play* play, s16 gi, int count)
+{
+    ComboItemOverride o;
+    memset(&o, 0, sizeof(o));
+    o.gi = gi;
+    comboTextHijackItemEx(play, &o, count);
 }
 
 static int isSoldOut(s16 gi)
@@ -694,7 +733,7 @@ static int isSoldOut(s16 gi)
 #endif
 }
 
-void comboTextHijackItemShop(GameState_Play* play, s16 gi, s16 price, int confirm)
+void comboTextHijackItemShop(GameState_Play* play, const ComboItemOverride* o, s16 price, int confirm)
 {
     char* b;
 
@@ -706,13 +745,13 @@ void comboTextHijackItemShop(GameState_Play* play, s16 gi, s16 price, int confir
 
     comboTextAppendShopHeader(&b, price);
 
-    if (isSoldOut(gi))
+    if (isSoldOut(o->gi))
     {
         comboTextAppendStr(&b, "SOLD OUT" TEXT_NOCLOSE TEXT_END);
         return;
     }
 
-    comboTextAppendItemName(&b, gi, TF_CAPITALIZE);
+    comboTextAppendItemNameOverride(&b, o, TF_CAPITALIZE);
     comboTextAppendStr(&b, TEXT_NL TEXT_COLOR_RED);
     comboTextAppendNum(&b, price);
     comboTextAppendStr(&b, " Rupees");
@@ -759,24 +798,6 @@ void comboTextHijackDungeonRewardHints(GameState_Play* play, int hint)
 #endif
 
 #if defined(GAME_OOT)
-void comboTextHijackSkullReward(GameState_Play* play, s16 gi, int count)
-{
-    char* b;
-
-    b = play->msgCtx.textBuffer;
-    comboTextAppendHeader(&b);
-    comboTextAppendStr(&b,
-        "Yeaaarrgh! I'm cursed!! Please save me by destroying " TEXT_COLOR_RED
-    );
-    comboTextAppendNum(&b, count);
-    comboTextAppendStr(&b,
-        " Spiders of the Curse" TEXT_CZ " and I will give you "
-    );
-    comboTextAppendItemName(&b, gi, TF_PROGRESSIVE);
-    comboTextAppendStr(&b, TEXT_CZ "." TEXT_END);
-    comboTextAutoLineBreaks(play->msgCtx.textBuffer);
-}
-
 void comboTextHijackLightArrows(GameState_Play* play)
 {
     char* b;
@@ -813,8 +834,12 @@ void comboTextHijackOathToOrder(GameState_Play* play)
 
 void comboTextAppendNpcReward(char** b, s16 npcId, s16 gi)
 {
-    gi = comboOverrideEx(OV_NPC, 0, npcId, gi, 0);
-    comboTextAppendItemName(b, gi, TF_PREPOS | TF_PROGRESSIVE);
+    ComboItemQuery q = ITEM_QUERY_INIT;
+
+    q.ovType = OV_NPC;
+    q.id = npcId;
+    q.gi = gi;
+    comboTextAppendItemNameQuery(b, &q, TF_PREPOS | TF_PROGRESSIVE);
 }
 
 void comboTextMessageCantBuy(GameState_Play* play, int flags)

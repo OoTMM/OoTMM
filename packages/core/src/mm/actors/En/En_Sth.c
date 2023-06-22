@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/item.h>
 
 int EnSth_HasGivenItemMaskOfTruth(Actor* this)
 {
@@ -14,21 +15,24 @@ PATCH_CALL(0x80b67b70, EnSth_HasGivenItemMaskOfTruth);
 
 void EnSth_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
 {
+    int npc;
+
+    npc = -1;
     switch (gi)
     {
     case GI_MM_WALLET2:
     case GI_MM_WALLET3:
-        gi = comboOverride(OV_NPC, 0, NPC_MM_SPIDER_HOUSE_OCEAN, gi);
+        npc = NPC_MM_SPIDER_HOUSE_OCEAN;
         break;
     case GI_MM_MASK_TRUTH:
         if (gMmExtraFlags2.maskTruth)
             gi = GI_MM_RECOVERY_HEART;
         else
-            gi = comboOverride(OV_NPC, 0, NPC_MM_SPIDER_HOUSE_SWAMP, gi);
+            npc = NPC_MM_SPIDER_HOUSE_SWAMP;
         break;
     }
 
-    GiveItem(this, play, gi, a, b);
+    comboGiveItemNpc(this, play, gi, npc, a, b);
 }
 
 PATCH_CALL(0x80b67524, EnSth_GiveItem);
@@ -43,7 +47,6 @@ void EnSth_AfterInit(Actor* this, GameState_Play* play)
             (char*)play + 0x1ca0,
             play,
             0xd4,
-            //-110.f, 540.f, 250.f,
             -110.f, 650.f, 250.f,
             0, 0, 0,
             0

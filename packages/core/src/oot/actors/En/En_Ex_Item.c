@@ -1,81 +1,93 @@
 #include <combo.h>
+#include <combo/item.h>
 
-s16 EnExItem_RewardByIndex(int index)
+void EnExItem_RewardByIndex(ComboItemQuery* q, int index, int flags)
 {
-    s16 gi;
+    memset(q, 0, sizeof(*q));
+    q->ovFlags = flags;
 
     switch (index)
     {
     case 0x00:
     case 0x05:
         /* Bomb pouch */
-        gi = comboOverride(OV_NPC, 0, NPC_OOT_BOMBCHU_BOWLING_1, GI_OOT_BOMB_BAG);
+        q->ovType = OV_NPC;
+        q->gi = GI_OOT_BOMB_BAG;
+        q->id = NPC_OOT_BOMBCHU_BOWLING_1;
         break;
     case 0x01:
     case 0x06:
         /* Piece of Heart */
-        gi = comboOverride(OV_NPC, 0, NPC_OOT_BOMBCHU_BOWLING_2, GI_OOT_HEART_PIECE);
+        q->ovType = OV_NPC;
+        q->gi = GI_OOT_HEART_PIECE;
+        q->id = NPC_OOT_BOMBCHU_BOWLING_2;
         break;
     case 0x02:
     case 0x07:
         /* Bombchu */
-        gi = GI_OOT_BOMBCHU_10;
+        q->gi = GI_OOT_BOMBCHU_10;
         break;
     case 0x03:
     case 0x08:
         /* Bombs */
-        gi = GI_OOT_BOMBS_10;
+        q->gi = GI_OOT_BOMBS_10;
         break;
     case 0x04:
     case 0x09:
         /* Purple Rupee */
-        gi = GI_OOT_RUPEE_PURPLE;
+        q->gi = GI_OOT_RUPEE_PURPLE;
         break;
     case 0x0a:
         /* Treasure Game: Green Rupee */
-        gi = GI_OOT_RUPEE_GREEN;
+        q->gi = GI_OOT_RUPEE_GREEN;
         break;
     case 0x0b:
         /* Treasure Game: Blue Rupee */
-        gi = GI_OOT_RUPEE_BLUE;
+        q->gi = GI_OOT_RUPEE_BLUE;
         break;
     case 0x0c:
         /* Treasure Game: Red Rupee */
-        gi = GI_OOT_RUPEE_RED;
+        q->gi = GI_OOT_RUPEE_RED;
         break;
     case 0x0f:
         /* Treasure Game: Small Key */
-        gi = GI_OOT_SMALL_KEY;
+        q->gi = GI_OOT_SMALL_KEY;
         break;
     case 0x13:
         /* Target: Slingshot */
-        gi = comboOverride(OV_NPC, 0, NPC_OOT_LOST_WOODS_TARGET, GI_OOT_SLINGSHOT);
+        q->ovType = OV_NPC;
+        q->gi = GI_OOT_SLINGSHOT;
+        q->id = NPC_OOT_LOST_WOODS_TARGET;
         break;
     default:
-        gi = GI_NONE;
         break;
     }
-    return gi;
 }
 
-s16 EnExItem_Reward(Actor* actor)
+void EnExItem_Reward(ComboItemQuery* q, const Actor* actor, int flags)
 {
-    return EnExItem_RewardByIndex(actor->variable & 0x1f);
+    EnExItem_RewardByIndex(q, actor->variable & 0x1f, flags);
 }
 
 void EnExItem_Draw(Actor* actor, GameState_Play* play)
 {
+    ComboItemQuery q;
+    ComboItemOverride o;
     float scale;
 
+    EnExItem_Reward(&q, actor, OVF_PROGRESSIVE);
+    comboItemOverride(&o, &q);
     scale = *(float*)(((char*)actor) + 0x154);
     ActorSetScale(actor, scale);
-    comboDrawGI(play, actor, EnExItem_Reward(actor), 0);
+    comboDrawGI(play, actor, o.gi, 0);
 }
 
 void EnExItem_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
 {
-    gi = EnExItem_Reward(actor);
-    GiveItem(actor, play, gi, a, b);
+    ComboItemQuery q;
+
+    EnExItem_Reward(&q, actor, OVF_DOWNGRADE | OVF_PROGRESSIVE);
+    comboGiveItem(actor, play, &q, a, b);
 }
 
 PATCH_FUNC(0x80ad9f78, EnExItem_Draw);

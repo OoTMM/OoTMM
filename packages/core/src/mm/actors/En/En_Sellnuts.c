@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/item.h>
 
 int EnSellnuts_HasGivenItem(Actor* this)
 {
@@ -14,6 +15,9 @@ PATCH_CALL(0x80adbbfc, EnSellnuts_HasGivenItem);
 
 void EnSellnuts_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
 {
+    int npc;
+
+    npc = -1;
     /* Unfreeze player */
     GET_LINK(play)->state &= ~PLAYER_ACTOR_STATE_CUTSCENE_FROZEN;
 
@@ -21,8 +25,8 @@ void EnSellnuts_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, flo
     if (gMmExtraFlags.scrubTown)
         gi = GI_MM_RECOVERY_HEART;
     else
-        gi = comboOverride(OV_NPC, 0, NPC_MM_SCRUB_LAND, gi);
-    GiveItem(this, play, gi, a, b);
+        npc = NPC_MM_SCRUB_LAND;
+    comboGiveItemNpc(this, play, gi, npc, a, b);
 }
 
 PATCH_CALL(0x80adbc48, EnSellnuts_GiveItem);

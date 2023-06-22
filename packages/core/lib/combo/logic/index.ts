@@ -1,3 +1,5 @@
+import crypto from 'crypto';
+
 import { Random } from '../random';
 import { LogicPassSolver } from './solve';
 import { LogicPassWorld } from './world';
@@ -74,13 +76,17 @@ const solvedWorldState = (monitor: Monitor, opts: Options) => {
 export const logic = (monitor: Monitor, opts: Options) => {
   const state = solvedWorldState(monitor, opts);
 
-  return pipeline(state)
+  const data = pipeline(state)
     .apply(LogicPassAnalysis)
     .apply(LogicPassAnalysisFoolish)
     .apply(LogicPassHints)
     .apply(LogicPassSpoiler)
     .apply(LogicPassHash)
     .exec();
+
+    const uuid = crypto.randomBytes(16);
+
+    return { ...data, uuid };
 };
 
 export type LogicResult = ReturnType<typeof logic>;

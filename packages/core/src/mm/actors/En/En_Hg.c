@@ -1,9 +1,8 @@
 #include <combo.h>
+#include <combo/item.h>
 
 void EnHg_HandlerGiveMask(Actor* this, GameState_Play* play)
 {
-    s16 gi;
-
     if (gMmExtraFlags.maskGibdo || Actor_HasParent(this))
     {
         gMmExtraFlags.maskGibdo = 1;
@@ -12,6 +11,5 @@ void EnHg_HandlerGiveMask(Actor* this, GameState_Play* play)
         return;
     }
 
-    gi = comboOverride(OV_NPC, 0, NPC_MM_MASK_GIBDO, GI_MM_MASK_GIBDO);
-    GiveItem(this, play, gi, 9999.f, 9999.f);
+    comboGiveItemNpc(this, play, GI_MM_MASK_GIBDO, NPC_MM_MASK_GIBDO, 9999.f, 9999.f);
 }

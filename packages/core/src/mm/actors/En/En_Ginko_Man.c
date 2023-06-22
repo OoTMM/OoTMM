@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/item.h>
 
 static u8 sIsReward2;
 
@@ -22,25 +23,28 @@ PATCH_CALL(0x80a6559c, EnGinkoMan_HasGivenItem);
 
 void EnGinkoMan_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
 {
+    int npc;
+
+    npc = -1;
     switch (gi)
     {
     case GI_MM_WALLET2:
     case GI_MM_WALLET3:
-        gi = comboOverride(OV_NPC, 0, NPC_MM_BANK_1, gi);
+        npc = NPC_MM_BANK_1;
         break;
     case GI_MM_RUPEE_BLUE:
         if (!gMmExtraFlags.bankReward2)
         {
-            gi = comboOverride(OV_NPC, 0, NPC_MM_BANK_2, gi);
+            npc = NPC_MM_BANK_2;
             sIsReward2 = 1;
         }
         break;
     case GI_MM_HEART_PIECE:
-        gi = comboOverride(OV_NPC, 0, NPC_MM_BANK_3, gi);
+        npc = NPC_MM_BANK_3;
         break;
     }
 
-    GiveItem(this, play, gi, a, b);
+    comboGiveItemNpc(this, play, gi, npc, a, b);
 }
 
 PATCH_CALL(0x80a65618, EnGinkoMan_GiveItem);

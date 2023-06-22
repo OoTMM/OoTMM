@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/item.h>
 
 typedef struct
 {
@@ -43,6 +44,20 @@ static const BlueWarpData* DoorWarp1_GetData(Actor* this, GameState_Play* play)
     return &kBlueWarpData[id];
 }
 
+static s16 DoorWarp1_GetGI(const BlueWarpData* data, int flags)
+{
+    ComboItemQuery q = ITEM_QUERY_INIT;
+    ComboItemOverride o;
+
+    q.ovType = OV_NPC;
+    q.gi = data->gi;
+    q.id = data->npc;
+    q.ovFlags = flags;
+
+    comboItemOverride(&o, &q);
+    return o.gi;
+}
+
 int DoorWarp1_Collide(Actor* this, GameState_Play* play)
 {
     float dist;
@@ -67,6 +82,7 @@ int DoorWarp1_ShouldTrigger(Actor* this, GameState_Play* play)
     int id;
     const BlueWarpData* data;
     s16 gi;
+    int npc;
 
     /* Check for collision */
     if (!DoorWarp1_Collide(this, play))
@@ -106,10 +122,16 @@ int DoorWarp1_ShouldTrigger(Actor* this, GameState_Play* play)
 
     /* Give the correct item */
     if (!gMmExtraFlags2.songOath)
-        gi = comboOverride(OV_NPC, 0, NPC_MM_SONG_ORDER, GI_MM_SONG_ORDER);
+    {
+        gi = GI_MM_SONG_ORDER;
+        npc = NPC_MM_SONG_ORDER;
+    }
     else
-        gi = comboOverride(OV_NPC, 0, data->npc, data->gi);
-    GiveItem(this, play, gi, 9999.f, 9999.f);
+    {
+        gi = data->gi;
+        npc = data->npc;
+    }
+    comboGiveItemNpc(this, play, gi, npc, 9999.f, 9999.f);
     return 0;
 }
 
@@ -125,7 +147,7 @@ void DoorWarp1_AfterDraw(Actor* this, GameState_Play* play)
         return;
     if (gMmExtraBoss.items & (1 << data->index))
         return;
-    gi = comboOverride(OV_NPC, 0, data->npc, data->gi);
+    gi = DoorWarp1_GetGI(data, OVF_PROGRESSIVE);
 
     angle = (play->gs.frameCount % kRotDivisor) * (1.f / kRotDivisor) * M_PI * 2.f;
     ModelViewTranslate(this->position.x, this->position.y + 35.f, this->position.z, MAT_SET);

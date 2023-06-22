@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/item.h>
 
 static u8 sIsPictobox;
 
@@ -13,6 +14,9 @@ void EnDnh_AfterGivingItem(Actor* actor)
 
 void EnDnh_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
 {
+    int npc;
+
+    npc = -1;
     sIsPictobox = 0;
     switch (gi)
     {
@@ -21,11 +25,12 @@ void EnDnh_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b
         if (gMmExtraFlags.pictobox)
             gi = GI_MM_RECOVERY_HEART;
         else
-            gi = comboOverride(OV_NPC, 0, NPC_MM_KOUME_PICTOGRAPH_BOX, gi);
+            npc = NPC_MM_KOUME_PICTOGRAPH_BOX;
         break;
     case GI_MM_HEART_PIECE:
-        gi = comboOverride(OV_NPC, 0, NPC_MM_KOUME_HEART_PIECE, gi);
+        npc = NPC_MM_KOUME_HEART_PIECE;
         break;
     }
-    GiveItem(actor, play, gi, a, b);
+
+    comboGiveItemNpc(actor, play, gi, npc, a, b);
 }

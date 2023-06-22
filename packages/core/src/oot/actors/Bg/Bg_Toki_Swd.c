@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/item.h>
 
 static void BgTokiSwd_GiveItem(Actor* this, GameState_Play* play, s16 gi, int npc, int event)
 {
@@ -6,12 +7,10 @@ static void BgTokiSwd_GiveItem(Actor* this, GameState_Play* play, s16 gi, int np
     {
         this->attachedA = NULL;
         SetEventChk(event);
+        return;
     }
-    else
-    {
-        gi = comboOverride(OV_NPC, 0, npc, gi);
-        GiveItem(this, play, gi, 200.f, 50.f);
-    }
+
+    comboGiveItemNpc(this, play, gi, npc, 200.f, 50.f);
 }
 
 static void swapFarore(void)

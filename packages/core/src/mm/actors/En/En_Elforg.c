@@ -1,33 +1,44 @@
 #include <combo.h>
 #include <combo/item.h>
 
-static s16 EnElforg_Item(Actor* this, GameState_Play* play)
+static void EnElforg_ItemQuery(ComboItemQuery* q, Actor* this, GameState_Play* play, int flags)
 {
-    s16 gi;
+    bzero(q, sizeof(*q));
 
-    gi = GI_MM_STRAY_FAIRY;
+    q->gi = GI_MM_STRAY_FAIRY;
+    q->ovFlags = flags;
     switch (play->sceneId)
     {
     case SCE_MM_CLOCK_TOWN_EAST:
     case SCE_MM_LAUNDRY_POOL:
-        gi = comboOverride(OV_NPC, 0, NPC_MM_STRAY_FAIRY_TOWN, gi);
+        q->ovType = OV_NPC;
+        q->id = NPC_MM_STRAY_FAIRY_TOWN;
         break;
     default:
-        gi = comboOverride(OV_SF, play->sceneId, (this->variable & 0xfe00) >> 9, gi);
+        q->ovType = OV_SF;
+        q->sceneId = play->sceneId;
+        q->id = (this->variable & 0xfe00) >> 9;
         break;
     }
-    return gi;
+}
+
+static void EnElforg_ItemOverride(ComboItemOverride* o, Actor* this, GameState_Play* play, int flags)
+{
+    ComboItemQuery q;
+
+    EnElforg_ItemQuery(&q, this, play, flags);
+    comboItemOverride(o, &q);
 }
 
 static void EnElforg_Draw(Actor* this, GameState_Play* play)
 {
+    ComboItemOverride o;
     ActorCallback draw;
     static const int kRotDivisor = 100;
     float angle;
-    s16 gi;
 
-    gi = EnElforg_Item(this, play);
-    if (gi == GI_MM_STRAY_FAIRY)
+    EnElforg_ItemOverride(&o, this, play, OVF_PROGRESSIVE);
+    if (o.gi == GI_MM_STRAY_FAIRY)
     {
         draw = actorAddr(0x1b0, 0x80acd8c0);
         draw(this, play);
@@ -38,7 +49,7 @@ static void EnElforg_Draw(Actor* this, GameState_Play* play)
     ModelViewTranslate(this->position.x, this->position.y, this->position.z, MAT_SET);
     ModelViewScale(0.35f, 0.35f, 0.35f, MAT_MUL);
     ModelViewRotateY(angle, MAT_MUL);
-    comboDrawGI(play, this, gi, 0);
+    comboDrawGI(play, this, o.gi, 0);
 }
 
 void EnElforg_DrawWrapper(Actor* this, GameState_Play* play)
@@ -65,11 +76,11 @@ void EnElforg_DrawWrapper(Actor* this, GameState_Play* play)
 
 void EnElforg_GiveItem(GameState_Play* play, Actor* this)
 {
-    s16 gi;
+    ComboItemQuery q;
 
-    gi = EnElforg_Item(this, play);
+    EnElforg_ItemQuery(&q, this, play, OVF_PROGRESSIVE | OVF_DOWNGRADE);
     PlayerDisplayTextBox(play, 0x579, NULL);
-    comboAddItem(play, gi);
+    comboAddItemEx(play, &q);
 
     // If it's a town fairy
     if ((this->variable & 0xF) == 3) {

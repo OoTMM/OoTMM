@@ -2,9 +2,9 @@
 #include <combo/entrance.h>
 
 #if defined(GAME_OOT)
-# define ENTRANCES_ADDR 0x03fec000
+# define ENTRANCES_ADDR 0x03ff4000
 #else
-# define ENTRANCES_ADDR 0x03fed000
+# define ENTRANCES_ADDR 0x03ff5000
 #endif
 
 s8  gIsEntranceOverride;

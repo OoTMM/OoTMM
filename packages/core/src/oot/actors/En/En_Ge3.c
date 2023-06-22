@@ -1,9 +1,9 @@
 #include <combo.h>
+#include <combo/item.h>
 
 void EnGe3_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
 {
-    gi = comboOverride(OV_NPC, 0, NPC_OOT_GERUDO_CARD, gi);
-    GiveItem(this, play, gi, a, b);
+    comboGiveItemNpc(this, play, gi, NPC_OOT_GERUDO_CARD, a, b);
 }
 
 PATCH_CALL(0x80b7f27c, EnGe3_GiveItem);

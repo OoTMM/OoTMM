@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/item.h>
 
 int EnKgy_HasGivenItem(Actor* this)
 {
@@ -20,11 +21,13 @@ PATCH_CALL(0x80b41d84, EnKgy_HasGivenItem);
 
 void EnKgy_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
 {
+    int npc;
+
     if (!gMmExtraFlags.swordRazor)
-        gi = comboOverride(OV_NPC, 0, NPC_MM_SWORD_RAZOR, GI_MM_SWORD_RAZOR);
+        npc = NPC_MM_SWORD_RAZOR;
     else
-        gi = comboOverride(OV_NPC, 0, NPC_MM_SWORD_GILDED, GI_MM_SWORD_GILDED);
-    GiveItem(this, play, gi, a, b);
+        npc = NPC_MM_SWORD_GILDED;
+    comboGiveItemNpc(this, play, gi, npc, a, b);
 }
 
 PATCH_CALL(0x80b41df0, EnKgy_GiveItem);

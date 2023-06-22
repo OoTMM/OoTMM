@@ -1,17 +1,28 @@
 #include <combo.h>
+#include <combo/item.h>
+
+static void EnScopenuts_ItemQuery(ComboItemQuery* q, int flags)
+{
+    bzero(q, sizeof(*q));
+
+    q->ovType = OV_NPC;
+    q->gi = GI_MM_HEART_PIECE;
+    q->id = NPC_MM_SCRUB_TELESCOPE;
+    q->ovFlags = flags;
+}
 
 static void EnScopenuts_AlterMessage(GameState_Play* play)
 {
-    s16 gi;
+    ComboItemQuery q;
     char* b;
     char* start;
 
-    gi = comboOverrideEx(OV_NPC, 0, NPC_MM_SCRUB_TELESCOPE, GI_MM_HEART_PIECE, 0);
+    EnScopenuts_ItemQuery(&q, 0);
     b = play->textBuffer;
     comboTextAppendHeader(&b);
     start = b;
     comboTextAppendStr(&b, "Please! I'll sell you ");
-    comboTextAppendItemName(&b, gi, TF_PREPOS | TF_PROGRESSIVE);
+    comboTextAppendItemNameQuery(&b, &q, TF_PREPOS | TF_PROGRESSIVE);
     comboTextAppendStr(&b, " if you just keep this place a secret..." TEXT_SIGNAL TEXT_END);
     comboTextAutoLineBreaks(start);
 }
@@ -29,8 +40,10 @@ PATCH_CALL(0x80bcb79c, EnScopenuts_DisplayTextBox);
 
 void EnScopenuts_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
 {
-    gi = comboOverride(OV_NPC, 0, NPC_MM_SCRUB_TELESCOPE, gi);
-    GiveItem(this, play, gi, a, b);
+    ComboItemQuery q;
+
+    EnScopenuts_ItemQuery(&q, OVF_PROGRESSIVE | OVF_DOWNGRADE);
+    comboGiveItem(this, play, &q, a, b);
 }
 
 PATCH_CALL(0x80bcb968, EnScopenuts_GiveItem);

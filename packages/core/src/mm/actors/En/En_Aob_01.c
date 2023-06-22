@@ -1,12 +1,16 @@
 #include <combo.h>
+#include <combo/item.h>
 
 void EnAob01_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
 {
+    int npc;
+
+    npc = -1;
     if (gi == GI_MM_HEART_PIECE)
     {
-        gi = comboOverride(OV_NPC, 0, NPC_MM_DOG_LADY_HEART_PIECE, gi);
+        npc = NPC_MM_DOG_LADY_HEART_PIECE;
     }
-    GiveItem(actor, play, gi, a, b);
+    comboGiveItemNpc(actor, play, gi, npc, a, b);
 }
 
 PATCH_CALL(0x809c2ba8, EnAob01_GiveItem);

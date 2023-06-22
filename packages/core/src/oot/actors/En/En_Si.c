@@ -1,7 +1,7 @@
 #include <combo.h>
 #include <combo/item.h>
 
-static s16 EnSi_Override(Actor* this)
+static void EnSi_ItemQuery(ComboItemQuery* q, Actor* this, int flags)
 {
     u16 key;
 
@@ -20,23 +20,39 @@ static s16 EnSi_Override(Actor* this)
         UNREACHABLE();
     }
     key += ((((this->variable + 0x100) >> 8) & 0x1f) * 8);
-    return comboOverride(OV_GS, 0, key, GI_OOT_GS_TOKEN);
+
+    bzero(q, sizeof(*q));
+    q->ovType = OV_GS;
+    q->id = key;
+    q->gi = GI_OOT_GS_TOKEN;
+    q->ovFlags = flags;
+}
+
+static void EnSi_ItemOverride(ComboItemOverride* o, Actor* this, int flags)
+{
+    ComboItemQuery q;
+
+    EnSi_ItemQuery(&q, this, flags);
+    comboItemOverride(o, &q);
 }
 
 void EnSi_Draw(Actor* this, GameState_Play* play)
 {
-    comboDrawGI(play, this, EnSi_Override(this), 0);
+    ComboItemOverride o;
+
+    EnSi_ItemOverride(&o, this, OVF_PROGRESSIVE);
+    comboDrawGI(play, this, o.gi, 0);
 }
 
 PATCH_CALL(0x80b4b3f8, EnSi_Draw);
 
 void EnSi_GiveItem(GameState_Play* play, Actor* this)
 {
-    s16 gi;
+    ComboItemQuery q;
 
-    gi = EnSi_Override(this);
+    EnSi_ItemQuery(&q, this, OVF_PROGRESSIVE | OVF_DOWNGRADE);
     PlayerDisplayTextBox(play, 0xb4, NULL);
-    comboAddItem(play, gi);
+    comboAddItemEx(play, &q);
 }
 
 PATCH_CALL(0x80b4b190, EnSi_GiveItem);

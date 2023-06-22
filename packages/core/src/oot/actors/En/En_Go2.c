@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/item.h>
 
 #define SET_HANDLER(a, h) do { *(void**)(((char*)(a)) + 0x180) = (h); } while (0)
 
@@ -8,7 +9,11 @@ static void EnGo2_HandlerNull(Actor* this, GameState_Play* play)
 
 static void EnGo2_HandlerGiveBiggoronItem(Actor* this, GameState_Play* play)
 {
-    s16 gi = *(s16*)((char*)this + 0x584);
+    int npc;
+    s16 gi;
+
+    npc = -1;
+    gi = *(s16*)((char*)this + 0x584);
 
     if (Actor_HasParent(this))
     {
@@ -19,15 +24,15 @@ static void EnGo2_HandlerGiveBiggoronItem(Actor* this, GameState_Play* play)
     switch (gi)
     {
     case GI_OOT_PRESCRIPTION:
-        gi = comboOverride(OV_NPC, 0, NPC_OOT_TRADE_PRESCRIPTION, gi);
+        npc = NPC_OOT_TRADE_PRESCRIPTION;
         comboRemoveTradeItemAdult(XITEM_OOT_ADULT_BROKEN_GORON_SWORD);
         break;
     case GI_OOT_CLAIM_CHECK:
-        gi = comboOverride(OV_NPC, 0, NPC_OOT_TRADE_CLAIM_CHECK, gi);
+        npc = NPC_OOT_TRADE_CLAIM_CHECK;
         comboRemoveTradeItemAdult(XITEM_OOT_ADULT_EYE_DROPS);
         break;
     case GI_OOT_SWORD_BIGGORON:
-        gi = comboOverride(OV_NPC, 0, NPC_OOT_TRADE_BIGGORON_SWORD, gi);
+        npc = NPC_OOT_TRADE_BIGGORON_SWORD;
         gOotExtraFlags.biggoron = 1;
         break;
     }
@@ -35,7 +40,7 @@ static void EnGo2_HandlerGiveBiggoronItem(Actor* this, GameState_Play* play)
     if (!(GET_LINK(play)->state & PLAYER_ACTOR_STATE_GET_ITEM))
         Message_Close(play);
 
-    GiveItem(this, play, gi, 10000.f, 5000.f);
+    comboGiveItemNpc(this, play, gi, npc, 10000.f, 5000.f);
 }
 
 void EnGo2_SetBiggoronMessageId(Actor* this, GameState_Play* play, Actor* dst)
@@ -81,19 +86,22 @@ PATCH_FUNC(0x80b58c8c, EnGo2_SetBiggoronMessageId);
 
 void EnGo2_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
 {
+    int npc;
+
+    npc = -1;
     switch (gi)
     {
     case GI_OOT_TUNIC_GORON:
         gOotExtraFlags.tunicGoron = 1;
-        gi = comboOverride(OV_NPC, 0, NPC_OOT_GORON_LINK_TUNIC, gi);
+        npc = NPC_OOT_GORON_LINK_TUNIC;
         break;
     case GI_OOT_BOMB_BAG2:
     case GI_OOT_BOMB_BAG3:
-        gi = comboOverride(OV_NPC, 0, NPC_OOT_GORON_BOMB_BAG, gi);
+        npc = NPC_OOT_GORON_BOMB_BAG;
         break;
     }
 
-    GiveItem(this, play, gi, a, b);
+    comboGiveItemNpc(this, play, gi, npc, a, b);
 }
 
 PATCH_CALL(0x80b56ff4, EnGo2_GiveItem);

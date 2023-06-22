@@ -1,27 +1,31 @@
 #include <combo.h>
+#include <combo/item.h>
 
 void EnSth_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
 {
+    int npc;
+
+    npc = -1;
     switch (gi)
     {
     case GI_OOT_WALLET2:
-        gi = comboOverride(OV_NPC, 0, NPC_OOT_GS_10, gi);
+        npc = NPC_OOT_GS_10;
         break;
     case GI_OOT_STONE_OF_AGONY:
-        gi = comboOverride(OV_NPC, 0, NPC_OOT_GS_20, gi);
+        npc = NPC_OOT_GS_20;
         break;
     case GI_OOT_WALLET3:
-        gi = comboOverride(OV_NPC, 0, NPC_OOT_GS_30, gi);
+        npc = NPC_OOT_GS_30;
         break;
     case GI_OOT_BOMBCHU_10:
-        gi = comboOverride(OV_NPC, 0, NPC_OOT_GS_40, gi);
+        npc = NPC_OOT_GS_40;
         break;
     case GI_OOT_HEART_PIECE:
-        gi = comboOverride(OV_NPC, 0, NPC_OOT_GS_50, gi);
+        npc = NPC_OOT_GS_50;
         break;
     }
 
-    GiveItem(actor, play, gi, a, b);
+    comboGiveItemNpc(actor, play, gi, npc, a, b);
 }
 
 PATCH_CALL(0x80b28268, EnSth_GiveItem);

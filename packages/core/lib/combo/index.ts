@@ -5,7 +5,7 @@ import { Generator, GeneratorOutput } from './generator';
 import { Monitor, MonitorCallbacks } from './monitor';
 import { worldState } from './logic';
 import { itemName } from './names';
-import { isDungeonItem, isItemTriforce, isItemUnlimitedStarting, isJunk, isStrayFairy, isToken, Items } from './logic/items';
+import { isDungeonItem, isItemTriforce, isItemUnlimitedStarting, isJunk, isStrayFairy, isToken, Item, Items, makeItem } from './logic/items';
 import { isShuffled } from './logic/is-shuffled';
 import { DEFAULT_SETTINGS, DUNGEONS, makeSettings, mergeSettings, SettingCategory, SETTINGS, Settings, SETTINGS_CATEGORIES, SPECIAL_CONDS, SPECIAL_CONDS_KEYS, TRICKS } from './settings';
 import { SettingsPatch } from './settings/patch';
@@ -46,7 +46,7 @@ export const itemPool = (aSettings: Partial<Settings>) => {
   const { pool, world } = worldState(monitor, { settings, cosmetics, debug: false, seed: "--- INTERNAL ---", random });
 
   /* Extract relevant items from the pool */
-  for (const item of Object.keys(pool)) {
+  for (const item of Object.keys(pool) as Item[]) {
     if (isJunk(item) || isDungeonItem(item) || isToken(item) || isStrayFairy(item) || isItemTriforce(item)) {
       delete pool[item];
     }
@@ -56,14 +56,15 @@ export const itemPool = (aSettings: Partial<Settings>) => {
   for (const loc in world.checks) {
     const check = world.checks[loc];
     const { item } = check;
-    if (isItemUnlimitedStarting(item)) {
-      pool[item] = 999;
+    const globalItem = makeItem(item);
+    if (isItemUnlimitedStarting(globalItem)) {
+      pool[globalItem] = 999;
     }
   }
 
   /* Sort items */
   const items: Items = {};
-  const sortedItems = Object.keys(pool).sort((a, b) => itemName(a).localeCompare(itemName(b)));
+  const sortedItems = (Object.keys(pool) as Item[]).sort((a, b) => itemName(a).localeCompare(itemName(b)));
   for (const item of sortedItems) {
     items[item] = pool[item];
   }

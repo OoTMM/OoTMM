@@ -38,7 +38,7 @@ PATCH_END
 PATCH_START 0x8084834c
   lw v0,0x24(sp)
   lw a0,0x20(sp)
-  jal comboAddItem
+  jal comboPlayerAddItem
    lh a1,0x384(v0)
 PATCH_END
 

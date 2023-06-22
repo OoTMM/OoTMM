@@ -8,22 +8,25 @@ static s16 kPrices[] = {
     200,
 };
 
-static s16 EnTab_GI(int index, int flags)
+static void EnTab_ItemQuery(ComboItemQuery* q, int index, int flags)
 {
-    s16 gi;
-    s16 npc;
     int flag;
+
+    bzero(q, sizeof(*q));
+
+    q->ovType = OV_NPC;
+    q->ovFlags = flags | OVF_PRECOND;
 
     switch (index)
     {
     case 0:
-        gi = GI_MM_MILK;
-        npc = NPC_MM_MILK_BAR_MILK;
+        q->gi = GI_MM_MILK;
+        q->id = NPC_MM_MILK_BAR_MILK;
         flag = gMmExtraFlags2.milkBarMilk;
         break;
     case 1:
-        gi = GI_MM_CHATEAU;
-        npc = NPC_MM_MILK_BAR_CHATEAU;
+        q->gi = GI_MM_CHATEAU;
+        q->id = NPC_MM_MILK_BAR_CHATEAU;
         flag = gMmExtraFlags2.milkBarChateau;
         break;
     default:
@@ -31,20 +34,24 @@ static s16 EnTab_GI(int index, int flags)
         break;
     }
 
-    gi = comboOverrideEx(OV_NPC, 0, npc, gi, flags);
     if (flag)
-        gi = comboRenewable(gi, 0);
-    if (!gi)
-        return -1;
-    return gi;
+        q->ovFlags |= OVF_RENEW;
+}
+
+static void EnTab_ItemOverride(ComboItemOverride* o, int index, int flags)
+{
+    ComboItemQuery q;
+
+    EnTab_ItemQuery(&q, index, flags);
+    comboItemOverride(o, &q);
 }
 
 static void EnTab_TextItem(char** b, int index)
 {
-    s16 gi;
+    ComboItemOverride o;
 
-    gi = EnTab_GI(index, 0);
-    if (gi < 0)
+    EnTab_ItemOverride(&o, index, 0);
+    if (o.gi == 0)
     {
         comboTextAppendStr(b, TEXT_COLOR_RED "SOLD OUT");
         comboTextAppendClearColor(b);
@@ -52,7 +59,7 @@ static void EnTab_TextItem(char** b, int index)
     }
     else
     {
-        comboTextAppendItemName(b, gi, TF_PREPOS | TF_CAPITALIZE | TF_PROGRESSIVE);
+        comboTextAppendItemName(b, o.gi, TF_PREPOS | TF_CAPITALIZE | TF_PROGRESSIVE);
         comboTextAppendStr(b, ": " TEXT_COLOR_RED);
         comboTextAppendNum(b, kPrices[index]);
         comboTextAppendStr(b, " Rupees");
@@ -86,6 +93,8 @@ void EnTab_AfterTextBox(Actor* this, GameState_Play* play, s16 messageId)
 
 void EnTab_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
 {
+    ComboItemQuery q;
+    ComboItemOverride o;
     Actor_Player* link;
     int sc;
 
@@ -104,16 +113,18 @@ void EnTab_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
         break;
     }
 
-    gi = EnTab_GI(sItemIndex, OVF_PROGRESSIVE);
-    if (gi < 0)
+    EnTab_ItemQuery(&q, sItemIndex, OVF_PROGRESSIVE);
+    comboItemOverride(&o, &q);
+    if (gi == 0)
         sc = SC_ERR_CANNOTBUY;
     else
-        sc = comboItemPrecond(gi, kPrices[sItemIndex]);
+        sc = comboItemPrecondEx(&q, kPrices[sItemIndex]);
+
     switch (sc)
     {
     case SC_OK:
     case SC_OK_NOCUTSCENE:
-        GiveItem(this, play, gi, a, b);
+        comboGiveItem(this, play, &q, a, b);
         break;
     default:
         sItemIndex = -1;

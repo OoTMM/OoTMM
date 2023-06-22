@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/item.h>
 
 #define SET_HANDLER(a, h) do { *(void**)(((char*)(a)) + 0x180) = (h); } while (0)
 
@@ -8,18 +9,13 @@ void EnSa_HandlerNull(Actor* this, GameState_Play* play)
 
 void EnSa_HandlerMeadow_GiveItem(Actor* this, GameState_Play* play)
 {
-    s16 gi;
-
     if (Actor_HasParent(this))
     {
         SetEventChk(EV_OOT_CHK_SONG_SARIA);
         SET_HANDLER(this, EnSa_HandlerNull);
+        return;
     }
-    else
-    {
-        gi = comboOverride(OV_NPC, 0, NPC_OOT_SARIA_SONG, GI_OOT_SONG_SARIA);
-        GiveItem(this, play, gi, 10000.f, 5000.f);
-    }
+    comboGiveItemNpc(this, play, GI_OOT_SONG_SARIA, NPC_OOT_SARIA_SONG, 10000.f, 5000.f);
 }
 
 void EnSa_HandlerMeadow(Actor* this, GameState_Play* play)

@@ -1,21 +1,17 @@
 #include <combo.h>
+#include <combo/item.h>
 
 #define SET_HANDLER(a, h) do { *(void**)(((char*)(a)) + 0x13c) = (h); } while (0)
 
 void EnOkarinaTag_GiveSunSong(Actor* this, GameState_Play* play)
 {
-    s16 gi;
-
     if (Actor_HasParent(this))
     {
         SetEventChk(EV_OOT_CHK_SONG_SUN);
         ActorDestroy(this);
+        return;
     }
-    else
-    {
-        gi = comboOverride(OV_NPC, 0, NPC_OOT_ROYAL_TOMB_SONG, GI_OOT_SONG_SUN);
-        GiveItem(this, play, gi, 10000.f, 500.f);
-    }
+    comboGiveItemNpc(this, play, GI_OOT_SONG_SUN, NPC_OOT_ROYAL_TOMB_SONG, 10000.f, 500.f);
 }
 
 void EnOkarinaTag_HandlerTombRoyal(Actor* this, GameState_Play* play)

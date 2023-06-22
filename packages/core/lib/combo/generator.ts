@@ -8,17 +8,17 @@ import { logic } from './logic';
 import { Monitor, MonitorCallbacks } from './monitor';
 import { Options } from "./options";
 import { pack } from "./pack";
-import { buildPatchfile } from './patch-build';
+import { buildPatchfiles } from './patch-build';
 import { Patchfile } from './patch-build/patchfile';
 import { makeAddresses } from './addresses';
-import { cosmetics, makeCosmetics } from './cosmetics';
+import { cosmetics } from './cosmetics';
 import { applyRandomSettings } from './settings/random';
 
 export type GeneratorOutput = {
-  rom: Buffer;
-  log: string | null;
   hash: string;
-  patch: Buffer | null;
+  log: string | null;
+  roms: Buffer[];
+  patches: Buffer[];
 };
 
 export class Generator {
@@ -36,7 +36,7 @@ export class Generator {
   async run(): Promise<GeneratorOutput> {
     const roms = await decompressGames(this.monitor, { oot: this.oot, mm: this.mm });
     const addresses = makeAddresses(roms);
-    let patchfile: Patchfile;
+    let patchfiles: Patchfile[];
     let log: string | null = null;
 
     /* Apply random settings (if enabled) */
@@ -50,7 +50,7 @@ export class Generator {
       const buildResult = await build(this.opts);
       /* Run logic */
       const logicResult = logic(this.monitor, this.opts);
-      patchfile = buildPatchfile({
+      patchfiles = buildPatchfiles({
         monitor: this.monitor,
         roms,
         addresses,
@@ -61,16 +61,23 @@ export class Generator {
       });
       log = logicResult.log;
     } else {
-      patchfile = new Patchfile(this.opts.patch);
+      patchfiles = [new Patchfile(this.opts.patch)];
     }
 
     const cosmeticsPatchfile = await cosmetics(this.opts, addresses, roms);
 
-    const packedRom = await pack(this.monitor, roms, [patchfile, cosmeticsPatchfile]);
-    let patch: Buffer | null = null;
-    if (!this.opts.patch) {
-      patch = patchfile.toBuffer();
+    /* Build ROM(s) */
+    let packedRoms: Buffer[] = [];
+    if (patchfiles.length === 1 || this.opts.debug) {
+      packedRoms = await Promise.all(patchfiles.map(x => pack(this.monitor, roms, [x, cosmeticsPatchfile])));
     }
-    return { rom: packedRom, log, hash: patchfile.hash, patch };
+
+    /* Build patch(es) */
+    let patches: Buffer[] = [];
+    if (!this.opts.patch) {
+      patches = patchfiles.map(x => x.toBuffer());
+    }
+
+    return { roms: packedRoms, log, hash: patchfiles[0].hash, patches };
   }
 };

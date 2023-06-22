@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/item.h>
 
 int Fishing_HasGivenItem(Actor* this)
 {
@@ -17,22 +18,25 @@ PATCH_CALL(0x80a427ac, Fishing_HasGivenItem);
 
 void Fishing_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
 {
+    int npc;
+
+    npc = -1;
     if (gSave.age == AGE_CHILD)
     {
         if (gOotExtraFlags.fishingChild)
             gi = GI_OOT_RUPEE_BLUE;
         else
-            gi = comboOverride(OV_NPC, 0, NPC_OOT_FISH_CHILD, gi);
+            npc = NPC_OOT_FISH_CHILD;
     }
     else
     {
         if (gOotExtraFlags.fishingAdult)
             gi = GI_OOT_RUPEE_BLUE;
         else
-            gi = comboOverride(OV_NPC, 0, NPC_OOT_FISH_ADULT, gi);
+            npc = NPC_OOT_FISH_ADULT;
     }
 
-    GiveItem(this, play, gi, a, b);
+    comboGiveItemNpc(this, play, gi, npc, a, b);
 }
 
 PATCH_CALL(0x80a42644, Fishing_GiveItem);

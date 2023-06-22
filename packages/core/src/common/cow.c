@@ -89,6 +89,9 @@ static void EnCow_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, f
 {
     int id;
     Actor_Player* link;
+    ComboItemQuery q = ITEM_QUERY_INIT;
+
+    q.gi = gi;
 
     /* Make sure any dialog is closed */
     link = GET_LINK(play);
@@ -101,15 +104,15 @@ static void EnCow_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, f
     if (id != -1)
     {
         sCowID = id;
-        gi = comboOverride(OV_COW, 0, id, gi);
+        q.ovType = OV_COW;
+        q.id = id;
+        q.giRenew = RECOVERY_HEART;
         if (gCowFlags & (1 << id))
-        {
-            gi = comboRenewable(gi, RECOVERY_HEART);
-        }
+            q.ovFlags |= OVF_RENEW;
     }
 
     /* Give the item */
-    GiveItem(this, play, gi, 10000.f, 10000.f);
+    comboGiveItem(this, play, &q, 10000.f, 10000.f);
 }
 
 static int EnCow_HasGivenItem(Actor* this)

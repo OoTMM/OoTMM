@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/item.h>
 
 void EnZl4_Update6(Actor* actor, GameState_Play* play)
 {
@@ -25,36 +26,26 @@ void EnZl4_Update5(Actor* actor, GameState_Play* play)
 
 void EnZl4_Update4(Actor* actor, GameState_Play* play)
 {
-    s16 gi;
-
     if (Actor_HasParent(actor))
     {
         actor->attachedA = NULL;
         EnZl4_Update5(actor, play);
         actor->update = EnZl4_Update5;
+        return;
     }
-    else
-    {
-        gi = comboOverride(OV_NPC, 0, NPC_OOT_ZELDA_SONG, GI_OOT_SONG_ZELDA);
-        GiveItem(actor, play, gi, 10000.f, 400.f);
-    }
+    comboGiveItemNpc(actor, play, GI_OOT_SONG_ZELDA, NPC_OOT_ZELDA_SONG, 10000.f, 400.f);
 }
 
 void EnZl4_Update3(Actor* actor, GameState_Play* play)
 {
-    s16 gi;
-
     if (Actor_HasParent(actor))
     {
         actor->attachedA = NULL;
         EnZl4_Update4(actor, play);
         actor->update = EnZl4_Update4;
+        return;
     }
-    else
-    {
-        gi = comboOverride(OV_NPC, 0, NPC_OOT_ZELDA_LETTER, GI_OOT_ZELDA_LETTER);
-        GiveItem(actor, play, gi, 10000.f, 400.f);
-    }
+    comboGiveItemNpc(actor, play, GI_OOT_ZELDA_LETTER, NPC_OOT_ZELDA_LETTER, 10000.f, 400.f);
 }
 
 void EnZl4_Update2(Actor* actor, GameState_Play* play)

@@ -1,16 +1,41 @@
 #include <combo.h>
+#include <combo/item.h>
 
-static s16 EnBox_Item(Actor* this, GameState_Play* play, s16 gi, int progressive)
+static void EnBox_ItemQuery(ComboItemQuery* q, Actor* this, GameState_Play* play, s16 gi, int flags)
 {
+    memset(q, 0, sizeof(*q));
+
+    q->gi = gi;
+    q->ovFlags = flags;
     if (!(play->sceneId == SCE_OOT_TREASURE_SHOP && (this->variable & 0x1f) == 0x0a && gi == -GI_OOT_TC_RUPEE_PURPLE))
-        gi = comboOverrideEx(OV_CHEST, play->sceneId, this->variable & 0x1f, gi, progressive ? OVF_PROGRESSIVE | OVF_DOWNGRADE : 0);
-    return gi;
+    {
+        q->ovType = OV_CHEST;
+        q->sceneId = play->sceneId;
+        q->id = this->variable & 0x1f;
+    }
+    else
+    {
+        q->ovType = OV_NONE;
+    }
+}
+
+static s16 EnBox_Item(Actor* this, GameState_Play* play, s16 gi, int flags)
+{
+    ComboItemQuery q;
+    ComboItemOverride o;
+
+    EnBox_ItemQuery(&q, this, play, gi, flags);
+    comboItemOverride(&o, &q);
+
+    return o.gi;
 }
 
 void EnBox_GiveItem(Actor* actor, GameState_Play* play, s16 gi)
 {
-    gi = EnBox_Item(actor, play, gi, 1);
-    GiveItemDefaultRange(actor, play, gi);
+    ComboItemQuery q;
+
+    EnBox_ItemQuery(&q, actor, play, gi, OVF_PROGRESSIVE | OVF_DOWNGRADE);
+    comboGiveItem(actor, play, &q, 50.f, 10.f);
 }
 
 PATCH_CALL(0x808696bc, &EnBox_GiveItem);

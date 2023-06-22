@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/item.h>
 
 static u8 sIsFirstReward;
 
@@ -19,20 +20,23 @@ PATCH_CALL(0x80963574, EnFu_HasGivenItem);
 
 void EnFu_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
 {
+    int npc;
+
+    npc = -1;
     switch (gi)
     {
     case GI_MM_RUPEE_PURPLE:
         if (!gMmExtraFlags2.honeyDarling)
         {
-            gi = comboOverride(OV_NPC, 0, NPC_MM_HONEY_DARLING_1, gi);
+            npc = NPC_MM_HONEY_DARLING_1;
             sIsFirstReward = 1;
         }
         break;
     case GI_MM_HEART_PIECE:
-        gi = comboOverride(OV_NPC, 0, NPC_MM_HONEY_DARLING_2, gi);
+        npc = NPC_MM_HONEY_DARLING_2;
         break;
     }
-    GiveItem(this, play, gi, a, b);
+    comboGiveItemNpc(this, play, gi, npc, a, b);
 }
 
 PATCH_CALL(0x809635cc, EnFu_GiveItem);

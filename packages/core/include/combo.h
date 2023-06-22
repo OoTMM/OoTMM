@@ -152,6 +152,9 @@ ComboDataHints;
 #define SPECIAL_GANON_BK    3
 #define SPECIAL_MAJORA      4
 
+#define PLAYER_SELF 0x00
+#define PLAYER_ALL  0xff
+
 typedef struct
 {
     u16 flags;
@@ -161,6 +164,8 @@ SpecialCond;
 
 typedef struct
 {
+    u8              uuid[16];
+    u8              playerId;
     u32             mq;
     u8              config[0x40];
     SpecialCond     special[5];
@@ -199,6 +204,7 @@ void comboCreateSaveMM(void);
 NORETURN void comboGameSwitch(GameState_Play* play, s32 entrance);
 
 /* Override */
+#define OV_NONE         -1
 #define OV_CHEST        0
 #define OV_COLLECTIBLE  1
 #define OV_NPC          2
@@ -210,18 +216,17 @@ NORETURN void comboGameSwitch(GameState_Play* play, s32 entrance);
 
 #define OVF_PROGRESSIVE       (1 << 0)
 #define OVF_DOWNGRADE         (1 << 1)
-
-s16 comboOverride(int type, u16 sceneId, u16 id, s16 gi);
-s16 comboOverrideEx(int type, u16 sceneId, u16 id, s16 gi, int flags);
+#define OVF_RENEW             (1 << 2)
+#define OVF_PRECOND           (1 << 3)
 
 /* Text */
 int  comboMultibyteCharSize(u8 c);
 void comboTextHijackItem(GameState_Play* play, s16 gi, int count);
-void comboTextHijackItemShop(GameState_Play* play, s16 gi, s16 price, int confirm);
+void comboTextHijackItemEx(GameState_Play* play, const ComboItemOverride* o, int count);
+void comboTextHijackItemShop(GameState_Play* play, const ComboItemOverride* o, s16 price, int confirm);
 
 #if defined(GAME_OOT)
 void comboTextHijackDungeonRewardHints(GameState_Play* play, int base, int count);
-void comboTextHijackSkullReward(GameState_Play* play, s16 gi, int count);
 void comboTextHijackLightArrows(GameState_Play* play);
 #else
 void comboTextHijackDungeonRewardHints(GameState_Play* play, int hint);
@@ -395,12 +400,16 @@ extern u8 gCustomOcarinaSong;
 int comboSpecialCond(int special);
 int comboGoalCond(void);
 
+typedef struct ComboItemQuery ComboItemQuery;
+
 /* Global data */
 typedef struct
 {
-    u16 initialEntrance;
-    u8  inGrotto;
-    u8  isCreditWarp;
+    u16                     initialEntrance;
+    u8                      inGrotto;
+    u8                      isCreditWarp;
+    const ComboItemQuery*   itemQuery;
+    const ComboItemQuery*   itemQueryBox;
 }
 ComboGlobal;
 

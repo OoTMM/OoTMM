@@ -105,6 +105,9 @@ void hookPlay_Init(GameState_Play* play)
 
     isEndOfGame = 0;
 
+    /* Init */
+    gActorCustomTriggers = NULL;
+
     /* Handle transition override */
     if (g.inGrotto)
         gIsEntranceOverride = 0;
@@ -180,6 +183,7 @@ void hookPlay_Init(GameState_Play* play)
     {
         gLastScene = play->sceneId;
     }
+    CustomTriggers_Spawn(play);
     comboSpawnItemGivers(play);
     comboSpawnCustomWarps(play);
 

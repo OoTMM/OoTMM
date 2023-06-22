@@ -1,24 +1,29 @@
 #include <combo.h>
+#include <combo/item.h>
 
 #define SET_HANDLER(a, h) do { *(void**)(((char*)(a)) + 0x274) = (h); } while (0)
 
 void EnMk_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
 {
+    int npc;
+
+    npc = -1;
+
     if (!(GET_LINK(play)->state & PLAYER_ACTOR_STATE_GET_ITEM))
         Message_Close(play);
 
     switch (gi)
     {
     case GI_OOT_HEART_PIECE:
-        gi = comboOverride(OV_NPC, 0, NPC_OOT_LABORATORY_DIVE, gi);
+        npc = NPC_OOT_LABORATORY_DIVE;
         break;
     case GI_OOT_EYE_DROPS:
-        gi = comboOverride(OV_NPC, 0, NPC_OOT_TRADE_EYE_DROPS, gi);
+        npc = NPC_OOT_TRADE_EYE_DROPS;
         comboRemoveTradeItemAdult(XITEM_OOT_ADULT_EYEBALL_FROG);
         break;
     }
 
-    GiveItem(this, play, gi, a, b);
+    comboGiveItemNpc(this, play, gi, npc, a, b);
 }
 
 PATCH_CALL(0x80aac7e4, EnMk_GiveItem);

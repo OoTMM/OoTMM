@@ -7,10 +7,10 @@ void Player_UseItemWrapper(GameState_Play* play, Actor_Player* link, s16 itemId)
     switch (itemId)
     {
     case ITEM_OOT_WEIRD_EGG:
-        gActorCustomTriggers->events.weirdEgg = 1;
+        gComboTriggersData.events.weirdEgg = 1;
         break;
     case ITEM_OOT_POCKET_EGG:
-        gActorCustomTriggers->events.pocketEgg = 1;
+        gComboTriggersData.events.pocketEgg = 1;
         break;
     default:
         Player_UseItem = OverlayAddr(0x80834000);
@@ -23,6 +23,8 @@ PATCH_CALL(0x8083212c, Player_UseItemWrapper);
 
 void Player_UpdateWrapper(Actor_Player* this, GameState_Play* play)
 {
+    CustomTriggers_Spawn(play);
+
     Player_Update(this, play);
     comboDpadUpdate(play);
     comboDpadUse(play, DPF_EQUIP);

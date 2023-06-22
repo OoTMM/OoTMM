@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/item.h>
 
 static u8 sIsMaksPostman;
 
@@ -13,15 +14,18 @@ void EnPm_AfterGivingItem(Actor* this)
 
 void EnPm_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
 {
+    int npc;
+
+    npc = -1;
     if (gi == GI_MM_MASK_POSTMAN)
     {
         if (gMmExtraFlags2.maskPostman)
             gi = GI_MM_RECOVERY_HEART;
         else
         {
-            gi = comboOverride(OV_NPC, 0, NPC_MM_MASK_POSTMAN, gi);
+            npc = NPC_MM_MASK_POSTMAN;
             sIsMaksPostman = 1;
         }
     }
-    GiveItem(this, play, gi, a, b);
+    comboGiveItemNpc(this, play, gi, npc, a, b);
 }

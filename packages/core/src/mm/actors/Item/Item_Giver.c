@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/item.h>
 
 static int ItemGiver_Common(Actor* this, GameState_Play* play, s16 gi)
 {
@@ -7,12 +8,9 @@ static int ItemGiver_Common(Actor* this, GameState_Play* play, s16 gi)
         ActorDestroy(this);
         return 1;
     }
-    else
-    {
-        gi = comboOverride(OV_NPC, 0, this->variable, gi);
-        GiveItem(this, play, gi, 10000.f, 5000.f);
-        return 0;
-    }
+
+    comboGiveItemNpc(this, play, gi, this->variable, 10000.f, 5000.f);
+    return 0;
 }
 
 static void ItemGiver_Init(Actor* this, GameState_Play* play)

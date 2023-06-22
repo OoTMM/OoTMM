@@ -1,6 +1,17 @@
 #include <combo.h>
+#include <combo/item.h>
 
 #define SET_HANDLER(a, h) do { *(void**)(((char*)(a)) + 0x280) = (h); } while (0)
+
+static void EnMk_ItemQuery(ComboItemQuery* q, int flags)
+{
+    bzero(q, sizeof(*q));
+
+    q->ovType = OV_NPC;
+    q->gi = GI_MM_SONG_ZORA;
+    q->id = NPC_MM_SONG_ZORA;
+    q->ovFlags = flags;
+}
 
 void EnMk_HandlerNull(Actor* this, GameState_Play* play)
 {
@@ -8,7 +19,7 @@ void EnMk_HandlerNull(Actor* this, GameState_Play* play)
 
 void EnMk_HandlerZoraEggs(Actor* this, GameState_Play* play)
 {
-    s16 gi;
+    ComboItemQuery q;
 
     if (gSave.playerForm != MM_PLAYER_FORM_ZORA || Actor_HasParent(this))
     {
@@ -16,26 +27,26 @@ void EnMk_HandlerZoraEggs(Actor* this, GameState_Play* play)
         return;
     }
 
-    gi = comboOverride(OV_NPC, 0, NPC_MM_SONG_ZORA, GI_MM_SONG_ZORA);
-    GiveItem(this, play, gi, 10000.f, 10000.f);
+    EnMk_ItemQuery(&q, OVF_PROGRESSIVE | OVF_DOWNGRADE);
+    comboGiveItem(this, play, &q, 10000.f, 10000.f);
 }
 
 PATCH_FUNC(0x80959d28, EnMk_HandlerZoraEggs);
 
 static void hintZoraEggs(GameState_Play* play)
 {
-    s16 gi;
+    ComboItemQuery q;
     char* b;
     char* start;
 
-    gi = comboOverrideEx(OV_NPC, 0, NPC_MM_SONG_ZORA, GI_MM_SONG_ZORA, 0);
+    EnMk_ItemQuery(&q, 0);
     b = play->textBuffer;
     comboTextAppendHeader(&b);
     start = b;
     comboTextAppendStr(&b, "If you can bring all of the " TEXT_COLOR_BLUE "Zora Eggs ");
     comboTextAppendClearColor(&b);
     comboTextAppendStr(&b, "here, you will get ");
-    comboTextAppendItemName(&b, gi, TF_PREPOS | TF_PROGRESSIVE);
+    comboTextAppendItemNameQuery(&b, &q, TF_PREPOS | TF_PROGRESSIVE);
     comboTextAppendStr(&b, "!" TEXT_SIGNAL TEXT_END);
     comboTextAutoLineBreaks(start);
 }

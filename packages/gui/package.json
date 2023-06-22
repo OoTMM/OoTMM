@@ -18,13 +18,14 @@
   },
   "homepage": "https://github.com/OoTMM/gui#readme",
   "dependencies": {
-    "@ootmm/core": "*",
     "@fortawesome/fontawesome-svg-core": "^6.3.0",
     "@fortawesome/free-solid-svg-icons": "^6.3.0",
     "@fortawesome/react-fontawesome": "^0.2.0",
+    "@ootmm/core": "*",
     "buffer": "^6.0.3",
     "core-js": "^3.26.1",
     "crypto-browserify": "^3.12.0",
+    "jszip": "^3.10.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-select": "^5.7.2",
@@ -61,17 +62,32 @@
   },
   "nx": {
     "namedInputs": {
-      "default": ["{projectRoot}/**/*"],
-      "version": [{"env": "VERSION"}]
+      "default": [
+        "{projectRoot}/**/*"
+      ],
+      "version": [
+        {
+          "env": "VERSION"
+        }
+      ]
     },
     "targets": {
       "build": {
-        "inputs": ["default", "version"],
-        "outputs": ["dist"],
-        "dependsOn": ["^build"]
+        "inputs": [
+          "default",
+          "version"
+        ],
+        "outputs": [
+          "dist"
+        ],
+        "dependsOn": [
+          "^build"
+        ]
       },
       "serve": {
-        "dependsOn": ["^build"]
+        "dependsOn": [
+          "^build"
+        ]
       }
     }
   }

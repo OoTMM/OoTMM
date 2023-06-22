@@ -1,12 +1,16 @@
 #include <combo.h>
+#include <combo/item.h>
 
 void EnBjt_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
 {
+    int npc;
+
+    npc = -1;
     if (gi == GI_MM_HEART_PIECE)
     {
-        gi = comboOverride(OV_NPC, 0, NPC_MM_TOILET_HEART_PIECE, gi);
+        npc = NPC_MM_TOILET_HEART_PIECE;
     }
-    GiveItem(actor, play, gi, a, b);
+    comboGiveItemNpc(actor, play, gi, npc, a, b);
 }
 
 void EnBjt_RemoveItem(s16 itemId)

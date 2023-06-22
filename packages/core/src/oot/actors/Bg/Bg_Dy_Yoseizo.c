@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/item.h>
 
 static const s16 kGreatFairyRewards[] = {
     GI_OOT_MAGIC_UPGRADE,
@@ -21,7 +22,6 @@ static const u8 kGreatFairyNPCs[] = {
 void BgDyYoseizo_Update(Actor* this, GameState_Play* play)
 {
     u8 index;
-    s16 gi;
     u8 mask;
 
     if (GetSwitchFlag(play, 0x38))
@@ -45,8 +45,7 @@ void BgDyYoseizo_Update(Actor* this, GameState_Play* play)
             return;
         }
 
-        gi = comboOverride(OV_NPC, 0, kGreatFairyNPCs[index], kGreatFairyRewards[index]);
-        GiveItem(this, play, gi, 400.f, 400.f);
+        comboGiveItemNpc(this, play, kGreatFairyRewards[index], kGreatFairyNPCs[index], 400.f, 400.f);
     }
 }
 

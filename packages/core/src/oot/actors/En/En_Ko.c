@@ -1,12 +1,12 @@
 #include <combo.h>
+#include <combo/item.h>
 
 void EnKo_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
 {
     if (!(GET_LINK(play)->state & PLAYER_ACTOR_STATE_GET_ITEM))
         Message_Close(play);
-    gi = comboOverride(OV_NPC, 0, NPC_OOT_TRADE_POACHER_SAW, gi);
     comboRemoveTradeItemAdult(XITEM_OOT_ADULT_ODD_POTION);
-    GiveItem(actor, play, gi, a, b);
+    comboGiveItemNpc(actor, play, gi, NPC_OOT_TRADE_POACHER_SAW, a, b);
 }
 
 PATCH_CALL(0x80ad43ec, EnKo_GiveItem);

@@ -1,16 +1,34 @@
 #include <combo.h>
+#include <combo/item.h>
 
-static s16 EnBox_Item(Actor* this, GameState_Play* play, s16 gi, int progressive)
+static void EnBox_ItemQuery(ComboItemQuery* q, Actor* this, GameState_Play* play, s16 gi, int flags)
 {
+    memset(q, 0, sizeof(*q));
+
+    q->gi = gi;
+    q->ovFlags = flags;
     if (play->sceneId == SCE_MM_TREASURE_SHOP && gi == -GI_MM_HEART_PIECE)
     {
-        gi = comboOverrideEx(OV_NPC, 0, NPC_MM_CHEST_GAME, gi, progressive ? OVF_PROGRESSIVE | OVF_DOWNGRADE : 0);
+        q->ovType = OV_NPC;
+        q->id = NPC_MM_CHEST_GAME;
     }
     else
     {
-        gi = comboOverrideEx(OV_CHEST, play->sceneId, this->variable & 0x1f, gi, progressive ? OVF_PROGRESSIVE | OVF_DOWNGRADE : 0);
+        q->ovType = OV_CHEST;
+        q->sceneId = play->sceneId;
+        q->id = this->variable & 0x1f;
     }
-    return gi;
+}
+
+static s16 EnBox_Item(Actor* this, GameState_Play* play, s16 gi, int flags)
+{
+    ComboItemQuery q;
+    ComboItemOverride ov;
+
+    EnBox_ItemQuery(&q, this, play, gi, flags);
+    comboItemOverride(&ov, &q);
+
+    return ov.gi;
 }
 
 static s16 EnBox_GetGI(Actor* this)
@@ -23,8 +41,10 @@ static s16 EnBox_GetGI(Actor* this)
 
 void EnBox_GiveItemDefaultRange(Actor* actor, GameState_Play* play, s16 gi)
 {
-    gi = EnBox_Item(actor, play, gi, 1);
-    GiveItemDefaultRange(actor, play, gi);
+    ComboItemQuery q;
+
+    EnBox_ItemQuery(&q, actor, play, gi, OVF_DOWNGRADE | OVF_PROGRESSIVE);
+    comboGiveItem(actor, play, &q, 50.f, 10.f);
 }
 
 PATCH_CALL(0x80868fe0, EnBox_GiveItemDefaultRange);

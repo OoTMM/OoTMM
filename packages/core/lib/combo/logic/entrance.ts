@@ -8,6 +8,7 @@ import { Monitor } from '../monitor';
 import { LogicEntranceError, LogicError } from './error';
 import { Expr, exprAnd, exprTrue } from './expr';
 import { Game } from '../config';
+import { makeLocation } from './locations';
 
 type Entrance = {
   from: string;
@@ -118,7 +119,7 @@ export class LogicPassEntrances {
     }
 
     /* Check if the new world is valid */
-    const pathfinderState = this.pathfinder.run(null, { ignoreItems: true, recursive: true });
+    const pathfinderState = this.pathfinder.run(null, { singleWorld: true, ignoreItems: true, recursive: true });
 
     /* Restore the override */
     delete this.world.areas[from.from].exits[to.to];
@@ -135,12 +136,15 @@ export class LogicPassEntrances {
       locations = Array.from(this.world.dungeons[dungeon]);
     }
 
+    /* Turn into world 0 locations */
+    const worldLocs = locations.map(l => makeLocation(l, 0));
+
     /* Check if the new world is valid */
-    if (!(locations.every(l => pathfinderState.locations.has(l))))
+    if (!(worldLocs.every(l => pathfinderState.locations.has(l))))
       return false;
 
     /* Ganon's tower check */
-    if (dungeon === 'Tower' && ['ganon', 'both'].includes(this.input.settings.goal) && !pathfinderState.events.has('OOT_GANON'))
+    if (dungeon === 'Tower' && ['ganon', 'both'].includes(this.input.settings.goal) && !pathfinderState.ws[0].events.has('OOT_GANON'))
       return false;
 
     return true;

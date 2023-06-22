@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/item.h>
 
 int EnHs_HasGivenItem(Actor* actor)
 {
@@ -16,16 +17,19 @@ PATCH_CALL(0x809530a4, EnHs_HasGivenItem);
 
 void EnHs_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
 {
+    int npc;
+
+    npc = -1;
     if (gMmExtraFlags.maskBunny)
     {
         gi = GI_MM_RUPEE_RED;
     }
     else
     {
-        gi = comboOverride(OV_NPC, 0, NPC_MM_MASK_BUNNY, GI_MM_MASK_BUNNY);
+        npc = NPC_MM_MASK_BUNNY;
     }
 
-    GiveItem(actor, play, gi, a, b);
+    comboGiveItemNpc(actor, play, gi, npc, a, b);
 }
 
 PATCH_CALL(0x8095314c, EnHs_GiveItem);

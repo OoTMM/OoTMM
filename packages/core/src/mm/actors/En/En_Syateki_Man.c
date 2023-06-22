@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/item.h>
 
 int EnSyatekiMan_HasGivenItemSwamp(Actor* this, GameState_Play* play)
 {
@@ -46,6 +47,7 @@ void EnSyatekiMan_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, 
     Actor_Player* link;
     int npcQuiver;
     int npcHeartPiece;
+    int npc;
 
     link = GET_LINK(play);
     if (link->state & PLAYER_ACTOR_STATE_GET_ITEM)
@@ -67,13 +69,16 @@ void EnSyatekiMan_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, 
     case GI_MM_BOW:
     case GI_MM_QUIVER2:
     case GI_MM_QUIVER3:
-        gi = comboOverride(OV_NPC, 0, npcQuiver, gi);
+        npc = npcQuiver;
         break;
     case GI_MM_HEART_PIECE:
-        gi = comboOverride(OV_NPC, 0, npcHeartPiece, gi);
+        npc = npcHeartPiece;
+        break;
+    default:
+        npc = -1;
         break;
     }
-    GiveItem(actor, play, gi, a, b);
+    comboGiveItemNpc(actor, play, gi, npc, a, b);
 }
 
 PATCH_CALL(0x809c7b64, EnSyatekiMan_GiveItem);

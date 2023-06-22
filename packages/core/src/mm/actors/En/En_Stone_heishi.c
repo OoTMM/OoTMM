@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/item.h>
 
 int EnStoneheishi_HasGivenItem(Actor* actor)
 {
@@ -16,15 +17,14 @@ PATCH_CALL(0x80bc9d4c, EnStoneheishi_HasGivenItem);
 
 void EnStoneheishi_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
 {
+    int npc;
+
+    npc = -1;
     if (gMmExtraFlags.maskStone)
-    {
         gi = GI_MM_RUPEE_BLUE;
-    }
     else
-    {
-        gi = comboOverride(OV_NPC, 0, NPC_MM_MASK_STONE, GI_MM_MASK_STONE);
-    }
-    GiveItem(actor, play, gi, a, b);
+        npc = NPC_MM_MASK_STONE;
+    comboGiveItemNpc(actor, play, gi, npc, a, b);
 }
 
 PATCH_CALL(0x80bc9cd4, EnStoneheishi_GiveItem);

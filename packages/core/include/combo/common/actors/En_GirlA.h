@@ -39,4 +39,10 @@ _Static_assert(sizeof(Actor_EnGirlA) == 0x1c8, "OoT Actor_EnGirlA size is wrong"
 _Static_assert(sizeof(Actor_EnGirlA) == 0x1d0, "MM Actor_EnGirlA size is wrong");
 #endif
 
+typedef struct ComboItemQuery ComboItemQuery;
+typedef struct ComboItemOverride ComboItemOverride;
+
+void EnGirlA_ItemQuery(ComboItemQuery* q, Actor_EnGirlA* girlA, int flags);
+void EnGirlA_ItemOverride(ComboItemOverride* o, Actor_EnGirlA* girlA, int flags);
+
 #endif

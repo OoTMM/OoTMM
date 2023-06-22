@@ -54,7 +54,7 @@ function asmPatchGroups(settings: Settings) {
   return keys.filter((k) => groups[k]);
 }
 
-export function buildPatchfile(args: BuildPatchfileIn): Patchfile {
+export function buildPatchfiles(args: BuildPatchfileIn): Patchfile[] {
   args.monitor.log("Building Patchfile");
   const file = new Patchfile(args.logic.hash);
   const groups = asmPatchGroups(args.settings);
@@ -84,7 +84,12 @@ export function buildPatchfile(args: BuildPatchfileIn): Patchfile {
   file.addPatch('global', 0x3c, Buffer.from('ZZE'));
 
   /* Patch the randomized data */
-  patchRandomizer(args.logic, args.settings, file);
+  const patches: Patchfile[] = [];
+  for (let world = 0; world < args.settings.players; ++world) {
+    const p = file.dup();
+    patchRandomizer(world, args.logic, args.settings, p);
+    patches.push(p);
+  }
 
-  return file;
+  return patches;
 };

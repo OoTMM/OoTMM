@@ -49,6 +49,8 @@
 #define TF_SIGNAL       (1 << 3)
 
 typedef struct GameState_Play GameState_Play;
+typedef struct ComboItemQuery ComboItemQuery;
+typedef struct ComboItemOverride ComboItemOverride;
 
 void comboTextAutoLineBreaks(char* buffer);
 void comboTextAppendStr(char** dst, const char* src);
@@ -58,6 +60,8 @@ void comboTextAppendShopHeader2(char** b, s16 price, s16 price2);
 void comboTextAppendClearColor(char** b);
 void comboTextAppendNum(char** b, int num);
 void comboTextAppendItemName(char** b, s16 gi, int flags);
+void comboTextAppendItemNameQuery(char** b, const ComboItemQuery* q, int flags);
+void comboTextAppendItemNameOverride(char** b, const ComboItemOverride* o, int flags);
 void comboTextAppendRegionName(char** b, u8 regionId, int flags);
 void comboTextAppendCheckName(char** b, u8 checkId);
 void comboTextAppendNpcReward(char** b, s16 npcId, s16 gi);

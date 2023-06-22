@@ -43,6 +43,16 @@ const makeOptions = async (args: string[]): Promise<OptionsInput> => {
   return opts;
 };
 
+function writeFiles(data: (Buffer | string)[], name: string, ext: string) {
+  if (data.length === 1) {
+    return [fs.writeFile(`${name}.${ext}`, data[0])];
+  }
+
+  return data.map((x, i) => {
+    return fs.writeFile(`${name}-${i+1}.${ext}`, x);
+  });
+}
+
 const main = async () => {
   const opts = await makeOptions(process.argv.slice(2));
   const [oot, mm] = await Promise.all([
@@ -50,15 +60,16 @@ const main = async () => {
     fs.readFile('../../roms/mm.z64'),
   ]);
   const gen = generate({ oot, mm, opts });
-  const { rom, log, hash, patch } = await gen.run();
+  const { roms, log, hash, patches } = await gen.run();
   await fs.mkdir('out', { recursive: true });
   const promises: Promise<unknown>[] = [];
   const suffix =  opts.debug ? "" : `-${hash}`
-  promises.push(fs.writeFile(`out/OoTMM${suffix}.z64`, rom));
+
+  promises.push(...writeFiles(roms, `out/OoTMM${suffix}`, 'z64'));
+  promises.push(...writeFiles(patches, `out/OoTMM-Patch${suffix}`, 'ootmm'));
   if (log)
-    promises.push(fs.writeFile(`out/OoTMM-spoiler${suffix}.txt`, log));
-  if (patch)
-    promises.push(fs.writeFile(`out/OoTMM-Patch${suffix}.ootmm`, patch));
+    promises.push(...writeFiles([log], `out/OoTMM-spoiler${suffix}`, 'txt'));
+
   return Promise.all(promises);
 }
 

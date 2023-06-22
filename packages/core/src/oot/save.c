@@ -113,7 +113,7 @@ static void applyStartingItems(void)
     slice = 0;
     for (;;)
     {
-        DMARomToRam((0x03feb000 + slice * sizeof(gStartingItemsBuffer)) | PI_DOM1_ADDR2, gStartingItemsBuffer, sizeof(gStartingItemsBuffer));
+        DMARomToRam((0x03ff3000 + slice * sizeof(gStartingItemsBuffer)) | PI_DOM1_ADDR2, gStartingItemsBuffer, sizeof(gStartingItemsBuffer));
         slice++;
         for (int i = 0; i < ARRAY_SIZE(gStartingItemsBuffer); i += 2)
         {

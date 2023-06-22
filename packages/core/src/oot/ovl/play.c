@@ -223,6 +223,9 @@ void hookPlay_Init(GameState_Play* play)
 {
     s32 override;
 
+    /* Init */
+    gActorCustomTriggers = NULL;
+
     /* Register play */
     gPlay = play;
 
@@ -301,6 +304,9 @@ void hookPlay_Init(GameState_Play* play)
         comboGameSwitch(play, 0xd800);
         return;
     }
+
+    /* Spawn Custom Triggers */
+    CustomTriggers_Spawn(play);
 
     /* Title screen transition skip */
     if (gComboCtx.valid)

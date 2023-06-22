@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/net.h>
 
 ComboGlobal g;
 
@@ -14,6 +15,7 @@ void comboInit(void)
     comboInitHints();
     comboInitEntrances();
     comboMenuInit();
+    netInit();
 }
 
 ALIGNED(16) ComboData gComboData;

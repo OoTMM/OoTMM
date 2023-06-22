@@ -1,6 +1,6 @@
 import { Monitor } from '../monitor';
 import { Settings } from '../settings';
-import { isOwlStatue, isSmallKeyHideout, isTingleMap } from './items';
+import { isOwlStatue, isSmallKeyHideout, isTingleMap, makeItem } from './items';
 import { MM_MERCHANTS, MM_SCRUBS, ONE_TIME_SHOP_CHECKS, OOT_ONE_TIME_SCRUBS } from './locations';
 import { World } from './world';
 
@@ -25,11 +25,11 @@ export class LogicPassFixer {
       const check = this.state.world.checks[loc];
       const { type, item, game } = check;
 
-      if (isTingleMap(item) && settings.tingleShuffle === 'vanilla') {
+      if (isTingleMap(makeItem(item)) && settings.tingleShuffle === 'vanilla') {
         this.fixedLocations.add(loc);
       }
 
-      if (isOwlStatue(item) && settings.owlShuffle === 'none') {
+      if (isOwlStatue(makeItem(item)) && settings.owlShuffle === 'none') {
         this.fixedLocations.add(loc);
       }
 
@@ -77,7 +77,7 @@ export class LogicPassFixer {
         this.fixedLocations.add(loc);
       }
 
-      if (isSmallKeyHideout(item) && this.state.settings.smallKeyShuffleHideout === 'vanilla') {
+      if (isSmallKeyHideout(makeItem(item)) && this.state.settings.smallKeyShuffleHideout === 'vanilla') {
         this.fixedLocations.add(loc);
       }
     }

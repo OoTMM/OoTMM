@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/item.h>
 
 static int checkSetEvent(Actor* actor, int event)
 {
@@ -18,20 +19,14 @@ static int checkSetEvent(Actor* actor, int event)
 
 static void EnXc_Update_ForestMeadow(Actor* actor, GameState_Play* play)
 {
-    s16 gi;
-
     if (checkSetEvent(actor, EV_OOT_CHK_SONG_TP_FOREST))
         return;
     if (GET_LINK(play)->base.position.z < -2225.f)
-    {
-        gi = comboOverride(OV_NPC, 0, NPC_OOT_SHEIK_FOREST, GI_OOT_SONG_TP_FOREST);
-        GiveItem(actor, play, gi, 10000.f, 50.f);
-    }
+        comboGiveItemNpc(actor, play, GI_OOT_SONG_TP_FOREST, NPC_OOT_SHEIK_FOREST, 10000.f, 50.f);
 }
 
 static void EnXc_Update_DeathMountainCrater(Actor* actor, GameState_Play* play)
 {
-    s16 gi;
     float x;
     float y;
     float z;
@@ -52,13 +47,11 @@ static void EnXc_Update_DeathMountainCrater(Actor* actor, GameState_Play* play)
     if (z <= -446.f || z >= -246.f)
         return;
 
-    gi = comboOverride(OV_NPC, 0, NPC_OOT_SHEIK_FIRE, GI_OOT_SONG_TP_FIRE);
-    GiveItem(actor, play, gi, 10000.f, 50.f);
+    comboGiveItemNpc(actor, play, GI_OOT_SONG_TP_FIRE, NPC_OOT_SHEIK_FIRE, 10000.f, 50.f);
 }
 
 static void EnXc_Update_IceCavern(Actor* actor, GameState_Play* play)
 {
-    s16 gi;
     Actor_Player* link;
     static int lagFrame = 0;
 
@@ -76,8 +69,7 @@ static void EnXc_Update_IceCavern(Actor* actor, GameState_Play* play)
         {
             if (lagFrame)
             {
-                gi = comboOverride(OV_NPC, 0, NPC_OOT_SHEIK_WATER, GI_OOT_SONG_TP_WATER);
-                GiveItem(actor, play, gi, 10000.f, 5000.f);
+                comboGiveItemNpc(actor, play, GI_OOT_SONG_TP_WATER, NPC_OOT_SHEIK_WATER, 10000.f, 5000.f);
                 lagFrame = 0;
             }
             lagFrame++;
@@ -87,16 +79,13 @@ static void EnXc_Update_IceCavern(Actor* actor, GameState_Play* play)
 
 static void EnXc_Update_TempleOfTime(Actor* this, GameState_Play* play)
 {
-    s16 gi;
-
     if (!gSave.inventory.quest.medallionForest || GetEventChk(EV_OOT_CHK_SONG_TP_LIGHT))
         ActorDestroy(this);
 
     if (checkSetEvent(this, EV_OOT_CHK_SONG_TP_LIGHT))
         return;
 
-    gi = comboOverride(OV_NPC, 0, NPC_OOT_SHEIK_LIGHT, GI_OOT_SONG_TP_LIGHT);
-    GiveItem(this, play, gi, 10000.f, 50.f);
+    comboGiveItemNpc(this, play, GI_OOT_SONG_TP_LIGHT, NPC_OOT_SHEIK_LIGHT, 10000.f, 50.f);
 }
 
 static void EnXc_Init(Actor* this, GameState_Play* play)

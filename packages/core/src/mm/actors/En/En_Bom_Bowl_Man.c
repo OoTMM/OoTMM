@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/item.h>
 
 int EnBomBowlMan_HasGivenItem(Actor* this)
 {
@@ -14,11 +15,14 @@ PATCH_CALL(0x809c59fc, EnBomBowlMan_HasGivenItem);
 
 void EnBomBowlMan_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
 {
+    int npc;
+
+    npc = -1;
     if (gMmExtraFlags2.notebook)
         gi = GI_MM_RECOVERY_HEART;
     else
-        gi = comboOverride(OV_NPC, 0, NPC_MM_BOMBER_NOTEBOOK, gi);
-    GiveItem(this, play, gi, a, b);
+        npc = NPC_MM_BOMBER_NOTEBOOK;
+    comboGiveItemNpc(this, play, gi, npc, a, b);
 }
 
 PATCH_CALL(0x809c59c0, EnBomBowlMan_GiveItem);

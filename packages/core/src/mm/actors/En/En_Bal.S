@@ -18,8 +18,9 @@ PATCH_START 0x80a62614
 PATCH_END
 
 /* Do not run the map update */
-PATCH_START 0x80a62ee0
-  nop
+PATCH_START 0x80a62ed0
+  jr ra
+   nop
 PATCH_END
 
 /* Relocs */

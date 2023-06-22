@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/item.h>
 
 #define SET_HANDLER(a, h) do { *(void**)(((char*)(a)) + 0x1d4) = (h); } while (0)
 
@@ -8,8 +9,6 @@ void EnGk_HandlerNull(void)
 
 void EnGk_LearnSongLullaby(Actor* this, GameState_Play* play)
 {
-    s16 gi;
-
     if (gMmExtraFlags.songGoron)
     {
         SET_HANDLER(this, EnGk_HandlerNull);
@@ -23,8 +22,7 @@ void EnGk_LearnSongLullaby(Actor* this, GameState_Play* play)
         return;
     }
 
-    gi = comboOverride(OV_NPC, 0, NPC_MM_GORON_BABY, GI_MM_SONG_GORON);
-    GiveItem(this, play, gi, 9999.f, 9999.f);
+    comboGiveItemNpc(this, play, GI_MM_SONG_GORON, NPC_MM_GORON_BABY, 9999.f, 9999.f);
 }
 
 void EnGk_CheckLullaby(Actor* this, GameState_Play* play)
@@ -54,13 +52,14 @@ PATCH_FUNC(0x80b51410, EnGk_CheckLullaby);
 
 void EnGk_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
 {
+    int npc;
+
+    npc = -1;
     if (gi == GI_MM_BOTTLED_GOLD_DUST)
-    {
-        gi = comboOverride(OV_NPC, 0, NPC_MM_GORON_RACE, gi);
-    }
+        npc = NPC_MM_GORON_RACE;
     else
         gi = GI_MM_RECOVERY_HEART;
-    GiveItem(actor, play, gi, a, b);
+    comboGiveItemNpc(actor, play, gi, npc, a, b);
 }
 
 PATCH_CALL(0x80b525c8, EnGk_GiveItem);

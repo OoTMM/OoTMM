@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/item.h>
 
 #define FLAG_ROOM_KEY           1
 #define FLAG_LETTER_TO_KAFEI    2
@@ -21,13 +22,16 @@ void EnAn_AfterGivingItem(Actor* this)
 
 void EnAn_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
 {
+    int npc;
+
+    npc = -1;
     switch (gi)
     {
     case GI_MM_ROOM_KEY:
         if (!gMmExtraFlags2.roomKey)
         {
             sAnjuFlag = FLAG_ROOM_KEY;
-            gi = comboOverride(OV_NPC, 0, NPC_MM_ROOM_KEY, gi);
+            npc = NPC_MM_ROOM_KEY;
         }
         else
         {
@@ -38,7 +42,7 @@ void EnAn_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
         if (!gMmExtraFlags2.letterKafei)
         {
             sAnjuFlag = FLAG_LETTER_TO_KAFEI;
-            gi = comboOverride(OV_NPC, 0, NPC_MM_LETTER_TO_KAFEI, gi);
+            npc = NPC_MM_LETTER_TO_KAFEI;
         }
         else
         {
@@ -46,5 +50,5 @@ void EnAn_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
         }
         break;
     }
-    GiveItem(this, play, gi, a, b);
+    comboGiveItemNpc(this, play, gi, npc, a, b);
 }

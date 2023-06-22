@@ -79,4 +79,10 @@ export class Patchfile {
       patch.data.copy(rom, patch.romAddr);
     }
   }
+
+  dup() {
+    const ret = new Patchfile(this.hash);
+    ret.patches = [...this.patches];
+    return ret;
+  }
 }

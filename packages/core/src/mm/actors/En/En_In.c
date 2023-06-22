@@ -3,23 +3,39 @@
 
 static u8 sIsMask;
 
-static s16 EnIn_MilkGI(int flags)
+static void EnIn_ItemQuery(ComboItemQuery* q, s16 gi, int flags)
 {
-    s16 gi;
+    bzero(q, sizeof(ComboItemQuery));
 
-    gi = comboOverrideEx(OV_NPC, 0, NPC_MM_GORMAN_MILK, GI_MM_MILK, flags);
-    if (gMmExtraFlags2.gormanMilk)
-        gi = comboRenewable(gi, GI_MM_RECOVERY_HEART);
-    return gi;
+    q->gi = gi;
+    q->ovFlags = flags;
+    q->giRenew = GI_MM_RECOVERY_HEART;
+
+    switch (gi)
+    {
+    case GI_MM_MILK:
+        q->ovType = OV_NPC;
+        q->ovFlags |= OVF_PRECOND;
+        q->id = NPC_MM_GORMAN_MILK;
+        if (gMmExtraFlags2.gormanMilk)
+            q->ovFlags |= OVF_RENEW;
+        break;
+    case GI_MM_MASK_GARO:
+        q->ovType = OV_NPC;
+        q->id = NPC_MM_MASK_GARO;
+        break;
+    default:
+        q->ovType = OV_NONE;
+    }
 }
 
 static int EnIn_CanBuy(void)
 {
+    ComboItemQuery q;
     int ret;
-    s16 gi;
 
-    gi = EnIn_MilkGI(0);
-    ret = comboItemPrecond(gi, 0);
+    EnIn_ItemQuery(&q, GI_MM_MILK, 0);
+    ret = comboItemPrecondEx(&q, 0);
     if (ret == SC_OK || ret == SC_OK_NOCUTSCENE)
         return 1;
     return 0;
@@ -32,18 +48,20 @@ PATCH_CALL(0x808f53f0, EnIn_CanBuy);
 
 static void EnIn_DisplayBuy(GameState_Play* play)
 {
+    ComboItemQuery q;
+    ComboItemOverride o;
     char* b;
     char* start;
-    s16 gi;
 
-    gi = EnIn_MilkGI(0);
+    EnIn_ItemQuery(&q, GI_MM_MILK, 0);
+    comboItemOverride(&o, &q);
 
     b = play->textBuffer;
     comboTextAppendShopHeader(&b, 50);
     start = b;
 
     comboTextAppendStr(&b, "50 Rupees will do ya for ");
-    comboTextAppendItemName(&b, gi, TF_PREPOS | TF_PROGRESSIVE);
+    comboTextAppendItemName(&b, o.gi, TF_PREPOS | TF_PROGRESSIVE);
     comboTextAppendStr(&b, "!" TEXT_NL TEXT_CHOICE2 "I'll buy it" TEXT_NL "No thanks" TEXT_END);
     comboTextAutoLineBreaks(start);
 }
@@ -138,22 +156,20 @@ PATCH_CALL(0x808f3d50, EnIn_HasActorGivenItem);
 
 static void EnIn_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
 {
+    ComboItemQuery q;
+
+    EnIn_ItemQuery(&q, gi, OVF_PROGRESSIVE | OVF_DOWNGRADE);
     switch (gi)
     {
     case GI_MM_MASK_GARO:
         sIsMask = 1;
-        if (gMmExtraFlags.maskGaro)
-            gi = GI_MM_RECOVERY_HEART;
-        else
-            gi = comboOverride(OV_NPC, 0, NPC_MM_MASK_GARO, GI_MM_MASK_GARO);
         break;
     case GI_MM_MILK:
         sIsMask = 0;
-        gi = EnIn_MilkGI(OVF_PROGRESSIVE);
         break;
     }
 
-    GiveItem(actor, play, gi, a, b);
+    comboGiveItem(actor, play, &q, a, b);
 }
 
 PATCH_CALL(0x808f3bbc, EnIn_GiveItem);

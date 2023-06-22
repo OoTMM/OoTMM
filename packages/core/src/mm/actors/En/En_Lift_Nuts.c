@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/item.h>
 
 int EnLiftNuts_HasGivenItem(Actor* this)
 {
@@ -14,15 +15,18 @@ PATCH_CALL(0x80aeb5a4, EnLiftNuts_HasGivenItem);
 
 void EnLiftNuts_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
 {
+    int npc;
+
+    npc = -1;
     if (gi == GI_MM_HEART_PIECE)
     {
-        gi = comboOverride(OV_NPC, 0, NPC_MM_DEKU_PLAYGROUND_2, gi);
+        npc = NPC_MM_DEKU_PLAYGROUND_2;
     }
     else if (!gMmExtraFlags2.dekuPlayground)
     {
-        gi = comboOverride(OV_NPC, 0, NPC_MM_DEKU_PLAYGROUND_1, gi);
+        npc = NPC_MM_DEKU_PLAYGROUND_1;
     }
-    GiveItem(this, play, gi, a, b);
+    comboGiveItemNpc(this, play, gi, npc, a, b);
 }
 
 PATCH_CALL(0x80aeb64c, EnLiftNuts_GiveItem);

@@ -1,15 +1,42 @@
+import JSZip from 'jszip';
 import { GeneratorOutput } from '@ootmm/core';
-import React from 'react';
+import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 
-const download = (data: Buffer | string, name: string, mime: string) => {
+type OutFile = {
+  name: string;
+  mime: string;
+  data: Buffer | Blob | string;
+};
+
+const download = (file: OutFile) => {
   const a = document.createElement('a');
-  const blob = new Blob([data], { type: mime });
+  let blob: Blob;
+  if (file.data instanceof Blob) {
+    blob = file.data;
+  } else {
+    blob = new Blob([file.data], { type: file.mime });
+  }
   a.href = window.URL.createObjectURL(blob);
-  a.download = name;
+  a.download = file.name;
   a.click();
 };
+
+const makeZip = async (files: OutFile[], hash: string): Promise<OutFile> => {
+  if (files.length === 1) {
+    return files[0];
+  }
+
+  const name = `OoTMM-${hash}.zip`;
+  const mime = 'application/zip';
+  const zip = new JSZip();
+  files.forEach((file) => {
+    zip.file(file.name, file.data);
+  });
+  const f = await zip.generateAsync({ type: 'blob', compression: 'DEFLATE' });
+  return { name, mime, data: f };
+}
 
 const appendHash = (str: string, hash: string | null, ext: string) => {
   if (hash) {
@@ -21,16 +48,48 @@ const appendHash = (str: string, hash: string | null, ext: string) => {
 type Props = {
   result: GeneratorOutput;
 }
-export const Result = ({ result: { rom, hash, log, patch } }: Props) => 
-<div>
-  {log && <div style={{border: "none", borderRadius:"2px", background: "#ff5722", fontWeight:"700", fontSize:"1em", padding: "0.5em 1em", textDecoration: "none", minWidth: "48px"}}>
-    <div><span style={{textAlign:"left"}}><FontAwesomeIcon icon={solid("triangle-exclamation")}/> WARNING </span></div>
-      <div>Be advised that this page is only accessible ONCE, it is extremely recommended to save the spoiler log.</div>
-      <div>There are a few scenarios where you may encounter unbeatable seeds, in which case, you would need to report them in the Discord.</div>
-  </div>}
-  <div>
-    <button className='btn-download' onClick={() => download(rom, appendHash('OoTMM', hash, 'z64'), 'application/octet-stream')}>Save ROM</button>
-    {log && <button className='btn-download' onClick={() => download(log, appendHash('OoTMM-Spoiler', hash, 'txt'), 'text/plain')}>Save Spoiler Log</button>}
-    {patch && <button className='btn-download' onClick={() => download(patch, appendHash('OoTMM-Patch', hash, 'ootmm'), 'application/octet-stream')}>Save Patch File</button>}
-  </div>
-</div>;
+export const Result = ({ result: { roms, hash, log, patches } }: Props) => {
+  const [outFile, setOutFile] = useState<OutFile | null>(null);
+  const [outFilePending, setOutFilePending] = useState<boolean>(false);
+
+  /* Generate zip */
+  if (!outFile && !outFilePending) {
+    setOutFilePending(true);
+    const srcFiles: OutFile[] = [];
+    if (log) srcFiles.push({ name: appendHash('OoTMM-Spoiler', hash, 'txt'), mime: 'text/plain', data: log });
+    if (patches && patches.length === 1) {
+      srcFiles.push({ name: appendHash('OoTMM-Patch', hash, 'ootmm'), mime: 'application/octet-stream', data: patches[0] });
+    } else {
+      patches.forEach((patch, i) => {
+        srcFiles.push({ name: appendHash(`OoTMM-Patch-p${i+1}`, hash, 'ootmm'), mime: 'application/octet-stream', data: patch });
+      });
+    }
+    if (roms && roms.length === 1) {
+      srcFiles.push({ name: appendHash('OoTMM', hash, 'z64'), mime: 'application/octet-stream', data: roms[0] });
+    } else {
+      roms.forEach((rom, i) => {
+        srcFiles.push({ name: appendHash(`OoTMM-p${i+1}`, hash, 'z64'), mime: 'application/octet-stream', data: rom });
+      });
+    }
+    makeZip(srcFiles, hash).then((f) => {
+      setOutFile(f);
+      setOutFilePending(false);
+    }).catch((e) => {
+      console.error(e);
+    });
+  }
+
+  return (
+    <div>
+      {log && <div style={{border: "none", borderRadius:"2px", background: "#ff5722", fontWeight:"700", fontSize:"1em", padding: "0.5em 1em", textDecoration: "none", minWidth: "48px"}}>
+        <div><span style={{textAlign:"left"}}><FontAwesomeIcon icon={solid("triangle-exclamation")}/> WARNING </span></div>
+          <div>You have generated a spoiler log. It is STRONGLY recommended to store it.</div>
+          <div>If you run into issues while playing the seed, you will be asked to provide the spoiler log for assistance.</div>
+      </div>}
+      <div>
+        {outFilePending && <div>Building archive...</div>}
+        {outFile && <button className='btn-download' onClick={() => download(outFile)}>Save</button>}
+      </div>
+    </div>
+  );
+};

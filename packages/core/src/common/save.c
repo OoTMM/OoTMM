@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/item.h>
+#include <combo/net.h>
 
 #if !defined(GAME_OOT)
 ALIGNED(16) OotSave gOotSave;
@@ -11,6 +12,15 @@ ALIGNED(16) MmSave gMmSave;
 
 void comboOnSaveLoad(void)
 {
+    NetContext* net;
+
+    /* Clear network */
+    net = netMutexLock();
+    net->ledgerBase = gSaveLedgerBase;
+    bzero(&net->cmdIn, sizeof(net->cmdIn));
+    bzero(&net->cmdOut, sizeof(net->cmdOut));
+    netMutexUnlock();
+
     gOotMaxRupees[0] = gOotExtraFlags.childWallet ? 99 : 0;
     gMmMaxRupees[0] = gMmExtraFlags2.childWallet ? 99 : 0;
 }
@@ -93,8 +103,16 @@ void comboReadForeignSave(void)
 
 void comboWriteSave(void)
 {
+    NetContext* net;
+
     if (gSaveContext.fileIndex == 0xff)
         return;
+
+    /* Save the network part */
+    net = netMutexLock();
+    netWaitCmdClear();
+    net->ledgerBase = gSaveLedgerBase;
+    netMutexUnlock();
 
     comboSyncItems();
     saveOot();

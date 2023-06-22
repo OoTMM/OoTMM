@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/item.h>
 
 static s16 kitemPrices[] = {
     30,
@@ -34,12 +35,14 @@ static int itemPrice(GameState_Play* play, Actor_EnGirlA* girlA)
 
 void EnGirlA_Draw(Actor_EnGirlA* this, GameState_Play* play)
 {
+    ComboItemOverride o;
+
     /* KLUDGE: Should not be here but the update func is annoying to patch */
     comboShopUpdateItem(play, this);
-
-    if (this->gi != GI_MM_SOLD_OUT)
+    EnGirlA_ItemOverride(&o, this, OVF_PROGRESSIVE);
+    if (o.gi != GI_MM_SOLD_OUT)
         MatrixRotation(this->angle, 1);
-    comboDrawGI(play, &this->base, this->gi, 0);
+    comboDrawGI(play, &this->base, o.gi, 0);
 }
 
 void EnGirlA_AfterHandler(Actor_EnGirlA* this, GameState_Play* play)

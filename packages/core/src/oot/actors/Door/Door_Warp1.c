@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/item.h>
 
 typedef struct
 {
@@ -83,6 +84,20 @@ int DoorWarp1_Collide(Actor* this, GameState_Play* play)
     return 0;
 }
 
+static s16 DoorWarp1_GetGI(const BlueWarpData* data, int flags)
+{
+    ComboItemQuery q = ITEM_QUERY_INIT;
+    ComboItemOverride o;
+
+    q.ovType = OV_NPC;
+    q.ovFlags = flags;
+    q.id = data->npc;
+    q.gi = data->gi;
+
+    comboItemOverride(&o, &q);
+    return o.gi;
+}
+
 int DoorWarp1_ShouldTrigger(Actor* this, GameState_Play* play)
 {
     int id;
@@ -126,7 +141,7 @@ void DoorWarp1_AfterDrawWarp(Actor* this, GameState_Play* play)
         return;
 
     angle = (play->gs.frameCount % kRotDivisor) * (1.f / kRotDivisor) * M_PI * 2.f;
-    gi = comboOverride(OV_NPC, 0, data->npc, data->gi);
+    gi = DoorWarp1_GetGI(data, OVF_PROGRESSIVE);
 
     ModelViewTranslate(this->position.x, this->position.y + 35.f, this->position.z, MAT_SET);
     ModelViewScale(0.35f, 0.35f, 0.35f, MAT_MUL);

@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/item.h>
 
 int EnMaYto_HasGivenItem(Actor* this)
 {
@@ -14,15 +15,18 @@ PATCH_CALL(0x80b900d4, EnMaYto_HasGivenItem);
 
 void EnMaYto_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
 {
+    int npc;
+
+    npc = -1;
     if (gMmExtraFlags.maskRomani)
     {
         gi = GI_MM_RUPEE_GOLD;
     }
     else
     {
-        gi = comboOverride(OV_NPC, 0, NPC_MM_CREMIA_ESCORT, GI_MM_MASK_ROMANI);
+        npc = NPC_MM_CREMIA_ESCORT;
     }
-    GiveItem(this, play, gi, a, b);
+    comboGiveItemNpc(this, play, gi, npc, a, b);
 }
 
 PATCH_CALL(0x80b9012c, EnMaYto_GiveItem);

@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/item.h>
 
 #define SET_HANDLER(a, h) do { *(void**)(((char*)(a)) + 0x144) = (h); } while (0)
 
@@ -8,8 +9,6 @@ void EnTimeTag_HandlerNull(Actor* this, GameState_Play* play)
 
 void EnTimeTag_GiveItemSoaring(Actor* this, GameState_Play* play)
 {
-    s16 gi;
-
     if (Actor_HasParent(this))
     {
         gMmExtraFlags.songSoaring = 1;
@@ -17,8 +16,7 @@ void EnTimeTag_GiveItemSoaring(Actor* this, GameState_Play* play)
         return;
     }
 
-    gi = comboOverride(OV_NPC, 0, NPC_MM_SONG_SOARING, GI_MM_SONG_SOARING);
-    GiveItem(this, play, gi, 10000.f, 10000.f);
+    comboGiveItemNpc(this, play, GI_MM_SONG_SOARING, NPC_MM_SONG_SOARING, 10000.f, 10000.f);
 }
 
 void EnTimeTag_HandlerSoaring(Actor* this, GameState_Play* play)

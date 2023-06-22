@@ -2,7 +2,7 @@
 
 void CustomTriggers_HandleTriggerGame(Actor_CustomTriggers* this, GameState_Play* play)
 {
-    switch (this->trigger)
+    switch (gComboTriggersData.trigger)
     {
     default:
         break;

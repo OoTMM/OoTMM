@@ -1,12 +1,14 @@
 #include <combo.h>
+#include <combo/item.h>
 
-s16 EnExItem_Reward(Actor* actor);
-s16 EnExItem_RewardByIndex(int index);
+void EnExItem_RewardByIndex(ComboItemQuery* q, int index, int flags);
 
 void EnBomBowlPit_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
 {
-    gi = EnExItem_RewardByIndex(*(u16*)((char*)actor + 0x14a));
-    GiveItem(actor, play, gi, a, b);
+    ComboItemQuery q;
+
+    EnExItem_RewardByIndex(&q, *(u16*)((char*)actor + 0x14a), OVF_DOWNGRADE | OVF_PROGRESSIVE);
+    comboGiveItem(actor, play, &q, a, b);
 }
 
 PATCH_CALL(0x80aaf0ec, EnBomBowlPit_GiveItem);

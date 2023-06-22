@@ -6,6 +6,26 @@
 
 typedef struct GameState_Play GameState_Play;
 
+typedef struct ComboItemQuery
+{
+    s16 gi;
+    s16 giRenew;
+    s16 ovType;
+    int ovFlags;
+    u8  sceneId;
+    u8  id;
+    u8  from;
+}
+ComboItemQuery;
+
+typedef struct ComboItemOverride
+{
+    u8  player;
+    u8  playerFrom;
+    s16 gi;
+}
+ComboItemOverride;
+
 extern u16 gMaxRupees[];
 
 #if defined(GAME_OOT)
@@ -69,10 +89,19 @@ void comboAddCommonItemMm(int sid, int noEffect);
 int  comboAddItem(GameState_Play* play, s16 gi);
 int  comboAddItemNoEffect(s16 gi);
 
+int comboAddItemEx(GameState_Play* play, const ComboItemQuery* q);
+
 int comboIsItemUnavailable(s16 gi);
 int comboIsItemMinor(s16 gi);
 
-int comboItemPrecond(s16 gi, s16 price);
+int comboItemPrecondEx(const ComboItemQuery* q, s16 price);
 s16 comboRenewable(s16 gi, s16 def);
+
+#define ITEM_QUERY_INIT { 0, 0, OV_NONE, 0, 0, 0 }
+
+void comboGiveItem(Actor* actor, GameState_Play* play, const ComboItemQuery* q, float a, float b);
+void comboGiveItemNpc(Actor* actor, GameState_Play* play, s16 gi, int npcId, float a, float b);
+void comboGiveItemNpcEx(Actor* actor, GameState_Play* play, s16 gi, int npcId, int flags, float a, float b);
+void comboItemOverride(ComboItemOverride* dst, const ComboItemQuery* q);
 
 #endif

@@ -1,4 +1,25 @@
 export const SETTINGS = [{
+  key: 'mode',
+  name: 'Mode',
+  category: 'main',
+  type: 'enum',
+  description: 'The game mode.',
+  values: [
+    { value: 'single', name: 'Singleplayer', description: 'A regular, one player seed' },
+    { value: 'multi', name: 'Multiworld', description: 'A multiplayer settings where players can find each other\'s items' },
+  ],
+  default: 'single'
+}, {
+  key: 'players',
+  name: 'Players',
+  category: 'main',
+  type: 'number',
+  description: 'For multiworld, how many players are in the game.',
+  min: (x: any) => x.mode === 'multi' ? 2 : 1,
+  max: (x: any) => x.mode === 'multi' ? 127 : 1,
+  cond: (x: any) => x.mode === 'multi',
+  default: 1
+}, {
   key: 'goal',
   name: 'Goal',
   category: 'main',

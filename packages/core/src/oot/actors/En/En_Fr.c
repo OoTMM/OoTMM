@@ -1,19 +1,19 @@
 #include <combo.h>
+#include <combo/item.h>
 
 void EnFr_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
 {
+    int npc;
+
+    npc = -1;
     if (gi == GI_OOT_HEART_PIECE)
     {
         if (GetEventChk(EV_OOT_CHK_FROGS_GAME))
-        {
-            gi = comboOverride(OV_NPC, 0, NPC_OOT_FROGS_GAME, gi);
-        }
+            npc = NPC_OOT_FROGS_GAME;
         else
-        {
-            gi = comboOverride(OV_NPC, 0, NPC_OOT_FROGS_STORMS, gi);
-        }
+            npc = NPC_OOT_FROGS_STORMS;
     }
-    GiveItem(actor, play, gi, a, b);
+    comboGiveItemNpc(actor, play, gi, npc, a, b);
 }
 
 PATCH_CALL(0x80a279b0, EnFr_GiveItem);

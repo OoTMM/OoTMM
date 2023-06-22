@@ -1,18 +1,31 @@
 #include <combo.h>
+#include <combo/item.h>
 
-static s16 moonTearGI(GameState_Play* play)
+static void ObjMoonStone_ItemQuery(ComboItemQuery* q, GameState_Play* play, int flags)
 {
+    memset(q, 0, sizeof(*q));
+
     if (gMmExtraFlags2.moonTear && play->sceneId == SCE_MM_TERMINA_FIELD)
-        return GI_MM_RECOVERY_HEART;
-    return comboOverride(OV_NPC, 0, NPC_MM_MOON_TEAR, GI_MM_MOON_TEAR);
+    {
+        q->ovType = OV_NONE;
+        q->gi = GI_MM_RECOVERY_HEART;
+        return;
+    }
+
+    q->ovType = OV_NPC;
+    q->id = NPC_MM_MOON_TEAR;
+    q->gi = GI_MM_MOON_TEAR;
+    q->ovFlags = flags;
 }
 
 void ObjMoonStone_Draw(Actor* this, GameState_Play* play)
 {
-    s16 gi;
+    ComboItemQuery q;
+    ComboItemOverride o;
 
-    gi = moonTearGI(play);
-    comboDrawGI(play, this, gi, 0);
+    ObjMoonStone_ItemQuery(&q, play, OVF_PROGRESSIVE);
+    comboItemOverride(&o, &q);
+    comboDrawGI(play, this, o.gi, 0);
 }
 
 PATCH_FUNC(0x80c06910, ObjMoonStone_Draw);
@@ -31,8 +44,10 @@ PATCH_CALL(0x80c067ec, ObjMoonStone_HasGivenItem);
 
 void ObjMoonStone_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
 {
-    gi = moonTearGI(play);
-    GiveItem(this, play, gi, a, b);
+    ComboItemQuery q;
+
+    ObjMoonStone_ItemQuery(&q, play, OVF_PROGRESSIVE | OVF_DOWNGRADE);
+    comboGiveItem(this, play, &q, a, b);
 }
 
 PATCH_CALL(0x80c06840, ObjMoonStone_GiveItem);

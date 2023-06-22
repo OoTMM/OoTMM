@@ -2,6 +2,8 @@ import { Settings, Trick, TRICKS } from '../settings';
 import { Items, ITEMS_MASKS_OOT, ITEMS_MASKS_REGULAR, ITEMS_MASKS_TRANSFORM, ITEMS_MEDALLIONS, ITEMS_REMAINS, ITEMS_STONES } from './items';
 import { Age } from './pathfind';
 
+type RecursiveArray<T> = Array<T | RecursiveArray<T>>;
+
 export const MM_TIME_SLICES = [
   'DAY1_AM_06_00',
   'DAY1_AM_07_00',
@@ -46,14 +48,10 @@ export const MM_TIME_SLICES = [
   'NIGHT3_AM_05_00',
 ];
 
-export type ExprDependencies = {
-  items?: Set<string>;
-  events?: Set<string>;
-};
-
 type ExprResultFalse = {
   result: false;
-  dependencies?: ExprDependencies;
+  depItems: RecursiveArray<string>;
+  depEvents: RecursiveArray<string>;
 }
 
 type ExprRestrictions = {
@@ -92,7 +90,8 @@ export const isDefaultRestrictions = (r: ExprRestrictions): boolean => {
 
 type ExprResultTrue = {
   result: true;
-  dependencies?: ExprDependencies;
+  depItems: RecursiveArray<string>;
+  depEvents: RecursiveArray<string>;
   restrictions?: ExprRestrictions;
 }
 
@@ -108,26 +107,13 @@ export type AreaData = {
 };
 
 type State = {
-  items: Items;
-  renewables: Items;
-  licenses: Items;
+  items: {[k: string]: number};
+  renewables: {[k: string]: number};
+  licenses: {[k: string]: number};
   age: Age;
   events: Set<string>;
   ignoreItems: boolean;
   areaData: AreaData;
-};
-
-export const exprDependencies = (exprs: ExprResult[]): ExprDependencies => {
-  const deps: ExprDependencies = {};
-
-  for (const expr of exprs) {
-    const d = expr.dependencies;
-    if (!d) continue;
-    if (d.items) deps.items = new Set([...(deps.items || []), ...d.items]);
-    if (d.events) deps.events = new Set([...(deps.events || []), ...d.events]);
-  }
-
-  return deps;
 };
 
 /* AND the restrictions together */
@@ -173,7 +159,7 @@ function resolveSpecialCond(settings: Settings, state: State, special: string): 
   }
 
   if (state.ignoreItems) {
-    return { result: true };
+    return { result: true, depItems: [], depEvents: [] };
   }
 
   let items = new Set<string>();
@@ -200,45 +186,43 @@ function resolveSpecialCond(settings: Settings, state: State, special: string): 
   const result = (itemsCount(state, [...items]) + countUnique) >= cond.count;
   const dependencies = { items: new Set([...items, ...itemsUnique]) };
 
-  return { result, dependencies };
+  return { result, depEvents: [], depItems: [...items, ...itemsUnique] };
 }
 
 export type Expr = (state: State) => ExprResult;
 
-export const exprTrue = (): Expr => state => ({result: true });
-export const exprFalse = (): Expr => state => ({ result: false, dependencies: { items: new Set(), events: new Set() } });
+export const exprTrue = (): Expr => state => ({ result: true, depItems: [], depEvents: [] });
+export const exprFalse = (): Expr => state => ({ result: false, depItems: [], depEvents: [] });
 
 export const exprAnd = (exprs: Expr[]): Expr => state => {
   const results: ExprResult[] = exprs.map(expr => expr(state));
-  const dependencies = exprDependencies(results);
   const result = results.every(x => x.result);
 
   if (result) {
     const restrictions = exprRestrictionsAnd(results);
     if (isDefaultRestrictions(restrictions)) {
-      return { result: true };
+      return { result: true, depItems: [], depEvents: [] };
     } else {
-      return { result: true, dependencies, restrictions };
+      return { result: true, depItems: results.map(x => x.depItems), depEvents: results.map(x => x.depEvents), restrictions };
     }
   } else {
-    return { result: false, dependencies };
+    return { result: false, depItems: results.map(x => x.depItems), depEvents: results.map(x => x.depEvents) };
   }
 };
 
 export const exprOr = (exprs: Expr[]): Expr => state => {
   const results: ExprResult[] = exprs.map(expr => expr(state));
-  const dependencies = exprDependencies(results);
   const result = results.some(x => x.result);
 
   if (result) {
     const restrictions = exprRestrictionsOr(results);
     if (isDefaultRestrictions(restrictions)) {
-      return { result: true };
+      return { result: true, depItems: [], depEvents: [] };
     } else {
-      return { result: true, dependencies, restrictions };
+      return { result: true, depItems: results.map(x => x.depItems), depEvents: results.map(x => x.depEvents), restrictions };
     }
   } else {
-    return { result: false, dependencies };
+    return { result: false, depItems: results.map(x => x.depItems), depEvents: results.map(x => x.depEvents) };
   }
 };
 
@@ -253,37 +237,32 @@ export const exprHas = (item: string, itemShared: string, count: number): Expr =
 
   return state => {
     const result = (state.ignoreItems || (itemCount(state, item) >= count) || (itemCount(state, itemShared) >= count));
-    const dependencies = { items: new Set([item, itemShared]) };
-    return { result, dependencies };
+    return { result, depItems: [item, itemShared], depEvents: [] };
   }
 };
 
 export const exprRenewable = (item: string, itemShared: string): Expr => {
   return state => {
     const result = (state.ignoreItems || state.renewables[item] > 0 || state.renewables[itemShared] > 0);
-    const dependencies = { items: new Set([item, itemShared]) };
-    return { result, dependencies };
+    return { result, depItems: [item, itemShared], depEvents: [] };
   }
 };
 
 export const exprLicense = (item: string, itemShared: string): Expr => {
   return state => {
     const result = (state.ignoreItems || state.licenses[item] > 0 || state.licenses[itemShared] > 0);
-    const dependencies = { items: new Set([item, itemShared]) };
-    return { result, dependencies };
+    return { result, depItems: [item, itemShared], depEvents: [] };
   }
 };
 
 export const exprEvent = (event: string): Expr => state => {
-  const dependencies = { events: new Set([event]) };
   const result = state.events.has(event);
-  return { result, dependencies };
+  return { result, depItems: [], depEvents: [event] };
 };
 
 export const exprMasks = (count: number): Expr => state => {
   const result = state.ignoreItems || (itemsCount(state, ITEMS_MASKS_REGULAR) >= count);
-  const dependencies = { items: new Set(ITEMS_MASKS_REGULAR) };
-  return { result, dependencies };
+  return { result, depItems: [...ITEMS_MASKS_REGULAR], depEvents: [] };
 };
 
 export const exprSpecial = (settings: Settings, special: string): Expr => state => resolveSpecialCond(settings, state, special);
@@ -314,10 +293,12 @@ export const exprOotTime = (time: string): Expr => {
     if (state.areaData.oot[time]) {
       const restrictions = defaultRestrictions();
       restrictions.oot[negation] = true;
-      return { result: true, restrictions };
+      return { result: true, depItems: [], depEvents: [], restrictions };
     } else {
       return {
         result: false,
+        depItems: [],
+        depEvents: [],
       };
     }
   };
@@ -368,10 +349,12 @@ export const exprMmTime = (operator: string, sliceName: string): Expr => {
       const restrictions = defaultRestrictions();
       restrictions.mmTime = ~value >>> 0;
       restrictions.mmTime2 = ~value2 >>> 0;
-      return { result: true, restrictions };
+      return { result: true, restrictions, depItems: [], depEvents: [] };
     } else {
       return {
         result: false,
+        depItems: [],
+        depEvents: [],
       };
     }
   };
