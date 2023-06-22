@@ -2,7 +2,8 @@
   dungeon: DC
   exits:
     "Death Mountain": "true"
-    "Dodongo Cavern Main": "has_bombflowers || can_hammer"
+    "Dodongo Cavern Main": "has_bombflowers || can_hammer || has_blue_fire_arrows"
+
 "Dodongo Cavern Main":
   dungeon: DC
   exits:
@@ -15,23 +16,25 @@
   event:
     STICKS: "has_weapon || can_boomerang"
   locations:
-    "MQ Dodongo Cavern Map Chest": "has_bombflowers || can_hammer"
+    "MQ Dodongo Cavern Map Chest": "has_bombflowers || can_hammer || has_blue_fire_arrows"
     "MQ Dodongo Cavern GS Time Blocks": "can_play(SONG_TIME) && can_damage_skull"
     "MQ Dodongo Cavern Lobby Scrub Front": "can_hit_scrub && can_use_wallet(1)"
     "MQ Dodongo Cavern Lobby Scrub Back": "can_hit_scrub && can_use_wallet(1)"
   gossip:
     "Dodongo Cavern Gossip": "has_bombflowers || can_hammer"
+
 "Dodongo Cavern Upper Staircase":
   dungeon: DC
   exits:
     "Dodongo Cavern Main": "true"
     "Dodongo Cavern Upper Ledges": "can_hookshot || has_hover_boots || (is_adult && trick(OOT_DC_JUMP))"
-    "Dodongo Cavern Upper Lizalfos": "can_use_sticks || (has_fire && has_explosives_or_hammer)"
+    "Dodongo Cavern Upper Lizalfos": "can_use_sticks || (has_fire && (has_explosives_or_hammer || has_blue_fire_arrows))"
   locations:
     "MQ Dodongo Cavern Compass Chest": "true"
     "MQ Dodongo Cavern Larvae Room Chest": "can_use_sticks || has_fire"
     "MQ Dodongo Cavern GS Larve Room": "can_use_sticks || has_fire"
     "MQ Dodongo Cavern Staircase Scrub": "can_hit_scrub && can_use_wallet(1)"
+
 "Dodongo Cavern Upper Lizalfos":
   dungeon: DC
   exits:
