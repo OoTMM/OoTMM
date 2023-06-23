@@ -85,3 +85,13 @@ OOT_STABLES,                              indoors,          Lon Lon Ranch Stable
 OOT_LON_LON_RANCH_FROM_STABLES,           indoors,          Lon Lon Ranch,                              Lon Lon Ranch Stables,                        OOT_STABLES
 OOT_SILO,                                 indoors,          Lon Lon Ranch Silo,                         Lon Lon Ranch,                                OOT_LON_LON_RANCH_FROM_SILO
 OOT_LON_LON_RANCH_FROM_SILO,              indoors,          Lon Lon Ranch,                              Lon Lon Ranch Silo,                           OOT_SILO
+OOT_HOUSE_LINK,                           indoors-special,  Link's House,                               Kokiri Forest,                                OOT_KOKIRI_FOREST_FROM_LINK
+OOT_KOKIRI_FOREST_FROM_LINK,              indoors-special,  Kokiri Forest,                              Link's House,                                 OOT_HOUSE_LINK
+OOT_TEMPLE_OF_TIME,                       indoors-special,  Temple of Time,                             Temple of Time Entryway,                      OOT_TEMPLE_OF_TIME_ENTRYWAY_FROM_TEMPLE
+OOT_TEMPLE_OF_TIME_ENTRYWAY_FROM_TEMPLE,  indoors-special,  Temple of Time Entryway,                    Temple of Time,                               OOT_TEMPLE_OF_TIME
+OOT_WINDMILL,                             indoors-special,  Windmill,                                   Kakariko,                                     OOT_KAKARIKO_FROM_WINDMILL
+OOT_KAKARIKO_FROM_WINDMILL,               indoors-special,  Kakariko,                                   Windmill,                                     OOT_WINDMILL
+OOT_SHOP_POTION_KAKARIKO,                 indoors-special,  Kakariko Potion Shop,                       Kakariko,                                     OOT_KAKARIKO_FROM_SHOP_POTION
+OOT_KAKARIKO_FROM_SHOP_POTION,            indoors-special,  Kakariko,                                   Kakariko Potion Shop,                         OOT_SHOP_POTION_KAKARIKO
+OOT_SHOP_POTION_KAKARIKO_BACK,            indoors-special,  Kakariko Potion Shop Back,                  Kakariko Back,                                OOT_KAKARIKO_FROM_SHOP_POTION_BACK
+OOT_KAKARIKO_FROM_SHOP_POTION_BACK,       indoors-special,  Kakariko Back,                              Kakariko Potion Shop Back,                    OOT_SHOP_POTION_KAKARIKO_BACK

@@ -58,7 +58,6 @@ OOT_HOUSE_KNOW_IT_ALL:                      0x26a
 OOT_KOKIRI_SHOP:                            0x0c1
 OOT_MARKET_ENTRANCE_FROM_POTS:              0x26e
 OOT_HOUSE_POTS:                             0x07e
-
 OOT_LABORATORY:                             0x043
 OOT_LAKE_HYLIA_FROM_LABORATORY:             0x3cc
 OOT_FISHING_POND:                           0x45f
@@ -87,6 +86,16 @@ OOT_STABLES:                                0x2f9
 OOT_LON_LON_RANCH_FROM_STABLES:             0x42f
 OOT_SILO:                                   0x5d0
 OOT_LON_LON_RANCH_FROM_SILO:                0x5d4
+OOT_HOUSE_LINK:                             0x272
+OOT_KOKIRI_FOREST_FROM_LINK:                0x211
+OOT_TEMPLE_OF_TIME:                         0x053
+OOT_TEMPLE_OF_TIME_ENTRYWAY_FROM_TEMPLE:    0x472
+OOT_WINDMILL:                               0x453
+OOT_KAKARIKO_FROM_WINDMILL:                 0x351
+OOT_SHOP_POTION_KAKARIKO:                   0x384
+OOT_KAKARIKO_FROM_SHOP_POTION:              0x44b
+OOT_SHOP_POTION_KAKARIKO_BACK:              0x3ec
+OOT_KAKARIKO_FROM_SHOP_POTION_BACK:         0x4ff
 
 MM_BOSS_TEMPLE_WOODFALL:                    0x3800
 MM_BOSS_TEMPLE_SNOWHEAD:                    0x8200
