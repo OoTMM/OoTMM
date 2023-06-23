@@ -163,7 +163,7 @@ export class LogicPassHints {
       }
     }
 
-    for (const loc of Object.keys(this.state.items) as Location[]) {
+    for (const loc of this.state.items.keys()) {
       if (this.state.items.get(loc) === item) {
         locs.push(loc);
       }
