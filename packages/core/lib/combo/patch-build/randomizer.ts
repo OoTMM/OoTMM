@@ -1,7 +1,7 @@
 import { Buffer } from 'buffer';
 
 import { LogicResult } from '../logic';
-import { DATA_GI, DATA_NPC, DATA_SCENES, DATA_REGIONS, DATA_HINTS_POOL, DATA_HINTS, DATA_ENTRANCES } from '../data';
+import { DATA_GI, DATA_NPC, DATA_SCENES, DATA_REGIONS, DATA_HINTS_POOL, DATA_HINTS, DATA_ENTRANCES_POOL } from '../data';
 import { Game, GAMES } from "../config";
 import { WorldCheck } from '../logic/world';
 import { DUNGEONS, Settings, SPECIAL_CONDS, SPECIAL_CONDS_KEYS } from '../settings';
@@ -217,7 +217,7 @@ const entrance = (game: Game, from: string, to: string) => {
     to = to.substring(4);
     entrGame = 'oot';
   }
-  const entrances = DATA_ENTRANCES[entrGame];
+  const entrances = DATA_ENTRANCES_POOL[entrGame];
   const e = entrances.find((e: any) => e.from === from && e.to === to);
   if (!e) {
     throw new Error(`Unknown ${entrGame} entrance ${from} -> ${to}`);

@@ -3,6 +3,7 @@ export { default as DATA_SCENES } from '../../data/scenes.yml';
 export { default as DATA_NPC } from '../../data/npc.yml';
 export { default as DATA_REGIONS } from '../../data/regions.yml';
 export { default as DATA_HINTS } from '../../data/hints.yml';
+export { default as DATA_ENTRANCES } from '../../data/entrances.yml';
 
 import poolOot from '../../data/oot/pool.csv';
 import poolMm from '../../data/mm/pool.csv';
@@ -23,7 +24,7 @@ export const DATA_MACROS = {
 import entrancesOot from '../../data/oot/entrances.csv';
 import entrancesMm from '../../data/mm/entrances.csv';
 
-export const DATA_ENTRANCES = {
+export const DATA_ENTRANCES_POOL = {
   oot: entrancesOot,
   mm: entrancesMm,
 };

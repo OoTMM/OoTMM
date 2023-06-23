@@ -2,7 +2,7 @@ import { Game, GAMES } from '../config';
 import { gameId } from '../util';
 import { Expr, exprTrue } from './expr';
 import { ExprParser } from './expr-parser';
-import { DATA_POOL, DATA_MACROS, DATA_WORLD, DATA_REGIONS, DATA_ENTRANCES, DATA_HINTS, DATA_HINTS_POOL } from '../data';
+import { DATA_POOL, DATA_MACROS, DATA_WORLD, DATA_REGIONS, DATA_ENTRANCES_POOL, DATA_HINTS, DATA_HINTS_POOL } from '../data';
 import { Settings } from '../settings';
 import { Monitor } from '../monitor';
 import { isDungeonReward, isSong, makeItem } from './items';
@@ -272,7 +272,7 @@ export class LogicPassWorld {
   }
 
   private loadEntrances(game: Game) {
-    for (const record of DATA_ENTRANCES[game]) {
+    for (const record of DATA_ENTRANCES_POOL[game]) {
       const from = gameId(game, String(record.from), ' ');
       const to = gameId(game, String(record.to), ' ');
       const type = String(record.type) as WorldEntrance['type'];

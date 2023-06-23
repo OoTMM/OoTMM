@@ -54,6 +54,7 @@
 #include <combo/save.h>
 #include <combo/gi.h>
 #include <combo/data/items.h>
+#include <combo/entrances.h>
 #include <combo/common/events.h>
 #include <combo/scenes.h>
 #include <combo/shader.h>
