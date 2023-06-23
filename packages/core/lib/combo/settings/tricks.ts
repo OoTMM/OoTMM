@@ -24,6 +24,7 @@ export const TRICKS = {
   OOT_PASS_COLLISION: "Pass through Visible One-Way Collisions",
   OOT_DMT_RED_ROCK_GS: "DMT Red Rock Skulls without Hammer",
   OOT_DEAD_HAND_STICKS: "Child Dead Hand without Kokiri Sword",
+  OOT_BFA_MUDWALLS: "Break mud walls with blue fire arrows",
   MM_LENS: "Fewer Lens Requirements (MM)",
   MM_PALACE_BEAN_SKIP: "Skip Planting Beans in Deku Palace",
   MM_DARMANI_WALL: "Climb Mountain Village Wall Blind",

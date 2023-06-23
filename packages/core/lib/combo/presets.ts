@@ -248,8 +248,8 @@ const PRESET_HELL = makeSettings({
       fairiesST: true,
       fairyTown: true,
       masksRegular: true,
-      masksTransform: true, 
-      masksOot: true 
+      masksTransform: true,
+      masksOot: true
     },
     MAJORA: {
       count: 266,
@@ -312,6 +312,7 @@ const PRESET_HELL = makeSettings({
     'OOT_PASS_COLLISION',
     'OOT_DMT_RED_ROCK_GS',
     'OOT_DEAD_HAND_STICKS',
+    'OOT_BFA_MUDWALLS',
     'MM_LENS',
     'MM_PALACE_BEAN_SKIP',
     'MM_DARMANI_WALL',

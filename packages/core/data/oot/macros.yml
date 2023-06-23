@@ -76,6 +76,7 @@
 "can_use_nayru": "has_magic && has(SPELL_LOVE)"
 "has_light_arrows": "can_use_bow && (has(ARROW_LIGHT) || has(SHARED_ARROW_LIGHT)) && has_magic"
 "has_blue_fire_arrows": "can_use_bow && (setting(blueFireArrows) && (has(ARROW_ICE) || has(SHARED_ARROW_ICE))) && has_magic"
+"has_blue_fire_arrows_mudwall": "trick(OOT_BFA_MUDWALLS) && has_blue_fire_arrows"
 "has_fire_arrows": "can_use_bow && (has(ARROW_FIRE) || has(SHARED_ARROW_FIRE)) && has_magic"
 "has_lens_strict": "has_magic && (has(LENS) || has(SHARED_LENS))"
 #Item Combination Macros
