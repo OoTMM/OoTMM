@@ -262,7 +262,7 @@ export class LogicPassSolver {
 
     for (let player = 0; player < this.state.settings.players; ++player) {
       const locations = new Set([...gs, ...house].map(x => makeLocation(x, player)));
-      const pool = shuffle(this.state.random, Array.from(locations).map(loc => makeItem(this.state.world.checks[loc].item, player)));
+      const pool = shuffle(this.state.random, Array.from(locations).map(loc => makeItem(this.state.world.checks[locationData(loc).id].item, player)));
       for (const location of locations) {
         const item = pool.pop();
         this.place(location, item!);
