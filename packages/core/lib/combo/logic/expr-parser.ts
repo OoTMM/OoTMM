@@ -164,7 +164,6 @@ export class ExprParser {
     this.expect('(');
     const itemName = this.expect('identifier');
     const item = gameId(this.game, itemName, '_');
-    const itemShared = gameId('shared', itemName, '_');
     let count = 1;
     if (this.accept(',')) {
       const n = this.parseNumeric();
@@ -174,7 +173,7 @@ export class ExprParser {
       count = n;
     }
     this.expect(')');
-    return exprHas(item, itemShared, count);
+    return exprHas(item, count);
   }
 
   private parseExprRenewable(): Expr | undefined {
@@ -185,9 +184,8 @@ export class ExprParser {
     this.expect('(');
     const itemName = this.expect('identifier');
     const item = gameId(this.game, itemName, '_');
-    const itemShared = gameId('shared', itemName, '_');
     this.expect(')');
-    return exprRenewable(item, itemShared);
+    return exprRenewable(item);
   }
 
   private parseExprLicense(): Expr | undefined {
@@ -198,9 +196,8 @@ export class ExprParser {
     this.expect('(');
     const itemName = this.expect('identifier');
     const item = gameId(this.game, itemName, '_');
-    const itemShared = gameId('shared', itemName, '_');
     this.expect(')');
-    return exprLicense(item, itemShared);
+    return exprLicense(item);
   }
 
   private parseExprEvent(): Expr | undefined {

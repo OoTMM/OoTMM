@@ -53,15 +53,15 @@
   exits:
     "Moon": "true"
   events:
-    MOON_TRIAL_ZORA: "has(MASK_ZORA)"
+    MOON_TRIAL_ZORA: "has_mask_zora"
   locations:
-    "Moon Trial Zora HP": "has(MASK_ZORA)"
+    "Moon Trial Zora HP": "has_mask_zora"
   gossip:
-    "Moon Trial Zora Gossip Outer Left": "has(MASK_ZORA)"
-    "Moon Trial Zora Gossip Middle Left": "has(MASK_ZORA)"
-    "Moon Trial Zora Gossip Inner Right": "has(MASK_ZORA)"
-    "Moon Trial Zora Gossip Middle Right": "has(MASK_ZORA)"
-    "Moon Trial Zora Gossip Outer Right": "has(MASK_ZORA)"
+    "Moon Trial Zora Gossip Outer Left": "has_mask_zora"
+    "Moon Trial Zora Gossip Middle Left": "has_mask_zora"
+    "Moon Trial Zora Gossip Inner Right": "has_mask_zora"
+    "Moon Trial Zora Gossip Middle Right": "has_mask_zora"
+    "Moon Trial Zora Gossip Outer Right": "has_mask_zora"
 "Moon Trial Link Entrance":
   region: MOON
   exits:
@@ -105,5 +105,5 @@
 "Moon Boss":
   region: MOON
   events:
-    MAJORA_PHASE_1: "has_arrows || has(MASK_ZORA) || (has(MASK_FIERCE_DEITY) && has_magic)"
-    MAJORA: "!setting(goal, triforce) && event(MAJORA_PHASE_1) && (has_weapon || has(MASK_ZORA) || (has(MASK_FIERCE_DEITY) && has_magic))"
+    MAJORA_PHASE_1: "has_arrows || has_mask_zora || (has(MASK_FIERCE_DEITY) && has_magic)"
+    MAJORA: "!setting(goal, triforce) && event(MAJORA_PHASE_1) && (has_weapon || has_mask_zora || (has(MASK_FIERCE_DEITY) && has_magic))"

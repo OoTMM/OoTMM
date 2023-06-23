@@ -16,7 +16,7 @@
   dungeon: Shadow
   locations:
     "MQ Shadow Temple Compass Chest": "true"
-    "MQ Shadow Temple Hover Boots Chest": "can_play(SONG_TIME) && can_use_bow"
+    "MQ Shadow Temple Hover Boots Chest": "can_play_time && can_use_bow"
 "Shadow Temple First Beamos":
   dungeon: Shadow
   exits:
@@ -30,8 +30,8 @@
   exits:
     "Shadow Temple Lower Huge Pit": "has_fire"
   locations:
-    "MQ Shadow Temple Second Silver Rupee Visible Chest": "can_play(SONG_TIME)"
-    "MQ Shadow Temple Second Silver Rupee Invisible Chest": "can_play(SONG_TIME)"
+    "MQ Shadow Temple Second Silver Rupee Visible Chest": "can_play_time"
+    "MQ Shadow Temple Second Silver Rupee Invisible Chest": "can_play_time"
 "Shadow Temple Lower Huge Pit":
   dungeon: Shadow
   exits:
@@ -70,7 +70,7 @@
   dungeon: Shadow
   exits:
     "Shadow Temple Boss": "boss_key(BOSS_KEY_SHADOW) && can_use_bow"
-    "Shadow Temple Final Side Rooms": "can_use_bow && can_play(SONG_TIME) && can_longshot"
+    "Shadow Temple Final Side Rooms": "can_use_bow && can_play_time && can_longshot"
   locations:
     "MQ Shadow Temple GS After Boat": "true"
     "MQ Shadow Temple GS Pre-Boss": "can_use_bow"

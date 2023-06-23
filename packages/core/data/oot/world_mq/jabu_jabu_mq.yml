@@ -25,8 +25,8 @@
     "MQ Jabu-Jabu Third Room East Chest": "can_use_slingshot"
     "MQ Jabu-Jabu SoT Room Lower Chest": "true"
     "MQ Jabu-Jabu Boomerang Chest": "true" #You will always have an acceptable weapon for this.
-    "MQ Jabu-Jabu GS SoT Block": "can_play(SONG_TIME)"
-    "MQ Jabu-Jabu Cow": "can_play(SONG_EPONA) && event(JABU_BIG_OCTO) && is_child"
+    "MQ Jabu-Jabu GS SoT Block": "can_play_time"
+    "MQ Jabu-Jabu Cow": "can_play_epona && event(JABU_BIG_OCTO) && is_child"
 "Jabu-Jabu Back":
   dungeon: JJ
   exits:

@@ -16,7 +16,7 @@
 "GLOBAL":
   region: NONE
   exits:
-    "SONGS": "has(OCARINA)"
+    "SONGS": "has_ocarina"
     "EGGS": "true"
 "SONGS":
   region: NONE
@@ -38,7 +38,7 @@
   exits:
     "Kokiri Forest": "true"
   locations:
-    "Kokiri Forest Cow": "is_adult && event(MALON_COW) && can_play(SONG_EPONA)"
+    "Kokiri Forest Cow": "is_adult && event(MALON_COW) && can_play_epona"
 "Kokiri Forest":
   region: KOKIRI_FOREST
   exits:
@@ -225,7 +225,7 @@
     BUGS: "has_fire && can_cut_grass"
   locations:
     "Hyrule Field Grotto Near Gerudo GS": "can_collect_distance && has_fire"
-    "Hyrule Field Cow": "has_fire && can_play(SONG_EPONA)"
+    "Hyrule Field Cow": "has_fire && can_play_epona"
   gossip:
     "Hyrule Field Gossip Near Gerudo Valley": "has_fire"
 "Hyrule Field Grotto Near Kak":
@@ -338,8 +338,8 @@
     BOMBS: "can_use_wallet(2)"
     BOMBCHUS: "can_use_wallet(1)"
   locations:
-    "Bombchu Bowling Reward 1": "has(BOMB_BAG) && can_use_wallet(1)"
-    "Bombchu Bowling Reward 2": "has(BOMB_BAG) && can_use_wallet(1)"
+    "Bombchu Bowling Reward 1": "has_bomb_bag && can_use_wallet(1)"
+    "Bombchu Bowling Reward 2": "has_bomb_bag && can_use_wallet(1)"
 "Shooting Gallery Child":
   region: MARKET
   exits:
@@ -379,12 +379,12 @@
     "Lon Lon Ranch House": "is_day"
     "Lon Lon Ranch Grotto": "is_child"
   events:
-    #EPONA: "is_adult && can_play(SONG_EPONA) && can_use_wallet(1) && is_day"
+    #EPONA: "is_adult && can_play_epona && can_use_wallet(1) && is_day"
     EPONA: "true" #If fast Epona becomes a setting, we need a check here... this is "Ingo deposed".
     MALON_COW: "can_ride_epona && event(EPONA) && is_day"
     RUPEES: "is_child"
   locations:
-    "Lon Lon Ranch Malon Song": "is_child && has(OCARINA) && event(MALON) && is_day"
+    "Lon Lon Ranch Malon Song": "is_child && has_ocarina && event(MALON) && is_day"
     "Lon Lon Ranch GS Tree": "is_child"
     "Lon Lon Ranch GS House": "can_boomerang && gs_night"
     "Lon Lon Ranch GS Rain Shed": "is_child && gs_night"
@@ -394,16 +394,16 @@
   exits:
     "Lon Lon Ranch": "true"
   locations:
-    "Lon Lon Ranch Stables Cow Left": "can_play(SONG_EPONA)"
-    "Lon Lon Ranch Stables Cow Right": "can_play(SONG_EPONA)"
+    "Lon Lon Ranch Stables Cow Left": "can_play_epona"
+    "Lon Lon Ranch Stables Cow Right": "can_play_epona"
 "Lon Lon Ranch Silo":
   region: LON_LON_RANCH
   exits:
     "Lon Lon Ranch": "true"
   locations:
     "Lon Lon Ranch Silo HP": "is_child"
-    "Lon Lon Ranch Silo Cow Front": "can_play(SONG_EPONA)"
-    "Lon Lon Ranch Silo Cow Back": "can_play(SONG_EPONA)"
+    "Lon Lon Ranch Silo Cow Front": "can_play_epona"
+    "Lon Lon Ranch Silo Cow Back": "can_play_epona"
 "Lon Lon Ranch House":
   region: LON_LON_RANCH
   exits:
@@ -508,7 +508,7 @@
   locations:
     "Lost Woods Target": "can_use_slingshot"
     "Lost Woods Skull Kid": "is_child && can_play(SONG_SARIA)"
-    "Lost Woods Memory Game": "is_child && has(OCARINA)"
+    "Lost Woods Memory Game": "is_child && has_ocarina"
     "Lost Woods Scrub Sticks Upgrade": "is_child && can_hit_scrub && can_use_wallet(1)"
     "Lost Woods Odd Mushroom": "adult_trade(COJIRO)"
     "Lost Woods Poacher's Saw": "adult_trade(ODD_POTION)"
@@ -566,7 +566,7 @@
     "Lost Woods Deep": "true"
   locations:
     "Deku Theater Sticks Upgrade": "is_child && has(MASK_SKULL)"
-    "Deku Theater Nuts Upgrade": "is_child && has(MASK_TRUTH)"
+    "Deku Theater Nuts Upgrade": "is_child && has_mask_truth"
 "Lost Woods Scrub Grotto":
   region: LOST_WOODS
   exits:
@@ -714,23 +714,23 @@
   exits:
     "Kakariko": "true"
   locations:
-    "Kakariko Cow": "can_play(SONG_EPONA)"
+    "Kakariko Cow": "can_play_epona"
 "Impa House Back":
   region: KAKARIKO
   exits:
     "Kakariko": "true"
   locations:
-    "Kakariko Cow": "can_play(SONG_EPONA)"
+    "Kakariko Cow": "can_play_epona"
     "Kakariko Impa House HP": "true"
 "Windmill":
   region: KAKARIKO
   exits:
     "Kakariko": "true"
   events:
-    WELL_DRAIN: "is_child && can_play(SONG_STORMS)"
+    WELL_DRAIN: "is_child && can_play_storms"
   locations:
     "Windmill HP": "can_boomerang || event(WINDMILL_TOP) || (is_adult && trick(OOT_WINDMILL_HP_NOTHING))"
-    "Windmill Song of Storms": "is_adult && has(OCARINA)"
+    "Windmill Song of Storms": "is_adult && has_ocarina"
 "Kakariko Carpenter House":
   region: KAKARIKO
   exits:
@@ -816,12 +816,12 @@
   exits:
     "Graveyard": "true"
   locations:
-    "Graveyard ReDead Tomb": "can_play(SONG_SUN)"
+    "Graveyard ReDead Tomb": "can_play_sun"
 "Dampe Grave":
   region: GRAVEYARD
   exits:
     "Graveyard": "true"
-    "Windmill": "is_adult && can_play(SONG_TIME)"
+    "Windmill": "is_adult && can_play_time"
   events:
     NUTS: "true"
     RUPEES: "true"
@@ -829,7 +829,7 @@
     BOMBS: "true"
     SEEDS: "is_child"
     ARROWS: "is_adult"
-    WINDMILL_TOP: "is_adult && can_play(SONG_TIME)"
+    WINDMILL_TOP: "is_adult && can_play_time"
   locations:
     "Graveyard Dampe Tomb Reward 1": "true"
     "Graveyard Dampe Tomb Reward 2": "is_adult" #It's very hard to finish this race sub-1 as kid.
@@ -898,7 +898,7 @@
   events:
     RUPEES: "true"
   locations:
-    "Death Mountain Cow": "can_play(SONG_EPONA)"
+    "Death Mountain Cow": "can_play_epona"
 "Fairy Fountain Magic":
   region: DEATH_MOUNTAIN_TRAIL
   exits:
@@ -921,7 +921,7 @@
     "Death Mountain": "true"
     "Death Mountain Crater Bottom": "is_adult && (has_explosives || can_use_bow || has(STRENGTH))"
     "Goron Shop": "(is_adult && (has_explosives || can_use_bow || has(STRENGTH))) || (is_child && has_bombflowers)"
-    "Goron City Grotto": "is_adult && (can_play(SONG_TIME) || (can_hookshot && (has_tunic_goron_strict || can_use_nayru)))"
+    "Goron City Grotto": "is_adult && (can_play_time || (can_hookshot && (has_tunic_goron_strict || can_use_nayru)))"
   event:
     GORON_CITY_SHORTCUT: "has_bombflowers || can_hammer || can_use_bow || can_use_din"
     STICKS: "is_child"
@@ -997,8 +997,8 @@
     "Zora River Bean Seller": "is_child && can_use_wallet(1)"
     "Zora River HP Pillar": "is_child || has_hover_boots"
     "Zora River HP Platform": "is_child || has_hover_boots"
-    "Zora River Frogs Storms": "is_child && can_play(SONG_STORMS)"
-    "Zora River Frogs Game": "is_child && can_play(SONG_ZELDA) && can_play(SONG_SARIA) && can_play(SONG_EPONA) && can_play(SONG_SUN) && can_play(SONG_TIME) && can_play(SONG_STORMS)"
+    "Zora River Frogs Storms": "is_child && can_play_storms"
+    "Zora River Frogs Game": "is_child && can_play(SONG_ZELDA) && can_play(SONG_SARIA) && can_play_epona && can_play_sun && can_play_time && can_play_storms"
     "Zora River GS Ladder": "is_child && gs_night && can_damage_skull"
     "Zora River GS Near Grotto": "is_adult && gs_night && can_hookshot"
     "Zora River GS Near Bridge": "is_adult && gs_night && can_hookshot"
@@ -1051,7 +1051,7 @@
     "Zora Domain Diving Game": "is_child && can_use_wallet(1)"
     "Zora Domain Tunic": "is_adult && has_blue_fire"
     "Zora Domain Eyeball Frog": "has_blue_fire && adult_trade(PRESCRIPTION)"
-    "Zora Domain GS Waterfall": "is_adult && gs_night && (has_ranged_weapon_adult || has(MAGIC_UPGRADE))"
+    "Zora Domain GS Waterfall": "is_adult && gs_night && (has_ranged_weapon_adult || has(MAGIC_UPGRADE) || has(SHARED_MAGIC_UPGRADE))"
   gossip:
     "Zora Domain Gossip": "true"
 "Zora Domain Back":
@@ -1087,7 +1087,7 @@
     "Fishing Pond": "is_child || event(WATER_TEMPLE_CLEARED) || scarecrow_hookshot || can_ride_bean(BEAN_LAKE_HYLIA)"
     "Lake Hylia Grotto": "true"
   events:
-    SCARECROW_CHILD: "is_child && has(OCARINA)"
+    SCARECROW_CHILD: "is_child && has_ocarina"
     SCARECROW: "is_adult && event(SCARECROW_CHILD)"
     BEAN_LAKE_HYLIA: "can_use_beans"
     BOMBS: "can_cut_grass"
@@ -1168,7 +1168,7 @@
     "Temple of Time Entryway": "true"
     "Sacred Realm": "is_adult && event(DOOR_OF_TIME_OPEN)"
   events:
-    DOOR_OF_TIME_OPEN: "setting(doorOfTime, open) || can_play(SONG_TIME)"
+    DOOR_OF_TIME_OPEN: "setting(doorOfTime, open) || can_play_time"
     TIME_TRAVEL: "event(DOOR_OF_TIME_OPEN) && has_sword_master"
   locations:
     "Temple of Time Master Sword": "is_child && event(DOOR_OF_TIME_OPEN)"
@@ -1274,7 +1274,7 @@
     "Gerudo Valley Waterfall HP": "true"
     "Gerudo Valley GS Soil": "gs_soil && can_damage_skull"
     "Gerudo Valley GS Wall": "can_boomerang && gs_night"
-    "Gerudo Valley Cow": "is_child && can_play(SONG_EPONA)"
+    "Gerudo Valley Cow": "is_child && can_play_epona"
   gossip:
     "Gerudo Valley Gossip": "true"
 "Gerudo Valley After Bridge":

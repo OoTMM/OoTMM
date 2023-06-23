@@ -29,7 +29,7 @@
     "Ancient Castle of Ikana Roof Interior": "can_goron_bomb_jump"
     "Ikana Castle Exterior": "true"
   events:
-    IKANA_CASTLE_LIGHT: "cond(setting(erIkanaCastle), has(MASK_DEKU), true)" #|| (has(MASK_ZORA) && can_gainer) Can press the switch trivially, but can't get back to the roof without these.
+    IKANA_CASTLE_LIGHT: "cond(setting(erIkanaCastle), has(MASK_DEKU), true)" #|| (has_mask_zora && can_gainer) Can press the switch trivially, but can't get back to the roof without these.
     IKANA_CASTLE_LIGHT2: "can_use_keg"
     NUTS: "true"
   locations:

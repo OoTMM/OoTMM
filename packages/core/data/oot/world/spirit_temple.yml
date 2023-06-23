@@ -51,7 +51,7 @@
   locations:
     "Spirit Temple Adult Silver Rupees": "has_ranged_weapon_adult || has_explosives"
     "Spirit Temple Adult Lullaby": "can_play(SONG_ZELDA) && can_hookshot"
-    "Spirit Temple GS Boulders": "can_play(SONG_TIME) && (has_ranged_weapon_adult || has_explosives)"
+    "Spirit Temple GS Boulders": "can_play_time && (has_ranged_weapon_adult || has_explosives)"
 "Spirit Temple Adult Climb":
   dungeon: Spirit
   exits:
@@ -69,7 +69,7 @@
   locations:
     "Spirit Temple Statue Base": "(event(SPIRIT_CHILD_DOOR) && has_explosives && can_use_sticks) || has_fire_spirit || (has_fire_arrows && small_keys(SMALL_KEY_SPIRIT, 4))"
     "Spirit Temple GS Statue": "event(SPIRIT_ADULT_DOOR) && (can_hookshot || has_hover_boots)"
-    "Spirit Temple Silver Gauntlets": "small_keys(SMALL_KEY_SPIRIT, 3) && has(HOOKSHOT, 2) && has_explosives"
+    "Spirit Temple Silver Gauntlets": "small_keys(SMALL_KEY_SPIRIT, 3) && has_hookshot(2) && has_explosives"
 "Spirit Temple Statue Adult":
   dungeon: Spirit
   exits:

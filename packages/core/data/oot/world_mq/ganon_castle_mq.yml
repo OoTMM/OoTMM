@@ -24,7 +24,7 @@
 "Ganon Castle Forest":
   dungeon: Ganon
   events:
-    GANON_TRIAL_FOREST: "can_play(SONG_TIME) && has_light_arrows"
+    GANON_TRIAL_FOREST: "can_play_time && has_light_arrows"
   locations:
     "MQ Ganon Castle Forest Trial Key": "can_hookshot"
     "MQ Ganon Castle Forest Trial First Chest": "can_use_bow"

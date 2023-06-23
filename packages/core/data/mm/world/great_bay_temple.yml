@@ -1,7 +1,7 @@
 "Great Bay Temple":
   dungeon: GB
   exits:
-    "Great Bay Temple Entrance": "can_play(SONG_TIME) || ((can_hookshot || can_oot_warp) && event(MAJORA) && trick(MM_MAJORA_LOGIC))"
+    "Great Bay Temple Entrance": "can_play_time || ((can_hookshot || can_oot_warp) && event(MAJORA) && trick(MM_MAJORA_LOGIC))"
     "Zora Cape Peninsula": "can_hookshot"
 "Great Bay Temple Entrance":
   dungeon: GB
@@ -21,9 +21,9 @@
     GB_WATER_WHEEL: "event(GB_PIPE_RED) && event(GB_PIPE_RED2) && can_hookshot"
   exits:
     "Great Bay Temple Entrance": "true"
-    "Great Bay Temple Central Room": "has(MASK_ZORA)"
+    "Great Bay Temple Central Room": "has_mask_zora"
   locations:
-    "Great Bay Temple SF Water Wheel Platform": "has(MASK_ZORA) || (has(MASK_GREAT_FAIRY) && (has_arrows || can_hookshot))"
+    "Great Bay Temple SF Water Wheel Platform": "has_mask_zora || (has(MASK_GREAT_FAIRY) && (has_arrows || can_hookshot))"
     "Great Bay Temple SF Water Wheel Skulltula": "true"
 "Great Bay Temple Central Room":
   dungeon: GB
@@ -36,7 +36,7 @@
     "Great Bay Temple Pre-Boss": "event(GB_WATER_WHEEL)"
   locations:
     "Great Bay Temple SF Central Room Barrel": "true"
-    "Great Bay Temple SF Central Room Underwater Pot": "has(MASK_ZORA) || (has_arrows && has(MASK_GREAT_FAIRY))"
+    "Great Bay Temple SF Central Room Underwater Pot": "has_mask_zora || (has_arrows && has(MASK_GREAT_FAIRY))"
 "Great Bay Temple Map Room":
   dungeon: GB
   events:
@@ -75,7 +75,7 @@
 "Great Bay Temple Ice Arrow Room":
   dungeon: GB
   events:
-    MAGIC: "(has_weapon || has(MASK_ZORA) || has(MASK_DEKU) || has_explosives) && (can_hookshot || can_oot_warp)"
+    MAGIC: "(has_weapon || has_mask_zora || has(MASK_DEKU) || has_explosives) && (can_hookshot || can_oot_warp)"
   exits:
     "Great Bay Temple Red Pipe 1": "true"
   locations:
@@ -132,7 +132,7 @@
   boss: true
   dungeon: GB
   exits:
-    "Great Bay Temple After Boss": "(has_magic && ((has(MASK_ZORA) && has_arrows) || has(MASK_FIERCE_DEITY)))"
+    "Great Bay Temple After Boss": "(has_magic && ((has_mask_zora && has_arrows) || has(MASK_FIERCE_DEITY)))"
 "Great Bay Temple After Boss":
   boss: true
   dungeon: GB

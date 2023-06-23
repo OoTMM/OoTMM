@@ -111,7 +111,7 @@
 "Water Temple Longshot Room":
   dungeon: Water
   exits:
-    "Water Temple River": "can_play(SONG_TIME)"
+    "Water Temple River": "can_play_time"
   locations:
     "Water Temple Longshot": "true"
 "Water Temple River":

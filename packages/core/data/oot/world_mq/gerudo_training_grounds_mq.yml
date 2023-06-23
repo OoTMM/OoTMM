@@ -32,7 +32,7 @@
 "Gerudo Training Grounds Stalfos Room":
   dungeon: GTG
   exits:
-    "Gerudo Training Grounds Spinning Statue Room": "has_blue_fire && can_play(SONG_TIME) && has_lens"
+    "Gerudo Training Grounds Spinning Statue Room": "has_blue_fire && can_play_time && has_lens"
   events:
     BLUE_FIRE: "true"
   locations:

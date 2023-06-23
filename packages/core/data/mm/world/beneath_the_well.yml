@@ -7,7 +7,7 @@
 "Beneath the Well North Section":
   dungeon: BtW
   events:
-    WELL_HOT_WATER: "event(FISH) && (has_explosives || has(MASK_ZORA) || trick_keg_explosives || trick(MM_WELL_HSW))"
+    WELL_HOT_WATER: "event(FISH) && (has_explosives || has_mask_zora || trick_keg_explosives || trick(MM_WELL_HSW))"
     WATER: "true"
     FISH: "true"
     BUGS: "event(WATER) && (can_use_fire_arrows || has_sticks)"
@@ -31,7 +31,7 @@
     WELL_BIG_POE: "has_bombs && has_weapon_range"
     BUGS: "has_bottle"
   locations:
-    "Beneath the Well Cow": "(event(WELL_HOT_WATER) || has_hot_water_distance) && can_play(SONG_EPONA)"
+    "Beneath the Well Cow": "(event(WELL_HOT_WATER) || has_hot_water_distance) && can_play_epona"
 "Beneath the Well Middle Section":
   dungeon: BtW
   exits:

@@ -184,7 +184,6 @@ function resolveSpecialCond(settings: Settings, state: State, special: string): 
 
   const countUnique = [...itemsUnique].filter(item => itemCount(state, item) > 0).length;
   const result = (itemsCount(state, [...items]) + countUnique) >= cond.count;
-  const dependencies = { items: new Set([...items, ...itemsUnique]) };
 
   return { result, depEvents: [], depItems: [...items, ...itemsUnique] };
 }
@@ -195,24 +194,39 @@ export const exprTrue = (): Expr => state => ({ result: true, depItems: [], depE
 export const exprFalse = (): Expr => state => ({ result: false, depItems: [], depEvents: [] });
 
 export const exprAnd = (exprs: Expr[]): Expr => state => {
-  const results: ExprResult[] = exprs.map(expr => expr(state));
-  const result = results.every(x => x.result);
+  const results: ExprResult[] = [];
+  for (const e of exprs) {
+    const r = e(state);
+    results.push(r);
 
-  if (result) {
-    const restrictions = exprRestrictionsAnd(results);
-    if (isDefaultRestrictions(restrictions)) {
-      return { result: true, depItems: [], depEvents: [] };
-    } else {
-      return { result: true, depItems: results.map(x => x.depItems), depEvents: results.map(x => x.depEvents), restrictions };
+    /* Early exit */
+    if (!r.result) {
+      return { result: false, depItems: results.map(x => x.depItems), depEvents: results.map(x => x.depEvents) };
     }
+  }
+
+  const restrictions = exprRestrictionsAnd(results);
+  if (isDefaultRestrictions(restrictions)) {
+    return { result: true, depItems: [], depEvents: [] };
   } else {
-    return { result: false, depItems: results.map(x => x.depItems), depEvents: results.map(x => x.depEvents) };
+    return { result: true, depItems: results.map(x => x.depItems), depEvents: results.map(x => x.depEvents), restrictions };
   }
 };
 
 export const exprOr = (exprs: Expr[]): Expr => state => {
-  const results: ExprResult[] = exprs.map(expr => expr(state));
-  const result = results.some(x => x.result);
+  const results: ExprResult[] = [];
+  let result = false;
+
+  for (const e of exprs) {
+    const r = e(state);
+    results.push(r);
+    if (r.result) {
+      result = true;
+      if (!r.restrictions) {
+        return { result: true, depItems: [], depEvents: [] };
+      }
+    }
+  }
 
   if (result) {
     const restrictions = exprRestrictionsOr(results);
@@ -230,28 +244,35 @@ export const exprNot = (expr: Expr): Expr => state => expr(state).result ? exprF
 export const exprCond = (cond: Expr, then: Expr, otherwise: Expr): Expr => state => cond(state).result ? then(state) : otherwise(state);
 export const exprAge = (age: Age): Expr => state => state.age === age ? exprTrue()(state) : exprFalse()(state);
 
-export const exprHas = (item: string, itemShared: string, count: number): Expr => {
+export const exprHas = (item: string, count: number): Expr => {
   if (count <= 0) {
     return exprTrue();
   }
+  const depItems = [item];
+  const depEvents: string[] = [];
 
   return state => {
-    const result = (state.ignoreItems || (itemCount(state, item) >= count) || (itemCount(state, itemShared) >= count));
-    return { result, depItems: [item, itemShared], depEvents: [] };
+    const result = (state.ignoreItems || (itemCount(state, item) >= count));
+    return { result, depItems, depEvents };
   }
 };
 
-export const exprRenewable = (item: string, itemShared: string): Expr => {
+export const exprRenewable = (item: string): Expr => {
+  const depItems = [item];
+  const depEvents: string[] = [];
   return state => {
-    const result = (state.ignoreItems || state.renewables[item] > 0 || state.renewables[itemShared] > 0);
-    return { result, depItems: [item, itemShared], depEvents: [] };
+    const result = (state.ignoreItems || state.renewables[item] > 0);
+    return { result, depItems, depEvents };
   }
 };
 
-export const exprLicense = (item: string, itemShared: string): Expr => {
+export const exprLicense = (item: string): Expr => {
+  const depItems = [item];
+  const depEvents: string[] = [];
+
   return state => {
-    const result = (state.ignoreItems || state.licenses[item] > 0 || state.licenses[itemShared] > 0);
-    return { result, depItems: [item, itemShared], depEvents: [] };
+    const result = (state.ignoreItems || state.licenses[item] > 0);
+    return { result, depItems, depEvents };
   }
 };
 

@@ -11,7 +11,7 @@
   exits:
     "Forest Temple": "true"
     "Forest Temple Mini-Boss": "true"
-    "Forest Temple Garden West": "can_play(SONG_TIME)"
+    "Forest Temple Garden West": "can_play_time"
     "Forest Temple Garden East": "can_hit_triggers_distance"
     "Forest Temple Maze": "small_keys(SMALL_KEY_FOREST, 1)"
     "Forest Temple Antichamber": "event(FOREST_POE_4)"

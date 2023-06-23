@@ -17,7 +17,7 @@
     STICKS: "has_weapon || can_boomerang"
   locations:
     "MQ Dodongo Cavern Map Chest": "has_bombflowers || can_hammer || has_blue_fire_arrows"
-    "MQ Dodongo Cavern GS Time Blocks": "can_play(SONG_TIME) && can_damage_skull"
+    "MQ Dodongo Cavern GS Time Blocks": "can_play_time && can_damage_skull"
     "MQ Dodongo Cavern Lobby Scrub Front": "can_hit_scrub && can_use_wallet(1)"
     "MQ Dodongo Cavern Lobby Scrub Back": "can_hit_scrub && can_use_wallet(1)"
   gossip:

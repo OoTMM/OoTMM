@@ -57,7 +57,7 @@
   events:
     GANON_TRIAL_SHADOW: "can_hammer && has_light_arrows && (can_longshot || has_fire_arrows) && (has_hover_boots || has_fire) && (has_lens || (can_longshot && has_hover_boots))"
   locations:
-    "Ganon Castle Shadow Chest 1": "can_play(SONG_TIME) || can_hookshot || has_hover_boots || has_fire_arrows"
+    "Ganon Castle Shadow Chest 1": "can_play_time || can_hookshot || has_hover_boots || has_fire_arrows"
     "Ganon Castle Shadow Chest 2": "(can_longshot || has_fire_arrows) && (has_hover_boots || has_fire)"
 "Ganon Castle Stairs":
   region: NONE

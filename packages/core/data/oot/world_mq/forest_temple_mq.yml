@@ -4,7 +4,7 @@
     "Sacred Meadow": "true"
     "Forest Temple Main": "small_keys(SMALL_KEY_FOREST, 1) && (is_adult || (has_nuts || has_weapon || has_explosives || has_ranged_weapon_child))"
   locations:
-    "MQ Forest Temple First Room Chest": "can_hit_triggers_distance || can_hookshot || has_explosives || has_hover_boots || can_use_din || (has_weapon && has(MAGIC_UPGRADE))" #Many ways to deal with the Skulltula in the way.
+    "MQ Forest Temple First Room Chest": "can_hit_triggers_distance || can_hookshot || has_explosives || has_hover_boots || can_use_din || (has_weapon && (has(MAGIC_UPGRADE) || has(SHARED_MAGIC_UPGRADE)))" #Many ways to deal with the Skulltula in the way.
     "MQ Forest Temple GS Entryway": "can_collect_distance"
 "Forest Temple Main":
   dungeon: Forest
@@ -15,7 +15,7 @@
     "Forest Temple West Garden": "can_hit_triggers_distance"
     "Forest Temple East Garden": "can_hit_triggers_distance"
   locations:
-    "MQ Forest Temple Wolfos Chest": "can_play(SONG_TIME) && (has_weapon || can_use_slingshot || has_explosives || can_use_din || can_use_sticks)"
+    "MQ Forest Temple Wolfos Chest": "can_play_time && (has_weapon || can_use_slingshot || has_explosives || can_use_din || can_use_sticks)"
 "Forest Temple West Wing":
   dungeon: Forest
   exits:
@@ -52,7 +52,7 @@
   dungeon: Forest
   exits:
     "Forest Temple Main": "true"
-    "Forest Temple Garden Ledges": "can_longshot || (can_hookshot && (trick(OOT_FOREST_HOOK) || can_play(SONG_TIME)))"
+    "Forest Temple Garden Ledges": "can_longshot || (can_hookshot && (trick(OOT_FOREST_HOOK) || can_play_time))"
     "Forest Temple East Garden Ledge": "can_longshot"
   events:
     STICKS: "can_hookshot || can_hammer || can_boomerang || (has_nuts && has_weapon)"
@@ -72,7 +72,7 @@
   dungeon: Forest
   exits:
     "Forest Temple East Garden": "true"
-    "Forest Temple Falling Ceiling": "can_play(SONG_TIME)"
+    "Forest Temple Falling Ceiling": "can_play_time"
   locations:
     "MQ Forest Temple East Garden Ledge Chest": "true"
 "Forest Temple Twisted Hallway":

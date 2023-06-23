@@ -39,13 +39,13 @@
     "Woodfall Temple Water Room Upper": "has_arrows && has(MASK_DEKU)"
   locations:
     "Woodfall Temple Water Chest": "has(MASK_DEKU) || can_hookshot || (can_hookshot_short && event(WOODFALL_TEMPLE_MAIN_FLOWER)) || can_use_ice_arrows"
-    "Woodfall Temple SF Water Room Beehive": "has_arrows || can_use_deku_bubble || (has(MASK_GREAT_FAIRY) && (has_bombs || has_bombchu || has(MASK_ZORA) || can_hookshot))"
+    "Woodfall Temple SF Water Room Beehive": "has_arrows || can_use_deku_bubble || (has(MASK_GREAT_FAIRY) && (has_bombs || has_bombchu || has_mask_zora || can_hookshot))"
 "Woodfall Temple Map Room":
   dungeon: WF
   exits:
     "Woodfall Temple Water Room": "true"
   locations:
-    "Woodfall Temple Map": "has(MASK_DEKU) || has_explosives || has(MASK_GORON)"
+    "Woodfall Temple Map": "has(MASK_DEKU) || has_explosives || has_mask_goron"
 "Woodfall Temple Maze":
   dungeon: WF
   exits:

@@ -42,7 +42,7 @@
 "Fire Temple Maze Upper":
   dungeon: Fire
   exits:
-    "Fire Temple Burning Block": "can_play(SONG_TIME) || can_longshot"
+    "Fire Temple Burning Block": "can_play_time || can_longshot"
     "Fire Temple 3f Lava Room": "small_keys(SMALL_KEY_FIRE, 3)"
   locations:
     "MQ Fire Temple Maze Upper Chest": "true"
@@ -64,7 +64,7 @@
     FIRE_TEMPLE_PILLAR_HAMMER: "true"
   locations:
     "MQ Fire Temple Flare Dancer Key": "true"
-    "MQ Fire Temple GS Fire Walls Side Room": "has_hover_boots || can_play(SONG_TIME)"
+    "MQ Fire Temple GS Fire Walls Side Room": "has_hover_boots || can_play_time"
     "MQ Fire Temple GS Fire Walls Middle": "has_explosives"
 "Fire Temple Top":
   dungeon: Fire
