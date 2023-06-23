@@ -45,3 +45,15 @@ FIELD_FROM_KAKARIKO,                      overworld,        Hyrule Field,       
 FIELD_FROM_LON_LON_RANCH,                 overworld,        Hyrule Field,                               Lon Lon Ranch,                                LON_LON_RANCH_FROM_FIELD
 FIELD_FROM_LAKE_HYLIA,                    overworld,        Hyrule Field,                               Lake Hylia,                                   LAKE_HYLIA_FROM_FIELD
 VALLEY_FROM_GERUDO_FORTRESS,              overworld,        Gerudo Valley After Bridge,                 Gerudo Fortress Exterior,                     GERUDO_FORTRESS_FROM_VALLEY
+OOT_HOUSE_MIDO,                           indoors,          Mido's House,                               Kokiri Forest,                                OOT_KOKIRI_FOREST_FROM_MIDO
+OOT_KOKIRI_FOREST_FROM_MIDO,              indoors,          Kokiri Forest,                              Mido's House,                                 OOT_HOUSE_MIDO
+OOT_HOUSE_SARIA,                          indoors,          Saria's House,                              Kokiri Forest,                                OOT_KOKIRI_FOREST_FROM_SARIA
+OOT_KOKIRI_FOREST_FROM_SARIA,             indoors,          Kokiri Forest,                              Saria's House,                                OOT_HOUSE_SARIA
+OOT_HOUSE_TWINS,                          indoors,          House of Twins,                             Kokiri Forest,                                OOT_KOKIRI_FOREST_FROM_TWINS
+OOT_KOKIRI_FOREST_FROM_TWINS,             indoors,          Kokiri Forest,                              House of Twins,                               OOT_HOUSE_TWINS
+OOT_HOUSE_KNOW_IT_ALL,                    indoors,          Know It All House,                          Kokiri Forest,                                OOT_KOKIRI_FOREST_FROM_KNOW_IT_ALL
+OOT_KOKIRI_FOREST_FROM_KNOW_IT_ALL,       indoors,          Kokiri Forest,                              Know It All House,                            OOT_HOUSE_KNOW_IT_ALL
+OOT_KOKIRI_SHOP,                          indoors,          Kokiri Shop,                                Kokiri Forest,                                OOT_KOKIRI_FOREST_FROM_SHOP
+OOT_KOKIRI_FOREST_FROM_SHOP,              indoors,          Kokiri Forest,                              Kokiri Shop,                                  OOT_KOKIRI_SHOP
+OOT_HOUSE_POTS,                           indoors,          Market Pot House,                           Market Entryway,                              OOT_MARKET_ENTRANCE_FROM_POTS
+OOT_MARKET_ENTRANCE_FROM_POTS,            indoors,          Market Entryway,                            Market Pot House,                             OOT_HOUSE_POTS
