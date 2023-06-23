@@ -268,7 +268,7 @@ const gameChecks = (world: number, settings: Settings, game: Game, logic: LogicR
   for (const locId in logic.world.checks) {
     const loc = makeLocation(locId, world);
     const c = logic.world.checks[locId];
-    const item = logic.items[loc];
+    const item = logic.items.get(loc)!;
     const itemD = itemData(item);
 
     if (c.game !== game) {
@@ -506,7 +506,7 @@ export const randomizerData = (world: number, logic: LogicResult): Buffer => {
 
 function addStartingItemLocsWorld(world: number, logic: LogicResult, locs: string[], items: {[k: string]: number}) {
   const l = makePlayerLocations(logic.settings, locs);
-  const i = l.map(x => logic.items[x]);
+  const i = l.map(x => logic.items.get(x)!);
 
   for (const j of i) {
     const itemD = itemData(j);

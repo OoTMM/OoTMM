@@ -157,14 +157,14 @@ export class LogicPassHints {
 
     for (const sphere of this.state.analysis.spheres) {
       for (const loc of sphere) {
-        if (this.state.items[loc] === item) {
+        if (this.state.items.get(loc) === item) {
           locs.push(loc);
         }
       }
     }
 
     for (const loc of Object.keys(this.state.items) as Location[]) {
-      if (this.state.items[loc] === item) {
+      if (this.state.items.get(loc) === item) {
         locs.push(loc);
       }
     }
@@ -190,7 +190,7 @@ export class LogicPassHints {
 
   private isLocationHintable(loc: Location, klass: HintClass) {
     /* Get the item and region  */
-    const item = this.state.items[loc];
+    const item = this.state.items.get(loc)!;
     const locD = locationData(loc);
     const region = this.state.world.regions[locD.id];
 
@@ -299,7 +299,7 @@ export class LogicPassHints {
 
   private playthroughLocations(player: number) {
     const locations = this.state.analysis.spheres.flat()
-      .filter(loc => itemData(this.state.items[loc]).player === player)
+      .filter(loc => itemData(this.state.items.get(loc)!).player === player)
       .filter(loc => this.isLocationHintable(loc, 'item'));
     return shuffle(this.state.random, locations);
   }
@@ -352,7 +352,7 @@ export class LogicPassHints {
     if (locations.every(l => this.hintedLocations.has(l))) {
       return false;
     }
-    const items = locations.map(l => this.state.items[l]);
+    const items = locations.map(l => this.state.items.get(l)!);
     let gossip;
     if (isMoon) {
       const candidates = Object.keys(this.state.world.gossip)
@@ -471,7 +471,7 @@ export class LogicPassHints {
     if (this.hintedLocations.has(location) && !isMoon) {
       return false;
     }
-    const item = this.state.items[location];
+    const item = this.state.items.get(location)!;
     const hint = this.state.world.checks[locD.id].hint;
     if (this.placeGossipItemExact(world, locD.world as number, hint, extra, isMoon)) {
       return true;

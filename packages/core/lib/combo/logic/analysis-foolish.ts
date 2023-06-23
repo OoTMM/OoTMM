@@ -37,7 +37,7 @@ export class LogicPassAnalysisFoolish {
 
   private markAsSometimesRequired(loc: Location) {
     if (!this.conditionallyRequiredLocations.has(loc)) {
-      this.state.monitor.debug("Foolish Analysis - Sometimes Required: " + loc + "(" + this.state.items[loc] + ")");
+      this.state.monitor.debug("Foolish Analysis - Sometimes Required: " + loc + "(" + this.state.items.get(loc) + ")");
       this.conditionallyRequiredLocations.add(loc);
     }
   }
@@ -178,7 +178,7 @@ export class LogicPassAnalysisFoolish {
       if (this.state.analysis.required.has(loc)) continue;
       if (this.state.analysis.unreachable.has(loc)) continue;
       if (this.state.analysis.useless.has(loc)) continue;
-      const item = this.state.items[loc];
+      const item = this.state.items.get(loc)!;
       if (isItemConsumable(item) && !isLocationRenewable(this.state.world, loc) && !isItemLicense(item)) continue;
       locsSet.add(loc);
     }

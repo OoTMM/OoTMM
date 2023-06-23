@@ -449,7 +449,7 @@ export class LogicPassAnalysis {
     do {
       this.progress(count++, 10);
       pathfinderState = this.pathfinder.run(pathfinderState, { inPlace: true, items: this.state.items, stopAtGoal: true, restrictedLocations });
-      const sphere = Array.from(pathfinderState.newLocations).filter(x => isItemImportant(this.state.items[x]));
+      const sphere = Array.from(pathfinderState.newLocations).filter(x => isItemImportant(this.state.items.get(x)!));
       if (sphere.length !== 0) {
         spheres.push(shuffle(this.state.random, sphere));
       }
@@ -489,7 +489,7 @@ export class LogicPassAnalysis {
       const pathfinderState = this.pathfinder.run(null, { items: this.state.items, forbiddenLocations: new Set([loc]), recursive: true, stopAtGoal: true });
       if (!pathfinderState.goal) {
         this.requiredLocs.add(loc);
-        const item = this.state.items[loc];
+        const item = this.state.items.get(loc)!;
         if (!this.requiredlocsByItem[item]) {
           this.requiredlocsByItem[item] = new Set();
         }
@@ -499,13 +499,13 @@ export class LogicPassAnalysis {
   }
 
   private isLocUselessNonRenewable(loc: Location) {
-    const item = this.state.items[loc];
+    const item = this.state.items.get(loc)!;
     return (isItemConsumable(item) && !isLocationRenewable(this.state.world, loc) && !isItemLicense(item));
   }
 
   private isLocUselessHeuristicCount(loc: Location) {
     /* TODO: this is fragile */
-    const item = this.state.items[loc];
+    const item = this.state.items.get(loc)!;
     const itemId = itemData(item).id;
     let maximumRequired = -1;
     switch (itemId) {
@@ -551,7 +551,7 @@ export class LogicPassAnalysis {
 
     while (locsToCheck.length > 0) {
       const l = locsToCheck.pop()!;
-      const item = this.state.items[l];
+      const item = this.state.items.get(l)!;
       const itemD = itemData(item);
       if (isItemImportant(item) && !this.uselessLocs.has(l) && !this.unreachableLocs.has(l)) {
         /* May be a progression item - need to check other locations */
@@ -571,7 +571,7 @@ export class LogicPassAnalysis {
         }
       }
     }
-    this.state.monitor.debug("Analysis - isLocUselessHeuristicDependencies: " + this.state.items[loc]);
+    this.state.monitor.debug("Analysis - isLocUselessHeuristicDependencies: " + this.state.items.get(loc));
     return true;
   }
 
@@ -580,7 +580,7 @@ export class LogicPassAnalysis {
       if (this.requiredLocs.has(loc) || this.uselessLocs.has(loc) || this.unreachableLocs.has(loc)) {
         continue;
       }
-      if (!isItemImportant(this.state.items[loc]) || this.isLocUselessNonRenewable(loc) || this.isLocUselessHeuristicCount(loc) || this.isLocUselessHeuristicDependencies(loc)) {
+      if (!isItemImportant(this.state.items.get(loc)!) || this.isLocUselessNonRenewable(loc) || this.isLocUselessHeuristicCount(loc) || this.isLocUselessHeuristicDependencies(loc)) {
         this.uselessLocs.add(loc);
       }
     }
@@ -589,8 +589,8 @@ export class LogicPassAnalysis {
   private makeUnreachable() {
     const pathfinderState = this.pathfinder.run(null, { items: this.state.items, recursive: true });
     for (const loc of this.locations) {
-      if (isItemImportant(this.state.items[loc]) && !pathfinderState.locations.has(loc)) {
-        this.state.monitor.debug("Analysis - makeUnreachable: " + this.state.items[loc]);
+      if (isItemImportant(this.state.items.get(loc)!) && !pathfinderState.locations.has(loc)) {
+        this.state.monitor.debug("Analysis - makeUnreachable: " + this.state.items.get(loc));
         this.unreachableLocs.add(loc);
       }
     }

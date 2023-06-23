@@ -431,7 +431,7 @@ export class Pathfinder {
     const ws = this.state.ws[world];
     const globalLoc = makeLocation(loc, world);
     this.state.locations.add(globalLoc);
-    const globalItem = this.opts.items?.[globalLoc];
+    const globalItem = this.opts.items?.get(globalLoc);
     if (globalItem) {
       const itemD = itemData(globalItem);
       const otherWs = this.state.ws[itemD.player as number];

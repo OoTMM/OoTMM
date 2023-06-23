@@ -190,7 +190,7 @@ export class LogicPassSpoiler {
         this.indent('Way of the Hero:');
         for (const [stone, hint] of gossipsHero) {
           this.write(stone);
-          this.write(`  ${this.regionName(hint.region)}    ${this.locationName(hint.location)} - ${this.itemName(this.state.items[hint.location])}`);
+          this.write(`  ${this.regionName(hint.region)}    ${this.locationName(hint.location)} - ${this.itemName(this.state.items.get(hint.location)!)}`);
         }
         this.unindent('');
       }
@@ -273,7 +273,7 @@ export class LogicPassSpoiler {
         const regionalLocations = Object.keys(world.regions)
           .filter(location => world.regions[location] === region)
           .filter(location => isShuffled(settings, world, location, dungeonLocations))
-          .map(loc => `${loc}: ${this.itemName(placement[makeLocation(loc, i)])}`);
+          .map(loc => `${loc}: ${this.itemName(placement.get(makeLocation(loc, i))!)}`);
         this.indent(`${regionName(region)} (${regionalLocations.length}):`);
         for (const loc of regionalLocations) {
           this.write(loc);
@@ -293,7 +293,7 @@ export class LogicPassSpoiler {
       this.indent(`Sphere ${i}`);
       const sphere = spheres[i];
       for (const loc of sphere) {
-        this.write(`${this.locationName(loc)}: ${this.itemName(this.state.items[loc])}`);
+        this.write(`${this.locationName(loc)}: ${this.itemName(this.state.items.get(loc)!)}`);
       }
       this.unindent('');
     }

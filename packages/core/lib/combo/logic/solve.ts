@@ -9,7 +9,7 @@ import { Settings } from '../settings';
 import { Monitor } from '../monitor';
 import { Location, isLocationRenewable, locationData, makeLocation } from './locations';
 
-export type ItemPlacement = {[k: Location]: Item};
+export type ItemPlacement = Map<Location, Item>;
 
 const REWARDS_DUNGEONS = [
   'DT',
@@ -76,7 +76,7 @@ export class LogicPassSolver {
   ) {
     this.locations = this.makePlayerLocations(Object.keys(this.state.world.checks));
     this.pathfinder = new Pathfinder(this.state.world, this.state.settings);
-    this.items = {};
+    this.items = new Map;
     this.makeItemPools();
     this.pathfinderState = this.pathfinder.run(null);
     this.criticalRenewables = new Set<Item>();
@@ -282,7 +282,7 @@ export class LogicPassSolver {
       /* Fix the non-shuffled GS */
       for (const rawLocation of rawGsLocations) {
         const location = makeLocation(rawLocation, player);
-        if (!this.items[location]) {
+        if (!this.items.has(location)) {
           const item = makeItem(this.state.world.checks[rawLocation].item, player);
           this.place(location, item);
           removeItemPools(this.pools, item);
@@ -293,7 +293,7 @@ export class LogicPassSolver {
       if (this.state.settings.housesSkulltulaTokens !== 'all') {
         for (const rawLocation of rawHouseLocations) {
           const location = makeLocation(rawLocation, player);
-          if (!this.items[location]) {
+          if (!this.items.has(location)) {
             const item = makeItem(this.state.world.checks[rawLocation].item, player);
             this.place(location, item);
             removeItemPools(this.pools, item);
@@ -524,7 +524,7 @@ export class LogicPassSolver {
 
       /* Get all assumed reachable locations that have not been placed */
       unplacedLocs = Array.from(result.locations)
-        .filter(location => !this.items[location]);
+        .filter(location => !this.items.has(location));
 
       if (options.restrictedLocations) {
         unplacedLocs = unplacedLocs.filter(x => options.restrictedLocations!.has(x));
@@ -552,12 +552,12 @@ export class LogicPassSolver {
       } else {
         unplacedLocs = this.locations;
       }
-      unplacedLocs = shuffle(this.state.random, unplacedLocs.filter(x => !this.items[x]));
+      unplacedLocs = shuffle(this.state.random, unplacedLocs.filter(x => !this.items.has(x)));
 
       while (unplacedLocs.length) {
         const loc = unplacedLocs.pop()!;
-        const newPlacement = { ...this.items };
-        newPlacement[loc] = requiredItem;
+        const newPlacement = new Map(this.items);
+        newPlacement.set(loc, requiredItem);
         const result = this.pathfinder.run(null, { recursive: true, stopAtGoal: true, items: newPlacement, assumedItems: pool });
         if (result.goal) {
           this.place(loc, requiredItem);
@@ -571,7 +571,7 @@ export class LogicPassSolver {
 
   private fillAll() {
     /* Get all unplaced locs */
-    let locs = this.locations.filter(x => !this.items[x]);
+    let locs = this.locations.filter(x => !this.items.has(x));
 
     /* Fill using every pool */
     this.fill(locs, this.pools.required, true);
@@ -584,7 +584,7 @@ export class LogicPassSolver {
     this.fill(locs, this.pools.junk, false);
 
     /* Junk pool empty - fill with extra junk */
-    locs = shuffle(this.state.random, locs.filter(loc => !this.items[loc]));
+    locs = shuffle(this.state.random, locs.filter(loc => !this.items.has(loc)));
     const junkDistribution = itemsArray(this.junkDistribution);
     const junkDistributionRenewable = itemsArray(this.junkDistribution).filter(x => !isItemMajor(x));
     for (const loc of locs) {
@@ -596,7 +596,7 @@ export class LogicPassSolver {
 
   private fill(locs: Location[], pool: Items, required: boolean) {
     const items = shuffle(this.state.random, itemsArray(pool));
-    const locations = shuffle(this.state.random, locs.filter(loc => !this.items[loc]));
+    const locations = shuffle(this.state.random, locs.filter(loc => !this.items.has(loc)));
 
     for (const item of items) {
       if (locations.length === 0) {
@@ -614,10 +614,10 @@ export class LogicPassSolver {
     if (this.state.world.checks[locationData(location).id] === undefined) {
       throw new Error('Invalid Location: ' + location);
     }
-    if (this.items[location]) {
+    if (this.items.has(location)) {
       throw new Error('Location already placed: ' + location);
     }
-    this.items[location] = item;
+    this.items.set(location, item);
     if (isLocationRenewable(this.state.world, location) && isItemCriticalRenewable(item)) {
       this.criticalRenewables.add(item);
     }
