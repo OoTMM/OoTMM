@@ -590,8 +590,8 @@ export const SETTINGS = [{
   name: 'Blue Fire Arrows',
   category: 'main.misc',
   type: 'boolean',
-  description: 'Changes the OOT Ice Arrows to have Blue Fire properties',
-  default: true
+  description: 'Changes the OoT Ice Arrows to have Blue Fire properties',
+  default: false,
 }, {
   key: 'agelessSwords',
   name: 'Ageless Swords',
