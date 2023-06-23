@@ -51,3 +51,19 @@ MM_STOCK_POT_INN_ROOF,                              indoors,          Stock Pot 
 MM_CLOCK_TOWN_EAST_FROM_STOCK_POT_INN_ROOF,         indoors,          Stock Pot Inn Roof,                 Stock Pot Inn,                              MM_STOCK_POT_INN_ROOF
 MM_MILK_BAR,                                        indoors,          Milk Bar,                           Clock Town East,                            MM_CLOCK_TOWN_EAST_FROM_MILK_BAR
 MM_CLOCK_TOWN_EAST_FROM_MILK_BAR,                   indoors,          Clock Town East,                    Milk Bar,                                   MM_MILK_BAR
+MM_FAIRY_FOUNTAIN_TOWN,                             indoors,          Clock Town Fairy Fountain,          Clock Town North,                           MM_CLOCK_TOWN_NORTH_FROM_FAIRY_FOUNTAIN
+MM_CLOCK_TOWN_NORTH_FROM_FAIRY_FOUNTAIN,            indoors,          Clock Town North,                   Clock Town Fairy Fountain,                  MM_FAIRY_FOUNTAIN_TOWN
+MM_SWORDSMAN_SCHOOL,                                indoors,          Swordsman School,                   Clock Town West,                            MM_CLOCK_TOWN_WEST_FROM_SWORDSMAN_SCHOOL
+MM_CLOCK_TOWN_WEST_FROM_SWORDSMAN_SCHOOL,           indoors,          Clock Town West,                    Swordsman School,                           MM_SWORDSMAN_SCHOOL
+MM_CURIOSITY_SHOP,                                  indoors,          Curiosity Shop,                     Clock Town West,                            MM_CLOCK_TOWN_WEST_FROM_CURIOSITY_SHOP
+MM_CLOCK_TOWN_WEST_FROM_CURIOSITY_SHOP,             indoors,          Clock Town West,                    Curiosity Shop,                             MM_CURIOSITY_SHOP
+MM_TRADING_POST,                                    indoors,          Trading Post,                       Clock Town West,                            MM_CLOCK_TOWN_WEST_FROM_TRADING_POST
+MM_CLOCK_TOWN_WEST_FROM_TRADING_POST,               indoors,          Clock Town West,                    Trading Post,                               MM_TRADING_POST
+MM_BOMB_SHOP,                                       indoors,          Bomb Shop,                          Clock Town West,                            MM_CLOCK_TOWN_WEST_FROM_BOMB_SHOP
+MM_CLOCK_TOWN_WEST_FROM_BOMB_SHOP,                  indoors,          Clock Town West,                    Bomb Shop,                                  MM_BOMB_SHOP
+MM_POST_OFFICE,                                     indoors,          Post Office,                        Clock Town West,                            MM_CLOCK_TOWN_WEST_FROM_POST_OFFICE
+MM_CLOCK_TOWN_WEST_FROM_POST_OFFICE,                indoors,          Clock Town West,                    Post Office,                                MM_POST_OFFICE
+MM_LOTTERY,                                         indoors,          Lottery,                            Clock Town West,                            MM_CLOCK_TOWN_WEST_FROM_LOTTERY
+MM_CLOCK_TOWN_WEST_FROM_LOTTERY,                    indoors,          Clock Town West,                    Lottery,                                    MM_LOTTERY
+MM_KAFEI_HIDEOUT,                                   indoors,          Kafei Hideout,                      Laundry Pool,                               MM_LAUNDRY_POOL_FROM_KAFEI_HIDEOUT
+MM_LAUNDRY_POOL_FROM_KAFEI_HIDEOUT,                 indoors,          Laundry Pool,                       Kafei Hideout,                              MM_KAFEI_HIDEOUT

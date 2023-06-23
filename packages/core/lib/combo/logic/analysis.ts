@@ -279,9 +279,9 @@ const SIMPLE_DEPENDENCIES: {[k: string]: string[]} = {
   MM_LETTER_TO_KAFEI: [
     'MM Stock Pot Inn ??? HP',
     'MM Stock Pot Inn Couple\'s Mask',
-    'MM Curiosity Shop Back Room Pendant of Memories',
-    'MM Curiosity Shop Back Room Owner Reward 1',
-    'MM Curiosity Shop Back Room Owner Reward 2'
+    'MM Kafei Hideout Pendant of Memories',
+    'MM Kafei Hideout Owner Reward 1',
+    'MM Kafei Hideout Owner Reward 2'
   ],
   MM_PENDANT_OF_MEMORIES: [
     'MM Stock Pot Inn Couple\'s Mask'

@@ -148,17 +148,19 @@ MM_CLOCK_TOWN_EAST_FROM_STOCK_POT_INN:      0xd290
 MM_STOCK_POT_INN_ROOF:                      0xbc10
 MM_CLOCK_TOWN_EAST_FROM_STOCK_POT_INN_ROOF: 0xd2a0
 
-Chest Game,                         Clock Town East,                        indoors,    0x2800
-Clock Town East,                    Chest Game,                             indoors,    0xd240
-Honey & Darling Game,               Clock Town East,                        indoors,    0x0800
-Clock Town East,                    Honey & Darling Game,                   indoors,    0xd260
-Mayor's Office,                     Clock Town East,                        indoors,    0x0000
-Clock Town East,                    Mayor's Office,                         indoors,    0xd270
-Town Archery,                       Clock Town East,                        indoors,    0x3a00
-Clock Town East,                    Town Archery,                           indoors,    0xd280
-Stock Pot Inn,                      Clock Town East,                        indoors,    0xbc00
-Clock Town East,                    Stock Pot Inn,                          indoors,    0xd290
-Stock Pot Inn,                      Stock Pot Inn Roof,                     indoors,    0xbc10
-Stock Pot Inn Roof,                 Stock Pot Inn,                          indoors,    0xd2a0
-Milk Bar,                           Clock Town East,                        indoors,    0x2400
-Clock Town East,                    Milk Bar,                               indoors,    0xd2b0
+MM_FAIRY_FOUNTAIN_TOWN:                     0x4600
+MM_CLOCK_TOWN_NORTH_FROM_FAIRY_FOUNTAIN:    0xd630
+MM_SWORDSMAN_SCHOOL:                        0xa200
+MM_CLOCK_TOWN_WEST_FROM_SWORDSMAN_SCHOOL:   0xd430
+MM_CURIOSITY_SHOP:                          0x0e00
+MM_CLOCK_TOWN_WEST_FROM_CURIOSITY_SHOP:     0xd440
+MM_TRADING_POST:                            0x6200
+MM_CLOCK_TOWN_WEST_FROM_TRADING_POST:       0xd450
+MM_BOMB_SHOP:                               0xca00
+MM_CLOCK_TOWN_WEST_FROM_BOMB_SHOP:          0xd460
+MM_POST_OFFICE:                             0x5600
+MM_CLOCK_TOWN_WEST_FROM_POST_OFFICE:        0xd470
+MM_LOTTERY:                                 0x6c00
+MM_CLOCK_TOWN_WEST_FROM_LOTTERY:            0xd480
+MM_KAFEI_HIDEOUT:                           0x0e10
+MM_LAUNDRY_POOL_FROM_KAFEI_HIDEOUT:         0xda10
