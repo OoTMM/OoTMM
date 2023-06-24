@@ -1,6 +1,6 @@
 import { Game, GAMES } from '../config';
 import { gameId } from '../util';
-import { Expr, exprTrue } from './expr';
+import { Expr, exprTrue, MM_TIME_SLICES } from './expr';
 import { ExprParser } from './expr-parser';
 import { DATA_POOL, DATA_MACROS, DATA_WORLD, DATA_REGIONS, DATA_ENTRANCES_POOL, DATA_HINTS, DATA_HINTS_POOL } from '../data';
 import { Settings } from '../settings';
@@ -19,6 +19,7 @@ export type WorldArea = {
   events: ExprMap;
   locations: ExprMap;
   gossip: ExprMap;
+  stay: Expr[] | null;
   time: 'still' | 'day' | 'night' | 'flow';
 };
 
@@ -196,6 +197,7 @@ export class LogicPassWorld {
         const events = mapExprs(exprParser, game, '_', area.events || {});
         const gossip = mapExprs(exprParser, game, ' ', area.gossip || {});
         const time = area.time || 'still';
+        let stay: Expr[] | null = null;
 
         /* Hack to propagate time back to OoT GLOBAL */
         if (time !== 'still') {
@@ -214,7 +216,18 @@ export class LogicPassWorld {
           throw new Error(`Unknown region ${region}`);
         }
 
-        this.world.areas[name] = { game, boss, dungeon, exits, events, locations, gossip, time };
+        if (area.stay) {
+          stay = Object.values(MM_TIME_SLICES).map(x => exprTrue());
+          for (const [k, v] of Object.entries(area.stay)) {
+            const timeId = MM_TIME_SLICES.indexOf(k as any);
+            if (timeId === -1) {
+              throw new Error(`Unknown time ${k}`);
+            }
+            stay[timeId] = exprParser.parse(v as string);
+          }
+        }
+
+        this.world.areas[name] = { game, boss, dungeon, exits, events, locations, gossip, time, stay };
 
         if (dungeon) {
           if (this.world.dungeons[dungeon] === undefined) {
