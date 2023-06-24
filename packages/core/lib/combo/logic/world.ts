@@ -46,7 +46,7 @@ export type WorldGossip = {
 
 export type WorldEntrance = {
   id: string;
-  type: 'boss' | 'dungeon' | 'overworld' | 'region';
+  type: 'boss' | 'dungeon' | 'overworld' | 'region' | 'indoors' | 'indoors-extra' | 'indoors-exit' | 'indoors-special';
   from: string;
   to: string;
   reverse: string | null;
