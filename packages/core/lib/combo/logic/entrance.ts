@@ -387,6 +387,7 @@ export class LogicPassEntrances {
       const reverse = e.reverse;
       if (reverse) {
         const r = this.world.entrances.get(reverse)!;
+        console.log(r.from, r.to);
         delete this.world.areas[r.from].exits[r.to];
       }
     }

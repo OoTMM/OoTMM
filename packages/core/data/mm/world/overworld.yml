@@ -133,7 +133,7 @@
     "Clock Town South Upper East": "true"
     "Clock Town South Lower East": "true"
     "Clock Town North": "true"
-    "Clock Town Laundry Pool": "true"
+    "Laundry Pool": "true"
     "Clock Tower Roof": "after(NIGHT3_AM_12_00)"
     "Owl Clock Town": "true"
   events:
@@ -236,11 +236,11 @@
   locations:
     "Clock Town Silver Rupee Chest": "true"
     "Clock Town Postman Hat": "event(POSTMAN_FREEDOM) && before(NIGHT3_AM_05_00)"
-"Clock Town Laundry Pool":
+"Laundry Pool":
   region: LAUNDRY_POOL
   exits:
     "Clock Town South": "true"
-    "Curiosity Shop Back Room": "(event(MAIL_LETTER) && (after(DAY2_PM_02_00) && before(NIGHT2_PM_10_00))) || (event(MEET_KAFEI) && (after(DAY3_PM_01_00) && before(NIGHT3_PM_10_00)))"
+    "Kafei Hideout": "(event(MAIL_LETTER) && (after(DAY2_PM_02_00) && before(NIGHT2_PM_10_00))) || (event(MEET_KAFEI) && (after(DAY3_PM_01_00) && before(NIGHT3_PM_10_00)))"
   events:
     FROG_1: "has(MASK_DON_GERO)"
     MAGIC: "true"
@@ -300,16 +300,16 @@
     #"Curiostiy Shop 20r Trade": "(event(WATER) || event(BUGS) || event(FISH) || has_milk || has_red_or_blue_potion || has_green_potion || has_zora_egg) && is_night"
     #"Curiostiy Shop 50r Trade": "(event(POE)) && is_night"
     #"Curiostiy Shop 200r Trade": "(has_chateau || has_big_poe)) && is_night"
-"Curiosity Shop Back Room":
+"Kafei Hideout":
   region: LAUNDRY_POOL
   exits:
-    "Clock Town Laundry Pool": "true"
+    "Laundry Pool": "true"
   events:
     MEET_KAFEI: "before(DAY3_AM_06_00)"
   locations:
-    "Curiosity Shop Back Room Pendant of Memories": "before(DAY3_AM_06_00) || event(SAKON_BOMB_BAG) || event(SAKON_BOOM)"
-    "Curiosity Shop Back Room Owner Reward 1": "after(DAY3_AM_06_00) && before(NIGHT3_PM_10_00)"
-    "Curiosity Shop Back Room Owner Reward 2": "after(DAY3_AM_06_00) && before(NIGHT3_PM_10_00)"
+    "Kafei Hideout Pendant of Memories": "before(DAY3_AM_06_00) || event(SAKON_BOMB_BAG) || event(SAKON_BOOM)"
+    "Kafei Hideout Owner Reward 1": "after(DAY3_AM_06_00) && before(NIGHT3_PM_10_00)"
+    "Kafei Hideout Owner Reward 2": "after(DAY3_AM_06_00) && before(NIGHT3_PM_10_00)"
 "Post Office":
   region: CLOCK_TOWN_WEST
   exits:
@@ -893,7 +893,7 @@
   region: WOODFALL
   exits:
     "Woodfall": "has(MASK_DEKU) || event(CLEAN_SWAMP)"
-    "Woodfall Near Great Fairy Fountain": "has(MASK_DEKU)"
+    "Woodfall Near Fairy Fountain": "has(MASK_DEKU)"
     "Woodfall Front of Temple": "event(OPEN_WOODFALL_TEMPLE)"
     "Owl Woodfall": "true"
   events:
@@ -902,18 +902,18 @@
     NUTS: "true"
   locations:
     "Woodfall Near Owl Chest": "has(MASK_DEKU) || can_hookshot"
-"Woodfall Near Great Fairy Fountain":
+"Woodfall Near Fairy Fountain":
   region: WOODFALL
   exits:
     "Woodfall": "has(MASK_DEKU) || event(CLEAN_SWAMP)"
     "Woodfall Shrine": "has(MASK_DEKU)"
-    "Woodfall Great Fairy Fountain": "true"
+    "Woodfall Fairy Fountain": "true"
   locations:
     "Woodfall Near Owl Chest": "can_hookshot"
-"Woodfall Great Fairy Fountain":
+"Woodfall Fairy Fountain":
   region: WOODFALL
   exits:
-    "Woodfall Near Great Fairy Fountain": "true"
+    "Woodfall Near Fairy Fountain": "true"
   locations:
     "Woodfall Great Fairy": "has(STRAY_FAIRY_WF, 15)"
 "Near Deku Shrine":
@@ -1177,7 +1177,7 @@
   exits:
     "Path to Snowhead Back": "true"
     "Snowhead": "event(OPEN_SNOWHEAD_TEMPLE)"
-    "Snowhead Near Great Fairy Fountain": "event(OPEN_SNOWHEAD_TEMPLE)"
+    "Snowhead Near Fairy Fountain": "event(OPEN_SNOWHEAD_TEMPLE)"
     "Owl Snowhead": "true"
   events:
     OPEN_SNOWHEAD_TEMPLE: "can_lullaby || (event(BOSS_SNOWHEAD) && has_mask_goron)"
@@ -1189,8 +1189,8 @@
   exits:
     "Snowhead Entrance": "true"
     "Snowhead Temple": "true"
-    "Snowhead Near Great Fairy Fountain": "event(BOSS_SNOWHEAD)"
-"Snowhead Near Great Fairy Fountain":
+    "Snowhead Near Fairy Fountain": "event(BOSS_SNOWHEAD)"
+"Snowhead Near Fairy Fountain":
   region: SNOWHEAD
   events:
     MAGIC: "(event(OPEN_SNOWHEAD_TEMPLE) && can_break_boulders) || event(BOSS_SNOWHEAD)"
@@ -1198,11 +1198,11 @@
   exits:
     "Snowhead Entrance": "true"
     "Snowhead": "event(BOSS_SNOWHEAD)"
-    "Snowhead Great Fairy Fountain": "true"
-"Snowhead Great Fairy Fountain":
+    "Snowhead Fairy Fountain": "true"
+"Snowhead Fairy Fountain":
   region: SNOWHEAD
   exits:
-    "Snowhead Near Great Fairy Fountain": "true"
+    "Snowhead Near Fairy Fountain": "true"
   locations:
     "Snowhead Great Fairy": "has(STRAY_FAIRY_SH, 15)"
 "Goron Race":
@@ -1465,7 +1465,7 @@
     "Zora Hall Entrance": "true"
     "Zora Cape Peninsula": "true"
     "Zora Shop": "true"
-    "Drummer Room": "has_mask_zora"
+    "Tijo's Room": "has_mask_zora"
     "Japas' Room": "has_mask_zora"
     "Evan's Room": "has_mask_zora"
     "Lulu's Room": "has_mask_zora"
@@ -1479,7 +1479,7 @@
     "Zora Shop Item 1": "can_use_wallet(1)"
     "Zora Shop Item 2": "can_use_wallet(1)"
     "Zora Shop Item 3": "can_use_wallet(1)"
-"Drummer Room":
+"Tijo's Room":
   region: ZORA_HALL
   exits:
     "Zora Hall": "true"
