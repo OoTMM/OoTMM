@@ -62,3 +62,10 @@ void EnTimeTag_MoonCutscene(Actor* this, GameState_Play* play)
 }
 
 PATCH_FUNC(0x80ac9fe4, EnTimeTag_MoonCutscene);
+
+static void EnTimeTag_AfterKick(void)
+{
+    gIsEntranceOverride = 1;
+}
+
+PATCH_FUNC(0x80aca714, EnTimeTag_AfterKick);
