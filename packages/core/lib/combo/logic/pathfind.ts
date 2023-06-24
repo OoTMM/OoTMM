@@ -308,18 +308,45 @@ export class Pathfinder {
         newAreaData.mmTime = (newAreaData.mmTime | (1 << 0)) >>> 0;
       }
 
-      /* We can wait to reach later time slices */
-      let earliest: number;
-      if (newAreaData.mmTime) {
-        earliest = Math.floor(Math.log2(newAreaData.mmTime));
-      } else {
-        earliest = Math.floor(Math.log2(newAreaData.mmTime2)) + 32;
-      }
-      for (let i = earliest; i < MM_TIME_SLICES.length; ++i) {
-        if (i < 32) {
-          newAreaData.mmTime = (newAreaData.mmTime | (1 << i)) >>> 0;
+      if (worldArea.stay === null) {
+        /* We can wait to reach later time slices */
+        let earliest: number;
+        if (newAreaData.mmTime) {
+          earliest = Math.floor(Math.log2(newAreaData.mmTime));
         } else {
-          newAreaData.mmTime2 = (newAreaData.mmTime2 | (1 << (i - 32))) >>> 0;
+          earliest = Math.floor(Math.log2(newAreaData.mmTime2)) + 32;
+        }
+        for (let i = earliest; i < MM_TIME_SLICES.length; ++i) {
+          if (i < 32) {
+            newAreaData.mmTime = (newAreaData.mmTime | (1 << i)) >>> 0;
+          } else {
+            newAreaData.mmTime2 = (newAreaData.mmTime2 | (1 << (i - 32))) >>> 0;
+          }
+        }
+      } else {
+        /* We can wait but there are conditions */
+        let waitMode = false;
+
+        for (let i = 0; i < MM_TIME_SLICES.length; ++i) {
+          const mask1 = (i < 32) ? (1 << i) >>> 0 : 0;
+          const mask2 = (i < 32) ? 0 : (1 << ((i - 32) >>> 0)) >>> 0;
+          if ((newAreaData.mmTime & mask1) || (newAreaData.mmTime2 & mask2)) {
+            waitMode = true;
+          } else if (waitMode) {
+            const stayExpr = worldArea.stay![i];
+            const result = this.evalExpr(world, stayExpr, age, area);
+            if (result.result) {
+              waitMode = true;
+              newAreaData.mmTime = (newAreaData.mmTime | mask1) >>> 0;
+              newAreaData.mmTime2 = (newAreaData.mmTime2 | mask2) >>> 0;
+            } else {
+              /* We can't wait! */
+              waitMode = false;
+              const d = this.getDeps([result]);
+              this.addExitsDependencies(ws.dependencies.items, age, area, fromArea, d.items);
+              this.addExitsDependencies(ws.dependencies.events, age, area, fromArea, d.events);
+            }
+          }
         }
       }
     }
