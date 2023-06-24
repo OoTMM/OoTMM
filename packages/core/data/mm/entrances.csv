@@ -60,7 +60,7 @@ ROOM_EVANS,                                         indoors,          Evan's Roo
 ROOM_JAPAS,                                         indoors,          Japas' Room,                        Zora Hall,                                  ZORA_HALL_FROM_JAPAS
 ROOM_TIJO,                                          indoors,          Tijo's Room,                        Zora Hall,                                  ZORA_HALL_FROM_TIJO
 ROOM_LULU,                                          indoors,          Lulu's Room,                        Zora Hall,                                  ZORA_HALL_FROM_LULU
-MAGIC_BOX_HOUSE,                                    indoors,          Magic Box House,                    Ikana Canyon,                               IKANA_CANYON_FROM_MAGIC_BOX_HOUSE
+MUSIC_BOX_HOUSE,                                    indoors,          Music Box House,                    Ikana Canyon,                               IKANA_CANYON_FROM_MUSIC_BOX_HOUSE
 ZORA_SHOP,                                          indoors,          Zora Shop,                          Zora Hall,                                  ZORA_HALL_FROM_SHOP
 CUCCO_SHACK,                                        indoors,          Cucco Shack,                        Romani Ranch,                               ROMANI_RANCH_FROM_CUCCO_SHACK
 GHOST_HUT,                                          indoors,          Ghost Hut,                          Ikana Canyon,                               IKANA_CANYON_FROM_GHOST_HUT
@@ -100,7 +100,7 @@ ZORA_HALL_FROM_TIJO,                                indoors-exit,     Zora Hall,
 ZORA_HALL_FROM_LULU,                                indoors-exit,     Zora Hall,                          Lulu's Room,                                ROOM_LULU
 ZORA_HALL_FROM_SHOP,                                indoors-exit,     Zora Hall,                          Zora Shop,                                  ZORA_SHOP
 IKANA_CANYON_FROM_GHOST_HUT,                        indoors-exit,     Ikana Canyon,                       Ghost Hut,                                  GHOST_HUT
-IKANA_CANYON_FROM_MAGIC_BOX_HOUSE,                  indoors-exit,     Ikana Canyon,                       Magic Box House,                            MAGIC_BOX_HOUSE
+IKANA_CANYON_FROM_MUSIC_BOX_HOUSE,                  indoors-exit,     Ikana Canyon,                       Music Box House,                            MUSIC_BOX_HOUSE
 IKANA_CANYON_FROM_FAIRY_FOUNTAIN,                   indoors-exit,     Ikana Canyon,                       Ikana Fairy Fountain,                       FAIRY_FOUNTAIN_IKANA
 ROMANI_RANCH_FROM_CUCCO_SHACK,                      indoors-exit,     Romani Ranch,                       Cucco Shack,                                CUCCO_SHACK
 ROMANI_RANCH_FROM_DOGGY_RACETRACK,                  indoors-exit,     Romani Ranch,                       Doggy Racetrack,                            DOGGY_RACETRACK

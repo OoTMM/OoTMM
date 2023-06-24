@@ -147,6 +147,8 @@ MM_STOCK_POT_INN:                           0xbc00
 MM_CLOCK_TOWN_EAST_FROM_STOCK_POT_INN:      0xd290
 MM_STOCK_POT_INN_ROOF:                      0xbc10
 MM_CLOCK_TOWN_EAST_FROM_STOCK_POT_INN_ROOF: 0xd2a0
+MM_MILK_BAR:                                0x2400
+MM_CLOCK_TOWN_EAST_FROM_MILK_BAR:           0xd2b0
 MM_FAIRY_FOUNTAIN_TOWN:                     0x4600
 MM_CLOCK_TOWN_NORTH_FROM_FAIRY_FOUNTAIN:    0xd630
 MM_SWORDSMAN_SCHOOL:                        0xa200
@@ -185,8 +187,8 @@ MM_ZORA_SHOP:                               0x9250
 MM_ZORA_HALL_FROM_SHOP:                     0x6020
 MM_GHOST_HUT:                               0x9c00
 MM_IKANA_CANYON_FROM_GHOST_HUT:             0x2010
-MM_MAGIC_BOX_HOUSE:                         0xa400
-MM_IKANA_CANYON_FROM_MAGIC_BOX_HOUSE:       0x2020
+MM_MUSIC_BOX_HOUSE:                         0xa400
+MM_IKANA_CANYON_FROM_MUSIC_BOX_HOUSE:       0x2020
 MM_FAIRY_FOUNTAIN_IKANA:                    0x4640
 MM_IKANA_CANYON_FROM_FAIRY_FOUNTAIN:        0x20b0
 MM_DEKU_PALACE_THRONE:                      0x7600
