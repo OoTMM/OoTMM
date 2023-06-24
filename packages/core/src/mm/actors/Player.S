@@ -110,7 +110,12 @@ PATCH_START 0x8083bda0
   nop
 PATCH_END
 
-/* '  0x8084AC84        8084AEEC Bremen speed? */
+/* Bremen speed */
 PATCH_VROM 0xCD8A10
 .float 1.0
+PATCH_END
+
+/* Don't spawn the cutscene of first time transforming */
+PATCH_START 0x808555E4
+  nop
 PATCH_END
