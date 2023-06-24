@@ -856,7 +856,7 @@
     "Death Mountain HP": "true"
     "Death Mountain GS Entrance": "has_explosives_or_hammer"
     "Death Mountain GS Soil": "gs_soil && has_bombflowers && can_damage_skull"
-    "Death Mountain GS Above Dodongo":  "gs_night && (can_hammer || trick(OOT_DMT_RED_ROCK_GS))"
+    "Death Mountain GS Above Dodongo":  "gs_night && is_adult && (can_hammer || trick(OOT_DMT_RED_ROCK_GS))"
 "Death Mountain Summit":
   region: DEATH_MOUNTAIN_TRAIL
   time: flow
