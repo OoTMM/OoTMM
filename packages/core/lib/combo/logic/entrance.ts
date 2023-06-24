@@ -1,13 +1,12 @@
 import { cloneDeep } from 'lodash';
 
-import { Random, shuffle } from '../random';
+import { Random, sample, shuffle } from '../random';
 import { Settings } from '../settings';
 import { DUNGEONS_REGIONS, ExprMap, ExprParsers, World, WorldEntrance } from './world';
 import { Pathfinder } from './pathfind';
 import { Monitor } from '../monitor';
 import { LogicEntranceError, LogicError } from './error';
 import { Expr, exprAnd, exprTrue } from './expr';
-import { Game } from '../config';
 import { makeLocation } from './locations';
 
 export type EntranceShuffleResult = {
@@ -62,6 +61,7 @@ const DUNGEON_INDEX = {
 type PlaceOpts = {
   overworld?: boolean;
   noSongOfTime?: boolean;
+  ownGame?: boolean;
 };
 
 export class LogicPassEntrances {
@@ -379,7 +379,7 @@ export class LogicPassEntrances {
 
   private placePool(pool: string[], opts?: PlaceOpts) {
     /* Get overworld entrances */
-    const entrances = [...this.world.entrances.values()].filter(e => pool.includes(e.type));
+    const entrances = new Set([...this.world.entrances.values()].filter(e => pool.includes(e.type)));
 
     /* Delete the overworld entrances from the world */
     for (const e of entrances) {
@@ -387,22 +387,27 @@ export class LogicPassEntrances {
       const reverse = e.reverse;
       if (reverse) {
         const r = this.world.entrances.get(reverse)!;
-        console.log(r.from, r.to);
         delete this.world.areas[r.from].exits[r.to];
       }
     }
 
     /* Shuffle the entrances */
-    const shuffledEntrances = shuffle(this.input.random, entrances);
+    const shuffledEntrances = shuffle(this.input.random, [...entrances]);
 
     /* Apply the entrances */
-    for (let i = 0; i < entrances.length; ++i) {
-      this.place(entrances[i].id, shuffledEntrances[i].id, opts);
+    for (let e of shuffledEntrances) {
+      let candidates = [...entrances];
+      if (opts?.ownGame) {
+        candidates = candidates.filter(c => c.game === e.game);
+      }
+      const newE = sample(this.input.random, candidates);
+      this.place(e.id, newE.id, opts);
+      entrances.delete(newE);
     }
   }
 
   private placeRegions() {
-    this.placePool(['region'], { overworld: true });
+    this.placePool(['region'], { overworld: true, ownGame: this.input.settings.erRegions === 'ownGame' });
   }
 
   private placeIndoors() {
@@ -410,21 +415,17 @@ export class LogicPassEntrances {
     if (this.input.settings.erIndoorsExtra) {
       pool.push('indoors-extra');
     }
-    this.placePool(pool);
+    this.placePool(pool, { ownGame: this.input.settings.erIndoors === 'ownGame' });
   }
 
   run() {
     this.input.monitor.log(`Logic: Entrances (attempt ${this.input.attempts})`);
 
-    if (this.input.settings.erRegions) {
+    if (this.input.settings.erRegions !== 'none') {
       this.placeRegions();
     }
 
-    if (this.input.settings.erIndoors) {
-      this.placeIndoors();
-    }
-
-    if (this.input.settings.erIndoors) {
+    if (this.input.settings.erIndoors !== 'none') {
       this.placeIndoors();
     }
 

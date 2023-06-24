@@ -902,16 +902,26 @@ export const SETTINGS = [{
   key: 'erRegions',
   name: 'Shuffle Major Regions',
   category: 'entrances',
-  type: 'boolean',
+  type: 'enum',
+  values: [
+    { value: 'none', name: 'None' },
+    { value: 'ownGame', name: 'Own Game' },
+    { value: 'full', name: 'Full' },
+  ],
+  default: 'none',
   description: '- Every entrance to Hyrule Field except Gerudo Valley and Market<br>- The entrance to Gerudo Fortress from Gerudo Valley<br>- The entrances to the four main regions in MM<br>- The entrance to Romani Ranch',
-  default: false
 }, {
   key: 'erIndoors',
   name: 'Shuffle Interiors',
   category: 'entrances',
-  type: 'boolean',
+  type: 'enum',
+  values: [
+    { value: 'none', name: 'None' },
+    { value: 'ownGame', name: 'Own Game' },
+    { value: 'full', name: 'Full' },
+  ],
+  default: 'none',
   description: 'Shuffle most interiors with each other',
-  default: false
 }, {
   key: 'erIndoorsExtra',
   name: 'Shuffle Extra Interiors',

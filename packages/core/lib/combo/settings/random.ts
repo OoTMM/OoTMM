@@ -378,14 +378,14 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
     case 1:
       base.erDungeons = 'full';
       base.erBoss = 'full';
-      base.erRegions = true;
-      base.erIndoors = true;
+      base.erRegions = 'full';
+      base.erIndoors = 'full';
       break;
     default:
       base.erDungeons = sampleWeighted(random, { none: 10, full: 10, ownGame: 10 });
       base.erBoss = sampleWeighted(random, { none: 10, full: 10, ownGame: 10 });
-      base.erRegions = booleanWeighted(random, 0.5);
-      base.erIndoors = booleanWeighted(random, 0.5);
+      base.erRegions = sampleWeighted(random, { none: 10, full: 10, ownGame: 10 });
+      base.erIndoors = sampleWeighted(random, { none: 10, full: 10, ownGame: 10 });
     }
 
     /* ER sub-settings - 25% all on, 25% all off, 50% individual */
