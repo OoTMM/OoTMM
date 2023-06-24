@@ -209,3 +209,11 @@ MM_GORON_GRAVEYARD:                         0x9600
 MM_MOUNTAIN_VILLAGE_FROM_GORON_GRAVEYARD:   0x9a30
 MM_BLACKSMITH:                              0x5200
 MM_MOUNTAIN_VILLAGE_FROM_BLACKSMITH:        0x9a10
+MM_CUCCO_SHACK:                             0x7e00
+MM_ROMANI_RANCH_FROM_CUCCO_SHACK:           0x6440
+MM_DOGGY_RACETRACK:                         0x7c00
+MM_ROMANI_RANCH_FROM_DOGGY_RACETRACK:       0x6450
+MM_STABLES:                                 0x0600
+MM_ROMANI_RANCH_FROM_STABLES:               0x6420
+MM_RANCH_HOUSE:                             0x0610
+MM_ROMANI_RANCH_FROM_RANCH_HOUSE:           0x6430

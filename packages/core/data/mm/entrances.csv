@@ -113,3 +113,11 @@ GORON_GRAVEYARD,                                    indoors-special,  Goron Grav
 MOUNTAIN_VILLAGE_FROM_GORON_GRAVEYARD,              indoors-special,  Near Goron Graveyard,               Goron Graveyard,                            GORON_GRAVEYARD
 BLACKSMITH,                                         indoors-special,  Blacksmith,                         Mountain Village,                           MOUNTAIN_VILLAGE_FROM_BLACKSMITH
 MOUNTAIN_VILLAGE_FROM_BLACKSMITH,                   indoors-special,  Mountain Village,                   Blacksmith,                                 BLACKSMITH
+CUCCO_SHACK,                                        indoors,          Cucco Shack,                        Romani Ranch,                               ROMANI_RANCH_FROM_CUCCO_SHACK
+ROMANI_RANCH_FROM_CUCCO_SHACK,                      indoors,          Romani Ranch,                       Cucco Shack,                                CUCCO_SHACK
+DOGGY_RACETRACK,                                    indoors,          Doggy Racetrack,                    Romani Ranch,                               ROMANI_RANCH_FROM_DOGGY_RACETRACK
+ROMANI_RANCH_FROM_DOGGY_RACETRACK,                  indoors,          Romani Ranch,                       Doggy Racetrack,                            DOGGY_RACETRACK
+STABLES,                                            indoors,          Stables,                            Romani Ranch,                               ROMANI_RANCH_FROM_STABLES
+ROMANI_RANCH_FROM_STABLES,                          indoors,          Romani Ranch,                       Stables,                                    STABLES
+RANCH_HOUSE,                                        indoors,          Ranch House,                        Romani Ranch,                               ROMANI_RANCH_FROM_RANCH_HOUSE
+ROMANI_RANCH_FROM_RANCH_HOUSE,                      indoors,          Romani Ranch,                       Ranch House,                                RANCH_HOUSE
