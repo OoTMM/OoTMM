@@ -7,6 +7,7 @@ type RecursiveArray<T> = Array<T | RecursiveArray<T>>;
 export const MM_TIME_SLICES = [
   'DAY1_AM_06_00',
   'DAY1_AM_07_00',
+  'DAY1_AM_08_00',
   'DAY1_AM_10_00',
   'DAY1_PM_01_45',
   'DAY1_PM_03_00',
@@ -22,6 +23,7 @@ export const MM_TIME_SLICES = [
   'NIGHT1_AM_05_00',
   'DAY2_AM_06_00',
   'DAY2_AM_07_00',
+  'DAY2_AM_08_00',
   'DAY2_AM_10_00',
   'DAY2_AM_11_30',
   'DAY2_PM_02_00',
@@ -35,6 +37,7 @@ export const MM_TIME_SLICES = [
   'NIGHT2_AM_05_00',
   'DAY3_AM_06_00',
   'DAY3_AM_07_00',
+  'DAY3_AM_08_00',
   'DAY3_AM_10_00',
   'DAY3_AM_11_30',
   'DAY3_PM_01_00',

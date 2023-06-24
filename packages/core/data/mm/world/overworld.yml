@@ -223,7 +223,7 @@
     "Town Archery": "before(NIGHT1_PM_10_00) || (after(DAY2_AM_06_00) && before(NIGHT2_PM_10_00)) || (after(DAY3_AM_06_00) && before(NIGHT3_PM_10_00))"
     "Chest Game": "before(NIGHT1_PM_10_00) || (after(DAY2_AM_06_00) && before(NIGHT2_PM_10_00)) || (after(DAY3_AM_06_00) && before(NIGHT3_PM_10_00))"
     "Honey & Darling Game": "before(NIGHT1_PM_10_00) || (after(DAY2_AM_06_00) && before(NIGHT2_PM_10_00)) || (after(DAY3_AM_06_00) && before(NIGHT3_PM_10_00))"
-    "Stock Pot Inn": "is_day || has(ROOM_KEY) || is_night3"
+    "Stock Pot Inn": "has(ROOM_KEY) || between(DAY1_AM_08_00, NIGHT1_PM_08_00) || between(DAY2_AM_08_00, NIGHT2_PM_08_00) || after(DAY3_AM_08_00)"
     "Stock Pot Inn Roof": "has(MASK_DEKU)"
     "Milk Bar": "(after(DAY1_AM_10_00) && before(NIGHT1_PM_09_00)) || (after(DAY2_AM_10_00) && before(NIGHT2_PM_09_00)) || (after(DAY3_AM_10_00) && before(NIGHT3_PM_09_00)) || (has(MASK_ROMANI) && (after(NIGHT1_PM_10_00) && before(NIGHT1_AM_05_00)) || (after(NIGHT2_PM_10_00) && before(NIGHT2_AM_05_00)) || after(NIGHT3_PM_10_00))"
     "Astral Observatory": "event(BOMBER_CODE) || trick(MM_BOMBER_SKIP)"
@@ -387,9 +387,14 @@
   exits:
     "Clock Town East": "true"
     "Stock Pot Inn Roof": "true"
+  stay:
+    NIGHT1_PM_08_00: "has(ROOM_KEY)"
+    DAY2_AM_06_00: "has(ROOM_KEY)"
+    NIGHT2_PM_08_00: "has(ROOM_KEY)"
+    DAY3_AM_06_00: "has(ROOM_KEY)"
   events:
     SETUP_MEET: "has(MASK_KAFEI) && after(DAY1_PM_01_45) && before(NIGHT1_PM_09_00)"
-    MEET_ANJU: "event(SETUP_MEET) && (has(MASK_DEKU) || has(ROOM_KEY))" #after(NIGHT1_AM_12_00) && before(DAY2_AM_06_00)
+    MEET_ANJU: "event(SETUP_MEET) && after(NIGHT1_AM_12_00) && before(DAY2_AM_06_00)"
     DELIVER_PENDANT: "has(PENDANT_OF_MEMORIES) && ((after(DAY2_AM_06_00) && before(NIGHT2_PM_09_00)) || (after(DAY3_AM_06_00) && before(DAY3_AM_11_30)))"
     BUGS: "has_bottle"
     FISH: "has_bottle"

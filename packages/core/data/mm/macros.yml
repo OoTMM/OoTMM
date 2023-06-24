@@ -2,6 +2,7 @@
 "at(x)": "mm_time(at, x)"
 "after(x)": "mm_time(after, x)"
 "before(x)": "mm_time(before, x)"
+"between(a, b)": "after(a) && before(b)"
 "is_day1": "before(NIGHT1_PM_06_00)"
 "is_day2": "after(DAY2_AM_06_00) && before(NIGHT2_PM_06_00)"
 "is_day3": "after(DAY3_AM_06_00) && before(NIGHT3_PM_06_00)"
