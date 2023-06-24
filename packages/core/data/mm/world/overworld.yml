@@ -893,7 +893,7 @@
   region: WOODFALL
   exits:
     "Woodfall": "has(MASK_DEKU) || event(CLEAN_SWAMP)"
-    "Woodfall Near Great Fairy Fountain": "has(MASK_DEKU)"
+    "Woodfall Near Fairy Fountain": "has(MASK_DEKU)"
     "Woodfall Front of Temple": "event(OPEN_WOODFALL_TEMPLE)"
     "Owl Woodfall": "true"
   events:
@@ -902,18 +902,18 @@
     NUTS: "true"
   locations:
     "Woodfall Near Owl Chest": "has(MASK_DEKU) || can_hookshot"
-"Woodfall Near Great Fairy Fountain":
+"Woodfall Near Fairy Fountain":
   region: WOODFALL
   exits:
     "Woodfall": "has(MASK_DEKU) || event(CLEAN_SWAMP)"
     "Woodfall Shrine": "has(MASK_DEKU)"
-    "Woodfall Great Fairy Fountain": "true"
+    "Woodfall Fairy Fountain": "true"
   locations:
     "Woodfall Near Owl Chest": "can_hookshot"
-"Woodfall Great Fairy Fountain":
+"Woodfall Fairy Fountain":
   region: WOODFALL
   exits:
-    "Woodfall Near Great Fairy Fountain": "true"
+    "Woodfall Near Fairy Fountain": "true"
   locations:
     "Woodfall Great Fairy": "has(STRAY_FAIRY_WF, 15)"
 "Near Deku Shrine":
@@ -1177,7 +1177,7 @@
   exits:
     "Path to Snowhead Back": "true"
     "Snowhead": "event(OPEN_SNOWHEAD_TEMPLE)"
-    "Snowhead Near Great Fairy Fountain": "event(OPEN_SNOWHEAD_TEMPLE)"
+    "Snowhead Near Fairy Fountain": "event(OPEN_SNOWHEAD_TEMPLE)"
     "Owl Snowhead": "true"
   events:
     OPEN_SNOWHEAD_TEMPLE: "can_lullaby || (event(BOSS_SNOWHEAD) && has_mask_goron)"
@@ -1189,8 +1189,8 @@
   exits:
     "Snowhead Entrance": "true"
     "Snowhead Temple": "true"
-    "Snowhead Near Great Fairy Fountain": "event(BOSS_SNOWHEAD)"
-"Snowhead Near Great Fairy Fountain":
+    "Snowhead Near Fairy Fountain": "event(BOSS_SNOWHEAD)"
+"Snowhead Near Fairy Fountain":
   region: SNOWHEAD
   events:
     MAGIC: "(event(OPEN_SNOWHEAD_TEMPLE) && can_break_boulders) || event(BOSS_SNOWHEAD)"
@@ -1198,11 +1198,11 @@
   exits:
     "Snowhead Entrance": "true"
     "Snowhead": "event(BOSS_SNOWHEAD)"
-    "Snowhead Great Fairy Fountain": "true"
-"Snowhead Great Fairy Fountain":
+    "Snowhead Fairy Fountain": "true"
+"Snowhead Fairy Fountain":
   region: SNOWHEAD
   exits:
-    "Snowhead Near Great Fairy Fountain": "true"
+    "Snowhead Near Fairy Fountain": "true"
   locations:
     "Snowhead Great Fairy": "has(STRAY_FAIRY_SH, 15)"
 "Goron Race":
@@ -1465,7 +1465,7 @@
     "Zora Hall Entrance": "true"
     "Zora Cape Peninsula": "true"
     "Zora Shop": "true"
-    "Drummer Room": "has_mask_zora"
+    "Tijo's Room": "has_mask_zora"
     "Japas' Room": "has_mask_zora"
     "Evan's Room": "has_mask_zora"
     "Lulu's Room": "has_mask_zora"
@@ -1479,7 +1479,7 @@
     "Zora Shop Item 1": "can_use_wallet(1)"
     "Zora Shop Item 2": "can_use_wallet(1)"
     "Zora Shop Item 3": "can_use_wallet(1)"
-"Drummer Room":
+"Tijo's Room":
   region: ZORA_HALL
   exits:
     "Zora Hall": "true"
