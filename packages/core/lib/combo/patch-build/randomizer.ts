@@ -1,9 +1,9 @@
 import { Buffer } from 'buffer';
 
 import { LogicResult } from '../logic';
-import { DATA_GI, DATA_NPC, DATA_SCENES, DATA_REGIONS, DATA_HINTS_POOL, DATA_HINTS, DATA_ENTRANCES_POOL } from '../data';
+import { DATA_GI, DATA_NPC, DATA_SCENES, DATA_REGIONS, DATA_HINTS_POOL, DATA_HINTS, DATA_ENTRANCES_POOL, DATA_ENTRANCES } from '../data';
 import { Game, GAMES } from "../config";
-import { WorldCheck } from '../logic/world';
+import { World, WorldCheck } from '../logic/world';
 import { DUNGEONS, Settings, SPECIAL_CONDS, SPECIAL_CONDS_KEYS } from '../settings';
 import { HintGossip, Hints, WorldHints } from '../logic/hints';
 import { isDungeonStrayFairy, isGanonBossKey, isMap, isCompass, isTownStrayFairy, isSmallKeyHideout, isItemUnlimitedStarting, ITEMS_MAPS, ITEMS_COMPASSES, addItem, ITEMS_TINGLE_MAPS, isSmallKeyRegularOot, isSmallKeyRegularMm, isRegularBossKeyOot, isRegularBossKeyMm, makeItem, itemData, Items, Item, addRawItem } from '../logic/items';
@@ -205,28 +205,15 @@ const gi = (settings: Settings, game: Game, itemId: string, generic: boolean) =>
   return value;
 };
 
-const entrance = (game: Game, from: string, to: string) => {
-  let entrGame: Game;
-
-  if (from.startsWith('MM ')) {
-    from = from.substring(3);
-    to = to.substring(3);
-    entrGame = 'mm';
-  } else {
-    from = from.substring(4);
-    to = to.substring(4);
-    entrGame = 'oot';
+const entrance = (srcGame: Game, dstGame: Game, name: string) => {
+  let data = DATA_ENTRANCES[name] as number;
+  if (data === undefined) {
+    throw new Error(`Unknown entrance ${name}`);
   }
-  const entrances = DATA_ENTRANCES_POOL[entrGame];
-  const e = entrances.find((e: any) => e.from === from && e.to === to);
-  if (!e) {
-    throw new Error(`Unknown ${entrGame} entrance ${from} -> ${to}`);
+  if (srcGame !== dstGame) {
+    data = (data | 0x80000000) >>> 0;
   }
-  let id = Number(e.id);
-  if (game !== entrGame) {
-    id = (id | 0x80000000) >>> 0;
-  }
-  return id;
+  return data;
 }
 
 const checkId = (check: WorldCheck) => {
@@ -407,20 +394,17 @@ const regionsBuffer = (regions: string[]) => {
   return toU8Buffer(data);
 };
 
-const gameEntrances = (game: Game, entrances: EntranceShuffleResult) => {
+const gameEntrances = (game: Game, logic: LogicResult) => {
   const data: number[] = [];
-  const gamePrefix = game === 'oot' ? 'OOT ' : 'MM ';
-  for (const srcFrom in entrances.overrides) {
-    if (!srcFrom.startsWith(gamePrefix)) {
+  const { world, entrances } = logic;
+  for (const [src, dst] of entrances.overrides) {
+    const srcEntrance = world.entrances.get(src)!;
+    const dstEntrance = world.entrances.get(dst)!;
+    if (srcEntrance.game !== game)
       continue;
-    }
-    const src = entrances.overrides[srcFrom];
-    for (const srcTo in src) {
-      const dst = src[srcTo];
-      const srcId = entrance(game, srcFrom, srcTo);
-      const dstId = entrance(game, dst.from, dst.to);
-      data.push(srcId, dstId);
-    }
+    const srcId = entrance(srcEntrance.game, srcEntrance.game, src);
+    const dstId = entrance(srcEntrance.game, dstEntrance.game, dst);
+    data.push(srcId, dstId);
   }
   return toU32Buffer(data);
 };
@@ -569,7 +553,7 @@ export function patchRandomizer(world: number, logic: LogicResult, settings: Set
   for (const g of GAMES) {
     const checksBuffer = gameChecks(world, settings, g, logic);
     const hintsBuffer = gameHints(settings, g, logic.hints[world]);
-    const entrancesBuffer = gameEntrances(g, logic.entrances);
+    const entrancesBuffer = gameEntrances(g, logic);
     checksBuffer.copy(buffer, GAME_DATA_OFFSETS[g]);
     hintsBuffer.copy(buffer, HINTS_DATA_OFFSETS[g]);
     entrancesBuffer.copy(buffer, ENTRANCE_DATA_OFFSETS[g]);

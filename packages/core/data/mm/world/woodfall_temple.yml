@@ -11,7 +11,7 @@
   exits:
     "Woodfall Temple": "true"
     "Woodfall Temple Main": "has(MASK_DEKU) || can_hookshot_short"
-    "Woodfall Temple Boss": "setting(bossWarpPads, remains) && has(REMAINS_ODOLWA)"
+    "Woodfall Temple Boss Access": "setting(bossWarpPads, remains) && has(REMAINS_ODOLWA)"
   locations:
     "Woodfall Temple Entrance Chest": "has(MASK_DEKU) || can_hookshot_short"
     "Woodfall Temple SF Entrance": "true"
@@ -113,7 +113,7 @@
 "Woodfall Temple Pre-Boss":
   dungeon: WF
   exits:
-    "Woodfall Temple Boss": "boss_key(BOSS_KEY_WF) && (can_hookshot || has(MASK_DEKU))"
+    "Woodfall Temple Boss Access": "boss_key(BOSS_KEY_WF) && (can_hookshot || has(MASK_DEKU))"
     "Woodfall Temple Main Ledge": "true"
   locations:
     "Woodfall Temple SF Pre-Boss Bottom Right": "true"
@@ -126,6 +126,10 @@
     DEKU_PRINCESS: "has_bottle && has_weapon"
   exits:
     "Woodfall": "true"
+"Woodfall Temple Boss Access":
+  dungeon: WF
+  exits:
+    "Woodfall Temple Boss": "true"
 "Woodfall Temple Boss":
   boss: true
   dungeon: WF

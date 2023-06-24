@@ -1,43 +1,39 @@
-to,                                 from,                                   type,       id
-Woodfall Temple Boss,               Woodfall Temple Pre-Boss,               boss,       0x3800
-Woodfall Temple Boss,               Woodfall Temple Entrance,               boss,       0x3800
-Snowhead Temple Boss,               Snowhead Temple Center Level 4,         boss,       0x8200
-Snowhead Temple Boss,               Snowhead Temple Entrance,               boss,       0x8200
-Great Bay Temple Boss,              Great Bay Temple Pre-Boss,              boss,       0xb800
-Great Bay Temple Boss,              Great Bay Temple Entrance,              boss,       0xb800
-Stone Tower Temple Boss,            Stone Tower Temple Inverted Pre-Boss,   boss,       0x6600
-Stone Tower Temple Boss,            Stone Tower Temple Inverted Entrance,   boss,       0x6600
-Woodfall Temple,                    Woodfall Front of Temple,               dungeon,    0x3000
-Woodfall Front of Temple,           Woodfall Temple,                        dungeon,    0x8610
-Snowhead Temple,                    Snowhead,                               dungeon,    0x3c00
-Snowhead,                           Snowhead Temple,                        dungeon,    0xb210
-Great Bay Temple,                   Zora Cape Peninsula,                    dungeon,    0x8c00
-Zora Cape Peninsula,                Great Bay Temple,                       dungeon,    0x6a70
-Stone Tower Temple Inverted,        Stone Tower Top Inverted,               dungeon,    0x2a00
-Stone Tower Top Inverted,           Stone Tower Temple Inverted,            dungeon,    0xac10
-Stone Tower Temple,                 Stone Tower Front of Temple,            dungeon,    0x2600
-Stone Tower Front of Temple,        Stone Tower Temple,                     dungeon,    0xaa20
-Swamp Spider House,                 Near Swamp Spider House,                dungeon,    0x4800
-Near Swamp Spider House,            Swamp Spider House,                     dungeon,    0x8480
-Ocean Spider House,                 Great Bay Coast,                        dungeon,    0x4a00
-Great Bay Coast,                    Ocean Spider House,                     dungeon,    0x6880
-Beneath the Well Entrance,          Ikana Canyon,                           dungeon,    0x9000
-Ikana Canyon,                       Beneath the Well Entrance,              dungeon,    0x2050
-Ancient Castle of Ikana,            Ikana Castle Exterior,                  dungeon,    0x3430
-Ikana Castle Exterior,              Ancient Castle of Ikana,                dungeon,    0x3420
-Secret Shrine,                      Ikana Valley,                           dungeon,    0xba00
-Ikana Valley,                       Secret Shrine,                          dungeon,    0x20c0
-Beneath the Well End,               Ikana Castle Exterior,                  dungeon,    0x9010
-Ikana Castle Exterior,              Beneath the Well End,                   dungeon,    0x3400
-Pirate Fortress,                    Great Bay Coast Fortress,               dungeon,    0x7000
-Great Bay Coast Fortress,           Pirate Fortress,                        dungeon,    0x6850
-Swamp Front,                        Road to Southern Swamp,                 overworld,  0x8400
-Road to Southern Swamp,             Swamp Front,                            overworld,  0x7a10
-Mountain Village,                   Mountain Village Path Upper,            overworld,  0x9a60
-Mountain Village Path Upper,        Mountain Village,                       overworld,  0x3210
-Great Bay Coast,                    Great Bay Fence,                        overworld,  0x6800
-Great Bay Fence,                    Great Bay Coast,                        overworld,  0x5420
-Ikana Valley,                       Road to Ikana Top,                      overworld,  0x2000
-Road to Ikana Top,                  Ikana Valley,                           overworld,  0xa010
-Romani Ranch,                       Near Romani Ranch,                      overworld,  0x6400
-Near Romani Ranch,                  Romani Ranch,                           overworld,  0x3e10
+id,                                    type,             to,                                 from,                                       reverse
+BOSS_TEMPLE_WOODFALL,                  boss,             Woodfall Temple Boss,               Woodfall Temple Boss Access,                NONE
+BOSS_TEMPLE_SNOWHEAD,                  boss,             Snowhead Temple Boss,               Snowhead Temple Boss Access,                NONE
+BOSS_TEMPLE_GREAT_BAY,                 boss,             Great Bay Temple Boss,              Great Bay Temple Boss Access,               NONE
+BOSS_TEMPLE_STONE_TOWER,               boss,             Stone Tower Temple Boss,            Stone Tower Temple Boss Access,             NONE
+TEMPLE_WOODFALL,                       dungeon,          Woodfall Temple,                    Woodfall Front of Temple,                   WOODFALL_FROM_TEMPLE
+WOODFALL_FROM_TEMPLE,                  dungeon,          Woodfall Front of Temple,           Woodfall Temple,                            TEMPLE_WOODFALL
+TEMPLE_SNOWHEAD,                       dungeon,          Snowhead Temple,                    Snowhead,                                   SNOWHEAD_FROM_TEMPLE
+SNOWHEAD_FROM_TEMPLE,                  dungeon,          Snowhead,                           Snowhead Temple,                            TEMPLE_SNOWHEAD
+TEMPLE_GREAT_BAY,                      dungeon,          Great Bay Temple,                   Zora Cape Peninsula,                        GREAT_BAY_FROM_TEMPLE
+GREAT_BAY_FROM_TEMPLE,                 dungeon,          Zora Cape Peninsula,                Great Bay Temple,                           TEMPLE_GREAT_BAY
+TEMPLE_STONE_TOWER_INVERTED,           dungeon,          Stone Tower Temple Inverted,        Stone Tower Top Inverted,                   STONE_TOWER_INVERTED_FROM_TEMPLE
+STONE_TOWER_INVERTED_FROM_TEMPLE,      dungeon,          Stone Tower Top Inverted,           Stone Tower Temple Inverted,                TEMPLE_STONE_TOWER_INVERTED
+TEMPLE_STONE_TOWER,                    dungeon,          Stone Tower Temple,                 Stone Tower Front of Temple,                STONE_TOWER_FROM_TEMPLE
+STONE_TOWER_FROM_TEMPLE,               dungeon,          Stone Tower Front of Temple,        Stone Tower Temple,                         TEMPLE_STONE_TOWER
+SPIDER_HOUSE_SWAMP,                    dungeon,          Swamp Spider House,                 Near Swamp Spider House,                    SWAMP_FROM_SPIDER_HOUSE
+SWAMP_FROM_SPIDER_HOUSE,               dungeon,          Near Swamp Spider House,            Swamp Spider House,                         SPIDER_HOUSE_SWAMP
+SPIDER_HOUSE_OCEAN,                    dungeon,          Ocean Spider House,                 Great Bay Coast,                            GREAT_BAY_FROM_SPIDER_HOUSE
+GREAT_BAY_FROM_SPIDER_HOUSE,           dungeon,          Great Bay Coast,                    Ocean Spider House,                         SPIDER_HOUSE_OCEAN
+BENEATH_THE_WELL,                      dungeon,          Beneath the Well Entrance,          Ikana Canyon,                               IKANA_CANYON_FROM_WELL
+IKANA_CANYON_FROM_WELL,                dungeon,          Ikana Canyon,                       Beneath the Well Entrance,                  BENEATH_THE_WELL
+IKANA_CASTLE,                          dungeon,          Ancient Castle of Ikana,            Ikana Castle Exterior,                      IKANA_CASTLE_EXTERIOR_FROM_CASTLE
+IKANA_CASTLE_EXTERIOR_FROM_CASTLE,     dungeon,          Ikana Castle Exterior,              Ancient Castle of Ikana,                    IKANA_CASTLE
+SECRET_SHRINE,                         dungeon,          Secret Shrine,                      Ikana Valley,                               IKANA_VALLEY_FROM_SHRINE
+IKANA_VALLEY_FROM_SHRINE,              dungeon,          Ikana Valley,                       Secret Shrine,                              SECRET_SHRINE
+BENEATH_THE_WELL_BACK,                 dungeon,          Beneath the Well End,               Ikana Castle Exterior,                      IKANA_CASTLE_EXTERIOR_FROM_WELL
+IKANA_CASTLE_EXTERIOR_FROM_WELL,       dungeon,          Ikana Castle Exterior,              Beneath the Well End,                       BENEATH_THE_WELL_BACK
+PIRATE_FORTRESS,                       dungeon,          Pirate Fortress,                    Great Bay Coast Fortress,                   GREAT_BAY_FROM_PIRATE_FORTRESS
+GREAT_BAY_FROM_PIRATE_FORTRESS,        dungeon,          Great Bay Coast Fortress,           Pirate Fortress,                            PIRATE_FORTRESS
+SWAMP_FROM_ROAD,                       region,           Swamp Front,                        Road to Southern Swamp,                     SWAMP_ROAD_FROM_SWAMP
+MOUNTAIN_VILLAGE_FROM_PATH,            region,           Mountain Village,                   Mountain Village Path Upper,                PATH_FROM_MOUNTAIN_VILLAGE
+GREAT_BAY_COAST_FROM_FIELD,            region,           Great Bay Coast,                    Great Bay Fence,                            FIELD_FROM_GREAT_BAY_COAST
+IKANA_VALLEY_FROM_ROAD,                region,           Ikana Valley,                       Road to Ikana Top,                          IKANA_ROAD_FROM_VALLEY
+ROMANI_RANCH_FROM_MILK_ROAD,           region,           Romani Ranch,                       Near Romani Ranch,                          MILK_ROAD_FROM_ROMANI_RANCH
+SWAMP_ROAD_FROM_SWAMP,                 overworld,        Road to Southern Swamp,             Swamp Front,                                SWAMP_FROM_ROAD
+PATH_FROM_MOUNTAIN_VILLAGE,            overworld,        Mountain Village Path Upper,        Mountain Village,                           MOUNTAIN_VILLAGE_FROM_PATH
+FIELD_FROM_GREAT_BAY_COAST,            overworld,        Great Bay Fence,                    Great Bay Coast,                            GREAT_BAY_COAST_FROM_FIELD
+IKANA_ROAD_FROM_VALLEY,                overworld,        Road to Ikana Top,                  Ikana Valley,                               IKANA_VALLEY_FROM_ROAD
+MILK_ROAD_FROM_ROMANI_RANCH,           overworld,        Near Romani Ranch,                  Romani Ranch,                               ROMANI_RANCH_FROM_MILK_ROAD

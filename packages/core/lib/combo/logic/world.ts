@@ -45,9 +45,11 @@ export type WorldGossip = {
 };
 
 export type WorldEntrance = {
-  type: 'boss' | 'dungeon' | 'overworld';
+  id: string;
+  type: 'boss' | 'dungeon' | 'overworld' | 'region';
   from: string;
   to: string;
+  reverse: string | null;
   game: Game;
 };
 
@@ -58,7 +60,7 @@ export type World = {
   regions: {[k: string]: string};
   gossip: {[k: string]: WorldGossip};
   checkHints: {[k: string]: string[]};
-  entrances: WorldEntrance[];
+  entrances: Map<string, WorldEntrance>;
   locations: Set<string>;
   songLocations: Set<string>;
   warpLocations: Set<string>;
@@ -125,7 +127,7 @@ export class LogicPassWorld {
       regions: {},
       gossip: {},
       checkHints: {},
-      entrances: [],
+      entrances: new Map,
       locations: new Set(),
       songLocations: new Set(),
       warpLocations: new Set(),
@@ -273,10 +275,16 @@ export class LogicPassWorld {
 
   private loadEntrances(game: Game) {
     for (const record of DATA_ENTRANCES_POOL[game]) {
+      const id = gameId(game, String(record.id), '_');
+      const reverseRaw = String(record.reverse);
+      let reverse: string | null = null;
+      if (reverseRaw !== 'NONE') {
+        reverse = gameId(game, reverseRaw, '_');
+      }
       const from = gameId(game, String(record.from), ' ');
       const to = gameId(game, String(record.to), ' ');
       const type = String(record.type) as WorldEntrance['type'];
-      this.world.entrances.push({ from, to, type, game });
+      this.world.entrances.set(id, { id, from, to, type, reverse, game });
     }
   }
 }

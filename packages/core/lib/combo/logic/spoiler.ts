@@ -159,17 +159,13 @@ export class LogicPassSpoiler {
 
   private writeEntrances() {
     const { entrances } = this.state;
-    if (Object.keys(entrances.overrides).length === 0) {
+    if (entrances.overrides.size === 0) {
       return;
     }
 
     this.indent('Entrances');
-    for (const srcFrom in entrances.overrides) {
-      const e = entrances.overrides[srcFrom];
-      for (const srcTo in e) {
-        const dest = e[srcTo];
-        this.write(`${srcFrom}/${srcTo} -> ${dest.from}/${dest.to}`);
-      }
+    for (const [src, dst] of entrances.overrides) {
+      this.write(`${src} -> ${dst}`);
     }
     this.unindent('');
   }

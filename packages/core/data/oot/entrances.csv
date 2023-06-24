@@ -1,47 +1,47 @@
-to,                                         from,                                       type,       id
-Deku Tree Boss,                             Deku Tree Before Boss,                      boss,       0x40f
-Dodongo Cavern Boss,                        Dodongo Cavern Skull,                       boss,       0x40b
-Jabu-Jabu Boss,                             Jabu-Jabu Pre-Boss,                         boss,       0x301
-Forest Temple Boss,                         Forest Temple Antichamber,                  boss,       0x00c
-Fire Temple Boss,                           Fire Temple Pre-Boss,                       boss,       0x305
-Water Temple Boss,                          Water Temple Antichamber,                   boss,       0x417
-Spirit Temple Boss,                         Spirit Temple Statue,                       boss,       0x08d
-Shadow Temple Boss,                         Shadow Temple Boat,                         boss,       0x413
-Deku Tree,                                  Kokiri Forest Near Deku Tree,               dungeon,    0x000
-Kokiri Forest Near Deku Tree,               Deku Tree,                                  dungeon,    0x209
-Dodongo Cavern,                             Death Mountain,                             dungeon,    0x004
-Death Mountain,                             Dodongo Cavern,                             dungeon,    0x242
-Jabu-Jabu,                                  Zora Fountain,                              dungeon,    0x028
-Zora Fountain,                              Jabu-Jabu,                                  dungeon,    0x221
-Forest Temple,                              Sacred Meadow,                              dungeon,    0x169
-Sacred Meadow,                              Forest Temple,                              dungeon,    0x215
-Fire Temple,                                Fire Temple Entry,                          dungeon,    0x165
-Fire Temple Entry,                          Fire Temple,                                dungeon,    0x24a
-Water Temple,                               Lake Hylia,                                 dungeon,    0x010
-Lake Hylia,                                 Water Temple,                               dungeon,    0x21d
-Shadow Temple,                              Graveyard Upper,                            dungeon,    0x037
-Graveyard Upper,                            Shadow Temple,                              dungeon,    0x205
-Spirit Temple,                              Desert Colossus,                            dungeon,    0x082
-Desert Colossus Spirit Exit,                Spirit Temple,                              dungeon,    0x1e1
-Bottom of the Well,                         Kakariko,                                   dungeon,    0x098
-Kakariko,                                   Bottom of the Well,                         dungeon,    0x2a6
-Ice Cavern,                                 Zora Fountain Frozen,                       dungeon,    0x088
-Zora Fountain Frozen,                       Ice Cavern,                                 dungeon,    0x3d4
-Gerudo Training Grounds,                    Gerudo Fortress Exterior,                   dungeon,    0x008
-Gerudo Fortress Exterior,                   Gerudo Training Grounds,                    dungeon,    0x3a8
-Ganon Castle,                               Ganon Castle Exterior After Bridge,         dungeon,    0x467
-Ganon Castle Exterior After Bridge,         Ganon Castle,                               dungeon,    0x23d
-Ganon Castle Tower,                         Ganon Castle Stairs,                        dungeon,    0x41b
-Ganon Castle Stairs,                        Ganon Castle Tower,                         dungeon,    0x534
-Lost Woods Bridge,                          Hyrule Field,                               overworld,  0x4de
-Hyrule Field,                               Lost Woods Bridge,                          overworld,  0x185
-Zora River Front,                           Hyrule Field,                               overworld,  0x0ea
-Hyrule Field,                               Zora River Front,                           overworld,  0x181
-Kakariko,                                   Hyrule Field,                               overworld,  0x0db
-Hyrule Field,                               Kakariko,                                   overworld,  0x17d
-Lon Lon Ranch,                              Hyrule Field,                               overworld,  0x157
-Hyrule Field,                               Lon Lon Ranch,                              overworld,  0x1f9
-Lake Hylia,                                 Hyrule Field,                               overworld,  0x102
-Hyrule Field,                               Lake Hylia,                                 overworld,  0x189
-Gerudo Fortress Exterior,                   Gerudo Valley After Bridge,                 overworld,  0x129
-Gerudo Valley After Bridge,                 Gerudo Fortress Exterior,                   overworld,  0x22d
+id,                                       type,             to,                                         from,                                         reverse
+BOSS_DEKU_TREE,                           boss,             Deku Tree Boss,                             Deku Tree Before Boss,                        NONE
+BOSS_DODONGO_CAVERN,                      boss,             Dodongo Cavern Boss,                        Dodongo Cavern Skull,                         NONE
+BOSS_JABU_JABU,                           boss,             Jabu-Jabu Boss,                             Jabu-Jabu Pre-Boss,                           NONE
+BOSS_TEMPLE_FOREST,                       boss,             Forest Temple Boss,                         Forest Temple Antichamber,                    NONE
+BOSS_TEMPLE_FIRE,                         boss,             Fire Temple Boss,                           Fire Temple Pre-Boss,                         NONE
+BOSS_TEMPLE_WATER,                        boss,             Water Temple Boss,                          Water Temple Antichamber,                     NONE
+BOSS_TEMPLE_SPIRIT,                       boss,             Spirit Temple Boss,                         Spirit Temple Statue,                         NONE
+BOSS_TEMPLE_SHADOW,                       boss,             Shadow Temple Boss,                         Shadow Temple Boat,                           NONE
+DEKU_TREE,                                dungeon,          Deku Tree,                                  Kokiri Forest Near Deku Tree,                 KOKIRI_FOREST_FROM_DEKU_TREE
+KOKIRI_FOREST_FROM_DEKU_TREE,             dungeon,          Kokiri Forest Near Deku Tree,               Deku Tree,                                    DEKU_TREE
+DODONGO_CAVERN,                           dungeon,          Dodongo Cavern,                             Death Mountain,                               MOUNTAIN_TRAIL_FROM_DODONGO_CAVERN
+MOUNTAIN_TRAIL_FROM_DODONGO_CAVERN,       dungeon,          Death Mountain,                             Dodongo Cavern,                               DODONGO_CAVERN
+JABU_JABU,                                dungeon,          Jabu-Jabu,                                  Zora Fountain,                                ZORA_FOUNTAIN_FROM_JABU_JABU
+ZORA_FOUNTAIN_FROM_JABU_JABU,             dungeon,          Zora Fountain,                              Jabu-Jabu,                                    JABU_JABU
+TEMPLE_FOREST,                            dungeon,          Forest Temple,                              Sacred Meadow,                                SACRED_MEADOW_FROM_TEMPLE_FOREST
+SACRED_MEADOW_FROM_TEMPLE_FOREST,         dungeon,          Sacred Meadow,                              Forest Temple,                                TEMPLE_FOREST
+TEMPLE_FIRE,                              dungeon,          Fire Temple,                                Fire Temple Entry,                            DEATH_CRATER_FROM_TEMPLE_FIRE
+DEATH_CRATER_FROM_TEMPLE_FIRE,            dungeon,          Fire Temple Entry,                          Fire Temple,                                  TEMPLE_FIRE
+TEMPLE_WATER,                             dungeon,          Water Temple,                               Lake Hylia,                                   LAKE_HYLIA_FROM_TEMPLE_WATER
+LAKE_HYLIA_FROM_TEMPLE_WATER,             dungeon,          Lake Hylia,                                 Water Temple,                                 TEMPLE_WATER
+TEMPLE_SHADOW,                            dungeon,          Shadow Temple,                              Graveyard Upper,                              GRAVEYARD_FROM_TEMPLE_SHADOW
+GRAVEYARD_FROM_TEMPLE_SHADOW,             dungeon,          Graveyard Upper,                            Shadow Temple,                                TEMPLE_SHADOW
+TEMPLE_SPIRIT,                            dungeon,          Spirit Temple,                              Desert Colossus,                              DESERT_COLOSSUS_FROM_TEMPLE_SPIRIT
+DESERT_COLOSSUS_FROM_TEMPLE_SPIRIT,       dungeon,          Desert Colossus Spirit Exit,                Spirit Temple,                                TEMPLE_SPIRIT
+BOTTOM_OF_THE_WELL,                       dungeon,          Bottom of the Well,                         Kakariko,                                     KAKARIKO_FROM_BOTTOM_OF_THE_WELL
+KAKARIKO_FROM_BOTTOM_OF_THE_WELL,         dungeon,          Kakariko,                                   Bottom of the Well,                           BOTTOM_OF_THE_WELL
+ICE_CAVERN,                               dungeon,          Ice Cavern,                                 Zora Fountain Frozen,                         ZORA_FOUNTAIN_FROM_ICE_CAVERN
+ZORA_FOUNTAIN_FROM_ICE_CAVERN,            dungeon,          Zora Fountain Frozen,                       Ice Cavern,                                   ICE_CAVERN
+GERUDO_TRAINING_GROUNDS,                  dungeon,          Gerudo Training Grounds,                    Gerudo Fortress Exterior,                     GERUDO_FORTRESS_FROM_GERUDO_TRAINING
+GERUDO_FORTRESS_FROM_GERUDO_TRAINING,     dungeon,          Gerudo Fortress Exterior,                   Gerudo Training Grounds,                      GERUDO_TRAINING_GROUNDS
+GANON_CASTLE,                             dungeon,          Ganon Castle,                               Ganon Castle Exterior After Bridge,           GANON_CASTLE_EXTERIOR_FROM_CASTLE
+GANON_CASTLE_EXTERIOR_FROM_CASTLE,        dungeon,          Ganon Castle Exterior After Bridge,         Ganon Castle,                                 GANON_CASTLE
+GANON_TOWER,                              dungeon,          Ganon Castle Tower,                         Ganon Castle Stairs,                          GANON_CASTLE_FROM_TOWER
+GANON_CASTLE_FROM_TOWER,                  dungeon,          Ganon Castle Stairs,                        Ganon Castle Tower,                           GANON_TOWER
+LOST_WOODS_BRIDGE_FROM_FIELD,             region,           Lost Woods Bridge,                          Hyrule Field,                                 FIELD_FROM_LOST_WOODS_BRIDGE
+ZORA_RIVER_FROM_FIELD,                    region,           Zora River Front,                           Hyrule Field,                                 FIELD_FROM_ZORA_RIVER
+KAKARIKO_FROM_FIELD,                      region,           Kakariko,                                   Hyrule Field,                                 FIELD_FROM_KAKARIKO
+LON_LON_RANCH_FROM_FIELD,                 region,           Lon Lon Ranch,                              Hyrule Field,                                 FIELD_FROM_LON_LON_RANCH
+LAKE_HYLIA_FROM_FIELD,                    region,           Lake Hylia,                                 Hyrule Field,                                 FIELD_FROM_LAKE_HYLIA
+GERUDO_FORTRESS_FROM_VALLEY,              region,           Gerudo Fortress Exterior,                   Gerudo Valley After Bridge,                   VALLEY_FROM_GERUDO_FORTRESS
+FIELD_FROM_LOST_WOODS_BRIDGE,             overworld,        Hyrule Field,                               Lost Woods Bridge,                            LOST_WOODS_BRIDGE_FROM_FIELD
+FIELD_FROM_ZORA_RIVER,                    overworld,        Hyrule Field,                               Zora River Front,                             ZORA_RIVER_FROM_FIELD
+FIELD_FROM_KAKARIKO,                      overworld,        Hyrule Field,                               Kakariko,                                     KAKARIKO_FROM_FIELD
+FIELD_FROM_LON_LON_RANCH,                 overworld,        Hyrule Field,                               Lon Lon Ranch,                                LON_LON_RANCH_FROM_FIELD
+FIELD_FROM_LAKE_HYLIA,                    overworld,        Hyrule Field,                               Lake Hylia,                                   LAKE_HYLIA_FROM_FIELD
+VALLEY_FROM_GERUDO_FORTRESS,              overworld,        Gerudo Valley After Bridge,                 Gerudo Fortress Exterior,                     GERUDO_FORTRESS_FROM_VALLEY

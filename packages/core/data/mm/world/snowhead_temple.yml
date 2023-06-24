@@ -8,7 +8,7 @@
   exits:
     "Snowhead Temple": "true"
     "Snowhead Temple Main": "has_mask_goron || has_mask_zora"
-    "Snowhead Temple Boss": "setting(bossWarpPads, remains) && has(REMAINS_GOHT)"
+    "Snowhead Temple Boss Access": "setting(bossWarpPads, remains) && has(REMAINS_GOHT)"
 "Snowhead Temple Main":
   dungeon: SH
   events:
@@ -192,9 +192,13 @@
   exits:
     "Snowhead Temple Center Level 3 Iced": "true"
     "Snowhead Temple Center Level 3 Snow": "true"
-    "Snowhead Temple Boss": "goron_fast_roll && boss_key(BOSS_KEY_SH)"
+    "Snowhead Temple Boss Access": "goron_fast_roll && boss_key(BOSS_KEY_SH)"
     "Snowhead Temple Boss Key Room": "has_mask_goron"
     "Snowhead Temple Dinolfos Room": "has_mask_goron"
+"Snowhead Temple Boss Access":
+  dungeon: SH
+  exits:
+    "Snowhead Temple Boss": "true"
 "Snowhead Temple Boss":
   boss: true
   dungeon: SH
