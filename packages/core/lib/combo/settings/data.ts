@@ -905,4 +905,18 @@ export const SETTINGS = [{
   type: 'boolean',
   description: '- Every entrance to Hyrule Field except Gerudo Valley and Market<br>- The entrance to Gerudo Fortress from Gerudo Valley<br>- The entrances to the four main regions in MM<br>- The entrance to Romani Ranch',
   default: false
+}, {
+  key: 'erIndoors',
+  name: 'Shuffle Interiors',
+  category: 'entrances',
+  type: 'boolean',
+  description: 'Shuffle most interiors with each other',
+  default: false
+}, {
+  key: 'erIndoorsExtra',
+  name: 'Shuffle Extra Interiors',
+  category: 'entrances',
+  type: 'boolean',
+  description: 'Shuffle additional interiors, like link\'s house',
+  default: false
 }] as const;

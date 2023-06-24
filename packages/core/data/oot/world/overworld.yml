@@ -718,7 +718,7 @@
 "Impa House Back":
   region: KAKARIKO
   exits:
-    "Kakariko": "true"
+    "Kakariko Rooftop": "true"
   locations:
     "Kakariko Cow": "can_play_epona"
     "Kakariko Impa House HP": "true"

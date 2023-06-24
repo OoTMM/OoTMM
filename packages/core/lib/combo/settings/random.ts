@@ -379,11 +379,13 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
       base.erDungeons = 'full';
       base.erBoss = 'full';
       base.erRegions = true;
+      base.erIndoors = true;
       break;
     default:
       base.erDungeons = sampleWeighted(random, { none: 10, full: 10, ownGame: 10 });
       base.erBoss = sampleWeighted(random, { none: 10, full: 10, ownGame: 10 });
       base.erRegions = booleanWeighted(random, 0.5);
+      base.erIndoors = booleanWeighted(random, 0.5);
     }
 
     /* ER sub-settings - 25% all on, 25% all off, 50% individual */
@@ -399,6 +401,7 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
       base.erPirateFortress = true;
       base.erSecretShrine = true;
       base.erSpiderHouses = true;
+      base.erIndoorsExtra = true;
       break;
     default:
       base.erBeneathWell = booleanWeighted(random, 0.5);
@@ -409,6 +412,7 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
       base.erPirateFortress = booleanWeighted(random, 0.5);
       base.erSecretShrine = booleanWeighted(random, 0.5);
       base.erSpiderHouses = booleanWeighted(random, 0.5);
+      base.erIndoorsExtra = booleanWeighted(random, 0.5);
     }
   }
 

@@ -7,5 +7,7 @@ export function isEntranceShuffle(settings: Settings) {
     return true;
   if (settings.erRegions)
     return true;
+  if (settings.erIndoors)
+    return true;
   return false;
 }
