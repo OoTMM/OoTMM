@@ -899,7 +899,7 @@ export const SETTINGS = [{
   type: 'boolean',
   default: false
 }, {
-  key: 'erOverworld',
+  key: 'erRegions',
   name: 'Shuffle Major Regions',
   category: 'entrances',
   type: 'boolean',

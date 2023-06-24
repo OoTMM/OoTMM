@@ -384,7 +384,7 @@ export class LogicPassEntrances {
   run() {
     this.input.monitor.log(`Logic: Entrances (attempt ${this.input.attempts})`);
 
-    if (this.input.settings.erOverworld) {
+    if (this.input.settings.erRegions) {
       this.placeRegions();
     }
 

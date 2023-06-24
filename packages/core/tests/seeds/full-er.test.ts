@@ -5,7 +5,7 @@ test("Can make a seed - Full ER", () => {
     songs: 'anywhere',
     erDungeons: 'full',
     erBoss: 'full',
-    erOverworld: true,
+    erRegions: true,
     erMinorDungeons: true,
     erSpiderHouses: true,
 	  erPirateFortress: true,

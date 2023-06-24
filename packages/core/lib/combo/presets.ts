@@ -172,7 +172,7 @@ const PRESET_ALLSANITY = makeSettings({
   erBeneathWell: true,
   erIkanaCastle: true,
   erSecretShrine: true,
-  erOverworld: true,
+  erRegions: true,
 });
 
 const PRESET_HELL = makeSettings({
@@ -230,7 +230,7 @@ const PRESET_HELL = makeSettings({
   erBeneathWell: true,
   erIkanaCastle: true,
   erSecretShrine: true,
-  erOverworld: true,
+  erRegions: true,
   erGanonCastle: true,
   erGanonTower: true,
   specialConds: {

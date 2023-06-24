@@ -5,7 +5,7 @@ export function isEntranceShuffle(settings: Settings) {
     return true;
   if (settings.erDungeons !== 'none')
     return true;
-  if (settings.erOverworld)
+  if (settings.erRegions)
     return true;
   return false;
 }
