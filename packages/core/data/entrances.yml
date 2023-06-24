@@ -176,7 +176,7 @@ MM_GREAT_BAY_COAST_FROM_FISHER_HUT:         0x6840
 MM_LABORATORY:                              0x5800
 MM_GREAT_BAY_COAST_FROM_LABORATORY:         0x6870
 MM_ROOM_EVANS:                              0x9230
-MM_ZORA_HALL_FROM_EVANS:                    0x6030
+MM_ZORA_HALL_FROM_EVANS:                    0x6040
 MM_ROOM_JAPAS:                              0x9210
 MM_ZORA_HALL_FROM_JAPAS:                    0x6050
 MM_ROOM_TIJO:                               0x9200
