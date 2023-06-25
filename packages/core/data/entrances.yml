@@ -49,12 +49,12 @@ OOT_VALLEY_FROM_GERUDO_FORTRESS:            0x22d
 OOT_KOKIRI_FOREST_FROM_MIDO:                0x443
 OOT_KOKIRI_FOREST_FROM_SARIA:               0x447
 OOT_KOKIRI_FOREST_FROM_TWINS:               0x33c
-OOT_KOKIRI_FOREST_FROM_KNOW_IT_ALL:         0x0c9
+OOT_KOKIRI_FOREST_FROM_KNOW_IT_ALL:         0x26a
 OOT_KOKIRI_FOREST_FROM_SHOP:                0x266
 OOT_HOUSE_MIDO:                             0x433
 OOT_HOUSE_SARIA:                            0x437
 OOT_HOUSE_TWINS:                            0x09c
-OOT_HOUSE_KNOW_IT_ALL:                      0x26a
+OOT_HOUSE_KNOW_IT_ALL:                      0x0c9
 OOT_KOKIRI_SHOP:                            0x0c1
 OOT_MARKET_ENTRANCE_FROM_POTS:              0x26e
 OOT_HOUSE_POTS:                             0x07e
