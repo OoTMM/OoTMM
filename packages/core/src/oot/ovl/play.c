@@ -215,7 +215,7 @@ static u32 entranceForOverride(u32 entrance)
         /* Water entrance to hyrule */
         return 0x181;
     case ENTR_OOT_HYRULE_CASTLE_FROM_FAIRY:
-        return gSave.age == AGE_ADULT ? ENTR_OOT_OUTSIDE_GANON_FROM_FAIRY : ENTR_OOT_HYRULE_CASTLE_FROM_FAIRY;
+        return gLastScene == SCE_OOT_GREAT_FAIRY_FOUNTAIN_UPGRADES ? ENTR_OOT_OUTSIDE_GANON_FROM_FAIRY : ENTR_OOT_HYRULE_CASTLE_FROM_FAIRY;
     default:
         return entrance;
     }
