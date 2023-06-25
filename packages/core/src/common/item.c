@@ -268,7 +268,7 @@ void comboGiveItem(Actor* actor, GameState_Play* play, const ComboItemQuery* q, 
     ComboItemOverride o;
 
     comboItemOverride(&o, q);
-    if (GiveItem(actor, play, o.gi, a, b) && q->ovType != OV_NONE)
+    if (GiveItem(actor, play, o.gi, a, b))
     {
         if (q->gi < 0)
         {
