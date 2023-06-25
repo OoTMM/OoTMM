@@ -14,6 +14,9 @@ void comboOnSaveLoad(void)
 {
     NetContext* net;
 
+    /* Clear custom trigger data */
+    bzero(&gComboTriggersData, sizeof(gComboTriggersData));
+
     /* Clear network */
     net = netMutexLock();
     net->ledgerBase = gSaveLedgerBase;
@@ -21,6 +24,7 @@ void comboOnSaveLoad(void)
     bzero(&net->cmdOut, sizeof(net->cmdOut));
     netMutexUnlock();
 
+    /* Clear child wallets */
     gOotMaxRupees[0] = gOotExtraFlags.childWallet ? 99 : 0;
     gMmMaxRupees[0] = gMmExtraFlags2.childWallet ? 99 : 0;
 }
