@@ -451,6 +451,28 @@ export class LogicPassEntrances {
     }
   }
 
+  private validate() {
+    if (this.input.settings.logic === 'none')
+      return;
+    const pathfinderState = this.pathfinder.run(null, { singleWorld: true, ignoreItems: true, recursive: true });
+
+    /* We don't want child to reach the Fairy OGC exit, and the other way around too */
+    const forbiddenAreasChild = ['OOT Near Fairy Fountain Defense'];
+    const forbiddenAreasAdult = ['OOT Near Fairy Fountain Din'];
+
+    for (const area of forbiddenAreasChild) {
+      if (pathfinderState.ws[0].areas.child.has(area)) {
+        throw new LogicEntranceError(`Child can reach ${area}`);
+      }
+    }
+
+    for (const area of forbiddenAreasAdult) {
+      if (pathfinderState.ws[0].areas.adult.has(area)) {
+        throw new LogicEntranceError(`Adult can reach ${area}`);
+      }
+    }
+  }
+
   run() {
     this.input.monitor.log(`Logic: Entrances (attempt ${this.input.attempts})`);
 
@@ -470,6 +492,7 @@ export class LogicPassEntrances {
       this.fixBosses();
     }
 
+    this.validate();
     this.propagateRegions();
 
     return { world: this.world, entrances: this.result };
