@@ -744,7 +744,7 @@
     "Southern Swamp Grotto": "true"
 "Tourist Information":
   region: SOUTHERN_SWAMP
-  exit:
+  exits:
     "Swamp Front": "true"
     "Swamp Back": "event(BOAT_RIDE)"
   events:

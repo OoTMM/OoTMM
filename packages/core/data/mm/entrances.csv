@@ -41,8 +41,6 @@ CHEST_GAME,                                         indoors,          Chest Game
 HONEY_AND_DARLING_GAME,                             indoors,          Honey & Darling Game,               Clock Town East,                            CLOCK_TOWN_EAST_FROM_HONEY_AND_DARLING
 MAYORS_OFFICE,                                      indoors,          Mayor's Office,                     Clock Town East,                            CLOCK_TOWN_EAST_FROM_MAYORS_OFFICE
 TOWN_ARCHERY,                                       indoors,          Town Archery,                       Clock Town East,                            CLOCK_TOWN_EAST_FROM_TOWN_ARCHERY
-STOCK_POT_INN,                                      indoors-extra,    Stock Pot Inn,                      Clock Town East,                            CLOCK_TOWN_EAST_FROM_STOCK_POT_INN
-STOCK_POT_INN_ROOF,                                 indoors-extra,    Stock Pot Inn,                      Stock Pot Inn Roof,                         CLOCK_TOWN_EAST_FROM_STOCK_POT_INN_ROOF
 MILK_BAR,                                           indoors,          Milk Bar,                           Clock Town East,                            CLOCK_TOWN_EAST_FROM_MILK_BAR
 SWORDSMAN_SCHOOL,                                   indoors,          Swordsman School,                   Clock Town West,                            CLOCK_TOWN_WEST_FROM_SWORDSMAN_SCHOOL
 CURIOSITY_SHOP,                                     indoors,          Curiosity Shop,                     Clock Town West,                            CLOCK_TOWN_WEST_FROM_CURIOSITY_SHOP
@@ -60,10 +58,8 @@ ROOM_EVANS,                                         indoors,          Evan's Roo
 ROOM_JAPAS,                                         indoors,          Japas' Room,                        Zora Hall,                                  ZORA_HALL_FROM_JAPAS
 ROOM_TIJO,                                          indoors,          Tijo's Room,                        Zora Hall,                                  ZORA_HALL_FROM_TIJO
 ROOM_LULU,                                          indoors,          Lulu's Room,                        Zora Hall,                                  ZORA_HALL_FROM_LULU
-MUSIC_BOX_HOUSE,                                    indoors-extra,    Music Box House,                    Ikana Canyon,                               IKANA_CANYON_FROM_MUSIC_BOX_HOUSE
 ZORA_SHOP,                                          indoors,          Zora Shop,                          Zora Hall,                                  ZORA_HALL_FROM_SHOP
 CUCCO_SHACK,                                        indoors,          Cucco Shack,                        Romani Ranch,                               ROMANI_RANCH_FROM_CUCCO_SHACK
-GHOST_HUT,                                          indoors-extra,    Ghost Hut,                          Ikana Canyon,                               IKANA_CANYON_FROM_GHOST_HUT
 DOGGY_RACETRACK,                                    indoors,          Doggy Racetrack,                    Romani Ranch,                               ROMANI_RANCH_FROM_DOGGY_RACETRACK
 STABLES,                                            indoors,          Stables,                            Romani Ranch,                               ROMANI_RANCH_FROM_STABLES
 RANCH_HOUSE,                                        indoors,          Ranch House,                        Romani Ranch,                               ROMANI_RANCH_FROM_RANCH_HOUSE
@@ -72,8 +68,13 @@ FAIRY_FOUNTAIN_WOODFALL,                            indoors,          Woodfall F
 FAIRY_FOUNTAIN_SNOWHEAD,                            indoors,          Snowhead Fairy Fountain,            Snowhead Near Fairy Fountain,               SNOWHEAD_FROM_FAIRY_FOUNTAIN
 FAIRY_FOUNTAIN_GREAT_BAY,                           indoors,          Great Bay Fairy Fountain,           Great Bay Near Fairy Fountain,              GREAT_BAY_FROM_FAIRY_FOUNTAIN
 FAIRY_FOUNTAIN_IKANA,                               indoors,          Ikana Fairy Fountain,               Ikana Canyon,                               IKANA_CANYON_FROM_FAIRY_FOUNTAIN
+STOCK_POT_INN,                                      indoors-extra,    Stock Pot Inn,                      Clock Town East,                            CLOCK_TOWN_EAST_FROM_STOCK_POT_INN
+STOCK_POT_INN_ROOF,                                 indoors-extra,    Stock Pot Inn,                      Stock Pot Inn Roof,                         CLOCK_TOWN_EAST_FROM_STOCK_POT_INN_ROOF
+GHOST_HUT,                                          indoors-extra,    Ghost Hut,                          Ikana Canyon,                               IKANA_CANYON_FROM_GHOST_HUT
+MUSIC_BOX_HOUSE,                                    indoors-extra,    Music Box House,                    Ikana Canyon,                               IKANA_CANYON_FROM_MUSIC_BOX_HOUSE
 BLACKSMITH,                                         indoors-extra,    Blacksmith,                         Mountain Village,                           MOUNTAIN_VILLAGE_FROM_BLACKSMITH
 IKANA_CAVERN,                                       indoors-extra,    Ikana Spring Water Cave,            Ikana Canyon,                               IKANA_CANYON_FROM_CAVERN
+TOURIST_INFORMATION,                                indoors-extra,    Tourist Information,                Swamp Front,                                SWAMP_FROM_TOURIST_INFORMATION
 CLOCK_TOWN_EAST_FROM_HONEY_AND_DARLING,             indoors-exit,     Clock Town East,                    Honey & Darling Game,                       HONEY_AND_DARLING_GAME
 CLOCK_TOWN_EAST_FROM_MAYORS_OFFICE,                 indoors-exit,     Clock Town East,                    Mayor's Office,                             MAYORS_OFFICE
 CLOCK_TOWN_EAST_FROM_TOWN_ARCHERY,                  indoors-exit,     Clock Town East,                    Town Archery,                               TOWN_ARCHERY
@@ -106,18 +107,17 @@ ROMANI_RANCH_FROM_CUCCO_SHACK,                      indoors-exit,     Romani Ran
 ROMANI_RANCH_FROM_DOGGY_RACETRACK,                  indoors-exit,     Romani Ranch,                       Doggy Racetrack,                            DOGGY_RACETRACK
 ROMANI_RANCH_FROM_STABLES,                          indoors-exit,     Romani Ranch,                       Stables,                                    STABLES
 ROMANI_RANCH_FROM_RANCH_HOUSE,                      indoors-exit,     Romani Ranch,                       Ranch House,                                RANCH_HOUSE
+IKANA_CANYON_FROM_CAVERN,                           indoors-exit,     Ikana Canyon,                       Ikana Spring Water Cave,                    IKANA_CAVERN
+GREAT_BAY_FROM_FAIRY_FOUNTAIN,                      indoors-exit,     Great Bay Near Fairy Fountain,      Great Bay Fairy Fountain,                   FAIRY_FOUNTAIN_GREAT_BAY
+SNOWHEAD_FROM_FAIRY_FOUNTAIN,                       indoors-exit,     Snowhead Near Fairy Fountain,       Snowhead Fairy Fountain,                    FAIRY_FOUNTAIN_SNOWHEAD
+SWAMP_FROM_TOURIST_INFORMATION,                     indoors-exit,     Swamp Front,                        Tourist Information,                        TOURIST_INFORMATION
+WOODFALL_FROM_FAIRY_FOUNTAIN,                       indoors-exit,     Woodfall Near Fairy Fountain,       Woodfall Fairy Fountain,                    FAIRY_FOUNTAIN_WOODFALL
+MOUNTAIN_VILLAGE_FROM_BLACKSMITH,                   indoors-exit,     Mountain Village,                   Blacksmith,                                 BLACKSMITH
 DEKU_PALACE_THRONE,                                 indoors-special,  Deku Palace Throne,                 Deku Palace Main,                           DEKU_PALACE_EXTERIOR_FROM_THRONE
 DEKU_PALACE_EXTERIOR_FROM_THRONE,                   indoors-special,  Deku Palace Main,                   Deku Palace Throne,                         DEKU_PALACE_THRONE
 DEKU_PALACE_THRONE_CAGE,                            indoors-special,  Deku Palace Cage,                   Deku Palace Near Cage,                      DEKU_PALACE_EXTERIOR_FROM_THRONE_CAGE
 DEKU_PALACE_EXTERIOR_FROM_THRONE_CAGE,              indoors-special,  Deku Palace Near Cage,              Deku Palace Cage,                           DEKU_PALACE_THRONE_CAGE
 SAKON_HIDEOUT,                                      indoors-special,  Sakon Hideout,                      Ikana Valley,                               IKANA_CANYON_FROM_SAKON_HIDEOUT
 IKANA_CANYON_FROM_SAKON_HIDEOUT,                    indoors-special,  Ikana Valley,                       Sakon Hideout,                              SAKON_HIDEOUT
-IKANA_CANYON_FROM_CAVERN,                           indoors-exit,     Ikana Canyon,                       Ikana Spring Water Cave,                    IKANA_CAVERN
-GREAT_BAY_FROM_FAIRY_FOUNTAIN,                      indoors-exit,     Great Bay Near Fairy Fountain,      Great Bay Fairy Fountain,                   FAIRY_FOUNTAIN_GREAT_BAY
-SNOWHEAD_FROM_FAIRY_FOUNTAIN,                       indoors-exit,     Snowhead Near Fairy Fountain,       Snowhead Fairy Fountain,                    FAIRY_FOUNTAIN_SNOWHEAD
-TOURIST_INFORMATION,                                indoors-extra,    Tourist Information,                Swamp Front,                                SWAMP_FROM_TOURIST_INFORMATION
-SWAMP_FROM_TOURIST_INFORMATION,                     indoors-exit,     Swamp Front,                        Tourist Information,                        TOURIST_INFORMATION
-WOODFALL_FROM_FAIRY_FOUNTAIN,                       indoors-exit,     Woodfall Near Fairy Fountain,       Woodfall Fairy Fountain,                    FAIRY_FOUNTAIN_WOODFALL
 GORON_GRAVEYARD,                                    indoors-special,  Goron Graveyard,                    Near Goron Graveyard,                       MOUNTAIN_VILLAGE_FROM_GORON_GRAVEYARD
 MOUNTAIN_VILLAGE_FROM_GORON_GRAVEYARD,              indoors-special,  Near Goron Graveyard,               Goron Graveyard,                            GORON_GRAVEYARD
-MOUNTAIN_VILLAGE_FROM_BLACKSMITH,                   indoors-exit,     Mountain Village,                   Blacksmith,                                 BLACKSMITH
