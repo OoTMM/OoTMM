@@ -355,8 +355,7 @@
 "Market Destroyed":
   region: MARKET
   exits:
-    "Hyrule Field": "true"
-    "Market Pot House": "true"
+    "Market Entryway": "true"
     "Temple of Time": "true"
     "Ganon Castle Exterior": "true"
 "Temple of Time Entryway":
