@@ -422,7 +422,7 @@
   time: flow
   exits:
     "Market": "true"
-    "Fairy Fountain Din": "has_explosives"
+    "Near Fairy Fountain Din": "has_explosives"
     "Hyrule Castle Grotto": "hidden_grotto_storms"
   events:
     MALON: "true"
@@ -441,10 +441,16 @@
   gossip:
     "Hyrule Castle Gossip After Climb": "true"
     "Hyrule Castle Gossip Before Moat": "true"
+"Near Fairy Fountain Din":
+  region: HYRULE_CASTLE
+  exits:
+    "Hyrule Castle": "is_child"
+    "Fairy Fountain Din": "is_child"
+    "Near Fairy Fountain Defense": "is_adult"
 "Fairy Fountain Din":
   region: ENTRANCE
   exits:
-    "Hyrule Castle": "true"
+    "Near Fairy Fountain Din": "true"
   events:
     MAGIC: "can_play(SONG_ZELDA)"
   locations:
@@ -470,7 +476,7 @@
   exits:
     "Market Destroyed": "true"
     "Ganon Castle Exterior After Bridge": "special(BRIDGE)"
-    "Fairy Fountain Defense": "can_lift_gold"
+    "Near Fairy Fountain Defense": "can_lift_gold"
   locations:
     "Ganon Castle Exterior GS": "true"
 "Ganon Castle Exterior After Bridge":
@@ -479,10 +485,16 @@
     "Ganon Castle Exterior": "is_adult && special(BRIDGE)"
     "Hyrule Castle": "is_child"
     "Ganon Castle": "true"
+"Near Fairy Fountain Defense":
+  region: GANON_CASTLE_EXTERIOR
+  exits:
+    "Ganon Castle Exterior": "is_adult"
+    "Fairy Fountain Defense": "is_adult"
+    "Near Fairy Fountain Din": "is_child"
 "Fairy Fountain Defense":
   region: ENTRANCE
   exits:
-    "Ganon Castle Exterior": "true"
+    "Near Fairy Fountain Defense": "true"
   events:
     MAGIC: "can_play(SONG_ZELDA)"
   locations:
