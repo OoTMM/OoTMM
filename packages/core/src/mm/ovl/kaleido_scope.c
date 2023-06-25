@@ -197,3 +197,41 @@ static void KaleidoScope_DrawDungeonUnk2(void* unk)
 
 PATCH_CALL(0x80822a00, KaleidoScope_DrawDungeonUnk2);
 PATCH_CALL(0x80822f68, KaleidoScope_DrawDungeonUnk2);
+
+static void menuSave(GameState_Play* play)
+{
+    /* Can't save in some scenes */
+    switch (play->sceneId)
+    {
+    case SCE_MM_CLOCK_TOWER_ROOFTOP:
+    case SCE_MM_MOON:
+    case SCE_MM_MOON_DEKU:
+    case SCE_MM_MOON_GORON:
+    case SCE_MM_MOON_LINK:
+    case SCE_MM_MOON_ZORA:
+    case SCE_MM_LAIR_MAJORA:
+        return;
+    }
+
+    /* Save the game */
+    gSave.isOwlSave = 1;
+    PrepareSave(&play->sramCtx);
+    comboWriteSave();
+    PlaySound(0x4823);
+}
+
+static void KaleidoScope_UpdateSomeMenu(GameState_Play* play)
+{
+    KaleidoScopeHandler handler;
+
+    /* Call the handler */
+    handler = OverlayAddr(0x80817b5c);
+    handler(play);
+
+    if (play->gs.input[0].pressed.buttons & (L_TRIG | U_CBUTTONS))
+    {
+        menuSave(play);
+    }
+}
+
+PATCH_CALL(0x8082ae10, KaleidoScope_UpdateSomeMenu);
