@@ -214,6 +214,8 @@ static u32 entranceForOverride(u32 entrance)
     case 0x311:
         /* Water entrance to hyrule */
         return 0x181;
+    case ENTR_OOT_HYRULE_CASTLE_FROM_FAIRY:
+        return gSave.age == AGE_ADULT ? ENTR_OOT_OUTSIDE_GANON_FROM_FAIRY : ENTR_OOT_HYRULE_CASTLE_FROM_FAIRY;
     default:
         return entrance;
     }
@@ -249,6 +251,14 @@ void hookPlay_Init(GameState_Play* play)
                 return;
             }
         }
+    }
+
+    /* Handle custom entrance IDs */
+    switch (gSave.entrance)
+    {
+    case ENTR_OOT_OUTSIDE_GANON_FROM_FAIRY:
+        gSave.entrance = ENTR_OOT_HYRULE_CASTLE_FROM_FAIRY;
+        break;
     }
 
     /* Handle swordless */

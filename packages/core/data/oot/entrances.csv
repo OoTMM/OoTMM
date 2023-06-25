@@ -45,53 +45,65 @@ FIELD_FROM_KAKARIKO,                      overworld,        Hyrule Field,       
 FIELD_FROM_LON_LON_RANCH,                 overworld,        Hyrule Field,                               Lon Lon Ranch,                                LON_LON_RANCH_FROM_FIELD
 FIELD_FROM_LAKE_HYLIA,                    overworld,        Hyrule Field,                               Lake Hylia,                                   LAKE_HYLIA_FROM_FIELD
 VALLEY_FROM_GERUDO_FORTRESS,              overworld,        Gerudo Valley After Bridge,                 Gerudo Fortress Exterior,                     GERUDO_FORTRESS_FROM_VALLEY
-OOT_HOUSE_MIDO,                           indoors,          Mido's House,                               Kokiri Forest,                                OOT_KOKIRI_FOREST_FROM_MIDO
-OOT_HOUSE_SARIA,                          indoors,          Saria's House,                              Kokiri Forest,                                OOT_KOKIRI_FOREST_FROM_SARIA
-OOT_HOUSE_TWINS,                          indoors,          House of Twins,                             Kokiri Forest,                                OOT_KOKIRI_FOREST_FROM_TWINS
-OOT_HOUSE_KNOW_IT_ALL,                    indoors,          Know It All House,                          Kokiri Forest,                                OOT_KOKIRI_FOREST_FROM_KNOW_IT_ALL
-OOT_KOKIRI_SHOP,                          indoors,          Kokiri Shop,                                Kokiri Forest,                                OOT_KOKIRI_FOREST_FROM_SHOP
-OOT_HOUSE_POTS,                           indoors,          Market Pot House,                           Market Entryway,                              OOT_MARKET_ENTRANCE_FROM_POTS
-OOT_LABORATORY,                           indoors,          Laboratory,                                 Lake Hylia,                                   OOT_LAKE_HYLIA_FROM_LABORATORY
-OOT_FISHING_POND,                         indoors,          Fishing Pond,                               Lake Hylia,                                   OOT_LAKE_HYLIA_FROM_FISHING_POND
-OOT_VALLEY_TENT,                          indoors,          Gerudo Valley Tent,                         Gerudo Valley After Bridge,                   OOT_GERUDO_VALLEY_FROM_TENT
-OOT_HOUSE_CARPENTER,                      indoors,          Kakariko Carpenter House,                   Kakariko,                                     OOT_KAKARIKO_FROM_CARPENTER
-OOT_HOUSE_SKULLTULA,                      indoors,          Skulltula House,                            Kakariko,                                     OOT_KAKARIKO_FROM_SKULLTULA
-OOT_HOUSE_IMPA,                           indoors,          Impa House Front,                           Kakariko,                                     OOT_KAKARIKO_FROM_IMPA
-OOT_HOUSE_IMPA_BACK,                      indoors,          Impa House Back,                            Kakariko Rooftop,                             OOT_KAKARIKO_FROM_IMPA_BACK
-OOT_SHOP_GRANNY,                          indoors,          Kakariko Granny Shop,                       Kakariko Back,                                OOT_KAKARIKO_FROM_GRANNY
-OOT_HOUSE_DAMPE,                          indoors,          Dampe House,                                Graveyard,                                    OOT_GRAVEYARD_FROM_DAMPE
-OOT_SHOP_GORON,                           indoors,          Goron Shop,                                 Goron City,                                   OOT_GORON_CITY_FROM_SHOP
-OOT_SHOP_ZORA,                            indoors,          Zora Shop,                                  Zora Domain,                                  OOT_ZORA_DOMAIN_FROM_SHOP
-OOT_HOUSE_LON_LON,                        indoors,          Lon Lon Ranch House,                        Lon Lon Ranch,                                OOT_LON_LON_RANCH_FROM_HOUSE
-OOT_STABLES,                              indoors,          Lon Lon Ranch Stables,                      Lon Lon Ranch,                                OOT_LON_LON_RANCH_FROM_STABLES
-OOT_SILO,                                 indoors,          Lon Lon Ranch Silo,                         Lon Lon Ranch,                                OOT_LON_LON_RANCH_FROM_SILO
-OOT_HOUSE_LINK,                           indoors-extra,    Link's House,                               Kokiri Forest,                                OOT_KOKIRI_FOREST_FROM_LINK
-OOT_TEMPLE_OF_TIME,                       indoors-extra,    Temple of Time,                             Temple of Time Entryway,                      OOT_TEMPLE_OF_TIME_ENTRYWAY_FROM_TEMPLE
-OOT_WINDMILL,                             indoors-extra,    Windmill,                                   Kakariko,                                     OOT_KAKARIKO_FROM_WINDMILL
-OOT_KOKIRI_FOREST_FROM_MIDO,              indoors-exit,     Kokiri Forest,                              Mido's House,                                 OOT_HOUSE_MIDO
-OOT_KOKIRI_FOREST_FROM_SARIA,             indoors-exit,     Kokiri Forest,                              Saria's House,                                OOT_HOUSE_SARIA
-OOT_KOKIRI_FOREST_FROM_TWINS,             indoors-exit,     Kokiri Forest,                              House of Twins,                               OOT_HOUSE_TWINS
-OOT_KOKIRI_FOREST_FROM_KNOW_IT_ALL,       indoors-exit,     Kokiri Forest,                              Know It All House,                            OOT_HOUSE_KNOW_IT_ALL
-OOT_KOKIRI_FOREST_FROM_SHOP,              indoors-exit,     Kokiri Forest,                              Kokiri Shop,                                  OOT_KOKIRI_SHOP
-OOT_MARKET_ENTRANCE_FROM_POTS,            indoors-exit,     Market Entryway,                            Market Pot House,                             OOT_HOUSE_POTS
-OOT_LAKE_HYLIA_FROM_LABORATORY,           indoors-exit,     Lake Hylia,                                 Laboratory,                                   OOT_LABORATORY
-OOT_LAKE_HYLIA_FROM_FISHING_POND,         indoors-exit,     Lake Hylia,                                 Fishing Pond,                                 OOT_FISHING_POND
-OOT_GERUDO_VALLEY_FROM_TENT,              indoors-exit,     Gerudo Valley After Bridge,                 Gerudo Valley Tent,                           OOT_VALLEY_TENT
-OOT_KAKARIKO_FROM_CARPENTER,              indoors-exit,     Kakariko,                                   Kakariko Carpenter House,                     OOT_HOUSE_CARPENTER
-OOT_KAKARIKO_FROM_SKULLTULA,              indoors-exit,     Kakariko,                                   Skulltula House,                              OOT_HOUSE_SKULLTULA
-OOT_KAKARIKO_FROM_IMPA,                   indoors-exit,     Kakariko,                                   Impa House Front,                             OOT_HOUSE_IMPA
-OOT_KAKARIKO_FROM_IMPA_BACK,              indoors-exit,     Kakariko Rooftop,                           Impa House Back,                              OOT_HOUSE_IMPA_BACK
-OOT_KAKARIKO_FROM_GRANNY,                 indoors-exit,     Kakariko Back,                              Kakariko Granny Shop,                         OOT_SHOP_GRANNY
-OOT_GRAVEYARD_FROM_DAMPE,                 indoors-exit,     Graveyard,                                  Dampe House,                                  OOT_HOUSE_DAMPE
-OOT_GORON_CITY_FROM_SHOP,                 indoors-exit,     Goron City,                                 Goron Shop,                                   OOT_SHOP_GORON
-OOT_ZORA_DOMAIN_FROM_SHOP,                indoors-exit,     Zora Domain,                                Zora Shop,                                    OOT_SHOP_ZORA
-OOT_LON_LON_RANCH_FROM_HOUSE,             indoors-exit,     Lon Lon Ranch,                              Lon Lon Ranch House,                          OOT_HOUSE_LON_LON
-OOT_LON_LON_RANCH_FROM_STABLES,           indoors-exit,     Lon Lon Ranch,                              Lon Lon Ranch Stables,                        OOT_STABLES
-OOT_LON_LON_RANCH_FROM_SILO,              indoors-exit,     Lon Lon Ranch,                              Lon Lon Ranch Silo,                           OOT_SILO
-OOT_TEMPLE_OF_TIME_ENTRYWAY_FROM_TEMPLE,  indoors-special,  Temple of Time Entryway,                    Temple of Time,                               OOT_TEMPLE_OF_TIME
-OOT_KOKIRI_FOREST_FROM_LINK,              indoors-special,  Kokiri Forest,                              Link's House,                                 OOT_HOUSE_LINK
-OOT_KAKARIKO_FROM_WINDMILL,               indoors-special,  Kakariko,                                   Windmill,                                     OOT_WINDMILL
-OOT_SHOP_POTION_KAKARIKO,                 indoors-special,  Kakariko Potion Shop,                       Kakariko,                                     OOT_KAKARIKO_FROM_SHOP_POTION
-OOT_KAKARIKO_FROM_SHOP_POTION,            indoors-special,  Kakariko,                                   Kakariko Potion Shop,                         OOT_SHOP_POTION_KAKARIKO
-OOT_SHOP_POTION_KAKARIKO_BACK,            indoors-special,  Kakariko Potion Shop Back,                  Kakariko Back,                                OOT_KAKARIKO_FROM_SHOP_POTION_BACK
-OOT_KAKARIKO_FROM_SHOP_POTION_BACK,       indoors-special,  Kakariko Back,                              Kakariko Potion Shop Back,                    OOT_SHOP_POTION_KAKARIKO_BACK
+HOUSE_MIDO,                               indoors,          Mido's House,                               Kokiri Forest,                                KOKIRI_FOREST_FROM_MIDO
+HOUSE_SARIA,                              indoors,          Saria's House,                              Kokiri Forest,                                KOKIRI_FOREST_FROM_SARIA
+HOUSE_TWINS,                              indoors,          House of Twins,                             Kokiri Forest,                                KOKIRI_FOREST_FROM_TWINS
+HOUSE_KNOW_IT_ALL,                        indoors,          Know It All House,                          Kokiri Forest,                                KOKIRI_FOREST_FROM_KNOW_IT_ALL
+KOKIRI_SHOP,                              indoors,          Kokiri Shop,                                Kokiri Forest,                                KOKIRI_FOREST_FROM_SHOP
+HOUSE_POTS,                               indoors,          Market Pot House,                           Market Entryway,                              MARKET_ENTRANCE_FROM_POTS
+LABORATORY,                               indoors,          Laboratory,                                 Lake Hylia,                                   LAKE_HYLIA_FROM_LABORATORY
+FISHING_POND,                             indoors,          Fishing Pond,                               Lake Hylia,                                   LAKE_HYLIA_FROM_FISHING_POND
+VALLEY_TENT,                              indoors,          Gerudo Valley Tent,                         Gerudo Valley After Bridge,                   GERUDO_VALLEY_FROM_TENT
+HOUSE_CARPENTER,                          indoors,          Kakariko Carpenter House,                   Kakariko,                                     KAKARIKO_FROM_CARPENTER
+HOUSE_SKULLTULA,                          indoors,          Skulltula House,                            Kakariko,                                     KAKARIKO_FROM_SKULLTULA
+HOUSE_IMPA,                               indoors,          Impa House Front,                           Kakariko,                                     KAKARIKO_FROM_IMPA
+HOUSE_IMPA_BACK,                          indoors,          Impa House Back,                            Kakariko Rooftop,                             KAKARIKO_FROM_IMPA_BACK
+SHOP_GRANNY,                              indoors,          Kakariko Granny Shop,                       Kakariko Back,                                KAKARIKO_FROM_GRANNY
+HOUSE_DAMPE,                              indoors,          Dampe House,                                Graveyard,                                    GRAVEYARD_FROM_DAMPE
+SHOP_GORON,                               indoors,          Goron Shop,                                 Goron City,                                   GORON_CITY_FROM_SHOP
+SHOP_ZORA,                                indoors,          Zora Shop,                                  Zora Domain,                                  ZORA_DOMAIN_FROM_SHOP
+HOUSE_LON_LON,                            indoors,          Lon Lon Ranch House,                        Lon Lon Ranch,                                LON_LON_RANCH_FROM_HOUSE
+STABLES,                                  indoors,          Lon Lon Ranch Stables,                      Lon Lon Ranch,                                LON_LON_RANCH_FROM_STABLES
+SILO,                                     indoors,          Lon Lon Ranch Silo,                         Lon Lon Ranch,                                LON_LON_RANCH_FROM_SILO
+FAIRY_MAGIC,                              indoors,          Fairy Fountain Magic,                       Death Mountain Summit,                        DEATH_MOUNTAIN_FROM_FAIRY
+FAIRY_MAGIC2,                             indoors,          Fairy Fountain Double Magic,                Death Mountain Crater Bottom,                 DEATH_CRATER_FROM_FAIRY
+FAIRY_DEFENSE,                            indoors,          Fairy Fountain Defense,                     Near Fairy Fountain Defense,                  OUTSIDE_GANON_FROM_FAIRY
+FAIRY_DIN,                                indoors,          Fairy Fountain Din,                         Near Fairy Fountain Din,                      HYRULE_CASTLE_FROM_FAIRY
+FAIRY_FARORE,                             indoors,          Fairy Fountain Farore,                      Zora Fountain,                                ZORA_FOUNTAIN_FROM_FAIRY
+FAIRY_NAYRU,                              indoors,          Fairy Fountain Nayru,                       Desert Colossus,                              DESERT_COLOSSUS_FROM_FAIRY
+HOUSE_LINK,                               indoors-extra,    Link's House,                               Kokiri Forest,                                KOKIRI_FOREST_FROM_LINK
+TEMPLE_OF_TIME,                           indoors-extra,    Temple of Time,                             Temple of Time Entryway,                      TEMPLE_OF_TIME_ENTRYWAY_FROM_TEMPLE
+WINDMILL,                                 indoors-extra,    Windmill,                                   Kakariko,                                     KAKARIKO_FROM_WINDMILL
+KOKIRI_FOREST_FROM_MIDO,                  indoors-exit,     Kokiri Forest,                              Mido's House,                                 HOUSE_MIDO
+KOKIRI_FOREST_FROM_SARIA,                 indoors-exit,     Kokiri Forest,                              Saria's House,                                HOUSE_SARIA
+KOKIRI_FOREST_FROM_TWINS,                 indoors-exit,     Kokiri Forest,                              House of Twins,                               HOUSE_TWINS
+KOKIRI_FOREST_FROM_KNOW_IT_ALL,           indoors-exit,     Kokiri Forest,                              Know It All House,                            HOUSE_KNOW_IT_ALL
+KOKIRI_FOREST_FROM_SHOP,                  indoors-exit,     Kokiri Forest,                              Kokiri Shop,                                  KOKIRI_SHOP
+MARKET_ENTRANCE_FROM_POTS,                indoors-exit,     Market Entryway,                            Market Pot House,                             HOUSE_POTS
+LAKE_HYLIA_FROM_LABORATORY,               indoors-exit,     Lake Hylia,                                 Laboratory,                                   LABORATORY
+LAKE_HYLIA_FROM_FISHING_POND,             indoors-exit,     Lake Hylia,                                 Fishing Pond,                                 FISHING_POND
+GERUDO_VALLEY_FROM_TENT,                  indoors-exit,     Gerudo Valley After Bridge,                 Gerudo Valley Tent,                           VALLEY_TENT
+KAKARIKO_FROM_CARPENTER,                  indoors-exit,     Kakariko,                                   Kakariko Carpenter House,                     HOUSE_CARPENTER
+KAKARIKO_FROM_SKULLTULA,                  indoors-exit,     Kakariko,                                   Skulltula House,                              HOUSE_SKULLTULA
+KAKARIKO_FROM_IMPA,                       indoors-exit,     Kakariko,                                   Impa House Front,                             HOUSE_IMPA
+KAKARIKO_FROM_IMPA_BACK,                  indoors-exit,     Kakariko Rooftop,                           Impa House Back,                              HOUSE_IMPA_BACK
+KAKARIKO_FROM_GRANNY,                     indoors-exit,     Kakariko Back,                              Kakariko Granny Shop,                         SHOP_GRANNY
+GRAVEYARD_FROM_DAMPE,                     indoors-exit,     Graveyard,                                  Dampe House,                                  HOUSE_DAMPE
+GORON_CITY_FROM_SHOP,                     indoors-exit,     Goron City,                                 Goron Shop,                                   SHOP_GORON
+ZORA_DOMAIN_FROM_SHOP,                    indoors-exit,     Zora Domain,                                Zora Shop,                                    SHOP_ZORA
+LON_LON_RANCH_FROM_HOUSE,                 indoors-exit,     Lon Lon Ranch,                              Lon Lon Ranch House,                          HOUSE_LON_LON
+LON_LON_RANCH_FROM_STABLES,               indoors-exit,     Lon Lon Ranch,                              Lon Lon Ranch Stables,                        STABLES
+LON_LON_RANCH_FROM_SILO,                  indoors-exit,     Lon Lon Ranch,                              Lon Lon Ranch Silo,                           SILO
+DEATH_MOUNTAIN_FROM_FAIRY,                indoors-exit,     Death Mountain Summit,                      Fairy Fountain Magic,                         FAIRY_MAGIC
+DEATH_CRATER_FROM_FAIRY,                  indoors-exit,     Death Mountain Crater Bottom,               Fairy Fountain Double Magic,                  FAIRY_MAGIC2
+OUTSIDE_GANON_FROM_FAIRY,                 indoors-exit,     Near Fairy Fountain Defense,                Fairy Fountain Defense,                       FAIRY_DEFENSE
+HYRULE_CASTLE_FROM_FAIRY,                 indoors-exit,     Near Fairy Fountain Din,                    Fairy Fountain Din,                           FAIRY_DIN
+ZORA_FOUNTAIN_FROM_FAIRY,                 indoors-exit,     Zora Fountain,                              Fairy Fountain Farore,                        FAIRY_FARORE
+DESERT_COLOSSUS_FROM_FAIRY,               indoors-exit,     Desert Colossus,                            Fairy Fountain Nayru,                         FAIRY_NAYRU
+TEMPLE_OF_TIME_ENTRYWAY_FROM_TEMPLE,      indoors-special,  Temple of Time Entryway,                    Temple of Time,                               TEMPLE_OF_TIME
+KOKIRI_FOREST_FROM_LINK,                  indoors-special,  Kokiri Forest,                              Link's House,                                 HOUSE_LINK
+KAKARIKO_FROM_WINDMILL,                   indoors-special,  Kakariko,                                   Windmill,                                     WINDMILL
+SHOP_POTION_KAKARIKO,                     indoors-special,  Kakariko Potion Shop,                       Kakariko,                                     KAKARIKO_FROM_SHOP_POTION
+KAKARIKO_FROM_SHOP_POTION,                indoors-special,  Kakariko,                                   Kakariko Potion Shop,                         SHOP_POTION_KAKARIKO
+SHOP_POTION_KAKARIKO_BACK,                indoors-special,  Kakariko Potion Shop Back,                  Kakariko Back,                                KAKARIKO_FROM_SHOP_POTION_BACK
+KAKARIKO_FROM_SHOP_POTION_BACK,           indoors-special,  Kakariko Back,                              Kakariko Potion Shop Back,                    SHOP_POTION_KAKARIKO_BACK
