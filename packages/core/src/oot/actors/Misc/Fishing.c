@@ -26,14 +26,20 @@ void Fishing_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float 
         if (gOotExtraFlags.fishingChild)
             gi = GI_OOT_RUPEE_BLUE;
         else
+        {
             npc = NPC_OOT_FISH_CHILD;
+            gi = GI_OOT_HEART_PIECE;
+        }
     }
     else
     {
         if (gOotExtraFlags.fishingAdult)
             gi = GI_OOT_RUPEE_BLUE;
         else
+        {
             npc = NPC_OOT_FISH_ADULT;
+            gi = GI_OOT_SCALE_SILVER;
+        }
     }
 
     comboGiveItemNpc(this, play, gi, npc, a, b);
