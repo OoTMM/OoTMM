@@ -245,6 +245,7 @@ export class LogicPassEntrances {
       for (const a of bossAreas.get(dstBoss)!) {
         const area = this.world.areas[a];
         area.dungeon = srcBoss;
+        area.region = DUNGEONS_REGIONS[srcBoss];
 
         for (const loc in area.locations) {
           this.world.regions[loc] = DUNGEONS_REGIONS[srcBoss];
@@ -418,6 +419,38 @@ export class LogicPassEntrances {
     this.placePool(pool, { ownGame: this.input.settings.erIndoors === 'ownGame' });
   }
 
+  private propagateRegionsStep() {
+    let changed = false;
+    for (const areaName of Object.keys(this.world.areas)) {
+      const a = this.world.areas[areaName];
+      if (a.region === 'NONE' || a.region === 'ENTRANCE')
+        continue;
+      /* We need to propagate the region */
+      for (const exitName of Object.keys(a.exits)) {
+        const exitArea = this.world.areas[exitName];
+        if (exitArea.region === 'ENTRANCE') {
+          exitArea.region = a.region;
+          for (const loc of Object.keys(exitArea.locations)) {
+            if (this.world.regions[loc] === 'ENTRANCE') {
+              this.world.regions[loc] = a.region;
+            }
+          }
+          changed = true;
+        }
+      }
+    }
+    return changed;
+  }
+
+  private propagateRegions() {
+    /* Propagate regions */
+    for (;;) {
+      if (!this.propagateRegionsStep()) {
+        break;
+      }
+    }
+  }
+
   run() {
     this.input.monitor.log(`Logic: Entrances (attempt ${this.input.attempts})`);
 
@@ -436,6 +469,8 @@ export class LogicPassEntrances {
     if (this.input.settings.erBoss !== 'none') {
       this.fixBosses();
     }
+
+    this.propagateRegions();
 
     return { world: this.world, entrances: this.result };
   }

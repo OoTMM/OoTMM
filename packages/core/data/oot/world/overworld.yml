@@ -34,7 +34,7 @@
     "Hatch Chicken": "is_child && has(WEIRD_EGG)"
     "Hatch Pocket Cucco": "is_adult && has(POCKET_EGG)"
 "Link's House":
-  region: KOKIRI_FOREST
+  region: ENTRANCE
   exits:
     "Kokiri Forest": "true"
   locations:
@@ -79,7 +79,7 @@
     "Kokiri Gossip Left of Deku Tree": "true"
     "Kokiri Gossip Right of Deku Tree": "true"
 "Kokiri Shop":
-  region: KOKIRI_FOREST
+  region: ENTRANCE
   exits:
     "Kokiri Forest": "true"
   locations:
@@ -92,7 +92,7 @@
     "Kokiri Shop Item 7": "can_use_wallet(1)"
     "Kokiri Shop Item 8": "can_use_wallet(1)"
 "Mido's House":
-  region: KOKIRI_FOREST
+  region: ENTRANCE
   exits:
     "Kokiri Forest": "true"
   locations:
@@ -101,19 +101,19 @@
     "Kokiri Forest Mido Bottom Left": "true"
     "Kokiri Forest Mido Bottom Right": "true"
 "Saria's House":
-  region: KOKIRI_FOREST
+  region: ENTRANCE
   exits:
     "Kokiri Forest": "true"
 "House of Twins":
-  region: KOKIRI_FOREST
+  region: ENTRANCE
   exits:
     "Kokiri Forest": "true"
 "Know It All House":
-  region: KOKIRI_FOREST
+  region: ENTRANCE
   exits:
     "Kokiri Forest": "true"
 "Kokiri Forest Storms Grotto":
-  region: KOKIRI_FOREST
+  region: ENTRANCE
   exits:
     "Kokiri Forest": "true"
   events:
@@ -157,13 +157,13 @@
     "Hyrule Field Ocarina of Time": "has_spiritual_stones"
     "Hyrule Field Song of Time": "has_spiritual_stones"
 "Hyrule Field Scrub Grotto":
-  region: HYRULE_FIELD
+  region: ENTRANCE
   exits:
     "Hyrule Field": "true"
   locations:
     "Hyrule Field Grotto Scrub HP": "can_hit_scrub && can_use_wallet(1)"
 "Hyrule Field Open Grotto":
-  region: HYRULE_FIELD
+  region: ENTRANCE
   exits:
     "Hyrule Field": "true"
   events:
@@ -179,7 +179,7 @@
   gossip:
     "Hyrule Field Gossip Near Lake Hylia": "true"
 "Hyrule Field Southeast Grotto":
-  region: HYRULE_FIELD
+  region: ENTRANCE
   exits:
     "Hyrule Field": "true"
   events:
@@ -195,7 +195,7 @@
   gossip:
     "Hyrule Field Gossip Southeast Grotto": "true"
 "Hyrule Field Grotto Near Market":
-  region: HYRULE_FIELD
+  region: ENTRANCE
   exits:
     "Hyrule Field": "true"
   events:
@@ -211,13 +211,13 @@
   gossip:
     "Hyrule Field Gossip Near Castle Town": "true"
 "Hyrule Field Tektite Grotto":
-  region: HYRULE_FIELD
+  region: ENTRANCE
   exits:
     "Hyrule Field": "true"
   locations:
     "Hyrule Field Grotto Tektite HP": "can_dive_big"
 "Hyrule Field Grotto Near GV":
-  region: HYRULE_FIELD
+  region: ENTRANCE
   exits:
     "Hyrule Field": "true"
   events:
@@ -229,7 +229,7 @@
   gossip:
     "Hyrule Field Gossip Near Gerudo Valley": "has_fire"
 "Hyrule Field Grotto Near Kak":
-  region: HYRULE_FIELD
+  region: ENTRANCE
   exits:
     "Hyrule Field": "true"
   events:
@@ -238,7 +238,7 @@
   locations:
     "Hyrule Field Grotto Near Kakariko GS": "can_collect_distance"
 "Hyrule Field Fairy Grotto":
-  region: HYRULE_FIELD
+  region: ENTRANCE
   exits:
     "Hyrule Field": "true"
 "Market Entryway":
@@ -265,7 +265,7 @@
     RICHARD: "is_night"
     RUPEES: "true"
 "Market Bazaar":
-  region: MARKET
+  region: ENTRANCE
   exits:
     "Market": "is_child"
   locations:
@@ -278,7 +278,7 @@
     "Market Bazaar Item 7": "can_use_wallet(1)"
     "Market Bazaar Item 8": "can_use_wallet(1)"
 "Market Potion Shop":
-  region: MARKET
+  region: ENTRANCE
   exits:
     "Market": "is_child"
   locations:
@@ -291,7 +291,7 @@
     "Market Potion Shop Item 7": "can_use_wallet(1)"
     "Market Potion Shop Item 8": "can_use_wallet(1)"
 "Market Bombchu Shop":
-  region: MARKET
+  region: ENTRANCE
   exits:
     "Market": "is_child"
   locations:
@@ -304,7 +304,7 @@
     "Market Bombchu Shop Item 7": "can_use_wallet(2)"
     "Market Bombchu Shop Item 8": "can_use_wallet(2)"
 "Market Pot House":
-  region: MARKET
+  region: ENTRANCE
   exits:
     "Market Entryway": "true"
   events:
@@ -321,17 +321,17 @@
     "Market Bombchu Shop": "is_night"
     "Market Back Alley East Home": "is_night"
 "Dog Lady House":
-  region: MARKET
+  region: ENTRANCE
   exits:
     "Back Alley": "true"
   locations:
     "Market Dog Lady HP": "event(RICHARD) && is_night"
 "Market Back Alley East Home":
-  region: MARKET
+  region: ENTRANCE
   exits:
     "Back Alley": "true"
 "Bombchu Bowling":
-  region: MARKET
+  region: ENTRANCE
   exits:
     "Market": "true"
   events:
@@ -341,13 +341,13 @@
     "Bombchu Bowling Reward 1": "has_bomb_bag && can_use_wallet(1)"
     "Bombchu Bowling Reward 2": "has_bomb_bag && can_use_wallet(1)"
 "Shooting Gallery Child":
-  region: MARKET
+  region: ENTRANCE
   exits:
     "Market": "is_child"
   locations:
     "Shooting Gallery Child": "is_child && can_use_wallet(1)"
 "Treasure Game":
-  region: MARKET
+  region: ENTRANCE
   exits:
     "Market": "true"
   locations:
@@ -389,14 +389,14 @@
     "Lon Lon Ranch GS Rain Shed": "is_child && gs_night"
     "Lon Lon Ranch GS Back Wall": "can_boomerang && gs_night"
 "Lon Lon Ranch Stables":
-  region: LON_LON_RANCH
+  region: ENTRANCE
   exits:
     "Lon Lon Ranch": "true"
   locations:
     "Lon Lon Ranch Stables Cow Left": "can_play_epona"
     "Lon Lon Ranch Stables Cow Right": "can_play_epona"
 "Lon Lon Ranch Silo":
-  region: LON_LON_RANCH
+  region: ENTRANCE
   exits:
     "Lon Lon Ranch": "true"
   locations:
@@ -404,13 +404,13 @@
     "Lon Lon Ranch Silo Cow Front": "can_play_epona"
     "Lon Lon Ranch Silo Cow Back": "can_play_epona"
 "Lon Lon Ranch House":
-  region: LON_LON_RANCH
+  region: ENTRANCE
   exits:
     "Lon Lon Ranch": "true"
   locations:
     "Lon Lon Ranch Talon Bottle": "is_child && woke_talon_child && can_use_wallet(1) && is_day"
 "Lon Lon Ranch Grotto":
-  region: LON_LON_RANCH
+  region: ENTRANCE
   exits:
     "Lon Lon Ranch": "true"
   locations:
@@ -442,7 +442,7 @@
     "Hyrule Castle Gossip After Climb": "true"
     "Hyrule Castle Gossip Before Moat": "true"
 "Fairy Fountain Din":
-  region: HYRULE_CASTLE
+  region: ENTRANCE
   exits:
     "Hyrule Castle": "true"
   events:
@@ -450,7 +450,7 @@
   locations:
     "Great Fairy Din's Fire": "can_play(SONG_ZELDA)"
 "Hyrule Castle Grotto":
-  region: HYRULE_CASTLE
+  region: ENTRANCE
   exits:
     "Hyrule Castle": "true"
   events:
@@ -480,7 +480,7 @@
     "Hyrule Castle": "is_child"
     "Ganon Castle": "true"
 "Fairy Fountain Defense":
-  region: GANON_CASTLE_EXTERIOR
+  region: ENTRANCE
   exits:
     "Ganon Castle Exterior": "true"
   events:
@@ -515,7 +515,7 @@
   gossip:
     "Lost Woods Gossip Under Bridge": "true"
 "Lost Woods Generic Grotto":
-  region: LOST_WOODS
+  region: ENTRANCE
   exits:
     "Lost Woods": "true"
   events:
@@ -560,14 +560,14 @@
     "Lost Woods GS Soil Theater": "gs_soil && can_damage_skull"
     "Lost Woods GS Bean Ride": "gs_night && (can_ride_bean(BEAN_LOST_WOODS_LATE) || (trick(OOT_LOST_WOODS_ADULT_GS) && can_hookshot && (can_longshot || can_use_bow || has_bombchu || can_use_din)))"
 "Deku Theater":
-  region: LOST_WOODS
+  region: ENTRANCE
   exits:
     "Lost Woods Deep": "true"
   locations:
     "Deku Theater Sticks Upgrade": "is_child && has(MASK_SKULL)"
     "Deku Theater Nuts Upgrade": "is_child && has_mask_truth"
 "Lost Woods Scrub Grotto":
-  region: LOST_WOODS
+  region: ENTRANCE
   exits:
     "Lost Woods Deep": "true"
   locations:
@@ -582,7 +582,7 @@
   events:
     RUPEES: "true"
 "Wolfos Grotto":
-  region: SACRED_MEADOW
+  region: ENTRANCE
   exits:
     "Sacred Meadow Entryway": "true"
   locations:
@@ -602,7 +602,7 @@
     "Sacred Meadow Gossip Atop Maze Woods Side": "true"
     "Sacred Meadow Gossip Atop Maze Temple Side": "true"
 "Sacred Meadow Storms Grotto":
-  region: SACRED_MEADOW
+  region: ENTRANCE
   exits:
     "Sacred Meadow": "true"
   locations:
@@ -663,7 +663,7 @@
     "Kakariko Granny Shop": "is_adult"
     "Kakariko Generic Grotto": "true"
 "Kakariko Bazaar":
-  region: KAKARIKO
+  region: ENTRANCE
   exits:
     "Kakariko": "is_adult"
   locations:
@@ -676,7 +676,7 @@
     "Kakariko Bazaar Item 7": "can_use_wallet(1)"
     "Kakariko Bazaar Item 8": "can_use_wallet(1)"
 "Kakariko Potion Shop":
-  region: KAKARIKO
+  region: ENTRANCE
   exits:
     "Kakariko": "is_adult"
     "Kakariko Potion Shop Back": "is_adult"
@@ -695,7 +695,7 @@
     "Kakariko Back": "is_adult"
     "Kakariko Potion Shop": "true"
 "Kakariko Granny Shop":
-  region: KAKARIKO
+  region: ENTRANCE
   exits:
     "Kakariko Back": "true"
   events:
@@ -703,19 +703,19 @@
   locations:
     "Kakariko Potion Shop Odd Potion": "adult_trade(ODD_MUSHROOM)"
 "Shooting Gallery Adult":
-  region: KAKARIKO
+  region: ENTRANCE
   exits:
     "Kakariko": "is_adult"
   locations:
     "Shooting Gallery Adult": "can_use_bow && can_use_wallet(1)"
 "Impa House Front":
-  region: KAKARIKO
+  region: ENTRANCE
   exits:
     "Kakariko": "true"
   locations:
     "Kakariko Cow": "can_play_epona"
 "Impa House Back":
-  region: KAKARIKO
+  region: ENTRANCE
   exits:
     "Kakariko Rooftop": "true"
   locations:
@@ -731,13 +731,13 @@
     "Windmill HP": "can_boomerang || event(WINDMILL_TOP) || (is_adult && trick(OOT_WINDMILL_HP_NOTHING))"
     "Windmill Song of Storms": "is_adult && has_ocarina"
 "Kakariko Carpenter House":
-  region: KAKARIKO
+  region: ENTRANCE
   exits:
     "Kakariko": "true"
   events:
     TALON_AWAKE: adult_trade(POCKET_CUCCO)
 "Skulltula House":
-  region: KAKARIKO
+  region: ENTRANCE
   exits:
     "Kakariko": "true"
   locations:
@@ -747,13 +747,13 @@
     "Skulltula House 40 Tokens": "has(GS_TOKEN, 40)"
     "Skulltula House 50 Tokens": "has(GS_TOKEN, 50)"
 "ReDead Grotto":
-  region: KAKARIKO
+  region: ENTRANCE
   exits:
     "Kakariko": "true"
   locations:
     "Kakariko Grotto Front": "has_weapon || can_use_sticks"
 "Kakariko Generic Grotto":
-  region: KAKARIKO
+  region: ENTRANCE
   exits:
     "Kakariko Back": "true"
   events:
@@ -798,20 +798,20 @@
   gossip:
     "Graveyard Gossip": "true"
 "Graveyard Royal Tomb":
-  region: GRAVEYARD
+  region: ENTRANCE
   exits:
     "Graveyard": "true"
   locations:
     "Graveyard Royal Tomb Song": "true"
     "Graveyard Royal Tomb Chest": "has_fire"
 "Graveyard Shield Grave":
-  region: GRAVEYARD
+  region: ENTRANCE
   exits:
     "Graveyard": "true"
   locations:
     "Graveyard Fairy Tomb": "true"
 "Graveyard ReDead Grave":
-  region: GRAVEYARD
+  region: ENTRANCE
   exits:
     "Graveyard": "true"
   locations:
@@ -833,7 +833,7 @@
     "Graveyard Dampe Tomb Reward 1": "true"
     "Graveyard Dampe Tomb Reward 2": "is_adult" #It's very hard to finish this race sub-1 as kid.
 "Dampe House":
-  region: GRAVEYARD
+  region: ENTRANCE
   exits:
     "Graveyard": "true"
 "Death Mountain":
@@ -875,7 +875,7 @@
   gossip:
     "Death Mountain Gossip on Climb": "true"
 "Death Mountain Storms Grotto":
-  region: DEATH_MOUNTAIN_TRAIL
+  region: ENTRANCE
   exits:
     "Death Mountain": "true"
   events:
@@ -891,7 +891,7 @@
   gossip:
     "Death Mountain Gossip Grotto": "true"
 "Death Mountain Cow Grotto":
-  region: DEATH_MOUNTAIN_TRAIL
+  region: ENTRANCE
   exits:
     "Death Mountain": "true"
   events:
@@ -899,7 +899,7 @@
   locations:
     "Death Mountain Cow": "can_play_epona"
 "Fairy Fountain Magic":
-  region: DEATH_MOUNTAIN_TRAIL
+  region: ENTRANCE
   exits:
     "Death Mountain Summit": "true"
   events:
@@ -942,7 +942,7 @@
     "Goron City Gossip Boulder Maze": "has_explosives_or_hammer || can_lift_silver"
     "Goron City Gossip Near Medigoron": "has_bombflowers || can_hammer"
 "Goron Shop":
-  region: GORON_CITY
+  region: ENTRANCE
   exits:
     "Goron City": "true"
   locations:
@@ -955,7 +955,7 @@
     "Goron Shop Item 7": "can_use_wallet(1)"
     "Goron Shop Item 8": "can_use_wallet(2)"
 "Goron City Grotto":
-  region: GORON_CITY
+  region: ENTRANCE
   exits:
     "Goron City": "true"
   locations:
@@ -1005,7 +1005,7 @@
     "Zora River Gossip High Pillar": "true"
     "Zora River Gossip Near Domain": "true"
 "Zora River Storms Grotto":
-  region: ZORA_RIVER
+  region: ENTRANCE
   exits:
     "Zora River": "true"
   locations:
@@ -1028,7 +1028,7 @@
   gossip:
     "Zora River Gossip Grotto": "true"
 "Zora River Boulder Grotto":
-  region: ZORA_RIVER
+  region: ENTRANCE
   exits:
     "Zora River": "true"
 "Zora Domain":
@@ -1059,7 +1059,7 @@
     "Zora Fountain": "true"
     "Zora Domain": "king_zora_moved"
 "Zora Shop":
-  region: ZORA_DOMAIN
+  region: ENTRANCE
   exits:
     "Zora Domain": "true"
   locations:
@@ -1072,7 +1072,7 @@
     "Zora Shop Item 7": "can_use_wallet(3)"
     "Zora Shop Item 8": "can_use_wallet(1)"
 "Zora Domain Grotto":
-  region: ZORA_DOMAIN
+  region: ENTRANCE
   exits:
     "Zora Domain": "true"
 "Lake Hylia":
@@ -1108,7 +1108,7 @@
     "Lake Hylia Gossip Southeast Lake": "true"
     "Lake Hylia Gossip Southwest Lake": "true"
 "Laboratory":
-  region: LAKE_HYLIA
+  region: ENTRANCE
   exits:
     "Lake Hylia": "true"
   locations:
@@ -1116,14 +1116,14 @@
     "Laboratory Eye Drops": "adult_trade(EYEBALL_FROG)"
     "Laboratory GS Crate": "has_iron_boots && can_hookshot"
 "Fishing Pond":
-  region: LAKE_HYLIA
+  region: ENTRANCE
   exits:
     "Lake Hylia": "true"
   locations:
     "Fishing Pond Child": "is_child && can_use_wallet(1)"
     "Fishing Pond Adult": "is_adult && can_use_wallet(1)"
 "Lake Hylia Grotto":
-  region: LAKE_HYLIA
+  region: ENTRANCE
   exits:
     "Lake Hylia": "true"
   locations:
@@ -1154,7 +1154,7 @@
     "Zora Fountain": "true"
     "Ice Cavern": "true"
 "Fairy Fountain Farore":
-  region: ZORA_FOUNTAIN
+  region: ENTRANCE
   exits:
     "Zora Fountain": "true"
   events:
@@ -1223,7 +1223,7 @@
     "Fire Temple": "true"
     "Death Mountain Crater Warp": "has_tunic_goron_strict"
 "Death Mountain Crater Generic Grotto":
-  region: DEATH_MOUNTAIN_CRATER
+  region: ENTRANCE
   exits:
     "Death Mountain Crater Top": "true"
   events:
@@ -1239,7 +1239,7 @@
   gossip:
     "Death Mountain Crater Gossip Grotto": "true"
 "Death Mountain Crater Scrub Grotto":
-  region: DEATH_MOUNTAIN_CRATER
+  region: ENTRANCE
   exits:
     "Death Mountain Crater Bottom": "true"
   locations:
@@ -1247,7 +1247,7 @@
     "Death Mountain Crater Grotto Center Scrub": "can_hit_scrub && can_use_wallet(1)"
     "Death Mountain Crater Grotto Right Scrub": "can_hit_scrub && can_use_wallet(1)"
 "Fairy Fountain Double Magic":
-  region: DEATH_MOUNTAIN_CRATER
+  region: ENTRANCE
   exits:
     "Death Mountain Crater Bottom": "true"
   events:
@@ -1291,20 +1291,20 @@
     "Gerudo Valley GS Tent": "can_hookshot && gs_night"
     "Gerudo Valley GS Pillar": "can_hookshot && gs_night"
 "Octorok Grotto":
-  region: GERUDO_VALLEY
+  region: ENTRANCE
   exits:
     "Gerudo Valley": "true"
   events:
     RUPEES: "true"
 "Gerudo Valley Storms Grotto":
-  region: GERUDO_VALLEY
+  region: ENTRANCE
   exits:
     "Gerudo Valley After Bridge": "true"
   locations:
     "Gerudo Valley Grotto Front Scrub": "can_hit_scrub && can_use_wallet(1)"
     "Gerudo Valley Grotto Back Scrub": "can_hit_scrub && can_use_wallet(1)"
 "Gerudo Valley Tent":
-  region: GERUDO_VALLEY
+  region: ENTRANCE
   exits:
     "Gerudo Valley After Bridge": "true"
 "Gerudo Fortress Exterior":
@@ -1388,7 +1388,7 @@
     "Gerudo Fortress Exterior": "event(OPEN_FORTRESS_GATE)"
     "Haunted Wasteland Start": "true"
 "Gerudo Fortress Grotto":
-  region: GERUDO_FORTRESS
+  region: ENTRANCE
   exits:
     "Gerudo Fortress Exterior": "true"
 "Haunted Wasteland Start":
@@ -1436,7 +1436,7 @@
   locations:
     "Desert Colossus Song Spirit": "true"
 "Fairy Fountain Nayru":
-  region: DESERT_COLOSSUS
+  region: ENTRANCE
   exits:
     "Desert Colossus": "true"
   events:
@@ -1444,7 +1444,7 @@
   locations:
     "Great Fairy Nayru's Love": "can_play(SONG_ZELDA)"
 "Desert Colossus Grotto":
-  region: DESERT_COLOSSUS
+  region: ENTRANCE
   exits:
     "Desert Colossus": "true"
   locations:

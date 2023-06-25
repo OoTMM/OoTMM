@@ -21,6 +21,7 @@ export type WorldArea = {
   gossip: ExprMap;
   stay: Expr[] | null;
   time: 'still' | 'day' | 'night' | 'flow';
+  region: string;
 };
 
 type WorldCheckNumeric = {
@@ -55,19 +56,19 @@ export type WorldEntrance = {
 };
 
 export type World = {
-  areas: {[k: string]: WorldArea};
-  checks: {[k: string]: WorldCheck};
-  dungeons: {[k: string]: Set<string>};
-  regions: {[k: string]: string};
-  gossip: {[k: string]: WorldGossip};
-  checkHints: {[k: string]: string[]};
+  areas: { [k: string]: WorldArea };
+  checks: { [k: string]: WorldCheck };
+  dungeons: { [k: string]: Set<string> };
+  regions: { [k: string]: string };
+  gossip: { [k: string]: WorldGossip };
+  checkHints: { [k: string]: string[] };
   entrances: Map<string, WorldEntrance>;
   locations: Set<string>;
   songLocations: Set<string>;
   warpLocations: Set<string>;
 };
 
-export const DUNGEONS_REGIONS: {[k: string]: string} = {
+export const DUNGEONS_REGIONS: { [k: string]: string } = {
   DT: "OOT_DEKU_TREE",
   DC: "OOT_DODONGO_CAVERN",
   JJ: "OOT_JABU_JABU",
@@ -186,7 +187,7 @@ export class LogicPassWorld {
         const boss = area.boss || false;
         const dungeon = area.dungeon || null;
         let region = area.region;
-        if (region !== 'NONE') {
+        if (region !== 'NONE' && region !== 'ENTRANCE') {
           region = region ? gameId(game, region, '_') : undefined;
         }
         if (dungeon) {
@@ -212,7 +213,7 @@ export class LogicPassWorld {
           throw new Error(`Undefined region for area ${name}`);
         }
 
-        if (DATA_REGIONS[region] === undefined) {
+        if (region !== 'ENTRANCE' && DATA_REGIONS[region] === undefined) {
           throw new Error(`Unknown region ${region}`);
         }
 
@@ -227,7 +228,7 @@ export class LogicPassWorld {
           }
         }
 
-        this.world.areas[name] = { game, boss, dungeon, exits, events, locations, gossip, time, stay };
+        this.world.areas[name] = { game, boss, dungeon, exits, events, locations, gossip, time, stay, region };
 
         if (dungeon) {
           if (this.world.dungeons[dungeon] === undefined) {
