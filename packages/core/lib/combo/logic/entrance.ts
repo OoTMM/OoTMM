@@ -109,8 +109,8 @@ export class LogicPassEntrances {
       }
     }
 
-    /* Beatable only */
-    if (this.input.settings.logic === 'beatable') {
+    /* Not all locations */
+    if (this.input.settings.logic !== 'allLocations') {
       return true;
     }
 
