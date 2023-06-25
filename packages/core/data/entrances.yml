@@ -96,6 +96,20 @@ OOT_SHOP_POTION_KAKARIKO:                   0x384
 OOT_KAKARIKO_FROM_SHOP_POTION:              0x44b
 OOT_SHOP_POTION_KAKARIKO_BACK:              0x3ec
 OOT_KAKARIKO_FROM_SHOP_POTION_BACK:         0x4ff
+OOT_FAIRY_MAGIC:                            0x315
+OOT_DEATH_MOUNTAIN_FROM_FAIRY:              0x45b
+OOT_FAIRY_MAGIC2:                           0x4be
+OOT_DEATH_CRATER_FROM_FAIRY:                0x482
+OOT_FAIRY_DIN:                              0x578
+OOT_HYRULE_CASTLE_FROM_FAIRY:               0x340
+OOT_FAIRY_FARORE:                           0x371
+OOT_ZORA_FOUNTAIN_FROM_FAIRY:               0x394
+OOT_FAIRY_NAYRU:                            0x588
+OOT_DESERT_COLOSSUS_FROM_FAIRY:             0x57c
+OOT_FAIRY_DEFENSE:                          0x4c2
+
+# Custom
+OOT_OUTSIDE_GANON_FROM_FAIRY:               0xf00
 
 MM_BOSS_TEMPLE_WOODFALL:                    0x3800
 MM_BOSS_TEMPLE_SNOWHEAD:                    0x8200
