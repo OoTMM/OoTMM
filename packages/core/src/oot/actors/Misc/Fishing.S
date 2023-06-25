@@ -42,6 +42,7 @@ EasierFishing:
   jr   ra
    nop
 
+/* This doesn't work as intended, probably because of the hardcoded address */
 FishBite:
   la        t0,0x801F5DE0
   lw        at,0x009C(t0)
@@ -120,6 +121,17 @@ PATCH_END
 
 PATCH_START 0x80a42614
   nop
+PATCH_END
+
+/* Don't reset lure - relocs */
+PATCH_START 0x80a47640
+.int 0
+.int 0
+PATCH_END
+
+PATCH_START 0x80a47650
+.int 0
+.int 0
 PATCH_END
 
 /* Ignore sinking lure for prizes */
