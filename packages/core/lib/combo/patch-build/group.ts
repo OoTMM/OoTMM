@@ -26,6 +26,7 @@ export const PATCH_GROUPS = [
   'OOT_AGELESS_HAMMER',
   'OOT_AGELESS_CHILD_TRADE',
   'OOT_BLUE_FIRE_ARROWS',
+  'ER',
 ] as const;
 
 export type PatchGroup = typeof PATCH_GROUPS[number];

@@ -9,6 +9,7 @@ import { Patcher } from "./patcher";
 import { Patchfile } from "./patchfile";
 import { patchRandomizer } from "./randomizer";
 import { PatchGroup } from "./group";
+import { isEntranceShuffle } from "../logic/helpers";
 
 export type BuildPatchfileIn = {
   monitor: Monitor;
@@ -49,6 +50,7 @@ function asmPatchGroups(settings: Settings) {
     OOT_AGELESS_HAMMER: settings.agelessHammer,
     OOT_AGELESS_CHILD_TRADE: settings.agelessChildTrade,
     OOT_BLUE_FIRE_ARROWS: settings.blueFireArrows,
+    ER: isEntranceShuffle(settings),
   };
   const keys = Object.keys(groups) as PatchGroup[];
   return keys.filter((k) => groups[k]);
