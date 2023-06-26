@@ -15,6 +15,7 @@ import { LogicPassWorldTransform } from './world-transform';
 import { LogicError } from './error';
 import { LogicPassFixer } from './fixer';
 import { LogicPassAnalysisFoolish } from './analysis-foolish';
+import { LogicPassPrice } from './price';
 
 interface LogicPass<Out> {
   run: () => Out;
@@ -61,6 +62,7 @@ const solvedWorldState = (monitor: Monitor, opts: Options) => {
     state.attempts++;
     try {
       const newState = pipeline(state)
+        .apply(LogicPassPrice)
         .apply(LogicPassEntrances)
         .apply(LogicPassSolver)
         .exec();

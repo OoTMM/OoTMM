@@ -6,6 +6,7 @@ import { DATA_POOL, DATA_MACROS, DATA_WORLD, DATA_REGIONS, DATA_ENTRANCES_POOL, 
 import { Settings } from '../settings';
 import { Monitor } from '../monitor';
 import { isDungeonReward, isSong, makeItem } from './items';
+import { defaultPrices } from './price';
 
 export type ExprMap = {
   [k: string]: Expr;
@@ -66,6 +67,7 @@ export type World = {
   locations: Set<string>;
   songLocations: Set<string>;
   warpLocations: Set<string>;
+  prices: number[];
 };
 
 export const DUNGEONS_REGIONS: { [k: string]: string } = {
@@ -133,6 +135,7 @@ export class LogicPassWorld {
       locations: new Set(),
       songLocations: new Set(),
       warpLocations: new Set(),
+      prices: defaultPrices(),
     };
   }
 

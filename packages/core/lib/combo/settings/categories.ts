@@ -11,6 +11,9 @@ export const SETTINGS_CATEGORIES: SettingCategory[] = [{
     name: "Shuffle",
     key: "shuffle",
   }, {
+    name: "Prices",
+    key: "prices",
+  }, {
     name: "Events",
     key: "events",
   }, {
