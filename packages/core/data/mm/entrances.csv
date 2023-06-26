@@ -75,6 +75,8 @@ MUSIC_BOX_HOUSE,                                    indoors-extra,    Music Box 
 BLACKSMITH,                                         indoors-extra,    Blacksmith,                         Mountain Village,                           MOUNTAIN_VILLAGE_FROM_BLACKSMITH
 IKANA_CAVERN,                                       indoors-extra,    Ikana Spring Water Cave,            Ikana Canyon,                               IKANA_CANYON_FROM_CAVERN
 TOURIST_INFORMATION,                                indoors-extra,    Tourist Information,                Swamp Front,                                SWAMP_FROM_TOURIST_INFORMATION
+ASTRAL_OBSERVATORY_FROM_CLOCK_TOWN_EAST,            indoors-extra,    Astral Observatory Passage,         Clock Town East,                            CLOCK_TOWN_EAST_FROM_ASTRAL_OBSERVATORY
+ASTRAL_OBSERVATORY_FROM_FIELD,                      indoors-extra,    Astral Observatory,                 Astral Observatory Balcony,                 FIELD_FROM_ASTRAL_OBSERVATORY
 CLOCK_TOWN_EAST_FROM_HONEY_AND_DARLING,             indoors-exit,     Clock Town East,                    Honey & Darling Game,                       HONEY_AND_DARLING_GAME
 CLOCK_TOWN_EAST_FROM_MAYORS_OFFICE,                 indoors-exit,     Clock Town East,                    Mayor's Office,                             MAYORS_OFFICE
 CLOCK_TOWN_EAST_FROM_TOWN_ARCHERY,                  indoors-exit,     Clock Town East,                    Town Archery,                               TOWN_ARCHERY
@@ -113,6 +115,8 @@ SNOWHEAD_FROM_FAIRY_FOUNTAIN,                       indoors-exit,     Snowhead N
 SWAMP_FROM_TOURIST_INFORMATION,                     indoors-exit,     Swamp Front,                        Tourist Information,                        TOURIST_INFORMATION
 WOODFALL_FROM_FAIRY_FOUNTAIN,                       indoors-exit,     Woodfall Near Fairy Fountain,       Woodfall Fairy Fountain,                    FAIRY_FOUNTAIN_WOODFALL
 MOUNTAIN_VILLAGE_FROM_BLACKSMITH,                   indoors-exit,     Mountain Village,                   Blacksmith,                                 BLACKSMITH
+CLOCK_TOWN_EAST_FROM_ASTRAL_OBSERVATORY,            indoors-exit,     Clock Town East,                    Astral Observatory Passage,                 ASTRAL_OBSERVATORY_FROM_CLOCK_TOWN_EAST
+FIELD_FROM_ASTRAL_OBSERVATORY,                      indoors-exit,     Astral Observatory Balcony,         Astral Observatory,                         ASTRAL_OBSERVATORY_FROM_FIELD
 DEKU_PALACE_THRONE,                                 indoors-special,  Deku Palace Throne,                 Deku Palace Main,                           DEKU_PALACE_EXTERIOR_FROM_THRONE
 DEKU_PALACE_EXTERIOR_FROM_THRONE,                   indoors-special,  Deku Palace Main,                   Deku Palace Throne,                         DEKU_PALACE_THRONE
 DEKU_PALACE_THRONE_CAGE,                            indoors-special,  Deku Palace Cage,                   Deku Palace Near Cage,                      DEKU_PALACE_EXTERIOR_FROM_THRONE_CAGE
@@ -121,7 +125,3 @@ SAKON_HIDEOUT,                                      indoors-special,  Sakon Hide
 IKANA_CANYON_FROM_SAKON_HIDEOUT,                    indoors-special,  Ikana Valley,                       Sakon Hideout,                              SAKON_HIDEOUT
 GORON_GRAVEYARD,                                    indoors-special,  Goron Graveyard,                    Near Goron Graveyard,                       MOUNTAIN_VILLAGE_FROM_GORON_GRAVEYARD
 MOUNTAIN_VILLAGE_FROM_GORON_GRAVEYARD,              indoors-special,  Near Goron Graveyard,               Goron Graveyard,                            GORON_GRAVEYARD
-ASTRAL_OBSERVATORY_FROM_CLOCK_TOWN_EAST,            indoors-special,  Astral Observatory,                 Clock Town East,                            CLOCK_TOWN_EAST_FROM_ASTRAL_OBSERVATORY
-CLOCK_TOWN_EAST_FROM_ASTRAL_OBSERVATORY,            indoors-special,  Clock Town East,                    Astral Observatory,                         ASTRAL_OBSERVATORY_FROM_CLOCK_TOWN_EAST
-ASTRAL_OBSERVATORY_FROM_FIELD,                      indoors-special,  Astral Observatory,                 Termina Field,                              FIELD_FROM_ASTRAL_OBSERVATORY
-FIELD_FROM_ASTRAL_OBSERVATORY,                      indoors-special,  Termina Field,                      Astral Observatory,                         ASTRAL_OBSERVATORY_FROM_FIELD
