@@ -23,6 +23,7 @@ const OOT_SHOPS = [
 
 const PRICES = {
   OOT_SHOPS,
+  MAX: [],
 } as const;
 
 const DEFAULT_PRICES = Object.values(PRICES).flat();

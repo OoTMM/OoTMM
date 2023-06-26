@@ -52,6 +52,7 @@
 #include <PR/gbi.h>
 #include <combo/common/actor.h>
 #include <combo/save.h>
+#include <combo/prices.h>
 #include <combo/gi.h>
 #include <combo/data/items.h>
 #include <combo/entrances.h>
@@ -170,6 +171,7 @@ typedef struct
     u32             mq;
     u8              config[0x40];
     SpecialCond     special[5];
+    u16             prices[PRICES_MAX];
     ComboDataHints  hints;
     u8              boss[12];
     u8              dungeons[25];
