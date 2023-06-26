@@ -133,6 +133,8 @@
 # Wallets
 "has_wallet(n)": "cond(setting(childWallets), has(WALLET, n) || has(SHARED_WALLET, n), has(WALLET, n - 1) || has(SHARED_WALLET, n - 1))"
 "can_use_wallet(n)": "has_rupees && has_wallet(n)"
+"wallet_price(range, id)": "price(range, id, 0) || has_rupees && ((price(range, id, 99) && has_wallet(1)) || (price(range, id, 200) && has_wallet(2)) || (price(range, id, 500) && has_wallet(3)) || (price(range, id, 999) && has_wallet(4)))"
+"shop_price(id)": "wallet_price(OOT_SHOPS, id)"
 
 # Keys
 "boss_key(x)": "setting(bossKeyShuffleOot, removed) || has(x)"

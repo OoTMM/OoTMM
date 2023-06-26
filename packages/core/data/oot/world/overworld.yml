@@ -83,14 +83,14 @@
   exits:
     "Kokiri Forest": "true"
   locations:
-    "Kokiri Shop Item 1": "can_use_wallet(1)"
-    "Kokiri Shop Item 2": "can_use_wallet(1)"
-    "Kokiri Shop Item 3": "can_use_wallet(1)"
-    "Kokiri Shop Item 4": "can_use_wallet(1)"
-    "Kokiri Shop Item 5": "can_use_wallet(1)"
-    "Kokiri Shop Item 6": "can_use_wallet(1)"
-    "Kokiri Shop Item 7": "can_use_wallet(1)"
-    "Kokiri Shop Item 8": "can_use_wallet(1)"
+    "Kokiri Shop Item 1": "shop_price(0x00)"
+    "Kokiri Shop Item 2": "shop_price(0x01)"
+    "Kokiri Shop Item 3": "shop_price(0x02)"
+    "Kokiri Shop Item 4": "shop_price(0x03)"
+    "Kokiri Shop Item 5": "shop_price(0x04)"
+    "Kokiri Shop Item 6": "shop_price(0x05)"
+    "Kokiri Shop Item 7": "shop_price(0x06)"
+    "Kokiri Shop Item 8": "shop_price(0x07)"
 "Mido's House":
   region: ENTRANCE
   exits:
@@ -269,40 +269,40 @@
   exits:
     "Market": "is_child"
   locations:
-    "Market Bazaar Item 1": "can_use_wallet(1)"
-    "Market Bazaar Item 2": "can_use_wallet(1)"
-    "Market Bazaar Item 3": "can_use_wallet(1)"
-    "Market Bazaar Item 4": "can_use_wallet(1)"
-    "Market Bazaar Item 5": "can_use_wallet(1)"
-    "Market Bazaar Item 6": "can_use_wallet(1)"
-    "Market Bazaar Item 7": "can_use_wallet(1)"
-    "Market Bazaar Item 8": "can_use_wallet(1)"
+    "Market Bazaar Item 1": "shop_price(0x20)"
+    "Market Bazaar Item 2": "shop_price(0x21)"
+    "Market Bazaar Item 3": "shop_price(0x22)"
+    "Market Bazaar Item 4": "shop_price(0x23)"
+    "Market Bazaar Item 5": "shop_price(0x24)"
+    "Market Bazaar Item 6": "shop_price(0x25)"
+    "Market Bazaar Item 7": "shop_price(0x26)"
+    "Market Bazaar Item 8": "shop_price(0x27)"
 "Market Potion Shop":
   region: ENTRANCE
   exits:
     "Market": "is_child"
   locations:
-    "Market Potion Shop Item 1": "can_use_wallet(2)"
-    "Market Potion Shop Item 2": "can_use_wallet(1)"
-    "Market Potion Shop Item 3": "can_use_wallet(1)"
-    "Market Potion Shop Item 4": "can_use_wallet(1)"
-    "Market Potion Shop Item 5": "can_use_wallet(3)"
-    "Market Potion Shop Item 6": "can_use_wallet(1)"
-    "Market Potion Shop Item 7": "can_use_wallet(1)"
-    "Market Potion Shop Item 8": "can_use_wallet(1)"
+    "Market Potion Shop Item 1": "shop_price(0x28)"
+    "Market Potion Shop Item 2": "shop_price(0x29)"
+    "Market Potion Shop Item 3": "shop_price(0x2a)"
+    "Market Potion Shop Item 4": "shop_price(0x2b)"
+    "Market Potion Shop Item 5": "shop_price(0x2c)"
+    "Market Potion Shop Item 6": "shop_price(0x2d)"
+    "Market Potion Shop Item 7": "shop_price(0x2e)"
+    "Market Potion Shop Item 8": "shop_price(0x2f)"
 "Market Bombchu Shop":
   region: ENTRANCE
   exits:
     "Market": "is_child"
   locations:
-    "Market Bombchu Shop Item 1": "can_use_wallet(2)"
-    "Market Bombchu Shop Item 2": "can_use_wallet(2)"
-    "Market Bombchu Shop Item 3": "can_use_wallet(2)"
-    "Market Bombchu Shop Item 4": "can_use_wallet(2)"
-    "Market Bombchu Shop Item 5": "can_use_wallet(2)"
-    "Market Bombchu Shop Item 6": "can_use_wallet(2)"
-    "Market Bombchu Shop Item 7": "can_use_wallet(2)"
-    "Market Bombchu Shop Item 8": "can_use_wallet(2)"
+    "Market Bombchu Shop Item 1": "shop_price(0x08)"
+    "Market Bombchu Shop Item 2": "shop_price(0x09)"
+    "Market Bombchu Shop Item 3": "shop_price(0x0a)"
+    "Market Bombchu Shop Item 4": "shop_price(0x0b)"
+    "Market Bombchu Shop Item 5": "shop_price(0x0c)"
+    "Market Bombchu Shop Item 6": "shop_price(0x0d)"
+    "Market Bombchu Shop Item 7": "shop_price(0x0e)"
+    "Market Bombchu Shop Item 8": "shop_price(0x0f)"
 "Market Pot House":
   region: ENTRANCE
   exits:
@@ -679,28 +679,28 @@
   exits:
     "Kakariko": "is_adult"
   locations:
-    "Kakariko Bazaar Item 1": "can_use_wallet(1)"
-    "Kakariko Bazaar Item 2": "can_use_wallet(1)"
-    "Kakariko Bazaar Item 3": "can_use_wallet(1)"
-    "Kakariko Bazaar Item 4": "can_use_wallet(1)"
-    "Kakariko Bazaar Item 5": "can_use_wallet(1)"
-    "Kakariko Bazaar Item 6": "can_use_wallet(1)"
-    "Kakariko Bazaar Item 7": "can_use_wallet(1)"
-    "Kakariko Bazaar Item 8": "can_use_wallet(1)"
+    "Kakariko Bazaar Item 1": "shop_price(0x30)"
+    "Kakariko Bazaar Item 2": "shop_price(0x31)"
+    "Kakariko Bazaar Item 3": "shop_price(0x32)"
+    "Kakariko Bazaar Item 4": "shop_price(0x33)"
+    "Kakariko Bazaar Item 5": "shop_price(0x34)"
+    "Kakariko Bazaar Item 6": "shop_price(0x35)"
+    "Kakariko Bazaar Item 7": "shop_price(0x36)"
+    "Kakariko Bazaar Item 8": "shop_price(0x37)"
 "Kakariko Potion Shop":
   region: ENTRANCE
   exits:
     "Kakariko": "is_adult"
     "Kakariko Potion Shop Back": "is_adult"
   locations:
-    "Kakariko Potion Shop Item 1": "can_use_wallet(2) && is_adult"
-    "Kakariko Potion Shop Item 2": "can_use_wallet(1) && is_adult"
-    "Kakariko Potion Shop Item 3": "can_use_wallet(1) && is_adult"
-    "Kakariko Potion Shop Item 4": "can_use_wallet(1) && is_adult"
-    "Kakariko Potion Shop Item 5": "can_use_wallet(3) && is_adult"
-    "Kakariko Potion Shop Item 6": "can_use_wallet(1) && is_adult"
-    "Kakariko Potion Shop Item 7": "can_use_wallet(1) && is_adult"
-    "Kakariko Potion Shop Item 8": "can_use_wallet(1) && is_adult"
+    "Kakariko Potion Shop Item 1": "shop_price(0x38) && is_adult"
+    "Kakariko Potion Shop Item 2": "shop_price(0x39) && is_adult"
+    "Kakariko Potion Shop Item 3": "shop_price(0x3a) && is_adult"
+    "Kakariko Potion Shop Item 4": "shop_price(0x3b) && is_adult"
+    "Kakariko Potion Shop Item 5": "shop_price(0x3c) && is_adult"
+    "Kakariko Potion Shop Item 6": "shop_price(0x3d) && is_adult"
+    "Kakariko Potion Shop Item 7": "shop_price(0x3e) && is_adult"
+    "Kakariko Potion Shop Item 8": "shop_price(0x3f) && is_adult"
 "Kakariko Potion Shop Back":
   region: KAKARIKO
   exits:
@@ -958,14 +958,14 @@
   exits:
     "Goron City": "true"
   locations:
-    "Goron Shop Item 1": "can_use_wallet(1)"
-    "Goron Shop Item 2": "can_use_wallet(1)"
-    "Goron Shop Item 3": "can_use_wallet(1)"
-    "Goron Shop Item 4": "can_use_wallet(2)"
-    "Goron Shop Item 5": "can_use_wallet(1)"
-    "Goron Shop Item 6": "can_use_wallet(1)"
-    "Goron Shop Item 7": "can_use_wallet(1)"
-    "Goron Shop Item 8": "can_use_wallet(2)"
+    "Goron Shop Item 1": "shop_price(0x10)"
+    "Goron Shop Item 2": "shop_price(0x11)"
+    "Goron Shop Item 3": "shop_price(0x12)"
+    "Goron Shop Item 4": "shop_price(0x13)"
+    "Goron Shop Item 5": "shop_price(0x14)"
+    "Goron Shop Item 6": "shop_price(0x15)"
+    "Goron Shop Item 7": "shop_price(0x16)"
+    "Goron Shop Item 8": "shop_price(0x17)"
 "Goron City Grotto":
   region: ENTRANCE
   exits:
@@ -1075,14 +1075,14 @@
   exits:
     "Zora Domain": "true"
   locations:
-    "Zora Shop Item 1": "can_use_wallet(1)"
-    "Zora Shop Item 2": "can_use_wallet(1)"
-    "Zora Shop Item 3": "can_use_wallet(2)"
-    "Zora Shop Item 4": "can_use_wallet(1)"
-    "Zora Shop Item 5": "can_use_wallet(1)"
-    "Zora Shop Item 6": "can_use_wallet(1)"
-    "Zora Shop Item 7": "can_use_wallet(3)"
-    "Zora Shop Item 8": "can_use_wallet(1)"
+    "Zora Shop Item 1": "shop_price(0x18)"
+    "Zora Shop Item 2": "shop_price(0x19)"
+    "Zora Shop Item 3": "shop_price(0x1a)"
+    "Zora Shop Item 4": "shop_price(0x1b)"
+    "Zora Shop Item 5": "shop_price(0x1c)"
+    "Zora Shop Item 6": "shop_price(0x1d)"
+    "Zora Shop Item 7": "shop_price(0x1e)"
+    "Zora Shop Item 8": "shop_price(0x1f)"
 "Zora Domain Grotto":
   region: ENTRANCE
   exits:

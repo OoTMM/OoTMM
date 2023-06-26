@@ -376,7 +376,7 @@ export class Pathfinder {
   private evalExpr(world: number, expr: Expr, age: Age, area: string) {
     const ws = this.state.ws[world];
     const areaData = ws.areas[age].get(area)!;
-    const result = expr({ areaData, items: ws.items, renewables: ws.renewables, licenses: ws.licenses, age, events: ws.events, ignoreItems: this.opts.ignoreItems || false });
+    const result = expr({ world: this.world, areaData, items: ws.items, renewables: ws.renewables, licenses: ws.licenses, age, events: ws.events, ignoreItems: this.opts.ignoreItems || false });
     if (result.result) {
       if (!result.restrictions || isDefaultRestrictions(result.restrictions)) {
         result.depItems = [];
