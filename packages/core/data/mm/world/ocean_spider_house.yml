@@ -1,7 +1,7 @@
 "Ocean Spider House":
   dungeon: OSH
   exits:
-    "Ocean Spider House Front": "(can_play_time || ((has_mask_goron || can_warp) && event(MAJORA) && trick(MM_MAJORA_LOGIC))) && (has_explosives || trick_keg_explosives)"
+    "Ocean Spider House Front": "can_reset_time && (has_explosives || trick_keg_explosives)"
     "Great Bay Coast": "true"
   locations:
     "Ocean Spider House Wallet": "has(GS_TOKEN_OCEAN, 30)"
