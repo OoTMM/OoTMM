@@ -1122,7 +1122,7 @@
 "Goron Graveyard":
   region: ENTRANCE
   exits:
-    "Mountain Village": "true"
+    "Near Goron Graveyard": "true"
   locations:
     "Goron Graveyard Mask": "can_use_lens_strict && can_play(SONG_HEALING)"
   events:

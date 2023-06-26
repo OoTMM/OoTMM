@@ -68,11 +68,12 @@ FAIRY_FOUNTAIN_WOODFALL,                            indoors,          Woodfall F
 FAIRY_FOUNTAIN_SNOWHEAD,                            indoors,          Snowhead Fairy Fountain,            Snowhead Near Fairy Fountain,               SNOWHEAD_FROM_FAIRY_FOUNTAIN
 FAIRY_FOUNTAIN_GREAT_BAY,                           indoors,          Great Bay Fairy Fountain,           Great Bay Near Fairy Fountain,              GREAT_BAY_FROM_FAIRY_FOUNTAIN
 FAIRY_FOUNTAIN_IKANA,                               indoors,          Ikana Fairy Fountain,               Ikana Canyon,                               IKANA_CANYON_FROM_FAIRY_FOUNTAIN
+BLACKSMITH,                                         indoors,          Blacksmith,                         Mountain Village,                           MOUNTAIN_VILLAGE_FROM_BLACKSMITH
+GORON_GRAVEYARD,                                    indoors,          Goron Graveyard,                    Near Goron Graveyard,                       MOUNTAIN_VILLAGE_FROM_GORON_GRAVEYARD
 STOCK_POT_INN,                                      indoors-extra,    Stock Pot Inn,                      Clock Town East,                            CLOCK_TOWN_EAST_FROM_STOCK_POT_INN
 STOCK_POT_INN_ROOF,                                 indoors-extra,    Stock Pot Inn,                      Stock Pot Inn Roof,                         CLOCK_TOWN_EAST_FROM_STOCK_POT_INN_ROOF
 GHOST_HUT,                                          indoors-extra,    Ghost Hut,                          Ikana Canyon,                               IKANA_CANYON_FROM_GHOST_HUT
 MUSIC_BOX_HOUSE,                                    indoors-extra,    Music Box House,                    Ikana Canyon,                               IKANA_CANYON_FROM_MUSIC_BOX_HOUSE
-BLACKSMITH,                                         indoors-extra,    Blacksmith,                         Mountain Village,                           MOUNTAIN_VILLAGE_FROM_BLACKSMITH
 IKANA_CAVERN,                                       indoors-extra,    Ikana Spring Water Cave,            Ikana Canyon,                               IKANA_CANYON_FROM_CAVERN
 TOURIST_INFORMATION,                                indoors-extra,    Tourist Information,                Swamp Front,                                SWAMP_FROM_TOURIST_INFORMATION
 ASTRAL_OBSERVATORY_FROM_CLOCK_TOWN_EAST,            indoors-extra,    Astral Observatory Passage,         Clock Town East,                            CLOCK_TOWN_EAST_FROM_ASTRAL_OBSERVATORY
@@ -117,11 +118,10 @@ WOODFALL_FROM_FAIRY_FOUNTAIN,                       indoors-exit,     Woodfall N
 MOUNTAIN_VILLAGE_FROM_BLACKSMITH,                   indoors-exit,     Mountain Village,                   Blacksmith,                                 BLACKSMITH
 CLOCK_TOWN_EAST_FROM_ASTRAL_OBSERVATORY,            indoors-exit,     Clock Town East,                    Astral Observatory Passage,                 ASTRAL_OBSERVATORY_FROM_CLOCK_TOWN_EAST
 FIELD_FROM_ASTRAL_OBSERVATORY,                      indoors-exit,     Astral Observatory Balcony,         Astral Observatory,                         ASTRAL_OBSERVATORY_FROM_FIELD
+MOUNTAIN_VILLAGE_FROM_GORON_GRAVEYARD,              indoors-exit,     Near Goron Graveyard,               Goron Graveyard,                            GORON_GRAVEYARD
 DEKU_PALACE_THRONE,                                 indoors-special,  Deku Palace Throne,                 Deku Palace Main,                           DEKU_PALACE_EXTERIOR_FROM_THRONE
 DEKU_PALACE_EXTERIOR_FROM_THRONE,                   indoors-special,  Deku Palace Main,                   Deku Palace Throne,                         DEKU_PALACE_THRONE
 DEKU_PALACE_THRONE_CAGE,                            indoors-special,  Deku Palace Cage,                   Deku Palace Near Cage,                      DEKU_PALACE_EXTERIOR_FROM_THRONE_CAGE
 DEKU_PALACE_EXTERIOR_FROM_THRONE_CAGE,              indoors-special,  Deku Palace Near Cage,              Deku Palace Cage,                           DEKU_PALACE_THRONE_CAGE
 SAKON_HIDEOUT,                                      indoors-special,  Sakon Hideout,                      Ikana Valley,                               IKANA_CANYON_FROM_SAKON_HIDEOUT
 IKANA_CANYON_FROM_SAKON_HIDEOUT,                    indoors-special,  Ikana Valley,                       Sakon Hideout,                              SAKON_HIDEOUT
-GORON_GRAVEYARD,                                    indoors-special,  Goron Graveyard,                    Near Goron Graveyard,                       MOUNTAIN_VILLAGE_FROM_GORON_GRAVEYARD
-MOUNTAIN_VILLAGE_FROM_GORON_GRAVEYARD,              indoors-special,  Near Goron Graveyard,               Goron Graveyard,                            GORON_GRAVEYARD
