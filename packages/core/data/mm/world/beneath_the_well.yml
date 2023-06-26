@@ -31,7 +31,7 @@
     WELL_BIG_POE: "has_bombs && has_weapon_range"
     BUGS: "has_bottle"
   locations:
-    "Beneath the Well Cow": "(event(WELL_HOT_WATER) || has_hot_water_distance) && can_play_epona"
+    "Beneath the Well Cow": "(event(WELL_HOT_WATER) || (has_hot_water_distance && has(OWL_IKANA_CANYON)) || has_hot_water_er) && can_play_epona"
 "Beneath the Well Middle Section":
   dungeon: BtW
   exits:

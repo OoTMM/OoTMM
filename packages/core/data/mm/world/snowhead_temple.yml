@@ -57,7 +57,7 @@
     "Snowhead Temple Center Level 1": "true"
     "Snowhead Temple Center Level 2 Dual": "goron_fast_roll"
     "Snowhead Temple Fire Arrow": "goron_fast_roll || (can_use_lens && scarecrow_hookshot && has(MASK_DEKU))"
-    "Snowhead Temple Center Level 3 Iced": "can_use_fire_arrows || (trick_sht_fireless && scarecrow_hookshot && has_mask_goron)"
+    "Snowhead Temple Center Level 3 Iced": "can_use_fire_arrows || (trick_sht_fireless && scarecrow_hookshot && has_mask_goron) || trick_sht_fireless_er"
     "Snowhead Temple Center Level 3 Snow": "can_use_lens && scarecrow_hookshot"
   locations:
     "Snowhead Temple Map Alcove": "can_use_lens || can_hookshot"
@@ -75,7 +75,7 @@
   exits:
     "Snowhead Temple Center Level 1": "true"
   events:
-    SNOWHEAD_RAISE_PILLAR: "has_mask_goron && (can_use_fire_arrows || event(SHT_STICK_RUN))"
+    SNOWHEAD_RAISE_PILLAR: "has_mask_goron && (can_use_fire_arrows || (event(SHT_STICK_RUN) && trick(MM_SHT_STICKS_RUN)))"
   locations:
     "Snowhead Temple Pillars Room": "true"
 "Snowhead Temple Center Level 0":
@@ -166,13 +166,13 @@
   dungeon: SH
   exits:
     "Snowhead Temple Center Level 3 Snow": "small_keys(SMALL_KEY_SH, 3)"
-    "Snowhead Temple Dinolfos Room": "can_use_fire_arrows"
+    "Snowhead Temple Dinolfos Room": "can_use_fire_arrows || trick_sht_fireless_er"
   locations:
     "Snowhead Temple SF Snow Room": "can_use_lens && (has_arrows || can_hookshot_short) && has(MASK_GREAT_FAIRY)"
 "Snowhead Temple Dinolfos Room":
   dungeon: SH
   exits:
-    "Snowhead Temple Snow Room": "true"
+    "Snowhead Temple Snow Room": "can_use_fire_arrows || trick_sht_fireless_er"
     "Snowhead Temple Boss Key Room": "event(SNOWHEAD_RAISE_PILLAR)"
     "Snowhead Temple Center Level 3 Iced": "true"
     "Snowhead Temple Center Level 3 Snow": "true"

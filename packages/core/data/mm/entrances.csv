@@ -70,10 +70,9 @@ FAIRY_FOUNTAIN_GREAT_BAY,                           indoors,          Great Bay 
 FAIRY_FOUNTAIN_IKANA,                               indoors,          Ikana Fairy Fountain,               Ikana Canyon,                               IKANA_CANYON_FROM_FAIRY_FOUNTAIN
 BLACKSMITH,                                         indoors,          Blacksmith,                         Mountain Village,                           MOUNTAIN_VILLAGE_FROM_BLACKSMITH
 GORON_GRAVEYARD,                                    indoors,          Goron Graveyard,                    Near Goron Graveyard,                       MOUNTAIN_VILLAGE_FROM_GORON_GRAVEYARD
+GHOST_HUT,                                          indoors,          Ghost Hut,                          Ikana Canyon,                               IKANA_CANYON_FROM_GHOST_HUT
 STOCK_POT_INN,                                      indoors-extra,    Stock Pot Inn,                      Clock Town East,                            CLOCK_TOWN_EAST_FROM_STOCK_POT_INN
 STOCK_POT_INN_ROOF,                                 indoors-extra,    Stock Pot Inn,                      Stock Pot Inn Roof,                         CLOCK_TOWN_EAST_FROM_STOCK_POT_INN_ROOF
-GHOST_HUT,                                          indoors-extra,    Ghost Hut,                          Ikana Canyon,                               IKANA_CANYON_FROM_GHOST_HUT
-MUSIC_BOX_HOUSE,                                    indoors-extra,    Music Box House,                    Ikana Canyon,                               IKANA_CANYON_FROM_MUSIC_BOX_HOUSE
 IKANA_CAVERN,                                       indoors-extra,    Ikana Spring Water Cave,            Ikana Canyon,                               IKANA_CANYON_FROM_CAVERN
 TOURIST_INFORMATION,                                indoors-extra,    Tourist Information,                Swamp Front,                                SWAMP_FROM_TOURIST_INFORMATION
 ASTRAL_OBSERVATORY_FROM_CLOCK_TOWN_EAST,            indoors-extra,    Astral Observatory Passage,         Clock Town East,                            CLOCK_TOWN_EAST_FROM_ASTRAL_OBSERVATORY
@@ -104,7 +103,6 @@ ZORA_HALL_FROM_TIJO,                                indoors-exit,     Zora Hall,
 ZORA_HALL_FROM_LULU,                                indoors-exit,     Zora Hall,                          Lulu's Room,                                ROOM_LULU
 ZORA_HALL_FROM_SHOP,                                indoors-exit,     Zora Hall,                          Zora Shop,                                  ZORA_SHOP
 IKANA_CANYON_FROM_GHOST_HUT,                        indoors-exit,     Ikana Canyon,                       Ghost Hut,                                  GHOST_HUT
-IKANA_CANYON_FROM_MUSIC_BOX_HOUSE,                  indoors-exit,     Ikana Canyon,                       Music Box House,                            MUSIC_BOX_HOUSE
 IKANA_CANYON_FROM_FAIRY_FOUNTAIN,                   indoors-exit,     Ikana Canyon,                       Ikana Fairy Fountain,                       FAIRY_FOUNTAIN_IKANA
 ROMANI_RANCH_FROM_CUCCO_SHACK,                      indoors-exit,     Romani Ranch,                       Cucco Shack,                                CUCCO_SHACK
 ROMANI_RANCH_FROM_DOGGY_RACETRACK,                  indoors-exit,     Romani Ranch,                       Doggy Racetrack,                            DOGGY_RACETRACK
@@ -125,3 +123,5 @@ DEKU_PALACE_THRONE_CAGE,                            indoors-special,  Deku Palac
 DEKU_PALACE_EXTERIOR_FROM_THRONE_CAGE,              indoors-special,  Deku Palace Near Cage,              Deku Palace Cage,                           DEKU_PALACE_THRONE_CAGE
 SAKON_HIDEOUT,                                      indoors-special,  Sakon Hideout,                      Ikana Valley,                               IKANA_CANYON_FROM_SAKON_HIDEOUT
 IKANA_CANYON_FROM_SAKON_HIDEOUT,                    indoors-special,  Ikana Valley,                       Sakon Hideout,                              SAKON_HIDEOUT
+MUSIC_BOX_HOUSE,                                    indoors-special,  Music Box House,                    Ikana Canyon,                               IKANA_CANYON_FROM_MUSIC_BOX_HOUSE
+IKANA_CANYON_FROM_MUSIC_BOX_HOUSE,                  indoors-special,  Ikana Canyon,                       Music Box House,                            MUSIC_BOX_HOUSE
