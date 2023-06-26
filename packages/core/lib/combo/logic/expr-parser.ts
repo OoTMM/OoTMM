@@ -1,7 +1,7 @@
 import { Game } from '../config';
 import { Settings } from '../settings';
 import { gameId } from '../util';
-import { Expr, exprTrue, exprFalse, exprAnd, exprOr, exprAge, exprHas, exprRenewable, exprEvent, exprMasks, exprSetting, exprNot, exprCond, exprTrick, exprSpecial, exprOotTime, exprMmTime, exprLicense } from './expr';
+import { Expr, exprTrue, exprFalse, exprAnd, exprOr, exprAge, exprHas, exprRenewable, exprEvent, exprMasks, exprSetting, exprNot, exprCond, exprTrick, exprSpecial, exprOotTime, exprMmTime, exprLicense, exprPrice } from './expr';
 
 const SIMPLE_TOKENS = ['||', '&&', '(', ')', ',', 'true', 'false', '!', '+', '-'] as const;
 
@@ -286,6 +286,21 @@ export class ExprParser {
     return exprMmTime(operator, slice);
   }
 
+  private parseExprPrice(): Expr | undefined {
+    if (this.peek('identifier') !== 'price') {
+      return undefined;
+    }
+    this.accept('identifier');
+    this.expect('(');
+    const range = this.expect('identifier');
+    this.expect(',');
+    const id = this.expect('number');
+    this.expect(',');
+    const max = this.expect('number');
+    this.expect(')');
+    return exprPrice(range, id, max);
+  }
+
   private parseMacro(): Expr | undefined {
     /* Check for a macro with the given name */
     const name = this.peek('identifier');
@@ -361,6 +376,7 @@ export class ExprParser {
       || this.parseExprSpecial()
       || this.parseExprOotTime()
       || this.parseExprMmTime()
+      || this.parseExprPrice()
       || this.parseMacro();
   }
 
@@ -496,7 +512,21 @@ export class ExprParser {
       return { type: 'identifier', value: str };
     }
 
-    /* Check for a number */
+    /* Check for an hex number */
+    if (ctx.buffer[ctx.cursor] === '0' && ctx.buffer[ctx.cursor + 1] === 'x') {
+      if (!/[0-9a-fA-F]/.test(ctx.buffer[ctx.cursor] || '')) {
+        throw this.error(`Expected hex number at ${ctx.cursor}`);
+      }
+      ctx.cursor += 2;
+      const start = ctx.cursor;
+      while (/[0-9a-fA-F]/.test(ctx.buffer[ctx.cursor] || '')) {
+        ctx.cursor++;
+      }
+      const str = ctx.buffer.substring(start, ctx.cursor);
+      return { type: 'number', value: parseInt(str, 16) };
+    }
+
+    /* Check for a decimal number */
     if (/[0-9]/.test(ctx.buffer[ctx.cursor] || '')) {
       const start = ctx.cursor;
       while (/[0-9]/.test(ctx.buffer[ctx.cursor] || '')) {

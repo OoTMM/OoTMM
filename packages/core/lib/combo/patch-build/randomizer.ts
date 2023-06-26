@@ -474,6 +474,10 @@ function specialConds(settings: Settings) {
   return Buffer.concat(buffers);
 }
 
+export const prices = (logic: LogicResult): Buffer => {
+  return toU16Buffer(logic.world.prices);
+};
+
 export const randomizerData = (world: number, logic: LogicResult): Buffer => {
   const buffers = [];
   buffers.push(logic.uuid);
@@ -481,6 +485,7 @@ export const randomizerData = (world: number, logic: LogicResult): Buffer => {
   buffers.push(randomizerMq(logic));
   buffers.push(randomizerConfig(logic.config));
   buffers.push(specialConds(logic.settings));
+  buffers.push(prices(logic));
   buffers.push(randomizerHints(world, logic));
   buffers.push(randomizerBoss(logic));
   buffers.push(randomizerDungeons(logic));

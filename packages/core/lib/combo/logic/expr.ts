@@ -1,6 +1,8 @@
 import { Settings, Trick, TRICKS } from '../settings';
 import { Items, ITEMS_MASKS_OOT, ITEMS_MASKS_REGULAR, ITEMS_MASKS_TRANSFORM, ITEMS_MEDALLIONS, ITEMS_REMAINS, ITEMS_STONES } from './items';
 import { Age } from './pathfind';
+import { PRICE_RANGES } from './price';
+import { World } from './world';
 
 type RecursiveArray<T> = Array<T | RecursiveArray<T>>;
 
@@ -117,6 +119,7 @@ type State = {
   events: Set<string>;
   ignoreItems: boolean;
   areaData: AreaData;
+  world: World;
 };
 
 /* AND the restrictions together */
@@ -382,4 +385,10 @@ export const exprMmTime = (operator: string, sliceName: string): Expr => {
       };
     }
   };
+}
+
+export const exprPrice = (range: string, id: number, max: number): Expr => state => {
+  const price = state.world.prices[id + PRICE_RANGES[range]];
+  const result = price <= max;
+  return { result, depItems: [], depEvents: [] };
 }
