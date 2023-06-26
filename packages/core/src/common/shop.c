@@ -59,6 +59,11 @@ void comboShopSetupItem(GameState_Play* play, Actor_EnGirlA* girlA)
 #endif
 
     girlA->shopId = comboShopItemSlot(play, girlA);
+
+#if defined(GAME_OOT)
+    girlA->price = (s16)gComboData.prices[PRICES_OOT_SHOPS + girlA->shopId];
+#endif
+
     comboShopUpdateItem(play, girlA);
 }
 
