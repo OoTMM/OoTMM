@@ -2,13 +2,15 @@
 
 void KaleidoScope_AfterSetCutsorColor(GameState_Play* play)
 {
+    u16 cursorSlot;
     int press;
     int effect;
 
+    cursorSlot = play->pauseCtx.cursorSlot[0];
     press = !!(play->gs.input[0].pressed.buttons & (L_TRIG | U_CBUTTONS));
     effect = 0;
 
-    if (play->pauseCtx.cursorSlot[0] == ITS_MM_TRADE1 && popcount(gMmExtraTrade.trade1) > 1)
+    if (cursorSlot == ITS_MM_TRADE1 && popcount(gMmExtraTrade.trade1) > 1)
     {
         play->pauseCtx.cursorColorIndex = 4;
         if (press)
@@ -18,7 +20,7 @@ void KaleidoScope_AfterSetCutsorColor(GameState_Play* play)
         }
     }
 
-    if (play->pauseCtx.cursorSlot[0] == ITS_MM_TRADE2 && popcount(gMmExtraTrade.trade2) > 1)
+    if (cursorSlot == ITS_MM_TRADE2 && popcount(gMmExtraTrade.trade2) > 1)
     {
         play->pauseCtx.cursorColorIndex = 4;
         if (press)
@@ -28,7 +30,7 @@ void KaleidoScope_AfterSetCutsorColor(GameState_Play* play)
         }
     }
 
-    if (play->pauseCtx.cursorSlot[0] == ITS_MM_TRADE3 && popcount(gMmExtraTrade.trade3) > 1)
+    if (cursorSlot == ITS_MM_TRADE3 && popcount(gMmExtraTrade.trade3) > 1)
     {
         play->pauseCtx.cursorColorIndex = 4;
         if (press)
@@ -38,7 +40,7 @@ void KaleidoScope_AfterSetCutsorColor(GameState_Play* play)
         }
     }
 
-    if (play->pauseCtx.cursorSlot[0] == ITS_MM_HOOKSHOT && popcount(gMmExtraItems.hookshot) > 1)
+    if (cursorSlot == ITS_MM_HOOKSHOT && popcount(gMmExtraItems.hookshot) > 1)
     {
         play->pauseCtx.cursorColorIndex = 4;
         if (press)
@@ -48,12 +50,31 @@ void KaleidoScope_AfterSetCutsorColor(GameState_Play* play)
         }
     }
 
-    if (play->pauseCtx.cursorSlot[0] == ITS_MM_OCARINA && play->pauseCtx.cursorItem[0] != 0x3e7 && popcount(gMmExtraItems.ocarina) > 1)
+    if (cursorSlot == ITS_MM_OCARINA && play->pauseCtx.cursorItem[0] != 0x3e7 && popcount(gMmExtraItems.ocarina) > 1)
     {
         play->pauseCtx.cursorColorIndex = 4;
         if (press)
         {
             comboToggleOcarina();
+            effect = 1;
+        }
+    }
+
+    if (cursorSlot >= ITS_MM_BOTTLE && cursorSlot <= ITS_MM_BOTTLE6 && gSave.inventory.items[cursorSlot] == ITEM_MM_BOTTLED_SPRING_WATER_HOT)
+    {
+        play->pauseCtx.cursorColorIndex = 4;
+        if (press)
+        {
+            gSave.inventory.items[cursorSlot] = ITEM_MM_BOTTLED_SPRING_WATER;
+            for (int i = 1; i <= 3; ++i)
+            {
+                if (gMmSave.itemEquips.cButtonSlots[0][i] == cursorSlot)
+                {
+                    gMmSave.itemEquips.buttonItems[0][i] = ITEM_MM_BOTTLED_SPRING_WATER;
+                }
+            }
+            for (int i = 1; i < 4; i++)
+                Interface_LoadItemIconImpl(play, i);
             effect = 1;
         }
     }
