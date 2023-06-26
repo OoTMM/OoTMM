@@ -235,9 +235,7 @@ static void menuSave(GameState_Play* play)
     }
 
     /* Save the game */
-    gSave.isOwlSave = 1;
-    PrepareSave(&play->sramCtx);
-    comboWriteSave();
+    comboSave(play, SF_OWL);
     PlaySound(0x4823);
 }
 

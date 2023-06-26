@@ -76,3 +76,10 @@ void netWaitCmdClear(void)
         netMutexLock();
     }
 }
+
+void netWaitSave(void)
+{
+    netMutexLock();
+    netWaitCmdClear();
+    netMutexUnlock();
+}

@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/item.h>
+#include <combo/net.h>
 
 #define ENTRANCE_MARKET       0x1d1
 
@@ -219,3 +220,27 @@ static void DeathWarpWrapper(GameState_Play* play)
 }
 
 PATCH_CALL(0x8009dacc, DeathWarpWrapper);
+
+void PrepareAndSave(void)
+{
+    comboSave(gPlay, 0);
+}
+
+void comboSave(GameState_Play* play, int saveFlags)
+{
+    /* Wait for net */
+    netWaitSave();
+
+    gComboCtx.saveIndex = gSaveContext.fileIndex;
+    if (!(saveFlags & SF_PASSIVE))
+    {
+        if (!(saveFlags & SF_NOCOMMIT))
+            PlayStoreFlags(play);
+        gSave.sceneId = play->sceneId;
+    }
+
+    if (!(saveFlags & SF_NOCOMMIT))
+    {
+        comboWriteSave();
+    }
+}

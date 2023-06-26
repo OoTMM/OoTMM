@@ -8,9 +8,7 @@ void comboCreditWarp(GameState_Play* play)
     g.isCreditWarp = 1;
 
     /* Save */
-    PlayStoreFlags(play);
-    gSave.sceneId = play->sceneId;
-    comboWriteSave();
+    comboSave(play, 0);
 
     /* Credit warp */
     link = GET_LINK(play);

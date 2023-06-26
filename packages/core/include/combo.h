@@ -193,10 +193,15 @@ void comboInitData(void);
 void comboReadWriteFlash(u32 devAddr, void* dramAddr, u32 size, s32 direction);
 
 /* Save */
+#define SF_OWL          0x01
+#define SF_NOCOMMIT     0x02
+#define SF_PASSIVE      0x04
+
 void comboReadForeignSave(void);
 void comboWriteSave(void);
 void comboCopyMmSave(int dst, int src);
 void comboOnSaveLoad(void);
+void comboSave(GameState_Play* play, int saveFlags);
 
 /* Save util */
 void comboCreateSaveMM(void);

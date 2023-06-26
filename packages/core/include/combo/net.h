@@ -57,5 +57,6 @@ NetContext* netMutexLock(void);
 void        netMutexUnlock(void);
 void        netClose(void);
 void        netWaitCmdClear(void);
+void        netWaitSave(void);
 
 #endif

@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/net.h>
 
 #define ENTRANCE_CLOCKTOWN  0xd800
 
@@ -82,6 +83,7 @@ void Sram_SaveEndOfCycleWrapper(GameState_Play* play)
     gOotSave.sceneId = SCE_OOT_TEMPLE_OF_TIME;
     gOotSave.entrance = 0x05f4;
 
+    comboSave(play, SF_NOCOMMIT);
     Sram_SaveEndOfCycle(play);
 
     /* Not an Owl save */
@@ -177,3 +179,24 @@ PATCH_CALL(0x80158554, PrepareSaveAndSave);
 PATCH_CALL(0x80829218, PrepareSaveAndSave);
 PATCH_CALL(0x80829f08, PrepareSaveAndSave);
 PATCH_CALL(0x80146f10, PrepareSaveAndSave);
+
+void comboSave(GameState_Play* play, int saveFlags)
+{
+    /* Wait for net */
+    netWaitSave();
+
+    /* Mark the save as owl */
+    if (saveFlags & SF_OWL)
+        gSave.isOwlSave = 1;
+
+    /* Reset the OoT spawn point */
+    gOotSave.sceneId = SCE_OOT_TEMPLE_OF_TIME;
+    gOotSave.entrance = 0x05f4;
+
+    if (!(saveFlags & SF_NOCOMMIT))
+    {
+        PlayStoreFlags(play);
+        PrepareSave(&play->sramCtx);
+        comboWriteSave();
+    }
+}

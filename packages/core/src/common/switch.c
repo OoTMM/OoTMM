@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/net.h>
 
 typedef void (*EntryPoint)(void)  __attribute__ ((noreturn));
 
@@ -84,19 +85,8 @@ NORETURN void comboGameSwitch(GameState_Play* play, s32 entrance)
     else
         gComboCtx.entrance = (entrance & 0x7fffffff);
 
-#if defined(GAME_OOT)
-    gComboCtx.saveIndex = gSaveContext.fileIndex;
-    PlayStoreFlags(play);
-    gSave.sceneId = play->sceneId;
-#endif
-
-#if defined(GAME_MM)
-    gSave.isOwlSave = 1;
-    PlayStoreFlags(play);
-    PrepareSave(&play->sramCtx);
-#endif
-
-    comboWriteSave();
+    netClose();
+    comboSave(play, SF_OWL);
     comboDisableInterrupts();
     waitSubsystems();
     comboGameSwitch2();

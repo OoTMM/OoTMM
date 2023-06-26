@@ -2,7 +2,7 @@
 
 /* Replace SaveGame */
 PATCH_START 0x800905d4
-  j comboWriteSave
+  j PrepareAndSave
    nop
 PATCH_END
 

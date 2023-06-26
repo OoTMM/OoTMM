@@ -60,9 +60,7 @@ PATCH_CALL(0x80b92ea8, ObjWarpstone_TalkedTo);
 
 void ObjWarpstone_Save(GameState_Play* play)
 {
-    gSave.isOwlSave = 1;
-    PrepareSave(&play->sramCtx);
-    comboWriteSave();
+    comboSave(play, SF_OWL);
     PlaySound(0x4823);
     Message_Close(play);
 }

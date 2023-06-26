@@ -191,7 +191,7 @@ static void endGame(void)
     gSave.sceneId = SCE_OOT_GANON_CASTLE_EXTERIOR;
 
     /* Save */
-    comboWriteSave();
+    comboSave(NULL, SF_PASSIVE);
 
     /* Restore gameplay values to play the cutscene if majora was beaten too */
     if (comboGoalCond())
