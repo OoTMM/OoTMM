@@ -369,6 +369,7 @@ export const SETTINGS = [{
   default: false
 },
 { ...SETTING_PRICE, key: 'priceOotShops', name: 'OoT Shops Prices', description: 'Sets the price of items inside OoT shops' },
+{ ...SETTING_PRICE, key: 'priceOotScrubs', name: 'OoT Scrubs Prices', description: 'Sets the price of items sold by OoT scrubs' },
 {
   key: 'doorOfTime',
   name: 'Door of Time',

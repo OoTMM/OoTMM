@@ -150,15 +150,19 @@ static void EnDns_ItemOverride(ComboItemOverride* o, int id, int flags)
     comboItemOverride(o, &q);
 }
 
-static s16 EnDns_GetPrice(Actor* this)
+static void EnDns_PatchPrice(Actor* this, s16 price)
 {
     void* scrubData;
-    s16 price;
-
     scrubData = *(void**)((char*)this + 0x2b0);
-    price = *(s16*)((char*)scrubData + 0x0);
+    *(s16*)((char*)scrubData + 0x0) = price;
+}
 
-    return price;
+static s16 EnDns_GetPrice(Actor* this)
+{
+    int id;
+
+    id = EnDns_GetID(this);
+    return (s16)gComboData.prices[PRICES_OOT_SCRUBS + id];
 }
 
 void EnDns_MaybeDestroy(Actor* this)
@@ -177,6 +181,7 @@ static int EnDns_CanBuy(Actor* this)
 
     EnDns_ItemQuery(&q, EnDns_GetID(this), 0);
     price = EnDns_GetPrice(this);
+    EnDns_PatchPrice(this, price);
 
     switch (comboItemPrecondEx(&q, price))
     {

@@ -161,7 +161,7 @@
   exits:
     "Hyrule Field": "true"
   locations:
-    "Hyrule Field Grotto Scrub HP": "can_hit_scrub && can_use_wallet(1)"
+    "Hyrule Field Grotto Scrub HP": "can_hit_scrub && scrub_price(0x07)"
 "Hyrule Field Open Grotto":
   region: ENTRANCE
   exits:
@@ -414,9 +414,9 @@
   exits:
     "Lon Lon Ranch": "true"
   locations:
-    "Lon Lon Ranch Grotto Left Scrub": "is_child && can_use_wallet(1) && can_hit_scrub"
-    "Lon Lon Ranch Grotto Center Scrub": "is_child && can_use_wallet(1) && can_hit_scrub"
-    "Lon Lon Ranch Grotto Right Scrub": "is_child && can_use_wallet(1) && can_hit_scrub"
+    "Lon Lon Ranch Grotto Left Scrub": "is_child && scrub_price(0x08) && can_hit_scrub"
+    "Lon Lon Ranch Grotto Center Scrub": "is_child && scrub_price(0x09) && can_hit_scrub"
+    "Lon Lon Ranch Grotto Right Scrub": "is_child && scrub_price(0x0a) && can_hit_scrub"
 "Hyrule Castle":
   region: HYRULE_CASTLE
   time: flow
@@ -520,7 +520,7 @@
     "Lost Woods Target": "can_use_slingshot"
     "Lost Woods Skull Kid": "is_child && can_play(SONG_SARIA)"
     "Lost Woods Memory Game": "is_child && has_ocarina"
-    "Lost Woods Scrub Sticks Upgrade": "is_child && can_hit_scrub && can_use_wallet(1)"
+    "Lost Woods Scrub Sticks Upgrade": "is_child && can_hit_scrub && scrub_price(0x00)"
     "Lost Woods Odd Mushroom": "adult_trade(COJIRO)"
     "Lost Woods Poacher's Saw": "adult_trade(ODD_POTION)"
     "Lost Woods GS Soil Bridge": "gs_soil && can_damage_skull"
@@ -567,8 +567,8 @@
     MAGIC: "can_cut_grass"
     BUGS: "has_bottle && can_cut_grass"
   locations:
-    "Lost Woods Scrub Near Theater Left": "is_child && can_hit_scrub && can_use_wallet(1)"
-    "Lost Woods Scrub Near Theater Right": "is_child && can_hit_scrub && can_use_wallet(1)"
+    "Lost Woods Scrub Near Theater Left": "is_child && can_hit_scrub && scrub_price(0x01)"
+    "Lost Woods Scrub Near Theater Right": "is_child && can_hit_scrub && scrub_price(0x02)"
     "Lost Woods GS Soil Theater": "gs_soil && can_damage_skull"
     "Lost Woods GS Bean Ride": "gs_night && (can_ride_bean(BEAN_LOST_WOODS_LATE) || (trick(OOT_LOST_WOODS_ADULT_GS) && can_hookshot && (can_longshot || can_use_bow || has_bombchu || can_use_din)))"
 "Deku Theater":
@@ -583,8 +583,8 @@
   exits:
     "Lost Woods Deep": "true"
   locations:
-    "Lost Woods Grotto Scrub Nuts Upgrade": "can_hit_scrub && can_use_wallet(1)"
-    "Lost Woods Grotto Scrub Back": "can_hit_scrub && can_use_wallet(1)"
+    "Lost Woods Grotto Scrub Nuts Upgrade": "can_hit_scrub && scrub_price(0x03)"
+    "Lost Woods Grotto Scrub Back": "can_hit_scrub && scrub_price(0x04)"
 "Sacred Meadow Entryway":
   region: SACRED_MEADOW
   exits:
@@ -618,8 +618,8 @@
   exits:
     "Sacred Meadow": "true"
   locations:
-    "Sacred Meadow Storms Grotto Front Scrub": "can_hit_scrub && can_use_wallet(1)"
-    "Sacred Meadow Storms Grotto Back Scrub": "can_hit_scrub && can_use_wallet(1)"
+    "Sacred Meadow Storms Grotto Front Scrub": "can_hit_scrub && scrub_price(0x05)"
+    "Sacred Meadow Storms Grotto Back Scrub": "can_hit_scrub && scrub_price(0x06)"
 "Kakariko":
   region: KAKARIKO
   events:
@@ -971,9 +971,9 @@
   exits:
     "Goron City": "true"
   locations:
-    "Goron City Grotto Left Scrub": "can_hit_scrub && can_use_wallet(1)"
-    "Goron City Grotto Center Scrub": "can_hit_scrub && can_use_wallet(1)"
-    "Goron City Grotto Right Scrub": "can_hit_scrub && can_use_wallet(1)"
+    "Goron City Grotto Left Scrub": "can_hit_scrub && scrub_price(0x0b)"
+    "Goron City Grotto Center Scrub": "can_hit_scrub && scrub_price(0x0c)"
+    "Goron City Grotto Right Scrub": "can_hit_scrub && scrub_price(0x0d)"
 "Zora River Front":
   region: ZORA_RIVER
   time: flow
@@ -1021,8 +1021,8 @@
   exits:
     "Zora River": "true"
   locations:
-    "Zora River Storms Grotto Front Scrub": "can_hit_scrub && can_use_wallet(1)"
-    "Zora River Storms Grotto Back Scrub": "can_hit_scrub && can_use_wallet(1)"
+    "Zora River Storms Grotto Front Scrub": "can_hit_scrub && scrub_price(0x12)"
+    "Zora River Storms Grotto Back Scrub": "can_hit_scrub && scrub_price(0x13)"
 "Zora River Open Grotto":
   region: ZORA_RIVER
   exits:
@@ -1139,9 +1139,9 @@
   exits:
     "Lake Hylia": "true"
   locations:
-    "Lake Hylia Grotto Left Scrub": "can_hit_scrub && can_use_wallet(1)"
-    "Lake Hylia Grotto Center Scrub": "can_hit_scrub && can_use_wallet(1)"
-    "Lake Hylia Grotto Right Scrub": "can_hit_scrub && can_use_wallet(1)"
+    "Lake Hylia Grotto Left Scrub": "can_hit_scrub && scrub_price(0x14)"
+    "Lake Hylia Grotto Center Scrub": "can_hit_scrub && scrub_price(0x15)"
+    "Lake Hylia Grotto Right Scrub": "can_hit_scrub && scrub_price(0x16)"
 "Zora Fountain":
   region: ZORA_FOUNTAIN
   exits:
@@ -1205,7 +1205,7 @@
   locations:
     "Death Mountain Crater GS Crate": "is_child && can_damage_skull"
     "Death Mountain Crater Alcove HP": "true"
-    "Death Mountain Crater Scrub Child": "is_child && can_hit_scrub && can_use_wallet(1)"
+    "Death Mountain Crater Scrub Child": "is_child && can_hit_scrub && scrub_price(0x0e)"
   gossip:
     "Death Mountain Crater Gossip Wall": "has_explosives"
 "Death Mountain Crater Bottom":
@@ -1255,9 +1255,9 @@
   exits:
     "Death Mountain Crater Bottom": "true"
   locations:
-    "Death Mountain Crater Grotto Left Scrub": "can_hit_scrub && can_use_wallet(1)"
-    "Death Mountain Crater Grotto Center Scrub": "can_hit_scrub && can_use_wallet(1)"
-    "Death Mountain Crater Grotto Right Scrub": "can_hit_scrub && can_use_wallet(1)"
+    "Death Mountain Crater Grotto Left Scrub": "can_hit_scrub && scrub_price(0x0f)"
+    "Death Mountain Crater Grotto Center Scrub": "can_hit_scrub && scrub_price(0x10)"
+    "Death Mountain Crater Grotto Right Scrub": "can_hit_scrub && scrub_price(0x11)"
 "Fairy Fountain Double Magic":
   region: ENTRANCE
   exits:
@@ -1313,8 +1313,8 @@
   exits:
     "Gerudo Valley After Bridge": "true"
   locations:
-    "Gerudo Valley Grotto Front Scrub": "can_hit_scrub && can_use_wallet(1)"
-    "Gerudo Valley Grotto Back Scrub": "can_hit_scrub && can_use_wallet(1)"
+    "Gerudo Valley Grotto Front Scrub": "can_hit_scrub && scrub_price(0x17)"
+    "Gerudo Valley Grotto Back Scrub": "can_hit_scrub && scrub_price(0x18)"
 "Gerudo Valley Tent":
   region: ENTRANCE
   exits:
@@ -1460,5 +1460,5 @@
   exits:
     "Desert Colossus": "true"
   locations:
-    "Desert Colossus Grotto Front Scrub": "can_hit_scrub && can_use_wallet(1)"
-    "Desert Colossus Grotto Back Scrub": "can_hit_scrub && can_use_wallet(1)"
+    "Desert Colossus Grotto Front Scrub": "can_hit_scrub && scrub_price(0x19)"
+    "Desert Colossus Grotto Back Scrub": "can_hit_scrub && scrub_price(0x1a)"

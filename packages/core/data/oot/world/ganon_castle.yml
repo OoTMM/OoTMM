@@ -10,10 +10,10 @@
     "Ganon Castle Shadow": "true"
     "Ganon Castle Stairs": "true"
   locations:
-    "Ganon Castle Leftmost Scrub": "has_lens && can_hit_scrub && can_use_wallet(1)"
-    "Ganon Castle Left-Center Scrub": "has_lens && can_hit_scrub && can_use_wallet(1)"
-    "Ganon Castle Right-Center Scrub": "has_lens && can_hit_scrub && can_use_wallet(1)"
-    "Ganon Castle Rightmost Scrub": "has_lens && can_hit_scrub && can_use_wallet(1)"
+    "Ganon Castle Leftmost Scrub": "has_lens && can_hit_scrub && scrub_price(0x21)"
+    "Ganon Castle Left-Center Scrub": "has_lens && can_hit_scrub && scrub_price(0x22)"
+    "Ganon Castle Right-Center Scrub": "has_lens && can_hit_scrub && scrub_price(0x23)"
+    "Ganon Castle Rightmost Scrub": "has_lens && can_hit_scrub && scrub_price(0x24)"
 "Ganon Castle Light":
   dungeon: Ganon
   events:

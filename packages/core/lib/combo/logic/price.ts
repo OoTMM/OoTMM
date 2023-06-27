@@ -18,10 +18,29 @@ const OOT_SHOPS = [
   ...OOT_SHOP_POTION,
   ...OOT_SHOP_BAZAAR,
   ...OOT_SHOP_POTION,
-]
+];
+
+const OOT_SCRUBS_OVERWORLD = [ 40, 15, 20, 40, 40, 40, 40, 10, 20, 40, 40, 20, 40, 40, 40, 20, 40, 40, 40, 40, 20, 40, 40, 40, 40, 40, 40 ];
+const OOT_SCRUBS_DT = [ 0 ];
+const OOT_SCRUBS_DT_MQ = [ 50 ];
+const OOT_SCRUBS_DC = [ 40, 15, 20, 50 ];
+const OOT_SCRUBS_DC_MQ = [ 40, 15, 50, 40 ];
+const OOT_SCRUBS_JJ = [ 20 ];
+const OOT_SCRUBS_JJ_MQ = [ 0 ];
+const OOT_SCRUBS_GC = [40, 40, 70, 40, 0];
+const OOT_SCRUBS_GC_MQ = [40, 40, 70, 40, 20];
+
+const OOT_SCRUBS = [
+  ...OOT_SCRUBS_OVERWORLD,
+  ...OOT_SCRUBS_DT,
+  ...OOT_SCRUBS_DC,
+  ...OOT_SCRUBS_JJ,
+  ...OOT_SCRUBS_GC,
+];
 
 const PRICES = {
   OOT_SHOPS,
+  OOT_SCRUBS,
   MAX: [],
 } as const;
 
@@ -42,7 +61,41 @@ export const PRICE_RANGES: {[k: string] :number} = {};
 export type PriceRandoType = 'vanilla' | 'affordable' | 'random' | 'weighted';
 
 export function defaultPrices(mq: Set<string>) {
-  return [...DEFAULT_PRICES];
+  const p = [...DEFAULT_PRICES];
+
+  /* Handle MQ */
+  const ootScrubs: number[][] = [];
+  ootScrubs.push(OOT_SCRUBS_OVERWORLD);
+  if (mq.has('DT')) {
+    ootScrubs.push(OOT_SCRUBS_DT_MQ);
+  } else {
+    ootScrubs.push(OOT_SCRUBS_DT);
+  }
+
+  if (mq.has('DC')) {
+    ootScrubs.push(OOT_SCRUBS_DC_MQ);
+  } else {
+    ootScrubs.push(OOT_SCRUBS_DC);
+  }
+
+  if (mq.has('JJ')) {
+    ootScrubs.push(OOT_SCRUBS_JJ_MQ);
+  } else {
+    ootScrubs.push(OOT_SCRUBS_JJ);
+  }
+
+  if (mq.has('Ganon')) {
+    ootScrubs.push(OOT_SCRUBS_GC_MQ);
+  } else {
+    ootScrubs.push(OOT_SCRUBS_GC);
+  }
+
+  const ootScrubsFlat = ootScrubs.flat();
+  for (let i = 0; i < ootScrubsFlat.length; ++i) {
+    p[PRICE_RANGES.OOT_SCRUBS + i] = ootScrubsFlat[i];
+  }
+
+  return p;
 }
 
 /* Approximate beta func */
@@ -105,6 +158,7 @@ export class LogicPassPrice {
 
   run() {
     this.shufflePrices('OOT_SHOPS', this.state.settings.priceOotShops);
+    this.shufflePrices('OOT_SCRUBS', this.state.settings.priceOotScrubs);
 
     return {};
   }

@@ -13,7 +13,7 @@
     "Dodongo Cavern Skull": "event(DC_BOMB_EYES)"
   locations:
     "Dodongo Cavern Map Chest": "has_bombflowers || can_hammer || has_blue_fire_arrows_mudwall"
-    "Dodongo Cavern Lobby Scrub": "can_hit_scrub && can_use_wallet(1)"
+    "Dodongo Cavern Lobby Scrub": "can_hit_scrub && scrub_price(0x1f)"
   gossip:
     "Dodongo Cavern Gossip": "has_bombflowers || can_hammer || has_blue_fire_arrows_mudwall"
 "Dodongo Cavern Right Corridor":
@@ -46,7 +46,7 @@
   exits:
     "Dodongo Cavern Green Room": "true"
   locations:
-    "Dodongo Cavern Green Side Room Scrub": "can_hit_scrub && can_use_wallet(1)"
+    "Dodongo Cavern Green Side Room Scrub": "can_hit_scrub && scrub_price(0x1d)"
 "Dodongo Cavern Main Ledge":
   dungeon: DC
   exits:
@@ -88,8 +88,8 @@
   exits:
     "Dodongo Cavern Bomb Bag Room 1": "true"
   locations:
-    "Dodongo Cavern Bomb Bag Side Room Left Scrub": "can_hit_scrub && can_use_wallet(1)"
-    "Dodongo Cavern Bomb Bag Side Room Right Scrub": "can_hit_scrub && can_use_wallet(1)"
+    "Dodongo Cavern Bomb Bag Side Room Left Scrub": "can_hit_scrub && scrub_price(0x1e)"
+    "Dodongo Cavern Bomb Bag Side Room Right Scrub": "can_hit_scrub && scrub_price(0x1c)"
 "Dodongo Cavern Miniboss 2":
   dungeon: DC
   exits:
