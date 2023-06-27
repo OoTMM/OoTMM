@@ -187,8 +187,16 @@ static void endGame(void)
     gSave.age = AGE_ADULT;
     *(u16*)((char*)&gSaveContext + 0x1412) = 0;
     gSave.cutscene = 0;
-    gSave.entrance = 0x023d;
-    gSave.sceneId = SCE_OOT_GANON_CASTLE_EXTERIOR;
+    if (comboConfig(CFG_ER_ANY))
+    {
+        gSave.entrance = ENTR_OOT_GANON_TOWER;
+        gSave.sceneId = SCE_OOT_GANON_TOWER;
+    }
+    else
+    {
+        gSave.entrance = ENTR_OOT_GANON_CASTLE_EXTERIOR_FROM_CASTLE;
+        gSave.sceneId = SCE_OOT_GANON_CASTLE_EXTERIOR;
+    }
 
     /* Save */
     comboSave(NULL, SF_PASSIVE);
