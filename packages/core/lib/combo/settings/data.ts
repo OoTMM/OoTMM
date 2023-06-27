@@ -3,6 +3,7 @@ const SETTING_PRICE = {
   values: [
     { value: 'affordable', name: 'Affordable', description: 'All prices are set to 10 rupees.' },
     { value: 'vanilla', name: 'Vanilla', description: 'All prices are set to their vanilla values.' },
+    { value: 'weighted', name: 'Weighted Random', description: 'All prices are randomized, but lower prices are favored.' },
     { value: 'random', name: 'Random', description: 'All prices are randomized.' },
   ],
   category: 'main.prices',

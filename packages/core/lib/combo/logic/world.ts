@@ -135,7 +135,7 @@ export class LogicPassWorld {
       locations: new Set(),
       songLocations: new Set(),
       warpLocations: new Set(),
-      prices: defaultPrices(),
+      prices: defaultPrices(this.state.mq),
     };
   }
 

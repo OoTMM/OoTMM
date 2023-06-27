@@ -39,10 +39,20 @@ export const PRICE_RANGES: {[k: string] :number} = {};
   }
 })();
 
-export type PriceRandoType = 'vanilla' | 'affordable' | 'random';
+export type PriceRandoType = 'vanilla' | 'affordable' | 'random' | 'weighted';
 
-export function defaultPrices() {
+export function defaultPrices(mq: Set<string>) {
   return [...DEFAULT_PRICES];
+}
+
+/* Approximate beta func */
+function betaApproxInt(random: Random, alpha: number, beta: number, max: number) {
+  const draws = alpha + beta - 1;
+  const values: number[] = [];
+  for (let i = 0; i < draws; ++i) {
+    values.push(randomInt(random, max));
+  }
+  return (values.sort())[alpha - 1];
 }
 
 export class LogicPassPrice {
@@ -56,12 +66,23 @@ export class LogicPassPrice {
   }
 
   private randomPrice() {
-    let max = 50;
+    let max = 100;
     if (this.state.settings.colossalWallets) {
-      max = 99;
+      max = 199;
     }
-    const r = 1 + randomInt(this.state.random, max - 1);
-    return r * 10;
+    const r = randomInt(this.state.random, max);
+    return r * 5;
+  }
+
+  private randomPriceBeta() {
+    let max = 100;
+    let beta = 5;
+    if (this.state.settings.colossalWallets) {
+      max = 199;
+      beta = 9;
+    }
+    const r = betaApproxInt(this.state.random, 2, beta, max);
+    return r * 5;
   }
 
   private adjustPrice(type: PriceRandoType, value: number) {
@@ -69,6 +90,7 @@ export class LogicPassPrice {
     case 'vanilla': return value;
     case 'affordable': return 10;
     case 'random': return this.randomPrice();
+    case 'weighted': return this.randomPriceBeta();
     }
   }
 
