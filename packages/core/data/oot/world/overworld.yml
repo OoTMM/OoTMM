@@ -958,14 +958,14 @@
   exits:
     "Goron City": "true"
   locations:
-    "Goron Shop Item 1": "shop_price(0x10)"
-    "Goron Shop Item 2": "shop_price(0x11)"
-    "Goron Shop Item 3": "shop_price(0x12)"
-    "Goron Shop Item 4": "shop_price(0x13)"
-    "Goron Shop Item 5": "shop_price(0x14)"
-    "Goron Shop Item 6": "shop_price(0x15)"
-    "Goron Shop Item 7": "shop_price(0x16)"
-    "Goron Shop Item 8": "shop_price(0x17)"
+    "Goron Shop Item 1": "shop_price(0x18)"
+    "Goron Shop Item 2": "shop_price(0x19)"
+    "Goron Shop Item 3": "shop_price(0x1a)"
+    "Goron Shop Item 4": "shop_price(0x1b)"
+    "Goron Shop Item 5": "shop_price(0x1c)"
+    "Goron Shop Item 6": "shop_price(0x1d)"
+    "Goron Shop Item 7": "shop_price(0x1e)"
+    "Goron Shop Item 8": "shop_price(0x1f)"
 "Goron City Grotto":
   region: ENTRANCE
   exits:
@@ -1075,14 +1075,14 @@
   exits:
     "Zora Domain": "true"
   locations:
-    "Zora Shop Item 1": "shop_price(0x18)"
-    "Zora Shop Item 2": "shop_price(0x19)"
-    "Zora Shop Item 3": "shop_price(0x1a)"
-    "Zora Shop Item 4": "shop_price(0x1b)"
-    "Zora Shop Item 5": "shop_price(0x1c)"
-    "Zora Shop Item 6": "shop_price(0x1d)"
-    "Zora Shop Item 7": "shop_price(0x1e)"
-    "Zora Shop Item 8": "shop_price(0x1f)"
+    "Zora Shop Item 1": "shop_price(0x10)"
+    "Zora Shop Item 2": "shop_price(0x11)"
+    "Zora Shop Item 3": "shop_price(0x12)"
+    "Zora Shop Item 4": "shop_price(0x13)"
+    "Zora Shop Item 5": "shop_price(0x14)"
+    "Zora Shop Item 6": "shop_price(0x15)"
+    "Zora Shop Item 7": "shop_price(0x16)"
+    "Zora Shop Item 8": "shop_price(0x17)"
 "Zora Domain Grotto":
   region: ENTRANCE
   exits:

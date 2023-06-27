@@ -109,20 +109,6 @@ u8 comboShopItemSlot(GameState_Play* play, Actor_EnGirlA* girlA)
         case SHOP_BOMBCHU_10_4:     return 0x0f;
         }
     }
-    else if (play->sceneId == SCE_OOT_GORON_SHOP)
-    {
-        /* Goron shop */
-        switch (girlA->base.variable)
-        {
-        case SHOP_RECOVERY_HEART:   return girlA->base.position.x < -60.f ? 0x18 : 0x19;
-        case SHOP_POTION_RED_ALT:   return 0x1a;
-        case SHOP_TUNIC_GORON:      return 0x1b;
-        case SHOP_BOMBS_5_ALT:      return 0x1c;
-        case SHOP_BOMBS_10:         return 0x1d;
-        case SHOP_BOMBS_20:         return 0x1e;
-        case SHOP_BOMBS_30:         return 0x1f;
-        }
-    }
     else if (play->sceneId == SCE_OOT_ZORA_SHOP)
     {
         /* Zora shop */
@@ -136,6 +122,20 @@ u8 comboShopItemSlot(GameState_Play* play, Actor_EnGirlA* girlA)
         case SHOP_ARROWS_30:        return 0x15;
         case SHOP_TUNIC_ZORA:       return 0x16;
         case SHOP_RECOVERY_HEART:   return 0x17;
+        }
+    }
+    else if (play->sceneId == SCE_OOT_GORON_SHOP)
+    {
+        /* Goron shop */
+        switch (girlA->base.variable)
+        {
+        case SHOP_RECOVERY_HEART:   return girlA->base.position.x < -60.f ? 0x18 : 0x19;
+        case SHOP_POTION_RED_ALT:   return 0x1a;
+        case SHOP_TUNIC_GORON:      return 0x1b;
+        case SHOP_BOMBS_5_ALT:      return 0x1c;
+        case SHOP_BOMBS_10:         return 0x1d;
+        case SHOP_BOMBS_20:         return 0x1e;
+        case SHOP_BOMBS_30:         return 0x1f;
         }
     }
     else if (play->sceneId == SCE_OOT_BAZAAR)

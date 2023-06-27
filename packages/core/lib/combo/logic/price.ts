@@ -1,20 +1,19 @@
-import { Game } from "../config";
 import { Random, randomInt } from "../random";
 import { Settings } from "../settings";
 import { World } from "./world";
 
 const OOT_SHOP_KOKIRI = [ 10, 20, 60, 30, 15, 30, 10, 40 ];
 const OOT_SHOP_BOMBCHU = [ 180, 180, 180, 180, 100, 100, 100, 100 ];
-const OOT_SHOP_GORON = [ 10, 10, 40, 200, 25, 50, 80, 120 ];
 const OOT_SHOP_ZORA = [ 50, 90, 200, 15, 20, 60, 300, 10 ];
+const OOT_SHOP_GORON = [ 10, 10, 40, 200, 25, 50, 80, 120 ];
 const OOT_SHOP_BAZAAR = [ 20, 60, 90, 10, 35, 10, 15, 80 ];
 const OOT_SHOP_POTION = [ 200, 50, 30, 15, 300, 50, 30, 30 ];
 
 const OOT_SHOPS = [
   ...OOT_SHOP_KOKIRI,
   ...OOT_SHOP_BOMBCHU,
-  ...OOT_SHOP_GORON,
   ...OOT_SHOP_ZORA,
+  ...OOT_SHOP_GORON,
   ...OOT_SHOP_BAZAAR,
   ...OOT_SHOP_POTION,
   ...OOT_SHOP_BAZAAR,
