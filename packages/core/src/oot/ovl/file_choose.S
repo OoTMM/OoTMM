@@ -62,3 +62,137 @@ PATCH_END
 PATCH_START 0x8080f778
   slti at,s3,0x2
 PATCH_END
+
+/* Skip slot 3 with the cursor - file select */
+FileSelectButtonIndexIncr:
+  addiu t5,t9,1
+  li    t9,2
+  bne   t5,t9,.LFileSelectButtonIndexIncrEnd
+   nop
+  addiu t5,1
+.LFileSelectButtonIndexIncrEnd:
+  jr ra
+   sh t5,-0x35d6(at)
+
+PATCH_START 0x8080c754
+  jal FileSelectButtonIndexIncr
+   nop
+PATCH_END
+
+FileSelectButtonIndexDecr:
+  addiu t6,t5,-1
+  li    t5,2
+  bne   t6,t5,.LFileSelectButtonIndexDecrEnd
+   nop
+  addiu t6,-1
+.LFileSelectButtonIndexDecrEnd:
+  jr ra
+   sh t6,-0x35d6(at)
+
+PATCH_START 0x8080c724
+  jal FileSelectButtonIndexDecr
+   nop
+PATCH_END
+
+/* Skip slot 3 with the cursor - file copy */
+FileCopyButtonIndexIncr:
+  addiu t9,t8,1
+  li    t8,2
+  bne   t9,t8,.LFileCopyButtonIndexIncrEnd
+   nop
+  addiu t9,1
+.LFileCopyButtonIndexIncrEnd:
+  jr ra
+   sh t9,-0x35d6(at)
+
+PATCH_START 0x80803c9c
+  jal FileCopyButtonIndexIncr
+   nop
+PATCH_END
+
+FileCopyButtonIndexDecr:
+  addiu t7,t6,-1
+  li    t6,2
+  bne   t7,t6,.LFileCopyButtonIndexDecrEnd
+   nop
+  addiu t7,-1
+.LFileCopyButtonIndexDecrEnd:
+  jr ra
+   sh t7,-0x35d6(at)
+
+PATCH_START 0x80803c68
+  jal FileCopyButtonIndexDecr
+   nop
+PATCH_END
+
+/* Skip slot 3 with the cursor - file copy 2 */
+FileCopy2ButtonIndexIncr:
+  addiu t9,t8,1
+
+  /* Check for selected slot */
+  lh t8,0x4a38(t0)
+  bne t8,t9,.LFileCopy2ButtonIndexIncrCheck2
+   nop
+  addiu t9,1
+
+.LFileCopy2ButtonIndexIncrCheck2:
+  /* Check for slot 2 */
+  li   t8,2
+  bne  t9,t8,.LFileCopy2ButtonIndexIncrEnd
+   nop
+  addiu t9,1
+
+.LFileCopy2ButtonIndexIncrEnd:
+  jr ra
+   sh t9,-0x35d6(at)
+
+PATCH_START 0x8080428c
+  jal FileCopy2ButtonIndexIncr
+   nop
+PATCH_END
+
+FileCopy2ButtonIndexDecr:
+  addiu t5,t4,-1
+  li    t4,2
+  bne   t5,t4,.LFileCopy2ButtonIndexDecrEnd
+   nop
+  addiu t5,-1
+.LFileCopy2ButtonIndexDecrEnd:
+  jr ra
+   sh t5,-0x35d6(at)
+
+PATCH_START 0x80804224
+  jal FileCopy2ButtonIndexDecr
+   nop
+PATCH_END
+
+/* Skip slot 3 with the cursor - file erase */
+FileEraseButtonIndexIncr:
+  addiu t3,t2,1
+  li    t2,2
+  bne   t3,t2,.LFileEraseButtonIndexIncrEnd
+   nop
+  addiu t3,1
+.LFileEraseButtonIndexIncrEnd:
+  jr ra
+   sh t3,-0x35d6(at)
+
+PATCH_START 0x808058bc
+  jal FileEraseButtonIndexIncr
+   nop
+PATCH_END
+
+FileEraseButtonIndexDecr:
+  addiu t9,t8,-1
+  li    t8,2
+  bne   t9,t8,.LFileEraseButtonIndexDecrEnd
+   nop
+  addiu t9,-1
+.LFileEraseButtonIndexDecrEnd:
+  jr ra
+   sh t9,-0x35d6(at)
+
+PATCH_START 0x80805888
+  jal FileEraseButtonIndexDecr
+   nop
+PATCH_END
