@@ -3,6 +3,8 @@ import { randString } from './random';
 import { Cosmetics, makeCosmetics } from './cosmetics';
 import { makeRandomSettings, OptionRandomSettings } from './settings/random';
 
+export type FetchFunc = (filename: string) => Promise<Buffer>;
+
 export type Options = {
   debug: boolean;
   seed: string;
@@ -10,11 +12,12 @@ export type Options = {
   cosmetics: Cosmetics;
   random: OptionRandomSettings;
   patch?: Buffer;
+  fetch?: FetchFunc;
 };
 
 export type OptionsInput =
   Partial<
-    Pick<Options, 'debug' | 'seed' | 'patch'>
+    Pick<Options, 'debug' | 'seed' | 'patch' | 'fetch'>
     & { settings: Partial<Settings> }
     & { cosmetics: Partial<Cosmetics> }
     & { random: Partial<OptionRandomSettings> }
@@ -39,6 +42,7 @@ export const options = (opts: OptionsInput): Options => {
   newOpts.settings = makeSettings(opts.settings || {});
   newOpts.cosmetics = makeCosmetics(opts.cosmetics || {});
   newOpts.random = makeRandomSettings(opts.random || {});
+  newOpts.fetch = opts.fetch;
 
   return newOpts as Options;
 };

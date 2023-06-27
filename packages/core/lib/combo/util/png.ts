@@ -1,5 +1,6 @@
 import fs from 'fs/promises';
 import path from 'path';
+import { Options } from '../options';
 
 let PNG: any = null;
 if (!process.env.ROLLUP) {
@@ -71,9 +72,9 @@ const parsePngBitmask = async (data: Buffer) => {
   return bitmask;
 };
 
-export const png = async (filename: string, mode: 'rgba32' | 'rgba16' | 'i4' | 'bitmask') => {
+export const png = async (opts: Options, filename: string, mode: 'rgba32' | 'rgba16' | 'i4' | 'bitmask') => {
   if (process.env.ROLLUP) {
-    return fetch(`/${filename}.bin`).then(x => x.arrayBuffer()).then(x => Buffer.from(x));
+    return opts.fetch!(`${filename}.bin`);
   } else {
     const data = await fs.readFile(__dirname + '/../../../data/assets/' + filename + '.png');
     let pngBuffer: Buffer;

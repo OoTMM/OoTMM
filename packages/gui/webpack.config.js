@@ -57,7 +57,7 @@ module.exports = {
     }),
     new CopyWebpackPlugin({
       patterns: [
-        { from: `${path.dirname(require.resolve('@ootmm/core/package.json'))}/dist/data` },
+        { from: `${path.dirname(require.resolve('@ootmm/core/package.json'))}/dist/data.zip`, to: `data-${VERSION}.zip` },
       ]
     }),
     new MiniCssExtractPlugin({

@@ -34,9 +34,9 @@ export function makeCosmetics(data: Partial<Cosmetics>) {
   };
 }
 
-export async function cosmeticsAssets() {
+export async function cosmeticsAssets(opts: Options) {
   return {
-    MASK_TUNIC: await png('masks/tunic', 'bitmask'),
+    MASK_TUNIC: await png(opts, 'masks/tunic', 'bitmask'),
   }
 }
 
@@ -107,7 +107,7 @@ class CosmeticsPass {
   }
 
   async run(): Promise<Patchfile> {
-    this.assets = await cosmeticsAssets();
+    this.assets = await cosmeticsAssets(this.opts);
 
     /* OoT tunics */
     this.patchOotTunic(0, this.opts.cosmetics.ootTunicKokiri);

@@ -11,6 +11,7 @@ import dsvPlugin from '@rollup/plugin-dsv';
 import externals from 'rollup-plugin-node-externals';
 import terser from '@rollup/plugin-terser';
 import glob from 'glob';
+import JSZip from 'jszip';
 
 import { build as comboBuild } from './combo/build';
 import { codegen as comboCodegen } from './combo/codegen';
@@ -58,37 +59,37 @@ async function build() {
 }
 
 async function copyData() {
+  const opts = {} as any;
   await Promise.all([
     comboCodegen(dummyMonitor),
-    cosmeticsAssets(),
+    cosmeticsAssets(opts),
   ]);
   const b = await comboBuild({ debug: false, seed: 'ROLLUP', settings: DEFAULT_SETTINGS, cosmetics: DEFAULT_COSMETICS, random: DEFAULT_RANDOM_SETTINGS });
-  await fs.mkdir('dist/data', { recursive: true });
+
+  /* Create the zip */
+  const zip = new JSZip();
+
+  /* Add the payload and the patches */
   await Promise.all(
     Object.entries(b).map(async ([game, { payload, patches }]) => {
-      await Promise.all([
-        fs.writeFile(`dist/data/${game}_payload.bin`, payload),
-        fs.writeFile(`dist/data/${game}_patch.bin`, patches),
-      ]);
+      zip.file(`${game}_payload.bin`, payload);
+      zip.file(`${game}_patch.bin`, patches);
     })
   );
 
-  /* Copy the extra assets */
-  await customAssets();
-  let promises: Promise<void>[] = [];
+  /* Add the extra assets */
+  await customAssets(opts);
   for (const basePath of ["build/assets", "data/static"]) {
     const matches = glob.sync(['**/*.bin', '**/*.zobj'], { cwd: basePath });
     for (const filename of matches) {
-      const outPath = `dist/data/${filename}`;
-      const dir = path.dirname(outPath);
-      const p = (async () => {
-        await fs.mkdir(dir, { recursive: true });
-        await fs.copyFile(path.join(basePath, filename), outPath);
-      })();
-      promises.push(p);
+      const data = await fs.readFile(path.join(basePath, filename));
+      zip.file(filename, data);
     }
   }
-  await Promise.all(promises);
+
+  /* Compress the data */
+  const zipBuf = await zip.generateAsync({ type: 'nodebuffer', compression: 'DEFLATE', compressionOptions: { level: 9 } });
+  await fs.writeFile('dist/data.zip', zipBuf);
 }
 
 const dummyMonitor = new Monitor({});

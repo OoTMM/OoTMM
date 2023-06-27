@@ -46,7 +46,7 @@ export class Generator {
       if (!process.env.ROLLUP) {
         await codegen(this.monitor);
       }
-      const customData = await custom(this.monitor, roms);
+      const customData = await custom(this.opts, this.monitor, roms);
       const buildResult = await build(this.opts);
       /* Run logic */
       const logicResult = logic(this.monitor, this.opts);

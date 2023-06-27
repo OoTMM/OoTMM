@@ -1,8 +1,10 @@
 import { promises as fs } from 'fs';
 
-export const raw = async (filename: string) => {
+import { Options } from '../options';
+
+export const raw = async (opts: Options, filename: string) => {
   if (process.env.ROLLUP) {
-    return fetch(`/${filename}`).then(x => x.arrayBuffer()).then(x => Buffer.from(x));
+    return opts.fetch!(`${filename}`);
   } else {
     const data = await fs.readFile(__dirname + '/../../../data/static/' + filename);
     return data;

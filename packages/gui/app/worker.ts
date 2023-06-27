@@ -1,5 +1,30 @@
 import { Buffer } from 'buffer';
+import JSZip from 'jszip';
 import { Settings, itemPool, Items, OptionsInput, GeneratorOutput, generate } from '@ootmm/core';
+
+const VERSION = process.env.VERSION as string;
+
+async function makeDataPromise(path: string) {
+  const reply = await fetch(path);
+  if (reply.ok) {
+    const ab = await reply.arrayBuffer();
+    return Buffer.from(ab);
+  } else {
+    throw new Error(`Failed to download ${path}`);
+  }
+}
+
+const dataPromise = makeDataPromise(`/data-${VERSION}.zip`).then(data => JSZip.loadAsync(data));
+
+async function fetchFunc(path: string) {
+  const zip = await dataPromise;
+  const file = zip.file(path);
+  if (file) {
+    return file.async('arraybuffer').then(ab => Buffer.from(ab));
+  } else {
+    throw new Error(`Failed to unzip file ${path}`);
+  }
+}
 
 export type WorkerTaskItemPool = {
   type: 'itemPool',
@@ -56,7 +81,7 @@ function onTaskGenerate(task: WorkerTaskGenerate) {
       log: msg,
     });
   };
-  const generator = generate({ oot, mm, opts: { ...task.options, patch }, monitor: { onLog } });
+  const generator = generate({ oot, mm, opts: { ...task.options, patch, fetch: fetchFunc }, monitor: { onLog } });
   generator.run().then(result => {
     postMessage({
       type: 'generate',

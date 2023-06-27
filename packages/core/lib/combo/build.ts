@@ -62,11 +62,11 @@ const getBuildArtifacts = async (root: string): Promise<BuildOutput> => {
   return { oot, mm };
 };
 
-const fetchBuildArtifacts = async (): Promise<BuildOutput> => {
+const fetchBuildArtifacts = async (opts: Options): Promise<BuildOutput> => {
   const [oot, mm] = await Promise.all(GAMES.map(async (g) => {
     const [payload, patches] = await Promise.all([
-      fetch(`/${g}_payload.bin`).then(x => x.arrayBuffer()).then(x => Buffer.from(x)),
-      fetch(`/${g}_patch.bin`).then(x => x.arrayBuffer()).then(x => Buffer.from(x)),
+      opts.fetch!(`${g}_payload.bin`),
+      opts.fetch!(`${g}_patch.bin`),
     ]);
     return { payload, patches };
   }));
@@ -78,6 +78,6 @@ export const build = async (opts: Options): Promise<BuildOutput> => {
     await make(opts);
     return getBuildArtifacts('build' + (opts.debug ? '/Debug' : '/Release'));
   } else {
-    return fetchBuildArtifacts();
+    return fetchBuildArtifacts(opts);
   }
 };

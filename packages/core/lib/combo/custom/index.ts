@@ -14,6 +14,7 @@ import { KeepFile } from './keep';
 import { png } from '../util/png';
 import { font } from './font';
 import { raw } from './raw';
+import { Options } from '../options';
 
 const FILES_TO_INDEX_OOT = arrayToIndexMap(DATA_FILES.oot);
 const FILES_TO_INDEX_MM = arrayToIndexMap(DATA_FILES.mm);
@@ -89,31 +90,31 @@ const customExtractedObjects = async (roms: DecompressedRoms, archive: CustomArc
   }
 };
 
-async function customFileObject(name: string, filename: string, archive: CustomArchive, cg: CodeGen, defines: number[]) {
-  const file = await raw(filename);
+async function customFileObject(opts: Options, name: string, filename: string, archive: CustomArchive, cg: CodeGen, defines: number[]) {
+  const file = await raw(opts, filename);
   await customObject(name, file, archive, cg, defines);
 }
 
-export const customAssets = async (): Promise<{[k: string]: Buffer}> => ({
-  DPAD: await png('dpad', 'rgba32'),
-  CHEST_MAJOR_FRONT: await png('chest_front_major', 'rgba16'),
-  CHEST_MAJOR_SIDE: await png('chest_side_major', 'rgba16'),
-  CHEST_KEY_FRONT: await png('chest_front_key', 'rgba16'),
-  CHEST_KEY_SIDE: await png('chest_side_key', 'rgba16'),
-  CHEST_SPIDER_FRONT: await png('chest_front_spider', 'rgba16'),
-  CHEST_SPIDER_SIDE: await png('chest_side_spider', 'rgba16'),
-  CHEST_FAIRY_FRONT: await png('chest_front_fairy', 'rgba16'),
-  CHEST_FAIRY_SIDE: await png('chest_side_fairy', 'rgba16'),
-  CHEST_HEART_FRONT: await png('chest_front_heart', 'rgba16'),
-  CHEST_HEART_SIDE: await png('chest_side_heart', 'rgba16'),
-  FONT: await font('font_8x12'),
-  SMALL_ICON_KEY: await png('small_icon_key', 'rgba32'),
-  SMALL_ICON_BOSS_KEY: await png('small_icon_boss_key', 'rgba32'),
-  SMALL_ICON_MAP: await png('small_icon_map', 'rgba32'),
-  SMALL_ICON_COMPASS: await png('small_icon_compass', 'rgba32'),
-  SMALL_ICON_FAIRY: await png('small_icon_fairy', 'rgba32'),
-  SMALL_ICON_SKULL: await png('small_icon_skull', 'rgba32'),
-  SMALL_ICON_TRIFORCE: await png('small_icon_triforce', 'rgba32'),
+export const customAssets = async (opts: Options): Promise<{[k: string]: Buffer}> => ({
+  DPAD: await png(opts, 'dpad', 'rgba32'),
+  CHEST_MAJOR_FRONT: await png(opts, 'chest_front_major', 'rgba16'),
+  CHEST_MAJOR_SIDE: await png(opts, 'chest_side_major', 'rgba16'),
+  CHEST_KEY_FRONT: await png(opts, 'chest_front_key', 'rgba16'),
+  CHEST_KEY_SIDE: await png(opts, 'chest_side_key', 'rgba16'),
+  CHEST_SPIDER_FRONT: await png(opts, 'chest_front_spider', 'rgba16'),
+  CHEST_SPIDER_SIDE: await png(opts, 'chest_side_spider', 'rgba16'),
+  CHEST_FAIRY_FRONT: await png(opts, 'chest_front_fairy', 'rgba16'),
+  CHEST_FAIRY_SIDE: await png(opts, 'chest_side_fairy', 'rgba16'),
+  CHEST_HEART_FRONT: await png(opts, 'chest_front_heart', 'rgba16'),
+  CHEST_HEART_SIDE: await png(opts, 'chest_side_heart', 'rgba16'),
+  FONT: await font(opts, 'font_8x12'),
+  SMALL_ICON_KEY: await png(opts, 'small_icon_key', 'rgba32'),
+  SMALL_ICON_BOSS_KEY: await png(opts, 'small_icon_boss_key', 'rgba32'),
+  SMALL_ICON_MAP: await png(opts, 'small_icon_map', 'rgba32'),
+  SMALL_ICON_COMPASS: await png(opts, 'small_icon_compass', 'rgba32'),
+  SMALL_ICON_FAIRY: await png(opts, 'small_icon_fairy', 'rgba32'),
+  SMALL_ICON_SKULL: await png(opts, 'small_icon_skull', 'rgba32'),
+  SMALL_ICON_TRIFORCE: await png(opts, 'small_icon_triforce', 'rgba32'),
 });
 
 const extractRaw = async (roms: DecompressedRoms, game: Game, file: string, offset: number, size: number) => {
@@ -127,9 +128,9 @@ export const extractedAssets = async (roms: DecompressedRoms): Promise<{[k: stri
   SF_TEXTURE_3: await extractRaw(roms, 'mm', 'objects/gameplay_keep', 0x2bc30, 32 * 32),
 });
 
-const customKeepFiles = async (roms: DecompressedRoms, archive: CustomArchive, cg: CodeGen) => {
+const customKeepFiles = async (opts: Options, roms: DecompressedRoms, archive: CustomArchive, cg: CodeGen) => {
   const keep = new KeepFile();
-  const cAssets = await customAssets();
+  const cAssets = await customAssets(opts);
   const eAssets = await extractedAssets(roms);
   const assets = { ...cAssets, ...eAssets };
   for (const k in assets) {
@@ -140,13 +141,13 @@ const customKeepFiles = async (roms: DecompressedRoms, archive: CustomArchive, c
   cg.define('CUSTOM_OBJECT_ID_KEEP', custonKeepId);
 };
 
-async function addRawData(archive: CustomArchive, cg: CodeGen, define: string, filename: string) {
-  const file = await raw(filename);
+async function addRawData(opts: Options, archive: CustomArchive, cg: CodeGen, define: string, filename: string) {
+  const file = await raw(opts, filename);
   const addr = await archive.addData(file);
   cg.define('CUSTOM_' + define + '_ADDR', addr);
 }
 
-export const custom = async (monitor: Monitor, roms: DecompressedRoms) => {
+export const custom = async (opts: Options, monitor: Monitor, roms: DecompressedRoms) => {
   monitor.log("Building custom objects");
   const cgPath = process.env.ROLLUP ? '' : path.resolve('include', 'combo', 'custom.h');
   const cg = new CodeGen(cgPath, 'CUSTOM_H');
@@ -156,15 +157,15 @@ export const custom = async (monitor: Monitor, roms: DecompressedRoms) => {
   await customExtractedObjects(roms, archive, cg);
 
   /* Setup custom keep */
-  await customKeepFiles(roms, archive, cg);
+  await customKeepFiles(opts, roms, archive, cg);
 
   /* Load MQ data */
-  await addRawData(archive, cg, 'MQ_ROOMS', 'mq_rooms.bin');
-  await addRawData(archive, cg, 'MQ_SCENES', 'mq_scenes.bin');
-  await addRawData(archive, cg, 'MQ_MAPS', 'mq_maps.bin');
+  await addRawData(opts, archive, cg, 'MQ_ROOMS', 'mq_rooms.bin');
+  await addRawData(opts, archive, cg, 'MQ_SCENES', 'mq_scenes.bin');
+  await addRawData(opts, archive, cg, 'MQ_MAPS', 'mq_maps.bin');
 
   /* Load custom objects */
-  await customFileObject('TRIFORCE', 'triforce.zobj', archive, cg, [0x06000a30]);
+  await customFileObject(opts, 'TRIFORCE', 'triforce.zobj', archive, cg, [0x06000a30]);
 
   /* Emit the custom header and data */
   const pack = archive.pack();
