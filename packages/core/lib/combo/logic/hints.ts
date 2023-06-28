@@ -1,6 +1,6 @@
 import { World } from './world';
 import { Analysis } from './analysis';
-import { Random, sample, shuffle } from '../random';
+import { Random, sample, shuffle, randomInt } from '../random';
 import { DUNGEON_REWARDS_ORDERED, isDungeonReward, isGoldToken, itemsArray, isKey, isHouseToken, isGanonBossKey, isStrayFairy, isToken, isTownStrayFairy, isSong, isSmallKeyRegular, isSmallKeyHideout, isMapCompass, ITEMS_MASKS_REGULAR, isSmallKeyRegularOot, isSmallKeyRegularMm, isRegularBossKeyOot, isRegularBossKeyMm, isItemTriforce, Item, itemData, makeItem } from './items';
 import { Settings } from '../settings';
 import { Game } from '../config';
@@ -86,7 +86,12 @@ export type HintGossipItemRegion = {
   item: Item;
 };
 
-export type HintGossip = { game: Game } & (HintGossipHero | HintGossipFoolish | HintGossipItemExact | HintGossipItemRegion);
+export type HintGossipJunk = {
+  type: 'junk';
+  id: number;
+};
+
+export type HintGossip = { game: Game } & (HintGossipHero | HintGossipFoolish | HintGossipItemExact | HintGossipItemRegion | HintGossipJunk);
 
 type WorldItemHints = {
   dungeonRewards: Region[];
@@ -463,6 +468,30 @@ export class LogicPassHints {
     return placed;
   }
 
+  private placeGossipJunk(world: number, count: number | 'max', extra: number, moon: boolean) {
+    if (count === 'max') {
+      count = 999;
+    }
+    let placed = 0;
+    let gossips = Object.keys(this.state.world.gossip)
+      .filter(x => !this.gossip[world][x]);
+    if (!moon) {
+      gossips = gossips.filter(x => ['gossip', 'gossip-grotto'].includes(this.state.world.gossip[x].type));
+    }
+    gossips = shuffle(this.state.random, gossips);
+    for (;;) {
+      if (placed >= count || gossips.length === 0) {
+        break;
+      }
+      const gossip = gossips.pop()!;
+      const id = randomInt(this.state.random, 65536);
+      const hint: HintGossip = { game: this.state.world.gossip[gossip].game, type: 'junk', id };
+      this.placeWithExtra(world, gossip, hint, extra);
+      placed++;
+    }
+    return placed;
+  }
+
   private placeGossipItemRegion(world: number, location: Location | null, extra: number, isMoon: boolean) {
     if (location === null) {
       return false;
@@ -586,11 +615,17 @@ export class LogicPassHints {
       case 'woth':
         this.placeGossipHero(world, s.amount, s.extra);
         break;
+      case 'junk':
+        this.placeGossipJunk(world, s.amount, s.extra, false);
+        break;
       }
     }
 
     /* Place moon hints */
     this.placeMoonGossip(world);
+
+    /* Fill with junk hints */
+    this.placeGossipJunk(world, 'max', 0, true);
   }
 
   private locRegion(loc: string | null) {

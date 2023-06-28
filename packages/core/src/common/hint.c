@@ -23,6 +23,17 @@ static const char* kJunkHints[] = {
     "getting 100 coins gives you a star",               /* Mario 64 */
     "the main character is not actually called Zelda",  /* ... */
     "nothing is forever",                               /* Useful life advice */
+    "the yes needs the no, to win against the no",      /* French politics */
+    "a winner is you",                                  /* Meme */
+    "your princess is in another castle",               /* Mario 1 */
+    "it's a secret to everybody",                       /* Zelda 1 */
+    "Ocarina of Time is the better game",               /* OoTMM */
+    "Majora's Mask is the better game",                 /* OoTMM */
+    "the cake is a lie",                                /* Portal */
+    "I am Error",                                       /* Zelda 2 */
+    "plundering Area 51 is a foolish choice",           /* Useful life advice */
+    "there are 118 known elements",                     /* Chemistry */
+    "Nax's House is on the Way of the Hero",            /* OoTMM */
 };
 
 ALIGNED(16) Hint gHints[0x40];
@@ -73,7 +84,7 @@ void comboHintGossip(u8 key, GameState_Play* play)
     hint = findHint(key);
     if (hint == NULL)
     {
-        /* Junk hint */
+        /* (Fake) junk hint */
         comboTextAppendStr(&b, kJunkHints[key % ARRAY_SIZE(kJunkHints)]);
     }
     else
@@ -105,6 +116,9 @@ void comboHintGossip(u8 key, GameState_Play* play)
             appendCorrectItemName(&b, hint->item);
             comboTextAppendStr(&b, " can be found ");
             comboTextAppendRegionName(&b, hint->region, TF_PREPOS);
+            break;
+        case HINT_TYPE_JUNK:
+            comboTextAppendStr(&b, kJunkHints[((u16)hint->item) % ARRAY_SIZE(kJunkHints)]);
             break;
         }
     }

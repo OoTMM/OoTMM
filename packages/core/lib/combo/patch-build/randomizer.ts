@@ -367,6 +367,13 @@ const hintBuffer = (settings: Settings, game: Game, gossip: string, hint: HintGo
         data.writeUInt16BE(item, 4);
       }
       break;
+  case 'junk':
+    {
+      data.writeUInt8(id, 0);
+      data.writeUInt8(0x04, 1);
+      data.writeUInt16BE(hint.id, 4);
+    }
+    break;
   }
   return data;
 }
