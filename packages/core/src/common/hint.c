@@ -11,9 +11,11 @@ typedef struct PACKED ALIGNED(2)
     u8 key;
     u8 type;
     u8 region;
-    u8 unused;
+    u8 world;
     s16 item;
     s16 item2;
+    u8  player;
+    u8  player2;
 }
 Hint;
 
@@ -56,12 +58,19 @@ void comboInitHints(void)
     DMARomToRam(HINTS_ADDR | PI_DOM1_ADDR2, gHints,  sizeof(gHints));
 }
 
-static void appendCorrectItemName(char** b, s16 gi)
+static void appendCorrectItemName(char** b, s16 gi, u8 player)
 {
 #if defined(GAME_MM)
     gi ^= MASK_FOREIGN_GI;
 #endif
     comboTextAppendItemName(b, gi, TF_PROGRESSIVE);
+
+    if (player != 0 && player != 0xff && player != gComboData.playerId)
+    {
+        comboTextAppendStr(b, " for " TEXT_COLOR_YELLOW " Player ");
+        comboTextAppendNum(b, player + 1);
+        comboTextAppendClearColor(b);
+    }
 }
 
 void comboHintGossip(u8 key, GameState_Play* play)
@@ -92,30 +101,30 @@ void comboHintGossip(u8 key, GameState_Play* play)
         switch (hint->type)
         {
         case HINT_TYPE_HERO:
-            comboTextAppendRegionName(&b, hint->region, 0, 0);
+            comboTextAppendRegionName(&b, hint->region, hint->world, 0);
             comboTextAppendStr(&b, " is on the " TEXT_COLOR_YELLOW "Way of the Hero");
             comboTextAppendClearColor(&b);
             break;
         case HINT_TYPE_FOOLISH:
             comboTextAppendStr(&b, "plundering ");
-            comboTextAppendRegionName(&b, hint->region, 0, 0);
+            comboTextAppendRegionName(&b, hint->region, hint->world, 0);
             comboTextAppendStr(&b, " is a " TEXT_COLOR_PINK "foolish choice");
             comboTextAppendClearColor(&b);
             break;
         case HINT_TYPE_ITEM_EXACT:
-            comboTextAppendCheckName(&b, hint->region);
+            comboTextAppendCheckName(&b, hint->region, hint->world);
             comboTextAppendStr(&b, " gives ");
-            appendCorrectItemName(&b, hint->item);
+            appendCorrectItemName(&b, hint->item, hint->player);
             if (hint->item2 != -1)
             {
                 comboTextAppendStr(&b, " and ");
-                appendCorrectItemName(&b, hint->item2);
+                appendCorrectItemName(&b, hint->item2, hint->player2);
             }
             break;
         case HINT_TYPE_ITEM_REGION:
-            appendCorrectItemName(&b, hint->item);
+            appendCorrectItemName(&b, hint->item, hint->player);
             comboTextAppendStr(&b, " can be found ");
-            comboTextAppendRegionName(&b, hint->region, 0, TF_PREPOS);
+            comboTextAppendRegionName(&b, hint->region, hint->world, TF_PREPOS);
             break;
         case HINT_TYPE_JUNK:
             comboTextAppendStr(&b, kJunkHints[((u16)hint->item) % ARRAY_SIZE(kJunkHints)]);

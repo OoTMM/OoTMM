@@ -298,7 +298,7 @@ const gameChecks = (world: number, settings: Settings, game: Game, logic: LogicR
 };
 
 const hintBuffer = (settings: Settings, game: Game, gossip: string, hint: HintGossip): Buffer => {
-  const data = Buffer.alloc(8, 0xff);
+  const data = Buffer.alloc(10, 0xff);
   let gossipData = DATA_HINTS_POOL[game][gossip];
   if (!gossipData) {
     throw new Error(`Unknown gossip ${gossip} for game ${game}`);
@@ -318,24 +318,28 @@ const hintBuffer = (settings: Settings, game: Game, gossip: string, hint: HintGo
   switch (hint.type) {
   case 'hero':
     {
-      const region = DATA_REGIONS[regionData(hint.region).id];
+      const regionD = regionData(hint.region);
+      const region = DATA_REGIONS[regionD.id];
       if (region === undefined) {
         throw new Error(`Unknown region ${hint.region}`);
       }
       data.writeUInt8(id, 0);
       data.writeUInt8(0x00, 1);
       data.writeUInt8(region, 2);
+      data.writeUInt8(regionD.world + 1, 3);
     }
     break;
   case 'foolish':
     {
-      const region = DATA_REGIONS[regionData(hint.region).id];
+      const regionD = regionData(hint.region);
+      const region = DATA_REGIONS[regionD.id];
       if (region === undefined) {
         throw new Error(`Unknown region ${hint.region}`);
       }
       data.writeUInt8(id, 0);
       data.writeUInt8(0x01, 1);
       data.writeUInt8(region, 2);
+      data.writeUInt8(regionD.world + 1, 3);
     }
     break;
   case 'item-exact':
@@ -344,27 +348,35 @@ const hintBuffer = (settings: Settings, game: Game, gossip: string, hint: HintGo
       if (check === undefined) {
         throw new Error(`Unknown named check: ${hint.check}`);
       }
+      const itemsD = hint.items.map((item) => itemData(item));
       const items = hint.items.map((item) => gi(settings, 'oot', itemData(item).id, true));
       data.writeUInt8(id, 0);
       data.writeUInt8(0x02, 1);
       data.writeUInt8(check, 2);
+      data.writeUInt8(hint.world + 1, 3);
       data.writeUInt16BE(items[0], 4);
+      data.writeUint8((itemsD[0].player as number) + 1, 7);
       if (items.length > 1) {
         data.writeUInt16BE(items[1], 6);
+        data.writeUint8((itemsD[1].player as number) + 1, 7);
       }
     }
     break;
   case 'item-region':
       {
-        const region = DATA_REGIONS[regionData(hint.region).id];
+        const regionD = regionData(hint.region);
+        const region = DATA_REGIONS[regionD.id];
+        const itemD = itemData(hint.item);
         if (region === undefined) {
           throw new Error(`Unknown region ${hint.region}`);
         }
-        const item = gi(settings, 'oot', itemData(hint.item).id, true);
+        const item = gi(settings, 'oot', itemD.id, true);
         data.writeUInt8(id, 0);
         data.writeUInt8(0x03, 1);
         data.writeUInt8(region, 2);
+        data.writeUInt8(regionD.world + 1, 3);
         data.writeUInt16BE(item, 4);
+        data.writeUint8((itemD.player as number) + 1, 7);
       }
       break;
   case 'junk':
@@ -396,7 +408,7 @@ const regionsBuffer = (regions: Region[]) => {
     if (regionId === undefined) {
       throw new Error(`Unknown region ${region}`);
     }
-    const world = regionData(region).world;
+    const world = regionData(region).world + 1;
     return [regionId, world];
   });
   return toU8Buffer(data.flat());

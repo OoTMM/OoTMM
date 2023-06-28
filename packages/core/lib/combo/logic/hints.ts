@@ -77,6 +77,7 @@ export type HintGossipFoolish = {
 export type HintGossipItemExact = {
   type: 'item-exact',
   check: string,
+  world: number,
   items: Item[],
 };
 
@@ -377,7 +378,7 @@ export class LogicPassHints {
     for (const l of locations) {
       this.hintedLocations.add(l);
     }
-    const hint: HintGossip = { game: this.state.world.gossip[gossip].game, type: 'item-exact', items, check: checkHint };
+    const hint: HintGossip = { game: this.state.world.gossip[gossip].game, type: 'item-exact', items, check: checkHint, world: checkWorld };
     this.placeWithExtra(world, gossip, hint, extra);
     return true;
   }

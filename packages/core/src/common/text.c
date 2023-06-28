@@ -664,7 +664,7 @@ void comboTextAppendRegionName(char** b, u8 regionId, u8 world, int flags)
     comboTextAppendStr(b, regName->name);
     comboTextAppendClearColor(b);
 
-    if (world && world != gComboData.playerId)
+    if (world != 0 && world != 0xff && world != gComboData.playerId)
     {
         comboTextAppendStr(b, " in " TEXT_COLOR_YELLOW "World ");
         comboTextAppendNum(b, world);
@@ -677,7 +677,7 @@ void comboTextAppendRegionName(char** b, u8 regionId, u8 world, int flags)
     }
 }
 
-void comboTextAppendCheckName(char** b, u8 checkId)
+void comboTextAppendCheckName(char** b, u8 checkId, u8 world)
 {
     const char* checkName;
 
@@ -692,6 +692,13 @@ void comboTextAppendCheckName(char** b, u8 checkId)
 
     comboTextAppendStr(b, checkName);
     comboTextAppendClearColor(b);
+
+    if (world != 0 && world != 0xff && world != gComboData.playerId)
+    {
+        comboTextAppendStr(b, " in " TEXT_COLOR_YELLOW "World ");
+        comboTextAppendNum(b, world);
+        comboTextAppendClearColor(b);
+    }
 }
 
 void comboTextHijackItemEx(GameState_Play* play, const ComboItemOverride* o, int count)
