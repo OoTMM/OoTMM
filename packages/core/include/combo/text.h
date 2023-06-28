@@ -62,7 +62,7 @@ void comboTextAppendNum(char** b, int num);
 void comboTextAppendItemName(char** b, s16 gi, int flags);
 void comboTextAppendItemNameQuery(char** b, const ComboItemQuery* q, int flags);
 void comboTextAppendItemNameOverride(char** b, const ComboItemOverride* o, int flags);
-void comboTextAppendRegionName(char** b, u8 regionId, int flags);
+void comboTextAppendRegionName(char** b, u8 regionId, u8 world, int flags);
 void comboTextAppendCheckName(char** b, u8 checkId);
 void comboTextAppendNpcReward(char** b, s16 npcId, s16 gi);
 void comboTextMessageCantBuy(GameState_Play* play, int flags);

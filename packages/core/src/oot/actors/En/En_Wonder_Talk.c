@@ -14,10 +14,13 @@ static const char kIcons[] = {
 
 static void hintSingleDungeon(char** b, int index)
 {
+    const ItemHint* ih;
+
+    ih = &gComboData.hints.dungeonRewards[index];
     comboTextAppendStr(b, TEXT_FAST TEXT_ICON);
     **b = kIcons[index];
     ++(*b);
-    comboTextAppendRegionName(b, gComboData.hints.dungeonRewards[index], TF_PREPOS | TF_CAPITALIZE);
+    comboTextAppendRegionName(b, ih->region, ih->world, TF_PREPOS | TF_CAPITALIZE);
     comboTextAppendStr(b, "...");
 }
 
@@ -56,10 +59,10 @@ static void hintDungeons(GameState_Play* play)
     else
     {
         /* Ganon BK hint */
-        if (gComboData.hints.ganonBossKey != 0)
+        if (gComboData.hints.ganonBossKey.region != 0)
         {
             comboTextAppendStr(&b, TEXT_BB TEXT_ICON "\x74" TEXT_FAST);
-            comboTextAppendRegionName(&b, gComboData.hints.ganonBossKey, TF_PREPOS | TF_CAPITALIZE);
+            comboTextAppendRegionName(&b, gComboData.hints.ganonBossKey.region, gComboData.hints.ganonBossKey.world, TF_PREPOS | TF_CAPITALIZE);
             comboTextAppendStr(&b, "...");
         }
     }

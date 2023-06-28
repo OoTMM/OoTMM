@@ -12,7 +12,7 @@ import { EntranceShuffleResult } from '../logic/entrance';
 import { Patchfile } from './patchfile';
 import { LOCATIONS_ZELDA, makeLocation, makePlayerLocations } from '../logic/locations';
 import { CONFVARS_VALUES, Confvar } from '../confvars';
-import { regionData } from '../logic/regions';
+import { Region, regionData } from '../logic/regions';
 
 const GAME_DATA_OFFSETS = {
   oot: 0x1000,
@@ -390,15 +390,16 @@ const gameHints = (settings: Settings, game: Game, hints: WorldHints): Buffer =>
   return Buffer.concat(buffers);
 }
 
-const regionsBuffer = (regions: string[]) => {
+const regionsBuffer = (regions: Region[]) => {
   const data = regions.map((region) => {
-    const regionId = DATA_REGIONS[regionData(region as any).id];
+    const regionId = DATA_REGIONS[regionData(region).id];
     if (regionId === undefined) {
       throw new Error(`Unknown region ${region}`);
     }
-    return regionId;
+    const world = regionData(region).world;
+    return [regionId, world];
   });
-  return toU8Buffer(data);
+  return toU8Buffer(data.flat());
 };
 
 const gameEntrances = (game: Game, logic: LogicResult) => {
