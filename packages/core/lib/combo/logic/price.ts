@@ -132,7 +132,7 @@ function betaApproxInt(random: Random, alpha: number, beta: number, max: number)
   for (let i = 0; i < draws; ++i) {
     values.push(randomInt(random, max));
   }
-  return (values.sort())[alpha - 1];
+  return (values.sort((a, b) => a - b))[alpha - 1];
 }
 
 export class LogicPassPrice {
