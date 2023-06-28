@@ -38,9 +38,33 @@ const OOT_SCRUBS = [
   ...OOT_SCRUBS_GC,
 ];
 
+const MM_SHOP_BOMB = [30, 40, 50, 90];
+const MM_SHOP_CURIOSITY = [500];
+const MM_SHOP_TRADING = [30, 80, 80, 50, 10, 30, 30, 30];
+const MM_SHOP_POTION = [60, 10, 20];
+const MM_SHOP_GORON = [40, 40, 80];
+const MM_SHOP_ZORA = [90, 20, 60];
+
+const MM_SHOPS = [
+  ...MM_SHOP_BOMB,
+  ...MM_SHOP_CURIOSITY,
+  ...MM_SHOP_TRADING,
+  ...MM_SHOP_POTION,
+  ...MM_SHOP_GORON,
+  ...MM_SHOP_ZORA,
+];
+
+const MM_SHOP_EX_CURIOSITY = [100];
+
+const MM_SHOPS_EX = [
+  ...MM_SHOP_EX_CURIOSITY,
+];
+
 const PRICES = {
   OOT_SHOPS,
   OOT_SCRUBS,
+  MM_SHOPS,
+  MM_SHOPS_EX,
   MAX: [],
 } as const;
 
@@ -159,6 +183,8 @@ export class LogicPassPrice {
   run() {
     this.shufflePrices('OOT_SHOPS', this.state.settings.priceOotShops);
     this.shufflePrices('OOT_SCRUBS', this.state.settings.priceOotScrubs);
+    this.shufflePrices('MM_SHOPS', this.state.settings.priceMmShops);
+    this.shufflePrices('MM_SHOPS_EX', this.state.settings.priceMmShops);
 
     return {};
   }

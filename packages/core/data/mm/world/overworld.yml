@@ -285,10 +285,10 @@
   exits:
     "Clock Town West": "true"
   locations:
-    "Bomb Shop Item 1": "can_use_wallet(1)"
-    "Bomb Shop Item 2": "can_use_wallet(1)"
-    "Bomb Shop Bomb Bag": "can_use_wallet(1)"
-    "Bomb Shop Bomb Bag 2": "event(SAKON_BOMB_BAG) && can_use_wallet(1)"
+    "Bomb Shop Item 1": "shop_price(0x00)"
+    "Bomb Shop Item 2": "shop_price(0x01)"
+    "Bomb Shop Bomb Bag": "shop_price(0x02)"
+    "Bomb Shop Bomb Bag 2": "event(SAKON_BOMB_BAG) && shop_price(0x03)"
 "Trading Post":
   region: ENTRANCE
   events:
@@ -296,21 +296,21 @@
   exits:
     "Clock Town West": "true"
   locations:
-    "Trading Post Item 1": "can_use_wallet(1) && before(NIGHT3_PM_09_00)"
-    "Trading Post Item 2": "can_use_wallet(1) && before(NIGHT3_PM_09_00)"
-    "Trading Post Item 3": "can_use_wallet(1) && before(NIGHT3_PM_09_00)"
-    "Trading Post Item 4": "can_use_wallet(1) && before(NIGHT3_PM_09_00)"
-    "Trading Post Item 5": "can_use_wallet(1) && before(NIGHT3_PM_09_00)"
-    "Trading Post Item 6": "can_use_wallet(1) && before(NIGHT3_PM_09_00)"
-    "Trading Post Item 7": "can_use_wallet(1) && before(NIGHT3_PM_09_00)"
-    "Trading Post Item 8": "can_use_wallet(1) && before(NIGHT3_PM_09_00)"
+    "Trading Post Item 1": "shop_price(0x05) && before(NIGHT3_PM_09_00)"
+    "Trading Post Item 2": "shop_price(0x06) && before(NIGHT3_PM_09_00)"
+    "Trading Post Item 3": "shop_price(0x07) && before(NIGHT3_PM_09_00)"
+    "Trading Post Item 4": "shop_price(0x08) && before(NIGHT3_PM_09_00)"
+    "Trading Post Item 5": "shop_price(0x09) && before(NIGHT3_PM_09_00)"
+    "Trading Post Item 6": "shop_price(0x0a) && before(NIGHT3_PM_09_00)"
+    "Trading Post Item 7": "shop_price(0x0b) && before(NIGHT3_PM_09_00)"
+    "Trading Post Item 8": "shop_price(0x0c) && before(NIGHT3_PM_09_00)"
 "Curiosity Shop":
   region: ENTRANCE
   exits:
     "Clock Town West": "true"
   locations:
-    "Bomb Shop Bomb Bag 2": "can_use_wallet(2) && is_night3"
-    "Curiosity Shop All-Night Mask": "(event(SAKON_BOMB_BAG) || event(SAKON_BOOM)) && can_use_wallet(3) && is_night3"
+    "Bomb Shop Bomb Bag 2": "shop_ex_price(0x00) && is_night3"
+    "Curiosity Shop All-Night Mask": "(event(SAKON_BOMB_BAG) || event(SAKON_BOOM)) && shop_price(0x04) && is_night3"
     #"Curiostiy Shop 5r Trade": "(has_milk || event(MUSHROOM)) && is_night"
     #"Curiostiy Shop 20r Trade": "(event(WATER) || event(BUGS) || event(FISH) || has_milk || has_red_or_blue_potion || has_green_potion || has_zora_egg) && is_night"
     #"Curiostiy Shop 50r Trade": "(event(POE)) && is_night"
@@ -800,9 +800,9 @@
   exits:
     "Swamp Front": "true"
   locations:
-    "Swamp Potion Shop Item 1": "event(MUSHROOM) && can_use_wallet(1) && (first_day || event(MEET_KOUME))"
-    "Swamp Potion Shop Item 2": "can_use_wallet(1) && (first_day || event(MEET_KOUME))"
-    "Swamp Potion Shop Item 3": "can_use_wallet(1) && (first_day || event(MEET_KOUME))"
+    "Swamp Potion Shop Item 1": "event(MUSHROOM) && shop_price(0x0d) && (first_day || event(MEET_KOUME))"
+    "Swamp Potion Shop Item 2": "shop_price(0x0e) && (first_day || event(MEET_KOUME))"
+    "Swamp Potion Shop Item 3": "shop_price(0x0f) && (first_day || event(MEET_KOUME))"
 "Deku Palace Front":
   region: DEKU_PALACE
   exits:
@@ -1144,9 +1144,9 @@
   exits:
     "Goron Shrine": "true"
   locations:
-    "Goron Shop Item 1": "can_use_wallet(1)"
-    "Goron Shop Item 2": "can_use_wallet(1)"
-    "Goron Shop Item 3": "can_use_wallet(1)"
+    "Goron Shop Item 1": "shop_price(0x10)"
+    "Goron Shop Item 2": "shop_price(0x11)"
+    "Goron Shop Item 3": "shop_price(0x12)"
 "Path to Snowhead Front":
   region: PATH_TO_SNOWHEAD
   exits:
@@ -1481,9 +1481,9 @@
   exits:
     "Zora Hall": "true"
   locations:
-    "Zora Shop Item 1": "can_use_wallet(1)"
-    "Zora Shop Item 2": "can_use_wallet(1)"
-    "Zora Shop Item 3": "can_use_wallet(1)"
+    "Zora Shop Item 1": "shop_price(0x13)"
+    "Zora Shop Item 2": "shop_price(0x14)"
+    "Zora Shop Item 3": "shop_price(0x15)"
 "Tijo's Room":
   region: ENTRANCE
   exits:

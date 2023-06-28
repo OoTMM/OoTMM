@@ -62,9 +62,9 @@ Bomb Shop Item 2,                                 shop,           NONE,         
 Bomb Shop Bomb Bag,                               shop,           NONE,                   BOMB_SHOP,                  0x02,                       BOMB_BAG
 Bomb Shop Bomb Bag 2,                             shop,           NONE,                   BOMB_SHOP,                  0x03,                       BOMB_BAG
 Curiosity Shop All-Night Mask,                    shop,           NONE,                   CURIOSITY_SHOP,             0x04,                       MASK_ALL_NIGHT
-Kafei Hideout Pendant of Memories,     npc,            NONE,                   CURIOSITY_SHOP,             PENDANT_OF_MEMORIES,        PENDANT_OF_MEMORIES
-Kafei Hideout Owner Reward 1,          npc,            NONE,                   CURIOSITY_SHOP,             MASK_KEATON,                MASK_KEATON
-Kafei Hideout Owner Reward 2,          npc,            NONE,                   CURIOSITY_SHOP,             LETTER_TO_MAMA,             LETTER_TO_MAMA
+Kafei Hideout Pendant of Memories,                npc,            NONE,                   CURIOSITY_SHOP,             PENDANT_OF_MEMORIES,        PENDANT_OF_MEMORIES
+Kafei Hideout Owner Reward 1,                     npc,            NONE,                   CURIOSITY_SHOP,             MASK_KEATON,                MASK_KEATON
+Kafei Hideout Owner Reward 2,                     npc,            NONE,                   CURIOSITY_SHOP,             LETTER_TO_MAMA,             LETTER_TO_MAMA
 Post Office HP,                                   npc,            NONE,                   POST_OFFICE,                POSTMAN_HEART_PIECE,        HEART_PIECE
 Swordsman School HP,                              npc,            NONE,                   SWORDSMAN_SCHOOL,           SWORDSMAN_HEART_PIECE,      HEART_PIECE
 Deku Playground Reward 1,                         npc,            NONE,                   DEKU_PLAYGROUND,            DEKU_PLAYGROUND_1,          RUPEE_PURPLE

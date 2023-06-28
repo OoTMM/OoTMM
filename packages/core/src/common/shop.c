@@ -3,8 +3,10 @@
 
 #if defined(GAME_OOT)
 # define SOLD_OUT (GI_MM_SOLD_OUT | MASK_FOREIGN_GI)
+# define PRICES_SHOPS PRICES_OOT_SHOPS
 #else
 # define SOLD_OUT GI_MM_SOLD_OUT
+# define PRICES_SHOPS PRICES_MM_SHOPS
 #endif
 
 int shopReadFlag(int);
@@ -59,9 +61,11 @@ void comboShopSetupItem(GameState_Play* play, Actor_EnGirlA* girlA)
 #endif
 
     girlA->shopId = comboShopItemSlot(play, girlA);
+    girlA->price = (s16)gComboData.prices[PRICES_SHOPS + girlA->shopId];
 
-#if defined(GAME_OOT)
-    girlA->price = (s16)gComboData.prices[PRICES_OOT_SHOPS + girlA->shopId];
+#if defined(GAME_MM)
+    if (girlA->shopId == 0x03 && play->sceneId == SCE_MM_CURIOSITY_SHOP)
+        girlA->price = (s16)gComboData.prices[PRICES_MM_SHOPS_EX + 0x00];
 #endif
 
     comboShopUpdateItem(play, girlA);
