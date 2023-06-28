@@ -355,10 +355,10 @@ const hintBuffer = (settings: Settings, game: Game, gossip: string, hint: HintGo
       data.writeUInt8(check, 2);
       data.writeUInt8(hint.world + 1, 3);
       data.writeUInt16BE(items[0], 4);
-      data.writeUint8((itemsD[0].player as number) + 1, 7);
+      data.writeUint8((itemsD[0].player as number) + 1, 8);
       if (items.length > 1) {
         data.writeUInt16BE(items[1], 6);
-        data.writeUint8((itemsD[1].player as number) + 1, 7);
+        data.writeUint8((itemsD[1].player as number) + 1, 9);
       }
     }
     break;
@@ -376,7 +376,7 @@ const hintBuffer = (settings: Settings, game: Game, gossip: string, hint: HintGo
         data.writeUInt8(region, 2);
         data.writeUInt8(regionD.world + 1, 3);
         data.writeUInt16BE(item, 4);
-        data.writeUint8((itemD.player as number) + 1, 7);
+        data.writeUint8((itemD.player as number) + 1, 8);
       }
       break;
   case 'junk':
