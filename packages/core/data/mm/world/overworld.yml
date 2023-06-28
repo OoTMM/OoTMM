@@ -6,33 +6,33 @@
 "Tingle Town":
   region: TINGLE
   locations:
-    "Tingle Map Clock Town": "can_use_wallet(1)"
-    "Tingle Map Woodfall": "can_use_wallet(1)"
+    "Tingle Map Clock Town": "tingle_price(0x00)"
+    "Tingle Map Woodfall": "tingle_price(0x01)"
 "Tingle Swamp":
   region: TINGLE
   locations:
-    "Tingle Map Woodfall": "can_use_wallet(1)"
-    "Tingle Map Snowhead": "can_use_wallet(1)"
+    "Tingle Map Woodfall": "tingle_price(0x02)"
+    "Tingle Map Snowhead": "tingle_price(0x03)"
 "Tingle Mountain":
   region: TINGLE
   locations:
-    "Tingle Map Snowhead": "can_use_wallet(1)"
-    "Tingle Map Ranch": "can_use_wallet(1)"
+    "Tingle Map Snowhead": "tingle_price(0x04)"
+    "Tingle Map Ranch": "tingle_price(0x05)"
 "Tingle Ranch":
   region: TINGLE
   locations:
-    "Tingle Map Ranch": "can_use_wallet(1)"
-    "Tingle Map Great Bay": "can_use_wallet(1)"
+    "Tingle Map Ranch": "tingle_price(0x06)"
+    "Tingle Map Great Bay": "tingle_price(0x07)"
 "Tingle Great Bay":
   region: TINGLE
   locations:
-    "Tingle Map Great Bay": "can_use_wallet(1)"
-    "Tingle Map Ikana": "can_use_wallet(1)"
+    "Tingle Map Great Bay": "tingle_price(0x08)"
+    "Tingle Map Ikana": "tingle_price(0x09)"
 "Tingle Ikana":
   region: TINGLE
   locations:
-    "Tingle Map Ikana": "can_use_wallet(1)"
-    "Tingle Map Clock Town": "can_use_wallet(1)"
+    "Tingle Map Ikana": "tingle_price(0x0a)"
+    "Tingle Map Clock Town": "tingle_price(0x0b)"
 "SOARING":
   region: NONE
   exits:

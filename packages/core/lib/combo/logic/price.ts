@@ -60,11 +60,14 @@ const MM_SHOPS_EX = [
   ...MM_SHOP_EX_CURIOSITY,
 ];
 
+const MM_TINGLE = [5, 40, 20, 40, 20, 40, 20, 40, 20, 40, 20, 40];
+
 const PRICES = {
   OOT_SHOPS,
   OOT_SCRUBS,
   MM_SHOPS,
   MM_SHOPS_EX,
+  MM_TINGLE,
   MAX: [],
 } as const;
 
@@ -185,6 +188,7 @@ export class LogicPassPrice {
     this.shufflePrices('OOT_SCRUBS', this.state.settings.priceOotScrubs);
     this.shufflePrices('MM_SHOPS', this.state.settings.priceMmShops);
     this.shufflePrices('MM_SHOPS_EX', this.state.settings.priceMmShops);
+    this.shufflePrices('MM_TINGLE', this.state.settings.priceMmTingle);
 
     return {};
   }

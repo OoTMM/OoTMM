@@ -152,8 +152,8 @@ static void EnBal_DisplayBuyTextBox(GameState_Play* play, u16 messageId, Actor* 
 
     /* Get tingle ID */
     tingleId = EnBal_GetTingleId(play);
-    price1 = tingleId == 0 ? 5 : 20;
-    price2 = 40;
+    price1 = gComboData.prices[PRICES_MM_TINGLE + tingleId * 2 + 0];
+    price2 = gComboData.prices[PRICES_MM_TINGLE + tingleId * 2 + 1];
 
     /* Override */
     b = play->textBuffer;
