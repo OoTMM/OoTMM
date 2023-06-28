@@ -802,7 +802,7 @@ void comboTextHijackDungeonRewardHints(GameState_Play* play, int hint)
     const ItemHint* ih;
     char* b;
 
-    ih = &gComboData.hints.dungeonRewards[hint];
+    ih = &gComboData.hints.dungeonRewards[9 + hint];
     b = play->textBuffer;
     appendBossRewardHeader(&b, 0x55 + hint);
     comboTextAppendRegionName(&b, ih->region, ih->world, TF_PREPOS | TF_CAPITALIZE);
