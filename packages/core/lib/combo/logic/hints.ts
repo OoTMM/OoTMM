@@ -592,47 +592,44 @@ export class LogicPassHints {
     }
   }
 
-  private placeGossips(world: number, foolish: {[k: string]: number}) {
+  private placeGossips(foolish: {[k: string]: number}[]) {
     const settingsHints = this.state.settings.hints;
 
     for (const s of settingsHints) {
-      switch (s.type) {
-      case 'always':
-        this.placeGossipItemExactPool(world, this.hintsAlways, s.amount, s.extra);
-        break;
-      case 'sometimes':
-        this.placeGossipItemExactPool(world, this.hintsSometimes, s.amount, s.extra);
-        break;
-      case 'foolish':
-        this.placeGossipFoolish(world, foolish, s.amount, s.extra);
-        break;
-      case 'item':
-        this.placeGossipItemName(world, s.item!, s.amount, s.extra);
-        break;
-      case 'playthrough':
-        this.placeGossipItemRegionSpheres(world, s.amount, s.extra);
-        break;
-      case 'woth':
-        this.placeGossipHero(world, s.amount, s.extra);
-        break;
-      case 'junk':
-        this.placeGossipJunk(world, s.amount, s.extra, false);
-        break;
+      for (let world = 0; world < this.state.settings.players; ++world) {
+        switch (s.type) {
+        case 'always':
+          this.placeGossipItemExactPool(world, this.hintsAlways, s.amount, s.extra);
+          break;
+        case 'sometimes':
+          this.placeGossipItemExactPool(world, this.hintsSometimes, s.amount, s.extra);
+          break;
+        case 'foolish':
+          this.placeGossipFoolish(world, foolish[world], s.amount, s.extra);
+          break;
+        case 'item':
+          this.placeGossipItemName(world, s.item!, s.amount, s.extra);
+          break;
+        case 'playthrough':
+          this.placeGossipItemRegionSpheres(world, s.amount, s.extra);
+          break;
+        case 'woth':
+          this.placeGossipHero(world, s.amount, s.extra);
+          break;
+        case 'junk':
+          this.placeGossipJunk(world, s.amount, s.extra, false);
+          break;
+        }
       }
     }
 
     /* Place moon hints */
-    this.placeMoonGossip(world);
+    for (let world = 0; world < this.state.settings.players; ++world)
+      this.placeMoonGossip(world);
 
     /* Fill with junk hints */
-    this.placeGossipJunk(world, 'max', 0, true);
-  }
-
-  private locRegion(loc: string | null) {
-    if (loc === null) {
-      return 'NONE';
-    }
-    return this.state.world.regions[loc];
+    for (let world = 0; world < this.state.settings.players; ++world)
+      this.placeGossipJunk(world, 'max', 0, true);
   }
 
   markLocation(location: Location | null) {
@@ -640,17 +637,6 @@ export class LogicPassHints {
       return;
     }
     this.hintedLocations.add(location);
-  }
-
-  private makeHints(world: number, foolish: {[k: string]: number}, ih: WorldItemHints): WorldHints {
-    /* Place hints on gossip stones */
-    this.placeGossips(world, foolish);
-
-    return {
-      ...ih,
-      foolish,
-      gossip: { ...this.gossip[world] },
-    };
   }
 
   run() {
@@ -688,9 +674,12 @@ export class LogicPassHints {
     }
 
     /* Place hints */
+    this.placeGossips(worldFoolish);
+
+    /* Make hints */
     const hints: Hints = [];
     for (let world = 0; world < this.state.settings.players; ++world) {
-      hints.push(this.makeHints(world, worldFoolish[world], worldItemHints[world]));
+      hints.push({ foolish: worldFoolish[world], ...worldItemHints[world], gossip: { ...this.gossip[world] }});
     }
 
     return { hints };
