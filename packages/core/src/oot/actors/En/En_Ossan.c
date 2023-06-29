@@ -21,7 +21,7 @@ static void EnOssan_GiveItem(Actor_EnOssan* this, GameState_Play* play, s16 gi, 
     Actor_EnGirlA* girlA;
 
     girlA = this->items[this->itemIndex];
-    EnGirlA_ItemQuery(&q, girlA, OVF_PROGRESSIVE);
+    EnGirlA_ItemQuery(&q, girlA);
     comboGiveItem(&this->base, play, &q, a, b);
 }
 

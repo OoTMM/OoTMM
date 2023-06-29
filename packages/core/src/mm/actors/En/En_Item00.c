@@ -1,7 +1,7 @@
 #include <combo.h>
 #include <combo/item.h>
 
-static void EnItem00_ItemQuery(ComboItemQuery* q, Actor_EnItem00* this, GameState_Play* play, s16 gi, int flags)
+static void EnItem00_ItemQuery(ComboItemQuery* q, Actor_EnItem00* this, GameState_Play* play, s16 gi)
 {
     memset(q, 0, sizeof(*q));
 
@@ -11,7 +11,6 @@ static void EnItem00_ItemQuery(ComboItemQuery* q, Actor_EnItem00* this, GameStat
         q->sceneId = play->sceneId;
         q->id = this->collectibleFlag;
         q->gi = gi;
-        q->ovFlags = flags;
     }
     else
     {
@@ -26,7 +25,7 @@ void EnItem00_GiveItem(Actor_EnItem00* this, GameState_Play* play, s16 gi, float
     Actor_Player* link;
     s16 itemId;
 
-    EnItem00_ItemQuery(&q, this, play, gi, OVF_PROGRESSIVE | OVF_DOWNGRADE);
+    EnItem00_ItemQuery(&q, this, play, gi);
     link = GET_LINK(play);
     itemId = -1;
 
@@ -57,7 +56,7 @@ void EnItem00_DrawHeartPiece(Actor_EnItem00* this, GameState_Play* play)
     ComboItemQuery q;
     ComboItemOverride o;
 
-    EnItem00_ItemQuery(&q, this, play, GI_OOT_HEART_PIECE, OVF_PROGRESSIVE);
+    EnItem00_ItemQuery(&q, this, play, GI_OOT_HEART_PIECE);
     comboItemOverride(&o, &q);
     ModelViewScale(scale, scale, scale, MAT_MUL);
     comboDrawGI(play, &this->base, o.gi, 0);

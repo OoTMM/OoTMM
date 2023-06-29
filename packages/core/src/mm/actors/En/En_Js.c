@@ -1,7 +1,7 @@
 #include <combo.h>
 #include <combo/item.h>
 
-static void EnJs_ItemQuery(ComboItemQuery* q, int flags)
+static void EnJs_ItemQuery(ComboItemQuery* q)
 {
     bzero(q, sizeof(*q));
 
@@ -10,13 +10,11 @@ static void EnJs_ItemQuery(ComboItemQuery* q, int flags)
         q->ovType = OV_NPC;
         q->gi = GI_MM_MASK_FIERCE_DEITY;
         q->id = NPC_MM_MASK_FIERCE_DEITY;
-        q->ovFlags = flags;
     }
     else
     {
         q->ovType = OV_NONE;
         q->gi = GI_MM_RECOVERY_HEART;
-        q->ovFlags = flags;
     }
 }
 
@@ -51,7 +49,7 @@ void EnJs_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
 {
     ComboItemQuery q;
 
-    EnJs_ItemQuery(&q, OVF_PROGRESSIVE | OVF_DOWNGRADE);
+    EnJs_ItemQuery(&q);
     comboGiveItem(this, play, &q, a, b);
 }
 
@@ -64,7 +62,7 @@ static void EnJs_DisplayHint(GameState_Play* play, s16 messageId)
     char* start;
 
     /* Hint */
-    EnJs_ItemQuery(&q, 0);
+    EnJs_ItemQuery(&q);
     DisplayTextBox2(play, messageId);
     b = play->textBuffer;
     comboTextAppendHeader(&b);

@@ -229,8 +229,6 @@ NORETURN void comboGameSwitch(GameState_Play* play, s32 entrance);
 #define OV_SHOP         6
 #define OV_SCRUB        7
 
-#define OVF_PROGRESSIVE       (1 << 0)
-#define OVF_DOWNGRADE         (1 << 1)
 #define OVF_RENEW             (1 << 2)
 #define OVF_PRECOND           (1 << 3)
 
@@ -252,7 +250,6 @@ void comboTextHijackOathToOrder(GameState_Play* play);
 s32 comboProgressive(s32 gi);
 s32 comboProgressiveOot(s32 gi);
 s32 comboProgressiveMm(s32 gi);
-s16 comboDowngrade(s16 gi);
 
 /* Objects */
 void    comboObjectsReset(void);

@@ -6,11 +6,9 @@ void EnGo_AfterGivingItem(Actor* actor)
     gMmExtraFlags.powderKeg = 1;
 }
 
-static void EnGo_ItemQuery(ComboItemQuery* q, int flags)
+static void EnGo_ItemQuery(ComboItemQuery* q)
 {
     bzero(q, sizeof(*q));
-
-    q->ovFlags = flags;
     if (!gMmExtraFlags.powderKeg)
     {
         q->ovType = OV_NPC;
@@ -28,7 +26,7 @@ void EnGo_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
 {
     ComboItemQuery q;
 
-    EnGo_ItemQuery(&q, OVF_PROGRESSIVE | OVF_DOWNGRADE);
+    EnGo_ItemQuery(&q);
     comboGiveItem(this, play, &q, a, b);
 }
 
@@ -38,7 +36,7 @@ static void powderKegHint(GameState_Play* play)
     char* b;
     char* start;
 
-    EnGo_ItemQuery(&q, 0);
+    EnGo_ItemQuery(&q);
     b = play->textBuffer;
     comboTextAppendHeader(&b);
     start = b;

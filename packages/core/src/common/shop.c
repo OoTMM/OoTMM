@@ -16,7 +16,7 @@ int comboShopPrecond(GameState_Play* play, Actor_EnGirlA* girlA)
 {
     ComboItemQuery q;
 
-    EnGirlA_ItemQuery(&q, girlA, 0);
+    EnGirlA_ItemQuery(&q, girlA);
     return comboItemPrecondEx(&q, girlA->price);
 }
 
@@ -30,7 +30,7 @@ static void quickBuyItem(GameState_Play* play, Actor_EnGirlA* girlA)
 {
     ComboItemQuery q;
 
-    EnGirlA_ItemQuery(&q, girlA, OVF_PROGRESSIVE);
+    EnGirlA_ItemQuery(&q, girlA);
     comboAddItemEx(play, &q);
     AddRupees(-girlA->price);
 }
@@ -44,7 +44,7 @@ void comboShopUpdateItem(GameState_Play* play, Actor_EnGirlA* girlA)
 {
     ComboItemOverride o;
 
-    EnGirlA_ItemOverride(&o, girlA, OVF_PROGRESSIVE);
+    EnGirlA_ItemOverride(&o, girlA);
     if (o.gi == SOLD_OUT)
         girlA->disabled = 1;
 
@@ -75,7 +75,7 @@ void comboShopDisplayTextBox(GameState_Play* play, Actor_EnGirlA* girlA)
 {
     ComboItemOverride o;
 
-    EnGirlA_ItemOverride(&o, girlA, OVF_PROGRESSIVE);
+    EnGirlA_ItemOverride(&o, girlA);
     DisplayTextBox2(play, girlA->base.messageId);
     if (o.gi == SOLD_OUT)
     {
@@ -88,7 +88,7 @@ void comboShopDisplayTextBoxConfirm(GameState_Play* play, Actor_EnGirlA* girlA)
 {
     ComboItemOverride o;
 
-    EnGirlA_ItemOverride(&o, girlA, OVF_PROGRESSIVE);
+    EnGirlA_ItemOverride(&o, girlA);
     DisplayTextBox2(play, girlA->messageId2);
     comboTextHijackItemShop(play, &o, girlA->price, 1);
 }

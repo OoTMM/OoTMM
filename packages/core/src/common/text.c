@@ -614,7 +614,13 @@ void comboTextAppendItemNameQuery(char** b, const ComboItemQuery* q, int flags)
 
 void comboTextAppendItemNameOverride(char** b, const ComboItemOverride* o, int flags)
 {
-    comboTextAppendItemName(b, o->gi, flags);
+    s16 gi;
+
+    if (flags & TF_PROGRESSIVE)
+        gi = o->giRaw;
+    else
+        gi = o->gi;
+    comboTextAppendItemName(b, gi, flags);
     if (o->player != PLAYER_SELF && o->player != PLAYER_ALL && o->player != gComboData.playerId)
     {
         comboTextAppendStr(b, " for " TEXT_COLOR_YELLOW "Player ");

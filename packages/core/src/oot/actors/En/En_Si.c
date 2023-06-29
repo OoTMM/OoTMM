@@ -1,7 +1,7 @@
 #include <combo.h>
 #include <combo/item.h>
 
-static void EnSi_ItemQuery(ComboItemQuery* q, Actor* this, int flags)
+static void EnSi_ItemQuery(ComboItemQuery* q, Actor* this)
 {
     u16 key;
 
@@ -25,14 +25,13 @@ static void EnSi_ItemQuery(ComboItemQuery* q, Actor* this, int flags)
     q->ovType = OV_GS;
     q->id = key;
     q->gi = GI_OOT_GS_TOKEN;
-    q->ovFlags = flags;
 }
 
-static void EnSi_ItemOverride(ComboItemOverride* o, Actor* this, int flags)
+static void EnSi_ItemOverride(ComboItemOverride* o, Actor* this)
 {
     ComboItemQuery q;
 
-    EnSi_ItemQuery(&q, this, flags);
+    EnSi_ItemQuery(&q, this);
     comboItemOverride(o, &q);
 }
 
@@ -40,7 +39,7 @@ void EnSi_Draw(Actor* this, GameState_Play* play)
 {
     ComboItemOverride o;
 
-    EnSi_ItemOverride(&o, this, OVF_PROGRESSIVE);
+    EnSi_ItemOverride(&o, this);
     comboDrawGI(play, this, o.gi, 0);
 }
 
@@ -50,7 +49,7 @@ void EnSi_GiveItem(GameState_Play* play, Actor* this)
 {
     ComboItemQuery q;
 
-    EnSi_ItemQuery(&q, this, OVF_PROGRESSIVE | OVF_DOWNGRADE);
+    EnSi_ItemQuery(&q, this);
     PlayerDisplayTextBox(play, 0xb4, NULL);
     comboAddItemEx(play, &q);
 }

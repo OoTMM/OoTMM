@@ -1,21 +1,20 @@
 #include <combo.h>
 #include <combo/item.h>
 
-static void DemoEffect_SapphireItemQuery(ComboItemQuery* q, int flags)
+static void DemoEffect_SapphireItemQuery(ComboItemQuery* q)
 {
     bzero(q, sizeof(*q));
 
     q->ovType = OV_NPC;
     q->gi = GI_OOT_STONE_SAPPHIRE;
     q->id = NPC_OOT_BLUE_WARP_BARINADE;
-    q->ovFlags = flags;
 }
 
-static void DemoEffect_SapphireItemOverride(ComboItemOverride* o, int flags)
+static void DemoEffect_SapphireItemOverride(ComboItemOverride* o)
 {
     ComboItemQuery q;
 
-    DemoEffect_SapphireItemQuery(&q, flags);
+    DemoEffect_SapphireItemQuery(&q);
     comboItemOverride(o, &q);
 }
 
@@ -25,7 +24,7 @@ void DemoEffect_TextRutoSapphire(GameState_Play* play)
     char* b;
     char* start;
 
-    DemoEffect_SapphireItemQuery(&q, OVF_PROGRESSIVE);
+    DemoEffect_SapphireItemQuery(&q);
     b = play->msgCtx.textBuffer;
     comboTextAppendHeader(&b);
     start = b;
@@ -41,7 +40,7 @@ static void DemoEffect_DrawSapphireInJabu(Actor* this, GameState_Play* play)
     static const int kRotDivisor = 100;
     float angle;
 
-    DemoEffect_SapphireItemOverride(&o, OVF_PROGRESSIVE);
+    DemoEffect_SapphireItemOverride(&o);
     angle = (play->gs.frameCount % kRotDivisor) * (1.f / kRotDivisor) * M_PI * 2.f;
 
     ModelViewTranslate(this->position.x, this->position.y, this->position.z, MAT_SET);

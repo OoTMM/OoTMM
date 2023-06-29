@@ -44,7 +44,7 @@ static const BlueWarpData* DoorWarp1_GetData(Actor* this, GameState_Play* play)
     return &kBlueWarpData[id];
 }
 
-static s16 DoorWarp1_GetGI(const BlueWarpData* data, int flags)
+static s16 DoorWarp1_GetGI(const BlueWarpData* data)
 {
     ComboItemQuery q = ITEM_QUERY_INIT;
     ComboItemOverride o;
@@ -52,7 +52,6 @@ static s16 DoorWarp1_GetGI(const BlueWarpData* data, int flags)
     q.ovType = OV_NPC;
     q.gi = data->gi;
     q.id = data->npc;
-    q.ovFlags = flags;
 
     comboItemOverride(&o, &q);
     return o.gi;
@@ -147,7 +146,7 @@ void DoorWarp1_AfterDraw(Actor* this, GameState_Play* play)
         return;
     if (gMmExtraBoss.items & (1 << data->index))
         return;
-    gi = DoorWarp1_GetGI(data, OVF_PROGRESSIVE);
+    gi = DoorWarp1_GetGI(data);
 
     angle = (play->gs.frameCount % kRotDivisor) * (1.f / kRotDivisor) * M_PI * 2.f;
     ModelViewTranslate(this->position.x, this->position.y + 35.f, this->position.z, MAT_SET);

@@ -3,14 +3,13 @@
 
 #define SET_HANDLER(a, h) do { *(void**)(((char*)(a)) + 0x280) = (h); } while (0)
 
-static void EnMk_ItemQuery(ComboItemQuery* q, int flags)
+static void EnMk_ItemQuery(ComboItemQuery* q)
 {
     bzero(q, sizeof(*q));
 
     q->ovType = OV_NPC;
     q->gi = GI_MM_SONG_ZORA;
     q->id = NPC_MM_SONG_ZORA;
-    q->ovFlags = flags;
 }
 
 void EnMk_HandlerNull(Actor* this, GameState_Play* play)
@@ -27,7 +26,7 @@ void EnMk_HandlerZoraEggs(Actor* this, GameState_Play* play)
         return;
     }
 
-    EnMk_ItemQuery(&q, OVF_PROGRESSIVE | OVF_DOWNGRADE);
+    EnMk_ItemQuery(&q);
     comboGiveItem(this, play, &q, 10000.f, 10000.f);
 }
 
@@ -39,7 +38,7 @@ static void hintZoraEggs(GameState_Play* play)
     char* b;
     char* start;
 
-    EnMk_ItemQuery(&q, 0);
+    EnMk_ItemQuery(&q);
     b = play->textBuffer;
     comboTextAppendHeader(&b);
     start = b;

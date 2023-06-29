@@ -28,21 +28,20 @@ void EnSi_WaitForPlayerToCloseMessage(Actor* this, GameState_Play* play) {
     }
 }
 
-static void EnSi_ItemQuery(ComboItemQuery* q, Actor* this, GameState_Play* play, int flags)
+static void EnSi_ItemQuery(ComboItemQuery* q, Actor* this, GameState_Play* play)
 {
     bzero(q, sizeof(*q));
     q->ovType = OV_CHEST;
     q->sceneId = play->sceneId;
     q->id = (this->variable & 0xfc) >> 2;
     q->gi = play->sceneId == SCE_MM_SPIDER_HOUSE_OCEAN ? GI_MM_GS_TOKEN_OCEAN : GI_MM_GS_TOKEN_SWAMP;
-    q->ovFlags = flags;
 }
 
-static void EnSi_ItemOverride(ComboItemOverride* o, Actor* this, GameState_Play* play, int flags)
+static void EnSi_ItemOverride(ComboItemOverride* o, Actor* this, GameState_Play* play)
 {
     ComboItemQuery q;
 
-    EnSi_ItemQuery(&q, this, play, flags);
+    EnSi_ItemQuery(&q, this, play);
     comboItemOverride(o, &q);
 }
 
@@ -50,7 +49,7 @@ void EnSi_AddItem(Actor* this, GameState_Play* play)
 {
     ComboItemQuery q;
 
-    EnSi_ItemQuery(&q, this, play, OVF_PROGRESSIVE | OVF_DOWNGRADE);
+    EnSi_ItemQuery(&q, this, play);
     SetChestFlag(play, (this->variable & 0xfc) >> 2);
     PlayerDisplayTextBox(play, 0x52, NULL);
     comboAddItemEx(play, &q);
@@ -66,7 +65,7 @@ void EnSi_Draw(Actor* this, GameState_Play* play)
 {
     ComboItemOverride o;
 
-    EnSi_ItemOverride(&o, this, play, OVF_PROGRESSIVE);
+    EnSi_ItemOverride(&o, this, play);
     comboDrawGI(play, this, o.gi, 0);
 }
 

@@ -1,13 +1,11 @@
 #include <combo.h>
 #include <combo/item.h>
 
-static void ItemEtcetera_ItemQuery(ComboItemQuery* q, Actor* this, s16 gi, int flags)
+static void ItemEtcetera_ItemQuery(ComboItemQuery* q, Actor* this, s16 gi)
 {
     bzero(q, sizeof(ComboItemQuery));
 
     q->gi = gi;
-    q->ovFlags = flags;
-
     switch (this->variable & 0xff)
     {
     case 0x1:
@@ -45,7 +43,7 @@ void ItemEtcetera_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, f
 {
     ComboItemQuery q;
 
-    ItemEtcetera_ItemQuery(&q, this, gi, OVF_PROGRESSIVE | OVF_DOWNGRADE);
+    ItemEtcetera_ItemQuery(&q, this, gi);
     comboGiveItem(this, play, &q, a, b);
 }
 
@@ -57,7 +55,7 @@ void ItemEtcetera_Draw(Actor_ItemEtcetera* this, GameState_Play* play)
     ComboItemQuery q;
     ComboItemOverride o;
 
-    ItemEtcetera_ItemQuery(&q, &this->base, this->gi, OVF_PROGRESSIVE);
+    ItemEtcetera_ItemQuery(&q, &this->base, this->gi);
     comboItemOverride(&o, &q);
     comboDrawGI(play, &this->base, o.gi, 0);
 }
@@ -98,7 +96,7 @@ void ItemEtcetera_DrawTreasureGame(Actor_ItemEtcetera* this, GameState_Play* pla
         break;
     }
 
-    ItemEtcetera_ItemQuery(&q, &this->base, gi, OVF_PROGRESSIVE);
+    ItemEtcetera_ItemQuery(&q, &this->base, gi);
     comboItemOverride(&o, &q);
     comboDrawGI(play, &this->base, o.gi, 0);
 }

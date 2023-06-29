@@ -1,10 +1,9 @@
 #include <combo.h>
 #include <combo/item.h>
 
-void EnExItem_RewardByIndex(ComboItemQuery* q, int index, int flags)
+void EnExItem_RewardByIndex(ComboItemQuery* q, int index)
 {
     memset(q, 0, sizeof(*q));
-    q->ovFlags = flags;
 
     switch (index)
     {
@@ -64,9 +63,9 @@ void EnExItem_RewardByIndex(ComboItemQuery* q, int index, int flags)
     }
 }
 
-void EnExItem_Reward(ComboItemQuery* q, const Actor* actor, int flags)
+void EnExItem_Reward(ComboItemQuery* q, const Actor* actor)
 {
-    EnExItem_RewardByIndex(q, actor->variable & 0x1f, flags);
+    EnExItem_RewardByIndex(q, actor->variable & 0x1f);
 }
 
 void EnExItem_Draw(Actor* actor, GameState_Play* play)
@@ -75,7 +74,7 @@ void EnExItem_Draw(Actor* actor, GameState_Play* play)
     ComboItemOverride o;
     float scale;
 
-    EnExItem_Reward(&q, actor, OVF_PROGRESSIVE);
+    EnExItem_Reward(&q, actor);
     comboItemOverride(&o, &q);
     scale = *(float*)(((char*)actor) + 0x154);
     ActorSetScale(actor, scale);
@@ -86,7 +85,7 @@ void EnExItem_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, floa
 {
     ComboItemQuery q;
 
-    EnExItem_Reward(&q, actor, OVF_DOWNGRADE | OVF_PROGRESSIVE);
+    EnExItem_Reward(&q, actor);
     comboGiveItem(actor, play, &q, a, b);
 }
 

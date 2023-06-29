@@ -71,115 +71,6 @@ int comboAddItemNoEffect(s16 gi)
     return -1;
 }
 
-static int isItemUnavailableOot(s32 gi)
-{
-    switch (gi)
-    {
-    case GI_OOT_BOMB:
-    case GI_OOT_BOMBS_5:
-    case GI_OOT_BOMBS_10:
-    case GI_OOT_BOMBS_20:
-    case GI_OOT_BOMBS_30:
-        return gOotSave.inventory.upgrades.bombBag == 0;
-    case GI_OOT_ARROWS_5:
-    case GI_OOT_ARROWS_10:
-    case GI_OOT_ARROWS_30:
-        return gOotSave.inventory.upgrades.quiver == 0;
-    case GI_OOT_DEKU_SEEDS_5:
-    case GI_OOT_DEKU_SEEDS_30:
-        return gOotSave.inventory.upgrades.bulletBag == 0;
-    default:
-        return 0;
-    }
-}
-
-static int isItemUnavailableMm(s32 gi)
-{
-    switch (gi)
-    {
-    case GI_MM_BOMB:
-    case GI_MM_BOMBS_5:
-    case GI_MM_BOMBS_10:
-    case GI_MM_BOMBS_20:
-    case GI_MM_BOMBS_30:
-    case GI_MM_BOMBCHU:
-    case GI_MM_BOMBCHU_5:
-    case GI_MM_BOMBCHU_10:
-    case GI_MM_BOMBCHU_20:
-        return gMmSave.inventory.upgrades.bombBag == 0;
-    case GI_MM_ARROWS_10:
-    case GI_MM_ARROWS_30:
-    case GI_MM_ARROWS_40:
-        return gMmSave.inventory.upgrades.quiver == 0;
-    default:
-        return 0;
-    }
-}
-
-int comboIsItemUnavailable(s16 gi)
-{
-#if defined(GAME_MM)
-    gi ^= MASK_FOREIGN_GI;
-#endif
-    if (gi & MASK_FOREIGN_GI)
-        return isItemUnavailableMm(gi & ~MASK_FOREIGN_GI);
-    else
-        return isItemUnavailableOot(gi);
-}
-
-static int isItemMinorOot(s16 gi)
-{
-    switch (gi)
-    {
-    case GI_OOT_BOMB:
-    case GI_OOT_BOMBS_5:
-    case GI_OOT_BOMBS_10:
-    case GI_OOT_BOMBS_20:
-    case GI_OOT_BOMBS_30:
-    case GI_OOT_ARROWS_5:
-    case GI_OOT_ARROWS_10:
-    case GI_OOT_ARROWS_30:
-    case GI_OOT_DEKU_SEEDS_5:
-    case GI_OOT_DEKU_SEEDS_30:
-        return 1;
-    default:
-        return 0;
-    }
-}
-
-static int isItemMinorMm(s16 gi)
-{
-    switch (gi)
-    {
-    case GI_MM_BOMB:
-    case GI_MM_BOMBS_5:
-    case GI_MM_BOMBS_10:
-    case GI_MM_BOMBS_20:
-    case GI_MM_BOMBS_30:
-    case GI_MM_BOMBCHU:
-    case GI_MM_BOMBCHU_5:
-    case GI_MM_BOMBCHU_10:
-    case GI_MM_BOMBCHU_20:
-    case GI_MM_ARROWS_10:
-    case GI_MM_ARROWS_30:
-    case GI_MM_ARROWS_40:
-        return 1;
-    default:
-        return 0;
-    }
-}
-
-int comboIsItemMinor(s16 gi)
-{
-#if defined(GAME_MM)
-    gi ^= MASK_FOREIGN_GI;
-#endif
-    if (gi & MASK_FOREIGN_GI)
-        return isItemMinorMm(gi & ~MASK_FOREIGN_GI);
-    else
-        return isItemMinorOot(gi);
-}
-
 void comboSyncItems(void)
 {
     if (comboConfig(CFG_SHARED_BOWS))
@@ -208,54 +99,19 @@ void comboSyncItems(void)
     }
 }
 
-static int isItemBuyableOot(s16 gi)
-{
-    switch (gi)
-    {
-    case GI_OOT_BOMBCHU_5:
-    case GI_OOT_BOMBCHU_10:
-    case GI_OOT_BOMBCHU_20:
-        if (gOotSave.inventory.upgrades.bombBag == 0 && gOotSave.inventory.items[ITS_OOT_BOMBCHU] != ITEM_OOT_BOMBCHU_10)
-            return 0;
-        break;
-    }
-    return 1;
-}
-
-static int isItemBuyableMm(s16 gi)
-{
-    switch (gi)
-    {
-    case GI_MM_MAGIC_BEAN:
-        return (gMmSave.inventory.items[ITS_MM_BEANS] == ITEM_MM_MAGIC_BEAN);
-    }
-    return 1;
-}
-
-static int isItemBuyable(s16 gi)
-{
-#if defined(GAME_MM)
-    gi ^= MASK_FOREIGN_GI;
-#endif
-
-    if (gi & MASK_FOREIGN_GI)
-        return isItemBuyableMm(gi ^ MASK_FOREIGN_GI);
-    else
-        return isItemBuyableOot(gi);
-}
-
 int comboItemPrecondEx(const ComboItemQuery* q, s16 price)
 {
     ComboItemOverride o;
 
+    comboSyncItems();
     comboItemOverride(&o, q);
-    if (isPlayerSelf(o.player) && (comboIsItemUnavailable(o.gi) || !isItemBuyable(o.gi)))
+    if (isPlayerSelf(o.player) && (!isItemBuyable(o.gi) || !isItemLicensed(o.gi)))
         return SC_ERR_CANNOTBUY;
 
     if (gSave.playerData.rupees < price)
         return SC_ERR_NORUPEES;
 
-    if (comboIsItemMinor(o.gi))
+    if (isItemFastBuy(o.gi))
         return SC_OK_NOCUTSCENE;
 
     return SC_OK;
@@ -285,7 +141,7 @@ void comboGiveItem(Actor* actor, GameState_Play* play, const ComboItemQuery* q, 
 
 void comboGiveItemNpc(Actor* actor, GameState_Play* play, s16 gi, int npc, float a, float b)
 {
-    comboGiveItemNpcEx(actor, play, gi, npc, OVF_DOWNGRADE | OVF_PROGRESSIVE, a, b);
+    comboGiveItemNpcEx(actor, play, gi, npc, 0, a, b);
 }
 
 void comboGiveItemNpcEx(Actor* actor, GameState_Play* play, s16 gi, int npc, int flags, float a, float b)
@@ -424,17 +280,15 @@ void comboItemOverride(ComboItemOverride* dst, const ComboItemQuery* q)
         gi = (s16)data->value;
     }
 
-    if (isPlayerSelf(dst->player))
-    {
-        if (q->ovFlags & OVF_PROGRESSIVE)
-            gi = comboProgressive(gi);
-
-        if (q->ovFlags & OVF_DOWNGRADE)
-            gi = comboDowngrade(gi);
-    }
-
     if (q->ovFlags & OVF_RENEW)
         gi = comboRenewable(gi, q->giRenew);
+
+    dst->giRaw = gi;
+
+    if (isPlayerSelf(dst->player))
+    {
+        gi = comboProgressive(gi);
+    }
 
     if (neg)
         gi = -gi;

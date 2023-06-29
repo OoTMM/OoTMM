@@ -48,7 +48,6 @@ int CustomTriggers_GiveItemNpc(Actor_CustomTriggers* this, GameState_Play* play,
     q.ovType = OV_NPC;
     q.gi = gi;
     q.id = npc;
-    q.ovFlags = OVF_PROGRESSIVE | OVF_DOWNGRADE;
 
     return CustomTriggers_GiveItem(this, play, &q);
 }
@@ -56,37 +55,22 @@ int CustomTriggers_GiveItemNpc(Actor_CustomTriggers* this, GameState_Play* play,
 int CustomTriggers_GiveItemDirect(Actor_CustomTriggers* this, GameState_Play* play, s16 gi)
 {
     ComboItemQuery q = ITEM_QUERY_INIT;
-
     q.gi = gi;
-    q.ovFlags = OVF_PROGRESSIVE | OVF_DOWNGRADE;
-
     return CustomTriggers_GiveItem(this, play, &q);
 }
 
 int CustomTriggers_GiveItemNet(Actor_CustomTriggers* this, GameState_Play* play, s16 gi, u8 from, int flags)
 {
     ComboItemQuery q = ITEM_QUERY_INIT;
-    int ret;
 
     q.gi = gi;
-    q.ovFlags = OVF_PROGRESSIVE | OVF_DOWNGRADE;
     q.from = from;
 
-    if (flags & OVF_PRECOND)
+    if ((flags & OVF_PRECOND) && (!isItemLicensed(gi)))
     {
-        q.ovFlags &= ~OVF_DOWNGRADE;
-        ret = comboItemPrecondEx(&q, 0);
-        switch (ret)
-        {
-        case SC_OK:
-        case SC_OK_NOCUTSCENE:
-            break;
-        default:
-            bzero(&q, sizeof(q));
-            q.ovType = OV_NONE;
-            q.gi = RECOVERY_HEART;
-            break;
-        }
+        bzero(&q, sizeof(q));
+        q.ovType = OV_NONE;
+        q.gi = RECOVERY_HEART;
     }
 
     return CustomTriggers_GiveItem(this, play, &q);

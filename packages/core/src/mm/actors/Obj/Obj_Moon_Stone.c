@@ -1,7 +1,7 @@
 #include <combo.h>
 #include <combo/item.h>
 
-static void ObjMoonStone_ItemQuery(ComboItemQuery* q, GameState_Play* play, int flags)
+static void ObjMoonStone_ItemQuery(ComboItemQuery* q, GameState_Play* play)
 {
     memset(q, 0, sizeof(*q));
 
@@ -15,7 +15,6 @@ static void ObjMoonStone_ItemQuery(ComboItemQuery* q, GameState_Play* play, int 
     q->ovType = OV_NPC;
     q->id = NPC_MM_MOON_TEAR;
     q->gi = GI_MM_MOON_TEAR;
-    q->ovFlags = flags;
 }
 
 void ObjMoonStone_Draw(Actor* this, GameState_Play* play)
@@ -23,7 +22,7 @@ void ObjMoonStone_Draw(Actor* this, GameState_Play* play)
     ComboItemQuery q;
     ComboItemOverride o;
 
-    ObjMoonStone_ItemQuery(&q, play, OVF_PROGRESSIVE);
+    ObjMoonStone_ItemQuery(&q, play);
     comboItemOverride(&o, &q);
     comboDrawGI(play, this, o.gi, 0);
 }
@@ -46,7 +45,7 @@ void ObjMoonStone_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, f
 {
     ComboItemQuery q;
 
-    ObjMoonStone_ItemQuery(&q, play, OVF_PROGRESSIVE | OVF_DOWNGRADE);
+    ObjMoonStone_ItemQuery(&q, play);
     comboGiveItem(this, play, &q, a, b);
 }
 

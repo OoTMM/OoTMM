@@ -84,13 +84,12 @@ int DoorWarp1_Collide(Actor* this, GameState_Play* play)
     return 0;
 }
 
-static s16 DoorWarp1_GetGI(const BlueWarpData* data, int flags)
+static s16 DoorWarp1_GetGI(const BlueWarpData* data)
 {
     ComboItemQuery q = ITEM_QUERY_INIT;
     ComboItemOverride o;
 
     q.ovType = OV_NPC;
-    q.ovFlags = flags;
     q.id = data->npc;
     q.gi = data->gi;
 
@@ -141,7 +140,7 @@ void DoorWarp1_AfterDrawWarp(Actor* this, GameState_Play* play)
         return;
 
     angle = (play->gs.frameCount % kRotDivisor) * (1.f / kRotDivisor) * M_PI * 2.f;
-    gi = DoorWarp1_GetGI(data, OVF_PROGRESSIVE);
+    gi = DoorWarp1_GetGI(data);
 
     ModelViewTranslate(this->position.x, this->position.y + 35.f, this->position.z, MAT_SET);
     ModelViewScale(0.35f, 0.35f, 0.35f, MAT_MUL);

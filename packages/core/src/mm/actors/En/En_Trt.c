@@ -40,7 +40,7 @@ static void EnTrt_GiveItem(Actor_EnTrt* this, GameState_Play* play, s16 gi, floa
     Actor_EnGirlA* girlA;
 
     girlA = this->items[this->itemIndex];
-    EnGirlA_ItemQuery(&q, girlA, OVF_PROGRESSIVE);
+    EnGirlA_ItemQuery(&q, girlA);
     comboGiveItem(&this->base, play, &q, a, b);
 }
 

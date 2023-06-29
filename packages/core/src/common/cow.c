@@ -105,7 +105,6 @@ static void EnCow_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, f
     {
         sCowID = id;
         q.ovType = OV_COW;
-        q.ovFlags = OVF_PROGRESSIVE | OVF_DOWNGRADE;
         q.id = id;
         q.giRenew = RECOVERY_HEART;
         if (gCowFlags & (1 << id))

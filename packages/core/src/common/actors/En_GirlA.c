@@ -9,13 +9,13 @@
 
 int shopReadFlag(int);
 
-void EnGirlA_ItemQuery(ComboItemQuery* q, Actor_EnGirlA* girlA, int flags)
+void EnGirlA_ItemQuery(ComboItemQuery* q, Actor_EnGirlA* girlA)
 {
     bzero(q, sizeof(*q));
 
     q->ovType = OV_SHOP;
     q->id = girlA->shopId;
-    q->ovFlags = flags | OVF_PRECOND;
+    q->ovFlags = OVF_PRECOND;
     q->gi = girlA->gi;
     q->giRenew = SOLD_OUT;
 
@@ -38,10 +38,10 @@ void EnGirlA_ItemQuery(ComboItemQuery* q, Actor_EnGirlA* girlA, int flags)
     }
 }
 
-void EnGirlA_ItemOverride(ComboItemOverride* o, Actor_EnGirlA* girlA, int flags)
+void EnGirlA_ItemOverride(ComboItemOverride* o, Actor_EnGirlA* girlA)
 {
     ComboItemQuery q;
 
-    EnGirlA_ItemQuery(&q, girlA, flags);
+    EnGirlA_ItemQuery(&q, girlA);
     comboItemOverride(o, &q);
 }

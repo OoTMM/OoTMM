@@ -1,12 +1,11 @@
 #include <combo.h>
 #include <combo/item.h>
 
-static void EnBox_ItemQuery(ComboItemQuery* q, Actor* this, GameState_Play* play, s16 gi, int flags)
+static void EnBox_ItemQuery(ComboItemQuery* q, Actor* this, GameState_Play* play, s16 gi)
 {
     memset(q, 0, sizeof(*q));
 
     q->gi = gi;
-    q->ovFlags = flags;
     if (play->sceneId == SCE_MM_TREASURE_SHOP && gi == -GI_MM_HEART_PIECE)
     {
         q->ovType = OV_NPC;
@@ -20,12 +19,12 @@ static void EnBox_ItemQuery(ComboItemQuery* q, Actor* this, GameState_Play* play
     }
 }
 
-static s16 EnBox_Item(Actor* this, GameState_Play* play, s16 gi, int flags)
+static s16 EnBox_Item(Actor* this, GameState_Play* play, s16 gi)
 {
     ComboItemQuery q;
     ComboItemOverride ov;
 
-    EnBox_ItemQuery(&q, this, play, gi, flags);
+    EnBox_ItemQuery(&q, this, play, gi);
     comboItemOverride(&ov, &q);
 
     return ov.gi;
@@ -43,7 +42,7 @@ void EnBox_GiveItemDefaultRange(Actor* actor, GameState_Play* play, s16 gi)
 {
     ComboItemQuery q;
 
-    EnBox_ItemQuery(&q, actor, play, gi, OVF_DOWNGRADE | OVF_PROGRESSIVE);
+    EnBox_ItemQuery(&q, actor, play, gi);
     comboGiveItem(actor, play, &q, 50.f, 10.f);
 }
 
@@ -59,7 +58,7 @@ void EnBox_InitWrapper(Actor* this, GameState_Play* play)
     init(this, play);
 
     /* Resize chest */
-    gi = EnBox_Item(this, play, EnBox_GetGI(this), 0);
+    gi = EnBox_Item(this, play, EnBox_GetGI(this));
     comboCsmcInit(this, play, gi);
 }
 
@@ -69,7 +68,7 @@ void EnBox_DrawWrapper(Actor* this, GameState_Play* play)
     s16 gi;
 
     /* Prepare the segments */
-    gi = EnBox_Item(this, play, EnBox_GetGI(this), 0);
+    gi = EnBox_Item(this, play, EnBox_GetGI(this));
     comboCsmcPreDraw(this, play, gi);
 
     /* Draw */

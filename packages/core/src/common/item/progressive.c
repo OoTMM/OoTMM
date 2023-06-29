@@ -23,29 +23,6 @@ s32 comboProgressive(s32 gi)
     return gi;
 }
 
-s16 comboDowngrade(s16 gi)
-{
-    if (comboIsItemUnavailable(gi))
-    {
-#if defined(GAME_MM)
-        gi ^= MASK_FOREIGN_GI;
-#endif
-        if (gi & MASK_FOREIGN_GI)
-        {
-            gi = MASK_FOREIGN_GI | GI_MM_RUPEE_BLUE;
-        }
-        else
-        {
-            gi = GI_OOT_RUPEE_BLUE;
-        }
-#if defined(GAME_MM)
-        gi ^= MASK_FOREIGN_GI;
-#endif
-    }
-
-    return gi;
-}
-
 s16 comboRenewable(s16 gi, s16 def)
 {
 #if defined(GAME_MM)

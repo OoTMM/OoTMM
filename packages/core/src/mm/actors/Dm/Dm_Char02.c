@@ -1,20 +1,19 @@
 #include <combo.h>
 #include <combo/item.h>
 
-static void DmChar02_ItemQuery(ComboItemQuery* q, int npc, int flags)
+static void DmChar02_ItemQuery(ComboItemQuery* q, int npc)
 {
     bzero(q, sizeof(*q));
     q->ovType = OV_NPC;
     q->gi = npc == NPC_MM_SKULL_KID_OCARINA ? GI_MM_OCARINA_OF_TIME : GI_MM_SONG_TIME;
     q->id = npc;
-    q->ovFlags = flags;
 }
 
-static void DmChar02_ItemOverride(ComboItemOverride* o, int npc, int flags)
+static void DmChar02_ItemOverride(ComboItemOverride* o, int npc)
 {
     ComboItemQuery q;
 
-    DmChar02_ItemQuery(&q, npc, flags);
+    DmChar02_ItemQuery(&q, npc);
     comboItemOverride(o, &q);
 }
 
@@ -57,7 +56,7 @@ void DmChar02_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float
         npc = NPC_MM_SKULL_KID_OCARINA;
     else
         npc = NPC_MM_SKULL_KID_SONG;
-    DmChar02_ItemQuery(&q, npc, OVF_PROGRESSIVE | OVF_DOWNGRADE);
+    DmChar02_ItemQuery(&q, npc);
     comboGiveItem(this, play, &q, a, b);
 }
 
@@ -68,7 +67,7 @@ void DmChar02_DrawOcarina(Actor* this, GameState_Play* play)
     static const float scale = 25.0f;
     ComboItemOverride o;
 
-    DmChar02_ItemOverride(&o, NPC_MM_SKULL_KID_OCARINA, OVF_PROGRESSIVE);
+    DmChar02_ItemOverride(&o, NPC_MM_SKULL_KID_OCARINA);
     ModelViewScale(scale, scale, scale, MAT_MUL);
     ModelViewTranslate(0.0f, 20.0f, 0.0f, MAT_MUL);
     comboDrawGI(play, this, o.gi, DRAW_RAW);

@@ -1,14 +1,13 @@
 #include <combo.h>
 #include <combo/item.h>
 
-static void EnScopenuts_ItemQuery(ComboItemQuery* q, int flags)
+static void EnScopenuts_ItemQuery(ComboItemQuery* q)
 {
     bzero(q, sizeof(*q));
 
     q->ovType = OV_NPC;
     q->gi = GI_MM_HEART_PIECE;
     q->id = NPC_MM_SCRUB_TELESCOPE;
-    q->ovFlags = flags;
 }
 
 static void EnScopenuts_AlterMessage(GameState_Play* play)
@@ -17,7 +16,7 @@ static void EnScopenuts_AlterMessage(GameState_Play* play)
     char* b;
     char* start;
 
-    EnScopenuts_ItemQuery(&q, 0);
+    EnScopenuts_ItemQuery(&q);
     b = play->textBuffer;
     comboTextAppendHeader(&b);
     start = b;
@@ -42,7 +41,7 @@ void EnScopenuts_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, fl
 {
     ComboItemQuery q;
 
-    EnScopenuts_ItemQuery(&q, OVF_PROGRESSIVE | OVF_DOWNGRADE);
+    EnScopenuts_ItemQuery(&q);
     comboGiveItem(this, play, &q, a, b);
 }
 

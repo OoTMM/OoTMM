@@ -1,12 +1,11 @@
 #include <combo.h>
 #include <combo/item.h>
 
-static void EnElforg_ItemQuery(ComboItemQuery* q, Actor* this, GameState_Play* play, int flags)
+static void EnElforg_ItemQuery(ComboItemQuery* q, Actor* this, GameState_Play* play)
 {
     bzero(q, sizeof(*q));
 
     q->gi = GI_MM_STRAY_FAIRY;
-    q->ovFlags = flags;
     switch (play->sceneId)
     {
     case SCE_MM_CLOCK_TOWN_EAST:
@@ -22,11 +21,11 @@ static void EnElforg_ItemQuery(ComboItemQuery* q, Actor* this, GameState_Play* p
     }
 }
 
-static void EnElforg_ItemOverride(ComboItemOverride* o, Actor* this, GameState_Play* play, int flags)
+static void EnElforg_ItemOverride(ComboItemOverride* o, Actor* this, GameState_Play* play)
 {
     ComboItemQuery q;
 
-    EnElforg_ItemQuery(&q, this, play, flags);
+    EnElforg_ItemQuery(&q, this, play);
     comboItemOverride(o, &q);
 }
 
@@ -37,7 +36,7 @@ static void EnElforg_Draw(Actor* this, GameState_Play* play)
     static const int kRotDivisor = 100;
     float angle;
 
-    EnElforg_ItemOverride(&o, this, play, OVF_PROGRESSIVE);
+    EnElforg_ItemOverride(&o, this, play);
     if (o.gi == GI_MM_STRAY_FAIRY)
     {
         draw = actorAddr(0x1b0, 0x80acd8c0);
@@ -78,7 +77,7 @@ void EnElforg_GiveItem(GameState_Play* play, Actor* this)
 {
     ComboItemQuery q;
 
-    EnElforg_ItemQuery(&q, this, play, OVF_PROGRESSIVE | OVF_DOWNGRADE);
+    EnElforg_ItemQuery(&q, this, play);
     PlayerDisplayTextBox(play, 0x579, NULL);
     comboAddItemEx(play, &q);
 

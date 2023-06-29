@@ -3,12 +3,11 @@
 
 static u8 sIsMask;
 
-static void EnIn_ItemQuery(ComboItemQuery* q, s16 gi, int flags)
+static void EnIn_ItemQuery(ComboItemQuery* q, s16 gi)
 {
     bzero(q, sizeof(ComboItemQuery));
 
     q->gi = gi;
-    q->ovFlags = flags;
     q->giRenew = GI_MM_RECOVERY_HEART;
 
     switch (gi)
@@ -34,7 +33,7 @@ static int EnIn_CanBuy(void)
     ComboItemQuery q;
     int ret;
 
-    EnIn_ItemQuery(&q, GI_MM_MILK, 0);
+    EnIn_ItemQuery(&q, GI_MM_MILK);
     ret = comboItemPrecondEx(&q, 0);
     if (ret == SC_OK || ret == SC_OK_NOCUTSCENE)
         return 1;
@@ -53,7 +52,7 @@ static void EnIn_DisplayBuy(GameState_Play* play)
     char* b;
     char* start;
 
-    EnIn_ItemQuery(&q, GI_MM_MILK, 0);
+    EnIn_ItemQuery(&q, GI_MM_MILK);
     comboItemOverride(&o, &q);
 
     b = play->textBuffer;
@@ -158,7 +157,7 @@ static void EnIn_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, f
 {
     ComboItemQuery q;
 
-    EnIn_ItemQuery(&q, gi, OVF_PROGRESSIVE | OVF_DOWNGRADE);
+    EnIn_ItemQuery(&q, gi);
     switch (gi)
     {
     case GI_MM_MASK_GARO:

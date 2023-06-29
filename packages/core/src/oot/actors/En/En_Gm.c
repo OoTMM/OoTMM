@@ -1,14 +1,13 @@
 #include <combo.h>
 #include <combo/item.h>
 
-static void EnGm_ItemQuery(ComboItemQuery* q, int flags)
+static void EnGm_ItemQuery(ComboItemQuery* q)
 {
     bzero(q, sizeof(ComboItemQuery));
 
     q->ovType = OV_NPC;
     q->gi = GI_OOT_SWORD_KNIFE;
     q->id = NPC_OOT_MEDIGORON;
-    q->ovFlags = flags;
 }
 
 int EnGm_HasGivenItem(Actor* this)
@@ -27,7 +26,7 @@ void EnGm_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
 {
     ComboItemQuery q;
 
-    EnGm_ItemQuery(&q, OVF_PROGRESSIVE | OVF_DOWNGRADE);
+    EnGm_ItemQuery(&q);
     comboGiveItem(actor, play, &q, a, b);
 }
 
@@ -56,7 +55,7 @@ static void hintMedigoron(GameState_Play* play)
     b = play->msgCtx.textBuffer;
     start = b;
 
-    EnGm_ItemQuery(&q, 0);
+    EnGm_ItemQuery(&q);
     comboTextAppendHeader(&b);
     comboTextAppendStr(&b, "How about buying ");
     comboTextAppendItemNameQuery(&b, &q, TF_PREPOS | TF_PROGRESSIVE);

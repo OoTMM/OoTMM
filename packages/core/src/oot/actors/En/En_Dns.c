@@ -129,24 +129,24 @@ static void EnDns_SetFlag(int flag)
     }
 }
 
-static void EnDns_ItemQuery(ComboItemQuery* q, int id, int flags)
+static void EnDns_ItemQuery(ComboItemQuery* q, int id)
 {
     bzero(q, sizeof(*q));
 
     q->ovType = OV_SCRUB;
     q->gi = GI_OOT_STICK; /* Dummy */
-    q->ovFlags = flags | OVF_PRECOND;
+    q->ovFlags = OVF_PRECOND;
     q->id = id;
 
     if (EnDns_GetFlag(id))
         q->ovFlags |= OVF_RENEW;
 }
 
-static void EnDns_ItemOverride(ComboItemOverride* o, int id, int flags)
+static void EnDns_ItemOverride(ComboItemOverride* o, int id)
 {
     ComboItemQuery q;
 
-    EnDns_ItemQuery(&q, id, flags);
+    EnDns_ItemQuery(&q, id);
     comboItemOverride(o, &q);
 }
 
@@ -169,7 +169,7 @@ void EnDns_MaybeDestroy(Actor* this)
 {
     ComboItemOverride o;
 
-    EnDns_ItemOverride(&o, EnDns_GetID(this), 0);
+    EnDns_ItemOverride(&o, EnDns_GetID(this));
     if (o.gi == 0)
         ActorDestroy(this);
 }
@@ -179,7 +179,7 @@ static int EnDns_CanBuy(Actor* this)
     ComboItemQuery q;
     s16 price;
 
-    EnDns_ItemQuery(&q, EnDns_GetID(this), 0);
+    EnDns_ItemQuery(&q, EnDns_GetID(this));
     price = EnDns_GetPrice(this);
     EnDns_PatchPrice(this, price);
 
@@ -204,7 +204,7 @@ static void EnDns_ShopText(Actor* this, GameState_Play* play)
     char* start;
     s16 price;
 
-    EnDns_ItemQuery(&q, EnDns_GetID(this), 0);
+    EnDns_ItemQuery(&q, EnDns_GetID(this));
 
     b = play->msgCtx.textBuffer;
     start = b;
@@ -254,7 +254,7 @@ static void EnDns_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, 
 {
     ComboItemQuery q;
 
-    EnDns_ItemQuery(&q, EnDns_GetID(actor), OVF_PROGRESSIVE);
+    EnDns_ItemQuery(&q, EnDns_GetID(actor));
     comboGiveItem(actor, play, &q, a, b);
 }
 

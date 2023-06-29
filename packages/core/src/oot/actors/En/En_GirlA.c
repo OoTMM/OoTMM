@@ -12,7 +12,7 @@ void EnGirlA_Draw(Actor_EnGirlA* this, GameState_Play* play)
 
     /* KLUDGE: Should not be here but the update func is annoying to patch */
     comboShopUpdateItem(play, this);
-    EnGirlA_ItemOverride(&o, this, OVF_PROGRESSIVE);
+    EnGirlA_ItemOverride(&o, this);
 
     if (o.gi != (GI_MM_SOLD_OUT | MASK_FOREIGN_GI))
         ModelViewRotateY(((this->angle * 360.f) / 65536.f) * 0.017453292f, MAT_MUL);

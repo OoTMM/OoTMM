@@ -16,7 +16,7 @@ static void EnSob1_GiveItem(Actor_EnSob1* sob1, GameState_Play* play, s16 gi, fl
     Actor_EnGirlA* girlA;
 
     girlA = sob1->items[sob1->itemIndex];
-    EnGirlA_ItemQuery(&q, girlA, OVF_PROGRESSIVE);
+    EnGirlA_ItemQuery(&q, girlA);
     comboGiveItem(&sob1->base, play, &q, a, b);
 }
 

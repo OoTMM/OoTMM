@@ -33,13 +33,13 @@ static int EnAkindonuts_ShopID(Actor* this)
     return this->variable & 0x3;
 }
 
-static void EnAkindonuts_ShopItemQuery(ComboItemQuery* q, int id, int flags)
+static void EnAkindonuts_ShopItemQuery(ComboItemQuery* q, int id)
 {
     int flag;
 
     bzero(q, sizeof(*q));
     q->ovType = OV_NPC;
-    q->ovFlags = flags | OVF_PRECOND;
+    q->ovFlags = OVF_PRECOND;
     q->giRenew = GI_MM_RECOVERY_HEART;
     switch (id)
     {
@@ -76,12 +76,12 @@ static void EnAkindonuts_ShopItemQuery(ComboItemQuery* q, int id, int flags)
     }
 }
 
-static void EnAkindonuts_ShopOverride(ComboItemOverride* o, int id, int flags)
+static void EnAkindonuts_ShopOverride(ComboItemOverride* o, int id)
 {
     ComboItemQuery q;
 
     bzero(o, sizeof(*o));
-    EnAkindonuts_ShopItemQuery(&q, id, flags);
+    EnAkindonuts_ShopItemQuery(&q, id);
     comboItemOverride(o, &q);
 }
 
@@ -92,7 +92,7 @@ static int EnAkindonuts_Precond(Actor* this)
     int sc;
 
     id = EnAkindonuts_ShopID(this);
-    EnAkindonuts_ShopItemQuery(&q, id, 0);
+    EnAkindonuts_ShopItemQuery(&q, id);
     sc = comboItemPrecondEx(&q, kPrices[id]);
 
     switch (sc)
@@ -120,12 +120,12 @@ static void EnAkindonuts_AlterMessageIntroSwamp(GameState_Play* play)
     char* b;
     char* start;
 
-    EnAkindonuts_ShopOverride(&o, 0, 0);
+    EnAkindonuts_ShopOverride(&o, 0);
     b = play->textBuffer;
     comboTextAppendHeader(&b);
     start = b;
     comboTextAppendStr(&b, "I sell ");
-    comboTextAppendItemName(&b, o.gi, TF_PREPOS | TF_PROGRESSIVE);
+    comboTextAppendItemName(&b, o.giRaw, TF_PREPOS | TF_PROGRESSIVE);
     comboTextAppendStr(&b,
         " to Deku Scrubs, but I'd really like to leave my hometown."
         TEXT_BB
@@ -141,12 +141,12 @@ static void EnAkindonuts_AlterMessageIntroMountain(GameState_Play* play)
     char* b;
     char* start;
 
-    EnAkindonuts_ShopOverride(&o, 1, 0);
+    EnAkindonuts_ShopOverride(&o, 1);
     b = play->textBuffer;
     comboTextAppendHeader(&b);
     start = b;
     comboTextAppendStr(&b, "I sell ");
-    comboTextAppendItemName(&b, o.gi, TF_PREPOS | TF_PROGRESSIVE);
+    comboTextAppendItemName(&b, o.giRaw, TF_PREPOS | TF_PROGRESSIVE);
     comboTextAppendStr(&b,
         " but I'm focusing my marketing efforts on Gorons..."
         TEXT_BB
@@ -162,12 +162,12 @@ static void EnAkindonuts_AlterMessageIntroOcean(GameState_Play* play)
     char* b;
     char* start;
 
-    EnAkindonuts_ShopOverride(&o, 2, 0);
+    EnAkindonuts_ShopOverride(&o, 2);
     b = play->textBuffer;
     comboTextAppendHeader(&b);
     start = b;
     comboTextAppendStr(&b, "I'm selling ");
-    comboTextAppendItemName(&b, o.gi, TF_PREPOS | TF_PROGRESSIVE);
+    comboTextAppendItemName(&b, o.giRaw, TF_PREPOS | TF_PROGRESSIVE);
     comboTextAppendStr(&b,
         ", but I'm focusing my marketing efforts on Zoras."
         TEXT_BB
@@ -183,12 +183,12 @@ static void EnAkindonuts_AlterMessageIntroIkana(GameState_Play* play)
     char* b;
     char* start;
 
-    EnAkindonuts_ShopOverride(&o, 3, 0);
+    EnAkindonuts_ShopOverride(&o, 3);
     b = play->textBuffer;
     comboTextAppendHeader(&b);
     start = b;
     comboTextAppendStr(&b, "I'm here to sell ");
-    comboTextAppendItemName(&b, o.gi, TF_PREPOS | TF_PROGRESSIVE);
+    comboTextAppendItemName(&b, o.giRaw, TF_PREPOS | TF_PROGRESSIVE);
     comboTextAppendStr(&b,
         "."
         TEXT_BB
@@ -208,12 +208,12 @@ static void EnAkindonuts_AlterMessageBuy(Actor* this, GameState_Play* play)
 
     id = EnAkindonuts_ShopID(this);
     price = kPrices[id];
-    EnAkindonuts_ShopOverride(&o, id, 0);
+    EnAkindonuts_ShopOverride(&o, id);
     b = play->textBuffer;
     comboTextAppendHeader(&b);
     start = b;
     comboTextAppendStr(&b, "I'll give you ");
-    comboTextAppendItemName(&b, o.gi, TF_PREPOS | TF_PROGRESSIVE);
+    comboTextAppendItemName(&b, o.giRaw, TF_PREPOS | TF_PROGRESSIVE);
     comboTextAppendStr(&b, " for ");
     comboTextAppendNum(&b, price);
     comboTextAppendStr(&b, " Rupees!" TEXT_SIGNAL TEXT_END);
@@ -389,7 +389,7 @@ void EnAkindonuts_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, 
     }
 
     /* Shop trades */
-    EnAkindonuts_ShopItemQuery(&q, EnAkindonuts_ShopID(actor), OVF_PROGRESSIVE);
+    EnAkindonuts_ShopItemQuery(&q, EnAkindonuts_ShopID(actor));
     comboGiveItem(actor, play, &q, a, b);
 }
 

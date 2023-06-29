@@ -41,12 +41,12 @@ static int EnBal_GetTingleId(GameState_Play* play)
     }
 }
 
-static void EnBal_ItemQuery(ComboItemQuery* q, int mapId, int flags)
+static void EnBal_ItemQuery(ComboItemQuery* q, int mapId)
 {
     bzero(q, sizeof(*q));
 
     q->ovType = OV_NPC;
-    q->ovFlags = flags | OVF_PRECOND;
+    q->ovFlags = OVF_PRECOND;
     q->id = kTingleNpc[mapId];
     q->gi = kTingleMaps[mapId];
     q->giRenew = 0;
@@ -55,11 +55,11 @@ static void EnBal_ItemQuery(ComboItemQuery* q, int mapId, int flags)
         q->ovFlags |= OVF_RENEW;
 }
 
-static void EnBal_ItemOverride(ComboItemOverride* o, int mapId, int flags)
+static void EnBal_ItemOverride(ComboItemOverride* o, int mapId)
 {
     ComboItemQuery q;
 
-    EnBal_ItemQuery(&q, mapId, flags);
+    EnBal_ItemQuery(&q, mapId);
     comboItemOverride(o, &q);
 }
 
@@ -84,7 +84,7 @@ static void EnBal_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, f
     s16 mapId;
 
     mapId = *(s16*)((char*)this + 0x3ac);
-    EnBal_ItemQuery(&q, mapId, OVF_PROGRESSIVE);
+    EnBal_ItemQuery(&q, mapId);
     comboGiveItem(this, play, &q, a, b);
 }
 
@@ -104,7 +104,7 @@ static int EnBal_AlreadyBoughtItemWrapper(Actor* this, GameState_Play* play)
     mapId = *(s16*)((char*)this + 0x3ac);
 
     /* Get the item */
-    EnBal_ItemQuery(&q, mapId, 0);
+    EnBal_ItemQuery(&q, mapId);
     comboItemOverride(&o, &q);
     if (o.gi == 0)
         return 1;
@@ -122,7 +122,7 @@ static void EnBal_OverrideTextMapName(char** b, int mapId, int price)
 {
     ComboItemOverride o;
 
-    EnBal_ItemOverride(&o, mapId, 0);
+    EnBal_ItemOverride(&o, mapId);
     if (o.gi == 0)
     {
         comboTextAppendStr(b, TEXT_COLOR_RED "SOLD OUT");

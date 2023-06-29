@@ -1,12 +1,11 @@
 #include <combo.h>
 #include <combo/item.h>
 
-static void EnBox_ItemQuery(ComboItemQuery* q, Actor* this, GameState_Play* play, s16 gi, int flags)
+static void EnBox_ItemQuery(ComboItemQuery* q, Actor* this, GameState_Play* play, s16 gi)
 {
     memset(q, 0, sizeof(*q));
 
     q->gi = gi;
-    q->ovFlags = flags;
     if (!(play->sceneId == SCE_OOT_TREASURE_SHOP && (this->variable & 0x1f) == 0x0a && gi == -GI_OOT_TC_RUPEE_PURPLE))
     {
         q->ovType = OV_CHEST;
@@ -19,12 +18,12 @@ static void EnBox_ItemQuery(ComboItemQuery* q, Actor* this, GameState_Play* play
     }
 }
 
-static s16 EnBox_Item(Actor* this, GameState_Play* play, s16 gi, int flags)
+static s16 EnBox_Item(Actor* this, GameState_Play* play, s16 gi)
 {
     ComboItemQuery q;
     ComboItemOverride o;
 
-    EnBox_ItemQuery(&q, this, play, gi, flags);
+    EnBox_ItemQuery(&q, this, play, gi);
     comboItemOverride(&o, &q);
 
     return o.gi;
@@ -34,7 +33,7 @@ void EnBox_GiveItem(Actor* actor, GameState_Play* play, s16 gi)
 {
     ComboItemQuery q;
 
-    EnBox_ItemQuery(&q, actor, play, gi, OVF_PROGRESSIVE | OVF_DOWNGRADE);
+    EnBox_ItemQuery(&q, actor, play, gi);
     comboGiveItem(actor, play, &q, 50.f, 10.f);
 }
 
@@ -50,7 +49,7 @@ void EnBox_InitWrapper(Actor* this, GameState_Play* play)
     init(this, play);
 
     /* Resize chest */
-    gi = EnBox_Item(this, play, -1, 0);
+    gi = EnBox_Item(this, play, -1);
     comboCsmcInit(this, play, gi);
 }
 
@@ -60,7 +59,7 @@ void EnBox_DrawWrapper(Actor* this, GameState_Play* play)
     s16 gi;
 
     /* Prepare the segments */
-    gi = EnBox_Item(this, play, -1, 0);
+    gi = EnBox_Item(this, play, -1);
     comboCsmcPreDraw(this, play, gi);
 
     /* Draw */

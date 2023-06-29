@@ -8,14 +8,14 @@ static s16 kPrices[] = {
     200,
 };
 
-static void EnTab_ItemQuery(ComboItemQuery* q, int index, int flags)
+static void EnTab_ItemQuery(ComboItemQuery* q, int index)
 {
     int flag;
 
     bzero(q, sizeof(*q));
 
     q->ovType = OV_NPC;
-    q->ovFlags = flags | OVF_PRECOND;
+    q->ovFlags = OVF_PRECOND;
 
     switch (index)
     {
@@ -38,11 +38,11 @@ static void EnTab_ItemQuery(ComboItemQuery* q, int index, int flags)
         q->ovFlags |= OVF_RENEW;
 }
 
-static void EnTab_ItemOverride(ComboItemOverride* o, int index, int flags)
+static void EnTab_ItemOverride(ComboItemOverride* o, int index)
 {
     ComboItemQuery q;
 
-    EnTab_ItemQuery(&q, index, flags);
+    EnTab_ItemQuery(&q, index);
     comboItemOverride(o, &q);
 }
 
@@ -50,7 +50,7 @@ static void EnTab_TextItem(char** b, int index)
 {
     ComboItemOverride o;
 
-    EnTab_ItemOverride(&o, index, 0);
+    EnTab_ItemOverride(&o, index);
     if (o.gi == 0)
     {
         comboTextAppendStr(b, TEXT_COLOR_RED "SOLD OUT");
@@ -59,7 +59,7 @@ static void EnTab_TextItem(char** b, int index)
     }
     else
     {
-        comboTextAppendItemName(b, o.gi, TF_PREPOS | TF_CAPITALIZE | TF_PROGRESSIVE);
+        comboTextAppendItemName(b, o.giRaw, TF_PREPOS | TF_CAPITALIZE | TF_PROGRESSIVE);
         comboTextAppendStr(b, ": " TEXT_COLOR_RED);
         comboTextAppendNum(b, kPrices[index]);
         comboTextAppendStr(b, " Rupees");
@@ -113,7 +113,7 @@ void EnTab_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
         break;
     }
 
-    EnTab_ItemQuery(&q, sItemIndex, OVF_PROGRESSIVE);
+    EnTab_ItemQuery(&q, sItemIndex);
     comboItemOverride(&o, &q);
     if (gi == 0)
         sc = SC_ERR_CANNOTBUY;

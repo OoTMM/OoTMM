@@ -22,6 +22,7 @@ typedef struct ComboItemOverride
 {
     u8  player;
     u8  playerFrom;
+    s16 giRaw;
     s16 gi;
 }
 ComboItemOverride;
@@ -91,8 +92,9 @@ int  comboAddItemNoEffect(s16 gi);
 
 int comboAddItemEx(GameState_Play* play, const ComboItemQuery* q);
 
-int comboIsItemUnavailable(s16 gi);
-int comboIsItemMinor(s16 gi);
+int isItemLicensed(s16 gi);
+int isItemFastBuy(s16 gi);
+int isItemBuyable(s16 gi);
 
 int comboItemPrecondEx(const ComboItemQuery* q, s16 price);
 s16 comboRenewable(s16 gi, s16 def);

@@ -19,14 +19,13 @@ static const s16 kGreatFairyNPCs[] = {
     NPC_MM_GREAT_FAIRY_VALLEY,
 };
 
-static void EnElfgrp_ItemQuery(ComboItemQuery* q, int index, int flags)
+static void EnElfgrp_ItemQuery(ComboItemQuery* q, int index)
 {
     bzero(q, sizeof(*q));
 
     q->ovType = OV_NPC;
     q->gi = kGreatFairyRewards[index];
     q->id = kGreatFairyNPCs[index];
-    q->ovFlags = flags;
 }
 
 static u8 EnElfgrp_GetFairyIndex(Actor* this)
@@ -59,7 +58,7 @@ static void EnElfgrp_GiveReward(Actor* actor, GameState_Play* play)
         return;
     }
 
-    EnElfgrp_ItemQuery(&q, fairyIndex, OVF_PROGRESSIVE | OVF_DOWNGRADE);
+    EnElfgrp_ItemQuery(&q, fairyIndex);
     comboGiveItem(actor, play, &q, 200.f, 200.f);
 }
 
@@ -82,7 +81,7 @@ static void fairyHint(GameState_Play* play, int index)
     char* b;
     char* start;
 
-    EnElfgrp_ItemQuery(&q, index, 0);
+    EnElfgrp_ItemQuery(&q, index);
     b = play->textBuffer;
     comboTextAppendHeader(&b);
     start = b;
@@ -101,8 +100,8 @@ static void fairyHintTown(GameState_Play* play)
     char* b;
     char* start;
 
-    EnElfgrp_ItemQuery(&q1, 0, 0);
-    EnElfgrp_ItemQuery(&q2, 1, 0);
+    EnElfgrp_ItemQuery(&q1, 0);
+    EnElfgrp_ItemQuery(&q2, 1);
     b = play->textBuffer;
     comboTextAppendHeader(&b);
     start = b;
