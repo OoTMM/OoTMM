@@ -34,7 +34,7 @@ static int EnIn_CanBuy(void)
     int ret;
 
     EnIn_ItemQuery(&q, GI_MM_MILK);
-    ret = comboItemPrecondEx(&q, 0);
+    ret = comboItemPrecondEx(&q, 50);
     if (ret == SC_OK || ret == SC_OK_NOCUTSCENE)
         return 1;
     return 0;
@@ -60,7 +60,7 @@ static void EnIn_DisplayBuy(GameState_Play* play)
     start = b;
 
     comboTextAppendStr(&b, "50 Rupees will do ya for ");
-    comboTextAppendItemName(&b, o.gi, TF_PREPOS | TF_PROGRESSIVE);
+    comboTextAppendItemName(&b, o.giRaw, TF_PREPOS | TF_PROGRESSIVE);
     comboTextAppendStr(&b, "!" TEXT_NL TEXT_CHOICE2 "I'll buy it" TEXT_NL "No thanks" TEXT_END);
     comboTextAutoLineBreaks(start);
 }

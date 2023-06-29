@@ -115,7 +115,7 @@ void EnTab_GiveItem(Actor* this, GameState_Play* play, s16 gi, float a, float b)
 
     EnTab_ItemQuery(&q, sItemIndex);
     comboItemOverride(&o, &q);
-    if (gi == 0)
+    if (o.gi == 0)
         sc = SC_ERR_CANNOTBUY;
     else
         sc = comboItemPrecondEx(&q, kPrices[sItemIndex]);
