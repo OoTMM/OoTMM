@@ -345,6 +345,13 @@ typedef struct
 }
 MmExtraFlags2;
 
+typedef struct
+{
+    u32 bottomlessWallet:1;
+    u32 unused:31;
+}
+MmExtraFlags3;
+
 #define MM_PLAYER_FORM_GORON    1
 #define MM_PLAYER_FORM_ZORA     2
 #define MM_PLAYER_FORM_HUMAN    4

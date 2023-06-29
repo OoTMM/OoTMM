@@ -204,6 +204,7 @@ static int isItemAmbiguousOot(s16 gi)
     case GI_OOT_WALLET2:
     case GI_OOT_WALLET3:
     case GI_OOT_WALLET4:
+    case GI_OOT_WALLET5:
     case GI_OOT_RUPEE_GREEN:
     case GI_OOT_RUPEE_BLUE:
     case GI_OOT_RUPEE_RED:
@@ -298,6 +299,7 @@ static int isItemAmbiguousMm(s16 gi)
     case GI_MM_WALLET2:
     case GI_MM_WALLET3:
     case GI_MM_WALLET4:
+    case GI_MM_WALLET5:
     case GI_MM_RUPEE_GREEN:
     case GI_MM_RUPEE_BLUE:
     case GI_MM_RUPEE_RED:

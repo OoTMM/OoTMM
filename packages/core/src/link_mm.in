@@ -175,3 +175,7 @@ gMaxRupees = 0x801c1e2c;
 Inventory_SetWorldMapCloudVisibility = 0x8012ef0c;
 
 ActorCutscene_StartAndSetFlag = 0x800f1ce0;
+
+gWalletDigits = 0x801bfd24;
+
+DrawHUD = 0x8011f0e0;

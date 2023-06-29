@@ -170,6 +170,7 @@ static int csmcFromItemOot(s16 gi)
     case GI_OOT_WALLET2:
     case GI_OOT_WALLET3:
     case GI_OOT_WALLET4:
+    case GI_OOT_WALLET5:
     case GI_OOT_POCKET_CUCCO:
     case GI_OOT_COJIRO:
     case GI_OOT_ODD_MUSHROOM:
@@ -311,6 +312,7 @@ static int csmcFromItemMm(s16 gi)
     case GI_MM_WALLET2:
     case GI_MM_WALLET3:
     case GI_MM_WALLET4:
+    case GI_MM_WALLET5:
     case GI_MM_GREAT_FAIRY_SWORD:
     case GI_MM_SPIN_UPGRADE:
     case GI_MM_BOMBER_NOTEBOOK:

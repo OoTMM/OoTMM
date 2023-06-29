@@ -28,6 +28,7 @@ typedef struct ComboItemOverride
 ComboItemOverride;
 
 extern u16 gMaxRupees[];
+extern u16 gWalletDigits[];
 
 #if defined(GAME_OOT)
 # define gOotMaxRupees gMaxRupees

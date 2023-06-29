@@ -280,9 +280,18 @@ static void addWallet(int index, int noEffect)
         gOotExtraFlags.childWallet = 1;
         gOotMaxRupees[0] = 99;
     }
-    gOotSave.inventory.upgrades.wallet = index;
+    else if (index == 4)
+    {
+        gOotExtraFlags.bottomlessWallet = 1;
+        gOotMaxRupees[3] = 9999;
+#if defined(GAME_OOT)
+        gWalletDigits[3] = 4;
+#endif
+    }
+    else
+        gOotSave.inventory.upgrades.wallet = index;
     if (!noEffect && comboConfig(CFG_FILL_WALLETS))
-        addRupees(999);
+        addRupees(gOotMaxRupees[gOotSave.inventory.upgrades.wallet]);
 }
 
 static void reloadSlotEquips(OotItemEquips* equips, int slot)
@@ -396,6 +405,9 @@ void comboAddCommonItemOot(int sid, int noEffect)
         break;
     case SITEM_WALLET4:
         addWallet(3, noEffect);
+        break;
+    case SITEM_WALLET5:
+        addWallet(4, noEffect);
         break;
     case SITEM_RUPEE_GREEN:
         if (noEffect)
@@ -664,6 +676,9 @@ void comboAddItemSharedOot(s16 gi, int noEffect)
             break;
         case GI_OOT_WALLET4:
             comboAddCommonItemMm(SITEM_WALLET4, noEffect);
+            break;
+        case GI_OOT_WALLET5:
+            comboAddCommonItemMm(SITEM_WALLET5, noEffect);
             break;
         case GI_OOT_RUPEE_GREEN:
         case GI_OOT_TC_RUPEE_GREEN:
@@ -950,6 +965,9 @@ int comboAddItemOot(s16 gi, int noEffect)
         break;
     case GI_OOT_WALLET4:
         comboAddCommonItemOot(SITEM_WALLET4, noEffect);
+        break;
+    case GI_OOT_WALLET5:
+        comboAddCommonItemOot(SITEM_WALLET5, noEffect);
         break;
     case GI_OOT_MAGIC_UPGRADE:
         comboAddMagicUpgradeOot(1);

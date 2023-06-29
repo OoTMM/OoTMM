@@ -85,6 +85,7 @@ export class LogicPassConfig {
       CHILD_WALLET: settings.childWallets,
       OOT_ADULT_WELL: settings.wellAdult,
       COLOSSAL_WALLET: settings.colossalWallets,
+      BOTTOMLESS_WALLET: settings.bottomlessWallets,
       OOT_AGELESS_BOOTS: settings.agelessBoots,
       MM_OWL_SHUFFLE: settings.owlShuffle === 'anywhere',
       OOT_CARPENTERS_ONE: settings.gerudoFortress === 'single',

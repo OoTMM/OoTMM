@@ -634,6 +634,11 @@ export class LogicPassWorldTransform {
       this.addItem('MM_WALLET');
     }
 
+    if (this.state.settings.bottomlessWallets) {
+      this.addItem('OOT_WALLET');
+      this.addItem('MM_WALLET');
+    }
+
     /* Setup shared items */
     this.setupSharedItems();
 

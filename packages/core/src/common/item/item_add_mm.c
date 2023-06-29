@@ -229,10 +229,18 @@ static void addWallet(int index, int noEffect)
         gMmExtraFlags2.childWallet = 1;
         gMmMaxRupees[0] = 99;
     }
+    else if (index == 4)
+    {
+        gMmExtraFlags3.bottomlessWallet = 1;
+        gMmMaxRupees[3] = 9999;
+#if defined(GAME_MM)
+        gWalletDigits[3] = 4;
+#endif
+    }
     else
         gMmSave.inventory.upgrades.wallet = index;
     if (!noEffect && comboConfig(CFG_FILL_WALLETS))
-        addRupees(999);
+        addRupees(gMmMaxRupees[gMmSave.inventory.upgrades.wallet]);
 }
 
 static void addTrade1(u8 index)
@@ -386,6 +394,9 @@ void comboAddCommonItemMm(int sid, int noEffect)
         break;
     case SITEM_WALLET4:
         addWallet(3, noEffect);
+        break;
+    case SITEM_WALLET5:
+        addWallet(4, noEffect);
         break;
     case SITEM_RUPEE_GREEN:
         if (noEffect)
@@ -638,6 +649,9 @@ void comboAddItemSharedMm(s16 gi, int noEffect)
             break;
         case GI_MM_WALLET4:
             comboAddCommonItemOot(SITEM_WALLET4, noEffect);
+            break;
+        case GI_MM_WALLET5:
+            comboAddCommonItemOot(SITEM_WALLET5, noEffect);
             break;
         case GI_MM_RUPEE_GREEN:
             comboAddCommonItemOot(SITEM_RUPEE_GREEN, noEffect);
@@ -965,6 +979,9 @@ int comboAddItemMm(s16 gi, int noEffect)
         break;
     case GI_MM_WALLET4:
         comboAddCommonItemMm(SITEM_WALLET4, noEffect);
+        break;
+    case GI_MM_WALLET5:
+        comboAddCommonItemMm(SITEM_WALLET5, noEffect);
         break;
     case GI_MM_GS_TOKEN_SWAMP:
         count = ++gMmSave.skullCountSwamp;

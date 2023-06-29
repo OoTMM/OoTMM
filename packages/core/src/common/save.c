@@ -24,9 +24,20 @@ void comboOnSaveLoad(void)
     bzero(&net->cmdOut, sizeof(net->cmdOut));
     netMutexUnlock();
 
-    /* Clear child wallets */
+    /* Child & Bottomless wallets */
     gOotMaxRupees[0] = gOotExtraFlags.childWallet ? 99 : 0;
+    gOotMaxRupees[3] = gOotExtraFlags.bottomlessWallet ? 9999 : 999;
     gMmMaxRupees[0] = gMmExtraFlags2.childWallet ? 99 : 0;
+    gMmMaxRupees[3] = gMmExtraFlags3.bottomlessWallet ? 9999 : 999;
+
+#if defined(GAME_OOT)
+    if (gOotExtraFlags.bottomlessWallet)
+#else
+    if (gMmExtraFlags3.bottomlessWallet)
+#endif
+        gWalletDigits[3] = 4;
+    else
+        gWalletDigits[3] = 3;
 }
 
 static u16 computeChecksumOot(void* data, int len)

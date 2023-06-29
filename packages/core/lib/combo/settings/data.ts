@@ -743,6 +743,14 @@ export const SETTINGS = [{
   description: 'Adds a Wallet that can hold up to 999 rupees in each game',
   default: false
 }, {
+  key: 'bottomlessWallets',
+  name: 'Bottomless Wallets',
+  category: 'items.extensions',
+  type: 'boolean',
+  description: 'Adds a Wallet that can hold up to 9999 rupees in each game',
+  default: false,
+  cond: (s: any) => s.colossalWallets,
+}, {
   key: 'sharedNutsSticks',
   name: 'Shared Nuts & Sticks',
   category: 'items.shared',

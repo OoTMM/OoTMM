@@ -149,6 +149,9 @@ export class LogicPassPrice {
     let max = 100;
     if (this.state.settings.colossalWallets) {
       max = 199;
+      if (this.state.settings.bottomlessWallets) {
+        max = 999;
+      }
     }
     const r = randomInt(this.state.random, max + 1);
     return r * 5;
@@ -160,6 +163,10 @@ export class LogicPassPrice {
     if (this.state.settings.colossalWallets) {
       max = 199;
       beta = 9;
+      if (this.state.settings.bottomlessWallets) {
+        max = 999;
+        beta = 15;
+      }
     }
     const r = betaApproxInt(this.state.random, 2, beta, max + 1);
     return r * 5;

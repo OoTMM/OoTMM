@@ -305,8 +305,9 @@ typedef struct
     u32 ganonBossKey:1;
     u32 childWallet:1;
     u32 triforceWin:1;
-    u8  triforceCount;
-    u32 unused:8;
+    u32 triforceCount:8;
+    u32 bottomlessWallet:1;
+    u32 unused:7;
 }
 OotExtraFlags;
 

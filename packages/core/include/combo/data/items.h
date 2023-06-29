@@ -460,5 +460,6 @@
 #define SITEM_SONG_SUN          0x1c
 #define SITEM_WALLET            0x1d
 #define SITEM_WALLET4           0x1e
+#define SITEM_WALLET5           0x1f
 
 #endif

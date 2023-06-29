@@ -179,3 +179,7 @@ Play_LoadKaleidoOverlay = 0x80099c60;
 LoadMapMark = 0x80066df0;
 
 gMaxRupees = 0x800f8cec;
+
+gWalletDigits = 0x800f7618;
+
+DrawHUD = 0x800756f0;

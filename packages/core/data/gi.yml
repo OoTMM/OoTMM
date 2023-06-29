@@ -188,6 +188,7 @@ OOT_COMPASS_IC:                   0xbd
 OOT_WALLET:                       0xbe
 OOT_WALLET4:                      0xbf
 OOT_TRIFORCE:                     0xc0
+OOT_WALLET5:                      0xc1
 
 MM_RUPEE_GREEN:               0x01
 MM_RUPEE_BLUE:                0x02
@@ -364,3 +365,4 @@ MM_OWL_WOODFALL:              0xf2
 MM_OWL_SOUTHERN_SWAMP:        0xf3
 MM_OWL_IKANA_CANYON:          0xf4
 MM_OWL_STONE_TOWER:           0xf5
+MM_WALLET5:                   0xf6

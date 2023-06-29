@@ -61,7 +61,8 @@ static s32 progressiveWallet(void)
     {
     case 0: return GI_MM_WALLET2;
     case 1: return GI_MM_WALLET3;
-    default: return comboConfig(CFG_COLOSSAL_WALLET) ? GI_MM_WALLET4 : GI_MM_WALLET3;
+    case 2: return comboConfig(CFG_COLOSSAL_WALLET) ? GI_MM_WALLET4 : GI_MM_WALLET3;
+    case 3: return comboConfig(CFG_BOTTOMLESS_WALLET) ? GI_MM_WALLET5 : GI_MM_WALLET4;
     }
 }
 
@@ -153,6 +154,7 @@ s32 comboProgressiveMm(s32 gi)
     case GI_MM_WALLET2:
     case GI_MM_WALLET3:
     case GI_MM_WALLET4:
+    case GI_MM_WALLET5:
         gi = progressiveWallet();
         break;
     case GI_MM_MAGIC_UPGRADE:
