@@ -11,7 +11,7 @@
     MAGIC: "true"
     ARROWS: "true"
   exits:
-    "Ocean Spider House": "has_mask_goron || can_play(SONG_SOARING)"
+    "Ocean Spider House": "true"
     "Ocean Spider House Back": "can_hookshot_short || can_goron_bomb_jump"
   locations:
     "Ocean Skulltula Entrance Right Wall": "can_hookshot_short"
