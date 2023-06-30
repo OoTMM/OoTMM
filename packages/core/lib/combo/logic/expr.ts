@@ -194,60 +194,109 @@ function resolveSpecialCond(settings: Settings, state: State, special: string): 
   return { result, depEvents: [], depItems: [...items, ...itemsUnique] };
 }
 
+const exprImplTrue = (_state: State) => ({ result: true, depItems: [], depEvents: [] });
+const exprImplFalse = (_state: State) => ({ result: false, depItems: [], depEvents: [] });
+
 export type Expr = (state: State) => ExprResult;
 
-export const exprTrue = (): Expr => state => ({ result: true, depItems: [], depEvents: [] });
-export const exprFalse = (): Expr => state => ({ result: false, depItems: [], depEvents: [] });
+export const exprTrue = (): Expr => exprImplTrue;
+export const exprFalse = (): Expr => exprImplFalse;
 
-export const exprAnd = (exprs: Expr[]): Expr => state => {
-  const results: ExprResult[] = [];
-  for (const e of exprs) {
-    const r = e(state);
-    results.push(r);
-
-    /* Early exit */
-    if (!r.result) {
-      return { result: false, depItems: results.map(x => x.depItems), depEvents: results.map(x => x.depEvents) };
-    }
+export const exprAnd = (exprs: Expr[]): Expr => {
+  /* Optimizations */
+  exprs = exprs.filter(x => x !== exprImplTrue);
+  if (exprs.length === 0) {
+    return exprTrue();
+  }
+  if (exprs.some(x => x === exprImplFalse)) {
+    return exprFalse();
+  }
+  if (exprs.length === 1) {
+    return exprs[0];
   }
 
-  const restrictions = exprRestrictionsAnd(results);
-  if (isDefaultRestrictions(restrictions)) {
-    return { result: true, depItems: [], depEvents: [] };
-  } else {
-    return { result: true, depItems: results.map(x => x.depItems), depEvents: results.map(x => x.depEvents), restrictions };
-  }
-};
+  return state => {
+    const results: ExprResult[] = [];
+    for (const e of exprs) {
+      const r = e(state);
+      results.push(r);
 
-export const exprOr = (exprs: Expr[]): Expr => state => {
-  const results: ExprResult[] = [];
-  let result = false;
-
-  for (const e of exprs) {
-    const r = e(state);
-    results.push(r);
-    if (r.result) {
-      result = true;
-      if (!r.restrictions) {
-        return { result: true, depItems: [], depEvents: [] };
+      /* Early exit */
+      if (!r.result) {
+        return { result: false, depItems: results.map(x => x.depItems), depEvents: results.map(x => x.depEvents) };
       }
     }
-  }
 
-  if (result) {
-    const restrictions = exprRestrictionsOr(results);
+    const restrictions = exprRestrictionsAnd(results);
     if (isDefaultRestrictions(restrictions)) {
       return { result: true, depItems: [], depEvents: [] };
     } else {
       return { result: true, depItems: results.map(x => x.depItems), depEvents: results.map(x => x.depEvents), restrictions };
     }
-  } else {
-    return { result: false, depItems: results.map(x => x.depItems), depEvents: results.map(x => x.depEvents) };
   }
 };
 
-export const exprNot = (expr: Expr): Expr => state => expr(state).result ? exprFalse()(state) : exprTrue()(state);
-export const exprCond = (cond: Expr, then: Expr, otherwise: Expr): Expr => state => cond(state).result ? then(state) : otherwise(state);
+export const exprOr = (exprs: Expr[]): Expr => {
+  /* Optimizations */
+  exprs = exprs.filter(x => x !== exprImplFalse);
+  if (exprs.length === 0) {
+    return exprFalse();
+  }
+  if (exprs.some(x => x === exprImplTrue)) {
+    return exprTrue();
+  }
+  if (exprs.length === 1) {
+    return exprs[0];
+  }
+
+  return state => {
+    const results: ExprResult[] = [];
+    let result = false;
+
+    for (const e of exprs) {
+      const r = e(state);
+      results.push(r);
+      if (r.result) {
+        result = true;
+        if (!r.restrictions) {
+          return { result: true, depItems: [], depEvents: [] };
+        }
+      }
+    }
+
+    if (result) {
+      const restrictions = exprRestrictionsOr(results);
+      if (isDefaultRestrictions(restrictions)) {
+        return { result: true, depItems: [], depEvents: [] };
+      } else {
+        return { result: true, depItems: results.map(x => x.depItems), depEvents: results.map(x => x.depEvents), restrictions };
+      }
+    } else {
+      return { result: false, depItems: results.map(x => x.depItems), depEvents: results.map(x => x.depEvents) };
+    }
+  }
+};
+
+export const exprNot = (expr: Expr): Expr => {
+  if (expr === exprImplTrue) {
+    return exprFalse();
+  }
+  if (expr === exprImplFalse) {
+    return exprTrue();
+  }
+  return state => expr(state).result ? exprFalse()(state) : exprTrue()(state);
+}
+
+export const exprCond = (cond: Expr, then: Expr, otherwise: Expr): Expr => {
+  if (cond === exprImplTrue) {
+    return then;
+  }
+  if (cond === exprImplFalse) {
+    return otherwise;
+  }
+  return state => cond(state).result ? then(state) : otherwise(state);
+}
+
 export const exprAge = (age: Age): Expr => state => state.age === age ? exprTrue()(state) : exprFalse()(state);
 
 export const exprHas = (item: string, count: number): Expr => {
