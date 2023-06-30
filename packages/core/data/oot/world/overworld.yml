@@ -1153,7 +1153,7 @@
     SEEDS: "is_child"
   locations:
     "Zora Fountain Iceberg HP": "is_adult"
-    "Zora Fountain Bottom HP": "has_tunic_zora && has_iron_boots"
+    "Zora Fountain Bottom HP": "is_adult && has_tunic_zora && has_iron_boots"
     "Zora Fountain GS Wall": "gs_night && can_boomerang"
     "Zora Fountain GS Tree": "is_child && can_damage_skull"
     "Zora Fountain GS Upper": "gs_night && has_explosives_or_hammer && can_hookshot && can_lift_silver"
