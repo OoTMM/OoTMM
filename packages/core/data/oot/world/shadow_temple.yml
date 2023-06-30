@@ -33,8 +33,8 @@
     "Shadow Temple Invisible Spike Room": "small_keys(SMALL_KEY_SHADOW, 2) && can_hookshot && has_lens"
     "Shadow Temple Skull": "small_keys(SMALL_KEY_SHADOW, 2) && can_hookshot && has_bombs && has_lens"
     "Shadow Temple GS Skull Pot": "small_keys(SMALL_KEY_SHADOW, 2) && can_hookshot && has_lens"
-    "Shadow Temple GS Falling Spikes": "can_hookshot"
-    "Shadow Temple GS Invisible Scythe": "true"
+    "Shadow Temple GS Falling Spikes": "can_collect_distance"
+    "Shadow Temple GS Invisible Scythe": "can_collect_distance"
 "Shadow Temple Wind":
   dungeon: Shadow
   exits:
@@ -52,4 +52,4 @@
     "Shadow Temple Boss Key Room 1": "can_use_din"
     "Shadow Temple Boss Key Room 2": "can_use_din"
     "Shadow Temple Invisible Floormaster": "true"
-    "Shadow Temple GS Triple Skull Pot": "can_hookshot"
+    "Shadow Temple GS Triple Skull Pot": "can_collect_distance"

@@ -58,24 +58,24 @@
   exits:
     "Gerudo Fortress Lower-Right Ledge": "true"
     "Gerudo Fortress Kitchen Tunnel End": "true"
-    "Gerudo Fortress Kitchen Bottom": "can_use_bow || has(GERUDO_CARD)"
+    "Gerudo Fortress Kitchen Bottom": "can_use_bow || can_hookshot || has(GERUDO_CARD)"
 "Gerudo Fortress Kitchen Bottom":
   dungeon: "GF"
   exits:
-    "Gerudo Fortress Kitchen Tunnel Mid": "can_use_bow || has(GERUDO_CARD)"
-    "Gerudo Fortress Kitchen Ledge Near Tunnel": "can_use_bow || has(GERUDO_CARD)"
-    "Gerudo Fortress Kitchen Ledge Away from Tunnel": "can_use_bow || has(GERUDO_CARD)"
+    "Gerudo Fortress Kitchen Tunnel Mid": "can_use_bow || can_hookshot || has(GERUDO_CARD)"
+    "Gerudo Fortress Kitchen Ledge Near Tunnel": "can_use_bow || can_hookshot || has(GERUDO_CARD)"
+    "Gerudo Fortress Kitchen Ledge Away from Tunnel": "can_use_bow || can_hookshot || has(GERUDO_CARD)"
 "Gerudo Fortress Kitchen Ledge Near Tunnel":
   dungeon: "GF"
   exits:
     "Gerudo Fortress Lower-Center Ledge": "true"
-    "Gerudo Fortress Kitchen Bottom": "can_use_bow || has(GERUDO_CARD)"
+    "Gerudo Fortress Kitchen Bottom": "can_use_bow || can_hookshot || has(GERUDO_CARD)"
     "Gerudo Fortress Kitchen Ledge Away from Tunnel": "can_hookshot || has_hover_boots"
 "Gerudo Fortress Kitchen Ledge Away from Tunnel":
   dungeon: "GF"
   exits:
     "Gerudo Fortress Upper-Center Ledge": "true"
-    "Gerudo Fortress Kitchen Bottom": "can_use_bow || has(GERUDO_CARD)"
+    "Gerudo Fortress Kitchen Bottom": "can_use_bow || can_hookshot || has(GERUDO_CARD)"
     "Gerudo Fortress Kitchen Ledge Near Tunnel": "can_hookshot || has_hover_boots"
 "Gerudo Fortress Carpenter 4":
   dungeon: "GF"

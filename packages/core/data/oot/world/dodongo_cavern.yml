@@ -67,7 +67,7 @@
     "Dodongo Cavern Bomb Bag Room 1": "true"
   locations:
     "Dodongo Cavern GS Stairs Vines": "true"
-    "Dodongo Cavern GS Stairs Top": "(can_hookshot || can_boomerang) && event(DC_SHORTCUT)"
+    "Dodongo Cavern GS Stairs Top": "can_collect_distance && event(DC_SHORTCUT)"
 "Dodongo Cavern Compass Room":
   dungeon: DC
   exits:

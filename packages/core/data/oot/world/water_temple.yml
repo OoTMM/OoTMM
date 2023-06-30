@@ -89,7 +89,7 @@
   exits:
     "Water Temple Boss Key Room": "small_keys(SMALL_KEY_WATER, 5)"
   locations:
-    "Water Temple GS Waterfalls": "can_hookshot"
+    "Water Temple GS Waterfalls": "can_collect_distance"
 "Water Temple Boss Key Room":
   dungeon: Water
   locations:
@@ -103,7 +103,7 @@
 "Water Temple Before Dark Link":
   dungeon: Water
   exits:
-    "Water Temple Dark Link": "can_hookshot"
+    "Water Temple Dark Link": "can_hookshot || has_hover_boots"
 "Water Temple Dark Link":
   dungeon: Water
   exits:

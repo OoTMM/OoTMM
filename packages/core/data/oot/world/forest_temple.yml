@@ -134,8 +134,11 @@
   dungeon: Forest
   exits:
     "Forest Temple Poe 3": "true"
+    "Forest Temple Garden East": "true"
   locations:
     "Forest Temple Checkerboard": "true"
+    "Forest Temple Garden": "true"
+    "Forest Temple GS Garden East": "can_collect_distance"
 "Forest Temple Poe 3":
   dungeon: Forest
   events:
