@@ -67,7 +67,7 @@ static void appendCorrectItemName(char** b, s16 gi, u8 player)
 
     if (player != 0 && player != 0xff && player != gComboData.playerId)
     {
-        comboTextAppendStr(b, " for " TEXT_COLOR_YELLOW " Player ");
+        comboTextAppendStr(b, " for " TEXT_COLOR_YELLOW "Player ");
         comboTextAppendNum(b, player);
         comboTextAppendClearColor(b);
     }
