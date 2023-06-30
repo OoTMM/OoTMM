@@ -90,9 +90,6 @@
 "bombers1": "event(BOMBERS_NORTH1) && event(BOMBERS_EAST1) && event(BOMBERS_WEST1)"
 "bombers2": "event(BOMBERS_NORTH2) && event(BOMBERS_EAST2) && event(BOMBERS_WEST2)"
 "bombers3": "event(BOMBERS_NORTH3) && event(BOMBERS_EAST3) && event(BOMBERS_WEST3)"
-"can_soar": "has_ocarina && has(SONG_SOARING) && (has(OWL_CLOCK_TOWN) || has(OWL_MILK_ROAD) || has(OWL_SOUTHERN_SWAMP) || has(OWL_WOODFALL) || has(OWL_MOUNTAIN_VILLAGE) || has(OWL_SNOWHEAD) || has(OWL_GREAT_BAY) || has(OWL_ZORA_CAPE) || has(OWL_IKANA_CANYON) || has(OWL_STONE_TOWER))"
-"can_oot_warp": "setting(crossWarpOot) && has_ocarina && (has(OOT_SONG_TP_LIGHT) || has(OOT_SONG_TP_FOREST) || has(OOT_SONG_TP_FIRE) || has(OOT_SONG_TP_WATER) || has(OOT_SONG_TP_SPIRIT) || has(OOT_SONG_TP_SHADOW))"
-"can_warp": "can_soar || can_oot_warp"
 
 # Wallets
 "has_wallet(n)": "cond(setting(childWallets), has(WALLET, n) || has(SHARED_WALLET, n), has(WALLET, n - 1) || has(SHARED_WALLET, n - 1))"
