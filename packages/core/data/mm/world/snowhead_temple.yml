@@ -176,6 +176,7 @@
     "Snowhead Temple Boss Key Room": "event(SNOWHEAD_RAISE_PILLAR)"
     "Snowhead Temple Center Level 3 Iced": "true"
     "Snowhead Temple Center Level 3 Snow": "true"
+    "Snowhead Temple Center Level 4": "trick(MM_SHT_PILLARLESS) && (can_use_fire_arrows || has_bombs)"
   locations:
     "Snowhead Temple SF Dinolfos 1": "true"
     "Snowhead Temple SF Dinolfos 2": "true"
@@ -185,6 +186,7 @@
     "Snowhead Temple Dinolfos Room": "event(SNOWHEAD_RAISE_PILLAR)"
     "Snowhead Temple Center Level 3 Iced": "true"
     "Snowhead Temple Center Level 3 Snow": "event(SNOWHEAD_RAISE_PILLAR)"
+    "Snowhead Temple Center Level 4": "trick(MM_SHT_PILLARLESS) && (can_use_fire_arrows || has_bombs)"
   locations:
     "Snowhead Temple Boss Key": "true"
 "Snowhead Temple Center Level 4":

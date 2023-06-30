@@ -707,6 +707,7 @@
     BOMBS: "true"
     ARROWS: "true"
     MAGIC: "true"
+    WATER: "has_bottle"
   locations:
     "Southern Swamp HP": "(has(DEED_LAND) && has(MASK_DEKU)) || (trick(MM_SOUTHERN_SWAMP_SCRUB_HP_GORON) && has_mask_goron)"
     "Southern Swamp Scrub Deed": "has(DEED_LAND)"

@@ -43,6 +43,7 @@ export const TRICKS = {
   MM_PALACE_GUARD_SKIP: "Backflip over Deku Palace Guards",
   MM_SHT_FIRELESS: "Complete Snowhead Temple without Fire Arrows",
   MM_SHT_STICKS_RUN: "Access SHT Pillar Fireless with Precise Stick Run",
+  MM_SHT_PILLARLESS: "Snowhead Temple Skip Raising Pillar",
   MM_KEG_EXPLOSIVES: "Use Powder Kegs as Explosives",
   MM_DOG_RACE_CHEST_NOTHING: "Doggy Racetrack Chest with Nothing",
   MM_MAJORA_LOGIC: "Fight Majora to Reset Time",
