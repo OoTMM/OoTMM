@@ -63,7 +63,7 @@
     "Kokiri Forest Kokiri Sword Chest": "is_child"
     "Kokiri Forest GS Soil": "gs_soil && can_damage_skull"
     "Kokiri Forest GS Night Child": "is_child && gs_night && can_damage_skull"
-    "Kokiri Forest GS Night Adult": "can_hookshot && gs_night"
+    "Kokiri Forest GS Night Adult": "is_adult && can_collect_distance && gs_night"
   gossip:
     "Kokiri Gossip Near Lost Woods Open": "true"
     "Kokiri Gossip Near Lost Woods Grotto": "hidden_grotto_storms"
@@ -385,9 +385,9 @@
   locations:
     "Lon Lon Ranch Malon Song": "is_child && has_ocarina && event(MALON) && is_day"
     "Lon Lon Ranch GS Tree": "is_child"
-    "Lon Lon Ranch GS House": "can_boomerang && gs_night"
+    "Lon Lon Ranch GS House": "is_child && can_boomerang && gs_night"
     "Lon Lon Ranch GS Rain Shed": "is_child && gs_night"
-    "Lon Lon Ranch GS Back Wall": "can_boomerang && gs_night"
+    "Lon Lon Ranch GS Back Wall": "is_child && can_boomerang && gs_night"
 "Lon Lon Ranch Stables":
   region: ENTRANCE
   exits:
@@ -570,7 +570,7 @@
     "Lost Woods Scrub Near Theater Left": "is_child && can_hit_scrub && scrub_price(0x01)"
     "Lost Woods Scrub Near Theater Right": "is_child && can_hit_scrub && scrub_price(0x02)"
     "Lost Woods GS Soil Theater": "gs_soil && can_damage_skull"
-    "Lost Woods GS Bean Ride": "gs_night && (can_ride_bean(BEAN_LOST_WOODS_LATE) || (trick(OOT_LOST_WOODS_ADULT_GS) && can_hookshot && (can_longshot || can_use_bow || has_bombchu || can_use_din)))"
+    "Lost Woods GS Bean Ride": "is_adult && gs_night && (can_ride_bean(BEAN_LOST_WOODS_LATE) || (trick(OOT_LOST_WOODS_ADULT_GS) && can_collect_distance && (can_longshot || can_use_bow || has_bombchu || can_use_din)))"
 "Deku Theater":
   region: ENTRANCE
   exits:
@@ -608,7 +608,7 @@
   locations:
     "Saria's Song": "met_zelda && is_child"
     "Sacred Meadow Sheik Song": "is_adult"
-    "Sacred Meadow GS Night Adult": "can_hookshot && gs_night"
+    "Sacred Meadow GS Night Adult": "is_adult && can_collect_distance && gs_night"
   gossip:
     "Sacred Meadow Gossip Near Forest Temple": "true"
     "Sacred Meadow Gossip Atop Maze Woods Side": "true"
@@ -651,7 +651,7 @@
     "Kakariko Anju Cojiro": "event(TALON_AWAKE) && is_day"
     "Kakariko Song Shadow": "is_adult && has(MEDALLION_FOREST) && has(MEDALLION_FIRE) && has(MEDALLION_WATER)"
     "Kakariko Man on Roof": "can_hookshot || trick(OOT_MAN_ON_ROOF)"
-    "Kakariko GS Roof": "gs_night && can_hookshot"
+    "Kakariko GS Roof": "is_adult && gs_night && can_hookshot"
     "Kakariko GS Shooting Gallery": "gs_night && is_child"
     "Kakariko GS Tree": "gs_night && is_child"
     "Kakariko GS House of Skulltula": "gs_night && is_child"
@@ -801,7 +801,7 @@
     "Graveyard Dampe Game": "is_child && can_use_wallet(1) && is_dusk"
     "Graveyard Crate HP": "can_ride_bean(BEAN_GRAVEYARD) || can_longshot"
     "Graveyard GS Soil": "gs_soil && can_damage_skull"
-    "Graveyard GS Wall": "can_boomerang && gs_night"
+    "Graveyard GS Wall": "is_child && can_boomerang && gs_night"
 "Graveyard Upper":
   region: GRAVEYARD
   exits:
@@ -865,7 +865,7 @@
   locations:
     "Death Mountain Chest": "has_explosives_or_hammer"
     "Death Mountain HP": "true"
-    "Death Mountain GS Entrance": "has_explosives_or_hammer"
+    "Death Mountain GS Entrance": "has_explosives || (can_hammer && has_ranged_weapon)"
     "Death Mountain GS Soil": "gs_soil && has_bombflowers && can_damage_skull"
     "Death Mountain GS Above Dodongo":  "gs_night && is_adult && (can_hammer || trick(OOT_DMT_RED_ROCK_GS))"
 "Death Mountain Summit":
@@ -883,7 +883,7 @@
     "Death Mountain Prescription": "adult_trade(BROKEN_GORON_SWORD)"
     "Death Mountain Claim Check": "adult_trade(EYE_DROPS)"
     "Death Mountain Biggoron Sword": "adult_trade(CLAIM_CHECK)"
-    "Death Mountain GS Before Climb": "gs_night && (can_hammer || trick(OOT_DMT_RED_ROCK_GS))"
+    "Death Mountain GS Before Climb": "is_adult && gs_night && (can_hammer || trick(OOT_DMT_RED_ROCK_GS))"
   gossip:
     "Death Mountain Gossip on Climb": "true"
 "Death Mountain Storms Grotto":
@@ -1011,8 +1011,8 @@
     "Zora River Frogs Storms": "is_child && can_play_storms"
     "Zora River Frogs Game": "is_child && can_play(SONG_ZELDA) && can_play(SONG_SARIA) && can_play_epona && can_play_sun && can_play_time && can_play_storms"
     "Zora River GS Ladder": "is_child && gs_night && can_damage_skull"
-    "Zora River GS Near Grotto": "is_adult && gs_night && can_hookshot"
-    "Zora River GS Near Bridge": "is_adult && gs_night && can_hookshot"
+    "Zora River GS Near Grotto": "is_adult && gs_night && can_collect_distance"
+    "Zora River GS Near Bridge": "is_adult && gs_night && can_collect_distance"
   gossip:
     "Zora River Gossip High Pillar": "true"
     "Zora River Gossip Near Domain": "true"
@@ -1062,7 +1062,7 @@
     "Zora Domain Diving Game": "is_child && can_use_wallet(1)"
     "Zora Domain Tunic": "is_adult && has_blue_fire"
     "Zora Domain Eyeball Frog": "has_blue_fire && adult_trade(PRESCRIPTION)"
-    "Zora Domain GS Waterfall": "is_adult && gs_night && (has_ranged_weapon_adult || has(MAGIC_UPGRADE) || has(SHARED_MAGIC_UPGRADE))"
+    "Zora Domain GS Waterfall": "is_adult && gs_night && (has_ranged_weapon_adult || can_boomerang || has_magic)"
   gossip:
     "Zora Domain Gossip": "true"
 "Zora Domain Back":
@@ -1111,10 +1111,10 @@
     "Lake Hylia Underwater Bottle": "is_child && has(SCALE)"
     "Lake Hylia Fire Arrow": "can_use_bow && (event(WATER_TEMPLE_CLEARED) || scarecrow_longshot)"
     "Lake Hylia HP": "can_ride_bean(BEAN_LAKE_HYLIA) || scarecrow_hookshot"
-    "Lake Hylia GS Lab Wall": "gs_night && (can_boomerang || (trick(OOT_LAB_WALL_GS) && (has_sword_kokiri || can_use_sticks)))"
+    "Lake Hylia GS Lab Wall": "is_child && gs_night && (can_boomerang || (trick(OOT_LAB_WALL_GS) && (can_use_sword || can_use_sticks)))"
     "Lake Hylia GS Island": "is_child && gs_night && can_damage_skull"
     "Lake Hylia GS Soil": "gs_soil && can_damage_skull"
-    "Lake Hylia GS Big Tree": "gs_night && can_longshot"
+    "Lake Hylia GS Big Tree": "is_adult && gs_night && can_longshot"
   gossip:
     "Lake Hylia Gossip Near River": "true"
     "Lake Hylia Gossip Southeast Lake": "true"
@@ -1154,9 +1154,9 @@
   locations:
     "Zora Fountain Iceberg HP": "is_adult"
     "Zora Fountain Bottom HP": "is_adult && has_tunic_zora && has_iron_boots"
-    "Zora Fountain GS Wall": "gs_night && can_boomerang"
+    "Zora Fountain GS Wall": "is_child && gs_night && can_boomerang"
     "Zora Fountain GS Tree": "is_child && can_damage_skull"
-    "Zora Fountain GS Upper": "gs_night && has_explosives_or_hammer && can_hookshot && can_lift_silver"
+    "Zora Fountain GS Upper": "is_adult && gs_night && has_explosives_or_hammer && can_collect_distance && can_lift_silver"
   gossip:
     "Zora Fountain Gossip Northwest": "true"
     "Zora Fountain Gossip Near Fairy": "true"
@@ -1284,7 +1284,7 @@
     "Gerudo Valley Crate HP": "is_child || can_longshot"
     "Gerudo Valley Waterfall HP": "true"
     "Gerudo Valley GS Soil": "gs_soil && can_damage_skull"
-    "Gerudo Valley GS Wall": "can_boomerang && gs_night"
+    "Gerudo Valley GS Wall": "is_child && can_boomerang && gs_night"
     "Gerudo Valley Cow": "is_child && can_play_epona"
   gossip:
     "Gerudo Valley Gossip": "true"
@@ -1300,8 +1300,8 @@
   locations:
     "Gerudo Valley Chest": "can_hammer"
     "Gerudo Valley Broken Goron Sword": "adult_trade(POACHER_SAW)"
-    "Gerudo Valley GS Tent": "can_hookshot && gs_night"
-    "Gerudo Valley GS Pillar": "can_hookshot && gs_night"
+    "Gerudo Valley GS Tent": "is_adult && can_collect_distance && gs_night"
+    "Gerudo Valley GS Pillar": "is_adult && can_collect_distance && gs_night"
 "Octorok Grotto":
   region: ENTRANCE
   exits:
@@ -1336,7 +1336,7 @@
   locations:
     "Gerudo Fortress Archery Reward 1": "can_ride_epona && can_use_bow && has(GERUDO_CARD) && can_use_wallet(1) && is_day"
     "Gerudo Fortress Archery Reward 2": "can_ride_epona && can_use_bow && has(GERUDO_CARD) && can_use_wallet(1) && is_day"
-    "Gerudo Fortress GS Target": "can_hookshot && gs_night && has(GERUDO_CARD)"
+    "Gerudo Fortress GS Target": "is_adult && can_collect_distance && gs_night && has(GERUDO_CARD)"
 "Gerudo Fortress Lower-Right Ledge":
   region: GERUDO_FORTRESS
   exits:
@@ -1369,7 +1369,7 @@
     "Gerudo Fortress Upper-Left Ledge": "scarecrow_hookshot || can_longshot || has_hover_boots"
     "Gerudo Fortress Center Ledge": "true"
   locations:
-    "Gerudo Fortress GS Wall": "can_hookshot && gs_night"
+    "Gerudo Fortress GS Wall": "is_adult && can_collect_distance && gs_night"
 "Gerudo Fortress Upper-Left Ledge":
   region: GERUDO_FORTRESS
   exits:
@@ -1436,8 +1436,8 @@
   locations:
     "Desert Colossus HP": "can_ride_bean(BEAN_DESERT_COLOSSUS)"
     "Desert Colossus GS Soil": "gs_soil && can_damage_skull"
-    "Desert Colossus GS Tree": "can_hookshot && gs_night"
-    "Desert Colossus GS Plateau": "gs_night && (can_longshot || can_ride_bean(BEAN_DESERT_COLOSSUS))"
+    "Desert Colossus GS Tree": "is_adult && can_collect_distance && gs_night"
+    "Desert Colossus GS Plateau": "is_adult && gs_night && (can_collect_distance || can_ride_bean(BEAN_DESERT_COLOSSUS))"
   gossip:
     "Desert Colossus Gossip": "true"
 "Desert Colossus Spirit Exit":

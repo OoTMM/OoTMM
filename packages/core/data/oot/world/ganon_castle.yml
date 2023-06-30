@@ -48,7 +48,7 @@
 "Ganon Castle Spirit":
   dungeon: Ganon
   events:
-    GANON_TRIAL_SPIRIT: "can_hookshot && has_bombchu && has_light_arrows"
+    GANON_TRIAL_SPIRIT: "can_hookshot && has_bombchu && has_light_arrows && has_mirror_shield"
   locations:
     "Ganon Castle Spirit Chest 1": "can_hookshot"
     "Ganon Castle Spirit Chest 2": "can_hookshot && has_bombchu && has_lens"

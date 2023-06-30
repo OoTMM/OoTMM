@@ -9,7 +9,7 @@
   dungeon: Fire
   exits:
     "Fire Temple": "true"
-    "Fire Temple Boss": "boss_key(BOSS_KEY_FIRE) && (event(FIRE_TEMPLE_PILLAR_HAMMER) || has_hover_boots) && has_tunic_goron"
+    "Fire Temple Boss": "boss_key(BOSS_KEY_FIRE) && ((is_adult && event(FIRE_TEMPLE_PILLAR_HAMMER)) || has_hover_boots) && has_tunic_goron"
   events:
     BOMBS: "has_tunic_goron"
   locations:
@@ -23,9 +23,9 @@
 "Fire Temple Lava Room":
   dungeon: Fire
   exits:
-    "Fire Temple Maze": "is_adult && has_small_keys_fire(3) && has_tunic_goron_strict && has(STRENGTH) && (has_ranged_weapon_adult || has_explosives)"
+    "Fire Temple Maze": "is_adult && has_small_keys_fire(3) && has_tunic_goron_strict && has(STRENGTH) && (has_ranged_weapon_adult || has_explosives || can_boomerang)"
   locations:
-    "Fire Temple Jail 2 Chest": "(is_adult && has_tunic_goron) || (is_child && trick(OOT_TUNICS) && can_play_time)"
+    "Fire Temple Jail 2 Chest": "has_tunic_goron && (is_adult || can_play_time)"
     "Fire Temple Jail 3 Chest": "is_adult && has_tunic_goron && has_explosives"
     "Fire Temple GS Lava Side Room": "is_adult && has_tunic_goron && can_play_time"
 "Fire Temple Maze":
