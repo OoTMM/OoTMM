@@ -29,3 +29,7 @@ MM_FISHERMAN_GAME:            0x8c
 MM_SONG_ELEGY:                0x8d
 MM_SECRET_SHRINE_WART_HP:     0x8e
 MM_COW_WELL:                  0x8f
+MM_BLACKSMITH:                0x90
+MM_MIDNIGHT_MEETING:          0x91
+MM_MADAME_AROMA_BAR:          0x92
+MM_CUCCOS:                    0x93

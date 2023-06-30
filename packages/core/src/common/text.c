@@ -140,6 +140,10 @@ static const char* const kCheckNamesMm[] = {
     TEXT_COLOR_ORANGE "Igos du Ikana",
     "the " TEXT_COLOR_YELLOW "Secret Shrine Wart and Final Chest",
     "the " TEXT_COLOR_PINK "Cow beneath the Well",
+    "the " TEXT_COLOR_RED "Blacksmith",
+    "the " TEXT_COLOR_PINK "Midnight Meeting",
+    TEXT_COLOR_BLUE "Madame Aroma in the Bar",
+    TEXT_COLOR_YELLOW "Marching for Cuccos",
 };
 
 static int isItemAmbiguousOot(s16 gi)
