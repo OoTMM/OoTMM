@@ -1012,7 +1012,7 @@
     "Zora River Frogs Game": "is_child && can_play(SONG_ZELDA) && can_play(SONG_SARIA) && can_play_epona && can_play_sun && can_play_time && can_play_storms"
     "Zora River GS Ladder": "is_child && gs_night && can_damage_skull"
     "Zora River GS Near Grotto": "is_adult && gs_night && can_collect_distance"
-    "Zora River GS Near Bridge": "is_adult && gs_night && can_collect_distance"
+    "Zora River GS Near Bridge": "is_adult && gs_night && can_hookshot"
   gossip:
     "Zora River Gossip High Pillar": "true"
     "Zora River Gossip Near Domain": "true"
