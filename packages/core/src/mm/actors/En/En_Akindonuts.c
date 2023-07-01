@@ -68,6 +68,7 @@ static void EnAkindonuts_ShopItemQuery(ComboItemQuery* q, int id)
             q->ovType = OV_NONE;
             q->id = 0;
             q->gi = GI_MM_RECOVERY_HEART;
+            q->ovFlags = 0;
         }
         else
         {
@@ -332,6 +333,7 @@ void EnAkindonuts_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, 
     ComboItemQuery q;
     int npc;
     int isShop;
+    int id;
 
     npc = -1;
     isShop = 0;
@@ -389,6 +391,21 @@ void EnAkindonuts_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, 
     }
 
     /* Shop trades */
+    switch (EnAkindonuts_ShopID(actor))
+    {
+    case 0:
+        sScrubFlag = SCRUB_SHOP_BEANS;
+        break;
+    case 1:
+        sScrubFlag = SCRUB_BOMB_BAG;
+        break;
+    case 2:
+        sScrubFlag = SCRUB_SHOP_POTION_GREEN;
+        break;
+    case 3:
+        sScrubFlag = SCRUB_SHOP_POTION_BLUE;
+        break;
+    }
     EnAkindonuts_ShopItemQuery(&q, EnAkindonuts_ShopID(actor));
     comboGiveItem(actor, play, &q, a, b);
 }
