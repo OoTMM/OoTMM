@@ -1,5 +1,6 @@
-import { Settings, Trick, TRICKS } from '../settings';
-import { Items, ITEMS_MASKS_OOT, ITEMS_MASKS_REGULAR, ITEMS_MASKS_TRANSFORM, ITEMS_MEDALLIONS, ITEMS_REMAINS, ITEMS_STONES } from './items';
+import { Settings, TRICKS } from '../settings';
+import { CountMap } from '../util';
+import { ITEMS_MASKS_OOT, ITEMS_MASKS_REGULAR, ITEMS_MASKS_TRANSFORM, ITEMS_MEDALLIONS, ITEMS_REMAINS, ITEMS_STONES } from './items';
 import { Age } from './pathfind';
 import { PRICE_RANGES } from './price';
 import { World } from './world';
@@ -112,9 +113,9 @@ export type AreaData = {
 };
 
 type State = {
-  items: {[k: string]: number};
-  renewables: {[k: string]: number};
-  licenses: {[k: string]: number};
+  items: CountMap<string>;
+  renewables: CountMap<string>;
+  licenses: CountMap<string>;
   age: Age;
   events: Set<string>;
   ignoreItems: boolean;
@@ -155,7 +156,7 @@ export const exprRestrictionsOr = (exprs: ExprResult[]): ExprRestrictions => {
   return restrictions;
 };
 
-const itemCount = (state: State, item: string): number => state.items[item] || 0;
+const itemCount = (state: State, item: string): number => state.items.get(item) || 0;
 const itemsCount = (state: State, items: string[]): number => items.reduce((acc, item) => acc + itemCount(state, item), 0);
 
 function resolveSpecialCond(settings: Settings, state: State, special: string): ExprResult {
@@ -316,7 +317,7 @@ export const exprRenewable = (item: string): Expr => {
   const depItems = [item];
   const depEvents: string[] = [];
   return state => {
-    const result = (state.ignoreItems || state.renewables[item] > 0);
+    const result = (state.ignoreItems || (state.renewables.get(item) || 0) > 0);
     return { result, depItems, depEvents };
   }
 };
@@ -326,7 +327,7 @@ export const exprLicense = (item: string): Expr => {
   const depEvents: string[] = [];
 
   return state => {
-    const result = (state.ignoreItems || state.licenses[item] > 0);
+    const result = (state.ignoreItems || (state.licenses.get(item) || 0) > 0);
     return { result, depItems, depEvents };
   }
 };

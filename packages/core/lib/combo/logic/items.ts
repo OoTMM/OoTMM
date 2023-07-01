@@ -1,23 +1,18 @@
-export type Item = string & { __brand: 'Item' };
-export type Items = {[k: Item]: number};
+import { CountMap, createMemo } from '../util';
 
-/* Item registry */
-type ItemDescriptor = {
+export type PlayerItem = {
   id: string;
-  player: null | number | 'all';
-}
-const itemRegistry: {[k: Item]: ItemDescriptor} = {};
+  player: number;
+  __brand: 'PlayerItem';
+};
 
-export function makeItem(id: string, player?: null | number | 'all'): Item {
-  const p = player === undefined ? null : player;
-  const x = (id + ((p === null) ? '' : `@${player}`)) as Item;
-  itemRegistry[x] = { id, player: p };
-  return x;
+const playerItemMemo = createMemo<PlayerItem>();
+
+export function makePlayerItem(id: string, player: number): PlayerItem {
+  return playerItemMemo(`${id}@${player}`, () => ({ id, player } as PlayerItem));
 }
 
-export function itemData(item: Item): ItemDescriptor {
-  return itemRegistry[item];
-}
+export type PlayerItems = CountMap<PlayerItem>;
 
 const ITEM_TRIFORCE = 'SHARED_TRIFORCE';
 
@@ -616,88 +611,39 @@ export const ITEMS_TINGLE_MAPS = new Set<string>([
   'MM_WORLD_MAP_STONE_TOWER',
 ]);
 
-export const isCompass = (item: Item) => ITEMS_COMPASSES.has(itemData(item).id);
-export const isMap = (item: Item) => ITEMS_MAPS.has(itemData(item).id);
-export const isMapCompass = (item: Item) => isMap(item) || isCompass(item);
-export const isSong = (item: Item) => ITEMS_SONGS.has(itemData(item).id);
-export const isSmallKey = (item: Item) => isSmallKeyRegular(item) || isSmallKeyHideout(item);
-export const isSmallKeyHideout = (item: Item) => itemData(item).id === 'OOT_SMALL_KEY_GF';
-export const isSmallKeyRegularOot = (item: Item) => ITEMS_SMALL_KEY_OOT.has(itemData(item).id);
-export const isSmallKeyRegularMm = (item: Item) => ITEMS_SMALL_KEY_MM.has(itemData(item).id);
-export const isSmallKeyRegular = (item: Item) => isSmallKeyRegularOot(item) || isSmallKeyRegularMm(item);
-export const isGanonBossKey = (item: Item) => itemData(item).id === 'OOT_BOSS_KEY_GANON';
-export const isBossKey = (item: Item) => isRegularBossKey(item) || isGanonBossKey(item);
-export const isRegularBossKeyOot = (item: Item) => ITEMS_BOSS_KEY_OOT.has(itemData(item).id);
-export const isRegularBossKeyMm = (item: Item) => ITEMS_BOSS_KEY_MM.has(itemData(item).id);
-export const isRegularBossKey = (item: Item) => isRegularBossKeyOot(item) || isRegularBossKeyMm(item);
-export const isStrayFairy = (item: Item) => !!(itemData(item).id.match(/^(OOT|MM)_STRAY_FAIRY_/));
-export const isTownStrayFairy = (item: Item) => itemData(item).id === 'MM_STRAY_FAIRY_TOWN';
-export const isDungeonStrayFairy = (item: Item) => isStrayFairy(item) && !isTownStrayFairy(item);
-export const isKey = (item: Item) => isSmallKey(item) || isBossKey(item);
-export const isDungeonItem = (item: Item) => isMapCompass(item) || isKey(item) || isStrayFairy(item);
-export const isDungeonReward = (item: Item) => DUNGEON_REWARDS.has(itemData(item).id);
-export const isItemMajor = (item: Item) => ITEMS_REQUIRED.has(itemData(item).id);
-export const isGoldToken = (item: Item) => !!itemData(item).id.match(/^OOT_GS_TOKEN/);
-export const isHouseToken = (item: Item) => !!itemData(item).id.match(/^MM_GS_TOKEN/);
-export const isToken = (item: Item) => isGoldToken(item) || isHouseToken(item);
-export const isJunk = (item: Item) => ITEMS_JUNK.has(itemData(item).id);
-export const isMasterSword = (item: Item) => itemData(item).id === 'OOT_SWORD_MASTER';
-export const isGerudoCard = (item: Item) => itemData(item).id === 'OOT_GERUDO_CARD';
-export const isItemImportant = (item: Item) => isItemMajor(item) || isDungeonReward(item) || isToken(item) || isStrayFairy(item) || isKey(item) || isItemConsumable(item) ||isItemTriforce(item) || isItemLicense(item);
-export const isItemConsumable = (item: Item) => CONSUMABLES.has(itemData(item).id);
-export const isRupees = (item: Item) => !!itemData(item).id.match(/^(OOT|MM|SHARED)_RUPEE_/);
-export const isItemUnlimitedStarting = (item: Item) => isRupees(item) || isItemConsumable(item);
-export const isItemCriticalRenewable = (item: Item) => CRITICAL_RENEWABLE_ITEMS.has(itemData(item).id);
-export const isTingleMap = (item: Item) => ITEMS_TINGLE_MAPS.has(itemData(item).id);
-export const isOwlStatue = (item: Item) => ITEMS_OWLS.has(itemData(item).id);
-export const isItemLicense = (item: Item) => ITEMS_LICENSES.has(itemData(item).id);
-export const isItemTriforce = (item: Item) => itemData(item).id === ITEM_TRIFORCE;
-
-export const itemsArray = (items: Items) => {
-  const arr: Item[] = [];
-  for (const item of Object.keys(items) as Item[]) {
-    for (let i = 0; i < items[item]; i++) {
-      arr.push(item);
-    }
-  }
-  return arr;
-};
-
-export const addItem = (items: Items, item: Item) => {
-  items[item] = (items[item] || 0) + 1;
-};
-
-export const addRawItem = (items: {[k: string]: number}, item: string, amount = 1) => {
-  items[item] = (items[item] || 0) + amount;
-};
-
-export const removeItem = (items: Items, item: Item) => {
-  if (items[item] === undefined)
-    return;
-  items[item] -= 1;
-  if (items[item] === 0) {
-    delete items[item];
-  }
-};
-
-export const combinedItems = (items: Items, other: Items) => {
-  const combined: Items = {};
-  for (const item of Object.keys(items) as Item[]) {
-    combined[item] = items[item];
-  }
-  for (const item of Object.keys(other) as Item[]) {
-    combined[item] = (combined[item] || 0) + other[item];
-  }
-  return combined;
-};
-
-export const combinedRawItems = (items: {[k: string]: number}, other: {[k: string]: number}) => {
-  const combined: Items = {};
-  for (const item of Object.keys(items) as Item[]) {
-    combined[item] = items[item];
-  }
-  for (const item of Object.keys(other) as Item[]) {
-    combined[item] = (combined[item] || 0) + other[item];
-  }
-  return combined;
-};
+export const isCompass = (item: string) => ITEMS_COMPASSES.has(item);
+export const isMap = (item: string) => ITEMS_MAPS.has(item);
+export const isMapCompass = (item: string) => isMap(item) || isCompass(item);
+export const isSong = (item: string) => ITEMS_SONGS.has(item);
+export const isSmallKey = (item: string) => isSmallKeyRegular(item) || isSmallKeyHideout(item);
+export const isSmallKeyHideout = (item: string) => item === 'OOT_SMALL_KEY_GF';
+export const isSmallKeyRegularOot = (item: string) => ITEMS_SMALL_KEY_OOT.has(item);
+export const isSmallKeyRegularMm = (item: string) => ITEMS_SMALL_KEY_MM.has(item);
+export const isSmallKeyRegular = (item: string) => isSmallKeyRegularOot(item) || isSmallKeyRegularMm(item);
+export const isGanonBossKey = (item: string) => item === 'OOT_BOSS_KEY_GANON';
+export const isBossKey = (item: string) => isRegularBossKey(item) || isGanonBossKey(item);
+export const isRegularBossKeyOot = (item: string) => ITEMS_BOSS_KEY_OOT.has(item);
+export const isRegularBossKeyMm = (item: string) => ITEMS_BOSS_KEY_MM.has(item);
+export const isRegularBossKey = (item: string) => isRegularBossKeyOot(item) || isRegularBossKeyMm(item);
+export const isStrayFairy = (item: string) => !!(item.match(/^(OOT|MM)_STRAY_FAIRY_/));
+export const isTownStrayFairy = (item: string) => item === 'MM_STRAY_FAIRY_TOWN';
+export const isDungeonStrayFairy = (item: string) => isStrayFairy(item) && !isTownStrayFairy(item);
+export const isKey = (item: string) => isSmallKey(item) || isBossKey(item);
+export const isDungeonItem = (item: string) => isMapCompass(item) || isKey(item) || isStrayFairy(item);
+export const isDungeonReward = (item: string) => DUNGEON_REWARDS.has(item);
+export const isItemMajor = (item: string) => ITEMS_REQUIRED.has(item);
+export const isGoldToken = (item: string) => !!item.match(/^OOT_GS_TOKEN/);
+export const isHouseToken = (item: string) => !!item.match(/^MM_GS_TOKEN/);
+export const isToken = (item: string) => isGoldToken(item) || isHouseToken(item);
+export const isJunk = (item: string) => ITEMS_JUNK.has(item);
+export const isMasterSword = (item: string) => item === 'OOT_SWORD_MASTER';
+export const isGerudoCard = (item: string) => item === 'OOT_GERUDO_CARD';
+export const isItemImportant = (item: string) => isItemMajor(item) || isDungeonReward(item) || isToken(item) || isStrayFairy(item) || isKey(item) || isItemConsumable(item) ||isItemTriforce(item) || isItemLicense(item);
+export const isItemConsumable = (item: string) => CONSUMABLES.has(item);
+export const isRupees = (item: string) => !!item.match(/^(OOT|MM|SHARED)_RUPEE_/);
+export const isItemUnlimitedStarting = (item: string) => isRupees(item) || isItemConsumable(item);
+export const isItemCriticalRenewable = (item: string) => CRITICAL_RENEWABLE_ITEMS.has(item);
+export const isTingleMap = (item: string) => ITEMS_TINGLE_MAPS.has(item);
+export const isOwlStatue = (item: string) => ITEMS_OWLS.has(item);
+export const isItemLicense = (item: string) => ITEMS_LICENSES.has(item);
+export const isItemTriforce = (item: string) => item === ITEM_TRIFORCE;

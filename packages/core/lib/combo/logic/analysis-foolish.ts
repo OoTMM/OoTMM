@@ -179,7 +179,7 @@ export class LogicPassAnalysisFoolish {
       if (this.state.analysis.unreachable.has(loc)) continue;
       if (this.state.analysis.useless.has(loc)) continue;
       const item = this.state.items.get(loc)!;
-      if (isItemConsumable(item) && !isLocationRenewable(this.state.world, loc) && !isItemLicense(item)) continue;
+      if (isItemConsumable(item.id) && !isLocationRenewable(this.state.world, loc) && !isItemLicense(item.id)) continue;
       locsSet.add(loc);
     }
 

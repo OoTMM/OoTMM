@@ -5,7 +5,7 @@ import { ExprParser } from './expr-parser';
 import { DATA_POOL, DATA_MACROS, DATA_WORLD, DATA_REGIONS, DATA_ENTRANCES_POOL, DATA_HINTS, DATA_HINTS_POOL } from '../data';
 import { Settings } from '../settings';
 import { Monitor } from '../monitor';
-import { isDungeonReward, isSong, makeItem } from './items';
+import { isDungeonReward, isSong } from './items';
 import { defaultPrices } from './price';
 
 export type ExprMap = {
@@ -282,9 +282,9 @@ export class LogicPassWorld {
       const check = { game, type, scene, id, item, hint } as WorldCheck;
       this.world.checks[location] = check;
 
-      if (isSong(makeItem(item))) {
+      if (isSong(item)) {
         this.world.songLocations.add(location);
-      } else if (isDungeonReward(makeItem(item))) {
+      } else if (isDungeonReward(item)) {
         this.world.warpLocations.add(location);
       }
     }

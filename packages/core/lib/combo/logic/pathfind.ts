@@ -2,11 +2,12 @@ import { cloneDeep } from 'lodash';
 import { Settings } from '../settings';
 import { AreaData, Expr, ExprResult, isDefaultRestrictions, MM_TIME_SLICES } from './expr';
 
-import { addItem, addRawItem, combinedItems, combinedRawItems, Item, itemData, Items } from './items';
+import { PlayerItem, PlayerItems } from './items';
 import { Location, locationData, makeLocation, makePlayerLocations } from './locations';
 import { World } from './world';
 import { isLocationLicenseGranting, isLocationRenewable } from './locations';
 import { ItemPlacement } from './solve';
+import { CountMap, countMapAdd } from '../util';
 
 export const AGES = ['child', 'adult'] as const;
 
@@ -57,9 +58,9 @@ type PathfinderWorldState = {
   queue: PathfinderQueue;
   dependencies: PathfinderDependencies;
   uncollectedLocations: Set<string>;
-  items: {[k: string]: number};
-  licenses: {[k: string]: number};
-  renewables: {[k: string]: number};
+  items: CountMap<string>;
+  licenses: CountMap<string>;
+  renewables: CountMap<string>;
   forbiddenReachableLocations: Set<string>;
   events: Set<string>;
   restrictedLocations?: Set<string>;
@@ -70,7 +71,7 @@ export type PathfinderState = {
   goal: boolean;
   started: boolean;
   ws: PathfinderWorldState[];
-  previousAssumedItems: Items;
+  previousAssumedItems: PlayerItems;
 
   /* Output */
   locations: Set<Location>;
@@ -87,6 +88,14 @@ const emptyDepList = (): PathfinderDependencyList => ({
     adult: new Set(),
   },
 });
+
+const makeStartingItems = (settings: Settings): CountMap<string> => {
+  const map = new Map<string, number>();
+  for (const [item, count] of Object.entries(settings.startingItems)) {
+    map.set(item, count);
+  }
+  return map;
+}
 
 const defaultWorldState = (settings: Settings): PathfinderWorldState => ({
   areas: {
@@ -107,9 +116,9 @@ const defaultWorldState = (settings: Settings): PathfinderWorldState => ({
     events: new Map(),
   },
   uncollectedLocations: new Set(),
-  items: { ...settings.startingItems },
-  licenses: { ...settings.startingItems },
-  renewables: {},
+  items: makeStartingItems(settings),
+  licenses: makeStartingItems(settings),
+  renewables: new Map(),
   forbiddenReachableLocations: new Set(),
   events: new Set(),
 });
@@ -132,7 +141,7 @@ const defaultState = (settings: Settings, worldCount: number): PathfinderState =
   }
 
   return {
-    previousAssumedItems: {},
+    previousAssumedItems: new Map,
     goal: false,
     started: false,
     ws: defaultWorldStates(settings, worldCount),
@@ -179,7 +188,7 @@ const cloneAreaData = (a: AreaData): AreaData => ({
 
 export type EntranceOverrides = {[k: string]: {[k: string]: string | null}};
 type PathfinderOptions = {
-  assumedItems?: Items;
+  assumedItems?: PlayerItems;
   items?: ItemPlacement;
   ignoreItems?: boolean;
   recursive?: boolean;
@@ -449,7 +458,6 @@ export class Pathfinder {
 
   private addLocationDelayed(world: number, loc: string) {
     const globalLoc = makeLocation(loc, world);
-    const ws = this.state.ws[world];
     this.state.locations.add(globalLoc);
     this.state.newLocations.add(globalLoc);
   }
@@ -458,17 +466,16 @@ export class Pathfinder {
     const ws = this.state.ws[world];
     const globalLoc = makeLocation(loc, world);
     this.state.locations.add(globalLoc);
-    const globalItem = this.opts.items?.get(globalLoc);
-    if (globalItem) {
-      const itemD = itemData(globalItem);
-      const otherWs = this.state.ws[itemD.player as number];
+    const playerItem = this.opts.items?.get(globalLoc);
+    if (playerItem) {
+      const otherWs = this.state.ws[playerItem.player];
       ws.uncollectedLocations.delete(loc);
-      addRawItem(otherWs.items, itemD.id);
+      countMapAdd(otherWs.items, playerItem.id);
       if (isLocationRenewable(this.world, globalLoc))
-        addRawItem(otherWs.renewables, itemD.id);
+        countMapAdd(otherWs.renewables, playerItem.id);
       if (isLocationLicenseGranting(this.world, globalLoc))
-        addRawItem(otherWs.licenses, itemD.id);
-      this.requeueItem(itemD.player as number, itemD.id);
+        countMapAdd(otherWs.licenses, playerItem.id);
+      this.requeueItem(playerItem.player, playerItem.id);
     } else {
       ws.uncollectedLocations.add(loc);
     }
@@ -719,7 +726,7 @@ export class Pathfinder {
       case 'ganon': worldGoal = ganon; break;
       case 'majora': worldGoal = majora; break;
       case 'both': worldGoal = ganon && majora; break;
-      case 'triforce': worldGoal = ws.items['SHARED_TRIFORCE'] >= settings.triforceGoal; break;
+      case 'triforce': worldGoal = (ws.items.get('SHARED_TRIFORCE') || 0) >= settings.triforceGoal; break;
       }
 
       if (!worldGoal) {
@@ -744,20 +751,20 @@ export class Pathfinder {
     }
 
     /* Assumed items */
-    for (const item of Object.keys(this.opts.assumedItems || {}) as Item[]) {
-      const amount = this.opts.assumedItems![item];
-      const amountPrev = this.state.previousAssumedItems[item] || 0;
+    if (this.opts.assumedItems) {
+      for (const [playerItem, amount] of this.opts.assumedItems.entries()) {
+        const amountPrev = this.state.previousAssumedItems.get(playerItem) || 0;
 
-      if (amount > amountPrev) {
-        const itemD = itemData(item);
-        const ws = this.state.ws[itemD.player as number];
-        const delta = amount - amountPrev;
+        if (amount > amountPrev) {
+          const ws = this.state.ws[playerItem.player];
+          const delta = amount - amountPrev;
 
-        addRawItem(ws.items, itemD.id, delta);
-        addRawItem(ws.renewables, itemD.id, delta);
-        addRawItem(ws.licenses, itemD.id, delta);
-        this.requeueItem(itemD.player as number, itemD.id);
-        this.state.previousAssumedItems[item] = amount;
+          countMapAdd(ws.items, playerItem.id, delta);
+          countMapAdd(ws.renewables, playerItem.id, delta);
+          countMapAdd(ws.licenses, playerItem.id, delta);
+          this.requeueItem(playerItem.player, playerItem.id);
+          this.state.previousAssumedItems.set(playerItem, amount);
+        }
       }
     }
 
@@ -765,7 +772,10 @@ export class Pathfinder {
     if (this.settings.logic === 'none') {
       this.state.goal = true;
       this.state.locations = new Set(makePlayerLocations(this.settings, Object.keys(this.world.checks)));
-      //this.state.gossip = new Set(Object.values(this.world.areas).map(x => Object.keys(x.gossip || {})).flat());
+      const gossips = new Set(Object.values(this.world.areas).map(x => Object.keys(x.gossip || {})).flat());
+      for (let world = 0; world < this.worldCount; ++world) {
+        this.state.gossips.push(gossips);
+      }
       return;
     }
 

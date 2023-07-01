@@ -1,9 +1,9 @@
 import { Confvar } from '../confvars';
 import { Monitor } from '../monitor';
 import { Settings } from '../settings';
+import { CountMap, countMapAdd } from '../util';
 import { exprTrue } from './expr';
-import { ITEMS_BOSS_KEY_MM, ITEMS_BOSS_KEY_OOT, ITEMS_OWLS, ITEMS_SMALL_KEY_MM, ITEMS_SMALL_KEY_OOT, Items, makeItem } from './items';
-import { addItem, ITEMS_MAPS, ITEMS_COMPASSES, ITEMS_TINGLE_MAPS, ITEMS_SONGS, DUNGEON_REWARDS, isJunk, isItemConsumable } from './items';
+import { ITEMS_BOSS_KEY_MM, ITEMS_BOSS_KEY_OOT, ITEMS_OWLS, ITEMS_SMALL_KEY_MM, ITEMS_SMALL_KEY_OOT, PlayerItems, ITEMS_MAPS, ITEMS_COMPASSES, ITEMS_TINGLE_MAPS, ITEMS_SONGS, DUNGEON_REWARDS, isJunk, isItemConsumable } from './items';
 import { LOCATIONS_ZELDA, isLocationRenewable, makeLocation } from './locations';
 import { World } from './world';
 
@@ -169,7 +169,7 @@ const ITEM_POOL_PLENTIFUL = [
 ];
 
 export class LogicPassWorldTransform {
-  private pool: Items = {};
+  private pool: CountMap<string> = new Map;
   private locsByItem = new Map<string, Set<string>>();
   private fixedLocations: Set<string>;
 
@@ -190,8 +190,8 @@ export class LogicPassWorldTransform {
     const { world } = this.state;
     for (const loc in world.checks) {
       const check = world.checks[loc];
-      const item = makeItem(check.item);
-      addItem(this.pool, item);
+      const item = check.item;
+      countMapAdd(this.pool, item);
       const set = this.locsByItem.get(check.item) || new Set();
       set.add(loc);
       this.locsByItem.set(check.item, set);
@@ -202,15 +202,13 @@ export class LogicPassWorldTransform {
    * Replace an item in the pool with another item.
    */
   private replaceItem(from: string, to: string) {
-    const fromItem = makeItem(from);
-    const toItem = makeItem(to);
-    const prevCount = this.pool[fromItem] || 0;
-    delete this.pool[fromItem];
-    const newCount = (this.pool[toItem] || 0) + prevCount;
+    const prevCount = this.pool.get(from) || 0;
+    this.pool.delete(from);
+    const newCount = (this.pool.get(to) || 0) + prevCount;
     if (newCount > 0) {
-      this.pool[toItem] = newCount;
+      this.pool.set(to, newCount);
     } else {
-      delete this.pool[toItem];
+      this.pool.delete(to);
     }
     const oldSet = this.locsByItem.get(from) || new Set();
     const newSet = this.locsByItem.get(to) || new Set();
@@ -228,12 +226,11 @@ export class LogicPassWorldTransform {
    * Optionally, limit the number of items removed.
    */
   private removeItem(item: string, amount?: number) {
-    const i = makeItem(item);
-    const count = this.pool[i] || 0;
+    const count = this.pool.get(item) || 0;
     if (amount === undefined || amount >= count) {
-      delete this.pool[i];
+      this.pool.delete(item);
     } else {
-      this.pool[i] = count - amount;
+      this.pool.set(item, count);
     }
   }
 
@@ -244,12 +241,11 @@ export class LogicPassWorldTransform {
   }
 
   private addItem(item: string, amount?: number) {
-    const i = makeItem(item);
-    const count = this.pool[i] || 0;
+    const count = this.pool.get(item) || 0;
     if (amount === undefined) {
       amount = 1;
     }
-    this.pool[i] = count + amount;
+    this.pool.set(item, count + amount);
   }
 
   private scarcifyPool(delta: number) {
@@ -269,13 +265,12 @@ export class LogicPassWorldTransform {
     }
 
     for (const item of items) {
-      const i = makeItem(item);
-      const amount = this.pool[i];
+      const amount = this.pool.get(item);
       if (amount) {
         let newAmount = amount - delta;
         if (newAmount < 1)
           newAmount = 1;
-        this.pool[i] = newAmount;
+        this.pool.set(item, newAmount);
       }
     }
 
@@ -300,7 +295,7 @@ export class LogicPassWorldTransform {
     const hp = prefix + '_HEART_PIECE';
     const hc = prefix + '_HEART_CONTAINER';
 
-    const hpCount = this.pool[makeItem(hp)] || 0;
+    const hpCount = this.pool.get(hp) || 0;
     if (hpCount) {
       this.removeItem(hp);
       this.addItem(hc, hpCount / 4);
@@ -369,7 +364,7 @@ export class LogicPassWorldTransform {
 
     /* Add extra items */
     for (const item of items) {
-      const amount = this.pool[makeItem(item)];
+      const amount = this.pool.get(item);
       if (amount) {
         this.addItem(item);
       }
@@ -528,7 +523,7 @@ export class LogicPassWorldTransform {
       this.replaceItem('OOT_WALLET',  'SHARED_WALLET');
       this.replaceItem('MM_WALLET',   'SHARED_WALLET');
 
-      this.pool[makeItem('SHARED_WALLET')] = this.pool[makeItem('SHARED_WALLET')] / 2;
+      this.pool.set('SHARED_WALLET', (this.pool.get('SHARED_WALLET') || 0) / 2);
 
       /* Rupees */
       this.replaceItem('OOT_RUPEE_GREEN',   'SHARED_RUPEE_GREEN');
@@ -551,8 +546,8 @@ export class LogicPassWorldTransform {
       this.replaceItem('MM_HEART_PIECE',      'SHARED_HEART_PIECE');
       this.replaceItem('OOT_HEART_PIECE',     'SHARED_HEART_PIECE');
 
-      this.pool[makeItem('SHARED_HEART_CONTAINER')] = 6;
-      this.pool[makeItem('SHARED_HEART_PIECE')] = 44;
+      this.pool.set('SHARED_HEART_CONTAINER', 6);
+      this.pool.set('SHARED_HEART_PIECE', 44);
 
       /* Defense */
       this.replaceItem('OOT_DEFENSE_UPGRADE', 'SHARED_DEFENSE_UPGRADE');
@@ -578,7 +573,7 @@ export class LogicPassWorldTransform {
 
     /* Triforce hunt */
     if (settings.goal === 'triforce') {
-      this.pool[makeItem('SHARED_TRIFORCE')] = settings.triforcePieces;
+      this.pool.set('SHARED_TRIFORCE', settings.triforcePieces);
     }
   }
 
@@ -754,14 +749,13 @@ export class LogicPassWorldTransform {
     }
 
     /* Handle required junks */
-    const renewableJunks: Items = {};
-    for (const itemId of Object.keys(this.pool)) {
-      const item = makeItem(itemId);
+    const renewableJunks: CountMap<string> = new Map;
+    for (const item of this.pool.keys()) {
       if (isJunk(item) && isItemConsumable(item)) {
         for (const loc of this.locsByItem.get(item) || []) {
           const l = makeLocation(loc);
           if (isLocationRenewable(this.state.world, l) && !this.fixedLocations.has(loc)) {
-            addItem(renewableJunks, makeItem(item));
+            countMapAdd(renewableJunks, item);
           }
         }
       }
