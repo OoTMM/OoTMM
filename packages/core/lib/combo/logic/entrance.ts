@@ -78,7 +78,7 @@ export class LogicPassEntrances {
       attempts: number;
     },
   ) {
-    this.world = cloneDeep(input.world);
+    this.world = { ...this.input.world, areas: cloneDeep(this.input.world.areas), regions: cloneDeep(this.input.world.regions), dungeons: cloneDeep(this.input.world.dungeons) };
     this.pathfinder = new Pathfinder(this.world, input.settings);
   }
   private result: EntranceShuffleResult = {

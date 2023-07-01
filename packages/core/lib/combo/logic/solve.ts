@@ -4,10 +4,10 @@ import { CountMap, countMapArray, countMapCombine, countMapRemove, gameId } from
 import { Pathfinder, PathfinderState } from './pathfind';
 import { World } from './world';
 import { LogicError, LogicSeedError } from './error';
-import { PlayerItems, ITEMS_REQUIRED, isDungeonReward, isGoldToken, isHouseToken, isKey, isStrayFairy, isGanonBossKey, isTownStrayFairy, isDungeonStrayFairy, isSong, isJunk, isMapCompass, isSmallKeyRegular, isSmallKeyHideout, isItemUnlimitedStarting, isItemCriticalRenewable, isRupees, isItemConsumable, isItemMajor, isSmallKeyRegularMm, isSmallKeyRegularOot, isRegularBossKeyOot, isRegularBossKeyMm, PlayerItem, makePlayerItem } from './items';
 import { Settings } from '../settings';
 import { Monitor } from '../monitor';
 import { Location, isLocationRenewable, locationData, makeLocation } from './locations';
+import { Item, ItemGroups, ItemHelpers, Items, ItemsCount, PlayerItem, PlayerItems, itemByID, makePlayerItem } from '../items';
 
 export type ItemPlacement = Map<Location, PlayerItem>;
 
@@ -70,8 +70,8 @@ export class LogicPassSolver {
       random: Random,
       monitor: Monitor,
       attempts: number,
-      pool: CountMap<string>;
-      renewableJunks: CountMap<string>;
+      pool: ItemsCount;
+      renewableJunks: ItemsCount;
     }
   ) {
     this.locations = this.makePlayerLocations(Object.keys(this.state.world.checks));
@@ -140,8 +140,9 @@ export class LogicPassSolver {
 
   private placePlando() {
     for (const loc in this.state.settings.plando.locations) {
-      const plandoItem = this.state.settings.plando.locations[loc];
-      if (plandoItem) {
+      const plandoItemId = this.state.settings.plando.locations[loc];
+      if (plandoItemId) {
+        const plandoItem = itemByID(plandoItemId);
         for (let player = 0; player < this.state.settings.players; ++player) {
           const item = makePlayerItem(plandoItem, player);
           const l = makeLocation(loc, player);
@@ -165,14 +166,14 @@ export class LogicPassSolver {
     }
   }
 
-  private setPlayersItemPool(pool: PlayerItems, item: string, amount: number) {
+  private setPlayersItemPool(pool: PlayerItems, item: Item, amount: number) {
     for (let i = 0; i < this.state.settings.players; ++i) {
       const x = makePlayerItem(item, i);
       pool.set(x, amount);
     }
   }
 
-  private removePlayersItemPools(pools: ItemPools, item: string) {
+  private removePlayersItemPools(pools: ItemPools, item: Item) {
     for (let i = 0; i < this.state.settings.players; ++i) {
       const x = makePlayerItem(item, i);
       removeItemPools(pools, x);
@@ -189,10 +190,10 @@ export class LogicPassSolver {
        * Some items are both junk and important.
        * Right now it only concerns sticks.
        */
-      const junk = isJunk(item);
+      const junk = ItemHelpers.isJunk(item);
 
-      if (isDungeonReward(item) || isKey(item) || isStrayFairy(item) || ITEMS_REQUIRED.has(item)) {
-        if (junk && isItemConsumable(item)) {
+      if (ItemHelpers.isDungeonReward(item) || ItemHelpers.isKey(item) || ItemHelpers.isStrayFairy(item) || ItemGroups.REQUIRED.has(item)) {
+        if (junk && ItemHelpers.isItemConsumable(item)) {
           const renewableCount = this.state.renewableJunks.get(item) || 0;
           const junkCount = amount - renewableCount;
 
@@ -215,10 +216,11 @@ export class LogicPassSolver {
     }
 
     /* Remove starting items */
-    for (const item in this.state.settings.startingItems) {
-      if (isItemUnlimitedStarting(item))
+    for (const itemId in this.state.settings.startingItems) {
+      const item = itemByID(itemId);
+      if (ItemHelpers.isItemUnlimitedStarting(item))
         continue;
-      const count = this.state.settings.startingItems[item];
+      const count = this.state.settings.startingItems[item.id];
       for (let i = 0; i < count; ++i) {
         this.removePlayersItemPools(this.pools, item);
       }
@@ -230,7 +232,7 @@ export class LogicPassSolver {
     const setting = this.state.settings.goldSkulltulaTokens;
     const shuffleInDungeons = ['dungeons', 'all'].includes(setting);
     const shuffleInOverworld = ['overworld', 'all'].includes(setting);
-    const skullLocations = Object.keys(this.state.world.checks).filter(x => isGoldToken(this.state.world.checks[x].item));
+    const skullLocations = Object.keys(this.state.world.checks).filter(x => ItemHelpers.isGoldToken(this.state.world.checks[x].item));
     const dungeonLocations = Object.values(this.state.world.dungeons).reduce((acc, x) => new Set([...acc, ...x]));
 
     for (const location of skullLocations) {
@@ -247,7 +249,7 @@ export class LogicPassSolver {
     const locations = new Set<string>();
     for (const location in this.state.world.checks) {
       const item = this.state.world.checks[location].item;
-      if (isHouseToken(item)) {
+      if (ItemHelpers.isHouseToken(item)) {
         locations.add(location);
       }
     }
@@ -310,10 +312,10 @@ export class LogicPassSolver {
         const check = this.state.world.checks[locationId];
         const item = check.item;
         const checkItem = makePlayerItem(item, player);
-        if (isTownStrayFairy(item) && this.state.settings.townFairyShuffle === 'vanilla') {
+        if (ItemHelpers.isTownStrayFairy(item) && this.state.settings.townFairyShuffle === 'vanilla') {
           this.place(location, checkItem);
           removeItemPools(this.pools, checkItem);
-        } else if (isDungeonStrayFairy(item)) {
+        } else if (ItemHelpers.isDungeonStrayFairy(item)) {
           if (check.type === 'sf') {
             if (this.state.settings.strayFairyShuffle !== 'anywhere' && this.state.settings.strayFairyShuffle !== 'ownDungeon') {
               this.place(location, checkItem);
@@ -350,30 +352,33 @@ export class LogicPassSolver {
       for (const game of GAMES) {
         for (const baseItem of ['SMALL_KEY', 'BOSS_KEY', 'STRAY_FAIRY', 'MAP', 'COMPASS']) {
           const itemId = gameId(game, baseItem + '_' + dungeon.toUpperCase(), '_');
-          const item = makePlayerItem(itemId, player);
+          if (!Object.hasOwn(Items, itemId))
+            continue;
+          const item = itemByID(itemId);
+          const playerItem = makePlayerItem(item, player);
           const locations = new Set([...locationIds].map(x => makeLocation(x, player)));
 
-          if (isSmallKeyHideout(itemId) && this.state.settings.smallKeyShuffleHideout === 'anywhere') {
+          if (ItemHelpers.isSmallKeyHideout(item) && this.state.settings.smallKeyShuffleHideout === 'anywhere') {
             continue;
-          } else if (isSmallKeyRegularOot(itemId) && this.state.settings.smallKeyShuffleOot === 'anywhere') {
+          } else if (ItemHelpers.isSmallKeyRegularOot(item) && this.state.settings.smallKeyShuffleOot === 'anywhere') {
             continue;
-          } else if (isSmallKeyRegularMm(itemId) && this.state.settings.smallKeyShuffleMm === 'anywhere') {
+          } else if (ItemHelpers.isSmallKeyRegularMm(item) && this.state.settings.smallKeyShuffleMm === 'anywhere') {
             continue;
-          } else if (isGanonBossKey(itemId) && this.state.settings.ganonBossKey === 'anywhere') {
+          } else if (ItemHelpers.isGanonBossKey(item) && this.state.settings.ganonBossKey === 'anywhere') {
             continue;
-          } else if (isRegularBossKeyOot(itemId) && this.state.settings.bossKeyShuffleOot === 'anywhere') {
+          } else if (ItemHelpers.isRegularBossKeyOot(item) && this.state.settings.bossKeyShuffleOot === 'anywhere') {
             continue;
-          } else if (isRegularBossKeyMm(itemId) && this.state.settings.bossKeyShuffleMm === 'anywhere') {
+          } else if (ItemHelpers.isRegularBossKeyMm(item) && this.state.settings.bossKeyShuffleMm === 'anywhere') {
             continue;
-          } else if (isDungeonStrayFairy(itemId) && this.state.settings.strayFairyShuffle === 'anywhere') {
+          } else if (ItemHelpers.isDungeonStrayFairy(item) && this.state.settings.strayFairyShuffle === 'anywhere') {
             continue;
-          } else if (isMapCompass(itemId) && this.state.settings.mapCompassShuffle === 'anywhere') {
+          } else if (ItemHelpers.isMapCompass(item) && this.state.settings.mapCompassShuffle === 'anywhere') {
             continue;
           }
 
-          while (pool.has(item)) {
-            this.randomAssumed(pool, { restrictedLocations: locations, forcedItem: item });
-            removeItemPools(this.pools, item);
+          while (pool.has(playerItem)) {
+            this.randomAssumed(pool, { restrictedLocations: locations, forcedItem: playerItem });
+            removeItemPools(this.pools, playerItem);
           }
         }
       }
@@ -388,13 +393,13 @@ export class LogicPassSolver {
     let items: PlayerItem[] = [];
 
     if (this.state.settings.songs === 'songLocations') {
-      const songs = pool.filter(x => isSong(x.id));
+      const songs = pool.filter(x => ItemHelpers.isSong(x.item));
       songLocations = [ ...this.state.world.songLocations ];
       items = [ ...items, ...songs ];
     }
 
     if (this.state.settings.dungeonRewardShuffle === 'dungeonBlueWarps') {
-      const rewards = pool.filter(x => isDungeonReward(x.id));
+      const rewards = pool.filter(x => ItemHelpers.isDungeonReward(x.item));
       rewardsLocations = [ ...this.state.world.warpLocations ];
       items = [ ...items, ...rewards ];
     }
@@ -419,7 +424,7 @@ export class LogicPassSolver {
 
       /* Get available locations */
       let restrictedLocations: string[];
-      if (isSong(item.id)) {
+      if (ItemHelpers.isSong(item.item)) {
         restrictedLocations = songLocations;
       } else {
         restrictedLocations = rewardsLocations;
@@ -443,7 +448,7 @@ export class LogicPassSolver {
     }
 
     const rewards = shuffle(this.state.random, countMapArray(this.pools.required)
-      .filter(x => isDungeonReward(x.id)));
+      .filter(x => ItemHelpers.isDungeonReward(x.item)));
 
     for (const reward of rewards) {
       let candidates = allDungeons.flatMap((x, i) => [...x].map(y => ({ player: i, dungeon: y })));
@@ -532,13 +537,13 @@ export class LogicPassSolver {
         }
 
         /* If the item is a critical renewable and it's all locations, ensure it lands correctly */
-        if (this.state.settings.logic === 'allLocations' && isItemCriticalRenewable(requiredItem.id) && !this.criticalRenewables.has(requiredItem)) {
+        if (this.state.settings.logic === 'allLocations' && ItemHelpers.isItemCriticalRenewable(requiredItem.item) && !this.criticalRenewables.has(requiredItem)) {
           unplacedLocs = unplacedLocs.filter(x => isLocationRenewable(this.state.world, x));
         }
 
         /* If there is nowhere to place an item, raise an error */
         if (unplacedLocs.length === 0) {
-          throw new LogicSeedError(`No reachable locations for item ${requiredItem.id}@${requiredItem.player}`);
+          throw new LogicSeedError(`No reachable locations for item ${requiredItem.item.id}@${requiredItem.player}`);
         }
 
       /* Select a random location from the assumed reachable locations */
@@ -587,7 +592,7 @@ export class LogicPassSolver {
     /* Junk pool empty - fill with extra junk */
     locs = shuffle(this.state.random, locs.filter(loc => !this.items.has(loc)));
     const junkDistribution = countMapArray(this.junkDistribution);
-    const junkDistributionRenewable = countMapArray(this.junkDistribution).filter(x => !isItemMajor(x.id));
+    const junkDistributionRenewable = countMapArray(this.junkDistribution).filter(x => !ItemHelpers.isItemMajor(x.item));
     for (const loc of locs) {
       const junkPool = isLocationRenewable(this.state.world, loc) ? junkDistributionRenewable : junkDistribution;
       const item = sample(this.state.random, junkPool);
@@ -619,7 +624,7 @@ export class LogicPassSolver {
       throw new Error('Location already placed: ' + location);
     }
     this.items.set(location, item);
-    if (isLocationRenewable(this.state.world, location) && isItemCriticalRenewable(item.id)) {
+    if (isLocationRenewable(this.state.world, location) && ItemHelpers.isItemCriticalRenewable(item.item)) {
       this.criticalRenewables.add(item);
     }
 

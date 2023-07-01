@@ -6,12 +6,12 @@ import { Game, GAMES } from "../config";
 import { WorldCheck } from '../logic/world';
 import { DUNGEONS, Settings, SPECIAL_CONDS, SPECIAL_CONDS_KEYS } from '../settings';
 import { HintGossip, WorldHints } from '../logic/hints';
-import { isDungeonStrayFairy, isGanonBossKey, isMap, isCompass, isTownStrayFairy, isSmallKeyHideout, isItemUnlimitedStarting, ITEMS_MAPS, ITEMS_COMPASSES, ITEMS_TINGLE_MAPS, isSmallKeyRegularOot, isSmallKeyRegularMm, isRegularBossKeyOot, isRegularBossKeyMm } from '../logic/items';
 import { CountMap, countMapAdd, gameId } from '../util';
 import { Patchfile } from './patchfile';
 import { LOCATIONS_ZELDA, makeLocation, makePlayerLocations } from '../logic/locations';
 import { CONFVARS_VALUES, Confvar } from '../confvars';
 import { Region, regionData } from '../logic/regions';
+import { Item, ItemGroups, ItemHelpers, ItemsCount, itemByID } from '../items';
 
 const GAME_DATA_OFFSETS = {
   oot: 0x1000,
@@ -143,60 +143,61 @@ const SUBSTITUTIONS: {[k: string]: string} = {
   SHARED_TRIFORCE: "OOT_TRIFORCE",
 };
 
-const gi = (settings: Settings, game: Game, item: string, generic: boolean) => {
+const gi = (settings: Settings, game: Game, item: Item, generic: boolean) => {
+  let itemId = item.id;
   if (generic) {
-    if (isSmallKeyHideout(item) && settings.smallKeyShuffleHideout !== 'anywhere') {
-      item = gameId(game, 'SMALL_KEY', '_');
-    } else if (isSmallKeyRegularOot(item) && settings.smallKeyShuffleOot === 'ownDungeon' && settings.erBoss === 'none') {
-      item = gameId(game, 'SMALL_KEY', '_');
-    } else if (isSmallKeyRegularMm(item) && settings.smallKeyShuffleMm === 'ownDungeon' && settings.erBoss === 'none') {
-      item = gameId(game, 'SMALL_KEY', '_');
-    } else if (isGanonBossKey(item) && settings.ganonBossKey !== 'anywhere') {
-      item = gameId(game, 'BOSS_KEY', '_');
-    } else if (isRegularBossKeyOot(item) && settings.bossKeyShuffleOot === 'ownDungeon' && settings.erBoss === 'none') {
-      item = gameId(game, 'BOSS_KEY', '_');
-    } else if (isRegularBossKeyMm(item) && settings.bossKeyShuffleMm === 'ownDungeon' && settings.erBoss === 'none') {
-      item = gameId(game, 'BOSS_KEY', '_');
-    } else if (isTownStrayFairy(item) && settings.townFairyShuffle === 'vanilla') {
-      item = gameId(game, 'STRAY_FAIRY', '_');
-    } else if (isDungeonStrayFairy(item) && settings.strayFairyShuffle !== 'anywhere' && settings.erBoss === 'none') {
-      item = gameId(game, 'STRAY_FAIRY', '_');
-    } else if (isMap(item) && settings.mapCompassShuffle === 'ownDungeon' && settings.erBoss === 'none') {
-      item = gameId(game, 'MAP', '_');
-    } else if (isCompass(item) && settings.mapCompassShuffle === 'ownDungeon' && settings.erBoss === 'none') {
-      item = gameId(game, 'COMPASS', '_');
+    if (ItemHelpers.isSmallKeyHideout(item) && settings.smallKeyShuffleHideout !== 'anywhere') {
+      itemId = gameId(game, 'SMALL_KEY', '_');
+    } else if (ItemHelpers.isSmallKeyRegularOot(item) && settings.smallKeyShuffleOot === 'ownDungeon' && settings.erBoss === 'none') {
+      itemId = gameId(game, 'SMALL_KEY', '_');
+    } else if (ItemHelpers.isSmallKeyRegularMm(item) && settings.smallKeyShuffleMm === 'ownDungeon' && settings.erBoss === 'none') {
+      itemId = gameId(game, 'SMALL_KEY', '_');
+    } else if (ItemHelpers.isGanonBossKey(item) && settings.ganonBossKey !== 'anywhere') {
+      itemId = gameId(game, 'BOSS_KEY', '_');
+    } else if (ItemHelpers.isRegularBossKeyOot(item) && settings.bossKeyShuffleOot === 'ownDungeon' && settings.erBoss === 'none') {
+      itemId = gameId(game, 'BOSS_KEY', '_');
+    } else if (ItemHelpers.isRegularBossKeyMm(item) && settings.bossKeyShuffleMm === 'ownDungeon' && settings.erBoss === 'none') {
+      itemId = gameId(game, 'BOSS_KEY', '_');
+    } else if (ItemHelpers.isTownStrayFairy(item) && settings.townFairyShuffle === 'vanilla') {
+      itemId = gameId(game, 'STRAY_FAIRY', '_');
+    } else if (ItemHelpers.isDungeonStrayFairy(item) && settings.strayFairyShuffle !== 'anywhere' && settings.erBoss === 'none') {
+      itemId = gameId(game, 'STRAY_FAIRY', '_');
+    } else if (ItemHelpers.isMap(item) && settings.mapCompassShuffle === 'ownDungeon' && settings.erBoss === 'none') {
+      itemId = gameId(game, 'MAP', '_');
+    } else if (ItemHelpers.isCompass(item) && settings.mapCompassShuffle === 'ownDungeon' && settings.erBoss === 'none') {
+      itemId = gameId(game, 'COMPASS', '_');
     }
   }
 
   /* Resolve shared item */
-  if (item === 'SHARED_OCARINA' && settings.fairyOcarinaMm && game === 'mm') {
-    item = 'MM_OCARINA';
+  if (itemId === 'SHARED_OCARINA' && settings.fairyOcarinaMm && game === 'mm') {
+    itemId = 'MM_OCARINA';
   } else {
     const sharedItems = SHARED_ITEMS[game];
-    const sharedItem = sharedItems.get(item);
+    const sharedItem = sharedItems.get(itemId);
     if (sharedItem) {
-      item = sharedItem;
+      itemId = sharedItem;
     }
   }
 
   /* Resolve substitutions */
-  if (item === 'MM_OCARINA' && settings.fairyOcarinaMm) {
-    item = 'MM_OCARINA_FAIRY';
-  } else if (item === 'MM_HOOKSHOT' && settings.shortHookshotMm) {
-    item = 'MM_HOOKSHOT_SHORT';
+  if (itemId === 'MM_OCARINA' && settings.fairyOcarinaMm) {
+    itemId = 'MM_OCARINA_FAIRY';
+  } else if (itemId === 'MM_HOOKSHOT' && settings.shortHookshotMm) {
+    itemId = 'MM_HOOKSHOT_SHORT';
   } else {
-    const subst = SUBSTITUTIONS[item];
+    const subst = SUBSTITUTIONS[itemId];
     if (subst) {
-      item = subst;
+      itemId = subst;
     }
   }
 
-  if (!DATA_GI.hasOwnProperty(item)) {
-    throw new Error(`Unknown item ${item}`);
+  if (!DATA_GI.hasOwnProperty(itemId)) {
+    throw new Error(`Unknown item ${itemId}`);
   }
-  let value = DATA_GI[item] as number;
+  let value = DATA_GI[itemId] as number;
 
-  if ((/^OOT_/.test(item) && game === 'mm') || (/^MM_/.test(item) && game === 'oot')) {
+  if ((/^OOT_/.test(itemId) && game === 'mm') || (/^MM_/.test(itemId) && game === 'oot')) {
     value |= 0x200;
   }
 
@@ -288,7 +289,7 @@ const gameChecks = (world: number, settings: Settings, game: Game, logic: LogicR
       break;
     }
     const key = (sceneId << 8) | id;
-    const itemGi = gi(settings, game, item.id, true);
+    const itemGi = gi(settings, game, item.item, true);
     buf.push(item.player + 1, 0, key, itemGi);
   }
   return toU16Buffer(buf);
@@ -346,7 +347,7 @@ const hintBuffer = (settings: Settings, game: Game, gossip: string, hint: HintGo
         throw new Error(`Unknown named check: ${hint.check}`);
       }
       const items = hint.items;
-      const itemsGI = hint.items.map((item) => gi(settings, 'oot', item.id, true));
+      const itemsGI = hint.items.map((item) => gi(settings, 'oot', item.item, true));
       data.writeUInt8(id, 0);
       data.writeUInt8(0x02, 1);
       data.writeUInt8(check, 2);
@@ -367,7 +368,7 @@ const hintBuffer = (settings: Settings, game: Game, gossip: string, hint: HintGo
         if (region === undefined) {
           throw new Error(`Unknown region ${hint.region}`);
         }
-        const itemGI = gi(settings, 'oot', item.id, true);
+        const itemGI = gi(settings, 'oot', item.item, true);
         data.writeUInt8(id, 0);
         data.writeUInt8(0x03, 1);
         data.writeUInt8(region, 2);
@@ -510,32 +511,33 @@ export const randomizerData = (world: number, logic: LogicResult): Buffer => {
   return Buffer.concat(buffers);
 };
 
-function addStartingItemLocsWorld(world: number, logic: LogicResult, locs: string[], items: CountMap<string>) {
+function addStartingItemLocsWorld(world: number, logic: LogicResult, locs: string[], items: ItemsCount) {
   const l = makePlayerLocations(logic.settings, locs);
   const i = l.map(x => logic.items.get(x)!);
 
   for (const item of i) {
     if (item.player === world) {
-      countMapAdd(items, item.id);
+      countMapAdd(items, item.item);
     }
   }
 }
 
-const effectiveStartingItems = (world: number, logic: LogicResult): CountMap<string> => {
+const effectiveStartingItems = (world: number, logic: LogicResult): ItemsCount => {
   const { settings } = logic;
-  const startingItems: CountMap<string> = new Map;
-  for (const [item, count] of Object.entries(logic.settings.startingItems)) {
+  const startingItems: ItemsCount = new Map;
+  for (const [itemId, count] of Object.entries(logic.settings.startingItems)) {
+    const item = itemByID(itemId);
     startingItems.set(item, count);
   }
 
   if (settings.tingleShuffle === 'starting') {
-    for (const item of ITEMS_TINGLE_MAPS) {
+    for (const item of ItemGroups.TINGLE_MAPS) {
       startingItems.set(item, 1);
     }
   }
 
   if (settings.mapCompassShuffle === 'starting') {
-    for (const item of [...ITEMS_MAPS, ...ITEMS_COMPASSES]) {
+    for (const item of [...ItemGroups.MAPS, ...ItemGroups.COMPASSES]) {
       startingItems.set(item, 1);
     }
   }
@@ -555,10 +557,10 @@ const randomizerStartingItems = (world: number, logic: LogicResult): Buffer => {
   for (const [item, count] of items.entries()) {
     const id = gi(settings, 'oot', item, false);
     if (gi === undefined) {
-      throw new Error(`Unknown item ${item}`);
+      throw new Error(`Unknown item ${item.id}`);
     }
     /* Consumables need to be added late */
-    if (isItemUnlimitedStarting(item)) {
+    if (ItemHelpers.isItemUnlimitedStarting(item)) {
       ids2.push(id);
       ids2.push(count);
     } else {

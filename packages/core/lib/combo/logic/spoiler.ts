@@ -12,8 +12,8 @@ import { regionName } from '../regions';
 import { isShuffled } from './is-shuffled'
 import { ItemPlacement } from './solve';
 import { Location, locationData, makeLocation } from './locations';
-import { PlayerItem } from './items';
 import { Region, regionData } from './regions';
+import { PlayerItem } from '../items';
 
 const VERSION = process.env.VERSION || 'XXX';
 
@@ -241,9 +241,9 @@ export class LogicPassSpoiler {
 
   private itemName(item: PlayerItem) {
     if (this.isMulti) {
-      return `Player ${item.player + 1} ${itemName(item.id)}`;
+      return `Player ${item.player + 1} ${itemName(item.item.id)}`;
     } else {
-      return itemName(item.id);
+      return itemName(item.item.id);
     }
   }
 

@@ -836,7 +836,7 @@
   exits:
     "Deku Palace Main": "true"
   events:
-    PICTURE_DEKU_KING: "has(PICTORGRAPH_BOX) && has(MASK_DEKU)"
+    PICTURE_DEKU_KING: "has(PICTOGRAPH_BOX) && has(MASK_DEKU)"
     RETURN_PRINCESS: "event(DEKU_PRINCESS) && has(MASK_DEKU)"
 "Deku Palace Near Cage":
   region: DEKU_PALACE

@@ -1,12 +1,12 @@
 import { Random, shuffle } from '../random';
 import { Settings } from '../settings';
-import { isItemConsumable, isItemImportant, isItemLicense, ITEMS_MASKS_OOT, ITEMS_MASKS_REGULAR, ITEMS_MASKS_TRANSFORM, ITEMS_MEDALLIONS, ITEMS_REMAINS, ITEMS_STONES, PlayerItem } from './items';
 import { World } from './world';
 import { Pathfinder, PathfinderState } from './pathfind';
 import { Monitor } from '../monitor';
 import { cloneDeep } from 'lodash';
 import { isLocationRenewable, makePlayerLocations, Location, makeLocation } from './locations';
 import { ItemPlacement } from './solve';
+import { ItemGroups, ItemHelpers, PlayerItem } from '../items';
 
 const SIMPLE_DEPENDENCIES: {[k: string]: string[]} = {
   OOT_WEIRD_EGG: [
@@ -405,38 +405,38 @@ export class LogicPassAnalysis {
     if (conds.some(x => x.count && x.fairyTown)) delete this.dependencies['MM_STRAY_FAIRY_TOWN'];
 
     if (conds.some(x => x.count && x.stones)) {
-      for (const s of ITEMS_STONES) {
-        delete this.dependencies[s];
+      for (const s of ItemGroups.STONES) {
+        delete this.dependencies[s.id];
       }
     }
 
     if (conds.some(x => x.count && x.medallions)) {
-      for (const m of ITEMS_MEDALLIONS) {
-        delete this.dependencies[m];
+      for (const m of ItemGroups.MEDALLIONS) {
+        delete this.dependencies[m.id];
       }
     }
 
     if (conds.some(x => x.count && x.remains)) {
-      for (const r of ITEMS_REMAINS) {
-        delete this.dependencies[r];
+      for (const r of ItemGroups.REMAINS) {
+        delete this.dependencies[r.id];
       }
     }
 
     if (conds.some(x => x.count && x.masksRegular)) {
-      for (const y of ITEMS_MASKS_REGULAR) {
-        delete this.dependencies[y];
+      for (const y of ItemGroups.MASKS_REGULAR) {
+        delete this.dependencies[y.id];
       }
     }
 
     if (conds.some(x => x.count && x.masksTransform)) {
-      for (const y of ITEMS_MASKS_TRANSFORM) {
-        delete this.dependencies[y];
+      for (const y of ItemGroups.MASKS_TRANSFORM) {
+        delete this.dependencies[y.id];
       }
     }
 
     if (conds.some(x => x.count && x.masksOot)) {
-      for (const y of ITEMS_MASKS_OOT) {
-        delete this.dependencies[y];
+      for (const y of ItemGroups.MASKS_OOT) {
+        delete this.dependencies[y.id];
       }
     }
   }
@@ -449,7 +449,7 @@ export class LogicPassAnalysis {
     do {
       this.progress(count++, 10);
       pathfinderState = this.pathfinder.run(pathfinderState, { inPlace: true, items: this.state.items, stopAtGoal: true, restrictedLocations });
-      const sphere = Array.from(pathfinderState.newLocations).filter(x => isItemImportant(this.state.items.get(x)!.id));
+      const sphere = Array.from(pathfinderState.newLocations).filter(x => ItemHelpers.isItemImportant(this.state.items.get(x)!.item));
       if (sphere.length !== 0) {
         spheres.push(shuffle(this.state.random, sphere));
       }
@@ -500,13 +500,13 @@ export class LogicPassAnalysis {
 
   private isLocUselessNonRenewable(loc: Location) {
     const item = this.state.items.get(loc)!;
-    return (isItemConsumable(item.id) && !isLocationRenewable(this.state.world, loc) && !isItemLicense(item.id));
+    return (ItemHelpers.isItemConsumable(item.item) && !isLocationRenewable(this.state.world, loc) && !ItemHelpers.isItemLicense(item.item));
   }
 
   private isLocUselessHeuristicCount(loc: Location) {
     /* TODO: this is fragile */
     const item = this.state.items.get(loc)!;
-    const itemId = item.id;
+    const itemId = item.item.id;
     let maximumRequired = -1;
     switch (itemId) {
     case 'OOT_SWORD':
@@ -541,7 +541,7 @@ export class LogicPassAnalysis {
     if (req.has(loc)) {
       return false;
     }
-    this.state.monitor.debug(`Analysis - isLocUselessHeuristicCount: ${item.id}@${item.player}`);
+    this.state.monitor.debug(`Analysis - isLocUselessHeuristicCount: ${item.item.id}@${item.player}`);
     return true;
   }
 
@@ -552,9 +552,9 @@ export class LogicPassAnalysis {
     while (locsToCheck.length > 0) {
       const l = locsToCheck.pop()!;
       const item = this.state.items.get(l)!;
-      if (isItemImportant(item.id) && !this.uselessLocs.has(l) && !this.unreachableLocs.has(l)) {
+      if (ItemHelpers.isItemImportant(item.item) && !this.uselessLocs.has(l) && !this.unreachableLocs.has(l)) {
         /* May be a progression item - need to check other locations */
-        const dependencies = this.dependencies[item.id];
+        const dependencies = this.dependencies[item.item.id];
         if (dependencies === undefined) {
           return false;
         } else {
@@ -570,7 +570,7 @@ export class LogicPassAnalysis {
       }
     }
     const item = this.state.items.get(loc)!;
-    this.state.monitor.debug(`Analysis - isLocUselessHeuristicDependencies: ${item.id}@${item.player}`);
+    this.state.monitor.debug(`Analysis - isLocUselessHeuristicDependencies: ${item.item.id}@${item.player}`);
     return true;
   }
 
@@ -579,7 +579,7 @@ export class LogicPassAnalysis {
       if (this.requiredLocs.has(loc) || this.uselessLocs.has(loc) || this.unreachableLocs.has(loc)) {
         continue;
       }
-      if (!isItemImportant(this.state.items.get(loc)!.id) || this.isLocUselessNonRenewable(loc) || this.isLocUselessHeuristicCount(loc) || this.isLocUselessHeuristicDependencies(loc)) {
+      if (!ItemHelpers.isItemImportant(this.state.items.get(loc)!.item) || this.isLocUselessNonRenewable(loc) || this.isLocUselessHeuristicCount(loc) || this.isLocUselessHeuristicDependencies(loc)) {
         this.uselessLocs.add(loc);
       }
     }
@@ -589,8 +589,8 @@ export class LogicPassAnalysis {
     const pathfinderState = this.pathfinder.run(null, { items: this.state.items, recursive: true });
     for (const loc of this.locations) {
       const item = this.state.items.get(loc)!;
-      if (isItemImportant(item.id) && !pathfinderState.locations.has(loc)) {
-        this.state.monitor.debug(`Analysis - makeUnreachable: ${item.id}@${item.player}`);
+      if (ItemHelpers.isItemImportant(item.item) && !pathfinderState.locations.has(loc)) {
+        this.state.monitor.debug(`Analysis - makeUnreachable: ${item.item.id}@${item.player}`);
         this.unreachableLocs.add(loc);
       }
     }

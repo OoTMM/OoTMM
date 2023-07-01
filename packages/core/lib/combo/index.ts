@@ -5,13 +5,13 @@ import { Generator, GeneratorOutput } from './generator';
 import { Monitor, MonitorCallbacks } from './monitor';
 import { worldState } from './logic';
 import { itemName } from './names';
-import { isDungeonItem, isItemTriforce, isItemUnlimitedStarting, isJunk, isStrayFairy, isToken, PlayerItem, PlayerItems } from './logic/items';
 import { isShuffled } from './logic/is-shuffled';
 import { DEFAULT_SETTINGS, DUNGEONS, makeSettings, mergeSettings, SettingCategory, SETTINGS, Settings, SETTINGS_CATEGORIES, SPECIAL_CONDS, SPECIAL_CONDS_KEYS, TRICKS } from './settings';
 import { SettingsPatch } from './settings/patch';
 import { makeCosmetics } from './cosmetics';
 import { makeRandomSettings } from './settings/random';
 import { CountMap } from './util';
+import { ItemHelpers, ItemsCount } from './items';
 
 export { Presets, PRESETS } from './presets';
 export { Cosmetics, makeCosmetics, COSMETIC_NAMES } from './cosmetics';
@@ -26,7 +26,7 @@ export type GeneratorParams = {
   monitor?: MonitorCallbacks
 };
 
-export type { GeneratorOutput, Settings, OptionsInput, PlayerItems as Items, SettingCategory, SettingsPatch };
+export type { GeneratorOutput, Settings, OptionsInput, SettingCategory, SettingsPatch };
 
 type LocInfo = {
   [k: string]: string[]
@@ -48,7 +48,7 @@ export const itemPool = (aSettings: Partial<Settings>): {[k: string]: number} =>
 
   /* Extract relevant items from the pool */
   for (const item of pool.keys()) {
-    if (isJunk(item) || isDungeonItem(item) || isToken(item) || isStrayFairy(item) || isItemTriforce(item)) {
+    if (ItemHelpers.isJunk(item) || ItemHelpers.isDungeonItem(item) || ItemHelpers.isToken(item) || ItemHelpers.isStrayFairy(item) || ItemHelpers.isItemTriforce(item)) {
       pool.delete(item);
     }
   }
@@ -57,14 +57,14 @@ export const itemPool = (aSettings: Partial<Settings>): {[k: string]: number} =>
   for (const loc in world.checks) {
     const check = world.checks[loc];
     const { item } = check;
-    if (isItemUnlimitedStarting(item)) {
+    if (ItemHelpers.isItemUnlimitedStarting(item)) {
       pool.set(item, 999);
     }
   }
 
   /* Sort items */
-  const items: CountMap<string> = new Map;
-  const sortedItems = [...pool.keys()].sort((a, b) => itemName(a).localeCompare(itemName(b)));
+  const items: ItemsCount = new Map;
+  const sortedItems = [...pool.keys()].sort((a, b) => itemName(a.id).localeCompare(itemName(b.id)));
   for (const item of sortedItems) {
     items.set(item, pool.get(item)!);
   }
@@ -72,7 +72,7 @@ export const itemPool = (aSettings: Partial<Settings>): {[k: string]: number} =>
   /* Make the item pool */
   const itemPool: {[k: string]: number} = {};
   for (const [item, count] of items) {
-    itemPool[item] = count;
+    itemPool[item.id] = count;
   }
   return itemPool;
 }
