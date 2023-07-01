@@ -65,3 +65,8 @@ PATCH_END
 PATCH_START 0x8084843c
   li at,0xffff
 PATCH_END
+
+/* Disable blue rupee fallback */
+PATCH_START 0x8083d3f0
+  li a0,0xff
+PATCH_END
