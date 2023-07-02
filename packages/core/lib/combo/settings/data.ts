@@ -835,8 +835,32 @@ export const SETTINGS = [{
   type: 'boolean',
   default: false
 }, {
-  key: 'sharedMasks',
-  name: 'Shared Masks',
+  key: 'sharedMaskGoron',
+  name: 'Shared Goron Mask',
+  category: 'items.shared',
+  type: 'boolean',
+  default: false
+}, {
+  key: 'sharedMaskZora',
+  name: 'Shared Zora Mask',
+  category: 'items.shared',
+  type: 'boolean',
+  default: false
+}, {
+  key: 'sharedMaskBunny',
+  name: 'Shared Bunny Hood',
+  category: 'items.shared',
+  type: 'boolean',
+  default: false
+}, {
+  key: 'sharedMaskKeaton',
+  name: 'Shared Keaton Mask',
+  category: 'items.shared',
+  type: 'boolean',
+  default: false
+}, {
+  key: 'sharedMaskTruth',
+  name: 'Shared Mask of Truth',
   category: 'items.shared',
   type: 'boolean',
   default: false

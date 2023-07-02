@@ -612,27 +612,20 @@ void comboAddItemSharedMm(s16 gi, int noEffect)
         }
     }
 
-    if (comboConfig(CFG_SHARED_MASKS))
-    {
-        switch (gi)
-        {
-        case GI_MM_MASK_BUNNY:
-            comboAddCommonItemOot(SITEM_MASK_BUNNY, noEffect);
-            break;
-        case GI_MM_MASK_GORON:
-            comboAddCommonItemOot(SITEM_MASK_GORON, noEffect);
-            break;
-        case GI_MM_MASK_KEATON:
-            comboAddCommonItemOot(SITEM_MASK_KEATON, noEffect);
-            break;
-        case GI_MM_MASK_TRUTH:
-            comboAddCommonItemOot(SITEM_MASK_TRUTH, noEffect);
-            break;
-        case GI_MM_MASK_ZORA:
-            comboAddCommonItemOot(SITEM_MASK_ZORA, noEffect);
-            break;
-        }
-    }
+    if (comboConfig(CFG_SHARED_MASK_BUNNY) && gi == GI_MM_MASK_BUNNY)
+        comboAddCommonItemOot(SITEM_MASK_BUNNY, noEffect);
+
+    if (comboConfig(CFG_SHARED_MASK_GORON) && gi == GI_MM_MASK_GORON)
+        comboAddCommonItemOot(SITEM_MASK_GORON, noEffect);
+
+    if (comboConfig(CFG_SHARED_MASK_KEATON) && gi == GI_MM_MASK_KEATON)
+        comboAddCommonItemOot(SITEM_MASK_KEATON, noEffect);
+
+    if (comboConfig(CFG_SHARED_MASK_TRUTH) && gi == GI_MM_MASK_TRUTH)
+        comboAddCommonItemOot(SITEM_MASK_TRUTH, noEffect);
+
+    if (comboConfig(CFG_SHARED_MASK_ZORA) && gi == GI_MM_MASK_ZORA)
+        comboAddCommonItemOot(SITEM_MASK_ZORA, noEffect);
 
     if (comboConfig(CFG_SHARED_WALLETS))
     {

@@ -513,22 +513,33 @@ export class LogicPassWorldTransform {
       this.addItem(Items.MM_OCARINA);
     }
 
-    if (config.has('SHARED_MASKS')) {
-      this.replaceItem(Items.OOT_MASK_ZORA,   Items.SHARED_MASK_ZORA);
+    if (settings.sharedMaskGoron) {
       this.replaceItem(Items.OOT_MASK_GORON,  Items.SHARED_MASK_GORON);
-      this.replaceItem(Items.OOT_MASK_TRUTH,  Items.SHARED_MASK_TRUTH);
-      this.replaceItem(Items.OOT_MASK_BUNNY,  Items.SHARED_MASK_BUNNY);
-      this.replaceItem(Items.OOT_MASK_KEATON, Items.SHARED_MASK_KEATON);
-      this.replaceItem(Items.MM_MASK_ZORA,    Items.SHARED_MASK_ZORA);
       this.replaceItem(Items.MM_MASK_GORON,   Items.SHARED_MASK_GORON);
-      this.replaceItem(Items.MM_MASK_TRUTH,   Items.SHARED_MASK_TRUTH);
-      this.replaceItem(Items.MM_MASK_BUNNY,   Items.SHARED_MASK_BUNNY);
-      this.replaceItem(Items.MM_MASK_KEATON,  Items.SHARED_MASK_KEATON);
-
-      this.removeItem(Items.SHARED_MASK_ZORA, 1);
       this.removeItem(Items.SHARED_MASK_GORON, 1);
+    }
+
+    if (settings.sharedMaskZora) {
+      this.replaceItem(Items.OOT_MASK_ZORA,   Items.SHARED_MASK_ZORA);
+      this.replaceItem(Items.MM_MASK_ZORA,    Items.SHARED_MASK_ZORA);
+      this.removeItem(Items.SHARED_MASK_ZORA, 1);
+    }
+
+    if (settings.sharedMaskTruth) {
+      this.replaceItem(Items.OOT_MASK_TRUTH,  Items.SHARED_MASK_TRUTH);
+      this.replaceItem(Items.MM_MASK_TRUTH,   Items.SHARED_MASK_TRUTH);
       this.removeItem(Items.SHARED_MASK_TRUTH, 1);
+    }
+
+    if (settings.sharedMaskBunny) {
+      this.replaceItem(Items.OOT_MASK_BUNNY,  Items.SHARED_MASK_BUNNY);
+      this.replaceItem(Items.MM_MASK_BUNNY,   Items.SHARED_MASK_BUNNY);
       this.removeItem(Items.SHARED_MASK_BUNNY, 1);
+    }
+
+    if (settings.sharedMaskKeaton) {
+      this.replaceItem(Items.OOT_MASK_KEATON, Items.SHARED_MASK_KEATON);
+      this.replaceItem(Items.MM_MASK_KEATON,  Items.SHARED_MASK_KEATON);
       this.removeItem(Items.SHARED_MASK_KEATON, 1);
     }
 

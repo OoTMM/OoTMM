@@ -1,6 +1,5 @@
 import { Item, ItemGroups, Items, ItemsCount } from '../items';
 import { Settings, TRICKS } from '../settings';
-import { CountMap } from '../util';
 import { Age } from './pathfind';
 import { PRICE_RANGES } from './price';
 import { World } from './world';

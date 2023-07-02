@@ -29,7 +29,11 @@ const PRESET_BLITZ = makeSettings({
   sharedSongEpona: true,
   sharedSongStorms: true,
   sharedSongTime: true,
-  sharedMasks: true,
+  sharedMaskGoron: true,
+  sharedMaskZora: true,
+  sharedMaskBunny: true,
+  sharedMaskTruth: true,
+  sharedMaskKeaton: true,
   sharedWallets: true,
   sharedHealth: true,
   tricks: [

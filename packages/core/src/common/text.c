@@ -199,11 +199,15 @@ static int isItemAmbiguousOot(s16 gi)
     case GI_OOT_OCARINA_TIME:
         return !comboConfig(CFG_SHARED_OCARINA);
     case GI_OOT_MASK_KEATON:
+        return !comboConfig(CFG_SHARED_MASK_KEATON);
     case GI_OOT_MASK_BUNNY:
+        return !comboConfig(CFG_SHARED_MASK_BUNNY);
     case GI_OOT_MASK_GORON:
+        return !comboConfig(CFG_SHARED_MASK_GORON);
     case GI_OOT_MASK_ZORA:
+        return !comboConfig(CFG_SHARED_MASK_ZORA);
     case GI_OOT_MASK_TRUTH:
-        return !comboConfig(CFG_SHARED_MASKS);
+        return !comboConfig(CFG_SHARED_MASK_TRUTH);
     case GI_OOT_WALLET:
     case GI_OOT_WALLET2:
     case GI_OOT_WALLET3:
@@ -294,11 +298,15 @@ static int isItemAmbiguousMm(s16 gi)
     case GI_MM_OCARINA_OF_TIME:
         return !comboConfig(CFG_SHARED_OCARINA);
     case GI_MM_MASK_GORON:
+        return !comboConfig(CFG_SHARED_MASK_GORON);
     case GI_MM_MASK_ZORA:
+        return !comboConfig(CFG_SHARED_MASK_ZORA);
     case GI_MM_MASK_TRUTH:
+        return !comboConfig(CFG_SHARED_MASK_TRUTH);
     case GI_MM_MASK_BUNNY:
+        return !comboConfig(CFG_SHARED_MASK_BUNNY);
     case GI_MM_MASK_KEATON:
-        return !comboConfig(CFG_SHARED_MASKS);
+        return !comboConfig(CFG_SHARED_MASK_KEATON);
     case GI_MM_WALLET:
     case GI_MM_WALLET2:
     case GI_MM_WALLET3:
