@@ -775,6 +775,7 @@ export class Pathfinder {
       this.state.goal = true;
       this.state.locations = new Set(makePlayerLocations(this.settings, Object.keys(this.world.checks)));
       const gossips = new Set(Object.values(this.world.areas).map(x => Object.keys(x.gossip || {})).flat());
+      this.state.gossips = [];
       for (let world = 0; world < this.worldCount; ++world) {
         this.state.gossips.push(gossips);
       }
