@@ -60,5 +60,6 @@
 typedef struct GameState_Play GameState_Play;
 
 int comboCurrentDungeon(GameState_Play *play);
+int comboBossDungeon(int dungeonId);
 
 #endif

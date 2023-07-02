@@ -1,7 +1,7 @@
 #include <combo.h>
 #include <combo/text.h>
 
-const char* kDungeonNames[] = {
+const char* const kDungeonNames[] = {
     TEXT_COLOR_GREEN "Deku Tree",
     TEXT_COLOR_RED "Dodongo's Cavern",
     TEXT_COLOR_BLUE "Jabu-Jabu",
@@ -29,8 +29,29 @@ const char* kDungeonNames[] = {
     TEXT_COLOR_RED "Ganon's Tower",
 };
 
+const char* const kBossNames[] = {
+    TEXT_COLOR_GREEN "Gohma",
+    TEXT_COLOR_RED "King Dodongo",
+    TEXT_COLOR_BLUE "Barinade",
+    TEXT_COLOR_GREEN "Phantom Ganon",
+    TEXT_COLOR_RED "Volvagia",
+    TEXT_COLOR_BLUE "Morpha",
+    TEXT_COLOR_PINK "Bongo Bongo",
+    TEXT_COLOR_ORANGE "Twinrova",
+    TEXT_COLOR_GREEN "Odolwa",
+    TEXT_COLOR_RED "Goht",
+    TEXT_COLOR_BLUE "Gyorg",
+    TEXT_COLOR_ORANGE "Twinmold",
+};
+
 void comboTextAppendDungeonName(char** buffer, u8 dungeonId)
 {
     comboTextAppendStr(buffer, kDungeonNames[dungeonId]);
+    comboTextAppendClearColor(buffer);
+}
+
+void comboTextAppendBossName(char** buffer, u8 bossId)
+{
+    comboTextAppendStr(buffer, kBossNames[bossId]);
     comboTextAppendClearColor(buffer);
 }

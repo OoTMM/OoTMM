@@ -64,6 +64,7 @@ export const CONFVARS = [
   'MM_NO_SMALL_KEY',
   'CSMC_HEARTS',
   'OOT_BLUE_FIRE_ARROWS',
+  'ER_BOSS',
 ] as const;
 
 export type Confvar = typeof CONFVARS[number];

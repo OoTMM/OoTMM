@@ -47,6 +47,7 @@ export class LogicPassConfig {
       DOOR_OF_TIME_OPEN: settings.doorOfTime === 'open',
       OOT_OPEN_DEKU: settings.dekuTree === 'open',
       ER_DUNGEONS: settings.erDungeons !== 'none',
+      ER_BOSS: settings.erBoss !== 'none',
       ER_ANY: isEntranceShuffle(settings),
       SHARED_BOWS: settings.sharedBows,
       SHARED_BOMB_BAGS: settings.sharedBombBags,
