@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/dungeon.h>
 
 static int ObjOshihiki_GetSwitchFlag(GameState_Play* play, int flag)
 {

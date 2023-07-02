@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/custom.h>
+#include <combo/dungeon.h>
 
 #define DD_OOT          0x00
 #define DD_MM           0x01

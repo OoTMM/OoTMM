@@ -9,11 +9,11 @@
 
 #define X(a, b, c, d, e, text) text
 static const char* const kItemNamesOot[] = {
-#include "data/oot/gi.inc"
+#include "../data/oot/gi.inc"
 };
 
 static const char* const kItemNamesMm[] = {
-#include "data/mm/gi.inc"
+#include "../data/mm/gi.inc"
 };
 #undef X
 
@@ -472,7 +472,7 @@ void comboTextAppendNum(char** b, int num)
     }
 }
 
-static void comboTextAppendOrd(char** b, int num)
+void comboTextAppendOrd(char** b, int num)
 {
     const char* suffix;
 
@@ -719,43 +719,6 @@ void comboTextAppendCheckName(char** b, u8 checkId, u8 world)
         comboTextAppendNum(b, world);
         comboTextAppendClearColor(b);
     }
-}
-
-void comboTextHijackItemEx(GameState_Play* play, const ComboItemOverride* o, int count)
-{
-    char* b;
-    char* start;
-    int isSelf;
-
-    isSelf = (o->player == PLAYER_SELF) || (o->player == PLAYER_ALL) || (o->player == gComboData.playerId);
-
-#if defined(GAME_OOT)
-    b = play->msgCtx.textBuffer;
-#else
-    b = play->textBuffer;
-#endif
-    comboTextAppendHeader(&b);
-    start = b;
-    comboTextAppendStr(&b, "You got ");
-    comboTextAppendItemNameOverride(&b, o, 0);
-    comboTextAppendStr(&b, "!");
-    if (isSelf && count)
-    {
-        comboTextAppendStr(&b, TEXT_NL "This is your " TEXT_COLOR_RED);
-        comboTextAppendOrd(&b, count);
-        comboTextAppendClearColor(&b);
-        comboTextAppendStr(&b, ".");
-    }
-    comboTextAppendStr(&b, TEXT_END);
-    comboTextAutoLineBreaks(start);
-}
-
-void comboTextHijackItem(GameState_Play* play, s16 gi, int count)
-{
-    ComboItemOverride o;
-    memset(&o, 0, sizeof(o));
-    o.gi = gi;
-    comboTextHijackItemEx(play, &o, count);
 }
 
 static int isSoldOut(s16 gi)

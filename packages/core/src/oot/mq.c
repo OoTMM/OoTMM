@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/custom.h>
+#include <combo/dungeon.h>
 
 typedef struct
 {

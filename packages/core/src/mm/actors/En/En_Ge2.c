@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/entrance.h>
+#include <combo/dungeon.h>
 
 static void EnGe2_ThrowPlayerOut(Actor* this, GameState_Play* play)
 {

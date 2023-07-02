@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/custom.h>
+#include <combo/dungeon.h>
 
 #define CSMC_NORMAL     0x00
 #define CSMC_BOSS_KEY   0x01
