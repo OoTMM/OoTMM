@@ -418,7 +418,7 @@
     "Stock Pot Inn Guest Room Chest": "has(ROOM_KEY)"
     "Stock Pot Inn Staff Room Chest": "is_night3"
     "Stock Pot Inn Room Key": "after(DAY1_PM_01_45) && before(DAY1_PM_04_00)"
-    "Stock Pot Inn Letter to Kafei": "event(MEET_ANJU)"
+    "Stock Pot Inn Letter to Kafei": "cond(setting(erIndoors, none), event(MEET_ANJU) && (has(ROOM_KEY) || has(MASK_DEKU)), event(MEET_ANJU))"
     "Stock Pot Inn Couple's Mask": "event(SUN_MASK) && event(DELIVER_PENDANT) && event(MEET_ANJU) && after(NIGHT3_AM_04_00)"
     "Stock Pot Inn Grandma HP 1": "has(MASK_ALL_NIGHT) && (is_day1 || is_day2)"
     "Stock Pot Inn Grandma HP 2": "has(MASK_ALL_NIGHT) && (is_day1 || is_day2)"
