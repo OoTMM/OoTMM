@@ -333,7 +333,6 @@ void EnAkindonuts_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, 
     ComboItemQuery q;
     int npc;
     int isShop;
-    int id;
 
     npc = -1;
     isShop = 0;

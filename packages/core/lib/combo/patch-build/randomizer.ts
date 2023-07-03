@@ -11,7 +11,22 @@ import { Patchfile } from './patchfile';
 import { LOCATIONS_ZELDA, makeLocation, makePlayerLocations } from '../logic/locations';
 import { CONFVARS_VALUES, Confvar } from '../confvars';
 import { Region, regionData } from '../logic/regions';
-import { Item, ItemGroups, ItemHelpers, ItemsCount, itemByID } from '../items';
+import { Item, ItemGroups, ItemHelpers, Items, ItemsCount, itemByID } from '../items';
+
+const DUNGEON_REWARD_LOCATIONS = [
+  'OOT Deku Tree Boss',
+  'OOT Dodongo Cavern Boss',
+  'OOT Jabu-Jabu Boss',
+  'OOT Forest Temple Boss',
+  'OOT Fire Temple Boss',
+  'OOT Water Temple Boss',
+  'OOT Shadow Temple Boss',
+  'OOT Spirit Temple Boss',
+  'MM Woodfall Temple Boss',
+  'MM Snowhead Temple Boss',
+  'MM Great Bay Temple Boss',
+  'MM Stone Tower Boss',
+];
 
 const GAME_DATA_OFFSETS = {
   oot: 0x1000,
@@ -248,6 +263,30 @@ const toU32Buffer = (data: number[]) => {
   }
   return buf;
 };
+
+function zoraSapphireGI(world: number, logic: LogicResult): number | null {
+  /* Find the dungeon holding the Zora Sapphire */
+  const dungeonId = logic.entrances.boss.indexOf(0x02);
+  if (dungeonId === -1)
+    return null;
+
+  /* Find the location */
+  const locId = DUNGEON_REWARD_LOCATIONS[dungeonId];
+  if (!locId)
+    return null;
+  const loc = makeLocation(locId, world);
+  const item = logic.items.get(loc);
+  if (!item)
+    return null;
+  return gi(logic.settings, 'oot', item.item, false);
+}
+
+function zoraSapphireBuffer(world: number, logic: LogicResult): Buffer {
+  let value = zoraSapphireGI(world, logic);
+  if (value === null)
+    value = gi(logic.settings, 'oot', Items.OOT_STONE_SAPPHIRE, false);
+  return toU16Buffer([value]);
+}
 
 const gameChecks = (world: number, settings: Settings, game: Game, logic: LogicResult): Buffer => {
   const buf: number[] = [];
@@ -505,6 +544,7 @@ export const randomizerData = (world: number, logic: LogicResult): Buffer => {
   buffers.push(specialConds(logic.settings));
   buffers.push(prices(logic));
   buffers.push(randomizerHints(world, logic));
+  buffers.push(zoraSapphireBuffer(world, logic));
   buffers.push(randomizerBoss(logic));
   buffers.push(randomizerDungeons(logic));
   buffers.push(randomizerTriforce(logic));

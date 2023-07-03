@@ -124,6 +124,7 @@ typedef struct
     SpecialCond     special[5];
     u16             prices[PRICES_MAX];
     ComboDataHints  hints;
+    u16             giZoraSapphire;
     u8              boss[12];
     u8              dungeons[25];
     u8              triforcePieces;
