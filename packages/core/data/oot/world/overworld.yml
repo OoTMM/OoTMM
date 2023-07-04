@@ -1217,7 +1217,7 @@
     "Death Mountain Crater Scrub Grotto": "can_hammer"
     "Fairy Fountain Double Magic": "can_hammer"
   events:
-    RED_BOULDER_BROKEN: "is_adult %% can_hammer"
+    RED_BOULDER_BROKEN: "is_adult && can_hammer"
 "Death Mountain Crater Warp":
   region: DEATH_MOUNTAIN_CRATER
   exits:
