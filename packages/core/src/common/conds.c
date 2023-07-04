@@ -96,16 +96,30 @@ int comboSpecialCond(int special)
 
     if (cond->flags & SPF_MASKS_REGULAR)
     {
-        if (comboConfig(CFG_SHARED_MASKS))
+        if (comboConfig(CFG_SHARED_MASK_KEATON))
         {
             if (gMmSave.inventory.items[ITS_MM_MASK_KEATON] == ITEM_MM_MASK_KEATON) hasMaskKeaton = 1;
-            if (gMmSave.inventory.items[ITS_MM_MASK_BUNNY] == ITEM_MM_MASK_BUNNY) hasMaskBunny = 1;
-            if (gMmSave.inventory.items[ITS_MM_MASK_TRUTH] == ITEM_MM_MASK_TRUTH) hasMaskTruth = 1;
         }
         else
         {
             if (gMmSave.inventory.items[ITS_MM_MASK_KEATON] == ITEM_MM_MASK_KEATON) count++;
+        }
+
+        if (comboConfig(CFG_SHARED_MASK_BUNNY))
+        {
+            if (gMmSave.inventory.items[ITS_MM_MASK_BUNNY] == ITEM_MM_MASK_BUNNY) hasMaskBunny = 1;
+        }
+        else
+        {
             if (gMmSave.inventory.items[ITS_MM_MASK_BUNNY] == ITEM_MM_MASK_BUNNY) count++;
+        }
+
+        if (comboConfig(CFG_SHARED_MASK_TRUTH))
+        {
+            if (gMmSave.inventory.items[ITS_MM_MASK_TRUTH] == ITEM_MM_MASK_TRUTH) hasMaskTruth = 1;
+        }
+        else
+        {
             if (gMmSave.inventory.items[ITS_MM_MASK_TRUTH] == ITEM_MM_MASK_TRUTH) count++;
         }
 
@@ -130,38 +144,75 @@ int comboSpecialCond(int special)
 
     if (cond->flags & SPF_MASKS_TRANSFORM)
     {
-        if (comboConfig(CFG_SHARED_MASKS))
+        if (comboConfig(CFG_SHARED_MASK_ZORA))
         {
             if (gMmSave.inventory.items[ITS_MM_MASK_ZORA] == ITEM_MM_MASK_ZORA) hasMaskZora = 1;
-            if (gMmSave.inventory.items[ITS_MM_MASK_GORON] == ITEM_MM_MASK_GORON) hasMaskGoron = 1;
         }
         else
         {
             if (gMmSave.inventory.items[ITS_MM_MASK_ZORA] == ITEM_MM_MASK_ZORA) count++;
+        }
+
+        if (comboConfig(CFG_SHARED_MASK_GORON))
+        {
+            if (gMmSave.inventory.items[ITS_MM_MASK_GORON] == ITEM_MM_MASK_GORON) hasMaskGoron = 1;
+        }
+        else
+        {
             if (gMmSave.inventory.items[ITS_MM_MASK_GORON] == ITEM_MM_MASK_GORON) count++;
         }
+
         if (gMmSave.inventory.items[ITS_MM_MASK_DEKU] == ITEM_MM_MASK_DEKU) count++;
         if (gMmSave.inventory.items[ITS_MM_MASK_FIERCE_DEITY] == ITEM_MM_MASK_FIERCE_DEITY) count++;
     }
 
     if (cond->flags & SPF_MASKS_OOT)
     {
-        if (comboConfig(CFG_SHARED_MASKS))
+        if (comboConfig(CFG_SHARED_MASK_KEATON))
         {
             if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_KEATON_MASK)) hasMaskKeaton = 1;
-            if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_BUNNY_HOOD)) hasMaskBunny = 1;
-            if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_MASK_OF_TRUTH)) hasMaskTruth = 1;
-            if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_ZORA_MASK)) hasMaskZora = 1;
-            if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_GORON_MASK)) hasMaskGoron = 1;
         }
         else
         {
             if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_KEATON_MASK)) count++;
+        }
+
+        if (comboConfig(CFG_SHARED_MASK_BUNNY))
+        {
+            if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_BUNNY_HOOD)) hasMaskBunny = 1;
+        }
+        else
+        {
             if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_BUNNY_HOOD)) count++;
+        }
+
+        if (comboConfig(CFG_SHARED_MASK_TRUTH))
+        {
+            if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_MASK_OF_TRUTH)) hasMaskTruth = 1;
+        }
+        else
+        {
             if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_MASK_OF_TRUTH)) count++;
+        }
+
+        if (comboConfig(CFG_SHARED_MASK_ZORA))
+        {
+            if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_ZORA_MASK)) hasMaskZora = 1;
+        }
+        else
+        {
             if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_ZORA_MASK)) count++;
+        }
+
+        if (comboConfig(CFG_SHARED_MASK_GORON))
+        {
+            if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_GORON_MASK)) hasMaskGoron = 1;
+        }
+        else
+        {
             if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_GORON_MASK)) count++;
         }
+
         if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_GERUDO_MASK)) count++;
         if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_SPOOKY_MASK)) count++;
         if (gOotExtraTrade.child & (1 << XITEM_OOT_CHILD_SKULL_MASK)) count++;

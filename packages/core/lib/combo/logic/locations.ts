@@ -1,5 +1,5 @@
+import { ItemHelpers } from '../items';
 import { Settings } from '../settings';
-import { isTingleMap, makeItem } from './items';
 import { World } from './world';
 
 export type Location = string & { __brand: 'Location' };
@@ -66,7 +66,7 @@ export function isLocationRenewable(world: World, loc: Location) {
   const check = world.checks[locationId];
   if (['shop', 'cow', 'scrub'].includes(check.type))
     return true;
-  if (isTingleMap(makeItem(check.item)))
+  if (ItemHelpers.isTingleMap(check.item))
     return true;
   return false;
 }

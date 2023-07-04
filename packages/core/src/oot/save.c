@@ -1,6 +1,7 @@
 #include <combo.h>
 #include <combo/item.h>
 #include <combo/net.h>
+#include <combo/dungeon.h>
 
 #define ENTRANCE_MARKET       0x1d1
 

@@ -9,11 +9,11 @@
 
 #define X(a, b, c, d, e, text) text
 static const char* const kItemNamesOot[] = {
-#include "data/oot/gi.inc"
+#include "../data/oot/gi.inc"
 };
 
 static const char* const kItemNamesMm[] = {
-#include "data/mm/gi.inc"
+#include "../data/mm/gi.inc"
 };
 #undef X
 
@@ -199,11 +199,15 @@ static int isItemAmbiguousOot(s16 gi)
     case GI_OOT_OCARINA_TIME:
         return !comboConfig(CFG_SHARED_OCARINA);
     case GI_OOT_MASK_KEATON:
+        return !comboConfig(CFG_SHARED_MASK_KEATON);
     case GI_OOT_MASK_BUNNY:
+        return !comboConfig(CFG_SHARED_MASK_BUNNY);
     case GI_OOT_MASK_GORON:
+        return !comboConfig(CFG_SHARED_MASK_GORON);
     case GI_OOT_MASK_ZORA:
+        return !comboConfig(CFG_SHARED_MASK_ZORA);
     case GI_OOT_MASK_TRUTH:
-        return !comboConfig(CFG_SHARED_MASKS);
+        return !comboConfig(CFG_SHARED_MASK_TRUTH);
     case GI_OOT_WALLET:
     case GI_OOT_WALLET2:
     case GI_OOT_WALLET3:
@@ -294,11 +298,15 @@ static int isItemAmbiguousMm(s16 gi)
     case GI_MM_OCARINA_OF_TIME:
         return !comboConfig(CFG_SHARED_OCARINA);
     case GI_MM_MASK_GORON:
+        return !comboConfig(CFG_SHARED_MASK_GORON);
     case GI_MM_MASK_ZORA:
+        return !comboConfig(CFG_SHARED_MASK_ZORA);
     case GI_MM_MASK_TRUTH:
+        return !comboConfig(CFG_SHARED_MASK_TRUTH);
     case GI_MM_MASK_BUNNY:
+        return !comboConfig(CFG_SHARED_MASK_BUNNY);
     case GI_MM_MASK_KEATON:
-        return !comboConfig(CFG_SHARED_MASKS);
+        return !comboConfig(CFG_SHARED_MASK_KEATON);
     case GI_MM_WALLET:
     case GI_MM_WALLET2:
     case GI_MM_WALLET3:
@@ -464,7 +472,7 @@ void comboTextAppendNum(char** b, int num)
     }
 }
 
-static void comboTextAppendOrd(char** b, int num)
+void comboTextAppendOrd(char** b, int num)
 {
     const char* suffix;
 
@@ -711,43 +719,6 @@ void comboTextAppendCheckName(char** b, u8 checkId, u8 world)
         comboTextAppendNum(b, world);
         comboTextAppendClearColor(b);
     }
-}
-
-void comboTextHijackItemEx(GameState_Play* play, const ComboItemOverride* o, int count)
-{
-    char* b;
-    char* start;
-    int isSelf;
-
-    isSelf = (o->player == PLAYER_SELF) || (o->player == PLAYER_ALL) || (o->player == gComboData.playerId);
-
-#if defined(GAME_OOT)
-    b = play->msgCtx.textBuffer;
-#else
-    b = play->textBuffer;
-#endif
-    comboTextAppendHeader(&b);
-    start = b;
-    comboTextAppendStr(&b, "You got ");
-    comboTextAppendItemNameOverride(&b, o, 0);
-    comboTextAppendStr(&b, "!");
-    if (isSelf && count)
-    {
-        comboTextAppendStr(&b, TEXT_NL "This is your " TEXT_COLOR_RED);
-        comboTextAppendOrd(&b, count);
-        comboTextAppendClearColor(&b);
-        comboTextAppendStr(&b, ".");
-    }
-    comboTextAppendStr(&b, TEXT_END);
-    comboTextAutoLineBreaks(start);
-}
-
-void comboTextHijackItem(GameState_Play* play, s16 gi, int count)
-{
-    ComboItemOverride o;
-    memset(&o, 0, sizeof(o));
-    o.gi = gi;
-    comboTextHijackItemEx(play, &o, count);
 }
 
 static int isSoldOut(s16 gi)

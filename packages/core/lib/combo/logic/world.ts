@@ -2,11 +2,11 @@ import { Game, GAMES } from '../config';
 import { gameId } from '../util';
 import { Expr, exprTrue, MM_TIME_SLICES } from './expr';
 import { ExprParser } from './expr-parser';
-import { DATA_POOL, DATA_MACROS, DATA_WORLD, DATA_REGIONS, DATA_ENTRANCES_POOL, DATA_HINTS, DATA_HINTS_POOL } from '../data';
+import { DATA_POOL, DATA_MACROS, DATA_WORLD, DATA_REGIONS, DATA_ENTRANCES_POOL, DATA_HINTS_POOL } from '../data';
 import { Settings } from '../settings';
 import { Monitor } from '../monitor';
-import { isDungeonReward, isSong, makeItem } from './items';
 import { defaultPrices } from './price';
+import { Item, itemByID, ItemHelpers, Items } from '../items';
 
 export type ExprMap = {
   [k: string]: Expr;
@@ -38,7 +38,7 @@ type WorldCheckSymbolic = {
 export type WorldCheck = {
   game: Game;
   scene: string;
-  item: string;
+  item: Item;
   hint: string;
 } & (WorldCheckNumeric | WorldCheckSymbolic);
 
@@ -269,7 +269,7 @@ export class LogicPassWorld {
       } else {
         id = Number(record.id);
       }
-      const item = gameId(game, String(record.item), '_');
+      const item = itemByID(gameId(game, String(record.item), '_'));
       let hint = String(record.hint);
       if (hint !== 'NONE') {
         hint = gameId(game, hint, '_');
@@ -282,9 +282,9 @@ export class LogicPassWorld {
       const check = { game, type, scene, id, item, hint } as WorldCheck;
       this.world.checks[location] = check;
 
-      if (isSong(makeItem(item))) {
+      if (ItemHelpers.isSong(item)) {
         this.world.songLocations.add(location);
-      } else if (isDungeonReward(makeItem(item))) {
+      } else if (ItemHelpers.isDungeonReward(item)) {
         this.world.warpLocations.add(location);
       }
     }

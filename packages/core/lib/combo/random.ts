@@ -61,11 +61,11 @@ export const sample = <T>(random: Random, arr: T[]): T => {
   }
 
   const index = randomInt(random, arr.length);
-  return ([...arr].sort())[index];
+  return arr[index];
 };
 
 export const shuffle = <T>(random: Random, arr: T[]): T[] => {
-  const copy = [...arr].sort();
+  const copy = [...arr];
   for (let i = 0; i < copy.length - 1; i++) {
     const j = i + randomInt(random, copy.length - i);
     [copy[i], copy[j]] = [copy[j], copy[i]];

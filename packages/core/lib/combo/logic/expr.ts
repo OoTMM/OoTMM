@@ -1,5 +1,5 @@
-import { Settings, Trick, TRICKS } from '../settings';
-import { Items, ITEMS_MASKS_OOT, ITEMS_MASKS_REGULAR, ITEMS_MASKS_TRANSFORM, ITEMS_MEDALLIONS, ITEMS_REMAINS, ITEMS_STONES } from './items';
+import { Item, ItemGroups, Items, ItemsCount } from '../items';
+import { Settings, TRICKS } from '../settings';
 import { Age } from './pathfind';
 import { PRICE_RANGES } from './price';
 import { World } from './world';
@@ -55,7 +55,7 @@ export const MM_TIME_SLICES = [
 
 type ExprResultFalse = {
   result: false;
-  depItems: RecursiveArray<string>;
+  depItems: RecursiveArray<Item>;
   depEvents: RecursiveArray<string>;
 }
 
@@ -95,7 +95,7 @@ export const isDefaultRestrictions = (r: ExprRestrictions): boolean => {
 
 type ExprResultTrue = {
   result: true;
-  depItems: RecursiveArray<string>;
+  depItems: RecursiveArray<Item>;
   depEvents: RecursiveArray<string>;
   restrictions?: ExprRestrictions;
 }
@@ -112,9 +112,9 @@ export type AreaData = {
 };
 
 type State = {
-  items: {[k: string]: number};
-  renewables: {[k: string]: number};
-  licenses: {[k: string]: number};
+  items: ItemsCount;
+  renewables: ItemsCount;
+  licenses: ItemsCount;
   age: Age;
   events: Set<string>;
   ignoreItems: boolean;
@@ -155,8 +155,8 @@ export const exprRestrictionsOr = (exprs: ExprResult[]): ExprRestrictions => {
   return restrictions;
 };
 
-const itemCount = (state: State, item: string): number => state.items[item] || 0;
-const itemsCount = (state: State, items: string[]): number => items.reduce((acc, item) => acc + itemCount(state, item), 0);
+const itemCount = (state: State, item: Item): number => state.items.get(item) || 0;
+const itemsCount = (state: State, items: Item[]): number => items.reduce((acc, item) => acc + itemCount(state, item), 0);
 
 function resolveSpecialCond(settings: Settings, state: State, special: string): ExprResult {
   const { specialConds } = settings;
@@ -168,25 +168,25 @@ function resolveSpecialCond(settings: Settings, state: State, special: string): 
     return { result: true, depItems: [], depEvents: [] };
   }
 
-  let items = new Set<string>();
-  let itemsUnique = new Set<string>();
+  let items = new Set<Item>();
+  let itemsUnique = new Set<Item>();
   const cond = specialConds[special as keyof typeof specialConds];
 
-  if (cond.stones) itemsUnique = new Set([...itemsUnique, ...ITEMS_STONES]);
-  if (cond.medallions) itemsUnique = new Set([...itemsUnique, ...ITEMS_MEDALLIONS]);
-  if (cond.remains) itemsUnique = new Set([...itemsUnique, ...ITEMS_REMAINS]);
-  if (cond.skullsGold) items.add('OOT_GS_TOKEN');
-  if (cond.skullsSwamp) items.add('MM_GS_TOKEN_SWAMP');
-  if (cond.skullsOcean) items.add('MM_GS_TOKEN_OCEAN');
-  if (cond.fairiesWF) items.add('MM_STRAY_FAIRY_WF');
-  if (cond.fairiesSH) items.add('MM_STRAY_FAIRY_SH');
-  if (cond.fairiesGB) items.add('MM_STRAY_FAIRY_GB');
-  if (cond.fairiesST) items.add('MM_STRAY_FAIRY_ST');
-  if (cond.fairyTown) items.add('MM_STRAY_FAIRY_TOWN');
-  if (cond.masksRegular) itemsUnique = new Set([...itemsUnique, ...ITEMS_MASKS_REGULAR]);
-  if (cond.masksTransform) itemsUnique = new Set([...itemsUnique, ...ITEMS_MASKS_TRANSFORM]);
-  if (cond.masksOot) itemsUnique = new Set([...itemsUnique, ...ITEMS_MASKS_OOT]);
-  if (cond.triforce) items.add('SHARED_TRIFORCE');
+  if (cond.stones) itemsUnique = new Set([...itemsUnique, ...ItemGroups.STONES]);
+  if (cond.medallions) itemsUnique = new Set([...itemsUnique, ...ItemGroups.MEDALLIONS]);
+  if (cond.remains) itemsUnique = new Set([...itemsUnique, ...ItemGroups.REMAINS]);
+  if (cond.skullsGold) items.add(Items.OOT_GS_TOKEN);
+  if (cond.skullsSwamp) items.add(Items.MM_GS_TOKEN_SWAMP);
+  if (cond.skullsOcean) items.add(Items.MM_GS_TOKEN_OCEAN);
+  if (cond.fairiesWF) items.add(Items.MM_STRAY_FAIRY_WF);
+  if (cond.fairiesSH) items.add(Items.MM_STRAY_FAIRY_SH);
+  if (cond.fairiesGB) items.add(Items.MM_STRAY_FAIRY_GB);
+  if (cond.fairiesST) items.add(Items.MM_STRAY_FAIRY_ST);
+  if (cond.fairyTown) items.add(Items.MM_STRAY_FAIRY_TOWN);
+  if (cond.masksRegular) itemsUnique = new Set([...itemsUnique, ...ItemGroups.MASKS_REGULAR]);
+  if (cond.masksTransform) itemsUnique = new Set([...itemsUnique, ...ItemGroups.MASKS_TRANSFORM]);
+  if (cond.masksOot) itemsUnique = new Set([...itemsUnique, ...ItemGroups.MASKS_OOT]);
+  if (cond.triforce) items.add(Items.SHARED_TRIFORCE);
 
   const countUnique = [...itemsUnique].filter(item => itemCount(state, item) > 0).length;
   const result = (itemsCount(state, [...items]) + countUnique) >= cond.count;
@@ -299,7 +299,7 @@ export const exprCond = (cond: Expr, then: Expr, otherwise: Expr): Expr => {
 
 export const exprAge = (age: Age): Expr => state => state.age === age ? exprTrue()(state) : exprFalse()(state);
 
-export const exprHas = (item: string, count: number): Expr => {
+export const exprHas = (item: Item, count: number): Expr => {
   if (count <= 0) {
     return exprTrue();
   }
@@ -312,21 +312,21 @@ export const exprHas = (item: string, count: number): Expr => {
   }
 };
 
-export const exprRenewable = (item: string): Expr => {
+export const exprRenewable = (item: Item): Expr => {
   const depItems = [item];
   const depEvents: string[] = [];
   return state => {
-    const result = (state.ignoreItems || state.renewables[item] > 0);
+    const result = (state.ignoreItems || (state.renewables.get(item) || 0) > 0);
     return { result, depItems, depEvents };
   }
 };
 
-export const exprLicense = (item: string): Expr => {
+export const exprLicense = (item: Item): Expr => {
   const depItems = [item];
   const depEvents: string[] = [];
 
   return state => {
-    const result = (state.ignoreItems || state.licenses[item] > 0);
+    const result = (state.ignoreItems || (state.licenses.get(item) || 0) > 0);
     return { result, depItems, depEvents };
   }
 };
@@ -337,8 +337,8 @@ export const exprEvent = (event: string): Expr => state => {
 };
 
 export const exprMasks = (count: number): Expr => state => {
-  const result = state.ignoreItems || (itemsCount(state, ITEMS_MASKS_REGULAR) >= count);
-  return { result, depItems: [...ITEMS_MASKS_REGULAR], depEvents: [] };
+  const result = state.ignoreItems || (itemsCount(state, [...ItemGroups.MASKS_REGULAR]) >= count);
+  return { result, depItems: [...ItemGroups.MASKS_REGULAR], depEvents: [] };
 };
 
 export const exprSpecial = (settings: Settings, special: string): Expr => state => resolveSpecialCond(settings, state, special);

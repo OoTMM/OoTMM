@@ -1,14 +1,15 @@
 import { World } from './world';
 import { Analysis } from './analysis';
 import { Random, sample, shuffle, randomInt } from '../random';
-import { DUNGEON_REWARDS_ORDERED, isDungeonReward, isGoldToken, itemsArray, isKey, isHouseToken, isGanonBossKey, isStrayFairy, isToken, isTownStrayFairy, isSong, isSmallKeyRegular, isSmallKeyHideout, isMapCompass, ITEMS_MASKS_REGULAR, isSmallKeyRegularOot, isSmallKeyRegularMm, isRegularBossKeyOot, isRegularBossKeyMm, isItemTriforce, Item, itemData, makeItem } from './items';
 import { Settings } from '../settings';
 import { Game } from '../config';
 import { Monitor } from '../monitor';
 import { Pathfinder } from './pathfind';
 import { ItemPlacement } from './solve';
 import { Location, locationData, makeLocation } from './locations';
-import { Region, makeRegion, regionData } from './regions';
+import { Region, makeRegion } from './regions';
+import { CountMap, countMapArray } from '../util';
+import { ItemGroups, ItemHelpers, Items, PlayerItem, itemByID, makePlayerItem } from '../items';
 
 const FIXED_HINTS_LOCATIONS = [
   'OOT Skulltula House 10 Tokens',
@@ -82,13 +83,13 @@ export type HintGossipItemExact = {
   type: 'item-exact',
   check: string,
   world: number,
-  items: Item[],
+  items: PlayerItem[],
 };
 
 export type HintGossipItemRegion = {
   type: 'item-region',
   region: Region,
-  item: Item;
+  item: PlayerItem;
 };
 
 export type HintGossipJunk = {
@@ -106,7 +107,7 @@ type WorldItemHints = {
 };
 
 export type WorldHints = WorldItemHints & {
-  foolish: {[k: string]: number};
+  foolish: CountMap<string>;
   gossip: {[k: string]: HintGossip};
 };
 
@@ -162,7 +163,7 @@ export class LogicPassHints {
     return sometimesHints;
   }
 
-  private findItems(item: Item) {
+  private findItems(item: PlayerItem) {
     const locs: Location[] = [];
 
     for (const sphere of this.state.analysis.spheres) {
@@ -182,7 +183,7 @@ export class LogicPassHints {
     return [...new Set(locs)];
   }
 
-  private findItem(item: Item) {
+  private findItem(item: PlayerItem) {
     const items = this.findItems(item);
     if (items.length === 0) {
       return null;
@@ -220,74 +221,74 @@ export class LogicPassHints {
     }
 
     /* Non-shuffled hideout keys */
-    if (isSmallKeyHideout(item) && this.state.settings.smallKeyShuffleHideout !== 'anywhere') {
+    if (ItemHelpers.isSmallKeyHideout(item.item) && this.state.settings.smallKeyShuffleHideout !== 'anywhere') {
       return false;
     }
 
     /* Non-shuffled regular keys */
-    if (isSmallKeyRegularOot(item) && this.state.settings.smallKeyShuffleOot !== 'anywhere') {
+    if (ItemHelpers.isSmallKeyRegularOot(item.item) && this.state.settings.smallKeyShuffleOot !== 'anywhere') {
       return false;
     }
-    if (isSmallKeyRegularMm(item) && this.state.settings.smallKeyShuffleMm !== 'anywhere') {
+    if (ItemHelpers.isSmallKeyRegularMm(item.item) && this.state.settings.smallKeyShuffleMm !== 'anywhere') {
       return false;
     }
 
     /* Non-shuffled Ganon BK (doesn't really matter) */
-    if (isGanonBossKey(item) && this.state.settings.ganonBossKey !== 'anywhere') {
+    if (ItemHelpers.isGanonBossKey(item.item) && this.state.settings.ganonBossKey !== 'anywhere') {
       return false;
     }
 
     /* Non shuffled boss keys */
-    if (isRegularBossKeyOot(item) && this.state.settings.bossKeyShuffleOot !== 'anywhere') {
+    if (ItemHelpers.isRegularBossKeyOot(item.item) && this.state.settings.bossKeyShuffleOot !== 'anywhere') {
       return false;
     }
 
-    if (isRegularBossKeyMm(item) && this.state.settings.bossKeyShuffleMm !== 'anywhere') {
+    if (ItemHelpers.isRegularBossKeyMm(item.item) && this.state.settings.bossKeyShuffleMm !== 'anywhere') {
       return false;
     }
 
     /* Non shuffled town fairy */
-    if (isTownStrayFairy(item) && this.state.settings.townFairyShuffle === 'vanilla') {
+    if (ItemHelpers.isTownStrayFairy(item.item) && this.state.settings.townFairyShuffle === 'vanilla') {
       return false;
     }
 
     /* Non shuffled stray fairy */
-    if (isStrayFairy(item) && this.state.settings.strayFairyShuffle !== 'anywhere') {
+    if (ItemHelpers.isStrayFairy(item.item) && this.state.settings.strayFairyShuffle !== 'anywhere') {
       return false;
     }
 
     /* Non-shuffled map/compass (doesn't really matter) */
-    if (isMapCompass(item) && this.state.settings.mapCompassShuffle !== 'anywhere') {
+    if (ItemHelpers.isMapCompass(item.item) && this.state.settings.mapCompassShuffle !== 'anywhere') {
       return false;
     }
 
     /* Non-shuffled dungeon reward */
-    if (isDungeonReward(item) && this.state.settings.dungeonRewardShuffle === 'dungeonBlueWarps') {
+    if (ItemHelpers.isDungeonReward(item.item) && this.state.settings.dungeonRewardShuffle === 'dungeonBlueWarps') {
       return false;
     }
 
     /* Non shuffled GS token */
     /* TODO: Handle dungeon/overworld better */
-    if (isGoldToken(item) && this.state.settings.goldSkulltulaTokens === 'none') {
+    if (ItemHelpers.isGoldToken(item.item) && this.state.settings.goldSkulltulaTokens === 'none') {
       return false;
     }
 
     /* Non shuffled House tokens */
-    if (isHouseToken(item) && this.state.settings.housesSkulltulaTokens === 'none') {
+    if (ItemHelpers.isHouseToken(item.item) && this.state.settings.housesSkulltulaTokens === 'none') {
       return false;
     }
 
     /* Triforce Piece - never hinted outside of location */
-    if (isItemTriforce(item) && klass !== 'location') {
+    if (ItemHelpers.isItemTriforce(item.item) && klass !== 'location') {
       return false;
     }
 
     /* Additional restrictions for WotH */
     if (klass === 'woth') {
-      if (isKey(item) || isStrayFairy(item) || isToken(item) || isDungeonReward(item)) {
+      if (ItemHelpers.isKey(item.item) || ItemHelpers.isStrayFairy(item.item) || ItemHelpers.isToken(item.item) || ItemHelpers.isDungeonReward(item.item)) {
         return false;
       }
-      if (isSong(item) && this.state.settings.songs !== 'anywhere') {
+      if (ItemHelpers.isSong(item.item) && this.state.settings.songs !== 'anywhere') {
         return false;
       }
     }
@@ -309,7 +310,7 @@ export class LogicPassHints {
 
   private playthroughLocations(player: number) {
     const locations = this.state.analysis.spheres.flat()
-      .filter(loc => itemData(this.state.items.get(loc)!).player === player)
+      .filter(loc => this.state.items.get(loc)!.player === player)
       .filter(loc => this.isLocationHintable(loc, 'item'));
     return shuffle(this.state.random, locations);
   }
@@ -328,26 +329,29 @@ export class LogicPassHints {
   }
 
   private foolishRegions(world: number) {
-    let regions: {[k:string]: number} = {};
+    let regions: CountMap<string> = new Map;
 
     for (const locationId in this.state.world.checks) {
       const location = makeLocation(locationId, world);
       const region = this.state.world.regions[locationId];
-      regions[region] ||= 0;
-      if (regions[region] === -1) {
+      if (!regions.has(region)) {
+        regions.set(region, 0);
+      }
+      const prev = regions.get(region)!;
+      if (prev === -1) {
         continue;
       }
       const value = this.locationFoolish(location);
       if (value === -1) {
-        regions[region] = -1;
+        regions.set(region, -1);
       } else {
-        regions[region] += value;
+        regions.set(region, prev + value);
       }
     }
 
-    for (const r in regions) {
-      if (regions[r] <= 0) {
-        delete regions[r];
+    for (const r of regions.keys()) {
+      if (regions.get(r)! <= 0) {
+        regions.delete(r);
       }
     }
 
@@ -411,19 +415,19 @@ export class LogicPassHints {
     return placed;
   }
 
-  private placeGossipFoolish(world: number, regions: {[k: string]: number}, count: number | 'max', extra: number) {
+  private placeGossipFoolish(world: number, regions: CountMap<string>, count: number | 'max', extra: number) {
     if (count === 'max') {
       count = 999;
     }
     let placed = 0;
-    regions = { ...regions };
+    regions = new Map(regions);
     while (placed < count) {
-      const regionsArray = itemsArray(regions); /* Ugly */
+      const regionsArray = countMapArray(regions);
       if (regionsArray.length === 0) {
         break;
       }
       const region = sample(this.state.random, regionsArray);
-      delete regions[region];
+      regions.delete(region);
       const gossips = Object.keys(this.state.world.gossip)
         .filter(x => !this.gossip[world][x])
         .filter(x => ['gossip', 'gossip-grotto'].includes(this.state.world.gossip[x].type));
@@ -531,8 +535,9 @@ export class LogicPassHints {
   }
 
   private placeGossipItemName(world: number, itemId: string, count: number | 'max', extra: number) {
-    const item = makeItem(itemId, world);
-    const locations = this.findItems(item);
+    const item = itemByID(itemId);
+    const playerItem = makePlayerItem(item, world);
+    const locations = this.findItems(playerItem);
     if (count === 'max') {
       count = locations.length;
     }
@@ -591,13 +596,13 @@ export class LogicPassHints {
   }
 
   private placeMoonGossip(world: number) {
-    for (const mask of ITEMS_MASKS_REGULAR) {
-      const location = this.findItem(makeItem(mask, world));
+    for (const mask of ItemGroups.MASKS_REGULAR) {
+      const location = this.findItem(makePlayerItem(mask, world));
       this.placeGossipItemRegion(world, location, 0, true);
     }
   }
 
-  private placeGossips(foolish: {[k: string]: number}[]) {
+  private placeGossips(foolish: CountMap<string>[]) {
     const settingsHints = this.state.settings.hints;
 
     for (const s of settingsHints) {
@@ -646,7 +651,7 @@ export class LogicPassHints {
 
   run() {
     this.state.monitor.log('Logic: Hints');
-    const worldFoolish: {[k: string]: number}[] = [];
+    const worldFoolish: CountMap<string>[] = [];
     const worldItemHints: WorldItemHints[] = [];
 
     /* Mark static hints */
@@ -661,10 +666,10 @@ export class LogicPassHints {
 
     /* Compute item hints */
     for (let world = 0; world < this.state.settings.players; ++world) {
-      const locDungeonRewards = DUNGEON_REWARDS_ORDERED.map(item => this.findItem(makeItem(item, world)));
-      const locLightArrow = this.findItem(makeItem('OOT_ARROW_LIGHT', world)) || this.findItem(makeItem('SHARED_ARROW_LIGHT', world));
-      const locOathToOrder = this.findItem(makeItem('MM_SONG_ORDER', world));
-      const locGanonBossKey = this.state.settings.ganonBossKey === 'anywhere' ? this.findItem(makeItem('OOT_BOSS_KEY_GANON', world)) : null;
+      const locDungeonRewards = [...ItemGroups.DUNGEON_REWARDS].map(item => this.findItem(makePlayerItem(item, world)));
+      const locLightArrow = this.findItem(makePlayerItem(Items.OOT_ARROW_LIGHT, world)) || this.findItem(makePlayerItem(Items.SHARED_ARROW_LIGHT, world));
+      const locOathToOrder = this.findItem(makePlayerItem(Items.MM_SONG_ORDER, world));
+      const locGanonBossKey = this.state.settings.ganonBossKey === 'anywhere' ? this.findItem(makePlayerItem(Items.OOT_BOSS_KEY_GANON, world)) : null;
 
       for (const l of [...locDungeonRewards, locLightArrow, locOathToOrder, locGanonBossKey]) {
         this.markLocation(l);

@@ -5,9 +5,8 @@ static void DemoEffect_SapphireItemQuery(ComboItemQuery* q)
 {
     bzero(q, sizeof(*q));
 
-    q->ovType = OV_NPC;
-    q->gi = GI_OOT_STONE_SAPPHIRE;
-    q->id = NPC_OOT_BLUE_WARP_BARINADE;
+    q->ovType = OV_NONE;
+    q->gi = gComboData.giZoraSapphire;
 }
 
 static void DemoEffect_SapphireItemOverride(ComboItemOverride* o)

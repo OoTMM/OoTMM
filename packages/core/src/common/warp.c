@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/entrance.h>
+#include <combo/dungeon.h>
 
 void comboTriggerWarp(GameState_Play* play, int bossId)
 {

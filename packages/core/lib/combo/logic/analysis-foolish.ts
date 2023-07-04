@@ -1,5 +1,4 @@
 import { Settings } from '../settings';
-import { isItemConsumable, isItemLicense } from './items';
 import { Location, isLocationRenewable, makePlayerLocations } from './locations';
 import { Pathfinder, PathfinderState } from './pathfind';
 import { World } from './world';
@@ -7,6 +6,7 @@ import { Random, sample } from '../random';
 import { Analysis } from './analysis';
 import { Monitor } from '../monitor';
 import { ItemPlacement } from './solve';
+import { ItemHelpers } from '../items';
 
 type ZigZagState = {
   allowed: Set<Location>;
@@ -37,7 +37,8 @@ export class LogicPassAnalysisFoolish {
 
   private markAsSometimesRequired(loc: Location) {
     if (!this.conditionallyRequiredLocations.has(loc)) {
-      this.state.monitor.debug("Foolish Analysis - Sometimes Required: " + loc + "(" + this.state.items.get(loc) + ")");
+      const item = this.state.items.get(loc)!;
+      this.state.monitor.debug(`Foolish Analysis - Sometimes Required: ${loc} (${item.item.id}@${item.player})`);
       this.conditionallyRequiredLocations.add(loc);
     }
   }
@@ -179,7 +180,7 @@ export class LogicPassAnalysisFoolish {
       if (this.state.analysis.unreachable.has(loc)) continue;
       if (this.state.analysis.useless.has(loc)) continue;
       const item = this.state.items.get(loc)!;
-      if (isItemConsumable(item) && !isLocationRenewable(this.state.world, loc) && !isItemLicense(item)) continue;
+      if (ItemHelpers.isItemConsumable(item.item) && !isLocationRenewable(this.state.world, loc) && !ItemHelpers.isItemLicense(item.item)) continue;
       locsSet.add(loc);
     }
 

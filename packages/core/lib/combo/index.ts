@@ -5,12 +5,13 @@ import { Generator, GeneratorOutput } from './generator';
 import { Monitor, MonitorCallbacks } from './monitor';
 import { worldState } from './logic';
 import { itemName } from './names';
-import { isDungeonItem, isItemTriforce, isItemUnlimitedStarting, isJunk, isStrayFairy, isToken, Item, Items, makeItem } from './logic/items';
 import { isShuffled } from './logic/is-shuffled';
 import { DEFAULT_SETTINGS, DUNGEONS, makeSettings, mergeSettings, SettingCategory, SETTINGS, Settings, SETTINGS_CATEGORIES, SPECIAL_CONDS, SPECIAL_CONDS_KEYS, TRICKS } from './settings';
 import { SettingsPatch } from './settings/patch';
 import { makeCosmetics } from './cosmetics';
 import { makeRandomSettings } from './settings/random';
+import { CountMap } from './util';
+import { ItemHelpers, ItemsCount } from './items';
 
 export { Presets, PRESETS } from './presets';
 export { Cosmetics, makeCosmetics, COSMETIC_NAMES } from './cosmetics';
@@ -25,7 +26,7 @@ export type GeneratorParams = {
   monitor?: MonitorCallbacks
 };
 
-export type { GeneratorOutput, Settings, OptionsInput, Items, SettingCategory, SettingsPatch };
+export type { GeneratorOutput, Settings, OptionsInput, SettingCategory, SettingsPatch };
 
 type LocInfo = {
   [k: string]: string[]
@@ -38,7 +39,7 @@ export const generate = (params: GeneratorParams): Generator => {
 
 export { SETTINGS, DEFAULT_SETTINGS, SETTINGS_CATEGORIES, TRICKS, itemName, DUNGEONS, mergeSettings, makeSettings, SPECIAL_CONDS, SPECIAL_CONDS_KEYS };
 
-export const itemPool = (aSettings: Partial<Settings>) => {
+export const itemPool = (aSettings: Partial<Settings>): {[k: string]: number} => {
   const settings: Settings = { ...DEFAULT_SETTINGS, ...aSettings };
   const cosmetics = makeCosmetics({});
   const monitor = new Monitor({ onLog: () => {} });
@@ -46,9 +47,9 @@ export const itemPool = (aSettings: Partial<Settings>) => {
   const { pool, world } = worldState(monitor, { settings, cosmetics, debug: false, seed: "--- INTERNAL ---", random });
 
   /* Extract relevant items from the pool */
-  for (const item of Object.keys(pool) as Item[]) {
-    if (isJunk(item) || isDungeonItem(item) || isToken(item) || isStrayFairy(item) || isItemTriforce(item)) {
-      delete pool[item];
+  for (const item of pool.keys()) {
+    if (ItemHelpers.isJunk(item) || ItemHelpers.isDungeonItem(item) || ItemHelpers.isToken(item) || ItemHelpers.isStrayFairy(item) || ItemHelpers.isItemTriforce(item)) {
+      pool.delete(item);
     }
   }
 
@@ -56,20 +57,24 @@ export const itemPool = (aSettings: Partial<Settings>) => {
   for (const loc in world.checks) {
     const check = world.checks[loc];
     const { item } = check;
-    const globalItem = makeItem(item);
-    if (isItemUnlimitedStarting(globalItem)) {
-      pool[globalItem] = 999;
+    if (ItemHelpers.isItemUnlimitedStarting(item)) {
+      pool.set(item, 999);
     }
   }
 
   /* Sort items */
-  const items: Items = {};
-  const sortedItems = (Object.keys(pool) as Item[]).sort((a, b) => itemName(a).localeCompare(itemName(b)));
+  const items: ItemsCount = new Map;
+  const sortedItems = [...pool.keys()].sort((a, b) => itemName(a.id).localeCompare(itemName(b.id)));
   for (const item of sortedItems) {
-    items[item] = pool[item];
+    items.set(item, pool.get(item)!);
   }
 
-  return items;
+  /* Make the item pool */
+  const itemPool: {[k: string]: number} = {};
+  for (const [item, count] of items) {
+    itemPool[item.id] = count;
+  }
+  return itemPool;
 }
 
 export const locationList = (aSettings: Partial<Settings>) => {

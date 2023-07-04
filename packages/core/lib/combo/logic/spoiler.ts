@@ -12,8 +12,8 @@ import { regionName } from '../regions';
 import { isShuffled } from './is-shuffled'
 import { ItemPlacement } from './solve';
 import { Location, locationData, makeLocation } from './locations';
-import { Item, itemData } from './items';
 import { Region, regionData } from './regions';
+import { PlayerItem } from '../items';
 
 const VERSION = process.env.VERSION || 'XXX';
 
@@ -219,9 +219,9 @@ export class LogicPassSpoiler {
       }
       this.write('');
       this.indent('Foolish Regions:');
-      const foolish = sortBy(Object.keys(hints.foolish), x => -hints.foolish[x]);
+      const foolish = sortBy([...hints.foolish.keys()], x => -hints.foolish.get(x)!);
       for (const f of foolish) {
-        const weight = hints.foolish[f];
+        const weight = hints.foolish.get(f);
         this.write(`${regionName(f)}: ${weight}`);
       }
       this.unindent();
@@ -239,12 +239,11 @@ export class LogicPassSpoiler {
     }
   }
 
-  private itemName(item: Item) {
-    const data = itemData(item);
+  private itemName(item: PlayerItem) {
     if (this.isMulti) {
-      return `Player ${data.player as number + 1} ${itemName(data.id)}`;
+      return `Player ${item.player + 1} ${itemName(item.item.id)}`;
     } else {
-      return itemName(data.id);
+      return itemName(item.item.id);
     }
   }
 

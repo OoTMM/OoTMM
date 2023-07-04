@@ -309,7 +309,11 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
     base.sharedHookshot = true;
     base.sharedLens = true;
     base.sharedOcarina = true;
-    base.sharedMasks = true;
+    base.sharedMaskGoron = true;
+    base.sharedMaskZora = true;
+    base.sharedMaskBunny = true;
+    base.sharedMaskTruth = true;
+    base.sharedMaskKeaton = true;
     base.sharedWallets = true;
     base.sharedHealth = true;
   default:
@@ -317,19 +321,65 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
     base.sharedBows = booleanWeighted(random, 0.5);
     base.sharedBombBags = booleanWeighted(random, 0.5);
     base.sharedMagic = booleanWeighted(random, 0.5);
-    base.sharedMagicArrowFire = booleanWeighted(random, 0.5);
-    base.sharedMagicArrowIce = booleanWeighted(random, 0.5);
-    base.sharedMagicArrowLight = booleanWeighted(random, 0.5);
-    base.sharedSongEpona = booleanWeighted(random, 0.5);
-    base.sharedSongStorms = booleanWeighted(random, 0.5);
-    base.sharedSongTime = booleanWeighted(random, 0.5);
-    base.sharedSongSun = booleanWeighted(random, 0.5);
     base.sharedHookshot = booleanWeighted(random, 0.5);
     base.sharedLens = booleanWeighted(random, 0.5);
     base.sharedOcarina = booleanWeighted(random, 0.5);
-    base.sharedMasks = booleanWeighted(random, 0.5);
     base.sharedWallets = booleanWeighted(random, 0.5);
     base.sharedHealth = booleanWeighted(random, 0.5);
+
+    /* Masks - grouping */
+    switch (randomInt(random, 4)) {
+    case 0:
+      break;
+    case 1:
+      base.sharedMaskGoron = true;
+      base.sharedMaskZora = true;
+      base.sharedMaskBunny = true;
+      base.sharedMaskTruth = true;
+      base.sharedMaskKeaton = true;
+      break;
+    default:
+      base.sharedMaskGoron = booleanWeighted(random, 0.5);
+      base.sharedMaskZora = booleanWeighted(random, 0.5);
+      base.sharedMaskBunny = booleanWeighted(random, 0.5);
+      base.sharedMaskTruth = booleanWeighted(random, 0.5);
+      base.sharedMaskKeaton = booleanWeighted(random, 0.5);
+      break;
+    }
+
+    /* Songs - grouping */
+    switch (randomInt(random, 4)) {
+    case 0:
+      break;
+    case 1:
+      base.sharedSongEpona = true;
+      base.sharedSongStorms = true;
+      base.sharedSongTime = true;
+      base.sharedSongSun = true;
+      break;
+    default:
+      base.sharedSongEpona = booleanWeighted(random, 0.5);
+      base.sharedSongStorms = booleanWeighted(random, 0.5);
+      base.sharedSongTime = booleanWeighted(random, 0.5);
+      base.sharedSongSun = booleanWeighted(random, 0.5);
+      break;
+    }
+
+    /* Magical Arrows - grouping */
+    switch (randomInt(random, 4)) {
+    case 0:
+      break;
+    case 1:
+      base.sharedMagicArrowFire = true;
+      base.sharedMagicArrowIce = true;
+      base.sharedMagicArrowLight = true;
+      break;
+    default:
+      base.sharedMagicArrowFire = booleanWeighted(random, 0.5);
+      base.sharedMagicArrowIce = booleanWeighted(random, 0.5);
+      base.sharedMagicArrowLight = booleanWeighted(random, 0.5);
+      break;
+    }
   }
 
   base.fairyOcarinaMm = booleanWeighted(random, 0.5);

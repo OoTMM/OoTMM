@@ -70,6 +70,12 @@ const solvedWorldState = (monitor: Monitor, opts: Options) => {
     } catch (e) {
       if (!(e instanceof LogicError) || state.attempts >= 1000) {
         throw e;
+      } else {
+        if (e.stack) {
+          monitor.debug(e.stack);
+        } else {
+          monitor.debug(e.message);
+        }
       }
     }
   }

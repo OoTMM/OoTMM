@@ -1,4 +1,5 @@
 import { Game } from '../config';
+import { itemByID } from '../items';
 import { Settings } from '../settings';
 import { gameId } from '../util';
 import { Expr, exprTrue, exprFalse, exprAnd, exprOr, exprAge, exprHas, exprRenewable, exprEvent, exprMasks, exprSetting, exprNot, exprCond, exprTrick, exprSpecial, exprOotTime, exprMmTime, exprLicense, exprPrice } from './expr';
@@ -163,7 +164,7 @@ export class ExprParser {
     this.accept('identifier');
     this.expect('(');
     const itemName = this.expect('identifier');
-    const item = gameId(this.game, itemName, '_');
+    const item = itemByID(gameId(this.game, itemName, '_'));
     let count = 1;
     if (this.accept(',')) {
       const n = this.parseNumeric();
@@ -183,7 +184,7 @@ export class ExprParser {
     this.accept('identifier');
     this.expect('(');
     const itemName = this.expect('identifier');
-    const item = gameId(this.game, itemName, '_');
+    const item = itemByID(gameId(this.game, itemName, '_'));
     this.expect(')');
     return exprRenewable(item);
   }
@@ -195,7 +196,7 @@ export class ExprParser {
     this.accept('identifier');
     this.expect('(');
     const itemName = this.expect('identifier');
-    const item = gameId(this.game, itemName, '_');
+    const item = itemByID(gameId(this.game, itemName, '_'));
     this.expect(')');
     return exprLicense(item);
   }
