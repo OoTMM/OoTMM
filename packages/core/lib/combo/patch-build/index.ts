@@ -51,7 +51,6 @@ function asmPatchGroups(settings: Settings) {
     OOT_AGELESS_CHILD_TRADE: settings.agelessChildTrade,
     OOT_BLUE_FIRE_ARROWS: settings.blueFireArrows,
     ER: isEntranceShuffle(settings),
-    DEFAULT_HOLD: settings.defaultHoldTarget,
   };
   const keys = Object.keys(groups) as PatchGroup[];
   return keys.filter((k) => groups[k]);
