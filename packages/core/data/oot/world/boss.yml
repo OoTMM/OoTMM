@@ -67,7 +67,7 @@
   boss: true
   dungeon: Spirit
   exits:
-    "Spirit Temple After Boss": "has_mirror_shield"
+    "Spirit Temple After Boss": "has_mirror_shield && has_weapon"
 "Spirit Temple After Boss":
   boss: true
   dungeon: Spirit

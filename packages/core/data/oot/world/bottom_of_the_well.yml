@@ -2,7 +2,7 @@
   dungeon: BotW
   exits:
     "Kakariko": "true"
-    "Bottom of the Well Main": "is_child && (has_nuts || has_weapon || has_explosives || has_ranged_weapon_child)"
+    "Bottom of the Well Main": "is_child && (has_nuts || has_weapon || has_explosives_or_hammer || has_ranged_weapon_child)"
 "Bottom of the Well Main":
   dungeon: BotW
   exits:
@@ -19,7 +19,7 @@
     "Bottom of the Well East Cage": "small_keys(SMALL_KEY_BOTW, 3) && has_lens"
     "Bottom of the Well Blood Chest": "has_lens"
     "Bottom of the Well Underwater 2": "can_play(SONG_ZELDA)"
-    "Bottom of the Well Map": "has_explosives || (has_bombflowers && (small_keys(SMALL_KEY_BOTW, 3) || can_use_din))"
+    "Bottom of the Well Map": "has_explosives_or_hammer || (has_bombflowers && (small_keys(SMALL_KEY_BOTW, 3) || can_use_din))"
     "Bottom of the Well Coffin": "true"
     "Bottom of the Well Pits": "has_lens && small_keys(SMALL_KEY_BOTW, 3)"
     "Bottom of the Well Lens": "can_play(SONG_ZELDA) && (has_weapon || (can_use_sticks && trick(OOT_DEAD_HAND_STICKS)))"

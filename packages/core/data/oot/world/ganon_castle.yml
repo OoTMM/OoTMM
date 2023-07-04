@@ -25,14 +25,14 @@
     "Ganon Castle Light Chest Around 4": "true"
     "Ganon Castle Light Chest Around 5": "true"
     "Ganon Castle Light Chest Around 6": "true"
-    "Ganon Castle Light Chest Center": "has_lens"
+    "Ganon Castle Light Chest Center": "has_lens && (has_weapon || has_explosives_or_hammer || can_use_slingshot || can_use_sticks)"
     "Ganon Castle Light Chest Lullaby": "small_keys(SMALL_KEY_GANON, 1) && can_play(SONG_ZELDA)"
 "Ganon Castle Forest":
   dungeon: Ganon
   events:
     GANON_TRIAL_FOREST: "(has_fire_arrows || (can_use_din && has_ranged_weapon_adult)) && has_light_arrows"
   locations:
-    "Ganon Castle Forest Chest": "true"
+    "Ganon Castle Forest Chest": "has_weapon || has_explosives_or_hammer || can_use_slingshot || can_use_sticks"
 "Ganon Castle Fire":
   dungeon: Ganon
   events:
@@ -40,7 +40,7 @@
 "Ganon Castle Water":
   dungeon: Ganon
   events:
-    BLUE_FIRE: "true"
+    BLUE_FIRE: "has_bottle && has_weapon"
     GANON_TRIAL_WATER: "has_blue_fire && can_hammer && has_light_arrows"
   locations:
     "Ganon Castle Water Chest 1": "true"

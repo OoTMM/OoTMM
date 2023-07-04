@@ -3,7 +3,7 @@
   exits:
     "Zora Fountain Frozen": "true"
   events:
-    BLUE_FIRE: "is_adult"
+    BLUE_FIRE: "is_adult && has_bottle"
   locations:
     "Ice Cavern Iron Boots": "has_blue_fire"
     "Ice Cavern Map": "has_blue_fire && is_adult"

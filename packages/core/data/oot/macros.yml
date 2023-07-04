@@ -42,6 +42,7 @@
 "age_shield_adult": "is_adult || setting(agelessShields)"
 "age_tunics": "is_adult || setting(agelessTunics)"
 "age_boots": "is_adult || setting(agelessBoots)"
+"age_child_trade": "is_child || setting(agelessChildTrade)"
 
 # Swords
 "has_sword_kokiri": "cond(setting(progressiveSwordsOot, progressive), has(SWORD), has(SWORD_KOKIRI))"

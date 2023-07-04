@@ -31,7 +31,7 @@
 "EGGS":
   region: EGGS
   locations:
-    "Hatch Chicken": "is_child && has(WEIRD_EGG)"
+    "Hatch Chicken": "age_child_trade && has(WEIRD_EGG)"
     "Hatch Pocket Cucco": "is_adult && has(POCKET_EGG)"
 "Link's House":
   region: ENTRANCE
@@ -356,7 +356,7 @@
   region: MARKET
   exits:
     "Market Entryway": "true"
-    "Temple of Time": "true"
+    "Temple of Time Entryway": "true"
     "Ganon Castle Exterior": "true"
 "Temple of Time Entryway":
   region: MARKET
@@ -427,7 +427,7 @@
   events:
     MALON: "true"
     TALON_CHILD: "has(CHICKEN)"
-    MEET_ZELDA: "woke_talon_child"
+    MEET_ZELDA: "woke_talon_child || has_hover_boots"
     BOMBS: "true"
     RUPEES: "true"
     SEEDS: "is_child"
@@ -462,7 +462,7 @@
   events:
     RUPEES: "has_explosives_or_hammer"
     NUTS: "has_explosives_or_hammer"
-    SEEDS: "has_explosives && is_child"
+    SEEDS: "has_explosives_or_hammer && is_child"
     ARROWS: "has_explosives_or_hammer && is_adult"
     BOMBS: "can_hammer"
     BUGS: "has_explosives_or_hammer && has_bottle"
@@ -576,8 +576,8 @@
   exits:
     "Lost Woods Deep": "true"
   locations:
-    "Deku Theater Sticks Upgrade": "is_child && has(MASK_SKULL)"
-    "Deku Theater Nuts Upgrade": "is_child && has_mask_truth"
+    "Deku Theater Sticks Upgrade": "age_child_trade && has(MASK_SKULL)"
+    "Deku Theater Nuts Upgrade": "age_child_trade && has_mask_truth"
 "Lost Woods Scrub Grotto":
   region: ENTRANCE
   exits:
@@ -602,7 +602,7 @@
 "Sacred Meadow":
   region: SACRED_MEADOW
   exits:
-    "Lost Woods Deep": "true"
+    "Sacred Meadow Entryway": "true"
     "Forest Temple": "can_hookshot"
     "Sacred Meadow Storms Grotto": "hidden_grotto_storms"
   locations:
@@ -806,7 +806,7 @@
   region: GRAVEYARD
   exits:
     "Graveyard": "true"
-    "Shadow Temple": "can_use_din || (has_fire_arrows && trick(OOT_SHADOW_FIRE_ARROW))"
+    "Shadow Temple": "can_use_din || (has_fire_arrows && (trick(OOT_SHADOW_FIRE_ARROW) || can_use_sticks))"
   gossip:
     "Graveyard Gossip": "true"
 "Graveyard Royal Tomb":
@@ -924,14 +924,14 @@
     "Lost Woods": "true"
     "Goron City": "event(GORON_CITY_SHORTCUT)"
   events:
-    GORON_CITY_SHORTCUT: "has_explosives || can_hammer || can_use_din"
+    GORON_CITY_SHORTCUT: "has_explosives_or_hammer || can_use_din"
 "Goron City":
   region: GORON_CITY
   exits:
     "Goron City Shortcut": "event(GORON_CITY_SHORTCUT)"
     "Death Mountain": "true"
     "Death Mountain Crater Bottom": "is_adult && (has_explosives || can_use_bow || has(STRENGTH))"
-    "Goron Shop": "(is_adult && (has_explosives || can_use_bow || has(STRENGTH))) || (is_child && has_bombflowers)"
+    "Goron Shop": "(is_adult && (has_explosives || can_use_bow || has(STRENGTH))) || (is_child && (has_bombflowers || can_use_din)"
     "Goron City Grotto": "is_adult && (can_play_time || (can_hookshot && (has_tunic_goron_strict || can_use_nayru)))"
   event:
     GORON_CITY_SHORTCUT: "has_bombflowers || can_hammer || can_use_bow || can_use_din"
@@ -949,7 +949,7 @@
     "Goron City Bomb Bag": "is_child && has_explosives"
     "Goron City Medigoron Giant Knife": "is_adult && (has_bombflowers || can_hammer) && can_use_wallet(2)"
     "Goron City GS Platform": "is_adult"
-    "Goron City GS Maze": "is_child && has_explosives"
+    "Goron City GS Maze": "is_child && has_explosives_or_hammer"
   gossip:
     "Goron City Gossip Boulder Maze": "has_explosives_or_hammer || can_lift_silver"
     "Goron City Gossip Near Medigoron": "has_bombflowers || can_hammer"
@@ -979,7 +979,7 @@
   time: flow
   exits:
     "Hyrule Field": "true"
-    "Zora River": "is_adult || (is_child && has_explosives)"
+    "Zora River": "is_adult || has_explosives_or_hammer || has_hover_boots"
   events:
     BOMBS: "can_cut_grass"
     RUPEES: "can_cut_grass"
@@ -1047,7 +1047,7 @@
   region: ZORA_DOMAIN
   exits:
     "Zora River": "true"
-    "Lake Hylia": "is_child && has(SCALE)"
+    "Lake Hylia": "is_child && can_dive_small"
     "Zora Domain Back": "king_zora_moved || (is_adult && trick(OOT_KZ_SKIP))"
     "Zora Shop": "is_child || has_blue_fire"
     "Zora Domain Grotto": "hidden_grotto_storms"
@@ -1092,7 +1092,7 @@
   time: flow
   exits:
     "Hyrule Field": "true"
-    "Zora Domain": "is_child && has(SCALE)"
+    "Zora Domain": "is_child && can_dive_small"
     "Laboratory": "true"
     "Water Temple": "has_iron_boots && has_tunic_zora && can_hookshot"
     "Fishing Pond": "is_child || event(WATER_TEMPLE_CLEARED) || scarecrow_hookshot || can_ride_bean(BEAN_LAKE_HYLIA)"
@@ -1108,7 +1108,7 @@
     MAGIC: "can_cut_grass"
     BUGS: "has_bottle && can_cut_grass && is_child"
   locations:
-    "Lake Hylia Underwater Bottle": "is_child && has(SCALE)"
+    "Lake Hylia Underwater Bottle": "is_child && can_dive_small"
     "Lake Hylia Fire Arrow": "can_use_bow && (event(WATER_TEMPLE_CLEARED) || scarecrow_longshot)"
     "Lake Hylia HP": "can_ride_bean(BEAN_LAKE_HYLIA) || scarecrow_hookshot"
     "Lake Hylia GS Lab Wall": "is_child && gs_night && (can_boomerang || (trick(OOT_LAB_WALL_GS) && (can_use_sword || can_use_sticks)))"
@@ -1193,15 +1193,15 @@
   region: DEATH_MOUNTAIN_CRATER
   exits:
     "Death Mountain Summit": "true"
-    "Death Mountain Crater Bottom": "event(RED_BOULDER_BROKEN) || has_hover_boots"
+    "Death Mountain Crater Bottom": "(is_adult && event(RED_BOULDER_BROKEN)) || (has_hover_boots && has_weapon)"
     "Death Mountain Crater Warp": "has_tunic_goron_strict && scarecrow_longshot"
     "Death Mountain Crater Generic Grotto": "has_explosives_or_hammer"
   events:
-    #Having to farm these rocks for drops without heat resistance isn't fair
-    BOMBS: "has_tunic_goron_strict"
-    RUPEES: "has_tunic_goron_strict"
-    ARROWS: "has_tunic_goron_strict"
-    MAGIC: "has_tunic_goron_strict"
+    #Having to farm these rocks for drops without heat resistance isn't fair without access to the grotto
+    BOMBS: "has_tunic_goron_strict || can_hammer"
+    RUPEES: "has_tunic_goron_strict || has_explosives_or_hammer"
+    ARROWS: "has_tunic_goron_strict || has_explosives_or_hammer"
+    MAGIC: "has_tunic_goron_strict || has_explosives_or_hammer"
   locations:
     "Death Mountain Crater GS Crate": "is_child && can_damage_skull"
     "Death Mountain Crater Alcove HP": "true"
@@ -1212,16 +1212,16 @@
   region: DEATH_MOUNTAIN_CRATER
   exits:
     "Goron City": "true"
-    "Death Mountain Crater Warp": "can_hookshot || has_hover_boots"
-    "Death Mountain Crater Top": "is_adult"
+    "Death Mountain Crater Warp": "can_hookshot || (has_hover_boots && (is_adult || has_tunic_goron_strict))"
+    "Death Mountain Crater Top": "is_adult || has_tunic_goron_strict"
     "Death Mountain Crater Scrub Grotto": "can_hammer"
     "Fairy Fountain Double Magic": "can_hammer"
   events:
-    RED_BOULDER_BROKEN: "can_hammer"
+    RED_BOULDER_BROKEN: "is_adult %% can_hammer"
 "Death Mountain Crater Warp":
   region: DEATH_MOUNTAIN_CRATER
   exits:
-    "Fire Temple Entry": "(is_adult && has_tunic_goron) || (is_child && setting(fireChild))"
+    "Fire Temple Entry": "has_tunic_goron && (is_adult || setting(fireChild) || has_hover_boots)"
     "Death Mountain Crater Bottom": "can_hookshot || has_hover_boots || can_ride_bean(BEAN_DEATH_MOUNTAIN_CRATER)"
   events:
     BEAN_DEATH_MOUNTAIN_CRATER: "can_use_beans"
@@ -1233,7 +1233,7 @@
   region: DEATH_MOUNTAIN_CRATER
   exits:
     "Fire Temple": "true"
-    "Death Mountain Crater Warp": "has_tunic_goron_strict"
+    "Death Mountain Crater Warp": "has_tunic_goron_strict && (is_adult || setting(fireChild) || has_hover_boots)"
 "Death Mountain Crater Generic Grotto":
   region: ENTRANCE
   exits:
@@ -1294,11 +1294,11 @@
   exits:
     "Lake Hylia": "true"
     "Gerudo Fortress Exterior": "true"
-    "Gerudo Valley": "can_longshot || can_ride_epona || (is_adult && carpenters_rescued)"
+    "Gerudo Valley": "is_child || can_longshot || can_ride_epona || (is_adult && carpenters_rescued)"
     "Gerudo Valley Storms Grotto": "hidden_grotto_storms && is_adult"
     "Gerudo Valley Tent": "is_adult"
   locations:
-    "Gerudo Valley Chest": "can_hammer"
+    "Gerudo Valley Chest": "is_adult && can_hammer"
     "Gerudo Valley Broken Goron Sword": "adult_trade(POACHER_SAW)"
     "Gerudo Valley GS Tent": "is_adult && can_collect_distance && gs_night"
     "Gerudo Valley GS Pillar": "is_adult && can_collect_distance && gs_night"
@@ -1366,7 +1366,7 @@
   exits:
     "Gerudo Fortress Lower-Center Ledge": "true"
     "Gerudo Fortress Lower-Right Ledge": "true"
-    "Gerudo Fortress Upper-Left Ledge": "scarecrow_hookshot || can_longshot || has_hover_boots"
+    "Gerudo Fortress Upper-Left Ledge": "scarecrow_hookshot || can_longshot || (is_adult && has_hover_boots)"
     "Gerudo Fortress Center Ledge": "true"
   locations:
     "Gerudo Fortress GS Wall": "is_adult && can_collect_distance && gs_night"
@@ -1399,6 +1399,8 @@
   exits:
     "Gerudo Fortress Exterior": "event(OPEN_FORTRESS_GATE)"
     "Haunted Wasteland Start": "true"
+  events:
+    OPEN_FORTRESS_GATE: "has(GERUDO_CARD) && is_adult"
 "Gerudo Fortress Grotto":
   region: ENTRANCE
   exits:
