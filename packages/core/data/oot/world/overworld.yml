@@ -634,7 +634,7 @@
     "Hyrule Field": "true"
     "Kakariko Trail Start": "setting(kakarikoGate, open) || event(KAKARIKO_GATE_OPEN) || is_adult"
     "Graveyard": "true"
-    "Bottom of the Well": "(is_child || (is_adult && setting(wellAdult))) && event(WELL_DRAIN)"
+    "Bottom of the Well": "(event(WELL_DRAIN) && cond(setting(wellAdult), true, is_child)) || (is_child && has_iron_boots)"
     "Skulltula House": "true"
     "Shooting Gallery Adult": "is_adult && is_day"
     "Kakariko Rooftop": "(is_child && is_day) || can_hookshot || (is_adult && trick(OOT_PASS_COLLISION))"
@@ -993,7 +993,7 @@
   time: flow
   exits:
     "Zora River Front": "true"
-    "Zora Domain": "can_play(SONG_ZELDA) || (is_child && trick(OOT_CHILD_DOMAIN)) || (has_hover_boots && trick(OOT_ADULT_DOMAIN))"
+    "Zora Domain": "can_play(SONG_ZELDA) || (is_child && trick(OOT_DOMAIN_CUCCO)) || (has_hover_boots && trick(OOT_DOMAIN_HOVER))"
     "Lost Woods": "can_dive_small"
     "Zora River Storms Grotto": "hidden_grotto_storms"
     "Zora River Open Grotto": "true"
