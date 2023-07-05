@@ -24,4 +24,4 @@
     "Jabu-Jabu Boss": "can_boomerang || (has_hover_boots && has_bombs)"
     "Jabu-Jabu Main": "true"
   locations:
-    "Jabu-Jabu GS Near Boss": "has_ranged_weapon || has_explosives || can_use_dins"
+    "Jabu-Jabu GS Near Boss": "has_ranged_weapon || has_explosives || can_use_din"
