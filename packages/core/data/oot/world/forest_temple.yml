@@ -2,7 +2,7 @@
   dungeon: Forest
   exits:
     "Sacred Meadow": "true"
-    "Forest Temple Main": "is_adult || (has_nuts || has_weapon || has_explosives || has_ranged_weapon_child)"
+    "Forest Temple Main": "is_adult || has_nuts || has_weapon || has_explosives_or_hammer || has_ranged_weapon_child"
   locations:
     "Forest Temple Tree Small Key": "true"
     "Forest Temple GS Entrance": "has_ranged_weapon || has_explosives || can_use_din"
@@ -45,7 +45,7 @@
 "Forest Temple Floormaster":
   dungeon: Forest
   locations:
-    "Forest Temple Floormaster": "true"
+    "Forest Temple Floormaster": "has_weapon || can_use_sticks"
 "Forest Temple Map Room":
   dungeon: Forest
   exits:
@@ -57,6 +57,7 @@
   dungeon: Forest
   exits:
     "Forest Temple Garden East": "true"
+    "Forest Temple Map Room": "true"
   events:
     FOREST_WELL: "true"
 "Forest Temple Garden East":

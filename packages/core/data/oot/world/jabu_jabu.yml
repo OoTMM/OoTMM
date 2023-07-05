@@ -7,7 +7,9 @@
   dungeon: JJ
   exits:
     "Jabu-Jabu": "true"
-    "Jabu-Jabu Pre-Boss": "can_boomerang && (has_weapon || can_use_sticks)"
+    "Jabu-Jabu Pre-Boss": "event(BIG_OCTO) || (has_hover_boots && trick(OOT_JABU_BOSS_HOVER))"
+  events:
+    BIG_OCTO: "can_boomerang && (has_weapon || can_use_sticks)"
   locations:
     "Jabu-Jabu Map Chest": "can_boomerang"
     "Jabu-Jabu Compass Chest": "can_boomerang"
@@ -16,9 +18,10 @@
     "Jabu-Jabu GS Bottom Lower": "can_collect_distance"
     "Jabu-Jabu GS Bottom Upper": "can_collect_distance"
     "Jabu-Jabu GS Water Switch": "true"
-    "Jabu-Jabu GS Near Boss": "can_boomerang && (has_weapon || can_use_sticks)"
 "Jabu-Jabu Pre-Boss":
   dungeon: JJ
   exits:
-    "Jabu-Jabu Boss": "true"
+    "Jabu-Jabu Boss": "can_boomerang || (has_hover_boots && has_bombs)"
     "Jabu-Jabu Main": "true"
+  locations:
+    "Jabu-Jabu GS Near Boss": "has_ranged_weapon || has_explosives || can_use_din"

@@ -7,7 +7,7 @@
   dungeon: DT
   exits:
     "Deku Tree Slingshot Room": "has_shield_for_scrubs"
-    "Deku Tree Basement": "has_fire || has_nuts || has_weapon || has_explosives || has_ranged_weapon_child"
+    "Deku Tree Basement": "has_fire || has_nuts || has_weapon || has_explosives_or_hammer || has_ranged_weapon_child || can_use_sticks"
   events:
     STICKS: "can_kill_baba_sticks"
     NUTS: "can_kill_baba_nuts"
@@ -28,7 +28,7 @@
   exits:
     "Deku Tree Lobby": "true"
     "Deku Tree Basement Back Room": "can_hit_triggers_distance"
-    "Deku Tree Basement Ledge": "trick(OOT_DEKU_SKIP) || is_adult"
+    "Deku Tree Basement Ledge": "trick(OOT_DEKU_SKIP) || is_adult || has_hover_boots"
   locations:
     "Deku Tree Basement Chest": "true"
     "Deku Tree GS Basement Gate": "can_damage_skull"

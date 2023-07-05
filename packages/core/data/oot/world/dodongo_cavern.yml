@@ -12,10 +12,10 @@
     "Dodongo Cavern Stairs": "event(DC_MAIN_SWITCH)"
     "Dodongo Cavern Skull": "event(DC_BOMB_EYES)"
   locations:
-    "Dodongo Cavern Map Chest": "has_bombflowers || can_hammer || has_blue_fire_arrows_mudwall"
+    "Dodongo Cavern Map Chest": "true"
     "Dodongo Cavern Lobby Scrub": "can_hit_scrub && scrub_price(0x1f)"
   gossip:
-    "Dodongo Cavern Gossip": "has_bombflowers || can_hammer || has_blue_fire_arrows_mudwall"
+    "Dodongo Cavern Gossip": "true"
 "Dodongo Cavern Right Corridor":
   dungeon: DC
   exits:
@@ -40,7 +40,7 @@
   exits:
     "Dodongo Cavern Miniboss 1": "true"
     "Dodongo Cavern Green Side Room": "true"
-    "Dodongo Cavern Main Ledge": "is_child || has_fire"
+    "Dodongo Cavern Main Ledge": "has_fire_or_sticks"
 "Dodongo Cavern Green Side Room":
   dungeon: DC
   exits:
@@ -59,7 +59,7 @@
   exits:
     "Dodongo Cavern Main": "true"
     "Dodongo Cavern Compass Room": "true"
-    "Dodongo Cavern Stairs Top": "has_bombflowers || can_use_din"
+    "Dodongo Cavern Stairs Top": "has_bombflowers || can_use_din || has_blue_fire_arrows_mudwall"
 "Dodongo Cavern Stairs Top":
   dungeon: DC
   exits:
@@ -80,7 +80,7 @@
     "Dodongo Cavern Stairs Top": "true"
     "Dodongo Cavern Bomb Bag Room 2": "can_longshot || has_hover_boots || (is_adult && trick(OOT_DC_JUMP))"
     "Dodongo Cavern Miniboss 2": "can_hit_triggers_distance"
-    "Dodongo Cavern Bomb Bag Side Room": "has_explosives_or_hammer"
+    "Dodongo Cavern Bomb Bag Side Room": "has_explosives_or_hammer || has_blue_fire_arrows_mudwall"
   locations:
     "Dodongo Cavern Bomb Bag Side Chest": "true"
 "Dodongo Cavern Bomb Bag Side Room":

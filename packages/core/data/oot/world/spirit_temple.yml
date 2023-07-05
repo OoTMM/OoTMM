@@ -13,7 +13,7 @@
   exits:
     "Spirit Temple": "is_child"
     "Spirit Temple Child Climb": "is_child && small_keys(SMALL_KEY_SPIRIT, 1)"
-    "Spirit Temple Child Back": can_use_sticks || has_explosives || ((can_boomerang || has_nuts) && (has_weapon || can_use_slingshot))
+    "Spirit Temple Child Back": can_use_sticks || has_explosives_or_hammer || ((can_boomerang || has_nuts) && (has_weapon || can_use_slingshot))
 "Spirit Temple Child Back":
   dungeon: Spirit
   locations:
@@ -36,7 +36,7 @@
     "Spirit Temple Child Hand": "small_keys(SMALL_KEY_SPIRIT, 5)"
   locations:
     "Spirit Temple Sun Block Room Torches": "(event(SPIRIT_CHILD_DOOR) && can_use_sticks && has_explosives) || has_fire_spirit || (has_fire_arrows && small_keys(SMALL_KEY_SPIRIT, 4))"
-    "Spirit Temple GS Iron Knuckle": "(event(SPIRIT_CHILD_DOOR) && can_boomerang) || (event(SPIRIT_ADULT_DOOR) && can_collect_distance) || (can_collect_ageless && (has_explosives || small_keys(SMALL_KEY_SPIRIT, 2)))"
+    "Spirit Temple GS Iron Knuckle": "(event(SPIRIT_CHILD_DOOR) && has_explosives && can_boomerang) || (event(SPIRIT_ADULT_DOOR) && can_collect_distance) || (can_collect_ageless && (has_explosives || small_keys(SMALL_KEY_SPIRIT, 2)))"
 "Spirit Temple Child Hand":
   dungeon: Spirit
   exits:
@@ -68,7 +68,7 @@
     "Spirit Temple Boss": "boss_key(BOSS_KEY_SPIRIT) && event(SPIRIT_LIGHT_STATUE) && can_hookshot"
   locations:
     "Spirit Temple Statue Base": "(event(SPIRIT_CHILD_DOOR) && has_explosives && can_use_sticks) || has_fire_spirit || (has_fire_arrows && small_keys(SMALL_KEY_SPIRIT, 4))"
-    "Spirit Temple GS Statue": "event(SPIRIT_ADULT_DOOR) && (scarecrow_hookshot || has_hover_boots)"
+    "Spirit Temple GS Statue": "(event(SPIRIT_ADULT_DOOR) && (scarecrow_hookshot || has_hover_boots)) || (event(SPIRIT_CHILD_DOOR) && has_hover_boots && has_explosives)"
     "Spirit Temple Silver Gauntlets": "small_keys(SMALL_KEY_SPIRIT, 3) && has_hookshot(2) && has_explosives"
 "Spirit Temple Statue Adult":
   dungeon: Spirit
