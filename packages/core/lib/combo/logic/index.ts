@@ -57,28 +57,11 @@ export const worldState = (monitor: Monitor, opts: Options) => {
 
 const solvedWorldState = (monitor: Monitor, opts: Options) => {
   let state = worldState(monitor, opts);
-
-  for (;;) {
-    state.attempts++;
-    try {
-      const newState = pipeline(state)
-        .apply(LogicPassPrice)
-        .apply(LogicPassEntrances)
-        .apply(LogicPassSolver)
-        .exec();
-      return newState;
-    } catch (e) {
-      if (!(e instanceof LogicError) || state.attempts >= 1000) {
-        throw e;
-      } else {
-        if (e.stack) {
-          monitor.debug(e.stack);
-        } else {
-          monitor.debug(e.message);
-        }
-      }
-    }
-  }
+  return pipeline(state)
+    .apply(LogicPassPrice)
+    .apply(LogicPassEntrances)
+    .apply(LogicPassSolver)
+    .exec();
 }
 
 export const logic = (monitor: Monitor, opts: Options) => {

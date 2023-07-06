@@ -8,6 +8,8 @@ import { Monitor } from '../monitor';
 import { LogicEntranceError, LogicError } from './error';
 import { Expr, exprAnd, exprTrue } from './expr';
 import { makeLocation } from './locations';
+import { LogicPassSolver } from './solve';
+import { ItemsCount } from '../items';
 
 export type EntranceShuffleResult = {
   overrides: Map<string, string>;
@@ -65,8 +67,8 @@ type PlaceOpts = {
 };
 
 export class LogicPassEntrances {
-  private pathfinder: Pathfinder;
-  private world: World;
+  private pathfinder!: Pathfinder;
+  private world!: World;
 
   constructor(
     private readonly input: {
@@ -75,12 +77,13 @@ export class LogicPassEntrances {
       settings: Settings;
       random: Random;
       monitor: Monitor;
-      attempts: number;
+      fixedLocations: Set<string>,
+      pool: ItemsCount;
+      renewableJunks: ItemsCount;
     },
   ) {
-    this.world = { ...this.input.world, areas: cloneDeep(this.input.world.areas), regions: cloneDeep(this.input.world.regions), dungeons: cloneDeep(this.input.world.dungeons) };
-    this.pathfinder = new Pathfinder(this.world, input.settings);
   }
+
   private result: EntranceShuffleResult = {
     overrides: new Map,
     boss: Object.values(BOSS_INDEX_BY_DUNGEON),
@@ -456,6 +459,17 @@ export class LogicPassEntrances {
       return;
     const pathfinderState = this.pathfinder.run(null, { singleWorld: true, ignoreItems: true, recursive: true });
 
+    /* We want to make sure everything that needs to is reachable */
+    if (!pathfinderState.goal) {
+      throw new LogicEntranceError('Goal is not reachable');
+    }
+
+    if (this.input.settings.logic === 'allLocations') {
+      if (pathfinderState.locations.size < this.world.locations.size) {
+        throw new LogicEntranceError('Not all locations are reachable');
+      }
+    }
+
     /* We don't want child to reach the Fairy OGC exit, and the other way around too */
     const forbiddenAreasChild = ['OOT Near Fairy Fountain Defense'];
     const forbiddenAreasAdult = ['OOT Near Fairy Fountain Din'];
@@ -471,31 +485,60 @@ export class LogicPassEntrances {
         throw new LogicEntranceError(`Adult can reach ${area}`);
       }
     }
+
+    /* Validate using the solver */
+    const solver = new LogicPassSolver({ ...this.input, world: this.world });
+    solver.validate();
   }
 
-  run() {
-    this.input.monitor.log(`Logic: Entrances (attempt ${this.input.attempts})`);
+  private runAttempt() {
+    /* Init */
+    let anyEr = false;
+    this.world = { ...this.input.world, areas: cloneDeep(this.input.world.areas), regions: cloneDeep(this.input.world.regions), dungeons: cloneDeep(this.input.world.dungeons) };
+    this.pathfinder = new Pathfinder(this.world, this.input.settings);
 
     if (this.input.settings.erRegions !== 'none') {
+      anyEr = true;
       this.placeRegions();
     }
 
     if (this.input.settings.erIndoors !== 'none') {
+      anyEr = true;
       this.placeIndoors();
     }
 
     if (this.input.settings.erDungeons !== 'none') {
+      anyEr = true;
       this.fixDungeons();
     }
 
     if (this.input.settings.erBoss !== 'none') {
+      anyEr = true;
       this.fixBosses();
     }
 
-    this.validate();
+    if (anyEr) {
+      this.validate();
+    }
+
     this.propagateRegions();
 
     return { world: this.world, entrances: this.result };
+  }
+
+  run() {
+    let attempts = 1;
+
+    for (;;) {
+      try {
+        this.input.monitor.log(`Logic: Entrances (attempt ${attempts})`);
+        return this.runAttempt();
+      } catch (e) {
+        if (!(e instanceof LogicError) || attempts >= 100)
+          throw e;
+        attempts++;
+      }
+    }
   }
 };
 

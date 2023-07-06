@@ -607,6 +607,7 @@ export class LogicPassWorldTransform {
     for (const loc of locs) {
       delete world.checks[loc];
       delete world.regions[loc];
+      world.locations.delete(loc);
       this.fixedLocations.delete(loc);
     }
     for (const areaName in world.areas) {
