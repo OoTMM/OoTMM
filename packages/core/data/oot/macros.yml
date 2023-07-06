@@ -49,7 +49,10 @@
 "has_sword_master": "cond(setting(progressiveSwordsOot, progressive), has(SWORD, 2), has(SWORD_MASTER))"
 "has_sword_goron": "cond(setting(progressiveSwordsOot, progressive), has(SWORD, 3), cond(setting(progressiveSwordsOot, goron), has(SWORD_GORON), has(SWORD_KNIFE) || has(SWORD_BIGGORON)))"
 "has_weapon": "can_use_sword"
-"can_use_sword": "(age_sword_child && has_sword_kokiri) || (age_sword_adult && (has_sword_master || has_sword_goron))"
+"can_use_sword_kokiri": "age_sword_child && has_sword_kokiri"
+"can_use_sword_master": "age_sword_adult && has_sword_master"
+"can_use_sword_goron": "age_sword_adult && has_sword_goron"
+"can_use_sword": "can_use_sword_kokiri || can_use_sword_master || can_use_sword_goron"
 
 # Shields
 "has_shield": "renewable(SHIELD_HYLIAN) || has_mirror_shield || (age_shield_child && renewable(SHIELD_DEKU))"

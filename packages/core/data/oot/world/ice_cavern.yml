@@ -5,11 +5,11 @@
   events:
     BLUE_FIRE: "is_adult && has_bottle"
   locations:
-    "Ice Cavern Iron Boots": "has_blue_fire"
+    "Ice Cavern Iron Boots": "has_blue_fire && (can_use_sticks || can_use_sword_master || can_use_sword_goron || has_explosives)"
     "Ice Cavern Map": "has_blue_fire && is_adult"
-    "Ice Cavern Compass": "has_blue_fire"
-    "Ice Cavern HP": "has_blue_fire"
-    "Ice Cavern Sheik Song": "has_blue_fire"
-    "Ice Cavern GS Scythe Room": "can_collect_distance"
-    "Ice Cavern GS Block Room": "has_blue_fire && can_collect_distance"
-    "Ice Cavern GS HP Room": "has_blue_fire && can_collect_distance"
+    "Ice Cavern Compass": "has_blue_fire && (can_use_sticks || can_use_sword_master || can_use_sword_goron || has_explosives)"
+    "Ice Cavern HP": "has_blue_fire && (can_use_sticks || can_use_sword_master || can_use_sword_goron || has_explosives)"
+    "Ice Cavern Sheik Song": "has_blue_fire && (can_use_sticks || can_use_sword_master || can_use_sword_goron || has_explosives)"
+    "Ice Cavern GS Scythe Room": "can_collect_distance && (can_use_sticks || can_use_sword_master || can_use_sword_goron || has_explosives)"
+    "Ice Cavern GS Block Room": "has_blue_fire && can_collect_distance && (can_use_sticks || can_use_sword_master || can_use_sword_goron || has_explosives)"
+    "Ice Cavern GS HP Room": "has_blue_fire && can_collect_distance && (can_use_sticks || can_use_sword_master || can_use_sword_goron || has_explosives)"
