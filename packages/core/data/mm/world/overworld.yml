@@ -50,8 +50,7 @@
   region: CLOCK_TOWN_SOUTH
   exits:
     "Clock Town South": "can_reset_time"
-    "OOT Market": "age(child)"
-    "OOT Market Destroyed": "age(adult)"
+    "OOT Market": "true"
     "Clock Tower Roof": "after(NIGHT3_AM_12_00)"
   locations:
     "Clock Town Owl Statue": "has_sticks || has_weapon"
@@ -125,8 +124,7 @@
 "Clock Town South":
   region: CLOCK_TOWN_SOUTH
   exits:
-    "OOT Market": "age(child)"
-    "OOT Market Destroyed": "age(adult)"
+    "OOT Market": "true"
     "Termina Field": "true"
     "Clock Town South Upper West": "true"
     "Clock Town South Lower West": "true"

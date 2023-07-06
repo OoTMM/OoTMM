@@ -245,25 +245,25 @@
   region: MARKET
   exits:
     "Hyrule Field": "is_day || is_adult"
-    "Market": "is_child"
-    "Market Destroyed": "is_adult"
+    "Market": "true"
     "Market Pot House": "true"
 "Market":
   region: MARKET
   exits:
     "Market Entryway": "true"
-    "Back Alley": "true"
+    "Back Alley": "is_child"
     "Hyrule Castle": "is_child"
+    "Ganon Castle Exterior": "is_adult"
     "Temple of Time Entryway": "true"
-    "Bombchu Bowling": "true"
-    "Treasure Game": "is_night"
-    "Shooting Gallery Child": "is_day"
-    "Market Bazaar": "is_day"
-    "Market Potion Shop": "is_day"
+    "Bombchu Bowling": "is_child"
+    "Treasure Game": "is_night && is_child"
+    "Shooting Gallery Child": "is_day && is_child"
+    "Market Bazaar": "is_day && is_child"
+    "Market Potion Shop": "is_day && is_child"
     "MM Clock Town": "is_child && is_day"
   events:
-    RICHARD: "is_night"
-    RUPEES: "true"
+    RICHARD: "is_night && is_child"
+    RUPEES: "is_child"
 "Market Bazaar":
   region: ENTRANCE
   exits:
@@ -315,8 +315,7 @@
 "Back Alley":
   region: MARKET
   exits:
-    "Market": "is_child"
-    "Market Destroyed": "is_adult"
+    "Market": "true"
     "Dog Lady House": "true"
     "Market Bombchu Shop": "is_night"
     "Market Back Alley East Home": "is_night"
@@ -352,17 +351,10 @@
     "Market": "true"
   locations:
     "Treasure Game HP": "has_lens_strict && can_use_wallet(1)"
-"Market Destroyed":
-  region: MARKET
-  exits:
-    "Market Entryway": "true"
-    "Temple of Time Entryway": "true"
-    "Ganon Castle Exterior": "true"
 "Temple of Time Entryway":
   region: MARKET
   exits:
-    "Market": "is_child"
-    "Market Destroyed": "is_adult"
+    "Market": "true"
     "Temple of Time": "true"
   gossip:
     "Market Gossip Outside Temple Leftmost": "true"
@@ -474,7 +466,7 @@
   region: GANON_CASTLE_EXTERIOR
   time: night
   exits:
-    "Market Destroyed": "true"
+    "Market": "true"
     "Ganon Castle Exterior After Bridge": "special(BRIDGE)"
     "Near Fairy Fountain Defense": "can_lift_gold"
   locations:
