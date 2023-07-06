@@ -8,7 +8,6 @@ import { Settings } from '../settings';
 import { Monitor } from '../monitor';
 import { Location, isLocationRenewable, locationData, makeLocation } from './locations';
 import { Item, ItemGroups, ItemHelpers, Items, ItemsCount, PlayerItem, PlayerItems, itemByID, makePlayerItem } from '../items';
-import { cloneDeep } from 'lodash';
 
 export type ItemPlacement = Map<Location, PlayerItem>;
 
@@ -55,11 +54,23 @@ const removeItemPools = (pools: ItemPools, item: PlayerItem) => {
 
 type SolverState = {
   items: ItemPlacement;
-  pathfinderState: PathfinderState;
   pools: ItemPools;
   criticalRenewables: Set<PlayerItem>;
   placedCount: number;
-}
+};
+
+const cloneState = (state: SolverState) => {
+  return {
+    items: new Map(state.items),
+    pools: {
+      required: new Map(state.pools.required),
+      nice: new Map(state.pools.nice),
+      junk: new Map(state.pools.junk),
+    },
+    criticalRenewables: new Set(state.criticalRenewables),
+    placedCount: state.placedCount,
+  };
+};
 
 export class LogicPassSolver {
   private monitor: Monitor;
@@ -67,6 +78,7 @@ export class LogicPassSolver {
   private junkDistribution!: PlayerItems;
   private locations!: Location[];
   private state: SolverState;
+  private pathfinderState: PathfinderState;
   private modeValidate = false;
   private attempts = 0;
   private attemptsMax = 100;
@@ -87,16 +99,16 @@ export class LogicPassSolver {
     this.pathfinder = new Pathfinder(this.input.world, this.input.settings);
     this.state = {
       items: new Map,
-      pathfinderState: this.pathfinder.run(null),
       pools: { required: new Map, nice: new Map, junk: new Map },
       criticalRenewables: new Set,
       placedCount: 0,
     }
+    this.pathfinderState = this.pathfinder.run(null);
     this.makeItemPools();
   }
 
   private retry(cb: () => void) {
-    const stateBackup = cloneDeep(this.state);
+    const stateBackup = cloneState(this.state);
 
     for (;;) {
       try {
@@ -105,7 +117,7 @@ export class LogicPassSolver {
       } catch (e) {
         if ((e instanceof LogicError) && this.attempts < this.attemptsMax) {
           this.attempts++;
-          this.state = cloneDeep(stateBackup);
+          this.state = cloneState(stateBackup);
           this.monitor.log(`Logic: Solver (attempt ${this.attempts + 1})`);
           continue;
         } else {
@@ -159,17 +171,19 @@ export class LogicPassSolver {
 
     /* Place required items */
     this.retry(() => {
+      this.pathfinderState = this.pathfinder.run(null);
+
       for (;;) {
         /* Pathfind */
-        this.state.pathfinderState = this.pathfinder.run(this.state.pathfinderState, { inPlace: true, recursive: true, items: this.state.items });
+        this.pathfinderState = this.pathfinder.run(this.pathfinderState, { inPlace: true, recursive: true, items: this.state.items });
 
         /* Stop cond */
         if (this.input.settings.logic === 'beatable') {
-          if (this.state.pathfinderState.goal) {
+          if (this.pathfinderState.goal) {
             break;
           }
         }
-        if (this.state.pathfinderState.locations.size === this.locations.length) {
+        if (this.pathfinderState.locations.size === this.locations.length) {
           break;
         }
 
@@ -560,7 +574,7 @@ export class LogicPassSolver {
   private forwardFill(pool: PlayerItems) {
     /* Only used for validation, needs to be fast */
     const items = countMapArray(pool);
-    const unplacedLocs = [...this.state.pathfinderState.locations].filter(x => !this.state.items.has(x));
+    const unplacedLocs = [...this.pathfinderState.locations].filter(x => !this.state.items.has(x));
 
     if (items.length === 0) {
       throw new LogicSeedError(`No items left to place`);
@@ -586,7 +600,7 @@ export class LogicPassSolver {
     } else {
       const items = countMapArray(pool);
       if (items.length === 0) {
-        const unreachableLocs = this.locations.filter(x => !this.state.pathfinderState.locations.has(x));
+        const unreachableLocs = this.locations.filter(x => !this.pathfinderState.locations.has(x));
         throw new LogicError(`Unreachable locations: ${unreachableLocs.join(', ')}`);
       }
       requiredItem = sample(this.input.random, items);
