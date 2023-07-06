@@ -84,11 +84,7 @@ export class LogicPassEntrances {
   ) {
   }
 
-  private result: EntranceShuffleResult = {
-    overrides: new Map,
-    boss: Object.values(BOSS_INDEX_BY_DUNGEON),
-    dungeons: Object.values(DUNGEON_INDEX),
-  };
+  private result!: EntranceShuffleResult;
 
   private getExpr(original: string) {
     const entrance = this.world.entrances.get(original)!;
@@ -493,6 +489,11 @@ export class LogicPassEntrances {
 
   private runAttempt() {
     /* Init */
+    this.result = {
+      overrides: new Map,
+      boss: Object.values(BOSS_INDEX_BY_DUNGEON),
+      dungeons: Object.values(DUNGEON_INDEX),
+    };
     let anyEr = false;
     this.world = { ...this.input.world, areas: cloneDeep(this.input.world.areas), regions: cloneDeep(this.input.world.regions), dungeons: cloneDeep(this.input.world.dungeons) };
     this.pathfinder = new Pathfinder(this.world, this.input.settings);
@@ -534,7 +535,7 @@ export class LogicPassEntrances {
         this.input.monitor.log(`Logic: Entrances (attempt ${attempts})`);
         return this.runAttempt();
       } catch (e) {
-        if (!(e instanceof LogicError) || attempts >= 100)
+        if (!(e instanceof LogicError) || attempts >= 1000)
           throw e;
         attempts++;
       }
