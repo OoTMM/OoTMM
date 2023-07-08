@@ -512,7 +512,7 @@ export class LogicPassSolver {
     for (const reward of rewards) {
       let candidates = allDungeons.flatMap((x, i) => [...x].map(y => ({ player: i, dungeon: y })));
       candidates = shuffle(this.input.random, candidates);
-      const pool = { ...this.state.pools.required };
+      const pool = new Map(this.state.pools.required);
       let error: LogicSeedError | null = null;
 
       for (const c of candidates) {
@@ -523,6 +523,12 @@ export class LogicPassSolver {
         if (dungeon === 'ST') {
           rawLocations = new Set([...rawLocations, ...world.dungeons['IST']]);
         }
+
+        /* Exclude song locs in non-songsanity */
+        if (this.input.settings.songs === 'songLocations') {
+          rawLocations = new Set([...rawLocations].filter(x => !world.songLocations.has(x)));
+        }
+
         const locations = new Set([...rawLocations].map(x => makeLocation(x, player)));
         error = null;
         try {
