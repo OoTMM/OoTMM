@@ -7,7 +7,7 @@ import { LogicEntranceError, LogicError } from './error';
 import { Expr, exprAnd, exprTrue } from './expr';
 import { Location, makeLocation } from './locations';
 import { LogicPassSolver } from './solve';
-import { PlayerItems } from '../../../dist/lib/combo/items';
+import { PlayerItems } from '../items';
 
 const BOSS_INDEX_BY_DUNGEON = {
   DT: 0,
