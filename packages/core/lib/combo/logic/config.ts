@@ -1,7 +1,7 @@
 import { Confvar } from '../confvars';
 import { Monitor } from '../monitor';
 import { Random } from '../random';
-import { DUNGEONS, Settings } from '../settings';
+import { Settings } from '../settings';
 import { isEntranceShuffle } from './helpers';
 
 /* This pass pre-computes things from the settings */
@@ -18,21 +18,8 @@ export class LogicPassConfig {
   run() {
     this.state.monitor.log('Logic: Config');
     const config = new Set<Confvar>;
-    const mq = new Set<string>;
 
     const { settings } = this.state;
-
-    /* MQ dungeons */
-    let d: keyof typeof DUNGEONS;
-    for (d in DUNGEONS) {
-      if (this.state.settings.dungeon[d] === 'mq') {
-        mq.add(d);
-      } else if (this.state.settings.dungeon[d] === 'random') {
-        if (this.state.random.next() & 0x10000) {
-          mq.add(d);
-        }
-      }
-    }
 
     const exprs: {[k in Confvar]: boolean} = {
       GANON_NO_BOSS_KEY: settings.ganonBossKey === 'removed',
@@ -109,6 +96,6 @@ export class LogicPassConfig {
       }
     }
 
-    return { mq, config };
+    return { config };
   }
 }

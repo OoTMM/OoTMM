@@ -4,7 +4,7 @@ import { World } from './world';
 import { Pathfinder, PathfinderState } from './pathfind';
 import { Monitor } from '../monitor';
 import { cloneDeep } from 'lodash';
-import { isLocationRenewable, makePlayerLocations, Location, makeLocation } from './locations';
+import { isLocationRenewable, makePlayerLocations, Location, makeLocation, locationData } from './locations';
 import { ItemPlacement } from './solve';
 import { ItemGroups, ItemHelpers, PlayerItem } from '../items';
 
@@ -354,13 +354,13 @@ export class LogicPassAnalysis {
     private readonly state: {
       settings: Settings,
       random: Random,
-      world: World,
+      worlds: World[],
       items: ItemPlacement,
       monitor: Monitor,
     },
   ){
-    this.pathfinder = new Pathfinder(this.state.world, this.state.settings);
-    this.locations = makePlayerLocations(this.state.settings, Object.keys(this.state.world.checks));
+    this.pathfinder = new Pathfinder(this.state.worlds, this.state.settings);
+    this.locations = this.state.worlds.map((x, i) => [...x.locations].map(l => makeLocation(l, i))).flat();
   }
 
   private makeDependencies() {
@@ -499,8 +499,9 @@ export class LogicPassAnalysis {
   }
 
   private isLocUselessNonRenewable(loc: Location) {
-    const item = this.state.items.get(loc)!;
-    return (ItemHelpers.isItemConsumable(item.item) && !isLocationRenewable(this.state.world, loc) && !ItemHelpers.isItemLicense(item.item));
+    const pi = this.state.items.get(loc)!;
+    const locD = locationData(loc);
+    return (ItemHelpers.isItemConsumable(pi.item) && !isLocationRenewable(this.state.worlds[locD.world as number], loc) && !ItemHelpers.isItemLicense(pi.item));
   }
 
   private isLocUselessHeuristicCount(loc: Location) {

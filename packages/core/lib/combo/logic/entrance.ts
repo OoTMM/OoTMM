@@ -1,21 +1,13 @@
-import { cloneDeep } from 'lodash';
-
 import { Random, sample, shuffle } from '../random';
 import { Settings } from '../settings';
-import { DUNGEONS_REGIONS, ExprMap, ExprParsers, World, WorldEntrance } from './world';
+import { DUNGEONS_REGIONS, ExprMap, ExprParsers, World, WorldEntrance, cloneWorld } from './world';
 import { Pathfinder } from './pathfind';
 import { Monitor } from '../monitor';
 import { LogicEntranceError, LogicError } from './error';
 import { Expr, exprAnd, exprTrue } from './expr';
-import { makeLocation } from './locations';
+import { Location, makeLocation } from './locations';
 import { LogicPassSolver } from './solve';
-import { ItemsCount } from '../items';
-
-export type EntranceShuffleResult = {
-  overrides: Map<string, string>;
-  boss: number[];
-  dungeons: number[];
-};
+import { PlayerItems } from '../../../dist/lib/combo/items';
 
 const BOSS_INDEX_BY_DUNGEON = {
   DT: 0,
@@ -68,27 +60,27 @@ type PlaceOpts = {
 
 export class LogicPassEntrances {
   private pathfinder!: Pathfinder;
-  private world!: World;
+  private worlds!: World[];
 
   constructor(
     private readonly input: {
-      world: World;
+      worlds: World[];
       exprParsers: ExprParsers;
       settings: Settings;
       random: Random;
       monitor: Monitor;
-      fixedLocations: Set<string>,
-      pool: ItemsCount;
-      renewableJunks: ItemsCount;
+      fixedLocations: Set<Location>,
+      pool: PlayerItems;
+      renewableJunks: PlayerItems;
     },
   ) {
   }
 
-  private result!: EntranceShuffleResult;
-
-  private getExpr(original: string) {
-    const entrance = this.world.entrances.get(original)!;
-    const from = this.input.world.areas[entrance.from];
+  private getExpr(worldId: number, original: string) {
+    const world = this.worlds[worldId];
+    const originalWorld = this.input.worlds[worldId];
+    const entrance = world.entrances.get(original)!;
+    const from = originalWorld.areas[entrance.from];
     const expr = from.exits[entrance.to];
     if (!expr) {
       throw new Error(`No expr for ${original}`);
@@ -96,10 +88,12 @@ export class LogicPassEntrances {
     return expr;
   }
 
-  private isAssignableNew(original: string, replacement: string, opts?: { ownGame?: boolean, locations?: string[] }) {
-    const originalEntrance = this.world.entrances.get(original)!;
-    const replacementEntrance = this.world.entrances.get(replacement)!;
-    const dungeon = this.input.world.areas[replacementEntrance.to].dungeon!;
+  private isAssignableNew(worldId: number, original: string, replacement: string, opts?: { ownGame?: boolean, locations?: string[] }) {
+    const world = this.worlds[worldId];
+    const originalWorld = this.input.worlds[worldId];
+    const originalEntrance = world.entrances.get(original)!;
+    const replacementEntrance = world.entrances.get(replacement)!;
+    const dungeon = originalWorld.areas[replacementEntrance.to].dungeon!;
 
     /* Reject wrong game */
     if (opts?.ownGame) {
@@ -114,32 +108,32 @@ export class LogicPassEntrances {
     }
 
     /* Apply an override */
-    this.world.areas[originalEntrance.from].exits[replacementEntrance.to] = this.getExpr(original);
+    world.areas[originalEntrance.from].exits[replacementEntrance.to] = this.getExpr(worldId, original);
 
     /* If the dungeon is ST or IST, we need to allow the other dungeon */
     if (dungeon === 'ST') {
-      this.world.areas['OOT SPAWN'].exits['MM Stone Tower Temple Inverted'] = exprTrue();
+      world.areas['OOT SPAWN'].exits['MM Stone Tower Temple Inverted'] = exprTrue();
     }
     if (dungeon === 'IST') {
-      this.world.areas['OOT SPAWN'].exits['MM Stone Tower Temple'] = exprTrue();
+      world.areas['OOT SPAWN'].exits['MM Stone Tower Temple'] = exprTrue();
     }
 
     /* Check if the new world is valid */
-    const pathfinderState = this.pathfinder.run(null, { singleWorld: true, ignoreItems: true, recursive: true });
+    const pathfinderState = this.pathfinder.run(null, { singleWorld: worldId, ignoreItems: true, recursive: true });
 
     /* Restore the override */
-    delete this.world.areas[originalEntrance.from].exits[replacementEntrance.to]
-    delete this.world.areas['OOT SPAWN'].exits['MM Stone Tower Temple Inverted'];
-    delete this.world.areas['OOT SPAWN'].exits['MM Stone Tower Temple'];
+    delete world.areas[originalEntrance.from].exits[replacementEntrance.to]
+    delete world.areas['OOT SPAWN'].exits['MM Stone Tower Temple Inverted'];
+    delete world.areas['OOT SPAWN'].exits['MM Stone Tower Temple'];
 
     /* Get the list of required locations */
     let locations: string[];
     if (opts?.locations) {
       locations = opts.locations;
     } else if (['ST', 'IST'].includes(dungeon)) {
-      locations = [...this.world.dungeons['ST'], ...this.world.dungeons['IST']];
+      locations = [...world.dungeons['ST'], ...world.dungeons['IST']];
     } else {
-      locations = Array.from(this.world.dungeons[dungeon]);
+      locations = Array.from(world.dungeons[dungeon]);
     }
 
     /* Turn into world 0 locations */
@@ -156,16 +150,17 @@ export class LogicPassEntrances {
     return true;
   }
 
-  private fixBosses() {
-    const bossEntrances = [...this.world.entrances.values()].filter(e => e.type === 'boss');
+  private fixBosses(worldId: number) {
+    const world = this.worlds[worldId];
+    const bossEntrances = [...world.entrances.values()].filter(e => e.type === 'boss');
     const bossEntrancesByDungeon = new Map<string, WorldEntrance>();
     const bossEvents = new Map<string, ExprMap>();
     const bossAreas = new Map<string, string[]>();
     const bossLocations = new Map<string, string[]>();
 
     /* Collect every boss event */
-    for (const a in this.world.areas) {
-      const area = this.world.areas[a];
+    for (const a in world.areas) {
+      const area = world.areas[a];
       const dungeon = area.dungeon!;
       if (area.boss) {
         /* Events */
@@ -197,8 +192,8 @@ export class LogicPassEntrances {
 
     /* Collect the entrances and delete the original ones */
     for (const e of bossEntrances) {
-      const areaFrom = this.world.areas[e.from];
-      const areaTo = this.world.areas[e.to];
+      const areaFrom = world.areas[e.from];
+      const areaTo = world.areas[e.to];
 
       /* We have a boss entrance */
       const dungeon = areaTo.dungeon!;
@@ -217,7 +212,7 @@ export class LogicPassEntrances {
       let dstBoss: string | null = null;
       for (const boss of candidates) {
         const dst = bossEntrancesByDungeon.get(boss)!;
-        if (this.isAssignableNew(src.id, dst.id, { ownGame: this.input.settings.erBoss === 'ownGame', locations: bossLocations.get(boss)! })) {
+        if (this.isAssignableNew(worldId, src.id, dst.id, { ownGame: this.input.settings.erBoss === 'ownGame', locations: bossLocations.get(boss)! })) {
           dstBoss = boss;
           break;
         }
@@ -229,33 +224,34 @@ export class LogicPassEntrances {
 
       /* We found a boss - place it */
       const dst = bossEntrancesByDungeon.get(dstBoss)!;
-      this.place(src.id, dst.id, { noSongOfTime: true });
+      this.place(worldId, src.id, dst.id, { noSongOfTime: true });
 
       /* Mark the boss */
-      this.result.boss[BOSS_INDEX_BY_DUNGEON[dstBoss]] = BOSS_INDEX_BY_DUNGEON[srcBoss];
+      world.bossIds[BOSS_INDEX_BY_DUNGEON[dstBoss]] = BOSS_INDEX_BY_DUNGEON[srcBoss];
 
       /* Add the events */
       const areaNames = bossAreas.get(dstBoss)!;
       const lastAreaName = areaNames[areaNames.length - 1];
-      const lastArea = this.world.areas[lastAreaName];
+      const lastArea = world.areas[lastAreaName];
       lastArea.events = { ...lastArea.events, ...bossEvents.get(srcBoss)! };
 
       /* Change the associated dungeon */
       for (const a of bossAreas.get(dstBoss)!) {
-        const area = this.world.areas[a];
+        const area = world.areas[a];
         area.dungeon = srcBoss;
         area.region = DUNGEONS_REGIONS[srcBoss];
 
         for (const loc in area.locations) {
-          this.world.regions[loc] = DUNGEONS_REGIONS[srcBoss];
-          this.world.dungeons[dstBoss].delete(loc);
-          this.world.dungeons[srcBoss].add(loc);
+          world.regions[loc] = DUNGEONS_REGIONS[srcBoss];
+          world.dungeons[dstBoss].delete(loc);
+          world.dungeons[srcBoss].add(loc);
         }
       }
     }
   }
 
-  private fixDungeons() {
+  private fixDungeons(worldId: number) {
+    const world = this.worlds[worldId];
     /* Set the dungeon list */
     let shuffledDungeons = new Set(['DT', 'DC', 'JJ', 'Forest', 'Fire', 'Water', 'Shadow', 'Spirit', 'WF', 'SH', 'GB', 'ST', 'IST']);
     if (this.input.settings.erMinorDungeons) {
@@ -284,20 +280,20 @@ export class LogicPassEntrances {
     }
 
     /* Get the transitions and exprs */
-    const dungeonTransitions = [...this.world.entrances.values()]
+    const dungeonTransitions = [...world.entrances.values()]
       .filter(e => e.type === 'dungeon')
-      .filter(e => shuffledDungeons.has(this.world.areas[e.from].dungeon!) || shuffledDungeons.has(this.world.areas[e.to].dungeon!));
+      .filter(e => shuffledDungeons.has(world.areas[e.from].dungeon!) || shuffledDungeons.has(world.areas[e.to].dungeon!));
 
     const dungeonEntrances = new Map<string, WorldEntrance>();
 
     for (const e of dungeonTransitions) {
       /* Get the exit */
-      const exit = this.world.entrances.get(e.reverse!)!;
+      const exit = world.entrances.get(e.reverse!)!;
 
       /* Get the various areas */
-      const entranceAreaFrom = this.world.areas[e.from];
-      const entranceAreaTo = this.world.areas[e.to];
-      const exitAreaFrom = this.world.areas[exit.from];
+      const entranceAreaFrom = world.areas[e.from];
+      const entranceAreaTo = world.areas[e.to];
+      const exitAreaFrom = world.areas[exit.from];
 
       /* Save the entrance */
       dungeonEntrances.set(entranceAreaTo.dungeon!, e);
@@ -318,7 +314,7 @@ export class LogicPassEntrances {
       for (const c of candidates) {
         const src = dungeonEntrances.get(dungeon)!.id;
         const dst = dungeonEntrances.get(c)!.id;
-        const assignable = this.isAssignableNew(src, dst, { ownGame: this.input.settings.erDungeons === 'ownGame' });
+        const assignable = this.isAssignableNew(worldId, src, dst, { ownGame: this.input.settings.erDungeons === 'ownGame' });
         if (assignable) {
           destDungeon = c;
           break;
@@ -334,10 +330,10 @@ export class LogicPassEntrances {
       const sourceEntranceId = dungeonEntrances.get(dungeon)!.id;
       const destEntranceId = dungeonEntrances.get(destDungeon)!.id;
 
-      this.place(sourceEntranceId, destEntranceId, { noSongOfTime: true });
+      this.place(worldId, sourceEntranceId, destEntranceId, { noSongOfTime: true });
 
       /* Store the dungeon */
-      this.result.dungeons[DUNGEON_INDEX[destDungeon]] = DUNGEON_INDEX[dungeon];
+      world.dungeonIds[DUNGEON_INDEX[destDungeon]] = DUNGEON_INDEX[dungeon];
     }
   }
 
@@ -346,48 +342,51 @@ export class LogicPassEntrances {
     return exprAnd([e, subcond]);
   }
 
-  private placeSingle(original: string, replacement: string, opts?: PlaceOpts) {
+  private placeSingle(worldId: number, original: string, replacement: string, opts?: PlaceOpts) {
     opts = opts || {};
-    const entranceOriginal = this.world.entrances.get(original)!;
-    const entranceReplacement = this.world.entrances.get(replacement)!;
+    const world = this.worlds[worldId];
+    const entranceOriginal = world.entrances.get(original)!;
+    const entranceReplacement = world.entrances.get(replacement)!;
 
     /* Change the world */
-    let expr = this.getExpr(original);
+    let expr = this.getExpr(worldId, original);
     if (entranceOriginal.game === 'oot' && entranceReplacement.game === 'mm') {
       if (opts.overworld) {
-        this.world.areas[entranceOriginal.from].exits['MM GLOBAL'] = expr;
+        world.areas[entranceOriginal.from].exits['MM GLOBAL'] = expr;
       }
       if (!opts.noSongOfTime) {
         expr = this.songOfTime(expr);
       }
     }
-    this.world.areas[entranceOriginal.from].exits[entranceReplacement.to] = expr;
+    world.areas[entranceOriginal.from].exits[entranceReplacement.to] = expr;
 
     /* Mark the override */
-    this.result.overrides.set(original, replacement);
+    world.entranceOverrides.set(original, replacement);
   }
 
-  private place(original: string, replacement: string, opts?: PlaceOpts) {
-    const entranceOriginal = this.world.entrances.get(original)!;
-    const entranceReplacement = this.world.entrances.get(replacement)!;
+  private place(worldId: number, original: string, replacement: string, opts?: PlaceOpts) {
+    const world = this.worlds[worldId];
+    const entranceOriginal = world.entrances.get(original)!;
+    const entranceReplacement = world.entrances.get(replacement)!;
 
-    this.placeSingle(original, replacement, opts);
+    this.placeSingle(worldId, original, replacement, opts);
     if (entranceOriginal.reverse && entranceReplacement.reverse) {
-      this.placeSingle(entranceReplacement.reverse, entranceOriginal.reverse, opts);
+      this.placeSingle(worldId, entranceReplacement.reverse, entranceOriginal.reverse, opts);
     }
   }
 
-  private placePool(pool: string[], opts?: PlaceOpts) {
+  private placePool(worldId: number, pool: string[], opts?: PlaceOpts) {
+    const world = this.worlds[worldId];
     /* Get overworld entrances */
-    const entrances = new Set([...this.world.entrances.values()].filter(e => pool.includes(e.type)));
+    const entrances = new Set([...world.entrances.values()].filter(e => pool.includes(e.type)));
 
     /* Delete the overworld entrances from the world */
     for (const e of entrances) {
-      delete this.world.areas[e.from].exits[e.to];
+      delete world.areas[e.from].exits[e.to];
       const reverse = e.reverse;
       if (reverse) {
-        const r = this.world.entrances.get(reverse)!;
-        delete this.world.areas[r.from].exits[r.to];
+        const r = world.entrances.get(reverse)!;
+        delete world.areas[r.from].exits[r.to];
       }
     }
 
@@ -401,37 +400,38 @@ export class LogicPassEntrances {
         candidates = candidates.filter(c => c.game === e.game);
       }
       const newE = sample(this.input.random, candidates);
-      this.place(e.id, newE.id, opts);
+      this.place(worldId, e.id, newE.id, opts);
       entrances.delete(newE);
     }
   }
 
-  private placeRegions() {
-    this.placePool(['region'], { overworld: true, ownGame: this.input.settings.erRegions === 'ownGame' });
+  private placeRegions(worldId: number) {
+    this.placePool(worldId, ['region'], { overworld: true, ownGame: this.input.settings.erRegions === 'ownGame' });
   }
 
-  private placeIndoors() {
+  private placeIndoors(worldId: number) {
     const pool = ['indoors'];
     if (this.input.settings.erIndoorsExtra) {
       pool.push('indoors-extra');
     }
-    this.placePool(pool, { ownGame: this.input.settings.erIndoors === 'ownGame' });
+    this.placePool(worldId, pool, { ownGame: this.input.settings.erIndoors === 'ownGame' });
   }
 
-  private propagateRegionsStep() {
+  private propagateRegionsStep(worldId: number) {
+    const world = this.worlds[worldId];
     let changed = false;
-    for (const areaName of Object.keys(this.world.areas)) {
-      const a = this.world.areas[areaName];
+    for (const areaName of Object.keys(world.areas)) {
+      const a = world.areas[areaName];
       if (a.region === 'NONE' || a.region === 'ENTRANCE')
         continue;
       /* We need to propagate the region */
       for (const exitName of Object.keys(a.exits)) {
-        const exitArea = this.world.areas[exitName];
+        const exitArea = world.areas[exitName];
         if (exitArea.region === 'ENTRANCE') {
           exitArea.region = a.region;
           for (const loc of Object.keys(exitArea.locations)) {
-            if (this.world.regions[loc] === 'ENTRANCE') {
-              this.world.regions[loc] = a.region;
+            if (world.regions[loc] === 'ENTRANCE') {
+              world.regions[loc] = a.region;
             }
           }
           changed = true;
@@ -443,9 +443,11 @@ export class LogicPassEntrances {
 
   private propagateRegions() {
     /* Propagate regions */
-    for (;;) {
-      if (!this.propagateRegionsStep()) {
-        break;
+    for (let i = 0; i < this.worlds.length; ++i) {
+      for (;;) {
+        if (!this.propagateRegionsStep(i)) {
+          break;
+        }
       }
     }
   }
@@ -453,7 +455,7 @@ export class LogicPassEntrances {
   private validate() {
     if (this.input.settings.logic === 'none')
       return;
-    const pathfinderState = this.pathfinder.run(null, { singleWorld: true, ignoreItems: true, recursive: true });
+    const pathfinderState = this.pathfinder.run(null, { ignoreItems: true, recursive: true });
 
     /* We want to make sure everything that needs to is reachable */
     if (!pathfinderState.goal) {
@@ -461,7 +463,8 @@ export class LogicPassEntrances {
     }
 
     if (this.input.settings.logic === 'allLocations') {
-      if (pathfinderState.locations.size < this.world.locations.size) {
+      const allLocsCount = this.worlds.map(x => x.locations.size).reduce((a, b) => a + b, 0);
+      if (pathfinderState.locations.size < allLocsCount) {
         throw new LogicEntranceError('Not all locations are reachable');
       }
     }
@@ -483,48 +486,58 @@ export class LogicPassEntrances {
     }
 
     /* Validate using the solver */
-    const solver = new LogicPassSolver({ ...this.input, world: this.world });
+    const solver = new LogicPassSolver({ ...this.input, worlds: this.worlds });
     solver.validate();
   }
 
   private runAttempt() {
     /* Init */
-    this.result = {
-      overrides: new Map,
-      boss: Object.values(BOSS_INDEX_BY_DUNGEON),
-      dungeons: Object.values(DUNGEON_INDEX),
-    };
+    this.worlds = [];
+    const worldsCount = this.input.settings.distinctWorlds ? this.input.worlds.length : 1;
+    for (let worldId = 0; worldId < worldsCount; ++worldId) {
+      const world = cloneWorld(this.input.worlds[worldId]);
+      world.dungeonIds = Object.values(DUNGEON_INDEX);
+      world.bossIds = Object.values(DUNGEON_INDEX);
+      this.worlds.push(world);
+    }
+    if (!this.input.settings.distinctWorlds) {
+      for (let i = 1; i < this.input.worlds.length; ++i) {
+        this.worlds.push(this.worlds[0]);
+      }
+    }
+
     let anyEr = false;
-    this.world = { ...this.input.world, areas: cloneDeep(this.input.world.areas), regions: cloneDeep(this.input.world.regions), dungeons: cloneDeep(this.input.world.dungeons) };
-    this.pathfinder = new Pathfinder(this.world, this.input.settings);
+    this.pathfinder = new Pathfinder(this.worlds, this.input.settings);
 
-    if (this.input.settings.erRegions !== 'none') {
-      anyEr = true;
-      this.placeRegions();
-    }
+    for (let i = 0; i < worldsCount; ++i) {
+      if (this.input.settings.erRegions !== 'none') {
+        anyEr = true;
+        this.placeRegions(i);
+      }
 
-    if (this.input.settings.erIndoors !== 'none') {
-      anyEr = true;
-      this.placeIndoors();
-    }
+      if (this.input.settings.erIndoors !== 'none') {
+        anyEr = true;
+        this.placeIndoors(i);
+      }
 
-    if (this.input.settings.erDungeons !== 'none') {
-      anyEr = true;
-      this.fixDungeons();
-    }
+      if (this.input.settings.erDungeons !== 'none') {
+        anyEr = true;
+        this.fixDungeons(i);
+      }
 
-    if (this.input.settings.erBoss !== 'none') {
-      anyEr = true;
-      this.fixBosses();
-    }
+      if (this.input.settings.erBoss !== 'none') {
+        anyEr = true;
+        this.fixBosses(i);
+      }
 
-    if (anyEr) {
-      this.validate();
+      if (anyEr) {
+        this.validate();
+      }
     }
 
     this.propagateRegions();
 
-    return { world: this.world, entrances: this.result };
+    return { worlds: this.worlds };
   }
 
   run() {
@@ -537,6 +550,9 @@ export class LogicPassEntrances {
       } catch (e) {
         if (!(e instanceof LogicError) || attempts >= 1000)
           throw e;
+        if (e.stack) {
+          this.input.monitor.debug(e.stack);
+        }
         attempts++;
       }
     }

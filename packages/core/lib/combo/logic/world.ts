@@ -3,10 +3,12 @@ import { gameId } from '../util';
 import { Expr, exprTrue, MM_TIME_SLICES } from './expr';
 import { ExprParser } from './expr-parser';
 import { DATA_POOL, DATA_MACROS, DATA_WORLD, DATA_REGIONS, DATA_ENTRANCES_POOL, DATA_HINTS_POOL } from '../data';
-import { Settings } from '../settings';
+import { DUNGEONS, SETTINGS, Settings } from '../settings';
 import { Monitor } from '../monitor';
 import { defaultPrices } from './price';
 import { Item, itemByID, ItemHelpers, Items } from '../items';
+import { Random } from '../random';
+import { cloneDeep } from 'lodash';
 
 export type ExprMap = {
   [k: string]: Expr;
@@ -68,6 +70,10 @@ export type World = {
   songLocations: Set<string>;
   warpLocations: Set<string>;
   prices: number[];
+  mq: Set<string>;
+  bossIds: number[];
+  dungeonIds: number[];
+  entranceOverrides: Map<string, string>;
 };
 
 export const DUNGEONS_REGIONS: { [k: string]: string } = {
@@ -108,23 +114,106 @@ const mapExprs = (exprParser: ExprParser, game: Game, char: string, data: any) =
   return result;
 }
 
+function cloneChecks(checks: { [k: string]: WorldCheck }): { [k: string]: WorldCheck } {
+  const result: { [k: string]: WorldCheck } = {};
+  for (const [k, v] of Object.entries(checks)) {
+    result[k] = { ...v };
+  }
+  return result;
+}
+
+export function cloneWorld(world: World): World {
+  return {
+    areas: cloneDeep(world.areas),
+    checks: cloneChecks(world.checks),
+    dungeons: cloneDeep(world.dungeons),
+    regions: cloneDeep(world.regions),
+    gossip: cloneDeep(world.gossip),
+    checkHints: cloneDeep(world.checkHints),
+    entrances: new Map(world.entrances),
+    locations: new Set(world.locations),
+    songLocations: new Set(world.songLocations),
+    warpLocations: new Set(world.warpLocations),
+    prices: [...world.prices],
+    mq: new Set(world.mq),
+    bossIds: [...world.bossIds],
+    dungeonIds: [...world.dungeonIds],
+    entranceOverrides: new Map(world.entranceOverrides),
+  };
+}
+
 export type ExprParsers = {
   oot: ExprParser;
   mm: ExprParser;
 }
 
 export class LogicPassWorld {
-  private world: World;
-  private exprParsers: Partial<ExprParsers> = {};
+  private world!: World;
+  private exprParsers!: ExprParsers;
 
   constructor(
     private readonly state: {
       monitor: Monitor,
       settings: Settings,
-      mq: Set<string>;
+      random: Random;
     }
-  ) {
-    this.world = {
+  ){
+  }
+
+  run() {
+    const worlds: World[] = [];
+    this.state.monitor.log('Logic: World Building');
+    this.makeExprParsers();
+
+    if (this.state.settings.distinctWorlds) {
+      for (let i = 0; i < this.state.settings.players; ++i) {
+        worlds.push(this.createWorld());
+      }
+    } else {
+      const world = this.createWorld();
+      for (let i = 0; i < this.state.settings.players; ++i) {
+        worlds.push(cloneWorld(world));
+      }
+    }
+
+    return { worlds, exprParsers: this.exprParsers };
+  }
+
+  private createWorld(): World {
+    this.world = this.makeDefaultWorld();
+    for (const g of GAMES) {
+      this.loadGame(g);
+    }
+    return this.world;
+  }
+
+  private makeExprParsers() {
+    this.exprParsers = {} as ExprParsers;
+    for (const g of GAMES) {
+      const parser = new ExprParser(this.state.settings, g);
+      this.loadMacros(g, parser);
+      this.exprParsers[g] = parser;
+    }
+  }
+
+  private makeDefaultWorld(): World {
+    /* MQ */
+    const mq = new Set<string>;
+    let d: keyof typeof DUNGEONS;
+    for (d in DUNGEONS) {
+      if (this.state.settings.dungeon[d] === 'mq') {
+        mq.add(d);
+      } else if (this.state.settings.dungeon[d] === 'random') {
+        if (this.state.random.next() & 0x10000) {
+          mq.add(d);
+        }
+      }
+    }
+
+    /* Prices */
+    const prices = defaultPrices(mq);
+
+    return {
       areas: {},
       checks: {},
       dungeons: {},
@@ -135,26 +224,17 @@ export class LogicPassWorld {
       locations: new Set(),
       songLocations: new Set(),
       warpLocations: new Set(),
-      prices: defaultPrices(this.state.mq),
+      prices,
+      mq,
+      bossIds: [],
+      dungeonIds: [],
+      entranceOverrides: new Map,
     };
-  }
-
-  run() {
-    this.state.monitor.log('Logic: World Building');
-
-    for (const g of GAMES) {
-      this.loadGame(g);
-    }
-
-    return { world: this.world, exprParsers: this.exprParsers as ExprParsers };
   }
 
   private loadGame(game: Game) {
     /* Create the expr parser */
-    const exprParser = new ExprParser(this.state.settings, game);
-    this.exprParsers[game] = exprParser;
-    this.loadMacros(game, exprParser);
-    this.loadAreas(game, exprParser);
+    this.loadAreas(game, this.exprParsers[game]);
     this.loadPool(game);
     this.loadEntrances(game);
   }
@@ -181,7 +261,7 @@ export class LogicPassWorld {
     for (let areaSetName in data) {
       let areaSet = (data as any)[areaSetName];
       /* Handle MQ */
-      if (game === 'oot' && this.state.mq.has(areaSetName)) {
+      if (game === 'oot' && this.world.mq.has(areaSetName)) {
         areaSet = (DATA_WORLD.mq as any)[areaSetName];
       }
       for (let name in areaSet) {

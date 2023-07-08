@@ -32,6 +32,14 @@ export const SETTINGS = [{
   cond: (x: any) => x.mode === 'multi',
   default: 1
 }, {
+  key: 'distinctWorlds',
+  name: 'Distinct Worlds',
+  category: 'main',
+  type: 'boolean',
+  description: 'For multiworld, with settings that involve randomness, should the worlds have distinct properties (ER, MQ, price rando...).',
+  cond: (x: any) => x.mode === 'multi',
+  default: false
+}, {
   key: 'goal',
   name: 'Goal',
   category: 'main',

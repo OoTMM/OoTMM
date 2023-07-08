@@ -264,9 +264,10 @@ const toU32Buffer = (data: number[]) => {
   return buf;
 };
 
-function zoraSapphireGI(world: number, logic: LogicResult): number | null {
+function zoraSapphireGI(worldId: number, logic: LogicResult): number | null {
   /* Find the dungeon holding the Zora Sapphire */
-  const dungeonId = logic.entrances.boss.indexOf(0x02);
+  const world = logic.worlds[worldId];
+  const dungeonId = world.bossIds.indexOf(0x02);
   if (dungeonId === -1)
     return null;
 
@@ -274,7 +275,7 @@ function zoraSapphireGI(world: number, logic: LogicResult): number | null {
   const locId = DUNGEON_REWARD_LOCATIONS[dungeonId];
   if (!locId)
     return null;
-  const loc = makeLocation(locId, world);
+  const loc = makeLocation(locId, worldId);
   const item = logic.items.get(loc);
   if (!item)
     return null;
@@ -288,11 +289,12 @@ function zoraSapphireBuffer(world: number, logic: LogicResult): Buffer {
   return toU16Buffer([value]);
 }
 
-const gameChecks = (world: number, settings: Settings, game: Game, logic: LogicResult): Buffer => {
+const gameChecks = (worldId: number, settings: Settings, game: Game, logic: LogicResult): Buffer => {
   const buf: number[] = [];
-  for (const locId in logic.world.checks) {
-    const loc = makeLocation(locId, world);
-    const c = logic.world.checks[locId];
+  const world = logic.worlds[worldId];
+  for (const locId in world.checks) {
+    const loc = makeLocation(locId, worldId);
+    const c = world.checks[locId];
     const item = logic.items.get(loc)!;
 
     if (c.game !== game) {
@@ -451,10 +453,10 @@ const regionsBuffer = (regions: Region[]) => {
   return toU8Buffer(data.flat());
 };
 
-const gameEntrances = (game: Game, logic: LogicResult) => {
+const gameEntrances = (worldId: number, game: Game, logic: LogicResult) => {
   const data: number[] = [];
-  const { world, entrances } = logic;
-  for (const [src, dst] of entrances.overrides) {
+  const world = logic.worlds[worldId];
+  for (const [src, dst] of world.entranceOverrides) {
     const srcEntrance = world.entrances.get(src)!;
     const dstEntrance = world.entrances.get(dst)!;
     if (srcEntrance.game !== game)
@@ -466,12 +468,13 @@ const gameEntrances = (game: Game, logic: LogicResult) => {
   return toU32Buffer(data);
 };
 
-export const randomizerMq = (logic: LogicResult): Buffer => {
+export const randomizerMq = (worldId: number, logic: LogicResult): Buffer => {
   let mq = 0;
   const dungeons = Object.keys(DUNGEONS);
+  const world = logic.worlds[worldId];
   for (let i = 0; i < dungeons.length; ++i) {
     const dungeon = dungeons[i];
-    if (logic.mq.has(dungeon)) {
+    if (world.mq.has(dungeon)) {
       mq |= 1 << i;
     }
   }
@@ -507,8 +510,8 @@ export const randomizerHints = (world: number, logic: LogicResult): Buffer => {
   return Buffer.concat(buffers);
 };
 
-const randomizerBoss = (logic: LogicResult): Buffer => toU8Buffer(logic.entrances.boss);
-const randomizerDungeons = (logic: LogicResult): Buffer => toU8Buffer(logic.entrances.dungeons);
+const randomizerBoss = (worldId: number, logic: LogicResult): Buffer => toU8Buffer(logic.worlds[worldId].bossIds);
+const randomizerDungeons = (worldId: number, logic: LogicResult): Buffer => toU8Buffer(logic.worlds[worldId].dungeonIds);
 const randomizerTriforce = (logic: LogicResult): Buffer => toU8Buffer([logic.settings.triforcePieces, logic.settings.triforceGoal]);
 
 function specialConds(settings: Settings) {
@@ -531,22 +534,22 @@ function specialConds(settings: Settings) {
   return Buffer.concat(buffers);
 }
 
-export const prices = (logic: LogicResult): Buffer => {
-  return toU16Buffer(logic.world.prices);
+export const prices = (worldId: number, logic: LogicResult): Buffer => {
+  return toU16Buffer(logic.worlds[worldId].prices);
 };
 
-export const randomizerData = (world: number, logic: LogicResult): Buffer => {
+export const randomizerData = (worldId: number, logic: LogicResult): Buffer => {
   const buffers = [];
   buffers.push(logic.uuid);
-  buffers.push(toU8Buffer([world + 1, 0, 0, 0]));
-  buffers.push(randomizerMq(logic));
+  buffers.push(toU8Buffer([worldId + 1, 0, 0, 0]));
+  buffers.push(randomizerMq(worldId, logic));
   buffers.push(randomizerConfig(logic.config));
   buffers.push(specialConds(logic.settings));
-  buffers.push(prices(logic));
-  buffers.push(randomizerHints(world, logic));
-  buffers.push(zoraSapphireBuffer(world, logic));
-  buffers.push(randomizerBoss(logic));
-  buffers.push(randomizerDungeons(logic));
+  buffers.push(prices(worldId, logic));
+  buffers.push(randomizerHints(worldId, logic));
+  buffers.push(zoraSapphireBuffer(worldId, logic));
+  buffers.push(randomizerBoss(worldId, logic));
+  buffers.push(randomizerDungeons(worldId, logic));
   buffers.push(randomizerTriforce(logic));
   return Buffer.concat(buffers);
 };
@@ -613,19 +616,19 @@ const randomizerStartingItems = (world: number, logic: LogicResult): Buffer => {
   return buffer;
 };
 
-export function patchRandomizer(world: number, logic: LogicResult, settings: Settings, patchfile: Patchfile) {
+export function patchRandomizer(worldId: number, logic: LogicResult, settings: Settings, patchfile: Patchfile) {
   const buffer = Buffer.alloc(0x20000, 0xff);
   for (const g of GAMES) {
-    const checksBuffer = gameChecks(world, settings, g, logic);
-    const hintsBuffer = gameHints(settings, g, logic.hints[world]);
-    const entrancesBuffer = gameEntrances(g, logic);
+    const checksBuffer = gameChecks(worldId, settings, g, logic);
+    const hintsBuffer = gameHints(settings, g, logic.hints[worldId]);
+    const entrancesBuffer = gameEntrances(worldId, g, logic);
     checksBuffer.copy(buffer, GAME_DATA_OFFSETS[g]);
     hintsBuffer.copy(buffer, HINTS_DATA_OFFSETS[g]);
     entrancesBuffer.copy(buffer, ENTRANCE_DATA_OFFSETS[g]);
   }
-  const data = randomizerData(world, logic);
+  const data = randomizerData(worldId, logic);
   data.copy(buffer, 0);
-  const startingItems = randomizerStartingItems(world, logic);
+  const startingItems = randomizerStartingItems(worldId, logic);
   startingItems.copy(buffer, STARTING_ITEMS_DATA_OFFSET);
   patchfile.addPatch('global', 0x03fe0000, buffer);
 }

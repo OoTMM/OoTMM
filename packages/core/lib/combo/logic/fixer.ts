@@ -1,85 +1,94 @@
 import { ItemHelpers } from '../items';
 import { Monitor } from '../monitor';
 import { Settings } from '../settings';
-import { MM_MERCHANTS, MM_SCRUBS, ONE_TIME_SHOP_CHECKS, OOT_ONE_TIME_SCRUBS } from './locations';
+import { Location, MM_MERCHANTS, MM_SCRUBS, ONE_TIME_SHOP_CHECKS, OOT_ONE_TIME_SCRUBS, makeLocation } from './locations';
 import { World } from './world';
 
 export class LogicPassFixer {
-  private fixedLocations = new Set<string>();
+  private fixedLocations = new Set<Location>();
 
   constructor(
     private readonly state: {
-      world: World,
+      worlds: World[],
       monitor: Monitor,
       settings: Settings,
     }
   ) {
   }
 
-  run() {
-    this.state.monitor.log("Logic: Fixing");
-
+  private fixWorld(id: number) {
     const { settings } = this.state;
+    const world = this.state.worlds[id];
 
-    for (const loc in this.state.world.checks) {
-      const check = this.state.world.checks[loc];
+
+    for (const locationId in world.checks) {
+      const check = world.checks[locationId];
       const { type, item, game } = check;
+      const location = makeLocation(locationId, id);
 
       if (ItemHelpers.isTingleMap(item) && settings.tingleShuffle === 'vanilla') {
-        this.fixedLocations.add(loc);
+        this.fixedLocations.add(location);
       }
 
       if (ItemHelpers.isOwlStatue(item) && settings.owlShuffle === 'none') {
-        this.fixedLocations.add(loc);
+        this.fixedLocations.add(location);
       }
 
-      if (!settings.shuffleMerchantsMm && MM_MERCHANTS.includes(loc)) {
-        this.fixedLocations.add(loc);
+      if (!settings.shuffleMerchantsMm && MM_MERCHANTS.includes(locationId)) {
+        this.fixedLocations.add(location);
       }
 
       if (type === 'cow') {
         if (game === 'oot' && !this.state.settings.cowShuffleOot) {
-          this.fixedLocations.add(loc);
+          this.fixedLocations.add(location);
         }
         if (game === 'mm' && !this.state.settings.cowShuffleMm) {
-          this.fixedLocations.add(loc);
+          this.fixedLocations.add(location);
         }
       }
 
       if (type === 'shop') {
         if (game === 'oot' && this.state.settings.shopShuffleOot === 'none') {
-          this.fixedLocations.add(loc);
+          this.fixedLocations.add(location);
         }
-        else if (game === 'mm' && this.state.settings.shopShuffleMm === 'none' && !ONE_TIME_SHOP_CHECKS.includes(loc)) {
-          this.fixedLocations.add(loc);
+        else if (game === 'mm' && this.state.settings.shopShuffleMm === 'none' && !ONE_TIME_SHOP_CHECKS.includes(locationId)) {
+          this.fixedLocations.add(location);
         }
       }
 
       if (type === 'scrub') {
-        if (game === 'oot' && !this.state.settings.scrubShuffleOot && !OOT_ONE_TIME_SCRUBS.includes(loc)) {
-          this.fixedLocations.add(loc);
+        if (game === 'oot' && !this.state.settings.scrubShuffleOot && !OOT_ONE_TIME_SCRUBS.includes(locationId)) {
+          this.fixedLocations.add(location);
         }
       }
 
-      if (MM_SCRUBS.includes(loc) && !this.state.settings.scrubShuffleMm) {
-        this.fixedLocations.add(loc);
+      if (MM_SCRUBS.includes(location) && !this.state.settings.scrubShuffleMm) {
+        this.fixedLocations.add(location);
       }
 
       if (ItemHelpers.isGerudoCard(item) && !this.state.settings.shuffleGerudoCard) {
-        this.fixedLocations.add(loc);
+        this.fixedLocations.add(location);
       }
 
       if (ItemHelpers.isMasterSword(item) && !this.state.settings.shuffleMasterSword) {
-        this.fixedLocations.add(loc);
+        this.fixedLocations.add(location);
       }
 
       if (ItemHelpers.isGanonBossKey(item) && this.state.settings.ganonBossKey === 'vanilla') {
-        this.fixedLocations.add(loc);
+        this.fixedLocations.add(location);
       }
 
       if (ItemHelpers.isSmallKeyHideout(item) && this.state.settings.smallKeyShuffleHideout === 'vanilla') {
-        this.fixedLocations.add(loc);
+        this.fixedLocations.add(location);
       }
+    }
+  }
+
+  run() {
+    this.state.monitor.log("Logic: Fixing");
+
+    for (let i = 0; i < this.state.worlds.length; ++i) {
+      this.fixWorld(i);
     }
 
     return { fixedLocations: this.fixedLocations };

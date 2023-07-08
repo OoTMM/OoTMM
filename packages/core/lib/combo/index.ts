@@ -11,7 +11,8 @@ import { SettingsPatch } from './settings/patch';
 import { makeCosmetics } from './cosmetics';
 import { makeRandomSettings } from './settings/random';
 import { CountMap } from './util';
-import { ItemHelpers, ItemsCount } from './items';
+import { ItemHelpers, ItemsCount, makePlayerItem } from './items';
+import { makeLocation } from './logic/locations';
 
 export { Presets, PRESETS } from './presets';
 export { Cosmetics, makeCosmetics, COSMETIC_NAMES } from './cosmetics';
@@ -44,29 +45,30 @@ export const itemPool = (aSettings: Partial<Settings>): {[k: string]: number} =>
   const cosmetics = makeCosmetics({});
   const monitor = new Monitor({ onLog: () => {} });
   const random = makeRandomSettings({});
-  const { pool, world } = worldState(monitor, { settings, cosmetics, debug: false, seed: "--- INTERNAL ---", random });
+  const { pool, worlds } = worldState(monitor, { settings, cosmetics, debug: false, seed: "--- INTERNAL ---", random });
 
   /* Extract relevant items from the pool */
-  for (const item of pool.keys()) {
-    if (ItemHelpers.isJunk(item) || ItemHelpers.isDungeonItem(item) || ItemHelpers.isToken(item) || ItemHelpers.isStrayFairy(item) || ItemHelpers.isItemTriforce(item)) {
-      pool.delete(item);
+  for (const pi of pool.keys()) {
+    if (pi.player !== 0 || ItemHelpers.isJunk(pi.item) || ItemHelpers.isDungeonItem(pi.item) || ItemHelpers.isToken(pi.item) || ItemHelpers.isStrayFairy(pi.item) || ItemHelpers.isItemTriforce(pi.item)) {
+      pool.delete(pi);
     }
   }
 
   /* Add unlimited consumables */
-  for (const loc in world.checks) {
-    const check = world.checks[loc];
+  for (const loc in worlds[0].checks) {
+    const check = worlds[0].checks[loc];
     const { item } = check;
+    const pi = makePlayerItem(item, 0);
     if (ItemHelpers.isItemUnlimitedStarting(item)) {
-      pool.set(item, 999);
+      pool.set(pi, 999);
     }
   }
 
   /* Sort items */
   const items: ItemsCount = new Map;
-  const sortedItems = [...pool.keys()].sort((a, b) => itemName(a.id).localeCompare(itemName(b.id)));
+  const sortedItems = [...pool.keys()].sort((a, b) => itemName(a.item.id).localeCompare(itemName(b.item.id)));
   for (const item of sortedItems) {
-    items.set(item, pool.get(item)!);
+    items.set(item.item, pool.get(item)!);
   }
 
   /* Make the item pool */
@@ -82,18 +84,19 @@ export const locationList = (aSettings: Partial<Settings>) => {
   const cosmetics = makeCosmetics({});
   const monitor = new Monitor({ onLog: () => {} });
   const random = makeRandomSettings({});
-  const { world, fixedLocations } = worldState(monitor, { settings, cosmetics, debug: false, seed: "--- INTERNAL ---", random });
+  const { worlds, fixedLocations } = worldState(monitor, { settings, cosmetics, debug: false, seed: "--- INTERNAL ---", random });
 
   // Precalculate this to avoid doing it more than once in the gui
-  const dungeonLocations = Object.values(world.dungeons).reduce((acc, x) => new Set([...acc, ...x]));
+  const dungeonLocations = Object.values(worlds[0].dungeons).reduce((acc, x) => new Set([...acc, ...x]));
 
   /* Everywhere below Check.type is a placeholder for Check.flags that I am going to add to the item tables. */
   const locations: LocInfo = {};
-  for (const loc in world.checks) {
-    if (fixedLocations.has(loc) || !isShuffled(settings, world, loc, dungeonLocations)) {
+  for (const loc in worlds[0].checks) {
+    const pl = makeLocation(loc, 0);
+    if (fixedLocations.has(pl) || !isShuffled(settings, worlds[0], loc, dungeonLocations)) {
       continue;
     }
-    locations[loc] = [world.checks[loc].type];
+    locations[loc] = [worlds[0].checks[loc].type];
   }
 
   return locations;
