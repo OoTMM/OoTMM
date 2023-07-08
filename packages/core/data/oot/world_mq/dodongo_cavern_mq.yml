@@ -13,7 +13,7 @@
     "Dodongo Cavern Upper Ledges": "has_explosives_or_hammer || can_use_din"
     "Dodongo Cavern Lower Tunnel": "has_explosives_or_hammer || event(DC_MQ_SHORTCUT)"
     "Dodongo Cavern Bomb Bag Ledge": "is_adult"
-  event:
+  events:
     STICKS: "has_weapon || can_boomerang"
   locations:
     "MQ Dodongo Cavern Map Chest": "has_bombflowers || can_hammer || has_blue_fire_arrows_mudwall"
