@@ -1,6 +1,5 @@
-import { PlayerItem } from '../../../dist/lib/combo/items';
 import { Confvar } from '../confvars';
-import { Item, ItemGroups, ItemHelpers, Items, ItemsCount, PlayerItems, makePlayerItem } from '../items';
+import { Item, ItemGroups, ItemHelpers, Items, PlayerItem, PlayerItems, makePlayerItem } from '../items';
 import { Monitor } from '../monitor';
 import { Settings } from '../settings';
 import { countMapAdd } from '../util';
