@@ -219,7 +219,6 @@ export class LogicPassSolver {
   private fixItems() {
     for (const loc of this.input.fixedLocations.values()) {
       const locD = locationData(loc);
-      console.log(this.input.worlds.length);
       const item = makePlayerItem(this.input.worlds[locD.world as number].checks[locD.id].item, locD.world as number);
       this.place(loc, item);
     }
