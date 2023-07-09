@@ -48,7 +48,7 @@
     "House of Twins": "true"
     "Know It All House": "true"
     "Lost Woods": "true"
-    "Lost Woods Bridge": "true"
+    "Lost Woods Bridge from Forest": "true"
     "Kokiri Shop": "true"
     "Kokiri Forest Storms Grotto": "hidden_grotto_storms"
     "Kokiri Forest Near Deku Tree": "mido_moved || is_adult"
@@ -549,7 +549,13 @@
     "Hyrule Field": "true"
     "Lost Woods": "can_longshot"
   locations:
-    "Lost Woods Gift from Saria": "true"
+    "Lost Woods Gift from Saria": "event(SARIA_GIFT)"
+"Lost Woods Bridge from Forest":
+  region: LOST_WOODS
+  exits:
+    "Lost Woods Bridge": "event(SARIA_GIFT)"
+  events:
+    SARIA_GIFT: "true"
 "Lost Woods Deep":
   region: LOST_WOODS
   exits:
