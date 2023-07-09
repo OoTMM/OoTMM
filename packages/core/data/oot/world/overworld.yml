@@ -415,11 +415,11 @@
   exits:
     "Market": "true"
     "Near Fairy Fountain Din": "has_explosives"
+    "Hyrule Castle Courtyard": "woke_talon_child || has_hover_boots"
     "Hyrule Castle Grotto": "hidden_grotto_storms"
   events:
     MALON: "true"
     TALON_CHILD: "has(CHICKEN)"
-    MEET_ZELDA: "woke_talon_child || has_hover_boots"
     BOMBS: "true"
     RUPEES: "true"
     SEEDS: "is_child"
@@ -427,12 +427,20 @@
     BUGS: "has_bottle"
   locations:
     "Malon Egg": "event(MALON)"
-    "Zelda's Letter": "met_zelda"
-    "Zelda's Song": "met_zelda"
     "Hyrule Castle GS Tree": "can_damage_skull"
   gossip:
     "Hyrule Castle Gossip After Climb": "true"
     "Hyrule Castle Gossip Before Moat": "true"
+"Hyrule Castle Courtyard":
+  region: HYRULE_CASTLE
+  time: flow
+  exits:
+    "Hyrule Castle": "true"
+  events:
+    MEET_ZELDA: "true"
+  locations:
+    "Zelda's Letter": "met_zelda"
+    "Zelda's Song": "met_zelda"
 "Near Fairy Fountain Din":
   region: HYRULE_CASTLE
   exits:
@@ -475,7 +483,7 @@
   region: GANON_CASTLE_EXTERIOR
   exits:
     "Ganon Castle Exterior": "is_adult && special(BRIDGE)"
-    "Hyrule Castle": "is_child"
+    "Hyrule Castle Courtyard": "is_child"
     "Ganon Castle": "true"
 "Near Fairy Fountain Defense":
   region: GANON_CASTLE_EXTERIOR
