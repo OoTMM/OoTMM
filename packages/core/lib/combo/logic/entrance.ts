@@ -497,7 +497,7 @@ export class LogicPassEntrances {
     for (let worldId = 0; worldId < worldsCount; ++worldId) {
       const world = cloneWorld(this.input.worlds[worldId]);
       world.dungeonIds = Object.values(DUNGEON_INDEX);
-      world.bossIds = Object.values(DUNGEON_INDEX);
+      world.bossIds = Object.values(BOSS_INDEX_BY_DUNGEON);
       this.worlds.push(world);
     }
     if (!this.input.settings.distinctWorlds) {
