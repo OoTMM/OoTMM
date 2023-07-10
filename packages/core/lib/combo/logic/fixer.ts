@@ -64,7 +64,6 @@ export class LogicPassFixer {
 
       if (MM_SCRUBS.includes(locationId) && !this.state.settings.scrubShuffleMm) {
         this.fixedLocations.add(location);
-        console.log(`Added ${location} to fixed locations`)
       }
 
       if (ItemHelpers.isGerudoCard(item) && !this.state.settings.shuffleGerudoCard) {
