@@ -62,7 +62,7 @@ export class LogicPassFixer {
         }
       }
 
-      if (MM_SCRUBS.includes(location) && !this.state.settings.scrubShuffleMm) {
+      if (MM_SCRUBS.includes(locationId) && !this.state.settings.scrubShuffleMm) {
         this.fixedLocations.add(location);
       }
 
