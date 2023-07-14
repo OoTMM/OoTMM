@@ -318,14 +318,13 @@ export class LogicPassSolver {
     }
 
     for (let player = 0; player < this.input.settings.players; ++player) {
+      const locations = [...gs, ...house].filter(x => locationData(x).world === player);
       const world = this.input.worlds[player];
-      const locations = new Set([...gs, ...house].map(x => makeLocation(x, player)));
-      const pool = shuffle(this.input.random, Array.from(locations).map(loc => world.checks[locationData(loc).id].item, player));
+      const pool = shuffle(this.input.random, locations.map(loc => makePlayerItem(world.checks[locationData(loc).id].item, player)));
       for (const location of locations) {
-        const itemId = pool.pop();
-        const item = makePlayerItem(itemId!, player);
-        this.place(location, item!);
-        removeItemPools(this.state.pools, item!);
+        const item = pool.pop()!;
+        this.place(location, item);
+        removeItemPools(this.state.pools, item);
       }
     }
   }
