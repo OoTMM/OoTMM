@@ -348,6 +348,17 @@ export const SETTINGS = [{
   ],
   default: 'none'
 }, {
+  key: 'silverRupeeShuffle',
+  name: 'Silver Rupee Shuffle',
+  category: 'main.shuffle',
+  type: 'enum',
+  description: 'Make silver rupees items that can be shuffled.',
+  values: [
+    { value: 'vanilla', name: 'Vanilla', description: 'Silver Rupees are vanilla' },
+    { value: 'anywhere', name: 'Anywhere', description: 'Silver Rupees are shuffled in the item pool' },
+  ],
+  default: 'vanilla'
+}, {
   key: 'shuffleMasterSword',
   name: 'Master Sword Shuffle',
   category: 'main.shuffle',

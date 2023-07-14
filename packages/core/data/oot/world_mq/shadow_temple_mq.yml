@@ -21,34 +21,75 @@
   dungeon: Shadow
   exits:
     "Shadow Temple Upper Huge Pit": "has_explosives && small_keys(SMALL_KEY_SHADOW, 2)"
+    "Shadow Temple Scythe Room": "has_lens"
   locations:
     "MQ Shadow Temple First Gibdos Chest": "true"
-    "MQ Shadow Temple Map Chest": "true"
     "MQ Shadow Temple Boat Passage Chest": "true"
+"Shadow Temple Scythe Room":
+  dungeon: Shadow
+  exits:
+    "Shadow Temple First Beamos": "true"
+  locations:
+    "MQ Shadow Temple SR Scythe 1": "true"
+    "MQ Shadow Temple SR Scythe 2": "can_hookshot || has_hover_boots"
+    "MQ Shadow Temple SR Scythe 3": "true"
+    "MQ Shadow Temple SR Scythe 4": "true"
+    "MQ Shadow Temple SR Scythe 5": "true"
+    "MQ Shadow Temple Map Chest": "has(RUPEE_SILVER_SHADOW_SCYTHE, 5)"
 "Shadow Temple Upper Huge Pit":
   dungeon: Shadow
   exits:
     "Shadow Temple Lower Huge Pit": "has_fire"
+    "Shadow Temple Invisible Blades Rooms": "true"
+"Shadow Temple Invisible Blades Rooms":
+  dungeon: Shadow
+  exits:
+    "Shadow Temple Upper Huge Pit": "true"
   locations:
-    "MQ Shadow Temple Second Silver Rupee Visible Chest": "can_play_time"
-    "MQ Shadow Temple Second Silver Rupee Invisible Chest": "can_play_time"
+    "MQ Shadow Temple SR Invisible Blades Ground 1": "true"
+    "MQ Shadow Temple SR Invisible Blades Ground 2": "true"
+    "MQ Shadow Temple SR Invisible Blades Ground 3": "true"
+    "MQ Shadow Temple SR Invisible Blades Ground 4": "true"
+    "MQ Shadow Temple SR Invisible Blades Ground 5": "true"
+    "MQ Shadow Temple SR Invisible Blades Ground 6": "true"
+    "MQ Shadow Temple SR Invisible Blades Ground 7": "true"
+    "MQ Shadow Temple SR Invisible Blades Ground 8": "true"
+    "MQ Shadow Temple SR Invisible Blades Ground 9": "true"
+    "MQ Shadow Temple SR Invisible Blades Time Block": "can_play_time"
+    "MQ Shadow Temple Second Silver Rupee Visible Chest": "has(RUPEE_SILVER_SHADOW_BLADES, 10)"
+    "MQ Shadow Temple Second Silver Rupee Invisible Chest": "has(RUPEE_SILVER_SHADOW_BLADES, 10)"
 "Shadow Temple Lower Huge Pit":
   dungeon: Shadow
   exits:
     "Shadow Temple Invisible Spike Floor": "small_keys(SMALL_KEY_SHADOW, 3) && has_hover_boots"
   locations:
-    "MQ Shadow Temple Huge Pit Silver Rupee Chest": "can_longshot"
+    "MQ Shadow Temple Huge Pit Silver Rupee Chest": "has(RUPEE_SILVER_SHADOW_PIT, 5)"
     "MQ Shadow Temple Spike Curtain Ground Chest": "true"
     "MQ Shadow Temple Spike Curtain Upper Cage Chest": "has(STRENGTH)"
     "MQ Shadow Temple Spike Curtain Upper Switch Chest": "has(STRENGTH)"
     "MQ Shadow Temple GS Spike Curtain": "can_hookshot"
+    "MQ Shadow Temple SR Pit Back": "true"
+    "MQ Shadow Temple SR Pit Midair Low": "can_longshot"
+    "MQ Shadow Temple SR Pit Midair High": "can_longshot"
+    "MQ Shadow Temple SR Pit Right": "true"
+    "MQ Shadow Temple SR Pit Front": "true"
 "Shadow Temple Invisible Spike Floor":
   dungeon: Shadow
   exits:
     "Shadow Temple Wind Tunnel": "small_keys(SMALL_KEY_SHADOW, 4) && can_hookshot"
   locations:
     "MQ Shadow Temple Invisible Spike Floor Chest": "true"
-    "MQ Shadow Temple Stalfos Room Chest": "can_hookshot"
+    "MQ Shadow Temple Stalfos Room Chest": "has(RUPEE_SILVER_SHADOW_SPIKES, 10)"
+    "MQ Shadow Temple SR Spikes Left Corner": "can_hookshot"
+    "MQ Shadow Temple SR Spikes Left Wall": "can_hookshot"
+    "MQ Shadow Temple SR Spikes Left Midair": "can_hookshot"
+    "MQ Shadow Temple SR Spikes Center Platforms": "can_hookshot"
+    "MQ Shadow Temple SR Spikes Center Ground": "true"
+    "MQ Shadow Temple SR Spikes Center Midair": "can_hookshot"
+    "MQ Shadow Temple SR Spikes Front Midair": "can_hookshot"
+    "MQ Shadow Temple SR Spikes Right Ground": "true"
+    "MQ Shadow Temple SR Spikes Right Back Wall": "can_hookshot"
+    "MQ Shadow Temple SR Spikes Right Lateral Wall": "can_hookshot"
 "Shadow Temple Wind Tunnel":
   dungeon: Shadow
   exits:

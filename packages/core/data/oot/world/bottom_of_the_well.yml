@@ -27,3 +27,8 @@
     "Bottom of the Well GS East Cage": "small_keys(SMALL_KEY_BOTW, 3) && has_lens && can_boomerang"
     "Bottom of the Well GS Inner West": "small_keys(SMALL_KEY_BOTW, 3) && has_lens && can_boomerang"
     "Bottom of the Well GS Inner East": "small_keys(SMALL_KEY_BOTW, 3) && has_lens && can_boomerang"
+    "Bottom of the Well SR 1": "true"
+    "Bottom of the Well SR 2": "true"
+    "Bottom of the Well SR 3": "true"
+    "Bottom of the Well SR 4": "true"
+    "Bottom of the Well SR 5": "true"

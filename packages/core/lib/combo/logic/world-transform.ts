@@ -407,6 +407,10 @@ export class LogicPassWorldTransform {
       items = [...items, ...ItemGroups.OWLS];
     }
 
+    if (settings.silverRupeeShuffle === 'anywhere') {
+      items = [...items, ...ItemGroups.RUPEES_SILVER];
+    }
+
     /* Add extra items */
     for (let i = 0; i < this.state.worlds.length; ++i) {
       for (const item of items) {

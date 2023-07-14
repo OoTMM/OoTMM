@@ -173,6 +173,7 @@ NORETURN void comboGameSwitch(GameState_Play* play, s32 entrance);
 #define OV_COW          5
 #define OV_SHOP         6
 #define OV_SCRUB        7
+#define OV_SR           8
 
 #define OVF_RENEW             (1 << 2)
 #define OVF_PRECOND           (1 << 3)
@@ -368,6 +369,8 @@ typedef struct
     u8                      isCreditWarp;
     const ComboItemQuery*   itemQuery;
     const ComboItemQuery*   itemQueryBox;
+    u8                      silverRupee;
+    u8                      delayedSwitchFlag;
 }
 ComboGlobal;
 

@@ -363,6 +363,16 @@ Ice Cavern Sheik Song,                                      npc,            NONE
 Ice Cavern GS Scythe Room,                                  gs,             NONE,                 ICE_CAVERN,                     0x51,                       GS_TOKEN
 Ice Cavern GS HP Room,                                      gs,             NONE,                 ICE_CAVERN,                     0x52,                       GS_TOKEN
 Ice Cavern GS Block Room,                                   gs,             NONE,                 ICE_CAVERN,                     0x50,                       GS_TOKEN
+Ice Cavern SR Scythe Left,                                  sr,             NONE,                 ICE_CAVERN,                     0x37,                       RUPEE_SILVER_IC_SCYTHE
+Ice Cavern SR Scythe Center Left,                           sr,             NONE,                 ICE_CAVERN,                     0x38,                       RUPEE_SILVER_IC_SCYTHE
+Ice Cavern SR Scythe Back,                                  sr,             NONE,                 ICE_CAVERN,                     0x39,                       RUPEE_SILVER_IC_SCYTHE
+Ice Cavern SR Scythe Center Right,                          sr,             NONE,                 ICE_CAVERN,                     0x3a,                       RUPEE_SILVER_IC_SCYTHE
+Ice Cavern SR Scythe Midair,                                sr,             NONE,                 ICE_CAVERN,                     0x3b,                       RUPEE_SILVER_IC_SCYTHE
+Ice Cavern SR Blocks Back Left,                             sr,             NONE,                 ICE_CAVERN,                     0x3c,                       RUPEE_SILVER_IC_BLOCK
+Ice Cavern SR Blocks Back Right,                            sr,             NONE,                 ICE_CAVERN,                     0x3d,                       RUPEE_SILVER_IC_BLOCK
+Ice Cavern SR Blocks Center,                                sr,             NONE,                 ICE_CAVERN,                     0x3e,                       RUPEE_SILVER_IC_BLOCK
+Ice Cavern SR Blocks Alcove,                                sr,             NONE,                 ICE_CAVERN,                     0x3f,                       RUPEE_SILVER_IC_BLOCK
+Ice Cavern SR Blocks Front Left,                            sr,             NONE,                 ICE_CAVERN,                     0x40,                       RUPEE_SILVER_IC_BLOCK
 Water Temple Under Center,                                  chest,          NONE,                 TEMPLE_WATER,                   0x06,                       RUPEE_BLUE
 Water Temple Compass,                                       chest,          NONE,                 TEMPLE_WATER,                   0x09,                       COMPASS_WATER
 Water Temple Longshot,                                      chest,          NONE,                 TEMPLE_WATER,                   0x07,                       HOOKSHOT
@@ -397,6 +407,11 @@ Bottom of the Well Lens Side Chest,                         chest,          NONE
 Bottom of the Well GS East Cage,                            gs,             NONE,                 BOTTOM_OF_THE_WELL,             0x48,                       GS_TOKEN
 Bottom of the Well GS Inner West,                           gs,             NONE,                 BOTTOM_OF_THE_WELL,             0x4a,                       GS_TOKEN
 Bottom of the Well GS Inner East,                           gs,             NONE,                 BOTTOM_OF_THE_WELL,             0x49,                       GS_TOKEN
+Bottom of the Well SR 1,                                    sr,             NONE,                 BOTTOM_OF_THE_WELL,             0x05,                       RUPEE_SILVER_BOTW
+Bottom of the Well SR 2,                                    sr,             NONE,                 BOTTOM_OF_THE_WELL,             0x06,                       RUPEE_SILVER_BOTW
+Bottom of the Well SR 3,                                    sr,             NONE,                 BOTTOM_OF_THE_WELL,             0x07,                       RUPEE_SILVER_BOTW
+Bottom of the Well SR 4,                                    sr,             NONE,                 BOTTOM_OF_THE_WELL,             0x08,                       RUPEE_SILVER_BOTW
+Bottom of the Well SR 5,                                    sr,             NONE,                 BOTTOM_OF_THE_WELL,             0x09,                       RUPEE_SILVER_BOTW
 Shadow Temple Map,                                          chest,          NONE,                 TEMPLE_SHADOW,                  0x01,                       MAP_SHADOW
 Shadow Temple Hover Boots,                                  chest,          NONE,                 TEMPLE_SHADOW,                  0x07,                       BOOTS_HOVER
 Shadow Temple Silver Rupees,                                chest,          NONE,                 TEMPLE_SHADOW,                  0x02,                       SMALL_KEY_SHADOW
@@ -419,6 +434,21 @@ Shadow Temple GS Skull Pot,                                 gs,             NONE
 Shadow Temple GS Triple Skull Pot,                          gs,             NONE,                 TEMPLE_SHADOW,                  0x42,                       GS_TOKEN
 Shadow Temple GS Near Boat,                                 gs,             NONE,                 TEMPLE_SHADOW,                  0x44,                       GS_TOKEN
 Shadow Temple GS Falling Spikes,                            gs,             NONE,                 TEMPLE_SHADOW,                  0x41,                       GS_TOKEN
+Shadow Temple SR Scythe 1,                                  sr,             NONE,                 TEMPLE_SHADOW,                  0x19,                       RUPEE_SILVER_SHADOW_SCYTHE
+Shadow Temple SR Scythe 2,                                  sr,             NONE,                 TEMPLE_SHADOW,                  0x1a,                       RUPEE_SILVER_SHADOW_SCYTHE
+Shadow Temple SR Scythe 3,                                  sr,             NONE,                 TEMPLE_SHADOW,                  0x1b,                       RUPEE_SILVER_SHADOW_SCYTHE
+Shadow Temple SR Scythe 4,                                  sr,             NONE,                 TEMPLE_SHADOW,                  0x1c,                       RUPEE_SILVER_SHADOW_SCYTHE
+Shadow Temple SR Scythe 5,                                  sr,             NONE,                 TEMPLE_SHADOW,                  0x1d,                       RUPEE_SILVER_SHADOW_SCYTHE
+Shadow Temple SR Pit 1,                                     sr,             NONE,                 TEMPLE_SHADOW,                  0x28,                       RUPEE_SILVER_SHADOW_PIT
+Shadow Temple SR Pit 2,                                     sr,             NONE,                 TEMPLE_SHADOW,                  0x29,                       RUPEE_SILVER_SHADOW_PIT
+Shadow Temple SR Pit 3,                                     sr,             NONE,                 TEMPLE_SHADOW,                  0x2a,                       RUPEE_SILVER_SHADOW_PIT
+Shadow Temple SR Pit 4,                                     sr,             NONE,                 TEMPLE_SHADOW,                  0x2b,                       RUPEE_SILVER_SHADOW_PIT
+Shadow Temple SR Pit 5,                                     sr,             NONE,                 TEMPLE_SHADOW,                  0x2c,                       RUPEE_SILVER_SHADOW_PIT
+Shadow Temple SR Spikes Back Left,                          sr,             NONE,                 TEMPLE_SHADOW,                  0x2d,                       RUPEE_SILVER_SHADOW_SPIKES
+Shadow Temple SR Spikes Right,                              sr,             NONE,                 TEMPLE_SHADOW,                  0x2e,                       RUPEE_SILVER_SHADOW_SPIKES
+Shadow Temple SR Spikes Center,                             sr,             NONE,                 TEMPLE_SHADOW,                  0x2f,                       RUPEE_SILVER_SHADOW_SPIKES
+Shadow Temple SR Spikes Front Left,                         sr,             NONE,                 TEMPLE_SHADOW,                  0x30,                       RUPEE_SILVER_SHADOW_SPIKES
+Shadow Temple SR Spikes Midair,                             sr,             NONE,                 TEMPLE_SHADOW,                  0x31,                       RUPEE_SILVER_SHADOW_SPIKES
 Shadow Temple Boss HC,                                      collectible,    NONE,                 LAIR_BONGO_BONGO,               0x1f,                       HEART_CONTAINER
 Shadow Temple Boss,                                         npc,            NONE,                 LAIR_BONGO_BONGO,               BLUE_WARP_BONGO_BONGO,      MEDALLION_SHADOW
 Gerudo Fortress Jail 1,                                     collectible,    NONE,                 THIEVES_HIDEOUT,                0x0c,                       SMALL_KEY_GF
@@ -448,6 +478,21 @@ Spirit Temple GS Child Fence,                               gs,             NONE
 Spirit Temple GS Iron Knuckle,                              gs,             NONE,                 TEMPLE_SPIRIT,                  0x38,                       GS_TOKEN
 Spirit Temple GS Boulders,                                  gs,             NONE,                 TEMPLE_SPIRIT,                  0x39,                       GS_TOKEN
 Spirit Temple GS Statue,                                    gs,             NONE,                 TEMPLE_SPIRIT,                  0x3a,                       GS_TOKEN
+Spirit Temple SR Child 1,                                   sr,             NONE,                 TEMPLE_SPIRIT,                  0x0a,                       RUPEE_SILVER_SPIRIT_CHILD
+Spirit Temple SR Child 2,                                   sr,             NONE,                 TEMPLE_SPIRIT,                  0x0b,                       RUPEE_SILVER_SPIRIT_CHILD
+Spirit Temple SR Child 3,                                   sr,             NONE,                 TEMPLE_SPIRIT,                  0x0c,                       RUPEE_SILVER_SPIRIT_CHILD
+Spirit Temple SR Child 4,                                   sr,             NONE,                 TEMPLE_SPIRIT,                  0x0d,                       RUPEE_SILVER_SPIRIT_CHILD
+Spirit Temple SR Child 5,                                   sr,             NONE,                 TEMPLE_SPIRIT,                  0x0e,                       RUPEE_SILVER_SPIRIT_CHILD
+Spirit Temple SR Sun 1,                                     sr,             NONE,                 TEMPLE_SPIRIT,                  0x0f,                       RUPEE_SILVER_SPIRIT_SUN
+Spirit Temple SR Sun 2,                                     sr,             NONE,                 TEMPLE_SPIRIT,                  0x10,                       RUPEE_SILVER_SPIRIT_SUN
+Spirit Temple SR Sun 3,                                     sr,             NONE,                 TEMPLE_SPIRIT,                  0x11,                       RUPEE_SILVER_SPIRIT_SUN
+Spirit Temple SR Sun 4,                                     sr,             NONE,                 TEMPLE_SPIRIT,                  0x12,                       RUPEE_SILVER_SPIRIT_SUN
+Spirit Temple SR Sun 5,                                     sr,             NONE,                 TEMPLE_SPIRIT,                  0x13,                       RUPEE_SILVER_SPIRIT_SUN
+Spirit Temple SR Boulders 1,                                sr,             NONE,                 TEMPLE_SPIRIT,                  0x14,                       RUPEE_SILVER_SPIRIT_BOULDERS
+Spirit Temple SR Boulders 2,                                sr,             NONE,                 TEMPLE_SPIRIT,                  0x15,                       RUPEE_SILVER_SPIRIT_BOULDERS
+Spirit Temple SR Boulders 3,                                sr,             NONE,                 TEMPLE_SPIRIT,                  0x16,                       RUPEE_SILVER_SPIRIT_BOULDERS
+Spirit Temple SR Boulders 4,                                sr,             NONE,                 TEMPLE_SPIRIT,                  0x17,                       RUPEE_SILVER_SPIRIT_BOULDERS
+Spirit Temple SR Boulders 5,                                sr,             NONE,                 TEMPLE_SPIRIT,                  0x18,                       RUPEE_SILVER_SPIRIT_BOULDERS
 Spirit Temple Silver Gauntlets,                             chest,          NONE,                 DESERT_COLOSSUS,                0x0b,                       STRENGTH
 Spirit Temple Mirror Shield,                                chest,          NONE,                 DESERT_COLOSSUS,                0x09,                       SHIELD_MIRROR
 Spirit Temple Boss HC,                                      collectible,    NONE,                 LAIR_TWINROVA,                  0x1f,                       HEART_CONTAINER
@@ -474,6 +519,21 @@ Gerudo Training Maze Chest 1,                               chest,          NONE
 Gerudo Training Maze Chest 2,                               chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x0a,                       RUPEE_RED
 Gerudo Training Maze Chest 3,                               chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x09,                       ARROWS_30
 Gerudo Training Maze Chest 4,                               chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x0c,                       ARROW_ICE
+Gerudo Training Grounds SR Slope Front Right,               sr,             NONE,                 GERUDO_TRAINING_GROUND,         0x41,                       RUPEE_SILVER_GTG_SLOPES
+Gerudo Training Grounds SR Slope Front Left,                sr,             NONE,                 GERUDO_TRAINING_GROUND,         0x42,                       RUPEE_SILVER_GTG_SLOPES
+Gerudo Training Grounds SR Slope Front Above,               sr,             NONE,                 GERUDO_TRAINING_GROUND,         0x43,                       RUPEE_SILVER_GTG_SLOPES
+Gerudo Training Grounds SR Slope Center,                    sr,             NONE,                 GERUDO_TRAINING_GROUND,         0x44,                       RUPEE_SILVER_GTG_SLOPES
+Gerudo Training Grounds SR Slope Back,                      sr,             NONE,                 GERUDO_TRAINING_GROUND,         0x45,                       RUPEE_SILVER_GTG_SLOPES
+Gerudo Training Grounds SR Lava Front Left,                 sr,             NONE,                 GERUDO_TRAINING_GROUND,         0x46,                       RUPEE_SILVER_GTG_LAVA
+Gerudo Training Grounds SR Lava Front Right,                sr,             NONE,                 GERUDO_TRAINING_GROUND,         0x47,                       RUPEE_SILVER_GTG_LAVA
+Gerudo Training Grounds SR Lava Back Left,                  sr,             NONE,                 GERUDO_TRAINING_GROUND,         0x48,                       RUPEE_SILVER_GTG_LAVA
+Gerudo Training Grounds SR Lava Back Center,                sr,             NONE,                 GERUDO_TRAINING_GROUND,         0x49,                       RUPEE_SILVER_GTG_LAVA
+Gerudo Training Grounds SR Lava Back Right,                 sr,             NONE,                 GERUDO_TRAINING_GROUND,         0x4a,                       RUPEE_SILVER_GTG_LAVA
+Gerudo Training Grounds SR Water 1,                         sr,             NONE,                 GERUDO_TRAINING_GROUND,         0x4c,                       RUPEE_SILVER_GTG_WATER
+Gerudo Training Grounds SR Water 2,                         sr,             NONE,                 GERUDO_TRAINING_GROUND,         0x4d,                       RUPEE_SILVER_GTG_WATER
+Gerudo Training Grounds SR Water 3,                         sr,             NONE,                 GERUDO_TRAINING_GROUND,         0x4e,                       RUPEE_SILVER_GTG_WATER
+Gerudo Training Grounds SR Water 4,                         sr,             NONE,                 GERUDO_TRAINING_GROUND,         0x4f,                       RUPEE_SILVER_GTG_WATER
+Gerudo Training Grounds SR Water 5,                         sr,             NONE,                 GERUDO_TRAINING_GROUND,         0x50,                       RUPEE_SILVER_GTG_WATER
 Ganon Castle Water Chest 1,                                 chest,          NONE,                 INSIDE_GANON_CASTLE,            0x06,                       RECOVERY_HEART
 Ganon Castle Water Chest 2,                                 chest,          NONE,                 INSIDE_GANON_CASTLE,            0x07,                       ICE_TRAP
 Ganon Castle Forest Chest,                                  chest,          NONE,                 INSIDE_GANON_CASTLE,            0x09,                       RUPEE_BLUE
@@ -494,6 +554,26 @@ Ganon Castle Leftmost Scrub,                                scrub,          NONE
 Ganon Castle Left-Center Scrub,                             scrub,          NONE,                 INSIDE_GANON_CASTLE,            0x22,                       BOMBS_5
 Ganon Castle Right-Center Scrub,                            scrub,          NONE,                 INSIDE_GANON_CASTLE,            0x23,                       ARROWS_10
 Ganon Castle Rightmost Scrub,                               scrub,          NONE,                 INSIDE_GANON_CASTLE,            0x24,                       POTION_RED
+Ganon Castle SR Spirit Center Midair,                       sr,             NONE,                 INSIDE_GANON_CASTLE,            0x51,                       RUPEE_SILVER_GANON_SPIRIT
+Ganon Castle SR Spirit Front Right,                         sr,             NONE,                 INSIDE_GANON_CASTLE,            0x52,                       RUPEE_SILVER_GANON_SPIRIT
+Ganon Castle SR Spirit Center Bottom,                       sr,             NONE,                 INSIDE_GANON_CASTLE,            0x53,                       RUPEE_SILVER_GANON_SPIRIT
+Ganon Castle SR Spirit Back Left,                           sr,             NONE,                 INSIDE_GANON_CASTLE,            0x54,                       RUPEE_SILVER_GANON_SPIRIT
+Ganon Castle SR Spirit Back Right,                          sr,             NONE,                 INSIDE_GANON_CASTLE,            0x55,                       RUPEE_SILVER_GANON_SPIRIT
+Ganon Castle SR Light Alcove Right,                         sr,             NONE,                 INSIDE_GANON_CASTLE,            0x56,                       RUPEE_SILVER_GANON_LIGHT
+Ganon Castle SR Light Alcove Left,                          sr,             NONE,                 INSIDE_GANON_CASTLE,            0x57,                       RUPEE_SILVER_GANON_LIGHT
+Ganon Castle SR Light Center Top,                           sr,             NONE,                 INSIDE_GANON_CASTLE,            0x58,                       RUPEE_SILVER_GANON_LIGHT
+Ganon Castle SR Light Center Right,                         sr,             NONE,                 INSIDE_GANON_CASTLE,            0x59,                       RUPEE_SILVER_GANON_LIGHT
+Ganon Castle SR Light Center Left,                          sr,             NONE,                 INSIDE_GANON_CASTLE,            0x5a,                       RUPEE_SILVER_GANON_LIGHT
+Ganon Castle SR Fire Back Right,                            sr,             NONE,                 INSIDE_GANON_CASTLE,            0x5b,                       RUPEE_SILVER_GANON_FIRE
+Ganon Castle SR Fire Left,                                  sr,             NONE,                 INSIDE_GANON_CASTLE,            0x5c,                       RUPEE_SILVER_GANON_FIRE
+Ganon Castle SR Fire Far Right,                             sr,             NONE,                 INSIDE_GANON_CASTLE,            0x5d,                       RUPEE_SILVER_GANON_FIRE
+Ganon Castle SR Fire Front Right,                           sr,             NONE,                 INSIDE_GANON_CASTLE,            0x5e,                       RUPEE_SILVER_GANON_FIRE
+Ganon Castle SR Fire Black Pillar,                          sr,             NONE,                 INSIDE_GANON_CASTLE,            0x5f,                       RUPEE_SILVER_GANON_FIRE
+Ganon Castle SR Forest Center Right,                        sr,             NONE,                 INSIDE_GANON_CASTLE,            0x60,                       RUPEE_SILVER_GANON_FOREST
+Ganon Castle SR Forest Front,                               sr,             NONE,                 INSIDE_GANON_CASTLE,            0x61,                       RUPEE_SILVER_GANON_FOREST
+Ganon Castle SR Forest Back Right,                          sr,             NONE,                 INSIDE_GANON_CASTLE,            0x62,                       RUPEE_SILVER_GANON_FOREST
+Ganon Castle SR Forest Back Middle,                         sr,             NONE,                 INSIDE_GANON_CASTLE,            0x63,                       RUPEE_SILVER_GANON_FOREST
+Ganon Castle SR Forest Center Left,                         sr,             NONE,                 INSIDE_GANON_CASTLE,            0x64,                       RUPEE_SILVER_GANON_FOREST
 MQ Deku Tree Map Chest,                                     chest,          NONE,                 INSIDE_DEKU_TREE,               0x03,                       MAP_DT
 MQ Deku Tree Compass Chest,                                 chest,          NONE,                 INSIDE_DEKU_TREE,               0x01,                       COMPASS_DT
 MQ Deku Tree Slingshot Chest,                               chest,          NONE,                 INSIDE_DEKU_TREE,               0x06,                       SLINGSHOT
@@ -521,6 +601,11 @@ MQ Dodongo Cavern GS Larve Room,                            gs,             NONE
 MQ Dodongo Cavern GS Upper Lizalfos,                        gs,             NONE,                 DODONGO_CAVERN,                 0x12,                       GS_TOKEN
 MQ Dodongo Cavern GS Poe Room Side,                         gs,             NONE,                 DODONGO_CAVERN,                 0x11,                       GS_TOKEN
 MQ Dodongo Cavern GS Near Boss,                             gs,             NONE,                 DODONGO_CAVERN,                 0x10,                       GS_TOKEN
+MQ Dodongo Cavern SR Beamos,                                sr,             NONE,                 DODONGO_CAVERN,                 0x00,                       RUPEE_SILVER_DC
+MQ Dodongo Cavern SR Crate,                                 sr,             NONE,                 DODONGO_CAVERN,                 0x01,                       RUPEE_SILVER_DC
+MQ Dodongo Cavern SR Upper Corner Low,                      sr,             NONE,                 DODONGO_CAVERN,                 0x02,                       RUPEE_SILVER_DC
+MQ Dodongo Cavern SR Vines,                                 sr,             NONE,                 DODONGO_CAVERN,                 0x03,                       RUPEE_SILVER_DC
+MQ Dodongo Cavern SR Upper Corner High,                     sr,             NONE,                 DODONGO_CAVERN,                 0x04,                       RUPEE_SILVER_DC
 MQ Jabu-Jabu Map Chest,                                     chest,          NONE,                 INSIDE_JABU_JABU,               0x03,                       MAP_JJ
 MQ Jabu-Jabu Entry Chest,                                   chest,          NONE,                 INSIDE_JABU_JABU,               0x05,                       NUTS_5
 MQ Jabu-Jabu Compass Chest,                                 chest,          NONE,                 INSIDE_JABU_JABU,               0x00,                       COMPASS_JJ
@@ -623,6 +708,36 @@ MQ Shadow Temple GS Wind Hint,                              gs,             NONE
 MQ Shadow Temple GS After Wind Bomb,                        gs,             NONE,                 TEMPLE_SHADOW,                  0x43,                       GS_TOKEN
 MQ Shadow Temple GS After Boat,                             gs,             NONE,                 TEMPLE_SHADOW,                  0x44,                       GS_TOKEN
 MQ Shadow Temple GS Pre-Boss,                               gs,             NONE,                 TEMPLE_SHADOW,                  0x42,                       GS_TOKEN
+MQ Shadow Temple SR Scythe 1,                               sr,             NONE,                 TEMPLE_SHADOW,                  0x19,                       RUPEE_SILVER_SHADOW_SCYTHE
+MQ Shadow Temple SR Scythe 2,                               sr,             NONE,                 TEMPLE_SHADOW,                  0x1a,                       RUPEE_SILVER_SHADOW_SCYTHE
+MQ Shadow Temple SR Scythe 3,                               sr,             NONE,                 TEMPLE_SHADOW,                  0x1b,                       RUPEE_SILVER_SHADOW_SCYTHE
+MQ Shadow Temple SR Scythe 4,                               sr,             NONE,                 TEMPLE_SHADOW,                  0x1c,                       RUPEE_SILVER_SHADOW_SCYTHE
+MQ Shadow Temple SR Scythe 5,                               sr,             NONE,                 TEMPLE_SHADOW,                  0x1d,                       RUPEE_SILVER_SHADOW_SCYTHE
+MQ Shadow Temple SR Invisible Blades Ground 1,              sr,             NONE,                 TEMPLE_SHADOW,                  0x1e,                       RUPEE_SILVER_SHADOW_BLADES
+MQ Shadow Temple SR Invisible Blades Ground 2,              sr,             NONE,                 TEMPLE_SHADOW,                  0x1f,                       RUPEE_SILVER_SHADOW_BLADES
+MQ Shadow Temple SR Invisible Blades Ground 3,              sr,             NONE,                 TEMPLE_SHADOW,                  0x20,                       RUPEE_SILVER_SHADOW_BLADES
+MQ Shadow Temple SR Invisible Blades Ground 4,              sr,             NONE,                 TEMPLE_SHADOW,                  0x21,                       RUPEE_SILVER_SHADOW_BLADES
+MQ Shadow Temple SR Invisible Blades Ground 5,              sr,             NONE,                 TEMPLE_SHADOW,                  0x22,                       RUPEE_SILVER_SHADOW_BLADES
+MQ Shadow Temple SR Invisible Blades Ground 6,              sr,             NONE,                 TEMPLE_SHADOW,                  0x23,                       RUPEE_SILVER_SHADOW_BLADES
+MQ Shadow Temple SR Invisible Blades Ground 7,              sr,             NONE,                 TEMPLE_SHADOW,                  0x24,                       RUPEE_SILVER_SHADOW_BLADES
+MQ Shadow Temple SR Invisible Blades Ground 8,              sr,             NONE,                 TEMPLE_SHADOW,                  0x25,                       RUPEE_SILVER_SHADOW_BLADES
+MQ Shadow Temple SR Invisible Blades Ground 9,              sr,             NONE,                 TEMPLE_SHADOW,                  0x26,                       RUPEE_SILVER_SHADOW_BLADES
+MQ Shadow Temple SR Invisible Blades Time Block,            sr,             NONE,                 TEMPLE_SHADOW,                  0x27,                       RUPEE_SILVER_SHADOW_BLADES
+MQ Shadow Temple SR Pit Back,                               sr,             NONE,                 TEMPLE_SHADOW,                  0x28,                       RUPEE_SILVER_SHADOW_PIT
+MQ Shadow Temple SR Pit Midair Low,                         sr,             NONE,                 TEMPLE_SHADOW,                  0x29,                       RUPEE_SILVER_SHADOW_PIT
+MQ Shadow Temple SR Pit Midair High,                        sr,             NONE,                 TEMPLE_SHADOW,                  0x2a,                       RUPEE_SILVER_SHADOW_PIT
+MQ Shadow Temple SR Pit Right,                              sr,             NONE,                 TEMPLE_SHADOW,                  0x2b,                       RUPEE_SILVER_SHADOW_PIT
+MQ Shadow Temple SR Pit Front,                              sr,             NONE,                 TEMPLE_SHADOW,                  0x2c,                       RUPEE_SILVER_SHADOW_PIT
+MQ Shadow Temple SR Spikes Left Corner,                     sr,             NONE,                 TEMPLE_SHADOW,                  0x2d,                       RUPEE_SILVER_SHADOW_SPIKES
+MQ Shadow Temple SR Spikes Left Wall,                       sr,             NONE,                 TEMPLE_SHADOW,                  0x2e,                       RUPEE_SILVER_SHADOW_SPIKES
+MQ Shadow Temple SR Spikes Left Midair,                     sr,             NONE,                 TEMPLE_SHADOW,                  0x2f,                       RUPEE_SILVER_SHADOW_SPIKES
+MQ Shadow Temple SR Spikes Center Platforms,                sr,             NONE,                 TEMPLE_SHADOW,                  0x30,                       RUPEE_SILVER_SHADOW_SPIKES
+MQ Shadow Temple SR Spikes Center Ground,                   sr,             NONE,                 TEMPLE_SHADOW,                  0x31,                       RUPEE_SILVER_SHADOW_SPIKES
+MQ Shadow Temple SR Spikes Center Midair,                   sr,             NONE,                 TEMPLE_SHADOW,                  0x32,                       RUPEE_SILVER_SHADOW_SPIKES
+MQ Shadow Temple SR Spikes Front Midair,                    sr,             NONE,                 TEMPLE_SHADOW,                  0x33,                       RUPEE_SILVER_SHADOW_SPIKES
+MQ Shadow Temple SR Spikes Right Ground,                    sr,             NONE,                 TEMPLE_SHADOW,                  0x34,                       RUPEE_SILVER_SHADOW_SPIKES
+MQ Shadow Temple SR Spikes Right Back Wall,                 sr,             NONE,                 TEMPLE_SHADOW,                  0x35,                       RUPEE_SILVER_SHADOW_SPIKES
+MQ Shadow Temple SR Spikes Right Lateral Wall,              sr,             NONE,                 TEMPLE_SHADOW,                  0x36,                       RUPEE_SILVER_SHADOW_SPIKES
 MQ Spirit Temple Entrance Initial Chest,                    chest,          NONE,                 TEMPLE_SPIRIT,                  0x1a,                       BOMBCHU_5
 MQ Spirit Temple Lobby Back-Left Chest,                     chest,          NONE,                 TEMPLE_SPIRIT,                  0x1e,                       SMALL_KEY_SPIRIT
 MQ Spirit Temple Lobby Back-Right Chest,                    chest,          NONE,                 TEMPLE_SPIRIT,                  0x1f,                       BOMBCHU_5
@@ -648,6 +763,16 @@ MQ Spirit Temple GS Leever Room,                            gs,             NONE
 MQ Spirit Temple GS Symphony Room,                          gs,             NONE,                 TEMPLE_SPIRIT,                  0x3b,                       GS_TOKEN
 MQ Spirit Temple GS Top Floor Left Wall,                    gs,             NONE,                 TEMPLE_SPIRIT,                  0x3a,                       GS_TOKEN
 MQ Spirit Temple GS Top Floor Back Wall,                    gs,             NONE,                 TEMPLE_SPIRIT,                  0x3c,                       GS_TOKEN
+MQ Spirit Temple SR Lobby After Water Near Stairs,          sr,             NONE,                 TEMPLE_SPIRIT,                  0x0a,                       RUPEE_SILVER_SPIRIT_LOBBY
+MQ Spirit Temple SR Lobby Rock Right,                       sr,             NONE,                 TEMPLE_SPIRIT,                  0x0b,                       RUPEE_SILVER_SPIRIT_LOBBY
+MQ Spirit Temple SR Lobby Rock Left,                        sr,             NONE,                 TEMPLE_SPIRIT,                  0x0c,                       RUPEE_SILVER_SPIRIT_LOBBY
+MQ Spirit Temple SR Lobby After Water Near Door,            sr,             NONE,                 TEMPLE_SPIRIT,                  0x0d,                       RUPEE_SILVER_SPIRIT_LOBBY
+MQ Spirit Temple SR Lobby In Water,                         sr,             NONE,                 TEMPLE_SPIRIT,                  0x0e,                       RUPEE_SILVER_SPIRIT_LOBBY
+MQ Spirit Temple SR Adult Bottom,                           sr,             NONE,                 TEMPLE_SPIRIT,                  0x0f,                       RUPEE_SILVER_SPIRIT_ADULT
+MQ Spirit Temple SR Adult Bottom-Center,                    sr,             NONE,                 TEMPLE_SPIRIT,                  0x10,                       RUPEE_SILVER_SPIRIT_ADULT
+MQ Spirit Temple SR Adult Center-Top,                       sr,             NONE,                 TEMPLE_SPIRIT,                  0x11,                       RUPEE_SILVER_SPIRIT_ADULT
+MQ Spirit Temple SR Adult Top,                              sr,             NONE,                 TEMPLE_SPIRIT,                  0x12,                       RUPEE_SILVER_SPIRIT_ADULT
+MQ Spirit Temple SR Adult Skulltula,                        sr,             NONE,                 TEMPLE_SPIRIT,                  0x13,                       RUPEE_SILVER_SPIRIT_ADULT
 MQ Gerudo Training Grounds Entryway Left Chest,             chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x13,                       ARROWS_10
 MQ Gerudo Training Grounds Entryway Right Chest,            chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x07,                       BOMBCHU_10
 MQ Gerudo Training Grounds Maze First Chest,                chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x0b,                       RUPEE_PURPLE
@@ -665,6 +790,20 @@ MQ Gerudo Training Grounds Torch Slug Room Switch Chest,    chest,          NONE
 MQ Gerudo Training Grounds Maze Right Side Middle Chest,    chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x05,                       RUPEE_BLUE
 MQ Gerudo Training Grounds Maze Right Side Right Chest,     chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x08,                       RUPEE_GREEN
 MQ Gerudo Training Grounds Ice Arrows Chest,                chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x04,                       ARROW_ICE
+MQ Gerudo Training Grounds SR Slopes Top Right,             sr,             NONE,                 GERUDO_TRAINING_GROUND,         0x41,                       RUPEE_SILVER_GTG_SLOPES
+MQ Gerudo Training Grounds SR Slopes Middle,                sr,             NONE,                 GERUDO_TRAINING_GROUND,         0x42,                       RUPEE_SILVER_GTG_SLOPES
+MQ Gerudo Training Grounds SR Slopes Front,                 sr,             NONE,                 GERUDO_TRAINING_GROUND,         0x43,                       RUPEE_SILVER_GTG_SLOPES
+MQ Gerudo Training Grounds SR Slopes Front-Left,            sr,             NONE,                 GERUDO_TRAINING_GROUND,         0x44,                       RUPEE_SILVER_GTG_SLOPES
+MQ Gerudo Training Grounds SR Slopes Front-Right,           sr,             NONE,                 GERUDO_TRAINING_GROUND,         0x45,                       RUPEE_SILVER_GTG_SLOPES
+MQ Gerudo Training Grounds SR Lava Back-Right,              sr,             NONE,                 GERUDO_TRAINING_GROUND,         0x46,                       RUPEE_SILVER_GTG_LAVA
+MQ Gerudo Training Grounds SR Lava Back-Left,               sr,             NONE,                 GERUDO_TRAINING_GROUND,         0x47,                       RUPEE_SILVER_GTG_LAVA
+MQ Gerudo Training Grounds SR Lava Center,                  sr,             NONE,                 GERUDO_TRAINING_GROUND,         0x48,                       RUPEE_SILVER_GTG_LAVA
+MQ Gerudo Training Grounds SR Lava Front-Right,             sr,             NONE,                 GERUDO_TRAINING_GROUND,         0x49,                       RUPEE_SILVER_GTG_LAVA
+MQ Gerudo Training Grounds SR Lava Front-Left,              sr,             NONE,                 GERUDO_TRAINING_GROUND,         0x4a,                       RUPEE_SILVER_GTG_LAVA
+MQ Gerudo Training Grounds SR Lava Front,                   sr,             NONE,                 GERUDO_TRAINING_GROUND,         0x4b,                       RUPEE_SILVER_GTG_LAVA
+MQ Gerudo Training Grounds SR Water Top-Left,               sr,             NONE,                 GERUDO_TRAINING_GROUND,         0x4c,                       RUPEE_SILVER_GTG_WATER
+MQ Gerudo Training Grounds SR Water Center,                 sr,             NONE,                 GERUDO_TRAINING_GROUND,         0x4d,                       RUPEE_SILVER_GTG_WATER
+MQ Gerudo Training Grounds SR Water Bottom-Right,           sr,             NONE,                 GERUDO_TRAINING_GROUND,         0x4e,                       RUPEE_SILVER_GTG_WATER
 MQ Ganon Castle Light Trial Chest,                          chest,          NONE,                 INSIDE_GANON_CASTLE,            0x04,                       RECOVERY_HEART
 MQ Ganon Castle Forest Trial First Chest,                   chest,          NONE,                 INSIDE_GANON_CASTLE,            0x02,                       ARROWS_10
 MQ Ganon Castle Forest Trial Second Chest,                  chest,          NONE,                 INSIDE_GANON_CASTLE,            0x03,                       BOMBS_5
@@ -683,3 +822,18 @@ MQ Ganon Castle Left-Center Scrub,                          scrub,          NONE
 MQ Ganon Castle Center Scrub,                               scrub,          NONE,                 INSIDE_GANON_CASTLE,            0x23,                       ARROWS_10
 MQ Ganon Castle Right-Center Scrub,                         scrub,          NONE,                 INSIDE_GANON_CASTLE,            0x24,                       POTION_RED
 MQ Ganon Castle Rightmost Scrub,                            scrub,          NONE,                 INSIDE_GANON_CASTLE,            0x25,                       NUTS_5
+MQ Ganon Castle SR Shadow Front-Right,                      sr,             NONE,                 INSIDE_GANON_CASTLE,            0x51,                       RUPEE_SILVER_GANON_SHADOW
+MQ Ganon Castle SR Shadow Middle,                           sr,             NONE,                 INSIDE_GANON_CASTLE,            0x52,                       RUPEE_SILVER_GANON_SHADOW
+MQ Ganon Castle SR Shadow Back-Left,                        sr,             NONE,                 INSIDE_GANON_CASTLE,            0x53,                       RUPEE_SILVER_GANON_SHADOW
+MQ Ganon Castle SR Shadow Back-Center,                      sr,             NONE,                 INSIDE_GANON_CASTLE,            0x54,                       RUPEE_SILVER_GANON_SHADOW
+MQ Ganon Castle SR Shadow Front-Center,                     sr,             NONE,                 INSIDE_GANON_CASTLE,            0x55,                       RUPEE_SILVER_GANON_SHADOW
+MQ Ganon Castle SR Water Shallow Hole,                      sr,             NONE,                 INSIDE_GANON_CASTLE,            0x56,                       RUPEE_SILVER_GANON_WATER
+MQ Ganon Castle SR Water Above Ground,                      sr,             NONE,                 INSIDE_GANON_CASTLE,            0x57,                       RUPEE_SILVER_GANON_WATER
+MQ Ganon Castle SR Water Alcove,                            sr,             NONE,                 INSIDE_GANON_CASTLE,            0x58,                       RUPEE_SILVER_GANON_WATER
+MQ Ganon Castle SR Water Deep Hole,                         sr,             NONE,                 INSIDE_GANON_CASTLE,            0x59,                       RUPEE_SILVER_GANON_WATER
+MQ Ganon Castle SR Water Under Alcove,                      sr,             NONE,                 INSIDE_GANON_CASTLE,            0x5a,                       RUPEE_SILVER_GANON_WATER
+MQ Ganon Castle SR Fire Under Pillar,                       sr,             NONE,                 INSIDE_GANON_CASTLE,            0x5b,                       RUPEE_SILVER_GANON_FIRE
+MQ Ganon Castle SR Fire Center-Left,                        sr,             NONE,                 INSIDE_GANON_CASTLE,            0x5c,                       RUPEE_SILVER_GANON_FIRE
+MQ Ganon Castle SR Fire Back-Left,                          sr,             NONE,                 INSIDE_GANON_CASTLE,            0x5d,                       RUPEE_SILVER_GANON_FIRE
+MQ Ganon Castle SR Fire High Above Lava,                    sr,             NONE,                 INSIDE_GANON_CASTLE,            0x5e,                       RUPEE_SILVER_GANON_FIRE
+MQ Ganon Castle SR Fire Front-Left,                         sr,             NONE,                 INSIDE_GANON_CASTLE,            0x5f,                       RUPEE_SILVER_GANON_FIRE

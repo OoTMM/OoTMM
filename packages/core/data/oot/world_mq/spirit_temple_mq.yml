@@ -15,7 +15,10 @@
     #The following three chests are here to allow for an age indeterminate path. This is the only age indeterminate content in Spirit MQ.
     "MQ Spirit Temple Compass Chest": "can_use_slingshot && has_bow && small_keys(SMALL_KEY_SPIRIT, 2) && has_explosives"
     "MQ Spirit Temple Sun Block Room Chest": "small_keys(SMALL_KEY_SPIRIT, 2) && has_explosives && can_play_time && is_child"
+    "MQ Spirit Temple Lobby Front-Right Chest": "has(RUPEE_SILVER_SPIRIT_LOBBY, 5)"
     "Spirit Temple Silver Gauntlets": "small_keys(SMALL_KEY_SPIRIT, 4) && has_explosives && can_play_time && is_child && (has_weapon || can_use_sticks) && has_lens"
+    "MQ Spirit Temple SR Lobby Rock Right": "has_explosives_or_hammer"
+    "MQ Spirit Temple SR Lobby Rock Left": "has_explosives_or_hammer"
 "Spirit Temple Child Side":
   dungeon: Spirit
   exits:
@@ -66,16 +69,18 @@
 "Spirit Temple Adult Lower":
   dungeon: Spirit
   locations:
-    "MQ Spirit Temple Lobby Front-Right Chest": "can_hammer"
     "MQ Spirit Temple Purple Leever Chest": "true"
     "MQ Spirit Temple Symphony Room Chest": "small_keys(SMALL_KEY_SPIRIT, 7) && can_hammer && can_play_time && can_play_epona && can_play_sun && can_play_storms && can_play(SONG_ZELDA)"
     "MQ Spirit Temple GS Leever Room": "true"
     "MQ Spirit Temple GS Symphony Room": "small_keys(SMALL_KEY_SPIRIT, 7) && can_hammer && can_play_time && can_play_epona && can_play_sun && can_play_storms && can_play(SONG_ZELDA)"
+    "MQ Spirit Temple SR Lobby In Water": "can_hammer"
+    "MQ Spirit Temple SR Lobby After Water Near Stairs": "true"
+    "MQ Spirit Temple SR Lobby After Water Near Door": "true"
 "Spirit Temple Adult Upper":
   dungeon: Spirit
   exits:
     "Spirit Temple Adult Hand": "can_play_time"
-    "Spirit Temple Top Floor": "small_keys(SMALL_KEY_SPIRIT, 6)"
+    "Spirit Temple Adult Climb": "small_keys(SMALL_KEY_SPIRIT, 6)"
   locations:
     "MQ Spirit Temple Beamos Room Chest": "true"
 "Spirit Temple Adult Hand":
@@ -86,6 +91,16 @@
     "MQ Spirit Temple Dinolfos Room Chest": "true"
     "MQ Spirit Temple Boss Key Chest": "has_mirror_shield"
     "Spirit Temple Mirror Shield": "has_lens"
+"Spirit Temple Adult Climb":
+  dungeon: Spirit
+  exits:
+    "Spirit Temple Top Floor": "has(RUPEE_SILVER_SPIRIT_ADULT, 5)"
+  locations:
+    "MQ Spirit Temple SR Adult Bottom": "true"
+    "MQ Spirit Temple SR Adult Bottom-Center": "true"
+    "MQ Spirit Temple SR Adult Center-Top": "true"
+    "MQ Spirit Temple SR Adult Top": "true"
+    "MQ Spirit Temple SR Adult Skulltula": "true"
 "Spirit Temple Top Floor":
   dungeon: Spirit
   events:

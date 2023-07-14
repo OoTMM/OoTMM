@@ -230,13 +230,9 @@ static void* pushMatrix(GfxContext* gfx, const float* mat)
     return end;
 }
 
-static void* dummySegment(GfxContext* gfx)
-{
-    Gfx* end = gfx->polyOpa.end - 1;
-    gfx->polyOpa.end = end;
-    gSPEndDisplayList(end);
-    return end;
-}
+ALIGNED(16) static const Gfx kEmptyList[] = {
+    gsSPEndDisplayList(),
+};
 
 void Shader_BossRemains(GameState_Play* play, s16 shaderId)
 {
@@ -295,8 +291,8 @@ void Shader_SpiritualStones(GameState_Play* play, s16 shaderId)
     gSPMatrix(POLY_OPA_DISP++, pushMatrix(play->gs.gfx, kMatrixRot), G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
     /* Segment setup */
-    gSPSegment(POLY_XLU_DISP++, 9, dummySegment(play->gs.gfx));
-    gSPSegment(POLY_OPA_DISP++, 8, dummySegment(play->gs.gfx));
+    gSPSegment(POLY_XLU_DISP++, 9, kEmptyList);
+    gSPSegment(POLY_OPA_DISP++, 8, kEmptyList);
 
     InitListPolyXlu(play->gs.gfx);
     color4(&r, &g, &b, &a, kPrimColors[colorIndex]);
@@ -339,7 +335,7 @@ void Shader_MasterSword(GameState_Play* play, s16 shaderId)
     gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPMatrix(POLY_OPA_DISP++, pushMatrix(play->gs.gfx, kMatrixRot), G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
     gSPMatrix(POLY_OPA_DISP++, pushMatrix(play->gs.gfx, kMatrixScale), G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-    gSPSegment(POLY_OPA_DISP++, 8, dummySegment(play->gs.gfx));
+    gSPSegment(POLY_OPA_DISP++, 8, kEmptyList);
     InitListPolyOpa(play->gs.gfx);
     gSPDisplayList(POLY_OPA_DISP++, shader->lists[0]);
     CLOSE_DISPS();
@@ -630,6 +626,34 @@ void Shader_CustomPotion(GameState_Play* play, s16 index)
     gDPSetEnvColor(POLY_XLU_DISP++, r, g, b, a);
     gDPLoadTextureBlock(POLY_XLU_DISP++, 0x06000000 | kTextureOffsets[colorIndex], G_IM_FMT_IA, G_IM_SIZ_8b, 16, 32, 0, G_TX_MIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_CLAMP, 4, 5, G_TX_NOLOD, G_TX_NOLOD);
     gSPDisplayList(POLY_XLU_DISP++, 0x06001848);
+    CLOSE_DISPS();
+}
+
+#if defined(GAME_OOT)
+# define DLIST_RUPEE 0x04045150
+#else
+# define DLIST_RUPEE 0x040622c0
+#endif
+
+ALIGNED(16) static u16 kSilverRupeeLUT[] = {
+    0x635f, 0xbdf1, 0xffff, 0xe739,
+    0x6ba1, 0xbdf1, 0xefbd, 0xbe31,
+    0x4257, 0x6b9f, 0xc633, 0x94e9,
+    0x0849, 0x3a15, 0x8ca7, 0x73a1,
+};
+
+void Shader_SilverRupee(GameState_Play* play, s16 index)
+{
+    static const float scale = 0.04;
+
+    OPEN_DISPS(play->gs.gfx);
+    InitListPolyOpa(play->gs.gfx);
+    ModelViewScale(scale, scale, scale, MAT_MUL);
+    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPSegment(POLY_OPA_DISP++, 0x08, &kSilverRupeeLUT);
+    gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 255, 255, 255, 255);
+    gDPSetEnvColor(POLY_OPA_DISP++, 255, 255, 255, 255);
+    gSPDisplayList(POLY_OPA_DISP++, DLIST_RUPEE);
     CLOSE_DISPS();
 }
 

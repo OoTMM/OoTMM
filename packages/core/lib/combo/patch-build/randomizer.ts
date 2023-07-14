@@ -322,6 +322,9 @@ const gameChecks = (worldId: number, settings: Settings, game: Game, logic: Logi
     case 'scrub':
       sceneId = 0xf4;
       break;
+    case 'sr':
+      sceneId = 0xf5;
+      break;
     case 'collectible':
       id |= 0x40;
       break;

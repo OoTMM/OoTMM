@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/net.h>
+#include <combo/sr.h>
 
 ComboGlobal g;
 
@@ -7,6 +8,8 @@ void comboInitObjects(void);
 
 void comboInit(void)
 {
+    g.delayedSwitchFlag = 0xff;
+
     comboLoadContext();
     comboInitDma();
     comboInitData();
@@ -14,6 +17,7 @@ void comboInit(void)
     comboInitOverride();
     comboInitHints();
     comboInitEntrances();
+    comboSilverRupeesInit();
     comboMenuInit();
     netInit();
 }

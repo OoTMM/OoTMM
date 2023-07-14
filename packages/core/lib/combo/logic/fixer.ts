@@ -66,6 +66,10 @@ export class LogicPassFixer {
         this.fixedLocations.add(location);
       }
 
+      if (type === 'sr' && settings.silverRupeeShuffle !== 'anywhere') {
+        this.fixedLocations.add(location);
+      }
+
       if (ItemHelpers.isGerudoCard(item) && !this.state.settings.shuffleGerudoCard) {
         this.fixedLocations.add(location);
       }

@@ -1,4 +1,6 @@
 #include <combo.h>
+#include <combo/sr.h>
+#include <combo/dungeon.h>
 
 void Player_UseItemWrapper(GameState_Play* play, Actor_Player* link, s16 itemId)
 {
@@ -28,6 +30,24 @@ void Player_UpdateWrapper(Actor_Player* this, GameState_Play* play)
     Player_Update(this, play);
     comboDpadUpdate(play);
     comboDpadUse(play, DPF_EQUIP);
+
+    if (!(this->state & (PLAYER_ACTOR_STATE_CLIMB | PLAYER_ACTOR_STATE_CLIMB2)))
+    {
+        if (g.delayedSwitchFlag != 0xff)
+        {
+            SetSwitchFlag(play, g.delayedSwitchFlag);
+            g.delayedSwitchFlag = 0xff;
+        }
+    }
+
+    /* Spirit MQ silver rupee chest */
+    if (comboConfig(CFG_OOT_SILVER_RUPEE_SHUFFLE)
+        && (gComboData.mq & (1 << MQ_TEMPLE_SPIRIT))
+        && (play->sceneId == SCE_OOT_TEMPLE_SPIRIT)
+        && (comboSilverRupeesGetCount(SR_SPIRIT1) >= 5))
+    {
+        SetSwitchFlag(play, 0x37);
+    }
 }
 
 int Player_DpadHook(Actor_Player* this, GameState_Play* play)

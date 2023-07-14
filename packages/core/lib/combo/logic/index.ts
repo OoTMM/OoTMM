@@ -54,7 +54,7 @@ export const worldState = (monitor: Monitor, opts: Options) => {
     .exec();
 };
 
-const solvedWorldState = (monitor: Monitor, opts: Options) => {
+export const solvedWorldState = (monitor: Monitor, opts: Options) => {
   let state = worldState(monitor, opts);
   return pipeline(state)
     .apply(LogicPassPrice)

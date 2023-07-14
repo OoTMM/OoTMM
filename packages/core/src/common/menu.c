@@ -1,6 +1,7 @@
 #include <combo.h>
 #include <combo/custom.h>
 #include <combo/dungeon.h>
+#include <combo/sr.h>
 
 #define DD_OOT          0x00
 #define DD_MM           0x01
@@ -86,7 +87,7 @@ static void color4(u8* r, u8* g, u8* b, u8* a, u32 color)
     *a = color & 0xff;
 }
 
-static Vtx gVtxBuffer[1024];
+static Vtx gVtxBuffer[2048];
 static int gVtxBufferIndex;
 
 static Vtx* vtxAlloc(GameState_Play* play, int count)
@@ -400,14 +401,46 @@ static void dungeonDataMm(DungeonData* out, const DungeonDef* def)
     out->compass = gMmSave.inventory.dungeonItems[def->id].compass;
 }
 
+static void printDungeonSilverRupees(GameState_Play* play, float x, float y, int srBase, int srCount)
+{
+    const ComboSilverRupeeData* data;
+    int sr;
+    int digits;
+    int count;
+
+    if (gSilverRupeeData[srBase].count == 0)
+        return;
+
+    OPEN_DISPS(play->gs.gfx);
+    gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 255, 255, 255, 255);
+    drawTexRGBA32(play, 0x06000000 | CUSTOM_KEEP_SMALL_ICON_RUPEE, 12, 12, x, y);
+    x += 12.f;
+
+    for (int i = 0; i < srCount; ++i)
+    {
+        sr = srBase + i;
+        data = gSilverRupeeData + sr;
+        if (data->count == 0)
+            continue;
+        digits = digitCount(data->count);
+        count = comboSilverRupeesGetCount(sr);
+        printNumColored(play, count, data->count, digits, x, y, 0);
+        x += 8.f * digits + 3.f;
+    }
+    CLOSE_DISPS();
+}
+
 static void printDungeonData(GameState_Play* play, int base, int index)
 {
     const DungeonDef* def;
     DungeonData data;
     int triforceMax;
     int triforceDigits;
+    int srBase;
+    int srCount;
     float x;
     float y;
+    float offX;
     u8 r;
     u8 g;
     u8 b;
@@ -416,12 +449,54 @@ static void printDungeonData(GameState_Play* play, int base, int index)
     triforceMax = gOotExtraFlags.triforceWin ? gComboData.triforcePieces : gComboData.triforceGoal;
     triforceDigits = digitCount(triforceMax);
 
+    offX = 0.f;
+    if (comboConfig(CFG_OOT_SILVER_RUPEE_SHUFFLE) && ((base + index) < 13))
+        offX = -30.f;
+
     OPEN_DISPS(play->gs.gfx);
     def = gDungeonDefs + base + index;
+
+    switch (base + index)
+    {
+    case 1:
+        srBase = SR_DC;
+        srCount = 1;
+        break;
+    case 6:
+        srBase = SR_SHADOW1;
+        srCount = 4;
+        break;
+    case 7:
+        srBase = SR_SPIRIT1;
+        srCount = 3;
+        break;
+    case 8:
+        srBase = SR_BOTW;
+        srCount = 1;
+        break;
+    case 9:
+        srBase = SR_IC1;
+        srCount = 2;
+        break;
+    case 11:
+        srBase = SR_GTG1;
+        srCount = 3;
+        break;
+    case 12:
+        srBase = SR_GANON1;
+        srCount = 4;
+        break;
+    default:
+        srBase = -1;
+        srCount = 0;
+        break;
+    }
+
     x = -110.f;
     y = 54.f - 12 * index;
     gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 255, 255, 255, 255);
     printStr(play, def->name, x, y);
+    x += offX;
     if (def->flags & DD_MISC)
     {
         switch (def->id)
@@ -470,7 +545,7 @@ static void printDungeonData(GameState_Play* play, int base, int index)
             if (data.compass)
                 drawTexRGBA32(play, 0x06000000 | CUSTOM_KEEP_SMALL_ICON_COMPASS, 12, 12, x + 116.f, y);
         }
-        if (def->flags & DD_BOSS_KEY && data.bossKey)
+        if ((def->flags & DD_BOSS_KEY) && data.bossKey)
         {
             drawTexRGBA32(play, 0x06000000 | CUSTOM_KEEP_SMALL_ICON_BOSS_KEY, 12, 12, x + 128.f, y);
         }
@@ -486,6 +561,9 @@ static void printDungeonData(GameState_Play* play, int base, int index)
             drawTexRGBA32(play, 0x06000000 | CUSTOM_KEEP_SMALL_ICON_FAIRY, 12, 12, x + 174.f, y);
             printNumColored(play, data.fairies, 15, 2, x + 186.f, y, 0);
         }
+
+        if (comboConfig(CFG_OOT_SILVER_RUPEE_SHUFFLE))
+            printDungeonSilverRupees(play, x + 170.f, y, srBase, srCount);
     }
     CLOSE_DISPS();
 }

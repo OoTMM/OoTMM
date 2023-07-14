@@ -9,6 +9,7 @@
   exits:
     "Dodongo Cavern": "true"
     "Dodongo Cavern Skull": "has_explosives"
+    "Dodongo Cavern Staircase": "true"
     "Dodongo Cavern Upper Staircase": "has_bombflowers && (is_adult || (has_nuts || has_weapon || has_explosives || has_ranged_weapon_child || can_use_sticks))"
     "Dodongo Cavern Upper Ledges": "has_explosives_or_hammer || can_use_din"
     "Dodongo Cavern Lower Tunnel": "has_explosives_or_hammer || event(DC_MQ_SHORTCUT)"
@@ -17,16 +18,31 @@
     STICKS: "has_weapon || can_boomerang"
   locations:
     "MQ Dodongo Cavern Map Chest": "has_bombflowers || can_hammer || has_blue_fire_arrows_mudwall"
-    "MQ Dodongo Cavern GS Time Blocks": "can_play_time && can_damage_skull"
     "MQ Dodongo Cavern Lobby Scrub Front": "can_hit_scrub && scrub_price(0x1c)"
     "MQ Dodongo Cavern Lobby Scrub Back": "can_hit_scrub && scrub_price(0x1d)"
   gossip:
     "Dodongo Cavern Gossip": "has_bombflowers || can_hammer"
-
-"Dodongo Cavern Upper Staircase":
+"Dodongo Cavern Staircase":
   dungeon: DC
   exits:
     "Dodongo Cavern Main": "true"
+    "Dodongo Cavern Upper Staircase": "has_bombflowers"
+  locations:
+    "MQ Dodongo Cavern GS Time Blocks": "can_play_time && can_damage_skull"
+    "MQ Dodongo Cavern SR Beamos": "has_bombflowers"
+    "MQ Dodongo Cavern SR Crate": "true"
+"Dodongo Cavern Upper Staircase":
+  dungeon: DC
+  exits:
+    "Dodongo Cavern After Staircase": "has(RUPEE_SILVER_DC, 5)"
+  locations:
+    "MQ Dodongo Cavern SR Upper Corner Low": "true"
+    "MQ Dodongo Cavern SR Vines": "true"
+    "MQ Dodongo Cavern SR Upper Corner High": "true"
+"Dodongo Cavern After Staircase":
+  dungeon: DC
+  exits:
+    "Dodongo Cavern Upper Staircase": "has(RUPEE_SILVER_DC, 5)"
     "Dodongo Cavern Upper Ledges": "can_hookshot || has_hover_boots || (is_adult && trick(OOT_DC_JUMP))"
     "Dodongo Cavern Upper Lizalfos": "can_use_sticks || (has_fire && (has_explosives_or_hammer || has_blue_fire_arrows_mudwall))"
   locations:

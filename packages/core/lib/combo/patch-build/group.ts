@@ -28,6 +28,7 @@ export const PATCH_GROUPS = [
   'OOT_BLUE_FIRE_ARROWS',
   'ER',
   'DEFAULT_HOLD',
+  'OOT_SILVER_RUPEE_SHUFFLE',
 ] as const;
 
 export type PatchGroup = typeof PATCH_GROUPS[number];
