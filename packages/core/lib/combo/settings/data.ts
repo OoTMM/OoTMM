@@ -718,7 +718,7 @@ export const SETTINGS = [{
     { value: 'separate', name: 'Separate' },
     { value: 'progressive', name: 'Progressive' },
   ],
-  default: 'start'
+  default: 'separate'
 }, {
   key: 'progressiveGoronLullaby',
   name: 'MM Goron Lullaby',
