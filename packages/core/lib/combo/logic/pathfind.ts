@@ -742,7 +742,7 @@ export class Pathfinder {
       case 'ganon': worldGoal = ganon; break;
       case 'majora': worldGoal = majora; break;
       case 'both': worldGoal = ganon && majora; break;
-      case 'triforce': worldGoal = (ws.items.get(Items.SHARED_TRIFORCE) || 0) >= settings.triforceGoal; break;
+      case 'triforce': worldGoal = (this.opts.ignoreItems || ((ws.items.get(Items.SHARED_TRIFORCE) || 0) >= settings.triforceGoal)); break;
       }
 
       if (!worldGoal) {
