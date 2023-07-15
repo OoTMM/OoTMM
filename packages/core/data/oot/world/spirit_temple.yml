@@ -55,12 +55,12 @@
     "Spirit Temple Statue": "true"
     "Spirit Temple Child Hand": "small_keys(SMALL_KEY_SPIRIT, 5)"
   locations:
-    "Spirit Temple Sun Block Room Torches": "(event(SPIRIT_CHILD_DOOR) && can_use_sticks && has(RUPEE_SILVER_SPIRIT_SUN, 5)) || has_fire_spirit || (has_fire_arrows && small_keys(SMALL_KEY_SPIRIT, 4))"
-    "Spirit Temple SR Sun 1": "has_explosives"
-    "Spirit Temple SR Sun 2": "has_explosives"
-    "Spirit Temple SR Sun 3": "has_explosives"
-    "Spirit Temple SR Sun 4": "has_explosives"
-    "Spirit Temple SR Sun 5": "has_explosives"
+    "Spirit Temple Sun Block Room Torches": "(event(SPIRIT_CHILD_DOOR) && can_use_sticks && has(RUPEE_SILVER_SPIRIT_SUN, 5)) || (has_fire_spirit && has(RUPEE_SILVER_SPIRIT_SUN, 5)) || (has_fire_arrows && small_keys(SMALL_KEY_SPIRIT, 4))"
+    "Spirit Temple SR Sun 1": "true"
+    "Spirit Temple SR Sun 2": "true"
+    "Spirit Temple SR Sun 3": "true"
+    "Spirit Temple SR Sun 4": "true"
+    "Spirit Temple SR Sun 5": "true"
     "Spirit Temple GS Iron Knuckle": "(event(SPIRIT_CHILD_DOOR) && has_explosives && can_boomerang) || (event(SPIRIT_ADULT_DOOR) && can_collect_distance) || (can_collect_ageless && (has_explosives || small_keys(SMALL_KEY_SPIRIT, 2)))"
 "Spirit Temple Child Hand":
   dungeon: Spirit
@@ -94,8 +94,8 @@
     "Spirit Temple Statue Adult": "true"
     "Spirit Temple Adult Entrance": "(is_adult && small_keys(SMALL_KEY_SPIRIT, 1)) || (is_child && small_keys(SMALL_KEY_SPIRIT, 5))"
   locations:
-    "Spirit Temple Adult Suns on Wall 1": "(trick(OOT_SPIRIT_CHILD_HOVER) && has(BOOTS_HOVER) && has_explosives) || event(SPIRIT_ADULT_DOOR) || (event(SPIRIT_CHILD_DOOR) && has_hover_boots && has_explosives && trick(OOT_SPIRIT_CHILD_HOVER))"
-    "Spirit Temple Adult Suns on Wall 2": "(trick(OOT_SPIRIT_CHILD_HOVER) && has(BOOTS_HOVER) && has_explosives) || event(SPIRIT_ADULT_DOOR) || (event(SPIRIT_CHILD_DOOR) && has_hover_boots && has_explosives && trick(OOT_SPIRIT_CHILD_HOVER))"
+    "Spirit Temple Adult Suns on Wall 1": "(trick(OOT_SPIRIT_CHILD_HOVER) && has(BOOTS_HOVER) && has_explosives) || event(SPIRIT_ADULT_DOOR) || (event(SPIRIT_CHILD_DOOR) && trick(OOT_SPIRIT_CHILD_HOVER))"
+    "Spirit Temple Adult Suns on Wall 2": "(trick(OOT_SPIRIT_CHILD_HOVER) && has(BOOTS_HOVER) && has_explosives) || event(SPIRIT_ADULT_DOOR) || (event(SPIRIT_CHILD_DOOR) && trick(OOT_SPIRIT_CHILD_HOVER))"
 "Spirit Temple Statue":
   dungeon: Spirit
   exits:
@@ -114,8 +114,8 @@
     "Spirit Temple Adult Climb": "true"
     "Spirit Temple Adult Upper": "small_keys(SMALL_KEY_SPIRIT, 4)"
   locations:
-    "Spirit Temple Statue Hands": "((trick(OOT_SPIRIT_CHILD_HOVER) && has(BOOTS_HOVER) && has_explosives) || event(SPIRIT_ADULT_DOOR) || (event(SPIRIT_CHILD_DOOR) && has_hover_boots && has_explosives && trick(OOT_SPIRIT_CHILD_HOVER))) && can_play(SONG_ZELDA)"
-    "Spirit Temple Statue Upper Right": "((trick(OOT_SPIRIT_CHILD_HOVER) && has(BOOTS_HOVER) && has_explosives) || (event(SPIRIT_ADULT_DOOR) && (has_hover_boots || can_hookshot)) || (event(SPIRIT_CHILD_DOOR) && has_hover_boots && has_explosives && trick(OOT_SPIRIT_CHILD_HOVER))) && can_play(SONG_ZELDA)"
+    "Spirit Temple Statue Hands": "((trick(OOT_SPIRIT_CHILD_HOVER) && has(BOOTS_HOVER) && has_explosives) || event(SPIRIT_ADULT_DOOR) || (event(SPIRIT_CHILD_DOOR) && trick(OOT_SPIRIT_CHILD_HOVER))) && can_play(SONG_ZELDA)"
+    "Spirit Temple Statue Upper Right": "((trick(OOT_SPIRIT_CHILD_HOVER) && has(BOOTS_HOVER) && has_explosives) || (event(SPIRIT_ADULT_DOOR) && (has_hover_boots || can_hookshot)) || (event(SPIRIT_CHILD_DOOR) && trick(OOT_SPIRIT_CHILD_HOVER))) && can_play(SONG_ZELDA)"
 "Spirit Temple Adult Upper":
   dungeon: Spirit
   exits:

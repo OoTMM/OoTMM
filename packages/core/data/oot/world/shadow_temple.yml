@@ -11,22 +11,22 @@
     #There are a lot of ways this works, but it always needs this trick.
     MAGIC: "trick(OOT_LENS)"
   locations:
-    "Shadow Temple Map": "has_lens"
-    "Shadow Temple Hover Boots": "has_lens"
+    "Shadow Temple Map": "has_lens && (has_weapon || can_use_sticks || can_use_din)"
+    "Shadow Temple Hover Boots": "has_lens && (has_weapon || (can_use_sticks && trick(OOT_DEAD_HAND_STICKS)))"
 "Shadow Temple Main":
   dungeon: Shadow
   exits:
     "Shadow Temple Open": "small_keys(SMALL_KEY_SHADOW, 1) && has_explosives"
     "Shadow Temple Scythe Silver Rupees": "true"
   locations:
-    "Shadow Temple Compass": "true"
+    "Shadow Temple Compass": "has_weapon || can_use_sticks || can_use_din"
 "Shadow Temple Scythe Silver Rupees":
   dungeon: Shadow
   exits:
     "Shadow Temple Main": "true"
   locations:
     "Shadow Temple SR Scythe 1": "true"
-    "Shadow Temple SR Scythe 2": "can_hookshot || has_hover_boots"
+    "Shadow Temple SR Scythe 2": "can_hookshot || (is_adult && has_hover_boots)"
     "Shadow Temple SR Scythe 3": "true"
     "Shadow Temple SR Scythe 4": "true"
     "Shadow Temple SR Scythe 5": "true"
@@ -66,7 +66,7 @@
     "Shadow Temple SR Spikes Center": "true"
     "Shadow Temple SR Spikes Front Left": "can_hookshot"
     "Shadow Temple SR Spikes Midair": "has_lens && can_hookshot"
-    "Shadow Temple Invisible Spike Room": "has_weapon"
+    "Shadow Temple Invisible Spike Room": "has_weapon || can_use_sticks || can_use_din"
 "Shadow Temple Skull Pot":
   dungeon: Shadow
   exits:
