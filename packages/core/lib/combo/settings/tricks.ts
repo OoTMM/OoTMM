@@ -27,6 +27,7 @@ export const TRICKS = {
   OOT_BFA_MUDWALLS: "Break mud walls with blue fire arrows",
   OOT_JABU_BOSS_HOVER: "Access Jabu-Jabu Pre-Boss using Hover Boots",
   OOT_SPIRIT_CHILD_HOVER: "Access Adult Spirit as Child using Hover Boots",
+  OOT_VALLEY_GATE_HOVER: "Reach Gerudo Fortress as Child using Hover Boots",
   MM_LENS: "Fewer Lens Requirements (MM)",
   MM_PALACE_BEAN_SKIP: "Skip Planting Beans in Deku Palace",
   MM_DARMANI_WALL: "Climb Mountain Village Wall Blind",

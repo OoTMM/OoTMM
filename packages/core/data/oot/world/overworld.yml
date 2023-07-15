@@ -1287,7 +1287,7 @@
   exits:
     "Lake Hylia": "true"
     "Hyrule Field": "true"
-    "Gerudo Valley After Bridge": "can_longshot || can_ride_epona || (is_adult && carpenters_rescued)"
+    "Gerudo Valley After Bridge": "can_longshot || can_ride_epona || (is_adult && carpenters_rescued) || (is_child && has_hover_boots && trick(OOT_VALLEY_GATE_HOVER))"
     "Octorok Grotto": "can_lift_silver"
   events:
     RUPEES: "true"
