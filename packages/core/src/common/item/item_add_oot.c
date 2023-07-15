@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/item.h>
+#include <combo/sr.h>
 
 const u8 kOotTradeAdult[] = {
     ITEM_OOT_POCKET_EGG,
@@ -271,6 +272,13 @@ static void addRupees(u16 count)
     gOotSave.playerData.rupees += count;
     if (gOotSave.playerData.rupees > max)
         gOotSave.playerData.rupees = max;
+}
+
+static int addSilverRupees(int id, int noEffect)
+{
+    if (noEffect)
+        addRupees(5);
+    return comboSilverRupeesIncCount(id, noEffect);
 }
 
 static void addWallet(int index, int noEffect)
@@ -1263,6 +1271,72 @@ int comboAddItemOot(s16 gi, int noEffect)
         break;
     case GI_OOT_TRIFORCE:
         count = ++gOotExtraFlags.triforceCount;
+        break;
+    case GI_OOT_RUPEE_SILVER_DC:
+        count = addSilverRupees(SR_DC, noEffect);
+        break;
+    case GI_OOT_RUPEE_SILVER_BOTW:
+        count = addSilverRupees(SR_BOTW, noEffect);
+        break;
+    case GI_OOT_RUPEE_SILVER_SPIRIT_CHILD:
+        count = addSilverRupees(SR_SPIRIT1, noEffect);
+        break;
+    case GI_OOT_RUPEE_SILVER_SPIRIT_SUN:
+        count = addSilverRupees(SR_SPIRIT2, noEffect);
+        break;
+    case GI_OOT_RUPEE_SILVER_SPIRIT_BOULDERS:
+        count = addSilverRupees(SR_SPIRIT3, noEffect);
+        break;
+    case GI_OOT_RUPEE_SILVER_SPIRIT_LOBBY:
+        count = addSilverRupees(SR_SPIRIT1, noEffect);
+        break;
+    case GI_OOT_RUPEE_SILVER_SPIRIT_ADULT:
+        count = addSilverRupees(SR_SPIRIT2, noEffect);
+        break;
+    case GI_OOT_RUPEE_SILVER_SHADOW_SCYTHE:
+        count = addSilverRupees(SR_SHADOW1, noEffect);
+        break;
+    case GI_OOT_RUPEE_SILVER_SHADOW_PIT:
+        count = addSilverRupees(SR_SHADOW3, noEffect);
+        break;
+    case GI_OOT_RUPEE_SILVER_SHADOW_SPIKES:
+        count = addSilverRupees(SR_SHADOW4, noEffect);
+        break;
+    case GI_OOT_RUPEE_SILVER_SHADOW_BLADES:
+        count = addSilverRupees(SR_SHADOW2, noEffect);
+        break;
+    case GI_OOT_RUPEE_SILVER_IC_SCYTHE:
+        count = addSilverRupees(SR_IC1, noEffect);
+        break;
+    case GI_OOT_RUPEE_SILVER_IC_BLOCK:
+        count = addSilverRupees(SR_IC2, noEffect);
+        break;
+    case GI_OOT_RUPEE_SILVER_GTG_SLOPES:
+        count = addSilverRupees(SR_GTG1, noEffect);
+        break;
+    case GI_OOT_RUPEE_SILVER_GTG_LAVA:
+        count = addSilverRupees(SR_GTG2, noEffect);
+        break;
+    case GI_OOT_RUPEE_SILVER_GTG_WATER:
+        count = addSilverRupees(SR_GTG3, noEffect);
+        break;
+    case GI_OOT_RUPEE_SILVER_GANON_SPIRIT:
+        count = addSilverRupees(SR_GANON1, noEffect);
+        break;
+    case GI_OOT_RUPEE_SILVER_GANON_LIGHT:
+        count = addSilverRupees(SR_GANON2, noEffect);
+        break;
+    case GI_OOT_RUPEE_SILVER_GANON_FIRE:
+        count = addSilverRupees(SR_GANON3, noEffect);
+        break;
+    case GI_OOT_RUPEE_SILVER_GANON_FOREST:
+        count = addSilverRupees(SR_GANON4, noEffect);
+        break;
+    case GI_OOT_RUPEE_SILVER_GANON_SHADOW:
+        count = addSilverRupees(SR_GANON1, noEffect);
+        break;
+    case GI_OOT_RUPEE_SILVER_GANON_WATER:
+        count = addSilverRupees(SR_GANON2, noEffect);
         break;
     }
 

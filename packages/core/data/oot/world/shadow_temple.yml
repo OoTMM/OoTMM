@@ -17,24 +17,63 @@
   dungeon: Shadow
   exits:
     "Shadow Temple Open": "small_keys(SMALL_KEY_SHADOW, 1) && has_explosives"
+    "Shadow Temple Scythe Silver Rupees": "true"
   locations:
-    "Shadow Temple Silver Rupees": "is_adult && (can_hookshot || has_hover_boots)"
     "Shadow Temple Compass": "true"
+"Shadow Temple Scythe Silver Rupees":
+  dungeon: Shadow
+  exits:
+    "Shadow Temple Main": "true"
+  locations:
+    "Shadow Temple SR Scythe 1": "true"
+    "Shadow Temple SR Scythe 2": "can_hookshot || has_hover_boots"
+    "Shadow Temple SR Scythe 3": "true"
+    "Shadow Temple SR Scythe 4": "true"
+    "Shadow Temple SR Scythe 5": "true"
+    "Shadow Temple Silver Rupees": "has(RUPEE_SILVER_SHADOW_SCYTHE, 5)"
 "Shadow Temple Open":
   dungeon: Shadow
   exits:
-    "Shadow Temple Wind": "small_keys(SMALL_KEY_SHADOW, 3) && can_hookshot && has_lens"
+    "Shadow Temple Falling Spikes": "has(RUPEE_SILVER_SHADOW_PIT, 5)"
+    "Shadow Temple Invisible Spikes": "small_keys(SMALL_KEY_SHADOW, 2) && has_lens"
   locations:
     "Shadow Temple Spinning Blades Visible": "true"
     "Shadow Temple Spinning Blades Invisible": "has_lens"
-    "Shadow Temple Falling Spikes Lower": "true"
-    "Shadow Temple Falling Spikes Upper 1": "is_adult && (has(STRENGTH) && has_lens)"
-    "Shadow Temple Falling Spikes Upper 2": "is_adult && (has(STRENGTH) && has_lens)"
-    "Shadow Temple Invisible Spike Room": "small_keys(SMALL_KEY_SHADOW, 2) && can_hookshot && has_lens"
-    "Shadow Temple Skull": "small_keys(SMALL_KEY_SHADOW, 2) && can_hookshot && has_bombflowers && has_lens"
-    "Shadow Temple GS Skull Pot": "small_keys(SMALL_KEY_SHADOW, 2) && can_hookshot && has_lens"
-    "Shadow Temple GS Falling Spikes": "can_collect_distance"
     "Shadow Temple GS Invisible Scythe": "can_collect_distance"
+    "Shadow Temple SR Pit 1": "true"
+    "Shadow Temple SR Pit 2": "true"
+    "Shadow Temple SR Pit 3": "true"
+    "Shadow Temple SR Pit 4": "true"
+    "Shadow Temple SR Pit 5": "true"
+"Shadow Temple Falling Spikes":
+  dungeon: Shadow
+  exits:
+    "Shadow Temple Open": "true"
+  locations:
+    "Shadow Temple Falling Spikes Lower": "true"
+    "Shadow Temple Falling Spikes Upper 1": "is_adult && has(STRENGTH) && has_lens"
+    "Shadow Temple Falling Spikes Upper 2": "is_adult && has(STRENGTH) && has_lens"
+    "Shadow Temple GS Falling Spikes": "can_collect_distance"
+"Shadow Temple Invisible Spikes":
+  dungeon: Shadow
+  exits:
+    "Shadow Temple Open": "true"
+    "Shadow Temple Wind": "small_keys(SMALL_KEY_SHADOW, 3) && can_hookshot"
+    "Shadow Temple Skull Pot": "has(RUPEE_SILVER_SHADOW_SPIKES, 5)"
+  locations:
+    "Shadow Temple SR Spikes Back Left": "has_lens && can_hookshot"
+    "Shadow Temple SR Spikes Right": "can_hookshot"
+    "Shadow Temple SR Spikes Center": "true"
+    "Shadow Temple SR Spikes Front Left": "can_hookshot"
+    "Shadow Temple SR Spikes Midair": "has_lens && can_hookshot"
+    "Shadow Temple Invisible Spike Room": "has_weapon"
+"Shadow Temple Skull Pot":
+  dungeon: Shadow
+  exits:
+    "Shadow Temple Invisible Spikes": "true"
+  locations:
+    "Shadow Temple Skull": "has_bombflowers"
+    "Shadow Temple GS Skull Pot": "true"
 "Shadow Temple Wind":
   dungeon: Shadow
   exits:

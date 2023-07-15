@@ -16,8 +16,8 @@
     "Ganon Castle Rightmost Scrub": "has_lens && can_hit_scrub && scrub_price(0x24)"
 "Ganon Castle Light":
   dungeon: Ganon
-  events:
-    GANON_TRIAL_LIGHT: "small_keys(SMALL_KEY_GANON, 2) && can_hookshot && has_lens && has_light_arrows"
+  exits:
+    "Ganon Castle Light 2": "small_keys(SMALL_KEY_GANON, 2)"
   locations:
     "Ganon Castle Light Chest Around 1": "true"
     "Ganon Castle Light Chest Around 2": "true"
@@ -27,16 +27,42 @@
     "Ganon Castle Light Chest Around 6": "true"
     "Ganon Castle Light Chest Center": "has_lens && (has_weapon || has_explosives_or_hammer || can_use_slingshot || can_use_sticks)"
     "Ganon Castle Light Chest Lullaby": "small_keys(SMALL_KEY_GANON, 1) && can_play(SONG_ZELDA)"
-"Ganon Castle Forest":
+"Ganon Castle Light 2":
   dungeon: Ganon
   events:
-    GANON_TRIAL_FOREST: "(has_fire_arrows || (can_use_din && has_ranged_weapon_adult)) && has_light_arrows"
+    GANON_TRIAL_LIGHT: "has(RUPEE_SILVER_GANON_LIGHT, 5) && has_lens && has_light_arrows"
+  locations:
+    "Ganon Castle SR Light Alcove Right": "true"
+    "Ganon Castle SR Light Alcove Left": "true"
+    "Ganon Castle SR Light Center Top": "can_hookshot"
+    "Ganon Castle SR Light Center Right": "true"
+    "Ganon Castle SR Light Center Left": "true"
+"Ganon Castle Forest":
+  dungeon: Ganon
+  exits:
+    "Ganon Castle Forest 2": "(has_fire_arrows || (can_use_din && has_ranged_weapon_adult))"
   locations:
     "Ganon Castle Forest Chest": "has_weapon || has_explosives_or_hammer || can_use_slingshot || can_use_sticks"
+"Ganon Castle Forest 2":
+  dungeon: Ganon
+  events:
+    GANON_TRIAL_FOREST: "has(RUPEE_SILVER_GANON_FOREST, 5) && has_hover_boots && has_light_arrows"
+  locations:
+    "Ganon Castle SR Forest Center Right": "has_hover_boots"
+    "Ganon Castle SR Forest Front": "true"
+    "Ganon Castle SR Forest Back Right": "has_hover_boots"
+    "Ganon Castle SR Forest Back Middle": "has_hover_boots"
+    "Ganon Castle SR Forest Center Left": "has_hover_boots"
 "Ganon Castle Fire":
   dungeon: Ganon
   events:
-    GANON_TRIAL_FIRE: "has_tunic_goron_strict && can_longshot && can_lift_gold && has_light_arrows"
+    GANON_TRIAL_FIRE: "has(RUPEE_SILVER_GANON_FIRE, 5) && has_tunic_goron_strict && can_longshot && has_light_arrows"
+  locations:
+    "Ganon Castle SR Fire Back Right": "has_tunic_goron_strict"
+    "Ganon Castle SR Fire Left": "has_tunic_goron_strict"
+    "Ganon Castle SR Fire Far Right": "has_tunic_goron_strict && can_lift_gold"
+    "Ganon Castle SR Fire Front Right": "has_tunic_goron_strict"
+    "Ganon Castle SR Fire Black Pillar": "has_tunic_goron_strict && can_lift_gold"
 "Ganon Castle Water":
   dungeon: Ganon
   events:
@@ -46,6 +72,16 @@
     "Ganon Castle Water Chest 1": "true"
     "Ganon Castle Water Chest 2": "true"
 "Ganon Castle Spirit":
+  dungeon: Ganon
+  exits:
+    "Ganon Castle Spirit 2": "has(RUPEE_SILVER_GANON_SPIRIT, 5)"
+  locations:
+    "Ganon Castle SR Spirit Center Midair": "can_hookshot"
+    "Ganon Castle SR Spirit Front Right": "true"
+    "Ganon Castle SR Spirit Center Bottom": "true"
+    "Ganon Castle SR Spirit Back Left": "true"
+    "Ganon Castle SR Spirit Back Right": "true"
+"Ganon Castle Spirit 2":
   dungeon: Ganon
   events:
     GANON_TRIAL_SPIRIT: "can_hookshot && has_bombchu && has_light_arrows && has_mirror_shield"

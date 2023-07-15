@@ -128,15 +128,15 @@ export class LogicPassHints {
       monitor: Monitor,
       random: Random,
       settings: Settings,
-      world: World,
+      worlds: World[],
       items: ItemPlacement,
       analysis: Analysis,
-      fixedLocations: Set<string>,
+      fixedLocations: Set<Location>,
     },
   ){
     this.hintsAlways = this.alwaysHints();
     this.hintsSometimes = this.sometimesHints();
-    this.pathfinder = new Pathfinder(state.world, state.settings);
+    this.pathfinder = new Pathfinder(state.worlds, state.settings);
     this.woth = new Set(Array.from(this.state.analysis.required).filter(loc => this.isLocationHintable(loc, 'woth')));
     this.gossip = Array.from({ length: this.state.settings.players }).map(_ => ({}));
   }
@@ -196,14 +196,14 @@ export class LogicPassHints {
       return makeRegion('NONE', world);
     }
     const locD = locationData(loc);
-    return makeRegion(this.state.world.regions[locD.id], locD.world as number);
+    return makeRegion(this.state.worlds[locD.world as number].regions[locD.id], locD.world as number);
   }
 
   private isLocationHintable(loc: Location, klass: HintClass) {
     /* Get the item and region  */
     const item = this.state.items.get(loc)!;
     const locD = locationData(loc);
-    const region = this.state.world.regions[locD.id];
+    const region = this.state.worlds[locD.world as number].regions[locD.id];
 
     /* These specific locations are always ignored */
     if (['OOT Temple of Time Medallion', 'MM Oath to Order', 'OOT Hatch Chicken', 'OOT Hatch Pocket Cucco'].includes(locD.id)) {
@@ -211,7 +211,7 @@ export class LogicPassHints {
     }
 
     /* Non-shuffled items are ignored */
-    if (this.state.fixedLocations.has(locD.id)) {
+    if (this.state.fixedLocations.has(loc)) {
       return false;
     }
 
@@ -301,7 +301,7 @@ export class LogicPassHints {
       locs = new Set([locs]);
     }
     const pathfinderState = this.pathfinder.run(null, { gossips: true, recursive: true, items: this.state.items, forbiddenLocations: locs });
-    const gossips = Array.from(pathfinderState.gossips[world]).filter(x => ['gossip', 'gossip-grotto'].includes(this.state.world.gossip[x].type)).filter(x => !this.gossip[world][x]);
+    const gossips = Array.from(pathfinderState.gossips[world]).filter(x => ['gossip', 'gossip-grotto'].includes(this.state.worlds[world].gossip[x].type)).filter(x => !this.gossip[world][x]);
     if (gossips.length === 0) {
       return null;
     }
@@ -328,12 +328,13 @@ export class LogicPassHints {
     return 1;
   }
 
-  private foolishRegions(world: number) {
+  private foolishRegions(worldId: number) {
     let regions: CountMap<string> = new Map;
+    const world = this.state.worlds[worldId];
 
-    for (const locationId in this.state.world.checks) {
-      const location = makeLocation(locationId, world);
-      const region = this.state.world.regions[locationId];
+    for (const locationId in world.checks) {
+      const location = makeLocation(locationId, worldId);
+      const region = world.regions[locationId];
       if (!regions.has(region)) {
         regions.set(region, 0);
       }
@@ -358,25 +359,27 @@ export class LogicPassHints {
     return regions;
   }
 
-  private placeGossipItemExact(world: number, checkWorld: number, checkHint: string, extra: number, isMoon: boolean) {
+  private placeGossipItemExact(worldId: number, checkWorldId: number, checkHint: string, extra: number, isMoon: boolean) {
     if (checkHint === 'NONE') {
       return false;
     }
-    const locations = (this.state.world.checkHints[checkHint] || []).map(x => makeLocation(x, checkWorld));
+    const world = this.state.worlds[worldId];
+    const checkWorld = this.state.worlds[checkWorldId];
+    const locations = (checkWorld.checkHints[checkHint] || []).map(x => makeLocation(x, checkWorldId));
     if (locations.every(l => this.hintedLocations.has(l))) {
       return false;
     }
     const items = locations.map(l => this.state.items.get(l)!);
     let gossip;
     if (isMoon) {
-      const candidates = Object.keys(this.state.world.gossip)
-        .filter(x => this.state.world.gossip[x].type === 'gossip-moon')
-        .filter(x => !this.gossip[world][x]);
+      const candidates = Object.keys(world.gossip)
+        .filter(x => world.gossip[x].type === 'gossip-moon')
+        .filter(x => !this.gossip[worldId][x]);
       if (candidates.length === 0)
         return false;
       gossip = sample(this.state.random, candidates);
     } else {
-      gossip = this.findValidGossip(world, new Set(locations));
+      gossip = this.findValidGossip(worldId, new Set(locations));
     }
     if (!gossip) {
       return false;
@@ -386,12 +389,13 @@ export class LogicPassHints {
     for (const l of locations) {
       this.hintedLocations.add(l);
     }
-    const hint: HintGossip = { game: this.state.world.gossip[gossip].game, type: 'item-exact', items, check: checkHint, world: checkWorld };
-    this.placeWithExtra(world, gossip, hint, extra);
+    const hint: HintGossip = { game: world.gossip[gossip].game, type: 'item-exact', items, check: checkHint, world: checkWorldId };
+    this.placeWithExtra(worldId, gossip, hint, extra);
     return true;
   }
 
-  private placeGossipItemExactPool(world: number, pool: string[], count: number | 'max', extra: number) {
+  private placeGossipItemExactPool(worldId: number, pool: string[], count: number | 'max', extra: number) {
+    const world = this.state.worlds[worldId];
     if (count === 'max') {
       count = pool.length;
     }
@@ -401,21 +405,22 @@ export class LogicPassHints {
       if (placed >= count) {
         break;
       }
-      const locations = (this.state.world.checkHints[checkHint] || []).map(x => makeLocation(x, world));
+      const locations = (world.checkHints[checkHint] || []).map(x => makeLocation(x, worldId));
       if (!locations) {
         continue;
       }
       if (locations.every(l => this.state.settings.junkLocations.includes(locationData(l).id))) {
         continue;
       }
-      if (this.placeGossipItemExact(world, world, checkHint, extra, false)) {
+      if (this.placeGossipItemExact(worldId, worldId, checkHint, extra, false)) {
         placed++;
       }
     }
     return placed;
   }
 
-  private placeGossipFoolish(world: number, regions: CountMap<string>, count: number | 'max', extra: number) {
+  private placeGossipFoolish(worldId: number, regions: CountMap<string>, count: number | 'max', extra: number) {
+    const world = this.state.worlds[worldId];
     if (count === 'max') {
       count = 999;
     }
@@ -428,36 +433,37 @@ export class LogicPassHints {
       }
       const region = sample(this.state.random, regionsArray);
       regions.delete(region);
-      const gossips = Object.keys(this.state.world.gossip)
-        .filter(x => !this.gossip[world][x])
-        .filter(x => ['gossip', 'gossip-grotto'].includes(this.state.world.gossip[x].type));
+      const gossips = Object.keys(world.gossip)
+        .filter(x => !this.gossip[worldId][x])
+        .filter(x => ['gossip', 'gossip-grotto'].includes(world.gossip[x].type));
       if (gossips.length === 0)
         break;
       const gossip = sample(this.state.random, gossips);
 
       /* Found a gossip */
-      for (const locId in this.state.world.checks) {
-        const loc = makeLocation(locId, world);
-        if (this.state.world.regions[locId] === region) {
+      for (const locId in world.checks) {
+        const loc = makeLocation(locId, worldId);
+        if (world.regions[locId] === region) {
           this.hintedLocations.add(loc);
         }
       }
 
-      const hint: HintGossip = { game: this.state.world.gossip[gossip].game, type: 'foolish', region: makeRegion(region, world) };
-      this.placeWithExtra(world, gossip, hint, extra);
+      const hint: HintGossip = { game: world.gossip[gossip].game, type: 'foolish', region: makeRegion(region, worldId) };
+      this.placeWithExtra(worldId, gossip, hint, extra);
 
       placed++;
     }
     return placed;
   }
 
-  private placeGossipHero(world: number, count: number | 'max', extra: number) {
+  private placeGossipHero(worldId: number, count: number | 'max', extra: number) {
+    const world = this.state.worlds[worldId];
     if (count === 'max') {
       count = 999;
     }
     let placed = 0;
     const locs = shuffle(this.state.random, Array.from(this.woth)
-      .filter(loc => locationData(loc).world === world)
+      .filter(loc => locationData(loc).world === worldId)
       .filter(loc => !this.hintedLocations.has(loc)));
 
     for (;;) {
@@ -465,27 +471,28 @@ export class LogicPassHints {
         break;
       }
       const loc = locs.pop()!;
-      const gossip = this.findValidGossip(world, loc);
+      const gossip = this.findValidGossip(worldId, loc);
       if (gossip !== null) {
         const locD = locationData(loc);
         this.hintedLocations.add(loc);
-        const hint: HintGossip = { game: this.state.world.gossip[gossip].game, type: 'hero', region: makeRegion(this.state.world.regions[locD.id], locD.world as number), location: loc };
-        this.placeWithExtra(world, gossip, hint, extra);
+        const hint: HintGossip = { game: world.gossip[gossip].game, type: 'hero', region: makeRegion(world.regions[locD.id], locD.world as number), location: loc };
+        this.placeWithExtra(worldId, gossip, hint, extra);
         placed++;
       }
     }
     return placed;
   }
 
-  private placeGossipJunk(world: number, count: number | 'max', extra: number, moon: boolean) {
+  private placeGossipJunk(worldId: number, count: number | 'max', extra: number, moon: boolean) {
+    const world = this.state.worlds[worldId];
     if (count === 'max') {
       count = 999;
     }
     let placed = 0;
-    let gossips = Object.keys(this.state.world.gossip)
-      .filter(x => !this.gossip[world][x]);
+    let gossips = Object.keys(world.gossip)
+      .filter(x => !this.gossip[worldId][x]);
     if (!moon) {
-      gossips = gossips.filter(x => ['gossip', 'gossip-grotto'].includes(this.state.world.gossip[x].type));
+      gossips = gossips.filter(x => ['gossip', 'gossip-grotto'].includes(world.gossip[x].type));
     }
     gossips = shuffle(this.state.random, gossips);
     for (;;) {
@@ -494,14 +501,15 @@ export class LogicPassHints {
       }
       const gossip = gossips.pop()!;
       const id = randomInt(this.state.random, 65536);
-      const hint: HintGossip = { game: this.state.world.gossip[gossip].game, type: 'junk', id };
-      this.placeWithExtra(world, gossip, hint, extra);
+      const hint: HintGossip = { game: world.gossip[gossip].game, type: 'junk', id };
+      this.placeWithExtra(worldId, gossip, hint, extra);
       placed++;
     }
     return placed;
   }
 
-  private placeGossipItemRegion(world: number, location: Location | null, extra: number, isMoon: boolean) {
+  private placeGossipItemRegion(worldId: number, location: Location | null, extra: number, isMoon: boolean) {
+    const world = this.state.worlds[worldId];
     if (location === null) {
       return false;
     }
@@ -510,27 +518,27 @@ export class LogicPassHints {
       return false;
     }
     const item = this.state.items.get(location)!;
-    const hint = this.state.world.checks[locD.id].hint;
-    if (this.placeGossipItemExact(world, locD.world as number, hint, extra, isMoon)) {
+    const hint = world.checks[locD.id].hint;
+    if (this.placeGossipItemExact(worldId, locD.world as number, hint, extra, isMoon)) {
       return true;
     }
     let gossip;
     if (isMoon) {
-      const candidates = Object.keys(this.state.world.gossip)
-        .filter(x => this.state.world.gossip[x].type === 'gossip-moon')
-        .filter(x => !this.gossip[world][x]);
+      const candidates = Object.keys(world.gossip)
+        .filter(x => world.gossip[x].type === 'gossip-moon')
+        .filter(x => !this.gossip[worldId][x]);
       if (candidates.length === 0)
         return false;
       gossip = sample(this.state.random, candidates);
     } else {
-      gossip = this.findValidGossip(world, location);
+      gossip = this.findValidGossip(worldId, location);
     }
     if (gossip === null) {
       return false;
     }
     this.hintedLocations.add(location);
-    const h: HintGossip = { game: this.state.world.gossip[gossip].game, type: 'item-region', item, region: makeRegion(this.state.world.regions[locD.id], locD.world as number) };
-    this.placeWithExtra(world, gossip, h, extra);
+    const h: HintGossip = { game: world.gossip[gossip].game, type: 'item-region', item, region: makeRegion(world.regions[locD.id], locD.world as number) };
+    this.placeWithExtra(worldId, gossip, h, extra);
     return true;
   }
 
@@ -570,28 +578,29 @@ export class LogicPassHints {
     return placed;
   }
 
-  private place(world: number, loc: string, hint: HintGossip) {
+  private place(worldId: number, loc: string, hint: HintGossip) {
     /* KLUDGE */
     if (loc.startsWith('MM ')) {
       hint.game = 'mm';
     } else {
       hint.game = 'oot';
     }
-    this.gossip[world][loc] = { ...hint };
+    this.gossip[worldId][loc] = { ...hint };
   }
 
-  private placeWithExtra(world: number, loc: string, hint: HintGossip, extra: number) {
-    this.place(world, loc, hint);
+  private placeWithExtra(worldId: number, loc: string, hint: HintGossip, extra: number) {
+    const world = this.state.worlds[worldId];
+    this.place(worldId, loc, hint);
 
     for (let i = 0; i < extra; ++i) {
-      const gossips = Object.keys(this.state.world.gossip)
-        .filter(x => !this.gossip[world][x])
-        .filter(x => ['gossip', 'gossip-grotto'].includes(this.state.world.gossip[x].type));
+      const gossips = Object.keys(world.gossip)
+        .filter(x => !this.gossip[worldId][x])
+        .filter(x => ['gossip', 'gossip-grotto'].includes(world.gossip[x].type));
       if (gossips.length === 0) {
         break;
       }
       const gossip = sample(this.state.random, gossips);
-      this.place(world, gossip, hint);
+      this.place(worldId, gossip, hint);
     }
   }
 

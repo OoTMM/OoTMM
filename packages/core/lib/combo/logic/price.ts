@@ -139,7 +139,7 @@ export class LogicPassPrice {
   constructor(
     private state: {
       settings: Settings,
-      world: World,
+      worlds: World[],
       random: Random,
     }
   ) {
@@ -181,21 +181,23 @@ export class LogicPassPrice {
     }
   }
 
-  private shufflePrices(range: string, type: PriceRandoType) {
+  private shufflePrices(world: World, range: string, type: PriceRandoType) {
     const base = PRICE_RANGES[range];
     const size = PRICE_COUNTS[range];
     for (let i = 0; i < size; ++i) {
-      const value = this.state.world.prices[base + i];
-      this.state.world.prices[base + i] = this.adjustPrice(type, value);
+      const value = world.prices[base + i];
+      world.prices[base + i] = this.adjustPrice(type, value);
     }
   }
 
   run() {
-    this.shufflePrices('OOT_SHOPS', this.state.settings.priceOotShops);
-    this.shufflePrices('OOT_SCRUBS', this.state.settings.priceOotScrubs);
-    this.shufflePrices('MM_SHOPS', this.state.settings.priceMmShops);
-    this.shufflePrices('MM_SHOPS_EX', this.state.settings.priceMmShops);
-    this.shufflePrices('MM_TINGLE', this.state.settings.priceMmTingle);
+    for (const world of this.state.worlds) {
+      this.shufflePrices(world, 'OOT_SHOPS', this.state.settings.priceOotShops);
+      this.shufflePrices(world, 'OOT_SCRUBS', this.state.settings.priceOotScrubs);
+      this.shufflePrices(world, 'MM_SHOPS', this.state.settings.priceMmShops);
+      this.shufflePrices(world, 'MM_SHOPS_EX', this.state.settings.priceMmShops);
+      this.shufflePrices(world, 'MM_TINGLE', this.state.settings.priceMmTingle);
+    }
 
     return {};
   }

@@ -16,19 +16,49 @@
     "MQ Gerudo Training Grounds Maze Third Chest": "true"
     "MQ Gerudo Training Grounds Maze Fourth Chest": "small_keys(SMALL_KEY_GTG, 1)"
 "Gerudo Training Grounds Right Path":
+  # TODO: This area should probably be split for better silver rupee logic
   dungeon: GTG
   exits:
     "Gerudo Training Grounds": "true"
+    "Gerudo Training Grounds Water Room": "has(RUPEE_SILVER_GTG_LAVA, 6)"
   locations:
     "MQ Gerudo Training Grounds Right Side Dinolfos Chest": "is_adult"
-    "MQ Gerudo Training Grounds Water Room Chest": "has_hover_boots && (can_use_bow || can_longshot) && has_fire && has_iron_boots && has_tunic_zora"
-"Gerudo Training Grounds Left Path":
+    "MQ Gerudo Training Grounds SR Lava Back-Left": "has_hover_boots && (can_use_bow || can_longshot) && has_fire"
+    "MQ Gerudo Training Grounds SR Lava Back-Right": "has_hover_boots && (can_use_bow || can_longshot) && has_fire"
+    "MQ Gerudo Training Grounds SR Lava Center": "has_hover_boots && (can_use_bow || can_longshot) && has_fire"
+    "MQ Gerudo Training Grounds SR Lava Front-Right": "has_hover_boots && (can_use_bow || can_longshot) && has_fire"
+    "MQ Gerudo Training Grounds SR Lava Front-Left": "has_hover_boots && (can_use_bow || can_longshot) && has_fire"
+    "MQ Gerudo Training Grounds SR Lava Front": "has_hover_boots && (can_use_bow || can_longshot) && has_fire"
+"Gerudo Training Grounds Water Room":
   dungeon: GTG
   exits:
-    "Gerudo Training Grounds": "true"
-    "Gerudo Training Grounds Stalfos Room": "can_longshot"
+    "Gerudo Training Grounds Right Path": "true"
   locations:
-   "MQ Gerudo Training Grounds Left Side Iron Knuckle Chest": "(has_weapon || can_use_sticks) && (has_shield || is_adult)" #Kid's size, the sand, and the time limit together make this fight unreasonable without shield, mountains of health, or Nayru's.
+    "MQ Gerudo Training Grounds Water Room Chest": "has(RUPEE_SILVER_GTG_WATER, 3)"
+    "MQ Gerudo Training Grounds SR Water Top-Left": "has_iron_boots && has_tunic_zora"
+    "MQ Gerudo Training Grounds SR Water Center": "has_iron_boots && has_tunic_zora"
+    "MQ Gerudo Training Grounds SR Water Bottom-Right": "has_iron_boots && has_tunic_zora"
+"Gerudo Training Grounds Left Path":
+  dungeon: GTG
+  events:
+    GTG_IRON_KNUCKLE: "(has_weapon || can_use_sticks) && (has_shield || is_adult)" #Kid's size, the sand, and the time limit together make this fight unreasonable without shield, mountains of health, or Nayru's.
+  exits:
+    "Gerudo Training Grounds": "true"
+    "Gerudo Training Grounds Slopes": "event(GTG_IRON_KNUCKLE)"
+  locations:
+   "MQ Gerudo Training Grounds Left Side Iron Knuckle Chest": "event(GTG_IRON_KNUCKLE)"
+"Gerudo Training Grounds Slopes":
+  dungeon: GTG
+  exits:
+    "Gerudo Training Grounds Left Path": "true"
+    "Gerudo Training Grounds Stalfos Room": "can_longshot && has(RUPEE_SILVER_GTG_SLOPES, 5)"
+  locations:
+    # TODO: Improve this logic
+    "MQ Gerudo Training Grounds SR Slopes Top Right": "can_longshot"
+    "MQ Gerudo Training Grounds SR Slopes Middle": "can_longshot"
+    "MQ Gerudo Training Grounds SR Slopes Front": "can_longshot"
+    "MQ Gerudo Training Grounds SR Slopes Front-Left": "can_longshot"
+    "MQ Gerudo Training Grounds SR Slopes Front-Right": "can_longshot"
 "Gerudo Training Grounds Stalfos Room":
   dungeon: GTG
   exits:

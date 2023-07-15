@@ -2,7 +2,6 @@ import { sortBy } from 'lodash';
 
 import { Options } from '../options';
 import { Settings, Trick, TRICKS } from '../settings';
-import { EntranceShuffleResult } from './entrance';
 import { HintGossipFoolish, HintGossipHero, HintGossipItemExact, HintGossipItemRegion, Hints } from './hints';
 import { World } from './world';
 import { itemName } from '../names';
@@ -14,6 +13,7 @@ import { ItemPlacement } from './solve';
 import { Location, locationData, makeLocation } from './locations';
 import { Region, regionData } from './regions';
 import { PlayerItem } from '../items';
+import { worldState } from '.';
 
 const VERSION = process.env.VERSION || 'XXX';
 
@@ -25,15 +25,13 @@ export class LogicPassSpoiler {
 
   constructor(
     private readonly state: {
-      world: World,
+      worlds: World[],
       items: ItemPlacement,
       analysis: Analysis,
       opts: Options,
       settings: Settings,
       hints: Hints,
-      entrances: EntranceShuffleResult,
       monitor: Monitor,
-      mq: Set<string>,
     }
   ) {
     this.buffer = [];
@@ -145,27 +143,54 @@ export class LogicPassSpoiler {
   }
 
   private writeMQ() {
-    const { mq } = this.state;
-    if (mq.size === 0) {
+    let worlds = this.state.worlds;
+    if (!this.state.settings.distinctWorlds) {
+      worlds = [this.state.worlds[0]];
+    }
+    if (!worlds.some(world => world.mq.size > 0)) {
       return;
     }
 
     this.indent('MQ Dungeons');
-    for (const d of mq) {
-      this.write(`${d}`);
+    for (let i = 0; i < worlds.length; ++i) {
+      if (worlds.length > 1) {
+        this.indent(`World ${i + 1}`);
+      }
+
+      for (const d of worlds[i].mq) {
+        this.write(`${d}`);
+      }
+
+      if (worlds.length > 1) {
+        this.unindent('');
+      }
     }
     this.unindent('');
   }
 
   private writeEntrances() {
-    const { entrances } = this.state;
-    if (entrances.overrides.size === 0) {
+    let worlds = this.state.worlds;
+    if (!this.state.settings.distinctWorlds) {
+      worlds = [this.state.worlds[0]];
+    }
+    if (!worlds.some(world => world.entranceOverrides.size > 0)) {
       return;
     }
 
     this.indent('Entrances');
-    for (const [src, dst] of entrances.overrides) {
-      this.write(`${src} -> ${dst}`);
+    for (let i = 0; i < worlds.length; ++i) {
+      const world = worlds[i];
+      if (worlds.length > 1) {
+        this.indent(`World ${i + 1}`);
+      }
+
+      for (const [src, dst] of world.entranceOverrides) {
+        this.write(`${src} -> ${dst}`);
+      }
+
+      if (worlds.length > 1) {
+        this.unindent('');
+      }
     }
     this.unindent('');
   }
@@ -173,9 +198,9 @@ export class LogicPassSpoiler {
   private writeHints() {
     const globalHints = this.state.hints;
     this.indent('Hints');
-    for (let world = 0; world < this.worlds; ++world) {
-      if (this.isMulti) this.indent(`World ${world + 1}:`);
-      const hints = globalHints[world];
+    for (let worldId = 0; worldId < this.worlds; ++worldId) {
+      if (this.isMulti) this.indent(`World ${worldId + 1}:`);
+      const hints = globalHints[worldId];
       const gossipStones = Object.entries(hints.gossip);
       const gossipsHero = gossipStones.filter(stone => stone[1].type === 'hero').sort() as [string, HintGossipHero][];
       const gossipsFoolish = gossipStones.filter(stone => stone[1].type === 'foolish').sort() as [string, HintGossipFoolish][];
@@ -203,8 +228,9 @@ export class LogicPassSpoiler {
       if (gossipsItemExact.length > 0) {
         this.indent('Specific Hints:');
         for (const [stone, hint] of gossipsItemExact) {
+          const world = this.state.worlds[hint.world];
           this.write(stone);
-          this.write(`  ${this.state.world.checkHints[hint.check].join(', ')} (${hint.items.map(x => this.itemName(x)).join(', ')})`);
+          this.write(`  ${world.checkHints[hint.check].join(', ')} (${hint.items.map(x => this.itemName(x)).join(', ')})`);
         }
         this.unindent('');
       }
@@ -257,11 +283,13 @@ export class LogicPassSpoiler {
   }
 
   private writeRaw() {
-    const { world, items: placement, settings } = this.state;
+    const { worlds, items: placement, settings } = this.state;
+    const allLocsCount = worlds.map(x => x.locations.size).reduce((a, b) => a + b, 0);
     this.writeSectionHeader();
-    this.indent(`Location List (${Object.keys(world.regions).length})`);
+    this.indent(`Location List (${allLocsCount})`);
     for (let i = 0; i < this.state.settings.players; ++i) {
       if (this.isMulti) this.indent(`World ${i+1}`);
+      const world = worlds[i];
       const regionNames = new Set(Object.values(world.regions));
       const dungeonLocations = Object.values(world.dungeons).reduce((acc, x) => new Set([...acc, ...x]));
       for (const region of regionNames) {

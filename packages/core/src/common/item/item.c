@@ -211,6 +211,9 @@ static u16 makeOverrideKey(int type, u16 sceneId, u16 id)
     case OV_SCRUB:
         sceneId = SCE_SCRUB;
         break;
+    case OV_SR:
+        sceneId = SCE_SR;
+        break;
     }
 
 #if defined(GAME_MM)

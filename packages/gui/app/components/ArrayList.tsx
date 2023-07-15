@@ -43,7 +43,7 @@ export function ArrayList({ options, selected, add, remove, clear }: ArrayListPr
         {selected.map(v => (
           <li key={v}>
             <span className="plando-remove" onClick={() => remove(v)}><FontAwesomeIcon icon={solid('xmark')}/></span>
-            <span className="plando-item">{options.find(x => x.value === v)!.label}</span>
+            <span className="plando-item">{options.find(x => x.value === v)?.label || v}</span>
           </li>
         ))}
       </ol>

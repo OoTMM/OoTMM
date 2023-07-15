@@ -13,13 +13,33 @@
   exits:
     "Spirit Temple": "is_child"
     "Spirit Temple Child Climb": "is_child && small_keys(SMALL_KEY_SPIRIT, 1)"
-    "Spirit Temple Child Back": can_use_sticks || has_explosives_or_hammer || ((can_boomerang || has_nuts) && (has_weapon || can_use_slingshot))
+    "Spirit Temple Child Left": "can_use_sticks || has_explosives_or_hammer || ((can_boomerang || has_nuts) && (has_weapon || can_use_slingshot))"
+    "Spirit Temple Child Right": "can_use_sticks || has_explosives_or_hammer || ((can_boomerang || has_nuts) && (has_weapon || can_use_slingshot))"
+"Spirit Temple Child Left":
+  dungeon: Spirit
+  exits:
+    "Spirit Temple Child Entrance": "true"
+    "Spirit Temple Child Back": "has_ranged_weapon_child"
+"Spirit Temple Child Right":
+  dungeon: Spirit
+  events:
+    SPIRIT_CHEST_CHILD: "has_fire || (has(RUPEE_SILVER_SPIRIT_CHILD, 5) && can_use_sticks)"
+  exits:
+    "Spirit Temple Child Entrance": "true"
+    "Spirit Temple Child Back": "has(RUPEE_SILVER_SPIRIT_CHILD, 5)"
 "Spirit Temple Child Back":
   dungeon: Spirit
+  exits:
+    "Spirit Temple Child Right": "has(RUPEE_SILVER_SPIRIT_CHILD, 5)"
   locations:
-    "Spirit Temple Child First Chest": "has_ranged_weapon_child"
-    "Spirit Temple Child Second Chest": "has_ranged_weapon_child && (can_use_sticks || can_use_din)"
+    "Spirit Temple Child First Chest": "true"
+    "Spirit Temple Child Second Chest": "event(SPIRIT_CHEST_CHILD)"
     "Spirit Temple GS Child Fence": "has_ranged_weapon_child"
+    "Spirit Temple SR Child 1": "true"
+    "Spirit Temple SR Child 2": "true"
+    "Spirit Temple SR Child 3": "true"
+    "Spirit Temple SR Child 4": "true"
+    "Spirit Temple SR Child 5": "true"
 "Spirit Temple Child Climb":
   dungeon: Spirit
   exits:
@@ -35,7 +55,12 @@
     "Spirit Temple Statue": "true"
     "Spirit Temple Child Hand": "small_keys(SMALL_KEY_SPIRIT, 5)"
   locations:
-    "Spirit Temple Sun Block Room Torches": "(event(SPIRIT_CHILD_DOOR) && can_use_sticks && has_explosives) || has_fire_spirit || (has_fire_arrows && small_keys(SMALL_KEY_SPIRIT, 4))"
+    "Spirit Temple Sun Block Room Torches": "(event(SPIRIT_CHILD_DOOR) && can_use_sticks && has(RUPEE_SILVER_SPIRIT_SUN, 5)) || has_fire_spirit || (has_fire_arrows && small_keys(SMALL_KEY_SPIRIT, 4))"
+    "Spirit Temple SR Sun 1": "has_explosives"
+    "Spirit Temple SR Sun 2": "has_explosives"
+    "Spirit Temple SR Sun 3": "has_explosives"
+    "Spirit Temple SR Sun 4": "has_explosives"
+    "Spirit Temple SR Sun 5": "has_explosives"
     "Spirit Temple GS Iron Knuckle": "(event(SPIRIT_CHILD_DOOR) && has_explosives && can_boomerang) || (event(SPIRIT_ADULT_DOOR) && can_collect_distance) || (can_collect_ageless && (has_explosives || small_keys(SMALL_KEY_SPIRIT, 2)))"
 "Spirit Temple Child Hand":
   dungeon: Spirit
@@ -48,10 +73,21 @@
   dungeon: Spirit
   exits:
     "Spirit Temple Adult Climb": "small_keys(SMALL_KEY_SPIRIT, 1)"
+    "Spirit Temple Adult Boulders": "has_ranged_weapon || can_boomerang || has_bombchu"
   locations:
-    "Spirit Temple Adult Silver Rupees": "has_ranged_weapon || can_boomerang || (is_adult && has_explosives) || (is_child && has_bombchu)"
     "Spirit Temple Adult Lullaby": "can_play(SONG_ZELDA) && can_hookshot"
-    "Spirit Temple GS Boulders": "can_play_time && (has_ranged_weapon || can_boomerang || (is_adult && has_explosives) || (is_child && has_bombchu))"
+"Spirit Temple Adult Boulders":
+  dungeon: Spirit
+  exits:
+    "Spirit Temple Adult Entrance": "true"
+  locations:
+    "Spirit Temple GS Boulders": "can_play_time"
+    "Spirit Temple Adult Silver Rupees": "has(RUPEE_SILVER_SPIRIT_BOULDERS, 5)"
+    "Spirit Temple SR Boulders 1": "true"
+    "Spirit Temple SR Boulders 2": "true"
+    "Spirit Temple SR Boulders 3": "true"
+    "Spirit Temple SR Boulders 4": "true"
+    "Spirit Temple SR Boulders 5": "true"
 "Spirit Temple Adult Climb":
   dungeon: Spirit
   exits:

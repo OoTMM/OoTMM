@@ -1,5 +1,5 @@
 import { Settings } from '../settings';
-import { Location, isLocationRenewable, makePlayerLocations } from './locations';
+import { Location, isLocationRenewable, locationData, makeLocation, makePlayerLocations } from './locations';
 import { Pathfinder, PathfinderState } from './pathfind';
 import { World } from './world';
 import { Random, sample } from '../random';
@@ -21,13 +21,13 @@ export class LogicPassAnalysisFoolish {
     private state: {
       monitor: Monitor;
       random: Random;
-      world: World;
+      worlds: World[];
       settings: Settings;
       items: ItemPlacement;
       analysis: Analysis;
     }
   ) {
-    this.pathfinder = new Pathfinder(this.state.world, this.state.settings);
+    this.pathfinder = new Pathfinder(this.state.worlds, this.state.settings);
     this.conditionallyRequiredLocations = new Set();
   }
 
@@ -138,8 +138,9 @@ export class LogicPassAnalysisFoolish {
   }
 
   private uselessLocs() {
+    const allLocs = this.state.worlds.map((x, i) => [...x.locations].map(y => makeLocation(y, i))).flat();
     const locs = new Set<Location>();
-    for (const loc of makePlayerLocations(this.state.settings, Object.keys(this.state.world.checks))) {
+    for (const loc of allLocs) {
       if (this.state.analysis.unreachable.has(loc)) continue;
       if (this.state.analysis.required.has(loc)) continue;
       if (this.conditionallyRequiredLocations.has(loc)) continue;
@@ -174,13 +175,15 @@ export class LogicPassAnalysisFoolish {
     }
 
     /* Get all candidates */
+    const allLocs = this.state.worlds.map((x, i) => [...x.locations].map(y => makeLocation(y, i))).flat();
     const locsSet = new Set<Location>();
-    for (const loc of makePlayerLocations(this.state.settings, Object.keys(this.state.world.checks))) {
+    for (const loc of allLocs) {
       if (this.state.analysis.required.has(loc)) continue;
       if (this.state.analysis.unreachable.has(loc)) continue;
       if (this.state.analysis.useless.has(loc)) continue;
       const item = this.state.items.get(loc)!;
-      if (ItemHelpers.isItemConsumable(item.item) && !isLocationRenewable(this.state.world, loc) && !ItemHelpers.isItemLicense(item.item)) continue;
+      const locD = locationData(loc);
+      if (ItemHelpers.isItemConsumable(item.item) && !isLocationRenewable(this.state.worlds[locD.world as number], loc) && !ItemHelpers.isItemLicense(item.item)) continue;
       locsSet.add(loc);
     }
 

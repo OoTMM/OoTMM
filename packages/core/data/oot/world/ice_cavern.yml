@@ -2,14 +2,52 @@
   dungeon: IC
   exits:
     "Zora Fountain Frozen": "true"
-  events:
-    BLUE_FIRE: "is_adult && has_bottle"
+    "Ice Cavern HP Room": "has_blue_fire"
+    "Ice Cavern Block Room": "has_blue_fire"
+    "Ice Cavern First Fire Room": "is_adult && has(RUPEE_SILVER_IC_SCYTHE, 5)"
   locations:
-    "Ice Cavern Iron Boots": "has_blue_fire && (can_use_sticks || can_use_sword_master || can_use_sword_goron || has_explosives)"
-    "Ice Cavern Map": "has_blue_fire && is_adult"
-    "Ice Cavern Compass": "has_blue_fire && (can_use_sticks || can_use_sword_master || can_use_sword_goron || has_explosives)"
-    "Ice Cavern HP": "has_blue_fire && (can_use_sticks || can_use_sword_master || can_use_sword_goron || has_explosives)"
-    "Ice Cavern Sheik Song": "has_blue_fire && (can_use_sticks || can_use_sword_master || can_use_sword_goron || has_explosives)"
-    "Ice Cavern GS Scythe Room": "can_collect_distance && (can_use_sticks || can_use_sword_master || can_use_sword_goron || has_explosives)"
-    "Ice Cavern GS Block Room": "has_blue_fire && can_collect_distance && (can_use_sticks || can_use_sword_master || can_use_sword_goron || has_explosives)"
-    "Ice Cavern GS HP Room": "has_blue_fire && can_collect_distance && (can_use_sticks || can_use_sword_master || can_use_sword_goron || has_explosives)"
+    "Ice Cavern GS Scythe Room": "can_collect_distance"
+    "Ice Cavern SR Scythe Left": "true"
+    "Ice Cavern SR Scythe Center Left": "true"
+    "Ice Cavern SR Scythe Back": "true"
+    "Ice Cavern SR Scythe Center Right": "true"
+    "Ice Cavern SR Scythe Midair": "is_adult"
+"Ice Cavern HP Room":
+  dungeon: IC
+  exits:
+    "Ice Cavern": "true"
+  events:
+    BLUE_FIRE: "true"
+  locations:
+    "Ice Cavern Compass": "true"
+    "Ice Cavern HP": "has_blue_fire"
+    "Ice Cavern GS HP Room": "can_collect_distance"
+"Ice Cavern First Fire Room":
+  dungeon: IC
+  exits:
+    "Ice Cavern": "true"
+  events:
+    BLUE_FIRE: "true"
+  locations:
+    "Ice Cavern Map": "has_blue_fire"
+"Ice Cavern Block Room":
+  dungeon: IC
+  exits:
+    "Ice Cavern": "true"
+    "Ice Cavern End": "has_blue_fire && has(RUPEE_SILVER_IC_BLOCK, 5)"
+  events:
+    BLUE_FIRE: "true"
+  locations:
+    "Ice Cavern GS Block Room": "can_collect_distance"
+    "Ice Cavern SR Blocks Back Left": "true"
+    "Ice Cavern SR Blocks Back Right": "true"
+    "Ice Cavern SR Blocks Center": "true"
+    "Ice Cavern SR Blocks Alcove": "true"
+    "Ice Cavern SR Blocks Front Left": "true"
+"Ice Cavern End":
+  dungeon: IC
+  exits:
+    "Ice Cavern Block Room": "true"
+  locations:
+    "Ice Cavern Iron Boots": "true"
+    "Ice Cavern Sheik Song": "true"

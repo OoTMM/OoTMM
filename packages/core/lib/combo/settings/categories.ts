@@ -35,6 +35,9 @@ export const SETTINGS_CATEGORIES: SettingCategory[] = [{
   }, {
     name: "Item Extensions",
     key: "extensions",
+  }, {
+    name: "Ageless items",
+    key: "ageless",
   }],
 }, {
   name: "Entrances",

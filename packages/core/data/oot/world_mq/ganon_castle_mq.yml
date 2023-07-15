@@ -32,14 +32,32 @@
 "Ganon Castle Fire":
   dungeon: Ganon
   events:
-    GANON_TRIAL_FIRE: "has_light_arrows && has_tunic_goron_strict && can_lift_gold && (can_longshot || has_hover_boots)"
+    GANON_TRIAL_FIRE: "has_light_arrows && has_tunic_goron_strict && can_lift_gold && (can_longshot || has_hover_boots) && has(RUPEE_SILVER_GANON_FIRE, 5)"
+  locations:
+    # TODO: Write proper logic
+    "MQ Ganon Castle SR Fire Under Pillar": "has_tunic_goron_strict && can_lift_gold && (can_longshot || has_hover_boots)"
+    "MQ Ganon Castle SR Fire Center-Left": "has_tunic_goron_strict && can_lift_gold && (can_longshot || has_hover_boots)"
+    "MQ Ganon Castle SR Fire Back-Left": "has_tunic_goron_strict && can_lift_gold && (can_longshot || has_hover_boots)"
+    "MQ Ganon Castle SR Fire High Above Lava": "has_tunic_goron_strict && can_lift_gold && (can_longshot || has_hover_boots)"
+    "MQ Ganon Castle SR Fire Front-Left": "has_tunic_goron_strict && can_lift_gold && (can_longshot || has_hover_boots)"
 "Ganon Castle Water":
   dungeon: Ganon
   events:
     BLUE_FIRE: "true"
-    GANON_TRIAL_WATER: "has_blue_fire && small_keys(SMALL_KEY_GANON, 3) && has_light_arrows"
+  exits:
+    "Ganon Castle Water Silver Rupees": "has_blue_fire && small_keys(SMALL_KEY_GANON, 3)"
   locations:
     "MQ Ganon Castle Water Trial Chest": "has_blue_fire"
+"Ganon Castle Water Silver Rupees":
+  dungeon: Ganon
+  events:
+    GANON_TRIAL_WATER: "has(RUPEE_SILVER_GANON_WATER, 5) && has_light_arrows"
+  locations:
+    "MQ Ganon Castle SR Water Shallow Hole": "true"
+    "MQ Ganon Castle SR Water Above Ground": "true"
+    "MQ Ganon Castle SR Water Alcove": "true"
+    "MQ Ganon Castle SR Water Deep Hole": "true"
+    "MQ Ganon Castle SR Water Under Alcove": "true"
 "Ganon Castle Spirit":
   dungeon: Ganon
   events:
@@ -55,10 +73,16 @@
 "Ganon Castle Shadow":
   dungeon: Ganon
   events:
-    GANON_TRIAL_SHADOW: "has_lens && has_light_arrows && (has_hover_boots || (can_hookshot && has_fire))"
+    GANON_TRIAL_SHADOW: "has_lens && has_light_arrows && (has_hover_boots || (can_hookshot && has_fire)) && has(RUPEE_SILVER_GANON_SHADOW, 5)"
   locations:
     "MQ Ganon Castle Shadow Trial Bomb Flower Chest": "(can_hookshot || has_hover_boots) && (can_use_bow || (has_lens && has_hover_boots && (can_use_din || has_bombflowers)))"
     "MQ Ganon Castle Shadow Trial Switch Chest": "can_use_bow && has_lens && (has_hover_boots || (can_hookshot && has_fire))"
+    # TODO: Write proper logic for these
+    "MQ Ganon Castle SR Shadow Front-Right": "has_lens && has_light_arrows && (has_hover_boots || (can_hookshot && has_fire))"
+    "MQ Ganon Castle SR Shadow Middle": "has_lens && has_light_arrows && (has_hover_boots || (can_hookshot && has_fire))"
+    "MQ Ganon Castle SR Shadow Back-Left": "has_lens && has_light_arrows && (has_hover_boots || (can_hookshot && has_fire))"
+    "MQ Ganon Castle SR Shadow Back-Center": "has_lens && has_light_arrows && (has_hover_boots || (can_hookshot && has_fire))"
+    "MQ Ganon Castle SR Shadow Front-Center": "has_lens && has_light_arrows && (has_hover_boots || (can_hookshot && has_fire))"
 "Ganon Castle Stairs":
   region: NONE
   exits:

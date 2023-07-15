@@ -221,5 +221,6 @@ extern const Shader kShaders[256];
 #define DRAWGI_MM_CHATEAU                   0xc8
 #define DRAWGI_MM_OWL                       0xc9
 #define DRAWGI_TRIFORCE                     0xca
+#define DRAWGI_OOT_RUPEE_SILVER             0xcb
 
 #endif

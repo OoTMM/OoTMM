@@ -48,7 +48,7 @@
     "House of Twins": "true"
     "Know It All House": "true"
     "Lost Woods": "true"
-    "Lost Woods Bridge": "true"
+    "Lost Woods Bridge from Forest": "true"
     "Kokiri Shop": "true"
     "Kokiri Forest Storms Grotto": "hidden_grotto_storms"
     "Kokiri Forest Near Deku Tree": "mido_moved || is_adult"
@@ -415,11 +415,11 @@
   exits:
     "Market": "true"
     "Near Fairy Fountain Din": "has_explosives"
+    "Hyrule Castle Courtyard": "woke_talon_child || has_hover_boots"
     "Hyrule Castle Grotto": "hidden_grotto_storms"
   events:
     MALON: "true"
     TALON_CHILD: "has(CHICKEN)"
-    MEET_ZELDA: "woke_talon_child || has_hover_boots"
     BOMBS: "true"
     RUPEES: "true"
     SEEDS: "is_child"
@@ -427,12 +427,20 @@
     BUGS: "has_bottle"
   locations:
     "Malon Egg": "event(MALON)"
-    "Zelda's Letter": "met_zelda"
-    "Zelda's Song": "met_zelda"
     "Hyrule Castle GS Tree": "can_damage_skull"
   gossip:
     "Hyrule Castle Gossip After Climb": "true"
     "Hyrule Castle Gossip Before Moat": "true"
+"Hyrule Castle Courtyard":
+  region: HYRULE_CASTLE
+  time: flow
+  exits:
+    "Hyrule Castle": "true"
+  events:
+    MEET_ZELDA: "true"
+  locations:
+    "Zelda's Letter": "met_zelda"
+    "Zelda's Song": "met_zelda"
 "Near Fairy Fountain Din":
   region: HYRULE_CASTLE
   exits:
@@ -475,7 +483,7 @@
   region: GANON_CASTLE_EXTERIOR
   exits:
     "Ganon Castle Exterior": "is_adult && special(BRIDGE)"
-    "Hyrule Castle": "is_child"
+    "Hyrule Castle Courtyard": "is_child"
     "Ganon Castle": "true"
 "Near Fairy Fountain Defense":
   region: GANON_CASTLE_EXTERIOR
@@ -541,7 +549,13 @@
     "Hyrule Field": "true"
     "Lost Woods": "can_longshot"
   locations:
-    "Lost Woods Gift from Saria": "true"
+    "Lost Woods Gift from Saria": "event(SARIA_GIFT)"
+"Lost Woods Bridge from Forest":
+  region: LOST_WOODS
+  exits:
+    "Lost Woods Bridge": "event(SARIA_GIFT)"
+  events:
+    SARIA_GIFT: "true"
 "Lost Woods Deep":
   region: LOST_WOODS
   exits:
@@ -922,21 +936,19 @@
   exits:
     "Goron City Shortcut": "event(GORON_CITY_SHORTCUT)"
     "Death Mountain": "true"
-    "Death Mountain Crater Bottom": "is_adult && (has_explosives || can_use_bow || has(STRENGTH))"
-    "Goron Shop": "(is_adult && (has_explosives || can_use_bow || has(STRENGTH))) || (is_child && (has_bombflowers || can_use_din))"
+    "Darunia Chamber": "(is_adult && (has_explosives || can_use_bow || has(STRENGTH))) || (is_child && can_play(SONG_ZELDA))"
+    "Goron Shop": "(is_adult && (has_explosives || can_use_bow || has(STRENGTH))) || (is_child && (has_bombflowers || can_use_din || event(DARUNIA_TORCH)))"
     "Goron City Grotto": "is_adult && (can_play_time || (can_hookshot && (has_tunic_goron_strict || can_use_nayru)))"
-  event:
-    GORON_CITY_SHORTCUT: "has_bombflowers || can_hammer || can_use_bow || can_use_din"
+  events:
+    GORON_CITY_SHORTCUT: "has_bombflowers || can_hammer || can_use_bow || can_use_din || event(DARUNIA_TORCH)"
     STICKS: "is_child"
     ARROWS: "is_adult"
-    RUPEES: "is_adult && (has_explosives || can_use_bow || has(STRENGTH))" #The pots outside of adult Darunia's Room are too unreliable
     BUGS: "has_bottle && (has_explosives_or_hammer || can_lift_silver)"
   locations:
-    "Darunia": "can_play(SONG_ZELDA) && can_play(SONG_SARIA)"
     "Goron City Maze Center 1": "has_explosives_or_hammer || can_lift_silver"
     "Goron City Maze Center 2": "has_explosives_or_hammer || can_lift_silver"
     "Goron City Maze Left": "can_hammer || can_lift_silver"
-    "Goron City Big Pot HP": "is_child && has_bombs && (can_play(SONG_ZELDA) || has_fire)"
+    "Goron City Big Pot HP": "is_child && has_bombs && (event(DARUNIA_TORCH) || has_fire)"
     "Goron City Tunic": "is_adult && (has_explosives || can_use_bow || has(STRENGTH))"
     "Goron City Bomb Bag": "is_child && has_explosives"
     "Goron City Medigoron Giant Knife": "is_adult && (has_bombflowers || can_hammer) && can_use_wallet(2)"
@@ -945,6 +957,17 @@
   gossip:
     "Goron City Gossip Boulder Maze": "has_explosives_or_hammer || can_lift_silver"
     "Goron City Gossip Near Medigoron": "has_bombflowers || can_hammer"
+"Darunia Chamber":
+  region: GORON_CITY
+  exits:
+    "Death Mountain Crater Bottom": "is_adult"
+    "Goron City": "true"
+  events:
+    DARUNIA_TORCH: "is_child && can_use_sticks"
+    STICKS: "is_child"
+    RUPEES: "is_adult"
+  locations:
+    "Darunia": "is_child && can_play(SONG_SARIA)"
 "Goron Shop":
   region: ENTRANCE
   exits:
@@ -1203,7 +1226,7 @@
 "Death Mountain Crater Bottom":
   region: DEATH_MOUNTAIN_CRATER
   exits:
-    "Goron City": "true"
+    "Darunia Chamber": "true"
     "Death Mountain Crater Warp": "can_hookshot || (has_hover_boots && (is_adult || has_tunic_goron_strict))"
     "Death Mountain Crater Top": "is_adult || has_tunic_goron_strict"
     "Death Mountain Crater Scrub Grotto": "can_hammer"

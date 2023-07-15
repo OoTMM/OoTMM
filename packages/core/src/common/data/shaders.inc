@@ -200,3 +200,4 @@
 /* MM        Potion (Chateau)                  */ { Shader_CustomPotion,           { 4 }},
 /* MM        Owl                               */ { Shader_CustomOwl,              { 0x6003770 }},
 /* Common    Triforce Piece                    */ { Shader_Opa0,                   { CUSTOM_OBJECT_TRIFORCE_0 }},
+/* OoT       Silver Rupee                      */ { Shader_SilverRupee,            {} },

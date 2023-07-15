@@ -1,10 +1,10 @@
 import { Confvar } from '../confvars';
-import { Item, ItemGroups, ItemHelpers, Items, ItemsCount } from '../items';
+import { Item, ItemGroups, ItemHelpers, Items, PlayerItem, PlayerItems, makePlayerItem } from '../items';
 import { Monitor } from '../monitor';
 import { Settings } from '../settings';
 import { countMapAdd } from '../util';
 import { exprTrue } from './expr';
-import { LOCATIONS_ZELDA, isLocationRenewable, makeLocation } from './locations';
+import { LOCATIONS_ZELDA, Location, isLocationRenewable, locationData, makeLocation } from './locations';
 import { World } from './world';
 
 const EXTRA_ITEMS = new Set([
@@ -184,39 +184,43 @@ const ITEMS_HEART_PIECES_CONTAINERS_BY_GAME = {
 }
 
 export class LogicPassWorldTransform {
-  private pool: ItemsCount = new Map;
-  private locsByItem = new Map<Item, Set<string>>();
-  private fixedLocations: Set<string>;
+  private pool: PlayerItems = new Map;
+  private locsByItem = new Map<PlayerItem, Set<Location>>();
+  private fixedLocations: Set<Location>;
 
   constructor(
     private readonly state: {
       monitor: Monitor;
-      world: World;
+      worlds: World[];
       settings: Settings;
       config: Set<Confvar>;
-      mq: Set<string>;
-      fixedLocations: Set<string>;
+      fixedLocations: Set<Location>;
     }
   ) {
     this.fixedLocations = new Set(state.fixedLocations);
   }
 
-  private makePool() {
-    const { world } = this.state;
-    for (const loc in world.checks) {
-      const check = world.checks[loc];
-      const item = check.item;
-      countMapAdd(this.pool, item);
-      const set = this.locsByItem.get(check.item) || new Set();
-      set.add(loc);
-      this.locsByItem.set(check.item, set);
+  private makePools() {
+    const { worlds } = this.state;
+    for (let i = 0; i < worlds.length; ++i) {
+      const world = worlds[i];
+      for (const locId in world.checks) {
+        const check = world.checks[locId];
+        const location = makeLocation(locId, i);
+        const item = check.item;
+        const playerItem = makePlayerItem(item, i);
+        countMapAdd(this.pool, playerItem);
+        const set = this.locsByItem.get(playerItem) || new Set();
+        set.add(location);
+        this.locsByItem.set(playerItem, set);
+      }
     }
   }
 
   /**
    * Replace an item in the pool with another item.
    */
-  private replaceItem(from: Item, to: Item) {
+  private replacePlayerItem(from: PlayerItem, to: PlayerItem) {
     const prevCount = this.pool.get(from) || 0;
     this.pool.delete(from);
     const newCount = (this.pool.get(to) || 0) + prevCount;
@@ -228,24 +232,37 @@ export class LogicPassWorldTransform {
     const oldSet = this.locsByItem.get(from) || new Set();
     const newSet = this.locsByItem.get(to) || new Set();
     for (const loc of oldSet) {
-      const check = this.state.world.checks[loc];
-      check.item = to;
+      const locData = locationData(loc);
+      const check = this.state.worlds[locData.world!].checks[locData.id];
+      check.item = to.item;
       newSet.add(loc);
     }
     this.locsByItem.set(to, newSet);
     this.locsByItem.delete(from);
   }
 
+  private replaceItem(from: Item, to: Item) {
+    for (let i = 0; i < this.state.worlds.length; ++i) {
+      this.replacePlayerItem(makePlayerItem(from, i), makePlayerItem(to, i));
+    }
+  }
+
   /**
    * Remove an item from the pool.
    * Optionally, limit the number of items removed.
    */
-  private removeItem(item: Item, amount?: number) {
+  private removePlayerItem(item: PlayerItem, amount?: number) {
     const count = this.pool.get(item) || 0;
     if (amount === undefined || amount >= count) {
       this.pool.delete(item);
     } else {
       this.pool.set(item, count - amount);
+    }
+  }
+
+  private removeItem(item: Item, amount?: number) {
+    for (let i = 0; i < this.state.worlds.length; ++i) {
+      this.removePlayerItem(makePlayerItem(item, i), amount);
     }
   }
 
@@ -255,12 +272,18 @@ export class LogicPassWorldTransform {
     }
   }
 
-  private addItem(item: Item, amount?: number) {
+  private addPlayerItem(item: PlayerItem, amount?: number) {
     const count = this.pool.get(item) || 0;
     if (amount === undefined) {
       amount = 1;
     }
     this.pool.set(item, count + amount);
+  }
+
+  private addItem(item: Item, amount?: number) {
+    for (let i = 0; i < this.state.worlds.length; ++i) {
+      this.addPlayerItem(makePlayerItem(item, i), amount);
+    }
   }
 
   private scarcifyPool(delta: number) {
@@ -279,13 +302,16 @@ export class LogicPassWorldTransform {
       items.push(Items.SHARED_OCARINA);
     }
 
-    for (const item of items) {
-      const amount = this.pool.get(item);
-      if (amount) {
-        let newAmount = amount - delta;
-        if (newAmount < 1)
-          newAmount = 1;
-        this.pool.set(item, newAmount);
+    for (let i = 0; i < this.state.worlds.length; ++i) {
+      for (const item of items) {
+        const playerItem = makePlayerItem(item, i);
+        const amount = this.pool.get(playerItem);
+        if (amount) {
+          let newAmount = amount - delta;
+          if (newAmount < 1)
+            newAmount = 1;
+          this.pool.set(playerItem, newAmount);
+        }
       }
     }
 
@@ -307,13 +333,16 @@ export class LogicPassWorldTransform {
   }
 
   private mergeHearts() {
-    for (const g of ['oot', 'mm', 'shared'] as const) {
-      const { hp, hc } = ITEMS_HEART_PIECES_CONTAINERS_BY_GAME[g];
-
-      const hpCount = this.pool.get(hp) || 0;
-      if (hpCount) {
-        this.removeItem(hp);
-        this.addItem(hc, hpCount / 4);
+    for (let i = 0; i < this.state.worlds.length; ++i) {
+      for (const g of ['oot', 'mm', 'shared'] as const) {
+        const { hp, hc } = ITEMS_HEART_PIECES_CONTAINERS_BY_GAME[g];
+        const playerHp = makePlayerItem(hp, i);
+        const playerHc = makePlayerItem(hc, i);
+        const hpCount = this.pool.get(playerHp) || 0;
+        if (hpCount) {
+          this.removePlayerItem(playerHp);
+          this.addPlayerItem(playerHc, hpCount / 4);
+        }
       }
     }
   }
@@ -378,11 +407,18 @@ export class LogicPassWorldTransform {
       items = [...items, ...ItemGroups.OWLS];
     }
 
+    if (settings.silverRupeeShuffle === 'anywhere') {
+      items = [...items, ...ItemGroups.RUPEES_SILVER];
+    }
+
     /* Add extra items */
-    for (const item of items) {
-      const amount = this.pool.get(item);
-      if (amount) {
-        this.addItem(item);
+    for (let i = 0; i < this.state.worlds.length; ++i) {
+      for (const item of items) {
+        const playerItem = makePlayerItem(item, i);
+        const amount = this.pool.get(playerItem);
+        if (amount) {
+          this.addPlayerItem(playerItem);
+        }
       }
     }
 
@@ -548,7 +584,10 @@ export class LogicPassWorldTransform {
       this.replaceItem(Items.OOT_WALLET,  Items.SHARED_WALLET);
       this.replaceItem(Items.MM_WALLET,   Items.SHARED_WALLET);
 
-      this.pool.set(Items.SHARED_WALLET, (this.pool.get(Items.SHARED_WALLET) || 0) / 2);
+      for (let i = 0; i < this.state.worlds.length; ++i) {
+        const playerItem = makePlayerItem(Items.SHARED_WALLET, i);
+        this.pool.set(playerItem, (this.pool.get(playerItem) || 0) / 2);
+      }
 
       /* Rupees */
       this.replaceItem(Items.OOT_RUPEE_GREEN,   Items.SHARED_RUPEE_GREEN);
@@ -571,8 +610,10 @@ export class LogicPassWorldTransform {
       this.replaceItem(Items.MM_HEART_PIECE,      Items.SHARED_HEART_PIECE);
       this.replaceItem(Items.OOT_HEART_PIECE,     Items.SHARED_HEART_PIECE);
 
-      this.pool.set(Items.SHARED_HEART_CONTAINER, 6);
-      this.pool.set(Items.SHARED_HEART_PIECE, 44);
+      for (let i = 0; i < this.state.worlds.length; ++i) {
+        this.pool.set(makePlayerItem(Items.SHARED_HEART_CONTAINER, i), 6);
+        this.pool.set(makePlayerItem(Items.SHARED_HEART_PIECE, i), 44);
+      }
 
       /* Defense */
       this.replaceItem(Items.OOT_DEFENSE_UPGRADE, Items.SHARED_DEFENSE_UPGRADE);
@@ -598,22 +639,28 @@ export class LogicPassWorldTransform {
 
     /* Triforce hunt */
     if (settings.goal === 'triforce') {
-      this.pool.set(Items.SHARED_TRIFORCE, settings.triforcePieces);
+      for (let i = 0; i < this.state.worlds.length; ++i) {
+        this.pool.set(makePlayerItem(Items.SHARED_TRIFORCE, i), settings.triforcePieces);
+      }
     }
   }
 
   private removeLocations(locs: string[]) {
-    const { world } = this.state;
-    for (const loc of locs) {
-      delete world.checks[loc];
-      delete world.regions[loc];
-      this.fixedLocations.delete(loc);
-    }
-    for (const areaName in world.areas) {
-      const area = world.areas[areaName];
-      const locations = area.locations;
+    const { worlds } = this.state;
+    for (let i = 0; i < worlds.length; ++i) {
+      const world = worlds[i];
       for (const loc of locs) {
-        delete locations[loc];
+        delete world.checks[loc];
+        delete world.regions[loc];
+        world.locations.delete(loc);
+        this.fixedLocations.delete(makeLocation(loc, i));
+      }
+      for (const areaName in world.areas) {
+        const area = world.areas[areaName];
+        const locations = area.locations;
+        for (const loc of locs) {
+          delete locations[loc];
+        }
       }
     }
   }
@@ -629,14 +676,17 @@ export class LogicPassWorldTransform {
       if (settings.gerudoFortress === 'open') {
         this.removeLocations(['OOT Gerudo Fortress Jail 1']);
         const loc = 'OOT Gerudo Member Card';
-        this.state.world.areas['OOT SPAWN'].locations[loc] = exprTrue();
-        this.state.world.regions[loc] = 'NONE';
-        this.state.world.dungeons['GF'].delete(loc);
+        for (let i = 0; i < this.state.worlds.length; ++i) {
+          const world = this.state.worlds[i];
+          world.areas['OOT SPAWN'].locations[loc] = exprTrue();
+          world.regions[loc] = 'NONE';
+          world.dungeons['GF'].delete(loc);
+        }
       }
     }
 
     /* Make the basic item pool */
-    this.makePool();
+    this.makePools();
 
     /* Add extra items */
     for (const item of EXTRA_ITEMS) {
@@ -674,8 +724,13 @@ export class LogicPassWorldTransform {
     }
 
     /* Handle non-MQ Fire */
-    if (!this.state.config.has('SMALL_KEY_SHUFFLE') && !this.state.mq.has('Fire')) {
-      this.removeItem(Items.OOT_SMALL_KEY_FIRE, 1);
+    if (!this.state.config.has('SMALL_KEY_SHUFFLE')) {
+      for (let i = 0; i < this.state.worlds.length; ++i) {
+        const world = this.state.worlds[i];
+        if (!world.mq.has('Fire')) {
+          this.removePlayerItem(makePlayerItem(Items.OOT_SMALL_KEY_FIRE, i), 1);
+        }
+      }
     }
 
     /* Handle tingle maps */
@@ -743,7 +798,9 @@ export class LogicPassWorldTransform {
       this.replaceItem(Items.MM_SONG_GORON, Items.MM_SONG_GORON_HALF);
     } else {
       this.removeItem(Items.MM_SONG_GORON_HALF);
-      this.state.world.songLocations.delete('MM Goron Baby');
+      for (let i = 0; i < this.state.worlds.length; ++i) {
+        this.state.worlds[i].songLocations.delete('MM Goron Baby');
+      }
     }
 
     /* Handle MM sun song */
@@ -756,8 +813,10 @@ export class LogicPassWorldTransform {
       this.removeItem(Items.OOT_CHICKEN);
 
       for (const loc of LOCATIONS_ZELDA) {
-        this.state.world.areas['OOT SPAWN'].locations[loc] = exprTrue();
-        this.state.world.regions[loc] = 'NONE';
+        for (const world of this.state.worlds) {
+          world.areas['OOT SPAWN'].locations[loc] = exprTrue();
+          world.regions[loc] = 'NONE';
+        }
       }
     }
 
@@ -768,19 +827,20 @@ export class LogicPassWorldTransform {
 
     /* Handle fixed locations */
     for (const loc of this.fixedLocations) {
-      const check = this.state.world.checks[loc];
+      const world = this.state.worlds[locationData(loc).world as number];
+      const check = world.checks[locationData(loc).id];
       const { item } = check;
       this.removeItem(item, 1);
     }
 
     /* Handle required junks */
-    const renewableJunks: ItemsCount = new Map;
-    for (const item of this.pool.keys()) {
-      if (ItemHelpers.isJunk(item) && ItemHelpers.isItemConsumable(item)) {
-        for (const loc of this.locsByItem.get(item) || []) {
-          const l = makeLocation(loc);
-          if (isLocationRenewable(this.state.world, l) && !this.fixedLocations.has(loc)) {
-            countMapAdd(renewableJunks, item);
+    const renewableJunks: PlayerItems = new Map;
+    for (const pi of this.pool.keys()) {
+      if (ItemHelpers.isJunk(pi.item) && ItemHelpers.isItemConsumable(pi.item)) {
+        for (const loc of this.locsByItem.get(pi) || []) {
+          const world = this.state.worlds[locationData(loc).world as number];
+          if (isLocationRenewable(world, loc) && !this.fixedLocations.has(loc)) {
+            countMapAdd(renewableJunks, pi);
           }
         }
       }
