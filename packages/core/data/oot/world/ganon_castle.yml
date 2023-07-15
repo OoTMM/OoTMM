@@ -46,13 +46,13 @@
 "Ganon Castle Forest 2":
   dungeon: Ganon
   events:
-    GANON_TRIAL_FOREST: "has(RUPEE_SILVER_GANON_FOREST, 5) && has_hover_boots && has_light_arrows"
+    GANON_TRIAL_FOREST: "has(RUPEE_SILVER_GANON_FOREST, 5) && has_light_arrows"
   locations:
-    "Ganon Castle SR Forest Center Right": "has_hover_boots"
+    "Ganon Castle SR Forest Center Right": "true"
     "Ganon Castle SR Forest Front": "true"
-    "Ganon Castle SR Forest Back Right": "has_hover_boots"
-    "Ganon Castle SR Forest Back Middle": "has_hover_boots"
-    "Ganon Castle SR Forest Center Left": "has_hover_boots"
+    "Ganon Castle SR Forest Back Right": "true"
+    "Ganon Castle SR Forest Back Middle": "true"
+    "Ganon Castle SR Forest Center Left": "is_adult"
 "Ganon Castle Fire":
   dungeon: Ganon
   events:
@@ -84,10 +84,10 @@
 "Ganon Castle Spirit 2":
   dungeon: Ganon
   events:
-    GANON_TRIAL_SPIRIT: "can_hookshot && has_bombchu && has_light_arrows && has_mirror_shield"
+    GANON_TRIAL_SPIRIT: "has_bombchu && has_light_arrows && has_mirror_shield"
   locations:
-    "Ganon Castle Spirit Chest 1": "can_hookshot"
-    "Ganon Castle Spirit Chest 2": "can_hookshot && has_bombchu && has_lens"
+    "Ganon Castle Spirit Chest 1": "can_use_sticks || can_use_sword || has_bombchu"
+    "Ganon Castle Spirit Chest 2": "has_bombchu && has_lens"
 "Ganon Castle Shadow":
   dungeon: Ganon
   events:

@@ -17,17 +17,17 @@
   exits:
     "Ice Cavern": "true"
   events:
-    BLUE_FIRE: "true"
+    BLUE_FIRE: "has_bottle"
   locations:
     "Ice Cavern Compass": "true"
-    "Ice Cavern HP": "has_blue_fire"
+    "Ice Cavern HP": "true"
     "Ice Cavern GS HP Room": "can_collect_distance"
 "Ice Cavern First Fire Room":
   dungeon: IC
   exits:
     "Ice Cavern": "true"
   events:
-    BLUE_FIRE: "true"
+    BLUE_FIRE: "has_bottle"
   locations:
     "Ice Cavern Map": "has_blue_fire"
 "Ice Cavern Block Room":
@@ -42,12 +42,12 @@
     "Ice Cavern SR Blocks Back Left": "true"
     "Ice Cavern SR Blocks Back Right": "true"
     "Ice Cavern SR Blocks Center": "true"
-    "Ice Cavern SR Blocks Alcove": "true"
+    "Ice Cavern SR Blocks Alcove": "has_blue_fire"
     "Ice Cavern SR Blocks Front Left": "true"
 "Ice Cavern End":
   dungeon: IC
   exits:
-    "Ice Cavern Block Room": "true"
+    "Ice Cavern Block Room": "has_blue_fire"
   locations:
     "Ice Cavern Iron Boots": "true"
     "Ice Cavern Sheik Song": "true"

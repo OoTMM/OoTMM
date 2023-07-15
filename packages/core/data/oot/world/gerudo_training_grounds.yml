@@ -62,9 +62,9 @@
   locations:
     "Gerudo Training Grounds SR Lava Front Left": "true"
     "Gerudo Training Grounds SR Lava Front Right": "true"
-    "Gerudo Training Grounds SR Lava Back Left": "can_hookshot && (can_longshot || has_hover_boots || can_play_time)"
+    "Gerudo Training Grounds SR Lava Back Left": "has_hover_boots || can_play_time"
     "Gerudo Training Grounds SR Lava Back Center": "can_hookshot && (can_longshot || has_hover_boots || can_play_time)"
-    "Gerudo Training Grounds SR Lava Back Right": "true"
+    "Gerudo Training Grounds SR Lava Back Right": "can_longshot || has_hover_boots || can_play_time || is_child"
 "Gerudo Training Grounds Maze Side":
   dungeon: GTG
   exits:
@@ -73,6 +73,8 @@
     "Gerudo Training Freestanding Key": "true"
     "Gerudo Training Maze Side Chest 1": "true"
     "Gerudo Training Maze Side Chest 2": "true"
+    "Gerudo Training Grounds SR Lava Back Center": "can_hookshot"
+    "Gerudo Training Grounds SR Lava Back Right": "true"
 "Gerudo Training Grounds Water":
   dungeon: GTG
   exits:
@@ -95,6 +97,8 @@
   locations:
     "Gerudo Training Grounds Hammer Room Switch": "can_hammer"
     "Gerudo Training Grounds Hammer Room": "true"
+    "Gerudo Training Grounds SR Lava Back Center": "can_hookshot"
+    "Gerudo Training Grounds SR Lava Back Right": "true"
 "Gerudo Training Grounds Statue":
   dungeon: GTG
   exits:

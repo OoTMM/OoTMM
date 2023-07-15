@@ -31,7 +31,7 @@
     "Shadow Temple First Beamos": "true"
   locations:
     "MQ Shadow Temple SR Scythe 1": "true"
-    "MQ Shadow Temple SR Scythe 2": "can_hookshot || has_hover_boots"
+    "MQ Shadow Temple SR Scythe 2": "can_hookshot || (is_adult && has_hover_boots)"
     "MQ Shadow Temple SR Scythe 3": "true"
     "MQ Shadow Temple SR Scythe 4": "true"
     "MQ Shadow Temple SR Scythe 5": "true"
