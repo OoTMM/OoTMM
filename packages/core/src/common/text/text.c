@@ -348,16 +348,26 @@ static int isItemAmbiguousMm(s16 gi)
     }
 }
 
+static size_t comboTextStrlen(const char* buffer)
+{
+    size_t i;
+    for (i = 0; ((u8)buffer[i]) != TEXT_END[0]; i++)
+        ;
+    return i;
+}
+
 void comboTextAutoLineBreaks(char* buffer)
 {
     static const int kMaxLineLength = 37;
     int lineLength;
     int i;
     int lastSpace;
+    int lineCount;
     u8 c;
 
     lastSpace = -1;
     lineLength = 0;
+    lineCount = 0;
     i = 0;
     for (;;)
     {
@@ -370,7 +380,19 @@ void comboTextAutoLineBreaks(char* buffer)
             if (lineLength >= kMaxLineLength && lastSpace != -1)
             {
                 lineLength = i - lastSpace;
-                buffer[lastSpace] = TEXT_NL[0];
+                if (lineCount < 3)
+                {
+                    buffer[lastSpace] = TEXT_NL[0];
+                    lineCount++;
+                }
+                else
+                {
+                    /* We need to inject a box break */
+                    memmove(buffer + lastSpace + 2, buffer + lastSpace + 1, comboTextStrlen(buffer + lastSpace + 1) + 1);
+                    buffer[lastSpace] = TEXT_BB[0];
+                    buffer[lastSpace + 1] = TEXT_FAST[0];
+                    lineCount = 0;
+                }
                 lastSpace = -1;
             }
         }
