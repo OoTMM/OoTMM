@@ -22,6 +22,7 @@
 # define AC_ITEM_OCARINA            0x0f1
 # define AC_ITEM_ETCETERA           0x10f
 # define AC_EN_SKJ                  0x115
+# define AC_EN_G_SWITCH             0x117
 # define AC_BG_SPOT03_TAKI          0x11f
 # define AC_EN_DIVING_GAME          0x124
 # define AC_EN_NIW_LADY             0x13c

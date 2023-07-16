@@ -1,5 +1,8 @@
 #include <combo.h>
 #include <combo/item.h>
+#include <combo/player.h>
+
+#define SET_HANDLER(a, h) do { *(void**)(((char*)(a)) + 0x13c) = (h); } while (0)
 
 static u32* const kFlags[] = {
     &gOotSilverRupeeFlags1,
@@ -178,6 +181,22 @@ void EnGSwitch_DrawSilverRupee(Actor* this, GameState_Play* play)
     comboDrawGI(play, this, o.gi, 0);
 }
 
+void EnGSwitch_HandlerAfterCollected(Actor* this, GameState_Play* play)
+{
+    ActorFunc f;
+
+    if (Message_IsClosed(this, play))
+    {
+        UnfreezePlayer(play);
+        f = actorAddr(AC_EN_G_SWITCH, 0x80a70db0);
+        f(this, play);
+    }
+    else
+    {
+        FreezePlayer(play);
+    }
+}
+
 void EnGSwitch_GiveItemSilverRupee(Actor* this)
 {
     ComboItemQuery q;
@@ -187,4 +206,6 @@ void EnGSwitch_GiveItemSilverRupee(Actor* this)
     PlayerDisplayTextBox(gPlay, 0xb4, NULL);
     comboAddItemEx(gPlay, &q);
     EnGSwitch_SetFlag(EnGSwitch_ID(this, gPlay));
+    SET_HANDLER(this, EnGSwitch_HandlerAfterCollected);
 }
+

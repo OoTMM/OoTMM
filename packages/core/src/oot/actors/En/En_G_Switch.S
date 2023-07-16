@@ -25,6 +25,10 @@ PATCH_START 0x80a70d18
   jal EnGSwitch_GiveItemSilverRupee
 PATCH_END
 
+PATCH_START 0x80a70d9c
+  nop
+PATCH_END
+
 /* Relocs */
 PATCH_START 0x80a71dec
 .int 0

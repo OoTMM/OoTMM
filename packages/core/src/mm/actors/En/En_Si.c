@@ -1,29 +1,18 @@
 #include <combo.h>
 #include <combo/item.h>
+#include <combo/player.h>
 
 #define SET_HANDLER(a, h) do { *(void**)(((char*)(a)) + 0x144) = (h); } while (0)
 
-// maybe worth moving somewhere common
-static void FreezePlayer(GameState_Play* play) {
-    Actor_Player* link;
-    link = GET_LINK(play);
-    link->base.freezeTimer = 100;
-    link->state |= PLAYER_ACTOR_STATE_FROZEN;
-}
-
-// maybe worth moving somewhere common
-static void UnfreezePlayer(GameState_Play* play) {
-    Actor_Player* link;
-    link = GET_LINK(play);
-    link->base.freezeTimer = 0;
-    link->state &= ~PLAYER_ACTOR_STATE_FROZEN;
-}
-
-void EnSi_WaitForPlayerToCloseMessage(Actor* this, GameState_Play* play) {
-    if (Message_IsClosed(this, play)) {
+void EnSi_WaitForPlayerToCloseMessage(Actor* this, GameState_Play* play)
+{
+    if (Message_IsClosed(this, play))
+    {
         UnfreezePlayer(play);
         ActorDestroy(this);
-    } else {
+    }
+    else
+    {
         FreezePlayer(play);
     }
 }
