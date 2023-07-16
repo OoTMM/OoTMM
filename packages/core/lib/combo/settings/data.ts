@@ -360,6 +360,13 @@ export const SETTINGS = [{
   ],
   default: 'none'
 }, {
+  key: 'shuffleOcarinasOot',
+  name: 'Ocarina Shuffle (OoT)',
+  category: 'main.shuffle',
+  type: 'boolean',
+  description: 'Controls whether or not the two Ocarinas in OoT are shuffled',
+  default: true
+}, {
   key: 'shuffleMasterSword',
   name: 'Master Sword Shuffle',
   category: 'main.shuffle',

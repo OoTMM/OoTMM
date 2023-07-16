@@ -66,6 +66,7 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
   }
   base.logic = sampleWeighted(random, { allLocations: 10, beatable: 5 });
   base.itemPool = sampleWeighted(random, { normal: 10, plentiful: 2, scarce: 2, minimal: 1 });
+  base.shuffleOcarinasOot = booleanWeighted(random, 0.7);
   base.shuffleMasterSword = booleanWeighted(random, 0.4);
   base.shuffleGerudoCard = booleanWeighted(random, 0.5);
 
