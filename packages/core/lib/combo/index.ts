@@ -48,7 +48,7 @@ export const itemPool = (aSettings: Partial<Settings>): {[k: string]: number} =>
 
   /* Extract relevant items from the pool */
   for (const pi of pool.keys()) {
-    if (pi.player !== 0 || ItemHelpers.isJunk(pi.item) || ItemHelpers.isDungeonItem(pi.item) || ItemHelpers.isToken(pi.item) || ItemHelpers.isStrayFairy(pi.item) || ItemHelpers.isItemTriforce(pi.item)) {
+    if (pi.player !== 0 || ItemHelpers.isJunk(pi.item) || ItemHelpers.isDungeonItem(pi.item) || ItemHelpers.isToken(pi.item) || ItemHelpers.isStrayFairy(pi.item)) {
       pool.delete(pi);
     }
   }

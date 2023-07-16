@@ -28,7 +28,7 @@ export const isToken = (item: Item) => isGoldToken(item) || isHouseToken(item);
 export const isJunk = (item: Item) => ItemGroups.JUNK.has(item);
 export const isMasterSword = (item: Item) => item === Items.OOT_SWORD_MASTER;
 export const isGerudoCard = (item: Item) => item === Items.OOT_GERUDO_CARD;
-export const isItemImportant = (item: Item) => isItemMajor(item) || isDungeonReward(item) || isToken(item) || isStrayFairy(item) || isKey(item) || isItemConsumable(item) ||isItemTriforce(item) || isItemLicense(item);
+export const isItemImportant = (item: Item) => isItemMajor(item) || isDungeonReward(item) || isToken(item) || isStrayFairy(item) || isKey(item) || isItemConsumable(item) ||isTriforcePiece(item) || isItemLicense(item);
 export const isItemConsumable = (item: Item) => ItemGroups.CONSUMABLES.has(item);
 export const isRupees = (item: Item) => ItemGroups.RUPEES.has(item);
 export const isItemUnlimitedStarting = (item: Item) => isRupees(item) || isItemConsumable(item);
@@ -36,5 +36,5 @@ export const isItemCriticalRenewable = (item: Item) => ItemGroups.CRITICAL_RENEW
 export const isTingleMap = (item: Item) => ItemGroups.TINGLE_MAPS.has(item);
 export const isOwlStatue = (item: Item) => ItemGroups.OWLS.has(item);
 export const isItemLicense = (item: Item) => ItemGroups.LICENSES.has(item);
-export const isItemTriforce = (item: Item) => item === Items.SHARED_TRIFORCE;
+export const isTriforcePiece = (item: Item) => item === Items.SHARED_TRIFORCE;
 export const isSilverRupee = (item: Item) => ItemGroups.RUPEES_SILVER.has(item);

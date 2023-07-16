@@ -284,7 +284,7 @@ export class LogicPassHints {
     }
 
     /* Triforce Piece - never hinted outside of location */
-    if (ItemHelpers.isItemTriforce(item.item) && klass !== 'location') {
+    if (ItemHelpers.isTriforcePiece(item.item) && klass !== 'location') {
       return false;
     }
 
