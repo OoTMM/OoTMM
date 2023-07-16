@@ -4,12 +4,14 @@
 
 ComboGlobal g;
 
+void initHeap(void);
 void comboInitObjects(void);
 
 void comboInit(void)
 {
     g.delayedSwitchFlag = 0xff;
 
+    initHeap();
     comboLoadContext();
     comboInitDma();
     comboInitData();
