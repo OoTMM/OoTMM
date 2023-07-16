@@ -235,6 +235,18 @@ export const SETTINGS = [{
   ],
   default: 'ownDungeon'
 }, {
+  key: 'silverRupeeShuffle',
+  name: 'Silver Rupee Shuffle',
+  category: 'main.shuffle',
+  type: 'enum',
+  description: 'Make silver rupees items that can be shuffled.',
+  values: [
+    { value: 'vanilla', name: 'Vanilla', description: 'Silver Rupees are vanilla' },
+    { value: 'ownDungeon', name: 'Own Dungeon', description: 'Silver Rupees are found within their own dungeon' },
+    { value: 'anywhere', name: 'Anywhere', description: 'Silver Rupees are shuffled in the item pool' },
+  ],
+  default: 'vanilla'
+}, {
   key: 'townFairyShuffle',
   name: 'Town Stray Fairy Shuffle',
   category: 'main.shuffle',
@@ -347,17 +359,6 @@ export const SETTINGS = [{
     { value: 'anywhere', name: 'Anywhere', description: 'Owl statues are shuffled in the item pool' },
   ],
   default: 'none'
-}, {
-  key: 'silverRupeeShuffle',
-  name: 'Silver Rupee Shuffle',
-  category: 'main.shuffle',
-  type: 'enum',
-  description: 'Make silver rupees items that can be shuffled.',
-  values: [
-    { value: 'vanilla', name: 'Vanilla', description: 'Silver Rupees are vanilla' },
-    { value: 'anywhere', name: 'Anywhere', description: 'Silver Rupees are shuffled in the item pool' },
-  ],
-  default: 'vanilla'
 }, {
   key: 'shuffleMasterSword',
   name: 'Master Sword Shuffle',

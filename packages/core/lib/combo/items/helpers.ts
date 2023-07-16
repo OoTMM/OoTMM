@@ -19,7 +19,7 @@ export const isStrayFairy = (item: Item) => isTownStrayFairy(item) || isDungeonS
 export const isTownStrayFairy = (item: Item) => item === Items.MM_STRAY_FAIRY_TOWN;
 export const isDungeonStrayFairy = (item: Item) => ItemGroups.STRAY_FAIRIES_DUNGEON.has(item);
 export const isKey = (item: Item) => isSmallKey(item) || isBossKey(item);
-export const isDungeonItem = (item: Item) => isMapCompass(item) || isKey(item) || isStrayFairy(item);
+export const isDungeonItem = (item: Item) => isMapCompass(item) || isKey(item) || isStrayFairy(item) || isSilverRupee(item);
 export const isDungeonReward = (item: Item) => ItemGroups.DUNGEON_REWARDS.has(item);
 export const isItemMajor = (item: Item) => ItemGroups.REQUIRED.has(item);
 export const isGoldToken = (item: Item) => item === Items.OOT_GS_TOKEN;
@@ -37,3 +37,4 @@ export const isTingleMap = (item: Item) => ItemGroups.TINGLE_MAPS.has(item);
 export const isOwlStatue = (item: Item) => ItemGroups.OWLS.has(item);
 export const isItemLicense = (item: Item) => ItemGroups.LICENSES.has(item);
 export const isItemTriforce = (item: Item) => item === Items.SHARED_TRIFORCE;
+export const isSilverRupee = (item: Item) => ItemGroups.RUPEES_SILVER.has(item);

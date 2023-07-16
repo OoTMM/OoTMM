@@ -88,7 +88,7 @@ export class LogicPassConfig {
       MM_NO_SMALL_KEY: settings.smallKeyShuffleMm === 'removed',
       CSMC_HEARTS: settings.csmcHearts,
       OOT_BLUE_FIRE_ARROWS: settings.blueFireArrows,
-      OOT_SILVER_RUPEE_SHUFFLE: settings.silverRupeeShuffle === 'anywhere',
+      OOT_SILVER_RUPEE_SHUFFLE: settings.silverRupeeShuffle !== 'vanilla',
     };
 
     for (const v in exprs) {

@@ -52,7 +52,7 @@ function asmPatchGroups(settings: Settings) {
     OOT_BLUE_FIRE_ARROWS: settings.blueFireArrows,
     ER: isEntranceShuffle(settings),
     DEFAULT_HOLD: settings.defaultHoldTarget,
-    OOT_SILVER_RUPEE_SHUFFLE: settings.silverRupeeShuffle === 'anywhere',
+    OOT_SILVER_RUPEE_SHUFFLE: settings.silverRupeeShuffle !== 'vanilla',
   };
   const keys = Object.keys(groups) as PatchGroup[];
   return keys.filter((k) => groups[k]);

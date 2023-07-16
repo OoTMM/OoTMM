@@ -66,7 +66,7 @@ export class LogicPassFixer {
         this.fixedLocations.add(location);
       }
 
-      if (type === 'sr' && settings.silverRupeeShuffle !== 'anywhere') {
+      if (type === 'sr' && settings.silverRupeeShuffle === 'vanilla') {
         this.fixedLocations.add(location);
       }
 

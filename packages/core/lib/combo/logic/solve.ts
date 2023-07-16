@@ -11,6 +11,127 @@ import { Item, ItemGroups, ItemHelpers, Items, ItemsCount, PlayerItem, PlayerIte
 
 export type ItemPlacement = Map<Location, PlayerItem>;
 
+const DUNGEON_ITEMS = {
+  DT: [
+    Items.OOT_MAP_DT,
+    Items.OOT_COMPASS_DT
+  ],
+  DC: [
+    Items.OOT_RUPEE_SILVER_DC,
+    Items.OOT_MAP_DC,
+    Items.OOT_COMPASS_DC
+  ],
+  JJ: [
+    Items.OOT_MAP_JJ,
+    Items.OOT_COMPASS_JJ
+  ],
+  Forest: [
+    Items.OOT_SMALL_KEY_FOREST,
+    Items.OOT_BOSS_KEY_FOREST,
+    Items.OOT_MAP_FOREST,
+    Items.OOT_COMPASS_FOREST
+  ],
+  Fire: [
+    Items.OOT_SMALL_KEY_FIRE,
+    Items.OOT_BOSS_KEY_FIRE,
+    Items.OOT_MAP_FIRE,
+    Items.OOT_COMPASS_FIRE
+  ],
+  Water: [
+    Items.OOT_SMALL_KEY_WATER,
+    Items.OOT_BOSS_KEY_WATER,
+    Items.OOT_MAP_WATER,
+    Items.OOT_COMPASS_WATER
+  ],
+  Shadow: [
+    Items.OOT_SMALL_KEY_SHADOW,
+    Items.OOT_RUPEE_SILVER_SHADOW_BLADES,
+    Items.OOT_RUPEE_SILVER_SHADOW_PIT,
+    Items.OOT_RUPEE_SILVER_SHADOW_SCYTHE,
+    Items.OOT_RUPEE_SILVER_SHADOW_SPIKES,
+    Items.OOT_BOSS_KEY_SHADOW,
+    Items.OOT_MAP_SHADOW,
+    Items.OOT_COMPASS_SHADOW
+  ],
+  Spirit: [
+    Items.OOT_SMALL_KEY_SPIRIT,
+    Items.OOT_RUPEE_SILVER_SPIRIT_ADULT,
+    Items.OOT_RUPEE_SILVER_SPIRIT_CHILD,
+    Items.OOT_RUPEE_SILVER_SPIRIT_LOBBY,
+    Items.OOT_RUPEE_SILVER_SPIRIT_SUN,
+    Items.OOT_RUPEE_SILVER_SPIRIT_BOULDERS,
+    Items.OOT_BOSS_KEY_SPIRIT,
+    Items.OOT_MAP_SPIRIT,
+    Items.OOT_COMPASS_SPIRIT
+  ],
+  BotW: [
+    Items.OOT_SMALL_KEY_BOTW,
+    Items.OOT_RUPEE_SILVER_BOTW,
+    Items.OOT_MAP_BOTW,
+    Items.OOT_COMPASS_BOTW
+  ],
+  IC: [
+    Items.OOT_RUPEE_SILVER_IC_BLOCK,
+    Items.OOT_RUPEE_SILVER_IC_SCYTHE,
+    Items.OOT_MAP_IC,
+    Items.OOT_COMPASS_IC
+  ],
+  GF: [
+    Items.OOT_SMALL_KEY_GF
+  ],
+  GTG: [
+    Items.OOT_SMALL_KEY_GTG,
+    Items.OOT_RUPEE_SILVER_GTG_SLOPES,
+    Items.OOT_RUPEE_SILVER_GTG_LAVA,
+    Items.OOT_RUPEE_SILVER_GTG_WATER,
+  ],
+  Ganon: [
+    Items.OOT_SMALL_KEY_GANON,
+    Items.OOT_RUPEE_SILVER_GANON_LIGHT,
+    Items.OOT_RUPEE_SILVER_GANON_FOREST,
+    Items.OOT_RUPEE_SILVER_GANON_FIRE,
+    Items.OOT_RUPEE_SILVER_GANON_WATER,
+    Items.OOT_RUPEE_SILVER_GANON_SHADOW,
+    Items.OOT_RUPEE_SILVER_GANON_SPIRIT,
+    Items.OOT_BOSS_KEY_GANON
+  ],
+  WF: [
+    Items.MM_SMALL_KEY_WF,
+    Items.MM_BOSS_KEY_WF,
+    Items.MM_STRAY_FAIRY_WF,
+    Items.MM_MAP_WF,
+    Items.MM_COMPASS_WF
+  ],
+  SH: [
+    Items.MM_SMALL_KEY_SH,
+    Items.MM_BOSS_KEY_SH,
+    Items.MM_STRAY_FAIRY_SH,
+    Items.MM_MAP_SH,
+    Items.MM_COMPASS_SH
+  ],
+  GB: [
+    Items.MM_SMALL_KEY_GB,
+    Items.MM_BOSS_KEY_GB,
+    Items.MM_STRAY_FAIRY_GB,
+    Items.MM_MAP_GB,
+    Items.MM_COMPASS_GB
+  ],
+  ST: [
+    Items.MM_SMALL_KEY_ST,
+    Items.MM_BOSS_KEY_ST,
+    Items.MM_STRAY_FAIRY_ST,
+    Items.MM_MAP_ST,
+    Items.MM_COMPASS_ST
+  ],
+  SSH: [],
+  OSH: [],
+  PF: [],
+  BtW: [],
+  BtWE: [],
+  ACoI: [],
+  SS: [],
+}
+
 const REWARDS_DUNGEONS = [
   'DT',
   'DC',
@@ -407,37 +528,34 @@ export class LogicPassSolver {
       if (dungeon === 'Ganon') {
         locationIds = new Set([...locationIds, ...world.dungeons['Tower']]);
       }
-      for (const game of GAMES) {
-        for (const baseItem of ['SMALL_KEY', 'BOSS_KEY', 'STRAY_FAIRY', 'MAP', 'COMPASS']) {
-          const itemId = gameId(game, baseItem + '_' + dungeon.toUpperCase(), '_');
-          if (!Object.hasOwn(Items, itemId))
-            continue;
-          const item = itemByID(itemId);
-          const playerItem = makePlayerItem(item, player);
-          const locations = new Set([...locationIds].map(x => makeLocation(x, player)));
+      const items = DUNGEON_ITEMS[dungeon as keyof typeof DUNGEON_ITEMS];
+      for (const item of items) {
+        const playerItem = makePlayerItem(item, player);
+        const locations = new Set([...locationIds].map(x => makeLocation(x, player)));
 
-          if (ItemHelpers.isSmallKeyHideout(item) && this.input.settings.smallKeyShuffleHideout === 'anywhere') {
-            continue;
-          } else if (ItemHelpers.isSmallKeyRegularOot(item) && this.input.settings.smallKeyShuffleOot === 'anywhere') {
-            continue;
-          } else if (ItemHelpers.isSmallKeyRegularMm(item) && this.input.settings.smallKeyShuffleMm === 'anywhere') {
-            continue;
-          } else if (ItemHelpers.isGanonBossKey(item) && this.input.settings.ganonBossKey === 'anywhere') {
-            continue;
-          } else if (ItemHelpers.isRegularBossKeyOot(item) && this.input.settings.bossKeyShuffleOot === 'anywhere') {
-            continue;
-          } else if (ItemHelpers.isRegularBossKeyMm(item) && this.input.settings.bossKeyShuffleMm === 'anywhere') {
-            continue;
-          } else if (ItemHelpers.isDungeonStrayFairy(item) && this.input.settings.strayFairyShuffle === 'anywhere') {
-            continue;
-          } else if (ItemHelpers.isMapCompass(item) && this.input.settings.mapCompassShuffle === 'anywhere') {
-            continue;
-          }
+        if (ItemHelpers.isSmallKeyHideout(item) && this.input.settings.smallKeyShuffleHideout === 'anywhere') {
+          continue;
+        } else if (ItemHelpers.isSmallKeyRegularOot(item) && this.input.settings.smallKeyShuffleOot === 'anywhere') {
+          continue;
+        } else if (ItemHelpers.isSmallKeyRegularMm(item) && this.input.settings.smallKeyShuffleMm === 'anywhere') {
+          continue;
+        } else if (ItemHelpers.isGanonBossKey(item) && this.input.settings.ganonBossKey === 'anywhere') {
+          continue;
+        } else if (ItemHelpers.isRegularBossKeyOot(item) && this.input.settings.bossKeyShuffleOot === 'anywhere') {
+          continue;
+        } else if (ItemHelpers.isRegularBossKeyMm(item) && this.input.settings.bossKeyShuffleMm === 'anywhere') {
+          continue;
+        } else if (ItemHelpers.isDungeonStrayFairy(item) && this.input.settings.strayFairyShuffle === 'anywhere') {
+          continue;
+        } else if (ItemHelpers.isMapCompass(item) && this.input.settings.mapCompassShuffle === 'anywhere') {
+          continue;
+        } else if (ItemHelpers.isSilverRupee(item) && this.input.settings.silverRupeeShuffle === 'anywhere') {
+          continue;
+        }
 
-          while (pool.has(playerItem)) {
-            this.randomAssumed(pool, { restrictedLocations: locations, forcedItem: playerItem });
-            removeItemPools(this.state.pools, playerItem);
-          }
+        while (pool.has(playerItem)) {
+          this.randomAssumed(pool, { restrictedLocations: locations, forcedItem: playerItem });
+          removeItemPools(this.state.pools, playerItem);
         }
       }
     }

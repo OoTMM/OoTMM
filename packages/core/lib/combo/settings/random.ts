@@ -151,6 +151,9 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
     }
   }
 
+  /* Silver rupees */
+  base.silverRupeeShuffle = sampleWeighted(random, { ownDungeon: 10, anywhere: 7, vanilla: 3 });
+
   /* Stray fairies */
   base.strayFairyShuffle = sampleWeighted(random, { mixed: 10, anywhere: 7, vanilla: 3, ownDungeon: 5 });
   if (booleanWeighted(random, 0.5)) {
@@ -399,6 +402,25 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
   default:
     base.childWallets = booleanWeighted(random, 0.25);
     base.colossalWallets = booleanWeighted(random, 0.5);
+  }
+
+  /* Price rando - 25% none, 25% all, 50% individual */
+  switch (randomInt(random, 4)) {
+  case 0:
+    break;
+  case 1:
+    const option = sampleWeighted(random, { affordable: 5, weighted: 10 });
+    base.priceOotShops = option;
+    base.priceMmShops = option;
+    base.priceOotScrubs = option;
+    base.priceMmTingle = option;
+    break;
+  default:
+    base.priceOotShops = sampleWeighted(random, { vanilla: 10, affordable: 10, weighted: 10 });
+    base.priceMmShops = sampleWeighted(random, { vanilla: 10, affordable: 10, weighted: 10 });
+    base.priceOotScrubs = sampleWeighted(random, { vanilla: 10, affordable: 10, weighted: 10 });
+    base.priceMmTingle = sampleWeighted(random, { vanilla: 10, affordable: 10, weighted: 10 });
+    break;
   }
 
   /* MQ - 25% Disabled, 25% Enabled, 50% Individual */
