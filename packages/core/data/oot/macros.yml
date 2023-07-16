@@ -33,16 +33,16 @@
 "can_play_storms": "can_play(SONG_STORMS) || can_play(SHARED_SONG_STORMS)"
 
 # Age macros
-"age_sticks": "is_child || setting(agelessSticks)"
-"age_boomerang": "is_child || setting(agelessBoomerang)"
-"age_hammer": "is_adult || setting(agelessHammer)"
+"age_sticks": "glitch_equip_swap || is_child || setting(agelessSticks)"
+"age_boomerang": "glitch_equip_swap || is_child || setting(agelessBoomerang)"
+"age_hammer": "glitch_equip_swap || is_adult || setting(agelessHammer)"
 "age_sword_child": "is_child || setting(agelessSwords)"
 "age_sword_adult": "is_adult || setting(agelessSwords)"
 "age_shield_child": "is_child || setting(agelessShields)"
 "age_shield_adult": "is_adult || setting(agelessShields)"
 "age_tunics": "is_adult || setting(agelessTunics)"
 "age_boots": "is_adult || setting(agelessBoots)"
-"age_child_trade": "is_child || setting(agelessChildTrade)"
+"age_child_trade": "glitch_equip_swap || is_child || setting(agelessChildTrade)"
 
 # Swords
 "has_sword_kokiri": "cond(setting(progressiveSwordsOot, progressive), has(SWORD), has(SWORD_KOKIRI))"
@@ -147,3 +147,6 @@
 
 # Masks
 "has_mask_truth": "has(MASK_TRUTH) || has(SHARED_MASK_TRUTH)"
+
+# Glitches
+"glitch_equip_swap": "glitch(OOT_EQUIP_SWAP) && (has(SPELL_FIRE) || (has_sticks && (is_child || setting(agelessSticks))))"

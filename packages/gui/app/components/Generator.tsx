@@ -7,6 +7,7 @@ import { Tab, TabBar } from './Tab';
 import { SettingsEditor } from './SettingsEditor';
 import { StartingItems } from './StartingItems';
 import { Tricks } from './Tricks';
+import { Glitches } from './Glitches';
 import { JunkLocations } from './JunkLocations';
 import { Dungeons } from './Dungeons';
 import { SpecialConds } from './SpecialConds';
@@ -39,6 +40,10 @@ export function Generator() {
     tabs.push({
       name: "Tricks",
       component: <Tricks/>
+    });
+    tabs.push({
+      name: "Glitches",
+      component: <Glitches/>
     });
     if (!isRandom) {
       tabs.push({

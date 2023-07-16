@@ -55,6 +55,7 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
   const base = makeSettings({});
   base.junkLocations = oldSettings.junkLocations;
   base.tricks = oldSettings.tricks;
+  base.glitches = oldSettings.glitches;
   base.hints = oldSettings.hints;
 
   /* Main Settings */

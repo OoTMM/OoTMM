@@ -7,6 +7,7 @@ import { DEFAULT_DUNGEONS } from './dungeons';
 import { DEFAULT_SPECIAL_COND, DEFAULT_SPECIAL_CONDS, SPECIAL_CONDS } from './special-conds';
 import { SettingsPatch, patchArray } from './patch';
 import { SETTINGS_DEFAULT_HINTS } from './hints';
+import { DEFAULT_GLITCHES, GLITCHES } from './glitches';
 
 export const DEFAULT_SETTINGS: Settings = { ...SETTINGS.map(s => {
   return {[s.key]: s.default};
@@ -14,6 +15,7 @@ export const DEFAULT_SETTINGS: Settings = { ...SETTINGS.map(s => {
   startingItems: {},
   junkLocations: [] as string[],
   tricks: [ ...DEFAULT_TRICKS ],
+  glitches: [ ...DEFAULT_GLITCHES ],
   dungeon: { ...DEFAULT_DUNGEONS },
   specialConds: { ...DEFAULT_SPECIAL_CONDS },
   plando: { locations: {} },
@@ -29,6 +31,9 @@ function validateSettingsStep(settings: Settings): Settings {
 
   /* Validate tricks */
   s.tricks = sortUnique(s.tricks.filter(t => TRICKS.hasOwnProperty(t)));
+
+  /* Validate glitches */
+  s.glitches = sortUnique(s.glitches.filter(g => GLITCHES.hasOwnProperty(g)));
 
   /* Validate junk locations */
   s.junkLocations = sortUnique(s.junkLocations);
@@ -138,6 +143,11 @@ export function makeSettings(arg: PartialDeep<Settings>): Settings {
     result.tricks = [ ...arg.tricks ];
   }
 
+  /* Apply the glitches */
+  if (arg.glitches !== undefined && Array.isArray(arg.glitches)) {
+    result.glitches = [ ...arg.glitches ];
+  }
+
   /* Apply dungeon settings */
   if (arg.dungeon !== undefined) {
     result.dungeon = { ...DEFAULT_DUNGEONS, ...arg.dungeon };
@@ -182,6 +192,10 @@ export function mergeSettings(settings: Settings, patch: SettingsPatch): Setting
   /* Apply tricks */
   if (patch.tricks !== undefined)
     s.tricks = patchArray(s.tricks, patch.tricks);
+
+  /* Apply glitches */
+  if (patch.glitches !== undefined)
+    s.glitches = patchArray(s.glitches, patch.glitches);
 
   /* Apply dungeons */
   if (patch.dungeon) {

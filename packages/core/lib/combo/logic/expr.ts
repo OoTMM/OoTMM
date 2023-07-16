@@ -1,5 +1,5 @@
 import { Item, ItemGroups, Items, ItemsCount } from '../items';
-import { Settings, TRICKS } from '../settings';
+import { GLITCHES, Settings, TRICKS } from '../settings';
 import { Age } from './pathfind';
 import { PRICE_RANGES } from './price';
 import { World } from './world';
@@ -356,6 +356,13 @@ export const exprTrick = (settings: Settings, trick: string): Expr => {
     throw new Error(`Trick ${trick} not found`);
   }
   return settings.tricks.includes(trick as keyof typeof TRICKS) ? exprTrue() : exprFalse();
+};
+
+export const exprGlitch = (settings: Settings, glitch: string): Expr => {
+  if (!GLITCHES.hasOwnProperty(glitch)) {
+    throw new Error(`Glitch ${glitch} not found`);
+  }
+  return settings.glitches.includes(glitch as keyof typeof GLITCHES) ? exprTrue() : exprFalse();
 };
 
 export const exprOotTime = (time: string): Expr => {

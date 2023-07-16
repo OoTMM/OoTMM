@@ -2,7 +2,7 @@ import { Game } from '../config';
 import { itemByID } from '../items';
 import { Settings } from '../settings';
 import { gameId } from '../util';
-import { Expr, exprTrue, exprFalse, exprAnd, exprOr, exprAge, exprHas, exprRenewable, exprEvent, exprMasks, exprSetting, exprNot, exprCond, exprTrick, exprSpecial, exprOotTime, exprMmTime, exprLicense, exprPrice } from './expr';
+import { Expr, exprTrue, exprFalse, exprAnd, exprOr, exprAge, exprHas, exprRenewable, exprEvent, exprMasks, exprSetting, exprNot, exprCond, exprTrick, exprSpecial, exprOotTime, exprMmTime, exprLicense, exprPrice, exprGlitch } from './expr';
 
 const SIMPLE_TOKENS = ['||', '&&', '(', ')', ',', 'true', 'false', '!', '+', '-'] as const;
 
@@ -252,6 +252,17 @@ export class ExprParser {
     return exprTrick(this.settings, trick);
   }
 
+  private parseExprGlitch(): Expr | undefined {
+    if (this.peek('identifier') !== 'glitch') {
+      return undefined;
+    }
+    this.accept('identifier');
+    this.expect('(');
+    const glitch = this.expect('identifier');
+    this.expect(')');
+    return exprGlitch(this.settings, glitch);
+  }
+
   private parseExprSpecial(): Expr | undefined {
     if (this.peek('identifier') !== 'special') {
       return undefined;
@@ -374,6 +385,7 @@ export class ExprParser {
       || this.parseExprMasks()
       || this.parseExprSetting()
       || this.parseExprTrick()
+      || this.parseExprGlitch()
       || this.parseExprSpecial()
       || this.parseExprOotTime()
       || this.parseExprMmTime()
