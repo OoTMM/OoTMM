@@ -351,7 +351,7 @@ static int isItemAmbiguousMm(s16 gi)
 static size_t comboTextStrlen(const char* buffer)
 {
     size_t i;
-    for (i = 0; ((u8)buffer[i]) != TEXT_END[0]; i++)
+    for (i = 0; ((u8)buffer[i]) != (u8)(TEXT_END[0]); i++)
         ;
     return i;
 }
