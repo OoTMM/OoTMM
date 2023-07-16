@@ -47,7 +47,7 @@ static u16 EnGSwitch_ID(Actor* this, GameState_Play* play)
         base = 0x05;
         break;
     case SCE_OOT_TEMPLE_SPIRIT:
-        switch (play->roomCtx.curRoom.num)
+        switch (this->room)
         {
         case 0x00:
         case 0x02:
@@ -65,7 +65,7 @@ static u16 EnGSwitch_ID(Actor* this, GameState_Play* play)
         }
         break;
     case SCE_OOT_TEMPLE_SHADOW:
-        switch (play->roomCtx.curRoom.num)
+        switch (this->room)
         {
         case 0x06:
             base = 0x19;
@@ -84,7 +84,7 @@ static u16 EnGSwitch_ID(Actor* this, GameState_Play* play)
         }
         break;
     case SCE_OOT_ICE_CAVERN:
-        switch (play->roomCtx.curRoom.num)
+        switch (this->room)
         {
         case 0x03:
             base = 0x37;
@@ -97,7 +97,7 @@ static u16 EnGSwitch_ID(Actor* this, GameState_Play* play)
         }
         break;
     case SCE_OOT_GERUDO_TRAINING_GROUND:
-        switch (play->roomCtx.curRoom.num)
+        switch (this->room)
         {
         case 0x02:
             base = 0x41;
@@ -113,7 +113,7 @@ static u16 EnGSwitch_ID(Actor* this, GameState_Play* play)
         }
         break;
     case SCE_OOT_INSIDE_GANON_CASTLE:
-        switch (play->roomCtx.curRoom.num)
+        switch (this->room)
         {
         case 0x0c:
         case 0x11:
