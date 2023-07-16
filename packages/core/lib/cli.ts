@@ -3,6 +3,7 @@ import YAML from 'yaml';
 
 import { generate } from "./combo";
 import { OptionsInput } from "./combo/options";
+import { makeSettings } from './combo';
 
 const makeOptions = async (args: string[]): Promise<OptionsInput> => {
   const opts: OptionsInput = {};
@@ -34,6 +35,12 @@ const makeOptions = async (args: string[]): Promise<OptionsInput> => {
     case "--patch": {
       const patch = await fs.readFile(args[++i]);
       opts.patch = patch;
+      break;
+    }
+    case "--settings": {
+      const newBuf = Buffer.from(args[++i], 'base64');
+      const newPartialSettings = JSON.parse(newBuf.toString());
+      opts.settings = makeSettings(newPartialSettings);
       break;
     }
     default:
