@@ -5,7 +5,7 @@
 "is_night": "oot_time(night) || can_play_sun"
 "is_dusk": "oot_time(day) && oot_time(night)" # If day and night can be true at the same time, then you have access to a local time-flow zone
 #Standard Single Item Use Macros
-"has_ocarina": "has(OCARINA) || has(SHARED_OCARINA)"
+"has_ocarina": "glitch_ocarina_items || has(OCARINA) || has(SHARED_OCARINA)"
 "can_play(x)": "has_ocarina && has(x)"
 "has_sticks": "event(STICKS) || renewable(STICK) || renewable(STICKS_5) || renewable(STICKS_10) || renewable(SHARED_STICK) || renewable(SHARED_STICKS_5) || renewable(SHARED_STICKS_10) || (setting(sharedNutsSticks) && event(MM_STICKS))"
 "has_nuts": "event(NUTS) || renewable(NUTS_5) || renewable(NUTS_10) || renewable(SHARED_NUT) || renewable(SHARED_NUTS_5) || renewable(SHARED_NUTS_10) || (setting(sharedNutsSticks) && event(MM_NUTS))"
@@ -102,6 +102,10 @@
 "hidden_grotto_storms": "stone_of_agony && can_play_storms"
 "has_spiritual_stones": "has(STONE_EMERALD) && has(STONE_RUBY) && has(STONE_SAPPHIRE)"
 
+# Bottle contents
+"has_bugs": "has_bottle && (renewable(BUGS) || event(BUGS))"
+"has_fish": "has_bottle && (renewable(FISH) || event(FISH))"
+
 #Specific Interaction Macros:
 "can_ride_epona": "is_adult && can_play_epona"
 "gs_soil": "is_child && has_bottle && (renewable(BUGS) || event(BUGS))"
@@ -150,3 +154,4 @@
 
 # Glitches
 "glitch_equip_swap": "glitch(OOT_EQUIP_SWAP) && (has(SPELL_FIRE) || (has_sticks && (is_child || setting(agelessSticks))))"
+"glitch_ocarina_items": "glitch(OOT_OCARINA_ITEMS) && (has_bugs || has_fish)"
