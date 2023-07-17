@@ -53,6 +53,7 @@ function asmPatchGroups(settings: Settings) {
     ER: isEntranceShuffle(settings),
     DEFAULT_HOLD: settings.defaultHoldTarget,
     OOT_SILVER_RUPEE_SHUFFLE: settings.silverRupeeShuffle !== 'vanilla',
+    OOT_FREE_SCARECROW: settings.freeScarecrowOot,
   };
   const keys = Object.keys(groups) as PatchGroup[];
   return keys.filter((k) => groups[k]);

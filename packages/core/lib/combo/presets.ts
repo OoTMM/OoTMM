@@ -27,6 +27,7 @@ const PRESET_BLITZ = makeSettings({
   blueFireArrows: true,
   defaultHoldTarget: true,
   progressiveGoronLullaby: 'single',
+  freeScarecrowOot: true,
   sharedBows: true,
   sharedBombBags: true,
   sharedMagic: true,

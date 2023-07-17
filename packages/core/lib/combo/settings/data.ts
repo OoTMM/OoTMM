@@ -519,6 +519,13 @@ export const SETTINGS = [{
   ],
   default: 'bossBeaten'
 }, {
+  key: 'freeScarecrowOot',
+  name: 'Free Scarecrow (OoT)',
+  category: 'main.events',
+  type: 'boolean',
+  description: '',
+  default: false,
+}, {
   key: 'crossWarpOot',
   name: 'Cross-Games OoT Warp Songs',
   category: 'main.cross',

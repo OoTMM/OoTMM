@@ -46,6 +46,7 @@
 #define EV_OOT_CHK_LAKE_HYLIA_WATER         0x69
 #define EV_OOT_CHK_ZELDA_FLED               0x80
 #define EV_OOT_CHK_ZELDA_FLED_BRIDGE        0x82
+#define EV_OOT_CHK_SONG_SCARECROW_ADULT     0x9c
 #define EV_OOT_CHK_CARPENTER_1              OOT_EV(0x9, 0)
 #define EV_OOT_CHK_CARPENTER_2              OOT_EV(0x9, 1)
 #define EV_OOT_CHK_CARPENTER_3              OOT_EV(0x9, 2)

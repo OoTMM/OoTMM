@@ -89,6 +89,7 @@ export class LogicPassConfig {
       CSMC_HEARTS: settings.csmcHearts,
       OOT_BLUE_FIRE_ARROWS: settings.blueFireArrows,
       OOT_SILVER_RUPEE_SHUFFLE: settings.silverRupeeShuffle !== 'vanilla',
+      OOT_FREE_SCARECROW: settings.freeScarecrowOot,
     };
 
     for (const v in exprs) {

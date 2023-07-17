@@ -179,6 +179,11 @@ static void applyStartingEvents(void)
             gSave.perm[SCE_OOT_THIEVES_HIDEOUT].switches |= (1 << 1);
         }
     }
+
+    if (comboConfig(CFG_OOT_FREE_SCARECROW))
+    {
+        SetEventChk(EV_OOT_CHK_SONG_SCARECROW_ADULT);
+    }
 }
 
 void comboCreateSave(void* unk, void* buffer)
