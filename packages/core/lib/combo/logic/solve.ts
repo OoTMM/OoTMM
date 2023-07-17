@@ -783,7 +783,7 @@ export class LogicPassSolver {
         }
       }
 
-      throw new LogicSeedError(`No reachable locations for item ${requiredItem}`);
+      throw new LogicSeedError(`No reachable locations for item ${requiredItem.item.id}`);
     }
   }
 
