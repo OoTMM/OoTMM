@@ -250,6 +250,45 @@ export class LogicPassEntrances {
     }
   }
 
+  private assignDungeon(worldId: number, dungeons: Set<string>, dungeonLocs: Set<string>, entrances: Map<string, WorldEntrance>) {
+    /* Compute the assign map */
+    let bestSize = Infinity;
+    const locsForDungeon = new Map<string, Set<string>>();
+    for (const dungeon of dungeons) {
+      const locs = new Set<string>();
+      locsForDungeon.set(dungeon, locs);
+      for (const loc of dungeonLocs) {
+        if (this.isAssignableNew(worldId, entrances.get(loc)!.id, entrances.get(dungeon)!.id, { ownGame: this.input.settings.erDungeons === 'ownGame' })) {
+          locs.add(loc);
+        }
+        if (locs.size > bestSize) {
+          locsForDungeon.delete(dungeon);
+          break;
+        }
+      }
+      if (locs.size < bestSize) {
+        bestSize = locs.size;
+      }
+    }
+
+    /* Remove the dungeons that are not the best */
+    for (const v of locsForDungeon.keys()) {
+      if (locsForDungeon.get(v)!.size !== bestSize) {
+        locsForDungeon.delete(v);
+      }
+    }
+
+    console.log(locsForDungeon);
+
+    /* Assign the dungeon */
+    const dungeon = sample(this.input.random, Array.from(locsForDungeon.keys()));
+    const locs = locsForDungeon.get(dungeon)!;
+    const loc = sample(this.input.random, Array.from(locs));
+
+    /* Return the result */
+    return { dungeon, loc };
+  }
+
   private fixDungeons(worldId: number) {
     const world = this.worlds[worldId];
     /* Set the dungeon list */
@@ -304,36 +343,51 @@ export class LogicPassEntrances {
     }
 
     /* Assign the dungeons */
-    const dungeons = shuffle(this.input.random, Array.from(shuffledDungeons));
-    const dungeonsDest = new Set(dungeons);
-    while (dungeons.length > 0) {
-      const dungeon = dungeons.pop()!;
-      const candidates = shuffle(this.input.random, Array.from(dungeonsDest));
-      let destDungeon: string | null = null;
-
-      for (const c of candidates) {
-        const src = dungeonEntrances.get(dungeon)!.id;
-        const dst = dungeonEntrances.get(c)!.id;
-        const assignable = this.isAssignableNew(worldId, src, dst, { ownGame: this.input.settings.erDungeons === 'ownGame' });
-        if (assignable) {
-          destDungeon = c;
-          break;
+    const unplacedDungeons = new Set(shuffledDungeons);
+    const unplacedLocs = new Set(shuffledDungeons);
+    const assigns = new Map<string, Set<string>>();
+    while (unplacedDungeons.size > 0) {
+      /* Refresh the assigns */
+      for (const dungeon of unplacedDungeons) {
+        if (!assigns.has(dungeon)) {
+          assigns.set(dungeon, new Set<string>());
+        }
+        const locs = assigns.get(dungeon)!;
+        for (const loc of unplacedLocs) {
+          if (locs.has(loc)) {
+            continue;
+          }
+          if (this.isAssignableNew(worldId, dungeonEntrances.get(loc)!.id, dungeonEntrances.get(dungeon)!.id, { ownGame: this.input.settings.erDungeons === 'ownGame' })) {
+            locs.add(loc);
+          }
         }
       }
 
-      if (!destDungeon) {
-        throw new LogicError('Unable to assign a dungeon to location: ' + dungeon);
+      const minSize = Math.min(...Array.from(assigns.values()).map(s => s.size));
+      const candidates = Array.from(assigns.entries()).filter(([_, s]) => s.size === minSize).map(([k, _]) => k);
+      const dungeon = sample(this.input.random, candidates);
+      const locs = assigns.get(dungeon)!;
+      if (locs.size === 0) {
+        throw new LogicError(`Unable to assign dungeon ${dungeon}`);
       }
+      const loc = sample(this.input.random, Array.from(locs));
+
+      /* Mark the placement */
+      assigns.delete(dungeon);
+      for (const v of assigns.values()) {
+        v.delete(loc);
+      }
+      unplacedDungeons.delete(dungeon);
+      unplacedLocs.delete(loc);
 
       /* Change the world */
-      dungeonsDest.delete(destDungeon);
-      const sourceEntranceId = dungeonEntrances.get(dungeon)!.id;
-      const destEntranceId = dungeonEntrances.get(destDungeon)!.id;
+      const sourceEntranceId = dungeonEntrances.get(loc)!.id;
+      const destEntranceId = dungeonEntrances.get(dungeon)!.id;
 
       this.place(worldId, sourceEntranceId, destEntranceId, { noSongOfTime: true });
 
       /* Store the dungeon */
-      world.dungeonIds[DUNGEON_INDEX[destDungeon]] = DUNGEON_INDEX[dungeon];
+      world.dungeonIds[DUNGEON_INDEX[dungeon]] = DUNGEON_INDEX[loc];
     }
   }
 
@@ -465,7 +519,9 @@ export class LogicPassEntrances {
     if (this.input.settings.logic === 'allLocations') {
       const allLocsCount = this.worlds.map(x => x.locations.size).reduce((a, b) => a + b, 0);
       if (pathfinderState.locations.size < allLocsCount) {
-        throw new LogicEntranceError('Not all locations are reachable');
+        const allLocations = this.worlds.map((x, i) => [...x.locations].map(y => makeLocation(y, i))).flat();
+        const unreachableLocs = allLocations.filter(x => !pathfinderState.locations.has(x));
+        throw new LogicEntranceError(`Unreachable locations: ${unreachableLocs.join(', ')}`);
       }
     }
 
