@@ -204,89 +204,68 @@ export class LogicPassEntrances {
     }
 
     /* Actually shuffle bosses */
-    const bosses = shuffle(this.input.random, Array.from(bossEntrancesByDungeon.keys()));
-    const bossesToPlace = new Set(bosses);
-    for (const srcBoss of bosses) {
-      const src = bossEntrancesByDungeon.get(srcBoss)!;
-      const candidates = shuffle(this.input.random, Array.from(bossesToPlace));
-      let dstBoss: string | null = null;
-      for (const boss of candidates) {
-        const dst = bossEntrancesByDungeon.get(boss)!;
-        if (this.isAssignableNew(worldId, src.id, dst.id, { ownGame: this.input.settings.erBoss === 'ownGame', locations: bossLocations.get(boss)! })) {
-          dstBoss = boss;
-          break;
+    const unplacedBosses = new Set(bossEntrancesByDungeon.keys());
+    const unplacedLocs = new Set(bossLocations.keys());
+    const assigns = new Map<string, Set<string>>();
+    while (unplacedBosses.size > 0) {
+      /* Refresh the assigns */
+      for (const boss of unplacedBosses) {
+        if (!assigns.has(boss)) {
+          assigns.set(boss, new Set());
+        }
+        const locs = assigns.get(boss)!;
+        for (const loc of unplacedLocs) {
+          if (locs.has(loc)) {
+            continue;
+          }
+          if (this.isAssignableNew(worldId, bossEntrancesByDungeon.get(loc)!.id, bossEntrancesByDungeon.get(boss)!.id, { ownGame: this.input.settings.erBoss === 'ownGame', locations: bossLocations.get(boss)! })) {
+            locs.add(loc);
+          }
         }
       }
-      if (dstBoss === null) {
-        throw new LogicEntranceError(`Nowhere to place boss ${srcBoss}`);
+
+      const minSize = Math.min(...Array.from(assigns.values()).map(s => s.size));
+      const bosses = Array.from(assigns.entries()).filter(([_, s]) => s.size === minSize).map(([k, _]) => k);
+      const boss = sample(this.input.random, bosses);
+      const locs = assigns.get(boss)!;
+      if (locs.size === 0) {
+        throw new LogicEntranceError(`Nowhere to place boss ${boss}`);
       }
-      bossesToPlace.delete(dstBoss);
+      const loc = sample(this.input.random, Array.from(locs));
 
-      /* We found a boss - place it */
-      const dst = bossEntrancesByDungeon.get(dstBoss)!;
+      /* Mark as placed */
+      unplacedBosses.delete(boss);
+      unplacedLocs.delete(loc);
+      assigns.delete(boss);
+      for (const l of assigns.values()) {
+        l.delete(loc);
+      }
+
+      /* Place the boss */
+      const src = bossEntrancesByDungeon.get(loc)!;
+      const dst = bossEntrancesByDungeon.get(boss)!;
       this.place(worldId, src.id, dst.id, { noSongOfTime: true });
-
-      /* Mark the boss */
-      world.bossIds[BOSS_INDEX_BY_DUNGEON[dstBoss]] = BOSS_INDEX_BY_DUNGEON[srcBoss];
+      world.bossIds[BOSS_INDEX_BY_DUNGEON[boss]] = BOSS_INDEX_BY_DUNGEON[loc];
 
       /* Add the events */
-      const areaNames = bossAreas.get(dstBoss)!;
+      const areaNames = bossAreas.get(boss)!;
       const lastAreaName = areaNames[areaNames.length - 1];
       const lastArea = world.areas[lastAreaName];
-      lastArea.events = { ...lastArea.events, ...bossEvents.get(srcBoss)! };
+      lastArea.events = { ...lastArea.events, ...bossEvents.get(loc)! };
 
       /* Change the associated dungeon */
-      for (const a of bossAreas.get(dstBoss)!) {
+      for (const a of bossAreas.get(boss)!) {
         const area = world.areas[a];
-        area.dungeon = srcBoss;
-        area.region = DUNGEONS_REGIONS[srcBoss];
+        area.dungeon = loc;
+        area.region = DUNGEONS_REGIONS[loc];
 
-        for (const loc in area.locations) {
-          world.regions[loc] = DUNGEONS_REGIONS[srcBoss];
-          world.dungeons[dstBoss].delete(loc);
-          world.dungeons[srcBoss].add(loc);
+        for (const l in area.locations) {
+          world.regions[l] = DUNGEONS_REGIONS[loc];
+          world.dungeons[boss].delete(l);
+          world.dungeons[loc].add(l);
         }
       }
     }
-  }
-
-  private assignDungeon(worldId: number, dungeons: Set<string>, dungeonLocs: Set<string>, entrances: Map<string, WorldEntrance>) {
-    /* Compute the assign map */
-    let bestSize = Infinity;
-    const locsForDungeon = new Map<string, Set<string>>();
-    for (const dungeon of dungeons) {
-      const locs = new Set<string>();
-      locsForDungeon.set(dungeon, locs);
-      for (const loc of dungeonLocs) {
-        if (this.isAssignableNew(worldId, entrances.get(loc)!.id, entrances.get(dungeon)!.id, { ownGame: this.input.settings.erDungeons === 'ownGame' })) {
-          locs.add(loc);
-        }
-        if (locs.size > bestSize) {
-          locsForDungeon.delete(dungeon);
-          break;
-        }
-      }
-      if (locs.size < bestSize) {
-        bestSize = locs.size;
-      }
-    }
-
-    /* Remove the dungeons that are not the best */
-    for (const v of locsForDungeon.keys()) {
-      if (locsForDungeon.get(v)!.size !== bestSize) {
-        locsForDungeon.delete(v);
-      }
-    }
-
-    console.log(locsForDungeon);
-
-    /* Assign the dungeon */
-    const dungeon = sample(this.input.random, Array.from(locsForDungeon.keys()));
-    const locs = locsForDungeon.get(dungeon)!;
-    const loc = sample(this.input.random, Array.from(locs));
-
-    /* Return the result */
-    return { dungeon, loc };
   }
 
   private fixDungeons(worldId: number) {
