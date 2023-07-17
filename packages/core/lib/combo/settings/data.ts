@@ -523,7 +523,7 @@ export const SETTINGS = [{
   name: 'Free Scarecrow (OoT)',
   category: 'main.events',
   type: 'boolean',
-  description: '',
+  description: 'Allows to spawn Pierre the Scarecrow just by pulling the Ocarina out',
   default: false,
 }, {
   key: 'crossWarpOot',
