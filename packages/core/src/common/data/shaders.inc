@@ -59,7 +59,7 @@
 /* OoT       Megaton Hammer                    */ { Shader_Opa0,                   { 0x60009d0 }},
 /* OoT       Giant Knife / BS                  */ { Shader_GiantKnife,             { 0x6000600 }},
 /* OoT       Chicken / Pocket Cucco            */ { Shader_Opa10_Xlu2,             { 0x6001630, 0x60015f0, 0x6001948 }},
-/* OoT       Ruto's Letter                     */ { Shader_Opa0_Xlu1,              { 0x60008e0, 0x6000ae0 }},
+/* OoT       Ruto's Letter                     */ { Shader_RutosLetter,            { 0x60008e0, 0x6000ae0 }},
 /* OoT       Fairy Ocarina                     */ { Shader_Opa0_Xlu1,              { 0x60008e0, 0x6000b58 }},
 /* OoT       Iron Boots                        */ { Shader_Opa0_Xlu1,              { 0x6001630, 0x6001a98 }},
 /* OoT       Deku Seeds                        */ { Shader_Opa0,                   { 0x6000810 }},

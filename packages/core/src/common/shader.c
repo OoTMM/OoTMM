@@ -657,6 +657,24 @@ void Shader_SilverRupee(GameState_Play* play, s16 index)
     CLOSE_DISPS();
 }
 
+void Shader_RutosLetter(GameState_Play* play, s16 index)
+{
+    const Shader* shader;
+    shader = &kShaders[index];
+    OPEN_DISPS(play->gs.gfx);
+    ModelViewRotateZ(1.57f, 1);
+    
+    InitListPolyOpa(play->gs.gfx);
+
+    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
+    gSPDisplayList(POLY_OPA_DISP++, shader->lists[0]);
+    
+    InitListPolyXlu(play->gs.gfx);
+    gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
+    gSPDisplayList(POLY_XLU_DISP++, shader->lists[1]);
+    CLOSE_DISPS();
+}
+
 const Shader kShaders[] = {
 #include "data/shaders.inc"
 };
