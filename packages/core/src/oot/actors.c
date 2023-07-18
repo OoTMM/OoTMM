@@ -17,6 +17,10 @@ static int canSpawnSoul(s16 actorId, u16 variable)
     {
     case AC_EN_TEST:
         return hasSoul(GI_OOT_SOUL_STALFOS);
+    case AC_BG_BDAN_OBJECTS:
+        if (variable & 0xff)
+            return 1;
+        /* Fallthrough */
     case AC_EN_OKUTA:
     case AC_EN_BIGOKUTA:
         return hasSoul(GI_OOT_SOUL_OCTOROK);
