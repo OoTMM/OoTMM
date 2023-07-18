@@ -693,6 +693,13 @@ export class LogicPassWorldTransform {
       this.addItem(item);
     }
 
+    /* Add souls */
+    if (settings.enemySoulsOot) {
+      for (const item of ItemGroups.SOULS) {
+        this.addItem(item);
+      }
+    }
+
     /* Handle extra wallets */
     if (this.state.settings.childWallets) {
       this.addItem(Items.OOT_WALLET);
