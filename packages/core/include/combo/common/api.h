@@ -268,3 +268,5 @@ s16 ActorCutscene_StartAndSetFlag(s16 index, Actor* actor);
 #endif
 
 void DrawHUD(GameState_Play* play);
+
+int IsSceneValidEpona(int sceneId);

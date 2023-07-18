@@ -241,7 +241,8 @@ typedef struct
     /* 0x13EE */ u16 prevHudVisibilityMode; // used to store and recover hud visibility mode for pause menu and text boxes
     char    unk_13f0[0x06];
     s16     magicTarget;
-    char    unk_13f8[0x0a];
+    char    unk_13f8[0x02];
+    u16     eventInf[4];
     u16     mapIndex;
     char    unk_1404[0xe];
     u16     nextCutscene;
