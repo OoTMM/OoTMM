@@ -211,6 +211,7 @@ OOT_RUPEE_SILVER_GANON_FIRE:              0xd4
 OOT_RUPEE_SILVER_GANON_FOREST:            0xd5
 OOT_RUPEE_SILVER_GANON_SHADOW:            0xd6
 OOT_RUPEE_SILVER_GANON_WATER:             0xd7
+OOT_SOUL:                                 0xd8
 
 MM_RUPEE_GREEN:               0x01
 MM_RUPEE_BLUE:                0x02

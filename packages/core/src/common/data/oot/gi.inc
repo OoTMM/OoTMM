@@ -213,3 +213,4 @@ X(ITEM_CUSTOM,              0x80,  DRAWGI_OOT_RUPEE_SILVER,             0x5f, 0x
 X(ITEM_CUSTOM,              0x80,  DRAWGI_OOT_RUPEE_SILVER,             0x5f, 0x0000, "a " C1 "Silver Rupee (Ganon Forest)"),
 X(ITEM_CUSTOM,              0x80,  DRAWGI_OOT_RUPEE_SILVER,             0x5f, 0x0000, "a " C1 "Silver Rupee (Ganon Shadow)"),
 X(ITEM_CUSTOM,              0x80,  DRAWGI_OOT_RUPEE_SILVER,             0x5f, 0x0000, "a " C1 "Silver Rupee (Ganon Water)"),
+X(ITEM_CUSTOM,              0x80,  DRAWGI_SOUL,                         0xb4, 0x015c, "a " C1 "Soul"),

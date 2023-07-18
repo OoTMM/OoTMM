@@ -377,6 +377,7 @@ const ITEM_IDS = [
   'OOT_RUPEE_SILVER_GANON_FOREST',
   'OOT_RUPEE_SILVER_GANON_SHADOW',
   'OOT_RUPEE_SILVER_GANON_WATER',
+  'OOT_SOUL',
 ] as const;
 
 type ItemID = typeof ITEM_IDS[number];

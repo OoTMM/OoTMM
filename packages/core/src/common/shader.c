@@ -509,22 +509,60 @@ static void Shader_CustomStrayFairy(GameState_Play* play, s16 shaderId)
     CLOSE_DISPS();
 }
 
+typedef struct
+{
+    u32 skullEnv;
+    u32 skullPrimary;
+    u32 flameEnv;
+    u32 flamePrimary;
+}
+GsColors;
+
 void Shader_CustomGS(GameState_Play* play, s16 index)
 {
+    static const GsColors kColors[] = {
+        { 0x967800ff, 0xffffaaff, 0xffd86eff, 0xffd86eff }, /* GS Token */
+        { 0x967800ff, 0xffffaaff, 0x82ff80ff, 0x82ff80ff }, /* Swamp Token */
+        { 0x967800ff, 0xffffaaff, 0x7d83ffff, 0x7d83ffff }, /* Ocean Token */
+        { 0xaaaaaaff, 0xffffffff, 0xff0000ff, 0xff0000ff }, /* Soul */
+    };
+
     const Shader* shader;
+    const GsColors* gsc;
+    float fc;
     u8 r;
     u8 g;
     u8 b;
     u8 a;
 
     shader = &kShaders[index];
+    gsc = &kColors[shader->lists[0]];
+    fc = play->gs.frameCount;
+
     OPEN_DISPS(play->gs.gfx);
-    color4(&r, &g, &b, &a, shader->lists[2]);
+    InitListPolyOpa(play->gs.gfx);
+    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    color4(&r, &g, &b, &a, gsc->skullEnv);
+    gDPSetEnvColor(POLY_OPA_DISP++, r, g, b, a);
+    color4(&r, &g, &b, &a, gsc->skullPrimary);
+    gDPSetPrimColor(POLY_OPA_DISP++, 0, 0x80, r, g, b, a);
+    gSPDisplayList(POLY_OPA_DISP++, 0x06000330);
+
+    InitListPolyXlu(play->gs.gfx);
+    gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPSegment(POLY_XLU_DISP++, 0x08, GetSegment(play->gs.gfx, 0, 0, fc * -5, 0x20, 0x20, 1, 0, 0, 0x20, 0x40));
+    color4(&r, &g, &b, &a, gsc->flameEnv);
     gDPSetEnvColor(POLY_XLU_DISP++, r, g, b, a);
-    color4(&r, &g, &b, &a, shader->lists[3]);
+    color4(&r, &g, &b, &a, gsc->flamePrimary);
     gDPSetPrimColor(POLY_XLU_DISP++, 0, 0x80, r, g, b, a);
+    gSPDisplayList(POLY_XLU_DISP++, 0x06000438);
+    gDPPipeSync(POLY_XLU_DISP++);
+    color4(&r, &g, &b, &a, gsc->skullEnv);
+    gDPSetEnvColor(POLY_XLU_DISP++, r, g, b, a);
+    color4(&r, &g, &b, &a, gsc->skullPrimary);
+    gDPSetPrimColor(POLY_XLU_DISP++, 0, 0x80, r, g, b, a);
+    gSPDisplayList(POLY_XLU_DISP++, 0x06000508);
     CLOSE_DISPS();
-    Shader_GS(play, index);
 }
 
 void Shader_CustomPotion(GameState_Play* play, s16 index)
@@ -663,12 +701,12 @@ void Shader_RutosLetter(GameState_Play* play, s16 index)
     shader = &kShaders[index];
     OPEN_DISPS(play->gs.gfx);
     ModelViewRotateZ(1.57f, 1);
-    
+
     InitListPolyOpa(play->gs.gfx);
 
     gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
     gSPDisplayList(POLY_OPA_DISP++, shader->lists[0]);
-    
+
     InitListPolyXlu(play->gs.gfx);
     gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
     gSPDisplayList(POLY_XLU_DISP++, shader->lists[1]);
