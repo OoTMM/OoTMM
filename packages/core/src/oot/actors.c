@@ -11,7 +11,7 @@ static int hasSoul(s16 gi)
         return gOotSouls1 & (1 << soulId);
 }
 
-static int canSpawnSoul(s16 actorId, u16 variable)
+static int canSpawnSoul(GameState_Play* play, s16 actorId, u16 variable)
 {
     switch (actorId)
     {
@@ -37,6 +37,8 @@ static int canSpawnSoul(s16 actorId, u16 variable)
     case AC_EN_ZF:
         return hasSoul(GI_OOT_SOUL_LIZALFOS_DINALFOS);
     case AC_EN_GOMA:
+        if (play->sceneId == SCE_OOT_LAIR_GOHMA)
+            return 1;
         return hasSoul(GI_OOT_SOUL_GOHMA_LARVA);
     case AC_EN_BUBBLE:
         return hasSoul(GI_OOT_SOUL_SHABOM);
@@ -128,7 +130,7 @@ static int canSpawnSoul(s16 actorId, u16 variable)
 
 Actor* comboSpawnActor(void* unk, GameState_Play *play, short actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable)
 {
-    if (!canSpawnSoul(actorId, variable))
+    if (!canSpawnSoul(play, actorId, variable))
     {
         g.roomEnemyLackSoul = 1;
         return NULL;
