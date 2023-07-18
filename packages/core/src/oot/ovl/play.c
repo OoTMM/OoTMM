@@ -255,6 +255,7 @@ void hookPlay_Init(GameState_Play* play)
                 gSave.entrance = gLastEntrance;
                 Play_Init(play);
                 gComboCtx.shuffledEntrance = 1;
+                comboClearEpona(play);
                 comboGameSwitch(play, override);
                 return;
             }
@@ -375,3 +376,19 @@ static void Play_LoadKaleidoScopeHook(void* unk)
 }
 
 PATCH_CALL(0x8009a06c, Play_LoadKaleidoScopeHook);
+
+void comboClearEpona(GameState_Play* play)
+{
+    Actor_Player* link;
+
+    link = GET_LINK(play);
+    if (link->state & PLAYER_ACTOR_STATE_EPONA)
+    {
+        /* Link is on Epona, needs to dismount */
+        link->state &= ~PLAYER_ACTOR_STATE_EPONA;
+
+        /* Reset the TempB */
+        gSave.equips.buttonItems[0] = gSaveContext.buttonStatus[0];
+        gSaveContext.buttonStatus[0] = ITEM_NONE;
+    }
+}

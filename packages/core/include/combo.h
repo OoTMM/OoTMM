@@ -384,6 +384,8 @@ extern s16 gPrevCursorPoint;
 extern s8 gSoaringIndexSelected;
 #endif
 
+void comboClearEpona(GameState_Play* play);
+
 #else
 # include <combo/asm.h>
 #endif
