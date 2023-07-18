@@ -155,3 +155,6 @@
 # Glitches
 "glitch_equip_swap": "glitch(OOT_EQUIP_SWAP) && (has(SPELL_FIRE) || (has_sticks && (is_child || setting(agelessSticks))))"
 "glitch_ocarina_items": "glitch(OOT_OCARINA_ITEMS) && (has_bugs || has_fish)"
+
+# Misc
+"soul(x)": "(!setting(enemySoulsOot)) || has(x)"
