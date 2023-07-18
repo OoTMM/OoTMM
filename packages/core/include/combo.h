@@ -358,6 +358,7 @@ typedef struct
     const ComboItemQuery*   itemQueryBox;
     u8                      silverRupee;
     u8                      delayedSwitchFlag;
+    u8                      roomEnemyLackSoul:1;
 }
 ComboGlobal;
 

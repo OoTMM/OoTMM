@@ -129,6 +129,15 @@ static int canSpawnSoul(s16 actorId, u16 variable)
 Actor* comboSpawnActor(void* unk, GameState_Play *play, short actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable)
 {
     if (!canSpawnSoul(actorId, variable))
+    {
+        g.roomEnemyLackSoul = 1;
         return NULL;
+    }
     return SpawnActor(unk, play, actorId, x, y, z, rx, ry, rz, variable);
+}
+
+void Actor_RemoveFromCategory_SetTempClearHack(GameState_Play* play, u32 flag)
+{
+    if (!g.roomEnemyLackSoul)
+        SetRoomClear(play, flag);
 }
