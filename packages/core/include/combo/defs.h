@@ -7,6 +7,7 @@
 #ifdef GAME_OOT
 # define PAYLOAD_ROM    0x01f80000
 # define PAYLOAD_RAM    0x80600000
+# define PAYLOAD_SIZE   0x50000
 # define LOADER_ADDR    0x80006600
 # define LOADER_NEXT    InitDmaManager
 
@@ -15,8 +16,9 @@
 #endif
 
 #ifdef GAME_MM
-# define PAYLOAD_ROM    0x03f00000
+# define PAYLOAD_ROM    0x03f40000
 # define PAYLOAD_RAM    0x80740000
+# define PAYLOAD_SIZE   0x40000
 # define LOADER_ADDR    0x800982b0
 # define LOADER_NEXT    InitDmaManager
 
@@ -25,7 +27,6 @@
 #endif
 
 #define MM_BASE       0x02000000
-#define PAYLOAD_SIZE  0x00040000
 
 #define MASK_FOREIGN_GI     0x0200
 #define MASK_FOREIGN_OBJECT 0x1000

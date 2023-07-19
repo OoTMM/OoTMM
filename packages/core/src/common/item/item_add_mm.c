@@ -1206,7 +1206,6 @@ int comboAddItemMm(s16 gi, int noEffect)
     case GI_MM_SOUL_FREEZARD:
     case GI_MM_SOUL_WOLFOS:
     case GI_MM_SOUL_GUAY:
-    case GI_MM_SOUL_SPIKE:
     case GI_MM_SOUL_FLYING_POT:
     case GI_MM_SOUL_FLOORMASTER:
     case GI_MM_SOUL_CHUCHU:

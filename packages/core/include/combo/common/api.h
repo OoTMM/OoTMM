@@ -51,6 +51,10 @@ typedef struct Actor Actor;
 int    LoadFile(void* dst, u32 vromAddr, u32 size);
 
 Actor*  SpawnActor(void* const_1, GameState_Play* play, s16 actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable);
+#if defined(GAME_MM)
+Actor*  SpawnActorEx(void* const_1, GameState_Play* play, s16 actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable, int ex1, int ex2, int ex3);
+#endif
+
 void    ActorDestroy(Actor* actor);
 int     Actor_HasParent(Actor* actor);
 void    ActorSetScale(Actor* actor, float scale);

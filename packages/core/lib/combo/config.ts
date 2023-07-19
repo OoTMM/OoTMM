@@ -39,7 +39,7 @@ export const CONFIG_MM: GameConfig = {
   crc32: [0xb428d8a7],
   dmaAddr: 0x1a500,
   dmaCount: 1552,
-  payloadAddr: 0x03f00000,
+  payloadAddr: 0x03f40000,
   actorsOvlAddr: 0xc45510,
   actorsOvlCount: 690,
   objectTableAddr: 0xc58c80,
