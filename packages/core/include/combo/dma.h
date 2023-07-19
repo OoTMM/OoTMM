@@ -5,7 +5,7 @@
 
 #define OOT_DMA_ADDR    0x7430
 #define OOT_DMA_COUNT   0x5e6
-#define MM_DMA_ADDR     (0x1a500 | MM_BASE)
+#define MM_DMA_ADDR     (0x1a500 + MM_BASE)
 #define MM_DMA_COUNT    0x610
 
 #if defined(GAME_OOT)

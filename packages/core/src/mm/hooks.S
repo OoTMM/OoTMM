@@ -1,9 +1,12 @@
 #include <combo.h>
 
+#define DMA_START (0x1a500 + MM_BASE)
+#define DMA_END (0x20700 + MM_BASE)
+
 /* Rebase MM's DMA Table */
-PATCH_START(0x80080d14)
-  lui a0, ((0x00020000 | MM_BASE) >> 16)
-  lui t6, ((0x00020000 | MM_BASE) >> 16)
+PATCH_START 0x80080d14
+  la a0, DMA_START
+  la t6, DMA_END
 PATCH_END
 
 /* Downsize the heap by 0x40000 + 0x10000 malloc zone */
