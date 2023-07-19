@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/custom.h>
+#include <combo/dma.h>
 
 static int checkItemToggle(GameState_Play* play)
 {
@@ -468,7 +469,10 @@ static void KaleidoScope_UpdateSoaringMapCursor(GameState_Play* play)
 
 static void LoadMapName(void* dst, u32 mapNameId)
 {
-    u32 vromAddr = kComboDmaData[0x5E6 + 18].vstart;
+    DmaEntry dma;
+
+    comboDmaLookupForeignId(&dma, 18);
+    u32 vromAddr = dma.vstart;
     // u32 size = 0x400;
     u32 headerSize;
     LoadFile(&headerSize, vromAddr, sizeof(headerSize));
@@ -482,9 +486,9 @@ static void LoadMapName(void* dst, u32 mapNameId)
 
     u32 size = offsets[1] - offsets[0];
 
-    u32 romAddr = kComboDmaData[0x5E6 + 18].pstart;
+    u32 romAddr = dma.pstart;
 
-    Yaz0_Decompress(romAddr + headerSize + offsets[0], dst, size);
+    DmaCompressed(romAddr + headerSize + offsets[0], dst, size);
 }
 
 static void KaleidoScope_UpdateOwlWarpNamePanel(GameState_Play* play)

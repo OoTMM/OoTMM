@@ -139,7 +139,6 @@ void comboExportContext(void);
 
 /* Init */
 void comboInit(void);
-void comboInitDma(void);
 void comboInitOverride(void);
 void comboInitData(void);
 
@@ -272,18 +271,6 @@ int  comboDpadUse(GameState_Play* play, int flags);
 
 int comboConfig(int flag);
 int comboDoorIsUnlocked(GameState_Play* play, Actor* actor);
-
-/* DMA */
-typedef struct
-{
-    u32 vstart;
-    u32 vend;
-    u32 pstart;
-    u32 pend;
-}
-DmaEntry;
-
-extern DmaEntry kComboDmaData[];
 
 /* Hints */
 #define HINT_GOSSIP         0x00

@@ -75,10 +75,7 @@ Actor*  SpawnActorEx(void* const_1, GameState_Play* play, s16 actorId, float x, 
 #endif
 
 void DMARomToRam(u32 romAddr, void* dramAddr, u32 size);
-
-#if defined(GAME_OOT)
-void Yaz0_Decompress(u32 romStart, void* dst, u32 size);
-#endif
+void DmaCompressed(u32 pstart, void* dst, u32 size);
 
 void ConvertMatrix(const float* in, u16* out);
 void MatrixRotation(u16 angle, int unk_1);
@@ -270,3 +267,4 @@ s16 ActorCutscene_StartAndSetFlag(s16 index, Actor* actor);
 void DrawHUD(GameState_Play* play);
 
 int IsSceneValidEpona(int sceneId);
+

@@ -179,3 +179,8 @@ ActorCutscene_StartAndSetFlag = 0x800f1ce0;
 gWalletDigits = 0x801bfd24;
 
 DrawHUD = 0x8011f0e0;
+
+gDmaData = 0x8009f8b0;
+
+DmaCompressed = 0x80081178;
+osSetThreadPri = 0x8008fc00;

@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/dma.h>
 
 #define DPAD_DOWN   0
 #define DPAD_UP     1
@@ -94,7 +95,7 @@ static void reloadIcons(GameState_Play* play)
         if (sDpadItems[i] != sDpadItemsOld[i] && sDpadItems[i] != ITEM_NONE)
         {
 #if defined(GAME_OOT)
-            DMARomToRam((kComboDmaData[8].pstart + 0x1000 * sDpadItems[i]) | PI_DOM1_ADDR2, sDpadIconBuffer + (i * 32 * 32 * 4), 32 * 32 * 4);
+            DMARomToRam((gDmaData[8].pstart + 0x1000 * sDpadItems[i]) | PI_DOM1_ADDR2, sDpadIconBuffer + (i * 32 * 32 * 4), 32 * 32 * 4);
 #else
             LoadIcon(0xa36c10, sDpadItems[i], sDpadIconBuffer + (i * 32 * 32 * 4), 0x1000);
 #endif

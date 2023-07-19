@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/dma.h>
 
 void KaleidoScope_AfterSetCutsorColor(GameState_Play* play)
 {
@@ -87,6 +88,7 @@ void KaleidoScope_AfterSetCutsorColor(GameState_Play* play)
 
 void KaleidoScope_LoadNamedItemCustom(void* segment, u32 texIndex)
 {
+    DmaEntry dma;
     u32 isForeign = 0;
     switch (texIndex)
     {
@@ -101,8 +103,9 @@ void KaleidoScope_LoadNamedItemCustom(void* segment, u32 texIndex)
     }
     if (isForeign)
     {
+        comboDmaLookupForeignId(&dma, 0xf);
+        u32 textureFileAddress = dma.pstart;
         u32 textureOffset = 0x400 * texIndex;
-        u32 textureFileAddress = kComboDmaData[0x61f].pstart;
         DMARomToRam((textureFileAddress + textureOffset) | PI_DOM1_ADDR2, segment, 0x400);
     }
     else

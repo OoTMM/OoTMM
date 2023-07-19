@@ -13,7 +13,6 @@ void comboInit(void)
 
     initHeap();
     comboLoadContext();
-    comboInitDma();
     comboInitData();
     comboInitObjects();
     comboInitOverride();
