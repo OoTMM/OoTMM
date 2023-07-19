@@ -96,6 +96,7 @@
 # define AC_EN_GIRLA        0x002
 # define AC_EN_DOOR         0x005
 # define AC_EN_BOX          0x006
+# define AC_EN_OKUTA        0x008
 # define AC_ITEM00          0x00e
 # define AC_DOOR_SHUTTER    0x01e
 # define AC_ITEM_GIVER      0x01f
@@ -106,6 +107,69 @@
 # define AC_EN_COW          0x0f3
 # define AC_DM_HINA         0x140
 # define AC_EN_TAB          0x263
+
+# define AC_EN_BIGOKUTA     0x1a8
+# define AC_EN_WALLMAS      0x00a
+# define AC_EN_DODONGO      0x00b
+# define AC_EN_FIREFLY      0x00c
+# define AC_EN_TITE         0x012
+# define AC_EN_PEEHAT       0x014
+# define AC_EN_DINOFOS      0x019
+# define AC_EN_ST           0x024
+# define AC_EN_AM           0x032
+# define AC_EN_FAMOS        0x02d
+# define AC_EN_DEKUBABA     0x033
+# define AC_EN_KAREBABA     0x066
+# define AC_EN_DEKUNUTS     0x03b
+# define AC_EN_BBFALL       0x03c
+# define AC_EN_BB           0x03e
+# define AC_EN_VM           0x047
+# define AC_EN_RD           0x04c
+# define AC_EN_TALK_GIBUD   0x1da
+# define AC_EN_RAILGIBUD    0x235
+# define AC_EN_SW           0x050
+# define AC_EN_SB           0x064
+# define AC_EN_RR           0x06c
+# define AC_EN_IK           0x084
+# define AC_EN_FZ           0x08f
+# define AC_EN_WF           0x0ec
+# define AC_EN_CROW         0x0f1
+# define AC_EN_TUBO_TRAP    0x08d
+# define AC_EN_FLOORMAS     0x04a
+# define AC_EN_SLIME        0x14a
+# define AC_EN_DRAGON       0x206
+# define AC_EN_PR           0x14b
+# define AC_EN_PR2          0x180
+# define AC_EN_PRZ          0x181
+# define AC_EN_WDHAND       0x1d1
+# define AC_EN_GRASSHOPPER  0x109
+# define AC_EN_SNOWMAN      0x1e6
+# define AC_EN_EGOL         0x184
+# define AC_EN_PP           0x1e9
+# define AC_EN_RAT          0x16f
+# define AC_EN_THIEFBIRD    0x291
+# define AC_EN_MKK          0x164
+# define AC_EN_BAGUO        0x155
+# define AC_BOSS_05         0x12d
+# define AC_EN_JSO          0x113
+# define AC_EN_JSO2         0x182
+# define AC_EN_WIZ          0x15d
+# define AC_EN_WIZ_BROCK    0x15e
+# define AC_EN_DEATH        0x043
+# define AC_EN_PAMETFROG    0x007
+# define AC_EN_BIGSLIME     0x065
+# define AC_EN_BAT          0x15b
+# define AC_EN_BIGPAMET     0x144
+# define AC_BOSS_04         0x12c
+# define AC_EN_BSB          0x28f
+# define AC_EN_KNIGHT       0x115
+# define AC_BOSS_06         0x12e
+# define AC_BOSS_01         0x129
+# define AC_BOSS_HAKUGIN    0x1dd
+# define AC_BOSS_03         0x12b
+# define AC_BOSS_02         0x12a
+# define AC_EN_KAME         0x1ba
+
 #endif
 
 #if !defined(__ASSEMBLER__)
@@ -181,6 +245,7 @@ _Static_assert(sizeof(Actor) == 0x144, "MM Actor size is wrong");
 #endif
 
 Actor* comboSpawnActor(void* unk, GameState_Play *play, short actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable);
+Actor* comboSpawnActorEx(void* unk, GameState_Play *play, short actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable, int ex1, int ex2, int ex3);
 
 #endif
 

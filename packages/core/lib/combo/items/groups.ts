@@ -485,7 +485,6 @@ export const MM_SOULS = new Set([
   Items.MM_SOUL_FREEZARD,
   Items.MM_SOUL_WOLFOS,
   Items.MM_SOUL_GUAY,
-  Items.MM_SOUL_SPIKE,
   Items.MM_SOUL_FLYING_POT,
   Items.MM_SOUL_FLOORMASTER,
   Items.MM_SOUL_CHUCHU,
