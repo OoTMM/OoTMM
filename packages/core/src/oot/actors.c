@@ -137,9 +137,3 @@ Actor* comboSpawnActor(void* unk, GameState_Play *play, short actorId, float x, 
     }
     return SpawnActor(unk, play, actorId, x, y, z, rx, ry, rz, variable);
 }
-
-void Actor_RemoveFromCategory_SetTempClearHack(GameState_Play* play, u32 flag)
-{
-    if (!g.roomEnemyLackSoul)
-        SetRoomClear(play, flag);
-}
