@@ -2,7 +2,7 @@
   dungeon: IC
   exits:
     "Zora Fountain Frozen": "true"
-    "Ice Cavern Scythe": "soul(SOUL_FREEZARD) && (can_use_sword_master || can_use_sword_goron || can_use_sticks || has_explosives)
+    "Ice Cavern Scythe": "soul(SOUL_FREEZARD) && (can_use_sword_master || can_use_sword_goron || can_use_sticks || has_explosives)"
 "Ice Cavern Scythe":
   dungeon: IC
   exits:
@@ -17,7 +17,7 @@
     "Ice Cavern SR Scythe Back": "true"
     "Ice Cavern SR Scythe Center Right": "true"
     "Ice Cavern SR Scythe Midair": "is_adult"
-""Ice Cavern HP Room":
+"Ice Cavern HP Room":
   dungeon: IC
   exits:
     "Ice Cavern Scythe": "true"
