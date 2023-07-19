@@ -1,10 +1,10 @@
 "Ganon Castle Tower":
   dungeon: Tower
   locations:
-    "Ganon Castle Boss Key": "has_weapon"
+    "Ganon Castle Boss Key": "has_weapon && soul(SOUL_LIZALFOS_DINALFOS) && soul(SOUL_STALFOS)"
   exits:
     "Ganon Castle Stairs": "true"
-    "Ganon Castle Tower Boss": "setting(ganonBossKey, removed) || has(BOSS_KEY_GANON) || (setting(ganonBossKey, custom) && special(GANON_BK))"
+    "Ganon Castle Tower Boss": "has_weapon && soul(SOUL_LIZALFOS_DINALFOS) && soul(SOUL_STALFOS) && soul(SOUL_IRON_KNUCKLE) && (setting(ganonBossKey, removed) || has(BOSS_KEY_GANON) || (setting(ganonBossKey, custom) && special(GANON_BK)))"
 "Ganon Castle Tower Boss":
   dungeon: Tower
   events:
