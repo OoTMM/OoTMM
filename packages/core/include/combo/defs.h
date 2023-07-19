@@ -7,7 +7,7 @@
 #ifdef GAME_OOT
 # define PAYLOAD_ROM    0x01f80000
 # define PAYLOAD_RAM    0x80600000
-# define PAYLOAD_SIZE   0x50000
+# define PAYLOAD_SIZE   0x40000
 # define LOADER_ADDR    0x80006600
 # define LOADER_NEXT    InitDmaManager
 

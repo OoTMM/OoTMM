@@ -71,9 +71,8 @@ export function buildPatchfiles(args: BuildPatchfileIn): Patchfile[] {
     patcher.run();
 
     /* Pack the payload */
-    const maxSize = (game === 'oot') ? 0x50000 : 0x40000;
     const payload = args.build[game].payload;
-    if (payload.length > maxSize) {
+    if (payload.length > 0x40000) {
       throw new Error("Payload too large");
     }
     file.addPatch('global', CONFIG[game].payloadAddr, payload);
