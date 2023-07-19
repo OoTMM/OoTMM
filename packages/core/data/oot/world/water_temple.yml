@@ -37,11 +37,11 @@
 "Water Temple Map Room":
   dungeon: Water
   locations:
-    "Water Temple Map": "true"
+    "Water Temple Map": "soul(SOUL_SPIKE)"
 "Water Temple Shell Room":
   dungeon: Water
   locations:
-    "Water Temple Shell Chest": "has_weapon"
+    "Water Temple Shell Chest": "has_weapon && soul(SOUL_SHELL_BLADE)"
 "Water Temple Center Bottom":
   dungeon: Water
   exits:
@@ -58,7 +58,7 @@
 "Water Temple Under Center":
   dungeon: Water
   locations:
-    "Water Temple Under Center": "can_hookshot"
+    "Water Temple Under Center": "can_hookshot && soul(SOUL_SPIKE) && soul(SOUL_SHELL_BLADE)"
 "Water Temple Compass Room":
   dungeon: Water
   locations:
