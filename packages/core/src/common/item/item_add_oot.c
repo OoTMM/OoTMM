@@ -346,6 +346,14 @@ static void addOcarina(int level)
     reloadSlot(ITS_OOT_OCARINA);
 }
 
+static void addSoul(int index)
+{
+    if (index >= 32)
+        gOotSouls2 |= (1 << (index - 32));
+    else
+        gOotSouls1 |= (1 << index);
+}
+
 void comboAddCommonItemOot(int sid, int noEffect)
 {
     switch (sid)
@@ -1337,6 +1345,53 @@ int comboAddItemOot(s16 gi, int noEffect)
         break;
     case GI_OOT_RUPEE_SILVER_GANON_WATER:
         count = addSilverRupees(SR_GANON2, noEffect);
+        break;
+    case GI_OOT_SOUL_STALFOS:
+    case GI_OOT_SOUL_OCTOROK:
+    case GI_OOT_SOUL_WALLMASTER:
+    case GI_OOT_SOUL_DODONGO:
+    case GI_OOT_SOUL_KEESE:
+    case GI_OOT_SOUL_TEKTITE:
+    case GI_OOT_SOUL_PEAHAT:
+    case GI_OOT_SOUL_LIZALFOS_DINALFOS:
+    case GI_OOT_SOUL_GOHMA_LARVA:
+    case GI_OOT_SOUL_SHABOM:
+    case GI_OOT_SOUL_BABY_DODONGO:
+    case GI_OOT_SOUL_BIRI_BARI:
+    case GI_OOT_SOUL_TAILPASARN:
+    case GI_OOT_SOUL_SKULLTULA:
+    case GI_OOT_SOUL_TORCH_SLUG:
+    case GI_OOT_SOUL_MOBLIN:
+    case GI_OOT_SOUL_ARMOS:
+    case GI_OOT_SOUL_DEKU_BABA:
+    case GI_OOT_SOUL_DEKU_SCRUB:
+    case GI_OOT_SOUL_BUBBLE:
+    case GI_OOT_SOUL_BEAMOS:
+    case GI_OOT_SOUL_FLOORMASTER:
+    case GI_OOT_SOUL_REDEAD_GIBDO:
+    case GI_OOT_SOUL_SKULLWALLTULA:
+    case GI_OOT_SOUL_FLARE_DANCER:
+    case GI_OOT_SOUL_DEAD_HAND:
+    case GI_OOT_SOUL_SHELL_BLADE:
+    case GI_OOT_SOUL_LIKE_LIKE:
+    case GI_OOT_SOUL_SPIKE:
+    case GI_OOT_SOUL_ANUBIS:
+    case GI_OOT_SOUL_IRON_KNUCKLE:
+    case GI_OOT_SOUL_SKULL_KID:
+    case GI_OOT_SOUL_FLYING_POT:
+    case GI_OOT_SOUL_FREEZARD:
+    case GI_OOT_SOUL_STINGER:
+    case GI_OOT_SOUL_WOLFOS:
+    case GI_OOT_SOUL_GUAY:
+    case GI_OOT_SOUL_QUEEN_GOHMA:
+    case GI_OOT_SOUL_KING_DODONGO:
+    case GI_OOT_SOUL_BARINADE:
+    case GI_OOT_SOUL_PHANTOM_GANON:
+    case GI_OOT_SOUL_VOLVAGIA:
+    case GI_OOT_SOUL_MORPHA:
+    case GI_OOT_SOUL_BONGO_BONGO:
+    case GI_OOT_SOUL_TWINROVA:
+        addSoul(gi - GI_OOT_SOUL_STALFOS);
         break;
     }
 

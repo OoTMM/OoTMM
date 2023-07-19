@@ -13,28 +13,35 @@
   exits:
     "Spirit Temple": "is_child"
     "Spirit Temple Child Climb": "is_child && small_keys(SMALL_KEY_SPIRIT, 1)"
-    "Spirit Temple Child Left": "can_use_sticks || has_explosives_or_hammer || ((can_boomerang || has_nuts) && (has_weapon || can_use_slingshot))"
-    "Spirit Temple Child Right": "can_use_sticks || has_explosives_or_hammer || ((can_boomerang || has_nuts) && (has_weapon || can_use_slingshot))"
+    "Spirit Temple Child Left": "soul(SOUL_KEESE) && soul(SOUL_ARMOS) && (can_use_sticks || has_explosives_or_hammer || ((can_boomerang || has_nuts) && (has_weapon || can_use_slingshot)))"
+    "Spirit Temple Child Right": "soul(SOUL_KEESE) && soul(SOUL_ARMOS) && (can_use_sticks || has_explosives_or_hammer || ((can_boomerang || has_nuts) && (has_weapon || can_use_slingshot)))"
 "Spirit Temple Child Left":
   dungeon: Spirit
   exits:
     "Spirit Temple Child Entrance": "true"
-    "Spirit Temple Child Back": "has_ranged_weapon_child"
+    "Spirit Temple Child Back Left": "has_ranged_weapon_child"
 "Spirit Temple Child Right":
   dungeon: Spirit
   events:
-    SPIRIT_CHEST_CHILD: "has_fire || (has(RUPEE_SILVER_SPIRIT_CHILD, 5) && can_use_sticks)"
+    SPIRIT_CHEST_CHILD: "has_fire_or_sticks"
   exits:
     "Spirit Temple Child Entrance": "true"
-    "Spirit Temple Child Back": "has(RUPEE_SILVER_SPIRIT_CHILD, 5)"
-"Spirit Temple Child Back":
+    "Spirit Temple Child Back Right": "has(RUPEE_SILVER_SPIRIT_CHILD, 5)"
+  locations:
+    "Spirit Temple GS Child Fence": "can_boomerang"
+"Spirit Temple Child Back Left":
   dungeon: Spirit
   exits:
-    "Spirit Temple Child Right": "has(RUPEE_SILVER_SPIRIT_CHILD, 5)"
+    "Spirit Temple Child Back Right": "soul(SOUL_ANUBIS)"
   locations:
     "Spirit Temple Child First Chest": "true"
+"Spirit Temple Child Back Right":
+  dungeon: Spirit
+  exits:
+    "Spirit Temple Child Back Left": "soul(SOUL_ANUBIS) && (has_ranged_weapon_child || has_explosives || can_use_din)"
+  locations:
     "Spirit Temple Child Second Chest": "event(SPIRIT_CHEST_CHILD)"
-    "Spirit Temple GS Child Fence": "has_ranged_weapon_child"
+    "Spirit Temple GS Child Fence": "(has_ranged_weapon_child || has_explosives || can_use_din || can_use_sticks) && has(RUPEE_SILVER_SPIRIT_CHILD, 5)"
     "Spirit Temple SR Child 1": "true"
     "Spirit Temple SR Child 2": "true"
     "Spirit Temple SR Child 3": "true"
@@ -53,7 +60,7 @@
   dungeon: Spirit
   exits:
     "Spirit Temple Statue": "true"
-    "Spirit Temple Child Hand": "small_keys(SMALL_KEY_SPIRIT, 5)"
+    "Spirit Temple Child Hand": "small_keys(SMALL_KEY_SPIRIT, 5) && soul(SOUL_IRON_KNUCKLE)"
   locations:
     "Spirit Temple Sun Block Room Torches": "(event(SPIRIT_CHILD_DOOR) && can_use_sticks && has(RUPEE_SILVER_SPIRIT_SUN, 5)) || (has_fire_spirit && has(RUPEE_SILVER_SPIRIT_SUN, 5)) || (has_fire_arrows && small_keys(SMALL_KEY_SPIRIT, 4))"
     "Spirit Temple SR Sun 1": "true"
@@ -119,15 +126,17 @@
 "Spirit Temple Adult Upper":
   dungeon: Spirit
   exits:
-    "Spirit Temple Adult Upper 2": "has_explosives"
+    "Spirit Temple Adult Upper 2": "has_explosives && soul(SOUL_BEAMOS) && soul(SOUL_ANUBIS)"
     "Spirit Temple Adult Climb 2": "small_keys(SMALL_KEY_SPIRIT, 5)"
 "Spirit Temple Adult Upper 2":
   dungeon: Spirit
   exits:
     "Spirit Temple Adult Upper": "true"
-    "Spirit Temple Adult Hand": "true"
+    "Spirit Temple Adult Hand": "soul(SOUL_ARMOS) && soul(SOUL_IRON_KNUCKLE)"
   locations:
     "Spirit Temple Adult Late Sun on Wall": "has_mirror_shield"
+    "Spirit Temple Adult Invisible 1": "has_lens && soul(SOUL_ARMOS)"
+    "Spirit Temple Adult Invisible 2": "has_lens && soul(SOUL_ARMOS)"
 "Spirit Temple Adult Hand":
   dungeon: Spirit
   exits:
@@ -135,8 +144,6 @@
     "Spirit Temple Child Hand": "can_longshot"
     "Desert Colossus": "true"
   locations:
-    "Spirit Temple Adult Invisible 1": "has_lens"
-    "Spirit Temple Adult Invisible 2": "has_lens"
     "Spirit Temple Mirror Shield": "true"
 "Spirit Temple Adult Climb 2":
   dungeon: Spirit

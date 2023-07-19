@@ -22,7 +22,7 @@
 "Forest Temple Mini-Boss":
   dungeon: Forest
   locations:
-    "Forest Temple Mini-Boss Key": "has_weapon"
+    "Forest Temple Mini-Boss Key": "has_weapon && soul(SOUL_STALFOS)"
 "Forest Temple Garden West":
   dungeon: Forest
   exits:
@@ -45,14 +45,14 @@
 "Forest Temple Floormaster":
   dungeon: Forest
   locations:
-    "Forest Temple Floormaster": "has_weapon || can_use_sticks"
+    "Forest Temple Floormaster": "soul(SOUL_FLOORMASTER) && (has_weapon || can_use_sticks)"
 "Forest Temple Map Room":
   dungeon: Forest
   exits:
-    "Forest Temple Garden West": "can_use_bow || has_explosives || ((can_hookshot || has_nuts || can_boomerang || has_shield) && (has_weapon || can_use_slingshot || can_use_sticks))"
-    "Forest Temple Garden East Ledge": "can_use_bow || has_explosives || ((can_hookshot || has_nuts || can_boomerang || has_shield) && (has_weapon || can_use_slingshot || can_use_sticks))"
+    "Forest Temple Garden West": "soul(SOUL_BUBBLE) && (can_use_bow || has_explosives || ((can_hookshot || has_nuts || can_boomerang || has_shield) && (has_weapon || can_use_slingshot || can_use_sticks)))"
+    "Forest Temple Garden East Ledge": "soul(SOUL_BUBBLE) && (can_use_bow || has_explosives || ((can_hookshot || has_nuts || can_boomerang || has_shield) && (has_weapon || can_use_slingshot || can_use_sticks)))"
   locations:
-    "Forest Temple Map": "can_use_bow || has_explosives || ((can_hookshot || has_nuts || can_boomerang || has_shield) && (has_weapon || can_use_slingshot || can_use_sticks))"
+    "Forest Temple Map": "soul(SOUL_BUBBLE) && (can_use_bow || has_explosives || ((can_hookshot || has_nuts || can_boomerang || has_shield) && (has_weapon || can_use_slingshot || can_use_sticks)))"
 "Forest Temple Garden East Ledge":
   dungeon: Forest
   exits:
@@ -108,7 +108,7 @@
 "Forest Temple Mini-Boss 2":
   dungeon: Forest
   exits:
-    "Forest Temple Poe 2": "has_weapon"
+    "Forest Temple Poe 2": "has_weapon && soul(SOUL_STALFOS)"
   locations:
     "Forest Temple Bow": "has_weapon"
 "Forest Temple Poe 2":

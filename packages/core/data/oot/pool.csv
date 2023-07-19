@@ -337,10 +337,10 @@ Forest Temple Boss,                                         npc,            NONE
 Fire Temple Jail 1 Chest,                                   chest,          NONE,                 TEMPLE_FIRE,                    0x01,                       SMALL_KEY_FIRE
 Fire Temple Boss Key Side Chest,                            chest,          NONE,                 TEMPLE_FIRE,                    0x00,                       BOMBS_10
 Fire Temple Boss Key Chest,                                 chest,          NONE,                 TEMPLE_FIRE,                    0x0c,                       BOSS_KEY_FIRE
-Fire Temple Jail 2 Chest,                                   chest,          NONE,                 TEMPLE_FIRE,                    0x04,                       SMALL_KEY_FIRE
-Fire Temple Jail 3 Chest,                                   chest,          NONE,                 TEMPLE_FIRE,                    0x02,                       SMALL_KEY_FIRE
+Fire Temple Lava Room North Jail Chest,                     chest,          NONE,                 TEMPLE_FIRE,                    0x04,                       SMALL_KEY_FIRE
+Fire Temple Lava Room South Jail Chest,                     chest,          NONE,                 TEMPLE_FIRE,                    0x02,                       SMALL_KEY_FIRE
 Fire Temple Maze Chest,                                     chest,          NONE,                 TEMPLE_FIRE,                    0x03,                       SMALL_KEY_FIRE
-Fire Temple Jail 4 Chest,                                   chest,          NONE,                 TEMPLE_FIRE,                    0x08,                       SMALL_KEY_FIRE
+Fire Temple Maze Jail Chest,                                chest,          NONE,                 TEMPLE_FIRE,                    0x08,                       SMALL_KEY_FIRE
 Fire Temple Map,                                            chest,          NONE,                 TEMPLE_FIRE,                    0x0a,                       MAP_FIRE
 Fire Temple Above Maze Chest,                               chest,          NONE,                 TEMPLE_FIRE,                    0x06,                       SMALL_KEY_FIRE
 Fire Temple Below Maze Chest,                               chest,          NONE,                 TEMPLE_FIRE,                    0x0b,                       SMALL_KEY_FIRE
@@ -502,9 +502,9 @@ Gerudo Training Grounds Entrance 2,                         chest,          NONE
 Gerudo Training Grounds Stalfos,                            chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x00,                       SMALL_KEY_GTG
 Gerudo Training Grounds Near Block,                         chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x11,                       ARROWS_30
 Gerudo Training Grounds Behind Block Invisible,             chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x14,                       SMALL_KEY_GTG
-Gerudo Training Grounds Behind Block Visible 1,             chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x02,                       ICE_TRAP
-Gerudo Training Grounds Behind Block Visible 2,             chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x0e,                       RUPEE_BLUE
-Gerudo Training Grounds Behind Block Visible 3,             chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x0f,                       RUPEE_HUGE
+Gerudo Training Grounds Behind Block Visible,               chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x02,                       ICE_TRAP
+Gerudo Training Grounds Behind Block Enemy Back,            chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x0e,                       RUPEE_BLUE
+Gerudo Training Grounds Behind Block Enemy Front,           chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x0f,                       RUPEE_HUGE
 Gerudo Training Grounds Eye Statue,                         chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x03,                       SMALL_KEY_GTG
 Gerudo Training Grounds Hammer Room Switch,                 chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x10,                       SMALL_KEY_GTG
 Gerudo Training Grounds Hammer Room,                        chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x12,                       ARROWS_10

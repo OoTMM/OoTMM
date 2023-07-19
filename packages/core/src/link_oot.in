@@ -62,8 +62,7 @@ Gfx_SetupDL_42Opa       = 0x8007e868;
 GetMatrixMV             = 0x800ab900;
 
 IsSceneValidEpona = 0x8005a3c0;
-
-SpawnActor = 0x80025110;
+_SpawnActor = 0x80025110;
 gActorOvl = 0x800e8530;
 LoadObject = 0x800812f0;
 GetObject = 0x80081628;

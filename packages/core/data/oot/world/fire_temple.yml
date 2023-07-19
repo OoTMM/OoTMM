@@ -3,7 +3,7 @@
   exits:
     "Fire Temple Entry": "true"
     "Fire Temple Lava Room": "has_small_keys_fire(1)"
-    "Fire Temple Boss Key Loop": "cond(setting(smallKeyShuffleOot, anywhere), small_keys(SMALL_KEY_FIRE, 8), true) && can_hammer"
+    "Fire Temple Boss Key Loop Start": "cond(setting(smallKeyShuffleOot, anywhere), small_keys(SMALL_KEY_FIRE, 8), true) && can_hammer"
     "Fire Temple Pre-Boss": "true"
 "Fire Temple Pre-Boss":
   dungeon: Fire
@@ -14,19 +14,36 @@
     BOMBS: "has_tunic_goron"
   locations:
     "Fire Temple Jail 1 Chest": "has_tunic_goron"
-"Fire Temple Boss Key Loop":
+"Fire Temple Boss Key Loop Start":
+  dungeon: Fire
+  exits:
+    "Fire Temple": "true"
+    "Fire Temple Boss Key Loop Floor Tiles": "soul(SOUL_KEESE) && soul(SOUL_TORCH_SLUG)"
+"Fire Temple Boss Key Loop Floor Tiles":
+  dungeon: Fire
+  exits:
+    "Fire Temple Boss Key Loop Start": "true"
+    "Fire Temple Boss Key Loop Flare Dancer": "true"
+  locations:
+    "Fire Temple GS Hammer Statues": "true"
+"Fire Temple Boss Key Loop Flare Dancer":
+  dungeon: Fire
+  exits:
+    "Fire Temple Boss Key Loop Floor Tiles": "soul(SOUL_FLARE_DANCER)"
+    "Fire Temple Boss Key Loop End": "soul(SOUL_FLARE_DANCER)"
+  locations:
+    "Fire Temple Boss Key Side Chest": "soul(SOUL_FLARE_DANCER)"
+"Fire Temple Boss Key Loop End":
   dungeon: Fire
   locations:
-    "Fire Temple Boss Key Side Chest": "true"
     "Fire Temple Boss Key Chest": "true"
-    "Fire Temple GS Hammer Statues": "true"
 "Fire Temple Lava Room":
   dungeon: Fire
   exits:
     "Fire Temple Maze": "is_adult && has_small_keys_fire(3) && has_tunic_goron_strict && has(STRENGTH) && (has_ranged_weapon_adult || has_explosives || can_boomerang)"
   locations:
-    "Fire Temple Jail 2 Chest": "has_tunic_goron && (is_adult || can_play_time)"
-    "Fire Temple Jail 3 Chest": "is_adult && has_tunic_goron && has_explosives"
+    "Fire Temple Lava Room North Jail Chest": "has_tunic_goron && (is_adult || can_play_time)"
+    "Fire Temple Lava Room South Jail Chest": "is_adult && has_tunic_goron && has_explosives"
     "Fire Temple GS Lava Side Room": "is_adult && has_tunic_goron && can_play_time"
 "Fire Temple Maze":
   dungeon: Fire
@@ -34,7 +51,7 @@
     "Fire Temple Maze Upper": "has_small_keys_fire(5)"
   locations:
     "Fire Temple Maze Chest": "true"
-    "Fire Temple Jail 4 Chest": "true"
+    "Fire Temple Maze Jail Chest": "true"
     "Fire Temple GS Maze": "has_explosives"
     "Fire Temple Map": "can_use_bow && has_small_keys_fire(4)"
 "Fire Temple Maze Upper":
@@ -62,7 +79,7 @@
 "Fire Temple Before Miniboss":
   dungeon: Fire
   exits:
-    "Fire Temple After Miniboss": "has_explosives && (has_bombs || can_hammer || can_hookshot)"
+    "Fire Temple After Miniboss": "soul(SOUL_FLARE_DANCER) && has_explosives && (has_bombs || can_hammer || can_hookshot)"
     "Fire Temple Pillar Ledge": "can_play_time"
   locations:
     "Fire Temple Ring Jail": "can_hammer && can_play_time"

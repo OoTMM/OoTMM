@@ -25,7 +25,7 @@
     "Ganon Castle Light Chest Around 4": "true"
     "Ganon Castle Light Chest Around 5": "true"
     "Ganon Castle Light Chest Around 6": "true"
-    "Ganon Castle Light Chest Center": "has_lens && (has_weapon || has_explosives_or_hammer || can_use_slingshot || can_use_sticks)"
+    "Ganon Castle Light Chest Center": "soul(SOUL_KEESE) && soul(SOUL_SKULLTULA) && has_lens && (has_weapon || has_explosives_or_hammer || can_use_slingshot || can_use_sticks)"
     "Ganon Castle Light Chest Lullaby": "small_keys(SMALL_KEY_GANON, 1) && can_play(SONG_ZELDA)"
 "Ganon Castle Light 2":
   dungeon: Ganon
@@ -42,7 +42,7 @@
   exits:
     "Ganon Castle Forest 2": "(has_fire_arrows || (can_use_din && has_ranged_weapon_adult))"
   locations:
-    "Ganon Castle Forest Chest": "has_weapon || has_explosives_or_hammer || can_use_slingshot || can_use_sticks"
+    "Ganon Castle Forest Chest": "soul(SOUL_WOLFOS) && (has_weapon || has_explosives_or_hammer || can_use_slingshot || can_use_sticks)"
 "Ganon Castle Forest 2":
   dungeon: Ganon
   events:
@@ -67,7 +67,7 @@
   dungeon: Ganon
   events:
     BLUE_FIRE: "has_bottle && has_weapon"
-    GANON_TRIAL_WATER: "has_blue_fire && can_hammer && has_light_arrows"
+    GANON_TRIAL_WATER: "soul(SOUL_FREEZARD) && has_blue_fire && can_hammer && has_light_arrows"
   locations:
     "Ganon Castle Water Chest 1": "true"
     "Ganon Castle Water Chest 2": "true"

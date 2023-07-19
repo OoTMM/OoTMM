@@ -83,6 +83,7 @@
 "has_blue_fire_arrows_mudwall": "trick(OOT_BFA_MUDWALLS) && has_blue_fire_arrows"
 "has_fire_arrows": "can_use_bow && (has(ARROW_FIRE) || has(SHARED_ARROW_FIRE)) && has_magic"
 "has_lens_strict": "has_magic && (has(LENS) || has(SHARED_LENS))"
+
 #Item Combination Macros
 "has_explosives": "has_bombs || has_bombchu"
 "has_bombflowers": "has_explosives || has(STRENGTH)"
@@ -115,8 +116,8 @@
 "can_damage": "has_weapon || can_use_sticks || has_explosives || can_use_slingshot || can_use_din"
 "can_damage_skull": "can_damage || can_collect_distance"
 "can_cut_grass": "has_weapon || can_boomerang || has(STRENGTH)"
-"can_kill_baba_sticks": "can_boomerang || (has_weapon && (is_child || has_nuts || can_hookshot || can_hammer))"
-"can_kill_baba_nuts": "has_weapon || has_explosives || can_use_slingshot"
+"can_kill_baba_sticks": "soul(SOUL_DEKU_BABA) && (can_boomerang || (has_weapon && (is_child || has_nuts || can_hookshot || can_hammer)))"
+"can_kill_baba_nuts": "soul(SOUL_DEKU_BABA) && (has_weapon || has_explosives || can_use_slingshot)"
 "can_hit_scrub": "has_nuts || can_hit_triggers_distance || has_shield_for_scrubs || can_collect_distance || can_hammer"
 "has_small_key_gerudo": "setting(gerudoFortress, open) || cond(setting(gerudoFortress, single), has(SMALL_KEY_GF, 1), has(SMALL_KEY_GF, 4))"
 "can_rescue_carpenter": "has_small_key_gerudo && (has_weapon || ((can_boomerang || has_nuts) && can_use_sticks))"
@@ -155,3 +156,6 @@
 # Glitches
 "glitch_equip_swap": "glitch(OOT_EQUIP_SWAP) && (has(SPELL_FIRE) || (has_sticks && (is_child || setting(agelessSticks))))"
 "glitch_ocarina_items": "glitch(OOT_OCARINA_ITEMS) && (has_bugs || has_fish)"
+
+# Misc
+"soul(x)": "(!setting(enemySoulsOot)) || has(x)"

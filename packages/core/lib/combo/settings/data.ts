@@ -736,6 +736,13 @@ export const SETTINGS = [{
   default: false,
   cond: (s: any) => s.colossalWallets,
 }, {
+  key: 'enemySoulsOot',
+  name: 'Enemy Souls (OoT)',
+  category: 'items.extensions',
+  type: 'boolean',
+  description: 'Add enemy souls into the item pool. Enemies won\'t spawn unless their soul is obtained.',
+  default: false
+}, {
   key: 'sharedNutsSticks',
   name: 'Shared Nuts & Sticks',
   category: 'items.shared',

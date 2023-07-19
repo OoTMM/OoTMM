@@ -9,11 +9,11 @@
     "Jabu-Jabu": "true"
     "Jabu-Jabu Pre-Boss": "event(BIG_OCTO) || (has_hover_boots && trick(OOT_JABU_BOSS_HOVER))"
   events:
-    BIG_OCTO: "can_boomerang && (has_weapon || can_use_sticks)"
+    BIG_OCTO: "soul(SOUL_OCTOROK) && soul(SOUL_BIRI_BARI) && can_boomerang && (has_weapon || can_use_sticks)"
   locations:
     "Jabu-Jabu Map Chest": "can_boomerang"
-    "Jabu-Jabu Compass Chest": "can_boomerang"
-    "Jabu-Jabu Boomerang Chest": "true"
+    "Jabu-Jabu Compass Chest": "can_boomerang && soul(SOUL_SHABOM)"
+    "Jabu-Jabu Boomerang Chest": "true && soul(SOUL_STINGER)"
     "Jabu-Jabu Scrub": "can_hit_scrub && (is_child || can_dive_small) && scrub_price(0x20)"
     "Jabu-Jabu GS Bottom Lower": "can_collect_distance"
     "Jabu-Jabu GS Bottom Upper": "can_collect_distance"

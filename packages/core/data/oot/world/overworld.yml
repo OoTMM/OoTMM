@@ -595,7 +595,7 @@
   region: SACRED_MEADOW
   exits:
     "Lost Woods Deep": "true"
-    "Sacred Meadow": "can_damage"
+    "Sacred Meadow": "(is_child && can_damage && soul(SOUL_WOLFOS)) || is_adult"
     "Wolfos Grotto": "hidden_grotto_bomb"
   events:
     RUPEES: "true"
@@ -604,7 +604,7 @@
   exits:
     "Sacred Meadow Entryway": "true"
   locations:
-    "Sacred Meadow Grotto": "can_damage"
+    "Sacred Meadow Grotto": "soul(SOUL_WOLFOS) && can_damage"
 "Sacred Meadow":
   region: SACRED_MEADOW
   exits:
@@ -769,7 +769,7 @@
   exits:
     "Kakariko": "true"
   locations:
-    "Kakariko Grotto Front": "has_weapon || can_use_sticks"
+    "Kakariko Grotto Front": "soul(SOUL_REDEAD_GIBDO) && (has_weapon || can_use_sticks || can_use_din)"
 "Kakariko Generic Grotto":
   region: ENTRANCE
   exits:
@@ -820,7 +820,7 @@
   exits:
     "Graveyard": "true"
   locations:
-    "Graveyard Royal Tomb Song": "true"
+    "Graveyard Royal Tomb Song": "soul(SOUL_KEESE) && (has_ranged_weapon_child || can_use_sword || has_explosives || can_hammer || can_use_sticks)"
     "Graveyard Royal Tomb Chest": "has_fire"
 "Graveyard Shield Grave":
   region: ENTRANCE

@@ -9,6 +9,7 @@
 #define CSMC_SPIDER     0x04
 #define CSMC_FAIRY      0x05
 #define CSMC_HEART      0x06
+#define CSMC_SOUL       0x07
 
 #if defined(GAME_OOT)
 # define CHEST_TEX_NORMAL_FRONT     0x06001798
@@ -245,6 +246,52 @@ static int csmcFromItemOot(s16 gi)
     case GI_OOT_HEART_CONTAINER2:
     case GI_OOT_TC_HEART_PIECE:
         return comboConfig(CFG_CSMC_HEARTS) ? CSMC_HEART : CSMC_NORMAL;
+    case GI_OOT_SOUL_STALFOS:
+    case GI_OOT_SOUL_OCTOROK:
+    case GI_OOT_SOUL_WALLMASTER:
+    case GI_OOT_SOUL_DODONGO:
+    case GI_OOT_SOUL_KEESE:
+    case GI_OOT_SOUL_TEKTITE:
+    case GI_OOT_SOUL_PEAHAT:
+    case GI_OOT_SOUL_LIZALFOS_DINALFOS:
+    case GI_OOT_SOUL_GOHMA_LARVA:
+    case GI_OOT_SOUL_SHABOM:
+    case GI_OOT_SOUL_BABY_DODONGO:
+    case GI_OOT_SOUL_BIRI_BARI:
+    case GI_OOT_SOUL_TAILPASARN:
+    case GI_OOT_SOUL_SKULLTULA:
+    case GI_OOT_SOUL_TORCH_SLUG:
+    case GI_OOT_SOUL_MOBLIN:
+    case GI_OOT_SOUL_ARMOS:
+    case GI_OOT_SOUL_DEKU_BABA:
+    case GI_OOT_SOUL_DEKU_SCRUB:
+    case GI_OOT_SOUL_BUBBLE:
+    case GI_OOT_SOUL_BEAMOS:
+    case GI_OOT_SOUL_FLOORMASTER:
+    case GI_OOT_SOUL_REDEAD_GIBDO:
+    case GI_OOT_SOUL_SKULLWALLTULA:
+    case GI_OOT_SOUL_FLARE_DANCER:
+    case GI_OOT_SOUL_DEAD_HAND:
+    case GI_OOT_SOUL_SHELL_BLADE:
+    case GI_OOT_SOUL_LIKE_LIKE:
+    case GI_OOT_SOUL_SPIKE:
+    case GI_OOT_SOUL_ANUBIS:
+    case GI_OOT_SOUL_IRON_KNUCKLE:
+    case GI_OOT_SOUL_SKULL_KID:
+    case GI_OOT_SOUL_FLYING_POT:
+    case GI_OOT_SOUL_FREEZARD:
+    case GI_OOT_SOUL_STINGER:
+    case GI_OOT_SOUL_WOLFOS:
+    case GI_OOT_SOUL_GUAY:
+    case GI_OOT_SOUL_QUEEN_GOHMA:
+    case GI_OOT_SOUL_KING_DODONGO:
+    case GI_OOT_SOUL_BARINADE:
+    case GI_OOT_SOUL_PHANTOM_GANON:
+    case GI_OOT_SOUL_VOLVAGIA:
+    case GI_OOT_SOUL_MORPHA:
+    case GI_OOT_SOUL_BONGO_BONGO:
+    case GI_OOT_SOUL_TWINROVA:
+        return CSMC_SOUL;
     }
 
     return CSMC_NORMAL;
@@ -476,6 +523,7 @@ void comboCsmcPreDraw(Actor* this, GameState_Play* play, s16 gi)
         listSide = kListNormalSide;
         break;
     case CSMC_BOSS_KEY:
+    case CSMC_SOUL:
         listFront = kListBossKeyFront;
         listSide = kListBossKeySide;
         break;

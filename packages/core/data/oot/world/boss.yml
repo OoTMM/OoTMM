@@ -2,8 +2,8 @@
   boss: true
   dungeon: DT
   locations:
-    "Deku Tree Boss Container": "(has_nuts || can_use_slingshot) && (can_use_sticks || has_weapon)"
-    "Deku Tree Boss": "(has_nuts || can_use_slingshot) && (can_use_sticks || has_weapon)"
+    "Deku Tree Boss Container": "soul(SOUL_QUEEN_GOHMA) && (has_nuts || can_use_slingshot) && (can_use_sticks || has_weapon)"
+    "Deku Tree Boss": "soul(SOUL_QUEEN_GOHMA) && (has_nuts || can_use_slingshot) && (can_use_sticks || has_weapon)"
 "Dodongo Cavern Boss":
   boss: true
   dungeon: DC
@@ -15,13 +15,13 @@
   boss: true
   dungeon: DC
   locations:
-    "Dodongo Cavern Boss Container": "(has_bombs || has(STRENGTH)) && (can_use_sticks || has_weapon)"
-    "Dodongo Cavern Boss": "(has_bombs || has(STRENGTH)) && (can_use_sticks || has_weapon)"
+    "Dodongo Cavern Boss Container": "soul(SOUL_KING_DODONGO) && (has_bombs || has(STRENGTH)) && (can_use_sticks || has_weapon)"
+    "Dodongo Cavern Boss": "soul(SOUL_KING_DODONGO) && (has_bombs || has(STRENGTH)) && (can_use_sticks || has_weapon)"
 "Jabu-Jabu Boss":
   boss: true
   dungeon: JJ
   exits:
-    "Jabu-Jabu After Boss": "can_boomerang && (can_use_sticks || has_weapon)"
+    "Jabu-Jabu After Boss": "soul(SOUL_BARINADE) && can_boomerang && (can_use_sticks || has_weapon)"
 "Jabu-Jabu After Boss":
   boss: true
   dungeon: JJ
@@ -32,7 +32,7 @@
   boss: true
   dungeon: Forest
   exits:
-    "Forest Temple After Boss": "(has_ranged_weapon_adult || can_use_slingshot) && has_weapon"
+    "Forest Temple After Boss": "soul(SOUL_PHANTOM_GANON) && (has_ranged_weapon_adult || can_use_slingshot) && has_weapon"
 "Forest Temple After Boss":
   boss: true
   dungeon: Forest
@@ -43,7 +43,7 @@
   boss: true
   dungeon: Fire
   exits:
-    "Fire Temple After Boss": "can_hammer && has_tunic_goron_strict"
+    "Fire Temple After Boss": "soul(SOUL_VOLVAGIA) && can_hammer && has_tunic_goron_strict"
 "Fire Temple After Boss":
   boss: true
   dungeon: Fire
@@ -54,7 +54,7 @@
   boss: true
   dungeon: Water
   exits:
-    "Water Temple After Boss": "can_hookshot && has_weapon"
+    "Water Temple After Boss": "soul(SOUL_MORPHA) && can_hookshot && has_weapon"
 "Water Temple After Boss":
   boss: true
   dungeon: Water
@@ -67,7 +67,7 @@
   boss: true
   dungeon: Spirit
   exits:
-    "Spirit Temple After Boss": "has_mirror_shield && has_weapon"
+    "Spirit Temple After Boss": "soul(SOUL_TWINROVA) && soul(SOUL_IRON_KNUCKLE) && has_mirror_shield && has_weapon"
 "Spirit Temple After Boss":
   boss: true
   dungeon: Spirit
@@ -78,7 +78,7 @@
   boss: true
   dungeon: Shadow
   exits:
-    "Shadow Temple After Boss": "has_weapon && has_lens && (can_use_bow || can_use_slingshot)"
+    "Shadow Temple After Boss": "soul(SOUL_BONGO_BONGO) && has_weapon && has_lens && (can_use_bow || can_use_slingshot)"
 "Shadow Temple After Boss":
   boss: true
   dungeon: Shadow

@@ -11,15 +11,15 @@
     #There are a lot of ways this works, but it always needs this trick.
     MAGIC: "trick(OOT_LENS)"
   locations:
-    "Shadow Temple Map": "has_lens && (has_weapon || can_use_sticks || can_use_din)"
-    "Shadow Temple Hover Boots": "has_lens && (has_weapon || (can_use_sticks && trick(OOT_DEAD_HAND_STICKS)))"
+    "Shadow Temple Map": "soul(SOUL_REDEAD_GIBDO) && soul(SOUL_KEESE) && has_lens && (has_weapon || can_use_sticks || can_use_din)"
+    "Shadow Temple Hover Boots": "soul(SOUL_DEAD_HAND) && has_lens && (has_weapon || (can_use_sticks && trick(OOT_DEAD_HAND_STICKS)))"
 "Shadow Temple Main":
   dungeon: Shadow
   exits:
     "Shadow Temple Open": "small_keys(SMALL_KEY_SHADOW, 1) && has_explosives"
     "Shadow Temple Scythe Silver Rupees": "true"
   locations:
-    "Shadow Temple Compass": "has_weapon || can_use_sticks || can_use_din"
+    "Shadow Temple Compass": "soul(SOUL_REDEAD_GIBDO) && (has_weapon || can_use_sticks || can_use_din)"
 "Shadow Temple Scythe Silver Rupees":
   dungeon: Shadow
   exits:
@@ -37,9 +37,9 @@
     "Shadow Temple Falling Spikes": "has(RUPEE_SILVER_SHADOW_PIT, 5)"
     "Shadow Temple Invisible Spikes": "small_keys(SMALL_KEY_SHADOW, 2) && has_lens"
   locations:
-    "Shadow Temple Spinning Blades Visible": "true"
-    "Shadow Temple Spinning Blades Invisible": "has_lens"
-    "Shadow Temple GS Invisible Scythe": "can_collect_distance"
+    "Shadow Temple Spinning Blades Visible": "soul(SOUL_LIKE_LIKE) && soul(SOUL_KEESE)"
+    "Shadow Temple Spinning Blades Invisible": "soul(SOUL_LIKE_LIKE) && soul(SOUL_KEESE) && has_lens"
+    "Shadow Temple GS Invisible Scythe": "soul(SOUL_LIKE_LIKE) && soul(SOUL_KEESE) && can_collect_distance"
     "Shadow Temple SR Pit 1": "true"
     "Shadow Temple SR Pit 2": "true"
     "Shadow Temple SR Pit 3": "true"
@@ -66,7 +66,7 @@
     "Shadow Temple SR Spikes Center": "true"
     "Shadow Temple SR Spikes Front Left": "can_hookshot"
     "Shadow Temple SR Spikes Midair": "has_lens && can_hookshot"
-    "Shadow Temple Invisible Spike Room": "has_weapon || can_use_sticks || can_use_din"
+    "Shadow Temple Invisible Spike Room": "soul(SOUL_REDEAD_GIBDO) && (has_weapon || can_use_sticks || can_use_din)"
 "Shadow Temple Skull Pot":
   dungeon: Shadow
   exits:
@@ -80,7 +80,7 @@
     "Shadow Temple Boat": "small_keys(SMALL_KEY_SHADOW, 4) && can_play(SONG_ZELDA)"
   locations:
     "Shadow Temple Wind Room Hint": "has_lens"
-    "Shadow Temple After Wind": "true"
+    "Shadow Temple After Wind": "soul(SOUL_REDEAD_GIBDO) && soul(SOUL_FLYING_POT)"
     "Shadow Temple After Wind Invisible": "has_explosives && has_lens"
     "Shadow Temple GS Near Boat": "small_keys(SMALL_KEY_SHADOW, 4) && can_longshot"
 "Shadow Temple Boat":
@@ -90,5 +90,5 @@
   locations:
     "Shadow Temple Boss Key Room 1": "can_use_din"
     "Shadow Temple Boss Key Room 2": "can_use_din"
-    "Shadow Temple Invisible Floormaster": "true"
+    "Shadow Temple Invisible Floormaster": "soul(SOUL_FLOORMASTER)"
     "Shadow Temple GS Triple Skull Pot": "can_collect_distance"

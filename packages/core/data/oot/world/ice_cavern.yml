@@ -2,6 +2,11 @@
   dungeon: IC
   exits:
     "Zora Fountain Frozen": "true"
+    "Ice Cavern Scythe": "soul(SOUL_FREEZARD) && (can_use_sword_master || can_use_sword_goron || can_use_sticks || has_explosives)"
+"Ice Cavern Scythe":
+  dungeon: IC
+  exits:
+    "Ice Cavern": "true"
     "Ice Cavern HP Room": "has_blue_fire"
     "Ice Cavern Block Room": "has_blue_fire"
     "Ice Cavern First Fire Room": "is_adult && has(RUPEE_SILVER_IC_SCYTHE, 5)"
@@ -15,7 +20,7 @@
 "Ice Cavern HP Room":
   dungeon: IC
   exits:
-    "Ice Cavern": "true"
+    "Ice Cavern Scythe": "true"
   events:
     BLUE_FIRE: "has_bottle"
   locations:
@@ -25,7 +30,7 @@
 "Ice Cavern First Fire Room":
   dungeon: IC
   exits:
-    "Ice Cavern": "true"
+    "Ice Cavern Scythe": "true"
   events:
     BLUE_FIRE: "has_bottle"
   locations:
@@ -33,10 +38,10 @@
 "Ice Cavern Block Room":
   dungeon: IC
   exits:
-    "Ice Cavern": "true"
+    "Ice Cavern Scythe": "true"
     "Ice Cavern End": "has_blue_fire && has(RUPEE_SILVER_IC_BLOCK, 5)"
   events:
-    BLUE_FIRE: "true"
+    BLUE_FIRE: "has_bottle"
   locations:
     "Ice Cavern GS Block Room": "can_collect_distance"
     "Ice Cavern SR Blocks Back Left": "true"
@@ -47,7 +52,7 @@
 "Ice Cavern End":
   dungeon: IC
   exits:
-    "Ice Cavern Block Room": "has_blue_fire"
+    "Ice Cavern Block Room": "has_blue_fire && soul(SOUL_WOLFOS)"
   locations:
-    "Ice Cavern Iron Boots": "true"
-    "Ice Cavern Sheik Song": "true"
+    "Ice Cavern Iron Boots": "soul(SOUL_WOLFOS)"
+    "Ice Cavern Sheik Song": "soul(SOUL_WOLFOS)"

@@ -203,6 +203,13 @@ void comboCreateSave(void* unk, void* buffer)
         gMmMaxRupees[0] = 99;
     }
 
+    /* Apply enemy souls */
+    if (!comboConfig(CFG_OOT_SOULS))
+    {
+        gOotSouls1 = 0xffffffff;
+        gOotSouls2 = 0xffffffff;
+    }
+
     /* Apply starting items */
     applyStartingItems();
 

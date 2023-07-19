@@ -6,24 +6,71 @@
 #endif
 
 #if defined(GAME_OOT)
+# define AC_EN_TEST                 0x002
 # define AC_ITEM_GIVER              0x003
 # define AC_CUSTOM_WARP             0x005
 # define AC_CUSTOM_TRIGGERS         0x006
 # define AC_EN_DOOR                 0x009
 # define AC_EN_BOX                  0x00a
+# define AC_EN_OKUTA                0x00e
+# define AC_EN_WALLMAS              0x011
+# define AC_EN_DODONGO              0x012
+# define AC_EN_FIREFLY              0x013
 # define AC_ITEM00                  0x015
+# define AC_EN_TITE                 0x01b
+# define AC_EN_PEEHAT               0x01d
+# define AC_EN_ZF                   0x025
+# define AC_BOSS_DODONGO            0x027
+# define AC_BOSS_GOMA               0x028
+# define AC_EN_GOMA                 0x02b
+# define AC_EN_BUBBLE               0x02d
 # define AC_DOOR_SHUTTER            0x02e
+# define AC_EN_DODOJR               0x02f
+# define AC_EN_BILI                 0x034
+# define AC_EN_TP                   0x035
+# define AC_EN_ST                   0x037
+# define AC_EN_BW                   0x038
+# define AC_EN_EIYER                0x03a
 # define AC_EN_XC                   0x048
+# define AC_EN_MB                   0x04b
+# define AC_BOSS_GANONDROF          0x052
+# define AC_EN_AM                   0x054
+# define AC_EN_DEKUBABA             0x055
 # define AC_DOOR_WARP1              0x05d
 # define AC_ITEM_B_HEART            0x05f
+# define AC_EN_DEKUNUTS             0x060
+# define AC_EN_VALI                 0x063
+# define AC_EN_BB                   0x069
 # define AC_BG_TOKI_SWD             0x06c
+# define AC_EN_VM                   0x08a
+# define AC_EN_FLOORMAS             0x08e
+# define AC_EN_RD                   0x090
+# define AC_EN_SW                   0x095
+# define AC_BOSS_FD                 0x096
 # define AC_EN_DU                   0x098
+# define AC_EN_FD                   0x099
+# define AC_EN_DH                   0x0a4
+# define AC_BOSS_VA                 0x0ba
+# define AC_BOSS_MO                 0x0c4
+# define AC_EN_SB                   0x0c5
+# define AC_EN_BIGOKUTA             0x0c6
+# define AC_EN_KAREBABA             0x0c7
+# define AC_BG_BDAN_OBJECTS         0x0c8
+# define AC_BOSS_TW                 0x0dc
+# define AC_EN_RR                   0x0dd
+# define AC_EN_ANUBICE              0x0e0
 # define AC_EN_MA1                  0x0e7
+# define AC_BOSS_SST                0x0e9
+# define AC_EN_NY                   0x0ec
 # define AC_ITEM_OCARINA            0x0f1
+# define AC_EN_ANUBICE_TAG          0x0f6
 # define AC_ITEM_ETCETERA           0x10f
+# define AC_EN_IK                   0x113
 # define AC_EN_SKJ                  0x115
 # define AC_EN_G_SWITCH             0x117
+# define AC_EN_TUBO_TRAP            0x11d
 # define AC_BG_SPOT03_TAKI          0x11f
+# define AC_EN_FZ                   0x121
 # define AC_EN_DIVING_GAME          0x124
 # define AC_EN_NIW_LADY             0x13c
 # define AC_EN_GM                   0x13d
@@ -35,9 +82,14 @@
 # define AC_EN_ZK                   0x164
 # define AC_EN_EX_ITEM              0x168
 # define AC_EN_SSH                  0x188
+# define AC_EN_WEIYER               0x18c
+# define AC_EN_HINTNUTS             0x192
 # define AC_EN_GO2                  0x1ae
-# define AC_EN_COW                  0x1c6
+# define AC_EN_WF                   0x1af
 # define AC_EN_GS                   0x1b9
+# define AC_EN_CROW                 0x1c0
+# define AC_EN_COW                  0x1c6
+
 #endif
 
 #if defined(GAME_MM)
@@ -127,6 +179,9 @@ _Static_assert(sizeof(Actor) == 0x13c, "OoT Actor size is wrong");
 #if defined(GAME_MM)
 _Static_assert(sizeof(Actor) == 0x144, "MM Actor size is wrong");
 #endif
+
+Actor* comboSpawnActor(void* unk, GameState_Play *play, short actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable);
+
 #endif
 
 #endif
