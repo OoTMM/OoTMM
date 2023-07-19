@@ -15,7 +15,7 @@
 #endif
 
 #ifdef GAME_MM
-# define PAYLOAD_ROM    0x01fc0000
+# define PAYLOAD_ROM    0x03f00000
 # define PAYLOAD_RAM    0x80740000
 # define LOADER_ADDR    0x800982b0
 # define LOADER_NEXT    InitDmaManager

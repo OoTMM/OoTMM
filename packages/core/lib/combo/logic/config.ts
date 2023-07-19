@@ -91,6 +91,7 @@ export class LogicPassConfig {
       OOT_SILVER_RUPEE_SHUFFLE: settings.silverRupeeShuffle !== 'vanilla',
       OOT_FREE_SCARECROW: settings.freeScarecrowOot,
       OOT_SOULS: settings.enemySoulsOot,
+      MM_SOULS: settings.enemySoulsMm,
     };
 
     for (const v in exprs) {
