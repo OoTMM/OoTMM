@@ -2,13 +2,13 @@
   dungeon: GTG
   exits:
     "Gerudo Fortress Exterior": "true"
-    "Gerudo Training Grounds Slopes": "has_weapon"
-    "Gerudo Training Grounds Right Side": "has_explosives && has_weapon"
+    "Gerudo Training Grounds Slopes": "has_weapon && soul(SOUL_STALFOS)"
+    "Gerudo Training Grounds Right Side": "has_explosives && has_weapon && soul(SOUL_BEAMOS) && soul(SOUL_LIZALFOS_DINALFOS)"
     "Gerudo Training Grounds Maze": "true"
   locations:
     "Gerudo Training Grounds Entrance 1": "can_hit_triggers_distance"
     "Gerudo Training Grounds Entrance 2": "can_hit_triggers_distance"
-    "Gerudo Training Grounds Stalfos": "has_weapon"
+    "Gerudo Training Grounds Stalfos": "has_weapon && soul(SOUL_STALFOS)"
 "Gerudo Training Grounds Slopes":
   dungeon: GTG
   exits:
@@ -32,14 +32,14 @@
     "Gerudo Training Grounds After Block": "can_lift_silver && has_lens && can_hookshot"
     "Gerudo Training Grounds Upper": "can_hookshot && has_lens"
   locations:
-    "Gerudo Training Grounds Near Block": "true"
+    "Gerudo Training Grounds Near Block": "soul(SOUL_WOLFOS)"
 "Gerudo Training Grounds After Block":
   dungeon: GTG
   locations:
     "Gerudo Training Grounds Behind Block Invisible": "has_lens"
-    "Gerudo Training Grounds Behind Block Visible 1": "true"
-    "Gerudo Training Grounds Behind Block Visible 2": "true"
-    "Gerudo Training Grounds Behind Block Visible 3": "true"
+    "Gerudo Training Grounds Behind Block Visible": "true"
+    "Gerudo Training Grounds Behind Block Enemy Back": "soul(SOUL_LIKE_LIKE)"
+    "Gerudo Training Grounds Behind Block Enemy Front": "soul(SOUL_LIKE_LIKE)"
 "Gerudo Training Grounds Upper":
   dungeon: GTG
   exits:
@@ -96,7 +96,7 @@
     "Gerudo Training Grounds Statue": "can_hammer && can_use_bow"
   locations:
     "Gerudo Training Grounds Hammer Room Switch": "can_hammer"
-    "Gerudo Training Grounds Hammer Room": "true"
+    "Gerudo Training Grounds Hammer Room": "soul(SOUL_KEESE) && soul(SOUL_TORCH_SLUG)"
     "Gerudo Training Grounds SR Lava Back Center": "can_hookshot"
     "Gerudo Training Grounds SR Lava Back Right": "true"
 "Gerudo Training Grounds Statue":
