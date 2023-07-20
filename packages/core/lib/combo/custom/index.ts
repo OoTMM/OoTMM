@@ -140,23 +140,23 @@ class CustomAssetsBuilder {
     return objectId;
   }
 
-  addRawData(data: Buffer) {
+  addRawData(data: Buffer, compressed: boolean) {
     const sizeAligned = (data.length + 0xf) & ~0xf;
     const vrom = this.vrom;
     this.vrom += sizeAligned;
-    this.patch.addNewFile(vrom, data, false);
+    this.patch.addNewFile(vrom, data, compressed);
     return vrom;
   }
 
-  async addFile(define: string, filename: string) {
+  async addFile(define: string, filename: string, compressed: boolean) {
     const data = await raw(this.opts, filename);
-    const vrom = this.addRawData(data);
+    const vrom = this.addRawData(data, compressed);
     this.cg.define('CUSTOM_' + define + '_ADDR', vrom);
     return vrom;
   }
 
   async addCustomObject(name: string, data: Buffer, defines: number[]) {
-    const vrom = this.addRawData(data);
+    const vrom = this.addRawData(data, true);
     const objectId = this.addObjectEntry(vrom, data.length);
     this.cg.define('CUSTOM_OBJECT_ID_' + name, objectId);
     for (let i = 0; i < defines.length; ++i) {
@@ -185,7 +185,7 @@ class CustomAssetsBuilder {
       this.cg.define('CUSTOM_KEEP_' + k, off);
     }
 
-    const customKeepVrom = this.addRawData(keep.pack());
+    const customKeepVrom = this.addRawData(keep.pack(), true);
     this.cg.define('CUSTOM_KEEP_VROM', customKeepVrom);
   }
 
@@ -201,16 +201,16 @@ class CustomAssetsBuilder {
     await this.addCustomKeepFiles();
 
     /* Load MQ data */
-    await this.addFile('MQ_ROOMS', 'mq_rooms.bin');
-    await this.addFile('MQ_SCENES', 'mq_scenes.bin');
-    await this.addFile('MQ_MAPS', 'mq_maps.bin');
+    await this.addFile('MQ_ROOMS', 'mq_rooms.bin', false);
+    await this.addFile('MQ_SCENES', 'mq_scenes.bin', false);
+    await this.addFile('MQ_MAPS', 'mq_maps.bin', true);
 
     /* Load custom objects */
     await this.addObjectFile('TRIFORCE', 'triforce.zobj', [0x06000a30]);
 
     /* Add the object table */
     const objectTableBuffer = toU32Buffer(this.objectVroms.map(o => [o.vstart, o.vend]).flat());
-    const objectTableVrom = this.addRawData(objectTableBuffer);
+    const objectTableVrom = this.addRawData(objectTableBuffer, true);
     this.cg.define('CUSTOM_OBJECT_TABLE_VROM', objectTableVrom);
     this.cg.define('CUSTOM_OBJECT_TABLE_SIZE', this.objectVroms.length);
 
