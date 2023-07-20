@@ -51,6 +51,7 @@ export class Generator {
       const buildResult = await build(this.opts);
       /* Run logic */
       const logicResult = logic(this.monitor, this.opts);
+      patchfile.setHash(logicResult.hash);
       patchfiles = buildPatchfiles({
         patch: patchfile,
         monitor: this.monitor,
