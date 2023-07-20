@@ -111,6 +111,15 @@ class Packer {
     return this.rom;
   }
 
+  private addData(data: Buffer) {
+    const size = data.length;
+    const sizeAligned = (size + 0xf) & ~0xf;
+    const paddr = this.paddr;
+    data.copy(this.rom, paddr);
+    this.paddr += sizeAligned;
+    return paddr;
+  }
+
   private async packFiles(game: Game, count?: number) {
     const config = CONFIG[game];
     const gs = this.gs[game];
