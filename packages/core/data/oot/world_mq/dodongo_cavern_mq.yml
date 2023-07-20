@@ -45,7 +45,6 @@
     "Dodongo Cavern Torch Room": "soul(SOUL_DODONGO)"
   locations:
     "MQ Dodongo Cavern Compass Chest": "soul(SOUL_DODONGO)"
-    "MQ Dodongo Cavern Staircase Scrub": "can_hit_scrub && scrub_price(0x1f)"
 "Dodongo Cavern Torch Room":
   dungeon: DC
   exits:
