@@ -122,6 +122,10 @@ class Packer {
     /* Write the meta */
     meta.copy(this.rom, this.rom.length - meta.length);
 
+    /* Patch rom header */
+    Buffer.from('OOT+MM COMBO       ').copy(this.rom, 0x20);
+    Buffer.from('ZZE').copy(this.rom, 0x3c);
+
     this.fixChecksum();
 
     return this.rom;

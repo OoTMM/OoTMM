@@ -84,10 +84,6 @@ export function buildPatchfiles(args: BuildPatchfileIn): Patchfile[] {
   }
   file.addGlobalPatch(CUSTOM_ADDR, args.custom);
 
-  /* Patch rom header */
-  file.addGlobalPatch(0x20, Buffer.from('OOT+MM COMBO       '));
-  file.addGlobalPatch(0x3c, Buffer.from('ZZE'));
-
   /* Patch the randomized data */
   const patches: Patchfile[] = [];
   for (let world = 0; world < args.settings.players; ++world) {
