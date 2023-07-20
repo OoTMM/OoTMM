@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/entrance.h>
+#include <combo/dma.h>
 
 #if defined(GAME_OOT)
 # define ENTRANCES_ADDR 0x03ff4000
@@ -22,7 +23,8 @@ ALIGNED(16) static Entrance gEntrances[0x100];
 
 void comboInitEntrances(void)
 {
-    DMARomToRam(ENTRANCES_ADDR | PI_DOM1_ADDR2, gEntrances, sizeof(gEntrances));
+    memset(gEntrances, 0xff, sizeof(gEntrances));
+    comboDmaLoadFile(gEntrances, COMBO_VROM_ENTRANCES);
 }
 
 s32 comboEntranceOverride(s16 entranceId)

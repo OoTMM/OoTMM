@@ -161,6 +161,11 @@ class Packer {
   }
 
   private async addFile(vrom: number, data: Buffer, compressed: boolean) {
+    if (data.length === 0) {
+      this.extraDma.push({ physStart: 0xffffffff, physEnd: 0xffffffff, virtStart: vrom, virtEnd: vrom });
+      return;
+    }
+
     const physStart = this.paddr;
     const virtStart = vrom;
     let size = data.length;

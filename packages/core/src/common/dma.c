@@ -13,10 +13,7 @@ static const DmaEntry* dmaLookupNative(u32 vromAddr)
     {
         e = gDmaData + i;
 
-        if (e->pend == 0xffffffff)
-            continue;
-
-        if (vromAddr >= e->vstart && vromAddr < e->vend)
+        if (vromAddr == e->vstart || (vromAddr > e->vstart && vromAddr < e->vend))
             return e;
     }
 
@@ -31,7 +28,7 @@ static const DmaEntry* dmaLookupCache(u32 vromAddr)
     {
         e = sDmaCache + i;
 
-        if (vromAddr >= e->vstart && vromAddr < e->vend)
+        if (vromAddr == e->vstart || (vromAddr > e->vstart && vromAddr < e->vend))
             return e;
     }
 
@@ -63,7 +60,7 @@ static const DmaEntry* dmaLookupAlt(u32 dmaAddr, u32 dmaCount, u32 dmaFlag, u32 
         {
             e = tmp + i;
 
-            if (rawVromAddr >= e->vstart && rawVromAddr < e->vend)
+            if (rawVromAddr == e->vstart || (rawVromAddr > e->vstart && rawVromAddr < e->vend))
             {
                 /* Found the entry - copy it to the cache */
                 index = sDmaCacheIndex;
@@ -123,6 +120,8 @@ void DmaManagerRunRequest(const DmaRequest* dma)
     e = dmaLookup(dma->vromAddr);
     if (!e)
         return;
+    if (e->pend == 0xffffffff)
+        return;
 
     if (e->pend == 0)
     {
@@ -177,15 +176,16 @@ void comboDma_NoCacheInval(void* dramAddr, u32 cartAddr, u32 size)
 
 u32 comboDmaLoadFile(void* dst, u32 vrom)
 {
-    DmaEntry* e;
+    const DmaEntry* e;
     u32 size;
 
     e = dmaLookup(vrom);
     if (!e)
-    {
         for (;;) {}
+
+    if (e->pend == 0xffffffff)
         return 0;
-    }
+
     size = e->vend - e->vstart;
     if (dst)
         LoadFile(dst, e->vstart, size);
