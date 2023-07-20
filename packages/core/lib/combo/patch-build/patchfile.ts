@@ -1,3 +1,5 @@
+const REVISION = 0;
+
 const TYPES_TO_VALUES = {
   global: 0,
   oot: 1,
@@ -29,6 +31,10 @@ export class Patchfile {
       if (header.toString('utf8', 0, 8) !== 'OoTMM-PF') {
         throw new Error('Invalid patch file');
       }
+      const rev = header.readUInt32LE(0x8);
+      if (rev !== REVISION) {
+        throw new Error(`Unsupported patch file revision ${rev}`);
+      }
       this.hash = header.toString('utf8', 0x10, 0x18);
       let offset = 0x18;
       const patchCount = header.readUInt32LE(0xc);
@@ -53,7 +59,7 @@ export class Patchfile {
     const buffers: Buffer[] = [];
     const header = Buffer.alloc(0x18, 0xff);
     header.write('OoTMM-PF', 'utf8');
-    header.writeUInt32LE(0x00000000, 0x8); /* Revision */
+    header.writeUInt32LE(REVISION, 0x8); /* Revision */
     header.writeUInt32LE(this.patches.length, 0xc);
     header.write(this.hash, 0x10, 0x8, 'utf8');
     buffers.push(header);
