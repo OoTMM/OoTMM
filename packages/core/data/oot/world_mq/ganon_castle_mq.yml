@@ -2,7 +2,7 @@
   dungeon: Ganon
   exits:
     "Ganon Castle Exterior After Bridge": "true"
-    "Ganon Castle Main": "soul(SOUL_IRON_KNUCKLE) && soul(SOUL_ARMOS) && soul(SOUL_BUBBLE) && (can_use_sword_master || can_use_sword_goron || (can_use_sticks && has_weapon_ranged) || has_explosives_or_hammer
+    "Ganon Castle Main": "soul(SOUL_IRON_KNUCKLE) && soul(SOUL_ARMOS) && soul(SOUL_BUBBLE) && (can_use_sword_master || can_use_sword_goron || (can_use_sticks && has_weapon_ranged) || has_explosives_or_hammer)"
 "Ganon Castle":
   dungeon: Ganon
   exits:
