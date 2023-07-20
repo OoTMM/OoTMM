@@ -379,7 +379,7 @@ Stone Tower Boss,                                 npc,            NONE,         
 Secret Shrine Dinolfos Chest,                     chest,          NONE,                   SECRET_SHRINE,              0x00,                       RUPEE_SILVER
 Secret Shrine Wizzrobe Chest,                     chest,          NONE,                   SECRET_SHRINE,              0x01,                       RUPEE_SILVER
 Secret Shrine Wart Chest,                         chest,          SECRET_SHRINE_WART_HP,  SECRET_SHRINE,              0x02,                       RUPEE_SILVER
-Secret Shrine GaroMaster Chest,                   chest,          NONE,                   SECRET_SHRINE,              0x03,                       RUPEE_SILVER
+Secret Shrine Garo Master Chest,                  chest,          NONE,                   SECRET_SHRINE,              0x03,                       RUPEE_SILVER
 Secret Shrine HP Chest,                           chest,          SECRET_SHRINE_WART_HP,  SECRET_SHRINE,              0x0a,                       HEART_PIECE
 Moon Trial Deku HP,                               collectible,    NONE,                   MOON_DEKU,                  0x01,                       HEART_PIECE
 Moon Trial Goron HP,                              collectible,    NONE,                   MOON_GORON,                 0x01,                       HEART_PIECE
