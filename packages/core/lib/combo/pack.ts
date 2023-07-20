@@ -3,7 +3,7 @@ import { Buffer } from 'buffer';
 import { compressFile } from './compress';
 import { CONFIG, GAMES, Game } from './config';
 import { DecompressedRoms } from './decompress';
-import { DmaData } from './dma';
+import { DmaData, DmaDataRecord } from './dma';
 import { Monitor } from './monitor';
 import { Patchfile } from './patch-build/patchfile';
 
@@ -53,6 +53,7 @@ class Packer {
   private rom: Buffer;
   private paddr: number;
   private gs: {[k in Game]: PackerGameState};
+  private extraDma: DmaDataRecord[];
 
   constructor(
     private monitor: Monitor,
@@ -73,6 +74,7 @@ class Packer {
         packedFiles: 0,
       },
     };
+    this.extraDma = [];
   }
 
   async run() {
@@ -99,7 +101,7 @@ class Packer {
     this.gs.oot.dma.data().copy(this.rom, CONFIG['oot'].dmaAddr);
     this.gs.mm.dma.data().copy(this.rom, CONFIG['mm'].dmaAddr + mmBase);
 
-    /* Write the payloads */
+    /* Post compress global patches */
     this.monitor.log("Pack: Post-compress patches");
     for (const p of this.patchfiles) {
       for (const pp of p.globalPatches) {
@@ -107,6 +109,7 @@ class Packer {
       }
     }
 
+    /* Pack the payload */
     this.monitor.log("Pack: Write payloads");
     const meta = Buffer.alloc(0x1000);
     const patch = this.patchfiles[0];
@@ -118,6 +121,16 @@ class Packer {
     meta.writeUInt32BE(ootPayload.length, 0x0c);
     meta.writeUInt32BE(mmPayloadAddr, 0x10);
     meta.writeUInt32BE(mmPayload.length, 0x14);
+
+    /* Pack custom DMA */
+    this.monitor.log("Pack: Write custom DMA");
+    const customDma = new DmaData(Buffer.alloc(this.extraDma.length * 0x10));
+    for (let i = 0; i < this.extraDma.length; ++i) {
+      customDma.write(i, this.extraDma[i]);
+    }
+    const customDmaAddr = this.addData(customDma.data());
+    meta.writeUInt32BE(customDmaAddr, 0x00);
+    meta.writeUInt32BE(this.extraDma.length, 0x04);
 
     /* Write the meta */
     meta.copy(this.rom, this.rom.length - meta.length);
@@ -138,6 +151,15 @@ class Packer {
     data.copy(this.rom, paddr);
     this.paddr += sizeAligned;
     return paddr;
+  }
+
+  private addFile(vrom: number, data: Buffer) {
+    const size = data.length;
+    const sizeAligned = (size + 0xf) & ~0xf;
+    const paddr = this.paddr;
+    data.copy(this.rom, paddr);
+    this.paddr += sizeAligned;
+    return { physStart: paddr, physEnd: 0, virtStart: vrom, virtEnd: vrom + sizeAligned };
   }
 
   private async packFiles(game: Game, count?: number) {
