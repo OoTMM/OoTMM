@@ -22,6 +22,7 @@ type DataPatch = {
 
 type GamePatches = {
   data: DataPatch[];
+  payload?: Buffer;
 }
 
 export class Patchfile {
@@ -61,6 +62,10 @@ export class Patchfile {
     this.globalPatches.push({ addr, data });
   }
 
+  addPayload(game: Game, payload: Buffer) {
+    this.gamePatches[game].payload = payload;
+  }
+
   toBuffer(): Buffer {
     const buffers: Buffer[] = [];
     const header = Buffer.alloc(0x18, 0xff);
@@ -69,8 +74,8 @@ export class Patchfile {
 
   dup() {
     const ret = new Patchfile(this.hash);
-    ret.gamePatches.oot = { data: [...this.gamePatches.oot.data] };
-    ret.gamePatches.mm = { data: [...this.gamePatches.mm.data] };
+    ret.gamePatches.oot = { data: [...this.gamePatches.oot.data], payload: this.gamePatches.oot.payload };
+    ret.gamePatches.mm = { data: [...this.gamePatches.mm.data], payload: this.gamePatches.mm.payload };
     ret.globalPatches = [...this.globalPatches];
     return ret;
   }

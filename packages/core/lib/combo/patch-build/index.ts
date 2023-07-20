@@ -76,6 +76,7 @@ export function buildPatchfiles(args: BuildPatchfileIn): Patchfile[] {
       throw new Error("Payload too large");
     }
     file.addGlobalPatch(CONFIG[game].payloadAddr, payload);
+    file.addPayload(game, payload);
   }
 
   /* Pack the custom data */

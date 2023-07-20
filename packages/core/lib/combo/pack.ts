@@ -99,12 +99,28 @@ class Packer {
     this.gs.oot.dma.data().copy(this.rom, CONFIG['oot'].dmaAddr);
     this.gs.mm.dma.data().copy(this.rom, CONFIG['mm'].dmaAddr + mmBase);
 
+    /* Write the payloads */
+    this.monitor.log("Pack: Write payloads");
+    const meta = Buffer.alloc(0x1000);
+    const patch = this.patchfiles[0];
+    const ootPayload = patch.gamePatches['oot'].payload!;
+    const mmPayload = patch.gamePatches['mm'].payload!;
+    const ootPayloadAddr = this.addData(ootPayload);
+    const mmPayloadAddr = this.addData(mmPayload);
+    meta.writeUInt32BE(ootPayloadAddr, 0x08);
+    meta.writeUInt32BE(ootPayload.length, 0x0c);
+    meta.writeUInt32BE(mmPayloadAddr, 0x10);
+    meta.writeUInt32BE(mmPayload.length, 0x14);
+
     this.monitor.log("Pack: Post-compress patches");
     for (const p of this.patchfiles) {
       for (const pp of p.globalPatches) {
         pp.data.copy(this.rom, pp.addr);
       }
     }
+
+    /* Write the meta */
+    meta.copy(this.rom, this.rom.length - meta.length);
 
     this.fixChecksum();
 
