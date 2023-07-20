@@ -9,13 +9,10 @@
 #define PAYLOAD_META (0xb0000000 | (COMBO_META_ROM + PAYLOAD_OFF))
 
 PATCH_START LOADER_ADDR
-  addiu sp,-0x20
+  addiu sp,-0x10
   sw    ra,0x04(sp)
-  sw    a0,0x08(sp)
-  sw    a1,0x0c(sp)
-  sw    a2,0x10(sp)
-  sw    s0,0x14(sp)
-  sw    s1,0x18(sp)
+  sw    s0,0x08(sp)
+  sw    s1,0x0c(sp)
 
   /* Load the payload metadata */
   la    a0,PAYLOAD_META
@@ -43,13 +40,10 @@ PATCH_START LOADER_ADDR
    nop
 
   /* Return */
-  lw    s1,0x18(sp)
-  lw    s0,0x14(sp)
-  lw    a2,0x10(sp)
-  lw    a1,0x0c(sp)
-  lw    a0,0x08(sp)
+  lw    s1,0x0c(sp)
+  lw    s0,0x08(sp)
   lw    ra,0x04(sp)
-  addiu sp,0x20
+  addiu sp,0x10
 
   jr ra
    nop

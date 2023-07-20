@@ -18,7 +18,6 @@
 #ifdef GAME_OOT
 # define PAYLOAD_RAM    0x80600000
 # define LOADER_ADDR    0x80006600
-# define LOADER_NEXT    InitDmaManager
 
 # define COMBO_CTX_ADDR_READ    COMBO_CTX_ADDR_OOT
 # define COMBO_CTX_ADDR_WRITE   COMBO_CTX_ADDR_MM
@@ -27,7 +26,6 @@
 #ifdef GAME_MM
 # define PAYLOAD_RAM    0x80740000
 # define LOADER_ADDR    0x800982b0
-# define LOADER_NEXT    InitDmaManager
 
 # define COMBO_CTX_ADDR_READ    COMBO_CTX_ADDR_MM
 # define COMBO_CTX_ADDR_WRITE   COMBO_CTX_ADDR_OOT
