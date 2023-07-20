@@ -5,26 +5,36 @@ import { Options } from '../options';
 import { Patchfile } from '../patch-build/patchfile';
 import { randString } from '../random';
 import { Random, sample } from '../random';
+import { toU32Buffer } from '../util';
 import { png } from '../util/png';
 import { Color, ColorRandom, COLORS } from './color';
 import { recolorImage } from './image';
+import fs from 'fs/promises';
+import { enableModelOotLink } from './model';
+
+const OBJECTS_TABLE_ADDR = 0x800f8ff8;
+
+type BufferPath = string | Buffer;
 
 export type Cosmetics = {
   ootTunicKokiri: ColorRandom;
   ootTunicGoron: ColorRandom;
   ootTunicZora: ColorRandom;
+  modelOotChildLink: BufferPath | null;
 };
 
 export const COSMETIC_NAMES: {[k in keyof Cosmetics]: string} = {
   ootTunicKokiri: 'OoT Kokiri Tunic',
   ootTunicGoron: 'OoT Goron Tunic',
   ootTunicZora: 'OoT Zora Tunic',
+  modelOotChildLink: 'Player Model - Child Link (OoT)',
 };
 
 export const DEFAULT_COSMETICS: Cosmetics = {
   ootTunicKokiri: 'kokirigreen',
   ootTunicGoron: 'goronred',
   ootTunicZora: 'zorablue',
+  modelOotChildLink: null,
 };
 
 export function makeCosmetics(data: Partial<Cosmetics>) {
@@ -43,6 +53,7 @@ export async function cosmeticsAssets(opts: Options) {
 type Unpromise<T extends Promise<any>> = T extends Promise<infer U> ? U : never;
 
 class CosmeticsPass {
+  private vrom: number;
   private random: Random;
   private patch: Patchfile;
   private assets!: Unpromise<ReturnType<typeof cosmeticsAssets>>;
@@ -54,7 +65,32 @@ class CosmeticsPass {
   ) {
     this.random = new Random();
     this.random.seed(randString());
-    this.patch = new Patchfile('');
+    this.patch = new Patchfile;
+    this.vrom = 0xc0000000;
+  }
+
+  private addNewFile(data: Buffer) {
+    const size = (data.length + 0xf) & ~0xf;
+    const vrom = this.vrom;
+    this.vrom = (this.vrom + size) >>> 0;
+    this.patch.addNewFile(vrom, data, true);
+    return [vrom, (vrom + size) >>> 0];
+  }
+
+  private async getPathBuffer(path: BufferPath | null): Promise<Buffer | null> {
+    if (path === null) {
+      return null;
+    }
+
+    if (Buffer.isBuffer(path)) {
+      return path;
+    }
+
+    if (!process.env.ROLLUP) {
+      return fs.readFile(path);
+    } else {
+      throw new Error(`Cannot load buffers from path`);
+    }
   }
 
   private color(c: ColorRandom): number {
@@ -113,6 +149,19 @@ class CosmeticsPass {
     this.patchOotTunic(0, this.opts.cosmetics.ootTunicKokiri);
     this.patchOotTunic(1, this.opts.cosmetics.ootTunicGoron);
     this.patchOotTunic(2, this.opts.cosmetics.ootTunicZora);
+
+    /* OoT child model */
+    const model = await this.getPathBuffer(this.opts.cosmetics.modelOotChildLink);
+    if (model) {
+      /*const obj = this.addNewFile(model);
+      const objEntry = toU32Buffer(obj);
+      const vaddr = OBJECTS_TABLE_ADDR + 0x8 * 0x15;
+      const paddr = this.addresses.oot.virtualToPhysical(vaddr);
+      this.patch.addDataPatch('oot', paddr, objEntry);*/
+      const vrom = 0x00FBE000;
+      this.patch.addDataPatch('oot', vrom, model);
+      enableModelOotLink(this.patch, 0x13b38);
+    }
 
     return this.patch;
   }
