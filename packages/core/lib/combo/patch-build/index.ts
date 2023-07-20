@@ -75,7 +75,6 @@ export function buildPatchfiles(args: BuildPatchfileIn): Patchfile[] {
     if (payload.length > 0x40000) {
       throw new Error("Payload too large");
     }
-    file.addGlobalPatch(CONFIG[game].payloadAddr, payload);
     file.addPayload(game, payload);
   }
 
