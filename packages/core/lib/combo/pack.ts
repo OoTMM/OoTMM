@@ -113,8 +113,10 @@ class Packer {
 
     /* Add extra files */
     this.monitor.log("Pack: Add extra files");
-    for (const f of patch.newFiles) {
-      await this.addFile(f.vrom, f.data, f.compressed);
+    for (const p of this.patchfiles) {
+      for (const f of p.newFiles) {
+        await this.addFile(f.vrom, f.data, f.compressed);
+      }
     }
 
     /* Pack the payload */
