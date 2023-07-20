@@ -16,7 +16,7 @@
     "Forest Temple Maze": "small_keys(SMALL_KEY_FOREST, 1)"
     "Forest Temple Antichamber": "event(FOREST_POE_4)"
   events:
-    FOREST_POE_4: "event(FOREST_POE_1) && event(FOREST_POE_2) && event(FOREST_POE_3) && can_use_bow"
+    FOREST_POE_4: "event(FOREST_POE_1) && event(FOREST_POE_2) && event(FOREST_POE_3)"
   locations:
     "Forest Temple GS Main": "can_collect_distance"
 "Forest Temple Mini-Boss":

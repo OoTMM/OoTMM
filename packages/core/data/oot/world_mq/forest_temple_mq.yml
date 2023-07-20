@@ -10,36 +10,38 @@
   dungeon: Forest
   exits:
     "Forest Temple": "true"
-    "Forest Temple Antichamber": "event(FOREST_POE_1) && event(FOREST_POE_2) && event(FOREST_POE_3)"
-    "Forest Temple West Wing": "has_weapon"
+    "Forest Temple Antichamber": "event(FOREST_POE_4)"
+    "Forest Temple West Wing": "has_weapon && soul(SOUL_STALFOS)"
     "Forest Temple West Garden": "can_hit_triggers_distance"
     "Forest Temple East Garden": "can_hit_triggers_distance"
+  events:
+    FOREST_POE_4: "event(FOREST_POE_1) && event(FOREST_POE_2) && event(FOREST_POE_3)"
   locations:
-    "MQ Forest Temple Wolfos Chest": "can_play_time && (has_weapon || can_use_slingshot || has_explosives || can_use_din || can_use_sticks)"
+    "MQ Forest Temple Wolfos Chest": "soul(SOUL_WOLFOS) && can_play_time && (has_weapon || can_use_slingshot || has_explosives || can_use_din || can_use_sticks)"
 "Forest Temple West Wing":
   dungeon: Forest
   exits:
-    "Forest Temple Main": "has_weapon"
+    "Forest Temple Main": "has_weapon && soul(SOUL_STALFOS)"
     "Forest Temple Straightened Hallway": "small_keys(SMALL_KEY_FOREST, 3) && is_adult && has(STRENGTH)"
-    "Forest Temple West Garden": "small_keys(SMALL_KEY_FOREST, 2) && is_adult && has(STRENGTH)" #This is sideways thinking, but you must have access to West Garden with 2 keys here because you cannot waste a third without access via another means.
+    "Forest Temple West Garden": "soul(SOUL_FLOORMASTER) && small_keys(SMALL_KEY_FOREST, 2) && is_adult && has(STRENGTH)" #This is sideways thinking, but you must have access to West Garden with 2 keys here because you cannot waste a third without access via another means.
     "Forest Temple Twisted Hallway": "small_keys(SMALL_KEY_FOREST, 3) && is_adult && has(STRENGTH) && event(FOREST_TWIST_SWITCH)"
   locations:
     "MQ Forest Temple GS Climb Room": "can_damage_skull"
 "Forest Temple Straightened Hallway":
   dungeon: Forest
   exits:
-    "Forest Temple West Garden Ledge": "true"
+    "Forest Temple West Garden Ledge": "soul(SOUL_FLOORMASTER)"
   locations:
     "MQ Forest Temple Boss Key Chest": "true"
 "Forest Temple West Garden Ledge":
   dungeon: Forest
   exits:
     "Forest Temple West Garden": "true"
-    "Forest Temple West Wing": "true"
+    "Forest Temple West Wing": "event(FOREST_TWIST_SWITCH)"
   events:
     FOREST_TWIST_SWITCH: "true"
   locations:
-    "MQ Forest Temple ReDead Chest": "true"
+    "MQ Forest Temple ReDead Chest": "soul(SOUL_REDEAD_GIBDO)"
 "Forest Temple West Garden":
   dungeon: Forest
   exits:
@@ -55,8 +57,8 @@
     "Forest Temple Garden Ledges": "can_longshot || (can_hookshot && (trick(OOT_FOREST_HOOK) || can_play_time))"
     "Forest Temple East Garden Ledge": "can_longshot"
   events:
-    STICKS: "can_hookshot || can_hammer || can_boomerang || (has_nuts && has_weapon)"
-    NUTS: "is_adult || has_weapon || has_explosives || can_use_slingshot"
+    STICKS: "soul(SOUL_DEKU_BABA) && (can_hookshot || can_hammer || can_boomerang || (has_nuts && has_weapon))"
+    NUTS: "soul(SOUL_DEKU_BABA) && (has_weapon || has_explosives || can_use_slingshot)"
   locations:
     "MQ Forest Temple Well Chest": "can_hit_triggers_distance"
     "MQ Forest Temple GS East Garden": "can_collect_distance"
@@ -68,6 +70,7 @@
     "Forest Temple East Garden": "true"
   locations:
     "MQ Forest Temple East Garden High Ledge Chest": "true"
+    "MQ Forest Temple GS East Garden": "can_play_time"
 "Forest Temple East Garden Ledge":
   dungeon: Forest
   exits:
@@ -82,20 +85,22 @@
 "Forest Temple Bow Region":
   dungeon: Forest
   exits:
-    "Forest Temple Falling Ceiling": "small_keys(SMALL_KEY_FOREST, 5) && (can_use_bow || can_use_din)" #Only 5 keys is safe because, if you wasted a key in falling ceiling, you can go there otherwise.
+    "Forest Temple Falling Ceiling": "soul(SOUL_STALFOS) && soul(SOUL_WOLFOS) && small_keys(SMALL_KEY_FOREST, 5) && (can_use_bow || can_use_din)" #Only 5 keys is safe because, if you wasted a key in falling ceiling, you can go there otherwise.
   events:
     FOREST_POE_1: "can_use_bow"
-    FOREST_POE_2: "can_use_bow"
+    FOREST_POE_2: "soul(SOUL_STALFOS) && soul(SOUL_WOLFOS) && can_use_bow"
   locations:
     "MQ Forest Temple Map Chest": "can_use_bow"
-    "MQ Forest Temple Bow Chest": "true"
-    "MQ Forest Temple Compass Chest": "can_use_bow"
+    "MQ Forest Temple Bow Chest": "soul(SOUL_STALFOS) && soul(SOUL_WOLFOS)"
+    "MQ Forest Temple Compass Chest": "soul(SOUL_STALFOS) && soul(SOUL_WOLFOS) && can_use_bow"
+    "MQ Forest Temple Wolfos Chest": "soul(SOUL_WOLFOS)"
 "Forest Temple Falling Ceiling":
   dungeon: Forest
   events:
     FOREST_POE_3: "small_keys(SMALL_KEY_FOREST, 6) && can_use_bow"
   locations:
     "MQ Forest Temple Falling Ceiling Chest": "true"
+    "MQ Forest Temple East Garden Ledge Chest": "true"
 "Forest Temple Antichamber":
   dungeon: Forest
   exits:
