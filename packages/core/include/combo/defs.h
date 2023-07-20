@@ -1,11 +1,11 @@
 #ifndef COMBO_DEFS_H
 #define COMBO_DEFS_H
 
+#define COMBO_META_ROM      0x03fff000
 #define COMBO_CTX_ADDR_OOT 0x80006584
 #define COMBO_CTX_ADDR_MM  0x80098280
 
 #ifdef GAME_OOT
-# define PAYLOAD_ROM    0x03e80000
 # define PAYLOAD_RAM    0x80600000
 # define LOADER_ADDR    0x80006600
 # define LOADER_NEXT    InitDmaManager
@@ -15,7 +15,6 @@
 #endif
 
 #ifdef GAME_MM
-# define PAYLOAD_ROM    0x03ec0000
 # define PAYLOAD_RAM    0x80740000
 # define LOADER_ADDR    0x800982b0
 # define LOADER_NEXT    InitDmaManager
@@ -25,7 +24,7 @@
 #endif
 
 #define MM_BASE       0xa628f0
-#define PAYLOAD_SIZE  0x00040000
+#define PAYLOAD_SIZE  0x40000
 
 #define MASK_FOREIGN_GI     0x0200
 #define MASK_FOREIGN_OBJECT 0x1000
