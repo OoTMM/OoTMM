@@ -591,7 +591,6 @@ const effectiveStartingItems = (world: number, logic: LogicResult): ItemsCount =
 
 const randomizerStartingItems = (world: number, logic: LogicResult): Buffer => {
   const { settings } = logic;
-  const buffer = Buffer.alloc(0x1000, 0xff);
   const ids: number[] = [];
   const ids2: number[] = [];
   const items = effectiveStartingItems(world, logic);
@@ -609,14 +608,13 @@ const randomizerStartingItems = (world: number, logic: LogicResult): Buffer => {
       ids.push(count);
     }
   }
-  const data = toU16Buffer([...ids, ...ids2]);
-  data.copy(buffer, 0);
-  return buffer;
+  return toU16Buffer([...ids, ...ids2, 0xffff, 0xffff]);
 };
 
 export function patchRandomizer(worldId: number, logic: LogicResult, settings: Settings, patchfile: Patchfile) {
   const buffer = Buffer.alloc(0x20000, 0xff);
   patchfile.addNewFile(0xf0200000, randomizerData(worldId, logic), true);
+  patchfile.addNewFile(0xf0300000, randomizerStartingItems(worldId, logic), false);
   patchfile.addNewFile(0xf0400000, gameChecks(worldId, settings, 'oot', logic), true);
   patchfile.addNewFile(0xf0500000, gameChecks(worldId, settings, 'mm', logic), true);
   patchfile.addNewFile(0xf0600000, gameHints(settings, 'oot', logic.hints[worldId]), true);
