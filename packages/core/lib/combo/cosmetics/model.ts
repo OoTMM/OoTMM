@@ -1,5 +1,9 @@
 import { Patchfile } from "../patch-build/patchfile";
 
+const OOT_FILES = {
+  CODE: 0x00A87000,
+}
+
 const OOT_LINK_CHILD_OFFSETS = {
   LUT_DL_SHIELD_DEKU: 0x060050D0,
   LUT_DL_WAIST: 0x060050D8,
@@ -77,6 +81,18 @@ const OOT_LINK_CHILD_OFFSETS = {
   HIERARCHY: 0x060053A8,
 };
 
+function patchPtrOotHi(patch: Patchfile, base: number, offset: number, value: number) {
+  const buf = Buffer.alloc(2);
+  buf.writeUInt16BE(value >>> 16, 0);
+  patch.addDataPatch('oot', base + offset, buf);
+}
+
+function patchPtrOotLo(patch: Patchfile, base: number, offset: number, value: number) {
+  const buf = Buffer.alloc(2);
+  buf.writeUInt16BE((value & 0xffff) >>> 0, 0);
+  patch.addDataPatch('oot', base + offset, buf);
+}
+
 function patchPtrOot(patch: Patchfile, base: number, offset: number, value: number) {
   const buf = Buffer.alloc(4);
   buf.writeUInt32BE(value, 0);
@@ -87,9 +103,7 @@ export function enableModelOotLink(patch: Patchfile, dfAddr: number) {
   dfAddr |= 0x06000000;
   let base: number;
 
-  base = 0x00A87000 + 0xE671C;
-  /* writer.SetAdvance(8) */
-
+  base = OOT_FILES.CODE + 0xE671C;
   patchPtrOot(patch, base, 0x0000, OOT_LINK_CHILD_OFFSETS.LUT_DL_RFIST);
   patchPtrOot(patch, base, 0x0008, OOT_LINK_CHILD_OFFSETS.LUT_DL_RFIST);
   patchPtrOot(patch, base, 0x0010, OOT_LINK_CHILD_OFFSETS.LUT_DL_RFIST_SHIELD_DEKU);
@@ -166,25 +180,20 @@ export function enableModelOotLink(patch: Patchfile, dfAddr: number) {
   patchPtrOot(patch, base, 0x0248, 0x00000000);
   patchPtrOot(patch, base, 0x0250, OOT_LINK_CHILD_OFFSETS.LUT_DL_FPS_RARM_SLINGSHOT);
 
+  base = OOT_FILES.CODE + 0xE6B2C;
+  patchPtrOot(patch, base, 0x0000, OOT_LINK_CHILD_OFFSETS.LUT_DL_BOTTLE);
+
+  base = OOT_FILES.CODE + 0xE6B74;
+  patchPtrOot(patch, base, 0x0000, OOT_LINK_CHILD_OFFSETS.LUT_DL_SLINGSHOT_STRING)
+  patchPtrOot(patch, base, 0x0004, 0x44178000);
+  patchPtrOot(patch, base, 0x0008, 0x436C0000);
+
+  patchPtrOotHi(patch, OOT_FILES.CODE, 0x6922E, OOT_LINK_CHILD_OFFSETS.LUT_DL_GORON_BRACELET);
+  patchPtrOotLo(patch, OOT_FILES.CODE, 0x69232, OOT_LINK_CHILD_OFFSETS.LUT_DL_GORON_BRACELET);
+  patchPtrOotHi(patch, OOT_FILES.CODE, 0x6A80E, OOT_LINK_CHILD_OFFSETS.LUT_DL_DEKU_STICK);
+  patchPtrOotLo(patch, OOT_FILES.CODE, 0x6A812, OOT_LINK_CHILD_OFFSETS.LUT_DL_DEKU_STICK);
+
   /*
-  writer.GoTo(0xE6B2C)
-  writer.WriteModelData(Offsets.CHILD_LINK_LUT_DL_BOTTLE)
-
-  writer.GoTo(0xE6B74)
-  writer.SetAdvance(4)
-  writer.WriteModelData(Offsets.CHILD_LINK_LUT_DL_SLINGSHOT_STRING)
-  writer.WriteModelData(0x44178000)  # string anchor x: 606.0
-  writer.WriteModelData(0x436C0000)  # string anchor y: 236.0
-
-  writer.GoTo(0x6922E)
-  writer.WriteModelDataHi(Offsets.CHILD_LINK_LUT_DL_GORON_BRACELET)
-  writer.GoTo(0x69232)
-  writer.WriteModelDataLo(Offsets.CHILD_LINK_LUT_DL_GORON_BRACELET)
-  writer.GoTo(0x6A80E)
-  writer.WriteModelDataHi(Offsets.CHILD_LINK_LUT_DL_DEKU_STICK)
-  writer.GoTo(0x6A812)
-  writer.WriteModelDataLo(Offsets.CHILD_LINK_LUT_DL_DEKU_STICK)
-
   writer.SetBase('Stick')
   writer.GoTo(0x334)
   writer.WriteModelData(Offsets.CHILD_LINK_LUT_DL_DEKU_STICK)
