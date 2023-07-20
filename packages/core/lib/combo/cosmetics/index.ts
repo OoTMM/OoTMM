@@ -142,6 +142,20 @@ class CosmeticsPass {
     this.patch.addDataPatch('oot', paddr, newIcon);
   }
 
+  private async patchOotChildModel() {
+    const model = await this.getPathBuffer(this.opts.cosmetics.modelOotChildLink);
+    if (model) {
+      const magic = model.indexOf(Buffer.from('MODLOADER64'));
+      if (magic === -1) {
+        throw new Error('Invalid model file');
+      }
+      const vrom = 0x00FBE000;
+      this.patch.addDataPatch('oot', vrom, model);
+      const dfAddr = model.indexOf(Buffer.from([0xdf, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]));
+      enableModelOotLink(this.patch, dfAddr);
+    }
+  }
+
   async run(): Promise<Patchfile> {
     this.assets = await cosmeticsAssets(this.opts);
 
@@ -150,18 +164,8 @@ class CosmeticsPass {
     this.patchOotTunic(1, this.opts.cosmetics.ootTunicGoron);
     this.patchOotTunic(2, this.opts.cosmetics.ootTunicZora);
 
-    /* OoT child model */
-    const model = await this.getPathBuffer(this.opts.cosmetics.modelOotChildLink);
-    if (model) {
-      /*const obj = this.addNewFile(model);
-      const objEntry = toU32Buffer(obj);
-      const vaddr = OBJECTS_TABLE_ADDR + 0x8 * 0x15;
-      const paddr = this.addresses.oot.virtualToPhysical(vaddr);
-      this.patch.addDataPatch('oot', paddr, objEntry);*/
-      const vrom = 0x00FBE000;
-      this.patch.addDataPatch('oot', vrom, model);
-      enableModelOotLink(this.patch, 0x13b38);
-    }
+    /* Models */
+    await this.patchOotChildModel();
 
     return this.patch;
   }
