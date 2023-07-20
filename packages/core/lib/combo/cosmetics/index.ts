@@ -75,7 +75,7 @@ class CosmeticsPass {
     buffer.writeUInt8(color >>> 16, 0);
     buffer.writeUInt8((color >>> 8) & 0xff, 1);
     buffer.writeUInt8(color & 0xff, 2);
-    this.patch.addPatch(game, paddr, buffer);
+    this.patch.addDataPatch(game, paddr, buffer);
   }
 
   private patchOotTunic(index: number, color: ColorRandom) {
@@ -103,7 +103,7 @@ class CosmeticsPass {
     const paddr = 0x7fe000 + 0x1000 * index;
     const icon = this.roms.oot.rom.subarray(paddr, paddr + 0x1000);
     const newIcon = recolorImage(icon, this.assets.MASK_TUNIC, defaultColorIcon, c);
-    this.patch.addPatch('oot', paddr, newIcon);
+    this.patch.addDataPatch('oot', paddr, newIcon);
   }
 
   async run(): Promise<Patchfile> {

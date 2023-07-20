@@ -1,7 +1,7 @@
 import { Buffer } from 'buffer';
 
 import { compressFile } from './compress';
-import { CONFIG, Game } from './config';
+import { CONFIG, GAMES, Game } from './config';
 import { DecompressedRoms } from './decompress';
 import { DmaData } from './dma';
 import { Monitor } from './monitor';
@@ -77,19 +77,33 @@ class Packer {
 
   async run() {
     /* Apply patches and compress */
-    const romOot = this.roms.oot.rom;
-    const romMm = this.roms.mm.rom;
     this.monitor.log("Pack: Pre-compress patches");
     for (const p of this.patchfiles) {
-      p.apply(romOot, 'oot');
-      p.apply(romMm, 'mm');
+      for (const g of GAMES) {
+        const rom = this.roms[g].rom;
+        for (const pp of p.gamePatches[g].data) {
+          pp.data.copy(rom, pp.addr);
+        }
+      }
     }
 
-    await this.packAll();
+    /* Pack OoT and MM */
+    this.monitor.log("Pack: Compress");
+    await this.packFiles('oot', 27);
+    const mmBase = this.paddr;
+    await this.packFiles('mm', 31);
+    await this.packFiles('oot');
+    await this.packFiles('mm');
+
+    /* Write the DMA */
+    this.gs.oot.dma.data().copy(this.rom, CONFIG['oot'].dmaAddr);
+    this.gs.mm.dma.data().copy(this.rom, CONFIG['mm'].dmaAddr + mmBase);
 
     this.monitor.log("Pack: Post-compress patches");
     for (const p of this.patchfiles) {
-      p.apply(this.rom, 'global');
+      for (const pp of p.globalPatches) {
+        pp.data.copy(this.rom, pp.addr);
+      }
     }
 
     this.fixChecksum();
@@ -169,21 +183,6 @@ class Packer {
 
     /* Update the game state */
     gs.packedFiles += count;
-  }
-
-  private async packAll() {
-    this.monitor.log("Pack: Compress");
-
-    /* Pack OoT and MM */
-    await this.packFiles('oot', 27);
-    const mmBase = this.paddr;
-    await this.packFiles('mm', 31);
-    await this.packFiles('oot');
-    await this.packFiles('mm');
-
-    /* Write the DMA */
-    this.gs.oot.dma.data().copy(this.rom, CONFIG['oot'].dmaAddr);
-    this.gs.mm.dma.data().copy(this.rom, CONFIG['mm'].dmaAddr + mmBase);
   }
 
   private fixChecksum() {

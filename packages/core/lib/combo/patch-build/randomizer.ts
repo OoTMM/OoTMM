@@ -633,5 +633,5 @@ export function patchRandomizer(worldId: number, logic: LogicResult, settings: S
   data.copy(buffer, 0);
   const startingItems = randomizerStartingItems(worldId, logic);
   startingItems.copy(buffer, STARTING_ITEMS_DATA_OFFSET);
-  patchfile.addPatch('global', 0x03fe0000, buffer);
+  patchfile.addGlobalPatch(0x03fe0000, buffer);
 }

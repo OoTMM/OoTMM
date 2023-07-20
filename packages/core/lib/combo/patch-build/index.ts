@@ -75,18 +75,18 @@ export function buildPatchfiles(args: BuildPatchfileIn): Patchfile[] {
     if (payload.length > 0x40000) {
       throw new Error("Payload too large");
     }
-    file.addPatch('global', CONFIG[game].payloadAddr, payload);
+    file.addGlobalPatch(CONFIG[game].payloadAddr, payload);
   }
 
   /* Pack the custom data */
   if (args.custom.length > 0x40000) {
     throw new Error("Custom data too large");
   }
-  file.addPatch('global', CUSTOM_ADDR, args.custom);
+  file.addGlobalPatch(CUSTOM_ADDR, args.custom);
 
   /* Patch rom header */
-  file.addPatch('global', 0x20, Buffer.from('OOT+MM COMBO       '));
-  file.addPatch('global', 0x3c, Buffer.from('ZZE'));
+  file.addGlobalPatch(0x20, Buffer.from('OOT+MM COMBO       '));
+  file.addGlobalPatch(0x3c, Buffer.from('ZZE'));
 
   /* Patch the randomized data */
   const patches: Patchfile[] = [];

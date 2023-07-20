@@ -1,4 +1,6 @@
-const REVISION = 0;
+import { Game } from "../config";
+
+const REVISION = 1;
 
 const TYPES_TO_VALUES = {
   global: 0,
@@ -13,17 +15,27 @@ for (const [k, v] of Object.entries(TYPES_TO_VALUES)) {
   VALUES_TO_TYPES[v] = k as PatchType;
 }
 
-type Patch = {
-  type: PatchType;
-  romAddr: number;
+type DataPatch = {
+  addr: number;
   data: Buffer;
-};
+}
+
+type GamePatches = {
+  data: DataPatch[];
+}
 
 export class Patchfile {
-  private patches: Patch[] = [];
+  public gamePatches: {[k in Game]: GamePatches};
+  public globalPatches: DataPatch[];
   public readonly hash: string;
 
   constructor(hashOrBuffer: string | Buffer) {
+    this.gamePatches = {
+      oot: { data: [] },
+      mm: { data: [] },
+    };
+    this.globalPatches = [];
+
     if (typeof hashOrBuffer === 'string') {
       this.hash = hashOrBuffer;
     } else {
@@ -38,57 +50,28 @@ export class Patchfile {
       this.hash = header.toString('utf8', 0x10, 0x18);
       let offset = 0x18;
       const patchCount = header.readUInt32LE(0xc);
-      for (let i = 0; i < patchCount; ++i) {
-        const patchHeader = hashOrBuffer.subarray(offset, offset + 0xc);
-        offset += 0xc;
-        const type = VALUES_TO_TYPES[patchHeader.readUInt32LE(0x0)];
-        const romAddr = patchHeader.readUInt32LE(0x4);
-        const dataLen = patchHeader.readUInt32LE(0x8);
-        const data = hashOrBuffer.subarray(offset, offset + dataLen);
-        offset += dataLen;
-        this.patches.push({ type, romAddr, data });
-      }
     }
   }
 
-  addPatch(type: PatchType, romAddr: number, data: Buffer) {
-    this.patches.push({ type, romAddr, data });
+  addDataPatch(game: Game, addr: number, data: Buffer) {
+    this.gamePatches[game].data.push({ addr, data });
+  }
+
+  addGlobalPatch(addr: number, data: Buffer) {
+    this.globalPatches.push({ addr, data });
   }
 
   toBuffer(): Buffer {
     const buffers: Buffer[] = [];
     const header = Buffer.alloc(0x18, 0xff);
-    header.write('OoTMM-PF', 'utf8');
-    header.writeUInt32LE(REVISION, 0x8); /* Revision */
-    header.writeUInt32LE(this.patches.length, 0xc);
-    header.write(this.hash, 0x10, 0x8, 'utf8');
-    buffers.push(header);
-
-    for (const patch of this.patches) {
-      const patchHeader = Buffer.alloc(0xc);
-      let addr = patch.romAddr;
-      patchHeader.writeUInt32LE(TYPES_TO_VALUES[patch.type], 0x0);
-      patchHeader.writeUInt32LE(addr, 0x4);
-      patchHeader.writeUInt32LE(patch.data.length, 0x8);
-      buffers.push(patchHeader);
-      buffers.push(patch.data);
-    }
-
     return Buffer.concat(buffers);
-  }
-
-  apply(rom: Buffer, type: PatchType) {
-    for (const patch of this.patches) {
-      if (patch.type !== type) {
-        continue;
-      }
-      patch.data.copy(rom, patch.romAddr);
-    }
   }
 
   dup() {
     const ret = new Patchfile(this.hash);
-    ret.patches = [...this.patches];
+    ret.gamePatches.oot = { data: [...this.gamePatches.oot.data] };
+    ret.gamePatches.mm = { data: [...this.gamePatches.mm.data] };
+    ret.globalPatches = [...this.globalPatches];
     return ret;
   }
 }
