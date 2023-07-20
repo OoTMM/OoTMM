@@ -15,7 +15,7 @@
   dungeon: Fire
   exits:
     "Fire Temple Upper Lobby": "true"
-    "Fire Temple Boss": "has_tunic_goron && boss_key(BOSS_KEY_FIRE) && (is_adult && event(FIRE_TEMPLE_PILLAR_HAMMER)) || has_hover_boots)"
+    "Fire Temple Boss": "has_tunic_goron && boss_key(BOSS_KEY_FIRE) && ((is_adult && event(FIRE_TEMPLE_PILLAR_HAMMER)) || has_hover_boots)"
   locations:
     "MQ Fire Temple Pre-Boss Chest": "has_tunic_goron && has_fire && (can_use_bow || has_hover_boots || (has_tunic_goron_strict && is_adult))"
 "Fire Temple Vanilla Hammer Loop":
