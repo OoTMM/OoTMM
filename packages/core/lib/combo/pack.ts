@@ -209,6 +209,13 @@ class Packer {
     const gameRom = gameData.rom;
     const compressedDma = new DmaData(gameData.dma);
     const uncompressedDma = new DmaData(gameRom.subarray(config.dmaAddr, config.dmaAddr + config.dmaCount * 0x10));
+    const removedFiles = new Set<number>();
+
+    for (const p of this.patchfiles) {
+      for (const f of p.gamePatches[game].removedFiles) {
+        removedFiles.add(f);
+      }
+    }
 
     /* If count is not provided - pack all */
     if (count === undefined) {
@@ -223,7 +230,7 @@ class Packer {
       const uncompressedDmaEntry = uncompressedDma.read(fileId);
 
       /* Check if the file is dummy */
-      if (uncompressedDmaEntry.physEnd === 0xffffffff) {
+      if (uncompressedDmaEntry.physEnd === 0xffffffff || removedFiles.has(fileId)) {
         filePromises.push(Promise.resolve({ type: 'dummy' }));
         continue;
       }

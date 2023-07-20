@@ -15,6 +15,7 @@ type NewFile = {
 
 type GamePatches = {
   data: DataPatch[];
+  removedFiles: Set<number>;
 }
 
 export class Patchfile {
@@ -24,8 +25,8 @@ export class Patchfile {
 
   constructor(data?: Buffer) {
     this.gamePatches = {
-      oot: { data: [] },
-      mm: { data: [] },
+      oot: { data: [], removedFiles: new Set() },
+      mm: { data: [], removedFiles: new Set() },
     };
     this.newFiles = [];
     this.hash = 'XXXXXXXX';
@@ -57,6 +58,10 @@ export class Patchfile {
     this.newFiles.push({ vrom, data, compressed });
   }
 
+  removeFile(game: Game, id: number) {
+    this.gamePatches[game].removedFiles.add(id);
+  }
+
   toBuffer(): Buffer {
     const buffers: Buffer[] = [];
     const header = Buffer.alloc(0x18, 0xff);
@@ -66,8 +71,8 @@ export class Patchfile {
   dup() {
     const ret = new Patchfile();
     ret.hash = this.hash;
-    ret.gamePatches.oot = { data: [...this.gamePatches.oot.data] };
-    ret.gamePatches.mm = { data: [...this.gamePatches.mm.data] };
+    ret.gamePatches.oot = { data: [...this.gamePatches.oot.data], removedFiles: new Set(this.gamePatches.oot.removedFiles) };
+    ret.gamePatches.mm = { data: [...this.gamePatches.mm.data], removedFiles: new Set(this.gamePatches.mm.removedFiles) };
     ret.newFiles = [...this.newFiles];
     return ret;
   }

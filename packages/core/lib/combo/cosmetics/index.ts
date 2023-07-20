@@ -149,12 +149,18 @@ class CosmeticsPass {
       if (magic === -1) {
         throw new Error('Invalid model file');
       }
+
+      /* Inject the new model */
       const obj = this.addNewFile(model);
       const objBuffer = toU32Buffer(obj);
       const vram = OBJECTS_TABLE_ADDR + 8 * 0x15;
       const vrom = this.addresses.oot.virtualToPhysical(vram);
       this.patch.addDataPatch('oot', vrom, objBuffer);
 
+      /* Remove the old model */
+      this.patch.removeFile('oot', 0x1f7);
+
+      /* Enable the PlayAs hooks */
       const dfAddr = model.indexOf(Buffer.from([0xdf, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]));
       enableModelOotLink(this.patch, dfAddr);
     }
