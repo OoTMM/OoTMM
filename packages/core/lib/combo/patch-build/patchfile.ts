@@ -19,7 +19,6 @@ type GamePatches = {
 
 export class Patchfile {
   public gamePatches: {[k in Game]: GamePatches};
-  public globalPatches: DataPatch[];
   public newFiles: NewFile[];
   public hash: string;
 
@@ -28,7 +27,6 @@ export class Patchfile {
       oot: { data: [] },
       mm: { data: [] },
     };
-    this.globalPatches = [];
     this.newFiles = [];
     this.hash = 'XXXXXXXX';
 
@@ -55,10 +53,6 @@ export class Patchfile {
     this.gamePatches[game].data.push({ addr, data });
   }
 
-  addGlobalPatch(addr: number, data: Buffer) {
-    this.globalPatches.push({ addr, data });
-  }
-
   addNewFile(vrom: number, data: Buffer, compressed: boolean) {
     this.newFiles.push({ vrom, data, compressed });
   }
@@ -72,9 +66,8 @@ export class Patchfile {
   dup() {
     const ret = new Patchfile();
     ret.hash = this.hash;
-    ret.gamePatches.oot = { data: [...this.gamePatches.oot.data], payload: this.gamePatches.oot.payload };
-    ret.gamePatches.mm = { data: [...this.gamePatches.mm.data], payload: this.gamePatches.mm.payload };
-    ret.globalPatches = [...this.globalPatches];
+    ret.gamePatches.oot = { data: [...this.gamePatches.oot.data] };
+    ret.gamePatches.mm = { data: [...this.gamePatches.mm.data] };
     ret.newFiles = [...this.newFiles];
     return ret;
   }

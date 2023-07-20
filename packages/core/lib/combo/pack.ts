@@ -109,12 +109,6 @@ class Packer {
 
     /* Post compress global patches */
     this.monitor.log("Pack: Post-compress patches");
-    for (const p of this.patchfiles) {
-      for (const pp of p.globalPatches) {
-        pp.data.copy(this.rom, pp.addr);
-      }
-    }
-
     const patch = this.patchfiles[0];
 
     /* Add extra files */
