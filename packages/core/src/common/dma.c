@@ -174,22 +174,37 @@ void comboDma_NoCacheInval(void* dramAddr, u32 cartAddr, u32 size)
     }
 }
 
+static u32 comboDmaLoadFilePartialImpl(void* dst, const DmaEntry* e, u32 vrom, u32 offset, s32 size)
+{
+    if (!e)
+        for (;;) {}
+    if (e->pend == 0xffffffff)
+        return 0;
+    if (size + offset > e->vend - e->vstart)
+        size = e->vend - e->vstart - offset;
+    if (size < 0)
+        size = 0;
+    if (dst)
+        LoadFile(dst, e->vstart + offset, (u32)size);
+    return size;
+}
+
 u32 comboDmaLoadFile(void* dst, u32 vrom)
 {
     const DmaEntry* e;
     u32 size;
 
     e = dmaLookup(vrom);
-    if (!e)
-        for (;;) {}
+    if (e)
+        size = e->vend - e->vstart;
+    else
+        size = 0;
+    return comboDmaLoadFilePartialImpl(dst, e, vrom, 0, size);
+}
 
-    if (e->pend == 0xffffffff)
-        return 0;
-
-    size = e->vend - e->vstart;
-    if (dst)
-        LoadFile(dst, e->vstart, size);
-    return size;
+u32 comboDmaLoadFilePartial(void* dst, u32 vrom, u32 offset, s32 size)
+{
+    return comboDmaLoadFilePartialImpl(dst, dmaLookup(vrom), vrom, offset, size);
 }
 
 u32 comboLoadFile(void* dest, s32 fileIndex)

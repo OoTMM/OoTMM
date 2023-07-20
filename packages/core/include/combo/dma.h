@@ -47,5 +47,6 @@ extern DmaEntry gDmaData[DMA_COUNT];
 
 void comboDmaLookupForeignId(DmaEntry* dst, int id);
 u32  comboDmaLoadFile(void* dst, u32 vrom);
+u32  comboDmaLoadFilePartial(void* dst, u32 vrom, u32 offset, s32 size);
 
 #endif
