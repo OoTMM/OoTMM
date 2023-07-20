@@ -2,8 +2,8 @@
   dungeon: BtW
   exits:
     "Ikana Canyon": "true"
-    "Beneath the Well North Section": "can_reset_time && has(MASK_GIBDO) && has_blue_potion"
-    "Beneath the Well East Section": "can_reset_time && has(MASK_GIBDO) && has_beans"
+    "Beneath the Well North Section": "can_reset_time && has(MASK_GIBDO) && soul(SOUL_REDEAD_GIBDO) && has_blue_potion"
+    "Beneath the Well East Section": "can_reset_time && has(MASK_GIBDO) && soul(SOUL_REDEAD_GIBDO) && has_beans"
 "Beneath the Well North Section":
   dungeon: BtW
   events:
@@ -19,8 +19,8 @@
   dungeon: BtW
   exits:
     "Beneath the Well Entrance": "true"
-    "Beneath the Well Middle Section": "has(MASK_GIBDO) && event(FISH)"
-    "Beneath the Well Cow Hall": "has(MASK_GIBDO) && has_nuts"
+    "Beneath the Well Middle Section": "has(MASK_GIBDO) && soul(SOUL_REDEAD_GIBDO) && event(FISH)"
+    "Beneath the Well Cow Hall": "has(MASK_GIBDO) && soul(SOUL_REDEAD_GIBDO) && has_nuts"
   events:
     STICKS: "can_kill_baba_sticks"
     WATER: "has_bottle"
@@ -41,17 +41,17 @@
     STICKS: "can_kill_baba_both_sticks"
     NUTS: "true"
   locations:
-    "Beneath the Well Skulltulla Chest": "has(MASK_GIBDO) && event(BUGS)"
+    "Beneath the Well Skulltulla Chest": "has(MASK_GIBDO) && soul(SOUL_REDEAD_GIBDO) && event(BUGS)"
 "Beneath the Well Final Hall":
   dungeon: BtW
   exits:
     "Beneath the Well Middle Section": "true"
-    "Beneath the Well Sun Block": "has(MASK_GIBDO) && has_milk"
+    "Beneath the Well Sun Block": "has(MASK_GIBDO) && soul(SOUL_REDEAD_GIBDO) && has_milk"
   events:
     RUPEES: "can_fight || has_weapon_range || has_explosives"
     BUGS: "can_use_fire_arrows || (event(WELL_BIG_POE) && has_sticks)"
   locations:
-    "Beneath the Well Skulltulla Chest": "has(MASK_GIBDO) && has_bottle"
+    "Beneath the Well Skulltulla Chest": "has(MASK_GIBDO) && soul(SOUL_REDEAD_GIBDO) && has_bottle"
 "Beneath the Well Sun Block":
   dungeon: BtW
   exits:
