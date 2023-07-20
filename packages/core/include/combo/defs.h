@@ -1,9 +1,9 @@
 #ifndef COMBO_DEFS_H
 #define COMBO_DEFS_H
 
-#define COMBO_EXTRA_DMA_VROM    0xf0000000
-#define COMBO_VROM_DATA         0xf0200000
-#define COMBO_VROM_DATA         0xf0300000
+#define COMBO_EXTRA_DMA_VROM        0xf0000000
+#define COMBO_VROM_DATA             0xf0200000
+#define COMBO_VROM_STARTING_ITEMS   0xf0300000
 
 #if defined(GAME_OOT)
 #define COMBO_VROM_PAYLOAD      (COMBO_EXTRA_DMA_VROM | 0x00000000)

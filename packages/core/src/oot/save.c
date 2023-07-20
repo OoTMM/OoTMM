@@ -2,6 +2,7 @@
 #include <combo/item.h>
 #include <combo/net.h>
 #include <combo/dungeon.h>
+#include <combo/dma.h>
 
 #define ENTRANCE_MARKET       0x1d1
 
@@ -115,7 +116,7 @@ static void applyStartingItems(void)
     slice = 0;
     for (;;)
     {
-        DMARomToRam((0x03ff3000 + slice * sizeof(gStartingItemsBuffer)) | PI_DOM1_ADDR2, gStartingItemsBuffer, sizeof(gStartingItemsBuffer));
+        comboDmaLoadFilePartial(gStartingItemsBuffer, COMBO_VROM_STARTING_ITEMS, slice * sizeof(gStartingItemsBuffer), sizeof(gStartingItemsBuffer));
         slice++;
         for (int i = 0; i < ARRAY_SIZE(gStartingItemsBuffer); i += 2)
         {
