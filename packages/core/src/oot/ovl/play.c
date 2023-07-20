@@ -47,7 +47,6 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.upgrades.wallet = 2;
         gSave.inventory.upgrades.strength = 3;
 
-        /*
         gSave.inventory.ammo[ITS_OOT_STICKS] = 10;
         gSave.inventory.ammo[ITS_OOT_SLINGSHOT] = 50;
         gSave.inventory.ammo[ITS_OOT_BOMBS] = 40;
@@ -82,7 +81,6 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.quest.medallionFire = 1;
         gSave.inventory.quest.medallionWater = 1;
         gSave.inventory.quest.medallionLight = 1;
-        */
 
         gSave.inventory.quest.stoneRuby = 1;
 

@@ -1,8 +1,15 @@
 import { Patchfile } from "../patch-build/patchfile";
 
 const OOT_FILES = {
-  CODE: 0x00A87000,
-}
+  CODE:               0x00A87000,
+  PLAYER:             0x00BCDB70,
+  HOOK:               0x00CAD2C0,
+  SHIELD:             0x00DB1F40,
+  STICK:              0x00EAD0F0,
+  GRAVEYARD_KID:      0x00E60920,
+  GUARD:              0x00D1A690,
+  RUNNING_MAN:        0x00E50440,
+};
 
 const OOT_LINK_CHILD_OFFSETS = {
   LUT_DL_SHIELD_DEKU: 0x060050D0,
@@ -90,6 +97,12 @@ function patchPtrOotHi(patch: Patchfile, base: number, offset: number, value: nu
 function patchPtrOotLo(patch: Patchfile, base: number, offset: number, value: number) {
   const buf = Buffer.alloc(2);
   buf.writeUInt16BE((value & 0xffff) >>> 0, 0);
+  patch.addDataPatch('oot', base + offset, buf);
+}
+
+function patchPtrOot16(patch: Patchfile, base: number, offset: number, value: number) {
+  const buf = Buffer.alloc(2);
+  buf.writeUInt16BE(value, 0);
   patch.addDataPatch('oot', base + offset, buf);
 }
 
@@ -193,49 +206,30 @@ export function enableModelOotLink(patch: Patchfile, dfAddr: number) {
   patchPtrOotHi(patch, OOT_FILES.CODE, 0x6A80E, OOT_LINK_CHILD_OFFSETS.LUT_DL_DEKU_STICK);
   patchPtrOotLo(patch, OOT_FILES.CODE, 0x6A812, OOT_LINK_CHILD_OFFSETS.LUT_DL_DEKU_STICK);
 
-  /*
-  writer.SetBase('Stick')
-  writer.GoTo(0x334)
-  writer.WriteModelData(Offsets.CHILD_LINK_LUT_DL_DEKU_STICK)
-  writer.GoTo(0x330)
-  writer.WriteModelData16(0x0015)
+  patchPtrOot(patch, OOT_FILES.STICK, 0x334, OOT_LINK_CHILD_OFFSETS.LUT_DL_DEKU_STICK);
+  patchPtrOot16(patch, OOT_FILES.STICK, 0x330, 0x0015);
 
-  writer.SetBase('Shield')
-  writer.GoTo(0x7EE)
-  writer.WriteModelDataHi(Offsets.CHILD_LINK_LUT_DL_SHIELD_DEKU_ODD)
-  writer.GoTo(0x7F2)
-  writer.WriteModelDataLo(Offsets.CHILD_LINK_LUT_DL_SHIELD_DEKU_ODD)
+  patchPtrOotHi(patch, OOT_FILES.SHIELD, 0x7EE, OOT_LINK_CHILD_OFFSETS.LUT_DL_SHIELD_DEKU_ODD);
+  patchPtrOotLo(patch, OOT_FILES.SHIELD, 0x7F2, OOT_LINK_CHILD_OFFSETS.LUT_DL_SHIELD_DEKU_ODD);
 
-  writer.SetBase('Player')
-  writer.GoTo(0x2253C)
-  writer.SetAdvance(4)
-  writer.WriteModelData(Offsets.CHILD_LINK_LUT_DL_MASK_KEATON)
-  writer.WriteModelData(Offsets.CHILD_LINK_LUT_DL_MASK_SKULL)
-  writer.WriteModelData(Offsets.CHILD_LINK_LUT_DL_MASK_SPOOKY)
-  writer.WriteModelData(Offsets.CHILD_LINK_LUT_DL_MASK_BUNNY)
-  writer.WriteModelData(Offsets.CHILD_LINK_LUT_DL_MASK_GORON)
-  writer.WriteModelData(Offsets.CHILD_LINK_LUT_DL_MASK_ZORA)
-  writer.WriteModelData(Offsets.CHILD_LINK_LUT_DL_MASK_GERUDO)
-  writer.WriteModelData(Offsets.CHILD_LINK_LUT_DL_MASK_TRUTH)
+  base = OOT_FILES.PLAYER + 0x2253C;
+  patchPtrOot(patch, base, 0x0000, OOT_LINK_CHILD_OFFSETS.LUT_DL_MASK_KEATON);
+  patchPtrOot(patch, base, 0x0000, OOT_LINK_CHILD_OFFSETS.LUT_DL_MASK_SKULL);
+  patchPtrOot(patch, base, 0x0000, OOT_LINK_CHILD_OFFSETS.LUT_DL_MASK_SPOOKY);
+  patchPtrOot(patch, base, 0x0000, OOT_LINK_CHILD_OFFSETS.LUT_DL_MASK_BUNNY);
+  patchPtrOot(patch, base, 0x0000, OOT_LINK_CHILD_OFFSETS.LUT_DL_MASK_GORON);
+  patchPtrOot(patch, base, 0x0000, OOT_LINK_CHILD_OFFSETS.LUT_DL_MASK_ZORA);
+  patchPtrOot(patch, base, 0x0000, OOT_LINK_CHILD_OFFSETS.LUT_DL_MASK_GERUDO);
+  patchPtrOot(patch, base, 0x0000, OOT_LINK_CHILD_OFFSETS.LUT_DL_MASK_TRUTH);
 
-  writer.SetBase('GraveyardKid')
-  writer.GoTo(0xE62)
-  writer.WriteModelDataHi(Offsets.CHILD_LINK_LUT_DL_MASK_SPOOKY)
-  writer.GoTo(0xE66)
-  writer.WriteModelDataLo(Offsets.CHILD_LINK_LUT_DL_MASK_SPOOKY)
+  patchPtrOotHi(patch, OOT_FILES.GRAVEYARD_KID, 0xE62, OOT_LINK_CHILD_OFFSETS.LUT_DL_MASK_SPOOKY);
+  patchPtrOotLo(patch, OOT_FILES.GRAVEYARD_KID, 0xE66, OOT_LINK_CHILD_OFFSETS.LUT_DL_MASK_SPOOKY);
 
-  writer.SetBase('Guard')
-  writer.GoTo(0x1EA2)
-  writer.WriteModelDataHi(Offsets.CHILD_LINK_LUT_DL_MASK_KEATON)
-  writer.GoTo(0x1EA6)
-  writer.WriteModelDataLo(Offsets.CHILD_LINK_LUT_DL_MASK_KEATON)
+  patchPtrOotHi(patch, OOT_FILES.GUARD, 0x1EA2, OOT_LINK_CHILD_OFFSETS.LUT_DL_MASK_KEATON);
+  patchPtrOotLo(patch, OOT_FILES.GUARD, 0x1EA6, OOT_LINK_CHILD_OFFSETS.LUT_DL_MASK_KEATON);
 
-  writer.SetBase('RunningMan')
-  writer.GoTo(0x1142)
-  writer.WriteModelDataHi(Offsets.CHILD_LINK_LUT_DL_MASK_BUNNY)
-  writer.GoTo(0x1146)
-  writer.WriteModelDataLo(Offsets.CHILD_LINK_LUT_DL_MASK_BUNNY)
-  */
+  patchPtrOotHi(patch, OOT_FILES.RUNNING_MAN, 0x1142, OOT_LINK_CHILD_OFFSETS.LUT_DL_MASK_BUNNY);
+  patchPtrOotLo(patch, OOT_FILES.RUNNING_MAN, 0x1146, OOT_LINK_CHILD_OFFSETS.LUT_DL_MASK_BUNNY);
 
   base = 0x00A87000 + 0xE65A4;
   patchPtrOot(patch, base, 0x0000, OOT_LINK_CHILD_OFFSETS.HIERARCHY);
