@@ -75,7 +75,7 @@ export function buildPatchfiles(args: BuildPatchfileIn): Patchfile[] {
     if (payload.length > 0x40000) {
       throw new Error("Payload too large");
     }
-    file.addPayload(game, payload);
+    file.addNewFile(game === 'oot' ? 0xf0000000 : 0xf0100000, payload, false);
   }
 
   /* Patch the randomized data */

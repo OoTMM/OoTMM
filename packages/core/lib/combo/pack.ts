@@ -41,10 +41,16 @@ function checksum(rom: Buffer) {
   return [(t6 ^ t4 ^ t3) >>> 0, (t5 ^ t2 ^ t1) >>> 0];
 };
 
+type Payload = {
+  pstart: number;
+  psize: number;
+}
+
 type PackerGameState = {
   dma: DmaData;
   dmaAddr: number;
   packedFiles: number;
+  payload?: Payload;
 }
 
 type FileData = { type: 'uncompressed' | 'compressed', data: Buffer } | { type: 'dummy' };
@@ -120,14 +126,17 @@ class Packer {
     /* Pack the payload */
     this.monitor.log("Pack: Write payloads");
     const meta = Buffer.alloc(0x1000);
-    const ootPayload = patch.gamePatches['oot'].payload!;
-    const mmPayload = patch.gamePatches['mm'].payload!;
-    const ootPayloadAddr = this.addData(ootPayload);
-    const mmPayloadAddr = this.addData(mmPayload);
-    meta.writeUInt32BE(ootPayloadAddr, 0x08);
-    meta.writeUInt32BE(ootPayload.length, 0x0c);
-    meta.writeUInt32BE(mmPayloadAddr, 0x10);
-    meta.writeUInt32BE(mmPayload.length, 0x14);
+    const ootPayload = this.gs.oot.payload;
+    const mmPayload = this.gs.mm.payload;
+
+    if (!ootPayload || !mmPayload) {
+      throw new Error("Payload not found");
+    }
+
+    meta.writeUInt32BE(ootPayload.pstart, 0x08);
+    meta.writeUInt32BE(ootPayload.psize, 0x0c);
+    meta.writeUInt32BE(mmPayload.pstart, 0x10);
+    meta.writeUInt32BE(mmPayload.psize, 0x14);
 
     /* Pack custom DMA */
     this.monitor.log("Pack: Write custom DMA");
@@ -189,6 +198,12 @@ class Packer {
     data.copy(this.rom, physStart);
     this.paddr += sizeAligned;
     this.extraDma.push({ physStart, physEnd, virtStart, virtEnd });
+
+    if (vrom === 0xf0000000) {
+      this.gs.oot.payload = { pstart: physStart, psize: sizeAligned };
+    } else if (vrom === 0xf0100000) {
+      this.gs.mm.payload = { pstart: physStart, psize: sizeAligned };
+    }
   }
 
   private async packFiles(game: Game, count?: number) {

@@ -15,7 +15,6 @@ type NewFile = {
 
 type GamePatches = {
   data: DataPatch[];
-  payload?: Buffer;
 }
 
 export class Patchfile {
@@ -62,10 +61,6 @@ export class Patchfile {
 
   addNewFile(vrom: number, data: Buffer, compressed: boolean) {
     this.newFiles.push({ vrom, data, compressed });
-  }
-
-  addPayload(game: Game, payload: Buffer) {
-    this.gamePatches[game].payload = payload;
   }
 
   toBuffer(): Buffer {
