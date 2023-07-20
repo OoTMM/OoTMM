@@ -214,13 +214,13 @@ export function enableModelOotLink(patch: Patchfile, dfAddr: number) {
 
   base = OOT_FILES.PLAYER + 0x2253C;
   patchPtrOot(patch, base, 0x0000, OOT_LINK_CHILD_OFFSETS.LUT_DL_MASK_KEATON);
-  patchPtrOot(patch, base, 0x0000, OOT_LINK_CHILD_OFFSETS.LUT_DL_MASK_SKULL);
-  patchPtrOot(patch, base, 0x0000, OOT_LINK_CHILD_OFFSETS.LUT_DL_MASK_SPOOKY);
-  patchPtrOot(patch, base, 0x0000, OOT_LINK_CHILD_OFFSETS.LUT_DL_MASK_BUNNY);
-  patchPtrOot(patch, base, 0x0000, OOT_LINK_CHILD_OFFSETS.LUT_DL_MASK_GORON);
-  patchPtrOot(patch, base, 0x0000, OOT_LINK_CHILD_OFFSETS.LUT_DL_MASK_ZORA);
-  patchPtrOot(patch, base, 0x0000, OOT_LINK_CHILD_OFFSETS.LUT_DL_MASK_GERUDO);
-  patchPtrOot(patch, base, 0x0000, OOT_LINK_CHILD_OFFSETS.LUT_DL_MASK_TRUTH);
+  patchPtrOot(patch, base, 0x0004, OOT_LINK_CHILD_OFFSETS.LUT_DL_MASK_SKULL);
+  patchPtrOot(patch, base, 0x0008, OOT_LINK_CHILD_OFFSETS.LUT_DL_MASK_SPOOKY);
+  patchPtrOot(patch, base, 0x000c, OOT_LINK_CHILD_OFFSETS.LUT_DL_MASK_BUNNY);
+  patchPtrOot(patch, base, 0x0010, OOT_LINK_CHILD_OFFSETS.LUT_DL_MASK_GORON);
+  patchPtrOot(patch, base, 0x0014, OOT_LINK_CHILD_OFFSETS.LUT_DL_MASK_ZORA);
+  patchPtrOot(patch, base, 0x0018, OOT_LINK_CHILD_OFFSETS.LUT_DL_MASK_GERUDO);
+  patchPtrOot(patch, base, 0x001c, OOT_LINK_CHILD_OFFSETS.LUT_DL_MASK_TRUTH);
 
   patchPtrOotHi(patch, OOT_FILES.GRAVEYARD_KID, 0xE62, OOT_LINK_CHILD_OFFSETS.LUT_DL_MASK_SPOOKY);
   patchPtrOotLo(patch, OOT_FILES.GRAVEYARD_KID, 0xE66, OOT_LINK_CHILD_OFFSETS.LUT_DL_MASK_SPOOKY);
