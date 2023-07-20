@@ -616,8 +616,8 @@ const randomizerStartingItems = (world: number, logic: LogicResult): Buffer => {
 
 export function patchRandomizer(worldId: number, logic: LogicResult, settings: Settings, patchfile: Patchfile) {
   const buffer = Buffer.alloc(0x20000, 0xff);
-  patchfile.addNewFile(0xf0200000, gameChecks(worldId, settings, 'oot', logic));
-  patchfile.addNewFile(0xf0300000, gameChecks(worldId, settings, 'mm', logic));
+  patchfile.addNewFile(0xf0200000, gameChecks(worldId, settings, 'oot', logic), true);
+  patchfile.addNewFile(0xf0300000, gameChecks(worldId, settings, 'mm', logic), true);
   for (const g of GAMES) {
     const hintsBuffer = gameHints(settings, g, logic.hints[worldId]);
     const entrancesBuffer = gameEntrances(worldId, g, logic);

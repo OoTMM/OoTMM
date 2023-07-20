@@ -114,7 +114,7 @@ class Packer {
     /* Add extra files */
     this.monitor.log("Pack: Add extra files");
     for (const f of patch.newFiles) {
-      this.addFile(f.vrom, f.data);
+      await this.addFile(f.vrom, f.data, f.compressed);
     }
 
     /* Pack the payload */
@@ -160,13 +160,25 @@ class Packer {
     return paddr;
   }
 
-  private addFile(vrom: number, data: Buffer) {
-    const size = data.length;
-    const sizeAligned = (size + 0xf) & ~0xf;
-    const paddr = this.paddr;
-    data.copy(this.rom, paddr);
+  private async addFile(vrom: number, data: Buffer, compressed: boolean) {
+    const physStart = this.paddr;
+    const virtStart = vrom;
+    let size = data.length;
+    let sizeAligned = (size + 0xf) & ~0xf;
+    const virtSize = (size + 0xf) & ~0xf;
+    const virtEnd = (virtStart + virtSize) >>> 0;
+    let physEnd = 0;
+
+    if (compressed) {
+      data = await compressFile(data);
+      size = data.length;
+      sizeAligned = (size + 0xf) & ~0xf;
+      physEnd = physStart + sizeAligned;
+    }
+
+    data.copy(this.rom, physStart);
     this.paddr += sizeAligned;
-    this.extraDma.push({ physStart: paddr, physEnd: 0, virtStart: vrom, virtEnd: (vrom + sizeAligned) >>> 0 });
+    this.extraDma.push({ physStart, physEnd, virtStart, virtEnd });
   }
 
   private async packFiles(game: Game, count?: number) {
