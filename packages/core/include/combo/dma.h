@@ -46,5 +46,6 @@ DmaRequest;
 extern DmaEntry gDmaData[DMA_COUNT];
 
 void comboDmaLookupForeignId(DmaEntry* dst, int id);
+u32  comboDmaLoadFile(void* dst, u32 vrom);
 
 #endif

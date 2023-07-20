@@ -83,7 +83,20 @@ static const DmaEntry* dmaLookupAlt(u32 dmaAddr, u32 dmaCount, u32 dmaFlag, u32 
 
 static const DmaEntry* dmaLookup(u32 vromAddr)
 {
-    if (vromAddr & VROM_CUSTOM_OFFSET)
+    u32 extraDmaAddr;
+    u32 extraDmaCount;
+    u32* meta;
+
+    if (vromAddr >= 0xf0000000)
+    {
+        /* Extra DMA */
+        meta = (u32*)(0xb0000000 | COMBO_META_ROM);
+        extraDmaAddr = meta[0];
+        extraDmaCount = meta[1];
+
+        return dmaLookupAlt(extraDmaAddr, extraDmaCount, 0, vromAddr);
+    }
+    else if (vromAddr & VROM_CUSTOM_OFFSET)
         return dmaLookupAlt(CUSTOM_DMA_ADDR, CUSTOM_DMA_SIZE, 0, vromAddr);
     else if (vromAddr & VROM_FOREIGN_OFFSET)
         return dmaLookupAlt(DMA_ADDR_FOREIGN, DMA_COUNT_FOREIGN, VROM_FOREIGN_OFFSET, vromAddr);
@@ -160,6 +173,23 @@ void comboDma_NoCacheInval(void* dramAddr, u32 cartAddr, u32 size)
         dramAddr = (void*)((u32)dramAddr + tmp);
         cartAddr += tmp;
     }
+}
+
+u32 comboDmaLoadFile(void* dst, u32 vrom)
+{
+    DmaEntry* e;
+    u32 size;
+
+    e = dmaLookup(vrom);
+    if (!e)
+    {
+        for (;;) {}
+        return 0;
+    }
+    size = e->vend - e->vstart;
+    if (dst)
+        LoadFile(dst, e->vstart, size);
+    return size;
 }
 
 u32 comboLoadFile(void* dest, s32 fileIndex)

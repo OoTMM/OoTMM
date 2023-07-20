@@ -2,21 +2,13 @@ import { Game } from "../config";
 
 const REVISION = 1;
 
-const TYPES_TO_VALUES = {
-  global: 0,
-  oot: 1,
-  mm: 2,
-};
-
-export type PatchType = keyof typeof TYPES_TO_VALUES;
-
-const VALUES_TO_TYPES: {[k: number]: PatchType} = {};
-for (const [k, v] of Object.entries(TYPES_TO_VALUES)) {
-  VALUES_TO_TYPES[v] = k as PatchType;
-}
-
 type DataPatch = {
   addr: number;
+  data: Buffer;
+}
+
+type NewFile = {
+  vrom: number;
   data: Buffer;
 }
 
@@ -28,6 +20,7 @@ type GamePatches = {
 export class Patchfile {
   public gamePatches: {[k in Game]: GamePatches};
   public globalPatches: DataPatch[];
+  public newFiles: NewFile[];
   public readonly hash: string;
 
   constructor(hashOrBuffer: string | Buffer) {
@@ -36,6 +29,7 @@ export class Patchfile {
       mm: { data: [] },
     };
     this.globalPatches = [];
+    this.newFiles = [];
 
     if (typeof hashOrBuffer === 'string') {
       this.hash = hashOrBuffer;
@@ -62,6 +56,10 @@ export class Patchfile {
     this.globalPatches.push({ addr, data });
   }
 
+  addNewFile(vrom: number, data: Buffer) {
+    this.newFiles.push({ vrom, data });
+  }
+
   addPayload(game: Game, payload: Buffer) {
     this.gamePatches[game].payload = payload;
   }
@@ -77,6 +75,7 @@ export class Patchfile {
     ret.gamePatches.oot = { data: [...this.gamePatches.oot.data], payload: this.gamePatches.oot.payload };
     ret.gamePatches.mm = { data: [...this.gamePatches.mm.data], payload: this.gamePatches.mm.payload };
     ret.globalPatches = [...this.globalPatches];
+    ret.newFiles = [...this.newFiles];
     return ret;
   }
 }

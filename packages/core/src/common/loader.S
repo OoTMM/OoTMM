@@ -51,6 +51,6 @@ PATCH_START LOADER_ADDR
   lw    ra,0x04(sp)
   addiu sp,0x20
 
-  j LOADER_NEXT
+  jr ra
    nop
 PATCH_END

@@ -109,10 +109,17 @@ class Packer {
       }
     }
 
+    const patch = this.patchfiles[0];
+
+    /* Add extra files */
+    this.monitor.log("Pack: Add extra files");
+    for (const f of patch.newFiles) {
+      this.addFile(f.vrom, f.data);
+    }
+
     /* Pack the payload */
     this.monitor.log("Pack: Write payloads");
     const meta = Buffer.alloc(0x1000);
-    const patch = this.patchfiles[0];
     const ootPayload = patch.gamePatches['oot'].payload!;
     const mmPayload = patch.gamePatches['mm'].payload!;
     const ootPayloadAddr = this.addData(ootPayload);
@@ -159,7 +166,7 @@ class Packer {
     const paddr = this.paddr;
     data.copy(this.rom, paddr);
     this.paddr += sizeAligned;
-    return { physStart: paddr, physEnd: 0, virtStart: vrom, virtEnd: vrom + sizeAligned };
+    this.extraDma.push({ physStart: paddr, physEnd: 0, virtStart: vrom, virtEnd: (vrom + sizeAligned) >>> 0 });
   }
 
   private async packFiles(game: Game, count?: number) {

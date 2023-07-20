@@ -28,11 +28,6 @@ const DUNGEON_REWARD_LOCATIONS = [
   'MM Stone Tower Boss',
 ];
 
-const GAME_DATA_OFFSETS = {
-  oot: 0x1000,
-  mm: 0x9000,
-};
-
 const HINTS_DATA_OFFSETS = {
   oot: 0x11000,
   mm: 0x12000,
@@ -621,11 +616,11 @@ const randomizerStartingItems = (world: number, logic: LogicResult): Buffer => {
 
 export function patchRandomizer(worldId: number, logic: LogicResult, settings: Settings, patchfile: Patchfile) {
   const buffer = Buffer.alloc(0x20000, 0xff);
+  patchfile.addNewFile(0xf0200000, gameChecks(worldId, settings, 'oot', logic));
+  patchfile.addNewFile(0xf0300000, gameChecks(worldId, settings, 'mm', logic));
   for (const g of GAMES) {
-    const checksBuffer = gameChecks(worldId, settings, g, logic);
     const hintsBuffer = gameHints(settings, g, logic.hints[worldId]);
     const entrancesBuffer = gameEntrances(worldId, g, logic);
-    checksBuffer.copy(buffer, GAME_DATA_OFFSETS[g]);
     hintsBuffer.copy(buffer, HINTS_DATA_OFFSETS[g]);
     entrancesBuffer.copy(buffer, ENTRANCE_DATA_OFFSETS[g]);
   }
