@@ -22,20 +22,19 @@ export class Patchfile {
   public gamePatches: {[k in Game]: GamePatches};
   public globalPatches: DataPatch[];
   public newFiles: NewFile[];
-  public readonly hash: string;
+  public hash: string;
 
-  constructor(hashOrBuffer: string | Buffer) {
+  constructor(data?: Buffer) {
     this.gamePatches = {
       oot: { data: [] },
       mm: { data: [] },
     };
     this.globalPatches = [];
     this.newFiles = [];
+    this.hash = 'XXXXXXXX';
 
-    if (typeof hashOrBuffer === 'string') {
-      this.hash = hashOrBuffer;
-    } else {
-      const header = hashOrBuffer.subarray(0, 0x18);
+    if (data) {
+      const header = data.subarray(0, 0x18);
       if (header.toString('utf8', 0, 8) !== 'OoTMM-PF') {
         throw new Error('Invalid patch file');
       }
@@ -47,6 +46,10 @@ export class Patchfile {
       let offset = 0x18;
       const patchCount = header.readUInt32LE(0xc);
     }
+  }
+
+  setHash(hash: string) {
+    this.hash = hash;
   }
 
   addDataPatch(game: Game, addr: number, data: Buffer) {
@@ -72,7 +75,8 @@ export class Patchfile {
   }
 
   dup() {
-    const ret = new Patchfile(this.hash);
+    const ret = new Patchfile();
+    ret.hash = this.hash;
     ret.gamePatches.oot = { data: [...this.gamePatches.oot.data], payload: this.gamePatches.oot.payload };
     ret.gamePatches.mm = { data: [...this.gamePatches.mm.data], payload: this.gamePatches.mm.payload };
     ret.globalPatches = [...this.globalPatches];

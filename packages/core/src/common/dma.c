@@ -84,7 +84,7 @@ static const DmaEntry* dmaLookup(u32 vromAddr)
     u32 extraDmaCount;
     u32* meta;
 
-    if (vromAddr >= 0xf0000000)
+    if (vromAddr >= 0x08000000)
     {
         /* Extra DMA */
         meta = (u32*)(0xb0000000 | COMBO_META_ROM);
@@ -93,8 +93,6 @@ static const DmaEntry* dmaLookup(u32 vromAddr)
 
         return dmaLookupAlt(extraDmaAddr, extraDmaCount, 0, vromAddr);
     }
-    else if (vromAddr & VROM_CUSTOM_OFFSET)
-        return dmaLookupAlt(CUSTOM_DMA_ADDR, CUSTOM_DMA_SIZE, 0, vromAddr);
     else if (vromAddr & VROM_FOREIGN_OFFSET)
         return dmaLookupAlt(DMA_ADDR_FOREIGN, DMA_COUNT_FOREIGN, VROM_FOREIGN_OFFSET, vromAddr);
     else

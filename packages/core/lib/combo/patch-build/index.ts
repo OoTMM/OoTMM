@@ -12,11 +12,11 @@ import { PatchGroup } from "./group";
 import { isEntranceShuffle } from "../logic/helpers";
 
 export type BuildPatchfileIn = {
+  patch: Patchfile;
   monitor: Monitor;
   roms: DecompressedRoms;
   addresses: GameAddresses;
   build: BuildOutput;
-  custom: Buffer;
   logic: LogicResult;
   settings: Settings;
 };
@@ -61,7 +61,7 @@ function asmPatchGroups(settings: Settings) {
 
 export function buildPatchfiles(args: BuildPatchfileIn): Patchfile[] {
   args.monitor.log("Building Patchfile");
-  const file = new Patchfile(args.logic.hash);
+  const file = args.patch;
   const groups = asmPatchGroups(args.settings);
 
   for (const game of GAMES) {
@@ -77,12 +77,6 @@ export function buildPatchfiles(args: BuildPatchfileIn): Patchfile[] {
     }
     file.addPayload(game, payload);
   }
-
-  /* Pack the custom data */
-  if (args.custom.length > 0x40000) {
-    throw new Error("Custom data too large");
-  }
-  file.addGlobalPatch(CUSTOM_ADDR, args.custom);
 
   /* Patch the randomized data */
   const patches: Patchfile[] = [];

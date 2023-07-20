@@ -139,6 +139,11 @@ class Packer {
     meta.writeUInt32BE(customDmaAddr, 0x00);
     meta.writeUInt32BE(this.extraDma.length, 0x04);
 
+    /* Check that it fits */
+    if (this.paddr + meta.length > 0x4000000) {
+      throw new Error("ROM doesn't fit");
+    }
+
     /* Write the meta */
     meta.copy(this.rom, this.rom.length - meta.length);
 

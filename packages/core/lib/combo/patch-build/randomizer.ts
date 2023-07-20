@@ -6,7 +6,7 @@ import { Game, GAMES } from "../config";
 import { WorldCheck } from '../logic/world';
 import { DUNGEONS, Settings, SPECIAL_CONDS, SPECIAL_CONDS_KEYS } from '../settings';
 import { HintGossip, WorldHints } from '../logic/hints';
-import { CountMap, countMapAdd, gameId } from '../util';
+import { CountMap, countMapAdd, gameId, toU16Buffer, toU32Buffer, toU8Buffer } from '../util';
 import { Patchfile } from './patchfile';
 import { LOCATIONS_ZELDA, makeLocation, makePlayerLocations } from '../logic/locations';
 import { CONFVARS_VALUES, Confvar } from '../confvars';
@@ -234,30 +234,6 @@ const checkId = (check: WorldCheck) => {
   }
   return check.id;
 }
-
-const toU8Buffer = (data: number[]) => {
-  const buf = Buffer.alloc(data.length);
-  for (let i = 0; i < data.length; ++i) {
-    buf.writeUInt8(data[i], i);
-  }
-  return buf;
-};
-
-const toU16Buffer = (data: number[]) => {
-  const buf = Buffer.alloc(data.length * 2);
-  for (let i = 0; i < data.length; ++i) {
-    buf.writeUInt16BE(data[i], i * 2);
-  }
-  return buf;
-};
-
-const toU32Buffer = (data: number[]) => {
-  const buf = Buffer.alloc(data.length * 4);
-  for (let i = 0; i < data.length; ++i) {
-    buf.writeUInt32BE(data[i], i * 4);
-  }
-  return buf;
-};
 
 function zoraSapphireGI(worldId: number, logic: LogicResult): number | null {
   /* Find the dungeon holding the Zora Sapphire */
