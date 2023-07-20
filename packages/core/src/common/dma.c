@@ -38,7 +38,8 @@ static const DmaEntry* dmaLookupCache(u32 vromAddr)
     return NULL;
 }
 
-static const DmaEntry* dmaLookupForeign(u32 vromAddr)
+
+static const DmaEntry* dmaLookupAlt(u32 dmaAddr, u32 dmaCount, u32 dmaFlag, u32 vromAddr)
 {
     const DmaEntry* e;
     ALIGNED(16) DmaEntry tmp[16];
@@ -52,11 +53,11 @@ static const DmaEntry* dmaLookupForeign(u32 vromAddr)
         return e;
 
     /* Cache miss - load from foreign DMA table */
-    rawVromAddr = vromAddr & ~VROM_FOREIGN_OFFSET;
+    rawVromAddr = vromAddr & ~dmaFlag;
     offset = 0;
     for (;;)
     {
-        DMARomToRam((DMA_ADDR_FOREIGN + offset * sizeof(DmaEntry)) | PI_DOM1_ADDR2, tmp, sizeof(tmp));
+        DMARomToRam((dmaAddr + offset * sizeof(DmaEntry)) | PI_DOM1_ADDR2, tmp, sizeof(tmp));
         offset += ARRAY_SIZE(tmp);
         for (int i = 0; i < ARRAY_SIZE(tmp); ++i)
         {
@@ -68,52 +69,14 @@ static const DmaEntry* dmaLookupForeign(u32 vromAddr)
                 index = sDmaCacheIndex;
                 sDmaCacheIndex = (sDmaCacheIndex + 1) % ARRAY_SIZE(sDmaCache);
                 memcpy(sDmaCache + index, e, sizeof(DmaEntry));
-                sDmaCache[index].vstart |= VROM_FOREIGN_OFFSET;
-                sDmaCache[index].vend |= VROM_FOREIGN_OFFSET;
+                sDmaCache[index].vstart |= dmaFlag;
+                sDmaCache[index].vend |= dmaFlag;
                 return sDmaCache + index;
             }
         }
 
         /* Didn't find the entry - try the next table */
-        if (offset >= DMA_COUNT_FOREIGN)
-            return NULL;
-    }
-}
-
-const DmaEntry* dmaLookupCustom(u32 vromAddr)
-{
-    const DmaEntry* e;
-    ALIGNED(16) DmaEntry tmp[16];
-    u32 offset;
-    int index;
-
-    /* Try to load the file from the cache */
-    e = dmaLookupCache(vromAddr);
-    if (e)
-        return e;
-
-    /* Cache miss - load from custom DMA table */
-    offset = 0;
-    for (;;)
-    {
-        DMARomToRam((CUSTOM_DMA_ADDR + offset * sizeof(DmaEntry)) | PI_DOM1_ADDR2, tmp, sizeof(tmp));
-        offset += ARRAY_SIZE(tmp);
-        for (int i = 0; i < ARRAY_SIZE(tmp); ++i)
-        {
-            e = tmp + i;
-
-            if (vromAddr >= e->vstart && vromAddr < e->vend)
-            {
-                /* Found the entry - copy it to the cache */
-                index = sDmaCacheIndex;
-                sDmaCacheIndex = (sDmaCacheIndex + 1) % ARRAY_SIZE(sDmaCache);
-                memcpy(sDmaCache + index, e, sizeof(DmaEntry));
-                return sDmaCache + index;
-            }
-        }
-
-        /* Didn't find the entry - try the next table */
-        if (offset >= CUSTOM_DMA_SIZE)
+        if (offset >= dmaCount)
             return NULL;
     }
 }
@@ -121,9 +84,9 @@ const DmaEntry* dmaLookupCustom(u32 vromAddr)
 static const DmaEntry* dmaLookup(u32 vromAddr)
 {
     if (vromAddr & VROM_CUSTOM_OFFSET)
-        return dmaLookupCustom(vromAddr);
+        return dmaLookupAlt(CUSTOM_DMA_ADDR, CUSTOM_DMA_SIZE, 0, vromAddr);
     else if (vromAddr & VROM_FOREIGN_OFFSET)
-        return dmaLookupForeign(vromAddr);
+        return dmaLookupAlt(DMA_ADDR_FOREIGN, DMA_COUNT_FOREIGN, VROM_FOREIGN_OFFSET, vromAddr);
     else
         return dmaLookupNative(vromAddr);
 }
