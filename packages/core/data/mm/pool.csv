@@ -384,7 +384,7 @@ Secret Shrine HP Chest,                           chest,          SECRET_SHRINE_
 Moon Trial Deku HP,                               collectible,    NONE,                   MOON_DEKU,                  0x01,                       HEART_PIECE
 Moon Trial Goron HP,                              collectible,    NONE,                   MOON_GORON,                 0x01,                       HEART_PIECE
 Moon Trial Zora HP,                               collectible,    NONE,                   MOON_ZORA,                  0x01,                       HEART_PIECE
-Moon Trial Link Chest 1,                          chest,          NONE,                   MOON_LINK,                  0x01,                       ARROWS_30
-Moon Trial Link Chest 2,                          chest,          NONE,                   MOON_LINK,                  0x02,                       BOMBCHU_10
+Moon Trial Link Garo Master Chest,                chest,          NONE,                   MOON_LINK,                  0x01,                       ARROWS_30
+Moon Trial Link Iron Knuckle Chest,               chest,          NONE,                   MOON_LINK,                  0x02,                       BOMBCHU_10
 Moon Trial Link HP,                               collectible,    NONE,                   MOON_LINK,                  0x01,                       HEART_PIECE
 Moon Fierce Deity Mask,                           npc,            NONE,                   MOON_LINK,                  MASK_FIERCE_DEITY,          MASK_FIERCE_DEITY
