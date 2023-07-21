@@ -9,6 +9,18 @@ import { Monitor } from '../monitor';
 import { Location, isLocationRenewable, locationData, makeLocation } from './locations';
 import { Item, ItemGroups, ItemHelpers, Items, ItemsCount, PlayerItem, PlayerItems, itemByID, makePlayerItem } from '../items';
 
+const VALIDATION_CRITICAL_ITEMS = [
+  Items.MM_SONG_TIME,
+  Items.SHARED_SONG_TIME,
+  Items.MM_OCARINA,
+  Items.SHARED_OCARINA,
+  Items.OOT_OCARINA,
+  Items.OOT_SONG_TIME,
+  Items.OOT_SWORD,
+  Items.OOT_SWORD_MASTER,
+  Items.MM_SONG_EPONA,
+];
+
 export type ItemPlacement = Map<Location, PlayerItem>;
 
 const DUNGEON_ITEMS = {
@@ -696,18 +708,37 @@ export class LogicPassSolver {
   private forwardFill(pool: PlayerItems) {
     /* Only used for validation, needs to be fast */
     const items = countMapArray(pool);
-    const unplacedLocs = [...this.pathfinderState.locations].filter(x => !this.state.items.has(x));
+    let unplacedLocs = [...this.pathfinderState.locations].filter(x => !this.state.items.has(x));
 
     if (items.length === 0) {
       const unreachableLocs = this.locations.filter(x => !this.pathfinderState.locations.has(x));
       throw new LogicError(`Unreachable locations: ${unreachableLocs.join(', ')}`);
     }
 
+    let item: PlayerItem | null = null;
+    for (const candidate of VALIDATION_CRITICAL_ITEMS) {
+      for (let playerId = 0; playerId < this.input.settings.players; ++playerId) {
+        const pi = makePlayerItem(candidate, 0);
+        if (pool.has(pi)) {
+          item = pi;
+          break;
+        }
+      }
+    }
+
+    if (!item) {
+      item = sample(this.input.random, items);
+    }
+
+    if (this.input.settings.logic === 'allLocations' && ItemHelpers.isItemCriticalRenewable(item.item) && !this.state.criticalRenewables.has(item)) {
+      const world = this.input.worlds[item.player];
+      unplacedLocs = unplacedLocs.filter(x => isLocationRenewable(world, x));
+    }
+
     if (unplacedLocs.length === 0) {
       throw new LogicSeedError(`No locations left to place items`);
     }
 
-    const item = sample(this.input.random, items);
     const location = sample(this.input.random, unplacedLocs);
     this.place(location, item);
     countMapRemove(pool, item);
