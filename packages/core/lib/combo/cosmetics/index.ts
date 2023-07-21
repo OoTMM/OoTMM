@@ -10,7 +10,7 @@ import { png } from '../util/png';
 import { Color, ColorRandom, COLORS } from './color';
 import { recolorImage } from './image';
 import fs from 'fs/promises';
-import { enableModelOotLink } from './model';
+import { enableModelOotLinkChild, enableModelOotLinkAdult } from './model';
 import { BufferPath } from './type';
 
 export { makeCosmetics } from './util';
@@ -137,7 +137,31 @@ class CosmeticsPass {
 
       /* Enable the PlayAs hooks */
       const dfAddr = model.indexOf(Buffer.from([0xdf, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]));
-      enableModelOotLink(this.patch, dfAddr);
+      enableModelOotLinkChild(this.patch, dfAddr);
+    }
+  }
+
+  private async patchOotAdultModel() {
+    const model = await this.getPathBuffer(this.opts.cosmetics.modelOotAdultLink);
+    if (model) {
+      const magic = model.indexOf(Buffer.from('MODLOADER64'));
+      if (magic === -1) {
+        throw new Error('Invalid model file');
+      }
+
+      /* Inject the new model */
+      const obj = this.addNewFile(model);
+      const objBuffer = toU32Buffer(obj);
+      const vram = OBJECTS_TABLE_ADDR + 8 * 0x14;
+      const vrom = this.addresses.oot.virtualToPhysical(vram);
+      this.patch.addDataPatch('oot', vrom, objBuffer);
+
+      /* Remove the old model */
+      this.patch.removeFile('oot', 0x1f6);
+
+      /* Enable the PlayAs hooks */
+      const dfAddr = model.indexOf(Buffer.from([0xdf, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]));
+      enableModelOotLinkAdult(this.patch, dfAddr);
     }
   }
 
@@ -151,6 +175,7 @@ class CosmeticsPass {
 
     /* Models */
     await this.patchOotChildModel();
+    await this.patchOotAdultModel();
 
     return this.patch;
   }

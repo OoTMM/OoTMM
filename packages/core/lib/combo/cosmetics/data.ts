@@ -17,4 +17,8 @@ export const COSMETICS = [{
   key: 'modelOotChildLink',
   name: 'Player Model - Child Link (OoT)',
   type: 'zobj',
+}, {
+  key: 'modelOotAdultLink',
+  name: 'Player Model - Adult Link (OoT)',
+  type: 'zobj',
 }] as const;
