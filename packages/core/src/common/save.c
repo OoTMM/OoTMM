@@ -17,6 +17,10 @@ void comboOnSaveLoad(void)
     /* Clear custom trigger data */
     bzero(&gComboTriggersData, sizeof(gComboTriggersData));
 
+    /* Clear "next item" */
+    g.itemQuery = NULL;
+    g.itemQueryBox = NULL;
+
     /* Clear network */
     net = netMutexLock();
     net->ledgerBase = gSaveLedgerBase;
