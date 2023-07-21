@@ -34,7 +34,7 @@
     "Stone Tower Temple West Garden": "true"
   locations:
     "Stone Tower Temple Under West Garden Ledge Chest": "can_hookshot"
-    "Stone Tower Temple Under West Garden Lava Chest": "((event(STONE_TOWER_WEST_GARDEN_LIGHT) && has_mirror_shield) || can_use_light_arrows)"
+    "Stone Tower Temple Under West Garden Lava Chest": "soul(SOUL_ARMOS) && ((event(STONE_TOWER_WEST_GARDEN_LIGHT) && has_mirror_shield) || can_use_light_arrows)"
     "Stone Tower Temple Map": "((event(STONE_TOWER_WEST_GARDEN_LIGHT) && has_mirror_shield) || can_use_light_arrows)"
 "Stone Tower Temple Center Ledge":
   dungeon: ST
@@ -82,9 +82,9 @@
 "Stone Tower Temple Light Arrow Room":
   dungeon: ST
   exits:
-    "Stone Tower Temple Before Water Bridge": "true"
+    "Stone Tower Temple Before Water Bridge": "soul(SOUL_GARO)"
   locations:
-    "Stone Tower Temple Light Arrow": "true"
+    "Stone Tower Temple Light Arrow": "soul(SOUL_GARO)"
 "Stone Tower Temple Before Water Bridge":
   dungeon: ST
   exits:
@@ -98,4 +98,4 @@
     "Stone Tower Temple Center": "can_goron_bomb_jump"
     "Stone Tower Temple Center Ledge": "(can_goron_bomb_jump && (has_bombs || (small_keys(SMALL_KEY_ST, 3) && trick_keg_explosives))) && can_use_ice_arrows"
   locations:
-    "Stone Tower Temple Water Bridge Chest": "true"
+    "Stone Tower Temple Water Bridge Chest": "soul(SOUL_EYEGORE)"
