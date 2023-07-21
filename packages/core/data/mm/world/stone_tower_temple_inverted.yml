@@ -41,7 +41,7 @@
   exits:
     "Stone Tower Temple Inverted East": "true"
     "Stone Tower Temple Inverted East Bridge": "true"
-    "Stone Tower Temple Inverted Wizzrobe": "soul(SOUL_CHUCHU) || (trick(MM_ISTT_CHUCHU_LESS) && (has_chateau || has_blue_potion || has_green_potion || has_double_magic)) && can_use_light_arrows && cond(trick(MM_ISTT_ENTRY_JUMP), small_keys(SMALL_KEY_ST, 4), small_keys(SMALL_KEY_ST, 3))"
+    "Stone Tower Temple Inverted Wizzrobe": "(soul(SOUL_CHUCHU) || (trick(MM_ISTT_CHUCHU_LESS) && (has_chateau || has_blue_potion || has_green_potion || has_double_magic))) && can_use_light_arrows && cond(trick(MM_ISTT_ENTRY_JUMP), small_keys(SMALL_KEY_ST, 4), small_keys(SMALL_KEY_ST, 3))"
 "Stone Tower Temple Inverted Wizzrobe":
   dungeon: IST
   exits:

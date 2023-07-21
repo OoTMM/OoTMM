@@ -24,8 +24,8 @@
     "Woodfall Temple Main Ledge": "event(WOODFALL_TEMPLE_MAIN_FLOWER) || event(WOODFALL_TEMPLE_MAIN_LADDER) || can_hookshot_short"
   events:
     WOODFALL_TEMPLE_MAIN_FLOWER: "can_use_fire_arrows"
-    STICKS: "true"
-    NUTS: "has(MASK_DEKU) || has_arrows || has_explosives || can_fight"
+    STICKS: "soul(SOUL_DEKU_BABA)"
+    NUTS: "soul(SOUL_DEKU_BABA) && (has(MASK_DEKU) || has_arrows || has_explosives || can_fight)"
     BOMBS: "true"
     ARROWS: "true"
   locations:
