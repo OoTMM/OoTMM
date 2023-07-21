@@ -77,7 +77,7 @@
     "Stone Tower Temple Inverted Center": "has(MASK_DEKU)"
     "Stone Tower Temple Inverted Center Bridge": "trick(MM_ISTT_EYEGORE) && can_use_light_arrows && can_hookshot"
   locations:
-    "Stone Tower Temple Inverted Boss Key": "can_use_light_arrows"
+    "Stone Tower Temple Inverted Boss Key": "soul(SOUL_GOMESS) && can_use_light_arrows"
 "Stone Tower Temple Inverted Entrance Ledge":
   dungeon: IST
   exits:
