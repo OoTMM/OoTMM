@@ -1280,7 +1280,7 @@
     "Romani Ranch": "true"
   locations:
     "Doggy Racetrack Chest": "(can_use_beans || has_mask_zora || can_hookshot_short || trick(MM_DOG_RACE_CHEST_NOTHING)) && ((after(DAY1_AM_06_00) && before(NIGHT1_PM_08_00)) || (after(DAY2_AM_06_00) && before(NIGHT2_PM_08_00)) || (after(DAY3_AM_06_00) && before(NIGHT3_PM_08_00)))"
-    "Doggy Racetrack HP": "has_mask_truth && ((after(DAY1_AM_06_00) && before(NIGHT1_PM_08_00)) || (after(DAY2_AM_06_00) && before(NIGHT2_PM_08_00)) || (after(DAY3_AM_06_00) && before(NIGHT3_PM_08_00)))"
+    "Doggy Racetrack HP": "can_use_wallet(1) && has_mask_truth && ((after(DAY1_AM_06_00) && before(NIGHT1_PM_08_00)) || (after(DAY2_AM_06_00) && before(NIGHT2_PM_08_00)) || (after(DAY3_AM_06_00) && before(NIGHT3_PM_08_00)))"
   gossip:
     "Doggy Racetrack Gossip": "(after(DAY1_AM_06_00) && before(NIGHT1_PM_08_00)) || (after(DAY2_AM_06_00) && before(NIGHT2_PM_08_00)) || (after(DAY3_AM_06_00) && before(NIGHT3_PM_08_00))"
 "Stables":
