@@ -304,10 +304,10 @@ static int canSpawnSoul(GameState_Play* play, s16 actorId, u16 variable)
         return hasSoul(GI_MM_SOUL_GOMESS);
     case AC_EN_PAMETFROG:
     case AC_EN_BIGSLIME:
+    case AC_EN_BIGPAMET:
         return hasSoul(GI_MM_SOUL_GEKKO);
     case AC_EN_BAT:
         return hasSoul(GI_MM_SOUL_BAD_BAT);
-    case AC_EN_BIGPAMET:
     case AC_EN_KAME:
         return hasSoul(GI_MM_SOUL_SNAPPER);
     case AC_BOSS_04:

@@ -107,9 +107,9 @@
   exits:
     "Woodfall Temple Water Room Upper": "true"
   events:
-    FROG_2: "has(MASK_DON_GERO) && soul(SOUL_GEKKO) && soul(SOUL_SNAPPER)"
+    FROG_2: "has(MASK_DON_GERO) && soul(SOUL_GEKKO)"
   locations:
-    "Woodfall Temple Boss Key Chest": "soul(SOUL_GEKKO) && soul(SOUL_SNAPPER)"
+    "Woodfall Temple Boss Key Chest": "soul(SOUL_GEKKO)"
 "Woodfall Temple Pre-Boss":
   dungeon: WF
   exits:
