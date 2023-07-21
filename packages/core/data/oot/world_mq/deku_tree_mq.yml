@@ -8,13 +8,13 @@
   exits:
     "Deku Tree Compass Room": "can_use_bow || (can_use_slingshot && (can_use_sticks || can_use_din))"
     "Deku Tree Water Room": "(can_use_slingshot || can_use_bow) && (can_use_sticks || has_fire)"
-    "Deku Tree Basement Ledge": "is_adult || event(DEKU_BLOCK) || trick(OOT_DEKU_SKIP)"
+    "Deku Tree Basement Ledge": "is_adult || event(DEKU_BLOCK) || trick(OOT_DEKU_SKIP) || has_hover_boots"
   events:
     STICKS: "has_weapon || can_boomerang"
     NUTS: "can_kill_baba_nuts"
   locations:
     "MQ Deku Tree Map Chest": "true"
-    "MQ Deku Tree Slingshot Chest": "has_weapon || can_use_sticks || has_ranged_weapon_child" #Bombs and Din's work, but it's horrible.
+    "MQ Deku Tree Slingshot Chest": "soul(SOUL_DEKU_BABA) && soul(SOUL_GOHMA_LARVA) && (has_weapon || can_use_sticks || has_ranged_weapon_child)" #Bombs and Din's work, but it's horrible.
     "MQ Deku Tree Slingshot Room Far Chest": "can_use_sticks || has_fire"
     "MQ Deku Tree Basement Chest": "can_use_sticks || has_fire"
     "MQ Deku Tree GS Lobby Crate": "can_damage_skull"
@@ -24,7 +24,7 @@
     "Deku Tree Lobby": "true"
   locations:
     "MQ Deku Tree Compass Chest": "true"
-    "MQ Deku Tree GS Compass Room": "(has_explosives || (can_play_time && can_hammer)) && can_collect_distance"
+    "MQ Deku Tree GS Compass Room": "(has_bombchu || (can_play_time && has_explosives_or_hammer)) && can_collect_distance"
 "Deku Tree Water Room":
   dungeon: DT
   exits:
@@ -35,15 +35,15 @@
 "Deku Tree Water Room Back":
   dungeon: DT
   exits:
-    "Deku Tree Backrooms": "can_use_sticks || has_fire"
+    "Deku Tree Backrooms": "soul(SOUL_KEESE) && soul(SOUL_DEKU_SCRUB) && soul(SOUL_GOHMA_LARVA) && (has_weapon || has_ranged_weapon_child) && ((is_child && has_shield && can_use_sticks) || has_fire)"
   locations:
     "MQ Deku Tree After Water Platform Chest": "can_play_time"
     "MQ Deku Tree Before Water Platform Chest": "true"
 "Deku Tree Backrooms":
   dungeon: DT
   exits:
-    "Deku Tree Water Room Back": "has_weapon || has_ranged_weapon_child" #Judgment call, this fight is way too big for sticks and nuts to be forced.
-    "Deku Tree Basement Ledge": "can_use_sticks || can_use_din"
+    "Deku Tree Water Room Back": "soul(SOUL_KEESE) && soul(SOUL_DEKU_SCRUB) && soul(SOUL_GOHMA_LARVA) && (has_weapon || has_ranged_weapon_child)" #Judgment call, this fight is way too big for sticks and nuts to be forced.
+    "Deku Tree Basement Ledge": "(is_child && can_use_sticks) || can_use_din"
   locations:
     "MQ Deku Tree GS Song of Time Blocks": "(can_play_time && can_collect_distance) || can_longshot"
     "MQ Deku Tree GS Back Room": "(can_use_sticks || has_fire) && can_collect_distance"
@@ -60,4 +60,4 @@
   dungeon: DT
   exits:
     "Deku Tree Basement Ledge": "true"
-    "Deku Tree Boss": "has_shield_for_scrubs"
+    "Deku Tree Boss": "has_shield_for_scrubs && soul(SOUL_DEKU_SCRUB)"

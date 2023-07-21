@@ -6,13 +6,13 @@
 "Ice Cavern Main":
   dungeon: IC
   exits:
-    "Ice Cavern Map Room": "is_adult || can_use_sticks || has_explosives"
+    "Ice Cavern Map Room": "soul(SOUL_WOLFOS) && soul(SOUL_FREEZARD) && (has_weapon || can_use_sticks || has_explosives)"
     "Ice Cavern Compass Room": "is_adult && has_blue_fire"
     "Ice Cavern Big Room": "has_blue_fire"
 "Ice Cavern Map Room":
   dungeon: IC
   events:
-    BLUE_FIRE: "true"
+    BLUE_FIRE: "has_bottle"
   locations:
     "MQ Ice Cavern Map Chest": "has_blue_fire"
 "Ice Cavern Compass Room":
@@ -20,11 +20,11 @@
   locations:
     "MQ Ice Cavern Compass Chest": "true"
     "MQ Ice Cavern Piece of Heart": "has_explosives"
-    "MQ Ice Cavern GS Compass Room": "can_play_time"
+    "MQ Ice Cavern GS Compass Room": "can_play_time || has_blue_fire_arrows || can_boomerang"
 "Ice Cavern Big Room":
   dungeon: IC
   locations:
-    "MQ Ice Cavern Iron Boots": "is_adult"
-    "MQ Ice Cavern Sheik Song": "is_adult"
-    "MQ Ice Cavern GS Scarecrow": "scarecrow_hookshot"
+    "MQ Ice Cavern Iron Boots": "soul(SOUL_STALFOS) && has_weapon && (is_adult || (can_play_time && has_hover_boots))"
+    "MQ Ice Cavern Sheik Song": "soul(SOUL_STALFOS) && has_weapon && (is_adult || (can_play_time && has_hover_boots))"
+    "MQ Ice Cavern GS Scarecrow": "scarecrow_hookshot || (has_hover_boots && (can_longshot || (is_adult && trick(OOT_MQ_ICE_SCARE_HOVER)))) || (is_adult && trick(OOT_MQ_ICE_SCARE_NOTHING))"
     "MQ Ice Cavern GS Clear Blocks": "has_ranged_weapon || has_explosives" #Again, I'm not making people carry pots through boulder hell. Biggoron Sword also works here.

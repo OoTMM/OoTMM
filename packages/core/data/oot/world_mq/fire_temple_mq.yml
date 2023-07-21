@@ -3,9 +3,9 @@
   exits:
     "Fire Temple Entry": "true"
     "Fire Temple Upper Lobby": "is_adult && has_tunic_goron"
-    "Fire Temple Vanilla Hammer Loop": "small_keys(SMALL_KEY_FIRE, 5) && has_weapon && (has_bombs || can_hammer || can_hookshot)"
+    "Fire Temple Vanilla Hammer Loop": "small_keys(SMALL_KEY_FIRE, 5) && has_weapon && soul(SOUL_KEESE) && soul(SOUL_STALFOS) && soul(SOUL_IRON_KNUCKLE) && soul(SOUL_FLARE_DANCER) && (has_bombs || can_hammer || can_hookshot)"
   locations:
-    "MQ Fire Temple Early Lower Left Chest": "can_damage"
+    "MQ Fire Temple Early Lower Left Chest": "can_damage && soul(SOUL_LIKE_LIKE)"
 "Fire Temple Upper Lobby":
   dungeon: Fire
   exits:
@@ -15,9 +15,9 @@
   dungeon: Fire
   exits:
     "Fire Temple Upper Lobby": "true"
-    "Fire Temple Boss": "boss_key(BOSS_KEY_FIRE) && (event(FIRE_TEMPLE_PILLAR_HAMMER) || has_hover_boots)"
+    "Fire Temple Boss": "has_tunic_goron && boss_key(BOSS_KEY_FIRE) && ((is_adult && event(FIRE_TEMPLE_PILLAR_HAMMER)) || has_hover_boots)"
   locations:
-    "MQ Fire Temple Pre-Boss Chest": "has_fire && (can_use_bow || has_tunic_goron_strict)"
+    "MQ Fire Temple Pre-Boss Chest": "has_tunic_goron && has_fire && (can_use_bow || has_hover_boots || (has_tunic_goron_strict && is_adult))"
 "Fire Temple Vanilla Hammer Loop":
   dungeon: Fire
   locations:
@@ -29,8 +29,8 @@
     "Fire Temple Upper Lobby": "true"
     "Fire Temple Maze Lower": "has_tunic_goron_strict && small_keys(SMALL_KEY_FIRE, 2) && has_fire"
   locations:
-    "MQ Fire Temple Boss Key Chest": "has_fire && can_hookshot"
-    "MQ Fire Temple 1f Lava Room Goron Chest": "has_fire && can_hookshot && has_explosives"
+    "MQ Fire Temple Boss Key Chest": "has_tunic_goron && has_fire && can_hookshot"
+    "MQ Fire Temple 1f Lava Room Goron Chest": "has_tunic_goron && has_fire && can_hookshot && has_explosives"
     "MQ Fire Temple GS 1f Lava Room": "true"
 "Fire Temple Maze Lower":
   dungeon: Fire
@@ -63,7 +63,7 @@
   events:
     FIRE_TEMPLE_PILLAR_HAMMER: "true"
   locations:
-    "MQ Fire Temple Flare Dancer Key": "true"
+    "MQ Fire Temple Flare Dancer Key": "soul(SOUL_FLARE_DANCER)"
     "MQ Fire Temple GS Fire Walls Side Room": "has_hover_boots || can_play_time"
     "MQ Fire Temple GS Fire Walls Middle": "has_explosives"
 "Fire Temple Top":

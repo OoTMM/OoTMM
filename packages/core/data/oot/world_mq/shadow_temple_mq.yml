@@ -15,20 +15,20 @@
 "Shadow Temple First Locked Door":
   dungeon: Shadow
   locations:
-    "MQ Shadow Temple Compass Chest": "true"
-    "MQ Shadow Temple Hover Boots Chest": "can_play_time && can_use_bow"
+    "MQ Shadow Temple Compass Chest": "soul(SOUL_REDEAD_GIBDO) && (has_weapon || can_use_sticks || can_use_din)"
+    "MQ Shadow Temple Hover Boots Chest": "can_play_time && can_hit_triggers_distance && soul(SOUL_DEAD_HAND) && (has_weapon || (can_use_sticks && trick(OOT_DEAD_HAND_STICKS)))"
 "Shadow Temple First Beamos":
   dungeon: Shadow
   exits:
     "Shadow Temple Upper Huge Pit": "has_explosives && small_keys(SMALL_KEY_SHADOW, 2)"
-    "Shadow Temple Scythe Room": "has_lens"
+    "Shadow Temple Scythe Room": "true"
   locations:
-    "MQ Shadow Temple First Gibdos Chest": "true"
+    "MQ Shadow Temple First Gibdos Chest": "soul(SOUL_REDEAD_GIBDO) && (has_weapon || can_use_sticks || can_use_din)"
     "MQ Shadow Temple Boat Passage Chest": "true"
 "Shadow Temple Scythe Room":
   dungeon: Shadow
   exits:
-    "Shadow Temple First Beamos": "true"
+    "Shadow Temple First Beamos": "has(RUPEE_SILVER_SHADOW_BLADES, 5) && soul(SOUL_SKULLTULA) && (can_damage || has_ranged_weapon_adult || can_use_slingshot || can_hammer)"
   locations:
     "MQ Shadow Temple SR Scythe 1": "true"
     "MQ Shadow Temple SR Scythe 2": "can_hookshot || (is_adult && has_hover_boots)"
@@ -39,9 +39,11 @@
 "Shadow Temple Upper Huge Pit":
   dungeon: Shadow
   exits:
-    "Shadow Temple Lower Huge Pit": "has_fire"
-    "Shadow Temple Invisible Blades Rooms": "true"
-"Shadow Temple Invisible Blades Rooms":
+    "Shadow Temple Lower Huge Pit": "event(SHADOW_PIT_FIRE)"
+    "Shadow Temple Invisible Blades Room": "true"
+  events:
+    SHADOW_PIT_FIRE: "has_fire" #This allows for adult to open the path for child with Fire Arrows to get the GS in Falling Spikes with Boomerang.
+"Shadow Temple Invisible Blades Room":
   dungeon: Shadow
   exits:
     "Shadow Temple Upper Huge Pit": "true"
@@ -55,7 +57,7 @@
     "MQ Shadow Temple SR Invisible Blades Ground 7": "true"
     "MQ Shadow Temple SR Invisible Blades Ground 8": "true"
     "MQ Shadow Temple SR Invisible Blades Ground 9": "true"
-    "MQ Shadow Temple SR Invisible Blades Time Block": "can_play_time"
+    "MQ Shadow Temple SR Invisible Blades Time Block": "can_play_time && is_adult"
     "MQ Shadow Temple Second Silver Rupee Visible Chest": "has(RUPEE_SILVER_SHADOW_BLADES, 10)"
     "MQ Shadow Temple Second Silver Rupee Invisible Chest": "has(RUPEE_SILVER_SHADOW_BLADES, 10)"
 "Shadow Temple Lower Huge Pit":
@@ -65,9 +67,9 @@
   locations:
     "MQ Shadow Temple Huge Pit Silver Rupee Chest": "has(RUPEE_SILVER_SHADOW_PIT, 5)"
     "MQ Shadow Temple Spike Curtain Ground Chest": "true"
-    "MQ Shadow Temple Spike Curtain Upper Cage Chest": "has(STRENGTH)"
-    "MQ Shadow Temple Spike Curtain Upper Switch Chest": "has(STRENGTH)"
-    "MQ Shadow Temple GS Spike Curtain": "can_hookshot"
+    "MQ Shadow Temple Spike Curtain Upper Cage Chest": "has(STRENGTH) && is_adult"
+    "MQ Shadow Temple Spike Curtain Upper Switch Chest": "has(STRENGTH) && is_adult"
+    "MQ Shadow Temple GS Spike Curtain": "can_collect_distance"
     "MQ Shadow Temple SR Pit Back": "true"
     "MQ Shadow Temple SR Pit Midair Low": "can_longshot"
     "MQ Shadow Temple SR Pit Midair High": "can_longshot"
@@ -78,8 +80,8 @@
   exits:
     "Shadow Temple Wind Tunnel": "small_keys(SMALL_KEY_SHADOW, 4) && can_hookshot"
   locations:
-    "MQ Shadow Temple Invisible Spike Floor Chest": "true"
-    "MQ Shadow Temple Stalfos Room Chest": "has(RUPEE_SILVER_SHADOW_SPIKES, 10)"
+    "MQ Shadow Temple Invisible Spike Floor Chest": "soul(SOUL_REDEAD_GIBDO) && (has_weapon || can_use_sticks || can_use_din)"
+    "MQ Shadow Temple Stalfos Room Chest": "has(RUPEE_SILVER_SHADOW_SPIKES, 10) && soul(SOUL_STALFOS) && has_weapon"
     "MQ Shadow Temple SR Spikes Left Corner": "can_hookshot"
     "MQ Shadow Temple SR Spikes Left Wall": "can_hookshot"
     "MQ Shadow Temple SR Spikes Left Midair": "can_hookshot"
@@ -93,20 +95,13 @@
 "Shadow Temple Wind Tunnel":
   dungeon: Shadow
   exits:
-    "Shadow Temple Boat": "small_keys(SMALL_KEY_SHADOW, 5) && can_play(SONG_ZELDA)"
+    "Shadow Temple Boat": "small_keys(SMALL_KEY_SHADOW, 5) && can_play(SONG_ZELDA) && is_adult && (can_hookshot || has(STRENGTH))"
   locations:
     "MQ Shadow Temple Wind Hint Chest": "true"
-    "MQ Shadow Temple After Wind Gibdos Chest": "true"
+    "MQ Shadow Temple After Wind Gibdos Chest": "soul(SOUL_REDEAD_GIBDO) && soul(SOUL_FLYING_POT) && (has_weapon || can_use_sticks || can_use_din)"
     "MQ Shadow Temple After Wind Bomb Chest": "has_explosives"
     "MQ Shadow Temple GS Wind Hint": "true"
     "MQ Shadow Temple GS After Wind Bomb": "has_explosives"
-"Shadow Temple Final Side Rooms":
-  dungeon: Shadow
-  locations:
-    "MQ Shadow Temple Hidden Dead Hand Chest": "has_explosives || has(STRENGTH)" #Not strictly necessary to check
-    "MQ Shadow Temple Triple Pot Key": "has_explosives || has(STRENGTH)" #Not strictly necessary to check
-    "MQ Shadow Temple Boss Key Chest": "small_keys(SMALL_KEY_SHADOW, 6) && can_use_din"
-    "MQ Shadow Temple Crushing Wall Left Chest": "small_keys(SMALL_KEY_SHADOW, 6) && can_use_din"
 "Shadow Temple Boat":
   dungeon: Shadow
   exits:
@@ -115,3 +110,10 @@
   locations:
     "MQ Shadow Temple GS After Boat": "true"
     "MQ Shadow Temple GS Pre-Boss": "can_use_bow"
+"Shadow Temple Final Side Rooms":
+  dungeon: Shadow
+  locations:
+    "MQ Shadow Temple Hidden Dead Hand Chest": "has_bombflowers && soul(SOUL_DEAD_HAND)" #Not strictly necessary to check
+    "MQ Shadow Temple Triple Pot Key": "has_bombflowers" #Not strictly necessary to check
+    "MQ Shadow Temple Boss Key Chest": "small_keys(SMALL_KEY_SHADOW, 6) && can_use_din"
+    "MQ Shadow Temple Crushing Wall Left Chest": "small_keys(SMALL_KEY_SHADOW, 6) && can_use_din"
