@@ -24,7 +24,7 @@
     "Great Bay Temple Central Room": "has_mask_zora"
   locations:
     "Great Bay Temple SF Water Wheel Platform": "has_mask_zora || (has(MASK_GREAT_FAIRY) && (has_arrows || can_hookshot))"
-    "Great Bay Temple SF Water Wheel Skulltula": "true"
+    "Great Bay Temple SF Water Wheel Skulltula": "soul(SOUL_SKULLTULA)"
 "Great Bay Temple Central Room":
   dungeon: GB
   exits:
@@ -52,7 +52,7 @@
   exits:
     "Great Bay Temple Compass Room": "true"
   locations:
-    "Great Bay Temple Baba Chest": "true"
+    "Great Bay Temple Baba Chest": "soul(SOUL_BIO_BABA)"
 "Great Bay Temple Compass Room":
   dungeon: GB
   events:
@@ -71,30 +71,30 @@
   exits:
     "Great Bay Temple Ice Arrow Room": "small_keys(SMALL_KEY_GB, 1)"
   events:
-    GB_PIPE_RED: "can_use_ice_arrows"
+    GB_PIPE_RED: "soul(SOUL_OCTOROK) && can_use_ice_arrows"
 "Great Bay Temple Ice Arrow Room":
   dungeon: GB
   events:
-    MAGIC: "(has_weapon || has_mask_zora || has(MASK_DEKU) || has_explosives)"
+    MAGIC: "soul(SOUL_CHUCHU) && (has_weapon || has_mask_zora || has(MASK_DEKU) || has_explosives)"
   exits:
     "Great Bay Temple Red Pipe 1": "true"
   locations:
-    "Great Bay Temple Ice Arrow": "true"
+    "Great Bay Temple Ice Arrow": "soul(SOUL_WART)"
 "Great Bay Temple Red Pipe 2":
   dungeon: GB
   exits:
     "Great Bay Temple Map Room": "true"
   events:
-    GB_PIPE_RED2: "can_use_ice_arrows"
+    GB_PIPE_RED2: "soul(SOUL_CHUCHU) && can_use_ice_arrows"
     MAGIC: "true"
 "Great Bay Temple Boss Key Room":
   dungeon: GB
   exits:
-    "Great Bay Temple Compass Room": "true"
+    "Great Bay Temple Compass Room": "soul(SOUL_GEKKO)"
   events:
-    FROG_4: "has(MASK_DON_GERO)"
+    FROG_4: "has(MASK_DON_GERO) && soul(SOUL_GEKKO)"
   locations:
-    "Great Bay Temple Boss Key": "true"
+    "Great Bay Temple Boss Key": "soul(SOUL_GEKKO)"
 "Great Bay Temple Green Pipe 1":
   dungeon: GB
   exits:
@@ -136,7 +136,7 @@
   boss: true
   dungeon: GB
   exits:
-    "Great Bay Temple After Boss": "(has_magic && ((has_mask_zora && has_arrows) || has(MASK_FIERCE_DEITY)))"
+    "Great Bay Temple After Boss": "soul(SOUL_GYORG) && ((has_magic && ((has_mask_zora && has_arrows) || has(MASK_FIERCE_DEITY))))"
 "Great Bay Temple After Boss":
   boss: true
   dungeon: GB
