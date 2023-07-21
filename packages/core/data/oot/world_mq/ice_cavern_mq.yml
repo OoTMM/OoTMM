@@ -20,7 +20,7 @@
   locations:
     "MQ Ice Cavern Compass Chest": "true"
     "MQ Ice Cavern Piece of Heart": "has_explosives"
-    "MQ Ice Cavern GS Compass Room": "can_play_time || has_blue_fire_arrows"
+    "MQ Ice Cavern GS Compass Room": "can_play_time || has_blue_fire_arrows || can_boomerang"
 "Ice Cavern Big Room":
   dungeon: IC
   locations:
