@@ -3,7 +3,7 @@ import { Cosmetics } from './type';
 
 export const DEFAULT_COSMETICS: Cosmetics = { ...COSMETICS.map(c => {
   return c.type === 'zobj' ? {[c.key]: null} : {[c.key]: c.default};
-}).reduce((a, b) => ({...a, ...b}), {}) } as Cosmetics;
+}).reduce((a, b) => ({...a, ...b} as any), {}) } as Cosmetics;
 
 export function makeCosmetics(data: Partial<Cosmetics>) {
   return {
