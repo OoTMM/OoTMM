@@ -17,7 +17,7 @@
     "Jabu-Jabu Basement Side Room": "event(JABU_TENTACLE_RED)"
   events:
     "JABU_BIG_OCTO": "event(JABU_TENTACLE_GREEN) && soul(SOUL_OCTOROK) && (can_use_sticks || has_weapon)"
-    "JABU_MQ_BACK": "can_use_slingshot && has_explosives"
+    "JABU_MQ_BACK": "can_use_slingshot && has_explosives" #This allows adult to get to the back of Jabu.
   locations:
     "MQ Jabu-Jabu Compass Chest": "can_use_slingshot"
     "MQ Jabu-Jabu Second Room B1 Chest": "true"
@@ -31,7 +31,7 @@
 "Jabu-Jabu Back":
   dungeon: JJ
   exits:
-    "Jabu-Jabu Main": "can_boomerang"
+    "Jabu-Jabu Main": "true"
   events:
     "JABU_TENTACLE_BLUE": "((can_use_sticks && soul(SOUL_LIKE_LIKE) && can_use_slingshot) || has_fire) && can_boomerang"
     "JABU_TENTACLE_RED": "can_boomerang"
