@@ -57,7 +57,8 @@ export const TRICKS = {
   MM_ZORA_HALL_SCRUB_HP_NO_DEKU: "Zora Hall Scrub HP without Deku",
   MM_IKANA_ROOF_PARKOUR: "Jump from Ikana Castle's Roof Interior to Exterior",
   MM_POST_OFFICE_GAME: "Post Office Timing Game without Bunny Hood",
-  MM_WELL_HSW: "Well's Hot Spring Water without Killing Dexihand"
+  MM_WELL_HSW: "Well's Hot Spring Water without Killing Dexihand",
+  MM_ISTT_CHUCHU_LESS: "ISTT Block Room without Chuchu jellies"
 };
 
 export type Trick = keyof typeof TRICKS;
