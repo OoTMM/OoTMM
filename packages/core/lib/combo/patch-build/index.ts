@@ -12,11 +12,11 @@ import { PatchGroup } from "./group";
 import { isEntranceShuffle } from "../logic/helpers";
 
 export type BuildPatchfileIn = {
+  patch: Patchfile;
   monitor: Monitor;
   roms: DecompressedRoms;
   addresses: GameAddresses;
   build: BuildOutput;
-  custom: Buffer;
   logic: LogicResult;
   settings: Settings;
 };
@@ -61,7 +61,7 @@ function asmPatchGroups(settings: Settings) {
 
 export function buildPatchfiles(args: BuildPatchfileIn): Patchfile[] {
   args.monitor.log("Building Patchfile");
-  const file = new Patchfile(args.logic.hash);
+  const file = args.patch;
   const groups = asmPatchGroups(args.settings);
 
   for (const game of GAMES) {
@@ -75,18 +75,8 @@ export function buildPatchfiles(args: BuildPatchfileIn): Patchfile[] {
     if (payload.length > 0x40000) {
       throw new Error("Payload too large");
     }
-    file.addPatch('global', CONFIG[game].payloadAddr, payload);
+    file.addNewFile(game === 'oot' ? 0xf0000000 : 0xf0100000, payload, false);
   }
-
-  /* Pack the custom data */
-  if (args.custom.length > 0x40000) {
-    throw new Error("Custom data too large");
-  }
-  file.addPatch('global', CUSTOM_ADDR, args.custom);
-
-  /* Patch rom header */
-  file.addPatch('global', 0x20, Buffer.from('OOT+MM COMBO       '));
-  file.addPatch('global', 0x3c, Buffer.from('ZZE'));
 
   /* Patch the randomized data */
   const patches: Patchfile[] = [];

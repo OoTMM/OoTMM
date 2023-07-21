@@ -7,3 +7,7 @@ Objects:
   0x0000 - Native game
   0x1000 - Foreign game
   0x2000 - Custom
+
+ROM Static MM Offset: 0xa628f0
+
+ROM delta: 0x03e80000

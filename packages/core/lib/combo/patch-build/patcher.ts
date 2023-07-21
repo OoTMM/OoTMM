@@ -50,7 +50,7 @@ export class Patcher {
 
   private patch(romAddr: number, data: Buffer) {
     if (this.enabled) {
-      this.patchfile.addPatch(this.game, romAddr, data);
+      this.patchfile.addDataPatch(this.game, romAddr, data);
     }
   }
 

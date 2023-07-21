@@ -1,8 +1,8 @@
 #include <combo.h>
 
 /* Hook into Main, to load the payload */
-PATCH_START 0x800005ac
-  jal LOADER_ADDR
+PATCH_START 0x80000f4c
+  j LOADER_ADDR
    nop
 PATCH_END
 

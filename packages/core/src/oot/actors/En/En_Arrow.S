@@ -6,5 +6,3 @@ PATCH_GROUP PG_OOT_BLUE_FIRE_ARROWS
     .byte 0x29
     PATCH_END
 PATCH_GROUP_END
-
-/* patch.addPatch('oot', 0xC230C1, Buffer.from([0x29])) // Adds AT_TYPE_OTHER to arrows to allow collision with red ice */

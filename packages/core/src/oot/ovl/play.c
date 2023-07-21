@@ -6,13 +6,12 @@ GameState_Play* gPlay;
 static void debugCheat(GameState_Play* play)
 {
 #if defined(DEBUG)
-    MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_SH);
     if (play->gs.input[0].current.buttons & L_TRIG)
     {
         gSave.playerData.swordHealth = 8;
         gSave.isBiggoronSword = 1;
 
-        //gSave.inventory.quest.gerudoCard = 1;
+        gSave.inventory.quest.gerudoCard = 1;
         gSave.inventory.dungeonKeys[SCE_OOT_TEMPLE_FIRE] = 8;
         gSave.inventory.items[ITS_OOT_STICKS] = ITEM_OOT_STICK;
         gSave.inventory.items[ITS_OOT_NUTS] = ITEM_OOT_NUT;
@@ -33,10 +32,12 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.items[ITS_OOT_HOOKSHOT] = ITEM_OOT_LONGSHOT;
         gSave.inventory.items[ITS_OOT_LENS] = ITEM_OOT_LENS;
         gSave.inventory.items[ITS_OOT_SPELL_WIND] = ITEM_OOT_SPELL_WIND;
+
         gSave.inventory.equipment.swords = 0x7;
         gSave.inventory.equipment.shields = 0x7;
         gSave.inventory.equipment.tunics = 0x7;
         gSave.inventory.equipment.boots = 0x7;
+
         gSave.inventory.upgrades.dekuStick = 3;
         gSave.inventory.upgrades.dekuNut = 3;
         gSave.inventory.upgrades.bulletBag = 3;
@@ -45,6 +46,7 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.upgrades.dive = 2;
         gSave.inventory.upgrades.wallet = 2;
         gSave.inventory.upgrades.strength = 3;
+
         gSave.inventory.ammo[ITS_OOT_STICKS] = 10;
         gSave.inventory.ammo[ITS_OOT_SLINGSHOT] = 50;
         gSave.inventory.ammo[ITS_OOT_BOMBS] = 40;
@@ -73,12 +75,12 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.dungeonKeys[SCE_OOT_TEMPLE_FOREST] = 9;
         gSave.inventory.dungeonKeys[SCE_OOT_INSIDE_GANON_CASTLE] = 9;
 
-        //gSave.inventory.quest.medallionShadow = 1;
-        //gSave.inventory.quest.medallionSpirit = 1;
-        //gSave.inventory.quest.medallionForest = 1;
-        //gSave.inventory.quest.medallionFire = 1;
-        //gSave.inventory.quest.medallionWater = 1;
-        //gSave.inventory.quest.medallionLight = 1;
+        gSave.inventory.quest.medallionShadow = 1;
+        gSave.inventory.quest.medallionSpirit = 1;
+        gSave.inventory.quest.medallionForest = 1;
+        gSave.inventory.quest.medallionFire = 1;
+        gSave.inventory.quest.medallionWater = 1;
+        gSave.inventory.quest.medallionLight = 1;
 
         gSave.inventory.quest.stoneRuby = 1;
 
@@ -99,7 +101,7 @@ static void debugCheat(GameState_Play* play)
         gSave.age = DEBUG_AGE;
 #endif
 
-        BITMAP16_SET(gSave.eventsMisc, EV_OOT_INF_KING_ZORA_THAWED);
+        //BITMAP16_SET(gSave.eventsMisc, EV_OOT_INF_KING_ZORA_THAWED);
     }
 #endif
 }

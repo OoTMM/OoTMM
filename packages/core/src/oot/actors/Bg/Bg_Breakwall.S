@@ -7,5 +7,3 @@ PATCH_GROUP PG_OOT_BLUE_FIRE_ARROWS
   .byte 0x10
   PATCH_END
 PATCH_GROUP_END
-
-/* patch.addPatch('oot', 0xC9F036, Buffer.from([0x10])) // enable ice arrow collision on mud walls */

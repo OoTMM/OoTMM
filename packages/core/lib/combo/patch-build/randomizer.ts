@@ -6,7 +6,7 @@ import { Game, GAMES } from "../config";
 import { WorldCheck } from '../logic/world';
 import { DUNGEONS, Settings, SPECIAL_CONDS, SPECIAL_CONDS_KEYS } from '../settings';
 import { HintGossip, WorldHints } from '../logic/hints';
-import { CountMap, countMapAdd, gameId } from '../util';
+import { CountMap, countMapAdd, gameId, toU16Buffer, toU32Buffer, toU8Buffer } from '../util';
 import { Patchfile } from './patchfile';
 import { LOCATIONS_ZELDA, makeLocation, makePlayerLocations } from '../logic/locations';
 import { CONFVARS_VALUES, Confvar } from '../confvars';
@@ -27,11 +27,6 @@ const DUNGEON_REWARD_LOCATIONS = [
   'MM Great Bay Temple Boss',
   'MM Stone Tower Boss',
 ];
-
-const GAME_DATA_OFFSETS = {
-  oot: 0x1000,
-  mm: 0x9000,
-};
 
 const HINTS_DATA_OFFSETS = {
   oot: 0x11000,
@@ -239,30 +234,6 @@ const checkId = (check: WorldCheck) => {
   }
   return check.id;
 }
-
-const toU8Buffer = (data: number[]) => {
-  const buf = Buffer.alloc(data.length);
-  for (let i = 0; i < data.length; ++i) {
-    buf.writeUInt8(data[i], i);
-  }
-  return buf;
-};
-
-const toU16Buffer = (data: number[]) => {
-  const buf = Buffer.alloc(data.length * 2);
-  for (let i = 0; i < data.length; ++i) {
-    buf.writeUInt16BE(data[i], i * 2);
-  }
-  return buf;
-};
-
-const toU32Buffer = (data: number[]) => {
-  const buf = Buffer.alloc(data.length * 4);
-  for (let i = 0; i < data.length; ++i) {
-    buf.writeUInt32BE(data[i], i * 4);
-  }
-  return buf;
-};
 
 function zoraSapphireGI(worldId: number, logic: LogicResult): number | null {
   /* Find the dungeon holding the Zora Sapphire */
@@ -596,7 +567,6 @@ const effectiveStartingItems = (world: number, logic: LogicResult): ItemsCount =
 
 const randomizerStartingItems = (world: number, logic: LogicResult): Buffer => {
   const { settings } = logic;
-  const buffer = Buffer.alloc(0x1000, 0xff);
   const ids: number[] = [];
   const ids2: number[] = [];
   const items = effectiveStartingItems(world, logic);
@@ -614,24 +584,16 @@ const randomizerStartingItems = (world: number, logic: LogicResult): Buffer => {
       ids.push(count);
     }
   }
-  const data = toU16Buffer([...ids, ...ids2]);
-  data.copy(buffer, 0);
-  return buffer;
+  return toU16Buffer([...ids, ...ids2, 0xffff, 0xffff]);
 };
 
 export function patchRandomizer(worldId: number, logic: LogicResult, settings: Settings, patchfile: Patchfile) {
-  const buffer = Buffer.alloc(0x20000, 0xff);
-  for (const g of GAMES) {
-    const checksBuffer = gameChecks(worldId, settings, g, logic);
-    const hintsBuffer = gameHints(settings, g, logic.hints[worldId]);
-    const entrancesBuffer = gameEntrances(worldId, g, logic);
-    checksBuffer.copy(buffer, GAME_DATA_OFFSETS[g]);
-    hintsBuffer.copy(buffer, HINTS_DATA_OFFSETS[g]);
-    entrancesBuffer.copy(buffer, ENTRANCE_DATA_OFFSETS[g]);
-  }
-  const data = randomizerData(worldId, logic);
-  data.copy(buffer, 0);
-  const startingItems = randomizerStartingItems(worldId, logic);
-  startingItems.copy(buffer, STARTING_ITEMS_DATA_OFFSET);
-  patchfile.addPatch('global', 0x03fe0000, buffer);
+  patchfile.addNewFile(0xf0200000, randomizerData(worldId, logic), true);
+  patchfile.addNewFile(0xf0300000, randomizerStartingItems(worldId, logic), false);
+  patchfile.addNewFile(0xf0400000, gameChecks(worldId, settings, 'oot', logic), true);
+  patchfile.addNewFile(0xf0500000, gameChecks(worldId, settings, 'mm', logic), true);
+  patchfile.addNewFile(0xf0600000, gameHints(settings, 'oot', logic.hints[worldId]), true);
+  patchfile.addNewFile(0xf0700000, gameHints(settings, 'mm', logic.hints[worldId]), true);
+  patchfile.addNewFile(0xf0800000, gameEntrances(worldId, 'oot', logic), true);
+  patchfile.addNewFile(0xf0900000, gameEntrances(worldId, 'mm', logic), true);
 }

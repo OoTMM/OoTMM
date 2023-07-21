@@ -14,7 +14,7 @@ import { ItemHelpers, ItemsCount, makePlayerItem } from './items';
 import { makeLocation } from './logic/locations';
 
 export { Presets, PRESETS } from './presets';
-export { Cosmetics, makeCosmetics, COSMETIC_NAMES } from './cosmetics';
+export { COSMETICS, makeCosmetics, Cosmetics } from './cosmetics';
 export { COLORS } from './cosmetics/color';
 export { OptionRandomSettings, makeRandomSettings } from './settings/random';
 export { SettingHint, SettingHintType, SETTINGS_DEFAULT_HINTS, HINT_TYPES } from './settings/hints';

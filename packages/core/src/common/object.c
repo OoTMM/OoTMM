@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/custom.h>
+#include <combo/dma.h>
 
 void* gCustomKeep;
 
@@ -26,7 +27,7 @@ ALIGNED(16) const ObjectData kExtraObjectsTable[] = {
 #undef Y
 };
 
-ALIGNED(16) ObjectData kCustomObjectsTable[CUSTOM_OBJECTS_SIZE];
+ALIGNED(16) ObjectData kCustomObjectsTable[CUSTOM_OBJECT_TABLE_SIZE];
 
 static const ObjectPatch kObjectPatches[] = {
 #if defined(GAME_OOT)
@@ -148,16 +149,16 @@ static const ObjectPatch kObjectPatches[] = {
 void comboInitObjects(void)
 {
     /* Load the DMA table */
-    DMARomToRam(CUSTOM_OBJECTS_ADDR | PI_DOM1_ADDR2, kCustomObjectsTable, CUSTOM_OBJECTS_SIZE * sizeof(ObjectData));
+    comboDmaLoadFile(kCustomObjectsTable, CUSTOM_OBJECT_TABLE_VROM);
 }
 
 void comboLoadCustomKeep(void)
 {
     u32 customKeepSize;
 
-    customKeepSize = comboLoadObject(NULL, CUSTOM_OBJECT_ID_KEEP);
+    customKeepSize = comboDmaLoadFile(NULL, CUSTOM_KEEP_VROM);
     gCustomKeep = malloc(customKeepSize);
-    comboLoadObject(gCustomKeep, CUSTOM_OBJECT_ID_KEEP);
+    comboDmaLoadFile(gCustomKeep, CUSTOM_KEEP_VROM);
 }
 
 #if defined(GAME_OOT)

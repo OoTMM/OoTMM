@@ -1,34 +1,15 @@
 import { Buffer } from 'buffer';
 
-import { compress } from './compress';
-import { CONFIG } from './config';
+import { compressFile } from './compress';
+import { CONFIG, GAMES, Game } from './config';
 import { DecompressedRoms } from './decompress';
-import { DmaData } from './dma';
+import { DmaData, DmaDataRecord } from './dma';
 import { Monitor } from './monitor';
 import { Patchfile } from './patch-build/patchfile';
 
-const fixDMA = (monitor: Monitor, rom: Buffer) => {
-  monitor.log("Fixing DMA");
-  const config = CONFIG['mm'];
-  const mask = 0x02000000;
-  const dmaAddr = config.dmaAddr + mask;
-  const dma = new DmaData(rom.subarray(dmaAddr, dmaAddr + config.dmaCount * 0x10));
-  for (let i = 0; i < dma.count(); ++i) {
-    const entry = dma.read(i);
-    if (entry.physEnd === 0xffffffff) {
-      continue;
-    }
-    entry.physStart = (entry.physStart | mask) >>> 0;
-    if (entry.physEnd) {
-      entry.physEnd = (entry.physEnd | mask) >>> 0;
-    }
-    dma.write(i, entry);
-  }
-};
-
 const rol = (v: number, b: number) => (((v << b) | (v >>> (32 - b))) & 0xffffffff) >>> 0;
 
-const checksum = (rom: Buffer) => {
+function checksum(rom: Buffer) {
   const seed = 0xdf26f436;
   let t1 = seed;
   let t2 = seed;
@@ -60,35 +41,257 @@ const checksum = (rom: Buffer) => {
   return [(t6 ^ t4 ^ t3) >>> 0, (t5 ^ t2 ^ t1) >>> 0];
 };
 
-const fixChecksum = (monitor: Monitor, rom: Buffer) => {
-  monitor.log("Fixing the checksum");
-  const [c1, c2] = checksum(rom);
-  rom.writeUInt32BE(c1, 0x10);
-  rom.writeUInt32BE(c2, 0x14);
-};
+type Payload = {
+  pstart: number;
+  psize: number;
+}
 
-export async function pack(monitor: Monitor, roms: DecompressedRoms, patchfiles: Patchfile[]): Promise<Buffer> {
-  /* Apply patches and compress */
-  const romOot = roms.oot.rom;
-  const romMm = roms.mm.rom;
-  monitor.log("Pack: Pre-compress patches");
-  for (const p of patchfiles) {
-    p.apply(romOot, 'oot');
-    p.apply(romMm, 'mm');
+type PackerGameState = {
+  dma: DmaData;
+  dmaAddr: number;
+  packedFiles: number;
+  payload?: Payload;
+}
+
+type FileData = { type: 'uncompressed' | 'compressed', data: Buffer } | { type: 'dummy' };
+
+class Packer {
+  private rom: Buffer;
+  private paddr: number;
+  private gs: {[k in Game]: PackerGameState};
+  private extraDma: DmaDataRecord[];
+
+  constructor(
+    private monitor: Monitor,
+    private roms: DecompressedRoms,
+    private patchfiles: Patchfile[],
+  ) {
+    this.rom = Buffer.alloc(0x4000000);
+    this.paddr = 0;
+    this.gs = {
+      oot: {
+        dma: new DmaData(Buffer.alloc(CONFIG['oot'].dmaCount * 0x10)),
+        dmaAddr: 0,
+        packedFiles: 0,
+      },
+      mm: {
+        dma: new DmaData(Buffer.alloc(CONFIG['mm'].dmaCount * 0x10)),
+        dmaAddr: 0,
+        packedFiles: 0,
+      },
+    };
+    this.extraDma = [];
   }
 
-  monitor.log("Pack: Compress");
-  const compressedRoms = await compress(monitor, roms);
-  const compressedRom = Buffer.concat(compressedRoms);
+  async run() {
+    /* Apply patches and compress */
+    this.monitor.log("Pack: Pre-compress patches");
+    for (const p of this.patchfiles) {
+      for (const g of GAMES) {
+        const rom = this.roms[g].rom;
+        for (const pp of p.gamePatches[g].data) {
+          pp.data.copy(rom, pp.addr);
+        }
+      }
+    }
 
-  monitor.log("Pack: Post-compress patches");
-  for (const p of patchfiles) {
-    p.apply(compressedRom, 'global');
+    /* Pack OoT and MM */
+    this.monitor.log("Pack: Compress");
+    await this.packFiles('oot', 27);
+    const mmBase = this.paddr;
+    await this.packFiles('mm', 31);
+    await this.packFiles('oot');
+    await this.packFiles('mm');
+
+    /* Write the DMA */
+    this.gs.oot.dma.data().copy(this.rom, CONFIG['oot'].dmaAddr);
+    this.gs.mm.dma.data().copy(this.rom, CONFIG['mm'].dmaAddr + mmBase);
+
+    /* Post compress global patches */
+    this.monitor.log("Pack: Post-compress patches");
+    const patch = this.patchfiles[0];
+
+    /* Add extra files */
+    this.monitor.log("Pack: Add extra files");
+    for (const p of this.patchfiles) {
+      for (const f of p.newFiles) {
+        await this.addFile(f.vrom, f.data, f.compressed);
+      }
+    }
+
+    /* Pack the payload */
+    this.monitor.log("Pack: Write payloads");
+    const meta = Buffer.alloc(0x1000);
+    const ootPayload = this.gs.oot.payload;
+    const mmPayload = this.gs.mm.payload;
+
+    if (!ootPayload || !mmPayload) {
+      throw new Error("Payload not found");
+    }
+
+    meta.writeUInt32BE(ootPayload.pstart, 0x08);
+    meta.writeUInt32BE(ootPayload.psize, 0x0c);
+    meta.writeUInt32BE(mmPayload.pstart, 0x10);
+    meta.writeUInt32BE(mmPayload.psize, 0x14);
+
+    /* Pack custom DMA */
+    this.monitor.log("Pack: Write custom DMA");
+    const customDma = new DmaData(Buffer.alloc(this.extraDma.length * 0x10));
+    for (let i = 0; i < this.extraDma.length; ++i) {
+      customDma.write(i, this.extraDma[i]);
+    }
+    const customDmaAddr = this.addData(customDma.data());
+    meta.writeUInt32BE(customDmaAddr, 0x00);
+    meta.writeUInt32BE(this.extraDma.length, 0x04);
+
+    /* Check that it fits */
+    if (this.paddr + meta.length > 0x4000000) {
+      throw new Error("ROM doesn't fit");
+    }
+
+    /* Write the meta */
+    meta.copy(this.rom, this.rom.length - meta.length);
+
+    /* Patch rom header */
+    Buffer.from('OOT+MM COMBO       ').copy(this.rom, 0x20);
+    Buffer.from('ZZE').copy(this.rom, 0x3c);
+
+    this.fixChecksum();
+
+    return this.rom;
   }
 
-  monitor.log("Pack: Fixes");
-  fixDMA(monitor, compressedRom);
-  fixChecksum(monitor, compressedRom);
+  private addData(data: Buffer) {
+    const size = data.length;
+    const sizeAligned = (size + 0xf) & ~0xf;
+    const paddr = this.paddr;
+    data.copy(this.rom, paddr);
+    this.paddr += sizeAligned;
+    return paddr;
+  }
 
-  return compressedRom;
+  private async addFile(vrom: number, data: Buffer, compressed: boolean) {
+    if (data.length === 0) {
+      this.extraDma.push({ physStart: 0xffffffff, physEnd: 0xffffffff, virtStart: vrom, virtEnd: vrom });
+      return;
+    }
+
+    const physStart = this.paddr;
+    const virtStart = vrom;
+    let size = data.length;
+    let sizeAligned = (size + 0xf) & ~0xf;
+    const virtSize = (size + 0xf) & ~0xf;
+    const virtEnd = (virtStart + virtSize) >>> 0;
+    let physEnd = 0;
+
+    if (compressed) {
+      data = await compressFile(data);
+      size = data.length;
+      sizeAligned = (size + 0xf) & ~0xf;
+      physEnd = physStart + sizeAligned;
+    }
+
+    data.copy(this.rom, physStart);
+    this.paddr += sizeAligned;
+    this.extraDma.push({ physStart, physEnd, virtStart, virtEnd });
+
+    if (vrom === 0xf0000000) {
+      this.gs.oot.payload = { pstart: physStart, psize: sizeAligned };
+    } else if (vrom === 0xf0100000) {
+      this.gs.mm.payload = { pstart: physStart, psize: sizeAligned };
+    }
+  }
+
+  private async packFiles(game: Game, count?: number) {
+    const config = CONFIG[game];
+    const gs = this.gs[game];
+    const gameData = this.roms[game];
+    const gameRom = gameData.rom;
+    const compressedDma = new DmaData(gameData.dma);
+    const uncompressedDma = new DmaData(gameRom.subarray(config.dmaAddr, config.dmaAddr + config.dmaCount * 0x10));
+    const removedFiles = new Set<number>();
+
+    for (const p of this.patchfiles) {
+      for (const f of p.gamePatches[game].removedFiles) {
+        removedFiles.add(f);
+      }
+    }
+
+    /* If count is not provided - pack all */
+    if (count === undefined) {
+      count = config.dmaCount - gs.packedFiles;
+    }
+
+    /* Prepare files */
+    const filePromises: Promise<FileData>[] = [];
+    for (let i = 0; i < count; ++i) {
+      const fileId = gs.packedFiles + i;
+      const compressedDmaEntry = compressedDma.read(fileId);
+      const uncompressedDmaEntry = uncompressedDma.read(fileId);
+
+      /* Check if the file is dummy */
+      if (uncompressedDmaEntry.physEnd === 0xffffffff || removedFiles.has(fileId)) {
+        filePromises.push(Promise.resolve({ type: 'dummy' }));
+        continue;
+      }
+
+      /* Get the data */
+      let data = gameRom.subarray(uncompressedDmaEntry.physStart, uncompressedDmaEntry.physStart + uncompressedDmaEntry.virtEnd - uncompressedDmaEntry.virtStart);
+
+      /* Check if the file is compressed */
+      if (compressedDmaEntry.physEnd !== 0) {
+        filePromises.push(new Promise(async (resolve, reject) => {
+          data = await compressFile(data);
+          resolve({ type: 'compressed', data });
+        }));
+      } else {
+        filePromises.push(Promise.resolve({ type: 'uncompressed', data }));
+      }
+    }
+
+    /* Wait for all files to be ready */
+    const files = await Promise.all(filePromises);
+
+    /* Pack files */
+    for (let i = 0; i < count; ++i) {
+      const file = files[i];
+      const fileId = gs.packedFiles + i;
+      const uncompressedDmaEntry = uncompressedDma.read(fileId);
+
+      /* Check if the file is dummy */
+      if (file.type === 'dummy') {
+        gs.dma.write(fileId, { ...uncompressedDmaEntry, physStart: 0xffffffff, physEnd: 0xffffffff });
+        continue;
+      }
+
+      /* Write the file data */
+      const size = file.data.length;
+      const sizeAligned = (size + 0xf) & ~0xf;
+      const paddr = this.paddr;
+      file.data.copy(this.rom, paddr);
+      this.paddr += sizeAligned;
+
+      /* Write the DMA entry */
+      if (file.type === 'compressed') {
+        gs.dma.write(fileId, { ...uncompressedDmaEntry, physStart: paddr, physEnd: paddr + sizeAligned });
+      } else {
+        gs.dma.write(fileId, { ...uncompressedDmaEntry, physStart: paddr, physEnd: 0 });
+      }
+    }
+
+    /* Update the game state */
+    gs.packedFiles += count;
+  }
+
+  private fixChecksum() {
+    this.monitor.log("Fixing the checksum");
+    const [c1, c2] = checksum(this.rom);
+    this.rom.writeUInt32BE(c1, 0x10);
+    this.rom.writeUInt32BE(c2, 0x14);
+  }
+}
+
+export function pack(monitor: Monitor, roms: DecompressedRoms, patchfiles: Patchfile[]) {
+  const packer = new Packer(monitor, roms, patchfiles);
+  return packer.run();
 }

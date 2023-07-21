@@ -5,7 +5,7 @@
 
 #define OOT_DMA_ADDR    0x7430
 #define OOT_DMA_COUNT   0x5e6
-#define MM_DMA_ADDR     (0x1a500 | MM_BASE)
+#define MM_DMA_ADDR     (0x1a500 + MM_BASE)
 #define MM_DMA_COUNT    0x610
 
 #if defined(GAME_OOT)
@@ -46,5 +46,7 @@ DmaRequest;
 extern DmaEntry gDmaData[DMA_COUNT];
 
 void comboDmaLookupForeignId(DmaEntry* dst, int id);
+u32  comboDmaLoadFile(void* dst, u32 vrom);
+u32  comboDmaLoadFilePartial(void* dst, u32 vrom, u32 offset, s32 size);
 
 #endif

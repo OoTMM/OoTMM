@@ -1,6 +1,7 @@
 #include <combo.h>
 #include <combo/item.h>
 #include <combo/net.h>
+#include <combo/dma.h>
 
 #if defined(GAME_OOT)
 # define comboAddItemNative             comboAddItemOot
@@ -180,7 +181,8 @@ static ALIGNED(16) ComboOverrideData gComboOverrides[OVERRIDE_MAX];
 
 void comboInitOverride(void)
 {
-    DMARomToRam(OVERRIDE_ADDR | PI_DOM1_ADDR2, &gComboOverrides, sizeof(gComboOverrides));
+    memset(gComboOverrides, 0xff, sizeof(gComboOverrides));
+    comboDmaLoadFile(gComboOverrides, COMBO_VROM_CHECKS);
 }
 
 static u16 makeOverrideKey(int type, u16 sceneId, u16 id)

@@ -1,6 +1,6 @@
 import { Buffer } from 'buffer';
 import JSZip from 'jszip';
-import { Settings, itemPool, Items, OptionsInput, GeneratorOutput, generate } from '@ootmm/core';
+import { Settings, itemPool, Items, OptionsInput, GeneratorOutput, generate, COSMETICS } from '@ootmm/core';
 
 const VERSION = process.env.VERSION as string;
 
@@ -69,7 +69,13 @@ export type WorkerTask = WorkerTaskItemPool | WorkerTaskGenerate;
 export type WorkerResult = WorkerResultItemPool | WorkerResultGenerate | WorkerResultGenerateLog | WorkerResultGenerateError;
 
 function onTaskGenerate(task: WorkerTaskGenerate) {
-  let { oot, mm, patch } = task;
+  let { oot, mm, patch, options } = task;
+  options.cosmetics = { ...options.cosmetics };
+  for (const c of COSMETICS) {
+    if (c.type === 'zobj' && options.cosmetics[c.key]) {
+      options.cosmetics[c.key] = Buffer.from(options.cosmetics[c.key] as any);
+    }
+  }
   [oot, mm] = [oot, mm].map(b => Buffer.from(b));
   if (patch) {
     patch = Buffer.from(patch);
@@ -81,7 +87,7 @@ function onTaskGenerate(task: WorkerTaskGenerate) {
       log: msg,
     });
   };
-  const generator = generate({ oot, mm, opts: { ...task.options, patch, fetch: fetchFunc }, monitor: { onLog } });
+  const generator = generate({ oot, mm, opts: { ...options, patch, fetch: fetchFunc }, monitor: { onLog } });
   generator.run().then(result => {
     postMessage({
       type: 'generate',

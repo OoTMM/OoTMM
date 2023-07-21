@@ -1,6 +1,7 @@
 #include <combo.h>
 #include <combo/net.h>
 #include <combo/sr.h>
+#include <combo/dma.h>
 
 ComboGlobal g;
 
@@ -27,5 +28,5 @@ ALIGNED(16) ComboData gComboData;
 
 void comboInitData(void)
 {
-    DMARomToRam(0x03fe0000 | PI_DOM1_ADDR2, &gComboData, sizeof(gComboData));
+    comboDmaLoadFile(&gComboData, COMBO_VROM_DATA);
 }

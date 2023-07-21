@@ -91,3 +91,35 @@ export const gameId = (game: Game | 'shared', id: string, char: string) => {
   }
   return [game.toUpperCase(), id].join(char);
 }
+
+export const toU8Buffer = (data: number[]) => {
+  const buf = Buffer.alloc(data.length);
+  for (let i = 0; i < data.length; ++i) {
+    buf.writeUInt8(data[i], i);
+  }
+  return buf;
+};
+
+export const toU16Buffer = (data: number[]) => {
+  const buf = Buffer.alloc(data.length * 2);
+  for (let i = 0; i < data.length; ++i) {
+    buf.writeUInt16BE(data[i], i * 2);
+  }
+  return buf;
+};
+
+export const toU32Buffer = (data: number[]) => {
+  const buf = Buffer.alloc(data.length * 4);
+  for (let i = 0; i < data.length; ++i) {
+    buf.writeUInt32BE(data[i], i * 4);
+  }
+  return buf;
+};
+
+export const toU32BufferLE = (data: number[]) => {
+  const buf = Buffer.alloc(data.length * 4);
+  for (let i = 0; i < data.length; ++i) {
+    buf.writeUInt32LE(data[i], i * 4);
+  }
+  return buf;
+};

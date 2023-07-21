@@ -5,7 +5,7 @@ typedef void (*EntryPoint)(void)  __attribute__ ((noreturn));
 
 #if defined(GAME_OOT)
 # define FOREIGN_OFF    0x80000
-# define FOREIGN_CART   (0x10001000 | MM_BASE)
+# define FOREIGN_CART   (0x10001000 + MM_BASE)
 # define FOREIGN_SIZE   0x19500
 #else
 # define FOREIGN_OFF    0x400

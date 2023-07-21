@@ -1,6 +1,7 @@
 #include <combo.h>
 #include <combo/custom.h>
 #include <combo/dungeon.h>
+#include <combo/dma.h>
 
 typedef struct
 {
@@ -166,7 +167,7 @@ static void mqPatchCollisions(GameState_Play* play, MqSceneHeader* scene, void* 
         chunk = 0;
         while (count)
         {
-            DMARomToRam((CUSTOM_MQ_SCENES_ADDR + (scene->polyOffset + chunk * sizeof(buffer))) | PI_DOM1_ADDR2, buffer, sizeof(buffer));
+            comboDmaLoadFilePartial(buffer, CUSTOM_MQ_SCENES_ADDR, (scene->polyOffset + chunk * sizeof(buffer)), sizeof(buffer));
             for (int i = 0; i < sizeof(buffer) / sizeof(MqPolyPatch); ++i)
             {
                 MqPolyPatch* p;
@@ -187,7 +188,7 @@ static void mqPatchCollisions(GameState_Play* play, MqSceneHeader* scene, void* 
         chunk = 0;
         while (count)
         {
-            DMARomToRam((CUSTOM_MQ_SCENES_ADDR + (scene->polyTypeOffset + chunk * sizeof(buffer))) | PI_DOM1_ADDR2, buffer, sizeof(buffer));
+            comboDmaLoadFilePartial(buffer, CUSTOM_MQ_SCENES_ADDR, (scene->polyTypeOffset + chunk * sizeof(buffer)), sizeof(buffer));
             for (int i = 0; i < sizeof(buffer) / sizeof(MqPolyTypePatch); ++i)
             {
                 MqPolyTypePatch* p;
@@ -218,7 +219,7 @@ static int findMqOverrideScene(GameState_Play* play, MqSceneHeader* dst)
     if (!isEnabledMq(dungeonId))
         return 0;
 
-    DMARomToRam(CUSTOM_MQ_SCENES_ADDR | PI_DOM1_ADDR2, buffer, sizeof(buffer));
+    comboDmaLoadFilePartial(buffer, CUSTOM_MQ_SCENES_ADDR, 0, sizeof(buffer));
     headerCount = *(u32*)buffer;
     headerPage = 0;
     headerIndex = 1;
@@ -236,7 +237,7 @@ static int findMqOverrideScene(GameState_Play* play, MqSceneHeader* dst)
         {
             headerIndex = 0;
             headerPage++;
-            DMARomToRam((CUSTOM_MQ_SCENES_ADDR + headerPage * sizeof(buffer)) | PI_DOM1_ADDR2, buffer, sizeof(buffer));
+            comboDmaLoadFilePartial(buffer, CUSTOM_MQ_SCENES_ADDR, headerPage * sizeof(buffer), sizeof(buffer));
         }
     }
 
@@ -258,7 +259,7 @@ static int findMqOverrideRoom(GameState_Play* play, MqRoomHeader* dst)
     if (!isEnabledMq(dungeonId))
         return 0;
 
-    DMARomToRam(CUSTOM_MQ_ROOMS_ADDR | PI_DOM1_ADDR2, buffer, sizeof(buffer));
+    comboDmaLoadFilePartial(buffer, CUSTOM_MQ_ROOMS_ADDR, 0, sizeof(buffer));
     headerCount = *(u32*)buffer;
     headerPage = 0;
     headerIndex = 1;
@@ -276,7 +277,7 @@ static int findMqOverrideRoom(GameState_Play* play, MqRoomHeader* dst)
         {
             headerIndex = 0;
             headerPage++;
-            DMARomToRam((CUSTOM_MQ_ROOMS_ADDR + headerPage * sizeof(buffer)) | PI_DOM1_ADDR2, buffer, sizeof(buffer));
+            comboDmaLoadFilePartial(buffer, CUSTOM_MQ_ROOMS_ADDR, headerPage * sizeof(buffer), sizeof(buffer));
         }
     }
 
@@ -294,7 +295,7 @@ static void loadMqSceneMaybe(GameState_Play* play)
         return;
 
     /* Load the MQ scene data */
-    DMARomToRam((CUSTOM_MQ_SCENES_ADDR + mqHeader.offset) | PI_DOM1_ADDR2, sMqBufferScene, mqHeader.size);
+    comboDmaLoadFilePartial(sMqBufferScene, CUSTOM_MQ_SCENES_ADDR, mqHeader.offset, mqHeader.size);
 
     /* Patch the scene */
     parseEnd = 0;
@@ -356,7 +357,7 @@ static void loadMqRoomMaybe(GameState_Play* play)
         return;
 
     /* Load the MQ room data */
-    DMARomToRam((CUSTOM_MQ_ROOMS_ADDR + mqHeader.offset) | PI_DOM1_ADDR2, sMqBufferRoomPtr, mqHeader.size);
+    comboDmaLoadFilePartial(sMqBufferRoomPtr, CUSTOM_MQ_ROOMS_ADDR, mqHeader.offset, mqHeader.size);
 
     /* Patch the room */
     parseEnd = 0;
@@ -436,7 +437,7 @@ void comboMqKaleidoHook(GameState_Play* play)
 
     /* Load the alternate maps */
     maps = OverlayAddr(0x8082a3e0);
-    DMARomToRam(CUSTOM_MQ_MAPS_ADDR | PI_DOM1_ADDR2, maps, kMapCount * sizeof(DungeonMapFloor));
+    comboDmaLoadFile(maps, CUSTOM_MQ_MAPS_ADDR);
 
     /* Patch the vertex buffer */
     for (int i = 0; i < kMapCount; ++i)
@@ -470,12 +471,12 @@ static void LoadMapMarkWrapper(void* unk)
     minimaps = (void**)(mapMark + 0x6aec);
     minimapAddr = minimaps[gPlay->sceneId];
     minimapSize = sceneHeader.minimapSize;
-    minimapOffset = (CUSTOM_MQ_SCENES_ADDR + sceneHeader.minimapOffset) | PI_DOM1_ADDR2;
+    minimapOffset = sceneHeader.minimapOffset;
 
     /* Load the minimap */
     while (minimapSize)
     {
-        DMARomToRam(minimapOffset, buffer, sizeof(buffer));
+        comboDmaLoadFilePartial(buffer, CUSTOM_MQ_SCENES_ADDR, minimapOffset, sizeof(buffer));
         size = sizeof(buffer);
         if (size > minimapSize)
             size = minimapSize;

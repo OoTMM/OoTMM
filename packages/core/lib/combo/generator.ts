@@ -46,16 +46,18 @@ export class Generator {
       if (!process.env.ROLLUP) {
         await codegen(this.monitor);
       }
-      const customData = await custom(this.opts, this.monitor, roms);
+      const patchfile = new Patchfile;
+      await custom(this.opts, this.monitor, roms, patchfile);
       const buildResult = await build(this.opts);
       /* Run logic */
       const logicResult = logic(this.monitor, this.opts);
+      patchfile.setHash(logicResult.hash);
       patchfiles = buildPatchfiles({
+        patch: patchfile,
         monitor: this.monitor,
         roms,
         addresses,
         build: buildResult,
-        custom: customData,
         logic: logicResult,
         settings: this.opts.settings,
       });

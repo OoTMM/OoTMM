@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/dma.h>
 
 #if defined(GAME_OOT)
 # define HINTS_ADDR 0x03ff1000
@@ -55,7 +56,8 @@ static const Hint* findHint(u8 key)
 
 void comboInitHints(void)
 {
-    DMARomToRam(HINTS_ADDR | PI_DOM1_ADDR2, gHints,  sizeof(gHints));
+    memset(gHints, 0xff, sizeof(gHints));
+    comboDmaLoadFile(gHints, COMBO_VROM_HINTS);
 }
 
 static void appendCorrectItemName(char** b, s16 gi, u8 player)
