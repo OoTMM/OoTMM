@@ -115,3 +115,11 @@ export const toU32Buffer = (data: number[]) => {
   }
   return buf;
 };
+
+export const toU32BufferLE = (data: number[]) => {
+  const buf = Buffer.alloc(data.length * 4);
+  for (let i = 0; i < data.length; ++i) {
+    buf.writeUInt32LE(data[i], i * 4);
+  }
+  return buf;
+};
