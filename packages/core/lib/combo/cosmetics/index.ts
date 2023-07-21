@@ -11,38 +11,13 @@ import { Color, ColorRandom, COLORS } from './color';
 import { recolorImage } from './image';
 import fs from 'fs/promises';
 import { enableModelOotLink } from './model';
+import { BufferPath } from './type';
+
+export { makeCosmetics } from './util';
+export { COSMETICS } from './data';
+export { Cosmetics } from './type';
 
 const OBJECTS_TABLE_ADDR = 0x800f8ff8;
-
-type BufferPath = string | Buffer;
-
-export type Cosmetics = {
-  ootTunicKokiri: ColorRandom;
-  ootTunicGoron: ColorRandom;
-  ootTunicZora: ColorRandom;
-  modelOotChildLink: BufferPath | null;
-};
-
-export const COSMETIC_NAMES: {[k in keyof Cosmetics]: string} = {
-  ootTunicKokiri: 'OoT Kokiri Tunic',
-  ootTunicGoron: 'OoT Goron Tunic',
-  ootTunicZora: 'OoT Zora Tunic',
-  modelOotChildLink: 'Player Model - Child Link (OoT)',
-};
-
-export const DEFAULT_COSMETICS: Cosmetics = {
-  ootTunicKokiri: 'kokirigreen',
-  ootTunicGoron: 'goronred',
-  ootTunicZora: 'zorablue',
-  modelOotChildLink: null,
-};
-
-export function makeCosmetics(data: Partial<Cosmetics>) {
-  return {
-    ...DEFAULT_COSMETICS,
-    ...data,
-  };
-}
 
 export async function cosmeticsAssets(opts: Options) {
   return {

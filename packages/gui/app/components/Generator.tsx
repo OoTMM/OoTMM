@@ -12,7 +12,7 @@ import { JunkLocations } from './JunkLocations';
 import { Dungeons } from './Dungeons';
 import { SpecialConds } from './SpecialConds';
 import { Plando } from './Plando';
-import { Cosmetics } from './Cosmetics';
+import { CosmeticsEditor } from './Cosmetics';
 import { Hints } from './Hints';
 
 export function Generator() {
@@ -75,7 +75,7 @@ export function Generator() {
 
   tabs.push({
     name: "Cosmetics",
-    component: <Cosmetics/>
+    component: <CosmeticsEditor/>
   });
 
   return <TabBar tabs={tabs}/>
