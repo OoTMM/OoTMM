@@ -39,8 +39,10 @@
 "Shadow Temple Upper Huge Pit":
   dungeon: Shadow
   exits:
-    "Shadow Temple Lower Huge Pit": "has_fire"
+    "Shadow Temple Lower Huge Pit": "event(SHADOW_PIT_FIRE)"
     "Shadow Temple Invisible Blades Room": "true"
+  events:
+    SHADOW_PIT_FIRE: "has_fire" #This allows for adult to open the path for child with Fire Arrows to get the GS in Falling Spikes with Boomerang.
 "Shadow Temple Invisible Blades Room":
   dungeon: Shadow
   exits:

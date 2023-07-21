@@ -44,7 +44,7 @@
   exits:
     "Spirit Temple Child Upper": "small_keys(SMALL_KEY_SPIRIT, 7)"
     "Spirit Temple Sun Block Room": "is_adult || can_play_time || has_hover_boots" #Adult's long legs make the jumps easy
-    "Spirit Temple Adult Lower": "has_fire_arrows && has_mirror_shield"
+    "Spirit Temple Adult Lower": "has_fire_arrows && has_mirror_shield && soul(SOUL_STALFOS) && soul(SOUL_WALLMASTER) && has_weapon"
     "Spirit Temple Adult Upper": "is_adult && small_keys(SMALL_KEY_SPIRIT, 5)"
     "Spirit Temple Boss": "event(SPIRIT_TEMPLE_LIGHT) && has_mirror_shield && boss_key(BOSS_KEY_SPIRIT) && is_adult"
   events:
@@ -71,10 +71,10 @@
 "Spirit Temple Adult Lower":
   dungeon: Spirit
   locations:
-    "MQ Spirit Temple Purple Leever Chest": "true"
+    "MQ Spirit Temple Purple Leever Chest": "can_collect_distance"
     "MQ Spirit Temple Symphony Room Chest": "small_keys(SMALL_KEY_SPIRIT, 7) && can_hammer && can_play_time && can_play_epona && can_play_sun && can_play_storms && can_play(SONG_ZELDA)"
     "MQ Spirit Temple GS Leever Room": "true"
-    "MQ Spirit Temple GS Symphony Room": "small_keys(SMALL_KEY_SPIRIT, 7) && can_hammer && can_play_time && can_play_epona && can_play_sun && can_play_storms && can_play(SONG_ZELDA)"
+    "MQ Spirit Temple GS Symphony Room": "can_collect_distance && small_keys(SMALL_KEY_SPIRIT, 7) && can_hammer && can_play_time && can_play_epona && can_play_sun && can_play_storms && can_play(SONG_ZELDA)"
     "MQ Spirit Temple SR Lobby In Water": "can_hammer"
     "MQ Spirit Temple SR Lobby After Water Near Stairs": "true"
     "MQ Spirit Temple SR Lobby After Water Near Door": "true"
