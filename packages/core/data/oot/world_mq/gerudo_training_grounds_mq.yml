@@ -79,7 +79,7 @@
 "Gerudo Training Grounds Spinning Statue Room":
   dungeon: GTG
   exits:
-    "Gerudo Training Grounds Lava Room": "can_longshot || (can_hookshot && (has_fire_arrows || trick(OOT_MQ_GTG_FLAMES)) || (has_hover_boots && trick(OOT_MQ_GTG_FLAMES) && event(GTG_LAVA_TARGETS))"
+    "Gerudo Training Grounds Lava Room": "can_longshot || (can_hookshot && (has_fire_arrows || trick(OOT_MQ_GTG_FLAMES))) || (has_hover_boots && trick(OOT_MQ_GTG_FLAMES) && event(GTG_LAVA_TARGETS))"
     "Gerudo Training Grounds Water Room": "has(RUPEE_SILVER_GTG_LAVA, 6) && event(GTG_LAVA_TARGETS) && (can_hookshot || has_hover_boots || trick(OOT_MQ_GTG_FLAMES))"
   events:
     GTG_LAVA_HAMMER: "can_hammer"
