@@ -94,8 +94,8 @@ export const SETTINGS = [{
   values: [
     { value: 'plentiful', name: 'Plentiful', description: 'One extra copy of every major item. Heart containers only.' },
     { value: 'normal', name: 'Normal', description: 'The regular item count for each game.' },
-    { value: 'scarce', name: 'Scarce', description: 'One less of every major item. No Heart Containers.' },
-    { value: 'minimal', name: 'Minimal', description: 'Only one of each major item. No Heart Pieces or containers.' },
+    { value: 'scarce', name: 'Scarce', description: 'One less of every major item. No Heart Pieces.' },
+    { value: 'minimal', name: 'Minimal', description: 'Only one of each major item. No Heart Pieces or Containers.' },
   ],
   default: 'normal'
 }, {
