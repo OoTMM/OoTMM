@@ -50,6 +50,7 @@
 # define AC_EN_DU                   0x098
 # define AC_EN_FD                   0x099
 # define AC_EN_DH                   0x0a4
+# define AC_EN_DHA                  0x0a5
 # define AC_BOSS_VA                 0x0ba
 # define AC_BOSS_MO                 0x0c4
 # define AC_EN_SB                   0x0c5

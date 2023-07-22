@@ -80,6 +80,7 @@ static int canSpawnSoul(GameState_Play* play, s16 actorId, u16 variable)
     case AC_EN_FD:
         return hasSoul(GI_OOT_SOUL_FLARE_DANCER);
     case AC_EN_DH:
+    case AC_EN_DHA:
         return hasSoul(GI_OOT_SOUL_DEAD_HAND);
     case AC_EN_SB:
         return hasSoul(GI_OOT_SOUL_SHELL_BLADE);
