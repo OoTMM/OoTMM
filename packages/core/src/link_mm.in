@@ -79,7 +79,7 @@ SetCollectibleFlag = 0x800b5db0;
 GetCollectibleFlag = 0x800b5d6c;
 
 SpawnActor = 0x800bac60;
-SpawnActorEx = 0x800bae14;
+_SpawnActorEx = 0x800bae14;
 ConvertMatrix = 0x801817fc;
 MatrixRotation = 0x801809ac;
 
@@ -184,3 +184,4 @@ gDmaData = 0x8009f8b0;
 
 DmaCompressed = 0x80081178;
 osSetThreadPri = 0x8008fc00;
+SetRoomClear = 0x800b5d30;

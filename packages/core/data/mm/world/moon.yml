@@ -66,34 +66,51 @@
   region: MOON
   exits:
     "Moon": "true"
-    "Moon Trial Link Rest 1": "can_fight || has_arrows"
+    "Moon Trial Link Dinalfos Fight": "true"
+"Moon Trial Link Dinalfos Fight":
+  region: MOON
+  exits:
+    "Moon Trial Link Entrance": "soul(SOUL_LIZALFOS_DINALFOS) && (can_fight || can_use_deku_bubble || has_arrows)"
+    "Moon Trial Link Rest 1": "soul(SOUL_LIZALFOS_DINALFOS) && (can_fight || can_use_deku_bubble || has_arrows)"
 "Moon Trial Link Rest 1":
   region: MOON
   exits:
-    "Moon Trial Link Entrance": "can_fight || can_use_deku_bubble || has_arrows"
-    "Moon Trial Link Rest 2": "can_hookshot_short && (can_fight || has_arrows)"
+    "Moon Trial Link Dinalfos Fight": "true"
+    "Moon Trial Link Garo Fight": "true"
   gossip:
     "Moon Trial Link Gossip 1": "true"
+"Moon Trial Link Garo Fight":
+  region: MOON
+  exits:
+    "Moon Trial Link Rest 1": "soul(SOUL_GARO) && (has_weapon || has_mask_goron || can_use_deku_bubble || has_arrows)"
+    "Moon Trial Link Rest 2": "soul(SOUL_GARO) && (has_weapon || has_mask_goron || can_use_deku_bubble || has_arrows) && can_hookshot_short"
+  locations:
+    "Moon Trial Link Garo Master Chest": "soul(SOUL_GARO) && (can_fight || can_use_deku_bubble || has_arrows) && can_hookshot_short"
 "Moon Trial Link Rest 2":
   region: MOON
   exits:
-    "Moon Trial Link Rest 1": "can_fight || has_arrows"
-    "Moon Trial Link Rest 3": "has_bombchu && has_arrows"
-  locations:
-    "Moon Trial Link Chest 1": "true"
-    "Moon Trial Link Chest 2": "can_fight || has_bombs || has_bombchu"
+    "Moon Trial Link Garo Fight": "true"
+    "Moon Trial Link Iron Knuckle Fight": "true"
   gossip:
     "Moon Trial Link Gossip 2": "true"
+"Moon Trial Link Iron Knuckle Fight":
+  region: MOON
+  exits:
+    "Moon Trial Link Rest 2": "soul(SOUL_IRON_KNUCKLE) && (has_weapon || has_mask_goron || has_bombs)"
+    "Moon Trial Link Rest 3": "soul(SOUL_IRON_KNUCKLE) && (has_weapon || has_mask_goron || has_bombs) && has_bombchu && has_arrows"
+  locations:
+    "Moon Trial Link Iron Knuckle Chest": "soul(SOUL_IRON_KNUCKLE) && (has_weapon || has_mask_goron || has_bombs)"
+  gossip:
+    "Moon Trial Link Gossip Left": "has_bombchu && has_arrows"
+    "Moon Trial Link Gossip Right": "has_bombchu && has_arrows"
 "Moon Trial Link Rest 3":
   region: MOON
   exits:
-    "Moon Trial Link Rest 2": "can_fight || has_bombs || has_bombchu"
+    "Moon Trial Link Iron Knuckle Fight": "true"
     "Moon Trial Link Exit": "has_bombchu && can_use_fire_arrows"
   locations:
     "Moon Trial Link HP": "true"
   gossip:
-    "Moon Trial Link Gossip Left": "true"
-    "Moon Trial Link Gossip Right": "true"
     "Moon Trial Link Gossip Last": "true"
 "Moon Trial Link Exit":
   region: MOON

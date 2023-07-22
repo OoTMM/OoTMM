@@ -23,6 +23,7 @@
 
 #ifdef GAME_OOT
 # define PAYLOAD_RAM    0x80600000
+# define PAYLOAD_SIZE   0x40000
 # define LOADER_ADDR    0x80006600
 
 # define COMBO_CTX_ADDR_READ    COMBO_CTX_ADDR_OOT
@@ -31,6 +32,7 @@
 
 #ifdef GAME_MM
 # define PAYLOAD_RAM    0x80740000
+# define PAYLOAD_SIZE   0x40000
 # define LOADER_ADDR    0x800982b0
 
 # define COMBO_CTX_ADDR_READ    COMBO_CTX_ADDR_MM

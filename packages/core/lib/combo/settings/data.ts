@@ -743,6 +743,13 @@ export const SETTINGS = [{
   description: 'Add enemy souls into the item pool. Enemies won\'t spawn unless their soul is obtained.',
   default: false
 }, {
+  key: 'enemySoulsMm',
+  name: 'Enemy Souls (MM)',
+  category: 'items.extensions',
+  type: 'boolean',
+  description: 'Add enemy souls into the item pool. Enemies won\'t spawn unless their soul is obtained.',
+  default: false
+}, {
   key: 'sharedNutsSticks',
   name: 'Shared Nuts & Sticks',
   category: 'items.shared',

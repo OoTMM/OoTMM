@@ -24,13 +24,13 @@
     "Woodfall Temple Main Ledge": "event(WOODFALL_TEMPLE_MAIN_FLOWER) || event(WOODFALL_TEMPLE_MAIN_LADDER) || can_hookshot_short"
   events:
     WOODFALL_TEMPLE_MAIN_FLOWER: "can_use_fire_arrows"
-    STICKS: "true"
-    NUTS: "has(MASK_DEKU) || has_arrows || has_explosives || can_fight"
+    STICKS: "soul(SOUL_DEKU_BABA)"
+    NUTS: "soul(SOUL_DEKU_BABA) && (has(MASK_DEKU) || has_arrows || has_explosives || can_fight)"
     BOMBS: "true"
     ARROWS: "true"
   locations:
     "Woodfall Temple SF Main Pot": "true"
-    "Woodfall Temple SF Main Deku Baba": "true"
+    "Woodfall Temple SF Main Deku Baba": "soul(SOUL_DEKU_BABA)"
 "Woodfall Temple Water Room":
   dungeon: WF
   exits:
@@ -45,7 +45,7 @@
   exits:
     "Woodfall Temple Water Room": "true"
   locations:
-    "Woodfall Temple Map": "has(MASK_DEKU) || has_explosives || has_mask_goron"
+    "Woodfall Temple Map": "soul(SOUL_SNAPPER) && (has(MASK_DEKU) || has_explosives || has_mask_goron)"
 "Woodfall Temple Maze":
   dungeon: WF
   exits:
@@ -53,7 +53,7 @@
     "Woodfall Temple Compass Room": "has_sticks || can_use_fire_arrows"
     "Woodfall Temple Dark Room": "has_sticks || can_use_fire_arrows"
   locations:
-    "Woodfall Temple SF Maze Skulltula": "can_fight || has_arrows || can_use_deku_bubble || has_explosives"
+    "Woodfall Temple SF Maze Skulltula": "soul(SOUL_SKULLTULA) && (can_fight || has_arrows || can_use_deku_bubble || has_explosives)"
     "Woodfall Temple SF Maze Beehive": "has_weapon_range"
     "Woodfall Temple SF Maze Bubble": "(has(MASK_GREAT_FAIRY) && (has_arrows || can_hookshot_short)) || event(WOODFALL_TEMPLE_MAIN_FLOWER)"
 "Woodfall Temple Compass Room":
@@ -61,14 +61,14 @@
   exits:
     "Woodfall Temple Maze": "true"
   locations:
-    "Woodfall Temple Compass": "true"
+    "Woodfall Temple Compass": "soul(SOUL_DRAGONFLY)"
 "Woodfall Temple Dark Room":
   dungeon: WF
   exits:
     "Woodfall Temple Maze": "has_sticks || has_arrows"
     "Woodfall Temple Pits Room": "true"
   locations:
-    "Woodfall Temple Dark Chest": "true"
+    "Woodfall Temple Dark Chest": "soul(SOUL_BOE)"
 "Woodfall Temple Pits Room":
   dungeon: WF
   events:
@@ -101,15 +101,15 @@
   exits:
     "Woodfall Temple Water Room Upper": "can_fight || has_arrows"
   locations:
-    "Woodfall Temple Bow": "can_fight || has_arrows"
+    "Woodfall Temple Bow": "soul(SOUL_LIZALFOS_DINALFOS) && (can_fight || has_arrows)"
 "Woodfall Temple Boss Key Room":
   dungeon: WF
   exits:
     "Woodfall Temple Water Room Upper": "true"
   events:
-    FROG_2: "has(MASK_DON_GERO)"
+    FROG_2: "has(MASK_DON_GERO) && soul(SOUL_GEKKO)"
   locations:
-    "Woodfall Temple Boss Key Chest": "true"
+    "Woodfall Temple Boss Key Chest": "soul(SOUL_GEKKO)"
 "Woodfall Temple Pre-Boss":
   dungeon: WF
   exits:
@@ -134,7 +134,7 @@
   boss: true
   dungeon: WF
   exits:
-    "Woodfall Temple After Boss": "(has(MASK_FIERCE_DEITY) && has_magic) || (has_arrows && has_weapon)"
+    "Woodfall Temple After Boss": "soul(SOUL_ODOLWA) && ((has(MASK_FIERCE_DEITY) && has_magic) || (has_arrows && can_fight))"
 "Woodfall Temple After Boss":
   boss: true
   dungeon: WF

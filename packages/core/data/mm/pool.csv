@@ -98,7 +98,7 @@ Swamp Potion Shop Item 1,                         shop,           NONE,         
 Swamp Potion Shop Item 2,                         shop,           NONE,                   POTION_SHOP,                0x0e,                       POTION_GREEN
 Swamp Potion Shop Item 3,                         shop,           NONE,                   POTION_SHOP,                0x0f,                       POTION_RED
 Tourist Information Pictobox,                     npc,            NONE,                   TOURIST_INFORMATION,        KOUME_PICTOGRAPH_BOX,       PICTOGRAPH_BOX
-Tourist Information Boat Cruise,                  npc,            BOAT_ARCHERY,           TOURIST_INFORMATION,        KOUME_HEART_PIECE,          HEART_PIECE
+Tourist Information Boat Archery,                 npc,            BOAT_ARCHERY,           TOURIST_INFORMATION,        KOUME_HEART_PIECE,          HEART_PIECE
 Tourist Information Tingle Picture,               npc,            NONE,                   TOURIST_INFORMATION,        TOUR_GUIDE_HEART_PIECE,     HEART_PIECE
 Deku Palace HP,                                   collectible,    NONE,                   DEKU_PALACE,                0x1e,                       HEART_PIECE
 Deku Palace Sonata of Awakening,                  npc,            NONE,                   DEKU_KING_CHAMBER,          SONG_AWAKENING,             SONG_AWAKENING
@@ -376,15 +376,15 @@ Stone Tower Temple Inverted Boss Key,             chest,          NONE,         
 Stone Tower Temple Inverted Giant Mask,           chest,          NONE,                   TEMPLE_STONE_TOWER,         0x1a,                       MASK_GIANT
 Stone Tower Boss HC,                              collectible,    NONE,                   LAIR_TWINMOLD,              0x1f,                       HEART_CONTAINER
 Stone Tower Boss,                                 npc,            NONE,                   LAIR_TWINMOLD,              REMAINS_TWINMOLD,           REMAINS_TWINMOLD
-Secret Shrine Boss 1 Chest,                       chest,          NONE,                   SECRET_SHRINE,              0x00,                       RUPEE_SILVER
-Secret Shrine Boss 2 Chest,                       chest,          NONE,                   SECRET_SHRINE,              0x01,                       RUPEE_SILVER
-Secret Shrine Boss 3 Chest,                       chest,          SECRET_SHRINE_WART_HP,  SECRET_SHRINE,              0x02,                       RUPEE_SILVER
-Secret Shrine Boss 4 Chest,                       chest,          NONE,                   SECRET_SHRINE,              0x03,                       RUPEE_SILVER
+Secret Shrine Dinalfos Chest,                     chest,          NONE,                   SECRET_SHRINE,              0x00,                       RUPEE_SILVER
+Secret Shrine Wizzrobe Chest,                     chest,          NONE,                   SECRET_SHRINE,              0x01,                       RUPEE_SILVER
+Secret Shrine Wart Chest,                         chest,          SECRET_SHRINE_WART_HP,  SECRET_SHRINE,              0x02,                       RUPEE_SILVER
+Secret Shrine Garo Master Chest,                  chest,          NONE,                   SECRET_SHRINE,              0x03,                       RUPEE_SILVER
 Secret Shrine HP Chest,                           chest,          SECRET_SHRINE_WART_HP,  SECRET_SHRINE,              0x0a,                       HEART_PIECE
 Moon Trial Deku HP,                               collectible,    NONE,                   MOON_DEKU,                  0x01,                       HEART_PIECE
 Moon Trial Goron HP,                              collectible,    NONE,                   MOON_GORON,                 0x01,                       HEART_PIECE
 Moon Trial Zora HP,                               collectible,    NONE,                   MOON_ZORA,                  0x01,                       HEART_PIECE
-Moon Trial Link Chest 1,                          chest,          NONE,                   MOON_LINK,                  0x01,                       ARROWS_30
-Moon Trial Link Chest 2,                          chest,          NONE,                   MOON_LINK,                  0x02,                       BOMBCHU_10
+Moon Trial Link Garo Master Chest,                chest,          NONE,                   MOON_LINK,                  0x01,                       ARROWS_30
+Moon Trial Link Iron Knuckle Chest,               chest,          NONE,                   MOON_LINK,                  0x02,                       BOMBCHU_10
 Moon Trial Link HP,                               collectible,    NONE,                   MOON_LINK,                  0x01,                       HEART_PIECE
 Moon Fierce Deity Mask,                           npc,            NONE,                   MOON_LINK,                  MASK_FIERCE_DEITY,          MASK_FIERCE_DEITY

@@ -62,5 +62,7 @@ MiscFlags;
 #define gOotSilverRupeeCounts5      SAVE_EXTRA_RECORD(u32,              27)
 #define gOotSouls1                  SAVE_EXTRA_RECORD(u32,              28)
 #define gOotSouls2                  SAVE_EXTRA_RECORD(u32,              29)
+#define gMmSouls1                   SAVE_EXTRA_RECORD(u32,              30)
+#define gMmSouls2                   SAVE_EXTRA_RECORD(u32,              31)
 
 #endif

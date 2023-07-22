@@ -331,6 +331,14 @@ static void refillMagic(int level)
     gMmSave.playerData.magicAmount = level * 0x30;
 }
 
+static void addSoul(int index)
+{
+    if (index >= 32)
+        gMmSouls2 |= (1 << (index - 32));
+    else
+        gMmSouls1 |= (1 << index);
+}
+
 void comboAddCommonItemMm(int sid, int noEffect)
 {
     switch (sid)
@@ -1176,6 +1184,57 @@ int comboAddItemMm(s16 gi, int noEffect)
         break;
     case GI_MM_OWL_STONE_TOWER:
         gMmOwlFlags |= (1 << 9);
+        break;
+    case GI_MM_SOUL_OCTOROK:
+    case GI_MM_SOUL_WALLMASTER:
+    case GI_MM_SOUL_DODONGO:
+    case GI_MM_SOUL_KEESE:
+    case GI_MM_SOUL_TEKTITE:
+    case GI_MM_SOUL_PEAHAT:
+    case GI_MM_SOUL_LIZALFOS_DINALFOS:
+    case GI_MM_SOUL_SKULLTULA:
+    case GI_MM_SOUL_ARMOS:
+    case GI_MM_SOUL_DEKU_BABA:
+    case GI_MM_SOUL_DEKU_SCRUB:
+    case GI_MM_SOUL_BUBBLE:
+    case GI_MM_SOUL_BEAMOS:
+    case GI_MM_SOUL_REDEAD_GIBDO:
+    case GI_MM_SOUL_SKULLWALLTULA:
+    case GI_MM_SOUL_SHELL_BLADE:
+    case GI_MM_SOUL_LIKE_LIKE:
+    case GI_MM_SOUL_IRON_KNUCKLE:
+    case GI_MM_SOUL_FREEZARD:
+    case GI_MM_SOUL_WOLFOS:
+    case GI_MM_SOUL_GUAY:
+    case GI_MM_SOUL_FLYING_POT:
+    case GI_MM_SOUL_FLOORMASTER:
+    case GI_MM_SOUL_CHUCHU:
+    case GI_MM_SOUL_DEEP_PYTHON:
+    case GI_MM_SOUL_SKULLFISH:
+    case GI_MM_SOUL_DEXIHAND:
+    case GI_MM_SOUL_DRAGONFLY:
+    case GI_MM_SOUL_EENO:
+    case GI_MM_SOUL_EYEGORE:
+    case GI_MM_SOUL_HIPLOOP:
+    case GI_MM_SOUL_REAL_BOMBCHU:
+    case GI_MM_SOUL_TAKKURI:
+    case GI_MM_SOUL_BOE:
+    case GI_MM_SOUL_NEJIRON:
+    case GI_MM_SOUL_BIO_BABA:
+    case GI_MM_SOUL_GARO:
+    case GI_MM_SOUL_WIZZROBE:
+    case GI_MM_SOUL_GOMESS:
+    case GI_MM_SOUL_GEKKO:
+    case GI_MM_SOUL_BAD_BAT:
+    case GI_MM_SOUL_SNAPPER:
+    case GI_MM_SOUL_WART:
+    case GI_MM_SOUL_CAPTAIN_KEETA:
+    case GI_MM_SOUL_IGOS:
+    case GI_MM_SOUL_ODOLWA:
+    case GI_MM_SOUL_GOHT:
+    case GI_MM_SOUL_GYORG:
+    case GI_MM_SOUL_TWINMOLD:
+        addSoul(gi - GI_MM_SOUL_OCTOROK);
         break;
     }
 

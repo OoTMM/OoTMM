@@ -459,8 +459,8 @@
   region: TERMINA_FIELD
   events:
     STICKS: "can_kill_baba_both_sticks"
-    NUTS: "true"
-    MAGIC: "true"
+    NUTS: "soul(SOUL_DEKU_BABA)"
+    MAGIC: "soul(SOUL_CHUCHU)"
     RUPEES: "true"
     BOMBS: "true"
     ARROWS: "true"
@@ -500,8 +500,8 @@
 "Grass Grotto":
   region: ENTRANCE
   events:
-    STICKS: "true"
-    NUTS: "true"
+    STICKS: "soul(SOUL_DEKU_BABA)"
+    NUTS: "soul(SOUL_DEKU_BABA)"
     MAGIC: "true"
     RUPEES: "true"
     BOMBS: "true"
@@ -520,7 +520,7 @@
   exits:
     "Termina Field": "true"
   locations:
-    "Termina Field Peahat Grotto": "(can_fight || has_arrows || has(MASK_DEKU)) && is_day"
+    "Termina Field Peahat Grotto": "soul(SOUL_PEAHAT) && (can_fight || has_arrows || has(MASK_DEKU)) && is_day"
 "Bio Baba Grotto":
   region: ENTRANCE
   events:
@@ -535,12 +535,12 @@
   exits:
     "Termina Field": "true"
   locations:
-    "Termina Field Dodongo Grotto": "has_weapon || has_explosives || has_mask_goron || has_arrows"
+    "Termina Field Dodongo Grotto": "soul(SOUL_DODONGO) && (has_weapon || has_explosives || has_mask_goron || has_arrows)"
 "Pillar Grotto":
   region: ENTRANCE
   events:
-    STICKS: "true"
-    NUTS: "true"
+    STICKS: "soul(SOUL_DEKU_BABA)"
+    NUTS: "soul(SOUL_DEKU_BABA)"
     MAGIC: "true"
     RUPEES: "true"
     BOMBS: "true"
@@ -644,8 +644,8 @@
 "Road to Southern Swamp":
   region: ROAD_TO_SWAMP
   events:
-    STICKS: "true"
-    NUTS: "true"
+    STICKS: "soul(SOUL_DEKU_BABA)"
+    NUTS: "soul(SOUL_DEKU_BABA)"
     MAGIC: "true"
     RUPEES: "true"
     BOMBS: "true"
@@ -674,8 +674,8 @@
 "Road to Southern Swamp Grotto":
   region: ENTRANCE
   events:
-    STICKS: "true"
-    NUTS: "true"
+    STICKS: "soul(SOUL_DEKU_BABA)"
+    NUTS: "soul(SOUL_DEKU_BABA)"
     MAGIC: "true"
     RUPEES: "true"
     BOMBS: "true"
@@ -691,16 +691,16 @@
   exits:
     "Road to Southern Swamp": "true"
     "Tourist Information": "true"
-    "Swamp Back": "event(BOAT_RIDE) || has_mask_zora || event(CLEAN_SWAMP) || (has(MASK_DEKU) && (has_arrows || can_hookshot_short))"
+    "Swamp Back": "event(BOAT_RIDE) || event(CLEAN_SWAMP) || has_mask_zora || (has(MASK_DEKU) && (has_arrows || can_hookshot_short))"
     "Swamp Potion Shop": "true"
     "Woods of Mystery": "true"
     "Owl Swamp": "true"
   events:
     FROG_3: "has(MASK_DON_GERO)"
     PICTURE_SWAMP: "has(PICTOGRAPH_BOX)"
-    PICTURE_BIG_OCTO: "has(PICTOGRAPH_BOX)"
+    PICTURE_BIG_OCTO: "has(PICTOGRAPH_BOX) && soul(SOUL_OCTOROK)"
     STICKS: "true"
-    NUTS: "true"
+    NUTS: "soul(SOUL_DEKU_BABA)"
     RUPEES: "true"
     BOMBS: "true"
     ARROWS: "true"
@@ -716,7 +716,7 @@
   region: SOUTHERN_SWAMP
   events:
     PICTURE_SWAMP: "has(PICTOGRAPH_BOX)"
-    PICTURE_BIG_OCTO: "has(PICTOGRAPH_BOX)"
+    PICTURE_BIG_OCTO: "has(PICTOGRAPH_BOX) && soul(SOUL_OCTOROK)"
   exits:
     "Swamp Front": "event(BOAT_RIDE) || event(CLEAN_SWAMP) || has_mask_zora || ((has_arrows || can_hookshot) && (has(MASK_DEKU) || has_mask_goron))"
     "Deku Palace Front": "true"
@@ -739,8 +739,8 @@
 "Southern Swamp Grotto":
   region: ENTRANCE
   events:
-    STICKS: "true"
-    NUTS: "true"
+    STICKS: "soul(SOUL_DEKU_BABA)"
+    NUTS: "soul(SOUL_DEKU_BABA)"
     MAGIC: "true"
     RUPEES: "true"
     BOMBS: "true"
@@ -761,7 +761,7 @@
      BOAT_RIDE: "event(PICTURE_SWAMP) || event(KOUME)"
   locations:
     "Tourist Information Pictobox": "event(KOUME)"
-    "Tourist Information Boat Cruise": "event(KOUME) && event(CLEAN_SWAMP) && has_bow"
+    "Tourist Information Boat Archery": "event(KOUME) && event(CLEAN_SWAMP) && has_bow"
     "Tourist Information Tingle Picture": "event(PICTURE_TINGLE) || event(PICTURE_DEKU_KING)"
 #    "Tourist Information Big Octo Picture": "event(PICTURE_BIG_OCTO)"
 #    "Tourist Information Consolation Prize": "event(PICTURE_SWAMP)"
@@ -781,8 +781,8 @@
   exits:
     "Woods of Mystery": "second_day"
   events:
-    STICKS: "true"
-    NUTS: "true"
+    STICKS: "soul(SOUL_DEKU_BABA)"
+    NUTS: "soul(SOUL_DEKU_BABA)"
     MAGIC: "true"
     RUPEES: "true"
     BOMBS: "true"
@@ -811,8 +811,8 @@
     "Deku Palace Main": "has(MASK_DEKU) || trick(MM_PALACE_GUARD_SKIP)"
     "Deku Palace Upper": "(event(CLEAN_SWAMP) || has(MASK_DEKU)) && can_use_beans"
   events:
-    PICTURE_BIG_OCTO: "has(MASK_DEKU) && has(PICTOGRAPH_BOX)"
-    NUTS: "has(MASK_DEKU) || (event(CLEAN_SWAMP) && (can_fight || has_arrows || has_explosives || can_hookshot_short))"
+    PICTURE_BIG_OCTO: "soul(SOUL_OCTOROK) && has(MASK_DEKU) && has(PICTOGRAPH_BOX)"
+    NUTS: "soul(SOUL_DEKU_BABA) && (has(MASK_DEKU) || (event(CLEAN_SWAMP) && (can_fight || has_arrows || has_explosives || can_hookshot_short)))"
 "Deku Palace Main":
   region: DEKU_PALACE
   exits:
@@ -840,7 +840,7 @@
   region: DEKU_PALACE
   exits:
     "Deku Palace Main": "true"
-    "Deku Palace Upper": "has(MASK_DEKU)"
+    "Deku Palace Upper": "has(MASK_DEKU) && soul(SOUL_DEKU_SCRUB)"
     "Deku Palace Cage": "true"
 "Deku Palace Cage":
   region: DEKU_PALACE
@@ -887,12 +887,12 @@
     MAGIC: "true"
   exits:
     "Swamp Canopy Back": "true"
-    "Woodfall Shrine": "has(MASK_DEKU)"
+    "Woodfall Shrine": "has(MASK_DEKU) && (soul(SOUL_DEKU_SCRUB) || event(CLEAN_SWAMP))"
     "Woodfall Temple Princess Jail": "event(CLEAN_SWAMP) && event(OPEN_WOODFALL_TEMPLE)"
   locations:
     "Woodfall Entrance Chest": "has(MASK_DEKU) || can_hookshot || event(CLEAN_SWAMP)"
-    "Woodfall HP Chest": "has(MASK_DEKU) || can_hookshot"
-    "Woodfall Near Owl Chest": "has(MASK_DEKU) || (event(CLEAN_SWAMP) && can_hookshot)"
+    "Woodfall HP Chest": "(has(MASK_DEKU) && (soul(SOUL_DEKU_SCRUB) || event(CLEAN_SWAMP))) || can_hookshot"
+    "Woodfall Near Owl Chest": "(has(MASK_DEKU) && (soul(SOUL_DEKU_SCRUB) || event(CLEAN_SWAMP))) || (event(CLEAN_SWAMP) && can_hookshot)"
 "Woodfall Front of Temple":
   region: WOODFALL
   exits:
@@ -902,8 +902,8 @@
 "Woodfall Shrine":
   region: WOODFALL
   exits:
-    "Woodfall": "has(MASK_DEKU) || event(CLEAN_SWAMP)"
-    "Woodfall Near Fairy Fountain": "has(MASK_DEKU)"
+    "Woodfall": "(has(MASK_DEKU) && (soul(SOUL_DEKU_SCRUB) || event(CLEAN_SWAMP))) || event(CLEAN_SWAMP)"
+    "Woodfall Near Fairy Fountain": "has(MASK_DEKU) && (soul(SOUL_DEKU_SCRUB) || event(CLEAN_SWAMP))"
     "Woodfall Front of Temple": "event(OPEN_WOODFALL_TEMPLE)"
     "Owl Woodfall": "true"
   events:
@@ -915,8 +915,8 @@
 "Woodfall Near Fairy Fountain":
   region: WOODFALL
   exits:
-    "Woodfall": "has(MASK_DEKU) || event(CLEAN_SWAMP)"
-    "Woodfall Shrine": "has(MASK_DEKU)"
+    "Woodfall": "(has(MASK_DEKU) && (soul(SOUL_DEKU_SCRUB) || event(CLEAN_SWAMP))) || event(CLEAN_SWAMP)"
+    "Woodfall Shrine": "has(MASK_DEKU) && (soul(SOUL_DEKU_SCRUB) || event(CLEAN_SWAMP))"
     "Woodfall Fairy Fountain": "true"
   locations:
     "Woodfall Near Owl Chest": "can_hookshot"
@@ -997,8 +997,8 @@
     ARROWS: "true"
     BOMBS: "true"
     RUPEES: "true"
-    STICKS: "true"
-    NUTS: "true"
+    STICKS: "soul(SOUL_DEKU_BABA)"
+    NUTS: "soul(SOUL_DEKU_BABA)"
     BUGS: "has_bottle"
     FISH: "has_bottle"
     MUSHROOM: "has_bottle && has(MASK_SCENTS)"
@@ -1040,8 +1040,8 @@
     ARROWS: "true"
     BOMBS: "true"
     RUPEES: "true"
-    STICKS: "true"
-    NUTS: "true"
+    STICKS: "soul(SOUL_DEKU_BABA)"
+    NUTS: "soul(SOUL_DEKU_BABA)"
     BUGS: "has_bottle"
     FISH: "has_bottle"
     MUSHROOM: "has_bottle && has(MASK_SCENTS)"
@@ -1175,8 +1175,8 @@
     ARROWS: "true"
     BOMBS: "true"
     RUPEES: "true"
-    STICKS: "true"
-    NUTS: "true"
+    STICKS: "soul(SOUL_DEKU_BABA)"
+    NUTS: "soul(SOUL_DEKU_BABA)"
     BUGS: "has_bottle"
     FISH: "has_bottle"
     MUSHROOM: "has_bottle && has(MASK_SCENTS)"
@@ -1339,8 +1339,8 @@
     BOMBS: "true"
     ARROWS: "true"
     RUPEES: "true"
-    STICKS: "true"
-    NUTS: "true"
+    STICKS: "soul(SOUL_DEKU_BABA)"
+    NUTS: "soul(SOUL_DEKU_BABA)"
     BUGS: "has_bottle"
     FISH: "has_bottle"
   exits:
@@ -1385,7 +1385,7 @@
   locations:
     "Pinnacle Rock Chest 1": "has_mask_zora"
     "Pinnacle Rock Chest 2": "has_mask_zora"
-    "Pinnacle Rock HP": "has_mask_zora && event(SEAHORSE)"
+    "Pinnacle Rock HP": "soul(SOUL_DEEP_PYTHON) && has_mask_zora && event(SEAHORSE)"
 "Laboratory":
   region: ENTRANCE
   exits:
@@ -1417,8 +1417,8 @@
     ARROWS: "true"
     BOMBS: "true"
     RUPEES: "true"
-    STICKS: "true"
-    NUTS: "true"
+    STICKS: "soul(SOUL_DEKU_BABA)"
+    NUTS: "soul(SOUL_DEKU_BABA)"
     FISH: "has_bottle"
     BUGS: "has_bottle"
   exits:
@@ -1549,8 +1549,8 @@
     RUPEES: "true"
     FISH: "has_bottle"
     BUGS: "has_bottle"
-    STICKS: "true"
-    NUTS: "true"
+    STICKS: "soul(SOUL_DEKU_BABA)"
+    NUTS: "soul(SOUL_DEKU_BABA)"
   exits:
     "Road to Ikana Front": "true"
   locations:
@@ -1580,7 +1580,7 @@
     "Beneath The Graveyard Night 2": "has(MASK_CAPTAIN) && is_night2"
     "Beneath The Graveyard Night 3": "has(MASK_CAPTAIN) && is_night3"
   locations:
-    "Ikana Graveyard Captain Mask": "can_play(SONG_AWAKENING) && has_arrows && can_fight"
+    "Ikana Graveyard Captain Mask": "soul(SOUL_CAPTAIN_KEETA) && can_play(SONG_AWAKENING) && has_arrows && can_fight"
 "Ikana Graveyard Grotto":
   region: ENTRANCE
   events:
@@ -1588,8 +1588,8 @@
     BOMBS: "true"
     ARROWS: "true"
     RUPEES: "true"
-    STICKS: "true"
-    NUTS: "true"
+    STICKS: "soul(SOUL_DEKU_BABA)"
+    NUTS: "soul(SOUL_DEKU_BABA)"
     FISH: "has_bottle"
     BUGS: "has_bottle"
   exits:
@@ -1603,8 +1603,8 @@
   exits:
     "Ikana Graveyard": "true"
   locations:
-    "Beneath The Graveyard Chest": "can_fight || has_explosives || has_arrows || can_hookshot_short || has(MASK_DEKU)"
-    "Beneath The Graveyard Song of Storms": "(can_fight || has_explosives) && (has_sticks || can_use_fire_arrows)"
+    "Beneath The Graveyard Chest": "soul(SOUL_BAD_BAT) && (can_fight || has_explosives || has_arrows || can_hookshot_short || has(MASK_DEKU))"
+    "Beneath The Graveyard Song of Storms": "soul(SOUL_IRON_KNUCKLE) && ((can_fight || has_explosives) && (has_sticks || can_use_fire_arrows))"
 "Beneath The Graveyard Night 2":
   region: ENTRANCE
   events:
@@ -1613,7 +1613,7 @@
   exits:
     "Ikana Graveyard": "true"
   locations:
-    "Beneath The Graveyard HP": "(has_explosives || (trick_keg_explosives && can_fight)) && can_use_lens"
+    "Beneath The Graveyard HP": "soul(SOUL_IRON_KNUCKLE) && ((has_explosives || (trick_keg_explosives && can_fight)) && can_use_lens)"
 "Beneath The Graveyard Night 3":
   region: ENTRANCE
   events:
@@ -1654,8 +1654,8 @@
     BOMBS: "true"
     ARROWS: "true"
     RUPEES: "true"
-    STICKS: "true"
-    NUTS: "true"
+    STICKS: "soul(SOUL_DEKU_BABA)"
+    NUTS: "soul(SOUL_DEKU_BABA)"
     FISH: "has_bottle"
     BUGS: "has_bottle"
   locations:

@@ -41,19 +41,19 @@
   exits:
     "Stone Tower Temple Inverted East": "true"
     "Stone Tower Temple Inverted East Bridge": "true"
-    "Stone Tower Temple Inverted Wizzrobe": "can_use_light_arrows && cond(trick(MM_ISTT_ENTRY_JUMP), small_keys(SMALL_KEY_ST, 4), small_keys(SMALL_KEY_ST, 3))"
+    "Stone Tower Temple Inverted Wizzrobe": "(soul(SOUL_CHUCHU) || (trick(MM_ISTT_CHUCHU_LESS) && (has_chateau || has_blue_potion || has_green_potion || has_double_magic))) && can_use_light_arrows && cond(trick(MM_ISTT_ENTRY_JUMP), small_keys(SMALL_KEY_ST, 4), small_keys(SMALL_KEY_ST, 3))"
 "Stone Tower Temple Inverted Wizzrobe":
   dungeon: IST
   exits:
-    "Stone Tower Temple Inverted Wizzrobe Ledge": "can_hookshot_short"
-    "Stone Tower Temple Inverted East Ledge": "(can_use_light_arrows && small_keys(SMALL_KEY_ST, 3)) || (can_goron_bomb_jump && has_bombs && small_keys(SMALL_KEY_ST, 4))"
+    "Stone Tower Temple Inverted Wizzrobe Ledge": "soul(SOUL_WIZZROBE) && can_hookshot_short"
+    "Stone Tower Temple Inverted East Ledge": "soul(SOUL_WIZZROBE) && (can_use_light_arrows && small_keys(SMALL_KEY_ST, 3)) || (can_goron_bomb_jump && has_bombs && small_keys(SMALL_KEY_ST, 4))"
 "Stone Tower Temple Inverted Wizzrobe Ledge":
   dungeon: IST
   exits:
     "Stone Tower Temple Inverted Wizzrobe": "true"
     "Stone Tower Temple Inverted Death Armos Maze": "has(MASK_DEKU)"
   locations:
-    "Stone Tower Temple Inverted Wizrobe Chest": "true"
+    "Stone Tower Temple Inverted Wizrobe Chest": "soul(SOUL_WIZZROBE)"
 "Stone Tower Temple Inverted Death Armos Maze":
   dungeon: IST
   exits:
@@ -77,7 +77,7 @@
     "Stone Tower Temple Inverted Center": "has(MASK_DEKU)"
     "Stone Tower Temple Inverted Center Bridge": "trick(MM_ISTT_EYEGORE) && can_use_light_arrows && can_hookshot"
   locations:
-    "Stone Tower Temple Inverted Boss Key": "can_use_light_arrows"
+    "Stone Tower Temple Inverted Boss Key": "soul(SOUL_GOMESS) && can_use_light_arrows"
 "Stone Tower Temple Inverted Entrance Ledge":
   dungeon: IST
   exits:
@@ -88,11 +88,11 @@
 "Stone Tower Temple Inverted Center Bridge":
   dungeon: IST
   exits:
-    "Stone Tower Temple Inverted Pre-Boss": "true"
+    "Stone Tower Temple Inverted Pre-Boss": "soul(SOUL_EYEGORE)"
     "Stone Tower Temple Inverted Boss Key Room": "trick(MM_ISTT_EYEGORE) && (has_mask_goron || (has_explosives || (trick_keg_explosives && can_hookshot && small_keys(SMALL_KEY_ST, 4))))"
     "Stone Tower Temple Inverted Center": "trick(MM_ISTT_EYEGORE) && (has_mask_goron || (has_explosives || (trick_keg_explosives && can_hookshot)))"
   locations:
-    "Stone Tower Temple Inverted Giant Mask": "true"
+    "Stone Tower Temple Inverted Giant Mask": "soul(SOUL_EYEGORE)"
 "Stone Tower Temple Inverted Pre-Boss":
   dungeon: IST
   exits:
@@ -109,7 +109,7 @@
   boss: true
   dungeon: IST
   exits:
-    "Stone Tower After Boss": "(has_magic && ((has(MASK_GIANT) && has(SWORD)) || has(MASK_FIERCE_DEITY)))"
+    "Stone Tower After Boss": "soul(SOUL_TWINMOLD) && (has_magic && ((has(MASK_GIANT) && has(SWORD)) || has(MASK_FIERCE_DEITY)))"
 "Stone Tower After Boss":
   boss: true
   dungeon: IST

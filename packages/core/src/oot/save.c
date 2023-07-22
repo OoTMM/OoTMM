@@ -211,6 +211,12 @@ void comboCreateSave(void* unk, void* buffer)
         gOotSouls2 = 0xffffffff;
     }
 
+    if (!comboConfig(CFG_MM_SOULS))
+    {
+        gMmSouls1 = 0xffffffff;
+        gMmSouls2 = 0xffffffff;
+    }
+
     /* Apply starting items */
     applyStartingItems();
 

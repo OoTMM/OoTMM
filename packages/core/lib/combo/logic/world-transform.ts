@@ -695,7 +695,13 @@ export class LogicPassWorldTransform {
 
     /* Add souls */
     if (settings.enemySoulsOot) {
-      for (const item of ItemGroups.SOULS) {
+      for (const item of ItemGroups.OOT_SOULS) {
+        this.addItem(item);
+      }
+    }
+
+    if (settings.enemySoulsMm) {
+      for (const item of ItemGroups.MM_SOULS) {
         this.addItem(item);
       }
     }
