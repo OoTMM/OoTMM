@@ -98,7 +98,7 @@ Swamp Potion Shop Item 1,                         shop,           NONE,         
 Swamp Potion Shop Item 2,                         shop,           NONE,                   POTION_SHOP,                0x0e,                       POTION_GREEN
 Swamp Potion Shop Item 3,                         shop,           NONE,                   POTION_SHOP,                0x0f,                       POTION_RED
 Tourist Information Pictobox,                     npc,            NONE,                   TOURIST_INFORMATION,        KOUME_PICTOGRAPH_BOX,       PICTOGRAPH_BOX
-Tourist Information Boat Cruise,                  npc,            BOAT_ARCHERY,           TOURIST_INFORMATION,        KOUME_HEART_PIECE,          HEART_PIECE
+Tourist Information Boat Archery,                 npc,            BOAT_ARCHERY,           TOURIST_INFORMATION,        KOUME_HEART_PIECE,          HEART_PIECE
 Tourist Information Tingle Picture,               npc,            NONE,                   TOURIST_INFORMATION,        TOUR_GUIDE_HEART_PIECE,     HEART_PIECE
 Deku Palace HP,                                   collectible,    NONE,                   DEKU_PALACE,                0x1e,                       HEART_PIECE
 Deku Palace Sonata of Awakening,                  npc,            NONE,                   DEKU_KING_CHAMBER,          SONG_AWAKENING,             SONG_AWAKENING
