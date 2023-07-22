@@ -2,10 +2,7 @@
 #include <combo/custom.h>
 #include <combo/dma.h>
 
-static DmaEntry sDmaCache[16];
-static int sDmaCacheIndex;
-
-static const DmaEntry* dmaLookupNative(u32 vromAddr)
+static int dmaLookupNative(DmaEntry* buf, u32 vromAddr)
 {
     DmaEntry* e;
 
@@ -14,42 +11,23 @@ static const DmaEntry* dmaLookupNative(u32 vromAddr)
         e = gDmaData + i;
 
         if (vromAddr == e->vstart || (vromAddr > e->vstart && vromAddr < e->vend))
-            return e;
+        {
+            memcpy(buf, e, sizeof(DmaEntry));
+            return 1;
+        }
     }
 
-    return NULL;
+    return 0;
 }
 
-static const DmaEntry* dmaLookupCache(u32 vromAddr)
-{
-    DmaEntry* e;
-
-    for (int i = 0; i < ARRAY_SIZE(sDmaCache); ++i)
-    {
-        e = sDmaCache + i;
-
-        if (vromAddr == e->vstart || (vromAddr > e->vstart && vromAddr < e->vend))
-            return e;
-    }
-
-    return NULL;
-}
-
-ALIGNED(16) DmaEntry sTmpDmaEntries[16];
-
-static const DmaEntry* dmaLookupAlt(u32 dmaAddr, u32 dmaCount, u32 dmaFlag, u32 vromAddr)
+static int dmaLookupAlt(DmaEntry* buf, u32 dmaAddr, u32 dmaCount, u32 dmaFlag, u32 vromAddr)
 {
     const DmaEntry* e;
+    ALIGNED(16) DmaEntry sTmpDmaEntries[16];
     u32 rawVromAddr;
     u32 offset;
     int index;
 
-    /* Try to load the file from the cache */
-    e = dmaLookupCache(vromAddr);
-    if (e)
-        return e;
-
-    /* Cache miss - load from foreign DMA table */
     rawVromAddr = vromAddr & ~dmaFlag;
     offset = 0;
     for (;;)
@@ -63,22 +41,20 @@ static const DmaEntry* dmaLookupAlt(u32 dmaAddr, u32 dmaCount, u32 dmaFlag, u32 
             if (rawVromAddr == e->vstart || (rawVromAddr > e->vstart && rawVromAddr < e->vend))
             {
                 /* Found the entry - copy it to the cache */
-                index = sDmaCacheIndex;
-                sDmaCacheIndex = (sDmaCacheIndex + 1) % ARRAY_SIZE(sDmaCache);
-                memcpy(sDmaCache + index, e, sizeof(DmaEntry));
-                sDmaCache[index].vstart |= dmaFlag;
-                sDmaCache[index].vend |= dmaFlag;
-                return sDmaCache + index;
+                memcpy(buf, e, sizeof(DmaEntry));
+                buf->vstart |= dmaFlag;
+                buf->vend |= dmaFlag;
+                return 1;
             }
         }
 
         /* Didn't find the entry - try the next table */
         if (offset >= dmaCount)
-            return NULL;
+            return 0;
     }
 }
 
-static const DmaEntry* dmaLookup(u32 vromAddr)
+static int dmaLookup(DmaEntry* buf, u32 vromAddr)
 {
     u32 extraDmaAddr;
     u32 extraDmaCount;
@@ -91,45 +67,48 @@ static const DmaEntry* dmaLookup(u32 vromAddr)
         extraDmaAddr = meta[0];
         extraDmaCount = meta[1];
 
-        return dmaLookupAlt(extraDmaAddr, extraDmaCount, 0, vromAddr);
+        return dmaLookupAlt(buf, extraDmaAddr, extraDmaCount, 0, vromAddr);
     }
     else if (vromAddr & VROM_FOREIGN_OFFSET)
-        return dmaLookupAlt(DMA_ADDR_FOREIGN, DMA_COUNT_FOREIGN, VROM_FOREIGN_OFFSET, vromAddr);
+        return dmaLookupAlt(buf, DMA_ADDR_FOREIGN, DMA_COUNT_FOREIGN, VROM_FOREIGN_OFFSET, vromAddr);
     else
-        return dmaLookupNative(vromAddr);
+        return dmaLookupNative(buf, vromAddr);
 }
 
 void comboDmaLookupForeignId(DmaEntry* dst, int id)
 {
-    DMARomToRam((DMA_ADDR_FOREIGN + id * sizeof(DmaEntry)) | PI_DOM1_ADDR2, sTmpDmaEntries, sizeof(sTmpDmaEntries[0]));
-    sTmpDmaEntries[0].vstart |= VROM_FOREIGN_OFFSET;
-    sTmpDmaEntries[1].vend |= VROM_FOREIGN_OFFSET;
-    memcpy(dst, sTmpDmaEntries, sizeof(sTmpDmaEntries[0]));
+    ALIGNED(16) DmaEntry tmp;
+
+    DMARomToRam((DMA_ADDR_FOREIGN + id * sizeof(DmaEntry)) | PI_DOM1_ADDR2, &tmp, sizeof(tmp));
+    memcpy(dst, &tmp, sizeof(tmp));
+    dst->vstart |= VROM_FOREIGN_OFFSET;
+    dst->vend |= VROM_FOREIGN_OFFSET;
 }
 
 void DmaManagerRunRequest(const DmaRequest* dma)
 {
-    const DmaEntry* e;
+    DmaEntry e;
     u32 offset;
+    int ret;
 
     /* Find the file to DMA */
-    e = dmaLookup(dma->vromAddr);
-    if (!e)
+    ret = dmaLookup(&e, dma->vromAddr);
+    if (!ret)
         return;
-    if (e->pend == 0xffffffff)
+    if (e.pend == 0xffffffff)
         return;
 
-    if (e->pend == 0)
+    if (e.pend == 0)
     {
         /* File is not compressed - load and allow partial loading */
-        offset = dma->vromAddr - e->vstart;
-        DMARomToRam((e->pstart + offset) | PI_DOM1_ADDR2, dma->dramAddr, dma->size);
+        offset = dma->vromAddr - e.vstart;
+        DMARomToRam((e.pstart + offset) | PI_DOM1_ADDR2, dma->dramAddr, dma->size);
     }
     else
     {
         /* File is compressed */
         osSetThreadPri(NULL, 0x0a);
-        DmaCompressed(e->pstart, dma->dramAddr, e->pend - e->pstart);
+        DmaCompressed(e.pstart, dma->dramAddr, e.pend - e.pstart);
 #if defined(GAME_OOT)
         osSetThreadPri(NULL, 0x10);
 #else
@@ -187,20 +166,27 @@ static u32 comboDmaLoadFilePartialImpl(void* dst, const DmaEntry* e, u32 vrom, u
 
 u32 comboDmaLoadFile(void* dst, u32 vrom)
 {
-    const DmaEntry* e;
+    DmaEntry e;
     u32 size;
+    int ret;
 
-    e = dmaLookup(vrom);
-    if (e)
-        size = e->vend - e->vstart;
+    ret = dmaLookup(&e, vrom);
+    if (ret)
+        return comboDmaLoadFilePartialImpl(dst, &e, vrom, 0, e.vend - e.vstart);
     else
-        size = 0;
-    return comboDmaLoadFilePartialImpl(dst, e, vrom, 0, size);
+        return comboDmaLoadFilePartialImpl(dst, NULL, vrom, 0, 0);
 }
 
 u32 comboDmaLoadFilePartial(void* dst, u32 vrom, u32 offset, s32 size)
 {
-    return comboDmaLoadFilePartialImpl(dst, dmaLookup(vrom), vrom, offset, size);
+    DmaEntry e;
+    int ret;
+
+    ret = dmaLookup(&e, vrom);
+    if (ret)
+        return comboDmaLoadFilePartialImpl(dst, &e, vrom, offset, size);
+    else
+        return comboDmaLoadFilePartialImpl(dst, NULL, vrom, offset, size);
 }
 
 u32 comboLoadFile(void* dest, s32 fileIndex)
@@ -213,9 +199,11 @@ u32 comboLoadFile(void* dest, s32 fileIndex)
 
 u32 comboLoadForeignFile(void* dest, s32 foreignFileIndex)
 {
-    DMARomToRam((DMA_ADDR_FOREIGN + foreignFileIndex * sizeof(DmaEntry)) | PI_DOM1_ADDR2, sTmpDmaEntries, sizeof(sTmpDmaEntries[0]));
-    u32 src = sTmpDmaEntries[0].vstart;
-    u32 size = sTmpDmaEntries[0].vend - src;
+    ALIGNED(16) DmaEntry e;
+
+    DMARomToRam((DMA_ADDR_FOREIGN + foreignFileIndex * sizeof(DmaEntry)) | PI_DOM1_ADDR2, &e, sizeof(e));
+    u32 src = e.vstart;
+    u32 size = e.vend - src;
     LoadFile(dest, src | VROM_FOREIGN_OFFSET, size);
     return size;
 }

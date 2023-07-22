@@ -27,7 +27,7 @@ ALIGNED(16) const ObjectData kExtraObjectsTable[] = {
 #undef Y
 };
 
-ALIGNED(16) ObjectData kCustomObjectsTable[CUSTOM_OBJECT_TABLE_SIZE];
+ALIGNED(16) ObjectData kCustomObjectsTable[32];
 
 static const ObjectPatch kObjectPatches[] = {
 #if defined(GAME_OOT)
