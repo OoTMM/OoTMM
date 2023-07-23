@@ -237,15 +237,22 @@ typedef struct
 {
     u32     count;
     Actor*  first;
+#if defined(GAME_MM)    
+    char    unk_8[0x4];
+#endif
 }
 ActorList;
 
+ASSERT_OFFSET(Actor, variable, 0x01c);
+
 #if defined(GAME_OOT)
 _Static_assert(sizeof(Actor) == 0x13c, "OoT Actor size is wrong");
+_Static_assert(sizeof(ActorList) == 0x8, "OoT ActorList size is wrong");
 #endif
 
 #if defined(GAME_MM)
 _Static_assert(sizeof(Actor) == 0x144, "MM Actor size is wrong");
+_Static_assert(sizeof(ActorList) == 0xC, "MM ActorList size is wrong");
 #endif
 
 Actor* comboSpawnActor(void* unk, GameState_Play *play, short actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable);

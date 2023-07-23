@@ -94,15 +94,30 @@ typedef struct
 }
 EnvironmentContext;
 
+typedef struct 
+{
+    /* 0x000 */ char        unk_000[0xf];
+    /* 0x010 */ ActorList   actors[12];
+    /* 0x0a0 */ char        unk_a0[0x1b4];
+    /* 0x254 */ Actor*      elegyStatues[4];
+    /* 0x264 */ char        unk_264[0x20];
+}
+ActorContext;
+
+ASSERT_OFFSET(ActorContext, actors,         0x010);
+ASSERT_OFFSET(ActorContext, elegyStatues,   0x254);
+ASSERT_OFFSET(ActorContext, unk_264,        0x264);
+
+_Static_assert(sizeof(ActorContext) == 0x284,       "MM ActorContext size is wrong");
 _Static_assert(sizeof(EnvironmentContext) == 0x100, "MM EnvironmentContext size is wrong");
 
 typedef struct GameState_Play
 {
     GameState           gs;
     u16                 sceneId;
-    char                unk_000a6[0x01c12];
-    ActorList           actors[12];
-    char                unk_01d18[0x029a0];
+    char                unk_000a6[0x01bfa];
+    ActorContext        actorCtx;
+    char                unk_01f24[0x02794]; 
     SramContext         sramCtx;
     char                unk_046e0[0x11c10];
     char                textBuffer[4]; /* Real size unknown */
@@ -162,6 +177,9 @@ GameData;
 
 extern GameData* gGameData;
 
+ASSERT_OFFSET(GameState_Play, actorCtx,         0x01ca0);
+ASSERT_OFFSET(GameState_Play, unk_01f24,        0x01f24);
+ASSERT_OFFSET(GameState_Play, sramCtx,          0x046b8);
 ASSERT_OFFSET(GameState_Play, unk_16938,        0x16938);
 ASSERT_OFFSET(GameState_Play, interfaceCtx,     0x169e8);
 ASSERT_OFFSET(GameState_Play, envCtx,           0x17004);

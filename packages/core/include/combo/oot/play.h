@@ -267,6 +267,16 @@ ObjectContext; // size = 0x518
 
 _Static_assert(sizeof(ObjectContext) == 0x518, "ObjectContext size is wrong");
 
+typedef struct {
+    /* 0x000 */ char unk_000[0xb];
+    /* 0x00c */ ActorList actors[12];
+    /* 0x06c */ char unk_06c[0xd4];
+}
+ActorContext;
+
+ASSERT_OFFSET(ActorContext, actors, 0x00c);
+_Static_assert(sizeof(ActorContext) == 0x140, "OOT ActorContext size is wrong");
+
 #define TRANS_TYPE_NONE     0x00
 #define TRANS_TYPE_NORMAL   0x14
 
@@ -280,9 +290,9 @@ typedef struct GameState_Play
 {
     GameState           gs;
     u16                 sceneId;
-    char                unk_000a6[0x1b8a];
-    ActorList           actors[12];
-    char                unk_01c90[0x00d4];
+    char                unk_000a6[0x1b7e];
+    ActorContext        actorCtx;
+    // char                unk_01c90[0x00d4];
     CutsceneContext     cutscene;
     char                unk_1d94[0x344];
     MessageContext      msgCtx;
