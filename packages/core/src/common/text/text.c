@@ -225,6 +225,30 @@ static int isItemAmbiguousOot(s16 gi)
     case GI_OOT_RECOVERY_HEART:
     case GI_OOT_DEFENSE_UPGRADE:
         return !comboConfig(CFG_SHARED_HEALTH);
+    case GI_OOT_SOUL_OCTOROK:
+    case GI_OOT_SOUL_WALLMASTER:
+    case GI_OOT_SOUL_DODONGO:
+    case GI_OOT_SOUL_KEESE:
+    case GI_OOT_SOUL_TEKTITE:
+    case GI_OOT_SOUL_PEAHAT:
+    case GI_OOT_SOUL_LIZALFOS_DINALFOS:
+    case GI_OOT_SOUL_SKULLTULA:
+    case GI_OOT_SOUL_ARMOS:
+    case GI_OOT_SOUL_DEKU_BABA:
+    case GI_OOT_SOUL_DEKU_SCRUB:
+    case GI_OOT_SOUL_BUBBLE:
+    case GI_OOT_SOUL_BEAMOS:
+    case GI_OOT_SOUL_REDEAD_GIBDO:
+    case GI_OOT_SOUL_SKULLWALLTULA:
+    case GI_OOT_SOUL_SHELL_BLADE:
+    case GI_OOT_SOUL_LIKE_LIKE:
+    case GI_OOT_SOUL_IRON_KNUCKLE:
+    case GI_OOT_SOUL_FREEZARD:
+    case GI_OOT_SOUL_WOLFOS:
+    case GI_OOT_SOUL_GUAY:
+    case GI_OOT_SOUL_FLYING_POT:
+    case GI_OOT_SOUL_FLOORMASTER:
+        return 1;
     case GI_OOT_BOMBCHU_10:
     case GI_OOT_MAGIC_BEAN:
     case GI_OOT_BOTTLE_EMPTY:
@@ -324,6 +348,30 @@ static int isItemAmbiguousMm(s16 gi)
     case GI_MM_RECOVERY_HEART:
     case GI_MM_DEFENSE_UPGRADE:
         return !comboConfig(CFG_SHARED_HEALTH);
+    case GI_MM_SOUL_OCTOROK:
+    case GI_MM_SOUL_WALLMASTER:
+    case GI_MM_SOUL_DODONGO:
+    case GI_MM_SOUL_KEESE:
+    case GI_MM_SOUL_TEKTITE:
+    case GI_MM_SOUL_PEAHAT:
+    case GI_MM_SOUL_LIZALFOS_DINALFOS:
+    case GI_MM_SOUL_SKULLTULA:
+    case GI_MM_SOUL_ARMOS:
+    case GI_MM_SOUL_DEKU_BABA:
+    case GI_MM_SOUL_DEKU_SCRUB:
+    case GI_MM_SOUL_BUBBLE:
+    case GI_MM_SOUL_BEAMOS:
+    case GI_MM_SOUL_REDEAD_GIBDO:
+    case GI_MM_SOUL_SKULLWALLTULA:
+    case GI_MM_SOUL_SHELL_BLADE:
+    case GI_MM_SOUL_LIKE_LIKE:
+    case GI_MM_SOUL_IRON_KNUCKLE:
+    case GI_MM_SOUL_FREEZARD:
+    case GI_MM_SOUL_WOLFOS:
+    case GI_MM_SOUL_GUAY:
+    case GI_MM_SOUL_FLYING_POT:
+    case GI_MM_SOUL_FLOORMASTER:
+        return 1;
     case GI_MM_BOMBCHU:
     case GI_MM_MAGIC_BEAN:
     case GI_MM_BOTTLE_POTION_RED:
