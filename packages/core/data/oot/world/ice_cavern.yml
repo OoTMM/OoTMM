@@ -2,7 +2,7 @@
   dungeon: IC
   exits:
     "Zora Fountain Frozen": "true"
-    "Ice Cavern Scythe": "soul(SOUL_FREEZARD) && (can_use_sword_master || can_use_sword_goron || can_use_sticks || has_explosives)"
+    "Ice Cavern Scythe": "soul_freezard && (can_use_sword_master || can_use_sword_goron || can_use_sticks || has_explosives)"
 "Ice Cavern Scythe":
   dungeon: IC
   exits:
@@ -52,7 +52,7 @@
 "Ice Cavern End":
   dungeon: IC
   exits:
-    "Ice Cavern Block Room": "has_blue_fire && soul(SOUL_WOLFOS)"
+    "Ice Cavern Block Room": "has_blue_fire && soul_wolfos"
   locations:
-    "Ice Cavern Iron Boots": "soul(SOUL_WOLFOS)"
-    "Ice Cavern Sheik Song": "soul(SOUL_WOLFOS)"
+    "Ice Cavern Iron Boots": "soul_wolfos"
+    "Ice Cavern Sheik Song": "soul_wolfos"

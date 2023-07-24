@@ -57,6 +57,7 @@ export class LogicPassConfig {
       SHARED_MASK_KEATON: settings.sharedMaskKeaton,
       SHARED_WALLETS: settings.sharedWallets,
       SHARED_HEALTH: settings.sharedHealth,
+      SHARED_SOULS: settings.sharedSouls,
       OOT_CROSS_WARP: settings.crossWarpOot,
       MM_CROSS_WARP: settings.crossWarpMm !== 'none',
       MM_CROSS_WARP_ADULT: settings.crossWarpMm === 'full',

@@ -19,9 +19,9 @@
   dungeon: GTG
   exits:
     "Gerudo Training Grounds": "true"
-    "Gerudo Training Grounds Lava Room": "soul(SOUL_LIZALFOS_DINALFOS) && soul(SOUL_ARMOS) && soul(SOUL_DODONGO) && (can_use_sword_master || can_use_sword_goron)"
+    "Gerudo Training Grounds Lava Room": "soul_lizalfos_dinalfos && soul_armos && soul_dodongo && (can_use_sword_master || can_use_sword_goron)"
   locations:
-    "MQ Gerudo Training Grounds Right Side Dinolfos Chest": "soul(SOUL_LIZALFOS_DINALFOS) && soul(SOUL_ARMOS) && soul(SOUL_DODONGO) && (can_use_sword_master || can_use_sword_goron)" #This room is too difficult for child to do with other means
+    "MQ Gerudo Training Grounds Right Side Dinolfos Chest": "soul_lizalfos_dinalfos && soul_armos && soul_dodongo && (can_use_sword_master || can_use_sword_goron)" #This room is too difficult for child to do with other means
 "Gerudo Training Grounds Lava Room":
   dungeon: GTG
   exits:
@@ -50,7 +50,7 @@
 "Gerudo Training Grounds Left Path":
   dungeon: GTG
   events:
-    GTG_IRON_KNUCKLE: "soul(SOUL_IRON_KNUCKLE) && (has_weapon || can_use_sticks) && (has_shield || is_adult)" #Kid's size, the sand, and the time limit together make this fight unreasonable without shield, mountains of health, or Nayru's.
+    GTG_IRON_KNUCKLE: "soul_iron_knuckle && (has_weapon || can_use_sticks) && (has_shield || is_adult)" #Kid's size, the sand, and the time limit together make this fight unreasonable without shield, mountains of health, or Nayru's.
   exits:
     "Gerudo Training Grounds": "true"
     "Gerudo Training Grounds Slopes": "event(GTG_IRON_KNUCKLE)"
@@ -74,8 +74,8 @@
   events:
     BLUE_FIRE: "has_bottle"
   locations:
-    "MQ Gerudo Training Grounds Stalfos Room Chest": "soul(SOUL_STALFOS) && soul(SOUL_SKULLTULA)"
-    "MQ Gerudo Training Grounds Silver Block Room Chest": "can_lift_silver && soul(SOUL_SPIKE) && soul(SOUL_FREEZARD)"
+    "MQ Gerudo Training Grounds Stalfos Room Chest": "soul(SOUL_STALFOS) && soul_skulltula"
+    "MQ Gerudo Training Grounds Silver Block Room Chest": "can_lift_silver && soul(SOUL_SPIKE) && soul_freezard"
 "Gerudo Training Grounds Spinning Statue Room":
   dungeon: GTG
   exits:
@@ -86,7 +86,7 @@
     GTG_LAVA_TARGETS: "has(RUPEE_SILVER_GTG_LAVA, 6)"
   locations:
     "MQ Gerudo Training Grounds Spinning Statue Chest": "can_use_bow"
-    "MQ Gerudo Training Grounds Torch Slug Room Clear Chest": "soul(SOUL_IRON_KNUCKLE) && soul(SOUL_TORCH_SLUG)"
+    "MQ Gerudo Training Grounds Torch Slug Room Clear Chest": "soul_iron_knuckle && soul(SOUL_TORCH_SLUG)"
     "MQ Gerudo Training Grounds Torch Slug Room Switch Chest": "has_ranged_weapon" #You are no longer guaranteed a hook due to silver rupee shuffle.
     "MQ Gerudo Training Grounds Maze Right Side Middle Chest": "event(GTG_LAVA_HAMMER) && (can_longshot || (can_hookshot && (has_fire_arrows || (has_hover_boots && event(GTG_LAVA_TARGETS)) || trick(OOT_MQ_GTG_FLAMES))))"
     "MQ Gerudo Training Grounds Maze Right Side Right Chest": "event(GTG_LAVA_HAMMER) && (can_longshot || (can_hookshot && (has_fire_arrows || (has_hover_boots && event(GTG_LAVA_TARGETS)) || trick(OOT_MQ_GTG_FLAMES))))"

@@ -2,7 +2,7 @@
   dungeon: Ganon
   exits:
     "Ganon Castle Exterior After Bridge": "true"
-    "Ganon Castle Main": "soul(SOUL_IRON_KNUCKLE) && soul(SOUL_ARMOS) && soul(SOUL_BUBBLE) && (can_use_sword_master || can_use_sword_goron || (can_use_sticks && (has_ranged_weapon_child || can_use_bow)) || has_explosives_or_hammer)"
+    "Ganon Castle Main": "soul_iron_knuckle && soul_armos && soul_bubble && (can_use_sword_master || can_use_sword_goron || (can_use_sticks && (has_ranged_weapon_child || can_use_bow)) || has_explosives_or_hammer)"
 "Ganon Castle Main":
   dungeon: Ganon
   exits:
@@ -23,9 +23,9 @@
 "Ganon Castle Light":
   dungeon: Ganon
   events:
-    GANON_TRIAL_LIGHT: "soul(SOUL_LIZALFOS_DINALFOS) && soul(SOUL_TORCH_SLUG) && has_light_arrows && has_lens && can_hookshot && small_keys(SMALL_KEY_GANON, 3)"
+    GANON_TRIAL_LIGHT: "soul_lizalfos_dinalfos && soul(SOUL_TORCH_SLUG) && has_light_arrows && has_lens && can_hookshot && small_keys(SMALL_KEY_GANON, 3)"
   locations:
-    "MQ Ganon Castle Light Trial Chest": "soul(SOUL_LIZALFOS_DINALFOS) && soul(SOUL_TORCH_SLUG) && can_play(SONG_ZELDA) && has_weapon"
+    "MQ Ganon Castle Light Trial Chest": "soul_lizalfos_dinalfos && soul(SOUL_TORCH_SLUG) && can_play(SONG_ZELDA) && has_weapon"
 "Ganon Castle Forest":
   dungeon: Ganon
   events:
@@ -65,15 +65,15 @@
 "Ganon Castle Spirit":
   dungeon: Ganon
   events:
-    GANON_TRIAL_SPIRIT: "has_light_arrows && has_fire_arrows && has_mirror_shield && can_hammer && has_bombchu && (soul(SOUL_IRON_KNUCKLE) || trick(OOT_HAMMER_WALLS))"
+    GANON_TRIAL_SPIRIT: "has_light_arrows && has_fire_arrows && has_mirror_shield && can_hammer && has_bombchu && (soul_iron_knuckle || trick(OOT_HAMMER_WALLS))"
   locations:
-    "MQ Ganon Castle Spirit Trial First Chest": "can_hammer && ((can_use_bow && soul(SOUL_IRON_KNUCKLE)) || trick(OOT_HAMMER_WALLS))"
-    "MQ Ganon Castle Spirit Trial Second Chest": "can_hammer && ((can_use_bow && soul(SOUL_IRON_KNUCKLE)) || trick(OOT_HAMMER_WALLS)) && has_bombchu && has_lens"
+    "MQ Ganon Castle Spirit Trial First Chest": "can_hammer && ((can_use_bow && soul_iron_knuckle) || trick(OOT_HAMMER_WALLS))"
+    "MQ Ganon Castle Spirit Trial Second Chest": "can_hammer && ((can_use_bow && soul_iron_knuckle) || trick(OOT_HAMMER_WALLS)) && has_bombchu && has_lens"
     #Chests are named relative to facing the door to the end of the trial
-    "MQ Ganon Castle Spirit Trial Back Right Sun Chest": "can_hammer && has_fire_arrows && has_mirror_shield && has_bombchu && (soul(SOUL_IRON_KNUCKLE) || trick(OOT_HAMMER_WALLS))"
-    "MQ Ganon Castle Spirit Trial Back Left Sun Chest": "can_hammer && has_fire_arrows && has_mirror_shield && has_bombchu && (soul(SOUL_IRON_KNUCKLE) || trick(OOT_HAMMER_WALLS))"
-    "MQ Ganon Castle Spirit Trial Front Left Sun Chest": "can_hammer && has_fire_arrows && has_mirror_shield && has_bombchu && (soul(SOUL_IRON_KNUCKLE) || trick(OOT_HAMMER_WALLS))"
-    "MQ Ganon Castle Spirit Trial Gold Gauntlets Chest": "can_hammer && has_fire_arrows && has_mirror_shield && has_bombchu && (soul(SOUL_IRON_KNUCKLE) || trick(OOT_HAMMER_WALLS))"
+    "MQ Ganon Castle Spirit Trial Back Right Sun Chest": "can_hammer && has_fire_arrows && has_mirror_shield && has_bombchu && (soul_iron_knuckle || trick(OOT_HAMMER_WALLS))"
+    "MQ Ganon Castle Spirit Trial Back Left Sun Chest": "can_hammer && has_fire_arrows && has_mirror_shield && has_bombchu && (soul_iron_knuckle || trick(OOT_HAMMER_WALLS))"
+    "MQ Ganon Castle Spirit Trial Front Left Sun Chest": "can_hammer && has_fire_arrows && has_mirror_shield && has_bombchu && (soul_iron_knuckle || trick(OOT_HAMMER_WALLS))"
+    "MQ Ganon Castle Spirit Trial Gold Gauntlets Chest": "can_hammer && has_fire_arrows && has_mirror_shield && has_bombchu && (soul_iron_knuckle || trick(OOT_HAMMER_WALLS))"
 "Ganon Castle Shadow":
   dungeon: Ganon
   events:

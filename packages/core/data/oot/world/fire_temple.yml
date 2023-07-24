@@ -18,7 +18,7 @@
   dungeon: Fire
   exits:
     "Fire Temple": "true"
-    "Fire Temple Boss Key Loop Floor Tiles": "soul(SOUL_KEESE) && soul(SOUL_TORCH_SLUG)"
+    "Fire Temple Boss Key Loop Floor Tiles": "soul_keese && soul(SOUL_TORCH_SLUG)"
 "Fire Temple Boss Key Loop Floor Tiles":
   dungeon: Fire
   exits:

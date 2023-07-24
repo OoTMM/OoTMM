@@ -239,8 +239,7 @@ export class LogicPassWorld {
     this.loadEntrances(game);
   }
 
-  private loadMacros(game: Game, exprParser: ExprParser) {
-    const data = DATA_MACROS[game];
+  private loadMacrosFile(exprParser: ExprParser, data: any) {
     for (let name in data) {
       const buffer = data[name];
 
@@ -254,6 +253,11 @@ export class LogicPassWorld {
       const args = parts.slice(1);
       exprParser.addMacro(name, args, buffer);
     }
+  }
+
+  private loadMacros(game: Game, exprParser: ExprParser) {
+    this.loadMacrosFile(exprParser, DATA_MACROS.common);
+    this.loadMacrosFile(exprParser, DATA_MACROS[game]);
   }
 
   private loadAreas(game: Game, exprParser: ExprParser) {

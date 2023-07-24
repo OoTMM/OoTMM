@@ -9,7 +9,7 @@
     "Jabu-Jabu": "true"
     "Jabu-Jabu Pre-Boss": "event(BIG_OCTO) || (has_hover_boots && trick(OOT_JABU_BOSS_HOVER))"
   events:
-    BIG_OCTO: "soul(SOUL_OCTOROK) && soul(SOUL_BIRI_BARI) && can_boomerang && (has_weapon || can_use_sticks)"
+    BIG_OCTO: "soul_octorok && soul(SOUL_BIRI_BARI) && can_boomerang && (has_weapon || can_use_sticks)"
   locations:
     "Jabu-Jabu Map Chest": "can_boomerang"
     "Jabu-Jabu Compass Chest": "can_boomerang && soul(SOUL_SHABOM)"

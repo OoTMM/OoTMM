@@ -30,7 +30,7 @@
     "Snowhead Temple Main": "true"
     "Snowhead Temple Bridge Back": "goron_fast_roll || can_hookshot"
   locations:
-    "Snowhead Temple Bridge Room": "soul(SOUL_FREEZARD) && can_hookshot_short"
+    "Snowhead Temple Bridge Room": "soul_freezard && can_hookshot_short"
     "Snowhead Temple SF Bridge Under Platform": "(has_arrows || can_hookshot) && has(MASK_GREAT_FAIRY)"
     "Snowhead Temple SF Bridge Pillar": "can_use_lens && (has_arrows || can_hookshot_short) && has(MASK_GREAT_FAIRY)"
 "Snowhead Temple Bridge Back":
@@ -40,7 +40,7 @@
     "Snowhead Temple Bridge Front": "true"
     "Snowhead Temple Center Level 1": "true"
   locations:
-    "Snowhead Temple Bridge Room": "soul(SOUL_FREEZARD) && can_use_fire_arrows"
+    "Snowhead Temple Bridge Room": "soul_freezard && can_use_fire_arrows"
     "Snowhead Temple SF Bridge Under Platform": "has_weapon_range && has(MASK_GREAT_FAIRY)"
 "Snowhead Temple Map Room":
   dungeon: SH
@@ -77,7 +77,7 @@
   events:
     SNOWHEAD_RAISE_PILLAR: "has_mask_goron && (can_use_fire_arrows || (event(SHT_STICK_RUN) && trick(MM_SHT_STICKS_RUN)))"
   locations:
-    "Snowhead Temple Pillars Room": "soul(SOUL_FREEZARD)"
+    "Snowhead Temple Pillars Room": "soul_freezard"
 "Snowhead Temple Center Level 0":
   dungeon: SH
   exits:
@@ -178,8 +178,8 @@
     "Snowhead Temple Center Level 3 Snow": "true"
     "Snowhead Temple Center Level 4": "trick(MM_SHT_PILLARLESS) && (can_use_fire_arrows || has_bombs)"
   locations:
-    "Snowhead Temple SF Dinolfos 1": "soul(SOUL_LIZALFOS_DINALFOS)"
-    "Snowhead Temple SF Dinolfos 2": "soul(SOUL_LIZALFOS_DINALFOS)"
+    "Snowhead Temple SF Dinolfos 1": "soul_lizalfos_dinalfos"
+    "Snowhead Temple SF Dinolfos 2": "soul_lizalfos_dinalfos"
 "Snowhead Temple Boss Key Room":
   dungeon: SH
   exits:

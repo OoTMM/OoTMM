@@ -876,6 +876,13 @@ export const SETTINGS = [{
   type: 'boolean',
   default: false
 }, {
+  key: 'sharedSouls',
+  name: 'Shared Souls',
+  category: 'items.shared',
+  type: 'boolean',
+  default: false,
+  cond: (s: any) => s.enemySoulsOot && s.enemySoulsMm,
+}, {
   key: 'agelessSwords',
   name: 'Ageless Swords',
   category: 'items.ageless',

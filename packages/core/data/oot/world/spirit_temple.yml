@@ -13,8 +13,8 @@
   exits:
     "Spirit Temple": "is_child"
     "Spirit Temple Child Climb": "is_child && small_keys(SMALL_KEY_SPIRIT, 1)"
-    "Spirit Temple Child Left": "soul(SOUL_KEESE) && soul(SOUL_ARMOS) && (can_use_sticks || has_explosives_or_hammer || ((can_boomerang || has_nuts) && (has_weapon || can_use_slingshot)))"
-    "Spirit Temple Child Right": "soul(SOUL_KEESE) && soul(SOUL_ARMOS) && (can_use_sticks || has_explosives_or_hammer || ((can_boomerang || has_nuts) && (has_weapon || can_use_slingshot)))"
+    "Spirit Temple Child Left": "soul_keese && soul_armos && (can_use_sticks || has_explosives_or_hammer || ((can_boomerang || has_nuts) && (has_weapon || can_use_slingshot)))"
+    "Spirit Temple Child Right": "soul_keese && soul_armos && (can_use_sticks || has_explosives_or_hammer || ((can_boomerang || has_nuts) && (has_weapon || can_use_slingshot)))"
 "Spirit Temple Child Left":
   dungeon: Spirit
   exits:
@@ -60,7 +60,7 @@
   dungeon: Spirit
   exits:
     "Spirit Temple Statue": "true"
-    "Spirit Temple Child Hand": "small_keys(SMALL_KEY_SPIRIT, 5) && soul(SOUL_IRON_KNUCKLE)"
+    "Spirit Temple Child Hand": "small_keys(SMALL_KEY_SPIRIT, 5) && soul_iron_knuckle"
   locations:
     "Spirit Temple Sun Block Room Torches": "(event(SPIRIT_CHILD_DOOR) && can_use_sticks && has(RUPEE_SILVER_SPIRIT_SUN, 5)) || (has_fire_spirit && has(RUPEE_SILVER_SPIRIT_SUN, 5)) || (has_fire_arrows && small_keys(SMALL_KEY_SPIRIT, 4))"
     "Spirit Temple SR Sun 1": "true"
@@ -126,17 +126,17 @@
 "Spirit Temple Adult Upper":
   dungeon: Spirit
   exits:
-    "Spirit Temple Adult Upper 2": "has_explosives && soul(SOUL_BEAMOS) && soul(SOUL_ANUBIS)"
+    "Spirit Temple Adult Upper 2": "has_explosives && soul_beamos && soul(SOUL_ANUBIS)"
     "Spirit Temple Adult Climb 2": "small_keys(SMALL_KEY_SPIRIT, 5)"
 "Spirit Temple Adult Upper 2":
   dungeon: Spirit
   exits:
     "Spirit Temple Adult Upper": "true"
-    "Spirit Temple Adult Hand": "soul(SOUL_ARMOS) && soul(SOUL_IRON_KNUCKLE)"
+    "Spirit Temple Adult Hand": "soul_armos && soul_iron_knuckle"
   locations:
     "Spirit Temple Adult Late Sun on Wall": "has_mirror_shield"
-    "Spirit Temple Adult Invisible 1": "has_lens && soul(SOUL_ARMOS)"
-    "Spirit Temple Adult Invisible 2": "has_lens && soul(SOUL_ARMOS)"
+    "Spirit Temple Adult Invisible 1": "has_lens && soul_armos"
+    "Spirit Temple Adult Invisible 2": "has_lens && soul_armos"
 "Spirit Temple Adult Hand":
   dungeon: Spirit
   exits:

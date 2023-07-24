@@ -6,7 +6,7 @@
 "Ice Cavern Main":
   dungeon: IC
   exits:
-    "Ice Cavern Map Room": "soul(SOUL_WOLFOS) && soul(SOUL_FREEZARD) && (has_weapon || can_use_sticks || has_explosives)"
+    "Ice Cavern Map Room": "soul_wolfos && soul_freezard && (has_weapon || can_use_sticks || has_explosives)"
     "Ice Cavern Compass Room": "is_adult && has_blue_fire"
     "Ice Cavern Big Room": "has_blue_fire"
 "Ice Cavern Map Room":

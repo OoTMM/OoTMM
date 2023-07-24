@@ -67,7 +67,7 @@
   boss: true
   dungeon: Spirit
   exits:
-    "Spirit Temple After Boss": "soul(SOUL_TWINROVA) && soul(SOUL_IRON_KNUCKLE) && has_mirror_shield && has_weapon"
+    "Spirit Temple After Boss": "soul(SOUL_TWINROVA) && soul_iron_knuckle && has_mirror_shield && has_weapon"
 "Spirit Temple After Boss":
   boss: true
   dungeon: Spirit

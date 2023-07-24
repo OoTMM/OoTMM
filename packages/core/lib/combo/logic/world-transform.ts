@@ -5,6 +5,7 @@ import { Settings } from '../settings';
 import { countMapAdd } from '../util';
 import { exprTrue } from './expr';
 import { LOCATIONS_ZELDA, Location, isLocationRenewable, locationData, makeLocation } from './locations';
+import { ItemSharedDef, SharedItemGroups } from './shared';
 import { World } from './world';
 
 const EXTRA_ITEMS = new Set([
@@ -426,6 +427,22 @@ export class LogicPassWorldTransform {
     this.mergeHearts();
   }
 
+  private shareItems(defs: ItemSharedDef[]) {
+    for (let playerId = 0; playerId < this.state.worlds.length; ++playerId) {
+      for (const def of defs) {
+        const piShared = makePlayerItem(def.shared, playerId);
+        const piOot = makePlayerItem(def.oot, playerId);
+        const piMm = makePlayerItem(def.mm, playerId);
+        const amountOot = this.pool.get(piOot) || 0;
+        const amountMm = this.pool.get(piMm) || 0;
+        const newAmount = (amountOot + amountMm) / 2;
+        this.removePlayerItem(piOot);
+        this.removePlayerItem(piMm);
+        this.addPlayerItem(piShared, newAmount);
+      }
+    }
+  }
+
   /**
    * Setup the shared items.
    */
@@ -623,6 +640,10 @@ export class LogicPassWorldTransform {
       /* Recovery */
       this.replaceItem(Items.OOT_RECOVERY_HEART, Items.SHARED_RECOVERY_HEART);
       this.replaceItem(Items.MM_RECOVERY_HEART,  Items.SHARED_RECOVERY_HEART);
+    }
+
+    if (settings.sharedSouls) {
+      this.shareItems(SharedItemGroups.SOULS);
     }
 
     switch (settings.itemPool) {

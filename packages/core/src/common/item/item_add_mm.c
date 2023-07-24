@@ -331,8 +331,11 @@ static void refillMagic(int level)
     gMmSave.playerData.magicAmount = level * 0x30;
 }
 
-static void addSoul(int index)
+void comboAddSoulMm(s16 gi)
 {
+    int index;
+
+    index = gi - GI_MM_SOUL_OCTOROK;
     if (index >= 32)
         gMmSouls2 |= (1 << (index - 32));
     else
@@ -690,6 +693,82 @@ void comboAddItemSharedMm(s16 gi, int noEffect)
             break;
         case GI_MM_DEFENSE_UPGRADE:
             comboAddCommonItemOot(SITEM_DEFENSE_UPGRADE, noEffect);
+            break;
+        }
+    }
+
+    if (comboConfig(CFG_SHARED_SOULS))
+    {
+        switch (gi)
+        {
+        case GI_MM_SOUL_OCTOROK:
+            comboAddSoulOot(GI_OOT_SOUL_OCTOROK);
+            break;
+        case GI_MM_SOUL_WALLMASTER:
+            comboAddSoulOot(GI_OOT_SOUL_WALLMASTER);
+            break;
+        case GI_MM_SOUL_DODONGO:
+            comboAddSoulOot(GI_OOT_SOUL_DODONGO);
+            break;
+        case GI_MM_SOUL_KEESE:
+            comboAddSoulOot(GI_OOT_SOUL_KEESE);
+            break;
+        case GI_MM_SOUL_TEKTITE:
+            comboAddSoulOot(GI_OOT_SOUL_TEKTITE);
+            break;
+        case GI_MM_SOUL_PEAHAT:
+            comboAddSoulOot(GI_OOT_SOUL_PEAHAT);
+            break;
+        case GI_MM_SOUL_LIZALFOS_DINALFOS:
+            comboAddSoulOot(GI_OOT_SOUL_LIZALFOS_DINALFOS);
+            break;
+        case GI_MM_SOUL_SKULLTULA:
+            comboAddSoulOot(GI_OOT_SOUL_SKULLTULA);
+            break;
+        case GI_MM_SOUL_ARMOS:
+            comboAddSoulOot(GI_OOT_SOUL_ARMOS);
+            break;
+        case GI_MM_SOUL_DEKU_BABA:
+            comboAddSoulOot(GI_OOT_SOUL_DEKU_BABA);
+            break;
+        case GI_MM_SOUL_DEKU_SCRUB:
+            comboAddSoulOot(GI_OOT_SOUL_DEKU_SCRUB);
+            break;
+        case GI_MM_SOUL_BUBBLE:
+            comboAddSoulOot(GI_OOT_SOUL_BUBBLE);
+            break;
+        case GI_MM_SOUL_BEAMOS:
+            comboAddSoulOot(GI_OOT_SOUL_BEAMOS);
+            break;
+        case GI_MM_SOUL_REDEAD_GIBDO:
+            comboAddSoulOot(GI_OOT_SOUL_REDEAD_GIBDO);
+            break;
+        case GI_MM_SOUL_SKULLWALLTULA:
+            comboAddSoulOot(GI_OOT_SOUL_SKULLWALLTULA);
+            break;
+        case GI_MM_SOUL_SHELL_BLADE:
+            comboAddSoulOot(GI_OOT_SOUL_SHELL_BLADE);
+            break;
+        case GI_MM_SOUL_LIKE_LIKE:
+            comboAddSoulOot(GI_OOT_SOUL_LIKE_LIKE);
+            break;
+        case GI_MM_SOUL_IRON_KNUCKLE:
+            comboAddSoulOot(GI_OOT_SOUL_IRON_KNUCKLE);
+            break;
+        case GI_MM_SOUL_FREEZARD:
+            comboAddSoulOot(GI_OOT_SOUL_FREEZARD);
+            break;
+        case GI_MM_SOUL_WOLFOS:
+            comboAddSoulOot(GI_OOT_SOUL_WOLFOS);
+            break;
+        case GI_MM_SOUL_GUAY:
+            comboAddSoulOot(GI_OOT_SOUL_GUAY);
+            break;
+        case GI_MM_SOUL_FLYING_POT:
+            comboAddSoulOot(GI_OOT_SOUL_FLYING_POT);
+            break;
+        case GI_MM_SOUL_FLOORMASTER:
+            comboAddSoulOot(GI_OOT_SOUL_FLOORMASTER);
             break;
         }
     }
@@ -1234,7 +1313,7 @@ int comboAddItemMm(s16 gi, int noEffect)
     case GI_MM_SOUL_GOHT:
     case GI_MM_SOUL_GYORG:
     case GI_MM_SOUL_TWINMOLD:
-        addSoul(gi - GI_MM_SOUL_OCTOROK);
+        comboAddSoulMm(gi);
         break;
     }
 

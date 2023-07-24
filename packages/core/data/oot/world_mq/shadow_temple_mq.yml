@@ -15,7 +15,7 @@
 "Shadow Temple First Locked Door":
   dungeon: Shadow
   locations:
-    "MQ Shadow Temple Compass Chest": "soul(SOUL_REDEAD_GIBDO) && (has_weapon || can_use_sticks || can_use_din)"
+    "MQ Shadow Temple Compass Chest": "soul_redead_gibdo && (has_weapon || can_use_sticks || can_use_din)"
     "MQ Shadow Temple Hover Boots Chest": "can_play_time && can_hit_triggers_distance && soul(SOUL_DEAD_HAND) && (has_weapon || (can_use_sticks && trick(OOT_DEAD_HAND_STICKS)))"
 "Shadow Temple First Beamos":
   dungeon: Shadow
@@ -23,12 +23,12 @@
     "Shadow Temple Upper Huge Pit": "has_explosives && small_keys(SMALL_KEY_SHADOW, 2)"
     "Shadow Temple Scythe Room": "true"
   locations:
-    "MQ Shadow Temple First Gibdos Chest": "soul(SOUL_REDEAD_GIBDO) && (has_weapon || can_use_sticks || can_use_din)"
+    "MQ Shadow Temple First Gibdos Chest": "soul_redead_gibdo && (has_weapon || can_use_sticks || can_use_din)"
     "MQ Shadow Temple Boat Passage Chest": "true"
 "Shadow Temple Scythe Room":
   dungeon: Shadow
   exits:
-    "Shadow Temple First Beamos": "has(RUPEE_SILVER_SHADOW_BLADES, 5) && soul(SOUL_SKULLTULA) && (can_damage || has_ranged_weapon_adult || can_use_slingshot || can_hammer)"
+    "Shadow Temple First Beamos": "has(RUPEE_SILVER_SHADOW_BLADES, 5) && soul_skulltula && (can_damage || has_ranged_weapon_adult || can_use_slingshot || can_hammer)"
   locations:
     "MQ Shadow Temple SR Scythe 1": "true"
     "MQ Shadow Temple SR Scythe 2": "can_hookshot || (is_adult && has_hover_boots)"
@@ -80,7 +80,7 @@
   exits:
     "Shadow Temple Wind Tunnel": "small_keys(SMALL_KEY_SHADOW, 4) && can_hookshot"
   locations:
-    "MQ Shadow Temple Invisible Spike Floor Chest": "soul(SOUL_REDEAD_GIBDO) && (has_weapon || can_use_sticks || can_use_din)"
+    "MQ Shadow Temple Invisible Spike Floor Chest": "soul_redead_gibdo && (has_weapon || can_use_sticks || can_use_din)"
     "MQ Shadow Temple Stalfos Room Chest": "has(RUPEE_SILVER_SHADOW_SPIKES, 10) && soul(SOUL_STALFOS) && has_weapon"
     "MQ Shadow Temple SR Spikes Left Corner": "can_hookshot"
     "MQ Shadow Temple SR Spikes Left Wall": "can_hookshot"
@@ -98,7 +98,7 @@
     "Shadow Temple Boat": "small_keys(SMALL_KEY_SHADOW, 5) && can_play(SONG_ZELDA) && is_adult && (can_hookshot || has(STRENGTH))"
   locations:
     "MQ Shadow Temple Wind Hint Chest": "true"
-    "MQ Shadow Temple After Wind Gibdos Chest": "soul(SOUL_REDEAD_GIBDO) && soul(SOUL_FLYING_POT) && (has_weapon || can_use_sticks || can_use_din)"
+    "MQ Shadow Temple After Wind Gibdos Chest": "soul_redead_gibdo && soul_flying_pot && (has_weapon || can_use_sticks || can_use_din)"
     "MQ Shadow Temple After Wind Bomb Chest": "has_explosives"
     "MQ Shadow Temple GS Wind Hint": "true"
     "MQ Shadow Temple GS After Wind Bomb": "has_explosives"

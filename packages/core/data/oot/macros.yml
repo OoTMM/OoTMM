@@ -26,12 +26,6 @@
 "has_bottle": "has(BOTTLE_EMPTY) || has(BOTTLE_MILK) || event(KING_ZORA_LETTER)"
 "can_use_beans": "is_child && has(MAGIC_BEAN)"
 
-# Songs
-"can_play_sun": "can_play(SONG_SUN) || can_play(SHARED_SONG_SUN)"
-"can_play_time": "can_play(SONG_TIME) || can_play(SHARED_SONG_TIME)"
-"can_play_epona": "can_play(SONG_EPONA) || can_play(SHARED_SONG_EPONA)"
-"can_play_storms": "can_play(SONG_STORMS) || can_play(SHARED_SONG_STORMS)"
-
 # Age macros
 "age_sticks": "glitch_equip_swap || is_child || setting(agelessSticks)"
 "age_boomerang": "glitch_equip_swap || is_child || setting(agelessBoomerang)"
@@ -116,8 +110,8 @@
 "can_damage": "has_weapon || can_use_sticks || has_explosives || can_use_slingshot || can_use_din"
 "can_damage_skull": "can_damage || can_collect_distance"
 "can_cut_grass": "has_weapon || can_boomerang || has(STRENGTH)"
-"can_kill_baba_sticks": "soul(SOUL_DEKU_BABA) && (can_boomerang || (has_weapon && (is_child || has_nuts || can_hookshot || can_hammer)))"
-"can_kill_baba_nuts": "soul(SOUL_DEKU_BABA) && (has_weapon || has_explosives || can_use_slingshot)"
+"can_kill_baba_sticks": "soul_deku_baba && (can_boomerang || (has_weapon && (is_child || has_nuts || can_hookshot || can_hammer)))"
+"can_kill_baba_nuts": "soul_deku_baba && (has_weapon || has_explosives || can_use_slingshot)"
 "can_hit_scrub": "has_nuts || can_hit_triggers_distance || has_shield_for_scrubs || can_collect_distance || can_hammer"
 "has_small_key_gerudo": "setting(gerudoFortress, open) || cond(setting(gerudoFortress, single), has(SMALL_KEY_GF, 1), has(SMALL_KEY_GF, 4))"
 "can_rescue_carpenter": "has_small_key_gerudo && (has_weapon || ((can_boomerang || has_nuts) && can_use_sticks))"

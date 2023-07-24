@@ -3,9 +3,9 @@
   exits:
     "Fire Temple Entry": "true"
     "Fire Temple Upper Lobby": "is_adult && has_tunic_goron"
-    "Fire Temple Vanilla Hammer Loop": "small_keys(SMALL_KEY_FIRE, 5) && has_weapon && soul(SOUL_KEESE) && soul(SOUL_STALFOS) && soul(SOUL_IRON_KNUCKLE) && soul(SOUL_FLARE_DANCER) && (has_bombs || can_hammer || can_hookshot)"
+    "Fire Temple Vanilla Hammer Loop": "small_keys(SMALL_KEY_FIRE, 5) && has_weapon && soul_keese && soul(SOUL_STALFOS) && soul_iron_knuckle && soul(SOUL_FLARE_DANCER) && (has_bombs || can_hammer || can_hookshot)"
   locations:
-    "MQ Fire Temple Early Lower Left Chest": "can_damage && soul(SOUL_LIKE_LIKE)"
+    "MQ Fire Temple Early Lower Left Chest": "can_damage && soul_like_like"
 "Fire Temple Upper Lobby":
   dungeon: Fire
   exits:

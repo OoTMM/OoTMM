@@ -33,8 +33,8 @@
 "Dodongo Cavern Miniboss 1":
   dungeon: DC
   exits:
-    "Dodongo Cavern Right Corridor": "soul(SOUL_LIZALFOS_DINALFOS) && (can_use_sticks || has_weapon || can_use_slingshot)"
-    "Dodongo Cavern Green Room": "soul(SOUL_LIZALFOS_DINALFOS) && (can_use_sticks || has_weapon || can_use_slingshot)"
+    "Dodongo Cavern Right Corridor": "soul_lizalfos_dinalfos && (can_use_sticks || has_weapon || can_use_slingshot)"
+    "Dodongo Cavern Green Room": "soul_lizalfos_dinalfos && (can_use_sticks || has_weapon || can_use_slingshot)"
 "Dodongo Cavern Green Room":
   dungeon: DC
   exits:
@@ -71,7 +71,7 @@
 "Dodongo Cavern Compass Room":
   dungeon: DC
   exits:
-    "Dodongo Cavern Stairs": "soul(SOUL_ARMOS)"
+    "Dodongo Cavern Stairs": "soul_armos"
   locations:
     "Dodongo Cavern Compass Chest": "true"
 "Dodongo Cavern Bomb Bag Room 1":
@@ -93,8 +93,8 @@
 "Dodongo Cavern Miniboss 2":
   dungeon: DC
   exits:
-    "Dodongo Cavern Bomb Bag Room 1": "soul(SOUL_LIZALFOS_DINALFOS) && (can_use_sticks || has_weapon || can_use_slingshot)"
-    "Dodongo Cavern Bomb Bag Room 2": "soul(SOUL_LIZALFOS_DINALFOS) && (can_use_sticks || has_weapon || can_use_slingshot)"
+    "Dodongo Cavern Bomb Bag Room 1": "soul_lizalfos_dinalfos && (can_use_sticks || has_weapon || can_use_slingshot)"
+    "Dodongo Cavern Bomb Bag Room 2": "soul_lizalfos_dinalfos && (can_use_sticks || has_weapon || can_use_slingshot)"
 "Dodongo Cavern Bomb Bag Room 2":
   dungeon: DC
   exits:

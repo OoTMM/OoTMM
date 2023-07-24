@@ -16,7 +16,7 @@
     "MQ Spirit Temple Compass Chest": "can_use_slingshot && has_bow && small_keys(SMALL_KEY_SPIRIT, 2) && has_bombchu"
     "MQ Spirit Temple Sun Block Room Chest": "small_keys(SMALL_KEY_SPIRIT, 2) && has_bombchu && can_play_time && is_child"
     "MQ Spirit Temple Lobby Front-Right Chest": "has(RUPEE_SILVER_SPIRIT_LOBBY, 5)"
-    "Spirit Temple Silver Gauntlets": "small_keys(SMALL_KEY_SPIRIT, 4) && has_explosives && can_play_time && is_child && soul(SOUL_IRON_KNUCKLE) && (has_weapon || can_use_sticks) && has_lens"
+    "Spirit Temple Silver Gauntlets": "small_keys(SMALL_KEY_SPIRIT, 4) && has_explosives && can_play_time && is_child && soul_iron_knuckle && (has_weapon || can_use_sticks) && has_lens"
     "MQ Spirit Temple SR Lobby Rock Right": "has_explosives_or_hammer"
     "MQ Spirit Temple SR Lobby Rock Left": "has_explosives_or_hammer"
 "Spirit Temple Child Side":
@@ -27,7 +27,7 @@
     SPIRIT_PARADOX: "can_hammer"
   locations:
     "MQ Spirit Temple Map Chest": "soul(SOUL_TORCH_SLUG) && (can_use_sticks || has_weapon || (has_explosives && has_nuts))"
-    "MQ Spirit Temple Map Room Back Chest": "soul(SOUL_TORCH_SLUG) && soul(SOUL_REDEAD_GIBDO) && soul(SOUL_STALFOS) && soul(SOUL_KEESE) && soul(SOUL_ANUBIS) && has_weapon && has_bombchu && can_use_slingshot && can_use_din"
+    "MQ Spirit Temple Map Room Back Chest": "soul(SOUL_TORCH_SLUG) && soul_redead_gibdo && soul(SOUL_STALFOS) && soul_keese && soul(SOUL_ANUBIS) && has_weapon && has_bombchu && can_use_slingshot && can_use_din"
     "MQ Spirit Temple Paradox Chest": "event(SPIRIT_PARADOX)"
 "Spirit Temple Child Upper":
 #All paths into this room guarantee explosives.
@@ -37,14 +37,14 @@
   events:
     SPIRIT_PARADOX: "can_hammer && small_keys(SMALL_KEY_SPIRIT, 7)" #Adult needs to use up a key just to reach the switch.
   locations:
-    "MQ Spirit Temple Child Upper Ground Chest": "soul(SOUL_LIKE_LIKE) && soul(SOUL_BEAMOS) && soul(SOUL_BABY_DODONGO)" #Explosives are enough for every enemy in this room
+    "MQ Spirit Temple Child Upper Ground Chest": "soul_like_like && soul_beamos && soul(SOUL_BABY_DODONGO)" #Explosives are enough for every enemy in this room
     "MQ Spirit Temple Child Upper Ledge Chest": "can_hookshot"
 "Spirit Temple Statue":
   dungeon: Spirit
   exits:
     "Spirit Temple Child Upper": "small_keys(SMALL_KEY_SPIRIT, 7)"
     "Spirit Temple Sun Block Room": "is_adult || can_play_time || has_hover_boots" #Adult's long legs make the jumps easy
-    "Spirit Temple Adult Lower": "has_fire_arrows && has_mirror_shield && soul(SOUL_STALFOS) && soul(SOUL_WALLMASTER) && has_weapon"
+    "Spirit Temple Adult Lower": "has_fire_arrows && has_mirror_shield && soul(SOUL_STALFOS) && soul_wallmaster && has_weapon"
     "Spirit Temple Adult Upper": "is_adult && small_keys(SMALL_KEY_SPIRIT, 5)"
     "Spirit Temple Boss": "event(SPIRIT_TEMPLE_LIGHT) && has_mirror_shield && boss_key(BOSS_KEY_SPIRIT) && is_adult"
   events:
@@ -58,7 +58,7 @@
   dungeon: Spirit
   exits:
     #This looks weird but is the last way to account for a very specific scenario involving adult access to the Silver Gauntlets chest and the Colossus drop.
-    "Spirit Temple Child Hand": "soul(SOUL_IRON_KNUCKLE) && (small_keys(SMALL_KEY_SPIRIT, 7) && (has_weapon || can_use_sticks)) || (is_adult && small_keys(SMALL_KEY_SPIRIT, 4) && has_lens && can_play_time && soul(SOUL_FLOORMASTER))"
+    "Spirit Temple Child Hand": "soul_iron_knuckle && (small_keys(SMALL_KEY_SPIRIT, 7) && (has_weapon || can_use_sticks)) || (is_adult && small_keys(SMALL_KEY_SPIRIT, 4) && has_lens && can_play_time && soul_floormaster)"
   locations:
     "MQ Spirit Temple Sun Block Room Chest": "true"
     "MQ Spirit Temple GS Sun Block Room": "is_adult"
@@ -84,15 +84,15 @@
     "Spirit Temple Adult Hand": "can_play_time"
     "Spirit Temple Adult Climb": "small_keys(SMALL_KEY_SPIRIT, 6)"
   locations:
-    "MQ Spirit Temple Beamos Room Chest": "soul(SOUL_BEAMOS)"
+    "MQ Spirit Temple Beamos Room Chest": "soul_beamos"
 "Spirit Temple Adult Hand":
   dungeon: Spirit
   exits:
-    "Spirit Temple Child Hand": "can_longshot && has_lens && soul(SOUL_IRON_KNUCKLE) && soul(SOUL_FLOORMASTER)"
+    "Spirit Temple Child Hand": "can_longshot && has_lens && soul_iron_knuckle && soul_floormaster"
   locations:
     "MQ Spirit Temple Dinolfos Room Chest": "true"
     "MQ Spirit Temple Boss Key Chest": "has_mirror_shield"
-    "Spirit Temple Mirror Shield": "has_lens && soul(SOUL_IRON_KNUCKLE) && soul(SOUL_FLOORMASTER)"
+    "Spirit Temple Mirror Shield": "has_lens && soul_iron_knuckle && soul_floormaster"
 "Spirit Temple Adult Climb":
   dungeon: Spirit
   exits:
@@ -109,5 +109,5 @@
     SPIRIT_TEMPLE_LIGHT: "can_play(SONG_ZELDA) && can_hammer && has_mirror_shield"
   locations:
     "MQ Spirit Temple Topmost Chest": "can_play(SONG_ZELDA) && can_hammer && has_lens"
-    "MQ Spirit Temple GS Top Floor Left Wall": "small_keys(SMALL_KEY_SPIRIT, 7) && soul(SOUL_IRON_KNUCKLE)"
-    "MQ Spirit Temple GS Top Floor Back Wall": "small_keys(SMALL_KEY_SPIRIT, 7) && soul(SOUL_IRON_KNUCKLE)"
+    "MQ Spirit Temple GS Top Floor Left Wall": "small_keys(SMALL_KEY_SPIRIT, 7) && soul_iron_knuckle"
+    "MQ Spirit Temple GS Top Floor Back Wall": "small_keys(SMALL_KEY_SPIRIT, 7) && soul_iron_knuckle"

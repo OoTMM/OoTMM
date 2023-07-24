@@ -16,7 +16,7 @@
     "Jabu-Jabu Pre-Boss": "event(JABU_TENTACLE_RED) && (event(JABU_BIG_OCTO) || can_hookshot || has_hover_boots)"
     "Jabu-Jabu Basement Side Room": "event(JABU_TENTACLE_RED)"
   events:
-    "JABU_BIG_OCTO": "event(JABU_TENTACLE_GREEN) && soul(SOUL_OCTOROK) && (can_use_sticks || has_weapon)"
+    "JABU_BIG_OCTO": "event(JABU_TENTACLE_GREEN) && soul_octorok && (can_use_sticks || has_weapon)"
     "JABU_MQ_BACK": "can_use_slingshot && has_explosives" #This allows adult to get to the back of Jabu.
   locations:
     "MQ Jabu-Jabu Compass Chest": "can_use_slingshot"
@@ -25,7 +25,7 @@
     "MQ Jabu-Jabu Third Room West Chest": "can_use_slingshot"
     "MQ Jabu-Jabu Third Room East Chest": "can_use_slingshot"
     "MQ Jabu-Jabu SoT Room Lower Chest": "true"
-    "MQ Jabu-Jabu Boomerang Chest": "soul(SOUL_LIZALFOS_DINALFOS) && soul(SOUL_LIKE_LIKE) && soul(SOUL_STINGER)" #You will always have an acceptable weapon for this.
+    "MQ Jabu-Jabu Boomerang Chest": "soul_lizalfos_dinalfos && soul_like_like && soul(SOUL_STINGER)" #You will always have an acceptable weapon for this.
     "MQ Jabu-Jabu GS SoT Block": "can_play_time"
     "MQ Jabu-Jabu Cow": "can_play_epona && event(JABU_BIG_OCTO) && can_use_slingshot"
 "Jabu-Jabu Back":
@@ -33,18 +33,18 @@
   exits:
     "Jabu-Jabu Main": "true"
   events:
-    "JABU_TENTACLE_BLUE": "((can_use_sticks && soul(SOUL_LIKE_LIKE) && can_use_slingshot) || has_fire) && can_boomerang"
+    "JABU_TENTACLE_BLUE": "((can_use_sticks && soul_like_like && can_use_slingshot) || has_fire) && can_boomerang"
     "JABU_TENTACLE_RED": "can_boomerang"
     "JABU_TENTACLE_GREEN": "event(JABU_TENTACLE_BLUE)"
   locations:
-    "MQ Jabu-Jabu Back Chest": "soul(SOUL_LIKE_LIKE) && can_use_slingshot"
+    "MQ Jabu-Jabu Back Chest": "soul_like_like && can_use_slingshot"
     "MQ Jabu-Jabu GS Back": "event(JABU_TENTACLE_BLUE)"
 "Jabu-Jabu Basement Side Room":
   dungeon: JJ
   exits:
     "Jabu-Jabu Main": "true"
   locations:
-    "MQ Jabu-Jabu GS Basement Side Room": "(has_lens && soul(SOUL_KEESE) && soul(SOUL_STINGER)) || (has_hover_boots && can_collect_distance) || (has_fire_arrows && can_longshot)"
+    "MQ Jabu-Jabu GS Basement Side Room": "(has_lens && soul_keese && soul(SOUL_STINGER)) || (has_hover_boots && can_collect_distance) || (has_fire_arrows && can_longshot)"
 "Jabu-Jabu Pre-Boss":
   dungeon: JJ
   exits:

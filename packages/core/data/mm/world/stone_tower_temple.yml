@@ -34,7 +34,7 @@
     "Stone Tower Temple West Garden": "true"
   locations:
     "Stone Tower Temple Under West Garden Ledge Chest": "can_hookshot"
-    "Stone Tower Temple Under West Garden Lava Chest": "soul(SOUL_ARMOS) && ((event(STONE_TOWER_WEST_GARDEN_LIGHT) && has_mirror_shield) || can_use_light_arrows)"
+    "Stone Tower Temple Under West Garden Lava Chest": "soul_armos && ((event(STONE_TOWER_WEST_GARDEN_LIGHT) && has_mirror_shield) || can_use_light_arrows)"
     "Stone Tower Temple Map": "((event(STONE_TOWER_WEST_GARDEN_LIGHT) && has_mirror_shield) || can_use_light_arrows)"
 "Stone Tower Temple Center Ledge":
   dungeon: ST

@@ -26,7 +26,6 @@ static int dmaLookupAlt(DmaEntry* buf, u32 dmaAddr, u32 dmaCount, u32 dmaFlag, u
     ALIGNED(16) DmaEntry sTmpDmaEntries[16];
     u32 rawVromAddr;
     u32 offset;
-    int index;
 
     rawVromAddr = vromAddr & ~dmaFlag;
     offset = 0;
@@ -167,7 +166,6 @@ static u32 comboDmaLoadFilePartialImpl(void* dst, const DmaEntry* e, u32 vrom, u
 u32 comboDmaLoadFile(void* dst, u32 vrom)
 {
     DmaEntry e;
-    u32 size;
     int ret;
 
     ret = dmaLookup(&e, vrom);

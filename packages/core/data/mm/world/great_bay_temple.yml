@@ -24,7 +24,7 @@
     "Great Bay Temple Central Room": "has_mask_zora"
   locations:
     "Great Bay Temple SF Water Wheel Platform": "has_mask_zora || (has(MASK_GREAT_FAIRY) && (has_arrows || can_hookshot))"
-    "Great Bay Temple SF Water Wheel Skulltula": "soul(SOUL_SKULLTULA)"
+    "Great Bay Temple SF Water Wheel Skulltula": "soul_skulltula"
 "Great Bay Temple Central Room":
   dungeon: GB
   exits:
@@ -71,7 +71,7 @@
   exits:
     "Great Bay Temple Ice Arrow Room": "small_keys(SMALL_KEY_GB, 1)"
   events:
-    GB_PIPE_RED: "soul(SOUL_OCTOROK) && can_use_ice_arrows"
+    GB_PIPE_RED: "soul_octorok && can_use_ice_arrows"
 "Great Bay Temple Ice Arrow Room":
   dungeon: GB
   events:

@@ -15,10 +15,12 @@ export const DATA_POOL = {
 
 import macrosOot from '../../data/oot/macros.yml';
 import macrosMm from '../../data/mm/macros.yml';
+import macrosCommon from '../../data/macros.yml';
 
 export const DATA_MACROS = {
   oot: macrosOot,
   mm: macrosMm,
+  common: macrosCommon,
 };
 
 import entrancesOot from '../../data/oot/entrances.csv';

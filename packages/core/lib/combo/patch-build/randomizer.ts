@@ -12,6 +12,7 @@ import { LOCATIONS_ZELDA, makeLocation, makePlayerLocations } from '../logic/loc
 import { CONFVARS_VALUES, Confvar } from '../confvars';
 import { Region, regionData } from '../logic/regions';
 import { Item, ItemGroups, ItemHelpers, Items, ItemsCount, itemByID } from '../items';
+import { SharedItemGroups } from '../logic/shared';
 
 const DUNGEON_REWARD_LOCATIONS = [
   'OOT Deku Tree Boss',
@@ -187,6 +188,16 @@ const gi = (settings: Settings, game: Game, item: Item, generic: boolean) => {
     const sharedItem = sharedItems.get(itemId);
     if (sharedItem) {
       itemId = sharedItem;
+    }
+  }
+
+  /* Resolve shared items - new system */
+  for (const group of Object.values(SharedItemGroups)) {
+    for (const def of group) {
+      if (def.shared.id === itemId) {
+        itemId = def[game].id;
+        break;
+      }
     }
   }
 

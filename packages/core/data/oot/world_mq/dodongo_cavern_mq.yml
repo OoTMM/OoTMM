@@ -42,9 +42,9 @@
   dungeon: DC
   exits:
     "Dodongo Cavern Upper Staircase": "true"
-    "Dodongo Cavern Torch Room": "soul(SOUL_DODONGO)"
+    "Dodongo Cavern Torch Room": "soul_dodongo"
   locations:
-    "MQ Dodongo Cavern Compass Chest": "soul(SOUL_DODONGO)"
+    "MQ Dodongo Cavern Compass Chest": "soul_dodongo"
 "Dodongo Cavern Torch Room":
   dungeon: DC
   exits:
@@ -57,7 +57,7 @@
 "Dodongo Cavern Upper Lizalfos":
   dungeon: DC
   exits:
-    "Dodongo Cavern Upper Ledges": "soul(SOUL_LIZALFOS_DINALFOS) && (can_use_sticks || has_weapon || can_use_slingshot)"
+    "Dodongo Cavern Upper Ledges": "soul_lizalfos_dinalfos && (can_use_sticks || has_weapon || can_use_slingshot)"
   locations:
     "MQ Dodongo Cavern GS Upper Lizalfos": "has_explosives_or_hammer"
 "Dodongo Cavern Upper Ledges":
@@ -78,8 +78,8 @@
 "Dodongo Cavern Lower Lizalfos":
   dungeon: DC
   exits:
-    "Dodongo Cavern Lower Tunnel": "soul(SOUL_LIZALFOS_DINALFOS) && (can_use_sticks || has_weapon || can_use_slingshot)"
-    "Dodongo Cavern Poe Room": "soul(SOUL_LIZALFOS_DINALFOS) && (can_use_sticks || has_weapon || can_use_slingshot)"
+    "Dodongo Cavern Lower Tunnel": "soul_lizalfos_dinalfos && (can_use_sticks || has_weapon || can_use_slingshot)"
+    "Dodongo Cavern Poe Room": "soul_lizalfos_dinalfos && (can_use_sticks || has_weapon || can_use_slingshot)"
 "Dodongo Cavern Poe Room":
   dungeon: DC
   exits:

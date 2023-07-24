@@ -45,14 +45,14 @@
 "Forest Temple Floormaster":
   dungeon: Forest
   locations:
-    "Forest Temple Floormaster": "soul(SOUL_FLOORMASTER) && (has_weapon || can_use_sticks)"
+    "Forest Temple Floormaster": "soul_floormaster && (has_weapon || can_use_sticks)"
 "Forest Temple Map Room":
   dungeon: Forest
   exits:
-    "Forest Temple Garden West": "soul(SOUL_BUBBLE) && (can_use_bow || has_explosives || ((can_hookshot || has_nuts || can_boomerang || has_shield) && (has_weapon || can_use_slingshot || can_use_sticks)))"
-    "Forest Temple Garden East Ledge": "soul(SOUL_BUBBLE) && (can_use_bow || has_explosives || ((can_hookshot || has_nuts || can_boomerang || has_shield) && (has_weapon || can_use_slingshot || can_use_sticks)))"
+    "Forest Temple Garden West": "soul_bubble && (can_use_bow || has_explosives || ((can_hookshot || has_nuts || can_boomerang || has_shield) && (has_weapon || can_use_slingshot || can_use_sticks)))"
+    "Forest Temple Garden East Ledge": "soul_bubble && (can_use_bow || has_explosives || ((can_hookshot || has_nuts || can_boomerang || has_shield) && (has_weapon || can_use_slingshot || can_use_sticks)))"
   locations:
-    "Forest Temple Map": "soul(SOUL_BUBBLE) && (can_use_bow || has_explosives || ((can_hookshot || has_nuts || can_boomerang || has_shield) && (has_weapon || can_use_slingshot || can_use_sticks)))"
+    "Forest Temple Map": "soul_bubble && (can_use_bow || has_explosives || ((can_hookshot || has_nuts || can_boomerang || has_shield) && (has_weapon || can_use_slingshot || can_use_sticks)))"
 "Forest Temple Garden East Ledge":
   dungeon: Forest
   exits:

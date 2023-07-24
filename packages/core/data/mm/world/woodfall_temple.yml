@@ -24,13 +24,13 @@
     "Woodfall Temple Main Ledge": "event(WOODFALL_TEMPLE_MAIN_FLOWER) || event(WOODFALL_TEMPLE_MAIN_LADDER) || can_hookshot_short"
   events:
     WOODFALL_TEMPLE_MAIN_FLOWER: "can_use_fire_arrows"
-    STICKS: "soul(SOUL_DEKU_BABA)"
-    NUTS: "soul(SOUL_DEKU_BABA) && (has(MASK_DEKU) || has_arrows || has_explosives || can_fight)"
+    STICKS: "soul_deku_baba"
+    NUTS: "soul_deku_baba && (has(MASK_DEKU) || has_arrows || has_explosives || can_fight)"
     BOMBS: "true"
     ARROWS: "true"
   locations:
     "Woodfall Temple SF Main Pot": "true"
-    "Woodfall Temple SF Main Deku Baba": "soul(SOUL_DEKU_BABA)"
+    "Woodfall Temple SF Main Deku Baba": "soul_deku_baba"
 "Woodfall Temple Water Room":
   dungeon: WF
   exits:
@@ -53,7 +53,7 @@
     "Woodfall Temple Compass Room": "has_sticks || can_use_fire_arrows"
     "Woodfall Temple Dark Room": "has_sticks || can_use_fire_arrows"
   locations:
-    "Woodfall Temple SF Maze Skulltula": "soul(SOUL_SKULLTULA) && (can_fight || has_arrows || can_use_deku_bubble || has_explosives)"
+    "Woodfall Temple SF Maze Skulltula": "soul_skulltula && (can_fight || has_arrows || can_use_deku_bubble || has_explosives)"
     "Woodfall Temple SF Maze Beehive": "has_weapon_range"
     "Woodfall Temple SF Maze Bubble": "(has(MASK_GREAT_FAIRY) && (has_arrows || can_hookshot_short)) || event(WOODFALL_TEMPLE_MAIN_FLOWER)"
 "Woodfall Temple Compass Room":
@@ -101,7 +101,7 @@
   exits:
     "Woodfall Temple Water Room Upper": "can_fight || has_arrows"
   locations:
-    "Woodfall Temple Bow": "soul(SOUL_LIZALFOS_DINALFOS) && (can_fight || has_arrows)"
+    "Woodfall Temple Bow": "soul_lizalfos_dinalfos && (can_fight || has_arrows)"
 "Woodfall Temple Boss Key Room":
   dungeon: WF
   exits:

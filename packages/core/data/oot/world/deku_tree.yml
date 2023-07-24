@@ -6,7 +6,7 @@
 "Deku Tree Lobby":
   dungeon: DT
   exits:
-    "Deku Tree Slingshot Room": "soul(SOUL_DEKU_SCRUB) && has_shield_for_scrubs"
+    "Deku Tree Slingshot Room": "soul_deku_scrub && has_shield_for_scrubs"
     "Deku Tree Basement": "has_fire || has_nuts || has_weapon || has_explosives_or_hammer || has_ranged_weapon_child || can_use_sticks"
   events:
     STICKS: "can_kill_baba_sticks"
@@ -48,4 +48,4 @@
   dungeon: DT
   exits:
     "Deku Tree Basement Ledge": "true"
-    "Deku Tree Boss": "soul(SOUL_DEKU_SCRUB) && has_shield_for_scrubs"
+    "Deku Tree Boss": "soul_deku_scrub && has_shield_for_scrubs"
