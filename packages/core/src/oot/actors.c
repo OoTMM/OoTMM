@@ -98,7 +98,7 @@ static int canSpawnSoul(GameState_Play* play, s16 actorId, u16 variable)
             return 1;
         return hasSoul(GI_OOT_SOUL_SKULL_KID);
     case AC_EN_TUBO_TRAP:
-        return hasSoul(GI_OOT_SOUL_FLYING_POT);
+        return hasSoul(GI_OOT_SOUL_FLYING_POT) ? 1 : -1;
     case AC_EN_FZ:
         return hasSoul(GI_OOT_SOUL_FREEZARD);
     case AC_EN_WEIYER:
@@ -131,9 +131,13 @@ static int canSpawnSoul(GameState_Play* play, s16 actorId, u16 variable)
 
 Actor* comboSpawnActor(void* unk, GameState_Play *play, short actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable)
 {
-    if (!canSpawnSoul(play, actorId, variable))
+    int ret;
+
+    ret = canSpawnSoul(play, actorId, variable);
+    if (ret <= 0)
     {
-        g.roomEnemyLackSoul = 1;
+        if (ret == 0)
+            g.roomEnemyLackSoul = 1;
         return NULL;
     }
     return SpawnActor(unk, play, actorId, x, y, z, rx, ry, rz, variable);

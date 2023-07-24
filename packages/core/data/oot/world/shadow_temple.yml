@@ -80,7 +80,7 @@
     "Shadow Temple Boat": "small_keys(SMALL_KEY_SHADOW, 4) && can_play(SONG_ZELDA)"
   locations:
     "Shadow Temple Wind Room Hint": "has_lens"
-    "Shadow Temple After Wind": "soul_redead_gibdo && soul_flying_pot"
+    "Shadow Temple After Wind": "soul_redead_gibdo"
     "Shadow Temple After Wind Invisible": "has_explosives && has_lens"
     "Shadow Temple GS Near Boat": "small_keys(SMALL_KEY_SHADOW, 4) && can_longshot"
 "Shadow Temple Boat":
