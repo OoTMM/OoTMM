@@ -235,7 +235,7 @@ X(ITEM_CUSTOM,              0x80,  DRAWGI_SOUL,                         0xb4, 0x
 X(ITEM_CUSTOM,              0x80,  DRAWGI_SOUL,                         0xb4, 0x015c, "the " C1 "Soul of Bubbles"),
 X(ITEM_CUSTOM,              0x80,  DRAWGI_SOUL,                         0xb4, 0x015c, "the " C1 "Soul of Beamos"),
 X(ITEM_CUSTOM,              0x80,  DRAWGI_SOUL,                         0xb4, 0x015c, "the " C1 "Soul of Floormasters"),
-X(ITEM_CUSTOM,              0x80,  DRAWGI_SOUL,                         0xb4, 0x015c, "the " C1 "Soul of Redeads/Gibdos"),
+X(ITEM_CUSTOM,              0x80,  DRAWGI_SOUL,                         0xb4, 0x015c, "the " C1 "Soul of ReDeads/Gibdos"),
 X(ITEM_CUSTOM,              0x80,  DRAWGI_SOUL,                         0xb4, 0x015c, "the " C1 "Soul of Skullwalltulas"),
 X(ITEM_CUSTOM,              0x80,  DRAWGI_SOUL,                         0xb4, 0x015c, "the " C1 "Soul of Flare Dancers"),
 X(ITEM_CUSTOM,              0x80,  DRAWGI_SOUL,                         0xb4, 0x015c, "the " C1 "Soul of Dead Hands"),
