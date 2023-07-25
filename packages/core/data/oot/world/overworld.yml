@@ -156,6 +156,11 @@
   locations:
     "Hyrule Field Ocarina of Time": "has_spiritual_stones"
     "Hyrule Field Song of Time": "has_spiritual_stones"
+"Hyrule Field Drawbridge":
+  region: HYRULE_FIELD
+  time: flow
+  exits:
+    "Hyrule Field": "true"
 "Hyrule Field Scrub Grotto":
   region: ENTRANCE
   exits:
@@ -1107,6 +1112,7 @@
   time: flow
   exits:
     "Hyrule Field": "true"
+    "Hyrule Field Drawbridge": "is_child"
     "Zora Domain": "is_child && can_dive_small"
     "Laboratory": "true"
     "Water Temple": "has_iron_boots && has_tunic_zora && can_hookshot"
