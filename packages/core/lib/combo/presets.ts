@@ -139,10 +139,10 @@ const PRESET_BLITZ = makeSettings({
   ],
   plando: {
     locations: {
-      'OOT Zora River Bean Seller': 'Magic Beans (OoT)',
-      'OOT Zelda\'s Letter':        'Progressive Ocarina (OoT)',
-      'OOT Zelda\'s Song':          'Prelude of Light',
-      'MM Initial Song of Healing': 'Song of Time (MM)'
+      'OOT Zora River Bean Seller': 'OOT_MAGIC_BEAN',
+      'OOT Zelda\'s Letter':        'OOT_OCARINA',
+      'OOT Zelda\'s Song':          'OOT_SONG_LIGHT',
+      'MM Initial Song of Healing': 'MM_SONG_TIME'
     }
   },
   hints: [
