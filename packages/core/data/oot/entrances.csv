@@ -106,7 +106,7 @@ ZORA_FOUNTAIN_FROM_FAIRY,                 indoors-exit,     Zora Fountain,      
 DESERT_COLOSSUS_FROM_FAIRY,               indoors-exit,     Desert Colossus,                            Fairy Fountain Nayru,                         FAIRY_NAYRU
 MARKET_FROM_BOWLING,                      indoors-exit,     Market,                                     Bombchu Bowling,                              BOMBCHU_BOWLING
 MARKET_FROM_TREASURE_GAME,                indoors-exit,     Market,                                     Treasure Game,                                TREASURE_GAME
-MARKET_FROM_BOMBCHU_SHOP,                 indoors-exit,     Back Alley,                                 Bombchu Shop,                                 BOMBCHU_SHOP
+MARKET_FROM_BOMBCHU_SHOP,                 indoors-exit,     Back Alley,                                 Market Bombchu Shop,                          BOMBCHU_SHOP
 MARKET_FROM_ALLEY_HOUSE,                  indoors-exit,     Back Alley,                                 Market Back Alley East Home,                  ALLEY_HOUSE
 TEMPLE_OF_TIME_ENTRYWAY_FROM_TEMPLE,      indoors-exit,     Temple of Time Entryway,                    Temple of Time,                               TEMPLE_OF_TIME
 KOKIRI_FOREST_FROM_LINK,                  indoors-exit,     Kokiri Forest,                              Link's House,                                 HOUSE_LINK
