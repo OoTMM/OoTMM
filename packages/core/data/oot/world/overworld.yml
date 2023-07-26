@@ -286,6 +286,14 @@
     "Market Bazaar Item 6": "is_child && shop_price(0x25)"
     "Market Bazaar Item 7": "is_child && shop_price(0x26)"
     "Market Bazaar Item 8": "is_child && shop_price(0x27)"
+    "Kakariko Bazaar Item 1": "is_adult && shop_price(0x30)"
+    "Kakariko Bazaar Item 2": "is_adult && shop_price(0x31)"
+    "Kakariko Bazaar Item 3": "is_adult && shop_price(0x32)"
+    "Kakariko Bazaar Item 4": "is_adult && shop_price(0x33)"
+    "Kakariko Bazaar Item 5": "is_adult && shop_price(0x34)"
+    "Kakariko Bazaar Item 6": "is_adult && shop_price(0x35)"
+    "Kakariko Bazaar Item 7": "is_adult && shop_price(0x36)"
+    "Kakariko Bazaar Item 8": "is_adult && shop_price(0x37)"
 "Market Potion Shop":
   region: ENTRANCE
   exits:
@@ -299,6 +307,14 @@
     "Market Potion Shop Item 6": "is_child && shop_price(0x2d)"
     "Market Potion Shop Item 7": "is_child && shop_price(0x2e)"
     "Market Potion Shop Item 8": "is_child && shop_price(0x2f)"
+    "Kakariko Potion Shop Item 1": "shop_price(0x38) && is_adult"
+    "Kakariko Potion Shop Item 2": "shop_price(0x39) && is_adult"
+    "Kakariko Potion Shop Item 3": "shop_price(0x3a) && is_adult"
+    "Kakariko Potion Shop Item 4": "shop_price(0x3b) && is_adult"
+    "Kakariko Potion Shop Item 5": "shop_price(0x3c) && is_adult"
+    "Kakariko Potion Shop Item 6": "shop_price(0x3d) && is_adult"
+    "Kakariko Potion Shop Item 7": "shop_price(0x3e) && is_adult"
+    "Kakariko Potion Shop Item 8": "shop_price(0x3f) && is_adult"
 "Market Bombchu Shop":
   region: ENTRANCE
   exits:
@@ -703,6 +719,14 @@
     "Kakariko Bazaar Item 6": "is_adult && shop_price(0x35)"
     "Kakariko Bazaar Item 7": "is_adult && shop_price(0x36)"
     "Kakariko Bazaar Item 8": "is_adult && shop_price(0x37)"
+    "Market Bazaar Item 1": "is_child && shop_price(0x20)"
+    "Market Bazaar Item 2": "is_child && shop_price(0x21)"
+    "Market Bazaar Item 3": "is_child && shop_price(0x22)"
+    "Market Bazaar Item 4": "is_child && shop_price(0x23)"
+    "Market Bazaar Item 5": "is_child && shop_price(0x24)"
+    "Market Bazaar Item 6": "is_child && shop_price(0x25)"
+    "Market Bazaar Item 7": "is_child && shop_price(0x26)"
+    "Market Bazaar Item 8": "is_child && shop_price(0x27)"
 "Kakariko Potion Shop":
   region: ENTRANCE
   exits:

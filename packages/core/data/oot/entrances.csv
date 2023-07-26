@@ -79,6 +79,7 @@ CHILD_ARCHERY,                            indoors,          Shooting Gallery Chi
 MARKET_POTION,                            indoors,          Market Potion Shop,                         Market,                                       MARKET_FROM_POTION
 MARKET_BAZAAR,                            indoors,          Market Bazaar,                              Market,                                       MARKET_FROM_BAZAAR
 KAKARIKO_BAZAAR,                          indoors,          Kakariko Bazaar,                            Kakariko,                                     KAKARIKO_FROM_BAZAAR
+ADULT_ARCHERY,                            indoors,          Shooting Gallery Adult,                     Kakariko,                                     KAKARIKO_FROM_ARCHERY
 HOUSE_LINK,                               indoors-extra,    Link's House,                               Kokiri Forest,                                KOKIRI_FOREST_FROM_LINK
 TEMPLE_OF_TIME,                           indoors-extra,    Temple of Time,                             Temple of Time Entryway,                      TEMPLE_OF_TIME_ENTRYWAY_FROM_TEMPLE
 WINDMILL,                                 indoors-extra,    Windmill,                                   Kakariko,                                     KAKARIKO_FROM_WINDMILL
@@ -123,3 +124,4 @@ MARKET_FROM_BAZAAR,                       indoors-exit,     Market,             
 KAKARIKO_FROM_BAZAAR,                     indoors-exit,     Kakariko,                                   Kakariko Bazaar,                              KAKARIKO_BAZAAR
 KAKARIKO_FROM_SHOP_POTION,                indoors-exit,     Kakariko,                                   Kakariko Potion Shop,                         SHOP_POTION_KAKARIKO
 KAKARIKO_FROM_SHOP_POTION_BACK,           indoors-exit,     Kakariko Back,                              Kakariko Potion Shop Back,                    SHOP_POTION_KAKARIKO_BACK
+KAKARIKO_FROM_ARCHERY,                    indoors-exit,     Kakariko,                                   Shooting Gallery Adult,                       ADULT_ARCHERY
