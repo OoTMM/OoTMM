@@ -124,6 +124,15 @@ static int canSpawnSoul(GameState_Play* play, s16 actorId, u16 variable)
         return hasSoul(GI_OOT_SOUL_BONGO_BONGO);
     case AC_BOSS_TW:
         return hasSoul(GI_OOT_SOUL_TWINROVA);
+    default:
+        return 1;
+    }
+}
+
+static int canSpawnActor(GameState_Play* play, s16 actorId, u16 valid)
+{
+    switch (actorId)
+    {
     case AC_EN_SYATEKI_MAN:
         if(gSave.entrance == ENTR_OOT_CHILD_ARCHERY && gSave.age == AGE_CHILD)
             return 1;
@@ -131,13 +140,16 @@ static int canSpawnSoul(GameState_Play* play, s16 actorId, u16 variable)
             return 1;
         else
             return 0;
-    default:
+    default: 
         return 1;
     }
 }
 
 Actor* comboSpawnActor(void* unk, GameState_Play *play, short actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable)
 {
+
+    if (!canSpawnActor(play, actorId, variable)) return NULL;
+    
     int ret;
 
     ret = canSpawnSoul(play, actorId, variable);
@@ -147,5 +159,6 @@ Actor* comboSpawnActor(void* unk, GameState_Play *play, short actorId, float x, 
             g.roomEnemyLackSoul = 1;
         return NULL;
     }
+
     return SpawnActor(unk, play, actorId, x, y, z, rx, ry, rz, variable);
 }
