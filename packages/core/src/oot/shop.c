@@ -155,7 +155,7 @@ u8 comboShopItemSlot(GameState_Play* play, Actor_EnGirlA* girlA)
     else if (play->sceneId == SCE_OOT_MARKET_POTION_SHOP || play->sceneId == SCE_OOT_KAKARIKO_POTION_SHOP)
     {
         /* Market / Kakriko Potion Shop */
-        ageMask = (gSave.age == AGE_ADULT) ? 0x10 : 0x00;
+        ageMask = (play->sceneId == SCE_OOT_KAKARIKO_POTION_SHOP) ? 0x10 : 0x00;
         switch (girlA->base.variable)
         {
         case SHOP_FISH:         return 0x28 | ageMask;
