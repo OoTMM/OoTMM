@@ -291,22 +291,14 @@
   exits:
     "Market": "true"
   locations:
-    "Market Potion Shop Item 1": "is_child && shop_price(0x28)"
-    "Market Potion Shop Item 2": "is_child && shop_price(0x29)"
-    "Market Potion Shop Item 3": "is_child && shop_price(0x2a)"
-    "Market Potion Shop Item 4": "is_child && shop_price(0x2b)"
-    "Market Potion Shop Item 5": "is_child && shop_price(0x2c)"
-    "Market Potion Shop Item 6": "is_child && shop_price(0x2d)"
-    "Market Potion Shop Item 7": "is_child && shop_price(0x2e)"
-    "Market Potion Shop Item 8": "is_child && shop_price(0x2f)"
-    "Kakariko Potion Shop Item 1": "shop_price(0x38) && is_adult"
-    "Kakariko Potion Shop Item 2": "shop_price(0x39) && is_adult"
-    "Kakariko Potion Shop Item 3": "shop_price(0x3a) && is_adult"
-    "Kakariko Potion Shop Item 4": "shop_price(0x3b) && is_adult"
-    "Kakariko Potion Shop Item 5": "shop_price(0x3c) && is_adult"
-    "Kakariko Potion Shop Item 6": "shop_price(0x3d) && is_adult"
-    "Kakariko Potion Shop Item 7": "shop_price(0x3e) && is_adult"
-    "Kakariko Potion Shop Item 8": "shop_price(0x3f) && is_adult"
+    "Market Potion Shop Item 1": "shop_price(0x28)"
+    "Market Potion Shop Item 2": "shop_price(0x29)"
+    "Market Potion Shop Item 3": "shop_price(0x2a)"
+    "Market Potion Shop Item 4": "shop_price(0x2b)"
+    "Market Potion Shop Item 5": "shop_price(0x2c)"
+    "Market Potion Shop Item 6": "shop_price(0x2d)"
+    "Market Potion Shop Item 7": "shop_price(0x2e)"
+    "Market Potion Shop Item 8": "shop_price(0x2f)"
 "Market Bombchu Shop":
   region: ENTRANCE
   exits:
@@ -716,14 +708,14 @@
     "Kakariko": "true"
     "Kakariko Potion Shop Back": "is_adult"
   locations:
-    "Kakariko Potion Shop Item 1": "shop_price(0x38) && is_adult"
-    "Kakariko Potion Shop Item 2": "shop_price(0x39) && is_adult"
-    "Kakariko Potion Shop Item 3": "shop_price(0x3a) && is_adult"
-    "Kakariko Potion Shop Item 4": "shop_price(0x3b) && is_adult"
-    "Kakariko Potion Shop Item 5": "shop_price(0x3c) && is_adult"
-    "Kakariko Potion Shop Item 6": "shop_price(0x3d) && is_adult"
-    "Kakariko Potion Shop Item 7": "shop_price(0x3e) && is_adult"
-    "Kakariko Potion Shop Item 8": "shop_price(0x3f) && is_adult"
+    "Kakariko Potion Shop Item 1": "shop_price(0x38)"
+    "Kakariko Potion Shop Item 2": "shop_price(0x39)"
+    "Kakariko Potion Shop Item 3": "shop_price(0x3a)"
+    "Kakariko Potion Shop Item 4": "shop_price(0x3b)"
+    "Kakariko Potion Shop Item 5": "shop_price(0x3c)"
+    "Kakariko Potion Shop Item 6": "shop_price(0x3d)"
+    "Kakariko Potion Shop Item 7": "shop_price(0x3e)"
+    "Kakariko Potion Shop Item 8": "shop_price(0x3f)"
 "Kakariko Potion Shop Back":
   region: KAKARIKO
   exits:
