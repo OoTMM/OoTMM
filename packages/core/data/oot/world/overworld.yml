@@ -708,14 +708,14 @@
     "Kakariko": "true"
     "Kakariko Potion Shop Back": "is_adult"
   locations:
-    "Kakariko Potion Shop Item 1": "shop_price(0x38)"
-    "Kakariko Potion Shop Item 2": "shop_price(0x39)"
-    "Kakariko Potion Shop Item 3": "shop_price(0x3a)"
-    "Kakariko Potion Shop Item 4": "shop_price(0x3b)"
-    "Kakariko Potion Shop Item 5": "shop_price(0x3c)"
-    "Kakariko Potion Shop Item 6": "shop_price(0x3d)"
-    "Kakariko Potion Shop Item 7": "shop_price(0x3e)"
-    "Kakariko Potion Shop Item 8": "shop_price(0x3f)"
+    "Kakariko Potion Shop Item 1": "is_adult && shop_price(0x38)"
+    "Kakariko Potion Shop Item 2": "is_adult && shop_price(0x39)"
+    "Kakariko Potion Shop Item 3": "is_adult && shop_price(0x3a)"
+    "Kakariko Potion Shop Item 4": "is_adult && shop_price(0x3b)"
+    "Kakariko Potion Shop Item 5": "is_adult && shop_price(0x3c)"
+    "Kakariko Potion Shop Item 6": "is_adult && shop_price(0x3d)"
+    "Kakariko Potion Shop Item 7": "is_adult && shop_price(0x3e)"
+    "Kakariko Potion Shop Item 8": "is_adult && shop_price(0x3f)"
 "Kakariko Potion Shop Back":
   region: KAKARIKO
   exits:
