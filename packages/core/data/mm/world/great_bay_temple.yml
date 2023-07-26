@@ -21,7 +21,7 @@
     GB_WATER_WHEEL: "event(GB_PIPE_RED) && event(GB_PIPE_RED2) && can_hookshot"
   exits:
     "Great Bay Temple Entrance": "true"
-    "Great Bay Temple Central Room": "has_mask_zora"
+    "Great Bay Temple Central Room": "has_mask_zora || (has_mask_goron && trick(MM_GBT_WATERWHEEL_GORON))"
   locations:
     "Great Bay Temple SF Water Wheel Platform": "has_mask_zora || (has(MASK_GREAT_FAIRY) && (has_arrows || can_hookshot))"
     "Great Bay Temple SF Water Wheel Skulltula": "soul_skulltula"

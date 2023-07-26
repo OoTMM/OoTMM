@@ -58,7 +58,8 @@ export const TRICKS = {
   MM_IKANA_ROOF_PARKOUR: "Jump from Ikana Castle's Roof Interior to Exterior",
   MM_POST_OFFICE_GAME: "Post Office Timing Game without Bunny Hood",
   MM_WELL_HSW: "Well's Hot Spring Water without Killing Dexihand",
-  MM_ISTT_CHUCHU_LESS: "ISTT Block Room without Chuchu jellies"
+  MM_ISTT_CHUCHU_LESS: "ISTT Block Room without Chuchu jellies",
+  MM_GBT_WATERWHEEL_GORON: "Cross GBT WaterWheel Room as Goron",
 };
 
 export type Trick = keyof typeof TRICKS;
