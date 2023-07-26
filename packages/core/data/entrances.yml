@@ -115,6 +115,16 @@ OOT_BOMBCHU_SHOP:                           0x528
 OOT_MARKET_FROM_BOMBCHU_SHOP:               0x3c0
 OOT_ALLEY_HOUSE:                            0x43b
 OOT_MARKET_FROM_ALLEY_HOUSE:                0x67
+OOT_MARKET_BAZAAR:                          0x52c
+OOT_MARKET_FROM_BAZAAR:                     0x3b8
+OOT_MARKET_POTION:                          0x388
+OOT_MARKET_FROM_POTION:                     0x2a2
+OOT_CHILD_ARCHERY:                          0x16d
+OOT_MARKET_FROM_ARCHERY:                    0x1cd
+OOT_KAKARIKO_BAZAAR:                        0xb7
+OOT_KAKARIKO_FROM_BAZAAR:                   0x201
+OOT_ADULT_ARCHERY:                          0x2ea
+OOT_KAKARIKO_FROM_ARCHERY:                  0x463
 
 # Custom
 OOT_OUTSIDE_GANON_FROM_FAIRY:               0xf00
