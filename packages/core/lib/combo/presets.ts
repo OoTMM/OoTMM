@@ -141,7 +141,7 @@ const PRESET_BLITZ = makeSettings({
     locations: {
       'OOT Zora River Bean Seller': 'OOT_MAGIC_BEAN',
       'OOT Zelda\'s Letter':        'OOT_OCARINA',
-      'OOT Zelda\'s Song':          'OOT_SONG_LIGHT',
+      'OOT Zelda\'s Song':          'OOT_SONG_TP_LIGHT',
       'MM Initial Song of Healing': 'MM_SONG_TIME'
     }
   },
