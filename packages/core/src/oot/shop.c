@@ -77,8 +77,6 @@ u8 comboShopItemSlot(GameState_Play* play, Actor_EnGirlA* girlA)
 {
     int ageMask;
 
-    ageMask = (gSave.age == AGE_ADULT) ? 0x10 : 0x00;
-
     if (play->sceneId == SCE_OOT_KOKIRI_SHOP)
     {
         /* Kokiri shop */
@@ -141,6 +139,7 @@ u8 comboShopItemSlot(GameState_Play* play, Actor_EnGirlA* girlA)
     else if (play->sceneId == SCE_OOT_BAZAAR)
     {
         /* Market / Kakariko Bazaar */
+        ageMask = (gSave.entrance == ENTR_OOT_KAKARIKO_BAZAAR ? 0x10 : 0x00);
         switch (girlA->base.variable)
         {
         case SHOP_ARROWS_10:        return 0x20 | ageMask;
@@ -156,6 +155,7 @@ u8 comboShopItemSlot(GameState_Play* play, Actor_EnGirlA* girlA)
     else if (play->sceneId == SCE_OOT_MARKET_POTION_SHOP || play->sceneId == SCE_OOT_KAKARIKO_POTION_SHOP)
     {
         /* Market / Kakriko Potion Shop */
+        ageMask = (play->sceneId == SCE_OOT_KAKARIKO_POTION_SHOP) ? 0x10 : 0x00;
         switch (girlA->base.variable)
         {
         case SHOP_FISH:         return 0x28 | ageMask;

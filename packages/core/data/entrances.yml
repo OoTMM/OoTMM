@@ -107,6 +107,24 @@ OOT_ZORA_FOUNTAIN_FROM_FAIRY:               0x394
 OOT_FAIRY_NAYRU:                            0x588
 OOT_DESERT_COLOSSUS_FROM_FAIRY:             0x57c
 OOT_FAIRY_DEFENSE:                          0x4c2
+OOT_BOMBCHU_BOWLING:                        0x507
+OOT_MARKET_FROM_BOWLING:                    0x3bc
+OOT_TREASURE_GAME:                          0x63
+OOT_MARKET_FROM_TREASURE_GAME:              0x1d5
+OOT_BOMBCHU_SHOP:                           0x528
+OOT_MARKET_FROM_BOMBCHU_SHOP:               0x3c0
+OOT_ALLEY_HOUSE:                            0x43b
+OOT_MARKET_FROM_ALLEY_HOUSE:                0x67
+OOT_MARKET_BAZAAR:                          0x52c
+OOT_MARKET_FROM_BAZAAR:                     0x3b8
+OOT_MARKET_POTION:                          0x388
+OOT_MARKET_FROM_POTION:                     0x2a2
+OOT_CHILD_ARCHERY:                          0x16d
+OOT_MARKET_FROM_ARCHERY:                    0x1cd
+OOT_KAKARIKO_BAZAAR:                        0xb7
+OOT_KAKARIKO_FROM_BAZAAR:                   0x201
+OOT_ADULT_ARCHERY:                          0x3b
+OOT_KAKARIKO_FROM_ARCHERY:                  0x463
 
 # Custom
 OOT_OUTSIDE_GANON_FROM_FAIRY:               0xf00
@@ -237,3 +255,5 @@ MM_ASTRAL_OBSERVATORY_FROM_CLOCK_TOWN_EAST: 0x4c00
 MM_CLOCK_TOWN_EAST_FROM_ASTRAL_OBSERVATORY: 0xd220
 MM_ASTRAL_OBSERVATORY_FROM_FIELD:           0x4c10
 MM_FIELD_FROM_ASTRAL_OBSERVATORY:           0x5490
+MM_SWAMP_ARCHERY:                           0x4200
+MM_SWAMP_ROAD_FROM_ARCHERY:                 0x7a20

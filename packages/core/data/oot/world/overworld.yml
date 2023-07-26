@@ -257,8 +257,7 @@
   exits:
     "Market Entryway": "true"
     "Back Alley": "is_child"
-    "Hyrule Castle": "is_child"
-    "Ganon Castle Exterior": "is_adult"
+    "Market Castle Entry": "true"
     "Temple of Time Entryway": "true"
     "Bombchu Bowling": "is_child"
     "Treasure Game": "is_night && is_child"
@@ -269,10 +268,15 @@
   events:
     RICHARD: "is_night && is_child"
     RUPEES: "is_child"
+"Market Castle Entry":
+  region: MARKET
+  exits:
+    "Hyrule Castle": "is_child"
+    "Ganon Castle Exterior": "is_adult"
 "Market Bazaar":
   region: ENTRANCE
   exits:
-    "Market": "is_child"
+    "Market": "true"
   locations:
     "Market Bazaar Item 1": "shop_price(0x20)"
     "Market Bazaar Item 2": "shop_price(0x21)"
@@ -285,7 +289,7 @@
 "Market Potion Shop":
   region: ENTRANCE
   exits:
-    "Market": "is_child"
+    "Market": "true"
   locations:
     "Market Potion Shop Item 1": "shop_price(0x28)"
     "Market Potion Shop Item 2": "shop_price(0x29)"
@@ -298,7 +302,7 @@
 "Market Bombchu Shop":
   region: ENTRANCE
   exits:
-    "Market": "is_child"
+    "Back Alley": "true"
   locations:
     "Market Bombchu Shop Item 1": "shop_price(0x08)"
     "Market Bombchu Shop Item 2": "shop_price(0x09)"
@@ -347,7 +351,7 @@
 "Shooting Gallery Child":
   region: ENTRANCE
   exits:
-    "Market": "is_child"
+    "Market": "true"
   locations:
     "Shooting Gallery Child": "is_child && can_use_wallet(1)"
 "Treasure Game":
@@ -418,7 +422,7 @@
   region: HYRULE_CASTLE
   time: flow
   exits:
-    "Market": "true"
+    "Market Castle Entry": "true"
     "Near Fairy Fountain Din": "has_explosives"
     "Hyrule Castle Courtyard": "woke_talon_child || has_hover_boots"
     "Hyrule Castle Grotto": "hidden_grotto_storms"
@@ -479,7 +483,7 @@
   region: GANON_CASTLE_EXTERIOR
   time: night
   exits:
-    "Market": "true"
+    "Market Castle Entry": "true"
     "Ganon Castle Exterior After Bridge": "special(BRIDGE)"
     "Near Fairy Fountain Defense": "can_lift_gold"
   locations:
@@ -688,7 +692,7 @@
 "Kakariko Bazaar":
   region: ENTRANCE
   exits:
-    "Kakariko": "is_adult"
+    "Kakariko": "true"
   locations:
     "Kakariko Bazaar Item 1": "shop_price(0x30)"
     "Kakariko Bazaar Item 2": "shop_price(0x31)"
@@ -701,19 +705,19 @@
 "Kakariko Potion Shop":
   region: ENTRANCE
   exits:
-    "Kakariko": "is_adult"
+    "Kakariko": "true"
     "Kakariko Potion Shop Back": "is_adult"
   locations:
-    "Kakariko Potion Shop Item 1": "shop_price(0x38) && is_adult"
-    "Kakariko Potion Shop Item 2": "shop_price(0x39) && is_adult"
-    "Kakariko Potion Shop Item 3": "shop_price(0x3a) && is_adult"
-    "Kakariko Potion Shop Item 4": "shop_price(0x3b) && is_adult"
-    "Kakariko Potion Shop Item 5": "shop_price(0x3c) && is_adult"
-    "Kakariko Potion Shop Item 6": "shop_price(0x3d) && is_adult"
-    "Kakariko Potion Shop Item 7": "shop_price(0x3e) && is_adult"
-    "Kakariko Potion Shop Item 8": "shop_price(0x3f) && is_adult"
+    "Kakariko Potion Shop Item 1": "is_adult && shop_price(0x38)"
+    "Kakariko Potion Shop Item 2": "is_adult && shop_price(0x39)"
+    "Kakariko Potion Shop Item 3": "is_adult && shop_price(0x3a)"
+    "Kakariko Potion Shop Item 4": "is_adult && shop_price(0x3b)"
+    "Kakariko Potion Shop Item 5": "is_adult && shop_price(0x3c)"
+    "Kakariko Potion Shop Item 6": "is_adult && shop_price(0x3d)"
+    "Kakariko Potion Shop Item 7": "is_adult && shop_price(0x3e)"
+    "Kakariko Potion Shop Item 8": "is_adult && shop_price(0x3f)"
 "Kakariko Potion Shop Back":
-  region: KAKARIKO
+  region: NONE
   exits:
     "Kakariko Back": "is_adult"
     "Kakariko Potion Shop": "true"
@@ -728,9 +732,9 @@
 "Shooting Gallery Adult":
   region: ENTRANCE
   exits:
-    "Kakariko": "is_adult"
+    "Kakariko": "true"
   locations:
-    "Shooting Gallery Adult": "can_use_bow && can_use_wallet(1)"
+    "Shooting Gallery Adult": "is_adult && can_use_bow && can_use_wallet(1)"
 "Impa House Front":
   region: ENTRANCE
   exits:

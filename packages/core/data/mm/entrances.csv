@@ -71,6 +71,7 @@ FAIRY_FOUNTAIN_IKANA,                               indoors,          Ikana Fair
 BLACKSMITH,                                         indoors,          Blacksmith,                         Mountain Village,                           MOUNTAIN_VILLAGE_FROM_BLACKSMITH
 GORON_GRAVEYARD,                                    indoors,          Goron Graveyard,                    Near Goron Graveyard,                       MOUNTAIN_VILLAGE_FROM_GORON_GRAVEYARD
 GHOST_HUT,                                          indoors,          Ghost Hut,                          Ikana Canyon,                               IKANA_CANYON_FROM_GHOST_HUT
+SWAMP_ARCHERY,                                      indoors,          Swamp Archery,                      Road to Southern Swamp,                     SWAMP_ROAD_FROM_ARCHERY
 STOCK_POT_INN,                                      indoors-extra,    Stock Pot Inn,                      Clock Town East,                            CLOCK_TOWN_EAST_FROM_STOCK_POT_INN
 STOCK_POT_INN_ROOF,                                 indoors-extra,    Stock Pot Inn,                      Stock Pot Inn Roof,                         CLOCK_TOWN_EAST_FROM_STOCK_POT_INN_ROOF
 IKANA_CAVERN,                                       indoors-extra,    Ikana Spring Water Cave,            Ikana Canyon,                               IKANA_CANYON_FROM_CAVERN
@@ -117,6 +118,7 @@ MOUNTAIN_VILLAGE_FROM_BLACKSMITH,                   indoors-exit,     Mountain V
 CLOCK_TOWN_EAST_FROM_ASTRAL_OBSERVATORY,            indoors-exit,     Clock Town East,                    Astral Observatory Passage,                 ASTRAL_OBSERVATORY_FROM_CLOCK_TOWN_EAST
 FIELD_FROM_ASTRAL_OBSERVATORY,                      indoors-exit,     Astral Observatory Balcony,         Astral Observatory,                         ASTRAL_OBSERVATORY_FROM_FIELD
 MOUNTAIN_VILLAGE_FROM_GORON_GRAVEYARD,              indoors-exit,     Near Goron Graveyard,               Goron Graveyard,                            GORON_GRAVEYARD
+SWAMP_ROAD_FROM_ARCHERY,                            indoors-exit,     Road to Southern Swamp,             Swamp Archery,                              SWAMP_ARCHERY
 DEKU_PALACE_THRONE,                                 indoors-special,  Deku Palace Throne,                 Deku Palace Main,                           DEKU_PALACE_EXTERIOR_FROM_THRONE
 DEKU_PALACE_EXTERIOR_FROM_THRONE,                   indoors-special,  Deku Palace Main,                   Deku Palace Throne,                         DEKU_PALACE_THRONE
 DEKU_PALACE_THRONE_CAGE,                            indoors-special,  Deku Palace Cage,                   Deku Palace Near Cage,                      DEKU_PALACE_EXTERIOR_FROM_THRONE_CAGE

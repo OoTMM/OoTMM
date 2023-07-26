@@ -71,9 +71,20 @@ FAIRY_DEFENSE,                            indoors,          Fairy Fountain Defen
 FAIRY_DIN,                                indoors,          Fairy Fountain Din,                         Near Fairy Fountain Din,                      HYRULE_CASTLE_FROM_FAIRY
 FAIRY_FARORE,                             indoors,          Fairy Fountain Farore,                      Zora Fountain,                                ZORA_FOUNTAIN_FROM_FAIRY
 FAIRY_NAYRU,                              indoors,          Fairy Fountain Nayru,                       Desert Colossus,                              DESERT_COLOSSUS_FROM_FAIRY
+BOMBCHU_BOWLING,                          indoors,          Bombchu Bowling,                            Market,                                       MARKET_FROM_BOWLING
+TREASURE_GAME,                            indoors,          Treasure Game,                              Market,                                       MARKET_FROM_TREASURE_GAME
+BOMBCHU_SHOP,                             indoors,          Market Bombchu Shop,                        Back Alley,                                   MARKET_FROM_BOMBCHU_SHOP
+ALLEY_HOUSE,                              indoors,          Market Back Alley East Home,                Back Alley,                                   MARKET_FROM_ALLEY_HOUSE
+CHILD_ARCHERY,                            indoors,          Shooting Gallery Child,                     Market,                                       MARKET_FROM_ARCHERY
+MARKET_POTION,                            indoors,          Market Potion Shop,                         Market,                                       MARKET_FROM_POTION
+MARKET_BAZAAR,                            indoors,          Market Bazaar,                              Market,                                       MARKET_FROM_BAZAAR
+KAKARIKO_BAZAAR,                          indoors,          Kakariko Bazaar,                            Kakariko,                                     KAKARIKO_FROM_BAZAAR
+ADULT_ARCHERY,                            indoors,          Shooting Gallery Adult,                     Kakariko,                                     KAKARIKO_FROM_ARCHERY
 HOUSE_LINK,                               indoors-extra,    Link's House,                               Kokiri Forest,                                KOKIRI_FOREST_FROM_LINK
 TEMPLE_OF_TIME,                           indoors-extra,    Temple of Time,                             Temple of Time Entryway,                      TEMPLE_OF_TIME_ENTRYWAY_FROM_TEMPLE
 WINDMILL,                                 indoors-extra,    Windmill,                                   Kakariko,                                     KAKARIKO_FROM_WINDMILL
+SHOP_POTION_KAKARIKO,                     indoors-extra,    Kakariko Potion Shop,                       Kakariko,                                     KAKARIKO_FROM_SHOP_POTION
+SHOP_POTION_KAKARIKO_BACK,                indoors-extra,    Kakariko Potion Shop Back,                  Kakariko Back,                                KAKARIKO_FROM_SHOP_POTION_BACK
 KOKIRI_FOREST_FROM_MIDO,                  indoors-exit,     Kokiri Forest,                              Mido's House,                                 HOUSE_MIDO
 KOKIRI_FOREST_FROM_SARIA,                 indoors-exit,     Kokiri Forest,                              Saria's House,                                HOUSE_SARIA
 KOKIRI_FOREST_FROM_TWINS,                 indoors-exit,     Kokiri Forest,                              House of Twins,                               HOUSE_TWINS
@@ -100,10 +111,17 @@ OUTSIDE_GANON_FROM_FAIRY,                 indoors-exit,     Near Fairy Fountain 
 HYRULE_CASTLE_FROM_FAIRY,                 indoors-exit,     Near Fairy Fountain Din,                    Fairy Fountain Din,                           FAIRY_DIN
 ZORA_FOUNTAIN_FROM_FAIRY,                 indoors-exit,     Zora Fountain,                              Fairy Fountain Farore,                        FAIRY_FARORE
 DESERT_COLOSSUS_FROM_FAIRY,               indoors-exit,     Desert Colossus,                            Fairy Fountain Nayru,                         FAIRY_NAYRU
-TEMPLE_OF_TIME_ENTRYWAY_FROM_TEMPLE,      indoors-special,  Temple of Time Entryway,                    Temple of Time,                               TEMPLE_OF_TIME
-KOKIRI_FOREST_FROM_LINK,                  indoors-special,  Kokiri Forest,                              Link's House,                                 HOUSE_LINK
-KAKARIKO_FROM_WINDMILL,                   indoors-special,  Kakariko,                                   Windmill,                                     WINDMILL
-SHOP_POTION_KAKARIKO,                     indoors-special,  Kakariko Potion Shop,                       Kakariko,                                     KAKARIKO_FROM_SHOP_POTION
-KAKARIKO_FROM_SHOP_POTION,                indoors-special,  Kakariko,                                   Kakariko Potion Shop,                         SHOP_POTION_KAKARIKO
-SHOP_POTION_KAKARIKO_BACK,                indoors-special,  Kakariko Potion Shop Back,                  Kakariko Back,                                KAKARIKO_FROM_SHOP_POTION_BACK
-KAKARIKO_FROM_SHOP_POTION_BACK,           indoors-special,  Kakariko Back,                              Kakariko Potion Shop Back,                    SHOP_POTION_KAKARIKO_BACK
+MARKET_FROM_BOWLING,                      indoors-exit,     Market,                                     Bombchu Bowling,                              BOMBCHU_BOWLING
+MARKET_FROM_TREASURE_GAME,                indoors-exit,     Market,                                     Treasure Game,                                TREASURE_GAME
+MARKET_FROM_BOMBCHU_SHOP,                 indoors-exit,     Back Alley,                                 Market Bombchu Shop,                          BOMBCHU_SHOP
+MARKET_FROM_ALLEY_HOUSE,                  indoors-exit,     Back Alley,                                 Market Back Alley East Home,                  ALLEY_HOUSE
+TEMPLE_OF_TIME_ENTRYWAY_FROM_TEMPLE,      indoors-exit,     Temple of Time Entryway,                    Temple of Time,                               TEMPLE_OF_TIME
+KOKIRI_FOREST_FROM_LINK,                  indoors-exit,     Kokiri Forest,                              Link's House,                                 HOUSE_LINK
+KAKARIKO_FROM_WINDMILL,                   indoors-exit,     Kakariko,                                   Windmill,                                     WINDMILL
+MARKET_FROM_ARCHERY,                      indoors-exit,     Market,                                     Shooting Gallery Child,                       CHILD_ARCHERY
+MARKET_FROM_POTION,                       indoors-exit,     Market,                                     Market Potion Shop,                           MARKET_POTION
+MARKET_FROM_BAZAAR,                       indoors-exit,     Market,                                     Market Bazaar,                                MARKET_BAZAAR
+KAKARIKO_FROM_BAZAAR,                     indoors-exit,     Kakariko,                                   Kakariko Bazaar,                              KAKARIKO_BAZAAR
+KAKARIKO_FROM_SHOP_POTION,                indoors-exit,     Kakariko,                                   Kakariko Potion Shop,                         SHOP_POTION_KAKARIKO
+KAKARIKO_FROM_SHOP_POTION_BACK,           indoors-exit,     Kakariko Back,                              Kakariko Potion Shop Back,                    SHOP_POTION_KAKARIKO_BACK
+KAKARIKO_FROM_ARCHERY,                    indoors-exit,     Kakariko,                                   Shooting Gallery Adult,                       ADULT_ARCHERY
