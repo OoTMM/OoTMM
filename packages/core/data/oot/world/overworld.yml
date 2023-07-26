@@ -717,7 +717,7 @@
     "Kakariko Potion Shop Item 7": "is_adult && shop_price(0x3e)"
     "Kakariko Potion Shop Item 8": "is_adult && shop_price(0x3f)"
 "Kakariko Potion Shop Back":
-  region: KAKARIKO
+  region: NONE
   exits:
     "Kakariko Back": "is_adult"
     "Kakariko Potion Shop": "true"
