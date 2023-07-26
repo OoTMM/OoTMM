@@ -203,9 +203,9 @@ static int hasSoul(s16 gi)
 
     soulId = gi - GI_MM_SOUL_OCTOROK;
     if (soulId >= 32)
-        return gMmSouls2 & (1 << (soulId - 32));
+        return !!(gMmSouls2 & (1 << (soulId - 32)));
     else
-        return gMmSouls1 & (1 << soulId);
+        return !!(gMmSouls1 & (1 << soulId));
 }
 
 static int canSpawnSoul(GameState_Play* play, s16 actorId, u16 variable)
