@@ -71,6 +71,10 @@ FAIRY_DEFENSE,                            indoors,          Fairy Fountain Defen
 FAIRY_DIN,                                indoors,          Fairy Fountain Din,                         Near Fairy Fountain Din,                      HYRULE_CASTLE_FROM_FAIRY
 FAIRY_FARORE,                             indoors,          Fairy Fountain Farore,                      Zora Fountain,                                ZORA_FOUNTAIN_FROM_FAIRY
 FAIRY_NAYRU,                              indoors,          Fairy Fountain Nayru,                       Desert Colossus,                              DESERT_COLOSSUS_FROM_FAIRY
+BOMBCHU_BOWLING,                          indoors,          Bombchu Bowling,                            Market,                                       MARKET_FROM_BOWLING
+TREASURE_GAME,                            indoors,          Treasure Game,                              Market,                                       MARKET_FROM_TREASURE_GAME
+BOMBCHU_SHOP,                             indoors,          Market Bombchu Shop,                        Back Alley,                                   MARKET_FROM_BOMBCHU_SHOP
+ALLEY_HOUSE,                              indoors,          Market Back Alley East Home,                Back Alley,                                   MARKET_FROM_ALLEY_HOUSE
 HOUSE_LINK,                               indoors-extra,    Link's House,                               Kokiri Forest,                                KOKIRI_FOREST_FROM_LINK
 TEMPLE_OF_TIME,                           indoors-extra,    Temple of Time,                             Temple of Time Entryway,                      TEMPLE_OF_TIME_ENTRYWAY_FROM_TEMPLE
 WINDMILL,                                 indoors-extra,    Windmill,                                   Kakariko,                                     KAKARIKO_FROM_WINDMILL
@@ -100,9 +104,13 @@ OUTSIDE_GANON_FROM_FAIRY,                 indoors-exit,     Near Fairy Fountain 
 HYRULE_CASTLE_FROM_FAIRY,                 indoors-exit,     Near Fairy Fountain Din,                    Fairy Fountain Din,                           FAIRY_DIN
 ZORA_FOUNTAIN_FROM_FAIRY,                 indoors-exit,     Zora Fountain,                              Fairy Fountain Farore,                        FAIRY_FARORE
 DESERT_COLOSSUS_FROM_FAIRY,               indoors-exit,     Desert Colossus,                            Fairy Fountain Nayru,                         FAIRY_NAYRU
-TEMPLE_OF_TIME_ENTRYWAY_FROM_TEMPLE,      indoors-special,  Temple of Time Entryway,                    Temple of Time,                               TEMPLE_OF_TIME
-KOKIRI_FOREST_FROM_LINK,                  indoors-special,  Kokiri Forest,                              Link's House,                                 HOUSE_LINK
-KAKARIKO_FROM_WINDMILL,                   indoors-special,  Kakariko,                                   Windmill,                                     WINDMILL
+MARKET_FROM_BOWLING,                      indoors-exit,     Market,                                     Bombchu Bowling,                              BOMBCHU_BOWLING
+MARKET_FROM_TREASURE_GAME,                indoors-exit,     Market,                                     Treasure Game,                                TREASURE_GAME
+MARKET_FROM_BOMBCHU_SHOP,                 indoors-exit,     Back Alley,                                 Bombchu Shop,                                 BOMBCHU_SHOP
+MARKET_FROM_ALLEY_HOUSE,                  indoors-exit,     Back Alley,                                 Market Back Alley East Home,                  ALLEY_HOUSE
+TEMPLE_OF_TIME_ENTRYWAY_FROM_TEMPLE,      indoors-exit,     Temple of Time Entryway,                    Temple of Time,                               TEMPLE_OF_TIME
+KOKIRI_FOREST_FROM_LINK,                  indoors-exit,     Kokiri Forest,                              Link's House,                                 HOUSE_LINK
+KAKARIKO_FROM_WINDMILL,                   indoors-exit,     Kakariko,                                   Windmill,                                     WINDMILL
 SHOP_POTION_KAKARIKO,                     indoors-special,  Kakariko Potion Shop,                       Kakariko,                                     KAKARIKO_FROM_SHOP_POTION
 KAKARIKO_FROM_SHOP_POTION,                indoors-special,  Kakariko,                                   Kakariko Potion Shop,                         SHOP_POTION_KAKARIKO
 SHOP_POTION_KAKARIKO_BACK,                indoors-special,  Kakariko Potion Shop Back,                  Kakariko Back,                                KAKARIKO_FROM_SHOP_POTION_BACK
