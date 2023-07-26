@@ -52,6 +52,7 @@
 # define AC_EN_DH                   0x0a4
 # define AC_EN_DHA                  0x0a5
 # define AC_BOSS_VA                 0x0ba
+# define AC_EN_SYATEKI_MAN          0x0c1
 # define AC_BOSS_MO                 0x0c4
 # define AC_EN_SB                   0x0c5
 # define AC_EN_BIGOKUTA             0x0c6

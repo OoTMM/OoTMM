@@ -124,6 +124,13 @@ static int canSpawnSoul(GameState_Play* play, s16 actorId, u16 variable)
         return hasSoul(GI_OOT_SOUL_BONGO_BONGO);
     case AC_BOSS_TW:
         return hasSoul(GI_OOT_SOUL_TWINROVA);
+    case AC_EN_SYATEKI_MAN:
+        if(gSave.entrance == ENTR_OOT_CHILD_ARCHERY && gSave.age == AGE_CHILD)
+            return 1;
+        if(gSave.entrance == ENTR_OOT_ADULT_ARCHERY && gSave.age == AGE_ADULT)
+            return 1;
+        else
+            return 0;
     default:
         return 1;
     }
