@@ -123,7 +123,7 @@ OOT_CHILD_ARCHERY:                          0x16d
 OOT_MARKET_FROM_ARCHERY:                    0x1cd
 OOT_KAKARIKO_BAZAAR:                        0xb7
 OOT_KAKARIKO_FROM_BAZAAR:                   0x201
-OOT_ADULT_ARCHERY:                          0x2ea
+OOT_ADULT_ARCHERY:                          0x3b
 OOT_KAKARIKO_FROM_ARCHERY:                  0x463
 
 # Custom
