@@ -239,9 +239,11 @@ typedef struct
     /* 0x13EA */ u16 hudVisibilityMode; // current hud visibility mode
     /* 0x13EC */ u16 hudVisibilityModeTimer; // number of frames in the transition to a new hud visibility mode. Used to step alpha
     /* 0x13EE */ u16 prevHudVisibilityMode; // used to store and recover hud visibility mode for pause menu and text boxes
-    char    unk_13f0[0x06];
-    s16     magicTarget;
-    char    unk_13f8[0x02];
+    /* 0x13F0 */ s16 magicState; // determines magic meter behavior on each frame
+    /* 0x13F2 */ s16 prevMagicState; // used to resume the previous state after adding or filling magic
+    /* 0x13F4 */ s16 magicCapacity; // maximum magic available
+    /* 0x13F6 */ s16 magicFillTarget; // target used to fill magic. Target can either be full capacity (Magic_Fill, magic upgrades), or the saved magic amount (loading a file, game over)
+    /* 0x13F8 */ s16 magicTarget; // target for magic to step to when adding or consuming magic
     u16     eventInf[4];
     u16     mapIndex;
     char    unk_1404[0xe];
