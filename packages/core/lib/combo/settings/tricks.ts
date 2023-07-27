@@ -31,6 +31,7 @@ export const TRICKS = {
   OOT_MQ_ICE_SCARE_NOTHING: "MQ Ice Cavern GS without Scarecrow or Hover Boots",
   OOT_MQ_ICE_SCARE_HOVER: "MQ Ice Cavern GS using only Hover Boots",
   OOT_MQ_GTG_FLAMES: "MQ Gerudo Training Grounds Lava Room Walk along Flame Circles",
+  OOT_FORTRESS_JUMPS: "Jump up to higher ledges outside Gerudo Fortress.",
   MM_LENS: "Fewer Lens Requirements (MM)",
   MM_PALACE_BEAN_SKIP: "Skip Planting Beans in Deku Palace",
   MM_DARMANI_WALL: "Climb Mountain Village Wall Blind",

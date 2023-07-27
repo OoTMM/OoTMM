@@ -121,6 +121,7 @@
     "Owl Clock Town": "true"
   locations:
     "Initial Song of Healing": "true"
+    "Clock Town Platform HP": "true"
 "Clock Town South":
   region: CLOCK_TOWN_SOUTH
   exits:

@@ -1377,13 +1377,13 @@
     "Gerudo Fortress Carpenter 2 Top": "true"
     "Gerudo Fortress Carpenter 3 Top": "true"
     "Gerudo Fortress Kitchen Ledge Near Tunnel": "true"
-    "Gerudo Fortress Upper-Right Ledge": "false" #Placeholder for trick jump later
+    "Gerudo Fortress Upper-Right Ledge": "trick(OOT_FORTRESS_JUMPS) && is_adult"
 "Gerudo Fortress Upper-Center Ledge":
   region: GERUDO_FORTRESS
   exits:
     "Gerudo Fortress Kitchen Ledge Away from Tunnel": "true"
     "Gerudo Fortress Lower-Center Ledge": "true"
-    "Gerudo Fortress Upper-Right Ledge": "is_adult" #Kid is too short to climb the ledge.
+    "Gerudo Fortress Upper-Right Ledge": "is_adult || trick(OOT_FORTRESS_JUMPS)" #Kid is too short to climb the ledge normally.
     "Gerudo Fortress Upper-Left Ledge": "can_longshot"
     "Gerudo Fortress Center Ledge": "true"
 "Gerudo Fortress Upper-Right Ledge":
@@ -1391,7 +1391,7 @@
   exits:
     "Gerudo Fortress Lower-Center Ledge": "true"
     "Gerudo Fortress Lower-Right Ledge": "true"
-    "Gerudo Fortress Upper-Left Ledge": "scarecrow_hookshot || can_longshot || (is_adult && has_hover_boots)"
+    "Gerudo Fortress Upper-Left Ledge": "scarecrow_hookshot || can_longshot || has_hover_boots"
     "Gerudo Fortress Center Ledge": "true"
   locations:
     "Gerudo Fortress GS Wall": "is_adult && can_collect_distance && gs_night"
