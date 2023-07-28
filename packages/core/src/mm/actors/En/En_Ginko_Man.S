@@ -3,6 +3,7 @@
 #define RUPEES_REWARD_1    200
 #define RUPEES_REWARD_2    500
 #define RUPEES_REWARD_3   1000
+#define RUPEES_MAX        9999
 
 /* Force the regular wallet as the first reward */
 PATCH_START 0x80a655f0
@@ -51,7 +52,7 @@ PATCH_START 0x80a64984
 PATCH_END
 
 PATCH_START 0x80a64ba8
-  sltiu at,t5,RUPEES_REWARD_3
+  sltiu at,t5,RUPEES_MAX
 PATCH_END
 
 PATCH_START 0x80a64e44
