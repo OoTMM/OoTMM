@@ -8,68 +8,105 @@ static void debugCheat(GameState_Play* play)
 #if defined(DEBUG)
     //if (play->gs.input[0].current.buttons & L_TRIG)
     {
-        gSave.itemEquips.sword = 1;
+        gSave.itemEquips.sword = 3;
         gSave.itemEquips.shield = 2;
         gMmExtraFlags2.progressiveShield = 1;
-        gSave.itemEquips.buttonItems[0][0] = ITEM_MM_SWORD_KOKIRI;
-        gSave.inventory.items[ITS_MM_STICKS] = ITEM_MM_STICK;
+        gSave.inventory.upgrades.quiver = 3;
+        gSave.inventory.upgrades.dekuStick = 3;
+        gSave.inventory.upgrades.dekuNut = 3;
+        gMmExtraFlags2.childWallet = 1;
+        gSave.inventory.upgrades.wallet = 3;
+        gMmExtraFlags3.bottomlessWallet = 1;
+        gSave.inventory.upgrades.bombBag = 3;
+
+        gSave.itemEquips.buttonItems[0][0] = ITEM_MM_SWORD_GILDED;
         gSave.inventory.items[ITS_MM_OCARINA] = ITEM_MM_OCARINA_OF_TIME;
-        gSave.inventory.items[ITS_MM_MASK_DEKU] = ITEM_MM_MASK_DEKU;
-        gSave.inventory.items[ITS_MM_MASK_ZORA] = ITEM_MM_MASK_ZORA;
-        gSave.inventory.items[ITS_MM_MASK_GORON] = ITEM_MM_MASK_GORON;
         gSave.inventory.items[ITS_MM_BOW] = ITEM_MM_BOW;
-        gSave.inventory.items[ITS_MM_LENS] = ITEM_MM_LENS_OF_TRUTH;
+        gSave.inventory.items[ITS_MM_ARROW_FIRE] = ITEM_MM_ARROW_FIRE;
+        gSave.inventory.items[ITS_MM_ARROW_ICE] = ITEM_MM_ARROW_ICE;
+        gSave.inventory.items[ITS_MM_ARROW_LIGHT] = ITEM_MM_ARROW_LIGHT;
         gSave.inventory.items[ITS_MM_BOMBS] = ITEM_MM_BOMB;
+        gSave.inventory.items[ITS_MM_BOMBCHU] = ITEM_MM_BOMBCHU;
+        gSave.inventory.items[ITS_MM_STICKS] = ITEM_MM_STICK;
+        gSave.inventory.items[ITS_MM_NUTS] = ITEM_MM_NUT;
+        gSave.inventory.items[ITS_MM_BEANS] = ITEM_MM_MAGIC_BEAN;
+        gSave.inventory.items[ITS_MM_KEG] = ITEM_MM_POWDER_KEG;
+        gSave.inventory.items[ITS_MM_PICTOBOX] = ITEM_MM_PICTOGRAPH_BOX;
+        gSave.inventory.items[ITS_MM_LENS] = ITEM_MM_LENS_OF_TRUTH;
         gSave.inventory.items[ITS_MM_HOOKSHOT] = ITEM_MM_HOOKSHOT;
         gSave.inventory.items[ITS_MM_GREAT_FAIRY_SWORD] = ITEM_MM_GREAT_FAIRY_SWORD;
-        gSave.inventory.upgrades.quiver = 3;
-        gSave.inventory.upgrades.wallet = 2;
-        gSave.inventory.upgrades.bombBag = 3;
-        gSave.playerData.rupees = 500;
+        gSave.inventory.items[ITS_MM_BOTTLE + 0] = ITEM_MM_BOTTLED_DEKU_PRINCESS;
+        gSave.inventory.items[ITS_MM_BOTTLE + 1] = ITEM_MM_BOTTLED_SPRING_WATER_HOT;
+        gSave.inventory.items[ITS_MM_BOTTLE + 2] = ITEM_MM_BOTTLE_EMPTY;
+        gSave.inventory.items[ITS_MM_BOTTLE + 3] = ITEM_MM_BOTTLE_EMPTY;
+        gSave.inventory.items[ITS_MM_BOTTLE + 4] = ITEM_MM_BOTTLE_EMPTY;
+        gSave.inventory.items[ITS_MM_BOTTLE + 5] = ITEM_MM_BOTTLE_EMPTY;
+
+        gSave.inventory.items[ITS_MM_MASK_POSTMAN] = ITEM_MM_MASK_POSTMAN;
+        gSave.inventory.items[ITS_MM_MASK_ALL_NIGHT] = ITEM_MM_MASK_ALL_NIGHT;
+        gSave.inventory.items[ITS_MM_MASK_BLAST] = ITEM_MM_MASK_BLAST;
+        gSave.inventory.items[ITS_MM_MASK_STONE] = ITEM_MM_MASK_STONE;
+        gSave.inventory.items[ITS_MM_MASK_GREAT_FAIRY] = ITEM_MM_MASK_GREAT_FAIRY;
+        gSave.inventory.items[ITS_MM_MASK_DEKU] = ITEM_MM_MASK_DEKU;
+        gSave.inventory.items[ITS_MM_MASK_KEATON] = ITEM_MM_MASK_KEATON;
+        gSave.inventory.items[ITS_MM_MASK_BREMEN] = ITEM_MM_MASK_BREMEN;
+        gSave.inventory.items[ITS_MM_MASK_BUNNY] = ITEM_MM_MASK_BUNNY;
+        gSave.inventory.items[ITS_MM_MASK_DON_GERO] = ITEM_MM_MASK_DON_GERO;
+        gSave.inventory.items[ITS_MM_MASK_SCENTS] = ITEM_MM_MASK_SCENTS;
+        gSave.inventory.items[ITS_MM_MASK_GORON] = ITEM_MM_MASK_GORON;
+        gSave.inventory.items[ITS_MM_MASK_ROMANI] = ITEM_MM_MASK_ROMANI;
+        gSave.inventory.items[ITS_MM_MASK_TROUPE_LEADER] = ITEM_MM_MASK_TROUPE_LEADER;
+        gSave.inventory.items[ITS_MM_MASK_KAFEI] = ITEM_MM_MASK_KAFEI;
+        gSave.inventory.items[ITS_MM_MASK_COUPLE] = ITEM_MM_MASK_COUPLE;
+        gSave.inventory.items[ITS_MM_MASK_TRUTH] = ITEM_MM_MASK_TRUTH;
+        gSave.inventory.items[ITS_MM_MASK_ZORA] = ITEM_MM_MASK_ZORA;
+        gSave.inventory.items[ITS_MM_MASK_KAMARO] = ITEM_MM_MASK_KAMARO;
+        gSave.inventory.items[ITS_MM_MASK_GIBDO] = ITEM_MM_MASK_GIBDO;
+        gSave.inventory.items[ITS_MM_MASK_GARO] = ITEM_MM_MASK_GARO;
+        gSave.inventory.items[ITS_MM_MASK_CAPTAIN] = ITEM_MM_MASK_CAPTAIN;
+        gSave.inventory.items[ITS_MM_MASK_GIANT] = ITEM_MM_MASK_GIANT;
+        gSave.inventory.items[ITS_MM_MASK_FIERCE_DEITY] = ITEM_MM_MASK_FIERCE_DEITY;
+
+        gSave.playerData.rupees = 9999;
+
         gSave.inventory.quest.songHealing = 1;
         gSave.inventory.quest.songTime = 1;
         gSave.inventory.quest.songSoaring = 1;
         gSave.inventory.quest.songEpona = 1;
-        gSave.inventory.quest.songOrder = 1;
         gSave.inventory.quest.songStorms = 1;
-        gSave.inventory.quest.songNewWave = 1;
         gSave.inventory.quest.songAwakening = 1;
-        gSave.inventory.items[ITS_MM_BOTTLE + 0] = ITEM_MM_BOTTLED_DEKU_PRINCESS;
-        gSave.inventory.items[ITS_MM_BOTTLE + 1] = ITEM_MM_BOTTLED_SPRING_WATER_HOT;
-        gSave.playerData.magicAmount = 0x30;
-        gMmSave.playerData.magicAcquired = 1;
-        gSaveContext.magicTarget = 0x30;
-        gSave.inventory.items[ITS_MM_MASK_GORON] = ITEM_MM_MASK_GORON;
-        gSave.inventory.ammo[ITS_MM_STICKS] = 10;
-        gSave.inventory.ammo[ITS_MM_BOW] = 50;
-        gSave.inventory.ammo[ITS_MM_BOMBS] = 40;
-        gSave.inventory.items[ITS_MM_ARROW_FIRE] = ITEM_MM_ARROW_FIRE;
-        gSave.inventory.items[ITS_MM_ARROW_LIGHT] = ITEM_MM_ARROW_LIGHT;
-        gSave.inventory.items[ITS_MM_PICTOBOX] = ITEM_MM_PICTOGRAPH_BOX;
         gSave.inventory.quest.songLullabyIntro = 1;
         gSave.inventory.quest.songLullaby = 1;
+        gSave.inventory.quest.songNewWave = 1;
+        gSave.inventory.quest.songEmpty = 1;
+        gSave.inventory.quest.songOrder = 1;
+        gSave.inventory.quest.songSun = 1;
+        gSave.inventory.quest.songSaria = 0; // left out because it currently breaks the audio channels 
+        
+        gMmSave.playerData.magicAcquired = 1;
+        gMmSave.playerData.doubleMagic = 1;
+        gMmSave.playerData.magicAmount = 2 * 0x30;
+        gSaveContext.magicTarget = 0x60;
+        gSave.inventory.ammo[ITS_MM_STICKS] = 30;
+        gSave.inventory.ammo[ITS_MM_NUTS] = 40;
+        gSave.inventory.ammo[ITS_MM_KEG] = 1;
+        gSave.inventory.ammo[ITS_MM_BEANS] = 10;
+        gSave.inventory.ammo[ITS_MM_BOW] = 50;
+        gSave.inventory.ammo[ITS_MM_BOMBCHU] = 40;
+        gSave.inventory.ammo[ITS_MM_BOMBS] = 40;
 
-        gSave.inventory.items[ITS_MM_KEG] = ITEM_MM_POWDER_KEG;
-        gSave.inventory.items[ITS_MM_MASK_CAPTAIN] = ITEM_MM_MASK_CAPTAIN;
-        gSave.playerData.healthMax = 0x10 * 10;
+        gSave.playerData.healthMax = 0x10 * 20;
         gSave.playerData.health = gSave.playerData.healthMax;
 
-        gSave.inventory.items[ITS_MM_TRADE1] = ITEM_MM_DEED_LAND;
-        gSave.inventory.items[ITS_MM_TRADE3] = ITEM_MM_LETTER_TO_KAFEI;
-        gMmExtraTrade.trade1 = 0x02;
+        gMmExtraTrade.trade1 = 0x1f;
         gMmExtraTrade.trade2 = 0x03;
         gMmExtraTrade.trade3 = 0x03;
 
+        gSave.inventory.items[ITS_MM_TRADE1] = ITEM_MM_DEED_LAND;
         gSave.inventory.items[ITS_MM_TRADE2] = ITEM_MM_ROOM_KEY;
         gSave.inventory.items[ITS_MM_TRADE3] = ITEM_MM_PENDANT_OF_MEMORIES;
 
-        gSave.inventory.items[ITS_MM_MASK_KAFEI] = ITEM_MM_MASK_KAFEI;
-        gSave.inventory.items[ITS_MM_MASK_ROMANI] = ITEM_MM_MASK_ROMANI;
-        gSave.inventory.items[ITS_MM_MASK_COUPLE] = ITEM_MM_MASK_COUPLE;
-        gSave.inventory.items[ITS_MM_MASK_POSTMAN] = ITEM_MM_MASK_POSTMAN;
-        gSave.inventory.items[ITS_MM_MASK_TROUPE_LEADER] = ITEM_MM_MASK_TROUPE_LEADER;
-        gSave.inventory.items[ITS_MM_MASK_FIERCE_DEITY] = ITEM_MM_MASK_FIERCE_DEITY;
-
+        gMmOwlFlags = 0b001111111111; // all owls statues
         //gSave.inventory.quest.remainsOdolwa = 1;
         //gMmExtraBoss.boss |= 0x01;
 
