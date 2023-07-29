@@ -1666,7 +1666,7 @@
   exits:
     "Ikana Valley": "true"
   events:
-    SUN_MASK: "can_fight || has_explosives || has_arrows"
+    SUN_MASK: "(can_fight || has_explosives || has_arrows) && soul_deku_baba && soul_wolfos"
 "Ikana Canyon":
   region: IKANA_CANYON
   exits:
