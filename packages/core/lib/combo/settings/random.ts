@@ -155,14 +155,18 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
   /* Silver rupees */
   base.silverRupeeShuffle = sampleWeighted(random, { ownDungeon: 10, anywhere: 7, vanilla: 3 });
 
-  /* Stray fairies */
-  base.strayFairyShuffle = sampleWeighted(random, { mixed: 10, anywhere: 7, vanilla: 3, ownDungeon: 5 });
+  /* Stray fairies - 50% together, 50% individual */
   if (booleanWeighted(random, 0.5)) {
-    base.townFairyShuffle = base.strayFairyShuffle === 'anywhere' ? 'anywhere' : 'vanilla';
+    base.strayFairyChestShuffle = sampleWeighted(random, { anywhere: 7, vanilla: 3, ownDungeon: 5 });
+    base.strayFairyOtherShuffle = base.strayFairyChestShuffle;
+    base.townFairyShuffle = base.strayFairyChestShuffle === 'anywhere' ? 'anywhere' : 'vanilla';
   } else {
-    base.townFairyShuffle = sampleWeighted(random, { vanilla: 10, anywhere: 10 });
+    base.strayFairyChestShuffle = sampleWeighted(random, { anywhere: 7, vanilla: 3, ownDungeon: 5 });
+    base.strayFairyOtherShuffle = sampleWeighted(random, { anywhere: 7, vanilla: 3, ownDungeon: 5 });
+    base.townFairyShuffle = sampleWeighted(random, { anywhere: 5, vanilla: 5 });
   }
 
+  /* Dungeon reward shuffle */
   base.dungeonRewardShuffle = sampleWeighted(random, { dungeonBlueWarps: 6, dungeons: 2, dungeonsLimited: 3, anywhere: 2 });
 
   /* Shop shuffle */

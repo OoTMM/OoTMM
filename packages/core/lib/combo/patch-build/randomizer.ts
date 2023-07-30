@@ -171,7 +171,7 @@ const gi = (settings: Settings, game: Game, item: Item, generic: boolean) => {
       itemId = gameId(game, 'BOSS_KEY', '_');
     } else if (ItemHelpers.isTownStrayFairy(item) && settings.townFairyShuffle === 'vanilla') {
       itemId = gameId(game, 'STRAY_FAIRY', '_');
-    } else if (ItemHelpers.isDungeonStrayFairy(item) && settings.strayFairyShuffle !== 'anywhere' && settings.erBoss === 'none') {
+    } else if (ItemHelpers.isDungeonStrayFairy(item) && settings.strayFairyChestShuffle !== 'anywhere' && settings.strayFairyOtherShuffle !== 'anywhere' && settings.erBoss === 'none') {
       itemId = gameId(game, 'STRAY_FAIRY', '_');
     } else if (ItemHelpers.isMap(item) && settings.mapCompassShuffle === 'ownDungeon' && settings.erBoss === 'none') {
       itemId = gameId(game, 'MAP', '_');

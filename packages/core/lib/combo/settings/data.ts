@@ -258,18 +258,29 @@ export const SETTINGS = [{
   ],
   default: 'vanilla'
 }, {
-  key: 'strayFairyShuffle',
-  name: 'Dungeon Stray Fairy Shuffle',
+  key: 'strayFairyChestShuffle',
+  name: 'Dungeon Chest Fairy Shuffle',
   category: 'main.shuffle',
   type: 'enum',
-  description: 'Controls where the Dungeon Stray Fairies can be',
+  description: 'Controls where the Chest Dungeon Stray Fairies can be',
   values: [
     { value: 'vanilla', name: 'Vanilla', description: 'The Dungeon Stray Fairies will be at their original locations' },
-    { value: 'mixed', name: 'Chests Own Dungeon', description: 'The Dungeon Stray Fairies within bubbles are vanilla, but the ones in chests are shuffled within their own dungeon' },
     { value: 'ownDungeon', name: 'Own Dungeon', description: 'All Dungeon Stray Fairies are shuffled within their own dungeon' },
     { value: 'anywhere', name: 'Anywhere', description: 'All Dungeon Stray Fairies are shuffled anywhere' },
   ],
-  default: 'mixed'
+  default: 'ownDungeon'
+}, {
+  key: 'strayFairyOtherShuffle',
+  name: 'Dungeon Freestanding Fairy Shuffle',
+  category: 'main.shuffle',
+  type: 'enum',
+  description: 'Controls where the Freestanding Dungeon Stray Fairies can be',
+  values: [
+    { value: 'vanilla', name: 'Vanilla', description: 'The Dungeon Stray Fairies will be at their original locations' },
+    { value: 'ownDungeon', name: 'Own Dungeon', description: 'All Dungeon Stray Fairies are shuffled within their own dungeon' },
+    { value: 'anywhere', name: 'Anywhere', description: 'All Dungeon Stray Fairies are shuffled anywhere' },
+  ],
+  default: 'vanilla'
 }, {
   key: 'ganonBossKey',
   name: 'Ganon Boss Key Shuffle',

@@ -6,6 +6,7 @@ import { World } from "./world";
 export const isShuffled = (settings: Settings, world: World, loc: string, dungLocations?: Set<string>) => {
   const check = world.checks[loc];
   const item = check.item;
+
   // Gold Skulltulas - 100
   if (ItemHelpers.isGoldToken(item)) {
     if (settings.goldSkulltulaTokens === 'none') {
@@ -23,14 +24,6 @@ export const isShuffled = (settings: Settings, world: World, loc: string, dungLo
   // House Skulltulas - 60
   if (ItemHelpers.isHouseToken(item)) {
     if (settings.housesSkulltulaTokens === 'none') {
-      return false;
-    }
-    return true;
-  }
-
-  // Stray Fairy Shuffle - 60
-  if (ItemHelpers.isDungeonStrayFairy(item)) {
-    if (settings.strayFairyShuffle === 'vanilla') {
       return false;
     }
     return true;

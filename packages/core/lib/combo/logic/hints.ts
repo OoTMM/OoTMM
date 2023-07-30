@@ -6,7 +6,7 @@ import { Game } from '../config';
 import { Monitor } from '../monitor';
 import { Pathfinder } from './pathfind';
 import { ItemPlacement } from './solve';
-import { Location, locationData, makeLocation } from './locations';
+import { Location, isLocationChestFairy, isLocationOtherFairy, locationData, makeLocation } from './locations';
 import { Region, makeRegion } from './regions';
 import { CountMap, countMapArray } from '../util';
 import { ItemGroups, ItemHelpers, Items, PlayerItem, itemByID, makePlayerItem } from '../items';
@@ -203,7 +203,8 @@ export class LogicPassHints {
     /* Get the item and region  */
     const item = this.state.items.get(loc)!;
     const locD = locationData(loc);
-    const region = this.state.worlds[locD.world as number].regions[locD.id];
+    const world = this.state.worlds[locD.world as number];
+    const region = world.regions[locD.id];
 
     /* These specific locations are always ignored */
     if (['OOT Temple of Time Medallion', 'MM Oath to Order', 'OOT Hatch Chicken', 'OOT Hatch Pocket Cucco'].includes(locD.id)) {
@@ -257,8 +258,13 @@ export class LogicPassHints {
       return false;
     }
 
-    /* Non shuffled stray fairy */
-    if (ItemHelpers.isStrayFairy(item.item) && this.state.settings.strayFairyShuffle !== 'anywhere') {
+    /* Non shuffled chest stray fairy */
+    if (isLocationChestFairy(world, loc) && this.state.settings.strayFairyChestShuffle !== 'anywhere') {
+      return false;
+    }
+
+    /* Non shuffled other stray fairy */
+    if (isLocationOtherFairy(world, loc) && this.state.settings.strayFairyOtherShuffle !== 'anywhere') {
       return false;
     }
 

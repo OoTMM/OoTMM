@@ -86,3 +86,15 @@ export function isLocationLicenseGranting(world: World, loc: Location) {
     return false;
   return true;
 }
+
+export function isLocationChestFairy(world: World, loc: Location) {
+  const locD = locationData(loc);
+  const check = world.checks[locD.id];
+  return check.type !== 'sf' && ItemHelpers.isDungeonStrayFairy(check.item);
+}
+
+export function isLocationOtherFairy(world: World, loc: Location) {
+  const locD = locationData(loc);
+  const check = world.checks[locD.id];
+  return (check.type === 'sf') && ItemHelpers.isDungeonStrayFairy(check.item);
+}
