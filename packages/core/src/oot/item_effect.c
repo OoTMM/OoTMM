@@ -29,7 +29,7 @@ static void addRupees(u16 count)
 static void refillMagic(int level)
 {
     gOotSave.playerData.magicSize = 0;
-    gSaveContext.magicTarget = 0x30 * level;
+    gSaveContext.magicFillTarget = 0x30 * level;
 }
 
 static void reloadIconsC(GameState_Play* play)
