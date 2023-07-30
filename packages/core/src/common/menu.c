@@ -871,7 +871,7 @@ static void drawMenuInfo(GameState_Play* play)
 {
     OPEN_DISPS(play->gs.gfx);
     gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 255, 255, 0, 255);
-    printStr(play, "Informations", -110.f, 54.f);
+    printStr(play, "Information", -110.f, 54.f);
     for (int i = 0; i < LINES; ++i)
         printDungeonData(play, g.menuCursor, i);
     CLOSE_DISPS();
