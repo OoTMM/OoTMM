@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/custom.h>
+#include <combo/menu.h>
 #include <combo/dma.h>
 
 static int checkItemToggle(GameState_Play* play)
@@ -92,8 +93,6 @@ void KaleidoSetCursorColor(GameState_Play* play)
     CLOSE_DISPS();
 }
 
-static int isKeysMenu;
-
 typedef void (*KaleidoScopeHandler)(GameState_Play*);
 typedef void (*KaleidoScopeHandler2)(GameState_Play*, void*);
 
@@ -104,16 +103,13 @@ static void KaleidoScope_HandleMapDungeonMenu(GameState_Play* play, void* unk, u
 
     onMenu = play->pauseCtx.screen_idx == 1;
     if (onMenu && play->gs.input[0].pressed.buttons & (L_TRIG | U_CBUTTONS))
-    {
-        isKeysMenu = !isKeysMenu;
-        PlaySound(0x4809);
-    }
+        comboMenuNext();
 
-    if (isKeysMenu)
+    if (g.menuScreen)
     {
         if (onMenu)
-            comboMenuKeysUpdate(play);
-        comboMenuKeysDraw(play);
+            comboMenuUpdate(play);
+        comboMenuDraw(play);
     }
     else
     {
@@ -142,7 +138,7 @@ static void KaleidoScope_HandleDungeonChests(GameState_Play* play)
 {
     KaleidoScopeHandler handler;
 
-    if (!isKeysMenu)
+    if (!g.menuScreen)
     {
         handler = OverlayAddr(0x808292e8);
         handler(play);

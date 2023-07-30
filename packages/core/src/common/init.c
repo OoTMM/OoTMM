@@ -2,6 +2,7 @@
 #include <combo/net.h>
 #include <combo/sr.h>
 #include <combo/dma.h>
+#include <combo/menu.h>
 
 ComboGlobal g;
 

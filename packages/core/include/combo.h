@@ -316,11 +316,6 @@ extern s32 gLastScene;
 /* Warp */
 void comboTriggerWarp(GameState_Play* play, int index);
 
-/* Menu */
-void comboMenuInit(void);
-void comboMenuKeysUpdate(GameState_Play* play);
-void comboMenuKeysDraw(GameState_Play* play);
-
 /* Custom Shaders */
 void Shader_Xlu0(GameState_Play* play, s16 shaderId);
 
@@ -359,6 +354,9 @@ typedef struct
     u8                      silverRupee;
     u8                      delayedSwitchFlag;
     u8                      roomEnemyLackSoul:1;
+    u8                      menuScreen;
+    u8                      menuCursor;
+    u8                      menuCursorMax;
 }
 ComboGlobal;
 

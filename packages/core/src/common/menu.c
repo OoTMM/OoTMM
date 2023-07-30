@@ -1,7 +1,10 @@
 #include <combo.h>
 #include <combo/custom.h>
 #include <combo/dungeon.h>
+#include <combo/menu.h>
 #include <combo/sr.h>
+
+#define LINES 9
 
 #define DD_OOT          0x00
 #define DD_MM           0x01
@@ -58,6 +61,106 @@ static DungeonDef gDungeonDefs[] = {
     { "Clock Town",     0,                              DD_MISC, 0 },
     { "Tokens",         1,                              DD_MISC, 0 },
     { "Triforce",       2,                              DD_MISC, 0 },
+};
+
+static const char* const kSoulsOot[] = {
+    "Stalfos",
+    "Octoroks",
+    "Wallmasters",
+    "Dodongos",
+    "Keeses",
+    "Tektites",
+    "Peahats",
+    "Lizalfos/Dinalfos",
+    "Gohma Larvae",
+    "Shaboms",
+    "Baby Dodongos",
+    "Biris/Baris",
+    "Tailpasarans",
+    "Skulltulas",
+    "Torch Slugs",
+    "Moblins",
+    "Armos",
+    "Deku Babas",
+    "Deku Scrubs",
+    "Bubbles",
+    "Beamos",
+    "Floormasters",
+    "ReDeads/Gibdos",
+    "Skullwalltulas",
+    "Flare Dancers",
+    "Dead Hands",
+    "Shell Blades",
+    "Like-Likes",
+    "Spikes",
+    "Anubis",
+    "Iron Knuckles",
+    "Skull Kids",
+    "Flying Pots",
+    "Freezards",
+    "Stingers",
+    "Wolfos",
+    "Guays",
+    "Queen Gohma",
+    "King Dodongo",
+    "Barinade",
+    "Phantom Ganon",
+    "Volvagia",
+    "Morpha",
+    "Bongo-Bongo",
+    "Twinrova",
+};
+
+static const char* const kSoulsMm[] = {
+    "Octoroks",
+    "Wallmasters",
+    "Dodongos",
+    "Keeses",
+    "Tektites",
+    "Peahats",
+    "Lizalfos/Dinalfos",
+    "Skulltulas",
+    "Armos",
+    "Deku Babas",
+    "Deku Scrubs",
+    "Bubbles",
+    "Beamos",
+    "ReDeads/Gibdos",
+    "Skullwalltulas",
+    "Shell Blades",
+    "Like-Likes",
+    "Iron Knuckles",
+    "Freezards",
+    "Wolfos",
+    "Guays",
+    "Flying Pots",
+    "Floormasters",
+    "Chuchus",
+    "Deep Pythons",
+    "Skullfish",
+    "Dexihands",
+    "Dragonflys",
+    "Eenos",
+    "Eyegores",
+    "Hiploops",
+    "Real Bombchu",
+    "Takkuri",
+    "Boes",
+    "Nejirons",
+    "Bio Babas",
+    "Garo",
+    "Wizzrobes",
+    "Gomess",
+    "Gekkos",
+    "Bad Bats",
+    "Snappers",
+    "Warts",
+    "Captain Keeta",
+    "Igos",
+    "Odolwa",
+    "Goht",
+    "Gyorg",
+    "Twinmold",
 };
 
 static int digitCount(int v)
@@ -430,6 +533,47 @@ static void printDungeonSilverRupees(GameState_Play* play, float x, float y, int
     CLOSE_DISPS();
 }
 
+static int hasSoulOot(int id)
+{
+    if (id >= 32)
+        return gOotSouls2 & (1 << (id - 32));
+    return gOotSouls1 & (1 << id);
+}
+
+static int hasSoulMm(int id)
+{
+    if (id >= 32)
+        return gMmSouls2 & (1 << (id - 32));
+    return gMmSouls1 & (1 << id);
+}
+
+static void printSoul(GameState_Play* play, const char* const * names, int base, int index, int mm)
+{
+    const char* name;
+    float x;
+    float y;
+    int id;
+    int hasSoul;
+
+    id = base + index;
+    hasSoul = mm ? hasSoulMm(id) : hasSoulOot(id);
+    name = names[id];
+    x = -110.f;
+    y = 42.f - 12 * index;
+
+    OPEN_DISPS(play->gs.gfx);
+    if (hasSoul)
+    {
+        gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 255, 255, 255, 255);
+    }
+    else
+    {
+        gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 70, 70, 70, 255);
+    }
+    printStr(play, name, x, y);
+    CLOSE_DISPS();
+}
+
 static void printDungeonData(GameState_Play* play, int base, int index)
 {
     const DungeonDef* def;
@@ -493,7 +637,7 @@ static void printDungeonData(GameState_Play* play, int base, int index)
     }
 
     x = -110.f;
-    y = 54.f - 12 * index;
+    y = 42.f - 12 * index;
     gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 255, 255, 255, 255);
     printStr(play, def->name, x, y);
     x += offX;
@@ -567,8 +711,6 @@ static void printDungeonData(GameState_Play* play, int base, int index)
     }
     CLOSE_DISPS();
 }
-
-static int menuCursor;
 
 void comboMenuInit(void)
 {
@@ -654,7 +796,7 @@ void comboMenuInit(void)
     }
 }
 
-void comboMenuKeysUpdate(GameState_Play* play)
+static void updateCursor(GameState_Play* play)
 {
     static int delay;
     int change;
@@ -667,16 +809,16 @@ void comboMenuKeysUpdate(GameState_Play* play)
     else
     {
         float stickY = play->gs.input[0].current.y / 128.f;
-        if (stickY > 0.5f && menuCursor > 0)
+        if (stickY > 0.5f && g.menuCursor > 0)
         {
             change = 1;
-            menuCursor--;
+            g.menuCursor--;
         }
 
-        if (stickY < -0.5f && menuCursor < menuCount() - 10)
+        if (stickY < -0.5f && g.menuCursor < g.menuCursorMax - LINES)
         {
             change = 1;
-            menuCursor++;
+            g.menuCursor++;
         }
 
         if (change)
@@ -687,15 +829,92 @@ void comboMenuKeysUpdate(GameState_Play* play)
     }
 }
 
-void comboMenuKeysDraw(GameState_Play* play)
+void comboMenuUpdate(GameState_Play* play)
 {
+    switch (g.menuScreen)
+    {
+    case MENU_INFO:
+        g.menuCursorMax = menuCount();
+        break;
+    case MENU_SOULS_OOT:
+        g.menuCursorMax = ARRAY_SIZE(kSoulsOot);
+        break;
+    case MENU_SOULS_MM:
+        g.menuCursorMax = ARRAY_SIZE(kSoulsMm);
+        break;
+    }
+
+    updateCursor(play);
+}
+
+static void drawMenuSoulsOot(GameState_Play* play)
+{
+    OPEN_DISPS(play->gs.gfx);
+    gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 255, 255, 0, 255);
+    printStr(play, "Souls - OoT", -110.f, 54.f);
+    for (int i = 0; i < LINES; ++i)
+        printSoul(play, kSoulsOot, g.menuCursor, i, 0);
+    CLOSE_DISPS();
+}
+
+static void drawMenuSoulsMm(GameState_Play* play)
+{
+    OPEN_DISPS(play->gs.gfx);
+    gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 255, 255, 0, 255);
+    printStr(play, "Souls - MM", -110.f, 54.f);
+    for (int i = 0; i < LINES; ++i)
+        printSoul(play, kSoulsMm, g.menuCursor, i, 1);
+    CLOSE_DISPS();
+}
+
+static void drawMenuInfo(GameState_Play* play)
+{
+    OPEN_DISPS(play->gs.gfx);
+    gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 255, 255, 0, 255);
+    printStr(play, "Informations", -110.f, 54.f);
+    for (int i = 0; i < LINES; ++i)
+        printDungeonData(play, g.menuCursor, i);
+    CLOSE_DISPS();
+}
+
+void comboMenuDraw(GameState_Play* play)
+{
+    /* Draw the black background */
     OPEN_DISPS(play->gs.gfx);
     gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 0, 0, 0, 255);
     gDPSetCombineMode(POLY_OPA_DISP++, G_CC_PRIMITIVE, G_CC_PRIMITIVE);
     drawBackground(play, -110.f, 59.f, 217.f, 128.f);
     gDPSetCombineMode(POLY_OPA_DISP++, G_CC_MODULATEIA_PRIM, G_CC_MODULATEIA_PRIM);
     gSPSegment(POLY_OPA_DISP++, 0x06, gCustomKeep);
-    for (int i = 0; i < 10; ++i)
-        printDungeonData(play, menuCursor, i);
     CLOSE_DISPS();
+
+    switch (g.menuScreen)
+    {
+    case MENU_INFO:
+        drawMenuInfo(play);
+        break;
+    case MENU_SOULS_OOT:
+        drawMenuSoulsOot(play);
+        break;
+    case MENU_SOULS_MM:
+        drawMenuSoulsMm(play);
+        break;
+    }
+}
+
+void comboMenuNext(void)
+{
+    PlaySound(0x4809);
+    g.menuScreen++;
+    g.menuCursor = 0;
+    g.menuCursorMax = 0;
+
+    if (g.menuScreen == MENU_SOULS_OOT && !comboConfig(CFG_OOT_SOULS))
+        g.menuScreen++;
+
+    if (g.menuScreen == MENU_SOULS_MM && !comboConfig(CFG_MM_SOULS))
+        g.menuScreen++;
+
+    if (g.menuScreen >= MENU_MAX)
+        g.menuScreen = MENU_NONE;
 }

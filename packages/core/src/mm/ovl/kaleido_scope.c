@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/dma.h>
+#include <combo/menu.h>
 
 void KaleidoScope_AfterSetCutsorColor(GameState_Play* play)
 {
@@ -134,17 +135,15 @@ void KaleidoScope_ShowItemMessage(GameState_Play* play, u16 messageId, u8 yPosit
     }
 }
 
-static int isKeysMenu;
-
 typedef void (*KaleidoScopeHandler)(GameState_Play*);
 
 static void KaleidoScope_DrawMapDungeonMenu(GameState_Play* play, u32 overlayAddr)
 {
     KaleidoScopeHandler handler;
 
-    if (isKeysMenu)
+    if (g.menuScreen)
     {
-        comboMenuKeysDraw(play);
+        comboMenuDraw(play);
     }
     else
     {
@@ -158,14 +157,11 @@ static void KaleidoScope_UpdateMapDungeonMenu(GameState_Play* play, u32 overlayA
     KaleidoScopeHandler handler;
 
     if (play->gs.input[0].pressed.buttons & (L_TRIG | U_CBUTTONS))
-    {
-        isKeysMenu = !isKeysMenu;
-        PlaySound(0x4809);
-    }
+        comboMenuNext();
 
-    if (isKeysMenu)
+    if (g.menuScreen)
     {
-        comboMenuKeysUpdate(play);
+        comboMenuUpdate(play);
     }
     else
     {
@@ -206,7 +202,7 @@ PATCH_CALL(0x8082adf0, KaleidoScope_UpdateDungeonMenu);
 
 static void KaleidoScope_DrawDungeonUnk1(void* unk)
 {
-    if (!isKeysMenu)
+    if (!g.menuScreen)
         Gfx_SetupDL_42Opa(unk);
 }
 
@@ -215,7 +211,7 @@ PATCH_CALL(0x80822f3c, KaleidoScope_DrawDungeonUnk1);
 
 static void KaleidoScope_DrawDungeonUnk2(void* unk)
 {
-    if (!isKeysMenu)
+    if (!g.menuScreen)
         DrawDungeonUnk2(unk);
 }
 
