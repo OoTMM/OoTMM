@@ -50,7 +50,7 @@
     "Stone Tower Temple Center Ledge": "has_mask_zora"
     "Stone Tower Temple Water Bridge": "can_goron_bomb_jump && can_use_ice_arrows"
   locations:
-    "Stone Tower Temple Center Across Water Chest": "true"
+    "Stone Tower Temple Center Across Water Chest": "soul(SOUL_DEXIHAND) || has_mask_zora"
 "Stone Tower Temple Water Room":
   dungeon: ST
   exits:
