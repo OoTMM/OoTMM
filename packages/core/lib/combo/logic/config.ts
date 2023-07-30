@@ -1,11 +1,15 @@
 import { Confvar } from '../confvars';
+import { Items, ItemsCount, itemByID } from '../items';
 import { Monitor } from '../monitor';
 import { Random } from '../random';
 import { Settings } from '../settings';
+import { countMapAdd } from '../util';
 import { isEntranceShuffle } from './helpers';
 
 /* This pass pre-computes things from the settings */
 export class LogicPassConfig {
+  private startingItems: ItemsCount;
+
   constructor(
     private readonly state: {
       monitor: Monitor,
@@ -13,6 +17,30 @@ export class LogicPassConfig {
       random: Random,
     }
   ) {
+    /* Starting items */
+    this.startingItems = new Map;
+
+    for (const [itemId, count] of Object.entries(state.settings.startingItems)) {
+      const item = itemByID(itemId);
+      countMapAdd(this.startingItems, item, count);
+    }
+  }
+
+  private startingFairies() {
+    const { settings } = this.state;
+
+    if (settings.strayFairyChestShuffle === 'starting') {
+      countMapAdd(this.startingItems, Items.MM_STRAY_FAIRY_WF, 3);
+      countMapAdd(this.startingItems, Items.MM_STRAY_FAIRY_SH, 7);
+      countMapAdd(this.startingItems, Items.MM_STRAY_FAIRY_GB, 6);
+      countMapAdd(this.startingItems, Items.MM_STRAY_FAIRY_ST, 15);
+    }
+
+    if (['starting', 'removed'].includes(settings.strayFairyOtherShuffle)) {
+      countMapAdd(this.startingItems, Items.MM_STRAY_FAIRY_WF, 12);
+      countMapAdd(this.startingItems, Items.MM_STRAY_FAIRY_SH, 8);
+      countMapAdd(this.startingItems, Items.MM_STRAY_FAIRY_GB, 9);
+    }
   }
 
   run() {
@@ -20,6 +48,9 @@ export class LogicPassConfig {
     const config = new Set<Confvar>;
 
     const { settings } = this.state;
+
+    /* Handle fairies */
+    this.startingFairies();
 
     const exprs: {[k in Confvar]: boolean} = {
       GANON_NO_BOSS_KEY: settings.ganonBossKey === 'removed',
@@ -93,6 +124,7 @@ export class LogicPassConfig {
       OOT_FREE_SCARECROW: settings.freeScarecrowOot,
       OOT_SOULS: settings.enemySoulsOot,
       MM_SOULS: settings.enemySoulsMm,
+      MM_REMOVED_FAIRIES: settings.strayFairyOtherShuffle === 'removed',
     };
 
     for (const v in exprs) {
@@ -101,6 +133,6 @@ export class LogicPassConfig {
       }
     }
 
-    return { config };
+    return { config, startingItems: this.startingItems };
   }
 }

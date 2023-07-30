@@ -89,16 +89,7 @@ const emptyDepList = (): PathfinderDependencyList => ({
   },
 });
 
-const makeStartingItems = (settings: Settings): ItemsCount => {
-  const map: ItemsCount = new Map;
-  for (const [itemId, count] of Object.entries(settings.startingItems)) {
-    const item = itemByID(itemId);
-    map.set(item, count);
-  }
-  return map;
-}
-
-const defaultWorldState = (settings: Settings): PathfinderWorldState => ({
+const defaultWorldState = (startingItems: ItemsCount): PathfinderWorldState => ({
   areas: {
     child: new Map(),
     adult: new Map(),
@@ -117,24 +108,24 @@ const defaultWorldState = (settings: Settings): PathfinderWorldState => ({
     events: new Map(),
   },
   uncollectedLocations: new Set(),
-  items: makeStartingItems(settings),
-  licenses: makeStartingItems(settings),
+  items: new Map(startingItems),
+  licenses: new Map(startingItems),
   renewables: new Map(),
   forbiddenReachableLocations: new Set(),
   events: new Set(),
 });
 
-const defaultWorldStates = (settings: Settings, worldCount: number) => {
+const defaultWorldStates = (startingItems: ItemsCount, worldCount: number) => {
   const ws: PathfinderWorldState[] = [];
 
   for (let world = 0; world < worldCount; ++world) {
-    ws.push(defaultWorldState(settings));
+    ws.push(defaultWorldState(startingItems));
   }
 
   return ws;
 }
 
-const defaultState = (settings: Settings, worldCount: number): PathfinderState => {
+const defaultState = (startingItems: ItemsCount, worldCount: number): PathfinderState => {
   const gossips: Set<string>[] = [];
 
   for (let world = 0; world < worldCount; ++world) {
@@ -145,7 +136,7 @@ const defaultState = (settings: Settings, worldCount: number): PathfinderState =
     previousAssumedItems: new Map,
     goal: false,
     started: false,
-    ws: defaultWorldStates(settings, worldCount),
+    ws: defaultWorldStates(startingItems, worldCount),
     locations: new Set(),
     newLocations: new Set(),
     gossips,
@@ -209,12 +200,13 @@ export class Pathfinder {
   constructor(
     private readonly worlds: World[],
     private readonly settings: Settings,
+    private readonly startingItems: ItemsCount,
   ) {
   }
 
   run(state: PathfinderState | null, opts?: PathfinderOptions) {
     this.opts = opts || {};
-    this.state = state ? (this.opts.inPlace ? state : cloneDeep(state)) : defaultState(this.settings, this.worlds.length);
+    this.state = state ? (this.opts.inPlace ? state : cloneDeep(state)) : defaultState(this.startingItems, this.worlds.length);
 
     /* Restricted locations */
     if (this.opts.restrictedLocations) {

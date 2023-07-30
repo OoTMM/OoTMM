@@ -185,6 +185,18 @@ static void applyStartingEvents(void)
     {
         SetEventChk(EV_OOT_CHK_SONG_SCARECROW_ADULT);
     }
+
+    if (comboConfig(CFG_MM_REMOVED_FAIRIES))
+    {
+        gMmSave.permanentSceneFlags[SCE_MM_TEMPLE_WOODFALL].switch1 |= 0x0007fc00;
+        gMmSave.permanentSceneFlags[SCE_MM_TEMPLE_WOODFALL].collectible |= 0x70000000;
+
+        gMmSave.permanentSceneFlags[SCE_MM_TEMPLE_SNOWHEAD].switch1 |= 0x0007b800;
+        gMmSave.permanentSceneFlags[SCE_MM_TEMPLE_SNOWHEAD].collectible |= 0x40000000;
+
+        gMmSave.permanentSceneFlags[SCE_MM_TEMPLE_GREAT_BAY].switch1 |= 0x00078000;
+        gMmSave.permanentSceneFlags[SCE_MM_TEMPLE_GREAT_BAY].collectible |= 0x7c000000;
+    }
 }
 
 void comboCreateSave(void* unk, void* buffer)

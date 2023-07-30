@@ -4,7 +4,7 @@ import { Monitor } from '../monitor';
 import { Settings } from '../settings';
 import { countMapAdd } from '../util';
 import { exprTrue } from './expr';
-import { LOCATIONS_ZELDA, Location, isLocationRenewable, locationData, makeLocation } from './locations';
+import { LOCATIONS_ZELDA, Location, isLocationChestFairy, isLocationOtherFairy, isLocationRenewable, locationData, makeLocation } from './locations';
 import { ItemSharedDef, SharedItemGroups } from './shared';
 import { World } from './world';
 
@@ -686,6 +686,19 @@ export class LogicPassWorldTransform {
     }
   }
 
+  private makeLocationStarting(loc: string | string[]) {
+    if (typeof loc === 'string') {
+      loc = [loc];
+    }
+
+    for (const locId of loc) {
+      for (const world of this.state.worlds) {
+        world.areas['OOT SPAWN'].locations[locId] = exprTrue();
+        world.regions[locId] = 'NONE';
+      }
+    }
+  }
+
   run() {
     const { settings } = this.state;
     this.state.monitor.log('Logic: World Transform');
@@ -842,16 +855,23 @@ export class LogicPassWorldTransform {
       this.addItem(Items.MM_SONG_SUN);
     }
 
+    /* Handle MM other fairies */
+    if (this.state.settings.strayFairyOtherShuffle === 'removed') {
+      for (let i = 0; i < this.state.worlds.length; ++i) {
+        const world = this.state.worlds[i];
+        for (const locId of world.locations) {
+          const loc = makeLocation(locId, i);
+          if (isLocationOtherFairy(world, loc)) {
+            this.removeLocations([locId]);
+          }
+        }
+      }
+    }
+
     /* Handle Skip Zelda */
     if (this.state.settings.skipZelda) {
       this.removeItem(Items.OOT_CHICKEN);
-
-      for (const loc of LOCATIONS_ZELDA) {
-        for (const world of this.state.worlds) {
-          world.areas['OOT SPAWN'].locations[loc] = exprTrue();
-          world.regions[loc] = 'NONE';
-        }
-      }
+      this.makeLocationStarting(LOCATIONS_ZELDA);
     }
 
     /* Handle open gate */

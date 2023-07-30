@@ -7,7 +7,7 @@ import { LogicEntranceError, LogicError } from './error';
 import { Expr, exprAnd, exprTrue } from './expr';
 import { Location, makeLocation } from './locations';
 import { LogicPassSolver } from './solve';
-import { PlayerItems } from '../items';
+import { ItemsCount, PlayerItems } from '../items';
 
 const BOSS_INDEX_BY_DUNGEON = {
   DT: 0,
@@ -72,6 +72,7 @@ export class LogicPassEntrances {
       fixedLocations: Set<Location>,
       pool: PlayerItems;
       renewableJunks: PlayerItems;
+      startingItems: ItemsCount;
     },
   ) {
   }
@@ -542,7 +543,7 @@ export class LogicPassEntrances {
     }
 
     let anyEr = false;
-    this.pathfinder = new Pathfinder(this.worlds, this.input.settings);
+    this.pathfinder = new Pathfinder(this.worlds, this.input.settings, this.input.startingItems);
 
     for (let i = 0; i < worldsCount; ++i) {
       if (this.input.settings.erRegions !== 'none') {

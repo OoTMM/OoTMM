@@ -9,7 +9,7 @@ import { ItemPlacement } from './solve';
 import { Location, isLocationChestFairy, isLocationOtherFairy, locationData, makeLocation } from './locations';
 import { Region, makeRegion } from './regions';
 import { CountMap, countMapArray } from '../util';
-import { ItemGroups, ItemHelpers, Items, PlayerItem, itemByID, makePlayerItem } from '../items';
+import { ItemGroups, ItemHelpers, Items, ItemsCount, PlayerItem, itemByID, makePlayerItem } from '../items';
 
 const FIXED_HINTS_LOCATIONS = [
   'OOT Skulltula House 10 Tokens',
@@ -125,18 +125,19 @@ export class LogicPassHints {
 
   constructor(
     private readonly state: {
-      monitor: Monitor,
-      random: Random,
-      settings: Settings,
-      worlds: World[],
-      items: ItemPlacement,
-      analysis: Analysis,
-      fixedLocations: Set<Location>,
+      monitor: Monitor;
+      random: Random;
+      settings: Settings;
+      worlds: World[];
+      items: ItemPlacement;
+      analysis: Analysis;
+      fixedLocations: Set<Location>;
+      startingItems: ItemsCount;
     },
   ){
     this.hintsAlways = this.alwaysHints();
     this.hintsSometimes = this.sometimesHints();
-    this.pathfinder = new Pathfinder(state.worlds, state.settings);
+    this.pathfinder = new Pathfinder(state.worlds, state.settings, state.startingItems);
     this.woth = new Set(Array.from(this.state.analysis.required).filter(loc => this.isLocationHintable(loc, 'woth')));
     this.gossip = Array.from({ length: this.state.settings.players }).map(_ => ({}));
   }

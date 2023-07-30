@@ -8,7 +8,7 @@ import { DUNGEONS, Settings, SPECIAL_CONDS, SPECIAL_CONDS_KEYS } from '../settin
 import { HintGossip, WorldHints } from '../logic/hints';
 import { CountMap, countMapAdd, gameId, toU16Buffer, toU32Buffer, toU8Buffer } from '../util';
 import { Patchfile } from './patchfile';
-import { LOCATIONS_ZELDA, makeLocation, makePlayerLocations } from '../logic/locations';
+import { LOCATIONS_ZELDA, isLocationChestFairy, isLocationOtherFairy, makeLocation, makePlayerLocations } from '../logic/locations';
 import { CONFVARS_VALUES, Confvar } from '../confvars';
 import { Region, regionData } from '../logic/regions';
 import { Item, ItemGroups, ItemHelpers, Items, ItemsCount, itemByID } from '../items';
@@ -550,13 +550,9 @@ function addStartingItemLocsWorld(world: number, logic: LogicResult, locs: strin
   }
 }
 
-const effectiveStartingItems = (world: number, logic: LogicResult): ItemsCount => {
+const effectiveStartingItems = (worldId: number, logic: LogicResult): ItemsCount => {
   const { settings } = logic;
-  const startingItems: ItemsCount = new Map;
-  for (const [itemId, count] of Object.entries(logic.settings.startingItems)) {
-    const item = itemByID(itemId);
-    startingItems.set(item, count);
-  }
+  const startingItems = new Map(logic.startingItems);
 
   if (settings.tingleShuffle === 'starting') {
     for (const item of ItemGroups.TINGLE_MAPS) {
@@ -570,8 +566,8 @@ const effectiveStartingItems = (world: number, logic: LogicResult): ItemsCount =
     }
   }
 
-  if (settings.skipZelda) addStartingItemLocsWorld(world, logic, LOCATIONS_ZELDA, startingItems);
-  if (settings.gerudoFortress === 'open') addStartingItemLocsWorld(world, logic, ['OOT Gerudo Member Card'], startingItems);
+  if (settings.skipZelda) addStartingItemLocsWorld(worldId, logic, LOCATIONS_ZELDA, startingItems);
+  if (settings.gerudoFortress === 'open') addStartingItemLocsWorld(worldId, logic, ['OOT Gerudo Member Card'], startingItems);
 
   return startingItems;
 }

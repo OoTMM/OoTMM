@@ -157,12 +157,12 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
 
   /* Stray fairies - 50% together, 50% individual */
   if (booleanWeighted(random, 0.5)) {
-    base.strayFairyChestShuffle = sampleWeighted(random, { anywhere: 7, vanilla: 3, ownDungeon: 5 });
-    base.strayFairyOtherShuffle = base.strayFairyChestShuffle;
+    base.strayFairyOtherShuffle = sampleWeighted(random, { anywhere: 7, vanilla: 3, ownDungeon: 5, starting: 3, removed: 3 });
+    base.strayFairyChestShuffle = base.strayFairyOtherShuffle === 'removed' ? 'starting' : base.strayFairyOtherShuffle;
     base.townFairyShuffle = base.strayFairyChestShuffle === 'anywhere' ? 'anywhere' : 'vanilla';
   } else {
-    base.strayFairyChestShuffle = sampleWeighted(random, { anywhere: 7, vanilla: 3, ownDungeon: 5 });
-    base.strayFairyOtherShuffle = sampleWeighted(random, { anywhere: 7, vanilla: 3, ownDungeon: 5 });
+    base.strayFairyChestShuffle = sampleWeighted(random, { anywhere: 7, vanilla: 3, ownDungeon: 5, starting: 6 });
+    base.strayFairyOtherShuffle = sampleWeighted(random, { anywhere: 7, vanilla: 3, ownDungeon: 5, starting: 3, removed: 3 });
     base.townFairyShuffle = sampleWeighted(random, { anywhere: 5, vanilla: 5 });
   }
 

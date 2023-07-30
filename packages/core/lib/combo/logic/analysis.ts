@@ -6,7 +6,7 @@ import { Monitor } from '../monitor';
 import { cloneDeep } from 'lodash';
 import { isLocationRenewable, makePlayerLocations, Location, makeLocation, locationData } from './locations';
 import { ItemPlacement } from './solve';
-import { ItemGroups, ItemHelpers, PlayerItem } from '../items';
+import { ItemGroups, ItemHelpers, ItemsCount, PlayerItem } from '../items';
 
 const SIMPLE_DEPENDENCIES: {[k: string]: string[]} = {
   OOT_WEIRD_EGG: [
@@ -352,14 +352,15 @@ export class LogicPassAnalysis {
 
   constructor(
     private readonly state: {
-      settings: Settings,
-      random: Random,
-      worlds: World[],
-      items: ItemPlacement,
-      monitor: Monitor,
+      settings: Settings;
+      random: Random;
+      worlds: World[];
+      items: ItemPlacement;
+      monitor: Monitor;
+      startingItems: ItemsCount;
     },
   ){
-    this.pathfinder = new Pathfinder(this.state.worlds, this.state.settings);
+    this.pathfinder = new Pathfinder(this.state.worlds, this.state.settings, this.state.startingItems);
     this.locations = this.state.worlds.map((x, i) => [...x.locations].map(l => makeLocation(l, i))).flat();
   }
 
@@ -552,7 +553,10 @@ export class LogicPassAnalysis {
 
     while (locsToCheck.length > 0) {
       const l = locsToCheck.pop()!;
-      const item = this.state.items.get(l)!;
+      const item = this.state.items.get(l);
+      if (item === undefined) {
+        continue;
+      }
       if (ItemHelpers.isItemImportant(item.item) && !this.uselessLocs.has(l) && !this.unreachableLocs.has(l)) {
         /* May be a progression item - need to check other locations */
         const dependencies = this.dependencies[item.item.id];

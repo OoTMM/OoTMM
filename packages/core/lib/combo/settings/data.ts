@@ -264,6 +264,7 @@ export const SETTINGS = [{
   type: 'enum',
   description: 'Controls where the Chest Dungeon Stray Fairies can be',
   values: [
+    { value: 'starting', name: 'Starting', description: 'Start with the fairies' },
     { value: 'vanilla', name: 'Vanilla', description: 'The Dungeon Stray Fairies will be at their original locations' },
     { value: 'ownDungeon', name: 'Own Dungeon', description: 'All Dungeon Stray Fairies are shuffled within their own dungeon' },
     { value: 'anywhere', name: 'Anywhere', description: 'All Dungeon Stray Fairies are shuffled anywhere' },
@@ -276,6 +277,8 @@ export const SETTINGS = [{
   type: 'enum',
   description: 'Controls where the Freestanding Dungeon Stray Fairies can be',
   values: [
+    { value: 'removed', name: 'Starting', description: 'Start with the fairies, and the bubbles are removed.' },
+    { value: 'starting', name: 'Starting', description: 'Start with the fairies' },
     { value: 'vanilla', name: 'Vanilla', description: 'The Dungeon Stray Fairies will be at their original locations' },
     { value: 'ownDungeon', name: 'Own Dungeon', description: 'All Dungeon Stray Fairies are shuffled within their own dungeon' },
     { value: 'anywhere', name: 'Anywhere', description: 'All Dungeon Stray Fairies are shuffled anywhere' },

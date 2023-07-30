@@ -70,6 +70,7 @@ export const CONFVARS = [
   'OOT_FREE_SCARECROW',
   'OOT_SOULS',
   'MM_SOULS',
+  'MM_REMOVED_FAIRIES',
 ] as const;
 
 export type Confvar = typeof CONFVARS[number];

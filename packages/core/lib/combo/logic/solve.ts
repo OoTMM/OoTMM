@@ -218,18 +218,19 @@ export class LogicPassSolver {
 
   constructor(
     private readonly input: {
-      fixedLocations: Set<Location>,
-      worlds: World[],
-      settings: Settings,
-      random: Random,
-      monitor: Monitor,
+      fixedLocations: Set<Location>;
+      worlds: World[];
+      settings: Settings;
+      random: Random;
+      monitor: Monitor;
       pool: PlayerItems;
       renewableJunks: PlayerItems;
+      startingItems: ItemsCount;
     }
   ) {
     this.monitor = this.input.monitor;
     this.locations = this.input.worlds.map((x, i) => [...x.locations].map(l => makeLocation(l, i))).flat();
-    this.pathfinder = new Pathfinder(this.input.worlds, this.input.settings);
+    this.pathfinder = new Pathfinder(this.input.worlds, this.input.settings, this.input.startingItems);
     this.state = {
       items: new Map,
       pools: { required: new Map, nice: new Map, junk: new Map },
@@ -398,11 +399,9 @@ export class LogicPassSolver {
     }
 
     /* Remove starting items */
-    for (const itemId in this.input.settings.startingItems) {
-      const item = itemByID(itemId);
+    for (const [item, count] of this.input.startingItems.entries()) {
       if (ItemHelpers.isItemUnlimitedStarting(item))
         continue;
-      const count = this.input.settings.startingItems[item.id];
       for (let i = 0; i < count; ++i) {
         this.removePlayersItemPools(this.state.pools, item);
       }
