@@ -1,6 +1,6 @@
 import { Random, randString, randomInt } from "../random";
 import { Settings } from "./type";
-import { makeSettings } from "./util";
+import { makeSettings, validateSettings } from "./util";
 
 export type OptionRandomSettings = {
   enabled: boolean;
@@ -174,6 +174,19 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
   }
   base.owlShuffle = sampleWeighted(random, { none: 10, anywhere: 7 });
 
+  /* Soul shuffle - 25% enabled, 25% disabled, 50% individual */
+  switch (randomInt(random, 4)) {
+  case 0:
+    break;
+  case 1:
+    base.enemySoulsOot = true;
+    base.enemySoulsMm = true;
+    break;
+  default:
+    base.enemySoulsMm = booleanWeighted(random, 0.5);
+    base.enemySoulsOot = booleanWeighted(random, 0.5);
+  }
+
   /* Dungeon age modifiers - 25% all true, 25% all false, 50% individual */
   switch (randomInt(random, 4)) {
   case 0:
@@ -321,6 +334,7 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
     base.sharedMaskKeaton = true;
     base.sharedWallets = true;
     base.sharedHealth = true;
+    base.sharedSouls = true;
   default:
     base.sharedNutsSticks = booleanWeighted(random, 0.5);
     base.sharedBows = booleanWeighted(random, 0.5);
@@ -331,6 +345,7 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
     base.sharedOcarina = booleanWeighted(random, 0.5);
     base.sharedWallets = booleanWeighted(random, 0.5);
     base.sharedHealth = booleanWeighted(random, 0.5);
+    base.sharedSouls = booleanWeighted(random, 0.5);
 
     /* Masks - grouping */
     switch (randomInt(random, 4)) {
@@ -490,5 +505,5 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
     }
   }
 
-  return base;
+  return validateSettings(base);
 }
