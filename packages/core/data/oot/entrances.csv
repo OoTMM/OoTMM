@@ -47,7 +47,7 @@ FIELD_FROM_LON_LON_RANCH,                 overworld,        Hyrule Field,       
 FIELD_FROM_LAKE_HYLIA,                    overworld,        Hyrule Field,                               Lake Hylia,                                   LAKE_HYLIA_FROM_FIELD
 VALLEY_FROM_GERUDO_FORTRESS,              overworld,        Gerudo Valley After Bridge,                 Gerudo Fortress Exterior,                     GERUDO_FORTRESS_FROM_VALLEY
 FIELD_FROM_MARKET_ENTRANCE,               overworld,        Hyrule Field,                               Market Entryway,                              MARKET_ENTRANCE_FROM_FIELD
-MARKET_FROM_CLOCK_TOWN,                   overworld,        Market,                                     MM Clock Town South,                                CLOCK_TOWN_FROM_MARKET
+MARKET_FROM_CLOCK_TOWN,                   overworld,        Market,                                     Clock Town South,                             CLOCK_TOWN_FROM_MARKET
 HOUSE_MIDO,                               indoors,          Mido's House,                               Kokiri Forest,                                KOKIRI_FOREST_FROM_MIDO
 HOUSE_SARIA,                              indoors,          Saria's House,                              Kokiri Forest,                                KOKIRI_FOREST_FROM_SARIA
 HOUSE_TWINS,                              indoors,          House of Twins,                             Kokiri Forest,                                KOKIRI_FOREST_FROM_TWINS
