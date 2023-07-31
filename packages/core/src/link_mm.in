@@ -62,8 +62,8 @@ PreDraw1 = 0x800b8050;
 PreDraw2 = 0x800b8118;
 
 LoadFile = 0x80080c90;
-_malloc = 0x80086dd0;
-_free = 0x80086310;
+_z_malloc = 0x80086dd0;
+_z_free = 0x80086310;
 osSetIntMask = 0x80088010;
 ActorAlloc = 0x80102c60;
 ActorFree = 0x80102ce0;

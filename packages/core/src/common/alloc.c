@@ -34,7 +34,7 @@ void initHeap(void)
 }
 
 /* Very dumb linear allocator */
-void* malloc(size_t size)
+static void* _malloc(size_t size)
 {
     HeapBlock* best;
     HeapBlock* newBlock;
@@ -119,7 +119,7 @@ static int mergeBlocks(int blockIdLeft, int blockIdRight)
     return lowId;
 }
 
-void free(void* data)
+static void _free(void* data)
 {
     int blockId;
     int nextBlockId;
@@ -183,4 +183,25 @@ void free(void* data)
 
         blockId = mergeBlocks(nextBlockId, blockId);
     }
+}
+
+void* malloc(size_t size)
+{
+    u64 mask;
+    void* ret;
+
+    mask = osSetIntMask(1);
+    ret = _malloc(size);
+    osSetIntMask(mask);
+
+    return ret;
+}
+
+void free(void* data)
+{
+    u64 mask;
+
+    mask = osSetIntMask(1);
+    _free(data);
+    osSetIntMask(mask);
 }
