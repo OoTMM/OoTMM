@@ -6,8 +6,7 @@ import { Random, sample } from '../random';
 import { Analysis } from './analysis';
 import { Monitor } from '../monitor';
 import { ItemPlacement } from './solve';
-import { ItemHelpers } from '../items';
-import { ItemsCount } from '../../../dist/lib/combo/items';
+import { ItemHelpers, ItemsCount } from '../items';
 
 type ZigZagState = {
   allowed: Set<Location>;
