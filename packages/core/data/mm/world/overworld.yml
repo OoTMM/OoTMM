@@ -125,7 +125,7 @@
 "Clock Town South":
   region: CLOCK_TOWN_SOUTH
   exits:
-    "OOT Market": "true"
+    "OOT Clock Town Transition": "true"
     "Termina Field": "true"
     "Clock Town South Upper West": "true"
     "Clock Town South Lower West": "true"
