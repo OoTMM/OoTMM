@@ -78,7 +78,6 @@ IKANA_CAVERN,                                       indoors-extra,    Ikana Spri
 TOURIST_INFORMATION,                                indoors-extra,    Tourist Information,                Swamp Front,                                SWAMP_FROM_TOURIST_INFORMATION
 ASTRAL_OBSERVATORY_FROM_CLOCK_TOWN_EAST,            indoors-extra,    Astral Observatory Passage,         Clock Town East,                            CLOCK_TOWN_EAST_FROM_ASTRAL_OBSERVATORY
 ASTRAL_OBSERVATORY_FROM_FIELD,                      indoors-extra,    Astral Observatory,                 Astral Observatory Balcony,                 FIELD_FROM_ASTRAL_OBSERVATORY
-ASTRAL_OBSERVATORY_FROM_FIELD,                      indoors-extra,    Astral Observatory,                 Astral Observatory Balcony,                 FIELD_FROM_ASTRAL_OBSERVATORY
 CLOCK_TOWN_EAST_FROM_HONEY_AND_DARLING,             indoors-exit,     Clock Town East,                    Honey & Darling Game,                       HONEY_AND_DARLING_GAME
 CLOCK_TOWN_EAST_FROM_MAYORS_OFFICE,                 indoors-exit,     Clock Town East,                    Mayor's Office,                             MAYORS_OFFICE
 CLOCK_TOWN_EAST_FROM_TOWN_ARCHERY,                  indoors-exit,     Clock Town East,                    Town Archery,                               TOWN_ARCHERY
