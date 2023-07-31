@@ -1,4 +1,4 @@
-import { Color, ColorRandom } from './color';
+import { Color, ColorArg, ColorRandom } from './color';
 import { COSMETICS } from './data';
 
 export type BufferPath = string | Buffer;
@@ -10,14 +10,13 @@ type CosmeticsDataCommon = {
 
 type CosmeticsDataColor = CosmeticsDataCommon & {
   readonly type: 'color';
-  readonly default: Color;
 }
 
 type CosmeticsDataZobj = CosmeticsDataCommon & {
   readonly type: 'zobj';
 }
 
-type InputToShape<T> = T extends CosmeticsDataColor ? { [K in T['key']]: ColorRandom }
+type InputToShape<T> = T extends CosmeticsDataColor ? { [K in T['key']]: ColorArg }
   : T extends CosmeticsDataZobj ? { [K in T['key']]: BufferPath | null }
   : never;
 

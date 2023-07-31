@@ -154,4 +154,5 @@ export const COLORS = {
 } as const;
 
 export type Color = keyof typeof COLORS;
-export type ColorRandom = Color | "random";
+export type ColorRandom = Color | 'random';
+export type ColorArg = Color | 'random' | 'auto' | 'default';
