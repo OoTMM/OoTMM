@@ -230,6 +230,19 @@ class CosmeticsPass {
     this.patch.addDataPatch('mm', paddr2 + texOff, newTex);
   }
 
+  private patchMmTunicFierceDeity() {
+    const rawColor = this.opts.cosmetics.mmTunicFierceDeity;
+    if (rawColor === 'white') {
+      return;
+    }
+    const c = this.color(rawColor);
+    const paddr = 0x0114d000;
+    const lutOff = 0x8128;
+    const lut = Buffer.from(this.roms.mm.rom.subarray(paddr + lutOff, paddr + lutOff + 16 * 2));
+    const newLut = recolorImage('rgba16', lut, null, 0xffffff, c);
+    this.patch.addDataPatch('mm', paddr + lutOff, newLut);
+  }
+
   async run(): Promise<Patchfile> {
     const { cosmetics } = this.opts;
     this.assets = await cosmeticsAssets(this.opts);
@@ -244,6 +257,7 @@ class CosmeticsPass {
     this.patchMmTunicDeku();
     this.patchMmTunicGoron();
     this.patchMmTunicZora();
+    this.patchMmTunicFierceDeity();
 
     /* Models */
     await this.patchOotChildModel();

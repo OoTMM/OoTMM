@@ -34,6 +34,11 @@ export const COSMETICS = [{
   type: 'color',
   default: 'kokirigreen'
 }, {
+  key: 'mmTunicFierceDeity',
+  name: 'MM Fierce Deity Tunic',
+  type: 'color',
+  default: 'white'
+}, {
   key: 'modelOotChildLink',
   name: 'Player Model - Child Link (OoT)',
   type: 'zobj',
