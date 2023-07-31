@@ -239,7 +239,7 @@ static void addWallet(int index, int noEffect)
     }
     else
         gMmSave.inventory.upgrades.wallet = index;
-    if (!noEffect && comboConfig(CFG_FILL_WALLETS))
+    if (noEffect && comboConfig(CFG_FILL_WALLETS))
         addRupees(gMmMaxRupees[gMmSave.inventory.upgrades.wallet]);
 }
 
