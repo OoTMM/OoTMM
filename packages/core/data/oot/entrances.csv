@@ -39,12 +39,14 @@ KAKARIKO_FROM_FIELD,                      region,           Kakariko,           
 LON_LON_RANCH_FROM_FIELD,                 region,           Lon Lon Ranch,                              Hyrule Field,                                 FIELD_FROM_LON_LON_RANCH
 LAKE_HYLIA_FROM_FIELD,                    region,           Lake Hylia,                                 Hyrule Field,                                 FIELD_FROM_LAKE_HYLIA
 GERUDO_FORTRESS_FROM_VALLEY,              region,           Gerudo Fortress Exterior,                   Gerudo Valley After Bridge,                   VALLEY_FROM_GERUDO_FORTRESS
+MARKET_ENTRANCE_FROM_FIELD,               region-extra,     Market Entryway,                            Hyrule Field,                                 FIELD_FROM_MARKET_ENTRANCE
 FIELD_FROM_LOST_WOODS_BRIDGE,             overworld,        Hyrule Field,                               Lost Woods Bridge,                            LOST_WOODS_BRIDGE_FROM_FIELD
 FIELD_FROM_ZORA_RIVER,                    overworld,        Hyrule Field,                               Zora River Front,                             ZORA_RIVER_FROM_FIELD
 FIELD_FROM_KAKARIKO,                      overworld,        Hyrule Field,                               Kakariko,                                     KAKARIKO_FROM_FIELD
 FIELD_FROM_LON_LON_RANCH,                 overworld,        Hyrule Field,                               Lon Lon Ranch,                                LON_LON_RANCH_FROM_FIELD
 FIELD_FROM_LAKE_HYLIA,                    overworld,        Hyrule Field,                               Lake Hylia,                                   LAKE_HYLIA_FROM_FIELD
 VALLEY_FROM_GERUDO_FORTRESS,              overworld,        Gerudo Valley After Bridge,                 Gerudo Fortress Exterior,                     GERUDO_FORTRESS_FROM_VALLEY
+FIELD_FROM_MARKET_ENTRANCE,               overworld,        Hyrule Field,                               Market Entryway,                              MARKET_ENTRANCE_FROM_FIELD
 HOUSE_MIDO,                               indoors,          Mido's House,                               Kokiri Forest,                                KOKIRI_FOREST_FROM_MIDO
 HOUSE_SARIA,                              indoors,          Saria's House,                              Kokiri Forest,                                KOKIRI_FOREST_FROM_SARIA
 HOUSE_TWINS,                              indoors,          House of Twins,                             Kokiri Forest,                                KOKIRI_FOREST_FROM_TWINS
