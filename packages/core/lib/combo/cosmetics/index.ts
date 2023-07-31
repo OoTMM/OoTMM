@@ -206,6 +206,30 @@ class CosmeticsPass {
     this.patch.addDataPatch('mm', paddr + texOff, newTex);
   }
 
+  private patchMmTunicZora() {
+    const rawColor = this.opts.cosmetics.mmTunicZora;
+    if (rawColor === 'kokirigreen') {
+      return;
+    }
+    const c = this.color(rawColor);
+    const paddr = 0x01192000;
+    const lutOff = 0x5000 + 9 * 16 * 2;
+    const lut = Buffer.from(this.roms.mm.rom.subarray(paddr + lutOff, paddr + lutOff + 16 * 2 * 2));
+    const newLut = recolorImage('rgba16', lut, null, 0x00b439, c);
+    this.patch.addDataPatch('mm', paddr + lutOff, newLut);
+    const lutOff2 = 0xc578 + 9 * 16 * 2;
+    const lut2 = Buffer.from(this.roms.mm.rom.subarray(paddr + lutOff2, paddr + lutOff2 + 16 * 2 * 2));
+    const newLut2 = recolorImage('rgba16', lut2, null, 0x00b439, c);
+    this.patch.addDataPatch('mm', paddr + lutOff2, newLut2);
+
+    /* Fin */
+    const paddr2 = 0x0108b000;
+    const texOff = 0x700b0 + 7 * 16 * 2;
+    const tex = Buffer.from(this.roms.mm.rom.subarray(paddr2 + texOff, paddr2 + texOff + (32 - 7) * 16 * 2));
+    const newTex = recolorImage('rgba16', tex, null, 0x00b439, c);
+    this.patch.addDataPatch('mm', paddr2 + texOff, newTex);
+  }
+
   async run(): Promise<Patchfile> {
     const { cosmetics } = this.opts;
     this.assets = await cosmeticsAssets(this.opts);
@@ -219,6 +243,7 @@ class CosmeticsPass {
     this.patchMmTunic(0x0115b000, 'kokirigreen', cosmetics.mmTunicHuman, [0xb39c, 0xb8c4, 0xbdcc, 0xbfa4, 0xc064, 0xc66c, 0xcae4, 0xcd1c, 0xcea4, 0xd1ec, 0xd374]);
     this.patchMmTunicDeku();
     this.patchMmTunicGoron();
+    this.patchMmTunicZora();
 
     /* Models */
     await this.patchOotChildModel();

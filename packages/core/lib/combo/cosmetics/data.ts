@@ -25,7 +25,12 @@ export const COSMETICS = [{
   default: 'kokirigreen'
 }, {
   key: 'mmTunicGoron',
-  name: 'MM Deku Tunic',
+  name: 'MM Goron Tunic',
+  type: 'color',
+  default: 'kokirigreen'
+}, {
+  key: 'mmTunicZora',
+  name: 'MM Zora Tunic',
   type: 'color',
   default: 'kokirigreen'
 }, {
