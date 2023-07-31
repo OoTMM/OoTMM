@@ -116,12 +116,12 @@ class CosmeticsPass {
       return;
 
     /* Patch the in-game color */
-    this.patchColorRGB('oot', (0x800f7ad8 + index * 0x03) >>> 0, c);
+    this.patchColorRGB('oot', (0x800f7ad8 + index * 0x03) >>> 0, color);
 
     /* Patch the icon */
     const paddr = 0x7fe000 + 0x1000 * index;
     const icon = this.roms.oot.rom.subarray(paddr, paddr + 0x1000);
-    const newIcon = recolorImage('rgba32', icon, this.assets.MASK_TUNIC, defaultColorIcon, c);
+    const newIcon = recolorImage('rgba32', icon, this.assets.MASK_TUNIC, defaultColorIcon, color);
     this.patch.addDataPatch('oot', paddr, newIcon);
   }
 
