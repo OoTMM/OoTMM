@@ -14,6 +14,11 @@ export const COSMETICS = [{
   type: 'color',
   default: 'zorablue'
 }, {
+  key: 'mmTunicHuman',
+  name: 'MM Human Tunic',
+  type: 'color',
+  default: 'kokirigreen'
+}, {
   key: 'modelOotChildLink',
   name: 'Player Model - Child Link (OoT)',
   type: 'zobj',

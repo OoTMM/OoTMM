@@ -165,6 +165,23 @@ class CosmeticsPass {
     }
   }
 
+  private patchMmTunicHuman(color: ColorRandom) {
+    if (color === 'kokirigreen') {
+      return;
+    }
+    const c = this.color(color);
+    const rgba = (((c << 8) | 0xff) >>> 0);
+    const vrom = 0x0115b000;
+
+    /* Patch the in-game color */
+    const buffer = Buffer.alloc(4);
+    buffer.writeUInt32BE(rgba, 0);
+    const offsets = [0xb39c, 0xb8c4, 0xbdcc, 0xbfa4, 0xc064, 0xc66c, 0xcae4, 0xcd1c, 0xcea4, 0xd1ec, 0xd374];
+    for (const offset of offsets) {
+      this.patch.addDataPatch('mm', vrom + offset, buffer);
+    }
+  }
+
   async run(): Promise<Patchfile> {
     this.assets = await cosmeticsAssets(this.opts);
 
@@ -172,6 +189,9 @@ class CosmeticsPass {
     this.patchOotTunic(0, this.opts.cosmetics.ootTunicKokiri);
     this.patchOotTunic(1, this.opts.cosmetics.ootTunicGoron);
     this.patchOotTunic(2, this.opts.cosmetics.ootTunicZora);
+
+    /* MM tunics */
+    this.patchMmTunicHuman(this.opts.cosmetics.mmTunicHuman);
 
     /* Models */
     await this.patchOotChildModel();
