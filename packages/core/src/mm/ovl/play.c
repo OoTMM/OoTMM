@@ -81,12 +81,12 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.quest.songEmpty = 1;
         gSave.inventory.quest.songOrder = 1;
         gSave.inventory.quest.songSun = 1;
-        gSave.inventory.quest.songSaria = 0; // left out because it currently breaks the audio channels 
-        
+        gSave.inventory.quest.songSaria = 0; // left out because it currently breaks the audio channels
+
         gMmSave.playerData.magicAcquired = 1;
         gMmSave.playerData.doubleMagic = 1;
         gMmSave.playerData.magicAmount = 2 * 0x30;
-        gSaveContext.magicTarget = 0x60;
+        gSaveContext.magicFillTarget = 0x60;
         gSave.inventory.ammo[ITS_MM_STICKS] = 30;
         gSave.inventory.ammo[ITS_MM_NUTS] = 40;
         gSave.inventory.ammo[ITS_MM_KEG] = 1;

@@ -120,6 +120,13 @@ void comboReadForeignSave(void)
 #endif
 }
 
+static void saveFixup(void)
+{
+    /* Instantly fill the magic bar */
+    if (gSaveContext.magicState == MAGIC_STATE_FILL)
+        gSave.playerData.magicAmount = gSaveContext.magicFillTarget;
+}
+
 void comboWriteSave(void)
 {
     NetContext* net;
@@ -133,6 +140,7 @@ void comboWriteSave(void)
     net->ledgerBase = gSaveLedgerBase;
     netMutexUnlock();
 
+    saveFixup();
     comboSyncItems();
     saveOot();
     saveMm();

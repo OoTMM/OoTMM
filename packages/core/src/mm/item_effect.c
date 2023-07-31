@@ -10,7 +10,7 @@ static void refillMagic(int level)
 {
     gSave.playerData.magicLevel = 0;
     gSave.playerData.magicAmount = level * 0x30;
-    gSaveContext.magicTarget = level * 0x30;
+    gSaveContext.magicFillTarget = level * 0x30;
 }
 
 static void addRupees(s16 count)
