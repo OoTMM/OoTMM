@@ -193,6 +193,19 @@ class CosmeticsPass {
     this.patch.addDataPatch('mm', paddr + lutOff, newLut);
   }
 
+  private patchMmTunicGoron() {
+    const rawColor = this.opts.cosmetics.mmTunicGoron;
+    if (rawColor === 'kokirigreen') {
+      return;
+    }
+    const c = this.color(rawColor);
+    const paddr = 0x0117a000;
+    const texOff = 0x2780;
+    const tex = Buffer.from(this.roms.mm.rom.subarray(paddr + texOff, paddr + texOff + 8 * 16 * 2));
+    const newTex = recolorImage('rgba16', tex, null, 0x00b439, c);
+    this.patch.addDataPatch('mm', paddr + texOff, newTex);
+  }
+
   async run(): Promise<Patchfile> {
     const { cosmetics } = this.opts;
     this.assets = await cosmeticsAssets(this.opts);
@@ -205,6 +218,7 @@ class CosmeticsPass {
     /* MM tunics */
     this.patchMmTunic(0x0115b000, 'kokirigreen', cosmetics.mmTunicHuman, [0xb39c, 0xb8c4, 0xbdcc, 0xbfa4, 0xc064, 0xc66c, 0xcae4, 0xcd1c, 0xcea4, 0xd1ec, 0xd374]);
     this.patchMmTunicDeku();
+    this.patchMmTunicGoron();
 
     /* Models */
     await this.patchOotChildModel();

@@ -24,6 +24,11 @@ export const COSMETICS = [{
   type: 'color',
   default: 'kokirigreen'
 }, {
+  key: 'mmTunicGoron',
+  name: 'MM Deku Tunic',
+  type: 'color',
+  default: 'kokirigreen'
+}, {
   key: 'modelOotChildLink',
   name: 'Player Model - Child Link (OoT)',
   type: 'zobj',
