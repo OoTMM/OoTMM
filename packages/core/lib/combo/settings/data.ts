@@ -1036,6 +1036,13 @@ export const SETTINGS = [{
   default: 'none',
   description: '- Every entrance to Hyrule Field except Gerudo Valley and Market<br>- The entrance to Gerudo Fortress from Gerudo Valley<br>- The entrances to the four main regions in MM<br>- The entrance to Romani Ranch',
 }, {
+  key: 'erRegionssExtra',
+  name: 'Shuffle Market and Clock Town',
+  category: 'entrances',
+  type: 'boolean',
+  description: 'Shuffle Hyrule Field\'s Market entrance and the Market entrance to Clock Town among the regions.',
+  default: false
+}, {
   key: 'erIndoors',
   name: 'Shuffle Interiors',
   category: 'entrances',

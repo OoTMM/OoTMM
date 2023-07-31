@@ -211,6 +211,7 @@ const PRESET_ALLSANITY = makeSettings({
   erIkanaCastle: true,
   erSecretShrine: true,
   erRegions: 'full',
+  erRegionsExtra: true,
   erIndoors: 'full',
   erIndoorsExtra: true,
 });
@@ -272,6 +273,7 @@ const PRESET_HELL = makeSettings({
   erIkanaCastle: true,
   erSecretShrine: true,
   erRegions: 'full',
+  erRegionsExtra: true,
   erIndoors: 'full',
   erIndoorsExtra: true,
   erGanonCastle: true,

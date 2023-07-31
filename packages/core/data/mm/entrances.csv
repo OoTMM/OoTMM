@@ -32,6 +32,7 @@ MOUNTAIN_VILLAGE_FROM_PATH,                         region,           Mountain V
 GREAT_BAY_COAST_FROM_FIELD,                         region,           Great Bay Coast,                    Great Bay Fence,                            FIELD_FROM_GREAT_BAY_COAST
 IKANA_VALLEY_FROM_ROAD,                             region,           Ikana Valley,                       Road to Ikana Top,                          IKANA_ROAD_FROM_VALLEY
 ROMANI_RANCH_FROM_MILK_ROAD,                        region,           Romani Ranch,                       Near Romani Ranch,                          MILK_ROAD_FROM_ROMANI_RANCH
+CLOCK_TOWN_FROM_MARKET,                             region-extra,     Clock Town,                         Market,                                     OOT_MARKET_FROM_CLOCK_TOWN
 SWAMP_ROAD_FROM_SWAMP,                              overworld,        Road to Southern Swamp,             Swamp Front,                                SWAMP_FROM_ROAD
 PATH_FROM_MOUNTAIN_VILLAGE,                         overworld,        Mountain Village Path Upper,        Mountain Village,                           MOUNTAIN_VILLAGE_FROM_PATH
 FIELD_FROM_GREAT_BAY_COAST,                         overworld,        Great Bay Fence,                    Great Bay Coast,                            GREAT_BAY_COAST_FROM_FIELD
@@ -78,6 +79,8 @@ IKANA_CAVERN,                                       indoors-extra,    Ikana Spri
 TOURIST_INFORMATION,                                indoors-extra,    Tourist Information,                Swamp Front,                                SWAMP_FROM_TOURIST_INFORMATION
 ASTRAL_OBSERVATORY_FROM_CLOCK_TOWN_EAST,            indoors-extra,    Astral Observatory Passage,         Clock Town East,                            CLOCK_TOWN_EAST_FROM_ASTRAL_OBSERVATORY
 ASTRAL_OBSERVATORY_FROM_FIELD,                      indoors-extra,    Astral Observatory,                 Astral Observatory Balcony,                 FIELD_FROM_ASTRAL_OBSERVATORY
+ASTRAL_OBSERVATORY_FROM_FIELD,                      indoors-extra,    Astral Observatory,                 Astral Observatory Balcony,                 FIELD_FROM_ASTRAL_OBSERVATORY
+SAKON_HIDEOUT,                                      indoors-extra,    Sakon Hideout,                      Ikana Valley,                               IKANA_CANYON_FROM_SAKON_HIDEOUT
 CLOCK_TOWN_EAST_FROM_HONEY_AND_DARLING,             indoors-exit,     Clock Town East,                    Honey & Darling Game,                       HONEY_AND_DARLING_GAME
 CLOCK_TOWN_EAST_FROM_MAYORS_OFFICE,                 indoors-exit,     Clock Town East,                    Mayor's Office,                             MAYORS_OFFICE
 CLOCK_TOWN_EAST_FROM_TOWN_ARCHERY,                  indoors-exit,     Clock Town East,                    Town Archery,                               TOWN_ARCHERY
@@ -119,11 +122,10 @@ CLOCK_TOWN_EAST_FROM_ASTRAL_OBSERVATORY,            indoors-exit,     Clock Town
 FIELD_FROM_ASTRAL_OBSERVATORY,                      indoors-exit,     Astral Observatory Balcony,         Astral Observatory,                         ASTRAL_OBSERVATORY_FROM_FIELD
 MOUNTAIN_VILLAGE_FROM_GORON_GRAVEYARD,              indoors-exit,     Near Goron Graveyard,               Goron Graveyard,                            GORON_GRAVEYARD
 SWAMP_ROAD_FROM_ARCHERY,                            indoors-exit,     Road to Southern Swamp,             Swamp Archery,                              SWAMP_ARCHERY
+IKANA_CANYON_FROM_SAKON_HIDEOUT,                    indoors-exit,     Ikana Valley,                       Sakon Hideout,                              SAKON_HIDEOUT
 DEKU_PALACE_THRONE,                                 indoors-special,  Deku Palace Throne,                 Deku Palace Main,                           DEKU_PALACE_EXTERIOR_FROM_THRONE
 DEKU_PALACE_EXTERIOR_FROM_THRONE,                   indoors-special,  Deku Palace Main,                   Deku Palace Throne,                         DEKU_PALACE_THRONE
 DEKU_PALACE_THRONE_CAGE,                            indoors-special,  Deku Palace Cage,                   Deku Palace Near Cage,                      DEKU_PALACE_EXTERIOR_FROM_THRONE_CAGE
 DEKU_PALACE_EXTERIOR_FROM_THRONE_CAGE,              indoors-special,  Deku Palace Near Cage,              Deku Palace Cage,                           DEKU_PALACE_THRONE_CAGE
-SAKON_HIDEOUT,                                      indoors-special,  Sakon Hideout,                      Ikana Valley,                               IKANA_CANYON_FROM_SAKON_HIDEOUT
-IKANA_CANYON_FROM_SAKON_HIDEOUT,                    indoors-special,  Ikana Valley,                       Sakon Hideout,                              SAKON_HIDEOUT
 MUSIC_BOX_HOUSE,                                    indoors-special,  Music Box House,                    Ikana Canyon,                               IKANA_CANYON_FROM_MUSIC_BOX_HOUSE
 IKANA_CANYON_FROM_MUSIC_BOX_HOUSE,                  indoors-special,  Ikana Canyon,                       Music Box House,                            MUSIC_BOX_HOUSE
