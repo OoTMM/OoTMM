@@ -191,3 +191,5 @@ gDmaData = 0x8000b140;
 
 DmaCompressed = 0x80001254;
 osSetThreadPri = 0x80004480;
+
+SetTextFlags = 0x800c69a0;

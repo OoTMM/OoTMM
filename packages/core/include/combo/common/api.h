@@ -297,3 +297,6 @@ typedef enum {
 
 s32 Magic_RequestChange(GameState_Play* play, s16 amount, s16 type);
 void Magic_Update(GameState_Play* play);
+
+/* Unsure what this does */
+void SetTextFlags(u16 bits);
