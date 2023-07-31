@@ -113,7 +113,7 @@ class CosmeticsPass {
     /* Patch the icon */
     const paddr = 0x7fe000 + 0x1000 * index;
     const icon = this.roms.oot.rom.subarray(paddr, paddr + 0x1000);
-    const newIcon = recolorImage(icon, this.assets.MASK_TUNIC, defaultColorIcon, c);
+    const newIcon = recolorImage('rgba32', icon, this.assets.MASK_TUNIC, defaultColorIcon, c);
     this.patch.addDataPatch('oot', paddr, newIcon);
   }
 
@@ -165,33 +165,46 @@ class CosmeticsPass {
     }
   }
 
-  private patchMmTunicHuman(color: ColorRandom) {
-    if (color === 'kokirigreen') {
+  private patchMmTunic(vrom: number, def: Color, color: ColorRandom, offsets: number[]) {
+    if (color === def) {
       return;
     }
     const c = this.color(color);
     const rgba = (((c << 8) | 0xff) >>> 0);
-    const vrom = 0x0115b000;
 
     /* Patch the in-game color */
     const buffer = Buffer.alloc(4);
     buffer.writeUInt32BE(rgba, 0);
-    const offsets = [0xb39c, 0xb8c4, 0xbdcc, 0xbfa4, 0xc064, 0xc66c, 0xcae4, 0xcd1c, 0xcea4, 0xd1ec, 0xd374];
     for (const offset of offsets) {
       this.patch.addDataPatch('mm', vrom + offset, buffer);
     }
   }
 
+  private patchMmTunicDeku() {
+    const rawColor = this.opts.cosmetics.mmTunicDeku;
+    if (rawColor === 'kokirigreen') {
+      return;
+    }
+    const c = this.color(rawColor);
+    const paddr = 0x011a5000;
+    const lutOff = 0x4090;
+    const lut = Buffer.from(this.roms.mm.rom.subarray(paddr + lutOff, paddr + lutOff + 16 * 2));
+    const newLut = recolorImage('rgba16', lut, null, 0x00b439, c);
+    this.patch.addDataPatch('mm', paddr + lutOff, newLut);
+  }
+
   async run(): Promise<Patchfile> {
+    const { cosmetics } = this.opts;
     this.assets = await cosmeticsAssets(this.opts);
 
     /* OoT tunics */
-    this.patchOotTunic(0, this.opts.cosmetics.ootTunicKokiri);
-    this.patchOotTunic(1, this.opts.cosmetics.ootTunicGoron);
-    this.patchOotTunic(2, this.opts.cosmetics.ootTunicZora);
+    this.patchOotTunic(0, cosmetics.ootTunicKokiri);
+    this.patchOotTunic(1, cosmetics.ootTunicGoron);
+    this.patchOotTunic(2, cosmetics.ootTunicZora);
 
     /* MM tunics */
-    this.patchMmTunicHuman(this.opts.cosmetics.mmTunicHuman);
+    this.patchMmTunic(0x0115b000, 'kokirigreen', cosmetics.mmTunicHuman, [0xb39c, 0xb8c4, 0xbdcc, 0xbfa4, 0xc064, 0xc66c, 0xcae4, 0xcd1c, 0xcea4, 0xd1ec, 0xd374]);
+    this.patchMmTunicDeku();
 
     /* Models */
     await this.patchOotChildModel();

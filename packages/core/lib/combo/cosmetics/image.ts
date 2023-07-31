@@ -86,40 +86,109 @@ function clamp01(x: number) {
   return clamp(x, 0, 1);
 }
 
-export function recolorImage(image: Buffer, mask: Buffer, defaultColor: number, color: number) {
-  const newBuffer = Buffer.alloc(image.length);
+function bits5to8(x: number) {
+  return (x << 3) | (x >>> 2);
+}
 
-  /* Convert the color to HSL */
-  const [colorH, colorS, colorL] = rgbToHsl(...packToRgb(color));
-  const [defaultH, defaultS, defaultL] = rgbToHsl(...packToRgb(defaultColor));
+function fromRgba16(image: Buffer) {
+  const newBuf = Buffer.alloc(image.length * 2);
+  for (let i = 0; i < image.length / 2; ++i) {
+    const srcIndex = i * 2;
+    const dstIndex = i * 4;
+    const rawColor = image.readUInt16BE(srcIndex);
+    const r5 = (rawColor >>> 11) & 0x1f;
+    const g5 = (rawColor >>>  6) & 0x1f;
+    const b5 = (rawColor >>>  1) & 0x1f;
+    const a1 = (rawColor >>>  0) & 0x1;
+    const r8 = bits5to8(r5);
+    const g8 = bits5to8(g5);
+    const b8 = bits5to8(b5);
+    const a8 = a1 ? 0xff : 0x00;
+    newBuf.writeUInt8(r8, dstIndex + 0);
+    newBuf.writeUInt8(g8, dstIndex + 1);
+    newBuf.writeUInt8(b8, dstIndex + 2);
+    newBuf.writeUInt8(a8, dstIndex + 3);
+  }
+  return newBuf;
+}
+
+function fromFormat(image: Buffer, format: 'rgba32' | 'rgba16') {
+  if (format === 'rgba32') {
+    return image;
+  } else {
+    return fromRgba16(image);
+  }
+}
+
+function toRgba16(image: Buffer) {
+  const newBuf = Buffer.alloc(image.length / 2);
+  for (let i = 0; i < image.length / 4; ++i) {
+    const srcIndex = i * 4;
+    const dstIndex = i * 2;
+    const r8 = image.readUInt8(srcIndex + 0);
+    const g8 = image.readUInt8(srcIndex + 1);
+    const b8 = image.readUInt8(srcIndex + 2);
+    const a8 = image.readUInt8(srcIndex + 3);
+    const r5 = (r8 >>> 3) & 0x1f;
+    const g5 = (g8 >>> 3) & 0x1f;
+    const b5 = (b8 >>> 3) & 0x1f;
+    const a1 = (a8 >= 0x80) ? 0x01 : 0x00;
+    const rawColor = (r5 << 11) | (g5 << 6) | (b5 << 1) | (a1 << 0);
+    newBuf.writeUInt16BE(rawColor, dstIndex);
+  }
+  return newBuf;
+}
+
+function toFormat(image: Buffer, format: 'rgba32' | 'rgba16') {
+  if (format === 'rgba32') {
+    return image;
+  } else {
+    return toRgba16(image);
+  }
+}
+
+export function recolorImage(format: 'rgba32' | 'rgba16', image: Buffer, mask: Buffer | null, defaultColor: number, color: number) {
+  image = fromFormat(image, format);
+  const newBuffer = Buffer.alloc(image.length);
+  if (mask === null) {
+    mask = Buffer.alloc(image.length, 0xff);
+  }
+
+  /* Extract new color */
+  const [r, g, b] = packToRgb(color);
+
+  /* Extract new color grayscale value */
+  const l = Math.max(r, g, b);
+
+  /* Extract default color grayscale */
+  const [dr, dg, db] = packToRgb(defaultColor);
+  const dl = Math.max(dr, dg, db);
+
+  /* Compute lumi boost */
+  const boost = l / dl;
 
   for (let i = 0; i < image.length; i += 4) {
     /* Fetch the pixel */
     const data = image.readUInt32BE(i);
-    const [r, g, b, a] = packToRgba(data);
+    const [pr, pg, pb, pa] = packToRgba(data);
 
-    /* Convert to HSL */
-    const [h, s, l] = rgbToHsl(r, g, b);
-
-    /* Compute ratios */
-    const rS = s / defaultS;
-    const rL = l / defaultL;
+    /* Convert to grayscale */
+    const pl = Math.max(pr, pg, pb);
 
     /* Check if the pixel is inside the mask */
     const maskByte = mask.readUInt8(Math.floor(i / 32));
     const maskBit = (maskByte >> ((i / 4) % 8)) & 1;
     if (maskBit) {
       /* Pixel is within tolerance, recolor it */
-      const newH = colorH;
-      const newS = clamp01(colorS * rS);
-      const newL = clamp01(colorL * rL);
-      const [newR, newG, newB] = hslToRgb(newH, newS, newL).map(x => x * 255);
-      newBuffer.writeUInt32BE(((newR << 24) | (newG << 16) | (newB << 8) | a * 255) >>> 0, i);
+      const newR = Math.floor(clamp01(r * pl * boost) * 255);
+      const newG = Math.floor(clamp01(g * pl * boost) * 255);
+      const newB = Math.floor(clamp01(b * pl * boost) * 255);
+      newBuffer.writeUInt32BE(((newR << 24) | (newG << 16) | (newB << 8) | pa * 255) >>> 0, i);
     } else {
       /* Pixel is not within tolerance, copy it over */
       newBuffer.writeUInt32BE(data, i);
     }
   }
 
-  return newBuffer;
+  return toFormat(newBuffer, format);
 }
