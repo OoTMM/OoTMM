@@ -933,6 +933,13 @@ export const SETTINGS = [{
   default: false,
   cond: (s: any) => s.enemySoulsOot && s.enemySoulsMm,
 }, {
+  key: 'sharedSkeletonKey',
+  name: 'Shared Skeleton Key',
+  category: 'items.shared',
+  type: 'boolean',
+  default: false,
+  cond: (s: any) => s.skeletonKeyOot && s.skeletonKeyMm,
+}, {
   key: 'agelessSwords',
   name: 'Ageless Swords',
   category: 'items.ageless',

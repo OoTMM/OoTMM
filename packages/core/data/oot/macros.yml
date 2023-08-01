@@ -139,7 +139,7 @@
 "scrub_price(id)": "wallet_price(OOT_SCRUBS, id)"
 
 # Keys
-"has_skeleton_key": "setting(skeletonKeyOot) && has(SKELETON_KEY)"
+"has_skeleton_key": "setting(skeletonKeyOot) && cond(setting(sharedSkeletonKey), has(SHARED_SKELETON_KEY), has(SKELETON_KEY))"
 "boss_key(x)": "setting(bossKeyShuffleOot, removed) || has(x)"
 "small_keys(x, y, count)": "has_skeleton_key || (setting(smallKeyShuffleOot, removed) || cond(setting(smallKeyRingOot, keyRings), has(y), has(x, count)))"
 "small_keys_extra(x, y, count)": "setting(smallKeyShuffleOot, removed) || cond(setting(smallKeyRingOot, keyRings), has(y), has(x, count + 1))"

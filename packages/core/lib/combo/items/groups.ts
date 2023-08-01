@@ -793,5 +793,6 @@ export const REQUIRED = new Set([
   Items.SHARED_BOMBCHU_5,
   Items.SHARED_BOMBCHU_10,
   Items.SHARED_BOMBCHU_20,
+  Items.SHARED_SKELETON_KEY,
 ]);
 

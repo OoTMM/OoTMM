@@ -788,6 +788,9 @@ void comboAddItemSharedMm(s16 gi, int noEffect)
             break;
         }
     }
+
+    if (comboConfig(CFG_SHARED_SKELETON_KEY) && gi == GI_MM_SKELETON_KEY)
+        comboAddSkeletonKeyOot();
 }
 
 int comboAddItemMm(s16 gi, int noEffect)

@@ -99,6 +99,7 @@ const ITEM_POOL_PLENTIFUL = new Set([
   Items.OOT_MASK_GORON,
   Items.OOT_MASK_BUNNY,
   Items.OOT_MASK_KEATON,
+  Items.OOT_SKELETON_KEY,
   Items.MM_BOTTLED_GOLD_DUST,
   Items.MM_MASK_DEKU,
   Items.MM_MASK_GORON,
@@ -152,6 +153,7 @@ const ITEM_POOL_PLENTIFUL = new Set([
   Items.MM_WALLET,
   Items.MM_GREAT_FAIRY_SWORD,
   Items.MM_SPIN_UPGRADE,
+  Items.MM_SKELETON_KEY,
   Items.SHARED_BOW,
   Items.SHARED_BOMB_BAG,
   Items.SHARED_MAGIC_UPGRADE,
@@ -167,6 +169,7 @@ const ITEM_POOL_PLENTIFUL = new Set([
   Items.SHARED_MASK_BUNNY,
   Items.SHARED_MASK_KEATON,
   Items.SHARED_WALLET,
+  Items.SHARED_SKELETON_KEY,
 ]);
 
 const ITEMS_HEART_PIECES_CONTAINERS_BY_GAME = {
@@ -662,6 +665,10 @@ export class LogicPassWorldTransform {
 
     if (settings.sharedSouls) {
       this.shareItems(SharedItemGroups.SOULS);
+    }
+
+    if (settings.sharedSkeletonKey) {
+      this.shareItems(SharedItemGroups.SKELETON_KEY);
     }
 
     switch (settings.itemPool) {
