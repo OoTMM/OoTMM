@@ -425,7 +425,6 @@ export function enableModelOotLinkAdult(patch: Patchfile, dfAddr: number) {
   patchPtrOotLo(patch, OOT_FILES.HOOK, 0xA76, OOT_LINK_ADULT_OFFSETS.LUT_DL_HOOKSHOT_HOOK);
   patchPtrOotHi(patch, OOT_FILES.HOOK, 0xB66, OOT_LINK_ADULT_OFFSETS.LUT_DL_HOOKSHOT_CHAIN);
   patchPtrOotLo(patch, OOT_FILES.HOOK, 0xB6A, OOT_LINK_ADULT_OFFSETS.LUT_DL_HOOKSHOT_CHAIN);
-  patchPtrOot16(patch, OOT_FILES.HOOK, 0xBA8, 0x0014);
 
   patchPtrOot(patch, OOT_FILES.STICK, 0x32C, OOT_LINK_ADULT_OFFSETS.LUT_DL_BLADEBREAK);
   patchPtrOot16(patch, OOT_FILES.STICK, 0x328, 0x0014);
