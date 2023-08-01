@@ -414,6 +414,11 @@ static int csmcFromItemMm(s16 gi)
     case GI_MM_SMALL_KEY_SH:
     case GI_MM_SMALL_KEY_GB:
     case GI_MM_SMALL_KEY_ST:
+    case GI_MM_KEY_RING:
+    case GI_MM_KEY_RING_WF:
+    case GI_MM_KEY_RING_SH:
+    case GI_MM_KEY_RING_GB:
+    case GI_MM_KEY_RING_ST:
         return CSMC_KEY;
     case GI_MM_BOSS_KEY:
     case GI_MM_BOSS_KEY_WF:

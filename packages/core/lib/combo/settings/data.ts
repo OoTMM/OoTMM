@@ -239,7 +239,18 @@ export const SETTINGS = [{
   name: 'Small Key Ring (OoT)',
   category: 'main.shuffle',
   type: 'enum',
-  description: 'Controls the grouping of keys into keyrings',
+  description: 'Controls the grouping of keys into keyrings, for OoT',
+  values: [
+    { value: 'disabled', name: 'Disabled', description: 'Small keys are found individually, like in the base game.' },
+    { value: 'keyRings', name: 'Key Rings', description: 'Small keys are grouped into key rings.' },
+  ],
+  default: 'disabled'
+}, {
+  key: 'smallKeyRingMm',
+  name: 'Small Key Ring (MM)',
+  category: 'main.shuffle',
+  type: 'enum',
+  description: 'Controls the grouping of keys into keyrings, for MM',
   values: [
     { value: 'disabled', name: 'Disabled', description: 'Small keys are found individually, like in the base game.' },
     { value: 'keyRings', name: 'Key Rings', description: 'Small keys are grouped into key rings.' },

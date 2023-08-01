@@ -66,6 +66,7 @@ void comboAddBossKeyOot(u16 dungeonId);
 void comboAddCompassOot(u16 dungeonId);
 void comboAddMapOot(u16 dungeonId);
 int  comboAddSmallKeyMm(u16 dungeonId);
+void comboAddKeyRingMm(u16 dungeonId);
 void comboAddBossKeyMm(u16 dungeonId);
 int  comboAddStrayFairyMm(u16 dungeonId);
 void comboAddMapMm(u16 dungeonId);

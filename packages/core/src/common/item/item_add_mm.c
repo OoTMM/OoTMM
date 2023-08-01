@@ -30,6 +30,10 @@ int comboAddSmallKeyMm(u16 dungeonId)
 {
     s8 keyCount;
 
+    /* Max keys */
+    if (gMmSave.inventory.dungeonItems[dungeonId].maxKeys >= g.maxKeysMm[dungeonId])
+        return 0;
+
     keyCount = gMmSave.inventory.dungeonKeys[dungeonId];
     if (keyCount < 0)
         keyCount = 1;
@@ -39,6 +43,12 @@ int comboAddSmallKeyMm(u16 dungeonId)
     gMmSave.inventory.dungeonItems[dungeonId].maxKeys++;
 
     return gMmSave.inventory.dungeonItems[dungeonId].maxKeys;
+}
+
+void comboAddKeyRingMm(u16 dungeonId)
+{
+    for (int i = 0; i < g.maxKeysMm[dungeonId]; i++)
+        comboAddSmallKeyMm(dungeonId);
 }
 
 void comboAddBossKeyMm(u16 dungeonId)
@@ -1158,6 +1168,18 @@ int comboAddItemMm(s16 gi, int noEffect)
         break;
     case GI_MM_SMALL_KEY_ST:
         count = comboAddSmallKeyMm(3);
+        break;
+    case GI_MM_KEY_RING_WF:
+        comboAddKeyRingMm(0);
+        break;
+    case GI_MM_KEY_RING_SH:
+        comboAddKeyRingMm(1);
+        break;
+    case GI_MM_KEY_RING_GB:
+        comboAddKeyRingMm(2);
+        break;
+    case GI_MM_KEY_RING_ST:
+        comboAddKeyRingMm(3);
         break;
     case GI_MM_BOSS_KEY_WF:
         comboAddBossKeyMm(0);

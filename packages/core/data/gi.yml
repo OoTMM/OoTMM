@@ -492,6 +492,11 @@ MM_SOUL_ODOLWA:                          0x124
 MM_SOUL_GOHT:                            0x125
 MM_SOUL_GYORG:                           0x126
 MM_SOUL_TWINMOLD:                        0x127
+MM_KEY_RING:                             0x128
+MM_KEY_RING_WF:                          0x129
+MM_KEY_RING_SH:                          0x12a
+MM_KEY_RING_GB:                          0x12b
+MM_KEY_RING_ST:                          0x12c
 
 # Special
 # MM_SOUL_SKULL_KID:                       0xf7

@@ -159,6 +159,9 @@ int comboAddItemEffect(GameState_Play* play, s16 gi)
     case GI_MM_SMALL_KEY:
         count = comboAddSmallKeyMm(gSaveContext.dungeonId);
         break;
+    case GI_MM_KEY_RING:
+        comboAddKeyRingMm(gSaveContext.dungeonId);
+        break;
     case GI_MM_BOSS_KEY:
         comboAddBossKeyMm(gSaveContext.dungeonId);
         break;

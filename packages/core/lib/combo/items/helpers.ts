@@ -10,6 +10,11 @@ export const isSmallKeyHideout = (item: Item) => item === Items.OOT_SMALL_KEY_GF
 export const isSmallKeyRegularOot = (item: Item) => ItemGroups.SMALL_KEYS_OOT.has(item);
 export const isSmallKeyRegularMm = (item: Item) => ItemGroups.SMALL_KEYS_MM.has(item);
 export const isSmallKeyRegular = (item: Item) => isSmallKeyRegularOot(item) || isSmallKeyRegularMm(item);
+export const isKeyRing = (item: Item) => isKeyRingRegular(item) || isKeyRingHideout(item);
+export const isKeyRingHideout = (item: Item) => item === Items.OOT_KEY_RING_GF;
+export const isKeyRingRegularOot = (item: Item) => ItemGroups.KEY_RINGS_OOT.has(item);
+export const isKeyRingRegularMm = (item: Item) => ItemGroups.KEY_RINGS_MM.has(item);
+export const isKeyRingRegular = (item: Item) => isKeyRingRegularOot(item) || isKeyRingRegularMm(item);
 export const isGanonBossKey = (item: Item) => item === Items.OOT_BOSS_KEY_GANON;
 export const isBossKey = (item: Item) => isRegularBossKey(item) || isGanonBossKey(item);
 export const isRegularBossKeyOot = (item: Item) => ItemGroups.BOSS_KEYS_OOT.has(item);
