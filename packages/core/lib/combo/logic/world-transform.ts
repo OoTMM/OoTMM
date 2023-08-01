@@ -758,6 +758,15 @@ export class LogicPassWorldTransform {
       }
     }
 
+    /* Add skeleton keys */
+    if (settings.skeletonKeyOot) {
+      this.addItem(Items.OOT_SKELETON_KEY);
+    }
+
+    if (settings.skeletonKeyMm) {
+      this.addItem(Items.MM_SKELETON_KEY);
+    }
+
     /* Handle extra wallets */
     if (this.state.settings.childWallets) {
       this.addItem(Items.OOT_WALLET);
