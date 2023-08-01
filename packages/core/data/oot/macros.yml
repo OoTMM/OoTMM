@@ -18,7 +18,7 @@
 "has_arrows": "has_bow && (event(ARROWS) || renewable(ARROWS_5) || renewable(ARROWS_10) || renewable(ARROWS_30) || renewable(SHARED_ARROWS_5) || renewable(SHARED_ARROWS_10) || renewable(SHARED_ARROWS_30) || renewable(SHARED_ARROWS_40) || (setting(sharedBows) && event(MM_ARROWS)))"
 "can_use_bow": "is_adult && has_arrows"
 "has_hookshot(x)": "has(HOOKSHOT, x) || has(SHARED_HOOKSHOT, x)"
-"can_hookshot_n(x)": "is_adult && has_hookshot(x)"
+"can_hookshot_n(x)": "age_hookshot && has_hookshot(x)"
 "can_hookshot": "can_hookshot_n(1)"
 "can_longshot": "can_hookshot_n(2)"
 "can_boomerang": "age_boomerang && has(BOOMERANG)"
@@ -29,7 +29,10 @@
 # Age macros
 "age_sticks": "glitch_equip_swap || is_child || setting(agelessSticks)"
 "age_boomerang": "glitch_equip_swap || is_child || setting(agelessBoomerang)"
+"age_boomerang_anyage": "glitch_equip_swap_anyage || setting(agelessBoomerang)"
 "age_hammer": "glitch_equip_swap || is_adult || setting(agelessHammer)"
+"age_hookshot": "glitch_equip_swap || is_adult || setting(agelessHookshot)"
+"age_hookshot_anyage": "glitch_equip_swap_anyage || setting(agelessHookshot)"
 "age_sword_child": "is_child || setting(agelessSwords)"
 "age_sword_adult": "is_adult || setting(agelessSwords)"
 "age_shield_child": "is_child || setting(agelessShields)"
@@ -126,7 +129,7 @@
 "woke_talon_child": "event(TALON_CHILD) || setting(skipZelda)"
 "has_fire_spirit": "has_magic && ((has_arrows && (has(ARROW_FIRE) || has(SHARED_ARROW_FIRE)) && has_sticks) || has(SPELL_FIRE)) && (has_explosives || small_keys_spirit(2))"
 "has_ranged_weapon_both": "has_explosives || (((has(SLINGSHOT) && (event(SEEDS) || renewable(DEKU_SEEDS_30))) || has(BOOMERANG)) && (has_hookshot(1) || has_arrows))"
-"can_collect_ageless": "has_hookshot(1) && has(BOOMERANG)"
+"can_collect_ageless": "(has_hookshot(1) && has(BOOMERANG)) || (age_boomerang_anyage && has(BOOMERANG)) || (age_hookshot_anyage && has_hookshot(1))"
 "king_zora_moved": "event(KING_ZORA_LETTER) || setting(zoraKing, open) || (setting(zoraKing, adult) && is_adult)"
 "can_move_mido": "is_child && has_sword_kokiri && renewable(SHIELD_DEKU)"
 "mido_moved": "setting(dekuTree, open) || event(MIDO_MOVED)"
@@ -159,6 +162,7 @@
 
 # Glitches
 "glitch_equip_swap": "glitch(OOT_EQUIP_SWAP) && (has(SPELL_FIRE) || (has_sticks && (is_child || setting(agelessSticks))))"
+"glitch_equip_swap_anyage": "glitch(OOT_EQUIP_SWAP) && (has(SPELL_FIRE) || (has_sticks && setting(agelessSticks)))"
 "glitch_ocarina_items": "glitch(OOT_OCARINA_ITEMS) && (has_bugs || has_fish)"
 
 # Misc

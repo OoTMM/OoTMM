@@ -293,6 +293,7 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
     base.agelessBoomerang = true;
     base.agelessSticks = true;
     base.agelessHammer = true;
+    base.agelessHookshot = true;
     base.agelessTunics = true;
     base.agelessSwords = true;
     base.agelessShields = true;
@@ -302,6 +303,7 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
     base.agelessBoomerang = booleanWeighted(random, 0.1);
     base.agelessSticks = booleanWeighted(random, 0.1);
     base.agelessHammer = booleanWeighted(random, 0.1);
+    base.agelessHookshot = booleanWeighted(random, 0.1);
     base.agelessTunics = booleanWeighted(random, 0.1);
     base.agelessSwords = booleanWeighted(random, 0.1);
     base.agelessShields = booleanWeighted(random, 0.1);
