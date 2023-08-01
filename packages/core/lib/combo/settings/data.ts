@@ -989,6 +989,13 @@ export const SETTINGS = [{
   description: 'Allows Link to use the hammer independently of his age',
   default: false
 }, {
+  key: 'agelessHookshot',
+  name: 'Ageless Hookshot',
+  category: 'items.ageless',
+  type: 'boolean',
+  description: 'Allows Link to use the hookshot independently of his age',
+  default: false
+}, {
   key: 'agelessChildTrade',
   name: 'Ageless Child Trade',
   category: 'items.ageless',

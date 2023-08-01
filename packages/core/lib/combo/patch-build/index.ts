@@ -48,6 +48,7 @@ function asmPatchGroups(settings: Settings) {
     OOT_AGELESS_STICKS: settings.agelessSticks,
     OOT_AGELESS_BOOMERANG: settings.agelessBoomerang,
     OOT_AGELESS_HAMMER: settings.agelessHammer,
+    OOT_AGELESS_HOOKSHOT: settings.agelessHookshot,
     OOT_AGELESS_CHILD_TRADE: settings.agelessChildTrade,
     OOT_BLUE_FIRE_ARROWS: settings.blueFireArrows,
     ER: isEntranceShuffle(settings),
