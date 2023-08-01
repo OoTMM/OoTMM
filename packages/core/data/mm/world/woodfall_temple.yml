@@ -20,7 +20,7 @@
   exits:
     "Woodfall Temple Entrance": "true"
     "Woodfall Temple Water Room": "true"
-    "Woodfall Temple Maze": "small_keys(SMALL_KEY_WF, 1)"
+    "Woodfall Temple Maze": "small_keys_wf(1)"
     "Woodfall Temple Main Ledge": "event(WOODFALL_TEMPLE_MAIN_FLOWER) || event(WOODFALL_TEMPLE_MAIN_LADDER) || can_hookshot_short"
   events:
     WOODFALL_TEMPLE_MAIN_FLOWER: "can_use_fire_arrows"

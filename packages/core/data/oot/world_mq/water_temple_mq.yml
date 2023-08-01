@@ -7,7 +7,7 @@
   dungeon: Water
   exits:
     "Water Temple": "true"
-    "Water Temple Dark Link": "small_keys(SMALL_KEY_WATER, 1) && event(WATER_LEVEL_HIGH) && can_longshot && soul(SOUL_STALFOS)"
+    "Water Temple Dark Link": "small_keys_water(1) && event(WATER_LEVEL_HIGH) && can_longshot && soul(SOUL_STALFOS)"
     "Water Temple Three Torch Room": "event(WATER_GATES)"
     "Water Temple Side Loop": "event(WATER_GATES) && can_longshot && (scarecrow_longshot || has_hover_boots)"
     "Water Temple Antichamber": "can_longshot && event(WATER_LEVEL_HIGH)"
@@ -36,7 +36,7 @@
   dungeon: Water
   locations:
     "MQ Water Temple Side Loop Key": "true"
-    "MQ Water Temple GS Side Loop": "has_fire && small_keys(SMALL_KEY_WATER, 2) && soul_dodongo"
+    "MQ Water Temple GS Side Loop": "has_fire && small_keys_water(2) && soul_dodongo"
 "Water Temple Antichamber":
   dungeon: Water
   exits:

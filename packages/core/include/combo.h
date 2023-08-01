@@ -357,6 +357,8 @@ typedef struct
     u8                      menuScreen;
     u8                      menuCursor;
     u8                      menuCursorMax;
+    u8                      maxKeysOot[0x10];
+    u8                      maxKeysMm[4];
 }
 ComboGlobal;
 

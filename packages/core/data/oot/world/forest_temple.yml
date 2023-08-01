@@ -13,7 +13,7 @@
     "Forest Temple Mini-Boss": "true"
     "Forest Temple Garden West": "can_play_time"
     "Forest Temple Garden East": "can_hit_triggers_distance"
-    "Forest Temple Maze": "small_keys(SMALL_KEY_FOREST, 1)"
+    "Forest Temple Maze": "small_keys_forest(1)"
     "Forest Temple Antichamber": "event(FOREST_POE_4)"
   events:
     FOREST_POE_4: "event(FOREST_POE_1) && event(FOREST_POE_2) && event(FOREST_POE_3)"
@@ -83,14 +83,14 @@
   exits:
     "Forest Temple Main": "true"
     "Forest Temple Garden West Ledge": "has_hover_boots"
-    "Forest Temple Twisted 1 Normal": "is_adult && small_keys(SMALL_KEY_FOREST, 2) && has(STRENGTH)"
-    "Forest Temple Twisted 1 Alt": "is_adult && small_keys(SMALL_KEY_FOREST, 2) && has(STRENGTH) && can_hit_triggers_distance"
+    "Forest Temple Twisted 1 Normal": "is_adult && small_keys_forest(2) && has(STRENGTH)"
+    "Forest Temple Twisted 1 Alt": "is_adult && small_keys_forest(2) && has(STRENGTH) && can_hit_triggers_distance"
   locations:
     "Forest Temple Maze": "has(STRENGTH) && can_hit_triggers_distance"
 "Forest Temple Twisted 1 Normal":
   dungeon: Forest
   exits:
-    "Forest Temple Poe 1": "small_keys(SMALL_KEY_FOREST, 3)"
+    "Forest Temple Poe 1": "small_keys_forest(3)"
 "Forest Temple Twisted 1 Alt":
   dungeon: Forest
   exits:
@@ -114,7 +114,7 @@
 "Forest Temple Poe 2":
   dungeon: Forest
   exits:
-    "Forest Temple Twisted 2 Normal": "small_keys(SMALL_KEY_FOREST, 4)"
+    "Forest Temple Twisted 2 Normal": "small_keys_forest(4)"
   events:
     FOREST_POE_2: "can_use_bow"
   locations:
@@ -122,7 +122,7 @@
 "Forest Temple Twisted 2 Normal":
   dungeon: Forest
   exits:
-    "Forest Temple Rotating Room": "small_keys(SMALL_KEY_FOREST, 5)"
+    "Forest Temple Rotating Room": "small_keys_forest(5)"
 "Forest Temple Rotating Room":
   dungeon: Forest
   exits:

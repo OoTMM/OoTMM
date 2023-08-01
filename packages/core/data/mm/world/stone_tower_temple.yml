@@ -25,7 +25,7 @@
   dungeon: ST
   exits:
     "Stone Tower Temple Under West Garden": "true"
-    "Stone Tower Temple Center Ledge": "small_keys(SMALL_KEY_ST, 4) || (small_keys(SMALL_KEY_ST, 3) && has_mask_zora)"
+    "Stone Tower Temple Center Ledge": "small_keys_st(4) || (small_keys_st(3) && has_mask_zora)"
   events:
     STONE_TOWER_WEST_GARDEN_LIGHT: "has_explosives"
 "Stone Tower Temple Under West Garden":
@@ -39,7 +39,7 @@
 "Stone Tower Temple Center Ledge":
   dungeon: ST
   exits:
-    "Stone Tower Temple West Garden": "small_keys(SMALL_KEY_ST, 4) || (small_keys(SMALL_KEY_ST, 3) && has_mask_goron && (has_explosives || trick_keg_explosives) && can_play(SONG_EMPTINESS))"
+    "Stone Tower Temple West Garden": "small_keys_st(4) || (small_keys_st(3) && has_mask_goron && (has_explosives || trick_keg_explosives) && can_play(SONG_EMPTINESS))"
     "Stone Tower Temple Center": "true"
   locations:
     "Stone Tower Temple Center Sun Block Chest": "(has_mask_zora || has(MASK_DEKU) || has_explosives || (has_magic && (has_weapon && has(SPIN_UPGRADE))) || has(SWORD, 3) || has(GREAT_FAIRY_SWORD) || can_use_ice_arrows) && can_use_light_arrows"
@@ -55,7 +55,7 @@
   dungeon: ST
   exits:
     "Stone Tower Temple Center": "has_mask_zora"
-    "Stone Tower Temple Mirrors Room": "small_keys(SMALL_KEY_ST, 4)"
+    "Stone Tower Temple Mirrors Room": "small_keys_st(4)"
     "Stone Tower Temple Entrance": "event(STONE_TOWER_EAST_ENTRY_BLOCK)"
   events:
     STONE_TOWER_WATER_CHEST_SWITCH: "has_mask_zora"
@@ -66,7 +66,7 @@
 "Stone Tower Temple Mirrors Room":
   dungeon: ST
   exits:
-    "Stone Tower Temple Water Room": "small_keys(SMALL_KEY_ST, 4)"
+    "Stone Tower Temple Water Room": "small_keys_st(4)"
     "Stone Tower Temple Wind Room": "(has_mask_goron && has_mirror_shield) || can_use_light_arrows"
   locations:
     "Stone Tower Temple Mirrors Room Center Chest": "(has_mask_goron && has_mirror_shield) || can_use_light_arrows"
@@ -96,6 +96,6 @@
   exits:
     "Stone Tower Temple Entrance": "true"
     "Stone Tower Temple Center": "can_goron_bomb_jump"
-    "Stone Tower Temple Center Ledge": "(can_goron_bomb_jump && (has_bombs || (small_keys(SMALL_KEY_ST, 3) && trick_keg_explosives))) && can_use_ice_arrows"
+    "Stone Tower Temple Center Ledge": "(can_goron_bomb_jump && (has_bombs || (small_keys_st(3) && trick_keg_explosives))) && can_use_ice_arrows"
   locations:
     "Stone Tower Temple Water Bridge Chest": "soul(SOUL_EYEGORE)"

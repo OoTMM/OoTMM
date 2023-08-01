@@ -103,11 +103,29 @@ export const SMALL_KEYS_OOT = new Set([
   Items.OOT_SMALL_KEY_GANON,
 ]);
 
+export const KEY_RINGS_OOT = new Set([
+  Items.OOT_KEY_RING_FOREST,
+  Items.OOT_KEY_RING_FIRE,
+  Items.OOT_KEY_RING_WATER,
+  Items.OOT_KEY_RING_SPIRIT,
+  Items.OOT_KEY_RING_SHADOW,
+  Items.OOT_KEY_RING_BOTW,
+  Items.OOT_KEY_RING_GTG,
+  Items.OOT_KEY_RING_GANON,
+]);
+
 export const SMALL_KEYS_MM = new Set([
   Items.MM_SMALL_KEY_WF,
   Items.MM_SMALL_KEY_SH,
   Items.MM_SMALL_KEY_GB,
   Items.MM_SMALL_KEY_ST,
+]);
+
+export const KEY_RINGS_MM = new Set([
+  Items.MM_KEY_RING_WF,
+  Items.MM_KEY_RING_SH,
+  Items.MM_KEY_RING_GB,
+  Items.MM_KEY_RING_ST,
 ]);
 
 export const BOSS_KEYS_OOT = new Set([

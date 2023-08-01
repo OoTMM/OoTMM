@@ -96,7 +96,11 @@
 
 # Keys
 "boss_key(x)": "setting(bossKeyShuffleMm, removed) || has(x)"
-"small_keys(x, count)": "setting(smallKeyShuffleMm, removed) || has(x, count)"
+"small_keys(x, y, count)": "setting(smallKeyShuffleMm, removed) || cond(setting(smallKeyRingMm, keyRings), has(y), has(x, count))"
+"small_keys_wf(n)": "small_keys(SMALL_KEY_WF, KEY_RING_WF, n)"
+"small_keys_sh(n)": "small_keys(SMALL_KEY_SH, KEY_RING_SH, n)"
+"small_keys_gb(n)": "small_keys(SMALL_KEY_GB, KEY_RING_GB, n)"
+"small_keys_st(n)": "small_keys(SMALL_KEY_ST, KEY_RING_ST, n)"
 
 # Masks
 "has_mask_bunny": "has(MASK_BUNNY) || has(SHARED_MASK_BUNNY)"

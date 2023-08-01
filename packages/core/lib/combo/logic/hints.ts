@@ -223,15 +223,15 @@ export class LogicPassHints {
     }
 
     /* Non-shuffled hideout keys */
-    if (ItemHelpers.isSmallKeyHideout(item.item) && this.state.settings.smallKeyShuffleHideout !== 'anywhere') {
+    if ((ItemHelpers.isSmallKeyHideout(item.item) || ItemHelpers.isKeyRingHideout(item.item)) && this.state.settings.smallKeyShuffleHideout !== 'anywhere') {
       return false;
     }
 
     /* Non-shuffled regular keys */
-    if (ItemHelpers.isSmallKeyRegularOot(item.item) && this.state.settings.smallKeyShuffleOot !== 'anywhere') {
+    if ((ItemHelpers.isSmallKeyRegularOot(item.item) || ItemHelpers.isKeyRingRegularOot(item.item)) && this.state.settings.smallKeyShuffleOot !== 'anywhere') {
       return false;
     }
-    if (ItemHelpers.isSmallKeyRegularMm(item.item) && this.state.settings.smallKeyShuffleMm !== 'anywhere') {
+    if ((ItemHelpers.isSmallKeyRegularMm(item.item) || ItemHelpers.isKeyRingRegularMm(item.item)) && this.state.settings.smallKeyShuffleMm !== 'anywhere') {
       return false;
     }
 

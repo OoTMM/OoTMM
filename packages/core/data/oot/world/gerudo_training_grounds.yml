@@ -108,10 +108,10 @@
 "Gerudo Training Grounds Maze":
   dungeon: GTG
   exits:
-    "Gerudo Training Grounds Maze Side": "small_keys(SMALL_KEY_GTG, 9)"
+    "Gerudo Training Grounds Maze Side": "small_keys_gtg(9)"
   locations:
-    "Gerudo Training Maze Upper Fake Ceiling": "small_keys(SMALL_KEY_GTG, 3) && has_lens"
-    "Gerudo Training Maze Chest 1": "small_keys(SMALL_KEY_GTG, 4)"
-    "Gerudo Training Maze Chest 2": "small_keys(SMALL_KEY_GTG, 6)"
-    "Gerudo Training Maze Chest 3": "small_keys(SMALL_KEY_GTG, 7)"
-    "Gerudo Training Maze Chest 4": "small_keys(SMALL_KEY_GTG, 9)"
+    "Gerudo Training Maze Upper Fake Ceiling": "small_keys_gtg(3) && has_lens"
+    "Gerudo Training Maze Chest 1": "small_keys_gtg(4)"
+    "Gerudo Training Maze Chest 2": "small_keys_gtg(6)"
+    "Gerudo Training Maze Chest 3": "small_keys_gtg(7)"
+    "Gerudo Training Maze Chest 4": "small_keys_gtg(9)"

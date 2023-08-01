@@ -7,14 +7,14 @@
   events:
     GTG_RIGHT_SIDE: "can_hit_triggers_distance"
     GTG_LEFT_SIDE: "has_fire"
-    GTG_ICE_ARROWS: "small_keys(SMALL_KEY_GTG, 3) && can_hammer"
+    GTG_ICE_ARROWS: "small_keys_gtg(3) && can_hammer"
   locations:
     "MQ Gerudo Training Grounds Entryway Left Chest": "true"
     "MQ Gerudo Training Grounds Entryway Right Chest": "true"
     "MQ Gerudo Training Grounds Maze First Chest": "has_lens"
     "MQ Gerudo Training Grounds Maze Second Chest": "true"
     "MQ Gerudo Training Grounds Maze Third Chest": "true"
-    "MQ Gerudo Training Grounds Maze Fourth Chest": "small_keys(SMALL_KEY_GTG, 1)"
+    "MQ Gerudo Training Grounds Maze Fourth Chest": "small_keys_gtg(1)"
 "Gerudo Training Grounds Right Path":
   dungeon: GTG
   exits:

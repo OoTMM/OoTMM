@@ -113,8 +113,7 @@
 "can_kill_baba_sticks": "soul_deku_baba && (can_boomerang || (has_weapon && (is_child || has_nuts || can_hookshot || can_hammer)))"
 "can_kill_baba_nuts": "soul_deku_baba && (has_weapon || has_explosives || can_use_slingshot)"
 "can_hit_scrub": "has_nuts || can_hit_triggers_distance || has_shield_for_scrubs || can_collect_distance || can_hammer"
-"has_small_key_gerudo": "setting(gerudoFortress, open) || cond(setting(gerudoFortress, single), has(SMALL_KEY_GF, 1), has(SMALL_KEY_GF, 4))"
-"can_rescue_carpenter": "has_small_key_gerudo && (has_weapon || ((can_boomerang || has_nuts) && can_use_sticks))"
+"can_rescue_carpenter": "small_keys_hideout_all && (has_weapon || ((can_boomerang || has_nuts) && can_use_sticks))"
 "carpenters_rescued": "setting(gerudoFortress, open) || (event(CARPENTER_1) && (setting(gerudoFortress, single) || (event(CARPENTER_2) || event(CARPENTER_3) || event(CARPENTER_4))))"
 
 #Trick Macros
@@ -125,10 +124,9 @@
 #Specialty Macros
 "met_zelda": "event(MEET_ZELDA) || setting(skipZelda)"
 "woke_talon_child": "event(TALON_CHILD) || setting(skipZelda)"
-"has_fire_spirit": "has_magic && ((has_arrows && (has(ARROW_FIRE) || has(SHARED_ARROW_FIRE)) && has_sticks) || has(SPELL_FIRE)) && (has_explosives || small_keys(SMALL_KEY_SPIRIT, 2))"
+"has_fire_spirit": "has_magic && ((has_arrows && (has(ARROW_FIRE) || has(SHARED_ARROW_FIRE)) && has_sticks) || has(SPELL_FIRE)) && (has_explosives || small_keys_spirit(2))"
 "has_ranged_weapon_both": "has_explosives || (((has(SLINGSHOT) && (event(SEEDS) || renewable(DEKU_SEEDS_30))) || has(BOOMERANG)) && (has_hookshot(1) || has_arrows))"
 "can_collect_ageless": "has_hookshot(1) && has(BOOMERANG)"
-"has_small_keys_fire(x)": "setting(smallKeyShuffleOot, removed) || cond(setting(smallKeyShuffleOot, anywhere), has(SMALL_KEY_FIRE, x + 1), has(SMALL_KEY_FIRE, x))"
 "king_zora_moved": "event(KING_ZORA_LETTER) || setting(zoraKing, open) || (setting(zoraKing, adult) && is_adult)"
 "can_move_mido": "is_child && has_sword_kokiri && renewable(SHIELD_DEKU)"
 "mido_moved": "setting(dekuTree, open) || event(MIDO_MOVED)"
@@ -142,7 +140,18 @@
 
 # Keys
 "boss_key(x)": "setting(bossKeyShuffleOot, removed) || has(x)"
-"small_keys(x, count)": "setting(smallKeyShuffleOot, removed) || has(x, count)"
+"small_keys(x, y, count)": "setting(smallKeyShuffleOot, removed) || cond(setting(smallKeyRingOot, keyRings), has(y), has(x, count))"
+"small_keys_extra(x, y, count)": "setting(smallKeyShuffleOot, removed) || cond(setting(smallKeyRingOot, keyRings), has(y), has(x, count + 1))"
+"small_keys_forest(n)": "small_keys(SMALL_KEY_FOREST, KEY_RING_FOREST, n)"
+"small_keys_fire(n)": "cond(setting(smallKeyShuffleOot, anywhere), small_keys_extra(SMALL_KEY_FIRE, KEY_RING_FIRE, n), small_keys(SMALL_KEY_FIRE, KEY_RING_FIRE, n))"
+"small_keys_water(n)": "small_keys(SMALL_KEY_WATER, KEY_RING_WATER, n)"
+"small_keys_shadow(n)": "small_keys(SMALL_KEY_SHADOW, KEY_RING_SHADOW, n)"
+"small_keys_spirit(n)": "small_keys(SMALL_KEY_SPIRIT, KEY_RING_SPIRIT, n)"
+"small_keys_hideout(n)": "small_keys(SMALL_KEY_GF, KEY_RING_GF, n)"
+"small_keys_hideout_all": "setting(gerudoFortress, open) || cond(setting(gerudoFortress, single), small_keys_hideout(1), small_keys_hideout(4))"
+"small_keys_botw(n)": "small_keys(SMALL_KEY_BOTW, KEY_RING_BOTW, n)"
+"small_keys_gtg(n)": "small_keys(SMALL_KEY_GTG, KEY_RING_GTG, n)"
+"small_keys_ganon(n)": "small_keys(SMALL_KEY_GANON, KEY_RING_GANON, n)"
 
 # Masks
 "has_mask_truth": "has(MASK_TRUTH) || has(SHARED_MASK_TRUTH)"

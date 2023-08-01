@@ -151,6 +151,10 @@ int comboAddItemEffect(GameState_Play* play, s16 gi)
         dungeonId = dungeon(play, 0);
         count = comboAddSmallKeyOot(dungeonId);
         break;
+    case GI_OOT_KEY_RING:
+        dungeonId = dungeon(play, 0);
+        comboAddKeyRingOot(dungeonId);
+        break;
     case GI_OOT_MAP:
         dungeonId = dungeon(play, 0);
         comboAddMapOot(dungeonId);
