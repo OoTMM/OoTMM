@@ -91,6 +91,7 @@
 # define AC_EN_GS                   0x1b9
 # define AC_EN_CROW                 0x1c0
 # define AC_EN_COW                  0x1c6
+# define AC_ARMS_HOOK               0x066
 
 #endif
 
