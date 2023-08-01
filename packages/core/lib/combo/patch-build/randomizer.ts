@@ -159,10 +159,16 @@ const gi = (settings: Settings, game: Game, item: Item, generic: boolean) => {
   if (generic) {
     if (ItemHelpers.isSmallKeyHideout(item) && settings.smallKeyShuffleHideout !== 'anywhere') {
       itemId = gameId(game, 'SMALL_KEY', '_');
+    } else if (ItemHelpers.isKeyRingHideout(item) && settings.smallKeyShuffleHideout !== 'anywhere') {
+      itemId = gameId(game, 'KEY_RING', '_');
     } else if (ItemHelpers.isSmallKeyRegularOot(item) && settings.smallKeyShuffleOot === 'ownDungeon' && settings.erBoss === 'none') {
       itemId = gameId(game, 'SMALL_KEY', '_');
+    } else if (ItemHelpers.isKeyRingRegularOot(item) && settings.smallKeyShuffleOot === 'ownDungeon' && settings.erBoss === 'none') {
+      itemId = gameId(game, 'KEY_RING', '_');
     } else if (ItemHelpers.isSmallKeyRegularMm(item) && settings.smallKeyShuffleMm === 'ownDungeon' && settings.erBoss === 'none') {
       itemId = gameId(game, 'SMALL_KEY', '_');
+    } else if (ItemHelpers.isKeyRingRegularMm(item) && settings.smallKeyShuffleMm === 'ownDungeon' && settings.erBoss === 'none') {
+      itemId = gameId(game, 'KEY_RING', '_');
     } else if (ItemHelpers.isGanonBossKey(item) && settings.ganonBossKey !== 'anywhere') {
       itemId = gameId(game, 'BOSS_KEY', '_');
     } else if (ItemHelpers.isRegularBossKeyOot(item) && settings.bossKeyShuffleOot === 'ownDungeon' && settings.erBoss === 'none') {
