@@ -713,6 +713,31 @@ void Shader_RutosLetter(GameState_Play* play, s16 index)
     CLOSE_DISPS();
 }
 
+void Shader_CustomSmallKey(GameState_Play* play, s16 index)
+{
+    const Shader* shader;
+
+    shader = &kShaders[index];
+    OPEN_DISPS(play->gs.gfx);
+    InitListPolyOpa(play->gs.gfx);
+    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
+    switch (shader->lists[1])
+    {
+    case 0:
+        /* Silver */
+        gDPSetPrimColor(POLY_OPA_DISP++, 0x00, 0x80, 255, 255, 255, 255);
+        gDPSetEnvColor(POLY_OPA_DISP++, 60, 80, 90, 255);
+        break;
+    case 1:
+        /* Gold */
+        gDPSetPrimColor(POLY_OPA_DISP++, 0x00, 0x80, 255, 255, 0, 255);
+        gDPSetEnvColor(POLY_OPA_DISP++, 60, 80, 0, 255);
+        break;
+    }
+    gSPDisplayList(POLY_OPA_DISP++, shader->lists[0]);
+    CLOSE_DISPS();
+}
+
 const Shader kShaders[] = {
 #include "data/shaders.inc"
 };
