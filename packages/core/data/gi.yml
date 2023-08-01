@@ -266,6 +266,7 @@ OOT_KEY_RING_GANON:                       0x10b
 OOT_KEY_RING_BOTW:                        0x10c
 OOT_KEY_RING_GF:                          0x10d
 OOT_KEY_RING_GTG:                         0x10e
+OOT_SKELETON_KEY:                         0x10f
 
 MM_RUPEE_GREEN:               0x01
 MM_RUPEE_BLUE:                0x02
@@ -497,6 +498,7 @@ MM_KEY_RING_WF:                          0x129
 MM_KEY_RING_SH:                          0x12a
 MM_KEY_RING_GB:                          0x12b
 MM_KEY_RING_ST:                          0x12c
+MM_SKELETON_KEY:                         0x12d
 
 # Special
 # MM_SOUL_SKULL_KID:                       0xf7

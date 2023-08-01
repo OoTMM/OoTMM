@@ -1,5 +1,5 @@
 /* Common    Empty Bottle                      */ { Shader_Opa0_Xlu1,              { 0x6000670, 0x6000750 }},
-/* Common    Small Key                         */ { Shader_Opa0,                   { 0x6000800 }},
+/* Common    Small Key                         */ { Shader_CustomSmallKey,         { 0x6000800, 0 }},
 /* Common    Recovery Heart                    */ { Shader_Heart,                  { 0x60000e0 }},
 /* Common    Boss Key                          */ { Shader_Opa0_Xlu1,              { 0x6000ca0, 0x6000f08 }},
 /* Common    Compass                           */ { Shader_Compass,                { 0x6000960, 0x6000c50 }},
@@ -202,3 +202,4 @@
 /* Common    Triforce Piece                    */ { Shader_Opa0,                   { CUSTOM_OBJECT_TRIFORCE_0 }},
 /* OoT       Silver Rupee                      */ { Shader_SilverRupee,            {} },
 /* Common    Souls                             */ { Shader_CustomGS,               { 3 } },
+/* Common    Skeleton Key                      */ { Shader_CustomSmallKey,         { 0x6000800, 1 }},

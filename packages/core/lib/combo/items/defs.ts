@@ -507,6 +507,9 @@ const ITEM_IDS = [
   'MM_KEY_RING_SH',
   'MM_KEY_RING_GB',
   'MM_KEY_RING_ST',
+  'OOT_SKELETON_KEY',
+  'MM_SKELETON_KEY',
+  'SHARED_SKELETON_KEY',
 ] as const;
 
 type ItemID = typeof ITEM_IDS[number];

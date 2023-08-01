@@ -197,6 +197,7 @@ static int csmcFromItemOot(s16 gi)
     case GI_OOT_NUT_UPGRADE2:
     case GI_OOT_DEFENSE_UPGRADE:
     case GI_OOT_TRIFORCE:
+    case GI_OOT_SKELETON_KEY:
         return CSMC_MAJOR;
     case GI_OOT_SMALL_KEY:
     case GI_OOT_SMALL_KEY_FOREST:
@@ -408,6 +409,7 @@ static int csmcFromItemMm(s16 gi)
     case GI_MM_OWL_SOUTHERN_SWAMP:
     case GI_MM_OWL_IKANA_CANYON:
     case GI_MM_OWL_STONE_TOWER:
+    case GI_MM_SKELETON_KEY:
         return CSMC_MAJOR;
     case GI_MM_SMALL_KEY:
     case GI_MM_SMALL_KEY_WF:

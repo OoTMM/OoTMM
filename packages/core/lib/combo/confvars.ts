@@ -71,6 +71,7 @@ export const CONFVARS = [
   'OOT_SOULS',
   'MM_SOULS',
   'MM_REMOVED_FAIRIES',
+  'SHARED_SKELETON_KEY',
 ] as const;
 
 export type Confvar = typeof CONFVARS[number];

@@ -772,6 +772,20 @@ export const SETTINGS = [{
   default: false,
   cond: (s: any) => s.colossalWallets,
 }, {
+  key: 'skeletonKeyOot',
+  name: 'Skeleton Key (OoT)',
+  category: 'items.extensions',
+  type: 'boolean',
+  description: 'Adds a Skeleton Key that can open every small-key-locked door.',
+  default: false,
+}, {
+  key: 'skeletonKeyMm',
+  name: 'Skeleton Key (MM)',
+  category: 'items.extensions',
+  type: 'boolean',
+  description: 'Adds a Skeleton Key that can open every small-key-locked door.',
+  default: false,
+}, {
   key: 'enemySoulsOot',
   name: 'Enemy Souls (OoT)',
   category: 'items.extensions',
@@ -918,6 +932,13 @@ export const SETTINGS = [{
   type: 'boolean',
   default: false,
   cond: (s: any) => s.enemySoulsOot && s.enemySoulsMm,
+}, {
+  key: 'sharedSkeletonKey',
+  name: 'Shared Skeleton Key',
+  category: 'items.shared',
+  type: 'boolean',
+  default: false,
+  cond: (s: any) => s.skeletonKeyOot && s.skeletonKeyMm,
 }, {
   key: 'agelessSwords',
   name: 'Ageless Swords',

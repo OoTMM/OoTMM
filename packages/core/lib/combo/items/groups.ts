@@ -660,6 +660,7 @@ export const REQUIRED = new Set([
   Items.OOT_POTION_BLUE,
   Items.OOT_FISH,
   Items.OOT_BUG,
+  Items.OOT_SKELETON_KEY,
   Items.MM_GS_TOKEN_SWAMP,
   Items.MM_GS_TOKEN_OCEAN,
   Items.MM_SHIELD_HERO,
@@ -753,6 +754,7 @@ export const REQUIRED = new Set([
   Items.MM_ARROWS_10,
   Items.MM_ARROWS_30,
   Items.MM_ARROWS_40,
+  Items.MM_SKELETON_KEY,
   Items.SHARED_BOW,
   Items.SHARED_BOMB_BAG,
   Items.SHARED_MAGIC_UPGRADE,
@@ -791,5 +793,6 @@ export const REQUIRED = new Set([
   Items.SHARED_BOMBCHU_5,
   Items.SHARED_BOMBCHU_10,
   Items.SHARED_BOMBCHU_20,
+  Items.SHARED_SKELETON_KEY,
 ]);
 

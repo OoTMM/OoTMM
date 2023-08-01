@@ -223,5 +223,6 @@ extern const Shader kShaders[256];
 #define DRAWGI_TRIFORCE                     0xca
 #define DRAWGI_OOT_RUPEE_SILVER             0xcb
 #define DRAWGI_SOUL                         0xcc
+#define DRAWGI_SKELETON_KEY                 0xcd
 
 #endif

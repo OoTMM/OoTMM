@@ -2,16 +2,16 @@ import { Buffer } from 'buffer';
 
 import { LogicResult } from '../logic';
 import { DATA_GI, DATA_NPC, DATA_SCENES, DATA_REGIONS, DATA_HINTS_POOL, DATA_HINTS, DATA_ENTRANCES } from '../data';
-import { Game, GAMES } from "../config";
+import { Game } from "../config";
 import { WorldCheck } from '../logic/world';
 import { DUNGEONS, Settings, SPECIAL_CONDS, SPECIAL_CONDS_KEYS } from '../settings';
 import { HintGossip, WorldHints } from '../logic/hints';
-import { CountMap, countMapAdd, gameId, toU16Buffer, toU32Buffer, toU8Buffer } from '../util';
+import { countMapAdd, gameId, toU16Buffer, toU32Buffer, toU8Buffer } from '../util';
 import { Patchfile } from './patchfile';
-import { LOCATIONS_ZELDA, isLocationChestFairy, isLocationOtherFairy, makeLocation, makePlayerLocations } from '../logic/locations';
+import { LOCATIONS_ZELDA, makeLocation, makePlayerLocations } from '../logic/locations';
 import { CONFVARS_VALUES, Confvar } from '../confvars';
 import { Region, regionData } from '../logic/regions';
-import { Item, ItemGroups, ItemHelpers, Items, ItemsCount, itemByID } from '../items';
+import { Item, ItemGroups, ItemHelpers, Items, ItemsCount } from '../items';
 import { SharedItemGroups } from '../logic/shared';
 
 const DUNGEON_REWARD_LOCATIONS = [

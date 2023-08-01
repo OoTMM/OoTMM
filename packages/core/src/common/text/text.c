@@ -249,6 +249,8 @@ static int isItemAmbiguousOot(s16 gi)
     case GI_OOT_SOUL_FLYING_POT:
     case GI_OOT_SOUL_FLOORMASTER:
         return !comboConfig(CFG_SHARED_SOULS);
+    case GI_OOT_SKELETON_KEY:
+        return !comboConfig(CFG_SHARED_SKELETON_KEY);
     case GI_OOT_BOMBCHU_10:
     case GI_OOT_MAGIC_BEAN:
     case GI_OOT_BOTTLE_EMPTY:
@@ -372,6 +374,8 @@ static int isItemAmbiguousMm(s16 gi)
     case GI_MM_SOUL_FLYING_POT:
     case GI_MM_SOUL_FLOORMASTER:
         return !comboConfig(CFG_SHARED_SOULS);
+    case GI_MM_SKELETON_KEY:
+        return !comboConfig(CFG_SHARED_SKELETON_KEY);
     case GI_MM_BOMBCHU:
     case GI_MM_MAGIC_BEAN:
     case GI_MM_BOTTLE_POTION_RED:

@@ -135,6 +135,28 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
     base.smallKeyShuffleHideout = sampleWeighted(random, { ownDungeon: 10, anywhere: 7 });
   }
 
+  /* Skeleton key */
+  switch (randomInt(random, 4)) {
+  case 0:
+    break;
+  case 1:
+    base.skeletonKeyOot = true;
+    base.skeletonKeyMm = true;
+    break;
+  default:
+    base.skeletonKeyOot = booleanWeighted(random, 0.5);
+    base.skeletonKeyMm = booleanWeighted(random, 0.5);
+    break;
+  }
+
+  /* No skeleton key if keysy */
+  if (base.smallKeyShuffleOot === 'removed') {
+    base.skeletonKeyOot = false;
+  }
+  if (base.smallKeyShuffleMm === 'removed') {
+    base.skeletonKeyMm = false;
+  }
+
   /* Boss key shuffle */
   base.bossKeyShuffleOot = sampleWeighted(random, { ownDungeon: 10, anywhere: 8, removed: 4 });
   if (booleanWeighted(random, 0.5)) {
@@ -339,6 +361,8 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
     base.sharedWallets = true;
     base.sharedHealth = true;
     base.sharedSouls = true;
+    base.sharedSkeletonKey = true;
+    break;
   default:
     base.sharedNutsSticks = booleanWeighted(random, 0.5);
     base.sharedBows = booleanWeighted(random, 0.5);
@@ -350,6 +374,7 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
     base.sharedWallets = booleanWeighted(random, 0.5);
     base.sharedHealth = booleanWeighted(random, 0.5);
     base.sharedSouls = booleanWeighted(random, 0.5);
+    base.sharedSkeletonKey = booleanWeighted(random, 0.5);
 
     /* Masks - grouping */
     switch (randomInt(random, 4)) {

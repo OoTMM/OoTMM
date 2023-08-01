@@ -268,3 +268,4 @@ X(ITEM_CUSTOM,              0x80,  DRAWGI_SMALL_KEY,                    0x60, 0x
 X(ITEM_CUSTOM,              0x80,  DRAWGI_SMALL_KEY,                    0x60, 0x00aa, "the " C0 "Key Ring (Well)"),
 X(ITEM_CUSTOM,              0x80,  DRAWGI_SMALL_KEY,                    0x60, 0x00aa, "the " C0 "Key Ring (Hideout)"),
 X(ITEM_CUSTOM,              0x80,  DRAWGI_SMALL_KEY,                    0x60, 0x00aa, "the " C0 "Key Ring (GTG)"),
+X(ITEM_CUSTOM,              0x80,  DRAWGI_SKELETON_KEY,                 0x60, 0x00aa, "the " C1 "Skeleton Key"),
