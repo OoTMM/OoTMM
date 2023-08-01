@@ -235,6 +235,17 @@ export const SETTINGS = [{
   ],
   default: 'ownDungeon'
 }, {
+  key: 'smallKeyRingOot',
+  name: 'Small Key Ring (OoT)',
+  category: 'main.shuffle',
+  type: 'enum',
+  description: 'Controls the grouping of keys into keyrings',
+  values: [
+    { value: 'disabled', name: 'Disabled', description: 'Small keys are found individually, like in the base game.' },
+    { value: 'keyRings', name: 'Key Rings', description: 'Small keys are grouped into key rings.' },
+  ],
+  default: 'disabled'
+}, {
   key: 'silverRupeeShuffle',
   name: 'Silver Rupee Shuffle',
   category: 'main.shuffle',

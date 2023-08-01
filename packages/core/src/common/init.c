@@ -21,13 +21,6 @@ void comboInit(void)
     comboInitHints();
     comboInitEntrances();
     comboSilverRupeesInit();
-    comboMenuInit();
     netInit();
 }
 
-ALIGNED(16) ComboData gComboData;
-
-void comboInitData(void)
-{
-    comboDmaLoadFile(&gComboData, COMBO_VROM_DATA);
-}

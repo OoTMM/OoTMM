@@ -18,7 +18,6 @@ typedef struct
     const char* name;
     int id;
     int flags;
-    int maxKeys;
 }
 DungeonDef;
 
@@ -26,6 +25,7 @@ typedef struct
 {
     s8 keys;
     u8 fairies;
+    u8 maxKeys;
     u8 map:1;
     u8 compass:1;
     u8 bossKey:1;
@@ -41,26 +41,26 @@ static u32 kFairyColors[] = {
 };
 
 static DungeonDef gDungeonDefs[] = {
-    { "Deku",           SCE_OOT_INSIDE_DEKU_TREE,       DD_OOT | DD_MAP_COMPASS, 0 },
-    { "Dodongo",        SCE_OOT_DODONGO_CAVERN,         DD_OOT | DD_MAP_COMPASS, 0 },
-    { "Jabu",           SCE_OOT_INSIDE_JABU_JABU,       DD_OOT | DD_MAP_COMPASS, 0 },
-    { "Forest",         SCE_OOT_TEMPLE_FOREST,          DD_OOT | DD_MAP_COMPASS | DD_BOSS_KEY, 5 },
-    { "Fire",           SCE_OOT_TEMPLE_FIRE,            DD_OOT | DD_MAP_COMPASS | DD_BOSS_KEY, 7 },
-    { "Water",          SCE_OOT_TEMPLE_WATER,           DD_OOT | DD_MAP_COMPASS | DD_BOSS_KEY, 5 },
-    { "Shadow",         SCE_OOT_TEMPLE_SHADOW,          DD_OOT | DD_MAP_COMPASS | DD_BOSS_KEY, 5 },
-    { "Spirit",         SCE_OOT_TEMPLE_SPIRIT,          DD_OOT | DD_MAP_COMPASS | DD_BOSS_KEY, 5 },
-    { "Well",           SCE_OOT_BOTTOM_OF_THE_WELL,     DD_OOT | DD_MAP_COMPASS, 3 },
-    { "Ice",            SCE_OOT_ICE_CAVERN,             DD_OOT | DD_MAP_COMPASS, 0 },
-    { "Hideout",        SCE_OOT_THIEVES_HIDEOUT,        DD_OOT, 4 },
-    { "GTG",            SCE_OOT_GERUDO_TRAINING_GROUND, DD_OOT, 9 },
-    { "Ganon",          SCE_OOT_INSIDE_GANON_CASTLE,    DD_OOT | DD_BOSS_KEY, 2 },
-    { "Woodfall",       0,                              DD_MM  | DD_MAP_COMPASS | DD_BOSS_KEY | DD_FAIRIES, 1 },
-    { "Snowhead",       1,                              DD_MM  | DD_MAP_COMPASS | DD_BOSS_KEY | DD_FAIRIES, 3 },
-    { "Great Bay",      2,                              DD_MM  | DD_MAP_COMPASS | DD_BOSS_KEY | DD_FAIRIES, 1 },
-    { "Stone Tower",    3,                              DD_MM  | DD_MAP_COMPASS | DD_BOSS_KEY | DD_FAIRIES, 4 },
-    { "Clock Town",     0,                              DD_MISC, 0 },
-    { "Tokens",         1,                              DD_MISC, 0 },
-    { "Triforce",       2,                              DD_MISC, 0 },
+    { "Deku",           SCE_OOT_INSIDE_DEKU_TREE,       DD_OOT | DD_MAP_COMPASS },
+    { "Dodongo",        SCE_OOT_DODONGO_CAVERN,         DD_OOT | DD_MAP_COMPASS },
+    { "Jabu",           SCE_OOT_INSIDE_JABU_JABU,       DD_OOT | DD_MAP_COMPASS },
+    { "Forest",         SCE_OOT_TEMPLE_FOREST,          DD_OOT | DD_MAP_COMPASS | DD_BOSS_KEY },
+    { "Fire",           SCE_OOT_TEMPLE_FIRE,            DD_OOT | DD_MAP_COMPASS | DD_BOSS_KEY },
+    { "Water",          SCE_OOT_TEMPLE_WATER,           DD_OOT | DD_MAP_COMPASS | DD_BOSS_KEY },
+    { "Shadow",         SCE_OOT_TEMPLE_SHADOW,          DD_OOT | DD_MAP_COMPASS | DD_BOSS_KEY },
+    { "Spirit",         SCE_OOT_TEMPLE_SPIRIT,          DD_OOT | DD_MAP_COMPASS | DD_BOSS_KEY },
+    { "Well",           SCE_OOT_BOTTOM_OF_THE_WELL,     DD_OOT | DD_MAP_COMPASS },
+    { "Ice",            SCE_OOT_ICE_CAVERN,             DD_OOT | DD_MAP_COMPASS },
+    { "Hideout",        SCE_OOT_THIEVES_HIDEOUT,        DD_OOT },
+    { "GTG",            SCE_OOT_GERUDO_TRAINING_GROUND, DD_OOT },
+    { "Ganon",          SCE_OOT_INSIDE_GANON_CASTLE,    DD_OOT | DD_BOSS_KEY },
+    { "Woodfall",       0,                              DD_MM  | DD_MAP_COMPASS | DD_BOSS_KEY | DD_FAIRIES },
+    { "Snowhead",       1,                              DD_MM  | DD_MAP_COMPASS | DD_BOSS_KEY | DD_FAIRIES },
+    { "Great Bay",      2,                              DD_MM  | DD_MAP_COMPASS | DD_BOSS_KEY | DD_FAIRIES },
+    { "Stone Tower",    3,                              DD_MM  | DD_MAP_COMPASS | DD_BOSS_KEY | DD_FAIRIES },
+    { "Clock Town",     0,                              DD_MISC },
+    { "Tokens",         1,                              DD_MISC },
+    { "Triforce",       2,                              DD_MISC },
 };
 
 static const char* const kSoulsOot[] = {
@@ -485,6 +485,7 @@ static void printNumColored(GameState_Play* play, int num, int max, int digits, 
 
 static void dungeonDataOot(DungeonData* out, const DungeonDef* def)
 {
+    out->maxKeys = g.maxKeysOot[def->id];
     out->keys = gOotSave.inventory.dungeonItems[def->id].maxKeys;
     out->fairies = 0;
     out->map = gOotSave.inventory.dungeonItems[def->id].map;
@@ -497,6 +498,7 @@ static void dungeonDataOot(DungeonData* out, const DungeonDef* def)
 
 static void dungeonDataMm(DungeonData* out, const DungeonDef* def)
 {
+    out->maxKeys = g.maxKeysMm[def->id];
     out->keys = gMmSave.inventory.dungeonItems[def->id].maxKeys;
     out->bossKey = gMmSave.inventory.dungeonItems[def->id].bossKey;
     out->fairies = gMmSave.inventory.strayFairies[def->id];
@@ -693,10 +695,10 @@ static void printDungeonData(GameState_Play* play, int base, int index)
         {
             drawTexRGBA32(play, 0x06000000 | CUSTOM_KEEP_SMALL_ICON_BOSS_KEY, 12, 12, x + 128.f, y);
         }
-        if (def->maxKeys)
+        if (data.maxKeys)
         {
             drawTexRGBA32(play, 0x06000000 | CUSTOM_KEEP_SMALL_ICON_KEY, 12, 12, x + 144.f, y);
-            printNumColored(play, data.keys, def->maxKeys, 1, x + 156.f, y, 0);
+            printNumColored(play, data.keys, data.maxKeys, 1, x + 156.f, y, 0);
         }
         if (def->flags & DD_FAIRIES)
         {
@@ -710,90 +712,6 @@ static void printDungeonData(GameState_Play* play, int base, int index)
             printDungeonSilverRupees(play, x + 170.f, y, srBase, srCount);
     }
     CLOSE_DISPS();
-}
-
-void comboMenuInit(void)
-{
-    /* MQ Forest */
-    if (gComboData.mq & (1 << MQ_TEMPLE_FOREST))
-    {
-        gDungeonDefs[3].maxKeys = 6;
-    }
-
-    /* MQ Fire / keysanity */
-    if (gComboData.mq & (1 << MQ_TEMPLE_FIRE))
-    {
-        gDungeonDefs[4].maxKeys = 5;
-    }
-    else if (comboConfig(CFG_SMALL_KEY_SHUFFLE))
-    {
-        gDungeonDefs[4].maxKeys = 8;
-    }
-
-    /* MQ Water */
-    if (gComboData.mq & (1 << MQ_TEMPLE_WATER))
-    {
-        gDungeonDefs[5].maxKeys = 2;
-    }
-
-    /* MQ Shadow */
-    if (gComboData.mq & (1 << MQ_TEMPLE_SHADOW))
-    {
-        gDungeonDefs[6].maxKeys = 6;
-    }
-
-    /* MQ Spirit */
-    if (gComboData.mq & (1 << MQ_TEMPLE_SPIRIT))
-    {
-        gDungeonDefs[7].maxKeys = 7;
-    }
-
-    /* MQ Well */
-    if (gComboData.mq & (1 << MQ_BOTTOM_OF_THE_WELL))
-    {
-        gDungeonDefs[8].maxKeys = 2;
-    }
-
-    /* MQ GTG */
-    if (gComboData.mq & (1 << MQ_GERUDO_TRAINING_GROUNDS))
-    {
-        gDungeonDefs[11].maxKeys = 3;
-    }
-
-    /* MQ Ganon */
-    if (gComboData.mq & (1 << MQ_GANON_CASTLE))
-    {
-        gDungeonDefs[12].maxKeys = 3;
-    }
-
-    if (comboConfig(CFG_OOT_CARPENTERS_NONE))
-    {
-        gDungeonDefs[10].maxKeys = 0;
-    }
-    else if (comboConfig(CFG_OOT_CARPENTERS_ONE))
-    {
-        gDungeonDefs[10].maxKeys = 1;
-    }
-
-    if (comboConfig(CFG_OOT_NO_SMALL_KEY))
-    {
-        gDungeonDefs[3].maxKeys = 0;
-        gDungeonDefs[4].maxKeys = 0;
-        gDungeonDefs[5].maxKeys = 0;
-        gDungeonDefs[6].maxKeys = 0;
-        gDungeonDefs[7].maxKeys = 0;
-        gDungeonDefs[8].maxKeys = 0;
-        gDungeonDefs[11].maxKeys = 0;
-        gDungeonDefs[12].maxKeys = 0;
-    }
-
-    if (comboConfig(CFG_MM_NO_SMALL_KEY))
-    {
-        gDungeonDefs[13].maxKeys = 0;
-        gDungeonDefs[14].maxKeys = 0;
-        gDungeonDefs[15].maxKeys = 0;
-        gDungeonDefs[16].maxKeys = 0;
-    }
 }
 
 static void updateCursor(GameState_Play* play)

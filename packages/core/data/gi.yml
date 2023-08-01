@@ -256,6 +256,16 @@ OOT_SOUL_VOLVAGIA:                        0x101
 OOT_SOUL_MORPHA:                          0x102
 OOT_SOUL_BONGO_BONGO:                     0x103
 OOT_SOUL_TWINROVA:                        0x104
+OOT_KEY_RING:                             0x105
+OOT_KEY_RING_FOREST:                      0x106
+OOT_KEY_RING_FIRE:                        0x107
+OOT_KEY_RING_WATER:                       0x108
+OOT_KEY_RING_SPIRIT:                      0x109
+OOT_KEY_RING_SHADOW:                      0x10a
+OOT_KEY_RING_GANON:                       0x10b
+OOT_KEY_RING_BOTW:                        0x10c
+OOT_KEY_RING_GF:                          0x10d
+OOT_KEY_RING_GTG:                         0x10e
 
 MM_RUPEE_GREEN:               0x01
 MM_RUPEE_BLUE:                0x02
