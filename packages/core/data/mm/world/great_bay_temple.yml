@@ -69,7 +69,7 @@
 "Great Bay Temple Red Pipe 1":
   dungeon: GB
   exits:
-    "Great Bay Temple Ice Arrow Room": "small_keys(SMALL_KEY_GB, 1)"
+    "Great Bay Temple Ice Arrow Room": "small_keys_gb(1)"
   events:
     GB_PIPE_RED: "soul_octorok && can_use_ice_arrows"
 "Great Bay Temple Ice Arrow Room":
