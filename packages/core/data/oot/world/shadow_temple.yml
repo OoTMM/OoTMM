@@ -16,7 +16,7 @@
 "Shadow Temple Main":
   dungeon: Shadow
   exits:
-    "Shadow Temple Open": "small_keys(SMALL_KEY_SHADOW, 1) && has_explosives"
+    "Shadow Temple Open": "small_keys_shadow(1) && has_explosives"
     "Shadow Temple Scythe Silver Rupees": "true"
   locations:
     "Shadow Temple Compass": "soul_redead_gibdo && (has_weapon || can_use_sticks || can_use_din)"
@@ -35,7 +35,7 @@
   dungeon: Shadow
   exits:
     "Shadow Temple Falling Spikes": "has(RUPEE_SILVER_SHADOW_PIT, 5)"
-    "Shadow Temple Invisible Spikes": "small_keys(SMALL_KEY_SHADOW, 2) && has_lens"
+    "Shadow Temple Invisible Spikes": "small_keys_shadow(2) && has_lens"
   locations:
     "Shadow Temple Spinning Blades Visible": "soul_like_like && soul_keese"
     "Shadow Temple Spinning Blades Invisible": "soul_like_like && soul_keese && has_lens"
@@ -58,7 +58,7 @@
   dungeon: Shadow
   exits:
     "Shadow Temple Open": "true"
-    "Shadow Temple Wind": "small_keys(SMALL_KEY_SHADOW, 3) && can_hookshot"
+    "Shadow Temple Wind": "small_keys_shadow(3) && can_hookshot"
     "Shadow Temple Skull Pot": "has(RUPEE_SILVER_SHADOW_SPIKES, 5)"
   locations:
     "Shadow Temple SR Spikes Back Left": "has_lens && can_hookshot"
@@ -77,16 +77,16 @@
 "Shadow Temple Wind":
   dungeon: Shadow
   exits:
-    "Shadow Temple Boat": "small_keys(SMALL_KEY_SHADOW, 4) && can_play(SONG_ZELDA)"
+    "Shadow Temple Boat": "small_keys_shadow(4) && can_play(SONG_ZELDA)"
   locations:
     "Shadow Temple Wind Room Hint": "has_lens"
     "Shadow Temple After Wind": "soul_redead_gibdo"
     "Shadow Temple After Wind Invisible": "has_explosives && has_lens"
-    "Shadow Temple GS Near Boat": "small_keys(SMALL_KEY_SHADOW, 4) && can_longshot"
+    "Shadow Temple GS Near Boat": "small_keys_shadow(4) && can_longshot"
 "Shadow Temple Boat":
   dungeon: Shadow
   exits:
-    "Shadow Temple Boss": "small_keys(SMALL_KEY_SHADOW, 5) && boss_key(BOSS_KEY_SHADOW) && (can_use_bow || scarecrow_longshot)"
+    "Shadow Temple Boss": "small_keys_shadow(5) && boss_key(BOSS_KEY_SHADOW) && (can_use_bow || scarecrow_longshot)"
   locations:
     "Shadow Temple Boss Key Room 1": "can_use_din"
     "Shadow Temple Boss Key Room 2": "can_use_din"

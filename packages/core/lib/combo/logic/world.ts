@@ -246,7 +246,7 @@ export class LogicPassWorld {
       /* Horrible hack */
       name = name.replace('(', ' ');
       name = name.replace(')', ' ');
-      name = name.replace(',', ' ');
+      name = name.replace(/,/g, ' ');
 
       const parts = name.split(' ').filter(x => !!x);
       name = parts[0];

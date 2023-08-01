@@ -6,7 +6,7 @@
 "Shadow Temple Truth Spinner":
   dungeon: Shadow
   exits:
-    "Shadow Temple First Locked Door": "has_explosives && small_keys(SMALL_KEY_SHADOW, 6)"
+    "Shadow Temple First Locked Door": "has_explosives && small_keys_shadow(6)"
     "Shadow Temple First Beamos": "has_fire_arrows || has_hover_boots"
   events:
     ARROWS: "true"
@@ -20,7 +20,7 @@
 "Shadow Temple First Beamos":
   dungeon: Shadow
   exits:
-    "Shadow Temple Upper Huge Pit": "has_explosives && small_keys(SMALL_KEY_SHADOW, 2)"
+    "Shadow Temple Upper Huge Pit": "has_explosives && small_keys_shadow(2)"
     "Shadow Temple Scythe Room": "true"
   locations:
     "MQ Shadow Temple First Gibdos Chest": "soul_redead_gibdo && (has_weapon || can_use_sticks || can_use_din)"
@@ -63,7 +63,7 @@
 "Shadow Temple Lower Huge Pit":
   dungeon: Shadow
   exits:
-    "Shadow Temple Invisible Spike Floor": "small_keys(SMALL_KEY_SHADOW, 3) && has_hover_boots"
+    "Shadow Temple Invisible Spike Floor": "small_keys_shadow(3) && has_hover_boots"
   locations:
     "MQ Shadow Temple Huge Pit Silver Rupee Chest": "has(RUPEE_SILVER_SHADOW_PIT, 5)"
     "MQ Shadow Temple Spike Curtain Ground Chest": "true"
@@ -78,7 +78,7 @@
 "Shadow Temple Invisible Spike Floor":
   dungeon: Shadow
   exits:
-    "Shadow Temple Wind Tunnel": "small_keys(SMALL_KEY_SHADOW, 4) && can_hookshot"
+    "Shadow Temple Wind Tunnel": "small_keys_shadow(4) && can_hookshot"
   locations:
     "MQ Shadow Temple Invisible Spike Floor Chest": "soul_redead_gibdo && (has_weapon || can_use_sticks || can_use_din)"
     "MQ Shadow Temple Stalfos Room Chest": "has(RUPEE_SILVER_SHADOW_SPIKES, 10) && soul(SOUL_STALFOS) && has_weapon"
@@ -95,7 +95,7 @@
 "Shadow Temple Wind Tunnel":
   dungeon: Shadow
   exits:
-    "Shadow Temple Boat": "small_keys(SMALL_KEY_SHADOW, 5) && can_play(SONG_ZELDA) && is_adult && (can_hookshot || has(STRENGTH))"
+    "Shadow Temple Boat": "small_keys_shadow(5) && can_play(SONG_ZELDA) && is_adult && (can_hookshot || has(STRENGTH))"
   locations:
     "MQ Shadow Temple Wind Hint Chest": "true"
     "MQ Shadow Temple After Wind Gibdos Chest": "soul_redead_gibdo && (has_weapon || can_use_sticks || can_use_din)"
@@ -115,5 +115,5 @@
   locations:
     "MQ Shadow Temple Hidden Dead Hand Chest": "has_bombflowers && soul(SOUL_DEAD_HAND)" #Not strictly necessary to check
     "MQ Shadow Temple Triple Pot Key": "has_bombflowers" #Not strictly necessary to check
-    "MQ Shadow Temple Boss Key Chest": "small_keys(SMALL_KEY_SHADOW, 6) && can_use_din"
-    "MQ Shadow Temple Crushing Wall Left Chest": "small_keys(SMALL_KEY_SHADOW, 6) && can_use_din"
+    "MQ Shadow Temple Boss Key Chest": "small_keys_shadow(6) && can_use_din"
+    "MQ Shadow Temple Crushing Wall Left Chest": "small_keys_shadow(6) && can_use_din"

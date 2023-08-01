@@ -23,7 +23,7 @@ export const isRegularBossKey = (item: Item) => isRegularBossKeyOot(item) || isR
 export const isStrayFairy = (item: Item) => isTownStrayFairy(item) || isDungeonStrayFairy(item);
 export const isTownStrayFairy = (item: Item) => item === Items.MM_STRAY_FAIRY_TOWN;
 export const isDungeonStrayFairy = (item: Item) => ItemGroups.STRAY_FAIRIES_DUNGEON.has(item);
-export const isKey = (item: Item) => isSmallKey(item) || isBossKey(item);
+export const isKey = (item: Item) => isSmallKey(item) || isBossKey(item) || isKeyRing(item);
 export const isDungeonItem = (item: Item) => isMapCompass(item) || isKey(item) || isStrayFairy(item) || isSilverRupee(item);
 export const isDungeonReward = (item: Item) => ItemGroups.DUNGEON_REWARDS.has(item);
 export const isItemMajor = (item: Item) => ItemGroups.REQUIRED.has(item);

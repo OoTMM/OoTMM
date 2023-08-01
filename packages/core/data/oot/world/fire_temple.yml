@@ -2,8 +2,8 @@
   dungeon: Fire
   exits:
     "Fire Temple Entry": "true"
-    "Fire Temple Lava Room": "has_small_keys_fire(1)"
-    "Fire Temple Boss Key Loop Start": "cond(setting(smallKeyShuffleOot, anywhere), small_keys(SMALL_KEY_FIRE, 8), true) && can_hammer"
+    "Fire Temple Lava Room": "small_keys_fire(1)"
+    "Fire Temple Boss Key Loop Start": "cond(setting(smallKeyShuffleOot, anywhere), small_keys_fire(7), true) && can_hammer"
     "Fire Temple Pre-Boss": "true"
 "Fire Temple Pre-Boss":
   dungeon: Fire
@@ -40,7 +40,7 @@
 "Fire Temple Lava Room":
   dungeon: Fire
   exits:
-    "Fire Temple Maze": "is_adult && has_small_keys_fire(3) && has_tunic_goron_strict && has(STRENGTH) && (has_ranged_weapon_adult || has_explosives || can_boomerang)"
+    "Fire Temple Maze": "is_adult && small_keys_fire(3) && has_tunic_goron_strict && has(STRENGTH) && (has_ranged_weapon_adult || has_explosives || can_boomerang)"
   locations:
     "Fire Temple Lava Room North Jail Chest": "has_tunic_goron && (is_adult || can_play_time)"
     "Fire Temple Lava Room South Jail Chest": "is_adult && has_tunic_goron && has_explosives"
@@ -48,16 +48,16 @@
 "Fire Temple Maze":
   dungeon: Fire
   exits:
-    "Fire Temple Maze Upper": "has_small_keys_fire(5)"
+    "Fire Temple Maze Upper": "small_keys_fire(5)"
   locations:
     "Fire Temple Maze Chest": "true"
     "Fire Temple Maze Jail Chest": "true"
     "Fire Temple GS Maze": "has_explosives"
-    "Fire Temple Map": "can_use_bow && has_small_keys_fire(4)"
+    "Fire Temple Map": "can_use_bow && small_keys_fire(4)"
 "Fire Temple Maze Upper":
   dungeon: Fire
   exits:
-    "Fire Temple Ring": "has_small_keys_fire(6)"
+    "Fire Temple Ring": "small_keys_fire(6)"
     "Fire Temple Scarecrow": "scarecrow_hookshot"
   locations:
     "Fire Temple Map": "true"
@@ -72,7 +72,7 @@
 "Fire Temple Ring":
   dungeon: Fire
   exits:
-    "Fire Temple Before Miniboss": "has_small_keys_fire(7)"
+    "Fire Temple Before Miniboss": "small_keys_fire(7)"
     "Fire Temple Pillar Ledge": "has_hover_boots"
   locations:
     "Fire Temple Compass": "true"
