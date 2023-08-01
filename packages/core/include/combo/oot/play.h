@@ -253,7 +253,8 @@ typedef struct {
     /* 0x40 */ OSMesg      loadMsg;
 } ObjectStatus; // size = 0x44
 
-typedef struct {
+typedef struct ObjectContext
+{
     /* 0x0000 */ void*  spaceStart;
     /* 0x0004 */ void*  spaceEnd; // original name: "endSegment"
     /* 0x0008 */ u8     num; // number of objects in bank
@@ -261,7 +262,8 @@ typedef struct {
     /* 0x000A */ u8     mainKeepIndex; // "gameplay_keep" index in bank
     /* 0x000B */ u8     subKeepIndex; // "gameplay_field_keep" or "gameplay_dangeon_keep" index in bank
     /* 0x000C */ ObjectStatus status[OBJECT_EXCHANGE_BANK_MAX];
-} ObjectContext; // size = 0x518
+}
+ObjectContext; // size = 0x518
 
 _Static_assert(sizeof(ObjectContext) == 0x518, "ObjectContext size is wrong");
 

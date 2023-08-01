@@ -329,3 +329,6 @@ void Magic_Update(GameState_Play* play);
 
 /* Unsure what this does */
 void SetTextFlags(u16 bits);
+
+typedef struct ObjectContext ObjectContext;
+int GetObject(ObjectContext* ctx, int objectId);
