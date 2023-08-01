@@ -35,7 +35,7 @@ int comboAddSmallKeyOot(u16 dungeonId)
     s8 keyCount;
 
     /* Check for max keys */
-    if (gOotSave.inventory.dungeonItems[dungeonId].maxKeys >= g.maxKeysOot[dungeonId])
+    if (dungeonId != SCE_OOT_TREASURE_SHOP && gOotSave.inventory.dungeonItems[dungeonId].maxKeys >= g.maxKeysOot[dungeonId])
         return 0;
 
     keyCount = gOotSave.inventory.dungeonKeys[dungeonId];
@@ -54,6 +54,12 @@ void comboAddKeyRingOot(u16 dungeonId)
 {
     for (int i = 0; i < g.maxKeysOot[dungeonId]; ++i)
         comboAddSmallKeyOot(dungeonId);
+}
+
+void comboAddSkeletonKeyOot(void)
+{
+    for (int i = 0; i < ARRAY_SIZE(g.maxKeysOot); ++i)
+        comboAddKeyRingOot(i);
 }
 
 void comboAddBossKeyOot(u16 dungeonId)
@@ -1314,6 +1320,9 @@ int comboAddItemOot(s16 gi, int noEffect)
         break;
     case GI_OOT_KEY_RING_GTG:
         comboAddKeyRingOot(SCE_OOT_GERUDO_TRAINING_GROUND);
+        break;
+    case GI_OOT_SKELETON_KEY:
+        comboAddSkeletonKeyOot();
         break;
     case GI_OOT_BOSS_KEY_FOREST:
         comboAddBossKeyOot(SCE_OOT_TEMPLE_FOREST);

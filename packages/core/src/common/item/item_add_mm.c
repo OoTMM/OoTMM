@@ -51,6 +51,12 @@ void comboAddKeyRingMm(u16 dungeonId)
         comboAddSmallKeyMm(dungeonId);
 }
 
+void comboAddSkeletonKeyMm(void)
+{
+    for (int i = 0; i < ARRAY_SIZE(g.maxKeysMm); ++i)
+        comboAddKeyRingMm(i);
+}
+
 void comboAddBossKeyMm(u16 dungeonId)
 {
     gMmSave.inventory.dungeonItems[dungeonId].bossKey = 1;
@@ -1180,6 +1186,9 @@ int comboAddItemMm(s16 gi, int noEffect)
         break;
     case GI_MM_KEY_RING_ST:
         comboAddKeyRingMm(3);
+        break;
+    case GI_MM_SKELETON_KEY:
+        comboAddSkeletonKeyMm();
         break;
     case GI_MM_BOSS_KEY_WF:
         comboAddBossKeyMm(0);
