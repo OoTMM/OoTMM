@@ -363,6 +363,7 @@ typedef struct
     u8                      maxKeysOot[0x10];
     u8                      maxKeysMm[4];
     u8                      actorIndex;
+    u8                      sceneSetupId;
 }
 ComboGlobal;
 

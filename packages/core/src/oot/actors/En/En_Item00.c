@@ -106,3 +106,35 @@ void EnItem00_SetExtendedFlag(Actor_EnItem00* this)
     else
         SetCollectibleFlag(gPlay, this->collectibleFlag);
 }
+
+static void EnItem00_ExtendedItemQuery(ComboItemQuery* q, Actor_EnItem00* this)
+{
+    bzero(q, sizeof(*q));
+    q->ovType = OV_EXTENDED;
+    q->sceneId = gPlay->sceneId;
+    q->roomId = (this->extendedRoomId | ((g.sceneSetupId & 3) << 6));
+    q->id = this->extendedId;
+    q->gi = this->extendedGi;
+}
+
+static void EnItem00_DrawExtended(Actor_EnItem00* this, GameState_Play* play)
+{
+    static const float scale = 12.5f;
+    ComboItemQuery q;
+    ComboItemOverride o;
+
+    EnItem00_ExtendedItemQuery(&q, this);
+    comboItemOverride(&o, &q);
+    ModelViewScale(scale, scale, scale, MAT_MUL);
+    comboDrawGI(play, &this->base, o.gi, 0);
+}
+
+static void EnItem00_DrawExtendedOrRupee(Actor_EnItem00* item, GameState_Play* play)
+{
+    if (item->isExtended)
+        EnItem00_DrawExtended(item, play);
+    else
+        EnItem00_DrawRupee(item, play);
+}
+
+PATCH_CALL(0x80013004, EnItem00_DrawExtendedOrRupee);

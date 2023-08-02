@@ -220,7 +220,8 @@ typedef struct
     u32     fileIndex;
     char    unk_1358[0x04];
     s32     gameMode;
-    char    unk_1360[0x37];
+    s32     sceneSetupId;
+    char    unk_1364[0x33];
     u8      grottoChestFlag;
     char    unk_1398[0x34];
     s16     rupeesDelta;
@@ -256,7 +257,8 @@ typedef struct
 OotSaveContext;
 
 ASSERT_OFFSET(OotSaveContext, gameMode,         0x135c);
-ASSERT_OFFSET(OotSaveContext, unk_1360,         0x1360);
+ASSERT_OFFSET(OotSaveContext, sceneSetupId,     0x1360);
+ASSERT_OFFSET(OotSaveContext, unk_1364,         0x1364);
 ASSERT_OFFSET(OotSaveContext, grottoChestFlag,  0x1397);
 ASSERT_OFFSET(OotSaveContext, unk_1398,         0x1398);
 ASSERT_OFFSET(OotSaveContext, unk_1404,         0x1404);

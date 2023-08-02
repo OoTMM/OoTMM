@@ -290,23 +290,25 @@ typedef struct GameState_Play
 {
     GameState           gs;
     u16                 sceneId;
-    char                unk_000a6[0x1b7e];
+    char                unk_000a6[0xa];
+    void*               sceneSegment;
+    char                unk_000b4[0x1b6e];
     ActorContext        actorCtx;
-    // char                unk_01c90[0x00d4];
     CutsceneContext     cutscene;
     char                unk_1d94[0x344];
     MessageContext      msgCtx;
     InterfaceContext    interfaceCtx;
     PauseContext        pauseCtx;
     char                unk_10a14[0xd90];
-    /* 0x117A4 */ ObjectContext objectCtx;
+    ObjectContext       objectCtx;
     RoomContext         roomCtx;
     TransitionContext   transition;
     char                unk_11e60[0x6b8];
 }
 GameState_Play;
 
-ASSERT_OFFSET(GameState_Play, cutscene,             0x1d64);
+ASSERT_OFFSET(GameState_Play, sceneSegment,         0x000b0);
+ASSERT_OFFSET(GameState_Play, cutscene,             0x01d64);
 ASSERT_OFFSET(GameState_Play, roomCtx,              0x11cbc);
 ASSERT_OFFSET(GameState_Play, transition,           0x11d30);
 ASSERT_OFFSET(GameState_Play, transition.type,      0x11e15);

@@ -319,15 +319,10 @@ function checkKey(check: WorldCheck): number {
   case 'chest':
   case 'collectible':
   case 'sf':
+  case 'pot':
     sceneId = DATA_SCENES[check.scene];
     if (sceneId === undefined) {
       throw new Error(`Unknown scene ${check.scene}`);
-    }
-    break;
-  case 'pot':
-    sceneId = DATA_SETUPS[check.scene];
-    if (sceneId === undefined) {
-      throw new Error(`Unknown scene setup ${check.scene}`);
     }
     break;
   default:
