@@ -184,16 +184,8 @@ void comboInitOverride(void)
     comboDmaLoadFile(gComboOverrides, COMBO_VROM_CHECKS);
 }
 
-static u32 makeOverrideKey(const ComboItemQuery* q)
+u8 comboSceneKey(u8 sceneId)
 {
-    u32 key;
-    u8 sceneId;
-
-    if (q->ovType == OV_NONE)
-        return 0;
-
-    /* Scene aliases */
-    sceneId = q->sceneId;
 #if defined(GAME_MM)
     switch (sceneId)
     {
@@ -215,9 +207,19 @@ static u32 makeOverrideKey(const ComboItemQuery* q)
     }
 #endif
 
+    return sceneId;
+}
+
+static u32 makeOverrideKey(const ComboItemQuery* q)
+{
+    u32 key;
+
+    if (q->ovType == OV_NONE)
+        return 0;
+
     key = 0;
     key |= (((u32)(q->ovType & 0xff)) << 24);
-    key |= (((u32)(sceneId & 0xff)) << 16);
+    key |= (((u32)(q->sceneId & 0xff)) << 16);
     key |= (((u32)(q->roomId & 0xff)) << 8);
     key |= (((u32)(q->id & 0xff)) << 0);
 
