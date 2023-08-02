@@ -302,6 +302,7 @@ static int csmcFromItemOot(s16 gi)
     case GI_OOT_SOUL_MORPHA:
     case GI_OOT_SOUL_BONGO_BONGO:
     case GI_OOT_SOUL_TWINROVA:
+    case GI_OOT_SOUL_PARASITE:
         return CSMC_SOUL;
     }
 

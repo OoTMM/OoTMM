@@ -60,6 +60,7 @@
 # define AC_BG_BDAN_OBJECTS         0x0c8
 # define AC_BOSS_TW                 0x0dc
 # define AC_EN_RR                   0x0dd
+# define AC_EN_BA                   0x0de
 # define AC_EN_ANUBICE              0x0e0
 # define AC_EN_MA1                  0x0e7
 # define AC_BOSS_SST                0x0e9

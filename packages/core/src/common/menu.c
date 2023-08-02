@@ -77,6 +77,7 @@ static const char* const kSoulsOot[] = {
     "Baby Dodongos",
     "Biris/Baris",
     "Tailpasarans",
+    "Parasites",
     "Skulltulas",
     "Torch Slugs",
     "Moblins",

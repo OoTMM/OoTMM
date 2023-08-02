@@ -124,6 +124,8 @@ static int canSpawnSoul(GameState_Play* play, s16 actorId, u16 variable)
         return hasSoul(GI_OOT_SOUL_BONGO_BONGO);
     case AC_BOSS_TW:
         return hasSoul(GI_OOT_SOUL_TWINROVA);
+    case AC_EN_BA:
+        return hasSoul(GI_OOT_SOUL_PARASITE);
     default:
         return 1;
     }

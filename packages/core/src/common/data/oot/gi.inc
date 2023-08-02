@@ -226,6 +226,7 @@ X(ITEM_CUSTOM,              0x80,  DRAWGI_SOUL,                         0xb4, 0x
 X(ITEM_CUSTOM,              0x80,  DRAWGI_SOUL,                         0xb4, 0x015c, "the " C1 "Soul of Baby Dodongos"),
 X(ITEM_CUSTOM,              0x80,  DRAWGI_SOUL,                         0xb4, 0x015c, "the " C1 "Soul of Biris/Baris"),
 X(ITEM_CUSTOM,              0x80,  DRAWGI_SOUL,                         0xb4, 0x015c, "the " C1 "Soul of Tailpasarans"),
+X(ITEM_CUSTOM,              0x80,  DRAWGI_SOUL,                         0xb4, 0x015c, "the " C1 "Soul of Jabu-Jabu's Parasites"),
 X(ITEM_CUSTOM,              0x80,  DRAWGI_SOUL,                         0xb4, 0x015c, "the " C1 "Soul of Skulltulas"),
 X(ITEM_CUSTOM,              0x80,  DRAWGI_SOUL,                         0xb4, 0x015c, "the " C1 "Soul of Torch Slugs"),
 X(ITEM_CUSTOM,              0x80,  DRAWGI_SOUL,                         0xb4, 0x015c, "the " C1 "Soul of Moblins"),
