@@ -31,6 +31,7 @@ _Static_assert(sizeof(Actor_EnItem00) == 0x1b0, "MM Actor_EnItem00 size is wrong
 
 typedef struct GameState_Play GameState_Play;
 void EnItem00_Init(Actor_EnItem00* this, GameState_Play* play);
+void EnItem00_Update(Actor_EnItem00* this, GameState_Play* play);
 void EnItem00_DrawRupee(Actor_EnItem00* this, GameState_Play* play);
 
 #endif

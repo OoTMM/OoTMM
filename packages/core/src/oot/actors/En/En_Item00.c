@@ -85,6 +85,10 @@ void EnItem00_InitWrapper(Actor_EnItem00* this, GameState_Play* play)
 {
     this->isExtended = g.spawnExtended;
     EnItem00_Init(this, play);
+
+    /* Disable blinking */
+    if (this->isExtended)
+        *(s16*)((char*)this + 0x148) = 0;
 }
 
 static int EnItem00_GetCollectibleFlag(GameState_Play* play, u32 flag)
@@ -138,3 +142,13 @@ static void EnItem00_DrawExtendedOrRupee(Actor_EnItem00* item, GameState_Play* p
 }
 
 PATCH_CALL(0x80013004, EnItem00_DrawExtendedOrRupee);
+
+void EnItem00_UpdateWrapper(Actor_EnItem00* this, GameState_Play* play)
+{
+    if (this->isExtended)
+    {
+        if (*(u32*)((char*)this + 0x13c) != 0x800127e0)
+            *(s16*)((char*)this + 0x14a) += 1;
+    }
+    EnItem00_Update(this, play);
+}

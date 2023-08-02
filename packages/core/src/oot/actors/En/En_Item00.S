@@ -5,9 +5,13 @@ PATCH_START 0x800e775c
 .int 0x1a4
 PATCH_END
 
-/* Hook the init function */
+/* Hook the functions */
 PATCH_START 0x800e7760
 .int EnItem00_InitWrapper
+PATCH_END
+
+PATCH_START 0x800e7768
+.int EnItem00_UpdateWrapper
 PATCH_END
 
 /* Make small keys use the same draw function as heart pieces */
