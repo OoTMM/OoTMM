@@ -3,7 +3,7 @@
 
 #include <combo/common/actor.h>
 
-typedef struct
+typedef struct Actor_EnItem00
 {
     Actor   base;
     char    unk_13c[0x4];

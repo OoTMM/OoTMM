@@ -39,3 +39,9 @@ PATCH_END
 PATCH_START 0x80012174
   nop
 PATCH_END
+
+/* Check for extended objects before writing the flag */
+PATCH_START 0x80012f50
+  jal EnItem00_SetExtendedFlag
+   move a0,s0
+PATCH_END

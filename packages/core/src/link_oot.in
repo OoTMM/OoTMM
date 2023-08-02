@@ -195,3 +195,4 @@ osSetThreadPri = 0x80004480;
 SetTextFlags = 0x800c69a0;
 
 EnItem00_Init = 0x80011b4c;
+Item_DropCollectible = 0x80013678;

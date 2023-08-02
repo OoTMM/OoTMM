@@ -356,11 +356,13 @@ typedef struct
     u8                      silverRupee;
     u8                      delayedSwitchFlag;
     u8                      roomEnemyLackSoul:1;
+    u8                      spawnExtended:1;
     u8                      menuScreen;
     u8                      menuCursor;
     u8                      menuCursorMax;
     u8                      maxKeysOot[0x10];
     u8                      maxKeysMm[4];
+    u8                      actorIndex;
 }
 ComboGlobal;
 

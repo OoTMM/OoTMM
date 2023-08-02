@@ -332,3 +332,7 @@ void SetTextFlags(u16 bits);
 
 typedef struct ObjectContext ObjectContext;
 int GetObject(ObjectContext* ctx, int objectId);
+
+typedef struct Actor_EnItem00 Actor_EnItem00;
+
+Actor_EnItem00* Item_DropCollectible(GameState_Play* play, Vec3f* pos, s16 params);

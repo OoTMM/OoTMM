@@ -83,6 +83,26 @@ PATCH_FUNC(0x80013498, EnItem00_DrawHeartPieceSmallKey);
 
 void EnItem00_InitWrapper(Actor_EnItem00* this, GameState_Play* play)
 {
-    this->isExtended = 0;
+    this->isExtended = g.spawnExtended;
     EnItem00_Init(this, play);
+}
+
+static int EnItem00_GetCollectibleFlag(GameState_Play* play, u32 flag)
+{
+    if (g.spawnExtended)
+        return 0;
+
+    return GetCollectibleFlag(play, flag);
+}
+
+PATCH_CALL(0x80011ba0, EnItem00_GetCollectibleFlag);
+
+void EnItem00_SetExtendedFlag(Actor_EnItem00* this)
+{
+    if (this->isExtended)
+    {
+        /* TODO: Mark the potsanity item as collected */
+    }
+    else
+        SetCollectibleFlag(gPlay, this->collectibleFlag);
 }
