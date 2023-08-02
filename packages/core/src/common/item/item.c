@@ -170,9 +170,8 @@ void comboGiveItemNpcEx(Actor* actor, GameState_Play* play, s16 gi, int npc, int
 
 typedef struct ComboOverrideData
 {
+    u32  key;
     s16  player;
-    s16  pad;
-    u16  key;
     u16  value;
 }
 ComboOverrideData;
@@ -185,39 +184,16 @@ void comboInitOverride(void)
     comboDmaLoadFile(gComboOverrides, COMBO_VROM_CHECKS);
 }
 
-static u16 makeOverrideKey(int type, u16 sceneId, u16 id)
+static u32 makeOverrideKey(const ComboItemQuery* q)
 {
-    switch (type)
-    {
-    case OV_CHEST:
-        id &= 0x3f;
-        break;
-    case OV_COLLECTIBLE:
-        id = (id & 0x3f) | 0x40;
-        break;
-    case OV_SF:
-        id = (id & 0x3f) | 0x80;
-        break;
-    case OV_NPC:
-        sceneId = SCE_NPC;
-        break;
-    case OV_GS:
-        sceneId = SCE_GS;
-        break;
-    case OV_COW:
-        sceneId = SCE_COW;
-        break;
-    case OV_SHOP:
-        sceneId = SCE_SHOP;
-        break;
-    case OV_SCRUB:
-        sceneId = SCE_SCRUB;
-        break;
-    case OV_SR:
-        sceneId = SCE_SR;
-        break;
-    }
+    u32 key;
+    u8 sceneId;
 
+    if (q->ovType == OV_NONE)
+        return 0;
+
+    /* Scene aliases */
+    sceneId = q->sceneId;
 #if defined(GAME_MM)
     switch (sceneId)
     {
@@ -239,15 +215,21 @@ static u16 makeOverrideKey(int type, u16 sceneId, u16 id)
     }
 #endif
 
-    return (sceneId << 8) | id;
+    key = 0;
+    key |= (((u32)(q->ovType & 0xff)) << 24);
+    key |= (((u32)(sceneId & 0xff)) << 16);
+    key |= (((u32)(q->roomId & 0xff)) << 8);
+    key |= (((u32)(q->id & 0xff)) << 0);
+
+    return key;
 }
 
-static const ComboOverrideData* overrideData(u16 key)
+static const ComboOverrideData* overrideData(u32 key)
 {
     for (int i = 0; i < OVERRIDE_MAX; ++i)
     {
         ComboOverrideData* o = &gComboOverrides[i];
-        if (o->key == 0xffff)
+        if (o->key == 0xffffffff)
             break;
         if (o->key == key)
             return o;
@@ -277,7 +259,7 @@ void comboItemOverride(ComboItemOverride* dst, const ComboItemQuery* q)
     if (q->ovType == OV_NONE)
         data = NULL;
     else
-        data = overrideData(makeOverrideKey(q->ovType, q->sceneId, q->id));
+        data = overrideData(makeOverrideKey(q));
 
     if (data)
     {
@@ -331,7 +313,7 @@ int comboAddItemEx(GameState_Play* play, const ComboItemQuery* q)
         net->cmdOut.itemSend.game = 1;
         net->cmdOut.itemSend.gi = o.gi ^ MASK_FOREIGN_GI;
 #endif
-        net->cmdOut.itemSend.key = makeOverrideKey(q->ovType, q->sceneId, q->id);
+        net->cmdOut.itemSend.key = makeOverrideKey(q);
         net->cmdOut.itemSend.flags = (s16)q->ovFlags;
         netMutexUnlock();
     }

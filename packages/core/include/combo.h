@@ -163,16 +163,16 @@ void comboCreateSaveMM(void);
 NORETURN void comboGameSwitch(GameState_Play* play, s32 entrance);
 
 /* Override */
-#define OV_NONE         -1
-#define OV_CHEST        0
-#define OV_COLLECTIBLE  1
-#define OV_NPC          2
-#define OV_GS           3
-#define OV_SF           4
-#define OV_COW          5
-#define OV_SHOP         6
-#define OV_SCRUB        7
-#define OV_SR           8
+#define OV_NONE         0x00
+#define OV_CHEST        0x01
+#define OV_COLLECTIBLE  0x02
+#define OV_NPC          0x03
+#define OV_GS           0x04
+#define OV_SF           0x05
+#define OV_COW          0x06
+#define OV_SHOP         0x07
+#define OV_SCRUB        0x08
+#define OV_SR           0x09
 
 #define OVF_RENEW             (1 << 2)
 #define OVF_PRECOND           (1 << 3)

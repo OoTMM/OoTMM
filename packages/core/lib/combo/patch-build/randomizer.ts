@@ -277,8 +277,72 @@ function zoraSapphireBuffer(world: number, logic: LogicResult): Buffer {
   return toU16Buffer([value]);
 }
 
+function checkKey(check: WorldCheck): number {
+  /* Extract the type */
+  let typeId: number;
+  switch (check.type) {
+  case 'chest':
+    typeId = 0x01;
+    break;
+  case 'collectible':
+    typeId = 0x02;
+    break;
+  case 'npc':
+    typeId = 0x03;
+    break;
+  case 'gs':
+    typeId = 0x04;
+    break;
+  case 'sf':
+    typeId = 0x05;
+    break;
+  case 'cow':
+    typeId = 0x06;
+    break;
+  case 'shop':
+    typeId = 0x07;
+    break;
+  case 'scrub':
+    typeId = 0x08;
+    break;
+  case 'sr':
+    typeId = 0x09;
+    break;
+  }
+
+  /* Extract the scene ID */
+  let sceneId = DATA_SCENES[check.scene];
+  if (sceneId === undefined) {
+    throw new Error(`Unknown scene ${check.scene}`);
+  }
+  switch (check.type) {
+  case 'chest':
+  case 'collectible':
+  case 'sf':
+    break;
+  default:
+    sceneId = 0;
+    break;
+  }
+
+  /* Extract the room ID */
+  let roomId: number = 0;
+
+  /* Extract the ID */
+  const id = checkId(check);
+
+  /* Build the key */
+  let key = 0;
+  key = (key | ((typeId & 0xff) << 24)) >>> 0;
+  key = (key | ((sceneId & 0xff) << 16)) >>> 0;
+  key = (key | ((roomId & 0xff) << 8)) >>> 0;
+  key = (key | (id & 0xff)) >>> 0;
+
+  return key;
+}
+
 const gameChecks = (worldId: number, settings: Settings, game: Game, logic: LogicResult): Buffer => {
-  const buf: number[] = [];
+  const buffers: Buffer[] = [];
   const world = logic.worlds[worldId];
   for (const locId in world.checks) {
     const loc = makeLocation(locId, worldId);
@@ -288,43 +352,15 @@ const gameChecks = (worldId: number, settings: Settings, game: Game, logic: Logi
     if (c.game !== game) {
       continue;
     }
-    let { scene } = c;
-    let id = checkId(c);
-    if (!DATA_SCENES.hasOwnProperty(scene)) {
-      throw new Error(`Unknown scene ${scene}`);
-    }
-    let sceneId = DATA_SCENES[scene];
-    switch (c.type) {
-    case 'npc':
-      sceneId = 0xf0;
-      break;
-    case 'gs':
-      sceneId = 0xf1;
-      break;
-    case 'cow':
-      sceneId = 0xf2;
-      break;
-    case 'shop':
-      sceneId = 0xf3;
-      break;
-    case 'scrub':
-      sceneId = 0xf4;
-      break;
-    case 'sr':
-      sceneId = 0xf5;
-      break;
-    case 'collectible':
-      id |= 0x40;
-      break;
-    case 'sf':
-      id |= 0x80;
-      break;
-    }
-    const key = (sceneId << 8) | id;
+    const key = checkKey(c);
     const itemGi = gi(settings, game, item.item, true);
-    buf.push(item.player + 1, 0, key, itemGi);
+    const b = Buffer.alloc(8, 0xff);
+    b.writeUInt32BE(key, 0);
+    b.writeUint16BE(item.player + 1, 4);
+    b.writeUInt16BE(itemGi, 6);
+    buffers.push(b);
   }
-  return toU16Buffer(buf);
+  return Buffer.concat(buffers);
 };
 
 const hintBuffer = (settings: Settings, game: Game, gossip: string, hint: HintGossip): Buffer => {
