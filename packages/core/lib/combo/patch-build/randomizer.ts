@@ -1,7 +1,7 @@
 import { Buffer } from 'buffer';
 
 import { LogicResult } from '../logic';
-import { DATA_GI, DATA_NPC, DATA_SCENES, DATA_REGIONS, DATA_HINTS_POOL, DATA_HINTS, DATA_ENTRANCES } from '../data';
+import { DATA_GI, DATA_NPC, DATA_SCENES, DATA_REGIONS, DATA_HINTS_POOL, DATA_HINTS, DATA_ENTRANCES, DATA_SETUPS } from '../data';
 import { Game } from "../config";
 import { WorldCheck } from '../logic/world';
 import { DUNGEONS, Settings, SPECIAL_CONDS, SPECIAL_CONDS_KEYS } from '../settings';
@@ -308,20 +308,29 @@ function checkKey(check: WorldCheck): number {
   case 'sr':
     typeId = 0x09;
     break;
+  case 'pot':
+    typeId = 0x0a;
+    break;
   }
 
   /* Extract the scene ID */
-  let sceneId = DATA_SCENES[check.scene];
-  if (sceneId === undefined) {
-    throw new Error(`Unknown scene ${check.scene}`);
-  }
+  let sceneId = 0;
   switch (check.type) {
   case 'chest':
   case 'collectible':
   case 'sf':
+    sceneId = DATA_SCENES[check.scene];
+    if (sceneId === undefined) {
+      throw new Error(`Unknown scene ${check.scene}`);
+    }
+    break;
+  case 'pot':
+    sceneId = DATA_SETUPS[check.scene];
+    if (sceneId === undefined) {
+      throw new Error(`Unknown scene setup ${check.scene}`);
+    }
     break;
   default:
-    sceneId = 0;
     break;
   }
 

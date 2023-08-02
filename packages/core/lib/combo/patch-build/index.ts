@@ -55,6 +55,7 @@ function asmPatchGroups(settings: Settings) {
     DEFAULT_HOLD: settings.defaultHoldTarget,
     OOT_SILVER_RUPEE_SHUFFLE: settings.silverRupeeShuffle !== 'vanilla',
     OOT_FREE_SCARECROW: settings.freeScarecrowOot,
+    OOT_SHUFFLE_POTS: settings.shufflePotsOot,
   };
   const keys = Object.keys(groups) as PatchGroup[];
   return keys.filter((k) => groups[k]);

@@ -95,6 +95,10 @@ export class LogicPassFixer {
       return true;
     }
 
+    if (type === 'pot' && !this.state.settings.shufflePotsOot) {
+      return true;
+    }
+
     if (item === Items.OOT_OCARINA && !this.state.settings.shuffleOcarinasOot) {
       return true;
     }

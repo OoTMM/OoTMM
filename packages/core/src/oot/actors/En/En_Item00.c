@@ -80,3 +80,9 @@ void EnItem00_DrawHeartPieceSmallKey(Actor_EnItem00* this, GameState_Play* play)
 }
 
 PATCH_FUNC(0x80013498, EnItem00_DrawHeartPieceSmallKey);
+
+void EnItem00_InitWrapper(Actor_EnItem00* this, GameState_Play* play)
+{
+    this->isExtended = 0;
+    EnItem00_Init(this, play);
+}

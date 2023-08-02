@@ -31,6 +31,7 @@ export const PATCH_GROUPS = [
   'DEFAULT_HOLD',
   'OOT_SILVER_RUPEE_SHUFFLE',
   'OOT_FREE_SCARECROW',
+  'OOT_SHUFFLE_POTS',
 ] as const;
 
 export type PatchGroup = typeof PATCH_GROUPS[number];

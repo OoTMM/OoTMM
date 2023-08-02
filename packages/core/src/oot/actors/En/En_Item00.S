@@ -1,5 +1,15 @@
 #include <combo.h>
 
+/* Resize Item00 */
+PATCH_START 0x800e775c
+.int 0x1a4
+PATCH_END
+
+/* Hook the init function */
+PATCH_START 0x800e7760
+.int EnItem00_InitWrapper
+PATCH_END
+
 /* Make small keys use the same draw function as heart pieces */
 PATCH_START 0x80105fe0
 .int 0x80013014
