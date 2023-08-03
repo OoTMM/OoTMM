@@ -55,7 +55,7 @@ static void EnIn_DisplayBuy(GameState_Play* play)
     EnIn_ItemQuery(&q, GI_MM_MILK);
     comboItemOverride(&o, &q);
 
-    b = play->textBuffer;
+    b = play->msgCtx.font.textBuffer.schar;
     comboTextAppendShopHeader(&b, 50);
     start = b;
 

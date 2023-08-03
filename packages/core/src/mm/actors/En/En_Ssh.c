@@ -28,7 +28,7 @@ static void EnSsh_DisplayHint(Actor* this, GameState_Play* play)
 
     EnSsh_ItemQuery(&q, play, 0);
     PlayerDisplayTextBox(play, 0x915, this);
-    b = play->textBuffer;
+    b = play->msgCtx.font.textBuffer.schar;
     comboTextAppendHeader(&b);
     start = b;
     comboTextAppendStr(&b, "If you lift the curse... I'll give you... ");

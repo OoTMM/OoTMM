@@ -152,7 +152,7 @@ s16 RandIntRange(s16 base, s16 amplitude);
 
 extern u32 gSegments[16];
 
-#define GET_LINK(play) ((Actor_Player*)(play->actors[2].first))
+#define GET_LINK(play) ((Actor_Player*)(play->actorCtx.actors[2].first))
 
 int  ActorCutscene_GetCanPlayNext(int cutscene);
 s16  ActorCutscene_GetCurrentIndex(void);

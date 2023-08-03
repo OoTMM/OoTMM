@@ -84,7 +84,7 @@ void comboHintGossip(u8 key, GameState_Play* play)
 #if defined(GAME_OOT)
     b = play->msgCtx.textBuffer;
 #else
-    b = play->textBuffer;
+    b = play->msgCtx.font.textBuffer.schar;
 #endif
 
     comboTextAppendHeader(&b);

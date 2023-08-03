@@ -72,7 +72,7 @@ static void EnTab_MessagePurchase(GameState_Play* play)
 {
     char* b;
 
-    b = play->textBuffer;
+    b = play->msgCtx.font.textBuffer.schar;
     comboTextAppendShopHeader2(&b, kPrices[0], kPrices[1]);
 
     comboTextAppendStr(&b, TEXT_CHOICE3);

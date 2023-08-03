@@ -811,7 +811,7 @@ void comboTextHijackItemShop(GameState_Play* play, const ComboItemOverride* o, s
 #if defined(GAME_OOT)
     b = play->msgCtx.textBuffer;
 #else
-    b = play->textBuffer;
+    b = play->msgCtx.font.textBuffer.schar;
 #endif
 
     comboTextAppendShopHeader(&b, price);
@@ -860,7 +860,7 @@ void comboTextHijackDungeonRewardHints(GameState_Play* play, int hint)
     char* b;
 
     ih = &gComboData.hints.dungeonRewards[9 + hint];
-    b = play->textBuffer;
+    b = play->msgCtx.font.textBuffer.schar;
     appendBossRewardHeader(&b, 0x55 + hint);
     comboTextAppendRegionName(&b, ih->region, ih->world, TF_PREPOS | TF_CAPITALIZE);
     comboTextAppendStr(&b, "...");
@@ -892,7 +892,7 @@ void comboTextHijackOathToOrder(GameState_Play* play)
     char* b;
     char* start;
 
-    b = play->textBuffer;
+    b = play->msgCtx.font.textBuffer.schar;
     comboTextAppendHeader(&b);
     start = b;
     comboTextAppendStr(&b,
@@ -923,7 +923,7 @@ void comboTextMessageCantBuy(GameState_Play* play, int flags)
 #if defined(GAME_OOT)
     b = play->msgCtx.textBuffer;
 #else
-    b = play->textBuffer;
+    b = play->msgCtx.font.textBuffer.schar;
 #endif
 
     comboTextAppendHeader(&b);
