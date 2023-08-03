@@ -8,6 +8,35 @@ const POT_ACTOR_TYPE = 0x111;
 const SCENE_TABLE_ADDR = 0xb71440;
 const SCENE_TABLE_SIZE = 101;
 
+const ITEM00_DROPS = [
+  'RUPEE_GREEN',
+  'RUPEE_BLUE',
+  'RUPEE_RED',
+  'RECOVERY_HEART',
+  'BOMB',
+  '???',
+  '???',
+  '???',
+  'ARROWS_5',
+  'ARROWS_10',
+  'ARROWS_30',
+  'BOMBS_5',
+  'NUTS_5',
+  'STICK',
+  'MAGIC_JAR_LARGE',
+  'MAGIC_JAR_SMALL',
+  'DEKU_SEEDS_5',
+  'SMALL_KEY',
+  'FLEXIBLE',
+  'RUPEE_HUGE',
+  'RUPEE_PURPLE',
+  'SHIELD_DEKU',
+  'SHIELD_HYLIAN',
+  'TUNIC_ZORA',
+  'TUNIC_GORON',
+  'BOMBS_5',
+];
+
 const INTERESTING_ACTORS = [
   POT_ACTOR_TYPE,
 ];
@@ -178,6 +207,26 @@ async function codegen(roomActors: RoomActors[], addrTable: AddressingTable) {
   ]);
 }
 
+function outputPotsPool(roomActors: RoomActors[]) {
+  for (const room of roomActors) {
+    console.log(`===== SCENE ${room.sceneId.toString(16)} SETUP ${room.setupId} ROOM ${room.roomId} =====`);
+    for (const actor of room.actors) {
+      if (actor.typeId === 0x111) {
+        const item00 = (actor.params >> 0) & 0xff;
+        let item: string;
+        if (item00 >= 0x1a) {
+          item = 'NOTHING';
+        } else {
+          item = ITEM00_DROPS[item00];
+        }
+        const key = ((room.setupId & 0x3) << 14) | (room.roomId << 8) | actor.actorId;
+        console.log(`Scene ${room.sceneId.toString(16)} Setup ${room.setupId} Room ${room.roomId} Pot ${actor.actorId}, pot,            NONE,                 SCENE_${room.sceneId.toString(16)}, 0x${key.toString(16)}, ${item}`);
+      }
+    }
+    console.log('');
+  }
+}
+
 async function run() {
   const ootRom = await fs.readFile(__dirname + '/../../../roms/oot.z64');
   const ootDecompressed = await decompressGame('oot', ootRom);
@@ -186,6 +235,7 @@ async function run() {
   const actorRooms = sortRoomActors(rawRooms.map(raw => parseRoomActors(rom, raw)));
   const addrTable = buildAddressingTable(actorRooms);
   await codegen(actorRooms, addrTable);
+  outputPotsPool(actorRooms);
 }
 
 run().catch(e => {

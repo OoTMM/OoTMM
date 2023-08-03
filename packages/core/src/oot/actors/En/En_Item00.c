@@ -118,6 +118,7 @@ static void EnItem00_ExtendedItemQuery(ComboItemQuery* q, Actor_EnItem00* this)
     q->ovType = OV_EXTENDED;
     q->sceneId = gPlay->sceneId;
     q->roomId = (this->extendedRoomId | ((g.sceneSetupId & 3) << 6));
+    //q->roomId = (this->extendedRoomId | ((2 & 3) << 6));
     q->id = this->extendedId;
     q->gi = this->extendedGi;
 }

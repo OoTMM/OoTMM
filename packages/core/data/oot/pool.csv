@@ -245,6 +245,17 @@ Market Pot House Child Pot Ground 41,                       pot,            NONE
 Market Pot House Child Pot Ground 42,                       pot,            NONE,                 GUARD_HOUSE,                    0x0033,                     RUPEE_GREEN
 Market Pot House Child Pot Above 1,                         pot,            NONE,                 GUARD_HOUSE,                    0x0027,                     RUPEE_GREEN
 Market Pot House Child Pot Above 2,                         pot,            NONE,                 GUARD_HOUSE,                    0x0029,                     RUPEE_GREEN
+Market Pot House Adult Pot 1,                               pot,            NONE,                 GUARD_HOUSE,                    0x8001,                     RUPEE_GREEN
+Market Pot House Adult Pot 2,                               pot,            NONE,                 GUARD_HOUSE,                    0x8002,                     NOTHING
+Market Pot House Adult Pot 3,                               pot,            NONE,                 GUARD_HOUSE,                    0x8003,                     RUPEE_GREEN
+Market Pot House Adult Pot 4,                               pot,            NONE,                 GUARD_HOUSE,                    0x8004,                     RECOVERY_HEART
+Market Pot House Adult Pot 5,                               pot,            NONE,                 GUARD_HOUSE,                    0x8005,                     NOTHING
+Market Pot House Adult Pot 6,                               pot,            NONE,                 GUARD_HOUSE,                    0x8006,                     RUPEE_RED
+Market Pot House Adult Pot 7,                               pot,            NONE,                 GUARD_HOUSE,                    0x8007,                     RUPEE_GREEN
+Market Pot House Adult Pot 8,                               pot,            NONE,                 GUARD_HOUSE,                    0x8008,                     NOTHING
+Market Pot House Adult Pot 9,                               pot,            NONE,                 GUARD_HOUSE,                    0x8009,                     RECOVERY_HEART
+Market Pot House Adult Pot 10,                              pot,            NONE,                 GUARD_HOUSE,                    0x800a,                     NOTHING
+Market Pot House Adult Pot 11,                              pot,            NONE,                 GUARD_HOUSE,                    0x800b,                     RUPEE_GREEN
 Market Bazaar Item 1,                                       shop,           NONE,                 BAZAAR,                         0x20,                       ARROWS_5
 Market Bazaar Item 2,                                       shop,           NONE,                 BAZAAR,                         0x21,                       ARROWS_10
 Market Bazaar Item 3,                                       shop,           NONE,                 BAZAAR,                         0x22,                       ARROWS_30

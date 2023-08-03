@@ -329,9 +329,6 @@ function checkKey(check: WorldCheck): number {
     break;
   }
 
-  /* Extract the room ID */
-  let roomId: number = 0;
-
   /* Extract the ID */
   const id = checkId(check);
 
@@ -339,8 +336,7 @@ function checkKey(check: WorldCheck): number {
   let key = 0;
   key = (key | ((typeId & 0xff) << 24)) >>> 0;
   key = (key | ((sceneId & 0xff) << 16)) >>> 0;
-  key = (key | ((roomId & 0xff) << 8)) >>> 0;
-  key = (key | (id & 0xff)) >>> 0;
+  key = (key | (id & 0xffff)) >>> 0;
 
   return key;
 }

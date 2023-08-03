@@ -18,7 +18,7 @@ void updateSceneSetup(void)
     /* If the scene_setup_index is > 3 then we're probably in a cutscene so just return -1. */
     if (gSaveContext.sceneSetupId > 3)
     {
-        g.sceneSetupId = 0xff;
+        g.sceneSetupId = 0;
         return;
     }
 
@@ -35,7 +35,7 @@ void updateSceneSetup(void)
         /* Alternate header */
         if (code == 0x18)
         {
-            seg = cmd[1] >> 28;
+            seg = cmd[1] >> 24;
             segOffset = cmd[1] & 0x00ffffff;
             altHeader = (u32*)(gSegments[seg] + 0x80000000 + segOffset);
 
@@ -47,7 +47,6 @@ void updateSceneSetup(void)
                     return;
                 }
             }
-
         }
         cmd += 2;
     }

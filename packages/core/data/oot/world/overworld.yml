@@ -365,6 +365,17 @@
     "Market Pot House Child Pot Ground 42": "is_child"
     "Market Pot House Child Pot Above 1": "is_child"
     "Market Pot House Child Pot Above 2": "is_child"
+    "Market Pot House Adult Pot 1": "is_adult"
+    "Market Pot House Adult Pot 2": "is_adult"
+    "Market Pot House Adult Pot 3": "is_adult"
+    "Market Pot House Adult Pot 4": "is_adult"
+    "Market Pot House Adult Pot 5": "is_adult"
+    "Market Pot House Adult Pot 6": "is_adult"
+    "Market Pot House Adult Pot 7": "is_adult"
+    "Market Pot House Adult Pot 8": "is_adult"
+    "Market Pot House Adult Pot 9": "is_adult"
+    "Market Pot House Adult Pot 10": "is_adult"
+    "Market Pot House Adult Pot 11": "is_adult"
 "Back Alley":
   region: MARKET
   exits:
