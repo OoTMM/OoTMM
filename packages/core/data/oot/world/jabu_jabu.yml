@@ -13,7 +13,7 @@
   locations:
     "Jabu-Jabu Map Chest": "can_boomerang && soul(SOUL_PARASITE)"
     "Jabu-Jabu Compass Chest": "can_boomerang && soul(SOUL_SHABOM) && soul(SOUL_PARASITE)"
-    "Jabu-Jabu Boomerang Chest": "soul(SOUL_STINGER) && (has_weapon || can_use_sticks || has_explosives || can_hookshot || can_use_slingshot || can_hammer)"
+    "Jabu-Jabu Boomerang Chest": "soul(SOUL_STINGER)"
     "Jabu-Jabu Scrub": "can_hit_scrub && (is_child || can_dive_small) && scrub_price(0x20)"
     "Jabu-Jabu GS Bottom Lower": "can_collect_distance || climb_anywhere"
     "Jabu-Jabu GS Bottom Upper": "can_collect_distance || climb_anywhere"
