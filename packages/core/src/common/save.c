@@ -149,6 +149,7 @@ void comboWriteSave(void)
     saveOot();
     saveMm();
 
+    /* Write the custom save */
     comboReadWriteFlash(0x18000 + 0x4000 * gSaveContext.fileIndex + CUSTOM_SAVE_OFFSET, &gCustomSave, sizeof(gCustomSave), OS_WRITE);
 }
 

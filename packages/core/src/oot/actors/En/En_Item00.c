@@ -182,6 +182,7 @@ void EnItem00_GiveExtendedOrRupee(GameState_Play* play, Actor_EnItem00* this)
         this->extendedMajor = 0;
     }
     comboAddItemEx(play, &q, major);
+    comboXflagsSet(play->sceneId, g.sceneSetupId, this->extendedRoomId, this->extendedId);
 }
 
 void EnItem00_PlayExtendedCollectedSound(Actor_EnItem00* this)

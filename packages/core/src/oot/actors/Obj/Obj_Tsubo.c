@@ -17,6 +17,12 @@ void ObjTsubo_SpawnShuffledDrop(Actor_ObjTsubo* this, GameState_Play* play)
 {
     Actor_EnItem00* item;
 
+    if (comboXflagsGet(play->sceneId, g.sceneSetupId, this->extendedRoomId, this->extendedId))
+    {
+        /* Already spawned */
+        return;
+    }
+
     /* Spawn an extended item */
     g.spawnExtended = 1;
     item = Item_DropCollectible(play, &this->base.position, 0x0000);

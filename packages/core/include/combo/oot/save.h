@@ -317,7 +317,7 @@ typedef struct
 }
 OotExtraFlags;
 
-ALIGNED(16) typedef struct
+typedef struct ALIGNED(16)
 {
     u8 xflags[XFLAGS_COUNT_OOT];
 }
