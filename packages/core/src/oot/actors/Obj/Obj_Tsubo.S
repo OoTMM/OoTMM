@@ -10,7 +10,17 @@ PATCH_START 0x80a66020
 .int ObjTsubo_InitWrapper
 PATCH_END
 
+/* Draw */
+PATCH_START 0x80a65a0c
+  la t6,ObjTsubo_DrawWrapper
+PATCH_END
+
 /* Relocs */
+PATCH_START 0x80a66140
+.int 0
+.int 0
+PATCH_END
+
 PATCH_START 0x80a661f4
 .int 0
 PATCH_END
