@@ -1017,7 +1017,7 @@
   time: flow
   exits:
     "Zora River Front": "true"
-    "Zora Domain": "can_play(SONG_ZELDA) || hookshot_anywhere || (is_child && trick(OOT_DOMAIN_CUCCO)) || (has_hover_boots && trick(OOT_DOMAIN_HOVER)"
+    "Zora Domain": "can_play(SONG_ZELDA) || hookshot_anywhere || (is_child && trick(OOT_DOMAIN_CUCCO)) || (has_hover_boots && trick(OOT_DOMAIN_HOVER))"
     "Lost Woods": "can_dive_small || hookshot_anywhere"
     "Zora River Storms Grotto": "hidden_grotto_storms"
     "Zora River Open Grotto": "true"
