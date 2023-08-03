@@ -49,3 +49,9 @@ PATCH_START 0x80012f50
   jal EnItem00_SetExtendedFlag
    move a0,s0
 PATCH_END
+
+/* Handle the give item for extended objects */
+PATCH_START 0x80012cb0
+  jal EnItem00_GiveExtendedOrRupee
+   move a1,s0
+PATCH_END

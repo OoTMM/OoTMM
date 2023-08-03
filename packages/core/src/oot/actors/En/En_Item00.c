@@ -152,3 +152,20 @@ void EnItem00_UpdateWrapper(Actor_EnItem00* this, GameState_Play* play)
     }
     EnItem00_Update(this, play);
 }
+
+void EnItem00_GiveExtendedOrRupee(GameState_Play* play, Actor_EnItem00* this)
+{
+    ComboItemQuery q;
+
+    /* Check for an actual extended item */
+    if (!this->isExtended)
+    {
+        AddItem(play, 0x84);
+        return;
+    }
+
+    /* Query the item */
+    EnItem00_ExtendedItemQuery(&q, this);
+    PlayerDisplayTextBox(play, 0xb4, NULL);
+    comboAddItemEx(play, &q);
+}
