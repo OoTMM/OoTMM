@@ -183,7 +183,6 @@ void EnGSwitch_DrawSilverRupee(Actor* this, GameState_Play* play)
 
 void EnGSwitch_HandlerAfterCollected(Actor* this, GameState_Play* play)
 {
-
     if (Message_IsClosed(this, play))
     {
         UnfreezePlayer(play);
@@ -203,7 +202,7 @@ void EnGSwitch_GiveItemSilverRupee(Actor* this)
     EnGSwitch_ItemQuery(&q, this, gPlay);
     EnGSwitch_SetFlag(EnGSwitch_ID(this, gPlay));
     PlayerDisplayTextBox(gPlay, 0xb4, NULL);
-    comboAddItemEx(gPlay, &q);
+    comboAddItemEx(gPlay, &q, 1);
     SetTextFlags(0x39);
     SET_HANDLER(this, EnGSwitch_HandlerAfterCollected);
 }

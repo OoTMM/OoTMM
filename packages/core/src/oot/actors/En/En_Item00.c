@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/item.h>
+#include <combo/player.h>
 
 static void EnItem00_ItemQuery(ComboItemQuery* q, Actor_EnItem00* this, GameState_Play* play, s16 gi)
 {
@@ -156,6 +157,8 @@ void EnItem00_UpdateWrapper(Actor_EnItem00* this, GameState_Play* play)
 void EnItem00_GiveExtendedOrRupee(GameState_Play* play, Actor_EnItem00* this)
 {
     ComboItemQuery q;
+    ComboItemOverride o;
+    int major;
 
     /* Check for an actual extended item */
     if (!this->isExtended)
@@ -166,6 +169,55 @@ void EnItem00_GiveExtendedOrRupee(GameState_Play* play, Actor_EnItem00* this)
 
     /* Query the item */
     EnItem00_ExtendedItemQuery(&q, this);
-    PlayerDisplayTextBox(play, 0xb4, NULL);
-    comboAddItemEx(play, &q);
+    comboItemOverride(&o, &q);
+    major = !isItemFastBuy(o.gi);
+    if (major)
+    {
+        PlayerDisplayTextBox(play, 0xb4, NULL);
+        FreezePlayer(play);
+        this->extendedMajor = 1;
+    }
+    else
+    {
+        this->extendedMajor = 0;
+    }
+    comboAddItemEx(play, &q, major);
+}
+
+void EnItem00_PlayExtendedCollectedSound(Actor_EnItem00* this)
+{
+    /* Check for an actual extended item */
+    if (!this->isExtended)
+    {
+        PlaySound(0x4803);
+        return;
+    }
+
+    /* Play the regular get item sound */
+    PlaySound(0x4824);
+}
+
+void EnItem00_ExtendedCollectedHandler(Actor_EnItem00* this, GameState_Play* play)
+{
+    /* Check for an extended item */
+    if (!this->isExtended)
+    {
+        EnItem00_SetHandler(this, EnItem00_CollectedHandler);
+        EnItem00_CollectedHandler(this, play);
+        return;
+    }
+
+    /* Invoke the default handler */
+    EnItem00_CollectedHandler(this, play);
+
+    /* Check for the message box */
+    if (!this->extendedMajor || Message_IsClosed(&this->base, play))
+    {
+        UnfreezePlayer(play);
+        EnItem00_SetHandler(this, EnItem00_CollectedHandler);
+    }
+    else
+    {
+        FreezePlayer(play);
+    }
 }

@@ -98,7 +98,7 @@ void comboAddCommonItemMm(int sid, int noEffect);
 int  comboAddItem(GameState_Play* play, s16 gi);
 int  comboAddItemNoEffect(s16 gi);
 
-int comboAddItemEx(GameState_Play* play, const ComboItemQuery* q);
+int comboAddItemEx(GameState_Play* play, const ComboItemQuery* q, int updateText);
 
 int isItemLicensed(s16 gi);
 int isItemFastBuy(s16 gi);

@@ -55,3 +55,18 @@ PATCH_START 0x80012cb0
   jal EnItem00_GiveExtendedOrRupee
    move a1,s0
 PATCH_END
+
+/* Patch the sound effect */
+PATCH_START 0x80012ee0
+  jal EnItem00_PlayExtendedCollectedSound
+   move a0,s0
+PATCH_END
+
+/* Use our custom post-collection handler */
+PATCH_START 0x80012f90
+  lui a1,%HI(EnItem00_ExtendedCollectedHandler)
+PATCH_END
+
+PATCH_START 0x80012f98
+  addiu a1,%LO(EnItem00_ExtendedCollectedHandler)
+PATCH_END

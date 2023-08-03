@@ -31,7 +31,7 @@ static void quickBuyItem(GameState_Play* play, Actor_EnGirlA* girlA)
     ComboItemQuery q;
 
     EnGirlA_ItemQuery(&q, girlA);
-    comboAddItemEx(play, &q);
+    comboAddItemEx(play, &q, 1);
     AddRupees(-girlA->price);
     comboShopAfterBuy(play, girlA);
 }

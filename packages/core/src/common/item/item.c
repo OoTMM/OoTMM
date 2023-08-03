@@ -287,7 +287,7 @@ void comboItemOverride(ComboItemOverride* dst, const ComboItemQuery* q)
 }
 
 
-int comboAddItemEx(GameState_Play* play, const ComboItemQuery* q)
+int comboAddItemEx(GameState_Play* play, const ComboItemQuery* q, int updateText)
 {
     ComboItemOverride o;
     NetContext* net;
@@ -321,7 +321,8 @@ int comboAddItemEx(GameState_Play* play, const ComboItemQuery* q)
     }
 
     /* Update text */
-    comboTextHijackItemEx(play, &o, count);
+    if (updateText)
+        comboTextHijackItemEx(play, &o, count);
 
     return -1;
 }
@@ -365,5 +366,5 @@ void comboPlayerAddItem(GameState_Play* play, s16 gi)
     if (q.gi < 0)
         q.gi = -q.gi;
 
-    comboAddItemEx(play, &q);
+    comboAddItemEx(play, &q, 1);
 }

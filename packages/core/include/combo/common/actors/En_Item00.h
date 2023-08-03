@@ -17,7 +17,7 @@ typedef struct Actor_EnItem00
     u8      isExtended;
     u8      extendedRoomId;
     u8      extendedId;
-    u8      pad0;
+    u8      extendedMajor;
     s16     extendedGi;
     s16     pad1;
 }
@@ -33,5 +33,7 @@ typedef struct GameState_Play GameState_Play;
 void EnItem00_Init(Actor_EnItem00* this, GameState_Play* play);
 void EnItem00_Update(Actor_EnItem00* this, GameState_Play* play);
 void EnItem00_DrawRupee(Actor_EnItem00* this, GameState_Play* play);
+void EnItem00_CollectedHandler(Actor_EnItem00* this, GameState_Play* play);
+void EnItem00_SetHandler(Actor_EnItem00* this, void* handler);
 
 #endif
