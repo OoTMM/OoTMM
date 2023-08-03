@@ -4,6 +4,14 @@
 #if !defined(__ASSEMBLER__)
 # include <combo/oot/save.h>
 # include <combo/mm/save.h>
+# if defined(GAME_OOT)
+typedef OotCustomSave CustomSave;
+# define CUSTOM_SAVE_OFFSET 0
+# else
+typedef MmCustomSave CustomSave;
+# define CUSTOM_SAVE_OFFSET sizeof(OotCustomSave)
+# endif
+extern CustomSave gCustomSave;
 #endif
 
 #define SAVE_OFFSET_MM_1            0x08000

@@ -69,12 +69,27 @@ static const MmInventory kDefaultInventory =
     },
 };
 
+
+static void initCustomSave(void)
+{
+    ALIGNED(16) char buf[0x100];
+
+    bzero(buf, sizeof(buf));
+    for (int i = 0; i < 0x4000 / sizeof(buf); ++i)
+        comboReadWriteFlash(0x18000 + 0x4000 * gSaveContext.fileIndex + i * sizeof(buf), buf, sizeof(buf), OS_WRITE);
+}
+
 void comboCreateSaveMM(void)
 {
     int i;
     int j;
     u8 tmp;
 
+    /* Custom save things */
+    initCustomSave();
+    bzero(&gCustomSave, sizeof(CustomSave));
+
+    /* Actual MM save */
     bzero(&gMmSave, sizeof(MmSave));
 
     /* Create some save data */

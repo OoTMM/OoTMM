@@ -360,4 +360,10 @@ MmExtraFlags3;
 #define MM_PLAYER_FORM_ZORA     2
 #define MM_PLAYER_FORM_HUMAN    4
 
+ALIGNED(16) typedef struct
+{
+
+}
+MmCustomSave;
+
 #endif /* MM_SAVE_H */

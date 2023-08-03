@@ -3,6 +3,7 @@
 
 #include <combo/types.h>
 #include <combo/util.h>
+#include <combo/xflags.h>
 
 typedef struct
 {
@@ -315,5 +316,11 @@ typedef struct
     u32 unused:7;
 }
 OotExtraFlags;
+
+ALIGNED(16) typedef struct
+{
+    u8 xflags[XFLAGS_COUNT_OOT];
+}
+OotCustomSave;
 
 #endif
