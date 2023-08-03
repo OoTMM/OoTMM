@@ -156,7 +156,7 @@ static void EnBal_DisplayBuyTextBox(GameState_Play* play, u16 messageId, Actor* 
     price2 = gComboData.prices[PRICES_MM_TINGLE + tingleId * 2 + 1];
 
     /* Override */
-    b = play->textBuffer;
+    b = play->msgCtx.font.textBuffer.schar;
     comboTextAppendShopHeader2(&b, price1, price2);
 
     comboTextAppendStr(&b, TEXT_CHOICE3);

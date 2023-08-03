@@ -126,7 +126,7 @@ void KaleidoScope_ShowItemMessage(GameState_Play* play, u16 messageId, u8 yPosit
     Message_ShowMessageAtYPosition(play, messageId, yPosition);
     if (messageId == 0x1705)
     {
-        b = play->textBuffer;
+        b = play->msgCtx.font.textBuffer.schar;
         b[2] = 0x4C; // Use Ocarina of Time icon.
         b += 11;
         comboTextAppendStr(&b, TEXT_COLOR_RED "Fairy Ocarina" TEXT_NL);

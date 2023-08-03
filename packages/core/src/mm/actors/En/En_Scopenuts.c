@@ -17,7 +17,7 @@ static void EnScopenuts_AlterMessage(GameState_Play* play)
     char* start;
 
     EnScopenuts_ItemQuery(&q);
-    b = play->textBuffer;
+    b = play->msgCtx.font.textBuffer.schar;
     comboTextAppendHeader(&b);
     start = b;
     comboTextAppendStr(&b, "Please! I'll sell you ");

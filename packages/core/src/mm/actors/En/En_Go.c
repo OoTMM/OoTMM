@@ -37,7 +37,7 @@ static void powderKegHint(GameState_Play* play)
     char* start;
 
     EnGo_ItemQuery(&q);
-    b = play->textBuffer;
+    b = play->msgCtx.font.textBuffer.schar;
     comboTextAppendHeader(&b);
     start = b;
     comboTextAppendStr(&b, "If you pass my test, I will give you ");

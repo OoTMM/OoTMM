@@ -96,7 +96,7 @@ static u8 sWarpSongPlayed = 0xff;
 u8 Ocarina_BeforeSongPlayingProcessed(GameState_Play* ctxt)
 {
     char* b;
-    u8 songPlayed = ctxt->ocarinaStaff->state;
+    u8 songPlayed = ctxt->msgCtx.songInfo->frameInfo[0].storedSong;
 
     if (songPlayed >= 0x80 && songPlayed <= 0x85)
     {
@@ -108,12 +108,12 @@ u8 Ocarina_BeforeSongPlayingProcessed(GameState_Play* ctxt)
         if (ctxt->interfaceCtx.restrictions.songOfSoaring)
         {
             PlayerDisplayTextBox(ctxt, 0x1B95, NULL);
-            ctxt->ocarinaMode = 0x27; // OCARINA_MODE_PROCESS_RESTRICTED_SONG
+            ctxt->msgCtx.ocarinaMode = 0x27; // OCARINA_MODE_PROCESS_RESTRICTED_SONG
             return 0xFE;
         }
 
         PlayerDisplayTextBox(ctxt, 0x1B93, NULL); // Soar to X?
-        b = ctxt->textBuffer;
+        b = ctxt->msgCtx.font.textBuffer.schar;
         b += 11;
         comboTextAppendStr(&b, warpTexts[songIndex]);
         if (songIndex != 1)
@@ -122,7 +122,7 @@ u8 Ocarina_BeforeSongPlayingProcessed(GameState_Play* ctxt)
         }
         comboTextAppendStr(&b, TEXT_NL TEXT_COLOR_GREEN TEXT_CHOICE2 "     OK" TEXT_NL "     No" TEXT_END);
 
-        ctxt->ocarinaMode = 1; // OCARINA_MODE_ACTIVE
+        ctxt->msgCtx.ocarinaMode = 1; // OCARINA_MODE_ACTIVE
         return 0xfe;
     }
 
@@ -140,7 +140,7 @@ void Ocarina_HandleWarp(Actor_Player* player, GameState_Play* play)
             AudioOcarina_SetInstrument(0);
         }
 
-        if (play->ocarinaMode == 0x27) // OCARINA_MODE_PROCESS_RESTRICTED_SONG
+        if (play->msgCtx.ocarinaMode == 0x27) // OCARINA_MODE_PROCESS_RESTRICTED_SONG
         {
             if (messageState == 6) // TEXT_STATE_DONE
             {
@@ -149,7 +149,7 @@ void Ocarina_HandleWarp(Actor_Player* player, GameState_Play* play)
             }
         }
 
-        if (play->ocarinaMode == 2) // OCARINA_MODE_WARP
+        if (play->msgCtx.ocarinaMode == 2) // OCARINA_MODE_WARP
         {
             play->interfaceCtx.unk_222 = 0;
             ActorCutscene_Stop(play->playerActorCsIds[0]);
@@ -176,7 +176,7 @@ void Ocarina_HandleWarp(Actor_Player* player, GameState_Play* play)
             }
             sWarpSongPlayed = 0xFF;
         }
-        else if (play->ocarinaMode == 4) // OCARINA_MODE_END
+        else if (play->msgCtx.ocarinaMode == 4) // OCARINA_MODE_END
         {
             sWarpSongPlayed = 0xFF;
         }

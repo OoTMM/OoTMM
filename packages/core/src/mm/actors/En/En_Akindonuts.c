@@ -122,7 +122,7 @@ static void EnAkindonuts_AlterMessageIntroSwamp(GameState_Play* play)
     char* start;
 
     EnAkindonuts_ShopOverride(&o, 0);
-    b = play->textBuffer;
+    b = play->msgCtx.font.textBuffer.schar;
     comboTextAppendHeader(&b);
     start = b;
     comboTextAppendStr(&b, "I sell ");
@@ -143,7 +143,7 @@ static void EnAkindonuts_AlterMessageIntroMountain(GameState_Play* play)
     char* start;
 
     EnAkindonuts_ShopOverride(&o, 1);
-    b = play->textBuffer;
+    b = play->msgCtx.font.textBuffer.schar;
     comboTextAppendHeader(&b);
     start = b;
     comboTextAppendStr(&b, "I sell ");
@@ -164,7 +164,7 @@ static void EnAkindonuts_AlterMessageIntroOcean(GameState_Play* play)
     char* start;
 
     EnAkindonuts_ShopOverride(&o, 2);
-    b = play->textBuffer;
+    b = play->msgCtx.font.textBuffer.schar;
     comboTextAppendHeader(&b);
     start = b;
     comboTextAppendStr(&b, "I'm selling ");
@@ -185,7 +185,7 @@ static void EnAkindonuts_AlterMessageIntroIkana(GameState_Play* play)
     char* start;
 
     EnAkindonuts_ShopOverride(&o, 3);
-    b = play->textBuffer;
+    b = play->msgCtx.font.textBuffer.schar;
     comboTextAppendHeader(&b);
     start = b;
     comboTextAppendStr(&b, "I'm here to sell ");
@@ -210,7 +210,7 @@ static void EnAkindonuts_AlterMessageBuy(Actor* this, GameState_Play* play)
     id = EnAkindonuts_ShopID(this);
     price = kPrices[id];
     EnAkindonuts_ShopOverride(&o, id);
-    b = play->textBuffer;
+    b = play->msgCtx.font.textBuffer.schar;
     comboTextAppendHeader(&b);
     start = b;
     comboTextAppendStr(&b, "I'll give you ");
@@ -226,7 +226,7 @@ static void EnAkindonuts_AlterMessageNoRupees(GameState_Play* play)
     char* b;
     char* start;
 
-    b = play->textBuffer;
+    b = play->msgCtx.font.textBuffer.schar;
     comboTextAppendHeader(&b);
     start = b;
     comboTextAppendStr(&b, "Not enough Rupees!" TEXT_SIGNAL TEXT_END);

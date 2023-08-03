@@ -39,7 +39,7 @@ static void hintZoraEggs(GameState_Play* play)
     char* start;
 
     EnMk_ItemQuery(&q);
-    b = play->textBuffer;
+    b = play->msgCtx.font.textBuffer.schar;
     comboTextAppendHeader(&b);
     start = b;
     comboTextAppendStr(&b, "If you can bring all of the " TEXT_COLOR_BLUE "Zora Eggs ");
