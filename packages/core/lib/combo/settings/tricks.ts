@@ -32,6 +32,8 @@ export const TRICKS = {
   OOT_MQ_ICE_SCARE_HOVER: "MQ Ice Cavern GS using only Hover Boots",
   OOT_MQ_GTG_FLAMES: "MQ Gerudo Training Grounds Lava Room Walk along Flame Circles",
   OOT_FORTRESS_JUMPS: "Jump up to higher ledges outside Gerudo Fortress.",
+  OOT_COLOSSUS_GS_NO_BEAN: "Collect the plateau GS in Desert Colossus without using the Bean Plant.",
+  OOT_ENTER_JABU: "Enter Jabu-Jabu as child by touching the top of his head.",
   MM_LENS: "Fewer Lens Requirements (MM)",
   MM_PALACE_BEAN_SKIP: "Skip Planting Beans in Deku Palace",
   MM_DARMANI_WALL: "Climb Mountain Village Wall Blind",
