@@ -96,11 +96,11 @@ EnvironmentContext;
 
 typedef struct 
 {
-    /* 0x000 */ char        unk_000[0xf];
-    /* 0x010 */ ActorList   actors[12];
-    /* 0x0a0 */ char        unk_a0[0x1b4];
-    /* 0x254 */ Actor*      elegyStatues[4];
-    /* 0x264 */ char        unk_264[0x20];
+    char        unk_000[0xf];
+    ActorList   actors[12];
+    char        unk_a0[0x1b4];
+    Actor*      elegyStatues[4];
+    char        unk_264[0x20];
 }
 ActorContext;
 
@@ -140,9 +140,9 @@ _Static_assert(sizeof(Font) == 0x11d90, "MM Font size is wrong");
 
 typedef struct MessageTableEntry 
 {
-    /* 0x0 */ u16 textId;
-    /* 0x2 */ u8 typePos;
-    /* 0x4 */ const char* segment;
+    u16 textId;
+    u8 typePos;
+    const char* segment;
 } 
 MessageTableEntry; // size = 0x8;
 
@@ -157,7 +157,7 @@ typedef struct {
     u8      playbackState; // 1 while doing playback, is reset to 0 to show the "You Played X song" text.
     u8      playbackNoteIndex;
     char    pad7;
-} SongFrameInfo; // size = 0x8
+} SongFrameInfo;
 
 // Structure with some song state. Usually located at: 0x801FD43A.
 typedef struct {
@@ -170,7 +170,7 @@ typedef struct {
     u16             flags; // 0x37DF if all songs.
     u8              noteIndex3;
     char            pad33;
-} SongInfo; // size = 0x34
+} SongInfo;
 
 _Static_assert(sizeof(SongFrameInfo) == 0x8, "MM SongFrameInfo size is wrong");
 _Static_assert(sizeof(SongInfo) == 0x34, "MM SongInfo size is wrong");
@@ -315,14 +315,6 @@ typedef struct GameState_Play
     SramContext         sramCtx;
     char                unk_046e0[0x228];
     MessageContext      msgCtx;
-    // char                textBuffer[4]; /* Real size unknown */
-    // char                unk_162f4[0x00514];
-    // OcarinaStaff*       ocarinaStaff;
-    // char                unk_1680C[0x00126];
-    // u16                 ocarinaMode;
-    // char                unk_16934[2];
-    // s16                 ocarinaSong;
-    // char                unk_16938[0x000b0];
     InterfaceContext    interfaceCtx;
     PauseContext        pauseCtx;
     GameOverContext     gameOverCtx;
@@ -372,12 +364,10 @@ GameData;
 
 extern GameData* gGameData;
 
-// ASSERT_OFFSET(GameState_Play, ocarinaStaff,     0x16808);
 ASSERT_OFFSET(GameState_Play, actorCtx,                 0x01ca0);
 ASSERT_OFFSET(GameState_Play, unk_01f24,                0x01f24);
 ASSERT_OFFSET(GameState_Play, sramCtx,                  0x046b8);
 ASSERT_OFFSET(GameState_Play, msgCtx,                   0x04908);
-_Static_assert(offsetof(GameState_Play, msgCtx) + offsetof(MessageContext, font) + offsetof(Font, textBuffer) == 0x162f0, "MM TextBuffer offset is");
 ASSERT_OFFSET(GameState_Play, interfaceCtx,             0x169e8);
 ASSERT_OFFSET(GameState_Play, envCtx,                   0x17004);
 ASSERT_OFFSET(GameState_Play, gameplayFrames,           0x18840);
