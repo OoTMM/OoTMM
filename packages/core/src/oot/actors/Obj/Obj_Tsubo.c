@@ -15,11 +15,17 @@ void ObjTsubo_InitWrapper(Actor_ObjTsubo* this, GameState_Play* play)
 
 void ObjTsubo_SpawnShuffledDrop(Actor_ObjTsubo* this, GameState_Play* play)
 {
+    u16 var;
     Actor_EnItem00* item;
 
     if (comboXflagsGet(play->sceneId, g.sceneSetupId, this->extendedRoomId, this->extendedId))
     {
         /* Already spawned */
+        var = this->base.variable;
+        if ((var & 0xff) < 0x1a)
+        {
+            Item_DropCollectible(play, &this->base.position, (var & 0xff) | (((var >> 9) & 0x3f) << 8));
+        }
         return;
     }
 
