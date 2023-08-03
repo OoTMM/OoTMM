@@ -34,6 +34,8 @@ export const TRICKS = {
   OOT_FORTRESS_JUMPS: "Jump up to higher ledges outside Gerudo Fortress.",
   OOT_COLOSSUS_GS_NO_BEAN: "Collect the plateau GS in Desert Colossus without using the Bean Plant.",
   OOT_ENTER_JABU: "Enter Jabu-Jabu as child by touching the top of his head.",
+  OOT_BIG_OCTO_NO_RANG: "Fight Big Octo in Jabu-Jabu without Boomerang.",
+  OOT_JABU_BOSS_HIGH_SWITCH: "Hit the switch before Jabu-Jabu's boss without Boomerang or Climb Anywhere.",
   MM_LENS: "Fewer Lens Requirements (MM)",
   MM_PALACE_BEAN_SKIP: "Skip Planting Beans in Deku Palace",
   MM_DARMANI_WALL: "Climb Mountain Village Wall Blind",
