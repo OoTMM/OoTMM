@@ -6,7 +6,7 @@ import { Game, DATA_FILES } from '../config';
 import { DmaData } from '../dma';
 import { splitObject } from './split';
 import { arrayToIndexMap, toU32Buffer } from '../util';
-import { CodeGen } from '../codegen';
+import { CodeGen } from '../util/codegen';
 import { DecompressedRoms } from '../decompress';
 import { Monitor } from '../monitor';
 import { KeepFile } from './keep';
