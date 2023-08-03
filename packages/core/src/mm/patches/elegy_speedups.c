@@ -50,8 +50,44 @@ void Elegy_Update(Actor* actor, GameState_Play* play)
 {
     u8 index = actor->variable & 7;
     Actor* statue = play->actorCtx.elegyStatues[index];
-    // if (statue != NULL)
-    // {
-    actor->initPos = statue->initPos;
-    // }
+    if (statue != NULL)
+    {
+        actor->initPos = statue->initPos;
+    }
+}
+
+union SongStateResults {
+    struct {
+        u8 action;
+        u8 unk1F0A;
+        u8 frameCount;
+        u8 unused;
+    };
+    u32 value;
+};
+
+u32 SongState_HandlePlayback(GameState_Play* play, MessageContext* msgCtxt) {
+    s8 song = msgCtxt->songInfo->frameInfo[0].storedSong;
+    if (song == 3) {
+        // Process state for Elegy of Emptiness
+        // Disable sfx being "dampened" (normally action 0x17 would do this before advancing to 0x18)
+        AudioOcarina_SetInstrument(0);
+        // Code for action 0x18 will stop early unless this value is 0x32.
+        // msgCtxt->unk202C = 0x32;
+        // Skip past song playback & message box, to state 0x18
+        union SongStateResults results = {
+            .action = 0x18,
+            .unk1F0A = 3,
+            .frameCount = 2,
+        };
+        return results.value;
+    } else {
+        // Vanilla behavior, prepare for song playback.
+        union SongStateResults results = {
+            .action = 0x12,
+            .unk1F0A = 3,
+            .frameCount = 10,
+        };
+        return results.value;
+    }
 }
