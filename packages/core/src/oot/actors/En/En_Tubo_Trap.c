@@ -1,6 +1,51 @@
 #include <combo.h>
 #include <combo/custom.h>
 
+void EnTuboTrap_InitWrapper(Actor_EnTuboTrap* this, GameState_Play* play)
+{
+    ActorFunc EnTuboTrap_Init;
+
+    /* Set the extended properties */
+    this->xflag.sceneId = play->sceneId;
+    this->xflag.setupId = g.sceneSetupId;
+    this->xflag.roomId = this->base.room;
+    this->xflag.id = g.actorIndex;
+
+    /* Forward init */
+    EnTuboTrap_Init = actorAddr(AC_EN_TUBO_TRAP, 0x80a77b30);
+    EnTuboTrap_Init(&this->base, play);
+}
+
+
+void EnTuboTrap_SpawnShuffledDrop(Actor_EnTuboTrap* this, GameState_Play* play)
+{
+    u16 var;
+    Actor_EnItem00* item;
+
+    if (comboXflagsGet(&this->xflag))
+    {
+        /* Already spawned */
+        var = this->base.variable;
+        if ((var & 0xff) < 0x1a)
+        {
+            Item_DropCollectible(play, &this->base.position, (var & 0xff) | (((var >> 9) & 0x3f) << 8));
+        }
+        return;
+    }
+
+    /* Spawn an extended item */
+    g.spawnExtended = 1;
+    item = Item_DropCollectible(play, &this->base.position, 0x0000);
+    g.spawnExtended = 0;
+
+    item->xflag.sceneId = this->xflag.sceneId;
+    item->xflag.setupId = this->xflag.setupId;
+    item->xflag.roomId = this->xflag.roomId;
+    item->xflag.id = this->xflag.id;
+    item->extendedGi = GI_OOT_RUPEE_GREEN;
+    item->extendedGiDraw = 0;
+}
+
 static const Gfx kDrawListNormalDangeonTop[] = {
     gsDPLoadTextureBlock(0x050118A0, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, 4, 4, 0, 0),
     gsSPEndDisplayList(),
