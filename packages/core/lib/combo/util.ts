@@ -123,3 +123,14 @@ export const toU32BufferLE = (data: number[]) => {
   }
   return buf;
 };
+
+export function padBuffer16(data: Buffer, fill = 0xff) {
+  const len = data.length;
+  const newLen = align(len, 16);
+  if (newLen === len) {
+    return data;
+  }
+  const buf = Buffer.alloc(newLen, fill);
+  data.copy(buf);
+  return buf;
+}

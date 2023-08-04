@@ -6,7 +6,7 @@ import { Game } from "../config";
 import { WorldCheck } from '../logic/world';
 import { DUNGEONS, Settings, SPECIAL_CONDS, SPECIAL_CONDS_KEYS } from '../settings';
 import { HintGossip, WorldHints } from '../logic/hints';
-import { countMapAdd, gameId, toU16Buffer, toU32Buffer, toU8Buffer } from '../util';
+import { countMapAdd, gameId, padBuffer16, toU16Buffer, toU32Buffer, toU8Buffer } from '../util';
 import { Patchfile } from './patchfile';
 import { LOCATIONS_ZELDA, makeLocation, makePlayerLocations } from '../logic/locations';
 import { CONFVARS_VALUES, Confvar } from '../confvars';
@@ -361,9 +361,7 @@ const gameChecks = (worldId: number, settings: Settings, game: Game, logic: Logi
     buffers.push(b);
   }
   buffers.push(Buffer.alloc(8, 0xff));
-  if (buffers.length % 2 !== 0)
-    buffers.push(Buffer.alloc(8, 0xff));
-  return Buffer.concat(buffers);
+  return padBuffer16(Buffer.concat(buffers));
 };
 
 const hintBuffer = (settings: Settings, game: Game, gossip: string, hint: HintGossip): Buffer => {
@@ -468,7 +466,8 @@ const gameHints = (settings: Settings, game: Game, hints: WorldHints): Buffer =>
     }
     buffers.push(hintBuffer(settings, game, gossip, h));
   }
-  return Buffer.concat(buffers);
+  buffers.push(Buffer.alloc(10, 0xff));
+  return padBuffer16(Buffer.concat(buffers));
 }
 
 const regionsBuffer = (regions: Region[]) => {
@@ -495,7 +494,9 @@ const gameEntrances = (worldId: number, game: Game, logic: LogicResult) => {
     const dstId = entrance(srcEntrance.game, dstEntrance.game, dst);
     data.push(srcId, dstId);
   }
-  return toU32Buffer(data);
+  data.push(0xffffffff);
+  data.push(0xffffffff);
+  return padBuffer16(toU32Buffer(data));
 };
 
 export const randomizerMq = (worldId: number, logic: LogicResult): Buffer => {

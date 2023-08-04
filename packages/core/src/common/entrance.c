@@ -19,24 +19,30 @@ typedef struct PACKED ALIGNED(4)
 }
 Entrance;
 
-ALIGNED(16) static Entrance gEntrances[0x100];
+static Entrance* gEntrances;
 
 void comboInitEntrances(void)
 {
-    memset(gEntrances, 0xff, sizeof(gEntrances));
+    size_t size;
+
+    size = comboDmaLoadFile(NULL, COMBO_VROM_ENTRANCES);
+    gEntrances = malloc(size);
     comboDmaLoadFile(gEntrances, COMBO_VROM_ENTRANCES);
 }
 
 s32 comboEntranceOverride(s16 entranceId)
 {
-    for (int i = 0; i < ARRAY_SIZE(gEntrances); i++)
+    int i;
+
+    i = 0;
+    for (;;)
     {
         if (gEntrances[i].key == -1)
-            break;
+            return -1;
         if (gEntrances[i].key == (s32)((u16)entranceId & 0xffff))
             return gEntrances[i].value;
+        i++;
     }
-    return -1;
 }
 
 void comboGetDungeonExit(EntranceDescr* dst, int dungeonId)
