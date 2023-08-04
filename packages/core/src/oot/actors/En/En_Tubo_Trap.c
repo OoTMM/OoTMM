@@ -72,7 +72,7 @@ static void EnTuboTrap_Draw(Actor_EnTuboTrap* this, GameState_Play* play)
     const void* dlistTop;
 
     /* Checks flag and dangeon_keep */
-    if (!comboXflagsGet(&this->xflag))
+    if (comboConfig(CFG_OOT_SHUFFLE_POTS) && !comboXflagsGet(&this->xflag))
     {
         dlistSide = kDrawListMajorSide;
         dlistTop = kDrawListMajorTop;
