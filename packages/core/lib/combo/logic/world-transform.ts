@@ -948,10 +948,12 @@ export class LogicPassWorldTransform {
 
     /* Handle fixed locations */
     for (const loc of this.fixedLocations) {
-      const world = this.state.worlds[locationData(loc).world as number];
+      const worldId = locationData(loc).world as number;
+      const world = this.state.worlds[worldId];
       const check = world.checks[locationData(loc).id];
       const { item } = check;
-      this.removeItem(item, 1);
+      const pi = makePlayerItem(item, worldId);
+      this.removePlayerItem(pi, 1);
     }
 
     /* Handle required junks */

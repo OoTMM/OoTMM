@@ -1,6 +1,5 @@
-import { GAMES } from '../config';
 import { Random, sample, shuffle } from '../random';
-import { countMapArray, countMapCombine, countMapRemove, gameId } from '../util';
+import { countMapArray, countMapCombine, countMapRemove } from '../util';
 import { Pathfinder, PathfinderState } from './pathfind';
 import { World } from './world';
 import { LogicError, LogicSeedError } from './error';
@@ -262,6 +261,7 @@ export class LogicPassSolver {
         cb();
         return;
       } catch (e) {
+        this.monitor.debug((e as Error).stack!);
         if ((e instanceof LogicError) && this.attempts < this.attemptsMax) {
           this.attempts++;
           this.state = cloneState(stateBackup);
