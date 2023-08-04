@@ -1,6 +1,7 @@
 location,                                                   type,           hint,                 scene,                          id,                         item
 Hatch Chicken,                                              npc,            NONE,                 GROTTOS,                        WEIRD_EGG,                  WEIRD_EGG
 Hatch Pocket Cucco,                                         npc,            NONE,                 GROTTOS,                        POCKET_EGG,                 POCKET_EGG
+Link's House Pot,                                           pot,            NONE,                 LINK_HOUSE,                     0x0002,                     RECOVERY_HEART
 Kokiri Forest Mido Top Left,                                chest,          NONE,                 KOKIRI_MIDO,                    0x00,                       RUPEE_BLUE
 Kokiri Forest Mido Top Right,                               chest,          NONE,                 KOKIRI_MIDO,                    0x01,                       RUPEE_BLUE
 Kokiri Forest Mido Bottom Left,                             chest,          NONE,                 KOKIRI_MIDO,                    0x02,                       RUPEE_GREEN
@@ -19,6 +20,10 @@ Kokiri Shop Item 5,                                         shop,           NONE
 Kokiri Shop Item 6,                                         shop,           NONE,                 KOKIRI_FOREST,                  0x05,                       NUTS_10
 Kokiri Shop Item 7,                                         shop,           NONE,                 KOKIRI_FOREST,                  0x06,                       STICK
 Kokiri Shop Item 8,                                         shop,           NONE,                 KOKIRI_FOREST,                  0x07,                       SHIELD_DEKU
+Know It All House Pot 1,                                    pot,            NONE,                 KOKIRI_KNOW_IT_ALL,             0x0006,                     RUPEE_GREEN
+Know It All House Pot 2,                                    pot,            NONE,                 KOKIRI_KNOW_IT_ALL,             0x0007,                     RUPEE_GREEN
+Twins House Pot 1,                                          pot,            NONE,                 KOKIRI_TWINS,                   0x0002,                     RUPEE_GREEN
+Twins House Pot 2,                                          pot,            NONE,                 KOKIRI_TWINS,                   0x0003,                     RUPEE_BLUE
 Malon Egg,                                                  npc,            NONE,                 HYRULE_CASTLE,                  MALON_EGG,                  CHICKEN
 Zelda's Letter,                                             npc,            NONE,                 CASTLE_COURTYARD,               ZELDA_LETTER,               ZELDA_LETTER
 Zelda's Song,                                               npc,            NONE,                 CASTLE_COURTYARD,               ZELDA_SONG,                 SONG_ZELDA
@@ -128,6 +133,15 @@ Goron City GS Maze,                                         gs,             NONE
 Goron City Grotto Left Scrub,                               scrub,          NONE,                 GROTTOS,                        0x0b,                       NUTS_5
 Goron City Grotto Center Scrub,                             scrub,          NONE,                 GROTTOS,                        0x0c,                       DEKU_SEEDS_30
 Goron City Grotto Right Scrub,                              scrub,          NONE,                 GROTTOS,                        0x0d,                       BOMBS_5
+Goron City Pot Darunia Room 1,                              pot,            NONE,                 GORON_CITY,                     0x0105,                     STICK
+Goron City Pot Darunia Room 2,                              pot,            NONE,                 GORON_CITY,                     0x0106,                     RUPEE_GREEN
+Goron City Pot Darunia Room 3,                              pot,            NONE,                 GORON_CITY,                     0x0107,                     STICK
+Goron City Pot Medigoron Room,                              pot,            NONE,                 GORON_CITY,                     0x0203,                     RUPEE_BLUE
+Goron City Pot Stairs 1,                                    pot,            NONE,                 GORON_CITY,                     0x0329,                     STICK
+Goron City Pot Stairs 2,                                    pot,            NONE,                 GORON_CITY,                     0x032a,                     RUPEE_BLUE
+Goron City Pot Stairs 3,                                    pot,            NONE,                 GORON_CITY,                     0x032b,                     RUPEE_GREEN
+Goron City Pot Stairs 4,                                    pot,            NONE,                 GORON_CITY,                     0x032c,                     RUPEE_BLUE
+Goron City Pot Stairs 5,                                    pot,            NONE,                 GORON_CITY,                     0x032d,                     RECOVERY_HEART
 Goron Shop Item 1,                                          shop,           NONE,                 GORON_CITY,                     0x18,                       RECOVERY_HEART
 Goron Shop Item 2,                                          shop,           NONE,                 GORON_CITY,                     0x19,                       RECOVERY_HEART
 Goron Shop Item 3,                                          shop,           NONE,                 GORON_CITY,                     0x1a,                       POTION_RED
@@ -146,6 +160,10 @@ Death Mountain Crater Grotto Center Scrub,                  scrub,          NONE
 Death Mountain Crater Grotto Right Scrub,                   scrub,          NONE,                 GROTTOS,                        0x11,                       BOMBS_5
 Death Mountain Crater GS Soil,                              gs,             NONE,                 DEATH_MOUNTAIN_CRATER,          0x80,                       GS_TOKEN
 Death Mountain Crater GS Crate,                             gs,             NONE,                 DEATH_MOUNTAIN_CRATER,          0x87,                       GS_TOKEN
+Death Mountain Crater Pot 1,                                pot,            NONE,                 DEATH_MOUNTAIN_CRATER,          0x810d,                     RECOVERY_HEART
+Death Mountain Crater Pot 2,                                pot,            NONE,                 DEATH_MOUNTAIN_CRATER,          0x810e,                     ARROWS_5
+Death Mountain Crater Pot 3,                                pot,            NONE,                 DEATH_MOUNTAIN_CRATER,          0x810f,                     RUPEE_BLUE
+Death Mountain Crater Pot 4,                                pot,            NONE,                 DEATH_MOUNTAIN_CRATER,          0x8110,                     MAGIC_JAR_SMALL
 Zora River HP Pillar,                                       collectible,    NONE,                 ZORA_RIVER,                     0x04,                       HEART_PIECE
 Zora River HP Platform,                                     collectible,    NONE,                 ZORA_RIVER,                     0x0b,                       HEART_PIECE
 Zora River Bean Seller,                                     npc,            NONE,                 ZORA_RIVER,                     BEAN_SELLER,                MAGIC_BEAN
@@ -163,6 +181,11 @@ Zora Domain Diving Game,                                    npc,            NONE
 Zora Domain Tunic,                                          npc,            ZORA_KING,            ZORA_DOMAIN,                    ZORA_KING_TUNIC,            TUNIC_ZORA
 Zora Domain Eyeball Frog,                                   npc,            ZORA_KING,            ZORA_DOMAIN,                    TRADE_EYEBALL_FROG,         EYEBALL_FROG
 Zora Domain GS Waterfall,                                   gs,             NONE,                 ZORA_DOMAIN,                    0x96,                       GS_TOKEN
+Zora Domain Pot 1,                                          pot,            NONE,                 ZORA_DOMAIN,                    0x0115,                     RUPEE_BLUE
+Zora Domain Pot 2,                                          pot,            NONE,                 ZORA_DOMAIN,                    0x0116,                     RECOVERY_HEART
+Zora Domain Pot 3,                                          pot,            NONE,                 ZORA_DOMAIN,                    0x0117,                     RECOVERY_HEART
+Zora Domain Pot 4,                                          pot,            NONE,                 ZORA_DOMAIN,                    0x0118,                     NUTS_5
+Zora Domain Pot 5,                                          pot,            NONE,                 ZORA_DOMAIN,                    0x0119,                     STICK
 Zora Shop Item 1,                                           shop,           NONE,                 ZORA_SHOP,                      0x10,                       POTION_RED
 Zora Shop Item 2,                                           shop,           NONE,                 ZORA_SHOP,                      0x11,                       ARROWS_30
 Zora Shop Item 3,                                           shop,           NONE,                 ZORA_SHOP,                      0x12,                       FISH
@@ -176,6 +199,13 @@ Zora Fountain Bottom HP,                                    collectible,    NONE
 Zora Fountain GS Wall,                                      gs,             NONE,                 ZORA_FOUNTAIN,                  0x92,                       GS_TOKEN
 Zora Fountain GS Tree,                                      gs,             NONE,                 ZORA_FOUNTAIN,                  0x97,                       GS_TOKEN
 Zora Fountain GS Upper,                                     gs,             NONE,                 ZORA_FOUNTAIN,                  0x95,                       GS_TOKEN
+Zora Fountain Child Pot 1,                                  pot,            NONE,                 ZORA_FOUNTAIN,                  0x0013,                     DEKU_SEEDS_5
+Zora Fountain Child Pot 2,                                  pot,            NONE,                 ZORA_FOUNTAIN,                  0x0015,                     DEKU_SEEDS_5
+Zora Fountain Child Pot 3,                                  pot,            NONE,                 ZORA_FOUNTAIN,                  0x0016,                     DEKU_SEEDS_5
+Zora Fountain Child Pot 4,                                  pot,            NONE,                 ZORA_FOUNTAIN,                  0x0017,                     RECOVERY_HEART
+Zora Fountain Adult Pot 1,                                  pot,            NONE,                 ZORA_FOUNTAIN,                  0x802a,                     MAGIC_JAR_LARGE
+Zora Fountain Adult Pot 2,                                  pot,            NONE,                 ZORA_FOUNTAIN,                  0x802b,                     MAGIC_JAR_LARGE
+Zora Fountain Adult Pot 3,                                  pot,            NONE,                 ZORA_FOUNTAIN,                  0x802c,                     ARROWS_10
 Lake Hylia Underwater Bottle,                               npc,            NONE,                 LAKE_HYLIA,                     RUTO_LETTER,                RUTO_LETTER
 Lake Hylia Fire Arrow,                                      npc,            NONE,                 LAKE_HYLIA,                     FIRE_ARROW,                 ARROW_FIRE
 Lake Hylia HP,                                              collectible,    NONE,                 LAKE_HYLIA,                     0x1e,                       HEART_PIECE
@@ -186,6 +216,8 @@ Lake Hylia GS Lab Wall,                                     gs,             NONE
 Lake Hylia GS Island,                                       gs,             NONE,                 LAKE_HYLIA,                     0x99,                       GS_TOKEN
 Lake Hylia GS Soil,                                         gs,             NONE,                 LAKE_HYLIA,                     0x98,                       GS_TOKEN
 Lake Hylia GS Big Tree,                                     gs,             NONE,                 LAKE_HYLIA,                     0x9c,                       GS_TOKEN
+Lake Hylia Pot 1,                                           pot,            NONE,                 LAKE_HYLIA,                     0x000a,                     RECOVERY_HEART
+Lake Hylia Pot 2,                                           pot,            NONE,                 LAKE_HYLIA,                     0x000b,                     RECOVERY_HEART
 Laboratory Dive,                                            npc,            NONE,                 LABORATORY,                     LABORATORY_DIVE,            HEART_PIECE
 Laboratory Eye Drops,                                       npc,            NONE,                 LABORATORY,                     TRADE_EYE_DROPS,            EYE_DROPS
 Laboratory GS Crate,                                        gs,             NONE,                 LABORATORY,                     0x9b,                       GS_TOKEN
@@ -194,6 +226,9 @@ Fishing Pond Adult,                                         npc,            FISH
 Lon Lon Ranch Malon Song,                                   npc,            NONE,                 LON_LON_RANCH,                  MALON_SONG,                 SONG_EPONA
 Lon Lon Ranch Silo HP,                                      collectible,    NONE,                 RANCH_HOUSE_SILO,               0x01,                       HEART_PIECE
 Lon Lon Ranch Talon Bottle,                                 npc,            NONE,                 RANCH_HOUSE_SILO,               TALON_BOTTLE,               BOTTLE_MILK
+Lon Lon Ranch Talon House Pot 1,                            pot,            NONE,                 RANCH_HOUSE_SILO,               0x0200,                     RUPEE_BLUE
+Lon Lon Ranch Talon House Pot 2,                            pot,            NONE,                 RANCH_HOUSE_SILO,               0x0201,                     RUPEE_BLUE
+Lon Lon Ranch Talon House Pot 3,                            pot,            NONE,                 RANCH_HOUSE_SILO,               0x0202,                     RUPEE_GREEN
 Lon Lon Ranch GS Tree,                                      gs,             NONE,                 LON_LON_RANCH,                  0x63,                       GS_TOKEN
 Lon Lon Ranch GS House,                                     gs,             NONE,                 LON_LON_RANCH,                  0x62,                       GS_TOKEN
 Lon Lon Ranch GS Rain Shed,                                 gs,             NONE,                 LON_LON_RANCH,                  0x61,                       GS_TOKEN
@@ -222,7 +257,12 @@ Hyrule Field Grotto Tektite HP,                             collectible,    NONE
 Hyrule Field Grotto Near Kakariko GS,                       gs,             NONE,                 GROTTOS,                        0x59,                       GS_TOKEN
 Hyrule Field Grotto Near Gerudo GS,                         gs,             NONE,                 GROTTOS,                        0x58,                       GS_TOKEN
 Hyrule Field Cow,                                           cow,            NONE,                 HYRULE_FIELD,                   0x01,                       MILK
-Market Dog Lady HP,                                         npc,            NONE,                 BACK_ALLEY_HOUSE,               DOG_LADY,                   HEART_PIECE
+Hyrule Field Cow Grotto Pot 1,                              pot,            NONE,                 GROTTOS,                        0x0405,                     NUTS_5
+Hyrule Field Cow Grotto Pot 2,                              pot,            NONE,                 GROTTOS,                        0x0407,                     MAGIC_JAR_SMALL
+Market Dog Lady HP,                                         npc,            NONE,                 BACK_ALLEY_HOUSE2,              DOG_LADY,                   HEART_PIECE
+Market Back Alley East House Pot 1,                         pot,            NONE,                 BACK_ALLEY_HOUSE,               0x0002,                     RECOVERY_HEART
+Market Back Alley East House Pot 2,                         pot,            NONE,                 BACK_ALLEY_HOUSE,               0x0003,                     RECOVERY_HEART
+Market Back Alley East House Pot 3,                         pot,            NONE,                 BACK_ALLEY_HOUSE,               0x0004,                     MAGIC_JAR_SMALL
 Market Pot House Big Poes,                                  npc,            NONE,                 GUARD_HOUSE,                    POE_COLLECTOR,              BOTTLE_EMPTY
 Market Pot House GS,                                        gs,             NONE,                 GUARD_HOUSE,                    0x7b,                       GS_TOKEN
 Market Pot House Child Pot Ground 1,                        pot,            NONE,                 GUARD_HOUSE,                    0x0008,                     RUPEE_GREEN
@@ -311,6 +351,12 @@ Shooting Gallery Child,                                     npc,            NONE
 Shooting Gallery Adult,                                     npc,            NONE,                 SHOOTING_GALLERY,               SHOOTING_GAME_ADULT,        BOW
 Hyrule Castle GS Tree,                                      gs,             NONE,                 HYRULE_CASTLE,                  0x7a,                       GS_TOKEN
 Hyrule Castle GS Grotto,                                    gs,             NONE,                 GROTTOS,                        0x79,                       GS_TOKEN
+Hyrule Castle Grotto Pot 1,                                 pot,            NONE,                 GROTTOS,                        0x0806,                     RUPEE_RED
+Hyrule Castle Grotto Pot 2,                                 pot,            NONE,                 GROTTOS,                        0x0807,                     BOMB
+Hyrule Castle Grotto Pot 3,                                 pot,            NONE,                 GROTTOS,                        0x0809,                     ARROWS_5
+Hyrule Castle Grotto Pot 4,                                 pot,            NONE,                 GROTTOS,                        0x080b,                     NUTS_5
+Hyrule Castle Pot 1,                                        pot,            NONE,                 HYRULE_CASTLE,                  0x0008,                     RUPEE_GREEN
+Hyrule Castle Pot 2,                                        pot,            NONE,                 HYRULE_CASTLE,                  0x0009,                     RUPEE_BLUE
 Ganon Castle Exterior GS,                                   gs,             NONE,                 GANON_CASTLE_EXTERIOR,          0x78,                       GS_TOKEN
 Temple of Time Master Sword,                                npc,            NONE,                 TEMPLE_OF_TIME,                 MASTER_SWORD,               SWORD_MASTER
 Temple of Time Medallion,                                   npc,            NONE,                 TEMPLE_OF_TIME,                 LIGHT_MEDALLION,            MEDALLION_LIGHT
@@ -336,6 +382,10 @@ Gerudo Fortress GS Wall,                                    gs,             NONE
 Gerudo Fortress GS Target,                                  gs,             NONE,                 GERUDO_FORTRESS,                0xa8,                       GS_TOKEN
 Haunted Wasteland Chest,                                    chest,          HAUNTED_WASTELAND,    HAUNTED_WASTELAND,              0x00,                       RUPEE_PURPLE
 Haunted Wasteland GS,                                       gs,             NONE,                 HAUNTED_WASTELAND,              0xb1,                       GS_TOKEN
+Haunted Wasteland Pot 1,                                    pot,            NONE,                 HAUNTED_WASTELAND,              0x0000,                     RECOVERY_HEART
+Haunted Wasteland Pot 2,                                    pot,            NONE,                 HAUNTED_WASTELAND,              0x0001,                     NUTS_5
+Haunted Wasteland Pot 3,                                    pot,            NONE,                 HAUNTED_WASTELAND,              0x0002,                     FLEXIBLE
+Haunted Wasteland Pot 4,                                    pot,            NONE,                 HAUNTED_WASTELAND,              0x0003,                     MAGIC_JAR_SMALL
 Desert Colossus HP,                                         collectible,    NONE,                 DESERT_COLOSSUS,                0x0d,                       HEART_PIECE
 Desert Colossus Song Spirit,                                npc,            NONE,                 DESERT_COLOSSUS,                SHEIK_SPIRIT,               SONG_TP_SPIRIT
 Desert Colossus Grotto Front Scrub,                         scrub,          NONE,                 GROTTOS,                        0x19,                       POTION_GREEN

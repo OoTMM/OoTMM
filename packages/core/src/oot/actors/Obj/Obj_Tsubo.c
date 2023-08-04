@@ -15,6 +15,42 @@ static void ObjTsubo_Aliases(Actor_ObjTsubo* this, GameState_Play* play)
             this->extendedId += 1;
         }
         break;
+    case SCE_OOT_ZORA_DOMAIN:
+        if (this->extendedSetupId == 2)
+        {
+            this->extendedSetupId = 0;
+            switch (this->extendedId)
+            {
+            case 1: this->extendedId = 25; break;
+            case 2: this->extendedId = 22; break;
+            case 3: this->extendedId = 24; break;
+            case 4: this->extendedId = 21; break;
+            case 5: this->extendedId = 23; break;
+            }
+        }
+        break;
+    case SCE_OOT_ZORA_FOUNTAIN:
+        if (this->extendedSetupId == 1)
+            this->extendedSetupId = 0;
+        break;
+    case SCE_OOT_DEATH_MOUNTAIN_CRATER:
+        if (this->extendedSetupId == 0)
+        {
+            this->extendedSetupId = 2;
+            this->extendedId -= 2;
+        }
+        break;
+    case SCE_OOT_GORON_CITY:
+        if (this->extendedSetupId == 2)
+        {
+            this->extendedSetupId = 0;
+            switch (this->extendedRoomId)
+            {
+            case 1: this->extendedId += 4; break;
+            case 3: this->extendedId += 33; break;
+            }
+        }
+        break;
     default:
         break;
     }
