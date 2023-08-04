@@ -220,7 +220,7 @@ void EnItem00_UpdateWrapper(Actor_EnItem00* this, GameState_Play* play)
     {
         if (*(u32*)((char*)this + 0x13c) != 0x800127e0)
         {
-            if (*(u32*)((char*)this + 0x13c) != EnItem00_ExtendedCollectedHandler)
+            if (*(void**)((char*)this + 0x13c) != EnItem00_ExtendedCollectedHandler)
             {
                 EnItem00_ExtendedItemQuery(&q, this);
                 comboItemOverride(&o, &q);
