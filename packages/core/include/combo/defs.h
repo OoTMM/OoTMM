@@ -31,8 +31,8 @@
 #endif
 
 #ifdef GAME_MM
-# define PAYLOAD_RAM    0x80740000
-# define PAYLOAD_SIZE   0x40000
+# define PAYLOAD_RAM    0x80750000
+# define PAYLOAD_SIZE   0x30000
 # define LOADER_ADDR    0x800982b0
 
 # define COMBO_CTX_ADDR_READ    COMBO_CTX_ADDR_MM
@@ -40,7 +40,6 @@
 #endif
 
 #define MM_BASE       0xa628f0
-#define PAYLOAD_SIZE  0x40000
 
 #define MASK_FOREIGN_GI     0x0200
 #define MASK_FOREIGN_OBJECT 0x1000

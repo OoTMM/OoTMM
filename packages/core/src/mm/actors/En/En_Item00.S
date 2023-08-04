@@ -2,7 +2,7 @@
 
 /* Resize Item00 */
 PATCH_START 0x801adecc
-.int 0x1b0
+.int 0x1b4
 PATCH_END
 
 /* Patch DrawGI */
