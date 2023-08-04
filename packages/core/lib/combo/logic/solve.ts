@@ -735,8 +735,7 @@ export class LogicPassSolver {
     }
 
     if (this.input.settings.logic === 'allLocations' && ItemHelpers.isItemCriticalRenewable(item.item) && !this.state.criticalRenewables.has(item)) {
-      const world = this.input.worlds[item.player];
-      unplacedLocs = unplacedLocs.filter(x => isLocationRenewable(world, x));
+      unplacedLocs = unplacedLocs.filter(x => isLocationRenewable(this.input.worlds[locationData(x).world as number], x));
     }
 
     if (unplacedLocs.length === 0) {
@@ -784,8 +783,7 @@ export class LogicPassSolver {
 
         /* If the item is a critical renewable and it's all locations, ensure it lands correctly */
         if (this.input.settings.logic === 'allLocations' && ItemHelpers.isItemCriticalRenewable(requiredItem.item) && !this.state.criticalRenewables.has(requiredItem)) {
-          const world = this.input.worlds[requiredItem.player];
-          unplacedLocs = unplacedLocs.filter(x => isLocationRenewable(world, x));
+          unplacedLocs = unplacedLocs.filter(x => isLocationRenewable(this.input.worlds[locationData(x).world as number], x));
         }
 
         /* If there is nowhere to place an item, raise an error */
