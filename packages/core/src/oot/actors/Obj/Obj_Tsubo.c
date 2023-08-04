@@ -3,9 +3,9 @@
 
 static ActorFunc sDraw;
 
-static void ObjTsubo_Aliases(Actor_ObjTsubo* this, GameState_Play* play)
+static void ObjTsubo_Aliases(Actor_ObjTsubo* this)
 {
-    switch (play->sceneId)
+    switch (this->extendedSceneId)
     {
     case SCE_OOT_KAKARIKO_VILLAGE:
     case SCE_OOT_LON_LON_RANCH:
@@ -51,6 +51,16 @@ static void ObjTsubo_Aliases(Actor_ObjTsubo* this, GameState_Play* play)
             }
         }
         break;
+    case SCE_OOT_LAIR_GANONDORF:
+        this->extendedSceneId = SCE_OOT_GANON_TOWER;
+        this->extendedRoomId = 8;
+        this->extendedId -= 46;
+        break;
+    case SCE_OOT_GANON_TOWER_COLLAPSING:
+        this->extendedSceneId = SCE_OOT_GANON_TOWER;
+        this->extendedRoomId = 8;
+        this->extendedId -= 15;
+        break;
     default:
         break;
     }
@@ -64,12 +74,13 @@ void ObjTsubo_InitWrapper(Actor_ObjTsubo* this, GameState_Play* play)
     sDraw = actorAddr(AC_OBJ_TSUBO, 0x80a65fbc);
 
     /* Set the extended properties */
+    this->extendedSceneId = play->sceneId;
     this->extendedSetupId = g.sceneSetupId;
     this->extendedRoomId = this->base.room;
     this->extendedId = g.actorIndex;
 
     /* Fix the aliases */
-    ObjTsubo_Aliases(this, play);
+    ObjTsubo_Aliases(this);
 
     /* Forward init */
     init = actorAddr(AC_OBJ_TSUBO, 0x80a653a8);
@@ -97,6 +108,7 @@ void ObjTsubo_SpawnShuffledDrop(Actor_ObjTsubo* this, GameState_Play* play)
     item = Item_DropCollectible(play, &this->base.position, 0x0000);
     g.spawnExtended = 0;
 
+    item->extendedSceneId = this->extendedSceneId;
     item->extendedSetupId = this->extendedSetupId;
     item->extendedRoomId = this->extendedRoomId;
     item->extendedId = this->extendedId;

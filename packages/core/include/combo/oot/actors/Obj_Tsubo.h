@@ -9,6 +9,7 @@ typedef struct ALIGNED(4)
     char            unk_13c[0x54];
 
     /* Extended flags */
+    u8              extendedSceneId;
     u8              extendedSetupId;
     u8              extendedRoomId;
     u8              extendedId;

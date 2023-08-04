@@ -18,6 +18,7 @@ typedef struct ALIGNED(4) Actor_EnItem00
     s16     extendedGiDraw;
     u8      extendedMajor;
     u8      isExtended;
+    u8      extendedSceneId;
     u8      extendedSetupId;
     u8      extendedRoomId;
     u8      extendedId;
