@@ -166,8 +166,6 @@ void comboGiveItemNpcEx(Actor* actor, GameState_Play* play, s16 gi, int npc, int
 # define OVERRIDE_ADDR 0x03fe9000
 #endif
 
-#define OVERRIDE_MAX 1024
-
 typedef struct ComboOverrideData
 {
     u32  key;
@@ -176,11 +174,14 @@ typedef struct ComboOverrideData
 }
 ComboOverrideData;
 
-static ALIGNED(16) ComboOverrideData gComboOverrides[OVERRIDE_MAX];
+static ComboOverrideData* gComboOverrides;
 
 void comboInitOverride(void)
 {
-    memset(gComboOverrides, 0xff, sizeof(gComboOverrides));
+    size_t size;
+
+    size = comboDmaLoadFile(NULL, COMBO_VROM_CHECKS);
+    gComboOverrides = malloc(size);
     comboDmaLoadFile(gComboOverrides, COMBO_VROM_CHECKS);
 }
 
@@ -228,15 +229,18 @@ static u32 makeOverrideKey(const ComboItemQuery* q)
 
 static const ComboOverrideData* overrideData(u32 key)
 {
-    for (int i = 0; i < OVERRIDE_MAX; ++i)
+    int i;
+
+    i = 0;
+    for (;;)
     {
         ComboOverrideData* o = &gComboOverrides[i];
         if (o->key == 0xffffffff)
-            break;
+            return NULL;
         if (o->key == key)
             return o;
+        i++;
     }
-    return NULL;
 }
 
 void comboItemOverride(ComboItemOverride* dst, const ComboItemQuery* q)

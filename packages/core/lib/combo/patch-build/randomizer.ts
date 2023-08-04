@@ -1,7 +1,7 @@
 import { Buffer } from 'buffer';
 
 import { LogicResult } from '../logic';
-import { DATA_GI, DATA_NPC, DATA_SCENES, DATA_REGIONS, DATA_HINTS_POOL, DATA_HINTS, DATA_ENTRANCES, DATA_SETUPS } from '../data';
+import { DATA_GI, DATA_NPC, DATA_SCENES, DATA_REGIONS, DATA_HINTS_POOL, DATA_HINTS, DATA_ENTRANCES } from '../data';
 import { Game } from "../config";
 import { WorldCheck } from '../logic/world';
 import { DUNGEONS, Settings, SPECIAL_CONDS, SPECIAL_CONDS_KEYS } from '../settings';
@@ -360,6 +360,9 @@ const gameChecks = (worldId: number, settings: Settings, game: Game, logic: Logi
     b.writeUInt16BE(itemGi, 6);
     buffers.push(b);
   }
+  buffers.push(Buffer.alloc(8, 0xff));
+  if (buffers.length % 2 !== 0)
+    buffers.push(Buffer.alloc(8, 0xff));
   return Buffer.concat(buffers);
 };
 
