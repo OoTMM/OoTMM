@@ -18,6 +18,17 @@
     "Jabu-Jabu GS Bottom Lower": "can_collect_distance"
     "Jabu-Jabu GS Bottom Upper": "can_collect_distance"
     "Jabu-Jabu GS Water Switch": "true"
+    "Jabu-Jabu Pot Big Octo Room 1": "event(BIG_OCTO)"
+    "Jabu-Jabu Pot Big Octo Room 2": "event(BIG_OCTO)"
+    "Jabu-Jabu Pot Big Octo Room 3": "event(BIG_OCTO)"
+    "Jabu-Jabu Pot Muscle Block Room 1": "true"
+    "Jabu-Jabu Pot Muscle Block Room 2": "true"
+    "Jabu-Jabu Pot Muscle Block Room 3": "true"
+    "Jabu-Jabu Pot Muscle Block Room 4": "true"
+    "Jabu-Jabu Pot Muscle Block Room 5": "true"
+    "Jabu-Jabu Pot Alcove 1": "true"
+    "Jabu-Jabu Pot Alcove 2": "true"
+    "Jabu-Jabu Pot Alcove 3": "true"
 "Jabu-Jabu Pre-Boss":
   dungeon: JJ
   exits:
