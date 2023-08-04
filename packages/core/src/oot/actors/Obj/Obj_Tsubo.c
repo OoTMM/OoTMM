@@ -3,63 +3,63 @@
 
 static ActorFunc sDraw;
 
-static void ObjTsubo_Aliases(Actor_ObjTsubo* this)
+static void ObjTsubo_Aliases(Xflag* xflag)
 {
-    switch (this->extendedSceneId)
+    switch (xflag->sceneId)
     {
     case SCE_OOT_KAKARIKO_VILLAGE:
     case SCE_OOT_LON_LON_RANCH:
-        if (this->extendedSetupId == 1)
+        if (xflag->setupId == 1)
         {
-            this->extendedSetupId = 0;
-            this->extendedId += 1;
+            xflag->setupId = 0;
+            xflag->id += 1;
         }
         break;
     case SCE_OOT_ZORA_DOMAIN:
-        if (this->extendedSetupId == 2)
+        if (xflag->setupId == 2)
         {
-            this->extendedSetupId = 0;
-            switch (this->extendedId)
+            xflag->setupId = 0;
+            switch (xflag->id)
             {
-            case 1: this->extendedId = 25; break;
-            case 2: this->extendedId = 22; break;
-            case 3: this->extendedId = 24; break;
-            case 4: this->extendedId = 21; break;
-            case 5: this->extendedId = 23; break;
+            case 1: xflag->id = 25; break;
+            case 2: xflag->id = 22; break;
+            case 3: xflag->id = 24; break;
+            case 4: xflag->id = 21; break;
+            case 5: xflag->id = 23; break;
             }
         }
         break;
     case SCE_OOT_ZORA_FOUNTAIN:
-        if (this->extendedSetupId == 1)
-            this->extendedSetupId = 0;
+        if (xflag->setupId == 1)
+            xflag->setupId = 0;
         break;
     case SCE_OOT_DEATH_MOUNTAIN_CRATER:
-        if (this->extendedSetupId == 0)
+        if (xflag->setupId == 0)
         {
-            this->extendedSetupId = 2;
-            this->extendedId -= 2;
+            xflag->setupId = 2;
+            xflag->id -= 2;
         }
         break;
     case SCE_OOT_GORON_CITY:
-        if (this->extendedSetupId == 2)
+        if (xflag->setupId == 2)
         {
-            this->extendedSetupId = 0;
-            switch (this->extendedRoomId)
+            xflag->setupId = 0;
+            switch (xflag->roomId)
             {
-            case 1: this->extendedId += 4; break;
-            case 3: this->extendedId += 33; break;
+            case 1: xflag->id += 4; break;
+            case 3: xflag->id += 33; break;
             }
         }
         break;
     case SCE_OOT_LAIR_GANONDORF:
-        this->extendedSceneId = SCE_OOT_GANON_TOWER;
-        this->extendedRoomId = 8;
-        this->extendedId -= 46;
+        xflag->sceneId = SCE_OOT_GANON_TOWER;
+        xflag->roomId = 8;
+        xflag->id -= 46;
         break;
     case SCE_OOT_GANON_TOWER_COLLAPSING:
-        this->extendedSceneId = SCE_OOT_GANON_TOWER;
-        this->extendedRoomId = 8;
-        this->extendedId -= 15;
+        xflag->sceneId = SCE_OOT_GANON_TOWER;
+        xflag->roomId = 8;
+        xflag->id -= 15;
         break;
     default:
         break;
@@ -74,13 +74,13 @@ void ObjTsubo_InitWrapper(Actor_ObjTsubo* this, GameState_Play* play)
     sDraw = actorAddr(AC_OBJ_TSUBO, 0x80a65fbc);
 
     /* Set the extended properties */
-    this->extendedSceneId = play->sceneId;
-    this->extendedSetupId = g.sceneSetupId;
-    this->extendedRoomId = this->base.room;
-    this->extendedId = g.actorIndex;
+    this->xflag.sceneId = play->sceneId;
+    this->xflag.setupId = g.sceneSetupId;
+    this->xflag.roomId = this->base.room;
+    this->xflag.id = g.actorIndex;
 
     /* Fix the aliases */
-    ObjTsubo_Aliases(this);
+    ObjTsubo_Aliases(&this->xflag);
 
     /* Forward init */
     init = actorAddr(AC_OBJ_TSUBO, 0x80a653a8);
@@ -92,7 +92,7 @@ void ObjTsubo_SpawnShuffledDrop(Actor_ObjTsubo* this, GameState_Play* play)
     u16 var;
     Actor_EnItem00* item;
 
-    if (comboXflagsGet(play->sceneId, g.sceneSetupId, this->extendedRoomId, this->extendedId))
+    if (comboXflagsGet(&this->xflag))
     {
         /* Already spawned */
         var = this->base.variable;
@@ -108,10 +108,10 @@ void ObjTsubo_SpawnShuffledDrop(Actor_ObjTsubo* this, GameState_Play* play)
     item = Item_DropCollectible(play, &this->base.position, 0x0000);
     g.spawnExtended = 0;
 
-    item->extendedSceneId = this->extendedSceneId;
-    item->extendedSetupId = this->extendedSetupId;
-    item->extendedRoomId = this->extendedRoomId;
-    item->extendedId = this->extendedId;
+    item->xflag.sceneId = this->xflag.sceneId;
+    item->xflag.setupId = this->xflag.setupId;
+    item->xflag.roomId = this->xflag.roomId;
+    item->xflag.id = this->xflag.id;
     item->extendedGi = GI_OOT_RUPEE_GREEN;
     item->extendedGiDraw = 0;
 }
@@ -152,7 +152,7 @@ void ObjTsubo_DrawWrapper(Actor_ObjTsubo* this, GameState_Play* play)
     const void* dlistTop;
 
     /* Checks flag and dangeon_keep */
-    if (!comboXflagsGet(play->sceneId, g.sceneSetupId, this->extendedRoomId, this->extendedId))
+    if (!comboXflagsGet(&this->xflag))
     {
         dlistSide = kDrawListMajorSide;
         dlistTop = kDrawListMajorTop;

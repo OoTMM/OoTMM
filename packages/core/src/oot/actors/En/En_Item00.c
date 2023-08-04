@@ -116,9 +116,9 @@ static void EnItem00_ExtendedItemQuery(ComboItemQuery* q, Actor_EnItem00* this)
 {
     bzero(q, sizeof(*q));
     q->ovType = OV_EXTENDED;
-    q->sceneId = this->extendedSceneId;
-    q->roomId = (this->extendedRoomId | ((this->extendedSetupId & 3) << 6));
-    q->id = this->extendedId;
+    q->sceneId = this->xflag.sceneId;
+    q->roomId = (this->xflag.roomId | ((this->xflag.setupId & 3) << 6));
+    q->id = this->xflag.id;
     q->gi = this->extendedGi;
 }
 
@@ -170,7 +170,7 @@ void EnItem00_GiveExtendedOrRupee(GameState_Play* play, Actor_EnItem00* this)
         this->extendedMajor = 0;
     }
     comboAddItemEx(play, &q, major);
-    comboXflagsSet(play->sceneId, g.sceneSetupId, this->extendedRoomId, this->extendedId);
+    comboXflagsSet(&this->xflag);
 }
 
 void EnItem00_PlayExtendedCollectedSound(Actor_EnItem00* this)

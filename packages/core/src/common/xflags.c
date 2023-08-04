@@ -2,24 +2,24 @@
 #include <combo/xflags.h>
 
 #if defined(GAME_OOT)
-u16 comboXflagsBitPosLookup(u16 sceneId, u16 setupId, u16 roomId, u16 id)
+u16 comboXflagsBitPosLookup(const Xflag* xf)
 {
-    return kXflagsTableRooms[kXflagsTableSetups[kXflagsTableScenes[sceneId] + setupId] + roomId] + id;
+    return kXflagsTableRooms[kXflagsTableSetups[kXflagsTableScenes[xf->sceneId] + xf->setupId] + xf->roomId] + xf->id;
 }
 
-int comboXflagsGet(u16 sceneId, u16 setupId, u16 roomId, u16 id)
+int comboXflagsGet(const Xflag* xf)
 {
     u16 bitPos;
 
-    bitPos = comboXflagsBitPosLookup(sceneId, setupId, roomId, id);
+    bitPos = comboXflagsBitPosLookup(xf);
     return !!BITMAP8_GET(gCustomSave.xflags, bitPos);
 }
 
-void comboXflagsSet(u16 sceneId, u16 setupId, u16 roomId, u16 id)
+void comboXflagsSet(const Xflag* xf)
 {
     u16 bitPos;
 
-    bitPos = comboXflagsBitPosLookup(sceneId, setupId, roomId, id);
+    bitPos = comboXflagsBitPosLookup(xf);
     BITMAP8_SET(gCustomSave.xflags, bitPos);
 }
 

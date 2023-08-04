@@ -1,6 +1,7 @@
 #ifndef COMBO_OOT_OBJ_TSUBO_H
 #define COMBO_OOT_OBJ_TSUBO_H
 
+#include <combo/xflags.h>
 #include <combo/common/actor.h>
 
 typedef struct ALIGNED(4)
@@ -9,10 +10,7 @@ typedef struct ALIGNED(4)
     char            unk_13c[0x54];
 
     /* Extended flags */
-    u8              extendedSceneId;
-    u8              extendedSetupId;
-    u8              extendedRoomId;
-    u8              extendedId;
+    Xflag xflag;
 }
 Actor_ObjTsubo;
 

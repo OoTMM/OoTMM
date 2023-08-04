@@ -4,12 +4,21 @@
 #include <combo/types.h>
 #include <combo/xflags_data.h>
 
+typedef struct Xflag
+{
+    u8 sceneId;
+    u8 setupId;
+    u8 roomId;
+    u8 id;
+}
+Xflag;
+
 extern const u16 kXflagsTableScenes[];
 extern const u16 kXflagsTableSetups[];
 extern const u16 kXflagsTableRooms[];
 
-u16  comboXflagsBitPosLookup(u16 sceneId, u16 setupId, u16 roomId, u16 id);
-int  comboXflagsGet(u16 sceneId, u16 setupId, u16 roomId, u16 id);
-void comboXflagsSet(u16 sceneId, u16 setupId, u16 roomId, u16 id);
+u16  comboXflagsBitPosLookup(const Xflag* xf);
+int  comboXflagsGet(const Xflag* xf);
+void comboXflagsSet(const Xflag* xf);
 
 #endif /* COMBO_XFLAGS_H */
