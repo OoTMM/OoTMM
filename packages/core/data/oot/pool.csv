@@ -430,6 +430,34 @@ Dodongo Cavern GS Stairs Vines,                             gs,             NONE
 Dodongo Cavern GS Stairs Top,                               gs,             NONE,                 DODONGO_CAVERN,                 0x12,                       GS_TOKEN
 Dodongo Cavern GS Scarecrow,                                gs,             NONE,                 DODONGO_CAVERN,                 0x11,                       GS_TOKEN
 Dodongo Cavern GS Near Boss,                                gs,             NONE,                 DODONGO_CAVERN,                 0x13,                       GS_TOKEN
+Dodongo Cavern Pot Right Corridor Pot 1,                    pot,            NONE,                 DODONGO_CAVERN,                 0x010c,                     RUPEE_GREEN
+Dodongo Cavern Pot Right Corridor Pot 2,                    pot,            NONE,                 DODONGO_CAVERN,                 0x010d,                     RUPEE_BLUE
+Dodongo Cavern Pot Right Corridor Pot 3,                    pot,            NONE,                 DODONGO_CAVERN,                 0x010f,                     RUPEE_GREEN
+Dodongo Cavern Pot Right Corridor Pot 4,                    pot,            NONE,                 DODONGO_CAVERN,                 0x0110,                     RUPEE_BLUE
+Dodongo Cavern Pot Right Corridor Pot 5,                    pot,            NONE,                 DODONGO_CAVERN,                 0x0111,                     RUPEE_GREEN
+Dodongo Cavern Pot Right Corridor Pot 6,                    pot,            NONE,                 DODONGO_CAVERN,                 0x0112,                     RECOVERY_HEART
+Dodongo Cavern Pot Stairs Pot 1,                            pot,            NONE,                 DODONGO_CAVERN,                 0x0217,                     RECOVERY_HEART
+Dodongo Cavern Pot Stairs Pot 2,                            pot,            NONE,                 DODONGO_CAVERN,                 0x0218,                     RUPEE_RED
+Dodongo Cavern Pot Stairs Pot 3,                            pot,            NONE,                 DODONGO_CAVERN,                 0x0219,                     RUPEE_RED
+Dodongo Cavern Pot Stairs Pot 4,                            pot,            NONE,                 DODONGO_CAVERN,                 0x021a,                     RECOVERY_HEART
+Dodongo Cavern Pot Miniboss 1,                              pot,            NONE,                 DODONGO_CAVERN,                 0x0308,                     RECOVERY_HEART
+Dodongo Cavern Pot Miniboss 2,                              pot,            NONE,                 DODONGO_CAVERN,                 0x0309,                     RECOVERY_HEART
+Dodongo Cavern Pot Miniboss 3,                              pot,            NONE,                 DODONGO_CAVERN,                 0x030a,                     RUPEE_BLUE
+Dodongo Cavern Pot Miniboss 4,                              pot,            NONE,                 DODONGO_CAVERN,                 0x030b,                     RUPEE_BLUE
+Dodongo Cavern Pot Green Roon Pot 1,                        pot,            NONE,                 DODONGO_CAVERN,                 0x040a,                     RUPEE_BLUE
+Dodongo Cavern Pot Green Roon Pot 2,                        pot,            NONE,                 DODONGO_CAVERN,                 0x040b,                     RUPEE_GREEN
+Dodongo Cavern Pot Green Roon Pot 3,                        pot,            NONE,                 DODONGO_CAVERN,                 0x040c,                     RUPEE_BLUE
+Dodongo Cavern Pot Green Roon Pot 4,                        pot,            NONE,                 DODONGO_CAVERN,                 0x040d,                     RECOVERY_HEART
+Dodongo Cavern Pot Skull 1,                                 pot,            NONE,                 DODONGO_CAVERN,                 0x0706,                     BOMB
+Dodongo Cavern Pot Skull 2,                                 pot,            NONE,                 DODONGO_CAVERN,                 0x0707,                     RECOVERY_HEART
+Dodongo Cavern Pot Skull 3,                                 pot,            NONE,                 DODONGO_CAVERN,                 0x0806,                     DEKU_SEEDS_5
+Dodongo Cavern Pot Skull 4,                                 pot,            NONE,                 DODONGO_CAVERN,                 0x0807,                     FLEXIBLE
+Dodongo Cavern Pot Bomb Bag Room 1,                         pot,            NONE,                 DODONGO_CAVERN,                 0x090e,                     RECOVERY_HEART
+Dodongo Cavern Pot Bomb Bag Room 2,                         pot,            NONE,                 DODONGO_CAVERN,                 0x090f,                     RECOVERY_HEART
+Dodongo Cavern Pot Room Before Miniboss 1,                  pot,            NONE,                 DODONGO_CAVERN,                 0x0a06,                     RECOVERY_HEART
+Dodongo Cavern Pot Room Before Miniboss 2,                  pot,            NONE,                 DODONGO_CAVERN,                 0x0a07,                     RUPEE_BLUE
+Dodongo Cavern Pot Room After Miniboss 1,                   pot,            NONE,                 DODONGO_CAVERN,                 0x0c05,                     RECOVERY_HEART
+Dodongo Cavern Pot Room After Miniboss 2,                   pot,            NONE,                 DODONGO_CAVERN,                 0x0c06,                     RUPEE_BLUE
 Dodongo Cavern Boss Chest,                                  chest,          NONE,                 LAIR_KING_DODONGO,              0x00,                       BOMBS_10
 Dodongo Cavern Boss Container,                              collectible,    NONE,                 LAIR_KING_DODONGO,              0x1f,                       HEART_CONTAINER
 Dodongo Cavern Boss,                                        npc,            NONE,                 LAIR_KING_DODONGO,              BLUE_WARP_KING_DODONGO,     STONE_RUBY
@@ -443,6 +471,12 @@ Jabu-Jabu GS Bottom Upper,                                  gs,             NONE
 Jabu-Jabu GS Near Boss,                                     gs,             NONE,                 INSIDE_JABU_JABU,               0x1a,                       GS_TOKEN
 Jabu-Jabu Boss Container,                                   collectible,    NONE,                 LAIR_BARINADE,                  0x1f,                       HEART_CONTAINER
 Jabu-Jabu Boss,                                             npc,            NONE,                 LAIR_BARINADE,                  BLUE_WARP_BARINADE,         STONE_SAPPHIRE
+Jabu-Jabu Boss Pot 1,                                       pot,            NONE,                 LAIR_BARINADE,                  0x0101,                     RECOVERY_HEART
+Jabu-Jabu Boss Pot 2,                                       pot,            NONE,                 LAIR_BARINADE,                  0x0102,                     RECOVERY_HEART
+Jabu-Jabu Boss Pot 3,                                       pot,            NONE,                 LAIR_BARINADE,                  0x0103,                     RECOVERY_HEART
+Jabu-Jabu Boss Pot 4,                                       pot,            NONE,                 LAIR_BARINADE,                  0x0104,                     RECOVERY_HEART
+Jabu-Jabu Boss Pot 5,                                       pot,            NONE,                 LAIR_BARINADE,                  0x0105,                     RECOVERY_HEART
+Jabu-Jabu Boss Pot 6,                                       pot,            NONE,                 LAIR_BARINADE,                  0x0106,                     RECOVERY_HEART
 Forest Temple Tree Small Key,                               chest,          NONE,                 TEMPLE_FOREST,                  0x03,                       SMALL_KEY_FOREST
 Forest Temple Mini-Boss Key,                                chest,          NONE,                 TEMPLE_FOREST,                  0x00,                       SMALL_KEY_FOREST
 Forest Temple Map,                                          chest,          NONE,                 TEMPLE_FOREST,                  0x01,                       MAP_FOREST

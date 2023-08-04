@@ -24,6 +24,12 @@
     "Dodongo Cavern Miniboss 1": "true"
   locations:
     "Dodongo Cavern GS Scarecrow": "scarecrow_hookshot"
+    "Dodongo Cavern Pot Right Corridor Pot 1": "true"
+    "Dodongo Cavern Pot Right Corridor Pot 2": "true"
+    "Dodongo Cavern Pot Right Corridor Pot 3": "true"
+    "Dodongo Cavern Pot Right Corridor Pot 4": "true"
+    "Dodongo Cavern Pot Right Corridor Pot 5": "true"
+    "Dodongo Cavern Pot Right Corridor Pot 6": "true"
 "Dodongo Cavern Side Room":
   dungeon: DC
   exits:
@@ -35,12 +41,22 @@
   exits:
     "Dodongo Cavern Right Corridor": "soul_lizalfos_dinalfos && (can_use_sticks || has_weapon || can_use_slingshot)"
     "Dodongo Cavern Green Room": "soul_lizalfos_dinalfos && (can_use_sticks || has_weapon || can_use_slingshot)"
+  locations:
+    "Dodongo Cavern Pot Miniboss 1": "true"
+    "Dodongo Cavern Pot Miniboss 2": "true"
+    "Dodongo Cavern Pot Miniboss 3": "true"
+    "Dodongo Cavern Pot Miniboss 4": "true"
 "Dodongo Cavern Green Room":
   dungeon: DC
   exits:
     "Dodongo Cavern Miniboss 1": "true"
     "Dodongo Cavern Green Side Room": "true"
     "Dodongo Cavern Main Ledge": "has_fire_or_sticks"
+  locations:
+    "Dodongo Cavern Pot Green Roon Pot 1": "true"
+    "Dodongo Cavern Pot Green Roon Pot 2": "true"
+    "Dodongo Cavern Pot Green Roon Pot 3": "true"
+    "Dodongo Cavern Pot Green Roon Pot 4": "true"
 "Dodongo Cavern Green Side Room":
   dungeon: DC
   exits:
@@ -68,6 +84,10 @@
   locations:
     "Dodongo Cavern GS Stairs Vines": "true"
     "Dodongo Cavern GS Stairs Top": "can_collect_distance && event(DC_SHORTCUT)"
+    "Dodongo Cavern Pot Stairs Pot 1": "true"
+    "Dodongo Cavern Pot Stairs Pot 2": "true"
+    "Dodongo Cavern Pot Stairs Pot 3": "true"
+    "Dodongo Cavern Pot Stairs Pot 4": "true"
 "Dodongo Cavern Compass Room":
   dungeon: DC
   exits:
@@ -83,6 +103,8 @@
     "Dodongo Cavern Bomb Bag Side Room": "has_explosives_or_hammer || has_blue_fire_arrows_mudwall"
   locations:
     "Dodongo Cavern Bomb Bag Side Chest": "true"
+    "Dodongo Cavern Pot Room Before Miniboss 1": "true"
+    "Dodongo Cavern Pot Room Before Miniboss 2": "true"
 "Dodongo Cavern Bomb Bag Side Room":
   dungeon: DC
   exits:
@@ -103,6 +125,10 @@
     "Dodongo Cavern Main Bridge": "true"
   locations:
     "Dodongo Cavern Bomb Bag Chest": "true"
+    "Dodongo Cavern Pot Bomb Bag Room 1": "true"
+    "Dodongo Cavern Pot Bomb Bag Room 2": "true"
+    "Dodongo Cavern Pot Room After Miniboss 1": "true"
+    "Dodongo Cavern Pot Room After Miniboss 2": "true"
 "Dodongo Cavern Main Bridge":
   dungeon: DC
   exits:
@@ -119,3 +145,7 @@
     "Dodongo Cavern Boss": "true"
   locations:
     "Dodongo Cavern GS Near Boss": "true"
+    "Dodongo Cavern Pot Skull 1": "true"
+    "Dodongo Cavern Pot Skull 2": "true"
+    "Dodongo Cavern Pot Skull 3": "true"
+    "Dodongo Cavern Pot Skull 4": "true"

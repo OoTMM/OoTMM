@@ -44,6 +44,16 @@ const ITEM00_DROPS = [
   'BOMBS_5',
 ];
 
+const FLYING_POT_DROPS = [
+  'RECOVERY_HEART',
+  'BOMBS_5',
+  'DEKU_SEEDS_5',
+  'NUTS_5',
+  'DEKU_SEEDS_5',
+  'RUPEE_PURPLE',
+  'TUNIC_GORON',
+];
+
 type RawRoom = {
   sceneId: number;
   roomId: number;
@@ -172,7 +182,6 @@ function getRawRooms(rom: Buffer, mq = false) {
   const rooms: RawRoom[] = [];
   for (let sceneId = 0; sceneId < SCENE_TABLE_SIZE; sceneId++) {
     const sceneVrom = rom.readUInt32BE((mq ? SCENE_TABLE_ADDR_MQ : SCENE_TABLE_ADDR) + sceneId * 0x14);
-    console.log(sceneVrom.toString(16));
     const roomsHeaderVrom = findHeaderOffset(rom, sceneVrom, 0x04);
     if (roomsHeaderVrom === null)
       continue;
@@ -226,9 +235,8 @@ async function codegen(roomActors: RoomActors[], addrTable: AddressingTable) {
 
 function outputPotsPool(roomActors: RoomActors[]) {
   for (const room of roomActors) {
-    console.log(`===== SCENE ${room.sceneId.toString(16)} SETUP ${room.setupId} ROOM ${room.roomId} =====`);
     for (const actor of room.actors) {
-      if (actor.typeId === 0x111) {
+      if (actor.typeId === POT_ACTOR_TYPE) {
         const item00 = (actor.params >> 0) & 0xff;
         let item: string;
         if (item00 >= 0x1a) {
@@ -239,8 +247,19 @@ function outputPotsPool(roomActors: RoomActors[]) {
         const key = ((room.setupId & 0x3) << 14) | (room.roomId << 8) | actor.actorId;
         console.log(`Scene ${room.sceneId.toString(16)} Setup ${room.setupId} Room ${room.roomId} Pot ${actor.actorId}, pot,            NONE,                 SCENE_${room.sceneId.toString(16)}, 0x${key.toString(16)}, ${item}`);
       }
+
+      if (actor.typeId === FLYING_POT_ACTOR_TYPE) {
+        const itemId = (actor.params >> 8) & 0xff;
+        let item: string;
+        if (itemId >= 0x07) {
+          item = 'NOTHING';
+        } else {
+          item = FLYING_POT_DROPS[itemId];
+        }
+        const key = ((room.setupId & 0x3) << 14) | (room.roomId << 8) | actor.actorId;
+        console.log(`Scene ${room.sceneId.toString(16)} Setup ${room.setupId} Room ${room.roomId} Flying Pot ${actor.actorId}, pot,            NONE,                 SCENE_${room.sceneId.toString(16)}, 0x${key.toString(16)}, ${item}`);
+      }
     }
-    console.log('');
   }
 }
 
@@ -273,8 +292,9 @@ async function run() {
 
   /* Codegen */
   await codegen(mergedList, addrTable);
-  //outputPotsPool(actorRooms);
-  console.log(mqRooms);
+
+  /* Output */
+  outputPotsPool(mqRooms);
 }
 
 run().catch(e => {
