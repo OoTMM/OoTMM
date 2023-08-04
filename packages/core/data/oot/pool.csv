@@ -506,6 +506,25 @@ Forest Temple GS Main,                                      gs,             NONE
 Forest Temple GS Garden West,                               gs,             NONE,                 TEMPLE_FOREST,                  0x22,                       GS_TOKEN
 Forest Temple GS Garden East,                               gs,             NONE,                 TEMPLE_FOREST,                  0x20,                       GS_TOKEN
 Forest Temple GS Antichamber,                               gs,             NONE,                 TEMPLE_FOREST,                  0x24,                       GS_TOKEN
+Forest Temple Pot Main Room 1,                              pot,            NONE,                 TEMPLE_FOREST,                  0x020b,                     MAGIC_JAR_SMALL
+Forest Temple Pot Main Room 2,                              pot,            NONE,                 TEMPLE_FOREST,                  0x020c,                     MAGIC_JAR_SMALL
+Forest Temple Pot Main Room 3,                              pot,            NONE,                 TEMPLE_FOREST,                  0x020d,                     RECOVERY_HEART
+Forest Temple Pot Main Room 4,                              pot,            NONE,                 TEMPLE_FOREST,                  0x020e,                     RECOVERY_HEART
+Forest Temple Pot Main Room 5,                              pot,            NONE,                 TEMPLE_FOREST,                  0x020f,                     ARROWS_10
+Forest Temple Pot Main Room 6,                              pot,            NONE,                 TEMPLE_FOREST,                  0x0210,                     ARROWS_10
+Forest Temple Pot Miniboss Lower 1,                         pot,            NONE,                 TEMPLE_FOREST,                  0x0605,                     RECOVERY_HEART
+Forest Temple Pot Miniboss Lower 2,                         pot,            NONE,                 TEMPLE_FOREST,                  0x0606,                     FLEXIBLE
+Forest Temple Pot Miniboss Upper 1,                         pot,            NONE,                 TEMPLE_FOREST,                  0x0607,                     RECOVERY_HEART
+Forest Temple Pot Miniboss Upper 2,                         pot,            NONE,                 TEMPLE_FOREST,                  0x0608,                     RECOVERY_HEART
+Forest Temple Pot Miniboss Upper 3,                         pot,            NONE,                 TEMPLE_FOREST,                  0x0609,                     RECOVERY_HEART
+Forest Temple Pot Miniboss Upper 4,                         pot,            NONE,                 TEMPLE_FOREST,                  0x060a,                     RECOVERY_HEART
+Forest Temple Pot Blue Poe 1,                               pot,            NONE,                 TEMPLE_FOREST,                  0x0d05,                     RECOVERY_HEART
+Forest Temple Pot Blue Poe 2,                               pot,            NONE,                 TEMPLE_FOREST,                  0x0d06,                     ARROWS_10
+Forest Temple Pot Blue Poe 3,                               pot,            NONE,                 TEMPLE_FOREST,                  0x0d07,                     ARROWS_10
+Forest Temple Pot Rotating Room 1,                          pot,            NONE,                 TEMPLE_FOREST,                  0x0e05,                     RECOVERY_HEART
+Forest Temple Pot Rotating Room 2,                          pot,            NONE,                 TEMPLE_FOREST,                  0x0e06,                     ARROWS_10
+Forest Temple Pot Green Poe Pot 1,                          pot,            NONE,                 TEMPLE_FOREST,                  0x1006,                     RECOVERY_HEART
+Forest Temple Pot Green Poe Pot 2,                          pot,            NONE,                 TEMPLE_FOREST,                  0x1007,                     ARROWS_10
 Forest Temple Boss Container,                               collectible,    NONE,                 LAIR_PHANTOM_GANON,             0x1f,                       HEART_CONTAINER
 Forest Temple Boss,                                         npc,            NONE,                 LAIR_PHANTOM_GANON,             BLUE_WARP_PHANTOM_GANON,    MEDALLION_FOREST
 Fire Temple Jail 1 Chest,                                   chest,          NONE,                 TEMPLE_FIRE,                    0x01,                       SMALL_KEY_FIRE
