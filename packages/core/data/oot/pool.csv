@@ -906,6 +906,22 @@ Ganon Castle SR Forest Front,                               sr,             NONE
 Ganon Castle SR Forest Back Right,                          sr,             NONE,                 INSIDE_GANON_CASTLE,            0x62,                       RUPEE_SILVER_GANON_FOREST
 Ganon Castle SR Forest Back Middle,                         sr,             NONE,                 INSIDE_GANON_CASTLE,            0x63,                       RUPEE_SILVER_GANON_FOREST
 Ganon Castle SR Forest Center Left,                         sr,             NONE,                 INSIDE_GANON_CASTLE,            0x64,                       RUPEE_SILVER_GANON_FOREST
+Ganon Castle Pot Water,                                     pot,            NONE,                 INSIDE_GANON_CASTLE,            0x0303,                     FLEXIBLE
+Ganon Castle Pot Water End 1,                               pot,            NONE,                 INSIDE_GANON_CASTLE,            0x0404,                     RECOVERY_HEART
+Ganon Castle Pot Water End 2,                               pot,            NONE,                 INSIDE_GANON_CASTLE,            0x0405,                     MAGIC_JAR_SMALL
+Ganon Castle Pot Forest End 1,                              pot,            NONE,                 INSIDE_GANON_CASTLE,            0x0704,                     RECOVERY_HEART
+Ganon Castle Pot Forest End 2,                              pot,            NONE,                 INSIDE_GANON_CASTLE,            0x0705,                     MAGIC_JAR_SMALL
+Ganon Castle Pot Light,                                     pot,            NONE,                 INSIDE_GANON_CASTLE,            0x080a,                     NOTHING
+Ganon Castle Pot Light End 1,                               pot,            NONE,                 INSIDE_GANON_CASTLE,            0x0b04,                     RECOVERY_HEART
+Ganon Castle Pot Light End 2,                               pot,            NONE,                 INSIDE_GANON_CASTLE,            0x0b05,                     MAGIC_JAR_LARGE
+Ganon Castle Pot Shadow 1,                                  pot,            NONE,                 INSIDE_GANON_CASTLE,            0x0c0e,                     ARROWS_10
+Ganon Castle Pot Shadow 2,                                  pot,            NONE,                 INSIDE_GANON_CASTLE,            0x0c0f,                     MAGIC_JAR_LARGE
+Ganon Castle Pot Shadow End 1,                              pot,            NONE,                 INSIDE_GANON_CASTLE,            0x0d04,                     ARROWS_10
+Ganon Castle Pot Shadow End 2,                              pot,            NONE,                 INSIDE_GANON_CASTLE,            0x0d05,                     MAGIC_JAR_LARGE
+Ganon Castle Pot Fire End 1,                                pot,            NONE,                 INSIDE_GANON_CASTLE,            0x0f04,                     RECOVERY_HEART
+Ganon Castle Pot Fire End 2,                                pot,            NONE,                 INSIDE_GANON_CASTLE,            0x0f05,                     MAGIC_JAR_SMALL
+Ganon Castle Pot Spirit End 1,                              pot,            NONE,                 INSIDE_GANON_CASTLE,            0x1304,                     NUTS_5
+Ganon Castle Pot Spirit End 2,                              pot,            NONE,                 INSIDE_GANON_CASTLE,            0x1305,                     MAGIC_JAR_SMALL
 Ganon Tower Boss Pot 01,                                    pot,            NONE,                 GANON_TOWER,                    0x002f,                     MAGIC_JAR_LARGE
 Ganon Tower Boss Pot 02,                                    pot,            NONE,                 GANON_TOWER,                    0x0030,                     RECOVERY_HEART
 Ganon Tower Boss Pot 03,                                    pot,            NONE,                 GANON_TOWER,                    0x0031,                     ARROWS_10
