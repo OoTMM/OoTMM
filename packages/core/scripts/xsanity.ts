@@ -5,7 +5,8 @@ import { decompressGame } from '../lib/combo/decompress';
 
 const POT_ACTOR_TYPE = 0x111;
 
-const SCENE_TABLE_ADDR = 0xb71440;
+const SCENE_TABLE_ADDR =    0xb71440;
+const SCENE_TABLE_ADDR_MQ = 0xBA0BB0;
 const SCENE_TABLE_SIZE = 101;
 
 const ITEM00_DROPS = [
@@ -80,6 +81,19 @@ function sortRoomActors(roomActors: RoomActors[]) {
   });
 }
 
+function mergeRoomActors(roomActors: RoomActors[][]): RoomActors[] {
+  /* For every unique room, get the longest actor list */
+  const merged = new Map<string, RoomActors>();
+  for (const roomActor of roomActors.flat()) {
+    const key = `${roomActor.sceneId}-${roomActor.setupId}-${roomActor.roomId}`;
+    const existing = merged.get(key);
+    if (existing === undefined || existing.actors.length < roomActor.actors.length) {
+      merged.set(key, roomActor);
+    }
+  }
+  return sortRoomActors(Array.from(merged.values()));
+}
+
 function buildAddressingTable(roomActors: RoomActors[]): AddressingTable {
   let sceneId = -1;
   let setupId = -1;
@@ -152,10 +166,11 @@ function parseRoomActors(rom: Buffer, raw: RawRoom): RoomActors {
   return { sceneId: raw.sceneId, setupId: raw.setupId, roomId: raw.roomId, actors };
 }
 
-function getRawRooms(rom: Buffer) {
+function getRawRooms(rom: Buffer, mq = false) {
   const rooms: RawRoom[] = [];
   for (let sceneId = 0; sceneId < SCENE_TABLE_SIZE; sceneId++) {
-    const sceneVrom = rom.readUInt32BE(SCENE_TABLE_ADDR + sceneId * 0x14);
+    const sceneVrom = rom.readUInt32BE((mq ? SCENE_TABLE_ADDR_MQ : SCENE_TABLE_ADDR) + sceneId * 0x14);
+    console.log(sceneVrom.toString(16));
     const roomsHeaderVrom = findHeaderOffset(rom, sceneVrom, 0x04);
     if (roomsHeaderVrom === null)
       continue;
@@ -227,15 +242,37 @@ function outputPotsPool(roomActors: RoomActors[]) {
   }
 }
 
-async function run() {
-  const ootRom = await fs.readFile(__dirname + '/../../../roms/oot.z64');
-  const ootDecompressed = await decompressGame('oot', ootRom);
-  const { rom } = ootDecompressed;
-  const rawRooms = getRawRooms(rom);
+function getGameRoomActor(rom: Buffer, mq: boolean) {
+  const rawRooms = getRawRooms(rom, mq);
   const actorRooms = sortRoomActors(rawRooms.map(raw => parseRoomActors(rom, raw)));
-  const addrTable = buildAddressingTable(actorRooms);
-  await codegen(actorRooms, addrTable);
-  outputPotsPool(actorRooms);
+  return actorRooms;
+}
+
+async function run() {
+  /* Get OoT ROM */
+  const ootRomCompressed = await fs.readFile(__dirname + '/../../../roms/oot.z64');
+  const ootDecompressed = await decompressGame('oot', ootRomCompressed);
+  const ootRom = ootDecompressed.rom;
+
+  /* Get MQ ROM */
+  const mqRom = await fs.readFile(__dirname + '/../../../roms/mq.z64');
+
+  /* Get OoT Rooms */
+  const ootRooms = getGameRoomActor(ootRom, false);
+
+  /* Get MQ Rooms */
+  const mqRooms = getGameRoomActor(mqRom, true);
+
+  /* Get the merged list */
+  const mergedList = mergeRoomActors([ootRooms, mqRooms]);
+
+  /* Build the addressing table, suitable for both OoT and MQ */
+  const addrTable = buildAddressingTable(mergedList);
+
+  /* Codegen */
+  await codegen(mergedList, addrTable);
+  //outputPotsPool(actorRooms);
+  console.log(mqRooms);
 }
 
 run().catch(e => {
