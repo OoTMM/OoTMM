@@ -252,8 +252,8 @@ class CosmeticsPass {
     const colorOotTunicZora = this.colorArg(cosmetics.ootTunicZora, 'zorablue', () => 'zorablue');
     const colorMmTunicHuman = this.colorArg(cosmetics.mmTunicHuman, 'kokirigreen', () => colorOotTunicKokiri);
     const colorMmTunicDeku = this.colorArg(cosmetics.mmTunicDeku, 'kokirigreen', () => colorMmTunicHuman);
-    const colorMmTunicGoron = this.colorArg(cosmetics.mmTunicGoron, 'goronred', () => colorMmTunicHuman);
-    const colorMmTunicZora = this.colorArg(cosmetics.mmTunicZora, 'zorablue', () => colorMmTunicHuman);
+    const colorMmTunicGoron = this.colorArg(cosmetics.mmTunicGoron, 'kokirigreen', () => colorMmTunicHuman);
+    const colorMmTunicZora = this.colorArg(cosmetics.mmTunicZora, 'kokirigreen', () => colorMmTunicHuman);
     const colorMmTunicFierceDeity = this.colorArg(cosmetics.mmTunicFierceDeity, 'white', () => 'white');
 
     /* OoT tunics */
