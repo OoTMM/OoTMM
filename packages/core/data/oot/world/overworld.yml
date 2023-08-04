@@ -39,6 +39,7 @@
     "Kokiri Forest": "true"
   locations:
     "Kokiri Forest Cow": "is_adult && event(MALON_COW) && can_play_epona"
+    "Link's House Pot": "true"
 "Kokiri Forest":
   region: KOKIRI_FOREST
   exits:
@@ -108,10 +109,16 @@
   region: ENTRANCE
   exits:
     "Kokiri Forest": "true"
+  locations:
+    "Twins House Pot 1": "true"
+    "Twins House Pot 2": "true"
 "Know It All House":
   region: ENTRANCE
   exits:
     "Kokiri Forest": "true"
+  locations:
+    "Know It All House Pot 1": "true"
+    "Know It All House Pot 2": "true"
 "Kokiri Forest Storms Grotto":
   region: ENTRANCE
   exits:
@@ -231,6 +238,8 @@
   locations:
     "Hyrule Field Grotto Near Gerudo GS": "can_collect_distance && has_fire"
     "Hyrule Field Cow": "has_fire && can_play_epona"
+    "Hyrule Field Cow Grotto Pot 1": "has_fire"
+    "Hyrule Field Cow Grotto Pot 2": "has_fire"
   gossip:
     "Hyrule Field Gossip Near Gerudo Valley": "has_fire"
 "Hyrule Field Grotto Near Kak":
@@ -321,6 +330,61 @@
   locations:
     "Market Pot House Big Poes": "is_adult && event(BIG_POE)"
     "Market Pot House GS": "is_child"
+    "Market Pot House Child Pot Ground 1": "is_child"
+    "Market Pot House Child Pot Ground 2": "is_child"
+    "Market Pot House Child Pot Ground 3": "is_child"
+    "Market Pot House Child Pot Ground 4": "is_child"
+    "Market Pot House Child Pot Ground 5": "is_child"
+    "Market Pot House Child Pot Ground 6": "is_child"
+    "Market Pot House Child Pot Ground 7": "is_child"
+    "Market Pot House Child Pot Ground 8": "is_child"
+    "Market Pot House Child Pot Ground 9": "is_child"
+    "Market Pot House Child Pot Ground 10": "is_child"
+    "Market Pot House Child Pot Ground 11": "is_child"
+    "Market Pot House Child Pot Ground 12": "is_child"
+    "Market Pot House Child Pot Ground 13": "is_child"
+    "Market Pot House Child Pot Ground 14": "is_child"
+    "Market Pot House Child Pot Ground 15": "is_child"
+    "Market Pot House Child Pot Ground 16": "is_child"
+    "Market Pot House Child Pot Ground 17": "is_child"
+    "Market Pot House Child Pot Ground 18": "is_child"
+    "Market Pot House Child Pot Ground 19": "is_child"
+    "Market Pot House Child Pot Ground 20": "is_child"
+    "Market Pot House Child Pot Ground 21": "is_child"
+    "Market Pot House Child Pot Ground 22": "is_child"
+    "Market Pot House Child Pot Ground 23": "is_child"
+    "Market Pot House Child Pot Ground 24": "is_child"
+    "Market Pot House Child Pot Ground 25": "is_child"
+    "Market Pot House Child Pot Ground 26": "is_child"
+    "Market Pot House Child Pot Ground 27": "is_child"
+    "Market Pot House Child Pot Ground 28": "is_child"
+    "Market Pot House Child Pot Ground 29": "is_child"
+    "Market Pot House Child Pot Ground 30": "is_child"
+    "Market Pot House Child Pot Ground 31": "is_child"
+    "Market Pot House Child Pot Ground 32": "is_child"
+    "Market Pot House Child Pot Ground 33": "is_child"
+    "Market Pot House Child Pot Ground 34": "is_child"
+    "Market Pot House Child Pot Ground 35": "is_child"
+    "Market Pot House Child Pot Ground 36": "is_child"
+    "Market Pot House Child Pot Ground 37": "is_child"
+    "Market Pot House Child Pot Ground 38": "is_child"
+    "Market Pot House Child Pot Ground 39": "is_child"
+    "Market Pot House Child Pot Ground 40": "is_child"
+    "Market Pot House Child Pot Ground 41": "is_child"
+    "Market Pot House Child Pot Ground 42": "is_child"
+    "Market Pot House Child Pot Above 1": "is_child"
+    "Market Pot House Child Pot Above 2": "is_child"
+    "Market Pot House Adult Pot 1": "is_adult"
+    "Market Pot House Adult Pot 2": "is_adult"
+    "Market Pot House Adult Pot 3": "is_adult"
+    "Market Pot House Adult Pot 4": "is_adult"
+    "Market Pot House Adult Pot 5": "is_adult"
+    "Market Pot House Adult Pot 6": "is_adult"
+    "Market Pot House Adult Pot 7": "is_adult"
+    "Market Pot House Adult Pot 8": "is_adult"
+    "Market Pot House Adult Pot 9": "is_adult"
+    "Market Pot House Adult Pot 10": "is_adult"
+    "Market Pot House Adult Pot 11": "is_adult"
 "Back Alley":
   region: MARKET
   exits:
@@ -338,6 +402,10 @@
   region: ENTRANCE
   exits:
     "Back Alley": "true"
+  locations:
+    "Market Back Alley East House Pot 1": "true"
+    "Market Back Alley East House Pot 2": "true"
+    "Market Back Alley East House Pot 3": "true"
 "Bombchu Bowling":
   region: ENTRANCE
   exits:
@@ -389,6 +457,13 @@
     "Lon Lon Ranch GS House": "is_child && can_boomerang && gs_night"
     "Lon Lon Ranch GS Rain Shed": "is_child && gs_night"
     "Lon Lon Ranch GS Back Wall": "is_child && can_boomerang && gs_night"
+    "Lon Lon Ranch Pot 1": "is_child"
+    "Lon Lon Ranch Pot 2": "is_child"
+    "Lon Lon Ranch Pot 3": "is_child"
+    "Lon Lon Ranch Pot 4": "is_child"
+    "Lon Lon Ranch Pot 5": "is_child"
+    "Lon Lon Ranch Pot 6": "is_child"
+    "Lon Lon Ranch Pot 7": "is_child"
 "Lon Lon Ranch Stables":
   region: ENTRANCE
   exits:
@@ -410,6 +485,9 @@
     "Lon Lon Ranch": "true"
   locations:
     "Lon Lon Ranch Talon Bottle": "is_child && woke_talon_child && can_use_wallet(1) && is_day"
+    "Lon Lon Ranch Talon House Pot 1": "true"
+    "Lon Lon Ranch Talon House Pot 2": "true"
+    "Lon Lon Ranch Talon House Pot 3": "true"
 "Lon Lon Ranch Grotto":
   region: ENTRANCE
   exits:
@@ -437,6 +515,9 @@
   locations:
     "Malon Egg": "event(MALON)"
     "Hyrule Castle GS Tree": "can_damage_skull"
+    # These pots fail to load
+    #"Hyrule Castle Pot 1": "true"
+    #"Hyrule Castle Pot 2": "true"
   gossip:
     "Hyrule Castle Gossip After Climb": "true"
     "Hyrule Castle Gossip Before Moat": "true"
@@ -478,6 +559,10 @@
     BUGS: "has_explosives_or_hammer && has_bottle"
   locations:
     "Hyrule Castle GS Grotto": "has_explosives_or_hammer && can_collect_distance"
+    "Hyrule Castle Grotto Pot 1": "true"
+    "Hyrule Castle Grotto Pot 2": "true"
+    "Hyrule Castle Grotto Pot 3": "true"
+    "Hyrule Castle Grotto Pot 4": "true"
   gossip:
     "Hyrule Castle Gossip Grotto": "has_explosives_or_hammer"
 "Ganon Castle Exterior":
@@ -673,6 +758,17 @@
     "Kakariko GS House of Skulltula": "gs_night && is_child"
     "Kakariko GS Bazaar": "gs_night && is_child"
     "Kakariko GS Ladder": "gs_night && is_child && (can_use_slingshot || has_bombchu)"
+    "Kakariko Pot 01": "is_child"
+    "Kakariko Pot 02": "is_child"
+    "Kakariko Pot 03": "is_child"
+    "Kakariko Pot 04": "is_child"
+    "Kakariko Pot 05": "is_child"
+    "Kakariko Pot 06": "is_child"
+    "Kakariko Pot 07": "is_child"
+    "Kakariko Pot 08": "is_child"
+    "Kakariko Pot 09": "is_child"
+    "Kakariko Pot 10": "is_child"
+    "Kakariko Pot 11": "is_child"
 "Kakariko Rooftop":
   region: KAKARIKO
   exits:
@@ -860,6 +956,12 @@
   locations:
     "Graveyard Dampe Tomb Reward 1": "true"
     "Graveyard Dampe Tomb Reward 2": "is_adult" #It's very hard to finish this race sub-1 as kid.
+    "Graveyard Dampe Tomb Pot 1": "true"
+    "Graveyard Dampe Tomb Pot 2": "true"
+    "Graveyard Dampe Tomb Pot 3": "true"
+    "Graveyard Dampe Tomb Pot 4": "true"
+    "Graveyard Dampe Tomb Pot 5": "true"
+    "Graveyard Dampe Tomb Pot 6": "true"
 "Dampe House":
   region: ENTRANCE
   exits:
@@ -964,6 +1066,12 @@
     "Goron City Medigoron Giant Knife": "is_adult && (has_bombflowers || can_hammer) && can_use_wallet(2)"
     "Goron City GS Platform": "is_adult"
     "Goron City GS Maze": "is_child && has_explosives_or_hammer"
+    "Goron City Pot Stairs 1": "true"
+    "Goron City Pot Stairs 2": "true"
+    "Goron City Pot Stairs 3": "true"
+    "Goron City Pot Stairs 4": "true"
+    "Goron City Pot Stairs 5": "true"
+    "Goron City Pot Medigoron Room": "has_bombflowers || can_hammer"
   gossip:
     "Goron City Gossip Boulder Maze": "has_explosives_or_hammer || can_lift_silver"
     "Goron City Gossip Near Medigoron": "has_bombflowers || can_hammer"
@@ -978,6 +1086,9 @@
     RUPEES: "is_adult"
   locations:
     "Darunia": "is_child && can_play(SONG_SARIA)"
+    "Goron City Pot Darunia Room 1": "true"
+    "Goron City Pot Darunia Room 2": "true"
+    "Goron City Pot Darunia Room 3": "true"
 "Goron Shop":
   region: ENTRANCE
   exits:
@@ -1088,6 +1199,11 @@
     "Zora Domain Tunic": "is_adult && has_blue_fire"
     "Zora Domain Eyeball Frog": "has_blue_fire && adult_trade(PRESCRIPTION)"
     "Zora Domain GS Waterfall": "is_adult && gs_night && (has_ranged_weapon_adult || can_boomerang || has_magic)"
+    "Zora Domain Pot 1": "true"
+    "Zora Domain Pot 2": "true"
+    "Zora Domain Pot 3": "true"
+    "Zora Domain Pot 4": "true"
+    "Zora Domain Pot 5": "true"
   gossip:
     "Zora Domain Gossip": "true"
 "Zora Domain Back":
@@ -1141,6 +1257,9 @@
     "Lake Hylia GS Island": "is_child && gs_night && can_damage_skull"
     "Lake Hylia GS Soil": "gs_soil && can_damage_skull"
     "Lake Hylia GS Big Tree": "is_adult && gs_night && can_longshot"
+    # These pots do exist in the vanilla game but they fail to load
+    #"Lake Hylia Pot 1": "is_child"
+    #"Lake Hylia Pot 2": "is_child"
   gossip:
     "Lake Hylia Gossip Near River": "true"
     "Lake Hylia Gossip Southeast Lake": "true"
@@ -1183,6 +1302,13 @@
     "Zora Fountain GS Wall": "is_child && gs_night && can_boomerang"
     "Zora Fountain GS Tree": "is_child && can_damage_skull"
     "Zora Fountain GS Upper": "is_adult && gs_night && has_explosives_or_hammer && can_collect_distance && can_lift_silver"
+    "Zora Fountain Child Pot 1": "is_child"
+    "Zora Fountain Child Pot 2": "is_child"
+    "Zora Fountain Child Pot 3": "is_child"
+    "Zora Fountain Child Pot 4": "is_child"
+    "Zora Fountain Adult Pot 1": "is_adult && can_lift_silver && has_explosives_or_hammer"
+    "Zora Fountain Adult Pot 2": "is_adult && can_lift_silver && has_explosives_or_hammer"
+    "Zora Fountain Adult Pot 3": "is_adult && can_lift_silver && has_explosives_or_hammer"
   gossip:
     "Zora Fountain Gossip Northwest": "true"
     "Zora Fountain Gossip Near Fairy": "true"
@@ -1244,6 +1370,11 @@
     "Fairy Fountain Double Magic": "can_hammer"
   events:
     RED_BOULDER_BROKEN: "is_adult && can_hammer"
+  locations:
+    "Death Mountain Crater Pot 1": "true"
+    "Death Mountain Crater Pot 2": "true"
+    "Death Mountain Crater Pot 3": "true"
+    "Death Mountain Crater Pot 4": "true"
 "Death Mountain Crater Warp":
   region: DEATH_MOUNTAIN_CRATER
   exits:
@@ -1446,6 +1577,10 @@
   locations:
     "Haunted Wasteland Chest": "has_fire"
     "Haunted Wasteland GS": "can_collect_distance"
+    "Haunted Wasteland Pot 1": "true"
+    "Haunted Wasteland Pot 2": "true"
+    "Haunted Wasteland Pot 3": "true"
+    "Haunted Wasteland Pot 4": "true"
 "Haunted Wasteland End":
   region: HAUNTED_WASTELAND
   exits:

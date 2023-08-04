@@ -1,38 +1,10 @@
-import fs from 'fs/promises';
 import path from 'path';
 import { DATA_ENTRANCES, DATA_GI, DATA_NPC, DATA_SCENES } from './data';
 import { Monitor } from './monitor';
-
-import { fileExists } from './util';
 import { PATCH_GROUP_VALUES } from './patch-build/group';
 import { CONFVARS_VALUES } from './confvars';
 import { PRICE_RANGES } from './logic/price';
-
-export class CodeGen {
-  private defines: string[] = [];
-
-  constructor(private filename: string, private guard: string) {
-  }
-
-  define(k: string, v: number) {
-    this.defines.push(`#define ${k} 0x${v.toString(16)}`);
-  }
-
-  async emit() {
-    if (!process.env.ROLLUP) {
-      const dir = path.dirname(this.filename);
-      await fs.mkdir(dir, { recursive: true });
-      const buf = ['#ifndef ' + this.guard, '#define ' + this.guard, '', ...this.defines, '', '#endif', ''].join("\n");
-      let previousBuf = undefined;
-      if (await fileExists(this.filename)) {
-        previousBuf = await fs.readFile(this.filename, 'utf8');
-      }
-      if (previousBuf !== buf) {
-        await fs.writeFile(this.filename, buf);
-      }
-    }
-  }
-};
+import { CodeGen } from './util/codegen';
 
 const codegenFile = async (data: {[k: string]: number}, prefix: string, filename: string, guard: string) => {
   if (!process.env.ROLLUP) {

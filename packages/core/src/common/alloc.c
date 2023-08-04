@@ -4,8 +4,8 @@
 # define HEAP_BASE 0x80700000
 # define HEAP_SIZE 0x100000
 #else
-# define HEAP_BASE 0x80730000
-# define HEAP_SIZE 0x10000
+# define HEAP_BASE 0x80720000
+# define HEAP_SIZE 0x30000
 #endif
 
 typedef struct

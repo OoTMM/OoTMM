@@ -6,7 +6,7 @@ import { Game } from "../config";
 import { WorldCheck } from '../logic/world';
 import { DUNGEONS, Settings, SPECIAL_CONDS, SPECIAL_CONDS_KEYS } from '../settings';
 import { HintGossip, WorldHints } from '../logic/hints';
-import { countMapAdd, gameId, toU16Buffer, toU32Buffer, toU8Buffer } from '../util';
+import { countMapAdd, gameId, padBuffer16, toU16Buffer, toU32Buffer, toU8Buffer } from '../util';
 import { Patchfile } from './patchfile';
 import { LOCATIONS_ZELDA, makeLocation, makePlayerLocations } from '../logic/locations';
 import { CONFVARS_VALUES, Confvar } from '../confvars';
@@ -308,25 +308,26 @@ function checkKey(check: WorldCheck): number {
   case 'sr':
     typeId = 0x09;
     break;
+  case 'pot':
+    typeId = 0x0a;
+    break;
   }
 
   /* Extract the scene ID */
-  let sceneId = DATA_SCENES[check.scene];
-  if (sceneId === undefined) {
-    throw new Error(`Unknown scene ${check.scene}`);
-  }
+  let sceneId = 0;
   switch (check.type) {
   case 'chest':
   case 'collectible':
   case 'sf':
+  case 'pot':
+    sceneId = DATA_SCENES[check.scene];
+    if (sceneId === undefined) {
+      throw new Error(`Unknown scene ${check.scene}`);
+    }
     break;
   default:
-    sceneId = 0;
     break;
   }
-
-  /* Extract the room ID */
-  let roomId: number = 0;
 
   /* Extract the ID */
   const id = checkId(check);
@@ -335,8 +336,7 @@ function checkKey(check: WorldCheck): number {
   let key = 0;
   key = (key | ((typeId & 0xff) << 24)) >>> 0;
   key = (key | ((sceneId & 0xff) << 16)) >>> 0;
-  key = (key | ((roomId & 0xff) << 8)) >>> 0;
-  key = (key | (id & 0xff)) >>> 0;
+  key = (key | (id & 0xffff)) >>> 0;
 
   return key;
 }
@@ -360,7 +360,8 @@ const gameChecks = (worldId: number, settings: Settings, game: Game, logic: Logi
     b.writeUInt16BE(itemGi, 6);
     buffers.push(b);
   }
-  return Buffer.concat(buffers);
+  buffers.push(Buffer.alloc(8, 0xff));
+  return padBuffer16(Buffer.concat(buffers));
 };
 
 const hintBuffer = (settings: Settings, game: Game, gossip: string, hint: HintGossip): Buffer => {
@@ -465,7 +466,8 @@ const gameHints = (settings: Settings, game: Game, hints: WorldHints): Buffer =>
     }
     buffers.push(hintBuffer(settings, game, gossip, h));
   }
-  return Buffer.concat(buffers);
+  buffers.push(Buffer.alloc(10, 0xff));
+  return padBuffer16(Buffer.concat(buffers));
 }
 
 const regionsBuffer = (regions: Region[]) => {
@@ -492,7 +494,9 @@ const gameEntrances = (worldId: number, game: Game, logic: LogicResult) => {
     const dstId = entrance(srcEntrance.game, dstEntrance.game, dst);
     data.push(srcId, dstId);
   }
-  return toU32Buffer(data);
+  data.push(0xffffffff);
+  data.push(0xffffffff);
+  return padBuffer16(toU32Buffer(data));
 };
 
 export const randomizerMq = (worldId: number, logic: LogicResult): Buffer => {

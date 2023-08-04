@@ -19,10 +19,18 @@
     FOREST_POE_4: "event(FOREST_POE_1) && event(FOREST_POE_2) && event(FOREST_POE_3)"
   locations:
     "Forest Temple GS Main": "can_collect_distance"
+    "Forest Temple Pot Main Room 1": "true"
+    "Forest Temple Pot Main Room 2": "true"
+    "Forest Temple Pot Main Room 3": "true"
+    "Forest Temple Pot Main Room 4": "true"
+    "Forest Temple Pot Main Room 5": "true"
+    "Forest Temple Pot Main Room 6": "true"
 "Forest Temple Mini-Boss":
   dungeon: Forest
   locations:
     "Forest Temple Mini-Boss Key": "has_weapon && soul(SOUL_STALFOS)"
+    "Forest Temple Pot Miniboss Lower 1": "true"
+    "Forest Temple Pot Miniboss Lower 2": "true"
 "Forest Temple Garden West":
   dungeon: Forest
   exits:
@@ -111,6 +119,10 @@
     "Forest Temple Poe 2": "has_weapon && soul(SOUL_STALFOS)"
   locations:
     "Forest Temple Bow": "has_weapon && soul(SOUL_STALFOS)"
+    "Forest Temple Pot Miniboss Upper 1": "true"
+    "Forest Temple Pot Miniboss Upper 2": "true"
+    "Forest Temple Pot Miniboss Upper 3": "true"
+    "Forest Temple Pot Miniboss Upper 4": "true"
 "Forest Temple Poe 2":
   dungeon: Forest
   exits:
@@ -119,6 +131,9 @@
     FOREST_POE_2: "can_use_bow"
   locations:
     "Forest Temple Compass": "event(FOREST_POE_2)"
+    "Forest Temple Pot Blue Poe 1": "true"
+    "Forest Temple Pot Blue Poe 2": "true"
+    "Forest Temple Pot Blue Poe 3": "true"
 "Forest Temple Twisted 2 Normal":
   dungeon: Forest
   exits:
@@ -127,6 +142,9 @@
   dungeon: Forest
   exits:
     "Forest Temple Twisted 2 Alt": "can_use_bow || can_use_din"
+  locations:
+    "Forest Temple Pot Rotating Room 1": "true"
+    "Forest Temple Pot Rotating Room 2": "true"
 "Forest Temple Twisted 2 Alt":
   dungeon: Forest
   exits:
@@ -144,6 +162,9 @@
   dungeon: Forest
   events:
     FOREST_POE_3: "can_use_bow"
+  locations:
+    "Forest Temple Pot Green Poe Pot 1": "true"
+    "Forest Temple Pot Green Poe Pot 2": "true"
 "Forest Temple Antichamber":
   dungeon: Forest
   exits:

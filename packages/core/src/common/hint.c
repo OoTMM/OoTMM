@@ -39,24 +39,30 @@ static const char* kJunkHints[] = {
     "Nax's House is on the Way of the Hero",            /* OoTMM */
 };
 
-ALIGNED(16) Hint gHints[0x40];
+static Hint* gHints;
 
 static const Hint* findHint(u8 key)
 {
-    for (int i = 0; i < ARRAY_SIZE(gHints); ++i)
+    int i;
+
+    i = 0;
+    for (;;)
     {
         const Hint* h = &gHints[i];
         if (h->key == 0xff)
-            break;
+            return NULL;
         if (h->key == key)
             return h;
+        i++;
     }
-    return NULL;
 }
 
 void comboInitHints(void)
 {
-    memset(gHints, 0xff, sizeof(gHints));
+    size_t size;
+
+    size = comboDmaLoadFile(NULL, COMBO_VROM_HINTS);
+    gHints = malloc(size);
     comboDmaLoadFile(gHints, COMBO_VROM_HINTS);
 }
 

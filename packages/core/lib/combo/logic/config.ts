@@ -126,6 +126,7 @@ export class LogicPassConfig {
       MM_SOULS: settings.enemySoulsMm,
       MM_REMOVED_FAIRIES: settings.strayFairyOtherShuffle === 'removed',
       SHARED_SKELETON_KEY: settings.sharedSkeletonKey,
+      OOT_SHUFFLE_POTS: settings.shufflePotsOot,
     };
 
     for (const v in exprs) {

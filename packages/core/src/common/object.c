@@ -4,7 +4,7 @@
 
 void* gCustomKeep;
 
-#define OBJECT_COUNT    16
+#define OBJECT_COUNT    64
 #define OBJECT_TTL      6
 
 static u16   sObjectsIds[OBJECT_COUNT];

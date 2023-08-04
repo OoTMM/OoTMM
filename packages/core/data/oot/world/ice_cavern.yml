@@ -17,6 +17,12 @@
     "Ice Cavern SR Scythe Back": "true"
     "Ice Cavern SR Scythe Center Right": "true"
     "Ice Cavern SR Scythe Midair": "is_adult"
+    "Ice Cavern Pot First Corridor 1": "true"
+    "Ice Cavern Pot First Corridor 2": "true"
+    "Ice Cavern Pot Scythe Room 1": "true"
+    "Ice Cavern Pot Scythe Room 2": "true"
+    "Ice Cavern Pot Scythe Room 3": "true"
+    "Ice Cavern Flying Pot Scythe Room": "soul_flying_pot"
 "Ice Cavern HP Room":
   dungeon: IC
   exits:
@@ -35,6 +41,7 @@
     BLUE_FIRE: "has_bottle"
   locations:
     "Ice Cavern Map": "has_blue_fire"
+    "Ice Cavern Pot Map Room": "has_blue_fire"
 "Ice Cavern Block Room":
   dungeon: IC
   exits:
@@ -56,3 +63,5 @@
   locations:
     "Ice Cavern Iron Boots": "soul_wolfos"
     "Ice Cavern Sheik Song": "soul_wolfos"
+    "Ice Cavern Pot Red Ice 1": "true"
+    "Ice Cavern Pot Red Ice 2": "true"

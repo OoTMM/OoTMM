@@ -27,6 +27,8 @@
 #  include <combo/oot/player.h>
 #  include <combo/oot/pause_state.h>
 #  include <combo/oot/actors/Item_Etcetera.h>
+#  include <combo/oot/actors/Obj_Tsubo.h>
+#  include <combo/oot/actors/En_Tubo_Trap.h>
 #  include <combo/oot/actors/En_Ossan.h>
 # endif
 
@@ -173,6 +175,7 @@ NORETURN void comboGameSwitch(GameState_Play* play, s32 entrance);
 #define OV_SHOP         0x07
 #define OV_SCRUB        0x08
 #define OV_SR           0x09
+#define OV_EXTENDED     0x0a
 
 #define OVF_RENEW             (1 << 2)
 #define OVF_PRECOND           (1 << 3)
@@ -354,11 +357,14 @@ typedef struct
     u8                      silverRupee;
     u8                      delayedSwitchFlag;
     u8                      roomEnemyLackSoul:1;
+    u8                      spawnExtended:1;
     u8                      menuScreen;
     u8                      menuCursor;
     u8                      menuCursorMax;
     u8                      maxKeysOot[0x10];
     u8                      maxKeysMm[4];
+    u8                      actorIndex;
+    u8                      sceneSetupId;
 }
 ComboGlobal;
 

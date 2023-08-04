@@ -55,6 +55,7 @@ function asmPatchGroups(settings: Settings) {
     DEFAULT_HOLD: settings.defaultHoldTarget,
     OOT_SILVER_RUPEE_SHUFFLE: settings.silverRupeeShuffle !== 'vanilla',
     OOT_FREE_SCARECROW: settings.freeScarecrowOot,
+    OOT_SHUFFLE_POTS: settings.shufflePotsOot,
   };
   const keys = Object.keys(groups) as PatchGroup[];
   return keys.filter((k) => groups[k]);
@@ -73,7 +74,7 @@ export function buildPatchfiles(args: BuildPatchfileIn): Patchfile[] {
 
     /* Pack the payload */
     const payload = args.build[game].payload;
-    if (payload.length > 0x40000) {
+    if (payload.length > (game === 'mm' ? 0x30000 : 0x40000)) {
       throw new Error("Payload too large");
     }
     file.addNewFile(game === 'oot' ? 0xf0000000 : 0xf0100000, payload, false);

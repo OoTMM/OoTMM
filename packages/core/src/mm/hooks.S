@@ -9,10 +9,10 @@ PATCH_START 0x80080d14
   la t6, DMA_END
 PATCH_END
 
-/* Downsize the heap by 0x40000 + 0x10000 malloc zone */
+/* Downsize the heap by 0x40000 + 0x20000 malloc zone */
 /* DEBUG */
 PATCH_START 0x80174c4c
-  lui t8,0x8073
+  lui t8,0x8072
 PATCH_END
 
 /* Not sure about this

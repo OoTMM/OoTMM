@@ -79,7 +79,7 @@ void EnElforg_GiveItem(GameState_Play* play, Actor* this)
 
     EnElforg_ItemQuery(&q, this, play);
     PlayerDisplayTextBox(play, 0x579, NULL);
-    comboAddItemEx(play, &q);
+    comboAddItemEx(play, &q, 1);
 
     // If it's a town fairy
     if ((this->variable & 0xF) == 3) {

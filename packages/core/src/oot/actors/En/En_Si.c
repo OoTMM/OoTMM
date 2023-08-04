@@ -51,7 +51,7 @@ void EnSi_GiveItem(GameState_Play* play, Actor* this)
 
     EnSi_ItemQuery(&q, this);
     PlayerDisplayTextBox(play, 0xb4, NULL);
-    comboAddItemEx(play, &q);
+    comboAddItemEx(play, &q, 1);
 }
 
 PATCH_CALL(0x80b4b190, EnSi_GiveItem);

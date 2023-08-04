@@ -68,6 +68,7 @@
 # define AC_ITEM_OCARINA            0x0f1
 # define AC_EN_ANUBICE_TAG          0x0f6
 # define AC_ITEM_ETCETERA           0x10f
+# define AC_OBJ_TSUBO               0x111
 # define AC_EN_IK                   0x113
 # define AC_EN_SKJ                  0x115
 # define AC_EN_G_SWITCH             0x117
@@ -237,7 +238,7 @@ typedef struct
 {
     u32     count;
     Actor*  first;
-#if defined(GAME_MM)    
+#if defined(GAME_MM)
     char    unk_8[0x4];
 #endif
 }

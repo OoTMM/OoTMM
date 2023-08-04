@@ -1,5 +1,10 @@
 #include <combo.h>
 
+/* Resize Item00 */
+PATCH_START 0x801adecc
+.int 0x1b4
+PATCH_END
+
 /* Patch DrawGI */
 PATCH_START 0x800a7248
   li a1,(DRAWGI_RECOVERY_HEART - 1)

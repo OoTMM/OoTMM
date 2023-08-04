@@ -396,6 +396,13 @@ export const SETTINGS = [{
   ],
   default: 'none'
 }, {
+  key: 'shufflePotsOot',
+  name: 'Pots Shuffle (OoT)',
+  category: 'main.shuffle',
+  type: 'boolean',
+  description: 'Controls whether or not the pots are shuffled (OoT). !!!!! MQ NOT INCLUDED YET !!!!!',
+  default: false
+}, {
   key: 'shuffleOcarinasOot',
   name: 'Ocarina Shuffle (OoT)',
   category: 'main.shuffle',

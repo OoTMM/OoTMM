@@ -5,5 +5,5 @@ Save Layout:
 0x0c000     MM Save 1 backup
 0x10000     MM Save 2
 0x14000     MM Save 2 backup
-0x18000     MM Save 3
-0x1c000     MM Save 3 backup
+0x18000     Custom Save 1
+0x1c000     Custom Save 2

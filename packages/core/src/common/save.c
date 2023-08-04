@@ -10,6 +10,8 @@ ALIGNED(16) OotSave gOotSave;
 ALIGNED(16) MmSave gMmSave;
 #endif
 
+ALIGNED(16) CustomSave gCustomSave;
+
 void comboOnSaveLoad(void)
 {
     NetContext* net;
@@ -118,6 +120,8 @@ void comboReadForeignSave(void)
 #if !defined(GAME_MM)
     comboReadWriteFlash(0x8000 + 0x8000 * fileIndex, &gMmSave, sizeof(gMmSave), OS_READ);
 #endif
+
+    comboReadWriteFlash(0x18000 + 0x4000 * fileIndex + CUSTOM_SAVE_OFFSET, &gCustomSave, sizeof(gCustomSave), OS_READ);
 }
 
 static void saveFixup(void)
@@ -144,22 +148,29 @@ void comboWriteSave(void)
     comboSyncItems();
     saveOot();
     saveMm();
+
+    /* Write the custom save */
+    comboReadWriteFlash(0x18000 + 0x4000 * gSaveContext.fileIndex + CUSTOM_SAVE_OFFSET, &gCustomSave, sizeof(gCustomSave), OS_WRITE);
 }
 
-void comboCopyMmSave(int dst, int src)
+static void copyRawSave(u32 dst, u32 src, int size)
 {
-    char buf[0x800];
-    u32 devAddrSrc;
-    u32 devAddrDst;
+    ALIGNED(16) char buf[0x100];
 
-    devAddrSrc = 0x8000 + 0x8000 * src;
-    devAddrDst = 0x8000 + 0x8000 * dst;
-
-    for (int i = 0; i < 0x8000 / sizeof(buf); ++i)
+    for (int i = 0; i < size / sizeof(buf); ++i)
     {
-        comboReadWriteFlash(devAddrSrc, buf, sizeof(buf), OS_READ);
-        comboReadWriteFlash(devAddrDst, buf, sizeof(buf), OS_WRITE);
-        devAddrSrc += sizeof(buf);
-        devAddrDst += sizeof(buf);
+        comboReadWriteFlash(src, buf, sizeof(buf), OS_READ);
+        comboReadWriteFlash(dst, buf, sizeof(buf), OS_WRITE);
+        src += sizeof(buf);
+        dst += sizeof(buf);
     }
+}
+
+void comboCopyMmSave(int fileIndexDst, int fileIndexSrc)
+{
+    /* Copy the actual MM save */
+    copyRawSave(0x8000 + 0x8000 * fileIndexDst, 0x8000 + 0x8000 * fileIndexSrc, 0x8000);
+
+    /* Copy the custom save */
+    copyRawSave(0x18000 + 0x4000 * fileIndexDst, 0x18000 + 0x4000 * fileIndexSrc, 0x4000);
 }
