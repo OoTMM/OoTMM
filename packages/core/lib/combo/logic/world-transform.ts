@@ -732,7 +732,6 @@ export class LogicPassWorldTransform {
     /* Potsanity */
     if (!settings.shufflePotsOot) {
       const pots = DATA_POOL.oot.filter((x: any) => x.type === 'pot').map((x: any) => gameId('oot', x.location, ' ')) as string[];
-      console.log(pots);
       this.removeLocations(pots);
     } else {
       if (settings.goal === 'triforce') {
