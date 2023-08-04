@@ -750,6 +750,36 @@ Spirit Temple Silver Gauntlets,                             chest,          NONE
 Spirit Temple Mirror Shield,                                chest,          NONE,                 DESERT_COLOSSUS,                0x09,                       SHIELD_MIRROR
 Spirit Temple Boss HC,                                      collectible,    NONE,                 LAIR_TWINROVA,                  0x1f,                       HEART_CONTAINER
 Spirit Temple Boss,                                         npc,            NONE,                 LAIR_TWINROVA,                  BLUE_WARP_TWINROVA,         MEDALLION_SPIRIT
+Spirit Temple Pot Lobby 1,                                  pot,            NONE,                 TEMPLE_SPIRIT,                  0x000a,                     RECOVERY_HEART
+Spirit Temple Pot Lobby 2,                                  pot,            NONE,                 TEMPLE_SPIRIT,                  0x000b,                     MAGIC_JAR_LARGE
+Spirit Temple Pot Child Climb,                              pot,            NONE,                 TEMPLE_SPIRIT,                  0x040a,                     DEKU_SEEDS_5
+Spirit Temple Pot Statue Room 1,                            pot,            NONE,                 TEMPLE_SPIRIT,                  0x0517,                     NOTHING
+Spirit Temple Pot Statue Room 2,                            pot,            NONE,                 TEMPLE_SPIRIT,                  0x0518,                     NOTHING
+Spirit Temple Pot Statue Room 3,                            pot,            NONE,                 TEMPLE_SPIRIT,                  0x0519,                     NOTHING
+Spirit Temple Pot Statue Room 4,                            pot,            NONE,                 TEMPLE_SPIRIT,                  0x051a,                     NOTHING
+Spirit Temple Pot Statue Room 5,                            pot,            NONE,                 TEMPLE_SPIRIT,                  0x051b,                     NOTHING
+Spirit Temple Pot Statue Room 6,                            pot,            NONE,                 TEMPLE_SPIRIT,                  0x051c,                     NOTHING
+Spirit Temple Pot Child Hand Stairway 1,                    pot,            NONE,                 TEMPLE_SPIRIT,                  0x0907,                     RECOVERY_HEART
+Spirit Temple Pot Child Hand Stairway 2,                    pot,            NONE,                 TEMPLE_SPIRIT,                  0x0908,                     RECOVERY_HEART
+Spirit Temple Pot Adult Upper,                              pot,            NONE,                 TEMPLE_SPIRIT,                  0x1005,                     BOMBS_5
+Spirit Temple Pot Child Anubis Room 1,                      pot,            NONE,                 TEMPLE_SPIRIT,                  0x1b04,                     NOTHING
+Spirit Temple Pot Child Anubis Room 2,                      pot,            NONE,                 TEMPLE_SPIRIT,                  0x1b05,                     NOTHING
+Spirit Temple Pot Child Anubis Room 3,                      pot,            NONE,                 TEMPLE_SPIRIT,                  0x1b06,                     RECOVERY_HEART
+Spirit Temple Pot Child Anubis Room 4,                      pot,            NONE,                 TEMPLE_SPIRIT,                  0x1b07,                     SHIELD_DEKU
+Spirit Temple Flying Pot Lobby 1,                           pot,            NONE,                 TEMPLE_SPIRIT,                  0x000c,                     RECOVERY_HEART
+Spirit Temple Flying Pot Lobby 2,                           pot,            NONE,                 TEMPLE_SPIRIT,                  0x000d,                     RECOVERY_HEART
+Spirit Temple Flying Pot Child After Bridge 1,              pot,            NONE,                 TEMPLE_SPIRIT,                  0x0304,                     NOTHING
+Spirit Temple Flying Pot Child After Bridge 2,              pot,            NONE,                 TEMPLE_SPIRIT,                  0x0305,                     RECOVERY_HEART
+Spirit Temple Flying Pot Statue Room 1,                     pot,            NONE,                 TEMPLE_SPIRIT,                  0x0514,                     RECOVERY_HEART
+Spirit Temple Flying Pot Statue Room 2,                     pot,            NONE,                 TEMPLE_SPIRIT,                  0x0515,                     RECOVERY_HEART
+Spirit Temple Flying Pot Adult Climb 1,                     pot,            NONE,                 TEMPLE_SPIRIT,                  0x0f0a,                     RECOVERY_HEART
+Spirit Temple Flying Pot Adult Climb 2,                     pot,            NONE,                 TEMPLE_SPIRIT,                  0x0f0b,                     RECOVERY_HEART
+Spirit Temple Flying Pot Topmost 1,                         pot,            NONE,                 TEMPLE_SPIRIT,                  0x1904,                     NUTS_5
+Spirit Temple Flying Pot Topmost 2,                         pot,            NONE,                 TEMPLE_SPIRIT,                  0x1905,                     RECOVERY_HEART
+Spirit Temple Flying Pot Topmost 3,                         pot,            NONE,                 TEMPLE_SPIRIT,                  0x1906,                     NUTS_5
+Spirit Temple Flying Pot Topmost 4,                         pot,            NONE,                 TEMPLE_SPIRIT,                  0x1907,                     RECOVERY_HEART
+Spirit Temple Flying Pot Topmost 5,                         pot,            NONE,                 TEMPLE_SPIRIT,                  0x1908,                     NUTS_5
+Spirit Temple Flying Pot Topmost 6,                         pot,            NONE,                 TEMPLE_SPIRIT,                  0x1909,                     NUTS_5
 Gerudo Training Grounds Entrance 1,                         chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x07,                       ARROWS_10
 Gerudo Training Grounds Entrance 2,                         chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x13,                       RUPEE_BLUE
 Gerudo Training Grounds Stalfos,                            chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x00,                       SMALL_KEY_GTG
