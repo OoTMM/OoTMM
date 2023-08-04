@@ -19,6 +19,11 @@
     "Water Temple Antichamber": "can_longshot && event(WATER_LEVEL_RESET)"
     "Water Temple Cage Room": "has_tunic_zora && event(WATER_LEVEL_LOW) && has_explosives && can_dive_small"
     "Water Temple Main Ledge": "is_adult && has_hover_boots"
+  locations:
+    "Water Temple Pot Main Room Near Block 1": "event(WATER_LEVEL_LOW)"
+    "Water Temple Pot Main Room Near Block 2": "event(WATER_LEVEL_LOW)"
+    "Water Temple Pot Main Room Near Boss 1": "can_longshot && event(WATER_LEVEL_RESET)"
+    "Water Temple Pot Main Room Near Boss 2": "can_longshot && event(WATER_LEVEL_RESET)"
 "Water Temple Main Ledge":
   dungeon: Water
   events:
@@ -34,6 +39,8 @@
     WATER_LEVEL_LOW: "can_play(SONG_ZELDA)"
   locations:
     "Water Temple Bombable Chest": "event(WATER_LEVEL_MIDDLE) && has_explosives"
+    "Water Temple Pot Ruto Room 1": "event(WATER_LEVEL_LOW)"
+    "Water Temple Pot Ruto Room 2": "event(WATER_LEVEL_LOW)"
 "Water Temple Map Room":
   dungeon: Water
   locations:
@@ -63,6 +70,9 @@
   dungeon: Water
   locations:
     "Water Temple Compass": "true"
+    "Water Temple Pot Compass Room 1": "true"
+    "Water Temple Pot Compass Room 2": "true"
+    "Water Temple Pot Compass Room 3": "true"
 "Water Temple Dragon Room":
   dungeon: Water
   locations:
@@ -75,6 +85,8 @@
   dungeon: Water
   locations:
     "Water Temple Corridor Chest": "has(STRENGTH)"
+    "Water Temple Pot Corridor 1": "has(STRENGTH)"
+    "Water Temple Pot Corridor 2": "has(STRENGTH)"
 "Water Temple Waterfalls":
   dungeon: Water
   exits:
@@ -84,6 +96,9 @@
   dungeon: Water
   exits:
     "Water Temple Waterfalls Ledge": "has_explosives && has(STRENGTH)"
+  locations:
+    "Water Temple Pot Blocks Room 1": "true"
+    "Water Temple Pot Blocks Room 2": "true"
 "Water Temple Waterfalls Ledge":
   dungeon: Water
   exits:
@@ -94,6 +109,8 @@
   dungeon: Water
   locations:
     "Water Temple Boss Key Chest": "true"
+    "Water Temple Pot Boss Key Room 1": "true"
+    "Water Temple Pot Boss Key Room 2": "true"
 "Water Temple Large Pit":
   dungeon: Water
   exits:
@@ -108,6 +125,9 @@
   dungeon: Water
   exits:
     "Water Temple Longshot Room": "has_weapon"
+  locations:
+    "Water Temple Pot Before Dark Link 1": "true"
+    "Water Temple Pot Before Dark Link 2": "true"
 "Water Temple Longshot Room":
   dungeon: Water
   exits:
@@ -121,14 +141,24 @@
   locations:
     "Water Temple River Chest": "can_use_bow"
     "Water Temple GS River": "has_iron_boots"
+    "Water Temple Pot River 1": "true"
+    "Water Temple Pot River 2": "true"
 "Water Temple Dragon Room Ledge":
   dungeon: Water
   exits:
     "Water Temple Dragon Room": "true"
 "Water Temple Cage Room":
   dungeon: Water
+  exits:
+    "Water Temple Inside Cage": "can_hookshot || (is_adult && has_hover_boots)"
+"Water Temple Inside Cage":
+  dungeon: Water
   locations:
-    "Water Temple GS Cage": "can_hookshot || (is_adult && has_hover_boots)"
+    "Water Temple GS Cage": "true"
+    "Water Temple Pot Skull Cage 1": "true"
+    "Water Temple Pot Skull Cage 2": "true"
+    "Water Temple Pot Skull Cage 3": "true"
+    "Water Temple Pot Skull Cage 4": "true"
 "Water Temple Antichamber":
   dungeon: Water
   exits:

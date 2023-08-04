@@ -546,6 +546,21 @@ Fire Temple GS Hammer Statues,                              gs,             NONE
 Fire Temple GS Maze,                                        gs,             NONE,                 TEMPLE_FIRE,                    0x2a,                       GS_TOKEN
 Fire Temple GS Scarecrow Wall,                              gs,             NONE,                 TEMPLE_FIRE,                    0x2c,                       GS_TOKEN
 Fire Temple GS Scarecrow Top,                               gs,             NONE,                 TEMPLE_FIRE,                    0x2b,                       GS_TOKEN
+Fire Temple Pot Lava Room 1,                                pot,            NONE,                 TEMPLE_FIRE,                    0x011a,                     ARROWS_10
+Fire Temple Pot Lava Room 2,                                pot,            NONE,                 TEMPLE_FIRE,                    0x011b,                     RECOVERY_HEART
+Fire Temple Pot Lava Room 3,                                pot,            NONE,                 TEMPLE_FIRE,                    0x011c,                     ARROWS_10
+Fire Temple Pot Pre-Boss Room 1,                            pot,            NONE,                 TEMPLE_FIRE,                    0x0208,                     FLEXIBLE
+Fire Temple Pot Pre-Boss Room 2,                            pot,            NONE,                 TEMPLE_FIRE,                    0x0209,                     BOMB
+Fire Temple Pot Pre-Boss Room 3,                            pot,            NONE,                 TEMPLE_FIRE,                    0x020a,                     BOMB
+Fire Temple Pot Pre-Boss Room 4,                            pot,            NONE,                 TEMPLE_FIRE,                    0x020b,                     FLEXIBLE
+Fire Temple Pot Before Miniboss 1,                          pot,            NONE,                 TEMPLE_FIRE,                    0x0a33,                     BOMB
+Fire Temple Pot Before Miniboss 2,                          pot,            NONE,                 TEMPLE_FIRE,                    0x0a34,                     RECOVERY_HEART
+Fire Temple Pot Before Miniboss 3,                          pot,            NONE,                 TEMPLE_FIRE,                    0x0a35,                     RECOVERY_HEART
+Fire Temple Pot Before Miniboss 4,                          pot,            NONE,                 TEMPLE_FIRE,                    0x0a36,                     BOMB
+Fire Temple Pot Ring 1,                                     pot,            NONE,                 TEMPLE_FIRE,                    0x0a37,                     RECOVERY_HEART
+Fire Temple Pot Ring 2,                                     pot,            NONE,                 TEMPLE_FIRE,                    0x0a38,                     RECOVERY_HEART
+Fire Temple Pot Ring 3,                                     pot,            NONE,                 TEMPLE_FIRE,                    0x0a39,                     RECOVERY_HEART
+Fire Temple Pot Ring 4,                                     pot,            NONE,                 TEMPLE_FIRE,                    0x0a3a,                     RECOVERY_HEART
 Fire Temple Boss Container,                                 collectible,    NONE,                 LAIR_VOLVAGIA,                  0x1f,                       HEART_CONTAINER
 Fire Temple Boss,                                           npc,            NONE,                 LAIR_VOLVAGIA,                  BLUE_WARP_VOLVAGIA,         MEDALLION_FIRE
 Ice Cavern Iron Boots,                                      chest,          NONE,                 ICE_CAVERN,                     0x02,                       BOOTS_IRON
@@ -583,6 +598,29 @@ Water Temple GS Waterfalls,                                 gs,             NONE
 Water Temple GS Cage,                                       gs,             NONE,                 TEMPLE_WATER,                   0x30,                       GS_TOKEN
 Water Temple Boss HC,                                       collectible,    NONE,                 LAIR_MORPHA,                    0x1f,                       HEART_CONTAINER
 Water Temple Boss,                                          npc,            NONE,                 LAIR_MORPHA,                    BLUE_WARP_MORPHA,           MEDALLION_WATER
+Water Temple Pot Main Room Near Block 1,                    pot,            NONE,                 TEMPLE_WATER,                   0x0017,                     RECOVERY_HEART
+Water Temple Pot Main Room Near Block 2,                    pot,            NONE,                 TEMPLE_WATER,                   0x0018,                     RECOVERY_HEART
+Water Temple Pot Main Room Near Boss 1,                     pot,            NONE,                 TEMPLE_WATER,                   0x0019,                     FLEXIBLE
+Water Temple Pot Main Room Near Boss 2,                     pot,            NONE,                 TEMPLE_WATER,                   0x001a,                     FLEXIBLE
+Water Temple Pot Skull Cage 1,                              pot,            NONE,                 TEMPLE_WATER,                   0x0309,                     BOMB
+Water Temple Pot Skull Cage 2,                              pot,            NONE,                 TEMPLE_WATER,                   0x030a,                     BOMB
+Water Temple Pot Skull Cage 3,                              pot,            NONE,                 TEMPLE_WATER,                   0x030d,                     ARROWS_10
+Water Temple Pot Skull Cage 4,                              pot,            NONE,                 TEMPLE_WATER,                   0x030e,                     ARROWS_10
+Water Temple Pot Compass Room 1,                            pot,            NONE,                 TEMPLE_WATER,                   0x0408,                     RECOVERY_HEART
+Water Temple Pot Compass Room 2,                            pot,            NONE,                 TEMPLE_WATER,                   0x0409,                     RECOVERY_HEART
+Water Temple Pot Compass Room 3,                            pot,            NONE,                 TEMPLE_WATER,                   0x040a,                     RECOVERY_HEART
+Water Temple Pot Before Dark Link 1,                        pot,            NONE,                 TEMPLE_WATER,                   0x0606,                     MAGIC_JAR_LARGE
+Water Temple Pot Before Dark Link 2,                        pot,            NONE,                 TEMPLE_WATER,                   0x0607,                     MAGIC_JAR_LARGE
+Water Temple Pot Blocks Room 1,                             pot,            NONE,                 TEMPLE_WATER,                   0x0e0b,                     BOMB
+Water Temple Pot Blocks Room 2,                             pot,            NONE,                 TEMPLE_WATER,                   0x0e0c,                     BOMB
+Water Temple Pot Boss Key Room 1,                           pot,            NONE,                 TEMPLE_WATER,                   0x1001,                     FLEXIBLE
+Water Temple Pot Boss Key Room 2,                           pot,            NONE,                 TEMPLE_WATER,                   0x1002,                     FLEXIBLE
+Water Temple Pot Ruto Room 1,                               pot,            NONE,                 TEMPLE_WATER,                   0x1107,                     ARROWS_10
+Water Temple Pot Ruto Room 2,                               pot,            NONE,                 TEMPLE_WATER,                   0x1108,                     ARROWS_10
+Water Temple Pot Corridor 1,                                pot,            NONE,                 TEMPLE_WATER,                   0x1403,                     RECOVERY_HEART
+Water Temple Pot Corridor 2,                                pot,            NONE,                 TEMPLE_WATER,                   0x1404,                     RECOVERY_HEART
+Water Temple Pot River 1,                                   pot,            NONE,                 TEMPLE_WATER,                   0x150d,                     ARROWS_10
+Water Temple Pot River 2,                                   pot,            NONE,                 TEMPLE_WATER,                   0x150e,                     FLEXIBLE
 Bottom of the Well Compass,                                 chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x01,                       COMPASS_BOTW
 Bottom of the Well Under Debris,                            chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x02,                       BOMBCHU_10
 Bottom of the Well Back West,                               chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x04,                       NUTS_10

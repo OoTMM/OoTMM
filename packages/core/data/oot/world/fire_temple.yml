@@ -14,6 +14,10 @@
     BOMBS: "has_tunic_goron"
   locations:
     "Fire Temple Jail 1 Chest": "has_tunic_goron"
+    "Fire Temple Pot Pre-Boss Room 1": "has_tunic_goron"
+    "Fire Temple Pot Pre-Boss Room 2": "has_tunic_goron"
+    "Fire Temple Pot Pre-Boss Room 3": "has_tunic_goron"
+    "Fire Temple Pot Pre-Boss Room 4": "has_tunic_goron"
 "Fire Temple Boss Key Loop Start":
   dungeon: Fire
   exits:
@@ -45,6 +49,9 @@
     "Fire Temple Lava Room North Jail Chest": "has_tunic_goron && (is_adult || can_play_time)"
     "Fire Temple Lava Room South Jail Chest": "is_adult && has_tunic_goron && has_explosives"
     "Fire Temple GS Lava Side Room": "is_adult && has_tunic_goron && can_play_time"
+    "Fire Temple Pot Lava Room 1": "has_tunic_goron"
+    "Fire Temple Pot Lava Room 2": "has_tunic_goron"
+    "Fire Temple Pot Lava Room 3": "has_tunic_goron"
 "Fire Temple Maze":
   dungeon: Fire
   exits:
@@ -76,6 +83,10 @@
     "Fire Temple Pillar Ledge": "has_hover_boots"
   locations:
     "Fire Temple Compass": "true"
+    "Fire Temple Pot Ring 1": "true"
+    "Fire Temple Pot Ring 2": "true"
+    "Fire Temple Pot Ring 3": "true"
+    "Fire Temple Pot Ring 4": "true"
 "Fire Temple Before Miniboss":
   dungeon: Fire
   exits:
@@ -83,6 +94,10 @@
     "Fire Temple Pillar Ledge": "can_play_time"
   locations:
     "Fire Temple Ring Jail": "can_hammer && can_play_time"
+    "Fire Temple Pot Before Miniboss 1": "true"
+    "Fire Temple Pot Before Miniboss 2": "true"
+    "Fire Temple Pot Before Miniboss 3": "true"
+    "Fire Temple Pot Before Miniboss 4": "true"
 "Fire Temple Pillar Ledge":
   dungeon: Fire
   exits:
