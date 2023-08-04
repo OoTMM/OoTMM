@@ -4,7 +4,7 @@ import { Monitor } from '../monitor';
 import { Settings } from '../settings';
 import { countMapAdd } from '../util';
 import { exprTrue } from './expr';
-import { LOCATIONS_ZELDA, Location, isLocationChestFairy, isLocationOtherFairy, isLocationRenewable, locationData, makeLocation } from './locations';
+import { LOCATIONS_ZELDA, Location, isLocationOtherFairy, isLocationRenewable, locationData, makeLocation } from './locations';
 import { ItemSharedDef, SharedItemGroups } from './shared';
 import { World } from './world';
 

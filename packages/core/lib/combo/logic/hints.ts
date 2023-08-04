@@ -6,10 +6,11 @@ import { Game } from '../config';
 import { Monitor } from '../monitor';
 import { Pathfinder } from './pathfind';
 import { ItemPlacement } from './solve';
-import { Location, isLocationChestFairy, isLocationOtherFairy, locationData, makeLocation } from './locations';
+import { Location, locationData, makeLocation } from './locations';
 import { Region, makeRegion } from './regions';
 import { CountMap, countMapArray } from '../util';
 import { ItemGroups, ItemHelpers, Items, ItemsCount, PlayerItem, itemByID, makePlayerItem } from '../items';
+import { isDungeonStrayFairy } from '../items/helpers';
 
 const FIXED_HINTS_LOCATIONS = [
   'OOT Skulltula House 10 Tokens',
@@ -259,13 +260,8 @@ export class LogicPassHints {
       return false;
     }
 
-    /* Non shuffled chest stray fairy */
-    if (isLocationChestFairy(world, loc) && this.state.settings.strayFairyChestShuffle !== 'anywhere') {
-      return false;
-    }
-
-    /* Non shuffled other stray fairy */
-    if (isLocationOtherFairy(world, loc) && this.state.settings.strayFairyOtherShuffle !== 'anywhere') {
+    /* Non shuffled dungeon stray fairy */
+    if (isDungeonStrayFairy(item.item) && this.state.settings.strayFairyChestShuffle !== 'anywhere' && this.state.settings.strayFairyOtherShuffle !== 'anywhere') {
       return false;
     }
 
