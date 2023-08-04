@@ -101,6 +101,7 @@ void ObjTsubo_SpawnShuffledDrop(Actor_ObjTsubo* this, GameState_Play* play)
     item->extendedRoomId = this->extendedRoomId;
     item->extendedId = this->extendedId;
     item->extendedGi = GI_OOT_RUPEE_GREEN;
+    item->extendedGiDraw = 0;
 }
 
 static const Gfx kDrawListNormalTop[] = {

@@ -125,13 +125,11 @@ static void EnItem00_ExtendedItemQuery(ComboItemQuery* q, Actor_EnItem00* this)
 static void EnItem00_DrawExtended(Actor_EnItem00* this, GameState_Play* play)
 {
     static const float scale = 12.5f;
-    ComboItemQuery q;
-    ComboItemOverride o;
 
-    EnItem00_ExtendedItemQuery(&q, this);
-    comboItemOverride(&o, &q);
+    if (this->extendedGiDraw == 0)
+        return;
     ModelViewScale(scale, scale, scale, MAT_MUL);
-    comboDrawGI(play, &this->base, o.gi, 0);
+    comboDrawGI(play, &this->base, this->extendedGiDraw, 0);
 }
 
 static void EnItem00_DrawExtendedOrRupee(Actor_EnItem00* item, GameState_Play* play)
@@ -143,16 +141,6 @@ static void EnItem00_DrawExtendedOrRupee(Actor_EnItem00* item, GameState_Play* p
 }
 
 PATCH_CALL(0x80013004, EnItem00_DrawExtendedOrRupee);
-
-void EnItem00_UpdateWrapper(Actor_EnItem00* this, GameState_Play* play)
-{
-    if (this->isExtended)
-    {
-        if (*(u32*)((char*)this + 0x13c) != 0x800127e0)
-            *(s16*)((char*)this + 0x14a) += 1;
-    }
-    EnItem00_Update(this, play);
-}
 
 void EnItem00_GiveExtendedOrRupee(GameState_Play* play, Actor_EnItem00* this)
 {
@@ -221,4 +209,25 @@ void EnItem00_ExtendedCollectedHandler(Actor_EnItem00* this, GameState_Play* pla
     {
         FreezePlayer(play);
     }
+}
+
+void EnItem00_UpdateWrapper(Actor_EnItem00* this, GameState_Play* play)
+{
+    ComboItemQuery q;
+    ComboItemOverride o;
+
+    if (this->isExtended)
+    {
+        if (*(u32*)((char*)this + 0x13c) != 0x800127e0)
+        {
+            if (*(u32*)((char*)this + 0x13c) != EnItem00_ExtendedCollectedHandler)
+            {
+                EnItem00_ExtendedItemQuery(&q, this);
+                comboItemOverride(&o, &q);
+                this->extendedGiDraw = o.gi;
+            }
+            *(s16*)((char*)this + 0x14a) += 1;
+        }
+    }
+    EnItem00_Update(this, play);
 }
