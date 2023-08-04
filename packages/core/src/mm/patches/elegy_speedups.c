@@ -13,7 +13,7 @@ union ElegyLockParams
 
 f32 Elegy_BlockSpeed(Actor* actor, GameState_Play* play, int type)
 {
-    return 50.0;
+    return 40.0;
 }
 
 u32 Elegy_LockParams(Actor_Player* player, GameState_Play* play)
