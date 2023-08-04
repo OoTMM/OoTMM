@@ -922,24 +922,24 @@ Ganon Castle Pot Fire End 1,                                pot,            NONE
 Ganon Castle Pot Fire End 2,                                pot,            NONE,                 INSIDE_GANON_CASTLE,            0x0f05,                     MAGIC_JAR_SMALL
 Ganon Castle Pot Spirit End 1,                              pot,            NONE,                 INSIDE_GANON_CASTLE,            0x1304,                     NUTS_5
 Ganon Castle Pot Spirit End 2,                              pot,            NONE,                 INSIDE_GANON_CASTLE,            0x1305,                     MAGIC_JAR_SMALL
-Ganon Tower Boss Pot 01,                                    pot,            NONE,                 GANON_TOWER,                    0x002f,                     MAGIC_JAR_LARGE
-Ganon Tower Boss Pot 02,                                    pot,            NONE,                 GANON_TOWER,                    0x0030,                     RECOVERY_HEART
-Ganon Tower Boss Pot 03,                                    pot,            NONE,                 GANON_TOWER,                    0x0031,                     ARROWS_10
-Ganon Tower Boss Pot 04,                                    pot,            NONE,                 GANON_TOWER,                    0x0032,                     MAGIC_JAR_SMALL
-Ganon Tower Boss Pot 05,                                    pot,            NONE,                 GANON_TOWER,                    0x0033,                     ARROWS_10
-Ganon Tower Boss Pot 06,                                    pot,            NONE,                 GANON_TOWER,                    0x0034,                     RECOVERY_HEART
-Ganon Tower Boss Pot 07,                                    pot,            NONE,                 GANON_TOWER,                    0x0035,                     MAGIC_JAR_SMALL
-Ganon Tower Boss Pot 08,                                    pot,            NONE,                 GANON_TOWER,                    0x0036,                     NOTHING
-Ganon Tower Boss Pot 09,                                    pot,            NONE,                 GANON_TOWER,                    0x0037,                     RECOVERY_HEART
-Ganon Tower Boss Pot 10,                                    pot,            NONE,                 GANON_TOWER,                    0x0038,                     NOTHING
-Ganon Tower Boss Pot 11,                                    pot,            NONE,                 GANON_TOWER,                    0x0039,                     ARROWS_10
-Ganon Tower Boss Pot 12,                                    pot,            NONE,                 GANON_TOWER,                    0x003a,                     ARROWS_10
-Ganon Tower Boss Pot 13,                                    pot,            NONE,                 GANON_TOWER,                    0x003b,                     RECOVERY_HEART
-Ganon Tower Boss Pot 14,                                    pot,            NONE,                 GANON_TOWER,                    0x003c,                     RECOVERY_HEART
-Ganon Tower Boss Pot 15,                                    pot,            NONE,                 GANON_TOWER,                    0x003d,                     RECOVERY_HEART
-Ganon Tower Boss Pot 16,                                    pot,            NONE,                 GANON_TOWER,                    0x003e,                     NOTHING
-Ganon Tower Boss Pot 17,                                    pot,            NONE,                 GANON_TOWER,                    0x003f,                     NOTHING
-Ganon Tower Boss Pot 18,                                    pot,            NONE,                 GANON_TOWER,                    0x0040,                     ARROWS_10
+Ganon Tower Pot 01,                                         pot,            NONE,                 GANON_TOWER,                    0x0801,                     MAGIC_JAR_LARGE
+Ganon Tower Pot 02,                                         pot,            NONE,                 GANON_TOWER,                    0x0802,                     RECOVERY_HEART
+Ganon Tower Pot 03,                                         pot,            NONE,                 GANON_TOWER,                    0x0803,                     MAGIC_JAR_SMALL
+Ganon Tower Pot 04,                                         pot,            NONE,                 GANON_TOWER,                    0x0804,                     MAGIC_JAR_SMALL
+Ganon Tower Pot 05,                                         pot,            NONE,                 GANON_TOWER,                    0x0805,                     RECOVERY_HEART
+Ganon Tower Pot 06,                                         pot,            NONE,                 GANON_TOWER,                    0x0806,                     ARROWS_10
+Ganon Tower Pot 07,                                         pot,            NONE,                 GANON_TOWER,                    0x0807,                     ARROWS_10
+Ganon Tower Pot 08,                                         pot,            NONE,                 GANON_TOWER,                    0x0808,                     RECOVERY_HEART
+Ganon Tower Pot 09,                                         pot,            NONE,                 GANON_TOWER,                    0x0809,                     NOTHING
+Ganon Tower Pot 10,                                         pot,            NONE,                 GANON_TOWER,                    0x080a,                     NOTHING
+Ganon Tower Pot 11,                                         pot,            NONE,                 GANON_TOWER,                    0x080b,                     ARROWS_10
+Ganon Tower Pot 12,                                         pot,            NONE,                 GANON_TOWER,                    0x080c,                     ARROWS_10
+Ganon Tower Pot 13,                                         pot,            NONE,                 GANON_TOWER,                    0x080d,                     RECOVERY_HEART
+Ganon Tower Pot 14,                                         pot,            NONE,                 GANON_TOWER,                    0x080e,                     RECOVERY_HEART
+Ganon Tower Pot 15,                                         pot,            NONE,                 GANON_TOWER,                    0x080f,                     RECOVERY_HEART
+Ganon Tower Pot 16,                                         pot,            NONE,                 GANON_TOWER,                    0x0810,                     NOTHING
+Ganon Tower Pot 17,                                         pot,            NONE,                 GANON_TOWER,                    0x0811,                     NOTHING
+Ganon Tower Pot 18,                                         pot,            NONE,                 GANON_TOWER,                    0x0812,                     ARROWS_10
 MQ Deku Tree Map Chest,                                     chest,          NONE,                 INSIDE_DEKU_TREE,               0x03,                       MAP_DT
 MQ Deku Tree Compass Chest,                                 chest,          NONE,                 INSIDE_DEKU_TREE,               0x01,                       COMPASS_DT
 MQ Deku Tree Slingshot Chest,                               chest,          NONE,                 INSIDE_DEKU_TREE,               0x06,                       SLINGSHOT
