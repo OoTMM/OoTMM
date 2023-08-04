@@ -59,8 +59,19 @@ Kakariko GS Tree,                                           gs,             NONE
 Kakariko GS House of Skulltula,                             gs,             NONE,                 KAKARIKO_VILLAGE,               0x8c,                       GS_TOKEN
 Kakariko GS Bazaar,                                         gs,             NONE,                 KAKARIKO_VILLAGE,               0x89,                       GS_TOKEN
 Kakariko GS Ladder,                                         gs,             NONE,                 KAKARIKO_VILLAGE,               0x8a,                       GS_TOKEN
-Kakariko Potion Shop Odd Potion,                            npc,            NONE,                 KAKARIKO_POTION_SHOP,           TRADE_ODD_POTION,           ODD_POTION
 Kakariko Cow,                                               cow,            NONE,                 KAKARIKO_VILLAGE,               0x06,                       MILK
+Kakariko Pot 01,                                            pot,            NONE,                 KAKARIKO_VILLAGE,               0x0008,                     RECOVERY_HEART
+Kakariko Pot 02,                                            pot,            NONE,                 KAKARIKO_VILLAGE,               0x0009,                     RECOVERY_HEART
+Kakariko Pot 03,                                            pot,            NONE,                 KAKARIKO_VILLAGE,               0x000a,                     RECOVERY_HEART
+Kakariko Pot 04,                                            pot,            NONE,                 KAKARIKO_VILLAGE,               0x000b,                     RECOVERY_HEART
+Kakariko Pot 05,                                            pot,            NONE,                 KAKARIKO_VILLAGE,               0x000c,                     RECOVERY_HEART
+Kakariko Pot 06,                                            pot,            NONE,                 KAKARIKO_VILLAGE,               0x000d,                     RECOVERY_HEART
+Kakariko Pot 07,                                            pot,            NONE,                 KAKARIKO_VILLAGE,               0x000e,                     RECOVERY_HEART
+Kakariko Pot 08,                                            pot,            NONE,                 KAKARIKO_VILLAGE,               0x000f,                     RECOVERY_HEART
+Kakariko Pot 09,                                            pot,            NONE,                 KAKARIKO_VILLAGE,               0x0010,                     RECOVERY_HEART
+Kakariko Pot 10,                                            pot,            NONE,                 KAKARIKO_VILLAGE,               0x0011,                     RECOVERY_HEART
+Kakariko Pot 11,                                            pot,            NONE,                 KAKARIKO_VILLAGE,               0x0012,                     RECOVERY_HEART
+Kakariko Potion Shop Odd Potion,                            npc,            NONE,                 KAKARIKO_POTION_SHOP,           TRADE_ODD_POTION,           ODD_POTION
 Kakariko Bazaar Item 1,                                     shop,           NONE,                 BAZAAR,                         0x30,                       ARROWS_5
 Kakariko Bazaar Item 2,                                     shop,           NONE,                 BAZAAR,                         0x31,                       ARROWS_10
 Kakariko Bazaar Item 3,                                     shop,           NONE,                 BAZAAR,                         0x32,                       ARROWS_30
@@ -84,6 +95,12 @@ Graveyard Royal Tomb Chest,                                 chest,          NONE
 Graveyard Fairy Tomb,                                       chest,          NONE,                 TOMB_FAIRY,                     0x00,                       SHIELD_HYLIAN
 Graveyard Dampe Tomb Reward 1,                              chest,          NONE,                 TOMB_DAMPE_WINDMILL,            0x00,                       HOOKSHOT
 Graveyard Dampe Tomb Reward 2,                              collectible,    NONE,                 TOMB_DAMPE_WINDMILL,            0x07,                       HEART_PIECE
+Graveyard Dampe Tomb Pot 1,                                 pot,            NONE,                 TOMB_DAMPE_WINDMILL,            0x0000,                     RECOVERY_HEART
+Graveyard Dampe Tomb Pot 2,                                 pot,            NONE,                 TOMB_DAMPE_WINDMILL,            0x0001,                     NUTS_5
+Graveyard Dampe Tomb Pot 3,                                 pot,            NONE,                 TOMB_DAMPE_WINDMILL,            0x0002,                     BOMB
+Graveyard Dampe Tomb Pot 4,                                 pot,            NONE,                 TOMB_DAMPE_WINDMILL,            0x0003,                     ARROWS_5
+Graveyard Dampe Tomb Pot 5,                                 pot,            NONE,                 TOMB_DAMPE_WINDMILL,            0x0004,                     MAGIC_JAR_SMALL
+Graveyard Dampe Tomb Pot 6,                                 pot,            NONE,                 TOMB_DAMPE_WINDMILL,            0x0005,                     RUPEE_RED
 Graveyard Crate HP,                                         collectible,    NONE,                 GRAVEYARD,                      0x04,                       HEART_PIECE
 Graveyard GS Soil,                                          gs,             NONE,                 GRAVEYARD,                      0x88,                       GS_TOKEN
 Graveyard GS Wall,                                          gs,             NONE,                 GRAVEYARD,                      0x8f,                       GS_TOKEN
@@ -188,6 +205,13 @@ Lon Lon Ranch Silo Cow Back,                                cow,            NONE
 Lon Lon Ranch Grotto Left Scrub,                            scrub,          NONE,                 GROTTOS,                        0x08,                       NUTS_5
 Lon Lon Ranch Grotto Center Scrub,                          scrub,          NONE,                 GROTTOS,                        0x09,                       DEKU_SEEDS_30
 Lon Lon Ranch Grotto Right Scrub,                           scrub,          NONE,                 GROTTOS,                        0x0a,                       BOMBS_5
+Lon Lon Ranch Pot 1,                                        pot,            NONE,                 LON_LON_RANCH,                  0x0003,                     RUPEE_GREEN
+Lon Lon Ranch Pot 2,                                        pot,            NONE,                 LON_LON_RANCH,                  0x0004,                     RUPEE_GREEN
+Lon Lon Ranch Pot 3,                                        pot,            NONE,                 LON_LON_RANCH,                  0x0005,                     RECOVERY_HEART
+Lon Lon Ranch Pot 4,                                        pot,            NONE,                 LON_LON_RANCH,                  0x0006,                     RECOVERY_HEART
+Lon Lon Ranch Pot 5,                                        pot,            NONE,                 LON_LON_RANCH,                  0x0007,                     RECOVERY_HEART
+Lon Lon Ranch Pot 6,                                        pot,            NONE,                 LON_LON_RANCH,                  0x0008,                     RECOVERY_HEART
+Lon Lon Ranch Pot 7,                                        pot,            NONE,                 LON_LON_RANCH,                  0x0009,                     RECOVERY_HEART
 Hyrule Field Ocarina of Time,                               npc,            NONE,                 HYRULE_FIELD,                   OCARINA_TIME_ITEM,          OCARINA
 Hyrule Field Song of Time,                                  npc,            NONE,                 HYRULE_FIELD,                   OCARINA_TIME_SONG,          SONG_TIME
 Hyrule Field Grotto Scrub HP,                               scrub,          NONE,                 GROTTOS,                        0x07,                       HEART_PIECE
@@ -629,6 +653,24 @@ Ganon Castle SR Forest Front,                               sr,             NONE
 Ganon Castle SR Forest Back Right,                          sr,             NONE,                 INSIDE_GANON_CASTLE,            0x62,                       RUPEE_SILVER_GANON_FOREST
 Ganon Castle SR Forest Back Middle,                         sr,             NONE,                 INSIDE_GANON_CASTLE,            0x63,                       RUPEE_SILVER_GANON_FOREST
 Ganon Castle SR Forest Center Left,                         sr,             NONE,                 INSIDE_GANON_CASTLE,            0x64,                       RUPEE_SILVER_GANON_FOREST
+Ganon Tower Boss Pot 01,                                    pot,            NONE,                 GANON_TOWER,                    0x002f,                     MAGIC_JAR_LARGE
+Ganon Tower Boss Pot 02,                                    pot,            NONE,                 GANON_TOWER,                    0x0030,                     RECOVERY_HEART
+Ganon Tower Boss Pot 03,                                    pot,            NONE,                 GANON_TOWER,                    0x0031,                     ARROWS_10
+Ganon Tower Boss Pot 04,                                    pot,            NONE,                 GANON_TOWER,                    0x0032,                     MAGIC_JAR_SMALL
+Ganon Tower Boss Pot 05,                                    pot,            NONE,                 GANON_TOWER,                    0x0033,                     ARROWS_10
+Ganon Tower Boss Pot 06,                                    pot,            NONE,                 GANON_TOWER,                    0x0034,                     RECOVERY_HEART
+Ganon Tower Boss Pot 07,                                    pot,            NONE,                 GANON_TOWER,                    0x0035,                     MAGIC_JAR_SMALL
+Ganon Tower Boss Pot 08,                                    pot,            NONE,                 GANON_TOWER,                    0x0036,                     NOTHING
+Ganon Tower Boss Pot 09,                                    pot,            NONE,                 GANON_TOWER,                    0x0037,                     RECOVERY_HEART
+Ganon Tower Boss Pot 10,                                    pot,            NONE,                 GANON_TOWER,                    0x0038,                     NOTHING
+Ganon Tower Boss Pot 11,                                    pot,            NONE,                 GANON_TOWER,                    0x0039,                     ARROWS_10
+Ganon Tower Boss Pot 12,                                    pot,            NONE,                 GANON_TOWER,                    0x003a,                     ARROWS_10
+Ganon Tower Boss Pot 13,                                    pot,            NONE,                 GANON_TOWER,                    0x003b,                     RECOVERY_HEART
+Ganon Tower Boss Pot 14,                                    pot,            NONE,                 GANON_TOWER,                    0x003c,                     RECOVERY_HEART
+Ganon Tower Boss Pot 15,                                    pot,            NONE,                 GANON_TOWER,                    0x003d,                     RECOVERY_HEART
+Ganon Tower Boss Pot 16,                                    pot,            NONE,                 GANON_TOWER,                    0x003e,                     NOTHING
+Ganon Tower Boss Pot 17,                                    pot,            NONE,                 GANON_TOWER,                    0x003f,                     NOTHING
+Ganon Tower Boss Pot 18,                                    pot,            NONE,                 GANON_TOWER,                    0x0040,                     ARROWS_10
 MQ Deku Tree Map Chest,                                     chest,          NONE,                 INSIDE_DEKU_TREE,               0x03,                       MAP_DT
 MQ Deku Tree Compass Chest,                                 chest,          NONE,                 INSIDE_DEKU_TREE,               0x01,                       COMPASS_DT
 MQ Deku Tree Slingshot Chest,                               chest,          NONE,                 INSIDE_DEKU_TREE,               0x06,                       SLINGSHOT

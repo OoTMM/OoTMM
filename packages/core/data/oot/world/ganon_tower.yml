@@ -9,3 +9,22 @@
   dungeon: Tower
   events:
     GANON: "!setting(goal, triforce) && has_light_arrows"
+  locations:
+    "Ganon Tower Boss Pot 01": "true"
+    "Ganon Tower Boss Pot 02": "true"
+    "Ganon Tower Boss Pot 03": "true"
+    "Ganon Tower Boss Pot 04": "true"
+    "Ganon Tower Boss Pot 05": "true"
+    "Ganon Tower Boss Pot 06": "true"
+    "Ganon Tower Boss Pot 07": "true"
+    "Ganon Tower Boss Pot 08": "true"
+    "Ganon Tower Boss Pot 09": "true"
+    "Ganon Tower Boss Pot 10": "true"
+    "Ganon Tower Boss Pot 11": "true"
+    "Ganon Tower Boss Pot 12": "true"
+    "Ganon Tower Boss Pot 13": "true"
+    "Ganon Tower Boss Pot 14": "true"
+    "Ganon Tower Boss Pot 15": "true"
+    "Ganon Tower Boss Pot 16": "true"
+    "Ganon Tower Boss Pot 17": "true"
+    "Ganon Tower Boss Pot 18": "true"

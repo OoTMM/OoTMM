@@ -3,15 +3,15 @@
 
 #include <combo/common/actor.h>
 
-typedef struct
+typedef struct ALIGNED(4)
 {
     Actor           base;
     char            unk_13c[0x54];
 
     /* Extended flags */
+    u8              extendedSetupId;
     u8              extendedRoomId;
     u8              extendedId;
-    u8              pad0[2];
 }
 Actor_ObjTsubo;
 

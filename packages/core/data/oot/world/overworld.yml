@@ -444,6 +444,13 @@
     "Lon Lon Ranch GS House": "is_child && can_boomerang && gs_night"
     "Lon Lon Ranch GS Rain Shed": "is_child && gs_night"
     "Lon Lon Ranch GS Back Wall": "is_child && can_boomerang && gs_night"
+    "Lon Lon Ranch Pot 1": "is_child"
+    "Lon Lon Ranch Pot 2": "is_child"
+    "Lon Lon Ranch Pot 3": "is_child"
+    "Lon Lon Ranch Pot 4": "is_child"
+    "Lon Lon Ranch Pot 5": "is_child"
+    "Lon Lon Ranch Pot 6": "is_child"
+    "Lon Lon Ranch Pot 7": "is_child"
 "Lon Lon Ranch Stables":
   region: ENTRANCE
   exits:
@@ -728,6 +735,17 @@
     "Kakariko GS House of Skulltula": "gs_night && is_child"
     "Kakariko GS Bazaar": "gs_night && is_child"
     "Kakariko GS Ladder": "gs_night && is_child && (can_use_slingshot || has_bombchu)"
+    "Kakariko Pot 01": "is_child"
+    "Kakariko Pot 02": "is_child"
+    "Kakariko Pot 03": "is_child"
+    "Kakariko Pot 04": "is_child"
+    "Kakariko Pot 05": "is_child"
+    "Kakariko Pot 06": "is_child"
+    "Kakariko Pot 07": "is_child"
+    "Kakariko Pot 08": "is_child"
+    "Kakariko Pot 09": "is_child"
+    "Kakariko Pot 10": "is_child"
+    "Kakariko Pot 11": "is_child"
 "Kakariko Rooftop":
   region: KAKARIKO
   exits:
@@ -915,6 +933,12 @@
   locations:
     "Graveyard Dampe Tomb Reward 1": "true"
     "Graveyard Dampe Tomb Reward 2": "is_adult" #It's very hard to finish this race sub-1 as kid.
+    "Graveyard Dampe Tomb Pot 1": "true"
+    "Graveyard Dampe Tomb Pot 2": "true"
+    "Graveyard Dampe Tomb Pot 3": "true"
+    "Graveyard Dampe Tomb Pot 4": "true"
+    "Graveyard Dampe Tomb Pot 5": "true"
+    "Graveyard Dampe Tomb Pot 6": "true"
 "Dampe House":
   region: ENTRANCE
   exits:

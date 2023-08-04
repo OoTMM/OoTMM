@@ -3,7 +3,7 @@
 
 #include <combo/common/actor.h>
 
-typedef struct Actor_EnItem00
+typedef struct ALIGNED(4) Actor_EnItem00
 {
     Actor   base;
     char    unk_13c[0x4];
@@ -14,12 +14,12 @@ typedef struct Actor_EnItem00
 #endif
 
     /* Extra flags */
+    s16     extendedGi;
+    u8      extendedMajor;
     u8      isExtended;
+    u8      extendedSetupId;
     u8      extendedRoomId;
     u8      extendedId;
-    u8      extendedMajor;
-    s16     extendedGi;
-    s16     pad1;
 }
 Actor_EnItem00;
 
