@@ -742,6 +742,22 @@ Gerudo Fortress Jail 2,                                     collectible,    NONE
 Gerudo Fortress Jail 3,                                     collectible,    NONE,                 THIEVES_HIDEOUT,                0x0a,                       SMALL_KEY_GF
 Gerudo Fortress Jail 4,                                     collectible,    NONE,                 THIEVES_HIDEOUT,                0x0e,                       SMALL_KEY_GF
 Gerudo Member Card,                                         npc,            NONE,                 THIEVES_HIDEOUT,                GERUDO_CARD,                GERUDO_CARD
+Gerudo Fortress Pot Break Room 1,                           pot,            NONE,                 THIEVES_HIDEOUT,                0x0004,                     ARROWS_10
+Gerudo Fortress Pot Break Room 2,                           pot,            NONE,                 THIEVES_HIDEOUT,                0x0005,                     MAGIC_JAR_LARGE
+Gerudo Fortress Pot Jail 1 1,                               pot,            NONE,                 THIEVES_HIDEOUT,                0x0206,                     RECOVERY_HEART
+Gerudo Fortress Pot Jail 1 2,                               pot,            NONE,                 THIEVES_HIDEOUT,                0x0207,                     ARROWS_10
+Gerudo Fortress Pot Jail 1 3,                               pot,            NONE,                 THIEVES_HIDEOUT,                0x0208,                     RUPEE_RED
+Gerudo Fortress Pot Kitchen 1,                              pot,            NONE,                 THIEVES_HIDEOUT,                0x0305,                     ARROWS_10
+Gerudo Fortress Pot Kitchen 2,                              pot,            NONE,                 THIEVES_HIDEOUT,                0x0306,                     RECOVERY_HEART
+Gerudo Fortress Pot Jail 4 1,                               pot,            NONE,                 THIEVES_HIDEOUT,                0x0409,                     RUPEE_BLUE
+Gerudo Fortress Pot Jail 4 2,                               pot,            NONE,                 THIEVES_HIDEOUT,                0x040a,                     RECOVERY_HEART
+Gerudo Fortress Pot Jail 2 1,                               pot,            NONE,                 THIEVES_HIDEOUT,                0x0507,                     RECOVERY_HEART
+Gerudo Fortress Pot Jail 2 2,                               pot,            NONE,                 THIEVES_HIDEOUT,                0x0508,                     RUPEE_BLUE
+Gerudo Fortress Pot Jail 2 3,                               pot,            NONE,                 THIEVES_HIDEOUT,                0x0509,                     RUPEE_RED
+Gerudo Fortress Pot Jail 2 4,                               pot,            NONE,                 THIEVES_HIDEOUT,                0x050a,                     RECOVERY_HEART
+Gerudo Fortress Pot Jail 2 5,                               pot,            NONE,                 THIEVES_HIDEOUT,                0x050b,                     RECOVERY_HEART
+Gerudo Fortress Pot Jail 2 6,                               pot,            NONE,                 THIEVES_HIDEOUT,                0x050c,                     RECOVERY_HEART
+Gerudo Fortress Pot Jail 2 7,                               pot,            NONE,                 THIEVES_HIDEOUT,                0x050d,                     RECOVERY_HEART
 Spirit Temple Child First Chest,                            chest,          NONE,                 TEMPLE_SPIRIT,                  0x08,                       SHIELD_DEKU
 Spirit Temple Child Second Chest,                           chest,          NONE,                 TEMPLE_SPIRIT,                  0x00,                       SMALL_KEY_SPIRIT
 Spirit Temple Child Climb 1,                                chest,          NONE,                 TEMPLE_SPIRIT,                  0x0c,                       SHIELD_DEKU
