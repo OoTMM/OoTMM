@@ -522,11 +522,12 @@ export class LogicPassHints {
       return false;
     }
     const locD = locationData(location);
+    const locWorld = this.state.worlds[locD.world as number];
     if (this.hintedLocations.has(location) && !isMoon) {
       return false;
     }
     const item = this.state.items.get(location)!;
-    const hint = world.checks[locD.id].hint;
+    const hint = locWorld.checks[locD.id].hint;
     if (this.placeGossipItemExact(worldId, locD.world as number, hint, extra, isMoon)) {
       return true;
     }
@@ -545,7 +546,7 @@ export class LogicPassHints {
       return false;
     }
     this.hintedLocations.add(location);
-    const h: HintGossip = { game: world.gossip[gossip].game, type: 'item-region', item, region: makeRegion(world.regions[locD.id], locD.world as number) };
+    const h: HintGossip = { game: world.gossip[gossip].game, type: 'item-region', item, region: makeRegion(locWorld.regions[locD.id], locD.world as number) };
     this.placeWithExtra(worldId, gossip, h, extra);
     return true;
   }
