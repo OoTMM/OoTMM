@@ -4,6 +4,12 @@ import { CodeGen } from '../lib/combo/util/codegen';
 import { decompressGame } from '../lib/combo/decompress';
 
 const POT_ACTOR_TYPE = 0x111;
+const FLYING_POT_ACTOR_TYPE = 0x11d;
+
+const INTERESTING_ACTORS = [
+  POT_ACTOR_TYPE,
+  FLYING_POT_ACTOR_TYPE,
+];
 
 const SCENE_TABLE_ADDR =    0xb71440;
 const SCENE_TABLE_ADDR_MQ = 0xBA0BB0;
@@ -36,10 +42,6 @@ const ITEM00_DROPS = [
   'TUNIC_ZORA',
   'TUNIC_GORON',
   'BOMBS_5',
-];
-
-const INTERESTING_ACTORS = [
-  POT_ACTOR_TYPE,
 ];
 
 type RawRoom = {
