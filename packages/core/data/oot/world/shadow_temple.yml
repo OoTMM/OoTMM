@@ -13,6 +13,15 @@
   locations:
     "Shadow Temple Map": "soul_redead_gibdo && soul_keese && has_lens && (has_weapon || can_use_sticks || can_use_din)"
     "Shadow Temple Hover Boots": "soul(SOUL_DEAD_HAND) && has_lens && (has_weapon || (can_use_sticks && trick(OOT_DEAD_HAND_STICKS)))"
+    "Shadow Temple Pot Early Maze 1": "has_lens"
+    "Shadow Temple Pot Early Maze 2": "has_lens"
+    "Shadow Temple Pot Early Maze 3": "has_lens"
+    "Shadow Temple Pot Early Maze 4": "has_lens"
+    "Shadow Temple Pot Early Maze 5": "has_lens"
+    "Shadow Temple Pot Early Maze 6": "has_lens"
+    "Shadow Temple Pot Map Room 1": "has_lens"
+    "Shadow Temple Pot Map Room 2": "has_lens"
+    "Shadow Temple Flying Pot Early Maze": "has_lens && soul_flying_pot"
 "Shadow Temple Main":
   dungeon: Shadow
   exits:
@@ -54,6 +63,10 @@
     "Shadow Temple Falling Spikes Upper 1": "is_adult && has(STRENGTH) && has_lens"
     "Shadow Temple Falling Spikes Upper 2": "is_adult && has(STRENGTH) && has_lens"
     "Shadow Temple GS Falling Spikes": "can_collect_distance"
+    "Shadow Temple Pot Falling Spikes Bottom 1": "true"
+    "Shadow Temple Pot Falling Spikes Bottom 2": "true"
+    "Shadow Temple Pot Falling Spikes Top 1": "is_adult && has(STRENGTH) && has_lens"
+    "Shadow Temple Pot Falling Spikes Top 2": "is_adult && has(STRENGTH) && has_lens"
 "Shadow Temple Invisible Spikes":
   dungeon: Shadow
   exits:
@@ -83,6 +96,10 @@
     "Shadow Temple After Wind": "soul_redead_gibdo"
     "Shadow Temple After Wind Invisible": "has_explosives && has_lens"
     "Shadow Temple GS Near Boat": "small_keys_shadow(4) && can_longshot"
+    "Shadow Temple Pot After Wind 1": "true"
+    "Shadow Temple Pot After Wind 2": "true"
+    "Shadow Temple Flying Pot After Wind 1": "soul_flying_pot"
+    "Shadow Temple Flying Pot After Wind 2": "soul_flying_pot"
 "Shadow Temple Boat":
   dungeon: Shadow
   exits:
@@ -92,3 +109,10 @@
     "Shadow Temple Boss Key Room 2": "can_use_din"
     "Shadow Temple Invisible Floormaster": "soul_floormaster"
     "Shadow Temple GS Triple Skull Pot": "can_collect_distance"
+    "Shadow Temple Pot Boss Key Room": "true"
+    "Shadow Temple Pot Invisible Floormaster Room 1": "true"
+    "Shadow Temple Pot Invisible Floormaster Room 2": "true"
+    "Shadow Temple Pot Boat Before Bridge 1": "true"
+    "Shadow Temple Pot Boat Before Bridge 2": "true"
+    "Shadow Temple Pot Boat After Bridge 1": "(can_use_bow || scarecrow_longshot)"
+    "Shadow Temple Pot Boat After Bridge 2": "(can_use_bow || scarecrow_longshot)"

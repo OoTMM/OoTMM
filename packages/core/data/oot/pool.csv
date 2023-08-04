@@ -702,6 +702,30 @@ Shadow Temple SR Spikes Right,                              sr,             NONE
 Shadow Temple SR Spikes Center,                             sr,             NONE,                 TEMPLE_SHADOW,                  0x2f,                       RUPEE_SILVER_SHADOW_SPIKES
 Shadow Temple SR Spikes Front Left,                         sr,             NONE,                 TEMPLE_SHADOW,                  0x30,                       RUPEE_SILVER_SHADOW_SPIKES
 Shadow Temple SR Spikes Midair,                             sr,             NONE,                 TEMPLE_SHADOW,                  0x31,                       RUPEE_SILVER_SHADOW_SPIKES
+Shadow Temple Pot Early Maze 1,                             pot,            NONE,                 TEMPLE_SHADOW,                  0x0000,                     MAGIC_JAR_SMALL
+Shadow Temple Pot Early Maze 2,                             pot,            NONE,                 TEMPLE_SHADOW,                  0x0001,                     MAGIC_JAR_SMALL
+Shadow Temple Pot Early Maze 3,                             pot,            NONE,                 TEMPLE_SHADOW,                  0x0002,                     RECOVERY_HEART
+Shadow Temple Pot Early Maze 4,                             pot,            NONE,                 TEMPLE_SHADOW,                  0x0003,                     RUPEE_BLUE
+Shadow Temple Pot Early Maze 5,                             pot,            NONE,                 TEMPLE_SHADOW,                  0x0004,                     NUTS_5
+Shadow Temple Pot Early Maze 6,                             pot,            NONE,                 TEMPLE_SHADOW,                  0x0005,                     RECOVERY_HEART
+Shadow Temple Pot Map Room 1,                               pot,            NONE,                 TEMPLE_SHADOW,                  0x0103,                     ARROWS_10
+Shadow Temple Pot Map Room 2,                               pot,            NONE,                 TEMPLE_SHADOW,                  0x0104,                     RECOVERY_HEART
+Shadow Temple Pot Falling Spikes Bottom 1,                  pot,            NONE,                 TEMPLE_SHADOW,                  0x0a03,                     RECOVERY_HEART
+Shadow Temple Pot Falling Spikes Bottom 2,                  pot,            NONE,                 TEMPLE_SHADOW,                  0x0a04,                     BOMB
+Shadow Temple Pot Falling Spikes Top 1,                     pot,            NONE,                 TEMPLE_SHADOW,                  0x0a05,                     RECOVERY_HEART
+Shadow Temple Pot Falling Spikes Top 2,                     pot,            NONE,                 TEMPLE_SHADOW,                  0x0a06,                     RECOVERY_HEART
+Shadow Temple Pot Boss Key Room,                            pot,            NONE,                 TEMPLE_SHADOW,                  0x0d02,                     MAGIC_JAR_LARGE
+Shadow Temple Pot Invisible Floormaster Room 1,             pot,            NONE,                 TEMPLE_SHADOW,                  0x1101,                     RECOVERY_HEART
+Shadow Temple Pot Invisible Floormaster Room 2,             pot,            NONE,                 TEMPLE_SHADOW,                  0x1102,                     ARROWS_30
+Shadow Temple Pot After Wind 1,                             pot,            NONE,                 TEMPLE_SHADOW,                  0x1402,                     RUPEE_BLUE
+Shadow Temple Pot After Wind 2,                             pot,            NONE,                 TEMPLE_SHADOW,                  0x1403,                     NUTS_5
+Shadow Temple Pot Boat Before Bridge 1,                     pot,            NONE,                 TEMPLE_SHADOW,                  0x1510,                     ARROWS_10
+Shadow Temple Pot Boat Before Bridge 2,                     pot,            NONE,                 TEMPLE_SHADOW,                  0x1511,                     NOTHING
+Shadow Temple Pot Boat After Bridge 1,                      pot,            NONE,                 TEMPLE_SHADOW,                  0x1512,                     ARROWS_30
+Shadow Temple Pot Boat After Bridge 2,                      pot,            NONE,                 TEMPLE_SHADOW,                  0x1513,                     MAGIC_JAR_LARGE
+Shadow Temple Flying Pot Early Maze,                        pot,            NONE,                 TEMPLE_SHADOW,                  0x0006,                     RECOVERY_HEART
+Shadow Temple Flying Pot After Wind 1,                      pot,            NONE,                 TEMPLE_SHADOW,                  0x1404,                     RECOVERY_HEART
+Shadow Temple Flying Pot After Wind 2,                      pot,            NONE,                 TEMPLE_SHADOW,                  0x1405,                     NUTS_5
 Shadow Temple Boss HC,                                      collectible,    NONE,                 LAIR_BONGO_BONGO,               0x1f,                       HEART_CONTAINER
 Shadow Temple Boss,                                         npc,            NONE,                 LAIR_BONGO_BONGO,               BLUE_WARP_BONGO_BONGO,      MEDALLION_SHADOW
 Gerudo Fortress Jail 1,                                     collectible,    NONE,                 THIEVES_HIDEOUT,                0x0c,                       SMALL_KEY_GF
