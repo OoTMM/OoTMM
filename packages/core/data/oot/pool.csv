@@ -581,6 +581,15 @@ Ice Cavern SR Blocks Back Right,                            sr,             NONE
 Ice Cavern SR Blocks Center,                                sr,             NONE,                 ICE_CAVERN,                     0x3e,                       RUPEE_SILVER_IC_BLOCK
 Ice Cavern SR Blocks Alcove,                                sr,             NONE,                 ICE_CAVERN,                     0x3f,                       RUPEE_SILVER_IC_BLOCK
 Ice Cavern SR Blocks Front Left,                            sr,             NONE,                 ICE_CAVERN,                     0x40,                       RUPEE_SILVER_IC_BLOCK
+Ice Cavern Pot First Corridor 1,                            pot,            NONE,                 ICE_CAVERN,                     0x0200,                     RECOVERY_HEART
+Ice Cavern Pot First Corridor 2,                            pot,            NONE,                 ICE_CAVERN,                     0x0201,                     RECOVERY_HEART
+Ice Cavern Pot Scythe Room 1,                               pot,            NONE,                 ICE_CAVERN,                     0x0308,                     ARROWS_10
+Ice Cavern Pot Scythe Room 2,                               pot,            NONE,                 ICE_CAVERN,                     0x0309,                     RUPEE_BLUE
+Ice Cavern Pot Scythe Room 3,                               pot,            NONE,                 ICE_CAVERN,                     0x030a,                     RECOVERY_HEART
+Ice Cavern Pot Red Ice 1,                                   pot,            NONE,                 ICE_CAVERN,                     0x0600,                     RECOVERY_HEART
+Ice Cavern Pot Red Ice 2,                                   pot,            NONE,                 ICE_CAVERN,                     0x0601,                     RECOVERY_HEART
+Ice Cavern Pot Map Room,                                    pot,            NONE,                 ICE_CAVERN,                     0x0909,                     RUPEE_PURPLE
+Ice Cavern Flying Pot Scythe Room,                          pot,            NONE,                 ICE_CAVERN,                     0x030b,                     RECOVERY_HEART
 Water Temple Under Center,                                  chest,          NONE,                 TEMPLE_WATER,                   0x06,                       RUPEE_BLUE
 Water Temple Compass,                                       chest,          NONE,                 TEMPLE_WATER,                   0x09,                       COMPASS_WATER
 Water Temple Longshot,                                      chest,          NONE,                 TEMPLE_WATER,                   0x07,                       HOOKSHOT
