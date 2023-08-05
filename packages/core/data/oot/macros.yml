@@ -145,7 +145,7 @@
 "has_skeleton_key": "setting(skeletonKeyOot) && cond(setting(sharedSkeletonKey), has(SHARED_SKELETON_KEY), has(SKELETON_KEY))"
 "boss_key(x)": "setting(bossKeyShuffleOot, removed) || has(x)"
 "small_keys(x, y, count)": "has_skeleton_key || (setting(smallKeyShuffleOot, removed) || cond(setting(smallKeyRingOot, keyRings), has(y), has(x, count)))"
-"small_keys_extra(x, y, count)": "setting(smallKeyShuffleOot, removed) || cond(setting(smallKeyRingOot, keyRings), has(y), has(x, count + 1))"
+"small_keys_extra(x, y, count)": "has_skeleton_key || (setting(smallKeyShuffleOot, removed) || cond(setting(smallKeyRingOot, keyRings), has(y), has(x, count + 1)))"
 "small_keys_forest(n)": "small_keys(SMALL_KEY_FOREST, KEY_RING_FOREST, n)"
 "small_keys_fire(n)": "cond(setting(smallKeyShuffleOot, anywhere), small_keys_extra(SMALL_KEY_FIRE, KEY_RING_FIRE, n), small_keys(SMALL_KEY_FIRE, KEY_RING_FIRE, n))"
 "small_keys_water(n)": "small_keys(SMALL_KEY_WATER, KEY_RING_WATER, n)"
