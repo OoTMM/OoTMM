@@ -73,6 +73,7 @@ export const CONFVARS = [
   'MM_REMOVED_FAIRIES',
   'SHARED_SKELETON_KEY',
   'OOT_SHUFFLE_POTS',
+  'MM_SHUFFLE_POTS',
 ] as const;
 
 export type Confvar = typeof CONFVARS[number];

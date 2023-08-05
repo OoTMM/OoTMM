@@ -40,6 +40,7 @@
 #  include <combo/mm/actor_entrt.h>
 #  include <combo/mm/actor_enossan.h>
 #  include <combo/mm/actor_arms_hook.h>
+#  include <combo/mm/actors/Obj_Tsubo.h>
 # endif
 
 # include <combo/common/actors/En_Item00.h>

@@ -176,7 +176,6 @@ static void CustomItem_Init(Actor_CustomItem* this, GameState_Play* play)
     this->handler = CustomItem_HandlerUncollected;
 }
 
-#if defined(GAME_OOT)
 ActorInit CustomItem_gActorInit = {
     AC_CUSTOM_ITEM,
     0x8,
@@ -224,4 +223,3 @@ Actor_CustomItem* DropCustomItem(GameState_Play* play, const Vec3f* pos, const X
 
     return item;
 }
-#endif
