@@ -3,17 +3,45 @@ import fs from 'fs/promises';
 import { CodeGen } from '../lib/combo/util/codegen';
 import { decompressGame } from '../lib/combo/decompress';
 
-const POT_ACTOR_TYPE = 0x111;
-const FLYING_POT_ACTOR_TYPE = 0x11d;
+type Game = 'oot' | 'mq' | 'mm';
 
-const INTERESTING_ACTORS = [
-  POT_ACTOR_TYPE,
-  FLYING_POT_ACTOR_TYPE,
-];
+const MM_SCENES_WITH_EXTRA_SETUPS: {[k: number]: number} = {
+  0x2036000: 3,
+  0x2249000: 1,
+  0x263b000: 1,
+  0x265e000: 1,
+};
 
-const SCENE_TABLE_ADDR =    0xb71440;
-const SCENE_TABLE_ADDR_MQ = 0xBA0BB0;
-const SCENE_TABLE_SIZE = 101;
+const ACTORS_OOT = {
+  POT: 0x111,
+  FLYING_POT: 0x11d,
+};
+
+const ACTORS_MM = {
+  POT: 0x82,
+  FLYING_POT: 0x8d,
+};
+
+const INTERESTING_ACTORS_OOT = Object.values(ACTORS_OOT);
+const INTERESTING_ACTORS_MM = Object.values(ACTORS_MM);
+
+const CONFIGS = {
+  oot: {
+    SCENE_TABLE_ADDR: 0xb71440,
+    SCENE_TABLE_SIZE: 101,
+    INTERESTING_ACTORS: INTERESTING_ACTORS_OOT,
+  },
+  mq: {
+    SCENE_TABLE_ADDR: 0xba0bb0,
+    SCENE_TABLE_SIZE: 101,
+    INTERESTING_ACTORS: INTERESTING_ACTORS_OOT,
+  },
+  mm: {
+    SCENE_TABLE_ADDR: 0x00C5A1E0,
+    SCENE_TABLE_SIZE: 113,
+    INTERESTING_ACTORS: INTERESTING_ACTORS_MM,
+  }
+}
 
 const ITEM00_DROPS = [
   'RUPEE_GREEN',
@@ -150,18 +178,18 @@ function findHeaderOffset(rom: Buffer, offset: number, wantedOp: number) {
   }
 }
 
-function filterActors(actors: Actor[]): Actor[] {
+function filterActors(actors: Actor[], game: Game): Actor[] {
   /* Filter the unintresting trailing actors */
   let lastInterestingActor = -1;
   for (let i = 0; i < actors.length; i++) {
-    if (INTERESTING_ACTORS.includes(actors[i].typeId)) {
+    if (CONFIGS[game].INTERESTING_ACTORS.includes(actors[i].typeId)) {
       lastInterestingActor = i;
     }
   }
   return actors.slice(0, lastInterestingActor + 1);
 }
 
-function parseRoomActors(rom: Buffer, raw: RawRoom): RoomActors {
+function parseRoomActors(rom: Buffer, raw: RawRoom, game: Game): RoomActors {
   let actors: Actor[] = [];
   const actorHeaders = findHeaderOffset(rom, raw.vromHeader, 0x01);
   if (actorHeaders !== null) {
@@ -174,14 +202,17 @@ function parseRoomActors(rom: Buffer, raw: RawRoom): RoomActors {
       actors.push({ actorId, typeId, params });
     }
   }
-  actors = filterActors(actors);
+  actors = filterActors(actors, game);
   return { sceneId: raw.sceneId, setupId: raw.setupId, roomId: raw.roomId, actors };
 }
 
-function getRawRooms(rom: Buffer, mq = false) {
+function getRawRooms(rom: Buffer, game: 'oot' | 'mq' | 'mm') {
   const rooms: RawRoom[] = [];
-  for (let sceneId = 0; sceneId < SCENE_TABLE_SIZE; sceneId++) {
-    const sceneVrom = rom.readUInt32BE((mq ? SCENE_TABLE_ADDR_MQ : SCENE_TABLE_ADDR) + sceneId * 0x14);
+  const config = CONFIGS[game];
+  for (let sceneId = 0; sceneId < config.SCENE_TABLE_SIZE; sceneId++) {
+    const sceneVrom = rom.readUInt32BE(config.SCENE_TABLE_ADDR + sceneId * (game === 'mm' ? 0x10 : 0x14));
+    if (sceneVrom === 0)
+      continue;
     const roomsHeaderVrom = findHeaderOffset(rom, sceneVrom, 0x04);
     if (roomsHeaderVrom === null)
       continue;
@@ -194,16 +225,18 @@ function getRawRooms(rom: Buffer, mq = false) {
       rooms.push({ sceneId, setupId: 0, roomId, vromBase: roomFileVrom, vromHeader: roomFileVrom });
 
       /* Look for alternate setups */
-      const altHeaderOffset = findHeaderOffset(rom, roomFileVrom, 0x18);
-      if (altHeaderOffset === null)
-        continue;
-      const altHeaderListVrom = roomFileVrom + (rom.readUInt32BE(altHeaderOffset + 4) & 0xffffff);
-      for (let setupId = 1; setupId < 4; ++setupId) {
-        const setupAddr = rom.readUInt32BE(altHeaderListVrom + (setupId - 1) * 4);
-        if (setupAddr === 0)
+      if (game !== 'mm') {
+        const altHeaderOffset = findHeaderOffset(rom, roomFileVrom, 0x18);
+        if (altHeaderOffset === null)
           continue;
-        const setupVrom = roomFileVrom + (setupAddr & 0xffffff);
-        rooms.push({ sceneId, setupId, roomId, vromBase: roomFileVrom, vromHeader: setupVrom });
+        const altHeaderListVrom = roomFileVrom + (rom.readUInt32BE(altHeaderOffset + 4) & 0xffffff);
+        for (let setupId = 1; setupId < 4; ++setupId) {
+          const setupAddr = rom.readUInt32BE(altHeaderListVrom + (setupId - 1) * 4);
+          if (setupAddr === 0)
+            continue;
+          const setupVrom = roomFileVrom + (setupAddr & 0xffffff);
+          rooms.push({ sceneId, setupId, roomId, vromBase: roomFileVrom, vromHeader: setupVrom });
+        }
       }
     }
   }
@@ -233,10 +266,10 @@ async function codegen(roomActors: RoomActors[], addrTable: AddressingTable) {
   ]);
 }
 
-function outputPotsPool(roomActors: RoomActors[]) {
+function outputPotsPoolOot(roomActors: RoomActors[]) {
   for (const room of roomActors) {
     for (const actor of room.actors) {
-      if (actor.typeId === POT_ACTOR_TYPE) {
+      if (actor.typeId === ACTORS_OOT.POT) {
         const item00 = (actor.params >> 0) & 0xff;
         let item: string;
         if (item00 >= 0x1a) {
@@ -248,7 +281,7 @@ function outputPotsPool(roomActors: RoomActors[]) {
         console.log(`Scene ${room.sceneId.toString(16)} Setup ${room.setupId} Room ${room.roomId} Pot ${actor.actorId}, pot,            NONE,                 SCENE_${room.sceneId.toString(16)}, 0x${key.toString(16)}, ${item}`);
       }
 
-      if (actor.typeId === FLYING_POT_ACTOR_TYPE) {
+      if (actor.typeId === ACTORS_OOT.FLYING_POT) {
         const itemId = (actor.params >> 8) & 0xff;
         let item: string;
         if (itemId >= 0x07) {
@@ -263,9 +296,9 @@ function outputPotsPool(roomActors: RoomActors[]) {
   }
 }
 
-function getGameRoomActor(rom: Buffer, mq: boolean) {
-  const rawRooms = getRawRooms(rom, mq);
-  const actorRooms = sortRoomActors(rawRooms.map(raw => parseRoomActors(rom, raw)));
+function getGameRoomActor(rom: Buffer, game: Game) {
+  const rawRooms = getRawRooms(rom, game);
+  const actorRooms = sortRoomActors(rawRooms.map(raw => parseRoomActors(rom, raw, game)));
   return actorRooms;
 }
 
@@ -275,14 +308,22 @@ async function run() {
   const ootDecompressed = await decompressGame('oot', ootRomCompressed);
   const ootRom = ootDecompressed.rom;
 
+  /* Get MM ROM */
+  const mmRomCompressed = await fs.readFile(__dirname + '/../../../roms/mm.z64');
+  const mmDecompressed = await decompressGame('mm', mmRomCompressed);
+  const mmRom = mmDecompressed.rom;
+
+  /* Get MM Rooms */
+  const mmRooms = getGameRoomActor(mmRom, 'mm');
+
   /* Get MQ ROM */
   const mqRom = await fs.readFile(__dirname + '/../../../roms/mq.z64');
 
   /* Get OoT Rooms */
-  const ootRooms = getGameRoomActor(ootRom, false);
+  const ootRooms = getGameRoomActor(ootRom, 'oot');
 
   /* Get MQ Rooms */
-  const mqRooms = getGameRoomActor(mqRom, true);
+  const mqRooms = getGameRoomActor(mqRom, 'mq');
 
   /* Get the merged list */
   const mergedList = mergeRoomActors([ootRooms, mqRooms]);
@@ -293,8 +334,10 @@ async function run() {
   /* Codegen */
   await codegen(mergedList, addrTable);
 
+  console.log(mmRooms);
+
   /* Output */
-  outputPotsPool(mqRooms);
+  //outputPotsPoolOot(mqRooms);
 }
 
 run().catch(e => {
