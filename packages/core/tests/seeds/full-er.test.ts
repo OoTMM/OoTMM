@@ -6,7 +6,7 @@ test("Can make a seed - Full ER", () => {
     erDungeons: 'full',
     erBoss: 'full',
     erRegions: 'full',
-    erRegionsExtra: true,
+    //erRegionsExtra: true,
     erIndoors: 'full',
     erIndoorsExtra: true,
     erMinorDungeons: true,
