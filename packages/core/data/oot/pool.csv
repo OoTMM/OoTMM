@@ -384,7 +384,7 @@ Haunted Wasteland Chest,                                    chest,          HAUN
 Haunted Wasteland GS,                                       gs,             NONE,                 HAUNTED_WASTELAND,              0xb1,                       GS_TOKEN
 Haunted Wasteland Pot 1,                                    pot,            NONE,                 HAUNTED_WASTELAND,              0x0000,                     RECOVERY_HEART
 Haunted Wasteland Pot 2,                                    pot,            NONE,                 HAUNTED_WASTELAND,              0x0001,                     NUTS_5
-Haunted Wasteland Pot 3,                                    pot,            NONE,                 HAUNTED_WASTELAND,              0x0002,                     FLEXIBLE
+Haunted Wasteland Pot 3,                                    pot,            NONE,                 HAUNTED_WASTELAND,              0x0002,                     FAIRY
 Haunted Wasteland Pot 4,                                    pot,            NONE,                 HAUNTED_WASTELAND,              0x0003,                     MAGIC_JAR_SMALL
 Desert Colossus HP,                                         collectible,    NONE,                 DESERT_COLOSSUS,                0x0d,                       HEART_PIECE
 Desert Colossus Song Spirit,                                npc,            NONE,                 DESERT_COLOSSUS,                SHEIK_SPIRIT,               SONG_TP_SPIRIT
@@ -451,7 +451,7 @@ Dodongo Cavern Pot Green Roon Pot 4,                        pot,            NONE
 Dodongo Cavern Pot Skull 1,                                 pot,            NONE,                 DODONGO_CAVERN,                 0x0706,                     BOMB
 Dodongo Cavern Pot Skull 2,                                 pot,            NONE,                 DODONGO_CAVERN,                 0x0707,                     RECOVERY_HEART
 Dodongo Cavern Pot Skull 3,                                 pot,            NONE,                 DODONGO_CAVERN,                 0x0806,                     DEKU_SEEDS_5
-Dodongo Cavern Pot Skull 4,                                 pot,            NONE,                 DODONGO_CAVERN,                 0x0807,                     FLEXIBLE
+Dodongo Cavern Pot Skull 4,                                 pot,            NONE,                 DODONGO_CAVERN,                 0x0807,                     FAIRY
 Dodongo Cavern Pot Bomb Bag Room 1,                         pot,            NONE,                 DODONGO_CAVERN,                 0x090e,                     RECOVERY_HEART
 Dodongo Cavern Pot Bomb Bag Room 2,                         pot,            NONE,                 DODONGO_CAVERN,                 0x090f,                     RECOVERY_HEART
 Dodongo Cavern Pot Room Before Miniboss 1,                  pot,            NONE,                 DODONGO_CAVERN,                 0x0a06,                     RECOVERY_HEART
@@ -469,16 +469,16 @@ Jabu-Jabu GS Water Switch,                                  gs,             NONE
 Jabu-Jabu GS Bottom Lower,                                  gs,             NONE,                 INSIDE_JABU_JABU,               0x18,                       GS_TOKEN
 Jabu-Jabu GS Bottom Upper,                                  gs,             NONE,                 INSIDE_JABU_JABU,               0x19,                       GS_TOKEN
 Jabu-Jabu GS Near Boss,                                     gs,             NONE,                 INSIDE_JABU_JABU,               0x1a,                       GS_TOKEN
-Jabu-Jabu Pot Big Octo Room 1,                              pot,            NONE,                 INSIDE_JABU_JABU,               0x0606,                     FLEXIBLE
+Jabu-Jabu Pot Big Octo Room 1,                              pot,            NONE,                 INSIDE_JABU_JABU,               0x0606,                     FAIRY
 Jabu-Jabu Pot Big Octo Room 2,                              pot,            NONE,                 INSIDE_JABU_JABU,               0x0607,                     NUTS_5
 Jabu-Jabu Pot Big Octo Room 3,                              pot,            NONE,                 INSIDE_JABU_JABU,               0x0608,                     NUTS_5
-Jabu-Jabu Pot Muscle Block Room 1,                          pot,            NONE,                 INSIDE_JABU_JABU,               0x0d03,                     FLEXIBLE
+Jabu-Jabu Pot Muscle Block Room 1,                          pot,            NONE,                 INSIDE_JABU_JABU,               0x0d03,                     FAIRY
 Jabu-Jabu Pot Muscle Block Room 2,                          pot,            NONE,                 INSIDE_JABU_JABU,               0x0d04,                     RUPEE_BLUE
 Jabu-Jabu Pot Muscle Block Room 3,                          pot,            NONE,                 INSIDE_JABU_JABU,               0x0d05,                     RUPEE_RED
 Jabu-Jabu Pot Muscle Block Room 4,                          pot,            NONE,                 INSIDE_JABU_JABU,               0x0d06,                     RUPEE_RED
 Jabu-Jabu Pot Muscle Block Room 5,                          pot,            NONE,                 INSIDE_JABU_JABU,               0x0d07,                     RUPEE_BLUE
 Jabu-Jabu Pot Alcove 1,                                     pot,            NONE,                 INSIDE_JABU_JABU,               0x0e07,                     DEKU_SEEDS_5
-Jabu-Jabu Pot Alcove 2,                                     pot,            NONE,                 INSIDE_JABU_JABU,               0x0e08,                     FLEXIBLE
+Jabu-Jabu Pot Alcove 2,                                     pot,            NONE,                 INSIDE_JABU_JABU,               0x0e08,                     FAIRY
 Jabu-Jabu Pot Alcove 3,                                     pot,            NONE,                 INSIDE_JABU_JABU,               0x0e09,                     DEKU_SEEDS_5
 Jabu-Jabu Boss Container,                                   collectible,    NONE,                 LAIR_BARINADE,                  0x1f,                       HEART_CONTAINER
 Jabu-Jabu Boss,                                             npc,            NONE,                 LAIR_BARINADE,                  BLUE_WARP_BARINADE,         STONE_SAPPHIRE
@@ -513,7 +513,7 @@ Forest Temple Pot Main Room 4,                              pot,            NONE
 Forest Temple Pot Main Room 5,                              pot,            NONE,                 TEMPLE_FOREST,                  0x020f,                     ARROWS_10
 Forest Temple Pot Main Room 6,                              pot,            NONE,                 TEMPLE_FOREST,                  0x0210,                     ARROWS_10
 Forest Temple Pot Miniboss Lower 1,                         pot,            NONE,                 TEMPLE_FOREST,                  0x0605,                     RECOVERY_HEART
-Forest Temple Pot Miniboss Lower 2,                         pot,            NONE,                 TEMPLE_FOREST,                  0x0606,                     FLEXIBLE
+Forest Temple Pot Miniboss Lower 2,                         pot,            NONE,                 TEMPLE_FOREST,                  0x0606,                     FAIRY
 Forest Temple Pot Miniboss Upper 1,                         pot,            NONE,                 TEMPLE_FOREST,                  0x0607,                     RECOVERY_HEART
 Forest Temple Pot Miniboss Upper 2,                         pot,            NONE,                 TEMPLE_FOREST,                  0x0608,                     RECOVERY_HEART
 Forest Temple Pot Miniboss Upper 3,                         pot,            NONE,                 TEMPLE_FOREST,                  0x0609,                     RECOVERY_HEART
@@ -549,10 +549,10 @@ Fire Temple GS Scarecrow Top,                               gs,             NONE
 Fire Temple Pot Lava Room 1,                                pot,            NONE,                 TEMPLE_FIRE,                    0x011a,                     ARROWS_10
 Fire Temple Pot Lava Room 2,                                pot,            NONE,                 TEMPLE_FIRE,                    0x011b,                     RECOVERY_HEART
 Fire Temple Pot Lava Room 3,                                pot,            NONE,                 TEMPLE_FIRE,                    0x011c,                     ARROWS_10
-Fire Temple Pot Pre-Boss Room 1,                            pot,            NONE,                 TEMPLE_FIRE,                    0x0208,                     FLEXIBLE
+Fire Temple Pot Pre-Boss Room 1,                            pot,            NONE,                 TEMPLE_FIRE,                    0x0208,                     FAIRY
 Fire Temple Pot Pre-Boss Room 2,                            pot,            NONE,                 TEMPLE_FIRE,                    0x0209,                     BOMB
 Fire Temple Pot Pre-Boss Room 3,                            pot,            NONE,                 TEMPLE_FIRE,                    0x020a,                     BOMB
-Fire Temple Pot Pre-Boss Room 4,                            pot,            NONE,                 TEMPLE_FIRE,                    0x020b,                     FLEXIBLE
+Fire Temple Pot Pre-Boss Room 4,                            pot,            NONE,                 TEMPLE_FIRE,                    0x020b,                     FAIRY
 Fire Temple Pot Before Miniboss 1,                          pot,            NONE,                 TEMPLE_FIRE,                    0x0a33,                     BOMB
 Fire Temple Pot Before Miniboss 2,                          pot,            NONE,                 TEMPLE_FIRE,                    0x0a34,                     RECOVERY_HEART
 Fire Temple Pot Before Miniboss 3,                          pot,            NONE,                 TEMPLE_FIRE,                    0x0a35,                     RECOVERY_HEART
@@ -609,8 +609,8 @@ Water Temple Boss HC,                                       collectible,    NONE
 Water Temple Boss,                                          npc,            NONE,                 LAIR_MORPHA,                    BLUE_WARP_MORPHA,           MEDALLION_WATER
 Water Temple Pot Main Room Near Block 1,                    pot,            NONE,                 TEMPLE_WATER,                   0x0017,                     RECOVERY_HEART
 Water Temple Pot Main Room Near Block 2,                    pot,            NONE,                 TEMPLE_WATER,                   0x0018,                     RECOVERY_HEART
-Water Temple Pot Main Room Near Boss 1,                     pot,            NONE,                 TEMPLE_WATER,                   0x0019,                     FLEXIBLE
-Water Temple Pot Main Room Near Boss 2,                     pot,            NONE,                 TEMPLE_WATER,                   0x001a,                     FLEXIBLE
+Water Temple Pot Main Room Near Boss 1,                     pot,            NONE,                 TEMPLE_WATER,                   0x0019,                     FAIRY
+Water Temple Pot Main Room Near Boss 2,                     pot,            NONE,                 TEMPLE_WATER,                   0x001a,                     FAIRY
 Water Temple Pot Skull Cage 1,                              pot,            NONE,                 TEMPLE_WATER,                   0x0309,                     BOMB
 Water Temple Pot Skull Cage 2,                              pot,            NONE,                 TEMPLE_WATER,                   0x030a,                     BOMB
 Water Temple Pot Skull Cage 3,                              pot,            NONE,                 TEMPLE_WATER,                   0x030d,                     ARROWS_10
@@ -622,14 +622,14 @@ Water Temple Pot Before Dark Link 1,                        pot,            NONE
 Water Temple Pot Before Dark Link 2,                        pot,            NONE,                 TEMPLE_WATER,                   0x0607,                     MAGIC_JAR_LARGE
 Water Temple Pot Blocks Room 1,                             pot,            NONE,                 TEMPLE_WATER,                   0x0e0b,                     BOMB
 Water Temple Pot Blocks Room 2,                             pot,            NONE,                 TEMPLE_WATER,                   0x0e0c,                     BOMB
-Water Temple Pot Boss Key Room 1,                           pot,            NONE,                 TEMPLE_WATER,                   0x1001,                     FLEXIBLE
-Water Temple Pot Boss Key Room 2,                           pot,            NONE,                 TEMPLE_WATER,                   0x1002,                     FLEXIBLE
+Water Temple Pot Boss Key Room 1,                           pot,            NONE,                 TEMPLE_WATER,                   0x1001,                     FAIRY
+Water Temple Pot Boss Key Room 2,                           pot,            NONE,                 TEMPLE_WATER,                   0x1002,                     FAIRY
 Water Temple Pot Ruto Room 1,                               pot,            NONE,                 TEMPLE_WATER,                   0x1107,                     ARROWS_10
 Water Temple Pot Ruto Room 2,                               pot,            NONE,                 TEMPLE_WATER,                   0x1108,                     ARROWS_10
 Water Temple Pot Corridor 1,                                pot,            NONE,                 TEMPLE_WATER,                   0x1403,                     RECOVERY_HEART
 Water Temple Pot Corridor 2,                                pot,            NONE,                 TEMPLE_WATER,                   0x1404,                     RECOVERY_HEART
 Water Temple Pot River 1,                                   pot,            NONE,                 TEMPLE_WATER,                   0x150d,                     ARROWS_10
-Water Temple Pot River 2,                                   pot,            NONE,                 TEMPLE_WATER,                   0x150e,                     FLEXIBLE
+Water Temple Pot River 2,                                   pot,            NONE,                 TEMPLE_WATER,                   0x150e,                     FAIRY
 Bottom of the Well Compass,                                 chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x01,                       COMPASS_BOTW
 Bottom of the Well Under Debris,                            chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x02,                       BOMBCHU_10
 Bottom of the Well Back West,                               chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x04,                       NUTS_10
@@ -906,7 +906,7 @@ Ganon Castle SR Forest Front,                               sr,             NONE
 Ganon Castle SR Forest Back Right,                          sr,             NONE,                 INSIDE_GANON_CASTLE,            0x62,                       RUPEE_SILVER_GANON_FOREST
 Ganon Castle SR Forest Back Middle,                         sr,             NONE,                 INSIDE_GANON_CASTLE,            0x63,                       RUPEE_SILVER_GANON_FOREST
 Ganon Castle SR Forest Center Left,                         sr,             NONE,                 INSIDE_GANON_CASTLE,            0x64,                       RUPEE_SILVER_GANON_FOREST
-Ganon Castle Pot Water,                                     pot,            NONE,                 INSIDE_GANON_CASTLE,            0x0303,                     FLEXIBLE
+Ganon Castle Pot Water,                                     pot,            NONE,                 INSIDE_GANON_CASTLE,            0x0303,                     FAIRY
 Ganon Castle Pot Water End 1,                               pot,            NONE,                 INSIDE_GANON_CASTLE,            0x0404,                     RECOVERY_HEART
 Ganon Castle Pot Water End 2,                               pot,            NONE,                 INSIDE_GANON_CASTLE,            0x0405,                     MAGIC_JAR_SMALL
 Ganon Castle Pot Forest End 1,                              pot,            NONE,                 INSIDE_GANON_CASTLE,            0x0704,                     RECOVERY_HEART
