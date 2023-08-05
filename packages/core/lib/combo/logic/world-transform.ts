@@ -709,6 +709,12 @@ export class LogicPassWorldTransform {
           delete locations[loc];
         }
       }
+      for (const dungeonId of Object.keys(world.dungeons)) {
+        const dungeon = world.dungeons[dungeonId];
+        for (const l of locs) {
+          dungeon.delete(l);
+        }
+      }
     }
   }
 
