@@ -5,6 +5,60 @@ import { decompressGame } from '../lib/combo/decompress';
 
 type Game = 'oot' | 'mq' | 'mm';
 
+const MM_POTS_SET_DROPS = [
+  'NOTHING',
+  'RUPEE_GREEN',
+  'RUPEE_BLUE',
+  'NOTHING',
+  'RUPEE_RED',
+  'RUPEE_PURPLE',
+  'NOTHING',
+  'RUPEE_ORANGE',
+  '???',
+  '???',
+  'RECOVERY_HEART',
+  'RECOVERY_HEART',
+  '???',
+  '???',
+  'MAGIC_JAR_SMALL',
+  'MAGIC_JAR_LARGE',
+  'FAIRY',
+  'STRAY_FAIRY',
+  'NOTHING',
+  'NUTS_10',
+  'NOTHING',
+  'BOMBS_5',
+  'NOTHING',
+  'NOTHING',
+  'NOTHING',
+  'STICK',
+  'NOTHING',
+  'NOTHING',
+  'NOTHING',
+  'NOTHING',
+  'ARROWS_10',
+  'ARROWS_20',
+];
+
+const MM_POTS_RANDOM_DROPS = [
+  'RUPEE_GREEN',
+  'MAGIC_JAR_SMALL',
+  'RECOVERY_HEART',
+  'RUPEE_RED',
+  'NOTHING',
+  'NOTHING',
+  'RECOVERY_HEART',
+  'RECOVERY_HEART',
+  'RUPEE_GREEN',
+  'RUPEE_BLUE',
+  'ARROWS_10',
+  'BOMBS_5',
+  'MAGIC_JAR_SMALL',
+  'MAGIC_JAR_LARGE',
+  'NUT',
+  'STICK',
+];
+
 const MM_SCENES_WITH_EXTRA_SETUPS: {[k: number]: number} = {
   0x2036000: 3, /* Ikana Canyon */
   0x2249000: 1, /* Road to Mountain Village */
@@ -322,6 +376,54 @@ function outputPotsPoolOot(roomActors: RoomActors[]) {
   }
 }
 
+function outputPotsPoolMm(roomActors: RoomActors[]) {
+  let lastSceneId = -1;
+  let lastSetupId = -1;
+  for (const room of roomActors) {
+    for (const actor of room.actors) {
+      if (actor.typeId === ACTORS_MM.POT) {
+        let item: string;
+        const potType = (actor.params >> 7) & 3;
+        const potEnemy = (actor.rz >> 7) & 3;
+        if (potEnemy)
+          continue;
+        switch (potType) {
+        case 0:
+        case 2:
+          /* Set item */
+          item = MM_POTS_SET_DROPS[actor.params & 0x1f];
+          break;
+        case 1:
+          /* Magic Pot */
+          item = 'MAGIC_JAR_LARGE';
+          break;
+        case 3:
+          /* Random item */
+          if (actor.params & 0x10) {
+            item = 'NOTHING';
+          } else {
+            item = MM_POTS_RANDOM_DROPS[actor.params & 0x1f];
+          }
+          break;
+        default:
+          item = 'DUMMY';
+          break;
+        }
+        if (item === 'STRAY_FAIRY') {
+          continue;
+        }
+        const key = ((room.setupId & 0x3) << 14) | (room.roomId << 8) | actor.actorId;
+        if (room.sceneId != lastSceneId || room.setupId != lastSetupId) {
+          console.log('');
+          lastSceneId = room.sceneId;
+          lastSetupId = room.setupId;
+        }
+        console.log(`Scene ${room.sceneId.toString(16)} Setup ${room.setupId} Room ${room.roomId} Pot ${actor.actorId}, pot,            NONE,                 SCENE_${room.sceneId.toString(16)}, 0x${key.toString(16)}, ${item}`);
+      }
+    }
+  }
+}
+
 function getGameRoomActor(rom: Buffer, game: Game) {
   const rawRooms = getRawRooms(rom, game);
   const actorRooms = sortRoomActors(rawRooms.map(raw => parseRoomActors(rom, raw, game)));
@@ -364,7 +466,7 @@ async function run() {
     codegenSource(ootMqRooms, mmRooms, addrTableOotMq, addrTableMm),
   ]);
 
-  console.log(mmRooms);
+  outputPotsPoolMm(mmRooms);
 
   /* Output */
   //outputPotsPoolOot(mqRooms);

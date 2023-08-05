@@ -67,6 +67,11 @@ Kafei Hideout Owner Reward 1,                     npc,            NONE,         
 Kafei Hideout Owner Reward 2,                     npc,            NONE,                   CURIOSITY_SHOP,             LETTER_TO_MAMA,             LETTER_TO_MAMA
 Post Office HP,                                   npc,            NONE,                   POST_OFFICE,                POSTMAN_HEART_PIECE,        HEART_PIECE
 Swordsman School HP,                              npc,            NONE,                   SWORDSMAN_SCHOOL,           SWORDSMAN_HEART_PIECE,      HEART_PIECE
+Swordsman School Pot 1,                           pot,            NONE,                   SWORDSMAN_SCHOOL,           0x0006,                     RUPEE_BLUE
+Swordsman School Pot 2,                           pot,            NONE,                   SWORDSMAN_SCHOOL,           0x0007,                     RUPEE_BLUE
+Swordsman School Pot 3,                           pot,            NONE,                   SWORDSMAN_SCHOOL,           0x0008,                     RUPEE_BLUE
+Swordsman School Pot 4,                           pot,            NONE,                   SWORDSMAN_SCHOOL,           0x0009,                     RUPEE_BLUE
+Swordsman School Pot 5,                           pot,            NONE,                   SWORDSMAN_SCHOOL,           0x000a,                     RUPEE_BLUE
 Deku Playground Reward 1,                         npc,            NONE,                   DEKU_PLAYGROUND,            DEKU_PLAYGROUND_1,          RUPEE_PURPLE
 Deku Playground Reward 2,                         npc,            NONE,                   DEKU_PLAYGROUND,            DEKU_PLAYGROUND_2,          HEART_PIECE
 Termina Field Water Chest,                        chest,          NONE,                   TERMINA_FIELD,              0x00,                       RUPEE_RED

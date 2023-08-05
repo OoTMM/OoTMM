@@ -106,7 +106,11 @@ static void CustomItem_Collect(Actor_CustomItem* this, GameState_Play* play)
     major = !isItemFastBuy(o.gi);
     if (major)
     {
+#if defined(GAME_OOT)
         PlayerDisplayTextBox(play, 0xb4, NULL);
+#else
+        PlayerDisplayTextBox(play, 0x52, NULL);
+#endif
         FreezePlayer(play);
         this->extendedMajor = 1;
     }
@@ -178,7 +182,7 @@ static void CustomItem_Init(Actor_CustomItem* this, GameState_Play* play)
 
 ActorInit CustomItem_gActorInit = {
     AC_CUSTOM_ITEM,
-    0x8,
+    0x7,
     0x10,
     0x1,
     sizeof(Actor_CustomItem),
