@@ -148,7 +148,7 @@
   dungeon: Water
   exits:
     "Water Temple Dragon Room": "true"
-    "Water Temple River": "hookshot_anywhere && trick(OOT_WATER_REVERSE_RIVER)
+    "Water Temple River": "hookshot_anywhere && trick(OOT_WATER_REVERSE_RIVER)"
   locations:
     "Water Temple River Chest": "true"
 "Water Temple Cage Room":
