@@ -49,7 +49,13 @@ static void CustomItem_UpdateDraw(Actor_CustomItem* this)
 
 static void CustomItem_Fini(Actor_CustomItem* this, GameState_Play* play)
 {
+    if (g.customItemsList == this)
+        g.customItemsList = this->next;
 
+    if (this->next)
+        this->next->prev = this->prev;
+    if (this->prev)
+        this->prev->next = this->next;
 }
 
 static void CustomItem_HandlerCollected(Actor_CustomItem* this, GameState_Play* play)
@@ -178,6 +184,13 @@ static void CustomItem_Init(Actor_CustomItem* this, GameState_Play* play)
 
     ActorSetScale(&this->base, 0.015f);
     this->handler = CustomItem_HandlerUncollected;
+
+    /* Add to the list */
+    this->next = g.customItemsList;
+    this->prev = NULL;
+    if (g.customItemsList)
+        g.customItemsList->prev = this;
+    g.customItemsList = this;
 }
 
 ActorInit CustomItem_gActorInit = {
@@ -195,6 +208,15 @@ ActorInit CustomItem_gActorInit = {
 Actor_CustomItem* DropCustomItem(GameState_Play* play, const Vec3f* pos, const Xflag* xflag)
 {
     Actor_CustomItem* item;
+
+    /* Check if the xflag item is already spawned */
+    item = g.customItemsList;
+    while (item)
+    {
+        if (memcmp(&item->xflag, xflag, sizeof(Xflag)) == 0)
+            return NULL;
+        item = item->next;
+    }
 
     /* Spawn the custom actor */
     item = (Actor_CustomItem*)SpawnActor(

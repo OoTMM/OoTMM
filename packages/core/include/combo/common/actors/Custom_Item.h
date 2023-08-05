@@ -12,6 +12,8 @@ typedef void (*ActorFunc_CustomItem)(Actor_CustomItem*, GameState_Play*);
 typedef struct ALIGNED(4) Actor_CustomItem
 {
     Actor                   base;
+    Actor_CustomItem*       next;
+    Actor_CustomItem*       prev;
     ActorFunc_CustomItem    handler;
     Xflag                   xflag;
     s16                     extendedGi;

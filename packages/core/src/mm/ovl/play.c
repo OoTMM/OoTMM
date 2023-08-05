@@ -144,6 +144,7 @@ void hookPlay_Init(GameState_Play* play)
 
     /* Init */
     gActorCustomTriggers = NULL;
+    g.customItemsList = NULL;
 
     /* Handle transition override */
     if (g.inGrotto)
