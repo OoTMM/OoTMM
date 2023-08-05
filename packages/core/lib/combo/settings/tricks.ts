@@ -39,6 +39,7 @@ export const TRICKS = {
   OOT_WATER_REVERSE_RIVER: "Water Temple Reverse River with Hookshot Anywhere",
   OOT_WATER_PIT_GS_CHU: "Water Temple Large Pit GS with Bombchus",
   OOT_SHADOW_BOAT_EARLY: "Reach Shadow Temple Boat with Climb Anywhere",
+  OOT_SPIRIT_BOSS_CLIMB_NO_HOOK: "Reach Twinrova using Climb Anywhere and Hover Boots",
   MM_LENS: "Fewer Lens Requirements (MM)",
   MM_PALACE_BEAN_SKIP: "Skip Planting Beans in Deku Palace",
   MM_DARMANI_WALL: "Climb Mountain Village Wall Blind",
