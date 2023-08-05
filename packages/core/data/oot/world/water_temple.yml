@@ -10,7 +10,7 @@
     "Water Temple Ruto Room": "has_tunic_zora && (has_iron_boots || (can_longshot && trick(OOT_WATER_LONGSHOT)))"
     "Water Temple Center Bottom": "event(WATER_LEVEL_LOW) && small_keys_water(5)"
     "Water Temple Center Middle": "event(WATER_LEVEL_LOW) && (can_use_din || can_use_bow)"
-    "Water Temple Compass Room": "((has_tunic_zora && has_iron_boots && can_hookshot) || (event(WATER_LEVEL_LOW) && (can_hookshot || (climb_anywhere && (has_weapon || can_use_sticks || has_ranged_weapon || has_explosives_or_hammer))))"
+    "Water Temple Compass Room": "(has_tunic_zora && has_iron_boots && can_hookshot) || (event(WATER_LEVEL_LOW) && (can_hookshot || (climb_anywhere && (has_weapon || can_use_sticks || has_ranged_weapon || has_explosives_or_hammer))))"
     "Water Temple Dragon Room": "event(WATER_LEVEL_LOW) && has(STRENGTH) && can_dive_small && (has_weapon || has_ranged_weapon || has_explosives_or_hammer)"
     "Water Temple Elevator": "(small_keys_water(5) && (can_hookshot || climb_anywhere)) || can_use_bow || can_use_din"
     "Water Temple Corridor": "(can_longshot || has_hover_boots || hookshot_anywhere) && can_hit_triggers_distance && event(WATER_LEVEL_LOW)"
