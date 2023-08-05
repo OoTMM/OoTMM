@@ -17,6 +17,7 @@
 # define AC_EN_DODONGO              0x012
 # define AC_EN_FIREFLY              0x013
 # define AC_ITEM00                  0x015
+# define AC_CUSTOM_ITEM             0x017
 # define AC_EN_TITE                 0x01b
 # define AC_EN_PEEHAT               0x01d
 # define AC_EN_ZF                   0x025

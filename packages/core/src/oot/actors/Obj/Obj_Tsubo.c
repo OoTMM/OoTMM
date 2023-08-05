@@ -103,17 +103,8 @@ void ObjTsubo_SpawnShuffledDrop(Actor_ObjTsubo* this, GameState_Play* play)
         return;
     }
 
-    /* Spawn an extended item */
-    g.spawnExtended = 1;
-    item = Item_DropCollectible(play, &this->base.position, 0x0000);
-    g.spawnExtended = 0;
-
-    item->xflag.sceneId = this->xflag.sceneId;
-    item->xflag.setupId = this->xflag.setupId;
-    item->xflag.roomId = this->xflag.roomId;
-    item->xflag.id = this->xflag.id;
-    item->extendedGi = GI_OOT_RUPEE_GREEN;
-    item->extendedGiDraw = 0;
+    /* Spawn a custom item */
+    DropCustomItem(play, &this->base.position, &this->xflag);
 }
 
 static const Gfx kDrawListNormalTop[] = {
