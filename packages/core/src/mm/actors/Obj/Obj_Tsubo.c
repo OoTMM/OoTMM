@@ -14,3 +14,19 @@ void ObjTsubo_InitWrapper(Actor_ObjTsubo* this, GameState_Play* play)
     ObjTsubo_Init = (ActorFunc)actorAddr(AC_OBJ_TSUBO, 0x809278c0);
     ObjTsubo_Init(&this->base, play);
 }
+
+void ObjTsubo_SpawnShuffledDrop(Actor_ObjTsubo* this, GameState_Play* play)
+{
+    ActorFunc ObjTsubo_SpawnDrop;
+
+    if (comboXflagsGet(&this->xflag))
+    {
+        /* Already spawned */
+        ObjTsubo_SpawnDrop = (ActorFunc)actorAddr(AC_OBJ_TSUBO, 0x80927690);
+        ObjTsubo_SpawnDrop(&this->base, play);
+        return;
+    }
+
+    /* Spawn a custom item */
+    DropCustomItem(play, &this->base.position, &this->xflag);
+}

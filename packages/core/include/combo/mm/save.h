@@ -361,7 +361,7 @@ MmExtraFlags3;
 #define MM_PLAYER_FORM_ZORA     2
 #define MM_PLAYER_FORM_HUMAN    4
 
-ALIGNED(16) typedef struct
+typedef struct ALIGNED(16)
 {
     u8 xflags[XFLAGS_COUNT_MM];
 }
