@@ -201,6 +201,7 @@ void EnGSwitch_DrawArcheryPot(Actor* this, GameState_Play* play)
     gSPSegment(POLY_OPA_DISP++, 0x0a, kPotDrawListNormalSide);
     gSPSegment(POLY_OPA_DISP++, 0x0b, kPotDrawListNormalTop);
     gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPDisplayList(POLY_OPA_DISP++, 0x060017c0);
     CLOSE_DISPS();
 }
 
