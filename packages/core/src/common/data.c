@@ -101,7 +101,6 @@ void comboInitData(void)
         g.maxKeysOot[SCE_OOT_TEMPLE_SPIRIT] = 0;
         g.maxKeysOot[SCE_OOT_BOTTOM_OF_THE_WELL] = 0;
         g.maxKeysOot[SCE_OOT_GERUDO_TRAINING_GROUND] = 0;
-        g.maxKeysOot[SCE_OOT_THIEVES_HIDEOUT] = 0;
     }
 
     /* MM keysy */
