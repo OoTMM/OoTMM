@@ -41,7 +41,7 @@ void updateSceneSetup(void)
 
             for (int i = gSaveContext.sceneSetupId; i > 0; --i)
             {
-                if (altHeader[((i - 1) * 2) + 1] != 0)
+                if (altHeader[i - 1] != 0)
                 {
                     g.sceneSetupId = i;
                     return;
