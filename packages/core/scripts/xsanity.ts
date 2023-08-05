@@ -420,6 +420,14 @@ function outputPotsPoolMm(roomActors: RoomActors[]) {
         }
         console.log(`Scene ${room.sceneId.toString(16)} Setup ${room.setupId} Room ${room.roomId} Pot ${actor.actorId}, pot,            NONE,                 SCENE_${room.sceneId.toString(16)}, 0x${key.toString(16)}, ${item}`);
       }
+
+      /*
+      if (actor.typeId === ACTORS_MM.FLYING_POT) {
+        const key = ((room.setupId & 0x3) << 14) | (room.roomId << 8) | actor.actorId;
+        const item = '???';
+        console.log(`Scene ${room.sceneId.toString(16)} Setup ${room.setupId} Room ${room.roomId} FLYING Pot ${actor.actorId}, pot,            NONE,                 SCENE_${room.sceneId.toString(16)}, 0x${key.toString(16)}, ${item}`);
+      }
+      */
     }
   }
 }
