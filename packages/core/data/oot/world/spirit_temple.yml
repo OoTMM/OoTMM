@@ -126,7 +126,7 @@
   exits:
     "Spirit Temple Adult Upper 2": "has_explosives && soul_beamos && soul(SOUL_ANUBIS)"
     "Spirit Temple Adult Climb 2": "small_keys_spirit(5)"
-    "Spirit Temple Statue Adult": "has_explosives && soul_beamos && soul(SOUL_ANUBIS) && ((small_keys_spirit(1) && has_mirror_shield) || small_keys_spirit(2))
+    "Spirit Temple Statue Adult": "has_explosives && soul_beamos && soul(SOUL_ANUBIS) && ((small_keys_spirit(1) && has_mirror_shield) || small_keys_spirit(2))"
 "Spirit Temple Adult Upper 2":
   dungeon: Spirit
   exits:
