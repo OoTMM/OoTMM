@@ -2,6 +2,7 @@
 #define MM_SAVE_H
 
 #include <combo/types.h>
+#include <combo/xflags.h>
 
 typedef struct
 {
@@ -362,7 +363,7 @@ MmExtraFlags3;
 
 ALIGNED(16) typedef struct
 {
-
+    u8 xflags[XFLAGS_COUNT_MM];
 }
 MmCustomSave;
 

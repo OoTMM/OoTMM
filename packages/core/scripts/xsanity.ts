@@ -6,10 +6,18 @@ import { decompressGame } from '../lib/combo/decompress';
 type Game = 'oot' | 'mq' | 'mm';
 
 const MM_SCENES_WITH_EXTRA_SETUPS: {[k: number]: number} = {
-  0x2036000: 3,
-  0x2249000: 1,
-  0x263b000: 1,
-  0x265e000: 1,
+  0x2036000: 3, /* Ikana Canyon */
+  0x2249000: 1, /* Road to Mountain Village */
+  0x263b000: 1, /* Goron Shrine */
+  0x265e000: 1, /* Zora Hall */
+  0x26bf000: 1, /* Great bay coast */
+  0x26fc000: 1, /* Zora cape */
+  0x2778000: 1, /* Deku Throne room */
+  0x2879000: 2, /* Woodfall */
+  0x2bfe000: 1, /* Road to Snowhead */
+  0x2c09000: 1, /* Snowhead */
+  0x2da7000: 1, /* Goron Racetrack */
+  0x2e1d000: 1, /* North Clock Town */
 };
 
 const ACTORS_OOT = {
@@ -93,6 +101,7 @@ type RawRoom = {
 type Actor = {
   actorId: number;
   typeId: number;
+  rz: number;
   params: number;
 }
 
@@ -190,6 +199,7 @@ function filterActors(actors: Actor[], game: Game): Actor[] {
 }
 
 function parseRoomActors(rom: Buffer, raw: RawRoom, game: Game): RoomActors {
+  const typeIdMask = (game === 'mm' ? 0xfff : 0xffff);
   let actors: Actor[] = [];
   const actorHeaders = findHeaderOffset(rom, raw.vromHeader, 0x01);
   if (actorHeaders !== null) {
@@ -197,9 +207,10 @@ function parseRoomActors(rom: Buffer, raw: RawRoom, game: Game): RoomActors {
     const actorsVrom = raw.vromBase + (rom.readUInt32BE(actorHeaders + 4) & 0xffffff);
     for (let actorId = 0; actorId < actorCount; actorId++) {
       const actorVromBase = 0x10 * actorId + actorsVrom;
-      const typeId = rom.readUInt16BE(actorVromBase + 0x00);
+      const typeId = rom.readUInt16BE(actorVromBase + 0x00) & typeIdMask;
+      const rz = rom.readUInt16BE(actorVromBase + 0x0c);
       const params = rom.readUInt16BE(actorVromBase + 0x0e);
-      actors.push({ actorId, typeId, params });
+      actors.push({ actorId, typeId, rz, params });
     }
   }
   actors = filterActors(actors, game);
@@ -237,33 +248,48 @@ function getRawRooms(rom: Buffer, game: 'oot' | 'mq' | 'mm') {
           const setupVrom = roomFileVrom + (setupAddr & 0xffffff);
           rooms.push({ sceneId, setupId, roomId, vromBase: roomFileVrom, vromHeader: setupVrom });
         }
+      } else {
+        /* MM setups */
+        const extraSetupsCount = MM_SCENES_WITH_EXTRA_SETUPS[sceneVrom];
+        if (!extraSetupsCount)
+          continue;
+        const altHeaderOffset = findHeaderOffset(rom, roomFileVrom, 0x18)!;
+        const altHeaderListVrom = roomFileVrom + (rom.readUInt32BE(altHeaderOffset + 4) & 0xffffff);
+        for (let i = 0; i < extraSetupsCount; ++i) {
+          const setupId = i + 1;
+          const setupAddr = rom.readUInt32BE(altHeaderListVrom + i * 4);
+          const setupVrom = roomFileVrom + (setupAddr & 0xffffff);
+          rooms.push({ sceneId, setupId, roomId, vromBase: roomFileVrom, vromHeader: setupVrom });
+        }
       }
     }
   }
   return rooms;
 }
 
-async function codegenHeader(roomActors: RoomActors[], addrTable: AddressingTable) {
-  const actorsCount = roomActors.reduce((acc, room) => acc + room.actors.length, 0);
+async function codegenHeader(roomActorsOotMq: RoomActors[], roomActorsMm: RoomActors[], addrTableOotMq: AddressingTable, addrTableMm: AddressingTable) {
+  const actorsCountOotMq = roomActorsOotMq.reduce((acc, room) => acc + room.actors.length, 0);
+  const actorsCountMm = roomActorsMm.reduce((acc, room) => acc + room.actors.length, 0);
   const cg = new CodeGen(__dirname + '/../include/combo/xflags_data.h', 'XFLAGS_DATA');
-  cg.define('XFLAGS_COUNT_OOT', Math.floor((actorsCount + 7) / 8));
+  cg.define('XFLAGS_COUNT_OOT', Math.floor((actorsCountOotMq + 7) / 8));
+  cg.define('XFLAGS_COUNT_MM', Math.floor((actorsCountMm + 7) / 8));
   return cg.emit();
 }
 
-async function codegenSource(roomActors: RoomActors[], addrTable: AddressingTable) {
-  const cg = new CodeGen(__dirname + '/../src/oot/xflags_data.c');
-  cg.include('combo.h');
-  cg.table('kXflagsTableScenes', 'u16', addrTable.scenesTable);
-  cg.table('kXflagsTableSetups', 'u16', addrTable.setupsTable);
-  cg.table('kXflagsTableRooms', 'u16', addrTable.roomsTable);
-  return cg.emit();
-}
+async function codegenSource(roomActorsOotMq: RoomActors[], roomActorsMm: RoomActors[], addrTableOotMq: AddressingTable, addrTableMm: AddressingTable) {
+  const cgOot = new CodeGen(__dirname + '/../src/oot/xflags_data.c');
+  cgOot.include('combo.h');
+  cgOot.table('kXflagsTableScenes', 'u16', addrTableOotMq.scenesTable);
+  cgOot.table('kXflagsTableSetups', 'u16', addrTableOotMq.setupsTable);
+  cgOot.table('kXflagsTableRooms', 'u16', addrTableOotMq.roomsTable);
 
-async function codegen(roomActors: RoomActors[], addrTable: AddressingTable) {
-  return Promise.all([
-    codegenHeader(roomActors, addrTable),
-    codegenSource(roomActors, addrTable),
-  ]);
+  const cgMm = new CodeGen(__dirname + '/../src/mm/xflags_data.c');
+  cgMm.include('combo.h');
+  cgMm.table('kXflagsTableScenes', 'u16', addrTableMm.scenesTable);
+  cgMm.table('kXflagsTableSetups', 'u16', addrTableMm.setupsTable);
+  cgMm.table('kXflagsTableRooms', 'u16', addrTableMm.roomsTable);
+
+  return Promise.all([cgOot.emit(), cgMm.emit()]);
 }
 
 function outputPotsPoolOot(roomActors: RoomActors[]) {
@@ -326,13 +352,17 @@ async function run() {
   const mqRooms = getGameRoomActor(mqRom, 'mq');
 
   /* Get the merged list */
-  const mergedList = mergeRoomActors([ootRooms, mqRooms]);
+  const ootMqRooms = mergeRoomActors([ootRooms, mqRooms]);
 
-  /* Build the addressing table, suitable for both OoT and MQ */
-  const addrTable = buildAddressingTable(mergedList);
+  /* Build the addr tables */
+  const addrTableOotMq = buildAddressingTable(ootMqRooms);
+  const addrTableMm = buildAddressingTable(mmRooms);
 
   /* Codegen */
-  await codegen(mergedList, addrTable);
+  await Promise.all([
+    codegenHeader(ootMqRooms, mmRooms, addrTableOotMq, addrTableMm),
+    codegenSource(ootMqRooms, mmRooms, addrTableOotMq, addrTableMm),
+  ]);
 
   console.log(mmRooms);
 
