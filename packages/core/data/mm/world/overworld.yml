@@ -938,6 +938,9 @@
     NUTS: "true"
   locations:
     "Woodfall Near Owl Chest": "has(MASK_DEKU) || can_hookshot"
+    "Woodfall Pot 1": "true"
+    "Woodfall Pot 2": "true"
+    "Woodfall Pot 3": "true"
 "Woodfall Near Fairy Fountain":
   region: WOODFALL
   exits:
@@ -1318,6 +1321,10 @@
   locations:
     "Doggy Racetrack Chest": "(can_use_beans || has_mask_zora || can_hookshot_short || trick(MM_DOG_RACE_CHEST_NOTHING)) && ((after(DAY1_AM_06_00) && before(NIGHT1_PM_08_00)) || (after(DAY2_AM_06_00) && before(NIGHT2_PM_08_00)) || (after(DAY3_AM_06_00) && before(NIGHT3_PM_08_00)))"
     "Doggy Racetrack HP": "can_use_wallet(1) && has_mask_truth && ((after(DAY1_AM_06_00) && before(NIGHT1_PM_08_00)) || (after(DAY2_AM_06_00) && before(NIGHT2_PM_08_00)) || (after(DAY3_AM_06_00) && before(NIGHT3_PM_08_00)))"
+    "Doggy Racetrack Pot 1": "true"
+    "Doggy Racetrack Pot 2": "true"
+    "Doggy Racetrack Pot 3": "true"
+    "Doggy Racetrack Pot 4": "true"
   gossip:
     "Doggy Racetrack Gossip": "(after(DAY1_AM_06_00) && before(NIGHT1_PM_08_00)) || (after(DAY2_AM_06_00) && before(NIGHT2_PM_08_00)) || (after(DAY3_AM_06_00) && before(NIGHT3_PM_08_00))"
 "Stables":
@@ -1362,6 +1369,21 @@
     "Great Bay Coast Zora Mask": "can_play(SONG_HEALING)"
     "Great Bay Coast HP": "can_use_beans && scarecrow_hookshot"
     "Great Bay Coast Fisherman HP": "can_use_wallet(1) && can_hookshot_short && event(BOSS_GREAT_BAY) && ((after(DAY1_AM_07_00) && before(NIGHT1_AM_04_00)) || (after(DAY2_AM_07_00) && before(NIGHT2_AM_04_00)) || (after(DAY3_AM_07_00) && before(NIGHT3_AM_04_00)))"
+    "Great Bay Coast Pot Ledge 1": "can_hookshot"
+    "Great Bay Coast Pot Ledge 2": "can_hookshot"
+    "Great Bay Coast Pot Ledge 3": "can_hookshot"
+    "Great Bay Coast Pot 01": "true"
+    "Great Bay Coast Pot 02": "true"
+    "Great Bay Coast Pot 03": "true"
+    "Great Bay Coast Pot 04": "true"
+    "Great Bay Coast Pot 05": "true"
+    "Great Bay Coast Pot 06": "true"
+    "Great Bay Coast Pot 07": "true"
+    "Great Bay Coast Pot 08": "true"
+    "Great Bay Coast Pot 09": "true"
+    "Great Bay Coast Pot 10": "true"
+    "Great Bay Coast Pot 11": "true"
+    "Great Bay Coast Pot 12": "true"
   gossip:
     "Great Bay Coast Gossip": "true"
 "Great Bay Coast Fortress":
@@ -1743,6 +1765,12 @@
     "Ikana Valley": "true"
   events:
     SUN_MASK: "(can_fight || has_explosives || has_arrows) && soul_deku_baba && soul_wolfos"
+  locations:
+    "Sakon Hideout Pot First Room 1": "true"
+    "Sakon Hideout Pot First Room 2": "true"
+    "Sakon Hideout Pot Second Room 1": "soul_deku_baba"
+    "Sakon Hideout Pot Second Room 2": "soul_deku_baba"
+    "Sakon Hideout Pot Third Room": "soul_deku_baba"
 "Ikana Canyon":
   region: IKANA_CANYON
   exits:
@@ -1751,7 +1779,7 @@
     "Ikana Spring Water Cave": "true"
     "Music Box House": "event(IKANA_CURSE_LIFTED) && (has_explosives || has(MASK_STONE))"
     "Ghost Hut": "true"
-    "Beneath the Well Entrance": "true"
+    "Beneath The Well Entrance": "true"
     "Ikana Castle Entrance": "true"
     "Stone Tower": "true"
     "Tingle Ikana": "has_weapon_range"
@@ -1801,7 +1829,7 @@
     ARROWS: "true"
     RUPEES: "true"
   exits:
-    "Beneath the Well End": "true"
+    "Beneath The Well End": "true"
     "Ikana Castle Entrance": "can_use_light_arrows"
     "Ancient Castle of Ikana": "true"
 "Stone Tower":

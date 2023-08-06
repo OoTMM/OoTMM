@@ -1072,7 +1072,7 @@ export const SETTINGS = [{
   default: false
 }, {
   key: 'erBeneathWell',
-  name: 'Shuffle Beneath the Well with Dungeons',
+  name: 'Shuffle Beneath The Well with Dungeons',
   category: 'entrances',
   type: 'boolean',
   default: false

@@ -17,14 +17,14 @@ SPIDER_HOUSE_SWAMP,                                 dungeon,          Swamp Spid
 SWAMP_FROM_SPIDER_HOUSE,                            dungeon,          Near Swamp Spider House,            Swamp Spider House,                         SPIDER_HOUSE_SWAMP
 SPIDER_HOUSE_OCEAN,                                 dungeon,          Ocean Spider House,                 Great Bay Coast,                            GREAT_BAY_FROM_SPIDER_HOUSE
 GREAT_BAY_FROM_SPIDER_HOUSE,                        dungeon,          Great Bay Coast,                    Ocean Spider House,                         SPIDER_HOUSE_OCEAN
-BENEATH_THE_WELL,                                   dungeon,          Beneath the Well Entrance,          Ikana Canyon,                               IKANA_CANYON_FROM_WELL
-IKANA_CANYON_FROM_WELL,                             dungeon,          Ikana Canyon,                       Beneath the Well Entrance,                  BENEATH_THE_WELL
+BENEATH_THE_WELL,                                   dungeon,          Beneath The Well Entrance,          Ikana Canyon,                               IKANA_CANYON_FROM_WELL
+IKANA_CANYON_FROM_WELL,                             dungeon,          Ikana Canyon,                       Beneath The Well Entrance,                  BENEATH_THE_WELL
 IKANA_CASTLE,                                       dungeon,          Ancient Castle of Ikana,            Ikana Castle Exterior,                      IKANA_CASTLE_EXTERIOR_FROM_CASTLE
 IKANA_CASTLE_EXTERIOR_FROM_CASTLE,                  dungeon,          Ikana Castle Exterior,              Ancient Castle of Ikana,                    IKANA_CASTLE
 SECRET_SHRINE,                                      dungeon,          Secret Shrine,                      Ikana Valley,                               IKANA_VALLEY_FROM_SHRINE
 IKANA_VALLEY_FROM_SHRINE,                           dungeon,          Ikana Valley,                       Secret Shrine,                              SECRET_SHRINE
-BENEATH_THE_WELL_BACK,                              dungeon,          Beneath the Well End,               Ikana Castle Exterior,                      IKANA_CASTLE_EXTERIOR_FROM_WELL
-IKANA_CASTLE_EXTERIOR_FROM_WELL,                    dungeon,          Ikana Castle Exterior,              Beneath the Well End,                       BENEATH_THE_WELL_BACK
+BENEATH_THE_WELL_BACK,                              dungeon,          Beneath The Well End,               Ikana Castle Exterior,                      IKANA_CASTLE_EXTERIOR_FROM_WELL
+IKANA_CASTLE_EXTERIOR_FROM_WELL,                    dungeon,          Ikana Castle Exterior,              Beneath The Well End,                       BENEATH_THE_WELL_BACK
 PIRATE_FORTRESS,                                    dungeon,          Pirate Fortress,                    Great Bay Coast Fortress,                   GREAT_BAY_FROM_PIRATE_FORTRESS
 GREAT_BAY_FROM_PIRATE_FORTRESS,                     dungeon,          Great Bay Coast Fortress,           Pirate Fortress,                            PIRATE_FORTRESS
 SWAMP_FROM_ROAD,                                    region,           Swamp Front,                        Road to Southern Swamp,                     SWAMP_ROAD_FROM_SWAMP

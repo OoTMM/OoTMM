@@ -20,11 +20,28 @@ static void ObjTsubo_Aliases(Xflag* xflag)
             }
         }
         break;
+    case SCE_MM_GREAT_BAY_COAST:
+        if (xflag->setupId == 1)
+        {
+            xflag->setupId = 0;
+            if (xflag->id <= 15)
+                xflag->id += 48;
+            else
+                xflag->id += 102;
+        }
+        break;
     case SCE_MM_ZORA_CAPE:
         if (xflag->setupId == 1)
         {
             xflag->setupId = 0;
             xflag->id += 9;
+        }
+        break;
+    case SCE_MM_WOODFALL:
+        if (xflag->setupId == 2)
+        {
+            xflag->setupId = 0;
+            xflag->id -= 36;
         }
         break;
     }
