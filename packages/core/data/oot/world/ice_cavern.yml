@@ -11,7 +11,7 @@
     "Ice Cavern Block Room": "has_blue_fire"
     "Ice Cavern First Fire Room": "(is_adult || climb_anywhere || hookshot_anywhere) && has(RUPEE_SILVER_IC_SCYTHE, 5)"
   locations:
-    "Ice Cavern GS Scythe Room": "can_collect_distance || climb_anywhere"
+    "Ice Cavern GS Scythe Room": "can_collect_distance || (climb_anywhere && (has_weapon || can_use_sticks || has_ranged_weapon || has_explosives || can_use_din))"
     "Ice Cavern SR Scythe Left": "true"
     "Ice Cavern SR Scythe Center Left": "true"
     "Ice Cavern SR Scythe Back": "true"
