@@ -16,6 +16,8 @@
   locations:
     "Stone Tower Temple Entrance Chest": "has_arrows"
     "Stone Tower Temple Entrance Switch Chest": "event(STONE_TOWER_ENTRANCE_CHEST_SWITCH)"
+    "Stone Tower Temple Pot Entrance 1": "true"
+    "Stone Tower Temple Pot Entrance 2": "true"
 "Stone Tower Temple West":
   dungeon: ST
   exits:
@@ -32,10 +34,24 @@
   dungeon: ST
   exits:
     "Stone Tower Temple West Garden": "true"
+    "Stone Tower Temple Under West Garden After Block": "((event(STONE_TOWER_WEST_GARDEN_LIGHT) && has_mirror_shield) || can_use_light_arrows)"
   locations:
     "Stone Tower Temple Under West Garden Ledge Chest": "can_hookshot"
-    "Stone Tower Temple Under West Garden Lava Chest": "soul_armos && ((event(STONE_TOWER_WEST_GARDEN_LIGHT) && has_mirror_shield) || can_use_light_arrows)"
-    "Stone Tower Temple Map": "((event(STONE_TOWER_WEST_GARDEN_LIGHT) && has_mirror_shield) || can_use_light_arrows)"
+    "Stone Tower Temple Pot Lava Room 1": "true"
+    "Stone Tower Temple Pot Lava Room 2": "true"
+    "Stone Tower Temple Pot Lava Room 3": "true"
+    "Stone Tower Temple Pot Lava Room 4": "true"
+"Stone Tower Temple Under West Garden After Block":
+  dungeon: ST
+  exits:
+    "Stone Tower Temple Under West Garden": "true"
+  locations:
+    "Stone Tower Temple Under West Garden Lava Chest": "soul_armos"
+    "Stone Tower Temple Map": "true"
+    "Stone Tower Temple Pot Lava Room After Block 1": "true"
+    "Stone Tower Temple Pot Lava Room After Block 2": "true"
+    "Stone Tower Temple Pot Lava Room After Block 3": "true"
+    "Stone Tower Temple Pot Lava Room After Block 4": "true"
 "Stone Tower Temple Center Ledge":
   dungeon: ST
   exits:
@@ -63,6 +79,13 @@
   locations:
     "Stone Tower Temple Compass": "event(STONE_TOWER_EAST_ENTRY_BLOCK)"
     "Stone Tower Temple Water Sun Switch Chest": "has_mask_zora && event(STONE_TOWER_WATER_CHEST_SUN)"
+    "Stone Tower Temple Pot Water Room Underwater 1": "has_mask_zora"
+    "Stone Tower Temple Pot Water Room Underwater 2": "has_mask_zora"
+    "Stone Tower Temple Pot Water Room Underwater 3": "has_mask_zora"
+    "Stone Tower Temple Pot Water Room Underwater 4": "has_mask_zora"
+    "Stone Tower Temple Pot Water Room Underwater 5": "has_mask_zora"
+    "Stone Tower Temple Pot Water Room Bridge 1": "true"
+    "Stone Tower Temple Pot Water Room Bridge 2": "true"
 "Stone Tower Temple Mirrors Room":
   dungeon: ST
   exits:
@@ -71,6 +94,8 @@
   locations:
     "Stone Tower Temple Mirrors Room Center Chest": "(has_mask_goron && has_mirror_shield) || can_use_light_arrows"
     "Stone Tower Temple Mirrors Room Right Chest": "(has_mask_goron && has_mirror_shield) || can_use_light_arrows"
+    "Stone Tower Temple Pot Mirror Room 1": "true"
+    "Stone Tower Temple Pot Mirror Room 2": "true"
 "Stone Tower Temple Wind Room":
   dungeon: ST
   exits:
@@ -79,6 +104,10 @@
   locations:
     "Stone Tower Temple Wind Room Ledge Chest": "has(MASK_DEKU)"
     "Stone Tower Temple Wind Room Jail Chest": "(has(MASK_DEKU) || can_use_light_arrows) && has_mask_goron"
+    "Stone Tower Temple Pot Wind Room 1": "has(MASK_DEKU)"
+    "Stone Tower Temple Pot Wind Room 2": "has(MASK_DEKU)"
+    "Stone Tower Temple Pot Wind Room 3": "has(MASK_DEKU)"
+    "Stone Tower Temple Pot Wind Room 4": "has(MASK_DEKU)"
 "Stone Tower Temple Light Arrow Room":
   dungeon: ST
   exits:
@@ -91,6 +120,14 @@
     "Stone Tower Temple Water Bridge": "true"
   locations:
     "Stone Tower Temple Before Water Bridge Chest": "event(STONE_TOWER_BRIDGE_CHEST_SWITCH) || (has_explosives || trick_keg_explosives)"
+    "Stone Tower Temple Pot Before Water Bridge 1": "true"
+    "Stone Tower Temple Pot Before Water Bridge 2": "true"
+    "Stone Tower Temple Pot Before Water Bridge 3": "true"
+    "Stone Tower Temple Pot Before Water Bridge 4": "true"
+    "Stone Tower Temple Pot Before Water Bridge 5": "true"
+    "Stone Tower Temple Pot Before Water Bridge 6": "true"
+    "Stone Tower Temple Pot Before Water Bridge 7": "true"
+    "Stone Tower Temple Pot Before Water Bridge 8": "true"
 "Stone Tower Temple Water Bridge":
   dungeon: ST
   exits:
