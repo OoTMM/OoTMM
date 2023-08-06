@@ -22,11 +22,11 @@ static const ExtraSceneSetups kExtraSceneSetups[] = {
     { SCE_MM_CLOCK_TOWN_NORTH, 1 },
 };
 
-void updateSceneSetup(void)
+void updateSceneSetup(GameState_Play* play)
 {
     for (int i = 0; i < ARRAY_SIZE(kExtraSceneSetups); ++i)
     {
-        if (gPlay->sceneId == kExtraSceneSetups[i].sceneId)
+        if (play->sceneId == kExtraSceneSetups[i].sceneId)
         {
             if (gSaveContext.sceneSetupId > kExtraSceneSetups[i].extraCount)
                 g.sceneSetupId = 0;
@@ -48,9 +48,9 @@ static void SpawnRoomActors_Wrapper(GameState_Play* play, int id)
 PATCH_CALL(0x8012eb18, SpawnRoomActors_Wrapper);
 PATCH_CALL(0x8012ec30, SpawnRoomActors_Wrapper);
 
-void OnRoomChange(void* arg1, void* arg2)
+void OnRoomChange(GameState_Play* play, void* arg2)
 {
-    void (*OnRoomChangeOriginal)(void*, void*);
+    void (*OnRoomChangeOriginal)(GameState_Play*, void*);
 
     /* Clear some flags */
     g.silverRupee = 0;
@@ -58,10 +58,10 @@ void OnRoomChange(void* arg1, void* arg2)
     g.actorIndex = 0;
 
     /* Update the scene setup */
-    updateSceneSetup();
+    updateSceneSetup(play);
 
     OnRoomChangeOriginal = (void*)0x8012f90c;
-    OnRoomChangeOriginal(arg1, arg2);
+    OnRoomChangeOriginal(play, arg2);
 }
 
 Actor* SpawnRoomActorEx(void* unk, GameState_Play *play, short actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable, int ex1, int ex2, int ex3)
