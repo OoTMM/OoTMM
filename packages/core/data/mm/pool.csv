@@ -589,8 +589,8 @@ Snowhead Temple Pot Wizzrobe 2,                   pot,            NONE,         
 Snowhead Temple Pot Wizzrobe 3,                   pot,            NONE,                   TEMPLE_SNOWHEAD,            0x0c0a,                     RECOVERY_HEART
 Snowhead Temple Pot Wizzrobe 4,                   pot,            NONE,                   TEMPLE_SNOWHEAD,            0x0c0b,                     ARROWS_10
 Snowhead Temple Pot Wizzrobe 5,                   pot,            NONE,                   TEMPLE_SNOWHEAD,            0x0c0c,                     ARROWS_10
-Snowhead Temple Flying Pot 1,                     pot,            NONE,                   TEMPLE_SNOWHEAD,            0x0308,                     ???
-Snowhead Temple Flying Pot 2,                     pot,            NONE,                   TEMPLE_SNOWHEAD,            0x0309,                     ???
+Snowhead Temple Flying Pot 1,                     pot,            NONE,                   TEMPLE_SNOWHEAD,            0x0308,                     NOTHING
+Snowhead Temple Flying Pot 2,                     pot,            NONE,                   TEMPLE_SNOWHEAD,            0x0309,                     NOTHING
 Pirate Fortress Entrance Chest 1,                 chest,          NONE,                   PIRATE_FORTRESS_ENTRANCE,   0x00,                       RUPEE_RED
 Pirate Fortress Entrance Chest 2,                 chest,          NONE,                   PIRATE_FORTRESS_ENTRANCE,   0x01,                       RUPEE_RED
 Pirate Fortress Entrance Chest 3,                 chest,          NONE,                   PIRATE_FORTRESS_ENTRANCE,   0x02,                       RUPEE_RED

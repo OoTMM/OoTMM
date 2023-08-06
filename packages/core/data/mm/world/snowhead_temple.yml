@@ -130,8 +130,8 @@
     "Snowhead Temple Compass Room": "true"
   locations:
     "Snowhead Temple Block Room Ledge": "event(SNOWHEAD_PUSH_BLOCK)"
-    "Snowhead Temple Flying Pot 1": "event(SNOWHEAD_PUSH_BLOCK)"
-    "Snowhead Temple Flying Pot 2": "event(SNOWHEAD_PUSH_BLOCK)"
+    "Snowhead Temple Flying Pot 1": "soul_flying_pot"
+    "Snowhead Temple Flying Pot 2": "soul_flying_pot"
 "Snowhead Temple Compass Room":
   dungeon: SH
   exits:
