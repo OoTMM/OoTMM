@@ -65,3 +65,17 @@ static void EnTuboTrap_Draw(Actor_EnTuboTrap* this, GameState_Play* play)
 }
 
 PATCH_FUNC(0x809313d8, EnTuboTrap_Draw);
+
+void EnTuboTrap_SpawnShuffledDrop(Actor_EnTuboTrap* this, GameState_Play* play)
+{
+    u16 var;
+
+    if (comboXflagsGet(&this->xflag))
+    {
+        /* Already spawned */
+        return;
+    }
+
+    /* Spawn an extended item */
+    DropCustomItem(play, &this->base.position, &this->xflag);
+}

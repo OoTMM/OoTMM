@@ -310,6 +310,11 @@ Zora Cape Pot Near Owl Statue 1,                  pot,            NONE,         
 Zora Cape Pot Near Owl Statue 2,                  pot,            NONE,                   ZORA_CAPE,                    0x0046,                     FAIRY
 Zora Cape Pot Near Owl Statue 3,                  pot,            NONE,                   ZORA_CAPE,                    0x0047,                     BOMBS_5
 Zora Cape Pot Near Owl Statue 4,                  pot,            NONE,                   ZORA_CAPE,                    0x0048,                     ARROWS_20
+Zora Cape Pot Game 1,                             pot,            NONE,                   EXTRA,                        0x0000,                     NOTHING
+Zora Cape Pot Game 2,                             pot,            NONE,                   EXTRA,                        0x0001,                     NOTHING
+Zora Cape Pot Game 3,                             pot,            NONE,                   EXTRA,                        0x0002,                     NOTHING
+Zora Cape Pot Game 4,                             pot,            NONE,                   EXTRA,                        0x0003,                     NOTHING
+Zora Cape Pot Game 5,                             pot,            NONE,                   EXTRA,                        0x0004,                     NOTHING
 Great Bay Great Fairy,                            npc,            NONE,                   FAIRY_FOUNTAIN,               GREAT_FAIRY_OCEAN,          DEFENSE_UPGRADE
 Zora Hall Scrub Deed,                             npc,            NONE,                   ZORA_HALL_ROOMS,              SCRUB_OCEAN,                DEED_OCEAN
 Zora Hall Scrub Shop,                             npc,            NONE,                   ZORA_HALL_ROOMS,              SCRUB_SHOP_POTION_GREEN,    POTION_GREEN

@@ -1513,6 +1513,11 @@
     "Zora Cape Waterfall HP": "has_mask_zora"
     "Zora Cape Pot Near Beavers 1": "true"
     "Zora Cape Pot Near Beavers 2": "true"
+    "Zora Cape Pot Game 1": "is_day"
+    "Zora Cape Pot Game 2": "is_day"
+    "Zora Cape Pot Game 3": "is_day"
+    "Zora Cape Pot Game 4": "is_day"
+    "Zora Cape Pot Game 5": "is_day"
   gossip:
     "Zora Cape Gossip": "true"
 "Zora Cape Grotto":

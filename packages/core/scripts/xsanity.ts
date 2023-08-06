@@ -5,6 +5,10 @@ import { decompressGame } from '../lib/combo/decompress';
 
 type Game = 'oot' | 'mq' | 'mm';
 
+const MM_EXTRA_SCENES = {
+  0xf0: 5,
+};
+
 const MM_POTS_SET_DROPS = [
   'NOTHING',
   'RUPEE_GREEN',
@@ -385,7 +389,7 @@ function outputPotsPoolMm(roomActors: RoomActors[]) {
         let item: string;
         const potType = (actor.params >> 7) & 3;
         const potEnemy = (actor.rz >> 7) & 3;
-        if (potEnemy != 1)
+        if (potEnemy)
           continue;
         switch (potType) {
         case 0:
@@ -432,9 +436,29 @@ function outputPotsPoolMm(roomActors: RoomActors[]) {
   }
 }
 
+function roomActorsFromRaw(rom: Buffer, raw: RawRoom[], game: Game): RoomActors[] {
+  const actorsRooms = raw.map(r => parseRoomActors(rom, r, game));
+
+  /* Inject extra fake rooms */
+  actorsRooms.push({
+    sceneId: 0xf0,
+    roomId: 0x00,
+    setupId: 0x00,
+    actors: [
+      { actorId: 0, typeId: ACTORS_MM.POT, params: 0x00, rz: 0x0000, },
+      { actorId: 1, typeId: ACTORS_MM.POT, params: 0x00, rz: 0x0000, },
+      { actorId: 2, typeId: ACTORS_MM.POT, params: 0x00, rz: 0x0000, },
+      { actorId: 3, typeId: ACTORS_MM.POT, params: 0x00, rz: 0x0000, },
+      { actorId: 4, typeId: ACTORS_MM.POT, params: 0x00, rz: 0x0000, },
+    ]
+  });
+
+  return sortRoomActors(actorsRooms);
+}
+
 function getGameRoomActor(rom: Buffer, game: Game) {
   const rawRooms = getRawRooms(rom, game);
-  const actorRooms = sortRoomActors(rawRooms.map(raw => parseRoomActors(rom, raw, game)));
+  const actorRooms = roomActorsFromRaw(rom, rawRooms, game);
   return actorRooms;
 }
 

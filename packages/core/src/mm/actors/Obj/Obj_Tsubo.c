@@ -21,8 +21,30 @@ static int ObjTsubo_IsShuffled(Actor_ObjTsubo* this)
     return 1;
 }
 
-static void ObjTsubo_Aliases(Xflag* xflag)
+static void ObjTsubo_Aliases(Actor_ObjTsubo* this)
 {
+    Xflag* xflag;
+
+    xflag = &this->xflag;
+
+    /* Check for zora game pots */
+    if (xflag->sceneId == SCE_MM_ZORA_CAPE && this->base.variable == 0x13f)
+    {
+        xflag->sceneId = SCE_MM_EXTRA;
+        xflag->setupId = 0;
+        xflag->roomId = 0;
+        switch ((s16)(this->base.initPos.x))
+        {
+        case 0x04D0: xflag->id = 0; break;
+        case 0x0560: xflag->id = 1; break;
+        case 0x05BD: xflag->id = 2; break;
+        case 0x056F: xflag->id = 3; break;
+        case 0x0543: xflag->id = 4; break;
+        default: UNREACHABLE(); break;
+        }
+        return;
+    }
+
     switch (xflag->sceneId)
     {
     case SCE_MM_SOUTHERN_SWAMP_CLEAR:
@@ -85,7 +107,7 @@ void ObjTsubo_InitWrapper(Actor_ObjTsubo* this, GameState_Play* play)
     this->xflag.id = g.actorIndex;
 
     /* Resolve aliases */
-    ObjTsubo_Aliases(&this->xflag);
+    ObjTsubo_Aliases(this);
 
     /* Invoke init */
     ObjTsubo_Init = (ActorFunc)actorAddr(AC_OBJ_TSUBO, 0x809278c0);
