@@ -20,7 +20,6 @@ void EnTuboTrap_InitWrapper(Actor_EnTuboTrap* this, GameState_Play* play)
 void EnTuboTrap_SpawnShuffledDrop(Actor_EnTuboTrap* this, GameState_Play* play)
 {
     u16 var;
-    Actor_EnItem00* item;
 
     if (comboXflagsGet(&this->xflag))
     {

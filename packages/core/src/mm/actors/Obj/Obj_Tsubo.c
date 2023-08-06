@@ -7,7 +7,7 @@ static int ObjTsubo_IsShuffled(Actor_ObjTsubo* this)
 
     /* Check for stray fairy */
     potType = (this->base.variable >> 7) & 3;
-    if ((potType == 0 || potType == 2) && (this->base.variable & 0x1f == 0x11))
+    if ((potType == 0 || potType == 2) && ((this->base.variable & 0x1f) == 0x11))
         return 0;
 
     /* Check for enemy */
