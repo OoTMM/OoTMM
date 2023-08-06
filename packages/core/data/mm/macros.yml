@@ -85,6 +85,7 @@
 "bombers1": "event(BOMBERS_NORTH1) && event(BOMBERS_EAST1) && event(BOMBERS_WEST1)"
 "bombers2": "event(BOMBERS_NORTH2) && event(BOMBERS_EAST2) && event(BOMBERS_WEST2)"
 "bombers3": "event(BOMBERS_NORTH3) && event(BOMBERS_EAST3) && event(BOMBERS_WEST3)"
+"has_fire_sticks": "has_sticks || can_use_fire_arrows"
 
 # Wallets
 "has_wallet(n)": "cond(setting(childWallets), has(WALLET, n) || has(SHARED_WALLET, n), has(WALLET, n - 1) || has(SHARED_WALLET, n - 1))"

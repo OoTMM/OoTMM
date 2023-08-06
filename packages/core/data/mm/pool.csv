@@ -367,6 +367,22 @@ Ocean Skulltula Colored Skulls Chandelier 2,      chest,          NONE,         
 Ocean Skulltula Colored Skulls Chandelier 3,      chest,          NONE,                   SPIDER_HOUSE_OCEAN,         0x12,                       GS_TOKEN_OCEAN
 Ocean Skulltula Colored Skulls Behind Picture,    chest,          NONE,                   SPIDER_HOUSE_OCEAN,         0x13,                       GS_TOKEN_OCEAN
 Ocean Skulltula Colored Skulls Pot,               chest,          NONE,                   SPIDER_HOUSE_OCEAN,         0x19,                       GS_TOKEN_OCEAN
+Ocean Spider House Pot Entrance 1,                pot,            NONE,                   SPIDER_HOUSE_OCEAN,         0x000c,                     RECOVERY_HEART
+Ocean Spider House Pot Entrance 2,                pot,            NONE,                   SPIDER_HOUSE_OCEAN,         0x000d,                     MAGIC_JAR_SMALL
+Ocean Spider House Pot Entrance 3,                pot,            NONE,                   SPIDER_HOUSE_OCEAN,         0x000e,                     ARROWS_10
+Ocean Spider House Pot Entrance 4,                pot,            NONE,                   SPIDER_HOUSE_OCEAN,         0x000f,                     ARROWS_10
+Ocean Spider House Pot Main Room Web,             pot,            NONE,                   SPIDER_HOUSE_OCEAN,         0x011b,                     ARROWS_10
+Ocean Spider House Pot Main Room 1,               pot,            NONE,                   SPIDER_HOUSE_OCEAN,         0x011c,                     ARROWS_10
+Ocean Spider House Pot Main Room 2,               pot,            NONE,                   SPIDER_HOUSE_OCEAN,         0x011e,                     MAGIC_JAR_SMALL
+Ocean Spider House Pot Colored Skulls 1,          pot,            NONE,                   SPIDER_HOUSE_OCEAN,         0x0304,                     ARROWS_10
+Ocean Spider House Pot Colored Skulls 2,          pot,            NONE,                   SPIDER_HOUSE_OCEAN,         0x0305,                     ARROWS_10
+Ocean Spider House Pot Storage 1,                 pot,            NONE,                   SPIDER_HOUSE_OCEAN,         0x050b,                     RECOVERY_HEART
+Ocean Spider House Pot Storage 2,                 pot,            NONE,                   SPIDER_HOUSE_OCEAN,         0x050c,                     RECOVERY_HEART
+Ocean Spider House Pot Storage 3,                 pot,            NONE,                   SPIDER_HOUSE_OCEAN,         0x050d,                     ARROWS_10
+Ocean Spider House Pot Storage Top 1,             pot,            NONE,                   SPIDER_HOUSE_OCEAN,         0x050e,                     RECOVERY_HEART
+Ocean Spider House Pot Storage Top 2,             pot,            NONE,                   SPIDER_HOUSE_OCEAN,         0x050f,                     RECOVERY_HEART
+Ocean Spider House Pot Storage Top 3,             pot,            NONE,                   SPIDER_HOUSE_OCEAN,         0x0510,                     RECOVERY_HEART
+Ocean Spider House Pot Storage 4,                 pot,            NONE,                   SPIDER_HOUSE_OCEAN,         0x0511,                     MAGIC_JAR_SMALL
 Waterfall Rapids Beaver Race 1,                   npc,            NONE,                   WATERFALL_RAPIDS,           BEAVER_1,                   BOTTLE_EMPTY
 Waterfall Rapids Beaver Race 2,                   npc,            NONE,                   WATERFALL_RAPIDS,           BEAVER_2,                   HEART_PIECE
 Road to Ikana Chest,                              chest,          NONE,                   ROAD_IKANA,                 0x00,                       RUPEE_RED
