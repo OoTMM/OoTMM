@@ -514,11 +514,28 @@ Pirate Fortress Sewers Chest 1,                   chest,          NONE,         
 Pirate Fortress Sewers Chest 2,                   chest,          NONE,                   PIRATE_FORTRESS_INTERIOR,   0x04,                       RUPEE_RED
 Pirate Fortress Sewers Chest 3,                   chest,          NONE,                   PIRATE_FORTRESS_INTERIOR,   0x06,                       RUPEE_BLUE
 Pirate Fortress Sewers HP,                        collectible,    NONE,                   PIRATE_FORTRESS_INTERIOR,   0x0c,                       HEART_PIECE
+Pirate Fortress Sewers Pot End 1,                 pot,            NONE,                   PIRATE_FORTRESS_INTERIOR,   0x0913,                     RECOVERY_HEART
+Pirate Fortress Sewers Pot End 2,                 pot,            NONE,                   PIRATE_FORTRESS_INTERIOR,   0x0914,                     NUTS_10
+Pirate Fortress Sewers Pot End 3,                 pot,            NONE,                   PIRATE_FORTRESS_INTERIOR,   0x0915,                     ARROWS_10
+Pirate Fortress Sewers Pot Waterway 1,            pot,            NONE,                   PIRATE_FORTRESS_INTERIOR,   0x0a08,                     RECOVERY_HEART
+Pirate Fortress Sewers Pot Waterway 2,            pot,            NONE,                   PIRATE_FORTRESS_INTERIOR,   0x0a09,                     ARROWS_10
+Pirate Fortress Sewers Pot Heart Piece Room 1,    pot,            NONE,                   PIRATE_FORTRESS_INTERIOR,   0x0b22,                     ARROWS_20
+Pirate Fortress Sewers Pot Heart Piece Room 2,    pot,            NONE,                   PIRATE_FORTRESS_INTERIOR,   0x0b23,                     NOTHING
 Pirate Fortress Interior Hookshot,                chest,          NONE,                   PIRATE_FORTRESS_INTERIOR,   0x02,                       HOOKSHOT
 Pirate Fortress Interior Aquarium,                chest,          NONE,                   PIRATE_FORTRESS_INTERIOR,   0x00,                       RUPEE_RED
 Pirate Fortress Interior Silver Rupee Chest,      chest,          NONE,                   PIRATE_FORTRESS_INTERIOR,   0x03,                       RUPEE_SILVER
 Pirate Fortress Interior Lower Chest,             chest,          NONE,                   PIRATE_FORTRESS_EXTERIOR,   0x00,                       RUPEE_RED
 Pirate Fortress Interior Upper Chest,             chest,          NONE,                   PIRATE_FORTRESS_EXTERIOR,   0x01,                       RUPEE_RED
+Pirate Fortress Interior Pot Beehive 1,           pot,            NONE,                   PIRATE_FORTRESS_INTERIOR,   0x030c,                     ARROWS_10
+Pirate Fortress Interior Pot Beehive 2,           pot,            NONE,                   PIRATE_FORTRESS_INTERIOR,   0x030d,                     ARROWS_10
+Pirate Fortress Interior Pot Chest Aquarium 1,    pot,            NONE,                   PIRATE_FORTRESS_INTERIOR,   0x0603,                     RECOVERY_HEART
+Pirate Fortress Interior Pot Chest Aquarium 2,    pot,            NONE,                   PIRATE_FORTRESS_INTERIOR,   0x0604,                     RECOVERY_HEART
+Pirate Fortress Interior Pot Chest Aquarium 3,    pot,            NONE,                   PIRATE_FORTRESS_INTERIOR,   0x0605,                     ARROWS_20
+Pirate Fortress Interior Pot Barrel Maze 1,       pot,            NONE,                   PIRATE_FORTRESS_INTERIOR,   0x0804,                     RECOVERY_HEART
+Pirate Fortress Interior Pot Barrel Maze 2,       pot,            NONE,                   PIRATE_FORTRESS_INTERIOR,   0x0805,                     RUPEE_BLUE
+Pirate Fortress Interior Pot Barrel Maze 3,       pot,            NONE,                   PIRATE_FORTRESS_INTERIOR,   0x0806,                     ARROWS_10
+Pirate Fortress Interior Pot Guarded 1,           pot,            NONE,                   PIRATE_FORTRESS_INTERIOR,   0x0d06,                     RECOVERY_HEART
+Pirate Fortress Interior Pot Guarded 2,           pot,            NONE,                   PIRATE_FORTRESS_INTERIOR,   0x0d07,                     ARROWS_10
 Great Bay Temple Map,                             chest,          NONE,                   TEMPLE_GREAT_BAY,           0x1d,                       MAP_GB
 Great Bay Temple Baba Chest,                      chest,          NONE,                   TEMPLE_GREAT_BAY,           0x19,                       STRAY_FAIRY_GB
 Great Bay Temple Boss Key,                        chest,          NONE,                   TEMPLE_GREAT_BAY,           0x1e,                       BOSS_KEY_GB
