@@ -270,3 +270,7 @@ X(ITEM_CUSTOM,              0x80,  DRAWGI_SMALL_KEY,                    0x60, 0x
 X(ITEM_CUSTOM,              0x80,  DRAWGI_SMALL_KEY,                    0x60, 0x00aa, "the " C0 "Key Ring (Hideout)"),
 X(ITEM_CUSTOM,              0x80,  DRAWGI_SMALL_KEY,                    0x60, 0x00aa, "the " C0 "Key Ring (GTG)"),
 X(ITEM_CUSTOM,              0x80,  DRAWGI_SKELETON_KEY,                 0x60, 0x00aa, "the " C1 "Skeleton Key"),
+X(ITEM_CUSTOM,              0x80,  DRAWGI_COIN_YELLOW,                  0x60, 0x012e, "a " C1 "Yellow Coin"),
+X(ITEM_CUSTOM,              0x80,  DRAWGI_COIN_RED,                     0x60, 0x012e, "a " C1 "Red Coin"),
+X(ITEM_CUSTOM,              0x80,  DRAWGI_COIN_GREEN,                   0x60, 0x012e, "a " C1 "Green Coin"),
+X(ITEM_CUSTOM,              0x80,  DRAWGI_COIN_BLUE,                    0x60, 0x012e, "a " C1 "Blue Coin"),

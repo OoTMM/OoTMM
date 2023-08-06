@@ -511,6 +511,10 @@ const ITEM_IDS = [
   'OOT_SKELETON_KEY',
   'MM_SKELETON_KEY',
   'SHARED_SKELETON_KEY',
+  'OOT_COIN_YELLOW',
+  'OOT_COIN_RED',
+  'OOT_COIN_GREEN',
+  'OOT_COIN_BLUE',
 ] as const;
 
 type ItemID = typeof ITEM_IDS[number];
