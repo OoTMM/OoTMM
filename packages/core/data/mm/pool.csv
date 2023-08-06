@@ -545,6 +545,52 @@ Snowhead Temple Boss Pot 07,                      pot,            NONE,         
 Snowhead Temple Boss Pot 08,                      pot,            NONE,                   LAIR_GOHT,                  0x000a,                     MAGIC_JAR_LARGE
 Snowhead Temple Boss Pot 09,                      pot,            NONE,                   LAIR_GOHT,                  0x000b,                     MAGIC_JAR_LARGE
 Snowhead Temple Boss Pot 10,                      pot,            NONE,                   LAIR_GOHT,                  0x000c,                     MAGIC_JAR_LARGE
+Snowhead Temple Pot Entrance 1,                   pot,            NONE,                   TEMPLE_SNOWHEAD,            0x0015,                     RECOVERY_HEART
+Snowhead Temple Pot Entrance 2,                   pot,            NONE,                   TEMPLE_SNOWHEAD,            0x0016,                     RECOVERY_HEART
+Snowhead Temple Pot Compass Room 1,               pot,            NONE,                   TEMPLE_SNOWHEAD,            0x0105,                     RECOVERY_HEART
+Snowhead Temple Pot Compass Room 2,               pot,            NONE,                   TEMPLE_SNOWHEAD,            0x0106,                     ARROWS_10
+Snowhead Temple Pot Compass Room 3,               pot,            NONE,                   TEMPLE_SNOWHEAD,            0x0107,                     MAGIC_JAR_SMALL
+Snowhead Temple Pot Compass Room 4,               pot,            NONE,                   TEMPLE_SNOWHEAD,            0x0108,                     MAGIC_JAR_SMALL
+Snowhead Temple Pot Compass Room 5,               pot,            NONE,                   TEMPLE_SNOWHEAD,            0x0109,                     MAGIC_JAR_LARGE
+Snowhead Temple Pot Bridge Room After 1,          pot,            NONE,                   TEMPLE_SNOWHEAD,            0x0201,                     ARROWS_10
+Snowhead Temple Pot Bridge Room After 2,          pot,            NONE,                   TEMPLE_SNOWHEAD,            0x0202,                     MAGIC_JAR_SMALL
+Snowhead Temple Pot Bridge Room 1,                pot,            NONE,                   TEMPLE_SNOWHEAD,            0x0207,                     RECOVERY_HEART
+Snowhead Temple Pot Bridge Room 2,                pot,            NONE,                   TEMPLE_SNOWHEAD,            0x0208,                     RECOVERY_HEART
+Snowhead Temple Pot Bridge Room 3,                pot,            NONE,                   TEMPLE_SNOWHEAD,            0x0209,                     MAGIC_JAR_LARGE
+Snowhead Temple Pot Bridge Room 4,                pot,            NONE,                   TEMPLE_SNOWHEAD,            0x020a,                     MAGIC_JAR_LARGE
+Snowhead Temple Pot Bridge Room 5,                pot,            NONE,                   TEMPLE_SNOWHEAD,            0x020b,                     BOMBS_5
+Snowhead Temple Pot Block Room 1,                 pot,            NONE,                   TEMPLE_SNOWHEAD,            0x0300,                     ARROWS_10
+Snowhead Temple Pot Block Room 2,                 pot,            NONE,                   TEMPLE_SNOWHEAD,            0x0307,                     RECOVERY_HEART
+Snowhead Temple Pot Central Room Scarecrow 1,     pot,            NONE,                   TEMPLE_SNOWHEAD,            0x041b,                     RECOVERY_HEART
+Snowhead Temple Pot Central Room Scarecrow 2,     pot,            NONE,                   TEMPLE_SNOWHEAD,            0x041c,                     RECOVERY_HEART
+Snowhead Temple Pot Central Room Near Boss Key 1, pot,            NONE,                   TEMPLE_SNOWHEAD,            0x041d,                     ARROWS_10
+Snowhead Temple Pot Central Room Near Boss Key 2, pot,            NONE,                   TEMPLE_SNOWHEAD,            0x041e,                     MAGIC_JAR_SMALL
+Snowhead Temple Pot Central Room Level 2 1,       pot,            NONE,                   TEMPLE_SNOWHEAD,            0x042e,                     RUPEE_BLUE
+Snowhead Temple Pot Central Room Level 2 2,       pot,            NONE,                   TEMPLE_SNOWHEAD,            0x042f,                     RUPEE_BLUE
+Snowhead Temple Pot Central Room Bottom 1,        pot,            NONE,                   TEMPLE_SNOWHEAD,            0x0430,                     RECOVERY_HEART
+Snowhead Temple Pot Central Room Bottom 2,        pot,            NONE,                   TEMPLE_SNOWHEAD,            0x0431,                     FAIRY
+Snowhead Temple Pot Pillars Room Upper 1,         pot,            NONE,                   TEMPLE_SNOWHEAD,            0x0503,                     ARROWS_10
+Snowhead Temple Pot Pillars Room Upper 2,         pot,            NONE,                   TEMPLE_SNOWHEAD,            0x0504,                     ARROWS_10
+Snowhead Temple Pot Pillars Room Upper 3,         pot,            NONE,                   TEMPLE_SNOWHEAD,            0x0505,                     MAGIC_JAR_SMALL
+Snowhead Temple Pot Pillars Room Upper 4,         pot,            NONE,                   TEMPLE_SNOWHEAD,            0x0506,                     MAGIC_JAR_SMALL
+Snowhead Temple Pot Pillars Room Upper 5,         pot,            NONE,                   TEMPLE_SNOWHEAD,            0x0507,                     MAGIC_JAR_LARGE
+Snowhead Temple Pot Pillars Room Upper 6,         pot,            NONE,                   TEMPLE_SNOWHEAD,            0x0508,                     MAGIC_JAR_LARGE
+Snowhead Temple Pot Pillars Room Lower 1,         pot,            NONE,                   TEMPLE_SNOWHEAD,            0x050c,                     MAGIC_JAR_SMALL
+Snowhead Temple Pot Pillars Room Lower 2,         pot,            NONE,                   TEMPLE_SNOWHEAD,            0x050d,                     MAGIC_JAR_SMALL
+Snowhead Temple Pot Pillars Room Lower 3,         pot,            NONE,                   TEMPLE_SNOWHEAD,            0x050e,                     MAGIC_JAR_SMALL
+Snowhead Temple Pot Pillars Room Lower 4,         pot,            NONE,                   TEMPLE_SNOWHEAD,            0x050f,                     MAGIC_JAR_LARGE
+Snowhead Temple Pot Pillars Room Lower 5,         pot,            NONE,                   TEMPLE_SNOWHEAD,            0x0510,                     ARROWS_10
+Snowhead Temple Pot Pillars Room Lower 6,         pot,            NONE,                   TEMPLE_SNOWHEAD,            0x0511,                     ARROWS_10
+Snowhead Temple Pot Pillars Room Lower 7,         pot,            NONE,                   TEMPLE_SNOWHEAD,            0x0512,                     ARROWS_10
+Snowhead Temple Pot Dual Switches 1,              pot,            NONE,                   TEMPLE_SNOWHEAD,            0x080b,                     BOMBS_5
+Snowhead Temple Pot Dual Switches 2,              pot,            NONE,                   TEMPLE_SNOWHEAD,            0x080c,                     BOMBS_5
+Snowhead Temple Pot Wizzrobe 1,                   pot,            NONE,                   TEMPLE_SNOWHEAD,            0x0c08,                     NOTHING
+Snowhead Temple Pot Wizzrobe 2,                   pot,            NONE,                   TEMPLE_SNOWHEAD,            0x0c09,                     NOTHING
+Snowhead Temple Pot Wizzrobe 3,                   pot,            NONE,                   TEMPLE_SNOWHEAD,            0x0c0a,                     RECOVERY_HEART
+Snowhead Temple Pot Wizzrobe 4,                   pot,            NONE,                   TEMPLE_SNOWHEAD,            0x0c0b,                     ARROWS_10
+Snowhead Temple Pot Wizzrobe 5,                   pot,            NONE,                   TEMPLE_SNOWHEAD,            0x0c0c,                     ARROWS_10
+Snowhead Temple Flying Pot 1,                     pot,            NONE,                   TEMPLE_SNOWHEAD,            0x0308,                     ???
+Snowhead Temple Flying Pot 2,                     pot,            NONE,                   TEMPLE_SNOWHEAD,            0x0309,                     ???
 Pirate Fortress Entrance Chest 1,                 chest,          NONE,                   PIRATE_FORTRESS_ENTRANCE,   0x00,                       RUPEE_RED
 Pirate Fortress Entrance Chest 2,                 chest,          NONE,                   PIRATE_FORTRESS_ENTRANCE,   0x01,                       RUPEE_RED
 Pirate Fortress Entrance Chest 3,                 chest,          NONE,                   PIRATE_FORTRESS_ENTRANCE,   0x02,                       RUPEE_RED
