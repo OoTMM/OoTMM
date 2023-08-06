@@ -1,15 +1,47 @@
 #include <combo.h>
 #include <combo/custom.h>
 
+static void ObjTsubo_Aliases(Xflag* xflag)
+{
+    switch (xflag->sceneId)
+    {
+    case SCE_MM_SOUTHERN_SWAMP_CLEAR:
+        xflag->sceneId = SCE_MM_SOUTHERN_SWAMP;
+        xflag->id += 3;
+        break;
+    case SCE_MM_GORON_SHRINE:
+        if (xflag->setupId == 1)
+        {
+            xflag->setupId = 0;
+            switch (xflag->roomId)
+            {
+            case 0: xflag->id -= 2; break;
+            case 1: xflag->id += 3; break;
+            }
+        }
+        break;
+    case SCE_MM_ZORA_CAPE:
+        if (xflag->setupId == 1)
+        {
+            xflag->setupId = 0;
+            xflag->id += 9;
+        }
+        break;
+    }
+}
+
 void ObjTsubo_InitWrapper(Actor_ObjTsubo* this, GameState_Play* play)
 {
     ActorFunc ObjTsubo_Init;
 
     /* Setup the xflag */
     this->xflag.sceneId = play->sceneId;
-    this->xflag.setupId = 0; /* TODO - Chnage this */
+    this->xflag.setupId = g.sceneSetupId;
     this->xflag.roomId = this->base.room;
     this->xflag.id = g.actorIndex;
+
+    /* Resolve aliases */
+    ObjTsubo_Aliases(&this->xflag);
 
     /* Invoke init */
     ObjTsubo_Init = (ActorFunc)actorAddr(AC_OBJ_TSUBO, 0x809278c0);

@@ -1,5 +1,44 @@
 #include <combo.h>
 
+typedef struct
+{
+    u8 sceneId;
+    u8 extraCount;
+}
+ExtraSceneSetups;
+
+static const ExtraSceneSetups kExtraSceneSetups[] = {
+    { SCE_MM_IKANA_CANYON, 3 },
+    { SCE_MM_PATH_MOUNTAIN_VILLAGE, 1 },
+    { SCE_MM_GORON_SHRINE, 1 },
+    { SCE_MM_ZORA_HALL, 1 },
+    { SCE_MM_GREAT_BAY_COAST, 1 },
+    { SCE_MM_ZORA_CAPE, 1 },
+    { SCE_MM_DEKU_KING_CHAMBER, 1 },
+    { SCE_MM_WOODFALL, 2 },
+    { SCE_MM_PATH_SNOWHEAD, 1 },
+    { SCE_MM_SNOWHEAD, 1 },
+    { SCE_MM_GORON_RACETRACK, 1 },
+    { SCE_MM_CLOCK_TOWN_NORTH, 1 },
+};
+
+void updateSceneSetup(void)
+{
+    for (int i = 0; i < ARRAY_SIZE(kExtraSceneSetups); ++i)
+    {
+        if (gPlay->sceneId == kExtraSceneSetups[i].sceneId)
+        {
+            if (gSaveContext.sceneSetupId > kExtraSceneSetups[i].extraCount)
+                g.sceneSetupId = 0;
+            else
+                g.sceneSetupId = gSaveContext.sceneSetupId;
+            return;
+        }
+    }
+
+    g.sceneSetupId = 0;
+}
+
 static void SpawnRoomActors_Wrapper(GameState_Play* play, int id)
 {
     /* Spawn the normal room actors */
@@ -17,6 +56,9 @@ void OnRoomChange(void* arg1, void* arg2)
     g.silverRupee = 0;
     g.roomEnemyLackSoul = 0;
     g.actorIndex = 0;
+
+    /* Update the scene setup */
+    updateSceneSetup();
 
     OnRoomChangeOriginal = (void*)0x8012f90c;
     OnRoomChangeOriginal(arg1, arg2);

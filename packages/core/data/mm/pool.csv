@@ -28,6 +28,10 @@ Clock Town Great Fairy,                           npc,            NONE,         
 Clock Town Great Fairy Alt,                       npc,            NONE,                   FAIRY_FOUNTAIN,             GREAT_FAIRY_TOWN_ALT,       MAGIC_UPGRADE
 Clock Tower Roof Skull Kid Ocarina,               npc,            NONE,                   CLOCK_TOWER_ROOFTOP,        SKULL_KID_OCARINA,          OCARINA
 Clock Tower Roof Skull Kid Song of Time,          npc,            NONE,                   CLOCK_TOWER_ROOFTOP,        SKULL_KID_SONG,             SONG_TIME
+Clock Tower Roof Pot 1,                           pot,            NONE,                   CLOCK_TOWER_ROOFTOP,        0x0003,                     MAGIC_JAR_LARGE
+Clock Tower Roof Pot 2,                           pot,            NONE,                   CLOCK_TOWER_ROOFTOP,        0x0004,                     MAGIC_JAR_LARGE
+Clock Tower Roof Pot 3,                           pot,            NONE,                   CLOCK_TOWER_ROOFTOP,        0x0005,                     MAGIC_JAR_LARGE
+Clock Tower Roof Pot 4,                           pot,            NONE,                   CLOCK_TOWER_ROOFTOP,        0x0006,                     MAGIC_JAR_LARGE
 Mayor's Office Kafei's Mask,                      npc,            NONE,                   MAYOR_HOUSE,                MASK_KAFEI,                 MASK_KAFEI
 Mayor's Office HP,                                npc,            NONE,                   MAYOR_HOUSE,                MAYOR_HEART_PIECE,          HEART_PIECE
 Milk Bar Troupe Leader Mask,                      npc,            SOUND_CHECK,            MILK_BAR,                   MASK_TROUPE_LEADER,         MASK_TROUPE_LEADER
@@ -49,6 +53,13 @@ Stock Pot Inn Grandma HP 2,                       npc,            NONE,         
 Stock Pot Inn ??? HP,                             npc,            NONE,                   STOCK_POT_INN,              TOILET_HEART_PIECE,         HEART_PIECE
 Astral Observatory Passage Chest,                 chest,          NONE,                   OBSERVATORY,                0x00,                       RUPEE_SILVER
 Astral Observatory Moon Tear,                     npc,            NONE,                   OBSERVATORY,                MOON_TEAR,                  MOON_TEAR
+Astral Observatory Passage Pot 1,                 pot,            NONE,                   OBSERVATORY,                0x0010,                     RECOVERY_HEART
+Astral Observatory Passage Pot 2,                 pot,            NONE,                   OBSERVATORY,                0x0011,                     RECOVERY_HEART
+Astral Observatory Passage Pot 3,                 pot,            NONE,                   OBSERVATORY,                0x0012,                     MAGIC_JAR_SMALL
+Astral Observatory Passage Pot 4,                 pot,            NONE,                   OBSERVATORY,                0x0013,                     MAGIC_JAR_SMALL
+Astral Observatory Pot 1,                         pot,            NONE,                   OBSERVATORY,                0x0104,                     RUPEE_BLUE
+Astral Observatory Pot 2,                         pot,            NONE,                   OBSERVATORY,                0x0105,                     RUPEE_BLUE
+Astral Observatory Pot 3,                         pot,            NONE,                   OBSERVATORY,                0x0106,                     MAGIC_JAR_SMALL
 Trading Post Item 1,                              shop,           NONE,                   TRADING_POST,               0x05,                       POTION_RED
 Trading Post Item 2,                              shop,           NONE,                   TRADING_POST,               0x06,                       POTION_GREEN
 Trading Post Item 3,                              shop,           NONE,                   TRADING_POST,               0x07,                       SHIELD_HERO
@@ -57,6 +68,7 @@ Trading Post Item 5,                              shop,           NONE,         
 Trading Post Item 6,                              shop,           NONE,                   TRADING_POST,               0x0a,                       ARROWS_10
 Trading Post Item 7,                              shop,           NONE,                   TRADING_POST,               0x0b,                       NUTS_10
 Trading Post Item 8,                              shop,           NONE,                   TRADING_POST,               0x0c,                       ARROWS_30
+Trading Post Pot,                                 pot,            NONE,                   TRADING_POST,               0x0008,                     RECOVERY_HEART
 Bomb Shop Item 1,                                 shop,           NONE,                   BOMB_SHOP,                  0x00,                       BOMBS_10
 Bomb Shop Item 2,                                 shop,           NONE,                   BOMB_SHOP,                  0x01,                       BOMBCHU_10
 Bomb Shop Bomb Bag,                               shop,           NONE,                   BOMB_SHOP,                  0x02,                       BOMB_BAG
@@ -84,9 +96,11 @@ Termina Field Peahat Grotto,                      chest,          NONE,         
 Termina Field Dodongo Grotto,                     chest,          NONE,                   GROTTOS,                    0x00,                       HEART_PIECE
 Termina Field Bio Baba Grotto,                    collectible,    NONE,                   GROTTOS,                    0x02,                       HEART_PIECE
 Termina Field Scrub,                              npc,            NONE,                   GROTTOS,                    SCRUB_TELESCOPE,            HEART_PIECE
+Termina Field Scrub Pot,                          pot,            NONE,                   GROTTOS,                    0x0903,                     RECOVERY_HEART
 Termina Field Gossip Stones HP,                   npc,            NONE,                   GROTTOS,                    GOSSIP_HEART_PIECE,         HEART_PIECE
 Termina Field Cow Front,                          cow,            NONE,                   GROTTOS,                    0x13,                       MILK
 Termina Field Cow Back,                           cow,            NONE,                   GROTTOS,                    0x14,                       MILK
+Termina Field Pot,                                pot,            NONE,                   TERMINA_FIELD,              0x0040,                     FAIRY
 Road to Southern Swamp HP,                        collectible,    NONE,                   ROAD_SOUTHERN_SWAMP,        0x01,                       HEART_PIECE
 Road to Southern Swamp Grotto,                    chest,          NONE,                   GROTTOS,                    0x1e,                       RUPEE_RED
 Southern Swamp HP,                                collectible,    NONE,                   SOUTHERN_SWAMP,             0x1e,                       HEART_PIECE
@@ -95,6 +109,9 @@ Southern Swamp Scrub Shop,                        npc,            NONE,         
 Southern Swamp Song of Soaring,                   npc,            NONE,                   SOUTHERN_SWAMP,             SONG_SOARING,               SONG_SOARING
 Southern Swamp Owl Statue,                        npc,            NONE,                   SOUTHERN_SWAMP,             OWL_SOUTHERN_SWAMP,         OWL_SOUTHERN_SWAMP
 Southern Swamp Grotto,                            chest,          NONE,                   GROTTOS,                    0x1d,                       RUPEE_RED
+Southern Swamp Pot 1,                             pot,            NONE,                   SOUTHERN_SWAMP,             0x020e,                     RECOVERY_HEART
+Southern Swamp Pot 2,                             pot,            NONE,                   SOUTHERN_SWAMP,             0x020f,                     RUPEE_BLUE
+Southern Swamp Pot 3,                             pot,            NONE,                   SOUTHERN_SWAMP,             0x0210,                     RUPEE_GREEN
 Woods of Mystery Grotto,                          chest,          NONE,                   GROTTOS,                    0x1c,                       RUPEE_PURPLE
 Swamp Archery Reward 1,                           npc,            NONE,                   SHOOTING_GALLERY_SWAMP,     SHOOTING_GAME_SWAMP_1,      BOW
 Swamp Archery Reward 2,                           npc,            NONE,                   SHOOTING_GALLERY_SWAMP,     SHOOTING_GAME_SWAMP_2,      HEART_PIECE
@@ -108,6 +125,8 @@ Tourist Information Tingle Picture,               npc,            NONE,         
 Deku Palace HP,                                   collectible,    NONE,                   DEKU_PALACE,                0x1e,                       HEART_PIECE
 Deku Palace Sonata of Awakening,                  npc,            NONE,                   DEKU_KING_CHAMBER,          SONG_AWAKENING,             SONG_AWAKENING
 Deku Palace Grotto Chest,                         chest,          NONE,                   GROTTOS,                    0x05,                       RUPEE_RED
+Deku Palace Pot 1,                                pot,            NONE,                   DEKU_PALACE,                0x010f,                     MAGIC_JAR_SMALL
+Deku Palace Pot 2,                                pot,            NONE,                   DEKU_PALACE,                0x0110,                     MAGIC_JAR_SMALL
 Deku Shrine Mask of Scents,                       npc,            BUTLER_RACE,            DEKU_SHRINE,                MASK_SCENTS,                MASK_SCENTS
 Woodfall Owl Statue,                              npc,            NONE,                   WOODFALL,                   OWL_WOODFALL,               OWL_WOODFALL
 Woodfall Near Owl Chest,                          chest,          NONE,                   WOODFALL,                   0x02,                       RUPEE_RED
@@ -162,6 +181,17 @@ Twin Islands Frozen Grotto Chest,                 chest,          NONE,         
 Twin Islands Ramp Grotto Chest,                   chest,          NONE,                   GROTTOS,                    0x19,                       BOMBCHU
 Goron Elder,                                      npc,            NONE,                   TWIN_ISLANDS_WINTER,        GORON_ELDER,                SONG_GORON_HALF
 Goron Baby,                                       npc,            NONE,                   GORON_SHRINE,               GORON_BABY,                 SONG_GORON
+Goron Shrine Pot 01,                              pot,            NONE,                   GORON_SHRINE,               0x0023,                     STICK
+Goron Shrine Pot 02,                              pot,            NONE,                   GORON_SHRINE,               0x0024,                     MAGIC_JAR_SMALL
+Goron Shrine Pot 03,                              pot,            NONE,                   GORON_SHRINE,               0x0025,                     MAGIC_JAR_SMALL
+Goron Shrine Pot 04,                              pot,            NONE,                   GORON_SHRINE,               0x0026,                     STICK
+Goron Shrine Pot 05,                              pot,            NONE,                   GORON_SHRINE,               0x0027,                     MAGIC_JAR_LARGE
+Goron Shrine Pot 06,                              pot,            NONE,                   GORON_SHRINE,               0x0028,                     MAGIC_JAR_LARGE
+Goron Shrine Pot 07,                              pot,            NONE,                   GORON_SHRINE,               0x0029,                     MAGIC_JAR_LARGE
+Goron Shrine Pot 08,                              pot,            NONE,                   GORON_SHRINE,               0x002a,                     STICK
+Goron Shrine Pot 09,                              pot,            NONE,                   GORON_SHRINE,               0x0106,                     STICK
+Goron Shrine Pot 10,                              pot,            NONE,                   GORON_SHRINE,               0x0107,                     STICK
+Goron Shrine Pot 11,                              pot,            NONE,                   GORON_SHRINE,               0x0108,                     MAGIC_JAR_LARGE
 Goron Shop Item 1,                                shop,           NONE,                   GORON_SHOP,                 0x10,                       BOMBS_10
 Goron Shop Item 2,                                shop,           NONE,                   GORON_SHOP,                 0x11,                       ARROWS_10
 Goron Shop Item 3,                                shop,           NONE,                   GORON_SHOP,                 0x12,                       POTION_RED
@@ -197,6 +227,12 @@ Zora Cape Underwater Chest,                       chest,          NONE,         
 Zora Cape Waterfall HP,                           collectible,    NONE,                   ZORA_CAPE,                  0x07,                       HEART_PIECE
 Zora Cape Owl Statue,                             npc,            NONE,                   ZORA_CAPE,                  OWL_ZORA_CAPE,              OWL_ZORA_CAPE
 Zora Cape Grotto,                                 chest,          NONE,                   GROTTOS,                    0x15,                       BOMBCHU
+Zora Cape Pot Near Beavers 1,                     pot,            NONE,                   ZORA_CAPE,                  0x0043,                     RECOVERY_HEART
+Zora Cape Pot Near Beavers 2,                     pot,            NONE,                   ZORA_CAPE,                  0x0044,                     MAGIC_JAR_SMALL
+Zora Cape Pot Near Owl Statue 1,                  pot,            NONE,                   ZORA_CAPE,                  0x0045,                     MAGIC_JAR_LARGE
+Zora Cape Pot Near Owl Statue 2,                  pot,            NONE,                   ZORA_CAPE,                  0x0046,                     FAIRY
+Zora Cape Pot Near Owl Statue 3,                  pot,            NONE,                   ZORA_CAPE,                  0x0047,                     BOMBS_5
+Zora Cape Pot Near Owl Statue 4,                  pot,            NONE,                   ZORA_CAPE,                  0x0048,                     ARROWS_20
 Great Bay Great Fairy,                            npc,            NONE,                   FAIRY_FOUNTAIN,             GREAT_FAIRY_OCEAN,          DEFENSE_UPGRADE
 Zora Hall Scrub Deed,                             npc,            NONE,                   ZORA_HALL_ROOMS,            SCRUB_OCEAN,                DEED_OCEAN
 Zora Hall Scrub Shop,                             npc,            NONE,                   ZORA_HALL_ROOMS,            SCRUB_SHOP_POTION_GREEN,    POTION_GREEN
@@ -209,6 +245,17 @@ Zora Shop Item 3,                                 shop,           NONE,         
 Pinnacle Rock Chest 1,                            chest,          NONE,                   PINNACLE_ROCK,              0x01,                       RUPEE_RED
 Pinnacle Rock Chest 2,                            chest,          NONE,                   PINNACLE_ROCK,              0x02,                       RUPEE_RED
 Pinnacle Rock HP,                                 npc,            PINNACLE_ROCK_HP,       PINNACLE_ROCK,              SEAHORSE_HEART_PIECE,       HEART_PIECE
+Pinnacle Rock Pot 01,                             pot,            NONE,                   PINNACLE_ROCK,              0x0003,                     MAGIC_JAR_SMALL
+Pinnacle Rock Pot 02,                             pot,            NONE,                   PINNACLE_ROCK,              0x0004,                     RECOVERY_HEART
+Pinnacle Rock Pot 03,                             pot,            NONE,                   PINNACLE_ROCK,              0x0005,                     RECOVERY_HEART
+Pinnacle Rock Pot 04,                             pot,            NONE,                   PINNACLE_ROCK,              0x0006,                     RECOVERY_HEART
+Pinnacle Rock Pot 05,                             pot,            NONE,                   PINNACLE_ROCK,              0x0007,                     RECOVERY_HEART
+Pinnacle Rock Pot 06,                             pot,            NONE,                   PINNACLE_ROCK,              0x0008,                     MAGIC_JAR_SMALL
+Pinnacle Rock Pot 07,                             pot,            NONE,                   PINNACLE_ROCK,              0x0009,                     RECOVERY_HEART
+Pinnacle Rock Pot 08,                             pot,            NONE,                   PINNACLE_ROCK,              0x000a,                     RECOVERY_HEART
+Pinnacle Rock Pot 09,                             pot,            NONE,                   PINNACLE_ROCK,              0x000b,                     MAGIC_JAR_SMALL
+Pinnacle Rock Pot 10,                             pot,            NONE,                   PINNACLE_ROCK,              0x000c,                     RECOVERY_HEART
+Pinnacle Rock Pot 11,                             pot,            NONE,                   PINNACLE_ROCK,              0x000d,                     MAGIC_JAR_SMALL
 Laboratory Zora Song,                             npc,            NONE,                   LABORATORY,                 SONG_ZORA,                  SONG_ZORA
 Laboratory Fish HP,                               npc,            NONE,                   LABORATORY,                 LAB_FISH_HEART_PIECE,       HEART_PIECE
 Ocean Spider House Wallet,                        npc,            NONE,                   SPIDER_HOUSE_OCEAN,         SPIDER_HOUSE_OCEAN,         WALLET
@@ -256,6 +303,28 @@ Beneath The Graveyard Chest,                      chest,          NONE,         
 Beneath The Graveyard Song of Storms,             npc,            NONE,                   BENEATH_THE_GRAVEYARD,      SONG_STORMS,                SONG_STORMS
 Beneath The Graveyard HP,                         chest,          NONE,                   BENEATH_THE_GRAVEYARD,      0x00,                       HEART_PIECE
 Beneath The Graveyard Dampe Chest,                chest,          GRAVEYARD_NIGHT3,       DAMPE_HOUSE,                0x00,                       BOTTLE_EMPTY
+Beneath The Graveyard Pot Night 1 Early 1,        pot,            NONE,                   BENEATH_THE_GRAVEYARD,      0x0004,                     RECOVERY_HEART
+Beneath The Graveyard Pot Night 1 Early 2,        pot,            NONE,                   BENEATH_THE_GRAVEYARD,      0x0005,                     ARROWS_10
+Beneath The Graveyard Pot Night 2 Early,          pot,            NONE,                   BENEATH_THE_GRAVEYARD,      0x0006,                     MAGIC_JAR_SMALL
+Beneath The Graveyard Pot Night 1 Bats 1,         pot,            NONE,                   BENEATH_THE_GRAVEYARD,      0x0104,                     ARROWS_10
+Beneath The Graveyard Pot Night 1 Bats 2,         pot,            NONE,                   BENEATH_THE_GRAVEYARD,      0x0105,                     RECOVERY_HEART
+Beneath The Graveyard Pot Night 1 Bats 3,         pot,            NONE,                   BENEATH_THE_GRAVEYARD,      0x0106,                     NOTHING
+Beneath The Graveyard Pot After Pit 1,            pot,            NONE,                   BENEATH_THE_GRAVEYARD,      0x0307,                     NOTHING
+Beneath The Graveyard Pot After Pit 2,            pot,            NONE,                   BENEATH_THE_GRAVEYARD,      0x0308,                     NOTHING
+Beneath The Graveyard Pot Before Pit 1,           pot,            NONE,                   BENEATH_THE_GRAVEYARD,      0x0309,                     ARROWS_10
+Beneath The Graveyard Pot Before Pit 2,           pot,            NONE,                   BENEATH_THE_GRAVEYARD,      0x030a,                     RECOVERY_HEART
+Beneath The Graveyard Pot After Pit 3,            pot,            NONE,                   BENEATH_THE_GRAVEYARD,      0x030b,                     RECOVERY_HEART
+Beneath The Graveyard Pot After Pit 4,            pot,            NONE,                   BENEATH_THE_GRAVEYARD,      0x030c,                     NOTHING
+Beneath The Graveyard Pot Dampe 01,               pot,            NONE,                   DAMPE_HOUSE,                0x0010,                     RUPEE_GREEN
+Beneath The Graveyard Pot Dampe 02,               pot,            NONE,                   DAMPE_HOUSE,                0x0011,                     RUPEE_GREEN
+Beneath The Graveyard Pot Dampe 03,               pot,            NONE,                   DAMPE_HOUSE,                0x0012,                     ARROWS_10
+Beneath The Graveyard Pot Dampe 04,               pot,            NONE,                   DAMPE_HOUSE,                0x0013,                     RECOVERY_HEART
+Beneath The Graveyard Pot Dampe 05,               pot,            NONE,                   DAMPE_HOUSE,                0x0014,                     RUPEE_GREEN
+Beneath The Graveyard Pot Dampe 06,               pot,            NONE,                   DAMPE_HOUSE,                0x0015,                     ARROWS_10
+Beneath The Graveyard Pot Dampe 07,               pot,            NONE,                   DAMPE_HOUSE,                0x0016,                     RUPEE_PURPLE
+Beneath The Graveyard Pot Dampe 08,               pot,            NONE,                   DAMPE_HOUSE,                0x0017,                     ARROWS_10
+Beneath The Graveyard Pot Dampe 09,               pot,            NONE,                   DAMPE_HOUSE,                0x0018,                     ARROWS_10
+Beneath The Graveyard Pot Dampe 10,               pot,            NONE,                   DAMPE_HOUSE,                0x0019,                     RECOVERY_HEART
 Ikana Valley Scrub Rupee,                         npc,            NONE,                   IKANA_CANYON,               SCRUB_VALLEY,               RUPEE_GOLD
 Ikana Valley Scrub Shop,                          npc,            NONE,                   IKANA_CANYON,               SCRUB_SHOP_POTION_BLUE,     POTION_BLUE
 Ikana Valley Scrub HP,                            collectible,    NONE,                   IKANA_CANYON,               0x1e,                       HEART_PIECE
@@ -393,3 +462,5 @@ Moon Trial Link Garo Master Chest,                chest,          NONE,         
 Moon Trial Link Iron Knuckle Chest,               chest,          NONE,                   MOON_LINK,                  0x02,                       BOMBCHU_10
 Moon Trial Link HP,                               collectible,    NONE,                   MOON_LINK,                  0x01,                       HEART_PIECE
 Moon Fierce Deity Mask,                           npc,            NONE,                   MOON_LINK,                  MASK_FIERCE_DEITY,          MASK_FIERCE_DEITY
+Moon Majora Pot 1,                                pot,            NONE,                   LAIR_MAJORA,                0x0001,                     ARROWS_20
+Moon Majora Pot 2,                                pot,            NONE,                   LAIR_MAJORA,                0x0002,                     MAGIC_JAR_LARGE

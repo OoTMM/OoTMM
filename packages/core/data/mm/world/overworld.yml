@@ -245,6 +245,13 @@
     RUPEES: "true"
   locations:
     "Astral Observatory Passage Chest": "has_explosives || trick_keg_explosives"
+    "Astral Observatory Passage Pot 1": "true"
+    "Astral Observatory Passage Pot 2": "true"
+    "Astral Observatory Passage Pot 3": "true"
+    "Astral Observatory Passage Pot 4": "true"
+    "Astral Observatory Pot 1": "true"
+    "Astral Observatory Pot 2": "true"
+    "Astral Observatory Pot 3": "true"
 "Astral Observatory Junction":
   region: NONE
   exits:
@@ -277,6 +284,10 @@
   locations:
     "Clock Tower Roof Skull Kid Ocarina": "has_weapon_range && can_play_time"
     "Clock Tower Roof Skull Kid Song of Time": "has_weapon_range && can_play_time"
+    "Clock Tower Roof Pot 1": "can_play_time"
+    "Clock Tower Roof Pot 2": "can_play_time"
+    "Clock Tower Roof Pot 3": "can_play_time"
+    "Clock Tower Roof Pot 4": "can_play_time"
 "Bomb Shop":
   region: ENTRANCE
   events:
@@ -303,6 +314,7 @@
     "Trading Post Item 6": "shop_price(0x0a) && before(NIGHT3_PM_09_00)"
     "Trading Post Item 7": "shop_price(0x0b) && before(NIGHT3_PM_09_00)"
     "Trading Post Item 8": "shop_price(0x0c) && before(NIGHT3_PM_09_00)"
+    "Trading Post Pot": "true"
 "Curiosity Shop":
   region: ENTRANCE
   exits:
@@ -497,6 +509,7 @@
     "Termina Field Tall Grass Chest": "true"
     "Termina Field Tree Stump Chest": "can_hookshot_short || can_use_beans"
     "Termina Field Kamaro Mask": "can_play(SONG_HEALING) && midnight"
+    "Termina Field Pot": "can_use_beans"
   gossip:
     "Termina Field Gossip Southeast": "true"
     "Termina Field Gossip Southwest": "true"
@@ -567,6 +580,7 @@
     "Termina Field": "true"
   locations:
     "Termina Field Scrub": "event(SCRUB_TELESCOPE) && can_use_wallet(2)"
+    "Termina Field Scrub Pot": "true"
 "Termina Field Cow Grotto":
   region: ENTRANCE
   events:
@@ -716,6 +730,9 @@
     "Southern Swamp HP": "(has(DEED_LAND) && has(MASK_DEKU)) || (trick(MM_SOUTHERN_SWAMP_SCRUB_HP_GORON) && has_mask_goron)"
     "Southern Swamp Scrub Deed": "has(DEED_LAND)"
     "Southern Swamp Scrub Shop": "has(MASK_DEKU) && can_use_wallet(1)"
+    "Southern Swamp Pot 1": "true"
+    "Southern Swamp Pot 2": "true"
+    "Southern Swamp Pot 3": "true"
   gossip:
     "Southern Swamp Gossip": "true"
 "Swamp Back":
@@ -835,6 +852,9 @@
   exits:
     "Deku Palace Main": "true"
     "Deku Palace Near Cage": "has(MASK_DEKU)"
+  locations:
+    "Deku Palace Pot 1": "true"
+    "Deku Palace Pot 2": "true"
 "Deku Palace Throne":
   region: DEKU_PALACE
   exits:
@@ -1144,6 +1164,17 @@
     MAGIC: "true"
   locations:
     "Goron Baby": "has_mask_goron && can_lullaby_half"
+    "Goron Shrine Pot 01": "true"
+    "Goron Shrine Pot 02": "true"
+    "Goron Shrine Pot 03": "true"
+    "Goron Shrine Pot 04": "true"
+    "Goron Shrine Pot 05": "true"
+    "Goron Shrine Pot 06": "true"
+    "Goron Shrine Pot 07": "true"
+    "Goron Shrine Pot 08": "true"
+    "Goron Shrine Pot 09": "true"
+    "Goron Shrine Pot 10": "true"
+    "Goron Shrine Pot 11": "true"
 "Goron Shop":
   region: ENTRANCE
   exits:
@@ -1386,12 +1417,23 @@
   exits:
     "Pinnacle Rock Entrance": "true"
   events:
-    ZORA_EGGS_PINNACLE_ROCK: "has_mask_zora && has_bottle"
+    ZORA_EGGS_PINNACLE_ROCK: "has_bottle"
     MAGIC: "true"
   locations:
-    "Pinnacle Rock Chest 1": "has_mask_zora"
-    "Pinnacle Rock Chest 2": "has_mask_zora"
-    "Pinnacle Rock HP": "soul(SOUL_DEEP_PYTHON) && has_mask_zora && event(SEAHORSE)"
+    "Pinnacle Rock Chest 1": "true"
+    "Pinnacle Rock Chest 2": "true"
+    "Pinnacle Rock HP": "soul(SOUL_DEEP_PYTHON) && event(SEAHORSE)"
+    "Pinnacle Rock Pot 01": "true"
+    "Pinnacle Rock Pot 02": "true"
+    "Pinnacle Rock Pot 03": "true"
+    "Pinnacle Rock Pot 04": "true"
+    "Pinnacle Rock Pot 05": "true"
+    "Pinnacle Rock Pot 06": "true"
+    "Pinnacle Rock Pot 07": "true"
+    "Pinnacle Rock Pot 08": "true"
+    "Pinnacle Rock Pot 09": "true"
+    "Pinnacle Rock Pot 10": "true"
+    "Pinnacle Rock Pot 11": "true"
 "Laboratory":
   region: ENTRANCE
   exits:
@@ -1414,6 +1456,8 @@
   locations:
     "Zora Cape Underwater Chest": "has_mask_zora"
     "Zora Cape Waterfall HP": "has_mask_zora"
+    "Zora Cape Pot Near Beavers 1": "true"
+    "Zora Cape Pot Near Beavers 2": "true"
   gossip:
     "Zora Cape Gossip": "true"
 "Zora Cape Grotto":
@@ -1518,6 +1562,11 @@
     "Zora Hall": "true"
     "Great Bay Temple": "has_mask_zora && can_hookshot && can_play(SONG_ZORA)"
     "Owl Zora Cape": "true"
+  locations:
+    "Zora Cape Pot Near Owl Statue 1": "true"
+    "Zora Cape Pot Near Owl Statue 2": "true"
+    "Zora Cape Pot Near Owl Statue 3": "true"
+    "Zora Cape Pot Near Owl Statue 4": "true"
 "Behind Gorman Fence":
   region: MILK_ROAD
   exits:
@@ -1611,6 +1660,11 @@
   locations:
     "Beneath The Graveyard Chest": "soul(SOUL_BAD_BAT) && (can_fight || has_explosives || has_arrows || can_hookshot_short || has(MASK_DEKU))"
     "Beneath The Graveyard Song of Storms": "soul_iron_knuckle && ((can_fight || has_explosives) && (has_sticks || can_use_fire_arrows))"
+    "Beneath The Graveyard Pot Night 1 Early 1": "true"
+    "Beneath The Graveyard Pot Night 1 Early 2": "true"
+    "Beneath The Graveyard Pot Night 1 Bats 1": "true"
+    "Beneath The Graveyard Pot Night 1 Bats 2": "true"
+    "Beneath The Graveyard Pot Night 1 Bats 3": "true"
 "Beneath The Graveyard Night 2":
   region: ENTRANCE
   events:
@@ -1620,6 +1674,13 @@
     "Ikana Graveyard": "true"
   locations:
     "Beneath The Graveyard HP": "soul_iron_knuckle && ((has_explosives || (trick_keg_explosives && can_fight)) && can_use_lens)"
+    "Beneath The Graveyard Pot Night 2 Early": "true"
+    "Beneath The Graveyard Pot Before Pit 1": "true"
+    "Beneath The Graveyard Pot Before Pit 2": "true"
+    "Beneath The Graveyard Pot After Pit 1": "can_use_lens"
+    "Beneath The Graveyard Pot After Pit 2": "can_use_lens"
+    "Beneath The Graveyard Pot After Pit 3": "can_use_lens"
+    "Beneath The Graveyard Pot After Pit 4": "can_use_lens"
 "Beneath The Graveyard Night 3":
   region: ENTRANCE
   events:
@@ -1628,6 +1689,16 @@
     "Ikana Graveyard": "true"
   locations:
     "Beneath The Graveyard Dampe Chest": "has_weapon_range && is_night3"
+    "Beneath The Graveyard Pot Dampe 01": "true"
+    "Beneath The Graveyard Pot Dampe 02": "true"
+    "Beneath The Graveyard Pot Dampe 03": "true"
+    "Beneath The Graveyard Pot Dampe 04": "true"
+    "Beneath The Graveyard Pot Dampe 05": "true"
+    "Beneath The Graveyard Pot Dampe 06": "true"
+    "Beneath The Graveyard Pot Dampe 07": "true"
+    "Beneath The Graveyard Pot Dampe 08": "true"
+    "Beneath The Graveyard Pot Dampe 09": "true"
+    "Beneath The Graveyard Pot Dampe 10": "true"
 "Road to Ikana Top":
   region: ROAD_TO_IKANA
   events:
