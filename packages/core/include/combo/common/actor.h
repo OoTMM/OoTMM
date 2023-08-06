@@ -175,6 +175,9 @@
 # define AC_BOSS_03         0x12b
 # define AC_BOSS_02         0x12a
 # define AC_EN_KAME         0x1ba
+# define AC_CUSTOM_ITEM     0x029
+# define AC_OBJ_TSUBO       0x082
+# define AC_EN_TUBO_TRAP    0x08d
 
 #endif
 

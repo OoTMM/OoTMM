@@ -3,17 +3,111 @@ import fs from 'fs/promises';
 import { CodeGen } from '../lib/combo/util/codegen';
 import { decompressGame } from '../lib/combo/decompress';
 
-const POT_ACTOR_TYPE = 0x111;
-const FLYING_POT_ACTOR_TYPE = 0x11d;
+type Game = 'oot' | 'mq' | 'mm';
 
-const INTERESTING_ACTORS = [
-  POT_ACTOR_TYPE,
-  FLYING_POT_ACTOR_TYPE,
+const MM_EXTRA_SCENES = {
+  0xf0: 5,
+};
+
+const MM_POTS_SET_DROPS = [
+  'NOTHING',
+  'RUPEE_GREEN',
+  'RUPEE_BLUE',
+  'NOTHING',
+  'RUPEE_RED',
+  'RUPEE_PURPLE',
+  'NOTHING',
+  'RUPEE_ORANGE',
+  '???',
+  '???',
+  'RECOVERY_HEART',
+  'RECOVERY_HEART',
+  '???',
+  '???',
+  'MAGIC_JAR_SMALL',
+  'MAGIC_JAR_LARGE',
+  'FAIRY',
+  'STRAY_FAIRY',
+  'NOTHING',
+  'NUTS_10',
+  'NOTHING',
+  'BOMBS_5',
+  'NOTHING',
+  'NOTHING',
+  'NOTHING',
+  'STICK',
+  'NOTHING',
+  'NOTHING',
+  'NOTHING',
+  'NOTHING',
+  'ARROWS_10',
+  'ARROWS_20',
 ];
 
-const SCENE_TABLE_ADDR =    0xb71440;
-const SCENE_TABLE_ADDR_MQ = 0xBA0BB0;
-const SCENE_TABLE_SIZE = 101;
+const MM_POTS_RANDOM_DROPS = [
+  'RUPEE_GREEN',
+  'MAGIC_JAR_SMALL',
+  'RECOVERY_HEART',
+  'RUPEE_RED',
+  'NOTHING',
+  'NOTHING',
+  'RECOVERY_HEART',
+  'RECOVERY_HEART',
+  'RUPEE_GREEN',
+  'RUPEE_BLUE',
+  'ARROWS_10',
+  'BOMBS_5',
+  'MAGIC_JAR_SMALL',
+  'MAGIC_JAR_LARGE',
+  'NUT',
+  'STICK',
+];
+
+const MM_SCENES_WITH_EXTRA_SETUPS: {[k: number]: number} = {
+  0x2036000: 3, /* Ikana Canyon */
+  0x2249000: 1, /* Road to Mountain Village */
+  0x263b000: 1, /* Goron Shrine */
+  0x265e000: 1, /* Zora Hall */
+  0x26bf000: 1, /* Great bay coast */
+  0x26fc000: 1, /* Zora cape */
+  0x2778000: 1, /* Deku Throne room */
+  0x2879000: 2, /* Woodfall */
+  0x2bfe000: 1, /* Road to Snowhead */
+  0x2c09000: 1, /* Snowhead */
+  0x2da7000: 1, /* Goron Racetrack */
+  0x2e1d000: 1, /* North Clock Town */
+};
+
+const ACTORS_OOT = {
+  POT: 0x111,
+  FLYING_POT: 0x11d,
+};
+
+const ACTORS_MM = {
+  POT: 0x82,
+  FLYING_POT: 0x8d,
+};
+
+const INTERESTING_ACTORS_OOT = Object.values(ACTORS_OOT);
+const INTERESTING_ACTORS_MM = Object.values(ACTORS_MM);
+
+const CONFIGS = {
+  oot: {
+    SCENE_TABLE_ADDR: 0xb71440,
+    SCENE_TABLE_SIZE: 101,
+    INTERESTING_ACTORS: INTERESTING_ACTORS_OOT,
+  },
+  mq: {
+    SCENE_TABLE_ADDR: 0xba0bb0,
+    SCENE_TABLE_SIZE: 101,
+    INTERESTING_ACTORS: INTERESTING_ACTORS_OOT,
+  },
+  mm: {
+    SCENE_TABLE_ADDR: 0x00C5A1E0,
+    SCENE_TABLE_SIZE: 113,
+    INTERESTING_ACTORS: INTERESTING_ACTORS_MM,
+  }
+}
 
 const ITEM00_DROPS = [
   'RUPEE_GREEN',
@@ -65,6 +159,7 @@ type RawRoom = {
 type Actor = {
   actorId: number;
   typeId: number;
+  rz: number;
   params: number;
 }
 
@@ -150,18 +245,19 @@ function findHeaderOffset(rom: Buffer, offset: number, wantedOp: number) {
   }
 }
 
-function filterActors(actors: Actor[]): Actor[] {
+function filterActors(actors: Actor[], game: Game): Actor[] {
   /* Filter the unintresting trailing actors */
   let lastInterestingActor = -1;
   for (let i = 0; i < actors.length; i++) {
-    if (INTERESTING_ACTORS.includes(actors[i].typeId)) {
+    if (CONFIGS[game].INTERESTING_ACTORS.includes(actors[i].typeId)) {
       lastInterestingActor = i;
     }
   }
   return actors.slice(0, lastInterestingActor + 1);
 }
 
-function parseRoomActors(rom: Buffer, raw: RawRoom): RoomActors {
+function parseRoomActors(rom: Buffer, raw: RawRoom, game: Game): RoomActors {
+  const typeIdMask = (game === 'mm' ? 0xfff : 0xffff);
   let actors: Actor[] = [];
   const actorHeaders = findHeaderOffset(rom, raw.vromHeader, 0x01);
   if (actorHeaders !== null) {
@@ -169,19 +265,23 @@ function parseRoomActors(rom: Buffer, raw: RawRoom): RoomActors {
     const actorsVrom = raw.vromBase + (rom.readUInt32BE(actorHeaders + 4) & 0xffffff);
     for (let actorId = 0; actorId < actorCount; actorId++) {
       const actorVromBase = 0x10 * actorId + actorsVrom;
-      const typeId = rom.readUInt16BE(actorVromBase + 0x00);
+      const typeId = rom.readUInt16BE(actorVromBase + 0x00) & typeIdMask;
+      const rz = rom.readUInt16BE(actorVromBase + 0x0c);
       const params = rom.readUInt16BE(actorVromBase + 0x0e);
-      actors.push({ actorId, typeId, params });
+      actors.push({ actorId, typeId, rz, params });
     }
   }
-  actors = filterActors(actors);
+  actors = filterActors(actors, game);
   return { sceneId: raw.sceneId, setupId: raw.setupId, roomId: raw.roomId, actors };
 }
 
-function getRawRooms(rom: Buffer, mq = false) {
+function getRawRooms(rom: Buffer, game: 'oot' | 'mq' | 'mm') {
   const rooms: RawRoom[] = [];
-  for (let sceneId = 0; sceneId < SCENE_TABLE_SIZE; sceneId++) {
-    const sceneVrom = rom.readUInt32BE((mq ? SCENE_TABLE_ADDR_MQ : SCENE_TABLE_ADDR) + sceneId * 0x14);
+  const config = CONFIGS[game];
+  for (let sceneId = 0; sceneId < config.SCENE_TABLE_SIZE; sceneId++) {
+    const sceneVrom = rom.readUInt32BE(config.SCENE_TABLE_ADDR + sceneId * (game === 'mm' ? 0x10 : 0x14));
+    if (sceneVrom === 0)
+      continue;
     const roomsHeaderVrom = findHeaderOffset(rom, sceneVrom, 0x04);
     if (roomsHeaderVrom === null)
       continue;
@@ -194,49 +294,66 @@ function getRawRooms(rom: Buffer, mq = false) {
       rooms.push({ sceneId, setupId: 0, roomId, vromBase: roomFileVrom, vromHeader: roomFileVrom });
 
       /* Look for alternate setups */
-      const altHeaderOffset = findHeaderOffset(rom, roomFileVrom, 0x18);
-      if (altHeaderOffset === null)
-        continue;
-      const altHeaderListVrom = roomFileVrom + (rom.readUInt32BE(altHeaderOffset + 4) & 0xffffff);
-      for (let setupId = 1; setupId < 4; ++setupId) {
-        const setupAddr = rom.readUInt32BE(altHeaderListVrom + (setupId - 1) * 4);
-        if (setupAddr === 0)
+      if (game !== 'mm') {
+        const altHeaderOffset = findHeaderOffset(rom, roomFileVrom, 0x18);
+        if (altHeaderOffset === null)
           continue;
-        const setupVrom = roomFileVrom + (setupAddr & 0xffffff);
-        rooms.push({ sceneId, setupId, roomId, vromBase: roomFileVrom, vromHeader: setupVrom });
+        const altHeaderListVrom = roomFileVrom + (rom.readUInt32BE(altHeaderOffset + 4) & 0xffffff);
+        for (let setupId = 1; setupId < 4; ++setupId) {
+          const setupAddr = rom.readUInt32BE(altHeaderListVrom + (setupId - 1) * 4);
+          if (setupAddr === 0)
+            continue;
+          const setupVrom = roomFileVrom + (setupAddr & 0xffffff);
+          rooms.push({ sceneId, setupId, roomId, vromBase: roomFileVrom, vromHeader: setupVrom });
+        }
+      } else {
+        /* MM setups */
+        const extraSetupsCount = MM_SCENES_WITH_EXTRA_SETUPS[sceneVrom];
+        if (!extraSetupsCount)
+          continue;
+        const altHeaderOffset = findHeaderOffset(rom, roomFileVrom, 0x18)!;
+        const altHeaderListVrom = roomFileVrom + (rom.readUInt32BE(altHeaderOffset + 4) & 0xffffff);
+        for (let i = 0; i < extraSetupsCount; ++i) {
+          const setupId = i + 1;
+          const setupAddr = rom.readUInt32BE(altHeaderListVrom + i * 4);
+          const setupVrom = roomFileVrom + (setupAddr & 0xffffff);
+          rooms.push({ sceneId, setupId, roomId, vromBase: roomFileVrom, vromHeader: setupVrom });
+        }
       }
     }
   }
   return rooms;
 }
 
-async function codegenHeader(roomActors: RoomActors[], addrTable: AddressingTable) {
-  const actorsCount = roomActors.reduce((acc, room) => acc + room.actors.length, 0);
+async function codegenHeader(roomActorsOotMq: RoomActors[], roomActorsMm: RoomActors[], addrTableOotMq: AddressingTable, addrTableMm: AddressingTable) {
+  const actorsCountOotMq = roomActorsOotMq.reduce((acc, room) => acc + room.actors.length, 0);
+  const actorsCountMm = roomActorsMm.reduce((acc, room) => acc + room.actors.length, 0);
   const cg = new CodeGen(__dirname + '/../include/combo/xflags_data.h', 'XFLAGS_DATA');
-  cg.define('XFLAGS_COUNT_OOT', Math.floor((actorsCount + 7) / 8));
+  cg.define('XFLAGS_COUNT_OOT', Math.floor((actorsCountOotMq + 7) / 8));
+  cg.define('XFLAGS_COUNT_MM', Math.floor((actorsCountMm + 7) / 8));
   return cg.emit();
 }
 
-async function codegenSource(roomActors: RoomActors[], addrTable: AddressingTable) {
-  const cg = new CodeGen(__dirname + '/../src/oot/xflags_data.c');
-  cg.include('combo.h');
-  cg.table('kXflagsTableScenes', 'u16', addrTable.scenesTable);
-  cg.table('kXflagsTableSetups', 'u16', addrTable.setupsTable);
-  cg.table('kXflagsTableRooms', 'u16', addrTable.roomsTable);
-  return cg.emit();
+async function codegenSource(roomActorsOotMq: RoomActors[], roomActorsMm: RoomActors[], addrTableOotMq: AddressingTable, addrTableMm: AddressingTable) {
+  const cgOot = new CodeGen(__dirname + '/../src/oot/xflags_data.c');
+  cgOot.include('combo.h');
+  cgOot.table('kXflagsTableScenes', 'u16', addrTableOotMq.scenesTable);
+  cgOot.table('kXflagsTableSetups', 'u16', addrTableOotMq.setupsTable);
+  cgOot.table('kXflagsTableRooms', 'u16', addrTableOotMq.roomsTable);
+
+  const cgMm = new CodeGen(__dirname + '/../src/mm/xflags_data.c');
+  cgMm.include('combo.h');
+  cgMm.table('kXflagsTableScenes', 'u16', addrTableMm.scenesTable);
+  cgMm.table('kXflagsTableSetups', 'u16', addrTableMm.setupsTable);
+  cgMm.table('kXflagsTableRooms', 'u16', addrTableMm.roomsTable);
+
+  return Promise.all([cgOot.emit(), cgMm.emit()]);
 }
 
-async function codegen(roomActors: RoomActors[], addrTable: AddressingTable) {
-  return Promise.all([
-    codegenHeader(roomActors, addrTable),
-    codegenSource(roomActors, addrTable),
-  ]);
-}
-
-function outputPotsPool(roomActors: RoomActors[]) {
+function outputPotsPoolOot(roomActors: RoomActors[]) {
   for (const room of roomActors) {
     for (const actor of room.actors) {
-      if (actor.typeId === POT_ACTOR_TYPE) {
+      if (actor.typeId === ACTORS_OOT.POT) {
         const item00 = (actor.params >> 0) & 0xff;
         let item: string;
         if (item00 >= 0x1a) {
@@ -248,7 +365,7 @@ function outputPotsPool(roomActors: RoomActors[]) {
         console.log(`Scene ${room.sceneId.toString(16)} Setup ${room.setupId} Room ${room.roomId} Pot ${actor.actorId}, pot,            NONE,                 SCENE_${room.sceneId.toString(16)}, 0x${key.toString(16)}, ${item}`);
       }
 
-      if (actor.typeId === FLYING_POT_ACTOR_TYPE) {
+      if (actor.typeId === ACTORS_OOT.FLYING_POT) {
         const itemId = (actor.params >> 8) & 0xff;
         let item: string;
         if (itemId >= 0x07) {
@@ -263,9 +380,85 @@ function outputPotsPool(roomActors: RoomActors[]) {
   }
 }
 
-function getGameRoomActor(rom: Buffer, mq: boolean) {
-  const rawRooms = getRawRooms(rom, mq);
-  const actorRooms = sortRoomActors(rawRooms.map(raw => parseRoomActors(rom, raw)));
+function outputPotsPoolMm(roomActors: RoomActors[]) {
+  let lastSceneId = -1;
+  let lastSetupId = -1;
+  for (const room of roomActors) {
+    for (const actor of room.actors) {
+      if (actor.typeId === ACTORS_MM.POT) {
+        let item: string;
+        const potType = (actor.params >> 7) & 3;
+        const potEnemy = (actor.rz >> 7) & 3;
+        if (potEnemy)
+          continue;
+        switch (potType) {
+        case 0:
+        case 2:
+          /* Set item */
+          item = MM_POTS_SET_DROPS[actor.params & 0x1f];
+          break;
+        case 1:
+          /* Magic Pot */
+          item = 'MAGIC_JAR_LARGE';
+          break;
+        case 3:
+          /* Random item */
+          if (actor.params & 0x10) {
+            item = 'NOTHING';
+          } else {
+            item = MM_POTS_RANDOM_DROPS[actor.params & 0x1f];
+          }
+          break;
+        default:
+          item = 'DUMMY';
+          break;
+        }
+        if (item === 'STRAY_FAIRY') {
+          continue;
+        }
+        const key = ((room.setupId & 0x3) << 14) | (room.roomId << 8) | actor.actorId;
+        if (room.sceneId != lastSceneId || room.setupId != lastSetupId) {
+          console.log('');
+          lastSceneId = room.sceneId;
+          lastSetupId = room.setupId;
+        }
+        console.log(`Scene ${room.sceneId.toString(16)} Setup ${room.setupId} Room ${room.roomId} Pot ${actor.actorId}, pot,            NONE,                 SCENE_${room.sceneId.toString(16)}, 0x${key.toString(16)}, ${item}`);
+      }
+
+      /*
+      if (actor.typeId === ACTORS_MM.FLYING_POT) {
+        const key = ((room.setupId & 0x3) << 14) | (room.roomId << 8) | actor.actorId;
+        const item = '???';
+        console.log(`Scene ${room.sceneId.toString(16)} Setup ${room.setupId} Room ${room.roomId} FLYING Pot ${actor.actorId}, pot,            NONE,                 SCENE_${room.sceneId.toString(16)}, 0x${key.toString(16)}, ${item}`);
+      }
+      */
+    }
+  }
+}
+
+function roomActorsFromRaw(rom: Buffer, raw: RawRoom[], game: Game): RoomActors[] {
+  const actorsRooms = raw.map(r => parseRoomActors(rom, r, game));
+
+  /* Inject extra fake rooms */
+  actorsRooms.push({
+    sceneId: 0xf0,
+    roomId: 0x00,
+    setupId: 0x00,
+    actors: [
+      { actorId: 0, typeId: ACTORS_MM.POT, params: 0x00, rz: 0x0000, },
+      { actorId: 1, typeId: ACTORS_MM.POT, params: 0x00, rz: 0x0000, },
+      { actorId: 2, typeId: ACTORS_MM.POT, params: 0x00, rz: 0x0000, },
+      { actorId: 3, typeId: ACTORS_MM.POT, params: 0x00, rz: 0x0000, },
+      { actorId: 4, typeId: ACTORS_MM.POT, params: 0x00, rz: 0x0000, },
+    ]
+  });
+
+  return sortRoomActors(actorsRooms);
+}
+
+function getGameRoomActor(rom: Buffer, game: Game) {
+  const rawRooms = getRawRooms(rom, game);
+  const actorRooms = roomActorsFromRaw(rom, rawRooms, game);
   return actorRooms;
 }
 
@@ -275,26 +468,40 @@ async function run() {
   const ootDecompressed = await decompressGame('oot', ootRomCompressed);
   const ootRom = ootDecompressed.rom;
 
+  /* Get MM ROM */
+  const mmRomCompressed = await fs.readFile(__dirname + '/../../../roms/mm.z64');
+  const mmDecompressed = await decompressGame('mm', mmRomCompressed);
+  const mmRom = mmDecompressed.rom;
+
+  /* Get MM Rooms */
+  const mmRooms = getGameRoomActor(mmRom, 'mm');
+
   /* Get MQ ROM */
   const mqRom = await fs.readFile(__dirname + '/../../../roms/mq.z64');
 
   /* Get OoT Rooms */
-  const ootRooms = getGameRoomActor(ootRom, false);
+  const ootRooms = getGameRoomActor(ootRom, 'oot');
 
   /* Get MQ Rooms */
-  const mqRooms = getGameRoomActor(mqRom, true);
+  const mqRooms = getGameRoomActor(mqRom, 'mq');
 
   /* Get the merged list */
-  const mergedList = mergeRoomActors([ootRooms, mqRooms]);
+  const ootMqRooms = mergeRoomActors([ootRooms, mqRooms]);
 
-  /* Build the addressing table, suitable for both OoT and MQ */
-  const addrTable = buildAddressingTable(mergedList);
+  /* Build the addr tables */
+  const addrTableOotMq = buildAddressingTable(ootMqRooms);
+  const addrTableMm = buildAddressingTable(mmRooms);
 
   /* Codegen */
-  await codegen(mergedList, addrTable);
+  await Promise.all([
+    codegenHeader(ootMqRooms, mmRooms, addrTableOotMq, addrTableMm),
+    codegenSource(ootMqRooms, mmRooms, addrTableOotMq, addrTableMm),
+  ]);
+
+  outputPotsPoolMm(mmRooms);
 
   /* Output */
-  outputPotsPool(mqRooms);
+  //outputPotsPoolOot(mqRooms);
 }
 
 run().catch(e => {

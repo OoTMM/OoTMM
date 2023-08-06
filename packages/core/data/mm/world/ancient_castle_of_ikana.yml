@@ -12,20 +12,39 @@
     "Ancient Castle of Ikana Interior North": "can_use_fire_arrows"
     "Ancient Castle of Ikana Interior South": "can_use_fire_arrows"
     "Ancient Castle of Ikana Behind Block": "(has_mirror_shield && event(IKANA_CASTLE_LIGHT2)) || can_use_light_arrows"
+  locations:
+    "Ancient Castle of Ikana Pot Entrance 1": "true"
+    "Ancient Castle of Ikana Pot Entrance 2": "true"
 "Ancient Castle of Ikana Interior North":
   dungeon: ACoI
   exits:
     "Ancient Castle of Ikana Interior": "true"
     "Ancient Castle of Ikana Interior North 2": "has(MASK_DEKU)"
+  locations:
+    "Ancient Castle of Ikana Pot Left First Room 1": "true"
+    "Ancient Castle of Ikana Pot Left First Room 2": "true"
 "Ancient Castle of Ikana Interior North 2":
   dungeon: ACoI
   exits:
     "Ancient Castle of Ikana Interior North": "has(MASK_DEKU)"
-    "Ancient Castle of Ikana Roof Exterior": "can_use_lens"
+    "Ancient Castle of Ikana Interior North 3": "can_use_lens"
+  locations:
+    "Ancient Castle of Ikana Pot Left Second Room 1": "true"
+    "Ancient Castle of Ikana Pot Left Second Room 2": "true"
+    "Ancient Castle of Ikana Pot Left Second Room 3": "true"
+    "Ancient Castle of Ikana Pot Left Second Room 4": "true"
+"Ancient Castle of Ikana Interior North 3":
+  dungeon: ACoI
+  exits:
+    "Ancient Castle of Ikana Interior North 2": "can_use_lens"
+    "Ancient Castle of Ikana Roof Exterior": "true"
+  locations:
+    "Ancient Castle of Ikana Pot Left Third Room 1": "true"
+    "Ancient Castle of Ikana Pot Left Third Room 2": "true"
 "Ancient Castle of Ikana Roof Exterior":
   dungeon: ACoI
   exits:
-    "Ancient Castle of Ikana Interior North 2": "true"
+    "Ancient Castle of Ikana Interior North 3": "true"
     "Ancient Castle of Ikana Roof Interior": "can_goron_bomb_jump"
     "Ikana Castle Exterior": "true"
   events:
@@ -43,12 +62,20 @@
   dungeon: ACoI
   exits:
     "Ancient Castle of Ikana Interior South": "soul(SOUL_WIZZROBE) && can_use_light_arrows"
-    "Ancient Castle of Ikana Roof Interior": "soul(SOUL_WIZZROBE) && (can_fight || has_arrows)"
+    "Ancient Castle of Ikana South Last": "soul(SOUL_WIZZROBE) && (can_fight || has_arrows)"
+"Ancient Castle of Ikana South Last":
+  dungeon: ACoI
+  exits:
+    "Ancient Castle of Ikana Wizzrobe": "true"
+    "Ancient Castle of Ikana Roof Interior": "true"
+  locations:
+    "Ancient Castle of Ikana Pot Right 1": "true"
+    "Ancient Castle of Ikana Pot Right 2": "true"
 "Ancient Castle of Ikana Roof Interior":
   dungeon: ACoI
   exits:
     "Ancient Castle of Ikana Interior": "event(IKANA_CASTLE_LIGHT2)"
-    "Ancient Castle of Ikana Wizzrobe": "true"
+    "Ancient Castle of Ikana South Last": "true"
     "Ancient Castle of Ikana Roof Exterior": "trick(MM_IKANA_ROOF_PARKOUR)"
   events:
     IKANA_CASTLE_LIGHT2: "can_use_keg"
@@ -69,6 +96,15 @@
   dungeon: ACoI
   exits:
     "Ancient Castle of Ikana After Boss": "soul(SOUL_IGOS) && has_mirror_shield && can_use_fire_arrows && can_fight"
+  locations:
+    "Ancient Castle of Ikana Boss Pot 1": "true"
+    "Ancient Castle of Ikana Boss Pot 2": "true"
+    "Ancient Castle of Ikana Boss Pot 3": "true"
+    "Ancient Castle of Ikana Boss Pot 4": "true"
+    "Ancient Castle of Ikana Boss Pot 5": "true"
+    "Ancient Castle of Ikana Boss Pot 6": "true"
+    "Ancient Castle of Ikana Boss Pot 7": "true"
+    "Ancient Castle of Ikana Boss Pot 8": "true"
 "Ancient Castle of Ikana After Boss":
   dungeon: ACoI
   exits:

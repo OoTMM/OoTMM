@@ -20,6 +20,9 @@
     "Snowhead Temple Compass Room": "small_keys_sh(3) || ((has_explosives || trick_keg_explosives) && small_keys_sh(2))"
     "Snowhead Temple Bridge Front": "true"
     "Snowhead Temple Center Level 1": "can_use_fire_arrows || trick_sht_fireless"
+  locations:
+    "Snowhead Temple Pot Entrance 1": "true"
+    "Snowhead Temple Pot Entrance 2": "true"
 "Snowhead Temple Bridge Front":
   dungeon: SH
   events:
@@ -33,6 +36,11 @@
     "Snowhead Temple Bridge Room": "soul_freezard && can_hookshot_short"
     "Snowhead Temple SF Bridge Under Platform": "(has_arrows || can_hookshot) && has(MASK_GREAT_FAIRY)"
     "Snowhead Temple SF Bridge Pillar": "can_use_lens && (has_arrows || can_hookshot_short) && has(MASK_GREAT_FAIRY)"
+    "Snowhead Temple Pot Bridge Room 1": "true"
+    "Snowhead Temple Pot Bridge Room 2": "true"
+    "Snowhead Temple Pot Bridge Room 3": "true"
+    "Snowhead Temple Pot Bridge Room 4": "true"
+    "Snowhead Temple Pot Bridge Room 5": "true"
 "Snowhead Temple Bridge Back":
   dungeon: SH
   exits:
@@ -42,6 +50,8 @@
   locations:
     "Snowhead Temple Bridge Room": "soul_freezard && can_use_fire_arrows"
     "Snowhead Temple SF Bridge Under Platform": "has_weapon_range && has(MASK_GREAT_FAIRY)"
+    "Snowhead Temple Pot Bridge Room After 1": "true"
+    "Snowhead Temple Pot Bridge Room After 2": "true"
 "Snowhead Temple Map Room":
   dungeon: SH
   exits:
@@ -70,6 +80,9 @@
     "Snowhead Temple Block Room": "true"
     "Snowhead Temple Pillars Room": "can_use_fire_arrows || trick_sht_fireless"
     "Snowhead Temple Map Room Upper": "scarecrow_hookshot"
+  locations:
+    "Snowhead Temple Pot Central Room Scarecrow 1": "scarecrow_hookshot"
+    "Snowhead Temple Pot Central Room Scarecrow 2": "scarecrow_hookshot"
 "Snowhead Temple Pillars Room":
   dungeon: SH
   exits:
@@ -78,12 +91,27 @@
     SNOWHEAD_RAISE_PILLAR: "has_mask_goron && (can_use_fire_arrows || (event(SHT_STICK_RUN) && trick(MM_SHT_STICKS_RUN)))"
   locations:
     "Snowhead Temple Pillars Room": "soul_freezard"
+    "Snowhead Temple Pot Pillars Room Upper 1": "true"
+    "Snowhead Temple Pot Pillars Room Upper 2": "true"
+    "Snowhead Temple Pot Pillars Room Upper 3": "true"
+    "Snowhead Temple Pot Pillars Room Upper 4": "true"
+    "Snowhead Temple Pot Pillars Room Upper 5": "true"
+    "Snowhead Temple Pot Pillars Room Upper 6": "true"
+    "Snowhead Temple Pot Pillars Room Lower 1": "true"
+    "Snowhead Temple Pot Pillars Room Lower 2": "true"
+    "Snowhead Temple Pot Pillars Room Lower 3": "true"
+    "Snowhead Temple Pot Pillars Room Lower 4": "true"
+    "Snowhead Temple Pot Pillars Room Lower 5": "true"
+    "Snowhead Temple Pot Pillars Room Lower 6": "true"
+    "Snowhead Temple Pot Pillars Room Lower 7": "true"
 "Snowhead Temple Center Level 0":
   dungeon: SH
   exits:
     "Snowhead Temple Center Level 1": "true"
   locations:
     "Snowhead Temple Central Room Bottom": "has_mask_goron"
+    "Snowhead Temple Pot Central Room Bottom 1": "true"
+    "Snowhead Temple Pot Central Room Bottom 2": "true"
 "Snowhead Temple Block Room":
   dungeon: SH
   exits:
@@ -93,6 +121,8 @@
     SNOWHEAD_PUSH_BLOCK: "true"
   locations:
     "Snowhead Temple Block Room": "true"
+    "Snowhead Temple Pot Block Room 1": "true"
+    "Snowhead Temple Pot Block Room 2": "true"
 "Snowhead Temple Block Room Upper":
   dungeon: SH
   exits:
@@ -100,6 +130,8 @@
     "Snowhead Temple Compass Room": "true"
   locations:
     "Snowhead Temple Block Room Ledge": "event(SNOWHEAD_PUSH_BLOCK)"
+    "Snowhead Temple Flying Pot 1": "soul_flying_pot"
+    "Snowhead Temple Flying Pot 2": "soul_flying_pot"
 "Snowhead Temple Compass Room":
   dungeon: SH
   exits:
@@ -110,6 +142,11 @@
     "Snowhead Temple Compass": "true"
     "Snowhead Temple Compass Room Ledge": "can_use_fire_arrows || trick_sht_fireless"
     "Snowhead Temple SF Compass Room Crate": "(((can_use_fire_arrows || trick_sht_fireless) || can_hookshot_short) && (has_explosives || has_mask_goron)) || (has(MASK_GREAT_FAIRY) && (has_bombs || trick_keg_explosives)) || can_goron_bomb_jump"
+    "Snowhead Temple Pot Compass Room 1": "true"
+    "Snowhead Temple Pot Compass Room 2": "true"
+    "Snowhead Temple Pot Compass Room 3": "true"
+    "Snowhead Temple Pot Compass Room 4": "true"
+    "Snowhead Temple Pot Compass Room 5": "true"
 "Snowhead Temple Icicles":
   dungeon: SH
   exits:
@@ -125,12 +162,19 @@
     "Snowhead Temple Center Level 2 Dual": "true"
   locations:
     "Snowhead Temple SF Dual Switches": "can_use_lens && has_arrows && has(MASK_GREAT_FAIRY)"
+    "Snowhead Temple Pot Dual Switches 1": "true"
+    "Snowhead Temple Pot Dual Switches 2": "true"
 "Snowhead Temple Center Level 2 Dual":
   dungeon: SH
   exits:
     "Snowhead Temple Dual Switches": "true"
     "Snowhead Temple Map Room Upper": "goron_fast_roll || can_hookshot"
     "Snowhead Temple Center Level 1": "true"
+  locations:
+    "Snowhead Temple Pot Central Room Scarecrow 1": "true"
+    "Snowhead Temple Pot Central Room Scarecrow 2": "true"
+    "Snowhead Temple Pot Central Room Level 2 1": "true"
+    "Snowhead Temple Pot Central Room Level 2 2": "true"
 "Snowhead Temple Fire Arrow":
   dungeon: SH
   exits:
@@ -189,6 +233,13 @@
     "Snowhead Temple Center Level 4": "trick(MM_SHT_PILLARLESS) && (can_use_fire_arrows || has_bombs)"
   locations:
     "Snowhead Temple Boss Key": "soul(SOUL_WIZZROBE)"
+    "Snowhead Temple Pot Central Room Near Boss Key 1": "true"
+    "Snowhead Temple Pot Central Room Near Boss Key 2": "true"
+    "Snowhead Temple Pot Wizzrobe 1": "true"
+    "Snowhead Temple Pot Wizzrobe 2": "true"
+    "Snowhead Temple Pot Wizzrobe 3": "true"
+    "Snowhead Temple Pot Wizzrobe 4": "true"
+    "Snowhead Temple Pot Wizzrobe 5": "true"
 "Snowhead Temple Center Level 4":
   dungeon: SH
   exits:
@@ -209,6 +260,21 @@
     ARROWS: "true"
   exits:
     "Snowhead Temple After Boss": "soul(SOUL_GOHT) && can_use_fire_arrows"
+  locations:
+    "Snowhead Temple Boss Pot Early 1": "true"
+    "Snowhead Temple Boss Pot Early 2": "true"
+    "Snowhead Temple Boss Pot Early 3": "true"
+    "Snowhead Temple Boss Pot Early 4": "true"
+    "Snowhead Temple Boss Pot 01": "can_use_fire_arrows"
+    "Snowhead Temple Boss Pot 02": "can_use_fire_arrows"
+    "Snowhead Temple Boss Pot 03": "can_use_fire_arrows"
+    "Snowhead Temple Boss Pot 04": "can_use_fire_arrows"
+    "Snowhead Temple Boss Pot 05": "can_use_fire_arrows"
+    "Snowhead Temple Boss Pot 06": "can_use_fire_arrows"
+    "Snowhead Temple Boss Pot 07": "can_use_fire_arrows"
+    "Snowhead Temple Boss Pot 08": "can_use_fire_arrows"
+    "Snowhead Temple Boss Pot 09": "can_use_fire_arrows"
+    "Snowhead Temple Boss Pot 10": "can_use_fire_arrows"
 "Snowhead Temple After Boss":
   boss: true
   dungeon: SH

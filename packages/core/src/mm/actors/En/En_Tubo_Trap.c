@@ -12,36 +12,17 @@ void EnTuboTrap_InitWrapper(Actor_EnTuboTrap* this, GameState_Play* play)
     this->xflag.id = g.actorIndex;
 
     /* Forward init */
-    EnTuboTrap_Init = actorAddr(AC_EN_TUBO_TRAP, 0x80a77b30);
+    EnTuboTrap_Init = actorAddr(AC_EN_TUBO_TRAP, 0x809307e0);
     EnTuboTrap_Init(&this->base, play);
 }
 
-void EnTuboTrap_SpawnShuffledDrop(Actor_EnTuboTrap* this, GameState_Play* play)
-{
-    u16 var;
-
-    if (comboXflagsGet(&this->xflag))
-    {
-        /* Already spawned */
-        var = this->base.variable;
-        if ((var & 0xff) < 0x1a)
-        {
-            Item_DropCollectible(play, &this->base.position, (var & 0xff) | (((var >> 9) & 0x3f) << 8));
-        }
-        return;
-    }
-
-    /* Spawn an extended item */
-    DropCustomItem(play, &this->base.position, &this->xflag);
-}
-
 static const Gfx kDrawListNormalDangeonTop[] = {
-    gsDPLoadTextureBlock(0x050118A0, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, 4, 4, 0, 0),
+    gsDPLoadTextureBlock(0x05011EC0, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, 4, 4, 0, 0),
     gsSPEndDisplayList(),
 };
 
 static const Gfx kDrawListNormalDangeonSide[] = {
-    gsDPLoadTextureBlock(0x050108A0, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 64, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 5, 6, 0, 0),
+    gsDPLoadTextureBlock(0x05010EC0, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 64, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 5, 6, 0, 0),
     gsSPEndDisplayList(),
 };
 
@@ -61,7 +42,7 @@ static void EnTuboTrap_Draw(Actor_EnTuboTrap* this, GameState_Play* play)
     const void* dlistTop;
 
     /* Checks flag and dangeon_keep */
-    if (comboConfig(CFG_OOT_SHUFFLE_POTS) && !comboXflagsGet(&this->xflag))
+    if (comboConfig(CFG_MM_SHUFFLE_POTS) && !comboXflagsGet(&this->xflag))
     {
         dlistSide = kDrawListMajorSide;
         dlistTop = kDrawListMajorTop;
@@ -80,7 +61,21 @@ static void EnTuboTrap_Draw(Actor_EnTuboTrap* this, GameState_Play* play)
     CLOSE_DISPS();
 
     /* Draw the pot */
-    DrawSimpleOpa(play, 0x5017870);
+    DrawSimpleOpa(play, 0x05017ea0);
 }
 
-PATCH_FUNC(0x80a78684, EnTuboTrap_Draw);
+PATCH_FUNC(0x809313d8, EnTuboTrap_Draw);
+
+void EnTuboTrap_SpawnShuffledDrop(Actor_EnTuboTrap* this, GameState_Play* play)
+{
+    u16 var;
+
+    if (comboXflagsGet(&this->xflag))
+    {
+        /* Already spawned */
+        return;
+    }
+
+    /* Spawn an extended item */
+    DropCustomItem(play, &this->base.position, &this->xflag);
+}

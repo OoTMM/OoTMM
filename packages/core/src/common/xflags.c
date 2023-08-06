@@ -1,7 +1,6 @@
 #include <combo.h>
 #include <combo/xflags.h>
 
-#if defined(GAME_OOT)
 u16 comboXflagsBitPosLookup(const Xflag* xf)
 {
     return kXflagsTableRooms[kXflagsTableSetups[kXflagsTableScenes[xf->sceneId] + xf->setupId] + xf->roomId] + xf->id;
@@ -22,5 +21,3 @@ void comboXflagsSet(const Xflag* xf)
     bitPos = comboXflagsBitPosLookup(xf);
     BITMAP8_SET(gCustomSave.xflags, bitPos);
 }
-
-#endif

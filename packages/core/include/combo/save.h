@@ -9,7 +9,7 @@ typedef OotCustomSave CustomSave;
 # define CUSTOM_SAVE_OFFSET 0
 # else
 typedef MmCustomSave CustomSave;
-# define CUSTOM_SAVE_OFFSET sizeof(OotCustomSave)
+# define CUSTOM_SAVE_OFFSET ((sizeof(OotCustomSave) + 15) & 0xffffff0)
 # endif
 extern CustomSave gCustomSave;
 #endif

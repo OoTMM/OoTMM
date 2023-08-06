@@ -2,6 +2,7 @@
 #define MM_SAVE_H
 
 #include <combo/types.h>
+#include <combo/xflags.h>
 
 typedef struct
 {
@@ -206,7 +207,8 @@ typedef struct
     u32             fileIndex;
     char            unk_3ca4[0x4];
     s32             gameMode;
-    char            unk_3cac[0x27c];
+    s32             sceneSetupId;
+    char            unk_3cb0[0x278];
     u16             magicState;
     u16             isMagicRequested;
     u16             magicFlag;
@@ -232,7 +234,8 @@ _Static_assert(sizeof(MmSaveContext) == 0x48cc, "MmSaveContext size is wrong");
 ASSERT_OFFSET(MmSaveContext, fileIndex,     0x3ca0);
 ASSERT_OFFSET(MmSaveContext, unk_3ca4,      0x3ca4);
 ASSERT_OFFSET(MmSaveContext, gameMode,      0x3ca8);
-ASSERT_OFFSET(MmSaveContext, unk_3cac,      0x3cac);
+ASSERT_OFFSET(MmSaveContext, sceneSetupId,  0x3cac);
+ASSERT_OFFSET(MmSaveContext, unk_3cb0,      0x3cb0);
 ASSERT_OFFSET(MmSaveContext, dungeonId2,    0x3f36);
 ASSERT_OFFSET(MmSaveContext, options,       0x3f40);
 ASSERT_OFFSET(MmSaveContext, unk_3f4c,      0x3f4c);
@@ -360,9 +363,9 @@ MmExtraFlags3;
 #define MM_PLAYER_FORM_ZORA     2
 #define MM_PLAYER_FORM_HUMAN    4
 
-ALIGNED(16) typedef struct
+typedef struct ALIGNED(16)
 {
-
+    u8 xflags[XFLAGS_COUNT_MM];
 }
 MmCustomSave;
 

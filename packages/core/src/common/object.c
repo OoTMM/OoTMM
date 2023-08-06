@@ -292,11 +292,9 @@ void* comboGetObject(u16 objectId)
         if (sObjectsIds[i] == 0)
         {
             size = comboLoadObject(NULL, objectId);
-#if defined(GAME_OOT)
             addr = malloc(size);
-#else
-            addr = ActorAlloc(size);
-#endif
+            if (!addr)
+                return NULL;
             comboLoadObject(addr, objectId);
             sObjectsIds[i] = objectId;
             sObjectsAddr[i] = addr;
@@ -311,9 +309,7 @@ void comboObjectsReset(void)
 {
     for (int i = 0; i < OBJECT_COUNT; ++i)
     {
-#if defined(GAME_OOT)
         free(sObjectsAddr[i]);
-#endif
         sObjectsIds[i] = 0;
         sObjectsAddr[i] = NULL;
         sObjectsTTL[i] = 0;
@@ -328,11 +324,7 @@ void comboObjectsGC(void)
             continue;
         if (sObjectsTTL[i] == 0)
         {
-#if defined(GAME_OOT)
             free(sObjectsAddr[i]);
-#else
-            ActorFree(sObjectsAddr[i]);
-#endif
             sObjectsIds[i] = 0;
             sObjectsAddr[i] = NULL;
             sObjectsTTL[i] = 0;

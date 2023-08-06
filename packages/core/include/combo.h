@@ -40,6 +40,8 @@
 #  include <combo/mm/actor_entrt.h>
 #  include <combo/mm/actor_enossan.h>
 #  include <combo/mm/actor_arms_hook.h>
+#  include <combo/mm/actors/Obj_Tsubo.h>
+#  include <combo/mm/actors/En_Tubo_Trap.h>
 # endif
 
 # include <combo/common/actors/En_Item00.h>
@@ -366,6 +368,7 @@ typedef struct
     u8                      maxKeysMm[4];
     u8                      actorIndex;
     u8                      sceneSetupId;
+    Actor_CustomItem*       customItemsList;
 }
 ComboGlobal;
 

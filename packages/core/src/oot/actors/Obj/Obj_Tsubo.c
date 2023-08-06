@@ -90,7 +90,6 @@ void ObjTsubo_InitWrapper(Actor_ObjTsubo* this, GameState_Play* play)
 void ObjTsubo_SpawnShuffledDrop(Actor_ObjTsubo* this, GameState_Play* play)
 {
     u16 var;
-    Actor_EnItem00* item;
 
     if (comboXflagsGet(&this->xflag))
     {

@@ -37,6 +37,8 @@
   locations:
     "Great Bay Temple SF Central Room Barrel": "true"
     "Great Bay Temple SF Central Room Underwater Pot": "has_mask_zora || (has_arrows && has(MASK_GREAT_FAIRY))"
+    "Great Bay Temple Pot Central Room 1": "true"
+    "Great Bay Temple Pot Central Room 2": "true"
 "Great Bay Temple Map Room":
   dungeon: GB
   events:
@@ -47,6 +49,17 @@
   locations:
     "Great Bay Temple Map": "true"
     "Great Bay Temple SF Map Room Pot": "true"
+    "Great Bay Temple Pot Map Room 01": "true"
+    "Great Bay Temple Pot Map Room 02": "true"
+    "Great Bay Temple Pot Map Room 03": "true"
+    "Great Bay Temple Pot Map Room 04": "true"
+    "Great Bay Temple Pot Map Room 05": "true"
+    "Great Bay Temple Pot Map Room 06": "true"
+    "Great Bay Temple Pot Map Room 07": "true"
+    "Great Bay Temple Pot Map Room 08": "true"
+    "Great Bay Temple Pot Map Room 09": "true"
+    "Great Bay Temple Pot Map Room 10": "true"
+    "Great Bay Temple Pot Map Room 11": "true"
 "Great Bay Temple Baba Room":
   dungeon: GB
   exits:
@@ -66,12 +79,24 @@
     "Great Bay Temple Compass": "true"
     "Great Bay Temple Compass Room Underwater": "true"
     "Great Bay Temple SF Compass Room Pot": "true"
+    "Great Bay Temple Pot Compass Room 1": "true"
+    "Great Bay Temple Pot Compass Room 2": "true"
+    "Great Bay Temple Pot Compass Room 3": "true"
+    "Great Bay Temple Pot Compass Room 4": "true"
+    "Great Bay Temple Pot Compass Room 5": "true"
+    "Great Bay Temple Pot Compass Room 6": "true"
+    "Great Bay Temple Pot Compass Room 7": "true"
 "Great Bay Temple Red Pipe 1":
   dungeon: GB
   exits:
     "Great Bay Temple Ice Arrow Room": "small_keys_gb(1)"
   events:
     GB_PIPE_RED: "soul_octorok && can_use_ice_arrows"
+  locations:
+    "Great Bay Temple Pot Red Pipe Before Wart 1": "true"
+    "Great Bay Temple Pot Red Pipe Before Wart 2": "true"
+    "Great Bay Temple Pot Red Pipe Before Wart 3": "true"
+    "Great Bay Temple Pot Red Pipe Before Wart 4": "true"
 "Great Bay Temple Ice Arrow Room":
   dungeon: GB
   events:
@@ -80,6 +105,26 @@
     "Great Bay Temple Red Pipe 1": "true"
   locations:
     "Great Bay Temple Ice Arrow": "soul(SOUL_WART)"
+    "Great Bay Temple Pot Wart 1": "true"
+    "Great Bay Temple Pot Wart 2": "true"
+    "Great Bay Temple Pot Wart 3": "true"
+    "Great Bay Temple Pot Wart 4": "true"
+    "Great Bay Temple Pot Wart 5": "true"
+    "Great Bay Temple Pot Wart 6": "true"
+    "Great Bay Temple Pot Wart 7": "true"
+    "Great Bay Temple Pot Wart 8": "true"
+    "Great Bay Temple Pot Before Wart 01": "true"
+    "Great Bay Temple Pot Before Wart 02": "true"
+    "Great Bay Temple Pot Before Wart 03": "true"
+    "Great Bay Temple Pot Before Wart 04": "true"
+    "Great Bay Temple Pot Before Wart 05": "true"
+    "Great Bay Temple Pot Before Wart 06": "true"
+    "Great Bay Temple Pot Before Wart 07": "true"
+    "Great Bay Temple Pot Before Wart 08": "true"
+    "Great Bay Temple Pot Before Wart 09": "true"
+    "Great Bay Temple Pot Before Wart 10": "true"
+    "Great Bay Temple Pot Before Wart 11": "true"
+    "Great Bay Temple Pot Before Wart 12": "true"
 "Great Bay Temple Red Pipe 2":
   dungeon: GB
   exits:
@@ -103,6 +148,10 @@
     GB_PIPE_GREEN: "true"
   locations:
     "Great Bay Temple Green Pipe 1 Chest": "can_hookshot"
+    "Great Bay Temple Pot Green Pipe 1 1": "true"
+    "Great Bay Temple Pot Green Pipe 1 2": "true"
+    "Great Bay Temple Pot Green Pipe 1 3": "true"
+    "Great Bay Temple Pot Green Pipe 1 4": "true"
 "Great Bay Temple Green Pipe 2":
   dungeon: GB
   exits:
@@ -110,6 +159,14 @@
   locations:
     "Great Bay Temple Green Pipe 2 Lower Chest": "can_hookshot || (can_use_ice_arrows && can_hookshot_short)" #can_use_fire_arrows - can just jump to the alcove after riding the platform, fires for safety of using ice arrows
     "Great Bay Temple Green Pipe 2 Upper Chest": "can_hookshot && can_use_ice_arrows && can_use_fire_arrows"
+    "Great Bay Temple Pot Green Pipe 2 1": "true"
+    "Great Bay Temple Pot Green Pipe 2 2": "true"
+    "Great Bay Temple Pot Green Pipe 2 3": "true"
+    "Great Bay Temple Pot Green Pipe 2 4": "true"
+    "Great Bay Temple Pot Green Pipe 2 5": "true"
+    "Great Bay Temple Pot Green Pipe 2 6": "true"
+    "Great Bay Temple Pot Green Pipe 2 7": "true"
+    "Great Bay Temple Pot Green Pipe 2 8": "true"
 "Great Bay Temple Green Pipe 3":
   dungeon: GB
   exits:
@@ -120,6 +177,9 @@
   locations:
     "Great Bay Temple Green Pipe 3 Chest": "can_use_ice_arrows && can_use_fire_arrows && can_hookshot"
     "Great Bay Temple SF Green Pipe 3 Barrel": "true"
+    "Great Bay Temple Pot Green Pipe 3 Upper 1": "can_use_ice_arrows && can_use_fire_arrows && can_hookshot"
+    "Great Bay Temple Pot Green Pipe 3 Upper 2": "can_use_ice_arrows && can_use_fire_arrows && can_hookshot"
+    "Great Bay Temple Pot Green Pipe 3 Lower": "true"
 "Great Bay Temple Pre-Boss":
   dungeon: GB
   exits:
@@ -128,6 +188,14 @@
   locations:
     "Great Bay Temple SF Pre-Boss Above Water": "can_use_ice_arrows || (has(MASK_GREAT_FAIRY) && (has_arrows || can_hookshot))"
     "Great Bay Temple SF Pre-Boss Underwater": "true"
+    "Great Bay Temple Pot Pre-Boss 1": "true"
+    "Great Bay Temple Pot Pre-Boss 2": "true"
+    "Great Bay Temple Pot Pre-Boss 3": "true"
+    "Great Bay Temple Pot Pre-Boss 4": "true"
+    "Great Bay Temple Pot Pre-Boss 5": "true"
+    "Great Bay Temple Pot Pre-Boss 6": "true"
+    "Great Bay Temple Pot Pre-Boss 7": "true"
+    "Great Bay Temple Pot Pre-Boss 8": "true"
 "Great Bay Temple Boss Access":
   dungeon: GB
   exits:
@@ -137,6 +205,15 @@
   dungeon: GB
   exits:
     "Great Bay Temple After Boss": "soul(SOUL_GYORG) && ((has_magic && ((has_mask_zora && has_arrows) || has(MASK_FIERCE_DEITY))))"
+  locations:
+    "Great Bay Temple Boss Pot 1": "true"
+    "Great Bay Temple Boss Pot 2": "true"
+    "Great Bay Temple Boss Pot 3": "true"
+    "Great Bay Temple Boss Pot 4": "true"
+    "Great Bay Temple Boss Pot Underwater 1": "has_mask_zora"
+    "Great Bay Temple Boss Pot Underwater 2": "has_mask_zora"
+    "Great Bay Temple Boss Pot Underwater 3": "has_mask_zora"
+    "Great Bay Temple Boss Pot Underwater 4": "has_mask_zora"
 "Great Bay Temple After Boss":
   boss: true
   dungeon: GB
