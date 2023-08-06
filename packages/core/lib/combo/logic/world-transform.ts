@@ -749,6 +749,11 @@ export class LogicPassWorldTransform {
     if (!settings.shufflePotsMm) {
       const pots = DATA_POOL.mm.filter((x: any) => x.type === 'pot').map((x: any) => gameId('mm', x.location, ' ')) as string[];
       this.removeLocations(pots);
+    } else {
+      if (settings.goal === 'triforce') {
+        const potsMajora = DATA_POOL.mm.filter((x: any) => x.type === 'pot' && x.scene === 'LAIR_MAJORA').map((x: any) => gameId('mm', x.location, ' ')) as string[];
+        this.removeLocations(potsMajora);
+      }
     }
 
     /* Carpenters */
