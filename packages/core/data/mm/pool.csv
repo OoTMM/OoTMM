@@ -604,6 +604,73 @@ Great Bay Temple Boss Pot Underwater 1,           pot,            NONE,         
 Great Bay Temple Boss Pot Underwater 2,           pot,            NONE,                   LAIR_GYORG,                 0x0006,                     MAGIC_JAR_LARGE
 Great Bay Temple Boss Pot Underwater 3,           pot,            NONE,                   LAIR_GYORG,                 0x0007,                     MAGIC_JAR_LARGE
 Great Bay Temple Boss Pot Underwater 4,           pot,            NONE,                   LAIR_GYORG,                 0x0008,                     MAGIC_JAR_LARGE
+Great Bay Temple Pot Central Room 1,              pot,            NONE,                   TEMPLE_GREAT_BAY,           0x0010,                     RECOVERY_HEART
+Great Bay Temple Pot Central Room 2,              pot,            NONE,                   TEMPLE_GREAT_BAY,           0x0011,                     MAGIC_JAR_LARGE
+Great Bay Temple Pot Map Room 01,                 pot,            NONE,                   TEMPLE_GREAT_BAY,           0x0103,                     RECOVERY_HEART
+Great Bay Temple Pot Map Room 02,                 pot,            NONE,                   TEMPLE_GREAT_BAY,           0x0104,                     RECOVERY_HEART
+Great Bay Temple Pot Map Room 03,                 pot,            NONE,                   TEMPLE_GREAT_BAY,           0x0105,                     MAGIC_JAR_LARGE
+Great Bay Temple Pot Map Room 04,                 pot,            NONE,                   TEMPLE_GREAT_BAY,           0x0106,                     MAGIC_JAR_LARGE
+Great Bay Temple Pot Map Room 05,                 pot,            NONE,                   TEMPLE_GREAT_BAY,           0x010a,                     RECOVERY_HEART
+Great Bay Temple Pot Map Room 06,                 pot,            NONE,                   TEMPLE_GREAT_BAY,           0x010b,                     RECOVERY_HEART
+Great Bay Temple Pot Map Room 07,                 pot,            NONE,                   TEMPLE_GREAT_BAY,           0x010c,                     RECOVERY_HEART
+Great Bay Temple Pot Map Room 08,                 pot,            NONE,                   TEMPLE_GREAT_BAY,           0x010d,                     RECOVERY_HEART
+Great Bay Temple Pot Map Room 09,                 pot,            NONE,                   TEMPLE_GREAT_BAY,           0x010e,                     RECOVERY_HEART
+Great Bay Temple Pot Map Room 10,                 pot,            NONE,                   TEMPLE_GREAT_BAY,           0x010f,                     RECOVERY_HEART
+Great Bay Temple Pot Map Room 11,                 pot,            NONE,                   TEMPLE_GREAT_BAY,           0x0110,                     MAGIC_JAR_LARGE
+Great Bay Temple Pot Compass Room 1,              pot,            NONE,                   TEMPLE_GREAT_BAY,           0x0409,                     RECOVERY_HEART
+Great Bay Temple Pot Compass Room 2,              pot,            NONE,                   TEMPLE_GREAT_BAY,           0x040a,                     RECOVERY_HEART
+Great Bay Temple Pot Compass Room 3,              pot,            NONE,                   TEMPLE_GREAT_BAY,           0x040b,                     ARROWS_10
+Great Bay Temple Pot Compass Room 4,              pot,            NONE,                   TEMPLE_GREAT_BAY,           0x040c,                     ARROWS_10
+Great Bay Temple Pot Compass Room 5,              pot,            NONE,                   TEMPLE_GREAT_BAY,           0x040d,                     MAGIC_JAR_SMALL
+Great Bay Temple Pot Compass Room 6,              pot,            NONE,                   TEMPLE_GREAT_BAY,           0x0414,                     RECOVERY_HEART
+Great Bay Temple Pot Compass Room 7,              pot,            NONE,                   TEMPLE_GREAT_BAY,           0x0415,                     RECOVERY_HEART
+Great Bay Temple Pot Red Pipe Before Wart 1,      pot,            NONE,                   TEMPLE_GREAT_BAY,           0x0608,                     RECOVERY_HEART
+Great Bay Temple Pot Red Pipe Before Wart 2,      pot,            NONE,                   TEMPLE_GREAT_BAY,           0x0609,                     ARROWS_10
+Great Bay Temple Pot Red Pipe Before Wart 3,      pot,            NONE,                   TEMPLE_GREAT_BAY,           0x060a,                     ARROWS_10
+Great Bay Temple Pot Red Pipe Before Wart 4,      pot,            NONE,                   TEMPLE_GREAT_BAY,           0x060b,                     MAGIC_JAR_SMALL
+Great Bay Temple Pot Wart 1,                      pot,            NONE,                   TEMPLE_GREAT_BAY,           0x0700,                     RECOVERY_HEART
+Great Bay Temple Pot Wart 2,                      pot,            NONE,                   TEMPLE_GREAT_BAY,           0x0701,                     RECOVERY_HEART
+Great Bay Temple Pot Wart 3,                      pot,            NONE,                   TEMPLE_GREAT_BAY,           0x0702,                     RECOVERY_HEART
+Great Bay Temple Pot Wart 4,                      pot,            NONE,                   TEMPLE_GREAT_BAY,           0x0703,                     RECOVERY_HEART
+Great Bay Temple Pot Wart 5,                      pot,            NONE,                   TEMPLE_GREAT_BAY,           0x0704,                     RECOVERY_HEART
+Great Bay Temple Pot Wart 6,                      pot,            NONE,                   TEMPLE_GREAT_BAY,           0x0705,                     RECOVERY_HEART
+Great Bay Temple Pot Wart 7,                      pot,            NONE,                   TEMPLE_GREAT_BAY,           0x0706,                     RECOVERY_HEART
+Great Bay Temple Pot Wart 8,                      pot,            NONE,                   TEMPLE_GREAT_BAY,           0x0707,                     RECOVERY_HEART
+Great Bay Temple Pot Green Pipe 2 1,              pot,            NONE,                   TEMPLE_GREAT_BAY,           0x0914,                     RECOVERY_HEART
+Great Bay Temple Pot Green Pipe 2 2,              pot,            NONE,                   TEMPLE_GREAT_BAY,           0x0915,                     RECOVERY_HEART
+Great Bay Temple Pot Green Pipe 2 3,              pot,            NONE,                   TEMPLE_GREAT_BAY,           0x0916,                     MAGIC_JAR_LARGE
+Great Bay Temple Pot Green Pipe 2 4,              pot,            NONE,                   TEMPLE_GREAT_BAY,           0x0917,                     MAGIC_JAR_LARGE
+Great Bay Temple Pot Green Pipe 2 5,              pot,            NONE,                   TEMPLE_GREAT_BAY,           0x0918,                     MAGIC_JAR_LARGE
+Great Bay Temple Pot Green Pipe 2 6,              pot,            NONE,                   TEMPLE_GREAT_BAY,           0x0919,                     MAGIC_JAR_LARGE
+Great Bay Temple Pot Green Pipe 2 7,              pot,            NONE,                   TEMPLE_GREAT_BAY,           0x091a,                     ARROWS_10
+Great Bay Temple Pot Green Pipe 2 8,              pot,            NONE,                   TEMPLE_GREAT_BAY,           0x091b,                     ARROWS_10
+Great Bay Temple Pot Green Pipe 3 Upper 1,        pot,            NONE,                   TEMPLE_GREAT_BAY,           0x0a04,                     RUPEE_GREEN
+Great Bay Temple Pot Green Pipe 3 Upper 2,        pot,            NONE,                   TEMPLE_GREAT_BAY,           0x0a05,                     RUPEE_GREEN
+Great Bay Temple Pot Green Pipe 3 Lower,          pot,            NONE,                   TEMPLE_GREAT_BAY,           0x0a15,                     ARROWS_20
+Great Bay Temple Pot Pre-Boss 1,                  pot,            NONE,                   TEMPLE_GREAT_BAY,           0x0b00,                     RECOVERY_HEART
+Great Bay Temple Pot Pre-Boss 2,                  pot,            NONE,                   TEMPLE_GREAT_BAY,           0x0b01,                     RECOVERY_HEART
+Great Bay Temple Pot Pre-Boss 3,                  pot,            NONE,                   TEMPLE_GREAT_BAY,           0x0b02,                     MAGIC_JAR_LARGE
+Great Bay Temple Pot Pre-Boss 4,                  pot,            NONE,                   TEMPLE_GREAT_BAY,           0x0b03,                     MAGIC_JAR_LARGE
+Great Bay Temple Pot Pre-Boss 5,                  pot,            NONE,                   TEMPLE_GREAT_BAY,           0x0b04,                     MAGIC_JAR_LARGE
+Great Bay Temple Pot Pre-Boss 6,                  pot,            NONE,                   TEMPLE_GREAT_BAY,           0x0b05,                     MAGIC_JAR_LARGE
+Great Bay Temple Pot Pre-Boss 7,                  pot,            NONE,                   TEMPLE_GREAT_BAY,           0x0b0e,                     ARROWS_10
+Great Bay Temple Pot Pre-Boss 8,                  pot,            NONE,                   TEMPLE_GREAT_BAY,           0x0b0f,                     ARROWS_10
+Great Bay Temple Pot Green Pipe 1 1,              pot,            NONE,                   TEMPLE_GREAT_BAY,           0x0c06,                     ARROWS_10
+Great Bay Temple Pot Green Pipe 1 2,              pot,            NONE,                   TEMPLE_GREAT_BAY,           0x0c07,                     MAGIC_JAR_LARGE
+Great Bay Temple Pot Green Pipe 1 3,              pot,            NONE,                   TEMPLE_GREAT_BAY,           0x0c08,                     MAGIC_JAR_LARGE
+Great Bay Temple Pot Green Pipe 1 4,              pot,            NONE,                   TEMPLE_GREAT_BAY,           0x0c09,                     MAGIC_JAR_LARGE
+Great Bay Temple Pot Before Wart 01,              pot,            NONE,                   TEMPLE_GREAT_BAY,           0x0e02,                     BOMBS_5
+Great Bay Temple Pot Before Wart 02,              pot,            NONE,                   TEMPLE_GREAT_BAY,           0x0e03,                     BOMBS_5
+Great Bay Temple Pot Before Wart 03,              pot,            NONE,                   TEMPLE_GREAT_BAY,           0x0e04,                     BOMBS_5
+Great Bay Temple Pot Before Wart 04,              pot,            NONE,                   TEMPLE_GREAT_BAY,           0x0e05,                     BOMBS_5
+Great Bay Temple Pot Before Wart 05,              pot,            NONE,                   TEMPLE_GREAT_BAY,           0x0e07,                     RECOVERY_HEART
+Great Bay Temple Pot Before Wart 06,              pot,            NONE,                   TEMPLE_GREAT_BAY,           0x0e08,                     RECOVERY_HEART
+Great Bay Temple Pot Before Wart 07,              pot,            NONE,                   TEMPLE_GREAT_BAY,           0x0e09,                     RECOVERY_HEART
+Great Bay Temple Pot Before Wart 08,              pot,            NONE,                   TEMPLE_GREAT_BAY,           0x0e0a,                     RECOVERY_HEART
+Great Bay Temple Pot Before Wart 09,              pot,            NONE,                   TEMPLE_GREAT_BAY,           0x0e0b,                     RECOVERY_HEART
+Great Bay Temple Pot Before Wart 10,              pot,            NONE,                   TEMPLE_GREAT_BAY,           0x0e0c,                     RECOVERY_HEART
+Great Bay Temple Pot Before Wart 11,              pot,            NONE,                   TEMPLE_GREAT_BAY,           0x0e0d,                     RECOVERY_HEART
+Great Bay Temple Pot Before Wart 12,              pot,            NONE,                   TEMPLE_GREAT_BAY,           0x0e0e,                     RECOVERY_HEART
 Beneath The Well Skulltulla Chest,                chest,          NONE,                   BENEATH_THE_WELL,           0x01,                       RUPEE_PURPLE
 Beneath The Well Keese Chest,                     chest,          NONE,                   BENEATH_THE_WELL,           0x02,                       RUPEE_PURPLE
 Beneath The Well Mirror Shield,                   chest,          NONE,                   BENEATH_THE_WELL,           0x1b,                       SHIELD_MIRROR
