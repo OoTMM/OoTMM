@@ -41,6 +41,7 @@
 #  include <combo/mm/actor_enossan.h>
 #  include <combo/mm/actor_arms_hook.h>
 #  include <combo/mm/actors/Obj_Tsubo.h>
+#  include <combo/mm/actors/En_Tubo_Trap.h>
 # endif
 
 # include <combo/common/actors/En_Item00.h>
