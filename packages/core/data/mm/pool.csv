@@ -374,6 +374,7 @@ Ocean Spider House Pot Entrance 4,                pot,            NONE,         
 Ocean Spider House Pot Main Room Web,             pot,            NONE,                   SPIDER_HOUSE_OCEAN,           0x011b,                     ARROWS_10
 Ocean Spider House Pot Main Room 1,               pot,            NONE,                   SPIDER_HOUSE_OCEAN,           0x011c,                     ARROWS_10
 Ocean Spider House Pot Main Room 2,               pot,            NONE,                   SPIDER_HOUSE_OCEAN,           0x011e,                     MAGIC_JAR_SMALL
+Ocean Spider House Pot Main Room Boe,             pot,            NONE,                   SPIDER_HOUSE_OCEAN,           0x011d,                     MAGIC_JAR_SMALL
 Ocean Spider House Pot Colored Skulls 1,          pot,            NONE,                   SPIDER_HOUSE_OCEAN,           0x0304,                     ARROWS_10
 Ocean Spider House Pot Colored Skulls 2,          pot,            NONE,                   SPIDER_HOUSE_OCEAN,           0x0305,                     ARROWS_10
 Ocean Spider House Pot Storage 1,                 pot,            NONE,                   SPIDER_HOUSE_OCEAN,           0x050b,                     RECOVERY_HEART
@@ -721,10 +722,25 @@ Beneath The Well Skulltulla Chest,                chest,          NONE,         
 Beneath The Well Keese Chest,                     chest,          NONE,                   BENEATH_THE_WELL,             0x02,                       RUPEE_PURPLE
 Beneath The Well Mirror Shield,                   chest,          NONE,                   BENEATH_THE_WELL,             0x1b,                       SHIELD_MIRROR
 Beneath The Well Cow,                             cow,            COW_WELL,               BENEATH_THE_WELL,             0x17,                       MILK
-Beneath The Well Pot 1,                           pot,            NONE,                   BENEATH_THE_WELL,             0x0c05,                     ARROWS_10
-Beneath The Well Pot 2,                           pot,            NONE,                   BENEATH_THE_WELL,             0x0c06,                     ARROWS_10
-Beneath The Well Pot 3,                           pot,            NONE,                   BENEATH_THE_WELL,             0x0c07,                     ARROWS_10
-Beneath The Well Pot 4,                           pot,            NONE,                   BENEATH_THE_WELL,             0x0c08,                     ARROWS_10
+Beneath The Well Pot Big Poe 1,                   pot,            NONE,                   BENEATH_THE_WELL,             0x0c05,                     ARROWS_10
+Beneath The Well Pot Big Poe 2,                   pot,            NONE,                   BENEATH_THE_WELL,             0x0c06,                     ARROWS_10
+Beneath The Well Pot Big Poe 3,                   pot,            NONE,                   BENEATH_THE_WELL,             0x0c07,                     ARROWS_10
+Beneath The Well Pot Big Poe 4,                   pot,            NONE,                   BENEATH_THE_WELL,             0x0c08,                     ARROWS_10
+Beneath The Well Pot Left Side 1,                 pot,            NONE,                   BENEATH_THE_WELL,             0x0511,                     BOMBS_5
+Beneath The Well Pot Left Side 2,                 pot,            NONE,                   BENEATH_THE_WELL,             0x0512,                     BOMBS_5
+Beneath The Well Pot Left Side 3,                 pot,            NONE,                   BENEATH_THE_WELL,             0x0513,                     BOMBS_5
+Beneath The Well Pot Left Side 4,                 pot,            NONE,                   BENEATH_THE_WELL,             0x0514,                     BOMBS_5
+Beneath The Well Pot Left Side 5,                 pot,            NONE,                   BENEATH_THE_WELL,             0x0515,                     BOMBS_5
+Beneath The Well Pot Middle 01,                   pot,            NONE,                   BENEATH_THE_WELL,             0x060e,                     ARROWS_20
+Beneath The Well Pot Middle 02,                   pot,            NONE,                   BENEATH_THE_WELL,             0x060f,                     ARROWS_20
+Beneath The Well Pot Middle 03,                   pot,            NONE,                   BENEATH_THE_WELL,             0x0610,                     ARROWS_20
+Beneath The Well Pot Middle 04,                   pot,            NONE,                   BENEATH_THE_WELL,             0x0611,                     ARROWS_20
+Beneath The Well Pot Middle 05,                   pot,            NONE,                   BENEATH_THE_WELL,             0x0612,                     ARROWS_20
+Beneath The Well Pot Middle 06,                   pot,            NONE,                   BENEATH_THE_WELL,             0x0613,                     ARROWS_20
+Beneath The Well Pot Middle 07,                   pot,            NONE,                   BENEATH_THE_WELL,             0x0614,                     ARROWS_20
+Beneath The Well Pot Middle 08,                   pot,            NONE,                   BENEATH_THE_WELL,             0x0615,                     ARROWS_20
+Beneath The Well Pot Middle 09,                   pot,            NONE,                   BENEATH_THE_WELL,             0x0616,                     ARROWS_20
+Beneath The Well Pot Middle 10,                   pot,            NONE,                   BENEATH_THE_WELL,             0x0617,                     ARROWS_20
 Ancient Castle of Ikana HP,                       collectible,    NONE,                   CASTLE_IKANA,                 0x0a,                       HEART_PIECE
 Ancient Castle of Ikana Song Emptiness,           npc,            SONG_ELEGY,             LAIR_IKANA,                   SONG_EMPTINESS,             SONG_EMPTINESS
 Ancient Castle of Ikana Boss Pot 1,               pot,            NONE,                   LAIR_IKANA,                   0x0002,                     ARROWS_10

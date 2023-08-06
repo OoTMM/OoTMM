@@ -15,6 +15,11 @@
     RUPEES: "event(WATER) && (can_fight || has_weapon_range || has_explosives)"
   locations:
     "Beneath The Well Keese Chest": "event(WATER) && event(BUGS) && can_use_lens"
+    "Beneath The Well Pot Left Side 1": "event(WATER) && has_bottle"
+    "Beneath The Well Pot Left Side 2": "event(WATER) && has_bottle"
+    "Beneath The Well Pot Left Side 3": "event(WATER) && has_bottle"
+    "Beneath The Well Pot Left Side 4": "event(WATER) && has_bottle"
+    "Beneath The Well Pot Left Side 5": "event(WATER) && has_bottle"
 "Beneath The Well East Section":
   dungeon: BtW
   exits:
@@ -32,10 +37,10 @@
     BUGS: "has_bottle"
   locations:
     "Beneath The Well Cow": "(event(WELL_HOT_WATER) || (has_hot_water_distance && has(OWL_IKANA_CANYON)) || has_hot_water_er) && can_play_epona"
-    "Beneath The Well Pot 1": "has_bombs"
-    "Beneath The Well Pot 2": "has_bombs"
-    "Beneath The Well Pot 3": "has_bombs"
-    "Beneath The Well Pot 4": "has_bombs"
+    "Beneath The Well Pot Big Poe 1": "has_bombs"
+    "Beneath The Well Pot Big Poe 2": "has_bombs"
+    "Beneath The Well Pot Big Poe 3": "has_bombs"
+    "Beneath The Well Pot Big Poe 4": "has_bombs"
 "Beneath The Well Middle Section":
   dungeon: BtW
   exits:
@@ -46,6 +51,16 @@
     NUTS: "true"
   locations:
     "Beneath The Well Skulltulla Chest": "has(MASK_GIBDO) && soul_redead_gibdo && event(BUGS)"
+    "Beneath The Well Pot Middle 01": "true"
+    "Beneath The Well Pot Middle 02": "true"
+    "Beneath The Well Pot Middle 03": "true"
+    "Beneath The Well Pot Middle 04": "true"
+    "Beneath The Well Pot Middle 05": "true"
+    "Beneath The Well Pot Middle 06": "true"
+    "Beneath The Well Pot Middle 07": "true"
+    "Beneath The Well Pot Middle 08": "true"
+    "Beneath The Well Pot Middle 09": "true"
+    "Beneath The Well Pot Middle 10": "true"
 "Beneath The Well Final Hall":
   dungeon: BtW
   exits:

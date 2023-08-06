@@ -385,7 +385,7 @@ function outputPotsPoolMm(roomActors: RoomActors[]) {
         let item: string;
         const potType = (actor.params >> 7) & 3;
         const potEnemy = (actor.rz >> 7) & 3;
-        if (potEnemy)
+        if (potEnemy != 1)
           continue;
         switch (potType) {
         case 0:
