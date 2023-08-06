@@ -210,36 +210,36 @@ Path to Snowhead Grotto,                          chest,          NONE,         
 Snowhead Great Fairy,                             npc,            NONE,                   FAIRY_FOUNTAIN,             GREAT_FAIRY_MOUNTAIN,       MAGIC_UPGRADE
 Snowhead Owl Statue,                              npc,            NONE,                   FAIRY_FOUNTAIN,             OWL_SNOWHEAD,               OWL_SNOWHEAD
 Goron Race Reward,                                npc,            GORON_RACE,             GORON_RACETRACK,            GORON_RACE,                 BOTTLED_GOLD_DUST
-Goron Race Pot 01,                                pot,            GORON_RACE,             GORON_RACETRACK,            0x0002,                     MAGIC_JAR_LARGE
-Goron Race Pot 02,                                pot,            GORON_RACE,             GORON_RACETRACK,            0x0003,                     MAGIC_JAR_LARGE
-Goron Race Pot 03,                                pot,            GORON_RACE,             GORON_RACETRACK,            0x0004,                     MAGIC_JAR_LARGE
-Goron Race Pot 04,                                pot,            GORON_RACE,             GORON_RACETRACK,            0x0005,                     MAGIC_JAR_LARGE
-Goron Race Pot 05,                                pot,            GORON_RACE,             GORON_RACETRACK,            0x0006,                     MAGIC_JAR_LARGE
-Goron Race Pot 06,                                pot,            GORON_RACE,             GORON_RACETRACK,            0x0007,                     MAGIC_JAR_LARGE
-Goron Race Pot 07,                                pot,            GORON_RACE,             GORON_RACETRACK,            0x0008,                     MAGIC_JAR_LARGE
-Goron Race Pot 08,                                pot,            GORON_RACE,             GORON_RACETRACK,            0x0009,                     MAGIC_JAR_LARGE
-Goron Race Pot 09,                                pot,            GORON_RACE,             GORON_RACETRACK,            0x000a,                     MAGIC_JAR_LARGE
-Goron Race Pot 10,                                pot,            GORON_RACE,             GORON_RACETRACK,            0x000b,                     MAGIC_JAR_LARGE
-Goron Race Pot 11,                                pot,            GORON_RACE,             GORON_RACETRACK,            0x000c,                     MAGIC_JAR_LARGE
-Goron Race Pot 12,                                pot,            GORON_RACE,             GORON_RACETRACK,            0x000d,                     MAGIC_JAR_LARGE
-Goron Race Pot 13,                                pot,            GORON_RACE,             GORON_RACETRACK,            0x000e,                     MAGIC_JAR_LARGE
-Goron Race Pot 14,                                pot,            GORON_RACE,             GORON_RACETRACK,            0x000f,                     MAGIC_JAR_LARGE
-Goron Race Pot 15,                                pot,            GORON_RACE,             GORON_RACETRACK,            0x0010,                     MAGIC_JAR_LARGE
-Goron Race Pot 16,                                pot,            GORON_RACE,             GORON_RACETRACK,            0x0011,                     MAGIC_JAR_LARGE
-Goron Race Pot 17,                                pot,            GORON_RACE,             GORON_RACETRACK,            0x0012,                     MAGIC_JAR_LARGE
-Goron Race Pot 18,                                pot,            GORON_RACE,             GORON_RACETRACK,            0x0013,                     MAGIC_JAR_LARGE
-Goron Race Pot 19,                                pot,            GORON_RACE,             GORON_RACETRACK,            0x0014,                     MAGIC_JAR_LARGE
-Goron Race Pot 20,                                pot,            GORON_RACE,             GORON_RACETRACK,            0x0015,                     MAGIC_JAR_LARGE
-Goron Race Pot 21,                                pot,            GORON_RACE,             GORON_RACETRACK,            0x0016,                     MAGIC_JAR_LARGE
-Goron Race Pot 22,                                pot,            GORON_RACE,             GORON_RACETRACK,            0x0017,                     MAGIC_JAR_LARGE
-Goron Race Pot 23,                                pot,            GORON_RACE,             GORON_RACETRACK,            0x0018,                     MAGIC_JAR_LARGE
-Goron Race Pot 24,                                pot,            GORON_RACE,             GORON_RACETRACK,            0x0019,                     MAGIC_JAR_LARGE
-Goron Race Pot 25,                                pot,            GORON_RACE,             GORON_RACETRACK,            0x001a,                     MAGIC_JAR_LARGE
-Goron Race Pot 26,                                pot,            GORON_RACE,             GORON_RACETRACK,            0x001b,                     MAGIC_JAR_LARGE
-Goron Race Pot 27,                                pot,            GORON_RACE,             GORON_RACETRACK,            0x001c,                     MAGIC_JAR_LARGE
-Goron Race Pot 28,                                pot,            GORON_RACE,             GORON_RACETRACK,            0x001d,                     MAGIC_JAR_LARGE
-Goron Race Pot 29,                                pot,            GORON_RACE,             GORON_RACETRACK,            0x001e,                     MAGIC_JAR_LARGE
-Goron Race Pot 30,                                pot,            GORON_RACE,             GORON_RACETRACK,            0x001f,                     MAGIC_JAR_LARGE
+Goron Race Pot 01,                                pot,            NONE,                   GORON_RACETRACK,            0x0002,                     MAGIC_JAR_LARGE
+Goron Race Pot 02,                                pot,            NONE,                   GORON_RACETRACK,            0x0003,                     MAGIC_JAR_LARGE
+Goron Race Pot 03,                                pot,            NONE,                   GORON_RACETRACK,            0x0004,                     MAGIC_JAR_LARGE
+Goron Race Pot 04,                                pot,            NONE,                   GORON_RACETRACK,            0x0005,                     MAGIC_JAR_LARGE
+Goron Race Pot 05,                                pot,            NONE,                   GORON_RACETRACK,            0x0006,                     MAGIC_JAR_LARGE
+Goron Race Pot 06,                                pot,            NONE,                   GORON_RACETRACK,            0x0007,                     MAGIC_JAR_LARGE
+Goron Race Pot 07,                                pot,            NONE,                   GORON_RACETRACK,            0x0008,                     MAGIC_JAR_LARGE
+Goron Race Pot 08,                                pot,            NONE,                   GORON_RACETRACK,            0x0009,                     MAGIC_JAR_LARGE
+Goron Race Pot 09,                                pot,            NONE,                   GORON_RACETRACK,            0x000a,                     MAGIC_JAR_LARGE
+Goron Race Pot 10,                                pot,            NONE,                   GORON_RACETRACK,            0x000b,                     MAGIC_JAR_LARGE
+Goron Race Pot 11,                                pot,            NONE,                   GORON_RACETRACK,            0x000c,                     MAGIC_JAR_LARGE
+Goron Race Pot 12,                                pot,            NONE,                   GORON_RACETRACK,            0x000d,                     MAGIC_JAR_LARGE
+Goron Race Pot 13,                                pot,            NONE,                   GORON_RACETRACK,            0x000e,                     MAGIC_JAR_LARGE
+Goron Race Pot 14,                                pot,            NONE,                   GORON_RACETRACK,            0x000f,                     MAGIC_JAR_LARGE
+Goron Race Pot 15,                                pot,            NONE,                   GORON_RACETRACK,            0x0010,                     MAGIC_JAR_LARGE
+Goron Race Pot 16,                                pot,            NONE,                   GORON_RACETRACK,            0x0011,                     MAGIC_JAR_LARGE
+Goron Race Pot 17,                                pot,            NONE,                   GORON_RACETRACK,            0x0012,                     MAGIC_JAR_LARGE
+Goron Race Pot 18,                                pot,            NONE,                   GORON_RACETRACK,            0x0013,                     MAGIC_JAR_LARGE
+Goron Race Pot 19,                                pot,            NONE,                   GORON_RACETRACK,            0x0014,                     MAGIC_JAR_LARGE
+Goron Race Pot 20,                                pot,            NONE,                   GORON_RACETRACK,            0x0015,                     MAGIC_JAR_LARGE
+Goron Race Pot 21,                                pot,            NONE,                   GORON_RACETRACK,            0x0016,                     MAGIC_JAR_LARGE
+Goron Race Pot 22,                                pot,            NONE,                   GORON_RACETRACK,            0x0017,                     MAGIC_JAR_LARGE
+Goron Race Pot 23,                                pot,            NONE,                   GORON_RACETRACK,            0x0018,                     MAGIC_JAR_LARGE
+Goron Race Pot 24,                                pot,            NONE,                   GORON_RACETRACK,            0x0019,                     MAGIC_JAR_LARGE
+Goron Race Pot 25,                                pot,            NONE,                   GORON_RACETRACK,            0x001a,                     MAGIC_JAR_LARGE
+Goron Race Pot 26,                                pot,            NONE,                   GORON_RACETRACK,            0x001b,                     MAGIC_JAR_LARGE
+Goron Race Pot 27,                                pot,            NONE,                   GORON_RACETRACK,            0x001c,                     MAGIC_JAR_LARGE
+Goron Race Pot 28,                                pot,            NONE,                   GORON_RACETRACK,            0x001d,                     MAGIC_JAR_LARGE
+Goron Race Pot 29,                                pot,            NONE,                   GORON_RACETRACK,            0x001e,                     MAGIC_JAR_LARGE
+Goron Race Pot 30,                                pot,            NONE,                   GORON_RACETRACK,            0x001f,                     MAGIC_JAR_LARGE
 Milk Road Owl Statue,                             npc,            NONE,                   MILK_ROAD,                  OWL_MILK_ROAD,              OWL_MILK_ROAD
 Romani Ranch Epona Song,                          npc,            NONE,                   ROMANI_RANCH,               SONG_EPONA,                 SONG_EPONA
 Romani Ranch Aliens,                              npc,            RANCH_DEFENSE,          ROMANI_RANCH,               ROMANI_BOTTLE,              BOTTLE_MILK
@@ -448,6 +448,27 @@ Woodfall Temple SF Pre-Boss Top Right,            sf,             NONE,         
 Woodfall Temple SF Pre-Boss Pillar,               sf,             NONE,                   TEMPLE_WOODFALL,            0x2d,                       STRAY_FAIRY_WF
 Woodfall Temple Boss Container,                   collectible,    NONE,                   LAIR_ODOLWA,                0x1f,                       HEART_CONTAINER
 Woodfall Temple Boss,                             npc,            NONE,                   LAIR_ODOLWA,                REMAINS_ODOLWA,             REMAINS_ODOLWA
+Woodfall Temple Pot Pre-Boss 1,                   pot,            NONE,                   TEMPLE_WOODFALL,            0x001c,                     RECOVERY_HEART
+Woodfall Temple Pot Pre-Boss 2,                   pot,            NONE,                   TEMPLE_WOODFALL,            0x001d,                     RECOVERY_HEART
+Woodfall Temple Pot Main Room Upper 1,            pot,            NONE,                   TEMPLE_WOODFALL,            0x010a,                     ARROWS_10
+Woodfall Temple Pot Main Room Upper 2,            pot,            NONE,                   TEMPLE_WOODFALL,            0x010b,                     ARROWS_10
+Woodfall Temple Pot Main Room Lower 1,            pot,            NONE,                   TEMPLE_WOODFALL,            0x0115,                     RECOVERY_HEART
+Woodfall Temple Pot Main Room Lower 2,            pot,            NONE,                   TEMPLE_WOODFALL,            0x0116,                     RECOVERY_HEART
+Woodfall Temple Pot Main Room Lower 3,            pot,            NONE,                   TEMPLE_WOODFALL,            0x0117,                     RECOVERY_HEART
+Woodfall Temple Pot Main Room Lower 4,            pot,            NONE,                   TEMPLE_WOODFALL,            0x0118,                     MAGIC_JAR_LARGE
+Woodfall Temple Pot Main Room Lower 5,            pot,            NONE,                   TEMPLE_WOODFALL,            0x011a,                     BOMBS_5
+Woodfall Temple Pot Main Room Lower 6,            pot,            NONE,                   TEMPLE_WOODFALL,            0x011b,                     ARROWS_10
+Woodfall Temple Pot Entrance,                     pot,            NONE,                   TEMPLE_WOODFALL,            0x0216,                     FAIRY
+Woodfall Temple Pot Maze 1,                       pot,            NONE,                   TEMPLE_WOODFALL,            0x030d,                     RECOVERY_HEART
+Woodfall Temple Pot Maze 2,                       pot,            NONE,                   TEMPLE_WOODFALL,            0x030e,                     RECOVERY_HEART
+Woodfall Temple Pot Water Room 1,                 pot,            NONE,                   TEMPLE_WOODFALL,            0x050e,                     RECOVERY_HEART
+Woodfall Temple Pot Water Room 2,                 pot,            NONE,                   TEMPLE_WOODFALL,            0x050f,                     RECOVERY_HEART
+Woodfall Temple Pot Water Room 3,                 pot,            NONE,                   TEMPLE_WOODFALL,            0x0510,                     RECOVERY_HEART
+Woodfall Temple Pot Water Room 4,                 pot,            NONE,                   TEMPLE_WOODFALL,            0x0511,                     ARROWS_10
+Woodfall Temple Pot Miniboss Room 1,              pot,            NONE,                   TEMPLE_WOODFALL,            0x0806,                     RUPEE_BLUE
+Woodfall Temple Pot Miniboss Room 2,              pot,            NONE,                   TEMPLE_WOODFALL,            0x0807,                     RUPEE_BLUE
+Woodfall Temple Pot Miniboss Room 3,              pot,            NONE,                   TEMPLE_WOODFALL,            0x0808,                     RUPEE_BLUE
+Woodfall Temple Pot Miniboss Room 4,              pot,            NONE,                   TEMPLE_WOODFALL,            0x0809,                     RUPEE_BLUE
 Snowhead Temple Compass Room Ledge,               chest,          NONE,                   TEMPLE_SNOWHEAD,            0x19,                       STRAY_FAIRY_SH
 Snowhead Temple Compass,                          chest,          NONE,                   TEMPLE_SNOWHEAD,            0x1c,                       COMPASS_SH
 Snowhead Temple Bridge Room,                      chest,          NONE,                   TEMPLE_SNOWHEAD,            0x01,                       SMALL_KEY_SH

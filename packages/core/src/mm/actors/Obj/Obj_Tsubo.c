@@ -1,6 +1,26 @@
 #include <combo.h>
 #include <combo/custom.h>
 
+static int ObjTsubo_IsShuffled(Actor_ObjTsubo* this)
+{
+    u8 potType;
+
+    /* Check for stray fairy */
+    potType = (this->base.variable >> 7) & 3;
+    if ((potType == 0 || potType == 2) && (this->base.variable & 0x1f == 0x11))
+        return 0;
+
+    /* Check for enemy */
+    if ((this->base.initRot.z >> 7) & 3)
+        return 0;
+
+    /* Check for dynamic pots */
+    if (this->xflag.id == 0xff)
+        return 0;
+
+    return 1;
+}
+
 static void ObjTsubo_Aliases(Xflag* xflag)
 {
     switch (xflag->sceneId)
@@ -76,7 +96,7 @@ void ObjTsubo_SpawnShuffledDrop(Actor_ObjTsubo* this, GameState_Play* play)
 {
     ActorFunc ObjTsubo_SpawnDrop;
 
-    if (comboXflagsGet(&this->xflag))
+    if (!ObjTsubo_IsShuffled(this) || comboXflagsGet(&this->xflag))
     {
         /* Already spawned */
         ObjTsubo_SpawnDrop = (ActorFunc)actorAddr(AC_OBJ_TSUBO, 0x80927690);
@@ -157,7 +177,7 @@ void ObjTsubo_Draw(Actor_ObjTsubo* this, GameState_Play* play)
     }
 
     /* Checks flag and dangeon_keep */
-    if (comboConfig(CFG_MM_SHUFFLE_POTS) && !comboXflagsGet(&this->xflag))
+    if (ObjTsubo_IsShuffled(this) && comboConfig(CFG_MM_SHUFFLE_POTS) && !comboXflagsGet(&this->xflag))
     {
         dlistSide = kDrawListMajorSide;
         dlistTop = kDrawListMajorTop;
