@@ -44,6 +44,13 @@ static void ObjTsubo_Aliases(Xflag* xflag)
             xflag->id -= 36;
         }
         break;
+    case SCE_MM_MOUNTAIN_VILLAGE_SPRING:
+        xflag->sceneId = SCE_MM_MOUNTAIN_VILLAGE_WINTER;
+        xflag->id = 38;
+        break;
+    case SCE_MM_GORON_RACETRACK:
+        xflag->setupId = 0;
+        break;
     }
 }
 

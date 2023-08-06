@@ -509,7 +509,7 @@
     "Termina Field Tall Grass Chest": "true"
     "Termina Field Tree Stump Chest": "can_hookshot_short || can_use_beans"
     "Termina Field Kamaro Mask": "can_play(SONG_HEALING) && midnight"
-    "Termina Field Pot": "can_use_beans"
+    "Termina Field Pot": "can_use_beans || has_bow"
   gossip:
     "Termina Field Gossip Southeast": "true"
     "Termina Field Gossip Southwest": "true"
@@ -966,6 +966,8 @@
     "Near Deku Shrine": "true"
   locations:
     "Deku Shrine Mask of Scents": "event(RETURN_PRINCESS) && has_weapon_range"
+    "Deku Shrine Pot 1": "true"
+    "Deku Shrine Pot 2": "true"
 "Behind Large Icicles":
   region: TERMINA_FIELD
   exits:
@@ -1011,6 +1013,7 @@
     "Mountain Village Waterfall Chest": "event(BOSS_SNOWHEAD) && can_use_lens"
     "Mountain Village Don Gero Mask": "event(GORON_FOOD)"
     "Mountain Village Frog Choir HP": "event(BOSS_SNOWHEAD) && event(FROG_1) && event(FROG_2) && event(FROG_3) && event(FROG_4)"
+    "Mountain Village Pot": "scarecrow_hookshot"
 "Near Village Grotto":
   region: MOUNTAIN_VILLAGE
   exits:
@@ -1263,6 +1266,36 @@
     "Near Goron Race": "true"
   locations:
     "Goron Race Reward": "event(BOSS_SNOWHEAD) && goron_fast_roll"
+    "Goron Race Pot 01": "true"
+    "Goron Race Pot 02": "true"
+    "Goron Race Pot 03": "true"
+    "Goron Race Pot 04": "true"
+    "Goron Race Pot 05": "true"
+    "Goron Race Pot 06": "true"
+    "Goron Race Pot 07": "true"
+    "Goron Race Pot 08": "true"
+    "Goron Race Pot 09": "true"
+    "Goron Race Pot 10": "true"
+    "Goron Race Pot 11": "true"
+    "Goron Race Pot 12": "true"
+    "Goron Race Pot 13": "true"
+    "Goron Race Pot 14": "true"
+    "Goron Race Pot 15": "true"
+    "Goron Race Pot 16": "true"
+    "Goron Race Pot 17": "true"
+    "Goron Race Pot 18": "true"
+    "Goron Race Pot 19": "true"
+    "Goron Race Pot 20": "true"
+    "Goron Race Pot 21": "true"
+    "Goron Race Pot 22": "true"
+    "Goron Race Pot 23": "true"
+    "Goron Race Pot 24": "true"
+    "Goron Race Pot 25": "true"
+    "Goron Race Pot 26": "true"
+    "Goron Race Pot 27": "true"
+    "Goron Race Pot 28": "true"
+    "Goron Race Pot 29": "true"
+    "Goron Race Pot 30": "true"
 "Milk Road":
   region: MILK_ROAD
   exits:
@@ -1642,6 +1675,7 @@
     "Ikana Graveyard": "true"
   locations:
     "Road to Ikana Stone Mask": "can_use_lens_strict && has_red_or_blue_potion"
+    "Road to Ikana Pot": "scarecrow_hookshot"
   gossip:
     "Road to Ikana Gossip": "true"
 "Ikana Graveyard":
@@ -1839,6 +1873,9 @@
   exits:
     "Ikana Canyon": "true"
     "Stone Tower Top": "(can_use_elegy3 || (can_use_elegy2 && trick(MM_ONE_MASK_STONE_TOWER))) && can_hookshot"
+  locations:
+    "Stone Tower Pot Climb 1": "can_hookshot"
+    "Stone Tower Pot Climb 2": "can_hookshot"
 "Stone Tower Top":
   region: STONE_TOWER
   exits:
@@ -1851,6 +1888,32 @@
     BOMBS: "true"
     ARROWS: "true"
     RUPEES: "has_mask_goron"
+  locations:
+    "Stone Tower Pot Owl Statue 1": "true"
+    "Stone Tower Pot Owl Statue 2": "true"
+    "Stone Tower Pot Owl Statue 3": "true"
+    "Stone Tower Pot Owl Statue 4": "true"
+    "Stone Tower Pot Lower Scarecrow 01": "scarecrow_hookshot"
+    "Stone Tower Pot Lower Scarecrow 02": "scarecrow_hookshot"
+    "Stone Tower Pot Lower Scarecrow 03": "scarecrow_hookshot"
+    "Stone Tower Pot Lower Scarecrow 04": "scarecrow_hookshot"
+    "Stone Tower Pot Lower Scarecrow 05": "scarecrow_hookshot"
+    "Stone Tower Pot Lower Scarecrow 06": "scarecrow_hookshot"
+    "Stone Tower Pot Lower Scarecrow 07": "scarecrow_hookshot"
+    "Stone Tower Pot Lower Scarecrow 08": "scarecrow_hookshot"
+    "Stone Tower Pot Lower Scarecrow 09": "scarecrow_hookshot"
+    "Stone Tower Pot Lower Scarecrow 10": "scarecrow_hookshot"
+    "Stone Tower Pot Lower Scarecrow 11": "scarecrow_hookshot"
+    "Stone Tower Pot Lower Scarecrow 12": "scarecrow_hookshot"
+    "Stone Tower Pot Higher Scarecrow 1": "scarecrow_hookshot"
+    "Stone Tower Pot Higher Scarecrow 2": "scarecrow_hookshot"
+    "Stone Tower Pot Higher Scarecrow 3": "scarecrow_hookshot"
+    "Stone Tower Pot Higher Scarecrow 4": "scarecrow_hookshot"
+    "Stone Tower Pot Higher Scarecrow 5": "scarecrow_hookshot"
+    "Stone Tower Pot Higher Scarecrow 6": "scarecrow_hookshot"
+    "Stone Tower Pot Higher Scarecrow 7": "scarecrow_hookshot"
+    "Stone Tower Pot Higher Scarecrow 8": "scarecrow_hookshot"
+    "Stone Tower Pot Higher Scarecrow 9": "scarecrow_hookshot"
 "Stone Tower Front of Temple":
   region: STONE_TOWER
   events:
@@ -1882,3 +1945,8 @@
     "Stone Tower Inverted Chest 1": "true"
     "Stone Tower Inverted Chest 2": "true"
     "Stone Tower Inverted Chest 3": "true"
+    "Stone Tower Inverted Pot 1": "true"
+    "Stone Tower Inverted Pot 2": "true"
+    "Stone Tower Inverted Pot 3": "true"
+    "Stone Tower Inverted Pot 4": "true"
+    "Stone Tower Inverted Pot 5": "true"

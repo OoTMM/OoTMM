@@ -128,6 +128,8 @@ Deku Palace Grotto Chest,                         chest,          NONE,         
 Deku Palace Pot 1,                                pot,            NONE,                   DEKU_PALACE,                0x010f,                     MAGIC_JAR_SMALL
 Deku Palace Pot 2,                                pot,            NONE,                   DEKU_PALACE,                0x0110,                     MAGIC_JAR_SMALL
 Deku Shrine Mask of Scents,                       npc,            BUTLER_RACE,            DEKU_SHRINE,                MASK_SCENTS,                MASK_SCENTS
+Deku Shrine Pot 1,                                pot,            NONE,                   DEKU_SHRINE,                0x000e,                     RUPEE_GREEN
+Deku Shrine Pot 2,                                pot,            NONE,                   DEKU_SHRINE,                0x000f,                     RUPEE_GREEN
 Woodfall Owl Statue,                              npc,            NONE,                   WOODFALL,                   OWL_WOODFALL,               OWL_WOODFALL
 Woodfall Near Owl Chest,                          chest,          NONE,                   WOODFALL,                   0x02,                       RUPEE_RED
 Woodfall Entrance Chest,                          chest,          NONE,                   WOODFALL,                   0x00,                       RUPEE_RED
@@ -172,6 +174,7 @@ Mountain Village Don Gero Mask,                   npc,            NONE,         
 Mountain Village Frog Choir HP,                   npc,            DON_GERO_CHOIR,         MOUNTAIN_VILLAGE_WINTER,    FROG_HEART_PIECE,           HEART_PIECE
 Mountain Village Tunnel Grotto,                   chest,          NONE,                   GROTTOS,                    0x1b,                       RUPEE_RED
 Mountain Village Owl Statue,                      npc,            NONE,                   MOUNTAIN_VILLAGE_WINTER,    OWL_MOUNTAIN_VILLAGE,       OWL_MOUNTAIN_VILLAGE
+Mountain Village Pot,                             pot,            NONE,                   MOUNTAIN_VILLAGE_WINTER,    0x0026,                     FAIRY
 Blacksmith Razor Blade,                           npc,            BLACKSMITH,             BLACKSMITH,                 SWORD_RAZOR,                SWORD
 Blacksmith Gilded Sword,                          npc,            BLACKSMITH,             BLACKSMITH,                 SWORD_GILDED,               SWORD
 Lone Peak Shrine Lens Chest,                      chest,          NONE,                   GROTTOS,                    0x01,                       LENS
@@ -207,6 +210,36 @@ Path to Snowhead Grotto,                          chest,          NONE,         
 Snowhead Great Fairy,                             npc,            NONE,                   FAIRY_FOUNTAIN,             GREAT_FAIRY_MOUNTAIN,       MAGIC_UPGRADE
 Snowhead Owl Statue,                              npc,            NONE,                   FAIRY_FOUNTAIN,             OWL_SNOWHEAD,               OWL_SNOWHEAD
 Goron Race Reward,                                npc,            GORON_RACE,             GORON_RACETRACK,            GORON_RACE,                 BOTTLED_GOLD_DUST
+Goron Race Pot 01,                                pot,            GORON_RACE,             GORON_RACETRACK,            0x0002,                     MAGIC_JAR_LARGE
+Goron Race Pot 02,                                pot,            GORON_RACE,             GORON_RACETRACK,            0x0003,                     MAGIC_JAR_LARGE
+Goron Race Pot 03,                                pot,            GORON_RACE,             GORON_RACETRACK,            0x0004,                     MAGIC_JAR_LARGE
+Goron Race Pot 04,                                pot,            GORON_RACE,             GORON_RACETRACK,            0x0005,                     MAGIC_JAR_LARGE
+Goron Race Pot 05,                                pot,            GORON_RACE,             GORON_RACETRACK,            0x0006,                     MAGIC_JAR_LARGE
+Goron Race Pot 06,                                pot,            GORON_RACE,             GORON_RACETRACK,            0x0007,                     MAGIC_JAR_LARGE
+Goron Race Pot 07,                                pot,            GORON_RACE,             GORON_RACETRACK,            0x0008,                     MAGIC_JAR_LARGE
+Goron Race Pot 08,                                pot,            GORON_RACE,             GORON_RACETRACK,            0x0009,                     MAGIC_JAR_LARGE
+Goron Race Pot 09,                                pot,            GORON_RACE,             GORON_RACETRACK,            0x000a,                     MAGIC_JAR_LARGE
+Goron Race Pot 10,                                pot,            GORON_RACE,             GORON_RACETRACK,            0x000b,                     MAGIC_JAR_LARGE
+Goron Race Pot 11,                                pot,            GORON_RACE,             GORON_RACETRACK,            0x000c,                     MAGIC_JAR_LARGE
+Goron Race Pot 12,                                pot,            GORON_RACE,             GORON_RACETRACK,            0x000d,                     MAGIC_JAR_LARGE
+Goron Race Pot 13,                                pot,            GORON_RACE,             GORON_RACETRACK,            0x000e,                     MAGIC_JAR_LARGE
+Goron Race Pot 14,                                pot,            GORON_RACE,             GORON_RACETRACK,            0x000f,                     MAGIC_JAR_LARGE
+Goron Race Pot 15,                                pot,            GORON_RACE,             GORON_RACETRACK,            0x0010,                     MAGIC_JAR_LARGE
+Goron Race Pot 16,                                pot,            GORON_RACE,             GORON_RACETRACK,            0x0011,                     MAGIC_JAR_LARGE
+Goron Race Pot 17,                                pot,            GORON_RACE,             GORON_RACETRACK,            0x0012,                     MAGIC_JAR_LARGE
+Goron Race Pot 18,                                pot,            GORON_RACE,             GORON_RACETRACK,            0x0013,                     MAGIC_JAR_LARGE
+Goron Race Pot 19,                                pot,            GORON_RACE,             GORON_RACETRACK,            0x0014,                     MAGIC_JAR_LARGE
+Goron Race Pot 20,                                pot,            GORON_RACE,             GORON_RACETRACK,            0x0015,                     MAGIC_JAR_LARGE
+Goron Race Pot 21,                                pot,            GORON_RACE,             GORON_RACETRACK,            0x0016,                     MAGIC_JAR_LARGE
+Goron Race Pot 22,                                pot,            GORON_RACE,             GORON_RACETRACK,            0x0017,                     MAGIC_JAR_LARGE
+Goron Race Pot 23,                                pot,            GORON_RACE,             GORON_RACETRACK,            0x0018,                     MAGIC_JAR_LARGE
+Goron Race Pot 24,                                pot,            GORON_RACE,             GORON_RACETRACK,            0x0019,                     MAGIC_JAR_LARGE
+Goron Race Pot 25,                                pot,            GORON_RACE,             GORON_RACETRACK,            0x001a,                     MAGIC_JAR_LARGE
+Goron Race Pot 26,                                pot,            GORON_RACE,             GORON_RACETRACK,            0x001b,                     MAGIC_JAR_LARGE
+Goron Race Pot 27,                                pot,            GORON_RACE,             GORON_RACETRACK,            0x001c,                     MAGIC_JAR_LARGE
+Goron Race Pot 28,                                pot,            GORON_RACE,             GORON_RACETRACK,            0x001d,                     MAGIC_JAR_LARGE
+Goron Race Pot 29,                                pot,            GORON_RACE,             GORON_RACETRACK,            0x001e,                     MAGIC_JAR_LARGE
+Goron Race Pot 30,                                pot,            GORON_RACE,             GORON_RACETRACK,            0x001f,                     MAGIC_JAR_LARGE
 Milk Road Owl Statue,                             npc,            NONE,                   MILK_ROAD,                  OWL_MILK_ROAD,              OWL_MILK_ROAD
 Romani Ranch Epona Song,                          npc,            NONE,                   ROMANI_RANCH,               SONG_EPONA,                 SONG_EPONA
 Romani Ranch Aliens,                              npc,            RANCH_DEFENSE,          ROMANI_RANCH,               ROMANI_BOTTLE,              BOTTLE_MILK
@@ -317,6 +350,7 @@ Waterfall Rapids Beaver Race 2,                   npc,            NONE,         
 Road to Ikana Chest,                              chest,          NONE,                   ROAD_IKANA,                 0x00,                       RUPEE_RED
 Road to Ikana Grotto,                             chest,          NONE,                   GROTTOS,                    0x16,                       BOMBCHU
 Road to Ikana Stone Mask,                         npc,            NONE,                   ROAD_IKANA,                 MASK_STONE,                 MASK_STONE
+Road to Ikana Pot,                                pot,            NONE,                   ROAD_IKANA,                 0x004c,                     FAIRY
 Gorman Track Garo Mask,                           npc,            NONE,                   GORMAN_TRACK,               MASK_GARO,                  MASK_GARO
 Gorman Track Milk Purchase,                       npc,            NONE,                   GORMAN_TRACK,               GORMAN_MILK,                MILK
 Ikana Graveyard Captain Mask,                     chest,          NONE,                   IKANA_GRAVEYARD,            0x00,                       MASK_CAPTAIN
@@ -356,9 +390,41 @@ Ikana Great Fairy,                                npc,            NONE,         
 Ghost Hut HP,                                     npc,            NONE,                   GHOST_HUT,                  GHOST_HUT_HEART_PIECE,      HEART_PIECE
 Music Box House Gibdo Mask,                       npc,            NONE,                   MUSIC_BOX_HOUSE,            MASK_GIBDO,                 MASK_GIBDO
 Stone Tower Owl Statue,                           npc,            NONE,                   STONE_TOWER,                OWL_STONE_TOWER,            OWL_STONE_TOWER
+Stone Tower Pot Lower Scarecrow 01,               pot,            NONE,                   STONE_TOWER,                0x0027,                     MAGIC_JAR_SMALL
+Stone Tower Pot Lower Scarecrow 02,               pot,            NONE,                   STONE_TOWER,                0x0028,                     RECOVERY_HEART
+Stone Tower Pot Lower Scarecrow 03,               pot,            NONE,                   STONE_TOWER,                0x0029,                     MAGIC_JAR_SMALL
+Stone Tower Pot Lower Scarecrow 04,               pot,            NONE,                   STONE_TOWER,                0x002a,                     FAIRY
+Stone Tower Pot Lower Scarecrow 05,               pot,            NONE,                   STONE_TOWER,                0x002b,                     RECOVERY_HEART
+Stone Tower Pot Lower Scarecrow 06,               pot,            NONE,                   STONE_TOWER,                0x002c,                     FAIRY
+Stone Tower Pot Lower Scarecrow 07,               pot,            NONE,                   STONE_TOWER,                0x002d,                     NOTHING
+Stone Tower Pot Lower Scarecrow 08,               pot,            NONE,                   STONE_TOWER,                0x002e,                     RECOVERY_HEART
+Stone Tower Pot Lower Scarecrow 09,               pot,            NONE,                   STONE_TOWER,                0x002f,                     NOTHING
+Stone Tower Pot Lower Scarecrow 10,               pot,            NONE,                   STONE_TOWER,                0x0030,                     NOTHING
+Stone Tower Pot Lower Scarecrow 11,               pot,            NONE,                   STONE_TOWER,                0x0031,                     RECOVERY_HEART
+Stone Tower Pot Lower Scarecrow 12,               pot,            NONE,                   STONE_TOWER,                0x003b,                     MAGIC_JAR_SMALL
+Stone Tower Pot Higher Scarecrow 1,               pot,            NONE,                   STONE_TOWER,                0x0032,                     RECOVERY_HEART
+Stone Tower Pot Higher Scarecrow 2,               pot,            NONE,                   STONE_TOWER,                0x0033,                     FAIRY
+Stone Tower Pot Higher Scarecrow 3,               pot,            NONE,                   STONE_TOWER,                0x0034,                     NOTHING
+Stone Tower Pot Higher Scarecrow 4,               pot,            NONE,                   STONE_TOWER,                0x0035,                     MAGIC_JAR_SMALL
+Stone Tower Pot Higher Scarecrow 5,               pot,            NONE,                   STONE_TOWER,                0x0036,                     ARROWS_10
+Stone Tower Pot Higher Scarecrow 6,               pot,            NONE,                   STONE_TOWER,                0x0037,                     RECOVERY_HEART
+Stone Tower Pot Higher Scarecrow 7,               pot,            NONE,                   STONE_TOWER,                0x0038,                     MAGIC_JAR_SMALL
+Stone Tower Pot Higher Scarecrow 8,               pot,            NONE,                   STONE_TOWER,                0x0039,                     NOTHING
+Stone Tower Pot Higher Scarecrow 9,               pot,            NONE,                   STONE_TOWER,                0x003a,                     ARROWS_10
+Stone Tower Pot Climb 1,                          pot,            NONE,                   STONE_TOWER,                0x003c,                     RECOVERY_HEART
+Stone Tower Pot Climb 2,                          pot,            NONE,                   STONE_TOWER,                0x003d,                     RECOVERY_HEART
+Stone Tower Pot Owl Statue 1,                     pot,            NONE,                   STONE_TOWER,                0x003e,                     BOMBS_5
+Stone Tower Pot Owl Statue 2,                     pot,            NONE,                   STONE_TOWER,                0x003f,                     ARROWS_20
+Stone Tower Pot Owl Statue 3,                     pot,            NONE,                   STONE_TOWER,                0x0040,                     FAIRY
+Stone Tower Pot Owl Statue 4,                     pot,            NONE,                   STONE_TOWER,                0x0041,                     MAGIC_JAR_LARGE
 Stone Tower Inverted Chest 1,                     chest,          NONE,                   STONE_TOWER_INVERTED,       0x1d,                       RUPEE_SILVER
 Stone Tower Inverted Chest 2,                     chest,          NONE,                   STONE_TOWER_INVERTED,       0x1e,                       BOMBCHU_10
 Stone Tower Inverted Chest 3,                     chest,          NONE,                   STONE_TOWER_INVERTED,       0x1f,                       MAGIC_BEAN
+Stone Tower Inverted Pot 1,                       pot,            NONE,                   STONE_TOWER_INVERTED,       0x0008,                     RECOVERY_HEART
+Stone Tower Inverted Pot 2,                       pot,            NONE,                   STONE_TOWER_INVERTED,       0x0009,                     MAGIC_JAR_LARGE
+Stone Tower Inverted Pot 3,                       pot,            NONE,                   STONE_TOWER_INVERTED,       0x000a,                     FAIRY
+Stone Tower Inverted Pot 4,                       pot,            NONE,                   STONE_TOWER_INVERTED,       0x000b,                     BOMBS_5
+Stone Tower Inverted Pot 5,                       pot,            NONE,                   STONE_TOWER_INVERTED,       0x000c,                     RECOVERY_HEART
 Oath to Order,                                    npc,            NONE,                   LAIR_ODOLWA,                SONG_ORDER,                 SONG_ORDER
 Woodfall Temple Entrance Chest,                   chest,          NONE,                   TEMPLE_WOODFALL,            0x18,                       STRAY_FAIRY_WF
 Woodfall Temple Water Chest,                      chest,          NONE,                   TEMPLE_WOODFALL,            0x01,                       SMALL_KEY_WF
@@ -454,6 +520,14 @@ Great Bay Temple SF Pre-Boss Above Water,         sf,             NONE,         
 Great Bay Temple SF Pre-Boss Underwater,          sf,             NONE,                   TEMPLE_GREAT_BAY,           0x2f,                       STRAY_FAIRY_GB
 Great Bay Temple Boss HC,                         collectible,    NONE,                   LAIR_GYORG,                 0x1f,                       HEART_CONTAINER
 Great Bay Temple Boss,                            npc,            NONE,                   LAIR_GYORG,                 REMAINS_GYORG,              REMAINS_GYORG
+Great Bay Temple Boss Pot 1,                      pot,            NONE,                   LAIR_GYORG,                 0x0001,                     ARROWS_10
+Great Bay Temple Boss Pot 2,                      pot,            NONE,                   LAIR_GYORG,                 0x0002,                     ARROWS_10
+Great Bay Temple Boss Pot 3,                      pot,            NONE,                   LAIR_GYORG,                 0x0003,                     ARROWS_10
+Great Bay Temple Boss Pot 4,                      pot,            NONE,                   LAIR_GYORG,                 0x0004,                     ARROWS_10
+Great Bay Temple Boss Pot Underwater 1,           pot,            NONE,                   LAIR_GYORG,                 0x0005,                     MAGIC_JAR_LARGE
+Great Bay Temple Boss Pot Underwater 2,           pot,            NONE,                   LAIR_GYORG,                 0x0006,                     MAGIC_JAR_LARGE
+Great Bay Temple Boss Pot Underwater 3,           pot,            NONE,                   LAIR_GYORG,                 0x0007,                     MAGIC_JAR_LARGE
+Great Bay Temple Boss Pot Underwater 4,           pot,            NONE,                   LAIR_GYORG,                 0x0008,                     MAGIC_JAR_LARGE
 Beneath The Well Skulltulla Chest,                chest,          NONE,                   BENEATH_THE_WELL,           0x01,                       RUPEE_PURPLE
 Beneath The Well Keese Chest,                     chest,          NONE,                   BENEATH_THE_WELL,           0x02,                       RUPEE_PURPLE
 Beneath The Well Mirror Shield,                   chest,          NONE,                   BENEATH_THE_WELL,           0x1b,                       SHIELD_MIRROR
@@ -464,6 +538,14 @@ Beneath The Well Pot 3,                           pot,            NONE,         
 Beneath The Well Pot 4,                           pot,            NONE,                   BENEATH_THE_WELL,           0x0c08,                     ARROWS_10
 Ancient Castle of Ikana HP,                       collectible,    NONE,                   CASTLE_IKANA,               0x0a,                       HEART_PIECE
 Ancient Castle of Ikana Song Emptiness,           npc,            SONG_ELEGY,             LAIR_IKANA,                 SONG_EMPTINESS,             SONG_EMPTINESS
+Ancient Castle of Ikana Boss Pot 1,               pot,            NONE,                   LAIR_IKANA,                 0x0002,                     ARROWS_10
+Ancient Castle of Ikana Boss Pot 2,               pot,            NONE,                   LAIR_IKANA,                 0x0003,                     ARROWS_10
+Ancient Castle of Ikana Boss Pot 3,               pot,            NONE,                   LAIR_IKANA,                 0x0004,                     MAGIC_JAR_SMALL
+Ancient Castle of Ikana Boss Pot 4,               pot,            NONE,                   LAIR_IKANA,                 0x0005,                     RECOVERY_HEART
+Ancient Castle of Ikana Boss Pot 5,               pot,            NONE,                   LAIR_IKANA,                 0x0105,                     ARROWS_10
+Ancient Castle of Ikana Boss Pot 6,               pot,            NONE,                   LAIR_IKANA,                 0x0106,                     MAGIC_JAR_LARGE
+Ancient Castle of Ikana Boss Pot 7,               pot,            NONE,                   LAIR_IKANA,                 0x0107,                     RECOVERY_HEART
+Ancient Castle of Ikana Boss Pot 8,               pot,            NONE,                   LAIR_IKANA,                 0x0108,                     ARROWS_10
 Stone Tower Temple Entrance Chest,                chest,          NONE,                   TEMPLE_STONE_TOWER,         0x16,                       STRAY_FAIRY_ST
 Stone Tower Temple Entrance Switch Chest,         chest,          NONE,                   TEMPLE_STONE_TOWER,         0x12,                       STRAY_FAIRY_ST
 Stone Tower Temple Under West Garden Ledge Chest, chest,          NONE,                   TEMPLE_STONE_TOWER,         0x15,                       STRAY_FAIRY_ST
@@ -495,6 +577,15 @@ Secret Shrine Wizzrobe Chest,                     chest,          NONE,         
 Secret Shrine Wart Chest,                         chest,          SECRET_SHRINE_WART_HP,  SECRET_SHRINE,              0x02,                       RUPEE_SILVER
 Secret Shrine Garo Master Chest,                  chest,          NONE,                   SECRET_SHRINE,              0x03,                       RUPEE_SILVER
 Secret Shrine HP Chest,                           chest,          SECRET_SHRINE_WART_HP,  SECRET_SHRINE,              0x0a,                       HEART_PIECE
+Secret Shrine Pot 1,                              pot,            NONE,                   SECRET_SHRINE,              0x0017,                     RECOVERY_HEART
+Secret Shrine Pot 2,                              pot,            NONE,                   SECRET_SHRINE,              0x0018,                     ARROWS_10
+Secret Shrine Pot 3,                              pot,            NONE,                   SECRET_SHRINE,              0x0019,                     MAGIC_JAR_SMALL
+Secret Shrine Pot 4,                              pot,            NONE,                   SECRET_SHRINE,              0x0106,                     MAGIC_JAR_SMALL
+Secret Shrine Pot 5,                              pot,            NONE,                   SECRET_SHRINE,              0x0107,                     RECOVERY_HEART
+Secret Shrine Pot 6,                              pot,            NONE,                   SECRET_SHRINE,              0x0108,                     ARROWS_10
+Secret Shrine Pot 7,                              pot,            NONE,                   SECRET_SHRINE,              0x0109,                     ARROWS_10
+Secret Shrine Pot 8,                              pot,            NONE,                   SECRET_SHRINE,              0x010a,                     MAGIC_JAR_SMALL
+Secret Shrine Pot 9,                              pot,            NONE,                   SECRET_SHRINE,              0x010b,                     FAIRY
 Sakon Hideout Pot Second Room 1,                  pot,            NONE,                   SAKON_HIDEOUT,              0x0127,                     RECOVERY_HEART
 Sakon Hideout Pot Second Room 2,                  pot,            NONE,                   SAKON_HIDEOUT,              0x0128,                     RECOVERY_HEART
 Sakon Hideout Pot First Room 1,                   pot,            NONE,                   SAKON_HIDEOUT,              0x0129,                     RECOVERY_HEART
@@ -521,6 +612,14 @@ Moon Trial Zora HP,                               collectible,    NONE,         
 Moon Trial Link Garo Master Chest,                chest,          NONE,                   MOON_LINK,                  0x01,                       ARROWS_30
 Moon Trial Link Iron Knuckle Chest,               chest,          NONE,                   MOON_LINK,                  0x02,                       BOMBCHU_10
 Moon Trial Link HP,                               collectible,    NONE,                   MOON_LINK,                  0x01,                       HEART_PIECE
+Moon Trial Link Pot 1,                            pot,            NONE,                   MOON_LINK,                  0x0001,                     RECOVERY_HEART
+Moon Trial Link Pot 2,                            pot,            NONE,                   MOON_LINK,                  0x0002,                     RECOVERY_HEART
+Moon Trial Link Pot 3,                            pot,            NONE,                   MOON_LINK,                  0x0003,                     RECOVERY_HEART
+Moon Trial Link Pot 4,                            pot,            NONE,                   MOON_LINK,                  0x0004,                     RECOVERY_HEART
+Moon Trial Link Pot 5,                            pot,            NONE,                   MOON_LINK,                  0x0005,                     MAGIC_JAR_LARGE
+Moon Trial Link Pot 6,                            pot,            NONE,                   MOON_LINK,                  0x0006,                     MAGIC_JAR_LARGE
+Moon Trial Link Pot 7,                            pot,            NONE,                   MOON_LINK,                  0x0007,                     MAGIC_JAR_LARGE
+Moon Trial Link Pot 8,                            pot,            NONE,                   MOON_LINK,                  0x0008,                     MAGIC_JAR_LARGE
 Moon Fierce Deity Mask,                           npc,            NONE,                   MOON_LINK,                  MASK_FIERCE_DEITY,          MASK_FIERCE_DEITY
 Moon Majora Pot 1,                                pot,            NONE,                   LAIR_MAJORA,                0x0001,                     ARROWS_20
 Moon Majora Pot 2,                                pot,            NONE,                   LAIR_MAJORA,                0x0002,                     MAGIC_JAR_LARGE

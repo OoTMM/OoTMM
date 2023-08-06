@@ -82,6 +82,15 @@
   exits:
     "Moon": "true"
     "Moon Trial Link Dinalfos Fight": "true"
+  locations:
+    "Moon Trial Link Pot 1": "true"
+    "Moon Trial Link Pot 2": "true"
+    "Moon Trial Link Pot 3": "true"
+    "Moon Trial Link Pot 4": "true"
+    "Moon Trial Link Pot 5": "true"
+    "Moon Trial Link Pot 6": "true"
+    "Moon Trial Link Pot 7": "true"
+    "Moon Trial Link Pot 8": "true"
 "Moon Trial Link Dinalfos Fight":
   region: MOON
   exits:

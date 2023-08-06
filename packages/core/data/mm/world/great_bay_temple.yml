@@ -137,6 +137,15 @@
   dungeon: GB
   exits:
     "Great Bay Temple After Boss": "soul(SOUL_GYORG) && ((has_magic && ((has_mask_zora && has_arrows) || has(MASK_FIERCE_DEITY))))"
+  locations:
+    "Great Bay Temple Boss Pot 1": "true"
+    "Great Bay Temple Boss Pot 2": "true"
+    "Great Bay Temple Boss Pot 3": "true"
+    "Great Bay Temple Boss Pot 4": "true"
+    "Great Bay Temple Boss Pot Underwater 1": "has_mask_zora"
+    "Great Bay Temple Boss Pot Underwater 2": "has_mask_zora"
+    "Great Bay Temple Boss Pot Underwater 3": "has_mask_zora"
+    "Great Bay Temple Boss Pot Underwater 4": "has_mask_zora"
 "Great Bay Temple After Boss":
   boss: true
   dungeon: GB
