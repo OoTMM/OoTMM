@@ -72,5 +72,6 @@ MiscFlags;
 #define gOotSouls2                  SAVE_EXTRA_RECORD(u32,              29)
 #define gMmSouls1                   SAVE_EXTRA_RECORD(u32,              30)
 #define gMmSouls2                   SAVE_EXTRA_RECORD(u32,              31)
+#define gTriforceCount              SAVE_EXTRA_RECORD(u32,              32)
 
 #endif

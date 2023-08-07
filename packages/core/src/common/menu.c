@@ -675,7 +675,7 @@ static void printDungeonData(GameState_Play* play, int base, int index)
             /* Triforce */
             gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 255, 255, 255, 255);
             drawTexRGBA32(play, 0x06000000 | CUSTOM_KEEP_SMALL_ICON_TRIFORCE, 12, 12, x + 104.f, y);
-            printNumColored(play, gOotExtraFlags.triforceCount, triforceMax, triforceDigits, x + 116.f, y, 1);
+            printNumColored(play, gTriforceCount, triforceMax, triforceDigits, x + 116.f, y, 1);
             break;
         }
     }

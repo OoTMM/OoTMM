@@ -37,8 +37,6 @@ PATCH_FUNC(0x809313d8, EnTuboTrap_Draw);
 
 void EnTuboTrap_SpawnShuffledDrop(Actor_EnTuboTrap* this, GameState_Play* play)
 {
-    u16 var;
-
     if (comboXflagsGet(&this->xflag))
     {
         /* Already spawned */

@@ -132,8 +132,8 @@ typedef struct
     u16             giZoraSapphire;
     u8              boss[12];
     u8              dungeons[25];
-    u8              triforcePieces;
-    u8              triforceGoal;
+    u16             triforcePieces;
+    u16             triforceGoal;
 }
 ComboData;
 

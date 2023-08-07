@@ -543,7 +543,7 @@ export const randomizerHints = (world: number, logic: LogicResult): Buffer => {
 
 const randomizerBoss = (worldId: number, logic: LogicResult): Buffer => toU8Buffer(logic.worlds[worldId].bossIds);
 const randomizerDungeons = (worldId: number, logic: LogicResult): Buffer => toU8Buffer(logic.worlds[worldId].dungeonIds);
-const randomizerTriforce = (logic: LogicResult): Buffer => toU8Buffer([logic.settings.triforcePieces, logic.settings.triforceGoal]);
+const randomizerTriforce = (logic: LogicResult): Buffer => toU16Buffer([logic.settings.triforcePieces, logic.settings.triforceGoal]);
 
 function specialConds(settings: Settings) {
   const buffers: Buffer[] = [];

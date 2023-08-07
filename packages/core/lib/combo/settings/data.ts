@@ -71,8 +71,8 @@ export const SETTINGS = [{
   description: 'The total amount of Triforce Pieces in the item pool.',
   default: 30,
   cond: (s: any) => s.goal === 'triforce',
-  min: 2,
-  max: 100
+  min: 1,
+  max: 999,
 }, {
   key: 'logic',
   name: 'Logic',
