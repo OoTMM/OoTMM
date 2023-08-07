@@ -325,6 +325,7 @@ function checkKey(check: WorldCheck): number {
   case 'collectible':
   case 'sf':
   case 'pot':
+  case 'grass':
     sceneId = DATA_SCENES[check.scene];
     if (sceneId === undefined) {
       throw new Error(`Unknown scene ${check.scene}`);

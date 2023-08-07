@@ -410,6 +410,13 @@ export const SETTINGS = [{
   description: 'Controls whether or not the pots are shuffled (MM).',
   default: false
 }, {
+  key: 'shuffleGrassOot',
+  name: 'Grass Shuffle (OoT)',
+  category: 'main.shuffle',
+  type: 'boolean',
+  description: 'Controls whether or not the grass is shuffled (OoT)',
+  default: false
+}, {
   key: 'shuffleOcarinasOot',
   name: 'Ocarina Shuffle (OoT)',
   category: 'main.shuffle',
