@@ -1,5 +1,7 @@
 #include <combo.h>
 #include <combo/custom.h>
+#include <combo/item.h>
+#include <combo/csmc.h>
 
 void EnTuboTrap_InitWrapper(Actor_EnTuboTrap* this, GameState_Play* play)
 {
@@ -35,49 +37,16 @@ void EnTuboTrap_SpawnShuffledDrop(Actor_EnTuboTrap* this, GameState_Play* play)
     DropCustomItem(play, &this->base.position, &this->xflag);
 }
 
-static const Gfx kDrawListNormalDangeonTop[] = {
-    gsDPLoadTextureBlock(0x050118A0, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, 4, 4, 0, 0),
-    gsSPEndDisplayList(),
-};
-
-static const Gfx kDrawListNormalDangeonSide[] = {
-    gsDPLoadTextureBlock(0x050108A0, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 64, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 5, 6, 0, 0),
-    gsSPEndDisplayList(),
-};
-
-static const Gfx kDrawListMajorTop[] = {
-    gsDPLoadTextureBlock(0x09000000 | CUSTOM_KEEP_POT_MAJOR_TOP, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, 4, 4, 0, 0),
-    gsSPEndDisplayList(),
-};
-
-static const Gfx kDrawListMajorSide[] = {
-    gsDPLoadTextureBlock(0x09000000 | CUSTOM_KEEP_POT_MAJOR_SIDE, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 64, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 5, 6, 0, 0),
-    gsSPEndDisplayList(),
-};
-
 static void EnTuboTrap_Draw(Actor_EnTuboTrap* this, GameState_Play* play)
 {
-    const void* dlistSide;
-    const void* dlistTop;
+    ComboItemOverride o;
 
-    /* Checks flag and dangeon_keep */
     if (comboConfig(CFG_OOT_SHUFFLE_POTS) && !comboXflagsGet(&this->xflag))
-    {
-        dlistSide = kDrawListMajorSide;
-        dlistTop = kDrawListMajorTop;
-    }
+        comboXflagItemOverride(&o, &this->xflag, 0);
     else
-    {
-        dlistSide = kDrawListNormalDangeonSide;
-        dlistTop = kDrawListNormalDangeonTop;
-    }
+        o.gi = 0;
 
-    /* Setup the textures */
-    OPEN_DISPS(play->gs.gfx);
-    gSPSegment(POLY_OPA_DISP++, 0x09, gCustomKeep);
-    gSPSegment(POLY_OPA_DISP++, 0x0a, dlistSide);
-    gSPSegment(POLY_OPA_DISP++, 0x0b, dlistTop);
-    CLOSE_DISPS();
+    csmcPotPreDraw(&this->base, play, o.gi, CSMC_POT_NORMAL_DANGEON);
 
     /* Draw the pot */
     DrawSimpleOpa(play, 0x5017870);

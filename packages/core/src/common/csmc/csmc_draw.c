@@ -19,7 +19,18 @@ static int log2Pot(int pot)
     UNREACHABLE();
 }
 
-void* csmcLoadTexture(u32 addr, int fmt, int bpp, int w, int h, int mirror)
+static u32 csmcResolveTexture(u8 custom, u32 seg)
+{
+    void* addr;
+
+    if (!custom)
+        return seg;
+
+    addr = comboCacheGetFile(seg);
+    return ((u32)addr - 0x80000000);
+}
+
+void* csmcLoadTexture(u8 custom, u32 addr, int fmt, int bpp, int w, int h, int mirror)
 {
     Gfx buffer[16];
     Gfx* dlist;
@@ -28,6 +39,7 @@ void* csmcLoadTexture(u32 addr, int fmt, int bpp, int w, int h, int mirror)
     int l2h;
     int mirrorFlag;
 
+    addr = csmcResolveTexture(custom, addr);
     dlist = buffer;
     l2w = log2Pot(w);
     l2h = log2Pot(h);

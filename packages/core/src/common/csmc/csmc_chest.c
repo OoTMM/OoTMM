@@ -43,17 +43,6 @@ static const ChestCsmcData kCsmcData[] = {
     { 0, CHEST_TEX_BOSS_KEY_FRONT, CHEST_TEX_BOSS_KEY_SIDE },
 };
 
-static u32 resolveTexture(u8 custom, u32 seg)
-{
-    void* addr;
-
-    if (!custom)
-        return seg;
-
-    addr = comboCacheGetFile(seg);
-    return ((u32)addr - 0x80000000);
-}
-
 static int csmcChestId(s16 gi)
 {
     int csmcId;
@@ -143,8 +132,8 @@ void csmcChestPreDraw(Actor* this, GameState_Play* play, s16 gi)
     else
         type = CSMC_CHEST_NORMAL;
 
-    listFront = csmcLoadTexture(resolveTexture(kCsmcData[type].custom, kCsmcData[type].segFront), G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 64, 1);
-    listSide = csmcLoadTexture(resolveTexture(kCsmcData[type].custom, kCsmcData[type].segSide), G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 1);
+    listFront = csmcLoadTexture(kCsmcData[type].custom, kCsmcData[type].segFront, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 64, 1);
+    listSide = csmcLoadTexture(kCsmcData[type].custom, kCsmcData[type].segSide, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 1);
 
     OPEN_DISPS(play->gs.gfx);
     gSPSegment(POLY_OPA_DISP++, 0x0a, listFront);

@@ -12,11 +12,16 @@
 #define CSMC_HEART      0x06
 #define CSMC_SOUL       0x07
 
+#define CSMC_POT_NORMAL             0x00
+#define CSMC_POT_NORMAL_DANGEON     0x01
+#define CSMC_POT_MAGIC              0x02
+#define CSMC_POT_MAJOR              0x03
+
 typedef struct GameState_Play GameState_Play;
 typedef struct Actor Actor;
 
 /* Generic */
-void*   csmcLoadTexture(u32 addr, int fmt, int bpp, int w, int h, int mirror);
+void*   csmcLoadTexture(u8 custom, u32 addr, int fmt, int bpp, int w, int h, int mirror);
 int     csmcFromItem(s16 gi);
 int     csmcEnabled(void);
 
@@ -24,5 +29,8 @@ int     csmcEnabled(void);
 void    csmcChestInit(Actor* this, GameState_Play* play, s16 gi);
 void    csmcChestPreDraw(Actor* this, GameState_Play* play, s16 gi);
 int     csmcChestLarge(s16 gi);
+
+/* Pots */
+void csmcPotPreDraw(Actor* this, GameState_Play* play, s16 gi, int def);
 
 #endif

@@ -86,12 +86,12 @@ export const customFiles = async (opts: Options): Promise<{[k: string]: Buffer}>
   CHEST_FAIRY_SIDE: await png(opts, 'chest_side_fairy', 'rgba16'),
   CHEST_HEART_FRONT: await png(opts, 'chest_front_heart', 'rgba16'),
   CHEST_HEART_SIDE: await png(opts, 'chest_side_heart', 'rgba16'),
+  POT_MAJOR_SIDE: await png(opts, 'pots/side_major', 'rgba16'),
+  POT_MAJOR_TOP: await png(opts, 'pots/top_major', 'rgba16'),
 });
 
 export const customAssetsKeep = async (opts: Options): Promise<{[k: string]: Buffer}> => ({
   DPAD: await png(opts, 'dpad', 'rgba32'),
-  POT_MAJOR_SIDE: await png(opts, 'pots/side_major', 'rgba16'),
-  POT_MAJOR_TOP: await png(opts, 'pots/top_major', 'rgba16'),
   FONT: await font(opts, 'font_8x12'),
   SMALL_ICON_KEY: await png(opts, 'small_icon_key', 'rgba32'),
   SMALL_ICON_BOSS_KEY: await png(opts, 'small_icon_boss_key', 'rgba32'),
