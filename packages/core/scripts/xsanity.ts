@@ -4,6 +4,8 @@ import { CodeGen } from '../lib/combo/util/codegen';
 import { decompressGame } from '../lib/combo/decompress';
 import { CONFIG } from '../lib/combo/config';
 
+const SLICES = 12;
+
 /* OOT Grass Scatter: 12 */
 
 type Game = 'oot' | 'mq' | 'mm';
@@ -84,12 +86,21 @@ const MM_SCENES_WITH_EXTRA_SETUPS: {[k: number]: number} = {
 const ACTORS_OOT = {
   POT: 0x111,
   FLYING_POT: 0x11d,
+  ROCK_BUSH_GROUP: 0x151,
 };
 
 const ACTORS_MM = {
   POT: 0x82,
   FLYING_POT: 0x8d,
 };
+
+const ACTOR_SLICES_OOT = {
+  [ACTORS_OOT.ROCK_BUSH_GROUP]: 12,
+}
+
+const ACTOR_SLICES_MM: {[k: number]: number} = {
+
+}
 
 const INTERESTING_ACTORS_OOT = Object.values(ACTORS_OOT);
 const INTERESTING_ACTORS_MM = Object.values(ACTORS_MM);
@@ -99,16 +110,19 @@ const CONFIGS = {
     SCENE_TABLE_ADDR: 0xb71440,
     SCENE_TABLE_SIZE: 101,
     INTERESTING_ACTORS: INTERESTING_ACTORS_OOT,
+    SLICES: ACTOR_SLICES_OOT,
   },
   mq: {
     SCENE_TABLE_ADDR: 0xba0bb0,
     SCENE_TABLE_SIZE: 101,
     INTERESTING_ACTORS: INTERESTING_ACTORS_OOT,
+    SLICES: ACTOR_SLICES_OOT,
   },
   mm: {
     SCENE_TABLE_ADDR: 0x00C5A1E0,
     SCENE_TABLE_SIZE: 113,
     INTERESTING_ACTORS: INTERESTING_ACTORS_MM,
+    SLICES: ACTOR_SLICES_MM,
   }
 }
 
@@ -180,6 +194,13 @@ type AddressingTable = {
   bitCount: number;
 }
 
+function sliceSize(game: Game, a: Actor) {
+  const conf = CONFIGS[game];
+  if (!conf.INTERESTING_ACTORS.includes(a.typeId))
+    return 0;
+  return conf.SLICES[a.typeId] || 1;
+}
+
 function sortRoomActors(roomActors: RoomActors[]) {
   return roomActors.sort((a, b) => {
     if (a.sceneId !== b.sceneId)
@@ -205,7 +226,9 @@ function mergeRooms(a: RoomActors, b: RoomActors): RoomActors {
     const actorA = a.actors[i];
     const actorB = b.actors[i];
 
-    if (CONFIGS.oot.INTERESTING_ACTORS.includes(actorA.typeId)) {
+    const sliceSizeA = sliceSize('oot', actorA);
+    const sliceSizeB = sliceSize('oot', actorB);
+    if (sliceSizeA > sliceSizeB) {
       actors[i] = { ...actorA };
     } else {
       actors[i] = { ...actorB };
@@ -243,13 +266,8 @@ function buildAddressingTable(game: Game, roomActors: RoomActors[]): AddressingT
   let setupsTable: number[] = [];
   let roomsTable: number[] = [];
   let bits = 0;
+
   for (const roomActor of roomActors) {
-    /* We need bits starting at the first useful actor */
-    let firstBit = roomActor.actors.findIndex(x => CONFIGS[game].INTERESTING_ACTORS.includes(x.typeId));
-    if (firstBit === -1) {
-      firstBit = 0;
-    }
-    const bitCount = roomActor.actors.length - firstBit;
     /* If it's a new scene, push the offset to the setups table */
     while (sceneId < roomActor.sceneId) {
       sceneId++;
@@ -265,14 +283,33 @@ function buildAddressingTable(game: Game, roomActors: RoomActors[]): AddressingT
       roomId = -1;
     }
 
-    /* Push the bit pos */
-    while (roomId < roomActor.roomId) {
-      roomId++;
-      roomsTable.push(bits - firstBit);
-    }
+    for (let slice = 0; slice < SLICES; ++slice) {
+      /* We need bits starting at the first useful actor */
+      const pred = (a: Actor) => sliceSize(game, a) > slice;
+      let firstBit = roomActor.actors.findIndex(pred);
+      if (firstBit === -1) {
+        firstBit = 0;
+      }
+      let lastBit = roomActor.actors.findLastIndex(pred);
+      if (lastBit === -1) {
+        lastBit = 0;
+      } else {
+        lastBit += 1;
+      }
+      const bitCount = lastBit - firstBit;
 
-    /* Allocate bits */
-    bits += bitCount;
+      /* Push the bit pos */
+      while (roomId < roomActor.roomId * SLICES + slice) {
+        roomId++;
+        roomsTable.push(bits - firstBit);
+      }
+
+      /* Push the bit pos */
+      roomsTable.push(bits - firstBit);
+
+      /* Allocate bits */
+      bits += bitCount;
+    }
   }
 
   return { scenesTable, setupsTable, roomsTable, bitCount: bits };

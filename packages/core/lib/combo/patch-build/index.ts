@@ -75,8 +75,8 @@ export function buildPatchfiles(args: BuildPatchfileIn): Patchfile[] {
 
     /* Pack the payload */
     const payload = args.build[game].payload;
-    if (payload.length > (game === 'mm' ? 0x30000 : 0x40000)) {
-      throw new Error("Payload too large");
+    if (payload.length > (game === 'mm' ? 0x40000 : 0x40000)) {
+      throw new Error(`Payload too large ${game}`);
     }
     file.addNewFile(game === 'oot' ? 0xf0000000 : 0xf0100000, payload, false);
   }

@@ -2,7 +2,7 @@
 
 /* Resize */
 PATCH_START 0x80a786f8
-.int 0x1a0
+.int 0x1a4
 PATCH_END
 
 /* Hook the init func */

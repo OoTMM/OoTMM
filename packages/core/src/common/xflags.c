@@ -4,7 +4,12 @@
 
 u16 comboXflagsBitPosLookup(const Xflag* xf)
 {
-    return kXflagsTableRooms[kXflagsTableSetups[kXflagsTableScenes[xf->sceneId] + xf->setupId] + xf->roomId] + xf->id;
+    u16 setupIndex;
+    u16 roomIndex;
+
+    setupIndex = kXflagsTableScenes[xf->sceneId] + xf->setupId;
+    roomIndex = kXflagsTableSetups[setupIndex] + (xf->roomId * 12) + xf->sliceId;
+    return kXflagsTableRooms[roomIndex] + xf->id;
 }
 
 int comboXflagsGet(const Xflag* xf)
@@ -26,7 +31,7 @@ void comboXflagsSet(const Xflag* xf)
 void comboXflagItemQuery(ComboItemQuery* q, const Xflag* xf, s16 gi)
 {
     bzero(q, sizeof(*q));
-    q->ovType = OV_EXTENDED;
+    q->ovType = OV_XFLAG0 + xf->sliceId;
     q->sceneId = xf->sceneId;
     q->roomId = (xf->roomId | ((xf->setupId & 3) << 6));
     q->id = xf->id;
