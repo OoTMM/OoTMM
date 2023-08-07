@@ -28,6 +28,9 @@ static const CsmcPotData kCsmcData[] = {
     { 0, POT_TEX_NORMAL_DANGEON_SIDE, POT_TEX_NORMAL_DANGEON_TOP },
     { 0, POT_TEX_MAGIC_SIDE, POT_TEX_MAGIC_TOP },
     { 1, CUSTOM_POT_MAJOR_SIDE_ADDR, CUSTOM_POT_MAJOR_TOP_ADDR },
+    { 1, CUSTOM_POT_SPIDER_SIDE_ADDR, CUSTOM_POT_SPIDER_TOP_ADDR },
+    { 1, CUSTOM_POT_FAIRY_SIDE_ADDR, CUSTOM_POT_SPIDER_TOP_ADDR },
+    { 1, CUSTOM_POT_KEY_SIDE_ADDR, CUSTOM_POT_SPIDER_TOP_ADDR },
 };
 
 static int csmcPotId(s16 gi, int def)
@@ -44,10 +47,10 @@ static int csmcPotId(s16 gi, int def)
     {
     case CSMC_NORMAL:       return def;
     case CSMC_MAJOR:        return CSMC_POT_MAJOR;
-    case CSMC_KEY:          return CSMC_POT_MAJOR;
-    case CSMC_SPIDER:       return CSMC_POT_MAJOR;
-    case CSMC_FAIRY:        return CSMC_POT_MAJOR;
-    case CSMC_HEART:        return CSMC_POT_MAJOR;
+    case CSMC_KEY:          return CSMC_POT_KEY;
+    case CSMC_SPIDER:       return CSMC_POT_SPIDER;
+    case CSMC_FAIRY:        return CSMC_POT_FAIRY;
+    case CSMC_HEART:        return def;
     case CSMC_SOUL:         return CSMC_POT_MAJOR;
     default:                return CSMC_POT_MAJOR;
     }

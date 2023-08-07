@@ -88,6 +88,10 @@ export const customFiles = async (opts: Options): Promise<{[k: string]: Buffer}>
   CHEST_HEART_SIDE: await png(opts, 'chest_side_heart', 'rgba16'),
   POT_MAJOR_SIDE: await png(opts, 'pots/side_major', 'rgba16'),
   POT_MAJOR_TOP: await png(opts, 'pots/top_major', 'rgba16'),
+  POT_SPIDER_SIDE: await png(opts, 'pots/side_spider', 'rgba16'),
+  POT_SPIDER_TOP: await png(opts, 'pots/top_spider', 'rgba16'),
+  POT_KEY_SIDE: await png(opts, 'pots/side_key', 'rgba16'),
+  POT_FAIRY_SIDE: await png(opts, 'pots/side_fairy', 'rgba16'),
 });
 
 export const customAssetsKeep = async (opts: Options): Promise<{[k: string]: Buffer}> => ({

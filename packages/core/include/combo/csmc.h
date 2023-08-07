@@ -16,6 +16,9 @@
 #define CSMC_POT_NORMAL_DANGEON     0x01
 #define CSMC_POT_MAGIC              0x02
 #define CSMC_POT_MAJOR              0x03
+#define CSMC_POT_SPIDER             0x04
+#define CSMC_POT_FAIRY              0x05
+#define CSMC_POT_KEY                0x06
 
 typedef struct GameState_Play GameState_Play;
 typedef struct Actor Actor;
