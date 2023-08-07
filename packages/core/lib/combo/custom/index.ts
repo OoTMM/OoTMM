@@ -75,8 +75,7 @@ const makeSplitObject = async (roms: DecompressedRoms, entry: CustomEntry) => {
   return obj;
 };
 
-export const customAssets = async (opts: Options): Promise<{[k: string]: Buffer}> => ({
-  DPAD: await png(opts, 'dpad', 'rgba32'),
+export const customFiles = async (opts: Options): Promise<{[k: string]: Buffer}> => ({
   CHEST_MAJOR_FRONT: await png(opts, 'chest_front_major', 'rgba16'),
   CHEST_MAJOR_SIDE: await png(opts, 'chest_side_major', 'rgba16'),
   CHEST_KEY_FRONT: await png(opts, 'chest_front_key', 'rgba16'),
@@ -87,6 +86,10 @@ export const customAssets = async (opts: Options): Promise<{[k: string]: Buffer}
   CHEST_FAIRY_SIDE: await png(opts, 'chest_side_fairy', 'rgba16'),
   CHEST_HEART_FRONT: await png(opts, 'chest_front_heart', 'rgba16'),
   CHEST_HEART_SIDE: await png(opts, 'chest_side_heart', 'rgba16'),
+});
+
+export const customAssetsKeep = async (opts: Options): Promise<{[k: string]: Buffer}> => ({
+  DPAD: await png(opts, 'dpad', 'rgba32'),
   POT_MAJOR_SIDE: await png(opts, 'pots/side_major', 'rgba16'),
   POT_MAJOR_TOP: await png(opts, 'pots/top_major', 'rgba16'),
   FONT: await font(opts, 'font_8x12'),
@@ -178,7 +181,7 @@ class CustomAssetsBuilder {
 
   async addCustomKeepFiles() {
     const keep = new KeepFile();
-    const cAssets = await customAssets(this.opts);
+    const cAssets = await customAssetsKeep(this.opts);
     const eAssets = await extractedAssets(this.roms);
     const assets = { ...cAssets, ...eAssets };
     for (const k in assets) {
@@ -188,6 +191,14 @@ class CustomAssetsBuilder {
 
     const customKeepVrom = this.addRawData(keep.pack(), true);
     this.cg.define('CUSTOM_KEEP_VROM', customKeepVrom);
+  }
+
+  async addCustomFiles() {
+    const cfiles = await customFiles(this.opts);
+    for (const [name, data] of Object.entries(cfiles)) {
+      const vrom = this.addRawData(data, true);
+      this.cg.define('CUSTOM_' + name + '_ADDR', vrom);
+    }
   }
 
   async run() {
@@ -200,6 +211,7 @@ class CustomAssetsBuilder {
 
     /* Setup custom keep */
     await this.addCustomKeepFiles();
+    await this.addCustomFiles();
 
     /* Load MQ data */
     await this.addFile('MQ_ROOMS', 'mq_rooms.bin', false);

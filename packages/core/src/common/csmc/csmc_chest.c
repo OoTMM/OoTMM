@@ -26,21 +26,33 @@
 
 typedef struct
 {
-    u32 segFront;
+    u32 custom:1;
+    u32 segFront:31;
     u32 segSide;
 }
 ChestCsmcData;
 
 static const ChestCsmcData kCsmcData[] = {
-    { CHEST_TEX_NORMAL_FRONT, CHEST_TEX_NORMAL_SIDE },
-    { CHEST_TEX_BOSS_KEY_FRONT, CHEST_TEX_BOSS_KEY_SIDE },
-    { 0x09000000 | CUSTOM_KEEP_CHEST_MAJOR_FRONT, 0x09000000 | CUSTOM_KEEP_CHEST_MAJOR_SIDE },
-    { 0x09000000 | CUSTOM_KEEP_CHEST_KEY_FRONT, 0x09000000 | CUSTOM_KEEP_CHEST_KEY_SIDE },
-    { 0x09000000 | CUSTOM_KEEP_CHEST_SPIDER_FRONT, 0x09000000 | CUSTOM_KEEP_CHEST_SPIDER_SIDE },
-    { 0x09000000 | CUSTOM_KEEP_CHEST_FAIRY_FRONT, 0x09000000 | CUSTOM_KEEP_CHEST_FAIRY_SIDE },
-    { 0x09000000 | CUSTOM_KEEP_CHEST_HEART_FRONT, 0x09000000 | CUSTOM_KEEP_CHEST_HEART_SIDE },
-    { CHEST_TEX_BOSS_KEY_FRONT, CHEST_TEX_BOSS_KEY_SIDE },
+    { 0, CHEST_TEX_NORMAL_FRONT, CHEST_TEX_NORMAL_SIDE },
+    { 0, CHEST_TEX_BOSS_KEY_FRONT, CHEST_TEX_BOSS_KEY_SIDE },
+    { 1, CUSTOM_CHEST_MAJOR_FRONT_ADDR, CUSTOM_CHEST_MAJOR_SIDE_ADDR },
+    { 1, CUSTOM_CHEST_KEY_FRONT_ADDR, CUSTOM_CHEST_KEY_SIDE_ADDR },
+    { 1, CUSTOM_CHEST_SPIDER_FRONT_ADDR, CUSTOM_CHEST_SPIDER_SIDE_ADDR },
+    { 1, CUSTOM_CHEST_FAIRY_FRONT_ADDR, CUSTOM_CHEST_FAIRY_SIDE_ADDR },
+    { 1, CUSTOM_CHEST_HEART_FRONT_ADDR, CUSTOM_CHEST_HEART_SIDE_ADDR },
+    { 0, CHEST_TEX_BOSS_KEY_FRONT, CHEST_TEX_BOSS_KEY_SIDE },
 };
+
+static u32 resolveTexture(u8 custom, u32 seg)
+{
+    void* addr;
+
+    if (!custom)
+        return seg;
+
+    addr = comboCacheGetFile(seg);
+    return ((u32)addr - 0x80000000);
+}
 
 static int csmcChestId(s16 gi)
 {
@@ -131,8 +143,8 @@ void csmcChestPreDraw(Actor* this, GameState_Play* play, s16 gi)
     else
         type = CSMC_CHEST_NORMAL;
 
-    listFront = csmcLoadTexture(kCsmcData[type].segFront, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 64, 1);
-    listSide = csmcLoadTexture(kCsmcData[type].segSide, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 1);
+    listFront = csmcLoadTexture(resolveTexture(kCsmcData[type].custom, kCsmcData[type].segFront), G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 64, 1);
+    listSide = csmcLoadTexture(resolveTexture(kCsmcData[type].custom, kCsmcData[type].segSide), G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 1);
 
     OPEN_DISPS(play->gs.gfx);
     gSPSegment(POLY_OPA_DISP++, 0x09, gCustomKeep);
