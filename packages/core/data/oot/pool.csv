@@ -1297,6 +1297,13 @@ MQ Bottom of the Well East Middle Room Key,                 collectible,    NONE
 MQ Bottom of the Well GS Basement,                          gs,             NONE,                 BOTTOM_OF_THE_WELL,             0x48,                       GS_TOKEN
 MQ Bottom of the Well GS West Middle Room,                  gs,             NONE,                 BOTTOM_OF_THE_WELL,             0x49,                       GS_TOKEN
 MQ Bottom of the Well GS Coffin Room,                       gs,             NONE,                 BOTTOM_OF_THE_WELL,             0x4a,                       GS_TOKEN
+MQ Bottom of the Well Pot Lobby Cage 1,                     pot,            NONE,                 BOTTOM_OF_THE_WELL,             0x0028,                     ARROWS_10
+MQ Bottom of the Well Pot Lobby Cage 2,                     pot,            NONE,                 BOTTOM_OF_THE_WELL,             0x002a,                     BOMBS_5
+MQ Bottom of the Well Pot Lobby Cage 3,                     pot,            NONE,                 BOTTOM_OF_THE_WELL,             0x002c,                     RECOVERY_HEART
+MQ Bottom of the Well Pot Lobby Alcove,                     pot,            NONE,                 BOTTOM_OF_THE_WELL,             0x002e,                     FLEXIBLE
+MQ Bottom of the Well Pot Side Room 1,                      pot,            NONE,                 BOTTOM_OF_THE_WELL,             0x0506,                     RECOVERY_HEART
+MQ Bottom of the Well Pot Side Room 2,                      pot,            NONE,                 BOTTOM_OF_THE_WELL,             0x0507,                     RECOVERY_HEART
+MQ Bottom of the Well Pot Side Room 3,                      pot,            NONE,                 BOTTOM_OF_THE_WELL,             0x0508,                     RECOVERY_HEART
 MQ Ice Cavern Map Chest,                                    chest,          NONE,                 ICE_CAVERN,                     0x01,                       MAP_IC
 MQ Ice Cavern Compass Chest,                                chest,          NONE,                 ICE_CAVERN,                     0x00,                       COMPASS_IC
 MQ Ice Cavern Iron Boots,                                   chest,          NONE,                 ICE_CAVERN,                     0x02,                       BOOTS_IRON
