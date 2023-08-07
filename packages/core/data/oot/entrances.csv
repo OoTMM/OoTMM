@@ -127,3 +127,12 @@ KAKARIKO_FROM_BAZAAR,                     indoors-exit,     Kakariko,           
 KAKARIKO_FROM_SHOP_POTION,                indoors-exit,     Kakariko,                                   Kakariko Potion Shop,                         SHOP_POTION_KAKARIKO
 KAKARIKO_FROM_SHOP_POTION_BACK,           indoors-exit,     Kakariko Back,                              Kakariko Potion Shop Back,                    SHOP_POTION_KAKARIKO_BACK
 KAKARIKO_FROM_ARCHERY,                    indoors-exit,     Kakariko,                                   Shooting Gallery Adult,                       ADULT_ARCHERY
+
+GRAVE_SHIELD,                             grave,           Graveyard Shield Grave,                     Graveyard,                                    GRAVEYARD_FROM_GRAVE_SHIELD
+GRAVE_REDEAD,                             grave,           Graveyard ReDead Grave,                     Graveyard,                                    GRAVEYARD_FROM_GRAVE_REDEAD
+GRAVE_ROYAL,                              grave,           Graveyard Royal Tomb,                       Graveyard,                                    GRAVEYARD_FROM_GRAVE_ROYAL
+GRAVE_DAMPE,                              grave,           Dampe Grave,                                Graveyard,                                    GRAVEYARD_FROM_GRAVE_DAMPE
+GRAVEYARD_FROM_GRAVE_SHIELD,              grave-exit,      Graveyard,                                  Graveyard Shield Grave,                       GRAVE_SHIELD
+GRAVEYARD_FROM_GRAVE_REDEAD,              grave-exit,      Graveyard,                                  Graveyard ReDead Grave,                       GRAVE_REDEAD
+GRAVEYARD_FROM_GRAVE_ROYAL,               grave-exit,      Graveyard,                                  Graveyard Royal Tomb,                         GRAVE_ROYAL
+GRAVEYARD_FROM_GRAVE_DAMPE,               grave-exit,      Graveyard,                                  Dampe Grave,                                  GRAVE_DAMPE

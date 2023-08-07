@@ -127,6 +127,14 @@ OOT_KAKARIKO_BAZAAR:                        0xb7
 OOT_KAKARIKO_FROM_BAZAAR:                   0x201
 OOT_ADULT_ARCHERY:                          0x3b
 OOT_KAKARIKO_FROM_ARCHERY:                  0x463
+OOT_GRAVE_SHIELD:                           0x4b
+OOT_GRAVEYARD_FROM_GRAVE_SHIELD:            0x35d
+OOT_GRAVE_REDEAD:                           0x31c
+OOT_GRAVEYARD_FROM_GRAVE_REDEAD:            0x361
+OOT_GRAVE_ROYAL:                            0x2d
+OOT_GRAVEYARD_FROM_GRAVE_ROYAL:             0x50b
+OOT_GRAVE_DAMPE:                            0x44f
+OOT_GRAVEYARD_FROM_GRAVE_DAMPE:             0x359
 
 # Custom
 OOT_OUTSIDE_GANON_FROM_FAIRY:               0xf00
