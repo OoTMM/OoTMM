@@ -51,4 +51,30 @@ PATCH_START 0x8092984c
 .int 0
 PATCH_END
 
+/* Spawn Drop (flexible) */
+PATCH_START 0x80928b7c
+  jal ObjTsubo_SpawnShuffledDropFlexible
+PATCH_END
+
+PATCH_START 0x80928fe4
+  jal ObjTsubo_SpawnShuffledDropFlexible
+PATCH_END
+
+PATCH_START 0x80929088
+  jal ObjTsubo_SpawnShuffledDropFlexible
+PATCH_END
+
+/* Relocs */
+PATCH_START 0x809297b8
+.int 0
+PATCH_END
+
+PATCH_START 0x80929828
+.int 0
+PATCH_END
+
+PATCH_START 0x80929848
+.int 0
+PATCH_END
+
 PATCH_GROUP_END

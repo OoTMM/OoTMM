@@ -130,6 +130,21 @@ void ObjTsubo_SpawnShuffledDrop(Actor_ObjTsubo* this, GameState_Play* play)
     DropCustomItem(play, &this->base.position, &this->xflag);
 }
 
+void ObjTsubo_SpawnShuffledDropFlexible(Actor_ObjTsubo* this, GameState_Play* play)
+{
+    ActorFunc ObjTsubo_SpawnDropFlexible;
+
+    if (!ObjTsubo_IsShuffled(this) || comboXflagsGet(&this->xflag))
+    {
+        /* Already spawned */
+        ObjTsubo_SpawnDropFlexible = (ActorFunc)actorAddr(AC_OBJ_TSUBO, 0x8092762c);
+        ObjTsubo_SpawnDropFlexible(&this->base, play);
+        return;
+    }
+
+    /* Spawn a custom item */
+    DropCustomItem(play, &this->base.position, &this->xflag);
+}
 
 static const Gfx kDrawListNormalTop[] = {
     gsDPLoadTextureBlock(0x06001000, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, 4, 4, 0, 0),
