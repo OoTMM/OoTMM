@@ -15,7 +15,7 @@ import JSZip from 'jszip';
 
 import { build as comboBuild } from './combo/build';
 import { codegen as comboCodegen } from './combo/codegen';
-import { customAssets } from './combo/custom';
+import { customAssetsKeep, customFiles } from './combo/custom';
 import { Monitor } from './combo/monitor';
 import { DEFAULT_SETTINGS } from './combo';
 import { cosmeticsAssets } from './combo/cosmetics';
@@ -79,7 +79,8 @@ async function copyData() {
   );
 
   /* Add the extra assets */
-  await customAssets(opts);
+  await customAssetsKeep(opts);
+  await customFiles(opts);
   for (const basePath of ["build/assets", "data/static"]) {
     const matches = glob.sync(['**/*.bin', '**/*.zobj'], { cwd: basePath });
     for (const filename of matches) {
