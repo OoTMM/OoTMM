@@ -11,7 +11,7 @@ static int ObjTsubo_IsShuffled(Actor_ObjTsubo* this)
         return 0;
 
     /* Check for enemy */
-    if (((this->base.initRot.z >> 7) & 3) > 1)
+    if ((this->base.initRot.z & 3) > 1)
         return 0;
 
     /* Check for dynamic pots */
