@@ -1305,9 +1305,9 @@
     "Zora Fountain Child Pot 2": "is_child"
     "Zora Fountain Child Pot 3": "is_child"
     "Zora Fountain Child Pot 4": "is_child"
-    "Zora Fountain Adult Pot 1": "is_adult && can_lift_silver && has_explosives_or_hammer"
-    "Zora Fountain Adult Pot 2": "is_adult && can_lift_silver && has_explosives_or_hammer"
-    "Zora Fountain Adult Pot 3": "is_adult && can_lift_silver && has_explosives_or_hammer"
+    "Zora Fountain Adult Pot 1": "is_adult && ((can_lift_silver && has_explosives_or_hammer) || climb_anywhere)"
+    "Zora Fountain Adult Pot 2": "is_adult && ((can_lift_silver && has_explosives_or_hammer) || climb_anywhere)"
+    "Zora Fountain Adult Pot 3": "is_adult && ((can_lift_silver && has_explosives_or_hammer) || climb_anywhere)"
   gossip:
     "Zora Fountain Gossip Northwest": "true"
     "Zora Fountain Gossip Near Fairy": "true"
