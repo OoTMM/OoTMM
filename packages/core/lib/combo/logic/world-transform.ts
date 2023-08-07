@@ -171,6 +171,9 @@ const ITEM_POOL_PLENTIFUL = new Set([
   Items.SHARED_MASK_KEATON,
   Items.SHARED_WALLET,
   Items.SHARED_SKELETON_KEY,
+  ...ItemGroups.OOT_SOULS,
+  ...ItemGroups.MM_SOULS,
+  ...ItemGroups.SHARED_SOULS,
 ]);
 
 const ITEMS_HEART_PIECES_CONTAINERS_BY_GAME = {
