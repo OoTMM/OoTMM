@@ -1,5 +1,7 @@
 #include <combo.h>
 
+u8 gActorNum;
+
 typedef struct
 {
     u8 sceneId;
@@ -68,8 +70,8 @@ Actor* SpawnRoomActorEx(void* unk, GameState_Play *play, short actorId, float x,
 {
     Actor* a;
 
+    g.actorIndex = gActorNum;
     a = comboSpawnActorEx(unk, play, actorId, x, y, z, rx, ry, rz, variable, ex1, ex2, ex3);
-    g.actorIndex++;
     return a;
 }
 
