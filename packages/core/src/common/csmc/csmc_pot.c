@@ -8,11 +8,11 @@
 # define POT_TEX_MAGIC_TOP      0x060013e0
 
 #if defined(GAME_OOT)
-# define POT_TEX_NORMAL_DANGEON_SIDE    0x05010ec0
-# define POT_TEX_NORMAL_DANGEON_TOP     0x05011ec0
-#else
 # define POT_TEX_NORMAL_DANGEON_SIDE    0x050108a0
 # define POT_TEX_NORMAL_DANGEON_TOP     0x050118a0
+#else
+# define POT_TEX_NORMAL_DANGEON_SIDE    0x05010ec0
+# define POT_TEX_NORMAL_DANGEON_TOP     0x05011ec0
 #endif
 
 typedef struct
