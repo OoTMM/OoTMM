@@ -199,6 +199,7 @@ void hookPlay_Init(GameState_Play* play)
         }
     }
 
+    comboCacheClear();
     comboObjectsReset();
     debugCheat(play);
 
@@ -259,6 +260,7 @@ void hookPlay_Init(GameState_Play* play)
 
 void Play_DrawWrapper(GameState_Play* play)
 {
+    comboCacheGarbageCollect();
     comboObjectsGC();
     Play_Draw(play);
     comboDpadDraw(play);

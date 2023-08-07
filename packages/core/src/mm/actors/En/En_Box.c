@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/item.h>
+#include <combo/csmc.h>
 
 static void EnBox_ItemQuery(ComboItemQuery* q, Actor* this, GameState_Play* play, s16 gi)
 {
@@ -59,7 +60,7 @@ void EnBox_InitWrapper(Actor* this, GameState_Play* play)
 
     /* Resize chest */
     gi = EnBox_Item(this, play, EnBox_GetGI(this));
-    comboCsmcInit(this, play, gi);
+    csmcChestInit(this, play, gi);
 }
 
 void EnBox_DrawWrapper(Actor* this, GameState_Play* play)
@@ -69,7 +70,7 @@ void EnBox_DrawWrapper(Actor* this, GameState_Play* play)
 
     /* Prepare the segments */
     gi = EnBox_Item(this, play, EnBox_GetGI(this));
-    comboCsmcPreDraw(this, play, gi);
+    csmcChestPreDraw(this, play, gi);
 
     /* Draw */
     draw = actorAddr(AC_EN_BOX, 0x808698f4);
