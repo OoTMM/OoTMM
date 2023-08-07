@@ -34,7 +34,8 @@ const OOT_REGION_NAMES: {[k: string]: string} = {
   'OOT_ICE_CAVERN': 'Ice Cavern',
   'OOT_THIEVES_HIDEOUT': 'Thieves\' Hideout',
   'OOT_GERUDO_TRAINING_GROUNDS': 'Gerudo\'s Training Ground',
-  'OOT_GANON_CASTLE': 'Ganon\'s Castle'
+  'OOT_GANON_CASTLE': 'Ganon\'s Castle',
+  'OOT_EGGS': 'Inside Eggs',
 }
 const MM_REGION_NAMES: {[k: string]: string} = {
   'MM_CLOCK_TOWN_SOUTH': 'South Clock Town',
