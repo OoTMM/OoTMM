@@ -577,11 +577,11 @@ export const randomizerData = (worldId: number, logic: LogicResult): Buffer => {
   buffers.push(randomizerConfig(logic.config));
   buffers.push(specialConds(logic.settings));
   buffers.push(prices(worldId, logic));
+  buffers.push(randomizerTriforce(logic));
   buffers.push(randomizerHints(worldId, logic));
   buffers.push(zoraSapphireBuffer(worldId, logic));
   buffers.push(randomizerBoss(worldId, logic));
   buffers.push(randomizerDungeons(worldId, logic));
-  buffers.push(randomizerTriforce(logic));
   return Buffer.concat(buffers);
 };
 

@@ -128,12 +128,12 @@ typedef struct
     u8              config[0x40];
     SpecialCond     special[5];
     u16             prices[PRICES_MAX];
+    u16             triforcePieces;
+    u16             triforceGoal;
     ComboDataHints  hints;
     u16             giZoraSapphire;
     u8              boss[12];
     u8              dungeons[25];
-    u16             triforcePieces;
-    u16             triforceGoal;
 }
 ComboData;
 
