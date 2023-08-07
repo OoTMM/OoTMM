@@ -87,6 +87,7 @@ const ACTORS_OOT = {
   POT: 0x111,
   FLYING_POT: 0x11d,
   ROCK_BUSH_GROUP: 0x151,
+  EN_KUSA: 0x125,
 };
 
 const ACTORS_MM = {
@@ -463,6 +464,23 @@ function outputPotsPoolOot(roomActors: RoomActors[]) {
   }
 }
 
+
+function outputGrassPoolOot(roomActors: RoomActors[]) {
+  for (const room of roomActors) {
+    for (const actor of room.actors) {
+      if (actor.typeId === ACTORS_OOT.EN_KUSA) {
+        const grassType = (actor.params) & 3;
+        if (grassType !== 0) {
+          continue;
+        }
+        const item = 'GRASS_BUSH';
+        const key = ((room.setupId & 0x3) << 14) | (room.roomId << 8) | actor.actorId;
+        console.log(`Scene ${room.sceneId.toString(16)} Setup ${room.setupId} Room ${room.roomId} Grass Bush ${actor.actorId}, grass,            NONE,                 SCENE_${room.sceneId.toString(16)}, 0x${key.toString(16)}, ${item}`);
+      }
+    }
+  }
+}
+
 function outputPotsPoolMm(roomActors: RoomActors[]) {
   let lastSceneId = -1;
   let lastSetupId = -1;
@@ -583,10 +601,11 @@ async function run() {
     codegenSource(ootMqRooms, mmRooms, addrTableOotMq, addrTableMm),
   ]);
 
-  outputPotsPoolMm(mmRooms);
+  //outputPotsPoolMm(mmRooms);
 
   /* Output */
   //outputPotsPoolOot(mqRooms);
+  outputGrassPoolOot(ootRooms);
 }
 
 run().catch(e => {

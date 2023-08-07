@@ -312,6 +312,7 @@ function checkKey(check: WorldCheck): number {
     typeId = 0x09;
     break;
   case 'pot':
+  case 'grass':
     /* xflag */
     typeId = 0x10 + ((id >> 16) & 0xf);
     break;

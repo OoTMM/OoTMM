@@ -20,6 +20,19 @@ Kokiri Shop Item 5,                                         shop,           NONE
 Kokiri Shop Item 6,                                         shop,           NONE,                 KOKIRI_FOREST,                  0x05,                       NUTS_10
 Kokiri Shop Item 7,                                         shop,           NONE,                 KOKIRI_FOREST,                  0x06,                       STICK
 Kokiri Shop Item 8,                                         shop,           NONE,                 KOKIRI_FOREST,                  0x07,                       SHIELD_DEKU
+Kokiri Forest Grass Bush 01,                                grass,          NONE,                 KOKIRI_FOREST,                  0x003c,                     GRASS_BUSH
+Kokiri Forest Grass Bush 02,                                grass,          NONE,                 KOKIRI_FOREST,                  0x003d,                     GRASS_BUSH
+Kokiri Forest Grass Bush 03,                                grass,          NONE,                 KOKIRI_FOREST,                  0x003e,                     GRASS_BUSH
+Kokiri Forest Grass Bush 04,                                grass,          NONE,                 KOKIRI_FOREST,                  0x003f,                     GRASS_BUSH
+Kokiri Forest Grass Bush 05,                                grass,          NONE,                 KOKIRI_FOREST,                  0x0040,                     GRASS_BUSH
+Kokiri Forest Grass Bush 06,                                grass,          NONE,                 KOKIRI_FOREST,                  0x0041,                     GRASS_BUSH
+Kokiri Forest Grass Bush 07,                                grass,          NONE,                 KOKIRI_FOREST,                  0x0042,                     GRASS_BUSH
+Kokiri Forest Grass Bush 08,                                grass,          NONE,                 KOKIRI_FOREST,                  0x0043,                     GRASS_BUSH
+Kokiri Forest Grass Bush 09,                                grass,          NONE,                 KOKIRI_FOREST,                  0x0044,                     GRASS_BUSH
+Kokiri Forest Grass Bush 10,                                grass,          NONE,                 KOKIRI_FOREST,                  0x0045,                     GRASS_BUSH
+Kokiri Forest Grass Bush 11,                                grass,          NONE,                 KOKIRI_FOREST,                  0x0046,                     GRASS_BUSH
+Kokiri Forest Grass Bush 12,                                grass,          NONE,                 KOKIRI_FOREST,                  0x0047,                     GRASS_BUSH
+Kokiri Forest Grass Bush Child,                             grass,          NONE,                 KOKIRI_FOREST,                  0x0209,                     GRASS_BUSH
 Know It All House Pot 1,                                    pot,            NONE,                 KOKIRI_KNOW_IT_ALL,             0x0006,                     RUPEE_GREEN
 Know It All House Pot 2,                                    pot,            NONE,                 KOKIRI_KNOW_IT_ALL,             0x0007,                     RUPEE_GREEN
 Twins House Pot 1,                                          pot,            NONE,                 KOKIRI_TWINS,                   0x0002,                     RUPEE_GREEN
