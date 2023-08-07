@@ -1234,6 +1234,36 @@ MQ Dodongo Cavern SR Crate,                                 sr,             NONE
 MQ Dodongo Cavern SR Upper Corner Low,                      sr,             NONE,                 DODONGO_CAVERN,                 0x02,                       RUPEE_SILVER_DC
 MQ Dodongo Cavern SR Vines,                                 sr,             NONE,                 DODONGO_CAVERN,                 0x03,                       RUPEE_SILVER_DC
 MQ Dodongo Cavern SR Upper Corner High,                     sr,             NONE,                 DODONGO_CAVERN,                 0x04,                       RUPEE_SILVER_DC
+MQ Dodongo Cavern Pot East Corridor 1,                      pot,            NONE,                 DODONGO_CAVERN,                 0x0107,                     RUPEE_GREEN
+MQ Dodongo Cavern Pot East Corridor 2,                      pot,            NONE,                 DODONGO_CAVERN,                 0x0108,                     RUPEE_BLUE
+MQ Dodongo Cavern Pot East Corridor 3,                      pot,            NONE,                 DODONGO_CAVERN,                 0x0109,                     RUPEE_GREEN
+MQ Dodongo Cavern Pot East Corridor 4,                      pot,            NONE,                 DODONGO_CAVERN,                 0x010a,                     DEKU_SEEDS_5
+MQ Dodongo Cavern Pot Stairs 1,                             pot,            NONE,                 DODONGO_CAVERN,                 0x0210,                     RECOVERY_HEART
+MQ Dodongo Cavern Pot Stairs 2,                             pot,            NONE,                 DODONGO_CAVERN,                 0x0211,                     RUPEE_RED
+MQ Dodongo Cavern Pot Stairs 3,                             pot,            NONE,                 DODONGO_CAVERN,                 0x0212,                     RUPEE_RED
+MQ Dodongo Cavern Pot Stairs 4,                             pot,            NONE,                 DODONGO_CAVERN,                 0x0213,                     RECOVERY_HEART
+MQ Dodongo Cavern Pot Miniboss 1,                           pot,            NONE,                 DODONGO_CAVERN,                 0x0307,                     RECOVERY_HEART
+MQ Dodongo Cavern Pot Miniboss 2,                           pot,            NONE,                 DODONGO_CAVERN,                 0x0308,                     RECOVERY_HEART
+MQ Dodongo Cavern Pot Miniboss 3,                           pot,            NONE,                 DODONGO_CAVERN,                 0x0309,                     RUPEE_BLUE
+MQ Dodongo Cavern Pot Miniboss 4,                           pot,            NONE,                 DODONGO_CAVERN,                 0x030a,                     RUPEE_BLUE
+MQ Dodongo Cavern Pot Green Room 1,                         pot,            NONE,                 DODONGO_CAVERN,                 0x0405,                     RECOVERY_HEART
+MQ Dodongo Cavern Pot Green Room 2,                         pot,            NONE,                 DODONGO_CAVERN,                 0x0406,                     RUPEE_GREEN
+MQ Dodongo Cavern Pot Green Room 3,                         pot,            NONE,                 DODONGO_CAVERN,                 0x0407,                     RUPEE_BLUE
+MQ Dodongo Cavern Pot Green Room 4,                         pot,            NONE,                 DODONGO_CAVERN,                 0x0408,                     RECOVERY_HEART
+MQ Dodongo Cavern Pot Before Boss 1,                        pot,            NONE,                 DODONGO_CAVERN,                 0x0706,                     BOMB
+MQ Dodongo Cavern Pot Before Boss 2,                        pot,            NONE,                 DODONGO_CAVERN,                 0x0707,                     RECOVERY_HEART
+MQ Dodongo Cavern Pot Before Boss Loop 1,                   pot,            NONE,                 DODONGO_CAVERN,                 0x0813,                     RECOVERY_HEART
+MQ Dodongo Cavern Pot Before Boss Loop 2,                   pot,            NONE,                 DODONGO_CAVERN,                 0x0814,                     FLEXIBLE
+MQ Dodongo Cavern Pot Before Boss Loop 3,                   pot,            NONE,                 DODONGO_CAVERN,                 0x0815,                     BOMB
+MQ Dodongo Cavern Pot Before Boss Loop 4,                   pot,            NONE,                 DODONGO_CAVERN,                 0x0816,                     BOMB
+MQ Dodongo Cavern Pot Vanilla Bomb Bag Room 1,              pot,            NONE,                 DODONGO_CAVERN,                 0x090b,                     RUPEE_BLUE
+MQ Dodongo Cavern Pot Vanilla Bomb Bag Room 2,              pot,            NONE,                 DODONGO_CAVERN,                 0x090c,                     RECOVERY_HEART
+MQ Dodongo Cavern Pot Before Miniboss 1,                    pot,            NONE,                 DODONGO_CAVERN,                 0x0a10,                     DEKU_SEEDS_5
+MQ Dodongo Cavern Pot Before Miniboss 2,                    pot,            NONE,                 DODONGO_CAVERN,                 0x0a11,                     DEKU_SEEDS_5
+MQ Dodongo Cavern Pot After Miniboss 1,                     pot,            NONE,                 DODONGO_CAVERN,                 0x0c05,                     DEKU_SEEDS_5
+MQ Dodongo Cavern Pot After Miniboss 2,                     pot,            NONE,                 DODONGO_CAVERN,                 0x0c06,                     RUPEE_BLUE
+MQ Dodongo Cavern Pot Before Boss Loop Side Room 1,         pot,            NONE,                 DODONGO_CAVERN,                 0x0e02,                     BOMB
+MQ Dodongo Cavern Pot Before Boss Loop Side Room 2,         pot,            NONE,                 DODONGO_CAVERN,                 0x0e03,                     BOMB
 MQ Jabu-Jabu Map Chest,                                     chest,          NONE,                 INSIDE_JABU_JABU,               0x03,                       MAP_JJ
 MQ Jabu-Jabu Entry Chest,                                   chest,          NONE,                 INSIDE_JABU_JABU,               0x05,                       NUTS_5
 MQ Jabu-Jabu Compass Chest,                                 chest,          NONE,                 INSIDE_JABU_JABU,               0x00,                       COMPASS_JJ
