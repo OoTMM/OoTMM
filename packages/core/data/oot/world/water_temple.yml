@@ -10,7 +10,7 @@
     "Water Temple Ruto Room": "has_tunic_zora && (has_iron_boots || (can_longshot && trick(OOT_WATER_LONGSHOT)))"
     "Water Temple Center Bottom": "event(WATER_LEVEL_LOW) && small_keys_water(5)"
     "Water Temple Center Middle": "event(WATER_LEVEL_LOW) && (can_use_din || can_use_bow)"
-    "Water Temple Compass Room": "(has_tunic_zora && has_iron_boots && can_hookshot) || (event(WATER_LEVEL_LOW) && (can_hookshot || (climb_anywhere && (has_weapon || can_use_sticks || has_ranged_weapon || has_explosives_or_hammer))))"
+    "Water Temple Compass Room": "(has_tunic_zora && has_iron_boots && can_hookshot) || (event(WATER_LEVEL_LOW) && (can_hookshot || climb_anywhere))"
     "Water Temple Dragon Room": "event(WATER_LEVEL_LOW) && has(STRENGTH) && can_dive_small && (has_weapon || has_ranged_weapon || has_explosives_or_hammer)"
     "Water Temple Elevator": "(small_keys_water(5) && (can_hookshot || climb_anywhere)) || can_use_bow || can_use_din"
     "Water Temple Corridor": "(can_longshot || has_hover_boots || hookshot_anywhere) && can_hit_triggers_distance && event(WATER_LEVEL_LOW)"
@@ -20,8 +20,8 @@
     "Water Temple Cage Room": "has_tunic_zora && event(WATER_LEVEL_LOW) && has_explosives && can_dive_small"
     "Water Temple Main Ledge": "(is_adult && has_hover_boots) || hookshot_anywhere"
   locations:
-    "Water Temple Pot Main Room Near Block 1": "event(WATER_LEVEL_LOW)"
-    "Water Temple Pot Main Room Near Block 2": "event(WATER_LEVEL_LOW)"
+    "Water Temple Pot Main Room Near Block 1": "event(WATER_LEVEL_LOW) || (has_iron_boots && can_hookshot)"
+    "Water Temple Pot Main Room Near Block 2": "event(WATER_LEVEL_LOW) || (has_iron_boots && can_hookshot)"
     "Water Temple Pot Main Room Near Boss 1": "(can_longshot && event(WATER_LEVEL_RESET)) || climb_anywhere"
     "Water Temple Pot Main Room Near Boss 2": "(can_longshot && event(WATER_LEVEL_RESET)) || climb_anywhere"
 "Water Temple Main Ledge":
@@ -39,8 +39,8 @@
     WATER_LEVEL_LOW: "can_play(SONG_ZELDA)"
   locations:
     "Water Temple Bombable Chest": "(event(WATER_LEVEL_MIDDLE) || (event(WATER_LEVEL_LOW) && (climb_anywhere))) && has_explosives"
-    "Water Temple Pot Ruto Room 1": "event(WATER_LEVEL_LOW)"
-    "Water Temple Pot Ruto Room 2": "event(WATER_LEVEL_LOW)"
+    "Water Temple Pot Ruto Room 1": "event(WATER_LEVEL_LOW) || (has_iron_boots && can_hookshot)"
+    "Water Temple Pot Ruto Room 2": "event(WATER_LEVEL_LOW) || (has_iron_boots && can_hookshot)"
 "Water Temple Map Room":
   dungeon: Water
   locations:
@@ -69,7 +69,7 @@
 "Water Temple Compass Room":
   dungeon: Water
   locations:
-    "Water Temple Compass": "true"
+    "Water Temple Compass": "has_weapon || can_use_sticks || has_ranged_weapon || has_explosives_or_hammer"
     "Water Temple Pot Compass Room 1": "true"
     "Water Temple Pot Compass Room 2": "true"
     "Water Temple Pot Compass Room 3": "true"
@@ -154,15 +154,15 @@
 "Water Temple Cage Room":
   dungeon: Water
   exits:
-    "Water Temple Inside Cage": "can_hookshot || (is_adult && has_hover_boots)"
+    "Water Temple Inside Cage": "can_hookshot || (is_adult && has_hover_boots) || climb_anywhere"
 "Water Temple Inside Cage":
   dungeon: Water
   locations:
-    "Water Temple GS Cage": "(can_hookshot || (is_adult && has_hover_boots) || climb_anywhere) && (has_weapon || can_use_sticks) && (is_adult || can_collect_distance || climb_anywhere)"
-    "Water Temple Pot Skull Cage 1": "true"
-    "Water Temple Pot Skull Cage 2": "true"
-    "Water Temple Pot Skull Cage 3": "true"
-    "Water Temple Pot Skull Cage 4": "true"
+    "Water Temple GS Cage": "has_weapon || can_use_sticks"
+    "Water Temple Pot Skull Cage 1": "has_weapon || can_use_sticks"
+    "Water Temple Pot Skull Cage 2": "has_weapon || can_use_sticks"
+    "Water Temple Pot Skull Cage 3": "has_weapon || can_use_sticks"
+    "Water Temple Pot Skull Cage 4": "has_weapon || can_use_sticks"
 "Water Temple Antichamber":
   dungeon: Water
   exits:

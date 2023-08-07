@@ -560,10 +560,10 @@
     BUGS: "has_explosives_or_hammer && has_bottle"
   locations:
     "Hyrule Castle GS Grotto": "has_explosives_or_hammer && can_collect_distance"
-    "Hyrule Castle Grotto Pot 1": "true"
-    "Hyrule Castle Grotto Pot 2": "true"
-    "Hyrule Castle Grotto Pot 3": "true"
-    "Hyrule Castle Grotto Pot 4": "true"
+    "Hyrule Castle Grotto Pot 1": "has_explosives_or_hammer"
+    "Hyrule Castle Grotto Pot 2": "has_explosives_or_hammer"
+    "Hyrule Castle Grotto Pot 3": "has_explosives_or_hammer"
+    "Hyrule Castle Grotto Pot 4": "has_explosives_or_hammer"
   gossip:
     "Hyrule Castle Gossip Grotto": "has_explosives_or_hammer"
 "Ganon Castle Exterior":
