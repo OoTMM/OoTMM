@@ -29,7 +29,7 @@ export class CodeGen {
     }
     this.data.push(`const ${type} ${name}[] = {`);
     for (const group of groups) {
-      this.data.push('  ' + group.map(v => '0x' + v.toString(16) + ',').join(' '));
+      this.data.push('  ' + group.map(v => (v < 0 ? '-' : '') + '0x' + Math.abs(v).toString(16) + ',').join(' '));
     }
     this.data.push('};');
     this.data.push('');

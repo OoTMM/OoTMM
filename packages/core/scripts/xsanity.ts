@@ -2,6 +2,9 @@ import fs from 'fs/promises';
 
 import { CodeGen } from '../lib/combo/util/codegen';
 import { decompressGame } from '../lib/combo/decompress';
+import { CONFIG } from '../lib/combo/config';
+
+/* OOT Grass Scatter: 12 */
 
 type Game = 'oot' | 'mq' | 'mm';
 
@@ -174,6 +177,7 @@ type AddressingTable = {
   scenesTable: number[];
   setupsTable: number[];
   roomsTable: number[];
+  bitCount: number;
 }
 
 function sortRoomActors(roomActors: RoomActors[]) {
@@ -188,20 +192,50 @@ function sortRoomActors(roomActors: RoomActors[]) {
   });
 }
 
+function mergeRooms(a: RoomActors, b: RoomActors): RoomActors {
+  /* Copy the longest actor list */
+  let actors: Actor[] = [];
+  if (a.actors.length > b.actors.length) {
+    actors = a.actors.map(a => ({...a}));
+  } else {
+    actors = b.actors.map(a => ({...a}));
+  }
+  const overlapCount = Math.min(a.actors.length, b.actors.length);
+  for (let i = 0; i < overlapCount; i++) {
+    const actorA = a.actors[i];
+    const actorB = b.actors[i];
+
+    if (CONFIGS.oot.INTERESTING_ACTORS.includes(actorA.typeId)) {
+      actors[i] = { ...actorA };
+    } else {
+      actors[i] = { ...actorB };
+    }
+  }
+
+  return {
+    sceneId: a.sceneId,
+    roomId: a.roomId,
+    setupId: a.setupId,
+    actors,
+  };
+}
+
 function mergeRoomActors(roomActors: RoomActors[][]): RoomActors[] {
   /* For every unique room, get the longest actor list */
   const merged = new Map<string, RoomActors>();
   for (const roomActor of roomActors.flat()) {
     const key = `${roomActor.sceneId}-${roomActor.setupId}-${roomActor.roomId}`;
     const existing = merged.get(key);
-    if (existing === undefined || existing.actors.length < roomActor.actors.length) {
-      merged.set(key, roomActor);
+    let room = roomActor;
+    if (existing) {
+      room = mergeRooms(existing, room);
     }
+    merged.set(key, room);
   }
   return sortRoomActors(Array.from(merged.values()));
 }
 
-function buildAddressingTable(roomActors: RoomActors[]): AddressingTable {
+function buildAddressingTable(game: Game, roomActors: RoomActors[]): AddressingTable {
   let sceneId = -1;
   let setupId = -1;
   let roomId = -1;
@@ -210,6 +244,12 @@ function buildAddressingTable(roomActors: RoomActors[]): AddressingTable {
   let roomsTable: number[] = [];
   let bits = 0;
   for (const roomActor of roomActors) {
+    /* We need bits starting at the first useful actor */
+    let firstBit = roomActor.actors.findIndex(x => CONFIGS[game].INTERESTING_ACTORS.includes(x.typeId));
+    if (firstBit === -1) {
+      firstBit = 0;
+    }
+    const bitCount = roomActor.actors.length - firstBit;
     /* If it's a new scene, push the offset to the setups table */
     while (sceneId < roomActor.sceneId) {
       sceneId++;
@@ -228,14 +268,14 @@ function buildAddressingTable(roomActors: RoomActors[]): AddressingTable {
     /* Push the bit pos */
     while (roomId < roomActor.roomId) {
       roomId++;
-      roomsTable.push(bits);
+      roomsTable.push(bits - firstBit);
     }
 
     /* Allocate bits */
-    bits += roomActor.actors.length;
+    bits += bitCount;
   }
 
-  return { scenesTable, setupsTable, roomsTable };
+  return { scenesTable, setupsTable, roomsTable, bitCount: bits };
 }
 
 function findHeaderOffset(rom: Buffer, offset: number, wantedOp: number) {
@@ -332,11 +372,11 @@ function getRawRooms(rom: Buffer, game: 'oot' | 'mq' | 'mm') {
 }
 
 async function codegenHeader(roomActorsOotMq: RoomActors[], roomActorsMm: RoomActors[], addrTableOotMq: AddressingTable, addrTableMm: AddressingTable) {
-  const actorsCountOotMq = roomActorsOotMq.reduce((acc, room) => acc + room.actors.length, 0);
-  const actorsCountMm = roomActorsMm.reduce((acc, room) => acc + room.actors.length, 0);
+  const byteCountOot = Math.floor((addrTableOotMq.bitCount + 7) / 8);
+  const byteCountMm = Math.floor((addrTableMm.bitCount + 7) / 8);
   const cg = new CodeGen(__dirname + '/../include/combo/xflags_data.h', 'XFLAGS_DATA');
-  cg.define('XFLAGS_COUNT_OOT', Math.floor((actorsCountOotMq + 7) / 8));
-  cg.define('XFLAGS_COUNT_MM', Math.floor((actorsCountMm + 7) / 8));
+  cg.define('XFLAGS_COUNT_OOT', byteCountOot);
+  cg.define('XFLAGS_COUNT_MM', byteCountMm);
   return cg.emit();
 }
 
@@ -345,13 +385,13 @@ async function codegenSource(roomActorsOotMq: RoomActors[], roomActorsMm: RoomAc
   cgOot.include('combo.h');
   cgOot.table('kXflagsTableScenes', 'u16', addrTableOotMq.scenesTable);
   cgOot.table('kXflagsTableSetups', 'u16', addrTableOotMq.setupsTable);
-  cgOot.table('kXflagsTableRooms', 'u16', addrTableOotMq.roomsTable);
+  cgOot.table('kXflagsTableRooms', 's16', addrTableOotMq.roomsTable);
 
   const cgMm = new CodeGen(__dirname + '/../src/mm/xflags_data.c');
   cgMm.include('combo.h');
   cgMm.table('kXflagsTableScenes', 'u16', addrTableMm.scenesTable);
   cgMm.table('kXflagsTableSetups', 'u16', addrTableMm.setupsTable);
-  cgMm.table('kXflagsTableRooms', 'u16', addrTableMm.roomsTable);
+  cgMm.table('kXflagsTableRooms', 's16', addrTableMm.roomsTable);
 
   return Promise.all([cgOot.emit(), cgMm.emit()]);
 }
@@ -497,8 +537,8 @@ async function run() {
   const ootMqRooms = mergeRoomActors([ootRooms, mqRooms]);
 
   /* Build the addr tables */
-  const addrTableOotMq = buildAddressingTable(ootMqRooms);
-  const addrTableMm = buildAddressingTable(mmRooms);
+  const addrTableOotMq = buildAddressingTable('oot', ootMqRooms);
+  const addrTableMm = buildAddressingTable('mm', mmRooms);
 
   /* Codegen */
   await Promise.all([
