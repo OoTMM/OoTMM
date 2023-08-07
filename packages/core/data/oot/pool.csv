@@ -1280,6 +1280,15 @@ MQ Jabu-Jabu GS Back,                                       gs,             NONE
 MQ Jabu-Jabu GS Basement Side Room,                         gs,             NONE,                 INSIDE_JABU_JABU,               0x1b,                       GS_TOKEN
 MQ Jabu-Jabu GS Pre-Boss,                                   gs,             NONE,                 INSIDE_JABU_JABU,               0x19,                       GS_TOKEN
 MQ Jabu-Jabu Cow,                                           cow,            NONE,                 INSIDE_JABU_JABU,               0x09,                       MILK
+MQ Jabu-Jabu Pot Entrance 1,                                pot,            NONE,                 INSIDE_JABU_JABU,               0x000f,                     BOMB
+MQ Jabu-Jabu Pot Entrance 2,                                pot,            NONE,                 INSIDE_JABU_JABU,               0x0010,                     NUTS_5
+MQ Jabu-Jabu Pot Underwater Alcove 1,                       pot,            NONE,                 INSIDE_JABU_JABU,               0x0115,                     ARROWS_5
+MQ Jabu-Jabu Pot Underwater Alcove 2,                       pot,            NONE,                 INSIDE_JABU_JABU,               0x0116,                     NUTS_5
+MQ Jabu-Jabu Pot Before Boss,                               pot,            NONE,                 INSIDE_JABU_JABU,               0x050d,                     FLEXIBLE
+MQ Jabu-Jabu Pot Like-Like Room 1,                          pot,            NONE,                 INSIDE_JABU_JABU,               0x0b1a,                     ARROWS_5
+MQ Jabu-Jabu Pot Like-Like Room 2,                          pot,            NONE,                 INSIDE_JABU_JABU,               0x0b1e,                     BOMBS_5
+MQ Jabu-Jabu Pot Boomerang Room 1,                          pot,            NONE,                 INSIDE_JABU_JABU,               0x0e0a,                     BOMB
+MQ Jabu-Jabu Pot Boomerang Room 2,                          pot,            NONE,                 INSIDE_JABU_JABU,               0x0e0e,                     ARROWS_5
 MQ Bottom of the Well Map Chest,                            chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x03,                       MAP_BOTW
 MQ Bottom of the Well Compass Chest,                        chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x02,                       COMPASS_BOTW
 MQ Bottom of the Well Lens Chest,                           chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x01,                       LENS
