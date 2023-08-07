@@ -34,7 +34,6 @@ export const TRICKS = {
   OOT_FORTRESS_JUMPS: "Jump up to higher ledges outside Gerudo Fortress",
   OOT_COLOSSUS_GS_NO_BEAN: "Desert Colossus Plateau GS without Bean Plant",
   OOT_ENTER_JABU: "Enter Jabu-Jabu with Head Collision",
-  OOT_BIG_OCTO_NO_RANG: "Fight Big Octo in Jabu-Jabu without Boomerang",
   OOT_JABU_BOSS_HIGH_SWITCH: "Jabu Boss Switch without Boomerang or Climb Anywhere",
   OOT_WATER_REVERSE_RIVER: "Water Temple Reverse River with Hookshot Anywhere",
   OOT_WATER_PIT_GS_CHU: "Water Temple Large Pit GS with Bombchus",
