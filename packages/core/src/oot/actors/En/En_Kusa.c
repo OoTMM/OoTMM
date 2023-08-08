@@ -17,6 +17,13 @@ void EnKusa_Aliases(Xflag* xflag)
         xflag->sceneId = SCE_OOT_MARKET_CHILD_DAY;
         xflag->id += 16;
         break;
+    case SCE_OOT_HYRULE_FIELD:
+        if (xflag->setupId == 1)
+            xflag->id += 2;
+        if (xflag->setupId == 2)
+            xflag->id += 8;
+        xflag->setupId = 0;
+        break;
     default:
         break;
     }

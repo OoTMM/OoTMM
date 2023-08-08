@@ -98,7 +98,7 @@ static void CustomItem_Collect(Actor_CustomItem* this, GameState_Play* play)
     int major;
 
     link = GET_LINK(play);
-    if (link->state & PLAYER_ACTOR_STATE_FROZEN)
+    if (link->state & (PLAYER_ACTOR_STATE_FROZEN | PLAYER_ACTOR_STATE_EPONA))
         return;
 
     /* Query the item */
