@@ -43,10 +43,10 @@
 "Gerudo Training Grounds Upper":
   dungeon: GTG
   exits:
-    "Gerudo Training Grounds Left Side": "true"
+    "Gerudo Training Grounds Left Side": "has_lens"
     "Gerudo Training Grounds Statue": "true"
-   events:
-     GTG_LIKE_LIKE_ROOM: "true"
+  events:
+    GTG_LIKE_LIKE_ROOM: "true"
   locations:
     "Gerudo Training Maze Upper Cage": "can_use_bow"
 "Gerudo Training Grounds Right Side":
