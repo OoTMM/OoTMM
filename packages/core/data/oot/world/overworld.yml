@@ -861,6 +861,14 @@
     "Kakariko Pot 09": "is_child"
     "Kakariko Pot 10": "is_child"
     "Kakariko Pot 11": "is_child"
+    "Kakariko Grass 1": "can_cut_grass"
+    "Kakariko Grass 2": "can_cut_grass"
+    "Kakariko Grass 3": "can_cut_grass"
+    "Kakariko Grass 4": "can_cut_grass"
+    "Kakariko Grass 5": "can_cut_grass"
+    "Kakariko Grass 6": "can_cut_grass"
+    "Kakariko Grass 7": "can_cut_grass"
+    "Kakariko Grass 8": "can_cut_grass"
 "Kakariko Rooftop":
   region: KAKARIKO
   exits:
@@ -1010,6 +1018,18 @@
     "Graveyard Crate HP": "can_ride_bean(BEAN_GRAVEYARD) || can_longshot"
     "Graveyard GS Soil": "gs_soil && can_damage_skull"
     "Graveyard GS Wall": "is_child && can_boomerang && gs_night"
+    "Graveyard Grass 01": "can_cut_grass"
+    "Graveyard Grass 02": "can_cut_grass"
+    "Graveyard Grass 03": "can_cut_grass"
+    "Graveyard Grass 04": "can_cut_grass"
+    "Graveyard Grass 05": "can_cut_grass"
+    "Graveyard Grass 06": "can_cut_grass"
+    "Graveyard Grass 07": "can_cut_grass"
+    "Graveyard Grass 08": "can_cut_grass"
+    "Graveyard Grass 09": "can_cut_grass"
+    "Graveyard Grass 10": "can_cut_grass"
+    "Graveyard Grass 11": "can_cut_grass"
+    "Graveyard Grass 12": "can_cut_grass"
 "Graveyard Upper":
   region: GRAVEYARD
   exits:
@@ -1226,6 +1246,18 @@
     MAGIC: "can_cut_grass"
   locations:
     "Zora River GS Tree": "is_child && can_damage_skull"
+    "Zora River Grass Pack Bush 01": "can_cut_grass"
+    "Zora River Grass Pack Bush 02": "can_cut_grass"
+    "Zora River Grass Pack Bush 03": "can_cut_grass"
+    "Zora River Grass Pack Bush 04": "can_cut_grass"
+    "Zora River Grass Pack Bush 05": "can_cut_grass"
+    "Zora River Grass Pack Bush 06": "can_cut_grass"
+    "Zora River Grass Pack Bush 07": "can_cut_grass"
+    "Zora River Grass Pack Bush 08": "can_cut_grass"
+    "Zora River Grass Pack Bush 09": "can_cut_grass"
+    "Zora River Grass Pack Bush 10": "can_cut_grass"
+    "Zora River Grass Pack Bush 11": "can_cut_grass"
+    "Zora River Grass Pack Bush 12": "can_cut_grass"
 "Zora River":
   region: ZORA_RIVER
   time: flow
@@ -1251,6 +1283,7 @@
     "Zora River GS Ladder": "is_child && gs_night && can_damage_skull"
     "Zora River GS Near Grotto": "is_adult && gs_night && can_collect_distance"
     "Zora River GS Near Bridge": "is_adult && gs_night && can_hookshot"
+    "Zora River Grass": "(is_child || has_hover_boots) && can_cut_grass"
   gossip:
     "Zora River Gossip High Pillar": "true"
     "Zora River Gossip Near Domain": "true"

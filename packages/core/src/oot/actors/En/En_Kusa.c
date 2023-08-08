@@ -18,11 +18,37 @@ void EnKusa_Aliases(Xflag* xflag)
         xflag->id += 16;
         break;
     case SCE_OOT_HYRULE_FIELD:
-        if (xflag->setupId == 1)
-            xflag->id += 2;
-        if (xflag->setupId == 2)
-            xflag->id += 8;
+        switch (xflag->setupId)
+        {
+        case 1: xflag->id += 2; break;
+        case 2: xflag->id += 8; break;
+        }
         xflag->setupId = 0;
+        break;
+    case SCE_OOT_KAKARIKO_VILLAGE:
+        switch (xflag->setupId)
+        {
+        case 1: xflag->id += 5; break;
+        case 2: xflag->id += 12; break;
+        case 3: xflag->id += 14; break;
+        }
+        xflag->setupId = 0;
+        break;
+    case SCE_OOT_GRAVEYARD:
+        switch (xflag->setupId)
+        {
+        case 1: xflag->id -= 4; break;
+        case 2: xflag->id -= 13; break;
+        case 3: xflag->id -= 13; break;
+        }
+        xflag->setupId = 0;
+        break;
+    case SCE_OOT_ZORA_RIVER:
+        if (xflag->setupId == 2)
+        {
+            xflag->id += 28;
+            xflag->setupId = 0;
+        }
         break;
     default:
         break;

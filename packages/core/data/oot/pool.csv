@@ -101,6 +101,14 @@ Kakariko Pot 08,                                            pot,            NONE
 Kakariko Pot 09,                                            pot,            NONE,                 KAKARIKO_VILLAGE,               0x0010,                     RECOVERY_HEART
 Kakariko Pot 10,                                            pot,            NONE,                 KAKARIKO_VILLAGE,               0x0011,                     RECOVERY_HEART
 Kakariko Pot 11,                                            pot,            NONE,                 KAKARIKO_VILLAGE,               0x0012,                     RECOVERY_HEART
+Kakariko Grass 1,                                           grass,          NONE,                 KAKARIKO_VILLAGE,               0x00024,                    RANDOM
+Kakariko Grass 2,                                           grass,          NONE,                 KAKARIKO_VILLAGE,               0x00025,                    RANDOM
+Kakariko Grass 3,                                           grass,          NONE,                 KAKARIKO_VILLAGE,               0x00026,                    RANDOM
+Kakariko Grass 4,                                           grass,          NONE,                 KAKARIKO_VILLAGE,               0x00027,                    RANDOM
+Kakariko Grass 5,                                           grass,          NONE,                 KAKARIKO_VILLAGE,               0x00028,                    RANDOM
+Kakariko Grass 6,                                           grass,          NONE,                 KAKARIKO_VILLAGE,               0x00029,                    RANDOM
+Kakariko Grass 7,                                           grass,          NONE,                 KAKARIKO_VILLAGE,               0x0002a,                    RANDOM
+Kakariko Grass 8,                                           grass,          NONE,                 KAKARIKO_VILLAGE,               0x0002b,                    RANDOM
 Kakariko Potion Shop Odd Potion,                            npc,            NONE,                 KAKARIKO_POTION_SHOP,           TRADE_ODD_POTION,           ODD_POTION
 Kakariko Bazaar Item 1,                                     shop,           NONE,                 BAZAAR,                         0x30,                       ARROWS_5
 Kakariko Bazaar Item 2,                                     shop,           NONE,                 BAZAAR,                         0x31,                       ARROWS_10
@@ -134,6 +142,18 @@ Graveyard Dampe Tomb Pot 6,                                 pot,            NONE
 Graveyard Crate HP,                                         collectible,    NONE,                 GRAVEYARD,                      0x04,                       HEART_PIECE
 Graveyard GS Soil,                                          gs,             NONE,                 GRAVEYARD,                      0x88,                       GS_TOKEN
 Graveyard GS Wall,                                          gs,             NONE,                 GRAVEYARD,                      0x8f,                       GS_TOKEN
+Graveyard Grass 01,                                         grass,          NONE,                 GRAVEYARD,                      0x00110,                    RANDOM
+Graveyard Grass 02,                                         grass,          NONE,                 GRAVEYARD,                      0x10110,                    RANDOM
+Graveyard Grass 03,                                         grass,          NONE,                 GRAVEYARD,                      0x20110,                    RANDOM
+Graveyard Grass 04,                                         grass,          NONE,                 GRAVEYARD,                      0x30110,                    RANDOM
+Graveyard Grass 05,                                         grass,          NONE,                 GRAVEYARD,                      0x40110,                    RANDOM
+Graveyard Grass 06,                                         grass,          NONE,                 GRAVEYARD,                      0x50110,                    RANDOM
+Graveyard Grass 07,                                         grass,          NONE,                 GRAVEYARD,                      0x60110,                    RANDOM
+Graveyard Grass 08,                                         grass,          NONE,                 GRAVEYARD,                      0x70110,                    RANDOM
+Graveyard Grass 09,                                         grass,          NONE,                 GRAVEYARD,                      0x80110,                    RANDOM
+Graveyard Grass 10,                                         grass,          NONE,                 GRAVEYARD,                      0x90110,                    RANDOM
+Graveyard Grass 11,                                         grass,          NONE,                 GRAVEYARD,                      0xa0110,                    RANDOM
+Graveyard Grass 12,                                         grass,          NONE,                 GRAVEYARD,                      0xb0110,                    RANDOM
 Death Mountain Chest,                                       chest,          NONE,                 DEATH_MOUNTAIN_TRAIL,           0x01,                       RUPEE_PURPLE
 Death Mountain HP,                                          collectible,    NONE,                 DEATH_MOUNTAIN_TRAIL,           0x1e,                       HEART_PIECE
 Death Mountain Prescription,                                npc,            NONE,                 DEATH_MOUNTAIN_TRAIL,           TRADE_PRESCRIPTION,         PRESCRIPTION
@@ -215,6 +235,19 @@ Zora River GS Tree,                                         gs,             NONE
 Zora River GS Ladder,                                       gs,             NONE,                 ZORA_RIVER,                     0x90,                       GS_TOKEN
 Zora River GS Near Grotto,                                  gs,             NONE,                 ZORA_RIVER,                     0x94,                       GS_TOKEN
 Zora River GS Near Bridge,                                  gs,             NONE,                 ZORA_RIVER,                     0x93,                       GS_TOKEN
+Zora River Grass,                                           grass,          NONE,                 ZORA_RIVER,                     0x00034,                    RANDOM
+Zora River Grass Pack Bush 01,                              grass,          NONE,                 ZORA_RIVER,                     0x00035,                    RANDOM
+Zora River Grass Pack Bush 02,                              grass,          NONE,                 ZORA_RIVER,                     0x10035,                    RANDOM
+Zora River Grass Pack Bush 03,                              grass,          NONE,                 ZORA_RIVER,                     0x20035,                    RANDOM
+Zora River Grass Pack Bush 04,                              grass,          NONE,                 ZORA_RIVER,                     0x30035,                    RANDOM
+Zora River Grass Pack Bush 05,                              grass,          NONE,                 ZORA_RIVER,                     0x40035,                    RANDOM
+Zora River Grass Pack Bush 06,                              grass,          NONE,                 ZORA_RIVER,                     0x50035,                    RANDOM
+Zora River Grass Pack Bush 07,                              grass,          NONE,                 ZORA_RIVER,                     0x60035,                    RANDOM
+Zora River Grass Pack Bush 08,                              grass,          NONE,                 ZORA_RIVER,                     0x70035,                    RANDOM
+Zora River Grass Pack Bush 09,                              grass,          NONE,                 ZORA_RIVER,                     0x80035,                    RANDOM
+Zora River Grass Pack Bush 10,                              grass,          NONE,                 ZORA_RIVER,                     0x90035,                    RANDOM
+Zora River Grass Pack Bush 11,                              grass,          NONE,                 ZORA_RIVER,                     0xa0035,                    RANDOM
+Zora River Grass Pack Bush 12,                              grass,          NONE,                 ZORA_RIVER,                     0xb0035,                    RANDOM
 Zora Domain Waterfall Chest,                                chest,          NONE,                 ZORA_DOMAIN,                    0x00,                       HEART_PIECE
 Zora Domain Diving Game,                                    npc,            NONE,                 ZORA_DOMAIN,                    ZORA_DIVING_GAME,           SCALE
 Zora Domain Tunic,                                          npc,            ZORA_KING,            ZORA_DOMAIN,                    ZORA_KING_TUNIC,            TUNIC_ZORA
