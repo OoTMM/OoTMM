@@ -97,6 +97,7 @@
 # define AC_ARMS_HOOK               0x066
 # define AC_OBJ_MURE2               0x151
 # define AC_EN_KUSA                 0x125
+# define AC_OBJ_HANA                0x14f
 
 #endif
 
