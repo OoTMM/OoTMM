@@ -517,6 +517,11 @@ Dodongo Cavern Pot Room Before Miniboss 1,                  pot,            NONE
 Dodongo Cavern Pot Room Before Miniboss 2,                  pot,            NONE,                 DODONGO_CAVERN,                 0x0a07,                     RUPEE_BLUE
 Dodongo Cavern Pot Room After Miniboss 1,                   pot,            NONE,                 DODONGO_CAVERN,                 0x0c05,                     RECOVERY_HEART
 Dodongo Cavern Pot Room After Miniboss 2,                   pot,            NONE,                 DODONGO_CAVERN,                 0x0c06,                     RUPEE_BLUE
+Dodongo Cavern Grass Lobby,                                 grass,          NONE,                 DODONGO_CAVERN,                 0x00002,                    DEKU_SEEDS_5
+Dodongo Cavern Grass Pre-Boss,                              grass,          NONE,                 DODONGO_CAVERN,                 0x00700,                    RECOVERY_HEART
+Dodongo Cavern Grass Bomb Bag Room,                         grass,          NONE,                 DODONGO_CAVERN,                 0x00900,                    DEKU_SEEDS_5
+Dodongo Cavern Grass Pre-Miniboss,                          grass,          NONE,                 DODONGO_CAVERN,                 0x00a00,                    RECOVERY_HEART
+Dodongo Cavern Grass Bomb Bag Side Room,                    grass,          NONE,                 DODONGO_CAVERN,                 0x00b03,                    DEKU_SEEDS_5
 Dodongo Cavern Boss Chest,                                  chest,          NONE,                 LAIR_KING_DODONGO,              0x00,                       BOMBS_10
 Dodongo Cavern Boss Container,                              collectible,    NONE,                 LAIR_KING_DODONGO,              0x1f,                       HEART_CONTAINER
 Dodongo Cavern Boss,                                        npc,            NONE,                 LAIR_KING_DODONGO,              BLUE_WARP_KING_DODONGO,     STONE_RUBY
