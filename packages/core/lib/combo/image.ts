@@ -149,7 +149,7 @@ function toFormat(image: Buffer, format: ImageFormat) {
   }
 }
 
-export function grayscale(image: Buffer, format: ImageFormat) {
+export function grayscale(image: Buffer, format: ImageFormat, gamma = 1) {
   image = fromFormat(image, format);
 
   for (let i = 0; i < image.length; i += 4) {
@@ -157,9 +157,10 @@ export function grayscale(image: Buffer, format: ImageFormat) {
     const g = image.readUInt8(i + 1);
     const b = image.readUInt8(i + 2);
     const l = Math.max(r, g, b);
-    image.writeUInt8(l, i + 0);
-    image.writeUInt8(l, i + 1);
-    image.writeUInt8(l, i + 2);
+    const lGamma = Math.round(Math.pow(l / 255, gamma) * 255);
+    image.writeUInt8(lGamma, i + 0);
+    image.writeUInt8(lGamma, i + 1);
+    image.writeUInt8(lGamma, i + 2);
   }
 
   return toFormat(image, format);
