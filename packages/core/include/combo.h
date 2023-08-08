@@ -30,6 +30,7 @@
 #  include <combo/oot/actors/Obj_Tsubo.h>
 #  include <combo/oot/actors/En_Kusa.h>
 #  include <combo/oot/actors/En_Tubo_Trap.h>
+#  include <combo/oot/actors/Obj_Mure2.h>
 #  include <combo/oot/actors/En_Ossan.h>
 # endif
 

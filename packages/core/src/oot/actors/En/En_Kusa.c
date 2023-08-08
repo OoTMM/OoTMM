@@ -26,7 +26,7 @@ void EnKusa_SpawnShuffledDrop(Actor_EnKusa* this, GameState_Play* play)
     {
         /* Already spawned */
         EnKusa_SpawnDrop = actorAddr(AC_EN_KUSA, 0x80a7f964);
-        EnKusa_SpawnDrop(this, play);
+        EnKusa_SpawnDrop(&this->base, play);
         return;
     }
 
@@ -49,5 +49,5 @@ void EnKusa_DrawWrapper(Actor_EnKusa* this, GameState_Play* play)
 
     /* Draw the actor */
     EnKusa_Draw = actorAddr(AC_EN_KUSA, 0x80a80a50);
-    EnKusa_Draw(this, play);
+    EnKusa_Draw(&this->base, play);
 }

@@ -305,9 +305,6 @@ function buildAddressingTable(game: Game, roomActors: RoomActors[]): AddressingT
         roomsTable.push(bits - firstBit);
       }
 
-      /* Push the bit pos */
-      roomsTable.push(bits - firstBit);
-
       /* Allocate bits */
       bits += bitCount;
     }
@@ -476,6 +473,24 @@ function outputGrassPoolOot(roomActors: RoomActors[]) {
         const item = 'GRASS_BUSH';
         const key = ((room.setupId & 0x3) << 14) | (room.roomId << 8) | actor.actorId;
         console.log(`Scene ${room.sceneId.toString(16)} Setup ${room.setupId} Room ${room.roomId} Grass Bush ${actor.actorId}, grass,            NONE,                 SCENE_${room.sceneId.toString(16)}, 0x${key.toString(16)}, ${item}`);
+      }
+
+      if (actor.typeId === ACTORS_OOT.ROCK_BUSH_GROUP) {
+        const type = (actor.params) & 3;
+        let count: number;
+        if (type > 1) {
+          continue;
+        }
+        if (type == 0) {
+          count = 9;
+        } else {
+          count = 12;
+        }
+        const item = 'GRASS_BUSH';
+        for (let i = 0; i < count; ++i) {
+          const key = (i << 16) | ((room.setupId & 0x3) << 14) | (room.roomId << 8) | actor.actorId;
+          console.log(`Scene ${room.sceneId.toString(16)} Setup ${room.setupId} Room ${room.roomId} Grass Pack ${actor.actorId} Grass ${i}, grass,            NONE,                 SCENE_${room.sceneId.toString(16)}, 0x${key.toString(16)}, ${item}`);
+        }
       }
     }
   }

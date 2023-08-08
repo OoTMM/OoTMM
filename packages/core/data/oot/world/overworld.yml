@@ -176,6 +176,18 @@
   locations:
     "Hyrule Field Ocarina of Time": "has_spiritual_stones"
     "Hyrule Field Song of Time": "has_spiritual_stones"
+    "Hyrule Field Grass Near lost Woods 01": "true"
+    "Hyrule Field Grass Near lost Woods 02": "true"
+    "Hyrule Field Grass Near lost Woods 03": "true"
+    "Hyrule Field Grass Near lost Woods 04": "true"
+    "Hyrule Field Grass Near lost Woods 05": "true"
+    "Hyrule Field Grass Near lost Woods 06": "true"
+    "Hyrule Field Grass Near lost Woods 07": "true"
+    "Hyrule Field Grass Near lost Woods 08": "true"
+    "Hyrule Field Grass Near lost Woods 09": "true"
+    "Hyrule Field Grass Near lost Woods 10": "true"
+    "Hyrule Field Grass Near lost Woods 11": "true"
+    "Hyrule Field Grass Near lost Woods 12": "true"
 "Hyrule Field Drawbridge":
   region: HYRULE_FIELD
   time: flow
