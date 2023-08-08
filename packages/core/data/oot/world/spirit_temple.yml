@@ -98,7 +98,7 @@
 "Spirit Temple Adult Entrance":
   dungeon: Spirit
   exits:
-    "Spirit Temple Adult Climb": "cond(climb_anywhere, (has_explosives && has_mirror_shield && small_keys_spirit(1)) || small_keys_spirit(3), small_keys_spirit(1)"
+    "Spirit Temple Adult Climb": "cond(climb_anywhere, (has_explosives && has_mirror_shield && small_keys_spirit(1)) || small_keys_spirit(3), small_keys_spirit(1))"
     "Spirit Temple Adult Boulders": "has_ranged_weapon || can_boomerang || has_bombchu"
   locations:
     "Spirit Temple Adult Lullaby": "can_play(SONG_ZELDA) && (can_hookshot || climb_anywhere)"
