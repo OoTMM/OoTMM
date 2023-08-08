@@ -522,6 +522,7 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
       base.erSecretShrine = true;
       base.erSpiderHouses = true;
       base.erRegionsExtra = true;
+      base.erRegionsOneWay = true;
       base.erIndoorsExtra = true;
       break;
     default:
@@ -534,6 +535,7 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
       base.erSecretShrine = booleanWeighted(random, 0.5);
       base.erSpiderHouses = booleanWeighted(random, 0.5);
       base.erRegionsExtra = booleanWeighted(random, 0.5);
+      base.erRegionsOneWay = booleanWeighted(random, 0.5);
       base.erIndoorsExtra = booleanWeighted(random, 0.5);
     }
   }

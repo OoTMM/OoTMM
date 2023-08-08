@@ -1235,6 +1235,7 @@
     "Hyrule Field": "true"
     "Hyrule Field Drawbridge": "is_child"
     "Zora Domain": "is_child && can_dive_small"
+    "Gerudo Valley Falls": "false"
     "Laboratory": "true"
     "Water Temple": "has_iron_boots && has_tunic_zora && can_hookshot"
     "Fishing Pond": "is_child || event(WATER_TEMPLE_CLEARED) || scarecrow_hookshot || can_ride_bean(BEAN_LAKE_HYLIA)"
@@ -1427,7 +1428,7 @@
   region: GERUDO_VALLEY
   time: flow
   exits:
-    "Lake Hylia": "true"
+    "Gerudo Valley Falls": "true"
     "Hyrule Field": "true"
     "Gerudo Valley After Bridge": "can_longshot || can_ride_epona || (is_adult && carpenters_rescued) || (is_child && has_hover_boots && trick(OOT_VALLEY_GATE_HOVER))"
     "Octorok Grotto": "can_lift_silver"
@@ -1449,7 +1450,7 @@
   region: GERUDO_VALLEY
   time: flow
   exits:
-    "Lake Hylia": "true"
+    "Gerudo Valley Falls": "true"
     "Gerudo Fortress Exterior": "true"
     "Gerudo Valley": "is_child || can_longshot || can_ride_epona || (is_adult && carpenters_rescued)"
     "Gerudo Valley Storms Grotto": "hidden_grotto_storms && is_adult"
@@ -1465,6 +1466,12 @@
     "Gerudo Valley": "true"
   events:
     RUPEES: "true"
+"Gerudo Valley Falls":
+  region: GERUDO_VALLEY
+  time: flow
+  exits:
+    "Lake Hylia": "true"
+    "Gerudo Valley After Bridge": "!setting(erRegions, none) && setting(erRegionsOneWay) && is_adult"
 "Gerudo Valley Storms Grotto":
   region: ENTRANCE
   exits:
