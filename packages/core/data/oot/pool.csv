@@ -738,6 +738,18 @@ Bottom of the Well Pot Side Room,                           pot,            NONE
 Bottom of the Well Flying Pot 1,                            pot,            NONE,                 BOTTOM_OF_THE_WELL,             0x0602,                     RECOVERY_HEART
 Bottom of the Well Flying Pot 2,                            pot,            NONE,                 BOTTOM_OF_THE_WELL,             0x0603,                     RECOVERY_HEART
 Bottom of the Well Flying Pot 3,                            pot,            NONE,                 BOTTOM_OF_THE_WELL,             0x0604,                     NUTS_5
+Bottom of the Well Grass 01,                                grass,          NONE,                 BOTTOM_OF_THE_WELL,             0x00101,                    RECOVERY_HEART
+Bottom of the Well Grass 02,                                grass,          NONE,                 BOTTOM_OF_THE_WELL,             0x00102,                    DEKU_SEEDS_5
+Bottom of the Well Grass 03,                                grass,          NONE,                 BOTTOM_OF_THE_WELL,             0x00103,                    RECOVERY_HEART
+Bottom of the Well Grass 04,                                grass,          NONE,                 BOTTOM_OF_THE_WELL,             0x00104,                    DEKU_SEEDS_5
+Bottom of the Well Grass 05,                                grass,          NONE,                 BOTTOM_OF_THE_WELL,             0x00105,                    RECOVERY_HEART
+Bottom of the Well Grass 06,                                grass,          NONE,                 BOTTOM_OF_THE_WELL,             0x00106,                    DEKU_SEEDS_5
+Bottom of the Well Grass 07,                                grass,          NONE,                 BOTTOM_OF_THE_WELL,             0x00107,                    RECOVERY_HEART
+Bottom of the Well Grass 08,                                grass,          NONE,                 BOTTOM_OF_THE_WELL,             0x00108,                    DEKU_SEEDS_5
+Bottom of the Well Grass 09,                                grass,          NONE,                 BOTTOM_OF_THE_WELL,             0x00109,                    RECOVERY_HEART
+Bottom of the Well Grass 10,                                grass,          NONE,                 BOTTOM_OF_THE_WELL,             0x0010a,                    DEKU_SEEDS_5
+Bottom of the Well Grass 11,                                grass,          NONE,                 BOTTOM_OF_THE_WELL,             0x0010b,                    RECOVERY_HEART
+Bottom of the Well Grass 12,                                grass,          NONE,                 BOTTOM_OF_THE_WELL,             0x0010c,                    DEKU_SEEDS_5
 Shadow Temple Map,                                          chest,          NONE,                 TEMPLE_SHADOW,                  0x01,                       MAP_SHADOW
 Shadow Temple Hover Boots,                                  chest,          NONE,                 TEMPLE_SHADOW,                  0x07,                       BOOTS_HOVER
 Shadow Temple Silver Rupees,                                chest,          NONE,                 TEMPLE_SHADOW,                  0x02,                       SMALL_KEY_SHADOW
