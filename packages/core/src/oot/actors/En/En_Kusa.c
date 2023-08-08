@@ -67,6 +67,28 @@ void EnKusa_Aliases(Xflag* xflag)
             xflag->id = 62;
         }
         break;
+    case SCE_OOT_LAKE_HYLIA:
+        if (xflag->setupId == 2)
+        {
+            xflag->setupId = 0;
+            if (xflag->id < 34)
+                xflag->id -= 8;
+            else
+                xflag->id -= 4;
+        }
+        break;
+    case SCE_OOT_LOST_WOODS:
+        if (xflag->setupId == 2)
+        {
+            xflag->setupId = 0;
+            switch (xflag->roomId)
+            {
+            case 2: xflag->id -= 2; break;
+            case 7: xflag->id -= 1; break;
+            case 8: xflag->id -= 1; break;
+            }
+        }
+        break;
     default:
         break;
     }

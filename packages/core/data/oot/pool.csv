@@ -67,6 +67,15 @@ Lost Woods Scrub Near Theater Left,                         scrub,          NONE
 Lost Woods Scrub Near Theater Right,                        scrub,          NONE,                 LOST_WOODS,                     0x02,                       NUTS_5
 Lost Woods Odd Mushroom,                                    npc,            NONE,                 LOST_WOODS,                     TRADE_ODD_MUSHROOM,         ODD_MUSHROOM
 Lost Woods Poacher's Saw,                                   npc,            NONE,                 LOST_WOODS,                     TRADE_POACHER_SAW,          POACHER_SAW
+Lost Woods Grass 1,                                         grass,          NONE,                 LOST_WOODS,                     0x00202,                    RANDOM
+Lost Woods Grass 2,                                         grass,          NONE,                 LOST_WOODS,                     0x00203,                    RANDOM
+Lost Woods Grass 3,                                         grass,          NONE,                 LOST_WOODS,                     0x00204,                    RANDOM
+Lost Woods Grass Deep 1,                                    grass,          NONE,                 LOST_WOODS,                     0x00701,                    RANDOM
+Lost Woods Grass Deep 2,                                    grass,          NONE,                 LOST_WOODS,                     0x00702,                    RANDOM
+Lost Woods Grass Deep 3,                                    grass,          NONE,                 LOST_WOODS,                     0x00703,                    RANDOM
+Lost Woods Grass Deep 4,                                    grass,          NONE,                 LOST_WOODS,                     0x00803,                    RANDOM
+Lost Woods Grass Deep 5,                                    grass,          NONE,                 LOST_WOODS,                     0x00804,                    RANDOM
+Lost Woods Grass Deep 6,                                    grass,          NONE,                 LOST_WOODS,                     0x00805,                    RANDOM
 Lost Woods Grotto Scrub Nuts Upgrade,                       scrub,          NONE,                 GROTTOS,                        0x03,                       NUT_UPGRADE
 Lost Woods Grotto Scrub Back,                               scrub,          NONE,                 GROTTOS,                        0x04,                       DEKU_SEEDS_30
 Lost Woods Grotto Generic,                                  chest,          NONE,                 GROTTOS,                        0x14,                       RUPEE_BLUE
@@ -304,6 +313,49 @@ Lake Hylia GS Soil,                                         gs,             NONE
 Lake Hylia GS Big Tree,                                     gs,             NONE,                 LAKE_HYLIA,                     0x9c,                       GS_TOKEN
 Lake Hylia Pot 1,                                           pot,            NONE,                 LAKE_HYLIA,                     0x000a,                     RECOVERY_HEART
 Lake Hylia Pot 2,                                           pot,            NONE,                 LAKE_HYLIA,                     0x000b,                     RECOVERY_HEART
+Lake Hylia Grass 1,                                         grass,          NONE,                 LAKE_HYLIA,                     0x00018,                    RANDOM
+Lake Hylia Grass 2,                                         grass,          NONE,                 LAKE_HYLIA,                     0x00019,                    RANDOM
+Lake Hylia Grass Child 1,                                   grass,          NONE,                 LAKE_HYLIA,                     0x00006,                    DEKU_SEEDS_5
+Lake Hylia Grass Child 2,                                   grass,          NONE,                 LAKE_HYLIA,                     0x0001a,                    RANDOM
+Lake Hylia Grass Child 3,                                   grass,          NONE,                 LAKE_HYLIA,                     0x0001b,                    RANDOM
+Lake Hylia Grass Child 4,                                   grass,          NONE,                 LAKE_HYLIA,                     0x0001c,                    RANDOM
+Lake Hylia Grass Child 5,                                   grass,          NONE,                 LAKE_HYLIA,                     0x0001d,                    RANDOM
+Lake Hylia Grass Pack 1 Bush 01,                            grass,          NONE,                 LAKE_HYLIA,                     0x0001e,                    RANDOM
+Lake Hylia Grass Pack 1 Bush 02,                            grass,          NONE,                 LAKE_HYLIA,                     0x1001e,                    RANDOM
+Lake Hylia Grass Pack 1 Bush 03,                            grass,          NONE,                 LAKE_HYLIA,                     0x2001e,                    RANDOM
+Lake Hylia Grass Pack 1 Bush 04,                            grass,          NONE,                 LAKE_HYLIA,                     0x3001e,                    RANDOM
+Lake Hylia Grass Pack 1 Bush 05,                            grass,          NONE,                 LAKE_HYLIA,                     0x4001e,                    RANDOM
+Lake Hylia Grass Pack 1 Bush 06,                            grass,          NONE,                 LAKE_HYLIA,                     0x5001e,                    RANDOM
+Lake Hylia Grass Pack 1 Bush 07,                            grass,          NONE,                 LAKE_HYLIA,                     0x6001e,                    RANDOM
+Lake Hylia Grass Pack 1 Bush 08,                            grass,          NONE,                 LAKE_HYLIA,                     0x7001e,                    RANDOM
+Lake Hylia Grass Pack 1 Bush 09,                            grass,          NONE,                 LAKE_HYLIA,                     0x8001e,                    RANDOM
+Lake Hylia Grass Pack 1 Bush 10,                            grass,          NONE,                 LAKE_HYLIA,                     0x9001e,                    RANDOM
+Lake Hylia Grass Pack 1 Bush 11,                            grass,          NONE,                 LAKE_HYLIA,                     0xa001e,                    RANDOM
+Lake Hylia Grass Pack 1 Bush 12,                            grass,          NONE,                 LAKE_HYLIA,                     0xb001e,                    RANDOM
+Lake Hylia Grass Pack 2 Bush 01,                            grass,          NONE,                 LAKE_HYLIA,                     0x0001f,                    RANDOM
+Lake Hylia Grass Pack 2 Bush 02,                            grass,          NONE,                 LAKE_HYLIA,                     0x1001f,                    RANDOM
+Lake Hylia Grass Pack 2 Bush 03,                            grass,          NONE,                 LAKE_HYLIA,                     0x2001f,                    RANDOM
+Lake Hylia Grass Pack 2 Bush 04,                            grass,          NONE,                 LAKE_HYLIA,                     0x3001f,                    RANDOM
+Lake Hylia Grass Pack 2 Bush 05,                            grass,          NONE,                 LAKE_HYLIA,                     0x4001f,                    RANDOM
+Lake Hylia Grass Pack 2 Bush 06,                            grass,          NONE,                 LAKE_HYLIA,                     0x5001f,                    RANDOM
+Lake Hylia Grass Pack 2 Bush 07,                            grass,          NONE,                 LAKE_HYLIA,                     0x6001f,                    RANDOM
+Lake Hylia Grass Pack 2 Bush 08,                            grass,          NONE,                 LAKE_HYLIA,                     0x7001f,                    RANDOM
+Lake Hylia Grass Pack 2 Bush 09,                            grass,          NONE,                 LAKE_HYLIA,                     0x8001f,                    RANDOM
+Lake Hylia Grass Pack 2 Bush 10,                            grass,          NONE,                 LAKE_HYLIA,                     0x9001f,                    RANDOM
+Lake Hylia Grass Pack 2 Bush 11,                            grass,          NONE,                 LAKE_HYLIA,                     0xa001f,                    RANDOM
+Lake Hylia Grass Pack 2 Bush 12,                            grass,          NONE,                 LAKE_HYLIA,                     0xb001f,                    RANDOM
+Lake Hylia Grass Pack 3 Bush 01,                            grass,          NONE,                 LAKE_HYLIA,                     0x00020,                    RANDOM
+Lake Hylia Grass Pack 3 Bush 02,                            grass,          NONE,                 LAKE_HYLIA,                     0x10020,                    RANDOM
+Lake Hylia Grass Pack 3 Bush 03,                            grass,          NONE,                 LAKE_HYLIA,                     0x20020,                    RANDOM
+Lake Hylia Grass Pack 3 Bush 04,                            grass,          NONE,                 LAKE_HYLIA,                     0x30020,                    RANDOM
+Lake Hylia Grass Pack 3 Bush 05,                            grass,          NONE,                 LAKE_HYLIA,                     0x40020,                    RANDOM
+Lake Hylia Grass Pack 3 Bush 06,                            grass,          NONE,                 LAKE_HYLIA,                     0x50020,                    RANDOM
+Lake Hylia Grass Pack 3 Bush 07,                            grass,          NONE,                 LAKE_HYLIA,                     0x60020,                    RANDOM
+Lake Hylia Grass Pack 3 Bush 08,                            grass,          NONE,                 LAKE_HYLIA,                     0x70020,                    RANDOM
+Lake Hylia Grass Pack 3 Bush 09,                            grass,          NONE,                 LAKE_HYLIA,                     0x80020,                    RANDOM
+Lake Hylia Grass Pack 3 Bush 10,                            grass,          NONE,                 LAKE_HYLIA,                     0x90020,                    RANDOM
+Lake Hylia Grass Pack 3 Bush 11,                            grass,          NONE,                 LAKE_HYLIA,                     0xa0020,                    RANDOM
+Lake Hylia Grass Pack 3 Bush 12,                            grass,          NONE,                 LAKE_HYLIA,                     0xb0020,                    RANDOM
 Laboratory Dive,                                            npc,            NONE,                 LABORATORY,                     LABORATORY_DIVE,            HEART_PIECE
 Laboratory Eye Drops,                                       npc,            NONE,                 LABORATORY,                     TRADE_EYE_DROPS,            EYE_DROPS
 Laboratory GS Crate,                                        gs,             NONE,                 LABORATORY,                     0x9b,                       GS_TOKEN
@@ -513,6 +565,8 @@ Hyrule Castle Grotto Pot 3,                                 pot,            NONE
 Hyrule Castle Grotto Pot 4,                                 pot,            NONE,                 GROTTOS,                        0x080b,                     NUTS_5
 Hyrule Castle Pot 1,                                        pot,            NONE,                 HYRULE_CASTLE,                  0x0008,                     RUPEE_GREEN
 Hyrule Castle Pot 2,                                        pot,            NONE,                 HYRULE_CASTLE,                  0x0009,                     RUPEE_BLUE
+Hyrule Castle Grass 1,                                      grass,          NONE,                 HYRULE_CASTLE,                  0x0002e,                    NOTHING
+Hyrule Castle Grass 2,                                      grass,          NONE,                 HYRULE_CASTLE,                  0x0002f,                    NOTHING
 Ganon Castle Exterior GS,                                   gs,             NONE,                 GANON_CASTLE_EXTERIOR,          0x78,                       GS_TOKEN
 Temple of Time Master Sword,                                npc,            NONE,                 TEMPLE_OF_TIME,                 MASTER_SWORD,               SWORD_MASTER
 Temple of Time Medallion,                                   npc,            NONE,                 TEMPLE_OF_TIME,                 LIGHT_MEDALLION,            MEDALLION_LIGHT
