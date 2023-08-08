@@ -146,6 +146,10 @@
     BUGS: "has_bottle && can_cut_grass"
   locations:
     "Kokiri Forest Storms Grotto": "true"
+    "Kokiri Forest Storms Grotto Grass 1": "can_cut_grass"
+    "Kokiri Forest Storms Grotto Grass 2": "can_cut_grass"
+    "Kokiri Forest Storms Grotto Grass 3": "can_cut_grass"
+    "Kokiri Forest Storms Grotto Grass 4": "can_cut_grass"
 "Hyrule Field":
   region: HYRULE_FIELD
   time: flow

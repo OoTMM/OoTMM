@@ -4,6 +4,18 @@ import { CodeGen } from '../lib/combo/util/codegen';
 import { decompressGame } from '../lib/combo/decompress';
 import { CONFIG } from '../lib/combo/config';
 
+const GENERIC_GROTTOS = [
+  0x0c,
+  0x14,
+  0x08,
+  0x17,
+  0x1a,
+  0x09,
+  0x02,
+  0x03,
+  0x00,
+];
+
 const SLICES = 12;
 
 /* OOT Grass Scatter: 12 */
@@ -337,7 +349,7 @@ function filterActors(actors: Actor[], game: Game): Actor[] {
   return actors.slice(0, lastInterestingActor + 1);
 }
 
-function parseRoomActors(rom: Buffer, raw: RawRoom, game: Game): RoomActors {
+function parseRoomActors(rom: Buffer, raw: RawRoom, game: Game): RoomActors[] {
   const typeIdMask = (game === 'mm' ? 0xfff : 0xffff);
   let actors: Actor[] = [];
   const actorHeaders = findHeaderOffset(rom, raw.vromHeader, 0x01);
@@ -353,7 +365,17 @@ function parseRoomActors(rom: Buffer, raw: RawRoom, game: Game): RoomActors {
     }
   }
   actors = filterActors(actors, game);
-  return { sceneId: raw.sceneId, setupId: raw.setupId, roomId: raw.roomId, actors };
+  if (game !== 'mm' && raw.sceneId === 0x3e && raw.roomId === 0x00) {
+    /* OoT generic grottos */
+    let genericRooms: RoomActors[] = [];
+    for (const genericId of GENERIC_GROTTOS) {
+      const genericRoomId = genericId | 0x20;
+      const genericActors = actors.map(x => ({...x, roomId: genericRoomId }));
+      genericRooms.push({ sceneId: raw.sceneId, setupId: raw.setupId, roomId: genericRoomId, actors: genericActors });
+    }
+    return genericRooms;
+  }
+  return [{ sceneId: raw.sceneId, setupId: raw.setupId, roomId: raw.roomId, actors }];
 }
 
 function getRawRooms(rom: Buffer, game: 'oot' | 'mq' | 'mm') {
@@ -581,7 +603,7 @@ function outputPotsPoolMm(roomActors: RoomActors[]) {
 }
 
 function roomActorsFromRaw(rom: Buffer, raw: RawRoom[], game: Game): RoomActors[] {
-  const actorsRooms = raw.map(r => parseRoomActors(rom, r, game));
+  const actorsRooms = raw.map(r => parseRoomActors(rom, r, game)).flat();
 
   /* Inject extra fake rooms */
   if (game === 'mm') {

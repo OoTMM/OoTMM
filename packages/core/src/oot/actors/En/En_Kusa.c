@@ -4,6 +4,13 @@
 
 void EnKusa_Aliases(Xflag* xflag)
 {
+    /* Check for generic grotto */
+    if (xflag->sceneId == SCE_OOT_GROTTOS && xflag->roomId == 0x00)
+    {
+        xflag->roomId = 0x20 | gSaveContext.grottoChestFlag;
+        return;
+    }
+
     switch (xflag->sceneId)
     {
     case SCE_OOT_MARKET_CHILD_NIGHT:
