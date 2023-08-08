@@ -14,6 +14,6 @@ typedef struct ALIGNED(4)
 }
 Actor_EnTuboTrap;
 
-_Static_assert(sizeof(Actor_EnTuboTrap) == 0x1a0, "OoT Actor_ObjTsubo size is wrong");
+_Static_assert(sizeof(Actor_EnTuboTrap) == 0x1a4, "OoT Actor_EnTuboTrap size is wrong");
 
 #endif

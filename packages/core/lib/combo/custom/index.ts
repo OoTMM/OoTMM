@@ -15,6 +15,7 @@ import { font } from './font';
 import { raw } from './raw';
 import { Options } from '../options';
 import { Patchfile } from '../patch-build/patchfile';
+import { grayscale } from '../image';
 
 const FILES_TO_INDEX_OOT = arrayToIndexMap(DATA_FILES.oot);
 const FILES_TO_INDEX_MM = arrayToIndexMap(DATA_FILES.mm);
@@ -74,6 +75,17 @@ const makeSplitObject = async (roms: DecompressedRoms, entry: CustomEntry) => {
 
   return obj;
 };
+
+const extractFileData = async (roms: DecompressedRoms, game: Game, file: string, offset: number, size: number) => {
+  const objBuffer = await getObjectBuffer(roms, game, file);
+  const tex = objBuffer.subarray(offset, offset + size);
+  return tex;
+};
+
+export const customExtractedFiles = async (roms: DecompressedRoms): Promise<{[k: string]: Buffer}> => ({
+  GRASS: await extractFileData(roms, 'oot', 'objects/gameplay_field_keep', 0xb140, 32 * 32 * 2).then(t => grayscale(t, 'rgba16', 0.25)),
+  GRASS_ALT: await extractFileData(roms, 'oot', 'objects/gameplay_keep', 0x35BD0, 32 * 32 * 2).then(t => grayscale(t, 'rgba16', 0.25)),
+});
 
 export const customFiles = async (opts: Options): Promise<{[k: string]: Buffer}> => ({
   CHEST_MAJOR_FRONT: await png(opts, 'chest_front_major', 'rgba16'),
@@ -210,6 +222,14 @@ class CustomAssetsBuilder {
     }
   }
 
+  async addCustomExtractedFiles() {
+    const cfiles = await customExtractedFiles(this.roms);
+    for (const [name, data] of Object.entries(cfiles)) {
+      const vrom = this.addRawData(data, true);
+      this.cg.define('CUSTOM_' + name + '_ADDR', vrom);
+    }
+  }
+
   async run() {
     this.monitor.log("Building custom objects");
 
@@ -221,6 +241,7 @@ class CustomAssetsBuilder {
     /* Setup custom keep */
     await this.addCustomKeepFiles();
     await this.addCustomFiles();
+    await this.addCustomExtractedFiles();
 
     /* Load MQ data */
     await this.addFile('MQ_ROOMS', 'mq_rooms.bin', false);

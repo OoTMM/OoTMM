@@ -74,6 +74,7 @@ export const CONFVARS = [
   'SHARED_SKELETON_KEY',
   'OOT_SHUFFLE_POTS',
   'MM_SHUFFLE_POTS',
+  'OOT_SHUFFLE_GRASS',
 ] as const;
 
 export type Confvar = typeof CONFVARS[number];

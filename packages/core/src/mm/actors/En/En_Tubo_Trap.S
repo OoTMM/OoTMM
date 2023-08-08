@@ -2,7 +2,7 @@
 
 /* Resize the actor */
 PATCH_START 0x80931448
-.int 0x1a8
+.int 0x1ac
 PATCH_END
 
 /* Wrap the init function */

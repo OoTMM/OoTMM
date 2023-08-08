@@ -2,6 +2,23 @@ import fs from 'fs/promises';
 
 import { CodeGen } from '../lib/combo/util/codegen';
 import { decompressGame } from '../lib/combo/decompress';
+import { CONFIG } from '../lib/combo/config';
+
+const GENERIC_GROTTOS = [
+  0x0c,
+  0x14,
+  0x08,
+  0x17,
+  0x1a,
+  0x09,
+  0x02,
+  0x03,
+  0x00,
+];
+
+const SLICES = 12;
+
+/* OOT Grass Scatter: 12 */
 
 type Game = 'oot' | 'mq' | 'mm';
 
@@ -81,12 +98,23 @@ const MM_SCENES_WITH_EXTRA_SETUPS: {[k: number]: number} = {
 const ACTORS_OOT = {
   POT: 0x111,
   FLYING_POT: 0x11d,
+  ROCK_BUSH_GROUP: 0x151,
+  EN_KUSA: 0x125,
+  OBJ_HANA: 0x14f,
 };
 
 const ACTORS_MM = {
   POT: 0x82,
   FLYING_POT: 0x8d,
 };
+
+const ACTOR_SLICES_OOT = {
+  [ACTORS_OOT.ROCK_BUSH_GROUP]: 12,
+}
+
+const ACTOR_SLICES_MM: {[k: number]: number} = {
+
+}
 
 const INTERESTING_ACTORS_OOT = Object.values(ACTORS_OOT);
 const INTERESTING_ACTORS_MM = Object.values(ACTORS_MM);
@@ -96,16 +124,19 @@ const CONFIGS = {
     SCENE_TABLE_ADDR: 0xb71440,
     SCENE_TABLE_SIZE: 101,
     INTERESTING_ACTORS: INTERESTING_ACTORS_OOT,
+    SLICES: ACTOR_SLICES_OOT,
   },
   mq: {
     SCENE_TABLE_ADDR: 0xba0bb0,
     SCENE_TABLE_SIZE: 101,
     INTERESTING_ACTORS: INTERESTING_ACTORS_OOT,
+    SLICES: ACTOR_SLICES_OOT,
   },
   mm: {
     SCENE_TABLE_ADDR: 0x00C5A1E0,
     SCENE_TABLE_SIZE: 113,
     INTERESTING_ACTORS: INTERESTING_ACTORS_MM,
+    SLICES: ACTOR_SLICES_MM,
   }
 }
 
@@ -174,6 +205,14 @@ type AddressingTable = {
   scenesTable: number[];
   setupsTable: number[];
   roomsTable: number[];
+  bitCount: number;
+}
+
+function sliceSize(game: Game, a: Actor) {
+  const conf = CONFIGS[game];
+  if (!conf.INTERESTING_ACTORS.includes(a.typeId))
+    return 0;
+  return conf.SLICES[a.typeId] || 1;
 }
 
 function sortRoomActors(roomActors: RoomActors[]) {
@@ -188,20 +227,52 @@ function sortRoomActors(roomActors: RoomActors[]) {
   });
 }
 
+function mergeRooms(a: RoomActors, b: RoomActors): RoomActors {
+  /* Copy the longest actor list */
+  let actors: Actor[] = [];
+  if (a.actors.length > b.actors.length) {
+    actors = a.actors.map(a => ({...a}));
+  } else {
+    actors = b.actors.map(a => ({...a}));
+  }
+  const overlapCount = Math.min(a.actors.length, b.actors.length);
+  for (let i = 0; i < overlapCount; i++) {
+    const actorA = a.actors[i];
+    const actorB = b.actors[i];
+
+    const sliceSizeA = sliceSize('oot', actorA);
+    const sliceSizeB = sliceSize('oot', actorB);
+    if (sliceSizeA > sliceSizeB) {
+      actors[i] = { ...actorA };
+    } else {
+      actors[i] = { ...actorB };
+    }
+  }
+
+  return {
+    sceneId: a.sceneId,
+    roomId: a.roomId,
+    setupId: a.setupId,
+    actors,
+  };
+}
+
 function mergeRoomActors(roomActors: RoomActors[][]): RoomActors[] {
   /* For every unique room, get the longest actor list */
   const merged = new Map<string, RoomActors>();
   for (const roomActor of roomActors.flat()) {
     const key = `${roomActor.sceneId}-${roomActor.setupId}-${roomActor.roomId}`;
     const existing = merged.get(key);
-    if (existing === undefined || existing.actors.length < roomActor.actors.length) {
-      merged.set(key, roomActor);
+    let room = roomActor;
+    if (existing) {
+      room = mergeRooms(existing, room);
     }
+    merged.set(key, room);
   }
   return sortRoomActors(Array.from(merged.values()));
 }
 
-function buildAddressingTable(roomActors: RoomActors[]): AddressingTable {
+function buildAddressingTable(game: Game, roomActors: RoomActors[]): AddressingTable {
   let sceneId = -1;
   let setupId = -1;
   let roomId = -1;
@@ -209,6 +280,7 @@ function buildAddressingTable(roomActors: RoomActors[]): AddressingTable {
   let setupsTable: number[] = [];
   let roomsTable: number[] = [];
   let bits = 0;
+
   for (const roomActor of roomActors) {
     /* If it's a new scene, push the offset to the setups table */
     while (sceneId < roomActor.sceneId) {
@@ -225,17 +297,33 @@ function buildAddressingTable(roomActors: RoomActors[]): AddressingTable {
       roomId = -1;
     }
 
-    /* Push the bit pos */
-    while (roomId < roomActor.roomId) {
-      roomId++;
-      roomsTable.push(bits);
-    }
+    for (let slice = 0; slice < SLICES; ++slice) {
+      /* We need bits starting at the first useful actor */
+      const pred = (a: Actor) => sliceSize(game, a) > slice;
+      let firstBit = roomActor.actors.findIndex(pred);
+      if (firstBit === -1) {
+        firstBit = 0;
+      }
+      let lastBit = roomActor.actors.findLastIndex(pred);
+      if (lastBit === -1) {
+        lastBit = 0;
+      } else {
+        lastBit += 1;
+      }
+      const bitCount = lastBit - firstBit;
 
-    /* Allocate bits */
-    bits += roomActor.actors.length;
+      /* Push the bit pos */
+      while (roomId < roomActor.roomId * SLICES + slice) {
+        roomId++;
+        roomsTable.push(bits - firstBit);
+      }
+
+      /* Allocate bits */
+      bits += bitCount;
+    }
   }
 
-  return { scenesTable, setupsTable, roomsTable };
+  return { scenesTable, setupsTable, roomsTable, bitCount: bits };
 }
 
 function findHeaderOffset(rom: Buffer, offset: number, wantedOp: number) {
@@ -262,7 +350,7 @@ function filterActors(actors: Actor[], game: Game): Actor[] {
   return actors.slice(0, lastInterestingActor + 1);
 }
 
-function parseRoomActors(rom: Buffer, raw: RawRoom, game: Game): RoomActors {
+function parseRoomActors(rom: Buffer, raw: RawRoom, game: Game): RoomActors[] {
   const typeIdMask = (game === 'mm' ? 0xfff : 0xffff);
   let actors: Actor[] = [];
   const actorHeaders = findHeaderOffset(rom, raw.vromHeader, 0x01);
@@ -278,7 +366,17 @@ function parseRoomActors(rom: Buffer, raw: RawRoom, game: Game): RoomActors {
     }
   }
   actors = filterActors(actors, game);
-  return { sceneId: raw.sceneId, setupId: raw.setupId, roomId: raw.roomId, actors };
+  if (game !== 'mm' && raw.sceneId === 0x3e && raw.roomId === 0x00) {
+    /* OoT generic grottos */
+    let genericRooms: RoomActors[] = [];
+    for (const genericId of GENERIC_GROTTOS) {
+      const genericRoomId = genericId | 0x20;
+      const genericActors = actors.map(x => ({...x, roomId: genericRoomId }));
+      genericRooms.push({ sceneId: raw.sceneId, setupId: raw.setupId, roomId: genericRoomId, actors: genericActors });
+    }
+    return genericRooms;
+  }
+  return [{ sceneId: raw.sceneId, setupId: raw.setupId, roomId: raw.roomId, actors }];
 }
 
 function getRawRooms(rom: Buffer, game: 'oot' | 'mq' | 'mm') {
@@ -332,11 +430,11 @@ function getRawRooms(rom: Buffer, game: 'oot' | 'mq' | 'mm') {
 }
 
 async function codegenHeader(roomActorsOotMq: RoomActors[], roomActorsMm: RoomActors[], addrTableOotMq: AddressingTable, addrTableMm: AddressingTable) {
-  const actorsCountOotMq = roomActorsOotMq.reduce((acc, room) => acc + room.actors.length, 0);
-  const actorsCountMm = roomActorsMm.reduce((acc, room) => acc + room.actors.length, 0);
+  const byteCountOot = Math.floor((addrTableOotMq.bitCount + 7) / 8);
+  const byteCountMm = Math.floor((addrTableMm.bitCount + 7) / 8);
   const cg = new CodeGen(__dirname + '/../include/combo/xflags_data.h', 'XFLAGS_DATA');
-  cg.define('XFLAGS_COUNT_OOT', Math.floor((actorsCountOotMq + 7) / 8));
-  cg.define('XFLAGS_COUNT_MM', Math.floor((actorsCountMm + 7) / 8));
+  cg.define('XFLAGS_COUNT_OOT', byteCountOot);
+  cg.define('XFLAGS_COUNT_MM', byteCountMm);
   return cg.emit();
 }
 
@@ -345,13 +443,13 @@ async function codegenSource(roomActorsOotMq: RoomActors[], roomActorsMm: RoomAc
   cgOot.include('combo.h');
   cgOot.table('kXflagsTableScenes', 'u16', addrTableOotMq.scenesTable);
   cgOot.table('kXflagsTableSetups', 'u16', addrTableOotMq.setupsTable);
-  cgOot.table('kXflagsTableRooms', 'u16', addrTableOotMq.roomsTable);
+  cgOot.table('kXflagsTableRooms', 's16', addrTableOotMq.roomsTable);
 
   const cgMm = new CodeGen(__dirname + '/../src/mm/xflags_data.c');
   cgMm.include('combo.h');
   cgMm.table('kXflagsTableScenes', 'u16', addrTableMm.scenesTable);
   cgMm.table('kXflagsTableSetups', 'u16', addrTableMm.setupsTable);
-  cgMm.table('kXflagsTableRooms', 'u16', addrTableMm.roomsTable);
+  cgMm.table('kXflagsTableRooms', 's16', addrTableMm.roomsTable);
 
   return Promise.all([cgOot.emit(), cgMm.emit()]);
 }
@@ -381,6 +479,93 @@ function outputPotsPoolOot(roomActors: RoomActors[]) {
         }
         const key = ((room.setupId & 0x3) << 14) | (room.roomId << 8) | actor.actorId;
         console.log(`Scene ${room.sceneId.toString(16)} Setup ${room.setupId} Room ${room.roomId} Flying Pot ${actor.actorId}, pot,            NONE,                 SCENE_${room.sceneId.toString(16)}, 0x${key.toString(16)}, ${item}`);
+      }
+    }
+  }
+}
+
+function hexPad(n: number, width: number) {
+  const s = n.toString(16);
+  return '0x' + '0'.repeat(width - s.length) + s;
+}
+
+function decPad(n: number, width: number) {
+  const s = n.toString();
+  return '0'.repeat(width - s.length) + s;
+}
+
+function outputGrassPoolOot(roomActors: RoomActors[]) {
+  let lastSceneId = -1;
+  let lastSetupId = -1;
+  let altGrassAcc = 0;
+  for (const room of roomActors) {
+    for (const actor of room.actors) {
+      if (actor.typeId === ACTORS_OOT.EN_KUSA) {
+        const grassType = (actor.params) & 3;
+        if (grassType == 3) {
+          console.log("Grass type 3????");
+        }
+        let item: string;
+        if (grassType == 0 || grassType == 2) {
+          item = 'RANDOM';
+        } else {
+          item = (altGrassAcc & 1) ? 'RECOVERY_HEART' : 'DEKU_SEEDS_5/ARROWS_5';
+          altGrassAcc++;
+        }
+        const key = ((room.setupId & 0x3) << 14) | (room.roomId << 8) | actor.actorId;
+        if (room.sceneId != lastSceneId || room.setupId != lastSetupId) {
+          console.log('');
+          lastSceneId = room.sceneId;
+          lastSetupId = room.setupId;
+        }
+        console.log(`Scene ${room.sceneId.toString(16)} Setup ${room.setupId} Room ${hexPad(room.roomId, 2)} Grass ${decPad(actor.actorId + 1, 2)},        grass,            NONE,                 SCENE_${room.sceneId.toString(16)}, ${hexPad(key, 5)}, ${item}`);
+      }
+
+      if (actor.typeId === ACTORS_OOT.ROCK_BUSH_GROUP) {
+        const type = (actor.params) & 3;
+        let count: number;
+        if (type > 1) {
+          continue;
+        }
+        if (type == 0) {
+          count = 9;
+        } else {
+          count = 12;
+        }
+        const item = 'RANDOM';
+        if (room.sceneId != lastSceneId || room.setupId != lastSetupId) {
+          console.log('');
+          lastSceneId = room.sceneId;
+          lastSetupId = room.setupId;
+        }
+        for (let i = 0; i < count; ++i) {
+          const key = (i << 16) | ((room.setupId & 0x3) << 14) | (room.roomId << 8) | actor.actorId;
+          console.log(`Scene ${room.sceneId.toString(16)} Setup ${room.setupId} Room ${hexPad(room.roomId, 2)} Grass Pack ${decPad(actor.actorId + 1, 2)} Grass ${decPad(i + 1, 2)},             grass,            NONE,                 SCENE_${room.sceneId.toString(16)}, ${hexPad(key, 5)}, ${item}`);
+        }
+      }
+    }
+  }
+}
+
+
+function outputGrassWeirdPoolOot(roomActors: RoomActors[]) {
+  let lastSceneId = -1;
+  let lastSetupId = -1;
+  let altGrassAcc = 0;
+  for (const room of roomActors) {
+    for (const actor of room.actors) {
+      if (actor.typeId === ACTORS_OOT.OBJ_HANA) {
+        const type = (actor.params) & 3;
+        if (type !== 2)
+          continue;
+        const item = 'NOTHING';
+        const key = ((room.setupId & 0x3) << 14) | (room.roomId << 8) | actor.actorId;
+        if (room.sceneId != lastSceneId || room.setupId != lastSetupId) {
+          console.log('');
+          lastSceneId = room.sceneId;
+          lastSetupId = room.setupId;
+        }
+        console.log(`Scene ${room.sceneId.toString(16)} Setup ${room.setupId} Room ${hexPad(room.roomId, 2)} Grass Weird ${decPad(actor.actorId + 1, 2)},        grass,            NONE,                 SCENE_${room.sceneId.toString(16)}, ${hexPad(key, 5)}, ${item}`);
       }
     }
   }
@@ -443,7 +628,7 @@ function outputPotsPoolMm(roomActors: RoomActors[]) {
 }
 
 function roomActorsFromRaw(rom: Buffer, raw: RawRoom[], game: Game): RoomActors[] {
-  const actorsRooms = raw.map(r => parseRoomActors(rom, r, game));
+  const actorsRooms = raw.map(r => parseRoomActors(rom, r, game)).flat();
 
   /* Inject extra fake rooms */
   if (game === 'mm') {
@@ -497,8 +682,8 @@ async function run() {
   const ootMqRooms = mergeRoomActors([ootRooms, mqRooms]);
 
   /* Build the addr tables */
-  const addrTableOotMq = buildAddressingTable(ootMqRooms);
-  const addrTableMm = buildAddressingTable(mmRooms);
+  const addrTableOotMq = buildAddressingTable('oot', ootMqRooms);
+  const addrTableMm = buildAddressingTable('mm', mmRooms);
 
   /* Codegen */
   await Promise.all([
@@ -506,10 +691,11 @@ async function run() {
     codegenSource(ootMqRooms, mmRooms, addrTableOotMq, addrTableMm),
   ]);
 
-  outputPotsPoolMm(mmRooms);
+  //outputPotsPoolMm(mmRooms);
 
   /* Output */
   //outputPotsPoolOot(mqRooms);
+  outputGrassWeirdPoolOot(ootRooms);
 }
 
 run().catch(e => {

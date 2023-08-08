@@ -4,6 +4,14 @@
   locations:
     "Deku Tree Boss Container": "soul(SOUL_QUEEN_GOHMA) && (has_nuts || can_use_slingshot) && (can_use_sticks || has_weapon)"
     "Deku Tree Boss": "soul(SOUL_QUEEN_GOHMA) && (has_nuts || can_use_slingshot) && (can_use_sticks || has_weapon)"
+    "Deku Tree Boss Grass 1": "can_cut_grass"
+    "Deku Tree Boss Grass 2": "can_cut_grass"
+    "Deku Tree Boss Grass 3": "can_cut_grass"
+    "Deku Tree Boss Grass 4": "can_cut_grass"
+    "Deku Tree Boss Grass 5": "can_cut_grass"
+    "Deku Tree Boss Grass 6": "can_cut_grass"
+    "Deku Tree Boss Grass 7": "can_cut_grass"
+    "Deku Tree Boss Grass 8": "can_cut_grass"
 "Dodongo Cavern Boss":
   boss: true
   dungeon: DC

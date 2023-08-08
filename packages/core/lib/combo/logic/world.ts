@@ -28,7 +28,7 @@ export type WorldArea = {
 };
 
 type WorldCheckNumeric = {
-  type: 'chest' | 'collectible' | 'gs' | 'sf' | 'cow' | 'shop' | 'scrub' | 'sr' | 'pot';
+  type: 'chest' | 'collectible' | 'gs' | 'sf' | 'cow' | 'shop' | 'scrub' | 'sr' | 'pot' | 'grass';
   id: number;
 };
 

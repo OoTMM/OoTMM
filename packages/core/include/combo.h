@@ -28,7 +28,9 @@
 #  include <combo/oot/pause_state.h>
 #  include <combo/oot/actors/Item_Etcetera.h>
 #  include <combo/oot/actors/Obj_Tsubo.h>
+#  include <combo/oot/actors/En_Kusa.h>
 #  include <combo/oot/actors/En_Tubo_Trap.h>
+#  include <combo/oot/actors/Obj_Mure2.h>
 #  include <combo/oot/actors/En_Ossan.h>
 # endif
 
@@ -178,7 +180,19 @@ NORETURN void comboGameSwitch(GameState_Play* play, s32 entrance);
 #define OV_SHOP         0x07
 #define OV_SCRUB        0x08
 #define OV_SR           0x09
-#define OV_EXTENDED     0x0a
+
+#define OV_XFLAG0       0x10
+#define OV_XFLAG1       0x11
+#define OV_XFLAG2       0x12
+#define OV_XFLAG3       0x13
+#define OV_XFLAG4       0x14
+#define OV_XFLAG5       0x15
+#define OV_XFLAG6       0x16
+#define OV_XFLAG7       0x17
+#define OV_XFLAG8       0x18
+#define OV_XFLAG9       0x19
+#define OV_XFLAG10      0x1a
+#define OV_XFLAG11      0x1b
 
 #define OVF_RENEW             (1 << 2)
 #define OVF_PRECOND           (1 << 3)

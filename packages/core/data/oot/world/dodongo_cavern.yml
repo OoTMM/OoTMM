@@ -88,6 +88,7 @@
     "Dodongo Cavern Pot Stairs Pot 2": "true"
     "Dodongo Cavern Pot Stairs Pot 3": "true"
     "Dodongo Cavern Pot Stairs Pot 4": "true"
+    "Dodongo Cavern Grass Lobby": "can_cut_grass"
 "Dodongo Cavern Compass Room":
   dungeon: DC
   exits:
@@ -105,6 +106,9 @@
     "Dodongo Cavern Bomb Bag Side Chest": "true"
     "Dodongo Cavern Pot Room Before Miniboss 1": "true"
     "Dodongo Cavern Pot Room Before Miniboss 2": "true"
+    "Dodongo Cavern Grass Bomb Bag Room": "can_cut_grass"
+    "Dodongo Cavern Grass Pre-Miniboss": "can_cut_grass"
+    "Dodongo Cavern Grass Bomb Bag Side Room": "can_cut_grass"
 "Dodongo Cavern Bomb Bag Side Room":
   dungeon: DC
   exits:
@@ -149,3 +153,4 @@
     "Dodongo Cavern Pot Skull 2": "true"
     "Dodongo Cavern Pot Skull 3": "true"
     "Dodongo Cavern Pot Skull 4": "true"
+    "Dodongo Cavern Grass Pre-Boss": "can_cut_grass"

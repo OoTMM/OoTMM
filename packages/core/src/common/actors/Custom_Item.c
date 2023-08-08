@@ -20,12 +20,7 @@ static int CustomItem_IsColliding(Actor_CustomItem* this, GameState_Play* play)
 
 static void CustomItem_ItemQuery(ComboItemQuery* q, Actor_CustomItem* this)
 {
-    bzero(q, sizeof(*q));
-    q->ovType = OV_EXTENDED;
-    q->sceneId = this->xflag.sceneId;
-    q->roomId = (this->xflag.roomId | ((this->xflag.setupId & 3) << 6));
-    q->id = this->xflag.id;
-    q->gi = this->extendedGi;
+    comboXflagItemQuery(q, &this->xflag, this->extendedGi);
 }
 
 static void CustomItem_ItemOverride(ComboItemOverride* o, Actor_CustomItem* this)
@@ -103,7 +98,7 @@ static void CustomItem_Collect(Actor_CustomItem* this, GameState_Play* play)
     int major;
 
     link = GET_LINK(play);
-    if (link->state & PLAYER_ACTOR_STATE_FROZEN)
+    if (link->state & (PLAYER_ACTOR_STATE_FROZEN | PLAYER_ACTOR_STATE_EPONA))
         return;
 
     /* Query the item */

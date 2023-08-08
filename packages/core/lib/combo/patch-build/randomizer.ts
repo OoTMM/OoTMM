@@ -278,6 +278,9 @@ function zoraSapphireBuffer(world: number, logic: LogicResult): Buffer {
 }
 
 function checkKey(check: WorldCheck): number {
+  /* Extract the ID */
+  const id = checkId(check);
+
   /* Extract the type */
   let typeId: number;
   switch (check.type) {
@@ -309,7 +312,9 @@ function checkKey(check: WorldCheck): number {
     typeId = 0x09;
     break;
   case 'pot':
-    typeId = 0x0a;
+  case 'grass':
+    /* xflag */
+    typeId = 0x10 + ((id >> 16) & 0xf);
     break;
   }
 
@@ -320,6 +325,7 @@ function checkKey(check: WorldCheck): number {
   case 'collectible':
   case 'sf':
   case 'pot':
+  case 'grass':
     sceneId = DATA_SCENES[check.scene];
     if (sceneId === undefined) {
       throw new Error(`Unknown scene ${check.scene}`);
@@ -328,9 +334,6 @@ function checkKey(check: WorldCheck): number {
   default:
     break;
   }
-
-  /* Extract the ID */
-  const id = checkId(check);
 
   /* Build the key */
   let key = 0;

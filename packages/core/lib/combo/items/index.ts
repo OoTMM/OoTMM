@@ -7,7 +7,7 @@ export * as ItemHelpers from './helpers';
 
 export function itemByID(id: string): Item {
   /* HARDCODED */
-  if (['OOT_NOTHING', 'OOT_FLEXIBLE', 'OOT_MAGIC_JAR_SMALL', 'OOT_MAGIC_JAR_LARGE'].includes(id)) {
+  if (['OOT_NOTHING', 'OOT_FLEXIBLE', 'OOT_MAGIC_JAR_SMALL', 'OOT_MAGIC_JAR_LARGE', 'OOT_RANDOM'].includes(id)) {
     id = 'OOT_RUPEE_GREEN';
   }
   if (['MM_NOTHING', 'MM_MAGIC_JAR_SMALL', 'MM_MAGIC_JAR_LARGE', 'MM_???'].includes(id)) {

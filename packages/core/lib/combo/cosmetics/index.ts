@@ -8,7 +8,7 @@ import { Random, sample } from '../random';
 import { toU32Buffer } from '../util';
 import { png } from '../util/png';
 import { Color, ColorArg, ColorRandom, COLORS } from './color';
-import { recolorImage } from './image';
+import { recolorImage } from '../image';
 import fs from 'fs/promises';
 import { enableModelOotLinkChild, enableModelOotLinkAdult } from './model';
 import { BufferPath } from './type';

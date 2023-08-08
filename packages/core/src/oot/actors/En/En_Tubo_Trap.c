@@ -11,6 +11,7 @@ void EnTuboTrap_InitWrapper(Actor_EnTuboTrap* this, GameState_Play* play)
     this->xflag.sceneId = play->sceneId;
     this->xflag.setupId = g.sceneSetupId;
     this->xflag.roomId = this->base.room;
+    this->xflag.sliceId = 0;
     this->xflag.id = g.actorIndex;
 
     /* Forward init */
