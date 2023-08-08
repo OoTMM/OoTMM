@@ -10,8 +10,22 @@ PATCH_START 0x80a80ae0
 .int EnKusa_InitWrapper
 PATCH_END
 
+/* Use our draw func */
+PATCH_START 0x80a80150
+  lui t8,%HI(EnKusa_DrawWrapper)
+PATCH_END
+
+PATCH_START 0x80a80158
+  addiu t8,%LO(EnKusa_DrawWrapper)
+PATCH_END
+
 /* Relocs */
 PATCH_START 0x80a80d78
+.int 0
+PATCH_END
+
+PATCH_START 0x80a80c4c
+.int 0
 .int 0
 PATCH_END
 
