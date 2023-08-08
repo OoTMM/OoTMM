@@ -98,6 +98,7 @@
 # define AC_OBJ_MURE2               0x151
 # define AC_EN_KUSA                 0x125
 # define AC_OBJ_HANA                0x14f
+# define AC_EN_WONDER_TALK2         0x185
 
 #endif
 

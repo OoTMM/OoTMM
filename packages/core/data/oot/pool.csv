@@ -26,6 +26,7 @@ Kokiri Forest Grass Child 4,                                grass,          NONE
 Kokiri Forest Grass Child Crawl 1,                          grass,          NONE,                 KOKIRI_FOREST,                  0x00202,                    RECOVERY_HEART
 Kokiri Forest Grass Child Crawl 2,                          grass,          NONE,                 KOKIRI_FOREST,                  0x00203,                    DEKU_SEEDS_5
 Kokiri Forest Grass Child Crawl 3,                          grass,          NONE,                 KOKIRI_FOREST,                  0x00204,                    RECOVERY_HEART
+Kokiri Forest Grass Child Kokiri,                           grass,          NONE,                 KOKIRI_FOREST,                  0x0003b,                    NOTHING
 Kokiri Forest Grass Adult 01,                               grass,          NONE,                 KOKIRI_FOREST,                  0x08017,                    RANDOM
 Kokiri Forest Grass Adult 02,                               grass,          NONE,                 KOKIRI_FOREST,                  0x18017,                    RANDOM
 Kokiri Forest Grass Adult 03,                               grass,          NONE,                 KOKIRI_FOREST,                  0x28017,                    RANDOM

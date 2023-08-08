@@ -100,6 +100,7 @@ const ACTORS_OOT = {
   FLYING_POT: 0x11d,
   ROCK_BUSH_GROUP: 0x151,
   EN_KUSA: 0x125,
+  OBJ_HANA: 0x14f,
 };
 
 const ACTORS_MM = {
@@ -546,6 +547,30 @@ function outputGrassPoolOot(roomActors: RoomActors[]) {
   }
 }
 
+
+function outputGrassWeirdPoolOot(roomActors: RoomActors[]) {
+  let lastSceneId = -1;
+  let lastSetupId = -1;
+  let altGrassAcc = 0;
+  for (const room of roomActors) {
+    for (const actor of room.actors) {
+      if (actor.typeId === ACTORS_OOT.OBJ_HANA) {
+        const type = (actor.params) & 3;
+        if (type !== 2)
+          continue;
+        const item = 'NOTHING';
+        const key = ((room.setupId & 0x3) << 14) | (room.roomId << 8) | actor.actorId;
+        if (room.sceneId != lastSceneId || room.setupId != lastSetupId) {
+          console.log('');
+          lastSceneId = room.sceneId;
+          lastSetupId = room.setupId;
+        }
+        console.log(`Scene ${room.sceneId.toString(16)} Setup ${room.setupId} Room ${hexPad(room.roomId, 2)} Grass Weird ${decPad(actor.actorId + 1, 2)},        grass,            NONE,                 SCENE_${room.sceneId.toString(16)}, ${hexPad(key, 5)}, ${item}`);
+      }
+    }
+  }
+}
+
 function outputPotsPoolMm(roomActors: RoomActors[]) {
   let lastSceneId = -1;
   let lastSetupId = -1;
@@ -670,7 +695,7 @@ async function run() {
 
   /* Output */
   //outputPotsPoolOot(mqRooms);
-  outputGrassPoolOot(ootRooms);
+  outputGrassWeirdPoolOot(ootRooms);
 }
 
 run().catch(e => {
