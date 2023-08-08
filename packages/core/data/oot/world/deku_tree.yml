@@ -16,6 +16,13 @@
     "Deku Tree Compass Chest": "true"
     "Deku Tree Compass Room Side Chest": "true"
     "Deku Tree GS Compass": "can_damage_skull"
+    "Deku Tree Grass Lobby 1": "can_cut_grass"
+    "Deku Tree Grass Lobby 2": "can_cut_grass"
+    "Deku Tree Grass Lobby 3": "can_cut_grass"
+    "Deku Tree Grass Lobby 4": "can_cut_grass"
+    "Deku Tree Grass Lobby 5": "can_cut_grass"
+    "Deku Tree Grass Compass Room 1": "can_cut_grass"
+    "Deku Tree Grass Compass Room 2": "can_cut_grass"
 "Deku Tree Slingshot Room":
   dungeon: DT
   exits:
@@ -23,6 +30,10 @@
   locations:
     "Deku Tree Slingshot Chest": "true"
     "Deku Tree Slingshot Side Chest": "true"
+    "Deku Tree Grass Slingshot Room 1": "can_cut_grass"
+    "Deku Tree Grass Slingshot Room 2": "can_cut_grass"
+    "Deku Tree Grass Slingshot Room 3": "can_cut_grass"
+    "Deku Tree Grass Slingshot Room 4": "can_cut_grass"
 "Deku Tree Basement":
   dungeon: DT
   exits:
@@ -33,6 +44,12 @@
     "Deku Tree Basement Chest": "true"
     "Deku Tree GS Basement Gate": "can_damage_skull"
     "Deku Tree GS Basement Vines": "has_ranged_weapon || can_use_din || has_bombs"
+    "Deku Tree Grass Basement Main 1": "can_cut_grass"
+    "Deku Tree Grass Basement Main 2": "can_cut_grass"
+    "Deku Tree Grass Eye Switch Room 1": "can_cut_grass"
+    "Deku Tree Grass Eye Switch Room 2": "can_cut_grass"
+    "Deku Tree Grass Eye Switch Room 3": "can_cut_grass"
+    "Deku Tree Grass Eye Switch Room 4": "can_cut_grass"
 "Deku Tree Basement Back Room":
   dungeon: DT
   exits:
@@ -44,6 +61,16 @@
   exits:
     "Deku Tree Basement Back Room": "is_child"
     "Deku Tree Before Boss": "has_fire_or_sticks"
+  locations:
+    "Deku Tree Grass Water Room 1": "can_cut_grass"
+    "Deku Tree Grass Water Room 2": "can_cut_grass"
+    "Deku Tree Grass Torch Room 1": "can_cut_grass"
+    "Deku Tree Grass Torch Room 2": "can_cut_grass"
+    "Deku Tree Grass Larva Room 1": "can_cut_grass"
+    "Deku Tree Grass Larva Room 2": "can_cut_grass"
+    "Deku Tree Grass Pre-Boss Room 1": "can_cut_grass"
+    "Deku Tree Grass Pre-Boss Room 2": "can_cut_grass"
+    "Deku Tree Grass Pre-Boss Room 3": "can_cut_grass"
 "Deku Tree Before Boss":
   dungeon: DT
   exits:

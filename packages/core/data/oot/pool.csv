@@ -439,8 +439,42 @@ Deku Tree GS Compass,                                       gs,             NONE
 Deku Tree GS Basement Vines,                                gs,             NONE,                 INSIDE_DEKU_TREE,               0x0a,                       GS_TOKEN
 Deku Tree GS Basement Gate,                                 gs,             NONE,                 INSIDE_DEKU_TREE,               0x09,                       GS_TOKEN
 Deku Tree GS Basement Back Room,                            gs,             NONE,                 INSIDE_DEKU_TREE,               0x08,                       GS_TOKEN
+Deku Tree Grass Lobby 1,                                    grass,          NONE,                 INSIDE_DEKU_TREE,               0x00006,                    GRASS_BUSH
+Deku Tree Grass Lobby 2,                                    grass,          NONE,                 INSIDE_DEKU_TREE,               0x00007,                    GRASS_BUSH
+Deku Tree Grass Lobby 3,                                    grass,          NONE,                 INSIDE_DEKU_TREE,               0x00008,                    GRASS_BUSH
+Deku Tree Grass Lobby 4,                                    grass,          NONE,                 INSIDE_DEKU_TREE,               0x00009,                    GRASS_BUSH
+Deku Tree Grass Lobby 5,                                    grass,          NONE,                 INSIDE_DEKU_TREE,               0x0000a,                    GRASS_BUSH
+Deku Tree Grass Slingshot Room 1,                           grass,          NONE,                 INSIDE_DEKU_TREE,               0x00200,                    GRASS_BUSH
+Deku Tree Grass Slingshot Room 2,                           grass,          NONE,                 INSIDE_DEKU_TREE,               0x00201,                    GRASS_BUSH
+Deku Tree Grass Slingshot Room 3,                           grass,          NONE,                 INSIDE_DEKU_TREE,               0x00202,                    GRASS_BUSH
+Deku Tree Grass Slingshot Room 4,                           grass,          NONE,                 INSIDE_DEKU_TREE,               0x00203,                    GRASS_BUSH
+Deku Tree Grass Basement Main 1,                            grass,          NONE,                 INSIDE_DEKU_TREE,               0x00301,                    GRASS_BUSH
+Deku Tree Grass Basement Main 2,                            grass,          NONE,                 INSIDE_DEKU_TREE,               0x00302,                    GRASS_BUSH
+Deku Tree Grass Eye Switch Room 1,                          grass,          NONE,                 INSIDE_DEKU_TREE,               0x00400,                    GRASS_BUSH
+Deku Tree Grass Eye Switch Room 2,                          grass,          NONE,                 INSIDE_DEKU_TREE,               0x00401,                    GRASS_BUSH
+Deku Tree Grass Eye Switch Room 3,                          grass,          NONE,                 INSIDE_DEKU_TREE,               0x00402,                    GRASS_BUSH
+Deku Tree Grass Eye Switch Room 4,                          grass,          NONE,                 INSIDE_DEKU_TREE,               0x00403,                    GRASS_BUSH
+Deku Tree Grass Water Room 1,                               grass,          NONE,                 INSIDE_DEKU_TREE,               0x00501,                    GRASS_BUSH
+Deku Tree Grass Water Room 2,                               grass,          NONE,                 INSIDE_DEKU_TREE,               0x00502,                    GRASS_BUSH
+Deku Tree Grass Torch Room 1,                               grass,          NONE,                 INSIDE_DEKU_TREE,               0x00602,                    GRASS_BUSH
+Deku Tree Grass Torch Room 2,                               grass,          NONE,                 INSIDE_DEKU_TREE,               0x00603,                    GRASS_BUSH
+Deku Tree Grass Larva Room 1,                               grass,          NONE,                 INSIDE_DEKU_TREE,               0x00702,                    GRASS_BUSH
+Deku Tree Grass Larva Room 2,                               grass,          NONE,                 INSIDE_DEKU_TREE,               0x00703,                    GRASS_BUSH
+Deku Tree Grass Pre-Boss Room 1,                            grass,          NONE,                 INSIDE_DEKU_TREE,               0x00900,                    GRASS_BUSH
+Deku Tree Grass Pre-Boss Room 2,                            grass,          NONE,                 INSIDE_DEKU_TREE,               0x00901,                    GRASS_BUSH
+Deku Tree Grass Pre-Boss Room 3,                            grass,          NONE,                 INSIDE_DEKU_TREE,               0x00902,                    GRASS_BUSH
+Deku Tree Grass Compass Room 1,                             grass,          NONE,                 INSIDE_DEKU_TREE,               0x00a02,                    GRASS_BUSH
+Deku Tree Grass Compass Room 2,                             grass,          NONE,                 INSIDE_DEKU_TREE,               0x00a03,                    GRASS_BUSH
 Deku Tree Boss Container,                                   collectible,    NONE,                 LAIR_GOHMA,                     0x1f,                       HEART_CONTAINER
 Deku Tree Boss,                                             npc,            NONE,                 LAIR_GOHMA,                     BLUE_WARP_GOHMA,            STONE_EMERALD
+Deku Tree Boss Grass 1,                                     grass,          NONE,                 LAIR_GOHMA,                     0x00101,                    GRASS_BUSH
+Deku Tree Boss Grass 2,                                     grass,          NONE,                 LAIR_GOHMA,                     0x00102,                    GRASS_BUSH
+Deku Tree Boss Grass 3,                                     grass,          NONE,                 LAIR_GOHMA,                     0x00103,                    GRASS_BUSH
+Deku Tree Boss Grass 4,                                     grass,          NONE,                 LAIR_GOHMA,                     0x00104,                    GRASS_BUSH
+Deku Tree Boss Grass 5,                                     grass,          NONE,                 LAIR_GOHMA,                     0x00105,                    GRASS_BUSH
+Deku Tree Boss Grass 6,                                     grass,          NONE,                 LAIR_GOHMA,                     0x00106,                    GRASS_BUSH
+Deku Tree Boss Grass 7,                                     grass,          NONE,                 LAIR_GOHMA,                     0x00107,                    GRASS_BUSH
+Deku Tree Boss Grass 8,                                     grass,          NONE,                 LAIR_GOHMA,                     0x00108,                    GRASS_BUSH
 Dodongo Cavern Map Chest,                                   chest,          NONE,                 DODONGO_CAVERN,                 0x08,                       MAP_DC
 Dodongo Cavern Compass Chest,                               chest,          NONE,                 DODONGO_CAVERN,                 0x05,                       COMPASS_DC
 Dodongo Cavern Bomb Bag Side Chest,                         chest,          NONE,                 DODONGO_CAVERN,                 0x06,                       RUPEE_RED

@@ -461,6 +461,15 @@ function outputPotsPoolOot(roomActors: RoomActors[]) {
   }
 }
 
+function hexPad(n: number, width: number) {
+  const s = n.toString(16);
+  return '0x' + '0'.repeat(width - s.length) + s;
+}
+
+function decPad(n: number, width: number) {
+  const s = n.toString();
+  return '0'.repeat(width - s.length) + s;
+}
 
 function outputGrassPoolOot(roomActors: RoomActors[]) {
   let lastSceneId = -1;
@@ -479,7 +488,7 @@ function outputGrassPoolOot(roomActors: RoomActors[]) {
           lastSceneId = room.sceneId;
           lastSetupId = room.setupId;
         }
-        console.log(`Scene ${room.sceneId.toString(16)} Setup ${room.setupId} Room ${room.roomId} Grass ${actor.actorId}, grass,            NONE,                 SCENE_${room.sceneId.toString(16)}, 0x${key.toString(16)}, ${item}`);
+        console.log(`Scene ${room.sceneId.toString(16)} Setup ${room.setupId} Room ${hexPad(room.roomId, 2)} Grass ${decPad(actor.actorId + 1, 2)},        grass,            NONE,                 SCENE_${room.sceneId.toString(16)}, ${hexPad(key, 5)}, ${item}`);
       }
 
       if (actor.typeId === ACTORS_OOT.ROCK_BUSH_GROUP) {
@@ -501,7 +510,7 @@ function outputGrassPoolOot(roomActors: RoomActors[]) {
         }
         for (let i = 0; i < count; ++i) {
           const key = (i << 16) | ((room.setupId & 0x3) << 14) | (room.roomId << 8) | actor.actorId;
-          console.log(`Scene ${room.sceneId.toString(16)} Setup ${room.setupId} Room ${room.roomId} Grass Pack ${actor.actorId} Grass ${i}, grass,            NONE,                 SCENE_${room.sceneId.toString(16)}, 0x${key.toString(16)}, ${item}`);
+          console.log(`Scene ${room.sceneId.toString(16)} Setup ${room.setupId} Room ${hexPad(room.roomId, 2)} Grass Pack ${decPad(actor.actorId + 1, 2)} Grass ${decPad(i + 1, 2)},             grass,            NONE,                 SCENE_${room.sceneId.toString(16)}, ${hexPad(key, 5)}, ${item}`);
         }
       }
     }

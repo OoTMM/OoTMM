@@ -14,7 +14,6 @@ static const CsmcDisplayList kGrassAltDlist[] = {
 
 static int csmcGrassId(s16 gi, int def)
 {
-    const CsmcDisplayList* dlists;
     int csmcId;
 
     if (gi == 0)
