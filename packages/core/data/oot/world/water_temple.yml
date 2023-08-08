@@ -33,12 +33,12 @@
 "Water Temple Ruto Room":
   dungeon: Water
   exits:
-    "Water Temple Map Room": "event(WATER_LEVEL_RESET) || climb_anywhere"
+    "Water Temple Map Room": "event(WATER_LEVEL_RESET) || climb_anywhere || longshot_anywhere"
     "Water Temple Shell Room": "event(WATER_LEVEL_LOW) && (can_use_bow || has_fire)"
   events:
     WATER_LEVEL_LOW: "can_play(SONG_ZELDA)"
   locations:
-    "Water Temple Bombable Chest": "(event(WATER_LEVEL_MIDDLE) || (event(WATER_LEVEL_LOW) && (climb_anywhere))) && has_explosives"
+    "Water Temple Bombable Chest": "(event(WATER_LEVEL_MIDDLE) || (event(WATER_LEVEL_LOW) && (climb_anywhere || longshot_anywhere))) && has_explosives"
     "Water Temple Pot Ruto Room 1": "event(WATER_LEVEL_LOW) || (has_iron_boots && can_hookshot)"
     "Water Temple Pot Ruto Room 2": "event(WATER_LEVEL_LOW) || (has_iron_boots && can_hookshot)"
 "Water Temple Map Room":
@@ -123,23 +123,28 @@
   dungeon: Water
   exits:
     "Water Temple Dark Link": "true"
+  locations:
+    "Water Temple Pot Before Dark Link 1": "true"
+    "Water Temple Pot Before Dark Link 2": "true"
 "Water Temple Dark Link":
   dungeon: Water
   exits:
     "Water Temple Longshot Room": "has_weapon"
-  locations:
-    "Water Temple Pot Before Dark Link 1": "true"
-    "Water Temple Pot Before Dark Link 2": "true"
+    "Water Temple Before Dark Link": "has_weapon"
 "Water Temple Longshot Room":
   dungeon: Water
   exits:
-    "Water Temple River": "can_play_time || is_child"
+    "Water Temple River": "event(LONGSHOT_TIME_BLOCK) || is_child"
+    "Water Temple Dark Link": "true"
+  events:
+    LONGSHOT_TIME_BLOCK: "can_play_time"
   locations:
     "Water Temple Longshot": "true"
 "Water Temple River":
   dungeon: Water
   exits:
     "Water Temple Dragon Room Ledge": "can_hit_triggers_distance"
+    "Water Temple Longshot Room": "longshot_anywhere && climb_anywhere && (is_child || event(LONGSHOT_TIME_BLOCK))"
   locations:
     "Water Temple GS River": "has_iron_boots"
     "Water Temple Pot River 1": "true"

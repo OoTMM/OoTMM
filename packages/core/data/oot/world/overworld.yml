@@ -736,7 +736,7 @@
     "Hyrule Field": "true"
     "Kakariko Trail Start": "setting(kakarikoGate, open) || event(KAKARIKO_GATE_OPEN) || is_adult || climb_anywhere || hookshot_anywhere"
     "Graveyard": "true"
-    "Bottom of the Well": "(event(WELL_DRAIN) && cond(setting(wellAdult), true, is_child)) || (is_child && has_iron_boots)"
+    "Bottom of the Well": "(event(WELL_DRAIN) && cond(setting(wellAdult), true, is_child)) || (is_child && (has_iron_boots || longshot_anywhere))"
     "Skulltula House": "true"
     "Shooting Gallery Adult": "is_adult && is_day"
     "Kakariko Rooftop": "(is_child && is_day) || can_hookshot || (is_adult && trick(OOT_PASS_COLLISION)) || climb_anywhere"
@@ -973,7 +973,7 @@
   time: flow
   exits:
     "Goron City": "true"
-    "Dodongo Cavern": "has_bombflowers || is_adult"
+    "Dodongo Cavern": "has_bombflowers || is_adult || (trick(OOT_DC_BOULDER) && hookshot_anywhere)"
     "Kakariko Trail Start": "true"
     "Death Mountain Summit": "event(BOULDER_DEATH_MOUNTAIN) || can_ride_bean(BEAN_DEATH_MOUNTAIN) || climb_anywhere || hookshot_anywhere"
     "Death Mountain Storms Grotto": "hidden_grotto_storms"
@@ -1182,7 +1182,7 @@
   region: ZORA_DOMAIN
   exits:
     "Zora River": "true"
-    "Lake Hylia": "is_child && (can_dive_small || hookshot_anywhere)"
+    "Lake Hylia": "is_child && (can_dive_small || longshot_anywhere || (trick(OOT_LAKE_SHORTCUT) && hookshot_anywhere))"
     "Zora Domain Back": "king_zora_moved || (is_adult && trick(OOT_KZ_SKIP)) || climb_anywhere || hookshot_anywhere"
     "Zora Shop": "is_child || has_blue_fire"
     "Zora Domain Grotto": "hidden_grotto_storms"
@@ -1233,10 +1233,10 @@
   exits:
     "Hyrule Field": "true"
     "Hyrule Field Drawbridge": "is_child"
-    "Zora Domain": "is_child && (can_dive_small || hookshot_anywhere)"
+    "Zora Domain": "is_child && (can_dive_small || longshot_anywhere || (trick(OOT_LAKE_SHORTCUT) && hookshot_anywhere))"
     "Laboratory": "true"
     "Water Temple": "has_iron_boots && has_tunic_zora && can_hookshot"
-    "Fishing Pond": "is_child || event(WATER_TEMPLE_CLEARED) || scarecrow_hookshot || can_ride_bean(BEAN_LAKE_HYLIA) || hookshot_anywhere || climb_anywhere"
+    "Fishing Pond": "is_child || event(WATER_TEMPLE_CLEARED) || (is_adult && scarecrow_hookshot) || can_ride_bean(BEAN_LAKE_HYLIA) || hookshot_anywhere || climb_anywhere"
     "Lake Hylia Grotto": "true"
   events:
     SCARECROW_CHILD: "is_child && has_ocarina"
@@ -1250,8 +1250,8 @@
     BUGS: "has_bottle && can_cut_grass && is_child"
   locations:
     "Lake Hylia Underwater Bottle": "is_child && can_dive_small"
-    "Lake Hylia Fire Arrow": "can_use_bow && (event(WATER_TEMPLE_CLEARED) || scarecrow_longshot || climb_anywhere)"
-    "Lake Hylia HP": "can_ride_bean(BEAN_LAKE_HYLIA) || scarecrow_hookshot || hookshot_anywhere"
+    "Lake Hylia Fire Arrow": "can_use_bow && (event(WATER_TEMPLE_CLEARED) || (is_adult && (scarecrow_longshot || longshot_anywhere)) || climb_anywhere)"
+    "Lake Hylia HP": "can_ride_bean(BEAN_LAKE_HYLIA) || (is_adult && scarecrow_hookshot) || hookshot_anywhere"
     "Lake Hylia GS Lab Wall": "is_child && gs_night && (can_collect_distance || (trick(OOT_LAB_WALL_GS) && (can_use_sword || can_use_sticks)))"
     "Lake Hylia GS Island": "is_child && gs_night && can_damage_skull"
     "Lake Hylia GS Soil": "gs_soil && can_damage_skull"
@@ -1291,7 +1291,7 @@
   exits:
     "Zora Domain Back": "true"
     "Jabu-Jabu": "is_child && has_bottle && (has(FISH) || event(FISH) || (trick(OOT_ENTER_JABU) && (climb_anywhere || hookshot_anywhere || has_weapon || can_use_sticks)))"
-    "Zora Fountain Frozen": "is_adult || climb_anywhere"
+    "Zora Fountain Frozen": "is_adult || climb_anywhere || longshot_anywhere"
     "Fairy Fountain Farore": "has_explosives"
   events:
     SEEDS: "is_child"
@@ -1345,7 +1345,7 @@
   exits:
     "Death Mountain Summit": "true"
     "Death Mountain Crater Bottom": "(is_adult && event(RED_BOULDER_BROKEN)) || (has_hover_boots && (has_weapon || can_hammer || can_use_sticks)) || climb_anywhere || hookshot_anywhere"
-    "Death Mountain Crater Warp": "has_tunic_goron_strict && scarecrow_longshot"
+    "Death Mountain Crater Warp": "has_tunic_goron_strict && ((is_adult && scarecrow_longshot) || longshot_anywhere)"
     "Death Mountain Crater Generic Grotto": "has_explosives_or_hammer"
   events:
     #Having to farm these rocks for drops without heat resistance isn't fair without access to the grotto
@@ -1533,7 +1533,7 @@
   exits:
     "Gerudo Fortress Lower-Center Ledge": "true"
     "Gerudo Fortress Lower-Right Ledge": "true"
-    "Gerudo Fortress Upper-Left Ledge": "scarecrow_hookshot || can_longshot || has_hover_boots || climb_anywhere || hookshot_anywhere"
+    "Gerudo Fortress Upper-Left Ledge": "(is_adult && scarecrow_hookshot) || can_longshot || has_hover_boots || climb_anywhere || hookshot_anywhere"
     "Gerudo Fortress Center Ledge": "true"
   locations:
     "Gerudo Fortress GS Wall": "is_adult && gs_night && (can_collect_distance || climb_anywhere)"
@@ -1554,6 +1554,7 @@
   exits:
     "Gerudo Fortress Exterior": "true"
     "Gerudo Fortress Break Room Bottom": "true"
+    "Gerudo Fortress Above Prison": "climb_anywhere || longshot_anywhere"
 "Gerudo Fortress Above Prison":
   region: GERUDO_FORTRESS
   exits:

@@ -131,7 +131,7 @@
     "Spirit Temple Boss": "boss_key(BOSS_KEY_SPIRIT) && event(SPIRIT_LIGHT_STATUE) && (can_hookshot || (climb_anywhere && has_hover_boots && can_jump_slash && trick(OOT_SPIRIT_BOSS_CLIMB_NO_HOOK)))"
   locations:
     "Spirit Temple Statue Base": "(event(SPIRIT_CHILD_DOOR) && has_explosives && can_use_sticks) || has_fire_spirit || (has_fire_arrows && event(SPIRIT_ADULT_DOOR))"
-    "Spirit Temple GS Statue": "(event(SPIRIT_ADULT_DOOR) && (scarecrow_hookshot || has_hover_boots || can_longshot || climb_anywhere)) || (event(SPIRIT_CHILD_DOOR) && has_explosives && (has_hover_boots || can_hookshot || climb_anywhere)) || (climb_anywhere && can_damage_skull)"
+    "Spirit Temple GS Statue": "(event(SPIRIT_ADULT_DOOR) && ((is_adult && scarecrow_hookshot) || has_hover_boots || can_longshot || climb_anywhere)) || (event(SPIRIT_CHILD_DOOR) && has_explosives && (has_hover_boots || can_hookshot || climb_anywhere)) || (climb_anywhere && can_damage_skull)"
     "Spirit Temple Silver Gauntlets": "small_keys_spirit(3) && has_hookshot(2) && has_explosives && soul_iron_knuckle && soul(SOUL_ANUBIS) && soul_beamos"
     "Spirit Temple Pot Statue Room 1": "true"
     "Spirit Temple Pot Statue Room 2": "true"
