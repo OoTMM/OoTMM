@@ -22,8 +22,14 @@
 #define CSMC_POT_HEART              0x07
 #define CSMC_POT_BOSSKEY            0x08
 
-#define CSMC_GRASS_NORMAL           0x00
-#define CSMC_GRASS_MAJOR            0x01
+#define CSMC_GRASS_NORMAL     0x00
+#define CSMC_GRASS_BOSS_KEY   0x01
+#define CSMC_GRASS_MAJOR      0x02
+#define CSMC_GRASS_KEY        0x03
+#define CSMC_GRASS_SPIDER     0x04
+#define CSMC_GRASS_FAIRY      0x05
+#define CSMC_GRASS_HEART      0x06
+#define CSMC_GRASS_SOUL       0x07
 
 #define CTF_MIRROR          (1 << 0)
 #define CTF_CLAMP           (1 << 1)
