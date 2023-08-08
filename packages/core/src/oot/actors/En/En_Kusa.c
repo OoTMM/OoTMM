@@ -38,6 +38,7 @@ void EnKusa_DrawWrapper(Actor_EnKusa* this, GameState_Play* play)
 {
     ActorFunc EnKusa_Draw;
     ComboItemOverride o;
+    int alt;
 
     if (comboConfig(CFG_OOT_SHUFFLE_GRASS) && !comboXflagsGet(&this->xflag))
         comboXflagItemOverride(&o, &this->xflag, 0);
@@ -45,7 +46,11 @@ void EnKusa_DrawWrapper(Actor_EnKusa* this, GameState_Play* play)
         o.gi = 0;
 
     /* Prepare */
-    csmcGrassPreDraw(play, o.gi, CSMC_GRASS_NORMAL);
+    if ((this->base.variable & 3) == 0)
+        alt = 0;
+    else
+        alt = 1;
+    csmcGrassPreDraw(play, o.gi, CSMC_GRASS_NORMAL, alt);
 
     /* Draw the actor */
     EnKusa_Draw = actorAddr(AC_EN_KUSA, 0x80a80a50);

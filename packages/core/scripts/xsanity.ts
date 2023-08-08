@@ -463,16 +463,23 @@ function outputPotsPoolOot(roomActors: RoomActors[]) {
 
 
 function outputGrassPoolOot(roomActors: RoomActors[]) {
+  let lastSceneId = -1;
+  let lastSetupId = -1;
   for (const room of roomActors) {
     for (const actor of room.actors) {
       if (actor.typeId === ACTORS_OOT.EN_KUSA) {
         const grassType = (actor.params) & 3;
-        if (grassType !== 0) {
-          continue;
+        if (grassType == 3) {
+          console.log("Grass type 3????");
         }
         const item = 'GRASS_BUSH';
         const key = ((room.setupId & 0x3) << 14) | (room.roomId << 8) | actor.actorId;
-        console.log(`Scene ${room.sceneId.toString(16)} Setup ${room.setupId} Room ${room.roomId} Grass Bush ${actor.actorId}, grass,            NONE,                 SCENE_${room.sceneId.toString(16)}, 0x${key.toString(16)}, ${item}`);
+        if (room.sceneId != lastSceneId || room.setupId != lastSetupId) {
+          console.log('');
+          lastSceneId = room.sceneId;
+          lastSetupId = room.setupId;
+        }
+        console.log(`Scene ${room.sceneId.toString(16)} Setup ${room.setupId} Room ${room.roomId} Grass ${actor.actorId}, grass,            NONE,                 SCENE_${room.sceneId.toString(16)}, 0x${key.toString(16)}, ${item}`);
       }
 
       if (actor.typeId === ACTORS_OOT.ROCK_BUSH_GROUP) {
@@ -487,6 +494,11 @@ function outputGrassPoolOot(roomActors: RoomActors[]) {
           count = 12;
         }
         const item = 'GRASS_BUSH';
+        if (room.sceneId != lastSceneId || room.setupId != lastSetupId) {
+          console.log('');
+          lastSceneId = room.sceneId;
+          lastSetupId = room.setupId;
+        }
         for (let i = 0; i < count; ++i) {
           const key = (i << 16) | ((room.setupId & 0x3) << 14) | (room.roomId << 8) | actor.actorId;
           console.log(`Scene ${room.sceneId.toString(16)} Setup ${room.setupId} Room ${room.roomId} Grass Pack ${actor.actorId} Grass ${i}, grass,            NONE,                 SCENE_${room.sceneId.toString(16)}, 0x${key.toString(16)}, ${item}`);

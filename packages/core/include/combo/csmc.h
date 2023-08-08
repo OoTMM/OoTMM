@@ -60,6 +60,6 @@ int     csmcChestLarge(s16 gi);
 void csmcPotPreDraw(Actor* this, GameState_Play* play, s16 gi, int def);
 
 /* Grass */
-void csmcGrassPreDraw(GameState_Play* play, s16 gi, int def);
+void csmcGrassPreDraw(GameState_Play* play, s16 gi, int def, int alt);
 
 #endif

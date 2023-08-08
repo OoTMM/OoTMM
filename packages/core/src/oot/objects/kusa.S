@@ -13,8 +13,18 @@ PATCH_OBJECT \object, \offset
 PATCH_END
 .endm
 
-/* Grass bush */
-PATCH_TEXTURE 0x0002, 0xb9e8, 0x0a
-PATCH_OBJECT 0x0002, 0xba40
+/* Normal grass */
+PATCH_TEXTURE 0x002, 0xb9e8, 0x0a
+PATCH_OBJECT 0x002, 0xba40
+.quad 0
+PATCH_END
+
+/* Alt grass */
+PATCH_TEXTURE 0x12b, 0x0158, 0x0a
+PATCH_TEXTURE 0x12b, 0x02f8, 0x0a
+PATCH_OBJECT 0x12b, 0x01b0
+.quad 0
+PATCH_END
+PATCH_OBJECT 0x12b, 0x0350
 .quad 0
 PATCH_END
