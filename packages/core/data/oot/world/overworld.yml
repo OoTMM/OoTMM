@@ -217,6 +217,10 @@
     BUGS: "has_bottle && can_cut_grass"
   locations:
     "Hyrule Field Grotto Open": "true"
+    "Hyrule Field Grotto Open Grass 1": "can_cut_grass"
+    "Hyrule Field Grotto Open Grass 2": "can_cut_grass"
+    "Hyrule Field Grotto Open Grass 3": "can_cut_grass"
+    "Hyrule Field Grotto Open Grass 4": "can_cut_grass"
   gossip:
     "Hyrule Field Gossip Near Lake Hylia": "true"
 "Hyrule Field Southeast Grotto":
@@ -233,6 +237,10 @@
     BUGS: "has_bottle && can_cut_grass"
   locations:
     "Hyrule Field Grotto Southeast": "true"
+    "Hyrule Field Grotto Southeast Grass 1": "can_cut_grass"
+    "Hyrule Field Grotto Southeast Grass 2": "can_cut_grass"
+    "Hyrule Field Grotto Southeast Grass 3": "can_cut_grass"
+    "Hyrule Field Grotto Southeast Grass 4": "can_cut_grass"
   gossip:
     "Hyrule Field Gossip Southeast Grotto": "true"
 "Hyrule Field Grotto Near Market":
@@ -249,6 +257,10 @@
     BUGS: "has_bottle && can_cut_grass"
   locations:
     "Hyrule Field Grotto Market": "true"
+    "Hyrule Field Grotto Market Grass 1": "can_cut_grass"
+    "Hyrule Field Grotto Market Grass 2": "can_cut_grass"
+    "Hyrule Field Grotto Market Grass 3": "can_cut_grass"
+    "Hyrule Field Grotto Market Grass 4": "can_cut_grass"
   gossip:
     "Hyrule Field Gossip Near Castle Town": "true"
 "Hyrule Field Tektite Grotto":
@@ -269,6 +281,8 @@
     "Hyrule Field Cow": "has_fire && can_play_epona"
     "Hyrule Field Cow Grotto Pot 1": "has_fire"
     "Hyrule Field Cow Grotto Pot 2": "has_fire"
+    "Hyrule Field Grotto Near Gerudo Grass 1": "has_fire && can_cut_grass"
+    "Hyrule Field Grotto Near Gerudo Grass 2": "has_fire && can_cut_grass"
   gossip:
     "Hyrule Field Gossip Near Gerudo Valley": "has_fire"
 "Hyrule Field Grotto Near Kak":
@@ -673,6 +687,10 @@
     BUGS: "has_bottle && can_cut_grass"
   locations:
     "Lost Woods Grotto Generic": "true"
+    "Lost Woods Grotto Generic Grass 1": "can_cut_grass"
+    "Lost Woods Grotto Generic Grass 2": "can_cut_grass"
+    "Lost Woods Grotto Generic Grass 3": "can_cut_grass"
+    "Lost Woods Grotto Generic Grass 4": "can_cut_grass"
   gossip:
     "Lost Woods Gossip Grotto": "true"
 "Lost Woods Bridge":
@@ -928,6 +946,10 @@
     BUGS: "has_bottle && can_cut_grass"
   locations:
     "Kakariko Grotto Back": "true"
+    "Kakariko Grotto Back Grass 1": "can_cut_grass"
+    "Kakariko Grotto Back Grass 2": "can_cut_grass"
+    "Kakariko Grotto Back Grass 3": "can_cut_grass"
+    "Kakariko Grotto Back Grass 4": "can_cut_grass"
   gossip:
     "Kakariko Gossip Grotto": "true"
 "Graveyard":
@@ -1056,6 +1078,10 @@
     BUGS: "has_bottle && can_cut_grass"
   locations:
     "Death Mountain Grotto": "true"
+    "Death Mountain Grotto Grass 1": "can_cut_grass"
+    "Death Mountain Grotto Grass 2": "can_cut_grass"
+    "Death Mountain Grotto Grass 3": "can_cut_grass"
+    "Death Mountain Grotto Grass 4": "can_cut_grass"
   gossip:
     "Death Mountain Gossip Grotto": "true"
 "Death Mountain Cow Grotto":
@@ -1066,6 +1092,8 @@
     RUPEES: "true"
   locations:
     "Death Mountain Cow": "can_play_epona"
+    "Death Mountain Cow Grotto Grass 1": "can_cut_grass"
+    "Death Mountain Cow Grotto Grass 2": "can_cut_grass"
 "Fairy Fountain Magic":
   region: ENTRANCE
   exits:
@@ -1211,6 +1239,10 @@
     BUGS: "has_bottle && can_cut_grass"
   locations:
     "Zora River Grotto": "true"
+    "Zora River Grotto Grass 1": "can_cut_grass"
+    "Zora River Grotto Grass 2": "can_cut_grass"
+    "Zora River Grotto Grass 3": "can_cut_grass"
+    "Zora River Grotto Grass 4": "can_cut_grass"
   gossip:
     "Zora River Gossip Grotto": "true"
 "Zora River Boulder Grotto":
@@ -1444,6 +1476,10 @@
     BUGS: "has_bottle && can_cut_grass"
   locations:
     "Death Mountain Crater Grotto": "true"
+    "Death Mountain Crater Grotto Grass 1": "can_cut_grass"
+    "Death Mountain Crater Grotto Grass 2": "can_cut_grass"
+    "Death Mountain Crater Grotto Grass 3": "can_cut_grass"
+    "Death Mountain Crater Grotto Grass 4": "can_cut_grass"
   gossip:
     "Death Mountain Crater Gossip Grotto": "true"
 "Death Mountain Crater Scrub Grotto":
