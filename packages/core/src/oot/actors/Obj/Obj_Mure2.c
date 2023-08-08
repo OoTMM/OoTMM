@@ -1,5 +1,7 @@
 #include <combo.h>
 
+void EnKusa_Aliases(Xflag* xflag);
+
 void ObjMure2_InitWrapper(Actor_ObjMure2* this, GameState_Play* play)
 {
     ActorFunc init;
@@ -51,5 +53,8 @@ void ObjMure2_SpawnChildrenWrapper(Actor_ObjMure2* this, GameState_Play* play)
         kusa->xflag.roomId = this->xflag.roomId;
         kusa->xflag.sliceId = i;
         kusa->xflag.id = this->xflag.id;
+
+        /* Aliases */
+        EnKusa_Aliases(&kusa->xflag);
     }
 }

@@ -302,6 +302,15 @@
   events:
     RICHARD: "is_night && is_child"
     RUPEES: "is_child"
+  locations:
+    "Market Grass 1": "is_child && can_cut_grass_no_c_button"
+    "Market Grass 2": "is_child && can_cut_grass_no_c_button"
+    "Market Grass 3": "is_child && can_cut_grass_no_c_button"
+    "Market Grass 4": "is_child && can_cut_grass_no_c_button"
+    "Market Grass 5": "is_child && can_cut_grass_no_c_button"
+    "Market Grass 6": "is_child && can_cut_grass_no_c_button"
+    "Market Grass 7": "is_child && can_cut_grass_no_c_button"
+    "Market Grass 8": "is_child && can_cut_grass_no_c_button"
 "Market Castle Entry":
   region: MARKET
   exits:

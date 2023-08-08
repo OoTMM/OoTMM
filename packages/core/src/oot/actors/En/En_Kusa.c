@@ -2,6 +2,19 @@
 #include <combo/csmc.h>
 #include <combo/item.h>
 
+void EnKusa_Aliases(Xflag* xflag)
+{
+    switch (xflag->sceneId)
+    {
+    case SCE_OOT_MARKET_CHILD_NIGHT:
+        xflag->sceneId = SCE_OOT_MARKET_CHILD_DAY;
+        xflag->id += 16;
+        break;
+    default:
+        break;
+    }
+}
+
 void EnKusa_InitWrapper(Actor_EnKusa* this, GameState_Play* play)
 {
     ActorFunc init;
@@ -12,6 +25,9 @@ void EnKusa_InitWrapper(Actor_EnKusa* this, GameState_Play* play)
     this->xflag.roomId = this->base.room;
     this->xflag.sliceId = 0;
     this->xflag.id = g.actorIndex;
+
+    /* Aliases */
+    EnKusa_Aliases(&this->xflag);
 
     /* Forward init */
     init = actorAddr(AC_EN_KUSA, 0x80a7ff78);

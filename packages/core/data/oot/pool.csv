@@ -369,6 +369,14 @@ Market Bombchu Shop Item 5,                                 shop,           NONE
 Market Bombchu Shop Item 6,                                 shop,           NONE,                 BOMBCHU_SHOP,                   0x0d,                       BOMBCHU_10
 Market Bombchu Shop Item 7,                                 shop,           NONE,                 BOMBCHU_SHOP,                   0x0e,                       BOMBCHU_10
 Market Bombchu Shop Item 8,                                 shop,           NONE,                 BOMBCHU_SHOP,                   0x0f,                       BOMBCHU_10
+Market Grass 1,                                             grass,          NONE,                 MARKET_CHILD_DAY,               0x00017,                    RANDOM
+Market Grass 2,                                             grass,          NONE,                 MARKET_CHILD_DAY,               0x00018,                    RANDOM
+Market Grass 3,                                             grass,          NONE,                 MARKET_CHILD_DAY,               0x00019,                    RANDOM
+Market Grass 4,                                             grass,          NONE,                 MARKET_CHILD_DAY,               0x0001a,                    RANDOM
+Market Grass 5,                                             grass,          NONE,                 MARKET_CHILD_DAY,               0x0001b,                    RANDOM
+Market Grass 6,                                             grass,          NONE,                 MARKET_CHILD_DAY,               0x0001c,                    RANDOM
+Market Grass 7,                                             grass,          NONE,                 MARKET_CHILD_DAY,               0x0001d,                    RANDOM
+Market Grass 8,                                             grass,          NONE,                 MARKET_CHILD_DAY,               0x0001e,                    RANDOM
 Bombchu Bowling Reward 1,                                   npc,            NONE,                 BOMBCHU_BOWLING_ALLEY,          BOMBCHU_BOWLING_1,          BOMB_BAG
 Bombchu Bowling Reward 2,                                   npc,            NONE,                 BOMBCHU_BOWLING_ALLEY,          BOMBCHU_BOWLING_2,          HEART_PIECE
 Treasure Game HP,                                           chest,          NONE,                 TREASURE_SHOP,                  0x0a,                       HEART_PIECE
