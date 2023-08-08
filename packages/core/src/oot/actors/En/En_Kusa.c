@@ -50,6 +50,23 @@ void EnKusa_Aliases(Xflag* xflag)
             xflag->setupId = 0;
         }
         break;
+    case SCE_OOT_KOKIRI_FOREST:
+        if (xflag->setupId == 3)
+        {
+            xflag->setupId = 2; /* Next case */
+            xflag->id -= 7;
+        }
+        if (xflag->setupId == 2 && xflag->id < 23)
+        {
+            xflag->setupId = 0;
+            xflag->id += 45;
+        }
+        if (xflag->setupId == 0 && xflag->roomId == 2 && xflag->id == 9)
+        {
+            xflag->roomId = 0;
+            xflag->id = 62;
+        }
+        break;
     default:
         break;
     }

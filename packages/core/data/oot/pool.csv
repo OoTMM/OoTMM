@@ -11,6 +11,33 @@ Kokiri Forest Storms Grotto,                                chest,          NONE
 Kokiri Forest GS Soil,                                      gs,             NONE,                 KOKIRI_FOREST,                  0x68,                       GS_TOKEN
 Kokiri Forest GS Night Child,                               gs,             NONE,                 KOKIRI_FOREST,                  0x69,                       GS_TOKEN
 Kokiri Forest GS Night Adult,                               gs,             NONE,                 KOKIRI_FOREST,                  0x6a,                       GS_TOKEN
+Kokiri Forest Grass 1,                                      grass,          NONE,                 KOKIRI_FOREST,                  0x0003c,                    RANDOM
+Kokiri Forest Grass 2,                                      grass,          NONE,                 KOKIRI_FOREST,                  0x0003d,                    RANDOM
+Kokiri Forest Grass 3,                                      grass,          NONE,                 KOKIRI_FOREST,                  0x0003e,                    RANDOM
+Kokiri Forest Grass 4,                                      grass,          NONE,                 KOKIRI_FOREST,                  0x0003f,                    RANDOM
+Kokiri Forest Grass 5,                                      grass,          NONE,                 KOKIRI_FOREST,                  0x00040,                    RANDOM
+Kokiri Forest Grass 6,                                      grass,          NONE,                 KOKIRI_FOREST,                  0x00041,                    RANDOM
+Kokiri Forest Grass 7,                                      grass,          NONE,                 KOKIRI_FOREST,                  0x00042,                    RANDOM
+Kokiri Forest Grass 8,                                      grass,          NONE,                 KOKIRI_FOREST,                  0x00043,                    RANDOM
+Kokiri Forest Grass Child 1,                                grass,          NONE,                 KOKIRI_FOREST,                  0x00044,                    RANDOM
+Kokiri Forest Grass Child 2,                                grass,          NONE,                 KOKIRI_FOREST,                  0x00045,                    RANDOM
+Kokiri Forest Grass Child 3,                                grass,          NONE,                 KOKIRI_FOREST,                  0x00046,                    RANDOM
+Kokiri Forest Grass Child 4,                                grass,          NONE,                 KOKIRI_FOREST,                  0x00047,                    RANDOM
+Kokiri Forest Grass Child Crawl 1,                          grass,          NONE,                 KOKIRI_FOREST,                  0x00202,                    RECOVERY_HEART
+Kokiri Forest Grass Child Crawl 2,                          grass,          NONE,                 KOKIRI_FOREST,                  0x00203,                    DEKU_SEEDS_5
+Kokiri Forest Grass Child Crawl 3,                          grass,          NONE,                 KOKIRI_FOREST,                  0x00204,                    RECOVERY_HEART
+Kokiri Forest Grass Adult 01,                               grass,          NONE,                 KOKIRI_FOREST,                  0x08017,                    RANDOM
+Kokiri Forest Grass Adult 02,                               grass,          NONE,                 KOKIRI_FOREST,                  0x18017,                    RANDOM
+Kokiri Forest Grass Adult 03,                               grass,          NONE,                 KOKIRI_FOREST,                  0x28017,                    RANDOM
+Kokiri Forest Grass Adult 04,                               grass,          NONE,                 KOKIRI_FOREST,                  0x38017,                    RANDOM
+Kokiri Forest Grass Adult 05,                               grass,          NONE,                 KOKIRI_FOREST,                  0x48017,                    RANDOM
+Kokiri Forest Grass Adult 06,                               grass,          NONE,                 KOKIRI_FOREST,                  0x58017,                    RANDOM
+Kokiri Forest Grass Adult 07,                               grass,          NONE,                 KOKIRI_FOREST,                  0x68017,                    RANDOM
+Kokiri Forest Grass Adult 08,                               grass,          NONE,                 KOKIRI_FOREST,                  0x78017,                    RANDOM
+Kokiri Forest Grass Adult 09,                               grass,          NONE,                 KOKIRI_FOREST,                  0x88017,                    RANDOM
+Kokiri Forest Grass Adult 10,                               grass,          NONE,                 KOKIRI_FOREST,                  0x98017,                    RANDOM
+Kokiri Forest Grass Adult 11,                               grass,          NONE,                 KOKIRI_FOREST,                  0xa8017,                    RANDOM
+Kokiri Forest Grass Adult 12,                               grass,          NONE,                 KOKIRI_FOREST,                  0xb8017,                    RANDOM
 Kokiri Forest Cow,                                          cow,            COW_LINK,             KOKIRI_FOREST,                  0x00,                       MILK
 Kokiri Forest Storms Grotto Grass 1,                        grass,          NONE,                 GROTTOS,                        0x02c02,                    RANDOM
 Kokiri Forest Storms Grotto Grass 2,                        grass,          NONE,                 GROTTOS,                        0x02c03,                    RANDOM
@@ -24,19 +51,6 @@ Kokiri Shop Item 5,                                         shop,           NONE
 Kokiri Shop Item 6,                                         shop,           NONE,                 KOKIRI_FOREST,                  0x05,                       NUTS_10
 Kokiri Shop Item 7,                                         shop,           NONE,                 KOKIRI_FOREST,                  0x06,                       STICK
 Kokiri Shop Item 8,                                         shop,           NONE,                 KOKIRI_FOREST,                  0x07,                       SHIELD_DEKU
-Kokiri Forest Grass Bush 01,                                grass,          NONE,                 KOKIRI_FOREST,                  0x003c,                     RANDOM
-Kokiri Forest Grass Bush 02,                                grass,          NONE,                 KOKIRI_FOREST,                  0x003d,                     RANDOM
-Kokiri Forest Grass Bush 03,                                grass,          NONE,                 KOKIRI_FOREST,                  0x003e,                     RANDOM
-Kokiri Forest Grass Bush 04,                                grass,          NONE,                 KOKIRI_FOREST,                  0x003f,                     RANDOM
-Kokiri Forest Grass Bush 05,                                grass,          NONE,                 KOKIRI_FOREST,                  0x0040,                     RANDOM
-Kokiri Forest Grass Bush 06,                                grass,          NONE,                 KOKIRI_FOREST,                  0x0041,                     RANDOM
-Kokiri Forest Grass Bush 07,                                grass,          NONE,                 KOKIRI_FOREST,                  0x0042,                     RANDOM
-Kokiri Forest Grass Bush 08,                                grass,          NONE,                 KOKIRI_FOREST,                  0x0043,                     RANDOM
-Kokiri Forest Grass Bush 09,                                grass,          NONE,                 KOKIRI_FOREST,                  0x0044,                     RANDOM
-Kokiri Forest Grass Bush 10,                                grass,          NONE,                 KOKIRI_FOREST,                  0x0045,                     RANDOM
-Kokiri Forest Grass Bush 11,                                grass,          NONE,                 KOKIRI_FOREST,                  0x0046,                     RANDOM
-Kokiri Forest Grass Bush 12,                                grass,          NONE,                 KOKIRI_FOREST,                  0x0047,                     RANDOM
-Kokiri Forest Grass Bush Child,                             grass,          NONE,                 KOKIRI_FOREST,                  0x0209,                     RANDOM
 Know It All House Pot 1,                                    pot,            NONE,                 KOKIRI_KNOW_IT_ALL,             0x0006,                     RUPEE_GREEN
 Know It All House Pot 2,                                    pot,            NONE,                 KOKIRI_KNOW_IT_ALL,             0x0007,                     RUPEE_GREEN
 Twins House Pot 1,                                          pot,            NONE,                 KOKIRI_TWINS,                   0x0002,                     RUPEE_GREEN
