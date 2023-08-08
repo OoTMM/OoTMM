@@ -20,19 +20,19 @@ Kokiri Shop Item 5,                                         shop,           NONE
 Kokiri Shop Item 6,                                         shop,           NONE,                 KOKIRI_FOREST,                  0x05,                       NUTS_10
 Kokiri Shop Item 7,                                         shop,           NONE,                 KOKIRI_FOREST,                  0x06,                       STICK
 Kokiri Shop Item 8,                                         shop,           NONE,                 KOKIRI_FOREST,                  0x07,                       SHIELD_DEKU
-Kokiri Forest Grass Bush 01,                                grass,          NONE,                 KOKIRI_FOREST,                  0x003c,                     GRASS_BUSH
-Kokiri Forest Grass Bush 02,                                grass,          NONE,                 KOKIRI_FOREST,                  0x003d,                     GRASS_BUSH
-Kokiri Forest Grass Bush 03,                                grass,          NONE,                 KOKIRI_FOREST,                  0x003e,                     GRASS_BUSH
-Kokiri Forest Grass Bush 04,                                grass,          NONE,                 KOKIRI_FOREST,                  0x003f,                     GRASS_BUSH
-Kokiri Forest Grass Bush 05,                                grass,          NONE,                 KOKIRI_FOREST,                  0x0040,                     GRASS_BUSH
-Kokiri Forest Grass Bush 06,                                grass,          NONE,                 KOKIRI_FOREST,                  0x0041,                     GRASS_BUSH
-Kokiri Forest Grass Bush 07,                                grass,          NONE,                 KOKIRI_FOREST,                  0x0042,                     GRASS_BUSH
-Kokiri Forest Grass Bush 08,                                grass,          NONE,                 KOKIRI_FOREST,                  0x0043,                     GRASS_BUSH
-Kokiri Forest Grass Bush 09,                                grass,          NONE,                 KOKIRI_FOREST,                  0x0044,                     GRASS_BUSH
-Kokiri Forest Grass Bush 10,                                grass,          NONE,                 KOKIRI_FOREST,                  0x0045,                     GRASS_BUSH
-Kokiri Forest Grass Bush 11,                                grass,          NONE,                 KOKIRI_FOREST,                  0x0046,                     GRASS_BUSH
-Kokiri Forest Grass Bush 12,                                grass,          NONE,                 KOKIRI_FOREST,                  0x0047,                     GRASS_BUSH
-Kokiri Forest Grass Bush Child,                             grass,          NONE,                 KOKIRI_FOREST,                  0x0209,                     GRASS_BUSH
+Kokiri Forest Grass Bush 01,                                grass,          NONE,                 KOKIRI_FOREST,                  0x003c,                     RANDOM
+Kokiri Forest Grass Bush 02,                                grass,          NONE,                 KOKIRI_FOREST,                  0x003d,                     RANDOM
+Kokiri Forest Grass Bush 03,                                grass,          NONE,                 KOKIRI_FOREST,                  0x003e,                     RANDOM
+Kokiri Forest Grass Bush 04,                                grass,          NONE,                 KOKIRI_FOREST,                  0x003f,                     RANDOM
+Kokiri Forest Grass Bush 05,                                grass,          NONE,                 KOKIRI_FOREST,                  0x0040,                     RANDOM
+Kokiri Forest Grass Bush 06,                                grass,          NONE,                 KOKIRI_FOREST,                  0x0041,                     RANDOM
+Kokiri Forest Grass Bush 07,                                grass,          NONE,                 KOKIRI_FOREST,                  0x0042,                     RANDOM
+Kokiri Forest Grass Bush 08,                                grass,          NONE,                 KOKIRI_FOREST,                  0x0043,                     RANDOM
+Kokiri Forest Grass Bush 09,                                grass,          NONE,                 KOKIRI_FOREST,                  0x0044,                     RANDOM
+Kokiri Forest Grass Bush 10,                                grass,          NONE,                 KOKIRI_FOREST,                  0x0045,                     RANDOM
+Kokiri Forest Grass Bush 11,                                grass,          NONE,                 KOKIRI_FOREST,                  0x0046,                     RANDOM
+Kokiri Forest Grass Bush 12,                                grass,          NONE,                 KOKIRI_FOREST,                  0x0047,                     RANDOM
+Kokiri Forest Grass Bush Child,                             grass,          NONE,                 KOKIRI_FOREST,                  0x0209,                     RANDOM
 Know It All House Pot 1,                                    pot,            NONE,                 KOKIRI_KNOW_IT_ALL,             0x0006,                     RUPEE_GREEN
 Know It All House Pot 2,                                    pot,            NONE,                 KOKIRI_KNOW_IT_ALL,             0x0007,                     RUPEE_GREEN
 Twins House Pot 1,                                          pot,            NONE,                 KOKIRI_TWINS,                   0x0002,                     RUPEE_GREEN
@@ -272,18 +272,18 @@ Hyrule Field Grotto Near Gerudo GS,                         gs,             NONE
 Hyrule Field Cow,                                           cow,            NONE,                 HYRULE_FIELD,                   0x01,                       MILK
 Hyrule Field Cow Grotto Pot 1,                              pot,            NONE,                 GROTTOS,                        0x0405,                     NUTS_5
 Hyrule Field Cow Grotto Pot 2,                              pot,            NONE,                 GROTTOS,                        0x0407,                     MAGIC_JAR_SMALL
-Hyrule Field Grass Near lost Woods 01,                      grass,          NONE,                 HYRULE_FIELD,                   0x0003d,                    GRASS_BUSH
-Hyrule Field Grass Near lost Woods 02,                      grass,          NONE,                 HYRULE_FIELD,                   0x1003d,                    GRASS_BUSH
-Hyrule Field Grass Near lost Woods 03,                      grass,          NONE,                 HYRULE_FIELD,                   0x2003d,                    GRASS_BUSH
-Hyrule Field Grass Near lost Woods 04,                      grass,          NONE,                 HYRULE_FIELD,                   0x3003d,                    GRASS_BUSH
-Hyrule Field Grass Near lost Woods 05,                      grass,          NONE,                 HYRULE_FIELD,                   0x4003d,                    GRASS_BUSH
-Hyrule Field Grass Near lost Woods 06,                      grass,          NONE,                 HYRULE_FIELD,                   0x5003d,                    GRASS_BUSH
-Hyrule Field Grass Near lost Woods 07,                      grass,          NONE,                 HYRULE_FIELD,                   0x6003d,                    GRASS_BUSH
-Hyrule Field Grass Near lost Woods 08,                      grass,          NONE,                 HYRULE_FIELD,                   0x7003d,                    GRASS_BUSH
-Hyrule Field Grass Near lost Woods 09,                      grass,          NONE,                 HYRULE_FIELD,                   0x8003d,                    GRASS_BUSH
-Hyrule Field Grass Near lost Woods 10,                      grass,          NONE,                 HYRULE_FIELD,                   0x9003d,                    GRASS_BUSH
-Hyrule Field Grass Near lost Woods 11,                      grass,          NONE,                 HYRULE_FIELD,                   0xa003d,                    GRASS_BUSH
-Hyrule Field Grass Near lost Woods 12,                      grass,          NONE,                 HYRULE_FIELD,                   0xb003d,                    GRASS_BUSH
+Hyrule Field Grass Near lost Woods 01,                      grass,          NONE,                 HYRULE_FIELD,                   0x0003d,                    RANDOM
+Hyrule Field Grass Near lost Woods 02,                      grass,          NONE,                 HYRULE_FIELD,                   0x1003d,                    RANDOM
+Hyrule Field Grass Near lost Woods 03,                      grass,          NONE,                 HYRULE_FIELD,                   0x2003d,                    RANDOM
+Hyrule Field Grass Near lost Woods 04,                      grass,          NONE,                 HYRULE_FIELD,                   0x3003d,                    RANDOM
+Hyrule Field Grass Near lost Woods 05,                      grass,          NONE,                 HYRULE_FIELD,                   0x4003d,                    RANDOM
+Hyrule Field Grass Near lost Woods 06,                      grass,          NONE,                 HYRULE_FIELD,                   0x5003d,                    RANDOM
+Hyrule Field Grass Near lost Woods 07,                      grass,          NONE,                 HYRULE_FIELD,                   0x6003d,                    RANDOM
+Hyrule Field Grass Near lost Woods 08,                      grass,          NONE,                 HYRULE_FIELD,                   0x7003d,                    RANDOM
+Hyrule Field Grass Near lost Woods 09,                      grass,          NONE,                 HYRULE_FIELD,                   0x8003d,                    RANDOM
+Hyrule Field Grass Near lost Woods 10,                      grass,          NONE,                 HYRULE_FIELD,                   0x9003d,                    RANDOM
+Hyrule Field Grass Near lost Woods 11,                      grass,          NONE,                 HYRULE_FIELD,                   0xa003d,                    RANDOM
+Hyrule Field Grass Near lost Woods 12,                      grass,          NONE,                 HYRULE_FIELD,                   0xb003d,                    RANDOM
 Market Dog Lady HP,                                         npc,            NONE,                 BACK_ALLEY_HOUSE2,              DOG_LADY,                   HEART_PIECE
 Market Back Alley East House Pot 1,                         pot,            NONE,                 BACK_ALLEY_HOUSE,               0x0002,                     RECOVERY_HEART
 Market Back Alley East House Pot 2,                         pot,            NONE,                 BACK_ALLEY_HOUSE,               0x0003,                     RECOVERY_HEART
@@ -439,42 +439,42 @@ Deku Tree GS Compass,                                       gs,             NONE
 Deku Tree GS Basement Vines,                                gs,             NONE,                 INSIDE_DEKU_TREE,               0x0a,                       GS_TOKEN
 Deku Tree GS Basement Gate,                                 gs,             NONE,                 INSIDE_DEKU_TREE,               0x09,                       GS_TOKEN
 Deku Tree GS Basement Back Room,                            gs,             NONE,                 INSIDE_DEKU_TREE,               0x08,                       GS_TOKEN
-Deku Tree Grass Lobby 1,                                    grass,          NONE,                 INSIDE_DEKU_TREE,               0x00006,                    GRASS_BUSH
-Deku Tree Grass Lobby 2,                                    grass,          NONE,                 INSIDE_DEKU_TREE,               0x00007,                    GRASS_BUSH
-Deku Tree Grass Lobby 3,                                    grass,          NONE,                 INSIDE_DEKU_TREE,               0x00008,                    GRASS_BUSH
-Deku Tree Grass Lobby 4,                                    grass,          NONE,                 INSIDE_DEKU_TREE,               0x00009,                    GRASS_BUSH
-Deku Tree Grass Lobby 5,                                    grass,          NONE,                 INSIDE_DEKU_TREE,               0x0000a,                    GRASS_BUSH
-Deku Tree Grass Slingshot Room 1,                           grass,          NONE,                 INSIDE_DEKU_TREE,               0x00200,                    GRASS_BUSH
-Deku Tree Grass Slingshot Room 2,                           grass,          NONE,                 INSIDE_DEKU_TREE,               0x00201,                    GRASS_BUSH
-Deku Tree Grass Slingshot Room 3,                           grass,          NONE,                 INSIDE_DEKU_TREE,               0x00202,                    GRASS_BUSH
-Deku Tree Grass Slingshot Room 4,                           grass,          NONE,                 INSIDE_DEKU_TREE,               0x00203,                    GRASS_BUSH
-Deku Tree Grass Basement Main 1,                            grass,          NONE,                 INSIDE_DEKU_TREE,               0x00301,                    GRASS_BUSH
-Deku Tree Grass Basement Main 2,                            grass,          NONE,                 INSIDE_DEKU_TREE,               0x00302,                    GRASS_BUSH
-Deku Tree Grass Eye Switch Room 1,                          grass,          NONE,                 INSIDE_DEKU_TREE,               0x00400,                    GRASS_BUSH
-Deku Tree Grass Eye Switch Room 2,                          grass,          NONE,                 INSIDE_DEKU_TREE,               0x00401,                    GRASS_BUSH
-Deku Tree Grass Eye Switch Room 3,                          grass,          NONE,                 INSIDE_DEKU_TREE,               0x00402,                    GRASS_BUSH
-Deku Tree Grass Eye Switch Room 4,                          grass,          NONE,                 INSIDE_DEKU_TREE,               0x00403,                    GRASS_BUSH
-Deku Tree Grass Water Room 1,                               grass,          NONE,                 INSIDE_DEKU_TREE,               0x00501,                    GRASS_BUSH
-Deku Tree Grass Water Room 2,                               grass,          NONE,                 INSIDE_DEKU_TREE,               0x00502,                    GRASS_BUSH
-Deku Tree Grass Torch Room 1,                               grass,          NONE,                 INSIDE_DEKU_TREE,               0x00602,                    GRASS_BUSH
-Deku Tree Grass Torch Room 2,                               grass,          NONE,                 INSIDE_DEKU_TREE,               0x00603,                    GRASS_BUSH
-Deku Tree Grass Larva Room 1,                               grass,          NONE,                 INSIDE_DEKU_TREE,               0x00702,                    GRASS_BUSH
-Deku Tree Grass Larva Room 2,                               grass,          NONE,                 INSIDE_DEKU_TREE,               0x00703,                    GRASS_BUSH
-Deku Tree Grass Pre-Boss Room 1,                            grass,          NONE,                 INSIDE_DEKU_TREE,               0x00900,                    GRASS_BUSH
-Deku Tree Grass Pre-Boss Room 2,                            grass,          NONE,                 INSIDE_DEKU_TREE,               0x00901,                    GRASS_BUSH
-Deku Tree Grass Pre-Boss Room 3,                            grass,          NONE,                 INSIDE_DEKU_TREE,               0x00902,                    GRASS_BUSH
-Deku Tree Grass Compass Room 1,                             grass,          NONE,                 INSIDE_DEKU_TREE,               0x00a02,                    GRASS_BUSH
-Deku Tree Grass Compass Room 2,                             grass,          NONE,                 INSIDE_DEKU_TREE,               0x00a03,                    GRASS_BUSH
+Deku Tree Grass Lobby 1,                                    grass,          NONE,                 INSIDE_DEKU_TREE,               0x00006,                    DEKU_SEEDS_5
+Deku Tree Grass Lobby 2,                                    grass,          NONE,                 INSIDE_DEKU_TREE,               0x00007,                    RECOVERY_HEART
+Deku Tree Grass Lobby 3,                                    grass,          NONE,                 INSIDE_DEKU_TREE,               0x00008,                    DEKU_SEEDS_5
+Deku Tree Grass Lobby 4,                                    grass,          NONE,                 INSIDE_DEKU_TREE,               0x00009,                    RECOVERY_HEART
+Deku Tree Grass Lobby 5,                                    grass,          NONE,                 INSIDE_DEKU_TREE,               0x0000a,                    DEKU_SEEDS_5
+Deku Tree Grass Slingshot Room 1,                           grass,          NONE,                 INSIDE_DEKU_TREE,               0x00200,                    RECOVERY_HEART
+Deku Tree Grass Slingshot Room 2,                           grass,          NONE,                 INSIDE_DEKU_TREE,               0x00201,                    DEKU_SEEDS_5
+Deku Tree Grass Slingshot Room 3,                           grass,          NONE,                 INSIDE_DEKU_TREE,               0x00202,                    RECOVERY_HEART
+Deku Tree Grass Slingshot Room 4,                           grass,          NONE,                 INSIDE_DEKU_TREE,               0x00203,                    DEKU_SEEDS_5
+Deku Tree Grass Basement Main 1,                            grass,          NONE,                 INSIDE_DEKU_TREE,               0x00301,                    RECOVERY_HEART
+Deku Tree Grass Basement Main 2,                            grass,          NONE,                 INSIDE_DEKU_TREE,               0x00302,                    DEKU_SEEDS_5
+Deku Tree Grass Eye Switch Room 1,                          grass,          NONE,                 INSIDE_DEKU_TREE,               0x00400,                    RECOVERY_HEART
+Deku Tree Grass Eye Switch Room 2,                          grass,          NONE,                 INSIDE_DEKU_TREE,               0x00401,                    DEKU_SEEDS_5
+Deku Tree Grass Eye Switch Room 3,                          grass,          NONE,                 INSIDE_DEKU_TREE,               0x00402,                    RECOVERY_HEART
+Deku Tree Grass Eye Switch Room 4,                          grass,          NONE,                 INSIDE_DEKU_TREE,               0x00403,                    DEKU_SEEDS_5
+Deku Tree Grass Water Room 1,                               grass,          NONE,                 INSIDE_DEKU_TREE,               0x00501,                    RECOVERY_HEART
+Deku Tree Grass Water Room 2,                               grass,          NONE,                 INSIDE_DEKU_TREE,               0x00502,                    DEKU_SEEDS_5
+Deku Tree Grass Torch Room 1,                               grass,          NONE,                 INSIDE_DEKU_TREE,               0x00602,                    RECOVERY_HEART
+Deku Tree Grass Torch Room 2,                               grass,          NONE,                 INSIDE_DEKU_TREE,               0x00603,                    DEKU_SEEDS_5
+Deku Tree Grass Larva Room 1,                               grass,          NONE,                 INSIDE_DEKU_TREE,               0x00702,                    RECOVERY_HEART
+Deku Tree Grass Larva Room 2,                               grass,          NONE,                 INSIDE_DEKU_TREE,               0x00703,                    DEKU_SEEDS_5
+Deku Tree Grass Pre-Boss Room 1,                            grass,          NONE,                 INSIDE_DEKU_TREE,               0x00900,                    RECOVERY_HEART
+Deku Tree Grass Pre-Boss Room 2,                            grass,          NONE,                 INSIDE_DEKU_TREE,               0x00901,                    DEKU_SEEDS_5
+Deku Tree Grass Pre-Boss Room 3,                            grass,          NONE,                 INSIDE_DEKU_TREE,               0x00902,                    RECOVERY_HEART
+Deku Tree Grass Compass Room 1,                             grass,          NONE,                 INSIDE_DEKU_TREE,               0x00a02,                    DEKU_SEEDS_5
+Deku Tree Grass Compass Room 2,                             grass,          NONE,                 INSIDE_DEKU_TREE,               0x00a03,                    RECOVERY_HEART
 Deku Tree Boss Container,                                   collectible,    NONE,                 LAIR_GOHMA,                     0x1f,                       HEART_CONTAINER
 Deku Tree Boss,                                             npc,            NONE,                 LAIR_GOHMA,                     BLUE_WARP_GOHMA,            STONE_EMERALD
-Deku Tree Boss Grass 1,                                     grass,          NONE,                 LAIR_GOHMA,                     0x00101,                    GRASS_BUSH
-Deku Tree Boss Grass 2,                                     grass,          NONE,                 LAIR_GOHMA,                     0x00102,                    GRASS_BUSH
-Deku Tree Boss Grass 3,                                     grass,          NONE,                 LAIR_GOHMA,                     0x00103,                    GRASS_BUSH
-Deku Tree Boss Grass 4,                                     grass,          NONE,                 LAIR_GOHMA,                     0x00104,                    GRASS_BUSH
-Deku Tree Boss Grass 5,                                     grass,          NONE,                 LAIR_GOHMA,                     0x00105,                    GRASS_BUSH
-Deku Tree Boss Grass 6,                                     grass,          NONE,                 LAIR_GOHMA,                     0x00106,                    GRASS_BUSH
-Deku Tree Boss Grass 7,                                     grass,          NONE,                 LAIR_GOHMA,                     0x00107,                    GRASS_BUSH
-Deku Tree Boss Grass 8,                                     grass,          NONE,                 LAIR_GOHMA,                     0x00108,                    GRASS_BUSH
+Deku Tree Boss Grass 1,                                     grass,          NONE,                 LAIR_GOHMA,                     0x00101,                    RECOVERY_HEART
+Deku Tree Boss Grass 2,                                     grass,          NONE,                 LAIR_GOHMA,                     0x00102,                    DEKU_SEEDS_5
+Deku Tree Boss Grass 3,                                     grass,          NONE,                 LAIR_GOHMA,                     0x00103,                    RECOVERY_HEART
+Deku Tree Boss Grass 4,                                     grass,          NONE,                 LAIR_GOHMA,                     0x00104,                    DEKU_SEEDS_5
+Deku Tree Boss Grass 5,                                     grass,          NONE,                 LAIR_GOHMA,                     0x00105,                    RECOVERY_HEART
+Deku Tree Boss Grass 6,                                     grass,          NONE,                 LAIR_GOHMA,                     0x00106,                    DEKU_SEEDS_5
+Deku Tree Boss Grass 7,                                     grass,          NONE,                 LAIR_GOHMA,                     0x00107,                    RECOVERY_HEART
+Deku Tree Boss Grass 8,                                     grass,          NONE,                 LAIR_GOHMA,                     0x00108,                    DEKU_SEEDS_5
 Dodongo Cavern Map Chest,                                   chest,          NONE,                 DODONGO_CAVERN,                 0x08,                       MAP_DC
 Dodongo Cavern Compass Chest,                               chest,          NONE,                 DODONGO_CAVERN,                 0x05,                       COMPASS_DC
 Dodongo Cavern Bomb Bag Side Chest,                         chest,          NONE,                 DODONGO_CAVERN,                 0x06,                       RUPEE_RED

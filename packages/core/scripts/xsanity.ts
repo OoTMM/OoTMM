@@ -474,6 +474,7 @@ function decPad(n: number, width: number) {
 function outputGrassPoolOot(roomActors: RoomActors[]) {
   let lastSceneId = -1;
   let lastSetupId = -1;
+  let altGrassAcc = 0;
   for (const room of roomActors) {
     for (const actor of room.actors) {
       if (actor.typeId === ACTORS_OOT.EN_KUSA) {
@@ -481,7 +482,13 @@ function outputGrassPoolOot(roomActors: RoomActors[]) {
         if (grassType == 3) {
           console.log("Grass type 3????");
         }
-        const item = 'GRASS_BUSH';
+        let item: string;
+        if (grassType == 0 || grassType == 2) {
+          item = 'RANDOM';
+        } else {
+          item = (altGrassAcc & 1) ? 'RECOVERY_HEART' : 'DEKU_SEEDS_5/ARROWS_5';
+          altGrassAcc++;
+        }
         const key = ((room.setupId & 0x3) << 14) | (room.roomId << 8) | actor.actorId;
         if (room.sceneId != lastSceneId || room.setupId != lastSetupId) {
           console.log('');
@@ -502,7 +509,7 @@ function outputGrassPoolOot(roomActors: RoomActors[]) {
         } else {
           count = 12;
         }
-        const item = 'GRASS_BUSH';
+        const item = 'RANDOM';
         if (room.sceneId != lastSceneId || room.setupId != lastSetupId) {
           console.log('');
           lastSceneId = room.sceneId;
