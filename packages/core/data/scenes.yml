@@ -203,7 +203,7 @@ MM_CLOCK_TOWN_NORTH:                    0x6e
 MM_CLOCK_TOWN_SOUTH:                    0x6f
 MM_LAUNDRY_POOL:                        0x70
 
-MM_EXTRA:                               0xf0
+MM_EXTRA:                               0x71
 
 NPC:     0xf0
 GS:      0xf1
