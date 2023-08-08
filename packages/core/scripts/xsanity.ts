@@ -6,7 +6,7 @@ import { decompressGame } from '../lib/combo/decompress';
 type Game = 'oot' | 'mq' | 'mm';
 
 const MM_EXTRA_SCENES = {
-  0xf0: 5,
+  0x71: 5,
 };
 
 const MM_POTS_SET_DROPS = [
@@ -204,26 +204,32 @@ function mergeRoomActors(roomActors: RoomActors[][]): RoomActors[] {
 function buildAddressingTable(roomActors: RoomActors[]): AddressingTable {
   let sceneId = -1;
   let setupId = -1;
+  let roomId = -1;
   let scenesTable: number[] = [];
   let setupsTable: number[] = [];
   let roomsTable: number[] = [];
   let bits = 0;
   for (const roomActor of roomActors) {
     /* If it's a new scene, push the offset to the setups table */
-    if (sceneId !== roomActor.sceneId) {
-      sceneId = roomActor.sceneId;
+    while (sceneId < roomActor.sceneId) {
+      sceneId++;
       scenesTable.push(setupsTable.length);
       setupId = -1;
+      roomId = -1;
     }
 
     /* If it's a new setup, push the offset to the room table */
-    if (setupId !== roomActor.setupId) {
-      setupId = roomActor.setupId;
+    while (setupId < roomActor.setupId) {
+      setupId++;
       setupsTable.push(roomsTable.length);
+      roomId = -1;
     }
 
     /* Push the bit pos */
-    roomsTable.push(bits);
+    while (roomId < roomActor.roomId) {
+      roomId++;
+      roomsTable.push(bits);
+    }
 
     /* Allocate bits */
     bits += roomActor.actors.length;
@@ -440,18 +446,20 @@ function roomActorsFromRaw(rom: Buffer, raw: RawRoom[], game: Game): RoomActors[
   const actorsRooms = raw.map(r => parseRoomActors(rom, r, game));
 
   /* Inject extra fake rooms */
-  actorsRooms.push({
-    sceneId: 0xf0,
-    roomId: 0x00,
-    setupId: 0x00,
-    actors: [
-      { actorId: 0, typeId: ACTORS_MM.POT, params: 0x00, rz: 0x0000, },
-      { actorId: 1, typeId: ACTORS_MM.POT, params: 0x00, rz: 0x0000, },
-      { actorId: 2, typeId: ACTORS_MM.POT, params: 0x00, rz: 0x0000, },
-      { actorId: 3, typeId: ACTORS_MM.POT, params: 0x00, rz: 0x0000, },
-      { actorId: 4, typeId: ACTORS_MM.POT, params: 0x00, rz: 0x0000, },
-    ]
-  });
+  if (game === 'mm') {
+    actorsRooms.push({
+      sceneId: 0x71,
+      roomId: 0x00,
+      setupId: 0x00,
+      actors: [
+        { actorId: 0, typeId: ACTORS_MM.POT, params: 0x00, rz: 0x0000, },
+        { actorId: 1, typeId: ACTORS_MM.POT, params: 0x00, rz: 0x0000, },
+        { actorId: 2, typeId: ACTORS_MM.POT, params: 0x00, rz: 0x0000, },
+        { actorId: 3, typeId: ACTORS_MM.POT, params: 0x00, rz: 0x0000, },
+        { actorId: 4, typeId: ACTORS_MM.POT, params: 0x00, rz: 0x0000, },
+      ]
+    });
+  }
 
   return sortRoomActors(actorsRooms);
 }

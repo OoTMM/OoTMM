@@ -1108,6 +1108,13 @@ export const SETTINGS = [{
   description: 'Shuffle Hyrule Field\'s Market entrance among the regions.',
   default: false
 }, {
+  key: 'erRegionsOneWay',
+  name: 'Shuffle One-Way Entrances',
+  category: 'entrances',
+  type: 'boolean',
+  description: 'Shuffle one-way entrances among the regions.<br>OOT: Gerudo Valley -> Lake Hylia<br>MM: Ikana Canyon -> Southern Swamp',
+  default: false
+}, {
   key: 'erIndoors',
   name: 'Shuffle Interiors',
   category: 'entrances',
