@@ -3,6 +3,7 @@ import fs from 'fs/promises';
 import { CodeGen } from '../lib/combo/util/codegen';
 import { decompressGame } from '../lib/combo/decompress';
 import { CONFIG } from '../lib/combo/config';
+import { mkdir } from 'fs';
 
 const GENERIC_GROTTOS = [
   0x0c,
@@ -627,6 +628,35 @@ function outputPotsPoolMm(roomActors: RoomActors[]) {
   }
 }
 
+async function writeAddressingTable(game: Game, addressingTable: AddressingTable) {
+  const base = `${__dirname}/../data/static`;
+  const scenesTableFilename = `${base}/xflag_table_${game}_scenes.bin`;
+  const setupsTableFilename = `${base}/xflag_table_${game}_setups.bin`;
+  const roomsTableFilename = `${base}/xflag_table_${game}_rooms.bin`;
+
+  const scenesTableData = Buffer.alloc(addressingTable.scenesTable.length * 2);
+  const setupsTableData = Buffer.alloc(addressingTable.setupsTable.length * 2);
+  const roomsTableData = Buffer.alloc(addressingTable.roomsTable.length * 2);
+
+  for (let i = 0; i < addressingTable.scenesTable.length; ++i) {
+    scenesTableData.writeUInt16BE(addressingTable.scenesTable[i], i * 2);
+  }
+
+  for (let i = 0; i < addressingTable.setupsTable.length; ++i) {
+    setupsTableData.writeUInt16BE(addressingTable.setupsTable[i], i * 2);
+  }
+
+  for (let i = 0; i < addressingTable.roomsTable.length; ++i) {
+    roomsTableData.writeInt16BE(addressingTable.roomsTable[i], i * 2);
+  }
+
+  return Promise.all([
+    fs.writeFile(scenesTableFilename, scenesTableData),
+    fs.writeFile(setupsTableFilename, setupsTableData),
+    fs.writeFile(roomsTableFilename, roomsTableData),
+  ]);
+}
+
 function roomActorsFromRaw(rom: Buffer, raw: RawRoom[], game: Game): RoomActors[] {
   const actorsRooms = raw.map(r => parseRoomActors(rom, r, game)).flat();
 
@@ -688,8 +718,11 @@ async function run() {
   /* Codegen */
   await Promise.all([
     codegenHeader(ootMqRooms, mmRooms, addrTableOotMq, addrTableMm),
-    codegenSource(ootMqRooms, mmRooms, addrTableOotMq, addrTableMm),
   ]);
+
+  /* Gen the xflags files */
+  await writeAddressingTable('oot', addrTableOotMq);
+  await writeAddressingTable('mm', addrTableMm);
 
   //outputPotsPoolMm(mmRooms);
 

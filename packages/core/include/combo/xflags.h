@@ -17,10 +17,6 @@ typedef struct Xflag
 }
 Xflag;
 
-extern const u16 kXflagsTableScenes[];
-extern const u16 kXflagsTableSetups[];
-extern const s16 kXflagsTableRooms[];
-
 u16  comboXflagsBitPosLookup(const Xflag* xf);
 int  comboXflagsGet(const Xflag* xf);
 void comboXflagsSet(const Xflag* xf);

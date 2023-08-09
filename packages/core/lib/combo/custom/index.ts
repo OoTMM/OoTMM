@@ -247,6 +247,12 @@ class CustomAssetsBuilder {
     await this.addFile('MQ_ROOMS', 'mq_rooms.bin', false);
     await this.addFile('MQ_SCENES', 'mq_scenes.bin', false);
     await this.addFile('MQ_MAPS', 'mq_maps.bin', true);
+    await this.addFile('XFLAG_TABLE_OOT_SCENES', 'xflag_table_oot_scenes.bin', false);
+    await this.addFile('XFLAG_TABLE_OOT_SETUPS', 'xflag_table_oot_setups.bin', false);
+    await this.addFile('XFLAG_TABLE_OOT_ROOMS',  'xflag_table_oot_rooms.bin', false);
+    await this.addFile('XFLAG_TABLE_MM_SCENES',  'xflag_table_mm_scenes.bin', false);
+    await this.addFile('XFLAG_TABLE_MM_SETUPS',  'xflag_table_mm_setups.bin', false);
+    await this.addFile('XFLAG_TABLE_MM_ROOMS',   'xflag_table_mm_rooms.bin', false);
 
     /* Load custom objects */
     await this.addObjectFile('TRIFORCE', 'triforce.zobj', [0x06000a30]);
