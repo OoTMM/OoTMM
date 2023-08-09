@@ -870,6 +870,9 @@ int comboAddItemMm(s16 gi, int noEffect)
     case GI_MM_MILK:
         fillBottle(ITEM_MM_MILK);
         break;
+    case GI_MM_FAIRY:
+        fillBottle(ITEM_MM_FAIRY);
+        break;
     case GI_MM_CHATEAU:
         fillBottle(ITEM_MM_BOTTLE_CHATEAU);
         break;
