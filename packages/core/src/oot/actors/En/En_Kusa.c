@@ -7,7 +7,7 @@ void EnKusa_Aliases(Xflag* xflag)
     /* Check for generic grotto */
     if (xflag->sceneId == SCE_OOT_GROTTOS && xflag->roomId == 0x00)
     {
-        xflag->roomId = 0x20 | gSaveContext.grottoChestFlag;
+        xflag->roomId = 0x20 | (gSaveContext.grottoChestFlag & 0x1f);
         return;
     }
 
