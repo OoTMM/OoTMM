@@ -163,13 +163,6 @@ Actor* comboSpawnActor(void* unk, GameState_Play *play, short actorId, float x, 
         return NULL;
     }
 
-    /* Inert grass */
-    if (actorId == AC_OBJ_HANA && ((variable & 3) == 2))
-    {
-        actorId = AC_EN_KUSA;
-        variable = 0xff00;
-    }
-
     actor = SpawnActor(unk, play, actorId, x, y, z, rx, ry, rz, variable);
     if (actorId == AC_ARMS_HOOK && gSave.age == AGE_ADULT)
         actor->objTableIndex = GetObject(&play->objectCtx, 0x14);

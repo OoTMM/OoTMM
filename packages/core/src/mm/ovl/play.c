@@ -146,6 +146,9 @@ void hookPlay_Init(GameState_Play* play)
     gActorCustomTriggers = NULL;
     g.customItemsList = NULL;
 
+    /* Register play */
+    gPlay = play;
+
     /* Handle transition override */
     if (g.inGrotto)
         gIsEntranceOverride = 0;
@@ -215,7 +218,6 @@ void hookPlay_Init(GameState_Play* play)
     MM_SET_EVENT_WEEK(MM_EV(82, 1));
 
     Play_Init(play);
-    gPlay = play;
     gLastEntrance = gSave.entranceIndex;
     g.inGrotto = (play->sceneId == SCE_MM_GROTTOS);
     if (!g.inGrotto)
