@@ -707,7 +707,7 @@ Dodongo Cavern Grass Lobby,                                 grass,          NONE
 Dodongo Cavern Grass Pre-Boss,                              grass,          NONE,                 DODONGO_CAVERN,                 0x00700,                    RECOVERY_HEART
 Dodongo Cavern Grass Bomb Bag Room,                         grass,          NONE,                 DODONGO_CAVERN,                 0x00900,                    DEKU_SEEDS_5
 Dodongo Cavern Grass Pre-Miniboss,                          grass,          NONE,                 DODONGO_CAVERN,                 0x00a00,                    RECOVERY_HEART
-Dodongo Cavern Grass Bomb Bag Side Room,                    grass,          NONE,                 DODONGO_CAVERN,                 0x00b03,                    DEKU_SEEDS_5
+Dodongo Cavern Grass East Corridor Side Room,               grass,          NONE,                 DODONGO_CAVERN,                 0x00b03,                    DEKU_SEEDS_5
 Dodongo Cavern Boss Chest,                                  chest,          NONE,                 LAIR_KING_DODONGO,              0x00,                       BOMBS_10
 Dodongo Cavern Boss Container,                              collectible,    NONE,                 LAIR_KING_DODONGO,              0x1f,                       HEART_CONTAINER
 Dodongo Cavern Boss,                                        npc,            NONE,                 LAIR_KING_DODONGO,              BLUE_WARP_KING_DODONGO,     STONE_RUBY

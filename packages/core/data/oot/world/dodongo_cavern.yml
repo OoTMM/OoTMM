@@ -36,6 +36,8 @@
     "Dodongo Cavern Right Corridor": "true"
   locations:
     "Dodongo Cavern GS Side Room": "can_damage_skull"
+    # This grass fail to load
+    #"Dodongo Cavern Grass East Corridor Side Room": "can_cut_grass"
 "Dodongo Cavern Miniboss 1":
   dungeon: DC
   exits:
@@ -108,7 +110,6 @@
     "Dodongo Cavern Pot Room Before Miniboss 2": "true"
     "Dodongo Cavern Grass Bomb Bag Room": "can_cut_grass"
     "Dodongo Cavern Grass Pre-Miniboss": "can_cut_grass"
-    "Dodongo Cavern Grass Bomb Bag Side Room": "can_cut_grass"
 "Dodongo Cavern Bomb Bag Side Room":
   dungeon: DC
   exits:
