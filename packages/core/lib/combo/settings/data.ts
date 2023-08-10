@@ -1106,7 +1106,7 @@ export const SETTINGS = [{
     { value: 'full', name: 'Full' },
   ],
   default: 'none',
-  description: '- Every entrance to Hyrule Field except Gerudo Valley and Market<br>- The entrance to Gerudo Fortress from Gerudo Valley<br>- The entrances to the four main regions in MM<br>- The entrance to Romani Ranch',
+  description: '- Every entrance to Hyrule Field except Gerudo Valley and Market<br>- The entrance to Gerudo Fortress from Gerudo Valley<br>- The entrance to Death Mountain from Kakariko<br>- The entrances to the four main regions in MM<br>- The entrance to Romani Ranch',
 }, {
   key: 'erRegionsExtra',
   name: 'Shuffle Market Entrance',
@@ -1115,11 +1115,11 @@ export const SETTINGS = [{
   description: 'Shuffle Hyrule Field\'s Market entrance among the regions.',
   default: false
 }, {
-  key: 'erRegionsOneWay',
-  name: 'Shuffle One-Way Entrances',
+  key: 'erRegionsShortcuts',
+  name: 'Shuffle Regional Shortcuts',
   category: 'entrances',
   type: 'boolean',
-  description: 'Shuffle one-way entrances among the regions.<br>OOT: Gerudo Valley -> Lake Hylia<br>MM: Ikana Canyon -> Southern Swamp',
+  description: 'Shuffles the various shortcuts between regions',
   default: false
 }, {
   key: 'erIndoors',

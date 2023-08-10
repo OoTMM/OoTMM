@@ -32,7 +32,7 @@ MOUNTAIN_VILLAGE_FROM_PATH,                         region,           Mountain V
 GREAT_BAY_COAST_FROM_FIELD,                         region,           Great Bay Coast,                    Great Bay Fence,                            FIELD_FROM_GREAT_BAY_COAST
 IKANA_VALLEY_FROM_ROAD,                             region,           Ikana Valley,                       Road to Ikana Top,                          IKANA_ROAD_FROM_VALLEY
 ROMANI_RANCH_FROM_MILK_ROAD,                        region,           Romani Ranch,                       Near Romani Ranch,                          MILK_ROAD_FROM_ROMANI_RANCH
-SWAMP_FROM_IKANA_CANYON,                            region-oneway,    Swamp Front,                        Ikana Valley,                               IKANA_CANYON_FROM_SWAMP
+SWAMP_FROM_IKANA_CANYON,                            region-shortcut,  Swamp Front,                        Ikana Valley,                               IKANA_CANYON_FROM_SWAMP
 SWAMP_ROAD_FROM_SWAMP,                              overworld,        Road to Southern Swamp,             Swamp Front,                                SWAMP_FROM_ROAD
 PATH_FROM_MOUNTAIN_VILLAGE,                         overworld,        Mountain Village Path Upper,        Mountain Village,                           MOUNTAIN_VILLAGE_FROM_PATH
 FIELD_FROM_GREAT_BAY_COAST,                         overworld,        Great Bay Fence,                    Great Bay Coast,                            GREAT_BAY_COAST_FROM_FIELD

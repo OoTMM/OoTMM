@@ -444,8 +444,8 @@ export class LogicPassEntrances {
     if (this.input.settings.erRegionsExtra) {
       pool.push('region-extra');
     }
-    if (this.input.settings.erRegionsOneWay) {
-      pool.push('region-oneway');
+    if (this.input.settings.erRegionsShortcuts) {
+      pool.push('region-shortcut');
     }
     this.placePool(worldId, pool, { ownGame: this.input.settings.erRegions === 'ownGame' });
   }

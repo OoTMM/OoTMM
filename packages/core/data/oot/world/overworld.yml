@@ -1683,7 +1683,7 @@
   time: flow
   exits:
     "Lake Hylia": "true"
-    "Gerudo Valley After Bridge": "!setting(erRegions, none) && setting(erRegionsOneWay) && is_adult"
+    "Gerudo Valley After Bridge": "!setting(erRegions, none) && setting(erRegionsShortcuts) && is_adult"
 "Gerudo Valley Storms Grotto":
   region: ENTRANCE
   exits:

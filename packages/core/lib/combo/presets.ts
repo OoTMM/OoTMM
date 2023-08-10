@@ -183,7 +183,7 @@ const PRESET_ALLSANITY = makeSettings({
   erSecretShrine: true,
   erRegions: 'full',
   erRegionsExtra: true,
-  erRegionsOneWay: true,
+  erRegionsShortcuts: true,
   erIndoors: 'full',
   erIndoorsExtra: true,
 });
@@ -250,7 +250,7 @@ const PRESET_HELL = makeSettings({
   erSecretShrine: true,
   erRegions: 'full',
   erRegionsExtra: true,
-  erRegionsOneWay: true,
+  erRegionsShortcuts: true,
   erIndoors: 'full',
   erIndoorsExtra: true,
   erGanonCastle: true,
