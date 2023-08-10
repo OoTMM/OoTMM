@@ -498,13 +498,13 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
     case 1:
       base.erDungeons = 'full';
       base.erBoss = 'full';
-      base.erRegions = 'full';
+      base.erOverworld = 'full';
       base.erIndoors = 'full';
       break;
     default:
       base.erDungeons = sampleWeighted(random, { none: 10, full: 10, ownGame: 10 });
       base.erBoss = sampleWeighted(random, { none: 10, full: 10, ownGame: 10 });
-      base.erRegions = sampleWeighted(random, { none: 10, full: 10, ownGame: 10 });
+      base.erOverworld = sampleWeighted(random, { none: 10, full: 10, ownGame: 10 });
       base.erIndoors = sampleWeighted(random, { none: 10, full: 10, ownGame: 10 });
     }
 

@@ -440,14 +440,24 @@ export class LogicPassEntrances {
   }
 
   private placeRegions(worldId: number) {
-    const pool = ['region'];
+    const pool = ['region', 'region-extra', 'region-shortcut', 'overworld'];
+    if (this.input.settings.erOverworld === 'regionsOwnGame' ) {
+      pool.pop('region-extra');
+      pool.pop('region-shortcut');
+      pool.pop('overworld');
+    }
+    if (this.input.settings.erOverworld === 'regionsFull' ) {
+      pool.pop('region-extra');
+      pool.pop('region-shortcut');
+      pool.pop('overworld');
+    }
     if (this.input.settings.erRegionsExtra) {
       pool.push('region-extra');
     }
     if (this.input.settings.erRegionsShortcuts) {
       pool.push('region-shortcut');
     }
-    this.placePool(worldId, pool, { ownGame: this.input.settings.erRegions === 'ownGame' });
+    this.placePool(worldId, pool, { ownGame: this.input.settings.erOverworld === 'ownGame' || this.input.settings.erOverworld === 'regionsOwnGame'});
   }
 
   private placeIndoors(worldId: number) {
@@ -553,7 +563,7 @@ export class LogicPassEntrances {
     this.pathfinder = new Pathfinder(this.worlds, this.input.settings, this.input.startingItems);
 
     for (let i = 0; i < worldsCount; ++i) {
-      if (this.input.settings.erRegions !== 'none') {
+      if (this.input.settings.erOverworld !== 'none') {
         anyEr = true;
         this.placeRegions(i);
       }

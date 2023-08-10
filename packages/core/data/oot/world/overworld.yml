@@ -383,6 +383,7 @@
 "Market Castle Entry":
   region: MARKET
   exits:
+    "Market": "true"
     "Hyrule Castle": "is_child"
     "Ganon Castle Exterior": "is_adult"
 "Market Bazaar":
@@ -1289,7 +1290,7 @@
   time: flow
   exits:
     "Zora River Front": "true"
-    "Zora Domain": "can_play(SONG_ZELDA) || (is_child && trick(OOT_DOMAIN_CUCCO)) || (has_hover_boots && trick(OOT_DOMAIN_HOVER))"
+    "Zora River Waterfall": "can_play(SONG_ZELDA) || (is_child && trick(OOT_DOMAIN_CUCCO)) || (has_hover_boots && trick(OOT_DOMAIN_HOVER))"
     "Lost Woods": "can_dive_small"
     "Zora River Storms Grotto": "hidden_grotto_storms"
     "Zora River Open Grotto": "true"
@@ -1313,6 +1314,12 @@
   gossip:
     "Zora River Gossip High Pillar": "true"
     "Zora River Gossip Near Domain": "true"
+"Zora River Waterfall":
+  region: ZORA_RIVER
+  time: flow
+  exits:
+    "Zora River": "true"
+    "Zora Domain": "true"
 "Zora River Storms Grotto":
   region: ENTRANCE
   exits:
@@ -1347,7 +1354,7 @@
 "Zora Domain":
   region: ZORA_DOMAIN
   exits:
-    "Zora River": "true"
+    "Zora River Waterfall": "true"
     "Lake Hylia": "is_child && can_dive_small"
     "Zora Domain Back": "king_zora_moved || (is_adult && trick(OOT_KZ_SKIP))"
     "Zora Shop": "is_child || has_blue_fire"
@@ -1683,7 +1690,7 @@
   time: flow
   exits:
     "Lake Hylia": "true"
-    "Gerudo Valley After Bridge": "!setting(erRegions, none) && setting(erRegionsShortcuts) && is_adult"
+    "Gerudo Valley After Bridge": "(((setting(erOverworld, regionsOwnGame) || setting(erOverworld, regionsFull)) && setting(erRegionsShortcuts)) || setting(erOverworld, OwnGame) || setting(erOverworld, Full)) && is_adult"
 "Gerudo Valley Storms Grotto":
   region: ENTRANCE
   exits:

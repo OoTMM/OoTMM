@@ -111,7 +111,7 @@
 "has_mask_zora": "has(MASK_ZORA) || has(SHARED_MASK_ZORA)"
 "has_mask_goron": "has(MASK_GORON) || has(SHARED_MASK_GORON)"
 
-"er_enabled": "!setting(erDungeons, none) || !setting(erIndoors, none) || !setting(erRegions, none) || !setting(erBoss, none)"
+"er_enabled": "!setting(erDungeons, none) || !setting(erIndoors, none) || !setting(erOverworld, none) || !setting(erBoss, none)"
 
 # Misc
 "soul(x)": "(!setting(enemySoulsMm)) || has(x)"

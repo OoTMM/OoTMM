@@ -62,7 +62,7 @@ export const SETTINGS = [{
   default: 20,
   cond: (s: any) => s.goal === 'triforce',
   min: 1,
-  max: (s: any) => s.triforcePieces,
+  max: (s: any) => s.triforcePieces
 }, {
   key: 'triforcePieces',
   name: 'Triforce Pieces',
@@ -72,7 +72,7 @@ export const SETTINGS = [{
   default: 30,
   cond: (s: any) => s.goal === 'triforce',
   min: 1,
-  max: 999,
+  max: 999
 }, {
   key: 'logic',
   name: 'Logic',
@@ -320,7 +320,7 @@ export const SETTINGS = [{
     { value: 'custom', name: 'Custom', description: '' },
   ],
   default: 'removed',
-  cond: (s: any) => s.goal !== 'triforce',
+  cond: (s: any) => s.goal !== 'triforce'
 }, {
   key: 'dungeonRewardShuffle',
   name: 'Dungeon Reward Shuffle',
@@ -442,8 +442,10 @@ export const SETTINGS = [{
   name: 'Merchants Shuffle (MM)',
   category: 'main.shuffle',
   type: 'boolean',
-  description: 'Shuffle extra merchants in MM',
+  description: 'Shuffle the Milk Bar and Gorman Racetrack purchases.',
   default: false
+  default: false,
+  cond: (x: any) => x.shopShuffleMM === 'full'
 }, {
   key: 'eggShuffle',
   name: 'Weird / Pocket Egg Content Shuffle',
@@ -540,7 +542,7 @@ export const SETTINGS = [{
   category: 'main.events',
   type: 'boolean',
   description: 'This changes the beginning of the child trade quest. True means you\'ll start having already met Zelda and got her item along the one from Impa. And the Chicken is also removed from the game',
-  default: false,
+  default: false
 }, {
   key: 'lacs',
   name: 'Light Arrow Cutscene',
@@ -563,7 +565,7 @@ export const SETTINGS = [{
     { value: 'custom', name: 'Custom', description: 'You will need to meet a special condition to fight Majora' },
   ],
   default: 'none',
-  cond: (s: any) => s.goal !== 'triforce',
+  cond: (s: any) => s.goal !== 'triforce'
 }, {
   key: 'bossWarpPads',
   name: 'Boss Warp Pads',
@@ -581,7 +583,7 @@ export const SETTINGS = [{
   category: 'main.events',
   type: 'boolean',
   description: 'Allows to spawn Pierre the Scarecrow just by pulling the Ocarina out',
-  default: false,
+  default: false
 }, {
   key: 'crossWarpOot',
   name: 'Cross-Games OoT Warp Songs',
@@ -620,7 +622,7 @@ export const SETTINGS = [{
   type: 'boolean',
   default: true,
   description: 'Use a specific texture for heart pieces/containers',
-  cond: (x: any) => x.csmc !== 'never',
+  cond: (x: any) => x.csmc !== 'never'
 }, {
   key: 'blastMaskCooldown',
   name: 'Blast Mask Cooldown',
@@ -791,21 +793,21 @@ export const SETTINGS = [{
   type: 'boolean',
   description: 'Adds a Wallet that can hold up to 9999 rupees in each game',
   default: false,
-  cond: (s: any) => s.colossalWallets,
+  cond: (s: any) => s.colossalWallets
 }, {
   key: 'skeletonKeyOot',
   name: 'Skeleton Key (OoT)',
   category: 'items.extensions',
   type: 'boolean',
   description: 'Adds a Skeleton Key that can open every small-key-locked door.',
-  default: false,
+  default: false
 }, {
   key: 'skeletonKeyMm',
   name: 'Skeleton Key (MM)',
   category: 'items.extensions',
   type: 'boolean',
   description: 'Adds a Skeleton Key that can open every small-key-locked door.',
-  default: false,
+  default: false
 }, {
   key: 'enemySoulsOot',
   name: 'Enemy Souls (OoT)',
@@ -886,7 +888,7 @@ export const SETTINGS = [{
   category: 'items.shared',
   type: 'boolean',
   default: false,
-  cond: (s: any) => s.sunSongMm,
+  cond: (s: any) => s.sunSongMm
 }, {
   key: 'sharedHookshot',
   name: 'Shared Hookshots',
@@ -953,14 +955,14 @@ export const SETTINGS = [{
   category: 'items.shared',
   type: 'boolean',
   default: false,
-  cond: (s: any) => s.enemySoulsOot && s.enemySoulsMm,
+  cond: (s: any) => s.enemySoulsOot && s.enemySoulsMm
 }, {
   key: 'sharedSkeletonKey',
   name: 'Shared Skeleton Key',
   category: 'items.shared',
   type: 'boolean',
   default: false,
-  cond: (s: any) => s.skeletonKeyOot && s.skeletonKeyMm,
+  cond: (s: any) => s.skeletonKeyOot && s.skeletonKeyMm
 }, {
   key: 'agelessSwords',
   name: 'Ageless Swords',
@@ -1052,75 +1054,87 @@ export const SETTINGS = [{
   category: 'entrances',
   type: 'boolean',
   description: 'If turned on, it means Bottom of the Well, Ice Cavern and Gerudo Training Grounds are also shuffled',
-  default: false
+  default: false,
+  cond: (x: any) => x.erDungeons !== 'none'
 }, {
   key: 'erGanonCastle',
   name: 'Shuffle Ganon\'s Castle with Dungeons',
   category: 'entrances',
   type: 'boolean',
-  default: false
+  default: false,
+  cond: (x: any) => x.erDungeons !== 'none'
 }, {
   key: 'erGanonTower',
   name: 'Shuffle Ganon\'s Tower with Dungeons',
   category: 'entrances',
   type: 'boolean',
-  default: false
+  default: false,
+  cond: (x: any) => x.erDungeons !== 'none'
 }, {
   key: 'erSpiderHouses',
   name: 'Shuffle Spider Houses with Dungeons',
   category: 'entrances',
   type: 'boolean',
-  default: false
+  default: false,
+  cond: (x: any) => x.erDungeons !== 'none'
 }, {
   key: 'erPirateFortress',
   name: 'Shuffle Pirate Fortress with Dungeons',
   category: 'entrances',
   type: 'boolean',
-  default: false
+  default: false,
+  cond: (x: any) => x.erDungeons !== 'none'
 }, {
   key: 'erBeneathWell',
   name: 'Shuffle Beneath The Well with Dungeons',
   category: 'entrances',
   type: 'boolean',
-  default: false
+  default: false,
+  cond: (x: any) => x.erDungeons !== 'none'
 }, {
   key: 'erIkanaCastle',
   name: 'Shuffle Ikana Castle Interior with Dungeons',
   category: 'entrances',
   type: 'boolean',
-  default: false
+  default: false,
+  cond: (x: any) => x.erDungeons !== 'none'
 }, {
   key: 'erSecretShrine',
   name: 'Shuffle Secret Shrine with Dungeons',
   category: 'entrances',
   type: 'boolean',
-  default: false
+  default: false,
+  cond: (x: any) => x.erDungeons !== 'none'
 }, {
-  key: 'erRegions',
-  name: 'Shuffle Major Regions',
+  key: 'erOverworld',
+  name: 'Shuffle Overworld Entrances',
   category: 'entrances',
   type: 'enum',
   values: [
-    { value: 'none', name: 'None' },
-    { value: 'ownGame', name: 'Own Game' },
-    { value: 'full', name: 'Full' },
+    { value: 'none', name: 'None', description: 'No entrances are shuffled' },
+    { value: 'regionsOwnGame', name: 'Regional - Own Game', description: 'Shuffles the major regions in their own game' },
+    { value: 'regionsFull', name: 'Regional - Full', description: 'Shuffles the major regions across both games' },
+    { value: 'ownGame', name: 'Own Game', description: 'Shuffles all entrances in their own game' },
+    { value: 'full', name: 'Full', description: 'Shuffles all entrances across both games' },
   ],
   default: 'none',
-  description: '- Every entrance to Hyrule Field except Gerudo Valley and Market<br>- The entrance to Gerudo Fortress from Gerudo Valley<br>- The entrance to Death Mountain from Kakariko<br>- The entrances to the four main regions in MM<br>- The entrance to Romani Ranch',
+  description: 'Shuffles all the overworld entrances among each other. Currently only OOT is supported by Own Game and Full. Major regions include:<br>- Every entrance to Hyrule Field except Gerudo Valley and Market<br>- The entrance to Gerudo Fortress from Gerudo Valley<br>- The entrance to Death Mountain from Kakariko<br>- The entrances to the four main regions in MM<br>- The entrance to Romani Ranch'
 }, {
   key: 'erRegionsExtra',
   name: 'Shuffle Market Entrance',
   category: 'entrances',
   type: 'boolean',
-  description: 'Shuffle Hyrule Field\'s Market entrance among the regions.',
-  default: false
+  description: 'Shuffle Hyrule Field\'s Market entrance among the regions. No effect if "Own Game" or "Full" is selected in Shuffle Overworld Entrances.',
+  default: false,
+  cond: (x: any) => x.erOverworld === 'regionsOwnGame' || x.erOverworld === 'regionsFull'
 }, {
   key: 'erRegionsShortcuts',
   name: 'Shuffle Regional Shortcuts',
   category: 'entrances',
   type: 'boolean',
-  description: 'Shuffles the various shortcuts between regions.<br>- Lost Woods/Goron City<br>- Lost Woods/Zora\'s River<br>- Lake Hylia/Zora\'s Domain<br>- Lake Hylia/Gerudo Valley<br>- Ikana Canyon/Southern Swamp',
-  default: false
+  description: 'Shuffles the various shortcuts between regions. No effect if "Own Game" or "Full" is selected in Shuffle Overworld Entrances.<br>- Lost Woods/Goron City<br>- Lost Woods/Zora\'s River<br>- Lake Hylia/Zora\'s Domain<br>- Lake Hylia/Gerudo Valley<br>- Ikana Canyon/Southern Swamp',
+  default: false,
+  cond: (x: any) => x.erOverworld === 'regionsOwnGame' || x.erOverworld === 'regionsFull'
 }, {
   key: 'erIndoors',
   name: 'Shuffle Interiors',
@@ -1132,12 +1146,13 @@ export const SETTINGS = [{
     { value: 'full', name: 'Full' },
   ],
   default: 'none',
-  description: 'Shuffle most interiors with each other',
+  description: 'Shuffle most interiors with each other'
 }, {
   key: 'erIndoorsExtra',
   name: 'Shuffle Extra Interiors',
   category: 'entrances',
   type: 'boolean',
   description: 'Shuffle additional, more complex interiors. These include:<br>- OOT: Link\'s House, Temple of Time, Windmill, Kak Potion Shop<br>- MM: Stock Pot Inn, Astral Observatory/Bombers\' Hideout, Swamp Tourist Hut, Ikana Spring Cave',
-  default: false
+  default: false,
+  cond: (x: any) => x.erIndoors !== 'none'
 }] as const;

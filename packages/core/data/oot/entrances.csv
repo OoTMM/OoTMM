@@ -57,6 +57,32 @@ VALLEY_FROM_LAKE_HYLIA,                   overworld,        Gerudo Valley Falls,
 ZORA_DOMAIN_FROM_LAKE_HYLIA,              overworld,        Zora Domain,                                Lake Hylia,                                   LAKE_HYLIA_FROM_ZORA_DOMAIN
 LOST_WOODS_FROM_ZORA_RIVER,               overworld,        Lost Woods,                                 Zora River,                                   ZORA_RIVER_FROM_LOST_WOODS
 LOST_WOODS_FROM_GORON_CITY,               overworld,        Lost Woods,                                 Goron City Shortcut,                          GORON_CITY_FROM_LOST_WOODS
+KOKIRI_FOREST_FROM_BRIDGE,                overworld,        Kokiri Forest,                              Lost Woods Bridge,                            LOST_WOODS_BRIDGE_FROM_FOREST
+LOST_WOODS_BRIDGE_FROM_FOREST,            overworld,        Lost Woods Bridge from Forest,              Kokiri Forest,                                KOKIRI_FOREST_FROM_BRIDGE
+KOKIRI_FOREST_FROM_LOST_WOODS,            overworld,        Kokiri Forest,                              Lost Woods,                                   LOST_WOODS_FROM_KOKIRI_FOREST
+LOST_WOODS_FROM_KOKIRI_FOREST,            overworld,        Lost Woods,                                 Kokiri Forest,                                KOKIRI_FOREST_FROM_LOST_WOODS
+LOST_WOODS_FROM_MEADOW,                   overworld,        Lost Woods Deep,                            Sacred Meadow Entryway,                       MEADOW_FROM_LOST_WOODS
+MEADOW_FROM_LOST_WOODS,                   overworld,        Sacred Meadow Entryway,                     Lost Woods Deep,                              LOST_WOODS_FROM_MEADOW
+FIELD_FROM_GERUDO_VALLEY,                 overworld,        Hyrule Field,                               Gerudo Valley,                                GERUDO_VALLEY_FROM_FIELD
+GERUDO_VALLEY_FROM_FIELD,                 overworld,        Gerudo Valley,                              Hyrule Field,                                 FIELD_FROM_GERUDO_VALLEY
+ZORA_RIVER_FROM_ZORA_DOMAIN,              overworld,        Zora River Waterfall,                       Zora Domain,                                  ZORA_DOMAIN_FROM_ZORA_RIVER
+ZORA_DOMAIN_FROM_ZORA_RIVER,              overworld,        Zora Domain,                                Zora River Waterfall,                         ZORA_RIVER_FROM_ZORA_DOMAIN
+ZORA_DOMAIN_FROM_FOUNTAIN,                overworld,        Zora Domain Back,                           Zora Fountain,                                FOUNTAIN_FROM_ZORA_DOMAIN
+FOUNTAIN_FROM_ZORA_DOMAIN,                overworld,        Zora Fountain,                              Zora Domain Back,                             ZORA_DOMAIN_FROM_FOUNTAIN
+KAKARIKO_FROM_GRAVEYARD,                  overworld,        Kakariko,                                   Graveyard,                                    GRAVEYARD_FROM_KAKARIKO
+GRAVEYARD_FROM_KAKARIKO,                  overworld,        Graveyard,                                  Kakariko,                                     KAKARIKO_FROM_GRAVEYARD
+DEATH_MOUNTAIN_FROM_GORON_CITY,           overworld,        Death Mountain,                             Goron City,                                   GORON_CITY_FROM_DEATH_MOUNTAIN
+GORON_CITY_FROM_DEATH_MOUNTAIN,           overworld,        Goron City,                                 Death Mountain,                               DEATH_MOUNTAIN_FROM_GORON_CITY
+DEATH_MOUNTAIN_FROM_CRATER,               overworld,        Death Mountain Summit,                      Death Mountain Crater Top,                    CRATER_FROM_DEATH_MOUNTAIN
+CRATER_FROM_DEATH_MOUNTAIN,               overworld,        Death Mountain Crater Top,                  Death Mountain Summit,                        DEATH_MOUNTAIN_FROM_CRATER
+GORON_CITY_FROM_CRATER,                   overworld,        Darunia Chamber,                            Death Mountain Crater Bottom,                 CRATER_FROM_GORON_CITY
+CRATER_FROM_GORON_CITY,                   overworld,        Death Mountain Crater Bottom,               Darunia Chamber,                              GORON_CITY_FROM_CRATER
+MARKET_ENTRANCE_FROM_MARKET,              overworld,        Market Entryway,                            Market,                                       MARKET_FROM_MARKET_ENTRANCE
+MARKET_FROM_MARKET_ENTRANCE,              overworld,        Market,                                     Market Entryway,                              MARKET_ENTRANCE_FROM_MARKET
+MARKET_FROM_HYRULE_CASTLE,                overworld,        Market,                                     Market Castle Entry,                          HYRULE_CASTLE_FROM_MARKET
+HYRULE_CASTLE_FROM_MARKET,                overworld,        Market Castle Entry,                        Market,                                       MARKET_FROM_HYRULE_CASTLE
+MARKET_FROM_TOT_ENTRY,                    overworld,        Market,                                     Temple of Time Entryway,                      TOT_ENTRY_FROM_MARKET
+TOT_ENTRY_FROM_MARKET,                    overworld,        Temple of Time Entryway,                    Market,                                       MARKET_FROM_TOT_ENTRY
 HOUSE_MIDO,                               indoors,          Mido's House,                               Kokiri Forest,                                KOKIRI_FOREST_FROM_MIDO
 HOUSE_SARIA,                              indoors,          Saria's House,                              Kokiri Forest,                                KOKIRI_FOREST_FROM_SARIA
 HOUSE_TWINS,                              indoors,          House of Twins,                             Kokiri Forest,                                KOKIRI_FOREST_FROM_TWINS
