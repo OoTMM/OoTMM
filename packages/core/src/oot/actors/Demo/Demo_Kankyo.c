@@ -18,6 +18,7 @@ static void DemoKankyo_Warp(GameState_Play* play, void* unk, Actor* this)
     t->type = TRANS_TYPE_NORMAL;
     t->gfx = TRANS_GFX_SHORTCUT;
     t->entrance = sWarpEntrances[play->msgCtx.lastSongPlayed];
+	gIsEntranceOverride = 1;
 }
 
 PATCH_CALL(0x80930ab0, DemoKankyo_Warp);

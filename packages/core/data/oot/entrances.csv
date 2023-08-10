@@ -57,6 +57,14 @@ VALLEY_FROM_LAKE_HYLIA,                   overworld,        Gerudo Valley Falls,
 ZORA_DOMAIN_FROM_LAKE_HYLIA,              overworld,        Zora Domain,                                Lake Hylia,                                   LAKE_HYLIA_FROM_ZORA_DOMAIN
 LOST_WOODS_FROM_ZORA_RIVER,               overworld,        Lost Woods,                                 Zora River,                                   ZORA_RIVER_FROM_LOST_WOODS
 LOST_WOODS_FROM_GORON_CITY,               overworld,        Lost Woods,                                 Goron City Shortcut,                          GORON_CITY_FROM_LOST_WOODS
+MEADOW_WARP,                              warp,             Sacred Meadow,                              SONGS,                                        NONE
+CRATER_WARP,                              warp,             Death Mountain Crater Warp,                 SONGS,                                        NONE
+LAKE_WARP,                                warp,             Lake Hylia,                                 SONGS,                                        NONE
+GRAVE_WARP,                               warp,             Graveyard Upper,                            SONGS,                                        NONE
+DESERT_WARP,                              warp,             Desert Colossus,                            SONGS,                                        NONE
+TEMPLE_WARP,                              warp,             Temple of Time,                             SONGS,                                        NONE
+VILLAGE_WARP,                             warp-owl,         Kakariko Rooftop,                           Death Mountain Summit,                        NONE
+FIELD_WARP,                               warp-owl,         Hyrule Field Drawbridge,                    Lake Hylia,                                   NONE
 HOUSE_MIDO,                               indoors,          Mido's House,                               Kokiri Forest,                                KOKIRI_FOREST_FROM_MIDO
 HOUSE_SARIA,                              indoors,          Saria's House,                              Kokiri Forest,                                KOKIRI_FOREST_FROM_SARIA
 HOUSE_TWINS,                              indoors,          House of Twins,                             Kokiri Forest,                                KOKIRI_FOREST_FROM_TWINS
