@@ -1119,7 +1119,7 @@ export const SETTINGS = [{
   name: 'Shuffle Regional Shortcuts',
   category: 'entrances',
   type: 'boolean',
-  description: 'Shuffles the various shortcuts between regions',
+  description: 'Shuffles the various shortcuts between regions.<br>- Lost Woods/Goron City<br>- Lost Woods/Zora\'s River<br>- Lake Hylia/Zora\'s Domain<br>- Lake Hylia/Gerudo Valley<br>- Ikana Canyon/Southern Swamp',
   default: false
 }, {
   key: 'erIndoors',
