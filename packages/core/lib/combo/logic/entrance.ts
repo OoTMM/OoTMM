@@ -440,16 +440,16 @@ export class LogicPassEntrances {
   }
 
   private placeRegions(worldId: number) {
-    const pool = ['region', 'region-extra', 'region-shortcut', 'overworld'];
+    const pool = ['region', 'region-extra', 'region-shortcut', 'overworld-shuffle'];
     if (this.input.settings.erOverworld === 'regionsOwnGame' ) {
       pool.pop('region-extra');
       pool.pop('region-shortcut');
-      pool.pop('overworld');
+      pool.pop('overworld-shuffle');
     }
     if (this.input.settings.erOverworld === 'regionsFull' ) {
       pool.pop('region-extra');
       pool.pop('region-shortcut');
-      pool.pop('overworld');
+      pool.pop('overworld-shuffle');
     }
     if (this.input.settings.erRegionsExtra) {
       pool.push('region-extra');

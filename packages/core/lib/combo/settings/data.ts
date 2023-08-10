@@ -443,7 +443,6 @@ export const SETTINGS = [{
   category: 'main.shuffle',
   type: 'boolean',
   description: 'Shuffle the Milk Bar and Gorman Racetrack purchases.',
-  default: false
   default: false,
   cond: (x: any) => x.shopShuffleMM === 'full'
 }, {
@@ -1124,7 +1123,7 @@ export const SETTINGS = [{
   name: 'Shuffle Market Entrance',
   category: 'entrances',
   type: 'boolean',
-  description: 'Shuffle Hyrule Field\'s Market entrance among the regions. No effect if "Own Game" or "Full" is selected in Shuffle Overworld Entrances.',
+  description: 'Shuffle Hyrule Field\'s Market entrance among the regions.',
   default: false,
   cond: (x: any) => x.erOverworld === 'regionsOwnGame' || x.erOverworld === 'regionsFull'
 }, {
@@ -1132,7 +1131,7 @@ export const SETTINGS = [{
   name: 'Shuffle Regional Shortcuts',
   category: 'entrances',
   type: 'boolean',
-  description: 'Shuffles the various shortcuts between regions. No effect if "Own Game" or "Full" is selected in Shuffle Overworld Entrances.<br>- Lost Woods/Goron City<br>- Lost Woods/Zora\'s River<br>- Lake Hylia/Zora\'s Domain<br>- Lake Hylia/Gerudo Valley<br>- Ikana Canyon/Southern Swamp',
+  description: 'Shuffles the various shortcuts between regions.<br>- Lost Woods -> Goron City<br>- Lost Woods -> Zora\'s River<br>- Zora\'s Domain -> Lake Hylia<br>- Gerudo Valley -> Lake Hylia<br>- Ikana Canyon -> Southern Swamp',
   default: false,
   cond: (x: any) => x.erOverworld === 'regionsOwnGame' || x.erOverworld === 'regionsFull'
 }, {
