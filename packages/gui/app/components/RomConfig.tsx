@@ -5,6 +5,7 @@ import { Checkbox } from './Checkbox';
 import { FileSelect } from './FileSelect';
 import { PresetSelector } from './PresetSelector';
 import { SettingsImportExport } from './SettingsImportExport';
+import Group from './Group';
 
 export function RomConfig() {
   const { romConfig, setFileBuffer, setSeed } = useRomConfig();
@@ -25,23 +26,27 @@ export function RomConfig() {
         {isPatch && <FileSelect file='patch' logo="ootmm" label="OoTMM Patch File" accept=".ootmm" onChange={(f) => setFileBuffer('patch', f)}/>}
       </div>
       {!isPatch && <Checkbox label="Random Settings" checked={isRandomSettings} onChange={x => setRandomSettings({ enabled: x })}/>}
-      {isRandomSettings && <>
-        <Checkbox label="Random Settings: MQ" checked={randomSettings.mq} onChange={x => setRandomSettings({ mq: x })}/>
-        <Checkbox label="Random Settings: Entrances" checked={randomSettings.er} onChange={x => setRandomSettings({ er: x })}/>
-      </>}
-      {!isPatch && !isRandomSettings && <>
-        <PresetSelector/>
-        <SettingsImportExport/>
-      </>}
-      {!isRandomSettings && <Checkbox label="Use a patch file" checked={isPatch} onChange={setIsPatch}/>}
-      {!isPatch && !isRandomSettings && <label>
-        Seed (leave blank to auto-generate)
-        <input
-          type="text"
-          value={romConfig.seed}
-          onChange={(e) => setSeed(e.target.value)}
-        />
-      </label>}
+      <Group direction='vertical'>
+        {isRandomSettings && <>
+          <Checkbox label="Random Settings: MQ" checked={randomSettings.mq} onChange={x => setRandomSettings({ mq: x })}/>
+          <Checkbox label="Random Settings: Entrances" checked={randomSettings.er} onChange={x => setRandomSettings({ er: x })}/>
+        </>}
+        {!isPatch && !isRandomSettings && <>
+          <Group direction='vertical'>
+            <PresetSelector/>
+            <SettingsImportExport/>
+          </Group>
+        </>}
+        {!isRandomSettings && <Checkbox label="Use a patch file" checked={isPatch} onChange={setIsPatch}/>}
+        {!isPatch && !isRandomSettings && <label>
+          Seed (leave blank to auto-generate)
+          <input
+            type="text"
+            value={romConfig.seed}
+            onChange={(e) => setSeed(e.target.value)}
+          />
+        </label>}
+      </Group>
       <button className="btn-primary sm-margin-top" type="submit">
         Generate
       </button>
