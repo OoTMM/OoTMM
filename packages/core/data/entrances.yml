@@ -148,8 +148,8 @@ OOT_GRAVEYARD_FROM_GRAVE_DAMPE:             0x359
 OOT_WARP_SONG_MEADOW:                       0x600
 OOT_WARP_SONG_CRATER:                       0x4f6
 OOT_WARP_SONG_LAKE:                         0x604
-OOT_WARP_SONG_GRAVE:                        0x568
-OOT_WARP_SONG_DESERT:                       0x1f1
+OOT_WARP_SONG_GRAVE:                        0x1f1
+OOT_WARP_SONG_DESERT:                       0x568
 OOT_WARP_SONG_TEMPLE:                       0x5f4
 OOT_VILLAGE_OWL:                            0x554
 OOT_FIELD_OWL:                              0x27e
