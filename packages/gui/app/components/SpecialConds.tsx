@@ -23,7 +23,7 @@ function SpecialCondsPanel({ cond }: SpecialCondsPanelProps) {
   return (
     <form onSubmit={e => e.preventDefault()}>
       <Group direction="vertical">
-        <h1>{SPECIAL_CONDS[cond].name}</h1>
+        <h2>{SPECIAL_CONDS[cond].name}</h2>
         <Group direction="vertical" spacing='4px'> 
           {Object.keys(SPECIAL_CONDS_KEYS).map(key =>
             <Checkbox
@@ -42,8 +42,11 @@ function SpecialCondsPanel({ cond }: SpecialCondsPanelProps) {
 
 export function SpecialConds() {
   return (
-    <Group direction="horizontal" spacing='4rem'>
-      {Object.keys(SPECIAL_CONDS).map(x => <SpecialCondsPanel key={x} cond={x}/>)}
+    <Group direction='vertical' spacing='24px'>
+      <h1>Special Conditions</h1>
+      <Group direction="horizontal" spacing='4rem'>
+        {Object.keys(SPECIAL_CONDS).map(x => <SpecialCondsPanel key={x} cond={x}/>)}
+      </Group>
     </Group>
   );
 }

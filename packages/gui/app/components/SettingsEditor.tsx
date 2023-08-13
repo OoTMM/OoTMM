@@ -6,6 +6,7 @@ import { Checkbox } from './Checkbox';
 import { useSettings } from '../contexts/GeneratorContext';
 import { Tooltip } from './Tooltip';
 import { InputNumber } from './InputNumber';
+import Group from './Group';
 
 function Setting({ setting }: { setting: string }) {
   const [settings, setSettings] = useSettings();
@@ -124,11 +125,11 @@ export function SettingsPanel({ category }: SettingsPanelProps) {
   const settingsData = SETTINGS.filter((s) => s.category === category);
 
   return (
-    <form className="settings">
-      <div className="three-column-grid">
-        {settingsData.map(setting => <Setting key={setting.key} setting={setting.key}/>)}
-      </div>
-      {settingsData.map(setting => <SettingTooltip key={setting.key} setting={setting.key}/>)}
+    <form>
+        <div className="three-column-grid">
+          {settingsData.map(setting => <Setting key={setting.key} setting={setting.key}/>)}
+        </div>
+        {settingsData.map(setting => <SettingTooltip key={setting.key} setting={setting.key}/>)}
     </form>
   );
 };
@@ -140,12 +141,17 @@ export function SettingsEditor({ category }: SettingsEditorProps) {
   const cat = SETTINGS_CATEGORIES.find(x => x.key === category)!;
   const subcategories = cat.subcategories || [];
   return (
-    <>
-      <SettingsPanel category={category}/>
-      {subcategories.map(sub => <div key={sub.key} className='settings-group'>
-        <h2>{sub.name}</h2>
-        <SettingsPanel category={`${category}.${sub.key}`}/>
-      </div>)}
-    </>
+    <Group direction='vertical' spacing='24px'>
+      <h1 style={{textTransform: 'capitalize'}}>{category}</h1>
+      <Group direction='vertical'>
+        <SettingsPanel category={category}/>
+        {subcategories.map(sub => <div key={sub.key}>
+          <Group direction='vertical' spacing='8px'>
+            <h2>{sub.name}</h2>
+            <SettingsPanel category={`${category}.${sub.key}`}/>
+          </Group>
+        </div>)}
+      </Group>
+    </Group>
   )
 }

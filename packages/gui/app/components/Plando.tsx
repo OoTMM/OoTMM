@@ -33,7 +33,7 @@ export function Plando() {
   };
 
   return (
-    <Group direction='vertical'>
+    <Group direction='vertical' spacing='24px'>
       <h1>Plando</h1>
       <Group direction='horizontal'>
         <Select className='plando-select' options={locsOptions} onChange={(v) => setSelectedLoc(v?.value)}/>

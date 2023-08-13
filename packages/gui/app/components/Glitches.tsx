@@ -39,12 +39,15 @@ export function Glitches() {
   }
 
   return (
-    <Group direction='vertical'>
-      <button className="btn-danger" onClick={clear} style={{width: '120px'}}>Remove All</button>
-      <div className="two-column-grid">
-        <GameGlitches game="OOT"/>
-        <GameGlitches game="MM"/>
-      </div>
+    <Group direction='vertical' spacing='24px'>
+      <h1>Glitches</h1>
+      <Group direction='vertical'>
+        <button className="btn-danger" onClick={clear} style={{width: '120px'}}>Remove All</button>
+        <div className="two-column-grid">
+          <GameGlitches game="OOT"/>
+          <GameGlitches game="MM"/>
+        </div>
+      </Group>
     </Group>
   )
 }

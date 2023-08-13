@@ -3,6 +3,7 @@ import { locationList } from '@ootmm/core';
 
 import { useSettings } from '../contexts/GeneratorContext';
 import { ArrayList } from './ArrayList';
+import Group from './Group';
 
 export function JunkLocations() {
   const [settings, setSettings] = useSettings();
@@ -21,5 +22,10 @@ export function JunkLocations() {
     setSettings({ junkLocations: { set: [] } });
   }
 
-  return <ArrayList options={options} selected={settings.junkLocations} add={add} remove={remove} clear={clear}/>;
+  return (
+    <Group direction='vertical' spacing='24px'>
+      <h1>Junk Locations</h1>
+      <ArrayList options={options} selected={settings.junkLocations} add={add} remove={remove} clear={clear}/>
+    </Group>
+  );
 }

@@ -38,13 +38,15 @@ export function Tricks() {
   }
 
   return (
-    <Group direction='vertical'>
+    <Group direction='vertical' spacing='24px'>
       <h1>Tricks</h1>
-      <button className="btn-danger" onClick={clear} style={{width: '120px'}}>Remove All</button>
-      <div className="two-column-grid">
-        <GameTricks game="OOT"/>
-        <GameTricks game="MM"/>
-      </div>
+      <Group direction='vertical'>
+        <button className="btn-danger" onClick={clear} style={{width: '120px'}}>Remove All</button>
+        <div className="two-column-grid">
+          <GameTricks game="OOT"/>
+          <GameTricks game="MM"/>
+        </div>
+      </Group>
     </Group>
   )
 }
