@@ -5,6 +5,8 @@ int gNoTimeFlow;
 
 static void debugCheat(GameState_Play* play)
 {
+    MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_GB);
+
 #if defined(DEBUG)
     //if (play->gs.input[0].current.buttons & L_TRIG)
     {

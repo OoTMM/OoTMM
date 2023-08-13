@@ -68,10 +68,25 @@ static void ObjTsubo_Aliases(Actor_ObjTsubo* this)
         if (xflag->setupId == 1)
         {
             xflag->setupId = 0;
-            if (xflag->id <= 15)
-                xflag->id += 48;
-            else
-                xflag->id += 102;
+            switch (xflag->id)
+            {
+            case 13: xflag->id = 123; break;
+            case 14: xflag->id = 124; break;
+            case 15: xflag->id = 125; break;
+            case 16: xflag->id = 133; break;
+            case 17: xflag->id = 119; break;
+            case 18: xflag->id = 129; break;
+            case 19: xflag->id = 118; break;
+            case 20: xflag->id = 128; break;
+            case 21: xflag->id = 130; break;
+            case 22: xflag->id = 120; break;
+            case 23: xflag->id = 121; break;
+            case 24: xflag->id = 62;  break;
+            case 25: xflag->id = 61;  break;
+            case 26: xflag->id = 63;  break;
+            case 27: xflag->id = 131;  break;
+            default: UNREACHABLE(); break;
+            }
         }
         break;
     case SCE_MM_ZORA_CAPE:
@@ -173,7 +188,7 @@ void ObjTsubo_Draw(Actor_ObjTsubo* this, GameState_Play* play)
         break;
     }
 
-    if (comboConfig(CFG_OOT_SHUFFLE_POTS) && ObjTsubo_IsShuffled(this) && !comboXflagsGet(&this->xflag))
+    if (comboConfig(CFG_MM_SHUFFLE_POTS) && ObjTsubo_IsShuffled(this) && !comboXflagsGet(&this->xflag))
         comboXflagItemOverride(&o, &this->xflag, 0);
     else
         o.gi = 0;
