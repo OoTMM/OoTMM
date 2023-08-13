@@ -24,7 +24,7 @@ export function GameTricks({ game }: { game: keyof typeof NAMES }) {
   }
 
   return (
-    <Group direction='vertical' spacing='4px'>
+    <Group direction='vertical' spacing='xs'>
       <h1>{NAMES[game]}</h1>
       <ArrayList options={options} selected={settings.tricks.filter(x => tricks.includes(x))} add={add} remove={remove}/>
     </Group>
@@ -38,7 +38,7 @@ export function Tricks() {
   }
 
   return (
-    <Group direction='vertical' spacing='24px'>
+    <Group direction='vertical' spacing='xl'>
       <h1>Tricks</h1>
       <Group direction='vertical'>
         <button className="btn-danger" onClick={clear} style={{width: '120px'}}>Remove All</button>

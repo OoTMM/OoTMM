@@ -54,7 +54,7 @@ export const PresetSelector = () => {
   }
 
   return <label>
-    <Group direction='vertical' spacing='4px'>
+    <Group direction='vertical' spacing='xs'>
       <span>
         Preset
       </span>

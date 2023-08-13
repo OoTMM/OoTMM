@@ -15,7 +15,7 @@ type InputNumberProps = {
 export const InputNumber = ({ label, value, onChange, min, max, tooltip }: InputNumberProps) => {
   return (
     <label>
-       <Group direction='vertical' spacing='4px'>
+       <Group direction='vertical' spacing='xs'>
         <span>
           {label}
           {tooltip && <a className="tooltip-link" id={tooltip} href="#"><FontAwesomeIcon icon={solid('question-circle')}/></a>}

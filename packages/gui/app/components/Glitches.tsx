@@ -24,7 +24,7 @@ export function GameGlitches({ game }: { game: keyof typeof NAMES }) {
   }
 
   return (
-    <Group direction='vertical' spacing='4px'>
+    <Group direction='vertical' spacing='xs'>
       <h1>{NAMES[game]}</h1>
       <ArrayList options={options} selected={settings.glitches.filter(x => glitches.includes(x))} add={add} remove={remove}/>
     </Group>
@@ -39,7 +39,7 @@ export function Glitches() {
   }
 
   return (
-    <Group direction='vertical' spacing='24px'>
+    <Group direction='vertical' spacing='xl'>
       <h1>Glitches</h1>
       <Group direction='vertical'>
         <button className="btn-danger" onClick={clear} style={{width: '120px'}}>Remove All</button>

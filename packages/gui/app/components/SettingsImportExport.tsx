@@ -20,7 +20,7 @@ export const SettingsImportExport = () => {
 
   return (
     <label>
-      <Group direction='vertical' spacing='4px'>
+      <Group direction='vertical' spacing='xs'>
         Import/Export Settings
         <textarea className='settings-string' value={str} onChange={x => onChange(x.target.value)}/>
       </Group>

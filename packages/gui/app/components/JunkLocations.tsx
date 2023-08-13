@@ -23,7 +23,7 @@ export function JunkLocations() {
   }
 
   return (
-    <Group direction='vertical' spacing='24px'>
+    <Group direction='vertical' spacing='xl'>
       <h1>Junk Locations</h1>
       <ArrayList options={options} selected={settings.junkLocations} add={add} remove={remove} clear={clear}/>
     </Group>

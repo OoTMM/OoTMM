@@ -40,7 +40,7 @@ export function ArrayList({ options, selected, add, remove, clear }: ArrayListPr
         />
         {clear && <button className="btn-danger" onClick={clear}>Remove All</button>}
       </Group>
-      <Group direction='vertical' spacing='4px'>
+      <Group direction='vertical' spacing='xs'>
         {selected.map(v => (
           <li key={v}>
             <span className="plando-remove" onClick={() => remove(v)}><FontAwesomeIcon icon={solid('xmark')}/></span>

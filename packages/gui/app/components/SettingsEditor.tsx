@@ -141,7 +141,7 @@ export function SettingsEditor({ category }: SettingsEditorProps) {
   const cat = SETTINGS_CATEGORIES.find(x => x.key === category)!;
   const subcategories = cat.subcategories || [];
   return (
-    <Group direction='vertical' spacing='24px'>
+    <Group direction='vertical' spacing='xl'>
       <h1 style={{textTransform: 'capitalize'}}>{category}</h1>
       <Group direction='vertical'>
         <SettingsPanel category={category}/>

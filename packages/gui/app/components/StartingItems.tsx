@@ -41,7 +41,7 @@ export function StartingItems() {
   };
 
   return (
-    <Group direction='vertical' spacing='24px'>
+    <Group direction='vertical' spacing='xl'>
       <h1>Starting Items</h1>
       <Group direction='vertical'>
         <button className="btn-danger" onClick={reset} style={{width: '200px'}}>

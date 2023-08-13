@@ -33,7 +33,7 @@ export function Plando() {
   };
 
   return (
-    <Group direction='vertical' spacing='24px'>
+    <Group direction='vertical' spacing='xl'>
       <h1>Plando</h1>
       <Group direction='horizontal'>
         <Select className='plando-select' options={locsOptions} onChange={(v) => setSelectedLoc(v?.value)}/>
@@ -41,7 +41,7 @@ export function Plando() {
         <button className="btn-primary" onClick={placeItem}>Add</button>
         <button className="btn-danger" onClick={removeAll}>Remove All</button>
       </Group>
-      <Group direction='vertical' spacing='4px'>
+      <Group direction='vertical' spacing='xs'>
         {Object.entries(settings.plando.locations || {}).filter(x => x[1]).map(([loc, item]) => (
           <li key={loc}>
             <span className="plando-remove" onClick={() => removeItem(loc)}><FontAwesomeIcon icon={solid('xmark')}/></span>

@@ -1,16 +1,19 @@
 import React, { ReactNode } from 'react';
 import '../style/group.css';
+import { getTypographySizeRem } from '../utils/getTypographySizeRem';
+
 type GroupProps = {
     direction: string;
     spacing?: string;
     children: ReactNode;
 }
 
-  const Group: React.FC<GroupProps> = ({ direction, spacing = '16px', children }) => {
+  const Group: React.FC<GroupProps> = ({ direction, spacing = "BASE", children }) => {
     const isVertical = direction === 'vertical';
+    const spacingValue = getTypographySizeRem(spacing);
     const spacingStyle = isVertical
-      ? { marginBottom: spacing }
-      : { marginRight: spacing };
+      ? { marginBottom: spacingValue }
+      : { marginRight: spacingValue };
   
     return (
       <div className={`group ${isVertical ? 'vertical' : 'horizontal'}`}>
