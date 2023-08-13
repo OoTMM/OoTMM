@@ -458,6 +458,14 @@ export class LogicPassEntrances {
     this.placePool(worldId, pool, { ownGame: this.input.settings.erIndoors === 'ownGame' });
   }
 
+  private placeWarps(worldId: number) {
+    const pool = ['warp'];
+    if (this.input.settings.erWarpsOwls) {
+      pool.push('warp-owl');
+    }
+    this.placePool(worldId, pool, { ownGame: this.input.settings.erWarps === 'ownGame' });
+  }
+
   private propagateRegionsStep(worldId: number) {
     const world = this.worlds[worldId];
     let changed = false;

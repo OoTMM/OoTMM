@@ -1140,4 +1140,23 @@ export const SETTINGS = [{
   type: 'boolean',
   description: 'Shuffle additional, more complex interiors. These include:<br>- OOT: Link\'s House, Temple of Time, Windmill, Kak Potion Shop<br>- MM: Stock Pot Inn, Astral Observatory/Bombers\' Hideout, Swamp Tourist Hut, Ikana Spring Cave',
   default: false
+}, {
+  key: 'erWarps',
+  name: 'Shuffle Warp Destinations',
+  category: 'entrances',
+  type: 'enum',
+  values: [
+    { value: 'none', name: 'None' },
+    { value: 'ownGame', name: 'Own Game' },
+    { value: 'full', name: 'Full' },
+  ],
+  default: 'none',
+  description: 'Shuffle the Warp Songs and Owl Statues with each other.',
+}, {
+  key: 'erWarpsOwls',
+  name: 'Shuffle Child Owl Warps',
+  category: 'entrances',
+  type: 'boolean',
+  description: 'Shuffle the two owl warps among the other warps.',
+  default: false
 }] as const;

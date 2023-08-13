@@ -39,6 +39,16 @@ FIELD_FROM_GREAT_BAY_COAST,                         overworld,        Great Bay 
 IKANA_ROAD_FROM_VALLEY,                             overworld,        Road to Ikana Top,                  Ikana Valley,                               IKANA_VALLEY_FROM_ROAD
 MILK_ROAD_FROM_ROMANI_RANCH,                        overworld,        Near Romani Ranch,                  Romani Ranch,                               ROMANI_RANCH_FROM_MILK_ROAD
 IKANA_CANYON_FROM_SWAMP,                            overworld,        Ikana Valley,                       Swamp Front,                                SWAMP_FROM_IKANA_CANYON
+TOWN_WARP,                                          warp,             Owl Clock Town,                     SOARING,                                    NONE
+RANCH_WARP,                                         warp,             Owl Milk Road,                      SOARING,                                    NONE
+SWAMP_WARP,                                         warp,             Owl Swamp,                          SOARING,                                    NONE
+WOODFALL_WARP,                                      warp,             Owl Woodfall,                       SOARING,                                    NONE
+MOUNTAIN_WARP,                                      warp,             Owl Mountain,                       SOARING,                                    NONE
+SNOWHEAD_WARP,                                      warp,             Owl Snowhead,                       SOARING,                                    NONE
+BAY_WARP,                                           warp,             Owl Great Bay,                      SOARING,                                    NONE
+CAPE_WARP,                                          warp,             Owl Zora Cape,                      SOARING,                                    NONE
+CANYON_WARP,                                        warp,             Owl Ikana,                          SOARING,                                    NONE
+TOWER_WARP,                                         warp,             Owl Stone Tower,                    SOARING,                                    NONE
 CHEST_GAME,                                         indoors,          Chest Game,                         Clock Town East,                            CLOCK_TOWN_EAST_FROM_CHEST_GAME
 HONEY_AND_DARLING_GAME,                             indoors,          Honey & Darling Game,               Clock Town East,                            CLOCK_TOWN_EAST_FROM_HONEY_AND_DARLING
 MAYORS_OFFICE,                                      indoors,          Mayor's Office,                     Clock Town East,                            CLOCK_TOWN_EAST_FROM_MAYORS_OFFICE
