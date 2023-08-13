@@ -16,15 +16,17 @@ export function RomConfig() {
 
   const isRandomSettings = randomSettings.enabled;
 
-  return <Group direction='vertical'>
+  return <Group direction='vertical' spacing='xl'>
     <Text size='mg'>OoTMM Web Generator</Text>
     <Text size='jb'>Version: {process.env.VERSION}</Text>
     {error && <div className="generator-error">{error}</div>}
     <form target="_self" onSubmit={(e) => { e.preventDefault(); generate(); }}>
-      <div className="flex-h">
+      <div className='center'>
+      <Group direction='horizontal' spacing='mg'>
         <FileSelect logo="oot" file='oot' label="Ocarina of Time (1.0, U or J)" accept=".z64, .n64, .v64" onChange={(f) => setFileBuffer('oot', f)}/>
         <FileSelect logo="mm" file='mm' label="Majora's Mask (U only)" accept=".z64, .n64, .v64" onChange={(f) => setFileBuffer('mm', f)} />
         {isPatch && <FileSelect file='patch' logo="ootmm" label="OoTMM Patch File" accept=".ootmm" onChange={(f) => setFileBuffer('patch', f)}/>}
+      </Group>
       </div>
       {!isPatch && <Checkbox label="Random Settings" checked={isRandomSettings} onChange={x => setRandomSettings({ enabled: x })}/>}
       <Group direction='vertical' spacing={ isRandomSettings ? '2px' : '16px'}>

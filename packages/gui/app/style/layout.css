@@ -29,13 +29,6 @@
   gap: 15px;
 }
 
-.settings>.checkboxes-lowcount {
-  display: flex;
-  flex-flow: row wrap;
-  gap: 15px;
-  margin-bottom: 8px;
-}
-
 .container {
   margin: 3em;
 }

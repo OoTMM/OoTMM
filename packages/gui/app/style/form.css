@@ -16,8 +16,6 @@ input[type=file] {
 input[type=checkbox] {
   height: 20px;
   width: 20px;
-  min-width: 20px;
-  margin-right: 6px;
   opacity: 0.5;
   transition: all 200ms ease-in 0s;
 }
@@ -81,9 +79,4 @@ button, .btn {
   background: linear-gradient(180deg, #43d857, #00bb19);
   color: #fff;
   margin: 0.25em;
-}
-
-.checkbox {
-  align-items: center;
-  flex-direction: row;
 }

@@ -4,6 +4,7 @@ import { DUNGEONS } from '@ootmm/core';
 import { useSettings } from '../contexts/GeneratorContext';
 import { Dropdown } from './Dropdown';
 import Group from './Group';
+import Text from './Text';
 
 export function Dungeons() {
   const [settings, setSettings] = useSettings();
@@ -21,7 +22,7 @@ export function Dungeons() {
 
   return (
     <Group direction='vertical' spacing='xl'>
-      <h1>Dungeons</h1>
+      <Text size="mg">Dungeons</Text>
       <form className="settings">
           <div className="three-column-grid">
             {Object.keys(DUNGEONS).map(d =>

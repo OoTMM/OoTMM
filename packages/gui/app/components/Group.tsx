@@ -6,9 +6,10 @@ type GroupProps = {
     direction: string;
     spacing?: string;
     children: ReactNode;
+    style?: React.CSSProperties;
 }
 
-  const Group: React.FC<GroupProps> = ({ direction, spacing = "BASE", children }) => {
+  const Group: React.FC<GroupProps> = ({ direction, spacing = "base", style, children }) => {
     const isVertical = direction === 'vertical';
     const spacingValue = getTypographySizeRem(spacing);
     const spacingStyle = isVertical
@@ -16,7 +17,7 @@ type GroupProps = {
       : { marginRight: spacingValue };
   
     return (
-      <div className={`group ${isVertical ? 'vertical' : 'horizontal'}`}>
+      <div className={`group ${isVertical ? 'vertical' : 'horizontal'}`} style={style}>
         {React.Children.map(children, (child, index) => (
           <>
             {child}
