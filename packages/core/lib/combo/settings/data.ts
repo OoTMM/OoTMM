@@ -1146,17 +1146,20 @@ export const SETTINGS = [{
   category: 'entrances',
   type: 'enum',
   values: [
-    { value: 'none', name: 'None' },
-    { value: 'ownGame', name: 'Own Game' },
-    { value: 'full', name: 'Full' },
+    { value: 'none', name: 'None', description: 'No Warps are shuffled.' },
+    { value: 'ootWarps', name: 'OOT Only', description: 'Only Warp Songs and Owl Flights can be shuffled between each other.' },
+    { value: 'mmWarps', name: 'MM Only', description: 'Only Owl Statues can be shuffled between each other.' },
+    { value: 'ownGame', name: 'Own Game', description: 'Warp Songs, Owl Flights, and Owl Statues are shuffled among each other within their own games.' },
+    { value: 'full', name: 'Full', description: 'Warp Songs, Owl Flights, and Owl Statues are shuffled among each other.' },
   ],
   default: 'none',
-  description: 'Shuffle the Warp Songs and Owl Statues with each other.',
+  description: 'Shuffle the Warp Songs and Owl Statues among each other.',
 }, {
   key: 'erWarpsOwls',
-  name: 'Shuffle Child Owl Warps',
+  name: 'Shuffle Child Owl Flights',
   category: 'entrances',
   type: 'boolean',
-  description: 'Shuffle the two owl warps among the other warps.',
-  default: false
+  description: 'Shuffle the two owl flights among the other warps.',
+  default: false,
+  cond: (x: any) => x.erWarps !== 'none' && x.erWarps !== 'mmWarps'
 }] as const;
