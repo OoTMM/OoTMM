@@ -8,6 +8,8 @@ import { Dropdown } from './Dropdown';
 import { HINT_TYPES, SETTINGS_DEFAULT_HINTS, SettingHint, itemName } from '@ootmm/core';
 import { InputNumber } from './InputNumber';
 import { Checkbox } from './Checkbox';
+import { Group } from './Group';
+import { Text } from './Text';
 
 const hintOptions: { name: string, value: string}[] = [];
 for (const k in HINT_TYPES) {
@@ -128,10 +130,13 @@ export function Hints() {
   };
 
   return (
-    <div>
-      <button className="btn-primary" onClick={onNew}>New</button>
-      <button className="btn-danger" onClick={() => setSettings({ hints: { set: [] } })}>Remove All</button>
-      <button className="btn-danger" onClick={() => setSettings({ hints: { set: SETTINGS_DEFAULT_HINTS } })}>Reset</button>
+    <Group direction="vertical" spacing='xxl'>
+      <Text size='mg'>Hints</Text>
+      <Group direction='horizontal'>
+        <button className="btn-primary" onClick={onNew}>New</button>
+        <button className="btn-danger" onClick={() => setSettings({ hints: { set: [] } })}>Remove All</button>
+        <button className="btn-danger" onClick={() => setSettings({ hints: { set: SETTINGS_DEFAULT_HINTS } })}>Reset</button>
+      </Group>
 
       <table className="hints">
         <thead>
@@ -148,6 +153,6 @@ export function Hints() {
           {settings.hints.map((_, i) => <HintEditor key={i} index={i}/>)}
         </tbody>
       </table>
-    </div>
+    </Group>
   );
 };
