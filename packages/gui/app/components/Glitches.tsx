@@ -24,10 +24,11 @@ export function GameGlitches({ game }: { game: keyof typeof NAMES }) {
   }
 
   return (
-    <div>
+    <Group direction='vertical' spacing='4px'>
       <h1>{NAMES[game]}</h1>
       <ArrayList options={options} selected={settings.glitches.filter(x => glitches.includes(x))} add={add} remove={remove}/>
-    </div>
+    </Group>
+    
   );
 }
 
