@@ -6,6 +6,7 @@ import { FileSelect } from './FileSelect';
 import { PresetSelector } from './PresetSelector';
 import { SettingsImportExport } from './SettingsImportExport';
 import Group from './Group';
+import Text from './Text';
 
 export function RomConfig() {
   const { romConfig, setFileBuffer, setSeed } = useRomConfig();
@@ -15,9 +16,9 @@ export function RomConfig() {
 
   const isRandomSettings = randomSettings.enabled;
 
-  return <>
-    <h1>OoTMM Web Generator</h1>
-    <h2>Version: {process.env.VERSION}</h2>
+  return <Group direction='vertical'>
+    <Text size='mg'>OoTMM Web Generator</Text>
+    <Text size='jb'>Version: {process.env.VERSION}</Text>
     {error && <div className="generator-error">{error}</div>}
     <form target="_self" onSubmit={(e) => { e.preventDefault(); generate(); }}>
       <div className="flex-h">
@@ -52,5 +53,5 @@ export function RomConfig() {
       </Group>
       
     </form>
-  </>
+  </Group>
 }
