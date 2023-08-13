@@ -16,7 +16,7 @@ export function RomConfig() {
 
   const isRandomSettings = randomSettings.enabled;
 
-  return <Group direction='vertical' spacing='xl'>
+  return <Group direction='vertical' spacing=''>
     <Text size='mg'>OoTMM Web Generator</Text>
     <Text size='jb'>Version: {process.env.VERSION}</Text>
     {error && <div className="generator-error">{error}</div>}

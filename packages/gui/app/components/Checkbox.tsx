@@ -18,7 +18,7 @@ export const Checkbox = ({ label, checked, tooltip, onChange }: CheckboxProps) =
         checked={checked}
         onChange={(e) => onChange(e.target.checked)}
         />
-        <Group direction='horizontal' style={{paddingTop: '4px'}}>
+        <Group direction='horizontal' spacing='xs' style={{paddingTop: '4px'}}>
           <Text size='xl'>{label}</Text>
           {tooltip && <a className="tooltip-link" id={tooltip} href="#"><FontAwesomeIcon icon={solid('question-circle')}/></a>}
         </Group>

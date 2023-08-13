@@ -1,10 +1,11 @@
 import React from 'react';
-import { Settings, SPECIAL_CONDS, SPECIAL_CONDS_KEYS } from '@ootmm/core';
+import { SPECIAL_CONDS, SPECIAL_CONDS_KEYS } from '@ootmm/core';
 
 import { useSettings } from '../contexts/GeneratorContext';
 import { Checkbox } from './Checkbox';
 import { InputNumber } from './InputNumber';
-import Group from './Group';
+import { Group } from './Group';
+import { Text } from './Text';
 
 type SpecialCondsPanelProps = {
   cond: string;
@@ -23,7 +24,7 @@ function SpecialCondsPanel({ cond }: SpecialCondsPanelProps) {
   return (
     <form onSubmit={e => e.preventDefault()}>
       <Group direction="vertical">
-        <h2>{SPECIAL_CONDS[cond].name}</h2>
+        <Text size='jb'>{SPECIAL_CONDS[cond].name}</Text>
         <Group direction="vertical" spacing='xs'> 
           {Object.keys(SPECIAL_CONDS_KEYS).map(key =>
             <Checkbox
@@ -42,8 +43,8 @@ function SpecialCondsPanel({ cond }: SpecialCondsPanelProps) {
 
 export function SpecialConds() {
   return (
-    <Group direction='vertical' spacing='xl'>
-      <h1>Special Conditions</h1>
+    <Group direction='vertical' spacing='xxl'>
+      <Text size='mg'>Special Conditions</Text>
       <Group direction="horizontal" spacing='mg'>
         {Object.keys(SPECIAL_CONDS).map(x => <SpecialCondsPanel key={x} cond={x}/>)}
       </Group>

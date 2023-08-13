@@ -110,11 +110,11 @@ function SettingTooltip({ setting }: { setting: string }) {
 
   return (
     <Tooltip id={data.key}>
-      <p style={{whiteSpace:"pre-line"}}>{description.split('<br>').join('\n')}</p>
+      <Text size='md' style={{whiteSpace:"pre-line"}}>{description.split('<br>').join('\n')}</Text>
       <ul>
         {Object.entries(values).map(x => <li key={x[0]}><strong>{x[0]}</strong>: {x[1]}</li>)}
       </ul>
-      <p>Default: <strong>{def}</strong></p>
+      <Text size='md'>Default: <strong>{def}</strong></Text>
     </Tooltip>
   );
 }
@@ -124,13 +124,26 @@ type SettingsPanelProps = {
 };
 export function SettingsPanel({ category }: SettingsPanelProps) {
   const settingsData = SETTINGS.filter((s) => s.category === category);
+  const booleans = settingsData.filter(setting => setting.type === 'boolean')
+  const nonBooleans = settingsData.filter(setting => setting.type !== 'boolean')
 
   return (
     <form>
-        <div className="three-column-grid">
-          {settingsData.map(setting => <Setting key={setting.key} setting={setting.key}/>)}
+      <Group direction='vertical' spacing='xl'>
+        <div>
+          <div className="three-column-grid">
+            {nonBooleans.map(setting => <Setting key={setting.key} setting={setting.key}/>)}
+          </div>
+          {nonBooleans.map(setting => <SettingTooltip key={setting.key} setting={setting.key}/>)}
         </div>
-        {settingsData.map(setting => <SettingTooltip key={setting.key} setting={setting.key}/>)}
+        <div>
+          <div className="three-column-grid">
+            {booleans.map(setting => <Setting key={setting.key} setting={setting.key}/>)}
+          </div>
+          {booleans.map(setting => <SettingTooltip key={setting.key} setting={setting.key}/>)}
+        </div>
+      </Group>
+       
     </form>
   );
 };
@@ -142,13 +155,13 @@ export function SettingsEditor({ category }: SettingsEditorProps) {
   const cat = SETTINGS_CATEGORIES.find(x => x.key === category)!;
   const subcategories = cat.subcategories || [];
   return (
-    <Group direction='vertical' spacing='xl'>
-      <Text style={{textTransform: 'capitalize'}}>{category}</Text>
-      <Group direction='vertical'>
+    <Group direction='vertical' spacing='xxl'>
+      <Text size='mg' style={{textTransform: 'capitalize'}}>{category}</Text>
+      <Group direction='vertical' spacing='jb'>
         <SettingsPanel category={category}/>
         {subcategories.map(sub => <div key={sub.key}>
-          <Group direction='vertical' spacing='8px'>
-            <h2>{sub.name}</h2>
+          <Group direction='vertical' spacing='lg'>
+            <Text size='jb'>{sub.name}</Text>
             <SettingsPanel category={`${category}.${sub.key}`}/>
           </Group>
         </div>)}

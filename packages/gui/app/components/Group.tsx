@@ -7,9 +7,10 @@ type GroupProps = {
     spacing?: string;
     children: ReactNode;
     style?: React.CSSProperties;
+    className?: string;
 }
 
-export function Group({ direction, spacing = "base", style, children }: GroupProps) {
+export function Group({ direction, spacing = "base", style, className, children }: GroupProps) {
     const isVertical = direction === 'vertical';
     const spacingValue = getTypographySizeRem(spacing);
     const spacingStyle = isVertical
@@ -17,7 +18,7 @@ export function Group({ direction, spacing = "base", style, children }: GroupPro
       : { marginRight: spacingValue };
   
     return (
-      <div className={`group ${isVertical ? 'vertical' : 'horizontal'}`} style={style}>
+      <div className={`group ${isVertical ? 'vertical' : 'horizontal'} ${className}`} style={style}>
         {React.Children.map(children, (child, index) => (
           <>
             {child}

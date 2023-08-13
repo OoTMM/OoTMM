@@ -2,8 +2,10 @@ import React from 'react';
 
 import { itemName } from '@ootmm/core';
 import { useStartingItems } from '../contexts/GeneratorContext';
-import Group from './Group';
 import { InputNumber } from './InputNumber';
+import { Group } from './Group';
+import { Text } from './Text';
+
 
 const NAMES = {
   MM: "Majora's Mask",
@@ -23,7 +25,7 @@ export function StartingItems() {
 
     return (
       <Group direction='vertical'>
-        <h2>{NAMES[gamePrefix]}</h2>
+        <Text size='jb'>{NAMES[gamePrefix]}</Text>
         <Group direction='vertical'>
           {items.map((item) => (
             <Group direction='horizontal' key={item}>
@@ -32,7 +34,7 @@ export function StartingItems() {
                 onChange={e => alterItem(item, e)}
                 min={0}
               />
-              {itemName(item)}
+              <Text size='xl' style={{paddingTop: '12px'}}>{itemName(item)}</Text>
             </Group>
           ))}
         </Group>
@@ -41,9 +43,9 @@ export function StartingItems() {
   };
 
   return (
-    <Group direction='vertical' spacing='xl'>
-      <h1>Starting Items</h1>
-      <Group direction='vertical'>
+    <Group direction='vertical' spacing='xxl'>
+      <Text size='mg'>Starting Items</Text>
+      <Group direction='vertical' spacing='xl'>
         <button className="btn-danger" onClick={reset} style={{width: '200px'}}>
           Reset Starting Items
         </button>

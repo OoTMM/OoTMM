@@ -40,9 +40,9 @@ export function Glitches() {
   }
 
   return (
-    <Group direction='vertical' spacing='xl'>
-      <h1>Glitches</h1>
-      <Group direction='vertical'>
+    <Group direction='vertical' spacing='xxl'>
+      <Text size='mg'>Glitches</Text>
+      <Group direction='vertical' spacing='xl'>
         <button className="btn-danger" onClick={clear} style={{width: '120px'}}>Remove All</button>
         <div className="two-column-grid">
           <GameGlitches game="OOT"/>

@@ -21,7 +21,7 @@ export function Dungeons() {
   }];
 
   return (
-    <Group direction='vertical' spacing='xl'>
+    <Group direction='vertical' spacing='xxl'>
       <Text size="mg">Dungeons</Text>
       <form className="settings">
           <div className="three-column-grid">

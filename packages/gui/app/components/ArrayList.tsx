@@ -29,7 +29,7 @@ export function ArrayList({ options, selected, add, remove, clear }: ArrayListPr
   const remaining = options.filter(x => !selected.includes(x.value));
 
   return (
-    <Group direction='vertical'>
+    <Group direction='vertical' spacing='xl'>
       <Group direction='horizontal'>
         <Select
           className='plando-select'
@@ -42,10 +42,10 @@ export function ArrayList({ options, selected, add, remove, clear }: ArrayListPr
       </Group>
       <Group direction='vertical' spacing='xs'>
         {selected.map(v => (
-          <li key={v}>
+          <Group direction='horizontal' spacing='xs' key={v}>
             <span className="plando-remove" onClick={() => remove(v)}><FontAwesomeIcon icon={solid('xmark')}/></span>
             <span className="plando-item">{options.find(x => x.value === v)?.label || v}</span>
-          </li>
+          </Group>
         ))}
       </Group>
     </Group>
