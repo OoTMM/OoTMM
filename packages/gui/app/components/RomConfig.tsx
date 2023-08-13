@@ -26,7 +26,7 @@ export function RomConfig() {
         {isPatch && <FileSelect file='patch' logo="ootmm" label="OoTMM Patch File" accept=".ootmm" onChange={(f) => setFileBuffer('patch', f)}/>}
       </div>
       {!isPatch && <Checkbox label="Random Settings" checked={isRandomSettings} onChange={x => setRandomSettings({ enabled: x })}/>}
-      <Group direction='vertical'>
+      <Group direction='vertical' spacing={ isRandomSettings ? '2px' : '16px'}>
         {isRandomSettings && <>
           <Checkbox label="Random Settings: MQ" checked={randomSettings.mq} onChange={x => setRandomSettings({ mq: x })}/>
           <Checkbox label="Random Settings: Entrances" checked={randomSettings.er} onChange={x => setRandomSettings({ er: x })}/>
@@ -46,10 +46,11 @@ export function RomConfig() {
             onChange={(e) => setSeed(e.target.value)}
           />
         </label>}
+        <button className="btn-primary sm-margin-top" type="submit" style={{width: '105px'}}>
+          Generate
+        </button>
       </Group>
-      <button className="btn-primary sm-margin-top" type="submit">
-        Generate
-      </button>
+      
     </form>
   </>
 }
