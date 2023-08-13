@@ -1,7 +1,9 @@
 import React from 'react';
 
 import { itemName } from '@ootmm/core';
-import { useSettings, useStartingItems } from '../contexts/GeneratorContext';
+import { useStartingItems } from '../contexts/GeneratorContext';
+import Group from './Group';
+import { InputNumber } from './InputNumber';
 
 const NAMES = {
   MM: "Majora's Mask",
@@ -10,7 +12,7 @@ const NAMES = {
 }
 
 export function StartingItems() {
-  const { startingItems, itemPool, incr, decr, reset } = useStartingItems();
+  const { startingItems, itemPool, alterItem, reset } = useStartingItems();
 
   const buildSingleTable = (gamePrefix: 'OOT' | 'MM' | 'SHARED') => {
     const items = Object.keys(itemPool).filter((item) => item.startsWith(gamePrefix));
@@ -20,40 +22,37 @@ export function StartingItems() {
     }
 
     return (
-      <table>
-        <thead>
-          <tr>
-            <th colSpan={2}>
-              {NAMES[gamePrefix]}
-            </th>
-          </tr>
-        </thead>
-        <tbody>
+      <Group direction='vertical'>
+        <h2>{NAMES[gamePrefix]}</h2>
+        <Group direction='vertical'>
           {items.map((item) => (
-            <tr key={item} className={startingItems[item] > 0 ? 'active' : 'inactive'}>
-              <td className="count">
-                <button className="count-adjust" onClick={() => decr(item)}>-</button>
-                {startingItems[item] || 0}
-                <button className="count-adjust" onClick={() => incr(item)}>+</button>
-              </td>
-              <td>{itemName(item)}</td>
-            </tr>
+            <Group direction='horizontal' key={item}>
+              <InputNumber
+                value={startingItems[item] || 0}
+                onChange={e => alterItem(item, e)}
+                min={0}
+              />
+              {itemName(item)}
+            </Group>
           ))}
-        </tbody>
-      </table>
+        </Group>
+      </Group>
     );
   };
 
   return (
-    <>
-      <button className="btn-danger" onClick={reset}>
-        Reset Starting Items
-      </button>
-      <div className="starting-items section-margin-top">
-        {buildSingleTable('OOT')}
-        {buildSingleTable('MM')}
-        {buildSingleTable('SHARED')}
-      </div>
-    </>
+    <Group direction='vertical' spacing='24px'>
+      <h1>Starting Items</h1>
+      <Group direction='vertical'>
+        <button className="btn-danger" onClick={reset} style={{width: '200px'}}>
+          Reset Starting Items
+        </button>
+        <Group direction='horizontal'>
+          {buildSingleTable('OOT')}
+          {buildSingleTable('MM')}
+          {buildSingleTable('SHARED')}
+        </Group>
+      </Group>
+    </Group>
   );
 }
