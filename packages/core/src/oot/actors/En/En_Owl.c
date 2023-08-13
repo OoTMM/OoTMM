@@ -31,6 +31,7 @@ static void EnOwl_StartCutscene(void)
         t->entrance = 0x554;
         break;
     }
+	gIsEntranceOverride = 1;
 }
 
 PATCH_CALL(0x80ab1548, EnOwl_StartCutscene);
