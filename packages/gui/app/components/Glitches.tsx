@@ -3,6 +3,7 @@ import { GLITCHES } from '@ootmm/core';
 
 import { useSettings } from '../contexts/GeneratorContext';
 import { ArrayList } from './ArrayList';
+import Group from './Group';
 
 const NAMES = {
   OOT: 'Ocarina of Time',
@@ -37,12 +38,12 @@ export function Glitches() {
   }
 
   return (
-    <div>
-      <button className="btn-danger" onClick={clear}>Remove All</button>
+    <Group direction='vertical'>
+      <button className="btn-danger" onClick={clear} style={{width: '120px'}}>Remove All</button>
       <div className="two-column-grid">
         <GameGlitches game="OOT"/>
         <GameGlitches game="MM"/>
       </div>
-    </div>
+    </Group>
   )
 }

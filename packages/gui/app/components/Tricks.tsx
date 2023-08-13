@@ -3,6 +3,7 @@ import { TRICKS } from '@ootmm/core';
 
 import { useSettings } from '../contexts/GeneratorContext';
 import { ArrayList } from './ArrayList';
+import Group from './Group';
 
 const NAMES = {
   OOT: 'Ocarina of Time',
@@ -23,10 +24,10 @@ export function GameTricks({ game }: { game: keyof typeof NAMES }) {
   }
 
   return (
-    <div>
+    <Group direction='vertical'>
       <h1>{NAMES[game]}</h1>
       <ArrayList options={options} selected={settings.tricks.filter(x => tricks.includes(x))} add={add} remove={remove}/>
-    </div>
+    </Group>
   );
 }
 
@@ -37,12 +38,12 @@ export function Tricks() {
   }
 
   return (
-    <div>
-      <button className="btn-danger" onClick={clear}>Remove All</button>
+    <Group direction='vertical'>
+      <button className="btn-danger" onClick={clear} style={{width: '120px'}}>Remove All</button>
       <div className="two-column-grid">
         <GameTricks game="OOT"/>
         <GameTricks game="MM"/>
       </div>
-    </div>
+    </Group>
   )
 }
