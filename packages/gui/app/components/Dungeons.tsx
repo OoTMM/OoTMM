@@ -23,7 +23,7 @@ export function Dungeons() {
   return (
     <Group direction='vertical' spacing='xxl'>
       <Text size="mg">Dungeons</Text>
-      <form className="settings">
+      <form>
           <div className="three-column-grid">
             {Object.keys(DUNGEONS).map(d =>
               <Dropdown

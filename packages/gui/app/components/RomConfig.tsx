@@ -49,7 +49,7 @@ export function RomConfig() {
             onChange={(e) => setSeed(e.target.value)}
           />
         </label>}
-        <button className="btn-primary sm-margin-top" type="submit" style={{width: '105px'}}>
+        <button className="btn-primary" type="submit" style={{width: '105px'}}>
           Generate
         </button>
       </Group>

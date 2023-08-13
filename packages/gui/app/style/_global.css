@@ -23,14 +23,6 @@ label, .label-main {
   font-weight: 500 !important;
 }
 
-.sm-margin-top {
-  margin-top: 8px;
-}
-
-.section-margin-top {
-  margin-top: 24px;
-}
-
 td {
   vertical-align: middle;
   padding: 0.5em 1em;
