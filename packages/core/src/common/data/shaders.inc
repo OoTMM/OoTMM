@@ -203,3 +203,7 @@
 /* OoT       Silver Rupee                      */ { Shader_SilverRupee,            {} },
 /* Common    Souls                             */ { Shader_CustomGS,               { 3 } },
 /* Common    Skeleton Key                      */ { Shader_CustomSmallKey,         { 0x6000800, 1 }},
+/* Common    Yellow Coin                       */ { Shader_Coin,                   { 0x060005e0, 0x06000560, 0x06000768 } },
+/* Common    Red Coin                          */ { Shader_Coin,                   { 0x060005e0, 0x06000580, 0x06000768 } },
+/* Common    Green Coin                        */ { Shader_Coin,                   { 0x060005e0, 0x060005a0, 0x06000768 } },
+/* Common    Blue Coin                         */ { Shader_Coin,                   { 0x060005e0, 0x060005c0, 0x06000768 } },

@@ -738,6 +738,26 @@ void Shader_CustomSmallKey(GameState_Play* play, s16 index)
     CLOSE_DISPS();
 }
 
+void Shader_Coin(GameState_Play* play, s16 index)
+{
+    const Shader* shader;
+    static const float scale = 2.f;
+
+    shader = &kShaders[index];
+    OPEN_DISPS(play->gs.gfx);
+    InitListPolyOpa(play->gs.gfx);
+    ModelViewScale(scale, scale, scale, MAT_MUL);
+
+    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
+    gSPDisplayList(POLY_OPA_DISP++, shader->lists[1]);
+    gSPDisplayList(POLY_OPA_DISP++, shader->lists[0]);
+
+    InitListPolyXlu(play->gs.gfx);
+    gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
+    gSPDisplayList(POLY_XLU_DISP++, shader->lists[2]);
+    CLOSE_DISPS();
+}
+
 const Shader kShaders[] = {
 #include "data/shaders.inc"
 };
