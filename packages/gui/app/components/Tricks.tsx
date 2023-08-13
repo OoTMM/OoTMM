@@ -39,6 +39,7 @@ export function Tricks() {
 
   return (
     <Group direction='vertical'>
+      <h1>Tricks</h1>
       <button className="btn-danger" onClick={clear} style={{width: '120px'}}>Remove All</button>
       <div className="two-column-grid">
         <GameTricks game="OOT"/>
