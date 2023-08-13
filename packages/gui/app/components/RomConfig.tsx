@@ -10,7 +10,7 @@ import Text from './Text';
 
 export function RomConfig() {
   const { romConfig, setFileBuffer, setSeed } = useRomConfig();
-  const [isPatch, setIsPatch] = useIsPatch();
+  const [ isPatch, setIsPatch] = useIsPatch();
   const { error, generate } = useGenerator();
   const [randomSettings, setRandomSettings] = useRandomSettings();
 
