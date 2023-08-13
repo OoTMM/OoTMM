@@ -1140,4 +1140,26 @@ export const SETTINGS = [{
   type: 'boolean',
   description: 'Shuffle additional, more complex interiors. These include:<br>- OOT: Link\'s House, Temple of Time, Windmill, Kak Potion Shop<br>- MM: Stock Pot Inn, Astral Observatory/Bombers\' Hideout, Swamp Tourist Hut, Ikana Spring Cave',
   default: false
+}, {
+  key: 'erWarps',
+  name: 'Shuffle Warp Destinations',
+  category: 'entrances',
+  type: 'enum',
+  values: [
+    { value: 'none', name: 'None', description: 'No Warps are shuffled.' },
+    { value: 'ootWarps', name: 'OOT Only', description: 'Only Warp Songs and Owl Flights can be shuffled between each other.' },
+    { value: 'mmWarps', name: 'MM Only', description: 'Only Owl Statues can be shuffled between each other.' },
+    { value: 'ownGame', name: 'Own Game', description: 'Warp Songs, Owl Flights, and Owl Statues are shuffled among each other within their own games.' },
+    { value: 'full', name: 'Full', description: 'Warp Songs, Owl Flights, and Owl Statues are shuffled among each other.' },
+  ],
+  default: 'none',
+  description: 'Shuffle the Warp Songs and Owl Statues among each other.',
+}, {
+  key: 'erWarpsOwls',
+  name: 'Shuffle Child Owl Flights',
+  category: 'entrances',
+  type: 'boolean',
+  description: 'Shuffle the two owl flights among the other warps.',
+  default: false,
+  cond: (x: any) => x.erWarps !== 'none' && x.erWarps !== 'mmWarps'
 }] as const;

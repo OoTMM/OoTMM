@@ -5,7 +5,7 @@ Ocarina_TriggerWarp_Hook:
     sw      ra, 0x0014 (sp)
 
     jal     EnTest7_TriggerWarp
-    nop
+     nop
 
     move    t9, v0
 
@@ -32,7 +32,7 @@ PATCH_START 0x80af2350 + 0x68
   beqz    t9, . + 0x14 /* 0x80AF2350 + 0x88 */
 PATCH_END
 
-/* Allow skip soaring cutscene on button press */ 
+/* Allow skip soaring cutscene on button press */
 PATCH_START 0x80AF1AF6
 .half 0x2350 /* Replaces .half 0x1CA0 */
 PATCH_END
