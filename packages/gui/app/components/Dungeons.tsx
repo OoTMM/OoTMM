@@ -3,8 +3,8 @@ import { DUNGEONS } from '@ootmm/core';
 
 import { useSettings } from '../contexts/GeneratorContext';
 import { Dropdown } from './Dropdown';
-import Group from './Group';
-import Text from './Text';
+import { Group } from './Group';
+import { Text } from './Text';
 
 export function Dungeons() {
   const [settings, setSettings] = useSettings();

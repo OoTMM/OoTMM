@@ -6,7 +6,8 @@ import { Checkbox } from './Checkbox';
 import { useSettings } from '../contexts/GeneratorContext';
 import { Tooltip } from './Tooltip';
 import { InputNumber } from './InputNumber';
-import Group from './Group';
+import { Group } from './Group';
+import { Text } from './Text';
 
 function Setting({ setting }: { setting: string }) {
   const [settings, setSettings] = useSettings();
@@ -142,7 +143,7 @@ export function SettingsEditor({ category }: SettingsEditorProps) {
   const subcategories = cat.subcategories || [];
   return (
     <Group direction='vertical' spacing='xl'>
-      <h1 style={{textTransform: 'capitalize'}}>{category}</h1>
+      <Text style={{textTransform: 'capitalize'}}>{category}</Text>
       <Group direction='vertical'>
         <SettingsPanel category={category}/>
         {subcategories.map(sub => <div key={sub.key}>

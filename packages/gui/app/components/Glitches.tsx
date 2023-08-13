@@ -3,8 +3,8 @@ import { GLITCHES } from '@ootmm/core';
 
 import { useSettings } from '../contexts/GeneratorContext';
 import { ArrayList } from './ArrayList';
-import Group from './Group';
-import Text from './Text';
+import { Group } from './Group';
+import { Text } from './Text';
 
 const NAMES = {
   OOT: 'Ocarina of Time',

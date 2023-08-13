@@ -4,8 +4,8 @@ import logoOot from '../assets/oot.png';
 import logoMm from '../assets/mm.png';
 import logoOotMm from '../assets/logo.png';
 import { useFiles } from '../contexts/GeneratorContext';
-import Group from './Group';
-import Text from './Text';
+import { Group } from './Group';
+import { Text } from './Text';
 
 const LOGOS = {
   oot: logoOot,

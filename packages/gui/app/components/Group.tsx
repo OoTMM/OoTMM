@@ -9,7 +9,7 @@ type GroupProps = {
     style?: React.CSSProperties;
 }
 
-  const Group: React.FC<GroupProps> = ({ direction, spacing = "base", style, children }) => {
+export function Group({ direction, spacing = "base", style, children }: GroupProps) {
     const isVertical = direction === 'vertical';
     const spacingValue = getTypographySizeRem(spacing);
     const spacingStyle = isVertical

@@ -5,8 +5,8 @@ import { Checkbox } from './Checkbox';
 import { FileSelect } from './FileSelect';
 import { PresetSelector } from './PresetSelector';
 import { SettingsImportExport } from './SettingsImportExport';
-import Group from './Group';
-import Text from './Text';
+import { Group } from './Group';
+import { Text } from './Text';
 
 export function RomConfig() {
   const { romConfig, setFileBuffer, setSeed } = useRomConfig();

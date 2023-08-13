@@ -9,7 +9,7 @@ type TextProps = {
   
   
   // Create a component with inline styles for the specified typography size
-  const Text: React.FC<TextProps> = ({ size, children, style}) => {
+  export function Text({ size, children, style}: TextProps)  {
     const typographyStyle = {
       fontSize: getTypographySizeRem(size),
       lineHeight: getTypographySizeRem(size),
@@ -23,5 +23,3 @@ type TextProps = {
       </div>
     );
   };
-  
-  export default Text;
