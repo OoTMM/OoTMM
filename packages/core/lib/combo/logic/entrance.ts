@@ -459,9 +459,17 @@ export class LogicPassEntrances {
   }
 
   private placeWarps(worldId: number) {
-    const pool = ['warp'];
-    if (this.input.settings.erWarpsOwls) {
+    const pool = ['warp-song', 'warp-owl'];
+    if (this.input.settings.erWarps === 'ootWarps') {
+      pool.pop();
+    }
+    if (this.input.settings.erWarps === 'mmWarps') {
+      pool.pop();
+      pool.pop();
       pool.push('warp-owl');
+    }
+    if (this.input.settings.erWarpsOwls) {
+      pool.push('owl-flight');
     }
     this.placePool(worldId, pool, { ownGame: this.input.settings.erWarps === 'ownGame' });
   }
@@ -571,6 +579,10 @@ export class LogicPassEntrances {
         this.placeIndoors(i);
       }
 
+      if (this.input.settings.erWarps !== 'none') {
+        anyEr = true;
+        this.placeWarps(i);
+      }
       if (this.input.settings.erDungeons !== 'none') {
         anyEr = true;
         this.fixDungeons(i);
