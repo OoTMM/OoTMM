@@ -127,6 +127,8 @@ typedef struct
     u8              uuid[16];
     u8              playerId;
     u32             mq;
+    u32             entrancesSong[6];
+    u32             entrancesOwl[10];
     u8              config[0x40];
     SpecialCond     special[5];
     u16             prices[PRICES_MAX];

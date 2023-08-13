@@ -459,19 +459,19 @@ export class LogicPassEntrances {
   }
 
   private placeWarps(worldId: number) {
-    const pool = ['warp-song', 'warp-owl'];
+    const pool = new Set(['warp-song', 'warp-owl']);
+
     if (this.input.settings.erWarps === 'ootWarps') {
-      pool.pop();
+      pool.delete('warp-owl');
     }
     if (this.input.settings.erWarps === 'mmWarps') {
-      pool.pop();
-      pool.pop();
-      pool.push('warp-owl');
+      pool.delete('warp-song');
     }
     if (this.input.settings.erWarpsOwls) {
-      pool.push('owl-flight');
+      pool.add('owl-flight');
     }
-    this.placePool(worldId, pool, { ownGame: this.input.settings.erWarps === 'ownGame' });
+
+    this.placePool(worldId, Array.from(pool), { ownGame: this.input.settings.erWarps === 'ownGame' });
   }
 
   private propagateRegionsStep(worldId: number) {

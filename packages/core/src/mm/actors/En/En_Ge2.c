@@ -25,7 +25,7 @@ static void EnGe2_ThrowPlayerOut(Actor* this, GameState_Play* play)
     else
     {
         comboGetDungeonExit(&entrance, gComboData.dungeons[DUNGEONID_PIRATE_FORTRESS]);
-        comboTransition(play, &entrance);
+        comboTransitionDescr(play, &entrance);
     }
 }
 
