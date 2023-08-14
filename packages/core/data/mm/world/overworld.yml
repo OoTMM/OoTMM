@@ -1580,10 +1580,10 @@
     "Zora Hall Entrance": "true"
     "Zora Cape Peninsula": "true"
     "Zora Shop": "true"
-    "Tijo's Room": "has_mask_zora"
-    "Japas' Room": "has_mask_zora"
-    "Evan's Room": "has_mask_zora"
-    "Lulu's Room": "has_mask_zora"
+    "Tijo's Room": "has_mask_zora || event(BOSS_GREAT_BAY)"
+    "Japas' Room": "has_mask_zora || event(BOSS_GREAT_BAY)"
+    "Evan's Room": "has_mask_zora || event(BOSS_GREAT_BAY)"
+    "Lulu's Room": "has_mask_zora || event(BOSS_GREAT_BAY)"
   locations:
     "Zora Hall Scene Lights": "can_use_fire_arrows"
 "Zora Shop":
@@ -1607,7 +1607,7 @@
   exits:
     "Zora Hall": "true"
   locations:
-    "Zora Hall Evan HP": "has_ocarina"
+    "Zora Hall Evan HP": "has_ocarina && cond(!setting(erDungeons, none) && setting(bossWarpPads, Remains), has_mask_zora, true)" #This conditional is necessary since Evan is not in his room in clear state, so you need to guarantee Zora for the check to be accessible.
 "Lulu's Room":
   region: ENTRANCE
   exits:

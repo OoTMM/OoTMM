@@ -14,7 +14,7 @@
     "Great Bay Temple Water Wheel": "true"
     "Great Bay Temple Boss Access": "setting(bossWarpPads, remains) && has(REMAINS_GYORG)"
   locations:
-    "Great Bay Temple Entrance Chest": "has_sticks || can_use_fire_arrows"
+    "Great Bay Temple Entrance Chest": "has_sticks || can_use_fire_arrows || (has_arrows && trick(MM_GBT_ENTRANCE_BOW))"
 "Great Bay Temple Water Wheel":
   dungeon: GB
   events:
