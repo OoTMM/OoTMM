@@ -1432,7 +1432,6 @@
     "Lake Hylia Grass Child 2": "is_child && can_cut_grass"
     "Lake Hylia Grass Child 3": "is_child && can_cut_grass"
     "Lake Hylia Grass Child 4": "is_child && can_cut_grass"
-    "Lake Hylia Grass Child 5": "is_child && can_cut_grass"
     "Lake Hylia Grass Pack 1 Bush 01": "can_cut_grass"
     "Lake Hylia Grass Pack 1 Bush 02": "can_cut_grass"
     "Lake Hylia Grass Pack 1 Bush 03": "can_cut_grass"
