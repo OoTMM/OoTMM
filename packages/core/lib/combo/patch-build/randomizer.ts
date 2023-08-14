@@ -536,8 +536,8 @@ function randomizerWarps(worldId: number, logic: LogicResult): Buffer {
     'OOT_WARP_SONG_MEADOW',
     'OOT_WARP_SONG_CRATER',
     'OOT_WARP_SONG_LAKE',
-    'OOT_WARP_SONG_GRAVE',
     'OOT_WARP_SONG_DESERT',
+    'OOT_WARP_SONG_GRAVE',
     'OOT_WARP_SONG_TEMPLE',
   ];
   const warpSongs = toU32Buffer(songs.map(e => entrance(e, logic.worlds[worldId])));
