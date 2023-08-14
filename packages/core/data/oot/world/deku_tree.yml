@@ -56,6 +56,8 @@
     "Deku Tree Basement Ledge": "is_child"
   locations:
     "Deku Tree GS Basement Back Room": "has_explosives_or_hammer && can_collect_distance"
+    "Deku Tree Grass Larva Room 1": "can_cut_grass"
+    "Deku Tree Grass Larva Room 2": "can_cut_grass"
 "Deku Tree Basement Ledge":
   dungeon: DT
   exits:
@@ -66,8 +68,6 @@
     "Deku Tree Grass Water Room 2": "can_cut_grass"
     "Deku Tree Grass Torch Room 1": "can_cut_grass"
     "Deku Tree Grass Torch Room 2": "can_cut_grass"
-    "Deku Tree Grass Larva Room 1": "can_cut_grass"
-    "Deku Tree Grass Larva Room 2": "can_cut_grass"
     "Deku Tree Grass Pre-Boss Room 1": "can_cut_grass"
     "Deku Tree Grass Pre-Boss Room 2": "can_cut_grass"
     "Deku Tree Grass Pre-Boss Room 3": "can_cut_grass"
