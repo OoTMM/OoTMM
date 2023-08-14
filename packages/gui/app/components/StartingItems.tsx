@@ -34,7 +34,7 @@ export function StartingItems() {
                 onChange={e => alterItem(item, e)}
                 min={0}
               />
-              <Text size='xl' style={{paddingTop: '12px'}}>{itemName(item)}</Text>
+              <Text size='xl' style={{paddingTop: '12px', fontWeight: startingItems[item] > 0 ? 'bold': 'Normal'}}>{itemName(item)}</Text>
             </Group>
           ))}
         </Group>
