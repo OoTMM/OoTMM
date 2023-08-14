@@ -444,8 +444,8 @@ export class LogicPassEntrances {
     if (this.input.settings.erRegionsExtra) {
       pool.push('region-extra');
     }
-    if (this.input.settings.erRegionsOneWay) {
-      pool.push('region-oneway');
+    if (this.input.settings.erRegionsShortcuts) {
+      pool.push('region-shortcut');
     }
     this.placePool(worldId, pool, { ownGame: this.input.settings.erRegions === 'ownGame' });
   }
@@ -456,6 +456,22 @@ export class LogicPassEntrances {
       pool.push('indoors-extra');
     }
     this.placePool(worldId, pool, { ownGame: this.input.settings.erIndoors === 'ownGame' });
+  }
+
+  private placeWarps(worldId: number) {
+    const pool = new Set(['warp-song', 'warp-owl']);
+
+    if (this.input.settings.erWarps === 'ootWarps') {
+      pool.delete('warp-owl');
+    }
+    if (this.input.settings.erWarps === 'mmWarps') {
+      pool.delete('warp-song');
+    }
+    if (this.input.settings.erWarpsOwls) {
+      pool.add('owl-flight');
+    }
+
+    this.placePool(worldId, Array.from(pool), { ownGame: this.input.settings.erWarps === 'ownGame' });
   }
 
   private propagateRegionsStep(worldId: number) {
@@ -563,6 +579,10 @@ export class LogicPassEntrances {
         this.placeIndoors(i);
       }
 
+      if (this.input.settings.erWarps !== 'none') {
+        anyEr = true;
+        this.placeWarps(i);
+      }
       if (this.input.settings.erDungeons !== 'none') {
         anyEr = true;
         this.fixDungeons(i);

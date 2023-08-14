@@ -22,11 +22,38 @@
 #define CSMC_POT_HEART              0x07
 #define CSMC_POT_BOSSKEY            0x08
 
+#define CSMC_GRASS_NORMAL     0x00
+#define CSMC_GRASS_BOSS_KEY   0x01
+#define CSMC_GRASS_MAJOR      0x02
+#define CSMC_GRASS_KEY        0x03
+#define CSMC_GRASS_SPIDER     0x04
+#define CSMC_GRASS_FAIRY      0x05
+#define CSMC_GRASS_HEART      0x06
+#define CSMC_GRASS_SOUL       0x07
+
+#define CTF_MIRROR          (1 << 0)
+#define CTF_CLAMP           (1 << 1)
+#define CTF_COLOR           (1 << 2)
+#define CTF_CUSTOM_TEXTURE  (1 << 3)
+
+typedef struct
+{
+    u32 addr;
+    u32 color;
+    u8 flags;
+    u8 fmt;
+    u8 bpp;
+    u8 w;
+    u8 h;
+}
+CsmcDisplayList;
+
 typedef struct GameState_Play GameState_Play;
 typedef struct Actor Actor;
 
 /* Generic */
 void*   csmcLoadTexture(u8 custom, u32 addr, int fmt, int bpp, int w, int h, int mirror);
+void*   csmcLoadTextureEx(const CsmcDisplayList* dl);
 int     csmcFromItem(s16 gi);
 int     csmcEnabled(void);
 
@@ -37,5 +64,8 @@ int     csmcChestLarge(s16 gi);
 
 /* Pots */
 void csmcPotPreDraw(Actor* this, GameState_Play* play, s16 gi, int def);
+
+/* Grass */
+void csmcGrassPreDraw(GameState_Play* play, s16 gi, int def, int alt);
 
 #endif

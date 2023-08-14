@@ -53,7 +53,7 @@ static int dmaLookupAlt(DmaEntry* buf, u32 dmaAddr, u32 dmaCount, u32 dmaFlag, u
     }
 }
 
-static int dmaLookup(DmaEntry* buf, u32 vromAddr)
+int comboDmaLookup(DmaEntry* buf, u32 vromAddr)
 {
     u32 extraDmaAddr;
     u32 extraDmaCount;
@@ -91,7 +91,7 @@ void DmaManagerRunRequest(const DmaRequest* dma)
     int ret;
 
     /* Find the file to DMA */
-    ret = dmaLookup(&e, dma->vromAddr);
+    ret = comboDmaLookup(&e, dma->vromAddr);
     if (!ret)
         return;
     if (e.pend == 0xffffffff)
@@ -168,7 +168,7 @@ u32 comboDmaLoadFile(void* dst, u32 vrom)
     DmaEntry e;
     int ret;
 
-    ret = dmaLookup(&e, vrom);
+    ret = comboDmaLookup(&e, vrom);
     if (ret)
         return comboDmaLoadFilePartialImpl(dst, &e, vrom, 0, e.vend - e.vstart);
     else
@@ -180,7 +180,7 @@ u32 comboDmaLoadFilePartial(void* dst, u32 vrom, u32 offset, s32 size)
     DmaEntry e;
     int ret;
 
-    ret = dmaLookup(&e, vrom);
+    ret = comboDmaLookup(&e, vrom);
     if (ret)
         return comboDmaLoadFilePartialImpl(dst, &e, vrom, offset, size);
     else

@@ -179,6 +179,8 @@ int comboAddItemEffect(GameState_Play* play, s16 gi)
     case GI_OOT_BLUE_FIRE:
     case GI_OOT_BUG:
     case GI_OOT_MILK:
+    case GI_OOT_FAIRY:
+    case GI_OOT_POE:
         reloadIconsC(play);
         break;
     }

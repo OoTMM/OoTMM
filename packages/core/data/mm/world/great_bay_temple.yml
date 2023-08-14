@@ -29,11 +29,11 @@
   dungeon: GB
   exits:
     "Great Bay Temple Water Wheel": "true"
-    "Great Bay Temple Map Room": "true"
-    "Great Bay Temple Red Pipe 1": "true"
+    "Great Bay Temple Map Room": "has_mask_zora"
+    "Great Bay Temple Red Pipe 1": "has_mask_zora"
     "Great Bay Temple Green Pipe 1": "can_use_ice_arrows"
-    "Great Bay Temple Compass Room": "event(GB_WATER_WHEEL)"
-    "Great Bay Temple Pre-Boss": "event(GB_WATER_WHEEL)"
+    "Great Bay Temple Compass Room": "has_mask_zora && event(GB_WATER_WHEEL)"
+    "Great Bay Temple Pre-Boss": "has_mask_zora && event(GB_WATER_WHEEL)"
   locations:
     "Great Bay Temple SF Central Room Barrel": "true"
     "Great Bay Temple SF Central Room Underwater Pot": "has_mask_zora || (has_arrows && has(MASK_GREAT_FAIRY))"

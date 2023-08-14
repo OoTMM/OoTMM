@@ -12,13 +12,10 @@ typedef struct Xflag
     u8 sceneId;
     u8 setupId;
     u8 roomId;
+    u8 sliceId;
     u8 id;
 }
 Xflag;
-
-extern const u16 kXflagsTableScenes[];
-extern const u16 kXflagsTableSetups[];
-extern const u16 kXflagsTableRooms[];
 
 u16  comboXflagsBitPosLookup(const Xflag* xf);
 int  comboXflagsGet(const Xflag* xf);

@@ -13,6 +13,7 @@ typedef struct
 EntranceDescr;
 
 void comboGetDungeonExit(EntranceDescr* dst, int dungeonId);
-void comboTransition(GameState_Play* play, const EntranceDescr* descr);
+void comboTransition(GameState_Play* play, u32 entranceId);
+void comboTransitionDescr(GameState_Play* play, const EntranceDescr* descr);
 
 #endif

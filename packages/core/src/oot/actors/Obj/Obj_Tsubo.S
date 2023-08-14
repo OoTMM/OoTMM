@@ -2,7 +2,7 @@
 
 /* Resize the ObjTsubo actor */
 PATCH_START 0x80a6601c
-.int 0x194
+.int 0x198
 PATCH_END
 
 /* Wrap the Tsubo ctor */

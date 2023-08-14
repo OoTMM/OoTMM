@@ -3,7 +3,7 @@ import { Buffer } from 'buffer';
 import { LogicResult } from '../logic';
 import { DATA_GI, DATA_NPC, DATA_SCENES, DATA_REGIONS, DATA_HINTS_POOL, DATA_HINTS, DATA_ENTRANCES } from '../data';
 import { Game } from "../config";
-import { WorldCheck } from '../logic/world';
+import { World, WorldCheck } from '../logic/world';
 import { DUNGEONS, Settings, SPECIAL_CONDS, SPECIAL_CONDS_KEYS } from '../settings';
 import { HintGossip, WorldHints } from '../logic/hints';
 import { countMapAdd, gameId, padBuffer16, toU16Buffer, toU32Buffer, toU8Buffer } from '../util';
@@ -231,7 +231,21 @@ const gi = (settings: Settings, game: Game, item: Item, generic: boolean) => {
   return value;
 };
 
-const entrance = (srcGame: Game, dstGame: Game, name: string) => {
+function entrance(srcName: string, world: World) {
+  const dstName = world.entranceOverrides.get(srcName) || srcName;
+  const srcGame: Game = (/^OOT_/.test(srcName) ? 'oot' : 'mm');
+  const dstGame: Game = (/^OOT_/.test(dstName) ? 'oot' : 'mm');
+  let data = DATA_ENTRANCES[dstName] as number;
+  if (data === undefined) {
+    throw new Error(`Unknown entrance ${name}`);
+  }
+  if (srcGame !== dstGame) {
+    data = (data | 0x80000000) >>> 0;
+  }
+  return data;
+}
+
+const entrance2 = (srcGame: Game, dstGame: Game, name: string) => {
   let data = DATA_ENTRANCES[name] as number;
   if (data === undefined) {
     throw new Error(`Unknown entrance ${name}`);
@@ -278,6 +292,9 @@ function zoraSapphireBuffer(world: number, logic: LogicResult): Buffer {
 }
 
 function checkKey(check: WorldCheck): number {
+  /* Extract the ID */
+  const id = checkId(check);
+
   /* Extract the type */
   let typeId: number;
   switch (check.type) {
@@ -309,7 +326,9 @@ function checkKey(check: WorldCheck): number {
     typeId = 0x09;
     break;
   case 'pot':
-    typeId = 0x0a;
+  case 'grass':
+    /* xflag */
+    typeId = 0x10 + ((id >> 16) & 0xf);
     break;
   }
 
@@ -320,6 +339,7 @@ function checkKey(check: WorldCheck): number {
   case 'collectible':
   case 'sf':
   case 'pot':
+  case 'grass':
     sceneId = DATA_SCENES[check.scene];
     if (sceneId === undefined) {
       throw new Error(`Unknown scene ${check.scene}`);
@@ -328,9 +348,6 @@ function checkKey(check: WorldCheck): number {
   default:
     break;
   }
-
-  /* Extract the ID */
-  const id = checkId(check);
 
   /* Build the key */
   let key = 0;
@@ -490,8 +507,8 @@ const gameEntrances = (worldId: number, game: Game, logic: LogicResult) => {
     const dstEntrance = world.entrances.get(dst)!;
     if (srcEntrance.game !== game)
       continue;
-    const srcId = entrance(srcEntrance.game, srcEntrance.game, src);
-    const dstId = entrance(srcEntrance.game, dstEntrance.game, dst);
+    const srcId = entrance2(srcEntrance.game, srcEntrance.game, src);
+    const dstId = entrance2(srcEntrance.game, dstEntrance.game, dst);
     data.push(srcId, dstId);
   }
   data.push(0xffffffff);
@@ -499,7 +516,7 @@ const gameEntrances = (worldId: number, game: Game, logic: LogicResult) => {
   return padBuffer16(toU32Buffer(data));
 };
 
-export const randomizerMq = (worldId: number, logic: LogicResult): Buffer => {
+const randomizerMq = (worldId: number, logic: LogicResult): Buffer => {
   let mq = 0;
   const dungeons = Object.keys(DUNGEONS);
   const world = logic.worlds[worldId];
@@ -512,6 +529,34 @@ export const randomizerMq = (worldId: number, logic: LogicResult): Buffer => {
   const buffer = Buffer.alloc(4);
   buffer.writeUInt32BE(mq);
   return buffer;
+}
+
+function randomizerWarps(worldId: number, logic: LogicResult): Buffer {
+  const songs = [
+    'OOT_WARP_SONG_MEADOW',
+    'OOT_WARP_SONG_CRATER',
+    'OOT_WARP_SONG_LAKE',
+    'OOT_WARP_SONG_DESERT',
+    'OOT_WARP_SONG_GRAVE',
+    'OOT_WARP_SONG_TEMPLE',
+  ];
+  const warpSongs = toU32Buffer(songs.map(e => entrance(e, logic.worlds[worldId])));
+
+  const owlStatues = [
+    'MM_WARP_OWL_GREAT_BAY',
+    'MM_WARP_OWL_ZORA_CAPE',
+    'MM_WARP_OWL_SNOWHEAD',
+    'MM_WARP_OWL_MOUNTAIN_VILLAGE',
+    'MM_WARP_OWL_CLOCK_TOWN',
+    'MM_WARP_OWL_MILK_ROAD',
+    'MM_WARP_OWL_WOODFALL',
+    'MM_WARP_OWL_SOUTHERN_SWAMP',
+    'MM_WARP_OWL_IKANA_CANYON',
+    'MM_WARP_OWL_STONE_TOWER',
+  ];
+  const owlStatuesBuffer = toU32Buffer(owlStatues.map(e => entrance(e, logic.worlds[worldId])));
+
+  return Buffer.concat([warpSongs, owlStatuesBuffer]);
 }
 
 export const randomizerConfig = (config: Set<Confvar>): Buffer => {
@@ -574,6 +619,7 @@ export const randomizerData = (worldId: number, logic: LogicResult): Buffer => {
   buffers.push(logic.uuid);
   buffers.push(toU8Buffer([worldId + 1, 0, 0, 0]));
   buffers.push(randomizerMq(worldId, logic));
+  buffers.push(randomizerWarps(worldId, logic));
   buffers.push(randomizerConfig(logic.config));
   buffers.push(specialConds(logic.settings));
   buffers.push(prices(worldId, logic));

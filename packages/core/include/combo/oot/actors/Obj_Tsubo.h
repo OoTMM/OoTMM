@@ -14,6 +14,6 @@ typedef struct ALIGNED(4)
 }
 Actor_ObjTsubo;
 
-_Static_assert(sizeof(Actor_ObjTsubo) == 0x194, "OoT Actor_ObjTsubo size is wrong");
+_Static_assert(sizeof(Actor_ObjTsubo) == 0x198, "OoT Actor_ObjTsubo size is wrong");
 
 #endif

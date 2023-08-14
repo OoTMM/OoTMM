@@ -128,6 +128,7 @@ export class LogicPassConfig {
       SHARED_SKELETON_KEY: settings.sharedSkeletonKey,
       OOT_SHUFFLE_POTS: settings.shufflePotsOot,
       MM_SHUFFLE_POTS: settings.shufflePotsMm,
+      OOT_SHUFFLE_GRASS: settings.shuffleGrassOot,
     };
 
     for (const v in exprs) {

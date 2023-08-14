@@ -410,6 +410,13 @@ export const SETTINGS = [{
   description: 'Controls whether or not the pots are shuffled (MM).',
   default: false
 }, {
+  key: 'shuffleGrassOot',
+  name: 'Grass Shuffle (OoT)',
+  category: 'main.shuffle',
+  type: 'boolean',
+  description: 'Controls whether or not the grass is shuffled (OoT)',
+  default: false
+}, {
   key: 'shuffleOcarinasOot',
   name: 'Ocarina Shuffle (OoT)',
   category: 'main.shuffle',
@@ -1099,7 +1106,7 @@ export const SETTINGS = [{
     { value: 'full', name: 'Full' },
   ],
   default: 'none',
-  description: '- Every entrance to Hyrule Field except Gerudo Valley and Market<br>- The entrance to Gerudo Fortress from Gerudo Valley<br>- The entrances to the four main regions in MM<br>- The entrance to Romani Ranch',
+  description: '- Every entrance to Hyrule Field except Gerudo Valley and Market<br>- The entrance to Gerudo Fortress from Gerudo Valley<br>- The entrance to Death Mountain from Kakariko<br>- The entrances to the four main regions in MM<br>- The entrance to Romani Ranch',
 }, {
   key: 'erRegionsExtra',
   name: 'Shuffle Market Entrance',
@@ -1108,11 +1115,11 @@ export const SETTINGS = [{
   description: 'Shuffle Hyrule Field\'s Market entrance among the regions.',
   default: false
 }, {
-  key: 'erRegionsOneWay',
-  name: 'Shuffle One-Way Entrances',
+  key: 'erRegionsShortcuts',
+  name: 'Shuffle Regional Shortcuts',
   category: 'entrances',
   type: 'boolean',
-  description: 'Shuffle one-way entrances among the regions.<br>OOT: Gerudo Valley -> Lake Hylia<br>MM: Ikana Canyon -> Southern Swamp',
+  description: 'Shuffles the various shortcuts between regions.<br>- Lost Woods/Goron City<br>- Lost Woods/Zora\'s River<br>- Lake Hylia/Zora\'s Domain<br>- Lake Hylia/Gerudo Valley<br>- Ikana Canyon/Southern Swamp',
   default: false
 }, {
   key: 'erIndoors',
@@ -1133,4 +1140,26 @@ export const SETTINGS = [{
   type: 'boolean',
   description: 'Shuffle additional, more complex interiors. These include:<br>- OOT: Link\'s House, Temple of Time, Windmill, Kak Potion Shop<br>- MM: Stock Pot Inn, Astral Observatory/Bombers\' Hideout, Swamp Tourist Hut, Ikana Spring Cave',
   default: false
+}, {
+  key: 'erWarps',
+  name: 'Shuffle Warp Destinations',
+  category: 'entrances',
+  type: 'enum',
+  values: [
+    { value: 'none', name: 'None', description: 'No Warps are shuffled.' },
+    { value: 'ootWarps', name: 'OOT Only', description: 'Only Warp Songs and Owl Flights can be shuffled between each other.' },
+    { value: 'mmWarps', name: 'MM Only', description: 'Only Owl Statues can be shuffled between each other.' },
+    { value: 'ownGame', name: 'Own Game', description: 'Warp Songs, Owl Flights, and Owl Statues are shuffled among each other within their own games.' },
+    { value: 'full', name: 'Full', description: 'Warp Songs, Owl Flights, and Owl Statues are shuffled among each other.' },
+  ],
+  default: 'none',
+  description: 'Shuffle the Warp Songs and Owl Statues among each other.',
+}, {
+  key: 'erWarpsOwls',
+  name: 'Shuffle Child Owl Flights',
+  category: 'entrances',
+  type: 'boolean',
+  description: 'Shuffle the two owl flights among the other warps.',
+  default: false,
+  cond: (x: any) => x.erWarps !== 'none' && x.erWarps !== 'mmWarps'
 }] as const;

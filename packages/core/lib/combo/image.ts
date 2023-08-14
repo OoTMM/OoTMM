@@ -1,3 +1,5 @@
+type ImageFormat = 'rgba32' | 'rgba16';
+
 function packToRgb(color: number) {
   const r = (color >> 16) & 0xff;
   const g = (color >> 8) & 0xff;
@@ -139,15 +141,32 @@ function toRgba16(image: Buffer) {
   return newBuf;
 }
 
-function toFormat(image: Buffer, format: 'rgba32' | 'rgba16') {
+function toFormat(image: Buffer, format: ImageFormat) {
   if (format === 'rgba32') {
-    return image;
+    return Buffer.from(image);
   } else {
     return toRgba16(image);
   }
 }
 
-export function recolorImage(format: 'rgba32' | 'rgba16', image: Buffer, mask: Buffer | null, defaultColor: number, color: number) {
+export function grayscale(image: Buffer, format: ImageFormat, gamma = 1) {
+  image = fromFormat(image, format);
+
+  for (let i = 0; i < image.length; i += 4) {
+    const r = image.readUInt8(i + 0);
+    const g = image.readUInt8(i + 1);
+    const b = image.readUInt8(i + 2);
+    const l = Math.max(r, g, b);
+    const lGamma = Math.round(Math.pow(l / 255, gamma) * 255);
+    image.writeUInt8(lGamma, i + 0);
+    image.writeUInt8(lGamma, i + 1);
+    image.writeUInt8(lGamma, i + 2);
+  }
+
+  return toFormat(image, format);
+}
+
+export function recolorImage(format: ImageFormat, image: Buffer, mask: Buffer | null, defaultColor: number, color: number) {
   image = fromFormat(image, format);
   const newBuffer = Buffer.alloc(image.length);
   if (mask === null) {

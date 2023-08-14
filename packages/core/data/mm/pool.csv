@@ -756,6 +756,7 @@ Ancient Castle of Ikana Boss Pot 5,               pot,            NONE,         
 Ancient Castle of Ikana Boss Pot 6,               pot,            NONE,                   LAIR_IKANA,                   0x0106,                     MAGIC_JAR_LARGE
 Ancient Castle of Ikana Boss Pot 7,               pot,            NONE,                   LAIR_IKANA,                   0x0107,                     RECOVERY_HEART
 Ancient Castle of Ikana Boss Pot 8,               pot,            NONE,                   LAIR_IKANA,                   0x0108,                     ARROWS_10
+Ancient Castle of Ikana Pot Exterior,             pot,            NONE,                   CASTLE_IKANA,                 0x001e,                     FAIRY
 Ancient Castle of Ikana Pot Entrance 1,           pot,            NONE,                   CASTLE_IKANA,                 0x0107,                     RECOVERY_HEART
 Ancient Castle of Ikana Pot Entrance 2,           pot,            NONE,                   CASTLE_IKANA,                 0x0108,                     RECOVERY_HEART
 Ancient Castle of Ikana Pot Left First Room 1,    pot,            NONE,                   CASTLE_IKANA,                 0x0208,                     MAGIC_JAR_SMALL

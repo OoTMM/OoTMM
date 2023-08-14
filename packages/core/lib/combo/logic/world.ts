@@ -28,7 +28,7 @@ export type WorldArea = {
 };
 
 type WorldCheckNumeric = {
-  type: 'chest' | 'collectible' | 'gs' | 'sf' | 'cow' | 'shop' | 'scrub' | 'sr' | 'pot';
+  type: 'chest' | 'collectible' | 'gs' | 'sf' | 'cow' | 'shop' | 'scrub' | 'sr' | 'pot' | 'grass';
   id: number;
 };
 
@@ -51,7 +51,7 @@ export type WorldGossip = {
 
 export type WorldEntrance = {
   id: string;
-  type: 'boss' | 'dungeon' | 'overworld' | 'region' | 'region-extra' | 'region-oneway' | 'indoors' | 'indoors-extra' | 'indoors-exit' | 'indoors-special';
+  type: 'boss' | 'dungeon' | 'overworld' | 'region' | 'region-extra' | 'region-shortcut' | 'warp-song' | 'warp-owl' | 'owl-flight' | 'indoors' | 'indoors-extra' | 'indoors-exit' | 'indoors-special';
   from: string;
   to: string;
   reverse: string | null;

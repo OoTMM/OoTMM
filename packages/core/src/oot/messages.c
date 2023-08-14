@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/entrance.h>
 
 static u8 sInCustomSong;
 
@@ -112,50 +113,30 @@ static void SetupSoaring(GameState_Play* play)
     }
 }
 
-static s32 soarTargets[] = {
-    0x68B0, // Great Bay Coast
-    0x6A60, // Zora Cape
-    0xB230, // Snowhead
-    0x9A80, // Mountain Village (Winter)
-    0xD890, // South Clock Town
-    0x3E40, // Milk Road
-    0x8640, // Woodfall
-    0x84A0, // Southern Swamp (Poisoned)
-    0x2040, // Ikana Canyon
-    0xAA30, // Stone Tower
-};
-
 static void HandleSoaring(GameState_Play* play)
 {
     int msgState;
+    int songId;
     if (play->pauseCtx.state == 0)
     {
-        if (gSoaringIndexSelected >= 0 && gSoaringIndexSelected < ARRAY_SIZE(soarTargets))
+        if (gSoaringIndexSelected >= 0 && gSoaringIndexSelected < 10)
         {
             msgState = Message_GetState(&play->msgCtx);
             if (msgState)
             {
                 if (msgState == 2)
                 {
+                    songId = gSoaringIndexSelected;
+
+                    /* Stop ocarina */
+                    sInCustomSong = 0;
+                    play->msgCtx.ocarinaMode = 4; // OCARINA_MODE_END
+                    gSoaringIndexSelected = -1;
+
                     if (play->msgCtx.choice == 0)
                     {
-                        s32 entrance = soarTargets[gSoaringIndexSelected];
-                        if (gSoaringIndexSelected == 3 && gMiscFlags.erSpring) // Mountain Village (Winter)
-                        {
-                            entrance = 0xAE80; // Mountain Village (Spring)
-                        }
-                        else if (gSoaringIndexSelected == 7 && gMiscFlags.erSwampClear) // Southern Swamp (Poisoned)
-                        {
-                            entrance = 0x84A0; // Southern Swamp (Cleared)
-                        }
-                        comboGameSwitch(play, entrance);
-                    }
-                    else
-                    {
-                        /* Stop ocarina */
-                        sInCustomSong = 0;
-                        play->msgCtx.ocarinaMode = 4; // OCARINA_MODE_END
-                        gSoaringIndexSelected = -1;
+                        u32 entrance = gComboData.entrancesOwl[songId] ^ MASK_FOREIGN_ENTRANCE;
+                        comboTransition(play, entrance);
                     }
                 }
             }

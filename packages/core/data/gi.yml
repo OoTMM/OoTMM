@@ -268,6 +268,10 @@ OOT_KEY_RING_BOTW:                        0x10d
 OOT_KEY_RING_GF:                          0x10e
 OOT_KEY_RING_GTG:                         0x10f
 OOT_SKELETON_KEY:                         0x110
+OOT_COIN_YELLOW:                          0x111
+OOT_COIN_RED:                             0x112
+OOT_COIN_GREEN:                           0x113
+OOT_COIN_BLUE:                            0x114
 
 MM_RUPEE_GREEN:               0x01
 MM_RUPEE_BLUE:                0x02

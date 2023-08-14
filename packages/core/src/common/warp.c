@@ -127,5 +127,5 @@ void comboTriggerWarp(GameState_Play* play, int bossId)
     gSave.equippedMask = 0;
 #endif
 
-    comboTransition(play, &descr);
+    comboTransitionDescr(play, &descr);
 }

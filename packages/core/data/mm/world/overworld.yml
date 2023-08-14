@@ -1872,6 +1872,8 @@
     "Beneath The Well End": "true"
     "Ikana Castle Entrance": "can_use_light_arrows"
     "Ancient Castle of Ikana": "true"
+  locations:
+    "Ancient Castle of Ikana Pot Exterior": "true"
 "Stone Tower":
   region: STONE_TOWER
   events:
