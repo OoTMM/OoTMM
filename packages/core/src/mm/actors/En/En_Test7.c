@@ -25,6 +25,10 @@ u16 EnTest7_TriggerWarp(Actor* actor, GameState_Play* play)
     case SCE_MM_TEMPLE_STONE_TOWER:
     case SCE_MM_TEMPLE_STONE_TOWER_INVERTED:
     case SCE_MM_SAKON_HIDEOUT:
+    case SCE_MM_LAIR_ODOLWA:
+    case SCE_MM_LAIR_GOHT:
+    case SCE_MM_LAIR_GYORG:
+    case SCE_MM_LAIR_TWINMOLD:
         break;
     default:
         gIsEntranceOverride = 1;
