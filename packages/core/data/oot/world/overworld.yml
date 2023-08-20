@@ -631,7 +631,6 @@
   time: flow
   exits:
     "Hyrule Castle": "true"
-    "Hyrule Field": "met_zelda"
   events:
     MEET_ZELDA: "true"
   locations:
