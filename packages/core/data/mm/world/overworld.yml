@@ -967,8 +967,8 @@
     "Near Deku Shrine": "true"
   locations:
     "Deku Shrine Mask of Scents": "event(RETURN_PRINCESS) && has_weapon_range"
-    "Deku Shrine Pot 1": "true"
-    "Deku Shrine Pot 2": "true"
+    "Deku Shrine Pot 1": "event(RETURN_PRINCESS)"
+    "Deku Shrine Pot 2": "event(RETURN_PRINCESS)"
 "Behind Large Icicles":
   region: TERMINA_FIELD
   exits:
