@@ -1063,7 +1063,7 @@
   locations:
     "Twin Islands Underwater Chest 1": "event(BOSS_SNOWHEAD) && has_mask_zora"
     "Twin Islands Underwater Chest 2": "event(BOSS_SNOWHEAD) && has_mask_zora"
-    "Goron Elder": "has_mask_goron && cond(!setting(erBoss, none) && (setting(bossWarpPads, remains) || trick(MM_SHT_FIRELESS)), can_use_fire_arrows, can_use_fire_arrows || has_hot_water_mtn || has_hot_water_er || (has_hot_water_distance && has(OWL_MOUNTAIN_VILLAGE))) && (first_day || second_day)"
+    "Goron Elder": "has_mask_goron && cond(!setting(erBoss, none), can_use_fire_arrows || (setting(bossWarpPads, bossBeaten) && has_hot_water_er), can_use_fire_arrows || has_hot_water_mtn || has_hot_water_er || (has_hot_water_distance && has(OWL_MOUNTAIN_VILLAGE))) && (first_day || second_day)"
 "Twin Islands Ramp Grotto":
   region: ENTRANCE
   exits:
