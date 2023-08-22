@@ -1772,7 +1772,7 @@
   region: IKANA_CANYON
   exits:
     "Road to Ikana Top": "true"
-    "Ikana Canyon": "(can_use_ice_arrows || trick(MM_ICELESS_IKANA)) && can_hookshot"
+    "Ikana Canyon": "((can_use_ice_arrows && soul_octorok) || trick(MM_ICELESS_IKANA)) && can_hookshot"
     "Secret Shrine": "true"
     "Sakon Hideout": "event(MEET_KAFEI) && at(NIGHT3_PM_06_00)"
     "Ikana Valley Grotto": "true"
