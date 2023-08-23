@@ -1367,6 +1367,34 @@ MQ Fire Temple GS 1f Lava Room,                             gs,             NONE
 MQ Fire Temple GS Fire Walls Side Room,                     gs,             NONE,                 TEMPLE_FIRE,                    0x2c,                       GS_TOKEN
 MQ Fire Temple GS Fire Walls Middle,                        gs,             NONE,                 TEMPLE_FIRE,                    0x2b,                       GS_TOKEN
 MQ Fire Temple GS Topmost,                                  gs,             NONE,                 TEMPLE_FIRE,                    0x29,                       GS_TOKEN
+MQ Fire Temple Pot Entrance 1,                              pot,            NONE,                 TEMPLE_FIRE,                    0x0009,                     MAGIC_JAR_SMALL
+MQ Fire Temple Pot Entrance 2,                              pot,            NONE,                 TEMPLE_FIRE,                    0x000a,                     MAGIC_JAR_SMALL
+MQ Fire Temple Pot Lava Room Left,                          pot,            NONE,                 TEMPLE_FIRE,                    0x0111,                     ARROWS_10
+MQ Fire Temple Pot Lava Room Alcove,                        pot,            NONE,                 TEMPLE_FIRE,                    0x0112,                     MAGIC_JAR_SMALL
+MQ Fire Temple Pot Lava Room Right,                         pot,            NONE,                 TEMPLE_FIRE,                    0x0113,                     MAGIC_JAR_SMALL
+MQ Fire Temple Pot Pre-Boss 1,                              pot,            NONE,                 TEMPLE_FIRE,                    0x0208,                     MAGIC_JAR_LARGE
+MQ Fire Temple Pot Pre-Boss 2,                              pot,            NONE,                 TEMPLE_FIRE,                    0x0209,                     ARROWS_30
+MQ Fire Temple Pot Bridge Above Lava Room 1,                pot,            NONE,                 TEMPLE_FIRE,                    0x0601,                     FLEXIBLE
+MQ Fire Temple Pot Bridge Above Lava Room 2,                pot,            NONE,                 TEMPLE_FIRE,                    0x0602,                     ARROWS_10
+MQ Fire Temple Pot Bridge Above Lava Room 3,                pot,            NONE,                 TEMPLE_FIRE,                    0x0603,                     BOMBS_5
+MQ Fire Temple Pot Fire Maze Room Back Right 1,             pot,            NONE,                 TEMPLE_FIRE,                    0x0a2f,                     BOMB
+MQ Fire Temple Pot Fire Maze Room Back Right 2,             pot,            NONE,                 TEMPLE_FIRE,                    0x0a30,                     RECOVERY_HEART
+MQ Fire Temple Pot Fire Maze Room Right 1,                  pot,            NONE,                 TEMPLE_FIRE,                    0x0a31,                     RECOVERY_HEART
+MQ Fire Temple Pot Fire Maze Room Right 2,                  pot,            NONE,                 TEMPLE_FIRE,                    0x0a32,                     BOMB
+MQ Fire Temple Pot Fire Maze Room Left 1,                   pot,            NONE,                 TEMPLE_FIRE,                    0x0a33,                     FLEXIBLE
+MQ Fire Temple Pot Fire Maze Room Left 2,                   pot,            NONE,                 TEMPLE_FIRE,                    0x0a34,                     BOMBS_5
+MQ Fire Temple Pot Grids Above Lava 1,                      pot,            NONE,                 TEMPLE_FIRE,                    0x1005,                     ARROWS_10
+MQ Fire Temple Pot Grids Above Lava 2,                      pot,            NONE,                 TEMPLE_FIRE,                    0x1006,                     ARROWS_10
+MQ Fire Temple Pot Hammer Loop 1,                           pot,            NONE,                 TEMPLE_FIRE,                    0x1208,                     FLEXIBLE
+MQ Fire Temple Pot Hammer Loop 2,                           pot,            NONE,                 TEMPLE_FIRE,                    0x1209,                     BOMB
+MQ Fire Temple Pot Hammer Loop 3,                           pot,            NONE,                 TEMPLE_FIRE,                    0x120a,                     FLEXIBLE
+MQ Fire Temple Pot Hammer Loop 4,                           pot,            NONE,                 TEMPLE_FIRE,                    0x120b,                     BOMB
+MQ Fire Temple Pot Hammer Loop 5,                           pot,            NONE,                 TEMPLE_FIRE,                    0x120c,                     BOMB
+MQ Fire Temple Pot Hammer Loop 6,                           pot,            NONE,                 TEMPLE_FIRE,                    0x120d,                     BOMB
+MQ Fire Temple Pot Hammer Loop 7,                           pot,            NONE,                 TEMPLE_FIRE,                    0x120e,                     FLEXIBLE
+MQ Fire Temple Pot Hammer Loop 8,                           pot,            NONE,                 TEMPLE_FIRE,                    0x120f,                     FLEXIBLE
+MQ Fire Temple Pot Boss Key Room 1,                         pot,            NONE,                 TEMPLE_FIRE,                    0x130d,                     FLEXIBLE
+MQ Fire Temple Pot Boss Key Room 2,                         pot,            NONE,                 TEMPLE_FIRE,                    0x130e,                     MAGIC_JAR_SMALL
 MQ Water Temple Map Chest,                                  chest,          NONE,                 TEMPLE_WATER,                   0x02,                       MAP_WATER
 MQ Water Temple Compass Chest,                              chest,          NONE,                 TEMPLE_WATER,                   0x01,                       COMPASS_WATER
 MQ Water Temple Longshot Chest,                             chest,          NONE,                 TEMPLE_WATER,                   0x00,                       HOOKSHOT
