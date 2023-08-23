@@ -1406,6 +1406,37 @@ MQ Water Temple GS High Water Changer,                      gs,             NONE
 MQ Water Temple GS River,                                   gs,             NONE,                 TEMPLE_WATER,                   0x31,                       GS_TOKEN
 MQ Water Temple GS Three Torch,                             gs,             NONE,                 TEMPLE_WATER,                   0x34,                       GS_TOKEN
 MQ Water Temple GS Side Loop,                               gs,             NONE,                 TEMPLE_WATER,                   0x33,                       GS_TOKEN
+MQ Water Temple Pot Skull Cage 1,                           pot,            NONE,                 TEMPLE_WATER,                   0x0313,                     BOMB
+MQ Water Temple Pot Skull Cage 2,                           pot,            NONE,                 TEMPLE_WATER,                   0x0314,                     BOMB
+MQ Water Temple Pot Skull Cage 3,                           pot,            NONE,                 TEMPLE_WATER,                   0x0319,                     ARROWS_10
+MQ Water Temple Pot Skull Cage 4,                           pot,            NONE,                 TEMPLE_WATER,                   0x031a,                     ARROWS_10
+MQ Water Temple Pot Storage Room 1,                         pot,            NONE,                 TEMPLE_WATER,                   0x040d,                     RECOVERY_HEART
+MQ Water Temple Pot Storage Room 2,                         pot,            NONE,                 TEMPLE_WATER,                   0x040e,                     RECOVERY_HEART
+MQ Water Temple Pot Storage Room 3,                         pot,            NONE,                 TEMPLE_WATER,                   0x040f,                     RECOVERY_HEART
+MQ Water Temple Pot Before Dark Link Near Door 1,           pot,            NONE,                 TEMPLE_WATER,                   0x0607,                     MAGIC_JAR_LARGE
+MQ Water Temple Pot Before Dark Link Near Door 2,           pot,            NONE,                 TEMPLE_WATER,                   0x0608,                     MAGIC_JAR_LARGE
+MQ Water Temple Pot Before Dark Link Ledge 1,               pot,            NONE,                 TEMPLE_WATER,                   0x0609,                     NUTS_5
+MQ Water Temple Pot Before Dark Link Ledge 2,               pot,            NONE,                 TEMPLE_WATER,                   0x060a,                     FLEXIBLE
+MQ Water Temple Pot Before Dark Link Ledge 3,               pot,            NONE,                 TEMPLE_WATER,                   0x060b,                     FLEXIBLE
+MQ Water Temple Pot After Dark Link 1,                      pot,            NONE,                 TEMPLE_WATER,                   0x0702,                     ARROWS_30
+MQ Water Temple Pot After Dark Link 2,                      pot,            NONE,                 TEMPLE_WATER,                   0x0703,                     FLEXIBLE
+MQ Water Temple Pot Boss Key Room,                          pot,            NONE,                 TEMPLE_WATER,                   0x090f,                     MAGIC_JAR_LARGE
+MQ Water Temple Pot Room Before High Water 1,               pot,            NONE,                 TEMPLE_WATER,                   0x0a11,                     RECOVERY_HEART
+MQ Water Temple Pot Room Before High Water 2,               pot,            NONE,                 TEMPLE_WATER,                   0x0a12,                     RECOVERY_HEART
+MQ Water Temple Pot Room Before High Water 3,               pot,            NONE,                 TEMPLE_WATER,                   0x0a13,                     RECOVERY_HEART
+MQ Water Temple Pot Loop 1,                                 pot,            NONE,                 TEMPLE_WATER,                   0x0e0e,                     BOMB
+MQ Water Temple Pot Loop 2,                                 pot,            NONE,                 TEMPLE_WATER,                   0x0e0f,                     BOMB
+MQ Water Temple Pot Stalfos Room 1,                         pot,            NONE,                 TEMPLE_WATER,                   0x1008,                     FLEXIBLE
+MQ Water Temple Pot Stalfos Room 2,                         pot,            NONE,                 TEMPLE_WATER,                   0x1009,                     MAGIC_JAR_LARGE
+MQ Water Temple Pot Ruto 1,                                 pot,            NONE,                 TEMPLE_WATER,                   0x110d,                     MAGIC_JAR_LARGE
+MQ Water Temple Pot Ruto 2,                                 pot,            NONE,                 TEMPLE_WATER,                   0x110e,                     MAGIC_JAR_LARGE
+MQ Water Temple Pot Twisted Room Entrance,                  pot,            NONE,                 TEMPLE_WATER,                   0x1411,                     RUPEE_RED
+MQ Water Temple Pot Twisted Room Right 1,                   pot,            NONE,                 TEMPLE_WATER,                   0x1412,                     ARROWS_10
+MQ Water Temple Pot Twisted Room Right 2,                   pot,            NONE,                 TEMPLE_WATER,                   0x1413,                     MAGIC_JAR_LARGE
+MQ Water Temple Pot Twisted Room Cage 1,                    pot,            NONE,                 TEMPLE_WATER,                   0x1414,                     RECOVERY_HEART
+MQ Water Temple Pot Twisted Room Cage 2,                    pot,            NONE,                 TEMPLE_WATER,                   0x1415,                     RECOVERY_HEART
+MQ Water Temple Pot River 1,                                pot,            NONE,                 TEMPLE_WATER,                   0x1512,                     ARROWS_10
+MQ Water Temple Pot River 2,                                pot,            NONE,                 TEMPLE_WATER,                   0x1513,                     FLEXIBLE
 MQ Shadow Temple Compass Chest,                             chest,          NONE,                 TEMPLE_SHADOW,                  0x01,                       COMPASS_SHADOW
 MQ Shadow Temple Hover Boots Chest,                         chest,          NONE,                 TEMPLE_SHADOW,                  0x07,                       BOOTS_HOVER
 MQ Shadow Temple First Gibdos Chest,                        chest,          NONE,                 TEMPLE_SHADOW,                  0x03,                       SMALL_KEY_SHADOW
