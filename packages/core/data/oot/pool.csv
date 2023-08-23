@@ -1492,6 +1492,29 @@ MQ Shadow Temple SR Spikes Front Midair,                    sr,             NONE
 MQ Shadow Temple SR Spikes Right Ground,                    sr,             NONE,                 TEMPLE_SHADOW,                  0x34,                       RUPEE_SILVER_SHADOW_SPIKES
 MQ Shadow Temple SR Spikes Right Back Wall,                 sr,             NONE,                 TEMPLE_SHADOW,                  0x35,                       RUPEE_SILVER_SHADOW_SPIKES
 MQ Shadow Temple SR Spikes Right Lateral Wall,              sr,             NONE,                 TEMPLE_SHADOW,                  0x36,                       RUPEE_SILVER_SHADOW_SPIKES
+MQ Shadow Temple Pot Entrance Maze 1,                       pot,            NONE,                 TEMPLE_SHADOW,                  0x0004,                     RECOVERY_HEART
+MQ Shadow Temple Pot Entrance Maze 2,                       pot,            NONE,                 TEMPLE_SHADOW,                  0x0005,                     RECOVERY_HEART
+MQ Shadow Temple Pot Compass Room 1,                        pot,            NONE,                 TEMPLE_SHADOW,                  0x0104,                     RECOVERY_HEART
+MQ Shadow Temple Pot Compass Room 2,                        pot,            NONE,                 TEMPLE_SHADOW,                  0x0105,                     RECOVERY_HEART
+MQ Shadow Temple Pot Guillotines Room Lower 1,              pot,            NONE,                 TEMPLE_SHADOW,                  0x0a03,                     RECOVERY_HEART
+MQ Shadow Temple Pot Guillotines Room Lower 2,              pot,            NONE,                 TEMPLE_SHADOW,                  0x0a04,                     BOMB
+MQ Shadow Temple Pot Guillotines Room Upper 1,              pot,            NONE,                 TEMPLE_SHADOW,                  0x0a05,                     RECOVERY_HEART
+MQ Shadow Temple Pot Guillotines Room Upper 2,              pot,            NONE,                 TEMPLE_SHADOW,                  0x0a06,                     RECOVERY_HEART
+MQ Shadow Temple Pot Boss Key Room,                         pot,            NONE,                 TEMPLE_SHADOW,                  0x0d08,                     MAGIC_JAR_LARGE
+MQ Shadow Temple Pot Bomb Flowers Room 1,                   pot,            NONE,                 TEMPLE_SHADOW,                  0x1101,                     BOMBS_5
+MQ Shadow Temple Pot Bomb Flowers Room 2,                   pot,            NONE,                 TEMPLE_SHADOW,                  0x1102,                     ARROWS_30
+MQ Shadow Temple Pot Room Before Boat 1,                    pot,            NONE,                 TEMPLE_SHADOW,                  0x1403,                     RUPEE_BLUE
+MQ Shadow Temple Pot Room Before Boat 2,                    pot,            NONE,                 TEMPLE_SHADOW,                  0x1404,                     NUTS_5
+MQ Shadow Temple Pot After Boat Before Bridge 1,            pot,            NONE,                 TEMPLE_SHADOW,                  0x1513,                     ARROWS_10
+MQ Shadow Temple Pot After Boat Before Bridge 2,            pot,            NONE,                 TEMPLE_SHADOW,                  0x1514,                     ARROWS_10
+MQ Shadow Temple Pot After Boat After Bridge 1,             pot,            NONE,                 TEMPLE_SHADOW,                  0x1515,                     ARROWS_30
+MQ Shadow Temple Pot After Boat After Bridge 2,             pot,            NONE,                 TEMPLE_SHADOW,                  0x1516,                     MAGIC_JAR_LARGE
+MQ Shadow Temple Flying Pot Entrance Maze 1,                pot,            NONE,                 TEMPLE_SHADOW,                  0x0006,                     NUTS_5
+MQ Shadow Temple Flying Pot Entrance Maze 2,                pot,            NONE,                 TEMPLE_SHADOW,                  0x0007,                     NUTS_5
+MQ Shadow Temple Flying Pot Entrance Maze 3,                pot,            NONE,                 TEMPLE_SHADOW,                  0x0008,                     NUTS_5
+MQ Shadow Temple Flying Pot Entrance Maze 4,                pot,            NONE,                 TEMPLE_SHADOW,                  0x0009,                     NUTS_5
+MQ Shadow Temple Flying Pot Room Before Boat 1,             pot,            NONE,                 TEMPLE_SHADOW,                  0x1405,                     RECOVERY_HEART
+MQ Shadow Temple Flying Pot Room Before Boat 2,             pot,            NONE,                 TEMPLE_SHADOW,                  0x1406,                     NUTS_5
 MQ Spirit Temple Entrance Initial Chest,                    chest,          NONE,                 TEMPLE_SPIRIT,                  0x1a,                       BOMBCHU_5
 MQ Spirit Temple Lobby Back-Left Chest,                     chest,          NONE,                 TEMPLE_SPIRIT,                  0x1e,                       SMALL_KEY_SPIRIT
 MQ Spirit Temple Lobby Back-Right Chest,                    chest,          NONE,                 TEMPLE_SPIRIT,                  0x1f,                       BOMBCHU_5
