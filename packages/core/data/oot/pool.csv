@@ -1661,3 +1661,15 @@ MQ Ganon Castle SR Fire Center-Left,                        sr,             NONE
 MQ Ganon Castle SR Fire Back-Left,                          sr,             NONE,                 INSIDE_GANON_CASTLE,            0x5d,                       RUPEE_SILVER_GANON_FIRE
 MQ Ganon Castle SR Fire High Above Lava,                    sr,             NONE,                 INSIDE_GANON_CASTLE,            0x5e,                       RUPEE_SILVER_GANON_FIRE
 MQ Ganon Castle SR Fire Front-Left,                         sr,             NONE,                 INSIDE_GANON_CASTLE,            0x5f,                       RUPEE_SILVER_GANON_FIRE
+MQ Ganon Pot Water End 1,                                   pot,            NONE,                 INSIDE_GANON_CASTLE,            0x0404,                     RECOVERY_HEART
+MQ Ganon Pot Water End 2,                                   pot,            NONE,                 INSIDE_GANON_CASTLE,            0x0405,                     ARROWS_10
+MQ Ganon Pot Forest End 1,                                  pot,            NONE,                 INSIDE_GANON_CASTLE,            0x0704,                     RECOVERY_HEART
+MQ Ganon Pot Forest End 2,                                  pot,            NONE,                 INSIDE_GANON_CASTLE,            0x0705,                     MAGIC_JAR_SMALL
+MQ Ganon Pot Light End 1,                                   pot,            NONE,                 INSIDE_GANON_CASTLE,            0x0b04,                     MAGIC_JAR_LARGE
+MQ Ganon Pot Light End 2,                                   pot,            NONE,                 INSIDE_GANON_CASTLE,            0x0b05,                     RECOVERY_HEART
+MQ Ganon Pot Shadow End 1,                                  pot,            NONE,                 INSIDE_GANON_CASTLE,            0x0d04,                     MAGIC_JAR_LARGE
+MQ Ganon Pot Shadow End 2,                                  pot,            NONE,                 INSIDE_GANON_CASTLE,            0x0d05,                     ARROWS_10
+MQ Ganon Pot Fire End 1,                                    pot,            NONE,                 INSIDE_GANON_CASTLE,            0x0f04,                     RECOVERY_HEART
+MQ Ganon Pot Fire End 2,                                    pot,            NONE,                 INSIDE_GANON_CASTLE,            0x0f05,                     MAGIC_JAR_SMALL
+MQ Ganon Pot Spirit End 1,                                  pot,            NONE,                 INSIDE_GANON_CASTLE,            0x1304,                     NUTS_5
+MQ Ganon Pot Spirit End 2,                                  pot,            NONE,                 INSIDE_GANON_CASTLE,            0x1305,                     MAGIC_JAR_SMALL
