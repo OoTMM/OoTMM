@@ -1527,6 +1527,38 @@ MQ Spirit Temple SR Adult Bottom-Center,                    sr,             NONE
 MQ Spirit Temple SR Adult Center-Top,                       sr,             NONE,                 TEMPLE_SPIRIT,                  0x11,                       RUPEE_SILVER_SPIRIT_ADULT
 MQ Spirit Temple SR Adult Top,                              sr,             NONE,                 TEMPLE_SPIRIT,                  0x12,                       RUPEE_SILVER_SPIRIT_ADULT
 MQ Spirit Temple SR Adult Skulltula,                        sr,             NONE,                 TEMPLE_SPIRIT,                  0x13,                       RUPEE_SILVER_SPIRIT_ADULT
+MQ Spirit Temple Pot Entrance 1,                            pot,            NONE,                 TEMPLE_SPIRIT,                  0x0011,                     RECOVERY_HEART
+MQ Spirit Temple Pot Entrance 2,                            pot,            NONE,                 TEMPLE_SPIRIT,                  0x0012,                     RECOVERY_HEART
+MQ Spirit Temple Pot Entrance 3,                            pot,            NONE,                 TEMPLE_SPIRIT,                  0x0013,                     BOMB
+MQ Spirit Temple Pot Entrance 4,                            pot,            NONE,                 TEMPLE_SPIRIT,                  0x0015,                     MAGIC_JAR_LARGE
+MQ Spirit Temple Pot Child Entrance,                        pot,            NONE,                 TEMPLE_SPIRIT,                  0x010b,                     BOMB
+MQ Spirit Temple Pot Child Boulders 1,                      pot,            NONE,                 TEMPLE_SPIRIT,                  0x020c,                     RECOVERY_HEART
+MQ Spirit Temple Pot Child Boulders 2,                      pot,            NONE,                 TEMPLE_SPIRIT,                  0x020d,                     MAGIC_JAR_LARGE
+MQ Spirit Temple Pot Child Climb,                           pot,            NONE,                 TEMPLE_SPIRIT,                  0x040c,                     MAGIC_JAR_LARGE
+MQ Spirit Temple Pot Statue Room Upper 1,                   pot,            NONE,                 TEMPLE_SPIRIT,                  0x0520,                     ARROWS_5
+MQ Spirit Temple Pot Statue Room Upper 2,                   pot,            NONE,                 TEMPLE_SPIRIT,                  0x0521,                     MAGIC_JAR_LARGE
+MQ Spirit Temple Pot Statue Room Lower 1,                   pot,            NONE,                 TEMPLE_SPIRIT,                  0x051e,                     RECOVERY_HEART
+MQ Spirit Temple Pot Statue Room Lower 2,                   pot,            NONE,                 TEMPLE_SPIRIT,                  0x0522,                     MAGIC_JAR_SMALL
+MQ Spirit Temple Pot Statue Room Lower 3,                   pot,            NONE,                 TEMPLE_SPIRIT,                  0x0523,                     DEKU_SEEDS_5
+MQ Spirit Temple Pot Child Sun Room 1,                      pot,            NONE,                 TEMPLE_SPIRIT,                  0x0816,                     RECOVERY_HEART
+MQ Spirit Temple Pot Child Sun Room 2,                      pot,            NONE,                 TEMPLE_SPIRIT,                  0x0818,                     DEKU_SEEDS_5
+MQ Spirit Temple Pot Adult Climb 1,                         pot,            NONE,                 TEMPLE_SPIRIT,                  0x0f0e,                     RECOVERY_HEART
+MQ Spirit Temple Pot Adult Climb 2,                         pot,            NONE,                 TEMPLE_SPIRIT,                  0x0f0f,                     RECOVERY_HEART
+MQ Spirit Temple Pot Topmost Climb 1,                       pot,            NONE,                 TEMPLE_SPIRIT,                  0x170f,                     RECOVERY_HEART
+MQ Spirit Temple Pot Topmost Climb 2,                       pot,            NONE,                 TEMPLE_SPIRIT,                  0x1710,                     RECOVERY_HEART
+MQ Spirit Temple Pot Top Near Triforce Symbol 1,            pot,            NONE,                 TEMPLE_SPIRIT,                  0x1803,                     RECOVERY_HEART
+MQ Spirit Temple Pot Top Near Triforce Symbol 2,            pot,            NONE,                 TEMPLE_SPIRIT,                  0x1804,                     BOMB
+MQ Spirit Temple Pot Top Near Lowering Platform 1,          pot,            NONE,                 TEMPLE_SPIRIT,                  0x1909,                     RECOVERY_HEART
+MQ Spirit Temple Pot Top Near Lowering Platform 2,          pot,            NONE,                 TEMPLE_SPIRIT,                  0x190a,                     RECOVERY_HEART
+MQ Spirit Temple Pot Top Near Lowering Platform 3,          pot,            NONE,                 TEMPLE_SPIRIT,                  0x190b,                     RECOVERY_HEART
+MQ Spirit Temple Pot Top Near Lowering Platform 4,          pot,            NONE,                 TEMPLE_SPIRIT,                  0x190c,                     MAGIC_JAR_SMALL
+MQ Spirit Temple Pot Child Back 1,                          pot,            NONE,                 TEMPLE_SPIRIT,                  0x1b09,                     RECOVERY_HEART
+MQ Spirit Temple Pot Child Back 2,                          pot,            NONE,                 TEMPLE_SPIRIT,                  0x1b0a,                     RECOVERY_HEART
+MQ Spirit Temple Pot Child Back 3,                          pot,            NONE,                 TEMPLE_SPIRIT,                  0x1b0b,                     DEKU_SEEDS_5
+MQ Spirit Temple Pot Child Back 4,                          pot,            NONE,                 TEMPLE_SPIRIT,                  0x1b0c,                     FLEXIBLE
+MQ Spirit Temple Flying Pot Statue Room Upper,              pot,            NONE,                 TEMPLE_SPIRIT,                  0x0512,                     NOTHING
+MQ Spirit Temple Flying Pot Statue Room Lower,              pot,            NONE,                 TEMPLE_SPIRIT,                  0x0513,                     NOTHING
+MQ Spirit Temple Flying Pot Statue Room Stairs,             pot,            NONE,                 TEMPLE_SPIRIT,                  0x0516,                     NOTHING
 MQ Gerudo Training Grounds Entryway Left Chest,             chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x13,                       ARROWS_10
 MQ Gerudo Training Grounds Entryway Right Chest,            chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x07,                       BOMBCHU_10
 MQ Gerudo Training Grounds Maze First Chest,                chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x0b,                       RUPEE_PURPLE
