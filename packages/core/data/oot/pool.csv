@@ -1329,6 +1329,27 @@ MQ Forest Temple GS Climb Room,                             gs,             NONE
 MQ Forest Temple GS West Garden,                            gs,             NONE,                 TEMPLE_FOREST,                  0x22,                       GS_TOKEN
 MQ Forest Temple GS East Garden,                            gs,             NONE,                 TEMPLE_FOREST,                  0x20,                       GS_TOKEN
 MQ Forest Temple GS Well,                                   gs,             NONE,                 TEMPLE_FOREST,                  0x23,                       GS_TOKEN
+MQ Forest Temple Pot Main Room 1,                           pot,            NONE,                 TEMPLE_FOREST,                  0x0209,                     MAGIC_JAR_SMALL
+MQ Forest Temple Pot Main Room 2,                           pot,            NONE,                 TEMPLE_FOREST,                  0x020a,                     MAGIC_JAR_SMALL
+MQ Forest Temple Pot Main Room 3,                           pot,            NONE,                 TEMPLE_FOREST,                  0x020b,                     RECOVERY_HEART
+MQ Forest Temple Pot Main Room 4,                           pot,            NONE,                 TEMPLE_FOREST,                  0x020c,                     RECOVERY_HEART
+MQ Forest Temple Pot Main Room 5,                           pot,            NONE,                 TEMPLE_FOREST,                  0x020d,                     ARROWS_10
+MQ Forest Temple Pot Main Room 6,                           pot,            NONE,                 TEMPLE_FOREST,                  0x020e,                     ARROWS_10
+MQ Forest Temple Pot Bow Room Lower 1,                      pot,            NONE,                 TEMPLE_FOREST,                  0x0606,                     RECOVERY_HEART
+MQ Forest Temple Pot Bow Room Lower 2,                      pot,            NONE,                 TEMPLE_FOREST,                  0x0607,                     FLEXIBLE
+MQ Forest Temple Pot Bow Room Upper 1,                      pot,            NONE,                 TEMPLE_FOREST,                  0x0608,                     RECOVERY_HEART
+MQ Forest Temple Pot Bow Room Upper 2,                      pot,            NONE,                 TEMPLE_FOREST,                  0x0609,                     RECOVERY_HEART
+MQ Forest Temple Pot Bow Room Upper 3,                      pot,            NONE,                 TEMPLE_FOREST,                  0x060a,                     RECOVERY_HEART
+MQ Forest Temple Pot Bow Room Upper 4,                      pot,            NONE,                 TEMPLE_FOREST,                  0x060b,                     RECOVERY_HEART
+MQ Forest Temple Pot Blue Poe 1,                            pot,            NONE,                 TEMPLE_FOREST,                  0x0d05,                     RECOVERY_HEART
+MQ Forest Temple Pot Blue Poe 2,                            pot,            NONE,                 TEMPLE_FOREST,                  0x0d06,                     ARROWS_10
+MQ Forest Temple Pot Blue Poe 3,                            pot,            NONE,                 TEMPLE_FOREST,                  0x0d07,                     ARROWS_10
+MQ Forest Temple Pot Green Poe 1,                           pot,            NONE,                 TEMPLE_FOREST,                  0x1006,                     RECOVERY_HEART
+MQ Forest Temple Pot Green Poe 2,                           pot,            NONE,                 TEMPLE_FOREST,                  0x1007,                     ARROWS_10
+MQ Forest Temple Pot Antichamber 1,                         pot,            NONE,                 TEMPLE_FOREST,                  0x110b,                     RECOVERY_HEART
+MQ Forest Temple Pot Antichamber 2,                         pot,            NONE,                 TEMPLE_FOREST,                  0x110c,                     RECOVERY_HEART
+MQ Forest Temple Pot Antichamber 3,                         pot,            NONE,                 TEMPLE_FOREST,                  0x110d,                     BOMBS_5
+MQ Forest Temple Pot Antichamber 4,                         pot,            NONE,                 TEMPLE_FOREST,                  0x110e,                     ARROWS_5
 MQ Fire Temple Early Lower Left Chest,                      chest,          NONE,                 TEMPLE_FIRE,                    0x02,                       RUPEE_BLUE
 MQ Fire Temple Pre-Boss Chest,                              chest,          NONE,                 TEMPLE_FIRE,                    0x07,                       SMALL_KEY_FIRE
 MQ Fire Temple Hammer Chest,                                chest,          NONE,                 TEMPLE_FIRE,                    0x00,                       HAMMER
