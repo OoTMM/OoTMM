@@ -1312,6 +1312,17 @@ MQ Ice Cavern Sheik Song,                                   npc,            NONE
 MQ Ice Cavern GS Compass Room,                              gs,             NONE,                 ICE_CAVERN,                     0x51,                       GS_TOKEN
 MQ Ice Cavern GS Scarecrow,                                 gs,             NONE,                 ICE_CAVERN,                     0x50,                       GS_TOKEN
 MQ Ice Cavern GS Clear Blocks,                              gs,             NONE,                 ICE_CAVERN,                     0x52,                       GS_TOKEN
+MQ Ice Cavern Pot Entrance,                                 pot,            NONE,                 ICE_CAVERN,                     0x0003,                     RECOVERY_HEART
+MQ Ice Cavern Pot First Room 1,                             pot,            NONE,                 ICE_CAVERN,                     0x0105,                     RECOVERY_HEART
+MQ Ice Cavern Pot First Room 2,                             pot,            NONE,                 ICE_CAVERN,                     0x0106,                     RECOVERY_HEART
+MQ Ice Cavern Pot Main Room 1,                              pot,            NONE,                 ICE_CAVERN,                     0x030c,                     FLEXIBLE
+MQ Ice Cavern Pot Main Room 2,                              pot,            NONE,                 ICE_CAVERN,                     0x030d,                     RUPEE_BLUE
+MQ Ice Cavern Pot Main Room 3,                              pot,            NONE,                 ICE_CAVERN,                     0x030f,                     RECOVERY_HEART
+MQ Ice Cavern Pot Main Room 4,                              pot,            NONE,                 ICE_CAVERN,                     0x0312,                     FLEXIBLE
+MQ Ice Cavern Pot Final Corridor 1,                         pot,            NONE,                 ICE_CAVERN,                     0x0605,                     FLEXIBLE
+MQ Ice Cavern Pot Final Corridor 2,                         pot,            NONE,                 ICE_CAVERN,                     0x0606,                     MAGIC_JAR_LARGE
+MQ Ice Cavern Pot Compass Room 1,                           pot,            NONE,                 ICE_CAVERN,                     0x090a,                     BOMBS_5
+MQ Ice Cavern Pot Compass Room 2,                           pot,            NONE,                 ICE_CAVERN,                     0x090b,                     BOMBS_5
 MQ Forest Temple First Room Chest,                          chest,          NONE,                 TEMPLE_FOREST,                  0x03,                       SMALL_KEY_FOREST
 MQ Forest Temple Wolfos Chest,                              chest,          NONE,                 TEMPLE_FOREST,                  0x00,                       SMALL_KEY_FOREST
 MQ Forest Temple Boss Key Chest,                            chest,          NONE,                 TEMPLE_FOREST,                  0x0e,                       BOSS_KEY_FOREST
