@@ -605,7 +605,7 @@ void comboTextAppendItemName(char** b, s16 gi, int flags)
             ambiguous = 0;
         }
     }
-    if((gi | MASK_FOREIGN_GI) == GI_MM_BOMBER_NOTEBOOK)
+    if((gi & ~MASK_FOREIGN_GI) == GI_MM_BOMBER_NOTEBOOK)
     {
         if(comboConfig(CFG_MENU_NOTEBOOK))
             itemName = "the " C1 "Bombers' Tracker";
