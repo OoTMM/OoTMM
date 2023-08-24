@@ -129,6 +129,7 @@ export class LogicPassConfig {
       OOT_SHUFFLE_POTS: settings.shufflePotsOot,
       MM_SHUFFLE_POTS: settings.shufflePotsMm,
       OOT_SHUFFLE_GRASS: settings.shuffleGrassOot,
+      MENU_NOTEBOOK: settings.menuNotebook,
     };
 
     for (const v in exprs) {

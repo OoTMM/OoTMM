@@ -828,6 +828,13 @@ export const SETTINGS = [{
   description: 'Goron spikes can charge midair and keep their charge. Minimum speed for goron spikes is removed.',
   default: true
 }, {
+  key: 'menuNotebook',
+  name: 'Bombers\' Tracker',
+  category: 'items.extensions',
+  type: 'boolean',
+  description: 'Locks the in-game tracker behind the Bombers\' Notebook',
+  default: false
+}, {
   key: 'sharedNutsSticks',
   name: 'Shared Nuts & Sticks',
   category: 'items.shared',
