@@ -54,7 +54,7 @@
   exits:
     "Dodongo Cavern After Staircase": "true"
     "Dodongo Cavern Upper Ledges": "can_hookshot || has_hover_boots || (is_adult && trick(OOT_DC_JUMP))"
-    "Dodongo Cavern Upper Lizalfos": "can_use_sticks || (has_fire && (has_explosives_or_hammer || has_blue_fire_arrows_mudwall))"
+    "Dodongo Cavern Room Before Upper Lizalfos": "can_use_sticks || has_fire"
   locations:
     "MQ Dodongo Cavern Larvae Room Chest": "soul(SOUL_GOHMA_LARVA) && (can_use_sticks || has_fire)"
     "MQ Dodongo Cavern GS Larve Room": "can_use_sticks || has_fire"
@@ -64,6 +64,10 @@
     "Dodongo Cavern Upper Ledges": "soul_lizalfos_dinalfos && (can_use_sticks || has_weapon || can_use_slingshot)"
   locations:
     "MQ Dodongo Cavern GS Upper Lizalfos": "has_explosives_or_hammer"
+    "MQ Dodongo Cavern Pot Miniboss 1": "true"
+    "MQ Dodongo Cavern Pot Miniboss 2": "true"
+    "MQ Dodongo Cavern Pot Miniboss 3": "true"
+    "MQ Dodongo Cavern Pot Miniboss 4": "true"
 "Dodongo Cavern Upper Ledges":
   dungeon: DC
   exits:
@@ -115,3 +119,19 @@
   locations:
     "MQ Dodongo Cavern Chest Under Grave": "true"
     "MQ Dodongo Cavern GS Near Boss": "true"
+"Dodongo Cavern Room Before Upper Lizalfos":
+  dungeon: DC
+  exits:
+    "Dodongo Cavern Upper Lizalfos": "has_explosives_or_hammer || has_blue_fire_arrows_mudwall"
+    "Dodongo Cavern Torch Room": "true"
+  locations:
+    "MQ Dodongo Cavern Pot Before Miniboss 1": "true"
+    "MQ Dodongo Cavern Pot Before Miniboss 2": "true"
+"Dodongo Cavern Room After Upper Lizalfos":
+  dungeon: DC
+  exits:
+    "Dodongo Cavern Upper Lizalfos": "true"
+    "Dodongo Cavern Upper Ledges": "has_bombflowers && (can_use_sticks || has_weapon || can_use_slingshot)"
+  locations:
+    "MQ Dodongo Cavern Pot After Miniboss 1": "true"
+    "MQ Dodongo Cavern Pot After Miniboss 2": "true"
