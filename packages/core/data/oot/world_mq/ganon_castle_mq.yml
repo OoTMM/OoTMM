@@ -26,6 +26,8 @@
     GANON_TRIAL_LIGHT: "soul_lizalfos_dinalfos && soul(SOUL_TORCH_SLUG) && has_light_arrows && has_lens && can_hookshot && small_keys_ganon(3)"
   locations:
     "MQ Ganon Castle Light Trial Chest": "soul_lizalfos_dinalfos && soul(SOUL_TORCH_SLUG) && can_play(SONG_ZELDA) && has_weapon"
+    "MQ Ganon Pot Light End 1": "soul_lizalfos_dinalfos && soul(SOUL_TORCH_SLUG) && has_lens && can_hookshot && small_keys_ganon(3)"
+    "MQ Ganon Pot Light End 2": "soul_lizalfos_dinalfos && soul(SOUL_TORCH_SLUG) && has_lens && can_hookshot && small_keys_ganon(3)"
 "Ganon Castle Forest":
   dungeon: Ganon
   events:
@@ -34,6 +36,8 @@
     "MQ Ganon Castle Forest Trial Key": "can_hookshot"
     "MQ Ganon Castle Forest Trial First Chest": "soul(SOUL_STALFOS) && has_weapon && can_hit_triggers_distance"
     "MQ Ganon Castle Forest Trial Second Chest": "soul(SOUL_STALFOS) && has_weapon && has_fire"
+    "MQ Ganon Pot Forest End 1": "soul(SOUL_STALFOS) && can_play_time"
+    "MQ Ganon Pot Forest End 2": "soul(SOUL_STALFOS) && can_play_time"
 "Ganon Castle Fire":
   dungeon: Ganon
   events:
@@ -44,6 +48,8 @@
     "MQ Ganon Castle SR Fire Back-Left": "has_tunic_goron_strict"
     "MQ Ganon Castle SR Fire High Above Lava": "has_tunic_goron"
     "MQ Ganon Castle SR Fire Front-Left": "has_tunic_goron_strict"
+    "MQ Ganon Pot Fire End 1": "has_tunic_goron_strict && (can_longshot || has_hover_boots) && has(RUPEE_SILVER_GANON_FIRE, 5)"
+    "MQ Ganon Pot Fire End 2": "has_tunic_goron_strict && (can_longshot || has_hover_boots) && has(RUPEE_SILVER_GANON_FIRE, 5)"
 "Ganon Castle Water":
   dungeon: Ganon
   events:
@@ -62,6 +68,8 @@
     "MQ Ganon Castle SR Water Alcove": "is_adult"
     "MQ Ganon Castle SR Water Deep Hole": "true"
     "MQ Ganon Castle SR Water Under Alcove": "true"
+    "MQ Ganon Pot Water End 1": "has(RUPEE_SILVER_GANON_WATER, 5)"
+    "MQ Ganon Pot Water End 2": "has(RUPEE_SILVER_GANON_WATER, 5)"
 "Ganon Castle Spirit":
   dungeon: Ganon
   events:
@@ -74,6 +82,8 @@
     "MQ Ganon Castle Spirit Trial Back Left Sun Chest": "can_hammer && has_fire_arrows && has_mirror_shield && has_bombchu && (soul_iron_knuckle || trick(OOT_HAMMER_WALLS))"
     "MQ Ganon Castle Spirit Trial Front Left Sun Chest": "can_hammer && has_fire_arrows && has_mirror_shield && has_bombchu && (soul_iron_knuckle || trick(OOT_HAMMER_WALLS))"
     "MQ Ganon Castle Spirit Trial Gold Gauntlets Chest": "can_hammer && has_fire_arrows && has_mirror_shield && has_bombchu && (soul_iron_knuckle || trick(OOT_HAMMER_WALLS))"
+    "MQ Ganon Pot Spirit End 1": "has_fire_arrows && has_mirror_shield && can_hammer && has_bombchu && (soul_iron_knuckle || trick(OOT_HAMMER_WALLS))"
+    "MQ Ganon Pot Spirit End 2": "has_fire_arrows && has_mirror_shield && can_hammer && has_bombchu && (soul_iron_knuckle || trick(OOT_HAMMER_WALLS))"
 "Ganon Castle Shadow":
   dungeon: Ganon
   events:
@@ -86,6 +96,8 @@
     "MQ Ganon Castle SR Shadow Back-Left": "has_lens && (has_hover_boots || (can_use_bow && can_hookshot && has_fire))"
     "MQ Ganon Castle SR Shadow Back-Center": "has_lens && (has_hover_boots || (can_use_bow && can_hookshot && has_fire))"
     "MQ Ganon Castle SR Shadow Front-Center": "has_lens && (has_hover_boots || (can_use_bow && can_hookshot))"
+    "MQ Ganon Pot Shadow End 1": "has_lens && (has_hover_boots || (can_hookshot && has_fire && can_use_bow)) && has(RUPEE_SILVER_GANON_SHADOW, 5)"
+    "MQ Ganon Pot Shadow End 2": "has_lens && (has_hover_boots || (can_hookshot && has_fire && can_use_bow)) && has(RUPEE_SILVER_GANON_SHADOW, 5)"
 "Ganon Castle Stairs":
   region: NONE
   exits:
