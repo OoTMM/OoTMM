@@ -71,7 +71,7 @@
 "Dodongo Cavern Upper Ledges":
   dungeon: DC
   exits:
-    "Dodongo Cavern Upper Lizalfos": "true"
+    "Dodongo Cavern Room After Upper Lizalfos": "true"
     "Dodongo Cavern Torch Room": "true"
   events:
     "DC_MQ_SHORTCUT": "true"
