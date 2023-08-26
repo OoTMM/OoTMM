@@ -17,7 +17,23 @@ u16 EnTest7_TriggerWarp(Actor* actor, GameState_Play* play)
         return entrance;
     }
 
-    gIsEntranceOverride = 1;
+    switch (play->sceneId)
+    {
+    case SCE_MM_TEMPLE_WOODFALL:
+    case SCE_MM_TEMPLE_SNOWHEAD:
+    case SCE_MM_TEMPLE_GREAT_BAY:
+    case SCE_MM_TEMPLE_STONE_TOWER:
+    case SCE_MM_TEMPLE_STONE_TOWER_INVERTED:
+    case SCE_MM_SAKON_HIDEOUT:
+    case SCE_MM_LAIR_ODOLWA:
+    case SCE_MM_LAIR_GOHT:
+    case SCE_MM_LAIR_GYORG:
+    case SCE_MM_LAIR_TWINMOLD:
+        break;
+    default:
+        gIsEntranceOverride = 1;
+    }
+
     if (play->sceneId == 0x4f) {
         return 0x2060;
     }

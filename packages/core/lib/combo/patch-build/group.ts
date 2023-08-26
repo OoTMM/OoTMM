@@ -34,6 +34,7 @@ export const PATCH_GROUPS = [
   'OOT_SHUFFLE_POTS',
   'MM_SHUFFLE_POTS',
   'OOT_SHUFFLE_GRASS',
+  'MM_LENIENT_SPIKES',
 ] as const;
 
 export type PatchGroup = typeof PATCH_GROUPS[number];

@@ -821,6 +821,20 @@ export const SETTINGS = [{
   description: 'Add enemy souls into the item pool. Enemies won\'t spawn unless their soul is obtained.',
   default: false
 }, {
+  key: 'lenientSpikes',
+  name: 'Lenient Goron Spikes',
+  category: 'items.extensions',
+  type: 'boolean',
+  description: 'Goron spikes can charge midair and keep their charge. Minimum speed for goron spikes is removed.',
+  default: true
+}, {
+  key: 'menuNotebook',
+  name: 'Bombers\' Tracker',
+  category: 'items.extensions',
+  type: 'boolean',
+  description: 'Locks the in-game tracker behind the Bombers\' Notebook',
+  default: false
+}, {
   key: 'sharedNutsSticks',
   name: 'Shared Nuts & Sticks',
   category: 'items.shared',

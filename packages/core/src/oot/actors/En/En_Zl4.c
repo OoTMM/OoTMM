@@ -12,7 +12,7 @@ void EnZl4_Update6(Actor* actor, GameState_Play* play)
     t = &play->transition;
     t->type = TRANS_TYPE_NORMAL;
     t->gfx = TRANS_GFX_SHORTCUT;
-    t->entrance = 0x0594;
+    t->entrance = 0x023d;
 }
 
 void EnZl4_Update5(Actor* actor, GameState_Play* play)
