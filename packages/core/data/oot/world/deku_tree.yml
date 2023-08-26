@@ -7,7 +7,7 @@
   dungeon: DT
   exits:
     "Deku Tree Slingshot Room": "soul_deku_scrub && has_shield_for_scrubs"
-    "Deku Tree Basement": "has_fire || has_nuts || has_weapon || has_explosives_or_hammer || has_ranged_weapon_child || can_use_sticks"
+    "Deku Tree Basement": "has_fire || has_nuts || has_weapon || has_explosives_or_hammer || has_ranged_weapon || can_use_sticks"
   events:
     STICKS: "can_kill_baba_sticks"
     NUTS: "can_kill_baba_nuts"
@@ -38,24 +38,24 @@
   dungeon: DT
   exits:
     "Deku Tree Lobby": "true"
-    "Deku Tree Basement Back Room": "can_hit_triggers_distance"
-    "Deku Tree Basement Ledge": "trick(OOT_DEKU_SKIP) || is_adult || has_hover_boots"
+    "Deku Tree Basement Back Room": "can_hit_triggers_distance && has_fire_or_sticks"
+    "Deku Tree Basement Ledge": "trick(OOT_DEKU_SKIP) || is_adult || has_hover_boots || climb_anywhere || hookshot_anywhere"
   locations:
     "Deku Tree Basement Chest": "true"
     "Deku Tree GS Basement Gate": "can_damage_skull"
-    "Deku Tree GS Basement Vines": "has_ranged_weapon || can_use_din || has_bombs"
+    "Deku Tree GS Basement Vines": "has_ranged_weapon || can_use_din || has_explosives"
     "Deku Tree Grass Basement Main 1": "can_cut_grass"
     "Deku Tree Grass Basement Main 2": "can_cut_grass"
-    "Deku Tree Grass Eye Switch Room 1": "can_cut_grass"
-    "Deku Tree Grass Eye Switch Room 2": "can_cut_grass"
-    "Deku Tree Grass Eye Switch Room 3": "can_cut_grass"
-    "Deku Tree Grass Eye Switch Room 4": "can_cut_grass"
+    "Deku Tree Grass Eye Switch Room 1": "can_cut_grass && can_hit_triggers_distance && has_fire_or_sticks"
+    "Deku Tree Grass Eye Switch Room 2": "can_cut_grass && can_hit_triggers_distance && has_fire_or_sticks"
+    "Deku Tree Grass Eye Switch Room 3": "can_cut_grass && can_hit_triggers_distance && has_fire_or_sticks"
+    "Deku Tree Grass Eye Switch Room 4": "can_cut_grass && can_hit_triggers_distance && has_fire_or_sticks"
 "Deku Tree Basement Back Room":
   dungeon: DT
   exits:
     "Deku Tree Basement Ledge": "is_child"
   locations:
-    "Deku Tree GS Basement Back Room": "has_explosives_or_hammer && can_collect_distance"
+    "Deku Tree GS Basement Back Room": "has_explosives_or_hammer && (can_collect_distance || (climb_anywhere && (has_explosives || has_ranged_weapon || can_use_din || (age_sword_adult && has(SWORD_BIGGORON)))))"
     "Deku Tree Grass Larva Room 1": "can_cut_grass"
     "Deku Tree Grass Larva Room 2": "can_cut_grass"
 "Deku Tree Basement Ledge":

@@ -83,13 +83,13 @@
   exits:
     "Gerudo Fortress Lower-Center Ledge": "true"
     "Gerudo Fortress Kitchen Bottom": "can_use_bow || can_hookshot || has(GERUDO_CARD)"
-    "Gerudo Fortress Kitchen Ledge Away from Tunnel": "can_hookshot || has_hover_boots"
+    "Gerudo Fortress Kitchen Ledge Away from Tunnel": "can_hookshot || has_hover_boots || climb_anywhere"
 "Gerudo Fortress Kitchen Ledge Away from Tunnel":
   dungeon: GF
   exits:
     "Gerudo Fortress Upper-Center Ledge": "true"
     "Gerudo Fortress Kitchen Bottom": "can_use_bow || can_hookshot || has(GERUDO_CARD)"
-    "Gerudo Fortress Kitchen Ledge Near Tunnel": "can_hookshot || has_hover_boots"
+    "Gerudo Fortress Kitchen Ledge Near Tunnel": "can_hookshot || has_hover_boots || climb_anywhere"
 "Gerudo Fortress Carpenter 4":
   dungeon: GF
   exits:
@@ -105,7 +105,7 @@
   dungeon: GF
   exits:
     "Gerudo Fortress Lower-Left Ledge": "true"
-    "Gerudo Fortress Break Room Top": "can_hookshot"
+    "Gerudo Fortress Break Room Top": "can_hookshot || climb_anywhere"
   events:
     MAGIC: "can_use_bow || can_hookshot || has(GERUDO_CARD)"
     ARROWS: "is_adult && (has(GERUDO_CARD) || can_hookshot)"
@@ -117,4 +117,4 @@
   dungeon: GF
   exits:
     "Gerudo Fortress Above Prison": "true"
-    "Gerudo Fortress Break Room Bottom": "can_hookshot"
+    "Gerudo Fortress Break Room Bottom": "can_hookshot || climb_anywhere"
