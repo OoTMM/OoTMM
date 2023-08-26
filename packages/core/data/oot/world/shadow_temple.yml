@@ -77,7 +77,7 @@
     "Shadow Temple SR Spikes Right": "can_hookshot || climb_anywhere"
     "Shadow Temple SR Spikes Center": "true"
     "Shadow Temple SR Spikes Front Left": "can_hookshot || climb_anywhere"
-    "Shadow Temple SR Spikes Midair": "has_lens && (can_hookshot || climb_anywhere) && (has_weapon || can_use_sticks || can_hammer || has_hover_boots)"
+    "Shadow Temple SR Spikes Midair": "has_lens && (can_hookshot || climb_anywhere) && (has_weapon || can_use_sticks || can_hammer || has_hover_boots || longshot_anywhere)"
     "Shadow Temple Invisible Spike Room": "soul_redead_gibdo && (has_weapon || can_use_sticks || can_use_din || can_hammer)"
 "Shadow Temple Skull Pot":
   dungeon: Shadow
