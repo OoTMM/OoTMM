@@ -977,7 +977,7 @@
 "Mountain Village Path Lower":
   region: PATH_TO_MOUNTAIN_VILLAGE
   events:
-    RUPEES: "can_use_light_arrows"
+    RUPEES: "can_use_light_arrows && soul_tektite && (is_day || (can_break_boulders || can_use_fire_arrows))"
     MAGIC: "event(BOSS_SNOWHEAD)"
   exits:
     "Behind Large Icicles": "true"
@@ -988,9 +988,9 @@
   region: PATH_TO_MOUNTAIN_VILLAGE
   events:
     MAGIC: "true"
-    RUPEES: "can_use_light_arrows"
+    RUPEES: "can_use_light_arrows && soul_tektite && is_day"
   exits:
-    "Mountain Village Path Lower": "can_break_boulders || can_use_fire_arrows || event(BOSS_SNOWHEAD)"
+    "Mountain Village Path Lower": "true"
     "Mountain Village": "true"
 "Mountain Village":
   region: MOUNTAIN_VILLAGE
@@ -1009,7 +1009,7 @@
     MAGIC: "true"
     ARROWS: "true"
     BOMBS: "true"
-    RUPEES: "event(BOSS_SNOWHEAD) || ((can_break_boulders || can_use_fire_arrows) && (second_day || final_day)) || ((can_break_boulders || can_use_fire_arrows) && can_use_light_arrows && first_day)"
+    RUPEES: "event(BOSS_SNOWHEAD) || ((can_break_boulders || can_use_fire_arrows) && (second_day || final_day)) || ((can_break_boulders || can_use_fire_arrows) && can_use_light_arrows && first_day && soul_tektite)"
   locations:
     "Mountain Village Waterfall Chest": "event(BOSS_SNOWHEAD) && can_use_lens"
     "Mountain Village Don Gero Mask": "event(GORON_FOOD)"
@@ -1052,7 +1052,7 @@
   events:
     PICTURE_TINGLE: "has(PICTOGRAPH_BOX)"
     MAGIC: "true"
-    RUPEES: "can_use_light_arrows || event(BOSS_SNOWHEAD)"
+    RUPEES: "(can_use_light_arrows && (soul_tektite || soul_wolfos || ((can_break_boulders || can_use_fire_arrows) && soul(SOUL_SNAPPER)))) || event(BOSS_SNOWHEAD)"
   exits:
     "Mountain Village": "true"
     "Goron Village": "true"
@@ -1118,7 +1118,7 @@
     BOMBS: "true"
     NUTS: "true"
     STICKS: "true"
-    RUPEES: "can_break_boulders || can_use_fire_arrows || can_use_light_arrows"
+    RUPEES: "can_break_boulders || can_use_fire_arrows || (can_use_light_arrows && soul_tektite)"
   locations:
     "Goron Village HP": "has(DEED_SWAMP) && has(MASK_DEKU)"
     "Goron Village Scrub Deed": "has(DEED_SWAMP) && has(MASK_DEKU)"
@@ -1248,7 +1248,7 @@
   region: SNOWHEAD
   events:
     MAGIC: "(event(OPEN_SNOWHEAD_TEMPLE) && can_break_boulders) || event(BOSS_SNOWHEAD)"
-    RUPEES: "(event(OPEN_SNOWHEAD_TEMPLE) || event(BOSS_SNOWHEAD)) && can_use_light_arrows"
+    RUPEES: "(event(OPEN_SNOWHEAD_TEMPLE) || event(BOSS_SNOWHEAD)) && (can_use_light_arrows && soul_wolfos)"
   exits:
     "Snowhead Entrance": "true"
     "Snowhead": "event(BOSS_SNOWHEAD)"
@@ -1649,7 +1649,7 @@
 "Road to Ikana Front":
   region: ROAD_TO_IKANA
   events:
-    RUPEES: "can_use_light_arrows && is_night"
+    RUPEES: "can_use_light_arrows && is_night && soul_bubble"
   exits:
     "Termina Field": "true"
     "Road to Ikana Grotto": "has_mask_goron"
@@ -1674,7 +1674,7 @@
 "Road to Ikana Center":
   region: ROAD_TO_IKANA
   events:
-    RUPEES: "can_use_light_arrows && is_night"
+    RUPEES: "can_use_light_arrows && is_night && soul_bubble"
   exits:
     "Road to Ikana Front": "can_play_epona || (can_goron_bomb_jump && has_bombs)"
     "Road to Ikana Top": "(has(MASK_GARO) || has(MASK_GIBDO)) && (can_hookshot || (can_hookshot_short && trick(MM_SHORT_HOOK_HARD)))"
@@ -1764,7 +1764,7 @@
 "Road to Ikana Top":
   region: ROAD_TO_IKANA
   events:
-    RUPEES: "can_use_light_arrows && is_night"
+    RUPEES: "can_use_light_arrows && is_night && soul_bubble"
   exits:
     "Road to Ikana Center": "true"
     "Ikana Valley": "true"
@@ -1828,7 +1828,7 @@
     MAGIC: "true"
     BOMBS: "true"
     ARROWS: "true"
-    RUPEES: "can_use_light_arrows && is_night"
+    RUPEES: "can_use_light_arrows && is_night && soul_bubble"
   gossip:
     "Ikana Canyon Gossip Upper": "true"
 "Ikana Fairy Fountain":
