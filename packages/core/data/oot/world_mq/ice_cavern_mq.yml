@@ -3,12 +3,21 @@
   exits:
     "Zora Fountain Frozen": "true"
     "Ice Cavern Main": "has_ranged_weapon || has_explosives" #The pot carry is very trick territory; this crystal switch is a problem.
+  locations:
+    "MQ Ice Cavern Pot Entrance": "true"
 "Ice Cavern Main":
   dungeon: IC
   exits:
     "Ice Cavern Map Room": "soul_wolfos && soul_freezard && (has_weapon || can_use_sticks || has_explosives)"
     "Ice Cavern Compass Room": "is_adult && has_blue_fire"
     "Ice Cavern Big Room": "has_blue_fire"
+  locations:
+    "MQ Ice Cavern Pot First Room 1": "true"
+    "MQ Ice Cavern Pot First Room 2": "true"
+    "MQ Ice Cavern Pot Main Room 1": "true"
+    "MQ Ice Cavern Pot Main Room 2": "true"
+    "MQ Ice Cavern Pot Main Room 3": "true"
+    "MQ Ice Cavern Pot Main Room 4": "true"
 "Ice Cavern Map Room":
   dungeon: IC
   events:
@@ -21,6 +30,8 @@
     "MQ Ice Cavern Compass Chest": "true"
     "MQ Ice Cavern Piece of Heart": "has_explosives"
     "MQ Ice Cavern GS Compass Room": "can_play_time || has_blue_fire_arrows || can_boomerang"
+    "MQ Ice Cavern Pot Compass Room 1": "true"
+    "MQ Ice Cavern Pot Compass Room 2": "true"
 "Ice Cavern Big Room":
   dungeon: IC
   locations:
@@ -28,3 +39,5 @@
     "MQ Ice Cavern Sheik Song": "soul(SOUL_STALFOS) && has_weapon && (is_adult || (can_play_time && has_hover_boots))"
     "MQ Ice Cavern GS Scarecrow": "scarecrow_hookshot || (has_hover_boots && (can_longshot || (is_adult && trick(OOT_MQ_ICE_SCARE_HOVER)))) || (is_adult && trick(OOT_MQ_ICE_SCARE_NOTHING))"
     "MQ Ice Cavern GS Clear Blocks": "has_ranged_weapon || has_explosives" #Again, I'm not making people carry pots through boulder hell. Biggoron Sword also works here.
+    "MQ Ice Cavern Pot Final Corridor 1": "is_adult || (can_play_time && has_hover_boots)"
+    "MQ Ice Cavern Pot Final Corridor 2": "is_adult || (can_play_time && has_hover_boots)"
