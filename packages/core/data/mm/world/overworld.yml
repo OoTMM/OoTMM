@@ -1746,7 +1746,8 @@
 "Beneath The Graveyard Night 3":
   region: ENTRANCE
   events:
-    RUPEES: "can_fight || has_weapon_range || has_explosives"
+    RUPEES: "(can_fight || has_weapon_range || has_explosives) && soul_wallmaster"
+    DAMPE_BIG_POE: "has_weapon_range && is_night3"
   exits:
     "Ikana Graveyard": "true"
   locations:
