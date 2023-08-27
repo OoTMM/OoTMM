@@ -7,12 +7,12 @@
 "Beneath The Well North Section":
   dungeon: BtW
   events:
-    WELL_HOT_WATER: "has_bottle && event(FISH) && (has_explosives || has_mask_zora || trick_keg_explosives || trick(MM_WELL_HSW))"
+    WELL_HOT_WATER: "event(FISH) && (has_explosives || has_mask_zora || trick_keg_explosives || trick(MM_WELL_HSW))"
     WATER: "has_bottle"
     FISH: "has_bottle"
     BUGS: "event(WATER) && has_fire_sticks"
     BOMBS: "event(WATER) && has_fire_sticks"
-    RUPEES: "event(WATER) && (can_fight || has_weapon_range || has_explosives) && (soul_wallmaster || (event(BUGS) && soul_keese))"
+    RUPEES: "event(WATER) && (((can_fight || has_weapon_range || has_explosives) && soul_wallmaster) || (event(BUGS) && can_use_light_arrows && soul_keese))"
   locations:
     "Beneath The Well Keese Chest": "event(WATER) && event(BUGS) && can_use_lens"
     "Beneath The Well Pot Left Side 1": "event(WATER) && has_fire_sticks"
@@ -29,7 +29,7 @@
   events:
     STICKS: "can_kill_baba_sticks"
     WATER: "has_bottle"
-    RUPEES: "(can_fight || has_weapon_range || has_explosives) && soul_keese"
+    RUPEES: "((can_fight || has_weapon_range || has_explosives) && soul_wallmaster) || (can_use_light_arrows && soul_keese)"
 "Beneath The Well Cow Hall":
   dungeon: BtW
   events:
@@ -68,7 +68,7 @@
     "Beneath The Well Sun Block": "has(MASK_GIBDO) && soul_redead_gibdo && has_milk"
   events:
     RUPEES: "(can_fight || has_weapon_range || has_explosives) && soul_wallmaster"
-    BUGS: "can_use_fire_arrows || (has_sticks && has_big_poe && has(MASK_GIBDO) && soul_redead_gibdo)"
+    BUGS: "(can_use_fire_arrows || (has_sticks && has_big_poe && has(MASK_GIBDO) && soul_redead_gibdo)) && (can_fight || has_weapon_range || has_explosives || has shield) && has_bottle"
 "Beneath The Well Sun Block":
   dungeon: BtW
   exits:
