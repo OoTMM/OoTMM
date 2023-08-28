@@ -1925,8 +1925,8 @@
     "Stone Tower": "true"
     "Stone Tower Front of Temple": "can_use_elegy"
     "Stone Tower Top Inverted": "can_use_elegy && can_use_light_arrows"
-    "Stone Tower Lower Scarecrow Ledge": "can_scarecrow_hookshot"
-    "Stone Tower Upper Scarecrow Ledge": "can_scarecrow_hookshot"
+    "Stone Tower Lower Scarecrow Ledge": "scarecrow_hookshot"
+    "Stone Tower Upper Scarecrow Ledge": "scarecrow_hookshot"
     "Owl Stone Tower": "true"
   events:
     MAGIC: "true"
@@ -1946,8 +1946,8 @@
     "Stone Tower Top": "can_use_elegy3"
     "Stone Tower Top Inverted": "can_use_elegy && can_use_light_arrows"
     "Stone Tower Temple": "true"
-    "Stone Tower Lower Scarecrow Ledge": "has_mask_goron || has_mask_zora || can_scarecrow_hookshot" # || (can_jumpslash) # Can simply backwalk off the ledge, jumpslash and recoil down to the ledge, but that should be a trick.
-    "Stone Tower Upper Scarecrow Ledge": "can_scarecrow_hookshot"
+    "Stone Tower Lower Scarecrow Ledge": "has_mask_goron || has_mask_zora || scarecrow_hookshot" # || (can_jumpslash) # Can simply backwalk off the ledge, jumpslash and recoil down to the ledge, but that should be a trick.
+    "Stone Tower Upper Scarecrow Ledge": "scarecrow_hookshot"
 "Stone Tower Lower Scarecrow Ledge":
   region: STONE_TOWER
   exits:
