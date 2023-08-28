@@ -1925,6 +1925,8 @@
     "Stone Tower": "true"
     "Stone Tower Front of Temple": "can_use_elegy"
     "Stone Tower Top Inverted": "can_use_elegy && can_use_light_arrows"
+    "Stone Tower Lower Scarecrow Ledge": "can_scarecrow_hookshot"
+    "Stone Tower Upper Scarecrow Ledge": "can_scarecrow_hookshot"
     "Owl Stone Tower": "true"
   events:
     MAGIC: "true"
@@ -1937,27 +1939,6 @@
     "Stone Tower Pot Owl Statue 2": "true"
     "Stone Tower Pot Owl Statue 3": "true"
     "Stone Tower Pot Owl Statue 4": "true"
-    "Stone Tower Pot Lower Scarecrow 01": "scarecrow_hookshot"
-    "Stone Tower Pot Lower Scarecrow 02": "scarecrow_hookshot"
-    "Stone Tower Pot Lower Scarecrow 03": "scarecrow_hookshot"
-    "Stone Tower Pot Lower Scarecrow 04": "scarecrow_hookshot"
-    "Stone Tower Pot Lower Scarecrow 05": "scarecrow_hookshot"
-    "Stone Tower Pot Lower Scarecrow 06": "scarecrow_hookshot"
-    "Stone Tower Pot Lower Scarecrow 07": "scarecrow_hookshot"
-    "Stone Tower Pot Lower Scarecrow 08": "scarecrow_hookshot"
-    "Stone Tower Pot Lower Scarecrow 09": "scarecrow_hookshot"
-    "Stone Tower Pot Lower Scarecrow 10": "scarecrow_hookshot"
-    "Stone Tower Pot Lower Scarecrow 11": "scarecrow_hookshot"
-    "Stone Tower Pot Lower Scarecrow 12": "scarecrow_hookshot"
-    "Stone Tower Pot Higher Scarecrow 1": "scarecrow_hookshot"
-    "Stone Tower Pot Higher Scarecrow 2": "scarecrow_hookshot"
-    "Stone Tower Pot Higher Scarecrow 3": "scarecrow_hookshot"
-    "Stone Tower Pot Higher Scarecrow 4": "scarecrow_hookshot"
-    "Stone Tower Pot Higher Scarecrow 5": "scarecrow_hookshot"
-    "Stone Tower Pot Higher Scarecrow 6": "scarecrow_hookshot"
-    "Stone Tower Pot Higher Scarecrow 7": "scarecrow_hookshot"
-    "Stone Tower Pot Higher Scarecrow 8": "scarecrow_hookshot"
-    "Stone Tower Pot Higher Scarecrow 9": "scarecrow_hookshot"
 "Stone Tower Front of Temple":
   region: STONE_TOWER
   exits:
@@ -1965,6 +1946,47 @@
     "Stone Tower Top": "can_use_elegy3"
     "Stone Tower Top Inverted": "can_use_elegy && can_use_light_arrows"
     "Stone Tower Temple": "true"
+    "Stone Tower Lower Scarecrow Ledge": "has_mask_goron || has_mask_zora || can_scarecrow_hookshot" # || (can_jumpslash) # Can simply backwalk off the ledge, jumpslash and recoil down to the ledge, but that should be a trick.
+    "Stone Tower Upper Scarecrow Ledge": "can_scarecrow_hookshot"
+"Stone Tower Lower Scarecrow Ledge":
+  region: STONE_TOWER
+  exits:
+    "Stone Tower": "true"
+  events:
+    MAGIC: "true"
+    FAIRY: "true"
+    RUPEES: "(can_use_light_arrows && soul_keese) || (can_attack && soul_redead)"
+  locations:
+    "Stone Tower Pot Lower Scarecrow 01": "true"
+    "Stone Tower Pot Lower Scarecrow 02": "true"
+    "Stone Tower Pot Lower Scarecrow 03": "true"
+    "Stone Tower Pot Lower Scarecrow 04": "true"
+    "Stone Tower Pot Lower Scarecrow 05": "true"
+    "Stone Tower Pot Lower Scarecrow 06": "true"
+    "Stone Tower Pot Lower Scarecrow 07": "true"
+    "Stone Tower Pot Lower Scarecrow 08": "true"
+    "Stone Tower Pot Lower Scarecrow 09": "true"
+    "Stone Tower Pot Lower Scarecrow 10": "true"
+    "Stone Tower Pot Lower Scarecrow 11": "true"
+    "Stone Tower Pot Lower Scarecrow 12": "true"
+"Stone Tower Upper Scarecrow Ledge":
+  region: STONE_TOWER
+  exits:
+    "Stone Tower": "true"
+  events:
+    MAGIC: "true"
+    ARROWS: "true"
+    FAIRY: "true"
+  locations:
+    "Stone Tower Pot Higher Scarecrow 1": "true"
+    "Stone Tower Pot Higher Scarecrow 2": "true"
+    "Stone Tower Pot Higher Scarecrow 3": "true"
+    "Stone Tower Pot Higher Scarecrow 4": "true"
+    "Stone Tower Pot Higher Scarecrow 5": "true"
+    "Stone Tower Pot Higher Scarecrow 6": "true"
+    "Stone Tower Pot Higher Scarecrow 7": "true"
+    "Stone Tower Pot Higher Scarecrow 8": "true"
+    "Stone Tower Pot Higher Scarecrow 9": "true"
 "Stone Tower Top Inverted":
   region: STONE_TOWER
   events:
