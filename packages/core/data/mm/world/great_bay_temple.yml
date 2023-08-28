@@ -76,7 +76,7 @@
   exits:
     "Great Bay Temple Baba Room": "true"
     "Great Bay Temple Central Room": "true"
-    "Great Bay Temple Boss Key Room"": "can_use_ice_arrows && can_use_fire_arrows"
+    "Great Bay Temple Boss Key Room": "can_use_ice_arrows && can_use_fire_arrows"
     "Great Bay Temple Green Pipe 2": "event(GB_WATER_WHEEL)"
   locations:
     "Great Bay Temple Compass": "soul(SOUL_BIO_BABA) || can_hookshot || can_use_ice_arrows" # The lilypads from the biobabas aren't here without their souls
