@@ -75,7 +75,7 @@
   dungeon: IST
   exits:
     "Stone Tower Temple Inverted Center": "true"
-    "Stone Tower Temple Inverted Death Armos Maze": "has(MASK_DEKU)"
+    "Stone Tower Temple Inverted Wizzrobe Ledge": "has(MASK_DEKU)"
   events:
     POE: "true"
   locations:
