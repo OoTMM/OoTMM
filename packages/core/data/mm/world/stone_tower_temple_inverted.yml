@@ -36,8 +36,8 @@
     "Stone Tower Temple Inverted Boss Key Room": trick(MM_ISTT_EYEGORE)
   locations:
     "Stone Tower Temple Inverted East Middle Chest": "true"
-    "Stone Tower Temple Inverted Pot Updrafts Bridge 1": "has(MASK_DEKU)"
-    "Stone Tower Temple Inverted Pot Updrafts Bridge 2": "has(MASK_DEKU)"
+    "Stone Tower Temple Inverted Pot Updrafts Bridge 1": "true"
+    "Stone Tower Temple Inverted Pot Updrafts Bridge 2": "true"
 "Stone Tower Temple Inverted East Ledge":
   dungeon: IST
   exits:
@@ -45,10 +45,10 @@
     "Stone Tower Temple Inverted East Bridge": "true"
     "Stone Tower Temple Inverted Wizzrobe": "(soul(SOUL_CHUCHU) || (trick(MM_ISTT_CHUCHU_LESS) && (has_chateau || has_blue_potion || has_green_potion || has_double_magic))) && can_use_light_arrows && cond(trick(MM_ISTT_ENTRY_JUMP), small_keys_st(4), small_keys_st(3))"
   locations:
-    "Stone Tower Temple Inverted Pot Updrafts Ledge 1": "has(MASK_DEKU)"
-    "Stone Tower Temple Inverted Pot Updrafts Ledge 2": "has(MASK_DEKU)"
-    "Stone Tower Temple Inverted Pot Updrafts Ledge 3": "has(MASK_DEKU)"
-    "Stone Tower Temple Inverted Pot Updrafts Ledge 4": "has(MASK_DEKU)"
+    "Stone Tower Temple Inverted Pot Updrafts Ledge 1": "true"
+    "Stone Tower Temple Inverted Pot Updrafts Ledge 2": "true"
+    "Stone Tower Temple Inverted Pot Updrafts Ledge 3": "true"
+    "Stone Tower Temple Inverted Pot Updrafts Ledge 4": "true"
 "Stone Tower Temple Inverted Wizzrobe":
   dungeon: IST
   exits:
