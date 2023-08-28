@@ -118,6 +118,8 @@
   dungeon: ST
   exits:
     "Stone Tower Temple Water Bridge": "true"
+  events:
+    FAIRY: "true"
   locations:
     "Stone Tower Temple Before Water Bridge Chest": "event(STONE_TOWER_BRIDGE_CHEST_SWITCH) || (has_explosives || trick_keg_explosives)"
     "Stone Tower Temple Pot Before Water Bridge 1": "true"
