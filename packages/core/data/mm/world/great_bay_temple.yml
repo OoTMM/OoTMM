@@ -93,14 +93,13 @@
     "Great Bay Temple Pot Compass Room 7": "true"
 "Great Bay Temple Red Pipe 1":
   dungeon: GB
-  events:
-    MAGIC: "true"
-    ARROWS: "true"
   exits:
     "Great Bay Temple Central Room": "true"
     "Great Bay Temple Ice Arrow Room": "small_keys_gb(1)"
   events:
     GB_PIPE_RED: "soul_octorok && can_use_ice_arrows"
+    MAGIC: "true"
+    ARROWS: "true"
   locations:
     "Great Bay Temple Pot Red Pipe Before Wart 1": "true"
     "Great Bay Temple Pot Red Pipe Before Wart 2": "true"
