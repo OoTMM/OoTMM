@@ -37,7 +37,7 @@
     WELL_BIG_POE: "has_bombs && has_weapon_range"
     BUGS: "true"
   locations:
-    "Beneath The Well Cow": (has_hot_water_well || has_hot_water_distance || has_hot_water_er) && can_play_epona"
+    "Beneath The Well Cow": "(has_hot_water_well || has_hot_water_distance || has_hot_water_er) && can_play_epona"
     "Beneath The Well Pot Big Poe 1": "has_bombs"
     "Beneath The Well Pot Big Poe 2": "has_bombs"
     "Beneath The Well Pot Big Poe 3": "has_bombs"
