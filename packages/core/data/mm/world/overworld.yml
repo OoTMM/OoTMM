@@ -1493,7 +1493,7 @@
   exits:
     "Pinnacle Rock Entrance": "true"
   events:
-    ZORA_EGGS_PINNACLE_ROCK: "true" # Are the eggs there without the Deep Python soul?
+    ZORA_EGGS_PINNACLE_ROCK: "true"
     MAGIC: "true"
     FISH: "true"
   locations:
