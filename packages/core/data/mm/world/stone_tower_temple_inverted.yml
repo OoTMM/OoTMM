@@ -64,24 +64,18 @@
   dungeon: IST
   exits:
     "Stone Tower Temple Inverted Wizzrobe": "true"
-    "Stone Tower Temple Inverted Death Armos Maze Near Wizzrobe": "has(MASK_DEKU)"
-  locations:
-    "Stone Tower Temple Inverted Wizrobe Chest": "soul(SOUL_WIZZROBE) && can_hookshot_short"
-"Stone Tower Temple Inverted Death Armos Maze Near Wizzrobe":
-  dungeon: IST
-  exits:
-    "Stone Tower Temple Inverted Wizzrobe Ledge": "true"
     "Stone Tower Temple Inverted Death Armos Maze": "has(MASK_DEKU)"
   events:
     POE: "true"
   locations:
-      "Stone Tower Temple Inverted Pot Poe Wizzrobe Side 1": "true"
-      "Stone Tower Temple Inverted Pot Poe Wizzrobe Side 2": "true"
+    "Stone Tower Temple Inverted Wizrobe Chest": "soul(SOUL_WIZZROBE) && can_hookshot_short"
+    "Stone Tower Temple Inverted Pot Poe Wizzrobe Side 1": "true"
+    "Stone Tower Temple Inverted Pot Poe Wizzrobe Side 2": "true"
 "Stone Tower Temple Inverted Death Armos Maze":
   dungeon: IST
   exits:
     "Stone Tower Temple Inverted Center": "true"
-    "Stone Tower Temple Inverted Death Armos Maze Near Wizzrobe": "has(MASK_DEKU)"
+    "Stone Tower Temple Inverted Death Armos Maze": "has(MASK_DEKU)"
   events:
     POE: "true"
   locations:
