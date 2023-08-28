@@ -66,7 +66,7 @@
     "Stone Tower Temple Inverted Wizzrobe": "true"
     "Stone Tower Temple Inverted Death Armos Maze Near Wizzrobe": "has(MASK_DEKU)"
   locations:
-    "Stone Tower Temple Inverted Wizrobe Chest": "soul(SOUL_WIZZROBE) & can_hookshot_short"
+    "Stone Tower Temple Inverted Wizrobe Chest": "soul(SOUL_WIZZROBE) && can_hookshot_short"
 "Stone Tower Temple Inverted Death Armos Maze Near Wizzrobe":
   dungeon: IST
   exits:
