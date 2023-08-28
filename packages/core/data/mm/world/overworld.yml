@@ -1955,7 +1955,7 @@
   events:
     MAGIC: "true"
     FAIRY: "true"
-    RUPEES: "(can_use_light_arrows && soul_keese) || (can_fight && soul_redead)"
+    RUPEES: "(can_use_light_arrows && soul_keese) || (can_fight && soul_redead_gibdo)"
   locations:
     "Stone Tower Pot Lower Scarecrow 01": "true"
     "Stone Tower Pot Lower Scarecrow 02": "true"
