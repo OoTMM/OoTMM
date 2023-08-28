@@ -8,6 +8,7 @@
   events:
     MAGIC: "true"
     RUPEES: "has_weapon_range"
+    FAIRY: "true"
   exits:
     "Woodfall Temple": "true"
     "Woodfall Temple Main": "has(MASK_DEKU) || can_hookshot_short"
@@ -148,7 +149,7 @@
 "Woodfall Temple Princess Jail":
   dungeon: WF
   events:
-    DEKU_PRINCESS: "has_bottle && has_weapon"
+    DEKU_PRINCESS: "has_weapon"
   exits:
     "Woodfall": "true"
 "Woodfall Temple Boss Access":
