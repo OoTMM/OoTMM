@@ -73,12 +73,10 @@
   dungeon: GB
   events:
     MAGIC: "true"
-    ARROWS: "true"
   exits:
     "Great Bay Temple Baba Room": "true"
     "Great Bay Temple Central Room": "true"
-    "Great Bay Temple Gekko Room": "can_use_ice_arrows && can_use_fire_arrows"
-    "Great Bay Temple Boss Key Ledge": "false" # Placeholder for trick to jump directly to BK chest
+    "Great Bay Temple Boss Key Room"": "can_use_ice_arrows && can_use_fire_arrows"
     "Great Bay Temple Green Pipe 2": "event(GB_WATER_WHEEL)"
   locations:
     "Great Bay Temple Compass": "soul(SOUL_BIO_BABA) || can_hookshot || can_use_ice_arrows" # The lilypads from the biobabas aren't here without their souls
@@ -98,8 +96,6 @@
     "Great Bay Temple Ice Arrow Room": "small_keys_gb(1)"
   events:
     GB_PIPE_RED: "soul_octorok && can_use_ice_arrows"
-    MAGIC: "true"
-    ARROWS: "true"
   locations:
     "Great Bay Temple Pot Red Pipe Before Wart 1": "true"
     "Great Bay Temple Pot Red Pipe Before Wart 2": "true"
@@ -140,29 +136,20 @@
   events:
     GB_PIPE_RED2: "soul(SOUL_CHUCHU) && can_use_ice_arrows"
     MAGIC: "true"
-"Great Bay Temple Gekko Room":
+"Great Bay Temple Boss Key Room":
   dungeon: GB
   exits:
-    "Great Bay Temple Compass Room": "event(GBT_GEKKO_DEFEATED)"
-    "Great Bay Temple Boss Key Ledge": "event(GBT_GEKKO_DEFEATED)"
+    "Great Bay Temple Compass Room": "soul(SOUL_GEKKO)"
   events:
-    GBT_GEKKO_DEFEATED: "soul(SOUL_GEKKO) && can_use_ice_arrows"
-    FROG_4: "has(MASK_DON_GERO) && event(GBT_GEKKO_DEFEATED)"
-"Great Bay Temple Boss Key Ledge":
-  dungeon: GB
-  exits:
-    "Great Bay Temple Compass Room": "true"
-    "Great Bay Temple Gekko Room": "true"
+    FROG_4: "has(MASK_DON_GERO) && soul(SOUL_GEKKO)"
   locations:
-     "Great Bay Temple Boss Key": "true"
+    "Great Bay Temple Boss Key": "soul(SOUL_GEKKO) && can_use_ice_arrows"
 "Great Bay Temple Green Pipe 1":
   dungeon: GB
   exits:
     "Great Bay Temple Central Room": "true"
   events:
     GB_PIPE_GREEN: "true"
-    ARROWS: "true"
-    MAGIC: "true"
   locations:
     "Great Bay Temple Green Pipe 1 Chest": "can_hookshot"
     "Great Bay Temple Pot Green Pipe 1 1": "has_mask_zora" # It's possible to get here without Zora with the Goron Waterwheel trick
