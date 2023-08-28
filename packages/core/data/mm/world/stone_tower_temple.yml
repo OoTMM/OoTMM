@@ -111,9 +111,9 @@
 "Stone Tower Temple Light Arrow Room":
   dungeon: ST
   exits:
-    "Stone Tower Temple Before Water Bridge": "soul(SOUL_GARO) && has_weapon"
+    "Stone Tower Temple Before Water Bridge": "soul(SOUL_GARO)"
   locations:
-    "Stone Tower Temple Light Arrow": "soul(SOUL_GARO) && has_weapon"
+    "Stone Tower Temple Light Arrow": "soul(SOUL_GARO)"
 "Stone Tower Temple Before Water Bridge":
   dungeon: ST
   exits:
