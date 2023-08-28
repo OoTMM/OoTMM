@@ -86,7 +86,7 @@
 "has_milk": "has_bottle && (renewable(MILK) || renewable(BOTTLE_MILK))"
 "has_red_or_blue_potion": "has_red_potion || has_blue_potion"
 "has_zora_egg": "has_bottle && (event(ZORA_EGGS_HOOKSHOT_ROOM) || event(ZORA_EGGS_BARREL_MAZE) || event(ZORA_EGGS_LONE_GUARD) || event(ZORA_EGGS_TREASURE_ROOM) || event(ZORA_EGGS_PINNACLE_ROCK))"
-"has_all_zora_eggs": "has_bottle && (event(ZORA_EGGS_HOOKSHOT_ROOM) && event(ZORA_EGGS_BARREL_MAZE) && event(ZORA_EGGS_LONE_GUARD) && event(ZORA_EGGS_TREASURE_ROOM) && event(ZORA_EGGS_PINNACLE_ROCK))"
+"has_all_zora_eggs": "has_bottle && event(ZORA_EGGS_HOOKSHOT_ROOM) && event(ZORA_EGGS_BARREL_MAZE) && event(ZORA_EGGS_LONE_GUARD) && event(ZORA_EGGS_TREASURE_ROOM) && event(ZORA_EGGS_PINNACLE_ROCK)"
 "has_chateau": "has_bottle && (renewable(CHATEAU) || renewable(BOTTLE_CHATEAU))"
 "has_big_poe": "has_bottle && (event(WELL_BIG_POE) || event(DAMPE_BIG_POE))"
 "has_hot_water_mtn": "has_bottle && (event(GORON_GRAVEYARD_HOT_WATER) || event(TWIN_ISLANDS_HOT_WATER))"
