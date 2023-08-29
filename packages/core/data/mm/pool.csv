@@ -793,16 +793,16 @@ Stone Tower Temple Inverted Wizrobe Chest,        chest,          NONE,         
 Stone Tower Temple Inverted Under Wizrobe Chest,  chest,          NONE,                   TEMPLE_STONE_TOWER,           0x05,                       SMALL_KEY_ST
 Stone Tower Temple Inverted Boss Key,             chest,          NONE,                   TEMPLE_STONE_TOWER,           0x1e,                       BOSS_KEY_ST
 Stone Tower Temple Inverted Giant Mask,           chest,          NONE,                   TEMPLE_STONE_TOWER,           0x1a,                       MASK_GIANT
-Stone Tower Temple Inverted Pot East Ledge 1,     pot,            NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x0209,                     RECOVERY_HEART
-Stone Tower Temple Inverted Pot East Ledge 2,     pot,            NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x020a,                     RECOVERY_HEART
-Stone Tower Temple Inverted Pot East Ledge 3,     pot,            NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x020b,                     ARROWS_10
-Stone Tower Temple Inverted Pot East Ledge 4,     pot,            NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x020c,                     MAGIC_JAR_SMALL
-Stone Tower Temple Inverted Pot Updrafts 1,       pot,            NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x0310,                     ARROWS_10
-Stone Tower Temple Inverted Pot Updrafts 2,       pot,            NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x0311,                     ARROWS_10
-Stone Tower Temple Inverted Pot Updrafts 3,       pot,            NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x0317,                     RECOVERY_HEART
-Stone Tower Temple Inverted Pot Updrafts 4,       pot,            NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x0318,                     RECOVERY_HEART
-Stone Tower Temple Inverted Pot Updrafts 5,       pot,            NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x0319,                     RECOVERY_HEART
-Stone Tower Temple Inverted Pot Updrafts 6,       pot,            NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x031a,                     RECOVERY_HEART
+Stone Tower Temple Inverted Pot Poe Maze Side 1,     pot,            NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x0209,                     RECOVERY_HEART
+Stone Tower Temple Inverted Pot Poe Maze Side 2,     pot,            NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x020b,                     ARROWS_10
+Stone Tower Temple Inverted Pot Poe Wizzrobe Side 1,     pot,            NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x020a,                     RECOVERY_HEART
+Stone Tower Temple Inverted Pot Poe Wizzrobe Side 2,     pot,            NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x020c,                     MAGIC_JAR_SMALL
+Stone Tower Temple Inverted Pot Updrafts Bridge 1,       pot,            NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x0310,                     ARROWS_10
+Stone Tower Temple Inverted Pot Updrafts Bridge 2,       pot,            NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x0311,                     ARROWS_10
+Stone Tower Temple Inverted Pot Updrafts Ledge 1,       pot,            NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x0317,                     RECOVERY_HEART
+Stone Tower Temple Inverted Pot Updrafts Ledge 2,       pot,            NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x0318,                     RECOVERY_HEART
+Stone Tower Temple Inverted Pot Updrafts Ledge 3,       pot,            NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x0319,                     RECOVERY_HEART
+Stone Tower Temple Inverted Pot Updrafts Ledge 4,       pot,            NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x031a,                     RECOVERY_HEART
 Stone Tower Temple Inverted Pot Wizzrobe 1,       pot,            NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x0408,                     ARROWS_10
 Stone Tower Temple Inverted Pot Wizzrobe 2,       pot,            NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x0409,                     BOMBS_5
 Stone Tower Temple Inverted Pot Wizzrobe 3,       pot,            NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x040c,                     RECOVERY_HEART

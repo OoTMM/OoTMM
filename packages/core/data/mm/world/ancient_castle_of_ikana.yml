@@ -25,14 +25,17 @@
     "Ancient Castle of Ikana Pot Left First Room 2": "true"
 "Ancient Castle of Ikana Interior North 2":
   dungeon: ACoI
+  events:
+    MAGIC: "has(MASK_DEKU)"
+    FAIRY: "has(MASK_DEKU)"
   exits:
     "Ancient Castle of Ikana Interior North": "has(MASK_DEKU)"
-    "Ancient Castle of Ikana Interior North 3": "can_use_lens"
+    "Ancient Castle of Ikana Interior North 3": "can_use_lens && has(MASK_DEKU)" # redundant for now, but future proofs for when the trick for doing the previous room Deku-less is added.
   locations:
-    "Ancient Castle of Ikana Pot Left Second Room 1": "true"
-    "Ancient Castle of Ikana Pot Left Second Room 2": "true"
-    "Ancient Castle of Ikana Pot Left Second Room 3": "true"
-    "Ancient Castle of Ikana Pot Left Second Room 4": "true"
+    "Ancient Castle of Ikana Pot Left Second Room 1": "has(MASK_DEKU)" # this jumpslash might need to be a trick
+    "Ancient Castle of Ikana Pot Left Second Room 2": "has(MASK_DEKU)"
+    "Ancient Castle of Ikana Pot Left Second Room 3": "has(MASK_DEKU)"
+    "Ancient Castle of Ikana Pot Left Second Room 4": "has(MASK_DEKU)"
 "Ancient Castle of Ikana Interior North 3":
   dungeon: ACoI
   exits:
@@ -92,15 +95,16 @@
   exits:
     "Ancient Castle of Ikana Behind Block": "true"
     "Ancient Castle of Ikana Throne Room": "true"
-"Ancient Castle of Ikana Throne Room":
-  dungeon: ACoI
-  exits:
-    "Ancient Castle of Ikana After Boss": "soul(SOUL_IGOS) && has_mirror_shield && can_use_fire_arrows && can_fight"
   locations:
     "Ancient Castle of Ikana Boss Pot 1": "true"
     "Ancient Castle of Ikana Boss Pot 2": "true"
     "Ancient Castle of Ikana Boss Pot 3": "true"
     "Ancient Castle of Ikana Boss Pot 4": "true"
+"Ancient Castle of Ikana Throne Room":
+  dungeon: ACoI
+  exits:
+    "Ancient Castle of Ikana After Boss": "soul(SOUL_IGOS) && has_mirror_shield && can_use_fire_arrows && can_fight"
+  locations:
     "Ancient Castle of Ikana Boss Pot 5": "true"
     "Ancient Castle of Ikana Boss Pot 6": "true"
     "Ancient Castle of Ikana Boss Pot 7": "true"

@@ -26,12 +26,6 @@
   locations:
     "Stone Tower Temple Inverted East Lower Chest": "has(MASK_DEKU) && can_use_fire_arrows"
     "Stone Tower Temple Inverted East Upper Chest": "has(MASK_DEKU) && can_use_elegy && event(STONE_TOWER_WATER_CHEST_SWITCH)"
-    "Stone Tower Temple Inverted Pot Updrafts 1": "has(MASK_DEKU)"
-    "Stone Tower Temple Inverted Pot Updrafts 2": "has(MASK_DEKU)"
-    "Stone Tower Temple Inverted Pot Updrafts 3": "has(MASK_DEKU)"
-    "Stone Tower Temple Inverted Pot Updrafts 4": "has(MASK_DEKU)"
-    "Stone Tower Temple Inverted Pot Updrafts 5": "has(MASK_DEKU)"
-    "Stone Tower Temple Inverted Pot Updrafts 6": "has(MASK_DEKU)"
 "Stone Tower Temple Inverted East Bridge":
   dungeon: IST
   events:
@@ -42,6 +36,8 @@
     "Stone Tower Temple Inverted Boss Key Room": trick(MM_ISTT_EYEGORE)
   locations:
     "Stone Tower Temple Inverted East Middle Chest": "true"
+    "Stone Tower Temple Inverted Pot Updrafts Bridge 1": "true"
+    "Stone Tower Temple Inverted Pot Updrafts Bridge 2": "true"
 "Stone Tower Temple Inverted East Ledge":
   dungeon: IST
   exits:
@@ -49,15 +45,15 @@
     "Stone Tower Temple Inverted East Bridge": "true"
     "Stone Tower Temple Inverted Wizzrobe": "(soul(SOUL_CHUCHU) || (trick(MM_ISTT_CHUCHU_LESS) && (has_chateau || has_blue_potion || has_green_potion || has_double_magic))) && can_use_light_arrows && cond(trick(MM_ISTT_ENTRY_JUMP), small_keys_st(4), small_keys_st(3))"
   locations:
-    "Stone Tower Temple Inverted Pot East Ledge 1": "true"
-    "Stone Tower Temple Inverted Pot East Ledge 2": "true"
-    "Stone Tower Temple Inverted Pot East Ledge 3": "true"
-    "Stone Tower Temple Inverted Pot East Ledge 4": "true"
+    "Stone Tower Temple Inverted Pot Updrafts Ledge 1": "true"
+    "Stone Tower Temple Inverted Pot Updrafts Ledge 2": "true"
+    "Stone Tower Temple Inverted Pot Updrafts Ledge 3": "true"
+    "Stone Tower Temple Inverted Pot Updrafts Ledge 4": "true"
 "Stone Tower Temple Inverted Wizzrobe":
   dungeon: IST
   exits:
     "Stone Tower Temple Inverted Wizzrobe Ledge": "soul(SOUL_WIZZROBE) && can_hookshot_short"
-    "Stone Tower Temple Inverted East Ledge": "soul(SOUL_WIZZROBE) && (can_use_light_arrows && small_keys_st(3)) || (can_goron_bomb_jump && has_bombs && small_keys_st(4))"
+    "Stone Tower Temple Inverted East Ledge": "(can_use_light_arrows && small_keys_st(3)) || (can_goron_bomb_jump && has_bombs && small_keys_st(4))"
   locations:
     "Stone Tower Temple Inverted Pot Wizzrobe 1": "can_hookshot"
     "Stone Tower Temple Inverted Pot Wizzrobe 2": "can_hookshot"
@@ -69,15 +65,23 @@
   exits:
     "Stone Tower Temple Inverted Wizzrobe": "true"
     "Stone Tower Temple Inverted Death Armos Maze": "has(MASK_DEKU)"
+  events:
+    POE: "true"
   locations:
-    "Stone Tower Temple Inverted Wizrobe Chest": "soul(SOUL_WIZZROBE)"
+    "Stone Tower Temple Inverted Wizrobe Chest": "soul(SOUL_WIZZROBE) && can_hookshot_short"
+    "Stone Tower Temple Inverted Pot Poe Wizzrobe Side 1": "true"
+    "Stone Tower Temple Inverted Pot Poe Wizzrobe Side 2": "true"
 "Stone Tower Temple Inverted Death Armos Maze":
   dungeon: IST
   exits:
     "Stone Tower Temple Inverted Center": "true"
     "Stone Tower Temple Inverted Wizzrobe Ledge": "has(MASK_DEKU)"
+  events:
+    POE: "true"
   locations:
     "Stone Tower Temple Inverted Under Wizrobe Chest": "can_use_elegy"
+    "Stone Tower Temple Inverted Pot Poe Maze Side 1": "true"
+    "Stone Tower Temple Inverted Pot Poe Maze Side 2": "true"
 "Stone Tower Temple Inverted Center":
   dungeon: IST
   exits:
@@ -112,17 +116,18 @@
 "Stone Tower Temple Inverted Center Bridge":
   dungeon: IST
   exits:
-    "Stone Tower Temple Inverted Pre-Boss": "soul(SOUL_EYEGORE)"
+    "Stone Tower Temple Inverted Pre-Boss": "soul(SOUL_EYEGORE) && (has_explosives || has_arrows || can_hookshot_short || has_mask_zora || has_mask_goron)"
     "Stone Tower Temple Inverted Boss Key Room": "trick(MM_ISTT_EYEGORE) && (has_mask_goron || (has_explosives || (trick_keg_explosives && can_hookshot && small_keys_st(4))))"
     "Stone Tower Temple Inverted Center": "trick(MM_ISTT_EYEGORE) && (has_mask_goron || (has_explosives || (trick_keg_explosives && can_hookshot)))"
   locations:
-    "Stone Tower Temple Inverted Giant Mask": "soul(SOUL_EYEGORE)"
+    "Stone Tower Temple Inverted Giant Mask": "soul(SOUL_EYEGORE) && (has_explosives || has_arrows || can_hookshot_short || has_mask_zora || has_mask_goron)"
 "Stone Tower Temple Inverted Pre-Boss":
   dungeon: IST
   exits:
     "Stone Tower Temple Boss Access": "can_hookshot_short && boss_key(BOSS_KEY_ST)"
   events:
     STONE_TOWER_BRIDGE_CHEST_SWITCH: "can_activate_crystal"
+    MAGIC: "can_hookshot_short"
     BOMBS: "can_hookshot_short"
     ARROWS: "can_hookshot_short"
   locations:

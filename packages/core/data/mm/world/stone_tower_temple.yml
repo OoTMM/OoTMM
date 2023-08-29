@@ -104,20 +104,22 @@
   locations:
     "Stone Tower Temple Wind Room Ledge Chest": "has(MASK_DEKU)"
     "Stone Tower Temple Wind Room Jail Chest": "(has(MASK_DEKU) || can_use_light_arrows) && has_mask_goron"
-    "Stone Tower Temple Pot Wind Room 1": "has(MASK_DEKU)"
-    "Stone Tower Temple Pot Wind Room 2": "has(MASK_DEKU)"
-    "Stone Tower Temple Pot Wind Room 3": "has(MASK_DEKU)"
-    "Stone Tower Temple Pot Wind Room 4": "has(MASK_DEKU)"
+    "Stone Tower Temple Pot Wind Room 1": "has(MASK_DEKU) || can_use_light_arrows"
+    "Stone Tower Temple Pot Wind Room 2": "has(MASK_DEKU) || can_use_light_arrows"
+    "Stone Tower Temple Pot Wind Room 3": "has(MASK_DEKU) || can_use_light_arrows"
+    "Stone Tower Temple Pot Wind Room 4": "has(MASK_DEKU) || can_use_light_arrows"
 "Stone Tower Temple Light Arrow Room":
   dungeon: ST
   exits:
-    "Stone Tower Temple Before Water Bridge": "soul(SOUL_GARO)"
+    "Stone Tower Temple Before Water Bridge": "soul(SOUL_GARO) && (has_weapon || has_mask_goron || can_use_deku_bubble || has_arrows)"
   locations:
-    "Stone Tower Temple Light Arrow": "soul(SOUL_GARO)"
+    "Stone Tower Temple Light Arrow": "soul(SOUL_GARO) && (has_weapon || has_mask_goron || can_use_deku_bubble || has_arrows)"
 "Stone Tower Temple Before Water Bridge":
   dungeon: ST
   exits:
     "Stone Tower Temple Water Bridge": "true"
+  events:
+    FAIRY: "true"
   locations:
     "Stone Tower Temple Before Water Bridge Chest": "event(STONE_TOWER_BRIDGE_CHEST_SWITCH) || (has_explosives || trick_keg_explosives)"
     "Stone Tower Temple Pot Before Water Bridge 1": "true"
@@ -135,4 +137,4 @@
     "Stone Tower Temple Center": "can_goron_bomb_jump"
     "Stone Tower Temple Center Ledge": "(can_goron_bomb_jump && (has_bombs || (small_keys_st(3) && trick_keg_explosives))) && can_use_ice_arrows"
   locations:
-    "Stone Tower Temple Water Bridge Chest": "soul(SOUL_EYEGORE)"
+    "Stone Tower Temple Water Bridge Chest": "soul(SOUL_EYEGORE) && (has_explosives || has_arrows || can_hookshot_short || has_mask_zora || has_mask_goron)"
