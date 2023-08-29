@@ -1782,10 +1782,10 @@
     ARROWS: "true"
   exits:
     "Ikana Graveyard": "true"
-    "Beneath the Graveyard Night 2": "short_hook_anywhere"
+    "Beneath the Graveyard Grave Pit": "short_hook_anywhere"
   locations:
     "Beneath The Graveyard Chest": "soul(SOUL_BAD_BAT) && (can_fight || has_explosives || has_arrows || can_hookshot_short || has(MASK_DEKU))"
-    "Beneath The Graveyard Song of Storms": "soul_iron_knuckle && ((can_fight || has_explosives) && (has_sticks || can_use_fire_arrows))"
+    "Beneath The Graveyard Song of Storms": "soul_iron_knuckle && ((has_weapon || has_mask_goron || has_explosives) && (has_sticks || can_use_fire_arrows))"
     "Beneath The Graveyard Pot Night 1 Early 1": "true"
     "Beneath The Graveyard Pot Night 1 Early 2": "true"
     "Beneath The Graveyard Pot Night 1 Bats 1": "true"
@@ -1798,9 +1798,9 @@
     ARROWS: "true"
   exits:
     "Ikana Graveyard": "true"
-    "Beneath the Graveyard Night 1": "short_hook_anywhere"
+    "Beneath the Graveyard Grave Pit": "short_hook_anywhere"
   locations:
-    "Beneath The Graveyard HP": "soul_iron_knuckle && ((has_explosives || (trick_keg_explosives && can_fight)) && (can_use_lens || short_hook_anywhere))"
+    "Beneath The Graveyard HP": "soul_iron_knuckle && (has_explosives || trick_keg_explosives) && (can_use_lens || short_hook_anywhere))"
     "Beneath The Graveyard Pot Night 2 Early": "true"
     "Beneath The Graveyard Pot Before Pit 1": "true"
     "Beneath The Graveyard Pot Before Pit 2": "true"
@@ -1808,6 +1808,11 @@
     "Beneath The Graveyard Pot After Pit 2": "can_use_lens || short_hook_anywhere"
     "Beneath The Graveyard Pot After Pit 3": "can_use_lens || short_hook_anywhere"
     "Beneath The Graveyard Pot After Pit 4": "can_use_lens || short_hook_anywhere"
+"Beneath The Graveyard Grave Pit":
+  region: IKANA_GRAVEYARD
+  exits:
+    "Beneath the Graveyard Night 1": "true"
+    "Beneath the Graveyard Night 2": "true"
 "Beneath The Graveyard Night 3":
   region: ENTRANCE
   events:
