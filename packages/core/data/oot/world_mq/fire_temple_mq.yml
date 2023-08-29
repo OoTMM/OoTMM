@@ -43,12 +43,15 @@
   locations:
     "MQ Fire Temple Boss Key Chest": "has_tunic_goron && has_fire && can_hookshot"
     "MQ Fire Temple 1f Lava Room Goron Chest": "has_tunic_goron && has_fire && can_hookshot && has_explosives"
-    "MQ Fire Temple GS 1f Lava Room": "true"
+    "MQ Fire Temple GS 1f Lava Room": "has_tunic_goron"
+    "MQ Fire Temple Pot Lava Room Left": "has_tunic_goron"
+    "MQ Fire Temple Pot Lava Room Alcove": "has_tunic_goron"
+    "MQ Fire Temple Pot Lava Room Right": "has_tunic_goron && can_hookshot"
 "Fire Temple Maze Lower":
   dungeon: Fire
   exits:
     "Fire Temple 1f Lava Room": "true"
-    "Fire Temple Maze Upper": "can_hookshot && (trick(OOT_HAMMER_WALLS) || has_explosives)"
+    "Fire Temple Maze Upper": "can_hookshot && can_hammer && (trick(OOT_HAMMER_WALLS) || has_explosives)"
   locations:
     "MQ Fire Temple Maze Lower Chest": "true"
 "Fire Temple Maze Upper":
@@ -60,6 +63,11 @@
     "MQ Fire Temple Maze Upper Chest": "true"
     "MQ Fire Temple Maze Side Room Chest": "true"
     "MQ Fire Temple Compass Chest": "has_explosives"
+    "MQ Fire Temple Pot Grids Above Lava 1": "small_keys_fire(3)"
+    "MQ Fire Temple Pot Grids Above Lava 2": "small_keys_fire(3)"
+    "MQ Fire Temple Pot Bridge Above Lava Room 1": "small_keys_fire(3)"
+    "MQ Fire Temple Pot Bridge Above Lava Room 2": "small_keys_fire(3)"
+    "MQ Fire Temple Pot Bridge Above Lava Room 3": "small_keys_fire(3)"
 "Fire Temple Burning Block":
   dungeon: Fire
   locations:
@@ -78,6 +86,12 @@
     "MQ Fire Temple Flare Dancer Key": "soul(SOUL_FLARE_DANCER)"
     "MQ Fire Temple GS Fire Walls Side Room": "has_hover_boots || can_play_time"
     "MQ Fire Temple GS Fire Walls Middle": "has_explosives"
+    "MQ Fire Temple Pot Fire Maze Room Left 1": "true"
+    "MQ Fire Temple Pot Fire Maze Room Left 2": "true"
+    "MQ Fire Temple Pot Fire Maze Room Right 1": "has_hover_boots || can_play_time"
+    "MQ Fire Temple Pot Fire Maze Room Right 2": "has_hover_boots || can_play_time"
+    "MQ Fire Temple Pot Fire Maze Room Back Right 1": "can_hookshot && can_hammer"
+    "MQ Fire Temple Pot Fire Maze Room Back Right 2": "can_hookshot && can_hammer"
 "Fire Temple Top":
   dungeon: Fire
   locations:
