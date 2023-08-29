@@ -70,7 +70,7 @@
     "Swamp Front": "can_reset_time"
   events:
     STICKS: "true"
-    NUTS: "can_kill_baba_nuts"
+    NUTS: "soul_deku_baba"
     FAIRY: "true"
   locations:
     "Southern Swamp Owl Statue": "has_sticks || has_weapon"
@@ -355,6 +355,7 @@
   region: ENTRANCE
   events:
     SCARECROW: "has_ocarina"
+    FISH: "true"
   exits:
     "Clock Town West": "true"
   locations:
@@ -479,9 +480,9 @@
     SETUP_MEET: "has(MASK_KAFEI) && after(DAY1_PM_01_45) && before(NIGHT1_PM_09_00)"
     MEET_ANJU: "event(SETUP_MEET) && after(NIGHT1_AM_12_00) && before(DAY2_AM_06_00)"
     DELIVER_PENDANT: "has(PENDANT_OF_MEMORIES) && ((after(DAY2_AM_06_00) && before(NIGHT2_PM_09_00)) || (after(DAY3_AM_06_00) && before(DAY3_AM_11_30)))"
-    BUGS: "has_bottle"
-    FISH: "has_bottle"
-    MUSHROOM: "has_bottle && has(MASK_SCENTS)"
+    BUGS: "true"
+    FISH: "true"
+    MUSHROOM: "has(MASK_SCENTS)"
   locations:
     "Stock Pot Inn Guest Room Chest": "has(ROOM_KEY)"
     "Stock Pot Inn Staff Room Chest": "is_night3"
@@ -521,6 +522,8 @@
   exits:
     "Termina Field": "can_use_beans || short_hook_anywhere || (can_goron_bomb_jump && has_bombs)"
     "Astral Observatory": "true"
+  events:
+    FAIRY: "can_get_gossip_fairy"
   locations:
     "Astral Observatory Moon Tear": "event(TEAR_TELESCOPE)"
   gossip:
@@ -534,6 +537,7 @@
     RUPEES: "true"
     BOMBS: "true"
     ARROWS: "true"
+    FAIRY: "can_get_gossip_fairy"
   exits:
     "Clock Town South": "true"
     "Clock Town North": "true"
@@ -577,9 +581,9 @@
     RUPEES: "true"
     BOMBS: "true"
     ARROWS: "true"
-    FISH: "has_bottle"
-    BUGS: "has_bottle"
-    MUSHROOM: "has_bottle && has(MASK_SCENTS)"
+    FISH: "true"
+    BUGS: "true"
+    MUSHROOM: "has(MASK_SCENTS)"
   exits:
     "Termina Field": "true"
   locations:
@@ -587,7 +591,7 @@
 "Peahat Grotto":
   region: ENTRANCE
   events:
-    MUSHROOM: "has_bottle && has(MASK_SCENTS)"
+    MUSHROOM: "has(MASK_SCENTS)"
   exits:
     "Termina Field": "true"
   locations:
@@ -595,8 +599,8 @@
 "Bio Baba Grotto":
   region: ENTRANCE
   events:
-    BUGS: "has_bottle"
-    MUSHROOM: "has_bottle && has(MASK_SCENTS)"
+    BUGS: "true"
+    MUSHROOM: "has(MASK_SCENTS)"
   exits:
     "Termina Field": "true"
   locations:
@@ -616,9 +620,9 @@
     RUPEES: "true"
     BOMBS: "true"
     ARROWS: "true"
-    FISH: "has_bottle"
-    BUGS: "has_bottle"
-    MUSHROOM: "has_bottle && has(MASK_SCENTS)"
+    FISH: "true"
+    BUGS: "true"
+    MUSHROOM: "has(MASK_SCENTS)"
   exits:
     "Termina Field": "true"
   locations:
@@ -626,8 +630,8 @@
 "Scrub Grotto":
   region: ENTRANCE
   events:
-    BUGS: "has_bottle"
-    MUSHROOM: "has_bottle && has(MASK_SCENTS)"
+    BUGS: "true"
+    MUSHROOM: "has(MASK_SCENTS)"
   exits:
     "Termina Field": "true"
   locations:
@@ -640,7 +644,7 @@
     RUPEES: "true"
     BOMBS: "true"
     ARROWS: "true"
-    MUSHROOM: "has_bottle && has(MASK_SCENTS)"
+    MUSHROOM: "has(MASK_SCENTS)"
   exits:
     "Termina Field": "true"
   locations:
@@ -649,9 +653,10 @@
 "Swamp Gossip Grotto":
   region: ENTRANCE
   events:
-    BUGS: "has_bottle"
-    MUSHROOM: "has_bottle && has(MASK_SCENTS)"
+    BUGS: "true"
+    MUSHROOM: "has(MASK_SCENTS)"
     SWAMP_SONG: "has_ocarina && ((has_mask_goron && has_goron_song) || (has(MASK_DEKU) && has(SONG_AWAKENING)) || (has_mask_zora && has(SONG_ZORA)))"
+    FAIRY: "can_get_gossip_fairy"
   exits:
     "Termina Field": "true"
   locations:
@@ -664,8 +669,9 @@
 "Mountain Gossip Grotto":
   region: ENTRANCE
   events:
-    BUGS: "has_bottle"
+    BUGS: "true"
     MOUNTAIN_SONG: "has_ocarina && ((has_mask_goron && has_goron_song) || (has(MASK_DEKU) && has(SONG_AWAKENING)) || (has_mask_zora && has(SONG_ZORA)))"
+    FAIRY: "can_get_gossip_fairy"
   exits:
     "Termina Field": "true"
   locations:
@@ -682,9 +688,10 @@
     RUPEES: "true"
     BOMBS: "true"
     ARROWS: "true"
-    BUGS: "has_bottle"
-    MUSHROOM: "has_bottle && has(MASK_SCENTS)"
+    BUGS: "true"
+    MUSHROOM: "has(MASK_SCENTS)"
     OCEAN_SONG: "has_ocarina && ((has_mask_goron && has_goron_song) || (has(MASK_DEKU) && has(SONG_AWAKENING)) || (has_mask_zora && has(SONG_ZORA)))"
+    FAIRY: "can_get_gossip_fairy"
   exits:
     "Termina Field": "true"
   locations:
@@ -701,9 +708,10 @@
     RUPEES: "true"
     BOMBS: "true"
     ARROWS: "true"
-    BUGS: "has_bottle"
-    MUSHROOM: "has_bottle && has(MASK_SCENTS)"
+    BUGS: "true"
+    MUSHROOM: "has(MASK_SCENTS)"
     CANYON_SONG: "has_ocarina && ((has_mask_goron && has_goron_song) || (has(MASK_DEKU) && has(SONG_AWAKENING)) || (has_mask_zora && has(SONG_ZORA)))"
+    FAIRY: "can_get_gossip_fairy"
   exits:
     "Termina Field": "true"
   locations:
@@ -722,10 +730,11 @@
     RUPEES: "true"
     BOMBS: "true"
     ARROWS: "true"
-    FISH: "has_bottle"
-    MUSHROOM: "has_bottle && has(MASK_SCENTS)"
-    WATER: "has_bottle"
+    FISH: "true"
+    MUSHROOM: "has(MASK_SCENTS)"
+    WATER: "true"
     PICTURE_TINGLE: "has(PICTOGRAPH_BOX)"
+    FAIRY: "can_get_gossip_fairy"
   exits:
     "Swamp Front": "true"
     "Termina Field": "true"
@@ -752,8 +761,8 @@
     RUPEES: "true"
     BOMBS: "true"
     ARROWS: "true"
-    FISH: "has_bottle"
-    MUSHROOM: "has_bottle && has(MASK_SCENTS)"
+    FISH: "true"
+    MUSHROOM: "has(MASK_SCENTS)"
   exits:
     "Road to Southern Swamp": "true"
   locations:
@@ -778,7 +787,8 @@
     BOMBS: "true"
     ARROWS: "true"
     MAGIC: "true"
-    WATER: "has_bottle"
+    WATER: "true"
+    FAIRY: "true"
   locations:
     "Southern Swamp HP": "(has(DEED_LAND) && has(MASK_DEKU)) || (trick(MM_SOUTHERN_SWAMP_SCRUB_HP_GORON) && has_mask_goron)"
     "Southern Swamp Scrub Deed": "has(DEED_LAND)"
@@ -807,7 +817,7 @@
 "Near Swamp Grotto":
   region: ENTRANCE
   events:
-    MUSHROOM: "has_bottle && has(MASK_SCENTS)"
+    MUSHROOM: "has(MASK_SCENTS)"
   exits:
     "Swamp Front": "(has_arrows || can_hookshot) && has_mask_goron"
     "Near Swamp Spider House": "has(MASK_DEKU) || has_mask_zora || event(CLEAN_SWAMP)"
@@ -821,9 +831,9 @@
     RUPEES: "true"
     BOMBS: "true"
     ARROWS: "true"
-    FISH: "has_bottle"
-    BUGS: "has_bottle"
-    MUSHROOM: "has_bottle && has(MASK_SCENTS)"
+    FISH: "true"
+    BUGS: "true"
+    MUSHROOM: "has(MASK_SCENTS)"
   exits:
     "Near Swamp Grotto": "true"
   locations:
@@ -849,7 +859,7 @@
   events:
     KOUME: "has_red_or_blue_potion"
     MEET_KOUME: "true"
-    MUSHROOM: "has_bottle && has(MASK_SCENTS)"
+    MUSHROOM: "has(MASK_SCENTS)"
   locations:
     "Swamp Potion Shop Kotake": "true"
 "Woods of Mystery Grotto":
@@ -863,9 +873,9 @@
     RUPEES: "true"
     BOMBS: "true"
     ARROWS: "true"
-    FISH: "has_bottle"
-    BUGS: "has_bottle"
-    MUSHROOM: "has_bottle && has(MASK_SCENTS)"
+    FISH: "true"
+    BUGS: "true"
+    MUSHROOM: "has(MASK_SCENTS)"
   locations:
     "Woods of Mystery Grotto": "true"
 "Swamp Potion Shop":
@@ -875,7 +885,7 @@
   exits:
     "Swamp Front": "true"
   locations:
-    "Swamp Potion Shop Item 1": "event(MUSHROOM) && shop_price(0x0d) && (first_day || event(MEET_KOUME))"
+    "Swamp Potion Shop Item 1": "has_mushroom && shop_price(0x0d) && (first_day || event(MEET_KOUME))"
     "Swamp Potion Shop Item 2": "shop_price(0x0e) && (first_day || event(MEET_KOUME))"
     "Swamp Potion Shop Item 3": "shop_price(0x0f) && (first_day || event(MEET_KOUME))"
 "Deku Palace Front":
@@ -914,7 +924,7 @@
     "Deku Palace Main": "true"
   events:
     PICTURE_DEKU_KING: "has(PICTOGRAPH_BOX) && has(MASK_DEKU)"
-    RETURN_PRINCESS: "event(DEKU_PRINCESS) && has(MASK_DEKU)"
+    RETURN_PRINCESS: "has_deku_princess && has(MASK_DEKU)"
 "Deku Palace Near Cage":
   region: DEKU_PALACE
   exits:
@@ -936,7 +946,7 @@
     ARROWS: "true"
     MAGIC: "true"
     RUPEES: "true"
-    WATER: "has_bottle"
+    WATER: "true"
   locations:
     "Deku Palace Grotto Chest": "can_use_beans || can_hookshot || (can_hookshot_short && trick(MM_SHORT_HOOK_HARD))"
 #    "Deku Palace Free Bean": "true"
@@ -987,8 +997,6 @@
     "Owl Woodfall": "true"
   events:
     OPEN_WOODFALL_TEMPLE: "has(MASK_DEKU) && can_play(SONG_AWAKENING)"
-    STICKS: "true"
-    NUTS: "true"
 "Woodfall Near Fairy Fountain":
   region: WOODFALL
   exits:
@@ -1026,6 +1034,7 @@
   events:
     RUPEES: "can_use_light_arrows && soul_tektite && (is_day || (can_break_boulders || can_use_fire_arrows))"
     MAGIC: "event(BOSS_SNOWHEAD)"
+    FAIRY: "can_get_gossip_fairy"
   exits:
     "Behind Large Icicles": "true"
     "Mountain Village Path Upper": "can_break_boulders || can_use_fire_arrows || event(BOSS_SNOWHEAD)"
@@ -1057,6 +1066,7 @@
     ARROWS: "true"
     BOMBS: "true"
     RUPEES: "event(BOSS_SNOWHEAD) || ((can_break_boulders || can_use_fire_arrows) && (second_day || final_day)) || ((can_break_boulders || can_use_fire_arrows) && can_use_light_arrows && first_day && soul_tektite)"
+    FAIRY: "true"
   locations:
     "Mountain Village Waterfall Chest": "event(BOSS_SNOWHEAD) && can_use_lens"
     "Mountain Village Don Gero Mask": "event(GORON_FOOD)"
@@ -1079,9 +1089,9 @@
     RUPEES: "true"
     STICKS: "soul_deku_baba"
     NUTS: "soul_deku_baba"
-    BUGS: "has_bottle"
-    FISH: "has_bottle"
-    MUSHROOM: "has_bottle && has(MASK_SCENTS)"
+    BUGS: "true"
+    FISH: "true"
+    MUSHROOM: "has(MASK_SCENTS)"
   locations:
     "Mountain Village Tunnel Grotto": "true"
 "Blacksmith":
@@ -1122,9 +1132,9 @@
     RUPEES: "true"
     STICKS: "soul_deku_baba"
     NUTS: "soul_deku_baba"
-    BUGS: "has_bottle"
-    FISH: "has_bottle"
-    MUSHROOM: "has_bottle && has(MASK_SCENTS)"
+    BUGS: "true"
+    FISH: "true"
+    MUSHROOM: "has(MASK_SCENTS)"
   locations:
     "Twin Islands Ramp Grotto Chest": "true"
 "Twin Islands Frozen Grotto":
@@ -1132,10 +1142,10 @@
   exits:
     "Twin Islands": "true"
   events:
-    TWIN_ISLANDS_HOT_WATER: "has_bottle"
-    WATER: "has_bottle"
+    TWIN_ISLANDS_HOT_WATER: "true"
+    WATER: "true"
     STICKS: "can_kill_baba_sticks"
-    MUSHROOM: "has_bottle && has(MASK_SCENTS)"
+    MUSHROOM: "has(MASK_SCENTS)"
   locations:
     "Twin Islands Frozen Grotto Chest": "(has_explosives || trick_keg_explosives || (trick(MM_KEG_EXPLOSIVES) && event(POWDER_KEG_TRIAL)))"
 "Near Goron Race":
@@ -1182,7 +1192,7 @@
   events:
     MAGIC: "true"
     BOMBS: "true"
-    BUGS: "has_bottle"
+    BUGS: "true"
   exits:
     "Front of Lone Peak Shrine": "true"
   locations:
@@ -1268,9 +1278,9 @@
     RUPEES: "true"
     STICKS: "soul_deku_baba"
     NUTS: "soul_deku_baba"
-    BUGS: "has_bottle"
-    FISH: "has_bottle"
-    MUSHROOM: "has_bottle && has(MASK_SCENTS)"
+    BUGS: "true"
+    FISH: "true"
+    MUSHROOM: "has(MASK_SCENTS)"
   locations:
     "Path to Snowhead Grotto": "true"
 "Snowhead Entrance":
@@ -1285,6 +1295,7 @@
     MAGIC: "true"
     BOMBS: "true"
     ARROWS: "true"
+    FAIRY: "true"
 "Snowhead":
   region: SNOWHEAD
   exits:
@@ -1358,6 +1369,7 @@
     RUPEES: "true"
     MAGIC: "true"
     ARROWS: "true"
+    FAIRY: "true"
   gossip:
     "Milk Road Gossip": "true"
 "Near Romani Ranch":
@@ -1371,6 +1383,7 @@
     ALIENS: "before(NIGHT1_AM_02_30) && has_arrows"
     ARROWS: "true"
     MAGIC: "true"
+    FAIRY: "can_get_gossip_fairy"
   exits:
     "Near Romani Ranch": "true"
     "Cucco Shack": "(after(DAY1_AM_06_00) && before(NIGHT1_PM_08_00)) || (after(DAY2_AM_06_00) && before(NIGHT2_PM_08_00)) || (after(DAY3_AM_06_00) && before(NIGHT3_PM_08_00))"
@@ -1389,6 +1402,7 @@
   region: ENTRANCE
   events:
     RUPEES: "has_weapon_range || has_weapon || can_break_boulders"
+    FAIRY: "can_get_gossip_fairy"
   exits:
     "Romani Ranch": "true"
   locations:
@@ -1397,6 +1411,8 @@
     "Cucco Shack Gossip": "(after(DAY1_AM_06_00) && before(NIGHT1_PM_08_00)) || (after(DAY2_AM_06_00) && before(NIGHT2_PM_08_00)) || (after(DAY3_AM_06_00) && before(NIGHT3_PM_08_00))"
 "Doggy Racetrack":
   region: ENTRANCE
+  events:
+    FAIRY: "can_get_gossip_fairy"
   exits:
     "Romani Ranch": "true"
   locations:
@@ -1443,8 +1459,9 @@
     BOMBS: "true"
     ARROWS: "true"
     RUPEES: "true"
-    BUGS: "has_bottle"
-    FISH: "has_bottle"
+    BUGS: "true"
+    FISH: "true"
+    FAIRY: "true"
   locations:
     "Great Bay Coast Zora Mask": "can_play(SONG_HEALING)"
     "Great Bay Coast HP": "can_use_beans && scarecrow_hookshot"
@@ -1480,8 +1497,8 @@
     RUPEES: "true"
     STICKS: "soul_deku_baba"
     NUTS: "soul_deku_baba"
-    BUGS: "has_bottle"
-    FISH: "has_bottle"
+    BUGS: "true"
+    FISH: "true"
   exits:
     "Great Bay Coast": "true"
   locations:
@@ -1519,8 +1536,9 @@
   exits:
     "Pinnacle Rock Entrance": "true"
   events:
-    ZORA_EGGS_PINNACLE_ROCK: "has_bottle"
+    ZORA_EGGS_PINNACLE_ROCK: "true"
     MAGIC: "true"
+    FISH: "true"
   locations:
     "Pinnacle Rock Chest 1": "true"
     "Pinnacle Rock Chest 2": "true"
@@ -1541,13 +1559,15 @@
   exits:
     "Great Bay Coast": "true"
   locations:
-    "Laboratory Zora Song": "event(ZORA_EGGS_HOOKSHOT_ROOM) && event(ZORA_EGGS_BARREL_MAZE) && event(ZORA_EGGS_LONE_GUARD) && event(ZORA_EGGS_TREASURE_ROOM) && event(ZORA_EGGS_PINNACLE_ROCK) && has_mask_zora && has_ocarina"
-    "Laboratory Fish HP": "has_bottle"
+    "Laboratory Zora Song": "has_all_zora_eggs && has_mask_zora && has_ocarina"
+    "Laboratory Fish HP": "has_fish"
 "Zora Cape":
   region: ZORA_CAPE
   events:
     MAGIC: "true"
-    RUPEES: "(can_fight || has_explosives || has_arrows) && is_night"
+    RUPEES: "(can_fight || has_explosives || has_arrows) && is_night && soul_like_like"
+    FISH: "true"
+    FAIRY: "can_get_gossip_fairy"
   exits:
     "Great Bay Coast": "true"
     "Zora Cape Near Hall": "has_mask_zora"
@@ -1576,8 +1596,8 @@
     RUPEES: "true"
     STICKS: "soul_deku_baba"
     NUTS: "soul_deku_baba"
-    FISH: "has_bottle"
-    BUGS: "has_bottle"
+    FISH: "true"
+    BUGS: "true"
   exits:
     "Great Bay Coast": "true"
   locations:
@@ -1704,8 +1724,8 @@
     BOMBS: "true"
     ARROWS: "true"
     RUPEES: "true"
-    FISH: "has_bottle"
-    BUGS: "has_bottle"
+    FISH: "true"
+    BUGS: "true"
     STICKS: "soul_deku_baba"
     NUTS: "soul_deku_baba"
   exits:
@@ -1716,6 +1736,7 @@
   region: ROAD_TO_IKANA
   events:
     RUPEES: "can_use_light_arrows && is_night && soul_bubble"
+    FAIRY: "can_get_gossip_fairy || scarecrow_hookshot"
   exits:
     "Road to Ikana Front": "can_play_epona || short_hook_anywhere || (can_goron_bomb_jump && has_bombs)"
     "Road to Ikana Top": "((has(MASK_GARO) || has(MASK_GIBDO)) && (can_hookshot || (can_hookshot_short && trick(MM_SHORT_HOOK_HARD)))) || short_hook_anywhere"
@@ -1748,8 +1769,8 @@
     RUPEES: "true"
     STICKS: "soul_deku_baba"
     NUTS: "soul_deku_baba"
-    FISH: "has_bottle"
-    BUGS: "has_bottle"
+    FISH: "true"
+    BUGS: "true"
   exits:
     "Ikana Graveyard": "true"
   locations:
@@ -1789,6 +1810,7 @@
 "Beneath The Graveyard Night 3":
   region: ENTRANCE
   events:
+    ARROWS: "true"
     RUPEES: "(can_fight || has_weapon_range || has_explosives) && soul_wallmaster"
     DAMPE_BIG_POE: "has_weapon_range && is_night3"
   exits:
@@ -1814,6 +1836,8 @@
     "Ikana Valley": "true"
 "Ikana Valley":
   region: IKANA_CANYON
+  events:
+    FAIRY: "can_get_gossip_fairy"
   exits:
     "Road to Ikana Top": "true"
     "Ikana Canyon": "(((can_use_ice_arrows && soul_octorok) || trick(MM_ICELESS_IKANA)) && can_hookshot) || short_hook_anywhere"
@@ -1839,8 +1863,8 @@
     RUPEES: "true"
     STICKS: "soul_deku_baba"
     NUTS: "soul_deku_baba"
-    FISH: "has_bottle"
-    BUGS: "has_bottle"
+    FISH: "true"
+    BUGS: "true"
   locations:
     "Ikana Valley Grotto": "true"
 "Sakon Hideout":
@@ -1873,6 +1897,7 @@
     BOMBS: "true"
     ARROWS: "true"
     RUPEES: "can_use_light_arrows && is_night && soul_bubble"
+    FAIRY: "true"
     PICTURE_TINGLE: "has(PICTOGRAPH_BOX)"
   gossip:
     "Ikana Canyon Gossip Upper": "true"
@@ -1913,6 +1938,7 @@
     MAGIC: "true"
     ARROWS: "true"
     RUPEES: "true"
+    FAIRY: "true"
   exits:
     "Beneath The Well End": "true"
     "Ikana Castle Entrance": "can_use_light_arrows || short_hook_anywhere"
@@ -1925,9 +1951,8 @@
   exits:
     "Ikana Canyon": "true"
     "Stone Tower Top": "((can_use_elegy3 || (can_use_elegy2 && trick(MM_ONE_MASK_STONE_TOWER))) && can_hookshot) || (can_use_elegy3 && short_hook_anywhere && trick(MM_OOB_MOVEMENT))"
-    "Stone Tower Front of Temple": "can_use_elegy3 && short_hook_anywhere && trick(MM_OOB_MOVEMENT)"
-    "Stone Tower Side Low": "(can_use_elegy3 || (can_use_elegy2 && trick(MM_ONE_MASK_STONE_TOWER))) && scarecrow_hookshot"
-    "Stone Tower Side High": "((can_use_elegy3 || (can_use_elegy2 && trick(MM_ONE_MASK_STONE_TOWER))) && can_hookshot) || (can_use_elegy3 && short_hook_anywhere)"
+    "Stone Tower Lower Scarecrow Ledge": "(can_use_elegy3 || (can_use_elegy2 && trick(MM_ONE_MASK_STONE_TOWER))) && scarecrow_hookshot"
+    "Stone Tower Upper Sccarecrow Ledge": "((can_use_elegy3 || (can_use_elegy2 && trick(MM_ONE_MASK_STONE_TOWER))) && can_hookshot) || (can_use_elegy3 && short_hook_anywhere)"
   locations:
     "Stone Tower Pot Climb 1": "can_hookshot_short"
     "Stone Tower Pot Climb 2": "can_hookshot_short"
@@ -1937,32 +1962,26 @@
     "Stone Tower": "true"
     "Stone Tower Front of Temple": "can_use_elegy || (short_hook_anywhere && trick(MM_OOB_MOVEMENT))"
     "Stone Tower Top Inverted": "can_use_elegy && can_use_light_arrows"
+    "Stone Tower Lower Scarecrow Ledge": "has_mask_goron || scarecrow_hookshot"
+    "Stone Tower Upper Scarecrow Ledge": "scarecrow_hookshot || short_hook_anywhere"
     "Owl Stone Tower": "true"
-    "Stone Tower Side Low": "has_mask_goron || scarecrow_hookshot"
-    "Stone Tower Side High": "scarecrow_hookshot || short_hook_anywhere"
 "Stone Tower Front of Temple":
   region: STONE_TOWER
-  events:
-    MAGIC: "has_mask_goron || has_mask_zora || (scarecrow_hookshot && can_fight)"
-    BOMBS: "has_mask_goron || has_mask_zora || (scarecrow_hookshot && can_fight)"
-    ARROWS: "has_mask_goron || has_mask_zora || (scarecrow_hookshot && can_fight)"
-    RUPEES: "has_mask_goron || has_mask_zora || (scarecrow_hookshot && can_fight)"
   exits:
     "Stone Tower": "true"
     "Stone Tower Top": "can_use_elegy3 || (can_use_elegy2 && trick(MM_ONE_MASK_STONE_TOWER) && short_hook_anywhere)"
     "Stone Tower Top Inverted": "can_use_elegy && can_use_light_arrows"
     "Stone Tower Temple": "true"
-    "Stone Tower Side Low": "has_mask_goron || has_mask_zora || scarecrow_hookshot || (short_hook_anywhere && trick(MM_OOB_MOVEMENT))"
-    "Stone Tower Side High": "short_hook_anywhere || scarecrow_hookshot"
-"Stone Tower Side Low":
+    "Stone Tower Lower Scarecrow Ledge": "has_mask_goron || has_mask_zora || scarecrow_hookshot" # || (can_jumpslash) # Can simply backwalk off the ledge, jumpslash and recoil down to the ledge, but that should be a trick.
+    "Stone Tower Upper Scarecrow Ledge": "scarecrow_hookshot"
+"Stone Tower Lower Scarecrow Ledge":
   region: STONE_TOWER
-  events:
-    MAGIC: "true"
-    BOMBS: "true"
-    ARROWS: "true"
-    RUPEES: "can_fight && soul_redead_gibdo"
   exits:
     "Stone Tower": "true"
+  events:
+    MAGIC: "true"
+    FAIRY: "true"
+    RUPEES: "(can_use_light_arrows && soul_keese) || (can_fight && soul_redead_gibdo)"
   locations:
     "Stone Tower Pot Lower Scarecrow 01": "true"
     "Stone Tower Pot Lower Scarecrow 02": "true"
@@ -1976,14 +1995,15 @@
     "Stone Tower Pot Lower Scarecrow 10": "true"
     "Stone Tower Pot Lower Scarecrow 11": "true"
     "Stone Tower Pot Lower Scarecrow 12": "true"
-"Stone Tower Side High":
+"Stone Tower Upper Scarecrow Ledge":
   region: STONE_TOWER
-  events:
-    MAGIC: "true"
-    BOMBS: "true"
-    ARROWS: "true"
   exits:
     "Stone Tower": "true"
+    "Stone Tower Front of Temple": "short_hook_anywhere && trick(MM_OOB_MOVEMENT)"
+  events:
+    MAGIC: "true"
+    ARROWS: "true"
+    FAIRY: "true"
   locations:
     "Stone Tower Pot Higher Scarecrow 1": "true"
     "Stone Tower Pot Higher Scarecrow 2": "true"
@@ -1996,6 +2016,8 @@
     "Stone Tower Pot Higher Scarecrow 9": "true"
 "Stone Tower Top Inverted":
   region: STONE_TOWER
+  events:
+    BUGS: "true"
   exits:
     "Stone Tower Temple Inverted": "true"
     "Stone Tower Top": "can_use_light_arrows"
@@ -2003,10 +2025,10 @@
 "Stone Tower Top Inverted Upper":
   region: STONE_TOWER
   events:
-    MAGIC: "can_use_beans"
-    BOMBS: "can_use_beans"
-    RUPEES: "can_use_beans"
-    BUGS: "has_bottle"
+    MAGIC: "true"
+    BOMBS: "true"
+    RUPEES: "true"
+    FAIRY: "true"
   exits:
     "Stone Tower Top Inverted": "true"
   locations:

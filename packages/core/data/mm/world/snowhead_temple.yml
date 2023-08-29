@@ -108,6 +108,8 @@
   dungeon: SH
   exits:
     "Snowhead Temple Center Level 1": "true"
+  events:
+    FAIRY: "true"
   locations:
     "Snowhead Temple Central Room Bottom": "has_mask_goron"
     "Snowhead Temple Pot Central Room Bottom 1": "true"

@@ -78,7 +78,7 @@
     "Pirate Fortress Interior": "true"
   events:
     FORTRESS_BEEHIVE: "has(MASK_STONE) && can_hookshot_short && (has_arrows || can_use_deku_bubble)"
-    ZORA_EGGS_HOOKSHOT_ROOM: "can_hookshot_short && has_mask_zora && has_bottle && event(FORTRESS_BEEHIVE)"
+    ZORA_EGGS_HOOKSHOT_ROOM: "can_hookshot_short && has_mask_zora && event(FORTRESS_BEEHIVE)"
   locations:
     "Pirate Fortress Interior Hookshot": "event(FORTRESS_BEEHIVE)"
 "Pirate Fortress Barrel Maze Entry":
@@ -103,7 +103,7 @@
     "Pirate Fortress Barrel Maze": "can_fight && can_evade_gerudo"
     "Pirate Fortress Barrel Maze Exit": "true"
   events:
-    ZORA_EGGS_BARREL_MAZE: "can_hookshot_short && has_mask_zora && has_bottle"
+    ZORA_EGGS_BARREL_MAZE: "can_hookshot_short && has_mask_zora"
     ARROWS: "true"
     RUPEES: "true"
   locations:
@@ -132,7 +132,7 @@
     "Pirate Fortress Lone Guard": "can_fight && can_evade_gerudo"
     "Pirate Fortress Lone Guard Exit": "true"
   events:
-    ZORA_EGGS_LONE_GUARD: "can_hookshot_short && has_mask_zora && has_bottle"
+    ZORA_EGGS_LONE_GUARD: "can_hookshot_short && has_mask_zora"
     ARROWS: "true"
   locations:
     "Pirate Fortress Interior Aquarium": "has_mask_zora && can_hookshot_short"
@@ -162,7 +162,7 @@
     "Pirate Fortress Treasure Room": "can_fight && can_evade_gerudo"
     "Pirate Fortress Treasure Room Exit": "true"
   events:
-    ZORA_EGGS_TREASURE_ROOM: "can_hookshot_short && has_mask_zora && has_bottle"
+    ZORA_EGGS_TREASURE_ROOM: "can_hookshot_short && has_mask_zora"
     ARROWS: "true"
   locations:
     "Pirate Fortress Interior Pot Guarded 1": "true"
