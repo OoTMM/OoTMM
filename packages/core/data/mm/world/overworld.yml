@@ -1800,7 +1800,7 @@
     "Ikana Graveyard": "true"
     "Beneath the Graveyard Grave Pit": "short_hook_anywhere"
   locations:
-    "Beneath The Graveyard HP": "soul_iron_knuckle && (has_explosives || trick_keg_explosives) && (can_use_lens || short_hook_anywhere))"
+    "Beneath The Graveyard HP": "soul_iron_knuckle && (has_explosives || trick_keg_explosives) && (can_use_lens || short_hook_anywhere)"
     "Beneath The Graveyard Pot Night 2 Early": "true"
     "Beneath The Graveyard Pot Before Pit 1": "true"
     "Beneath The Graveyard Pot Before Pit 2": "true"
