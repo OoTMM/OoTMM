@@ -114,7 +114,6 @@
   dungeon: IST
   exits:
     "Stone Tower Temple Inverted Center Bridge": "small_keys_st(4)"
-    "Stone Tower Temple Inverted Center": "true"
 "Stone Tower Temple Inverted Center Bridge":
   dungeon: IST
   exits:
