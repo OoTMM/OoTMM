@@ -58,56 +58,108 @@
   region: MILK_ROAD
   exits:
     "Milk Road": "can_reset_time"
+  events:
+    MAGIC: "true"
+    ARROWS: "true"
+    FAIRY: "true"
   locations:
     "Milk Road Owl Statue": "has_sticks || has_weapon"
 "Owl Swamp":
   region: SOUTHERN_SWAMP
   exits:
     "Swamp Front": "can_reset_time"
+  events:
+    STICKS: "true"
+    NUTS: "can_kill_baba_nuts"
+    FAIRY: "true"
   locations:
     "Southern Swamp Owl Statue": "has_sticks || has_weapon"
 "Owl Woodfall":
   region: WOODFALL
   exits:
     "Woodfall Shrine": "can_reset_time"
+  events:
+    STICKS: "true"
+    NUTS: "true"
+    FAIRY: "true"
   locations:
     "Woodfall Owl Statue": "has_sticks || has_weapon"
+    "Woodfall Near Owl Chest": "has(MASK_DEKU) || can_hookshot"
+    "Woodfall Pot 1": "true"
+    "Woodfall Pot 2": "true"
+    "Woodfall Pot 3": "true"
 "Owl Mountain":
   region: MOUNTAIN_VILLAGE
   exits:
     "Mountain Village": "can_reset_time"
+  events:
+    MAGIC: "true"
+    ARROWS: "true"
+    BOMBS: "true"
+    FAIRY: "true"
   locations:
     "Mountain Village Owl Statue": "has_sticks || has_weapon"
 "Owl Snowhead":
   region: SNOWHEAD
   exits:
     "Snowhead Entrance": "can_reset_time"
+  events:
+    MAGIC: "true"
+    ARROWS: "true"
+    BOMBS: "true"
+    FAIRY: "true"
   locations:
     "Snowhead Owl Statue": "has_sticks || has_weapon"
 "Owl Great Bay":
   region: GREAT_BAY_COAST
   exits:
     "Great Bay Coast": "can_reset_time"
+    "Tingle Great Bay": "can_hookshot || has_arrows"
+  events:
+    PICTURE_TINGLE: "has(PICTOGRAPH_BOX)"
   locations:
     "Great Bay Coast Owl Statue": "has_sticks || has_weapon"
 "Owl Zora Cape":
   region: ZORA_CAPE
   exits:
     "Zora Cape Peninsula": "can_reset_time"
+  events:
+    MAGIC: "true"
+    ARROWS: "true"
+    BOMBS: "true"
+    FAIRY: "true"
   locations:
     "Zora Cape Owl Statue": "has_sticks || has_weapon"
+    "Zora Cape Pot Near Owl Statue 1": "true"
+    "Zora Cape Pot Near Owl Statue 2": "true"
+    "Zora Cape Pot Near Owl Statue 3": "true"
+    "Zora Cape Pot Near Owl Statue 4": "true"
 "Owl Ikana":
   region: IKANA_CANYON
   exits:
     "Ikana Canyon": "can_reset_time"
+  events:
+    MAGIC: "true"
+    ARROWS: "true"
+    BOMBS: "true"
+    FAIRY: "true"
   locations:
     "Ikana Canyon Owl Statue": "has_sticks || has_weapon"
 "Owl Stone Tower":
   region: STONE_TOWER
   exits:
     "Stone Tower Top": "can_reset_time"
+  events:
+    MAGIC: "true"
+    ARROWS: "true"
+    BOMBS: "true"
+    FAIRY: "true"
   locations:
     "Stone Tower Owl Statue": "has_sticks || has_weapon"
+    "Stone Tower Pot Owl Statue 1": "true"
+    "Stone Tower Pot Owl Statue 2": "true"
+    "Stone Tower Pot Owl Statue 3": "true"
+    "Stone Tower Pot Owl Statue 4": "true"
 "Oath to Order":
   region: GIANT_DREAM
   locations:
@@ -139,8 +191,8 @@
     CLOCK_TOWN_SCRUB: "has(MOON_TEAR)"
     MAIL_LETTER: "has(LETTER_TO_KAFEI) && before(DAY2_AM_11_30)"
   locations:
-    "Clock Town South Chest Lower": "can_hookshot || (has(MASK_DEKU) && event(CLOCK_TOWN_SCRUB)) || trick(MM_SCT_NOTHING) || can_goron_bomb_jump"
-    "Clock Town South Chest Upper": "(can_hookshot || (has(MASK_DEKU) && event(CLOCK_TOWN_SCRUB)) || (can_goron_bomb_jump && can_hookshot_short)) && final_day"
+    "Clock Town South Chest Lower": "can_hookshot || short_hook_anywhere || (has(MASK_DEKU) && event(CLOCK_TOWN_SCRUB)) || trick(MM_SCT_NOTHING) || can_goron_bomb_jump"
+    "Clock Town South Chest Upper": "(can_hookshot || short_hook_anywhere || (has(MASK_DEKU) && event(CLOCK_TOWN_SCRUB)) || (can_goron_bomb_jump && can_hookshot_short)) && final_day"
     "Clock Town Platform HP": "true"
     "Clock Town Business Scrub": "event(CLOCK_TOWN_SCRUB)"
     "Clock Town Post Box": "has(MASK_POSTMAN)"
@@ -223,9 +275,9 @@
     "Chest Game": "before(NIGHT1_PM_10_00) || (after(DAY2_AM_06_00) && before(NIGHT2_PM_10_00)) || (after(DAY3_AM_06_00) && before(NIGHT3_PM_10_00))"
     "Honey & Darling Game": "before(NIGHT1_PM_10_00) || (after(DAY2_AM_06_00) && before(NIGHT2_PM_10_00)) || (after(DAY3_AM_06_00) && before(NIGHT3_PM_10_00))"
     "Stock Pot Inn": "has(ROOM_KEY) || between(DAY1_AM_08_00, NIGHT1_PM_08_00) || between(DAY2_AM_08_00, NIGHT2_PM_08_00) || after(DAY3_AM_08_00)"
-    "Stock Pot Inn Roof": "has(MASK_DEKU)"
+    "Stock Pot Inn Roof": "has(MASK_DEKU) || short_hook_anywhere"
     "Milk Bar": "between(DAY1_AM_10_00, NIGHT1_PM_09_00) || between(DAY2_AM_10_00, NIGHT2_PM_09_00) || between(DAY3_AM_10_00, NIGHT3_PM_09_00) || (has(MASK_ROMANI) && (between(NIGHT1_PM_10_00, NIGHT1_AM_05_00) || between(NIGHT2_PM_10_00, NIGHT2_AM_05_00) || after(NIGHT3_PM_10_00)))"
-    "Astral Observatory Passage": "event(BOMBER_CODE) || trick(MM_BOMBER_SKIP)"
+    "Astral Observatory Passage": "event(BOMBER_CODE) || trick(MM_BOMBER_SKIP) || short_hook_anywhere"
   events:
     GUESS_BOMBER: "trick(MM_BOMBER_SKIP)"
     BOMBERS_EAST1: "event(HIDE_SEEK1)"
@@ -467,7 +519,7 @@
 "Astral Observatory Balcony":
   region: TERMINA_FIELD
   exits:
-    "Termina Field": "can_use_beans || (can_goron_bomb_jump && has_bombs)"
+    "Termina Field": "can_use_beans || short_hook_anywhere || (can_goron_bomb_jump && has_bombs)"
     "Astral Observatory": "true"
   locations:
     "Astral Observatory Moon Tear": "event(TEAR_TELESCOPE)"
@@ -492,7 +544,7 @@
     "Milk Road": "true"
     "Great Bay Fence": "can_play_epona || (can_goron_bomb_jump && has_bombs)"
     "Road to Ikana Front": "true"
-    "Astral Observatory Balcony": "has(MASK_DEKU) || (can_goron_bomb_jump && has_bombs)"
+    "Astral Observatory Balcony": "has(MASK_DEKU) || short_hook_anywhere || (can_goron_bomb_jump && has_bombs)"
     "Grass Grotto": "true"
     "Peahat Grotto": "true"
     "Bio Baba Grotto": "can_break_boulders"
@@ -937,11 +989,6 @@
     OPEN_WOODFALL_TEMPLE: "has(MASK_DEKU) && can_play(SONG_AWAKENING)"
     STICKS: "true"
     NUTS: "true"
-  locations:
-    "Woodfall Near Owl Chest": "has(MASK_DEKU) || can_hookshot"
-    "Woodfall Pot 1": "true"
-    "Woodfall Pot 2": "true"
-    "Woodfall Pot 3": "true"
 "Woodfall Near Fairy Fountain":
   region: WOODFALL
   exits:
@@ -1388,7 +1435,6 @@
     "Laboratory": "true"
     "Zora Cape": "true"
     "Ocean Spider House": "true"
-    "Tingle Great Bay": "can_hookshot || has_arrows"
     "Great Bay Grotto": "true"
     "GBC Near Cow Grotto": "can_hookshot"
     "Owl Great Bay": "true"
@@ -1623,11 +1669,6 @@
     "Zora Hall": "true"
     "Great Bay Temple": "has_mask_zora && can_hookshot && can_play(SONG_ZORA)"
     "Owl Zora Cape": "true"
-  locations:
-    "Zora Cape Pot Near Owl Statue 1": "true"
-    "Zora Cape Pot Near Owl Statue 2": "true"
-    "Zora Cape Pot Near Owl Statue 3": "true"
-    "Zora Cape Pot Near Owl Statue 4": "true"
 "Behind Gorman Fence":
   region: MILK_ROAD
   exits:
@@ -1653,7 +1694,7 @@
   exits:
     "Termina Field": "true"
     "Road to Ikana Grotto": "has_mask_goron"
-    "Road to Ikana Center": "can_play_epona || (can_goron_bomb_jump && has_bombs)"
+    "Road to Ikana Center": "can_play_epona || short_hook_anywhere || (can_goron_bomb_jump && has_bombs)"
   locations:
     "Road to Ikana Chest": "can_hookshot || (can_hookshot_short && trick(MM_SHORT_HOOK_HARD))"
 "Road to Ikana Grotto":
@@ -1676,12 +1717,12 @@
   events:
     RUPEES: "can_use_light_arrows && is_night && soul_bubble"
   exits:
-    "Road to Ikana Front": "can_play_epona || (can_goron_bomb_jump && has_bombs)"
-    "Road to Ikana Top": "(has(MASK_GARO) || has(MASK_GIBDO)) && (can_hookshot || (can_hookshot_short && trick(MM_SHORT_HOOK_HARD)))"
+    "Road to Ikana Front": "can_play_epona || short_hook_anywhere || (can_goron_bomb_jump && has_bombs)"
+    "Road to Ikana Top": "((has(MASK_GARO) || has(MASK_GIBDO)) && (can_hookshot || (can_hookshot_short && trick(MM_SHORT_HOOK_HARD)))) || short_hook_anywhere"
     "Ikana Graveyard": "true"
   locations:
     "Road to Ikana Stone Mask": "can_use_lens_strict && has_red_or_blue_potion"
-    "Road to Ikana Pot": "scarecrow_hookshot"
+    "Road to Ikana Pot": "scarecrow_hookshot || short_hook_anywhere"
   gossip:
     "Road to Ikana Gossip": "true"
 "Ikana Graveyard":
@@ -1719,6 +1760,7 @@
     ARROWS: "true"
   exits:
     "Ikana Graveyard": "true"
+    "Beneath the Graveyard Night 2": "short_hook_anywhere"
   locations:
     "Beneath The Graveyard Chest": "soul(SOUL_BAD_BAT) && (can_fight || has_explosives || has_arrows || can_hookshot_short || has(MASK_DEKU))"
     "Beneath The Graveyard Song of Storms": "soul_iron_knuckle && ((can_fight || has_explosives) && (has_sticks || can_use_fire_arrows))"
@@ -1734,15 +1776,16 @@
     ARROWS: "true"
   exits:
     "Ikana Graveyard": "true"
+    "Beneath the Graveyard Night 1": "short_hook_anywhere"
   locations:
-    "Beneath The Graveyard HP": "soul_iron_knuckle && ((has_explosives || (trick_keg_explosives && can_fight)) && can_use_lens)"
+    "Beneath The Graveyard HP": "soul_iron_knuckle && ((has_explosives || (trick_keg_explosives && can_fight)) && (can_use_lens || short_hook_anywhere))"
     "Beneath The Graveyard Pot Night 2 Early": "true"
     "Beneath The Graveyard Pot Before Pit 1": "true"
     "Beneath The Graveyard Pot Before Pit 2": "true"
-    "Beneath The Graveyard Pot After Pit 1": "can_use_lens"
-    "Beneath The Graveyard Pot After Pit 2": "can_use_lens"
-    "Beneath The Graveyard Pot After Pit 3": "can_use_lens"
-    "Beneath The Graveyard Pot After Pit 4": "can_use_lens"
+    "Beneath The Graveyard Pot After Pit 1": "can_use_lens || short_hook_anywhere"
+    "Beneath The Graveyard Pot After Pit 2": "can_use_lens || short_hook_anywhere"
+    "Beneath The Graveyard Pot After Pit 3": "can_use_lens || short_hook_anywhere"
+    "Beneath The Graveyard Pot After Pit 4": "can_use_lens || short_hook_anywhere"
 "Beneath The Graveyard Night 3":
   region: ENTRANCE
   events:
@@ -1773,7 +1816,7 @@
   region: IKANA_CANYON
   exits:
     "Road to Ikana Top": "true"
-    "Ikana Canyon": "((can_use_ice_arrows && soul_octorok) || trick(MM_ICELESS_IKANA)) && can_hookshot"
+    "Ikana Canyon": "(((can_use_ice_arrows && soul_octorok) || trick(MM_ICELESS_IKANA)) && can_hookshot) || short_hook_anywhere"
     "Secret Shrine": "true"
     "Sakon Hideout": "event(MEET_KAFEI) && at(NIGHT3_PM_06_00)"
     "Ikana Valley Grotto": "true"
@@ -1830,6 +1873,7 @@
     BOMBS: "true"
     ARROWS: "true"
     RUPEES: "can_use_light_arrows && is_night && soul_bubble"
+    PICTURE_TINGLE: "has(PICTOGRAPH_BOX)"
   gossip:
     "Ikana Canyon Gossip Upper": "true"
 "Ikana Fairy Fountain":
@@ -1859,7 +1903,7 @@
 "Ikana Castle Entrance":
   region: IKANA_CASTLE
   exits:
-    "Ikana Castle Exterior": "(has_mirror_shield && event(IKANA_CASTLE_LIGHT_ENTRANCE)) || can_use_light_arrows"
+    "Ikana Castle Exterior": "(has_mirror_shield && event(IKANA_CASTLE_LIGHT_ENTRANCE)) || can_use_light_arrows || short_hook_anywhere"
     "Ikana Canyon": "true"
   events:
     IKANA_CASTLE_LIGHT_ENTRANCE: "can_activate_crystal"
@@ -1871,58 +1915,31 @@
     RUPEES: "true"
   exits:
     "Beneath The Well End": "true"
-    "Ikana Castle Entrance": "can_use_light_arrows"
+    "Ikana Castle Entrance": "can_use_light_arrows || short_hook_anywhere"
     "Ancient Castle of Ikana": "true"
+    "Ancient Castle of Ikana Roof Exterior": "short_hook_anywhere"
   locations:
     "Ancient Castle of Ikana Pot Exterior": "true"
 "Stone Tower":
   region: STONE_TOWER
-  events:
-    RUPEES: "(can_use_elegy3 || (can_use_elegy2 && trick(MM_ONE_MASK_STONE_TOWER))) && scarecrow_hookshot"
   exits:
     "Ikana Canyon": "true"
-    "Stone Tower Top": "(can_use_elegy3 || (can_use_elegy2 && trick(MM_ONE_MASK_STONE_TOWER))) && can_hookshot"
+    "Stone Tower Top": "((can_use_elegy3 || (can_use_elegy2 && trick(MM_ONE_MASK_STONE_TOWER))) && can_hookshot) || (can_use_elegy3 && short_hook_anywhere && trick(MM_OOB_MOVEMENT))"
+    "Stone Tower Front of Temple": "can_use_elegy3 && short_hook_anywhere && trick(MM_OOB_MOVEMENT)"
+    "Stone Tower Side Low": "(can_use_elegy3 || (can_use_elegy2 && trick(MM_ONE_MASK_STONE_TOWER))) && scarecrow_hookshot"
+    "Stone Tower Side High": "((can_use_elegy3 || (can_use_elegy2 && trick(MM_ONE_MASK_STONE_TOWER))) && can_hookshot) || (can_use_elegy3 && short_hook_anywhere)"
   locations:
-    "Stone Tower Pot Climb 1": "can_hookshot"
-    "Stone Tower Pot Climb 2": "can_hookshot"
+    "Stone Tower Pot Climb 1": "can_hookshot_short"
+    "Stone Tower Pot Climb 2": "can_hookshot_short"
 "Stone Tower Top":
   region: STONE_TOWER
   exits:
     "Stone Tower": "true"
-    "Stone Tower Front of Temple": "can_use_elegy"
+    "Stone Tower Front of Temple": "can_use_elegy || (short_hook_anywhere && trick(MM_OOB_MOVEMENT))"
     "Stone Tower Top Inverted": "can_use_elegy && can_use_light_arrows"
     "Owl Stone Tower": "true"
-  events:
-    MAGIC: "true"
-    BOMBS: "true"
-    ARROWS: "true"
-    RUPEES: "has_mask_goron"
-  locations:
-    "Stone Tower Pot Owl Statue 1": "true"
-    "Stone Tower Pot Owl Statue 2": "true"
-    "Stone Tower Pot Owl Statue 3": "true"
-    "Stone Tower Pot Owl Statue 4": "true"
-    "Stone Tower Pot Lower Scarecrow 01": "scarecrow_hookshot"
-    "Stone Tower Pot Lower Scarecrow 02": "scarecrow_hookshot"
-    "Stone Tower Pot Lower Scarecrow 03": "scarecrow_hookshot"
-    "Stone Tower Pot Lower Scarecrow 04": "scarecrow_hookshot"
-    "Stone Tower Pot Lower Scarecrow 05": "scarecrow_hookshot"
-    "Stone Tower Pot Lower Scarecrow 06": "scarecrow_hookshot"
-    "Stone Tower Pot Lower Scarecrow 07": "scarecrow_hookshot"
-    "Stone Tower Pot Lower Scarecrow 08": "scarecrow_hookshot"
-    "Stone Tower Pot Lower Scarecrow 09": "scarecrow_hookshot"
-    "Stone Tower Pot Lower Scarecrow 10": "scarecrow_hookshot"
-    "Stone Tower Pot Lower Scarecrow 11": "scarecrow_hookshot"
-    "Stone Tower Pot Lower Scarecrow 12": "scarecrow_hookshot"
-    "Stone Tower Pot Higher Scarecrow 1": "scarecrow_hookshot"
-    "Stone Tower Pot Higher Scarecrow 2": "scarecrow_hookshot"
-    "Stone Tower Pot Higher Scarecrow 3": "scarecrow_hookshot"
-    "Stone Tower Pot Higher Scarecrow 4": "scarecrow_hookshot"
-    "Stone Tower Pot Higher Scarecrow 5": "scarecrow_hookshot"
-    "Stone Tower Pot Higher Scarecrow 6": "scarecrow_hookshot"
-    "Stone Tower Pot Higher Scarecrow 7": "scarecrow_hookshot"
-    "Stone Tower Pot Higher Scarecrow 8": "scarecrow_hookshot"
-    "Stone Tower Pot Higher Scarecrow 9": "scarecrow_hookshot"
+    "Stone Tower Side Low": "has_mask_goron || scarecrow_hookshot"
+    "Stone Tower Side High": "scarecrow_hookshot || short_hook_anywhere"
 "Stone Tower Front of Temple":
   region: STONE_TOWER
   events:
@@ -1932,9 +1949,51 @@
     RUPEES: "has_mask_goron || has_mask_zora || (scarecrow_hookshot && can_fight)"
   exits:
     "Stone Tower": "true"
-    "Stone Tower Top": "can_use_elegy3"
+    "Stone Tower Top": "can_use_elegy3 || (can_use_elegy2 && trick(MM_ONE_MASK_STONE_TOWER) && short_hook_anywhere)"
     "Stone Tower Top Inverted": "can_use_elegy && can_use_light_arrows"
     "Stone Tower Temple": "true"
+    "Stone Tower Side Low": "has_mask_goron || has_mask_zora || scarecrow_hookshot || (short_hook_anywhere && trick(MM_OOB_MOVEMENT))"
+    "Stone Tower Side High": "short_hook_anywhere || scarecrow_hookshot"
+"Stone Tower Side Low":
+  region: STONE_TOWER
+  events:
+    MAGIC: "true"
+    BOMBS: "true"
+    ARROWS: "true"
+    RUPEES: "can_fight && soul_redead_gibdo"
+  exits:
+    "Stone Tower": "true"
+  locations:
+    "Stone Tower Pot Lower Scarecrow 01": "true"
+    "Stone Tower Pot Lower Scarecrow 02": "true"
+    "Stone Tower Pot Lower Scarecrow 03": "true"
+    "Stone Tower Pot Lower Scarecrow 04": "true"
+    "Stone Tower Pot Lower Scarecrow 05": "true"
+    "Stone Tower Pot Lower Scarecrow 06": "true"
+    "Stone Tower Pot Lower Scarecrow 07": "true"
+    "Stone Tower Pot Lower Scarecrow 08": "true"
+    "Stone Tower Pot Lower Scarecrow 09": "true"
+    "Stone Tower Pot Lower Scarecrow 10": "true"
+    "Stone Tower Pot Lower Scarecrow 11": "true"
+    "Stone Tower Pot Lower Scarecrow 12": "true"
+"Stone Tower Side High":
+  region: STONE_TOWER
+  events:
+    MAGIC: "true"
+    BOMBS: "true"
+    ARROWS: "true"
+  exits:
+    "Stone Tower": "true"
+  locations:
+    "Stone Tower Pot Higher Scarecrow 1": "true"
+    "Stone Tower Pot Higher Scarecrow 2": "true"
+    "Stone Tower Pot Higher Scarecrow 3": "true"
+    "Stone Tower Pot Higher Scarecrow 4": "true"
+    "Stone Tower Pot Higher Scarecrow 5": "true"
+    "Stone Tower Pot Higher Scarecrow 6": "true"
+    "Stone Tower Pot Higher Scarecrow 7": "true"
+    "Stone Tower Pot Higher Scarecrow 8": "true"
+    "Stone Tower Pot Higher Scarecrow 9": "true"
 "Stone Tower Top Inverted":
   region: STONE_TOWER
   exits:

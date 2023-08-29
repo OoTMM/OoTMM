@@ -384,6 +384,7 @@ const PRESET_HELL = makeSettings({
     'MM_WELL_HSW',
     'MM_GBT_WATERWHEEL_GORON',
     'MM_GBT_ENTRANCE_BOW',
+	'MM_OOB_MOVEMENT',
   ]
 });
 
