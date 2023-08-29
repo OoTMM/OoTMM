@@ -1953,7 +1953,7 @@
     "Ikana Canyon": "true"
     "Stone Tower Top": "((can_use_elegy3 || (can_use_elegy2 && trick(MM_ONE_MASK_STONE_TOWER))) && can_hookshot) || (can_use_elegy3 && short_hook_anywhere && trick(MM_OOB_MOVEMENT))"
     "Stone Tower Lower Scarecrow Ledge": "(can_use_elegy3 || (can_use_elegy2 && trick(MM_ONE_MASK_STONE_TOWER))) && scarecrow_hookshot"
-    "Stone Tower Upper Sccarecrow Ledge": "((can_use_elegy3 || (can_use_elegy2 && trick(MM_ONE_MASK_STONE_TOWER))) && can_hookshot) || (can_use_elegy3 && short_hook_anywhere)"
+    "Stone Tower Upper Scarecrow Ledge": "((can_use_elegy3 || (can_use_elegy2 && trick(MM_ONE_MASK_STONE_TOWER))) && can_hookshot) || (can_use_elegy3 && short_hook_anywhere)"
   locations:
     "Stone Tower Pot Climb 1": "can_hookshot_short"
     "Stone Tower Pot Climb 2": "can_hookshot_short"
