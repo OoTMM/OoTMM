@@ -26,7 +26,7 @@
   dungeon: Fire
   locations:
     "MQ Fire Temple Hammer Chest": "small_keys_fire(5) && has_weapon && soul_keese && soul(SOUL_STALFOS) && soul_iron_knuckle && soul(SOUL_FLARE_DANCER) && (has_bombs || can_hammer || can_hookshot)"
-    "MQ Fire Temple Map Chest": "can_hammer && (small_keys_fire(5) && has_weapon && soul_keese && soul(SOUL_STALFOS) && soul_iron_knuckle && soul(SOUL_FLARE_DANCER)"
+    "MQ Fire Temple Map Chest": "can_hammer && small_keys_fire(5) && has_weapon && soul_keese && soul(SOUL_STALFOS) && soul_iron_knuckle && soul(SOUL_FLARE_DANCER)"
     "MQ Fire Temple Pot Hammer Loop 1": "small_keys_fire(5) && has_weapon && soul_keese && soul(SOUL_STALFOS)"
     "MQ Fire Temple Pot Hammer Loop 2": "small_keys_fire(5) && has_weapon && soul_keese && soul(SOUL_STALFOS)"
     "MQ Fire Temple Pot Hammer Loop 3": "small_keys_fire(5) && has_weapon && soul_keese && soul(SOUL_STALFOS)"
