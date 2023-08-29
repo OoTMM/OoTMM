@@ -72,6 +72,7 @@
     STICKS: "true"
     NUTS: "soul_deku_baba"
     FAIRY: "true"
+    WATER: "true"
   locations:
     "Southern Swamp Owl Statue": "has_sticks || has_weapon"
 "Owl Woodfall":
@@ -1736,7 +1737,7 @@
   region: ROAD_TO_IKANA
   events:
     RUPEES: "can_use_light_arrows && is_night && soul_bubble"
-    FAIRY: "can_get_gossip_fairy || scarecrow_hookshot"
+    FAIRY: "can_get_gossip_fairy || scarecrow_hookshot || short_hook_anywhere"
   exits:
     "Road to Ikana Front": "can_play_epona || short_hook_anywhere || (can_goron_bomb_jump && has_bombs)"
     "Road to Ikana Top": "((has(MASK_GARO) || has(MASK_GIBDO)) && (can_hookshot || (can_hookshot_short && trick(MM_SHORT_HOOK_HARD)))) || short_hook_anywhere"
@@ -1973,7 +1974,7 @@
     "Stone Tower Top Inverted": "can_use_elegy && can_use_light_arrows"
     "Stone Tower Temple": "true"
     "Stone Tower Lower Scarecrow Ledge": "has_mask_goron || has_mask_zora || scarecrow_hookshot" # || (can_jumpslash) # Can simply backwalk off the ledge, jumpslash and recoil down to the ledge, but that should be a trick.
-    "Stone Tower Upper Scarecrow Ledge": "scarecrow_hookshot"
+    "Stone Tower Upper Scarecrow Ledge": "scarecrow_hookshot || short_hook_anywhere"
 "Stone Tower Lower Scarecrow Ledge":
   region: STONE_TOWER
   exits:

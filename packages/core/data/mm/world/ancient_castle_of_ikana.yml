@@ -26,8 +26,8 @@
 "Ancient Castle of Ikana Interior North 2":
   dungeon: ACoI
   events:
-    MAGIC: "has(MASK_DEKU)"
-    FAIRY: "has(MASK_DEKU)"
+    MAGIC: "has(MASK_DEKU) || short_hook_anywhere"
+    FAIRY: "has(MASK_DEKU) || short_hook_anywhere"
   exits:
     "Ancient Castle of Ikana Interior North": "true"
     "Ancient Castle of Ikana Interior North 3": "can_use_lens || short_hook_anywhere"
