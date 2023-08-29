@@ -791,7 +791,7 @@
     WATER: "true"
     FAIRY: "true"
   locations:
-    "Southern Swamp HP": "(has(DEED_LAND) && has(MASK_DEKU)) || (trick(MM_SOUTHERN_SWAMP_SCRUB_HP_GORON) && has_mask_goron)"
+    "Southern Swamp HP": "(has(DEED_LAND) && has(MASK_DEKU)) || (trick(MM_SOUTHERN_SWAMP_SCRUB_HP_GORON) && has_mask_goron) || short_hook_anywhere"
     "Southern Swamp Scrub Deed": "has(DEED_LAND)"
     "Southern Swamp Scrub Shop": "has(MASK_DEKU) && can_use_wallet(1)"
     "Southern Swamp Pot 1": "true"
@@ -807,22 +807,25 @@
   exits:
     "Swamp Front": "event(BOAT_RIDE) || event(CLEAN_SWAMP) || has_mask_zora || ((has_arrows || can_hookshot) && (has(MASK_DEKU) || has_mask_goron))"
     "Deku Palace Front": "true"
-    "Near Swamp Spider House": "has(MASK_DEKU) || has_mask_zora || event(CLEAN_SWAMP)"
-    "Swamp Canopy Back": "event(CLEAN_SWAMP)"
+    "Near Swamp Spider House": "has(MASK_DEKU) || has_mask_zora || event(CLEAN_SWAMP) || short_hook_anywhere"
+    "Swamp Canopy Back": "event(CLEAN_SWAMP) || short_hook_anywhere"
+    "Swamp Canopy Front": "short_hook_anywhere"
 "Near Swamp Spider House":
   region: SOUTHERN_SWAMP
   exits:
     "Swamp Spider House": "has_sticks || has_arrows"
-    "Swamp Back": "has(MASK_DEKU) || has_mask_zora || event(CLEAN_SWAMP)"
-    "Near Swamp Grotto": "has(MASK_DEKU) || has_mask_zora || event(CLEAN_SWAMP)"
+    "Swamp Back": "has(MASK_DEKU) || has_mask_zora || event(CLEAN_SWAMP) || short_hook_anywhere"
+    "Near Swamp Grotto": "has(MASK_DEKU) || has_mask_zora || event(CLEAN_SWAMP) || short_hook_anywhere"
+    "Swamp Canopy Front": "short_hook_anywhere"
 "Near Swamp Grotto":
   region: ENTRANCE
   events:
     MUSHROOM: "has(MASK_SCENTS)"
   exits:
     "Swamp Front": "(has_arrows || can_hookshot) && has_mask_goron"
-    "Near Swamp Spider House": "has(MASK_DEKU) || has_mask_zora || event(CLEAN_SWAMP)"
+    "Near Swamp Spider House": "has(MASK_DEKU) || has_mask_zora || event(CLEAN_SWAMP) || can_hookshot_short"
     "Southern Swamp Grotto": "true"
+    "Swamp Canopy Front": "short_hook_anywhere"
 "Southern Swamp Grotto":
   region: ENTRANCE
   events:
@@ -893,29 +896,29 @@
   region: DEKU_PALACE
   exits:
     "Swamp Back": "true"
-    "Deku Palace Cliff": "has(MASK_DEKU)"
+    "Deku Palace Cliff": "has(MASK_DEKU) || short_hook_anywhere"
     "Near Deku Shrine": "event(CLEAN_SWAMP)"
-    "Deku Palace Main": "has(MASK_DEKU) || trick(MM_PALACE_GUARD_SKIP)"
+    "Deku Palace Main": "has(MASK_DEKU) || trick(MM_PALACE_GUARD_SKIP) || short_hook_anywhere"
     "Deku Palace Upper": "(event(CLEAN_SWAMP) || has(MASK_DEKU)) && can_use_beans"
   events:
     PICTURE_BIG_OCTO: "soul_octorok && has(MASK_DEKU) && has(PICTOGRAPH_BOX)"
-    NUTS: "soul_deku_baba && (has(MASK_DEKU) || (event(CLEAN_SWAMP) && (can_fight || has_arrows || has_explosives || can_hookshot_short)))"
+    NUTS: "soul_deku_baba && (has(MASK_DEKU) || short_hook_anywhere || (event(CLEAN_SWAMP) && (can_fight || has_arrows || has_explosives || can_hookshot_short)))"
 "Deku Palace Main":
   region: DEKU_PALACE
   exits:
     "Deku Palace Throne": "true"
     "Deku Palace Front": "true"
     "Deku Palace Grotto": "true"
-    "Deku Palace Upper": "trick(MM_PALACE_BEAN_SKIP)"
+    "Deku Palace Upper": "trick(MM_PALACE_BEAN_SKIP) || short_hook_anywhere"
   locations:
     "Deku Palace HP": "true"
 "Deku Palace Upper":
   region: DEKU_PALACE
   events:
-    MAGIC: "has(MASK_DEKU)"
+    MAGIC: "has(MASK_DEKU) || short_hook_anywhere"
   exits:
     "Deku Palace Main": "true"
-    "Deku Palace Near Cage": "has(MASK_DEKU)"
+    "Deku Palace Near Cage": "has(MASK_DEKU) || short_hook_anywhere"
   locations:
     "Deku Palace Pot 1": "true"
     "Deku Palace Pot 2": "true"
@@ -923,6 +926,7 @@
   region: DEKU_PALACE
   exits:
     "Deku Palace Main": "true"
+    "Deku Palace Cage": "event(RETURN_PRINCESS) && short_hook_anywhere"
   events:
     PICTURE_DEKU_KING: "has(PICTOGRAPH_BOX) && has(MASK_DEKU)"
     RETURN_PRINCESS: "has_deku_princess && has(MASK_DEKU)"
@@ -930,12 +934,13 @@
   region: DEKU_PALACE
   exits:
     "Deku Palace Main": "true"
-    "Deku Palace Upper": "has(MASK_DEKU) && soul_deku_scrub"
+    "Deku Palace Upper": "has(MASK_DEKU) || short_hook_anywhere"
     "Deku Palace Cage": "true"
 "Deku Palace Cage":
   region: DEKU_PALACE
   exits:
     "Deku Palace Near Cage": "true"
+    "Deku Palace Throne": "short_hook_anywhere && trick(MM_ESCAPE_CAGE) && has(MASK_DEKU)"
   locations:
     "Deku Palace Sonata of Awakening": "has(MASK_DEKU) && has_ocarina"
 "Deku Palace Grotto":
@@ -949,28 +954,30 @@
     RUPEES: "true"
     WATER: "true"
   locations:
-    "Deku Palace Grotto Chest": "can_use_beans || can_hookshot || (can_hookshot_short && trick(MM_SHORT_HOOK_HARD))"
+    "Deku Palace Grotto Chest": "can_use_beans || can_hookshot_short"
 #    "Deku Palace Free Bean": "true"
 #    "Deku Palace Bean Purchase": "can_use_wallet(1)"
 "Deku Palace Cliff":
   region: DEKU_PALACE
   exits:
-    "Deku Palace Front": "has(MASK_DEKU) || event(CLEAN_SWAMP)"
+    "Deku Palace Front": "has(MASK_DEKU) || event(CLEAN_SWAMP) || short_hook_anywhere"
     "Swamp Canopy Front": "true"
 "Swamp Canopy Front":
   region: SOUTHERN_SWAMP
   exits:
+    "Swamp Back": "short_hook_anywhere || has(MASK_DEKU) || has_mask_zora"
+    "Near Swamp Spider House": "short_hook_anywhere || has(MASK_DEKU) || has_mask_zora"
     "Near Swamp Grotto": "true"
     "Deku Palace Cliff": "true"
-    "Swamp Canopy Back": "has(MASK_DEKU)"
+    "Swamp Canopy Back": "has(MASK_DEKU) || short_hook_anywhere"
 "Swamp Canopy Back":
   region: SOUTHERN_SWAMP
   exits:
     "Swamp Back": "has(MASK_DEKU) || has_mask_zora || event(CLEAN_SWAMP)"
     "Woodfall": "true"
-    "Swamp Canopy Front": "has(MASK_DEKU)"
+    "Swamp Canopy Front": "has(MASK_DEKU) || short_hook_anywhere"
   locations:
-    "Southern Swamp Song of Soaring": "has(MASK_DEKU)"
+    "Southern Swamp Song of Soaring": "has(MASK_DEKU) || short_hook_anywhere"
 "Woodfall":
   region: WOODFALL
   events:
@@ -979,6 +986,7 @@
     "Swamp Canopy Back": "true"
     "Woodfall Shrine": "has(MASK_DEKU) && (soul_deku_scrub || event(CLEAN_SWAMP))"
     "Woodfall Temple Princess Jail": "event(CLEAN_SWAMP) && event(OPEN_WOODFALL_TEMPLE)"
+    "Woodfall Near Fairy Fountain": "event(CLEAN_SWAMP) && short_hook_anywhere"
   locations:
     "Woodfall Entrance Chest": "has(MASK_DEKU) || can_hookshot || event(CLEAN_SWAMP)"
     "Woodfall HP Chest": "(has(MASK_DEKU) && (soul_deku_scrub || event(CLEAN_SWAMP))) || can_hookshot"
@@ -987,7 +995,7 @@
   region: WOODFALL
   exits:
     "Woodfall Temple": "true"
-    "Woodfall Shrine": "has(MASK_DEKU)"
+    "Woodfall Shrine": "true"
     "Woodfall": "event(CLEAN_SWAMP)"
 "Woodfall Shrine":
   region: WOODFALL

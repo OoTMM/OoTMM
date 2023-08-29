@@ -98,14 +98,14 @@
 "Stone Tower Temple Wind Room":
   dungeon: ST
   exits:
-    "Stone Tower Temple Light Arrow Room": "has(MASK_DEKU) || can_use_light_arrows"
+    "Stone Tower Temple Light Arrow Room": "has(MASK_DEKU) || can_use_light_arrows || (short_hook_anywhere && has_weapon && trick(MM_ST_UPDRAFTS))"
   locations:
-    "Stone Tower Temple Wind Room Ledge Chest": "has(MASK_DEKU)"
-    "Stone Tower Temple Wind Room Jail Chest": "(has(MASK_DEKU) || can_use_light_arrows) && has_mask_goron"
-    "Stone Tower Temple Pot Wind Room 1": "has(MASK_DEKU) || can_use_light_arrows"
-    "Stone Tower Temple Pot Wind Room 2": "has(MASK_DEKU) || can_use_light_arrows"
-    "Stone Tower Temple Pot Wind Room 3": "has(MASK_DEKU) || can_use_light_arrows"
-    "Stone Tower Temple Pot Wind Room 4": "has(MASK_DEKU) || can_use_light_arrows"
+    "Stone Tower Temple Wind Room Ledge Chest": "has(MASK_DEKU) || (short_hook_anywhere && trick(MM_ST_UPDRAFTS))"
+    "Stone Tower Temple Wind Room Jail Chest": "(has(MASK_DEKU) || can_use_light_arrows || (short_hook_anywhere && has_weapon && trick(MM_ST_UPDRAFTS))) && has_mask_goron"
+    "Stone Tower Temple Pot Wind Room 1": "has(MASK_DEKU) || can_use_light_arrows || (short_hook_anywhere && has_weapon && trick(MM_ST_UPDRAFTS))"
+    "Stone Tower Temple Pot Wind Room 2": "has(MASK_DEKU) || can_use_light_arrows || (short_hook_anywhere && has_weapon && trick(MM_ST_UPDRAFTS))"
+    "Stone Tower Temple Pot Wind Room 3": "has(MASK_DEKU) || can_use_light_arrows || (short_hook_anywhere && has_weapon && trick(MM_ST_UPDRAFTS))"
+    "Stone Tower Temple Pot Wind Room 4": "has(MASK_DEKU) || can_use_light_arrows || (short_hook_anywhere && has_weapon && trick(MM_ST_UPDRAFTS))"
 "Stone Tower Temple Light Arrow Room":
   dungeon: ST
   exits:

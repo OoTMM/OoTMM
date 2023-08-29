@@ -72,7 +72,8 @@ export const TRICKS = {
   MM_GBT_WATERWHEEL_GORON: "Cross GBT WaterWheel Room as Goron",
   MM_GBT_ENTRANCE_BOW: "Great Bay Temple Entrance Chest using only Bow",
   MM_OOB_MOVEMENT: "Walk Along Surfaces Out of Bounds",
-  MM_ISTT_UPDRAFTS: "ISTT Updrafts without Deku Mask",
+  MM_ST_UPDRAFTS: "Stone Tower Updrafts without Deku Mask",
+  MM_ESCAPE_CAGE: "Escape the Monkey Cage with Hookshot Anywhere",
 };
 
 export type Trick = keyof typeof TRICKS;
