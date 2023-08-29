@@ -21,7 +21,7 @@
   exits:
     "Stone Tower Temple Inverted Entrance": "can_use_light_arrows || short_hook_anywhere"
     "Stone Tower Temple Inverted East Ledge": "has(MASK_DEKU)"
-    "Stone Tower Temple Inverted East Bridge": "has(MASK_DEKU) || trick(MM_ISTT_UPDRAFTS) || short_hook_anywhere"
+    "Stone Tower Temple Inverted East Bridge": "has(MASK_DEKU) || trick(MM_ST_UPDRAFTS) || short_hook_anywhere"
   events:
     STONE_TOWER_WATER_CHEST_SUN: "can_use_light_arrows"
   locations:
