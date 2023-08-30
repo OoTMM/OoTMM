@@ -282,8 +282,8 @@
   exits:
     "Moon": "can_play(SONG_ORDER) && special(MOON)"
   locations:
-    "Clock Tower Roof Skull Kid Ocarina": "(has_weapon_range || fd_anywhere) && can_play_time"
-    "Clock Tower Roof Skull Kid Song of Time": "(has_weapon_range || fd_anywhere) && can_play_time"
+    "Clock Tower Roof Skull Kid Ocarina": "(has_weapon_range || (fd_anywhere && has_magic)) && can_play_time"
+    "Clock Tower Roof Skull Kid Song of Time": "(has_weapon_range || (fd_anywhere && has_magic)) && can_play_time"
     "Clock Tower Roof Pot 1": "can_play_time"
     "Clock Tower Roof Pot 2": "can_play_time"
     "Clock Tower Roof Pot 3": "can_play_time"
