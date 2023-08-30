@@ -21,10 +21,12 @@
     "MQ Water Temple Central Pillar Chest": "can_play_time && can_use_din && can_hookshot && has_iron_boots && has_tunic_zora_strict"
     "MQ Water Temple GS Lizalfos Hallway": "event(WATER_LEVEL_LOW) && can_use_din"
     "MQ Water Temple GS High Water Changer": "event(WATER_LEVEL_LOW) && can_longshot"
+    "MQ Water Temple Pot Ruto 1": "has_iron_boots && has_tunic_zora && can_hookshot"
+    "MQ Water Temple Pot Ruto 2": "has_iron_boots && has_tunic_zora && can_hookshot"
 "Water Temple Dark Link":
   dungeon: Water
   events:
-    WATER_GATES: "can_use_din && has_iron_boots && has_tunic_zora"
+    WATER_GATES: "can_use_din && has_iron_boots && has_tunic_zora && soul(SOUL_STALFOS)"
   locations:
     "MQ Water Temple Boss Key Chest": "can_use_din && can_dive_small && soul(SOUL_STALFOS)" #Scale can solve dragon spiral MQ
     "MQ Water Temple GS River": "soul(SOUL_STALFOS)" #Believe it or not, this is very easy to get with no Iron Boots.
@@ -42,6 +44,10 @@
   dungeon: Water
   locations:
     "MQ Water Temple GS Three Torch": "has_fire_arrows && (scarecrow_hookshot || has_hover_boots)"
+    "MQ Water Temple Pot Skull Cage 1": "has_fire_arrows && (scarecrow_hookshot || has_hover_boots)"
+    "MQ Water Temple Pot Skull Cage 2": "has_fire_arrows && (scarecrow_hookshot || has_hover_boots)"
+    "MQ Water Temple Pot Skull Cage 3": "has_fire_arrows && (scarecrow_hookshot || has_hover_boots)"
+    "MQ Water Temple Pot Skull Cage 4": "has_fire_arrows && (scarecrow_hookshot || has_hover_boots)"
 "Water Temple Side Loop":
   dungeon: Water
   locations:
