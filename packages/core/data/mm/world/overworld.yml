@@ -351,11 +351,11 @@
     "Clock Town West": "true"
   locations:
     "Swordsman School HP": "has(SWORD) && can_use_wallet(1) && before(NIGHT3_PM_11_00)"
-    "Swordsman School Pot 1": "(has(SWORD) || fd_anywhere)) && after(NIGHT3_AM_12_00)"
-    "Swordsman School Pot 2": "(has(SWORD) || fd_anywhere)) && after(NIGHT3_AM_12_00)"
-    "Swordsman School Pot 3": "(has(SWORD) || fd_anywhere)) && after(NIGHT3_AM_12_00)"
-    "Swordsman School Pot 4": "(has(SWORD) || fd_anywhere)) && after(NIGHT3_AM_12_00)"
-    "Swordsman School Pot 5": "(has(SWORD) || fd_anywhere)) && after(NIGHT3_AM_12_00)"
+    "Swordsman School Pot 1": "has(SWORD) && after(NIGHT3_AM_12_00)"
+    "Swordsman School Pot 2": "has(SWORD) && after(NIGHT3_AM_12_00)"
+    "Swordsman School Pot 3": "has(SWORD) && after(NIGHT3_AM_12_00)"
+    "Swordsman School Pot 4": "has(SWORD) && after(NIGHT3_AM_12_00)"
+    "Swordsman School Pot 5": "has(SWORD) && after(NIGHT3_AM_12_00)"
 "Lottery":
   region: ENTRANCE
   events:
