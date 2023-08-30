@@ -1,7 +1,7 @@
 export const GLITCHES = {
   OOT_EQUIP_SWAP: "Equip Swap (OoT)",
   OOT_OCARINA_ITEMS: "Ocarina Items (OoT)",
-  MM_SAKON_HIDEOUT_CLIP: "Sakon Hideout Clip",
+  MM_SAKONS_HIDEOUT_CLIP: "Sakon's Hideout Clip",
   MM_FD_ANYWHERE: "Fierce Deity Anywhere (Night 3)",
 }
 
