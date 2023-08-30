@@ -545,7 +545,7 @@
     "Clock Town East": "true"
     "Clock Town West": "true"
     "Road to Southern Swamp": "true"
-    "Behind Large Icicles": "has_arrows || (has_hot_water_distance && has(OWL_CLOCK_TOWN)) || has_hot_water_er"
+    "Behind Large Icicles": "has_arrows || (has_hot_water_distance && has(OWL_CLOCK_TOWN)) || has_hot_water_er || short_hook_anywhere"
     "Milk Road": "true"
     "Great Bay Fence": "can_play_epona || (can_goron_bomb_jump && has_bombs)"
     "Road to Ikana Front": "true"
@@ -1001,11 +1001,13 @@
   region: WOODFALL
   exits:
     "Woodfall": "(has(MASK_DEKU) && (soul_deku_scrub || event(CLEAN_SWAMP))) || event(CLEAN_SWAMP)"
-    "Woodfall Near Fairy Fountain": "has(MASK_DEKU) && (soul_deku_scrub || event(CLEAN_SWAMP))"
+    "Woodfall Near Fairy Fountain": "has(MASK_DEKU) && (soul_deku_scrub || event(CLEAN_SWAMP) || short_hook_anywhere)"
     "Woodfall Front of Temple": "event(OPEN_WOODFALL_TEMPLE)"
     "Owl Woodfall": "true"
   events:
     OPEN_WOODFALL_TEMPLE: "has(MASK_DEKU) && can_play(SONG_AWAKENING)"
+  locations:
+    "Woodfall Near Owl Chest": "short_hook_anywhere"
 "Woodfall Near Fairy Fountain":
   region: WOODFALL
   exits:
@@ -1036,7 +1038,7 @@
 "Behind Large Icicles":
   region: TERMINA_FIELD
   exits:
-    "Termina Field": "has_arrows || has_hot_water_mtn || has_hot_water_er"
+    "Termina Field": "has_arrows || has_hot_water_mtn || has_hot_water_er || short_hook_anywhere"
     "Mountain Village Path Lower": "true"
 "Mountain Village Path Lower":
   region: PATH_TO_MOUNTAIN_VILLAGE
@@ -1046,7 +1048,7 @@
     FAIRY: "can_get_gossip_fairy"
   exits:
     "Behind Large Icicles": "true"
-    "Mountain Village Path Upper": "can_break_boulders || can_use_fire_arrows || event(BOSS_SNOWHEAD)"
+    "Mountain Village Path Upper": "can_break_boulders || can_use_fire_arrows || event(BOSS_SNOWHEAD) || short_hook_anywhere"
   gossip:
     "Mountain Village Path Gossip": "true"
 "Mountain Village Path Upper":
@@ -1062,14 +1064,14 @@
   exits:
     "Mountain Village Path Upper": "true"
     "Twin Islands": "true"
-    "Near Goron Graveyard": "can_use_lens_strict || trick(MM_DARMANI_WALL) || (event(BOSS_SNOWHEAD) && (has_mask_goron || has_mask_zora))"
+    "Near Goron Graveyard": "can_use_lens_strict || trick(MM_DARMANI_WALL) || (event(BOSS_SNOWHEAD) && (has_mask_goron || has_mask_zora || short_hook_anywhere))"
     "Path to Snowhead Front": "true"
     "Blacksmith": "true"
-    "Near Village Grotto": "event(BOSS_SNOWHEAD) && has_mask_goron"
+    "Near Village Grotto": "event(BOSS_SNOWHEAD) && (has_mask_goron || short_hook_anywhere)"
     "Owl Mountain": "true"
   gossip:
     "Mountain Village Gossip Outside": "event(BOSS_SNOWHEAD)"
-    "Mountain Village Gossip Tunnel": "event(BOSS_SNOWHEAD) && has_mask_goron"
+    "Mountain Village Gossip Tunnel": "event(BOSS_SNOWHEAD) && (has_mask_goron || short_hook_anywhere)"
   events:
     MAGIC: "true"
     ARROWS: "true"
@@ -1080,13 +1082,13 @@
     "Mountain Village Waterfall Chest": "event(BOSS_SNOWHEAD) && can_use_lens"
     "Mountain Village Don Gero Mask": "event(GORON_FOOD)"
     "Mountain Village Frog Choir HP": "event(BOSS_SNOWHEAD) && event(FROG_1) && event(FROG_2) && event(FROG_3) && event(FROG_4)"
-    "Mountain Village Pot": "scarecrow_hookshot"
+    "Mountain Village Pot": "scarecrow_hookshot || short_hook_anywhere"
 "Near Village Grotto":
   region: MOUNTAIN_VILLAGE
   exits:
     "Mountain Village Grotto": "true"
     "Mountain Village": "true"
-    "Near Goron Graveyard": "has_mask_goron"
+    "Near Goron Graveyard": "has_mask_goron || short_hook_anywhere"
 "Mountain Village Grotto":
   region: ENTRANCE
   exits:
@@ -1122,8 +1124,8 @@
   exits:
     "Mountain Village": "true"
     "Goron Village": "true"
-    "Near Goron Race": "has_mask_goron || scarecrow_hookshot"
-    "Near Ramp Grotto": "has_mask_goron"
+    "Near Goron Race": "has_mask_goron || scarecrow_hookshot || short_hook_anywhere"
+    "Near Ramp Grotto": "has_mask_goron || short_hook_anywhere"
     "Twin Islands Frozen Grotto": "can_use_fire_arrows || event(BOSS_SNOWHEAD) || has_hot_water_mtn || has_hot_water_er || (has_hot_water_distance && has(OWL_MOUNTAIN_VILLAGE))"
     "Tingle Mountain": "has_weapon_range"
   locations:
@@ -1186,11 +1188,11 @@
     STICKS: "true"
     RUPEES: "can_break_boulders || can_use_fire_arrows || (can_use_light_arrows && soul_tektite)"
   locations:
-    "Goron Village HP": "has(DEED_SWAMP) && has(MASK_DEKU)"
+    "Goron Village HP": "(has(DEED_SWAMP) && has(MASK_DEKU)) || short_hook_anywhere"
     "Goron Village Scrub Deed": "has(DEED_SWAMP) && has(MASK_DEKU)"
     "Goron Village Scrub Bomb Bag": "has_mask_goron && can_use_wallet(2)"
 #    "Goron Village Scrub Bomb Bag": "(has_mask_goron || (has(MOON_TEAR) && has(DEED_LAND) && has(DEED_SWAMP))) && can_use_wallet(2)"
-    "Goron Powder Keg": "event(POWDER_KEG_TRIAL)"
+    "Goron Powder Keg": "event(POWDER_KEG_TRIAL) || (short_hook_anywhere && can_use_keg)"
 "Front of Lone Peak Shrine":
   region: GORON_VILLAGE
   exits:
