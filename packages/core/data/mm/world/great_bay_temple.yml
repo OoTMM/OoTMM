@@ -49,7 +49,7 @@
   exits:
     "Great Bay Temple Baba Room": "has_mask_zora || (has_bombchu && short_hook_anywhere)"
     "Great Bay Temple Red Pipe 2": "can_use_ice_arrows || short_hook_anywhere"
-    "Great Bay Temple Green Pipe 3:" "short_hook_anywhere"
+    "Great Bay Temple Green Pipe 3": "short_hook_anywhere"
   locations:
     "Great Bay Temple Map": "true"
     "Great Bay Temple SF Map Room Pot": "true"
@@ -181,7 +181,7 @@
     GB_PIPE_GREEN2: "(can_use_ice_arrows && can_use_fire_arrows) || short_hook_anywhere"
   locations:
     "Great Bay Temple Green Pipe 3 Chest": "(can_use_ice_arrows && can_use_fire_arrows && can_hookshot) || short_hook_anywhere"
-    "Great Bay Temple SF Green Pipe 3 Barrel": "has_mask_zora"
+    "Great Bay Temple SF Green Pipe 3 Barrel": "has_mask_zora || ((has_bombchu || has(MASK_BLAST)) && short_hook_anywhere)"
     "Great Bay Temple Pot Green Pipe 3 Upper 1": "(can_use_ice_arrows && can_use_fire_arrows) || short_hook_anywhere"
     "Great Bay Temple Pot Green Pipe 3 Upper 2": "(can_use_ice_arrows && can_use_fire_arrows) || short_hook_anywhere"
     "Great Bay Temple Pot Green Pipe 3 Lower": "true"
