@@ -17,6 +17,14 @@
   locations:
     "MQ Shadow Temple Compass Chest": "soul_redead_gibdo && (has_weapon || can_use_sticks || can_use_din)"
     "MQ Shadow Temple Hover Boots Chest": "can_play_time && can_hit_triggers_distance && soul(SOUL_DEAD_HAND) && (has_weapon || (can_use_sticks && trick(OOT_DEAD_HAND_STICKS)))"
+    "MQ Shadow Temple Pot Entrance Maze 1": "true"
+    "MQ Shadow Temple Pot Entrance Maze 2": "true"
+    "MQ Shadow Temple Flying Pot Entrance Maze 1": "soul_flying_pot"
+    "MQ Shadow Temple Flying Pot Entrance Maze 2": "soul_flying_pot"
+    "MQ Shadow Temple Flying Pot Entrance Maze 3": "soul_flying_pot && can_play_time"
+    "MQ Shadow Temple Flying Pot Entrance Maze 4": "soul_flying_pot && can_play_time"
+    "MQ Shadow Temple Pot Compass Room 1": "(has_weapon || can_use_sticks || can_use_din) || (can_play_sun)" #It would be too unfair to get around the Redeads otherwise
+    "MQ Shadow Temple Pot Compass Room 2": "(has_weapon || can_use_sticks || can_use_din) || (can_play_sun)" #It would be too unfair to get around the Redeads otherwise
 "Shadow Temple First Beamos":
   dungeon: Shadow
   exits:
