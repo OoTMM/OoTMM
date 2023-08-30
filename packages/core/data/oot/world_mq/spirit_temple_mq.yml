@@ -50,6 +50,7 @@
   locations:
     "MQ Spirit Temple Child Upper Ground Chest": "soul_like_like && soul_beamos && soul(SOUL_BABY_DODONGO)" #Explosives are enough for every enemy in this room
     "MQ Spirit Temple Child Upper Ledge Chest": "can_hookshot"
+    "MQ Spirit Temple Pot Child Climb": "true"
 "Spirit Temple Statue":
   dungeon: Spirit
   exits:
@@ -65,6 +66,14 @@
     "MQ Spirit Temple Compass Chest": "can_use_slingshot || can_use_bow"
     "MQ Spirit Temple Chest in Box": "can_play(SONG_ZELDA) && (is_adult || (has_hover_boots && trick(OOT_SPIRIT_CHILD_HOVER)))"
     "MQ Spirit Temple Statue Room Ledge Chest": "(is_adult || (has_hover_boots && trick(OOT_SPIRIT_CHILD_HOVER))) && has_lens"
+    "MQ Spirit Temple Pot Statue Room Lower 1": "true"
+    "MQ Spirit Temple Pot Statue Room Lower 2": "true"
+    "MQ Spirit Temple Pot Statue Room Lower 3": "true"
+    "MQ Spirit Temple Flying Pot Statue Room Lower": "soul_flying_pot"
+    "MQ Spirit Temple Flying Pot Statue Room Stairs": "soul_flying_pot"
+    "MQ Spirit Temple Flying Pot Statue Room Upper": "soul_flying_pot && (can_play_time || has_hover_boots)"
+    "MQ Spirit Temple Pot Statue Room Upper 1": "can_play_time || has_hover_boots"
+    "MQ Spirit Temple Pot Statue Room Upper 2": "can_play_time || has_hover_boots"
 "Spirit Temple Sun Block Room":
   dungeon: Spirit
   exits:
