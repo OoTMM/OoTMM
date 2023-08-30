@@ -75,6 +75,7 @@ export const TRICKS = {
   MM_ST_UPDRAFTS: "Stone Tower Updrafts without Deku Mask",
   MM_ESCAPE_CAGE: "Escape the Monkey Cage with Hookshot Anywhere",
   MM_GBT_FAIRY2_HOOK: "GBT First Underwater Fairy with Short Hookshot Anywhere",
+  MM_GBT_CENTRAL_GEYSER: "GBT Central Room without Zora using Fire & Ice Arrows",
 };
 
 export type Trick = keyof typeof TRICKS;

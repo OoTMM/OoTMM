@@ -387,7 +387,8 @@ const PRESET_HELL = makeSettings({
     'MM_OOB_MOVEMENT',
     'MM_ST_UPDRAFTS',
     'MM_ESCAPE_CAGE',
-	'MM_GBT_FAIRY2_HOOK',
+    'MM_GBT_FAIRY2_HOOK',
+    'MM_GBT_CENTRAL_GEYSER',
   ]
 });
 

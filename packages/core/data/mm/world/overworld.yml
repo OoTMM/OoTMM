@@ -1476,7 +1476,7 @@
   locations:
     "Great Bay Coast Zora Mask": "can_play(SONG_HEALING)"
     "Great Bay Coast HP": "(can_use_beans && scarecrow_hookshot) || short_hook_anywhere"
-    "Great Bay Coast Fisherman HP": "can_use_wallet(1) && can_hookshot_short && event(BOSS_GREAT_BAY) && ((after(DAY1_AM_07_00) && before(NIGHT1_AM_04_00)) || (after(DAY2_AM_07_00) && before(NIGHT2_AM_04_00)) || (after(DAY3_AM_07_00) && before(NIGHT3_AM_04_00)))"
+    "Great Bay Coast Fisherman HP": "can_use_wallet(1) && (can_hookshot_short || can_use_ice_arrows) && event(BOSS_GREAT_BAY) && ((after(DAY1_AM_07_00) && before(NIGHT1_AM_04_00)) || (after(DAY2_AM_07_00) && before(NIGHT2_AM_04_00)) || (after(DAY3_AM_07_00) && before(NIGHT3_AM_04_00)))"
     "Great Bay Coast Pot Ledge 1": "can_hookshot || short_hook_anywhere"
     "Great Bay Coast Pot Ledge 2": "can_hookshot || short_hook_anywhere"
     "Great Bay Coast Pot Ledge 3": "can_hookshot || short_hook_anywhere"
