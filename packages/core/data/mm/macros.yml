@@ -136,7 +136,7 @@
 
 # Misc
 "soul(x)": "(!setting(enemySoulsMm)) || has(x)"
-"fd_anywhere": "has(MASK_FIERCE_DEITY) && (setting(fierceDeityAnywhere) || (glitch(MM_FD_ANYWHERE) && has_regular_mask && is_night3 && !setting(erRegions, none) && (can_play(SONG_SOARING) || event(SUN_MASK))))"
+"fd_anywhere": "has(MASK_FIERCE_DEITY) && (setting(fierceDeityAnywhere) || (glitch(MM_FD_ANYWHERE) && regular_masks_row3 && is_night3 && !setting(erRegions, none) && (can_play(SONG_SOARING) || event(SUN_MASK))))"
 "fd_goron_region_access": fd_anywhere && (has(OWL_MOUNTAIN_VILLAGE) || has(OWL_SNOWHEAD))
 "fd_zora_region_access": fd_anywhere && (has(OWL_GREAT_BAY) || has(OWL_ZORA_CAPE))
 "fd_ic_access": "fd_anywhere && (has(OWL_IKANA_CANYON) || has(OWL_STONE_TOWER))"
