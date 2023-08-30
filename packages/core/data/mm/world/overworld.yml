@@ -690,7 +690,7 @@
     "Road to Southern Swamp Grotto": "true"
     "Tingle Swamp": "has_weapon_range"
   locations:
-    "Road to Southern Swamp HP": "has_weapon_range || (fd_anywhere && has_magic)"
+    "Road to Southern Swamp HP": "has_weapon_range"
   gossip:
     "Road to Southern Swamp Gossip": "true"
 "Swamp Archery":
