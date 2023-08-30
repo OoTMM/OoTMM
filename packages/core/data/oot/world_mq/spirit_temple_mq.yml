@@ -19,6 +19,10 @@
     "Spirit Temple Silver Gauntlets": "small_keys_spirit(4) && has_explosives && can_play_time && is_child && soul_iron_knuckle && (has_weapon || can_use_sticks) && has_lens"
     "MQ Spirit Temple SR Lobby Rock Right": "has_explosives_or_hammer"
     "MQ Spirit Temple SR Lobby Rock Left": "has_explosives_or_hammer"
+    "MQ Spirit Temple Pot Entrance 1": "true"
+    "MQ Spirit Temple Pot Entrance 2": "true"
+    "MQ Spirit Temple Pot Entrance 3": "true"
+    "MQ Spirit Temple Pot Entrance 4": "true"
 "Spirit Temple Child Side":
   dungeon: Spirit
   exits:
@@ -29,6 +33,13 @@
     "MQ Spirit Temple Map Chest": "soul(SOUL_TORCH_SLUG) && (can_use_sticks || has_weapon || (has_explosives && has_nuts))"
     "MQ Spirit Temple Map Room Back Chest": "soul(SOUL_TORCH_SLUG) && soul_redead_gibdo && soul(SOUL_STALFOS) && soul_keese && soul(SOUL_ANUBIS) && has_weapon && has_bombchu && can_use_slingshot && can_use_din"
     "MQ Spirit Temple Paradox Chest": "event(SPIRIT_PARADOX)"
+    "MQ Spirit Temple Pot Child Entrance": "true"
+    "MQ Spirit Temple Pot Child Boulders 1": "soul(SOUL_TORCH_SLUG) && (can_use_sticks || has_weapon || (has_explosives && has_nuts)) && has_bombchu && can_use_slingshot"
+    "MQ Spirit Temple Pot Child Boulders 2": "soul(SOUL_TORCH_SLUG) && (can_use_sticks || has_weapon || (has_explosives && has_nuts)) && has_bombchu && can_use_slingshot"
+    "MQ Spirit Temple Pot Child Back 1": "soul(SOUL_TORCH_SLUG) && soul_redead_gibdo && soul(SOUL_STALFOS) && has_weapon && has_bombchu && can_use_slingshot"
+    "MQ Spirit Temple Pot Child Back 2": "soul(SOUL_TORCH_SLUG) && soul_redead_gibdo && soul(SOUL_STALFOS) && has_weapon && has_bombchu && can_use_slingshot"
+    "MQ Spirit Temple Pot Child Back 3": "soul(SOUL_TORCH_SLUG) && soul_redead_gibdo && soul(SOUL_STALFOS) && has_weapon && has_bombchu && can_use_slingshot"
+    "MQ Spirit Temple Pot Child Back 4": "soul(SOUL_TORCH_SLUG) && soul_redead_gibdo && soul(SOUL_STALFOS) && has_weapon && has_bombchu && can_use_slingshot"
 "Spirit Temple Child Upper":
 #All paths into this room guarantee explosives.
   dungeon: Spirit
