@@ -175,6 +175,33 @@ const ITEM00_DROPS = [
   'BOMBS_5',
 ];
 
+const ITEM00_DROPS_MM = [
+  'RUPEE_GREEN',
+  'RUPEE_BLUE',
+  'RUPEE_RED',
+  'RECOVERY_HEART',
+  'BOMBS_5',
+  'ARROWS_10',
+  '???',
+  '???',
+  'ARROWS_20',
+  'ARROWS_30',
+  'ARROWS_30',
+  'BOMBS_5',
+  'NUT',
+  'STICK',
+  'MAGIC_JAR_LARGE',
+  'MAGIC_JAR_SMALL',
+  '???',
+  'SMALL_KEY',
+  'FLEXIBLE',
+  'RUPEE_HUGE',
+  'RUPEE_PURPLE',
+  'RECOVERY_HEART',
+  '???',
+  'NUTS_10',
+];
+
 const FLYING_POT_DROPS = [
   'RECOVERY_HEART',
   'BOMBS_5',
@@ -577,8 +604,16 @@ function outputGrassPoolMm(roomActors: RoomActors[]) {
         let item: string;
         if (grassType == 0 || grassType == 2) {
           item = 'RANDOM';
+        } else if (grassType === 3) {
+          const item00value = (actor.params & 0xfc) >> 2;
+          if (item00value >= ITEM00_DROPS_MM.length) {
+            item = 'NOTHING';
+          } else {
+            item = ITEM00_DROPS_MM[item00value];
+          }
         } else {
-          item = (altGrassAcc & 1) ? 'RECOVERY_HEART' : 'DEKU_SEEDS_5/ARROWS_5';
+
+          item = (altGrassAcc & 1) ? 'RECOVERY_HEART' : 'ARROWS_5';
           altGrassAcc++;
         }
         const key = ((room.setupId & 0x3) << 14) | (room.roomId << 8) | actor.actorId;
@@ -587,6 +622,7 @@ function outputGrassPoolMm(roomActors: RoomActors[]) {
           lastSceneId = room.sceneId;
           lastSetupId = room.setupId;
         }
+        item = 'RANDOM';
         console.log(`Scene ${room.sceneId.toString(16)} Setup ${room.setupId} Room ${hexPad(room.roomId, 2)} Grass ${decPad(actor.actorId + 1, 2)},        grass,            NONE,                 SCENE_${room.sceneId.toString(16)}, ${hexPad(key, 5)}, ${item}`);
       }
 
