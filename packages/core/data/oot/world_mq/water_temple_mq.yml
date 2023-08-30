@@ -7,7 +7,7 @@
   dungeon: Water
   exits:
     "Water Temple": "true"
-    "Water Temple Dark Link": "small_keys_water(1) && event(WATER_LEVEL_HIGH) && can_longshot && soul(SOUL_STALFOS)"
+    "Water Temple Dark Link": "small_keys_water(1) && event(WATER_LEVEL_HIGH) && can_longshot"
     "Water Temple Three Torch Room": "event(WATER_GATES)"
     "Water Temple Side Loop": "event(WATER_GATES) && can_longshot && (scarecrow_longshot || has_hover_boots)"
     "Water Temple Antichamber": "can_longshot && event(WATER_LEVEL_HIGH)"
@@ -26,8 +26,18 @@
   events:
     WATER_GATES: "can_use_din && has_iron_boots && has_tunic_zora"
   locations:
-    "MQ Water Temple Boss Key Chest": "can_use_din && can_dive_small" #Scale can solve dragon spiral MQ
-    "MQ Water Temple GS River": "true" #Believe it or not, this is very easy to get with no Iron Boots.
+    "MQ Water Temple Boss Key Chest": "can_use_din && can_dive_small && soul(SOUL_STALFOS)" #Scale can solve dragon spiral MQ
+    "MQ Water Temple GS River": "soul(SOUL_STALFOS)" #Believe it or not, this is very easy to get with no Iron Boots.
+    "MQ Water Temple Pot Before Dark Link Ledge 1": "soul(SOUL_STALFOS) || has_hover_boots" #This is why the Stalfos soul was removed from the main room requirements.
+    "MQ Water Temple Pot Before Dark Link Ledge 2": "soul(SOUL_STALFOS) || has_hover_boots" #This is why the Stalfos soul was removed from the main room requirements.
+    "MQ Water Temple Pot Before Dark Link Ledge 3": "soul(SOUL_STALFOS) || has_hover_boots" #This is why the Stalfos soul was removed from the main room requirements.
+    "MQ Water Temple Pot Before Dark Link Near Door 1": "soul(SOUL_STALFOS)"
+    "MQ Water Temple Pot Before Dark Link Near Door 2": "soul(SOUL_STALFOS)"
+    "MQ Water Temple Pot After Dark Link 1": "soul(SOUL_STALFOS)"
+    "MQ Water Temple Pot After Dark Link 2": "soul(SOUL_STALFOS)"
+    "MQ Water Temple Pot River 1": "soul(SOUL_STALFOS)"
+    "MQ Water Temple Pot River 2": "soul(SOUL_STALFOS)"
+    "MQ Water Temple Pot Boss Key Room": "can_use_din && can_dive_small && soul(SOUL_STALFOS)"
 "Water Temple Three Torch Room":
   dungeon: Water
   locations:
