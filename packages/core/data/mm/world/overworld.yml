@@ -107,7 +107,7 @@
   exits:
     "Stone Tower Top": "can_reset_time"
   locations:
-    "Stone Tower Owl Statue": "has_sticks || has_weapon || (fd_anywhere && (has(OWL_STONE_TOWER))"
+    "Stone Tower Owl Statue": "has_sticks || has_weapon || (fd_anywhere && has(OWL_STONE_TOWER))"
 "Oath to Order":
   region: GIANT_DREAM
   locations:
