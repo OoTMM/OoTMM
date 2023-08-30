@@ -107,14 +107,19 @@ const ACTORS_OOT = {
 const ACTORS_MM = {
   POT: 0x82,
   FLYING_POT: 0x8d,
+  EN_KUSA: 0x90,
+  OBJ_MURE2: 0xb3,
+  OBJ_GRASS: 0x10b,
+  OBJ_GRASS_UNIT: 0x10d,
 };
 
 const ACTOR_SLICES_OOT = {
   [ACTORS_OOT.ROCK_BUSH_GROUP]: 12,
 }
 
-const ACTOR_SLICES_MM: {[k: number]: number} = {
-
+const ACTOR_SLICES_MM = {
+  [ACTORS_MM.OBJ_MURE2]: 12,
+  [ACTORS_MM.OBJ_GRASS_UNIT]: 12,
 }
 
 const INTERESTING_ACTORS_OOT = Object.values(ACTORS_OOT);
@@ -504,7 +509,8 @@ function hexPad(n: number, width: number) {
 
 function decPad(n: number, width: number) {
   const s = n.toString();
-  return '0'.repeat(width - s.length) + s;
+  const count = width - s.length;
+  return count > 0 ? '0'.repeat(width - s.length) + s : s;
 }
 
 function outputGrassPoolOot(roomActors: RoomActors[]) {
@@ -545,6 +551,70 @@ function outputGrassPoolOot(roomActors: RoomActors[]) {
         } else {
           count = 12;
         }
+        const item = 'RANDOM';
+        if (room.sceneId != lastSceneId || room.setupId != lastSetupId) {
+          console.log('');
+          lastSceneId = room.sceneId;
+          lastSetupId = room.setupId;
+        }
+        for (let i = 0; i < count; ++i) {
+          const key = (i << 16) | ((room.setupId & 0x3) << 14) | (room.roomId << 8) | actor.actorId;
+          console.log(`Scene ${room.sceneId.toString(16)} Setup ${room.setupId} Room ${hexPad(room.roomId, 2)} Grass Pack ${decPad(actor.actorId + 1, 2)} Grass ${decPad(i + 1, 2)},             grass,            NONE,                 SCENE_${room.sceneId.toString(16)}, ${hexPad(key, 5)}, ${item}`);
+        }
+      }
+    }
+  }
+}
+
+function outputGrassPoolMm(roomActors: RoomActors[]) {
+  let lastSceneId = -1;
+  let lastSetupId = -1;
+  let altGrassAcc = 0;
+  for (const room of roomActors) {
+    for (const actor of room.actors) {
+      if (actor.typeId === ACTORS_MM.EN_KUSA) {
+        const grassType = (actor.params) & 3;
+        let item: string;
+        if (grassType == 0 || grassType == 2) {
+          item = 'RANDOM';
+        } else {
+          item = (altGrassAcc & 1) ? 'RECOVERY_HEART' : 'DEKU_SEEDS_5/ARROWS_5';
+          altGrassAcc++;
+        }
+        const key = ((room.setupId & 0x3) << 14) | (room.roomId << 8) | actor.actorId;
+        if (room.sceneId != lastSceneId || room.setupId != lastSetupId) {
+          console.log('');
+          lastSceneId = room.sceneId;
+          lastSetupId = room.setupId;
+        }
+        console.log(`Scene ${room.sceneId.toString(16)} Setup ${room.setupId} Room ${hexPad(room.roomId, 2)} Grass ${decPad(actor.actorId + 1, 2)},        grass,            NONE,                 SCENE_${room.sceneId.toString(16)}, ${hexPad(key, 5)}, ${item}`);
+      }
+
+      if (actor.typeId === ACTORS_MM.OBJ_MURE2) {
+        const type = (actor.params) & 3;
+        let count: number;
+        if (type > 1) {
+          continue;
+        }
+        if (type == 0) {
+          count = 9;
+        } else {
+          count = 12;
+        }
+        const item = 'RANDOM';
+        if (room.sceneId != lastSceneId || room.setupId != lastSetupId) {
+          console.log('');
+          lastSceneId = room.sceneId;
+          lastSetupId = room.setupId;
+        }
+        for (let i = 0; i < count; ++i) {
+          const key = (i << 16) | ((room.setupId & 0x3) << 14) | (room.roomId << 8) | actor.actorId;
+          console.log(`Scene ${room.sceneId.toString(16)} Setup ${room.setupId} Room ${hexPad(room.roomId, 2)} Grass Pack ${decPad(actor.actorId + 1, 2)} Grass ${decPad(i + 1, 2)},             grass,            NONE,                 SCENE_${room.sceneId.toString(16)}, ${hexPad(key, 5)}, ${item}`);
+        }
+      }
+
+      if (actor.typeId === ACTORS_MM.OBJ_GRASS_UNIT) {
+        const count = 12;
         const item = 'RANDOM';
         if (room.sceneId != lastSceneId || room.setupId != lastSetupId) {
           console.log('');
@@ -740,7 +810,8 @@ async function run() {
 
   /* Output */
   //outputPotsPoolOot(mqRooms);
-  outputGrassWeirdPoolOot(ootRooms);
+  //outputGrassWeirdPoolOot(ootRooms);
+  outputGrassPoolMm(mmRooms);
 }
 
 run().catch(e => {

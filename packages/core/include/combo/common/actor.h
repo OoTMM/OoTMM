@@ -190,6 +190,7 @@
 # define AC_EN_RAIL_SKB     0x212
 # define AC_EN_NEO_REEBA    0x216
 # define AC_EN_HINT_SKB     0x2a5
+# define AC_EN_KUSA         0x090
 
 #endif
 
