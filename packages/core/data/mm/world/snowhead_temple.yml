@@ -67,13 +67,15 @@
     "Snowhead Temple Center Level 1": "true"
     "Snowhead Temple Center Level 2 Dual": "goron_fast_roll || short_hook_anywhere"
     "Snowhead Temple Fire Arrow": "goron_fast_roll || (can_use_lens && scarecrow_hookshot && has(MASK_DEKU)) || short_hook_anywhere"
-    "Snowhead Temple Center Level 3 Iced": "can_use_fire_arrows || (trick_sht_fireless && scarecrow_hookshot && has_mask_goron) || trick_sht_fireless_er"
+    "Snowhead Temple Center Level 3 Iced": "can_use_fire_arrows || (trick_sht_fireless && (scarecrow_hookshot || short_hook_anywhere) && has_mask_goron) || trick_sht_fireless_er"
     "Snowhead Temple Center Level 3 Snow": "can_use_lens && scarecrow_hookshot"
   locations:
     "Snowhead Temple Map Alcove": "can_use_lens || can_hookshot || short_hook_anywhere"
     "Snowhead Temple Central Room Alcove": "(scarecrow_hookshot || (short_hook_anywhere && has_weapon) || hookshot_anywhere) && can_use_lens"
     "Snowhead Temple Pot Central Room Scarecrow 1": "true"
     "Snowhead Temple Pot Central Room Scarecrow 2": "true"
+    "Snowhead Temple Pot Central Room Level 2 1": "true"
+    "Snowhead Temple Pot Central Room Level 2 2": "true"
 "Snowhead Temple Center Level 1":
   dungeon: SH
   exits:
@@ -177,8 +179,6 @@
   locations:
     "Snowhead Temple Pot Central Room Scarecrow 1": "true"
     "Snowhead Temple Pot Central Room Scarecrow 2": "true"
-    "Snowhead Temple Pot Central Room Level 2 1": "true"
-    "Snowhead Temple Pot Central Room Level 2 2": "true"
 "Snowhead Temple Fire Arrow":
   dungeon: SH
   exits:
