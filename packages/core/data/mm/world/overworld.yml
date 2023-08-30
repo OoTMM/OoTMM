@@ -101,7 +101,7 @@
   exits:
     "Ikana Canyon": "can_reset_time"
   locations:
-    "Ikana Canyon Owl Statue": "has_sticks || has_weapon || fd_anywhere_ic_access"
+    "Ikana Canyon Owl Statue": "has_sticks || has_weapon || fd_ic_access"
 "Owl Stone Tower":
   region: STONE_TOWER
   exits:
