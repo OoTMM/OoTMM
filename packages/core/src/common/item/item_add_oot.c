@@ -1485,6 +1485,7 @@ int comboAddItemOot(s16 gi, int noEffect)
     case GI_OOT_SOUL_GOHMA_LARVA:
     case GI_OOT_SOUL_SHABOM:
     case GI_OOT_SOUL_BABY_DODONGO:
+    case GI_OOT_SOUL_DARK_LINK:
     case GI_OOT_SOUL_BIRI_BARI:
     case GI_OOT_SOUL_TAILPASARN:
     case GI_OOT_SOUL_PARASITE:

@@ -77,6 +77,7 @@ static const char* const kSoulsOot[] = {
     "Gohma Larvae",
     "Shaboms",
     "Baby Dodongos",
+    "Dark Link",
     "Biris/Baris",
     "Tailpasarans",
     "Parasites",

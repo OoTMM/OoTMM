@@ -24,10 +24,10 @@
 "Water Temple Dark Link":
   dungeon: Water
   events:
-    WATER_GATES: "can_use_din && has_iron_boots && has_tunic_zora"
+    WATER_GATES: "soul(SOUL_DARK_LINK) && can_use_din && has_iron_boots && has_tunic_zora"
   locations:
-    "MQ Water Temple Boss Key Chest": "can_use_din && can_dive_small" #Scale can solve dragon spiral MQ
-    "MQ Water Temple GS River": "true" #Believe it or not, this is very easy to get with no Iron Boots.
+    "MQ Water Temple Boss Key Chest": "soul(SOUL_DARK_LINK) && can_use_din && can_dive_small" #Scale can solve dragon spiral MQ
+    "MQ Water Temple GS River": "soul(SOUL_DARK_LINK)" #Believe it or not, this is very easy to get with no Iron Boots.
 "Water Temple Three Torch Room":
   dungeon: Water
   locations:

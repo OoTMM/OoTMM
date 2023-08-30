@@ -336,3 +336,7 @@ int GetObject(ObjectContext* ctx, int objectId);
 typedef struct Actor_EnItem00 Actor_EnItem00;
 
 Actor_EnItem00* Item_DropCollectible(GameState_Play* play, Vec3f* pos, s16 params);
+
+#if defined(GAME_OOT)
+Actor* ActorFind(void* actorCtx, s32 actorId, s32 actorCategory);
+#endif

@@ -27,6 +27,7 @@
 # define AC_EN_BUBBLE               0x02d
 # define AC_DOOR_SHUTTER            0x02e
 # define AC_EN_DODOJR               0x02f
+# define AC_EN_TORCH2               0x033
 # define AC_EN_BILI                 0x034
 # define AC_EN_TP                   0x035
 # define AC_EN_ST                   0x037
