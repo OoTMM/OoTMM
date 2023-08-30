@@ -213,6 +213,7 @@ static int csmcFromItemOot(s16 gi)
     case GI_OOT_SOUL_PARASITE:
     case GI_OOT_SOUL_DARK_LINK:
     case GI_OOT_SOUL_LEEVER:
+    case GI_OOT_SOUL_STALCHILD:
         return CSMC_SOUL;
     }
 

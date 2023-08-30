@@ -1513,6 +1513,7 @@ int comboAddItemOot(s16 gi, int noEffect)
     case GI_OOT_SOUL_FREEZARD:
     case GI_OOT_SOUL_STINGER:
     case GI_OOT_SOUL_WOLFOS:
+    case GI_OOT_SOUL_STALCHILD:
     case GI_OOT_SOUL_GUAY:
     case GI_OOT_SOUL_QUEEN_GOHMA:
     case GI_OOT_SOUL_KING_DODONGO:

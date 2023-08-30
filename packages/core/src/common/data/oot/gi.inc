@@ -252,6 +252,7 @@ X(ITEM_CUSTOM,              0x80,  DRAWGI_SOUL,                         0xb4, 0x
 X(ITEM_CUSTOM,              0x80,  DRAWGI_SOUL,                         0xb4, 0x015c, "the " C1 "Soul of Freezards"),
 X(ITEM_CUSTOM,              0x80,  DRAWGI_SOUL,                         0xb4, 0x015c, "the " C1 "Soul of Stingers"),
 X(ITEM_CUSTOM,              0x80,  DRAWGI_SOUL,                         0xb4, 0x015c, "the " C1 "Soul of Wolfos"),
+X(ITEM_CUSTOM,              0x80,  DRAWGI_SOUL,                         0xb4, 0x015c, "the " C1 "Soul of Stalchildren"),
 X(ITEM_CUSTOM,              0x80,  DRAWGI_SOUL,                         0xb4, 0x015c, "the " C1 "Soul of Guays"),
 X(ITEM_CUSTOM,              0x80,  DRAWGI_SOUL,                         0xb4, 0x015c, "the " C1 "Soul of Queen Gohma"),
 X(ITEM_CUSTOM,              0x80,  DRAWGI_SOUL,                         0xb4, 0x015c, "the " C1 "Soul of King Dodongo"),

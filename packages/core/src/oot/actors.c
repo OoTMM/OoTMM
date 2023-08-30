@@ -130,10 +130,8 @@ static int canSpawnSoul(GameState_Play* play, s16 actorId, u16 variable)
         return hasSoul(GI_OOT_SOUL_PARASITE);
     case AC_EN_REEBA:
         return hasSoul(GI_OOT_SOUL_LEEVER);
-    case 0xe8:  // Ganondorf
-    case 0x17a: // Ganon
-    case 0x1b0: // Stalchild
-        return 0;
+    case AC_EN_SKB:
+        return hasSoul(GI_OOT_SOUL_STALCHILD);
     default:
         return 1;
     }

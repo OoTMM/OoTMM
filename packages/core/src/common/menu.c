@@ -105,6 +105,7 @@ static const char* const kSoulsOot[] = {
     "Freezards",
     "Stingers",
     "Wolfos",
+    "Stalchildren",
     "Guays",
     "Queen Gohma",
     "King Dodongo",
