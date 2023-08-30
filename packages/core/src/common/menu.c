@@ -72,6 +72,7 @@ static const char* const kSoulsOot[] = {
     "Dodongos",
     "Keeses",
     "Tektites",
+    "Leevers",
     "Peahats",
     "Lizalfos/Dinalfos",
     "Gohma Larvae",
