@@ -74,6 +74,7 @@ export const TRICKS = {
   MM_OOB_MOVEMENT: "Walk Along Surfaces Out of Bounds",
   MM_ST_UPDRAFTS: "Stone Tower Updrafts without Deku Mask",
   MM_ESCAPE_CAGE: "Escape the Monkey Cage with Hookshot Anywhere",
+  MM_GBT_FAIRY2_HOOK: "GBT First Underwater Fairy with Short Hookshot Anywhere",
 };
 
 export type Trick = keyof typeof TRICKS;

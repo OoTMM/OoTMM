@@ -547,7 +547,7 @@
     "Road to Southern Swamp": "true"
     "Behind Large Icicles": "has_arrows || (has_hot_water_distance && has(OWL_CLOCK_TOWN)) || has_hot_water_er || short_hook_anywhere"
     "Milk Road": "true"
-    "Great Bay Fence": "can_play_epona || (can_goron_bomb_jump && has_bombs)"
+    "Great Bay Fence": "can_play_epona || (can_goron_bomb_jump && has_bombs) || short_hook_anywhere"
     "Road to Ikana Front": "true"
     "Astral Observatory Balcony": "has(MASK_DEKU) || short_hook_anywhere || (can_goron_bomb_jump && has_bombs)"
     "Grass Grotto": "true"
@@ -1372,8 +1372,8 @@
     "Termina Field": "true"
     "Gorman Track Front": "true"
     "Owl Milk Road": "true"
-    "Near Romani Ranch": "after(DAY3_AM_06_00) || can_use_keg"
-    "Behind Gorman Fence": "(can_goron_bomb_jump && has_bombs) || (is_night2 && event(ALIENS)) || final_day"
+    "Near Romani Ranch": "after(DAY3_AM_06_00) || can_use_keg || (short_hook_anywhere && trick(MM_OOB_MOVEMENT))"
+    "Behind Gorman Fence": "(can_goron_bomb_jump && has_bombs) || (is_night2 && event(ALIENS)) || final_day || short_hook_anywhere"
     "Tingle Ranch": "has_weapon_range"
   events:
     PICTURE_TINGLE: "has(PICTOGRAPH_BOX)"
@@ -1386,7 +1386,7 @@
 "Near Romani Ranch":
   region: MILK_ROAD
   exits:
-    "Milk Road": "after(DAY3_AM_06_00) || can_use_keg"
+    "Milk Road": "after(DAY3_AM_06_00) || can_use_keg || (short_hook_anywhere && trick(MM_OOB_MOVEMENT))"
     "Romani Ranch": "true"
 "Romani Ranch":
   region: ROMANI_RANCH
@@ -1450,7 +1450,7 @@
 "Great Bay Fence":
   region: TERMINA_FIELD
   exits:
-    "Termina Field": "can_play_epona || (can_goron_bomb_jump && has_bombs)"
+    "Termina Field": "can_play_epona || (can_goron_bomb_jump && has_bombs) || short_hook_anywhere"
     "Great Bay Coast": "true"
 "Great Bay Coast":
   region: GREAT_BAY_COAST
@@ -1475,11 +1475,11 @@
     FAIRY: "true"
   locations:
     "Great Bay Coast Zora Mask": "can_play(SONG_HEALING)"
-    "Great Bay Coast HP": "can_use_beans && scarecrow_hookshot"
+    "Great Bay Coast HP": "(can_use_beans && scarecrow_hookshot) || short_hook_anywhere"
     "Great Bay Coast Fisherman HP": "can_use_wallet(1) && can_hookshot_short && event(BOSS_GREAT_BAY) && ((after(DAY1_AM_07_00) && before(NIGHT1_AM_04_00)) || (after(DAY2_AM_07_00) && before(NIGHT2_AM_04_00)) || (after(DAY3_AM_07_00) && before(NIGHT3_AM_04_00)))"
-    "Great Bay Coast Pot Ledge 1": "can_hookshot"
-    "Great Bay Coast Pot Ledge 2": "can_hookshot"
-    "Great Bay Coast Pot Ledge 3": "can_hookshot"
+    "Great Bay Coast Pot Ledge 1": "can_hookshot || short_hook_anywhere"
+    "Great Bay Coast Pot Ledge 2": "can_hookshot || short_hook_anywhere"
+    "Great Bay Coast Pot Ledge 3": "can_hookshot || short_hook_anywhere"
     "Great Bay Coast Pot 01": "true"
     "Great Bay Coast Pot 02": "true"
     "Great Bay Coast Pot 03": "true"
@@ -1619,7 +1619,7 @@
   region: ZORA_CAPE
   exits:
     "Zora Cape": "true"
-    "Great Bay Fairy Fountain": "has_explosives || trick_keg_explosives"
+    "Great Bay Fairy Fountain": "has_explosives || trick_keg_explosives || short_hook_anywhere"
 "Great Bay Fairy Fountain":
   region: ENTRANCE
   exits:
@@ -1690,7 +1690,7 @@
   exits:
     "Zora Hall": "true"
   locations:
-    "Zora Hall Scrub HP": "(trick(MM_ZORA_HALL_SCRUB_HP_NO_DEKU) && (has_mask_goron || has_mask_zora)) || (has_mask_goron && has(MASK_DEKU) && has(DEED_MOUNTAIN))"
+    "Zora Hall Scrub HP": "(trick(MM_ZORA_HALL_SCRUB_HP_NO_DEKU) && (has_mask_goron || has_mask_zora)) || (has_mask_goron && has(MASK_DEKU) && has(DEED_MOUNTAIN)) || short_hook_anywhere"
     "Zora Hall Scrub Shop": "has_mask_zora && can_use_wallet(1)"
     "Zora Hall Scrub Deed": "has(DEED_MOUNTAIN) && has_mask_goron"
 "Zora Cape Peninsula":
@@ -1703,13 +1703,13 @@
 "Behind Gorman Fence":
   region: MILK_ROAD
   exits:
-    "Milk Road": "(can_goron_bomb_jump && has_bombs) || (is_night2 && event(ALIENS)) || final_day"
+    "Milk Road": "(can_goron_bomb_jump && has_bombs) || (is_night2 && event(ALIENS)) || final_day || short_hook_anywhere"
     "Gorman Track Back": "true"
 "Gorman Track Front":
   region: MILK_ROAD
   exits:
     "Milk Road": "true"
-    "Gorman Track Back": "(can_goron_bomb_jump && has_bombs) || (is_night2 && event(ALIENS))"
+    "Gorman Track Back": "(can_goron_bomb_jump && has_bombs) || (is_night2 && event(ALIENS)) || short_hook_anywhere"
   locations:
     "Gorman Track Garo Mask": "can_play_epona && can_use_wallet(1) && is_day"
     "Gorman Track Milk Purchase": "can_use_wallet(1) && is_day"
@@ -1717,7 +1717,7 @@
   region: MILK_ROAD
   exits:
     "Behind Gorman Fence": "true"
-    "Gorman Track Front": "(can_goron_bomb_jump && has_bombs) || (is_night2 && event(ALIENS))"
+    "Gorman Track Front": "(can_goron_bomb_jump && has_bombs) || (is_night2 && event(ALIENS)) || short_hook_anywhere"
 "Road to Ikana Front":
   region: ROAD_TO_IKANA
   events:
