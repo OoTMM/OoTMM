@@ -53,6 +53,9 @@
   locations:
     "Great Bay Temple Map": "has_mask_zora || short_hook_anywhere || can_use_ice_arrows || can_hookshot || has(MASK_DEKU)"
     "Great Bay Temple SF Map Room Pot": "has_mask_zora || short_hook_anywhere || can_use_ice_arrows || has(MASK_DEKU)"
+    "Great Bay Temple Pot Map Room Surface 1": "true"
+    "Great Bay Temple Pot Map Room Surface 2": "true"
+    "Great Bay Temple Pot Map Room Surface 3": "has_mask_zora || short_hook_anywhere || can_use_ice_arrows || has(MASK_DEKU)"
     "Great Bay Temple Pot Map Room Water 1": "has_mask_zora || hookshot_anywhere"
     "Great Bay Temple Pot Map Room Water 2": "has_mask_zora || hookshot_anywhere"
     "Great Bay Temple Pot Map Room Water 3": "has_mask_zora || hookshot_anywhere"
@@ -61,9 +64,6 @@
     "Great Bay Temple Pot Map Room Water 6": "has_mask_zora || hookshot_anywhere"
     "Great Bay Temple Pot Map Room Water 7": "has_mask_zora || hookshot_anywhere"
     "Great Bay Temple Pot Map Room Water 8": "has_mask_zora || hookshot_anywhere"
-    "Great Bay Temple Pot Map Room Surface 1": "true"
-    "Great Bay Temple Pot Map Room Surface 2": "true"
-    "Great Bay Temple Pot Map Room Surface 3": "has_mask_zora || short_hook_anywhere || can_use_ice_arrows || has(MASK_DEKU)"
 "Great Bay Temple Baba Room":
   dungeon: GB
   exits:
@@ -94,7 +94,7 @@
 "Great Bay Temple Red Pipe 1":
   dungeon: GB
   exits:
-    "Great Bay Temple Central Room": "has_mask_zora || hookshot_anywhere || (can_use_ice_arrows && short_hook_anywhere)"
+    "Great Bay Temple Central Room": "has_mask_zora || hookshot_anywhere"
     "Great Bay Temple Ice Arrow Room": "small_keys_gb(1)"
   events:
     GB_PIPE_RED: "(soul_octorok && can_use_ice_arrows) || short_hook_anywhere"
