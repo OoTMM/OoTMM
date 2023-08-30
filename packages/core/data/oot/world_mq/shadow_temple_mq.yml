@@ -83,6 +83,10 @@
     "MQ Shadow Temple SR Pit Midair High": "can_longshot"
     "MQ Shadow Temple SR Pit Right": "true"
     "MQ Shadow Temple SR Pit Front": "true"
+    "MQ Shadow Temple Pot Guillotines Room Lower 1": "true"
+    "MQ Shadow Temple Pot Guillotines Room Lower 2": "true"
+    "MQ Shadow Temple Pot Guillotines Room Upper 1": "has(STRENGTH) && is_adult"
+    "MQ Shadow Temple Pot Guillotines Room Upper 2": "has(STRENGTH) && is_adult"
 "Shadow Temple Invisible Spike Floor":
   dungeon: Shadow
   exits:
@@ -110,6 +114,10 @@
     "MQ Shadow Temple After Wind Bomb Chest": "has_explosives"
     "MQ Shadow Temple GS Wind Hint": "true"
     "MQ Shadow Temple GS After Wind Bomb": "has_explosives"
+    "MQ Shadow Temple Pot Room Before Boat 1": "(has_weapon || can_use_sticks || can_use_din) || (can_play_sun)" #It would be too unfair to get around the Gibdos otherwise
+    "MQ Shadow Temple Pot Room Before Boat 2": "(has_weapon || can_use_sticks || can_use_din) || (can_play_sun)" #It would be too unfair to get around the Gibdos otherwise
+    "MQ Shadow Temple Flying Pot Room Before Boat 1": "soul_flying_pot && ((has_weapon || can_use_sticks || can_use_din) || (can_play_sun))" #It would be too unfair to get around the Gibdos otherwise
+    "MQ Shadow Temple Flying Pot Room Before Boat 2": "soul_flying_pot && ((has_weapon || can_use_sticks || can_use_din) || (can_play_sun))" #It would be too unfair to get around the Gibdos otherwise
 "Shadow Temple Boat":
   dungeon: Shadow
   exits:
