@@ -47,6 +47,8 @@
     "MQ Fire Temple Pot Lava Room Left": "has_tunic_goron"
     "MQ Fire Temple Pot Lava Room Alcove": "has_tunic_goron"
     "MQ Fire Temple Pot Lava Room Right": "has_tunic_goron && can_hookshot"
+    "MQ Fire Temple Pot Boss Key Room 1": "has_tunic_goron && has_fire && can_hookshot"
+    "MQ Fire Temple Pot Boss Key Room 2": "has_tunic_goron && has_fire && can_hookshot"
 "Fire Temple Maze Lower":
   dungeon: Fire
   exits:
