@@ -1163,7 +1163,7 @@
   region: TWIN_ISLANDS
   exits:
     "Twin Islands": "true"
-    "Goron Race": "can_use_keg || event(POWDER_KEG_TRIAL)"
+    "Goron Race": "can_use_keg || event(POWDER_KEG_TRIAL) || short_hook_anywhere"
     "Near Ramp Grotto": "true"
 "Near Ramp Grotto":
   region: TWIN_ISLANDS
