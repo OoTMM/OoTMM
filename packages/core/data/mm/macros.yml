@@ -127,7 +127,7 @@
 "has_regular_mask": "has(MASK_POSTMAN) || has(MASK_ALL_NIGHT) || has(MASK_BLAST) || has(MASK_STONE) || has(MASK_GREAT_FAIRY) || has_mask_keaton || has(MASK_BREMEN) || has_mask_bunny || has(MASK_DON_GERO) || has(MASK_SCENTS) || has(MASK_ROMANI) || has(MASK_TROUPE_LEADER) || has(MASK_KAFEI) || has(MASK_COUPLE) || has_mask_truth || has(MASK_KAMARO) || has(MASK_GIBDO) || has(MASK_GARO)) || has(MASK_CAPTAIN)" # Giant's Mask purposely excluded.
 
 "regular_masks_row1": "has(MASK_POSTMAN) || has(MASK_ALL_NIGHT) || has(MASK_BLAST) || has(MASK_STONE) || has(MASK_GREAT_FAIRY)"
-"regular_masks_row2": "has_mask_keaton || has(MASK_BREMEN) || has_mask_bunny || has(MASK_DON_GERO || has(MASK_SCENTS))"
+"regular_masks_row2": "has_mask_keaton || has(MASK_BREMEN) || has_mask_bunny || has(MASK_DON_GERO || has(MASK_SCENTS)"
 "regular_masks_row3": "has(MASK_ROMANI) || has(MASK_TROUPE_LEADER) || has(MASK_KAFEI) || has(MASK_COUPLE) || has_mask_truth"
 "regular_masks_row4": "has(MASK_KAMARO) || has(MASK_GIBDO) || has(MASK_GARO)) || has(MASK_CAPTAIN)"
 
