@@ -124,19 +124,13 @@
 "has_mask_keaton": "has(MASK_KEATON) || has(SHARED_MASK_KEATON)"
 "has_mask_zora": "has(MASK_ZORA) || has(SHARED_MASK_ZORA)"
 "has_mask_goron": "has(MASK_GORON) || has(SHARED_MASK_GORON)"
-
-"regular_masks_row1": "has(MASK_POSTMAN) || has(MASK_ALL_NIGHT) || has(MASK_BLAST) || has(MASK_STONE) || has(MASK_GREAT_FAIRY)"
-"regular_masks_row2": "has_mask_keaton || has(MASK_BREMEN) || has_mask_bunny || has(MASK_DON_GERO) || has(MASK_SCENTS)"
-"regular_masks_row3": "has(MASK_ROMANI) || has(MASK_TROUPE_LEADER) || has(MASK_KAFEI) || has(MASK_COUPLE) || has_mask_truth"
-"regular_masks_row4": "has(MASK_KAMARO) || has(MASK_GIBDO) || has(MASK_GARO)) || has(MASK_CAPTAIN)" # Giant's Mask purposely excluded.
-"has_regular_mask": "regular_masks_row1 || regular_masks_row2 || regular_masks_row3 || regular_masks_row4"
-
+"has_regular_mask": "has(MASK_POSTMAN) || has(MASK_ALL_NIGHT) || has(MASK_BLAST) || has(MASK_STONE) || has(MASK_GREAT_FAIRY) || has_mask_keaton || has(MASK_BREMEN) || has_mask_bunny || has(MASK_DON_GERO) || has(MASK_SCENTS) || has(MASK_ROMANI) || has(MASK_TROUPE_LEADER) || has(MASK_KAFEI) || has(MASK_COUPLE) || has_mask_truth || has(MASK_KAMARO) || has(MASK_GIBDO) || has(MASK_GARO) || has(MASK_CAPTAIN)"
 
 "er_enabled": "!setting(erDungeons, none) || !setting(erIndoors, none) || !setting(erRegions, none) || !setting(erBoss, none)"
 
 # Misc
 "soul(x)": "(!setting(enemySoulsMm)) || has(x)"
-"fd_anywhere": "has(MASK_FIERCE_DEITY) && (setting(fierceDeityAnywhere) || (glitch(MM_FD_ANYWHERE) && regular_masks_row3 && is_night3 && !setting(erRegions, none) && (can_play(SONG_SOARING) || event(SUN_MASK))))"
+"fd_anywhere": "has(MASK_FIERCE_DEITY) && (setting(fierceDeityAnywhere) || (glitch(MM_FD_ANYWHERE) && has_regular_mask && is_night3 && !setting(erRegions, none) && (can_play(SONG_SOARING) || event(SUN_MASK))))"
 "fd_goron_region_access": fd_anywhere && (has(OWL_MOUNTAIN_VILLAGE) || has(OWL_SNOWHEAD))
 "fd_zora_region_access": fd_anywhere && (has(OWL_GREAT_BAY) || has(OWL_ZORA_CAPE))
 "fd_ic_access": "fd_anywhere && (has(OWL_IKANA_CANYON) || has(OWL_STONE_TOWER))"
