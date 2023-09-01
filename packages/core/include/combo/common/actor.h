@@ -185,6 +185,10 @@
 # define AC_CUSTOM_ITEM     0x029
 # define AC_OBJ_TSUBO       0x082
 # define AC_EN_TUBO_TRAP    0x08d
+# define AC_EN_SKB          0x0ed
+# define AC_EN_RAIL_SKB     0x212
+# define AC_EN_NEO_REEBA    0x216
+# define AC_EN_HINT_SKB     0x2a5
 
 #endif
 

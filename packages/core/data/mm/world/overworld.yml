@@ -1722,9 +1722,9 @@
   exits:
     "Road to Ikana Center": "true"
     "Ikana Graveyard Grotto": "has_explosives || trick_keg_explosives"
-    "Beneath The Graveyard Night 1": "soul(SOUL_STALCHILD) && has(MASK_CAPTAIN) && is_night1"
-    "Beneath The Graveyard Night 2": "soul(SOUL_STALCHILD) && has(MASK_CAPTAIN) && is_night2"
-    "Beneath The Graveyard Night 3": "soul(SOUL_STALCHILD) && has(MASK_CAPTAIN) && is_night3"
+    "Beneath The Graveyard Night 1": "soul_stalchild && has(MASK_CAPTAIN) && is_night1"
+    "Beneath The Graveyard Night 2": "soul_stalchild && has(MASK_CAPTAIN) && is_night2"
+    "Beneath The Graveyard Night 3": "soul_stalchild && has(MASK_CAPTAIN) && is_night3"
   locations:
     "Ikana Graveyard Captain Mask": "soul(SOUL_CAPTAIN_KEETA) && can_play(SONG_AWAKENING) && has_arrows && can_fight"
 "Ikana Graveyard Grotto":

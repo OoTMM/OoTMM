@@ -563,6 +563,8 @@ export const SHARED_SOULS = new Set([
   Items.SHARED_SOUL_GUAY,
   Items.SHARED_SOUL_FLYING_POT,
   Items.SHARED_SOUL_FLOORMASTER,
+  Items.SHARED_SOUL_LEEVER,
+  Items.SHARED_SOUL_STALCHILD,
 ]);
 
 export const REQUIRED = new Set([
