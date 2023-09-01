@@ -403,6 +403,8 @@ static int csmcFromItemMm(s16 gi)
     case GI_MM_SOUL_GOHT:
     case GI_MM_SOUL_GYORG:
     case GI_MM_SOUL_TWINMOLD:
+    case GI_MM_SOUL_STALCHILD:
+    case GI_MM_SOUL_LEEVER:
         return CSMC_SOUL;
     }
     return CSMC_NORMAL;

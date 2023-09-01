@@ -46,7 +46,7 @@
     "Ocean Skulltula Colored Skulls Behind Picture": "can_hookshot_short || has_mask_zora || (has_mask_goron && (has_arrows || can_use_deku_bubble))"
     "Ocean Skulltula Colored Skulls Pot": "true"
     "Ocean Skulltula Colored Skulls Ceiling Edge": "can_hookshot_short || has_mask_zora"
-    "Ocean Spider House Chest HP": "has_arrows && (has(MASK_CAPTAIN) || trick(MM_CAPTAIN_SKIP))"
+    "Ocean Spider House Chest HP": "has_arrows && ((has(MASK_CAPTAIN) && soul(SOUL_STALCHILD)) || trick(MM_CAPTAIN_SKIP))"
     "Ocean Skulltula Storage Room Behind Boat": "true"
     "Ocean Skulltula Storage Room Ceiling Web": "can_use_fire_arrows && (can_hookshot_short || has_mask_zora)"
     "Ocean Skulltula Storage Room Behind Crate": "can_hookshot_short || has_mask_zora || (has_mask_goron && (has_arrows || can_use_deku_bubble || has_explosives || trick_keg_explosives))"

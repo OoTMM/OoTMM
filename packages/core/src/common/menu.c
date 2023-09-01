@@ -143,6 +143,8 @@ static const char* const kSoulsMm[] = {
     "Floormasters",
     "Chuchus",
     "Deep Pythons",
+    "Stalchildren",
+    "Leevers",
     "Skullfish",
     "Dexihands",
     "Dragonflies",

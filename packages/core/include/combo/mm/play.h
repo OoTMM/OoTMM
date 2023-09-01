@@ -304,6 +304,40 @@ ASSERT_OFFSET(MessageContext, bankRupeesSelected,   0x12078);
 ASSERT_OFFSET(MessageContext, unk_120d8,            0x120d8);
 _Static_assert(sizeof(MessageContext) == 0x120e0, "MM MessageContext size is wrong");
 
+typedef struct Room
+{
+    s8 id;
+    u8 unk_1;
+    u8 behaviorType2;
+    u8 behaviorType1;
+    s8 echo;
+    u8 lensMode;
+    u8 enablePosLights;
+    char unk_7;
+    char roomShape_pointer[0x4];
+    void* segment;
+    char unk_10[0x4];
+} 
+Room;
+_Static_assert(sizeof(Room) == 0x14, "MM Room size is wrong");
+
+typedef struct RoomContext
+{
+    Room curRoom;
+    Room prefRoom;
+    void* roomMemPages[0x2];
+    u8 activeMemPage;
+    s8 status;
+    char unk_32[0x2];
+    void* activeRoomVram;
+    char unk_38[0x48];
+} 
+RoomContext;
+ASSERT_OFFSET(RoomContext, roomMemPages, 0x28);
+ASSERT_OFFSET(RoomContext, unk_32, 0x32);
+ASSERT_OFFSET(RoomContext, unk_38, 0x38);
+_Static_assert(sizeof(RoomContext) == 0x80, "MM RoomContext size is wrong");
+
 
 typedef struct GameState_Play
 {
@@ -319,7 +353,9 @@ typedef struct GameState_Play
     PauseContext        pauseCtx;
     GameOverContext     gameOverCtx;
     EnvironmentContext  envCtx;
-    char                unk_17104[0x01698];
+    char                unk_17104[0x015dc];
+    RoomContext         roomCtx;
+    char                unk_18760[0x3c];
     s16                 playerActorCsIds[10];
     float               viewProjectionMtxF[16];
     Vec3f               projectionMtxFDiagonal;
@@ -370,6 +406,7 @@ ASSERT_OFFSET(GameState_Play, sramCtx,                  0x046b8);
 ASSERT_OFFSET(GameState_Play, msgCtx,                   0x04908);
 ASSERT_OFFSET(GameState_Play, interfaceCtx,             0x169e8);
 ASSERT_OFFSET(GameState_Play, envCtx,                   0x17004);
+ASSERT_OFFSET(GameState_Play, roomCtx,                  0x186e0);
 ASSERT_OFFSET(GameState_Play, gameplayFrames,           0x18840);
 ASSERT_OFFSET(GameState_Play, setupExitList,            0x18860);
 ASSERT_OFFSET(GameState_Play, transitionType,           0x1887f);
