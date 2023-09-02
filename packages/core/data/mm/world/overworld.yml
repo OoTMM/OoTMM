@@ -1859,7 +1859,7 @@
     "Swamp Front": "true"
   locations:
     "Ikana Valley Scrub Rupee": "has(DEED_OCEAN) && has_mask_zora"
-    "Ikana Valley Scrub HP": "has(DEED_OCEAN) && has_mask_zora && has(MASK_DEKU)"
+    "Ikana Valley Scrub HP": "(has(DEED_OCEAN) && has_mask_zora && has(MASK_DEKU)) || hookshot_anywhere"
     "Ikana Valley Scrub Shop": "can_use_wallet(2)"
   gossip:
     "Ikana Valley Gossip Lower": "true"
@@ -1962,9 +1962,9 @@
   region: STONE_TOWER
   exits:
     "Ikana Canyon": "true"
-    "Stone Tower Top": "((can_use_elegy3 || (can_use_elegy2 && trick(MM_ONE_MASK_STONE_TOWER))) && can_hookshot) || (can_use_elegy3 && short_hook_anywhere && trick(MM_OOB_MOVEMENT))"
-    "Stone Tower Lower Scarecrow Ledge": "(can_use_elegy3 || (can_use_elegy2 && trick(MM_ONE_MASK_STONE_TOWER))) && scarecrow_hookshot"
-    "Stone Tower Upper Scarecrow Ledge": "((can_use_elegy3 || (can_use_elegy2 && trick(MM_ONE_MASK_STONE_TOWER))) && can_hookshot) || (can_use_elegy3 && short_hook_anywhere)"
+    "Stone Tower Top": "((can_use_elegy3 || (can_use_elegy2 && trick(MM_ONE_MASK_STONE_TOWER))) && can_hookshot) || (can_use_elegy3 && short_hook_anywhere && trick(MM_OOB_MOVEMENT)) || hookshot_anywhere"
+    "Stone Tower Lower Scarecrow Ledge": "((can_use_elegy3 || (can_use_elegy2 && trick(MM_ONE_MASK_STONE_TOWER))) && scarecrow_hookshot) || hookshot_anywhere"
+    "Stone Tower Upper Scarecrow Ledge": "((can_use_elegy3 || (can_use_elegy2 && trick(MM_ONE_MASK_STONE_TOWER))) && can_hookshot) || (can_use_elegy3 && short_hook_anywhere) || hookshot_anywhere"
   locations:
     "Stone Tower Pot Climb 1": "can_hookshot_short"
     "Stone Tower Pot Climb 2": "can_hookshot_short"
@@ -1972,19 +1972,19 @@
   region: STONE_TOWER
   exits:
     "Stone Tower": "true"
-    "Stone Tower Front of Temple": "can_use_elegy || (short_hook_anywhere && trick(MM_OOB_MOVEMENT))"
+    "Stone Tower Front of Temple": "can_use_elegy || (short_hook_anywhere && trick(MM_OOB_MOVEMENT)) || hookshot_anywhere"
     "Stone Tower Top Inverted": "can_use_elegy && can_use_light_arrows"
-    "Stone Tower Lower Scarecrow Ledge": "has_mask_goron || scarecrow_hookshot"
+    "Stone Tower Lower Scarecrow Ledge": "has_mask_goron || scarecrow_hookshot || hookshot_anywhere"
     "Stone Tower Upper Scarecrow Ledge": "scarecrow_hookshot || short_hook_anywhere"
     "Owl Stone Tower": "true"
 "Stone Tower Front of Temple":
   region: STONE_TOWER
   exits:
     "Stone Tower": "true"
-    "Stone Tower Top": "can_use_elegy3 || (can_use_elegy2 && trick(MM_ONE_MASK_STONE_TOWER) && short_hook_anywhere)"
+    "Stone Tower Top": "can_use_elegy3 || (can_use_elegy2 && trick(MM_ONE_MASK_STONE_TOWER) && short_hook_anywhere) || can_hookshot"
     "Stone Tower Top Inverted": "can_use_elegy && can_use_light_arrows"
     "Stone Tower Temple": "true"
-    "Stone Tower Lower Scarecrow Ledge": "has_mask_goron || has_mask_zora || scarecrow_hookshot" # || (can_jumpslash) # Can simply backwalk off the ledge, jumpslash and recoil down to the ledge, but that should be a trick.
+    "Stone Tower Lower Scarecrow Ledge": "has_mask_goron || has_mask_zora || scarecrow_hookshot || hookshot_anywhere || (short_hook_anywhere && trick(MM_OOB_MOVEMENT))" # || (can_jumpslash) # Can simply backwalk off the ledge, jumpslash and recoil down to the ledge, but that should be a trick.
     "Stone Tower Upper Scarecrow Ledge": "scarecrow_hookshot || short_hook_anywhere"
 "Stone Tower Lower Scarecrow Ledge":
   region: STONE_TOWER
@@ -2033,7 +2033,7 @@
   exits:
     "Stone Tower Temple Inverted": "true"
     "Stone Tower Top": "can_use_light_arrows"
-    "Stone Tower Top Inverted Upper": "can_use_beans"
+    "Stone Tower Top Inverted Upper": "can_use_beans || hookshot_anywhere"
 "Stone Tower Top Inverted Upper":
   region: STONE_TOWER
   events:

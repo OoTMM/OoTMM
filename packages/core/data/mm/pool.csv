@@ -828,11 +828,11 @@ Stone Tower Temple Inverted Flying Pot Pre-Boss 3,pot,            NONE,         
 Stone Tower Temple Inverted Flying Pot Pre-Boss 4,pot,            NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x081d,                     NOTHING
 Stone Tower Temple Pot Entrance 1,                pot,            NONE,                   TEMPLE_STONE_TOWER,           0x0007,                     RECOVERY_HEART
 Stone Tower Temple Pot Entrance 2,                pot,            NONE,                   TEMPLE_STONE_TOWER,           0x0008,                     FAIRY
-Stone Tower Temple Pot Water Room Underwater 1,   pot,            NONE,                   TEMPLE_STONE_TOWER,           0x030a,                     MAGIC_JAR_LARGE
-Stone Tower Temple Pot Water Room Underwater 2,   pot,            NONE,                   TEMPLE_STONE_TOWER,           0x030b,                     MAGIC_JAR_LARGE
-Stone Tower Temple Pot Water Room Underwater 3,   pot,            NONE,                   TEMPLE_STONE_TOWER,           0x030c,                     MAGIC_JAR_LARGE
-Stone Tower Temple Pot Water Room Underwater 4,   pot,            NONE,                   TEMPLE_STONE_TOWER,           0x030d,                     NOTHING
-Stone Tower Temple Pot Water Room Underwater 5,   pot,            NONE,                   TEMPLE_STONE_TOWER,           0x030e,                     NOTHING
+Stone Tower Temple Pot Water Room Underwater Lower 1,   pot,            NONE,                   TEMPLE_STONE_TOWER,           0x030a,                     MAGIC_JAR_LARGE
+Stone Tower Temple Pot Water Room Underwater Lower 2,   pot,            NONE,                   TEMPLE_STONE_TOWER,           0x030b,                     MAGIC_JAR_LARGE
+Stone Tower Temple Pot Water Room Underwater Lower 3,   pot,            NONE,                   TEMPLE_STONE_TOWER,           0x030c,                     MAGIC_JAR_LARGE
+Stone Tower Temple Pot Water Room Underwater Upper 1,   pot,            NONE,                   TEMPLE_STONE_TOWER,           0x030d,                     NOTHING
+Stone Tower Temple Pot Water Room Underwater Upper 2,   pot,            NONE,                   TEMPLE_STONE_TOWER,           0x030e,                     NOTHING
 Stone Tower Temple Pot Water Room Bridge 1,       pot,            NONE,                   TEMPLE_STONE_TOWER,           0x0316,                     RECOVERY_HEART
 Stone Tower Temple Pot Water Room Bridge 2,       pot,            NONE,                   TEMPLE_STONE_TOWER,           0x0317,                     RECOVERY_HEART
 Stone Tower Temple Pot Lava Room After Block 1,   pot,            NONE,                   TEMPLE_STONE_TOWER,           0x040b,                     RECOVERY_HEART
