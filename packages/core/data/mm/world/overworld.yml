@@ -973,6 +973,7 @@
 "Swamp Canopy Back":
   region: SOUTHERN_SWAMP
   exits:
+    "Swamp Front": "(has(MASK_DEKU) || has_mask_goron) && (can_hookshot || has_arrows)"
     "Swamp Back": "has(MASK_DEKU) || has_mask_zora || event(CLEAN_SWAMP)"
     "Woodfall": "true"
     "Swamp Canopy Front": "has(MASK_DEKU) || short_hook_anywhere"
@@ -984,13 +985,13 @@
     MAGIC: "true"
   exits:
     "Swamp Canopy Back": "true"
-    "Woodfall Shrine": "has(MASK_DEKU) && (soul_deku_scrub || event(CLEAN_SWAMP))"
+    "Woodfall Shrine": "(has(MASK_DEKU) && (soul_deku_scrub || event(CLEAN_SWAMP))) || hookshot_anywhere"
     "Woodfall Temple Princess Jail": "event(CLEAN_SWAMP) && event(OPEN_WOODFALL_TEMPLE)"
     "Woodfall Near Fairy Fountain": "event(CLEAN_SWAMP) && short_hook_anywhere"
   locations:
     "Woodfall Entrance Chest": "has(MASK_DEKU) || can_hookshot || event(CLEAN_SWAMP)"
     "Woodfall HP Chest": "(has(MASK_DEKU) && (soul_deku_scrub || event(CLEAN_SWAMP))) || can_hookshot"
-    "Woodfall Near Owl Chest": "(has(MASK_DEKU) && (soul_deku_scrub || event(CLEAN_SWAMP))) || (event(CLEAN_SWAMP) && can_hookshot)"
+    "Woodfall Near Owl Chest": "(has(MASK_DEKU) && (soul_deku_scrub || event(CLEAN_SWAMP))) || (event(CLEAN_SWAMP) && can_hookshot) || hookshot_anywhere"
 "Woodfall Front of Temple":
   region: WOODFALL
   exits:
@@ -1000,8 +1001,8 @@
 "Woodfall Shrine":
   region: WOODFALL
   exits:
-    "Woodfall": "(has(MASK_DEKU) && (soul_deku_scrub || event(CLEAN_SWAMP))) || event(CLEAN_SWAMP)"
-    "Woodfall Near Fairy Fountain": "has(MASK_DEKU) && (soul_deku_scrub || event(CLEAN_SWAMP) || short_hook_anywhere)"
+    "Woodfall": "(has(MASK_DEKU) && (soul_deku_scrub || event(CLEAN_SWAMP))) || event(CLEAN_SWAMP) || hookshot_anywhere"
+    "Woodfall Near Fairy Fountain": "(has(MASK_DEKU) && (soul_deku_scrub || event(CLEAN_SWAMP) || short_hook_anywhere)) || hookshot_anywhere"
     "Woodfall Front of Temple": "event(OPEN_WOODFALL_TEMPLE)"
     "Owl Woodfall": "true"
   events:
@@ -1011,8 +1012,8 @@
 "Woodfall Near Fairy Fountain":
   region: WOODFALL
   exits:
-    "Woodfall": "(has(MASK_DEKU) && (soul_deku_scrub || event(CLEAN_SWAMP))) || event(CLEAN_SWAMP)"
-    "Woodfall Shrine": "has(MASK_DEKU) && (soul_deku_scrub || event(CLEAN_SWAMP))"
+    "Woodfall": "(has(MASK_DEKU) && (soul_deku_scrub || event(CLEAN_SWAMP))) || event(CLEAN_SWAMP) || hookshot_anywhere"
+    "Woodfall Shrine": "(has(MASK_DEKU) && (soul_deku_scrub || event(CLEAN_SWAMP))) || hookshot_anywhere"
     "Woodfall Fairy Fountain": "true"
   locations:
     "Woodfall Near Owl Chest": "can_hookshot"

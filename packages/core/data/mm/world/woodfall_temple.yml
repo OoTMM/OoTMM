@@ -107,7 +107,7 @@
     "Woodfall Temple Main Ledge": "true"
     "Woodfall Temple Water Room": "true"
     "Woodfall Temple Bow Room": "true"
-    "Woodfall Temple Boss Key Room": "(has_arrows && has(MASK_DEKU)) || (short_hook_anywhere && event(WOODFALL_TEMPLE_MAIN_FLOWER))"
+    "Woodfall Temple Boss Key Room": "(has_arrows && has(MASK_DEKU)) || (short_hook_anywhere && event(WOODFALL_TEMPLE_MAIN_FLOWER)) || hookshot_anywhere"
   locations:
     "Woodfall Temple Pot Water Room 1": "true"
     "Woodfall Temple Pot Water Room 2": "true"
