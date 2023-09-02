@@ -1263,20 +1263,20 @@
   region: PATH_TO_SNOWHEAD
   exits:
     "Mountain Village": "true"
-    "Path to Snowhead Middle": "goron_fast_roll"
+    "Path to Snowhead Middle": "goron_fast_roll || hookshot_anywhere"
 "Path to Snowhead Middle":
   region: PATH_TO_SNOWHEAD
   exits:
     "Path to Snowhead Front": "true"
     "Path to Snowhead Back": "true"
   locations:
-    "Path to Snowhead HP": "can_use_lens && scarecrow_hookshot"
+    "Path to Snowhead HP": "can_use_lens && (scarecrow_hookshot || hookshot_anywhere)"
 "Path to Snowhead Back":
   region: PATH_TO_SNOWHEAD
   events:
     MAGIC: "can_break_boulders"
   exits:
-    "Path to Snowhead Middle": "goron_fast_roll"
+    "Path to Snowhead Middle": "goron_fast_roll || hookshot_anywhere"
     "Snowhead Entrance": "true"
     "Path to Snowhead Grotto": "has_explosives || trick_keg_explosives"
 "Path to Snowhead Grotto":
