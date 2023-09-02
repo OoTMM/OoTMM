@@ -167,7 +167,7 @@
     "Snowhead Temple Icicles": "small_keys_sh(3) || ((has_explosives || trick_keg_explosives) && small_keys_sh(2))"
     "Snowhead Temple Center Level 2 Dual": "true"
   locations:
-    "Snowhead Temple SF Dual Switches": "can_use_lens && has_arrows && has(MASK_GREAT_FAIRY)"
+    "Snowhead Temple SF Dual Switches": "can_use_lens && (((has_arrows || can_hookshot) && has(MASK_GREAT_FAIRY)) || hookshot_anywhere)"
     "Snowhead Temple Pot Dual Switches 1": "true"
     "Snowhead Temple Pot Dual Switches 2": "true"
 "Snowhead Temple Center Level 2 Dual":
