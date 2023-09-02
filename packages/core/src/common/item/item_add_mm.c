@@ -786,6 +786,12 @@ void comboAddItemSharedMm(s16 gi, int noEffect)
         case GI_MM_SOUL_FLOORMASTER:
             comboAddSoulOot(GI_OOT_SOUL_FLOORMASTER);
             break;
+        case GI_MM_SOUL_LEEVER:
+            comboAddSoulOot(GI_OOT_SOUL_LEEVER);
+            break;
+        case GI_MM_SOUL_STALCHILD:
+            comboAddSoulOot(GI_OOT_SOUL_STALCHILD);
+            break;
         }
     }
 
@@ -1350,6 +1356,8 @@ int comboAddItemMm(s16 gi, int noEffect)
     case GI_MM_SOUL_GOHT:
     case GI_MM_SOUL_GYORG:
     case GI_MM_SOUL_TWINMOLD:
+    case GI_MM_SOUL_STALCHILD:
+    case GI_MM_SOUL_LEEVER:    
         comboAddSoulMm(gi);
         break;
     }

@@ -824,6 +824,12 @@ void comboAddItemSharedOot(s16 gi, int noEffect)
         case GI_OOT_SOUL_FLOORMASTER:
             comboAddSoulMm(GI_MM_SOUL_FLOORMASTER);
             break;
+        case GI_OOT_SOUL_LEEVER:
+            comboAddSoulMm(GI_MM_SOUL_LEEVER);
+            break;
+        case GI_OOT_SOUL_STALCHILD:
+            comboAddSoulMm(GI_MM_SOUL_STALCHILD);
+            break;
         }
     }
 
@@ -1480,11 +1486,13 @@ int comboAddItemOot(s16 gi, int noEffect)
     case GI_OOT_SOUL_DODONGO:
     case GI_OOT_SOUL_KEESE:
     case GI_OOT_SOUL_TEKTITE:
+    case GI_OOT_SOUL_LEEVER:
     case GI_OOT_SOUL_PEAHAT:
     case GI_OOT_SOUL_LIZALFOS_DINALFOS:
     case GI_OOT_SOUL_GOHMA_LARVA:
     case GI_OOT_SOUL_SHABOM:
     case GI_OOT_SOUL_BABY_DODONGO:
+    case GI_OOT_SOUL_DARK_LINK:
     case GI_OOT_SOUL_BIRI_BARI:
     case GI_OOT_SOUL_TAILPASARN:
     case GI_OOT_SOUL_PARASITE:
@@ -1511,6 +1519,7 @@ int comboAddItemOot(s16 gi, int noEffect)
     case GI_OOT_SOUL_FREEZARD:
     case GI_OOT_SOUL_STINGER:
     case GI_OOT_SOUL_WOLFOS:
+    case GI_OOT_SOUL_STALCHILD:
     case GI_OOT_SOUL_GUAY:
     case GI_OOT_SOUL_QUEEN_GOHMA:
     case GI_OOT_SOUL_KING_DODONGO:

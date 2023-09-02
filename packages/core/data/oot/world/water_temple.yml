@@ -129,8 +129,8 @@
 "Water Temple Dark Link":
   dungeon: Water
   exits:
-    "Water Temple Longshot Room": "has_weapon"
-    "Water Temple Before Dark Link": "has_weapon"
+    "Water Temple Longshot Room": "soul(SOUL_DARK_LINK) && has_weapon"
+    "Water Temple Before Dark Link": "soul(SOUL_DARK_LINK) && has_weapon"
 "Water Temple Longshot Room":
   dungeon: Water
   exits:

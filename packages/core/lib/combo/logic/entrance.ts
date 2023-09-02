@@ -484,6 +484,9 @@ export class LogicPassEntrances {
       /* We need to propagate the region */
       for (const exitName of Object.keys(a.exits)) {
         const exitArea = world.areas[exitName];
+        if (exitArea == undefined) {
+          throw new LogicEntranceError(`Unknown exit: ${exitName}`);
+        }
         if (exitArea.region === 'ENTRANCE') {
           exitArea.region = a.region;
           for (const loc of Object.keys(exitArea.locations)) {
