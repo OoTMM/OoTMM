@@ -167,6 +167,7 @@ export class LogicPassConfig {
       OOT_SHUFFLE_POTS: settings.shufflePotsOot,
       MM_SHUFFLE_POTS: settings.shufflePotsMm,
       OOT_SHUFFLE_GRASS: settings.shuffleGrassOot,
+      MM_SHUFFLE_GRASS: settings.shuffleGrassMm,
       MENU_NOTEBOOK: settings.menuNotebook,
       OOT_AGELESS_CHILD_TRADE: settings.agelessChildTrade,
       OOT_START_ADULT: settings.startingAge === 'adult',

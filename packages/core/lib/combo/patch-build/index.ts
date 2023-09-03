@@ -58,6 +58,7 @@ function asmPatchGroups(settings: Settings) {
     OOT_SHUFFLE_POTS: settings.shufflePotsOot,
     MM_SHUFFLE_POTS: settings.shufflePotsMm,
     OOT_SHUFFLE_GRASS: settings.shuffleGrassOot,
+    MM_SHUFFLE_GRASS: settings.shuffleGrassMm,
     MM_LENIENT_SPIKES: settings.lenientSpikes,
   };
   const keys = Object.keys(groups) as PatchGroup[];

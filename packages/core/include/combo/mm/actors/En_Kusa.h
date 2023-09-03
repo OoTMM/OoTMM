@@ -7,13 +7,13 @@
 typedef struct ALIGNED(4)
 {
     Actor           base;
-    char            unk_13c[0x54];
+    char            unk_144[0x58];
 
     /* Extended flags */
     Xflag xflag;
 }
 Actor_EnKusa;
 
-_Static_assert(sizeof(Actor_EnKusa) == 0x198, "OoT Actor_EnKusa size is wrong");
+_Static_assert(sizeof(Actor_EnKusa) == 0x1a4, "MM Actor_EnKusa size is wrong");
 
 #endif
