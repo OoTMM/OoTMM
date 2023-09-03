@@ -11,7 +11,7 @@
     "Ancient Castle of Ikana": "true"
     "Ancient Castle of Ikana Interior North": "can_use_fire_arrows"
     "Ancient Castle of Ikana Interior South": "can_use_fire_arrows"
-    "Ancient Castle of Ikana Behind Block": "(has_mirror_shield && event(IKANA_CASTLE_LIGHT2)) || can_use_light_arrows"
+    "Ancient Castle of Ikana Behind Block": "(has_mirror_shield && event(IKANA_CASTLE_LIGHT2)) || can_use_light_arrows || short_hook_anywhere"
   locations:
     "Ancient Castle of Ikana Pot Entrance 1": "true"
     "Ancient Castle of Ikana Pot Entrance 2": "true"
@@ -19,27 +19,27 @@
   dungeon: ACoI
   exits:
     "Ancient Castle of Ikana Interior": "true"
-    "Ancient Castle of Ikana Interior North 2": "has(MASK_DEKU)"
+    "Ancient Castle of Ikana Interior North 2": "has(MASK_DEKU) || short_hook_anywhere"
   locations:
     "Ancient Castle of Ikana Pot Left First Room 1": "true"
     "Ancient Castle of Ikana Pot Left First Room 2": "true"
 "Ancient Castle of Ikana Interior North 2":
   dungeon: ACoI
   events:
-    MAGIC: "has(MASK_DEKU)"
-    FAIRY: "has(MASK_DEKU)"
+    MAGIC: "has(MASK_DEKU) || short_hook_anywhere"
+    FAIRY: "has(MASK_DEKU) || short_hook_anywhere"
   exits:
-    "Ancient Castle of Ikana Interior North": "has(MASK_DEKU)"
-    "Ancient Castle of Ikana Interior North 3": "can_use_lens && has(MASK_DEKU)" # redundant for now, but future proofs for when the trick for doing the previous room Deku-less is added.
+    "Ancient Castle of Ikana Interior North": "true"
+    "Ancient Castle of Ikana Interior North 3": "can_use_lens || short_hook_anywhere"
   locations:
-    "Ancient Castle of Ikana Pot Left Second Room 1": "has(MASK_DEKU)" # this jumpslash might need to be a trick
-    "Ancient Castle of Ikana Pot Left Second Room 2": "has(MASK_DEKU)"
-    "Ancient Castle of Ikana Pot Left Second Room 3": "has(MASK_DEKU)"
-    "Ancient Castle of Ikana Pot Left Second Room 4": "has(MASK_DEKU)"
+    "Ancient Castle of Ikana Pot Left Second Room 1": "has(MASK_DEKU) || short_hook_anywhere"
+    "Ancient Castle of Ikana Pot Left Second Room 2": "has(MASK_DEKU) || short_hook_anywhere"
+    "Ancient Castle of Ikana Pot Left Second Room 3": "has(MASK_DEKU) || short_hook_anywhere"
+    "Ancient Castle of Ikana Pot Left Second Room 4": "has(MASK_DEKU) || short_hook_anywhere"
 "Ancient Castle of Ikana Interior North 3":
   dungeon: ACoI
   exits:
-    "Ancient Castle of Ikana Interior North 2": "can_use_lens"
+    "Ancient Castle of Ikana Interior North 2": "true"
     "Ancient Castle of Ikana Roof Exterior": "true"
   locations:
     "Ancient Castle of Ikana Pot Left Third Room 1": "true"
@@ -48,23 +48,23 @@
   dungeon: ACoI
   exits:
     "Ancient Castle of Ikana Interior North 3": "true"
-    "Ancient Castle of Ikana Roof Interior": "can_goron_bomb_jump"
+    "Ancient Castle of Ikana Roof Interior": "can_goron_bomb_jump || short_hook_anywhere"
     "Ikana Castle Exterior": "true"
   events:
-    IKANA_CASTLE_LIGHT: "cond(setting(erIkanaCastle), has(MASK_DEKU), true)" #|| (has_mask_zora && can_gainer) Can press the switch trivially, but can't get back to the roof without these.
+    IKANA_CASTLE_LIGHT: "cond(setting(erIkanaCastle), has(MASK_DEKU) || short_hook_anywhere, true)" #|| (has_mask_zora && can_gainer) Can press the switch trivially, but can't get back to the roof without these.
     IKANA_CASTLE_LIGHT2: "can_use_keg"
     NUTS: "true"
   locations:
-    "Ancient Castle of Ikana HP": "(has_arrows || can_hookshot_short) && has(MASK_DEKU)"
+    "Ancient Castle of Ikana HP": "((has_arrows || can_hookshot_short) && has(MASK_DEKU)) || short_hook_anywhere"
 "Ancient Castle of Ikana Interior South":
   dungeon: ACoI
   exits:
     "Ancient Castle of Ikana Interior": "true"
-    "Ancient Castle of Ikana Wizzrobe": "(has_mirror_shield && event(IKANA_CASTLE_LIGHT)) || can_use_light_arrows"
+    "Ancient Castle of Ikana Wizzrobe": "((has_mirror_shield && event(IKANA_CASTLE_LIGHT)) || can_use_light_arrows) || short_hook_anywhere"
 "Ancient Castle of Ikana Wizzrobe":
   dungeon: ACoI
   exits:
-    "Ancient Castle of Ikana Interior South": "soul(SOUL_WIZZROBE) && can_use_light_arrows"
+    "Ancient Castle of Ikana Interior South": "soul(SOUL_WIZZROBE) && (can_use_light_arrows || short_hook_anywhere) && (can_fight || has_arrows)"
     "Ancient Castle of Ikana South Last": "soul(SOUL_WIZZROBE) && (can_fight || has_arrows)"
 "Ancient Castle of Ikana South Last":
   dungeon: ACoI
@@ -79,13 +79,13 @@
   exits:
     "Ancient Castle of Ikana Interior": "event(IKANA_CASTLE_LIGHT2)"
     "Ancient Castle of Ikana South Last": "true"
-    "Ancient Castle of Ikana Roof Exterior": "trick(MM_IKANA_ROOF_PARKOUR)"
+    "Ancient Castle of Ikana Roof Exterior": "trick(MM_IKANA_ROOF_PARKOUR) || short_hook_anywhere"
   events:
     IKANA_CASTLE_LIGHT2: "can_use_keg"
 "Ancient Castle of Ikana Behind Block":
   dungeon: ACoI
   exits:
-    "Ancient Castle of Ikana Interior": "can_use_light_arrows"
+    "Ancient Castle of Ikana Interior": "can_use_light_arrows || short_hook_anywhere"
     "Ancient Castle of Ikana Pre-Boss": "true"
 "Ancient Castle of Ikana Pre-Boss":
   dungeon: ACoI

@@ -71,6 +71,11 @@ export const TRICKS = {
   MM_ISTT_CHUCHU_LESS: "ISTT Block Room without Chuchu jellies",
   MM_GBT_WATERWHEEL_GORON: "Cross GBT WaterWheel Room as Goron",
   MM_GBT_ENTRANCE_BOW: "Great Bay Temple Entrance Chest using only Bow",
+  MM_OOB_MOVEMENT: "Walk Along Surfaces Out of Bounds",
+  MM_ST_UPDRAFTS: "Stone Tower Updrafts without Deku Mask",
+  MM_ESCAPE_CAGE: "Escape the Monkey Cage with Hookshot Anywhere",
+  MM_GBT_FAIRY2_HOOK: "GBT First Underwater Fairy with Short Hookshot Anywhere",
+  MM_GBT_CENTRAL_GEYSER: "GBT Central Room without Zora using Fire & Ice Arrows",
 };
 
 export type Trick = keyof typeof TRICKS;

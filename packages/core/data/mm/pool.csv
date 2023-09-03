@@ -658,24 +658,24 @@ Great Bay Temple Boss Pot Underwater 3,           pot,            NONE,         
 Great Bay Temple Boss Pot Underwater 4,           pot,            NONE,                   LAIR_GYORG,                   0x0008,                     MAGIC_JAR_LARGE
 Great Bay Temple Pot Central Room 1,              pot,            NONE,                   TEMPLE_GREAT_BAY,             0x0010,                     RECOVERY_HEART
 Great Bay Temple Pot Central Room 2,              pot,            NONE,                   TEMPLE_GREAT_BAY,             0x0011,                     MAGIC_JAR_LARGE
-Great Bay Temple Pot Map Room 01,                 pot,            NONE,                   TEMPLE_GREAT_BAY,             0x0103,                     RECOVERY_HEART
-Great Bay Temple Pot Map Room 02,                 pot,            NONE,                   TEMPLE_GREAT_BAY,             0x0104,                     RECOVERY_HEART
-Great Bay Temple Pot Map Room 03,                 pot,            NONE,                   TEMPLE_GREAT_BAY,             0x0105,                     MAGIC_JAR_LARGE
-Great Bay Temple Pot Map Room 04,                 pot,            NONE,                   TEMPLE_GREAT_BAY,             0x0106,                     MAGIC_JAR_LARGE
-Great Bay Temple Pot Map Room 05,                 pot,            NONE,                   TEMPLE_GREAT_BAY,             0x010a,                     RECOVERY_HEART
-Great Bay Temple Pot Map Room 06,                 pot,            NONE,                   TEMPLE_GREAT_BAY,             0x010b,                     RECOVERY_HEART
-Great Bay Temple Pot Map Room 07,                 pot,            NONE,                   TEMPLE_GREAT_BAY,             0x010c,                     RECOVERY_HEART
-Great Bay Temple Pot Map Room 08,                 pot,            NONE,                   TEMPLE_GREAT_BAY,             0x010d,                     RECOVERY_HEART
-Great Bay Temple Pot Map Room 09,                 pot,            NONE,                   TEMPLE_GREAT_BAY,             0x010e,                     RECOVERY_HEART
-Great Bay Temple Pot Map Room 10,                 pot,            NONE,                   TEMPLE_GREAT_BAY,             0x010f,                     RECOVERY_HEART
-Great Bay Temple Pot Map Room 11,                 pot,            NONE,                   TEMPLE_GREAT_BAY,             0x0110,                     MAGIC_JAR_LARGE
-Great Bay Temple Pot Compass Room 1,              pot,            NONE,                   TEMPLE_GREAT_BAY,             0x0409,                     RECOVERY_HEART
-Great Bay Temple Pot Compass Room 2,              pot,            NONE,                   TEMPLE_GREAT_BAY,             0x040a,                     RECOVERY_HEART
-Great Bay Temple Pot Compass Room 3,              pot,            NONE,                   TEMPLE_GREAT_BAY,             0x040b,                     ARROWS_10
-Great Bay Temple Pot Compass Room 4,              pot,            NONE,                   TEMPLE_GREAT_BAY,             0x040c,                     ARROWS_10
-Great Bay Temple Pot Compass Room 5,              pot,            NONE,                   TEMPLE_GREAT_BAY,             0x040d,                     MAGIC_JAR_SMALL
-Great Bay Temple Pot Compass Room 6,              pot,            NONE,                   TEMPLE_GREAT_BAY,             0x0414,                     RECOVERY_HEART
-Great Bay Temple Pot Compass Room 7,              pot,            NONE,                   TEMPLE_GREAT_BAY,             0x0415,                     RECOVERY_HEART
+Great Bay Temple Pot Map Room Surface 1,          pot,            NONE,                   TEMPLE_GREAT_BAY,             0x010e,                     RECOVERY_HEART
+Great Bay Temple Pot Map Room Surface 2,          pot,            NONE,                   TEMPLE_GREAT_BAY,             0x010f,                     RECOVERY_HEART
+Great Bay Temple Pot Map Room Surface 3,          pot,            NONE,                   TEMPLE_GREAT_BAY,             0x0110,                     MAGIC_JAR_LARGE
+Great Bay Temple Pot Map Room Water 1,            pot,            NONE,                   TEMPLE_GREAT_BAY,             0x0103,                     RECOVERY_HEART
+Great Bay Temple Pot Map Room Water 2,            pot,            NONE,                   TEMPLE_GREAT_BAY,             0x0104,                     RECOVERY_HEART
+Great Bay Temple Pot Map Room Water 3,            pot,            NONE,                   TEMPLE_GREAT_BAY,             0x0105,                     MAGIC_JAR_LARGE
+Great Bay Temple Pot Map Room Water 4,            pot,            NONE,                   TEMPLE_GREAT_BAY,             0x0106,                     MAGIC_JAR_LARGE
+Great Bay Temple Pot Map Room Water 5,            pot,            NONE,                   TEMPLE_GREAT_BAY,             0x010a,                     RECOVERY_HEART
+Great Bay Temple Pot Map Room Water 6,            pot,            NONE,                   TEMPLE_GREAT_BAY,             0x010b,                     RECOVERY_HEART
+Great Bay Temple Pot Map Room Water 7,            pot,            NONE,                   TEMPLE_GREAT_BAY,             0x010c,                     RECOVERY_HEART
+Great Bay Temple Pot Map Room Water 8,            pot,            NONE,                   TEMPLE_GREAT_BAY,             0x010d,                     RECOVERY_HEART
+Great Bay Temple Pot Compass Room Surface 1,      pot,            NONE,                   TEMPLE_GREAT_BAY,             0x0409,                     RECOVERY_HEART
+Great Bay Temple Pot Compass Room Surface 2,      pot,            NONE,                   TEMPLE_GREAT_BAY,             0x0414,                     RECOVERY_HEART
+Great Bay Temple Pot Compass Room Surface 3,      pot,            NONE,                   TEMPLE_GREAT_BAY,             0x0415,                     RECOVERY_HEART
+Great Bay Temple Pot Compass Room Surface 4,      pot,            NONE,                   TEMPLE_GREAT_BAY,             0x040a,                     RECOVERY_HEART
+Great Bay Temple Pot Compass Room Water 1,        pot,            NONE,                   TEMPLE_GREAT_BAY,             0x040b,                     ARROWS_10
+Great Bay Temple Pot Compass Room Water 2,        pot,            NONE,                   TEMPLE_GREAT_BAY,             0x040d,                     MAGIC_JAR_SMALL
+Great Bay Temple Pot Compass Room Water 3,        pot,            NONE,                   TEMPLE_GREAT_BAY,             0x040c,                     ARROWS_10
 Great Bay Temple Pot Red Pipe Before Wart 1,      pot,            NONE,                   TEMPLE_GREAT_BAY,             0x0608,                     RECOVERY_HEART
 Great Bay Temple Pot Red Pipe Before Wart 2,      pot,            NONE,                   TEMPLE_GREAT_BAY,             0x0609,                     ARROWS_10
 Great Bay Temple Pot Red Pipe Before Wart 3,      pot,            NONE,                   TEMPLE_GREAT_BAY,             0x060a,                     ARROWS_10
@@ -789,8 +789,8 @@ Stone Tower Temple Inverted Entrance Chest,       chest,          NONE,         
 Stone Tower Temple Inverted East Lower Chest,     chest,          NONE,                   TEMPLE_STONE_TOWER,           0x13,                       STRAY_FAIRY_ST
 Stone Tower Temple Inverted East Middle Chest,    chest,          NONE,                   TEMPLE_STONE_TOWER,           0x04,                       SMALL_KEY_ST
 Stone Tower Temple Inverted East Upper Chest,     chest,          NONE,                   TEMPLE_STONE_TOWER,           0x0e,                       STRAY_FAIRY_ST
-Stone Tower Temple Inverted Wizrobe Chest,        chest,          NONE,                   TEMPLE_STONE_TOWER,           0x11,                       STRAY_FAIRY_ST
-Stone Tower Temple Inverted Under Wizrobe Chest,  chest,          NONE,                   TEMPLE_STONE_TOWER,           0x05,                       SMALL_KEY_ST
+Stone Tower Temple Inverted Wizzrobe Chest,       chest,          NONE,                   TEMPLE_STONE_TOWER,           0x11,                       STRAY_FAIRY_ST
+Stone Tower Temple Inverted Death Armos Chest,    chest,          NONE,                   TEMPLE_STONE_TOWER,           0x05,                       SMALL_KEY_ST
 Stone Tower Temple Inverted Boss Key,             chest,          NONE,                   TEMPLE_STONE_TOWER,           0x1e,                       BOSS_KEY_ST
 Stone Tower Temple Inverted Giant Mask,           chest,          NONE,                   TEMPLE_STONE_TOWER,           0x1a,                       MASK_GIANT
 Stone Tower Temple Inverted Pot Poe Maze Side 1,     pot,            NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x0209,                     RECOVERY_HEART
@@ -828,11 +828,11 @@ Stone Tower Temple Inverted Flying Pot Pre-Boss 3,pot,            NONE,         
 Stone Tower Temple Inverted Flying Pot Pre-Boss 4,pot,            NONE,                   TEMPLE_STONE_TOWER_INVERTED,  0x081d,                     NOTHING
 Stone Tower Temple Pot Entrance 1,                pot,            NONE,                   TEMPLE_STONE_TOWER,           0x0007,                     RECOVERY_HEART
 Stone Tower Temple Pot Entrance 2,                pot,            NONE,                   TEMPLE_STONE_TOWER,           0x0008,                     FAIRY
-Stone Tower Temple Pot Water Room Underwater 1,   pot,            NONE,                   TEMPLE_STONE_TOWER,           0x030a,                     MAGIC_JAR_LARGE
-Stone Tower Temple Pot Water Room Underwater 2,   pot,            NONE,                   TEMPLE_STONE_TOWER,           0x030b,                     MAGIC_JAR_LARGE
-Stone Tower Temple Pot Water Room Underwater 3,   pot,            NONE,                   TEMPLE_STONE_TOWER,           0x030c,                     MAGIC_JAR_LARGE
-Stone Tower Temple Pot Water Room Underwater 4,   pot,            NONE,                   TEMPLE_STONE_TOWER,           0x030d,                     NOTHING
-Stone Tower Temple Pot Water Room Underwater 5,   pot,            NONE,                   TEMPLE_STONE_TOWER,           0x030e,                     NOTHING
+Stone Tower Temple Pot Water Room Underwater Lower 1,   pot,            NONE,                   TEMPLE_STONE_TOWER,           0x030a,                     MAGIC_JAR_LARGE
+Stone Tower Temple Pot Water Room Underwater Lower 2,   pot,            NONE,                   TEMPLE_STONE_TOWER,           0x030b,                     MAGIC_JAR_LARGE
+Stone Tower Temple Pot Water Room Underwater Lower 3,   pot,            NONE,                   TEMPLE_STONE_TOWER,           0x030c,                     MAGIC_JAR_LARGE
+Stone Tower Temple Pot Water Room Underwater Upper 1,   pot,            NONE,                   TEMPLE_STONE_TOWER,           0x030d,                     NOTHING
+Stone Tower Temple Pot Water Room Underwater Upper 2,   pot,            NONE,                   TEMPLE_STONE_TOWER,           0x030e,                     NOTHING
 Stone Tower Temple Pot Water Room Bridge 1,       pot,            NONE,                   TEMPLE_STONE_TOWER,           0x0316,                     RECOVERY_HEART
 Stone Tower Temple Pot Water Room Bridge 2,       pot,            NONE,                   TEMPLE_STONE_TOWER,           0x0317,                     RECOVERY_HEART
 Stone Tower Temple Pot Lava Room After Block 1,   pot,            NONE,                   TEMPLE_STONE_TOWER,           0x040b,                     RECOVERY_HEART
