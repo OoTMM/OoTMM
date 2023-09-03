@@ -70,7 +70,7 @@
 "Stone Tower Temple Water Room":
   dungeon: ST
   exits:
-    "Stone Tower Temple Center": "has_mask_zora || short_hook_anywhere"
+    "Stone Tower Temple Center": "has_mask_zora || (short_hook_anywhere && soul(SOUL_DEXIHAND))"
     "Stone Tower Temple Mirrors Room": "small_keys_st(4)"
     "Stone Tower Temple Entrance": "event(STONE_TOWER_EAST_ENTRY_BLOCK) || short_hook_anywhere"
   events:
