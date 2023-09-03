@@ -124,6 +124,9 @@
     "Moon Trial Link Rest 3": "soul_iron_knuckle && (has_weapon || has_mask_goron || has_bombs || has_bombchu || (has(MASK_BLAST) && masks(5))) && ((has_bombchu && has_arrows) || short_hook_anywhere)"
   locations:
     "Moon Trial Link Iron Knuckle Chest": "soul_iron_knuckle && (has_weapon || has_mask_goron || has_bombs || has_bombchu || (has(MASK_BLAST) && masks(5)))"
+  gossip:
+    "Moon Trial Link Gossip Left": "short_hook_anywhere || (has_bombchu && has_arrows)"
+    "Moon Trial Link Gossip Right": "short_hook_anywhere || (has_bombchu && has_arrows)"
 "Moon Trial Link Rest 3":
   region: MOON
   exits:
@@ -133,8 +136,6 @@
     "Moon Trial Link HP": "true"
   gossip:
     "Moon Trial Link Gossip Last": "true"
-    "Moon Trial Link Gossip Left": "true"
-    "Moon Trial Link Gossip Right": "true"
 "Moon Trial Link Exit":
   region: MOON
   exits:
