@@ -23,8 +23,8 @@
     "MQ Shadow Temple Flying Pot Entrance Maze 2": "soul_flying_pot"
     "MQ Shadow Temple Flying Pot Entrance Maze 3": "soul_flying_pot && can_play_time"
     "MQ Shadow Temple Flying Pot Entrance Maze 4": "soul_flying_pot && can_play_time"
-    "MQ Shadow Temple Pot Compass Room 1": "(has_weapon || can_use_sticks || can_use_din) || (can_play_sun)" #It would be too unfair to get around the Redeads otherwise
-    "MQ Shadow Temple Pot Compass Room 2": "(has_weapon || can_use_sticks || can_use_din) || (can_play_sun)" #It would be too unfair to get around the Redeads otherwise
+    "MQ Shadow Temple Pot Compass Room 1": "has_weapon || can_use_sticks || can_use_din || can_play_sun" #It would be too unfair to get around the Redeads otherwise
+    "MQ Shadow Temple Pot Compass Room 2": "has_weapon || can_use_sticks || can_use_din || can_play_sun" #It would be too unfair to get around the Redeads otherwise
 "Shadow Temple First Beamos":
   dungeon: Shadow
   exits:
@@ -114,8 +114,8 @@
     "MQ Shadow Temple After Wind Bomb Chest": "has_explosives"
     "MQ Shadow Temple GS Wind Hint": "true"
     "MQ Shadow Temple GS After Wind Bomb": "has_explosives"
-    "MQ Shadow Temple Pot Room Before Boat 1": "(has_weapon || can_use_sticks || can_use_din) || (can_play_sun)" #It would be too unfair to get around the Gibdos otherwise
-    "MQ Shadow Temple Pot Room Before Boat 2": "(has_weapon || can_use_sticks || can_use_din) || (can_play_sun)" #It would be too unfair to get around the Gibdos otherwise
+    "MQ Shadow Temple Pot Room Before Boat 1": "has_weapon || can_use_sticks || can_use_din || can_play_sun" #It would be too unfair to get around the Gibdos otherwise
+    "MQ Shadow Temple Pot Room Before Boat 2": "has_weapon || can_use_sticks || can_use_din || can_play_sun" #It would be too unfair to get around the Gibdos otherwise
     "MQ Shadow Temple Flying Pot Room Before Boat 1": "soul_flying_pot && ((has_weapon || can_use_sticks || can_use_din) || (can_play_sun))" #It would be too unfair to get around the Gibdos otherwise
     "MQ Shadow Temple Flying Pot Room Before Boat 2": "soul_flying_pot && ((has_weapon || can_use_sticks || can_use_din) || (can_play_sun))" #It would be too unfair to get around the Gibdos otherwise
 "Shadow Temple Boat":
