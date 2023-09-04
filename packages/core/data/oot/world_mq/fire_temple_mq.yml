@@ -65,11 +65,6 @@
     "MQ Fire Temple Maze Upper Chest": "true"
     "MQ Fire Temple Maze Side Room Chest": "true"
     "MQ Fire Temple Compass Chest": "has_explosives"
-    "MQ Fire Temple Pot Grids Above Lava 1": "small_keys_fire(3)"
-    "MQ Fire Temple Pot Grids Above Lava 2": "small_keys_fire(3)"
-    "MQ Fire Temple Pot Bridge Above Lava Room 1": "small_keys_fire(3)"
-    "MQ Fire Temple Pot Bridge Above Lava Room 2": "small_keys_fire(3)"
-    "MQ Fire Temple Pot Bridge Above Lava Room 3": "small_keys_fire(3)"
 "Fire Temple Burning Block":
   dungeon: Fire
   locations:
@@ -78,6 +73,12 @@
   dungeon: Fire
   exits:
     "Fire Temple Fire Walls": "can_use_bow" #With tricks, there's more logic here
+  locations:
+    "MQ Fire Temple Pot Grids Above Lava 1": "small_keys_fire(3)"
+    "MQ Fire Temple Pot Grids Above Lava 2": "small_keys_fire(3)"
+    "MQ Fire Temple Pot Bridge Above Lava Room 1": "small_keys_fire(3)"
+    "MQ Fire Temple Pot Bridge Above Lava Room 2": "small_keys_fire(3)"
+    "MQ Fire Temple Pot Bridge Above Lava Room 3": "small_keys_fire(3)"
 "Fire Temple Fire Walls":
   dungeon: Fire
   exits:
