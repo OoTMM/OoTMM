@@ -34,7 +34,7 @@
   locations:
     "Ganon Castle SR Light Alcove Right": "true"
     "Ganon Castle SR Light Alcove Left": "true"
-    "Ganon Castle SR Light Center Top": "can_hookshot"
+    "Ganon Castle SR Light Center Top": "can_hookshot || climb_anywhere"
     "Ganon Castle SR Light Center Right": "true"
     "Ganon Castle SR Light Center Left": "true"
     "Ganon Castle Pot Light": "true"
@@ -48,9 +48,9 @@
 "Ganon Castle Forest":
   dungeon: Ganon
   exits:
-    "Ganon Castle Forest 2": "(has_fire_arrows || (can_use_din && has_ranged_weapon_adult))"
+    "Ganon Castle Forest 2": "has_fire_arrows || (can_use_din && (has_ranged_weapon_adult || climb_anywhere))"
   locations:
-    "Ganon Castle Forest Chest": "soul_wolfos && (has_weapon || has_explosives_or_hammer || can_use_slingshot || can_use_sticks)"
+    "Ganon Castle Forest Chest": "soul_wolfos && (has_weapon || has_explosives_or_hammer || can_hit_triggers_distance || can_use_sticks || can_use_din)"
 "Ganon Castle Forest 2":
   dungeon: Ganon
   exits:
@@ -60,7 +60,7 @@
     "Ganon Castle SR Forest Front": "true"
     "Ganon Castle SR Forest Back Right": "true"
     "Ganon Castle SR Forest Back Middle": "true"
-    "Ganon Castle SR Forest Center Left": "is_adult"
+    "Ganon Castle SR Forest Center Left": "is_adult || climb_anywhere || can_hookshot"
 "Ganon Castle Forest End":
   dungeon: Ganon
   events:
@@ -71,13 +71,13 @@
 "Ganon Castle Fire":
   dungeon: Ganon
   exits:
-    "Ganon Castle Fire End": "has(RUPEE_SILVER_GANON_FIRE, 5) && has_tunic_goron_strict && can_longshot"
+    "Ganon Castle Fire End": "has(RUPEE_SILVER_GANON_FIRE, 5) && has_tunic_goron_strict && (can_longshot || climb_anywhere)"
   locations:
-    "Ganon Castle SR Fire Back Right": "has_tunic_goron_strict"
-    "Ganon Castle SR Fire Left": "has_tunic_goron_strict"
-    "Ganon Castle SR Fire Far Right": "has_tunic_goron_strict && can_lift_gold"
-    "Ganon Castle SR Fire Front Right": "has_tunic_goron_strict"
-    "Ganon Castle SR Fire Black Pillar": "has_tunic_goron_strict && can_lift_gold"
+    "Ganon Castle SR Fire Back Right": "has_tunic_goron"
+    "Ganon Castle SR Fire Left": "has_tunic_goron"
+    "Ganon Castle SR Fire Far Right": "has_tunic_goron_strict && (can_lift_gold || climb_anywhere || hookshot_anywhere)"
+    "Ganon Castle SR Fire Front Right": "has_tunic_goron"
+    "Ganon Castle SR Fire Black Pillar": "has_tunic_goron && can_lift_gold"
 "Ganon Castle Fire End":
   dungeon: Ganon
   events:
@@ -88,9 +88,9 @@
 "Ganon Castle Water":
   dungeon: Ganon
   events:
-    BLUE_FIRE: "has_bottle && has_weapon"
+    BLUE_FIRE: "has_bottle && (has_weapon || has_explosives_or_hammer || can_use_sticks)"
   exits:
-    "Ganon Castle Water 2": "soul_freezard && has_blue_fire"
+    "Ganon Castle Water 2": "soul_freezard && has_blue_fire && (can_use_sword_master || can_use_sword_goron || can_use_sticks || has_explosives_or_hammer || can_use_din)"
   locations:
     "Ganon Castle Water Chest 1": "true"
     "Ganon Castle Water Chest 2": "true"
@@ -99,7 +99,7 @@
   locations:
     "Ganon Castle Pot Water": "true"
   exits:
-    "Ganon Castle Water End": "can_hammer"
+    "Ganon Castle Water End": "can_hammer && (is_adult || climb_anywhere || hookshot_anywhere)"
 "Ganon Castle Water End":
   dungeon: Ganon
   events:
@@ -120,10 +120,10 @@
 "Ganon Castle Spirit 2":
   dungeon: Ganon
   exits:
-    "Ganon Castle Spirit End": "has_bombchu && has_mirror_shield"
+    "Ganon Castle Spirit End": "(has_bombchu || climb_anywhere || hookshot_anywhere) && has_mirror_shield && can_use_bow"
   locations:
-    "Ganon Castle Spirit Chest 1": "can_use_sticks || can_use_sword || has_bombchu"
-    "Ganon Castle Spirit Chest 2": "has_bombchu && has_lens"
+    "Ganon Castle Spirit Chest 1": "can_use_sticks || can_use_sword || has_bombchu || hookshot_anywhere || (climb_anywhere && (has_ranged_weapon || has_explosives))"
+    "Ganon Castle Spirit Chest 2": "(has_bombchu || climb_anywhere || hookshot_anywhere) && has_lens"
 "Ganon Castle Spirit End":
   dungeon: Ganon
   events:
@@ -134,12 +134,12 @@
 "Ganon Castle Shadow":
   dungeon: Ganon
   exits:
-    "Ganon Castle Shadow End": "can_hammer && (can_longshot || has_fire_arrows) && (has_hover_boots || has_fire) && (has_lens || (can_longshot && has_hover_boots))"
+    "Ganon Castle Shadow End": "can_hammer && (((can_longshot || has_fire_arrows) && (has_hover_boots || has_fire) && (has_lens || (can_longshot && has_hover_boots))) || (climb_anywhere && (has_hover_boots || hookshot_anywhere || has_lens)))"
   locations:
     "Ganon Castle Shadow Chest 1": "can_play_time || can_hookshot || has_hover_boots || has_fire_arrows"
-    "Ganon Castle Shadow Chest 2": "(can_longshot || has_fire_arrows) && (has_hover_boots || has_fire)"
-    "Ganon Castle Pot Shadow 1": "(can_longshot || has_fire_arrows) && (has_hover_boots || has_fire)"
-    "Ganon Castle Pot Shadow 2": "(can_longshot || has_fire_arrows) && (has_hover_boots || has_fire)"
+    "Ganon Castle Shadow Chest 2": "(((can_longshot || has_fire_arrows) && (has_hover_boots || has_fire)) || (climb_anywhere && (has_hover_boots || hookshot_anywhere || has_lens)))"
+    "Ganon Castle Pot Shadow 1": "(((can_longshot || has_fire_arrows) && (has_hover_boots || has_fire)) || (climb_anywhere && (has_hover_boots || hookshot_anywhere || (has_lens && has_fire_arrows))))"
+    "Ganon Castle Pot Shadow 2": "(((can_longshot || has_fire_arrows) && (has_hover_boots || has_fire)) || (climb_anywhere && (has_hover_boots || hookshot_anywhere || (has_lens && has_fire_arrows))))"
 "Ganon Castle Shadow End":
   dungeon: Ganon
   events:

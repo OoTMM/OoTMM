@@ -93,7 +93,7 @@
 "Spirit Temple Adult Lower":
   dungeon: Spirit
   locations:
-    "MQ Spirit Temple Purple Leever Chest": "can_collect_distance"
+    "MQ Spirit Temple Purple Leever Chest": "can_collect_distance && soul_leever"
     "MQ Spirit Temple Symphony Room Chest": "small_keys_spirit(7) && can_hammer && can_play_time && can_play_epona && can_play_sun && can_play_storms && can_play(SONG_ZELDA)"
     "MQ Spirit Temple GS Leever Room": "true"
     "MQ Spirit Temple GS Symphony Room": "can_collect_distance && small_keys_spirit(7) && can_hammer && can_play_time && can_play_epona && can_play_sun && can_play_storms && can_play(SONG_ZELDA)"

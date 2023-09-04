@@ -200,3 +200,5 @@ EnItem00_DrawRupee = 0x80013150;
 EnItem00_Update = 0x80012938;
 EnItem00_CollectedHandler = 0x800127e0;
 EnItem00_SetHandler = 0x80011b40;
+
+ActorFind = 0x80025b0c;

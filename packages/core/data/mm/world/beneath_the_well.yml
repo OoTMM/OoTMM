@@ -2,41 +2,42 @@
   dungeon: BtW
   exits:
     "Ikana Canyon": "true"
-    "Beneath The Well North Section": "can_reset_time && has(MASK_GIBDO) && soul_redead_gibdo && has_blue_potion"
-    "Beneath The Well East Section": "can_reset_time && has(MASK_GIBDO) && soul_redead_gibdo && has_beans"
+    "Beneath The Well North Section": "can_reset_time && can_pass_gibdo && has_blue_potion"
+    "Beneath The Well East Section": "can_reset_time && can_pass_gibdo && has_beans"
 "Beneath The Well North Section":
   dungeon: BtW
   events:
-    WELL_HOT_WATER: "event(FISH) && (has_explosives || has_mask_zora || trick_keg_explosives || trick(MM_WELL_HSW))"
+    WELL_HOT_WATER: "has_fish && (has_explosives || has_mask_zora || trick_keg_explosives || trick(MM_WELL_HSW))"
     WATER: "true"
     FISH: "true"
-    BUGS: "event(WATER) && (can_use_fire_arrows || has_sticks)"
-    BOMBS: "event(WATER) && (can_use_fire_arrows || has_sticks)"
-    RUPEES: "event(WATER) && (can_fight || has_weapon_range || has_explosives)"
+    BUGS: "has_water && has_fire_sticks"
+    BOMBS: "has_water && has_fire_sticks"
+    FAIRY: "has_water && has_bugs"
+    RUPEES: "has_water && (((can_fight || has_weapon_range || has_explosives) && soul_wallmaster) || (has_bugs && can_use_light_arrows && soul_keese))"
   locations:
-    "Beneath The Well Keese Chest": "event(WATER) && event(BUGS) && can_use_lens"
-    "Beneath The Well Pot Left Side 1": "event(WATER) && has_bottle"
-    "Beneath The Well Pot Left Side 2": "event(WATER) && has_bottle"
-    "Beneath The Well Pot Left Side 3": "event(WATER) && has_bottle"
-    "Beneath The Well Pot Left Side 4": "event(WATER) && has_bottle"
-    "Beneath The Well Pot Left Side 5": "event(WATER) && has_bottle"
+    "Beneath The Well Keese Chest": "has_water && has_bugs && can_use_lens"
+    "Beneath The Well Pot Left Side 1": "has_water && has_fire_sticks"
+    "Beneath The Well Pot Left Side 2": "has_water && has_fire_sticks"
+    "Beneath The Well Pot Left Side 3": "has_water && has_fire_sticks"
+    "Beneath The Well Pot Left Side 4": "has_water && has_fire_sticks"
+    "Beneath The Well Pot Left Side 5": "has_water && has_fire_sticks"
 "Beneath The Well East Section":
   dungeon: BtW
   exits:
     "Beneath The Well Entrance": "true"
-    "Beneath The Well Middle Section": "has(MASK_GIBDO) && soul_redead_gibdo && event(FISH)"
-    "Beneath The Well Cow Hall": "has(MASK_GIBDO) && soul_redead_gibdo && has_nuts"
+    "Beneath The Well Middle Section": "can_pass_gibdo && has_fish"
+    "Beneath The Well Cow Hall": "can_pass_gibdo && has_nuts"
   events:
     STICKS: "can_kill_baba_sticks"
-    WATER: "has_bottle"
-    RUPEES: "can_fight || has_weapon_range || has_explosives"
+    WATER: "true"
+    RUPEES: "((can_fight || has_weapon_range || has_explosives) && soul_wallmaster) || (can_use_light_arrows && soul_keese)"
 "Beneath The Well Cow Hall":
   dungeon: BtW
   events:
     WELL_BIG_POE: "has_bombs && has_weapon_range"
-    BUGS: "has_bottle"
+    BUGS: "true"
   locations:
-    "Beneath The Well Cow": "(event(WELL_HOT_WATER) || (has_hot_water_distance && has(OWL_IKANA_CANYON)) || has_hot_water_er) && can_play_epona"
+    "Beneath The Well Cow": "(has_hot_water_well || (has_hot_water_distance && has(OWL_IKANA_CANYON)) || has_hot_water_er) && can_play_epona"
     "Beneath The Well Pot Big Poe 1": "has_bombs"
     "Beneath The Well Pot Big Poe 2": "has_bombs"
     "Beneath The Well Pot Big Poe 3": "has_bombs"
@@ -45,12 +46,12 @@
   dungeon: BtW
   exits:
     "Beneath The Well East Section": "true"
-    "Beneath The Well Final Hall": "event(WELL_BIG_POE)"
+    "Beneath The Well Final Hall": "has_big_poe"
   events:
     STICKS: "can_kill_baba_both_sticks"
-    NUTS: "true"
+    NUTS: "can_kill_baba_nuts"
   locations:
-    "Beneath The Well Skulltulla Chest": "has(MASK_GIBDO) && soul_redead_gibdo && event(BUGS)"
+    "Beneath The Well Skulltulla Chest": "can_pass_gibdo && has_bugs && has_fire_sticks"
     "Beneath The Well Pot Middle 01": "true"
     "Beneath The Well Pot Middle 02": "true"
     "Beneath The Well Pot Middle 03": "true"
@@ -65,19 +66,17 @@
   dungeon: BtW
   exits:
     "Beneath The Well Middle Section": "true"
-    "Beneath The Well Sun Block": "has(MASK_GIBDO) && soul_redead_gibdo && has_milk"
+    "Beneath The Well Sun Block": "can_pass_gibdo && has_milk"
   events:
-    RUPEES: "can_fight || has_weapon_range || has_explosives"
-    BUGS: "can_use_fire_arrows || (event(WELL_BIG_POE) && has_sticks)"
-  locations:
-    "Beneath The Well Skulltulla Chest": "has(MASK_GIBDO) && soul_redead_gibdo && has_bottle"
+    RUPEES: "(can_fight || has_weapon_range || has_explosives) && soul_wallmaster"
+    BUGS: "can_use_fire_arrows || (has_sticks && has_big_poe && can_pass_gibdo)"
 "Beneath The Well Sun Block":
   dungeon: BtW
   exits:
     "Beneath The Well Final Hall": "true"
     "Beneath The Well End": "has_mirror_shield || can_use_light_arrows"
   locations:
-    "Beneath The Well Mirror Shield": "can_use_fire_arrows || event(WELL_BIG_POE)"
+    "Beneath The Well Mirror Shield": "can_use_fire_arrows || (has_sticks && has_big_poe && has_milk && can_pass_gibdo)"
 "Beneath The Well End":
   dungeon: BtWE
   exits:

@@ -2,16 +2,16 @@
   dungeon: Shadow
   exits:
     "Graveyard Upper": "true"
-    "Shadow Temple Pit": "has_hover_boots || can_hookshot"
+    "Shadow Temple Pit": "has_hover_boots || can_hookshot || climb_anywhere"
 "Shadow Temple Pit":
   dungeon: Shadow
   exits:
-    "Shadow Temple Main": "has_hover_boots && has_lens"
+    "Shadow Temple Main": "(has_hover_boots || hookshot_anywhere) && has_lens"
   events:
     #There are a lot of ways this works, but it always needs this trick.
     MAGIC: "trick(OOT_LENS)"
   locations:
-    "Shadow Temple Map": "soul_redead_gibdo && soul_keese && has_lens && (has_weapon || can_use_sticks || can_use_din)"
+    "Shadow Temple Map": "soul_redead_gibdo && soul_keese && has_lens && (has_weapon || can_use_sticks || can_use_din || can_hammer)"
     "Shadow Temple Hover Boots": "soul(SOUL_DEAD_HAND) && has_lens && (has_weapon || (can_use_sticks && trick(OOT_DEAD_HAND_STICKS)))"
     "Shadow Temple Pot Early Maze 1": "has_lens"
     "Shadow Temple Pot Early Maze 2": "has_lens"
@@ -25,17 +25,18 @@
 "Shadow Temple Main":
   dungeon: Shadow
   exits:
-    "Shadow Temple Open": "small_keys_shadow(1) && has_explosives"
+    "Shadow Temple Open": "cond(climb_anywhere, small_keys_shadow(4), small_keys_shadow(1)) && has_explosives"
     "Shadow Temple Scythe Silver Rupees": "true"
   locations:
-    "Shadow Temple Compass": "soul_redead_gibdo && (has_weapon || can_use_sticks || can_use_din)"
+    "Shadow Temple Compass": "soul_redead_gibdo && (has_weapon || can_use_sticks || can_use_din || can_hammer)"
 "Shadow Temple Scythe Silver Rupees":
   dungeon: Shadow
   exits:
     "Shadow Temple Main": "true"
+    "Shadow Temple Boat": "(climb_anywhere && trick(OOT_SHADOW_BOAT_EARLY)) || event(SHADOW_SHORTCUT)"
   locations:
     "Shadow Temple SR Scythe 1": "true"
-    "Shadow Temple SR Scythe 2": "can_hookshot || (is_adult && has_hover_boots)"
+    "Shadow Temple SR Scythe 2": "can_hookshot || (is_adult && has_hover_boots) || climb_anywhere"
     "Shadow Temple SR Scythe 3": "true"
     "Shadow Temple SR Scythe 4": "true"
     "Shadow Temple SR Scythe 5": "true"
@@ -44,11 +45,11 @@
   dungeon: Shadow
   exits:
     "Shadow Temple Falling Spikes": "has(RUPEE_SILVER_SHADOW_PIT, 5)"
-    "Shadow Temple Invisible Spikes": "small_keys_shadow(2) && has_lens"
+    "Shadow Temple Invisible Spikes": "cond(climb_anywhere, small_keys_shadow(4), small_keys_shadow(2))"
   locations:
-    "Shadow Temple Spinning Blades Visible": "soul_like_like && soul_keese"
-    "Shadow Temple Spinning Blades Invisible": "soul_like_like && soul_keese && has_lens"
-    "Shadow Temple GS Invisible Scythe": "soul_like_like && soul_keese && can_collect_distance"
+    "Shadow Temple Spinning Blades Visible": "soul_like_like && soul_keese && (has_ranged_weapon_adult || can_use_slingshot || can_use_sticks || has_explosives_or_hammer || has_weapon)"
+    "Shadow Temple Spinning Blades Invisible": "soul_like_like && soul_keese && (has_ranged_weapon_adult || can_use_slingshot || can_use_sticks || has_explosives_or_hammer || has_weapon)"
+    "Shadow Temple GS Invisible Scythe": "soul_like_like && soul_keese && (has_ranged_weapon_adult || can_use_slingshot || can_use_sticks || has_explosives || has_weapon) && (can_collect_distance || climb_anywhere)"
     "Shadow Temple SR Pit 1": "true"
     "Shadow Temple SR Pit 2": "true"
     "Shadow Temple SR Pit 3": "true"
@@ -56,46 +57,53 @@
     "Shadow Temple SR Pit 5": "true"
 "Shadow Temple Falling Spikes":
   dungeon: Shadow
-  exits:
-    "Shadow Temple Open": "true"
   locations:
     "Shadow Temple Falling Spikes Lower": "true"
-    "Shadow Temple Falling Spikes Upper 1": "is_adult && has(STRENGTH) && has_lens"
-    "Shadow Temple Falling Spikes Upper 2": "is_adult && has(STRENGTH) && has_lens"
-    "Shadow Temple GS Falling Spikes": "can_collect_distance"
+    "Shadow Temple Falling Spikes Upper 1": "(is_adult && has(STRENGTH)) || climb_anywhere || hookshot_anywhere"
+    "Shadow Temple Falling Spikes Upper 2": "(is_adult && has(STRENGTH)) || climb_anywhere || hookshot_anywhere"
+    "Shadow Temple GS Falling Spikes": "can_collect_distance || (climb_anywhere && can_damage_skull)"
     "Shadow Temple Pot Falling Spikes Bottom 1": "true"
     "Shadow Temple Pot Falling Spikes Bottom 2": "true"
-    "Shadow Temple Pot Falling Spikes Top 1": "is_adult && has(STRENGTH) && has_lens"
-    "Shadow Temple Pot Falling Spikes Top 2": "is_adult && has(STRENGTH) && has_lens"
+    "Shadow Temple Pot Falling Spikes Top 1": "(is_adult && has(STRENGTH)) || climb_anywhere || hookshot_anywhere"
+    "Shadow Temple Pot Falling Spikes Top 2": "(is_adult && has(STRENGTH)) || climb_anywhere || hookshot_anywhere"
 "Shadow Temple Invisible Spikes":
   dungeon: Shadow
   exits:
-    "Shadow Temple Open": "true"
-    "Shadow Temple Wind": "small_keys_shadow(3) && can_hookshot"
+    "Shadow Temple Open": "small_keys_shadow(4)"
+    "Shadow Temple Wind Front": "cond(climb_anywhere, small_keys_shadow(4), small_keys_shadow(3) && (is_adult && can_hookshot) || can_longshot)"
     "Shadow Temple Skull Pot": "has(RUPEE_SILVER_SHADOW_SPIKES, 5)"
   locations:
-    "Shadow Temple SR Spikes Back Left": "has_lens && can_hookshot"
-    "Shadow Temple SR Spikes Right": "can_hookshot"
+    "Shadow Temple SR Spikes Back Left": "has_lens && (can_hookshot || climb_anywhere)"
+    "Shadow Temple SR Spikes Right": "can_hookshot || climb_anywhere"
     "Shadow Temple SR Spikes Center": "true"
-    "Shadow Temple SR Spikes Front Left": "can_hookshot"
-    "Shadow Temple SR Spikes Midair": "has_lens && can_hookshot"
-    "Shadow Temple Invisible Spike Room": "soul_redead_gibdo && (has_weapon || can_use_sticks || can_use_din)"
+    "Shadow Temple SR Spikes Front Left": "can_hookshot || climb_anywhere"
+    "Shadow Temple SR Spikes Midair": "has_lens && (can_hookshot || climb_anywhere) && (has_weapon || can_use_sticks || can_hammer || has_hover_boots || longshot_anywhere)"
+    "Shadow Temple Invisible Spike Room": "soul_redead_gibdo && (has_weapon || can_use_sticks || can_use_din || can_hammer)"
 "Shadow Temple Skull Pot":
   dungeon: Shadow
-  exits:
-    "Shadow Temple Invisible Spikes": "true"
   locations:
     "Shadow Temple Skull": "has_bombflowers"
-    "Shadow Temple GS Skull Pot": "true"
-"Shadow Temple Wind":
+    "Shadow Temple GS Skull Pot": "can_damage_skull || has(STRENGTH)"
+"Shadow Temple Wind Front":
   dungeon: Shadow
   exits:
-    "Shadow Temple Boat": "small_keys_shadow(4) && can_play(SONG_ZELDA)"
+    "Shadow Temple Wind Back": "true"
+    "Shadow Temple Invisible Spikes": "small_keys_shadow(4)"
+"Shadow Temple Wind Back":
+  dungeon: Shadow
+  exits:
+    "Shadow Temple Wind Gibdo": "true"
+    "Shadow Temple Wind Front": "climb_anywhere || can_hookshot"
   locations:
-    "Shadow Temple Wind Room Hint": "has_lens"
-    "Shadow Temple After Wind": "soul_redead_gibdo"
-    "Shadow Temple After Wind Invisible": "has_explosives && has_lens"
-    "Shadow Temple GS Near Boat": "small_keys_shadow(4) && can_longshot"
+    "Shadow Temple Wind Room Hint": "true"
+"Shadow Temple Wind Gibdo":
+  dungeon: Shadow
+  exits:
+    "Shadow Temple Boat": "small_keys_shadow(4)"
+    "Shadow Temple Wind Back": "soul_redead_gibdo && (has_weapon || can_use_din || can_use_sticks || can_hammer)"
+  locations:
+    "Shadow Temple After Wind": "soul_redead_gibdo && (has_weapon || can_use_din || can_use_sticks || can_hammer)"
+    "Shadow Temple After Wind Invisible": "has_explosives"
     "Shadow Temple Pot After Wind 1": "true"
     "Shadow Temple Pot After Wind 2": "true"
     "Shadow Temple Flying Pot After Wind 1": "soul_flying_pot"
@@ -103,16 +111,28 @@
 "Shadow Temple Boat":
   dungeon: Shadow
   exits:
-    "Shadow Temple Boss": "small_keys_shadow(5) && boss_key(BOSS_KEY_SHADOW) && (can_use_bow || scarecrow_longshot)"
+    "Shadow Temple After Boat": "can_play(SONG_ZELDA) && (can_hookshot || climb_anywhere || (is_adult && event(SHADOW_SHORTCUT)))"
+    "Shadow Temple Wind Gibdo": "small_keys_shadow(4)"
+    "Shadow Temple Scythe Silver Rupees": "event(SHADOW_SHORTCUT) || (climb_anywhere && trick(OOT_SHADOW_BOAT_EARLY))"
+  events:
+    SHADOW_SHORTCUT: "has(STRENGTH)"
   locations:
-    "Shadow Temple Boss Key Room 1": "can_use_din"
-    "Shadow Temple Boss Key Room 2": "can_use_din"
-    "Shadow Temple Invisible Floormaster": "soul_floormaster"
-    "Shadow Temple GS Triple Skull Pot": "can_collect_distance"
+    "Shadow Temple GS Near Boat": "can_longshot || hookshot_anywhere || (climb_anywhere && (has_weapon || has_ranged_weapon || has_explosives || can_use_din))"
+"Shadow Temple After Boat":
+  dungeon: Shadow
+  exits:
+    "Shadow Temple Boss": "small_keys_shadow(5) && boss_key(BOSS_KEY_SHADOW) && (can_use_bow || scarecrow_longshot || climb_anywhere || event(SHADOW_PILLAR)) && (has_hover_boots || climb_anywhere || hookshot_anywhere)"
+  events:
+    SHADOW_PILLAR: "can_use_bow || (has_bombflowers && (scarecrow_longshot || climb_anywhere))"
+  locations:
+    "Shadow Temple Boss Key Room 1": "can_use_din || climb_anywhere || hookshot_anywhere"
+    "Shadow Temple Boss Key Room 2": "can_use_din || climb_anywhere || hookshot_anywhere"
+    "Shadow Temple Invisible Floormaster": "soul_floormaster && (has_weapon || can_hit_triggers_distance || can_use_din || can_use_sticks || can_hammer)"
+    "Shadow Temple GS Triple Skull Pot": "can_collect_distance || (climb_anywhere && (has_ranged_weapon || has_weapon || can_use_sticks || can_use_din || has_bombflowers))"
     "Shadow Temple Pot Boss Key Room": "true"
     "Shadow Temple Pot Invisible Floormaster Room 1": "true"
     "Shadow Temple Pot Invisible Floormaster Room 2": "true"
     "Shadow Temple Pot Boat Before Bridge 1": "true"
     "Shadow Temple Pot Boat Before Bridge 2": "true"
-    "Shadow Temple Pot Boat After Bridge 1": "(can_use_bow || scarecrow_longshot)"
-    "Shadow Temple Pot Boat After Bridge 2": "(can_use_bow || scarecrow_longshot)"
+    "Shadow Temple Pot Boat After Bridge 1": "can_use_bow || scarecrow_longshot || climb_anywhere"
+    "Shadow Temple Pot Boat After Bridge 2": "can_use_bow || scarecrow_longshot || climb_anywhere"

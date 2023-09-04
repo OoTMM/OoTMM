@@ -37,20 +37,20 @@
 "Water Temple Dark Link":
   dungeon: Water
   events:
-    WATER_GATES: "can_use_din && has_iron_boots && has_tunic_zora && soul(SOUL_STALFOS)"
+    WATER_GATES: "soul(SOUL_DARK_LINK) && has_weapon && can_use_din && has_iron_boots && has_tunic_zora && soul(SOUL_STALFOS)"
   locations:
-    "MQ Water Temple Boss Key Chest": "can_use_din && can_dive_small && soul(SOUL_STALFOS)" #Scale can solve dragon spiral MQ
-    "MQ Water Temple GS River": "soul(SOUL_STALFOS)" #Believe it or not, this is very easy to get with no Iron Boots.
-    "MQ Water Temple Pot Before Dark Link Ledge 1": "soul(SOUL_STALFOS) || has_hover_boots" #This is why the Stalfos soul was removed from the main room requirements.
-    "MQ Water Temple Pot Before Dark Link Ledge 2": "soul(SOUL_STALFOS) || has_hover_boots" #This is why the Stalfos soul was removed from the main room requirements.
-    "MQ Water Temple Pot Before Dark Link Ledge 3": "soul(SOUL_STALFOS) || has_hover_boots" #This is why the Stalfos soul was removed from the main room requirements.
-    "MQ Water Temple Pot Before Dark Link Near Door 1": "soul(SOUL_STALFOS)"
-    "MQ Water Temple Pot Before Dark Link Near Door 2": "soul(SOUL_STALFOS)"
-    "MQ Water Temple Pot After Dark Link 1": "soul(SOUL_STALFOS)"
-    "MQ Water Temple Pot After Dark Link 2": "soul(SOUL_STALFOS)"
-    "MQ Water Temple Pot River 1": "soul(SOUL_STALFOS)"
-    "MQ Water Temple Pot River 2": "soul(SOUL_STALFOS)"
-    "MQ Water Temple Pot Boss Key Room": "can_use_din && can_dive_small && soul(SOUL_STALFOS)"
+    "MQ Water Temple Boss Key Chest": "soul(SOUL_DARK_LINK) && has_weapon && can_use_din && can_dive_small && soul(SOUL_STALFOS)" #Scale can solve dragon spiral MQ
+    "MQ Water Temple GS River": "soul(SOUL_STALFOS) && soul(SOUL_DARK_LINK) && has_weapon" #Believe it or not, this is very easy to get with no Iron Boots.
+    "MQ Water Temple Pot Before Dark Link Ledge 1": "(soul(SOUL_STALFOS) && has_weapon) || has_hover_boots" #This is why the Stalfos soul was removed from the main room requirements.
+    "MQ Water Temple Pot Before Dark Link Ledge 2": "(soul(SOUL_STALFOS) && has_weapon) || has_hover_boots" #This is why the Stalfos soul was removed from the main room requirements.
+    "MQ Water Temple Pot Before Dark Link Ledge 3": "(soul(SOUL_STALFOS) && has_weapon) || has_hover_boots" #This is why the Stalfos soul was removed from the main room requirements.
+    "MQ Water Temple Pot Before Dark Link Near Door 1": "soul(SOUL_STALFOS) && has_weapon"
+    "MQ Water Temple Pot Before Dark Link Near Door 2": "soul(SOUL_STALFOS) && has_weapon"
+    "MQ Water Temple Pot After Dark Link 1": "soul(SOUL_DARK_LINK) && has_weapon && soul(SOUL_STALFOS)"
+    "MQ Water Temple Pot After Dark Link 2": "soul(SOUL_DARK_LINK) && has_weapon && soul(SOUL_STALFOS)"
+    "MQ Water Temple Pot River 1": "soul(SOUL_DARK_LINK) && has_weapon && soul(SOUL_STALFOS)"
+    "MQ Water Temple Pot River 2": "soul(SOUL_DARK_LINK) && has_weapon && soul(SOUL_STALFOS)"
+    "MQ Water Temple Pot Boss Key Room": "soul(SOUL_DARK_LINK) && has_weapon && can_use_din && can_dive_small && soul(SOUL_STALFOS)"
 "Water Temple Three Torch Room":
   dungeon: Water
   locations:

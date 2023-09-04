@@ -72,11 +72,13 @@ static const char* const kSoulsOot[] = {
     "Dodongos",
     "Keeses",
     "Tektites",
+    "Leevers",
     "Peahats",
     "Lizalfos/Dinalfos",
     "Gohma Larvae",
     "Shaboms",
     "Baby Dodongos",
+    "Dark Link",
     "Biris/Baris",
     "Tailpasarans",
     "Parasites",
@@ -103,6 +105,7 @@ static const char* const kSoulsOot[] = {
     "Freezards",
     "Stingers",
     "Wolfos",
+    "Stalchildren",
     "Guays",
     "Queen Gohma",
     "King Dodongo",
@@ -140,6 +143,8 @@ static const char* const kSoulsMm[] = {
     "Floormasters",
     "Chuchus",
     "Deep Pythons",
+    "Stalchildren",
+    "Leevers",
     "Skullfish",
     "Dexihands",
     "Dragonflies",
@@ -833,6 +838,10 @@ void comboMenuDraw(GameState_Play* play)
 
 void comboMenuNext(void)
 {
+    if(comboConfig(CFG_MENU_NOTEBOOK) && !gMmSave.inventory.quest.notebook) {
+        PlaySound(0x4806);
+        return;
+    }
     PlaySound(0x4809);
     g.menuScreen++;
     g.menuCursor = 0;

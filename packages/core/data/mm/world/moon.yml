@@ -14,13 +14,13 @@
     "Moon": "true"
     "Moon Trial Deku Exit": "has(MASK_DEKU)"
   locations:
-    "Moon Trial Deku HP": "has(MASK_DEKU)"
+    "Moon Trial Deku HP": "has(MASK_DEKU) || hookshot_anywhere"
   gossip:
-    "Moon Trial Deku Gossip Front-Left": "has(MASK_DEKU)"
-    "Moon Trial Deku Gossip Front-Right": "has(MASK_DEKU)"
-    "Moon Trial Deku Gossip Mid-Left": "has(MASK_DEKU)"
-    "Moon Trial Deku Gossip Mid-Right": "has(MASK_DEKU)"
-    "Moon Trial Deku Gossip Back": "has(MASK_DEKU)"
+    "Moon Trial Deku Gossip Front-Left": "has(MASK_DEKU) || short_hook_anywhere"
+    "Moon Trial Deku Gossip Front-Right": "has(MASK_DEKU) || short_hook_anywhere"
+    "Moon Trial Deku Gossip Mid-Left": "has(MASK_DEKU) || short_hook_anywhere"
+    "Moon Trial Deku Gossip Mid-Right": "has(MASK_DEKU) || short_hook_anywhere"
+    "Moon Trial Deku Gossip Back": "has(MASK_DEKU) || hookshot_anywhere"
 "Moon Trial Deku Exit":
   region: MOON
   exits:
@@ -32,30 +32,30 @@
   region: MOON
   exits:
     "Moon": "true"
-    "Moon Trial Goron Exit": "goron_fast_roll"
+    "Moon Trial Goron Exit": "goron_fast_roll || hookshot_anywhere"
   locations:
-    "Moon Trial Goron HP": "goron_fast_roll"
+    "Moon Trial Goron HP": "goron_fast_roll || hookshot_anywhere"
     "Moon Trial Goron Pot Early 1": "true"
     "Moon Trial Goron Pot Early 2": "true"
     "Moon Trial Goron Pot Early 3": "true"
     "Moon Trial Goron Pot Early 4": "true"
-    "Moon Trial Goron Pot 01": "goron_fast_roll"
-    "Moon Trial Goron Pot 02": "goron_fast_roll"
-    "Moon Trial Goron Pot 03": "goron_fast_roll"
-    "Moon Trial Goron Pot 04": "goron_fast_roll"
-    "Moon Trial Goron Pot 05": "goron_fast_roll"
-    "Moon Trial Goron Pot 06": "goron_fast_roll"
-    "Moon Trial Goron Pot 07": "goron_fast_roll"
-    "Moon Trial Goron Pot 08": "goron_fast_roll"
-    "Moon Trial Goron Pot 09": "goron_fast_roll"
-    "Moon Trial Goron Pot 10": "goron_fast_roll"
-    "Moon Trial Goron Pot 11": "goron_fast_roll"
+    "Moon Trial Goron Pot 01": "goron_fast_roll || hookshot_anywhere"
+    "Moon Trial Goron Pot 02": "goron_fast_roll || hookshot_anywhere"
+    "Moon Trial Goron Pot 03": "goron_fast_roll || hookshot_anywhere"
+    "Moon Trial Goron Pot 04": "goron_fast_roll || hookshot_anywhere"
+    "Moon Trial Goron Pot 05": "goron_fast_roll || hookshot_anywhere"
+    "Moon Trial Goron Pot 06": "goron_fast_roll || hookshot_anywhere"
+    "Moon Trial Goron Pot 07": "goron_fast_roll || hookshot_anywhere"
+    "Moon Trial Goron Pot 08": "goron_fast_roll || hookshot_anywhere"
+    "Moon Trial Goron Pot 09": "goron_fast_roll || hookshot_anywhere"
+    "Moon Trial Goron Pot 10": "goron_fast_roll || hookshot_anywhere"
+    "Moon Trial Goron Pot 11": "goron_fast_roll || hookshot_anywhere"
   gossip:
-    "Moon Trial Goron Gossip Center Left": "goron_fast_roll"
-    "Moon Trial Goron Gossip Center Right": "goron_fast_roll"
-    "Moon Trial Goron Gossip West Left": "goron_fast_roll"
-    "Moon Trial Goron Gossip West Right": "goron_fast_roll"
-    "Moon Trial Goron Gossip By Heart Piece": "goron_fast_roll"
+    "Moon Trial Goron Gossip Center Left": "goron_fast_roll || hookshot_anywhere"
+    "Moon Trial Goron Gossip Center Right": "goron_fast_roll || hookshot_anywhere"
+    "Moon Trial Goron Gossip West Left": "goron_fast_roll || hookshot_anywhere"
+    "Moon Trial Goron Gossip West Right": "goron_fast_roll || hookshot_anywhere"
+    "Moon Trial Goron Gossip By Heart Piece": "goron_fast_roll || hookshot_anywhere"
 "Moon Trial Goron Exit":
   region: MOON
   exits:
@@ -109,7 +109,7 @@
     "Moon Trial Link Rest 1": "soul(SOUL_GARO) && (has_weapon || has_mask_goron || can_use_deku_bubble || has_arrows)"
     "Moon Trial Link Rest 2": "soul(SOUL_GARO) && (has_weapon || has_mask_goron || can_use_deku_bubble || has_arrows) && can_hookshot_short"
   locations:
-    "Moon Trial Link Garo Master Chest": "soul(SOUL_GARO) && (can_fight || can_use_deku_bubble || has_arrows) && can_hookshot_short"
+    "Moon Trial Link Garo Master Chest": "soul(SOUL_GARO) && (has_weapon || has_mask_goron || can_use_deku_bubble || has_arrows) && can_hookshot_short"
 "Moon Trial Link Rest 2":
   region: MOON
   exits:
@@ -120,18 +120,18 @@
 "Moon Trial Link Iron Knuckle Fight":
   region: MOON
   exits:
-    "Moon Trial Link Rest 2": "soul_iron_knuckle && (has_weapon || has_mask_goron || has_bombs)"
-    "Moon Trial Link Rest 3": "soul_iron_knuckle && (has_weapon || has_mask_goron || has_bombs) && has_bombchu && has_arrows"
+    "Moon Trial Link Rest 2": "soul_iron_knuckle && (has_weapon || has_mask_goron || has_bombs || has_bombchu || (has(MASK_BLAST) && masks(5)))"
+    "Moon Trial Link Rest 3": "soul_iron_knuckle && (has_weapon || has_mask_goron || has_bombs || has_bombchu || (has(MASK_BLAST) && masks(5))) && ((has_bombchu && has_arrows) || short_hook_anywhere)"
   locations:
-    "Moon Trial Link Iron Knuckle Chest": "soul_iron_knuckle && (has_weapon || has_mask_goron || has_bombs)"
+    "Moon Trial Link Iron Knuckle Chest": "soul_iron_knuckle && (has_weapon || has_mask_goron || has_bombs || has_bombchu || (has(MASK_BLAST) && masks(5)))"
   gossip:
-    "Moon Trial Link Gossip Left": "has_bombchu && has_arrows"
-    "Moon Trial Link Gossip Right": "has_bombchu && has_arrows"
+    "Moon Trial Link Gossip Left": "short_hook_anywhere || (has_bombchu && has_arrows)"
+    "Moon Trial Link Gossip Right": "short_hook_anywhere || (has_bombchu && has_arrows)"
 "Moon Trial Link Rest 3":
   region: MOON
   exits:
     "Moon Trial Link Iron Knuckle Fight": "true"
-    "Moon Trial Link Exit": "has_bombchu && can_use_fire_arrows"
+    "Moon Trial Link Exit": "(has_bombchu || (short_hook_anywhere && has(MASK_BLAST) && masks(5))) && can_use_fire_arrows"
   locations:
     "Moon Trial Link HP": "true"
   gossip:

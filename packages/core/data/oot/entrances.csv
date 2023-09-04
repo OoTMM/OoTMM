@@ -6,7 +6,7 @@ BOSS_TEMPLE_FOREST,                       boss,             Forest Temple Boss, 
 BOSS_TEMPLE_FIRE,                         boss,             Fire Temple Boss,                           Fire Temple Pre-Boss,                         NONE
 BOSS_TEMPLE_WATER,                        boss,             Water Temple Boss,                          Water Temple Antichamber,                     NONE
 BOSS_TEMPLE_SPIRIT,                       boss,             Spirit Temple Boss,                         Spirit Temple Statue,                         NONE
-BOSS_TEMPLE_SHADOW,                       boss,             Shadow Temple Boss,                         Shadow Temple Boat,                           NONE
+BOSS_TEMPLE_SHADOW,                       boss,             Shadow Temple Boss,                         Shadow Temple After Boat,                     NONE
 DEKU_TREE,                                dungeon,          Deku Tree,                                  Kokiri Forest Near Deku Tree,                 KOKIRI_FOREST_FROM_DEKU_TREE
 KOKIRI_FOREST_FROM_DEKU_TREE,             dungeon,          Kokiri Forest Near Deku Tree,               Deku Tree,                                    DEKU_TREE
 DODONGO_CAVERN,                           dungeon,          Dodongo Cavern,                             Death Mountain,                               MOUNTAIN_TRAIL_FROM_DODONGO_CAVERN

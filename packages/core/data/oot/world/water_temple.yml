@@ -10,20 +10,20 @@
     "Water Temple Ruto Room": "has_tunic_zora && (has_iron_boots || (can_longshot && trick(OOT_WATER_LONGSHOT)))"
     "Water Temple Center Bottom": "event(WATER_LEVEL_LOW) && small_keys_water(5)"
     "Water Temple Center Middle": "event(WATER_LEVEL_LOW) && (can_use_din || can_use_bow)"
-    "Water Temple Compass Room": "((has_tunic_zora && has_iron_boots) || event(WATER_LEVEL_LOW)) && can_hookshot"
-    "Water Temple Dragon Room": "event(WATER_LEVEL_LOW) && has(STRENGTH) && can_dive_small"
-    "Water Temple Elevator": "(small_keys_water(5) && can_hookshot) || can_use_bow || can_use_din"
-    "Water Temple Corridor": "(can_longshot || has_hover_boots) && can_hit_triggers_distance && event(WATER_LEVEL_LOW)"
-    "Water Temple Waterfalls": "has_tunic_zora && small_keys_water(4) && can_longshot && (has_iron_boots || event(WATER_LEVEL_LOW))"
+    "Water Temple Compass Room": "(has_tunic_zora && has_iron_boots && can_hookshot) || (event(WATER_LEVEL_LOW) && (can_hookshot || climb_anywhere))"
+    "Water Temple Dragon Room": "event(WATER_LEVEL_LOW) && has(STRENGTH) && can_dive_small && (has_weapon || has_ranged_weapon || has_explosives_or_hammer)"
+    "Water Temple Elevator": "(small_keys_water(5) && (can_hookshot || climb_anywhere)) || can_use_bow || can_use_din"
+    "Water Temple Corridor": "(can_longshot || has_hover_boots || hookshot_anywhere) && can_hit_triggers_distance && event(WATER_LEVEL_LOW)"
+    "Water Temple Waterfalls": "has_tunic_zora && small_keys_water(4) && (can_longshot || climb_anywhere || hookshot_anywhere) && (has_iron_boots || event(WATER_LEVEL_LOW))"
     "Water Temple Large Pit": "small_keys_water(4) && event(WATER_LEVEL_RESET)"
-    "Water Temple Antichamber": "can_longshot && event(WATER_LEVEL_RESET)"
+    "Water Temple Antichamber": "(can_longshot && event(WATER_LEVEL_RESET)) || climb_anywhere"
     "Water Temple Cage Room": "has_tunic_zora && event(WATER_LEVEL_LOW) && has_explosives && can_dive_small"
-    "Water Temple Main Ledge": "is_adult && has_hover_boots"
+    "Water Temple Main Ledge": "(is_adult && has_hover_boots) || hookshot_anywhere"
   locations:
-    "Water Temple Pot Main Room Near Block 1": "event(WATER_LEVEL_LOW)"
-    "Water Temple Pot Main Room Near Block 2": "event(WATER_LEVEL_LOW)"
-    "Water Temple Pot Main Room Near Boss 1": "can_longshot && event(WATER_LEVEL_RESET)"
-    "Water Temple Pot Main Room Near Boss 2": "can_longshot && event(WATER_LEVEL_RESET)"
+    "Water Temple Pot Main Room Near Block 1": "event(WATER_LEVEL_LOW) || (has_iron_boots && can_hookshot)"
+    "Water Temple Pot Main Room Near Block 2": "event(WATER_LEVEL_LOW) || (has_iron_boots && can_hookshot)"
+    "Water Temple Pot Main Room Near Boss 1": "(can_longshot && event(WATER_LEVEL_RESET)) || climb_anywhere"
+    "Water Temple Pot Main Room Near Boss 2": "(can_longshot && event(WATER_LEVEL_RESET)) || climb_anywhere"
 "Water Temple Main Ledge":
   dungeon: Water
   events:
@@ -33,14 +33,14 @@
 "Water Temple Ruto Room":
   dungeon: Water
   exits:
-    "Water Temple Map Room": "event(WATER_LEVEL_RESET)"
+    "Water Temple Map Room": "event(WATER_LEVEL_RESET) || climb_anywhere || longshot_anywhere"
     "Water Temple Shell Room": "event(WATER_LEVEL_LOW) && (can_use_bow || has_fire)"
   events:
     WATER_LEVEL_LOW: "can_play(SONG_ZELDA)"
   locations:
-    "Water Temple Bombable Chest": "event(WATER_LEVEL_MIDDLE) && has_explosives"
-    "Water Temple Pot Ruto Room 1": "event(WATER_LEVEL_LOW)"
-    "Water Temple Pot Ruto Room 2": "event(WATER_LEVEL_LOW)"
+    "Water Temple Bombable Chest": "(event(WATER_LEVEL_MIDDLE) || (event(WATER_LEVEL_LOW) && (climb_anywhere || longshot_anywhere))) && has_explosives"
+    "Water Temple Pot Ruto Room 1": "event(WATER_LEVEL_LOW) || (has_iron_boots && can_hookshot)"
+    "Water Temple Pot Ruto Room 2": "event(WATER_LEVEL_LOW) || (has_iron_boots && can_hookshot)"
 "Water Temple Map Room":
   dungeon: Water
   locations:
@@ -48,12 +48,12 @@
 "Water Temple Shell Room":
   dungeon: Water
   locations:
-    "Water Temple Shell Chest": "has_weapon && soul_shell_blade"
+    "Water Temple Shell Chest": "soul_shell_blade" #Both arrows and Din's work here
 "Water Temple Center Bottom":
   dungeon: Water
   exits:
     "Water Temple Under Center": "event(WATER_LEVEL_MIDDLE) && has_iron_boots && has_tunic_zora_strict"
-    "Water Temple Center Middle": "can_hookshot"
+    "Water Temple Center Middle": "can_hookshot || climb_anywhere"
 "Water Temple Center Middle":
   dungeon: Water
   exits:
@@ -61,7 +61,7 @@
   events:
     WATER_LEVEL_MIDDLE: "can_play(SONG_ZELDA)"
   locations:
-    "Water Temple GS Center": "can_longshot"
+    "Water Temple GS Center": "can_longshot || hookshot_anywhere || (climb_anywhere && (has_ranged_weapon || has_bombchu))"
 "Water Temple Under Center":
   dungeon: Water
   locations:
@@ -69,12 +69,14 @@
 "Water Temple Compass Room":
   dungeon: Water
   locations:
-    "Water Temple Compass": "true"
+    "Water Temple Compass": "has_weapon || can_use_sticks || has_ranged_weapon || has_explosives_or_hammer"
     "Water Temple Pot Compass Room 1": "true"
     "Water Temple Pot Compass Room 2": "true"
     "Water Temple Pot Compass Room 3": "true"
 "Water Temple Dragon Room":
   dungeon: Water
+  exits:
+    "Water Temple Dragon Room Ledge": "climb_anywhere || hookshot_anywhere"
   locations:
     "Water Temple Dragon Chest": "can_hookshot && has_iron_boots"
 "Water Temple Elevator":
@@ -91,20 +93,20 @@
   dungeon: Water
   exits:
     "Water Temple Blocks": "true"
-    "Water Temple Waterfalls Ledge": has_hover_boots
+    "Water Temple Waterfalls Ledge": "cond(is_adult, has_hover_boots || climb_anywhere || hookshot_anywhere, has_iron_boots && (climb_anywhere || hookshot_anywhere))"
 "Water Temple Blocks":
   dungeon: Water
   exits:
-    "Water Temple Waterfalls Ledge": "has_explosives && has(STRENGTH)"
+    "Water Temple Waterfalls Ledge": "(has_explosives && has(STRENGTH)) || climb_anywhere || hookshot_anywhere"
   locations:
     "Water Temple Pot Blocks Room 1": "true"
     "Water Temple Pot Blocks Room 2": "true"
 "Water Temple Waterfalls Ledge":
   dungeon: Water
   exits:
-    "Water Temple Boss Key Room": "small_keys_water(5) && can_dive_small"
+    "Water Temple Boss Key Room": "small_keys_water(5) && ((is_adult && can_dive_small) || has_iron_boots || hookshot_anywhere)"
   locations:
-    "Water Temple GS Waterfalls": "can_collect_distance"
+    "Water Temple GS Waterfalls": "is_adult || can_collect_distance || ((can_use_sword_master || (age_sword_adult && has(SWORD_BIGGORON)) || can_use_sticks || has_ranged_weapon || can_use_din || (has_hover_boots && (can_use_sword_kokiri || can_use_sword_goron || has_explosives))) && (has_hover_boots || climb_anywhere))"
 "Water Temple Boss Key Room":
   dungeon: Water
   locations:
@@ -116,30 +118,34 @@
   exits:
     "Water Temple Before Dark Link": "small_keys_water(5) && can_hookshot"
   locations:
-    "Water Temple GS Large Pit": "can_longshot"
+    "Water Temple GS Large Pit": "can_longshot || (can_hit_triggers_distance && climb_anywhere) || (climb_anywhere && has_bombchu && trick(OOT_WATER_PIT_GS_CHU))"
 "Water Temple Before Dark Link":
   dungeon: Water
   exits:
-    "Water Temple Dark Link": "can_hookshot || has_hover_boots"
-"Water Temple Dark Link":
-  dungeon: Water
-  exits:
-    "Water Temple Longshot Room": "has_weapon"
+    "Water Temple Dark Link": "true"
   locations:
     "Water Temple Pot Before Dark Link 1": "true"
     "Water Temple Pot Before Dark Link 2": "true"
+"Water Temple Dark Link":
+  dungeon: Water
+  exits:
+    "Water Temple Longshot Room": "soul(SOUL_DARK_LINK) && has_weapon"
+    "Water Temple Before Dark Link": "soul(SOUL_DARK_LINK) && has_weapon"
 "Water Temple Longshot Room":
   dungeon: Water
   exits:
-    "Water Temple River": "can_play_time"
+    "Water Temple River": "event(LONGSHOT_TIME_BLOCK) || is_child"
+    "Water Temple Dark Link": "true"
+  events:
+    LONGSHOT_TIME_BLOCK: "can_play_time"
   locations:
     "Water Temple Longshot": "true"
 "Water Temple River":
   dungeon: Water
   exits:
-    "Water Temple Dragon Room Ledge": "can_use_bow"
+    "Water Temple Dragon Room Ledge": "can_hit_triggers_distance"
+    "Water Temple Longshot Room": "longshot_anywhere && climb_anywhere && (is_child || event(LONGSHOT_TIME_BLOCK))"
   locations:
-    "Water Temple River Chest": "can_use_bow"
     "Water Temple GS River": "has_iron_boots"
     "Water Temple Pot River 1": "true"
     "Water Temple Pot River 2": "true"
@@ -147,18 +153,21 @@
   dungeon: Water
   exits:
     "Water Temple Dragon Room": "true"
+    "Water Temple River": "hookshot_anywhere && trick(OOT_WATER_REVERSE_RIVER)"
+  locations:
+    "Water Temple River Chest": "true"
 "Water Temple Cage Room":
   dungeon: Water
   exits:
-    "Water Temple Inside Cage": "can_hookshot || (is_adult && has_hover_boots)"
+    "Water Temple Inside Cage": "can_hookshot || (is_adult && has_hover_boots) || climb_anywhere"
 "Water Temple Inside Cage":
   dungeon: Water
   locations:
-    "Water Temple GS Cage": "true"
-    "Water Temple Pot Skull Cage 1": "true"
-    "Water Temple Pot Skull Cage 2": "true"
-    "Water Temple Pot Skull Cage 3": "true"
-    "Water Temple Pot Skull Cage 4": "true"
+    "Water Temple GS Cage": "has_weapon || can_use_sticks"
+    "Water Temple Pot Skull Cage 1": "has_weapon || can_use_sticks"
+    "Water Temple Pot Skull Cage 2": "has_weapon || can_use_sticks"
+    "Water Temple Pot Skull Cage 3": "has_weapon || can_use_sticks"
+    "Water Temple Pot Skull Cage 4": "has_weapon || can_use_sticks"
 "Water Temple Antichamber":
   dungeon: Water
   exits:

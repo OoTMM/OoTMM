@@ -13,38 +13,40 @@
   dungeon: GTG
   exits:
     "Gerudo Training Grounds": "true"
-    "Gerudo Training Grounds Slopes End": "can_hookshot"
+    "Gerudo Training Grounds Slopes End": "can_hookshot || climb_anywhere"
   locations:
     "Gerudo Training Grounds SR Slope Front Right": "true"
     "Gerudo Training Grounds SR Slope Front Left": "true"
-    "Gerudo Training Grounds SR Slope Front Above": "can_hookshot"
+    "Gerudo Training Grounds SR Slope Front Above": "(is_adult && can_hookshot) || can_longshot"
     "Gerudo Training Grounds SR Slope Center": "true"
     "Gerudo Training Grounds SR Slope Back": "true"
 "Gerudo Training Grounds Slopes End":
   dungeon: GTG
   exits:
-    "Gerudo Training Grounds Slopes": "can_hookshot"
+    "Gerudo Training Grounds Slopes": "can_hookshot || climb_anywhere"
     "Gerudo Training Grounds Left Side": "has(RUPEE_SILVER_GTG_SLOPES, 5)"
 "Gerudo Training Grounds Left Side":
   dungeon: GTG
   exits:
     "Gerudo Training Grounds Slopes End": "true"
-    "Gerudo Training Grounds After Block": "can_lift_silver && has_lens && can_hookshot"
-    "Gerudo Training Grounds Upper": "can_hookshot && has_lens"
+    "Gerudo Training Grounds After Block": "can_lift_silver && event(GTG_LIKE_LIKE_ROOM)"
+    "Gerudo Training Grounds Upper": "(can_hookshot || climb_anywhere) && has_lens"
   locations:
-    "Gerudo Training Grounds Near Block": "soul_wolfos"
+    "Gerudo Training Grounds Near Block": "soul_wolfos && (has_weapon || can_use_sticks || has_explosives_or_hammer || can_hit_triggers_distance || can_use_din)"
 "Gerudo Training Grounds After Block":
   dungeon: GTG
   locations:
     "Gerudo Training Grounds Behind Block Invisible": "has_lens"
     "Gerudo Training Grounds Behind Block Visible": "true"
-    "Gerudo Training Grounds Behind Block Enemy Back": "soul_like_like"
-    "Gerudo Training Grounds Behind Block Enemy Front": "soul_like_like"
+    "Gerudo Training Grounds Behind Block Enemy Back": "soul_like_like && (has_weapon || can_use_sticks || has_explosives_or_hammer || can_hit_triggers_distance)"
+    "Gerudo Training Grounds Behind Block Enemy Front": "soul_like_like && (has_weapon || can_use_sticks || has_explosives_or_hammer || can_hit_triggers_distance)"
 "Gerudo Training Grounds Upper":
   dungeon: GTG
   exits:
-    "Gerudo Training Grounds Left Side": "true"
+    "Gerudo Training Grounds Left Side": "has_lens"
     "Gerudo Training Grounds Statue": "true"
+  events:
+    GTG_LIKE_LIKE_ROOM: "true"
   locations:
     "Gerudo Training Maze Upper Cage": "can_use_bow"
 "Gerudo Training Grounds Right Side":
@@ -56,19 +58,20 @@
 "Gerudo Training Grounds Lava":
   dungeon: GTG
   exits:
-    "Gerudo Training Grounds Maze Side": "can_play_time || is_child"
-    "Gerudo Training Grounds Hammer": "can_hookshot && (can_longshot || has_hover_boots || can_play_time)"
+    "Gerudo Training Grounds Maze Side": "can_play_time || is_child || climb_anywhere || hookshot_anywhere"
+    "Gerudo Training Grounds Hammer": "(can_hookshot && (can_longshot || has_hover_boots || can_play_time || hookshot_anywhere || is_child)) || climb_anywhere"
     "Gerudo Training Grounds Water": "has(RUPEE_SILVER_GTG_LAVA, 5)"
   locations:
     "Gerudo Training Grounds SR Lava Front Left": "true"
     "Gerudo Training Grounds SR Lava Front Right": "true"
-    "Gerudo Training Grounds SR Lava Back Left": "has_hover_boots || can_play_time"
-    "Gerudo Training Grounds SR Lava Back Center": "can_hookshot && (can_longshot || has_hover_boots || can_play_time)"
-    "Gerudo Training Grounds SR Lava Back Right": "can_longshot || has_hover_boots || can_play_time || is_child"
+    "Gerudo Training Grounds SR Lava Back Left": "has_hover_boots || can_play_time || climb_anywhere || hookshot_anywhere || is_child"
+    "Gerudo Training Grounds SR Lava Back Center": "(can_hookshot && (can_longshot || has_hover_boots || can_play_time || hookshot_anywhere || is_child)) || climb_anywhere"
+    "Gerudo Training Grounds SR Lava Back Right": "can_longshot || has_hover_boots || can_play_time || is_child || climb_anywhere || hookshot_anywhere"
 "Gerudo Training Grounds Maze Side":
   dungeon: GTG
   exits:
     "Gerudo Training Grounds Lava": "true"
+    "Gerudo Training Grounds Hammer": "can_hookshot"
   locations:
     "Gerudo Training Freestanding Key": "true"
     "Gerudo Training Maze Side Chest 1": "true"
@@ -92,17 +95,18 @@
 "Gerudo Training Grounds Hammer":
   dungeon: GTG
   exits:
-    "Gerudo Training Grounds Lava": "true"
-    "Gerudo Training Grounds Statue": "can_hammer && can_use_bow"
+    "Gerudo Training Grounds Lava": "soul(SOUL_TORCH_SLUG) && soul_keese && (has_weapon || can_use_sticks || can_hammer || can_use_bow)"
+    "Gerudo Training Grounds Statue": "can_hammer && can_hit_triggers_distance"
   locations:
     "Gerudo Training Grounds Hammer Room Switch": "can_hammer"
-    "Gerudo Training Grounds Hammer Room": "soul_keese && soul(SOUL_TORCH_SLUG)"
-    "Gerudo Training Grounds SR Lava Back Center": "can_hookshot"
+    "Gerudo Training Grounds Hammer Room": "soul_keese && soul(SOUL_TORCH_SLUG) && (has_weapon || can_use_sticks || can_hammer || can_use_bow)"
+    "Gerudo Training Grounds SR Lava Back Center": "soul_keese && soul(SOUL_TORCH_SLUG) && (has_weapon || can_use_sticks || can_hammer || can_use_bow) && can_hookshot"
     "Gerudo Training Grounds SR Lava Back Right": "true"
 "Gerudo Training Grounds Statue":
   dungeon: GTG
   exits:
     "Gerudo Training Grounds Hammer": "true"
+    "Gerudo Training Grounds Upper": "climb_anywhere || hookshot_anywhere"
   locations:
     "Gerudo Training Grounds Eye Statue": "can_use_bow"
 "Gerudo Training Grounds Maze":
