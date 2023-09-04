@@ -2,11 +2,11 @@
   dungeon: Shadow
   exits:
     "Graveyard Upper": "true"
-    "Shadow Temple Pit": "has_hover_boots || can_hookshot || climb_anywhere"
+    "Shadow Temple Pit": "has_hover_boots || can_hookshot || climb_anywhere || glitch_megaflip"
 "Shadow Temple Pit":
   dungeon: Shadow
   exits:
-    "Shadow Temple Main": "(has_hover_boots || hookshot_anywhere) && has_lens"
+    "Shadow Temple Main": "(has_hover_boots || hookshot_anywhere || glitch_megaflip) && has_lens"
   events:
     #There are a lot of ways this works, but it always needs this trick.
     MAGIC: "trick(OOT_LENS)"
