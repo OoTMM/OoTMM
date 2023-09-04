@@ -74,11 +74,11 @@
   exits:
     "Fire Temple Fire Walls": "can_use_bow" #With tricks, there's more logic here
   locations:
-    "MQ Fire Temple Pot Grids Above Lava 1": "small_keys_fire(3)"
-    "MQ Fire Temple Pot Grids Above Lava 2": "small_keys_fire(3)"
-    "MQ Fire Temple Pot Bridge Above Lava Room 1": "small_keys_fire(3)"
-    "MQ Fire Temple Pot Bridge Above Lava Room 2": "small_keys_fire(3)"
-    "MQ Fire Temple Pot Bridge Above Lava Room 3": "small_keys_fire(3)"
+    "MQ Fire Temple Pot Grids Above Lava 1": "true"
+    "MQ Fire Temple Pot Grids Above Lava 2": "true"
+    "MQ Fire Temple Pot Bridge Above Lava Room 1": "true"
+    "MQ Fire Temple Pot Bridge Above Lava Room 2": "true"
+    "MQ Fire Temple Pot Bridge Above Lava Room 3": "true"
 "Fire Temple Fire Walls":
   dungeon: Fire
   exits:
