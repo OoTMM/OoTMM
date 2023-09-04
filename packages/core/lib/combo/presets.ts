@@ -46,7 +46,6 @@ const PRESET_BLITZ = makeSettings({
   sharedWallets: true,
   sharedHealth: true,
   tricks: [
-    'MM_ISTT_ENTRY_JUMP',
     'MM_LENS',
     'MM_NO_SEAHORSE',
     'MM_ONE_MASK_STONE_TOWER',
