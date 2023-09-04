@@ -650,7 +650,7 @@ function outputGrassPoolMm(roomActors: RoomActors[]) {
       }
 
       if (actor.typeId === ACTORS_MM.OBJ_GRASS_UNIT) {
-        const count = 12;
+        const count = (actor.params & 1) ? 12 : 9;
         const item = 'RANDOM';
         if (room.sceneId != lastSceneId || room.setupId != lastSetupId) {
           console.log('');
@@ -659,7 +659,7 @@ function outputGrassPoolMm(roomActors: RoomActors[]) {
         }
         for (let i = 0; i < count; ++i) {
           const key = (i << 16) | ((room.setupId & 0x3) << 14) | (room.roomId << 8) | actor.actorId;
-          console.log(`Scene ${room.sceneId.toString(16)} Setup ${room.setupId} Room ${hexPad(room.roomId, 2)} Grass Pack ${decPad(actor.actorId + 1, 2)} Grass ${decPad(i + 1, 2)},             grass,            NONE,                 SCENE_${room.sceneId.toString(16)}, ${hexPad(key, 5)}, ${item}`);
+          console.log(`Scene ${room.sceneId.toString(16)} Setup ${room.setupId} Room ${hexPad(room.roomId, 2)} Grass UNIT Pack ${decPad(actor.actorId + 1, 2)} Grass ${decPad(i + 1, 2)},             grass,            NONE,                 SCENE_${room.sceneId.toString(16)}, ${hexPad(key, 5)}, ${item}`);
         }
       }
     }
