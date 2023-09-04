@@ -15,6 +15,10 @@
     "MQ Gerudo Training Grounds Maze Second Chest": "true"
     "MQ Gerudo Training Grounds Maze Third Chest": "true"
     "MQ Gerudo Training Grounds Maze Fourth Chest": "small_keys_gtg(1)"
+    "MQ Gerudo Training Grounds Pot 1": "true"
+    "MQ Gerudo Training Grounds Pot 2": "true"
+    "MQ Gerudo Training Grounds Pot 3": "true"
+    "MQ Gerudo Training Grounds Pot 4": "true"
 "Gerudo Training Grounds Right Path":
   dungeon: GTG
   exits:

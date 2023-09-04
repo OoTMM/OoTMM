@@ -1234,6 +1234,36 @@ MQ Dodongo Cavern SR Crate,                                 sr,             NONE
 MQ Dodongo Cavern SR Upper Corner Low,                      sr,             NONE,                 DODONGO_CAVERN,                 0x02,                       RUPEE_SILVER_DC
 MQ Dodongo Cavern SR Vines,                                 sr,             NONE,                 DODONGO_CAVERN,                 0x03,                       RUPEE_SILVER_DC
 MQ Dodongo Cavern SR Upper Corner High,                     sr,             NONE,                 DODONGO_CAVERN,                 0x04,                       RUPEE_SILVER_DC
+MQ Dodongo Cavern Pot East Corridor 1,                      pot,            NONE,                 DODONGO_CAVERN,                 0x0107,                     RUPEE_GREEN
+MQ Dodongo Cavern Pot East Corridor 2,                      pot,            NONE,                 DODONGO_CAVERN,                 0x0108,                     RUPEE_BLUE
+MQ Dodongo Cavern Pot East Corridor 3,                      pot,            NONE,                 DODONGO_CAVERN,                 0x0109,                     RUPEE_GREEN
+MQ Dodongo Cavern Pot East Corridor 4,                      pot,            NONE,                 DODONGO_CAVERN,                 0x010a,                     DEKU_SEEDS_5
+MQ Dodongo Cavern Pot Stairs 1,                             pot,            NONE,                 DODONGO_CAVERN,                 0x0210,                     RECOVERY_HEART
+MQ Dodongo Cavern Pot Stairs 2,                             pot,            NONE,                 DODONGO_CAVERN,                 0x0211,                     RUPEE_RED
+MQ Dodongo Cavern Pot Stairs 3,                             pot,            NONE,                 DODONGO_CAVERN,                 0x0212,                     RUPEE_RED
+MQ Dodongo Cavern Pot Stairs 4,                             pot,            NONE,                 DODONGO_CAVERN,                 0x0213,                     RECOVERY_HEART
+MQ Dodongo Cavern Pot Miniboss 1,                           pot,            NONE,                 DODONGO_CAVERN,                 0x0307,                     RECOVERY_HEART
+MQ Dodongo Cavern Pot Miniboss 2,                           pot,            NONE,                 DODONGO_CAVERN,                 0x0308,                     RECOVERY_HEART
+MQ Dodongo Cavern Pot Miniboss 3,                           pot,            NONE,                 DODONGO_CAVERN,                 0x0309,                     RUPEE_BLUE
+MQ Dodongo Cavern Pot Miniboss 4,                           pot,            NONE,                 DODONGO_CAVERN,                 0x030a,                     RUPEE_BLUE
+MQ Dodongo Cavern Pot Green Room 1,                         pot,            NONE,                 DODONGO_CAVERN,                 0x0405,                     RECOVERY_HEART
+MQ Dodongo Cavern Pot Green Room 2,                         pot,            NONE,                 DODONGO_CAVERN,                 0x0406,                     RUPEE_GREEN
+MQ Dodongo Cavern Pot Green Room 3,                         pot,            NONE,                 DODONGO_CAVERN,                 0x0407,                     RUPEE_BLUE
+MQ Dodongo Cavern Pot Green Room 4,                         pot,            NONE,                 DODONGO_CAVERN,                 0x0408,                     RECOVERY_HEART
+MQ Dodongo Cavern Pot Before Boss 1,                        pot,            NONE,                 DODONGO_CAVERN,                 0x0706,                     BOMB
+MQ Dodongo Cavern Pot Before Boss 2,                        pot,            NONE,                 DODONGO_CAVERN,                 0x0707,                     RECOVERY_HEART
+MQ Dodongo Cavern Pot Before Boss Loop 1,                   pot,            NONE,                 DODONGO_CAVERN,                 0x0813,                     RECOVERY_HEART
+MQ Dodongo Cavern Pot Before Boss Loop 2,                   pot,            NONE,                 DODONGO_CAVERN,                 0x0814,                     FLEXIBLE
+MQ Dodongo Cavern Pot Before Boss Loop 3,                   pot,            NONE,                 DODONGO_CAVERN,                 0x0815,                     BOMB
+MQ Dodongo Cavern Pot Before Boss Loop 4,                   pot,            NONE,                 DODONGO_CAVERN,                 0x0816,                     BOMB
+MQ Dodongo Cavern Pot Vanilla Bomb Bag Room 1,              pot,            NONE,                 DODONGO_CAVERN,                 0x090b,                     RUPEE_BLUE
+MQ Dodongo Cavern Pot Vanilla Bomb Bag Room 2,              pot,            NONE,                 DODONGO_CAVERN,                 0x090c,                     RECOVERY_HEART
+MQ Dodongo Cavern Pot Before Miniboss 1,                    pot,            NONE,                 DODONGO_CAVERN,                 0x0a10,                     DEKU_SEEDS_5
+MQ Dodongo Cavern Pot Before Miniboss 2,                    pot,            NONE,                 DODONGO_CAVERN,                 0x0a11,                     DEKU_SEEDS_5
+MQ Dodongo Cavern Pot After Miniboss 1,                     pot,            NONE,                 DODONGO_CAVERN,                 0x0c05,                     DEKU_SEEDS_5
+MQ Dodongo Cavern Pot After Miniboss 2,                     pot,            NONE,                 DODONGO_CAVERN,                 0x0c06,                     RUPEE_BLUE
+MQ Dodongo Cavern Pot Before Boss Loop Side Room 1,         pot,            NONE,                 DODONGO_CAVERN,                 0x0e02,                     BOMB
+MQ Dodongo Cavern Pot Before Boss Loop Side Room 2,         pot,            NONE,                 DODONGO_CAVERN,                 0x0e03,                     BOMB
 MQ Jabu-Jabu Map Chest,                                     chest,          NONE,                 INSIDE_JABU_JABU,               0x03,                       MAP_JJ
 MQ Jabu-Jabu Entry Chest,                                   chest,          NONE,                 INSIDE_JABU_JABU,               0x05,                       NUTS_5
 MQ Jabu-Jabu Compass Chest,                                 chest,          NONE,                 INSIDE_JABU_JABU,               0x00,                       COMPASS_JJ
@@ -1250,6 +1280,15 @@ MQ Jabu-Jabu GS Back,                                       gs,             NONE
 MQ Jabu-Jabu GS Basement Side Room,                         gs,             NONE,                 INSIDE_JABU_JABU,               0x1b,                       GS_TOKEN
 MQ Jabu-Jabu GS Pre-Boss,                                   gs,             NONE,                 INSIDE_JABU_JABU,               0x19,                       GS_TOKEN
 MQ Jabu-Jabu Cow,                                           cow,            NONE,                 INSIDE_JABU_JABU,               0x09,                       MILK
+MQ Jabu-Jabu Pot Entrance 1,                                pot,            NONE,                 INSIDE_JABU_JABU,               0x000f,                     BOMB
+MQ Jabu-Jabu Pot Entrance 2,                                pot,            NONE,                 INSIDE_JABU_JABU,               0x0010,                     NUTS_5
+MQ Jabu-Jabu Pot Underwater Alcove 1,                       pot,            NONE,                 INSIDE_JABU_JABU,               0x0115,                     ARROWS_5
+MQ Jabu-Jabu Pot Underwater Alcove 2,                       pot,            NONE,                 INSIDE_JABU_JABU,               0x0116,                     NUTS_5
+MQ Jabu-Jabu Pot Before Boss,                               pot,            NONE,                 INSIDE_JABU_JABU,               0x050d,                     FLEXIBLE
+MQ Jabu-Jabu Pot Like-Like Room 1,                          pot,            NONE,                 INSIDE_JABU_JABU,               0x0b1a,                     ARROWS_5
+MQ Jabu-Jabu Pot Like-Like Room 2,                          pot,            NONE,                 INSIDE_JABU_JABU,               0x0b1e,                     BOMBS_5
+MQ Jabu-Jabu Pot Boomerang Room 1,                          pot,            NONE,                 INSIDE_JABU_JABU,               0x0e0a,                     BOMB
+MQ Jabu-Jabu Pot Boomerang Room 2,                          pot,            NONE,                 INSIDE_JABU_JABU,               0x0e0e,                     ARROWS_5
 MQ Bottom of the Well Map Chest,                            chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x03,                       MAP_BOTW
 MQ Bottom of the Well Compass Chest,                        chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x02,                       COMPASS_BOTW
 MQ Bottom of the Well Lens Chest,                           chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x01,                       LENS
@@ -1258,6 +1297,13 @@ MQ Bottom of the Well East Middle Room Key,                 collectible,    NONE
 MQ Bottom of the Well GS Basement,                          gs,             NONE,                 BOTTOM_OF_THE_WELL,             0x48,                       GS_TOKEN
 MQ Bottom of the Well GS West Middle Room,                  gs,             NONE,                 BOTTOM_OF_THE_WELL,             0x49,                       GS_TOKEN
 MQ Bottom of the Well GS Coffin Room,                       gs,             NONE,                 BOTTOM_OF_THE_WELL,             0x4a,                       GS_TOKEN
+MQ Bottom of the Well Pot Lobby Cage 1,                     pot,            NONE,                 BOTTOM_OF_THE_WELL,             0x0028,                     ARROWS_10
+MQ Bottom of the Well Pot Lobby Cage 2,                     pot,            NONE,                 BOTTOM_OF_THE_WELL,             0x002a,                     BOMBS_5
+MQ Bottom of the Well Pot Lobby Cage 3,                     pot,            NONE,                 BOTTOM_OF_THE_WELL,             0x002c,                     RECOVERY_HEART
+MQ Bottom of the Well Pot Lobby Alcove,                     pot,            NONE,                 BOTTOM_OF_THE_WELL,             0x002e,                     FLEXIBLE
+MQ Bottom of the Well Pot Side Room 1,                      pot,            NONE,                 BOTTOM_OF_THE_WELL,             0x0506,                     RECOVERY_HEART
+MQ Bottom of the Well Pot Side Room 2,                      pot,            NONE,                 BOTTOM_OF_THE_WELL,             0x0507,                     RECOVERY_HEART
+MQ Bottom of the Well Pot Side Room 3,                      pot,            NONE,                 BOTTOM_OF_THE_WELL,             0x0508,                     RECOVERY_HEART
 MQ Ice Cavern Map Chest,                                    chest,          NONE,                 ICE_CAVERN,                     0x01,                       MAP_IC
 MQ Ice Cavern Compass Chest,                                chest,          NONE,                 ICE_CAVERN,                     0x00,                       COMPASS_IC
 MQ Ice Cavern Iron Boots,                                   chest,          NONE,                 ICE_CAVERN,                     0x02,                       BOOTS_IRON
@@ -1266,6 +1312,17 @@ MQ Ice Cavern Sheik Song,                                   npc,            NONE
 MQ Ice Cavern GS Compass Room,                              gs,             NONE,                 ICE_CAVERN,                     0x51,                       GS_TOKEN
 MQ Ice Cavern GS Scarecrow,                                 gs,             NONE,                 ICE_CAVERN,                     0x50,                       GS_TOKEN
 MQ Ice Cavern GS Clear Blocks,                              gs,             NONE,                 ICE_CAVERN,                     0x52,                       GS_TOKEN
+MQ Ice Cavern Pot Entrance,                                 pot,            NONE,                 ICE_CAVERN,                     0x0003,                     RECOVERY_HEART
+MQ Ice Cavern Pot First Room 1,                             pot,            NONE,                 ICE_CAVERN,                     0x0105,                     RECOVERY_HEART
+MQ Ice Cavern Pot First Room 2,                             pot,            NONE,                 ICE_CAVERN,                     0x0106,                     RECOVERY_HEART
+MQ Ice Cavern Pot Main Room 1,                              pot,            NONE,                 ICE_CAVERN,                     0x030c,                     FLEXIBLE
+MQ Ice Cavern Pot Main Room 2,                              pot,            NONE,                 ICE_CAVERN,                     0x030d,                     RUPEE_BLUE
+MQ Ice Cavern Pot Main Room 3,                              pot,            NONE,                 ICE_CAVERN,                     0x030f,                     RECOVERY_HEART
+MQ Ice Cavern Pot Main Room 4,                              pot,            NONE,                 ICE_CAVERN,                     0x0312,                     FLEXIBLE
+MQ Ice Cavern Pot Final Corridor 1,                         pot,            NONE,                 ICE_CAVERN,                     0x0605,                     FLEXIBLE
+MQ Ice Cavern Pot Final Corridor 2,                         pot,            NONE,                 ICE_CAVERN,                     0x0606,                     MAGIC_JAR_LARGE
+MQ Ice Cavern Pot Compass Room 1,                           pot,            NONE,                 ICE_CAVERN,                     0x090a,                     BOMBS_5
+MQ Ice Cavern Pot Compass Room 2,                           pot,            NONE,                 ICE_CAVERN,                     0x090b,                     BOMBS_5
 MQ Forest Temple First Room Chest,                          chest,          NONE,                 TEMPLE_FOREST,                  0x03,                       SMALL_KEY_FOREST
 MQ Forest Temple Wolfos Chest,                              chest,          NONE,                 TEMPLE_FOREST,                  0x00,                       SMALL_KEY_FOREST
 MQ Forest Temple Boss Key Chest,                            chest,          NONE,                 TEMPLE_FOREST,                  0x0e,                       BOSS_KEY_FOREST
@@ -1283,6 +1340,27 @@ MQ Forest Temple GS Climb Room,                             gs,             NONE
 MQ Forest Temple GS West Garden,                            gs,             NONE,                 TEMPLE_FOREST,                  0x22,                       GS_TOKEN
 MQ Forest Temple GS East Garden,                            gs,             NONE,                 TEMPLE_FOREST,                  0x20,                       GS_TOKEN
 MQ Forest Temple GS Well,                                   gs,             NONE,                 TEMPLE_FOREST,                  0x23,                       GS_TOKEN
+MQ Forest Temple Pot Main Room 1,                           pot,            NONE,                 TEMPLE_FOREST,                  0x0209,                     MAGIC_JAR_SMALL
+MQ Forest Temple Pot Main Room 2,                           pot,            NONE,                 TEMPLE_FOREST,                  0x020a,                     MAGIC_JAR_SMALL
+MQ Forest Temple Pot Main Room 3,                           pot,            NONE,                 TEMPLE_FOREST,                  0x020b,                     RECOVERY_HEART
+MQ Forest Temple Pot Main Room 4,                           pot,            NONE,                 TEMPLE_FOREST,                  0x020c,                     RECOVERY_HEART
+MQ Forest Temple Pot Main Room 5,                           pot,            NONE,                 TEMPLE_FOREST,                  0x020d,                     ARROWS_10
+MQ Forest Temple Pot Main Room 6,                           pot,            NONE,                 TEMPLE_FOREST,                  0x020e,                     ARROWS_10
+MQ Forest Temple Pot Bow Room Lower 1,                      pot,            NONE,                 TEMPLE_FOREST,                  0x0606,                     RECOVERY_HEART
+MQ Forest Temple Pot Bow Room Lower 2,                      pot,            NONE,                 TEMPLE_FOREST,                  0x0607,                     FLEXIBLE
+MQ Forest Temple Pot Bow Room Upper 1,                      pot,            NONE,                 TEMPLE_FOREST,                  0x0608,                     RECOVERY_HEART
+MQ Forest Temple Pot Bow Room Upper 2,                      pot,            NONE,                 TEMPLE_FOREST,                  0x0609,                     RECOVERY_HEART
+MQ Forest Temple Pot Bow Room Upper 3,                      pot,            NONE,                 TEMPLE_FOREST,                  0x060a,                     RECOVERY_HEART
+MQ Forest Temple Pot Bow Room Upper 4,                      pot,            NONE,                 TEMPLE_FOREST,                  0x060b,                     RECOVERY_HEART
+MQ Forest Temple Pot Blue Poe 1,                            pot,            NONE,                 TEMPLE_FOREST,                  0x0d05,                     RECOVERY_HEART
+MQ Forest Temple Pot Blue Poe 2,                            pot,            NONE,                 TEMPLE_FOREST,                  0x0d06,                     ARROWS_10
+MQ Forest Temple Pot Blue Poe 3,                            pot,            NONE,                 TEMPLE_FOREST,                  0x0d07,                     ARROWS_10
+MQ Forest Temple Pot Green Poe 1,                           pot,            NONE,                 TEMPLE_FOREST,                  0x1006,                     RECOVERY_HEART
+MQ Forest Temple Pot Green Poe 2,                           pot,            NONE,                 TEMPLE_FOREST,                  0x1007,                     ARROWS_10
+MQ Forest Temple Pot Antichamber 1,                         pot,            NONE,                 TEMPLE_FOREST,                  0x110b,                     RECOVERY_HEART
+MQ Forest Temple Pot Antichamber 2,                         pot,            NONE,                 TEMPLE_FOREST,                  0x110c,                     RECOVERY_HEART
+MQ Forest Temple Pot Antichamber 3,                         pot,            NONE,                 TEMPLE_FOREST,                  0x110d,                     BOMBS_5
+MQ Forest Temple Pot Antichamber 4,                         pot,            NONE,                 TEMPLE_FOREST,                  0x110e,                     ARROWS_5
 MQ Fire Temple Early Lower Left Chest,                      chest,          NONE,                 TEMPLE_FIRE,                    0x02,                       RUPEE_BLUE
 MQ Fire Temple Pre-Boss Chest,                              chest,          NONE,                 TEMPLE_FIRE,                    0x07,                       SMALL_KEY_FIRE
 MQ Fire Temple Hammer Chest,                                chest,          NONE,                 TEMPLE_FIRE,                    0x00,                       HAMMER
@@ -1300,6 +1378,34 @@ MQ Fire Temple GS 1f Lava Room,                             gs,             NONE
 MQ Fire Temple GS Fire Walls Side Room,                     gs,             NONE,                 TEMPLE_FIRE,                    0x2c,                       GS_TOKEN
 MQ Fire Temple GS Fire Walls Middle,                        gs,             NONE,                 TEMPLE_FIRE,                    0x2b,                       GS_TOKEN
 MQ Fire Temple GS Topmost,                                  gs,             NONE,                 TEMPLE_FIRE,                    0x29,                       GS_TOKEN
+MQ Fire Temple Pot Entrance 1,                              pot,            NONE,                 TEMPLE_FIRE,                    0x0009,                     MAGIC_JAR_SMALL
+MQ Fire Temple Pot Entrance 2,                              pot,            NONE,                 TEMPLE_FIRE,                    0x000a,                     MAGIC_JAR_SMALL
+MQ Fire Temple Pot Lava Room Left,                          pot,            NONE,                 TEMPLE_FIRE,                    0x0111,                     ARROWS_10
+MQ Fire Temple Pot Lava Room Alcove,                        pot,            NONE,                 TEMPLE_FIRE,                    0x0112,                     MAGIC_JAR_SMALL
+MQ Fire Temple Pot Lava Room Right,                         pot,            NONE,                 TEMPLE_FIRE,                    0x0113,                     MAGIC_JAR_SMALL
+MQ Fire Temple Pot Pre-Boss 1,                              pot,            NONE,                 TEMPLE_FIRE,                    0x0208,                     MAGIC_JAR_LARGE
+MQ Fire Temple Pot Pre-Boss 2,                              pot,            NONE,                 TEMPLE_FIRE,                    0x0209,                     ARROWS_30
+MQ Fire Temple Pot Bridge Above Lava Room 1,                pot,            NONE,                 TEMPLE_FIRE,                    0x0601,                     FLEXIBLE
+MQ Fire Temple Pot Bridge Above Lava Room 2,                pot,            NONE,                 TEMPLE_FIRE,                    0x0602,                     ARROWS_10
+MQ Fire Temple Pot Bridge Above Lava Room 3,                pot,            NONE,                 TEMPLE_FIRE,                    0x0603,                     BOMBS_5
+MQ Fire Temple Pot Fire Maze Room Back Right 1,             pot,            NONE,                 TEMPLE_FIRE,                    0x0a2f,                     BOMB
+MQ Fire Temple Pot Fire Maze Room Back Right 2,             pot,            NONE,                 TEMPLE_FIRE,                    0x0a30,                     RECOVERY_HEART
+MQ Fire Temple Pot Fire Maze Room Right 1,                  pot,            NONE,                 TEMPLE_FIRE,                    0x0a31,                     RECOVERY_HEART
+MQ Fire Temple Pot Fire Maze Room Right 2,                  pot,            NONE,                 TEMPLE_FIRE,                    0x0a32,                     BOMB
+MQ Fire Temple Pot Fire Maze Room Left 1,                   pot,            NONE,                 TEMPLE_FIRE,                    0x0a33,                     FLEXIBLE
+MQ Fire Temple Pot Fire Maze Room Left 2,                   pot,            NONE,                 TEMPLE_FIRE,                    0x0a34,                     BOMBS_5
+MQ Fire Temple Pot Grids Above Lava 1,                      pot,            NONE,                 TEMPLE_FIRE,                    0x1005,                     ARROWS_10
+MQ Fire Temple Pot Grids Above Lava 2,                      pot,            NONE,                 TEMPLE_FIRE,                    0x1006,                     ARROWS_10
+MQ Fire Temple Pot Hammer Loop 1,                           pot,            NONE,                 TEMPLE_FIRE,                    0x1208,                     FLEXIBLE
+MQ Fire Temple Pot Hammer Loop 2,                           pot,            NONE,                 TEMPLE_FIRE,                    0x1209,                     BOMB
+MQ Fire Temple Pot Hammer Loop 3,                           pot,            NONE,                 TEMPLE_FIRE,                    0x120a,                     FLEXIBLE
+MQ Fire Temple Pot Hammer Loop 4,                           pot,            NONE,                 TEMPLE_FIRE,                    0x120b,                     BOMB
+MQ Fire Temple Pot Hammer Loop 5,                           pot,            NONE,                 TEMPLE_FIRE,                    0x120c,                     BOMB
+MQ Fire Temple Pot Hammer Loop 6,                           pot,            NONE,                 TEMPLE_FIRE,                    0x120d,                     BOMB
+MQ Fire Temple Pot Hammer Loop 7,                           pot,            NONE,                 TEMPLE_FIRE,                    0x120e,                     FLEXIBLE
+MQ Fire Temple Pot Hammer Loop 8,                           pot,            NONE,                 TEMPLE_FIRE,                    0x120f,                     FLEXIBLE
+MQ Fire Temple Pot Boss Key Room 1,                         pot,            NONE,                 TEMPLE_FIRE,                    0x130d,                     FLEXIBLE
+MQ Fire Temple Pot Boss Key Room 2,                         pot,            NONE,                 TEMPLE_FIRE,                    0x130e,                     MAGIC_JAR_SMALL
 MQ Water Temple Map Chest,                                  chest,          NONE,                 TEMPLE_WATER,                   0x02,                       MAP_WATER
 MQ Water Temple Compass Chest,                              chest,          NONE,                 TEMPLE_WATER,                   0x01,                       COMPASS_WATER
 MQ Water Temple Longshot Chest,                             chest,          NONE,                 TEMPLE_WATER,                   0x00,                       HOOKSHOT
@@ -1311,6 +1417,37 @@ MQ Water Temple GS High Water Changer,                      gs,             NONE
 MQ Water Temple GS River,                                   gs,             NONE,                 TEMPLE_WATER,                   0x31,                       GS_TOKEN
 MQ Water Temple GS Three Torch,                             gs,             NONE,                 TEMPLE_WATER,                   0x34,                       GS_TOKEN
 MQ Water Temple GS Side Loop,                               gs,             NONE,                 TEMPLE_WATER,                   0x33,                       GS_TOKEN
+MQ Water Temple Pot Skull Cage 1,                           pot,            NONE,                 TEMPLE_WATER,                   0x0313,                     BOMB
+MQ Water Temple Pot Skull Cage 2,                           pot,            NONE,                 TEMPLE_WATER,                   0x0314,                     BOMB
+MQ Water Temple Pot Skull Cage 3,                           pot,            NONE,                 TEMPLE_WATER,                   0x0319,                     ARROWS_10
+MQ Water Temple Pot Skull Cage 4,                           pot,            NONE,                 TEMPLE_WATER,                   0x031a,                     ARROWS_10
+MQ Water Temple Pot Storage Room 1,                         pot,            NONE,                 TEMPLE_WATER,                   0x040d,                     RECOVERY_HEART
+MQ Water Temple Pot Storage Room 2,                         pot,            NONE,                 TEMPLE_WATER,                   0x040e,                     RECOVERY_HEART
+MQ Water Temple Pot Storage Room 3,                         pot,            NONE,                 TEMPLE_WATER,                   0x040f,                     RECOVERY_HEART
+MQ Water Temple Pot Before Dark Link Near Door 1,           pot,            NONE,                 TEMPLE_WATER,                   0x0607,                     MAGIC_JAR_LARGE
+MQ Water Temple Pot Before Dark Link Near Door 2,           pot,            NONE,                 TEMPLE_WATER,                   0x0608,                     MAGIC_JAR_LARGE
+MQ Water Temple Pot Before Dark Link Ledge 1,               pot,            NONE,                 TEMPLE_WATER,                   0x0609,                     NUTS_5
+MQ Water Temple Pot Before Dark Link Ledge 2,               pot,            NONE,                 TEMPLE_WATER,                   0x060a,                     FLEXIBLE
+MQ Water Temple Pot Before Dark Link Ledge 3,               pot,            NONE,                 TEMPLE_WATER,                   0x060b,                     FLEXIBLE
+MQ Water Temple Pot After Dark Link 1,                      pot,            NONE,                 TEMPLE_WATER,                   0x0702,                     ARROWS_30
+MQ Water Temple Pot After Dark Link 2,                      pot,            NONE,                 TEMPLE_WATER,                   0x0703,                     FLEXIBLE
+MQ Water Temple Pot Boss Key Room,                          pot,            NONE,                 TEMPLE_WATER,                   0x090f,                     MAGIC_JAR_LARGE
+MQ Water Temple Pot Room Before High Water 1,               pot,            NONE,                 TEMPLE_WATER,                   0x0a11,                     RECOVERY_HEART
+MQ Water Temple Pot Room Before High Water 2,               pot,            NONE,                 TEMPLE_WATER,                   0x0a12,                     RECOVERY_HEART
+MQ Water Temple Pot Room Before High Water 3,               pot,            NONE,                 TEMPLE_WATER,                   0x0a13,                     RECOVERY_HEART
+MQ Water Temple Pot Loop 1,                                 pot,            NONE,                 TEMPLE_WATER,                   0x0e0e,                     BOMB
+MQ Water Temple Pot Loop 2,                                 pot,            NONE,                 TEMPLE_WATER,                   0x0e0f,                     BOMB
+MQ Water Temple Pot Stalfos Room 1,                         pot,            NONE,                 TEMPLE_WATER,                   0x1008,                     FLEXIBLE
+MQ Water Temple Pot Stalfos Room 2,                         pot,            NONE,                 TEMPLE_WATER,                   0x1009,                     MAGIC_JAR_LARGE
+MQ Water Temple Pot Ruto 1,                                 pot,            NONE,                 TEMPLE_WATER,                   0x110d,                     MAGIC_JAR_LARGE
+MQ Water Temple Pot Ruto 2,                                 pot,            NONE,                 TEMPLE_WATER,                   0x110e,                     MAGIC_JAR_LARGE
+MQ Water Temple Pot Twisted Room Entrance,                  pot,            NONE,                 TEMPLE_WATER,                   0x1411,                     RUPEE_RED
+MQ Water Temple Pot Twisted Room Right 1,                   pot,            NONE,                 TEMPLE_WATER,                   0x1412,                     ARROWS_10
+MQ Water Temple Pot Twisted Room Right 2,                   pot,            NONE,                 TEMPLE_WATER,                   0x1413,                     MAGIC_JAR_LARGE
+MQ Water Temple Pot Twisted Room Cage 1,                    pot,            NONE,                 TEMPLE_WATER,                   0x1414,                     RECOVERY_HEART
+MQ Water Temple Pot Twisted Room Cage 2,                    pot,            NONE,                 TEMPLE_WATER,                   0x1415,                     RECOVERY_HEART
+MQ Water Temple Pot River 1,                                pot,            NONE,                 TEMPLE_WATER,                   0x1512,                     ARROWS_10
+MQ Water Temple Pot River 2,                                pot,            NONE,                 TEMPLE_WATER,                   0x1513,                     FLEXIBLE
 MQ Shadow Temple Compass Chest,                             chest,          NONE,                 TEMPLE_SHADOW,                  0x01,                       COMPASS_SHADOW
 MQ Shadow Temple Hover Boots Chest,                         chest,          NONE,                 TEMPLE_SHADOW,                  0x07,                       BOOTS_HOVER
 MQ Shadow Temple First Gibdos Chest,                        chest,          NONE,                 TEMPLE_SHADOW,                  0x03,                       SMALL_KEY_SHADOW
@@ -1366,6 +1503,29 @@ MQ Shadow Temple SR Spikes Front Midair,                    sr,             NONE
 MQ Shadow Temple SR Spikes Right Ground,                    sr,             NONE,                 TEMPLE_SHADOW,                  0x34,                       RUPEE_SILVER_SHADOW_SPIKES
 MQ Shadow Temple SR Spikes Right Back Wall,                 sr,             NONE,                 TEMPLE_SHADOW,                  0x35,                       RUPEE_SILVER_SHADOW_SPIKES
 MQ Shadow Temple SR Spikes Right Lateral Wall,              sr,             NONE,                 TEMPLE_SHADOW,                  0x36,                       RUPEE_SILVER_SHADOW_SPIKES
+MQ Shadow Temple Pot Entrance Maze 1,                       pot,            NONE,                 TEMPLE_SHADOW,                  0x0004,                     RECOVERY_HEART
+MQ Shadow Temple Pot Entrance Maze 2,                       pot,            NONE,                 TEMPLE_SHADOW,                  0x0005,                     RECOVERY_HEART
+MQ Shadow Temple Pot Compass Room 1,                        pot,            NONE,                 TEMPLE_SHADOW,                  0x0104,                     RECOVERY_HEART
+MQ Shadow Temple Pot Compass Room 2,                        pot,            NONE,                 TEMPLE_SHADOW,                  0x0105,                     RECOVERY_HEART
+MQ Shadow Temple Pot Guillotines Room Lower 1,              pot,            NONE,                 TEMPLE_SHADOW,                  0x0a03,                     RECOVERY_HEART
+MQ Shadow Temple Pot Guillotines Room Lower 2,              pot,            NONE,                 TEMPLE_SHADOW,                  0x0a04,                     BOMB
+MQ Shadow Temple Pot Guillotines Room Upper 1,              pot,            NONE,                 TEMPLE_SHADOW,                  0x0a05,                     RECOVERY_HEART
+MQ Shadow Temple Pot Guillotines Room Upper 2,              pot,            NONE,                 TEMPLE_SHADOW,                  0x0a06,                     RECOVERY_HEART
+MQ Shadow Temple Pot Boss Key Room,                         pot,            NONE,                 TEMPLE_SHADOW,                  0x0d08,                     MAGIC_JAR_LARGE
+MQ Shadow Temple Pot Bomb Flowers Room 1,                   pot,            NONE,                 TEMPLE_SHADOW,                  0x1101,                     BOMBS_5
+MQ Shadow Temple Pot Bomb Flowers Room 2,                   pot,            NONE,                 TEMPLE_SHADOW,                  0x1102,                     ARROWS_30
+MQ Shadow Temple Pot Room Before Boat 1,                    pot,            NONE,                 TEMPLE_SHADOW,                  0x1403,                     RUPEE_BLUE
+MQ Shadow Temple Pot Room Before Boat 2,                    pot,            NONE,                 TEMPLE_SHADOW,                  0x1404,                     NUTS_5
+MQ Shadow Temple Pot After Boat Before Bridge 1,            pot,            NONE,                 TEMPLE_SHADOW,                  0x1513,                     ARROWS_10
+MQ Shadow Temple Pot After Boat Before Bridge 2,            pot,            NONE,                 TEMPLE_SHADOW,                  0x1514,                     ARROWS_10
+MQ Shadow Temple Pot After Boat After Bridge 1,             pot,            NONE,                 TEMPLE_SHADOW,                  0x1515,                     ARROWS_30
+MQ Shadow Temple Pot After Boat After Bridge 2,             pot,            NONE,                 TEMPLE_SHADOW,                  0x1516,                     MAGIC_JAR_LARGE
+MQ Shadow Temple Flying Pot Entrance Maze 1,                pot,            NONE,                 TEMPLE_SHADOW,                  0x0006,                     NUTS_5
+MQ Shadow Temple Flying Pot Entrance Maze 2,                pot,            NONE,                 TEMPLE_SHADOW,                  0x0007,                     NUTS_5
+MQ Shadow Temple Flying Pot Entrance Maze 3,                pot,            NONE,                 TEMPLE_SHADOW,                  0x0008,                     NUTS_5
+MQ Shadow Temple Flying Pot Entrance Maze 4,                pot,            NONE,                 TEMPLE_SHADOW,                  0x0009,                     NUTS_5
+MQ Shadow Temple Flying Pot Room Before Boat 1,             pot,            NONE,                 TEMPLE_SHADOW,                  0x1405,                     RECOVERY_HEART
+MQ Shadow Temple Flying Pot Room Before Boat 2,             pot,            NONE,                 TEMPLE_SHADOW,                  0x1406,                     NUTS_5
 MQ Spirit Temple Entrance Initial Chest,                    chest,          NONE,                 TEMPLE_SPIRIT,                  0x1a,                       BOMBCHU_5
 MQ Spirit Temple Lobby Back-Left Chest,                     chest,          NONE,                 TEMPLE_SPIRIT,                  0x1e,                       SMALL_KEY_SPIRIT
 MQ Spirit Temple Lobby Back-Right Chest,                    chest,          NONE,                 TEMPLE_SPIRIT,                  0x1f,                       BOMBCHU_5
@@ -1401,6 +1561,38 @@ MQ Spirit Temple SR Adult Bottom-Center,                    sr,             NONE
 MQ Spirit Temple SR Adult Center-Top,                       sr,             NONE,                 TEMPLE_SPIRIT,                  0x11,                       RUPEE_SILVER_SPIRIT_ADULT
 MQ Spirit Temple SR Adult Top,                              sr,             NONE,                 TEMPLE_SPIRIT,                  0x12,                       RUPEE_SILVER_SPIRIT_ADULT
 MQ Spirit Temple SR Adult Skulltula,                        sr,             NONE,                 TEMPLE_SPIRIT,                  0x13,                       RUPEE_SILVER_SPIRIT_ADULT
+MQ Spirit Temple Pot Entrance 1,                            pot,            NONE,                 TEMPLE_SPIRIT,                  0x0011,                     RECOVERY_HEART
+MQ Spirit Temple Pot Entrance 2,                            pot,            NONE,                 TEMPLE_SPIRIT,                  0x0012,                     RECOVERY_HEART
+MQ Spirit Temple Pot Entrance 3,                            pot,            NONE,                 TEMPLE_SPIRIT,                  0x0013,                     BOMB
+MQ Spirit Temple Pot Entrance 4,                            pot,            NONE,                 TEMPLE_SPIRIT,                  0x0015,                     MAGIC_JAR_LARGE
+MQ Spirit Temple Pot Child Entrance,                        pot,            NONE,                 TEMPLE_SPIRIT,                  0x010b,                     BOMB
+MQ Spirit Temple Pot Child Boulders 1,                      pot,            NONE,                 TEMPLE_SPIRIT,                  0x020c,                     RECOVERY_HEART
+MQ Spirit Temple Pot Child Boulders 2,                      pot,            NONE,                 TEMPLE_SPIRIT,                  0x020d,                     MAGIC_JAR_LARGE
+MQ Spirit Temple Pot Child Climb,                           pot,            NONE,                 TEMPLE_SPIRIT,                  0x040c,                     MAGIC_JAR_LARGE
+MQ Spirit Temple Pot Statue Room Upper 1,                   pot,            NONE,                 TEMPLE_SPIRIT,                  0x0520,                     ARROWS_5
+MQ Spirit Temple Pot Statue Room Upper 2,                   pot,            NONE,                 TEMPLE_SPIRIT,                  0x0521,                     MAGIC_JAR_LARGE
+MQ Spirit Temple Pot Statue Room Lower 1,                   pot,            NONE,                 TEMPLE_SPIRIT,                  0x051e,                     RECOVERY_HEART
+MQ Spirit Temple Pot Statue Room Lower 2,                   pot,            NONE,                 TEMPLE_SPIRIT,                  0x0522,                     MAGIC_JAR_SMALL
+MQ Spirit Temple Pot Statue Room Lower 3,                   pot,            NONE,                 TEMPLE_SPIRIT,                  0x0523,                     DEKU_SEEDS_5
+MQ Spirit Temple Pot Child Sun Room 1,                      pot,            NONE,                 TEMPLE_SPIRIT,                  0x0816,                     RECOVERY_HEART
+MQ Spirit Temple Pot Child Sun Room 2,                      pot,            NONE,                 TEMPLE_SPIRIT,                  0x0818,                     DEKU_SEEDS_5
+MQ Spirit Temple Pot Adult Climb 1,                         pot,            NONE,                 TEMPLE_SPIRIT,                  0x0f0e,                     RECOVERY_HEART
+MQ Spirit Temple Pot Adult Climb 2,                         pot,            NONE,                 TEMPLE_SPIRIT,                  0x0f0f,                     RECOVERY_HEART
+MQ Spirit Temple Pot Topmost Climb 1,                       pot,            NONE,                 TEMPLE_SPIRIT,                  0x170f,                     RECOVERY_HEART
+MQ Spirit Temple Pot Topmost Climb 2,                       pot,            NONE,                 TEMPLE_SPIRIT,                  0x1710,                     RECOVERY_HEART
+MQ Spirit Temple Pot Top Near Triforce Symbol 1,            pot,            NONE,                 TEMPLE_SPIRIT,                  0x1803,                     RECOVERY_HEART
+MQ Spirit Temple Pot Top Near Triforce Symbol 2,            pot,            NONE,                 TEMPLE_SPIRIT,                  0x1804,                     BOMB
+MQ Spirit Temple Pot Top Near Lowering Platform 1,          pot,            NONE,                 TEMPLE_SPIRIT,                  0x1909,                     RECOVERY_HEART
+MQ Spirit Temple Pot Top Near Lowering Platform 2,          pot,            NONE,                 TEMPLE_SPIRIT,                  0x190a,                     RECOVERY_HEART
+MQ Spirit Temple Pot Top Near Lowering Platform 3,          pot,            NONE,                 TEMPLE_SPIRIT,                  0x190b,                     RECOVERY_HEART
+MQ Spirit Temple Pot Top Near Lowering Platform 4,          pot,            NONE,                 TEMPLE_SPIRIT,                  0x190c,                     MAGIC_JAR_SMALL
+MQ Spirit Temple Pot Child Back 1,                          pot,            NONE,                 TEMPLE_SPIRIT,                  0x1b09,                     RECOVERY_HEART
+MQ Spirit Temple Pot Child Back 2,                          pot,            NONE,                 TEMPLE_SPIRIT,                  0x1b0a,                     RECOVERY_HEART
+MQ Spirit Temple Pot Child Back 3,                          pot,            NONE,                 TEMPLE_SPIRIT,                  0x1b0b,                     DEKU_SEEDS_5
+MQ Spirit Temple Pot Child Back 4,                          pot,            NONE,                 TEMPLE_SPIRIT,                  0x1b0c,                     FLEXIBLE
+MQ Spirit Temple Flying Pot Statue Room Upper,              pot,            NONE,                 TEMPLE_SPIRIT,                  0x0512,                     NOTHING
+MQ Spirit Temple Flying Pot Statue Room Lower,              pot,            NONE,                 TEMPLE_SPIRIT,                  0x0513,                     NOTHING
+MQ Spirit Temple Flying Pot Statue Room Stairs,             pot,            NONE,                 TEMPLE_SPIRIT,                  0x0516,                     NOTHING
 MQ Gerudo Training Grounds Entryway Left Chest,             chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x13,                       ARROWS_10
 MQ Gerudo Training Grounds Entryway Right Chest,            chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x07,                       BOMBCHU_10
 MQ Gerudo Training Grounds Maze First Chest,                chest,          NONE,                 GERUDO_TRAINING_GROUND,         0x0b,                       RUPEE_PURPLE
@@ -1432,6 +1624,10 @@ MQ Gerudo Training Grounds SR Lava Front,                   sr,             NONE
 MQ Gerudo Training Grounds SR Water Top-Left,               sr,             NONE,                 GERUDO_TRAINING_GROUND,         0x4c,                       RUPEE_SILVER_GTG_WATER
 MQ Gerudo Training Grounds SR Water Center,                 sr,             NONE,                 GERUDO_TRAINING_GROUND,         0x4d,                       RUPEE_SILVER_GTG_WATER
 MQ Gerudo Training Grounds SR Water Bottom-Right,           sr,             NONE,                 GERUDO_TRAINING_GROUND,         0x4e,                       RUPEE_SILVER_GTG_WATER
+MQ Gerudo Training Grounds Pot 1,                           pot,            NONE,                 GERUDO_TRAINING_GROUND,         0x0005,                     RECOVERY_HEART
+MQ Gerudo Training Grounds Pot 2,                           pot,            NONE,                 GERUDO_TRAINING_GROUND,         0x0006,                     MAGIC_JAR_SMALL
+MQ Gerudo Training Grounds Pot 3,                           pot,            NONE,                 GERUDO_TRAINING_GROUND,         0x0007,                     MAGIC_JAR_LARGE
+MQ Gerudo Training Grounds Pot 4,                           pot,            NONE,                 GERUDO_TRAINING_GROUND,         0x0008,                     RECOVERY_HEART
 MQ Ganon Castle Light Trial Chest,                          chest,          NONE,                 INSIDE_GANON_CASTLE,            0x04,                       RECOVERY_HEART
 MQ Ganon Castle Forest Trial First Chest,                   chest,          NONE,                 INSIDE_GANON_CASTLE,            0x02,                       ARROWS_10
 MQ Ganon Castle Forest Trial Second Chest,                  chest,          NONE,                 INSIDE_GANON_CASTLE,            0x03,                       BOMBS_5
@@ -1465,3 +1661,15 @@ MQ Ganon Castle SR Fire Center-Left,                        sr,             NONE
 MQ Ganon Castle SR Fire Back-Left,                          sr,             NONE,                 INSIDE_GANON_CASTLE,            0x5d,                       RUPEE_SILVER_GANON_FIRE
 MQ Ganon Castle SR Fire High Above Lava,                    sr,             NONE,                 INSIDE_GANON_CASTLE,            0x5e,                       RUPEE_SILVER_GANON_FIRE
 MQ Ganon Castle SR Fire Front-Left,                         sr,             NONE,                 INSIDE_GANON_CASTLE,            0x5f,                       RUPEE_SILVER_GANON_FIRE
+MQ Ganon Pot Water End 1,                                   pot,            NONE,                 INSIDE_GANON_CASTLE,            0x0404,                     RECOVERY_HEART
+MQ Ganon Pot Water End 2,                                   pot,            NONE,                 INSIDE_GANON_CASTLE,            0x0405,                     ARROWS_10
+MQ Ganon Pot Forest End 1,                                  pot,            NONE,                 INSIDE_GANON_CASTLE,            0x0704,                     RECOVERY_HEART
+MQ Ganon Pot Forest End 2,                                  pot,            NONE,                 INSIDE_GANON_CASTLE,            0x0705,                     MAGIC_JAR_SMALL
+MQ Ganon Pot Light End 1,                                   pot,            NONE,                 INSIDE_GANON_CASTLE,            0x0b04,                     MAGIC_JAR_LARGE
+MQ Ganon Pot Light End 2,                                   pot,            NONE,                 INSIDE_GANON_CASTLE,            0x0b05,                     RECOVERY_HEART
+MQ Ganon Pot Shadow End 1,                                  pot,            NONE,                 INSIDE_GANON_CASTLE,            0x0d04,                     MAGIC_JAR_LARGE
+MQ Ganon Pot Shadow End 2,                                  pot,            NONE,                 INSIDE_GANON_CASTLE,            0x0d05,                     ARROWS_10
+MQ Ganon Pot Fire End 1,                                    pot,            NONE,                 INSIDE_GANON_CASTLE,            0x0f04,                     RECOVERY_HEART
+MQ Ganon Pot Fire End 2,                                    pot,            NONE,                 INSIDE_GANON_CASTLE,            0x0f05,                     MAGIC_JAR_SMALL
+MQ Ganon Pot Spirit End 1,                                  pot,            NONE,                 INSIDE_GANON_CASTLE,            0x1304,                     NUTS_5
+MQ Ganon Pot Spirit End 2,                                  pot,            NONE,                 INSIDE_GANON_CASTLE,            0x1305,                     MAGIC_JAR_SMALL

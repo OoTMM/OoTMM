@@ -18,6 +18,14 @@
     FOREST_POE_4: "event(FOREST_POE_1) && event(FOREST_POE_2) && event(FOREST_POE_3)"
   locations:
     "MQ Forest Temple Wolfos Chest": "soul_wolfos && can_play_time && (has_weapon || can_use_slingshot || has_explosives || can_use_din || can_use_sticks)"
+    "MQ Forest Temple Pot Main Room 1": "true"
+    "MQ Forest Temple Pot Main Room 2": "true"
+    "MQ Forest Temple Pot Main Room 3": "true"
+    "MQ Forest Temple Pot Main Room 4": "true"
+    "MQ Forest Temple Pot Main Room 5": "true"
+    "MQ Forest Temple Pot Main Room 6": "true"
+    "MQ Forest Temple Pot Bow Room Lower 1": "can_play_time"
+    "MQ Forest Temple Pot Bow Room Lower 2": "can_play_time"
 "Forest Temple West Wing":
   dungeon: Forest
   exits:
@@ -93,7 +101,13 @@
     "MQ Forest Temple Map Chest": "event(FOREST_POE_1)"
     "MQ Forest Temple Bow Chest": "soul(SOUL_STALFOS) && soul_wolfos && has_weapon"
     "MQ Forest Temple Compass Chest": "event(FOREST_POE_2)"
-    "MQ Forest Temple Wolfos Chest": "soul_wolfos"
+    "MQ Forest Temple Pot Bow Room Upper 1": "true"
+    "MQ Forest Temple Pot Bow Room Upper 2": "true"
+    "MQ Forest Temple Pot Bow Room Upper 3": "true"
+    "MQ Forest Temple Pot Bow Room Upper 4": "true"
+    "MQ Forest Temple Pot Blue Poe 1": "soul(SOUL_STALFOS) && soul_wolfos"
+    "MQ Forest Temple Pot Blue Poe 2": "soul(SOUL_STALFOS) && soul_wolfos"
+    "MQ Forest Temple Pot Blue Poe 3": "soul(SOUL_STALFOS) && soul_wolfos"
 "Forest Temple Falling Ceiling":
   dungeon: Forest
   events:
@@ -101,9 +115,15 @@
   locations:
     "MQ Forest Temple Falling Ceiling Chest": "true"
     "MQ Forest Temple East Garden Ledge Chest": "true"
+    "MQ Forest Temple Pot Green Poe 1": "small_keys_forest(6)"
+    "MQ Forest Temple Pot Green Poe 2": "small_keys_forest(6)"
 "Forest Temple Antichamber":
   dungeon: Forest
   exits:
     "Forest Temple Boss": "boss_key(BOSS_KEY_FOREST)"
   locations:
     "MQ Forest Temple Antichamber": "true"
+    "MQ Forest Temple Pot Antichamber 1": "true"
+    "MQ Forest Temple Pot Antichamber 2": "true"
+    "MQ Forest Temple Pot Antichamber 3": "true"
+    "MQ Forest Temple Pot Antichamber 4": "true"
