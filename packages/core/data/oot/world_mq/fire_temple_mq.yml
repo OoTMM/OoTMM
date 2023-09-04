@@ -3,9 +3,11 @@
   exits:
     "Fire Temple Entry": "true"
     "Fire Temple Upper Lobby": "is_adult && has_tunic_goron"
-    "Fire Temple Vanilla Hammer Loop": "small_keys_fire(5) && has_weapon && soul_keese && soul(SOUL_STALFOS) && soul_iron_knuckle && soul(SOUL_FLARE_DANCER) && (has_bombs || can_hammer || can_hookshot)"
+    "Fire Temple Vanilla Hammer Loop": "small_keys_fire(5)"
   locations:
     "MQ Fire Temple Early Lower Left Chest": "can_damage && soul_like_like"
+    "MQ Fire Temple Pot Entrance 1": "true"
+    "MQ Fire Temple Pot Entrance 2": "true"
 "Fire Temple Upper Lobby":
   dungeon: Fire
   exits:
@@ -18,11 +20,21 @@
     "Fire Temple Boss": "has_tunic_goron && boss_key(BOSS_KEY_FIRE) && ((is_adult && event(FIRE_TEMPLE_PILLAR_HAMMER)) || has_hover_boots)"
   locations:
     "MQ Fire Temple Pre-Boss Chest": "has_tunic_goron && has_fire && (can_use_bow || has_hover_boots || (has_tunic_goron_strict && is_adult))"
+    "MQ Fire Temple Pot Pre-Boss 1": "has_tunic_goron && (has_hover_boots || can_hookshot)"
+    "MQ Fire Temple Pot Pre-Boss 2": "has_tunic_goron && (has_hover_boots || can_hookshot)"
 "Fire Temple Vanilla Hammer Loop":
   dungeon: Fire
   locations:
-    "MQ Fire Temple Hammer Chest": "true"
-    "MQ Fire Temple Map Chest": "can_hammer"
+    "MQ Fire Temple Hammer Chest": "has_weapon && soul_keese && soul(SOUL_STALFOS) && soul_iron_knuckle && soul(SOUL_FLARE_DANCER) && (has_bombs || can_hammer || can_hookshot)"
+    "MQ Fire Temple Map Chest": "can_hammer && has_weapon && soul_keese && soul(SOUL_STALFOS) && soul_iron_knuckle && soul(SOUL_FLARE_DANCER)"
+    "MQ Fire Temple Pot Hammer Loop 1": "has_weapon && soul_keese && soul(SOUL_STALFOS)"
+    "MQ Fire Temple Pot Hammer Loop 2": "has_weapon && soul_keese && soul(SOUL_STALFOS)"
+    "MQ Fire Temple Pot Hammer Loop 3": "has_weapon && soul_keese && soul(SOUL_STALFOS)"
+    "MQ Fire Temple Pot Hammer Loop 4": "has_weapon && soul_keese && soul(SOUL_STALFOS)"
+    "MQ Fire Temple Pot Hammer Loop 5": "has_weapon && soul_keese && soul(SOUL_STALFOS)"
+    "MQ Fire Temple Pot Hammer Loop 6": "has_weapon && soul_keese && soul(SOUL_STALFOS)"
+    "MQ Fire Temple Pot Hammer Loop 7": "has_weapon && soul_keese && soul(SOUL_STALFOS)"
+    "MQ Fire Temple Pot Hammer Loop 8": "has_weapon && soul_keese && soul(SOUL_STALFOS)"
 "Fire Temple 1f Lava Room":
   dungeon: Fire
   exits:
@@ -31,7 +43,12 @@
   locations:
     "MQ Fire Temple Boss Key Chest": "has_tunic_goron && has_fire && can_hookshot"
     "MQ Fire Temple 1f Lava Room Goron Chest": "has_tunic_goron && has_fire && can_hookshot && has_explosives"
-    "MQ Fire Temple GS 1f Lava Room": "true"
+    "MQ Fire Temple GS 1f Lava Room": "has_tunic_goron"
+    "MQ Fire Temple Pot Lava Room Left": "has_tunic_goron"
+    "MQ Fire Temple Pot Lava Room Alcove": "has_tunic_goron"
+    "MQ Fire Temple Pot Lava Room Right": "has_tunic_goron && can_hookshot"
+    "MQ Fire Temple Pot Boss Key Room 1": "has_tunic_goron && has_fire && can_hookshot"
+    "MQ Fire Temple Pot Boss Key Room 2": "has_tunic_goron && has_fire && can_hookshot"
 "Fire Temple Maze Lower":
   dungeon: Fire
   exits:
@@ -56,6 +73,12 @@
   dungeon: Fire
   exits:
     "Fire Temple Fire Walls": "can_use_bow" #With tricks, there's more logic here
+  locations:
+    "MQ Fire Temple Pot Grids Above Lava 1": "true"
+    "MQ Fire Temple Pot Grids Above Lava 2": "true"
+    "MQ Fire Temple Pot Bridge Above Lava Room 1": "true"
+    "MQ Fire Temple Pot Bridge Above Lava Room 2": "true"
+    "MQ Fire Temple Pot Bridge Above Lava Room 3": "true"
 "Fire Temple Fire Walls":
   dungeon: Fire
   exits:
@@ -66,6 +89,12 @@
     "MQ Fire Temple Flare Dancer Key": "soul(SOUL_FLARE_DANCER)"
     "MQ Fire Temple GS Fire Walls Side Room": "has_hover_boots || can_play_time"
     "MQ Fire Temple GS Fire Walls Middle": "has_explosives"
+    "MQ Fire Temple Pot Fire Maze Room Left 1": "true"
+    "MQ Fire Temple Pot Fire Maze Room Left 2": "true"
+    "MQ Fire Temple Pot Fire Maze Room Right 1": "has_hover_boots || can_play_time"
+    "MQ Fire Temple Pot Fire Maze Room Right 2": "has_hover_boots || can_play_time"
+    "MQ Fire Temple Pot Fire Maze Room Back Right 1": "can_hookshot && can_hammer"
+    "MQ Fire Temple Pot Fire Maze Room Back Right 2": "can_hookshot && can_hammer"
 "Fire Temple Top":
   dungeon: Fire
   locations:

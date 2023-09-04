@@ -19,6 +19,10 @@
     "Spirit Temple Silver Gauntlets": "small_keys_spirit(4) && has_explosives && can_play_time && is_child && soul_iron_knuckle && (has_weapon || can_use_sticks) && has_lens"
     "MQ Spirit Temple SR Lobby Rock Right": "has_explosives_or_hammer"
     "MQ Spirit Temple SR Lobby Rock Left": "has_explosives_or_hammer"
+    "MQ Spirit Temple Pot Entrance 1": "true"
+    "MQ Spirit Temple Pot Entrance 2": "true"
+    "MQ Spirit Temple Pot Entrance 3": "true"
+    "MQ Spirit Temple Pot Entrance 4": "true"
 "Spirit Temple Child Side":
   dungeon: Spirit
   exits:
@@ -29,6 +33,13 @@
     "MQ Spirit Temple Map Chest": "soul(SOUL_TORCH_SLUG) && (can_use_sticks || has_weapon || (has_explosives && has_nuts))"
     "MQ Spirit Temple Map Room Back Chest": "soul(SOUL_TORCH_SLUG) && soul_redead_gibdo && soul(SOUL_STALFOS) && soul_keese && soul(SOUL_ANUBIS) && has_weapon && has_bombchu && can_use_slingshot && can_use_din"
     "MQ Spirit Temple Paradox Chest": "event(SPIRIT_PARADOX)"
+    "MQ Spirit Temple Pot Child Entrance": "true"
+    "MQ Spirit Temple Pot Child Boulders 1": "soul(SOUL_TORCH_SLUG) && (can_use_sticks || has_weapon || (has_explosives && has_nuts)) && has_bombchu && can_use_slingshot"
+    "MQ Spirit Temple Pot Child Boulders 2": "soul(SOUL_TORCH_SLUG) && (can_use_sticks || has_weapon || (has_explosives && has_nuts)) && has_bombchu && can_use_slingshot"
+    "MQ Spirit Temple Pot Child Back 1": "soul(SOUL_TORCH_SLUG) && soul_redead_gibdo && soul(SOUL_STALFOS) && has_weapon && has_bombchu && can_use_slingshot"
+    "MQ Spirit Temple Pot Child Back 2": "soul(SOUL_TORCH_SLUG) && soul_redead_gibdo && soul(SOUL_STALFOS) && has_weapon && has_bombchu && can_use_slingshot"
+    "MQ Spirit Temple Pot Child Back 3": "soul(SOUL_TORCH_SLUG) && soul_redead_gibdo && soul(SOUL_STALFOS) && has_weapon && has_bombchu && can_use_slingshot"
+    "MQ Spirit Temple Pot Child Back 4": "soul(SOUL_TORCH_SLUG) && soul_redead_gibdo && soul(SOUL_STALFOS) && has_weapon && has_bombchu && can_use_slingshot"
 "Spirit Temple Child Upper":
 #All paths into this room guarantee explosives.
   dungeon: Spirit
@@ -39,6 +50,7 @@
   locations:
     "MQ Spirit Temple Child Upper Ground Chest": "soul_like_like && soul_beamos && soul(SOUL_BABY_DODONGO)" #Explosives are enough for every enemy in this room
     "MQ Spirit Temple Child Upper Ledge Chest": "can_hookshot"
+    "MQ Spirit Temple Pot Child Climb": "true"
 "Spirit Temple Statue":
   dungeon: Spirit
   exits:
@@ -54,6 +66,14 @@
     "MQ Spirit Temple Compass Chest": "can_use_slingshot || can_use_bow"
     "MQ Spirit Temple Chest in Box": "can_play(SONG_ZELDA) && (is_adult || (has_hover_boots && trick(OOT_SPIRIT_CHILD_HOVER)))"
     "MQ Spirit Temple Statue Room Ledge Chest": "(is_adult || (has_hover_boots && trick(OOT_SPIRIT_CHILD_HOVER))) && has_lens"
+    "MQ Spirit Temple Pot Statue Room Lower 1": "true"
+    "MQ Spirit Temple Pot Statue Room Lower 2": "true"
+    "MQ Spirit Temple Pot Statue Room Lower 3": "true"
+    "MQ Spirit Temple Flying Pot Statue Room Lower": "soul_flying_pot"
+    "MQ Spirit Temple Flying Pot Statue Room Stairs": "soul_flying_pot"
+    "MQ Spirit Temple Flying Pot Statue Room Upper": "soul_flying_pot && (can_play_time || has_hover_boots)"
+    "MQ Spirit Temple Pot Statue Room Upper 1": "can_play_time || has_hover_boots"
+    "MQ Spirit Temple Pot Statue Room Upper 2": "can_play_time || has_hover_boots"
 "Spirit Temple Sun Block Room":
   dungeon: Spirit
   exits:
@@ -62,6 +82,8 @@
   locations:
     "MQ Spirit Temple Sun Block Room Chest": "true"
     "MQ Spirit Temple GS Sun Block Room": "is_adult"
+    "MQ Spirit Temple Pot Child Sun Room 1": "true"
+    "MQ Spirit Temple Pot Child Sun Room 2": "true"
 "Spirit Temple Child Hand":
   dungeon: Spirit
   exits:
@@ -78,6 +100,8 @@
     "MQ Spirit Temple SR Lobby In Water": "can_hammer"
     "MQ Spirit Temple SR Lobby After Water Near Stairs": "true"
     "MQ Spirit Temple SR Lobby After Water Near Door": "true"
+    "MQ Spirit Temple Pot Adult Climb 1": "true"
+    "MQ Spirit Temple Pot Adult Climb 2": "true"
 "Spirit Temple Adult Upper":
   dungeon: Spirit
   exits:
@@ -103,6 +127,8 @@
     "MQ Spirit Temple SR Adult Center-Top": "true"
     "MQ Spirit Temple SR Adult Top": "true"
     "MQ Spirit Temple SR Adult Skulltula": "true"
+    "MQ Spirit Temple Pot Topmost Climb 1": "true"
+    "MQ Spirit Temple Pot Topmost Climb 2": "true"
 "Spirit Temple Top Floor":
   dungeon: Spirit
   events:
@@ -111,3 +137,9 @@
     "MQ Spirit Temple Topmost Chest": "can_play(SONG_ZELDA) && can_hammer && has_lens"
     "MQ Spirit Temple GS Top Floor Left Wall": "small_keys_spirit(7) && soul_iron_knuckle"
     "MQ Spirit Temple GS Top Floor Back Wall": "small_keys_spirit(7) && soul_iron_knuckle"
+    "MQ Spirit Temple Pot Top Near Triforce Symbol 1": "true"
+    "MQ Spirit Temple Pot Top Near Triforce Symbol 2": "true"
+    "MQ Spirit Temple Pot Top Near Lowering Platform 1": "can_play(SONG_ZELDA)"
+    "MQ Spirit Temple Pot Top Near Lowering Platform 2": "can_play(SONG_ZELDA)"
+    "MQ Spirit Temple Pot Top Near Lowering Platform 3": "can_play(SONG_ZELDA)"
+    "MQ Spirit Temple Pot Top Near Lowering Platform 4": "can_play(SONG_ZELDA)"

@@ -17,6 +17,14 @@
   locations:
     "MQ Shadow Temple Compass Chest": "soul_redead_gibdo && (has_weapon || can_use_sticks || can_use_din)"
     "MQ Shadow Temple Hover Boots Chest": "can_play_time && can_hit_triggers_distance && soul(SOUL_DEAD_HAND) && (has_weapon || (can_use_sticks && trick(OOT_DEAD_HAND_STICKS)))"
+    "MQ Shadow Temple Pot Entrance Maze 1": "true"
+    "MQ Shadow Temple Pot Entrance Maze 2": "true"
+    "MQ Shadow Temple Flying Pot Entrance Maze 1": "soul_flying_pot"
+    "MQ Shadow Temple Flying Pot Entrance Maze 2": "soul_flying_pot"
+    "MQ Shadow Temple Flying Pot Entrance Maze 3": "soul_flying_pot && can_play_time"
+    "MQ Shadow Temple Flying Pot Entrance Maze 4": "soul_flying_pot && can_play_time"
+    "MQ Shadow Temple Pot Compass Room 1": "has_weapon || can_use_sticks || can_use_din || can_play_sun" #It would be too unfair to get around the Redeads otherwise
+    "MQ Shadow Temple Pot Compass Room 2": "has_weapon || can_use_sticks || can_use_din || can_play_sun" #It would be too unfair to get around the Redeads otherwise
 "Shadow Temple First Beamos":
   dungeon: Shadow
   exits:
@@ -75,6 +83,10 @@
     "MQ Shadow Temple SR Pit Midair High": "can_longshot"
     "MQ Shadow Temple SR Pit Right": "true"
     "MQ Shadow Temple SR Pit Front": "true"
+    "MQ Shadow Temple Pot Guillotines Room Lower 1": "true"
+    "MQ Shadow Temple Pot Guillotines Room Lower 2": "true"
+    "MQ Shadow Temple Pot Guillotines Room Upper 1": "has(STRENGTH) && is_adult"
+    "MQ Shadow Temple Pot Guillotines Room Upper 2": "has(STRENGTH) && is_adult"
 "Shadow Temple Invisible Spike Floor":
   dungeon: Shadow
   exits:
@@ -102,6 +114,10 @@
     "MQ Shadow Temple After Wind Bomb Chest": "has_explosives"
     "MQ Shadow Temple GS Wind Hint": "true"
     "MQ Shadow Temple GS After Wind Bomb": "has_explosives"
+    "MQ Shadow Temple Pot Room Before Boat 1": "has_weapon || can_use_sticks || can_use_din || can_play_sun" #It would be too unfair to get around the Gibdos otherwise
+    "MQ Shadow Temple Pot Room Before Boat 2": "has_weapon || can_use_sticks || can_use_din || can_play_sun" #It would be too unfair to get around the Gibdos otherwise
+    "MQ Shadow Temple Flying Pot Room Before Boat 1": "soul_flying_pot && ((has_weapon || can_use_sticks || can_use_din) || (can_play_sun))" #It would be too unfair to get around the Gibdos otherwise
+    "MQ Shadow Temple Flying Pot Room Before Boat 2": "soul_flying_pot && ((has_weapon || can_use_sticks || can_use_din) || (can_play_sun))" #It would be too unfair to get around the Gibdos otherwise
 "Shadow Temple Boat":
   dungeon: Shadow
   exits:
@@ -110,6 +126,10 @@
   locations:
     "MQ Shadow Temple GS After Boat": "true"
     "MQ Shadow Temple GS Pre-Boss": "can_use_bow"
+    "MQ Shadow Temple Pot After Boat Before Bridge 1": "true"
+    "MQ Shadow Temple Pot After Boat Before Bridge 2": "true"
+    "MQ Shadow Temple Pot After Boat After Bridge 1": "can_use_bow"
+    "MQ Shadow Temple Pot After Boat After Bridge 2": "can_use_bow"
 "Shadow Temple Final Side Rooms":
   dungeon: Shadow
   locations:
@@ -117,3 +137,6 @@
     "MQ Shadow Temple Triple Pot Key": "has_bombflowers" #Not strictly necessary to check
     "MQ Shadow Temple Boss Key Chest": "small_keys_shadow(6) && can_use_din"
     "MQ Shadow Temple Crushing Wall Left Chest": "small_keys_shadow(6) && can_use_din"
+    "MQ Shadow Temple Pot Bomb Flowers Room 1": "true"
+    "MQ Shadow Temple Pot Bomb Flowers Room 2": "true"
+    "MQ Shadow Temple Pot Boss Key Room": "small_keys_shadow(6)"
