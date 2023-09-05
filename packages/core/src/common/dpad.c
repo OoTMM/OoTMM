@@ -179,6 +179,11 @@ static void dpadUseItem(GameState_Play* play, int index, int flags)
     }
     else
     {
+        if (itemId == ITEM_OOT_WEIRD_EGG)
+        {
+            gComboTriggersData.events.weirdEgg = 1;
+            return;
+        }
         Player_UseItem = OverlayAddr(0x80834000);
         Player_UseItem(play, GET_LINK(play), itemId);
     }
@@ -207,6 +212,7 @@ void comboDpadUpdate(GameState_Play* play)
 
     if (gSave.age == AGE_CHILD && !comboConfig(CFG_OOT_AGELESS_BOOTS))
     {
+        sDpadItems[DPAD_UP] =  gSave.inventory.items[ITS_OOT_TRADE_CHILD];
         sDpadItems[DPAD_LEFT] = ITEM_NONE;
         sDpadItems[DPAD_RIGHT] = ITEM_NONE;
     }
@@ -214,6 +220,9 @@ void comboDpadUpdate(GameState_Play* play)
     {
         sDpadItems[DPAD_LEFT] = (gSave.inventory.equipment.boots & EQ_OOT_BOOTS_IRON) ? ITEM_OOT_BOOTS_IRON : ITEM_NONE;
         sDpadItems[DPAD_RIGHT] = (gSave.inventory.equipment.boots & EQ_OOT_BOOTS_HOVER) ? ITEM_OOT_BOOTS_HOVER : ITEM_NONE;
+        if(comboConfig(CFG_OOT_AGELESS_CHILD_TRADE)) {
+            sDpadItems[DPAD_UP] =  gSave.inventory.items[ITS_OOT_TRADE_CHILD];
+        }
     }
 }
 #endif

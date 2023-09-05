@@ -76,6 +76,7 @@ export const CONFVARS = [
   'MM_SHUFFLE_POTS',
   'OOT_SHUFFLE_GRASS',
   'MENU_NOTEBOOK',
+  'OOT_AGELESS_CHILD_TRADE',
 ] as const;
 
 export type Confvar = typeof CONFVARS[number];
