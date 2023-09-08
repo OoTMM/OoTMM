@@ -212,16 +212,17 @@ void comboDpadUpdate(GameState_Play* play)
 
     if (gSave.age == AGE_CHILD && !comboConfig(CFG_OOT_AGELESS_BOOTS))
     {
-        sDpadItems[DPAD_UP] =  gSave.inventory.items[ITS_OOT_TRADE_CHILD];
+        sDpadItems[DPAD_UP] = gSave.inventory.items[ITS_OOT_TRADE_CHILD];
         sDpadItems[DPAD_LEFT] = ITEM_NONE;
         sDpadItems[DPAD_RIGHT] = ITEM_NONE;
     }
     else
-    {
+    {   
+        sDpadItems[DPAD_UP] = ITEM_NONE;
         sDpadItems[DPAD_LEFT] = (gSave.inventory.equipment.boots & EQ_OOT_BOOTS_IRON) ? ITEM_OOT_BOOTS_IRON : ITEM_NONE;
         sDpadItems[DPAD_RIGHT] = (gSave.inventory.equipment.boots & EQ_OOT_BOOTS_HOVER) ? ITEM_OOT_BOOTS_HOVER : ITEM_NONE;
         if(comboConfig(CFG_OOT_AGELESS_CHILD_TRADE)) {
-            sDpadItems[DPAD_UP] =  gSave.inventory.items[ITS_OOT_TRADE_CHILD];
+            sDpadItems[DPAD_UP] = gSave.inventory.items[ITS_OOT_TRADE_CHILD];
         }
     }
 }
