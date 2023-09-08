@@ -75,7 +75,7 @@
   locations:
     "Ganon Castle SR Fire Back Right": "has_tunic_goron"
     "Ganon Castle SR Fire Left": "has_tunic_goron"
-    "Ganon Castle SR Fire Far Right": "has_tunic_goron_strict && (can_lift_gold || climb_anywhere || hookshot_anywhere)"
+    "Ganon Castle SR Fire Far Right": "has_tunic_goron_strict && (can_lift_gold || climb_anywhere || hookshot_anywhere || glitch_megaflip)"
     "Ganon Castle SR Fire Front Right": "has_tunic_goron"
     "Ganon Castle SR Fire Black Pillar": "has_tunic_goron && can_lift_gold"
 "Ganon Castle Fire End":
