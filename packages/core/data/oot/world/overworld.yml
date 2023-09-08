@@ -1301,7 +1301,7 @@
     MAGIC: "true"
   locations:
     "Zora River Bean Seller": "is_child && can_use_wallet(1)"
-    "Zora River HP Pillar": "is_child || has_hover_boots || climb_anywhere || hookshot_anywhere"
+    "Zora River HP Pillar": "is_child || has_hover_boots || climb_anywhere || hookshot_anywhere || glitch_megaflip"
     "Zora River HP Platform": "is_child || has_hover_boots || climb_anywhere || hookshot_anywhere || glitch_megaflip"
     "Zora River Frogs Storms": "is_child && can_play_storms"
     "Zora River Frogs Game": "is_child && can_play(SONG_ZELDA) && can_play(SONG_SARIA) && can_play_epona && can_play_sun && can_play_time && can_play_storms"
@@ -1555,6 +1555,7 @@
     "Death Mountain Crater Bottom": "(is_adult && event(RED_BOULDER_BROKEN)) || (has_hover_boots && (has_weapon || can_hammer || can_use_sticks)) || climb_anywhere || hookshot_anywhere"
     "Death Mountain Crater Warp": "has_tunic_goron_strict && ((is_adult && scarecrow_longshot) || longshot_anywhere || glitch_megaflip)"
     "Death Mountain Crater Generic Grotto": "has_explosives_or_hammer"
+    "Fairy Fountain Double Magic": "glitch_megaflip"
   events:
     #Having to farm these rocks for drops without heat resistance isn't fair without access to the grotto
     BOMBS: "has_tunic_goron_strict || can_hammer"
@@ -1574,7 +1575,7 @@
     "Death Mountain Crater Warp": "can_hookshot || (has_hover_boots && (is_adult || has_tunic_goron_strict))"
     "Death Mountain Crater Top": "is_adult || has_tunic_goron_strict"
     "Death Mountain Crater Scrub Grotto": "can_hammer"
-    "Fairy Fountain Double Magic": "can_hammer || climb_anywhere || hookshot_anywhere || glitch_megaflip"
+    "Fairy Fountain Double Magic": "can_hammer || climb_anywhere || hookshot_anywhere"
   events:
     RED_BOULDER_BROKEN: "is_adult && can_hammer"
   locations:
