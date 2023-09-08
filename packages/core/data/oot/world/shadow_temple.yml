@@ -121,7 +121,7 @@
 "Shadow Temple After Boat":
   dungeon: Shadow
   exits:
-    "Shadow Temple Boss": "small_keys_shadow(5) && boss_key(BOSS_KEY_SHADOW) && (can_use_bow || scarecrow_longshot || climb_anywhere || event(SHADOW_PILLAR)) && (has_hover_boots || climb_anywhere || hookshot_anywhere)"
+    "Shadow Temple Boss": "small_keys_shadow(5) && boss_key(BOSS_KEY_SHADOW) && (can_use_bow || scarecrow_longshot || climb_anywhere || event(SHADOW_PILLAR)) && (has_hover_boots || climb_anywhere || hookshot_anywhere || glitch_megaflip)"
   events:
     SHADOW_PILLAR: "can_use_bow || (has_bombflowers && (scarecrow_longshot || climb_anywhere))"
   locations:
