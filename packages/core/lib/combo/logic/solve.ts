@@ -536,29 +536,32 @@ export class LogicPassSolver {
       for (let worldId = 0; worldId < this.input.worlds.length; ++worldId) {
         const locs = this.getWeightedLocationList(worldId);
         let locsArray = shuffle(this.input.random, countMapArray(locs));
-        let triforceLocs: Location[] = [];
+        const triforces = [
+          makePlayerItem(Items.SHARED_TRIFORCE_POWER, worldId),
+          makePlayerItem(Items.SHARED_TRIFORCE_COURAGE, worldId),
+          makePlayerItem(Items.SHARED_TRIFORCE_WISDOM, worldId),
+        ];
 
-        for (let i = 0; i < 3; ++i) {
+        for (;;) {
+          const candidates = shuffle(this.input.random, triforces);
+          let pi: PlayerItem | undefined;
+          for (;;) {
+            pi = candidates.pop();
+            if (!pi)
+              break;
+            if (this.state.pools.required.has(pi))
+              break;
+          }
+          if (!pi)
+            break;
           const l = locsArray.pop()!;
           const region = this.input.worlds[worldId].regions[locationData(l).id];
           if (region !== 'NONE') {
             locsArray = locsArray.filter(x => this.input.worlds[worldId].regions[locationData(x).id] !== region);
           }
-          triforceLocs.push(l);
+          this.place(l, pi);
+          removeItemPools(this.state.pools, pi);
         }
-
-        triforceLocs = shuffle(this.input.random, triforceLocs);
-        const triforcePower = makePlayerItem(Items.SHARED_TRIFORCE_POWER, worldId);
-        const triforceCourage = makePlayerItem(Items.SHARED_TRIFORCE_COURAGE, worldId);
-        const triforceWisdom = makePlayerItem(Items.SHARED_TRIFORCE_WISDOM, worldId);
-
-        this.place(triforceLocs[0], triforcePower);
-        this.place(triforceLocs[1], triforceCourage);
-        this.place(triforceLocs[2], triforceWisdom);
-
-        removeItemPools(this.state.pools, triforcePower);
-        removeItemPools(this.state.pools, triforceCourage);
-        removeItemPools(this.state.pools, triforceWisdom);
       }
     });
   }
