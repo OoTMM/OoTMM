@@ -91,7 +91,7 @@ void EnJs_TryStartFight(Actor* this)
     void (*EnJs_SetFreeCamera)(Actor*, int);
 
     canFight = 0;
-    if (comboConfig(CFG_GOAL_TRIFORCE))
+    if (comboConfig(CFG_GOAL_TRIFORCE) || comboConfig(CFG_GOAL_TRIFORCE3))
     {
         if (gOotExtraFlags.triforceWin)
             canFight = 1;

@@ -76,7 +76,7 @@ void menuInit()
     DungeonDef* d;
 
     d = gDungeonDefs + gDungeonDefCount;
-    if (comboConfig(CFG_GOAL_TRIFORCE))
+    if (comboConfig(CFG_GOAL_TRIFORCE) || comboConfig(CFG_GOAL_TRIFORCE3))
     {
         d->name = "Triforce";
         d->id = 2;
@@ -655,7 +655,7 @@ static void printDungeonData(GameState_Play* play, int base, int index)
     u8 b;
     u8 a;
 
-    triforceMax = gOotExtraFlags.triforceWin ? gComboData.triforcePieces : gComboData.triforceGoal;
+    triforceMax = comboConfig(CFG_GOAL_TRIFORCE3) ? 3 : (gOotExtraFlags.triforceWin ? gComboData.triforcePieces : gComboData.triforceGoal);
     triforceDigits = digitCount(triforceMax);
 
     offX = 0.f;

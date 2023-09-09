@@ -50,7 +50,8 @@ export const SETTINGS = [{
     { value: 'ganon', name: 'Ganon', description: 'You must beat Ganon.' },
     { value: 'majora', name: 'Majora', description: 'You must beat Majora.' },
     { value: 'both', name: 'Ganon & Majora', description: 'You must beat Ganon AND Majora. You can do so in any order.' },
-    { value: 'triforce', name: 'Triforce', description: 'You must collect triforce pieces to win.' },
+    { value: 'triforce', name: 'Triforce Hunt', description: 'You must collect triforce pieces to win.' },
+    { value: 'triforce3', name: 'Triforce Quest', description: 'You must collect the three parts of the triforce (Power, Courage and Wisdom) to win. Specific hints will guide you.' },
   ],
   default: 'both'
 }, {
@@ -334,7 +335,7 @@ export const SETTINGS = [{
     { value: 'custom', name: 'Custom', description: '' },
   ],
   default: 'removed',
-  cond: (s: any) => s.goal !== 'triforce',
+  cond: (s: any) => s.goal !== 'triforce' && s.goal !== 'triforce3',
 }, {
   key: 'dungeonRewardShuffle',
   name: 'Dungeon Reward Shuffle',
@@ -589,7 +590,7 @@ export const SETTINGS = [{
     { value: 'custom', name: 'Custom', description: 'You will need to meet a special condition to fight Majora' },
   ],
   default: 'none',
-  cond: (s: any) => s.goal !== 'triforce',
+  cond: (s: any) => s.goal !== 'triforce' && s.goal !== 'triforce3',
 }, {
   key: 'bossWarpPads',
   name: 'Boss Warp Pads',

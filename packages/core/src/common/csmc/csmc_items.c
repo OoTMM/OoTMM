@@ -105,6 +105,9 @@ static int csmcFromItemOot(s16 gi)
     case GI_OOT_NUT_UPGRADE2:
     case GI_OOT_DEFENSE_UPGRADE:
     case GI_OOT_TRIFORCE:
+    case GI_OOT_TRIFORCE_POWER:
+    case GI_OOT_TRIFORCE_COURAGE:
+    case GI_OOT_TRIFORCE_WISDOM:
     case GI_OOT_SKELETON_KEY:
     case GI_OOT_COIN_RED:
     case GI_OOT_COIN_GREEN:

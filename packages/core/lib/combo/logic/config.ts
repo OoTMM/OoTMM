@@ -125,6 +125,7 @@ export class LogicPassConfig {
       GOAL_GANON: settings.goal === 'ganon' || settings.goal === 'both',
       GOAL_MAJORA: settings.goal === 'majora' || settings.goal === 'both',
       GOAL_TRIFORCE: settings.goal === 'triforce',
+      GOAL_TRIFORCE3: settings.goal === 'triforce3',
       MM_MAJORA_CHILD_CUSTOM: settings.majoraChild === 'custom',
       FILL_WALLETS: settings.fillWallets,
       CHILD_WALLET: settings.childWallets,

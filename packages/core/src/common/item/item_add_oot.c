@@ -1412,6 +1412,9 @@ int comboAddItemOot(s16 gi, int noEffect)
         comboAddCompassOot(SCE_OOT_ICE_CAVERN);
         break;
     case GI_OOT_TRIFORCE:
+    case GI_OOT_TRIFORCE_POWER:
+    case GI_OOT_TRIFORCE_COURAGE:
+    case GI_OOT_TRIFORCE_WISDOM:
         count = ++gTriforceCount;
         break;
     case GI_OOT_COIN_RED:
