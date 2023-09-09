@@ -117,8 +117,9 @@ ComboDataHints;
 
 typedef struct
 {
-    u16 flags;
+    u32 flags;
     u16 count;
+    u16 zero;
 }
 SpecialCond;
 
@@ -131,6 +132,7 @@ typedef struct
     u32             entrancesOwl[10];
     u8              config[0x40];
     SpecialCond     special[5];
+    u16             maxCoins[4];
     u16             prices[PRICES_MAX];
     u16             triforcePieces;
     u16             triforceGoal;

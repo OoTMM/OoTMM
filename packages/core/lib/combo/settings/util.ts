@@ -4,7 +4,7 @@ import type { Settings, SettingsBase } from './type';
 import { SETTINGS } from './data';
 import { DEFAULT_TRICKS, TRICKS } from './tricks';
 import { DEFAULT_DUNGEONS } from './dungeons';
-import { DEFAULT_SPECIAL_COND, DEFAULT_SPECIAL_CONDS, SPECIAL_CONDS } from './special-conds';
+import { DEFAULT_SPECIAL_COND, DEFAULT_SPECIAL_CONDS, SPECIAL_CONDS, SPECIAL_CONDS_FIELDS } from './special-conds';
 import { SettingsPatch, patchArray } from './patch';
 import { SETTINGS_DEFAULT_HINTS } from './hints';
 import { DEFAULT_GLITCHES, GLITCHES } from './glitches';
@@ -51,6 +51,13 @@ function validateSettingsStep(settings: Settings): Settings {
   /* Filter special conds */
   for (const key in SPECIAL_CONDS) {
     const cond = SPECIAL_CONDS[key];
+    for (const field of Object.keys(SPECIAL_CONDS_FIELDS)) {
+      const f = SPECIAL_CONDS_FIELDS[field as keyof typeof SPECIAL_CONDS_FIELDS];
+      const fcond = (f as  any).cond;
+      if (fcond && !fcond(s)) {
+        (s.specialConds as any)[key][field] = false;
+      }
+    }
     if (!cond.cond) break;
     if (!cond.cond(s)) {
       s.specialConds[key] = { ...DEFAULT_SPECIAL_COND };

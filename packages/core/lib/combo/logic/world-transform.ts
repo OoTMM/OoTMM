@@ -693,6 +693,14 @@ export class LogicPassWorldTransform {
         this.pool.set(makePlayerItem(Items.SHARED_TRIFORCE, i), settings.triforcePieces);
       }
     }
+
+    /* Coins */
+    for (let i = 0; i < this.state.worlds.length; ++i) {
+      this.pool.set(makePlayerItem(Items.OOT_COIN_RED, i), settings.coinsRed);
+      this.pool.set(makePlayerItem(Items.OOT_COIN_GREEN, i), settings.coinsGreen);
+      this.pool.set(makePlayerItem(Items.OOT_COIN_BLUE, i), settings.coinsBlue);
+      this.pool.set(makePlayerItem(Items.OOT_COIN_YELLOW, i), settings.coinsYellow);
+    }
   }
 
   private removeLocations(locs: string[]) {

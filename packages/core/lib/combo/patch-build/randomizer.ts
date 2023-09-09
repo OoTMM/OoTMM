@@ -4,7 +4,7 @@ import { LogicResult } from '../logic';
 import { DATA_GI, DATA_NPC, DATA_SCENES, DATA_REGIONS, DATA_HINTS_POOL, DATA_HINTS, DATA_ENTRANCES } from '../data';
 import { Game } from "../config";
 import { World, WorldCheck } from '../logic/world';
-import { DUNGEONS, Settings, SPECIAL_CONDS, SPECIAL_CONDS_KEYS } from '../settings';
+import { DUNGEONS, Settings, SPECIAL_CONDS, SPECIAL_CONDS_FIELDS } from '../settings';
 import { HintGossip, WorldHints } from '../logic/hints';
 import { countMapAdd, gameId, padBuffer16, toU16Buffer, toU32Buffer, toU8Buffer } from '../util';
 import { Patchfile } from './patchfile';
@@ -592,19 +592,19 @@ const randomizerTriforce = (logic: LogicResult): Buffer => toU16Buffer([logic.se
 
 function specialConds(settings: Settings) {
   const buffers: Buffer[] = [];
-  const flagsKeys: keyof typeof SPECIAL_CONDS_KEYS = Object.keys(SPECIAL_CONDS_KEYS) as any;
+  const flagsKeys: keyof typeof SPECIAL_CONDS_FIELDS = Object.keys(SPECIAL_CONDS_FIELDS) as any;
   for (const special in SPECIAL_CONDS) {
     const cond = settings.specialConds[special as keyof typeof SPECIAL_CONDS];
     let flags = 0;
     for (let i = 0; i < flagsKeys.length; ++i) {
       const key = flagsKeys[i];
       if ((cond as any)[key]) {
-        flags |= 1 << i;
+        flags = (flags | (1 << i)) >>> 0;
       }
     }
-    const buffer = Buffer.alloc(4);
-    buffer.writeUInt16BE(flags, 0);
-    buffer.writeUInt16BE(cond.count, 2);
+    const buffer = Buffer.alloc(8);
+    buffer.writeUInt32BE(flags, 0);
+    buffer.writeUInt16BE(cond.count, 4);
     buffers.push(buffer);
   }
   return Buffer.concat(buffers);
@@ -622,6 +622,7 @@ export const randomizerData = (worldId: number, logic: LogicResult): Buffer => {
   buffers.push(randomizerWarps(worldId, logic));
   buffers.push(randomizerConfig(logic.config));
   buffers.push(specialConds(logic.settings));
+  buffers.push(toU16Buffer([logic.settings.coinsRed, logic.settings.coinsGreen, logic.settings.coinsBlue, logic.settings.coinsYellow]));
   buffers.push(prices(worldId, logic));
   buffers.push(randomizerTriforce(logic));
   buffers.push(randomizerHints(worldId, logic));
