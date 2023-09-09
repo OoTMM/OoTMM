@@ -742,25 +742,25 @@ static void printDungeonData(GameState_Play* play, int base, int index)
         case 3:
             /* Red Coins */
             gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 255, 0, 0, 255);
-            drawTexRGBA32_12x12(play, CK_PTR(CUSTOM_KEEP_SMALL_ICON_TRIFORCE), x + 104.f, y);
+            drawTexRGBA32_12x12(play, CK_PTR(CUSTOM_KEEP_SMALL_ICON_COIN), x + 104.f, y);
             printNumColored(play, gSharedCustomSave.coins[0], gComboData.maxCoins[0], digitCount(gComboData.maxCoins[0]), x + 116.f, y, 1);
             break;
         case 4:
             /* Green Coins */
             gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 0, 255, 0, 255);
-            drawTexRGBA32_12x12(play, CK_PTR(CUSTOM_KEEP_SMALL_ICON_TRIFORCE), x + 104.f, y);
+            drawTexRGBA32_12x12(play, CK_PTR(CUSTOM_KEEP_SMALL_ICON_COIN), x + 104.f, y);
             printNumColored(play, gSharedCustomSave.coins[1], gComboData.maxCoins[1], digitCount(gComboData.maxCoins[1]), x + 116.f, y, 1);
             break;
         case 5:
             /* Blue Coins */
             gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 0, 0, 255, 255);
-            drawTexRGBA32_12x12(play, CK_PTR(CUSTOM_KEEP_SMALL_ICON_TRIFORCE), x + 104.f, y);
+            drawTexRGBA32_12x12(play, CK_PTR(CUSTOM_KEEP_SMALL_ICON_COIN), x + 104.f, y);
             printNumColored(play, gSharedCustomSave.coins[2], gComboData.maxCoins[2], digitCount(gComboData.maxCoins[2]), x + 116.f, y, 1);
             break;
         case 6:
             /* Yellow Coins */
             gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 255, 255, 0, 255);
-            drawTexRGBA32_12x12(play, CK_PTR(CUSTOM_KEEP_SMALL_ICON_TRIFORCE), x + 104.f, y);
+            drawTexRGBA32_12x12(play, CK_PTR(CUSTOM_KEEP_SMALL_ICON_COIN), x + 104.f, y);
             printNumColored(play, gSharedCustomSave.coins[3], gComboData.maxCoins[3], digitCount(gComboData.maxCoins[3]), x + 116.f, y, 1);
             break;
         }
