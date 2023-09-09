@@ -187,6 +187,10 @@ function resolveSpecialCond(settings: Settings, state: State, special: string): 
   if (cond.masksTransform) itemsUnique = new Set([...itemsUnique, ...ItemGroups.MASKS_TRANSFORM]);
   if (cond.masksOot) itemsUnique = new Set([...itemsUnique, ...ItemGroups.MASKS_OOT]);
   if (cond.triforce) items.add(Items.SHARED_TRIFORCE);
+  if (cond.coinsRed) items.add(Items.OOT_COIN_RED);
+  if (cond.coinsGreen) items.add(Items.OOT_COIN_GREEN);
+  if (cond.coinsBlue) items.add(Items.OOT_COIN_BLUE);
+  if (cond.coinsYellow) items.add(Items.OOT_COIN_YELLOW);
 
   const countUnique = [...itemsUnique].filter(item => itemCount(state, item) > 0).length;
   const result = (itemsCount(state, [...items]) + countUnique) >= cond.count;

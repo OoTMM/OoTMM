@@ -511,8 +511,8 @@ export const MM_SOULS = new Set([
   Items.MM_SOUL_FLOORMASTER,
   Items.MM_SOUL_CHUCHU,
   Items.MM_SOUL_DEEP_PYTHON,
-  Items.MM_SOUL_STALCHILD,  
-  Items.MM_SOUL_LEEVER,  
+  Items.MM_SOUL_STALCHILD,
+  Items.MM_SOUL_LEEVER,
   Items.MM_SOUL_SKULLFISH,
   Items.MM_SOUL_DEXIHAND,
   Items.MM_SOUL_DRAGONFLY,
@@ -802,5 +802,9 @@ export const REQUIRED = new Set([
   Items.SHARED_BOMBCHU_10,
   Items.SHARED_BOMBCHU_20,
   Items.SHARED_SKELETON_KEY,
+  Items.OOT_COIN_RED,
+  Items.OOT_COIN_GREEN,
+  Items.OOT_COIN_BLUE,
+  Items.OOT_COIN_YELLOW,
 ]);
 

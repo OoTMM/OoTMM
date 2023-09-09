@@ -1,31 +1,40 @@
 import type { Settings } from './type';
 
-export const SPECIAL_CONDS_KEYS = {
-  stones: "Spiritual Stones",
-  medallions: "Medallions",
-  remains: "Boss Remains",
-  skullsGold: "Gold Skulltulas Tokens",
-  skullsSwamp: "Swamp Skulltulas Tokens",
-  skullsOcean: "Ocean Skulltulas Tokens",
-  fairiesWF: "Stray Fairies (Woodfall)",
-  fairiesSH: "Stray Fairies (Snowhead)",
-  fairiesGB: "Stray Fairies (Great Bay)",
-  fairiesST: "Stray Fairies (Stone Tower)",
-  fairyTown: "Stray Fairy (Clock Town)",
-  masksRegular: "Regular Masks (MM)",
-  masksTransform: "Transformation Masks (MM)",
-  masksOot: "Masks (OoT)",
-  triforce: "Triforce Pieces",
+type SettingCond = (s: Settings) => boolean;
+
+type SpecialCondField = {
+  name: string;
+  cond?: SettingCond;
 };
 
-export type SpecialCond = {[k in keyof typeof SPECIAL_CONDS_KEYS]: boolean} & { count: number };
+export const SPECIAL_CONDS_FIELDS = {
+  stones:           { name: "Spiritual Stones" },
+  medallions:       { name: "Medallions" },
+  remains:          { name: "Boss Remains" },
+  skullsGold:       { name: "Gold Skulltulas Tokens" },
+  skullsSwamp:      { name: "Swamp Skulltulas Tokens" },
+  skullsOcean:      { name: "Ocean Skulltulas Tokens" },
+  fairiesWF:        { name: "Stray Fairies (Woodfall)" },
+  fairiesSH:        { name: "Stray Fairies (Snowhead)" },
+  fairiesGB:        { name: "Stray Fairies (Great Bay)" },
+  fairiesST:        { name: "Stray Fairies (Stone Tower)" },
+  fairyTown:        { name: "Stray Fairy (Clock Town)" },
+  masksRegular:     { name: "Regular Masks (MM)" },
+  masksTransform:   { name: "Transformation Masks (MM)" },
+  masksOot:         { name: "Masks (OoT)" },
+  triforce:         { name: "Triforce Pieces", cond: (s: Settings) => s.goal === 'triforce' },
+  coinsRed:         { name: "Coins (Red)", cond: (s: Settings) => s.coinsRed > 0 },
+  coinsGreen:       { name: "Coins (Green)", cond: (s: Settings) => s.coinsGreen > 0 },
+  coinsBlue:        { name: "Coins (Blue)", cond: (s: Settings) => s.coinsBlue > 0 },
+  coinsYellow:      { name: "Coins (Yellow)", cond: (s: Settings) => s.coinsYellow > 0 },
+};
 
-export const DEFAULT_SPECIAL_COND = Object.keys(SPECIAL_CONDS_KEYS).reduce((conds, cond) => {
+export type SpecialCond = {[k in keyof typeof SPECIAL_CONDS_FIELDS]: boolean} & { count: number };
+
+export const DEFAULT_SPECIAL_COND = Object.keys(SPECIAL_CONDS_FIELDS).reduce((conds, cond) => {
   conds[cond] = false;
   return conds;
 }, { count: 0 } as any) as SpecialCond;
-
-type SettingCond = (s: Settings) => boolean;
 
 type SpecialCondDefiniton = {
   name: string;

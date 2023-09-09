@@ -9,6 +9,8 @@ ComboGlobal g;
 void initHeap(void);
 void comboInitObjects(void);
 
+void menuInit();
+
 void comboInit(void)
 {
     g.delayedSwitchFlag = 0xff;
@@ -22,5 +24,6 @@ void comboInit(void)
     comboInitEntrances();
     comboSilverRupeesInit();
     netInit();
+    menuInit();
 }
 

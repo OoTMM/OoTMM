@@ -106,6 +106,10 @@ static int csmcFromItemOot(s16 gi)
     case GI_OOT_DEFENSE_UPGRADE:
     case GI_OOT_TRIFORCE:
     case GI_OOT_SKELETON_KEY:
+    case GI_OOT_COIN_RED:
+    case GI_OOT_COIN_GREEN:
+    case GI_OOT_COIN_BLUE:
+    case GI_OOT_COIN_YELLOW:
         return CSMC_MAJOR;
     case GI_OOT_SMALL_KEY:
     case GI_OOT_SMALL_KEY_FOREST:

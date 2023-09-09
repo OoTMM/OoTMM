@@ -15,6 +15,10 @@
 #define SPF_MASKS_TRANSFORM         (1 << 12)
 #define SPF_MASKS_OOT               (1 << 13)
 #define SPF_TRIFORCE                (1 << 14)
+#define SPF_COIN_RED                (1 << 15)
+#define SPF_COIN_GREEN              (1 << 16)
+#define SPF_COIN_BLUE               (1 << 17)
+#define SPF_COIN_YELLOW             (1 << 18)
 
 int comboGoalCond(void)
 {
@@ -222,6 +226,18 @@ int comboSpecialCond(int special)
     {
         count += gTriforceCount;
     }
+
+    if (cond->flags & SPF_COIN_RED)
+        count += gSharedCustomSave.coins[0];
+
+    if (cond->flags & SPF_COIN_GREEN)
+        count += gSharedCustomSave.coins[1];
+
+    if (cond->flags & SPF_COIN_BLUE)
+        count += gSharedCustomSave.coins[2];
+
+    if (cond->flags & SPF_COIN_YELLOW)
+        count += gSharedCustomSave.coins[3];
 
     count += hasMaskKeaton;
     count += hasMaskBunny;
