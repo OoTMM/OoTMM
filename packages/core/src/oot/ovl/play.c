@@ -275,7 +275,20 @@ void hookPlay_Init(GameState_Play* play)
         break;
     }
 
-    /* Handle swordless */
+    /* Handle swordless & time travel sword oddities */
+    if (gSave.entrance == 0x2ca)
+    {
+        if (gSave.age == AGE_CHILD)
+        {
+            gSave.equips.buttonItems[0] = gSave.childEquips.buttonItems[0];
+            if (gSave.equips.buttonItems[0] == ITEM_NONE)
+            {
+                gSave.equips.equipment.swords = 0;
+                gSave.eventsMisc[29] = 1;
+            }
+        }
+    }
+
     if (gSave.equips.equipment.swords == 0 || (gSave.inventory.equipment.swords & (1 << (gSave.equips.equipment.swords - 1))) == 0)
     {
         /* Set swordless */

@@ -942,6 +942,9 @@ export class LogicPassWorldTransform {
     }
 
     /* Handle OoT swords */
+    if (settings.startingAge === 'adult') {
+      this.removeItem(Items.OOT_SWORD_MASTER);
+    }
     if (this.state.config.has('OOT_PROGRESSIVE_SWORDS')) {
       this.replaceItem(Items.OOT_SWORD_KOKIRI,    Items.OOT_SWORD);
       this.replaceItem(Items.OOT_SWORD_MASTER,    Items.OOT_SWORD);

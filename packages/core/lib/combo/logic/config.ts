@@ -3,7 +3,7 @@ import { Items, ItemsCount, itemByID } from '../items';
 import { Monitor } from '../monitor';
 import { Random } from '../random';
 import { Settings } from '../settings';
-import { countMapAdd } from '../util';
+import { countMapAdd, countMapRemove } from '../util';
 import { isEntranceShuffle } from './helpers';
 
 /* This pass pre-computes things from the settings */
@@ -48,6 +48,27 @@ export class LogicPassConfig {
     const config = new Set<Confvar>;
 
     const { settings } = this.state;
+
+    /* Handle starting age */
+    if (settings.startingAge === 'random') {
+      if (this.state.random.next() & 1) {
+        settings.startingAge = 'adult';
+      } else {
+        settings.startingAge = 'child';
+      }
+    }
+
+    if (settings.startingAge === 'adult') {
+      if (settings.progressiveSwordsOot === 'progressive') {
+        if ((this.startingItems.get(Items.OOT_SWORD) || 0) > 1) {
+          countMapRemove(this.startingItems, Items.OOT_SWORD, 1);
+        }
+      } else {
+        if (this.startingItems.has(Items.OOT_SWORD_MASTER)) {
+          countMapRemove(this.startingItems, Items.OOT_SWORD_MASTER, 1);
+        }
+      }
+    }
 
     /* Handle fairies */
     this.startingFairies();
@@ -131,6 +152,7 @@ export class LogicPassConfig {
       OOT_SHUFFLE_GRASS: settings.shuffleGrassOot,
       MENU_NOTEBOOK: settings.menuNotebook,
       OOT_AGELESS_CHILD_TRADE: settings.agelessChildTrade,
+      OOT_START_ADULT: settings.startingAge === 'adult',
     };
 
     for (const v in exprs) {

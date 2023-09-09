@@ -464,6 +464,18 @@ export const SETTINGS = [{
 { ...SETTING_PRICE, key: 'priceMmShops', name: 'MM Shops Prices', description: 'Sets the price of items sold inside MM shops' },
 { ...SETTING_PRICE, key: 'priceMmTingle', name: 'MM Tingle Prices', description: 'Sets the price of items sold by Tingle' },
 {
+  key: 'startingAge',
+  name: 'Starting Age',
+  category: 'main.events',
+  type: 'enum',
+  description: 'Choose the starting age',
+  values: [
+    { value: 'child', name:  'Child',  description: 'Link will start off as child' },
+    { value: 'adult', name:  'Adult',  description: 'Link will start off as adult' },
+    { value: 'random', name: 'Random', description: 'Link will start off as either adult or child, with a 50/50 probability' },
+  ],
+  default: 'child'
+}, {
   key: 'doorOfTime',
   name: 'Door of Time',
   category: 'main.events',
