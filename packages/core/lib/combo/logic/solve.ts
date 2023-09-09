@@ -1,5 +1,5 @@
 import { Random, sample, shuffle } from '../random';
-import { countMapArray, countMapCombine, countMapRemove } from '../util';
+import { countMapAdd, countMapArray, countMapCombine, countMapRemove } from '../util';
 import { Pathfinder, PathfinderState } from './pathfind';
 import { World } from './world';
 import { LogicError, LogicSeedError } from './error';
@@ -316,6 +316,9 @@ export class LogicPassSolver {
       });
     }
 
+    /* Place named triforce pieces */
+    this.placeNamedTriforce();
+
     /* Place required items */
     this.retry(() => {
       this.pathfinderState = this.pathfinder.run(null);
@@ -504,6 +507,60 @@ export class LogicPassSolver {
         }
       }
     }
+  }
+
+  private getWeightedLocationList(worldId: number) {
+    const worldLocs = this.locations.filter(x => locationData(x).world === worldId);
+    const locs = new Map<Location, number>();
+    const worldItems = countMapArray(this.state.pools.required).filter(x => x.player === worldId);
+    const items = shuffle(this.input.random, worldItems).slice(0, 100);
+    const assumed = countMapCombine(this.state.pools.required, this.state.pools.nice);
+    for (const item of items) {
+      const assumedWithoutItem = new Map(assumed);
+      countMapRemove(assumedWithoutItem, item, 1);
+      const state = this.pathfinder.run(null, { recursive: true, assumedItems: assumedWithoutItem, items: this.state.items });
+      for (const loc of worldLocs) {
+        if (!state.locations.has(loc) && !this.state.items.has(loc)) {
+          countMapAdd(locs, loc, 1);
+        }
+      }
+    }
+    return locs;
+  }
+
+  private placeNamedTriforce() {
+    if (this.input.settings.goal !== 'triforce3')
+      return;
+
+    this.retry(() => {
+      for (let worldId = 0; worldId < this.input.worlds.length; ++worldId) {
+        const locs = this.getWeightedLocationList(worldId);
+        let locsArray = shuffle(this.input.random, countMapArray(locs));
+        let triforceLocs: Location[] = [];
+
+        for (let i = 0; i < 3; ++i) {
+          const l = locsArray.pop()!;
+          const region = this.input.worlds[worldId].regions[locationData(l).id];
+          if (region !== 'NONE') {
+            locsArray = locsArray.filter(x => this.input.worlds[worldId].regions[locationData(x).id] !== region);
+          }
+          triforceLocs.push(l);
+        }
+
+        triforceLocs = shuffle(this.input.random, triforceLocs);
+        const triforcePower = makePlayerItem(Items.SHARED_TRIFORCE_POWER, worldId);
+        const triforceCourage = makePlayerItem(Items.SHARED_TRIFORCE_COURAGE, worldId);
+        const triforceWisdom = makePlayerItem(Items.SHARED_TRIFORCE_WISDOM, worldId);
+
+        this.place(triforceLocs[0], triforcePower);
+        this.place(triforceLocs[1], triforceCourage);
+        this.place(triforceLocs[2], triforceWisdom);
+
+        removeItemPools(this.state.pools, triforcePower);
+        removeItemPools(this.state.pools, triforceCourage);
+        removeItemPools(this.state.pools, triforceWisdom);
+      }
+    });
   }
 
   private fixDungeon(dungeon: string) {
