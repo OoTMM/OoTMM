@@ -76,7 +76,7 @@ void menuInit()
     DungeonDef* d;
 
     d = gDungeonDefs + gDungeonDefCount;
-    if (gComboData.triforceGoal)
+    if (comboConfig(CFG_GOAL_TRIFORCE))
     {
         d->name = "Triforce";
         d->id = 2;
