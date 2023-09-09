@@ -696,7 +696,19 @@ export class LogicPassHints {
       const locOathToOrder = this.findItem(makePlayerItem(Items.MM_SONG_ORDER, world));
       const locGanonBossKey = this.state.settings.ganonBossKey === 'anywhere' ? this.findItem(makePlayerItem(Items.OOT_BOSS_KEY_GANON, world)) : null;
 
-      for (const l of [...locDungeonRewards, locLightArrow, locOathToOrder, locGanonBossKey]) {
+      /* We consider LAs hinted only if they don't lock the hint itself */
+      if (locLightArrow) {
+        if (this.state.settings.logic === 'none') {
+          this.markLocation(locLightArrow);
+        } else {
+          const pathfinderStateNoLA = this.pathfinder.run(null, { recursive: true, items: this.state.items, forbiddenLocations: new Set([locLightArrow]) });
+          if (pathfinderStateNoLA.ws[world].events.has('OOT_GANON_START')) {
+            this.markLocation(locLightArrow);
+          }
+        }
+      }
+
+      for (const l of [...locDungeonRewards, locOathToOrder, locGanonBossKey]) {
         this.markLocation(l);
       }
 

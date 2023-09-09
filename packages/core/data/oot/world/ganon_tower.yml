@@ -8,7 +8,8 @@
 "Ganon Castle Tower Boss":
   dungeon: Tower
   events:
-    GANON: "!setting(goal, triforce) && has_light_arrows"
+    GANON_START: "!setting(goal, triforce)"
+    GANON: "event(GANON_START) && has_light_arrows"
   locations:
     "Ganon Tower Pot 01": "true"
     "Ganon Tower Pot 02": "true"
