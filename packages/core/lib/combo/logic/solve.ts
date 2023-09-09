@@ -513,7 +513,7 @@ export class LogicPassSolver {
     const worldLocs = this.locations.filter(x => locationData(x).world === worldId);
     const locs = new Map<Location, number>();
     const worldItems = countMapArray(this.state.pools.required).filter(x => x.player === worldId);
-    const items = shuffle(this.input.random, worldItems).slice(0, 100);
+    const items = shuffle(this.input.random, worldItems);
     const assumed = countMapCombine(this.state.pools.required, this.state.pools.nice);
     for (const item of items) {
       const assumedWithoutItem = new Map(assumed);
@@ -525,11 +525,23 @@ export class LogicPassSolver {
         }
       }
     }
+
+    const cutoff = Math.floor(Array.from(locs.values()).reduce((acc, x) => acc + x, 0) / locs.size);
+
+    /* Boost checks above the cutoff */
+    for (const [loc, count] of locs.entries()) {
+      if (count >= cutoff) {
+        locs.set(loc, count * 2);
+      }
+    }
+
     return locs;
   }
 
   private placeNamedTriforce() {
     if (this.input.settings.goal !== 'triforce3')
+      return;
+    if (this.input.settings.logic === 'none')
       return;
 
     this.retry(() => {
