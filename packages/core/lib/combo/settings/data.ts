@@ -835,6 +835,13 @@ export const SETTINGS = [{
   description: 'Locks the in-game tracker behind the Bombers\' Notebook',
   default: false
 }, {
+  key: 'coins',
+  name: 'Coins',
+  category: 'items.extensions',
+  type: 'boolean',
+  description: 'Enable the leftover coin items, that can be used for special conds',
+  default: false
+}, {
   key: 'sharedNutsSticks',
   name: 'Shared Nuts & Sticks',
   category: 'items.shared',
