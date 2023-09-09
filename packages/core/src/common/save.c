@@ -11,6 +11,7 @@ ALIGNED(16) MmSave gMmSave;
 #endif
 
 ALIGNED(16) CustomSave gCustomSave;
+ALIGNED(16) SharedCustomSave gSharedCustomSave;
 
 void comboOnSaveLoad(void)
 {
@@ -122,6 +123,7 @@ void comboReadForeignSave(void)
 #endif
 
     comboReadWriteFlash(0x18000 + 0x4000 * fileIndex + CUSTOM_SAVE_OFFSET, &gCustomSave, sizeof(gCustomSave), OS_READ);
+    comboReadWriteFlash(0x18000 + 0x4000 * fileIndex + CUSTOM_SAVE_OFFSET_SHARED, &gSharedCustomSave, sizeof(gSharedCustomSave), OS_READ);
 }
 
 static void saveFixup(void)
@@ -151,6 +153,7 @@ void comboWriteSave(void)
 
     /* Write the custom save */
     comboReadWriteFlash(0x18000 + 0x4000 * gSaveContext.fileIndex + CUSTOM_SAVE_OFFSET, &gCustomSave, sizeof(gCustomSave), OS_WRITE);
+    comboReadWriteFlash(0x18000 + 0x4000 * gSaveContext.fileIndex + CUSTOM_SAVE_OFFSET_SHARED, &gSharedCustomSave, sizeof(gSharedCustomSave), OS_WRITE);
 }
 
 static void copyRawSave(u32 dst, u32 src, int size)
