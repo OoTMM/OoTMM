@@ -228,5 +228,7 @@ extern const Shader kShaders[256];
 #define DRAWGI_COIN_RED                     0xcf
 #define DRAWGI_COIN_GREEN                   0xd0
 #define DRAWGI_COIN_BLUE                    0xd1
+#define DRAWGI_MAGIC_UPGRADE                0xd2
+#define DRAWGI_MAGIC_UPGRADE2               0xd3
 
 #endif

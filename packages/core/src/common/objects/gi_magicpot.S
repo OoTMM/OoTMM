@@ -1,0 +1,37 @@
+#include <combo.h>
+
+#if defined(GAME_OOT)
+#define OBJECT_ID 0x00cd
+#else
+#define OBJECT_ID 0x00a4
+#endif
+
+PATCH_OBJECT OBJECT_ID, 0x0598
+.quad 0xde00000009000000 /* gSPDisplayList 0x09000000 */
+.quad 0
+PATCH_END
+
+PATCH_OBJECT OBJECT_ID, 0x0650
+.quad 0xde00000008000000 /* gSPDisplayList 0x08000000 */
+.quad 0
+PATCH_END
+
+PATCH_OBJECT OBJECT_ID, 0x07b8
+.quad 0
+.quad 0
+PATCH_END
+
+PATCH_OBJECT OBJECT_ID, 0x0ef8
+.quad 0xde00000009000000 /* gSPDisplayList 0x09000000 */
+.quad 0
+PATCH_END
+
+PATCH_OBJECT OBJECT_ID, 0x0fb0
+.quad 0xde00000008000000 /* gSPDisplayList 0x08000000 */
+.quad 0
+PATCH_END
+
+PATCH_OBJECT OBJECT_ID, 0x1198
+.quad 0
+.quad 0
+PATCH_END

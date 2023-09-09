@@ -106,7 +106,7 @@ static const u32 kMatTransformOffset = 0x11da0;
 static const u32 kMatTransformOffset = 0x187fc;
 #endif
 
-static void shaderFlameEffect(GameState_Play* play, int colorIndex)
+static void shaderFlameEffect(GameState_Play* play, int colorIndex, float scale, float offsetY)
 {
 #if defined(GAME_OOT)
     static const u32 kFlameDlist = 0x52a10;
@@ -114,18 +114,20 @@ static void shaderFlameEffect(GameState_Play* play, int colorIndex)
     static const u32 kFlameDlist = 0x7d590;
 #endif
 
-    static const float flameScale = 0.0055f;
+    float flameScale = 0.0055f * scale;
 
     static const u32 kPrimColors[] = {
         0x00ffffc0,
         0xff00ffc0,
         0xff0000c0,
+        0x00ff00c0,
     };
 
     static const u32 kEnvColors[] = {
         0x0000ffc0,
         0xff0000c0,
         0xffff00c0,
+        0x44ff44c0,
     };
 
     u8 r;
@@ -135,7 +137,7 @@ static void shaderFlameEffect(GameState_Play* play, int colorIndex)
 
     OPEN_DISPS(play->gs.gfx);
     ModelViewUnkTransform((float*)((char*)play + kMatTransformOffset));
-    ModelViewTranslate(0.f, -30.f, -15.f, MAT_MUL);
+    ModelViewTranslate(0.f, -(30.f + offsetY), -15.f, MAT_MUL);
     ModelViewScale(flameScale * 1.7f, flameScale, flameScale, MAT_MUL);
     gSPSegment(POLY_XLU_DISP++, 0x08, GetSegment(play->gs.gfx, 0, 0, 0, 0x20, 0x40, 1, 0, (-play->gs.frameCount & 0x7f) << 2, 0x20, 0x80));
     gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
@@ -181,7 +183,7 @@ void Shader_CustomStick(GameState_Play* play, s16 shaderId)
     if (shader->lists[1])
     {
         InitListPolyXlu(play->gs.gfx);
-        shaderFlameEffect(play, shader->lists[1] - 1);
+        shaderFlameEffect(play, shader->lists[1] - 1, 1.f, 0.f);
     }
 
     CLOSE_DISPS();
@@ -213,7 +215,7 @@ void Shader_CustomNut(GameState_Play* play, s16 shaderId)
     if (shader->lists[1])
     {
         InitListPolyXlu(play->gs.gfx);
-        shaderFlameEffect(play, shader->lists[1] - 1);
+        shaderFlameEffect(play, shader->lists[1] - 1, 1.f, 0.f);
     }
 
     CLOSE_DISPS();
@@ -360,7 +362,7 @@ void Shader_CustomSpin(GameState_Play* play, s16 shaderId)
     gSPDisplayList(POLY_OPA_DISP++, shader->lists[1]);
 
     InitListPolyXlu(play->gs.gfx);
-    shaderFlameEffect(play, 2);
+    shaderFlameEffect(play, 2, 1.f, 0.f);
     CLOSE_DISPS();
 }
 
@@ -756,6 +758,58 @@ void Shader_Coin(GameState_Play* play, s16 index)
     gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
     gSPDisplayList(POLY_XLU_DISP++, shader->lists[2]);
     CLOSE_DISPS();
+}
+
+static const Gfx kMagicJarColorGreen[] = {
+    gsDPSetPrimColor(0x00, 0x00, 40, 100, 40, 255),
+    gsDPSetEnvColor(0, 30, 20, 255),
+    gsSPEndDisplayList(),
+};
+
+static const Gfx kMagicJarColorSilver[] = {
+    gsDPSetPrimColor(0x00, 0x00, 255, 255, 255, 255),
+    gsDPSetEnvColor(50, 60, 60, 255),
+    gsSPEndDisplayList(),
+};
+
+static const Gfx kMagicJarColorGold[] = {
+    gsDPSetPrimColor(0x00, 0x00, 255, 255, 150, 255),
+    gsDPSetEnvColor(100, 70, 0, 255),
+    gsSPEndDisplayList(),
+};
+
+void Shader_MagicJar(GameState_Play* play, s16 index)
+{
+    const Shader* shader;
+    int isUpgrade;
+    int isLarge;
+    const Gfx* colorJar;
+    const Gfx* colorDetail;
+    const Gfx* tmp;
+
+    shader = &kShaders[index];
+    isUpgrade = shader->lists[1];
+    isLarge = shader->lists[2];
+
+    colorJar = kMagicJarColorGreen;
+    colorDetail = isLarge ? kMagicJarColorGold : kMagicJarColorSilver;
+    if (isUpgrade)
+    {
+        tmp = colorJar;
+        colorJar = colorDetail;
+        colorDetail = tmp;
+    }
+
+    OPEN_DISPS(play->gs.gfx);
+    InitListPolyOpa(play->gs.gfx);
+    gSPSegment(POLY_OPA_DISP++, 0x08, colorJar);
+    gSPSegment(POLY_OPA_DISP++, 0x09, colorDetail);
+    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
+    gSPDisplayList(POLY_OPA_DISP++, shader->lists[0]);
+    CLOSE_DISPS();
+
+    if (isUpgrade)
+        shaderFlameEffect(play, 3, 1.5f, 20.f);
 }
 
 const Shader kShaders[] = {
