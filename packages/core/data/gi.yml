@@ -275,6 +275,9 @@ OOT_COIN_YELLOW:                          0x114
 OOT_COIN_RED:                             0x115
 OOT_COIN_GREEN:                           0x116
 OOT_COIN_BLUE:                            0x117
+OOT_TRIFORCE_POWER:                       0x118
+OOT_TRIFORCE_COURAGE:                     0x119
+OOT_TRIFORCE_WISDOM:                      0x11a
 
 MM_RUPEE_GREEN:               0x01
 MM_RUPEE_BLUE:                0x02

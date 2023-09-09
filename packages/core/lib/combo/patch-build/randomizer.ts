@@ -5,7 +5,7 @@ import { DATA_GI, DATA_NPC, DATA_SCENES, DATA_REGIONS, DATA_HINTS_POOL, DATA_HIN
 import { Game } from "../config";
 import { World, WorldCheck } from '../logic/world';
 import { DUNGEONS, Settings, SPECIAL_CONDS, SPECIAL_CONDS_FIELDS } from '../settings';
-import { HintGossip, WorldHints } from '../logic/hints';
+import { HINTS_PATHS, HintGossip, WorldHints } from '../logic/hints';
 import { countMapAdd, gameId, padBuffer16, toU16Buffer, toU32Buffer, toU8Buffer } from '../util';
 import { Patchfile } from './patchfile';
 import { LOCATIONS_ZELDA, makeLocation, makePlayerLocations } from '../logic/locations';
@@ -152,6 +152,9 @@ const SUBSTITUTIONS: {[k: string]: string} = {
   MM_SHIELD: "MM_PROGRESSIVE_SHIELD_HERO",
   MM_OCARINA: "MM_OCARINA_OF_TIME",
   SHARED_TRIFORCE: "OOT_TRIFORCE",
+  SHARED_TRIFORCE_POWER: "OOT_TRIFORCE_POWER",
+  SHARED_TRIFORCE_COURAGE: "OOT_TRIFORCE_COURAGE",
+  SHARED_TRIFORCE_WISDOM: "OOT_TRIFORCE_WISDOM",
 };
 
 const gi = (settings: Settings, game: Game, item: Item, generic: boolean) => {
@@ -404,10 +407,11 @@ const hintBuffer = (settings: Settings, game: Game, gossip: string, hint: HintGo
     break;
   }
   switch (hint.type) {
-  case 'hero':
+  case 'path':
     {
       const regionD = regionData(hint.region);
       const region = DATA_REGIONS[regionD.id];
+      const pathId = HINTS_PATHS[hint.path].id;
       if (region === undefined) {
         throw new Error(`Unknown region ${hint.region}`);
       }
@@ -415,6 +419,7 @@ const hintBuffer = (settings: Settings, game: Game, gossip: string, hint: HintGo
       data.writeUInt8(0x00, 1);
       data.writeUInt8(region, 2);
       data.writeUInt8(regionD.world + 1, 3);
+      data.writeUInt16BE(pathId, 4);
     }
     break;
   case 'foolish':

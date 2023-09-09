@@ -30,3 +30,6 @@
 "soul_floormaster": "soul(SOUL_FLOORMASTER) || soul(SHARED_SOUL_FLOORMASTER)"
 "soul_leever": "soul(SOUL_LEEVER) || soul(SHARED_SOUL_LEEVER)"
 "soul_stalchild": "soul(SOUL_STALCHILD) || soul(SHARED_SOUL_STALCHILD)"
+
+# Settings
+"is_goal_triforce": "setting(goal, triforce) || setting(goal, triforce3)"

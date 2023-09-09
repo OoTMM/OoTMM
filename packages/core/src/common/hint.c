@@ -106,6 +106,13 @@ static void appendCorrectItemName(char** b, s16 gi, u8 player, u8 importance)
     }
 }
 
+static const char* kPathNames[] = {
+    TEXT_COLOR_YELLOW "Way of the Hero",
+    TEXT_COLOR_RED    "Path of Power",
+    TEXT_COLOR_GREEN  "Path of Courage",
+    TEXT_COLOR_BLUE   "Path of Wisdom",
+};
+
 void comboHintGossip(u8 key, GameState_Play* play)
 {
     char* b;
@@ -133,9 +140,10 @@ void comboHintGossip(u8 key, GameState_Play* play)
     {
         switch (hint->type)
         {
-        case HINT_TYPE_HERO:
+        case HINT_TYPE_PATH:
             comboTextAppendRegionName(&b, hint->region, hint->world, 0);
-            comboTextAppendStr(&b, " is on the " TEXT_COLOR_YELLOW "Way of the Hero");
+            comboTextAppendStr(&b, " is on the ");
+            comboTextAppendStr(&b, kPathNames[hint->item]);
             comboTextAppendClearColor(&b);
             break;
         case HINT_TYPE_FOOLISH:

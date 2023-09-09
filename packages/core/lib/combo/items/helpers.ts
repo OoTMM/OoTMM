@@ -41,5 +41,5 @@ export const isItemCriticalRenewable = (item: Item) => ItemGroups.CRITICAL_RENEW
 export const isTingleMap = (item: Item) => ItemGroups.TINGLE_MAPS.has(item);
 export const isOwlStatue = (item: Item) => ItemGroups.OWLS.has(item);
 export const isItemLicense = (item: Item) => ItemGroups.LICENSES.has(item);
-export const isTriforcePiece = (item: Item) => item === Items.SHARED_TRIFORCE;
+export const isTriforcePiece = (item: Item) => ItemGroups.TRIFORCE.has(item);
 export const isSilverRupee = (item: Item) => ItemGroups.RUPEES_SILVER.has(item);
