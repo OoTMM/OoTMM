@@ -230,5 +230,8 @@ extern const Shader kShaders[256];
 #define DRAWGI_COIN_BLUE                    0xd1
 #define DRAWGI_MAGIC_UPGRADE                0xd2
 #define DRAWGI_MAGIC_UPGRADE2               0xd3
+#define DRAWGI_TRIFORCE_POWER               0xd4
+#define DRAWGI_TRIFORCE_COURAGE             0xd5
+#define DRAWGI_TRIFORCE_WISDOM              0xd6
 
 #endif
