@@ -388,7 +388,7 @@ export class LogicPassSolver {
        */
       const junk = ItemHelpers.isJunk(pi.item);
 
-      if (ItemHelpers.isDungeonReward(pi.item) || ItemHelpers.isKey(pi.item) || ItemHelpers.isStrayFairy(pi.item) || ItemGroups.REQUIRED.has(pi.item)) {
+      if (ItemHelpers.isItemMajor(pi.item)) {
         if (junk && ItemHelpers.isItemConsumable(pi.item)) {
           const renewableCount = this.input.renewableJunks.get(pi) || 0;
           const junkCount = amount - renewableCount;

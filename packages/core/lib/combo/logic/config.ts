@@ -153,6 +153,7 @@ export class LogicPassConfig {
       MENU_NOTEBOOK: settings.menuNotebook,
       OOT_AGELESS_CHILD_TRADE: settings.agelessChildTrade,
       OOT_START_ADULT: settings.startingAge === 'adult',
+      HINT_IMPORTANCE: settings.hintImportance,
     };
 
     for (const v in exprs) {

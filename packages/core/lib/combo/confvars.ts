@@ -78,6 +78,7 @@ export const CONFVARS = [
   'MENU_NOTEBOOK',
   'OOT_AGELESS_CHILD_TRADE',
   'OOT_START_ADULT',
+  'HINT_IMPORTANCE',
 ] as const;
 
 export type Confvar = typeof CONFVARS[number];

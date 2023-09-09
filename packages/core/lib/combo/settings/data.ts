@@ -120,6 +120,13 @@ export const SETTINGS = [{
   description: 'Prevents items that are part of a plando from being hinted',
   default: true
 }, {
+  key: 'hintImportance',
+  name: 'Hint Importance',
+  category: 'main',
+  type: 'boolean',
+  description: 'Hints will tell if an item is foolish, sometimes required, or always required',
+  default: false
+}, {
   key: 'songs',
   name: 'Song Shuffle',
   category: 'main.shuffle',

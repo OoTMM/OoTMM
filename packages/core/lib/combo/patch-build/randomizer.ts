@@ -382,7 +382,11 @@ const gameChecks = (worldId: number, settings: Settings, game: Game, logic: Logi
 };
 
 const hintBuffer = (settings: Settings, game: Game, gossip: string, hint: HintGossip): Buffer => {
-  const data = Buffer.alloc(10, 0xff);
+  const data = Buffer.alloc(12, 0xff);
+  /* Zero out item importance */
+  data.writeUInt8(0, 10);
+  data.writeUInt8(0, 11);
+
   let gossipData = DATA_HINTS_POOL[game][gossip];
   if (!gossipData) {
     throw new Error(`Unknown gossip ${gossip} for game ${game}`);
@@ -440,9 +444,11 @@ const hintBuffer = (settings: Settings, game: Game, gossip: string, hint: HintGo
       data.writeUInt8(hint.world + 1, 3);
       data.writeUInt16BE(itemsGI[0], 4);
       data.writeUint8(items[0].player + 1, 8);
+      data.writeInt8(hint.importances[0], 10);
       if (items.length > 1) {
         data.writeUInt16BE(itemsGI[1], 6);
         data.writeUint8(items[1].player + 1, 9);
+        data.writeInt8(hint.importances[1], 11);
       }
     }
     break;
@@ -461,6 +467,7 @@ const hintBuffer = (settings: Settings, game: Game, gossip: string, hint: HintGo
         data.writeUInt8(regionD.world + 1, 3);
         data.writeUInt16BE(itemGI, 4);
         data.writeUint8(item.player + 1, 8);
+        data.writeInt8(hint.importance, 10);
       }
       break;
   case 'junk':
@@ -483,7 +490,7 @@ const gameHints = (settings: Settings, game: Game, hints: WorldHints): Buffer =>
     }
     buffers.push(hintBuffer(settings, game, gossip, h));
   }
-  buffers.push(Buffer.alloc(10, 0xff));
+  buffers.push(Buffer.alloc(12, 0xff));
   return padBuffer16(Buffer.concat(buffers));
 }
 

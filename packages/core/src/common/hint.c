@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/dma.h>
+#include <combo/item.h>
 
 #if defined(GAME_OOT)
 # define HINTS_ADDR 0x03ff1000
@@ -17,6 +18,8 @@ typedef struct PACKED ALIGNED(2)
     s16 item2;
     u8  player;
     u8  player2;
+    u8  itemImportance;
+    u8  itemImportance2;
 }
 Hint;
 
@@ -66,12 +69,34 @@ void comboInitHints(void)
     comboDmaLoadFile(gHints, COMBO_VROM_HINTS);
 }
 
-static void appendCorrectItemName(char** b, s16 gi, u8 player)
+static void appendCorrectItemName(char** b, s16 gi, u8 player, u8 importance)
 {
 #if defined(GAME_MM)
     gi ^= MASK_FOREIGN_GI;
 #endif
     comboTextAppendItemName(b, gi, TF_PROGRESSIVE);
+
+    if (comboConfig(CFG_HINT_IMPORTANCE) && !isItemFastBuy(gi))
+    {
+        switch (importance)
+        {
+        case 0:
+            comboTextAppendStr(b, " (" TEXT_COLOR_PINK "not required");
+            comboTextAppendClearColor(b);
+            comboTextAppendStr(b, ")");
+            break;
+        case 1:
+            comboTextAppendStr(b, " (" TEXT_COLOR_TEAL "sometimes required");
+            comboTextAppendClearColor(b);
+            comboTextAppendStr(b, ")");
+            break;
+        case 2:
+            comboTextAppendStr(b, " (" TEXT_COLOR_YELLOW "required");
+            comboTextAppendClearColor(b);
+            comboTextAppendStr(b, ")");
+            break;
+        }
+    }
 
     if (player != 0 && player != 0xff && player != gComboData.playerId)
     {
@@ -122,15 +147,15 @@ void comboHintGossip(u8 key, GameState_Play* play)
         case HINT_TYPE_ITEM_EXACT:
             comboTextAppendCheckName(&b, hint->region, hint->world);
             comboTextAppendStr(&b, " gives ");
-            appendCorrectItemName(&b, hint->item, hint->player);
+            appendCorrectItemName(&b, hint->item, hint->player, hint->itemImportance);
             if (hint->item2 != -1)
             {
                 comboTextAppendStr(&b, " and ");
-                appendCorrectItemName(&b, hint->item2, hint->player2);
+                appendCorrectItemName(&b, hint->item2, hint->player2, hint->itemImportance2);
             }
             break;
         case HINT_TYPE_ITEM_REGION:
-            appendCorrectItemName(&b, hint->item, hint->player);
+            appendCorrectItemName(&b, hint->item, hint->player, hint->itemImportance);
             comboTextAppendStr(&b, " can be found ");
             comboTextAppendRegionName(&b, hint->region, hint->world, TF_PREPOS);
             break;

@@ -81,16 +81,18 @@ export type HintGossipFoolish = {
 };
 
 export type HintGossipItemExact = {
-  type: 'item-exact',
-  check: string,
-  world: number,
-  items: PlayerItem[],
+  type: 'item-exact';
+  check: string;
+  world: number;
+  items: PlayerItem[];
+  importances: number[];
 };
 
 export type HintGossipItemRegion = {
   type: 'item-region',
   region: Region,
   item: PlayerItem;
+  importance: number;
 };
 
 export type HintGossipJunk = {
@@ -374,6 +376,23 @@ export class LogicPassHints {
     return regions;
   }
 
+  private locImportance(loc: Location) {
+    const pi = this.state.items.get(loc)!;
+    if (!ItemHelpers.isItemMajor(pi.item)) {
+      return -1;
+    }
+
+    if (this.state.analysis.unreachable.has(loc) || this.state.analysis.useless.has(loc)) {
+      return 0;
+    }
+
+    if (this.state.analysis.required.has(loc)) {
+      return 2;
+    }
+
+    return 1;
+  }
+
   private placeGossipItemExact(worldId: number, checkWorldId: number, checkHint: string, extra: number, isMoon: boolean) {
     if (checkHint === 'NONE') {
       return false;
@@ -399,12 +418,13 @@ export class LogicPassHints {
     if (!gossip) {
       return false;
     }
+    const importances = locations.map(l => this.locImportance(l));
 
     /* Found a valid gossip */
     for (const l of locations) {
       this.hintedLocations.add(l);
     }
-    const hint: HintGossip = { game: world.gossip[gossip].game, type: 'item-exact', items, check: checkHint, world: checkWorldId };
+    const hint: HintGossip = { game: world.gossip[gossip].game, type: 'item-exact', items, importances, check: checkHint, world: checkWorldId };
     this.placeWithExtra(worldId, gossip, hint, extra);
     return true;
   }
@@ -553,7 +573,8 @@ export class LogicPassHints {
       return false;
     }
     this.hintedLocations.add(location);
-    const h: HintGossip = { game: world.gossip[gossip].game, type: 'item-region', item, region: makeRegion(locWorld.regions[locD.id], locD.world as number) };
+    const importance = this.locImportance(location);
+    const h: HintGossip = { game: world.gossip[gossip].game, type: 'item-region', item, importance, region: makeRegion(locWorld.regions[locD.id], locD.world as number) };
     this.placeWithExtra(worldId, gossip, h, extra);
     return true;
   }
