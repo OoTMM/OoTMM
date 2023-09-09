@@ -6,7 +6,7 @@ import { Monitor } from '../monitor';
 import { cloneDeep } from 'lodash';
 import { isLocationRenewable, makePlayerLocations, Location, makeLocation, locationData } from './locations';
 import { ItemPlacement } from './solve';
-import { ItemGroups, ItemHelpers, ItemsCount, PlayerItem } from '../items';
+import { ItemGroups, ItemHelpers, Items, ItemsCount, PlayerItem } from '../items';
 
 const SIMPLE_DEPENDENCIES: {[k: string]: string[]} = {
   OOT_WEIRD_EGG: [
@@ -349,6 +349,11 @@ export class LogicPassAnalysis {
   private unreachableLocs = new Set<Location>();
   private dependencies: typeof SIMPLE_DEPENDENCIES = {};
   private locations: Location[];
+  private paths: {
+    triforcePower: Set<Location>;
+    triforceCourage: Set<Location>;
+    triforceWisdom: Set<Location>;
+  };
 
   constructor(
     private readonly state: {
@@ -362,6 +367,7 @@ export class LogicPassAnalysis {
   ){
     this.pathfinder = new Pathfinder(this.state.worlds, this.state.settings, this.state.startingItems);
     this.locations = this.state.worlds.map((x, i) => [...x.locations].map(l => makeLocation(l, i))).flat();
+    this.paths = { triforcePower: new Set, triforceCourage: new Set, triforceWisdom: new Set };
   }
 
   private makeDependencies() {
@@ -481,6 +487,21 @@ export class LogicPassAnalysis {
     this.spheres = this.makeSpheresRaw(spheresLocs);
   }
 
+  private makePath(name: string, pred: (x: PathfinderState) => boolean) {
+    const path = new Set<Location>();
+    this.state.monitor.log(`Analysis - ${name}`);
+    let count = 0;
+    const locations = new Set(this.spheres.flat());
+    for (const loc of locations) {
+      this.state.monitor.setProgress(count++, locations.size);
+      const pathfinderState = this.pathfinder.run(null, { items: this.state.items, forbiddenLocations: new Set([loc]), recursive: true, stopAtGoal: true });
+      if (!pred(pathfinderState)) {
+        path.add(loc);
+      }
+    }
+    return path;
+  }
+
   private makeRequiredLocs() {
     this.state.monitor.log('Analysis - WotH');
     let count = 0;
@@ -495,6 +516,33 @@ export class LogicPassAnalysis {
           this.requiredlocsByItem.set(item, new Set());
         }
         this.requiredlocsByItem.get(item)!.add(loc);
+      }
+    }
+  }
+
+  private makePaths() {
+    if (this.state.settings.goal === 'triforce3') {
+      const locsPower = Array.from(this.state.items.entries()).filter(([loc, item]) => item.item === Items.SHARED_TRIFORCE_POWER).map(([loc, _]) => loc);
+      const locsCourage = Array.from(this.state.items.entries()).filter(([loc, item]) => item.item === Items.SHARED_TRIFORCE_COURAGE).map(([loc, _]) => loc);
+      const locsWisdom = Array.from(this.state.items.entries()).filter(([loc, item]) => item.item === Items.SHARED_TRIFORCE_WISDOM).map(([loc, _]) => loc);
+
+      this.paths.triforcePower = this.makePath('Path of Power', x => locsPower.every(l => x.locations.has(l)));
+      this.paths.triforceCourage = this.makePath('Path of Courage', x => locsCourage.every(l => x.locations.has(l)));
+      this.paths.triforceWisdom = this.makePath('Path of Wisdom', x => locsWisdom.every(l => x.locations.has(l)));
+
+      const superset = new Set<Location>([...this.paths.triforcePower, ...this.paths.triforceCourage, ...this.paths.triforceWisdom]);
+      for (const loc of superset.values()) {
+        let count = 0;
+        for (const path of [this.paths.triforcePower, this.paths.triforceCourage, this.paths.triforceWisdom]) {
+          if (path.has(loc)) {
+            count++;
+          }
+        }
+        if (count > 1) {
+          for (const path of [this.paths.triforcePower, this.paths.triforceCourage, this.paths.triforceWisdom]) {
+            path.delete(loc);
+          }
+        }
       }
     }
   }
@@ -611,6 +659,7 @@ export class LogicPassAnalysis {
       this.makeDependencies();
       this.makeSpheres();
       this.makeRequiredLocs();
+      this.makePaths();
     }
     if (this.state.settings.logic === 'beatable') {
       this.makeUnreachable();
@@ -622,6 +671,7 @@ export class LogicPassAnalysis {
       required: this.requiredLocs,
       useless: this.uselessLocs,
       unreachable: this.unreachableLocs,
+      paths: this.paths,
     }
 
     return { analysis };

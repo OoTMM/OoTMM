@@ -305,7 +305,7 @@ int comboDoorIsUnlocked(GameState_Play* play, Actor* actor);
 #define HINT_GOSSIP         0x00
 #define HINT_GOSSIP_GROTTO  0x01
 
-#define HINT_TYPE_HERO          0x00
+#define HINT_TYPE_PATH          0x00
 #define HINT_TYPE_FOOLISH       0x01
 #define HINT_TYPE_ITEM_EXACT    0x02
 #define HINT_TYPE_ITEM_REGION   0x03
