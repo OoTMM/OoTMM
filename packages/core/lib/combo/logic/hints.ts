@@ -302,7 +302,7 @@ export class LogicPassHints {
 
     /* Additional restrictions for WotH */
     if (klass === 'woth') {
-      if (ItemHelpers.isKey(item.item) || ItemHelpers.isStrayFairy(item.item) || ItemHelpers.isToken(item.item) || ItemHelpers.isDungeonReward(item.item)) {
+      if (ItemHelpers.isKey(item.item) || ItemHelpers.isStrayFairy(item.item) || ItemHelpers.isSilverRupee(item.item) || ItemHelpers.isToken(item.item) || ItemHelpers.isDungeonReward(item.item)) {
         return false;
       }
       if (ItemHelpers.isSong(item.item) && this.state.settings.songs !== 'anywhere') {
