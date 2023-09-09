@@ -208,6 +208,13 @@ export class LogicPassHints {
     const world = this.state.worlds[locD.world as number];
     const region = world.regions[locD.id];
 
+    /* No plando */
+    if (this.state.settings.noPlandoHints) {
+      if (this.state.settings.plando.locations[locD.id]) {
+        return false;
+      }
+    }
+
     /* These specific locations are always ignored */
     if (['OOT Temple of Time Medallion', 'MM Oath to Order', 'OOT Hatch Chicken', 'OOT Hatch Pocket Cucco'].includes(locD.id)) {
       return false;

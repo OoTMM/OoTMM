@@ -113,6 +113,13 @@ export const SETTINGS = [{
   description: 'If you don\'t know what this is, leave it ON',
   default: true
 }, {
+  key: 'noPlandoHints',
+  name: 'No Plando Hints',
+  category: 'main',
+  type: 'boolean',
+  description: 'Prevents items that are part of a plando from being hinted',
+  default: true
+}, {
   key: 'songs',
   name: 'Song Shuffle',
   category: 'main.shuffle',
