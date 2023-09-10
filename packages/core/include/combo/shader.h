@@ -233,5 +233,6 @@ extern const Shader kShaders[256];
 #define DRAWGI_TRIFORCE_POWER               0xd4
 #define DRAWGI_TRIFORCE_COURAGE             0xd5
 #define DRAWGI_TRIFORCE_WISDOM              0xd6
+#define DRAWGI_SOUL_BOSS                    0xd7
 
 #endif

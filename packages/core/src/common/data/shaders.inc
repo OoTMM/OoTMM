@@ -212,3 +212,4 @@
 /* Common    Triforce Piece (Power)            */ { Shader_Triforce,               { CUSTOM_OBJECT_TRIFORCE_0, 1 }},
 /* Common    Triforce Piece (Courage)          */ { Shader_Triforce,               { CUSTOM_OBJECT_TRIFORCE_0, 2 }},
 /* Common    Triforce Piece (Wisdom)           */ { Shader_Triforce,               { CUSTOM_OBJECT_TRIFORCE_0, 3 }},
+/* Common    Boss Souls                        */ { Shader_CustomGS,               { 4 } },
