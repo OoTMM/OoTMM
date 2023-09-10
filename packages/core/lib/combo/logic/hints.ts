@@ -542,6 +542,7 @@ export class LogicPassHints {
 
     let placed = 0;
     for (;;) {
+      locations = locations.filter(x => !this.hintedLocations.has(x));
       if (placed >= count || locations.length === 0)
         break;
       const loc = locations.pop()!;
