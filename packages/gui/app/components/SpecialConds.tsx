@@ -26,27 +26,17 @@ function SpecialCondsPanel({ cond }: SpecialCondsPanelProps) {
       <Group direction="vertical">
         <Text size='jb'>{SPECIAL_CONDS[cond].name}</Text>
         <Group direction="vertical" spacing='xs'> 
-          {Object.keys(SPECIAL_CONDS_KEYS).map(key =>
-            <Checkbox
-              key={key}
-              label={(SPECIAL_CONDS_KEYS as any)[key]}
-              checked={(c as any)[key]}
-              onChange={x => setSettings({ specialConds: { [cond]: { [key]: x } }} as any)}
-            />
-          )}
+        {Object.keys(SPECIAL_CONDS_FIELDS).filter(key => { const cond = (SPECIAL_CONDS_FIELDS as any)[key].cond; return cond ? cond(settings) : true }).map(key =>
+          <Checkbox
+            key={key}
+            label={(SPECIAL_CONDS_FIELDS as any)[key].name}
+            checked={(c as any)[key]}
+            onChange={x => setSettings({ specialConds: { [cond]: { [key]: x } }} as any)}
+          />
+        )}
          </Group>
         <InputNumber label="Amount" value={c.count} onChange={x => setSettings({ specialConds: { [cond]: { count: x } }} as any)}/>
       </Group>
-<!--       <h2>{SPECIAL_CONDS[cond].name}</h2>
-      {Object.keys(SPECIAL_CONDS_FIELDS).filter(key => { const cond = (SPECIAL_CONDS_FIELDS as any)[key].cond; return cond ? cond(settings) : true }).map(key =>
-        <Checkbox
-          key={key}
-          label={(SPECIAL_CONDS_FIELDS as any)[key].name}
-          checked={(c as any)[key]}
-          onChange={x => setSettings({ specialConds: { [cond]: { [key]: x } }} as any)}
-        />
-      )}
-      <InputNumber label="Amount" value={c.count} onChange={x => setSettings({ specialConds: { [cond]: { count: x } }} as any)}/> -->
     </form>
   );
 }
