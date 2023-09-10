@@ -28,7 +28,7 @@ export type WorldArea = {
 };
 
 type WorldCheckNumeric = {
-  type: 'chest' | 'collectible' | 'gs' | 'sf' | 'cow' | 'shop' | 'scrub' | 'sr';
+  type: 'chest' | 'collectible' | 'gs' | 'sf' | 'cow' | 'shop' | 'scrub' | 'sr' | 'pot' | 'grass';
   id: number;
 };
 
@@ -51,7 +51,7 @@ export type WorldGossip = {
 
 export type WorldEntrance = {
   id: string;
-  type: 'boss' | 'dungeon' | 'overworld' | 'region' | 'indoors' | 'indoors-extra' | 'indoors-exit' | 'indoors-special';
+  type: 'boss' | 'dungeon' | 'overworld' | 'region' | 'region-extra' | 'region-shortcut' | 'indoors' | 'indoors-extra' | 'indoors-exit' | 'indoors-special';
   from: string;
   to: string;
   reverse: string | null;
@@ -246,7 +246,7 @@ export class LogicPassWorld {
       /* Horrible hack */
       name = name.replace('(', ' ');
       name = name.replace(')', ' ');
-      name = name.replace(',', ' ');
+      name = name.replace(/,/g, ' ');
 
       const parts = name.split(' ').filter(x => !!x);
       name = parts[0];

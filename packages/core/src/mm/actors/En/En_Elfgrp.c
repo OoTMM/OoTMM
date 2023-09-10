@@ -82,7 +82,7 @@ static void fairyHint(GameState_Play* play, int index)
     char* start;
 
     EnElfgrp_ItemQuery(&q, index);
-    b = play->textBuffer;
+    b = play->msgCtx.font.textBuffer.schar;
     comboTextAppendHeader(&b);
     start = b;
     comboTextAppendStr(&b, "Young one, please help us! If you bring the " TEXT_COLOR_PINK "15 Stray Fairies");
@@ -102,7 +102,7 @@ static void fairyHintTown(GameState_Play* play)
 
     EnElfgrp_ItemQuery(&q1, 0);
     EnElfgrp_ItemQuery(&q2, 1);
-    b = play->textBuffer;
+    b = play->msgCtx.font.textBuffer.schar;
     comboTextAppendHeader(&b);
     start = b;
     comboTextAppendStr(&b, "Young one, please help us! If you bring the missing " TEXT_COLOR_ORANGE "Stray Fairy");

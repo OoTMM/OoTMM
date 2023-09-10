@@ -15,7 +15,7 @@ typedef struct
     u8  playerTo;
     u8  game;
     u8  zero;
-    u16 key;
+    u32 key;
     s16 gi;
     s16 flags;
 }

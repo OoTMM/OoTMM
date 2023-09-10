@@ -30,6 +30,10 @@ int comboAddSmallKeyMm(u16 dungeonId)
 {
     s8 keyCount;
 
+    /* Max keys */
+    if (gMmSave.inventory.dungeonItems[dungeonId].maxKeys >= g.maxKeysMm[dungeonId])
+        return 0;
+
     keyCount = gMmSave.inventory.dungeonKeys[dungeonId];
     if (keyCount < 0)
         keyCount = 1;
@@ -39,6 +43,18 @@ int comboAddSmallKeyMm(u16 dungeonId)
     gMmSave.inventory.dungeonItems[dungeonId].maxKeys++;
 
     return gMmSave.inventory.dungeonItems[dungeonId].maxKeys;
+}
+
+void comboAddKeyRingMm(u16 dungeonId)
+{
+    for (int i = 0; i < g.maxKeysMm[dungeonId]; i++)
+        comboAddSmallKeyMm(dungeonId);
+}
+
+void comboAddSkeletonKeyMm(void)
+{
+    for (int i = 0; i < ARRAY_SIZE(g.maxKeysMm); ++i)
+        comboAddKeyRingMm(i);
 }
 
 void comboAddBossKeyMm(u16 dungeonId)
@@ -239,7 +255,7 @@ static void addWallet(int index, int noEffect)
     }
     else
         gMmSave.inventory.upgrades.wallet = index;
-    if (!noEffect && comboConfig(CFG_FILL_WALLETS))
+    if (noEffect && comboConfig(CFG_FILL_WALLETS))
         addRupees(gMmMaxRupees[gMmSave.inventory.upgrades.wallet]);
 }
 
@@ -772,6 +788,9 @@ void comboAddItemSharedMm(s16 gi, int noEffect)
             break;
         }
     }
+
+    if (comboConfig(CFG_SHARED_SKELETON_KEY) && gi == GI_MM_SKELETON_KEY)
+        comboAddSkeletonKeyOot();
 }
 
 int comboAddItemMm(s16 gi, int noEffect)
@@ -850,6 +869,9 @@ int comboAddItemMm(s16 gi, int noEffect)
         break;
     case GI_MM_MILK:
         fillBottle(ITEM_MM_MILK);
+        break;
+    case GI_MM_FAIRY:
+        fillBottle(ITEM_MM_FAIRY);
         break;
     case GI_MM_CHATEAU:
         fillBottle(ITEM_MM_BOTTLE_CHATEAU);
@@ -1158,6 +1180,21 @@ int comboAddItemMm(s16 gi, int noEffect)
         break;
     case GI_MM_SMALL_KEY_ST:
         count = comboAddSmallKeyMm(3);
+        break;
+    case GI_MM_KEY_RING_WF:
+        comboAddKeyRingMm(0);
+        break;
+    case GI_MM_KEY_RING_SH:
+        comboAddKeyRingMm(1);
+        break;
+    case GI_MM_KEY_RING_GB:
+        comboAddKeyRingMm(2);
+        break;
+    case GI_MM_KEY_RING_ST:
+        comboAddKeyRingMm(3);
+        break;
+    case GI_MM_SKELETON_KEY:
+        comboAddSkeletonKeyMm();
         break;
     case GI_MM_BOSS_KEY_WF:
         comboAddBossKeyMm(0);

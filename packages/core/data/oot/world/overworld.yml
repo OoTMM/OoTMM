@@ -39,6 +39,7 @@
     "Kokiri Forest": "true"
   locations:
     "Kokiri Forest Cow": "is_adult && event(MALON_COW) && can_play_epona"
+    "Link's House Pot": "true"
 "Kokiri Forest":
   region: KOKIRI_FOREST
   exits:
@@ -64,6 +65,34 @@
     "Kokiri Forest GS Soil": "gs_soil && can_damage_skull"
     "Kokiri Forest GS Night Child": "is_child && gs_night && can_damage_skull"
     "Kokiri Forest GS Night Adult": "is_adult && can_collect_distance && gs_night"
+    "Kokiri Forest Grass 1": "can_cut_grass"
+    "Kokiri Forest Grass 2": "can_cut_grass"
+    "Kokiri Forest Grass 3": "can_cut_grass"
+    "Kokiri Forest Grass 4": "can_cut_grass"
+    "Kokiri Forest Grass 5": "can_cut_grass"
+    "Kokiri Forest Grass 6": "can_cut_grass"
+    "Kokiri Forest Grass 7": "can_cut_grass"
+    "Kokiri Forest Grass 8": "can_cut_grass"
+    "Kokiri Forest Grass Child 1": "is_child && can_cut_grass"
+    "Kokiri Forest Grass Child 2": "is_child && can_cut_grass"
+    "Kokiri Forest Grass Child 3": "is_child && can_cut_grass"
+    "Kokiri Forest Grass Child 4": "is_child && can_cut_grass"
+    "Kokiri Forest Grass Child Kokiri": "is_child && can_cut_grass"
+    "Kokiri Forest Grass Child Crawl 1": "is_child && can_cut_grass"
+    "Kokiri Forest Grass Child Crawl 2": "is_child && can_cut_grass"
+    "Kokiri Forest Grass Child Crawl 3": "is_child && can_cut_grass"
+    "Kokiri Forest Grass Adult 01": "is_adult && can_cut_grass"
+    "Kokiri Forest Grass Adult 02": "is_adult && can_cut_grass"
+    "Kokiri Forest Grass Adult 03": "is_adult && can_cut_grass"
+    "Kokiri Forest Grass Adult 04": "is_adult && can_cut_grass"
+    "Kokiri Forest Grass Adult 05": "is_adult && can_cut_grass"
+    "Kokiri Forest Grass Adult 06": "is_adult && can_cut_grass"
+    "Kokiri Forest Grass Adult 07": "is_adult && can_cut_grass"
+    "Kokiri Forest Grass Adult 08": "is_adult && can_cut_grass"
+    "Kokiri Forest Grass Adult 09": "is_adult && can_cut_grass"
+    "Kokiri Forest Grass Adult 10": "is_adult && can_cut_grass"
+    "Kokiri Forest Grass Adult 11": "is_adult && can_cut_grass"
+    "Kokiri Forest Grass Adult 12": "is_adult && can_cut_grass"
   gossip:
     "Kokiri Gossip Near Lost Woods Open": "true"
     "Kokiri Gossip Near Lost Woods Grotto": "hidden_grotto_storms"
@@ -108,10 +137,16 @@
   region: ENTRANCE
   exits:
     "Kokiri Forest": "true"
+  locations:
+    "Twins House Pot 1": "true"
+    "Twins House Pot 2": "true"
 "Know It All House":
   region: ENTRANCE
   exits:
     "Kokiri Forest": "true"
+  locations:
+    "Know It All House Pot 1": "true"
+    "Know It All House Pot 2": "true"
 "Kokiri Forest Storms Grotto":
   region: ENTRANCE
   exits:
@@ -126,6 +161,10 @@
     BUGS: "has_bottle && can_cut_grass"
   locations:
     "Kokiri Forest Storms Grotto": "true"
+    "Kokiri Forest Storms Grotto Grass 1": "can_cut_grass"
+    "Kokiri Forest Storms Grotto Grass 2": "can_cut_grass"
+    "Kokiri Forest Storms Grotto Grass 3": "can_cut_grass"
+    "Kokiri Forest Storms Grotto Grass 4": "can_cut_grass"
 "Hyrule Field":
   region: HYRULE_FIELD
   time: flow
@@ -156,6 +195,54 @@
   locations:
     "Hyrule Field Ocarina of Time": "has_spiritual_stones"
     "Hyrule Field Song of Time": "has_spiritual_stones"
+    "Hyrule Field Grass Pack 1 Bush 01": "can_cut_grass"
+    "Hyrule Field Grass Pack 1 Bush 02": "can_cut_grass"
+    "Hyrule Field Grass Pack 1 Bush 03": "can_cut_grass"
+    "Hyrule Field Grass Pack 1 Bush 04": "can_cut_grass"
+    "Hyrule Field Grass Pack 1 Bush 05": "can_cut_grass"
+    "Hyrule Field Grass Pack 1 Bush 06": "can_cut_grass"
+    "Hyrule Field Grass Pack 1 Bush 07": "can_cut_grass"
+    "Hyrule Field Grass Pack 1 Bush 08": "can_cut_grass"
+    "Hyrule Field Grass Pack 1 Bush 09": "can_cut_grass"
+    "Hyrule Field Grass Pack 1 Bush 10": "can_cut_grass"
+    "Hyrule Field Grass Pack 1 Bush 11": "can_cut_grass"
+    "Hyrule Field Grass Pack 1 Bush 12": "can_cut_grass"
+    "Hyrule Field Grass Pack 2 Bush 01": "can_cut_grass"
+    "Hyrule Field Grass Pack 2 Bush 02": "can_cut_grass"
+    "Hyrule Field Grass Pack 2 Bush 03": "can_cut_grass"
+    "Hyrule Field Grass Pack 2 Bush 04": "can_cut_grass"
+    "Hyrule Field Grass Pack 2 Bush 05": "can_cut_grass"
+    "Hyrule Field Grass Pack 2 Bush 06": "can_cut_grass"
+    "Hyrule Field Grass Pack 2 Bush 07": "can_cut_grass"
+    "Hyrule Field Grass Pack 2 Bush 08": "can_cut_grass"
+    "Hyrule Field Grass Pack 2 Bush 09": "can_cut_grass"
+    "Hyrule Field Grass Pack 2 Bush 10": "can_cut_grass"
+    "Hyrule Field Grass Pack 2 Bush 11": "can_cut_grass"
+    "Hyrule Field Grass Pack 2 Bush 12": "can_cut_grass"
+    "Hyrule Field Grass Pack 3 Bush 01": "can_cut_grass"
+    "Hyrule Field Grass Pack 3 Bush 02": "can_cut_grass"
+    "Hyrule Field Grass Pack 3 Bush 03": "can_cut_grass"
+    "Hyrule Field Grass Pack 3 Bush 04": "can_cut_grass"
+    "Hyrule Field Grass Pack 3 Bush 05": "can_cut_grass"
+    "Hyrule Field Grass Pack 3 Bush 06": "can_cut_grass"
+    "Hyrule Field Grass Pack 3 Bush 07": "can_cut_grass"
+    "Hyrule Field Grass Pack 3 Bush 08": "can_cut_grass"
+    "Hyrule Field Grass Pack 3 Bush 09": "can_cut_grass"
+    "Hyrule Field Grass Pack 3 Bush 10": "can_cut_grass"
+    "Hyrule Field Grass Pack 3 Bush 11": "can_cut_grass"
+    "Hyrule Field Grass Pack 3 Bush 12": "can_cut_grass"
+    "Hyrule Field Grass Pack 4 Bush 01": "can_cut_grass"
+    "Hyrule Field Grass Pack 4 Bush 02": "can_cut_grass"
+    "Hyrule Field Grass Pack 4 Bush 03": "can_cut_grass"
+    "Hyrule Field Grass Pack 4 Bush 04": "can_cut_grass"
+    "Hyrule Field Grass Pack 4 Bush 05": "can_cut_grass"
+    "Hyrule Field Grass Pack 4 Bush 06": "can_cut_grass"
+    "Hyrule Field Grass Pack 4 Bush 07": "can_cut_grass"
+    "Hyrule Field Grass Pack 4 Bush 08": "can_cut_grass"
+    "Hyrule Field Grass Pack 4 Bush 09": "can_cut_grass"
+    "Hyrule Field Grass Pack 4 Bush 10": "can_cut_grass"
+    "Hyrule Field Grass Pack 4 Bush 11": "can_cut_grass"
+    "Hyrule Field Grass Pack 4 Bush 12": "can_cut_grass"
 "Hyrule Field Drawbridge":
   region: HYRULE_FIELD
   time: flow
@@ -181,6 +268,10 @@
     BUGS: "has_bottle && can_cut_grass"
   locations:
     "Hyrule Field Grotto Open": "true"
+    "Hyrule Field Grotto Open Grass 1": "can_cut_grass"
+    "Hyrule Field Grotto Open Grass 2": "can_cut_grass"
+    "Hyrule Field Grotto Open Grass 3": "can_cut_grass"
+    "Hyrule Field Grotto Open Grass 4": "can_cut_grass"
   gossip:
     "Hyrule Field Gossip Near Lake Hylia": "true"
 "Hyrule Field Southeast Grotto":
@@ -197,6 +288,10 @@
     BUGS: "has_bottle && can_cut_grass"
   locations:
     "Hyrule Field Grotto Southeast": "true"
+    "Hyrule Field Grotto Southeast Grass 1": "can_cut_grass"
+    "Hyrule Field Grotto Southeast Grass 2": "can_cut_grass"
+    "Hyrule Field Grotto Southeast Grass 3": "can_cut_grass"
+    "Hyrule Field Grotto Southeast Grass 4": "can_cut_grass"
   gossip:
     "Hyrule Field Gossip Southeast Grotto": "true"
 "Hyrule Field Grotto Near Market":
@@ -213,6 +308,10 @@
     BUGS: "has_bottle && can_cut_grass"
   locations:
     "Hyrule Field Grotto Market": "true"
+    "Hyrule Field Grotto Market Grass 1": "can_cut_grass"
+    "Hyrule Field Grotto Market Grass 2": "can_cut_grass"
+    "Hyrule Field Grotto Market Grass 3": "can_cut_grass"
+    "Hyrule Field Grotto Market Grass 4": "can_cut_grass"
   gossip:
     "Hyrule Field Gossip Near Castle Town": "true"
 "Hyrule Field Tektite Grotto":
@@ -231,6 +330,10 @@
   locations:
     "Hyrule Field Grotto Near Gerudo GS": "can_collect_distance && has_fire"
     "Hyrule Field Cow": "has_fire && can_play_epona"
+    "Hyrule Field Cow Grotto Pot 1": "has_fire"
+    "Hyrule Field Cow Grotto Pot 2": "has_fire"
+    "Hyrule Field Grotto Near Gerudo Grass 1": "has_fire && can_cut_grass"
+    "Hyrule Field Grotto Near Gerudo Grass 2": "has_fire && can_cut_grass"
   gossip:
     "Hyrule Field Gossip Near Gerudo Valley": "has_fire"
 "Hyrule Field Grotto Near Kak":
@@ -268,6 +371,15 @@
   events:
     RICHARD: "is_night && is_child"
     RUPEES: "is_child"
+  locations:
+    "Market Grass 1": "is_child && can_cut_grass_no_c_button"
+    "Market Grass 2": "is_child && can_cut_grass_no_c_button"
+    "Market Grass 3": "is_child && can_cut_grass_no_c_button"
+    "Market Grass 4": "is_child && can_cut_grass_no_c_button"
+    "Market Grass 5": "is_child && can_cut_grass_no_c_button"
+    "Market Grass 6": "is_child && can_cut_grass_no_c_button"
+    "Market Grass 7": "is_child && can_cut_grass_no_c_button"
+    "Market Grass 8": "is_child && can_cut_grass_no_c_button"
 "Market Castle Entry":
   region: MARKET
   exits:
@@ -321,6 +433,61 @@
   locations:
     "Market Pot House Big Poes": "is_adult && event(BIG_POE)"
     "Market Pot House GS": "is_child"
+    "Market Pot House Child Pot Ground 1": "is_child"
+    "Market Pot House Child Pot Ground 2": "is_child"
+    "Market Pot House Child Pot Ground 3": "is_child"
+    "Market Pot House Child Pot Ground 4": "is_child"
+    "Market Pot House Child Pot Ground 5": "is_child"
+    "Market Pot House Child Pot Ground 6": "is_child"
+    "Market Pot House Child Pot Ground 7": "is_child"
+    "Market Pot House Child Pot Ground 8": "is_child"
+    "Market Pot House Child Pot Ground 9": "is_child"
+    "Market Pot House Child Pot Ground 10": "is_child"
+    "Market Pot House Child Pot Ground 11": "is_child"
+    "Market Pot House Child Pot Ground 12": "is_child"
+    "Market Pot House Child Pot Ground 13": "is_child"
+    "Market Pot House Child Pot Ground 14": "is_child"
+    "Market Pot House Child Pot Ground 15": "is_child"
+    "Market Pot House Child Pot Ground 16": "is_child"
+    "Market Pot House Child Pot Ground 17": "is_child"
+    "Market Pot House Child Pot Ground 18": "is_child"
+    "Market Pot House Child Pot Ground 19": "is_child"
+    "Market Pot House Child Pot Ground 20": "is_child"
+    "Market Pot House Child Pot Ground 21": "is_child"
+    "Market Pot House Child Pot Ground 22": "is_child"
+    "Market Pot House Child Pot Ground 23": "is_child"
+    "Market Pot House Child Pot Ground 24": "is_child"
+    "Market Pot House Child Pot Ground 25": "is_child"
+    "Market Pot House Child Pot Ground 26": "is_child"
+    "Market Pot House Child Pot Ground 27": "is_child"
+    "Market Pot House Child Pot Ground 28": "is_child"
+    "Market Pot House Child Pot Ground 29": "is_child"
+    "Market Pot House Child Pot Ground 30": "is_child"
+    "Market Pot House Child Pot Ground 31": "is_child"
+    "Market Pot House Child Pot Ground 32": "is_child"
+    "Market Pot House Child Pot Ground 33": "is_child"
+    "Market Pot House Child Pot Ground 34": "is_child"
+    "Market Pot House Child Pot Ground 35": "is_child"
+    "Market Pot House Child Pot Ground 36": "is_child"
+    "Market Pot House Child Pot Ground 37": "is_child"
+    "Market Pot House Child Pot Ground 38": "is_child"
+    "Market Pot House Child Pot Ground 39": "is_child"
+    "Market Pot House Child Pot Ground 40": "is_child"
+    "Market Pot House Child Pot Ground 41": "is_child"
+    "Market Pot House Child Pot Ground 42": "is_child"
+    "Market Pot House Child Pot Above 1": "is_child"
+    "Market Pot House Child Pot Above 2": "is_child"
+    "Market Pot House Adult Pot 1": "is_adult"
+    "Market Pot House Adult Pot 2": "is_adult"
+    "Market Pot House Adult Pot 3": "is_adult"
+    "Market Pot House Adult Pot 4": "is_adult"
+    "Market Pot House Adult Pot 5": "is_adult"
+    "Market Pot House Adult Pot 6": "is_adult"
+    "Market Pot House Adult Pot 7": "is_adult"
+    "Market Pot House Adult Pot 8": "is_adult"
+    "Market Pot House Adult Pot 9": "is_adult"
+    "Market Pot House Adult Pot 10": "is_adult"
+    "Market Pot House Adult Pot 11": "is_adult"
 "Back Alley":
   region: MARKET
   exits:
@@ -338,6 +505,10 @@
   region: ENTRANCE
   exits:
     "Back Alley": "true"
+  locations:
+    "Market Back Alley East House Pot 1": "true"
+    "Market Back Alley East House Pot 2": "true"
+    "Market Back Alley East House Pot 3": "true"
 "Bombchu Bowling":
   region: ENTRANCE
   exits:
@@ -389,6 +560,13 @@
     "Lon Lon Ranch GS House": "is_child && can_boomerang && gs_night"
     "Lon Lon Ranch GS Rain Shed": "is_child && gs_night"
     "Lon Lon Ranch GS Back Wall": "is_child && can_boomerang && gs_night"
+    "Lon Lon Ranch Pot 1": "is_child"
+    "Lon Lon Ranch Pot 2": "is_child"
+    "Lon Lon Ranch Pot 3": "is_child"
+    "Lon Lon Ranch Pot 4": "is_child"
+    "Lon Lon Ranch Pot 5": "is_child"
+    "Lon Lon Ranch Pot 6": "is_child"
+    "Lon Lon Ranch Pot 7": "is_child"
 "Lon Lon Ranch Stables":
   region: ENTRANCE
   exits:
@@ -410,6 +588,9 @@
     "Lon Lon Ranch": "true"
   locations:
     "Lon Lon Ranch Talon Bottle": "is_child && woke_talon_child && can_use_wallet(1) && is_day"
+    "Lon Lon Ranch Talon House Pot 1": "true"
+    "Lon Lon Ranch Talon House Pot 2": "true"
+    "Lon Lon Ranch Talon House Pot 3": "true"
 "Lon Lon Ranch Grotto":
   region: ENTRANCE
   exits:
@@ -437,6 +618,11 @@
   locations:
     "Malon Egg": "event(MALON)"
     "Hyrule Castle GS Tree": "can_damage_skull"
+    "Hyrule Castle Grass 1": "can_cut_grass"
+    "Hyrule Castle Grass 2": "can_cut_grass"
+    # These pots fail to load
+    #"Hyrule Castle Pot 1": "true"
+    #"Hyrule Castle Pot 2": "true"
   gossip:
     "Hyrule Castle Gossip After Climb": "true"
     "Hyrule Castle Gossip Before Moat": "true"
@@ -445,6 +631,7 @@
   time: flow
   exits:
     "Hyrule Castle": "true"
+    "Hyrule Field": "met_zelda"
   events:
     MEET_ZELDA: "true"
   locations:
@@ -477,6 +664,10 @@
     BUGS: "has_explosives_or_hammer && has_bottle"
   locations:
     "Hyrule Castle GS Grotto": "has_explosives_or_hammer && can_collect_distance"
+    "Hyrule Castle Grotto Pot 1": "true"
+    "Hyrule Castle Grotto Pot 2": "true"
+    "Hyrule Castle Grotto Pot 3": "true"
+    "Hyrule Castle Grotto Pot 4": "true"
   gossip:
     "Hyrule Castle Gossip Grotto": "has_explosives_or_hammer"
 "Ganon Castle Exterior":
@@ -533,6 +724,9 @@
     "Lost Woods Odd Mushroom": "adult_trade(COJIRO)"
     "Lost Woods Poacher's Saw": "adult_trade(ODD_POTION)"
     "Lost Woods GS Soil Bridge": "gs_soil && can_damage_skull"
+    "Lost Woods Grass 1": "can_cut_grass"
+    "Lost Woods Grass 2": "can_cut_grass"
+    "Lost Woods Grass 3": "can_cut_grass"
   gossip:
     "Lost Woods Gossip Under Bridge": "true"
 "Lost Woods Generic Grotto":
@@ -549,6 +743,10 @@
     BUGS: "has_bottle && can_cut_grass"
   locations:
     "Lost Woods Grotto Generic": "true"
+    "Lost Woods Grotto Generic Grass 1": "can_cut_grass"
+    "Lost Woods Grotto Generic Grass 2": "can_cut_grass"
+    "Lost Woods Grotto Generic Grass 3": "can_cut_grass"
+    "Lost Woods Grotto Generic Grass 4": "can_cut_grass"
   gossip:
     "Lost Woods Gossip Grotto": "true"
 "Lost Woods Bridge":
@@ -586,6 +784,12 @@
     "Lost Woods Scrub Near Theater Right": "is_child && can_hit_scrub && scrub_price(0x02)"
     "Lost Woods GS Soil Theater": "gs_soil && can_damage_skull"
     "Lost Woods GS Bean Ride": "is_adult && gs_night && (can_ride_bean(BEAN_LOST_WOODS_LATE) || (trick(OOT_LOST_WOODS_ADULT_GS) && can_collect_distance && (can_longshot || can_use_bow || has_bombchu || can_use_din)))"
+    "Lost Woods Grass Deep 1": "can_cut_grass"
+    "Lost Woods Grass Deep 2": "can_cut_grass"
+    "Lost Woods Grass Deep 3": "can_cut_grass"
+    "Lost Woods Grass Deep 4": "can_cut_grass"
+    "Lost Woods Grass Deep 5": "can_cut_grass"
+    "Lost Woods Grass Deep 6": "can_cut_grass"
 "Deku Theater":
   region: ENTRANCE
   exits:
@@ -672,6 +876,25 @@
     "Kakariko GS House of Skulltula": "gs_night && is_child"
     "Kakariko GS Bazaar": "gs_night && is_child"
     "Kakariko GS Ladder": "gs_night && is_child && (can_use_slingshot || has_bombchu)"
+    "Kakariko Pot 01": "is_child"
+    "Kakariko Pot 02": "is_child"
+    "Kakariko Pot 03": "is_child"
+    "Kakariko Pot 04": "is_child"
+    "Kakariko Pot 05": "is_child"
+    "Kakariko Pot 06": "is_child"
+    "Kakariko Pot 07": "is_child"
+    "Kakariko Pot 08": "is_child"
+    "Kakariko Pot 09": "is_child"
+    "Kakariko Pot 10": "is_child"
+    "Kakariko Pot 11": "is_child"
+    "Kakariko Grass 1": "can_cut_grass"
+    "Kakariko Grass 2": "can_cut_grass"
+    "Kakariko Grass 3": "can_cut_grass"
+    "Kakariko Grass 4": "can_cut_grass"
+    "Kakariko Grass 5": "can_cut_grass"
+    "Kakariko Grass 6": "can_cut_grass"
+    "Kakariko Grass 7": "can_cut_grass"
+    "Kakariko Grass 8": "can_cut_grass"
 "Kakariko Rooftop":
   region: KAKARIKO
   exits:
@@ -793,6 +1016,10 @@
     BUGS: "has_bottle && can_cut_grass"
   locations:
     "Kakariko Grotto Back": "true"
+    "Kakariko Grotto Back Grass 1": "can_cut_grass"
+    "Kakariko Grotto Back Grass 2": "can_cut_grass"
+    "Kakariko Grotto Back Grass 3": "can_cut_grass"
+    "Kakariko Grotto Back Grass 4": "can_cut_grass"
   gossip:
     "Kakariko Gossip Grotto": "true"
 "Graveyard":
@@ -817,6 +1044,18 @@
     "Graveyard Crate HP": "can_ride_bean(BEAN_GRAVEYARD) || can_longshot"
     "Graveyard GS Soil": "gs_soil && can_damage_skull"
     "Graveyard GS Wall": "is_child && can_boomerang && gs_night"
+    "Graveyard Grass 01": "can_cut_grass"
+    "Graveyard Grass 02": "can_cut_grass"
+    "Graveyard Grass 03": "can_cut_grass"
+    "Graveyard Grass 04": "can_cut_grass"
+    "Graveyard Grass 05": "can_cut_grass"
+    "Graveyard Grass 06": "can_cut_grass"
+    "Graveyard Grass 07": "can_cut_grass"
+    "Graveyard Grass 08": "can_cut_grass"
+    "Graveyard Grass 09": "can_cut_grass"
+    "Graveyard Grass 10": "can_cut_grass"
+    "Graveyard Grass 11": "can_cut_grass"
+    "Graveyard Grass 12": "can_cut_grass"
 "Graveyard Upper":
   region: GRAVEYARD
   exits:
@@ -859,6 +1098,12 @@
   locations:
     "Graveyard Dampe Tomb Reward 1": "true"
     "Graveyard Dampe Tomb Reward 2": "is_adult" #It's very hard to finish this race sub-1 as kid.
+    "Graveyard Dampe Tomb Pot 1": "true"
+    "Graveyard Dampe Tomb Pot 2": "true"
+    "Graveyard Dampe Tomb Pot 3": "true"
+    "Graveyard Dampe Tomb Pot 4": "true"
+    "Graveyard Dampe Tomb Pot 5": "true"
+    "Graveyard Dampe Tomb Pot 6": "true"
 "Dampe House":
   region: ENTRANCE
   exits:
@@ -915,6 +1160,10 @@
     BUGS: "has_bottle && can_cut_grass"
   locations:
     "Death Mountain Grotto": "true"
+    "Death Mountain Grotto Grass 1": "can_cut_grass"
+    "Death Mountain Grotto Grass 2": "can_cut_grass"
+    "Death Mountain Grotto Grass 3": "can_cut_grass"
+    "Death Mountain Grotto Grass 4": "can_cut_grass"
   gossip:
     "Death Mountain Gossip Grotto": "true"
 "Death Mountain Cow Grotto":
@@ -925,6 +1174,8 @@
     RUPEES: "true"
   locations:
     "Death Mountain Cow": "can_play_epona"
+    "Death Mountain Cow Grotto Grass 1": "can_cut_grass"
+    "Death Mountain Cow Grotto Grass 2": "can_cut_grass"
 "Fairy Fountain Magic":
   region: ENTRANCE
   exits:
@@ -963,6 +1214,12 @@
     "Goron City Medigoron Giant Knife": "is_adult && (has_bombflowers || can_hammer) && can_use_wallet(2)"
     "Goron City GS Platform": "is_adult"
     "Goron City GS Maze": "is_child && has_explosives_or_hammer"
+    "Goron City Pot Stairs 1": "true"
+    "Goron City Pot Stairs 2": "true"
+    "Goron City Pot Stairs 3": "true"
+    "Goron City Pot Stairs 4": "true"
+    "Goron City Pot Stairs 5": "true"
+    "Goron City Pot Medigoron Room": "has_bombflowers || can_hammer"
   gossip:
     "Goron City Gossip Boulder Maze": "has_explosives_or_hammer || can_lift_silver"
     "Goron City Gossip Near Medigoron": "has_bombflowers || can_hammer"
@@ -977,6 +1234,9 @@
     RUPEES: "is_adult"
   locations:
     "Darunia": "is_child && can_play(SONG_SARIA)"
+    "Goron City Pot Darunia Room 1": "true"
+    "Goron City Pot Darunia Room 2": "true"
+    "Goron City Pot Darunia Room 3": "true"
 "Goron Shop":
   region: ENTRANCE
   exits:
@@ -1012,6 +1272,18 @@
     MAGIC: "can_cut_grass"
   locations:
     "Zora River GS Tree": "is_child && can_damage_skull"
+    "Zora River Grass Pack Bush 01": "can_cut_grass"
+    "Zora River Grass Pack Bush 02": "can_cut_grass"
+    "Zora River Grass Pack Bush 03": "can_cut_grass"
+    "Zora River Grass Pack Bush 04": "can_cut_grass"
+    "Zora River Grass Pack Bush 05": "can_cut_grass"
+    "Zora River Grass Pack Bush 06": "can_cut_grass"
+    "Zora River Grass Pack Bush 07": "can_cut_grass"
+    "Zora River Grass Pack Bush 08": "can_cut_grass"
+    "Zora River Grass Pack Bush 09": "can_cut_grass"
+    "Zora River Grass Pack Bush 10": "can_cut_grass"
+    "Zora River Grass Pack Bush 11": "can_cut_grass"
+    "Zora River Grass Pack Bush 12": "can_cut_grass"
 "Zora River":
   region: ZORA_RIVER
   time: flow
@@ -1037,6 +1309,7 @@
     "Zora River GS Ladder": "is_child && gs_night && can_damage_skull"
     "Zora River GS Near Grotto": "is_adult && gs_night && can_collect_distance"
     "Zora River GS Near Bridge": "is_adult && gs_night && can_hookshot"
+    "Zora River Grass": "(is_child || has_hover_boots) && can_cut_grass"
   gossip:
     "Zora River Gossip High Pillar": "true"
     "Zora River Gossip Near Domain": "true"
@@ -1061,6 +1334,10 @@
     BUGS: "has_bottle && can_cut_grass"
   locations:
     "Zora River Grotto": "true"
+    "Zora River Grotto Grass 1": "can_cut_grass"
+    "Zora River Grotto Grass 2": "can_cut_grass"
+    "Zora River Grotto Grass 3": "can_cut_grass"
+    "Zora River Grotto Grass 4": "can_cut_grass"
   gossip:
     "Zora River Gossip Grotto": "true"
 "Zora River Boulder Grotto":
@@ -1087,6 +1364,11 @@
     "Zora Domain Tunic": "is_adult && has_blue_fire"
     "Zora Domain Eyeball Frog": "has_blue_fire && adult_trade(PRESCRIPTION)"
     "Zora Domain GS Waterfall": "is_adult && gs_night && (has_ranged_weapon_adult || can_boomerang || has_magic)"
+    "Zora Domain Pot 1": "true"
+    "Zora Domain Pot 2": "true"
+    "Zora Domain Pot 3": "true"
+    "Zora Domain Pot 4": "true"
+    "Zora Domain Pot 5": "true"
   gossip:
     "Zora Domain Gossip": "true"
 "Zora Domain Back":
@@ -1118,6 +1400,7 @@
     "Hyrule Field": "true"
     "Hyrule Field Drawbridge": "is_child"
     "Zora Domain": "is_child && can_dive_small"
+    "Gerudo Valley Falls": "false"
     "Laboratory": "true"
     "Water Temple": "has_iron_boots && has_tunic_zora && can_hookshot"
     "Fishing Pond": "is_child || event(WATER_TEMPLE_CLEARED) || scarecrow_hookshot || can_ride_bean(BEAN_LAKE_HYLIA)"
@@ -1140,6 +1423,52 @@
     "Lake Hylia GS Island": "is_child && gs_night && can_damage_skull"
     "Lake Hylia GS Soil": "gs_soil && can_damage_skull"
     "Lake Hylia GS Big Tree": "is_adult && gs_night && can_longshot"
+    # These pots do exist in the vanilla game but they fail to load
+    #"Lake Hylia Pot 1": "is_child"
+    #"Lake Hylia Pot 2": "is_child"
+    "Lake Hylia Grass 1": "can_cut_grass"
+    "Lake Hylia Grass 2": "can_cut_grass"
+    "Lake Hylia Grass Child 1": "is_child && can_cut_grass"
+    "Lake Hylia Grass Child 2": "is_child && can_cut_grass"
+    "Lake Hylia Grass Child 3": "is_child && can_cut_grass"
+    "Lake Hylia Grass Child 4": "is_child && can_cut_grass"
+    "Lake Hylia Grass Child 5": "is_child && can_cut_grass"
+    "Lake Hylia Grass Pack 1 Bush 01": "can_cut_grass"
+    "Lake Hylia Grass Pack 1 Bush 02": "can_cut_grass"
+    "Lake Hylia Grass Pack 1 Bush 03": "can_cut_grass"
+    "Lake Hylia Grass Pack 1 Bush 04": "can_cut_grass"
+    "Lake Hylia Grass Pack 1 Bush 05": "can_cut_grass"
+    "Lake Hylia Grass Pack 1 Bush 06": "can_cut_grass"
+    "Lake Hylia Grass Pack 1 Bush 07": "can_cut_grass"
+    "Lake Hylia Grass Pack 1 Bush 08": "can_cut_grass"
+    "Lake Hylia Grass Pack 1 Bush 09": "can_cut_grass"
+    "Lake Hylia Grass Pack 1 Bush 10": "can_cut_grass"
+    "Lake Hylia Grass Pack 1 Bush 11": "can_cut_grass"
+    "Lake Hylia Grass Pack 1 Bush 12": "can_cut_grass"
+    "Lake Hylia Grass Pack 2 Bush 01": "can_cut_grass"
+    "Lake Hylia Grass Pack 2 Bush 02": "can_cut_grass"
+    "Lake Hylia Grass Pack 2 Bush 03": "can_cut_grass"
+    "Lake Hylia Grass Pack 2 Bush 04": "can_cut_grass"
+    "Lake Hylia Grass Pack 2 Bush 05": "can_cut_grass"
+    "Lake Hylia Grass Pack 2 Bush 06": "can_cut_grass"
+    "Lake Hylia Grass Pack 2 Bush 07": "can_cut_grass"
+    "Lake Hylia Grass Pack 2 Bush 08": "can_cut_grass"
+    "Lake Hylia Grass Pack 2 Bush 09": "can_cut_grass"
+    "Lake Hylia Grass Pack 2 Bush 10": "can_cut_grass"
+    "Lake Hylia Grass Pack 2 Bush 11": "can_cut_grass"
+    "Lake Hylia Grass Pack 2 Bush 12": "can_cut_grass"
+    "Lake Hylia Grass Pack 3 Bush 01": "can_cut_grass"
+    "Lake Hylia Grass Pack 3 Bush 02": "can_cut_grass"
+    "Lake Hylia Grass Pack 3 Bush 03": "can_cut_grass"
+    "Lake Hylia Grass Pack 3 Bush 04": "can_cut_grass"
+    "Lake Hylia Grass Pack 3 Bush 05": "can_cut_grass"
+    "Lake Hylia Grass Pack 3 Bush 06": "can_cut_grass"
+    "Lake Hylia Grass Pack 3 Bush 07": "can_cut_grass"
+    "Lake Hylia Grass Pack 3 Bush 08": "can_cut_grass"
+    "Lake Hylia Grass Pack 3 Bush 09": "can_cut_grass"
+    "Lake Hylia Grass Pack 3 Bush 10": "can_cut_grass"
+    "Lake Hylia Grass Pack 3 Bush 11": "can_cut_grass"
+    "Lake Hylia Grass Pack 3 Bush 12": "can_cut_grass"
   gossip:
     "Lake Hylia Gossip Near River": "true"
     "Lake Hylia Gossip Southeast Lake": "true"
@@ -1182,6 +1511,13 @@
     "Zora Fountain GS Wall": "is_child && gs_night && can_boomerang"
     "Zora Fountain GS Tree": "is_child && can_damage_skull"
     "Zora Fountain GS Upper": "is_adult && gs_night && has_explosives_or_hammer && can_collect_distance && can_lift_silver"
+    "Zora Fountain Child Pot 1": "is_child"
+    "Zora Fountain Child Pot 2": "is_child"
+    "Zora Fountain Child Pot 3": "is_child"
+    "Zora Fountain Child Pot 4": "is_child"
+    "Zora Fountain Adult Pot 1": "is_adult && can_lift_silver && has_explosives_or_hammer"
+    "Zora Fountain Adult Pot 2": "is_adult && can_lift_silver && has_explosives_or_hammer"
+    "Zora Fountain Adult Pot 3": "is_adult && can_lift_silver && has_explosives_or_hammer"
   gossip:
     "Zora Fountain Gossip Northwest": "true"
     "Zora Fountain Gossip Near Fairy": "true"
@@ -1243,6 +1579,11 @@
     "Fairy Fountain Double Magic": "can_hammer"
   events:
     RED_BOULDER_BROKEN: "is_adult && can_hammer"
+  locations:
+    "Death Mountain Crater Pot 1": "true"
+    "Death Mountain Crater Pot 2": "true"
+    "Death Mountain Crater Pot 3": "true"
+    "Death Mountain Crater Pot 4": "true"
 "Death Mountain Crater Warp":
   region: DEATH_MOUNTAIN_CRATER
   exits:
@@ -1273,6 +1614,10 @@
     BUGS: "has_bottle && can_cut_grass"
   locations:
     "Death Mountain Crater Grotto": "true"
+    "Death Mountain Crater Grotto Grass 1": "can_cut_grass"
+    "Death Mountain Crater Grotto Grass 2": "can_cut_grass"
+    "Death Mountain Crater Grotto Grass 3": "can_cut_grass"
+    "Death Mountain Crater Grotto Grass 4": "can_cut_grass"
   gossip:
     "Death Mountain Crater Gossip Grotto": "true"
 "Death Mountain Crater Scrub Grotto":
@@ -1295,7 +1640,7 @@
   region: GERUDO_VALLEY
   time: flow
   exits:
-    "Lake Hylia": "true"
+    "Gerudo Valley Falls": "true"
     "Hyrule Field": "true"
     "Gerudo Valley After Bridge": "can_longshot || can_ride_epona || (is_adult && carpenters_rescued) || (is_child && has_hover_boots && trick(OOT_VALLEY_GATE_HOVER))"
     "Octorok Grotto": "can_lift_silver"
@@ -1317,7 +1662,7 @@
   region: GERUDO_VALLEY
   time: flow
   exits:
-    "Lake Hylia": "true"
+    "Gerudo Valley Falls": "true"
     "Gerudo Fortress Exterior": "true"
     "Gerudo Valley": "is_child || can_longshot || can_ride_epona || (is_adult && carpenters_rescued)"
     "Gerudo Valley Storms Grotto": "hidden_grotto_storms && is_adult"
@@ -1333,6 +1678,12 @@
     "Gerudo Valley": "true"
   events:
     RUPEES: "true"
+"Gerudo Valley Falls":
+  region: GERUDO_VALLEY
+  time: flow
+  exits:
+    "Lake Hylia": "true"
+    "Gerudo Valley After Bridge": "!setting(erRegions, none) && setting(erRegionsShortcuts) && is_adult"
 "Gerudo Valley Storms Grotto":
   region: ENTRANCE
   exits:
@@ -1445,6 +1796,10 @@
   locations:
     "Haunted Wasteland Chest": "has_fire"
     "Haunted Wasteland GS": "can_collect_distance"
+    "Haunted Wasteland Pot 1": "true"
+    "Haunted Wasteland Pot 2": "true"
+    "Haunted Wasteland Pot 3": "true"
+    "Haunted Wasteland Pot 4": "true"
 "Haunted Wasteland End":
   region: HAUNTED_WASTELAND
   exits:

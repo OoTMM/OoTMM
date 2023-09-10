@@ -24,7 +24,7 @@ static void EnJs_AskForFight(GameState_Play* play, u16 unk, Actor* this)
     char* start;
 
     PlayerDisplayTextBox(play, 0x21fe, this);
-    b = play->textBuffer;
+    b = play->msgCtx.font.textBuffer.schar;
     comboTextAppendHeader(&b);
     start = b;
     comboTextAppendStr(&b, "So...you'll play?" TEXT_NL TEXT_NL TEXT_COLOR_GREEN TEXT_CHOICE2 "Yes" TEXT_NL "No" TEXT_END);
@@ -64,7 +64,7 @@ static void EnJs_DisplayHint(GameState_Play* play, s16 messageId)
     /* Hint */
     EnJs_ItemQuery(&q);
     DisplayTextBox2(play, messageId);
-    b = play->textBuffer;
+    b = play->msgCtx.font.textBuffer.schar;
     comboTextAppendHeader(&b);
     start = b;
     comboTextAppendStr(&b, "You have only weak masks..." TEXT_NL "Having better masks would give you ");
@@ -80,7 +80,7 @@ static void EnJs_DisplayWeak(Actor* this, GameState_Play* play)
     char* b;
 
     DisplayTextBox2(play, 0x21ff);
-    b = play->textBuffer;
+    b = play->msgCtx.font.textBuffer.schar;
     comboTextAppendHeader(&b);
     comboTextAppendStr(&b, "You're too weak..." TEXT_SIGNAL TEXT_END);
 }

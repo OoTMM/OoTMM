@@ -10,7 +10,6 @@
 typedef struct GameState_Play GameState_Play;
 
 /* Menu */
-void comboMenuInit(void);
 void comboMenuUpdate(GameState_Play* play);
 void comboMenuDraw(GameState_Play* play);
 void comboMenuNext(void);

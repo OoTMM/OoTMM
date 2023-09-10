@@ -181,9 +181,34 @@ void EnGSwitch_DrawSilverRupee(Actor* this, GameState_Play* play)
     comboDrawGI(play, this, o.gi, 0);
 }
 
+static const Gfx kPotDrawListNormalTop[] = {
+    gsDPLoadTextureBlock(0x06001000, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, 4, 4, 0, 0),
+    gsSPEndDisplayList(),
+};
+
+static const Gfx kPotDrawListNormalSide[] = {
+    gsDPLoadTextureBlock(0x06000000, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 64, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 5, 6, 0, 0),
+    gsSPEndDisplayList(),
+};
+
+void EnGSwitch_DrawArcheryPot(Actor* this, GameState_Play* play)
+{
+    if ((*(u16*)((char*)this + 0x14a)) != 0)
+        return;
+
+    OPEN_DISPS(play->gs.gfx);
+    InitListPolyOpa(play->gs.gfx);
+    gSPSegment(POLY_OPA_DISP++, 0x0a, kPotDrawListNormalSide);
+    gSPSegment(POLY_OPA_DISP++, 0x0b, kPotDrawListNormalTop);
+    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPDisplayList(POLY_OPA_DISP++, 0x060017c0);
+    CLOSE_DISPS();
+}
+
+PATCH_FUNC(0x80a71680, EnGSwitch_DrawArcheryPot);
+
 void EnGSwitch_HandlerAfterCollected(Actor* this, GameState_Play* play)
 {
-
     if (Message_IsClosed(this, play))
     {
         UnfreezePlayer(play);
@@ -203,7 +228,7 @@ void EnGSwitch_GiveItemSilverRupee(Actor* this)
     EnGSwitch_ItemQuery(&q, this, gPlay);
     EnGSwitch_SetFlag(EnGSwitch_ID(this, gPlay));
     PlayerDisplayTextBox(gPlay, 0xb4, NULL);
-    comboAddItemEx(gPlay, &q);
+    comboAddItemEx(gPlay, &q, 1);
     SetTextFlags(0x39);
     SET_HANDLER(this, EnGSwitch_HandlerAfterCollected);
 }

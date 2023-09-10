@@ -2,7 +2,7 @@
   dungeon: Forest
   exits:
     "Sacred Meadow": "true"
-    "Forest Temple Main": "small_keys(SMALL_KEY_FOREST, 1) && (is_adult || (has_nuts || has_weapon || has_explosives || has_ranged_weapon_child))"
+    "Forest Temple Main": "small_keys_forest(1) && (is_adult || (has_nuts || has_weapon || has_explosives || has_ranged_weapon_child))"
   locations:
     "MQ Forest Temple First Room Chest": "can_hit_triggers_distance || can_hookshot || has_explosives || has_hover_boots || can_use_din || (has_weapon && (has(MAGIC_UPGRADE) || has(SHARED_MAGIC_UPGRADE)))" #Many ways to deal with the Skulltula in the way.
     "MQ Forest Temple GS Entryway": "can_collect_distance"
@@ -22,9 +22,9 @@
   dungeon: Forest
   exits:
     "Forest Temple Main": "has_weapon && soul(SOUL_STALFOS)"
-    "Forest Temple Straightened Hallway": "small_keys(SMALL_KEY_FOREST, 3) && is_adult && has(STRENGTH)"
-    "Forest Temple West Garden": "soul_floormaster && small_keys(SMALL_KEY_FOREST, 2) && is_adult && has(STRENGTH)" #This is sideways thinking, but you must have access to West Garden with 2 keys here because you cannot waste a third without access via another means.
-    "Forest Temple Twisted Hallway": "small_keys(SMALL_KEY_FOREST, 3) && is_adult && has(STRENGTH) && event(FOREST_TWIST_SWITCH)"
+    "Forest Temple Straightened Hallway": "small_keys_forest(3) && is_adult && has(STRENGTH)"
+    "Forest Temple West Garden": "soul_floormaster && small_keys_forest(2) && is_adult && has(STRENGTH)" #This is sideways thinking, but you must have access to West Garden with 2 keys here because you cannot waste a third without access via another means.
+    "Forest Temple Twisted Hallway": "small_keys_forest(3) && is_adult && has(STRENGTH) && event(FOREST_TWIST_SWITCH)"
   locations:
     "MQ Forest Temple GS Climb Room": "can_damage_skull"
 "Forest Temple Straightened Hallway":
@@ -81,11 +81,11 @@
 "Forest Temple Twisted Hallway":
   dungeon: Forest
   exits:
-    "Forest Temple Bow Region": "small_keys(SMALL_KEY_FOREST, 4)"
+    "Forest Temple Bow Region": "small_keys_forest(4)"
 "Forest Temple Bow Region":
   dungeon: Forest
   exits:
-    "Forest Temple Falling Ceiling": "soul(SOUL_STALFOS) && soul_wolfos && has_weapon && small_keys(SMALL_KEY_FOREST, 5) && (can_use_bow || can_use_din)" #Only 5 keys is safe because, if you wasted a key in falling ceiling, you can go there otherwise.
+    "Forest Temple Falling Ceiling": "soul(SOUL_STALFOS) && soul_wolfos && has_weapon && small_keys_forest(5) && (can_use_bow || can_use_din)" #Only 5 keys is safe because, if you wasted a key in falling ceiling, you can go there otherwise.
   events:
     FOREST_POE_1: "can_use_bow"
     FOREST_POE_2: "soul(SOUL_STALFOS) && soul_wolfos && can_use_bow"
@@ -97,7 +97,7 @@
 "Forest Temple Falling Ceiling":
   dungeon: Forest
   events:
-    FOREST_POE_3: "small_keys(SMALL_KEY_FOREST, 6) && can_use_bow"
+    FOREST_POE_3: "small_keys_forest(6) && can_use_bow"
   locations:
     "MQ Forest Temple Falling Ceiling Chest": "true"
     "MQ Forest Temple East Garden Ledge Chest": "true"

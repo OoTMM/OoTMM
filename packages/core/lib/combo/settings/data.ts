@@ -71,8 +71,8 @@ export const SETTINGS = [{
   description: 'The total amount of Triforce Pieces in the item pool.',
   default: 30,
   cond: (s: any) => s.goal === 'triforce',
-  min: 2,
-  max: 100
+  min: 1,
+  max: 999,
 }, {
   key: 'logic',
   name: 'Logic',
@@ -235,6 +235,28 @@ export const SETTINGS = [{
   ],
   default: 'ownDungeon'
 }, {
+  key: 'smallKeyRingOot',
+  name: 'Small Key Ring (OoT)',
+  category: 'main.shuffle',
+  type: 'enum',
+  description: 'Controls the grouping of keys into keyrings, for OoT',
+  values: [
+    { value: 'disabled', name: 'Disabled', description: 'Small keys are found individually, like in the base game.' },
+    { value: 'keyRings', name: 'Key Rings', description: 'Small keys are grouped into key rings.' },
+  ],
+  default: 'disabled'
+}, {
+  key: 'smallKeyRingMm',
+  name: 'Small Key Ring (MM)',
+  category: 'main.shuffle',
+  type: 'enum',
+  description: 'Controls the grouping of keys into keyrings, for MM',
+  values: [
+    { value: 'disabled', name: 'Disabled', description: 'Small keys are found individually, like in the base game.' },
+    { value: 'keyRings', name: 'Key Rings', description: 'Small keys are grouped into key rings.' },
+  ],
+  default: 'disabled'
+}, {
   key: 'silverRupeeShuffle',
   name: 'Silver Rupee Shuffle',
   category: 'main.shuffle',
@@ -373,6 +395,27 @@ export const SETTINGS = [{
     { value: 'anywhere', name: 'Anywhere', description: 'Owl statues are shuffled in the item pool' },
   ],
   default: 'none'
+}, {
+  key: 'shufflePotsOot',
+  name: 'Pots Shuffle (OoT)',
+  category: 'main.shuffle',
+  type: 'boolean',
+  description: 'Controls whether or not the pots are shuffled (OoT). !!!!! MQ NOT INCLUDED YET !!!!!',
+  default: false
+}, {
+  key: 'shufflePotsMm',
+  name: 'Pots Shuffle (MM)',
+  category: 'main.shuffle',
+  type: 'boolean',
+  description: 'Controls whether or not the pots are shuffled (MM).',
+  default: false
+}, {
+  key: 'shuffleGrassOot',
+  name: 'Grass Shuffle (OoT)',
+  category: 'main.shuffle',
+  type: 'boolean',
+  description: 'Controls whether or not the grass is shuffled (OoT)',
+  default: false
 }, {
   key: 'shuffleOcarinasOot',
   name: 'Ocarina Shuffle (OoT)',
@@ -559,13 +602,6 @@ export const SETTINGS = [{
   ],
   default: 'none'
 }, {
-  key: 'sunSongMm',
-  name: 'Sun\'s Song in MM',
-  category: 'main.cross',
-  type: 'boolean',
-  description: 'Enables Sun\'s Song as an item in MM.',
-  default: false
-}, {
   key: 'csmc',
   name: 'Chest Size Matches Content',
   category: 'main.misc',
@@ -707,6 +743,13 @@ export const SETTINGS = [{
   ],
   default: 'progressive'
 }, {
+  key: 'sunSongMm',
+  name: 'Sun\'s Song in MM',
+  category: 'items.extensions',
+  type: 'boolean',
+  description: 'Enables Sun\'s Song as an item in MM.',
+  default: false
+}, {
   key: 'fairyOcarinaMm',
   name: 'Fairy Ocarina in MM',
   category: 'items.extensions',
@@ -749,6 +792,20 @@ export const SETTINGS = [{
   description: 'Adds a Wallet that can hold up to 9999 rupees in each game',
   default: false,
   cond: (s: any) => s.colossalWallets,
+}, {
+  key: 'skeletonKeyOot',
+  name: 'Skeleton Key (OoT)',
+  category: 'items.extensions',
+  type: 'boolean',
+  description: 'Adds a Skeleton Key that can open every small-key-locked door.',
+  default: false,
+}, {
+  key: 'skeletonKeyMm',
+  name: 'Skeleton Key (MM)',
+  category: 'items.extensions',
+  type: 'boolean',
+  description: 'Adds a Skeleton Key that can open every small-key-locked door.',
+  default: false,
 }, {
   key: 'enemySoulsOot',
   name: 'Enemy Souls (OoT)',
@@ -828,7 +885,8 @@ export const SETTINGS = [{
   name: 'Shared Sun\'s Song',
   category: 'items.shared',
   type: 'boolean',
-  default: false
+  default: false,
+  cond: (s: any) => s.sunSongMm,
 }, {
   key: 'sharedHookshot',
   name: 'Shared Hookshots',
@@ -897,6 +955,13 @@ export const SETTINGS = [{
   default: false,
   cond: (s: any) => s.enemySoulsOot && s.enemySoulsMm,
 }, {
+  key: 'sharedSkeletonKey',
+  name: 'Shared Skeleton Key',
+  category: 'items.shared',
+  type: 'boolean',
+  default: false,
+  cond: (s: any) => s.skeletonKeyOot && s.skeletonKeyMm,
+}, {
   key: 'agelessSwords',
   name: 'Ageless Swords',
   category: 'items.ageless',
@@ -944,6 +1009,13 @@ export const SETTINGS = [{
   category: 'items.ageless',
   type: 'boolean',
   description: 'Allows Link to use the hammer independently of his age',
+  default: false
+}, {
+  key: 'agelessHookshot',
+  name: 'Ageless Hookshot',
+  category: 'items.ageless',
+  type: 'boolean',
+  description: 'Allows Link to use the hookshot independently of his age',
   default: false
 }, {
   key: 'agelessChildTrade',
@@ -1007,7 +1079,7 @@ export const SETTINGS = [{
   default: false
 }, {
   key: 'erBeneathWell',
-  name: 'Shuffle Beneath the Well with Dungeons',
+  name: 'Shuffle Beneath The Well with Dungeons',
   category: 'entrances',
   type: 'boolean',
   default: false
@@ -1034,7 +1106,21 @@ export const SETTINGS = [{
     { value: 'full', name: 'Full' },
   ],
   default: 'none',
-  description: '- Every entrance to Hyrule Field except Gerudo Valley and Market<br>- The entrance to Gerudo Fortress from Gerudo Valley<br>- The entrances to the four main regions in MM<br>- The entrance to Romani Ranch',
+  description: '- Every entrance to Hyrule Field except Gerudo Valley and Market<br>- The entrance to Gerudo Fortress from Gerudo Valley<br>- The entrance to Death Mountain from Kakariko<br>- The entrances to the four main regions in MM<br>- The entrance to Romani Ranch',
+}, {
+  key: 'erRegionsExtra',
+  name: 'Shuffle Market Entrance',
+  category: 'entrances',
+  type: 'boolean',
+  description: 'Shuffle Hyrule Field\'s Market entrance among the regions.',
+  default: false
+}, {
+  key: 'erRegionsShortcuts',
+  name: 'Shuffle Regional Shortcuts',
+  category: 'entrances',
+  type: 'boolean',
+  description: 'Shuffles the various shortcuts between regions.<br>- Lost Woods/Goron City<br>- Lost Woods/Zora\'s River<br>- Lake Hylia/Zora\'s Domain<br>- Lake Hylia/Gerudo Valley<br>- Ikana Canyon/Southern Swamp',
+  default: false
 }, {
   key: 'erIndoors',
   name: 'Shuffle Interiors',

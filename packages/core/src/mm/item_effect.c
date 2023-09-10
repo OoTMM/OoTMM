@@ -10,7 +10,7 @@ static void refillMagic(int level)
 {
     gSave.playerData.magicLevel = 0;
     gSave.playerData.magicAmount = level * 0x30;
-    gSaveContext.magicTarget = level * 0x30;
+    gSaveContext.magicFillTarget = level * 0x30;
 }
 
 static void addRupees(s16 count)
@@ -45,6 +45,28 @@ void comboAddItemSharedForeignEffect(GameState_Play* play, s16 gi)
             break;
         case GI_OOT_RUPEE_BLUE:
         case GI_OOT_TC_RUPEE_BLUE:
+        case GI_OOT_RUPEE_SILVER_DC:
+        case GI_OOT_RUPEE_SILVER_BOTW:
+        case GI_OOT_RUPEE_SILVER_SPIRIT_CHILD:
+        case GI_OOT_RUPEE_SILVER_SPIRIT_SUN:
+        case GI_OOT_RUPEE_SILVER_SPIRIT_BOULDERS:
+        case GI_OOT_RUPEE_SILVER_SPIRIT_LOBBY:
+        case GI_OOT_RUPEE_SILVER_SPIRIT_ADULT:
+        case GI_OOT_RUPEE_SILVER_SHADOW_SCYTHE:
+        case GI_OOT_RUPEE_SILVER_SHADOW_PIT:
+        case GI_OOT_RUPEE_SILVER_SHADOW_SPIKES:
+        case GI_OOT_RUPEE_SILVER_SHADOW_BLADES:
+        case GI_OOT_RUPEE_SILVER_IC_SCYTHE:
+        case GI_OOT_RUPEE_SILVER_IC_BLOCK:
+        case GI_OOT_RUPEE_SILVER_GTG_SLOPES:
+        case GI_OOT_RUPEE_SILVER_GTG_LAVA:
+        case GI_OOT_RUPEE_SILVER_GTG_WATER:
+        case GI_OOT_RUPEE_SILVER_GANON_SPIRIT:
+        case GI_OOT_RUPEE_SILVER_GANON_LIGHT:
+        case GI_OOT_RUPEE_SILVER_GANON_FIRE:
+        case GI_OOT_RUPEE_SILVER_GANON_FOREST:
+        case GI_OOT_RUPEE_SILVER_GANON_SHADOW:
+        case GI_OOT_RUPEE_SILVER_GANON_WATER:
             addRupees(5);
             break;
         case GI_OOT_RUPEE_RED:
@@ -137,6 +159,9 @@ int comboAddItemEffect(GameState_Play* play, s16 gi)
     case GI_MM_SMALL_KEY:
         count = comboAddSmallKeyMm(gSaveContext.dungeonId);
         break;
+    case GI_MM_KEY_RING:
+        comboAddKeyRingMm(gSaveContext.dungeonId);
+        break;
     case GI_MM_BOSS_KEY:
         comboAddBossKeyMm(gSaveContext.dungeonId);
         break;
@@ -154,6 +179,7 @@ int comboAddItemEffect(GameState_Play* play, s16 gi)
     case GI_MM_MILK:
     case GI_MM_CHATEAU:
     case GI_MM_OCARINA_OF_TIME:
+    case GI_MM_FAIRY:
         reloadIconsC(play);
         break;
     case GI_MM_HOOKSHOT:

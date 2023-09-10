@@ -6,10 +6,11 @@ import { Game } from '../config';
 import { Monitor } from '../monitor';
 import { Pathfinder } from './pathfind';
 import { ItemPlacement } from './solve';
-import { Location, isLocationChestFairy, isLocationOtherFairy, locationData, makeLocation } from './locations';
+import { Location, locationData, makeLocation } from './locations';
 import { Region, makeRegion } from './regions';
 import { CountMap, countMapArray } from '../util';
 import { ItemGroups, ItemHelpers, Items, ItemsCount, PlayerItem, itemByID, makePlayerItem } from '../items';
+import { isDungeonStrayFairy } from '../items/helpers';
 
 const FIXED_HINTS_LOCATIONS = [
   'OOT Skulltula House 10 Tokens',
@@ -223,15 +224,15 @@ export class LogicPassHints {
     }
 
     /* Non-shuffled hideout keys */
-    if (ItemHelpers.isSmallKeyHideout(item.item) && this.state.settings.smallKeyShuffleHideout !== 'anywhere') {
+    if ((ItemHelpers.isSmallKeyHideout(item.item) || ItemHelpers.isKeyRingHideout(item.item)) && this.state.settings.smallKeyShuffleHideout !== 'anywhere') {
       return false;
     }
 
     /* Non-shuffled regular keys */
-    if (ItemHelpers.isSmallKeyRegularOot(item.item) && this.state.settings.smallKeyShuffleOot !== 'anywhere') {
+    if ((ItemHelpers.isSmallKeyRegularOot(item.item) || ItemHelpers.isKeyRingRegularOot(item.item)) && this.state.settings.smallKeyShuffleOot !== 'anywhere') {
       return false;
     }
-    if (ItemHelpers.isSmallKeyRegularMm(item.item) && this.state.settings.smallKeyShuffleMm !== 'anywhere') {
+    if ((ItemHelpers.isSmallKeyRegularMm(item.item) || ItemHelpers.isKeyRingRegularMm(item.item)) && this.state.settings.smallKeyShuffleMm !== 'anywhere') {
       return false;
     }
 
@@ -259,13 +260,8 @@ export class LogicPassHints {
       return false;
     }
 
-    /* Non shuffled chest stray fairy */
-    if (isLocationChestFairy(world, loc) && this.state.settings.strayFairyChestShuffle !== 'anywhere') {
-      return false;
-    }
-
-    /* Non shuffled other stray fairy */
-    if (isLocationOtherFairy(world, loc) && this.state.settings.strayFairyOtherShuffle !== 'anywhere') {
+    /* Non shuffled dungeon stray fairy */
+    if (isDungeonStrayFairy(item.item) && this.state.settings.strayFairyChestShuffle !== 'anywhere' && this.state.settings.strayFairyOtherShuffle !== 'anywhere') {
       return false;
     }
 
@@ -526,11 +522,12 @@ export class LogicPassHints {
       return false;
     }
     const locD = locationData(location);
+    const locWorld = this.state.worlds[locD.world as number];
     if (this.hintedLocations.has(location) && !isMoon) {
       return false;
     }
     const item = this.state.items.get(location)!;
-    const hint = world.checks[locD.id].hint;
+    const hint = locWorld.checks[locD.id].hint;
     if (this.placeGossipItemExact(worldId, locD.world as number, hint, extra, isMoon)) {
       return true;
     }
@@ -549,7 +546,7 @@ export class LogicPassHints {
       return false;
     }
     this.hintedLocations.add(location);
-    const h: HintGossip = { game: world.gossip[gossip].game, type: 'item-region', item, region: makeRegion(world.regions[locD.id], locD.world as number) };
+    const h: HintGossip = { game: world.gossip[gossip].game, type: 'item-region', item, region: makeRegion(locWorld.regions[locD.id], locD.world as number) };
     this.placeWithExtra(worldId, gossip, h, extra);
     return true;
   }

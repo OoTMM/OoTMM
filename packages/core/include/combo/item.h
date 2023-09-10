@@ -10,9 +10,10 @@ typedef struct ComboItemQuery
 {
     s16 gi;
     s16 giRenew;
-    s16 ovType;
-    int ovFlags;
+    u16 ovFlags;
+    u8  ovType;
     u8  sceneId;
+    u8  roomId;
     u8  id;
     u8  from;
 }
@@ -61,10 +62,14 @@ int  comboAddItemEffect(GameState_Play* play, s16 gi);
 void comboAddItemSharedForeignEffect(GameState_Play* play, s16 gi);
 
 int  comboAddSmallKeyOot(u16 dungeonId);
+void comboAddKeyRingOot(u16 dungeonId);
+void comboAddSkeletonKeyOot(void);
 void comboAddBossKeyOot(u16 dungeonId);
 void comboAddCompassOot(u16 dungeonId);
 void comboAddMapOot(u16 dungeonId);
 int  comboAddSmallKeyMm(u16 dungeonId);
+void comboAddKeyRingMm(u16 dungeonId);
+void comboAddSkeletonKeyMm(void);
 void comboAddBossKeyMm(u16 dungeonId);
 int  comboAddStrayFairyMm(u16 dungeonId);
 void comboAddMapMm(u16 dungeonId);
@@ -93,7 +98,7 @@ void comboAddCommonItemMm(int sid, int noEffect);
 int  comboAddItem(GameState_Play* play, s16 gi);
 int  comboAddItemNoEffect(s16 gi);
 
-int comboAddItemEx(GameState_Play* play, const ComboItemQuery* q);
+int comboAddItemEx(GameState_Play* play, const ComboItemQuery* q, int updateText);
 
 int isItemLicensed(s16 gi);
 int isItemFastBuy(s16 gi);
@@ -102,7 +107,7 @@ int isItemBuyable(s16 gi);
 int comboItemPrecondEx(const ComboItemQuery* q, s16 price);
 s16 comboRenewable(s16 gi, s16 def);
 
-#define ITEM_QUERY_INIT { 0, 0, OV_NONE, 0, 0, 0 }
+#define ITEM_QUERY_INIT { 0 }
 
 void comboGiveItem(Actor* actor, GameState_Play* play, const ComboItemQuery* q, float a, float b);
 void comboGiveItemNpc(Actor* actor, GameState_Play* play, s16 gi, int npcId, float a, float b);
@@ -110,3 +115,5 @@ void comboGiveItemNpcEx(Actor* actor, GameState_Play* play, s16 gi, int npcId, i
 void comboItemOverride(ComboItemOverride* dst, const ComboItemQuery* q);
 
 #endif
+
+u8 comboSceneKey(u8 sceneId);

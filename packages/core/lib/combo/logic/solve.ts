@@ -1,6 +1,5 @@
-import { GAMES } from '../config';
 import { Random, sample, shuffle } from '../random';
-import { countMapArray, countMapCombine, countMapRemove, gameId } from '../util';
+import { countMapArray, countMapCombine, countMapRemove } from '../util';
 import { Pathfinder, PathfinderState } from './pathfind';
 import { World } from './world';
 import { LogicError, LogicSeedError } from './error';
@@ -39,24 +38,28 @@ const DUNGEON_ITEMS = {
   ],
   Forest: [
     Items.OOT_SMALL_KEY_FOREST,
+    Items.OOT_KEY_RING_FOREST,
     Items.OOT_BOSS_KEY_FOREST,
     Items.OOT_MAP_FOREST,
     Items.OOT_COMPASS_FOREST
   ],
   Fire: [
     Items.OOT_SMALL_KEY_FIRE,
+    Items.OOT_KEY_RING_FIRE,
     Items.OOT_BOSS_KEY_FIRE,
     Items.OOT_MAP_FIRE,
     Items.OOT_COMPASS_FIRE
   ],
   Water: [
     Items.OOT_SMALL_KEY_WATER,
+    Items.OOT_KEY_RING_WATER,
     Items.OOT_BOSS_KEY_WATER,
     Items.OOT_MAP_WATER,
     Items.OOT_COMPASS_WATER
   ],
   Shadow: [
     Items.OOT_SMALL_KEY_SHADOW,
+    Items.OOT_KEY_RING_SHADOW,
     Items.OOT_RUPEE_SILVER_SHADOW_BLADES,
     Items.OOT_RUPEE_SILVER_SHADOW_PIT,
     Items.OOT_RUPEE_SILVER_SHADOW_SCYTHE,
@@ -67,6 +70,7 @@ const DUNGEON_ITEMS = {
   ],
   Spirit: [
     Items.OOT_SMALL_KEY_SPIRIT,
+    Items.OOT_KEY_RING_SPIRIT,
     Items.OOT_RUPEE_SILVER_SPIRIT_ADULT,
     Items.OOT_RUPEE_SILVER_SPIRIT_CHILD,
     Items.OOT_RUPEE_SILVER_SPIRIT_LOBBY,
@@ -78,6 +82,7 @@ const DUNGEON_ITEMS = {
   ],
   BotW: [
     Items.OOT_SMALL_KEY_BOTW,
+    Items.OOT_KEY_RING_BOTW,
     Items.OOT_RUPEE_SILVER_BOTW,
     Items.OOT_MAP_BOTW,
     Items.OOT_COMPASS_BOTW
@@ -89,16 +94,19 @@ const DUNGEON_ITEMS = {
     Items.OOT_COMPASS_IC
   ],
   GF: [
-    Items.OOT_SMALL_KEY_GF
+    Items.OOT_SMALL_KEY_GF,
+    Items.OOT_KEY_RING_GF
   ],
   GTG: [
     Items.OOT_SMALL_KEY_GTG,
+    Items.OOT_KEY_RING_GTG,
     Items.OOT_RUPEE_SILVER_GTG_SLOPES,
     Items.OOT_RUPEE_SILVER_GTG_LAVA,
     Items.OOT_RUPEE_SILVER_GTG_WATER,
   ],
   Ganon: [
     Items.OOT_SMALL_KEY_GANON,
+    Items.OOT_KEY_RING_GANON,
     Items.OOT_RUPEE_SILVER_GANON_LIGHT,
     Items.OOT_RUPEE_SILVER_GANON_FOREST,
     Items.OOT_RUPEE_SILVER_GANON_FIRE,
@@ -109,6 +117,7 @@ const DUNGEON_ITEMS = {
   ],
   WF: [
     Items.MM_SMALL_KEY_WF,
+    Items.MM_KEY_RING_WF,
     Items.MM_BOSS_KEY_WF,
     Items.MM_STRAY_FAIRY_WF,
     Items.MM_MAP_WF,
@@ -116,6 +125,7 @@ const DUNGEON_ITEMS = {
   ],
   SH: [
     Items.MM_SMALL_KEY_SH,
+    Items.MM_KEY_RING_SH,
     Items.MM_BOSS_KEY_SH,
     Items.MM_STRAY_FAIRY_SH,
     Items.MM_MAP_SH,
@@ -123,6 +133,7 @@ const DUNGEON_ITEMS = {
   ],
   GB: [
     Items.MM_SMALL_KEY_GB,
+    Items.MM_KEY_RING_GB,
     Items.MM_BOSS_KEY_GB,
     Items.MM_STRAY_FAIRY_GB,
     Items.MM_MAP_GB,
@@ -130,6 +141,7 @@ const DUNGEON_ITEMS = {
   ],
   ST: [
     Items.MM_SMALL_KEY_ST,
+    Items.MM_KEY_RING_ST,
     Items.MM_BOSS_KEY_ST,
     Items.MM_STRAY_FAIRY_ST,
     Items.MM_MAP_ST,
@@ -249,6 +261,7 @@ export class LogicPassSolver {
         cb();
         return;
       } catch (e) {
+        this.monitor.debug((e as Error).stack!);
         if ((e instanceof LogicError) && this.attempts < this.attemptsMax) {
           this.attempts++;
           this.state = cloneState(stateBackup);
@@ -517,11 +530,11 @@ export class LogicPassSolver {
         const playerItem = makePlayerItem(item, player);
         const locations = new Set([...locationIds].map(x => makeLocation(x, player)));
 
-        if (ItemHelpers.isSmallKeyHideout(item) && settings.smallKeyShuffleHideout === 'anywhere') {
+        if ((ItemHelpers.isSmallKeyHideout(item) || ItemHelpers.isKeyRingHideout(item)) && settings.smallKeyShuffleHideout === 'anywhere') {
           continue;
-        } else if (ItemHelpers.isSmallKeyRegularOot(item) && settings.smallKeyShuffleOot === 'anywhere') {
+        } else if ((ItemHelpers.isSmallKeyRegularOot(item) || ItemHelpers.isKeyRingRegularOot(item)) && settings.smallKeyShuffleOot === 'anywhere') {
           continue;
-        } else if (ItemHelpers.isSmallKeyRegularMm(item) && settings.smallKeyShuffleMm === 'anywhere') {
+        } else if ((ItemHelpers.isSmallKeyRegularMm(item) || ItemHelpers.isKeyRingRegularMm(item)) && settings.smallKeyShuffleMm === 'anywhere') {
           continue;
         } else if (ItemHelpers.isGanonBossKey(item) && settings.ganonBossKey === 'anywhere') {
           continue;
@@ -722,8 +735,7 @@ export class LogicPassSolver {
     }
 
     if (this.input.settings.logic === 'allLocations' && ItemHelpers.isItemCriticalRenewable(item.item) && !this.state.criticalRenewables.has(item)) {
-      const world = this.input.worlds[item.player];
-      unplacedLocs = unplacedLocs.filter(x => isLocationRenewable(world, x));
+      unplacedLocs = unplacedLocs.filter(x => isLocationRenewable(this.input.worlds[locationData(x).world as number], x));
     }
 
     if (unplacedLocs.length === 0) {
@@ -771,8 +783,7 @@ export class LogicPassSolver {
 
         /* If the item is a critical renewable and it's all locations, ensure it lands correctly */
         if (this.input.settings.logic === 'allLocations' && ItemHelpers.isItemCriticalRenewable(requiredItem.item) && !this.state.criticalRenewables.has(requiredItem)) {
-          const world = this.input.worlds[requiredItem.player];
-          unplacedLocs = unplacedLocs.filter(x => isLocationRenewable(world, x));
+          unplacedLocs = unplacedLocs.filter(x => isLocationRenewable(this.input.worlds[locationData(x).world as number], x));
         }
 
         /* If there is nowhere to place an item, raise an error */

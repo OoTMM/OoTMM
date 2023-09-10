@@ -34,7 +34,8 @@ const OOT_REGION_NAMES: {[k: string]: string} = {
   'OOT_ICE_CAVERN': 'Ice Cavern',
   'OOT_THIEVES_HIDEOUT': 'Thieves\' Hideout',
   'OOT_GERUDO_TRAINING_GROUNDS': 'Gerudo\'s Training Ground',
-  'OOT_GANON_CASTLE': 'Ganon\'s Castle'
+  'OOT_GANON_CASTLE': 'Ganon\'s Castle',
+  'OOT_EGGS': 'Inside Eggs',
 }
 const MM_REGION_NAMES: {[k: string]: string} = {
   'MM_CLOCK_TOWN_SOUTH': 'South Clock Town',
@@ -73,7 +74,7 @@ const MM_REGION_NAMES: {[k: string]: string} = {
   'MM_PIRATE_FORTRESS_SEWERS': 'Pirates\' Fortress Sewers',
   'MM_PIRATE_FORTRESS_INTERIOR': 'Pirates\' Fortress Interior',
   'MM_IKANA_CASTLE': 'Ikana Castle',
-  'MM_BENEATH_THE_WELL': 'Beneath the Well',
+  'MM_BENEATH_THE_WELL': 'Beneath The Well',
   'MM_SECRET_SHRINE': 'Secret Shrine',
   'MM_MOON': 'The Moon',
   'MM_SPIDER_HOUSE_SWAMP': 'Swamp Spider House',

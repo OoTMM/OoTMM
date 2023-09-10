@@ -4,6 +4,14 @@
 #if !defined(__ASSEMBLER__)
 # include <combo/oot/save.h>
 # include <combo/mm/save.h>
+# if defined(GAME_OOT)
+typedef OotCustomSave CustomSave;
+# define CUSTOM_SAVE_OFFSET 0
+# else
+typedef MmCustomSave CustomSave;
+# define CUSTOM_SAVE_OFFSET ((sizeof(OotCustomSave) + 15) & 0xffffff0)
+# endif
+extern CustomSave gCustomSave;
 #endif
 
 #define SAVE_OFFSET_MM_1            0x08000
@@ -64,5 +72,6 @@ MiscFlags;
 #define gOotSouls2                  SAVE_EXTRA_RECORD(u32,              29)
 #define gMmSouls1                   SAVE_EXTRA_RECORD(u32,              30)
 #define gMmSouls2                   SAVE_EXTRA_RECORD(u32,              31)
+#define gTriforceCount              SAVE_EXTRA_RECORD(u32,              32)
 
 #endif

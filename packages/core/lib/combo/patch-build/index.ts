@@ -48,12 +48,16 @@ function asmPatchGroups(settings: Settings) {
     OOT_AGELESS_STICKS: settings.agelessSticks,
     OOT_AGELESS_BOOMERANG: settings.agelessBoomerang,
     OOT_AGELESS_HAMMER: settings.agelessHammer,
+    OOT_AGELESS_HOOKSHOT: settings.agelessHookshot,
     OOT_AGELESS_CHILD_TRADE: settings.agelessChildTrade,
     OOT_BLUE_FIRE_ARROWS: settings.blueFireArrows,
     ER: isEntranceShuffle(settings),
     DEFAULT_HOLD: settings.defaultHoldTarget,
     OOT_SILVER_RUPEE_SHUFFLE: settings.silverRupeeShuffle !== 'vanilla',
     OOT_FREE_SCARECROW: settings.freeScarecrowOot,
+    OOT_SHUFFLE_POTS: settings.shufflePotsOot,
+    MM_SHUFFLE_POTS: settings.shufflePotsMm,
+    OOT_SHUFFLE_GRASS: settings.shuffleGrassOot,
   };
   const keys = Object.keys(groups) as PatchGroup[];
   return keys.filter((k) => groups[k]);
@@ -72,8 +76,8 @@ export function buildPatchfiles(args: BuildPatchfileIn): Patchfile[] {
 
     /* Pack the payload */
     const payload = args.build[game].payload;
-    if (payload.length > 0x40000) {
-      throw new Error("Payload too large");
+    if (payload.length > (game === 'mm' ? 0x40000 : 0x40000)) {
+      throw new Error(`Payload too large ${game}`);
     }
     file.addNewFile(game === 'oot' ? 0xf0000000 : 0xf0100000, payload, false);
   }

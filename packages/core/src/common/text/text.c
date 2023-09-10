@@ -101,7 +101,7 @@ const RegionName kRegionNamesMm[] = {
     { "in",         TEXT_COLOR_PINK "Ikana's Graveyard" },
     { "in",         TEXT_COLOR_ORANGE "Ikana Canyon" },
     { "in",         "the " TEXT_COLOR_ORANGE "Ancient Castle of Ikana" },
-    { "somewhere",  TEXT_COLOR_PINK "Beneath the Well" },
+    { "somewhere",  TEXT_COLOR_PINK "Beneath The Well" },
     { "in",         "a " TEXT_COLOR_YELLOW "Secret Shrine" },
     { "on",         "the " TEXT_COLOR_ORANGE "Stone Tower" },
     { "on",         "the " TEXT_COLOR_RED "Moon" },
@@ -139,7 +139,7 @@ static const char* const kCheckNamesMm[] = {
     "the " TEXT_COLOR_BLUE "Fisherman's Game",
     TEXT_COLOR_ORANGE "Igos du Ikana",
     "the " TEXT_COLOR_YELLOW "Secret Shrine Wart and Final Chest",
-    "the " TEXT_COLOR_PINK "Cow beneath the Well",
+    "the " TEXT_COLOR_PINK "Cow Beneath The Well",
     "the " TEXT_COLOR_RED "Blacksmith",
     "the " TEXT_COLOR_PINK "Midnight Meeting",
     TEXT_COLOR_BLUE "Madame Aroma in the Bar",
@@ -249,6 +249,8 @@ static int isItemAmbiguousOot(s16 gi)
     case GI_OOT_SOUL_FLYING_POT:
     case GI_OOT_SOUL_FLOORMASTER:
         return !comboConfig(CFG_SHARED_SOULS);
+    case GI_OOT_SKELETON_KEY:
+        return !comboConfig(CFG_SHARED_SKELETON_KEY);
     case GI_OOT_BOMBCHU_10:
     case GI_OOT_MAGIC_BEAN:
     case GI_OOT_BOTTLE_EMPTY:
@@ -372,6 +374,8 @@ static int isItemAmbiguousMm(s16 gi)
     case GI_MM_SOUL_FLYING_POT:
     case GI_MM_SOUL_FLOORMASTER:
         return !comboConfig(CFG_SHARED_SOULS);
+    case GI_MM_SKELETON_KEY:
+        return !comboConfig(CFG_SHARED_SKELETON_KEY);
     case GI_MM_BOMBCHU:
     case GI_MM_MAGIC_BEAN:
     case GI_MM_BOTTLE_POTION_RED:
@@ -807,7 +811,7 @@ void comboTextHijackItemShop(GameState_Play* play, const ComboItemOverride* o, s
 #if defined(GAME_OOT)
     b = play->msgCtx.textBuffer;
 #else
-    b = play->textBuffer;
+    b = play->msgCtx.font.textBuffer.schar;
 #endif
 
     comboTextAppendShopHeader(&b, price);
@@ -856,7 +860,7 @@ void comboTextHijackDungeonRewardHints(GameState_Play* play, int hint)
     char* b;
 
     ih = &gComboData.hints.dungeonRewards[9 + hint];
-    b = play->textBuffer;
+    b = play->msgCtx.font.textBuffer.schar;
     appendBossRewardHeader(&b, 0x55 + hint);
     comboTextAppendRegionName(&b, ih->region, ih->world, TF_PREPOS | TF_CAPITALIZE);
     comboTextAppendStr(&b, "...");
@@ -888,7 +892,7 @@ void comboTextHijackOathToOrder(GameState_Play* play)
     char* b;
     char* start;
 
-    b = play->textBuffer;
+    b = play->msgCtx.font.textBuffer.schar;
     comboTextAppendHeader(&b);
     start = b;
     comboTextAppendStr(&b,
@@ -919,7 +923,7 @@ void comboTextMessageCantBuy(GameState_Play* play, int flags)
 #if defined(GAME_OOT)
     b = play->msgCtx.textBuffer;
 #else
-    b = play->textBuffer;
+    b = play->msgCtx.font.textBuffer.schar;
 #endif
 
     comboTextAppendHeader(&b);

@@ -253,7 +253,8 @@ typedef struct {
     /* 0x40 */ OSMesg      loadMsg;
 } ObjectStatus; // size = 0x44
 
-typedef struct {
+typedef struct ObjectContext
+{
     /* 0x0000 */ void*  spaceStart;
     /* 0x0004 */ void*  spaceEnd; // original name: "endSegment"
     /* 0x0008 */ u8     num; // number of objects in bank
@@ -261,9 +262,20 @@ typedef struct {
     /* 0x000A */ u8     mainKeepIndex; // "gameplay_keep" index in bank
     /* 0x000B */ u8     subKeepIndex; // "gameplay_field_keep" or "gameplay_dangeon_keep" index in bank
     /* 0x000C */ ObjectStatus status[OBJECT_EXCHANGE_BANK_MAX];
-} ObjectContext; // size = 0x518
+}
+ObjectContext; // size = 0x518
 
 _Static_assert(sizeof(ObjectContext) == 0x518, "ObjectContext size is wrong");
+
+typedef struct {
+    /* 0x000 */ char unk_000[0xb];
+    /* 0x00c */ ActorList actors[12];
+    /* 0x06c */ char unk_06c[0xd4];
+}
+ActorContext;
+
+ASSERT_OFFSET(ActorContext, actors, 0x00c);
+_Static_assert(sizeof(ActorContext) == 0x140, "OOT ActorContext size is wrong");
 
 #define TRANS_TYPE_NONE     0x00
 #define TRANS_TYPE_NORMAL   0x14
@@ -278,23 +290,25 @@ typedef struct GameState_Play
 {
     GameState           gs;
     u16                 sceneId;
-    char                unk_000a6[0x1b8a];
-    ActorList           actors[12];
-    char                unk_01c90[0x00d4];
+    char                unk_000a6[0xa];
+    void*               sceneSegment;
+    char                unk_000b4[0x1b6e];
+    ActorContext        actorCtx;
     CutsceneContext     cutscene;
     char                unk_1d94[0x344];
     MessageContext      msgCtx;
     InterfaceContext    interfaceCtx;
     PauseContext        pauseCtx;
     char                unk_10a14[0xd90];
-    /* 0x117A4 */ ObjectContext objectCtx;
+    ObjectContext       objectCtx;
     RoomContext         roomCtx;
     TransitionContext   transition;
     char                unk_11e60[0x6b8];
 }
 GameState_Play;
 
-ASSERT_OFFSET(GameState_Play, cutscene,             0x1d64);
+ASSERT_OFFSET(GameState_Play, sceneSegment,         0x000b0);
+ASSERT_OFFSET(GameState_Play, cutscene,             0x01d64);
 ASSERT_OFFSET(GameState_Play, roomCtx,              0x11cbc);
 ASSERT_OFFSET(GameState_Play, transition,           0x11d30);
 ASSERT_OFFSET(GameState_Play, transition.type,      0x11e15);

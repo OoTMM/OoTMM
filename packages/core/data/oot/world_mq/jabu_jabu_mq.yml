@@ -33,8 +33,8 @@
   exits:
     "Jabu-Jabu Main": "true"
   events:
-    "JABU_TENTACLE_BLUE": "((can_use_sticks && soul_like_like && can_use_slingshot) || has_fire) && can_boomerang"
-    "JABU_TENTACLE_RED": "can_boomerang"
+    "JABU_TENTACLE_BLUE": "((can_use_sticks && soul_like_like && can_use_slingshot) || has_fire) && can_boomerang && soul(SOUL_PARASITE)"
+    "JABU_TENTACLE_RED": "can_boomerang && soul(SOUL_PARASITE)"
     "JABU_TENTACLE_GREEN": "event(JABU_TENTACLE_BLUE)"
   locations:
     "MQ Jabu-Jabu Back Chest": "soul_like_like && can_use_slingshot"

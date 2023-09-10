@@ -47,7 +47,7 @@ void EnZot_DisplayBeaverHint(Actor* this, GameState_Play* play)
     EnZot_BeaverItemQuery(&q1, 0, 0);
     EnZot_BeaverItemQuery(&q2, 1, 0);
     PlayerDisplayTextBox(play, 0x1260, this);
-    b = play->textBuffer;
+    b = play->msgCtx.font.textBuffer.schar;
     comboTextAppendHeader(&b);
     start = b;
     comboTextAppendStr(&b, "I've heared that the beavers are betting ");

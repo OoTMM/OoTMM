@@ -7,7 +7,7 @@ import { FileSelect } from './FileSelect';
 import { Group } from './Group';
 import { Text } from './Text';
 
-const COLOR_OPTIONS: { name: string, value: string}[] = [{ value: 'random', name: 'Random' }, ...Object.entries(COLORS).map(([key, x]) => ({ name: x.name, value: key }))];
+const COLOR_OPTIONS: { name: string, value: string}[] = [{ value: 'default', name: 'Default' }, { value: 'auto', name: 'Auto' }, { value: 'random', name: 'Random' }, ...Object.entries(COLORS).map(([key, x]) => ({ name: x.name, value: key }))];
 
 function Cosmetic({ cosmetic }: { cosmetic: keyof Cosmetics }) {
   const [cosmetics, setCosmetics] = useCosmetics();

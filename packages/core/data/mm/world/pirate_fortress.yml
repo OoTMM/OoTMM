@@ -32,6 +32,8 @@
     "Pirate Fortress Sewers Chest 2": "has_mask_zora"
     "Pirate Fortress Sewers Chest 3": "has_mask_zora"
     "Pirate Fortress Sewers HP": "has_mask_zora"
+    "Pirate Fortress Sewers Pot Heart Piece Room 1": "has_mask_zora"
+    "Pirate Fortress Sewers Pot Heart Piece Room 2": "has_mask_zora"
 "Pirate Fortress Sewers End":
   region: PIRATE_FORTRESS_SEWERS
   events:
@@ -41,6 +43,12 @@
   exits:
     "Pirate Fortress Entrance": "has_mask_zora"
     "Pirate Fortress Entrance Balcony": "true"
+  locations:
+    "Pirate Fortress Sewers Pot End 1": "true"
+    "Pirate Fortress Sewers Pot End 2": "true"
+    "Pirate Fortress Sewers Pot End 3": "true"
+    "Pirate Fortress Sewers Pot Waterway 1": "has_mask_zora"
+    "Pirate Fortress Sewers Pot Waterway 2": "has_mask_zora"
 "Pirate Fortress Interior":
   region: PIRATE_FORTRESS_INTERIOR
   events:
@@ -61,6 +69,9 @@
   events:
     FORTRESS_BEEHIVE: "has_arrows || can_use_deku_bubble"
     ARROWS: "true"
+  locations:
+    "Pirate Fortress Interior Pot Beehive 1": "true"
+    "Pirate Fortress Interior Pot Beehive 2": "true"
 "Pirate Fortress Hookshot Room Lower":
   region: PIRATE_FORTRESS_INTERIOR
   exits:
@@ -95,6 +106,10 @@
     ZORA_EGGS_BARREL_MAZE: "can_hookshot_short && has_mask_zora && has_bottle"
     ARROWS: "true"
     RUPEES: "true"
+  locations:
+    "Pirate Fortress Interior Pot Barrel Maze 1": "true"
+    "Pirate Fortress Interior Pot Barrel Maze 2": "true"
+    "Pirate Fortress Interior Pot Barrel Maze 3": "true"
 "Pirate Fortress Barrel Maze Exit":
   region: PIRATE_FORTRESS_INTERIOR
   exits:
@@ -121,6 +136,9 @@
     ARROWS: "true"
   locations:
     "Pirate Fortress Interior Aquarium": "has_mask_zora && can_hookshot_short"
+    "Pirate Fortress Interior Pot Chest Aquarium 1": "true"
+    "Pirate Fortress Interior Pot Chest Aquarium 2": "true"
+    "Pirate Fortress Interior Pot Chest Aquarium 3": "true"
 "Pirate Fortress Lone Guard Exit":
   region: PIRATE_FORTRESS_INTERIOR
   exits:
@@ -146,6 +164,9 @@
   events:
     ZORA_EGGS_TREASURE_ROOM: "can_hookshot_short && has_mask_zora && has_bottle"
     ARROWS: "true"
+  locations:
+    "Pirate Fortress Interior Pot Guarded 1": "true"
+    "Pirate Fortress Interior Pot Guarded 2": "true"
 "Pirate Fortress Treasure Room Exit":
   region: PIRATE_FORTRESS_INTERIOR
   exits:

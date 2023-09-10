@@ -300,7 +300,7 @@ export class LogicPassSpoiler {
     this.writeSectionHeader();
     this.indent(`Location List (${allLocsCount})`);
     for (let i = 0; i < this.state.settings.players; ++i) {
-      if (this.isMulti) this.indent(`World ${i+1}`);
+      if (this.isMulti) this.indent(`World ${i+1} (${worlds[i].locations.size})`);
       const world = worlds[i];
       const regionNames = new Set(Object.values(world.regions));
       const dungeonLocations = Object.values(world.dungeons).reduce((acc, x) => new Set([...acc, ...x]));
@@ -326,9 +326,9 @@ export class LogicPassSpoiler {
     this.indent('Spheres');
     for (const i in spheres) {
       this.indent(`Sphere ${i}`);
-      const sphere = spheres[i];
+      const sphere = spheres[i].map(x => `${this.locationName(x)}: ${this.itemName(this.state.items.get(x)!)}`).sort();
       for (const loc of sphere) {
-        this.write(`${this.locationName(loc)}: ${this.itemName(this.state.items.get(loc)!)}`);
+        this.write(loc);
       }
       this.unindent('');
     }

@@ -239,6 +239,7 @@ void hookPlay_Init(GameState_Play* play)
 
     /* Init */
     gActorCustomTriggers = NULL;
+    g.customItemsList = NULL;
 
     /* Register play */
     gPlay = play;
@@ -309,6 +310,7 @@ void hookPlay_Init(GameState_Play* play)
         endGame();
     }
 
+    comboCacheClear();
     comboObjectsReset();
     debugCheat(play);
     eventFixes(play);
@@ -359,6 +361,7 @@ void hookPlay_Init(GameState_Play* play)
 
 void Play_DrawWrapper(GameState_Play* play)
 {
+    comboCacheGarbageCollect();
     comboObjectsGC();
     Play_Draw(play);
 

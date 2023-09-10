@@ -85,3 +85,41 @@ PATCH_END
 PATCH_START 0x80853520
 .int 0
 PATCH_END
+
+ChildHookHand:
+  lw   a0,(gSaveContext+0x04)
+  beqz a0,ChildHookHand_End
+   nop
+  la t7,kDListEmpty
+  sw t7,0(a2)
+
+ChildHookHand_End:
+  li         v0,0
+  lw         ra,0x1c(sp)
+  addiu      sp,0x20
+  jr         ra
+   nop
+
+/* Use a dummy dlist as child for hook hand */
+PATCH_START 0x8007ae90
+  j ChildHookHand
+PATCH_END
+
+ChildHookAim:
+  /* Replaced code */
+  lw   a0,(gSaveContext+0x04)
+  beqz a0,ChildHookAim_End
+   nop
+  la t3,kDListEmpty
+
+ChildHookAim_End:
+  sw  t3,0x4(v1)
+  sw  t2,0x0(v1)
+  jr  ra
+   nop
+
+/* Use a dummy dlist as child for hook aim */
+PATCH_START 0x8007b714
+  jal ChildHookAim
+   nop
+PATCH_END

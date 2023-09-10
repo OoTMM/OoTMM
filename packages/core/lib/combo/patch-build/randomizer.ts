@@ -2,16 +2,16 @@ import { Buffer } from 'buffer';
 
 import { LogicResult } from '../logic';
 import { DATA_GI, DATA_NPC, DATA_SCENES, DATA_REGIONS, DATA_HINTS_POOL, DATA_HINTS, DATA_ENTRANCES } from '../data';
-import { Game, GAMES } from "../config";
+import { Game } from "../config";
 import { WorldCheck } from '../logic/world';
 import { DUNGEONS, Settings, SPECIAL_CONDS, SPECIAL_CONDS_KEYS } from '../settings';
 import { HintGossip, WorldHints } from '../logic/hints';
-import { CountMap, countMapAdd, gameId, toU16Buffer, toU32Buffer, toU8Buffer } from '../util';
+import { countMapAdd, gameId, padBuffer16, toU16Buffer, toU32Buffer, toU8Buffer } from '../util';
 import { Patchfile } from './patchfile';
-import { LOCATIONS_ZELDA, isLocationChestFairy, isLocationOtherFairy, makeLocation, makePlayerLocations } from '../logic/locations';
+import { LOCATIONS_ZELDA, makeLocation, makePlayerLocations } from '../logic/locations';
 import { CONFVARS_VALUES, Confvar } from '../confvars';
 import { Region, regionData } from '../logic/regions';
-import { Item, ItemGroups, ItemHelpers, Items, ItemsCount, itemByID } from '../items';
+import { Item, ItemGroups, ItemHelpers, Items, ItemsCount } from '../items';
 import { SharedItemGroups } from '../logic/shared';
 
 const DUNGEON_REWARD_LOCATIONS = [
@@ -159,10 +159,16 @@ const gi = (settings: Settings, game: Game, item: Item, generic: boolean) => {
   if (generic) {
     if (ItemHelpers.isSmallKeyHideout(item) && settings.smallKeyShuffleHideout !== 'anywhere') {
       itemId = gameId(game, 'SMALL_KEY', '_');
+    } else if (ItemHelpers.isKeyRingHideout(item) && settings.smallKeyShuffleHideout !== 'anywhere') {
+      itemId = gameId(game, 'KEY_RING', '_');
     } else if (ItemHelpers.isSmallKeyRegularOot(item) && settings.smallKeyShuffleOot === 'ownDungeon' && settings.erBoss === 'none') {
       itemId = gameId(game, 'SMALL_KEY', '_');
+    } else if (ItemHelpers.isKeyRingRegularOot(item) && settings.smallKeyShuffleOot === 'ownDungeon' && settings.erBoss === 'none') {
+      itemId = gameId(game, 'KEY_RING', '_');
     } else if (ItemHelpers.isSmallKeyRegularMm(item) && settings.smallKeyShuffleMm === 'ownDungeon' && settings.erBoss === 'none') {
       itemId = gameId(game, 'SMALL_KEY', '_');
+    } else if (ItemHelpers.isKeyRingRegularMm(item) && settings.smallKeyShuffleMm === 'ownDungeon' && settings.erBoss === 'none') {
+      itemId = gameId(game, 'KEY_RING', '_');
     } else if (ItemHelpers.isGanonBossKey(item) && settings.ganonBossKey !== 'anywhere') {
       itemId = gameId(game, 'BOSS_KEY', '_');
     } else if (ItemHelpers.isRegularBossKeyOot(item) && settings.bossKeyShuffleOot === 'ownDungeon' && settings.erBoss === 'none') {
@@ -271,8 +277,75 @@ function zoraSapphireBuffer(world: number, logic: LogicResult): Buffer {
   return toU16Buffer([value]);
 }
 
+function checkKey(check: WorldCheck): number {
+  /* Extract the ID */
+  const id = checkId(check);
+
+  /* Extract the type */
+  let typeId: number;
+  switch (check.type) {
+  case 'chest':
+    typeId = 0x01;
+    break;
+  case 'collectible':
+    typeId = 0x02;
+    break;
+  case 'npc':
+    typeId = 0x03;
+    break;
+  case 'gs':
+    typeId = 0x04;
+    break;
+  case 'sf':
+    typeId = 0x05;
+    break;
+  case 'cow':
+    typeId = 0x06;
+    break;
+  case 'shop':
+    typeId = 0x07;
+    break;
+  case 'scrub':
+    typeId = 0x08;
+    break;
+  case 'sr':
+    typeId = 0x09;
+    break;
+  case 'pot':
+  case 'grass':
+    /* xflag */
+    typeId = 0x10 + ((id >> 16) & 0xf);
+    break;
+  }
+
+  /* Extract the scene ID */
+  let sceneId = 0;
+  switch (check.type) {
+  case 'chest':
+  case 'collectible':
+  case 'sf':
+  case 'pot':
+  case 'grass':
+    sceneId = DATA_SCENES[check.scene];
+    if (sceneId === undefined) {
+      throw new Error(`Unknown scene ${check.scene}`);
+    }
+    break;
+  default:
+    break;
+  }
+
+  /* Build the key */
+  let key = 0;
+  key = (key | ((typeId & 0xff) << 24)) >>> 0;
+  key = (key | ((sceneId & 0xff) << 16)) >>> 0;
+  key = (key | (id & 0xffff)) >>> 0;
+
+  return key;
+}
+
 const gameChecks = (worldId: number, settings: Settings, game: Game, logic: LogicResult): Buffer => {
-  const buf: number[] = [];
+  const buffers: Buffer[] = [];
   const world = logic.worlds[worldId];
   for (const locId in world.checks) {
     const loc = makeLocation(locId, worldId);
@@ -282,43 +355,16 @@ const gameChecks = (worldId: number, settings: Settings, game: Game, logic: Logi
     if (c.game !== game) {
       continue;
     }
-    let { scene } = c;
-    let id = checkId(c);
-    if (!DATA_SCENES.hasOwnProperty(scene)) {
-      throw new Error(`Unknown scene ${scene}`);
-    }
-    let sceneId = DATA_SCENES[scene];
-    switch (c.type) {
-    case 'npc':
-      sceneId = 0xf0;
-      break;
-    case 'gs':
-      sceneId = 0xf1;
-      break;
-    case 'cow':
-      sceneId = 0xf2;
-      break;
-    case 'shop':
-      sceneId = 0xf3;
-      break;
-    case 'scrub':
-      sceneId = 0xf4;
-      break;
-    case 'sr':
-      sceneId = 0xf5;
-      break;
-    case 'collectible':
-      id |= 0x40;
-      break;
-    case 'sf':
-      id |= 0x80;
-      break;
-    }
-    const key = (sceneId << 8) | id;
+    const key = checkKey(c);
     const itemGi = gi(settings, game, item.item, true);
-    buf.push(item.player + 1, 0, key, itemGi);
+    const b = Buffer.alloc(8, 0xff);
+    b.writeUInt32BE(key, 0);
+    b.writeUint16BE(item.player + 1, 4);
+    b.writeUInt16BE(itemGi, 6);
+    buffers.push(b);
   }
-  return toU16Buffer(buf);
+  buffers.push(Buffer.alloc(8, 0xff));
+  return padBuffer16(Buffer.concat(buffers));
 };
 
 const hintBuffer = (settings: Settings, game: Game, gossip: string, hint: HintGossip): Buffer => {
@@ -423,7 +469,8 @@ const gameHints = (settings: Settings, game: Game, hints: WorldHints): Buffer =>
     }
     buffers.push(hintBuffer(settings, game, gossip, h));
   }
-  return Buffer.concat(buffers);
+  buffers.push(Buffer.alloc(10, 0xff));
+  return padBuffer16(Buffer.concat(buffers));
 }
 
 const regionsBuffer = (regions: Region[]) => {
@@ -450,7 +497,9 @@ const gameEntrances = (worldId: number, game: Game, logic: LogicResult) => {
     const dstId = entrance(srcEntrance.game, dstEntrance.game, dst);
     data.push(srcId, dstId);
   }
-  return toU32Buffer(data);
+  data.push(0xffffffff);
+  data.push(0xffffffff);
+  return padBuffer16(toU32Buffer(data));
 };
 
 export const randomizerMq = (worldId: number, logic: LogicResult): Buffer => {
@@ -497,7 +546,7 @@ export const randomizerHints = (world: number, logic: LogicResult): Buffer => {
 
 const randomizerBoss = (worldId: number, logic: LogicResult): Buffer => toU8Buffer(logic.worlds[worldId].bossIds);
 const randomizerDungeons = (worldId: number, logic: LogicResult): Buffer => toU8Buffer(logic.worlds[worldId].dungeonIds);
-const randomizerTriforce = (logic: LogicResult): Buffer => toU8Buffer([logic.settings.triforcePieces, logic.settings.triforceGoal]);
+const randomizerTriforce = (logic: LogicResult): Buffer => toU16Buffer([logic.settings.triforcePieces, logic.settings.triforceGoal]);
 
 function specialConds(settings: Settings) {
   const buffers: Buffer[] = [];
@@ -531,11 +580,11 @@ export const randomizerData = (worldId: number, logic: LogicResult): Buffer => {
   buffers.push(randomizerConfig(logic.config));
   buffers.push(specialConds(logic.settings));
   buffers.push(prices(worldId, logic));
+  buffers.push(randomizerTriforce(logic));
   buffers.push(randomizerHints(worldId, logic));
   buffers.push(zoraSapphireBuffer(worldId, logic));
   buffers.push(randomizerBoss(worldId, logic));
   buffers.push(randomizerDungeons(worldId, logic));
-  buffers.push(randomizerTriforce(logic));
   return Buffer.concat(buffers);
 };
 

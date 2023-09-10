@@ -124,6 +124,8 @@ static int canSpawnSoul(GameState_Play* play, s16 actorId, u16 variable)
         return hasSoul(GI_OOT_SOUL_BONGO_BONGO);
     case AC_BOSS_TW:
         return hasSoul(GI_OOT_SOUL_TWINROVA);
+    case AC_EN_BA:
+        return hasSoul(GI_OOT_SOUL_PARASITE);
     default:
         return 1;
     }
@@ -140,17 +142,18 @@ static int canSpawnActor(GameState_Play* play, s16 actorId, u16 valid)
             return 1;
         else
             return 0;
-    default: 
+    default:
         return 1;
     }
 }
 
 Actor* comboSpawnActor(void* unk, GameState_Play *play, short actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable)
 {
-
-    if (!canSpawnActor(play, actorId, variable)) return NULL;
-    
     int ret;
+    Actor* actor;
+
+    if (!canSpawnActor(play, actorId, variable))
+        return NULL;
 
     ret = canSpawnSoul(play, actorId, variable);
     if (ret <= 0)
@@ -160,5 +163,15 @@ Actor* comboSpawnActor(void* unk, GameState_Play *play, short actorId, float x, 
         return NULL;
     }
 
-    return SpawnActor(unk, play, actorId, x, y, z, rx, ry, rz, variable);
+    /* Inert grass */
+    if (actorId == AC_OBJ_HANA && ((variable & 3) == 2))
+    {
+        actorId = AC_EN_KUSA;
+        variable = 0xff00;
+    }
+
+    actor = SpawnActor(unk, play, actorId, x, y, z, rx, ry, rz, variable);
+    if (actorId == AC_ARMS_HOOK && gSave.age == AGE_ADULT)
+        actor->objTableIndex = GetObject(&play->objectCtx, 0x14);
+    return actor;
 }

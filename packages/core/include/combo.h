@@ -27,6 +27,10 @@
 #  include <combo/oot/player.h>
 #  include <combo/oot/pause_state.h>
 #  include <combo/oot/actors/Item_Etcetera.h>
+#  include <combo/oot/actors/Obj_Tsubo.h>
+#  include <combo/oot/actors/En_Kusa.h>
+#  include <combo/oot/actors/En_Tubo_Trap.h>
+#  include <combo/oot/actors/Obj_Mure2.h>
 #  include <combo/oot/actors/En_Ossan.h>
 # endif
 
@@ -38,12 +42,15 @@
 #  include <combo/mm/actor_entrt.h>
 #  include <combo/mm/actor_enossan.h>
 #  include <combo/mm/actor_arms_hook.h>
+#  include <combo/mm/actors/Obj_Tsubo.h>
+#  include <combo/mm/actors/En_Tubo_Trap.h>
 # endif
 
 # include <combo/common/actors/En_Item00.h>
 # include <combo/common/actors/En_GirlA.h>
 # include <combo/common/actor_init.h>
 # include <combo/common/actor_item_custom.h>
+# include <combo/common/actors/Custom_Item.h>
 # include <combo/common/actors/Custom_Triggers.h>
 # include <combo/common/api.h>
 #endif
@@ -123,12 +130,12 @@ typedef struct
     u8              config[0x40];
     SpecialCond     special[5];
     u16             prices[PRICES_MAX];
+    u16             triforcePieces;
+    u16             triforceGoal;
     ComboDataHints  hints;
     u16             giZoraSapphire;
     u8              boss[12];
     u8              dungeons[25];
-    u8              triforcePieces;
-    u8              triforceGoal;
 }
 ComboData;
 
@@ -163,16 +170,29 @@ void comboCreateSaveMM(void);
 NORETURN void comboGameSwitch(GameState_Play* play, s32 entrance);
 
 /* Override */
-#define OV_NONE         -1
-#define OV_CHEST        0
-#define OV_COLLECTIBLE  1
-#define OV_NPC          2
-#define OV_GS           3
-#define OV_SF           4
-#define OV_COW          5
-#define OV_SHOP         6
-#define OV_SCRUB        7
-#define OV_SR           8
+#define OV_NONE         0x00
+#define OV_CHEST        0x01
+#define OV_COLLECTIBLE  0x02
+#define OV_NPC          0x03
+#define OV_GS           0x04
+#define OV_SF           0x05
+#define OV_COW          0x06
+#define OV_SHOP         0x07
+#define OV_SCRUB        0x08
+#define OV_SR           0x09
+
+#define OV_XFLAG0       0x10
+#define OV_XFLAG1       0x11
+#define OV_XFLAG2       0x12
+#define OV_XFLAG3       0x13
+#define OV_XFLAG4       0x14
+#define OV_XFLAG5       0x15
+#define OV_XFLAG6       0x16
+#define OV_XFLAG7       0x17
+#define OV_XFLAG8       0x18
+#define OV_XFLAG9       0x19
+#define OV_XFLAG10      0x1a
+#define OV_XFLAG11      0x1b
 
 #define OVF_RENEW             (1 << 2)
 #define OVF_PRECOND           (1 << 3)
@@ -195,6 +215,11 @@ void comboTextHijackOathToOrder(GameState_Play* play);
 s32 comboProgressive(s32 gi);
 s32 comboProgressiveOot(s32 gi);
 s32 comboProgressiveMm(s32 gi);
+
+/* Cache */
+void    comboCacheClear(void);
+void    comboCacheGarbageCollect(void);
+void*   comboCacheGetFile(u32 vrom);
 
 /* Objects */
 void    comboObjectsReset(void);
@@ -285,11 +310,6 @@ int comboDoorIsUnlocked(GameState_Play* play, Actor* actor);
 void comboInitHints(void);
 void comboHintGossip(u8 key, GameState_Play* play);
 
-/* CSMC */
-void comboCsmcInit(Actor* this, GameState_Play* play, s16 gi);
-void comboCsmcPreDraw(Actor* this, GameState_Play* play, s16 gi);
-int  comboCsmcChestSize(s16 gi);
-
 /* Shop */
 #define SC_OK               0x00
 #define SC_OK_NOCUTSCENE    0x01
@@ -354,9 +374,15 @@ typedef struct
     u8                      silverRupee;
     u8                      delayedSwitchFlag;
     u8                      roomEnemyLackSoul:1;
+    u8                      spawnExtended:1;
     u8                      menuScreen;
     u8                      menuCursor;
     u8                      menuCursorMax;
+    u8                      maxKeysOot[0x10];
+    u8                      maxKeysMm[4];
+    u8                      actorIndex;
+    u8                      sceneSetupId;
+    Actor_CustomItem*       customItemsList;
 }
 ComboGlobal;
 

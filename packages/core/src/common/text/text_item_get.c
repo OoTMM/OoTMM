@@ -159,7 +159,7 @@ void comboTextHijackItemEx(GameState_Play* play, const ComboItemOverride* o, int
 #if defined(GAME_OOT)
     b = play->msgCtx.textBuffer;
 #else
-    b = play->textBuffer;
+    b = play->msgCtx.font.textBuffer.schar;
 #endif
     comboTextAppendHeader(&b);
     start = b;

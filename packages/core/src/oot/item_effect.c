@@ -151,6 +151,10 @@ int comboAddItemEffect(GameState_Play* play, s16 gi)
         dungeonId = dungeon(play, 0);
         count = comboAddSmallKeyOot(dungeonId);
         break;
+    case GI_OOT_KEY_RING:
+        dungeonId = dungeon(play, 0);
+        comboAddKeyRingOot(dungeonId);
+        break;
     case GI_OOT_MAP:
         dungeonId = dungeon(play, 0);
         comboAddMapOot(dungeonId);
@@ -175,6 +179,8 @@ int comboAddItemEffect(GameState_Play* play, s16 gi)
     case GI_OOT_BLUE_FIRE:
     case GI_OOT_BUG:
     case GI_OOT_MILK:
+    case GI_OOT_FAIRY:
+    case GI_OOT_POE:
         reloadIconsC(play);
         break;
     }

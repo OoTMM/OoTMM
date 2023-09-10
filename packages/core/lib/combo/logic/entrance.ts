@@ -440,7 +440,14 @@ export class LogicPassEntrances {
   }
 
   private placeRegions(worldId: number) {
-    this.placePool(worldId, ['region'], { overworld: true, ownGame: this.input.settings.erRegions === 'ownGame' });
+    const pool = ['region'];
+    if (this.input.settings.erRegionsExtra) {
+      pool.push('region-extra');
+    }
+    if (this.input.settings.erRegionsShortcuts) {
+      pool.push('region-shortcut');
+    }
+    this.placePool(worldId, pool, { ownGame: this.input.settings.erRegions === 'ownGame' });
   }
 
   private placeIndoors(worldId: number) {

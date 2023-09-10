@@ -35,6 +35,21 @@
     "Moon Trial Goron Exit": "goron_fast_roll"
   locations:
     "Moon Trial Goron HP": "goron_fast_roll"
+    "Moon Trial Goron Pot Early 1": "true"
+    "Moon Trial Goron Pot Early 2": "true"
+    "Moon Trial Goron Pot Early 3": "true"
+    "Moon Trial Goron Pot Early 4": "true"
+    "Moon Trial Goron Pot 01": "goron_fast_roll"
+    "Moon Trial Goron Pot 02": "goron_fast_roll"
+    "Moon Trial Goron Pot 03": "goron_fast_roll"
+    "Moon Trial Goron Pot 04": "goron_fast_roll"
+    "Moon Trial Goron Pot 05": "goron_fast_roll"
+    "Moon Trial Goron Pot 06": "goron_fast_roll"
+    "Moon Trial Goron Pot 07": "goron_fast_roll"
+    "Moon Trial Goron Pot 08": "goron_fast_roll"
+    "Moon Trial Goron Pot 09": "goron_fast_roll"
+    "Moon Trial Goron Pot 10": "goron_fast_roll"
+    "Moon Trial Goron Pot 11": "goron_fast_roll"
   gossip:
     "Moon Trial Goron Gossip Center Left": "goron_fast_roll"
     "Moon Trial Goron Gossip Center Right": "goron_fast_roll"
@@ -67,6 +82,15 @@
   exits:
     "Moon": "true"
     "Moon Trial Link Dinalfos Fight": "true"
+  locations:
+    "Moon Trial Link Pot 1": "true"
+    "Moon Trial Link Pot 2": "true"
+    "Moon Trial Link Pot 3": "true"
+    "Moon Trial Link Pot 4": "true"
+    "Moon Trial Link Pot 5": "true"
+    "Moon Trial Link Pot 6": "true"
+    "Moon Trial Link Pot 7": "true"
+    "Moon Trial Link Pot 8": "true"
 "Moon Trial Link Dinalfos Fight":
   region: MOON
   exits:
@@ -124,3 +148,6 @@
   events:
     MAJORA_PHASE_1: "has_arrows || has_mask_zora || (has(MASK_FIERCE_DEITY) && has_magic)"
     MAJORA: "!setting(goal, triforce) && event(MAJORA_PHASE_1) && (has_weapon || has_mask_zora || (has(MASK_FIERCE_DEITY) && has_magic))"
+  locations:
+    "Moon Majora Pot 1": "event(MAJORA)"
+    "Moon Majora Pot 2": "event(MAJORA)"

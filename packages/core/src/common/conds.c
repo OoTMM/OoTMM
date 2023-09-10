@@ -220,7 +220,7 @@ int comboSpecialCond(int special)
 
     if (cond->flags & SPF_TRIFORCE)
     {
-        count += gOotExtraFlags.triforceCount;
+        count += gTriforceCount;
     }
 
     count += hasMaskKeaton;

@@ -20,8 +20,8 @@ static Actor* EnCow_GetNearestCow(GameState_Play* play)
     cowDist = 0.f;
     for (int i = 0; i < 12; ++i)
     {
-        count = play->actors[i].count;
-        tmp = play->actors[i].first;
+        count = play->actorCtx.actors[i].count;
+        tmp = play->actorCtx.actors[i].first;
         while (tmp && count)
         {
             if (tmp->id == AC_EN_COW && tmp->variable != 1 && (!cow || cowDist > tmp->xzDistanceFromLink))

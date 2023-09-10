@@ -15,7 +15,7 @@ static void EnElforg_ItemQuery(ComboItemQuery* q, Actor* this, GameState_Play* p
         break;
     default:
         q->ovType = OV_SF;
-        q->sceneId = play->sceneId;
+        q->sceneId = comboSceneKey(play->sceneId);
         q->id = (this->variable & 0xfe00) >> 9;
         break;
     }
@@ -79,7 +79,7 @@ void EnElforg_GiveItem(GameState_Play* play, Actor* this)
 
     EnElforg_ItemQuery(&q, this, play);
     PlayerDisplayTextBox(play, 0x579, NULL);
-    comboAddItemEx(play, &q);
+    comboAddItemEx(play, &q, 1);
 
     // If it's a town fairy
     if ((this->variable & 0xF) == 3) {

@@ -103,11 +103,29 @@ export const SMALL_KEYS_OOT = new Set([
   Items.OOT_SMALL_KEY_GANON,
 ]);
 
+export const KEY_RINGS_OOT = new Set([
+  Items.OOT_KEY_RING_FOREST,
+  Items.OOT_KEY_RING_FIRE,
+  Items.OOT_KEY_RING_WATER,
+  Items.OOT_KEY_RING_SPIRIT,
+  Items.OOT_KEY_RING_SHADOW,
+  Items.OOT_KEY_RING_BOTW,
+  Items.OOT_KEY_RING_GTG,
+  Items.OOT_KEY_RING_GANON,
+]);
+
 export const SMALL_KEYS_MM = new Set([
   Items.MM_SMALL_KEY_WF,
   Items.MM_SMALL_KEY_SH,
   Items.MM_SMALL_KEY_GB,
   Items.MM_SMALL_KEY_ST,
+]);
+
+export const KEY_RINGS_MM = new Set([
+  Items.MM_KEY_RING_WF,
+  Items.MM_KEY_RING_SH,
+  Items.MM_KEY_RING_GB,
+  Items.MM_KEY_RING_ST,
 ]);
 
 export const BOSS_KEYS_OOT = new Set([
@@ -429,6 +447,7 @@ export const OOT_SOULS = new Set([
   Items.OOT_SOUL_BABY_DODONGO,
   Items.OOT_SOUL_BIRI_BARI,
   Items.OOT_SOUL_TAILPASARN,
+  Items.OOT_SOUL_PARASITE,
   Items.OOT_SOUL_SKULLTULA,
   Items.OOT_SOUL_TORCH_SLUG,
   Items.OOT_SOUL_MOBLIN,
@@ -642,6 +661,7 @@ export const REQUIRED = new Set([
   Items.OOT_POTION_BLUE,
   Items.OOT_FISH,
   Items.OOT_BUG,
+  Items.OOT_SKELETON_KEY,
   Items.MM_GS_TOKEN_SWAMP,
   Items.MM_GS_TOKEN_OCEAN,
   Items.MM_SHIELD_HERO,
@@ -735,6 +755,7 @@ export const REQUIRED = new Set([
   Items.MM_ARROWS_10,
   Items.MM_ARROWS_30,
   Items.MM_ARROWS_40,
+  Items.MM_SKELETON_KEY,
   Items.SHARED_BOW,
   Items.SHARED_BOMB_BAG,
   Items.SHARED_MAGIC_UPGRADE,
@@ -773,5 +794,6 @@ export const REQUIRED = new Set([
   Items.SHARED_BOMBCHU_5,
   Items.SHARED_BOMBCHU_10,
   Items.SHARED_BOMBCHU_20,
+  Items.SHARED_SKELETON_KEY,
 ]);
 

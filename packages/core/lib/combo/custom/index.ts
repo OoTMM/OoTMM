@@ -6,7 +6,7 @@ import { Game, DATA_FILES } from '../config';
 import { DmaData } from '../dma';
 import { splitObject } from './split';
 import { arrayToIndexMap, toU32Buffer } from '../util';
-import { CodeGen } from '../codegen';
+import { CodeGen } from '../util/codegen';
 import { DecompressedRoms } from '../decompress';
 import { Monitor } from '../monitor';
 import { KeepFile } from './keep';
@@ -15,6 +15,7 @@ import { font } from './font';
 import { raw } from './raw';
 import { Options } from '../options';
 import { Patchfile } from '../patch-build/patchfile';
+import { grayscale } from '../image';
 
 const FILES_TO_INDEX_OOT = arrayToIndexMap(DATA_FILES.oot);
 const FILES_TO_INDEX_MM = arrayToIndexMap(DATA_FILES.mm);
@@ -75,8 +76,18 @@ const makeSplitObject = async (roms: DecompressedRoms, entry: CustomEntry) => {
   return obj;
 };
 
-export const customAssets = async (opts: Options): Promise<{[k: string]: Buffer}> => ({
-  DPAD: await png(opts, 'dpad', 'rgba32'),
+const extractFileData = async (roms: DecompressedRoms, game: Game, file: string, offset: number, size: number) => {
+  const objBuffer = await getObjectBuffer(roms, game, file);
+  const tex = objBuffer.subarray(offset, offset + size);
+  return tex;
+};
+
+export const customExtractedFiles = async (roms: DecompressedRoms): Promise<{[k: string]: Buffer}> => ({
+  GRASS: await extractFileData(roms, 'oot', 'objects/gameplay_field_keep', 0xb140, 32 * 32 * 2).then(t => grayscale(t, 'rgba16', 0.25)),
+  GRASS_ALT: await extractFileData(roms, 'oot', 'objects/gameplay_keep', 0x35BD0, 32 * 32 * 2).then(t => grayscale(t, 'rgba16', 0.25)),
+});
+
+export const customFiles = async (opts: Options): Promise<{[k: string]: Buffer}> => ({
   CHEST_MAJOR_FRONT: await png(opts, 'chest_front_major', 'rgba16'),
   CHEST_MAJOR_SIDE: await png(opts, 'chest_side_major', 'rgba16'),
   CHEST_KEY_FRONT: await png(opts, 'chest_front_key', 'rgba16'),
@@ -87,6 +98,21 @@ export const customAssets = async (opts: Options): Promise<{[k: string]: Buffer}
   CHEST_FAIRY_SIDE: await png(opts, 'chest_side_fairy', 'rgba16'),
   CHEST_HEART_FRONT: await png(opts, 'chest_front_heart', 'rgba16'),
   CHEST_HEART_SIDE: await png(opts, 'chest_side_heart', 'rgba16'),
+  POT_MAJOR_SIDE: await png(opts, 'pots/side_major', 'rgba16'),
+  POT_MAJOR_TOP: await png(opts, 'pots/top_major', 'rgba16'),
+  POT_SPIDER_SIDE: await png(opts, 'pots/side_spider', 'rgba16'),
+  POT_SPIDER_TOP: await png(opts, 'pots/top_spider', 'rgba16'),
+  POT_KEY_SIDE: await png(opts, 'pots/side_key', 'rgba16'),
+  POT_FAIRY_SIDE: await png(opts, 'pots/side_fairy', 'rgba16'),
+  POT_FAIRY_TOP: await png(opts, 'pots/top_fairy', 'rgba16'),
+  POT_HEART_SIDE: await png(opts, 'pots/side_heart', 'rgba16'),
+  POT_HEART_TOP: await png(opts, 'pots/top_heart', 'rgba16'),
+  POT_BOSSKEY_SIDE: await png(opts, 'pots/side_bosskey', 'rgba16'),
+  POT_BOSSKEY_TOP: await png(opts, 'pots/top_bosskey', 'rgba16'),
+});
+
+export const customAssetsKeep = async (opts: Options): Promise<{[k: string]: Buffer}> => ({
+  DPAD: await png(opts, 'dpad', 'rgba32'),
   FONT: await font(opts, 'font_8x12'),
   SMALL_ICON_KEY: await png(opts, 'small_icon_key', 'rgba32'),
   SMALL_ICON_BOSS_KEY: await png(opts, 'small_icon_boss_key', 'rgba32'),
@@ -176,7 +202,7 @@ class CustomAssetsBuilder {
 
   async addCustomKeepFiles() {
     const keep = new KeepFile();
-    const cAssets = await customAssets(this.opts);
+    const cAssets = await customAssetsKeep(this.opts);
     const eAssets = await extractedAssets(this.roms);
     const assets = { ...cAssets, ...eAssets };
     for (const k in assets) {
@@ -186,6 +212,22 @@ class CustomAssetsBuilder {
 
     const customKeepVrom = this.addRawData(keep.pack(), true);
     this.cg.define('CUSTOM_KEEP_VROM', customKeepVrom);
+  }
+
+  async addCustomFiles() {
+    const cfiles = await customFiles(this.opts);
+    for (const [name, data] of Object.entries(cfiles)) {
+      const vrom = this.addRawData(data, true);
+      this.cg.define('CUSTOM_' + name + '_ADDR', vrom);
+    }
+  }
+
+  async addCustomExtractedFiles() {
+    const cfiles = await customExtractedFiles(this.roms);
+    for (const [name, data] of Object.entries(cfiles)) {
+      const vrom = this.addRawData(data, true);
+      this.cg.define('CUSTOM_' + name + '_ADDR', vrom);
+    }
   }
 
   async run() {
@@ -198,11 +240,19 @@ class CustomAssetsBuilder {
 
     /* Setup custom keep */
     await this.addCustomKeepFiles();
+    await this.addCustomFiles();
+    await this.addCustomExtractedFiles();
 
     /* Load MQ data */
     await this.addFile('MQ_ROOMS', 'mq_rooms.bin', false);
     await this.addFile('MQ_SCENES', 'mq_scenes.bin', false);
     await this.addFile('MQ_MAPS', 'mq_maps.bin', true);
+    await this.addFile('XFLAG_TABLE_OOT_SCENES', 'xflag_table_oot_scenes.bin', false);
+    await this.addFile('XFLAG_TABLE_OOT_SETUPS', 'xflag_table_oot_setups.bin', false);
+    await this.addFile('XFLAG_TABLE_OOT_ROOMS',  'xflag_table_oot_rooms.bin', false);
+    await this.addFile('XFLAG_TABLE_MM_SCENES',  'xflag_table_mm_scenes.bin', false);
+    await this.addFile('XFLAG_TABLE_MM_SETUPS',  'xflag_table_mm_setups.bin', false);
+    await this.addFile('XFLAG_TABLE_MM_ROOMS',   'xflag_table_mm_rooms.bin', false);
 
     /* Load custom objects */
     await this.addObjectFile('TRIFORCE', 'triforce.zobj', [0x06000a30]);

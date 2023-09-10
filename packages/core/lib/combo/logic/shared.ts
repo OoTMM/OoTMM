@@ -32,4 +32,8 @@ const SOULS: ItemSharedDef[] = [
   { shared: Items.SHARED_SOUL_FLOORMASTER,         oot: Items.OOT_SOUL_FLOORMASTER,        mm: Items.MM_SOUL_FLOORMASTER },
 ];
 
-export const SharedItemGroups = { SOULS };
+const SKELETON_KEY: ItemSharedDef[] = [
+  { shared: Items.SHARED_SKELETON_KEY, oot: Items.OOT_SKELETON_KEY, mm: Items.MM_SKELETON_KEY },
+];
+
+export const SharedItemGroups = { SOULS, SKELETON_KEY };

@@ -8,7 +8,7 @@ static void EnItem00_ItemQuery(ComboItemQuery* q, Actor_EnItem00* this, GameStat
     if (this->base.variable == 0x06)
     {
         q->ovType = OV_COLLECTIBLE;
-        q->sceneId = play->sceneId;
+        q->sceneId = comboSceneKey(play->sceneId);
         q->id = this->collectibleFlag;
         q->gi = gi;
     }

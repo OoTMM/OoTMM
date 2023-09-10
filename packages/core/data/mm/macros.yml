@@ -66,8 +66,8 @@
 "trick_keg_explosives": "can_use_keg && trick(MM_KEG_EXPLOSIVES)"
 "trick_sht_fireless": "((has_hot_water_distance && has(OWL_SNOWHEAD)) || has_hot_water_er) && trick(MM_SHT_FIRELESS)"
 "trick_sht_fireless_er": "has_hot_water_er && trick(MM_SHT_FIRELESS)"
-"can_reset_time_on_moon": "can_play_time || (setting(majoraChild, none) && event(MAJORA) && trick(MM_MAJORA_LOGIC))"
-"can_reset_time": "can_play_time || (event(MAJORA) && trick(MM_MAJORA_LOGIC))"
+"can_reset_time_on_moon": "can_play_time || (setting(majoraChild, none) && event(MAJORA) && trick(MM_MAJORA_LOGIC) && !setting(goal, triforce))"
+"can_reset_time": "can_play_time || (event(MAJORA) && trick(MM_MAJORA_LOGIC) && !setting(goal, triforce))"
 "has_sticks": "event(STICKS) || renewable(STICK) || renewable(SHARED_STICK) || renewable(SHARED_STICKS_5) || renewable(SHARED_STICKS_10) || (setting(sharedNutsSticks) && event(OOT_STICKS))"
 "has_nuts": "event(NUTS) || renewable(NUT) || renewable(NUTS_5) || renewable(NUTS_10) || renewable(SHARED_NUT) || renewable(SHARED_NUTS_5) || renewable(SHARED_NUTS_10) || (setting(sharedNutsSticks) && event(OOT_NUTS))"
 "has_bow": "has(BOW) || has(SHARED_BOW)"
@@ -85,6 +85,7 @@
 "bombers1": "event(BOMBERS_NORTH1) && event(BOMBERS_EAST1) && event(BOMBERS_WEST1)"
 "bombers2": "event(BOMBERS_NORTH2) && event(BOMBERS_EAST2) && event(BOMBERS_WEST2)"
 "bombers3": "event(BOMBERS_NORTH3) && event(BOMBERS_EAST3) && event(BOMBERS_WEST3)"
+"has_fire_sticks": "has_sticks || can_use_fire_arrows"
 
 # Wallets
 "has_wallet(n)": "cond(setting(childWallets), has(WALLET, n) || has(SHARED_WALLET, n), has(WALLET, n - 1) || has(SHARED_WALLET, n - 1))"
@@ -95,8 +96,13 @@
 "tingle_price(id)": "wallet_price(MM_TINGLE, id)"
 
 # Keys
+"has_skeleton_key": "setting(skeletonKeyMm) && cond(setting(sharedSkeletonKey), has(SHARED_SKELETON_KEY), has(SKELETON_KEY))"
 "boss_key(x)": "setting(bossKeyShuffleMm, removed) || has(x)"
-"small_keys(x, count)": "setting(smallKeyShuffleMm, removed) || has(x, count)"
+"small_keys(x, y, count)": "has_skeleton_key || (setting(smallKeyShuffleMm, removed) || cond(setting(smallKeyRingMm, keyRings), has(y), has(x, count)))"
+"small_keys_wf(n)": "small_keys(SMALL_KEY_WF, KEY_RING_WF, n)"
+"small_keys_sh(n)": "small_keys(SMALL_KEY_SH, KEY_RING_SH, n)"
+"small_keys_gb(n)": "small_keys(SMALL_KEY_GB, KEY_RING_GB, n)"
+"small_keys_st(n)": "small_keys(SMALL_KEY_ST, KEY_RING_ST, n)"
 
 # Masks
 "has_mask_bunny": "has(MASK_BUNNY) || has(SHARED_MASK_BUNNY)"

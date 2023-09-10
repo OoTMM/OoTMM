@@ -40,7 +40,6 @@
 #endif
 
 #define MM_BASE       0xa628f0
-#define PAYLOAD_SIZE  0x40000
 
 #define MASK_FOREIGN_GI     0x0200
 #define MASK_FOREIGN_OBJECT 0x1000

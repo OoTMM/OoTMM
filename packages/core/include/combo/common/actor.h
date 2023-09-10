@@ -17,6 +17,7 @@
 # define AC_EN_DODONGO              0x012
 # define AC_EN_FIREFLY              0x013
 # define AC_ITEM00                  0x015
+# define AC_CUSTOM_ITEM             0x017
 # define AC_EN_TITE                 0x01b
 # define AC_EN_PEEHAT               0x01d
 # define AC_EN_ZF                   0x025
@@ -60,6 +61,7 @@
 # define AC_BG_BDAN_OBJECTS         0x0c8
 # define AC_BOSS_TW                 0x0dc
 # define AC_EN_RR                   0x0dd
+# define AC_EN_BA                   0x0de
 # define AC_EN_ANUBICE              0x0e0
 # define AC_EN_MA1                  0x0e7
 # define AC_BOSS_SST                0x0e9
@@ -67,6 +69,7 @@
 # define AC_ITEM_OCARINA            0x0f1
 # define AC_EN_ANUBICE_TAG          0x0f6
 # define AC_ITEM_ETCETERA           0x10f
+# define AC_OBJ_TSUBO               0x111
 # define AC_EN_IK                   0x113
 # define AC_EN_SKJ                  0x115
 # define AC_EN_G_SWITCH             0x117
@@ -91,6 +94,11 @@
 # define AC_EN_GS                   0x1b9
 # define AC_EN_CROW                 0x1c0
 # define AC_EN_COW                  0x1c6
+# define AC_ARMS_HOOK               0x066
+# define AC_OBJ_MURE2               0x151
+# define AC_EN_KUSA                 0x125
+# define AC_OBJ_HANA                0x14f
+# define AC_EN_WONDER_TALK2         0x185
 
 #endif
 
@@ -171,6 +179,9 @@
 # define AC_BOSS_03         0x12b
 # define AC_BOSS_02         0x12a
 # define AC_EN_KAME         0x1ba
+# define AC_CUSTOM_ITEM     0x029
+# define AC_OBJ_TSUBO       0x082
+# define AC_EN_TUBO_TRAP    0x08d
 
 #endif
 
@@ -235,15 +246,22 @@ typedef struct
 {
     u32     count;
     Actor*  first;
+#if defined(GAME_MM)
+    char    unk_8[0x4];
+#endif
 }
 ActorList;
 
+ASSERT_OFFSET(Actor, variable, 0x01c);
+
 #if defined(GAME_OOT)
 _Static_assert(sizeof(Actor) == 0x13c, "OoT Actor size is wrong");
+_Static_assert(sizeof(ActorList) == 0x8, "OoT ActorList size is wrong");
 #endif
 
 #if defined(GAME_MM)
 _Static_assert(sizeof(Actor) == 0x144, "MM Actor size is wrong");
+_Static_assert(sizeof(ActorList) == 0xC, "MM ActorList size is wrong");
 #endif
 
 Actor* comboSpawnActor(void* unk, GameState_Play *play, short actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable);

@@ -1,97 +1,5 @@
 #include <combo.h>
-#include <combo/custom.h>
-#include <combo/dungeon.h>
-
-#define CSMC_NORMAL     0x00
-#define CSMC_BOSS_KEY   0x01
-#define CSMC_MAJOR      0x02
-#define CSMC_KEY        0x03
-#define CSMC_SPIDER     0x04
-#define CSMC_FAIRY      0x05
-#define CSMC_HEART      0x06
-#define CSMC_SOUL       0x07
-
-#if defined(GAME_OOT)
-# define CHEST_TEX_NORMAL_FRONT     0x06001798
-# define CHEST_TEX_NORMAL_SIDE      0x06002798
-# define CHEST_TEX_BOSS_KEY_FRONT   0x06003798
-# define CHEST_TEX_BOSS_KEY_SIDE    0x06002f98
-#else
-# define CHEST_TEX_NORMAL_FRONT     0x06001e60
-# define CHEST_TEX_NORMAL_SIDE      0x06002e60
-# define CHEST_TEX_BOSS_KEY_FRONT   0x06004e60
-# define CHEST_TEX_BOSS_KEY_SIDE    0x06005e60
-#endif
-
-static const Gfx kListNormalFront[] = {
-    gsDPLoadTextureBlock(CHEST_TEX_NORMAL_FRONT, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 64, 0, G_TX_MIRROR | G_TX_WRAP, G_TX_MIRROR | G_TX_WRAP, 5, 6, 0, 0),
-    gsSPEndDisplayList(),
-};
-
-static const Gfx kListNormalSide[] = {
-    gsDPLoadTextureBlock(CHEST_TEX_NORMAL_SIDE, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_MIRROR | G_TX_WRAP, G_TX_MIRROR | G_TX_WRAP, 5, 5, 0, 0),
-    gsSPEndDisplayList(),
-};
-
-static const Gfx kListBossKeyFront[] = {
-    gsDPLoadTextureBlock(CHEST_TEX_BOSS_KEY_FRONT, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 64, 0, G_TX_MIRROR | G_TX_WRAP, G_TX_MIRROR | G_TX_WRAP, 5, 6, 0, 0),
-    gsSPEndDisplayList(),
-};
-
-static const Gfx kListBossKeySide[] = {
-    gsDPLoadTextureBlock(CHEST_TEX_BOSS_KEY_SIDE, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_MIRROR | G_TX_WRAP, G_TX_MIRROR | G_TX_WRAP, 5, 5, 0, 0),
-    gsSPEndDisplayList(),
-};
-
-static const Gfx kListMajorFront[] = {
-    gsDPLoadTextureBlock(0x09000000 | CUSTOM_KEEP_CHEST_MAJOR_FRONT, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 64, 0, G_TX_MIRROR | G_TX_WRAP, G_TX_MIRROR | G_TX_WRAP, 5, 6, 0, 0),
-    gsSPEndDisplayList(),
-};
-
-static const Gfx kListMajorSide[] = {
-    gsDPLoadTextureBlock(0x09000000 | CUSTOM_KEEP_CHEST_MAJOR_SIDE, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_MIRROR | G_TX_WRAP, G_TX_MIRROR | G_TX_WRAP, 5, 5, 0, 0),
-    gsSPEndDisplayList(),
-};
-
-static const Gfx kListKeyFront[] = {
-    gsDPLoadTextureBlock(0x09000000 | CUSTOM_KEEP_CHEST_KEY_FRONT, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 64, 0, G_TX_MIRROR | G_TX_WRAP, G_TX_MIRROR | G_TX_WRAP, 5, 6, 0, 0),
-    gsSPEndDisplayList(),
-};
-
-static const Gfx kListKeySide[] = {
-    gsDPLoadTextureBlock(0x09000000 | CUSTOM_KEEP_CHEST_KEY_SIDE, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_MIRROR | G_TX_WRAP, G_TX_MIRROR | G_TX_WRAP, 5, 5, 0, 0),
-    gsSPEndDisplayList(),
-};
-
-static const Gfx kListSpiderFront[] = {
-    gsDPLoadTextureBlock(0x09000000 | CUSTOM_KEEP_CHEST_SPIDER_FRONT, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 64, 0, G_TX_MIRROR | G_TX_WRAP, G_TX_MIRROR | G_TX_WRAP, 5, 6, 0, 0),
-    gsSPEndDisplayList(),
-};
-
-static const Gfx kListSpiderSide[] = {
-    gsDPLoadTextureBlock(0x09000000 | CUSTOM_KEEP_CHEST_SPIDER_SIDE, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_MIRROR | G_TX_WRAP, G_TX_MIRROR | G_TX_WRAP, 5, 5, 0, 0),
-    gsSPEndDisplayList(),
-};
-
-static const Gfx kListFairyFront[] = {
-    gsDPLoadTextureBlock(0x09000000 | CUSTOM_KEEP_CHEST_FAIRY_FRONT, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 64, 0, G_TX_MIRROR | G_TX_WRAP, G_TX_MIRROR | G_TX_WRAP, 5, 6, 0, 0),
-    gsSPEndDisplayList(),
-};
-
-static const Gfx kListFairySide[] = {
-    gsDPLoadTextureBlock(0x09000000 | CUSTOM_KEEP_CHEST_FAIRY_SIDE, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_MIRROR | G_TX_WRAP, G_TX_MIRROR | G_TX_WRAP, 5, 5, 0, 0),
-    gsSPEndDisplayList(),
-};
-
-static const Gfx kListHeartFront[] = {
-    gsDPLoadTextureBlock(0x09000000 | CUSTOM_KEEP_CHEST_HEART_FRONT, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 64, 0, G_TX_MIRROR | G_TX_WRAP, G_TX_MIRROR | G_TX_WRAP, 5, 6, 0, 0),
-    gsSPEndDisplayList(),
-};
-
-static const Gfx kListHeartSide[] = {
-    gsDPLoadTextureBlock(0x09000000 | CUSTOM_KEEP_CHEST_HEART_SIDE, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32, 0, G_TX_MIRROR | G_TX_WRAP, G_TX_MIRROR | G_TX_WRAP, 5, 5, 0, 0),
-    gsSPEndDisplayList(),
-};
+#include <combo/csmc.h>
 
 static int csmcFromItemOot(s16 gi)
 {
@@ -197,6 +105,7 @@ static int csmcFromItemOot(s16 gi)
     case GI_OOT_NUT_UPGRADE2:
     case GI_OOT_DEFENSE_UPGRADE:
     case GI_OOT_TRIFORCE:
+    case GI_OOT_SKELETON_KEY:
         return CSMC_MAJOR;
     case GI_OOT_SMALL_KEY:
     case GI_OOT_SMALL_KEY_FOREST:
@@ -208,6 +117,16 @@ static int csmcFromItemOot(s16 gi)
     case GI_OOT_SMALL_KEY_BOTW:
     case GI_OOT_SMALL_KEY_GF:
     case GI_OOT_SMALL_KEY_GTG:
+    case GI_OOT_KEY_RING:
+    case GI_OOT_KEY_RING_FOREST:
+    case GI_OOT_KEY_RING_FIRE:
+    case GI_OOT_KEY_RING_WATER:
+    case GI_OOT_KEY_RING_SPIRIT:
+    case GI_OOT_KEY_RING_SHADOW:
+    case GI_OOT_KEY_RING_GANON:
+    case GI_OOT_KEY_RING_BOTW:
+    case GI_OOT_KEY_RING_GF:
+    case GI_OOT_KEY_RING_GTG:
     case GI_OOT_RUPEE_SILVER_DC:
     case GI_OOT_RUPEE_SILVER_BOTW:
     case GI_OOT_RUPEE_SILVER_SPIRIT_CHILD:
@@ -291,6 +210,7 @@ static int csmcFromItemOot(s16 gi)
     case GI_OOT_SOUL_MORPHA:
     case GI_OOT_SOUL_BONGO_BONGO:
     case GI_OOT_SOUL_TWINROVA:
+    case GI_OOT_SOUL_PARASITE:
         return CSMC_SOUL;
     }
 
@@ -398,12 +318,18 @@ static int csmcFromItemMm(s16 gi)
     case GI_MM_OWL_SOUTHERN_SWAMP:
     case GI_MM_OWL_IKANA_CANYON:
     case GI_MM_OWL_STONE_TOWER:
+    case GI_MM_SKELETON_KEY:
         return CSMC_MAJOR;
     case GI_MM_SMALL_KEY:
     case GI_MM_SMALL_KEY_WF:
     case GI_MM_SMALL_KEY_SH:
     case GI_MM_SMALL_KEY_GB:
     case GI_MM_SMALL_KEY_ST:
+    case GI_MM_KEY_RING:
+    case GI_MM_KEY_RING_WF:
+    case GI_MM_KEY_RING_SH:
+    case GI_MM_KEY_RING_GB:
+    case GI_MM_KEY_RING_ST:
         return CSMC_KEY;
     case GI_MM_BOSS_KEY:
     case GI_MM_BOSS_KEY_WF:
@@ -479,7 +405,7 @@ static int csmcFromItemMm(s16 gi)
     return CSMC_NORMAL;
 }
 
-static int csmcFromItem(s16 gi)
+int csmcFromItem(s16 gi)
 {
     if (gi < 0)
         gi = -gi;
@@ -490,135 +416,4 @@ static int csmcFromItem(s16 gi)
         return csmcFromItemMm(gi & ~MASK_FOREIGN_GI);
     else
         return csmcFromItemOot(gi);
-}
-
-static int csmcEnabled(void)
-{
-    return (comboConfig(CFG_CSMC) || (comboConfig(CFG_CSMC_AGONY) && gOotSave.inventory.quest.agonyStone));
-}
-
-static int csmcEnabledActor(Actor* this, GameState_Play* play)
-{
-    if (!csmcEnabled())
-        return 0;
-
-#if defined(GAME_OOT)
-    if (play->sceneId == SCE_OOT_TREASURE_SHOP && (this->variable & 0x1f) != 0x0a)
-        return 0;
-#endif
-
-#if defined(GAME_MM)
-    if (play->sceneId == SCE_MM_MOON_GORON)
-        return 0;
-#endif
-
-    return 1;
-}
-
-void comboCsmcInit(Actor* this, GameState_Play* play, s16 gi)
-{
-    int type;
-
-    if (!csmcEnabledActor(this, play))
-        return;
-
-    type = csmcFromItem(gi);
-    if (type == CSMC_MAJOR || type == CSMC_BOSS_KEY)
-    {
-        ActorSetScale(this, 0.01f);
-        ActorSetUnk(this, 40.f);
-
-
-#if defined(GAME_OOT)
-        /* Fix for IGT chest */
-        if (play->sceneId == SCE_OOT_INSIDE_GANON_CASTLE)
-        {
-            if ((this->variable & 0x1f) == (gComboData.mq & (1 << MQ_GANON_CASTLE) ? 0x04 : 0x11))
-                this->position.z -= 10.f;
-        }
-#endif
-    }
-    else
-    {
-#if defined(GAME_OOT)
-        ActorSetScale(this, 0.005f);
-        /* Fix for spirit temple chest */
-        if (play->sceneId == SCE_OOT_TEMPLE_SPIRIT && (this->variable & 0x1f) == 0x04)
-        {
-            this->position.x += 40.f;
-            this->position.z += 40.f;
-        }
-#else
-        ActorSetScale(this, 0.0075f);
-#endif
-        ActorSetUnk(this, 20.f);
-    }
-
-}
-
-void comboCsmcPreDraw(Actor* this, GameState_Play* play, s16 gi)
-{
-    int type;
-    const void* listFront;
-    const void* listSide;
-
-    if (csmcEnabledActor(this, play))
-        type = csmcFromItem(gi);
-    else
-        type = CSMC_NORMAL;
-    switch (type)
-    {
-    case CSMC_NORMAL:
-        listFront = kListNormalFront;
-        listSide = kListNormalSide;
-        break;
-    case CSMC_BOSS_KEY:
-    case CSMC_SOUL:
-        listFront = kListBossKeyFront;
-        listSide = kListBossKeySide;
-        break;
-    case CSMC_MAJOR:
-        listFront = kListMajorFront;
-        listSide = kListMajorSide;
-        break;
-    case CSMC_KEY:
-        listFront = kListKeyFront;
-        listSide = kListKeySide;
-        break;
-    case CSMC_SPIDER:
-        listFront = kListSpiderFront;
-        listSide = kListSpiderSide;
-        break;
-    case CSMC_FAIRY:
-        listFront = kListFairyFront;
-        listSide = kListFairySide;
-        break;
-    case CSMC_HEART:
-        listFront = kListHeartFront;
-        listSide = kListHeartSide;
-        break;
-    }
-
-    OPEN_DISPS(play->gs.gfx);
-    gSPSegment(POLY_OPA_DISP++, 0x09, gCustomKeep);
-    gSPSegment(POLY_OPA_DISP++, 0x0a, listFront);
-    gSPSegment(POLY_OPA_DISP++, 0x0b, listSide);
-    gSPSegment(POLY_XLU_DISP++, 0x09, gCustomKeep);
-    gSPSegment(POLY_XLU_DISP++, 0x0a, listFront);
-    gSPSegment(POLY_XLU_DISP++, 0x0b, listSide);
-    CLOSE_DISPS();
-}
-
-int comboCsmcChestSize(s16 gi)
-{
-    if (!csmcEnabled())
-        return -1;
-    switch (csmcFromItem(gi))
-    {
-    case CSMC_MAJOR:
-    case CSMC_BOSS_KEY:
-        return 1;
-    default:
-        return 0;
-    }
 }
