@@ -919,7 +919,6 @@ export class LogicPassSolver {
         newPlacement.set(loc, requiredItem);
         const result = this.pathfinder.run(null, { recursive: true, stopAtGoal: true, items: newPlacement, assumedItems: pool, ganonMajora: this.input.settings.goal === 'triforce3' });
         let goal: boolean;
-        console.log(result.ws[0].events.has(''));
         if (this.input.settings.goal === 'triforce3') {
           goal = result.ganonMajora;
         } else {
