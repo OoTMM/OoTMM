@@ -324,7 +324,7 @@ export class LogicPassSolver {
 
       for (;;) {
         /* Pathfind */
-        this.pathfinderState = this.pathfinder.run(this.pathfinderState, { inPlace: true, recursive: true, items: this.state.items });
+        this.pathfinderState = this.pathfinder.run(this.pathfinderState, { ganonMajora: this.input.settings.goal === 'triforce3', inPlace: true, recursive: true, items: this.state.items });
 
         /* Stop cond */
         if (this.input.settings.logic === 'beatable') {
