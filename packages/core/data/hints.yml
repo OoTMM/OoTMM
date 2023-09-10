@@ -13,6 +13,8 @@ OOT_HAUNTED_WASTELAND:      0x09
 OOT_GERUDO_ARCHERY:         0x0a
 OOT_COW_LINK:               0x0b
 OOT_BIGGORON:               0x0c
+OOT_ICE_CAVERN_CHEST:       0x0d
+OOT_TREASURE_GAME:          0x0e
 
 MM_RANCH_DEFENSE:     0x81
 MM_BUTLER_RACE:       0x82

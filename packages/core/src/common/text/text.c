@@ -123,6 +123,8 @@ static const char* const kCheckNamesOot[] = {
     "the " TEXT_COLOR_YELLOW "Gerudo Archery",
     "the " TEXT_COLOR_GREEN "Cow in Link's house",
     TEXT_COLOR_RED "Biggoron",
+    "the " TEXT_COLOR_TEAL "Ice Cavern Final Chest",
+    "the " TEXT_COLOR_YELLOW "Market Treasure Game",
 };
 
 static const char* const kCheckNamesMm[] = {
