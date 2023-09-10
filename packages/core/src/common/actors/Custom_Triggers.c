@@ -202,8 +202,16 @@ static void CustomTriggers_CheckTrigger(Actor_CustomTriggers* this, GameState_Pl
         return;
     }
 
-    /* Triforce */
+    /* Triforce (Hunt) */
     if (comboConfig(CFG_GOAL_TRIFORCE) && !gOotExtraFlags.triforceWin && gTriforceCount >= gComboData.triforceGoal)
+    {
+        gComboTriggersData.acc = 0;
+        gComboTriggersData.trigger = TRIGGER_TRIFORCE;
+        return;
+    }
+
+    /* Triforce (Quest) */
+    if (comboConfig(CFG_GOAL_TRIFORCE3) && !gOotExtraFlags.triforceWin && gTriforceCount >= 3)
     {
         gComboTriggersData.acc = 0;
         gComboTriggersData.trigger = TRIGGER_TRIFORCE;

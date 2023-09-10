@@ -4,8 +4,8 @@ import { LogicResult } from '../logic';
 import { DATA_GI, DATA_NPC, DATA_SCENES, DATA_REGIONS, DATA_HINTS_POOL, DATA_HINTS, DATA_ENTRANCES } from '../data';
 import { Game } from "../config";
 import { World, WorldCheck } from '../logic/world';
-import { DUNGEONS, Settings, SPECIAL_CONDS, SPECIAL_CONDS_KEYS } from '../settings';
-import { HintGossip, WorldHints } from '../logic/hints';
+import { DUNGEONS, Settings, SPECIAL_CONDS, SPECIAL_CONDS_FIELDS } from '../settings';
+import { HINTS_PATHS, HintGossip, WorldHints } from '../logic/hints';
 import { countMapAdd, gameId, padBuffer16, toU16Buffer, toU32Buffer, toU8Buffer } from '../util';
 import { Patchfile } from './patchfile';
 import { LOCATIONS_ZELDA, makeLocation, makePlayerLocations } from '../logic/locations';
@@ -28,18 +28,6 @@ const DUNGEON_REWARD_LOCATIONS = [
   'MM Great Bay Temple Boss',
   'MM Stone Tower Boss',
 ];
-
-const HINTS_DATA_OFFSETS = {
-  oot: 0x11000,
-  mm: 0x12000,
-};
-
-const STARTING_ITEMS_DATA_OFFSET = 0x13000;
-
-const ENTRANCE_DATA_OFFSETS = {
-  oot: 0x14000,
-  mm: 0x15000,
-};
 
 const SHARED_ITEMS_OOT = new Map([
   ['SHARED_BOW',              'OOT_BOW'],
@@ -152,6 +140,9 @@ const SUBSTITUTIONS: {[k: string]: string} = {
   MM_SHIELD: "MM_PROGRESSIVE_SHIELD_HERO",
   MM_OCARINA: "MM_OCARINA_OF_TIME",
   SHARED_TRIFORCE: "OOT_TRIFORCE",
+  SHARED_TRIFORCE_POWER: "OOT_TRIFORCE_POWER",
+  SHARED_TRIFORCE_COURAGE: "OOT_TRIFORCE_COURAGE",
+  SHARED_TRIFORCE_WISDOM: "OOT_TRIFORCE_WISDOM",
 };
 
 const gi = (settings: Settings, game: Game, item: Item, generic: boolean) => {
@@ -381,8 +372,24 @@ const gameChecks = (worldId: number, settings: Settings, game: Game, logic: Logi
   return padBuffer16(Buffer.concat(buffers));
 };
 
+const HINT_OFFSETS = {
+  KEY: 0,
+  TYPE: 1,
+  REGION: 2,
+  WORLD: 3,
+  ITEM: 4,
+  ITEM2: 6,
+  ITEM3: 8,
+  PLAYER: 10,
+  PLAYER2: 11,
+  PLAYER3: 12,
+  IMPORTANCE: 13,
+  IMPORTANCE2: 14,
+  IMPORTANCE3: 15,
+};
+
 const hintBuffer = (settings: Settings, game: Game, gossip: string, hint: HintGossip): Buffer => {
-  const data = Buffer.alloc(10, 0xff);
+  const data = Buffer.alloc(0x10, 0xff);
   let gossipData = DATA_HINTS_POOL[game][gossip];
   if (!gossipData) {
     throw new Error(`Unknown gossip ${gossip} for game ${game}`);
@@ -400,17 +407,19 @@ const hintBuffer = (settings: Settings, game: Game, gossip: string, hint: HintGo
     break;
   }
   switch (hint.type) {
-  case 'hero':
+  case 'path':
     {
       const regionD = regionData(hint.region);
       const region = DATA_REGIONS[regionD.id];
+      const pathId = HINTS_PATHS[hint.path].id;
       if (region === undefined) {
         throw new Error(`Unknown region ${hint.region}`);
       }
-      data.writeUInt8(id, 0);
-      data.writeUInt8(0x00, 1);
-      data.writeUInt8(region, 2);
-      data.writeUInt8(regionD.world + 1, 3);
+      data.writeUInt8(id, HINT_OFFSETS.KEY);
+      data.writeUInt8(0x00, HINT_OFFSETS.TYPE);
+      data.writeUInt8(region, HINT_OFFSETS.REGION);
+      data.writeUInt8(regionD.world + 1, HINT_OFFSETS.WORLD);
+      data.writeUInt16BE(pathId, HINT_OFFSETS.ITEM);
     }
     break;
   case 'foolish':
@@ -420,10 +429,10 @@ const hintBuffer = (settings: Settings, game: Game, gossip: string, hint: HintGo
       if (region === undefined) {
         throw new Error(`Unknown region ${hint.region}`);
       }
-      data.writeUInt8(id, 0);
-      data.writeUInt8(0x01, 1);
-      data.writeUInt8(region, 2);
-      data.writeUInt8(regionD.world + 1, 3);
+      data.writeUInt8(id, HINT_OFFSETS.KEY);
+      data.writeUInt8(0x01, HINT_OFFSETS.TYPE);
+      data.writeUInt8(region, HINT_OFFSETS.REGION);
+      data.writeUInt8(regionD.world + 1, HINT_OFFSETS.WORLD);
     }
     break;
   case 'item-exact':
@@ -434,15 +443,22 @@ const hintBuffer = (settings: Settings, game: Game, gossip: string, hint: HintGo
       }
       const items = hint.items;
       const itemsGI = hint.items.map((item) => gi(settings, 'oot', item.item, true));
-      data.writeUInt8(id, 0);
-      data.writeUInt8(0x02, 1);
-      data.writeUInt8(check, 2);
-      data.writeUInt8(hint.world + 1, 3);
-      data.writeUInt16BE(itemsGI[0], 4);
-      data.writeUint8(items[0].player + 1, 8);
+      data.writeUInt8(id, HINT_OFFSETS.KEY);
+      data.writeUInt8(0x02, HINT_OFFSETS.TYPE);
+      data.writeUInt8(check, HINT_OFFSETS.REGION);
+      data.writeUInt8(hint.world + 1, HINT_OFFSETS.WORLD);
+      data.writeUInt16BE(itemsGI[0], HINT_OFFSETS.ITEM);
+      data.writeUint8(items[0].player + 1, HINT_OFFSETS.PLAYER);
+      data.writeInt8(hint.importances[0], HINT_OFFSETS.IMPORTANCE);
       if (items.length > 1) {
-        data.writeUInt16BE(itemsGI[1], 6);
-        data.writeUint8(items[1].player + 1, 9);
+        data.writeUInt16BE(itemsGI[1], HINT_OFFSETS.ITEM2);
+        data.writeUint8(items[1].player + 1, HINT_OFFSETS.PLAYER2);
+        data.writeInt8(hint.importances[1], HINT_OFFSETS.IMPORTANCE2);
+      }
+      if (items.length > 2) {
+        data.writeUInt16BE(itemsGI[2], HINT_OFFSETS.ITEM3);
+        data.writeUint8(items[2].player + 1, HINT_OFFSETS.PLAYER3);
+        data.writeInt8(hint.importances[2], HINT_OFFSETS.IMPORTANCE3);
       }
     }
     break;
@@ -455,19 +471,20 @@ const hintBuffer = (settings: Settings, game: Game, gossip: string, hint: HintGo
           throw new Error(`Unknown region ${hint.region}`);
         }
         const itemGI = gi(settings, 'oot', item.item, true);
-        data.writeUInt8(id, 0);
-        data.writeUInt8(0x03, 1);
-        data.writeUInt8(region, 2);
-        data.writeUInt8(regionD.world + 1, 3);
-        data.writeUInt16BE(itemGI, 4);
-        data.writeUint8(item.player + 1, 8);
+        data.writeUInt8(id, HINT_OFFSETS.KEY);
+        data.writeUInt8(0x03, HINT_OFFSETS.TYPE);
+        data.writeUInt8(region, HINT_OFFSETS.REGION);
+        data.writeUInt8(regionD.world + 1, HINT_OFFSETS.WORLD);
+        data.writeUInt16BE(itemGI, HINT_OFFSETS.ITEM);
+        data.writeUint8(item.player + 1, HINT_OFFSETS.PLAYER);
+        data.writeInt8(hint.importance, HINT_OFFSETS.IMPORTANCE);
       }
       break;
   case 'junk':
     {
-      data.writeUInt8(id, 0);
-      data.writeUInt8(0x04, 1);
-      data.writeUInt16BE(hint.id, 4);
+      data.writeUInt8(id, HINT_OFFSETS.KEY);
+      data.writeUInt8(0x04, HINT_OFFSETS.TYPE);
+      data.writeUInt16BE(hint.id, HINT_OFFSETS.ITEM);
     }
     break;
   }
@@ -483,7 +500,7 @@ const gameHints = (settings: Settings, game: Game, hints: WorldHints): Buffer =>
     }
     buffers.push(hintBuffer(settings, game, gossip, h));
   }
-  buffers.push(Buffer.alloc(10, 0xff));
+  buffers.push(Buffer.alloc(0x10, 0xff));
   return padBuffer16(Buffer.concat(buffers));
 }
 
@@ -592,19 +609,19 @@ const randomizerTriforce = (logic: LogicResult): Buffer => toU16Buffer([logic.se
 
 function specialConds(settings: Settings) {
   const buffers: Buffer[] = [];
-  const flagsKeys: keyof typeof SPECIAL_CONDS_KEYS = Object.keys(SPECIAL_CONDS_KEYS) as any;
+  const flagsKeys: keyof typeof SPECIAL_CONDS_FIELDS = Object.keys(SPECIAL_CONDS_FIELDS) as any;
   for (const special in SPECIAL_CONDS) {
     const cond = settings.specialConds[special as keyof typeof SPECIAL_CONDS];
     let flags = 0;
     for (let i = 0; i < flagsKeys.length; ++i) {
       const key = flagsKeys[i];
       if ((cond as any)[key]) {
-        flags |= 1 << i;
+        flags = (flags | (1 << i)) >>> 0;
       }
     }
-    const buffer = Buffer.alloc(4);
-    buffer.writeUInt16BE(flags, 0);
-    buffer.writeUInt16BE(cond.count, 2);
+    const buffer = Buffer.alloc(8);
+    buffer.writeUInt32BE(flags, 0);
+    buffer.writeUInt16BE(cond.count, 4);
     buffers.push(buffer);
   }
   return Buffer.concat(buffers);
@@ -622,6 +639,7 @@ export const randomizerData = (worldId: number, logic: LogicResult): Buffer => {
   buffers.push(randomizerWarps(worldId, logic));
   buffers.push(randomizerConfig(logic.config));
   buffers.push(specialConds(logic.settings));
+  buffers.push(toU16Buffer([logic.settings.coinsRed, logic.settings.coinsGreen, logic.settings.coinsBlue, logic.settings.coinsYellow]));
   buffers.push(prices(worldId, logic));
   buffers.push(randomizerTriforce(logic));
   buffers.push(randomizerHints(worldId, logic));

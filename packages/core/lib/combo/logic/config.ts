@@ -3,7 +3,7 @@ import { Items, ItemsCount, itemByID } from '../items';
 import { Monitor } from '../monitor';
 import { Random } from '../random';
 import { Settings } from '../settings';
-import { countMapAdd } from '../util';
+import { countMapAdd, countMapRemove } from '../util';
 import { isEntranceShuffle } from './helpers';
 
 /* This pass pre-computes things from the settings */
@@ -48,6 +48,27 @@ export class LogicPassConfig {
     const config = new Set<Confvar>;
 
     const { settings } = this.state;
+
+    /* Handle starting age */
+    if (settings.startingAge === 'random') {
+      if (this.state.random.next() & 1) {
+        settings.startingAge = 'adult';
+      } else {
+        settings.startingAge = 'child';
+      }
+    }
+
+    if (settings.startingAge === 'adult') {
+      if (settings.progressiveSwordsOot === 'progressive') {
+        if ((this.startingItems.get(Items.OOT_SWORD) || 0) > 1) {
+          countMapRemove(this.startingItems, Items.OOT_SWORD, 1);
+        }
+      } else {
+        if (this.startingItems.has(Items.OOT_SWORD_MASTER)) {
+          countMapRemove(this.startingItems, Items.OOT_SWORD_MASTER, 1);
+        }
+      }
+    }
 
     /* Handle fairies */
     this.startingFairies();
@@ -104,6 +125,7 @@ export class LogicPassConfig {
       GOAL_GANON: settings.goal === 'ganon' || settings.goal === 'both',
       GOAL_MAJORA: settings.goal === 'majora' || settings.goal === 'both',
       GOAL_TRIFORCE: settings.goal === 'triforce',
+      GOAL_TRIFORCE3: settings.goal === 'triforce3',
       MM_MAJORA_CHILD_CUSTOM: settings.majoraChild === 'custom',
       FILL_WALLETS: settings.fillWallets,
       CHILD_WALLET: settings.childWallets,
@@ -130,6 +152,9 @@ export class LogicPassConfig {
       MM_SHUFFLE_POTS: settings.shufflePotsMm,
       OOT_SHUFFLE_GRASS: settings.shuffleGrassOot,
       MENU_NOTEBOOK: settings.menuNotebook,
+      OOT_AGELESS_CHILD_TRADE: settings.agelessChildTrade,
+      OOT_START_ADULT: settings.startingAge === 'adult',
+      HINT_IMPORTANCE: settings.hintImportance,
     };
 
     for (const v in exprs) {

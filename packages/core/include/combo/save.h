@@ -4,14 +4,26 @@
 #if !defined(__ASSEMBLER__)
 # include <combo/oot/save.h>
 # include <combo/mm/save.h>
+# define CUSTOM_SAVE_OFFSET_OOT 0
+# define CUSTOM_SAVE_OFFSET_MM      (CUSTOM_SAVE_OFFSET_OOT + ((sizeof(OotCustomSave) + 15) & 0xffffff0))
+# define CUSTOM_SAVE_OFFSET_SHARED  (CUSTOM_SAVE_OFFSET_MM +  ((sizeof(MmCustomSave) + 15) & 0xffffff0))
+
 # if defined(GAME_OOT)
 typedef OotCustomSave CustomSave;
-# define CUSTOM_SAVE_OFFSET 0
+#  define CUSTOM_SAVE_OFFSET CUSTOM_SAVE_OFFSET_OOT
 # else
 typedef MmCustomSave CustomSave;
-# define CUSTOM_SAVE_OFFSET ((sizeof(OotCustomSave) + 15) & 0xffffff0)
+#  define CUSTOM_SAVE_OFFSET CUSTOM_SAVE_OFFSET_MM
 # endif
 extern CustomSave gCustomSave;
+
+typedef struct ALIGNED(16)
+{
+    u16 coins[4];
+}
+SharedCustomSave;
+
+extern SharedCustomSave gSharedCustomSave;
 #endif
 
 #define SAVE_OFFSET_MM_1            0x08000

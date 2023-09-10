@@ -1,8 +1,8 @@
 "SPAWN":
   region: NONE
   exits:
-    "SPAWN CHILD": "is_child"
-    "SPAWN ADULT": "is_adult && event(TIME_TRAVEL)"
+    "SPAWN CHILD": "is_child && (setting(startingAge, child) || event(TIME_TRAVEL))"
+    "SPAWN ADULT": "is_adult && (setting(startingAge, adult) || event(TIME_TRAVEL))"
 "SPAWN CHILD":
   region: NONE
   exits:

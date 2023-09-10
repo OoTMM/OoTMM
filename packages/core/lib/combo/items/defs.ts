@@ -355,6 +355,9 @@ const ITEM_IDS = [
   'SHARED_STICKS_5',
   'SHARED_WALLET',
   'SHARED_TRIFORCE',
+  'SHARED_TRIFORCE_POWER',
+  'SHARED_TRIFORCE_COURAGE',
+  'SHARED_TRIFORCE_WISDOM',
   'OOT_RUPEE_SILVER_DC',
   'OOT_RUPEE_SILVER_BOTW',
   'OOT_RUPEE_SILVER_SPIRIT_CHILD',
@@ -524,7 +527,7 @@ const ITEM_IDS = [
   'OOT_COIN_BLUE',
 ] as const;
 
-type ItemID = typeof ITEM_IDS[number];
+export type ItemID = typeof ITEM_IDS[number];
 type ItemDefs = {[k in ItemID]: Item};
 
 export type Item = {

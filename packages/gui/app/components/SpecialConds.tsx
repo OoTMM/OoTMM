@@ -1,5 +1,5 @@
 import React from 'react';
-import { SPECIAL_CONDS, SPECIAL_CONDS_KEYS } from '@ootmm/core';
+import { Settings, SPECIAL_CONDS, SPECIAL_CONDS_FIELDS } from '@ootmm/core';
 
 import { useSettings } from '../contexts/GeneratorContext';
 import { Checkbox } from './Checkbox';
@@ -37,6 +37,16 @@ function SpecialCondsPanel({ cond }: SpecialCondsPanelProps) {
          </Group>
         <InputNumber label="Amount" value={c.count} onChange={x => setSettings({ specialConds: { [cond]: { count: x } }} as any)}/>
       </Group>
+<!--       <h2>{SPECIAL_CONDS[cond].name}</h2>
+      {Object.keys(SPECIAL_CONDS_FIELDS).filter(key => { const cond = (SPECIAL_CONDS_FIELDS as any)[key].cond; return cond ? cond(settings) : true }).map(key =>
+        <Checkbox
+          key={key}
+          label={(SPECIAL_CONDS_FIELDS as any)[key].name}
+          checked={(c as any)[key]}
+          onChange={x => setSettings({ specialConds: { [cond]: { [key]: x } }} as any)}
+        />
+      )}
+      <InputNumber label="Amount" value={c.count} onChange={x => setSettings({ specialConds: { [cond]: { count: x } }} as any)}/> -->
     </form>
   );
 }

@@ -229,6 +229,26 @@ void comboCreateSave(void* unk, void* buffer)
         gMmSouls2 = 0xffffffff;
     }
 
+    gOotSave.childEquips.buttonItems[0] = ITEM_NONE;
+    gOotSave.adultEquips.buttonItems[0] = ITEM_NONE;
+
+    /* Apply starting age */
+    if (comboConfig(CFG_OOT_START_ADULT))
+    {
+        /* Spawn as adult in ToT */
+        gOotSave.age = AGE_ADULT;
+        gOotSave.entrance = ENTR_OOT_TEMPLE_OF_TIME;
+        gOotSave.sceneId = SCE_OOT_TEMPLE_OF_TIME;
+
+        /* Force Master Sword */
+        gOotSave.equips.buttonItems[0] = ITEM_OOT_SWORD_MASTER;
+        gOotSave.inventory.equipment.swords |= EQ_OOT_SWORD_MASTER;
+        gOotSave.equips.equipment.swords = 2;
+
+        /* Unset the swordless flag */
+        gSave.eventsMisc[29] = 0;
+    }
+
     /* Apply starting items */
     applyStartingItems();
 

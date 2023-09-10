@@ -1,5 +1,7 @@
 "Moon":
   region: MOON
+  events:
+    MAJORA_PRE_BOSS: "true"
   exits:
     "Moon Trial Deku Entrance":  "can_reset_time_on_moon && masks(1)"
     "Moon Trial Goron Entrance": "can_reset_time_on_moon && masks(2)"
@@ -147,7 +149,7 @@
   region: MOON
   events:
     MAJORA_PHASE_1: "has_arrows || has_mask_zora || (has(MASK_FIERCE_DEITY) && has_magic)"
-    MAJORA: "!setting(goal, triforce) && event(MAJORA_PHASE_1) && (has_weapon || has_mask_zora || (has(MASK_FIERCE_DEITY) && has_magic))"
+    MAJORA: "!is_goal_triforce && event(MAJORA_PHASE_1) && (has_weapon || has_mask_zora || (has(MASK_FIERCE_DEITY) && has_magic))"
   locations:
     "Moon Majora Pot 1": "event(MAJORA)"
     "Moon Majora Pot 2": "event(MAJORA)"

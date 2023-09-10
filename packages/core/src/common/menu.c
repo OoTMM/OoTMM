@@ -62,8 +62,65 @@ static DungeonDef gDungeonDefs[] = {
     { "Stone Tower",    3,                              DD_MM  | DD_MAP_COMPASS | DD_BOSS_KEY | DD_FAIRIES },
     { "Clock Town",     0,                              DD_MISC },
     { "Tokens",         1,                              DD_MISC },
-    { "Triforce",       2,                              DD_MISC },
+    {},
+    {},
+    {},
+    {},
+    {},
 };
+
+static int gDungeonDefCount = 19;
+
+void menuInit()
+{
+    DungeonDef* d;
+
+    d = gDungeonDefs + gDungeonDefCount;
+    if (comboConfig(CFG_GOAL_TRIFORCE) || comboConfig(CFG_GOAL_TRIFORCE3))
+    {
+        d->name = "Triforce";
+        d->id = 2;
+        d->flags = DD_MISC;
+        gDungeonDefCount++;
+        d++;
+    }
+
+    if (gComboData.maxCoins[0])
+    {
+        d->name = "Red Coins";
+        d->id = 3;
+        d->flags = DD_MISC;
+        gDungeonDefCount++;
+        d++;
+    }
+
+    if (gComboData.maxCoins[1])
+    {
+        d->name = "Green Coins";
+        d->id = 4;
+        d->flags = DD_MISC;
+        gDungeonDefCount++;
+        d++;
+    }
+
+    if (gComboData.maxCoins[2])
+    {
+        d->name = "Blue Coins";
+        d->id = 5;
+        d->flags = DD_MISC;
+        gDungeonDefCount++;
+        d++;
+    }
+
+    if (gComboData.maxCoins[3])
+    {
+        d->name = "Yellow Coins";
+        d->id = 6;
+        d->flags = DD_MISC;
+        gDungeonDefCount++;
+        d++;
+    }
+}
 
 static const char* const kSoulsOot[] = {
     "Stalfos",
@@ -225,16 +282,6 @@ static int digitCount(int v)
     if (v >= 10)
         return 2;
     return 1;
-}
-
-static int menuCount(void)
-{
-    int count;
-
-    count = ARRAY_SIZE(gDungeonDefs);
-    if (!comboConfig(CFG_GOAL_TRIFORCE))
-        count--;
-    return count;
 }
 
 static void color4(u8* r, u8* g, u8* b, u8* a, u32 color)
@@ -608,7 +655,7 @@ static void printDungeonData(GameState_Play* play, int base, int index)
     u8 b;
     u8 a;
 
-    triforceMax = gOotExtraFlags.triforceWin ? gComboData.triforcePieces : gComboData.triforceGoal;
+    triforceMax = comboConfig(CFG_GOAL_TRIFORCE3) ? 3 : (gOotExtraFlags.triforceWin ? gComboData.triforcePieces : gComboData.triforceGoal);
     triforceDigits = digitCount(triforceMax);
 
     offX = 0.f;
@@ -692,6 +739,30 @@ static void printDungeonData(GameState_Play* play, int base, int index)
             drawTexRGBA32_12x12(play, CK_PTR(CUSTOM_KEEP_SMALL_ICON_TRIFORCE), x + 104.f, y);
             printNumColored(play, gTriforceCount, triforceMax, triforceDigits, x + 116.f, y, 1);
             break;
+        case 3:
+            /* Red Coins */
+            gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 255, 0, 0, 255);
+            drawTexRGBA32_12x12(play, CK_PTR(CUSTOM_KEEP_SMALL_ICON_COIN), x + 104.f, y);
+            printNumColored(play, gSharedCustomSave.coins[0], gComboData.maxCoins[0], digitCount(gComboData.maxCoins[0]), x + 116.f, y, 1);
+            break;
+        case 4:
+            /* Green Coins */
+            gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 0, 255, 0, 255);
+            drawTexRGBA32_12x12(play, CK_PTR(CUSTOM_KEEP_SMALL_ICON_COIN), x + 104.f, y);
+            printNumColored(play, gSharedCustomSave.coins[1], gComboData.maxCoins[1], digitCount(gComboData.maxCoins[1]), x + 116.f, y, 1);
+            break;
+        case 5:
+            /* Blue Coins */
+            gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 0, 0, 255, 255);
+            drawTexRGBA32_12x12(play, CK_PTR(CUSTOM_KEEP_SMALL_ICON_COIN), x + 104.f, y);
+            printNumColored(play, gSharedCustomSave.coins[2], gComboData.maxCoins[2], digitCount(gComboData.maxCoins[2]), x + 116.f, y, 1);
+            break;
+        case 6:
+            /* Yellow Coins */
+            gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 255, 255, 0, 255);
+            drawTexRGBA32_12x12(play, CK_PTR(CUSTOM_KEEP_SMALL_ICON_COIN), x + 104.f, y);
+            printNumColored(play, gSharedCustomSave.coins[3], gComboData.maxCoins[3], digitCount(gComboData.maxCoins[3]), x + 116.f, y, 1);
+            break;
         }
     }
     else
@@ -768,7 +839,7 @@ void comboMenuUpdate(GameState_Play* play)
     switch (g.menuScreen)
     {
     case MENU_INFO:
-        g.menuCursorMax = menuCount();
+        g.menuCursorMax = gDungeonDefCount;
         break;
     case MENU_SOULS_OOT:
         g.menuCursorMax = ARRAY_SIZE(kSoulsOot);

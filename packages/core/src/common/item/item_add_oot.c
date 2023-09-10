@@ -1412,7 +1412,22 @@ int comboAddItemOot(s16 gi, int noEffect)
         comboAddCompassOot(SCE_OOT_ICE_CAVERN);
         break;
     case GI_OOT_TRIFORCE:
+    case GI_OOT_TRIFORCE_POWER:
+    case GI_OOT_TRIFORCE_COURAGE:
+    case GI_OOT_TRIFORCE_WISDOM:
         count = ++gTriforceCount;
+        break;
+    case GI_OOT_COIN_RED:
+        count = ++gSharedCustomSave.coins[0];
+        break;
+    case GI_OOT_COIN_GREEN:
+        count = ++gSharedCustomSave.coins[1];
+        break;
+    case GI_OOT_COIN_BLUE:
+        count = ++gSharedCustomSave.coins[2];
+        break;
+    case GI_OOT_COIN_YELLOW:
+        count = ++gSharedCustomSave.coins[3];
         break;
     case GI_OOT_RUPEE_SILVER_DC:
         count = addSilverRupees(SR_DC, noEffect);

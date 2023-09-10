@@ -2,7 +2,7 @@ import { sortBy } from 'lodash';
 
 import { Options } from '../options';
 import { Glitch, GLITCHES, Settings, Trick, TRICKS } from '../settings';
-import { HintGossipFoolish, HintGossipHero, HintGossipItemExact, HintGossipItemRegion, Hints } from './hints';
+import { HintGossipFoolish, HintGossipPath, HintGossipItemExact, HintGossipItemRegion, Hints, HINTS_PATHS } from './hints';
 import { World } from './world';
 import { itemName } from '../names';
 import { Monitor } from '../monitor';
@@ -214,18 +214,23 @@ export class LogicPassSpoiler {
       if (this.isMulti) this.indent(`World ${worldId + 1}:`);
       const hints = globalHints[worldId];
       const gossipStones = Object.entries(hints.gossip);
-      const gossipsHero = gossipStones.filter(stone => stone[1].type === 'hero').sort() as [string, HintGossipHero][];
+      const gossipsPaths = gossipStones.filter(stone => stone[1].type === 'path').sort() as [string, HintGossipPath][];
       const gossipsFoolish = gossipStones.filter(stone => stone[1].type === 'foolish').sort() as [string, HintGossipFoolish][];
       const gossipsItemExact = gossipStones.filter(stone => stone[1].type === 'item-exact').sort() as [string, HintGossipItemExact][];
       const gossipsItemRegion = gossipStones.filter(stone => stone[1].type === 'item-region').sort() as [string, HintGossipItemRegion][];
 
-      if (gossipsHero.length > 0) {
-        this.indent('Way of the Hero:');
-        for (const [stone, hint] of gossipsHero) {
-          this.write(stone);
-          this.write(`  ${this.regionName(hint.region)}    ${this.locationName(hint.location)} - ${this.itemName(this.state.items.get(hint.location)!)}`);
+      if (gossipsPaths.length > 0) {
+        for (const type of Object.keys(HINTS_PATHS)) {
+          const hints = gossipsPaths.filter(x => x[1].path === type);
+          if (hints.length === 0) continue;
+          const name = (HINTS_PATHS as any)[type].name;
+          this.indent(`${name}:`);
+          for (const [stone, hint] of hints) {
+            this.write(stone);
+            this.write(`  ${this.regionName(hint.region)}    ${this.locationName(hint.location)} - ${this.itemName(this.state.items.get(hint.location)!)}`);
+          }
+          this.unindent('');
         }
-        this.unindent('');
       }
 
       if (gossipsFoolish.length > 0) {

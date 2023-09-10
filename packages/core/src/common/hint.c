@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/dma.h>
+#include <combo/item.h>
 
 #if defined(GAME_OOT)
 # define HINTS_ADDR 0x03ff1000
@@ -13,10 +14,9 @@ typedef struct PACKED ALIGNED(2)
     u8 type;
     u8 region;
     u8 world;
-    s16 item;
-    s16 item2;
-    u8  player;
-    u8  player2;
+    s16 items[3];
+    u8  players[3];
+    s8  itemImportances[3];
 }
 Hint;
 
@@ -66,12 +66,34 @@ void comboInitHints(void)
     comboDmaLoadFile(gHints, COMBO_VROM_HINTS);
 }
 
-static void appendCorrectItemName(char** b, s16 gi, u8 player)
+static void appendCorrectItemName(char** b, s16 gi, u8 player, u8 importance)
 {
 #if defined(GAME_MM)
     gi ^= MASK_FOREIGN_GI;
 #endif
     comboTextAppendItemName(b, gi, TF_PROGRESSIVE);
+
+    if (comboConfig(CFG_HINT_IMPORTANCE) && !isItemFastBuy(gi))
+    {
+        switch (importance)
+        {
+        case 0:
+            comboTextAppendStr(b, " (" TEXT_COLOR_PINK "not required");
+            comboTextAppendClearColor(b);
+            comboTextAppendStr(b, ")");
+            break;
+        case 1:
+            comboTextAppendStr(b, " (" TEXT_COLOR_TEAL "sometimes required");
+            comboTextAppendClearColor(b);
+            comboTextAppendStr(b, ")");
+            break;
+        case 2:
+            comboTextAppendStr(b, " (" TEXT_COLOR_YELLOW "required");
+            comboTextAppendClearColor(b);
+            comboTextAppendStr(b, ")");
+            break;
+        }
+    }
 
     if (player != 0 && player != 0xff && player != gComboData.playerId)
     {
@@ -81,11 +103,19 @@ static void appendCorrectItemName(char** b, s16 gi, u8 player)
     }
 }
 
+static const char* kPathNames[] = {
+    TEXT_COLOR_YELLOW "Way of the Hero",
+    TEXT_COLOR_RED    "Path of Power",
+    TEXT_COLOR_GREEN  "Path of Courage",
+    TEXT_COLOR_BLUE   "Path of Wisdom",
+};
+
 void comboHintGossip(u8 key, GameState_Play* play)
 {
     char* b;
     char* start;
     const Hint* hint;
+    int itemIndex;
 
 #if defined(GAME_OOT)
     b = play->msgCtx.textBuffer;
@@ -106,11 +136,13 @@ void comboHintGossip(u8 key, GameState_Play* play)
     }
     else
     {
+        itemIndex = 0;
         switch (hint->type)
         {
-        case HINT_TYPE_HERO:
+        case HINT_TYPE_PATH:
             comboTextAppendRegionName(&b, hint->region, hint->world, 0);
-            comboTextAppendStr(&b, " is on the " TEXT_COLOR_YELLOW "Way of the Hero");
+            comboTextAppendStr(&b, " is on the ");
+            comboTextAppendStr(&b, kPathNames[hint->items[0]]);
             comboTextAppendClearColor(&b);
             break;
         case HINT_TYPE_FOOLISH:
@@ -122,20 +154,27 @@ void comboHintGossip(u8 key, GameState_Play* play)
         case HINT_TYPE_ITEM_EXACT:
             comboTextAppendCheckName(&b, hint->region, hint->world);
             comboTextAppendStr(&b, " gives ");
-            appendCorrectItemName(&b, hint->item, hint->player);
-            if (hint->item2 != -1)
+            appendCorrectItemName(&b, hint->items[itemIndex], hint->players[itemIndex], hint->itemImportances[itemIndex]);
+            if (hint->items[2] != -1)
             {
+                itemIndex++;
+                comboTextAppendStr(&b, ", ");
+                appendCorrectItemName(&b, hint->items[itemIndex], hint->players[itemIndex], hint->itemImportances[itemIndex]);
+            }
+            if (hint->items[1] != -1)
+            {
+                itemIndex++;
                 comboTextAppendStr(&b, " and ");
-                appendCorrectItemName(&b, hint->item2, hint->player2);
+                appendCorrectItemName(&b, hint->items[itemIndex], hint->players[itemIndex], hint->itemImportances[itemIndex]);
             }
             break;
         case HINT_TYPE_ITEM_REGION:
-            appendCorrectItemName(&b, hint->item, hint->player);
+            appendCorrectItemName(&b, hint->items[0], hint->players[0], hint->itemImportances[0]);
             comboTextAppendStr(&b, " can be found ");
             comboTextAppendRegionName(&b, hint->region, hint->world, TF_PREPOS);
             break;
         case HINT_TYPE_JUNK:
-            comboTextAppendStr(&b, kJunkHints[((u16)hint->item) % ARRAY_SIZE(kJunkHints)]);
+            comboTextAppendStr(&b, kJunkHints[((u16)hint->items[0]) % ARRAY_SIZE(kJunkHints)]);
             break;
         }
     }

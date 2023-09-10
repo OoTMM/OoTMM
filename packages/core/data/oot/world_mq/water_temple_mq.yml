@@ -7,7 +7,7 @@
   dungeon: Water
   exits:
     "Water Temple": "true"
-    "Water Temple Dark Link": "small_keys_water(1) && event(WATER_LEVEL_HIGH) && can_longshot && soul(SOUL_STALFOS)"
+    "Water Temple Dark Link": "small_keys_water(1) && event(WATER_LEVEL_HIGH) && can_longshot"
     "Water Temple Three Torch Room": "event(WATER_GATES)"
     "Water Temple Side Loop": "event(WATER_GATES) && can_longshot && (scarecrow_longshot || has_hover_boots)"
     "Water Temple Antichamber": "can_longshot && event(WATER_LEVEL_HIGH)"
@@ -21,22 +21,53 @@
     "MQ Water Temple Central Pillar Chest": "can_play_time && can_use_din && can_hookshot && has_iron_boots && has_tunic_zora_strict"
     "MQ Water Temple GS Lizalfos Hallway": "event(WATER_LEVEL_LOW) && can_use_din"
     "MQ Water Temple GS High Water Changer": "event(WATER_LEVEL_LOW) && can_longshot"
+    "MQ Water Temple Pot Ruto 1": "has_iron_boots && has_tunic_zora && (can_hookshot || event(WATER_LEVEL_LOW))"
+    "MQ Water Temple Pot Ruto 2": "has_iron_boots && has_tunic_zora && (can_hookshot || event(WATER_LEVEL_LOW))"
+    "MQ Water Temple Pot Storage Room 1": "has_iron_boots && has_tunic_zora && can_hookshot"
+    "MQ Water Temple Pot Storage Room 2": "has_iron_boots && has_tunic_zora && can_hookshot"
+    "MQ Water Temple Pot Storage Room 3": "has_iron_boots && has_tunic_zora && can_hookshot"
+    "MQ Water Temple Pot Twisted Room Entrance": "has_iron_boots && has_tunic_zora && (can_hookshot || (event(WATER_LEVEL_LOW) && has_hover_boots))"
+    "MQ Water Temple Pot Twisted Room Right 1": "has_iron_boots && has_tunic_zora && (can_hookshot || (event(WATER_LEVEL_LOW) && has_hover_boots))"
+    "MQ Water Temple Pot Twisted Room Right 2": "has_iron_boots && has_tunic_zora && (can_hookshot || (event(WATER_LEVEL_LOW) && has_hover_boots))"
+    "MQ Water Temple Pot Twisted Room Cage 1": "event(WATER_LEVEL_LOW) && can_use_din"
+    "MQ Water Temple Pot Twisted Room Cage 2": "event(WATER_LEVEL_LOW) && can_use_din"
+    "MQ Water Temple Pot Room Before High Water 1": "event(WATER_LEVEL_LOW) && can_hookshot"
+    "MQ Water Temple Pot Room Before High Water 2": "event(WATER_LEVEL_LOW) && can_hookshot"
+    "MQ Water Temple Pot Room Before High Water 3": "event(WATER_LEVEL_LOW) && can_hookshot"
 "Water Temple Dark Link":
   dungeon: Water
   events:
-    WATER_GATES: "soul(SOUL_DARK_LINK) && can_use_din && has_iron_boots && has_tunic_zora"
+    WATER_GATES: "soul(SOUL_DARK_LINK) && has_weapon && can_use_din && has_iron_boots && has_tunic_zora && soul(SOUL_STALFOS)"
   locations:
-    "MQ Water Temple Boss Key Chest": "soul(SOUL_DARK_LINK) && can_use_din && can_dive_small" #Scale can solve dragon spiral MQ
-    "MQ Water Temple GS River": "soul(SOUL_DARK_LINK)" #Believe it or not, this is very easy to get with no Iron Boots.
+    "MQ Water Temple Boss Key Chest": "soul(SOUL_DARK_LINK) && has_weapon && can_use_din && can_dive_small && soul(SOUL_STALFOS)" #Scale can solve dragon spiral MQ
+    "MQ Water Temple GS River": "soul(SOUL_STALFOS) && soul(SOUL_DARK_LINK) && has_weapon" #Believe it or not, this is very easy to get with no Iron Boots.
+    "MQ Water Temple Pot Before Dark Link Ledge 1": "(soul(SOUL_STALFOS) && has_weapon) || has_hover_boots" #This is why the Stalfos soul was removed from the main room requirements.
+    "MQ Water Temple Pot Before Dark Link Ledge 2": "(soul(SOUL_STALFOS) && has_weapon) || has_hover_boots" #This is why the Stalfos soul was removed from the main room requirements.
+    "MQ Water Temple Pot Before Dark Link Ledge 3": "(soul(SOUL_STALFOS) && has_weapon) || has_hover_boots" #This is why the Stalfos soul was removed from the main room requirements.
+    "MQ Water Temple Pot Before Dark Link Near Door 1": "soul(SOUL_STALFOS) && has_weapon"
+    "MQ Water Temple Pot Before Dark Link Near Door 2": "soul(SOUL_STALFOS) && has_weapon"
+    "MQ Water Temple Pot After Dark Link 1": "soul(SOUL_DARK_LINK) && has_weapon && soul(SOUL_STALFOS)"
+    "MQ Water Temple Pot After Dark Link 2": "soul(SOUL_DARK_LINK) && has_weapon && soul(SOUL_STALFOS)"
+    "MQ Water Temple Pot River 1": "soul(SOUL_DARK_LINK) && has_weapon && soul(SOUL_STALFOS)"
+    "MQ Water Temple Pot River 2": "soul(SOUL_DARK_LINK) && has_weapon && soul(SOUL_STALFOS)"
+    "MQ Water Temple Pot Boss Key Room": "soul(SOUL_DARK_LINK) && has_weapon && can_use_din && can_dive_small && soul(SOUL_STALFOS)"
 "Water Temple Three Torch Room":
   dungeon: Water
   locations:
     "MQ Water Temple GS Three Torch": "has_fire_arrows && (scarecrow_hookshot || has_hover_boots)"
+    "MQ Water Temple Pot Skull Cage 1": "has_fire_arrows && (scarecrow_hookshot || has_hover_boots)"
+    "MQ Water Temple Pot Skull Cage 2": "has_fire_arrows && (scarecrow_hookshot || has_hover_boots)"
+    "MQ Water Temple Pot Skull Cage 3": "has_fire_arrows && (scarecrow_hookshot || has_hover_boots)"
+    "MQ Water Temple Pot Skull Cage 4": "has_fire_arrows && (scarecrow_hookshot || has_hover_boots)"
 "Water Temple Side Loop":
   dungeon: Water
   locations:
     "MQ Water Temple Side Loop Key": "true"
     "MQ Water Temple GS Side Loop": "has_fire && small_keys_water(2) && soul_dodongo"
+    "MQ Water Temple Pot Stalfos Room 1": "true"
+    "MQ Water Temple Pot Stalfos Room 2": "true"
+    "MQ Water Temple Pot Loop 1": "has_fire && small_keys_water(2)"
+    "MQ Water Temple Pot Loop 2": "has_fire && small_keys_water(2)"
 "Water Temple Antichamber":
   dungeon: Water
   exits:

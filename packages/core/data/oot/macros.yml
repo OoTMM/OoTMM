@@ -13,7 +13,7 @@
 "has_bomb_bag": "has(BOMB_BAG) || has(SHARED_BOMB_BAG)"
 "has_bombs": "has_bomb_bag && (event(BOMBS) || renewable(BOMBS_5) || renewable(BOMBS_10) || renewable(BOMBS_20) || renewable(BOMBS_30) || renewable(SHARED_BOMBS_5) || renewable(SHARED_BOMBS_10) || renewable(SHARED_BOMBS_20) || renewable(SHARED_BOMBS_30) || (setting(sharedBombBags) && event(MM_BOMBS)))"
 "has_bombchu": "has_bomb_bag && (event(BOMBCHUS) || renewable(BOMBCHU_5) || renewable(BOMBCHU_10) || renewable(BOMBCHU_20))"
-"can_use_slingshot": "is_child && has(SLINGSHOT) && (event(SEEDS) || renewable(DEKU_SEEDS_30))"
+"can_use_slingshot": "has(SLINGSHOT) && ((is_child && (event(SEEDS) || renewable(DEKU_SEEDS_30))) || (is_adult && glitch_equip_swap && can_use_bow))"
 "has_bow": "has(BOW) || has(SHARED_BOW)"
 "has_arrows": "has_bow && (event(ARROWS) || renewable(ARROWS_5) || renewable(ARROWS_10) || renewable(ARROWS_30) || renewable(SHARED_ARROWS_5) || renewable(SHARED_ARROWS_10) || renewable(SHARED_ARROWS_30) || renewable(SHARED_ARROWS_40) || (setting(sharedBows) && event(MM_ARROWS)))"
 "can_use_bow": "is_adult && has_arrows"
@@ -43,8 +43,8 @@
 
 # Swords
 "has_sword_kokiri": "cond(setting(progressiveSwordsOot, progressive), has(SWORD), has(SWORD_KOKIRI))"
-"has_sword_master": "cond(setting(progressiveSwordsOot, progressive), has(SWORD, 2), has(SWORD_MASTER))"
-"has_sword_goron": "cond(setting(progressiveSwordsOot, progressive), has(SWORD, 3), cond(setting(progressiveSwordsOot, goron), has(SWORD_GORON), has(SWORD_KNIFE) || has(SWORD_BIGGORON)))"
+"has_sword_master": "setting(startingAge, adult) || cond(setting(progressiveSwordsOot, progressive), has(SWORD, 2), has(SWORD_MASTER))"
+"has_sword_goron": "cond(setting(progressiveSwordsOot, progressive), cond(setting(startingAge, adult), has(SWORD, 2), has(SWORD, 3)), cond(setting(progressiveSwordsOot, goron), has(SWORD_GORON), has(SWORD_KNIFE) || has(SWORD_BIGGORON)))"
 "has_weapon": "can_use_sword"
 "can_use_sword_kokiri": "age_sword_child && has_sword_kokiri"
 "can_use_sword_master": "age_sword_adult && has_sword_master"
