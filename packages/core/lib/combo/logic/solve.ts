@@ -181,13 +181,14 @@ const REWARDS_DUNGEONS = [
 ];
 
 type ItemPools = {
+  extra: PlayerItems,
   required: PlayerItems,
   nice: PlayerItems,
   junk: PlayerItems,
 };
 
 const removeItemPools = (pools: ItemPools, item: PlayerItem) => {
-  const keys = ['required', 'nice', 'junk'] as const;
+  const keys = ['extra', 'required', 'nice', 'junk'] as const;
   for (const key of keys) {
     const items = pools[key];
     if (items.has(item)) {
@@ -208,6 +209,7 @@ const cloneState = (state: SolverState) => {
   return {
     items: new Map(state.items),
     pools: {
+      extra: new Map(state.pools.extra),
       required: new Map(state.pools.required),
       nice: new Map(state.pools.nice),
       junk: new Map(state.pools.junk),
@@ -245,7 +247,7 @@ export class LogicPassSolver {
     this.pathfinder = new Pathfinder(this.input.worlds, this.input.settings, this.input.startingItems);
     this.state = {
       items: new Map,
-      pools: { required: new Map, nice: new Map, junk: new Map },
+      pools: { extra: new Map, required: new Map, nice: new Map, junk: new Map },
       criticalRenewables: new Set,
       placedCount: 0,
     }
@@ -316,9 +318,6 @@ export class LogicPassSolver {
       });
     }
 
-    /* Place named triforce pieces */
-    this.placeNamedTriforce();
-
     /* Place required items */
     this.retry(() => {
       this.pathfinderState = this.pathfinder.run(null);
@@ -329,7 +328,13 @@ export class LogicPassSolver {
 
         /* Stop cond */
         if (this.input.settings.logic === 'beatable') {
-          if (this.pathfinderState.goal) {
+          let goal: boolean;
+          if (this.input.settings.goal === 'triforce3') {
+            goal = this.pathfinderState.ganonMajora;
+          } else {
+            goal = this.pathfinderState.goal;
+          }
+          if (goal) {
             break;
           }
         }
@@ -343,9 +348,7 @@ export class LogicPassSolver {
     });
 
     /* At this point we have a beatable game */
-    if (!this.modeValidate) {
-      this.fillAll();
-    }
+    this.fillAll();
 
     return { items: this.state.items };
   }
@@ -391,7 +394,9 @@ export class LogicPassSolver {
        */
       const junk = ItemHelpers.isJunk(pi.item);
 
-      if (ItemHelpers.isItemMajor(pi.item)) {
+      if (ItemHelpers.isNamedTriforce(pi.item)) {
+        this.state.pools.extra.set(pi, amount);
+      } else if (ItemHelpers.isItemMajor(pi.item)) {
         if (junk && ItemHelpers.isItemConsumable(pi.item)) {
           const renewableCount = this.input.renewableJunks.get(pi) || 0;
           const junkCount = amount - renewableCount;
@@ -538,15 +543,43 @@ export class LogicPassSolver {
     return locs;
   }
 
+  private getSpheres() {
+    let spheres = new Map<Location, number>;
+    let sphereId = 1;
+    let pathfinderState: PathfinderState | null = null;
+
+    for (;;) {
+      pathfinderState = this.pathfinder.run(pathfinderState, { inPlace: true, items: this.state.items });
+      if (!pathfinderState.changed) {
+        break;
+      }
+      for (const l of pathfinderState.newLocations) {
+        spheres.set(l, sphereId);
+      }
+      sphereId++;
+    }
+
+    return spheres;
+  }
+
+  private placeExtra() {
+    this.placeNamedTriforce();
+  }
+
   private placeNamedTriforce() {
     if (this.input.settings.goal !== 'triforce3')
-      return;
-    if (this.input.settings.logic === 'none')
       return;
 
     this.retry(() => {
       for (let worldId = 0; worldId < this.input.worlds.length; ++worldId) {
-        const locs = this.getWeightedLocationList(worldId);
+        let locs: Map<Location, number>;
+        if (this.input.settings.logic !== 'none') {
+          locs = this.getSpheres();
+        } else {
+          locs = new Map(this.locations.map(x => [x, 1] as const));
+        }
+        locs = new Map(Array.from(locs.entries()).filter(x => locationData(x[0]).world === worldId && !this.state.items.has(x[0])));
+        console.log(locs);
         let locsArray = shuffle(this.input.random, countMapArray(locs));
         const triforces = [
           makePlayerItem(Items.SHARED_TRIFORCE_POWER, worldId),
@@ -561,7 +594,7 @@ export class LogicPassSolver {
             pi = candidates.pop();
             if (!pi)
               break;
-            if (this.state.pools.required.has(pi))
+            if (this.state.pools.extra.has(pi))
               break;
           }
           if (!pi)
@@ -717,7 +750,7 @@ export class LogicPassSolver {
     for (const reward of rewards) {
       let candidates = allDungeons.flatMap((x, i) => [...x].map(y => ({ player: i, dungeon: y })));
       candidates = shuffle(this.input.random, candidates);
-      const pool = new Map(this.state.pools.required);
+      const pool = countMapCombine(this.state.pools.required);
       let error: LogicSeedError | null = null;
 
       for (const c of candidates) {
@@ -885,8 +918,15 @@ export class LogicPassSolver {
         const loc = unplacedLocs.pop()!;
         const newPlacement = new Map(this.state.items);
         newPlacement.set(loc, requiredItem);
-        const result = this.pathfinder.run(null, { recursive: true, stopAtGoal: true, items: newPlacement, assumedItems: pool });
-        if (result.goal) {
+        const result = this.pathfinder.run(null, { recursive: true, stopAtGoal: true, items: newPlacement, assumedItems: pool, ganonMajora: this.input.settings.goal === 'triforce3' });
+        let goal: boolean;
+        console.log(result.ws[0].events.has(''));
+        if (this.input.settings.goal === 'triforce3') {
+          goal = result.ganonMajora;
+        } else {
+          goal = result.goal;
+        }
+        if (goal) {
           this.place(loc, requiredItem);
           return;
         }
@@ -902,6 +942,7 @@ export class LogicPassSolver {
 
     /* Fill using every pool */
     this.fill(locs, this.state.pools.required, true);
+    this.placeExtra();
     this.fill(locs, this.state.pools.nice, true);
     this.fillJunk(locs);
   }

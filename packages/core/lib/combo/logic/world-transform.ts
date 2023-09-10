@@ -705,10 +705,14 @@ export class LogicPassWorldTransform {
 
     /* Coins */
     for (let i = 0; i < this.state.worlds.length; ++i) {
-      this.pool.set(makePlayerItem(Items.OOT_COIN_RED, i), settings.coinsRed);
-      this.pool.set(makePlayerItem(Items.OOT_COIN_GREEN, i), settings.coinsGreen);
-      this.pool.set(makePlayerItem(Items.OOT_COIN_BLUE, i), settings.coinsBlue);
-      this.pool.set(makePlayerItem(Items.OOT_COIN_YELLOW, i), settings.coinsYellow);
+      if (settings.coinsRed)
+        this.pool.set(makePlayerItem(Items.OOT_COIN_RED, i), settings.coinsRed);
+      if (settings.coinsGreen)
+        this.pool.set(makePlayerItem(Items.OOT_COIN_GREEN, i), settings.coinsGreen);
+      if (settings.coinsBlue)
+        this.pool.set(makePlayerItem(Items.OOT_COIN_BLUE, i), settings.coinsBlue);
+      if (settings.coinsYellow)
+        this.pool.set(makePlayerItem(Items.OOT_COIN_YELLOW, i), settings.coinsYellow);
     }
   }
 

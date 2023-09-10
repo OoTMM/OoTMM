@@ -43,3 +43,4 @@ export const isOwlStatue = (item: Item) => ItemGroups.OWLS.has(item);
 export const isItemLicense = (item: Item) => ItemGroups.LICENSES.has(item);
 export const isTriforcePiece = (item: Item) => ItemGroups.TRIFORCE.has(item);
 export const isSilverRupee = (item: Item) => ItemGroups.RUPEES_SILVER.has(item);
+export const isNamedTriforce = (item: Item) => ItemGroups.NAMED_TRIFORCE.has(item);

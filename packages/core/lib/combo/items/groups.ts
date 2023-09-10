@@ -567,11 +567,15 @@ export const SHARED_SOULS = new Set([
   Items.SHARED_SOUL_STALCHILD,
 ]);
 
-export const TRIFORCE = new Set([
-  Items.SHARED_TRIFORCE,
+export const NAMED_TRIFORCE = new Set([
   Items.SHARED_TRIFORCE_POWER,
   Items.SHARED_TRIFORCE_WISDOM,
   Items.SHARED_TRIFORCE_COURAGE,
+]);
+
+export const TRIFORCE = new Set([
+  Items.SHARED_TRIFORCE,
+  ...NAMED_TRIFORCE,
 ]);
 
 export const REQUIRED = new Set([

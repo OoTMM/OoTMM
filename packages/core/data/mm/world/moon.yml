@@ -1,5 +1,7 @@
 "Moon":
   region: MOON
+  events:
+    MAJORA_PRE_BOSS: "true"
   exits:
     "Moon Trial Deku Entrance":  "can_reset_time_on_moon && masks(1)"
     "Moon Trial Goron Entrance": "can_reset_time_on_moon && masks(2)"

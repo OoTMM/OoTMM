@@ -69,6 +69,8 @@ type PathfinderWorldState = {
 
 export type PathfinderState = {
   goal: boolean;
+  ganonMajora: boolean;
+  changed: boolean;
   started: boolean;
   ws: PathfinderWorldState[];
   previousAssumedItems: PlayerItems;
@@ -134,7 +136,9 @@ const defaultState = (startingItems: ItemsCount, worldCount: number): Pathfinder
 
   return {
     previousAssumedItems: new Map,
+    changed: false,
     goal: false,
+    ganonMajora: false,
     started: false,
     ws: defaultWorldStates(startingItems, worldCount),
     locations: new Set(),
@@ -191,6 +195,7 @@ type PathfinderOptions = {
   gossips?: boolean;
   inPlace?: boolean;
   singleWorld?: number;
+  ganonMajora?: boolean;
 };
 
 export class Pathfinder {
@@ -720,6 +725,19 @@ export class Pathfinder {
     return false;
   }
 
+  private isGanonMajoraReached() {
+    for (let worldId = 0; worldId < this.worlds.length; ++worldId) {
+      if (this.opts.singleWorld !== undefined && this.opts.singleWorld !== worldId) {
+        continue;
+      }
+      const ws = this.state.ws[worldId];
+      if (!ws.events.has('OOT_GANON_PRE_BOSS')) return false;
+      if (!ws.events.has('MM_MAJORA_PRE_BOSS')) return false;
+    }
+
+    return true;
+  }
+
   private isGoalReached() {
     const { settings } = this;
 
@@ -824,14 +842,17 @@ export class Pathfinder {
 
     /* Pathfind */
     for (;;) {
-      const changed = this.pathfindStep();
+      this.state.changed = this.pathfindStep();
+      if (this.opts.ganonMajora) {
+        this.state.ganonMajora = this.isGanonMajoraReached();
+      }
       if (this.isGoalReached()) {
         this.state.goal = true;
         if (this.opts.stopAtGoal) {
           break;
         }
       }
-      if (!changed || !this.opts.recursive) {
+      if (!this.state.changed || !this.opts.recursive) {
         break;
       }
     }
