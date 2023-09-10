@@ -78,34 +78,53 @@ void comboGetDungeonExit(EntranceDescr* dst, int dungeonId)
     memcpy(dst, &kDungeonExits[dungeonId], sizeof(EntranceDescr));
 }
 
-void comboTransition(GameState_Play* play, const EntranceDescr* descr)
+void comboTransition(GameState_Play* play, u32 entrance)
 {
 #if defined(GAME_OOT)
-    if (!descr->isMM)
+    if (!(entrance & MASK_FOREIGN_ENTRANCE))
     {
         TransitionContext* t;
 
         t = &play->transition;
         t->type = TRANS_TYPE_NORMAL;
         t->gfx = TRANS_GFX_BLACK;
-        t->entrance = descr->id;
+        t->entrance = (u16)entrance;
     }
     else
     {
-        comboGameSwitch(play, descr->id);
+        comboGameSwitch(play, entrance ^ MASK_FOREIGN_ENTRANCE);
     }
 #endif
 
 #if defined(GAME_MM)
-    if (descr->isMM)
+    if (!(entrance & MASK_FOREIGN_ENTRANCE))
     {
-        play->nextEntrance = descr->id;
+        play->nextEntrance = (u16)entrance;
         play->transitionTrigger = TRANS_TRIGGER_NORMAL;
         play->transitionType = TRANS_TYPE_BLACK;
     }
     else
     {
-        comboGameSwitch(play, descr->id);
+        comboGameSwitch(play, entrance ^ MASK_FOREIGN_ENTRANCE);
     }
 #endif
+}
+
+void comboTransitionDescr(GameState_Play* play, const EntranceDescr* descr)
+{
+    u32 entrance;
+
+    entrance = descr->id;
+
+#if defined(GAME_OOT)
+    if (descr->isMM)
+        entrance |= MASK_FOREIGN_ENTRANCE;
+#endif
+
+#if defined(GAME_MM)
+    if (!descr->isMM)
+        entrance |= MASK_FOREIGN_ENTRANCE;
+#endif
+
+    comboTransition(play, entrance);
 }

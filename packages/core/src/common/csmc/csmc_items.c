@@ -211,6 +211,9 @@ static int csmcFromItemOot(s16 gi)
     case GI_OOT_SOUL_BONGO_BONGO:
     case GI_OOT_SOUL_TWINROVA:
     case GI_OOT_SOUL_PARASITE:
+    case GI_OOT_SOUL_DARK_LINK:
+    case GI_OOT_SOUL_LEEVER:
+    case GI_OOT_SOUL_STALCHILD:
         return CSMC_SOUL;
     }
 
@@ -400,6 +403,8 @@ static int csmcFromItemMm(s16 gi)
     case GI_MM_SOUL_GOHT:
     case GI_MM_SOUL_GYORG:
     case GI_MM_SOUL_TWINMOLD:
+    case GI_MM_SOUL_STALCHILD:
+    case GI_MM_SOUL_LEEVER:
         return CSMC_SOUL;
     }
     return CSMC_NORMAL;

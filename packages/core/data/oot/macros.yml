@@ -99,6 +99,7 @@
 "hidden_grotto_bomb": "stone_of_agony && has_explosives_or_hammer"
 "hidden_grotto_storms": "stone_of_agony && can_play_storms"
 "has_spiritual_stones": "has(STONE_EMERALD) && has(STONE_RUBY) && has(STONE_SAPPHIRE)"
+"can_jump_slash": "has_weapon || can_use_sticks || can_hammer"
 
 # Bottle contents
 "has_bugs": "has_bottle && (renewable(BUGS) || event(BUGS))"
@@ -128,7 +129,7 @@
 #Specialty Macros
 "met_zelda": "event(MEET_ZELDA) || setting(skipZelda)"
 "woke_talon_child": "event(TALON_CHILD) || setting(skipZelda)"
-"has_fire_spirit": "has_magic && ((has_arrows && (has(ARROW_FIRE) || has(SHARED_ARROW_FIRE)) && has_sticks) || has(SPELL_FIRE)) && (has_explosives || small_keys_spirit(2))"
+"has_fire_spirit": "has_magic && ((has_arrows && (has(ARROW_FIRE) || has(SHARED_ARROW_FIRE)) && has_sticks) || has(SPELL_FIRE)) && cond(climb_anywhere, (has_explosives && has_mirror_shield) || small_keys_spirit(3), has_explosives || small_keys_spirit(2))"
 "has_ranged_weapon_both": "has_explosives || (((has(SLINGSHOT) && (event(SEEDS) || renewable(DEKU_SEEDS_30))) || has(BOOMERANG)) && (has_hookshot(1) || has_arrows))"
 "can_collect_ageless": "(has_hookshot(1) && has(BOOMERANG)) || (age_boomerang_anyage && has(BOOMERANG)) || (age_hookshot_anyage && has_hookshot(1))"
 "king_zora_moved": "event(KING_ZORA_LETTER) || setting(zoraKing, open) || (setting(zoraKing, adult) && is_adult)"
@@ -168,3 +169,6 @@
 
 # Misc
 "soul(x)": "(!setting(enemySoulsOot)) || has(x)"
+"climb_anywhere": "setting(climbMostSurfacesOot)"
+"hookshot_anywhere": "can_hookshot && setting(hookshotAnywhereOot)"
+"longshot_anywhere": "can_longshot && setting(hookshotAnywhereOot)"

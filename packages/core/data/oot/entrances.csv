@@ -6,7 +6,7 @@ BOSS_TEMPLE_FOREST,                       boss,             Forest Temple Boss, 
 BOSS_TEMPLE_FIRE,                         boss,             Fire Temple Boss,                           Fire Temple Pre-Boss,                         NONE
 BOSS_TEMPLE_WATER,                        boss,             Water Temple Boss,                          Water Temple Antichamber,                     NONE
 BOSS_TEMPLE_SPIRIT,                       boss,             Spirit Temple Boss,                         Spirit Temple Statue,                         NONE
-BOSS_TEMPLE_SHADOW,                       boss,             Shadow Temple Boss,                         Shadow Temple Boat,                           NONE
+BOSS_TEMPLE_SHADOW,                       boss,             Shadow Temple Boss,                         Shadow Temple After Boat,                     NONE
 DEKU_TREE,                                dungeon,          Deku Tree,                                  Kokiri Forest Near Deku Tree,                 KOKIRI_FOREST_FROM_DEKU_TREE
 KOKIRI_FOREST_FROM_DEKU_TREE,             dungeon,          Kokiri Forest Near Deku Tree,               Deku Tree,                                    DEKU_TREE
 DODONGO_CAVERN,                           dungeon,          Dodongo Cavern,                             Death Mountain,                               MOUNTAIN_TRAIL_FROM_DODONGO_CAVERN
@@ -57,6 +57,14 @@ VALLEY_FROM_LAKE_HYLIA,                   overworld,        Gerudo Valley Falls,
 ZORA_DOMAIN_FROM_LAKE_HYLIA,              overworld,        Zora Domain,                                Lake Hylia,                                   LAKE_HYLIA_FROM_ZORA_DOMAIN
 LOST_WOODS_FROM_ZORA_RIVER,               overworld,        Lost Woods,                                 Zora River,                                   ZORA_RIVER_FROM_LOST_WOODS
 LOST_WOODS_FROM_GORON_CITY,               overworld,        Lost Woods,                                 Goron City Shortcut,                          GORON_CITY_FROM_LOST_WOODS
+WARP_SONG_MEADOW,                         warp-song,        Sacred Meadow,                              SONGS,                                        NONE
+WARP_SONG_CRATER,                         warp-song,        Death Mountain Crater Warp,                 SONGS,                                        NONE
+WARP_SONG_LAKE,                           warp-song,        Lake Hylia,                                 SONGS,                                        NONE
+WARP_SONG_GRAVE,                          warp-song,        Graveyard Upper,                            SONGS,                                        NONE
+WARP_SONG_DESERT,                         warp-song,        Desert Colossus,                            SONGS,                                        NONE
+WARP_SONG_TEMPLE,                         warp-song,        Temple of Time,                             SONGS,                                        NONE
+VILLAGE_OWL,                              owl-flight,       Kakariko Rooftop,                           Death Mountain Summit,                        NONE
+FIELD_OWL,                                owl-flight,       Hyrule Field Drawbridge,                    Lake Hylia,                                   NONE
 HOUSE_MIDO,                               indoors,          Mido's House,                               Kokiri Forest,                                KOKIRI_FOREST_FROM_MIDO
 HOUSE_SARIA,                              indoors,          Saria's House,                              Kokiri Forest,                                KOKIRI_FOREST_FROM_SARIA
 HOUSE_TWINS,                              indoors,          House of Twins,                             Kokiri Forest,                                KOKIRI_FOREST_FROM_TWINS

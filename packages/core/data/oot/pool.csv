@@ -316,11 +316,11 @@ Lake Hylia Pot 1,                                           pot,            NONE
 Lake Hylia Pot 2,                                           pot,            NONE,                 LAKE_HYLIA,                     0x000b,                     RECOVERY_HEART
 Lake Hylia Grass 1,                                         grass,          NONE,                 LAKE_HYLIA,                     0x00018,                    RANDOM
 Lake Hylia Grass 2,                                         grass,          NONE,                 LAKE_HYLIA,                     0x00019,                    RANDOM
-Lake Hylia Grass Child 1,                                   grass,          NONE,                 LAKE_HYLIA,                     0x00006,                    DEKU_SEEDS_5
-Lake Hylia Grass Child 2,                                   grass,          NONE,                 LAKE_HYLIA,                     0x0001a,                    RANDOM
-Lake Hylia Grass Child 3,                                   grass,          NONE,                 LAKE_HYLIA,                     0x0001b,                    RANDOM
-Lake Hylia Grass Child 4,                                   grass,          NONE,                 LAKE_HYLIA,                     0x0001c,                    RANDOM
-Lake Hylia Grass Child 5,                                   grass,          NONE,                 LAKE_HYLIA,                     0x0001d,                    RANDOM
+Lake Hylia Grass Child Not Loading,                         grass,          NONE,                 LAKE_HYLIA,                     0x00006,                    DEKU_SEEDS_5
+Lake Hylia Grass Child 1,                                   grass,          NONE,                 LAKE_HYLIA,                     0x0001a,                    RANDOM
+Lake Hylia Grass Child 2,                                   grass,          NONE,                 LAKE_HYLIA,                     0x0001b,                    RANDOM
+Lake Hylia Grass Child 3,                                   grass,          NONE,                 LAKE_HYLIA,                     0x0001c,                    RANDOM
+Lake Hylia Grass Child 4,                                   grass,          NONE,                 LAKE_HYLIA,                     0x0001d,                    RANDOM
 Lake Hylia Grass Pack 1 Bush 01,                            grass,          NONE,                 LAKE_HYLIA,                     0x0001e,                    RANDOM
 Lake Hylia Grass Pack 1 Bush 02,                            grass,          NONE,                 LAKE_HYLIA,                     0x1001e,                    RANDOM
 Lake Hylia Grass Pack 1 Bush 03,                            grass,          NONE,                 LAKE_HYLIA,                     0x2001e,                    RANDOM

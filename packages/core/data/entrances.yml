@@ -145,6 +145,14 @@ OOT_GRAVE_ROYAL:                            0x2d
 OOT_GRAVEYARD_FROM_GRAVE_ROYAL:             0x50b
 OOT_GRAVE_DAMPE:                            0x44f
 OOT_GRAVEYARD_FROM_GRAVE_DAMPE:             0x359
+OOT_WARP_SONG_MEADOW:                       0x600
+OOT_WARP_SONG_CRATER:                       0x4f6
+OOT_WARP_SONG_LAKE:                         0x604
+OOT_WARP_SONG_GRAVE:                        0x568
+OOT_WARP_SONG_DESERT:                       0x1f1
+OOT_WARP_SONG_TEMPLE:                       0x5f4
+OOT_VILLAGE_OWL:                            0x554
+OOT_FIELD_OWL:                              0x27e
 
 # Custom
 OOT_OUTSIDE_GANON_FROM_FAIRY:               0xf00
@@ -279,3 +287,13 @@ MM_ASTRAL_OBSERVATORY_FROM_FIELD:           0x4c10
 MM_FIELD_FROM_ASTRAL_OBSERVATORY:           0x5490
 MM_SWAMP_ARCHERY:                           0x4200
 MM_SWAMP_ROAD_FROM_ARCHERY:                 0x7a20
+MM_WARP_OWL_GREAT_BAY:                      0x68b0
+MM_WARP_OWL_ZORA_CAPE:                      0x6a60
+MM_WARP_OWL_SNOWHEAD:                       0xb230
+MM_WARP_OWL_MOUNTAIN_VILLAGE:               0x9a80
+MM_WARP_OWL_CLOCK_TOWN:                     0xd890
+MM_WARP_OWL_MILK_ROAD:                      0x3e40
+MM_WARP_OWL_WOODFALL:                       0x8640
+MM_WARP_OWL_SOUTHERN_SWAMP:                 0x84a0
+MM_WARP_OWL_IKANA_CANYON:                   0x2040
+MM_WARP_OWL_STONE_TOWER:                    0xaa30

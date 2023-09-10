@@ -1,35 +1,41 @@
 #include <combo.h>
+#include <combo/entrance.h>
 
 u16 EnTest7_TriggerWarp(Actor* actor, GameState_Play* play)
 {
-    u8 warpId;
+    u32 entrance;
 
     if (actor->variable & 0x8000)
     {
-        warpId = actor->variable & 0xff;
-        switch (warpId) {
-            case 0: // Minuet
-                comboGameSwitch(play, 0x600);
-            case 1: // Bolero
-                comboGameSwitch(play, 0x4f6);
-            case 2: // Serenade
-                comboGameSwitch(play, 0x604);
-            case 3: // Requiem
-                comboGameSwitch(play, 0x1f1);
-            case 4: // Nocturne
-                comboGameSwitch(play, 0x568);
-            case 5: // Prelude
-                comboGameSwitch(play, 0x5f4);
-            default:
-                return 0;
+        entrance = gComboData.entrancesSong[actor->variable & 0xff] ^ MASK_FOREIGN_ENTRANCE;
+        if (entrance & MASK_FOREIGN_ENTRANCE)
+        {
+            comboTransition(play, entrance);
+            return 0;
         }
+
+        return entrance;
     }
 
-    // Displaced code
+    switch (play->sceneId)
+    {
+    case SCE_MM_TEMPLE_WOODFALL:
+    case SCE_MM_TEMPLE_SNOWHEAD:
+    case SCE_MM_TEMPLE_GREAT_BAY:
+    case SCE_MM_TEMPLE_STONE_TOWER:
+    case SCE_MM_TEMPLE_STONE_TOWER_INVERTED:
+    case SCE_MM_SAKON_HIDEOUT:
+    case SCE_MM_LAIR_ODOLWA:
+    case SCE_MM_LAIR_GOHT:
+    case SCE_MM_LAIR_GYORG:
+    case SCE_MM_LAIR_TWINMOLD:
+        break;
+    default:
+        gIsEntranceOverride = 1;
+    }
+
     if (play->sceneId == 0x4f) {
         return 0x2060;
     }
-    // End displaced code
-
     return 0;
 }

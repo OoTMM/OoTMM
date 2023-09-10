@@ -3,20 +3,20 @@
   exits:
     "Zora Fountain Frozen": "true"
     "Ice Cavern Scythe": "soul_freezard && (can_use_sword_master || can_use_sword_goron || can_use_sticks || has_explosives)"
+    "Ice Cavern End": "has_iron_boots && (climb_anywhere || hookshot_anywhere)"
 "Ice Cavern Scythe":
   dungeon: IC
   exits:
-    "Ice Cavern": "true"
     "Ice Cavern HP Room": "has_blue_fire"
     "Ice Cavern Block Room": "has_blue_fire"
-    "Ice Cavern First Fire Room": "is_adult && has(RUPEE_SILVER_IC_SCYTHE, 5)"
+    "Ice Cavern First Fire Room": "(is_adult || climb_anywhere || hookshot_anywhere) && has(RUPEE_SILVER_IC_SCYTHE, 5)"
   locations:
-    "Ice Cavern GS Scythe Room": "can_collect_distance"
+    "Ice Cavern GS Scythe Room": "can_collect_distance || (climb_anywhere && (has_weapon || can_use_sticks || has_ranged_weapon || has_explosives || can_use_din))"
     "Ice Cavern SR Scythe Left": "true"
     "Ice Cavern SR Scythe Center Left": "true"
     "Ice Cavern SR Scythe Back": "true"
     "Ice Cavern SR Scythe Center Right": "true"
-    "Ice Cavern SR Scythe Midair": "is_adult"
+    "Ice Cavern SR Scythe Midair": "is_adult || climb_anywhere || hookshot_anywhere"
     "Ice Cavern Pot First Corridor 1": "true"
     "Ice Cavern Pot First Corridor 2": "true"
     "Ice Cavern Pot Scythe Room 1": "true"
@@ -25,18 +25,14 @@
     "Ice Cavern Flying Pot Scythe Room": "soul_flying_pot"
 "Ice Cavern HP Room":
   dungeon: IC
-  exits:
-    "Ice Cavern Scythe": "true"
   events:
     BLUE_FIRE: "has_bottle"
   locations:
     "Ice Cavern Compass": "true"
     "Ice Cavern HP": "true"
-    "Ice Cavern GS HP Room": "can_collect_distance"
+    "Ice Cavern GS HP Room": "can_collect_distance || (climb_anywhere && (has_weapon || can_use_sticks || has_ranged_weapon || has_explosives || can_use_din))"
 "Ice Cavern First Fire Room":
   dungeon: IC
-  exits:
-    "Ice Cavern Scythe": "true"
   events:
     BLUE_FIRE: "has_bottle"
   locations:
@@ -46,22 +42,24 @@
   dungeon: IC
   exits:
     "Ice Cavern Scythe": "true"
-    "Ice Cavern End": "has_blue_fire && has(RUPEE_SILVER_IC_BLOCK, 5)"
+    "Ice Cavern End": "has(RUPEE_SILVER_IC_BLOCK, 5)"
   events:
     BLUE_FIRE: "has_bottle"
   locations:
-    "Ice Cavern GS Block Room": "can_collect_distance"
+    "Ice Cavern GS Block Room": "can_collect_distance || (climb_anywhere && (has_ranged_weapon || has_explosives || can_use_din))"
     "Ice Cavern SR Blocks Back Left": "true"
     "Ice Cavern SR Blocks Back Right": "true"
     "Ice Cavern SR Blocks Center": "true"
     "Ice Cavern SR Blocks Alcove": "has_blue_fire"
     "Ice Cavern SR Blocks Front Left": "true"
+    "Ice Cavern Pot Red Ice 1": "has(RUPEE_SILVER_IC_BLOCK, 5)"
+    "Ice Cavern Pot Red Ice 2": "has(RUPEE_SILVER_IC_BLOCK, 5)"
 "Ice Cavern End":
   dungeon: IC
   exits:
-    "Ice Cavern Block Room": "has_blue_fire && soul_wolfos"
+    "Ice Cavern Block Room": "(climb_anywhere || hookshot_anywhere || has_blue_fire) && soul_wolfos && (has_weapon || can_hit_triggers_distance || has_explosives_or_hammer || can_use_din || can_use_sticks)"
   locations:
-    "Ice Cavern Iron Boots": "soul_wolfos"
-    "Ice Cavern Sheik Song": "soul_wolfos"
-    "Ice Cavern Pot Red Ice 1": "true"
-    "Ice Cavern Pot Red Ice 2": "true"
+    "Ice Cavern Iron Boots": "soul_wolfos && (has_weapon || can_hit_triggers_distance || has_explosives_or_hammer || can_use_din || can_use_sticks)"
+    "Ice Cavern Sheik Song": "soul_wolfos && (has_weapon || can_hit_triggers_distance || has_explosives_or_hammer || can_use_din || can_use_sticks)"
+    "Ice Cavern Pot Red Ice 1": "soul_wolfos && has_blue_fire && (has_weapon || can_hit_triggers_distance || has_explosives_or_hammer || can_use_din || can_use_sticks)"
+    "Ice Cavern Pot Red Ice 2": "soul_wolfos && has_blue_fire && (has_weapon || can_hit_triggers_distance || has_explosives_or_hammer || can_use_din || can_use_sticks)"

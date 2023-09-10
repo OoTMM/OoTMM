@@ -10,14 +10,15 @@
   events:
     MAGIC: "true"
     RUPEES: "has_arrows"
-    BUGS: "has_bottle"
+    BUGS: "true"
+    WATER: "true"
   exits:
     "Swamp Spider House": "true"
   locations:
     "Swamp Skulltula Main Room Near Ceiling": "can_hookshot_short || has_mask_zora || (has(MASK_DEKU) && (has_arrows || has_magic || (has_bombs || has_bombchu || trick_keg_explosives)))"
-    "Swamp Skulltula Main Room Lower Right Soft Soil": "has_bottle"
-    "Swamp Skulltula Main Room Lower Left Soft Soil": "has_bottle"
-    "Swamp Skulltula Main Room Upper Soft Soil": "has_bottle"
+    "Swamp Skulltula Main Room Lower Right Soft Soil": "has_bugs"
+    "Swamp Skulltula Main Room Lower Left Soft Soil": "has_bugs"
+    "Swamp Skulltula Main Room Upper Soft Soil": "has_bugs"
     "Swamp Skulltula Main Room Upper Pillar": "true"
     "Swamp Skulltula Main Room Pillar": "true"
     "Swamp Skulltula Main Room Water": "true"

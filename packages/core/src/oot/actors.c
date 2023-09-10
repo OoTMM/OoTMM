@@ -44,6 +44,8 @@ static int canSpawnSoul(GameState_Play* play, s16 actorId, u16 variable)
         return hasSoul(GI_OOT_SOUL_SHABOM);
     case AC_EN_DODOJR:
         return hasSoul(GI_OOT_SOUL_BABY_DODONGO);
+    case AC_EN_TORCH2:
+        return hasSoul(GI_OOT_SOUL_DARK_LINK);
     case AC_EN_BILI:
     case AC_EN_VALI:
         return hasSoul(GI_OOT_SOUL_BIRI_BARI);
@@ -126,6 +128,10 @@ static int canSpawnSoul(GameState_Play* play, s16 actorId, u16 variable)
         return hasSoul(GI_OOT_SOUL_TWINROVA);
     case AC_EN_BA:
         return hasSoul(GI_OOT_SOUL_PARASITE);
+    case AC_EN_REEBA:
+        return hasSoul(GI_OOT_SOUL_LEEVER);
+    case AC_EN_SKB:
+        return hasSoul(GI_OOT_SOUL_STALCHILD);
     default:
         return 1;
     }

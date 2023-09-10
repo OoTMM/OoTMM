@@ -123,6 +123,6 @@ jobs:
       - name: Deploy to Netlify
         uses: netlify/actions/cli@master
         with:
-          args: deploy --prod --dir=packages/gui/dist
+          args: deploy --filter @ootmm/gui --prod --dir=packages/gui/dist
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}

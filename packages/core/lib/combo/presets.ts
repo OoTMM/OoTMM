@@ -46,7 +46,6 @@ const PRESET_BLITZ = makeSettings({
   sharedWallets: true,
   sharedHealth: true,
   tricks: [
-    'MM_ISTT_ENTRY_JUMP',
     'MM_LENS',
     'MM_NO_SEAHORSE',
     'MM_ONE_MASK_STONE_TOWER',
@@ -186,6 +185,8 @@ const PRESET_ALLSANITY = makeSettings({
   erRegionsShortcuts: true,
   erIndoors: 'full',
   erIndoorsExtra: true,
+  erWarps: 'full',
+  erWarpsOwls: true,
 });
 
 const PRESET_HELL = makeSettings({
@@ -253,6 +254,8 @@ const PRESET_HELL = makeSettings({
   erRegionsShortcuts: true,
   erIndoors: 'full',
   erIndoorsExtra: true,
+  erWarps: 'full',
+  erWarpsOwls: true,
   erGanonCastle: true,
   erGanonTower: true,
   specialConds: {
@@ -342,6 +345,15 @@ const PRESET_HELL = makeSettings({
     'OOT_MQ_ICE_SCARE_HOVER',
     'OOT_MQ_GTG_FLAMES',
     'OOT_FORTRESS_JUMPS',
+    'OOT_COLOSSUS_GS_NO_BEAN',
+    'OOT_ENTER_JABU',
+    'OOT_JABU_BOSS_HIGH_SWITCH',
+    'OOT_WATER_REVERSE_RIVER',
+    'OOT_WATER_PIT_GS_CHU',
+    'OOT_SHADOW_BOAT_EARLY',
+    'OOT_SPIRIT_BOSS_CLIMB_NO_HOOK',
+    'OOT_DC_BOULDER',
+    'OOT_LAKE_SHORTCUT',
     'MM_LENS',
     'MM_PALACE_BEAN_SKIP',
     'MM_DARMANI_WALL',
@@ -369,7 +381,13 @@ const PRESET_HELL = makeSettings({
     'MM_IKANA_ROOF_PARKOUR',
     'MM_POST_OFFICE_GAME',
     'MM_WELL_HSW',
-	  'MM_GBT_WATERWHEEL_GORON',
+    'MM_GBT_WATERWHEEL_GORON',
+    'MM_GBT_ENTRANCE_BOW',
+    'MM_OOB_MOVEMENT',
+    'MM_ST_UPDRAFTS',
+    'MM_ESCAPE_CAGE',
+    'MM_GBT_FAIRY2_HOOK',
+    'MM_GBT_CENTRAL_GEYSER',
   ]
 });
 

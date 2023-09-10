@@ -30,6 +30,8 @@ const SOULS: ItemSharedDef[] = [
   { shared: Items.SHARED_SOUL_GUAY,                oot: Items.OOT_SOUL_GUAY,               mm: Items.MM_SOUL_GUAY },
   { shared: Items.SHARED_SOUL_FLYING_POT,          oot: Items.OOT_SOUL_FLYING_POT,         mm: Items.MM_SOUL_FLYING_POT },
   { shared: Items.SHARED_SOUL_FLOORMASTER,         oot: Items.OOT_SOUL_FLOORMASTER,        mm: Items.MM_SOUL_FLOORMASTER },
+  { shared: Items.SHARED_SOUL_LEEVER,              oot: Items.OOT_SOUL_LEEVER,             mm: Items.MM_SOUL_LEEVER },
+  { shared: Items.SHARED_SOUL_STALCHILD,           oot: Items.OOT_SOUL_STALCHILD,          mm: Items.MM_SOUL_STALCHILD },
 ];
 
 const SKELETON_KEY: ItemSharedDef[] = [

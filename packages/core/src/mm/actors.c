@@ -325,6 +325,14 @@ static int canSpawnSoul(GameState_Play* play, s16 actorId, u16 variable)
         return hasSoul(GI_MM_SOUL_GYORG);
     case AC_BOSS_02:
         return hasSoul(GI_MM_SOUL_TWINMOLD);
+    case AC_EN_NEO_REEBA:
+        return hasSoul(GI_MM_SOUL_LEEVER);
+    case AC_EN_SKB:
+        if ((play->sceneId == SCE_MM_IKANA_GRAVEYARD) && (play->roomCtx.curRoom.id == 0x01)) // Upper graveyard
+            return 1;
+    case AC_EN_HINT_SKB:
+    case AC_EN_RAIL_SKB:
+        return hasSoul(GI_MM_SOUL_STALCHILD);
     default:
         return 1;
     }

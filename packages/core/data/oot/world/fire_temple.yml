@@ -9,15 +9,15 @@
   dungeon: Fire
   exits:
     "Fire Temple": "true"
-    "Fire Temple Boss": "boss_key(BOSS_KEY_FIRE) && ((is_adult && event(FIRE_TEMPLE_PILLAR_HAMMER)) || has_hover_boots) && has_tunic_goron"
+    "Fire Temple Boss": "boss_key(BOSS_KEY_FIRE) && ((is_adult && event(FIRE_TEMPLE_PILLAR_HAMMER)) || has_hover_boots || climb_anywhere || hookshot_anywhere) && has_tunic_goron"
   events:
     BOMBS: "has_tunic_goron"
   locations:
     "Fire Temple Jail 1 Chest": "has_tunic_goron"
-    "Fire Temple Pot Pre-Boss Room 1": "is_adult && has_tunic_goron && (has_hover_boots || can_hookshot)"
-    "Fire Temple Pot Pre-Boss Room 2": "is_adult && has_tunic_goron && (has_hover_boots || can_hookshot)"
-    "Fire Temple Pot Pre-Boss Room 3": "is_adult && has_tunic_goron && (has_hover_boots || can_hookshot)"
-    "Fire Temple Pot Pre-Boss Room 4": "is_adult && has_tunic_goron && (has_hover_boots || can_hookshot)"
+    "Fire Temple Pot Pre-Boss Room 1": "has_tunic_goron && ((is_adult && (has_hover_boots || can_hookshot)) || climb_anywhere || hookshot_anywhere)"
+    "Fire Temple Pot Pre-Boss Room 2": "has_tunic_goron && ((is_adult && (has_hover_boots || can_hookshot)) || climb_anywhere || hookshot_anywhere)"
+    "Fire Temple Pot Pre-Boss Room 3": "has_tunic_goron && ((is_adult && (has_hover_boots || can_hookshot)) || climb_anywhere || hookshot_anywhere)"
+    "Fire Temple Pot Pre-Boss Room 4": "has_tunic_goron && ((is_adult && (has_hover_boots || can_hookshot)) || climb_anywhere || hookshot_anywhere)"
 "Fire Temple Boss Key Loop Start":
   dungeon: Fire
   exits:
@@ -36,7 +36,7 @@
     "Fire Temple Boss Key Loop Floor Tiles": "soul(SOUL_FLARE_DANCER)"
     "Fire Temple Boss Key Loop End": "soul(SOUL_FLARE_DANCER)"
   locations:
-    "Fire Temple Boss Key Side Chest": "soul(SOUL_FLARE_DANCER)"
+    "Fire Temple Boss Key Side Chest": "soul(SOUL_FLARE_DANCER) && (is_adult || can_hookshot || climb_anywhere)"
 "Fire Temple Boss Key Loop End":
   dungeon: Fire
   locations:
@@ -44,43 +44,43 @@
 "Fire Temple Lava Room":
   dungeon: Fire
   exits:
-    "Fire Temple Maze": "is_adult && small_keys_fire(3) && has_tunic_goron_strict && has(STRENGTH) && (has_ranged_weapon_adult || has_explosives || can_boomerang)"
+    "Fire Temple Maze": "small_keys_fire(3) && has_tunic_goron_strict && (hookshot_anywhere || (((is_adult && has(STRENGTH)) || climb_anywhere) && (has_ranged_weapon || has_explosives)))"
   locations:
-    "Fire Temple Lava Room North Jail Chest": "has_tunic_goron && (is_adult || can_play_time)"
-    "Fire Temple Lava Room South Jail Chest": "is_adult && has_tunic_goron && has_explosives"
-    "Fire Temple GS Lava Side Room": "is_adult && has_tunic_goron && can_play_time"
+    "Fire Temple Lava Room North Jail Chest": "has_tunic_goron"
+    "Fire Temple Lava Room South Jail Chest": "(is_adult || climb_anywhere || hookshot_anywhere) && has_tunic_goron && has_explosives"
+    "Fire Temple GS Lava Side Room": "has_tunic_goron && (climb_anywhere || hookshot_anywhere || (is_adult && can_play_time)) && can_damage_skull"
     "Fire Temple Pot Lava Room 1": "has_tunic_goron"
     "Fire Temple Pot Lava Room 2": "has_tunic_goron"
     "Fire Temple Pot Lava Room 3": "has_tunic_goron"
 "Fire Temple Maze":
   dungeon: Fire
   exits:
-    "Fire Temple Maze Upper": "small_keys_fire(5)"
+    "Fire Temple Maze Upper": "small_keys_fire(5) || climb_anywhere || hookshot_anywhere"
   locations:
     "Fire Temple Maze Chest": "true"
     "Fire Temple Maze Jail Chest": "true"
-    "Fire Temple GS Maze": "has_explosives"
-    "Fire Temple Map": "can_use_bow && small_keys_fire(4)"
+    "Fire Temple GS Maze": "has_explosives && (climb_anywhere || can_collect_distance)"
+    "Fire Temple Map": "can_hit_triggers_distance && small_keys_fire(4)"
 "Fire Temple Maze Upper":
   dungeon: Fire
   exits:
     "Fire Temple Ring": "small_keys_fire(6)"
-    "Fire Temple Scarecrow": "scarecrow_hookshot"
+    "Fire Temple Scarecrow": "scarecrow_hookshot || hookshot_anywhere || climb_anywhere"
   locations:
-    "Fire Temple Map": "true"
+    "Fire Temple Map": "true" #while Child can't climb into it normally, the only way child can even be here is with climb or hook anywhere.
     "Fire Temple Above Maze Chest": "true"
     "Fire Temple Below Maze Chest": "has_explosives"
 "Fire Temple Scarecrow":
   dungeon: Fire
   locations:
     "Fire Temple Scarecrow Chest": "true"
-    "Fire Temple GS Scarecrow Wall": "true"
-    "Fire Temple GS Scarecrow Top": "true"
+    "Fire Temple GS Scarecrow Wall": "has_weapon || has_ranged_weapon || has_explosives || can_use_sticks || can_use_din"
+    "Fire Temple GS Scarecrow Top": "can_hookshot || (climb_anywhere && (has_ranged_weapon || has_explosives || can_use_din))"
 "Fire Temple Ring":
   dungeon: Fire
   exits:
-    "Fire Temple Before Miniboss": "small_keys_fire(7)"
-    "Fire Temple Pillar Ledge": "has_hover_boots"
+    "Fire Temple Before Miniboss": "small_keys_fire(7) || hookshot_anywhere || climb_anywhere"
+    "Fire Temple Pillar Ledge": "has_hover_boots || hookshot_anywhere || climb_anywhere"
   locations:
     "Fire Temple Compass": "true"
     "Fire Temple Pot Ring 1": "true"
@@ -90,8 +90,8 @@
 "Fire Temple Before Miniboss":
   dungeon: Fire
   exits:
-    "Fire Temple After Miniboss": "soul(SOUL_FLARE_DANCER) && has_explosives && (has_bombs || can_hammer || can_hookshot)"
-    "Fire Temple Pillar Ledge": "can_play_time"
+    "Fire Temple After Miniboss": "soul(SOUL_FLARE_DANCER) && has_explosives && (has_bombs || can_hammer || can_hookshot) && (has_weapon || can_hammer || can_use_sticks)"
+    "Fire Temple Pillar Ledge": "can_play_time || hookshot_anywhere || climb_anywhere"
   locations:
     "Fire Temple Ring Jail": "can_hammer && can_play_time"
     "Fire Temple Pot Before Miniboss 1": "true"
@@ -101,7 +101,7 @@
 "Fire Temple Pillar Ledge":
   dungeon: Fire
   exits:
-    "Fire Temple Before Miniboss": "can_hammer"
+    "Fire Temple Before Miniboss": "can_hammer || hookshot_anywhere || climb_anywhere"
     "Fire Temple Ring": "true"
   events:
     FIRE_TEMPLE_PILLAR_HAMMER: "can_hammer"
