@@ -393,7 +393,7 @@ Waterfall Rapids Beaver Race 1,                   npc,            NONE,         
 Waterfall Rapids Beaver Race 2,                   npc,            NONE,                   WATERFALL_RAPIDS,             BEAVER_2,                   HEART_PIECE
 Road to Ikana Chest,                              chest,          NONE,                   ROAD_IKANA,                   0x00,                       RUPEE_RED
 Road to Ikana Grotto,                             chest,          NONE,                   GROTTOS,                      0x16,                       BOMBCHU
-Road to Ikana Stone Mask,                         npc,            NONE,                   ROAD_IKANA,                   MASK_STONE,                 MASK_STONE
+Road to Ikana Stone Mask,                         npc,            INVISIBLE_SOLDIER,      ROAD_IKANA,                   MASK_STONE,                 MASK_STONE
 Road to Ikana Pot,                                pot,            NONE,                   ROAD_IKANA,                   0x004c,                     FAIRY
 Gorman Track Garo Mask,                           npc,            NONE,                   GORMAN_TRACK,                 MASK_GARO,                  MASK_GARO
 Gorman Track Milk Purchase,                       npc,            NONE,                   GORMAN_TRACK,                 GORMAN_MILK,                MILK

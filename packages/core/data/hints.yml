@@ -15,6 +15,7 @@ OOT_COW_LINK:               0x0b
 OOT_BIGGORON:               0x0c
 OOT_ICE_CAVERN_CHEST:       0x0d
 OOT_TREASURE_GAME:          0x0e
+OOT_SHOOT_SUN:              0x0f
 
 MM_RANCH_DEFENSE:     0x81
 MM_BUTLER_RACE:       0x82
@@ -37,3 +38,4 @@ MM_MIDNIGHT_MEETING:          0x91
 MM_MADAME_AROMA_BAR:          0x92
 MM_CUCCOS:                    0x93
 MM_KAFEI:                     0x94
+MM_INVISIBLE_SOLDIER:         0x95

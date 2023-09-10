@@ -303,7 +303,7 @@ Zora Fountain Adult Pot 1,                                  pot,            NONE
 Zora Fountain Adult Pot 2,                                  pot,            NONE,                 ZORA_FOUNTAIN,                  0x802b,                     MAGIC_JAR_LARGE
 Zora Fountain Adult Pot 3,                                  pot,            NONE,                 ZORA_FOUNTAIN,                  0x802c,                     ARROWS_10
 Lake Hylia Underwater Bottle,                               npc,            NONE,                 LAKE_HYLIA,                     RUTO_LETTER,                RUTO_LETTER
-Lake Hylia Fire Arrow,                                      npc,            NONE,                 LAKE_HYLIA,                     FIRE_ARROW,                 ARROW_FIRE
+Lake Hylia Fire Arrow,                                      npc,            SHOOT_SUN,            LAKE_HYLIA,                     FIRE_ARROW,                 ARROW_FIRE
 Lake Hylia HP,                                              collectible,    NONE,                 LAKE_HYLIA,                     0x1e,                       HEART_PIECE
 Lake Hylia Grotto Left Scrub,                               scrub,          NONE,                 GROTTOS,                        0x14,                       NUTS_5
 Lake Hylia Grotto Center Scrub,                             scrub,          NONE,                 GROTTOS,                        0x15,                       DEKU_SEEDS_30
