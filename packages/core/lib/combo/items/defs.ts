@@ -527,7 +527,7 @@ const ITEM_IDS = [
   'OOT_COIN_BLUE',
 ] as const;
 
-type ItemID = typeof ITEM_IDS[number];
+export type ItemID = typeof ITEM_IDS[number];
 type ItemDefs = {[k in ItemID]: Item};
 
 export type Item = {
