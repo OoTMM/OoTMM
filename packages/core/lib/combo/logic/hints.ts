@@ -522,7 +522,7 @@ export class LogicPassHints {
       return 0;
     }
     const paths = ['triforcePower', 'triforceCourage', 'triforceWisdom'] as const;
-    const mapPaths = new Map<Location, HintPath>;
+    const mapPaths = new Map<Location, Set<HintPath>>;
     let locations: Location[] = [];
     const world = this.state.worlds[worldId];
 
@@ -532,7 +532,9 @@ export class LogicPassHints {
         if (this.hintedLocations.has(loc) || !this.isLocationHintable(loc, 'path')) {
           continue;
         }
-        mapPaths.set(loc, p);
+        const s = mapPaths.get(loc) || new Set;
+        s.add(p);
+        mapPaths.set(loc, s);
         locations.push(loc);
       }
     }
@@ -547,7 +549,9 @@ export class LogicPassHints {
       if (gossip !== null) {
         const locD = locationData(loc);
         this.hintedLocations.add(loc);
-        const hint: HintGossip = { game: world.gossip[gossip].game, type: 'path', path: mapPaths.get(loc)!, region: makeRegion(world.regions[locD.id], locD.world as number), location: loc };
+        const paths = mapPaths.get(loc)!;
+        const path = sample(this.state.random, Array.from(paths));
+        const hint: HintGossip = { game: world.gossip[gossip].game, type: 'path', path, region: makeRegion(world.regions[locD.id], locD.world as number), location: loc };
         this.placeWithExtra(worldId, gossip, hint, extra);
         placed++;
       }

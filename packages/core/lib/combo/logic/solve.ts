@@ -579,7 +579,6 @@ export class LogicPassSolver {
           locs = new Map(this.locations.map(x => [x, 1] as const));
         }
         locs = new Map(Array.from(locs.entries()).filter(x => locationData(x[0]).world === worldId && !this.state.items.has(x[0])));
-        console.log(locs);
         let locsArray = shuffle(this.input.random, countMapArray(locs));
         const triforces = [
           makePlayerItem(Items.SHARED_TRIFORCE_POWER, worldId),

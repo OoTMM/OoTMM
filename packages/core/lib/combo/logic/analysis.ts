@@ -522,28 +522,13 @@ export class LogicPassAnalysis {
 
   private makePaths() {
     if (this.state.settings.goal === 'triforce3') {
-      const locsPower = Array.from(this.state.items.entries()).filter(([loc, item]) => item.item === Items.SHARED_TRIFORCE_POWER).map(([loc, _]) => loc);
-      const locsCourage = Array.from(this.state.items.entries()).filter(([loc, item]) => item.item === Items.SHARED_TRIFORCE_COURAGE).map(([loc, _]) => loc);
-      const locsWisdom = Array.from(this.state.items.entries()).filter(([loc, item]) => item.item === Items.SHARED_TRIFORCE_WISDOM).map(([loc, _]) => loc);
+      const locsPower = Array.from(this.state.items.entries()).filter(([_, item]) => item.item === Items.SHARED_TRIFORCE_POWER).map(([loc, _]) => loc);
+      const locsCourage = Array.from(this.state.items.entries()).filter(([_, item]) => item.item === Items.SHARED_TRIFORCE_COURAGE).map(([loc, _]) => loc);
+      const locsWisdom = Array.from(this.state.items.entries()).filter(([_, item]) => item.item === Items.SHARED_TRIFORCE_WISDOM).map(([loc, _]) => loc);
 
       this.paths.triforcePower = this.makePath('Path of Power', x => locsPower.every(l => x.locations.has(l)));
       this.paths.triforceCourage = this.makePath('Path of Courage', x => locsCourage.every(l => x.locations.has(l)));
       this.paths.triforceWisdom = this.makePath('Path of Wisdom', x => locsWisdom.every(l => x.locations.has(l)));
-
-      const superset = new Set<Location>([...this.paths.triforcePower, ...this.paths.triforceCourage, ...this.paths.triforceWisdom]);
-      for (const loc of superset.values()) {
-        let count = 0;
-        for (const path of [this.paths.triforcePower, this.paths.triforceCourage, this.paths.triforceWisdom]) {
-          if (path.has(loc)) {
-            count++;
-          }
-        }
-        if (count > 1) {
-          for (const path of [this.paths.triforcePower, this.paths.triforceCourage, this.paths.triforceWisdom]) {
-            path.delete(loc);
-          }
-        }
-      }
     }
   }
 
