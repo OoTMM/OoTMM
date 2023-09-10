@@ -122,6 +122,7 @@ static const char* const kCheckNamesOot[] = {
     "the " TEXT_COLOR_ORANGE "Haunted Wastelands Chest",
     "the " TEXT_COLOR_YELLOW "Gerudo Archery",
     "the " TEXT_COLOR_GREEN "Cow in Link's house",
+    TEXT_COLOR_RED "Biggoron",
 };
 
 static const char* const kCheckNamesMm[] = {
@@ -144,6 +145,7 @@ static const char* const kCheckNamesMm[] = {
     "the " TEXT_COLOR_PINK "Midnight Meeting",
     TEXT_COLOR_BLUE "Madame Aroma in the Bar",
     TEXT_COLOR_YELLOW "Marching for Cuccos",
+    TEXT_COLOR_PINK "Finding Kafei",
 };
 
 static int isItemAmbiguousOot(s16 gi)

@@ -180,9 +180,9 @@ Graveyard Grass 11,                                         grass,          NONE
 Graveyard Grass 12,                                         grass,          NONE,                 GRAVEYARD,                      0xb0110,                    RANDOM
 Death Mountain Chest,                                       chest,          NONE,                 DEATH_MOUNTAIN_TRAIL,           0x01,                       RUPEE_PURPLE
 Death Mountain HP,                                          collectible,    NONE,                 DEATH_MOUNTAIN_TRAIL,           0x1e,                       HEART_PIECE
-Death Mountain Prescription,                                npc,            NONE,                 DEATH_MOUNTAIN_TRAIL,           TRADE_PRESCRIPTION,         PRESCRIPTION
-Death Mountain Claim Check,                                 npc,            NONE,                 DEATH_MOUNTAIN_TRAIL,           TRADE_CLAIM_CHECK,          CLAIM_CHECK
-Death Mountain Biggoron Sword,                              npc,            NONE,                 DEATH_MOUNTAIN_TRAIL,           TRADE_BIGGORON_SWORD,       SWORD_BIGGORON
+Death Mountain Prescription,                                npc,            BIGGORON,             DEATH_MOUNTAIN_TRAIL,           TRADE_PRESCRIPTION,         PRESCRIPTION
+Death Mountain Claim Check,                                 npc,            BIGGORON,             DEATH_MOUNTAIN_TRAIL,           TRADE_CLAIM_CHECK,          CLAIM_CHECK
+Death Mountain Biggoron Sword,                              npc,            BIGGORON,             DEATH_MOUNTAIN_TRAIL,           TRADE_BIGGORON_SWORD,       SWORD_BIGGORON
 Death Mountain Grotto,                                      chest,          NONE,                 GROTTOS,                        0x17,                       RUPEE_HUGE
 Death Mountain Grotto Grass 1,                              grass,          NONE,                 GROTTOS,                        0x03702,                    RANDOM
 Death Mountain Grotto Grass 2,                              grass,          NONE,                 GROTTOS,                        0x03703,                    RANDOM
