@@ -610,6 +610,15 @@ export const SETTINGS = [{
   description: 'Allows to spawn Pierre the Scarecrow just by pulling the Ocarina out',
   default: false,
 }, {
+  key: 'preCompletedDungeons',
+  name: 'Pre-Completed Dungeons',
+  category: 'main.events',
+  type: 'number',
+  min: 0,
+  max: 12,
+  description: 'Allows some dungeons to be pre-completed',
+  default: 0,
+}, {
   key: 'crossWarpOot',
   name: 'Cross-Games OoT Warp Songs',
   category: 'main.cross',

@@ -199,6 +199,7 @@ const removeItemPools = (pools: ItemPools, item: PlayerItem) => {
 };
 
 type SolverState = {
+  startingItems: ItemsCount;
   items: ItemPlacement;
   pools: ItemPools;
   criticalRenewables: Set<PlayerItem>;
@@ -207,6 +208,7 @@ type SolverState = {
 
 const cloneState = (state: SolverState) => {
   return {
+    startingItems: new Map(state.startingItems),
     items: new Map(state.items),
     pools: {
       extra: new Map(state.pools.extra),
@@ -244,13 +246,14 @@ export class LogicPassSolver {
   ) {
     this.monitor = this.input.monitor;
     this.locations = this.input.worlds.map((x, i) => [...x.locations].map(l => makeLocation(l, i))).flat();
-    this.pathfinder = new Pathfinder(this.input.worlds, this.input.settings, this.input.startingItems);
     this.state = {
+      startingItems: new Map(this.input.startingItems),
       items: new Map,
       pools: { extra: new Map, required: new Map, nice: new Map, junk: new Map },
       criticalRenewables: new Set,
       placedCount: 0,
     }
+    this.pathfinder = new Pathfinder(this.input.worlds, this.input.settings, this.state.startingItems);
     this.pathfinderState = this.pathfinder.run(null);
     this.makeItemPools();
   }
@@ -267,6 +270,7 @@ export class LogicPassSolver {
         if ((e instanceof LogicError) && this.attempts < this.attemptsMax) {
           this.attempts++;
           this.state = cloneState(stateBackup);
+          this.pathfinder = new Pathfinder(this.input.worlds, this.input.settings, this.state.startingItems);
           this.monitor.log(`Logic: Solver (attempt ${this.attempts + 1})`);
           continue;
         } else {
@@ -318,6 +322,9 @@ export class LogicPassSolver {
       });
     }
 
+    /* Handle pre-completed dungeons */
+    this.preCompleteDungeons();
+
     /* Place required items */
     this.retry(() => {
       this.pathfinderState = this.pathfinder.run(null);
@@ -350,7 +357,7 @@ export class LogicPassSolver {
     /* At this point we have a beatable game */
     this.fillAll();
 
-    return { items: this.state.items };
+    return { items: this.state.items, startingItems: this.state.startingItems };
   }
 
   private placePlando() {
@@ -420,7 +427,7 @@ export class LogicPassSolver {
     }
 
     /* Remove starting items */
-    for (const [item, count] of this.input.startingItems.entries()) {
+    for (const [item, count] of this.state.startingItems.entries()) {
       if (ItemHelpers.isItemUnlimitedStarting(item))
         continue;
       for (let i = 0; i < count; ++i) {
@@ -677,6 +684,45 @@ export class LogicPassSolver {
           this.randomAssumed(pool, { restrictedLocations: locations, forcedItem: playerItem });
           removeItemPools(this.state.pools, playerItem);
         }
+      }
+    }
+  }
+
+  private tryJunk(location: Location) {
+
+  }
+
+  private preCompleteDungeons() {
+    for (let worldId = 0; worldId < this.input.worlds.length; ++worldId) {
+      const world = this.input.worlds[worldId];
+
+      let dungeons = ['DT', 'DC', 'JJ', 'Forest', 'Fire', 'Water', 'Shadow', 'Spirit', 'WF', 'SH', 'GB', 'ST'];
+      let preCompleted: typeof dungeons = [];
+
+      for (let i = 0; i < this.input.settings.preCompletedDungeons; ++i) {
+        /* Select the dungeon */
+        dungeons = shuffle(this.input.random, dungeons);
+        const dungeon = dungeons.pop()!;
+        preCompleted.push(dungeon);
+
+        /* Compute locations */
+        let locNames = Array.from(world.dungeons[dungeon]);
+        if (dungeon === 'ST') {
+          locNames = [...locNames, ...Array.from(world.dungeons['IST'])];
+        }
+        const locs = locNames.map(x => makeLocation(x, worldId));
+
+        /* Get dungeon rewards */
+        const locsWithRewards = locs.filter(x => this.state.items.has(x) && ItemHelpers.isDungeonReward(this.state.items.get(x)!.item));
+        for (const l of locsWithRewards) {
+          const item = this.state.items.get(l)!;
+          this.state.items.delete(l);
+          this.state.placedCount--;
+          countMapAdd(this.input.startingItems, item.item, 1);
+        }
+
+        /* Extract */
+        this.fillJunk(locs);
       }
     }
   }
