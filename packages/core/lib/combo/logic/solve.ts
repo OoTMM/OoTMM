@@ -7,6 +7,7 @@ import { Settings } from '../settings';
 import { Monitor } from '../monitor';
 import { Location, isLocationChestFairy, isLocationOtherFairy, isLocationRenewable, locationData, makeLocation } from './locations';
 import { Item, ItemGroups, ItemHelpers, Items, ItemsCount, PlayerItem, PlayerItems, itemByID, makePlayerItem } from '../items';
+import { exprTrue } from './expr';
 
 const VALIDATION_CRITICAL_ITEMS = [
   Items.MM_SONG_TIME,
@@ -717,6 +718,13 @@ export class LogicPassSolver {
     this.selectPreCompletedDungeons();
 
     for (let worldId = 0; worldId < this.input.worlds.length; ++worldId) {
+      const BOSS_EVENTS = new Set([
+        'OOT_WATER_TEMPLE_CLEARED',
+        'MM_CLEAN_SWAMP',
+        'MM_BOSS_SNOWHEAD',
+        'MM_BOSS_GREAT_BAY',
+      ]);
+
       const world = this.input.worlds[worldId];
       const dungeons = [...world.preCompleted];
       if (dungeons.includes('ST')) {
@@ -725,6 +733,9 @@ export class LogicPassSolver {
       let locNames = dungeons.map(x => Array.from(world.dungeons[x])).flat();
       const locs = locNames.map(x => makeLocation(x, worldId));
       const items = locs.map(x => this.state.items.get(x)!).filter(x => x);
+      const areas = Object.keys(world.areas).filter(x => dungeons.includes(world.areas[x].dungeon || ''));
+      const areasBoss = areas.filter(x => world.areas[x].boss);
+      const bossEvents = areasBoss.map(x => Object.keys(world.areas[x].events)).flat().filter(x => BOSS_EVENTS.has(x));
 
       /* Get dungeon rewards */
       const locsWithRewards = locs.filter(x => this.state.items.has(x) && ItemHelpers.isDungeonReward(this.state.items.get(x)!.item));
@@ -762,6 +773,17 @@ export class LogicPassSolver {
         }
       }
       this.tryJunk(greatFairyLocs);
+
+      /* Handle boss events */
+      for (const area of areasBoss) {
+        const a = world.areas[area];
+        for (const be of bossEvents) {
+          delete a.events[be];
+        }
+      }
+      for (const be of bossEvents) {
+        world.areas['OOT SPAWN'].events[be] = exprTrue();
+      }
     }
 
     /* We need to reset the pathfinder as we changed the starting items */
