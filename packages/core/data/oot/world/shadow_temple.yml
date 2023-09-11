@@ -2,11 +2,11 @@
   dungeon: Shadow
   exits:
     "Graveyard Upper": "true"
-    "Shadow Temple Pit": "has_hover_boots || can_hookshot || climb_anywhere"
+    "Shadow Temple Pit": "has_hover_boots || can_hookshot || climb_anywhere || glitch_megaflip"
 "Shadow Temple Pit":
   dungeon: Shadow
   exits:
-    "Shadow Temple Main": "(has_hover_boots || hookshot_anywhere) && has_lens"
+    "Shadow Temple Main": "(has_hover_boots || hookshot_anywhere || glitch_megaflip) && has_lens"
   events:
     #There are a lot of ways this works, but it always needs this trick.
     MAGIC: "trick(OOT_LENS)"
@@ -121,7 +121,7 @@
 "Shadow Temple After Boat":
   dungeon: Shadow
   exits:
-    "Shadow Temple Boss": "small_keys_shadow(5) && boss_key(BOSS_KEY_SHADOW) && (can_use_bow || scarecrow_longshot || climb_anywhere || event(SHADOW_PILLAR)) && (has_hover_boots || climb_anywhere || hookshot_anywhere)"
+    "Shadow Temple Boss": "small_keys_shadow(5) && boss_key(BOSS_KEY_SHADOW) && (can_use_bow || scarecrow_longshot || climb_anywhere || event(SHADOW_PILLAR)) && (has_hover_boots || climb_anywhere || hookshot_anywhere || glitch_megaflip)"
   events:
     SHADOW_PILLAR: "can_use_bow || (has_bombflowers && (scarecrow_longshot || climb_anywhere))"
   locations:

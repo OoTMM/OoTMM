@@ -14,10 +14,10 @@
     BOMBS: "has_tunic_goron"
   locations:
     "Fire Temple Jail 1 Chest": "has_tunic_goron"
-    "Fire Temple Pot Pre-Boss Room 1": "has_tunic_goron && ((is_adult && (has_hover_boots || can_hookshot)) || climb_anywhere || hookshot_anywhere)"
-    "Fire Temple Pot Pre-Boss Room 2": "has_tunic_goron && ((is_adult && (has_hover_boots || can_hookshot)) || climb_anywhere || hookshot_anywhere)"
-    "Fire Temple Pot Pre-Boss Room 3": "has_tunic_goron && ((is_adult && (has_hover_boots || can_hookshot)) || climb_anywhere || hookshot_anywhere)"
-    "Fire Temple Pot Pre-Boss Room 4": "has_tunic_goron && ((is_adult && (has_hover_boots || can_hookshot)) || climb_anywhere || hookshot_anywhere)"
+    "Fire Temple Pot Pre-Boss Room 1": "has_tunic_goron && ((is_adult && (has_hover_boots || can_hookshot || glitch_megaflip)) || climb_anywhere || hookshot_anywhere)"
+    "Fire Temple Pot Pre-Boss Room 2": "has_tunic_goron && ((is_adult && (has_hover_boots || can_hookshot || glitch_megaflip)) || climb_anywhere || hookshot_anywhere)"
+    "Fire Temple Pot Pre-Boss Room 3": "has_tunic_goron && ((is_adult && (has_hover_boots || can_hookshot || glitch_megaflip)) || climb_anywhere || hookshot_anywhere)"
+    "Fire Temple Pot Pre-Boss Room 4": "has_tunic_goron && ((is_adult && (has_hover_boots || can_hookshot || glitch_megaflip)) || climb_anywhere || hookshot_anywhere)"
 "Fire Temple Boss Key Loop Start":
   dungeon: Fire
   exits:

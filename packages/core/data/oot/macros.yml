@@ -55,6 +55,7 @@
 "has_shield": "renewable(SHIELD_HYLIAN) || has_mirror_shield || (age_shield_child && renewable(SHIELD_DEKU))"
 "has_shield_for_scrubs": "(is_adult && renewable(SHIELD_HYLIAN)) || (age_shield_child && renewable(SHIELD_DEKU))"
 "has_mirror_shield": "age_shield_adult && cond(setting(progressiveShieldsOot, progressive), has(SHIELD, 3), has(SHIELD_MIRROR))"
+"has_one_hand_shield": "has_shield_for_scrubs || has_mirror_shield"
 
 #Equipment Use Macros
 "has_rupees": "event(RUPEES) || (setting(sharedWallets) && event(MM_RUPEES))"
@@ -166,6 +167,7 @@
 "glitch_equip_swap": "glitch(OOT_EQUIP_SWAP) && (has(SPELL_FIRE) || (has_sticks && (is_child || setting(agelessSticks))))"
 "glitch_equip_swap_anyage": "glitch(OOT_EQUIP_SWAP) && (has(SPELL_FIRE) || (has_sticks && setting(agelessSticks)))"
 "glitch_ocarina_items": "glitch(OOT_OCARINA_ITEMS) && (has_bugs || has_fish)"
+"glitch_megaflip": "glitch(OOT_MEGAFLIP) && has_bombs && has_one_hand_shield"
 
 # Misc
 "soul(x)": "(!setting(enemySoulsOot)) || has(x)"

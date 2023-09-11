@@ -41,6 +41,7 @@ export const TRICKS = {
   OOT_SPIRIT_BOSS_CLIMB_NO_HOOK: "Reach Twinrova using Climb Anywhere and Hover Boots",
   OOT_DC_BOULDER: "Skip Dodongo Cavern's Boulder using Ageless Hookshot Anywhere",
   OOT_LAKE_SHORTCUT: "Move Between Lake Hylia and Zora's Domain with Ageless Hookshot Anywhere",
+  OOT_JJB_BOXLESS: "Access Jabu-Jabu pre-boss without the box",
   MM_LENS: "Fewer Lens Requirements (MM)",
   MM_PALACE_BEAN_SKIP: "Skip Planting Beans in Deku Palace",
   MM_DARMANI_WALL: "Climb Mountain Village Wall Blind",

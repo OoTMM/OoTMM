@@ -7,7 +7,7 @@
   dungeon: JJ
   exits:
     "Jabu-Jabu": "true"
-    "Jabu-Jabu Pre-Boss": "event(BIG_OCTO) || (has_hover_boots && trick(OOT_JABU_BOSS_HOVER)) || climb_anywhere"
+    "Jabu-Jabu Pre-Boss": "event(BIG_OCTO) || (has_hover_boots && trick(OOT_JABU_BOSS_HOVER)) || climb_anywhere || (glitch_megaflip && trick(OOT_JJB_BOXLESS) && can_jump_slash)"
   events:
     BIG_OCTO: "soul_octorok && can_boomerang && soul(SOUL_PARASITE) && (has_weapon || can_use_sticks)"
   locations:

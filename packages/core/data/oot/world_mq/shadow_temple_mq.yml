@@ -2,12 +2,12 @@
   dungeon: Shadow
   exits:
     "Graveyard Upper": "true"
-    "Shadow Temple Truth Spinner": "has_lens && (can_hookshot || has_hover_boots)"
+    "Shadow Temple Truth Spinner": "has_lens && (can_hookshot || has_hover_boots || glitch_megaflip)"
 "Shadow Temple Truth Spinner":
   dungeon: Shadow
   exits:
     "Shadow Temple First Locked Door": "has_explosives && small_keys_shadow(6)"
-    "Shadow Temple First Beamos": "has_fire_arrows || has_hover_boots"
+    "Shadow Temple First Beamos": "has_fire_arrows || has_hover_boots || glitch_megaflip"
   events:
     ARROWS: "true"
     BOMBS: "true"
