@@ -1,4 +1,4 @@
-import { World } from './world';
+import { DUNGEONS_REGIONS, World } from './world';
 import { Analysis } from './analysis';
 import { Random, sample, shuffle, randomInt } from '../random';
 import { Settings } from '../settings';
@@ -11,6 +11,7 @@ import { Region, makeRegion } from './regions';
 import { CountMap, countMapArray } from '../util';
 import { ItemGroups, ItemHelpers, Items, ItemsCount, PlayerItem, itemByID, makePlayerItem } from '../items';
 import { isDungeonStrayFairy } from '../items/helpers';
+import { PlayerItems } from '../../../dist/lib/combo/items';
 
 const FIXED_HINTS_LOCATIONS = [
   'OOT Skulltula House 10 Tokens',
@@ -141,6 +142,7 @@ export class LogicPassHints {
   private pathfinder: Pathfinder;
   private hintsAlways: string[];
   private hintsSometimes: string[];
+  private ignoredRegions: Set<Region>;
 
   constructor(
     private readonly state: {
@@ -151,9 +153,27 @@ export class LogicPassHints {
       items: ItemPlacement;
       analysis: Analysis;
       fixedLocations: Set<Location>;
-      startingItems: ItemsCount;
+      startingItems: PlayerItems;
     },
   ){
+    this.ignoredRegions = new Set;
+    for (let worldId = 0; worldId < this.state.worlds.length; ++worldId) {
+      const world = this.state.worlds[worldId];
+      for (const dungeon of world.preCompleted) {
+        const rawRegion = DUNGEONS_REGIONS[dungeon];
+        if (!rawRegion)
+          continue;
+        const region = makeRegion(rawRegion, worldId);
+        this.ignoredRegions.add(region);
+      }
+      if (world.preCompleted.has('ST')) {
+        this.ignoredRegions.add(makeRegion('IST', worldId));
+      }
+      if (world.preCompleted.has('BtW')) {
+        this.ignoredRegions.add(makeRegion('BtWE', worldId));
+      }
+    }
+
     this.hintsAlways = this.alwaysHints();
     this.hintsSometimes = this.sometimesHints();
     this.pathfinder = new Pathfinder(state.worlds, state.settings, state.startingItems);
@@ -225,6 +245,12 @@ export class LogicPassHints {
     const locD = locationData(loc);
     const world = this.state.worlds[locD.world as number];
     const region = world.regions[locD.id];
+    const playerRegion = makeRegion(region, locD.world as number);
+
+    /* Ignored region */
+    if (this.ignoredRegions.has(playerRegion)) {
+      return false;
+    }
 
     /* No plando */
     if (this.state.settings.noPlandoHints) {
@@ -384,7 +410,8 @@ export class LogicPassHints {
     }
 
     for (const r of regions.keys()) {
-      if (regions.get(r)! <= 0) {
+      const playerRegion = makeRegion(r, worldId);
+      if (this.ignoredRegions.has(playerRegion) || (regions.get(r)! <= 0)) {
         regions.delete(r);
       }
     }
@@ -720,8 +747,31 @@ export class LogicPassHints {
     }
   }
 
+  private placeGossipsJunkIgnored(worldId: number) {
+    const world = this.state.worlds[worldId];
+    const gossips = new Set<string>();
+    for (const a of Object.keys(world.areas)) {
+      const area = world.areas[a];
+      const playerRegion = makeRegion(area.region, worldId);
+      if (!this.ignoredRegions.has(playerRegion)) {
+        continue;
+      }
+      for (const g of Object.keys(area.gossip)) {
+        gossips.add(g);
+      }
+    }
+
+    for (const g of gossips) {
+      this.place(worldId, g, { game: world.gossip[g].game, type: 'junk', id: randomInt(this.state.random, 65536) });
+    }
+  }
+
   private placeGossips(foolish: CountMap<string>[]) {
     const settingsHints = this.state.settings.hints;
+
+    for (let world = 0; world < this.state.settings.players; ++world) {
+      this.placeGossipsJunkIgnored(world);
+    }
 
     for (const s of settingsHints) {
       for (let world = 0; world < this.state.settings.players; ++world) {

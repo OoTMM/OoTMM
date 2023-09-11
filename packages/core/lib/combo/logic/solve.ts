@@ -7,6 +7,8 @@ import { Settings } from '../settings';
 import { Monitor } from '../monitor';
 import { Location, isLocationChestFairy, isLocationOtherFairy, isLocationRenewable, locationData, makeLocation } from './locations';
 import { Item, ItemGroups, ItemHelpers, Items, ItemsCount, PlayerItem, PlayerItems, itemByID, makePlayerItem } from '../items';
+import { exprTrue } from './expr';
+import { STONES } from '../items/groups';
 
 const VALIDATION_CRITICAL_ITEMS = [
   Items.MM_SONG_TIME,
@@ -21,6 +23,8 @@ const VALIDATION_CRITICAL_ITEMS = [
 ];
 
 export type ItemPlacement = Map<Location, PlayerItem>;
+
+const NORMAL_DUNGEONS = ['DT', 'DC', 'JJ', 'Forest', 'Fire', 'Water', 'Shadow', 'Spirit', 'WF', 'SH', 'GB', 'ST'];
 
 const DUNGEON_ITEMS = {
   DT: [
@@ -199,6 +203,7 @@ const removeItemPools = (pools: ItemPools, item: PlayerItem) => {
 };
 
 type SolverState = {
+  startingItems: PlayerItems;
   items: ItemPlacement;
   pools: ItemPools;
   criticalRenewables: Set<PlayerItem>;
@@ -207,6 +212,7 @@ type SolverState = {
 
 const cloneState = (state: SolverState) => {
   return {
+    startingItems: new Map(state.startingItems),
     items: new Map(state.items),
     pools: {
       extra: new Map(state.pools.extra),
@@ -239,18 +245,19 @@ export class LogicPassSolver {
       monitor: Monitor;
       pool: PlayerItems;
       renewableJunks: PlayerItems;
-      startingItems: ItemsCount;
+      startingItems: PlayerItems;
     }
   ) {
     this.monitor = this.input.monitor;
     this.locations = this.input.worlds.map((x, i) => [...x.locations].map(l => makeLocation(l, i))).flat();
-    this.pathfinder = new Pathfinder(this.input.worlds, this.input.settings, this.input.startingItems);
     this.state = {
+      startingItems: new Map(this.input.startingItems),
       items: new Map,
       pools: { extra: new Map, required: new Map, nice: new Map, junk: new Map },
       criticalRenewables: new Set,
       placedCount: 0,
     }
+    this.pathfinder = new Pathfinder(this.input.worlds, this.input.settings, this.state.startingItems);
     this.pathfinderState = this.pathfinder.run(null);
     this.makeItemPools();
   }
@@ -267,6 +274,7 @@ export class LogicPassSolver {
         if ((e instanceof LogicError) && this.attempts < this.attemptsMax) {
           this.attempts++;
           this.state = cloneState(stateBackup);
+          this.pathfinder = new Pathfinder(this.input.worlds, this.input.settings, this.state.startingItems);
           this.monitor.log(`Logic: Solver (attempt ${this.attempts + 1})`);
           continue;
         } else {
@@ -318,6 +326,9 @@ export class LogicPassSolver {
       });
     }
 
+    /* Handle pre-completed dungeons */
+    this.preCompleteDungeons();
+
     /* Place required items */
     this.retry(() => {
       this.pathfinderState = this.pathfinder.run(null);
@@ -350,7 +361,7 @@ export class LogicPassSolver {
     /* At this point we have a beatable game */
     this.fillAll();
 
-    return { items: this.state.items };
+    return { items: this.state.items, startingItems: this.state.startingItems };
   }
 
   private placePlando() {
@@ -373,13 +384,6 @@ export class LogicPassSolver {
       const locD = locationData(loc);
       const item = makePlayerItem(this.input.worlds[locD.world as number].checks[locD.id].item, locD.world as number);
       this.place(loc, item);
-    }
-  }
-
-  private removePlayersItemPools(pools: ItemPools, item: Item) {
-    for (let i = 0; i < this.input.settings.players; ++i) {
-      const x = makePlayerItem(item, i);
-      removeItemPools(pools, x);
     }
   }
 
@@ -420,11 +424,11 @@ export class LogicPassSolver {
     }
 
     /* Remove starting items */
-    for (const [item, count] of this.input.startingItems.entries()) {
-      if (ItemHelpers.isItemUnlimitedStarting(item))
+    for (const [pi, count] of this.state.startingItems.entries()) {
+      if (ItemHelpers.isItemUnlimitedStarting(pi.item))
         continue;
       for (let i = 0; i < count; ++i) {
-        this.removePlayersItemPools(this.state.pools, item);
+        removeItemPools(this.state.pools, pi);
       }
     }
   }
@@ -679,6 +683,159 @@ export class LogicPassSolver {
         }
       }
     }
+  }
+
+  private tryJunk(locations: Iterable<Location>) {
+    for (const l of locations) {
+      const item = this.state.items.get(l);
+      if (item) {
+        if (ItemHelpers.isJunk(item.item)) {
+          return true;
+        }
+
+        /* Add to starting items */
+        countMapAdd(this.state.startingItems, item, 1);
+        this.state.items.delete(l);
+        this.state.placedCount--;
+      }
+    }
+
+    this.fillJunk(locations);
+  }
+
+  private selectPreCompletedDungeonsItem(worldId: number, items: PlayerItems, count: number, group: Set<Item>) {
+    const world = this.input.worlds[worldId];
+    const dungeons = shuffle(this.input.random, [...NORMAL_DUNGEONS]);
+
+    while (dungeons.length) {
+      const stoneCount = Array.from(items.keys()).filter(x => group.has(x.item)).length;
+      if (stoneCount >= count) {
+        break;
+      }
+      const dungeon = dungeons.pop()!;
+      if (world.preCompleted.has(dungeon)) {
+        continue;
+      }
+      const d = [dungeon];
+      if (dungeon === 'ST') {
+        d.push('IST');
+      }
+      const locNames = d.map(x => Array.from(world.dungeons[x])).flat();
+      const locItems = locNames.map(x => makeLocation(x, worldId)).map(x => this.state.items.get(x)!).filter(x => x);
+      if (!locItems.some(x => group.has(x.item))) {
+        continue;
+      }
+      world.preCompleted.add(dungeon);
+      for (const locItem of locItems) {
+        countMapAdd(items, locItem, 1);
+      }
+    }
+  }
+
+  private selectPreCompletedDungeonsMajor(worldId: number) {
+    const world = this.input.worlds[worldId];
+    let dungeons = shuffle(this.input.random, [...NORMAL_DUNGEONS]);
+
+    while (dungeons.length) {
+      if (world.preCompleted.size >= this.input.settings.preCompletedDungeonsMajor) {
+        break;
+      }
+      const dungeon = dungeons.pop()!;
+      if (world.preCompleted.has(dungeon)) {
+        continue;
+      }
+      world.preCompleted.add(dungeon);
+    }
+  }
+
+  private selectPreCompletedDungeons() {
+    for (let worldId = 0; worldId < this.input.worlds.length; ++worldId) {
+      const items: PlayerItems = new Map;
+      this.selectPreCompletedDungeonsItem(worldId, items, this.input.settings.preCompletedDungeonsStones, ItemGroups.STONES);
+      this.selectPreCompletedDungeonsItem(worldId, items, this.input.settings.preCompletedDungeonsMedallions, ItemGroups.MEDALLIONS);
+      this.selectPreCompletedDungeonsItem(worldId, items, this.input.settings.preCompletedDungeonsRemains, ItemGroups.REMAINS);
+      this.selectPreCompletedDungeonsMajor(worldId);
+    }
+  }
+
+  private preCompleteDungeons() {
+    if (!this.input.settings.preCompletedDungeons)
+      return;
+
+    this.selectPreCompletedDungeons();
+
+    for (let worldId = 0; worldId < this.input.worlds.length; ++worldId) {
+      const WISPS = {
+        'OOT_WATER_TEMPLE_CLEARED': 'OOT SPAWN',
+        'MM_CLEAN_SWAMP': 'MM Woodfall Shrine',
+        'MM_BOSS_SNOWHEAD': 'MM Mountain Village',
+        'MM_BOSS_GREAT_BAY': 'MM Zora Cape Peninsula',
+      };
+
+      const world = this.input.worlds[worldId];
+      const dungeons = [...world.preCompleted];
+      if (dungeons.includes('ST')) {
+        dungeons.push('IST');
+      }
+      let locNames = dungeons.map(x => Array.from(world.dungeons[x])).flat();
+      const locs = locNames.map(x => makeLocation(x, worldId));
+      const items = locs.map(x => this.state.items.get(x)!).filter(x => x);
+      const areas = Object.keys(world.areas).filter(x => dungeons.includes(world.areas[x].dungeon || ''));
+      const areasBoss = areas.filter(x => world.areas[x].boss);
+      const bossEvents = areasBoss.map(x => Object.keys(world.areas[x].events)).flat().filter(x => Object.keys(WISPS).includes(x));
+
+      /* Get dungeon rewards */
+      const locsWithRewards = locs.filter(x => this.state.items.has(x) && ItemHelpers.isDungeonReward(this.state.items.get(x)!.item));
+      this.tryJunk(locsWithRewards);
+
+      /* Fill dungeons with junk */
+      this.fillJunk(locs);
+
+      /* Handle Oath to Order */
+      const LOCS_OATH = [
+        'MM Woodfall Temple Boss',
+        'MM Snowhead Temple Boss',
+        'MM Great Bay Temple Boss',
+        'MM Stone Tower Boss',
+      ];
+      if (LOCS_OATH.some(x => locNames.includes(x))) {
+        const oathLoc = makeLocation('MM Oath to Order', worldId);
+        this.tryJunk([oathLoc]);
+      }
+
+      /* Handle MM Great Fairies */
+      const fairies = [
+        [Items.MM_STRAY_FAIRY_WF, 'MM Woodfall Great Fairy'],
+        [Items.MM_STRAY_FAIRY_SH ,'MM Snowhead Great Fairy'],
+        [Items.MM_STRAY_FAIRY_GB, 'MM Great Bay Great Fairy'],
+        [Items.MM_STRAY_FAIRY_ST, 'MM Ikana Great Fairy'],
+      ] as const;
+      const greatFairyLocs = new Set<Location>;
+      for (const [item, fairy] of fairies) {
+        for (const pi of items) {
+          if (pi.item === item) {
+            const loc = makeLocation(fairy, pi.player);
+            greatFairyLocs.add(loc);
+          }
+        }
+      }
+      this.tryJunk(greatFairyLocs);
+
+      /* Handle boss events */
+      for (const area of areasBoss) {
+        const a = world.areas[area];
+        for (const be of bossEvents) {
+          delete a.events[be];
+        }
+      }
+      for (const be of bossEvents) {
+        world.areas[(WISPS as any)[be]].events[be] = exprTrue();
+      }
+    }
+
+    /* We need to reset the pathfinder as we changed the starting items */
+    this.pathfinder = new Pathfinder(this.input.worlds, this.input.settings, this.state.startingItems);
+    this.pathfinderState = this.pathfinder.run(null);
   }
 
   private placeSemiShuffled() {
@@ -945,12 +1102,12 @@ export class LogicPassSolver {
     this.fillJunk(locs);
   }
 
-  private fillJunk(locs: Location[]) {
+  private fillJunk(locs: Iterable<Location>) {
     /* Fill using the junk pool */
     this.fill(locs, this.state.pools.junk, false);
 
     /* Junk pool empty - fill with extra junk */
-    locs = shuffle(this.input.random, locs.filter(loc => !this.state.items.has(loc)));
+    locs = shuffle(this.input.random, Array.from(locs).filter(loc => !this.state.items.has(loc)));
     const junkDistribution = countMapArray(this.junkDistribution);
     const junkDistributionRenewable = countMapArray(this.junkDistribution).filter(x => !ItemHelpers.isItemMajor(x.item));
     for (const loc of locs) {
@@ -961,9 +1118,9 @@ export class LogicPassSolver {
     }
   }
 
-  private fill(locs: Location[], pool: PlayerItems, required: boolean) {
+  private fill(locs: Iterable<Location>, pool: PlayerItems, required: boolean) {
     const items = shuffle(this.input.random, countMapArray(pool));
-    const locations = shuffle(this.input.random, locs.filter(loc => !this.state.items.has(loc)));
+    const locations = shuffle(this.input.random, Array.from(locs).filter(loc => !this.state.items.has(loc)));
 
     for (const item of items) {
       if (locations.length === 0) {

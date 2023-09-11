@@ -74,6 +74,7 @@ export type World = {
   bossIds: number[];
   dungeonIds: number[];
   entranceOverrides: Map<string, string>;
+  preCompleted: Set<string>;
 };
 
 export const DUNGEONS_REGIONS: { [k: string]: string } = {
@@ -136,6 +137,7 @@ export function cloneWorld(world: World): World {
     warpLocations: new Set(world.warpLocations),
     prices: [...world.prices],
     mq: new Set(world.mq),
+    preCompleted: new Set(world.preCompleted),
     bossIds: [...world.bossIds],
     dungeonIds: [...world.dungeonIds],
     entranceOverrides: new Map(world.entranceOverrides),
@@ -226,6 +228,7 @@ export class LogicPassWorld {
       warpLocations: new Set(),
       prices,
       mq,
+      preCompleted: new Set(),
       bossIds: [],
       dungeonIds: [],
       entranceOverrides: new Map,

@@ -72,7 +72,7 @@ export class LogicPassEntrances {
       fixedLocations: Set<Location>,
       pool: PlayerItems;
       renewableJunks: PlayerItems;
-      startingItems: ItemsCount;
+      startingItems: PlayerItems;
     },
   ) {
   }

@@ -533,8 +533,36 @@ const gameEntrances = (worldId: number, game: Game, logic: LogicResult) => {
   return padBuffer16(toU32Buffer(data));
 };
 
-const randomizerMq = (worldId: number, logic: LogicResult): Buffer => {
+const randomizerDungeonsBits = (worldId: number, logic: LogicResult): Buffer => {
+  const DUNGEONS_PRECOMPLETED = [
+    'DT',
+    'DC',
+    'JJ',
+    'Forest',
+    'Fire',
+    'Water',
+    'Shadow',
+    'Spirit',
+    'WF',
+    'SH',
+    'GB',
+    'IST',
+    'ST',
+    'SSH',
+    'OSH',
+    'BotW',
+    'IC',
+    'GTG',
+    'BtW',
+    'ACoI',
+    'SS',
+    'BtWE',
+    'PF',
+    'Ganon',
+    'Tower',
+  ]
   let mq = 0;
+  let preCompleted = 0;
   const dungeons = Object.keys(DUNGEONS);
   const world = logic.worlds[worldId];
   for (let i = 0; i < dungeons.length; ++i) {
@@ -543,8 +571,17 @@ const randomizerMq = (worldId: number, logic: LogicResult): Buffer => {
       mq |= 1 << i;
     }
   }
-  const buffer = Buffer.alloc(4);
-  buffer.writeUInt32BE(mq);
+
+  for (let i = 0; i < DUNGEONS_PRECOMPLETED.length; ++i) {
+    const dungeon = DUNGEONS_PRECOMPLETED[i];
+    if (world.preCompleted.has(dungeon)) {
+      preCompleted |= 1 << i;
+    }
+  }
+
+  const buffer = Buffer.alloc(8);
+  buffer.writeUInt32BE(mq, 0);
+  buffer.writeUInt32BE(preCompleted, 4);
   return buffer;
 }
 
@@ -635,7 +672,7 @@ export const randomizerData = (worldId: number, logic: LogicResult): Buffer => {
   const buffers = [];
   buffers.push(logic.uuid);
   buffers.push(toU8Buffer([worldId + 1, 0, 0, 0]));
-  buffers.push(randomizerMq(worldId, logic));
+  buffers.push(randomizerDungeonsBits(worldId, logic));
   buffers.push(randomizerWarps(worldId, logic));
   buffers.push(randomizerConfig(logic.config));
   buffers.push(specialConds(logic.settings));
@@ -662,24 +699,29 @@ function addStartingItemLocsWorld(world: number, logic: LogicResult, locs: strin
 
 const effectiveStartingItems = (worldId: number, logic: LogicResult): ItemsCount => {
   const { settings } = logic;
-  const startingItems = new Map(logic.startingItems);
+  const itemsCount: ItemsCount = new Map;
+  for (const [pi, count] of logic.startingItems) {
+    if (pi.player === worldId) {
+      itemsCount.set(pi.item, count);
+    }
+  }
 
   if (settings.tingleShuffle === 'starting') {
     for (const item of ItemGroups.TINGLE_MAPS) {
-      startingItems.set(item, 1);
+      itemsCount.set(item, 1);
     }
   }
 
   if (settings.mapCompassShuffle === 'starting') {
     for (const item of [...ItemGroups.MAPS, ...ItemGroups.COMPASSES]) {
-      startingItems.set(item, 1);
+      itemsCount.set(item, 1);
     }
   }
 
-  if (settings.skipZelda) addStartingItemLocsWorld(worldId, logic, LOCATIONS_ZELDA, startingItems);
-  if (settings.gerudoFortress === 'open') addStartingItemLocsWorld(worldId, logic, ['OOT Gerudo Member Card'], startingItems);
+  if (settings.skipZelda) addStartingItemLocsWorld(worldId, logic, LOCATIONS_ZELDA, itemsCount);
+  if (settings.gerudoFortress === 'open') addStartingItemLocsWorld(worldId, logic, ['OOT Gerudo Member Card'], itemsCount);
 
-  return startingItems;
+  return itemsCount;
 }
 
 const randomizerStartingItems = (world: number, logic: LogicResult): Buffer => {

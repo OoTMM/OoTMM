@@ -6,7 +6,7 @@ import { Monitor } from '../monitor';
 import { cloneDeep } from 'lodash';
 import { isLocationRenewable, makePlayerLocations, Location, makeLocation, locationData } from './locations';
 import { ItemPlacement } from './solve';
-import { ItemGroups, ItemHelpers, Items, ItemsCount, PlayerItem } from '../items';
+import { ItemGroups, ItemHelpers, Items, ItemsCount, PlayerItem, PlayerItems } from '../items';
 
 const SIMPLE_DEPENDENCIES: {[k: string]: string[]} = {
   OOT_WEIRD_EGG: [
@@ -362,7 +362,7 @@ export class LogicPassAnalysis {
       worlds: World[];
       items: ItemPlacement;
       monitor: Monitor;
-      startingItems: ItemsCount;
+      startingItems: PlayerItems;
     },
   ){
     this.pathfinder = new Pathfinder(this.state.worlds, this.state.settings, this.state.startingItems);

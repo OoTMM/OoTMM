@@ -14,6 +14,7 @@ import { Location, locationData, makeLocation } from './locations';
 import { Region, regionData } from './regions';
 import { PlayerItem } from '../items';
 import { worldState } from '.';
+import { PlayerItems } from '../../../dist/lib/combo/items';
 
 const VERSION = process.env.VERSION || 'XXX';
 
@@ -32,6 +33,7 @@ export class LogicPassSpoiler {
       settings: Settings,
       hints: Hints,
       monitor: Monitor,
+      startingItems: PlayerItems;
     }
   ) {
     this.buffer = [];
@@ -128,15 +130,19 @@ export class LogicPassSpoiler {
   }
 
   private writeStartingItems() {
-    const { startingItems } = this.state.settings;
-    if (Object.keys(startingItems).length === 0) {
+    const { startingItems } = this.state;
+    if (startingItems.size === 0) {
       return;
     }
 
     this.indent('Starting Items');
-    for (const item in startingItems) {
-      const count = startingItems[item];
-      this.write(`${itemName(item)}: ${count}`);
+    for (let playerId = 0; playerId < this.state.settings.players; ++playerId) {
+      if (this.isMulti) this.indent(`Player ${playerId + 1}`);
+      const items = new Map(Array.from(startingItems.entries()).filter(([x, _]) => x.player === playerId));
+      for (const [item, count] of items) {
+        this.write(`${itemName(item.item.id)}: ${count}`);
+      }
+      if (this.isMulti) this.unindent('');
     }
     this.unindent('');
   }
@@ -170,6 +176,32 @@ export class LogicPassSpoiler {
       }
 
       for (const d of worlds[i].mq) {
+        this.write(`${d}`);
+      }
+
+      if (worlds.length > 1) {
+        this.unindent('');
+      }
+    }
+    this.unindent('');
+  }
+
+  private writePreCompleted() {
+    let worlds = this.state.worlds;
+    if (!this.state.settings.distinctWorlds) {
+      worlds = [this.state.worlds[0]];
+    }
+    if (!worlds.some(world => world.preCompleted.size > 0)) {
+      return;
+    }
+
+    this.indent('Pre-Completed Dungeons');
+    for (let i = 0; i < worlds.length; ++i) {
+      if (worlds.length > 1) {
+        this.indent(`World ${i + 1}`);
+      }
+
+      for (const d of worlds[i].preCompleted) {
         this.write(`${d}`);
       }
 
@@ -355,6 +387,7 @@ export class LogicPassSpoiler {
     this.writeStartingItems();
     this.writeJunkLocations();
     this.writeMQ();
+    this.writePreCompleted();
     this.writeEntrances();
     this.writeHints();
     if (this.state.opts.settings.logic !== 'none') {

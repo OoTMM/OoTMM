@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/dungeon.h>
 
 typedef struct
 {
@@ -117,13 +118,10 @@ void comboSpawnCustomWarps(GameState_Play* play)
     float y;
     float z;
 
-    if (!comboConfig(CFG_ER_DUNGEONS))
-        return;
-
     variable = -1;
 
 #if defined(GAME_MM)
-    if (play->sceneId == SCE_MM_MOUNTAIN_VILLAGE_WINTER && gMiscFlags.erSpring)
+    if ((comboConfig(CFG_ER_DUNGEONS) || gComboData.preCompleted & (1 << DUNGEONID_TEMPLE_SNOWHEAD)) && play->sceneId == SCE_MM_MOUNTAIN_VILLAGE_WINTER && gMiscFlags.erSpring)
     {
         variable = SWITCH_SPRING;
         x = -1200.f;
@@ -131,7 +129,7 @@ void comboSpawnCustomWarps(GameState_Play* play)
         z = 600.f;
     }
 
-    if (play->sceneId == SCE_MM_WOODFALL && !MM_GET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_WF) && gMiscFlags.erSwampClear)
+    if ((comboConfig(CFG_ER_DUNGEONS) || gComboData.preCompleted & (1 << DUNGEONID_TEMPLE_WOODFALL)) && play->sceneId == SCE_MM_WOODFALL && !MM_GET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_WF) && gMiscFlags.erSwampClear)
     {
         variable = SWITCH_SWAMP_CLEAR;
         x = 70.f;
@@ -139,7 +137,7 @@ void comboSpawnCustomWarps(GameState_Play* play)
         z = -1320.f;
     }
 
-    if (play->sceneId == SCE_MM_ZORA_CAPE && !MM_GET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_GB) && gMiscFlags.erCoastClear)
+    if ((comboConfig(CFG_ER_DUNGEONS) || gComboData.preCompleted & (1 << DUNGEONID_TEMPLE_GREAT_BAY)) && play->sceneId == SCE_MM_ZORA_CAPE && !MM_GET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_GB) && gMiscFlags.erCoastClear)
     {
         variable = SWITCH_COAST_CLEAR;
         x = -5500.f;

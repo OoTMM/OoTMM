@@ -255,6 +255,13 @@ void comboCreateSave(void* unk, void* buffer)
     /* Apply starting events */
     applyStartingEvents();
 
+    /* Apply pre-completed dungeons */
+    for (int i = 0; i < 32; ++i)
+    {
+        if (gComboData.preCompleted & (1 << i))
+            comboDungeonSetFlags(i, 0);
+    }
+
     /* Write save */
     comboWriteSave();
 
