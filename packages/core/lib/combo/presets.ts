@@ -26,6 +26,7 @@ const PRESET_BLITZ = makeSettings({
   crossWarpMm: 'full',
   fastBunnyHood: true,
   blueFireArrows: true,
+  startingAge: 'random',
   defaultHoldTarget: true,
   progressiveGoronLullaby: 'single',
   freeScarecrowOot: true,
