@@ -11,6 +11,7 @@ import { Region, makeRegion } from './regions';
 import { CountMap, countMapArray } from '../util';
 import { ItemGroups, ItemHelpers, Items, ItemsCount, PlayerItem, itemByID, makePlayerItem } from '../items';
 import { isDungeonStrayFairy } from '../items/helpers';
+import { PlayerItems } from '../../../dist/lib/combo/items';
 
 const FIXED_HINTS_LOCATIONS = [
   'OOT Skulltula House 10 Tokens',
@@ -151,7 +152,7 @@ export class LogicPassHints {
       items: ItemPlacement;
       analysis: Analysis;
       fixedLocations: Set<Location>;
-      startingItems: ItemsCount;
+      startingItems: PlayerItems;
     },
   ){
     this.hintsAlways = this.alwaysHints();

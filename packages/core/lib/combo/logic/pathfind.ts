@@ -117,17 +117,23 @@ const defaultWorldState = (startingItems: ItemsCount): PathfinderWorldState => (
   events: new Set(),
 });
 
-const defaultWorldStates = (startingItems: ItemsCount, worldCount: number) => {
+const defaultWorldStates = (startingItems: PlayerItems, worldCount: number) => {
   const ws: PathfinderWorldState[] = [];
 
   for (let world = 0; world < worldCount; ++world) {
-    ws.push(defaultWorldState(startingItems));
+    const itemCount: ItemsCount = new Map;
+    for (const [pi, count] of startingItems) {
+      if (pi.player === world) {
+        itemCount.set(pi.item, count);
+      }
+    }
+    ws.push(defaultWorldState(itemCount));
   }
 
   return ws;
 }
 
-const defaultState = (startingItems: ItemsCount, worldCount: number): PathfinderState => {
+const defaultState = (startingItems: PlayerItems, worldCount: number): PathfinderState => {
   const gossips: Set<string>[] = [];
 
   for (let world = 0; world < worldCount; ++world) {
@@ -205,7 +211,7 @@ export class Pathfinder {
   constructor(
     private readonly worlds: World[],
     private readonly settings: Settings,
-    private readonly startingItems: ItemsCount,
+    private readonly startingItems: PlayerItems,
   ) {
   }
 

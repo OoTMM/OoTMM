@@ -662,24 +662,29 @@ function addStartingItemLocsWorld(world: number, logic: LogicResult, locs: strin
 
 const effectiveStartingItems = (worldId: number, logic: LogicResult): ItemsCount => {
   const { settings } = logic;
-  const startingItems = new Map(logic.startingItems);
+  const itemsCount: ItemsCount = new Map;
+  for (const [pi, count] of logic.startingItems) {
+    if (pi.player === worldId) {
+      itemsCount.set(pi.item, count);
+    }
+  }
 
   if (settings.tingleShuffle === 'starting') {
     for (const item of ItemGroups.TINGLE_MAPS) {
-      startingItems.set(item, 1);
+      itemsCount.set(item, 1);
     }
   }
 
   if (settings.mapCompassShuffle === 'starting') {
     for (const item of [...ItemGroups.MAPS, ...ItemGroups.COMPASSES]) {
-      startingItems.set(item, 1);
+      itemsCount.set(item, 1);
     }
   }
 
-  if (settings.skipZelda) addStartingItemLocsWorld(worldId, logic, LOCATIONS_ZELDA, startingItems);
-  if (settings.gerudoFortress === 'open') addStartingItemLocsWorld(worldId, logic, ['OOT Gerudo Member Card'], startingItems);
+  if (settings.skipZelda) addStartingItemLocsWorld(worldId, logic, LOCATIONS_ZELDA, itemsCount);
+  if (settings.gerudoFortress === 'open') addStartingItemLocsWorld(worldId, logic, ['OOT Gerudo Member Card'], itemsCount);
 
-  return startingItems;
+  return itemsCount;
 }
 
 const randomizerStartingItems = (world: number, logic: LogicResult): Buffer => {

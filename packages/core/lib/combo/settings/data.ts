@@ -618,6 +618,7 @@ export const SETTINGS = [{
   max: 12,
   description: 'Allows some dungeons to be pre-completed',
   default: 0,
+  cond: (s: any) => (s.mode !== 'multi' || s.distinctWorlds),
 }, {
   key: 'crossWarpOot',
   name: 'Cross-Games OoT Warp Songs',
