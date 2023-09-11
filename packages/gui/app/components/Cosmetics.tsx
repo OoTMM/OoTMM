@@ -4,6 +4,8 @@ import { COLORS, COSMETICS, Cosmetics } from '@ootmm/core';
 import { Dropdown } from './Dropdown';
 import { useCosmetics } from '../contexts/GeneratorContext';
 import { FileSelect } from './FileSelect';
+import { Group } from './Group';
+import { Text } from './Text';
 
 const COLOR_OPTIONS: { name: string, value: string}[] = [{ value: 'default', name: 'Default' }, { value: 'auto', name: 'Auto' }, { value: 'random', name: 'Random' }, ...Object.entries(COLORS).map(([key, x]) => ({ name: x.name, value: key }))];
 
@@ -40,12 +42,25 @@ function Cosmetic({ cosmetic }: { cosmetic: keyof Cosmetics }) {
 export function CosmeticsEditor() {
   const options: { name: string, value: string}[] = Object.entries(COLORS).map(([key, x]) => ({ name: x.name, value: key }));
   options.push({ name: "Random", value: "random" });
+  const dropdowns = COSMETICS.filter(c => c.type === 'color');
+  const fileSelects = COSMETICS.filter(c => c.type === 'zobj');
+
 
   return (
-    <form className="settings">
-      <div className="three-column-grid">
-        {COSMETICS.map(c => <Cosmetic key={c.key} cosmetic={c.key}/>)}
-      </div>
-    </form>
+    <Group direction='vertical' spacing='xxl'>
+      <Text size='mg'>Cosmetics</Text>
+      <form>
+      <Group direction='vertical' spacing='jb'>
+        <div className="three-column-grid">
+          {dropdowns.map(c => <Cosmetic key={c.key} cosmetic={c.key}/>)}
+        </div>
+        <div className="center">
+        <Group direction='horizontal' spacing='mg'>
+          {fileSelects.map(c => <Cosmetic key={c.key} cosmetic={c.key}/>)}
+        </Group>
+        </div>
+      </Group>
+      </form>
+    </Group>
   )
 }

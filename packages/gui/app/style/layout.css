@@ -4,17 +4,10 @@
   min-width: 100vw;
 }
 
-.flex-h {
+.center {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-}
-
-.settings {
-  display: flex;
-  flex-flow: column wrap;
-  gap: 0.5rem;
-  width: 100%;
 }
 
 .two-column-grid {
@@ -29,47 +22,8 @@
   gap: 15px;
 }
 
-.settings>.checkboxes-lowcount {
-  display: flex;
-  flex-flow: row wrap;
-  gap: 15px;
-  margin-bottom: 8px;
-}
-
 .container {
   margin: 3em;
-}
-
-.settings-group {
-  margin-bottom: 2.5em;
-}
-
-.select-list {
-  flex: 1;
-  overflow-y: auto;
-}
-
-.select-list li {
-  background: #eee;
-  padding: 0.5em;
-  user-select: none;
-
-}
-
-.select-list li:hover {
-  background: #ddd;
-  cursor: pointer;
-}
-
-.select-list li:active, .select-list li.selected {
-  background: #bbb;
-  cursor: pointer;
-}
-
-.plando {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
 }
 
 .plando-search {

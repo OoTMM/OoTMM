@@ -2,6 +2,7 @@ import React from 'react';
 import Select, { createFilter, components } from 'react-select';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
+import Group from './Group';
 
 const CustomOption = ({ children, ...props }: { children?: React.ReactNode, props: any }) => {
   const { onMouseMove, onMouseOver, ...rest } = (props as any).innerProps;
@@ -28,8 +29,8 @@ export function ArrayList({ options, selected, add, remove, clear }: ArrayListPr
   const remaining = options.filter(x => !selected.includes(x.value));
 
   return (
-    <div className='plando'>
-      <div className='plando-search'>
+    <Group direction='vertical' spacing='xl'>
+      <Group direction='horizontal'>
         <Select
           className='plando-select'
           filterOption={createFilter({ignoreAccents: false})}
@@ -38,15 +39,15 @@ export function ArrayList({ options, selected, add, remove, clear }: ArrayListPr
           onChange={(v) => v && add(v.value)}
         />
         {clear && <button className="btn-danger" onClick={clear}>Remove All</button>}
-      </div>
-      <ol className='plando-list'>
+      </Group>
+      <Group direction='vertical' spacing='xs'>
         {selected.map(v => (
-          <li key={v}>
+          <Group direction='horizontal' spacing='xs' key={v}>
             <span className="plando-remove" onClick={() => remove(v)}><FontAwesomeIcon icon={solid('xmark')}/></span>
             <span className="plando-item">{options.find(x => x.value === v)?.label || v}</span>
-          </li>
+          </Group>
         ))}
-      </ol>
-    </div>
+      </Group>
+    </Group>
   );
 }

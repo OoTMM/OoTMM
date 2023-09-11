@@ -207,13 +207,12 @@ export function useStartingItems() {
   const alterItem = (item: string, value: number) => {
     setState((state) => {
       const newStartingItems = { ...state.settings.startingItems };
-      const count = (newStartingItems[item] || 0) + value;
-      if (count <= 0) {
+      if (value <= 0) {
         delete newStartingItems[item];
-      } else if (count > state.itemPool[item]) {
+      } else if (value > state.itemPool[item]) {
         newStartingItems[item] = state.itemPool[item];
       } else {
-        newStartingItems[item] = count;
+        newStartingItems[item] = value;
       }
       const newSettings = { ...state.settings, startingItems: newStartingItems };
       localStorage.setItem('settings', JSON.stringify(newSettings));
@@ -227,10 +226,8 @@ export function useStartingItems() {
     setState(state => ({ ...state, settings: newSettings }));
   };
 
-  const incr = (item: string) => alterItem(item, 1);
-  const decr = (item: string) => alterItem(item, -1);
 
-  return { startingItems, itemPool, incr, decr, reset };
+  return { startingItems, itemPool, alterItem, reset };
 }
 
 export function useCosmetics() {

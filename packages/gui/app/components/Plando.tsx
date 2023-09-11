@@ -5,6 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 
 import { useItemPool, useSettings } from '../contexts/GeneratorContext';
+import { Group } from './Group';
+import { Text } from './Text';
 
 export function Plando() {
   const [selectedLoc, setSelectedLoc] = useState<string>();
@@ -32,21 +34,22 @@ export function Plando() {
   };
 
   return (
-    <div className='plando'>
-      <div className='plando-search'>
+    <Group direction='vertical' spacing='xxl'>
+      <Text size='mg'>Plando</Text>
+      <Group direction='horizontal' spacing='xl'>
         <Select className='plando-select' options={locsOptions} onChange={(v) => setSelectedLoc(v?.value)}/>
         <Select className='plando-select' options={itemOptions} onChange={(v) => setSelectedItem(v?.value)}/>
         <button className="btn-primary" onClick={placeItem}>Add</button>
         <button className="btn-danger" onClick={removeAll}>Remove All</button>
-      </div>
-      <ol className='plando-list'>
+      </Group>
+      <Group direction='vertical' spacing='xs'>
         {Object.entries(settings.plando.locations || {}).filter(x => x[1]).map(([loc, item]) => (
-          <li key={loc}>
+          <Group direction='horizontal' key={loc}>
             <span className="plando-remove" onClick={() => removeItem(loc)}><FontAwesomeIcon icon={solid('xmark')}/></span>
             <span className="plando-item">{loc}: {itemName(item!)}</span>
-          </li>
+          </Group>
         ))}
-      </ol>
-    </div>
+      </Group>
+    </Group>
   );
 }

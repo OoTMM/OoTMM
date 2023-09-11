@@ -3,6 +3,7 @@ import { Buffer } from 'buffer';
 import { makeSettings } from '@ootmm/core';
 
 import { useOverrideSettings, useSettings } from '../contexts/GeneratorContext';
+import Group from './Group';
 
 export const SettingsImportExport = () => {
   const [settings] = useSettings();
@@ -19,8 +20,10 @@ export const SettingsImportExport = () => {
 
   return (
     <label>
-      Import/Export Settings
-      <textarea className='settings-string' value={str} onChange={x => onChange(x.target.value)}/>
+      <Group direction='vertical' spacing='xs'>
+        Import/Export Settings
+        <textarea className='settings-string' value={str} onChange={x => onChange(x.target.value)}/>
+      </Group>
     </label>
   )
 };

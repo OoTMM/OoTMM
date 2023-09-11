@@ -1,0 +1,11 @@
+.group {
+    display: flex;
+  }
+  
+  .group.vertical {
+    flex-direction: column;
+  }
+  
+  .group-space {
+    flex-shrink: 0;
+  }
