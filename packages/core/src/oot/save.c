@@ -256,7 +256,7 @@ void comboCreateSave(void* unk, void* buffer)
     applyStartingEvents();
 
     /* Apply pre-completed dungeons */
-    for (int i = 0; i < 31; ++i)
+    for (int i = 0; i < 32; ++i)
     {
         if (gComboData.preCompleted & (1 << i))
             comboDungeonSetFlags(i, 0);
