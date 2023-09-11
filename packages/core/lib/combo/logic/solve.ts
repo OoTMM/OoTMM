@@ -724,6 +724,7 @@ export class LogicPassSolver {
       }
       let locNames = dungeons.map(x => Array.from(world.dungeons[x])).flat();
       const locs = locNames.map(x => makeLocation(x, worldId));
+      const items = locs.map(x => this.state.items.get(x)!).filter(x => x);
 
       /* Get dungeon rewards */
       const locsWithRewards = locs.filter(x => this.state.items.has(x) && ItemHelpers.isDungeonReward(this.state.items.get(x)!.item));
@@ -745,18 +746,22 @@ export class LogicPassSolver {
       }
 
       /* Handle MM Great Fairies */
-      const fairies = {
-        WF: 'MM Woodfall Great Fairy',
-        SH: 'MM Snowhead Great Fairy',
-        GB: 'MM Great Bay Great Fairy',
-        ST: 'MM Ikana Great Fairy',
-      };
-      for (const [dungeon, fairy] of Object.entries(fairies)) {
-        if (locNames.includes(dungeon)) {
-          const fairyLoc = makeLocation(fairy, worldId);
-          this.tryJunk([fairyLoc]);
+      const fairies = [
+        [Items.MM_STRAY_FAIRY_WF, 'MM Woodfall Great Fairy'],
+        [Items.MM_STRAY_FAIRY_SH ,'MM Snowhead Great Fairy'],
+        [Items.MM_STRAY_FAIRY_GB, 'MM Great Bay Great Fairy'],
+        [Items.MM_STRAY_FAIRY_ST, 'MM Ikana Great Fairy'],
+      ] as const;
+      const greatFairyLocs = new Set<Location>;
+      for (const [item, fairy] of fairies) {
+        for (const pi of items) {
+          if (pi.item === item) {
+            const loc = makeLocation(fairy, pi.player);
+            greatFairyLocs.add(loc);
+          }
         }
       }
+      this.tryJunk(greatFairyLocs);
     }
 
     /* We need to reset the pathfinder as we changed the starting items */
