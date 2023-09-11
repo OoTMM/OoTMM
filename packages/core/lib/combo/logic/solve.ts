@@ -8,6 +8,7 @@ import { Monitor } from '../monitor';
 import { Location, isLocationChestFairy, isLocationOtherFairy, isLocationRenewable, locationData, makeLocation } from './locations';
 import { Item, ItemGroups, ItemHelpers, Items, ItemsCount, PlayerItem, PlayerItems, itemByID, makePlayerItem } from '../items';
 import { exprTrue } from './expr';
+import { STONES } from '../items/groups';
 
 const VALIDATION_CRITICAL_ITEMS = [
   Items.MM_SONG_TIME,
@@ -22,6 +23,8 @@ const VALIDATION_CRITICAL_ITEMS = [
 ];
 
 export type ItemPlacement = Map<Location, PlayerItem>;
+
+const NORMAL_DUNGEONS = ['DT', 'DC', 'JJ', 'Forest', 'Fire', 'Water', 'Shadow', 'Spirit', 'WF', 'SH', 'GB', 'ST'];
 
 const DUNGEON_ITEMS = {
   DT: [
@@ -700,21 +703,65 @@ export class LogicPassSolver {
     this.fillJunk(locations);
   }
 
-  private selectPreCompletedDungeons() {
-    for (let worldId = 0; worldId < this.input.worlds.length; ++worldId) {
-      const world = this.input.worlds[worldId];
-      let dungeons = ['DT', 'DC', 'JJ', 'Forest', 'Fire', 'Water', 'Shadow', 'Spirit', 'WF', 'SH', 'GB', 'ST'];
+  private selectPreCompletedDungeonsItem(worldId: number, items: PlayerItems, count: number, group: Set<Item>) {
+    const world = this.input.worlds[worldId];
+    const dungeons = shuffle(this.input.random, [...NORMAL_DUNGEONS]);
 
-      for (let i = 0; i < this.input.settings.preCompletedDungeons; ++i) {
-        /* Select the dungeon */
-        dungeons = shuffle(this.input.random, dungeons);
-        const dungeon = dungeons.pop()!;
-        world.preCompleted.add(dungeon);
+    while (dungeons.length) {
+      const stoneCount = Array.from(items.keys()).filter(x => group.has(x.item)).length;
+      if (stoneCount >= count) {
+        break;
+      }
+      const dungeon = dungeons.pop()!;
+      if (world.preCompleted.has(dungeon)) {
+        continue;
+      }
+      const d = [dungeon];
+      if (dungeon === 'ST') {
+        d.push('IST');
+      }
+      const locNames = d.map(x => Array.from(world.dungeons[x])).flat();
+      const locItems = locNames.map(x => makeLocation(x, worldId)).map(x => this.state.items.get(x)!).filter(x => x);
+      if (!locItems.some(x => group.has(x.item))) {
+        continue;
+      }
+      world.preCompleted.add(dungeon);
+      for (const locItem of locItems) {
+        countMapAdd(items, locItem, 1);
       }
     }
   }
 
+  private selectPreCompletedDungeonsMajor(worldId: number) {
+    const world = this.input.worlds[worldId];
+    let dungeons = shuffle(this.input.random, [...NORMAL_DUNGEONS]);
+
+    while (dungeons.length) {
+      if (world.preCompleted.size >= this.input.settings.preCompletedDungeonsMajor) {
+        break;
+      }
+      const dungeon = dungeons.pop()!;
+      if (world.preCompleted.has(dungeon)) {
+        continue;
+      }
+      world.preCompleted.add(dungeon);
+    }
+  }
+
+  private selectPreCompletedDungeons() {
+    for (let worldId = 0; worldId < this.input.worlds.length; ++worldId) {
+      const items: PlayerItems = new Map;
+      this.selectPreCompletedDungeonsItem(worldId, items, this.input.settings.preCompletedDungeonsStones, ItemGroups.STONES);
+      this.selectPreCompletedDungeonsItem(worldId, items, this.input.settings.preCompletedDungeonsMedallions, ItemGroups.MEDALLIONS);
+      this.selectPreCompletedDungeonsItem(worldId, items, this.input.settings.preCompletedDungeonsRemains, ItemGroups.REMAINS);
+      this.selectPreCompletedDungeonsMajor(worldId);
+    }
+  }
+
   private preCompleteDungeons() {
+    if (!this.input.settings.preCompletedDungeons)
+      return;
+
     this.selectPreCompletedDungeons();
 
     for (let worldId = 0; worldId < this.input.worlds.length; ++worldId) {
