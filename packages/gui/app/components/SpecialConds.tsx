@@ -23,7 +23,7 @@ function SpecialCondsPanel({ cond }: SpecialCondsPanelProps) {
 
   return (
     <form onSubmit={e => e.preventDefault()}>
-      {/* <Group direction="vertical">  */}
+      <Group direction="vertical">
         <Text size='jb'>{SPECIAL_CONDS[cond].name}</Text>
         <Group direction="vertical" spacing='xs'> 
         {Object.keys(SPECIAL_CONDS_FIELDS).filter(key => { const cond = (SPECIAL_CONDS_FIELDS as any)[key].cond; return cond ? cond(settings) : true }).map(key =>
