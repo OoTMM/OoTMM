@@ -1,6 +1,5 @@
-import { PlayerItems } from '../../../dist/lib/combo/items';
 import { Confvar } from '../confvars';
-import { Items, ItemsCount, itemByID, makePlayerItem } from '../items';
+import { Items, PlayerItems, itemByID, makePlayerItem } from '../items';
 import { Monitor } from '../monitor';
 import { Random } from '../random';
 import { Settings } from '../settings';

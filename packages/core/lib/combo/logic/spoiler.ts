@@ -12,9 +12,7 @@ import { isShuffled } from './is-shuffled'
 import { ItemPlacement } from './solve';
 import { Location, locationData, makeLocation } from './locations';
 import { Region, regionData } from './regions';
-import { PlayerItem } from '../items';
-import { worldState } from '.';
-import { PlayerItems } from '../../../dist/lib/combo/items';
+import { PlayerItem, PlayerItems } from '../items';
 
 const VERSION = process.env.VERSION || 'XXX';
 
