@@ -533,8 +533,9 @@ const gameEntrances = (worldId: number, game: Game, logic: LogicResult) => {
   return padBuffer16(toU32Buffer(data));
 };
 
-const randomizerMq = (worldId: number, logic: LogicResult): Buffer => {
+const randomizerDungeonsBits = (worldId: number, logic: LogicResult): Buffer => {
   let mq = 0;
+  let preCompleted = 0;
   const dungeons = Object.keys(DUNGEONS);
   const world = logic.worlds[worldId];
   for (let i = 0; i < dungeons.length; ++i) {
@@ -542,9 +543,13 @@ const randomizerMq = (worldId: number, logic: LogicResult): Buffer => {
     if (world.mq.has(dungeon)) {
       mq |= 1 << i;
     }
+    if (world.preCompleted.has(dungeon)) {
+      preCompleted |= 1 << i;
+    }
   }
-  const buffer = Buffer.alloc(4);
-  buffer.writeUInt32BE(mq);
+  const buffer = Buffer.alloc(8);
+  buffer.writeUInt32BE(mq, 0);
+  buffer.writeUInt32BE(preCompleted, 4);
   return buffer;
 }
 
@@ -635,7 +640,7 @@ export const randomizerData = (worldId: number, logic: LogicResult): Buffer => {
   const buffers = [];
   buffers.push(logic.uuid);
   buffers.push(toU8Buffer([worldId + 1, 0, 0, 0]));
-  buffers.push(randomizerMq(worldId, logic));
+  buffers.push(randomizerDungeonsBits(worldId, logic));
   buffers.push(randomizerWarps(worldId, logic));
   buffers.push(randomizerConfig(logic.config));
   buffers.push(specialConds(logic.settings));

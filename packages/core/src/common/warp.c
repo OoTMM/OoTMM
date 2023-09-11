@@ -31,38 +31,7 @@ void comboTriggerWarp(GameState_Play* play, int bossId)
     dungeonId = (int)gComboData.boss[bossId];
     dungeonEntranceId = (int)gComboData.dungeons[dungeonId];
 
-    /* Set flags */
-    switch (dungeonId)
-    {
-    case DUNGEONID_DEKU_TREE:
-        BITMAP16_SET(gOotSave.eventsChk, EV_OOT_CHK_EMERALD_TREE_DEAD);
-        BITMAP16_SET(gOotSave.eventsChk, EV_OOT_CHK_GOHMA);
-        BITMAP16_SET(gOotSave.eventsChk, EV_OOT_CHK_TREE_DEAD);
-        BITMAP16_SET(gOotSave.eventsChk, EV_OOT_CHK_MIDO_TREE_DEAD);
-        break;
-    case DUNGEONID_TEMPLE_WATER:
-        BITMAP16_SET(gOotSave.eventsChk, EV_OOT_CHK_LAKE_HYLIA_WATER);
-        break;
-    case DUNGEONID_TEMPLE_WOODFALL:
-        gMmExtraBoss.boss |= (1 << 0);
-        MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_WF);
-        gMiscFlags.erSwampClear = 1;
-        break;
-    case DUNGEONID_TEMPLE_SNOWHEAD:
-        gMmExtraBoss.boss |= (1 << 1);
-        MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_SH);
-        gMiscFlags.erSpring = 1;
-        break;
-    case DUNGEONID_TEMPLE_GREAT_BAY:
-        gMmExtraBoss.boss |= (1 << 2);
-        MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_GB);
-        gMiscFlags.erCoastClear = 1;
-        break;
-    case DUNGEONID_TEMPLE_STONE_TOWER_INVERTED:
-        gMmExtraBoss.boss |= (1 << 3);
-        MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_ST);
-        break;
-    }
+    comboDungeonSetFlags(dungeonId, 1);
 
     /* Set entrance - need special case for warp dungeons */
     comboGetDungeonExit(&descr, dungeonEntranceId);
