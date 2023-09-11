@@ -534,6 +534,33 @@ const gameEntrances = (worldId: number, game: Game, logic: LogicResult) => {
 };
 
 const randomizerDungeonsBits = (worldId: number, logic: LogicResult): Buffer => {
+  const DUNGEONS_PRECOMPLETED = [
+    'DT',
+    'DC',
+    'JJ',
+    'Forest',
+    'Fire',
+    'Water',
+    'Shadow',
+    'Spirit',
+    'WF',
+    'SH',
+    'GB',
+    'IST',
+    'ST',
+    'SSH',
+    'OSH',
+    'BotW',
+    'IC',
+    'GTG',
+    'BtW',
+    'ACoI',
+    'SS',
+    'BtWE',
+    'PF',
+    'Ganon',
+    'Tower',
+  ]
   let mq = 0;
   let preCompleted = 0;
   const dungeons = Object.keys(DUNGEONS);
@@ -543,10 +570,15 @@ const randomizerDungeonsBits = (worldId: number, logic: LogicResult): Buffer => 
     if (world.mq.has(dungeon)) {
       mq |= 1 << i;
     }
+  }
+
+  for (let i = 0; i < DUNGEONS_PRECOMPLETED.length; ++i) {
+    const dungeon = DUNGEONS_PRECOMPLETED[i];
     if (world.preCompleted.has(dungeon)) {
       preCompleted |= 1 << i;
     }
   }
+
   const buffer = Buffer.alloc(8);
   buffer.writeUInt32BE(mq, 0);
   buffer.writeUInt32BE(preCompleted, 4);

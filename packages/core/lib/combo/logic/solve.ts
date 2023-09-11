@@ -718,12 +718,12 @@ export class LogicPassSolver {
     this.selectPreCompletedDungeons();
 
     for (let worldId = 0; worldId < this.input.worlds.length; ++worldId) {
-      const BOSS_EVENTS = new Set([
-        'OOT_WATER_TEMPLE_CLEARED',
-        'MM_CLEAN_SWAMP',
-        'MM_BOSS_SNOWHEAD',
-        'MM_BOSS_GREAT_BAY',
-      ]);
+      const WISPS = {
+        'OOT_WATER_TEMPLE_CLEARED': 'OOT SPAWN',
+        'MM_CLEAN_SWAMP': 'MM Woodfall Shrine',
+        'MM_BOSS_SNOWHEAD': 'MM Mountain Village',
+        'MM_BOSS_GREAT_BAY': 'MM Zora Cape Peninsula',
+      };
 
       const world = this.input.worlds[worldId];
       const dungeons = [...world.preCompleted];
@@ -735,7 +735,7 @@ export class LogicPassSolver {
       const items = locs.map(x => this.state.items.get(x)!).filter(x => x);
       const areas = Object.keys(world.areas).filter(x => dungeons.includes(world.areas[x].dungeon || ''));
       const areasBoss = areas.filter(x => world.areas[x].boss);
-      const bossEvents = areasBoss.map(x => Object.keys(world.areas[x].events)).flat().filter(x => BOSS_EVENTS.has(x));
+      const bossEvents = areasBoss.map(x => Object.keys(world.areas[x].events)).flat().filter(x => Object.keys(WISPS).includes(x));
 
       /* Get dungeon rewards */
       const locsWithRewards = locs.filter(x => this.state.items.has(x) && ItemHelpers.isDungeonReward(this.state.items.get(x)!.item));
@@ -782,7 +782,7 @@ export class LogicPassSolver {
         }
       }
       for (const be of bossEvents) {
-        world.areas['OOT SPAWN'].events[be] = exprTrue();
+        world.areas[(WISPS as any)[be]].events[be] = exprTrue();
       }
     }
 
