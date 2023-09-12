@@ -446,6 +446,10 @@ export class LogicPassHints {
       return false;
     }
     const items = locations.map(l => this.state.items.get(l)!);
+    const regions = locations.map(l => this.toRegion(worldId, l));
+    if (regions.some(r => this.ignoredRegions.has(r))) {
+      return false;
+    }
     let gossip;
     if (isMoon) {
       const candidates = Object.keys(world.gossip)
