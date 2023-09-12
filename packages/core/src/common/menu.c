@@ -19,6 +19,7 @@ typedef struct
 {
     const char* name;
     int id;
+    int dungeonId;
     int flags;
 }
 DungeonDef;
@@ -43,25 +44,25 @@ static u32 kFairyColors[] = {
 };
 
 static DungeonDef gDungeonDefs[] = {
-    { "Deku",           SCE_OOT_INSIDE_DEKU_TREE,       DD_OOT | DD_MAP_COMPASS },
-    { "Dodongo",        SCE_OOT_DODONGO_CAVERN,         DD_OOT | DD_MAP_COMPASS },
-    { "Jabu",           SCE_OOT_INSIDE_JABU_JABU,       DD_OOT | DD_MAP_COMPASS },
-    { "Forest",         SCE_OOT_TEMPLE_FOREST,          DD_OOT | DD_MAP_COMPASS | DD_BOSS_KEY },
-    { "Fire",           SCE_OOT_TEMPLE_FIRE,            DD_OOT | DD_MAP_COMPASS | DD_BOSS_KEY },
-    { "Water",          SCE_OOT_TEMPLE_WATER,           DD_OOT | DD_MAP_COMPASS | DD_BOSS_KEY },
-    { "Shadow",         SCE_OOT_TEMPLE_SHADOW,          DD_OOT | DD_MAP_COMPASS | DD_BOSS_KEY },
-    { "Spirit",         SCE_OOT_TEMPLE_SPIRIT,          DD_OOT | DD_MAP_COMPASS | DD_BOSS_KEY },
-    { "Well",           SCE_OOT_BOTTOM_OF_THE_WELL,     DD_OOT | DD_MAP_COMPASS },
-    { "Ice",            SCE_OOT_ICE_CAVERN,             DD_OOT | DD_MAP_COMPASS },
-    { "Hideout",        SCE_OOT_THIEVES_HIDEOUT,        DD_OOT },
-    { "GTG",            SCE_OOT_GERUDO_TRAINING_GROUND, DD_OOT },
-    { "Ganon",          SCE_OOT_INSIDE_GANON_CASTLE,    DD_OOT | DD_BOSS_KEY },
-    { "Woodfall",       0,                              DD_MM  | DD_MAP_COMPASS | DD_BOSS_KEY | DD_FAIRIES },
-    { "Snowhead",       1,                              DD_MM  | DD_MAP_COMPASS | DD_BOSS_KEY | DD_FAIRIES },
-    { "Great Bay",      2,                              DD_MM  | DD_MAP_COMPASS | DD_BOSS_KEY | DD_FAIRIES },
-    { "Stone Tower",    3,                              DD_MM  | DD_MAP_COMPASS | DD_BOSS_KEY | DD_FAIRIES },
-    { "Clock Town",     0,                              DD_MISC },
-    { "Tokens",         1,                              DD_MISC },
+    { "Deku",           SCE_OOT_INSIDE_DEKU_TREE,       DUNGEONID_DEKU_TREE, DD_OOT | DD_MAP_COMPASS },
+    { "Dodongo",        SCE_OOT_DODONGO_CAVERN,         DUNGEONID_DODONGOS_CAVERN, DD_OOT | DD_MAP_COMPASS },
+    { "Jabu",           SCE_OOT_INSIDE_JABU_JABU,       DUNGEONID_JABU_JABU, DD_OOT | DD_MAP_COMPASS },
+    { "Forest",         SCE_OOT_TEMPLE_FOREST,          DUNGEONID_TEMPLE_FOREST, DD_OOT | DD_MAP_COMPASS | DD_BOSS_KEY },
+    { "Fire",           SCE_OOT_TEMPLE_FIRE,            DUNGEONID_TEMPLE_FIRE, DD_OOT | DD_MAP_COMPASS | DD_BOSS_KEY },
+    { "Water",          SCE_OOT_TEMPLE_WATER,           DUNGEONID_TEMPLE_WATER, DD_OOT | DD_MAP_COMPASS | DD_BOSS_KEY },
+    { "Shadow",         SCE_OOT_TEMPLE_SHADOW,          DUNGEONID_TEMPLE_SHADOW, DD_OOT | DD_MAP_COMPASS | DD_BOSS_KEY },
+    { "Spirit",         SCE_OOT_TEMPLE_SPIRIT,          DUNGEONID_TEMPLE_SPIRIT, DD_OOT | DD_MAP_COMPASS | DD_BOSS_KEY },
+    { "Well",           SCE_OOT_BOTTOM_OF_THE_WELL,     DUNGEONID_BOTTOM_OF_THE_WELL, DD_OOT | DD_MAP_COMPASS },
+    { "Ice",            SCE_OOT_ICE_CAVERN,             DUNGEONID_ICE_CAVERN, DD_OOT | DD_MAP_COMPASS },
+    { "Hideout",        SCE_OOT_THIEVES_HIDEOUT,        -1, DD_OOT },
+    { "GTG",            SCE_OOT_GERUDO_TRAINING_GROUND, DUNGEONID_GERUDO_TRAINING_GROUNDS, DD_OOT },
+    { "Ganon",          SCE_OOT_INSIDE_GANON_CASTLE,    DUNGEONID_GANON_CASTLE, DD_OOT | DD_BOSS_KEY },
+    { "Woodfall",       0,                              DUNGEONID_TEMPLE_WOODFALL, DD_MM  | DD_MAP_COMPASS | DD_BOSS_KEY | DD_FAIRIES },
+    { "Snowhead",       1,                              DUNGEONID_TEMPLE_SNOWHEAD, DD_MM  | DD_MAP_COMPASS | DD_BOSS_KEY | DD_FAIRIES },
+    { "Great Bay",      2,                              DUNGEONID_TEMPLE_GREAT_BAY, DD_MM  | DD_MAP_COMPASS | DD_BOSS_KEY | DD_FAIRIES },
+    { "Stone Tower",    3,                              DUNGEONID_TEMPLE_STONE_TOWER, DD_MM  | DD_MAP_COMPASS | DD_BOSS_KEY | DD_FAIRIES },
+    { "Clock Town",     0,                              -1, DD_MISC },
+    { "Tokens",         1,                              -1, DD_MISC },
     {},
     {},
     {},
@@ -80,6 +81,7 @@ void menuInit()
     {
         d->name = "Triforce";
         d->id = 2;
+        d->dungeonId = -1;
         d->flags = DD_MISC;
         gDungeonDefCount++;
         d++;
@@ -89,6 +91,7 @@ void menuInit()
     {
         d->name = "Red Coins";
         d->id = 3;
+        d->dungeonId = -1;
         d->flags = DD_MISC;
         gDungeonDefCount++;
         d++;
@@ -98,6 +101,7 @@ void menuInit()
     {
         d->name = "Green Coins";
         d->id = 4;
+        d->dungeonId = -1;
         d->flags = DD_MISC;
         gDungeonDefCount++;
         d++;
@@ -107,6 +111,7 @@ void menuInit()
     {
         d->name = "Blue Coins";
         d->id = 5;
+        d->dungeonId = -1;
         d->flags = DD_MISC;
         gDungeonDefCount++;
         d++;
@@ -116,6 +121,7 @@ void menuInit()
     {
         d->name = "Yellow Coins";
         d->id = 6;
+        d->dungeonId = -1;
         d->flags = DD_MISC;
         gDungeonDefCount++;
         d++;
@@ -703,8 +709,20 @@ static void printDungeonData(GameState_Play* play, int base, int index)
 
     x = -110.f;
     y = 42.f - 12 * index;
-    gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 255, 255, 255, 255);
-    printStr(play, def->name, x, y);
+    if (def->dungeonId != -1 && gComboData.preCompleted & (1 << def->dungeonId))
+    {
+        r = 0x3f;
+        gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, r, r, r, 255);
+        printStr(play, def->name, x, y);
+        r = 0xff;
+        gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, r, r, r, 255);
+    }
+    else
+    {
+        r = 0xff;
+        gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, r, r, r, 255);
+        printStr(play, def->name, x, y);
+    }
     x += offX;
     if (def->flags & DD_MISC)
     {
