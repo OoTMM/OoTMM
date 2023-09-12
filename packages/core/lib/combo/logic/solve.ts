@@ -690,7 +690,19 @@ export class LogicPassSolver {
       const item = this.state.items.get(l);
       if (item) {
         if (ItemHelpers.isJunk(item.item)) {
-          return true;
+          continue;
+        }
+        if (this.input.fixedLocations.has(l)) {
+          continue;
+        }
+        if (ItemHelpers.isGoldToken(item.item) && this.input.settings.goldSkulltulaTokens !== 'all' && this.input.settings.goldSkulltulaTokens !== 'dungeons') {
+          continue;
+        }
+        if (ItemHelpers.isHouseToken(item.item) && this.input.settings.housesSkulltulaTokens !== 'all') {
+          continue;
+        }
+        if (ItemHelpers.isDungeonStrayFairy(item.item) && this.input.settings.strayFairyChestShuffle !== 'anywhere' && this.input.settings.strayFairyOtherShuffle !== 'anywhere') {
+          continue;
         }
 
         /* Add to starting items */
@@ -779,17 +791,15 @@ export class LogicPassSolver {
       }
       let locNames = dungeons.map(x => Array.from(world.dungeons[x])).flat();
       const locs = locNames.map(x => makeLocation(x, worldId));
-      const items = locs.map(x => this.state.items.get(x)!).filter(x => x);
       const areas = Object.keys(world.areas).filter(x => dungeons.includes(world.areas[x].dungeon || ''));
       const areasBoss = areas.filter(x => world.areas[x].boss);
       const bossEvents = areasBoss.map(x => Object.keys(world.areas[x].events)).flat().filter(x => Object.keys(WISPS).includes(x));
 
-      /* Get dungeon rewards */
-      const locsWithRewards = locs.filter(x => this.state.items.has(x) && ItemHelpers.isDungeonReward(this.state.items.get(x)!.item));
-      this.tryJunk(locsWithRewards);
+      /* Get every item and fill with junk */
+      this.tryJunk(locs);
 
-      /* Fill dungeons with junk */
-      this.fillJunk(locs);
+      /* Fetch remaining items */
+      const items = locs.map(x => this.state.items.get(x)!).filter(x => x);
 
       /* Handle Oath to Order */
       const LOCS_OATH = [
