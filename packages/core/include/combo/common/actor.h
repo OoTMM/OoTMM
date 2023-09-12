@@ -120,6 +120,7 @@
 # define AC_EN_COW          0x0f3
 # define AC_DM_HINA         0x140
 # define AC_EN_TAB          0x263
+# define AC_EN_TEST7        0x1ce
 
 # define AC_EN_BIGOKUTA     0x1a8
 # define AC_EN_WALLMAS      0x00a
