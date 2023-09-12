@@ -32,7 +32,7 @@ static void CustomWarp_OnTrigger(Actor_CustomWarp* this, GameState_Play* play)
         break;
     case SWITCH_SWAMP_CLEAR:
         MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_WF);
-        play->nextEntrance = 0x8600;
+        play->nextEntrance = 0x0ca0;
         break;
     case SWITCH_COAST_CLEAR:
         MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_GB);
@@ -129,12 +129,12 @@ void comboSpawnCustomWarps(GameState_Play* play)
         z = 600.f;
     }
 
-    if ((comboConfig(CFG_ER_DUNGEONS) || gComboData.preCompleted & (1 << DUNGEONID_TEMPLE_WOODFALL)) && play->sceneId == SCE_MM_WOODFALL && !MM_GET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_WF) && gMiscFlags.erSwampClear)
+    if ((comboConfig(CFG_ER_DUNGEONS) || gComboData.preCompleted & (1 << DUNGEONID_TEMPLE_WOODFALL)) && play->sceneId == SCE_MM_SOUTHERN_SWAMP && !MM_GET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_WF) && gMiscFlags.erSwampClear)
     {
         variable = SWITCH_SWAMP_CLEAR;
-        x = 70.f;
-        y = 35.f;
-        z = -1320.f;
+        x = -910.f;
+        y = 50.f;
+        z = -550.f;
     }
 
     if ((comboConfig(CFG_ER_DUNGEONS) || gComboData.preCompleted & (1 << DUNGEONID_TEMPLE_GREAT_BAY)) && play->sceneId == SCE_MM_ZORA_CAPE && !MM_GET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_GB) && gMiscFlags.erCoastClear)

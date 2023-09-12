@@ -767,7 +767,7 @@ export class LogicPassSolver {
     for (let worldId = 0; worldId < this.input.worlds.length; ++worldId) {
       const WISPS = {
         'OOT_WATER_TEMPLE_CLEARED': 'OOT SPAWN',
-        'MM_CLEAN_SWAMP': 'MM Woodfall Shrine',
+        'MM_CLEAN_SWAMP': 'MM Swamp Front',
         'MM_BOSS_SNOWHEAD': 'MM Mountain Village',
         'MM_BOSS_GREAT_BAY': 'MM Zora Cape Peninsula',
       };
