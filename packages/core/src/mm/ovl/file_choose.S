@@ -2,7 +2,7 @@
 
 .global hookDeep_FileChoose_Update
 hookDeep_FileChoose_Update:
-  HOOK_CALL(hook_FileChoose_Update)
+  HOOK_CALL hook_FileChoose_Update
 
   /* Original code */
   lh  t8,0x4484(a3)
@@ -12,12 +12,12 @@ hookDeep_FileChoose_Update:
   jr      ra
    nop
 
-PATCH_START(0x80813594)
+PATCH_START 0x80813594
   jal hookDeep_FileChoose_Update
    nop
 PATCH_END
 
 /* Mute menu BGM */
-PATCH_START(0x80813dd0)
+PATCH_START 0x80813dd0
   nop
 PATCH_END
