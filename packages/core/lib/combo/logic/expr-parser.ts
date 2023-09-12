@@ -289,13 +289,17 @@ export class ExprParser {
     if (this.peek('identifier') !== 'mm_time') {
       return undefined;
     }
+    const slices: string[] = [];
     this.accept('identifier');
     this.expect('(');
     const operator = this.expect('identifier');
     this.expect(',');
-    const slice = this.expect('identifier');
+    slices.push(this.expect('identifier'));
+    while (this.accept(',')) {
+      slices.push(this.expect('identifier'));
+    }
     this.expect(')');
-    return exprMmTime(operator, slice);
+    return exprMmTime(operator, slices);
   }
 
   private parseExprPrice(): Expr | undefined {

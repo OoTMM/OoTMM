@@ -391,19 +391,26 @@ export const exprOotTime = (time: string): Expr => {
   };
 }
 
-export const exprMmTime = (operator: string, sliceName: string): Expr => {
-  const slice = MM_TIME_SLICES.indexOf(sliceName);
+export const exprMmTime = (operator: string, sliceNames: string[]): Expr => {
+  const slices: number[] = [];
   let value = 0;
   let value2 = 0;
 
-  if (slice === -1) {
-    throw new Error(`Invalid MM time slice: ${sliceName}`);
+  for (const s of sliceNames) {
+    const sliceIndex = MM_TIME_SLICES.indexOf(s);
+    if (sliceIndex === -1) {
+      throw new Error(`Invalid MM time slice: ${s}`);
+    }
+    slices.push(sliceIndex);
   }
 
   switch (operator) {
   case 'before':
     /* Time < slice */
-    for (let i = 0; i < slice; ++i)
+    if (slices.length !== 1) {
+      throw new Error(`Wrong number of MM time slices for operator ${operator}`);
+    }
+    for (let i = 0; i < slices[0]; ++i)
       if (i < 32) {
         value = (value | (1 << i)) >>> 0;
       } else {
@@ -412,7 +419,10 @@ export const exprMmTime = (operator: string, sliceName: string): Expr => {
     break;
   case 'after':
     /* Time >= slice */
-    for (let i = slice; i < MM_TIME_SLICES.length; ++i)
+    if (slices.length !== 1) {
+      throw new Error(`Wrong number of MM time slices for operator ${operator}`);
+    }
+    for (let i = slices[0]; i < MM_TIME_SLICES.length; ++i)
       if (i < 32) {
         value = (value | (1 << i)) >>> 0;
       } else {
@@ -421,10 +431,26 @@ export const exprMmTime = (operator: string, sliceName: string): Expr => {
     break;
   case 'at':
     /* Time == slice */
-    if (slice < 32) {
-      value = (1 << slice) >>> 0;
+    if (slices.length !== 1) {
+      throw new Error(`Wrong number of MM time slices for operator ${operator}`);
+    }
+    if (slices[0] < 32) {
+      value = (1 << slices[0]) >>> 0;
     } else {
-      value2 = (1 << (slice - 32)) >>> 0;
+      value2 = (1 << (slices[0] - 32)) >>> 0;
+    }
+    break;
+  case 'between':
+    /* Time >= slice1 && Time < slice2 */
+    if (slices.length !== 2) {
+      throw new Error(`Wrong number of MM time slices for operator ${operator}`);
+    }
+    for (let i = slices[0]; i < slices[1]; ++i) {
+      if (i < 32) {
+        value = (value | (1 << i)) >>> 0;
+      } else {
+        value2 = (value2 | (1 << (i - 32))) >>> 0;
+      }
     }
     break;
   default:
