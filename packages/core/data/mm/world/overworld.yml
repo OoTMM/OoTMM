@@ -256,10 +256,10 @@
     "Clock Town South Lower West": "true"
     "Bomb Shop": "true"
     "Trading Post": "true"
-    "Curiosity Shop": "(after(NIGHT1_PM_10_00) && before(DAY2_AM_06_00)) || (after(NIGHT2_PM_10_00) && before(DAY3_AM_06_00)) || after(NIGHT3_PM_10_00)"
-    "Post Office": "(after(DAY1_PM_03_00) && before(NIGHT1_AM_12_00)) || (event(MAIL_LETTER) && after(NIGHT2_PM_06_00) && before(NIGHT2_AM_12_00)) || is_night3"
-    "Swordsman School": "first_day || second_day || (after(DAY3_AM_06_00) && before(NIGHT3_PM_11_00)) || after(NIGHT3_AM_12_00)"
-    "Lottery": "is_day || (event(PLAY_LOTTERY) && (before(NIGHT1_PM_11_00) || (after(NIGHT2_PM_06_00) && before(NIGHT2_PM_11_00)) || (after(NIGHT3_PM_06_00) && before(NIGHT3_PM_11_00))))"
+    "Curiosity Shop": "between(NIGHT1_PM_10_00, DAY2_AM_06_00) || between(NIGHT2_PM_10_00, DAY3_AM_06_00) || after(NIGHT3_PM_10_00)"
+    "Post Office": "between(DAY1_PM_03_00, NIGHT1_AM_12_00) || (event(MAIL_LETTER) && between(NIGHT2_PM_06_00, NIGHT2_AM_12_00)) || is_night3"
+    "Swordsman School": "first_day || second_day || between(DAY3_AM_06_00, NIGHT3_PM_11_00) || after(NIGHT3_AM_12_00)"
+    "Lottery": "is_day || (event(PLAY_LOTTERY) && (before(NIGHT1_PM_11_00) || between(NIGHT2_PM_06_00, NIGHT2_PM_11_00) || between(NIGHT3_PM_06_00, NIGHT3_PM_11_00)))"
   locations:
     "Clock Town Bank Reward 1": "can_use_wallet(1)"
     "Clock Town Bank Reward 2": "can_use_wallet(2)"
@@ -271,10 +271,10 @@
     "Termina Field": "true"
     "Clock Town South Upper East": "true"
     "Clock Town South Lower East": "true"
-    "Mayor's Office": "(after(DAY1_AM_10_00) && before(NIGHT1_PM_08_00)) || (after(DAY2_AM_10_00) && before(NIGHT2_PM_08_00)) || after(DAY3_AM_10_00)"
-    "Town Archery": "before(NIGHT1_PM_10_00) || (after(DAY2_AM_06_00) && before(NIGHT2_PM_10_00)) || (after(DAY3_AM_06_00) && before(NIGHT3_PM_10_00))"
-    "Chest Game": "before(NIGHT1_PM_10_00) || (after(DAY2_AM_06_00) && before(NIGHT2_PM_10_00)) || (after(DAY3_AM_06_00) && before(NIGHT3_PM_10_00))"
-    "Honey & Darling Game": "before(NIGHT1_PM_10_00) || (after(DAY2_AM_06_00) && before(NIGHT2_PM_10_00)) || (after(DAY3_AM_06_00) && before(NIGHT3_PM_10_00))"
+    "Mayor's Office": "between(DAY1_AM_10_00, NIGHT1_PM_08_00) || between(DAY2_AM_10_00, NIGHT2_PM_08_00) || after(DAY3_AM_10_00)"
+    "Town Archery": "before(NIGHT1_PM_10_00) || between(DAY2_AM_06_00, NIGHT2_PM_10_00) || between(DAY3_AM_06_00, NIGHT3_PM_10_00)"
+    "Chest Game": "before(NIGHT1_PM_10_00) || between(DAY2_AM_06_00, NIGHT2_PM_10_00) || between(DAY3_AM_06_00, NIGHT3_PM_10_00)"
+    "Honey & Darling Game": "before(NIGHT1_PM_10_00) || between(DAY2_AM_06_00, NIGHT2_PM_10_00) || between(DAY3_AM_06_00, NIGHT3_PM_10_00)"
     "Stock Pot Inn": "has(ROOM_KEY) || between(DAY1_AM_08_00, NIGHT1_PM_08_00) || between(DAY2_AM_08_00, NIGHT2_PM_08_00) || after(DAY3_AM_08_00)"
     "Stock Pot Inn Roof": "has(MASK_DEKU) || short_hook_anywhere"
     "Milk Bar": "between(DAY1_AM_10_00, NIGHT1_PM_09_00) || between(DAY2_AM_10_00, NIGHT2_PM_09_00) || between(DAY3_AM_10_00, NIGHT3_PM_09_00) || (has(MASK_ROMANI) && (between(NIGHT1_PM_10_00, NIGHT1_AM_05_00) || between(NIGHT2_PM_10_00, NIGHT2_AM_05_00) || after(NIGHT3_PM_10_00)))"
@@ -314,7 +314,7 @@
   region: LAUNDRY_POOL
   exits:
     "Clock Town South": "true"
-    "Kafei Hideout": "(event(MAIL_LETTER) && (after(DAY2_PM_02_00) && before(NIGHT2_PM_10_00))) || (event(MEET_KAFEI) && (after(DAY3_PM_01_00) && before(NIGHT3_PM_10_00)))"
+    "Kafei Hideout": "(event(MAIL_LETTER) && between(DAY2_PM_02_00, NIGHT2_PM_10_00)) || (event(MEET_KAFEI) && between(DAY3_PM_01_00, NIGHT3_PM_10_00))"
   events:
     FROG_1: "has(MASK_DON_GERO)"
     MAGIC: "true"
@@ -397,7 +397,7 @@
   events:
     POSTMAN_FREEDOM: "has(LETTER_TO_MAMA) && is_night3"
   locations:
-    "Post Office HP": "(has_mask_bunny || trick(MM_POST_OFFICE_GAME)) && ((after(DAY1_PM_03_00) && before(NIGHT1_AM_12_00)) || (event(MAIL_LETTER) && after(NIGHT2_PM_06_00) && before(NIGHT2_AM_12_00)))"
+    "Post Office HP": "(has_mask_bunny || trick(MM_POST_OFFICE_GAME)) && (between(DAY1_PM_03_00, NIGHT1_AM_12_00) || (event(MAIL_LETTER) && between(NIGHT2_PM_06_00, NIGHT2_AM_12_00)))"
 "Swordsman School":
   region: ENTRANCE
   exits:
@@ -416,14 +416,14 @@
   exits:
     "Clock Town West": "true"
 #  locations:
-#    "Lottery Prize": "event(PLAY_LOTTERY) && (before(NIGHT1_PM_11_00) || (after(NIGHT2_PM_06_00) && before(NIGHT2_PM_11_00)) || (after(NIGHT3_PM_06_00) && before(NIGHT3_PM_11_00)))"
+#    "Lottery Prize": "event(PLAY_LOTTERY) && (before(NIGHT1_PM_11_00) || between(NIGHT2_PM_06_00, NIGHT2_PM_11_00) || between(NIGHT3_PM_06_00, NIGHT3_PM_11_00))"
 "Mayor's Office":
   region: ENTRANCE
   exits:
     "Clock Town East": "true"
   locations:
-    "Mayor's Office Kafei's Mask": "(after(DAY1_AM_10_00) && before(NIGHT1_PM_08_00)) || (after(DAY2_AM_10_00) && before(NIGHT2_PM_08_00))"
-    "Mayor's Office HP": "has(MASK_COUPLE) && ((after(DAY1_AM_10_00) && before(NIGHT1_PM_08_00)) || (after(DAY2_AM_10_00) && before(NIGHT2_PM_08_00)) || (after(DAY3_AM_10_00) && before(NIGHT3_PM_06_00)))"
+    "Mayor's Office Kafei's Mask": "between(DAY1_AM_10_00, NIGHT1_PM_08_00) || between(DAY2_AM_10_00, NIGHT2_PM_08_00)"
+    "Mayor's Office HP": "has(MASK_COUPLE) && (between(DAY1_AM_10_00, NIGHT1_PM_08_00) || between(DAY2_AM_10_00, NIGHT2_PM_08_00) || between(DAY3_AM_10_00, NIGHT3_PM_06_00))"
 "Milk Bar":
   region: ENTRANCE
   exits:
@@ -437,30 +437,30 @@
     NIGHT3_AM_05_00: "false"
   locations:
     "Milk Bar Troupe Leader Mask": "has_ocarina && has(MASK_DEKU) && has_mask_zora && has_mask_goron && (between(NIGHT1_PM_10_00, NIGHT1_AM_05_00) || between(NIGHT2_PM_10_00, NIGHT2_AM_05_00))"
-    "Milk Bar Madame Aroma Bottle": "has(MASK_KAFEI) && has(LETTER_TO_MAMA) && ((after(NIGHT3_PM_06_00) && before(NIGHT3_PM_09_00)) || after(NIGHT3_PM_10_00))"
-    "Milk Bar Purchase Milk": "has(MASK_ROMANI) && can_use_wallet(1) && ((after(NIGHT1_PM_10_00) && before(DAY2_AM_06_00)) || (after(NIGHT2_PM_10_00) && before(DAY3_AM_06_00)) || (after(NIGHT3_PM_06_00) && before(NIGHT3_PM_09_00)) || after(NIGHT3_PM_10_00))"
-    "Milk Bar Purchase Chateau": "has(MASK_ROMANI) && can_use_wallet(2) && ((after(NIGHT1_PM_10_00) && before(DAY2_AM_06_00)) || (after(NIGHT2_PM_10_00) && before(DAY3_AM_06_00)) || (after(NIGHT3_PM_06_00) && before(NIGHT3_PM_09_00)) || after(NIGHT3_PM_10_00))"
+    "Milk Bar Madame Aroma Bottle": "has(MASK_KAFEI) && has(LETTER_TO_MAMA) && (between(NIGHT3_PM_06_00, NIGHT3_PM_09_00) || after(NIGHT3_PM_10_00))"
+    "Milk Bar Purchase Milk": "has(MASK_ROMANI) && can_use_wallet(1) && (between(NIGHT1_PM_10_00, DAY2_AM_06_00) || between(NIGHT2_PM_10_00, DAY3_AM_06_00) || between(NIGHT3_PM_06_00, NIGHT3_PM_09_00) || after(NIGHT3_PM_10_00))"
+    "Milk Bar Purchase Chateau": "has(MASK_ROMANI) && can_use_wallet(2) && (between(NIGHT1_PM_10_00, DAY2_AM_06_00) || between(NIGHT2_PM_10_00, DAY3_AM_06_00) || between(NIGHT3_PM_06_00, NIGHT3_PM_09_00) || after(NIGHT3_PM_10_00))"
 "Town Archery":
   region: ENTRANCE
   exits:
     "Clock Town East": "true"
   locations:
-    "Town Archery Reward 1": "has_bow && can_use_wallet(1) && (before(NIGHT1_PM_10_00) || (after(DAY2_AM_06_00) && before(NIGHT2_PM_10_00)) || (after(DAY3_AM_06_00) && before(NIGHT3_PM_10_00)))"
-    "Town Archery Reward 2": "has_bow && can_use_wallet(1) && (before(NIGHT1_PM_10_00) || (after(DAY2_AM_06_00) && before(NIGHT2_PM_10_00)) || (after(DAY3_AM_06_00) && before(NIGHT3_PM_10_00)))"
+    "Town Archery Reward 1": "has_bow && can_use_wallet(1) && (before(NIGHT1_PM_10_00) || between(DAY2_AM_06_00, NIGHT2_PM_10_00) || between(DAY3_AM_06_00, NIGHT3_PM_10_00))"
+    "Town Archery Reward 2": "has_bow && can_use_wallet(1) && (before(NIGHT1_PM_10_00) || between(DAY2_AM_06_00, NIGHT2_PM_10_00) || between(DAY3_AM_06_00, NIGHT3_PM_10_00))"
 "Chest Game":
   region: ENTRANCE
   exits:
     "Clock Town East": "true"
   locations:
-    "Chest Game HP": "has_mask_goron && can_use_wallet(1) && (before(NIGHT1_PM_10_00) || (after(DAY2_AM_06_00) && before(NIGHT2_PM_10_00)) || is_day3)"
-    #Chest Game Reward Human": "can_use_wallet(1) && (before(NIGHT1_PM_10_00) || (after(DAY2_AM_06_00) && before(NIGHT2_PM_10_00)) || is_day3)"
-    #Chest Game Reward Zora": "can_use_wallet(1) && has_mask_zora && (before(NIGHT1_PM_10_00) || (after(DAY2_AM_06_00) && before(NIGHT2_PM_10_00)) || is_day3)"
-    #Chest Game Reward Deku": "can_use_wallet(1) && has(MASK_DEKU) && (before(NIGHT1_PM_10_00) || (after(DAY2_AM_06_00) && before(NIGHT2_PM_10_00)) || is_day3)"
+    "Chest Game HP": "has_mask_goron && can_use_wallet(1) && (before(NIGHT1_PM_10_00) || between(DAY2_AM_06_00, NIGHT2_PM_10_00) || is_day3)"
+    #Chest Game Reward Human": "can_use_wallet(1) && (before(NIGHT1_PM_10_00) || between(DAY2_AM_06_00, NIGHT2_PM_10_00) || is_day3)"
+    #Chest Game Reward Zora": "can_use_wallet(1) && has_mask_zora && (before(NIGHT1_PM_10_00) || between(DAY2_AM_06_00, NIGHT2_PM_10_00) || is_day3)"
+    #Chest Game Reward Deku": "can_use_wallet(1) && has(MASK_DEKU) && (before(NIGHT1_PM_10_00) || between(DAY2_AM_06_00, NIGHT2_PM_10_00) || is_day3)"
 "Honey & Darling Game":
   region: ENTRANCE
   events:
     HD_REWARD_1: "has_bomb_bag && before(NIGHT1_PM_10_00)"
-    HD_REWARD_2: "has_bomb_bag && after(DAY2_AM_06_00) && before(NIGHT2_PM_10_00)"
+    HD_REWARD_2: "has_bomb_bag && between(DAY2_AM_06_00, NIGHT2_PM_10_00)"
     HD_REWARD_3: "(has_bow || can_use_deku_bubble) && is_day3"
   exits:
     "Clock Town East": "true"
@@ -478,16 +478,16 @@
     NIGHT2_PM_08_00: "has(ROOM_KEY)"
     DAY3_AM_06_00: "has(ROOM_KEY)"
   events:
-    SETUP_MEET: "has(MASK_KAFEI) && after(DAY1_PM_01_45) && before(NIGHT1_PM_09_00)"
-    MEET_ANJU: "event(SETUP_MEET) && after(NIGHT1_AM_12_00) && before(DAY2_AM_06_00)"
-    DELIVER_PENDANT: "has(PENDANT_OF_MEMORIES) && ((after(DAY2_AM_06_00) && before(NIGHT2_PM_09_00)) || (after(DAY3_AM_06_00) && before(DAY3_AM_11_30)))"
+    SETUP_MEET: "has(MASK_KAFEI) && between(DAY1_PM_01_45, NIGHT1_PM_09_00)"
+    MEET_ANJU: "event(SETUP_MEET) && between(NIGHT1_AM_12_00, DAY2_AM_06_00)"
+    DELIVER_PENDANT: "has(PENDANT_OF_MEMORIES) && (between(DAY2_AM_06_00, NIGHT2_PM_09_00) || between(DAY3_AM_06_00, DAY3_AM_11_30))"
     BUGS: "true"
     FISH: "true"
     MUSHROOM: "has(MASK_SCENTS)"
   locations:
     "Stock Pot Inn Guest Room Chest": "has(ROOM_KEY)"
     "Stock Pot Inn Staff Room Chest": "is_night3"
-    "Stock Pot Inn Room Key": "after(DAY1_PM_01_45) && before(DAY1_PM_04_00)"
+    "Stock Pot Inn Room Key": "between(DAY1_PM_01_45, DAY1_PM_04_00)"
     "Stock Pot Inn Letter to Kafei": "cond(setting(erIndoors, none), event(MEET_ANJU) && (has(ROOM_KEY) || has(MASK_DEKU)), event(MEET_ANJU))"
     "Stock Pot Inn Couple's Mask": "event(SUN_MASK) && event(DELIVER_PENDANT) && event(MEET_ANJU) && after(NIGHT3_AM_04_00)"
     "Stock Pot Inn Grandma HP 1": "has(MASK_ALL_NIGHT) && (is_day1 || is_day2)"
@@ -501,9 +501,9 @@
 "Deku Playground":
   region: ENTRANCE
   events:
-    DEKU_REWARD_1: "after(DAY1_AM_06_00) && before(NIGHT1_AM_12_00)"
-    DEKU_REWARD_2: "after(DAY2_AM_06_00) && before(NIGHT2_AM_12_00)"
-    DEKU_REWARD_3: "after(DAY3_AM_06_00) && before(NIGHT3_AM_12_00)"
+    DEKU_REWARD_1: "between(DAY1_AM_06_00, NIGHT1_AM_12_00)"
+    DEKU_REWARD_2: "between(DAY2_AM_06_00, NIGHT2_AM_12_00)"
+    DEKU_REWARD_3: "between(DAY3_AM_06_00, NIGHT3_AM_12_00)"
   exits:
     "Clock Town North": "true"
   locations:
@@ -739,7 +739,7 @@
   exits:
     "Swamp Front": "true"
     "Termina Field": "true"
-    "Swamp Archery": "before(NIGHT1_PM_10_00) || (after(DAY2_AM_06_00) && before(NIGHT2_PM_10_00)) || (after(DAY3_AM_06_00) && before(NIGHT3_PM_10_00))"
+    "Swamp Archery": "before(NIGHT1_PM_10_00) || between(DAY2_AM_06_00, NIGHT2_PM_10_00) || between(DAY3_AM_06_00, NIGHT3_PM_10_00)"
     "Road to Southern Swamp Grotto": "true"
     "Tingle Swamp": "has_weapon_range"
   locations:
@@ -751,8 +751,8 @@
   exits:
     "Road to Southern Swamp": "true"
   locations:
-    "Swamp Archery Reward 1": "has_bow && can_use_wallet(1) && (before(NIGHT1_PM_10_00) || (after(DAY2_AM_06_00) && before(NIGHT2_PM_10_00)) || (after(DAY3_AM_06_00) && before(NIGHT3_PM_10_00)))"
-    "Swamp Archery Reward 2": "has_bow && can_use_wallet(1) && (before(NIGHT1_PM_10_00) || (after(DAY2_AM_06_00) && before(NIGHT2_PM_10_00)) || (after(DAY3_AM_06_00) && before(NIGHT3_PM_10_00)))"
+    "Swamp Archery Reward 1": "has_bow && can_use_wallet(1) && (before(NIGHT1_PM_10_00) || between(DAY2_AM_06_00, NIGHT2_PM_10_00) || between(DAY3_AM_06_00, NIGHT3_PM_10_00))"
+    "Swamp Archery Reward 2": "has_bow && can_use_wallet(1) && (before(NIGHT1_PM_10_00) || between(DAY2_AM_06_00, NIGHT2_PM_10_00) || between(DAY3_AM_06_00, NIGHT3_PM_10_00))"
 "Road to Southern Swamp Grotto":
   region: ENTRANCE
   events:
@@ -1398,10 +1398,10 @@
     FAIRY: "can_get_gossip_fairy"
   exits:
     "Near Romani Ranch": "true"
-    "Cucco Shack": "(after(DAY1_AM_06_00) && before(NIGHT1_PM_08_00)) || (after(DAY2_AM_06_00) && before(NIGHT2_PM_08_00)) || (after(DAY3_AM_06_00) && before(NIGHT3_PM_08_00))"
-    "Doggy Racetrack": "(after(DAY1_AM_06_00) && before(NIGHT1_PM_08_00)) || (after(DAY2_AM_06_00) && before(NIGHT2_PM_08_00)) || (after(DAY3_AM_06_00) && before(NIGHT3_PM_08_00))"
+    "Cucco Shack": "between(DAY1_AM_06_00, NIGHT1_PM_08_00) || between(DAY2_AM_06_00, NIGHT2_PM_08_00) || between(DAY3_AM_06_00, NIGHT3_PM_08_00)"
+    "Doggy Racetrack": "between(DAY1_AM_06_00, NIGHT1_PM_08_00) || between(DAY2_AM_06_00, NIGHT2_PM_08_00) || between(DAY3_AM_06_00, NIGHT3_PM_08_00)"
     "Stables": "true"
-    "Ranch House": "(after(DAY1_AM_06_00) && before(NIGHT1_PM_08_00)) || (after(DAY2_AM_06_00) && before(NIGHT2_PM_08_00)) || (after(DAY3_AM_06_00) && before(NIGHT3_PM_08_00))"
+    "Ranch House": "between(DAY1_AM_06_00, NIGHT1_PM_08_00) || between(DAY2_AM_06_00, NIGHT2_PM_08_00) || between(DAY3_AM_06_00, NIGHT3_PM_08_00)"
   locations:
     "Romani Ranch Epona Song": "before(NIGHT1_PM_06_00)"
     "Romani Ranch Aliens": "before(NIGHT1_AM_02_30) && has_arrows"
@@ -1418,9 +1418,9 @@
   exits:
     "Romani Ranch": "true"
   locations:
-    "Cucco Shack Bunny Mask": "has(MASK_BREMEN) && ((after(DAY1_AM_06_00) && before(NIGHT1_PM_08_00)) || (after(DAY2_AM_06_00) && before(NIGHT2_PM_08_00)) || (after(DAY3_AM_06_00) && before(NIGHT3_PM_08_00)))"
+    "Cucco Shack Bunny Mask": "has(MASK_BREMEN) && (between(DAY1_AM_06_00, NIGHT1_PM_08_00) || between(DAY2_AM_06_00, NIGHT2_PM_08_00) || between(DAY3_AM_06_00, NIGHT3_PM_08_00))"
   gossip:
-    "Cucco Shack Gossip": "(after(DAY1_AM_06_00) && before(NIGHT1_PM_08_00)) || (after(DAY2_AM_06_00) && before(NIGHT2_PM_08_00)) || (after(DAY3_AM_06_00) && before(NIGHT3_PM_08_00))"
+    "Cucco Shack Gossip": "between(DAY1_AM_06_00, NIGHT1_PM_08_00) || between(DAY2_AM_06_00, NIGHT2_PM_08_00) || between(DAY3_AM_06_00, NIGHT3_PM_08_00)"
 "Doggy Racetrack":
   region: ENTRANCE
   events:
@@ -1428,14 +1428,14 @@
   exits:
     "Romani Ranch": "true"
   locations:
-    "Doggy Racetrack Chest": "(can_use_beans || has_mask_zora || can_hookshot_short || trick(MM_DOG_RACE_CHEST_NOTHING)) && ((after(DAY1_AM_06_00) && before(NIGHT1_PM_08_00)) || (after(DAY2_AM_06_00) && before(NIGHT2_PM_08_00)) || (after(DAY3_AM_06_00) && before(NIGHT3_PM_08_00)))"
-    "Doggy Racetrack HP": "can_use_wallet(1) && has_mask_truth && ((after(DAY1_AM_06_00) && before(NIGHT1_PM_08_00)) || (after(DAY2_AM_06_00) && before(NIGHT2_PM_08_00)) || (after(DAY3_AM_06_00) && before(NIGHT3_PM_08_00)))"
+    "Doggy Racetrack Chest": "(can_use_beans || has_mask_zora || can_hookshot_short || trick(MM_DOG_RACE_CHEST_NOTHING)) && (between(DAY1_AM_06_00, NIGHT1_PM_08_00) || between(DAY2_AM_06_00, NIGHT2_PM_08_00) || between(DAY3_AM_06_00, NIGHT3_PM_08_00))"
+    "Doggy Racetrack HP": "can_use_wallet(1) && has_mask_truth && (between(DAY1_AM_06_00, NIGHT1_PM_08_00) || between(DAY2_AM_06_00, NIGHT2_PM_08_00) || between(DAY3_AM_06_00, NIGHT3_PM_08_00))"
     "Doggy Racetrack Pot 1": "true"
     "Doggy Racetrack Pot 2": "true"
     "Doggy Racetrack Pot 3": "true"
     "Doggy Racetrack Pot 4": "true"
   gossip:
-    "Doggy Racetrack Gossip": "(after(DAY1_AM_06_00) && before(NIGHT1_PM_08_00)) || (after(DAY2_AM_06_00) && before(NIGHT2_PM_08_00)) || (after(DAY3_AM_06_00) && before(NIGHT3_PM_08_00))"
+    "Doggy Racetrack Gossip": "between(DAY1_AM_06_00, NIGHT1_PM_08_00) || between(DAY2_AM_06_00, NIGHT2_PM_08_00) || between(DAY3_AM_06_00, NIGHT3_PM_08_00)"
 "Stables":
   region: ENTRANCE
   exits:
@@ -1477,7 +1477,7 @@
   locations:
     "Great Bay Coast Zora Mask": "can_play(SONG_HEALING)"
     "Great Bay Coast HP": "(can_use_beans && scarecrow_hookshot) || short_hook_anywhere"
-    "Great Bay Coast Fisherman HP": "can_use_wallet(1) && (can_hookshot_short || can_use_ice_arrows) && event(BOSS_GREAT_BAY) && ((after(DAY1_AM_07_00) && before(NIGHT1_AM_04_00)) || (after(DAY2_AM_07_00) && before(NIGHT2_AM_04_00)) || (after(DAY3_AM_07_00) && before(NIGHT3_AM_04_00)))"
+    "Great Bay Coast Fisherman HP": "can_use_wallet(1) && (can_hookshot_short || can_use_ice_arrows) && event(BOSS_GREAT_BAY) && (between(DAY1_AM_07_00, NIGHT1_AM_04_00) || between(DAY2_AM_07_00, NIGHT2_AM_04_00) || between(DAY3_AM_07_00, NIGHT3_AM_04_00))"
     "Great Bay Coast Pot Ledge 1": "can_hookshot || short_hook_anywhere"
     "Great Bay Coast Pot Ledge 2": "can_hookshot || short_hook_anywhere"
     "Great Bay Coast Pot Ledge 3": "can_hookshot || short_hook_anywhere"
