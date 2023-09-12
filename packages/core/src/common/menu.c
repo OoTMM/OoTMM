@@ -4,6 +4,17 @@
 #include <combo/menu.h>
 #include <combo/sr.h>
 
+#if defined(GAME_OOT)
+# define SEG1        0x0a
+# define SEG2        0x0b
+#else
+# define SEG1        0x09
+# define SEG2        0x0a
+#endif
+
+#define SEG1_BASE   (SEG1 << 24)
+#define SEG2_BASE   (SEG2 << 24)
+
 #define LINES 9
 
 #define DD_OOT          0x00
@@ -236,10 +247,10 @@ static const char* const kSoulsMm[] = {
 
 static const Gfx kDlistQuadRGBA32_12x12[] = {
     gsDPPipeSync(),
-    gsSPVertex(0x09000000, 4, 0),
+    gsSPVertex(SEG1_BASE, 4, 0),
     gsDPTileSync(),
     gsDPLoadTextureTile(
-        0x0a000000,
+        SEG2_BASE,
         G_IM_FMT_RGBA,
         G_IM_SIZ_32b,
         12, 12,
@@ -260,10 +271,10 @@ static const Gfx kDlistQuadRGBA32_12x12[] = {
 
 static const Gfx kDlistQuadIA4_8x12[] = {
     gsDPPipeSync(),
-    gsSPVertex(0x09000000, 4, 0),
+    gsSPVertex(SEG1_BASE, 4, 0),
     gsDPTileSync(),
     gsDPLoadTextureTile_4b(
-        0x0a000000,
+        SEG2_BASE,
         G_IM_FMT_IA,
         8, 12,
         0, 0,
@@ -400,8 +411,8 @@ static void drawTexIA4_8x12(GameState_Play* play, const void* texPtr, float x, f
     }
 
     OPEN_DISPS(play->gs.gfx);
-    gSPSegment(POLY_OPA_DISP++, 0x09, v);
-    gSPSegment(POLY_OPA_DISP++, 0x0a, texPtr);
+    gSPSegment(POLY_OPA_DISP++, SEG1, v);
+    gSPSegment(POLY_OPA_DISP++, SEG2, texPtr);
     gSPDisplayList(POLY_OPA_DISP++, (u32)kDlistQuadIA4_8x12 & 0xffffff);
     CLOSE_DISPS();
 }
@@ -451,8 +462,8 @@ static void drawTexRGBA32_12x12(GameState_Play* play, const void* texPtr, float 
     }
 
     OPEN_DISPS(play->gs.gfx);
-    gSPSegment(POLY_OPA_DISP++, 0x09, v);
-    gSPSegment(POLY_OPA_DISP++, 0x0a, texPtr);
+    gSPSegment(POLY_OPA_DISP++, SEG1, v);
+    gSPSegment(POLY_OPA_DISP++, SEG2, texPtr);
     gSPDisplayList(POLY_OPA_DISP++, (u32)kDlistQuadRGBA32_12x12 & 0xffffff);
     CLOSE_DISPS();
 }
