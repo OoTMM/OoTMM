@@ -1188,49 +1188,57 @@ export const SETTINGS = [{
   category: 'entrances',
   type: 'boolean',
   description: 'If turned on, it means Bottom of the Well, Ice Cavern and Gerudo Training Grounds are also shuffled',
-  default: false
+  default: false,
+  cond: (x: any) => x.erDungeons !== 'none'
 }, {
   key: 'erGanonCastle',
   name: 'Shuffle Ganon\'s Castle with Dungeons',
   category: 'entrances',
   type: 'boolean',
-  default: false
+  default: false,
+  cond: (x: any) => x.erDungeons !== 'none'
 }, {
   key: 'erGanonTower',
   name: 'Shuffle Ganon\'s Tower with Dungeons',
   category: 'entrances',
   type: 'boolean',
-  default: false
+  default: false,
+  cond: (x: any) => x.erDungeons !== 'none'
 }, {
   key: 'erSpiderHouses',
   name: 'Shuffle Spider Houses with Dungeons',
   category: 'entrances',
   type: 'boolean',
-  default: false
+  default: false,
+  cond: (x: any) => x.erDungeons !== 'none'
 }, {
   key: 'erPirateFortress',
   name: 'Shuffle Pirate Fortress with Dungeons',
   category: 'entrances',
   type: 'boolean',
-  default: false
+  default: false,
+  cond: (x: any) => x.erDungeons !== 'none'
 }, {
   key: 'erBeneathWell',
   name: 'Shuffle Beneath The Well with Dungeons',
   category: 'entrances',
   type: 'boolean',
-  default: false
+  default: false,
+  cond: (x: any) => x.erDungeons !== 'none'
 }, {
   key: 'erIkanaCastle',
   name: 'Shuffle Ikana Castle Interior with Dungeons',
   category: 'entrances',
   type: 'boolean',
-  default: false
+  default: false,
+  cond: (x: any) => x.erDungeons !== 'none'
 }, {
   key: 'erSecretShrine',
   name: 'Shuffle Secret Shrine with Dungeons',
   category: 'entrances',
   type: 'boolean',
-  default: false
+  default: false,
+  cond: (x: any) => x.erDungeons !== 'none'
 }, {
   key: 'erRegions',
   name: 'Shuffle Major Regions',
@@ -1249,14 +1257,16 @@ export const SETTINGS = [{
   category: 'entrances',
   type: 'boolean',
   description: 'Shuffle Hyrule Field\'s Market entrance among the regions.',
-  default: false
+  default: false,
+  cond: (x: any) => x.erRegions !== 'none'
 }, {
   key: 'erRegionsShortcuts',
   name: 'Shuffle Regional Shortcuts',
   category: 'entrances',
   type: 'boolean',
   description: 'Shuffles the various shortcuts between regions.<br>- Lost Woods/Goron City<br>- Lost Woods/Zora\'s River<br>- Lake Hylia/Zora\'s Domain<br>- Lake Hylia/Gerudo Valley<br>- Ikana Canyon/Southern Swamp',
-  default: false
+  default: false,
+  cond: (x: any) => x.erRegions !== 'none'
 }, {
   key: 'erIndoors',
   name: 'Shuffle Interiors',
@@ -1275,7 +1285,8 @@ export const SETTINGS = [{
   category: 'entrances',
   type: 'boolean',
   description: 'Shuffle additional, more complex interiors. These include:<br>- OOT: Link\'s House, Temple of Time, Windmill, Kak Potion Shop<br>- MM: Stock Pot Inn, Astral Observatory/Bombers\' Hideout, Swamp Tourist Hut, Ikana Spring Cave',
-  default: false
+  default: false,
+  cond: (x: any) => x.erIndoors !== 'none'
 }, {
   key: 'erWarps',
   name: 'Shuffle Warp Destinations',
