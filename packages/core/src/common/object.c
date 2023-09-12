@@ -35,6 +35,7 @@ typedef struct
 ObjectTexturePatch;
 
 static const ObjectTexturePatch kObjectTexturePatches[] = {
+    { 0x224b0, 0x35fb0 },
     { 0x32930, 0x447b0 },
     { 0x32d30, 0x44bb0 },
     { 0x33130, 0x44fb0 },

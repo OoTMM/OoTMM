@@ -50,7 +50,7 @@ void Shader_Spell(GameState_Play* play, s16 index)
 
     OPEN_DISPS(play->gs.gfx);
     InitListPolyXlu(play->gs.gfx);
-    gSPSegment(POLY_XLU_DISP++, 8, GetSegment(play->gs.gfx, 0, fc * 2, fc * -6, 0x20, 0x20, 1, fc, fc * -2, 0x20, 0x20));
+    gSPSegment(POLY_XLU_DISP++, 8, DisplaceTexture(play->gs.gfx, 0, fc * 2, fc * -6, 0x20, 0x20, 1, fc, fc * -2, 0x20, 0x20));
     gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(POLY_XLU_DISP++, kShaders[index].lists[0]);
     gSPDisplayList(POLY_XLU_DISP++, kShaders[index].lists[1]);
@@ -64,7 +64,7 @@ void Shader_Scale(GameState_Play* play, s16 index)
 
     OPEN_DISPS(play->gs.gfx);
     InitListPolyXlu(play->gs.gfx);
-    gSPSegment(POLY_XLU_DISP++, 8, GetSegment(play->gs.gfx, 0, fc * 2, fc * -2, 0x40, 0x40, 1, fc * 4, fc * -4, 0x20, 0x20));
+    gSPSegment(POLY_XLU_DISP++, 8, DisplaceTexture(play->gs.gfx, 0, fc * 2, fc * -2, 0x40, 0x40, 1, fc * 4, fc * -4, 0x20, 0x20));
     gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(POLY_XLU_DISP++, kShaders[index].lists[2]);
     gSPDisplayList(POLY_XLU_DISP++, kShaders[index].lists[3]);
@@ -79,7 +79,7 @@ void Shader_MirrorShield(GameState_Play* play, s16 index)
 
     OPEN_DISPS(play->gs.gfx);
     InitListPolyOpa(play->gs.gfx);
-    gSPSegment(POLY_OPA_DISP++, 8, GetSegment(play->gs.gfx, 0, 0, (fc & 0x7f) << 1, 0x40, 0x40, 1, 0, (fc & 0x7f), 0x20, 0x20));
+    gSPSegment(POLY_OPA_DISP++, 8, DisplaceTexture(play->gs.gfx, 0, 0, (fc & 0x7f) << 1, 0x40, 0x40, 1, 0, (fc & 0x7f), 0x20, 0x20));
     gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(POLY_OPA_DISP++, kShaders[index].lists[0]);
     InitListPolyXlu(play->gs.gfx);
@@ -107,7 +107,7 @@ void Shader_BlueFire(GameState_Play* play, s16 index)
     gSPDisplayList(POLY_OPA_DISP++, shader->lists[0]);
 
     InitListPolyXlu(play->gs.gfx);
-    gSPSegment(POLY_XLU_DISP++, 8, GetSegment(play->gs.gfx, 0, 0, 0, 0x10, 0x20, 1, fc, -8 * fc, 0x10, 0x20));
+    gSPSegment(POLY_XLU_DISP++, 8, DisplaceTexture(play->gs.gfx, 0, 0, 0, 0x10, 0x20, 1, fc, -8 * fc, 0x10, 0x20));
     MatrixStackDup();
     ModelViewTranslate(-8.f, -2.f, 0.f, MAT_MUL);
     ModelViewUnkTransform((float*)((char*)play + 0x187fc));

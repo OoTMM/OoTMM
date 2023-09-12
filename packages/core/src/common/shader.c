@@ -149,7 +149,7 @@ static void shaderFlameEffectColor(GameState_Play* play, u32 color, float scale,
     ModelViewUnkTransform((float*)((char*)play + kMatTransformOffset));
     ModelViewTranslate(0.f, -(30.f + offsetY), -15.f, MAT_MUL);
     ModelViewScale(flameScale * 1.7f, flameScale, flameScale, MAT_MUL);
-    gSPSegment(POLY_XLU_DISP++, 0x08, GetSegment(play->gs.gfx, 0, 0, 0, 0x20, 0x40, 1, 0, (-play->gs.frameCount & 0x7f) << 2, 0x20, 0x80));
+    gSPSegment(POLY_XLU_DISP++, 0x08, DisplaceTexture(play->gs.gfx, 0, 0, 0, 0x20, 0x40, 1, 0, (-play->gs.frameCount & 0x7f) << 2, 0x20, 0x80));
     gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     color4(&r, &g, &b, &a, primColor);
     gDPSetPrimColor(POLY_XLU_DISP++, 0x80, 0x80, r, g, b, a);
@@ -192,7 +192,7 @@ static void shaderFlameEffect(GameState_Play* play, int colorIndex, float scale,
     ModelViewUnkTransform((float*)((char*)play + kMatTransformOffset));
     ModelViewTranslate(0.f, -(30.f + offsetY), -15.f, MAT_MUL);
     ModelViewScale(flameScale * 1.7f, flameScale, flameScale, MAT_MUL);
-    gSPSegment(POLY_XLU_DISP++, 0x08, GetSegment(play->gs.gfx, 0, 0, 0, 0x20, 0x40, 1, 0, (-play->gs.frameCount & 0x7f) << 2, 0x20, 0x80));
+    gSPSegment(POLY_XLU_DISP++, 0x08, DisplaceTexture(play->gs.gfx, 0, 0, 0, 0x20, 0x40, 1, 0, (-play->gs.frameCount & 0x7f) << 2, 0x20, 0x80));
     gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     color4(&r, &g, &b, &a, kPrimColors[colorIndex]);
     gDPSetPrimColor(POLY_XLU_DISP++, 0x80, 0x80, r, g, b, a);
@@ -256,7 +256,7 @@ void Shader_CustomNut(GameState_Play* play, s16 shaderId)
 
     OPEN_DISPS(play->gs.gfx);
     InitListPolyOpa(play->gs.gfx);
-    gSPSegment(POLY_OPA_DISP++, 0x09, GetSegment(play->gs.gfx, 0, fc, fc, 0x20, 0x20, 1, fc, fc, 0x20, 0x20));
+    gSPSegment(POLY_OPA_DISP++, 0x09, DisplaceTexture(play->gs.gfx, 0, fc, fc, 0x20, 0x20, 1, fc, fc, 0x20, 0x20));
     gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     color4(&r, &g, &b, &a, kNutStickPrimColors[shader->lists[1]]);
     gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, r, g, b, a);
@@ -606,7 +606,7 @@ void Shader_CustomGS(GameState_Play* play, s16 index)
 
     InitListPolyXlu(play->gs.gfx);
     gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    gSPSegment(POLY_XLU_DISP++, 0x08, GetSegment(play->gs.gfx, 0, 0, fc * -5, 0x20, 0x20, 1, 0, 0, 0x20, 0x40));
+    gSPSegment(POLY_XLU_DISP++, 0x08, DisplaceTexture(play->gs.gfx, 0, 0, fc * -5, 0x20, 0x20, 1, 0, 0, 0x20, 0x40));
     color4(&r, &g, &b, &a, gsc->flameEnv);
     gDPSetEnvColor(POLY_XLU_DISP++, r, g, b, a);
     color4(&r, &g, &b, &a, gsc->flamePrimary);
@@ -693,7 +693,7 @@ void Shader_CustomPotion(GameState_Play* play, s16 index)
     OPEN_DISPS(play->gs.gfx);
     /* Opa */
     InitListPolyOpa(play->gs.gfx);
-    gSPSegment(POLY_OPA_DISP++, 0x08, GetSegment(play->gs.gfx, 0, -fc, fc, 0x20, 0x20, 1, -fc, fc, 0x20, 0x20));
+    gSPSegment(POLY_OPA_DISP++, 0x08, DisplaceTexture(play->gs.gfx, 0, -fc, fc, 0x20, 0x20, 1, -fc, fc, 0x20, 0x20));
     gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     color4(&r, &g, &b, &a, kPrimColors1[colorIndex]);
     gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, r, g, b, a);

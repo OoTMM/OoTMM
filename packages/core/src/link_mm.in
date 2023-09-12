@@ -56,7 +56,7 @@ InitListPolyOpa = 0x8012c28c;
 InitListPolyXlu = 0x8012c2dc;
 Gfx_SetupDL_42Opa = 0x8012c8ac;
 GetMatrixMV     = 0x80181a40;
-GetSegment      = 0x8012cbd0;
+DisplaceTexture = 0x8012cbd0;
 
 PreDraw1 = 0x800b8050;
 PreDraw2 = 0x800b8118;

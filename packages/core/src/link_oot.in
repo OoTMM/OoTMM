@@ -88,7 +88,7 @@ GetCollectibleFlag = 0x800206e8;
 GetSwitchFlag = 0x8002049c;
 SetSwitchFlag = 0x800204d0;
 
-GetSegment = 0x8007eb84;
+DisplaceTexture = 0x8007eb84;
 ConvertMatrix = 0x800ab6bc;
 
 _z_malloc = 0x800cda20;

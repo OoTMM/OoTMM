@@ -39,6 +39,6 @@ void    InitListPolyOpa(GfxContext* gfx);
 void    InitListPolyXlu(GfxContext* gfx);
 void    Gfx_SetupDL_42Opa(GfxContext* gfx);
 void*   GetMatrixMV(GfxContext* gfx);
-u32     GetSegment(GfxContext* gfx, int, int, int, int, int, int, int, int, int, int);
+u32     DisplaceTexture(GfxContext* gfx, int, int, int, int, int, int, int, int, int, int);
 
 #endif
