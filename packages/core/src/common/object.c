@@ -27,6 +27,22 @@ ALIGNED(16) const ObjectData kExtraObjectsTable[] = {
 #undef Y
 };
 
+typedef struct
+{
+    u32 oot;
+    u32 mm;
+}
+ObjectTexturePatch;
+
+static const ObjectTexturePatch kObjectTexturePatches[] = {
+    { 0x32930, 0x447b0 },
+    { 0x32d30, 0x44bb0 },
+    { 0x33130, 0x44fb0 },
+    { 0x33530, 0x453b0 },
+    { 0x39450, 0x54f20 },
+    { 0x53390, 0x7df10 },
+};
+
 ALIGNED(16) ObjectData kCustomObjectsTable[32];
 
 static const ObjectPatch kObjectPatches[] = {
@@ -164,42 +180,26 @@ void comboLoadCustomKeep(void)
 #if defined(GAME_OOT)
 static u32 comboGetTextureOverride(u32 texture)
 {
-    switch (texture)
+    for (int i = 0; i < ARRAY_SIZE(kObjectTexturePatches); ++i)
     {
-    case 0x447b0:
-        return 0x32930;
-    case 0x44bb0:
-        return 0x32d30;
-    case 0x44fb0:
-        return 0x33130;
-    case 0x54F20:
-        return 0x39450;
-    case 0x7DF10:
-        return 0x53390;
-    default:
-        return 0x32930; /* Fine default */
+        if (kObjectTexturePatches[i].mm == texture)
+            return kObjectTexturePatches[i].oot;
     }
+
+    return 0x32930;
 }
 #endif
 
 #if defined(GAME_MM)
 static u32 comboGetTextureOverride(u32 texture)
 {
-    switch (texture)
+    for (int i = 0; i < ARRAY_SIZE(kObjectTexturePatches); ++i)
     {
-    case 0x32930:
-        return 0x447b0;
-    case 0x32d30:
-        return 0x44bb0;
-    case 0x33130:
-        return 0x44FB0;
-    case 0x39450:
-        return 0x54F20;
-    case 0x53390:
-        return 0x7DF10;
-    default:
-        return 0x447b0; /* Fine default */
+        if (kObjectTexturePatches[i].oot == texture)
+            return kObjectTexturePatches[i].mm;
     }
+
+    return 0x447b0;
 }
 #endif
 
