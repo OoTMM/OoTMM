@@ -46,8 +46,8 @@ extern const Shader kShaders[256];
 #define DRAWGI_MAGIC_LARGE                  0x19
 #define DRAWGI_BOMB                         0x1a
 #define DRAWGI_STONE_OF_AGONY               0x1b
-#define DRAWGI_WALLET2                      0x1c
-#define DRAWGI_WALLET3                      0x1d
+#define DRAWGI_WALLET                       0x1c
+#define DRAWGI_WALLET2                      0x1d
 #define DRAWGI_OOT_GERUDO_CARD              0x1e
 #define DRAWGI_ARROW                        0x1f
 #define DRAWGI_ARROW2                       0x20
@@ -234,5 +234,8 @@ extern const Shader kShaders[256];
 #define DRAWGI_TRIFORCE_COURAGE             0xd5
 #define DRAWGI_TRIFORCE_WISDOM              0xd6
 #define DRAWGI_SOUL_BOSS                    0xd7
+#define DRAWGI_WALLET3                      0xd8
+#define DRAWGI_WALLET4                      0xd9
+#define DRAWGI_WALLET5                      0xda
 
 #endif

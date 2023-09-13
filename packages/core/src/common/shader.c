@@ -900,6 +900,70 @@ void Shader_Triforce(GameState_Play* play, s16 index)
     shaderFlameEffectColor(play, color, 1.5f, 20.f);
 }
 
+#define LIST_PTR(x) ((u32)x & 0xffffff)
+
+static const Gfx kWalletRupeeGreen[] = {
+    gsDPPipeSync(),
+    gsDPSetPrimColor(0x00, 0x00, 0, 255, 0, 255),
+    gsDPSetEnvColor(0, 50, 0, 255),
+    gsSPEndDisplayList(),
+};
+
+static const Gfx kWalletRupeeBlue[] = {
+    gsDPPipeSync(),
+    gsDPSetPrimColor(0x00, 0x00, 0, 0, 255, 255),
+    gsDPSetEnvColor(0, 0, 50, 255),
+    gsSPEndDisplayList(),
+};
+
+static const Gfx kWalletRupeeRed[] = {
+    gsDPPipeSync(),
+    gsDPSetPrimColor(0x00, 0x00, 255, 0, 0, 255),
+    gsDPSetEnvColor(50, 0, 0, 255),
+    gsSPEndDisplayList(),
+};
+
+static const Gfx kWalletRupeePurple[] = {
+    gsDPPipeSync(),
+    gsDPSetPrimColor(0x00, 0x00, 150, 0, 255, 255),
+    gsDPSetEnvColor(30, 0, 50, 255),
+    gsSPEndDisplayList(),
+};
+
+static const Gfx kWalletRupeeSilver[] = {
+    gsDPPipeSync(),
+    gsDPSetPrimColor(0x00, 0x00, 255, 255, 255, 255),
+    gsDPSetEnvColor(50, 50, 50, 255),
+    gsSPEndDisplayList(),
+};
+
+static const Gfx* const kWalletRupee[] = {
+    kWalletRupeeGreen,
+    kWalletRupeeBlue,
+    kWalletRupeeRed,
+    kWalletRupeePurple,
+    kWalletRupeeSilver,
+};
+
+void Shader_Wallet(GameState_Play* play, s16 index)
+{
+    const Shader* shader;
+    shader = &kShaders[index];
+
+    OPEN_DISPS(play->gs.gfx);
+    InitListPolyOpa(play->gs.gfx);
+    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
+    gSPDisplayList(POLY_OPA_DISP++, shader->lists[1]);
+    gSPDisplayList(POLY_OPA_DISP++, shader->lists[0]);
+    gSPDisplayList(POLY_OPA_DISP++, shader->lists[2]);
+    gSPDisplayList(POLY_OPA_DISP++, shader->lists[3]);
+    gSPDisplayList(POLY_OPA_DISP++, shader->lists[4]);
+    gSPDisplayList(POLY_OPA_DISP++, shader->lists[5]);
+    gSPDisplayList(POLY_OPA_DISP++, LIST_PTR(kWalletRupee[shader->lists[6]]));
+    gSPDisplayList(POLY_OPA_DISP++, shader->lists[7]);
+    CLOSE_DISPS();
+}
+
 const Shader kShaders[] = {
 #include "data/shaders.inc"
 };
