@@ -297,6 +297,15 @@ static int addSilverRupees(int id, int noEffect)
     return comboSilverRupeesIncCount(id, noEffect);
 }
 
+static void addSilverRupeePouch(int id, int noEffect)
+{
+    int max;
+
+    max = gSilverRupeeData[id].count;
+    for (int i = 0; i < max; ++i)
+        addSilverRupees(id, noEffect);
+}
+
 static void addWallet(int index, int noEffect)
 {
     if (index == 0)
@@ -1494,6 +1503,72 @@ int comboAddItemOot(s16 gi, int noEffect)
         break;
     case GI_OOT_RUPEE_SILVER_GANON_WATER:
         count = addSilverRupees(SR_GANON2, noEffect);
+        break;
+    case GI_OOT_POUCH_SILVER_DC:
+        addSilverRupeePouch(SR_DC, noEffect);
+        break;
+    case GI_OOT_POUCH_SILVER_BOTW:
+        addSilverRupeePouch(SR_BOTW, noEffect);
+        break;
+    case GI_OOT_POUCH_SILVER_SPIRIT_CHILD:
+        addSilverRupeePouch(SR_SPIRIT1, noEffect);
+        break;
+    case GI_OOT_POUCH_SILVER_SPIRIT_SUN:
+        addSilverRupeePouch(SR_SPIRIT2, noEffect);
+        break;
+    case GI_OOT_POUCH_SILVER_SPIRIT_BOULDERS:
+        addSilverRupeePouch(SR_SPIRIT3, noEffect);
+        break;
+    case GI_OOT_POUCH_SILVER_SPIRIT_LOBBY:
+        addSilverRupeePouch(SR_SPIRIT1, noEffect);
+        break;
+    case GI_OOT_POUCH_SILVER_SPIRIT_ADULT:
+        addSilverRupeePouch(SR_SPIRIT2, noEffect);
+        break;
+    case GI_OOT_POUCH_SILVER_SHADOW_SCYTHE:
+        addSilverRupeePouch(SR_SHADOW1, noEffect);
+        break;
+    case GI_OOT_POUCH_SILVER_SHADOW_PIT:
+        addSilverRupeePouch(SR_SHADOW3, noEffect);
+        break;
+    case GI_OOT_POUCH_SILVER_SHADOW_SPIKES:
+        addSilverRupeePouch(SR_SHADOW4, noEffect);
+        break;
+    case GI_OOT_POUCH_SILVER_SHADOW_BLADES:
+        addSilverRupeePouch(SR_SHADOW2, noEffect);
+        break;
+    case GI_OOT_POUCH_SILVER_IC_SCYTHE:
+        addSilverRupeePouch(SR_IC1, noEffect);
+        break;
+    case GI_OOT_POUCH_SILVER_IC_BLOCK:
+        addSilverRupeePouch(SR_IC2, noEffect);
+        break;
+    case GI_OOT_POUCH_SILVER_GTG_SLOPES:
+        addSilverRupeePouch(SR_GTG1, noEffect);
+        break;
+    case GI_OOT_POUCH_SILVER_GTG_LAVA:
+        addSilverRupeePouch(SR_GTG2, noEffect);
+        break;
+    case GI_OOT_POUCH_SILVER_GTG_WATER:
+        addSilverRupeePouch(SR_GTG3, noEffect);
+        break;
+    case GI_OOT_POUCH_SILVER_GANON_SPIRIT:
+        addSilverRupeePouch(SR_GANON1, noEffect);
+        break;
+    case GI_OOT_POUCH_SILVER_GANON_LIGHT:
+        addSilverRupeePouch(SR_GANON2, noEffect);
+        break;
+    case GI_OOT_POUCH_SILVER_GANON_FIRE:
+        addSilverRupeePouch(SR_GANON3, noEffect);
+        break;
+    case GI_OOT_POUCH_SILVER_GANON_FOREST:
+        addSilverRupeePouch(SR_GANON4, noEffect);
+        break;
+    case GI_OOT_POUCH_SILVER_GANON_SHADOW:
+        addSilverRupeePouch(SR_GANON1, noEffect);
+        break;
+    case GI_OOT_POUCH_SILVER_GANON_WATER:
+        addSilverRupeePouch(SR_GANON2, noEffect);
         break;
     case GI_OOT_SOUL_STALFOS:
     case GI_OOT_SOUL_OCTOROK:

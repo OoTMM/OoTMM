@@ -41,15 +41,15 @@
 "Ganon Castle Fire":
   dungeon: Ganon
   events:
-    GANON_TRIAL_FIRE: "has_light_arrows && has_tunic_goron_strict && (can_longshot || has_hover_boots) && has(RUPEE_SILVER_GANON_FIRE, 5)"
+    GANON_TRIAL_FIRE: "has_light_arrows && has_tunic_goron_strict && (can_longshot || has_hover_boots) && silver_rupees_ganon_fire"
   locations:
     "MQ Ganon Castle SR Fire Under Pillar": "has_tunic_goron && can_lift_gold"
     "MQ Ganon Castle SR Fire Center-Left": "has_tunic_goron_strict"
     "MQ Ganon Castle SR Fire Back-Left": "has_tunic_goron_strict"
     "MQ Ganon Castle SR Fire High Above Lava": "has_tunic_goron"
     "MQ Ganon Castle SR Fire Front-Left": "has_tunic_goron_strict"
-    "MQ Ganon Pot Fire End 1": "has_tunic_goron_strict && (can_longshot || has_hover_boots) && has(RUPEE_SILVER_GANON_FIRE, 5)"
-    "MQ Ganon Pot Fire End 2": "has_tunic_goron_strict && (can_longshot || has_hover_boots) && has(RUPEE_SILVER_GANON_FIRE, 5)"
+    "MQ Ganon Pot Fire End 1": "has_tunic_goron_strict && (can_longshot || has_hover_boots) && silver_rupees_ganon_fire"
+    "MQ Ganon Pot Fire End 2": "has_tunic_goron_strict && (can_longshot || has_hover_boots) && silver_rupees_ganon_fire"
 "Ganon Castle Water":
   dungeon: Ganon
   events:
@@ -61,15 +61,15 @@
 "Ganon Castle Water Silver Rupees":
   dungeon: Ganon
   events:
-    GANON_TRIAL_WATER: "has(RUPEE_SILVER_GANON_WATER, 5) && has_light_arrows"
+    GANON_TRIAL_WATER: "silver_rupees_ganon_water && has_light_arrows"
   locations:
     "MQ Ganon Castle SR Water Shallow Hole": "true"
     "MQ Ganon Castle SR Water Above Ground": "true"
     "MQ Ganon Castle SR Water Alcove": "is_adult"
     "MQ Ganon Castle SR Water Deep Hole": "true"
     "MQ Ganon Castle SR Water Under Alcove": "true"
-    "MQ Ganon Pot Water End 1": "has(RUPEE_SILVER_GANON_WATER, 5)"
-    "MQ Ganon Pot Water End 2": "has(RUPEE_SILVER_GANON_WATER, 5)"
+    "MQ Ganon Pot Water End 1": "silver_rupees_ganon_water"
+    "MQ Ganon Pot Water End 2": "silver_rupees_ganon_water"
 "Ganon Castle Spirit":
   dungeon: Ganon
   events:
@@ -87,7 +87,7 @@
 "Ganon Castle Shadow":
   dungeon: Ganon
   events:
-    GANON_TRIAL_SHADOW: "has_lens && has_light_arrows && (has_hover_boots || (can_hookshot && has_fire && can_use_bow)) && has(RUPEE_SILVER_GANON_SHADOW, 5)"
+    GANON_TRIAL_SHADOW: "has_lens && has_light_arrows && (has_hover_boots || (can_hookshot && has_fire && can_use_bow)) && silver_rupees_ganon_shadow"
   locations:
     "MQ Ganon Castle Shadow Trial Bomb Flower Chest": "(can_hookshot || has_hover_boots) && (can_use_bow || (has_lens && has_hover_boots && (can_use_din || has_bombflowers)))"
     "MQ Ganon Castle Shadow Trial Switch Chest": "can_use_bow && has_lens && (has_hover_boots || (can_hookshot && has_fire))"
@@ -96,8 +96,8 @@
     "MQ Ganon Castle SR Shadow Back-Left": "has_lens && (has_hover_boots || (can_use_bow && can_hookshot && has_fire))"
     "MQ Ganon Castle SR Shadow Back-Center": "has_lens && (has_hover_boots || (can_use_bow && can_hookshot && has_fire))"
     "MQ Ganon Castle SR Shadow Front-Center": "has_lens && (has_hover_boots || (can_use_bow && can_hookshot))"
-    "MQ Ganon Pot Shadow End 1": "has_lens && (has_hover_boots || (can_hookshot && has_fire && can_use_bow)) && has(RUPEE_SILVER_GANON_SHADOW, 5)"
-    "MQ Ganon Pot Shadow End 2": "has_lens && (has_hover_boots || (can_hookshot && has_fire && can_use_bow)) && has(RUPEE_SILVER_GANON_SHADOW, 5)"
+    "MQ Ganon Pot Shadow End 1": "has_lens && (has_hover_boots || (can_hookshot && has_fire && can_use_bow)) && silver_rupees_ganon_shadow"
+    "MQ Ganon Pot Shadow End 2": "has_lens && (has_hover_boots || (can_hookshot && has_fire && can_use_bow)) && silver_rupees_ganon_shadow"
 "Ganon Castle Stairs":
   region: NONE
   exits:

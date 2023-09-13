@@ -237,5 +237,6 @@ extern const Shader kShaders[256];
 #define DRAWGI_WALLET3                      0xd8
 #define DRAWGI_WALLET4                      0xd9
 #define DRAWGI_WALLET5                      0xda
+#define DRAWGI_OOT_SILVER_POUCH             0xdb
 
 #endif

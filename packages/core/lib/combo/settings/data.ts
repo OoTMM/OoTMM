@@ -284,6 +284,14 @@ export const SETTINGS = [{
   ],
   default: 'vanilla'
 }, {
+  key: 'silverRupeePouches',
+  name: 'Silver Rupee Pouches',
+  category: 'main.shuffle',
+  type: 'boolean',
+  description: 'Turn every set of silver rupees into a single item.',
+  default: false,
+  cond: (s: any) => s.silverRupeeShuffle !== 'vanilla',
+}, {
   key: 'townFairyShuffle',
   name: 'Town Stray Fairy Shuffle',
   category: 'main.shuffle',

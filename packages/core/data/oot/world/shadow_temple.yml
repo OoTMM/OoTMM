@@ -40,11 +40,11 @@
     "Shadow Temple SR Scythe 3": "true"
     "Shadow Temple SR Scythe 4": "true"
     "Shadow Temple SR Scythe 5": "true"
-    "Shadow Temple Silver Rupees": "has(RUPEE_SILVER_SHADOW_SCYTHE, 5)"
+    "Shadow Temple Silver Rupees": "silver_rupees_shadow_scythe"
 "Shadow Temple Open":
   dungeon: Shadow
   exits:
-    "Shadow Temple Falling Spikes": "has(RUPEE_SILVER_SHADOW_PIT, 5)"
+    "Shadow Temple Falling Spikes": "silver_rupees_shadow_pit"
     "Shadow Temple Invisible Spikes": "cond(climb_anywhere, small_keys_shadow(4), small_keys_shadow(2))"
   locations:
     "Shadow Temple Spinning Blades Visible": "soul_like_like && soul_keese && (has_ranged_weapon_adult || can_use_slingshot || can_use_sticks || has_explosives_or_hammer || has_weapon)"
@@ -71,7 +71,7 @@
   exits:
     "Shadow Temple Open": "small_keys_shadow(4)"
     "Shadow Temple Wind Front": "cond(climb_anywhere, small_keys_shadow(4), small_keys_shadow(3) && (is_adult && can_hookshot) || can_longshot)"
-    "Shadow Temple Skull Pot": "has(RUPEE_SILVER_SHADOW_SPIKES, 5)"
+    "Shadow Temple Skull Pot": "silver_rupees_shadow_spikes"
   locations:
     "Shadow Temple SR Spikes Back Left": "has_lens && (can_hookshot || climb_anywhere)"
     "Shadow Temple SR Spikes Right": "can_hookshot || climb_anywhere"

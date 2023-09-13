@@ -9,7 +9,7 @@
   exits:
     "Ice Cavern HP Room": "has_blue_fire"
     "Ice Cavern Block Room": "has_blue_fire"
-    "Ice Cavern First Fire Room": "(is_adult || climb_anywhere || hookshot_anywhere) && has(RUPEE_SILVER_IC_SCYTHE, 5)"
+    "Ice Cavern First Fire Room": "(is_adult || climb_anywhere || hookshot_anywhere) && silver_rupees_ic_scythe"
   locations:
     "Ice Cavern GS Scythe Room": "can_collect_distance || (climb_anywhere && (has_weapon || can_use_sticks || has_ranged_weapon || has_explosives || can_use_din))"
     "Ice Cavern SR Scythe Left": "true"
@@ -42,7 +42,7 @@
   dungeon: IC
   exits:
     "Ice Cavern Scythe": "true"
-    "Ice Cavern End": "has(RUPEE_SILVER_IC_BLOCK, 5)"
+    "Ice Cavern End": "silver_rupees_ic_block"
   events:
     BLUE_FIRE: "has_bottle"
   locations:
@@ -52,8 +52,8 @@
     "Ice Cavern SR Blocks Center": "true"
     "Ice Cavern SR Blocks Alcove": "has_blue_fire"
     "Ice Cavern SR Blocks Front Left": "true"
-    "Ice Cavern Pot Red Ice 1": "has(RUPEE_SILVER_IC_BLOCK, 5)"
-    "Ice Cavern Pot Red Ice 2": "has(RUPEE_SILVER_IC_BLOCK, 5)"
+    "Ice Cavern Pot Red Ice 1": "silver_rupees_ic_block"
+    "Ice Cavern Pot Red Ice 2": "silver_rupees_ic_block"
 "Ice Cavern End":
   dungeon: IC
   exits:

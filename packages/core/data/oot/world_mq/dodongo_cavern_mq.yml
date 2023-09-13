@@ -36,7 +36,7 @@
 "Dodongo Cavern Upper Staircase":
   dungeon: DC
   exits:
-    "Dodongo Cavern After Staircase": "has(RUPEE_SILVER_DC, 5)"
+    "Dodongo Cavern After Staircase": "silver_rupees_dc"
   locations:
     "MQ Dodongo Cavern SR Upper Corner Low": "true"
     "MQ Dodongo Cavern SR Vines": "true"

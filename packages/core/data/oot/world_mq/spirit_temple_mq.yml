@@ -15,7 +15,7 @@
     #The following three chests are here to allow for an age indeterminate path. This is the only age indeterminate content in Spirit MQ.
     "MQ Spirit Temple Compass Chest": "can_use_slingshot && has_bow && small_keys_spirit(2) && has_bombchu"
     "MQ Spirit Temple Sun Block Room Chest": "small_keys_spirit(2) && has_bombchu && can_play_time && is_child"
-    "MQ Spirit Temple Lobby Front-Right Chest": "has(RUPEE_SILVER_SPIRIT_LOBBY, 5)"
+    "MQ Spirit Temple Lobby Front-Right Chest": "silver_rupees_spirit_lobby"
     "Spirit Temple Silver Gauntlets": "small_keys_spirit(4) && has_explosives && can_play_time && is_child && soul_iron_knuckle && (has_weapon || can_use_sticks) && has_lens"
     "MQ Spirit Temple SR Lobby Rock Right": "has_explosives_or_hammer"
     "MQ Spirit Temple SR Lobby Rock Left": "has_explosives_or_hammer"
@@ -120,7 +120,7 @@
 "Spirit Temple Adult Climb":
   dungeon: Spirit
   exits:
-    "Spirit Temple Top Floor": "has(RUPEE_SILVER_SPIRIT_ADULT, 5)"
+    "Spirit Temple Top Floor": "silver_rupees_spirit_adult"
   locations:
     "MQ Spirit Temple SR Adult Bottom": "true"
     "MQ Spirit Temple SR Adult Bottom-Center": "true"

@@ -160,6 +160,38 @@
 "small_keys_gtg(n)": "small_keys(SMALL_KEY_GTG, KEY_RING_GTG, n)"
 "small_keys_ganon(n)": "small_keys(SMALL_KEY_GANON, KEY_RING_GANON, n)"
 
+# Silver rupees
+"silver_rupees(rupee, pouch, count)": "cond(setting(silverRupeePouches), has(pouch), has(rupee, count))"
+"silver_rupees_ganon_light": "silver_rupees(RUPEE_SILVER_GANON_LIGHT, POUCH_SILVER_GANON_LIGHT, 5)"
+"silver_rupees_ganon_forest": "silver_rupees(RUPEE_SILVER_GANON_FOREST, POUCH_SILVER_GANON_FOREST, 5)"
+"silver_rupees_ganon_fire": "silver_rupees(RUPEE_SILVER_GANON_FIRE, POUCH_SILVER_GANON_FIRE, 5)"
+"silver_rupees_ganon_spirit": "silver_rupees(RUPEE_SILVER_GANON_SPIRIT, POUCH_SILVER_GANON_SPIRIT, 5)"
+"silver_rupees_ganon_water": "silver_rupees(RUPEE_SILVER_GANON_WATER, POUCH_SILVER_GANON_WATER, 5)"
+"silver_rupees_ganon_shadow": "silver_rupees(RUPEE_SILVER_GANON_SHADOW, POUCH_SILVER_GANON_SHADOW, 5)"
+
+"silver_rupees_gtg_slopes": "silver_rupees(RUPEE_SILVER_GTG_SLOPES, POUCH_SILVER_GTG_SLOPES, 5)"
+"silver_rupees_gtg_lava": "silver_rupees(RUPEE_SILVER_GTG_LAVA, POUCH_SILVER_GTG_LAVA, 5)"
+"silver_rupees_gtg_water": "silver_rupees(RUPEE_SILVER_GTG_WATER, POUCH_SILVER_GTG_WATER, 5)"
+"silver_rupees_gtg_lava_mq": "silver_rupees(RUPEE_SILVER_GTG_LAVA, POUCH_SILVER_GTG_LAVA, 6)"
+"silver_rupees_gtg_water_mq": "silver_rupees(RUPEE_SILVER_GTG_WATER, POUCH_SILVER_GTG_WATER, 3)"
+
+"silver_rupees_ic_scythe": "silver_rupees(RUPEE_SILVER_IC_SCYTHE, POUCH_SILVER_IC_SCYTHE, 5)"
+"silver_rupees_ic_block": "silver_rupees(RUPEE_SILVER_IC_BLOCK, POUCH_SILVER_IC_BLOCK, 5)"
+
+"silver_rupees_shadow_scythe": "silver_rupees(RUPEE_SILVER_SHADOW_SCYTHE, POUCH_SILVER_SHADOW_SCYTHE, 5)"
+"silver_rupees_shadow_pit": "silver_rupees(RUPEE_SILVER_SHADOW_PIT, POUCH_SILVER_SHADOW_PIT, 5)"
+"silver_rupees_shadow_spikes": "silver_rupees(RUPEE_SILVER_SHADOW_SPIKES, POUCH_SILVER_SHADOW_SPIKES, 5)"
+"silver_rupees_shadow_blades": "silver_rupees(RUPEE_SILVER_SHADOW_BLADES, POUCH_SILVER_SHADOW_BLADES, 10)"
+"silver_rupees_shadow_spikes_mq": "silver_rupees(RUPEE_SILVER_SHADOW_SPIKES, POUCH_SILVER_SHADOW_SPIKES, 10)"
+
+"silver_rupees_dc": "silver_rupees(RUPEE_SILVER_DC, POUCH_SILVER_DC, 5)"
+
+"silver_rupees_spirit_child": "silver_rupees(RUPEE_SILVER_SPIRIT_CHILD, POUCH_SILVER_SPIRIT_CHILD, 5)"
+"silver_rupees_spirit_sun": "silver_rupees(RUPEE_SILVER_SPIRIT_SUN, POUCH_SILVER_SPIRIT_SUN, 5)"
+"silver_rupees_spirit_boulders": "silver_rupees(RUPEE_SILVER_SPIRIT_BOULDERS, POUCH_SILVER_SPIRIT_BOULDERS, 5)"
+"silver_rupees_spirit_lobby": "silver_rupees(RUPEE_SILVER_SPIRIT_LOBBY, POUCH_SILVER_SPIRIT_LOBBY, 5)"
+"silver_rupees_spirit_adult": "silver_rupees(RUPEE_SILVER_SPIRIT_ADULT, POUCH_SILVER_SPIRIT_ADULT, 5)"
+
 # Masks
 "has_mask_truth": "has(MASK_TRUTH) || has(SHARED_MASK_TRUTH)"
 

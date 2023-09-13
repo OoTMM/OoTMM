@@ -24,7 +24,7 @@
   dungeon: GTG
   exits:
     "Gerudo Training Grounds Slopes": "can_hookshot || climb_anywhere"
-    "Gerudo Training Grounds Left Side": "has(RUPEE_SILVER_GTG_SLOPES, 5)"
+    "Gerudo Training Grounds Left Side": "silver_rupees_gtg_slopes"
 "Gerudo Training Grounds Left Side":
   dungeon: GTG
   exits:
@@ -60,7 +60,7 @@
   exits:
     "Gerudo Training Grounds Maze Side": "can_play_time || is_child || climb_anywhere || hookshot_anywhere"
     "Gerudo Training Grounds Hammer": "(can_hookshot && (can_longshot || has_hover_boots || can_play_time || hookshot_anywhere || is_child)) || climb_anywhere"
-    "Gerudo Training Grounds Water": "has(RUPEE_SILVER_GTG_LAVA, 5)"
+    "Gerudo Training Grounds Water": "silver_rupees_gtg_lava"
   locations:
     "Gerudo Training Grounds SR Lava Front Left": "true"
     "Gerudo Training Grounds SR Lava Front Right": "true"
@@ -83,7 +83,7 @@
   exits:
     "Gerudo Training Grounds Underwater": "can_play_time && has_tunic_zora && has_iron_boots"
   locations:
-    "Gerudo Training Water": "has(RUPEE_SILVER_GTG_WATER, 5)"
+    "Gerudo Training Water": "silver_rupees_gtg_water"
 "Gerudo Training Grounds Underwater":
   dungeon: GTG
   locations:

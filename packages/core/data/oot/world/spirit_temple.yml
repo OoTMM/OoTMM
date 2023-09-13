@@ -31,7 +31,7 @@
     SPIRIT_CHEST_CHILD: "has_fire_or_sticks"
   exits:
     "Spirit Temple Child Entrance": "true"
-    "Spirit Temple Child Back Right": "has(RUPEE_SILVER_SPIRIT_CHILD, 5)"
+    "Spirit Temple Child Back Right": "silver_rupees_spirit_child"
   locations:
     "Spirit Temple GS Child Fence": "can_collect_distance || (climb_anywhere && (can_use_din || has_ranged_weapon || has_explosives))"
 "Spirit Temple Child Back Left":
@@ -52,7 +52,7 @@
     "Spirit Temple Child Back Left": "soul(SOUL_ANUBIS)"
   locations:
     "Spirit Temple Child Second Chest": "event(SPIRIT_CHEST_CHILD)"
-    "Spirit Temple GS Child Fence": "(has_ranged_weapon || has_explosives || can_use_din || can_use_sticks || can_use_sword_master || (age_sword_adult && has(SWORD_BIGGORON))) && has(RUPEE_SILVER_SPIRIT_CHILD, 5)"
+    "Spirit Temple GS Child Fence": "(has_ranged_weapon || has_explosives || can_use_din || can_use_sticks || can_use_sword_master || (age_sword_adult && has(SWORD_BIGGORON))) && silver_rupees_spirit_child"
     "Spirit Temple SR Child 1": "true"
     "Spirit Temple SR Child 2": "true"
     "Spirit Temple SR Child 3": "true"
@@ -77,7 +77,7 @@
     "Spirit Temple Statue": "true"
     "Spirit Temple Child Hand": "small_keys_spirit(5) && soul_iron_knuckle"
   locations:
-    "Spirit Temple Sun Block Room Torches": "(event(SPIRIT_CHILD_DOOR) && can_use_sticks && has(RUPEE_SILVER_SPIRIT_SUN, 5)) || (has_fire_spirit && has(RUPEE_SILVER_SPIRIT_SUN, 5)) || (has_fire_arrows && event(SPIRIT_ADULT_DOOR))"
+    "Spirit Temple Sun Block Room Torches": "(event(SPIRIT_CHILD_DOOR) && can_use_sticks && silver_rupees_spirit_sun) || (has_fire_spirit && silver_rupees_spirit_sun) || (has_fire_arrows && event(SPIRIT_ADULT_DOOR))"
     "Spirit Temple SR Sun 1": "true"
     "Spirit Temple SR Sun 2": "true"
     "Spirit Temple SR Sun 3": "true"
@@ -106,7 +106,7 @@
   dungeon: Spirit
   locations:
     "Spirit Temple GS Boulders": "can_play_time"
-    "Spirit Temple Adult Silver Rupees": "has(RUPEE_SILVER_SPIRIT_BOULDERS, 5)"
+    "Spirit Temple Adult Silver Rupees": "silver_rupees_spirit_boulders"
     "Spirit Temple SR Boulders 1": "true"
     "Spirit Temple SR Boulders 2": "true"
     "Spirit Temple SR Boulders 3": "true"

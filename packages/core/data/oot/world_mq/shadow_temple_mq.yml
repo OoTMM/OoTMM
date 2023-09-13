@@ -36,14 +36,15 @@
 "Shadow Temple Scythe Room":
   dungeon: Shadow
   exits:
-    "Shadow Temple First Beamos": "has(RUPEE_SILVER_SHADOW_BLADES, 5) && soul_skulltula && (can_damage || has_ranged_weapon_adult || can_use_slingshot || can_hammer)"
+    # Is this correct?
+    "Shadow Temple First Beamos": "silver_rupees_shadow_blades && soul_skulltula && (can_damage || has_ranged_weapon_adult || can_use_slingshot || can_hammer)"
   locations:
     "MQ Shadow Temple SR Scythe 1": "true"
     "MQ Shadow Temple SR Scythe 2": "can_hookshot || (is_adult && has_hover_boots)"
     "MQ Shadow Temple SR Scythe 3": "true"
     "MQ Shadow Temple SR Scythe 4": "true"
     "MQ Shadow Temple SR Scythe 5": "true"
-    "MQ Shadow Temple Map Chest": "has(RUPEE_SILVER_SHADOW_SCYTHE, 5)"
+    "MQ Shadow Temple Map Chest": "silver_rupees_shadow_scythe"
 "Shadow Temple Upper Huge Pit":
   dungeon: Shadow
   exits:
@@ -66,14 +67,14 @@
     "MQ Shadow Temple SR Invisible Blades Ground 8": "true"
     "MQ Shadow Temple SR Invisible Blades Ground 9": "true"
     "MQ Shadow Temple SR Invisible Blades Time Block": "can_play_time && is_adult"
-    "MQ Shadow Temple Second Silver Rupee Visible Chest": "has(RUPEE_SILVER_SHADOW_BLADES, 10)"
-    "MQ Shadow Temple Second Silver Rupee Invisible Chest": "has(RUPEE_SILVER_SHADOW_BLADES, 10)"
+    "MQ Shadow Temple Second Silver Rupee Visible Chest": "silver_rupees_shadow_blades"
+    "MQ Shadow Temple Second Silver Rupee Invisible Chest": "silver_rupees_shadow_blades"
 "Shadow Temple Lower Huge Pit":
   dungeon: Shadow
   exits:
     "Shadow Temple Invisible Spike Floor": "small_keys_shadow(3) && has_hover_boots"
   locations:
-    "MQ Shadow Temple Huge Pit Silver Rupee Chest": "has(RUPEE_SILVER_SHADOW_PIT, 5)"
+    "MQ Shadow Temple Huge Pit Silver Rupee Chest": "silver_rupees_shadow_pit"
     "MQ Shadow Temple Spike Curtain Ground Chest": "true"
     "MQ Shadow Temple Spike Curtain Upper Cage Chest": "has(STRENGTH) && is_adult"
     "MQ Shadow Temple Spike Curtain Upper Switch Chest": "has(STRENGTH) && is_adult"
@@ -93,7 +94,7 @@
     "Shadow Temple Wind Tunnel": "small_keys_shadow(4) && can_hookshot"
   locations:
     "MQ Shadow Temple Invisible Spike Floor Chest": "soul_redead_gibdo && (has_weapon || can_use_sticks || can_use_din)"
-    "MQ Shadow Temple Stalfos Room Chest": "has(RUPEE_SILVER_SHADOW_SPIKES, 10) && soul(SOUL_STALFOS) && has_weapon"
+    "MQ Shadow Temple Stalfos Room Chest": "silver_rupees_shadow_spikes_mq && soul(SOUL_STALFOS) && has_weapon"
     "MQ Shadow Temple SR Spikes Left Corner": "can_hookshot"
     "MQ Shadow Temple SR Spikes Left Wall": "can_hookshot"
     "MQ Shadow Temple SR Spikes Left Midair": "can_hookshot"

@@ -8,7 +8,6 @@ import { Monitor } from '../monitor';
 import { Location, isLocationChestFairy, isLocationOtherFairy, isLocationRenewable, locationData, makeLocation } from './locations';
 import { Item, ItemGroups, ItemHelpers, Items, ItemsCount, PlayerItem, PlayerItems, itemByID, makePlayerItem } from '../items';
 import { exprTrue } from './expr';
-import { STONES } from '../items/groups';
 
 const VALIDATION_CRITICAL_ITEMS = [
   Items.MM_SONG_TIME,
@@ -33,6 +32,7 @@ const DUNGEON_ITEMS = {
   ],
   DC: [
     Items.OOT_RUPEE_SILVER_DC,
+    Items.OOT_POUCH_SILVER_DC,
     Items.OOT_MAP_DC,
     Items.OOT_COMPASS_DC
   ],
@@ -68,6 +68,10 @@ const DUNGEON_ITEMS = {
     Items.OOT_RUPEE_SILVER_SHADOW_PIT,
     Items.OOT_RUPEE_SILVER_SHADOW_SCYTHE,
     Items.OOT_RUPEE_SILVER_SHADOW_SPIKES,
+    Items.OOT_POUCH_SILVER_SHADOW_BLADES,
+    Items.OOT_POUCH_SILVER_SHADOW_PIT,
+    Items.OOT_POUCH_SILVER_SHADOW_SCYTHE,
+    Items.OOT_POUCH_SILVER_SHADOW_SPIKES,
     Items.OOT_BOSS_KEY_SHADOW,
     Items.OOT_MAP_SHADOW,
     Items.OOT_COMPASS_SHADOW
@@ -80,6 +84,11 @@ const DUNGEON_ITEMS = {
     Items.OOT_RUPEE_SILVER_SPIRIT_LOBBY,
     Items.OOT_RUPEE_SILVER_SPIRIT_SUN,
     Items.OOT_RUPEE_SILVER_SPIRIT_BOULDERS,
+    Items.OOT_POUCH_SILVER_SPIRIT_ADULT,
+    Items.OOT_POUCH_SILVER_SPIRIT_CHILD,
+    Items.OOT_POUCH_SILVER_SPIRIT_LOBBY,
+    Items.OOT_POUCH_SILVER_SPIRIT_SUN,
+    Items.OOT_POUCH_SILVER_SPIRIT_BOULDERS,
     Items.OOT_BOSS_KEY_SPIRIT,
     Items.OOT_MAP_SPIRIT,
     Items.OOT_COMPASS_SPIRIT
@@ -88,12 +97,15 @@ const DUNGEON_ITEMS = {
     Items.OOT_SMALL_KEY_BOTW,
     Items.OOT_KEY_RING_BOTW,
     Items.OOT_RUPEE_SILVER_BOTW,
+    Items.OOT_POUCH_SILVER_BOTW,
     Items.OOT_MAP_BOTW,
     Items.OOT_COMPASS_BOTW
   ],
   IC: [
     Items.OOT_RUPEE_SILVER_IC_BLOCK,
     Items.OOT_RUPEE_SILVER_IC_SCYTHE,
+    Items.OOT_POUCH_SILVER_IC_BLOCK,
+    Items.OOT_POUCH_SILVER_IC_SCYTHE,
     Items.OOT_MAP_IC,
     Items.OOT_COMPASS_IC
   ],
@@ -107,6 +119,9 @@ const DUNGEON_ITEMS = {
     Items.OOT_RUPEE_SILVER_GTG_SLOPES,
     Items.OOT_RUPEE_SILVER_GTG_LAVA,
     Items.OOT_RUPEE_SILVER_GTG_WATER,
+    Items.OOT_POUCH_SILVER_GTG_SLOPES,
+    Items.OOT_POUCH_SILVER_GTG_LAVA,
+    Items.OOT_POUCH_SILVER_GTG_WATER,
   ],
   Ganon: [
     Items.OOT_SMALL_KEY_GANON,
@@ -117,6 +132,12 @@ const DUNGEON_ITEMS = {
     Items.OOT_RUPEE_SILVER_GANON_WATER,
     Items.OOT_RUPEE_SILVER_GANON_SHADOW,
     Items.OOT_RUPEE_SILVER_GANON_SPIRIT,
+    Items.OOT_POUCH_SILVER_GANON_LIGHT,
+    Items.OOT_POUCH_SILVER_GANON_FOREST,
+    Items.OOT_POUCH_SILVER_GANON_FIRE,
+    Items.OOT_POUCH_SILVER_GANON_WATER,
+    Items.OOT_POUCH_SILVER_GANON_SHADOW,
+    Items.OOT_POUCH_SILVER_GANON_SPIRIT,
     Items.OOT_BOSS_KEY_GANON
   ],
   WF: [

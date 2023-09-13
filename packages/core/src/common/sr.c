@@ -98,6 +98,8 @@ int comboSilverRupeesIncCount(int id, int noEffect)
 
     data = &gSilverRupeeData[id];
     tmp = comboSilverRupeesGetCount(id) + 1;
+    if (tmp > data->count)
+        tmp = data->count;
     (*(kSilverRupeeCounts[id >> 2])) &= ~(0xff << ((id & 3) * 8));
     (*(kSilverRupeeCounts[id >> 2])) |= (tmp << ((id & 3) * 8));
 

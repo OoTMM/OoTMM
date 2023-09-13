@@ -30,9 +30,9 @@
   dungeon: GTG
   exits:
     "Gerudo Training Grounds Right Path": "true"
-    "Gerudo Training Grounds Water Room": "has(RUPEE_SILVER_GTG_LAVA, 6) && (can_longshot || can_use_bow || (trick(OOT_MQ_GTG_FLAMES) && (can_hookshot || has_hover_boots)))"
+    "Gerudo Training Grounds Water Room": "silver_rupees_gtg_lava_mq && (can_longshot || can_use_bow || (trick(OOT_MQ_GTG_FLAMES) && (can_hookshot || has_hover_boots)))"
   events:
-    GTG_LAVA_TARGETS: "has(RUPEE_SILVER_GTG_LAVA, 6)"
+    GTG_LAVA_TARGETS: "silver_rupees_gtg_lava_mq"
   locations:
     "MQ Gerudo Training Grounds SR Lava Back-Left": "(has_hover_boots || event(GTG_LAVA_TARGETS)) && (can_use_bow || ((can_longshot || (trick(OOT_MQ_GTG_FLAMES) && can_hookshot)) && has_fire) || (trick(OOT_MQ_GTG_FLAMES) && has_hover_boots && has_fire_or_sticks))"
     "MQ Gerudo Training Grounds SR Lava Back-Right": "(has_hover_boots || event(GTG_LAVA_TARGETS)) && (can_use_bow || ((can_longshot || (trick(OOT_MQ_GTG_FLAMES) && can_hookshot)) && has_fire) || (trick(OOT_MQ_GTG_FLAMES) && has_hover_boots && has_fire_or_sticks))"
@@ -47,7 +47,7 @@
   exits:
     "Gerudo Training Grounds Lava Room": "true"
   locations:
-    "MQ Gerudo Training Grounds Water Room Chest": "has(RUPEE_SILVER_GTG_WATER, 3)"
+    "MQ Gerudo Training Grounds Water Room Chest": "silver_rupees_gtg_water_mq"
     "MQ Gerudo Training Grounds SR Water Top-Left": "has_iron_boots && has_tunic_zora && has_fire"
     "MQ Gerudo Training Grounds SR Water Center": "has_iron_boots && has_tunic_zora && has_fire"
     "MQ Gerudo Training Grounds SR Water Bottom-Right": "has_iron_boots && has_tunic_zora && has_fire"
@@ -64,7 +64,7 @@
   dungeon: GTG
   exits:
     "Gerudo Training Grounds Left Path": "true"
-    "Gerudo Training Grounds Stalfos Room": "has(RUPEE_SILVER_GTG_SLOPES, 5)"
+    "Gerudo Training Grounds Stalfos Room": "silver_rupees_gtg_slopes"
   locations:
     "MQ Gerudo Training Grounds SR Slopes Top Right": "true"
     "MQ Gerudo Training Grounds SR Slopes Middle": "true"
@@ -84,10 +84,10 @@
   dungeon: GTG
   exits:
     "Gerudo Training Grounds Lava Room": "can_longshot || (can_hookshot && (has_fire_arrows || trick(OOT_MQ_GTG_FLAMES))) || (has_hover_boots && trick(OOT_MQ_GTG_FLAMES) && event(GTG_LAVA_TARGETS))"
-    "Gerudo Training Grounds Water Room": "has(RUPEE_SILVER_GTG_LAVA, 6) && event(GTG_LAVA_TARGETS) && (can_hookshot || has_hover_boots || trick(OOT_MQ_GTG_FLAMES))"
+    "Gerudo Training Grounds Water Room": "silver_rupees_gtg_lava_mq && event(GTG_LAVA_TARGETS) && (can_hookshot || has_hover_boots || trick(OOT_MQ_GTG_FLAMES))"
   events:
     GTG_LAVA_HAMMER: "can_hammer"
-    GTG_LAVA_TARGETS: "has(RUPEE_SILVER_GTG_LAVA, 6)"
+    GTG_LAVA_TARGETS: "silver_rupees_gtg_lava_mq"
   locations:
     "MQ Gerudo Training Grounds Spinning Statue Chest": "can_use_bow"
     "MQ Gerudo Training Grounds Torch Slug Room Clear Chest": "soul_iron_knuckle && soul(SOUL_TORCH_SLUG)"

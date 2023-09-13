@@ -209,6 +209,31 @@ const KEY_RINGS_MM = new Map([
   [Items.MM_SMALL_KEY_ST, Items.MM_KEY_RING_ST],
 ]);
 
+const SILVER_POUCHES = new Map([
+  [Items.OOT_RUPEE_SILVER_DC, Items.OOT_POUCH_SILVER_DC],
+  [Items.OOT_RUPEE_SILVER_BOTW, Items.OOT_POUCH_SILVER_BOTW],
+  [Items.OOT_RUPEE_SILVER_SPIRIT_CHILD, Items.OOT_POUCH_SILVER_SPIRIT_CHILD],
+  [Items.OOT_RUPEE_SILVER_SPIRIT_SUN, Items.OOT_POUCH_SILVER_SPIRIT_SUN],
+  [Items.OOT_RUPEE_SILVER_SPIRIT_BOULDERS, Items.OOT_POUCH_SILVER_SPIRIT_BOULDERS],
+  [Items.OOT_RUPEE_SILVER_SPIRIT_LOBBY, Items.OOT_POUCH_SILVER_SPIRIT_LOBBY],
+  [Items.OOT_RUPEE_SILVER_SPIRIT_ADULT, Items.OOT_POUCH_SILVER_SPIRIT_ADULT],
+  [Items.OOT_RUPEE_SILVER_SHADOW_SCYTHE, Items.OOT_POUCH_SILVER_SHADOW_SCYTHE],
+  [Items.OOT_RUPEE_SILVER_SHADOW_PIT, Items.OOT_POUCH_SILVER_SHADOW_PIT],
+  [Items.OOT_RUPEE_SILVER_SHADOW_SPIKES, Items.OOT_POUCH_SILVER_SHADOW_SPIKES],
+  [Items.OOT_RUPEE_SILVER_SHADOW_BLADES, Items.OOT_POUCH_SILVER_SHADOW_BLADES],
+  [Items.OOT_RUPEE_SILVER_IC_SCYTHE, Items.OOT_POUCH_SILVER_IC_SCYTHE],
+  [Items.OOT_RUPEE_SILVER_IC_BLOCK, Items.OOT_POUCH_SILVER_IC_BLOCK],
+  [Items.OOT_RUPEE_SILVER_GTG_SLOPES, Items.OOT_POUCH_SILVER_GTG_SLOPES],
+  [Items.OOT_RUPEE_SILVER_GTG_LAVA, Items.OOT_POUCH_SILVER_GTG_LAVA],
+  [Items.OOT_RUPEE_SILVER_GTG_WATER, Items.OOT_POUCH_SILVER_GTG_WATER],
+  [Items.OOT_RUPEE_SILVER_GANON_SPIRIT, Items.OOT_POUCH_SILVER_GANON_SPIRIT],
+  [Items.OOT_RUPEE_SILVER_GANON_LIGHT, Items.OOT_POUCH_SILVER_GANON_LIGHT],
+  [Items.OOT_RUPEE_SILVER_GANON_FIRE, Items.OOT_POUCH_SILVER_GANON_FIRE],
+  [Items.OOT_RUPEE_SILVER_GANON_FOREST, Items.OOT_POUCH_SILVER_GANON_FOREST],
+  [Items.OOT_RUPEE_SILVER_GANON_SHADOW, Items.OOT_POUCH_SILVER_GANON_SHADOW],
+  [Items.OOT_RUPEE_SILVER_GANON_WATER, Items.OOT_POUCH_SILVER_GANON_WATER],
+]);
+
 export class LogicPassWorldTransform {
   private pool: PlayerItems = new Map;
   private locsByItem = new Map<PlayerItem, Set<Location>>();
@@ -944,6 +969,20 @@ export class LogicPassWorldTransform {
           if (this.pool.has(piKey)) {
             this.removePlayerItem(piKey);
             this.addPlayerItem(piRing);
+          }
+        }
+      }
+    }
+
+    /* Handle silver pouches */
+    if (settings.silverRupeePouches) {
+      for (let worldId = 0; worldId < this.state.worlds.length; ++worldId) {
+        for (const [rupee, pouch] of SILVER_POUCHES.entries()) {
+          const piRupee = makePlayerItem(rupee, worldId);
+          const piPouch = makePlayerItem(pouch, worldId);
+          if (this.pool.has(piRupee)) {
+            this.removePlayerItem(piRupee);
+            this.addPlayerItem(piPouch);
           }
         }
       }

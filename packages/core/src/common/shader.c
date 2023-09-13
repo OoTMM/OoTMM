@@ -945,6 +945,33 @@ static const Gfx* const kWalletRupee[] = {
     kWalletRupeeSilver,
 };
 
+static const Gfx kWalletBodyLightBrown[] = {
+    gsDPPipeSync(),
+    gsDPSetPrimColor(0x00, 0x00, 160, 130, 100, 255),
+    gsDPSetEnvColor(70, 60, 50, 255),
+    gsSPEndDisplayList(),
+};
+
+static const Gfx kWalletBodyDarkBrown[] = {
+    gsDPPipeSync(),
+    gsDPSetPrimColor(0x00, 0x00, 150, 80, 20, 255),
+    gsDPSetEnvColor(40, 20, 0, 255),
+    gsSPEndDisplayList(),
+};
+
+static const Gfx kWalletBodyGray[] = {
+    gsDPPipeSync(),
+    gsDPSetPrimColor(0x00, 0x00, 50, 50, 50, 255),
+    gsDPSetEnvColor(15, 15, 15, 255),
+    gsSPEndDisplayList(),
+};
+
+static const Gfx* const kWalletBody[] = {
+    kWalletBodyLightBrown,
+    kWalletBodyDarkBrown,
+    kWalletBodyGray,
+};
+
 void Shader_Wallet(GameState_Play* play, s16 index)
 {
     const Shader* shader;
@@ -953,7 +980,7 @@ void Shader_Wallet(GameState_Play* play, s16 index)
     OPEN_DISPS(play->gs.gfx);
     InitListPolyOpa(play->gs.gfx);
     gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
-    gSPDisplayList(POLY_OPA_DISP++, shader->lists[1]);
+    gSPDisplayList(POLY_OPA_DISP++, LIST_PTR(kWalletBody[shader->lists[1]]));
     gSPDisplayList(POLY_OPA_DISP++, shader->lists[0]);
     gSPDisplayList(POLY_OPA_DISP++, shader->lists[2]);
     gSPDisplayList(POLY_OPA_DISP++, shader->lists[3]);

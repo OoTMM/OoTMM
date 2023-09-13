@@ -30,7 +30,7 @@
 "Ganon Castle Light 2":
   dungeon: Ganon
   exits:
-    "Ganon Castle Light End": "has(RUPEE_SILVER_GANON_LIGHT, 5) && has_lens"
+    "Ganon Castle Light End": "silver_rupees_ganon_light && has_lens"
   locations:
     "Ganon Castle SR Light Alcove Right": "true"
     "Ganon Castle SR Light Alcove Left": "true"
@@ -54,7 +54,7 @@
 "Ganon Castle Forest 2":
   dungeon: Ganon
   exits:
-    "Ganon Castle Forest End": "has(RUPEE_SILVER_GANON_FOREST, 5)"
+    "Ganon Castle Forest End": "silver_rupees_ganon_forest"
   locations:
     "Ganon Castle SR Forest Center Right": "true"
     "Ganon Castle SR Forest Front": "true"
@@ -71,7 +71,7 @@
 "Ganon Castle Fire":
   dungeon: Ganon
   exits:
-    "Ganon Castle Fire End": "has(RUPEE_SILVER_GANON_FIRE, 5) && has_tunic_goron_strict && (can_longshot || climb_anywhere)"
+    "Ganon Castle Fire End": "silver_rupees_ganon_fire && has_tunic_goron_strict && (can_longshot || climb_anywhere)"
   locations:
     "Ganon Castle SR Fire Back Right": "has_tunic_goron"
     "Ganon Castle SR Fire Left": "has_tunic_goron"
@@ -110,7 +110,7 @@
 "Ganon Castle Spirit":
   dungeon: Ganon
   exits:
-    "Ganon Castle Spirit 2": "has(RUPEE_SILVER_GANON_SPIRIT, 5)"
+    "Ganon Castle Spirit 2": "silver_rupees_ganon_spirit"
   locations:
     "Ganon Castle SR Spirit Center Midair": "can_hookshot"
     "Ganon Castle SR Spirit Front Right": "true"
