@@ -17,12 +17,12 @@
 "midnight": "between(NIGHT1_AM_12_00, DAY2_AM_06_00) || between(NIGHT2_AM_12_00, DAY3_AM_06_00) || after(NIGHT3_AM_12_00)"
 
 # Ocarina
-"ocarina_button(x)": "cond(setting(ocarinaButtonsShuffleMm), has(x), true)"
-"ocarina_button_a": "ocarina_button(BUTTON_A)"
-"ocarina_button_right": "ocarina_button(BUTTON_C_RIGHT)"
-"ocarina_button_left": "ocarina_button(BUTTON_C_LEFT)"
-"ocarina_button_up": "ocarina_button(BUTTON_C_UP)"
-"ocarina_button_down": "ocarina_button(BUTTON_C_DOWN)"
+"ocarina_button(x, y)": "cond(setting(ocarinaButtonsShuffleMm), cond(setting(sharedOcarinaButtons), has(y), has(x)), true)"
+"ocarina_button_a": "ocarina_button(BUTTON_A, SHARED_BUTTON_A)"
+"ocarina_button_right": "ocarina_button(BUTTON_C_RIGHT, SHARED_BUTTON_C_RIGHT)"
+"ocarina_button_left": "ocarina_button(BUTTON_C_LEFT, SHARED_BUTTON_C_LEFT)"
+"ocarina_button_up": "ocarina_button(BUTTON_C_UP, SHARED_BUTTON_C_UP)"
+"ocarina_button_down": "ocarina_button(BUTTON_C_DOWN, SHARED_BUTTON_C_DOWN)"
 
 "ocarina_button_any2": "ocarina_button_any2_a || ocarina_button_any2_right || ocarina_button_any2_left || ocarina_button_any2_up"
 "ocarina_button_any2_a": "ocarina_button_a && (ocarina_button_right || ocarina_button_left || ocarina_button_up || ocarina_button_down)"

@@ -706,6 +706,10 @@ export class LogicPassWorldTransform {
       this.shareItems(SharedItemGroups.SKELETON_KEY);
     }
 
+    if (settings.sharedOcarinaButtons) {
+      this.shareItems(SharedItemGroups.OCARINA_BUTTONS);
+    }
+
     switch (settings.itemPool) {
     case 'scarce':
       this.scarcifyPool(1);

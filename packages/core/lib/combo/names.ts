@@ -558,6 +558,11 @@ const ITEM_NAMES: {[k in ItemID]: string} = {
   MM_BUTTON_C_LEFT: "C-Left Button (MM)",
   MM_BUTTON_C_UP: "C-Up Button (MM)",
   MM_BUTTON_C_DOWN: "C-Down Button (MM)",
+  SHARED_BUTTON_A: "A Button",
+  SHARED_BUTTON_C_RIGHT: "C-Right Button",
+  SHARED_BUTTON_C_LEFT: "C-Left Button",
+  SHARED_BUTTON_C_UP: "C-Up Button",
+  SHARED_BUTTON_C_DOWN: "C-Down Button",
 };
 
 export function itemName(item: string) {

@@ -862,4 +862,9 @@ export const REQUIRED = new Set([
   Items.MM_BUTTON_C_LEFT,
   Items.MM_BUTTON_C_UP,
   Items.MM_BUTTON_C_DOWN,
+  Items.SHARED_BUTTON_A,
+  Items.SHARED_BUTTON_C_RIGHT,
+  Items.SHARED_BUTTON_C_LEFT,
+  Items.SHARED_BUTTON_C_UP,
+  Items.SHARED_BUTTON_C_DOWN,
 ]);

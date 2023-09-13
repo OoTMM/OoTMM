@@ -797,6 +797,28 @@ void comboAddItemSharedMm(s16 gi, int noEffect)
 
     if (comboConfig(CFG_SHARED_SKELETON_KEY) && gi == GI_MM_SKELETON_KEY)
         comboAddSkeletonKeyOot();
+
+    if (comboConfig(CFG_SHARED_OCARINA_BUTTONS))
+    {
+        switch (gi)
+        {
+        case GI_MM_BUTTON_A:
+            gSharedCustomSave.ocarinaButtonMaskOot |= A_BUTTON;
+            break;
+        case GI_MM_BUTTON_C_RIGHT:
+            gSharedCustomSave.ocarinaButtonMaskOot |= R_CBUTTONS;
+            break;
+        case GI_MM_BUTTON_C_LEFT:
+            gSharedCustomSave.ocarinaButtonMaskOot |= L_CBUTTONS;
+            break;
+        case GI_MM_BUTTON_C_UP:
+            gSharedCustomSave.ocarinaButtonMaskOot |= U_CBUTTONS;
+            break;
+        case GI_MM_BUTTON_C_DOWN:
+            gSharedCustomSave.ocarinaButtonMaskOot |= D_CBUTTONS;
+            break;
+        }
+    }
 }
 
 int comboAddItemMm(s16 gi, int noEffect)

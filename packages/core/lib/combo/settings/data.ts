@@ -1121,6 +1121,13 @@ export const SETTINGS = [{
   default: false,
   cond: (s: any) => s.enemySoulsOot && s.enemySoulsMm,
 }, {
+  key: 'sharedOcarinaButtons',
+  name: 'Shared Ocarina Buttons',
+  category: 'items.shared',
+  type: 'boolean',
+  default: false,
+  cond: (s: any) => s.ocarinaButtonsShuffleOot && s.ocarinaButtonsShuffleMm,
+}, {
   key: 'sharedSkeletonKey',
   name: 'Shared Skeleton Key',
   category: 'items.shared',
