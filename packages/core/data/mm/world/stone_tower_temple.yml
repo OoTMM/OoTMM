@@ -22,7 +22,7 @@
   dungeon: ST
   exits:
     "Stone Tower Temple Entrance": "true"
-    "Stone Tower Temple West Garden": "can_play(SONG_EMPTINESS) && has_mask_goron && (has_explosives || trick_keg_explosives)"
+    "Stone Tower Temple West Garden": "can_play_emptiness && has_mask_goron && (has_explosives || trick_keg_explosives)"
 "Stone Tower Temple West Garden":
   dungeon: ST
   exits:
@@ -53,7 +53,7 @@
 "Stone Tower Temple Center Ledge":
   dungeon: ST
   exits:
-    "Stone Tower Temple West Garden": "small_keys_st(4) || (small_keys_st(3) && has_mask_goron && (has_explosives || trick_keg_explosives) && can_play(SONG_EMPTINESS))"
+    "Stone Tower Temple West Garden": "small_keys_st(4) || (small_keys_st(3) && has_mask_goron && (has_explosives || trick_keg_explosives) && can_play_emptiness)"
     "Stone Tower Temple Center": "has_mask_zora || soul(SOUL_DEXIHAND)"
     "Stone Tower Temple Water Bridge": "(can_goron_bomb_jump && can_use_ice_arrows) || short_hook_anywhere"
   locations:

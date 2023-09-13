@@ -898,6 +898,20 @@ export const SETTINGS = [{
   default: false,
   cond: (s: any) => s.silverRupeeShuffle !== 'vanilla',
 }, {
+  key: 'ocarinaButtonsShuffleOot',
+  name: 'Ocarina Buttons Shuffle (OoT)',
+  category: 'items.extensions',
+  type: 'boolean',
+  description: 'Adds the Ocarina Buttons as items that are shuffled.',
+  default: false,
+}, {
+  key: 'ocarinaButtonsShuffleMm',
+  name: 'Ocarina Buttons Shuffle (MM)',
+  category: 'items.extensions',
+  type: 'boolean',
+  description: 'Adds the Ocarina Buttons as items that are shuffled.',
+  default: false,
+}, {
   key: 'enemySoulsOot',
   name: 'Enemy Souls (OoT)',
   category: 'items.extensions',
@@ -1106,6 +1120,13 @@ export const SETTINGS = [{
   type: 'boolean',
   default: false,
   cond: (s: any) => s.enemySoulsOot && s.enemySoulsMm,
+}, {
+  key: 'sharedOcarinaButtons',
+  name: 'Shared Ocarina Buttons',
+  category: 'items.shared',
+  type: 'boolean',
+  default: false,
+  cond: (s: any) => s.ocarinaButtonsShuffleOot && s.ocarinaButtonsShuffleMm,
 }, {
   key: 'sharedSkeletonKey',
   name: 'Shared Skeleton Key',

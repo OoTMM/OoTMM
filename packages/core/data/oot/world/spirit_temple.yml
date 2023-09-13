@@ -101,7 +101,7 @@
     "Spirit Temple Adult Climb": "cond(climb_anywhere, (has_explosives && has_mirror_shield && small_keys_spirit(1)) || small_keys_spirit(3), small_keys_spirit(1))"
     "Spirit Temple Adult Boulders": "has_ranged_weapon || can_boomerang || has_bombchu"
   locations:
-    "Spirit Temple Adult Lullaby": "can_play(SONG_ZELDA) && (can_hookshot || climb_anywhere)"
+    "Spirit Temple Adult Lullaby": "can_play_zelda && (can_hookshot || climb_anywhere)"
 "Spirit Temple Adult Boulders":
   dungeon: Spirit
   locations:
@@ -148,8 +148,8 @@
     "Spirit Temple Adult Climb": "true"
     "Spirit Temple Adult Upper": "small_keys_spirit(4)"
   locations:
-    "Spirit Temple Statue Hands": "((((setting(agelessBoots) && trick(OOT_SPIRIT_CHILD_HOVER) && has(BOOTS_HOVER)) || (setting(agelessHookshot) && has_hookshot(1))) && has_explosives) || event(SPIRIT_ADULT_DOOR) || (event(SPIRIT_CHILD_DOOR) && ((trick(OOT_SPIRIT_CHILD_HOVER) && has_hover_boots) || can_hookshot)) || climb_anywhere) && can_play(SONG_ZELDA)"
-    "Spirit Temple Statue Upper Right": "((((setting(agelessBoots) && trick(OOT_SPIRIT_CHILD_HOVER) && has(BOOTS_HOVER)) || (setting(agelessHookshot) && has_hookshot(1))) && has_explosives) || (event(SPIRIT_ADULT_DOOR) && (has_hover_boots || can_hookshot)) || (event(SPIRIT_CHILD_DOOR) && ((trick(OOT_SPIRIT_CHILD_HOVER) && has_hover_boots) || can_hookshot)) || climb_anywhere) && can_play(SONG_ZELDA)"
+    "Spirit Temple Statue Hands": "((((setting(agelessBoots) && trick(OOT_SPIRIT_CHILD_HOVER) && has(BOOTS_HOVER)) || (setting(agelessHookshot) && has_hookshot(1))) && has_explosives) || event(SPIRIT_ADULT_DOOR) || (event(SPIRIT_CHILD_DOOR) && ((trick(OOT_SPIRIT_CHILD_HOVER) && has_hover_boots) || can_hookshot)) || climb_anywhere) && can_play_zelda"
+    "Spirit Temple Statue Upper Right": "((((setting(agelessBoots) && trick(OOT_SPIRIT_CHILD_HOVER) && has(BOOTS_HOVER)) || (setting(agelessHookshot) && has_hookshot(1))) && has_explosives) || (event(SPIRIT_ADULT_DOOR) && (has_hover_boots || can_hookshot)) || (event(SPIRIT_CHILD_DOOR) && ((trick(OOT_SPIRIT_CHILD_HOVER) && has_hover_boots) || can_hookshot)) || climb_anywhere) && can_play_zelda"
     "Spirit Temple Pot Adult Upper": "small_keys_spirit(4)"
 "Spirit Temple Adult Upper":
   dungeon: Spirit
@@ -182,7 +182,7 @@
   events:
     SPIRIT_LIGHT_STATUE: "has_mirror_shield && has_explosives"
   locations:
-    "Spirit Temple Adult Boss Key Chest": "can_play(SONG_ZELDA) && (can_hookshot && can_hit_triggers_distance) || climb_anywhere || hookshot_anywhere"
+    "Spirit Temple Adult Boss Key Chest": "can_play_zelda && (can_hookshot && can_hit_triggers_distance) || climb_anywhere || hookshot_anywhere"
     "Spirit Temple Adult Topmost Sun on Wall": "has_mirror_shield"
     "Spirit Temple Flying Pot Topmost 1": "soul_flying_pot"
     "Spirit Temple Flying Pot Topmost 2": "soul_flying_pot"

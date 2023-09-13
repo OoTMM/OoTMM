@@ -25,3 +25,8 @@ PATCH_START 0x800c2860
    nop
   move    ra,v0
 PATCH_END
+
+/* Call our button masking code */
+PATCH_START 0x800c1f78
+  j OcarinaMaskButtons
+PATCH_END

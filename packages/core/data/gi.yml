@@ -301,6 +301,11 @@ OOT_POUCH_SILVER_GANON_FOREST:            0x12e
 OOT_POUCH_SILVER_GANON_SHADOW:            0x12f
 OOT_POUCH_SILVER_GANON_WATER:             0x130
 OOT_RUPEE_MAGICAL:                        0x131
+OOT_BUTTON_A:                             0x132
+OOT_BUTTON_C_RIGHT:                       0x133
+OOT_BUTTON_C_LEFT:                        0x134
+OOT_BUTTON_C_UP:                          0x135
+OOT_BUTTON_C_DOWN:                        0x136
 
 MM_RUPEE_GREEN:               0x01
 MM_RUPEE_BLUE:                0x02
@@ -535,6 +540,11 @@ MM_KEY_RING_SH:                          0x12c
 MM_KEY_RING_GB:                          0x12d
 MM_KEY_RING_ST:                          0x12e
 MM_SKELETON_KEY:                         0x12f
+MM_BUTTON_A:                             0x130
+MM_BUTTON_C_RIGHT:                       0x131
+MM_BUTTON_C_LEFT:                        0x132
+MM_BUTTON_C_UP:                          0x133
+MM_BUTTON_C_DOWN:                        0x134
 
 # Special
 # MM_SOUL_SKULL_KID:                       0xf7

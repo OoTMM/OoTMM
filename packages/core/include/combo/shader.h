@@ -239,5 +239,10 @@ extern const Shader kShaders[256];
 #define DRAWGI_WALLET5                      0xda
 #define DRAWGI_OOT_SILVER_POUCH             0xdb
 #define DRAWGI_OOT_RUPEE_MAGICAL            0xdc
+#define DRAWGI_BUTTON_A                     0xdd
+#define DRAWGI_BUTTON_C_RIGHT               0xde
+#define DRAWGI_BUTTON_C_LEFT                0xdf
+#define DRAWGI_BUTTON_C_UP                  0xe0
+#define DRAWGI_BUTTON_C_DOWN                0xe1
 
 #endif

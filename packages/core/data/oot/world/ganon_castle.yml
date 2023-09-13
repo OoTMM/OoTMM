@@ -26,7 +26,7 @@
     "Ganon Castle Light Chest Around 5": "true"
     "Ganon Castle Light Chest Around 6": "true"
     "Ganon Castle Light Chest Center": "soul_keese && soul_skulltula && has_lens && (has_weapon || has_explosives_or_hammer || can_use_slingshot || can_use_sticks)"
-    "Ganon Castle Light Chest Lullaby": "small_keys_ganon(1) && can_play(SONG_ZELDA)"
+    "Ganon Castle Light Chest Lullaby": "small_keys_ganon(1) && can_play_zelda"
 "Ganon Castle Light 2":
   dungeon: Ganon
   exits:

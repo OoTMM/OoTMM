@@ -36,7 +36,7 @@
     "Water Temple Map Room": "event(WATER_LEVEL_RESET) || climb_anywhere || longshot_anywhere"
     "Water Temple Shell Room": "event(WATER_LEVEL_LOW) && (can_use_bow || has_fire)"
   events:
-    WATER_LEVEL_LOW: "can_play(SONG_ZELDA)"
+    WATER_LEVEL_LOW: "can_play_zelda"
   locations:
     "Water Temple Bombable Chest": "(event(WATER_LEVEL_MIDDLE) || (event(WATER_LEVEL_LOW) && (climb_anywhere || longshot_anywhere))) && has_explosives"
     "Water Temple Pot Ruto Room 1": "event(WATER_LEVEL_LOW) || (has_iron_boots && can_hookshot)"
@@ -59,7 +59,7 @@
   exits:
     "Water Temple Center Bottom": "true"
   events:
-    WATER_LEVEL_MIDDLE: "can_play(SONG_ZELDA)"
+    WATER_LEVEL_MIDDLE: "can_play_zelda"
   locations:
     "Water Temple GS Center": "can_longshot || hookshot_anywhere || (climb_anywhere && (has_ranged_weapon || has_bombchu))"
 "Water Temple Under Center":

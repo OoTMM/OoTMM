@@ -259,6 +259,12 @@ static int isItemAmbiguousOot(s16 gi)
         return !comboConfig(CFG_SHARED_SOULS);
     case GI_OOT_SKELETON_KEY:
         return !comboConfig(CFG_SHARED_SKELETON_KEY);
+    case GI_OOT_BUTTON_A:
+    case GI_OOT_BUTTON_C_RIGHT:
+    case GI_OOT_BUTTON_C_LEFT:
+    case GI_OOT_BUTTON_C_DOWN:
+    case GI_OOT_BUTTON_C_UP:
+        return !comboConfig(CFG_SHARED_OCARINA_BUTTONS);
     case GI_OOT_BOMBCHU_10:
     case GI_OOT_MAGIC_BEAN:
     case GI_OOT_BOTTLE_EMPTY:
@@ -386,6 +392,12 @@ static int isItemAmbiguousMm(s16 gi)
         return !comboConfig(CFG_SHARED_SOULS);
     case GI_MM_SKELETON_KEY:
         return !comboConfig(CFG_SHARED_SKELETON_KEY);
+    case GI_MM_BUTTON_A:
+    case GI_MM_BUTTON_C_RIGHT:
+    case GI_MM_BUTTON_C_LEFT:
+    case GI_MM_BUTTON_C_DOWN:
+    case GI_MM_BUTTON_C_UP:
+        return !comboConfig(CFG_SHARED_OCARINA_BUTTONS);
     case GI_MM_BOMBCHU:
     case GI_MM_MAGIC_BEAN:
     case GI_MM_BOTTLE_POTION_RED:

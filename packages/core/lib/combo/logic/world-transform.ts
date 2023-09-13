@@ -175,6 +175,11 @@ const ITEM_POOL_PLENTIFUL = new Set([
   ...ItemGroups.OOT_SOULS,
   ...ItemGroups.MM_SOULS,
   ...ItemGroups.SHARED_SOULS,
+  Items.OOT_BUTTON_A,
+  Items.OOT_BUTTON_C_RIGHT,
+  Items.OOT_BUTTON_C_LEFT,
+  Items.OOT_BUTTON_C_UP,
+  Items.OOT_BUTTON_C_DOWN,
 ]);
 
 const ITEMS_HEART_PIECES_CONTAINERS_BY_GAME = {
@@ -701,6 +706,10 @@ export class LogicPassWorldTransform {
       this.shareItems(SharedItemGroups.SKELETON_KEY);
     }
 
+    if (settings.sharedOcarinaButtons) {
+      this.shareItems(SharedItemGroups.OCARINA_BUTTONS);
+    }
+
     switch (settings.itemPool) {
     case 'scarce':
       this.scarcifyPool(1);
@@ -854,13 +863,30 @@ export class LogicPassWorldTransform {
       this.addItem(Items.OOT_SKELETON_KEY);
     }
 
+    if (settings.skeletonKeyMm) {
+      this.addItem(Items.MM_SKELETON_KEY);
+    }
+
     /* Add magical rupee */
     if (settings.magicalRupee) {
       this.addItem(Items.OOT_RUPEE_MAGICAL);
     }
 
-    if (settings.skeletonKeyMm) {
-      this.addItem(Items.MM_SKELETON_KEY);
+    /* Add ocarina buttons */
+    if (settings.ocarinaButtonsShuffleOot) {
+      this.addItem(Items.OOT_BUTTON_A);
+      this.addItem(Items.OOT_BUTTON_C_RIGHT);
+      this.addItem(Items.OOT_BUTTON_C_LEFT);
+      this.addItem(Items.OOT_BUTTON_C_UP);
+      this.addItem(Items.OOT_BUTTON_C_DOWN);
+    }
+
+    if (settings.ocarinaButtonsShuffleMm) {
+      this.addItem(Items.MM_BUTTON_A);
+      this.addItem(Items.MM_BUTTON_C_RIGHT);
+      this.addItem(Items.MM_BUTTON_C_LEFT);
+      this.addItem(Items.MM_BUTTON_C_UP);
+      this.addItem(Items.MM_BUTTON_C_DOWN);
     }
 
     /* Handle extra wallets */

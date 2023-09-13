@@ -1,6 +1,6 @@
-import { ItemID } from "./items/defs";
+import { ItemID } from './items/defs';
 
-const ITEM_NAMES: {[k in ItemID as string]: string} = {
+const ITEM_NAMES: {[k in ItemID]: string} = {
   MM_ARROW_FIRE: "Fire Arrows (MM)",
   MM_ARROW_ICE: "Ice Arrows (MM)",
   MM_ARROW_LIGHT: "Light Arrows (MM)",
@@ -346,6 +346,29 @@ const ITEM_NAMES: {[k in ItemID as string]: string} = {
   OOT_RUPEE_SILVER_SPIRIT_CHILD: "Silver Rupee (Spirit Temple - Child)",
   OOT_RUPEE_SILVER_SPIRIT_LOBBY: "Silver Rupee (Spirit Temple - Lobby)",
   OOT_RUPEE_SILVER_SPIRIT_SUN: "Silver Rupee (Spirit Temple - Sun Block)",
+  OOT_POUCH_SILVER_BOTW: "Silver Rupee Pouch (Bottom of the Well)",
+  OOT_POUCH_SILVER_DC: "Silver Rupee Pouch (Dodongo's Cavern)",
+  OOT_POUCH_SILVER_GANON_FIRE: "Silver Rupee Pouch (Ganon's Castle - Fire Trial)",
+  OOT_POUCH_SILVER_GANON_FOREST: "Silver Rupee Pouch (Ganon's Castle - Forest Trial)",
+  OOT_POUCH_SILVER_GANON_LIGHT: "Silver Rupee Pouch (Ganon's Castle - Light Trial)",
+  OOT_POUCH_SILVER_GANON_SHADOW: "Silver Rupee Pouch (Ganon's Castle - Shadow Trial)",
+  OOT_POUCH_SILVER_GANON_SPIRIT: "Silver Rupee Pouch (Ganon's Castle - Spirit Trial)",
+  OOT_POUCH_SILVER_GANON_WATER: "Silver Rupee Pouch (Ganon's Castle - Water Trial)",
+  OOT_POUCH_SILVER_GTG_LAVA: "Silver Rupee Pouch (Gerudo Training Ground - Lava)",
+  OOT_POUCH_SILVER_GTG_SLOPES: "Silver Rupee Pouch (Gerudo Training Ground - Slopes)",
+  OOT_POUCH_SILVER_GTG_WATER: "Silver Rupee Pouch (Gerudo Training Ground - Water)",
+  OOT_POUCH_SILVER_IC_BLOCK: "Silver Rupee Pouch (Ice Cavern - Block)",
+  OOT_POUCH_SILVER_IC_SCYTHE: "Silver Rupee Pouch (Ice Cavern - Scythe)",
+  OOT_POUCH_SILVER_SHADOW_BLADES: "Silver Rupee Pouch (Shadow Temple - Invisible Blades)",
+  OOT_POUCH_SILVER_SHADOW_PIT: "Silver Rupee Pouch (Shadow Temple - Large Pits)",
+  OOT_POUCH_SILVER_SHADOW_SCYTHE: "Silver Rupee Pouch (Shadow Temple - Scythe)",
+  OOT_POUCH_SILVER_SHADOW_SPIKES: "Silver Rupee Pouch (Shadow Temple - Spikes)",
+  OOT_POUCH_SILVER_SPIRIT_ADULT: "Silver Rupee Pouch (Spirit Temple - Adult)",
+  OOT_POUCH_SILVER_SPIRIT_BOULDERS: "Silver Rupee Pouch (Spirit Temple - Boulders)",
+  OOT_POUCH_SILVER_SPIRIT_CHILD: "Silver Rupee Pouch (Spirit Temple - Child)",
+  OOT_POUCH_SILVER_SPIRIT_LOBBY: "Silver Rupee Pouch (Spirit Temple - Lobby)",
+  OOT_POUCH_SILVER_SPIRIT_SUN: "Silver Rupee Pouch (Spirit Temple - Sun Block)",
+  OOT_RUPEE_MAGICAL: "Magical Silver Rupee",
   OOT_RUTO_LETTER: "Ruto's Letter",
   OOT_SCALE: "Progressive Scale",
   OOT_SHIELD_DEKU: "Deku Shield",
@@ -525,6 +548,27 @@ const ITEM_NAMES: {[k in ItemID as string]: string} = {
   SHARED_TRIFORCE_WISDOM: "Triforce of Wisdom",
   SHARED_TRIFORCE: "Triforce Piece",
   SHARED_WALLET: "Progressive Wallet",
+  OOT_BUTTON_A: "A Button (OoT)",
+  OOT_BUTTON_C_RIGHT: "C-Right Button (OoT)",
+  OOT_BUTTON_C_LEFT: "C-Left Button (OoT)",
+  OOT_BUTTON_C_UP: "C-Up Button (OoT)",
+  OOT_BUTTON_C_DOWN: "C-Down Button (OoT)",
+  MM_BUTTON_A: "A Button (MM)",
+  MM_BUTTON_C_RIGHT: "C-Right Button (MM)",
+  MM_BUTTON_C_LEFT: "C-Left Button (MM)",
+  MM_BUTTON_C_UP: "C-Up Button (MM)",
+  MM_BUTTON_C_DOWN: "C-Down Button (MM)",
+  SHARED_BUTTON_A: "A Button",
+  SHARED_BUTTON_C_RIGHT: "C-Right Button",
+  SHARED_BUTTON_C_LEFT: "C-Left Button",
+  SHARED_BUTTON_C_UP: "C-Up Button",
+  SHARED_BUTTON_C_DOWN: "C-Down Button",
 };
 
-export const itemName = (item: string) => ITEM_NAMES[item] ?? item;
+export function itemName(item: string) {
+  if (ITEM_NAMES.hasOwnProperty(item)) {
+    return ITEM_NAMES[item as ItemID];
+  } else {
+    return item;
+  }
+}

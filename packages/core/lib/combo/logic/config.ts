@@ -125,6 +125,7 @@ export class LogicPassConfig {
       SHARED_WALLETS: settings.sharedWallets,
       SHARED_HEALTH: settings.sharedHealth,
       SHARED_SOULS: settings.sharedSouls,
+      SHARED_OCARINA_BUTTONS: settings.sharedOcarinaButtons,
       OOT_CROSS_WARP: settings.crossWarpOot,
       MM_CROSS_WARP: settings.crossWarpMm !== 'none',
       MM_CROSS_WARP_ADULT: settings.crossWarpMm === 'full',
@@ -170,6 +171,8 @@ export class LogicPassConfig {
       OOT_AGELESS_CHILD_TRADE: settings.agelessChildTrade,
       OOT_START_ADULT: settings.startingAge === 'adult',
       HINT_IMPORTANCE: settings.hintImportance,
+      OOT_OCARINA_BUTTONS: settings.ocarinaButtonsShuffleOot,
+      MM_OCARINA_BUTTONS: settings.ocarinaButtonsShuffleMm,
     };
 
     for (const v in exprs) {

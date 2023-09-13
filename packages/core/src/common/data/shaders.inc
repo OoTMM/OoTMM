@@ -218,3 +218,8 @@
 /* Common    Wallet 5                          */ { Shader_Wallet,                 { 0x6001850, 1, 0x60017f0, 0x60019a0, 0x6001810, 0x6001a28, 4, 0x6001ad8 }},
 /* OoT       Silver Pouch                      */ { Shader_Wallet,                 { 0x6001850, 2, 0x6001790, 0x60019a0, 0x60017b0, 0x6001a28, 4, 0x6001ad8 }},
 /* OoT       Magical Rupee                     */ { Shader_MagicalRupee,           {} },
+/* Common    A Button                          */ { Shader_Button,                 { 0, 0, CUSTOM_OBJECT_BTN_A_0 } },
+/* Common    C Right Button                    */ { Shader_Button,                 { 1, 0, CUSTOM_OBJECT_BTN_C_HORIZONTAL_0 } },
+/* Common    C Left Button                     */ { Shader_Button,                 { 1, 1, CUSTOM_OBJECT_BTN_C_HORIZONTAL_0 } },
+/* Common    C Up Button                       */ { Shader_Button,                 { 1, 0, CUSTOM_OBJECT_BTN_C_VERTICAL_0 } },
+/* Common    C Down Button                     */ { Shader_Button,                 { 1, 1, CUSTOM_OBJECT_BTN_C_VERTICAL_0 } },

@@ -16,18 +16,38 @@
 "GLOBAL":
   region: NONE
   exits:
-    "SONGS": "has_ocarina"
+    "SONG_TP_FOREST": "can_play_tp_forest"
+    "SONG_TP_FIRE": "can_play_tp_fire"
+    "SONG_TP_WATER": "can_play_tp_water"
+    "SONG_TP_SHADOW": "can_play_tp_shadow"
+    "SONG_TP_SPIRIT": "can_play_tp_spirit"
+    "SONG_TP_LIGHT": "can_play_tp_light"
+    "MM SOARING": "can_play_cross_soaring"
     "EGGS": "true"
-"SONGS":
+"SONG_TP_FOREST":
   region: NONE
   exits:
-    "Temple of Time": "has(SONG_TP_LIGHT)"
-    "Sacred Meadow": "has(SONG_TP_FOREST)"
-    "Death Mountain Crater Warp": "has(SONG_TP_FIRE)"
-    "Lake Hylia": "has(SONG_TP_WATER)"
-    "Graveyard Upper": "has(SONG_TP_SHADOW)"
-    "Desert Colossus": "has(SONG_TP_SPIRIT)"
-    "MM SOARING": "(setting(crossWarpMm, full) || (setting(crossWarpMm, childOnly) && is_child)) && has(MM_SONG_SOARING)"
+    "Sacred Meadow": "true"
+"SONG_TP_FIRE":
+  region: NONE
+  exits:
+    "Death Mountain Crater Warp": "true"
+"SONG_TP_WATER":
+  region: NONE
+  exits:
+    "Lake Hylia": "true"
+"SONG_TP_SHADOW":
+  region: NONE
+  exits:
+    "Graveyard Upper": "true"
+"SONG_TP_SPIRIT":
+  region: NONE
+  exits:
+    "Desert Colossus": "true"
+"SONG_TP_LIGHT":
+  region: NONE
+  exits:
+    "Temple of Time": "true"
 "EGGS":
   region: EGGS
   locations:
@@ -648,9 +668,9 @@
   exits:
     "Near Fairy Fountain Din": "true"
   events:
-    MAGIC: "can_play(SONG_ZELDA)"
+    MAGIC: "can_play_zelda"
   locations:
-    "Great Fairy Din's Fire": "can_play(SONG_ZELDA)"
+    "Great Fairy Din's Fire": "can_play_zelda"
 "Hyrule Castle Grotto":
   region: ENTRANCE
   exits:
@@ -696,15 +716,15 @@
   exits:
     "Near Fairy Fountain Defense": "true"
   events:
-    MAGIC: "can_play(SONG_ZELDA)"
+    MAGIC: "can_play_zelda"
   locations:
-    "Great Fairy Defense Upgrade": "can_play(SONG_ZELDA)"
+    "Great Fairy Defense Upgrade": "can_play_zelda"
 "Lost Woods":
   region: LOST_WOODS
   exits:
     "Kokiri Forest": "true"
     "Lost Woods Bridge": "can_longshot || has_hover_boots || can_ride_bean(BEAN_LOST_WOODS_EARLY) || climb_anywhere || hookshot_anywhere"
-    "Lost Woods Deep": "is_child || can_play(SONG_SARIA) || trick_mido || hookshot_anywhere || climb_anywhere"
+    "Lost Woods Deep": "is_child || can_play_saria || trick_mido || hookshot_anywhere || climb_anywhere"
     "Lost Woods Generic Grotto": "has_explosives_or_hammer"
     "Goron City Shortcut": "true"
     "Zora River": "can_dive_small || hookshot_anywhere"
@@ -718,8 +738,8 @@
     BUGS: "has_bottle && can_cut_grass"
   locations:
     "Lost Woods Target": "can_use_slingshot"
-    "Lost Woods Skull Kid": "is_child && can_play(SONG_SARIA)"
-    "Lost Woods Memory Game": "is_child && has_ocarina"
+    "Lost Woods Skull Kid": "is_child && can_play_saria"
+    "Lost Woods Memory Game": "is_child && can_play_minigame"
     "Lost Woods Scrub Sticks Upgrade": "is_child && can_hit_scrub && scrub_price(0x00)"
     "Lost Woods Odd Mushroom": "adult_trade(COJIRO)"
     "Lost Woods Poacher's Saw": "adult_trade(ODD_POTION)"
@@ -766,7 +786,7 @@
 "Lost Woods Deep":
   region: LOST_WOODS
   exits:
-    "Lost Woods": "is_child || can_play(SONG_SARIA) || (climb_anywhere && has_hover_boots) || hookshot_anywhere"
+    "Lost Woods": "is_child || can_play_saria || (climb_anywhere && has_hover_boots) || hookshot_anywhere"
     "Sacred Meadow Entryway": "true"
     "Deku Theater": "true"
     "Lost Woods Scrub Grotto": "has_explosives_or_hammer"
@@ -1027,7 +1047,7 @@
   region: GRAVEYARD
   exits:
     "Kakariko": "true"
-    "Graveyard Royal Tomb": "can_play(SONG_ZELDA)"
+    "Graveyard Royal Tomb": "can_play_zelda"
     "Graveyard Shield Grave": "is_adult || is_night"
     "Graveyard ReDead Grave": "is_adult || is_night"
     "Dampe Grave": "is_adult"
@@ -1180,9 +1200,9 @@
   exits:
     "Death Mountain Summit": "true"
   events:
-    MAGIC: "can_play(SONG_ZELDA)"
+    MAGIC: "can_play_zelda"
   locations:
-    "Great Fairy Magic Upgrade": "can_play(SONG_ZELDA)"
+    "Great Fairy Magic Upgrade": "can_play_zelda"
 "Goron City Shortcut":
   region: GORON_CITY
   exits:
@@ -1195,7 +1215,7 @@
   exits:
     "Goron City Shortcut": "event(GORON_CITY_SHORTCUT) || climb_anywhere || hookshot_anywhere"
     "Death Mountain": "true"
-    "Darunia Chamber": "(is_adult && (has_explosives || can_use_bow || has(STRENGTH))) || (is_child && can_play(SONG_ZELDA))"
+    "Darunia Chamber": "(is_adult && (has_explosives || can_use_bow || has(STRENGTH))) || (is_child && can_play_zelda)"
     "Goron Shop": "(is_adult && (has_explosives || can_use_bow || has(STRENGTH))) || (is_child && (has_bombflowers || can_use_din || event(DARUNIA_TORCH)))"
     "Goron City Grotto": "(is_adult && can_play_time) || (can_hookshot && (has_tunic_goron_strict || can_use_nayru)) || climb_anywhere"
   events:
@@ -1232,7 +1252,7 @@
     STICKS: "is_child"
     RUPEES: "is_adult"
   locations:
-    "Darunia": "is_child && can_play(SONG_SARIA)"
+    "Darunia": "is_child && can_play_saria"
     "Goron City Pot Darunia Room 1": "true"
     "Goron City Pot Darunia Room 2": "true"
     "Goron City Pot Darunia Room 3": "true"
@@ -1288,7 +1308,7 @@
   time: flow
   exits:
     "Zora River Front": "true"
-    "Zora Domain": "can_play(SONG_ZELDA) || hookshot_anywhere || (is_child && trick(OOT_DOMAIN_CUCCO)) || (has_hover_boots && trick(OOT_DOMAIN_HOVER))"
+    "Zora Domain": "can_play_zelda || hookshot_anywhere || (is_child && trick(OOT_DOMAIN_CUCCO)) || (has_hover_boots && trick(OOT_DOMAIN_HOVER))"
     "Lost Woods": "can_dive_small || hookshot_anywhere"
     "Zora River Storms Grotto": "hidden_grotto_storms"
     "Zora River Open Grotto": "true"
@@ -1304,7 +1324,7 @@
     "Zora River HP Pillar": "is_child || has_hover_boots || climb_anywhere || hookshot_anywhere || glitch_megaflip"
     "Zora River HP Platform": "is_child || has_hover_boots || climb_anywhere || hookshot_anywhere || glitch_megaflip"
     "Zora River Frogs Storms": "is_child && can_play_storms"
-    "Zora River Frogs Game": "is_child && can_play(SONG_ZELDA) && can_play(SONG_SARIA) && can_play_epona && can_play_sun && can_play_time && can_play_storms"
+    "Zora River Frogs Game": "is_child && can_play_zelda && can_play_saria && can_play_epona && can_play_sun && can_play_time && can_play_storms && can_play_minigame"
     "Zora River GS Ladder": "is_child && gs_night && can_damage_skull"
     "Zora River GS Near Grotto": "is_adult && gs_night && (can_collect_distance || climb_anywhere)"
     "Zora River GS Near Bridge": "is_adult && gs_night && (can_hookshot || (climb_anywhere && (has_ranged_weapon || has_bombchu)))"
@@ -1405,7 +1425,7 @@
     "Fishing Pond": "is_child || event(WATER_TEMPLE_CLEARED) || (is_adult && scarecrow_hookshot) || can_ride_bean(BEAN_LAKE_HYLIA) || hookshot_anywhere || climb_anywhere"
     "Lake Hylia Grotto": "true"
   events:
-    SCARECROW_CHILD: "is_child && has_ocarina"
+    SCARECROW_CHILD: "is_child && can_play_scarecrow"
     SCARECROW: "is_adult && event(SCARECROW_CHILD)"
     BEAN_LAKE_HYLIA: "can_use_beans"
     BOMBS: "can_cut_grass"
@@ -1529,9 +1549,9 @@
   exits:
     "Zora Fountain": "true"
   events:
-    MAGIC: "can_play(SONG_ZELDA)"
+    MAGIC: "can_play_zelda"
   locations:
-    "Great Fairy Farore's Wind": "can_play(SONG_ZELDA)"
+    "Great Fairy Farore's Wind": "can_play_zelda"
 "Temple of Time":
   region: TEMPLE_OF_TIME
   exits:
@@ -1633,9 +1653,9 @@
   exits:
     "Death Mountain Crater Bottom": "true"
   events:
-    MAGIC: "can_play(SONG_ZELDA)"
+    MAGIC: "can_play_zelda"
   locations:
-    "Great Fairy Magic Upgrade 2": "can_play(SONG_ZELDA)"
+    "Great Fairy Magic Upgrade 2": "can_play_zelda"
 "Gerudo Valley":
   region: GERUDO_VALLEY
   time: flow
@@ -1847,9 +1867,9 @@
   exits:
     "Desert Colossus": "true"
   events:
-    MAGIC: "can_play(SONG_ZELDA)"
+    MAGIC: "can_play_zelda"
   locations:
-    "Great Fairy Nayru's Love": "can_play(SONG_ZELDA)"
+    "Great Fairy Nayru's Love": "can_play_zelda"
 "Desert Colossus Grotto":
   region: ENTRANCE
   exits:

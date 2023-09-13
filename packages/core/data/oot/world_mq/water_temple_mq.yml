@@ -12,7 +12,7 @@
     "Water Temple Side Loop": "event(WATER_GATES) && can_longshot && (scarecrow_longshot || has_hover_boots)"
     "Water Temple Antichamber": "can_longshot && event(WATER_LEVEL_HIGH)"
   events:
-    WATER_LEVEL_LOW: "has_iron_boots && has_tunic_zora && can_play(SONG_ZELDA)"
+    WATER_LEVEL_LOW: "has_iron_boots && has_tunic_zora && can_play_zelda"
     WATER_LEVEL_HIGH: "can_hookshot || (is_adult && has_hover_boots)"
   locations:
     "MQ Water Temple Map Chest": "has_iron_boots && has_tunic_zora && has_fire && can_hookshot && event(WATER_LEVEL_HIGH)"

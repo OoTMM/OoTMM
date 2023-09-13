@@ -303,3 +303,8 @@ X(ITEM_CUSTOM,              0x80,  DRAWGI_OOT_SILVER_POUCH,             0x5f, 0x
 X(ITEM_CUSTOM,              0x80,  DRAWGI_OOT_SILVER_POUCH,             0x5f, 0x00d1, "the " C1 "Silver Pouch (Ganon Shadow)"),
 X(ITEM_CUSTOM,              0x80,  DRAWGI_OOT_SILVER_POUCH,             0x5f, 0x00d1, "the " C1 "Silver Pouch (Ganon Water)"),
 X(ITEM_CUSTOM,              0x80,  DRAWGI_OOT_RUPEE_MAGICAL,            0x5f, 0x0000, "the " C1 "Magical Rupee"),
+X(ITEM_CUSTOM,              0x80,  DRAWGI_BUTTON_A,                     0x5f, CUSTOM_OBJECT_ID_BTN_A, "the " C1 "A Button"),
+X(ITEM_CUSTOM,              0x80,  DRAWGI_BUTTON_C_RIGHT,               0x5f, CUSTOM_OBJECT_ID_BTN_C_HORIZONTAL, "the " C1 "C-Right Button"),
+X(ITEM_CUSTOM,              0x80,  DRAWGI_BUTTON_C_LEFT,                0x5f, CUSTOM_OBJECT_ID_BTN_C_HORIZONTAL, "the " C1 "C-Left Button"),
+X(ITEM_CUSTOM,              0x80,  DRAWGI_BUTTON_C_UP,                  0x5f, CUSTOM_OBJECT_ID_BTN_C_VERTICAL, "the " C1 "C-Up Button"),
+X(ITEM_CUSTOM,              0x80,  DRAWGI_BUTTON_C_DOWN,                0x5f, CUSTOM_OBJECT_ID_BTN_C_VERTICAL, "the " C1 "C-Down Button"),

@@ -38,4 +38,13 @@ const SKELETON_KEY: ItemSharedDef[] = [
   { shared: Items.SHARED_SKELETON_KEY, oot: Items.OOT_SKELETON_KEY, mm: Items.MM_SKELETON_KEY },
 ];
 
-export const SharedItemGroups = { SOULS, SKELETON_KEY };
+const OCARINA_BUTTONS: ItemSharedDef[] = [
+  { shared: Items.SHARED_BUTTON_A, oot: Items.OOT_BUTTON_A, mm: Items.MM_BUTTON_A },
+  { shared: Items.SHARED_BUTTON_C_RIGHT, oot: Items.OOT_BUTTON_C_RIGHT, mm: Items.MM_BUTTON_C_RIGHT },
+  { shared: Items.SHARED_BUTTON_C_LEFT, oot: Items.OOT_BUTTON_C_LEFT, mm: Items.MM_BUTTON_C_LEFT },
+  { shared: Items.SHARED_BUTTON_C_UP, oot: Items.OOT_BUTTON_C_UP, mm: Items.MM_BUTTON_C_UP },
+  { shared: Items.SHARED_BUTTON_C_DOWN, oot: Items.OOT_BUTTON_C_DOWN, mm: Items.MM_BUTTON_C_DOWN },
+];
+
+
+export const SharedItemGroups = { SOULS, SKELETON_KEY, OCARINA_BUTTONS };

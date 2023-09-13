@@ -108,7 +108,7 @@
 "Shadow Temple Wind Tunnel":
   dungeon: Shadow
   exits:
-    "Shadow Temple After Boat": "small_keys_shadow(5) && can_play(SONG_ZELDA) && is_adult && (can_hookshot || has(STRENGTH))"
+    "Shadow Temple After Boat": "small_keys_shadow(5) && can_play_zelda && is_adult && (can_hookshot || has(STRENGTH))"
   locations:
     "MQ Shadow Temple Wind Hint Chest": "true"
     "MQ Shadow Temple After Wind Gibdos Chest": "soul_redead_gibdo && (has_weapon || can_use_sticks || can_use_din)"

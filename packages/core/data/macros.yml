@@ -1,9 +1,3 @@
-# Shared songs
-"can_play_sun": "can_play(SONG_SUN) || can_play(SHARED_SONG_SUN)"
-"can_play_time": "can_play(SONG_TIME) || can_play(SHARED_SONG_TIME)"
-"can_play_epona": "can_play(SONG_EPONA) || can_play(SHARED_SONG_EPONA)"
-"can_play_storms": "can_play(SONG_STORMS) || can_play(SHARED_SONG_STORMS)"
-
 # Shared Souls
 "soul_octorok": "soul(SOUL_OCTOROK) || soul(SHARED_SOUL_OCTOROK)"
 "soul_wallmaster": "soul(SOUL_WALLMASTER) || soul(SHARED_SOUL_WALLMASTER)"

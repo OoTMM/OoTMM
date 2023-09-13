@@ -319,7 +319,7 @@ OotExtraFlags;
 
 typedef struct ALIGNED(16)
 {
-    u8 xflags[XFLAGS_COUNT_OOT];
+    u8  xflags[XFLAGS_COUNT_OOT];
 }
 OotCustomSave;
 

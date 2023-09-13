@@ -1,8 +1,13 @@
 "GLOBAL":
   region: NONE
   exits:
-    "OOT SONGS": "setting(crossWarpOot) && has_ocarina"
-    "SOARING": "can_play(SONG_SOARING)"
+    "OOT SONG_TP_FOREST": "can_play_cross_tp_forest"
+    "OOT SONG_TP_FIRE": "can_play_cross_tp_fire"
+    "OOT SONG_TP_WATER": "can_play_cross_tp_water"
+    "OOT SONG_TP_SHADOW": "can_play_cross_tp_shadow"
+    "OOT SONG_TP_SPIRIT": "can_play_cross_tp_spirit"
+    "OOT SONG_TP_LIGHT": "can_play_cross_tp_light"
+    "SOARING": "can_play_soaring"
 "Tingle Town":
   region: TINGLE
   locations:
@@ -333,7 +338,7 @@
   events:
     MAGIC: "can_play_time"
   exits:
-    "Moon": "can_play(SONG_ORDER) && special(MOON)"
+    "Moon": "can_play_order && special(MOON)"
   locations:
     "Clock Tower Roof Skull Kid Ocarina": "has_weapon_range && can_play_time"
     "Clock Tower Roof Skull Kid Song of Time": "has_weapon_range && can_play_time"
@@ -355,7 +360,7 @@
 "Trading Post":
   region: ENTRANCE
   events:
-    SCARECROW: "has_ocarina"
+    SCARECROW: "can_play_scarecrow"
     FISH: "true"
   exits:
     "Clock Town West": "true"
@@ -517,7 +522,7 @@
   events:
     SCRUB_TELESCOPE: "true"
     TEAR_TELESCOPE: "true"
-    SCARECROW: "has_ocarina"
+    SCARECROW: "can_play_scarecrow"
 "Astral Observatory Balcony":
   region: TERMINA_FIELD
   exits:
@@ -565,7 +570,7 @@
     "Termina Field Water Chest": "has_mask_zora"
     "Termina Field Tall Grass Chest": "true"
     "Termina Field Tree Stump Chest": "can_hookshot_short || can_use_beans"
-    "Termina Field Kamaro Mask": "can_play(SONG_HEALING) && midnight"
+    "Termina Field Kamaro Mask": "can_play_healing && midnight"
     "Termina Field Pot": "can_use_beans || has_bow"
   gossip:
     "Termina Field Gossip Southeast": "true"
@@ -1006,7 +1011,7 @@
     "Woodfall Front of Temple": "event(OPEN_WOODFALL_TEMPLE)"
     "Owl Woodfall": "true"
   events:
-    OPEN_WOODFALL_TEMPLE: "has(MASK_DEKU) && can_play(SONG_AWAKENING)"
+    OPEN_WOODFALL_TEMPLE: "has(MASK_DEKU) && can_play_awakening"
   locations:
     "Woodfall Near Owl Chest": "short_hook_anywhere"
 "Woodfall Near Fairy Fountain":
@@ -1225,7 +1230,7 @@
   exits:
     "Near Goron Graveyard": "true"
   locations:
-    "Goron Graveyard Mask": "can_use_lens_strict && can_play(SONG_HEALING)"
+    "Goron Graveyard Mask": "can_use_lens_strict && can_play_healing"
   events:
     GORON_GRAVEYARD_HOT_WATER: "has_bottle && has_mask_goron"
     WATER: "has_bottle && has_mask_goron"
@@ -1475,7 +1480,7 @@
     FISH: "true"
     FAIRY: "true"
   locations:
-    "Great Bay Coast Zora Mask": "can_play(SONG_HEALING)"
+    "Great Bay Coast Zora Mask": "can_play_healing"
     "Great Bay Coast HP": "(can_use_beans && scarecrow_hookshot) || short_hook_anywhere"
     "Great Bay Coast Fisherman HP": "can_use_wallet(1) && (can_hookshot_short || can_use_ice_arrows) && event(BOSS_GREAT_BAY) && (between(DAY1_AM_07_00, NIGHT1_AM_04_00) || between(DAY2_AM_07_00, NIGHT2_AM_04_00) || between(DAY3_AM_07_00, NIGHT3_AM_04_00))"
     "Great Bay Coast Pot Ledge 1": "can_hookshot || short_hook_anywhere"
@@ -1685,7 +1690,7 @@
   exits:
     "Zora Hall": "true"
   locations:
-    "Zora Hall Evan HP": "has_ocarina && cond(!setting(erDungeons, none) && setting(bossWarpPads, Remains), has_mask_zora, true)" #This conditional is necessary since Evan is not in his room in clear state, so you need to guarantee Zora for the check to be accessible.
+    "Zora Hall Evan HP": "can_play_minigame && cond(!setting(erDungeons, none) && setting(bossWarpPads, Remains), has_mask_zora, true)" #This conditional is necessary since Evan is not in his room in clear state, so you need to guarantee Zora for the check to be accessible.
 "Lulu's Room":
   region: ENTRANCE
   exits:
@@ -1699,7 +1704,7 @@
   exits:
     "Zora Cape": "has_mask_zora || trick(MM_ZORA_HALL_HUMAN)"
     "Zora Hall": "true"
-    "Great Bay Temple": "has_mask_zora && can_hookshot && can_play(SONG_ZORA)"
+    "Great Bay Temple": "has_mask_zora && can_hookshot && can_play_zora"
     "Owl Zora Cape": "true"
 "Behind Gorman Fence":
   region: MILK_ROAD
@@ -1771,7 +1776,7 @@
     "Beneath The Graveyard Night 2": "soul_stalchild && has(MASK_CAPTAIN) && is_night2"
     "Beneath The Graveyard Night 3": "soul_stalchild && has(MASK_CAPTAIN) && is_night3"
   locations:
-    "Ikana Graveyard Captain Mask": "soul(SOUL_CAPTAIN_KEETA) && can_play(SONG_AWAKENING) && has_arrows && can_fight"
+    "Ikana Graveyard Captain Mask": "soul(SOUL_CAPTAIN_KEETA) && can_play_awakening && has_arrows && can_fight"
 "Ikana Graveyard Grotto":
   region: ENTRANCE
   events:
@@ -1930,7 +1935,7 @@
   exits:
     "Ikana Canyon": "true"
   locations:
-    "Music Box House Gibdo Mask": "can_play(SONG_HEALING)"
+    "Music Box House Gibdo Mask": "can_play_healing"
 "Ghost Hut":
   region: ENTRANCE
   exits:
