@@ -49,6 +49,7 @@
 "can_play_emptiness": "can_play(SONG_EMPTINESS) && ocarina_button_left && ocarina_button_right && ocarina_button_up && ocarina_button_down"
 "can_play_order": "can_play(SONG_ORDER) && ocarina_button_right && ocarina_button_down && ocarina_button_up && ocarina_button_a"
 
+"can_play_evan": "has_ocarina && ocarina_button_a && ocarina_button_right && ocarina_button_down && ocarina_button_left"
 "can_play_minigame": "has_ocarina && ocarina_button_a && ocarina_button_right && ocarina_button_down && ocarina_button_left && ocarina_button_up"
 "can_play_scarecrow": "has_ocarina && ocarina_button_any2"
 
