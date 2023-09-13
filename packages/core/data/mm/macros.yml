@@ -16,6 +16,12 @@
 "final_day": "after(DAY3_AM_06_00)"
 "midnight": "between(NIGHT1_AM_12_00, DAY2_AM_06_00) || between(NIGHT2_AM_12_00, DAY3_AM_06_00) || after(NIGHT3_AM_12_00)"
 
+# Ocarina
+"can_play_sun": "can_play(SONG_SUN) || can_play(SHARED_SONG_SUN)"
+"can_play_time": "can_play(SONG_TIME) || can_play(SHARED_SONG_TIME)"
+"can_play_epona": "can_play(SONG_EPONA) || can_play(SHARED_SONG_EPONA)"
+"can_play_storms": "can_play(SONG_STORMS) || can_play(SHARED_SONG_STORMS)"
+
 "has_ocarina_n(x)": "has(OCARINA, x) || has(SHARED_OCARINA, x)"
 "has_ocarina": "cond(setting(sharedOcarina), cond(setting(fairyOcarinaMm), has_ocarina_n(1), has_ocarina_n(2)), has_ocarina_n(1))"
 "can_play(song)": "has_ocarina && has(song)"

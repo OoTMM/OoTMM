@@ -170,6 +170,7 @@ export class LogicPassConfig {
       OOT_AGELESS_CHILD_TRADE: settings.agelessChildTrade,
       OOT_START_ADULT: settings.startingAge === 'adult',
       HINT_IMPORTANCE: settings.hintImportance,
+      OOT_OCARINA_BUTTONS: settings.ocarinaButtonsShuffleOot,
     };
 
     for (const v in exprs) {

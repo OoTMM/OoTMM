@@ -171,6 +171,7 @@ gOcarinaFlags = 0x80102238;
 gOcarinaButtonPitchMap = 0x80102268;
 gOcarinaSongBuffer = 0x80121f38;
 gOcarinaSongBufferCursor = 0x80121f40;
+gOcarinaPressedButtons = 0x80121f24;
 
 HandleMessages = 0x800dda6c;
 

@@ -57,12 +57,12 @@ VALLEY_FROM_LAKE_HYLIA,                   overworld,        Gerudo Valley Falls,
 ZORA_DOMAIN_FROM_LAKE_HYLIA,              overworld,        Zora Domain,                                Lake Hylia,                                   LAKE_HYLIA_FROM_ZORA_DOMAIN
 LOST_WOODS_FROM_ZORA_RIVER,               overworld,        Lost Woods,                                 Zora River,                                   ZORA_RIVER_FROM_LOST_WOODS
 LOST_WOODS_FROM_GORON_CITY,               overworld,        Lost Woods,                                 Goron City Shortcut,                          GORON_CITY_FROM_LOST_WOODS
-WARP_SONG_MEADOW,                         warp-song,        Sacred Meadow,                              SONGS,                                        NONE
-WARP_SONG_CRATER,                         warp-song,        Death Mountain Crater Warp,                 SONGS,                                        NONE
-WARP_SONG_LAKE,                           warp-song,        Lake Hylia,                                 SONGS,                                        NONE
-WARP_SONG_GRAVE,                          warp-song,        Graveyard Upper,                            SONGS,                                        NONE
-WARP_SONG_DESERT,                         warp-song,        Desert Colossus,                            SONGS,                                        NONE
-WARP_SONG_TEMPLE,                         warp-song,        Temple of Time,                             SONGS,                                        NONE
+WARP_SONG_MEADOW,                         warp-song,        Sacred Meadow,                              SONG_TP_FOREST,                               NONE
+WARP_SONG_CRATER,                         warp-song,        Death Mountain Crater Warp,                 SONG_TP_FIRE,                                 NONE
+WARP_SONG_LAKE,                           warp-song,        Lake Hylia,                                 SONG_TP_WATER,                                NONE
+WARP_SONG_GRAVE,                          warp-song,        Graveyard Upper,                            SONG_TP_SHADOW,                               NONE
+WARP_SONG_DESERT,                         warp-song,        Desert Colossus,                            SONG_TP_SPIRIT,                               NONE
+WARP_SONG_TEMPLE,                         warp-song,        Temple of Time,                             SONG_TP_LIGHT,                                NONE
 VILLAGE_OWL,                              owl-flight,       Kakariko Rooftop,                           Death Mountain Summit,                        NONE
 FIELD_OWL,                                owl-flight,       Hyrule Field Drawbridge,                    Lake Hylia,                                   NONE
 HOUSE_MIDO,                               indoors,          Mido's House,                               Kokiri Forest,                                KOKIRI_FOREST_FROM_MIDO

@@ -64,7 +64,7 @@
   locations:
     "MQ Spirit Temple Silver Block Room Target Chest": "event(SPIRIT_STATUE_FIRE) && can_use_slingshot"
     "MQ Spirit Temple Compass Chest": "can_use_slingshot || can_use_bow"
-    "MQ Spirit Temple Chest in Box": "can_play(SONG_ZELDA) && (is_adult || (has_hover_boots && trick(OOT_SPIRIT_CHILD_HOVER)))"
+    "MQ Spirit Temple Chest in Box": "can_play_zelda && (is_adult || (has_hover_boots && trick(OOT_SPIRIT_CHILD_HOVER)))"
     "MQ Spirit Temple Statue Room Ledge Chest": "(is_adult || (has_hover_boots && trick(OOT_SPIRIT_CHILD_HOVER))) && has_lens"
     "MQ Spirit Temple Pot Statue Room Lower 1": "true"
     "MQ Spirit Temple Pot Statue Room Lower 2": "true"
@@ -94,9 +94,9 @@
   dungeon: Spirit
   locations:
     "MQ Spirit Temple Purple Leever Chest": "can_collect_distance && soul_leever"
-    "MQ Spirit Temple Symphony Room Chest": "small_keys_spirit(7) && can_hammer && can_play_time && can_play_epona && can_play_sun && can_play_storms && can_play(SONG_ZELDA)"
+    "MQ Spirit Temple Symphony Room Chest": "small_keys_spirit(7) && can_hammer && can_play_time && can_play_epona && can_play_sun && can_play_storms && can_play_zelda"
     "MQ Spirit Temple GS Leever Room": "true"
-    "MQ Spirit Temple GS Symphony Room": "can_collect_distance && small_keys_spirit(7) && can_hammer && can_play_time && can_play_epona && can_play_sun && can_play_storms && can_play(SONG_ZELDA)"
+    "MQ Spirit Temple GS Symphony Room": "can_collect_distance && small_keys_spirit(7) && can_hammer && can_play_time && can_play_epona && can_play_sun && can_play_storms && can_play_zelda"
     "MQ Spirit Temple SR Lobby In Water": "can_hammer"
     "MQ Spirit Temple SR Lobby After Water Near Stairs": "true"
     "MQ Spirit Temple SR Lobby After Water Near Door": "true"
@@ -132,14 +132,14 @@
 "Spirit Temple Top Floor":
   dungeon: Spirit
   events:
-    SPIRIT_TEMPLE_LIGHT: "can_play(SONG_ZELDA) && can_hammer && has_mirror_shield"
+    SPIRIT_TEMPLE_LIGHT: "can_play_zelda && can_hammer && has_mirror_shield"
   locations:
-    "MQ Spirit Temple Topmost Chest": "can_play(SONG_ZELDA) && can_hammer && has_lens"
+    "MQ Spirit Temple Topmost Chest": "can_play_zelda && can_hammer && has_lens"
     "MQ Spirit Temple GS Top Floor Left Wall": "small_keys_spirit(7) && soul_iron_knuckle"
     "MQ Spirit Temple GS Top Floor Back Wall": "small_keys_spirit(7) && soul_iron_knuckle"
     "MQ Spirit Temple Pot Top Near Triforce Symbol 1": "true"
     "MQ Spirit Temple Pot Top Near Triforce Symbol 2": "true"
-    "MQ Spirit Temple Pot Top Near Lowering Platform 1": "can_play(SONG_ZELDA)"
-    "MQ Spirit Temple Pot Top Near Lowering Platform 2": "can_play(SONG_ZELDA)"
-    "MQ Spirit Temple Pot Top Near Lowering Platform 3": "can_play(SONG_ZELDA)"
-    "MQ Spirit Temple Pot Top Near Lowering Platform 4": "can_play(SONG_ZELDA)"
+    "MQ Spirit Temple Pot Top Near Lowering Platform 1": "can_play_zelda"
+    "MQ Spirit Temple Pot Top Near Lowering Platform 2": "can_play_zelda"
+    "MQ Spirit Temple Pot Top Near Lowering Platform 3": "can_play_zelda"
+    "MQ Spirit Temple Pot Top Near Lowering Platform 4": "can_play_zelda"

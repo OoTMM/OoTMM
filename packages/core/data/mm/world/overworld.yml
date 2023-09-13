@@ -1,7 +1,12 @@
 "GLOBAL":
   region: NONE
   exits:
-    "OOT SONGS": "setting(crossWarpOot) && has_ocarina"
+    "OOT SONG_TP_FOREST": "setting(crossWarpOot) && has_ocarina && has(OOT_SONG_TP_FOREST)"
+    "OOT SONG_TP_FIRE": "setting(crossWarpOot) && has_ocarina && has(OOT_SONG_TP_FIRE)"
+    "OOT SONG_TP_WATER": "setting(crossWarpOot) && has_ocarina && has(OOT_SONG_TP_WATER)"
+    "OOT SONG_TP_SHADOW": "setting(crossWarpOot) && has_ocarina && has(OOT_SONG_TP_SHADOW)"
+    "OOT SONG_TP_SPIRIT": "setting(crossWarpOot) && has_ocarina && has(OOT_SONG_TP_SPIRIT)"
+    "OOT SONG_TP_LIGHT": "setting(crossWarpOot) && has_ocarina && has(OOT_SONG_TP_LIGHT)"
     "SOARING": "can_play(SONG_SOARING)"
 "Tingle Town":
   region: TINGLE

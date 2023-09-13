@@ -4,9 +4,45 @@
 "is_day": "oot_time(day) || can_play_sun"
 "is_night": "oot_time(night) || can_play_sun"
 "is_dusk": "oot_time(day) && oot_time(night)" # If day and night can be true at the same time, then you have access to a local time-flow zone
-#Standard Single Item Use Macros
+
+# Ocarina
+"ocarina_button(x)": "cond(setting(ocarinaButtonsShuffleOot), has(x), true)"
+"ocarina_button_a": "ocarina_button(BUTTON_A)"
+"ocarina_button_right": "ocarina_button(BUTTON_C_RIGHT)"
+"ocarina_button_left": "ocarina_button(BUTTON_C_LEFT)"
+"ocarina_button_up": "ocarina_button(BUTTON_C_UP)"
+"ocarina_button_down": "ocarina_button(BUTTON_C_DOWN)"
+
+"ocarina_button_any2": "ocarina_button_any2_a || ocarina_button_any2_right || ocarina_button_any2_left || ocarina_button_any2_up"
+"ocarina_button_any2_a": "ocarina_button_a && (ocarina_button_right || ocarina_button_left || ocarina_button_up || ocarina_button_down)"
+"ocarina_button_any2_right": "ocarina_button_right && (ocarina_button_left || ocarina_button_up || ocarina_button_down)"
+"ocarina_button_any2_left": "ocarina_button_left && (ocarina_button_up || ocarina_button_down)"
+"ocarina_button_any2_up": "ocarina_button_up && ocarina_button_down"
+
 "has_ocarina": "glitch_ocarina_items || has(OCARINA) || has(SHARED_OCARINA)"
 "can_play(x)": "has_ocarina && has(x)"
+"can_play_cross(x)": "can_play(x) && (setting(crossWarpMm, full) || (setting(crossWarpMm, childOnly) && is_child))"
+
+"can_play_sun": "(can_play(SONG_SUN) || can_play(SHARED_SONG_SUN)) && ocarina_button_right && ocarina_button_down && ocarina_button_up"
+"can_play_time": "(can_play(SONG_TIME) || can_play(SHARED_SONG_TIME)) && ocarina_button_a && ocarina_button_right && ocarina_button_down"
+"can_play_epona": "(can_play(SONG_EPONA) || can_play(SHARED_SONG_EPONA)) && ocarina_button_up && ocarina_button_right && ocarina_button_left"
+"can_play_storms": "(can_play(SONG_STORMS) || can_play(SHARED_SONG_STORMS)) && ocarina_button_a && ocarina_button_down && ocarina_button_up"
+"can_play_zelda": "can_play(SONG_ZELDA) && ocarina_button_up && ocarina_button_right && ocarina_button_left"
+"can_play_saria": "can_play(SONG_SARIA) && ocarina_button_down && ocarina_button_right && ocarina_button_left"
+
+"can_play_tp_light": "can_play(SONG_TP_LIGHT) && ocarina_button_up && ocarina_button_right && ocarina_button_left"
+"can_play_tp_forest": "can_play(SONG_TP_FOREST) && ocarina_button_a && ocarina_button_up && ocarina_button_right && ocarina_button_left"
+"can_play_tp_fire": "can_play(SONG_TP_FIRE) && ocarina_button_a && ocarina_button_right && ocarina_button_down"
+"can_play_tp_water": "can_play(SONG_TP_WATER) && ocarina_button_a && ocarina_button_right && ocarina_button_down && ocarina_button_left"
+"can_play_tp_shadow": "can_play(SONG_TP_SHADOW) && ocarina_button_a && ocarina_button_right && ocarina_button_down && ocarina_button_left"
+"can_play_tp_spirit": "can_play(SONG_TP_SPIRIT) && ocarina_button_a && ocarina_button_right && ocarina_button_down"
+
+"can_play_minigame": "has_ocarina && ocarina_button_a && ocarina_button_right && ocarina_button_down && ocarina_button_left && ocarina_button_up"
+"can_play_scarecrow": "has_ocarina && ocarina_button_any2"
+
+"can_play_cross_soaring": "can_play_cross(MM_SONG_SOARING) && ocarina_button_up && ocarina_button_down && ocarina_button_left"
+
+#Standard Single Item Use Macros
 "has_sticks": "event(STICKS) || renewable(STICK) || renewable(STICKS_5) || renewable(STICKS_10) || renewable(SHARED_STICK) || renewable(SHARED_STICKS_5) || renewable(SHARED_STICKS_10) || (setting(sharedNutsSticks) && event(MM_STICKS))"
 "has_nuts": "event(NUTS) || renewable(NUTS_5) || renewable(NUTS_10) || renewable(SHARED_NUT) || renewable(SHARED_NUTS_5) || renewable(SHARED_NUTS_10) || (setting(sharedNutsSticks) && event(MM_NUTS))"
 "can_use_sticks": "age_sticks && has_sticks"

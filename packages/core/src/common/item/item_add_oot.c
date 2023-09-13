@@ -1630,6 +1630,21 @@ int comboAddItemOot(s16 gi, int noEffect)
     case GI_OOT_SOUL_TWINROVA:
         comboAddSoulOot(gi);
         break;
+    case GI_OOT_BUTTON_A:
+        gSharedCustomSave.ocarinaButtonMaskOot |= A_BUTTON;
+        break;
+    case GI_OOT_BUTTON_C_RIGHT:
+        gSharedCustomSave.ocarinaButtonMaskOot |= R_CBUTTONS;
+        break;
+    case GI_OOT_BUTTON_C_LEFT:
+        gSharedCustomSave.ocarinaButtonMaskOot |= L_CBUTTONS;
+        break;
+    case GI_OOT_BUTTON_C_UP:
+        gSharedCustomSave.ocarinaButtonMaskOot |= U_CBUTTONS;
+        break;
+    case GI_OOT_BUTTON_C_DOWN:
+        gSharedCustomSave.ocarinaButtonMaskOot |= D_CBUTTONS;
+        break;
     }
 
     return count;

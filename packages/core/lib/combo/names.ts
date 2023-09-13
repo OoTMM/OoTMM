@@ -525,6 +525,11 @@ const ITEM_NAMES: {[k in ItemID as string]: string} = {
   SHARED_TRIFORCE_WISDOM: "Triforce of Wisdom",
   SHARED_TRIFORCE: "Triforce Piece",
   SHARED_WALLET: "Progressive Wallet",
+  OOT_BUTTON_A: "A Button (OoT)",
+  OOT_BUTTON_C_RIGHT: "C-Right Button (OoT)",
+  OOT_BUTTON_C_LEFT: "C-Left Button (OoT)",
+  OOT_BUTTON_C_UP: "C-Up Button (OoT)",
+  OOT_BUTTON_C_DOWN: "C-Down Button (OoT)",
 };
 
 export const itemName = (item: string) => ITEM_NAMES[item] ?? item;

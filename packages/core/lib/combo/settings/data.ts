@@ -898,6 +898,13 @@ export const SETTINGS = [{
   default: false,
   cond: (s: any) => s.silverRupeeShuffle !== 'vanilla',
 }, {
+  key: 'ocarinaButtonsShuffleOot',
+  name: 'Ocarina Buttons Shuffle (OoT)',
+  category: 'items.extensions',
+  type: 'boolean',
+  description: 'Adds the Ocarina Buttons as items that are shuffled.',
+  default: false,
+}, {
   key: 'enemySoulsOot',
   name: 'Enemy Souls (OoT)',
   category: 'items.extensions',

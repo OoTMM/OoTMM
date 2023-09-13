@@ -111,7 +111,7 @@
 "Shadow Temple Boat":
   dungeon: Shadow
   exits:
-    "Shadow Temple After Boat": "can_play(SONG_ZELDA) && (can_hookshot || climb_anywhere || (is_adult && event(SHADOW_SHORTCUT)))"
+    "Shadow Temple After Boat": "can_play_zelda && (can_hookshot || climb_anywhere || (is_adult && event(SHADOW_SHORTCUT)))"
     "Shadow Temple Wind Gibdo": "small_keys_shadow(4)"
     "Shadow Temple Scythe Silver Rupees": "event(SHADOW_SHORTCUT) || (climb_anywhere && trick(OOT_SHADOW_BOAT_EARLY))"
   events:

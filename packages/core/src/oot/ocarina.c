@@ -1,5 +1,7 @@
 #include <combo.h>
 
+extern u32 gOcarinaPressedButtons;
+
 static OcarinaSongButtons sSongSoaring = {
     6,
     {
@@ -24,4 +26,13 @@ void Ocarina_CheckCustomSongs(void)
         return;
 
     comboCheckSong(&sSongSoaring, 0);
+}
+
+void OcarinaMaskButtons(void)
+{
+    u32 mask;
+
+    mask = ~(A_BUTTON | U_CBUTTONS | D_CBUTTONS | L_CBUTTONS | R_CBUTTONS);
+    mask |= gSharedCustomSave.ocarinaButtonMaskOot;
+    gOcarinaPressedButtons &= mask;
 }

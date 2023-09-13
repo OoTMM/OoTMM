@@ -20,6 +20,7 @@ extern CustomSave gCustomSave;
 typedef struct ALIGNED(16)
 {
     u16 coins[4];
+    u16 ocarinaButtonMaskOot;
 }
 SharedCustomSave;
 

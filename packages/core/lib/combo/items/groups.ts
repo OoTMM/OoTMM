@@ -852,5 +852,10 @@ export const REQUIRED = new Set([
   Items.OOT_COIN_BLUE,
   Items.OOT_COIN_YELLOW,
   Items.OOT_RUPEE_MAGICAL,
+  Items.OOT_BUTTON_A,
+  Items.OOT_BUTTON_C_RIGHT,
+  Items.OOT_BUTTON_C_LEFT,
+  Items.OOT_BUTTON_C_UP,
+  Items.OOT_BUTTON_C_DOWN,
 ]);
 

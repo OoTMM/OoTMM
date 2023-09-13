@@ -25,7 +25,7 @@
   events:
     GANON_TRIAL_LIGHT: "soul_lizalfos_dinalfos && soul(SOUL_TORCH_SLUG) && has_light_arrows && has_lens && can_hookshot && small_keys_ganon(3)"
   locations:
-    "MQ Ganon Castle Light Trial Chest": "soul_lizalfos_dinalfos && soul(SOUL_TORCH_SLUG) && can_play(SONG_ZELDA) && has_weapon"
+    "MQ Ganon Castle Light Trial Chest": "soul_lizalfos_dinalfos && soul(SOUL_TORCH_SLUG) && can_play_zelda && has_weapon"
     "MQ Ganon Pot Light End 1": "soul_lizalfos_dinalfos && soul(SOUL_TORCH_SLUG) && has_lens && can_hookshot && small_keys_ganon(3)"
     "MQ Ganon Pot Light End 2": "soul_lizalfos_dinalfos && soul(SOUL_TORCH_SLUG) && has_lens && can_hookshot && small_keys_ganon(3)"
 "Ganon Castle Forest":
