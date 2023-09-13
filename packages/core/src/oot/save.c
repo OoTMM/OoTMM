@@ -232,6 +232,8 @@ void comboCreateSave(void* unk, void* buffer)
     /* Apply ocarina buttons */
     if (!comboConfig(CFG_OOT_OCARINA_BUTTONS))
         gSharedCustomSave.ocarinaButtonMaskOot = 0xffff;
+    if (!comboConfig(CFG_MM_OCARINA_BUTTONS))
+        gSharedCustomSave.ocarinaButtonMaskMm = 0xffff;
 
     gOotSave.childEquips.buttonItems[0] = ITEM_NONE;
     gOotSave.adultEquips.buttonItems[0] = ITEM_NONE;

@@ -1,5 +1,7 @@
 #include <combo.h>
 
+extern u32 gOcarinaPressedButtons;
+
 const char* warpTexts[6] = {
     TEXT_COLOR_GREEN "Warp to the Lost Woods?",
     TEXT_COLOR_RED "Warp to the Death Mountain" TEXT_NL "Crater?",
@@ -196,4 +198,13 @@ void Ocarina_CheckCustomSongs(void)
         if (enabledWarpSongs & (1 << songIndex))
             comboCheckSong(&sWarpSongs[songIndex], songIndex);
     }
+}
+
+void OcarinaMaskButtons(void)
+{
+    u32 mask;
+
+    mask = ~(A_BUTTON | U_CBUTTONS | D_CBUTTONS | L_CBUTTONS | R_CBUTTONS);
+    mask |= gSharedCustomSave.ocarinaButtonMaskMm;
+    gOcarinaPressedButtons &= mask;
 }

@@ -1357,8 +1357,23 @@ int comboAddItemMm(s16 gi, int noEffect)
     case GI_MM_SOUL_GYORG:
     case GI_MM_SOUL_TWINMOLD:
     case GI_MM_SOUL_STALCHILD:
-    case GI_MM_SOUL_LEEVER:    
+    case GI_MM_SOUL_LEEVER:
         comboAddSoulMm(gi);
+        break;
+    case GI_MM_BUTTON_A:
+        gSharedCustomSave.ocarinaButtonMaskMm |= A_BUTTON;
+        break;
+    case GI_MM_BUTTON_C_RIGHT:
+        gSharedCustomSave.ocarinaButtonMaskMm |= R_CBUTTONS;
+        break;
+    case GI_MM_BUTTON_C_LEFT:
+        gSharedCustomSave.ocarinaButtonMaskMm |= L_CBUTTONS;
+        break;
+    case GI_MM_BUTTON_C_UP:
+        gSharedCustomSave.ocarinaButtonMaskMm |= U_CBUTTONS;
+        break;
+    case GI_MM_BUTTON_C_DOWN:
+        gSharedCustomSave.ocarinaButtonMaskMm |= D_CBUTTONS;
         break;
     }
 

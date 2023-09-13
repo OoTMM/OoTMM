@@ -21,6 +21,7 @@ typedef struct ALIGNED(16)
 {
     u16 coins[4];
     u16 ocarinaButtonMaskOot;
+    u16 ocarinaButtonMaskMm;
 }
 SharedCustomSave;
 

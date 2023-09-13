@@ -553,6 +553,11 @@ const ITEM_NAMES: {[k in ItemID]: string} = {
   OOT_BUTTON_C_LEFT: "C-Left Button (OoT)",
   OOT_BUTTON_C_UP: "C-Up Button (OoT)",
   OOT_BUTTON_C_DOWN: "C-Down Button (OoT)",
+  MM_BUTTON_A: "A Button (MM)",
+  MM_BUTTON_C_RIGHT: "C-Right Button (MM)",
+  MM_BUTTON_C_LEFT: "C-Left Button (MM)",
+  MM_BUTTON_C_UP: "C-Up Button (MM)",
+  MM_BUTTON_C_DOWN: "C-Down Button (MM)",
 };
 
 export function itemName(item: string) {

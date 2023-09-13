@@ -357,6 +357,11 @@ static int csmcFromItemMm(s16 gi)
     case GI_MM_OWL_IKANA_CANYON:
     case GI_MM_OWL_STONE_TOWER:
     case GI_MM_SKELETON_KEY:
+    case GI_MM_BUTTON_A:
+    case GI_MM_BUTTON_C_RIGHT:
+    case GI_MM_BUTTON_C_LEFT:
+    case GI_MM_BUTTON_C_UP:
+    case GI_MM_BUTTON_C_DOWN:
         return CSMC_MAJOR;
     case GI_MM_SMALL_KEY:
     case GI_MM_SMALL_KEY_WF:

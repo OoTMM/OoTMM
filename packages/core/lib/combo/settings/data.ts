@@ -905,6 +905,13 @@ export const SETTINGS = [{
   description: 'Adds the Ocarina Buttons as items that are shuffled.',
   default: false,
 }, {
+  key: 'ocarinaButtonsShuffleMm',
+  name: 'Ocarina Buttons Shuffle (MM)',
+  category: 'items.extensions',
+  type: 'boolean',
+  description: 'Adds the Ocarina Buttons as items that are shuffled.',
+  default: false,
+}, {
   key: 'enemySoulsOot',
   name: 'Enemy Souls (OoT)',
   category: 'items.extensions',

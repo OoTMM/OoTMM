@@ -58,6 +58,8 @@ Gfx_SetupDL_42Opa = 0x8012c8ac;
 GetMatrixMV     = 0x80181a40;
 DisplaceTexture = 0x8012cbd0;
 
+gOcarinaPressedButtons = 0x801fd450;
+
 PreDraw1 = 0x800b8050;
 PreDraw2 = 0x800b8118;
 

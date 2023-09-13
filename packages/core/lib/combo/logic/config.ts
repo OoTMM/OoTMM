@@ -171,6 +171,7 @@ export class LogicPassConfig {
       OOT_START_ADULT: settings.startingAge === 'adult',
       HINT_IMPORTANCE: settings.hintImportance,
       OOT_OCARINA_BUTTONS: settings.ocarinaButtonsShuffleOot,
+      MM_OCARINA_BUTTONS: settings.ocarinaButtonsShuffleMm,
     };
 
     for (const v in exprs) {

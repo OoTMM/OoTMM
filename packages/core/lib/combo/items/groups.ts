@@ -857,5 +857,9 @@ export const REQUIRED = new Set([
   Items.OOT_BUTTON_C_LEFT,
   Items.OOT_BUTTON_C_UP,
   Items.OOT_BUTTON_C_DOWN,
+  Items.MM_BUTTON_A,
+  Items.MM_BUTTON_C_RIGHT,
+  Items.MM_BUTTON_C_LEFT,
+  Items.MM_BUTTON_C_UP,
+  Items.MM_BUTTON_C_DOWN,
 ]);
-

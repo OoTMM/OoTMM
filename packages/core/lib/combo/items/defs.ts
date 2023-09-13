@@ -553,6 +553,11 @@ const ITEM_IDS = [
   'OOT_BUTTON_C_LEFT',
   'OOT_BUTTON_C_UP',
   'OOT_BUTTON_C_DOWN',
+  'MM_BUTTON_A',
+  'MM_BUTTON_C_RIGHT',
+  'MM_BUTTON_C_LEFT',
+  'MM_BUTTON_C_UP',
+  'MM_BUTTON_C_DOWN',
 ] as const;
 
 export type ItemID = typeof ITEM_IDS[number];

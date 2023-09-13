@@ -877,6 +877,14 @@ export class LogicPassWorldTransform {
       this.addItem(Items.OOT_BUTTON_C_DOWN);
     }
 
+    if (settings.ocarinaButtonsShuffleMm) {
+      this.addItem(Items.MM_BUTTON_A);
+      this.addItem(Items.MM_BUTTON_C_RIGHT);
+      this.addItem(Items.MM_BUTTON_C_LEFT);
+      this.addItem(Items.MM_BUTTON_C_UP);
+      this.addItem(Items.MM_BUTTON_C_DOWN);
+    }
+
     /* Handle extra wallets */
     if (this.state.settings.childWallets) {
       this.addItem(Items.OOT_WALLET);
