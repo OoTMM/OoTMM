@@ -90,7 +90,19 @@ void Shader_MirrorShield(GameState_Play* play, s16 index)
 
 void Shader_SoldOut(GameState_Play* play, s16 index)
 {
-    Shader_Xlu0(play, index);
+    static const u32 kInitListSoldOut[] = {
+        0xE7000000, 0x00000000, 0xD7000002, 0xFFFFFFFF,
+        0xFC11FE23, 0xFFFFF7FB, 0xEF082C10, 0x005049D8,
+        0xD9000000, 0x00220405, 0xDF000000, 0x00000000,
+    };
+    const Shader* shader;
+    shader = &kShaders[index];
+
+    OPEN_DISPS(play->gs.gfx);
+    gSPDisplayList(POLY_XLU_DISP++, (u32)kInitListSoldOut & 0xffffff);
+    gSPMatrix(POLY_XLU_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPDisplayList(POLY_XLU_DISP++, shader->lists[0]);
+    CLOSE_DISPS();
 }
 
 void Shader_BlueFire(GameState_Play* play, s16 index)
