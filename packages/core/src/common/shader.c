@@ -1,6 +1,7 @@
 #include <combo.h>
 #include <combo/custom.h>
 
+#define M_PI      3.14159265358979323846
 #define M_SQRT1_2 0.707106781186547524401
 
 static float hueToRgb(float p, float q, float t)
@@ -855,7 +856,7 @@ void Shader_RutosLetter(GameState_Play* play, s16 index)
     const Shader* shader;
     shader = &kShaders[index];
     OPEN_DISPS(play->gs.gfx);
-    ModelViewRotateZ(1.57f, 1);
+    ModelViewRotateZ((M_PI / 2.f), 1);
 
     InitListPolyOpa(play->gs.gfx);
 
@@ -1090,6 +1091,28 @@ void Shader_Wallet(GameState_Play* play, s16 index)
     gSPDisplayList(POLY_OPA_DISP++, shader->lists[5]);
     gSPDisplayList(POLY_OPA_DISP++, LIST_PTR(kWalletRupee[shader->lists[6]]));
     gSPDisplayList(POLY_OPA_DISP++, shader->lists[7]);
+    CLOSE_DISPS();
+}
+
+void Shader_Button(GameState_Play* play, s16 index)
+{
+    const Shader* shader;
+    shader = &kShaders[index];
+
+    OPEN_DISPS(play->gs.gfx);
+    InitListPolyOpa(play->gs.gfx);
+    if (shader->lists[1])
+        ModelViewRotateZ(M_PI, 1);
+    gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
+    if (shader->lists[0])
+    {
+        gDPSetPrimColor(POLY_OPA_DISP++, 0, 0x80, 255, 255, 0, 255);
+    }
+    else
+    {
+        gDPSetPrimColor(POLY_OPA_DISP++, 0, 0x80, 0, 0, 255, 255);
+    }
+    gSPDisplayList(POLY_OPA_DISP++, shader->lists[2]);
     CLOSE_DISPS();
 }
 
