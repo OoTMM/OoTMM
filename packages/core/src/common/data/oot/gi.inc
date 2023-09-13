@@ -302,3 +302,4 @@ X(ITEM_CUSTOM,              0x80,  DRAWGI_OOT_SILVER_POUCH,             0x5f, 0x
 X(ITEM_CUSTOM,              0x80,  DRAWGI_OOT_SILVER_POUCH,             0x5f, 0x00d1, "the " C1 "Silver Pouch (Ganon Forest)"),
 X(ITEM_CUSTOM,              0x80,  DRAWGI_OOT_SILVER_POUCH,             0x5f, 0x00d1, "the " C1 "Silver Pouch (Ganon Shadow)"),
 X(ITEM_CUSTOM,              0x80,  DRAWGI_OOT_SILVER_POUCH,             0x5f, 0x00d1, "the " C1 "Silver Pouch (Ganon Water)"),
+X(ITEM_CUSTOM,              0x80,  DRAWGI_OOT_RUPEE_MAGICAL,            0x5f, 0x0000, "the " C1 "Magical Rupee"),

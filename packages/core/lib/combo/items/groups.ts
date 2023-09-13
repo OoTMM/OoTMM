@@ -851,5 +851,6 @@ export const REQUIRED = new Set([
   Items.OOT_COIN_GREEN,
   Items.OOT_COIN_BLUE,
   Items.OOT_COIN_YELLOW,
+  Items.OOT_RUPEE_MAGICAL,
 ]);
 

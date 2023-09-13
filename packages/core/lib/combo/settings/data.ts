@@ -890,6 +890,14 @@ export const SETTINGS = [{
   description: 'Adds a Skeleton Key that can open every small-key-locked door.',
   default: false,
 }, {
+  key: 'magicalRupee',
+  name: 'Magical Rupee',
+  category: 'items.extensions',
+  type: 'boolean',
+  description: 'Adds a Magical Rupee that can triggers ever silver-rupee event.',
+  default: false,
+  cond: (s: any) => s.silverRupeeShuffle !== 'vanilla',
+}, {
   key: 'enemySoulsOot',
   name: 'Enemy Souls (OoT)',
   category: 'items.extensions',

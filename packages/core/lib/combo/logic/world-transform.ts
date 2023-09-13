@@ -101,6 +101,7 @@ const ITEM_POOL_PLENTIFUL = new Set([
   Items.OOT_MASK_BUNNY,
   Items.OOT_MASK_KEATON,
   Items.OOT_SKELETON_KEY,
+  Items.OOT_RUPEE_MAGICAL,
   Items.MM_BOTTLED_GOLD_DUST,
   Items.MM_MASK_DEKU,
   Items.MM_MASK_GORON,
@@ -851,6 +852,11 @@ export class LogicPassWorldTransform {
     /* Add skeleton keys */
     if (settings.skeletonKeyOot) {
       this.addItem(Items.OOT_SKELETON_KEY);
+    }
+
+    /* Add magical rupee */
+    if (settings.magicalRupee) {
+      this.addItem(Items.OOT_RUPEE_MAGICAL);
     }
 
     if (settings.skeletonKeyMm) {

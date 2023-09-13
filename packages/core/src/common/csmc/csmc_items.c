@@ -113,6 +113,7 @@ static int csmcFromItemOot(s16 gi)
     case GI_OOT_COIN_GREEN:
     case GI_OOT_COIN_BLUE:
     case GI_OOT_COIN_YELLOW:
+    case GI_OOT_RUPEE_MAGICAL:
         return CSMC_MAJOR;
     case GI_OOT_SMALL_KEY:
     case GI_OOT_SMALL_KEY_FOREST:

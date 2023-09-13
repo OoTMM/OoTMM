@@ -306,6 +306,12 @@ static void addSilverRupeePouch(int id, int noEffect)
         addSilverRupees(id, noEffect);
 }
 
+static void addMagicalRupee(int noEffect)
+{
+    for (int i = 0; i < ARRAY_SIZE(gSilverRupeeData); ++i)
+        addSilverRupeePouch(i, noEffect);
+}
+
 static void addWallet(int index, int noEffect)
 {
     if (index == 0)
@@ -1569,6 +1575,9 @@ int comboAddItemOot(s16 gi, int noEffect)
         break;
     case GI_OOT_POUCH_SILVER_GANON_WATER:
         addSilverRupeePouch(SR_GANON2, noEffect);
+        break;
+    case GI_OOT_RUPEE_MAGICAL:
+        addMagicalRupee(noEffect);
         break;
     case GI_OOT_SOUL_STALFOS:
     case GI_OOT_SOUL_OCTOROK:

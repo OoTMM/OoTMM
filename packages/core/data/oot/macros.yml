@@ -161,7 +161,8 @@
 "small_keys_ganon(n)": "small_keys(SMALL_KEY_GANON, KEY_RING_GANON, n)"
 
 # Silver rupees
-"silver_rupees(rupee, pouch, count)": "cond(setting(silverRupeePouches), has(pouch), has(rupee, count))"
+"silver_rupees(rupee, pouch, count)": "(setting(magicalRupee) && has(RUPEE_MAGICAL)) || cond(setting(silverRupeePouches), has(pouch), has(rupee, count))"
+
 "silver_rupees_ganon_light": "silver_rupees(RUPEE_SILVER_GANON_LIGHT, POUCH_SILVER_GANON_LIGHT, 5)"
 "silver_rupees_ganon_forest": "silver_rupees(RUPEE_SILVER_GANON_FOREST, POUCH_SILVER_GANON_FOREST, 5)"
 "silver_rupees_ganon_fire": "silver_rupees(RUPEE_SILVER_GANON_FIRE, POUCH_SILVER_GANON_FIRE, 5)"

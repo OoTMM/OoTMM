@@ -32,6 +32,12 @@ static void addSilverPouchRupees(int id)
     addRupees(gSilverRupeeData[id].count * 5);
 }
 
+static void addMagicalRupeeRupees(void)
+{
+    for (int i = 0; i < ARRAY_SIZE(gSilverRupeeData); i++)
+        addSilverPouchRupees(i);
+}
+
 static void refillMagic(int level)
 {
     gOotSave.playerData.magicSize = 0;
@@ -190,6 +196,9 @@ int comboAddItemEffect(GameState_Play* play, s16 gi)
         break;
     case GI_OOT_POUCH_SILVER_GANON_WATER:
         addSilverPouchRupees(SR_GANON2);
+        break;
+    case GI_OOT_RUPEE_MAGICAL:
+        addMagicalRupeeRupees();
         break;
     case GI_OOT_RUPEE_RED:
     case GI_OOT_TC_RUPEE_RED:

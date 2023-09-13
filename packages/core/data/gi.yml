@@ -300,6 +300,7 @@ OOT_POUCH_SILVER_GANON_FIRE:              0x12d
 OOT_POUCH_SILVER_GANON_FOREST:            0x12e
 OOT_POUCH_SILVER_GANON_SHADOW:            0x12f
 OOT_POUCH_SILVER_GANON_WATER:             0x130
+OOT_RUPEE_MAGICAL:                        0x131
 
 MM_RUPEE_GREEN:               0x01
 MM_RUPEE_BLUE:                0x02

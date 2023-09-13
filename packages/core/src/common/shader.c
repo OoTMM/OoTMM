@@ -3,6 +3,57 @@
 
 #define M_SQRT1_2 0.707106781186547524401
 
+static float hueToRgb(float p, float q, float t)
+{
+    if (t < 0.f) t += 1.f;
+    if (t > 1.f) t -= 1.f;
+    if (t < (1.f/6.f)) return p + (q - p) * 6.f * t;
+    if (t < 0.5f) return q;
+    if (t < (2.f/3.f)) return p + (q - p) * ((2.f/3.f) - t) * 6.f;
+    return p;
+}
+
+static u32 hsla(float h, float s, float l, float a)
+{
+    float r;
+    float g;
+    float b;
+    float q;
+    float p;
+
+    /* Normalize */
+    if (h < 0)
+        h = ((int)((-h) + 1.f)) - h;
+    else
+        h = h - ((int)h);
+    if (s < 0.f)
+        s = 0.f;
+    if (s > 1.f)
+        s = 1.f;
+    if (l < 0.f)
+        l = 0.f;
+    if (l > 1.f)
+        l = 1.f;
+
+    if (s == 0.f)
+    {
+        r = l;
+        g = l;
+        b = l;
+    }
+    else
+    {
+        q = l < 0.5f ? l * (1.f + s) : l + s - l * s;
+        p = 2.f * l - q;
+
+        r = hueToRgb(p, q, h + (1.f/3.f));
+        g = hueToRgb(p, q, h);
+        b = hueToRgb(p, q, h - (1.f/3.f));
+    }
+
+    return ((u32)(r * 255.f)) << 24 | ((u32)(g * 255.f)) << 16 | ((u32)(b * 255.f)) << 8 | ((u32)(a * 255.f));
+}
+
 static void color4(u8* r, u8* g, u8* b, u8* a, u32 color)
 {
     *r = (color >> 24) & 0xff;
@@ -729,6 +780,38 @@ void Shader_CustomPotion(GameState_Play* play, s16 index)
 # define DLIST_RUPEE 0x040622c0
 #endif
 
+#if defined(GAME_OOT)
+# define OFF_RUPEE1 0x04044F10
+# define OFF_RUPEE2 0x04044F40
+# define OFF_RUPEE3 0x04045120
+#else
+# define OFF_RUPEE1 0x04062080
+# define OFF_RUPEE2 0x040620B0
+# define OFF_RUPEE3 0x04062290
+#endif
+
+static const Gfx kRupeeList[] = {
+    gsDPPipeSync(),
+    gsDPSetTextureLUT(G_TT_NONE),
+    gsSPTexture(0x7D0, 0x3E8, 0, G_TX_RENDERTILE, G_ON),
+    gsDPLoadTextureBlock(0x08000000, G_IM_FMT_RGBA, G_IM_SIZ_16b, 4, 4, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 2, 2, 2, 1),
+    gsDPSetCombineLERP(TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0, 1, 0, 0, 0, COMBINED, 0, 0, 0, COMBINED),
+    gsDPSetRenderMode(GBL_c1(G_BL_CLR_IN, G_BL_0, G_BL_CLR_IN, G_BL_1), GBL_c2(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_A_MEM) | AA_EN | Z_CMP | Z_UPD | IM_RD | CVG_DST_CLAMP | ZMODE_OPA | ALPHA_CVG_SEL),
+    gsSPClearGeometryMode(G_TEXTURE_ENABLE | G_FOG),
+    gsSPSetGeometryMode(G_TEXTURE_ENABLE | G_CULL_BACK | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR),
+    gsSPVertex(OFF_RUPEE1, 3, 0),
+    gsSP1Triangle(0, 1, 2, 0),
+    gsSPVertex(OFF_RUPEE2, 32, 0),
+    gsSP2Triangles(0, 1, 2, 0, 3, 4, 5, 0),
+    gsSP2Triangles(6, 7, 8, 0, 9, 10, 11, 0),
+    gsSP2Triangles(12, 13, 14, 0, 15, 16, 17, 0),
+    gsSP2Triangles(18, 19, 20, 0, 21, 22, 23, 0),
+    gsSP2Triangles(24, 25, 26, 0, 27, 28, 29, 0),
+    gsSPVertex(OFF_RUPEE3, 3, 0),
+    gsSP1Triangle(0, 1, 2, 0),
+    gsSPEndDisplayList(),
+};
+
 ALIGNED(16) static u16 kSilverRupeeLUT[] = {
     0x635f, 0xbdf1, 0xffff, 0xe739,
     0x6ba1, 0xbdf1, 0xefbd, 0xbe31,
@@ -736,19 +819,35 @@ ALIGNED(16) static u16 kSilverRupeeLUT[] = {
     0x0849, 0x3a15, 0x8ca7, 0x73a1,
 };
 
-void Shader_SilverRupee(GameState_Play* play, s16 index)
+static void drawColoredRupee(GameState_Play* play, u32 color)
 {
     static const float scale = 0.04;
+    u8 c[4];
 
+    color4(&c[0], &c[1], &c[2], &c[3], color);
     OPEN_DISPS(play->gs.gfx);
     InitListPolyOpa(play->gs.gfx);
     ModelViewScale(scale, scale, scale, MAT_MUL);
     gSPMatrix(POLY_OPA_DISP++, GetMatrixMV(play->gs.gfx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPSegment(POLY_OPA_DISP++, 0x08, &kSilverRupeeLUT);
-    gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 255, 255, 255, 255);
-    gDPSetEnvColor(POLY_OPA_DISP++, 255, 255, 255, 255);
-    gSPDisplayList(POLY_OPA_DISP++, DLIST_RUPEE);
+    gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, c[0], c[1], c[2], c[3]);
+    gSPDisplayList(POLY_OPA_DISP++, (u32)kRupeeList & 0xffffff);
     CLOSE_DISPS();
+}
+
+void Shader_SilverRupee(GameState_Play* play, s16 index)
+{
+    drawColoredRupee(play, 0xffffffff);
+}
+
+void Shader_MagicalRupee(GameState_Play* play, s16 index)
+{
+    float h;
+    u32 color;
+
+    h = (play->gs.frameCount % 60) * (1.f/60.f);
+    color = hsla(h, 1.f, 0.5f, 1.f);
+    drawColoredRupee(play, color);
 }
 
 void Shader_RutosLetter(GameState_Play* play, s16 index)

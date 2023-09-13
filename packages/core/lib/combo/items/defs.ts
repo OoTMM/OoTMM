@@ -547,6 +547,7 @@ const ITEM_IDS = [
   'OOT_COIN_RED',
   'OOT_COIN_GREEN',
   'OOT_COIN_BLUE',
+  'OOT_RUPEE_MAGICAL',
 ] as const;
 
 export type ItemID = typeof ITEM_IDS[number];

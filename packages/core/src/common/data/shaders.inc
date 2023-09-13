@@ -217,3 +217,4 @@
 /* Common    Wallet 4                          */ { Shader_Wallet,                 { 0x6001850, 1, 0x60017f0, 0x60019a0, 0x6001810, 0x6001a28, 3, 0x6001ad8 }},
 /* Common    Wallet 5                          */ { Shader_Wallet,                 { 0x6001850, 1, 0x60017f0, 0x60019a0, 0x6001810, 0x6001a28, 4, 0x6001ad8 }},
 /* OoT       Silver Pouch                      */ { Shader_Wallet,                 { 0x6001850, 2, 0x6001790, 0x60019a0, 0x60017b0, 0x6001a28, 4, 0x6001ad8 }},
+/* OoT       Magical Rupee                     */ { Shader_MagicalRupee,           {} },
