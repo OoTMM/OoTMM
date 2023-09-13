@@ -863,7 +863,10 @@ void Shader_MagicJar(GameState_Play* play, s16 index)
     CLOSE_DISPS();
 
     if (isUpgrade)
+    {
+        InitListPolyXlu(play->gs.gfx);
         shaderFlameEffect(play, 3, 1.5f, 20.f);
+    }
 }
 
 void Shader_Triforce(GameState_Play* play, s16 index)
