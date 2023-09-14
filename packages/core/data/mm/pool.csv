@@ -513,12 +513,72 @@ Goron Race Pot 28,                                pot,            NONE,         
 Goron Race Pot 29,                                pot,            NONE,                   GORON_RACETRACK,              0x001e,                     MAGIC_JAR_LARGE
 Goron Race Pot 30,                                pot,            NONE,                   GORON_RACETRACK,              0x001f,                     MAGIC_JAR_LARGE
 Milk Road Owl Statue,                             npc,            NONE,                   MILK_ROAD,                    OWL_MILK_ROAD,              OWL_MILK_ROAD
+Milk Road Grass 1,                                grass,          NONE,                   MILK_ROAD,                    0x00011,                    RANDOM
+Milk Road Grass 2,                                grass,          NONE,                   MILK_ROAD,                    0x00012,                    RANDOM
+Milk Road Grass 3,                                grass,          NONE,                   MILK_ROAD,                    0x00013,                    RANDOM
 Romani Ranch Epona Song,                          npc,            NONE,                   ROMANI_RANCH,                 SONG_EPONA,                 SONG_EPONA
 Romani Ranch Aliens,                              npc,            RANCH_DEFENSE,          ROMANI_RANCH,                 ROMANI_BOTTLE,              BOTTLE_MILK
 Romani Ranch Cremia Escort,                       npc,            RANCH_DEFENSE,          ROMANI_RANCH,                 CREMIA_ESCORT,              MASK_ROMANI
 Romani Ranch Barn Cow Left,                       cow,            NONE,                   ROMANI_RANCH,                 0x10,                       MILK
 Romani Ranch Barn Cow Right Front,                cow,            NONE,                   ROMANI_RANCH,                 0x11,                       MILK
 Romani Ranch Barn Cow Right Back,                 cow,            NONE,                   ROMANI_RANCH,                 0x12,                       MILK
+Romani Ranch Grass Pack 1 Grass 01,               grass,          NONE,                   ROMANI_RANCH,                 0x0001c,                    RANDOM
+Romani Ranch Grass Pack 1 Grass 02,               grass,          NONE,                   ROMANI_RANCH,                 0x1001c,                    RANDOM
+Romani Ranch Grass Pack 1 Grass 03,               grass,          NONE,                   ROMANI_RANCH,                 0x2001c,                    RANDOM
+Romani Ranch Grass Pack 1 Grass 04,               grass,          NONE,                   ROMANI_RANCH,                 0x3001c,                    RANDOM
+Romani Ranch Grass Pack 1 Grass 05,               grass,          NONE,                   ROMANI_RANCH,                 0x4001c,                    RANDOM
+Romani Ranch Grass Pack 1 Grass 06,               grass,          NONE,                   ROMANI_RANCH,                 0x5001c,                    RANDOM
+Romani Ranch Grass Pack 1 Grass 07,               grass,          NONE,                   ROMANI_RANCH,                 0x6001c,                    RANDOM
+Romani Ranch Grass Pack 1 Grass 08,               grass,          NONE,                   ROMANI_RANCH,                 0x7001c,                    RANDOM
+Romani Ranch Grass Pack 1 Grass 09,               grass,          NONE,                   ROMANI_RANCH,                 0x8001c,                    RANDOM
+Romani Ranch Grass Pack 1 Grass 10,               grass,          NONE,                   ROMANI_RANCH,                 0x9001c,                    RANDOM
+Romani Ranch Grass Pack 1 Grass 11,               grass,          NONE,                   ROMANI_RANCH,                 0xa001c,                    RANDOM
+Romani Ranch Grass Pack 1 Grass 12,               grass,          NONE,                   ROMANI_RANCH,                 0xb001c,                    RANDOM
+Romani Ranch Grass Pack 2 Grass 01,               grass,          NONE,                   ROMANI_RANCH,                 0x0001d,                    RANDOM
+Romani Ranch Grass Pack 2 Grass 02,               grass,          NONE,                   ROMANI_RANCH,                 0x1001d,                    RANDOM
+Romani Ranch Grass Pack 2 Grass 03,               grass,          NONE,                   ROMANI_RANCH,                 0x2001d,                    RANDOM
+Romani Ranch Grass Pack 2 Grass 04,               grass,          NONE,                   ROMANI_RANCH,                 0x3001d,                    RANDOM
+Romani Ranch Grass Pack 2 Grass 05,               grass,          NONE,                   ROMANI_RANCH,                 0x4001d,                    RANDOM
+Romani Ranch Grass Pack 2 Grass 06,               grass,          NONE,                   ROMANI_RANCH,                 0x5001d,                    RANDOM
+Romani Ranch Grass Pack 2 Grass 07,               grass,          NONE,                   ROMANI_RANCH,                 0x6001d,                    RANDOM
+Romani Ranch Grass Pack 2 Grass 08,               grass,          NONE,                   ROMANI_RANCH,                 0x7001d,                    RANDOM
+Romani Ranch Grass Pack 2 Grass 09,               grass,          NONE,                   ROMANI_RANCH,                 0x8001d,                    RANDOM
+Romani Ranch Grass Pack 2 Grass 10,               grass,          NONE,                   ROMANI_RANCH,                 0x9001d,                    RANDOM
+Romani Ranch Grass Pack 2 Grass 11,               grass,          NONE,                   ROMANI_RANCH,                 0xa001d,                    RANDOM
+Romani Ranch Grass Pack 2 Grass 12,               grass,          NONE,                   ROMANI_RANCH,                 0xb001d,                    RANDOM
+Romani Ranch Grass Pack 3 Grass 01,               grass,          NONE,                   ROMANI_RANCH,                 0x0001e,                    RANDOM
+Romani Ranch Grass Pack 3 Grass 02,               grass,          NONE,                   ROMANI_RANCH,                 0x1001e,                    RANDOM
+Romani Ranch Grass Pack 3 Grass 03,               grass,          NONE,                   ROMANI_RANCH,                 0x2001e,                    RANDOM
+Romani Ranch Grass Pack 3 Grass 04,               grass,          NONE,                   ROMANI_RANCH,                 0x3001e,                    RANDOM
+Romani Ranch Grass Pack 3 Grass 05,               grass,          NONE,                   ROMANI_RANCH,                 0x4001e,                    RANDOM
+Romani Ranch Grass Pack 3 Grass 06,               grass,          NONE,                   ROMANI_RANCH,                 0x5001e,                    RANDOM
+Romani Ranch Grass Pack 3 Grass 07,               grass,          NONE,                   ROMANI_RANCH,                 0x6001e,                    RANDOM
+Romani Ranch Grass Pack 3 Grass 08,               grass,          NONE,                   ROMANI_RANCH,                 0x7001e,                    RANDOM
+Romani Ranch Grass Pack 3 Grass 09,               grass,          NONE,                   ROMANI_RANCH,                 0x8001e,                    RANDOM
+Romani Ranch Grass Pack 3 Grass 10,               grass,          NONE,                   ROMANI_RANCH,                 0x9001e,                    RANDOM
+Romani Ranch Grass Pack 3 Grass 11,               grass,          NONE,                   ROMANI_RANCH,                 0xa001e,                    RANDOM
+Romani Ranch Grass Pack 3 Grass 12,               grass,          NONE,                   ROMANI_RANCH,                 0xb001e,                    RANDOM
+Romani Ranch Grass Pack 4 Grass 01,               grass,          NONE,                   ROMANI_RANCH,                 0x0001f,                    RANDOM
+Romani Ranch Grass Pack 4 Grass 02,               grass,          NONE,                   ROMANI_RANCH,                 0x1001f,                    RANDOM
+Romani Ranch Grass Pack 4 Grass 03,               grass,          NONE,                   ROMANI_RANCH,                 0x2001f,                    RANDOM
+Romani Ranch Grass Pack 4 Grass 04,               grass,          NONE,                   ROMANI_RANCH,                 0x3001f,                    RANDOM
+Romani Ranch Grass Pack 4 Grass 05,               grass,          NONE,                   ROMANI_RANCH,                 0x4001f,                    RANDOM
+Romani Ranch Grass Pack 4 Grass 06,               grass,          NONE,                   ROMANI_RANCH,                 0x5001f,                    RANDOM
+Romani Ranch Grass Pack 4 Grass 07,               grass,          NONE,                   ROMANI_RANCH,                 0x6001f,                    RANDOM
+Romani Ranch Grass Pack 4 Grass 08,               grass,          NONE,                   ROMANI_RANCH,                 0x7001f,                    RANDOM
+Romani Ranch Grass Pack 4 Grass 09,               grass,          NONE,                   ROMANI_RANCH,                 0x8001f,                    RANDOM
+Romani Ranch Grass Pack 4 Grass 10,               grass,          NONE,                   ROMANI_RANCH,                 0x9001f,                    RANDOM
+Romani Ranch Grass Pack 4 Grass 11,               grass,          NONE,                   ROMANI_RANCH,                 0xa001f,                    RANDOM
+Romani Ranch Grass Pack 4 Grass 12,               grass,          NONE,                   ROMANI_RANCH,                 0xb001f,                    RANDOM
+Romani Ranch Grass Pack 5 Grass 01,               grass,          NONE,                   ROMANI_RANCH,                 0x00020,                    RANDOM
+Romani Ranch Grass Pack 5 Grass 02,               grass,          NONE,                   ROMANI_RANCH,                 0x10020,                    RANDOM
+Romani Ranch Grass Pack 5 Grass 03,               grass,          NONE,                   ROMANI_RANCH,                 0x20020,                    RANDOM
+Romani Ranch Grass Pack 5 Grass 04,               grass,          NONE,                   ROMANI_RANCH,                 0x30020,                    RANDOM
+Romani Ranch Grass Pack 5 Grass 05,               grass,          NONE,                   ROMANI_RANCH,                 0x40020,                    RANDOM
+Romani Ranch Grass Pack 5 Grass 06,               grass,          NONE,                   ROMANI_RANCH,                 0x50020,                    RANDOM
+Romani Ranch Grass Pack 5 Grass 07,               grass,          NONE,                   ROMANI_RANCH,                 0x60020,                    RANDOM
+Romani Ranch Grass Pack 5 Grass 08,               grass,          NONE,                   ROMANI_RANCH,                 0x70020,                    RANDOM
+Romani Ranch Grass Pack 5 Grass 09,               grass,          NONE,                   ROMANI_RANCH,                 0x80020,                    RANDOM
 Cucco Shack Bunny Mask,                           npc,            CUCCOS,                 CUCCO_SHACK,                  MASK_BUNNY,                 MASK_BUNNY
 Doggy Racetrack Chest,                            chest,          NONE,                   DOG_RACETRACK,                0x00,                       RUPEE_PURPLE
 Doggy Racetrack HP,                               npc,            NONE,                   DOG_RACETRACK,                DOG_LADY_HEART_PIECE,       HEART_PIECE
@@ -680,6 +740,10 @@ Ikana Valley Scrub Shop,                          npc,            NONE,         
 Ikana Valley Scrub HP,                            collectible,    NONE,                   IKANA_CANYON,                 0x1e,                       HEART_PIECE
 Ikana Valley Grotto,                              chest,          NONE,                   GROTTOS,                      0x14,                       BOMBCHU_5
 Ikana Canyon Owl Statue,                          npc,            NONE,                   IKANA_CANYON,                 OWL_IKANA_CANYON,           OWL_IKANA_CANYON
+Ikana Canyon Grass 1,                             grass,          NONE,                   IKANA_CANYON,                 0x0003b,                    RANDOM
+Ikana Canyon Grass 2,                             grass,          NONE,                   IKANA_CANYON,                 0x0003c,                    RANDOM
+Ikana Canyon Grass 3,                             grass,          NONE,                   IKANA_CANYON,                 0x0003d,                    RANDOM
+Ikana Canyon Grass 4,                             grass,          NONE,                   IKANA_CANYON,                 0x0003e,                    RANDOM
 Ikana Great Fairy,                                npc,            NONE,                   FAIRY_FOUNTAIN,               GREAT_FAIRY_VALLEY,         GREAT_FAIRY_SWORD
 Ghost Hut HP,                                     npc,            NONE,                   GHOST_HUT,                    GHOST_HUT_HEART_PIECE,      HEART_PIECE
 Music Box House Gibdo Mask,                       npc,            NONE,                   MUSIC_BOX_HOUSE,              MASK_GIBDO,                 MASK_GIBDO
@@ -740,8 +804,6 @@ Woodfall Temple SF Pre-Boss Bottom Right,         sf,             NONE,         
 Woodfall Temple SF Pre-Boss Left,                 sf,             NONE,                   TEMPLE_WOODFALL,              0x2c,                       STRAY_FAIRY_WF
 Woodfall Temple SF Pre-Boss Top Right,            sf,             NONE,                   TEMPLE_WOODFALL,              0x32,                       STRAY_FAIRY_WF
 Woodfall Temple SF Pre-Boss Pillar,               sf,             NONE,                   TEMPLE_WOODFALL,              0x2d,                       STRAY_FAIRY_WF
-Woodfall Temple Boss Container,                   collectible,    NONE,                   LAIR_ODOLWA,                  0x1f,                       HEART_CONTAINER
-Woodfall Temple Boss,                             npc,            NONE,                   LAIR_ODOLWA,                  REMAINS_ODOLWA,             REMAINS_ODOLWA
 Woodfall Temple Pot Pre-Boss 1,                   pot,            NONE,                   TEMPLE_WOODFALL,              0x001c,                     RECOVERY_HEART
 Woodfall Temple Pot Pre-Boss 2,                   pot,            NONE,                   TEMPLE_WOODFALL,              0x001d,                     RECOVERY_HEART
 Woodfall Temple Pot Main Room Upper 1,            pot,            NONE,                   TEMPLE_WOODFALL,              0x010a,                     ARROWS_10
@@ -763,6 +825,24 @@ Woodfall Temple Pot Miniboss Room 1,              pot,            NONE,         
 Woodfall Temple Pot Miniboss Room 2,              pot,            NONE,                   TEMPLE_WOODFALL,              0x0807,                     RUPEE_BLUE
 Woodfall Temple Pot Miniboss Room 3,              pot,            NONE,                   TEMPLE_WOODFALL,              0x0808,                     RUPEE_BLUE
 Woodfall Temple Pot Miniboss Room 4,              pot,            NONE,                   TEMPLE_WOODFALL,              0x0809,                     RUPEE_BLUE
+Woodfall Temple Boss Container,                   collectible,    NONE,                   LAIR_ODOLWA,                  0x1f,                       HEART_CONTAINER
+Woodfall Temple Boss,                             npc,            NONE,                   LAIR_ODOLWA,                  REMAINS_ODOLWA,             REMAINS_ODOLWA
+Woodfall Temple Boss Grass 01,                    grass,          NONE,                   LAIR_ODOLWA,                  0x0000a,                    RANDOM
+Woodfall Temple Boss Grass 02,                    grass,          NONE,                   LAIR_ODOLWA,                  0x0000b,                    RANDOM
+Woodfall Temple Boss Grass 03,                    grass,          NONE,                   LAIR_ODOLWA,                  0x0000c,                    RANDOM
+Woodfall Temple Boss Grass 04,                    grass,          NONE,                   LAIR_ODOLWA,                  0x0000d,                    RANDOM
+Woodfall Temple Boss Grass 05,                    grass,          NONE,                   LAIR_ODOLWA,                  0x0000e,                    RANDOM
+Woodfall Temple Boss Grass 06,                    grass,          NONE,                   LAIR_ODOLWA,                  0x0000f,                    RANDOM
+Woodfall Temple Boss Grass 07,                    grass,          NONE,                   LAIR_ODOLWA,                  0x00010,                    RANDOM
+Woodfall Temple Boss Grass 08,                    grass,          NONE,                   LAIR_ODOLWA,                  0x00011,                    RANDOM
+Woodfall Temple Boss Grass 09,                    grass,          NONE,                   LAIR_ODOLWA,                  0x00012,                    RANDOM
+Woodfall Temple Boss Grass 10,                    grass,          NONE,                   LAIR_ODOLWA,                  0x00013,                    RANDOM
+Woodfall Temple Boss Grass 11,                    grass,          NONE,                   LAIR_ODOLWA,                  0x00014,                    RANDOM
+Woodfall Temple Boss Grass 12,                    grass,          NONE,                   LAIR_ODOLWA,                  0x00015,                    RANDOM
+Woodfall Temple Boss Grass 13,                    grass,          NONE,                   LAIR_ODOLWA,                  0x00016,                    RANDOM
+Woodfall Temple Boss Grass 14,                    grass,          NONE,                   LAIR_ODOLWA,                  0x00017,                    RANDOM
+Woodfall Temple Boss Grass 15,                    grass,          NONE,                   LAIR_ODOLWA,                  0x00018,                    RANDOM
+Woodfall Temple Boss Grass 16,                    grass,          NONE,                   LAIR_ODOLWA,                  0x00019,                    RANDOM
 Snowhead Temple Compass Room Ledge,               chest,          NONE,                   TEMPLE_SNOWHEAD,              0x19,                       STRAY_FAIRY_SH
 Snowhead Temple Compass,                          chest,          NONE,                   TEMPLE_SNOWHEAD,              0x1c,                       COMPASS_SH
 Snowhead Temple Bridge Room,                      chest,          NONE,                   TEMPLE_SNOWHEAD,              0x01,                       SMALL_KEY_SH

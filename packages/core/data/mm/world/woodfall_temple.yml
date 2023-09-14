@@ -136,12 +136,19 @@
 "Woodfall Temple Pre-Boss":
   dungeon: WF
   exits:
-    "Woodfall Temple Boss Access": "boss_key(BOSS_KEY_WF) && (can_hookshot || has(MASK_DEKU) || short_hook_anywhere)"
+    "Woodfall Temple Pre-Boss Ledge": "can_hookshot || has(MASK_DEKU) || short_hook_anywhere"
   locations:
     "Woodfall Temple SF Pre-Boss Bottom Right": "true"
     "Woodfall Temple SF Pre-Boss Left": "has(MASK_DEKU) || has(MASK_GREAT_FAIRY) || short_hook_anywhere"
     "Woodfall Temple SF Pre-Boss Top Right": "true"
     "Woodfall Temple SF Pre-Boss Pillar": "has(MASK_DEKU) || has(MASK_GREAT_FAIRY) || short_hook_anywhere"
+"Woodfall Temple Pre-Boss Ledge":
+  dungeon: WF
+  exits:
+    "Woodfall Temple Boss Access": "boss_key(BOSS_KEY_WF)"
+  locations:
+    "Woodfall Temple Pot Pre-Boss 1": "true"
+    "Woodfall Temple Pot Pre-Boss 2": "true"
 "Woodfall Temple Princess Jail":
   dungeon: WF
   events:
@@ -152,14 +159,28 @@
   dungeon: WF
   exits:
     "Woodfall Temple Boss": "true"
-  locations:
-    "Woodfall Temple Pot Pre-Boss 1": "true"
-    "Woodfall Temple Pot Pre-Boss 2": "true"
 "Woodfall Temple Boss":
   boss: true
   dungeon: WF
   exits:
     "Woodfall Temple After Boss": "soul(SOUL_ODOLWA) && ((has(MASK_FIERCE_DEITY) && has_magic) || (has_arrows && can_fight))"
+  locations:
+    "Woodfall Temple Boss Grass 01": "true"
+    "Woodfall Temple Boss Grass 02": "true"
+    "Woodfall Temple Boss Grass 03": "true"
+    "Woodfall Temple Boss Grass 04": "true"
+    "Woodfall Temple Boss Grass 05": "true"
+    "Woodfall Temple Boss Grass 06": "true"
+    "Woodfall Temple Boss Grass 07": "true"
+    "Woodfall Temple Boss Grass 08": "true"
+    "Woodfall Temple Boss Grass 09": "true"
+    "Woodfall Temple Boss Grass 10": "true"
+    "Woodfall Temple Boss Grass 11": "true"
+    "Woodfall Temple Boss Grass 12": "true"
+    "Woodfall Temple Boss Grass 13": "true"
+    "Woodfall Temple Boss Grass 14": "true"
+    "Woodfall Temple Boss Grass 15": "true"
+    "Woodfall Temple Boss Grass 16": "true"
 "Woodfall Temple After Boss":
   boss: true
   dungeon: WF

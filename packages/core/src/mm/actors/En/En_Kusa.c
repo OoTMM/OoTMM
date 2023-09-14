@@ -13,6 +13,13 @@ void EnKusa_Aliases(Xflag* xflag)
         else
             xflag->id += 3;
         break;
+    case SCE_MM_IKANA_CANYON:
+        if (xflag->setupId == 3)
+        {
+            xflag->setupId = 0;
+            xflag->id += 30;
+        }
+        break;
     }
 }
 
