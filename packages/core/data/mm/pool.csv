@@ -24,6 +24,9 @@ Clock Town Bank Reward 3,                         npc,            BANK_3,       
 Clock Town Rosa Sisters HP,                       npc,            NONE,                   CLOCK_TOWN_WEST,              ROSA_HEART_PIECE,           HEART_PIECE
 Clock Town Guru Guru Mask Bremen,                 npc,            NONE,                   LAUNDRY_POOL,                 MASK_BREMEN,                MASK_BREMEN
 Clock Town Stray Fairy,                           npc,            NONE,                   LAUNDRY_POOL,                 STRAY_FAIRY_TOWN,           STRAY_FAIRY_TOWN
+Clock Town Laundry Pool Grass 1,                  grass,          NONE,                   LAUNDRY_POOL,                 0x0000d,                    RANDOM
+Clock Town Laundry Pool Grass 2,                  grass,          NONE,                   LAUNDRY_POOL,                 0x0000e,                    RANDOM
+Clock Town Laundry Pool Grass 3,                  grass,          NONE,                   LAUNDRY_POOL,                 0x0000f,                    RANDOM
 Clock Town Great Fairy,                           npc,            NONE,                   FAIRY_FOUNTAIN,               GREAT_FAIRY_TOWN,           MASK_GREAT_FAIRY
 Clock Town Great Fairy Alt,                       npc,            NONE,                   FAIRY_FOUNTAIN,               GREAT_FAIRY_TOWN_ALT,       MAGIC_UPGRADE
 Clock Tower Roof Skull Kid Ocarina,               npc,            NONE,                   CLOCK_TOWER_ROOFTOP,          SKULL_KID_OCARINA,          OCARINA
@@ -383,6 +386,29 @@ Southern Swamp Grass Near Witch Pack 2 Grass 09,  grass,          NONE,         
 Southern Swamp Grass Near Witch 1,                grass,          NONE,                   SOUTHERN_SWAMP,               0x00211,                    RANDOM
 Southern Swamp Grass Near Witch 2,                grass,          NONE,                   SOUTHERN_SWAMP,               0x00212,                    RANDOM
 Woods of Mystery Grotto,                          chest,          NONE,                   GROTTOS,                      0x1c,                       RUPEE_PURPLE
+Woods of Mystery Grass NW 1,                      grass,          NONE,                   WOODS_MYSTERY,                0x00000,                    RANDOM
+Woods of Mystery Grass NW 2,                      grass,          NONE,                   WOODS_MYSTERY,                0x00001,                    RANDOM
+Woods of Mystery Grass W 1,                       grass,          NONE,                   WOODS_MYSTERY,                0x00103,                    RANDOM
+Woods of Mystery Grass W 2,                       grass,          NONE,                   WOODS_MYSTERY,                0x00104,                    RANDOM
+Woods of Mystery Grass W 3,                       grass,          NONE,                   WOODS_MYSTERY,                0x00105,                    RANDOM
+Woods of Mystery Grass SW,                        grass,          NONE,                   WOODS_MYSTERY,                0x00201,                    RANDOM
+Woods of Mystery Grass N 1,                       grass,          NONE,                   WOODS_MYSTERY,                0x00307,                    RANDOM
+Woods of Mystery Grass N 2,                       grass,          NONE,                   WOODS_MYSTERY,                0x00308,                    RANDOM
+Woods of Mystery Grass Center 1,                  grass,          NONE,                   WOODS_MYSTERY,                0x00406,                    RANDOM
+Woods of Mystery Grass Center 2,                  grass,          NONE,                   WOODS_MYSTERY,                0x00407,                    RANDOM
+Woods of Mystery Grass Center 3,                  grass,          NONE,                   WOODS_MYSTERY,                0x00408,                    RANDOM
+Woods of Mystery Grass Center 4,                  grass,          NONE,                   WOODS_MYSTERY,                0x00409,                    RANDOM
+Woods of Mystery Grass S 1,                       grass,          NONE,                   WOODS_MYSTERY,                0x00507,                    RANDOM
+Woods of Mystery Grass S 2,                       grass,          NONE,                   WOODS_MYSTERY,                0x00508,                    RANDOM
+Woods of Mystery Grass NE 1,                      grass,          NONE,                   WOODS_MYSTERY,                0x00601,                    RANDOM
+Woods of Mystery Grass NE 2,                      grass,          NONE,                   WOODS_MYSTERY,                0x00602,                    RANDOM
+Woods of Mystery Grass E 1,                       grass,          NONE,                   WOODS_MYSTERY,                0x00707,                    RANDOM
+Woods of Mystery Grass E 2,                       grass,          NONE,                   WOODS_MYSTERY,                0x00708,                    RANDOM
+Woods of Mystery Grass SE 1,                      grass,          NONE,                   WOODS_MYSTERY,                0x00801,                    RANDOM
+Woods of Mystery Grass SE 2,                      grass,          NONE,                   WOODS_MYSTERY,                0x00802,                    RANDOM
+Woods of Mystery Grass SE 3,                      grass,          NONE,                   WOODS_MYSTERY,                0x00803,                    RANDOM
+Woods of Mystery Grass SE 4,                      grass,          NONE,                   WOODS_MYSTERY,                0x00804,                    RANDOM
+Woods of Mystery Grass SE 5,                      grass,          NONE,                   WOODS_MYSTERY,                0x00806,                    RANDOM
 Swamp Archery Reward 1,                           npc,            NONE,                   SHOOTING_GALLERY_SWAMP,       SHOOTING_GAME_SWAMP_1,      BOW
 Swamp Archery Reward 2,                           npc,            NONE,                   SHOOTING_GALLERY_SWAMP,       SHOOTING_GAME_SWAMP_2,      HEART_PIECE
 Swamp Potion Shop Kotake,                         npc,            NONE,                   WOODS_MYSTERY,                KOTAKE_RED_POTION,          BOTTLE_POTION_RED
@@ -408,6 +434,12 @@ Woodfall Great Fairy,                             npc,            NONE,         
 Woodfall Pot 1,                                   pot,            NONE,                   WOODFALL,                     0x0006,                     FAIRY
 Woodfall Pot 2,                                   pot,            NONE,                   WOODFALL,                     0x0007,                     NUTS_10
 Woodfall Pot 3,                                   pot,            NONE,                   WOODFALL,                     0x0008,                     STICK
+Woodfall Grass 1,                                 grass,          NONE,                   WOODFALL,                     0x00011,                    RANDOM
+Woodfall Grass 2,                                 grass,          NONE,                   WOODFALL,                     0x00012,                    RANDOM
+Woodfall Grass 3,                                 grass,          NONE,                   WOODFALL,                     0x00013,                    RANDOM
+Woodfall Grass 4,                                 grass,          NONE,                   WOODFALL,                     0x00014,                    RANDOM
+Woodfall Grass 5,                                 grass,          NONE,                   WOODFALL,                     0x00015,                    RANDOM
+Woodfall Grass 6,                                 grass,          NONE,                   WOODFALL,                     0x00016,                    RANDOM
 Swamp Spider House Mask of Truth,                 npc,            NONE,                   SPIDER_HOUSE_SWAMP,           SPIDER_HOUSE_SWAMP,         MASK_TRUTH
 Swamp Skulltula Main Room Near Ceiling,           chest,          NONE,                   SPIDER_HOUSE_SWAMP,           0x00,                       GS_TOKEN_SWAMP
 Swamp Skulltula Main Room Lower Right Soft Soil,  chest,          NONE,                   SPIDER_HOUSE_SWAMP,           0x0c,                       GS_TOKEN_SWAMP
@@ -467,6 +499,36 @@ Mountain Village Frog Choir HP,                   npc,            DON_GERO_CHOIR
 Mountain Village Tunnel Grotto,                   chest,          NONE,                   GROTTOS,                      0x1b,                       RUPEE_RED
 Mountain Village Owl Statue,                      npc,            NONE,                   MOUNTAIN_VILLAGE_WINTER,      OWL_MOUNTAIN_VILLAGE,       OWL_MOUNTAIN_VILLAGE
 Mountain Village Pot,                             pot,            NONE,                   MOUNTAIN_VILLAGE_WINTER,      0x0026,                     FAIRY
+Mountain Village Grass 1,                         grass,          NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x0001a,                    RANDOM
+Mountain Village Grass 2,                         grass,          NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x0001b,                    RANDOM
+Mountain Village Grass 3,                         grass,          NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x0001c,                    RANDOM
+Mountain Village Grass Pack 1 Grass 1,            grass,          NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x0001d,                    RANDOM
+Mountain Village Grass Pack 1 Grass 2,            grass,          NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x1001d,                    RANDOM
+Mountain Village Grass Pack 1 Grass 3,            grass,          NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x2001d,                    RANDOM
+Mountain Village Grass Pack 1 Grass 4,            grass,          NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x3001d,                    RANDOM
+Mountain Village Grass Pack 1 Grass 5,            grass,          NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x4001d,                    RANDOM
+Mountain Village Grass Pack 1 Grass 6,            grass,          NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x5001d,                    RANDOM
+Mountain Village Grass Pack 1 Grass 7,            grass,          NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x6001d,                    RANDOM
+Mountain Village Grass Pack 1 Grass 8,            grass,          NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x7001d,                    RANDOM
+Mountain Village Grass Pack 1 Grass 9,            grass,          NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x8001d,                    RANDOM
+Mountain Village Grass Pack 2 Grass 1,            grass,          NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x0001e,                    RANDOM
+Mountain Village Grass Pack 2 Grass 2,            grass,          NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x1001e,                    RANDOM
+Mountain Village Grass Pack 2 Grass 3,            grass,          NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x2001e,                    RANDOM
+Mountain Village Grass Pack 2 Grass 4,            grass,          NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x3001e,                    RANDOM
+Mountain Village Grass Pack 2 Grass 5,            grass,          NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x4001e,                    RANDOM
+Mountain Village Grass Pack 2 Grass 6,            grass,          NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x5001e,                    RANDOM
+Mountain Village Grass Pack 2 Grass 7,            grass,          NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x6001e,                    RANDOM
+Mountain Village Grass Pack 2 Grass 8,            grass,          NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x7001e,                    RANDOM
+Mountain Village Grass Pack 2 Grass 9,            grass,          NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x8001e,                    RANDOM
+Mountain Village Grass Pack 3 Grass 1,            grass,          NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x0001f,                    RANDOM
+Mountain Village Grass Pack 3 Grass 2,            grass,          NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x1001f,                    RANDOM
+Mountain Village Grass Pack 3 Grass 3,            grass,          NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x2001f,                    RANDOM
+Mountain Village Grass Pack 3 Grass 4,            grass,          NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x3001f,                    RANDOM
+Mountain Village Grass Pack 3 Grass 5,            grass,          NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x4001f,                    RANDOM
+Mountain Village Grass Pack 3 Grass 6,            grass,          NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x5001f,                    RANDOM
+Mountain Village Grass Pack 3 Grass 7,            grass,          NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x6001f,                    RANDOM
+Mountain Village Grass Pack 3 Grass 8,            grass,          NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x7001f,                    RANDOM
+Mountain Village Grass Pack 3 Grass 9,            grass,          NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x8001f,                    RANDOM
 Blacksmith Razor Blade,                           npc,            BLACKSMITH,             BLACKSMITH,                   SWORD_RAZOR,                SWORD
 Blacksmith Gilded Sword,                          npc,            BLACKSMITH,             BLACKSMITH,                   SWORD_GILDED,               SWORD
 Lone Peak Shrine Lens Chest,                      chest,          NONE,                   GROTTOS,                      0x01,                       LENS
@@ -477,6 +539,18 @@ Twin Islands Underwater Chest 1,                  chest,          NONE,         
 Twin Islands Underwater Chest 2,                  chest,          NONE,                   TWIN_ISLANDS_WINTER,          0x00,                       RUPEE_RED
 Twin Islands Frozen Grotto Chest,                 chest,          NONE,                   GROTTOS,                      0x02,                       RUPEE_RED
 Twin Islands Ramp Grotto Chest,                   chest,          NONE,                   GROTTOS,                      0x19,                       BOMBCHU
+Twin Islands Grass 01,                            grass,          NONE,                   TWIN_ISLANDS_SPRING,          0x0000b,                    RANDOM
+Twin Islands Grass 02,                            grass,          NONE,                   TWIN_ISLANDS_SPRING,          0x1000b,                    RANDOM
+Twin Islands Grass 03,                            grass,          NONE,                   TWIN_ISLANDS_SPRING,          0x2000b,                    RANDOM
+Twin Islands Grass 04,                            grass,          NONE,                   TWIN_ISLANDS_SPRING,          0x3000b,                    RANDOM
+Twin Islands Grass 05,                            grass,          NONE,                   TWIN_ISLANDS_SPRING,          0x4000b,                    RANDOM
+Twin Islands Grass 06,                            grass,          NONE,                   TWIN_ISLANDS_SPRING,          0x5000b,                    RANDOM
+Twin Islands Grass 07,                            grass,          NONE,                   TWIN_ISLANDS_SPRING,          0x6000b,                    RANDOM
+Twin Islands Grass 08,                            grass,          NONE,                   TWIN_ISLANDS_SPRING,          0x7000b,                    RANDOM
+Twin Islands Grass 09,                            grass,          NONE,                   TWIN_ISLANDS_SPRING,          0x8000b,                    RANDOM
+Twin Islands Grass 10,                            grass,          NONE,                   TWIN_ISLANDS_SPRING,          0x9000b,                    RANDOM
+Twin Islands Grass 11,                            grass,          NONE,                   TWIN_ISLANDS_SPRING,          0xa000b,                    RANDOM
+Twin Islands Grass 12,                            grass,          NONE,                   TWIN_ISLANDS_SPRING,          0xb000b,                    RANDOM
 Goron Elder,                                      npc,            NONE,                   TWIN_ISLANDS_WINTER,          GORON_ELDER,                SONG_GORON_HALF
 Goron Baby,                                       npc,            NONE,                   GORON_SHRINE,                 GORON_BABY,                 SONG_GORON
 Goron Shrine Pot 01,                              pot,            NONE,                   GORON_SHRINE,                 0x0023,                     STICK
@@ -732,8 +806,46 @@ Road to Ikana Stone Mask,                         npc,            INVISIBLE_SOLD
 Road to Ikana Pot,                                pot,            NONE,                   ROAD_IKANA,                   0x004c,                     FAIRY
 Gorman Track Garo Mask,                           npc,            NONE,                   GORMAN_TRACK,                 MASK_GARO,                  MASK_GARO
 Gorman Track Milk Purchase,                       npc,            NONE,                   GORMAN_TRACK,                 GORMAN_MILK,                MILK
+Gorman Track Grass Pack 1 Grass 01,               grass,          NONE,                   GORMAN_TRACK,                 0x00024,                    RANDOM
+Gorman Track Grass Pack 1 Grass 02,               grass,          NONE,                   GORMAN_TRACK,                 0x10024,                    RANDOM
+Gorman Track Grass Pack 1 Grass 03,               grass,          NONE,                   GORMAN_TRACK,                 0x20024,                    RANDOM
+Gorman Track Grass Pack 1 Grass 04,               grass,          NONE,                   GORMAN_TRACK,                 0x30024,                    RANDOM
+Gorman Track Grass Pack 1 Grass 05,               grass,          NONE,                   GORMAN_TRACK,                 0x40024,                    RANDOM
+Gorman Track Grass Pack 1 Grass 06,               grass,          NONE,                   GORMAN_TRACK,                 0x50024,                    RANDOM
+Gorman Track Grass Pack 1 Grass 07,               grass,          NONE,                   GORMAN_TRACK,                 0x60024,                    RANDOM
+Gorman Track Grass Pack 1 Grass 08,               grass,          NONE,                   GORMAN_TRACK,                 0x70024,                    RANDOM
+Gorman Track Grass Pack 1 Grass 09,               grass,          NONE,                   GORMAN_TRACK,                 0x80024,                    RANDOM
+Gorman Track Grass Pack 1 Grass 10,               grass,          NONE,                   GORMAN_TRACK,                 0x90024,                    RANDOM
+Gorman Track Grass Pack 1 Grass 11,               grass,          NONE,                   GORMAN_TRACK,                 0xa0024,                    RANDOM
+Gorman Track Grass Pack 1 Grass 12,               grass,          NONE,                   GORMAN_TRACK,                 0xb0024,                    RANDOM
+Gorman Track Grass Pack 2 Grass 01,               grass,          NONE,                   GORMAN_TRACK,                 0x00025,                    RANDOM
+Gorman Track Grass Pack 2 Grass 02,               grass,          NONE,                   GORMAN_TRACK,                 0x10025,                    RANDOM
+Gorman Track Grass Pack 2 Grass 03,               grass,          NONE,                   GORMAN_TRACK,                 0x20025,                    RANDOM
+Gorman Track Grass Pack 2 Grass 04,               grass,          NONE,                   GORMAN_TRACK,                 0x30025,                    RANDOM
+Gorman Track Grass Pack 2 Grass 05,               grass,          NONE,                   GORMAN_TRACK,                 0x40025,                    RANDOM
+Gorman Track Grass Pack 2 Grass 06,               grass,          NONE,                   GORMAN_TRACK,                 0x50025,                    RANDOM
+Gorman Track Grass Pack 2 Grass 07,               grass,          NONE,                   GORMAN_TRACK,                 0x60025,                    RANDOM
+Gorman Track Grass Pack 2 Grass 08,               grass,          NONE,                   GORMAN_TRACK,                 0x70025,                    RANDOM
+Gorman Track Grass Pack 2 Grass 09,               grass,          NONE,                   GORMAN_TRACK,                 0x80025,                    RANDOM
+Gorman Track Grass Pack 2 Grass 10,               grass,          NONE,                   GORMAN_TRACK,                 0x90025,                    RANDOM
+Gorman Track Grass Pack 2 Grass 11,               grass,          NONE,                   GORMAN_TRACK,                 0xa0025,                    RANDOM
+Gorman Track Grass Pack 2 Grass 12,               grass,          NONE,                   GORMAN_TRACK,                 0xb0025,                    RANDOM
 Ikana Graveyard Captain Mask,                     chest,          NONE,                   IKANA_GRAVEYARD,              0x00,                       MASK_CAPTAIN
 Ikana Graveyard Grotto,                           chest,          NONE,                   GROTTOS,                      0x18,                       BOMBCHU_5
+Ikana Graveyard Grass 1,                          grass,          NONE,                   IKANA_GRAVEYARD,              0x0001f,                    RANDOM
+Ikana Graveyard Grass 2,                          grass,          NONE,                   IKANA_GRAVEYARD,              0x00027,                    RANDOM
+Ikana Graveyard Grass 3,                          grass,          NONE,                   IKANA_GRAVEYARD,              0x00028,                    RANDOM
+Ikana Graveyard Grass 4,                          grass,          NONE,                   IKANA_GRAVEYARD,              0x00029,                    RANDOM
+Ikana Graveyard Grass 5,                          grass,          NONE,                   IKANA_GRAVEYARD,              0x0002a,                    RANDOM
+Ikana Graveyard Grass Pack Grass 1,               grass,          NONE,                   IKANA_GRAVEYARD,              0x0012f,                    RANDOM
+Ikana Graveyard Grass Pack Grass 2,               grass,          NONE,                   IKANA_GRAVEYARD,              0x1012f,                    RANDOM
+Ikana Graveyard Grass Pack Grass 3,               grass,          NONE,                   IKANA_GRAVEYARD,              0x2012f,                    RANDOM
+Ikana Graveyard Grass Pack Grass 4,               grass,          NONE,                   IKANA_GRAVEYARD,              0x3012f,                    RANDOM
+Ikana Graveyard Grass Pack Grass 5,               grass,          NONE,                   IKANA_GRAVEYARD,              0x4012f,                    RANDOM
+Ikana Graveyard Grass Pack Grass 6,               grass,          NONE,                   IKANA_GRAVEYARD,              0x5012f,                    RANDOM
+Ikana Graveyard Grass Pack Grass 7,               grass,          NONE,                   IKANA_GRAVEYARD,              0x6012f,                    RANDOM
+Ikana Graveyard Grass Pack Grass 8,               grass,          NONE,                   IKANA_GRAVEYARD,              0x7012f,                    RANDOM
+Ikana Graveyard Grass Pack Grass 9,               grass,          NONE,                   IKANA_GRAVEYARD,              0x8012f,                    RANDOM
 Beneath The Graveyard Chest,                      chest,          NONE,                   BENEATH_THE_GRAVEYARD,        0x03,                       RUPEE_PURPLE
 Beneath The Graveyard Song of Storms,             npc,            NONE,                   BENEATH_THE_GRAVEYARD,        SONG_STORMS,                SONG_STORMS
 Beneath The Graveyard HP,                         chest,          NONE,                   BENEATH_THE_GRAVEYARD,        0x00,                       HEART_PIECE
@@ -1228,6 +1340,35 @@ Secret Shrine Pot 6,                              pot,            NONE,         
 Secret Shrine Pot 7,                              pot,            NONE,                   SECRET_SHRINE,                0x0109,                     ARROWS_10
 Secret Shrine Pot 8,                              pot,            NONE,                   SECRET_SHRINE,                0x010a,                     MAGIC_JAR_SMALL
 Secret Shrine Pot 9,                              pot,            NONE,                   SECRET_SHRINE,                0x010b,                     FAIRY
+Secret Shrine Grass Entrance 1,                   grass,          NONE,                   SECRET_SHRINE,                0x0001a,                    RANDOM
+Secret Shrine Grass Entrance 2,                   grass,          NONE,                   SECRET_SHRINE,                0x0001b,                    RANDOM
+Secret Shrine Grass Entrance 3,                   grass,          NONE,                   SECRET_SHRINE,                0x0001c,                    RANDOM
+Secret Shrine Grass Entrance 4,                   grass,          NONE,                   SECRET_SHRINE,                0x0001d,                    RANDOM
+Secret Shrine Grass Entrance 5,                   grass,          NONE,                   SECRET_SHRINE,                0x0001e,                    RANDOM
+Secret Shrine Grass Entrance 6,                   grass,          NONE,                   SECRET_SHRINE,                0x0001f,                    RANDOM
+Secret Shrine Grass Dinolfos 1,                   grass,          NONE,                   SECRET_SHRINE,                0x00204,                    RANDOM
+Secret Shrine Grass Dinolfos 2,                   grass,          NONE,                   SECRET_SHRINE,                0x00205,                    RANDOM
+Secret Shrine Grass Dinolfos 3,                   grass,          NONE,                   SECRET_SHRINE,                0x00206,                    RANDOM
+Secret Shrine Grass Dinolfos 4,                   grass,          NONE,                   SECRET_SHRINE,                0x00207,                    RANDOM
+Secret Shrine Grass Wizzrobe 1,                   grass,          NONE,                   SECRET_SHRINE,                0x00306,                    RANDOM
+Secret Shrine Grass Wizzrobe 2,                   grass,          NONE,                   SECRET_SHRINE,                0x00307,                    RANDOM
+Secret Shrine Grass Wizzrobe 3,                   grass,          NONE,                   SECRET_SHRINE,                0x00308,                    RANDOM
+Secret Shrine Grass Wizzrobe 4,                   grass,          NONE,                   SECRET_SHRINE,                0x00309,                    RANDOM
+Secret Shrine Grass Wizzrobe 5,                   grass,          NONE,                   SECRET_SHRINE,                0x0030a,                    RANDOM
+Secret Shrine Grass Wart 1,                       grass,          NONE,                   SECRET_SHRINE,                0x00405,                    RANDOM
+Secret Shrine Grass Wart 2,                       grass,          NONE,                   SECRET_SHRINE,                0x00406,                    RANDOM
+Secret Shrine Grass Wart 3,                       grass,          NONE,                   SECRET_SHRINE,                0x00407,                    RANDOM
+Secret Shrine Grass Wart 4,                       grass,          NONE,                   SECRET_SHRINE,                0x00408,                    RANDOM
+Secret Shrine Grass Wart 5,                       grass,          NONE,                   SECRET_SHRINE,                0x00409,                    RANDOM
+Secret Shrine Grass Wart 6,                       grass,          NONE,                   SECRET_SHRINE,                0x0040a,                    RANDOM
+Secret Shrine Grass Wart 7,                       grass,          NONE,                   SECRET_SHRINE,                0x0040b,                    RANDOM
+Secret Shrine Grass Wart 8,                       grass,          NONE,                   SECRET_SHRINE,                0x0040c,                    RANDOM
+Secret Shrine Grass Garo Master 1,                grass,          NONE,                   SECRET_SHRINE,                0x00502,                    RANDOM
+Secret Shrine Grass Garo Master 2,                grass,          NONE,                   SECRET_SHRINE,                0x00503,                    RANDOM
+Secret Shrine Grass Garo Master 3,                grass,          NONE,                   SECRET_SHRINE,                0x00504,                    RANDOM
+Secret Shrine Grass Garo Master 4,                grass,          NONE,                   SECRET_SHRINE,                0x00505,                    RANDOM
+Secret Shrine Grass Garo Master 5,                grass,          NONE,                   SECRET_SHRINE,                0x00506,                    RANDOM
+Secret Shrine Grass Garo Master 6,                grass,          NONE,                   SECRET_SHRINE,                0x00507,                    RANDOM
 Sakon Hideout Pot Second Room 1,                  pot,            NONE,                   SAKON_HIDEOUT,                0x0127,                     RECOVERY_HEART
 Sakon Hideout Pot Second Room 2,                  pot,            NONE,                   SAKON_HIDEOUT,                0x0128,                     RECOVERY_HEART
 Sakon Hideout Pot First Room 1,                   pot,            NONE,                   SAKON_HIDEOUT,                0x0129,                     RECOVERY_HEART

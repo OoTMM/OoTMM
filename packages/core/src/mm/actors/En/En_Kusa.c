@@ -27,6 +27,13 @@ void EnKusa_Aliases(Xflag* xflag)
             xflag->id -= 4;
         }
         break;
+    case SCE_MM_WOODFALL:
+        if (xflag->setupId == 2)
+        {
+            xflag->setupId = 0;
+            xflag->id += 8;
+        }
+        break;
     }
 }
 

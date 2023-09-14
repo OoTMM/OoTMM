@@ -333,6 +333,9 @@
   locations:
     "Clock Town Guru Guru Mask Bremen": "is_night1 || is_night2"
     "Clock Town Stray Fairy": "is_day"
+    "Clock Town Laundry Pool Grass 1": "true"
+    "Clock Town Laundry Pool Grass 2": "true"
+    "Clock Town Laundry Pool Grass 3": "true"
 "Clock Town Fairy Fountain":
   region: ENTRANCE
   exits:
@@ -1148,6 +1151,29 @@
     MUSHROOM: "has(MASK_SCENTS)"
   locations:
     "Swamp Potion Shop Kotake": "true"
+    "Woods of Mystery Grass NW 1": "final_day"
+    "Woods of Mystery Grass NW 2": "final_day"
+    "Woods of Mystery Grass W 1": "true"
+    "Woods of Mystery Grass W 2": "true"
+    "Woods of Mystery Grass W 3": "true"
+    "Woods of Mystery Grass SW": "first_day"
+    "Woods of Mystery Grass N 1": "true"
+    "Woods of Mystery Grass N 2": "true"
+    "Woods of Mystery Grass Center 1": "true"
+    "Woods of Mystery Grass Center 2": "true"
+    "Woods of Mystery Grass Center 3": "true"
+    "Woods of Mystery Grass Center 4": "true"
+    "Woods of Mystery Grass S 1": "true"
+    "Woods of Mystery Grass S 2": "true"
+    "Woods of Mystery Grass NE 1": "true"
+    "Woods of Mystery Grass NE 2": "true"
+    "Woods of Mystery Grass E 1": "true"
+    "Woods of Mystery Grass E 2": "true"
+    "Woods of Mystery Grass SE 1": "second_day"
+    "Woods of Mystery Grass SE 2": "second_day"
+    "Woods of Mystery Grass SE 3": "second_day"
+    "Woods of Mystery Grass SE 4": "second_day"
+    "Woods of Mystery Grass SE 5": "second_day"
 "Woods of Mystery Grotto":
   region: ENTRANCE
   exits:
@@ -1274,6 +1300,12 @@
     "Woodfall Entrance Chest": "has(MASK_DEKU) || can_hookshot || event(CLEAN_SWAMP)"
     "Woodfall HP Chest": "(has(MASK_DEKU) && (soul_deku_scrub || event(CLEAN_SWAMP))) || can_hookshot"
     "Woodfall Near Owl Chest": "(has(MASK_DEKU) && (soul_deku_scrub || event(CLEAN_SWAMP))) || (event(CLEAN_SWAMP) && can_hookshot) || hookshot_anywhere"
+    "Woodfall Grass 1": "true"
+    "Woodfall Grass 2": "true"
+    "Woodfall Grass 3": "true"
+    "Woodfall Grass 4": "true"
+    "Woodfall Grass 5": "true"
+    "Woodfall Grass 6": "true"
 "Woodfall Front of Temple":
   region: WOODFALL
   exits:
@@ -1366,6 +1398,36 @@
     "Mountain Village Don Gero Mask": "event(GORON_FOOD)"
     "Mountain Village Frog Choir HP": "event(BOSS_SNOWHEAD) && event(FROG_1) && event(FROG_2) && event(FROG_3) && event(FROG_4)"
     "Mountain Village Pot": "scarecrow_hookshot || short_hook_anywhere"
+    "Mountain Village Grass 1": "true"
+    "Mountain Village Grass 2": "true"
+    "Mountain Village Grass 3": "true"
+    "Mountain Village Grass Pack 1 Grass 1": "true"
+    "Mountain Village Grass Pack 1 Grass 2": "true"
+    "Mountain Village Grass Pack 1 Grass 3": "true"
+    "Mountain Village Grass Pack 1 Grass 4": "true"
+    "Mountain Village Grass Pack 1 Grass 5": "true"
+    "Mountain Village Grass Pack 1 Grass 6": "true"
+    "Mountain Village Grass Pack 1 Grass 7": "true"
+    "Mountain Village Grass Pack 1 Grass 8": "true"
+    "Mountain Village Grass Pack 1 Grass 9": "true"
+    "Mountain Village Grass Pack 2 Grass 1": "true"
+    "Mountain Village Grass Pack 2 Grass 2": "true"
+    "Mountain Village Grass Pack 2 Grass 3": "true"
+    "Mountain Village Grass Pack 2 Grass 4": "true"
+    "Mountain Village Grass Pack 2 Grass 5": "true"
+    "Mountain Village Grass Pack 2 Grass 6": "true"
+    "Mountain Village Grass Pack 2 Grass 7": "true"
+    "Mountain Village Grass Pack 2 Grass 8": "true"
+    "Mountain Village Grass Pack 2 Grass 9": "true"
+    "Mountain Village Grass Pack 3 Grass 1": "true"
+    "Mountain Village Grass Pack 3 Grass 2": "true"
+    "Mountain Village Grass Pack 3 Grass 3": "true"
+    "Mountain Village Grass Pack 3 Grass 4": "true"
+    "Mountain Village Grass Pack 3 Grass 5": "true"
+    "Mountain Village Grass Pack 3 Grass 6": "true"
+    "Mountain Village Grass Pack 3 Grass 7": "true"
+    "Mountain Village Grass Pack 3 Grass 8": "true"
+    "Mountain Village Grass Pack 3 Grass 9": "true"
 "Near Village Grotto":
   region: MOUNTAIN_VILLAGE
   exits:
@@ -1415,6 +1477,18 @@
     "Twin Islands Underwater Chest 1": "event(BOSS_SNOWHEAD) && has_mask_zora"
     "Twin Islands Underwater Chest 2": "event(BOSS_SNOWHEAD) && has_mask_zora"
     "Goron Elder": "has_mask_goron && cond(!setting(erBoss, none), can_use_fire_arrows || (setting(bossWarpPads, bossBeaten) && has_hot_water_er), can_use_fire_arrows || has_hot_water_mtn || has_hot_water_er || (has_hot_water_distance && has(OWL_MOUNTAIN_VILLAGE))) && (first_day || second_day)"
+    "Twin Islands Grass 01": "true"
+    "Twin Islands Grass 02": "true"
+    "Twin Islands Grass 03": "true"
+    "Twin Islands Grass 04": "true"
+    "Twin Islands Grass 05": "true"
+    "Twin Islands Grass 06": "true"
+    "Twin Islands Grass 07": "true"
+    "Twin Islands Grass 08": "true"
+    "Twin Islands Grass 09": "true"
+    "Twin Islands Grass 10": "true"
+    "Twin Islands Grass 11": "true"
+    "Twin Islands Grass 12": "true"
 "Twin Islands Ramp Grotto":
   region: ENTRANCE
   exits:
@@ -2063,6 +2137,31 @@
   exits:
     "Behind Gorman Fence": "true"
     "Gorman Track Front": "(can_goron_bomb_jump && has_bombs) || (is_night2 && event(ALIENS)) || short_hook_anywhere"
+  locations:
+    "Gorman Track Grass Pack 1 Grass 01": "true"
+    "Gorman Track Grass Pack 1 Grass 02": "true"
+    "Gorman Track Grass Pack 1 Grass 03": "true"
+    "Gorman Track Grass Pack 1 Grass 04": "true"
+    "Gorman Track Grass Pack 1 Grass 05": "true"
+    "Gorman Track Grass Pack 1 Grass 06": "true"
+    "Gorman Track Grass Pack 1 Grass 07": "true"
+    "Gorman Track Grass Pack 1 Grass 08": "true"
+    "Gorman Track Grass Pack 1 Grass 09": "true"
+    "Gorman Track Grass Pack 1 Grass 10": "true"
+    "Gorman Track Grass Pack 1 Grass 11": "true"
+    "Gorman Track Grass Pack 1 Grass 12": "true"
+    "Gorman Track Grass Pack 2 Grass 01": "true"
+    "Gorman Track Grass Pack 2 Grass 02": "true"
+    "Gorman Track Grass Pack 2 Grass 03": "true"
+    "Gorman Track Grass Pack 2 Grass 04": "true"
+    "Gorman Track Grass Pack 2 Grass 05": "true"
+    "Gorman Track Grass Pack 2 Grass 06": "true"
+    "Gorman Track Grass Pack 2 Grass 07": "true"
+    "Gorman Track Grass Pack 2 Grass 08": "true"
+    "Gorman Track Grass Pack 2 Grass 09": "true"
+    "Gorman Track Grass Pack 2 Grass 10": "true"
+    "Gorman Track Grass Pack 2 Grass 11": "true"
+    "Gorman Track Grass Pack 2 Grass 12": "true"
 "Road to Ikana Front":
   region: ROAD_TO_IKANA
   events:
@@ -2116,6 +2215,20 @@
     "Beneath The Graveyard Night 3": "soul_stalchild && has(MASK_CAPTAIN) && is_night3"
   locations:
     "Ikana Graveyard Captain Mask": "soul(SOUL_CAPTAIN_KEETA) && can_play_awakening && has_arrows && can_fight"
+    "Ikana Graveyard Grass 1": "true"
+    "Ikana Graveyard Grass 2": "true"
+    "Ikana Graveyard Grass 3": "true"
+    "Ikana Graveyard Grass 4": "true"
+    "Ikana Graveyard Grass 5": "true"
+    "Ikana Graveyard Grass Pack Grass 1": "true"
+    "Ikana Graveyard Grass Pack Grass 2": "true"
+    "Ikana Graveyard Grass Pack Grass 3": "true"
+    "Ikana Graveyard Grass Pack Grass 4": "true"
+    "Ikana Graveyard Grass Pack Grass 5": "true"
+    "Ikana Graveyard Grass Pack Grass 6": "true"
+    "Ikana Graveyard Grass Pack Grass 7": "true"
+    "Ikana Graveyard Grass Pack Grass 8": "true"
+    "Ikana Graveyard Grass Pack Grass 9": "true"
 "Ikana Graveyard Grotto":
   region: ENTRANCE
   events:
