@@ -320,6 +320,30 @@ Termina Field Grass Pack 18 Grass 09,                   grass,          NONE,   
 Termina Field Grass Pack 18 Grass 10,                   grass,          NONE,                   TERMINA_FIELD,                0x900bd,                    RANDOM
 Termina Field Grass Pack 18 Grass 11,                   grass,          NONE,                   TERMINA_FIELD,                0xa00bd,                    RANDOM
 Termina Field Grass Pack 18 Grass 12,                   grass,          NONE,                   TERMINA_FIELD,                0xb00bd,                    RANDOM
+Ocean Gossip Grotto Grass 1,                            grass,          NONE,                   GROTTOS,                      0x00001,                    RANDOM
+Ocean Gossip Grotto Grass 2,                            grass,          NONE,                   GROTTOS,                      0x00004,                    RANDOM
+Ocean Gossip Grotto Grass 3,                            grass,          NONE,                   GROTTOS,                      0x00006,                    RANDOM
+Ocean Gossip Grotto Grass 4,                            grass,          NONE,                   GROTTOS,                      0x00007,                    RANDOM
+Ocean Gossip Grotto Grass 5,                            grass,          NONE,                   GROTTOS,                      0x00008,                    RANDOM
+Canyon Gossip Grotto Grass 1,                           grass,          NONE,                   GROTTOS,                      0x00200,                    RANDOM
+Canyon Gossip Grotto Grass 2,                           grass,          NONE,                   GROTTOS,                      0x00201,                    RANDOM
+Canyon Gossip Grotto Grass 3,                           grass,          NONE,                   GROTTOS,                      0x00202,                    RANDOM
+Canyon Gossip Grotto Grass 4,                           grass,          NONE,                   GROTTOS,                      0x00203,                    RANDOM
+Canyon Gossip Grotto Grass 5,                           grass,          NONE,                   GROTTOS,                      0x00204,                    RANDOM
+Bio Baba Grotto Grass 1,                                grass,          NONE,                   GROTTOS,                      0x00b00,                    RANDOM
+Bio Baba Grotto Grass 2,                                grass,          NONE,                   GROTTOS,                      0x00b03,                    RANDOM
+Peahat Grotto Grass 01,                                 grass,          NONE,                   GROTTOS,                      0x00d01,                    RANDOM
+Peahat Grotto Grass 02,                                 grass,          NONE,                   GROTTOS,                      0x10d01,                    RANDOM
+Peahat Grotto Grass 03,                                 grass,          NONE,                   GROTTOS,                      0x20d01,                    RANDOM
+Peahat Grotto Grass 04,                                 grass,          NONE,                   GROTTOS,                      0x30d01,                    RANDOM
+Peahat Grotto Grass 05,                                 grass,          NONE,                   GROTTOS,                      0x40d01,                    RANDOM
+Peahat Grotto Grass 06,                                 grass,          NONE,                   GROTTOS,                      0x50d01,                    RANDOM
+Peahat Grotto Grass 07,                                 grass,          NONE,                   GROTTOS,                      0x60d01,                    RANDOM
+Peahat Grotto Grass 08,                                 grass,          NONE,                   GROTTOS,                      0x70d01,                    RANDOM
+Peahat Grotto Grass 09,                                 grass,          NONE,                   GROTTOS,                      0x80d01,                    RANDOM
+Peahat Grotto Grass 10,                                 grass,          NONE,                   GROTTOS,                      0x90d01,                    RANDOM
+Peahat Grotto Grass 11,                                 grass,          NONE,                   GROTTOS,                      0xa0d01,                    RANDOM
+Peahat Grotto Grass 12,                                 grass,          NONE,                   GROTTOS,                      0xb0d01,                    RANDOM
 Road to Southern Swamp HP,                              collectible,    NONE,                   ROAD_SOUTHERN_SWAMP,          0x01,                       HEART_PIECE
 Road to Southern Swamp Grotto,                          chest,          NONE,                   GROTTOS,                      0x1e,                       RUPEE_RED
 Road to Southern Swamp Grass Pack 1 Grass 01,           grass,          NONE,                   ROAD_SOUTHERN_SWAMP,          0x00023,                    RANDOM
@@ -423,6 +447,18 @@ Deku Palace Sonata of Awakening,                        npc,            NONE,   
 Deku Palace Grotto Chest,                               chest,          NONE,                   GROTTOS,                      0x05,                       RUPEE_RED
 Deku Palace Pot 1,                                      pot,            NONE,                   DEKU_PALACE,                  0x010f,                     MAGIC_JAR_SMALL
 Deku Palace Pot 2,                                      pot,            NONE,                   DEKU_PALACE,                  0x0110,                     MAGIC_JAR_SMALL
+Deku Palace Grotto Grass 01,                            grass,          NONE,                   GROTTOS,                      0x00c03,                    RANDOM
+Deku Palace Grotto Grass 02,                            grass,          NONE,                   GROTTOS,                      0x10c03,                    RANDOM
+Deku Palace Grotto Grass 03,                            grass,          NONE,                   GROTTOS,                      0x20c03,                    RANDOM
+Deku Palace Grotto Grass 04,                            grass,          NONE,                   GROTTOS,                      0x30c03,                    RANDOM
+Deku Palace Grotto Grass 05,                            grass,          NONE,                   GROTTOS,                      0x40c03,                    RANDOM
+Deku Palace Grotto Grass 06,                            grass,          NONE,                   GROTTOS,                      0x50c03,                    RANDOM
+Deku Palace Grotto Grass 07,                            grass,          NONE,                   GROTTOS,                      0x60c03,                    RANDOM
+Deku Palace Grotto Grass 08,                            grass,          NONE,                   GROTTOS,                      0x70c03,                    RANDOM
+Deku Palace Grotto Grass 09,                            grass,          NONE,                   GROTTOS,                      0x80c03,                    RANDOM
+Deku Palace Grotto Grass 10,                            grass,          NONE,                   GROTTOS,                      0x90c03,                    RANDOM
+Deku Palace Grotto Grass 11,                            grass,          NONE,                   GROTTOS,                      0xa0c03,                    RANDOM
+Deku Palace Grotto Grass 12,                            grass,          NONE,                   GROTTOS,                      0xb0c03,                    RANDOM
 Deku Shrine Mask of Scents,                             npc,            BUTLER_RACE,            DEKU_SHRINE,                  MASK_SCENTS,                MASK_SCENTS
 Deku Shrine Pot 1,                                      pot,            NONE,                   DEKU_SHRINE,                  0x000e,                     RUPEE_GREEN
 Deku Shrine Pot 2,                                      pot,            NONE,                   DEKU_SHRINE,                  0x000f,                     RUPEE_GREEN
@@ -534,6 +570,30 @@ Blacksmith Gilded Sword,                                npc,            BLACKSMI
 Lone Peak Shrine Lens Chest,                            chest,          NONE,                   GROTTOS,                      0x01,                       LENS
 Lone Peak Shrine Boulder Chest,                         chest,          NONE,                   GROTTOS,                      0x06,                       RUPEE_RED
 Lone Peak Shrine Invisible Chest,                       chest,          NONE,                   GROTTOS,                      0x03,                       RUPEE_PURPLE
+Lone Peak Shrine Grass Pack 1 Grass 01,                 grass,          NONE,                   GROTTOS,                      0x00500,                    RANDOM
+Lone Peak Shrine Grass Pack 1 Grass 02,                 grass,          NONE,                   GROTTOS,                      0x10500,                    RANDOM
+Lone Peak Shrine Grass Pack 1 Grass 03,                 grass,          NONE,                   GROTTOS,                      0x20500,                    RANDOM
+Lone Peak Shrine Grass Pack 1 Grass 04,                 grass,          NONE,                   GROTTOS,                      0x30500,                    RANDOM
+Lone Peak Shrine Grass Pack 1 Grass 05,                 grass,          NONE,                   GROTTOS,                      0x40500,                    RANDOM
+Lone Peak Shrine Grass Pack 1 Grass 06,                 grass,          NONE,                   GROTTOS,                      0x50500,                    RANDOM
+Lone Peak Shrine Grass Pack 1 Grass 07,                 grass,          NONE,                   GROTTOS,                      0x60500,                    RANDOM
+Lone Peak Shrine Grass Pack 1 Grass 08,                 grass,          NONE,                   GROTTOS,                      0x70500,                    RANDOM
+Lone Peak Shrine Grass Pack 1 Grass 09,                 grass,          NONE,                   GROTTOS,                      0x80500,                    RANDOM
+Lone Peak Shrine Grass Pack 1 Grass 10,                 grass,          NONE,                   GROTTOS,                      0x90500,                    RANDOM
+Lone Peak Shrine Grass Pack 1 Grass 11,                 grass,          NONE,                   GROTTOS,                      0xa0500,                    RANDOM
+Lone Peak Shrine Grass Pack 1 Grass 12,                 grass,          NONE,                   GROTTOS,                      0xb0500,                    RANDOM
+Lone Peak Shrine Grass Pack 2 Grass 01,                 grass,          NONE,                   GROTTOS,                      0x00502,                    RANDOM
+Lone Peak Shrine Grass Pack 2 Grass 02,                 grass,          NONE,                   GROTTOS,                      0x10502,                    RANDOM
+Lone Peak Shrine Grass Pack 2 Grass 03,                 grass,          NONE,                   GROTTOS,                      0x20502,                    RANDOM
+Lone Peak Shrine Grass Pack 2 Grass 04,                 grass,          NONE,                   GROTTOS,                      0x30502,                    RANDOM
+Lone Peak Shrine Grass Pack 2 Grass 05,                 grass,          NONE,                   GROTTOS,                      0x40502,                    RANDOM
+Lone Peak Shrine Grass Pack 2 Grass 06,                 grass,          NONE,                   GROTTOS,                      0x50502,                    RANDOM
+Lone Peak Shrine Grass Pack 2 Grass 07,                 grass,          NONE,                   GROTTOS,                      0x60502,                    RANDOM
+Lone Peak Shrine Grass Pack 2 Grass 08,                 grass,          NONE,                   GROTTOS,                      0x70502,                    RANDOM
+Lone Peak Shrine Grass Pack 2 Grass 09,                 grass,          NONE,                   GROTTOS,                      0x80502,                    RANDOM
+Lone Peak Shrine Grass Pack 2 Grass 10,                 grass,          NONE,                   GROTTOS,                      0x90502,                    RANDOM
+Lone Peak Shrine Grass Pack 2 Grass 11,                 grass,          NONE,                   GROTTOS,                      0xa0502,                    RANDOM
+Lone Peak Shrine Grass Pack 2 Grass 12,                 grass,          NONE,                   GROTTOS,                      0xb0502,                    RANDOM
 Goron Graveyard Mask,                                   npc,            NONE,                   GORON_GRAVEYARD,              MASK_GORON,                 MASK_GORON
 Twin Islands Underwater Chest 1,                        chest,          NONE,                   TWIN_ISLANDS_WINTER,          0x06,                       HEART_PIECE
 Twin Islands Underwater Chest 2,                        chest,          NONE,                   TWIN_ISLANDS_WINTER,          0x00,                       RUPEE_RED

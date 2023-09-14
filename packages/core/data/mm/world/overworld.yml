@@ -828,6 +828,18 @@
     "Termina Field": "true"
   locations:
     "Termina Field Peahat Grotto": "soul_peahat && (can_fight || has_arrows || has(MASK_DEKU)) && is_day"
+    "Peahat Grotto Grass 01": "true"
+    "Peahat Grotto Grass 02": "true"
+    "Peahat Grotto Grass 03": "true"
+    "Peahat Grotto Grass 04": "true"
+    "Peahat Grotto Grass 05": "true"
+    "Peahat Grotto Grass 06": "true"
+    "Peahat Grotto Grass 07": "true"
+    "Peahat Grotto Grass 08": "true"
+    "Peahat Grotto Grass 09": "true"
+    "Peahat Grotto Grass 10": "true"
+    "Peahat Grotto Grass 11": "true"
+    "Peahat Grotto Grass 12": "true"
 "Bio Baba Grotto":
   region: ENTRANCE
   events:
@@ -837,6 +849,8 @@
     "Termina Field": "true"
   locations:
     "Termina Field Bio Baba Grotto": "has_mask_zora"
+    "Bio Baba Grotto Grass 1": "true"
+    "Bio Baba Grotto Grass 2": "true"
 "Dodongo Grotto":
   region: ENTRANCE
   exits:
@@ -928,6 +942,11 @@
     "Termina Field": "true"
   locations:
     "Termina Field Gossip Stones HP": "event(SWAMP_SONG) && event(MOUNTAIN_SONG) && event(OCEAN_SONG) && event(CANYON_SONG)"
+    "Ocean Gossip Grotto Grass 1": "true"
+    "Ocean Gossip Grotto Grass 2": "true"
+    "Ocean Gossip Grotto Grass 3": "true"
+    "Ocean Gossip Grotto Grass 4": "true"
+    "Ocean Gossip Grotto Grass 5": "true"
   gossip:
     "Termina Field Gossip Grotto Leftmost": "true"
     "Termina Field Gossip Grotto Left-Center": "true"
@@ -948,6 +967,11 @@
     "Termina Field": "true"
   locations:
     "Termina Field Gossip Stones HP": "event(SWAMP_SONG) && event(MOUNTAIN_SONG) && event(OCEAN_SONG) && event(CANYON_SONG)"
+    "Canyon Gossip Grotto Grass 1": "true"
+    "Canyon Gossip Grotto Grass 2": "true"
+    "Canyon Gossip Grotto Grass 3": "true"
+    "Canyon Gossip Grotto Grass 4": "true"
+    "Canyon Gossip Grotto Grass 5": "true"
   gossip:
     "Termina Field Gossip Grotto Leftmost": "true"
     "Termina Field Gossip Grotto Left-Center": "true"
@@ -1263,6 +1287,18 @@
     WATER: "true"
   locations:
     "Deku Palace Grotto Chest": "can_use_beans || can_hookshot_short"
+    "Deku Palace Grotto Grass 01": "true"
+    "Deku Palace Grotto Grass 02": "true"
+    "Deku Palace Grotto Grass 03": "true"
+    "Deku Palace Grotto Grass 04": "true"
+    "Deku Palace Grotto Grass 05": "true"
+    "Deku Palace Grotto Grass 06": "true"
+    "Deku Palace Grotto Grass 07": "true"
+    "Deku Palace Grotto Grass 08": "true"
+    "Deku Palace Grotto Grass 09": "true"
+    "Deku Palace Grotto Grass 10": "true"
+    "Deku Palace Grotto Grass 11": "true"
+    "Deku Palace Grotto Grass 12": "true"
 #    "Deku Palace Free Bean": "true"
 #    "Deku Palace Bean Purchase": "can_use_wallet(1)"
 "Deku Palace Cliff":
@@ -1567,6 +1603,30 @@
     "Lone Peak Shrine Lens Chest": "true"
     "Lone Peak Shrine Boulder Chest": "has_explosives || trick_keg_explosives"
     "Lone Peak Shrine Invisible Chest": "can_use_lens"
+    "Lone Peak Shrine Grass Pack 1 Grass 01": "true"
+    "Lone Peak Shrine Grass Pack 1 Grass 02": "true"
+    "Lone Peak Shrine Grass Pack 1 Grass 03": "true"
+    "Lone Peak Shrine Grass Pack 1 Grass 04": "true"
+    "Lone Peak Shrine Grass Pack 1 Grass 05": "true"
+    "Lone Peak Shrine Grass Pack 1 Grass 06": "true"
+    "Lone Peak Shrine Grass Pack 1 Grass 07": "true"
+    "Lone Peak Shrine Grass Pack 1 Grass 08": "true"
+    "Lone Peak Shrine Grass Pack 1 Grass 09": "true"
+    "Lone Peak Shrine Grass Pack 1 Grass 10": "true"
+    "Lone Peak Shrine Grass Pack 1 Grass 11": "true"
+    "Lone Peak Shrine Grass Pack 1 Grass 12": "true"
+    "Lone Peak Shrine Grass Pack 2 Grass 01": "true"
+    "Lone Peak Shrine Grass Pack 2 Grass 02": "true"
+    "Lone Peak Shrine Grass Pack 2 Grass 03": "true"
+    "Lone Peak Shrine Grass Pack 2 Grass 04": "true"
+    "Lone Peak Shrine Grass Pack 2 Grass 05": "true"
+    "Lone Peak Shrine Grass Pack 2 Grass 06": "true"
+    "Lone Peak Shrine Grass Pack 2 Grass 07": "true"
+    "Lone Peak Shrine Grass Pack 2 Grass 08": "true"
+    "Lone Peak Shrine Grass Pack 2 Grass 09": "true"
+    "Lone Peak Shrine Grass Pack 2 Grass 10": "true"
+    "Lone Peak Shrine Grass Pack 2 Grass 11": "true"
+    "Lone Peak Shrine Grass Pack 2 Grass 12": "true"
 "Near Goron Graveyard":
   region: MOUNTAIN_VILLAGE
   exits:
