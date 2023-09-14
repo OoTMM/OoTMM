@@ -2,19 +2,6 @@
 
 void ObjGrass_GetXflag(Xflag* xflag, Actor_ObjGrass_PackBush* bush);
 
-void ObjGrassCarry_InitWrapper(Actor_EnKusa* this, GameState_Play* play)
-{
-    ActorFunc init;
-
-    /* Set dummy xflags (will be set by Obj_Grass) */
-    memset(&this->xflag, 0, sizeof(Xflag));
-    this->xflag.sceneId = 0xff;
-
-    /* Forward init */
-    init = actorAddr(AC_OBJ_GRASS_CARRY, 0x809ab2f0);
-    init(&this->base, play);
-}
-
 void ObjGrassCarry_SpawnDropsWrapper(Actor_ObjGrassCarry* this)
 {
     Xflag xflag;
@@ -31,4 +18,9 @@ void ObjGrassCarry_SpawnDropsWrapper(Actor_ObjGrassCarry* this)
             return;
         }
     }
+
+    /* Run the default function */
+    void (*ObjGrassCarry_SpawnDrops)(Vec3f*, u16, GameState_Play*);
+    ObjGrassCarry_SpawnDrops = actorAddr(AC_OBJ_GRASS_CARRY, 0x809aaf9c);
+    ObjGrassCarry_SpawnDrops(&this->base.position, this->drop, gPlay);
 }

@@ -11,13 +11,12 @@ typedef struct ALIGNED(4)
     Actor                       base;
     char                        unk[0x50];
     Actor_ObjGrass_PackBush*    bush;
-    char                        unk2[0x8];
-
-    /* Custom */
-    Xflag   xflag;
+    u16                         drop;
+    char                        unk2[0x2];
+    void*                       handler;
 }
 Actor_ObjGrassCarry;
 
-_Static_assert(sizeof(Actor_ObjGrassCarry) == 0x1a8, "MM Actor_ObjGrass size is wrong");
+_Static_assert(sizeof(Actor_ObjGrassCarry) == 0x1a0, "MM Actor_ObjGrass size is wrong");
 
 #endif
