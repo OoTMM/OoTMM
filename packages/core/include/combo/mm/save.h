@@ -208,7 +208,9 @@ typedef struct
     char            unk_3ca4[0x4];
     s32             gameMode;
     s32             sceneSetupId;
-    char            unk_3cb0[0x278];
+    char            unk_3cb0[0x077];
+    u8              grottoChestFlag;
+    char            unk_3d28[0x200];
     u16             magicState;
     u16             isMagicRequested;
     u16             magicFlag;
@@ -231,17 +233,19 @@ MmSaveContext;
 _Static_assert(sizeof(MmSave) == 0x3ca0, "MmSave size is wrong");
 _Static_assert(sizeof(MmSaveContext) == 0x48cc, "MmSaveContext size is wrong");
 
-ASSERT_OFFSET(MmSaveContext, fileIndex,     0x3ca0);
-ASSERT_OFFSET(MmSaveContext, unk_3ca4,      0x3ca4);
-ASSERT_OFFSET(MmSaveContext, gameMode,      0x3ca8);
-ASSERT_OFFSET(MmSaveContext, sceneSetupId,  0x3cac);
-ASSERT_OFFSET(MmSaveContext, unk_3cb0,      0x3cb0);
-ASSERT_OFFSET(MmSaveContext, dungeonId2,    0x3f36);
-ASSERT_OFFSET(MmSaveContext, options,       0x3f40);
-ASSERT_OFFSET(MmSaveContext, unk_3f4c,      0x3f4c);
-ASSERT_OFFSET(MmSaveContext, healthDelta,   0x3f5a);
-ASSERT_OFFSET(MmSaveContext, unk_3f5c,      0x3f5c);
-ASSERT_OFFSET(MmSaveContext, dungeonId,     0x48c8);
+ASSERT_OFFSET(MmSaveContext, fileIndex,         0x3ca0);
+ASSERT_OFFSET(MmSaveContext, unk_3ca4,          0x3ca4);
+ASSERT_OFFSET(MmSaveContext, gameMode,          0x3ca8);
+ASSERT_OFFSET(MmSaveContext, sceneSetupId,      0x3cac);
+ASSERT_OFFSET(MmSaveContext, unk_3cb0,          0x3cb0);
+ASSERT_OFFSET(MmSaveContext, grottoChestFlag,   0x3d27);
+ASSERT_OFFSET(MmSaveContext, unk_3d28,          0x3d28);
+ASSERT_OFFSET(MmSaveContext, dungeonId2,        0x3f36);
+ASSERT_OFFSET(MmSaveContext, options,           0x3f40);
+ASSERT_OFFSET(MmSaveContext, unk_3f4c,          0x3f4c);
+ASSERT_OFFSET(MmSaveContext, healthDelta,       0x3f5a);
+ASSERT_OFFSET(MmSaveContext, unk_3f5c,          0x3f5c);
+ASSERT_OFFSET(MmSaveContext, dungeonId,         0x48c8);
 
 #if defined(GAME_MM)
 ALIGNED(16) extern MmSaveContext gSaveContext;

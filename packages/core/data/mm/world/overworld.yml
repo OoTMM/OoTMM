@@ -820,6 +820,20 @@
     "Termina Field": "true"
   locations:
     "Termina Field Tall Grass Grotto": "true"
+    "Termina Field Tall Grass Grotto Grass 01": "true"
+    "Termina Field Tall Grass Grotto Grass 02": "true"
+    "Termina Field Tall Grass Grotto Grass 03": "true"
+    "Termina Field Tall Grass Grotto Grass 04": "true"
+    "Termina Field Tall Grass Grotto Grass 05": "true"
+    "Termina Field Tall Grass Grotto Grass 06": "true"
+    "Termina Field Tall Grass Grotto Grass 07": "true"
+    "Termina Field Tall Grass Grotto Grass 08": "true"
+    "Termina Field Tall Grass Grotto Grass 09": "true"
+    "Termina Field Tall Grass Grotto Grass 10": "true"
+    "Termina Field Tall Grass Grotto Grass 11": "true"
+    "Termina Field Tall Grass Grotto Grass 12": "true"
+    "Termina Field Tall Grass Grotto Grass 13": "true"
+    "Termina Field Tall Grass Grotto Grass 14": "true"
 "Peahat Grotto":
   region: ENTRANCE
   events:
@@ -873,6 +887,20 @@
     "Termina Field": "true"
   locations:
     "Termina Field Pillar Grotto": "true"
+    "Termina Field Pillar Grotto Grass 01": "true"
+    "Termina Field Pillar Grotto Grass 02": "true"
+    "Termina Field Pillar Grotto Grass 03": "true"
+    "Termina Field Pillar Grotto Grass 04": "true"
+    "Termina Field Pillar Grotto Grass 05": "true"
+    "Termina Field Pillar Grotto Grass 06": "true"
+    "Termina Field Pillar Grotto Grass 07": "true"
+    "Termina Field Pillar Grotto Grass 08": "true"
+    "Termina Field Pillar Grotto Grass 09": "true"
+    "Termina Field Pillar Grotto Grass 10": "true"
+    "Termina Field Pillar Grotto Grass 11": "true"
+    "Termina Field Pillar Grotto Grass 12": "true"
+    "Termina Field Pillar Grotto Grass 13": "true"
+    "Termina Field Pillar Grotto Grass 14": "true"
 "Scrub Grotto":
   region: ENTRANCE
   events:
@@ -1115,6 +1143,20 @@
     "Road to Southern Swamp": "true"
   locations:
     "Road to Southern Swamp Grotto": "true"
+    "Road to Southern Swamp Grotto Grass 01": "true"
+    "Road to Southern Swamp Grotto Grass 02": "true"
+    "Road to Southern Swamp Grotto Grass 03": "true"
+    "Road to Southern Swamp Grotto Grass 04": "true"
+    "Road to Southern Swamp Grotto Grass 05": "true"
+    "Road to Southern Swamp Grotto Grass 06": "true"
+    "Road to Southern Swamp Grotto Grass 07": "true"
+    "Road to Southern Swamp Grotto Grass 08": "true"
+    "Road to Southern Swamp Grotto Grass 09": "true"
+    "Road to Southern Swamp Grotto Grass 10": "true"
+    "Road to Southern Swamp Grotto Grass 11": "true"
+    "Road to Southern Swamp Grotto Grass 12": "true"
+    "Road to Southern Swamp Grotto Grass 13": "true"
+    "Road to Southern Swamp Grotto Grass 14": "true"
 "Swamp Front":
   region: SOUTHERN_SWAMP
   exits:
@@ -1223,6 +1265,20 @@
     "Near Swamp Grotto": "true"
   locations:
     "Southern Swamp Grotto": "true"
+    "Southern Swamp Grotto Grass 01": "true"
+    "Southern Swamp Grotto Grass 02": "true"
+    "Southern Swamp Grotto Grass 03": "true"
+    "Southern Swamp Grotto Grass 04": "true"
+    "Southern Swamp Grotto Grass 05": "true"
+    "Southern Swamp Grotto Grass 06": "true"
+    "Southern Swamp Grotto Grass 07": "true"
+    "Southern Swamp Grotto Grass 08": "true"
+    "Southern Swamp Grotto Grass 09": "true"
+    "Southern Swamp Grotto Grass 10": "true"
+    "Southern Swamp Grotto Grass 11": "true"
+    "Southern Swamp Grotto Grass 12": "true"
+    "Southern Swamp Grotto Grass 13": "true"
+    "Southern Swamp Grotto Grass 14": "true"
 "Tourist Information":
   region: ENTRANCE
   exits:
@@ -1286,6 +1342,20 @@
     MUSHROOM: "has(MASK_SCENTS)"
   locations:
     "Woods of Mystery Grotto": "true"
+    "Woods of Mystery Grotto Grass 01": "true"
+    "Woods of Mystery Grotto Grass 02": "true"
+    "Woods of Mystery Grotto Grass 03": "true"
+    "Woods of Mystery Grotto Grass 04": "true"
+    "Woods of Mystery Grotto Grass 05": "true"
+    "Woods of Mystery Grotto Grass 06": "true"
+    "Woods of Mystery Grotto Grass 07": "true"
+    "Woods of Mystery Grotto Grass 08": "true"
+    "Woods of Mystery Grotto Grass 09": "true"
+    "Woods of Mystery Grotto Grass 10": "true"
+    "Woods of Mystery Grotto Grass 11": "true"
+    "Woods of Mystery Grotto Grass 12": "true"
+    "Woods of Mystery Grotto Grass 13": "true"
+    "Woods of Mystery Grotto Grass 14": "true"
 "Swamp Potion Shop":
   region: ENTRANCE
   events:
@@ -1558,6 +1628,20 @@
     MUSHROOM: "has(MASK_SCENTS)"
   locations:
     "Mountain Village Tunnel Grotto": "true"
+    "Mountain Village Tunnel Grotto Grass 01": "true"
+    "Mountain Village Tunnel Grotto Grass 02": "true"
+    "Mountain Village Tunnel Grotto Grass 03": "true"
+    "Mountain Village Tunnel Grotto Grass 04": "true"
+    "Mountain Village Tunnel Grotto Grass 05": "true"
+    "Mountain Village Tunnel Grotto Grass 06": "true"
+    "Mountain Village Tunnel Grotto Grass 07": "true"
+    "Mountain Village Tunnel Grotto Grass 08": "true"
+    "Mountain Village Tunnel Grotto Grass 09": "true"
+    "Mountain Village Tunnel Grotto Grass 10": "true"
+    "Mountain Village Tunnel Grotto Grass 11": "true"
+    "Mountain Village Tunnel Grotto Grass 12": "true"
+    "Mountain Village Tunnel Grotto Grass 13": "true"
+    "Mountain Village Tunnel Grotto Grass 14": "true"
 "Blacksmith":
   region: ENTRANCE
   exits:
@@ -1613,6 +1697,20 @@
     MUSHROOM: "has(MASK_SCENTS)"
   locations:
     "Twin Islands Ramp Grotto Chest": "true"
+    "Twin Islands Ramp Grotto Grass 01": "true"
+    "Twin Islands Ramp Grotto Grass 02": "true"
+    "Twin Islands Ramp Grotto Grass 03": "true"
+    "Twin Islands Ramp Grotto Grass 04": "true"
+    "Twin Islands Ramp Grotto Grass 05": "true"
+    "Twin Islands Ramp Grotto Grass 06": "true"
+    "Twin Islands Ramp Grotto Grass 07": "true"
+    "Twin Islands Ramp Grotto Grass 08": "true"
+    "Twin Islands Ramp Grotto Grass 09": "true"
+    "Twin Islands Ramp Grotto Grass 10": "true"
+    "Twin Islands Ramp Grotto Grass 11": "true"
+    "Twin Islands Ramp Grotto Grass 12": "true"
+    "Twin Islands Ramp Grotto Grass 13": "true"
+    "Twin Islands Ramp Grotto Grass 14": "true"
 "Twin Islands Frozen Grotto":
   region: ENTRANCE
   exits:
@@ -1783,6 +1881,20 @@
     MUSHROOM: "has(MASK_SCENTS)"
   locations:
     "Path to Snowhead Grotto": "true"
+    "Path to Snowhead Grotto Grass 01": "true"
+    "Path to Snowhead Grotto Grass 02": "true"
+    "Path to Snowhead Grotto Grass 03": "true"
+    "Path to Snowhead Grotto Grass 04": "true"
+    "Path to Snowhead Grotto Grass 05": "true"
+    "Path to Snowhead Grotto Grass 06": "true"
+    "Path to Snowhead Grotto Grass 07": "true"
+    "Path to Snowhead Grotto Grass 08": "true"
+    "Path to Snowhead Grotto Grass 09": "true"
+    "Path to Snowhead Grotto Grass 10": "true"
+    "Path to Snowhead Grotto Grass 11": "true"
+    "Path to Snowhead Grotto Grass 12": "true"
+    "Path to Snowhead Grotto Grass 13": "true"
+    "Path to Snowhead Grotto Grass 14": "true"
 "Snowhead Entrance":
   region: SNOWHEAD
   exits:
@@ -2065,6 +2177,20 @@
     "Great Bay Coast": "true"
   locations:
     "Great Bay Coast Fisherman Grotto": "true"
+    "Great Bay Coast Fisherman Grotto Grass 01": "true"
+    "Great Bay Coast Fisherman Grotto Grass 02": "true"
+    "Great Bay Coast Fisherman Grotto Grass 03": "true"
+    "Great Bay Coast Fisherman Grotto Grass 04": "true"
+    "Great Bay Coast Fisherman Grotto Grass 05": "true"
+    "Great Bay Coast Fisherman Grotto Grass 06": "true"
+    "Great Bay Coast Fisherman Grotto Grass 07": "true"
+    "Great Bay Coast Fisherman Grotto Grass 08": "true"
+    "Great Bay Coast Fisherman Grotto Grass 09": "true"
+    "Great Bay Coast Fisherman Grotto Grass 10": "true"
+    "Great Bay Coast Fisherman Grotto Grass 11": "true"
+    "Great Bay Coast Fisherman Grotto Grass 12": "true"
+    "Great Bay Coast Fisherman Grotto Grass 13": "true"
+    "Great Bay Coast Fisherman Grotto Grass 14": "true"
 "GBC Near Cow Grotto":
   region: GREAT_BAY_COAST
   exits:
@@ -2236,6 +2362,20 @@
     "Great Bay Coast": "true"
   locations:
     "Zora Cape Grotto": "true"
+    "Zora Cape Grotto Grass 01": "true"
+    "Zora Cape Grotto Grass 02": "true"
+    "Zora Cape Grotto Grass 03": "true"
+    "Zora Cape Grotto Grass 04": "true"
+    "Zora Cape Grotto Grass 05": "true"
+    "Zora Cape Grotto Grass 06": "true"
+    "Zora Cape Grotto Grass 07": "true"
+    "Zora Cape Grotto Grass 08": "true"
+    "Zora Cape Grotto Grass 09": "true"
+    "Zora Cape Grotto Grass 10": "true"
+    "Zora Cape Grotto Grass 11": "true"
+    "Zora Cape Grotto Grass 12": "true"
+    "Zora Cape Grotto Grass 13": "true"
+    "Zora Cape Grotto Grass 14": "true"
   gossip:
     "Zora Cape Gossip": "true"
 "Great Bay Near Fairy Fountain":
@@ -2391,6 +2531,20 @@
     "Road to Ikana Front": "true"
   locations:
     "Road to Ikana Grotto": "true"
+    "Road to Ikana Grotto Grass 01": "true"
+    "Road to Ikana Grotto Grass 02": "true"
+    "Road to Ikana Grotto Grass 03": "true"
+    "Road to Ikana Grotto Grass 04": "true"
+    "Road to Ikana Grotto Grass 05": "true"
+    "Road to Ikana Grotto Grass 06": "true"
+    "Road to Ikana Grotto Grass 07": "true"
+    "Road to Ikana Grotto Grass 08": "true"
+    "Road to Ikana Grotto Grass 09": "true"
+    "Road to Ikana Grotto Grass 10": "true"
+    "Road to Ikana Grotto Grass 11": "true"
+    "Road to Ikana Grotto Grass 12": "true"
+    "Road to Ikana Grotto Grass 13": "true"
+    "Road to Ikana Grotto Grass 14": "true"
 "Road to Ikana Center":
   region: ROAD_TO_IKANA
   events:
@@ -2448,6 +2602,20 @@
     "Ikana Graveyard": "true"
   locations:
     "Ikana Graveyard Grotto": "true"
+    "Ikana Graveyard Grotto Grass 01": "true"
+    "Ikana Graveyard Grotto Grass 02": "true"
+    "Ikana Graveyard Grotto Grass 03": "true"
+    "Ikana Graveyard Grotto Grass 04": "true"
+    "Ikana Graveyard Grotto Grass 05": "true"
+    "Ikana Graveyard Grotto Grass 06": "true"
+    "Ikana Graveyard Grotto Grass 07": "true"
+    "Ikana Graveyard Grotto Grass 08": "true"
+    "Ikana Graveyard Grotto Grass 09": "true"
+    "Ikana Graveyard Grotto Grass 10": "true"
+    "Ikana Graveyard Grotto Grass 11": "true"
+    "Ikana Graveyard Grotto Grass 12": "true"
+    "Ikana Graveyard Grotto Grass 13": "true"
+    "Ikana Graveyard Grotto Grass 14": "true"
 "Beneath The Graveyard Night 1":
   region: ENTRANCE
   events:
@@ -2540,6 +2708,20 @@
     BUGS: "true"
   locations:
     "Ikana Valley Grotto": "true"
+    "Ikana Valley Grotto Grass 01": "true"
+    "Ikana Valley Grotto Grass 02": "true"
+    "Ikana Valley Grotto Grass 03": "true"
+    "Ikana Valley Grotto Grass 04": "true"
+    "Ikana Valley Grotto Grass 05": "true"
+    "Ikana Valley Grotto Grass 06": "true"
+    "Ikana Valley Grotto Grass 07": "true"
+    "Ikana Valley Grotto Grass 08": "true"
+    "Ikana Valley Grotto Grass 09": "true"
+    "Ikana Valley Grotto Grass 10": "true"
+    "Ikana Valley Grotto Grass 11": "true"
+    "Ikana Valley Grotto Grass 12": "true"
+    "Ikana Valley Grotto Grass 13": "true"
+    "Ikana Valley Grotto Grass 14": "true"
 "Sakon Hideout":
   region: ENTRANCE
   exits:

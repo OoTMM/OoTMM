@@ -94,7 +94,35 @@ Termina Field Tall Grass Chest,                         chest,          NONE,   
 Termina Field Tree Stump Chest,                         chest,          NONE,                   TERMINA_FIELD,                0x02,                       RUPEE_RED
 Termina Field Kamaro Mask,                              npc,            NONE,                   TERMINA_FIELD,                MASK_KAMARO,                MASK_KAMARO
 Termina Field Tall Grass Grotto,                        chest,          NONE,                   GROTTOS,                      0x1f,                       RUPEE_RED
+Termina Field Tall Grass Grotto Grass 01,               grass,          NONE,                   GROTTOS,                      0x03f00,                    RANDOM
+Termina Field Tall Grass Grotto Grass 02,               grass,          NONE,                   GROTTOS,                      0x03f01,                    RANDOM
+Termina Field Tall Grass Grotto Grass 03,               grass,          NONE,                   GROTTOS,                      0x03f02,                    RANDOM
+Termina Field Tall Grass Grotto Grass 04,               grass,          NONE,                   GROTTOS,                      0x03f03,                    RANDOM
+Termina Field Tall Grass Grotto Grass 05,               grass,          NONE,                   GROTTOS,                      0x03f05,                    RANDOM
+Termina Field Tall Grass Grotto Grass 06,               grass,          NONE,                   GROTTOS,                      0x03f06,                    RANDOM
+Termina Field Tall Grass Grotto Grass 07,               grass,          NONE,                   GROTTOS,                      0x03f0a,                    RANDOM
+Termina Field Tall Grass Grotto Grass 08,               grass,          NONE,                   GROTTOS,                      0x03f0b,                    RANDOM
+Termina Field Tall Grass Grotto Grass 09,               grass,          NONE,                   GROTTOS,                      0x03f0c,                    RANDOM
+Termina Field Tall Grass Grotto Grass 10,               grass,          NONE,                   GROTTOS,                      0x03f0e,                    RANDOM
+Termina Field Tall Grass Grotto Grass 11,               grass,          NONE,                   GROTTOS,                      0x03f10,                    RANDOM
+Termina Field Tall Grass Grotto Grass 12,               grass,          NONE,                   GROTTOS,                      0x03f11,                    RANDOM
+Termina Field Tall Grass Grotto Grass 13,               grass,          NONE,                   GROTTOS,                      0x03f12,                    RANDOM
+Termina Field Tall Grass Grotto Grass 14,               grass,          NONE,                   GROTTOS,                      0x03f13,                    RANDOM
 Termina Field Pillar Grotto,                            chest,          NONE,                   GROTTOS,                      0x1a,                       BOMBCHU
+Termina Field Pillar Grotto Grass 01,                   grass,          NONE,                   GROTTOS,                      0x03a00,                    RANDOM
+Termina Field Pillar Grotto Grass 02,                   grass,          NONE,                   GROTTOS,                      0x03a01,                    RANDOM
+Termina Field Pillar Grotto Grass 03,                   grass,          NONE,                   GROTTOS,                      0x03a02,                    RANDOM
+Termina Field Pillar Grotto Grass 04,                   grass,          NONE,                   GROTTOS,                      0x03a03,                    RANDOM
+Termina Field Pillar Grotto Grass 05,                   grass,          NONE,                   GROTTOS,                      0x03a05,                    RANDOM
+Termina Field Pillar Grotto Grass 06,                   grass,          NONE,                   GROTTOS,                      0x03a06,                    RANDOM
+Termina Field Pillar Grotto Grass 07,                   grass,          NONE,                   GROTTOS,                      0x03a0a,                    RANDOM
+Termina Field Pillar Grotto Grass 08,                   grass,          NONE,                   GROTTOS,                      0x03a0b,                    RANDOM
+Termina Field Pillar Grotto Grass 09,                   grass,          NONE,                   GROTTOS,                      0x03a0c,                    RANDOM
+Termina Field Pillar Grotto Grass 10,                   grass,          NONE,                   GROTTOS,                      0x03a0e,                    RANDOM
+Termina Field Pillar Grotto Grass 11,                   grass,          NONE,                   GROTTOS,                      0x03a10,                    RANDOM
+Termina Field Pillar Grotto Grass 12,                   grass,          NONE,                   GROTTOS,                      0x03a11,                    RANDOM
+Termina Field Pillar Grotto Grass 13,                   grass,          NONE,                   GROTTOS,                      0x03a12,                    RANDOM
+Termina Field Pillar Grotto Grass 14,                   grass,          NONE,                   GROTTOS,                      0x03a13,                    RANDOM
 Termina Field Peahat Grotto,                            chest,          NONE,                   GROTTOS,                      0x04,                       HEART_PIECE
 Termina Field Dodongo Grotto,                           chest,          NONE,                   GROTTOS,                      0x00,                       HEART_PIECE
 Termina Field Bio Baba Grotto,                          collectible,    NONE,                   GROTTOS,                      0x02,                       HEART_PIECE
@@ -418,6 +446,20 @@ Peahat Grotto Grass 11,                                 grass,          NONE,   
 Peahat Grotto Grass 12,                                 grass,          NONE,                   GROTTOS,                      0xb0d01,                    RANDOM
 Road to Southern Swamp HP,                              collectible,    NONE,                   ROAD_SOUTHERN_SWAMP,          0x01,                       HEART_PIECE
 Road to Southern Swamp Grotto,                          chest,          NONE,                   GROTTOS,                      0x1e,                       RUPEE_RED
+Road to Southern Swamp Grotto Grass 01,                 grass,          NONE,                   GROTTOS,                      0x03e00,                    RANDOM
+Road to Southern Swamp Grotto Grass 02,                 grass,          NONE,                   GROTTOS,                      0x03e01,                    RANDOM
+Road to Southern Swamp Grotto Grass 03,                 grass,          NONE,                   GROTTOS,                      0x03e02,                    RANDOM
+Road to Southern Swamp Grotto Grass 04,                 grass,          NONE,                   GROTTOS,                      0x03e03,                    RANDOM
+Road to Southern Swamp Grotto Grass 05,                 grass,          NONE,                   GROTTOS,                      0x03e05,                    RANDOM
+Road to Southern Swamp Grotto Grass 06,                 grass,          NONE,                   GROTTOS,                      0x03e06,                    RANDOM
+Road to Southern Swamp Grotto Grass 07,                 grass,          NONE,                   GROTTOS,                      0x03e0a,                    RANDOM
+Road to Southern Swamp Grotto Grass 08,                 grass,          NONE,                   GROTTOS,                      0x03e0b,                    RANDOM
+Road to Southern Swamp Grotto Grass 09,                 grass,          NONE,                   GROTTOS,                      0x03e0c,                    RANDOM
+Road to Southern Swamp Grotto Grass 10,                 grass,          NONE,                   GROTTOS,                      0x03e0e,                    RANDOM
+Road to Southern Swamp Grotto Grass 11,                 grass,          NONE,                   GROTTOS,                      0x03e10,                    RANDOM
+Road to Southern Swamp Grotto Grass 12,                 grass,          NONE,                   GROTTOS,                      0x03e11,                    RANDOM
+Road to Southern Swamp Grotto Grass 13,                 grass,          NONE,                   GROTTOS,                      0x03e12,                    RANDOM
+Road to Southern Swamp Grotto Grass 14,                 grass,          NONE,                   GROTTOS,                      0x03e13,                    RANDOM
 Road to Southern Swamp Grass Pack 1 Grass 01,           grass,          NONE,                   ROAD_SOUTHERN_SWAMP,          0x00023,                    RANDOM
 Road to Southern Swamp Grass Pack 1 Grass 02,           grass,          NONE,                   ROAD_SOUTHERN_SWAMP,          0x10023,                    RANDOM
 Road to Southern Swamp Grass Pack 1 Grass 03,           grass,          NONE,                   ROAD_SOUTHERN_SWAMP,          0x20023,                    RANDOM
@@ -444,6 +486,20 @@ Southern Swamp Scrub Shop,                              npc,            NONE,   
 Southern Swamp Song of Soaring,                         npc,            NONE,                   SOUTHERN_SWAMP,               SONG_SOARING,               SONG_SOARING
 Southern Swamp Owl Statue,                              npc,            NONE,                   SOUTHERN_SWAMP,               OWL_SOUTHERN_SWAMP,         OWL_SOUTHERN_SWAMP
 Southern Swamp Grotto,                                  chest,          NONE,                   GROTTOS,                      0x1d,                       RUPEE_RED
+Southern Swamp Grotto Grass 01,                         grass,          NONE,                   GROTTOS,                      0x03d00,                    RANDOM
+Southern Swamp Grotto Grass 02,                         grass,          NONE,                   GROTTOS,                      0x03d01,                    RANDOM
+Southern Swamp Grotto Grass 03,                         grass,          NONE,                   GROTTOS,                      0x03d02,                    RANDOM
+Southern Swamp Grotto Grass 04,                         grass,          NONE,                   GROTTOS,                      0x03d03,                    RANDOM
+Southern Swamp Grotto Grass 05,                         grass,          NONE,                   GROTTOS,                      0x03d05,                    RANDOM
+Southern Swamp Grotto Grass 06,                         grass,          NONE,                   GROTTOS,                      0x03d06,                    RANDOM
+Southern Swamp Grotto Grass 07,                         grass,          NONE,                   GROTTOS,                      0x03d0a,                    RANDOM
+Southern Swamp Grotto Grass 08,                         grass,          NONE,                   GROTTOS,                      0x03d0b,                    RANDOM
+Southern Swamp Grotto Grass 09,                         grass,          NONE,                   GROTTOS,                      0x03d0c,                    RANDOM
+Southern Swamp Grotto Grass 10,                         grass,          NONE,                   GROTTOS,                      0x03d0e,                    RANDOM
+Southern Swamp Grotto Grass 11,                         grass,          NONE,                   GROTTOS,                      0x03d10,                    RANDOM
+Southern Swamp Grotto Grass 12,                         grass,          NONE,                   GROTTOS,                      0x03d11,                    RANDOM
+Southern Swamp Grotto Grass 13,                         grass,          NONE,                   GROTTOS,                      0x03d12,                    RANDOM
+Southern Swamp Grotto Grass 14,                         grass,          NONE,                   GROTTOS,                      0x03d13,                    RANDOM
 Southern Swamp Pot 1,                                   pot,            NONE,                   SOUTHERN_SWAMP,               0x020e,                     RECOVERY_HEART
 Southern Swamp Pot 2,                                   pot,            NONE,                   SOUTHERN_SWAMP,               0x020f,                     RUPEE_BLUE
 Southern Swamp Pot 3,                                   pot,            NONE,                   SOUTHERN_SWAMP,               0x0210,                     RUPEE_GREEN
@@ -482,6 +538,20 @@ Southern Swamp Grass Near Witch Pack 2 Grass 09,        grass,          NONE,   
 Southern Swamp Grass Near Witch 1,                      grass,          NONE,                   SOUTHERN_SWAMP,               0x00211,                    RANDOM
 Southern Swamp Grass Near Witch 2,                      grass,          NONE,                   SOUTHERN_SWAMP,               0x00212,                    RANDOM
 Woods of Mystery Grotto,                                chest,          NONE,                   GROTTOS,                      0x1c,                       RUPEE_PURPLE
+Woods of Mystery Grotto Grass 01,                       grass,          NONE,                   GROTTOS,                      0x03c00,                    RANDOM
+Woods of Mystery Grotto Grass 02,                       grass,          NONE,                   GROTTOS,                      0x03c01,                    RANDOM
+Woods of Mystery Grotto Grass 03,                       grass,          NONE,                   GROTTOS,                      0x03c02,                    RANDOM
+Woods of Mystery Grotto Grass 04,                       grass,          NONE,                   GROTTOS,                      0x03c03,                    RANDOM
+Woods of Mystery Grotto Grass 05,                       grass,          NONE,                   GROTTOS,                      0x03c05,                    RANDOM
+Woods of Mystery Grotto Grass 06,                       grass,          NONE,                   GROTTOS,                      0x03c06,                    RANDOM
+Woods of Mystery Grotto Grass 07,                       grass,          NONE,                   GROTTOS,                      0x03c0a,                    RANDOM
+Woods of Mystery Grotto Grass 08,                       grass,          NONE,                   GROTTOS,                      0x03c0b,                    RANDOM
+Woods of Mystery Grotto Grass 09,                       grass,          NONE,                   GROTTOS,                      0x03c0c,                    RANDOM
+Woods of Mystery Grotto Grass 10,                       grass,          NONE,                   GROTTOS,                      0x03c0e,                    RANDOM
+Woods of Mystery Grotto Grass 11,                       grass,          NONE,                   GROTTOS,                      0x03c10,                    RANDOM
+Woods of Mystery Grotto Grass 12,                       grass,          NONE,                   GROTTOS,                      0x03c11,                    RANDOM
+Woods of Mystery Grotto Grass 13,                       grass,          NONE,                   GROTTOS,                      0x03c12,                    RANDOM
+Woods of Mystery Grotto Grass 14,                       grass,          NONE,                   GROTTOS,                      0x03c13,                    RANDOM
 Woods of Mystery Grass NW 1,                            grass,          NONE,                   WOODS_MYSTERY,                0x00000,                    RANDOM
 Woods of Mystery Grass NW 2,                            grass,          NONE,                   WOODS_MYSTERY,                0x00001,                    RANDOM
 Woods of Mystery Grass W 1,                             grass,          NONE,                   WOODS_MYSTERY,                0x00103,                    RANDOM
@@ -605,6 +675,20 @@ Mountain Village Waterfall Chest,                       chest,          NONE,   
 Mountain Village Don Gero Mask,                         npc,            NONE,                   MOUNTAIN_VILLAGE_WINTER,      MASK_DON_GERO,              MASK_DON_GERO
 Mountain Village Frog Choir HP,                         npc,            DON_GERO_CHOIR,         MOUNTAIN_VILLAGE_WINTER,      FROG_HEART_PIECE,           HEART_PIECE
 Mountain Village Tunnel Grotto,                         chest,          NONE,                   GROTTOS,                      0x1b,                       RUPEE_RED
+Mountain Village Tunnel Grotto Grass 01,                grass,          NONE,                   GROTTOS,                      0x03b00,                    RANDOM
+Mountain Village Tunnel Grotto Grass 02,                grass,          NONE,                   GROTTOS,                      0x03b01,                    RANDOM
+Mountain Village Tunnel Grotto Grass 03,                grass,          NONE,                   GROTTOS,                      0x03b02,                    RANDOM
+Mountain Village Tunnel Grotto Grass 04,                grass,          NONE,                   GROTTOS,                      0x03b03,                    RANDOM
+Mountain Village Tunnel Grotto Grass 05,                grass,          NONE,                   GROTTOS,                      0x03b05,                    RANDOM
+Mountain Village Tunnel Grotto Grass 06,                grass,          NONE,                   GROTTOS,                      0x03b06,                    RANDOM
+Mountain Village Tunnel Grotto Grass 07,                grass,          NONE,                   GROTTOS,                      0x03b0a,                    RANDOM
+Mountain Village Tunnel Grotto Grass 08,                grass,          NONE,                   GROTTOS,                      0x03b0b,                    RANDOM
+Mountain Village Tunnel Grotto Grass 09,                grass,          NONE,                   GROTTOS,                      0x03b0c,                    RANDOM
+Mountain Village Tunnel Grotto Grass 10,                grass,          NONE,                   GROTTOS,                      0x03b0e,                    RANDOM
+Mountain Village Tunnel Grotto Grass 11,                grass,          NONE,                   GROTTOS,                      0x03b10,                    RANDOM
+Mountain Village Tunnel Grotto Grass 12,                grass,          NONE,                   GROTTOS,                      0x03b11,                    RANDOM
+Mountain Village Tunnel Grotto Grass 13,                grass,          NONE,                   GROTTOS,                      0x03b12,                    RANDOM
+Mountain Village Tunnel Grotto Grass 14,                grass,          NONE,                   GROTTOS,                      0x03b13,                    RANDOM
 Mountain Village Owl Statue,                            npc,            NONE,                   MOUNTAIN_VILLAGE_WINTER,      OWL_MOUNTAIN_VILLAGE,       OWL_MOUNTAIN_VILLAGE
 Mountain Village Pot,                                   pot,            NONE,                   MOUNTAIN_VILLAGE_WINTER,      0x0026,                     FAIRY
 Mountain Village Grass 1,                               grass,          NONE,                   MOUNTAIN_VILLAGE_SPRING,      0x0001a,                    RANDOM
@@ -671,6 +755,20 @@ Twin Islands Underwater Chest 1,                        chest,          NONE,   
 Twin Islands Underwater Chest 2,                        chest,          NONE,                   TWIN_ISLANDS_WINTER,          0x00,                       RUPEE_RED
 Twin Islands Frozen Grotto Chest,                       chest,          NONE,                   GROTTOS,                      0x02,                       RUPEE_RED
 Twin Islands Ramp Grotto Chest,                         chest,          NONE,                   GROTTOS,                      0x19,                       BOMBCHU
+Twin Islands Ramp Grotto Grass 01,                      grass,          NONE,                   GROTTOS,                      0x03900,                    RANDOM
+Twin Islands Ramp Grotto Grass 02,                      grass,          NONE,                   GROTTOS,                      0x03901,                    RANDOM
+Twin Islands Ramp Grotto Grass 03,                      grass,          NONE,                   GROTTOS,                      0x03902,                    RANDOM
+Twin Islands Ramp Grotto Grass 04,                      grass,          NONE,                   GROTTOS,                      0x03903,                    RANDOM
+Twin Islands Ramp Grotto Grass 05,                      grass,          NONE,                   GROTTOS,                      0x03905,                    RANDOM
+Twin Islands Ramp Grotto Grass 06,                      grass,          NONE,                   GROTTOS,                      0x03906,                    RANDOM
+Twin Islands Ramp Grotto Grass 07,                      grass,          NONE,                   GROTTOS,                      0x0390a,                    RANDOM
+Twin Islands Ramp Grotto Grass 08,                      grass,          NONE,                   GROTTOS,                      0x0390b,                    RANDOM
+Twin Islands Ramp Grotto Grass 09,                      grass,          NONE,                   GROTTOS,                      0x0390c,                    RANDOM
+Twin Islands Ramp Grotto Grass 10,                      grass,          NONE,                   GROTTOS,                      0x0390e,                    RANDOM
+Twin Islands Ramp Grotto Grass 11,                      grass,          NONE,                   GROTTOS,                      0x03910,                    RANDOM
+Twin Islands Ramp Grotto Grass 12,                      grass,          NONE,                   GROTTOS,                      0x03911,                    RANDOM
+Twin Islands Ramp Grotto Grass 13,                      grass,          NONE,                   GROTTOS,                      0x03912,                    RANDOM
+Twin Islands Ramp Grotto Grass 14,                      grass,          NONE,                   GROTTOS,                      0x03913,                    RANDOM
 Twin Islands Grass 01,                                  grass,          NONE,                   TWIN_ISLANDS_SPRING,          0x0000b,                    RANDOM
 Twin Islands Grass 02,                                  grass,          NONE,                   TWIN_ISLANDS_SPRING,          0x1000b,                    RANDOM
 Twin Islands Grass 03,                                  grass,          NONE,                   TWIN_ISLANDS_SPRING,          0x2000b,                    RANDOM
@@ -705,6 +803,20 @@ Goron Village Scrub Bomb Bag,                           npc,            NONE,   
 Goron Powder Keg,                                       npc,            NONE,                   GORON_VILLAGE_WINTER,         GORON_KEG,                  POWDER_KEG
 Path to Snowhead HP,                                    collectible,    NONE,                   PATH_SNOWHEAD,                0x08,                       HEART_PIECE
 Path to Snowhead Grotto,                                chest,          NONE,                   GROTTOS,                      0x13,                       RUPEE_RED
+Path to Snowhead Grotto Grass 01,                       grass,          NONE,                   GROTTOS,                      0x03300,                    RANDOM
+Path to Snowhead Grotto Grass 02,                       grass,          NONE,                   GROTTOS,                      0x03301,                    RANDOM
+Path to Snowhead Grotto Grass 03,                       grass,          NONE,                   GROTTOS,                      0x03302,                    RANDOM
+Path to Snowhead Grotto Grass 04,                       grass,          NONE,                   GROTTOS,                      0x03303,                    RANDOM
+Path to Snowhead Grotto Grass 05,                       grass,          NONE,                   GROTTOS,                      0x03305,                    RANDOM
+Path to Snowhead Grotto Grass 06,                       grass,          NONE,                   GROTTOS,                      0x03306,                    RANDOM
+Path to Snowhead Grotto Grass 07,                       grass,          NONE,                   GROTTOS,                      0x0330a,                    RANDOM
+Path to Snowhead Grotto Grass 08,                       grass,          NONE,                   GROTTOS,                      0x0330b,                    RANDOM
+Path to Snowhead Grotto Grass 09,                       grass,          NONE,                   GROTTOS,                      0x0330c,                    RANDOM
+Path to Snowhead Grotto Grass 10,                       grass,          NONE,                   GROTTOS,                      0x0330e,                    RANDOM
+Path to Snowhead Grotto Grass 11,                       grass,          NONE,                   GROTTOS,                      0x03310,                    RANDOM
+Path to Snowhead Grotto Grass 12,                       grass,          NONE,                   GROTTOS,                      0x03311,                    RANDOM
+Path to Snowhead Grotto Grass 13,                       grass,          NONE,                   GROTTOS,                      0x03312,                    RANDOM
+Path to Snowhead Grotto Grass 14,                       grass,          NONE,                   GROTTOS,                      0x03313,                    RANDOM
 Snowhead Great Fairy,                                   npc,            NONE,                   FAIRY_FOUNTAIN,               GREAT_FAIRY_MOUNTAIN,       MAGIC_UPGRADE
 Snowhead Owl Statue,                                    npc,            NONE,                   FAIRY_FOUNTAIN,               OWL_SNOWHEAD,               OWL_SNOWHEAD
 Goron Race Reward,                                      npc,            GORON_RACE,             GORON_RACETRACK,              GORON_RACE,                 BOTTLED_GOLD_DUST
@@ -816,6 +928,20 @@ Great Bay Coast Zora Mask,                              npc,            NONE,   
 Great Bay Coast HP,                                     collectible,    NONE,                   GREAT_BAY_COAST,              0x05,                       HEART_PIECE
 Great Bay Coast Fisherman HP,                           npc,            FISHERMAN_GAME,         GREAT_BAY_COAST,              FISHERMAN_HEART_PIECE,      HEART_PIECE
 Great Bay Coast Fisherman Grotto,                       chest,          NONE,                   GROTTOS,                      0x17,                       RUPEE_RED
+Great Bay Coast Fisherman Grotto Grass 01,              grass,          NONE,                   GROTTOS,                      0x03700,                    RANDOM
+Great Bay Coast Fisherman Grotto Grass 02,              grass,          NONE,                   GROTTOS,                      0x03701,                    RANDOM
+Great Bay Coast Fisherman Grotto Grass 03,              grass,          NONE,                   GROTTOS,                      0x03702,                    RANDOM
+Great Bay Coast Fisherman Grotto Grass 04,              grass,          NONE,                   GROTTOS,                      0x03703,                    RANDOM
+Great Bay Coast Fisherman Grotto Grass 05,              grass,          NONE,                   GROTTOS,                      0x03705,                    RANDOM
+Great Bay Coast Fisherman Grotto Grass 06,              grass,          NONE,                   GROTTOS,                      0x03706,                    RANDOM
+Great Bay Coast Fisherman Grotto Grass 07,              grass,          NONE,                   GROTTOS,                      0x0370a,                    RANDOM
+Great Bay Coast Fisherman Grotto Grass 08,              grass,          NONE,                   GROTTOS,                      0x0370b,                    RANDOM
+Great Bay Coast Fisherman Grotto Grass 09,              grass,          NONE,                   GROTTOS,                      0x0370c,                    RANDOM
+Great Bay Coast Fisherman Grotto Grass 10,              grass,          NONE,                   GROTTOS,                      0x0370e,                    RANDOM
+Great Bay Coast Fisherman Grotto Grass 11,              grass,          NONE,                   GROTTOS,                      0x03710,                    RANDOM
+Great Bay Coast Fisherman Grotto Grass 12,              grass,          NONE,                   GROTTOS,                      0x03711,                    RANDOM
+Great Bay Coast Fisherman Grotto Grass 13,              grass,          NONE,                   GROTTOS,                      0x03712,                    RANDOM
+Great Bay Coast Fisherman Grotto Grass 14,              grass,          NONE,                   GROTTOS,                      0x03713,                    RANDOM
 Great Bay Coast Cow Front,                              cow,            NONE,                   GREAT_BAY_COAST,              0x15,                       MILK
 Great Bay Coast Cow Back,                               cow,            NONE,                   GREAT_BAY_COAST,              0x16,                       MILK
 Great Bay Coast Owl Statue,                             npc,            NONE,                   GREAT_BAY_COAST,              OWL_GREAT_BAY,              OWL_GREAT_BAY
@@ -917,6 +1043,20 @@ Zora Cape Underwater Chest,                             chest,          NONE,   
 Zora Cape Waterfall HP,                                 collectible,    NONE,                   ZORA_CAPE,                    0x07,                       HEART_PIECE
 Zora Cape Owl Statue,                                   npc,            NONE,                   ZORA_CAPE,                    OWL_ZORA_CAPE,              OWL_ZORA_CAPE
 Zora Cape Grotto,                                       chest,          NONE,                   GROTTOS,                      0x15,                       BOMBCHU
+Zora Cape Grotto Grass 01,                              grass,          NONE,                   GROTTOS,                      0x03500,                    RANDOM
+Zora Cape Grotto Grass 02,                              grass,          NONE,                   GROTTOS,                      0x03501,                    RANDOM
+Zora Cape Grotto Grass 03,                              grass,          NONE,                   GROTTOS,                      0x03502,                    RANDOM
+Zora Cape Grotto Grass 04,                              grass,          NONE,                   GROTTOS,                      0x03503,                    RANDOM
+Zora Cape Grotto Grass 05,                              grass,          NONE,                   GROTTOS,                      0x03505,                    RANDOM
+Zora Cape Grotto Grass 06,                              grass,          NONE,                   GROTTOS,                      0x03506,                    RANDOM
+Zora Cape Grotto Grass 07,                              grass,          NONE,                   GROTTOS,                      0x0350a,                    RANDOM
+Zora Cape Grotto Grass 08,                              grass,          NONE,                   GROTTOS,                      0x0350b,                    RANDOM
+Zora Cape Grotto Grass 09,                              grass,          NONE,                   GROTTOS,                      0x0350c,                    RANDOM
+Zora Cape Grotto Grass 10,                              grass,          NONE,                   GROTTOS,                      0x0350e,                    RANDOM
+Zora Cape Grotto Grass 11,                              grass,          NONE,                   GROTTOS,                      0x03510,                    RANDOM
+Zora Cape Grotto Grass 12,                              grass,          NONE,                   GROTTOS,                      0x03511,                    RANDOM
+Zora Cape Grotto Grass 13,                              grass,          NONE,                   GROTTOS,                      0x03512,                    RANDOM
+Zora Cape Grotto Grass 14,                              grass,          NONE,                   GROTTOS,                      0x03513,                    RANDOM
 Zora Cape Pot Near Beavers 1,                           pot,            NONE,                   ZORA_CAPE,                    0x0043,                     RECOVERY_HEART
 Zora Cape Pot Near Beavers 2,                           pot,            NONE,                   ZORA_CAPE,                    0x0044,                     MAGIC_JAR_SMALL
 Zora Cape Pot Near Owl Statue 1,                        pot,            NONE,                   ZORA_CAPE,                    0x0045,                     MAGIC_JAR_LARGE
@@ -1006,6 +1146,20 @@ Waterfall Rapids Beaver Race 1,                         npc,            NONE,   
 Waterfall Rapids Beaver Race 2,                         npc,            NONE,                   WATERFALL_RAPIDS,             BEAVER_2,                   HEART_PIECE
 Road to Ikana Chest,                                    chest,          NONE,                   ROAD_IKANA,                   0x00,                       RUPEE_RED
 Road to Ikana Grotto,                                   chest,          NONE,                   GROTTOS,                      0x16,                       BOMBCHU
+Road to Ikana Grotto Grass 01,                          grass,          NONE,                   GROTTOS,                      0x03600,                    RANDOM
+Road to Ikana Grotto Grass 02,                          grass,          NONE,                   GROTTOS,                      0x03601,                    RANDOM
+Road to Ikana Grotto Grass 03,                          grass,          NONE,                   GROTTOS,                      0x03602,                    RANDOM
+Road to Ikana Grotto Grass 04,                          grass,          NONE,                   GROTTOS,                      0x03603,                    RANDOM
+Road to Ikana Grotto Grass 05,                          grass,          NONE,                   GROTTOS,                      0x03605,                    RANDOM
+Road to Ikana Grotto Grass 06,                          grass,          NONE,                   GROTTOS,                      0x03606,                    RANDOM
+Road to Ikana Grotto Grass 07,                          grass,          NONE,                   GROTTOS,                      0x0360a,                    RANDOM
+Road to Ikana Grotto Grass 08,                          grass,          NONE,                   GROTTOS,                      0x0360b,                    RANDOM
+Road to Ikana Grotto Grass 09,                          grass,          NONE,                   GROTTOS,                      0x0360c,                    RANDOM
+Road to Ikana Grotto Grass 10,                          grass,          NONE,                   GROTTOS,                      0x0360e,                    RANDOM
+Road to Ikana Grotto Grass 11,                          grass,          NONE,                   GROTTOS,                      0x03610,                    RANDOM
+Road to Ikana Grotto Grass 12,                          grass,          NONE,                   GROTTOS,                      0x03611,                    RANDOM
+Road to Ikana Grotto Grass 13,                          grass,          NONE,                   GROTTOS,                      0x03612,                    RANDOM
+Road to Ikana Grotto Grass 14,                          grass,          NONE,                   GROTTOS,                      0x03613,                    RANDOM
 Road to Ikana Stone Mask,                               npc,            INVISIBLE_SOLDIER,      ROAD_IKANA,                   MASK_STONE,                 MASK_STONE
 Road to Ikana Pot,                                      pot,            NONE,                   ROAD_IKANA,                   0x004c,                     FAIRY
 Gorman Track Garo Mask,                                 npc,            NONE,                   GORMAN_TRACK,                 MASK_GARO,                  MASK_GARO
@@ -1036,6 +1190,20 @@ Gorman Track Grass Pack 2 Grass 11,                     grass,          NONE,   
 Gorman Track Grass Pack 2 Grass 12,                     grass,          NONE,                   GORMAN_TRACK,                 0xb0025,                    RANDOM
 Ikana Graveyard Captain Mask,                           chest,          NONE,                   IKANA_GRAVEYARD,              0x00,                       MASK_CAPTAIN
 Ikana Graveyard Grotto,                                 chest,          NONE,                   GROTTOS,                      0x18,                       BOMBCHU_5
+Ikana Graveyard Grotto Grass 01,                        grass,          NONE,                   GROTTOS,                      0x03800,                    RANDOM
+Ikana Graveyard Grotto Grass 02,                        grass,          NONE,                   GROTTOS,                      0x03801,                    RANDOM
+Ikana Graveyard Grotto Grass 03,                        grass,          NONE,                   GROTTOS,                      0x03802,                    RANDOM
+Ikana Graveyard Grotto Grass 04,                        grass,          NONE,                   GROTTOS,                      0x03803,                    RANDOM
+Ikana Graveyard Grotto Grass 05,                        grass,          NONE,                   GROTTOS,                      0x03805,                    RANDOM
+Ikana Graveyard Grotto Grass 06,                        grass,          NONE,                   GROTTOS,                      0x03806,                    RANDOM
+Ikana Graveyard Grotto Grass 07,                        grass,          NONE,                   GROTTOS,                      0x0380a,                    RANDOM
+Ikana Graveyard Grotto Grass 08,                        grass,          NONE,                   GROTTOS,                      0x0380b,                    RANDOM
+Ikana Graveyard Grotto Grass 09,                        grass,          NONE,                   GROTTOS,                      0x0380c,                    RANDOM
+Ikana Graveyard Grotto Grass 10,                        grass,          NONE,                   GROTTOS,                      0x0380e,                    RANDOM
+Ikana Graveyard Grotto Grass 11,                        grass,          NONE,                   GROTTOS,                      0x03810,                    RANDOM
+Ikana Graveyard Grotto Grass 12,                        grass,          NONE,                   GROTTOS,                      0x03811,                    RANDOM
+Ikana Graveyard Grotto Grass 13,                        grass,          NONE,                   GROTTOS,                      0x03812,                    RANDOM
+Ikana Graveyard Grotto Grass 14,                        grass,          NONE,                   GROTTOS,                      0x03813,                    RANDOM
 Ikana Graveyard Grass 1,                                grass,          NONE,                   IKANA_GRAVEYARD,              0x0001f,                    RANDOM
 Ikana Graveyard Grass 2,                                grass,          NONE,                   IKANA_GRAVEYARD,              0x00027,                    RANDOM
 Ikana Graveyard Grass 3,                                grass,          NONE,                   IKANA_GRAVEYARD,              0x00028,                    RANDOM
@@ -1080,6 +1248,20 @@ Ikana Valley Scrub Rupee,                               npc,            NONE,   
 Ikana Valley Scrub Shop,                                npc,            NONE,                   IKANA_CANYON,                 SCRUB_SHOP_POTION_BLUE,     POTION_BLUE
 Ikana Valley Scrub HP,                                  collectible,    NONE,                   IKANA_CANYON,                 0x1e,                       HEART_PIECE
 Ikana Valley Grotto,                                    chest,          NONE,                   GROTTOS,                      0x14,                       BOMBCHU_5
+Ikana Valley Grotto Grass 01,                           grass,          NONE,                   GROTTOS,                      0x03400,                    RANDOM
+Ikana Valley Grotto Grass 02,                           grass,          NONE,                   GROTTOS,                      0x03401,                    RANDOM
+Ikana Valley Grotto Grass 03,                           grass,          NONE,                   GROTTOS,                      0x03402,                    RANDOM
+Ikana Valley Grotto Grass 04,                           grass,          NONE,                   GROTTOS,                      0x03403,                    RANDOM
+Ikana Valley Grotto Grass 05,                           grass,          NONE,                   GROTTOS,                      0x03405,                    RANDOM
+Ikana Valley Grotto Grass 06,                           grass,          NONE,                   GROTTOS,                      0x03406,                    RANDOM
+Ikana Valley Grotto Grass 07,                           grass,          NONE,                   GROTTOS,                      0x0340a,                    RANDOM
+Ikana Valley Grotto Grass 08,                           grass,          NONE,                   GROTTOS,                      0x0340b,                    RANDOM
+Ikana Valley Grotto Grass 09,                           grass,          NONE,                   GROTTOS,                      0x0340c,                    RANDOM
+Ikana Valley Grotto Grass 10,                           grass,          NONE,                   GROTTOS,                      0x0340e,                    RANDOM
+Ikana Valley Grotto Grass 11,                           grass,          NONE,                   GROTTOS,                      0x03410,                    RANDOM
+Ikana Valley Grotto Grass 12,                           grass,          NONE,                   GROTTOS,                      0x03411,                    RANDOM
+Ikana Valley Grotto Grass 13,                           grass,          NONE,                   GROTTOS,                      0x03412,                    RANDOM
+Ikana Valley Grotto Grass 14,                           grass,          NONE,                   GROTTOS,                      0x03413,                    RANDOM
 Ikana Canyon Owl Statue,                                npc,            NONE,                   IKANA_CANYON,                 OWL_IKANA_CANYON,           OWL_IKANA_CANYON
 Ikana Canyon Grass 1,                                   grass,          NONE,                   IKANA_CANYON,                 0x0003b,                    RANDOM
 Ikana Canyon Grass 2,                                   grass,          NONE,                   IKANA_CANYON,                 0x0003c,                    RANDOM
