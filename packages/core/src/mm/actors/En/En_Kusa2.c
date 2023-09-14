@@ -1,4 +1,6 @@
 #include <combo.h>
+#include <combo/item.h>
+#include <combo/csmc.h>
 
 static void EnKusa2_GetXflag(Xflag* xflag, int id)
 {
@@ -43,3 +45,40 @@ static void EnKusa2_SpawnDrop(GameState_Play* play, Vec3f* pos, u16 dropIndex)
 }
 
 PATCH_CALL(0x80a5bd68, EnKusa2_SpawnDrop);
+
+static void EnKusa2_DrawStill(GameState_Play* play)
+{
+    static u32 sLastFrameCount;
+    static int sDrawIndex;
+
+    Xflag xflag;
+    ComboItemOverride o;
+    int id;
+
+    o.gi = 0;
+    if (comboConfig(CFG_MM_SHUFFLE_GRASS))
+    {
+        /* Compute a nice ID */
+        if (sLastFrameCount != play->gs.frameCount)
+        {
+            sLastFrameCount = play->gs.frameCount;
+            sDrawIndex = 0;
+        }
+        id = sDrawIndex++;
+        id += (play->gs.frameCount / 5) % 9;
+        id %= 9;
+
+        /* Get the xflag and check  */
+        EnKusa2_GetXflag(&xflag, id);
+        if (!comboXflagsGet(&xflag))
+            comboXflagItemOverride(&o, &xflag, 0);
+    }
+
+    /* Prepare */
+    csmcGrassPreDraw(play, o.gi, CSMC_GRASS_NORMAL, 0, 0);
+
+    /* Draw */
+    DrawSimpleOpa(play, 0x50078a0);
+}
+
+PATCH_CALL(0x80a5e95c, EnKusa2_DrawStill);

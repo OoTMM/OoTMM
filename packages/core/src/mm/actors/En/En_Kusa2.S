@@ -8,3 +8,13 @@ PATCH_END
 PATCH_START 0x80a5ed48
 .int 0
 PATCH_END
+
+PATCH_GROUP PG_MM_SHUFFLE_GRASS
+
+/* Disable fading out */
+PATCH_START 0x80a5e80c
+  jr ra
+   nop
+PATCH_END
+
+PATCH_GROUP_END
