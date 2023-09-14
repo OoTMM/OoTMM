@@ -4,6 +4,16 @@
 
 void EnKusa_Aliases(Xflag* xflag)
 {
+    switch (xflag->sceneId)
+    {
+    case SCE_MM_SOUTHERN_SWAMP_CLEAR:
+        xflag->sceneId = SCE_MM_SOUTHERN_SWAMP;
+        if (xflag->roomId == 0x00)
+            xflag->id += 6;
+        else
+            xflag->id += 3;
+        break;
+    }
 }
 
 void EnKusa_InitWrapper(Actor_EnKusa* this, GameState_Play* play)

@@ -2,6 +2,18 @@
 
 extern Actor_ObjGrass* gObjGrass;
 
+static void ObjGrassUnit_Alias(Xflag* xflag)
+{
+    switch (xflag->sceneId)
+    {
+    case SCE_MM_SOUTHERN_SWAMP_CLEAR:
+        xflag->sceneId = SCE_MM_SOUTHERN_SWAMP;
+        if (xflag->roomId == 0x00)
+            xflag->id += 2;
+        break;
+    }
+}
+
 void ObjGrassUnit_AfterSpawn(Actor* this)
 {
     Actor_ObjGrass* grass;
@@ -19,6 +31,9 @@ void ObjGrassUnit_AfterSpawn(Actor* this)
     xflag->roomId = this->room;
     xflag->sliceId = 0;
     xflag->id = g.actorIndex;
+
+    /* Alias the Xflag */
+    ObjGrassUnit_Alias(xflag);
 
     /* Store a ref to the grass manager */
     gObjGrass = grass;

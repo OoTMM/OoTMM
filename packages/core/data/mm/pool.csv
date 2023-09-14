@@ -328,6 +328,40 @@ Southern Swamp Grotto,                            chest,          NONE,         
 Southern Swamp Pot 1,                             pot,            NONE,                   SOUTHERN_SWAMP,               0x020e,                     RECOVERY_HEART
 Southern Swamp Pot 2,                             pot,            NONE,                   SOUTHERN_SWAMP,               0x020f,                     RUPEE_BLUE
 Southern Swamp Pot 3,                             pot,            NONE,                   SOUTHERN_SWAMP,               0x0210,                     RUPEE_GREEN
+Southern Swamp Grass Front 01,                    grass,          NONE,                   SOUTHERN_SWAMP,               0x0000b,                    RANDOM
+Southern Swamp Grass Front 02,                    grass,          NONE,                   SOUTHERN_SWAMP,               0x1000b,                    RANDOM
+Southern Swamp Grass Front 03,                    grass,          NONE,                   SOUTHERN_SWAMP,               0x2000b,                    RANDOM
+Southern Swamp Grass Front 04,                    grass,          NONE,                   SOUTHERN_SWAMP,               0x3000b,                    RANDOM
+Southern Swamp Grass Front 05,                    grass,          NONE,                   SOUTHERN_SWAMP,               0x4000b,                    RANDOM
+Southern Swamp Grass Front 06,                    grass,          NONE,                   SOUTHERN_SWAMP,               0x5000b,                    RANDOM
+Southern Swamp Grass Front 07,                    grass,          NONE,                   SOUTHERN_SWAMP,               0x6000b,                    RANDOM
+Southern Swamp Grass Front 08,                    grass,          NONE,                   SOUTHERN_SWAMP,               0x7000b,                    RANDOM
+Southern Swamp Grass Front 09,                    grass,          NONE,                   SOUTHERN_SWAMP,               0x8000b,                    RANDOM
+Southern Swamp Grass Front 10,                    grass,          NONE,                   SOUTHERN_SWAMP,               0x9000b,                    RANDOM
+Southern Swamp Grass Front 11,                    grass,          NONE,                   SOUTHERN_SWAMP,               0xa000b,                    RANDOM
+Southern Swamp Grass Front 12,                    grass,          NONE,                   SOUTHERN_SWAMP,               0xb000b,                    RANDOM
+Southern Swamp Grass Owl 1,                       grass,          NONE,                   SOUTHERN_SWAMP,               0x0002d,                    RANDOM
+Southern Swamp Grass Owl 2,                       grass,          NONE,                   SOUTHERN_SWAMP,               0x0002e,                    RANDOM
+Southern Swamp Grass Near Witch Pack 1 Grass 01,  grass,          NONE,                   SOUTHERN_SWAMP,               0x00207,                    RANDOM
+Southern Swamp Grass Near Witch Pack 1 Grass 02,  grass,          NONE,                   SOUTHERN_SWAMP,               0x10207,                    RANDOM
+Southern Swamp Grass Near Witch Pack 1 Grass 03,  grass,          NONE,                   SOUTHERN_SWAMP,               0x20207,                    RANDOM
+Southern Swamp Grass Near Witch Pack 1 Grass 04,  grass,          NONE,                   SOUTHERN_SWAMP,               0x30207,                    RANDOM
+Southern Swamp Grass Near Witch Pack 1 Grass 05,  grass,          NONE,                   SOUTHERN_SWAMP,               0x40207,                    RANDOM
+Southern Swamp Grass Near Witch Pack 1 Grass 06,  grass,          NONE,                   SOUTHERN_SWAMP,               0x50207,                    RANDOM
+Southern Swamp Grass Near Witch Pack 1 Grass 07,  grass,          NONE,                   SOUTHERN_SWAMP,               0x60207,                    RANDOM
+Southern Swamp Grass Near Witch Pack 1 Grass 08,  grass,          NONE,                   SOUTHERN_SWAMP,               0x70207,                    RANDOM
+Southern Swamp Grass Near Witch Pack 1 Grass 09,  grass,          NONE,                   SOUTHERN_SWAMP,               0x80207,                    RANDOM
+Southern Swamp Grass Near Witch Pack 2 Grass 01,  grass,          NONE,                   SOUTHERN_SWAMP,               0x00208,                    RANDOM
+Southern Swamp Grass Near Witch Pack 2 Grass 02,  grass,          NONE,                   SOUTHERN_SWAMP,               0x10208,                    RANDOM
+Southern Swamp Grass Near Witch Pack 2 Grass 03,  grass,          NONE,                   SOUTHERN_SWAMP,               0x20208,                    RANDOM
+Southern Swamp Grass Near Witch Pack 2 Grass 04,  grass,          NONE,                   SOUTHERN_SWAMP,               0x30208,                    RANDOM
+Southern Swamp Grass Near Witch Pack 2 Grass 05,  grass,          NONE,                   SOUTHERN_SWAMP,               0x40208,                    RANDOM
+Southern Swamp Grass Near Witch Pack 2 Grass 06,  grass,          NONE,                   SOUTHERN_SWAMP,               0x50208,                    RANDOM
+Southern Swamp Grass Near Witch Pack 2 Grass 07,  grass,          NONE,                   SOUTHERN_SWAMP,               0x60208,                    RANDOM
+Southern Swamp Grass Near Witch Pack 2 Grass 08,  grass,          NONE,                   SOUTHERN_SWAMP,               0x70208,                    RANDOM
+Southern Swamp Grass Near Witch Pack 2 Grass 09,  grass,          NONE,                   SOUTHERN_SWAMP,               0x80208,                    RANDOM
+Southern Swamp Grass Near Witch 1,                grass,          NONE,                   SOUTHERN_SWAMP,               0x00211,                    RANDOM
+Southern Swamp Grass Near Witch 2,                grass,          NONE,                   SOUTHERN_SWAMP,               0x00212,                    RANDOM
 Woods of Mystery Grotto,                          chest,          NONE,                   GROTTOS,                      0x1c,                       RUPEE_PURPLE
 Swamp Archery Reward 1,                           npc,            NONE,                   SHOOTING_GALLERY_SWAMP,       SHOOTING_GAME_SWAMP_1,      BOW
 Swamp Archery Reward 2,                           npc,            NONE,                   SHOOTING_GALLERY_SWAMP,       SHOOTING_GAME_SWAMP_2,      HEART_PIECE
