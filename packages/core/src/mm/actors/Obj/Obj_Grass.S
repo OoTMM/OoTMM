@@ -24,6 +24,15 @@ PATCH_START 0x809aa704
   nop
 PATCH_END
 
+/* Hook into grass drops */
+PATCH_START 0x809a97e8
+  jal ObjGrass_SpawnBushDropWrapper
+PATCH_END
+
+PATCH_START 0x809aac30
+.int 0
+PATCH_END
+
 PATCH_GROUP PG_MM_SHUFFLE_GRASS
 
 /* Disable grass fade-in */

@@ -38,7 +38,7 @@ void ObjGrass_GetXflag(Xflag* xflag, Actor_ObjGrass_PackBush* bush)
     xflag->sliceId = bushId;
 }
 
-static void ObjGrass_SpawnBushDrop(GameState_Play* play, int unk, Actor_ObjGrass_PackBush* bush, u16 unk2)
+void ObjGrass_SpawnBushDropWrapper(Actor_ObjGrass_PackBush* bush, GameState_Play* play)
 {
     Xflag xflag;
 
@@ -56,15 +56,10 @@ static void ObjGrass_SpawnBushDrop(GameState_Play* play, int unk, Actor_ObjGrass
     }
 
     /* Forward */
-    SpawnCollectible2(play, unk, bush, unk2);
+    void (*ObjGrass_SpawnBushDrop)(Actor_ObjGrass_PackBush*, GameState_Play*);
+    ObjGrass_SpawnBushDrop = actorAddr(AC_OBJ_GRASS, 0x809a92d0);
+    ObjGrass_SpawnBushDrop(bush, play);
 }
-
-PATCH_CALL(0x809a92fc, ObjGrass_SpawnBushDrop);
-
-/*
-* Carry 1 - 8046D9F0
-* Carry 2 - 8046DBB0
-*/
 
 void ObjGrass_DrawBush(Actor_ObjGrass_PackBush* bush)
 {
