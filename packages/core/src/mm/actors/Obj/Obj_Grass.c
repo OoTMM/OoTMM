@@ -28,7 +28,7 @@ static void ObjGrass_GetID(int* dstPackId, int* dstBushId, Actor_ObjGrass_PackBu
     *dstBushId = bushId;
 }
 
-static void ObjGrass_GetXflag(Xflag* xflag, Actor_ObjGrass_PackBush* bush)
+void ObjGrass_GetXflag(Xflag* xflag, Actor_ObjGrass_PackBush* bush)
 {
     int packId;
     int bushId;
@@ -60,6 +60,11 @@ static void ObjGrass_SpawnBushDrop(GameState_Play* play, int unk, Actor_ObjGrass
 }
 
 PATCH_CALL(0x809a92fc, ObjGrass_SpawnBushDrop);
+
+/*
+* Carry 1 - 8046D9F0
+* Carry 2 - 8046DBB0
+*/
 
 void ObjGrass_DrawBush(Actor_ObjGrass_PackBush* bush)
 {

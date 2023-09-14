@@ -4,7 +4,7 @@
 #include <combo/xflags.h>
 #include <combo/common/actor.h>
 
-typedef struct ALIGNED(4)
+typedef struct ALIGNED(4) Actor_ObjGrass_PackBush
 {
     Vec3f   position;
     char    unk[0x8];
