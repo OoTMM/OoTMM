@@ -21,6 +21,7 @@
 # include <combo/npc.h>
 # include <combo/text.h>
 # include <combo/common/ocarina.h>
+# include <combo/common/actors/Obj_Mure2.h>
 
 # if defined(GAME_OOT)
 #  include <combo/oot/play.h>
@@ -30,7 +31,6 @@
 #  include <combo/oot/actors/Obj_Tsubo.h>
 #  include <combo/oot/actors/En_Kusa.h>
 #  include <combo/oot/actors/En_Tubo_Trap.h>
-#  include <combo/oot/actors/Obj_Mure2.h>
 #  include <combo/oot/actors/En_Ossan.h>
 # endif
 

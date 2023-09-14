@@ -319,6 +319,26 @@ Termina Field Grass Pack 18 Grass 11,             grass,          NONE,         
 Termina Field Grass Pack 18 Grass 12,             grass,          NONE,                   TERMINA_FIELD,                0xb00bd,                    RANDOM
 Road to Southern Swamp HP,                        collectible,    NONE,                   ROAD_SOUTHERN_SWAMP,          0x01,                       HEART_PIECE
 Road to Southern Swamp Grotto,                    chest,          NONE,                   GROTTOS,                      0x1e,                       RUPEE_RED
+Road to Southern Swamp Grass Pack 1 Grass 01,     grass,          NONE,                   ROAD_SOUTHERN_SWAMP,          0x00023,                    RANDOM
+Road to Southern Swamp Grass Pack 1 Grass 02,     grass,          NONE,                   ROAD_SOUTHERN_SWAMP,          0x10023,                    RANDOM
+Road to Southern Swamp Grass Pack 1 Grass 03,     grass,          NONE,                   ROAD_SOUTHERN_SWAMP,          0x20023,                    RANDOM
+Road to Southern Swamp Grass Pack 1 Grass 04,     grass,          NONE,                   ROAD_SOUTHERN_SWAMP,          0x30023,                    RANDOM
+Road to Southern Swamp Grass Pack 1 Grass 05,     grass,          NONE,                   ROAD_SOUTHERN_SWAMP,          0x40023,                    RANDOM
+Road to Southern Swamp Grass Pack 1 Grass 06,     grass,          NONE,                   ROAD_SOUTHERN_SWAMP,          0x50023,                    RANDOM
+Road to Southern Swamp Grass Pack 1 Grass 07,     grass,          NONE,                   ROAD_SOUTHERN_SWAMP,          0x60023,                    RANDOM
+Road to Southern Swamp Grass Pack 1 Grass 08,     grass,          NONE,                   ROAD_SOUTHERN_SWAMP,          0x70023,                    RANDOM
+Road to Southern Swamp Grass Pack 1 Grass 09,     grass,          NONE,                   ROAD_SOUTHERN_SWAMP,          0x80023,                    RANDOM
+Road to Southern Swamp Grass Pack 2 Grass 01,     grass,          NONE,                   ROAD_SOUTHERN_SWAMP,          0x00024,                    RANDOM
+Road to Southern Swamp Grass Pack 2 Grass 02,     grass,          NONE,                   ROAD_SOUTHERN_SWAMP,          0x10024,                    RANDOM
+Road to Southern Swamp Grass Pack 2 Grass 03,     grass,          NONE,                   ROAD_SOUTHERN_SWAMP,          0x20024,                    RANDOM
+Road to Southern Swamp Grass Pack 2 Grass 04,     grass,          NONE,                   ROAD_SOUTHERN_SWAMP,          0x30024,                    RANDOM
+Road to Southern Swamp Grass Pack 2 Grass 05,     grass,          NONE,                   ROAD_SOUTHERN_SWAMP,          0x40024,                    RANDOM
+Road to Southern Swamp Grass Pack 2 Grass 06,     grass,          NONE,                   ROAD_SOUTHERN_SWAMP,          0x50024,                    RANDOM
+Road to Southern Swamp Grass Pack 2 Grass 07,     grass,          NONE,                   ROAD_SOUTHERN_SWAMP,          0x60024,                    RANDOM
+Road to Southern Swamp Grass Pack 2 Grass 08,     grass,          NONE,                   ROAD_SOUTHERN_SWAMP,          0x70024,                    RANDOM
+Road to Southern Swamp Grass Pack 2 Grass 09,     grass,          NONE,                   ROAD_SOUTHERN_SWAMP,          0x80024,                    RANDOM
+Road to Southern Swamp Grass 1,                   grass,          NONE,                   ROAD_SOUTHERN_SWAMP,          0x0002f,                    RANDOM
+Road to Southern Swamp Grass 2,                   grass,          NONE,                   ROAD_SOUTHERN_SWAMP,          0x00030,                    RANDOM
 Southern Swamp HP,                                collectible,    NONE,                   SOUTHERN_SWAMP,               0x1e,                       HEART_PIECE
 Southern Swamp Scrub Deed,                        npc,            NONE,                   SOUTHERN_SWAMP,               SCRUB_SWAMP,                DEED_SWAMP
 Southern Swamp Scrub Shop,                        npc,            NONE,                   SOUTHERN_SWAMP,               SCRUB_SHOP_BEANS,           MAGIC_BEAN
@@ -608,6 +628,11 @@ Great Bay Coast Pot 09,                           pot,            NONE,         
 Great Bay Coast Pot 10,                           pot,            NONE,                   GREAT_BAY_COAST,              0x0082,                     ARROWS_10
 Great Bay Coast Pot 11,                           pot,            NONE,                   GREAT_BAY_COAST,              0x0083,                     ARROWS_10
 Great Bay Coast Pot 12,                           pot,            NONE,                   GREAT_BAY_COAST,              0x0085,                     ARROWS_20
+Great Bay Coast Grass 1,                          grass,          NONE,                   GREAT_BAY_COAST,              0x0006e,                    RANDOM
+Great Bay Coast Grass 2,                          grass,          NONE,                   GREAT_BAY_COAST,              0x0006f,                    RANDOM
+Great Bay Coast Grass 3,                          grass,          NONE,                   GREAT_BAY_COAST,              0x00070,                    RANDOM
+Great Bay Coast Grass 4,                          grass,          NONE,                   GREAT_BAY_COAST,              0x00071,                    RANDOM
+Great Bay Coast Grass 5,                          grass,          NONE,                   GREAT_BAY_COAST,              0x00072,                    RANDOM
 Zora Cape Ledge Chest 1,                          chest,          NONE,                   ZORA_CAPE,                    0x01,                       RUPEE_RED
 Zora Cape Ledge Chest 2,                          chest,          NONE,                   ZORA_CAPE,                    0x02,                       RUPEE_RED
 Zora Cape Underwater Chest,                       chest,          NONE,                   ZORA_CAPE,                    0x00,                       RUPEE_PURPLE

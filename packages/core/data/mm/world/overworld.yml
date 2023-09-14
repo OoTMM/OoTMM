@@ -972,6 +972,26 @@
     "Tingle Swamp": "has_weapon_range"
   locations:
     "Road to Southern Swamp HP": "has_weapon_range"
+    "Road to Southern Swamp Grass Pack 1 Grass 01": "true"
+    "Road to Southern Swamp Grass Pack 1 Grass 02": "true"
+    "Road to Southern Swamp Grass Pack 1 Grass 03": "true"
+    "Road to Southern Swamp Grass Pack 1 Grass 04": "true"
+    "Road to Southern Swamp Grass Pack 1 Grass 05": "true"
+    "Road to Southern Swamp Grass Pack 1 Grass 06": "true"
+    "Road to Southern Swamp Grass Pack 1 Grass 07": "true"
+    "Road to Southern Swamp Grass Pack 1 Grass 08": "true"
+    "Road to Southern Swamp Grass Pack 1 Grass 09": "true"
+    "Road to Southern Swamp Grass Pack 2 Grass 01": "true"
+    "Road to Southern Swamp Grass Pack 2 Grass 02": "true"
+    "Road to Southern Swamp Grass Pack 2 Grass 03": "true"
+    "Road to Southern Swamp Grass Pack 2 Grass 04": "true"
+    "Road to Southern Swamp Grass Pack 2 Grass 05": "true"
+    "Road to Southern Swamp Grass Pack 2 Grass 06": "true"
+    "Road to Southern Swamp Grass Pack 2 Grass 07": "true"
+    "Road to Southern Swamp Grass Pack 2 Grass 08": "true"
+    "Road to Southern Swamp Grass Pack 2 Grass 09": "true"
+    "Road to Southern Swamp Grass 1": "true"
+    "Road to Southern Swamp Grass 2": "true"
   gossip:
     "Road to Southern Swamp Gossip": "true"
 "Swamp Archery":
@@ -1812,6 +1832,11 @@
     "Great Bay Coast Pot 10": "true"
     "Great Bay Coast Pot 11": "true"
     "Great Bay Coast Pot 12": "true"
+    "Great Bay Coast Grass 1": "true"
+    "Great Bay Coast Grass 2": "true"
+    "Great Bay Coast Grass 3": "true"
+    "Great Bay Coast Grass 4": "true"
+    "Great Bay Coast Grass 5": "true"
   gossip:
     "Great Bay Coast Gossip": "true"
 "Great Bay Coast Fortress":

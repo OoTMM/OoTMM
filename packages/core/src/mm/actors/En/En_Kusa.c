@@ -20,6 +20,13 @@ void EnKusa_Aliases(Xflag* xflag)
             xflag->id += 30;
         }
         break;
+    case SCE_MM_GREAT_BAY_COAST:
+        if (xflag->setupId == 1)
+        {
+            xflag->setupId = 0;
+            xflag->id -= 4;
+        }
+        break;
     }
 }
 

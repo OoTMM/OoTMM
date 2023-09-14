@@ -1,5 +1,5 @@
-#ifndef COMBO_OOT_OBJ_MURE2_H
-#define COMBO_OOT_OBJ_MURE2_H
+#ifndef COMBO_COMMON_ACTOR_OBJ_MURE2_H
+#define COMBO_COMMON_ACTOR_OBJ_MURE2_H
 
 #include <combo/xflags.h>
 #include <combo/common/actor.h>
@@ -18,6 +18,6 @@ Actor_ObjMure2;
 
 static const int x = sizeof(Actor_ObjMure2);
 
-_Static_assert(sizeof(Actor_ObjMure2) == 0x180, "OoT Actor_ObjMure2 size is wrong");
+_Static_assert(sizeof(Actor_ObjMure2) == (sizeof(Actor) + 0x44), "Actor_ObjMure2 size is wrong");
 
 #endif
