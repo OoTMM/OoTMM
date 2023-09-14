@@ -127,6 +127,7 @@ const ACTORS_MM = {
   OBJ_MURE2: 0xb3,
   OBJ_GRASS: 0x10b,
   OBJ_GRASS_UNIT: 0x10d,
+  EN_KUSA2: 0x171,
 };
 
 const ACTOR_SLICES_OOT = {
@@ -136,6 +137,7 @@ const ACTOR_SLICES_OOT = {
 const ACTOR_SLICES_MM = {
   [ACTORS_MM.OBJ_MURE2]: 12,
   [ACTORS_MM.OBJ_GRASS_UNIT]: 12,
+  [ACTORS_MM.EN_KUSA2]: 9,
 }
 
 const INTERESTING_ACTORS_OOT = Object.values(ACTORS_OOT);
@@ -704,6 +706,27 @@ function outputGrassPoolMm(roomActors: RoomActors[]) {
   }
 }
 
+function outputKeatonGrassPoolMm(roomActors: RoomActors[]) {
+  let lastSceneId = -1;
+  let lastSetupId = -1;
+  for (const room of roomActors) {
+    for (const actor of room.actors) {
+      if (actor.typeId === ACTORS_MM.EN_KUSA2) {
+        const key = ((room.setupId & 0x3) << 14) | (room.roomId << 8) | actor.actorId;
+        if (room.sceneId != lastSceneId || room.setupId != lastSetupId) {
+          console.log('');
+          lastSceneId = room.sceneId;
+          lastSetupId = room.setupId;
+        }
+
+        for (let i = 0; i < 9; ++i) {
+          const item = (i == 8) ? 'RUPEE_RED' : 'RUPEE_GREEN';
+          console.log(`Scene ${room.sceneId.toString(16)} Setup ${room.setupId} Room ${hexPad(room.roomId, 2)} Keaton Grass ${decPad(actor.actorId + 1, 2)} Reward ${i + 1},        grass,            NONE,                 SCENE_${room.sceneId.toString(16)}, ${hexPad(key, 5)}, ${item}`);
+        }
+      }
+    }
+  }
+}
 
 function outputGrassWeirdPoolOot(roomActors: RoomActors[]) {
   let lastSceneId = -1;
@@ -885,7 +908,8 @@ async function run() {
   /* Output */
   //outputPotsPoolOot(mqRooms);
   //outputGrassWeirdPoolOot(ootRooms);
-  outputGrassPoolMm(mmRooms);
+  //outputGrassPoolMm(mmRooms);
+  outputKeatonGrassPoolMm(mmRooms);
 }
 
 run().catch(e => {

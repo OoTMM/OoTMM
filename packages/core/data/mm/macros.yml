@@ -61,6 +61,9 @@
 "can_play_cross_tp_spirit": "can_play_cross(OOT_SONG_TP_SPIRIT) && ocarina_button_a && ocarina_button_right && ocarina_button_down"
 
 # Misc
+"keaton_grass_easy": "has_weapon && has_magic"
+"keaton_grass_hard": "keaton_grass_easy && (has(SPIN_UPGRADE) || has(GREAT_FAIRY_SWORD) || has(SWORD, 3))"
+
 "can_break_boulders": "has_explosives || has_mask_goron"
 "can_use_lens": "can_use_lens_strict || trick(MM_LENS)"
 "can_use_lens_strict": "has_magic && (has(LENS) || has(SHARED_LENS))"
