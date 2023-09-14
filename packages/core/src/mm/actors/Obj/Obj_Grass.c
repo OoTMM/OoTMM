@@ -43,8 +43,12 @@ static void ObjGrass_SpawnBushDrop(GameState_Play* play, int unk, Actor_ObjGrass
         if (!comboXflagsGet(&xflag))
         {
             DropCustomItem(play, &bush->position, &xflag);
+            return;
         }
     }
+
+    /* Forward */
+    SpawnCollectible2(play, unk, bush, unk2);
 }
 
 PATCH_CALL(0x809a92fc, ObjGrass_SpawnBushDrop);
