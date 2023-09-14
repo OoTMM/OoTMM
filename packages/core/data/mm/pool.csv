@@ -1257,6 +1257,20 @@ Beneath The Well Pot Middle 07,                         pot,            NONE,   
 Beneath The Well Pot Middle 08,                         pot,            NONE,                   BENEATH_THE_WELL,             0x0615,                     ARROWS_20
 Beneath The Well Pot Middle 09,                         pot,            NONE,                   BENEATH_THE_WELL,             0x0616,                     ARROWS_20
 Beneath The Well Pot Middle 10,                         pot,            NONE,                   BENEATH_THE_WELL,             0x0617,                     ARROWS_20
+Beneath The Well Grass Before Poe 1,                    grass,          NONE,                   BENEATH_THE_WELL,             0x00309,                    RANDOM
+Beneath The Well Grass Before Poe 2,                    grass,          NONE,                   BENEATH_THE_WELL,             0x0030a,                    RANDOM
+Beneath The Well Grass Before Poe 3,                    grass,          NONE,                   BENEATH_THE_WELL,             0x0030b,                    RANDOM
+Beneath The Well Grass Before Poe 4,                    grass,          NONE,                   BENEATH_THE_WELL,             0x0030c,                    RANDOM
+Beneath The Well Grass Left Side 1,                     grass,          NONE,                   BENEATH_THE_WELL,             0x00516,                    RANDOM
+Beneath The Well Grass Left Side 2,                     grass,          NONE,                   BENEATH_THE_WELL,             0x00517,                    RANDOM
+Beneath The Well Grass Near End 1,                      grass,          NONE,                   BENEATH_THE_WELL,             0x00713,                    RANDOM
+Beneath The Well Grass Near End 2,                      grass,          NONE,                   BENEATH_THE_WELL,             0x00714,                    RANDOM
+Beneath The Well Grass Near End 3,                      grass,          NONE,                   BENEATH_THE_WELL,             0x00715,                    RANDOM
+Beneath The Well Grass Near End 4,                      grass,          NONE,                   BENEATH_THE_WELL,             0x00716,                    RANDOM
+Beneath The Well Grass Near End 5,                      grass,          NONE,                   BENEATH_THE_WELL,             0x00717,                    RANDOM
+Beneath The Well Grass Cow 1,                           grass,          NONE,                   BENEATH_THE_WELL,             0x00906,                    RANDOM
+Beneath The Well Grass Cow 2,                           grass,          NONE,                   BENEATH_THE_WELL,             0x00907,                    RANDOM
+Beneath The Well Grass Cow 3,                           grass,          NONE,                   BENEATH_THE_WELL,             0x00908,                    RANDOM
 Ancient Castle of Ikana HP,                             collectible,    NONE,                   CASTLE_IKANA,                 0x0a,                       HEART_PIECE
 Ancient Castle of Ikana Song Emptiness,                 npc,            SONG_ELEGY,             LAIR_IKANA,                   SONG_EMPTINESS,             SONG_EMPTINESS
 Ancient Castle of Ikana Boss Pot 1,                     pot,            NONE,                   LAIR_IKANA,                   0x0002,                     ARROWS_10
