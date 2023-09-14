@@ -27,6 +27,9 @@ static void EnKusa2_SpawnDrop(GameState_Play* play, Vec3f* pos, u16 dropIndex)
 {
     Xflag xflag;
 
+    if ((s8)dropIndex > g.keatonGrassMax)
+        g.keatonGrassMax = (s8)dropIndex;
+
     if (comboConfig(CFG_MM_SHUFFLE_GRASS))
     {
         /* Extract the ID and build the xflag */
@@ -46,7 +49,7 @@ static void EnKusa2_SpawnDrop(GameState_Play* play, Vec3f* pos, u16 dropIndex)
 
 PATCH_CALL(0x80a5bd68, EnKusa2_SpawnDrop);
 
-static void EnKusa2_DrawStill(GameState_Play* play)
+static void EnKusa2_Draw(GameState_Play* play)
 {
     static u32 sLastFrameCount;
     static int sDrawIndex;
@@ -64,9 +67,15 @@ static void EnKusa2_DrawStill(GameState_Play* play)
             sLastFrameCount = play->gs.frameCount;
             sDrawIndex = 0;
         }
-        id = sDrawIndex++;
-        id += (play->gs.frameCount / 5) % 9;
-        id %= 9;
+
+        if (g.keatonGrassMax == -1)
+        {
+            id = sDrawIndex++;
+            id += (play->gs.frameCount / 5) % 9;
+            id %= 9;
+        }
+        else
+            id = g.keatonGrassMax + 1;
 
         /* Get the xflag and check  */
         EnKusa2_GetXflag(&xflag, id);
@@ -81,4 +90,6 @@ static void EnKusa2_DrawStill(GameState_Play* play)
     DrawSimpleOpa(play, 0x50078a0);
 }
 
-PATCH_CALL(0x80a5e95c, EnKusa2_DrawStill);
+PATCH_CALL(0x80a5e95c, EnKusa2_Draw);
+PATCH_CALL(0x80a5ea30, EnKusa2_Draw);
+PATCH_CALL(0x80a5ea70, EnKusa2_Draw);

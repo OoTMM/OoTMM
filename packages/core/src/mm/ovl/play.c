@@ -145,6 +145,7 @@ void hookPlay_Init(GameState_Play* play)
     /* Init */
     gActorCustomTriggers = NULL;
     g.customItemsList = NULL;
+    g.keatonGrassMax = -1;
 
     /* Handle transition override */
     if (g.inGrotto)

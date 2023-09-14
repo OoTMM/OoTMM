@@ -391,6 +391,7 @@ typedef struct
     u8                      actorIndex;
     u8                      sceneSetupId;
     Actor_CustomItem*       customItemsList;
+    s8                      keatonGrassMax;
 }
 ComboGlobal;
 
