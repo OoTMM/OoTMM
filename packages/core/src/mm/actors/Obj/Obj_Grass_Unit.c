@@ -11,6 +11,10 @@ static void ObjGrassUnit_Alias(Xflag* xflag)
         if (xflag->roomId == 0x00)
             xflag->id += 2;
         break;
+    case SCE_MM_GROTTOS:
+        if (xflag->roomId == 0x0a && gLastScene == SCE_MM_GREAT_BAY_COAST)
+            xflag->roomId = 0x0f;
+        break;
     }
 }
 

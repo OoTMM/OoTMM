@@ -5,7 +5,7 @@ import { decompressGame } from '../lib/combo/decompress';
 import { CONFIG } from '../lib/combo/config';
 import { mkdir } from 'fs';
 
-const GENERIC_GROTTOS = [
+const OOT_GENERIC_GROTTOS = [
   0x0c,
   0x14,
   0x08,
@@ -15,6 +15,22 @@ const GENERIC_GROTTOS = [
   0x02,
   0x03,
   0x00,
+];
+
+const MM_GENERIC_GROTTOS = [
+  0x13, /* Path to Snowhead Grotto,  */
+  0x14, /* Ikana Valley Grotto */
+  0x15, /* Zora Cape Grotto */
+  0x16, /* Road to Ikana Grotto */
+  0x17, /* Great Bay Coast Fisherman Grotto, */
+  0x18, /* Ikana Graveyard Grotto */
+  0x19, /* Twin Islands Ramp Grotto */
+  0x1a, /* Termina Field Pillar Grotto */
+  0x1b, /* Mountain Village Tunnel Grotto */
+  0x1c, /* Woods of Mystery Grotto */
+  0x1d, /* Southern Swamp Grotto */
+  0x1e, /* Road to Southern Swamp Grotto */
+  0x1f, /* Termina Field Tall Grass Grotto */
 ];
 
 const SLICES = 12;
@@ -402,13 +418,35 @@ function parseRoomActors(rom: Buffer, raw: RawRoom, game: Game): RoomActors[] {
   if (game !== 'mm' && raw.sceneId === 0x3e && raw.roomId === 0x00) {
     /* OoT generic grottos */
     let genericRooms: RoomActors[] = [];
-    for (const genericId of GENERIC_GROTTOS) {
+    for (const genericId of OOT_GENERIC_GROTTOS) {
       const genericRoomId = genericId | 0x20;
       const genericActors = actors.map(x => ({...x, roomId: genericRoomId }));
       genericRooms.push({ sceneId: raw.sceneId, setupId: raw.setupId, roomId: genericRoomId, actors: genericActors });
     }
     return genericRooms;
   }
+
+  if (game === 'mm' && raw.sceneId === 0x07 && raw.roomId === 0x04) {
+    /* MM generic grottos */
+    let genericRooms: RoomActors[] = [];
+    for (const genericId of MM_GENERIC_GROTTOS) {
+      const genericRoomId = genericId | 0x20;
+      const genericActors = actors.map(x => ({...x, roomId: genericRoomId }));
+      genericRooms.push({ sceneId: raw.sceneId, setupId: raw.setupId, roomId: genericRoomId, actors: genericActors });
+    }
+    return genericRooms;
+  }
+
+  if (game === 'mm' && raw.sceneId === 0x07 && raw.roomId === 0x0a) {
+    /* MM cow grottos */
+    let cowRooms: RoomActors[] = [];
+    cowRooms.push({ sceneId: raw.sceneId, setupId: raw.setupId, roomId: raw.roomId, actors });
+    const altRoomId = 0x0f;
+    const altActors = actors.map(x => ({...x, roomId: altRoomId }));
+    cowRooms.push({ sceneId: raw.sceneId, setupId: raw.setupId, roomId: altRoomId, actors: altActors });
+    return cowRooms;
+  }
+
   return [{ sceneId: raw.sceneId, setupId: raw.setupId, roomId: raw.roomId, actors }];
 }
 
