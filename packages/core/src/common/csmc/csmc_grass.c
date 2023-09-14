@@ -3,9 +3,11 @@
 #include <combo/custom.h>
 
 #if defined(GAME_OOT)
-# define TEXTURE_ADDR_STANDARD   0x0500b140
+# define TEXTURE_ADDR_STANDARD  0x0500b140
+# define TEXTURE_ADDR_ALT       0x04035BD0
 #else
-# define TEXTURE_ADDR_STANDARD   0x05007010
+# define TEXTURE_ADDR_STANDARD  0x05007010
+# define TEXTURE_ADDR_ALT       0x04052940
 #endif
 
 static const u32 kColorBossKey  = 0x0000ffff;
@@ -26,7 +28,7 @@ static const CsmcDisplayList kGrassStandardDlist[] = {
 };
 
 static const CsmcDisplayList kGrassAltDlist[] = {
-    { 0x04035BD0,               0xffffffff,    CTF_COLOR | CTF_CLAMP,                       G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32 },
+    { TEXTURE_ADDR_ALT,         0xffffffff,    CTF_COLOR | CTF_CLAMP,                       G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32 },
     { CUSTOM_GRASS_ALT_ADDR,    kColorBossKey, CTF_CUSTOM_TEXTURE | CTF_COLOR | CTF_CLAMP,  G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32 },
     { CUSTOM_GRASS_ALT_ADDR,    kColorMajor,   CTF_CUSTOM_TEXTURE | CTF_COLOR | CTF_CLAMP,  G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32 },
     { CUSTOM_GRASS_ALT_ADDR,    kColorKey,     CTF_CUSTOM_TEXTURE | CTF_COLOR | CTF_CLAMP,  G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32 },
