@@ -2415,6 +2415,18 @@
     "Ancient Castle of Ikana Roof Exterior": "short_hook_anywhere"
   locations:
     "Ancient Castle of Ikana Pot Exterior": "true"
+    "Ancient Castle of Ikana Grass 01": "true"
+    "Ancient Castle of Ikana Grass 02": "true"
+    "Ancient Castle of Ikana Grass 03": "true"
+    "Ancient Castle of Ikana Grass 04": "true"
+    "Ancient Castle of Ikana Grass 05": "true"
+    "Ancient Castle of Ikana Grass 06": "true"
+    "Ancient Castle of Ikana Grass 07": "true"
+    "Ancient Castle of Ikana Grass 08": "true"
+    "Ancient Castle of Ikana Grass 09": "true"
+    "Ancient Castle of Ikana Grass 10": "true"
+    "Ancient Castle of Ikana Grass 11": "true"
+    "Ancient Castle of Ikana Grass 12": "true"
 "Stone Tower":
   region: STONE_TOWER
   exits:

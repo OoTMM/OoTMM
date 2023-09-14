@@ -1270,6 +1270,18 @@ Ancient Castle of Ikana Pot Left Third Room 1,          pot,            NONE,   
 Ancient Castle of Ikana Pot Left Third Room 2,          pot,            NONE,                   CASTLE_IKANA,                 0x0603,                     NUTS_10
 Ancient Castle of Ikana Pot Right 1,                    pot,            NONE,                   CASTLE_IKANA,                 0x0704,                     RECOVERY_HEART
 Ancient Castle of Ikana Pot Right 2,                    pot,            NONE,                   CASTLE_IKANA,                 0x0705,                     RECOVERY_HEART
+Ancient Castle of Ikana Grass 01,                       grass,          NONE,                   CASTLE_IKANA,                 0x00020,                    RANDOM
+Ancient Castle of Ikana Grass 02,                       grass,          NONE,                   CASTLE_IKANA,                 0x00021,                    RANDOM
+Ancient Castle of Ikana Grass 03,                       grass,          NONE,                   CASTLE_IKANA,                 0x00022,                    RANDOM
+Ancient Castle of Ikana Grass 04,                       grass,          NONE,                   CASTLE_IKANA,                 0x00023,                    RANDOM
+Ancient Castle of Ikana Grass 05,                       grass,          NONE,                   CASTLE_IKANA,                 0x00024,                    RANDOM
+Ancient Castle of Ikana Grass 06,                       grass,          NONE,                   CASTLE_IKANA,                 0x00025,                    RANDOM
+Ancient Castle of Ikana Grass 07,                       grass,          NONE,                   CASTLE_IKANA,                 0x00026,                    RANDOM
+Ancient Castle of Ikana Grass 08,                       grass,          NONE,                   CASTLE_IKANA,                 0x00027,                    RANDOM
+Ancient Castle of Ikana Grass 09,                       grass,          NONE,                   CASTLE_IKANA,                 0x00028,                    RANDOM
+Ancient Castle of Ikana Grass 10,                       grass,          NONE,                   CASTLE_IKANA,                 0x00029,                    RANDOM
+Ancient Castle of Ikana Grass 11,                       grass,          NONE,                   CASTLE_IKANA,                 0x0002a,                    RANDOM
+Ancient Castle of Ikana Grass 12,                       grass,          NONE,                   CASTLE_IKANA,                 0x0002b,                    RANDOM
 Stone Tower Temple Entrance Chest,                      chest,          NONE,                   TEMPLE_STONE_TOWER,           0x16,                       STRAY_FAIRY_ST
 Stone Tower Temple Entrance Switch Chest,               chest,          NONE,                   TEMPLE_STONE_TOWER,           0x12,                       STRAY_FAIRY_ST
 Stone Tower Temple Under West Garden Ledge Chest,       chest,          NONE,                   TEMPLE_STONE_TOWER,           0x15,                       STRAY_FAIRY_ST
