@@ -118,6 +118,16 @@
     "Snowhead Temple Central Room Bottom": "has_mask_goron"
     "Snowhead Temple Pot Central Room Bottom 1": "true"
     "Snowhead Temple Pot Central Room Bottom 2": "true"
+    "Snowhead Temple Grass 01": "true"
+    "Snowhead Temple Grass 02": "true"
+    "Snowhead Temple Grass 03": "true"
+    "Snowhead Temple Grass 04": "true"
+    "Snowhead Temple Grass 05": "true"
+    "Snowhead Temple Grass 06": "true"
+    "Snowhead Temple Grass 07": "true"
+    "Snowhead Temple Grass 08": "true"
+    "Snowhead Temple Grass 09": "true"
+    "Snowhead Temple Grass 10": "true"
 "Snowhead Temple Block Room":
   dungeon: SH
   exits:
