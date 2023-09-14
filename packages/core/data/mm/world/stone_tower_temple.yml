@@ -18,6 +18,9 @@
     "Stone Tower Temple Entrance Switch Chest": "event(STONE_TOWER_ENTRANCE_CHEST_SWITCH)"
     "Stone Tower Temple Pot Entrance 1": "true"
     "Stone Tower Temple Pot Entrance 2": "true"
+    "Stone Tower Temple Grass Entrance 1": "true"
+    "Stone Tower Temple Grass Entrance 2": "true"
+    "Stone Tower Temple Grass Entrance 3": "true"
 "Stone Tower Temple West":
   dungeon: ST
   exits:
@@ -30,6 +33,13 @@
     "Stone Tower Temple Center Ledge": "small_keys_st(4) || (small_keys_st(3) && (has_mask_zora || short_hook_anywhere))"
   events:
     STONE_TOWER_WEST_GARDEN_LIGHT: "has_explosives"
+  locations:
+    "Stone Tower Temple Grass Garden 1": "true"
+    "Stone Tower Temple Grass Garden 2": "true"
+    "Stone Tower Temple Grass Garden 3": "true"
+    "Stone Tower Temple Grass Garden 4": "true"
+    "Stone Tower Temple Grass Garden 5": "true"
+    "Stone Tower Temple Grass Garden 6": "true"
 "Stone Tower Temple Under West Garden":
   dungeon: ST
   exits:
