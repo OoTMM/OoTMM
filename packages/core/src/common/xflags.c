@@ -45,6 +45,8 @@ int comboXflagsGet(const Xflag* xf)
 {
     u16 bitPos;
 
+    if (xf->sceneId == 0xff)
+        return 1;
     bitPos = comboXflagsBitPosLookup(xf);
     return !!BITMAP8_GET(gCustomSave.xflags, bitPos);
 }
@@ -53,6 +55,8 @@ void comboXflagsSet(const Xflag* xf)
 {
     u16 bitPos;
 
+    if (xf->sceneId == 0xff)
+        return;
     bitPos = comboXflagsBitPosLookup(xf);
     BITMAP8_SET(gCustomSave.xflags, bitPos);
 }

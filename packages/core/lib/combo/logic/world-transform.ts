@@ -827,8 +827,13 @@ export class LogicPassWorldTransform {
 
     /* Grasssanity */
     if (!settings.shuffleGrassOot) {
-      const pots = DATA_POOL.oot.filter((x: any) => x.type === 'grass').map((x: any) => gameId('oot', x.location, ' ')) as string[];
-      this.removeLocations(pots);
+      const grass = DATA_POOL.oot.filter((x: any) => x.type === 'grass').map((x: any) => gameId('oot', x.location, ' ')) as string[];
+      this.removeLocations(grass);
+    }
+
+    if (!settings.shuffleGrassMm) {
+      const grass = DATA_POOL.mm.filter((x: any) => x.type === 'grass').map((x: any) => gameId('mm', x.location, ' ')) as string[];
+      this.removeLocations(grass);
     }
 
     /* Carpenters */

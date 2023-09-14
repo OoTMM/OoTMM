@@ -191,3 +191,6 @@ SetRoomClear = 0x800b5d30;
 RandFloat = 0x80086fdc;
 
 ActorUpdateVelocity = 0x800b6a88;
+
+Item_DropCollectible = 0x800a7730;
+SpawnCollectible2 = 0x800a7d28;

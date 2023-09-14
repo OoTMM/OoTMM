@@ -340,3 +340,7 @@ Actor_EnItem00* Item_DropCollectible(GameState_Play* play, Vec3f* pos, s16 param
 #if defined(GAME_OOT)
 Actor* ActorFind(void* actorCtx, s32 actorId, s32 actorCategory);
 #endif
+
+#if defined(GAME_MM)
+void SpawnCollectible2(GameState_Play* play, int unk, void* unk2, u16 unk3);
+#endif

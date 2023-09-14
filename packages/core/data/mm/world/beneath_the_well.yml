@@ -21,6 +21,8 @@
     "Beneath The Well Pot Left Side 3": "has_water && has_fire_sticks"
     "Beneath The Well Pot Left Side 4": "has_water && has_fire_sticks"
     "Beneath The Well Pot Left Side 5": "has_water && has_fire_sticks"
+    "Beneath The Well Grass Left Side 1": "has_water && has_fire_sticks"
+    "Beneath The Well Grass Left Side 2": "has_water && has_fire_sticks"
 "Beneath The Well East Section":
   dungeon: BtW
   exits:
@@ -38,10 +40,17 @@
     BUGS: "true"
   locations:
     "Beneath The Well Cow": "(has_hot_water_well || (has_hot_water_distance && has(OWL_IKANA_CANYON)) || has_hot_water_er) && can_play_epona"
+    "Beneath The Well Grass Cow 1": "has_hot_water_well || (has_hot_water_distance && has(OWL_IKANA_CANYON)) || has_hot_water_er"
+    "Beneath The Well Grass Cow 2": "has_hot_water_well || (has_hot_water_distance && has(OWL_IKANA_CANYON)) || has_hot_water_er"
+    "Beneath The Well Grass Cow 3": "has_hot_water_well || (has_hot_water_distance && has(OWL_IKANA_CANYON)) || has_hot_water_er"
     "Beneath The Well Pot Big Poe 1": "has_bombs"
     "Beneath The Well Pot Big Poe 2": "has_bombs"
     "Beneath The Well Pot Big Poe 3": "has_bombs"
     "Beneath The Well Pot Big Poe 4": "has_bombs"
+    "Beneath The Well Grass Before Poe 1": "true"
+    "Beneath The Well Grass Before Poe 2": "true"
+    "Beneath The Well Grass Before Poe 3": "true"
+    "Beneath The Well Grass Before Poe 4": "true"
 "Beneath The Well Middle Section":
   dungeon: BtW
   exits:
@@ -70,6 +79,12 @@
   events:
     RUPEES: "(can_fight || has_weapon_range || has_explosives) && soul_wallmaster"
     BUGS: "can_use_fire_arrows || (has_sticks && has_big_poe && can_pass_gibdo)"
+  locations:
+    "Beneath The Well Grass Near End 1": "true"
+    "Beneath The Well Grass Near End 2": "true"
+    "Beneath The Well Grass Near End 3": "true"
+    "Beneath The Well Grass Near End 4": "true"
+    "Beneath The Well Grass Near End 5": "true"
 "Beneath The Well Sun Block":
   dungeon: BtW
   exits:

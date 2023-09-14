@@ -5,7 +5,7 @@ import { decompressGame } from '../lib/combo/decompress';
 import { CONFIG } from '../lib/combo/config';
 import { mkdir } from 'fs';
 
-const GENERIC_GROTTOS = [
+const OOT_GENERIC_GROTTOS = [
   0x0c,
   0x14,
   0x08,
@@ -15,6 +15,22 @@ const GENERIC_GROTTOS = [
   0x02,
   0x03,
   0x00,
+];
+
+const MM_GENERIC_GROTTOS = [
+  0x13, /* Path to Snowhead Grotto,  */
+  0x14, /* Ikana Valley Grotto */
+  0x15, /* Zora Cape Grotto */
+  0x16, /* Road to Ikana Grotto */
+  0x17, /* Great Bay Coast Fisherman Grotto, */
+  0x18, /* Ikana Graveyard Grotto */
+  0x19, /* Twin Islands Ramp Grotto */
+  0x1a, /* Termina Field Pillar Grotto */
+  0x1b, /* Mountain Village Tunnel Grotto */
+  0x1c, /* Woods of Mystery Grotto */
+  0x1d, /* Southern Swamp Grotto */
+  0x1e, /* Road to Southern Swamp Grotto */
+  0x1f, /* Termina Field Tall Grass Grotto */
 ];
 
 const SLICES = 12;
@@ -107,14 +123,21 @@ const ACTORS_OOT = {
 const ACTORS_MM = {
   POT: 0x82,
   FLYING_POT: 0x8d,
+  EN_KUSA: 0x90,
+  OBJ_MURE2: 0xb3,
+  OBJ_GRASS: 0x10b,
+  OBJ_GRASS_UNIT: 0x10d,
+  EN_KUSA2: 0x171,
 };
 
 const ACTOR_SLICES_OOT = {
   [ACTORS_OOT.ROCK_BUSH_GROUP]: 12,
 }
 
-const ACTOR_SLICES_MM: {[k: number]: number} = {
-
+const ACTOR_SLICES_MM = {
+  [ACTORS_MM.OBJ_MURE2]: 12,
+  [ACTORS_MM.OBJ_GRASS_UNIT]: 12,
+  [ACTORS_MM.EN_KUSA2]: 9,
 }
 
 const INTERESTING_ACTORS_OOT = Object.values(ACTORS_OOT);
@@ -168,6 +191,33 @@ const ITEM00_DROPS = [
   'TUNIC_ZORA',
   'TUNIC_GORON',
   'BOMBS_5',
+];
+
+const ITEM00_DROPS_MM = [
+  'RUPEE_GREEN',
+  'RUPEE_BLUE',
+  'RUPEE_RED',
+  'RECOVERY_HEART',
+  'BOMBS_5',
+  'ARROWS_10',
+  '???',
+  '???',
+  'ARROWS_20',
+  'ARROWS_30',
+  'ARROWS_30',
+  'BOMBS_5',
+  'NUT',
+  'STICK',
+  'MAGIC_JAR_LARGE',
+  'MAGIC_JAR_SMALL',
+  '???',
+  'SMALL_KEY',
+  'FLEXIBLE',
+  'RUPEE_HUGE',
+  'RUPEE_PURPLE',
+  'RECOVERY_HEART',
+  '???',
+  'NUTS_10',
 ];
 
 const FLYING_POT_DROPS = [
@@ -370,13 +420,35 @@ function parseRoomActors(rom: Buffer, raw: RawRoom, game: Game): RoomActors[] {
   if (game !== 'mm' && raw.sceneId === 0x3e && raw.roomId === 0x00) {
     /* OoT generic grottos */
     let genericRooms: RoomActors[] = [];
-    for (const genericId of GENERIC_GROTTOS) {
+    for (const genericId of OOT_GENERIC_GROTTOS) {
       const genericRoomId = genericId | 0x20;
       const genericActors = actors.map(x => ({...x, roomId: genericRoomId }));
       genericRooms.push({ sceneId: raw.sceneId, setupId: raw.setupId, roomId: genericRoomId, actors: genericActors });
     }
     return genericRooms;
   }
+
+  if (game === 'mm' && raw.sceneId === 0x07 && raw.roomId === 0x04) {
+    /* MM generic grottos */
+    let genericRooms: RoomActors[] = [];
+    for (const genericId of MM_GENERIC_GROTTOS) {
+      const genericRoomId = genericId | 0x20;
+      const genericActors = actors.map(x => ({...x, roomId: genericRoomId }));
+      genericRooms.push({ sceneId: raw.sceneId, setupId: raw.setupId, roomId: genericRoomId, actors: genericActors });
+    }
+    return genericRooms;
+  }
+
+  if (game === 'mm' && raw.sceneId === 0x07 && raw.roomId === 0x0a) {
+    /* MM cow grottos */
+    let cowRooms: RoomActors[] = [];
+    cowRooms.push({ sceneId: raw.sceneId, setupId: raw.setupId, roomId: raw.roomId, actors });
+    const altRoomId = 0x0f;
+    const altActors = actors.map(x => ({...x, roomId: altRoomId }));
+    cowRooms.push({ sceneId: raw.sceneId, setupId: raw.setupId, roomId: altRoomId, actors: altActors });
+    return cowRooms;
+  }
+
   return [{ sceneId: raw.sceneId, setupId: raw.setupId, roomId: raw.roomId, actors }];
 }
 
@@ -504,7 +576,8 @@ function hexPad(n: number, width: number) {
 
 function decPad(n: number, width: number) {
   const s = n.toString();
-  return '0'.repeat(width - s.length) + s;
+  const count = width - s.length;
+  return count > 0 ? '0'.repeat(width - s.length) + s : s;
 }
 
 function outputGrassPoolOot(roomActors: RoomActors[]) {
@@ -560,6 +633,100 @@ function outputGrassPoolOot(roomActors: RoomActors[]) {
   }
 }
 
+function outputGrassPoolMm(roomActors: RoomActors[]) {
+  let lastSceneId = -1;
+  let lastSetupId = -1;
+  let altGrassAcc = 0;
+  for (const room of roomActors) {
+    for (const actor of room.actors) {
+      if (actor.typeId === ACTORS_MM.EN_KUSA) {
+        const grassType = (actor.params) & 3;
+        let item: string;
+        if (grassType == 0 || grassType == 2) {
+          item = 'RANDOM';
+        } else if (grassType === 3) {
+          const item00value = (actor.params & 0xfc) >> 2;
+          if (item00value >= ITEM00_DROPS_MM.length) {
+            item = 'NOTHING';
+          } else {
+            item = ITEM00_DROPS_MM[item00value];
+          }
+        } else {
+
+          item = (altGrassAcc & 1) ? 'RECOVERY_HEART' : 'ARROWS_5';
+          altGrassAcc++;
+        }
+        const key = ((room.setupId & 0x3) << 14) | (room.roomId << 8) | actor.actorId;
+        if (room.sceneId != lastSceneId || room.setupId != lastSetupId) {
+          console.log('');
+          lastSceneId = room.sceneId;
+          lastSetupId = room.setupId;
+        }
+        item = 'RANDOM';
+        console.log(`Scene ${room.sceneId.toString(16)} Setup ${room.setupId} Room ${hexPad(room.roomId, 2)} Grass ${decPad(actor.actorId + 1, 2)},        grass,            NONE,                 SCENE_${room.sceneId.toString(16)}, ${hexPad(key, 5)}, ${item}`);
+      }
+
+      if (actor.typeId === ACTORS_MM.OBJ_MURE2) {
+        const type = (actor.params) & 3;
+        let count: number;
+        if (type > 1) {
+          continue;
+        }
+        if (type == 0) {
+          count = 9;
+        } else {
+          count = 12;
+        }
+        const item = 'RANDOM';
+        if (room.sceneId != lastSceneId || room.setupId != lastSetupId) {
+          console.log('');
+          lastSceneId = room.sceneId;
+          lastSetupId = room.setupId;
+        }
+        for (let i = 0; i < count; ++i) {
+          const key = (i << 16) | ((room.setupId & 0x3) << 14) | (room.roomId << 8) | actor.actorId;
+          console.log(`Scene ${room.sceneId.toString(16)} Setup ${room.setupId} Room ${hexPad(room.roomId, 2)} Grass Pack ${decPad(actor.actorId + 1, 2)} Grass ${decPad(i + 1, 2)},             grass,            NONE,                 SCENE_${room.sceneId.toString(16)}, ${hexPad(key, 5)}, ${item}`);
+        }
+      }
+
+      if (actor.typeId === ACTORS_MM.OBJ_GRASS_UNIT) {
+        const count = (actor.params & 1) ? 12 : 9;
+        const item = 'RANDOM';
+        if (room.sceneId != lastSceneId || room.setupId != lastSetupId) {
+          console.log('');
+          lastSceneId = room.sceneId;
+          lastSetupId = room.setupId;
+        }
+        for (let i = 0; i < count; ++i) {
+          const key = (i << 16) | ((room.setupId & 0x3) << 14) | (room.roomId << 8) | actor.actorId;
+          console.log(`Scene ${room.sceneId.toString(16)} Setup ${room.setupId} Room ${hexPad(room.roomId, 2)} Grass UNIT Pack ${decPad(actor.actorId + 1, 2)} Grass ${decPad(i + 1, 2)},             grass,            NONE,                 SCENE_${room.sceneId.toString(16)}, ${hexPad(key, 5)}, ${item}`);
+        }
+      }
+    }
+  }
+}
+
+function outputKeatonGrassPoolMm(roomActors: RoomActors[]) {
+  let lastSceneId = -1;
+  let lastSetupId = -1;
+  for (const room of roomActors) {
+    for (const actor of room.actors) {
+      if (actor.typeId === ACTORS_MM.EN_KUSA2) {
+        const key = ((room.setupId & 0x3) << 14) | (room.roomId << 8) | actor.actorId;
+        if (room.sceneId != lastSceneId || room.setupId != lastSetupId) {
+          console.log('');
+          lastSceneId = room.sceneId;
+          lastSetupId = room.setupId;
+        }
+
+        for (let i = 0; i < 9; ++i) {
+          const item = (i == 8) ? 'RUPEE_RED' : 'RUPEE_GREEN';
+          console.log(`Scene ${room.sceneId.toString(16)} Setup ${room.setupId} Room ${hexPad(room.roomId, 2)} Keaton Grass ${decPad(actor.actorId + 1, 2)} Reward ${i + 1},        grass,            NONE,                 SCENE_${room.sceneId.toString(16)}, ${hexPad(key, 5)}, ${item}`);
+        }
+      }
+    }
+  }
+}
 
 function outputGrassWeirdPoolOot(roomActors: RoomActors[]) {
   let lastSceneId = -1;
@@ -740,7 +907,9 @@ async function run() {
 
   /* Output */
   //outputPotsPoolOot(mqRooms);
-  outputGrassWeirdPoolOot(ootRooms);
+  //outputGrassWeirdPoolOot(ootRooms);
+  //outputGrassPoolMm(mmRooms);
+  outputKeatonGrassPoolMm(mmRooms);
 }
 
 run().catch(e => {

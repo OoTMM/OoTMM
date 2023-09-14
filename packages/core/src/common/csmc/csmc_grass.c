@@ -2,6 +2,14 @@
 #include <combo/csmc.h>
 #include <combo/custom.h>
 
+#if defined(GAME_OOT)
+# define TEXTURE_ADDR_STANDARD  0x0500b140
+# define TEXTURE_ADDR_ALT       0x04035BD0
+#else
+# define TEXTURE_ADDR_STANDARD  0x05007010
+# define TEXTURE_ADDR_ALT       0x04052940
+#endif
+
 static const u32 kColorBossKey  = 0x0000ffff;
 static const u32 kColorMajor    = 0xffff00ff;
 static const u32 kColorKey      = 0x444444ff;
@@ -10,17 +18,17 @@ static const u32 kColorFairy    = 0xff7afbff;
 static const u32 kColorHeart    = 0xff0000ff;
 
 static const CsmcDisplayList kGrassStandardDlist[] = {
-    { 0x0500b140,           0xffffffff,    CTF_COLOR | CTF_CLAMP,                       G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32 },
-    { CUSTOM_GRASS_ADDR,    kColorBossKey, CTF_CUSTOM_TEXTURE | CTF_COLOR | CTF_CLAMP,  G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32 },
-    { CUSTOM_GRASS_ADDR,    kColorMajor,   CTF_CUSTOM_TEXTURE | CTF_COLOR | CTF_CLAMP,  G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32 },
-    { CUSTOM_GRASS_ADDR,    kColorKey,     CTF_CUSTOM_TEXTURE | CTF_COLOR | CTF_CLAMP,  G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32 },
-    { CUSTOM_GRASS_ADDR,    kColorSpider,  CTF_CUSTOM_TEXTURE | CTF_COLOR | CTF_CLAMP,  G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32 },
-    { CUSTOM_GRASS_ADDR,    kColorFairy,   CTF_CUSTOM_TEXTURE | CTF_COLOR | CTF_CLAMP,  G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32 },
-    { CUSTOM_GRASS_ADDR,    kColorHeart,   CTF_CUSTOM_TEXTURE | CTF_COLOR | CTF_CLAMP,  G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32 },
+    { TEXTURE_ADDR_STANDARD,    0xffffffff,    CTF_COLOR | CTF_CLAMP,                       G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32 },
+    { CUSTOM_GRASS_ADDR,        kColorBossKey, CTF_CUSTOM_TEXTURE | CTF_COLOR | CTF_CLAMP,  G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32 },
+    { CUSTOM_GRASS_ADDR,        kColorMajor,   CTF_CUSTOM_TEXTURE | CTF_COLOR | CTF_CLAMP,  G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32 },
+    { CUSTOM_GRASS_ADDR,        kColorKey,     CTF_CUSTOM_TEXTURE | CTF_COLOR | CTF_CLAMP,  G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32 },
+    { CUSTOM_GRASS_ADDR,        kColorSpider,  CTF_CUSTOM_TEXTURE | CTF_COLOR | CTF_CLAMP,  G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32 },
+    { CUSTOM_GRASS_ADDR,        kColorFairy,   CTF_CUSTOM_TEXTURE | CTF_COLOR | CTF_CLAMP,  G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32 },
+    { CUSTOM_GRASS_ADDR,        kColorHeart,   CTF_CUSTOM_TEXTURE | CTF_COLOR | CTF_CLAMP,  G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32 },
 };
 
 static const CsmcDisplayList kGrassAltDlist[] = {
-    { 0x04035BD0,               0xffffffff,    CTF_COLOR | CTF_CLAMP,                       G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32 },
+    { TEXTURE_ADDR_ALT,         0xffffffff,    CTF_COLOR | CTF_CLAMP,                       G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32 },
     { CUSTOM_GRASS_ALT_ADDR,    kColorBossKey, CTF_CUSTOM_TEXTURE | CTF_COLOR | CTF_CLAMP,  G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32 },
     { CUSTOM_GRASS_ALT_ADDR,    kColorMajor,   CTF_CUSTOM_TEXTURE | CTF_COLOR | CTF_CLAMP,  G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32 },
     { CUSTOM_GRASS_ALT_ADDR,    kColorKey,     CTF_CUSTOM_TEXTURE | CTF_COLOR | CTF_CLAMP,  G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 32 },
@@ -53,7 +61,7 @@ static int csmcGrassId(s16 gi, int def)
     }
 }
 
-void csmcGrassPreDraw(GameState_Play* play, s16 gi, int def, int alt)
+void csmcGrassPreDraw(GameState_Play* play, s16 gi, int def, int alt, int direct)
 {
     const CsmcDisplayList* dlists;
     int id;
@@ -69,6 +77,13 @@ void csmcGrassPreDraw(GameState_Play* play, s16 gi, int def, int alt)
     list = csmcLoadTextureEx(&dlists[id]);
 
     OPEN_DISPS(play->gs.gfx);
-    gSPSegment(POLY_OPA_DISP++, 0x0a, list);
+    if (direct)
+    {
+        gSPDisplayList(POLY_OPA_DISP++, list);
+    }
+    else
+    {
+        gSPSegment(POLY_OPA_DISP++, 0x0a, list);
+    }
     CLOSE_DISPS();
 }

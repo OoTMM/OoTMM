@@ -21,6 +21,7 @@
 # include <combo/npc.h>
 # include <combo/text.h>
 # include <combo/common/ocarina.h>
+# include <combo/common/actors/Obj_Mure2.h>
 
 # if defined(GAME_OOT)
 #  include <combo/oot/play.h>
@@ -30,7 +31,6 @@
 #  include <combo/oot/actors/Obj_Tsubo.h>
 #  include <combo/oot/actors/En_Kusa.h>
 #  include <combo/oot/actors/En_Tubo_Trap.h>
-#  include <combo/oot/actors/Obj_Mure2.h>
 #  include <combo/oot/actors/En_Ossan.h>
 # endif
 
@@ -43,7 +43,10 @@
 #  include <combo/mm/actor_enossan.h>
 #  include <combo/mm/actor_arms_hook.h>
 #  include <combo/mm/actors/Obj_Tsubo.h>
+#  include <combo/mm/actors/Obj_Grass.h>
+#  include <combo/mm/actors/Obj_Grass_Carry.h>
 #  include <combo/mm/actors/En_Tubo_Trap.h>
+#  include <combo/mm/actors/En_Kusa.h>
 # endif
 
 # include <combo/common/actors/En_Item00.h>
@@ -388,6 +391,7 @@ typedef struct
     u8                      actorIndex;
     u8                      sceneSetupId;
     Actor_CustomItem*       customItemsList;
+    s8                      keatonGrassMax;
 }
 ComboGlobal;
 

@@ -2,7 +2,8 @@
 #define COMBO_COMMON_ACTOR_H
 
 #if !defined(__ASSEMBLER__)
-#include <combo/types.h>
+# include <combo/types.h>
+# include <combo/util.h>
 #endif
 
 #if defined(GAME_OOT)
@@ -121,6 +122,9 @@
 # define AC_DM_HINA         0x140
 # define AC_EN_TAB          0x263
 # define AC_EN_TEST7        0x1ce
+# define AC_OBJ_GRASS       0x10b
+# define AC_OBJ_GRASS_CARRY 0x10c
+# define AC_OBJ_GRASS_UNIT  0x10d
 
 # define AC_EN_BIGOKUTA     0x1a8
 # define AC_EN_WALLMAS      0x00a
@@ -190,6 +194,8 @@
 # define AC_EN_RAIL_SKB     0x212
 # define AC_EN_NEO_REEBA    0x216
 # define AC_EN_HINT_SKB     0x2a5
+# define AC_EN_KUSA         0x090
+# define AC_OBJ_MURE2       0x0b3
 
 #endif
 

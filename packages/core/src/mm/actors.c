@@ -330,6 +330,7 @@ static int canSpawnSoul(GameState_Play* play, s16 actorId, u16 variable)
     case AC_EN_SKB:
         if ((play->sceneId == SCE_MM_IKANA_GRAVEYARD) && (play->roomCtx.curRoom.id == 0x01)) // Upper graveyard
             return 1;
+        /* Fallthrough */
     case AC_EN_HINT_SKB:
     case AC_EN_RAIL_SKB:
         return hasSoul(GI_MM_SOUL_STALCHILD);
