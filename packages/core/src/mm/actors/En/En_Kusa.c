@@ -57,7 +57,7 @@ void EnKusa_DrawWrapper(Actor_EnKusa* this, GameState_Play* play)
         alt = 0;
     else
         alt = 1;
-    csmcGrassPreDraw(play, o.gi, CSMC_GRASS_NORMAL, alt);
+    csmcGrassPreDraw(play, o.gi, CSMC_GRASS_NORMAL, alt, 0);
 
     /* Draw the actor */
     EnKusa_Draw = actorAddr(AC_EN_KUSA, alt ? 0x809365cc : 0x80936414);
