@@ -315,6 +315,11 @@ export class LogicPassSolver {
   run() {
     this.monitor.log(`Logic: Solver`);
 
+    /* KLUDGE: Reset pre-completed dungeons */
+    for (const world of this.input.worlds) {
+      world.preCompleted = new Set;
+    }
+
     /* Place plando items */
     this.placePlando();
 
