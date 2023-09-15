@@ -120,9 +120,9 @@ jobs:
         run: |
           npm run build
 
-      - name: Deploy to Netlify
-        uses: netlify/actions/cli@master
-        with:
-          args: cd packages/gui/dist && deploy --filter @ootmm/gui --prod --dir ./
+      - name: Deploy to netlify
+        run: |
+          npm i -g netlify-cli
+          cd packages/gui/dist && netlify deploy --filter @ootmm/gui --prod --dir ./
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
