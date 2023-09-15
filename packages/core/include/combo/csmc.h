@@ -31,6 +31,15 @@
 #define CSMC_GRASS_HEART      0x06
 #define CSMC_GRASS_SOUL       0x07
 
+#define CSMC_GS_NORMAL     0x00
+#define CSMC_GS_BOSS_KEY   0x01
+#define CSMC_GS_MAJOR      0x02
+#define CSMC_GS_KEY        0x03
+#define CSMC_GS_SPIDER     0x04
+#define CSMC_GS_FAIRY      0x05
+#define CSMC_GS_HEART      0x06
+#define CSMC_GS_SOUL       0x07
+
 #define CTF_MIRROR          (1 << 0)
 #define CTF_CLAMP           (1 << 1)
 #define CTF_COLOR           (1 << 2)
@@ -56,6 +65,7 @@ void*   csmcLoadTexture(u8 custom, u32 addr, int fmt, int bpp, int w, int h, int
 void*   csmcLoadTextureEx(const CsmcDisplayList* dl);
 int     csmcFromItem(s16 gi);
 int     csmcEnabled(void);
+int     csmcEnabledExtra(void);
 
 /* Chest */
 void    csmcChestInit(Actor* this, GameState_Play* play, s16 gi);
@@ -67,5 +77,8 @@ void csmcPotPreDraw(Actor* this, GameState_Play* play, s16 gi, int def);
 
 /* Grass */
 void csmcGrassPreDraw(GameState_Play* play, s16 gi, int def, int alt, int direct);
+
+/* GS */
+void csmcGsPreDraw(GameState_Play* play, s16 gi);
 
 #endif

@@ -26,7 +26,7 @@ static void EnSi_ItemQuery(ComboItemQuery* q, Actor* this, GameState_Play* play)
     q->gi = play->sceneId == SCE_MM_SPIDER_HOUSE_OCEAN ? GI_MM_GS_TOKEN_OCEAN : GI_MM_GS_TOKEN_SWAMP;
 }
 
-static void EnSi_ItemOverride(ComboItemOverride* o, Actor* this, GameState_Play* play)
+void EnSi_ItemOverride(ComboItemOverride* o, Actor* this, GameState_Play* play)
 {
     ComboItemQuery q;
 

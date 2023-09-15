@@ -712,6 +712,14 @@ export const SETTINGS = [{
   description: 'Use a specific texture for heart pieces/containers',
   cond: (x: any) => x.csmc !== 'never',
 }, {
+  key: 'csmcExtra',
+  name: 'Extra CSMC',
+  category: 'main.misc',
+  type: 'boolean',
+  default: false,
+  description: 'Enables CSMC on a wider range of checks',
+  cond: (x: any) => x.csmc !== 'never',
+}, {
   key: 'blastMaskCooldown',
   name: 'Blast Mask Cooldown',
   category: 'main.misc',

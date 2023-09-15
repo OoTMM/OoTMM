@@ -92,6 +92,7 @@ export class LogicPassConfig {
       GANON_NO_BOSS_KEY: settings.ganonBossKey === 'removed',
       SMALL_KEY_SHUFFLE: settings.smallKeyShuffleOot === 'anywhere',
       CSMC: settings.csmc === 'always',
+      CSMC_EXTRA: settings.csmcExtra,
       CSMC_AGONY: settings.csmc === 'agony',
       OOT_PROGRESSIVE_SHIELDS: settings.progressiveShieldsOot === 'progressive',
       OOT_PROGRESSIVE_SWORDS: settings.progressiveSwordsOot === 'progressive',
