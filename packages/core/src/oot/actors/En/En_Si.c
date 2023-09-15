@@ -27,7 +27,7 @@ static void EnSi_ItemQuery(ComboItemQuery* q, Actor* this)
     q->gi = GI_OOT_GS_TOKEN;
 }
 
-static void EnSi_ItemOverride(ComboItemOverride* o, Actor* this)
+void EnSi_ItemOverride(ComboItemOverride* o, Actor* this)
 {
     ComboItemQuery q;
 
