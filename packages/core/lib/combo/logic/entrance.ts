@@ -4,7 +4,7 @@ import { DUNGEONS_REGIONS, ExprMap, ExprParsers, World, WorldEntrance, cloneWorl
 import { Pathfinder } from './pathfind';
 import { Monitor } from '../monitor';
 import { LogicEntranceError, LogicError } from './error';
-import { Expr, exprAnd, exprTrue } from './expr';
+import { Expr, exprAge, exprAnd, exprFalse, exprTrue } from './expr';
 import { Location, makeLocation } from './locations';
 import { LogicPassSolver } from './solve';
 import { ItemsCount, PlayerItems } from '../items';
@@ -512,9 +512,31 @@ export class LogicPassEntrances {
     }
   }
 
+  private validateAgeTemple() {
+    const newWorlds = this.worlds.map(w => cloneWorld(w));
+    for (const w of newWorlds) {
+      const a = w.areas['OOT SPAWN'];
+      if (this.input.settings.startingAge === 'child') {
+        a.exits['OOT SPAWN ADULT'] = exprAge('child');
+        a.exits['OOT SPAWN CHILD'] = exprFalse();
+      } else {
+        a.exits['OOT SPAWN ADULT'] = exprFalse();
+        a.exits['OOT SPAWN CHILD'] = exprAge('adult');
+      }
+    }
+
+    const agePathfinder = new Pathfinder(newWorlds, this.input.settings, this.input.startingItems);
+    const pathfinderState = agePathfinder.run(null, { recursive: true });
+    const target = 'OOT Temple of Time';
+    if (pathfinderState.ws.some(x => !(x.areas.adult.has(target) || x.areas.child.has(target)))) {
+      throw new LogicEntranceError('Temple of Time is unreachable from the non-starting age');
+    }
+  }
+
   private validate() {
     if (this.input.settings.logic === 'none')
       return;
+    this.validateAgeTemple();
     const pathfinderState = this.pathfinder.run(null, { ignoreItems: true, recursive: true });
 
     /* We want to make sure everything that needs to is reachable */
