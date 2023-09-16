@@ -160,12 +160,6 @@ void comboGiveItemNpcEx(Actor* actor, GameState_Play* play, s16 gi, int npc, int
     comboGiveItem(actor, play, &q, a, b);
 }
 
-#if defined(GAME_OOT)
-# define OVERRIDE_ADDR 0x03fe1000
-#else
-# define OVERRIDE_ADDR 0x03fe9000
-#endif
-
 typedef struct ComboOverrideData
 {
     u32  key;
@@ -174,15 +168,23 @@ typedef struct ComboOverrideData
 }
 ComboOverrideData;
 
-static ComboOverrideData* gComboOverrides;
+static ComboOverrideData sComboOverridesCache[64];
+static int sComboOverridesCacheCursor;
+static const ComboOverrideData* sComboOverridesFile;
+static u32 sComboOverridesCount;
 
 void comboInitOverride(void)
 {
-    size_t size;
+    u64 mask;
+    DmaEntry e;
 
-    size = comboDmaLoadFile(NULL, COMBO_VROM_CHECKS);
-    gComboOverrides = malloc(size);
-    comboDmaLoadFile(gComboOverrides, COMBO_VROM_CHECKS);
+    mask = osSetIntMask(1);
+    comboDmaLookup(&e, COMBO_VROM_CHECKS);
+    sComboOverridesCount = comboDmaLoadFile(NULL, COMBO_VROM_CHECKS) / sizeof(ComboOverrideData);
+    sComboOverridesFile = (void*)(0xb0000000 | e.pstart);
+    memset(sComboOverridesCache, 0xff, sizeof(sComboOverridesCache));
+    sComboOverridesCacheCursor = 0;
+    osSetIntMask(mask);
 }
 
 u8 comboSceneKey(u8 sceneId)
@@ -227,25 +229,52 @@ static u32 makeOverrideKey(const ComboItemQuery* q)
     return key;
 }
 
-static const ComboOverrideData* overrideData(u32 key)
+static int overrideData(ComboOverrideData* data, u32 key)
 {
-    int i;
+    ComboOverrideData d;
+    u32 min;
+    u32 max;
+    u32 cursor;
 
-    i = 0;
+    /* Check the cache */
+    for (int i = 0; i < ARRAY_SIZE(sComboOverridesCache); ++i)
+    {
+        if (sComboOverridesCache[i].key == key)
+        {
+            memcpy(data, &sComboOverridesCache[i], sizeof(*data));
+            return 1;
+        }
+    }
+
+    /* Cache miss, have to lookup manually */
+    min = 0;
+    max = sComboOverridesCount;
     for (;;)
     {
-        ComboOverrideData* o = &gComboOverrides[i];
-        if (o->key == 0xffffffff)
-            return NULL;
-        if (o->key == key)
-            return o;
-        i++;
+        if (min >= max)
+            return 0;
+        cursor = (min + max) / 2;
+        memcpy(&d, sComboOverridesFile + cursor, sizeof(d));
+        if (d.key == key)
+        {
+            /* Copy and add to cache */
+            memcpy(data, &d, sizeof(*data));
+            memcpy(&sComboOverridesCache[sComboOverridesCacheCursor], &d, sizeof(d));
+            sComboOverridesCacheCursor = (sComboOverridesCacheCursor + 1) % ARRAY_SIZE(sComboOverridesCache);
+            return 1;
+        }
+        if (key > d.key)
+            min = cursor + 1;
+        else
+            max = cursor;
     }
 }
 
 void comboItemOverride(ComboItemOverride* dst, const ComboItemQuery* q)
 {
-    const ComboOverrideData* data;
+    ComboOverrideData data;
+    u64 mask;
+    int isOverride;
     s16 gi;
     int neg;
 
@@ -263,14 +292,18 @@ void comboItemOverride(ComboItemOverride* dst, const ComboItemQuery* q)
     }
 
     if (q->ovType == OV_NONE)
-        data = NULL;
+        isOverride = 0;
     else
-        data = overrideData(makeOverrideKey(q));
-
-    if (data)
     {
-        dst->player = data->player;
-        gi = (s16)data->value;
+        mask = osSetIntMask(1);
+        isOverride = overrideData(&data, makeOverrideKey(q));
+        osSetIntMask(mask);
+    }
+
+    if (isOverride)
+    {
+        dst->player = data.player;
+        gi = (s16)data.value;
     }
 
     if (q->ovFlags & OVF_RENEW)

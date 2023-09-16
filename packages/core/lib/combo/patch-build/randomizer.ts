@@ -368,7 +368,8 @@ const gameChecks = (worldId: number, settings: Settings, game: Game, logic: Logi
     b.writeUInt16BE(itemGi, 6);
     buffers.push(b);
   }
-  buffers.push(Buffer.alloc(8, 0xff));
+  /* Sort by key ascending */
+  buffers.sort((a, b) => a.readUInt32BE(0) < b.readUInt32BE(0) ? -1 : 1);
   return padBuffer16(Buffer.concat(buffers));
 };
 
@@ -749,8 +750,8 @@ const randomizerStartingItems = (world: number, logic: LogicResult): Buffer => {
 export function patchRandomizer(worldId: number, logic: LogicResult, settings: Settings, patchfile: Patchfile) {
   patchfile.addNewFile(0xf0200000, randomizerData(worldId, logic), true);
   patchfile.addNewFile(0xf0300000, randomizerStartingItems(worldId, logic), false);
-  patchfile.addNewFile(0xf0400000, gameChecks(worldId, settings, 'oot', logic), true);
-  patchfile.addNewFile(0xf0500000, gameChecks(worldId, settings, 'mm', logic), true);
+  patchfile.addNewFile(0xf0400000, gameChecks(worldId, settings, 'oot', logic), false);
+  patchfile.addNewFile(0xf0500000, gameChecks(worldId, settings, 'mm', logic), false);
   patchfile.addNewFile(0xf0600000, gameHints(settings, 'oot', logic.hints[worldId]), true);
   patchfile.addNewFile(0xf0700000, gameHints(settings, 'mm', logic.hints[worldId]), true);
   patchfile.addNewFile(0xf0800000, gameEntrances(worldId, 'oot', logic), true);
