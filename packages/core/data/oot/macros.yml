@@ -4,7 +4,7 @@
 "is_day": "oot_time(day) || can_play_sun"
 "is_night": "oot_time(night) || can_play_sun"
 "is_dusk": "oot_time(day) && oot_time(night)" # If day and night can be true at the same time, then you have access to a local time-flow zone
-"time_travel_at_will": "setting(ageChange) && event(TIME_TRAVEL_AT_WILL)"
+"time_travel_at_will": "!setting(ageChange, none) && event(TIME_TRAVEL_AT_WILL)"
 
 # Ocarina
 "ocarina_button(x, y)": "cond(setting(ocarinaButtonsShuffleOot), cond(setting(sharedOcarinaButtons), has(y), has(x)), true)"
@@ -21,6 +21,7 @@
 "ocarina_button_any2_up": "ocarina_button_up && ocarina_button_down"
 
 "has_ocarina": "glitch_ocarina_items || has(OCARINA) || has(SHARED_OCARINA)"
+"has_ocarina_of_time": "has(OCARINA, 2) || has(SHARED_OCARINA, 2)"
 "can_play(x)": "has_ocarina && has(x)"
 "can_play_cross(x)": "can_play(x) && (setting(crossWarpMm, full) || (setting(crossWarpMm, childOnly) && is_child))"
 

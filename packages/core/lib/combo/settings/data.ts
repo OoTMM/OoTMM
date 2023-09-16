@@ -513,9 +513,14 @@ export const SETTINGS = [{
   key: 'ageChange',
   name: 'Age Change upon Song of Time',
   category: 'main.events',
-  type: 'boolean',
+  type: 'enum',
+  values: [
+    { value: 'none', name: 'None', description: 'Cannot change age by playing Song of Time.' },
+    { value: 'oot', name: 'Ocarina of Time', description: 'Can change age by playing Song of Time with the Ocarina of Time specifically.' },
+    { value: 'always', name: 'Always', description: 'Can always change age by playing Song of Time.' },
+  ],
   description: 'Allows you to switch ages by playing Song of Time, if you\'ve been to Temple of Time as both ages',
-  default: false
+  default: 'none',
 }, {
   key: 'dekuTree',
   name: 'Deku Tree',
