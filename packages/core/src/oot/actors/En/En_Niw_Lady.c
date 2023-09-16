@@ -39,8 +39,15 @@ void EnNiwLady_GiveItem(Actor* actor, GameState_Play* play, s16 gi, float a, flo
     comboGiveItemNpc(actor, play, gi, npc, a, b);
 }
 
-PATCH_CALL(0x80a9e95c, EnNiwLady_GiveItem);
-PATCH_CALL(0x80a9e9a0, EnNiwLady_GiveItem);
 PATCH_CALL(0x80a9ec70, EnNiwLady_GiveItem);
 PATCH_CALL(0x80a9edc4, EnNiwLady_GiveItem);
 PATCH_CALL(0x80a9eea8, EnNiwLady_GiveItem);
+
+static void EnNiwLady_GiveItemInit(Actor* actor, GameState_Play* play, s16 gi, float a, float b)
+{
+    actor->attachedA = NULL;
+    EnNiwLady_GiveItem(actor, play, gi, a, b);
+}
+
+PATCH_CALL(0x80a9e95c, EnNiwLady_GiveItemInit);
+PATCH_CALL(0x80a9e9a0, EnNiwLady_GiveItemInit);
