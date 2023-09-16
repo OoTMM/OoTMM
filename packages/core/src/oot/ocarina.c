@@ -86,6 +86,7 @@ void Ocarina_HandleLastPlayedSong(GameState_Play* play, Actor_Player* player, s1
                     case SCE_OOT_LAIR_BONGO_BONGO:
                     case SCE_OOT_LAIR_GANONDORF:
                     case SCE_OOT_TOWER_COLLAPSE_EXTERIOR:
+                    case SCE_OOT_GROTTOS:
                     case SCE_OOT_CASTLE_MAZE_DAY:
                     case SCE_OOT_CASTLE_MAZE_NIGHT:
                     case SCE_OOT_CASTLE_COURTYARD:
