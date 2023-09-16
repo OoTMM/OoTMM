@@ -67,7 +67,7 @@ void Ocarina_HandleLastPlayedSong(GameState_Play* play, Actor_Player* player, s1
         case OCARINA_SONG_TIME:
             canChangeAge = 1; // comboConfig(CFG_OOT_AGE_CHANGE);
             if (canChangeAge) {
-                if (!(gSaveContext.save.inventory.equipment.swords & 2)) {
+                if (!GetEventChk(EV_OOT_CHK_MASTER_SWORD_CHAMBER) || !GetEventChk(EV_OOT_CHK_MASTER_SWORD_PULLED)) {
                     canChangeAge = 0;
                 }
             }
