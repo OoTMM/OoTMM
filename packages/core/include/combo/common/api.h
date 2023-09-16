@@ -175,6 +175,9 @@ void UpdateEquipment(GameState_Play* play, Actor_Player* link);
 void PlayStoreFlags(GameState_Play* play);
 
 void Player_Update(Actor_Player* this, GameState_Play* play);
+#if defined(GAME_OOT)
+void Play_SetupRespawnPoint(GameState_Play* this, s32 respawnMode, s32 playerParams);
+#endif
 
 void* OverlayAddr(u32 addr);
 
