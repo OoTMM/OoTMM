@@ -46,3 +46,11 @@ static void EnTrt_GiveItem(Actor_EnTrt* this, GameState_Play* play, s16 gi, floa
 
 PATCH_CALL(0x80a8cc44, EnTrt_GiveItem);
 PATCH_CALL(0x80a8e014, EnTrt_GiveItem);
+
+static void EnTrt_DisplayKickMessage(GameState_Play* play, u16 messageId, void* unk)
+{
+    PlayerDisplayTextBox(play, messageId, unk);
+    gIsEntranceOverride = 1;
+}
+
+PATCH_CALL(0x80a8dda8, EnTrt_DisplayKickMessage);
