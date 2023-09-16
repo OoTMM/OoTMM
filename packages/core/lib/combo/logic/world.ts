@@ -17,6 +17,7 @@ export type ExprMap = {
 export type WorldArea = {
   game: Game;
   boss: boolean;
+  ageChange: boolean;
   dungeon: string | null;
   exits: ExprMap;
   events: ExprMap;
@@ -275,6 +276,7 @@ export class LogicPassWorld {
         const area = areaSet[name];
         name = gameId(game, name, ' ');
         const boss = area.boss || false;
+        const ageChange = area.age_change ?? (game === 'oot' ? true : false);
         const dungeon = area.dungeon || null;
         let region = area.region;
         if (region !== 'NONE' && region !== 'ENTRANCE') {
@@ -318,7 +320,7 @@ export class LogicPassWorld {
           }
         }
 
-        this.world.areas[name] = { game, boss, dungeon, exits, events, locations, gossip, time, stay, region };
+        this.world.areas[name] = { game, boss, ageChange, dungeon, exits, events, locations, gossip, time, stay, region };
 
         if (dungeon) {
           if (this.world.dungeons[dungeon] === undefined) {

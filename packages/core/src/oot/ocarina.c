@@ -98,8 +98,8 @@ void Ocarina_HandleLastPlayedSong(GameState_Play* play, Actor_Player* player, s1
             ActorContext* actorCtx;
             Actor* actor;
 
-            actor = actorCtx->actors[7].first;
             actorCtx = &play->actorCtx;
+            actor = actorCtx->actors[7].first;
 
             while (actor)
             {
