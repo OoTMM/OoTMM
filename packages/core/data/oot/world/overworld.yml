@@ -168,6 +168,7 @@
     "Know It All House Pot 2": "true"
 "Kokiri Forest Storms Grotto":
   region: ENTRANCE
+  age_change: false
   exits:
     "Kokiri Forest": "true"
   events:
@@ -271,12 +272,14 @@
     "Hyrule Field": "true"
 "Hyrule Field Scrub Grotto":
   region: ENTRANCE
+  age_change: false
   exits:
     "Hyrule Field": "true"
   locations:
     "Hyrule Field Grotto Scrub HP": "can_hit_scrub && scrub_price(0x07)"
 "Hyrule Field Open Grotto":
   region: ENTRANCE
+  age_change: false
   exits:
     "Hyrule Field": "true"
   events:
@@ -297,6 +300,7 @@
     "Hyrule Field Gossip Near Lake Hylia": "true"
 "Hyrule Field Southeast Grotto":
   region: ENTRANCE
+  age_change: false
   exits:
     "Hyrule Field": "true"
   events:
@@ -317,6 +321,7 @@
     "Hyrule Field Gossip Southeast Grotto": "true"
 "Hyrule Field Grotto Near Market":
   region: ENTRANCE
+  age_change: false
   exits:
     "Hyrule Field": "true"
   events:
@@ -337,12 +342,14 @@
     "Hyrule Field Gossip Near Castle Town": "true"
 "Hyrule Field Tektite Grotto":
   region: ENTRANCE
+  age_change: false
   exits:
     "Hyrule Field": "true"
   locations:
     "Hyrule Field Grotto Tektite HP": "can_dive_big"
 "Hyrule Field Grotto Near GV":
   region: ENTRANCE
+  age_change: false
   exits:
     "Hyrule Field": "true"
   events:
@@ -359,6 +366,7 @@
     "Hyrule Field Gossip Near Gerudo Valley": "has_fire"
 "Hyrule Field Grotto Near Kak":
   region: ENTRANCE
+  age_change: false
   exits:
     "Hyrule Field": "true"
   events:
@@ -368,6 +376,7 @@
     "Hyrule Field Grotto Near Kakariko GS": "can_collect_distance || (climb_anywhere && (has_ranged_weapon || has_explosives || can_use_din))"
 "Hyrule Field Fairy Grotto":
   region: ENTRANCE
+  age_change: false
   exits:
     "Hyrule Field": "true"
 "Market Entryway":
@@ -403,6 +412,7 @@
     "Market Grass 8": "is_child && can_cut_grass_no_c_button"
 "Market Castle Entry":
   region: NONE
+  age_change: false
   exits:
     "Hyrule Castle": "is_child"
     "Ganon Castle Exterior": "is_adult"
@@ -532,6 +542,7 @@
     "Market Back Alley East House Pot 3": "true"
 "Bombchu Bowling":
   region: ENTRANCE
+  age_change: false
   exits:
     "Market": "true"
   events:
@@ -548,6 +559,7 @@
     "Shooting Gallery Child": "is_child && can_use_wallet(1)"
 "Treasure Game":
   region: ENTRANCE
+  age_change: false
   exits:
     "Market": "true"
   locations:
@@ -614,6 +626,7 @@
     "Lon Lon Ranch Talon House Pot 3": "true"
 "Lon Lon Ranch Grotto":
   region: ENTRANCE
+  age_change: false
   exits:
     "Lon Lon Ranch": "true"
   locations:
@@ -622,6 +635,7 @@
     "Lon Lon Ranch Grotto Right Scrub": "is_child && scrub_price(0x0a) && can_hit_scrub"
 "Hyrule Castle":
   region: HYRULE_CASTLE
+  age_change: false
   time: flow
   exits:
     "Market Castle Entry": "true"
@@ -649,6 +663,7 @@
     "Hyrule Castle Gossip Before Moat": "true"
 "Hyrule Castle Courtyard":
   region: HYRULE_CASTLE
+  age_change: false
   time: flow
   exits:
     "Hyrule Castle": "true"
@@ -659,6 +674,7 @@
     "Zelda's Song": "met_zelda"
 "Near Fairy Fountain Din":
   region: HYRULE_CASTLE
+  age_change: false
   exits:
     "Hyrule Castle": "is_child"
     "Fairy Fountain Din": "is_child"
@@ -673,6 +689,7 @@
     "Great Fairy Din's Fire": "can_play_zelda"
 "Hyrule Castle Grotto":
   region: ENTRANCE
+  age_change: false
   exits:
     "Hyrule Castle": "true"
   events:
@@ -692,6 +709,7 @@
     "Hyrule Castle Gossip Grotto": "has_explosives_or_hammer"
 "Ganon Castle Exterior":
   region: GANON_CASTLE_EXTERIOR
+  age_change: false
   time: night
   exits:
     "Market Castle Entry": "true"
@@ -701,12 +719,14 @@
     "Ganon Castle Exterior GS": "true"
 "Ganon Castle Exterior After Bridge":
   region: GANON_CASTLE_EXTERIOR
+  age_change: false
   exits:
     "Ganon Castle Exterior": "is_adult && special(BRIDGE)"
     "Hyrule Castle Courtyard": "is_child"
     "Ganon Castle": "true"
 "Near Fairy Fountain Defense":
   region: GANON_CASTLE_EXTERIOR
+  age_change: false
   exits:
     "Ganon Castle Exterior": "is_adult"
     "Fairy Fountain Defense": "is_adult"
@@ -751,6 +771,7 @@
     "Lost Woods Gossip Under Bridge": "true"
 "Lost Woods Generic Grotto":
   region: ENTRANCE
+  age_change: false
   exits:
     "Lost Woods": "true"
   events:
@@ -819,6 +840,7 @@
     "Deku Theater Nuts Upgrade": "age_child_trade && has_mask_truth"
 "Lost Woods Scrub Grotto":
   region: ENTRANCE
+  age_change: false
   exits:
     "Lost Woods Deep": "true"
   locations:
@@ -834,6 +856,7 @@
     RUPEES: "true"
 "Wolfos Grotto":
   region: ENTRANCE
+  age_change: false
   exits:
     "Sacred Meadow Entryway": "true"
   locations:
@@ -854,6 +877,7 @@
     "Sacred Meadow Gossip Atop Maze Temple Side": "true"
 "Sacred Meadow Storms Grotto":
   region: ENTRANCE
+  age_change: false
   exits:
     "Sacred Meadow": "true"
   locations:
@@ -1019,12 +1043,14 @@
     "Skulltula House 50 Tokens": "has(GS_TOKEN, 50)"
 "ReDead Grotto":
   region: ENTRANCE
+  age_change: false
   exits:
     "Kakariko": "true"
   locations:
     "Kakariko Grotto Front": "soul_redead_gibdo && (has_weapon || can_use_sticks || can_use_din)"
 "Kakariko Generic Grotto":
   region: ENTRANCE
+  age_change: false
   exits:
     "Kakariko Back": "true"
   events:
@@ -1167,6 +1193,7 @@
     "Death Mountain Gossip on Climb": "true"
 "Death Mountain Storms Grotto":
   region: ENTRANCE
+  age_change: false
   exits:
     "Death Mountain": "true"
   events:
@@ -1187,6 +1214,7 @@
     "Death Mountain Gossip Grotto": "true"
 "Death Mountain Cow Grotto":
   region: ENTRANCE
+  age_change: false
   exits:
     "Death Mountain": "true"
   events:
@@ -1271,6 +1299,7 @@
     "Goron Shop Item 8": "shop_price(0x1f)"
 "Goron City Grotto":
   region: ENTRANCE
+  age_change: false
   exits:
     "Goron City": "true"
   locations:
@@ -1334,6 +1363,7 @@
     "Zora River Gossip Near Domain": "true"
 "Zora River Storms Grotto":
   region: ENTRANCE
+  age_change: false
   exits:
     "Zora River": "true"
   locations:
@@ -1361,6 +1391,7 @@
     "Zora River Gossip Grotto": "true"
 "Zora River Boulder Grotto":
   region: ENTRANCE
+  age_change: false
   exits:
     "Zora River": "true"
 "Zora Domain":
@@ -1410,6 +1441,7 @@
     "Zora Shop Item 8": "shop_price(0x17)"
 "Zora Domain Grotto":
   region: ENTRANCE
+  age_change: false
   exits:
     "Zora Domain": "true"
 "Lake Hylia":
@@ -1508,6 +1540,7 @@
     "Fishing Pond Adult": "is_adult && can_use_wallet(1)"
 "Lake Hylia Grotto":
   region: ENTRANCE
+  age_change: false
   exits:
     "Lake Hylia": "true"
   locations:
@@ -1623,6 +1656,7 @@
     "Death Mountain Crater Warp": "has_tunic_goron_strict && (is_adult || setting(fireChild) || has_hover_boots || climb_anywhere || hookshot_anywhere)"
 "Death Mountain Crater Generic Grotto":
   region: ENTRANCE
+  age_change: false
   exits:
     "Death Mountain Crater Top": "true"
   events:
@@ -1643,6 +1677,7 @@
     "Death Mountain Crater Gossip Grotto": "true"
 "Death Mountain Crater Scrub Grotto":
   region: ENTRANCE
+  age_change: false
   exits:
     "Death Mountain Crater Bottom": "true"
   locations:
@@ -1705,6 +1740,7 @@
     "Gerudo Valley Crate HP": "can_longshot"
 "Octorok Grotto":
   region: ENTRANCE
+  age_change: false
   exits:
     "Gerudo Valley": "true"
   events:
@@ -1717,6 +1753,7 @@
     "Gerudo Valley After Bridge": "!setting(erRegions, none) && setting(erRegionsShortcuts) && is_adult"
 "Gerudo Valley Storms Grotto":
   region: ENTRANCE
+  age_change: false
   exits:
     "Gerudo Valley After Bridge": "true"
   locations:
@@ -1811,6 +1848,7 @@
     OPEN_FORTRESS_GATE: "has(GERUDO_CARD) && is_adult"
 "Gerudo Fortress Grotto":
   region: ENTRANCE
+  age_change: false
   exits:
     "Gerudo Fortress Exterior": "true"
 "Haunted Wasteland Start":
@@ -1873,6 +1911,7 @@
     "Great Fairy Nayru's Love": "can_play_zelda"
 "Desert Colossus Grotto":
   region: ENTRANCE
+  age_change: false
   exits:
     "Desert Colossus": "true"
   locations:

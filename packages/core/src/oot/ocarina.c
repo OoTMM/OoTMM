@@ -72,6 +72,7 @@ void Ocarina_HandleLastPlayedSong(GameState_Play* play, Actor_Player* player, s1
             case SCE_OOT_GANON_TOWER_COLLAPSING:
             case SCE_OOT_INSIDE_GANON_CASTLE_COLLAPSING:
             case SCE_OOT_TREASURE_SHOP:
+            case SCE_OOT_BOMBCHU_BOWLING_ALLEY:
             case SCE_OOT_LAIR_GOHMA:
             case SCE_OOT_LAIR_KING_DODONGO:
             case SCE_OOT_LAIR_BARINADE:
@@ -83,6 +84,7 @@ void Ocarina_HandleLastPlayedSong(GameState_Play* play, Actor_Player* player, s1
             case SCE_OOT_LAIR_GANONDORF:
             case SCE_OOT_TOWER_COLLAPSE_EXTERIOR:
             case SCE_OOT_GROTTOS:
+            case SCE_OOT_FAIRY_FOUNTAIN:
             case SCE_OOT_CASTLE_MAZE_DAY:
             case SCE_OOT_CASTLE_MAZE_NIGHT:
             case SCE_OOT_CASTLE_COURTYARD:
