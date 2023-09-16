@@ -1000,6 +1000,7 @@ void Shader_Triforce(GameState_Play* play, s16 index)
         break;
     }
 
+    InitListPolyXlu(play->gs.gfx);
     shaderFlameEffectColor(play, color, 1.5f, 20.f);
 }
 
