@@ -22,3 +22,8 @@ PATCH_START 0x80b41cbc
   jr ra
    nop
 PATCH_END
+
+/* Use our after kick handler */
+PATCH_START 0x80b41ac4
+  j EnKgy_AfterKick
+PATCH_END

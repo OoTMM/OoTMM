@@ -67,7 +67,7 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.items[ITS_MM_MASK_GIANT] = ITEM_MM_MASK_GIANT;
         gSave.inventory.items[ITS_MM_MASK_FIERCE_DEITY] = ITEM_MM_MASK_FIERCE_DEITY;
 
-        gSave.playerData.rupees = 9999;
+        //gSave.playerData.rupees = 9999;
 
         gSave.inventory.quest.songHealing = 1;
         gSave.inventory.quest.songTime = 1;

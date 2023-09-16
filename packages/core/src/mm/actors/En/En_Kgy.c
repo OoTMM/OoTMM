@@ -61,3 +61,8 @@ u16 EnKgy_GetMessage2(void)
 }
 
 PATCH_FUNC(0x80b41460, EnKgy_GetMessage2);
+
+void EnKgy_AfterKick(void)
+{
+    gIsEntranceOverride = 1;
+}
