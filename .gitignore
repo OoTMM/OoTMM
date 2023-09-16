@@ -11,3 +11,5 @@
 /config*.yml
 /local
 /.env
+
+/.vscode/settings.json

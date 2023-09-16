@@ -61,6 +61,9 @@ void KaleidoSetCursorColor(GameState_Play* play)
     g = 0xff;
     b = 0xff;
 
+    /* Update dpad */
+    comboDpadUpdate(play);
+
     /* Not on Z/R */
     if (p->cursor_pos == 0)
     {

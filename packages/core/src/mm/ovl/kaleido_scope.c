@@ -1,12 +1,16 @@
 #include <combo.h>
 #include <combo/dma.h>
 #include <combo/menu.h>
+#include <combo/item.h>
 
 void KaleidoScope_AfterSetCutsorColor(GameState_Play* play)
 {
     u16 cursorSlot;
     int press;
     int effect;
+
+    /* Update Dpad */
+    comboDpadUpdate(play);
 
     cursorSlot = play->pauseCtx.cursorSlot[0];
     press = !!(play->gs.input[0].pressed.buttons & (L_TRIG | U_CBUTTONS));
@@ -68,15 +72,7 @@ void KaleidoScope_AfterSetCutsorColor(GameState_Play* play)
         if (press)
         {
             gSave.inventory.items[cursorSlot] = ITEM_MM_BOTTLED_SPRING_WATER;
-            for (int i = 1; i <= 3; ++i)
-            {
-                if (gMmSave.itemEquips.cButtonSlots[0][i] == cursorSlot)
-                {
-                    gMmSave.itemEquips.buttonItems[0][i] = ITEM_MM_BOTTLED_SPRING_WATER;
-                }
-            }
-            for (int i = 1; i < 4; i++)
-                Interface_LoadItemIconImpl(play, i);
+            reloadSlot(gPlay, cursorSlot);
             effect = 1;
         }
     }

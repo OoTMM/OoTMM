@@ -1,4 +1,17 @@
 #include <combo.h>
+#include <combo/item.h>
+
+void reloadSlot(GameState_Play* play, int slot)
+{
+#if defined(GAME_OOT)
+    reloadSlotOot(slot);
+#else
+    reloadSlotMm(slot);
+#endif
+
+    for (int i = 1; i < 4; ++i)
+    Interface_LoadItemIconImpl(play, i);
+}
 
 void comboToggleTrade(u8* slot, u32 flags, const u8* table, u32 tableSize)
 {

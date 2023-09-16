@@ -303,7 +303,7 @@ static void reloadSlotEquips(MmItemEquips* equips, int slot)
     }
 }
 
-static void reloadSlot(int slot)
+void reloadSlotMm(int slot)
 {
     reloadSlotEquips(&gMmSave.itemEquips, slot);
 }
@@ -318,7 +318,7 @@ static void addHookshot(int level)
         itemId = 0x11; // ITEM_MM_BOTTLE_POTION_RED but that enum is wrong
     gMmSave.inventory.items[ITS_MM_HOOKSHOT] = itemId;
     gMmExtraItems.hookshot |= (1 << (level - 1));
-    reloadSlot(ITS_MM_HOOKSHOT);
+    reloadSlotMm(ITS_MM_HOOKSHOT);
 }
 
 static void addOcarina(int level)
@@ -331,7 +331,7 @@ static void addOcarina(int level)
         itemId = ITEM_MM_OCARINA_FAIRY;
     gMmSave.inventory.items[ITS_MM_OCARINA] = itemId;
     gMmExtraItems.ocarina |= (1 << (level - 1));
-    reloadSlot(ITS_MM_OCARINA);
+    reloadSlotMm(ITS_MM_OCARINA);
 }
 
 void comboAddMagicUpgradeMm(int level)

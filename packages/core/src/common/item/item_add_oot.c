@@ -344,7 +344,7 @@ static void reloadSlotEquips(OotItemEquips* equips, int slot)
     }
 }
 
-static void reloadSlot(int slot)
+void reloadSlotOot(int slot)
 {
     reloadSlotEquips(&gOotSave.equips, slot);
     reloadSlotEquips(&gOotSave.childEquips, slot);
@@ -361,7 +361,7 @@ static void addHookshot(int level)
         itemId = ITEM_OOT_HOOKSHOT;
     gOotSave.inventory.items[ITS_OOT_HOOKSHOT] = itemId;
     gOotExtraItems.hookshot |= (1 << (level - 1));
-    reloadSlot(ITS_OOT_HOOKSHOT);
+    reloadSlotOot(ITS_OOT_HOOKSHOT);
 }
 
 static void addOcarina(int level)
@@ -374,7 +374,7 @@ static void addOcarina(int level)
         itemId = ITEM_OOT_OCARINA_FAIRY;
     gOotSave.inventory.items[ITS_OOT_OCARINA] = itemId;
     gOotExtraItems.ocarina |= (1 << (level - 1));
-    reloadSlot(ITS_OOT_OCARINA);
+    reloadSlotOot(ITS_OOT_OCARINA);
 }
 
 void comboAddSoulOot(s16 gi)

@@ -54,6 +54,10 @@ extern const u8 kMmTrade3[];
 
 void comboSyncItems(void);
 
+void reloadSlot(GameState_Play* play, int slot);
+void reloadSlotOot(int slot);
+void reloadSlotMm(int slot);
+
 int  comboAddItemMm(s16 gi, int noEffect);
 int  comboAddItemOot(s16 gi, int noEffect);
 void comboAddItemSharedMm(s16 gi, int noEffect);
