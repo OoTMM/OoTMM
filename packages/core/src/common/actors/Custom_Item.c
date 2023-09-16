@@ -101,6 +101,10 @@ static void CustomItem_Collect(Actor_CustomItem* this, GameState_Play* play)
     if (link->state & (PLAYER_ACTOR_STATE_FROZEN | PLAYER_ACTOR_STATE_EPONA))
         return;
 
+    /* Check for textbox */
+    if (Message_GetState(&play->msgCtx) != 0)
+        return;
+
     /* Query the item */
     CustomItem_ItemQuery(&q, this);
     comboItemOverride(&o, &q);
