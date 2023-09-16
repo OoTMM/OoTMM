@@ -14,7 +14,13 @@ typedef struct PACKED ALIGNED(4) Actor_Player
     char            unk_1a4[0x4c8];
     u32             state;
     u32             state2;
-    char            unk_674[0x3f8];
+    /* 0x674 */ Actor*          unk_674;
+    /* 0x678 */ Actor*          boomerangActor;
+    /* 0x67C */ Actor*          naviActor;
+    /* 0x680 */ s16             naviTextId;
+    /* 0x682 */ u8              state3;
+    /* 0x683 */ s8              exchangeItemId;
+    char            unk_684[0x3e8];
 }
 Actor_Player;
 

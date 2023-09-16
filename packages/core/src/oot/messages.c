@@ -1,7 +1,7 @@
 #include <combo.h>
 #include <combo/entrance.h>
 
-static u8 sInCustomSong;
+u8 gInCustomSong;
 
 const char* soarNames[10] = {
     "Great Bay Coast",
@@ -129,7 +129,7 @@ static void HandleSoaring(GameState_Play* play)
                     songId = gSoaringIndexSelected;
 
                     /* Stop ocarina */
-                    sInCustomSong = 0;
+                    gInCustomSong = 0;
                     play->msgCtx.ocarinaMode = 4; // OCARINA_MODE_END
                     gSoaringIndexSelected = -1;
 
@@ -149,7 +149,34 @@ static void HandleSoaring(GameState_Play* play)
         else
         {
             /* Stop ocarina */
-            sInCustomSong = 0;
+            gInCustomSong = 0;
+            play->msgCtx.ocarinaMode = 4; // OCARINA_MODE_END
+        }
+    }
+}
+
+static void HandleSongOfTime(GameState_Play* play)
+{
+    int msgState;
+
+    msgState = Message_GetState(&play->msgCtx);
+    if (msgState == 2)
+    {
+        /* Stop ocarina */
+        gInCustomSong = 0;
+
+        if (play->msgCtx.choice == 0)
+        {
+            play->transition.age = !gSaveContext.save.age;
+            Play_SetupRespawnPoint(play, 1, 0xDFF);
+            gSaveContext.respawnFlag = 2;
+            play->transition.type = TRANS_TYPE_NORMAL;
+            play->transition.entrance = gSaveContext.save.entrance;
+            play->transition.gfx = TRANS_GFX_SHORTCUT;
+        }
+        else
+        {
+            PlaySound(0x480A);
             play->msgCtx.ocarinaMode = 4; // OCARINA_MODE_END
         }
     }
@@ -160,23 +187,26 @@ void HandleMessagesWrapper(GameState_Play* play, void* unk)
     if (gCustomOcarinaSong)
     {
         PlaySound(0x4807);
-        sInCustomSong = gCustomOcarinaSong;
+        gInCustomSong = gCustomOcarinaSong;
         gCustomOcarinaSong = 0;
         gPlayedOcarinaSong = 0;
 
-        switch (sInCustomSong)
+        switch (gInCustomSong)
         {
         case 0x01:
             SetupSoaring(play);
             break;
         }
     }
-    else if (sInCustomSong)
+    else if (gInCustomSong)
     {
-        switch (sInCustomSong)
+        switch (gInCustomSong)
         {
         case 0x01:
             HandleSoaring(play);
+            break;
+        case 0x02:
+            HandleSongOfTime(play);
             break;
         }
     }

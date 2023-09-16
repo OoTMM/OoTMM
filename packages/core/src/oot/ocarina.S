@@ -30,3 +30,30 @@ PATCH_END
 PATCH_START 0x800c1f78
   j OcarinaMaskButtons
 PATCH_END
+
+/* Hook for handling sLastPlayedSong */
+/*
+Replaces:
+  ADDIU   AT, R0, 0x0006
+  BNEL    T3, AT, .+2C
+  ADDIU   AT, R0, 0x0029
+  LW      V0, 0x067C (A3)
+  ADDIU   T4, R0, 0xFF20
+  SH      T4, 0x0680 (A3)
+  LW      T5, 0x0004 (V0)
+  LUI     AT, 0x0001
+  OR      T7, T5, AT
+  SW      T7, 0x0004 (V0)
+*/
+PATCH_START 0x800e157c
+  sw      a2, 0x0030 (sp)
+  sw      a3, 0x0054 (sp)
+  sw      t1, 0x0024 (sp)
+  lw      a0, 0x0060 (sp)
+  or      a1, a3, zero
+  jal     Ocarina_HandleLastPlayedSong
+  or      a2, t3, zero
+  lw      a2, 0x0030 (sp)
+  lw      a3, 0x0054 (sp)
+  lw      t1, 0x0024 (sp)
+PATCH_END
