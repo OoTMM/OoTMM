@@ -70,7 +70,7 @@
   dungeon: Shadow
   exits:
     "Shadow Temple Open": "small_keys_shadow(4)"
-    "Shadow Temple Wind Front": "cond(climb_anywhere, small_keys_shadow(4), small_keys_shadow(3) && (is_adult && can_hookshot) || can_longshot)"
+    "Shadow Temple Wind Front": "cond(climb_anywhere, small_keys_shadow(4), small_keys_shadow(3) && ((is_adult && can_hookshot) || can_longshot))"
     "Shadow Temple Skull Pot": "silver_rupees_shadow_spikes"
   locations:
     "Shadow Temple SR Spikes Back Left": "has_lens && (can_hookshot || climb_anywhere)"
