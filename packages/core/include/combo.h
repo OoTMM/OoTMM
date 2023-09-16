@@ -178,6 +178,10 @@ void comboCreateSaveMM(void);
 /* Switch */
 NORETURN void comboGameSwitch(GameState_Play* play, s32 entrance);
 
+#if defined(GAME_OOT)
+void swapFarore(void);
+#endif
+
 /* Override */
 #define OV_NONE         0x00
 #define OV_CHEST        0x01

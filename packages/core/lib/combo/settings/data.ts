@@ -510,6 +510,13 @@ export const SETTINGS = [{
   ],
   default: 'closed'
 }, {
+  key: 'ageChange',
+  name: 'Age Change upon Song of Time',
+  category: 'main.events',
+  type: 'boolean',
+  description: 'Allows you to switch ages by playing Song of Time, if you\'ve been to Temple of Time as both ages',
+  default: false
+}, {
   key: 'dekuTree',
   name: 'Deku Tree',
   category: 'main.events',
@@ -953,13 +960,6 @@ export const SETTINGS = [{
   category: 'items.extensions',
   type: 'boolean',
   description: 'Locks the in-game tracker behind the Bombers\' Notebook',
-  default: false
-}, {
-  key: 'ageChangeOot',
-  name: 'Age Change upon Song of Time',
-  category: 'items.extensions',
-  type: 'boolean',
-  description: 'Allows you to switch ages by playing Song of Time, if you\'ve been to Temple of Time as both ages',
   default: false
 }, {
   key: 'coins',
