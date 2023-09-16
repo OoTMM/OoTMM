@@ -13,20 +13,6 @@ static void BgTokiSwd_GiveItem(Actor* this, GameState_Play* play, s16 gi, int np
     comboGiveItemNpc(this, play, gi, npc, 200.f, 50.f);
 }
 
-static void swapFarore(void)
-{
-    OotFaroreWind* current;
-    OotFaroreWind* prev;
-    OotFaroreWind tmp;
-
-    current = &gOotSave.fw;
-    prev = current - 1;
-
-    memcpy(&tmp, current, sizeof(tmp));
-    memcpy(current, prev, sizeof(tmp));
-    memcpy(prev, &tmp, sizeof(tmp));
-}
-
 void BgTokiSwd_Handler(Actor* this, GameState_Play* play)
 {
     TransitionContext* t;

@@ -6,7 +6,7 @@
     "Spirit Temple Adult Entrance": "can_lift_silver"
   events:
     SPIRIT_CHILD_DOOR: "is_child && small_keys_spirit(5)"
-    SPIRIT_ADULT_DOOR: "can_lift_silver && cond(setting(agelessBoots) || setting(agelessHookshot) || climb_anywhere, small_keys_spirit(5), small_keys_spirit(3))" #Child with Hover Boots, Hookshot, or climbing to the hands or adult side give the possibility of using every other door.
+    SPIRIT_ADULT_DOOR: "can_lift_silver && cond(setting(agelessBoots) || setting(agelessHookshot) || climb_anywhere || !setting(ageChange, none), small_keys_spirit(5), small_keys_spirit(3))" #Child with Hover Boots, Hookshot, or climbing to the hands or adult side give the possibility of using every other door.
     MAGIC: "true"
   locations:
     "Spirit Temple Pot Lobby 1": "true"

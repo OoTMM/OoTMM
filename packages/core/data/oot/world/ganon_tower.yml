@@ -13,6 +13,7 @@
     "Ganon Castle Tower Boss": "setting(ganonBossKey, removed) || has(BOSS_KEY_GANON) || (setting(ganonBossKey, custom) && special(GANON_BK))"
 "Ganon Castle Tower Boss":
   dungeon: Tower
+  age_change: false
   events:
     GANON_START: "!is_goal_triforce"
     GANON: "event(GANON_START) && has_light_arrows"

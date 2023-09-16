@@ -26,7 +26,6 @@ const ITEM_POOL_SCARCE = new Set([
   Items.OOT_BOMB_BAG,
   Items.OOT_BOW,
   Items.OOT_MAGIC_UPGRADE,
-  Items.OOT_OCARINA,
   Items.OOT_SLINGSHOT,
   Items.MM_MAGIC_UPGRADE,
   Items.MM_BOW,
@@ -357,6 +356,11 @@ export class LogicPassWorldTransform {
     const { settings } = this.state;
     const items = [...ITEM_POOL_SCARCE];
     const itemsNolimit = [...ITEM_POOL_SCARCE_NOLIMIT];
+
+    /* Ocarinas and age change */
+    if (settings.ageChange !== 'oot') {
+      items.push(Items.OOT_OCARINA);
+    }
 
     /* Tunics - shopsanity */
     if (settings.shopShuffleOot === 'full') {

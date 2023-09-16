@@ -175,6 +175,8 @@ export class LogicPassConfig {
       HINT_IMPORTANCE: settings.hintImportance,
       OOT_OCARINA_BUTTONS: settings.ocarinaButtonsShuffleOot,
       MM_OCARINA_BUTTONS: settings.ocarinaButtonsShuffleMm,
+      OOT_AGE_CHANGE: settings.ageChange !== 'none',
+      OOT_AGE_CHANGE_NEEDS_OOT: settings.ageChange === 'oot',
     };
 
     for (const v in exprs) {
