@@ -715,25 +715,29 @@ export class Pathfinder {
     this.state.newLocations.clear();
 
     for (let worldId = 0; worldId < this.worlds.length; ++worldId) {
+      const ws = this.state.ws[worldId];
+      const { queue } = ws;
+
       if (this.opts.singleWorld !== undefined && this.opts.singleWorld !== worldId) {
         continue;
       }
       for (;;) {
         /* Expand as much as possible */
-        const ws = this.state.ws[worldId];
-
         this.evalExits(worldId, 'child');
         this.evalExits(worldId, 'adult');
         this.evalEvents(worldId);
 
-        const { queue } = ws;
         if (!queue.events.size && !queue.exits.child.size && !queue.exits.adult.size) {
           break;
         }
       }
 
       /* Get locations */
-      this.evalLocations(worldId);
+      for (;;) {
+        this.evalLocations(worldId);
+        if (!this.opts.recursive || !queue.locations.size)
+          break;
+      }
     }
 
     /* Add delayed locations */
