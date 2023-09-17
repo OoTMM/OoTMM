@@ -553,9 +553,14 @@ export class LogicPassEntrances {
       }
     }
 
-    /* We don't want child to reach the Fairy OGC exit, and the other way around too */
-    const forbiddenAreasChild = ['OOT Near Fairy Fountain Defense'];
-    const forbiddenAreasAdult = ['OOT Near Fairy Fountain Din'];
+    const forbiddenAreasChild = [];
+    const forbiddenAreasAdult = [];
+
+    if (this.input.settings.ageChange === 'none') {
+      /* We don't want child to reach the Fairy OGC exit, and the other way around too */
+      forbiddenAreasChild.push('OOT Near Fairy Fountain Defense');
+      forbiddenAreasAdult.push('OOT Near Fairy Fountain Din');
+    }
 
     for (const area of forbiddenAreasChild) {
       if (pathfinderState.ws[0].areas.child.has(area)) {
