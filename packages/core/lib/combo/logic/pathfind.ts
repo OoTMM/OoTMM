@@ -471,9 +471,13 @@ export class Pathfinder {
   }
 
   private addLocationDelayed(worldId: number, loc: string) {
-    const globalLoc = makeLocation(loc, worldId);
-    this.state.locations.add(globalLoc);
-    this.state.newLocations.add(globalLoc);
+    if (this.opts.recursive) {
+      this.addLocation(worldId, loc);
+    } else {
+      const globalLoc = makeLocation(loc, worldId);
+      this.state.locations.add(globalLoc);
+      this.state.newLocations.add(globalLoc);
+    }
   }
 
   private addLocation(worldId: number, loc: string) {
