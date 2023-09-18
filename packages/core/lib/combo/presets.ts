@@ -361,6 +361,7 @@ const PRESET_HELL = makeSettings({
     'OOT_WELL_ADULT_TT',
     'OOT_ADULT_GALLERY_TT',
     'OOT_GTG_CHILD_TT',
+	'OOT_REVERSE_DAMPE',
     'MM_LENS',
     'MM_PALACE_BEAN_SKIP',
     'MM_DARMANI_WALL',

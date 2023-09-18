@@ -1035,6 +1035,7 @@
   region: KAKARIKO
   exits:
     "Kakariko": "true"
+    "Graveyard": "trick(OOT_REVERSE_DAMPE) && climb_anywhere && (is_child || can_play_time)"
   events:
     WELL_DRAIN: "is_child && can_play_storms"
   locations:
