@@ -9,6 +9,8 @@ import { defaultPrices } from './price';
 import { Item, itemByID, ItemHelpers, Items } from '../items';
 import { Random } from '../random';
 import { cloneDeep } from 'lodash';
+import { worldAtomExprSet } from './atom-expr';
+import { worldIR } from './logic-ir';
 
 export type ExprMap = {
   [k: string]: Expr;
@@ -178,6 +180,8 @@ export class LogicPassWorld {
         worlds.push(cloneWorld(world));
       }
     }
+
+    worldIR(worlds[0]);
 
     return { worlds, exprParsers: this.exprParsers };
   }
