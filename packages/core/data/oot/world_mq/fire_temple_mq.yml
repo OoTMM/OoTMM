@@ -1,7 +1,7 @@
 "Fire Temple":
   dungeon: Fire
   exits:
-    "Fire Temple Entry": "true"
+    "Death Mountain Crater Near Temple": "true"
     "Fire Temple Upper Lobby": "is_adult && has_tunic_goron"
     "Fire Temple Vanilla Hammer Loop": "small_keys_fire(5)"
   locations:

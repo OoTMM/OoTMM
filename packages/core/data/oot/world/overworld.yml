@@ -392,12 +392,14 @@
     "Hyrule Field": "true"
 "Market Entryway":
   region: MARKET
+  age_change: false
   exits:
     "Hyrule Field": "is_day || is_adult"
     "Market": "true"
     "Market Pot House": "true"
 "Market":
   region: MARKET
+  age_change: false
   exits:
     "Market Entryway": "true"
     "Back Alley": "is_child"
@@ -532,6 +534,7 @@
     "Market Pot House Adult Pot 11": "is_adult"
 "Back Alley":
   region: MARKET
+  age_change: false
   exits:
     "Market": "true"
     "Dog Lady House": "true"
@@ -577,6 +580,7 @@
     "Treasure Game HP": "has_lens_strict && can_use_wallet(1)"
 "Temple of Time Entryway":
   region: MARKET
+  age_change: false
   exits:
     "Market": "true"
     "Temple of Time": "true"
@@ -724,7 +728,7 @@
   time: night
   exits:
     "Market Castle Entry": "true"
-    "Ganon Castle Exterior After Bridge": "special(BRIDGE)"
+    "Ganon Castle Exterior After Bridge": "special(BRIDGE) || longshot_anywhere"
     "Near Fairy Fountain Defense": "can_lift_gold"
   locations:
     "Ganon Castle Exterior GS": "true"
@@ -876,7 +880,7 @@
   region: SACRED_MEADOW
   exits:
     "Sacred Meadow Entryway": "true"
-    "Forest Temple": "can_hookshot || climb_anywhere"
+    "Forest Temple": "can_hookshot || (has_hookshot(1) && time_travel_at_will) || climb_anywhere"
     "Sacred Meadow Storms Grotto": "hidden_grotto_storms"
   locations:
     "Saria's Song": "met_zelda && is_child"
@@ -908,9 +912,9 @@
     "Hyrule Field": "true"
     "Kakariko Trail Start": "setting(kakarikoGate, open) || event(KAKARIKO_GATE_OPEN) || is_adult || climb_anywhere || hookshot_anywhere"
     "Graveyard": "true"
-    "Bottom of the Well": "(event(WELL_DRAIN) && cond(setting(wellAdult), true, is_child)) || (is_child && (has_iron_boots || longshot_anywhere || time_travel_at_will))"
+    "Bottom of the Well": "(event(WELL_DRAIN) && cond(setting(wellAdult), true, is_child)) || (is_child && (has_iron_boots || longshot_anywhere || time_travel_at_will)) || (time_travel_at_will && trick(OOT_WELL_ADULT_TT))"
     "Skulltula House": "true"
-    "Shooting Gallery Adult": "is_adult && is_day"
+    "Shooting Gallery Adult": "(is_adult && is_day) || (time_travel_at_will && trick(OOT_ADULT_GALLERY_TT))"
     "Kakariko Rooftop": "(is_child && is_day) || can_hookshot || (is_adult && trick(OOT_PASS_COLLISION)) || climb_anywhere"
     "Kakariko Back": "can_hookshot || has_hover_boots || (is_day && is_child) || (trick(OOT_MAN_ON_ROOF) && (is_adult || can_use_slingshot || has_bombchu)) || climb_anywhere"
     "Kakariko Bazaar": "is_adult && is_day"
@@ -929,7 +933,7 @@
     "Kakariko GS Tree": "gs_night && is_child"
     "Kakariko GS House of Skulltula": "gs_night && is_child"
     "Kakariko GS Bazaar": "gs_night && is_child"
-    "Kakariko GS Ladder": "gs_night && is_child && (can_use_slingshot || has_bombchu)"
+    "Kakariko GS Ladder": "gs_night && is_child && (can_use_slingshot || has_bombchu || (climb_anywhere && (has_weapon || can_use_sticks) || can_use_din) || (time_travel_at_will && can_use_din))"
     "Kakariko Pot 01": "is_child"
     "Kakariko Pot 02": "is_child"
     "Kakariko Pot 03": "is_child"
@@ -1165,6 +1169,7 @@
     "Graveyard Dampe Tomb Pot 6": "true"
 "Dampe House":
   region: ENTRANCE
+  age_change: false
   exits:
     "Graveyard": "true"
 "Death Mountain":
@@ -1172,7 +1177,7 @@
   time: flow
   exits:
     "Goron City": "true"
-    "Dodongo Cavern": "has_bombflowers || is_adult || (trick(OOT_DC_BOULDER) && hookshot_anywhere)"
+    "Dodongo Cavern": "has_bombflowers || is_adult || (trick(OOT_DC_BOULDER) && hookshot_anywhere) || time_travel_at_will"
     "Kakariko Trail Start": "true"
     "Death Mountain Summit": "event(BOULDER_DEATH_MOUNTAIN) || can_ride_bean(BEAN_DEATH_MOUNTAIN) || climb_anywhere || hookshot_anywhere"
     "Death Mountain Storms Grotto": "hidden_grotto_storms"
@@ -1255,7 +1260,7 @@
     "Goron City Shortcut": "event(GORON_CITY_SHORTCUT) || climb_anywhere || hookshot_anywhere"
     "Death Mountain": "true"
     "Darunia Chamber": "(is_adult && (has_explosives || can_use_bow || has(STRENGTH))) || (is_child && can_play_zelda)"
-    "Goron Shop": "(is_adult && (has_explosives || can_use_bow || has(STRENGTH))) || (is_child && (has_bombflowers || can_use_din || event(DARUNIA_TORCH)))"
+    "Goron Shop": "has_bombflowers || (can_use_bow && (is_adult || time_travel_at_will)) || ((can_use_din || event(DARUNIA_TORCH)) && (is_child || time_travel_at_will))"
     "Goron City Grotto": "(is_adult && can_play_time) || (can_hookshot && (has_tunic_goron_strict || can_use_nayru)) || climb_anywhere"
   events:
     GORON_CITY_SHORTCUT: "has_bombflowers || can_hammer || can_use_bow || can_use_din || event(DARUNIA_TORCH)"
@@ -1284,7 +1289,7 @@
 "Darunia Chamber":
   region: GORON_CITY
   exits:
-    "Death Mountain Crater Bottom": "is_adult"
+    "Death Mountain Crater Bottom": "is_adult || time_travel_at_will"
     "Goron City": "true"
   events:
     DARUNIA_TORCH: "is_child && can_use_sticks"
@@ -1465,7 +1470,7 @@
     "Gerudo Valley Falls": "false"
     "Laboratory": "true"
     "Water Temple": "has_iron_boots && has_tunic_zora && can_hookshot"
-    "Fishing Pond": "is_child || event(WATER_TEMPLE_CLEARED) || (is_adult && scarecrow_hookshot) || can_ride_bean(BEAN_LAKE_HYLIA) || hookshot_anywhere || climb_anywhere"
+    "Fishing Pond": "is_child || event(WATER_TEMPLE_CLEARED) || (is_adult && scarecrow_hookshot) || can_ride_bean(BEAN_LAKE_HYLIA) || hookshot_anywhere || climb_anywhere || time_travel_at_will"
     "Lake Hylia Grotto": "true"
   events:
     SCARECROW_CHILD: "is_child && can_play_scarecrow"
@@ -1481,7 +1486,7 @@
     "Lake Hylia Underwater Bottle": "is_child && can_dive_small"
     "Lake Hylia Fire Arrow": "can_use_bow && (event(WATER_TEMPLE_CLEARED) || (is_adult && (scarecrow_longshot || longshot_anywhere)) || climb_anywhere)"
     "Lake Hylia HP": "can_ride_bean(BEAN_LAKE_HYLIA) || (is_adult && scarecrow_hookshot) || hookshot_anywhere"
-    "Lake Hylia GS Lab Wall": "is_child && gs_night && (can_collect_distance || (trick(OOT_LAB_WALL_GS) && (can_use_sword || can_use_sticks)))"
+    "Lake Hylia GS Lab Wall": "is_child && gs_night && (can_collect_distance || (trick(OOT_LAB_WALL_GS) && (can_use_sword || can_use_sticks)) || (time_travel_at_will && (scarecrow_hookshot || hookshot_anywhere || can_ride_bean(BEAN_LAKE_HYLIA)) && (has_explosives_or_hammer || can_use_din || can_use_slingshot)))"
     "Lake Hylia GS Island": "is_child && gs_night && can_damage_skull"
     "Lake Hylia GS Soil": "gs_soil && can_damage_skull"
     "Lake Hylia GS Big Tree": "is_adult && gs_night && (can_longshot || climb_anywhere)"
@@ -1544,6 +1549,7 @@
     "Laboratory GS Crate": "has_iron_boots && can_hookshot"
 "Fishing Pond":
   region: ENTRANCE
+  age_change: false
   exits:
     "Lake Hylia": "true"
   locations:
@@ -1562,7 +1568,7 @@
   region: ZORA_FOUNTAIN
   exits:
     "Zora Domain Back": "true"
-    "Jabu-Jabu": "is_child && has_bottle && (has(FISH) || event(FISH) || (trick(OOT_ENTER_JABU) && (climb_anywhere || hookshot_anywhere || has_weapon || can_use_sticks)))"
+    "Jabu-Jabu": "is_child && ((has_bottle && (has(FISH) || event(FISH))) || (trick(OOT_ENTER_JABU) && (climb_anywhere || hookshot_anywhere || has_weapon || can_use_sticks)) || time_travel_at_will)"
     "Zora Fountain Frozen": "is_adult || climb_anywhere || longshot_anywhere"
     "Fairy Fountain Farore": "has_explosives"
   events:
@@ -1652,7 +1658,7 @@
 "Death Mountain Crater Warp":
   region: DEATH_MOUNTAIN_CRATER
   exits:
-    "Fire Temple Entry": "has_tunic_goron && (is_adult || setting(fireChild) || has_hover_boots || climb_anywhere || hookshot_anywhere)"
+    "Death Mountain Crater Near Temple": "has_tunic_goron && (is_adult || setting(fireChild) || has_hover_boots || climb_anywhere || hookshot_anywhere)"
     "Death Mountain Crater Bottom": "can_hookshot || has_hover_boots || can_ride_bean(BEAN_DEATH_MOUNTAIN_CRATER)"
   events:
     BEAN_DEATH_MOUNTAIN_CRATER: "can_use_beans"
@@ -1709,7 +1715,7 @@
   exits:
     "Gerudo Valley Falls": "true"
     "Hyrule Field": "true"
-    "Gerudo Valley After Bridge": "can_longshot || can_ride_epona || (is_adult && carpenters_rescued) || (is_child && ((has_hover_boots && trick(OOT_VALLEY_GATE_HOVER)) || hookshot_anywhere))"
+    "Gerudo Valley After Bridge": "can_longshot || can_ride_epona || (is_adult && carpenters_rescued) || (is_child && ((has_hover_boots && trick(OOT_VALLEY_GATE_HOVER)) || hookshot_anywhere)) || time_travel_at_will"
     "Octorok Grotto Ledge": "true"
   events:
     RUPEES: "true"
@@ -1733,9 +1739,9 @@
     "Gerudo Fortress Exterior": "true"
     "Gerudo Valley": "is_child || can_longshot || can_ride_epona || (is_adult && carpenters_rescued) || climb_anywhere"
     "Gerudo Valley Storms Grotto": "hidden_grotto_storms && is_adult"
-    "Gerudo Valley Tent": "is_adult"
+    "Gerudo Valley Tent": "is_adult || trick(OOT_TENT_CHILD)"
   locations:
-    "Gerudo Valley Chest": "is_adult && (can_hammer || hookshot_anywhere || climb_anywhere)"
+    "Gerudo Valley Chest": "(is_adult && (can_hammer || hookshot_anywhere || climb_anywhere)) || time_travel_at_will"
     "Gerudo Valley Broken Goron Sword": "adult_trade(POACHER_SAW)"
     "Gerudo Valley GS Tent": "is_adult && gs_night && (can_collect_distance || (climb_anywhere && (has_explosives || has(SWORD_BIGGORON) || has_ranged_weapon || can_use_din)))"
     "Gerudo Valley GS Pillar": "is_adult && can_collect_distance && gs_night"
@@ -1783,7 +1789,7 @@
     "Gerudo Fortress Carpenter 2 Bottom": "true"
     "Gerudo Valley After Bridge": "true"
     "Fortress Near Wasteland": "event(OPEN_FORTRESS_GATE) || climb_anywhere || hookshot_anywhere"
-    "Gerudo Training Grounds": "has(GERUDO_CARD) && is_adult && can_use_wallet(1)"
+    "Gerudo Training Grounds": "has(GERUDO_CARD) && can_use_wallet(1) && (is_adult || (time_travel_at_will && trick(OOT_GTG_CHILD_TT)))"
     "Gerudo Fortress Grotto": "is_adult && hidden_grotto_storms"
     "Gerudo Fortress Lower-Right Ledge": "is_child || can_use_bow || can_hookshot || has(GERUDO_CARD)"
   events:
@@ -1791,7 +1797,7 @@
   locations:
     "Gerudo Fortress Archery Reward 1": "can_ride_epona && can_use_bow && has(GERUDO_CARD) && can_use_wallet(1) && is_day"
     "Gerudo Fortress Archery Reward 2": "can_ride_epona && can_use_bow && has(GERUDO_CARD) && can_use_wallet(1) && is_day"
-    "Gerudo Fortress GS Target": "is_adult && gs_night && has(GERUDO_CARD) && (can_collect_distance || climb_anywhere)"
+    "Gerudo Fortress GS Target": "is_adult && gs_night && (has(GERUDO_CARD) || time_travel_at_will) && (can_collect_distance || climb_anywhere)"
 "Gerudo Fortress Lower-Right Ledge":
   region: GERUDO_FORTRESS
   exits:

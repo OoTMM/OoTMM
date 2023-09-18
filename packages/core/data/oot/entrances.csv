@@ -15,8 +15,8 @@ JABU_JABU,                                dungeon,          Jabu-Jabu,          
 ZORA_FOUNTAIN_FROM_JABU_JABU,             dungeon,          Zora Fountain,                              Jabu-Jabu,                                    JABU_JABU
 TEMPLE_FOREST,                            dungeon,          Forest Temple,                              Sacred Meadow,                                SACRED_MEADOW_FROM_TEMPLE_FOREST
 SACRED_MEADOW_FROM_TEMPLE_FOREST,         dungeon,          Sacred Meadow,                              Forest Temple,                                TEMPLE_FOREST
-TEMPLE_FIRE,                              dungeon,          Fire Temple,                                Fire Temple Entry,                            DEATH_CRATER_FROM_TEMPLE_FIRE
-DEATH_CRATER_FROM_TEMPLE_FIRE,            dungeon,          Fire Temple Entry,                          Fire Temple,                                  TEMPLE_FIRE
+TEMPLE_FIRE,                              dungeon,          Fire Temple,                                Death Mountain Crater Near Temple,            DEATH_CRATER_FROM_TEMPLE_FIRE
+DEATH_CRATER_FROM_TEMPLE_FIRE,            dungeon,          Death Mountain Crater Near Temple,          Fire Temple,                                  TEMPLE_FIRE
 TEMPLE_WATER,                             dungeon,          Water Temple,                               Lake Hylia,                                   LAKE_HYLIA_FROM_TEMPLE_WATER
 LAKE_HYLIA_FROM_TEMPLE_WATER,             dungeon,          Lake Hylia,                                 Water Temple,                                 TEMPLE_WATER
 TEMPLE_SHADOW,                            dungeon,          Shadow Temple,                              Graveyard Upper,                              GRAVEYARD_FROM_TEMPLE_SHADOW

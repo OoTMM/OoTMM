@@ -1,7 +1,7 @@
 "Fire Temple":
   dungeon: Fire
   exits:
-    "Fire Temple Entry": "true"
+    "Death Mountain Crater Near Temple": "true"
     "Fire Temple Lava Room": "small_keys_fire(1)"
     "Fire Temple Boss Key Loop Start": "cond(setting(smallKeyShuffleOot, anywhere), small_keys_fire(7), true) && can_hammer"
     "Fire Temple Pre-Boss": "true"
@@ -9,7 +9,7 @@
   dungeon: Fire
   exits:
     "Fire Temple": "true"
-    "Fire Temple Boss": "boss_key(BOSS_KEY_FIRE) && ((is_adult && event(FIRE_TEMPLE_PILLAR_HAMMER)) || has_hover_boots || climb_anywhere || hookshot_anywhere) && has_tunic_goron"
+    "Fire Temple Boss": "boss_key(BOSS_KEY_FIRE) && (((is_adult || time_travel_at_will) && event(FIRE_TEMPLE_PILLAR_HAMMER)) || has_hover_boots || climb_anywhere || hookshot_anywhere) && has_tunic_goron"
   events:
     BOMBS: "has_tunic_goron"
   locations:
@@ -44,7 +44,7 @@
 "Fire Temple Lava Room":
   dungeon: Fire
   exits:
-    "Fire Temple Maze": "small_keys_fire(3) && has_tunic_goron_strict && (hookshot_anywhere || (((is_adult && has(STRENGTH)) || climb_anywhere) && (has_ranged_weapon || has_explosives)))"
+    "Fire Temple Maze": "small_keys_fire(3) && has_tunic_goron_strict && (hookshot_anywhere || ((((is_adult || time_travel_at_will) && has(STRENGTH)) || climb_anywhere) && (has_ranged_weapon || has_explosives)))"
   locations:
     "Fire Temple Lava Room North Jail Chest": "has_tunic_goron"
     "Fire Temple Lava Room South Jail Chest": "(is_adult || climb_anywhere || hookshot_anywhere) && has_tunic_goron && has_explosives"

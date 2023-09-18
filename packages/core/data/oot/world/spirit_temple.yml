@@ -18,8 +18,8 @@
   exits:
     "Spirit Temple": "is_child"
     "Spirit Temple Child Climb": "is_child && cond(climb_anywhere, (small_keys_spirit(1) && has_mirror_shield && has_explosives) || small_keys_spirit(2), small_keys_spirit(1))" #1 is safe if you have the means to lower the light platform, otherwise 2 is safe.
-    "Spirit Temple Child Left": "soul_keese && soul_armos && (can_use_sticks || has_explosives_or_hammer || ((can_boomerang || has_nuts) && (has_weapon || can_use_slingshot)))"
-    "Spirit Temple Child Right": "soul_keese && soul_armos && (can_use_sticks || has_explosives_or_hammer || ((can_boomerang || has_nuts) && (has_weapon || can_use_slingshot)))"
+    "Spirit Temple Child Left": "soul_keese && soul_armos && (can_use_sticks || has_explosives_or_hammer || ((can_boomerang || has_nuts) && (has_weapon || can_use_slingshot)) || time_travel_at_will)"
+    "Spirit Temple Child Right": "soul_keese && soul_armos && (can_use_sticks || has_explosives_or_hammer || ((can_boomerang || has_nuts) && (has_weapon || can_use_slingshot)) || time_travel_at_will)"
 "Spirit Temple Child Left":
   dungeon: Spirit
   exits:
@@ -118,10 +118,10 @@
     "Spirit Temple Statue Adult": "true"
     "Spirit Temple Adult Entrance": "small_keys_spirit(5)" #The only possible ways this would be necessary is if you do not have adult with silver gauntlets, and have either ageless boots/hookshot or climb anywhere, both of which give access to all doors
   locations:
-    "Spirit Temple Adult Suns on Wall 1": "(((setting(agelessBoots) && trick(OOT_SPIRIT_CHILD_HOVER) && has(BOOTS_HOVER)) || (setting(agelessHookshot) && has_hookshot(1))) && has_explosives) || event(SPIRIT_ADULT_DOOR) || (event(SPIRIT_CHILD_DOOR) && ((trick(OOT_SPIRIT_CHILD_HOVER) && has_hover_boots) || can_hookshot)) || climb_anywhere"
-    "Spirit Temple Adult Suns on Wall 2": "(((setting(agelessBoots) && trick(OOT_SPIRIT_CHILD_HOVER) && has(BOOTS_HOVER)) || (setting(agelessHookshot) && has_hookshot(1))) && has_explosives) || event(SPIRIT_ADULT_DOOR) || (event(SPIRIT_CHILD_DOOR) && ((trick(OOT_SPIRIT_CHILD_HOVER) && has_hover_boots) || can_hookshot)) || climb_anywhere"
-    "Spirit Temple Flying Pot Adult Climb 1": "soul_flying_pot && ((((setting(agelessBoots) && trick(OOT_SPIRIT_CHILD_HOVER) && has(BOOTS_HOVER)) || (setting(agelessHookshot) && has_hookshot(1))) && has_explosives) || event(SPIRIT_ADULT_DOOR) || (event(SPIRIT_CHILD_DOOR) && ((setting(agelessBoots) && trick(OOT_SPIRIT_CHILD_HOVER) && has_hover_boots) || can_hookshot)) || climb_anywhere)"
-    "Spirit Temple Flying Pot Adult Climb 2": "soul_flying_pot && ((((setting(agelessBoots) && trick(OOT_SPIRIT_CHILD_HOVER) && has(BOOTS_HOVER)) || (setting(agelessHookshot) && has_hookshot(1))) && has_explosives) || event(SPIRIT_ADULT_DOOR) || (event(SPIRIT_CHILD_DOOR) && ((setting(agelessBoots) && trick(OOT_SPIRIT_CHILD_HOVER) && has_hover_boots) || can_hookshot)) || climb_anywhere)"
+    "Spirit Temple Adult Suns on Wall 1": "((((setting(agelessBoots) && trick(OOT_SPIRIT_CHILD_HOVER) && has(BOOTS_HOVER)) || (setting(agelessHookshot) && has_hookshot(1))) && has_explosives) || time_travel_at_will) || event(SPIRIT_ADULT_DOOR) || (event(SPIRIT_CHILD_DOOR) && ((trick(OOT_SPIRIT_CHILD_HOVER) && has_hover_boots) || can_hookshot)) || climb_anywhere"
+    "Spirit Temple Adult Suns on Wall 2": "((((setting(agelessBoots) && trick(OOT_SPIRIT_CHILD_HOVER) && has(BOOTS_HOVER)) || (setting(agelessHookshot) && has_hookshot(1))) && has_explosives) || time_travel_at_will) || event(SPIRIT_ADULT_DOOR) || (event(SPIRIT_CHILD_DOOR) && ((trick(OOT_SPIRIT_CHILD_HOVER) && has_hover_boots) || can_hookshot)) || climb_anywhere"
+    "Spirit Temple Flying Pot Adult Climb 1": "soul_flying_pot && (((((setting(agelessBoots) && trick(OOT_SPIRIT_CHILD_HOVER) && has(BOOTS_HOVER)) || (setting(agelessHookshot) && has_hookshot(1))) && has_explosives) || time_travel_at_will) || event(SPIRIT_ADULT_DOOR) || (event(SPIRIT_CHILD_DOOR) && ((setting(agelessBoots) && trick(OOT_SPIRIT_CHILD_HOVER) && has_hover_boots) || can_hookshot)) || climb_anywhere)"
+    "Spirit Temple Flying Pot Adult Climb 2": "soul_flying_pot && (((((setting(agelessBoots) && trick(OOT_SPIRIT_CHILD_HOVER) && has(BOOTS_HOVER)) || (setting(agelessHookshot) && has_hookshot(1))) && has_explosives) || time_travel_at_will) || event(SPIRIT_ADULT_DOOR) || (event(SPIRIT_CHILD_DOOR) && ((setting(agelessBoots) && trick(OOT_SPIRIT_CHILD_HOVER) && has_hover_boots) || can_hookshot)) || climb_anywhere)"
 "Spirit Temple Statue":
   dungeon: Spirit
   exits:
@@ -148,8 +148,8 @@
     "Spirit Temple Adult Climb": "true"
     "Spirit Temple Adult Upper": "small_keys_spirit(4)"
   locations:
-    "Spirit Temple Statue Hands": "((((setting(agelessBoots) && trick(OOT_SPIRIT_CHILD_HOVER) && has(BOOTS_HOVER)) || (setting(agelessHookshot) && has_hookshot(1))) && has_explosives) || event(SPIRIT_ADULT_DOOR) || (event(SPIRIT_CHILD_DOOR) && ((trick(OOT_SPIRIT_CHILD_HOVER) && has_hover_boots) || can_hookshot)) || climb_anywhere) && can_play_zelda"
-    "Spirit Temple Statue Upper Right": "((((setting(agelessBoots) && trick(OOT_SPIRIT_CHILD_HOVER) && has(BOOTS_HOVER)) || (setting(agelessHookshot) && has_hookshot(1))) && has_explosives) || (event(SPIRIT_ADULT_DOOR) && (has_hover_boots || can_hookshot)) || (event(SPIRIT_CHILD_DOOR) && ((trick(OOT_SPIRIT_CHILD_HOVER) && has_hover_boots) || can_hookshot)) || climb_anywhere) && can_play_zelda"
+    "Spirit Temple Statue Hands": "(((((setting(agelessBoots) && trick(OOT_SPIRIT_CHILD_HOVER) && has(BOOTS_HOVER)) || (setting(agelessHookshot) && has_hookshot(1))) && has_explosives) || time_travel_at_will) || event(SPIRIT_ADULT_DOOR) || (event(SPIRIT_CHILD_DOOR) && ((trick(OOT_SPIRIT_CHILD_HOVER) && has_hover_boots) || can_hookshot)) || climb_anywhere) && can_play_zelda"
+    "Spirit Temple Statue Upper Right": "(((((setting(agelessBoots) && trick(OOT_SPIRIT_CHILD_HOVER) && has(BOOTS_HOVER)) || (setting(agelessHookshot) && has_hookshot(1))) && has_explosives) || time_travel_at_will) || (event(SPIRIT_ADULT_DOOR) && (has_hover_boots || can_hookshot)) || (event(SPIRIT_CHILD_DOOR) && ((trick(OOT_SPIRIT_CHILD_HOVER) && has_hover_boots) || can_hookshot)) || climb_anywhere) && can_play_zelda"
     "Spirit Temple Pot Adult Upper": "small_keys_spirit(4)"
 "Spirit Temple Adult Upper":
   dungeon: Spirit

@@ -43,6 +43,7 @@
   exits:
     "Dodongo Cavern Right Corridor": "soul_lizalfos_dinalfos && (can_use_sticks || has_weapon || can_use_slingshot)"
     "Dodongo Cavern Green Room": "soul_lizalfos_dinalfos && (can_use_sticks || has_weapon || can_use_slingshot)"
+    "Dodongo Cavern Miniboss 2": "time_travel_at_will && (climb_anywhere || (is_adult && hookshot_anywhere) || longshot_anywhere)"
   locations:
     "Dodongo Cavern Pot Miniboss 1": "true"
     "Dodongo Cavern Pot Miniboss 2": "true"
@@ -122,6 +123,12 @@
   exits:
     "Dodongo Cavern Bomb Bag Room 1": "soul_lizalfos_dinalfos && (can_use_sticks || has_weapon || can_use_slingshot)"
     "Dodongo Cavern Bomb Bag Room 2": "soul_lizalfos_dinalfos && (can_use_sticks || has_weapon || can_use_slingshot)"
+    "Dodongo Cavern Miniboss 1": "time_travel_at_will"
+  locations:
+    "Dodongo Cavern Pot Miniboss 1": "true"
+    "Dodongo Cavern Pot Miniboss 2": "true"
+    "Dodongo Cavern Pot Miniboss 3": "true"
+    "Dodongo Cavern Pot Miniboss 4": "true"
 "Dodongo Cavern Bomb Bag Room 2":
   dungeon: DC
   exits:
