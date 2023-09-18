@@ -93,6 +93,19 @@ void Ocarina_HandleLastPlayedSong(GameState_Play* play, Actor_Player* player, s1
             case SCE_OOT_GANON_BATTLE_ARENA:
             case SCE_OOT_HYRULE_CASTLE:
             case SCE_OOT_GANON_CASTLE_EXTERIOR:
+            case SCE_OOT_MARKET_ENTRANCE_CHILD_DAY:
+            case SCE_OOT_MARKET_ENTRANCE_CHILD_NIGHT:
+            case SCE_OOT_MARKET_ENTRANCE_ADULT:
+            case SCE_OOT_BACK_ALLEY_DAY:
+            case SCE_OOT_BACK_ALLEY_NIGHT:
+            case SCE_OOT_MARKET_CHILD_DAY:
+            case SCE_OOT_MARKET_CHILD_NIGHT:
+            case SCE_OOT_MARKET_ADULT:
+            case SCE_OOT_TEMPLE_OF_TIME_EXTERIOR_CHILD_DAY:
+            case SCE_OOT_TEMPLE_OF_TIME_EXTERIOR_CHILD_NIGHT:
+            case SCE_OOT_TEMPLE_OF_TIME_EXTERIOR_ADULT:
+            case SCE_OOT_GRAVEKEEPER_HUT:
+            case SCE_OOT_FISHING_POND:
                 canChangeAge = 0;
                 break;
             }
