@@ -1765,6 +1765,7 @@
 "Gerudo Valley Falls":
   region: GERUDO_VALLEY
   time: flow
+  age_change: false
   exits:
     "Lake Hylia": "true"
     "Gerudo Valley After Bridge": "!setting(erRegions, none) && setting(erRegionsShortcuts) && is_adult"
