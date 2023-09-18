@@ -198,154 +198,111 @@ function resolveSpecialCond(settings: Settings, state: State, special: string): 
   return { result, depEvents: [], depItems: [...items, ...itemsUnique] };
 }
 
-const exprImplTrue = (_state: State) => ({ result: true, depItems: [], depEvents: [] });
-const exprImplFalse = (_state: State) => ({ result: false, depItems: [], depEvents: [] });
+export type ExprTrue = { type: 'true' };
+export type ExprFalse = { type: 'false' };
+export type ExprAnd = { type: 'and', exprs: Expr[] };
+export type ExprOr = { type: 'or', exprs: Expr[] };
+export type ExprNot = { type: 'not', expr: Expr };
+export type ExprCond = { type: 'cond', cond: Expr, then: Expr, otherwise: Expr };
+export type ExprAge = { type: 'age', age: Age };
+export type ExprHas = { type: 'has', item: Item, count: number };
+export type ExprRenewable = { type: 'renewable', item: Item };
+export type ExprLicense = { type: 'license', item: Item };
+export type ExprEvent = { type: 'event', event: string };
+export type ExprMasks = { type: 'masks', count: number };
+export type ExprSpecial = { type: 'special', special: string, settings: Settings };
+export type ExprOotTime = { type: 'ootTime', time: 'day' | 'night' };
+export type ExprMmTime = { type: 'mmTime', operator: 'before' | 'after' | 'at' | 'between', slices: number[] };
+export type ExprPrice = { type: 'price', range: string, id: number, max: number };
+export type Expr = ExprTrue | ExprFalse | ExprAnd | ExprOr | ExprNot | ExprCond | ExprAge | ExprHas | ExprRenewable | ExprLicense | ExprEvent | ExprMasks | ExprSpecial | ExprOotTime | ExprMmTime | ExprPrice;
 
-export type Expr = (state: State) => ExprResult;
+export type ExprFunc = (state: State) => ExprResult;
 
-export const exprTrue = (): Expr => exprImplTrue;
-export const exprFalse = (): Expr => exprImplFalse;
+export const exprTrue = (): ExprTrue => ({ type: 'true' });
+export const exprFalse = (): ExprFalse => ({ type: 'false' });
 
 export const exprAnd = (exprs: Expr[]): Expr => {
   /* Optimizations */
-  exprs = exprs.filter(x => x !== exprImplTrue);
+  exprs = exprs.filter(x => x.type !== 'true');
   if (exprs.length === 0) {
     return exprTrue();
   }
-  if (exprs.some(x => x === exprImplFalse)) {
+  if (exprs.some(x => x.type === 'false')) {
     return exprFalse();
   }
   if (exprs.length === 1) {
     return exprs[0];
   }
 
-  return state => {
-    const results: ExprResult[] = [];
-    for (const e of exprs) {
-      const r = e(state);
-      results.push(r);
-
-      /* Early exit */
-      if (!r.result) {
-        return { result: false, depItems: results.map(x => x.depItems), depEvents: results.map(x => x.depEvents) };
-      }
-    }
-
-    const restrictions = exprRestrictionsAnd(results);
-    if (isDefaultRestrictions(restrictions)) {
-      return { result: true, depItems: [], depEvents: [] };
-    } else {
-      return { result: true, depItems: results.map(x => x.depItems), depEvents: results.map(x => x.depEvents), restrictions };
-    }
-  }
+  return { type: 'and', exprs };
 };
 
 export const exprOr = (exprs: Expr[]): Expr => {
   /* Optimizations */
-  exprs = exprs.filter(x => x !== exprImplFalse);
+  exprs = exprs.filter(x => x.type !== 'false');
   if (exprs.length === 0) {
     return exprFalse();
   }
-  if (exprs.some(x => x === exprImplTrue)) {
+  if (exprs.some(x => x.type === 'true')) {
     return exprTrue();
   }
   if (exprs.length === 1) {
     return exprs[0];
   }
 
-  return state => {
-    const results: ExprResult[] = [];
-    let result = false;
-
-    for (const e of exprs) {
-      const r = e(state);
-      results.push(r);
-      if (r.result) {
-        result = true;
-        if (!r.restrictions) {
-          return { result: true, depItems: [], depEvents: [] };
-        }
-      }
-    }
-
-    if (result) {
-      const restrictions = exprRestrictionsOr(results);
-      if (isDefaultRestrictions(restrictions)) {
-        return { result: true, depItems: [], depEvents: [] };
-      } else {
-        return { result: true, depItems: results.map(x => x.depItems), depEvents: results.map(x => x.depEvents), restrictions };
-      }
-    } else {
-      return { result: false, depItems: results.map(x => x.depItems), depEvents: results.map(x => x.depEvents) };
-    }
-  }
+  return { type: 'or', exprs };
 };
 
 export const exprNot = (expr: Expr): Expr => {
-  if (expr === exprImplTrue) {
+  if (expr.type === 'true') {
     return exprFalse();
   }
-  if (expr === exprImplFalse) {
+  if (expr.type === 'false') {
     return exprTrue();
   }
-  return state => expr(state).result ? exprFalse()(state) : exprTrue()(state);
+
+  return { type: 'not', expr };
 }
 
 export const exprCond = (cond: Expr, then: Expr, otherwise: Expr): Expr => {
-  if (cond === exprImplTrue) {
+  if (cond.type === 'true') {
     return then;
   }
-  if (cond === exprImplFalse) {
+
+  if (cond.type === 'false') {
     return otherwise;
   }
-  return state => cond(state).result ? then(state) : otherwise(state);
-}
 
-export const exprAge = (age: Age): Expr => state => state.age === age ? exprTrue()(state) : exprFalse()(state);
+  return { type: 'cond', cond, then, otherwise };
+};
+
+export const exprAge = (age: Age): Expr => ({ type: 'age', age });
 
 export const exprHas = (item: Item, count: number): Expr => {
   if (count <= 0) {
     return exprTrue();
   }
-  const depItems = [item];
-  const depEvents: string[] = [];
 
-  return state => {
-    const result = (state.ignoreItems || (itemCount(state, item) >= count));
-    return { result, depItems, depEvents };
-  }
+  return { type: 'has', item, count };
 };
 
 export const exprRenewable = (item: Item): Expr => {
-  const depItems = [item];
-  const depEvents: string[] = [];
-  return state => {
-    const result = (state.ignoreItems || (state.renewables.get(item) || 0) > 0);
-    return { result, depItems, depEvents };
-  }
+  return { type: 'renewable', item };
 };
 
 export const exprLicense = (item: Item): Expr => {
-  const depItems = [item];
-  const depEvents: string[] = [];
-
-  return state => {
-    const result = (state.ignoreItems || (state.licenses.get(item) || 0) > 0);
-    return { result, depItems, depEvents };
-  }
+  return { type: 'license', item };
 };
 
-export const exprEvent = (event: string): Expr => state => {
-  const result = state.events.has(event);
-  return { result, depItems: [], depEvents: [event] };
+export const exprEvent = (event: string): Expr => {
+  return { type: 'event', event };
 };
 
-export const exprMasks = (count: number): Expr => state => {
-  const result = state.ignoreItems || (itemsCount(state, [...ItemGroups.MASKS_REGULAR]) >= count);
-  return { result, depItems: [...ItemGroups.MASKS_REGULAR], depEvents: [] };
+export const exprMasks = (count: number): Expr => {
+  return { type: 'masks', count };
 };
 
-export const exprSpecial = (settings: Settings, special: string): Expr => state => resolveSpecialCond(settings, state, special);
+export const exprSpecial = (settings: Settings, special: string): Expr => ({ type: 'special', special, settings });
 
 export const exprSetting = (settings: Settings, setting: string, value: any): Expr => {
   const v = (settings as any)[setting];
@@ -374,6 +331,185 @@ export const exprOotTime = (time: string): Expr => {
     throw new Error(`Invalid OoT time: ${time}`);
   }
 
+  return { type: 'ootTime', time };
+}
+
+export const exprMmTime = (operator: string, sliceNames: string[]): Expr => {
+  const slices: number[] = [];
+  let value = 0;
+  let value2 = 0;
+
+  for (const s of sliceNames) {
+    const sliceIndex = MM_TIME_SLICES.indexOf(s);
+    if (sliceIndex === -1) {
+      throw new Error(`Invalid MM time slice: ${s}`);
+    }
+    slices.push(sliceIndex);
+  }
+
+  return { type: 'mmTime', operator, slices } as ExprMmTime;
+};
+
+export const exprPrice = (range: string, id: number, max: number): Expr => {
+  return { type: 'price', range, id, max };
+}
+
+const exprImplTrue = (_state: State) => ({ result: true, depItems: [], depEvents: [] });
+const exprImplFalse = (_state: State) => ({ result: false, depItems: [], depEvents: [] });
+
+export function exprFunc(e: Expr): ExprFunc {
+  switch (e.type) {
+  case 'true': return exprFuncTrue();
+  case 'false': return exprFuncFalse();
+  case 'and': return exprFuncAnd(e);
+  case 'or': return exprFuncOr(e);
+  case 'not': return exprFuncNot(e);
+  case 'cond': return exprFuncCond(e);
+  case 'age': return exprFuncAge(e);
+  case 'has': return exprFuncHas(e);
+  case 'renewable': return exprFuncRenewable(e);
+  case 'license': return exprFuncLicense(e);
+  case 'event': return exprFuncEvent(e);
+  case 'masks': return exprFuncMasks(e);
+  case 'special': return exprFuncSpecial(e);
+  case 'ootTime': return exprFuncOotTime(e);
+  case 'mmTime': return exprFuncMmTime(e);
+  case 'price': return exprFuncPrice(e);
+  }
+}
+
+export function exprFuncTrue(): ExprFunc { return exprImplTrue; }
+export function exprFuncFalse(): ExprFunc { return exprImplFalse; }
+
+export function exprFuncAnd(expr: ExprAnd): ExprFunc {
+  const funcs = expr.exprs.map(exprFunc);
+
+  return state => {
+    const results: ExprResult[] = [];
+    for (const e of funcs) {
+      const r = e(state);
+      results.push(r);
+
+      /* Early exit */
+      if (!r.result) {
+        return { result: false, depItems: results.map(x => x.depItems), depEvents: results.map(x => x.depEvents) };
+      }
+    }
+
+    const restrictions = exprRestrictionsAnd(results);
+    if (isDefaultRestrictions(restrictions)) {
+      return { result: true, depItems: [], depEvents: [] };
+    } else {
+      return { result: true, depItems: results.map(x => x.depItems), depEvents: results.map(x => x.depEvents), restrictions };
+    }
+  }
+}
+
+export function exprFuncOr(expr: ExprOr): ExprFunc {
+  const funcs = expr.exprs.map(exprFunc);
+
+  return state => {
+    const results: ExprResult[] = [];
+    let result = false;
+
+    for (const e of funcs) {
+      const r = e(state);
+      results.push(r);
+      if (r.result) {
+        result = true;
+        if (!r.restrictions) {
+          return { result: true, depItems: [], depEvents: [] };
+        }
+      }
+    }
+
+    if (result) {
+      const restrictions = exprRestrictionsOr(results);
+      if (isDefaultRestrictions(restrictions)) {
+        return { result: true, depItems: [], depEvents: [] };
+      } else {
+        return { result: true, depItems: results.map(x => x.depItems), depEvents: results.map(x => x.depEvents), restrictions };
+      }
+    } else {
+      return { result: false, depItems: results.map(x => x.depItems), depEvents: results.map(x => x.depEvents) };
+    }
+  }
+}
+
+export function exprFuncNot(expr: ExprNot): ExprFunc {
+  const func = exprFunc(expr.expr);
+  return state => func(state).result ? exprImplFalse(state) : exprImplTrue(state);
+}
+
+export function exprFuncCond(expr: ExprCond): ExprFunc {
+  const cond = exprFunc(expr.cond);
+  const then = exprFunc(expr.then);
+  const otherwise = exprFunc(expr.otherwise);
+
+  return state => cond(state).result ? then(state) : otherwise(state);
+}
+
+export function exprFuncAge(expr: ExprAge): ExprFunc {
+  const age = expr.age;
+  return state => state.age === age ? exprImplTrue(state) : exprImplFalse(state);
+}
+
+export function exprFuncHas(expr: ExprHas): ExprFunc {
+  const item = expr.item;
+  const count = expr.count;
+  const depItems = [expr.item];
+  const depEvents: string[] = [];
+
+  return state => {
+    const result = (state.ignoreItems || (itemCount(state, item) >= count));
+    return { result, depItems, depEvents };
+  }
+}
+
+export function exprFuncRenewable(expr: ExprRenewable): ExprFunc {
+  const item = expr.item;
+  const depItems = [item];
+  const depEvents: string[] = [];
+  return state => {
+    const result = (state.ignoreItems || (state.renewables.get(item) || 0) > 0);
+    return { result, depItems, depEvents };
+  }
+}
+
+export function exprFuncLicense(expr: ExprLicense): ExprFunc {
+  const item = expr.item;
+  const depItems = [item];
+  const depEvents: string[] = [];
+
+  return state => {
+    const result = (state.ignoreItems || (state.licenses.get(item) || 0) > 0);
+    return { result, depItems, depEvents };
+  }
+}
+
+export function exprFuncEvent(expr: ExprEvent): ExprFunc {
+  const event = expr.event;
+  return state => {
+    const result = state.events.has(event);
+    return { result, depItems: [], depEvents: [event] };
+  }
+}
+
+export function exprFuncMasks(expr: ExprMasks): ExprFunc {
+  const count = expr.count;
+  return state => {
+    const result = state.ignoreItems || (itemsCount(state, [...ItemGroups.MASKS_REGULAR]) >= count);
+    return { result, depItems: [...ItemGroups.MASKS_REGULAR], depEvents: [] };
+  }
+}
+
+export function exprFuncSpecial(expr: ExprSpecial): ExprFunc {
+  const { settings, special } = expr;
+  return state => resolveSpecialCond(settings, state, special);
+}
+
+export function exprFuncOotTime(expr: ExprOotTime): ExprFunc {
+  const time = expr.time;
   const negation = time === 'day' ? 'night' : 'day';
 
   return state => {
@@ -391,18 +527,11 @@ export const exprOotTime = (time: string): Expr => {
   };
 }
 
-export const exprMmTime = (operator: string, sliceNames: string[]): Expr => {
-  const slices: number[] = [];
+export function exprFuncMmTime(expr: ExprMmTime): ExprFunc {
+  const slices = expr.slices;
+  const operator = expr.operator;
   let value = 0;
   let value2 = 0;
-
-  for (const s of sliceNames) {
-    const sliceIndex = MM_TIME_SLICES.indexOf(s);
-    if (sliceIndex === -1) {
-      throw new Error(`Invalid MM time slice: ${s}`);
-    }
-    slices.push(sliceIndex);
-  }
 
   switch (operator) {
   case 'before':
@@ -473,8 +602,11 @@ export const exprMmTime = (operator: string, sliceNames: string[]): Expr => {
   };
 }
 
-export const exprPrice = (range: string, id: number, max: number): Expr => state => {
-  const price = state.world.prices[id + PRICE_RANGES[range]];
-  const result = price <= max;
-  return { result, depItems: [], depEvents: [] };
+export function exprFuncPrice(expr: ExprPrice): ExprFunc {
+  const { id, range, max } = expr;
+  return state => {
+    const price = state.world.prices[id + PRICE_RANGES[range]];
+    const result = price <= max;
+    return { result, depItems: [], depEvents: [] };
+  };
 }

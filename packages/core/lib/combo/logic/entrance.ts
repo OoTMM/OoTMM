@@ -4,7 +4,7 @@ import { DUNGEONS_REGIONS, ExprMap, ExprParsers, World, WorldEntrance, cloneWorl
 import { Pathfinder } from './pathfind';
 import { Monitor } from '../monitor';
 import { LogicEntranceError, LogicError } from './error';
-import { Expr, exprAge, exprAnd, exprFalse, exprTrue } from './expr';
+import { ExprFunc, exprAge, exprAnd, exprFalse, exprTrue } from './expr';
 import { Location, makeLocation } from './locations';
 import { LogicPassSolver } from './solve';
 import { ItemsCount, PlayerItems } from '../items';
@@ -371,7 +371,7 @@ export class LogicPassEntrances {
     }
   }
 
-  private songOfTime(e: Expr): Expr {
+  private songOfTime(e: ExprFunc): ExprFunc {
     const subcond = this.input.exprParsers.mm.parse('can_reset_time');
     return exprAnd([e, subcond]);
   }

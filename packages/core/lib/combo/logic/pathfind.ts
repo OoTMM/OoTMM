@@ -1,6 +1,6 @@
 import { cloneDeep } from 'lodash';
 import { Settings } from '../settings';
-import { AreaData, Expr, ExprResult, isDefaultRestrictions, MM_TIME_SLICES } from './expr';
+import { AreaData, ExprFunc, ExprResult, isDefaultRestrictions, MM_TIME_SLICES } from './expr';
 
 import { Location, locationData, makeLocation, makePlayerLocations } from './locations';
 import { World } from './world';
@@ -395,7 +395,7 @@ export class Pathfinder {
     }
   }
 
-  private evalExpr(worldId: number, expr: Expr, age: Age, area: string) {
+  private evalExpr(worldId: number, expr: ExprFunc, age: Age, area: string) {
     const world = this.worlds[worldId];
     const ws = this.state.ws[worldId];
     const areaData = ws.areas[age].get(area)!;

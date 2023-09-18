@@ -1,6 +1,6 @@
 import { Game, GAMES } from '../config';
 import { gameId } from '../util';
-import { Expr, exprTrue, MM_TIME_SLICES } from './expr';
+import { Expr, ExprFunc, exprTrue, MM_TIME_SLICES } from './expr';
 import { ExprParser } from './expr-parser';
 import { DATA_POOL, DATA_MACROS, DATA_WORLD, DATA_REGIONS, DATA_ENTRANCES_POOL, DATA_HINTS_POOL } from '../data';
 import { DUNGEONS, SETTINGS, Settings } from '../settings';
