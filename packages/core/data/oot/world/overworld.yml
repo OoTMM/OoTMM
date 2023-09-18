@@ -1666,7 +1666,7 @@
     "Death Mountain Crater Volcano HP": "can_ride_bean(BEAN_DEATH_MOUNTAIN_CRATER) || climb_anywhere"
     "Death Mountain Crater Sheik Song": "is_adult"
     "Death Mountain Crater GS Soil": "gs_soil && can_damage_skull"
-"Fire Temple Entry":
+"Death Mountain Crater Near Temple":
   region: DEATH_MOUNTAIN_CRATER
   exits:
     "Fire Temple": "true"
