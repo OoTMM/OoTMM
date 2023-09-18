@@ -1169,7 +1169,7 @@
     "Graveyard Dampe Tomb Pot 5": "true"
     "Graveyard Dampe Tomb Pot 6": "true"
 "Dampe Grave Entrance":
-  region: GRAVEYARD
+  region: NONE
   exits:
     "Graveyard": "true"
 "Dampe House":
