@@ -1035,7 +1035,7 @@
   region: KAKARIKO
   exits:
     "Kakariko": "true"
-    "Graveyard": "trick(OOT_REVERSE_DAMPE) && climb_anywhere && (is_child || can_play_time)"
+    "Dampe Grave Entrance": "trick(OOT_REVERSE_DAMPE) && climb_anywhere && (is_child || can_play_time)"
   events:
     WELL_DRAIN: "is_child && can_play_storms"
   locations:
@@ -1149,7 +1149,7 @@
 "Dampe Grave":
   region: GRAVEYARD
   exits:
-    "Graveyard": "true"
+    "Dampe Grave Entrance": "true"
     "Windmill": "is_adult && can_play_time"
   events:
     NUTS: "true"
@@ -1168,6 +1168,10 @@
     "Graveyard Dampe Tomb Pot 4": "true"
     "Graveyard Dampe Tomb Pot 5": "true"
     "Graveyard Dampe Tomb Pot 6": "true"
+"Dampe Grave Entrance":
+  region: GRAVEYARD
+  exits:
+    "Graveyard": "true"
 "Dampe House":
   region: ENTRANCE
   age_change: false
