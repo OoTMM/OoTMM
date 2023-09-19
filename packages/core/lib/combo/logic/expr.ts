@@ -202,8 +202,6 @@ export type ExprTrue = { type: 'true' };
 export type ExprFalse = { type: 'false' };
 export type ExprAnd = { type: 'and', exprs: Expr[] };
 export type ExprOr = { type: 'or', exprs: Expr[] };
-export type ExprNot = { type: 'not', expr: Expr };
-export type ExprCond = { type: 'cond', cond: Expr, then: Expr, otherwise: Expr };
 export type ExprAge = { type: 'age', age: Age };
 export type ExprHas = { type: 'has', item: Item, count: number };
 export type ExprRenewable = { type: 'renewable', item: Item };
@@ -214,7 +212,7 @@ export type ExprSpecial = { type: 'special', special: string, settings: Settings
 export type ExprOotTime = { type: 'ootTime', time: 'day' | 'night' };
 export type ExprMmTime = { type: 'mmTime', operator: 'before' | 'after' | 'at' | 'between', slices: number[] };
 export type ExprPrice = { type: 'price', range: string, id: number, max: number };
-export type Expr = ExprTrue | ExprFalse | ExprAnd | ExprOr | ExprNot | ExprCond | ExprAge | ExprHas | ExprRenewable | ExprLicense | ExprEvent | ExprMasks | ExprSpecial | ExprOotTime | ExprMmTime | ExprPrice;
+export type Expr = ExprTrue | ExprFalse | ExprAnd | ExprOr | ExprAge | ExprHas | ExprRenewable | ExprLicense | ExprEvent | ExprMasks | ExprSpecial | ExprOotTime | ExprMmTime | ExprPrice;
 
 export type ExprFunc = (state: State) => ExprResult;
 
@@ -261,7 +259,7 @@ export const exprNot = (expr: Expr): Expr => {
     return exprTrue();
   }
 
-  return { type: 'not', expr };
+  throw new Error(`Invalid constant expression: ${JSON.stringify(expr)}`);
 }
 
 export const exprCond = (cond: Expr, then: Expr, otherwise: Expr): Expr => {
@@ -273,7 +271,7 @@ export const exprCond = (cond: Expr, then: Expr, otherwise: Expr): Expr => {
     return otherwise;
   }
 
-  return { type: 'cond', cond, then, otherwise };
+  throw new Error(`Invalid condition: ${JSON.stringify(cond)}`);
 };
 
 export const exprAge = (age: Age): Expr => ({ type: 'age', age });
@@ -363,8 +361,6 @@ export function exprFunc(e: Expr): ExprFunc {
   case 'false': return exprFuncFalse();
   case 'and': return exprFuncAnd(e);
   case 'or': return exprFuncOr(e);
-  case 'not': return exprFuncNot(e);
-  case 'cond': return exprFuncCond(e);
   case 'age': return exprFuncAge(e);
   case 'has': return exprFuncHas(e);
   case 'renewable': return exprFuncRenewable(e);
@@ -434,19 +430,6 @@ export function exprFuncOr(expr: ExprOr): ExprFunc {
       return { result: false, depItems: results.map(x => x.depItems), depEvents: results.map(x => x.depEvents) };
     }
   }
-}
-
-export function exprFuncNot(expr: ExprNot): ExprFunc {
-  const func = exprFunc(expr.expr);
-  return state => func(state).result ? exprImplFalse(state) : exprImplTrue(state);
-}
-
-export function exprFuncCond(expr: ExprCond): ExprFunc {
-  const cond = exprFunc(expr.cond);
-  const then = exprFunc(expr.then);
-  const otherwise = exprFunc(expr.otherwise);
-
-  return state => cond(state).result ? then(state) : otherwise(state);
 }
 
 export function exprFuncAge(expr: ExprAge): ExprFunc {

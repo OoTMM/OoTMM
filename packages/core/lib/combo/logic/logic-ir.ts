@@ -19,10 +19,16 @@ type IRPartialEvaluationContext = {
   age?: Age;
 }
 
+type AreaToCompile = {
+  area: string;
+  ctx: IRPartialEvaluationContext;
+}
+
 class LogicIR {
   private nameToNode = new Map<string, IRNode>();
   private symbols = new Map<string, IRNode>();
   private locations = new Map<string, IRNode>();
+  private areasToCompile = new Map<string, AreaToCompile>();
 
   constructor(
     private world: World,
@@ -85,7 +91,49 @@ class LogicIR {
     return sym;
   }
 
-  private or(nodes: IRNode[]): IRNode {
+  /* Resolves a symbol, inlining whenever possible */
+  private symbol(name: string): IRNode {
+    const names = new Set<string>(name);
+    let node: IRNode | null = null;
+
+    for (;;) {
+      const candidate = this.symbols.get(name);
+      if (!candidate)
+        break;
+      if (candidate.type === 'or' || candidate.type === 'and')
+        break;
+      node = candidate;
+      if (candidate.type !== 'symbolic')
+        break;
+      if (names.has(candidate.name)) {
+        console.log(`Warn: Symbolic loop detected ${name}`);
+        break;
+      }
+      name = candidate.name;
+      names.add(name);
+    }
+
+    if (!node) {
+      node = { type: 'symbolic', name };
+    }
+
+    return node;
+  }
+
+  private area(area: string, ctx: IRPartialEvaluationContext): IRNode {
+    if (area === 'OOT SPAWN') {
+      return IR_TRUE;
+    }
+
+    const areaName = this.areaContextName(area, ctx);
+    const areaNode = this.symbol(areaName);
+    if (!this.symbols.has(areaName) && !this.areasToCompile.has(areaName)) {
+      this.areasToCompile.set(areaName, { area, ctx });
+    }
+    return areaNode;
+  }
+
+  private orRaw(nodes: IRNode[]): IRNode {
     const names = new Set<string>();
     const children: IRNode[] = [];
 
@@ -114,10 +162,14 @@ class LogicIR {
     /* Sort */
     children.sort((a, b) => this.nodeName(a).localeCompare(this.nodeName(b)));
 
-    return this.symbolify({ type: 'or', children });
+    return { type: 'or', children };
   }
 
-  private and(nodes: IRNode[]): IRNode {
+  private or(nodes: IRNode[]): IRNode {
+    return this.symbolify(this.orRaw(nodes));
+  }
+
+  private andRaw(nodes: IRNode[]): IRNode {
     const names = new Set<string>();
     const children: IRNode[] = [];
 
@@ -148,7 +200,11 @@ class LogicIR {
     /* Sort */
     children.sort((a, b) => this.nodeName(a).localeCompare(this.nodeName(b)));
 
-    return this.symbolify({ type: 'and', children });
+    return { type: 'and', children };
+  }
+
+  private and(nodes: IRNode[]): IRNode {
+    return this.symbolify(this.andRaw(nodes));
   }
 
   private exprHasToIR(expr: ExprHas): IRNode {
@@ -180,18 +236,28 @@ class LogicIR {
     case 'and': return this.exprAndToIR(expr, ctx);
     case 'has': return this.exprHasToIR(expr);
     case 'age': return expr.age === ctx.age ? IR_TRUE : IR_FALSE;
-    case 'event': return { type: 'symbolic', name: `E(${expr.event})` };
+    case 'event': return this.symbol(`E(${expr.event})`);
     case 'renewable': return IR_TRUE;
     case 'ootTime': return IR_TRUE;
     case 'mmTime': return IR_TRUE;
     case 'price': return IR_TRUE;
     case 'license': return IR_TRUE;
     case 'masks': return IR_TRUE;
-    default: throw new Error(`Unknown expr type: ${expr.type}`);
+    case 'special': return IR_TRUE;
     }
   }
 
+  private exprAreaVariantToIR(area: string, expr: Expr, ctx: IRPartialEvaluationContext) {
+    const exprNode = this.exprToIR(expr, ctx);
+    if (exprNode.type === 'false') {
+      return IR_FALSE;
+    }
+    const areaNode = this.area(area, ctx);
+    return this.and([areaNode, exprNode]);
+  }
+
   private exprAreaToIR(area: string, expr: Expr): IRNode {
+    /* Handle OoT Spawn */
     const variants: IRPartialEvaluationContext[] = [];
     const nodes: IRNode[] = [];
     const isVariantChild = this.exprContainsAge(expr, 'child');
@@ -206,11 +272,7 @@ class LogicIR {
       variants.push({});
     }
     for (const v of variants) {
-      const areaName = this.areaContextName(area, v);
-      const areaNode: IRNodeSymbolic = { type: 'symbolic', name: areaName };
-      const exprNode = this.exprToIR(expr, v);
-      const n = this.and([areaNode, exprNode]);
-      nodes.push(n);
+      nodes.push(this.exprAreaVariantToIR(area, expr, v));
     }
     return this.or(nodes);
   }
@@ -242,6 +304,92 @@ class LogicIR {
     this.symbols.set(symName, node);
   }
 
+  private compileArea(area: string, ctx: IRPartialEvaluationContext) {
+    const name = this.areaContextName(area, ctx);
+    if (this.symbols.has(name))
+      return;
+    const nodes: IRNode[] = [];
+    for (const a in this.world.areas) {
+      const aData = this.world.areas[a];
+      const expr = aData.exits[area];
+      if (!expr)
+        continue;
+      if (!ctx.age) {
+        const isVariantChild = this.exprContainsAge(expr, 'child');
+        const isVariantAdult = this.exprContainsAge(expr, 'adult');
+        if (isVariantChild) {
+          nodes.push(this.area(a, { age: 'child' }));
+        }
+        if (isVariantAdult) {
+          nodes.push(this.area(a, { age: 'adult' }));
+        }
+      }
+      const node = this.exprAreaVariantToIR(a, expr, ctx);
+      nodes.push(node);
+    }
+    const node = this.or(nodes);
+    this.symbols.set(name, node);
+  }
+
+  private compileAreas() {
+    for (;;) {
+      const toCompile = Array.from(this.areasToCompile.values());
+      this.areasToCompile.clear();
+      if (toCompile.length === 0)
+        break;
+      for (const { area, ctx } of toCompile) {
+        this.compileArea(area, ctx);
+      }
+    }
+  }
+
+  private replaceSymbolIn(name: string, node: IRNode, map: Map<string, IRNode>) {
+    for (const [sym, symNode] of map.entries()) {
+      if (symNode.type === 'symbolic' && symNode.name === name) {
+        map.set(sym, node);
+      }
+      else if (symNode.type === 'or' || symNode.type === 'and') {
+        let changed = false;
+        for (let i = 0; i < symNode.children.length; i++) {
+          const child = symNode.children[i];
+          if (child.type === 'symbolic' && child.name === name) {
+            symNode.children[i] = node;
+            changed = true;
+            break;
+          }
+        }
+        if (changed) {
+          if (symNode.type === 'or')
+            map.set(sym, this.or(symNode.children));
+          else
+            map.set(sym, this.and(symNode.children));
+        }
+      }
+    }
+  }
+
+  private replaceSymbol(name: string, node: IRNode) {
+    this.symbols.delete(name);
+    this.replaceSymbolIn(name, node, this.symbols);
+    this.replaceSymbolIn(name, node, this.locations);
+  }
+
+  private inlineAll() {
+    for (;;) {
+      const syms = this.symbols.keys();
+      let changed = false;
+      for (const s of syms) {
+        const node = this.symbols.get(s)!;
+        if (node.type === 'or' || node.type === 'and')
+          continue;
+        changed = true;
+        this.replaceSymbol(s, node);
+      }
+      if (!changed)
+        break;
+    }
+  }
+
   run() {
     const events = new Set<string>();
     for (const loc in this.world.checks) {
@@ -258,6 +406,9 @@ class LogicIR {
     for (const e of events) {
       this.compileEvent(e);
     }
+
+    this.compileAreas();
+    this.inlineAll();
 
     for (const [loc, node] of this.locations.entries()) {
       console.log(`${loc}: ${this.nodeName(node)}`);

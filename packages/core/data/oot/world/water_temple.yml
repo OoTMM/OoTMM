@@ -93,7 +93,7 @@
   dungeon: Water
   exits:
     "Water Temple Blocks": "true"
-    "Water Temple Waterfalls Ledge": "cond(is_adult, has_hover_boots || climb_anywhere || hookshot_anywhere, has_iron_boots && (climb_anywhere || hookshot_anywhere))"
+    "Water Temple Waterfalls Ledge": "(is_adult && (has_hover_boots || climb_anywhere || hookshot_anywhere)) || (is_child && (has_iron_boots && (climb_anywhere || hookshot_anywhere)))"
 "Water Temple Blocks":
   dungeon: Water
   exits:
