@@ -252,11 +252,13 @@ export class Pathfinder {
       }
 
       /* Pathfind locations */
-      for (const [l, atomId] of compiled.locations.entries()) {
+      const loclist = ws.restrictedLocations ?? compiled.locations.keys();
+      for (const l of loclist) {
         const ll = makeLocation(l, worldId);
         if (this.state.locations.has(ll)) {
           continue;
         }
+        const atomId = compiled.locations.get(l)!;
         const bitPos = atomId & 7;
         const bytePos = atomId >> 3;
         const mask = 1 << bitPos;
