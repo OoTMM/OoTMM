@@ -355,16 +355,16 @@
 "Clock Tower Roof":
   region: CLOCK_TOWER_ROOF
   events:
-    MAGIC: "can_play_time"
+    MAGIC: "(can_play_time || event(MAJORA))"
   exits:
     "Moon": "can_play_order && special(MOON)"
   locations:
-    "Clock Tower Roof Skull Kid Ocarina": "has_weapon_range && can_play_time"
-    "Clock Tower Roof Skull Kid Song of Time": "has_weapon_range && can_play_time"
-    "Clock Tower Roof Pot 1": "can_play_time"
-    "Clock Tower Roof Pot 2": "can_play_time"
-    "Clock Tower Roof Pot 3": "can_play_time"
-    "Clock Tower Roof Pot 4": "can_play_time"
+    "Clock Tower Roof Skull Kid Ocarina": "has_weapon_range && (can_play_time || event(MAJORA))"
+    "Clock Tower Roof Skull Kid Song of Time": "has_weapon_range && (can_play_time || event(MAJORA))"
+    "Clock Tower Roof Pot 1": "(can_play_time || event(MAJORA))"
+    "Clock Tower Roof Pot 2": "(can_play_time || event(MAJORA))"
+    "Clock Tower Roof Pot 3": "(can_play_time || event(MAJORA))"
+    "Clock Tower Roof Pot 4": "(can_play_time || event(MAJORA))"
 "Bomb Shop":
   region: ENTRANCE
   events:
