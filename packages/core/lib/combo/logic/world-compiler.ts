@@ -1,19 +1,23 @@
 import { Item } from '../items';
-import { Expr, ExprAnd, ExprEvent, ExprHas, ExprOr } from './expr';
-import { locationData, Location } from './locations';
+import { Expr, ExprAnd, ExprHas, ExprOr } from './expr';
 import { Age } from './pathfind';
 import { World } from './world';
 
-type IRNodeTrue = { type: 'true' };
-type IRNodeFalse = { type: 'false' };
-type IRNodeItem = { type: 'item', item: Item, count: number };
-type IRNodeOr = { type: 'or', children: IRNode[] };
-type IRNodeAnd = { type: 'and', children: IRNode[] };
+type NodeTrue = { type: 'true' };
+type NodeFalse = { type: 'false' };
+type NodeItem = { type: 'item', item: Item, count: number };
 type IRNodeSymbolic = { type: 'symbolic', name: string };
-type IRNode = IRNodeTrue | IRNodeFalse | IRNodeItem | IRNodeOr | IRNodeAnd | IRNodeSymbolic;
 
-const IR_FALSE: IRNodeFalse = { type: 'false' };
-const IR_TRUE: IRNodeTrue = { type: 'true' };
+type Primitive = NodeTrue | NodeFalse | NodeItem;
+type IRPrimitive = Primitive | IRNodeSymbolic;
+
+type NodeOr<T> = { type: 'or', children: T[] };
+type NodeAnd<T> = { type: 'and', children: T[] };
+type IRNode = IRPrimitive | NodeOr<IRPrimitive> | NodeAnd<IRPrimitive>;
+type Atom = Primitive | NodeOr<number> | NodeAnd<number>;
+
+const IR_FALSE: NodeFalse = { type: 'false' };
+const IR_TRUE: NodeTrue = { type: 'true' };
 
 type IRPartialEvaluationContext = {
   age?: Age;
@@ -24,13 +28,23 @@ type AreaToCompile = {
   ctx: IRPartialEvaluationContext;
 }
 
-class LogicIR {
-  private nameToNode = new Map<string, IRNode>();
+type CompiledWorld = {
+  atoms: Atom[];
+  locations: Map<string, number>;
+  events: Map<string, number>;
+}
+
+class WorldCompiler {
+  private nameToNode = new Map<string, IRNodeSymbolic>();
   private symbols = new Map<string, IRNode>();
+  private definedSymbols: Set<string> = new Set();
   private nextSymbolNum = 0;
   private locations = new Map<string, IRNode>();
   private events = new Map<string, IRNode>();
   private areasToCompile = new Map<string, AreaToCompile>();
+  private atoms: Atom[] = [];
+  private atomsCount = 0;
+  private atomNames: Map<string, number> = new Map();
 
   constructor(
     private world: World,
@@ -80,7 +94,7 @@ class LogicIR {
     }
   }
 
-  private symbolify(node: IRNode): IRNode {
+  private symbolify(node: IRNode): IRPrimitive {
     const name = this.nodeName(node);
     const oldSym = this.nameToNode.get(name);
     if (oldSym)
@@ -94,37 +108,12 @@ class LogicIR {
   }
 
   /* Resolves a symbol, inlining whenever possible */
-  private symbol(name: string): IRNode {
+  private symbol(name: string): IRPrimitive {
+    this.definedSymbols.add(name);
     return { type: 'symbolic', name };
-
-    const names = new Set<string>(name);
-    let node: IRNode | null = null;
-
-    for (;;) {
-      const candidate = this.symbols.get(name);
-      if (!candidate)
-        break;
-      if (candidate.type === 'or' || candidate.type === 'and')
-        break;
-      node = candidate;
-      if (candidate.type !== 'symbolic')
-        break;
-      if (names.has(candidate.name)) {
-        console.log(`Warn: Symbolic loop detected ${name}`);
-        break;
-      }
-      name = candidate.name;
-      names.add(name);
-    }
-
-    if (!node) {
-      node = { type: 'symbolic', name };
-    }
-
-    return node;
   }
 
-  private area(area: string, ctx: IRPartialEvaluationContext): IRNode {
+  private area(area: string, ctx: IRPartialEvaluationContext): IRPrimitive {
     if (area === 'OOT SPAWN') {
       return IR_TRUE;
     }
@@ -137,9 +126,9 @@ class LogicIR {
     return areaNode;
   }
 
-  private orRaw(nodes: IRNode[]): IRNode {
+  private orRaw(nodes: IRPrimitive[]): IRNode {
     const names = new Set<string>();
-    const children: IRNode[] = [];
+    const children: IRPrimitive[] = [];
 
     if (nodes.length === 0)
       return IR_FALSE;
@@ -169,13 +158,13 @@ class LogicIR {
     return { type: 'or', children };
   }
 
-  private or(nodes: IRNode[]): IRNode {
+  private or(nodes: IRPrimitive[]): IRPrimitive {
     return this.symbolify(this.orRaw(nodes));
   }
 
-  private andRaw(nodes: IRNode[]): IRNode {
+  private andRaw(nodes: IRPrimitive[]): IRNode {
     const names = new Set<string>();
-    const children: IRNode[] = [];
+    const children: IRPrimitive[] = [];
 
     if (nodes.length === 0) {
       return IR_TRUE;
@@ -207,32 +196,32 @@ class LogicIR {
     return { type: 'and', children };
   }
 
-  private and(nodes: IRNode[]): IRNode {
+  private and(nodes: IRPrimitive[]): IRPrimitive {
     return this.symbolify(this.andRaw(nodes));
   }
 
-  private exprHasToIR(expr: ExprHas): IRNode {
+  private exprHasToIR(expr: ExprHas): IRPrimitive {
     const { item, count } = expr;
     return { type: 'item', item, count };
   }
 
-  private exprOrToIR(expr: ExprOr, ctx: IRPartialEvaluationContext): IRNode {
-    const children: IRNode[] = [];
+  private exprOrToIR(expr: ExprOr, ctx: IRPartialEvaluationContext): IRPrimitive {
+    const children: IRPrimitive[] = [];
     for (const e of expr.exprs) {
       children.push(this.exprToIR(e, ctx));
     }
     return this.or(children);
   }
 
-  private exprAndToIR(expr: ExprAnd, ctx: IRPartialEvaluationContext): IRNode {
-    const children: IRNode[] = [];
+  private exprAndToIR(expr: ExprAnd, ctx: IRPartialEvaluationContext): IRPrimitive {
+    const children: IRPrimitive[] = [];
     for (const e of expr.exprs) {
       children.push(this.exprToIR(e, ctx));
     }
     return this.and(children);
   }
 
-  private exprToIR(expr: Expr, ctx: IRPartialEvaluationContext): IRNode {
+  private exprToIR(expr: Expr, ctx: IRPartialEvaluationContext): IRPrimitive {
     switch (expr.type) {
     case 'false': return IR_FALSE;
     case 'true': return IR_TRUE;
@@ -260,9 +249,9 @@ class LogicIR {
     return this.and([areaNode, exprNode]);
   }
 
-  private exprAreaToIR(area: string, expr: Expr): IRNode {
+  private exprAreaToIR(area: string, expr: Expr): IRPrimitive {
     const variants: IRPartialEvaluationContext[] = [];
-    const nodes: IRNode[] = [];
+    const nodes: IRPrimitive[] = [];
     const isVariantChild = this.exprContainsAge(expr, 'child');
     const isVariantAdult = this.exprContainsAge(expr, 'adult');
     if (isVariantChild) {
@@ -281,7 +270,7 @@ class LogicIR {
   }
 
   private compileLocation(loc: string) {
-    const nodes: IRNode[] = [];
+    const nodes: IRPrimitive[] = [];
     for (const area in this.world.areas) {
       const a = this.world.areas[area];
       const expr = a.locations[loc];
@@ -294,7 +283,7 @@ class LogicIR {
   }
 
   private compileEvent(event: string) {
-    const nodes: IRNode[] = [];
+    const nodes: IRPrimitive[] = [];
     for (const area in this.world.areas) {
       const a = this.world.areas[area];
       const expr = a.events[event];
@@ -312,7 +301,7 @@ class LogicIR {
     const name = this.areaContextName(area, ctx);
     if (this.symbols.has(name))
       return;
-    const nodes: IRNode[] = [];
+    const nodes: IRPrimitive[] = [];
     for (const a in this.world.areas) {
       const aData = this.world.areas[a];
       const expr = aData.exits[area];
@@ -347,7 +336,7 @@ class LogicIR {
     }
   }
 
-  private replaceSymbolIn(name: string, node: IRNode, map: Map<string, IRNode>) {
+  private replaceSymbolIn(name: string, node: IRPrimitive, map: Map<string, IRNode>) {
     for (const [sym, symNode] of map.entries()) {
       if (symNode.type === 'symbolic' && symNode.name === name) {
         map.set(sym, node);
@@ -372,7 +361,7 @@ class LogicIR {
     }
   }
 
-  private replaceSymbol(name: string, node: IRNode) {
+  private replaceSymbol(name: string, node: IRPrimitive) {
     this.symbols.delete(name);
     this.replaceSymbolIn(name, node, this.symbols);
     this.replaceSymbolIn(name, node, this.locations);
@@ -380,19 +369,74 @@ class LogicIR {
   }
 
   private inlineAll() {
+    /* Define false values for all undefined symbols */
+    for (const s of this.definedSymbols.keys()) {
+      if (!this.symbols.has(s)) {
+        this.symbols.set(s, IR_FALSE);
+      }
+    }
+
     for (;;) {
       const syms = this.symbols.keys();
       let changed = false;
       for (const s of syms) {
-        const node = this.symbols.get(s)!;
+        let node = this.symbols.get(s)!;
         if (node.type === 'or' || node.type === 'and')
           continue;
+        /* Remove loops */
+        if (node.type === 'symbolic' && node.name === s) {
+          node = IR_FALSE;
+        }
         changed = true;
         this.replaceSymbol(s, node);
       }
       if (!changed)
         break;
     }
+  }
+
+  private resolveAtom(node: Exclude<IRNode, IRNodeSymbolic>): Atom {
+    switch (node.type) {
+    case 'or': return { type: 'or', children: node.children.map(c => this.emitAtom(c)) };
+    case 'and': return { type: 'and', children: node.children.map(c => this.emitAtom(c)) };
+    default: return node;
+    }
+  }
+
+  private emitAtom(node: IRNode): number {
+    /* Resolve */
+    while (node.type === 'symbolic') {
+      const n = this.symbols.get(node.name)!;
+      node = n;
+    }
+
+    const str = this.nodeName(node);
+    let id = this.atomNames.get(str);
+    if (id !== undefined)
+      return id;
+    id = this.atomsCount++;
+    this.atomNames.set(str, id);
+    const atom = this.resolveAtom(node);
+    this.atoms[id] = atom;
+    return id;
+  }
+
+  private compile() {
+    const locations = new Map<string, number>();
+    const events = new Map<string, number>();
+
+    for (const [loc, node] of this.locations.entries()) {
+      locations.set(loc, this.emitAtom(node));
+    }
+
+    for (const [loc, node] of this.events.entries()) {
+      events.set(loc, this.emitAtom(node));
+    }
+
+    const atoms = this.atoms;
+    this.atoms = [];
+
+    return { atoms, locations, events };
   }
 
   run() {
@@ -414,23 +458,11 @@ class LogicIR {
 
     this.compileAreas();
     this.inlineAll();
-
-    for (const [loc, node] of this.events.entries()) {
-      console.log(`${loc}: ${this.nodeName(node)}`);
-    }
-
-    for (const [loc, node] of this.locations.entries()) {
-      console.log(`${loc}: ${this.nodeName(node)}`);
-    }
-
-    for (const [sym, node] of this.symbols.entries()) {
-      console.log(`${sym}: ${this.nodeName(node)}`);
-    }
+    return this.compile();
   }
 }
 
-export function worldIR(world: World) {
-  const builder = new LogicIR(world);
-  builder.run();
-  process.exit(0);
+export function compileWorld(world: World) {
+  const compiler = new WorldCompiler(world);
+  return compiler.run();
 }
