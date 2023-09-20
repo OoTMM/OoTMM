@@ -9,8 +9,7 @@ import { defaultPrices } from './price';
 import { Item, itemByID, ItemHelpers, Items } from '../items';
 import { Random } from '../random';
 import { cloneDeep } from 'lodash';
-import { worldAtomExprSet } from './atom-expr';
-import { worldIR } from './world-compiler';
+import { CompiledWorld } from './world-compiler';
 
 export type ExprMap = {
   [k: string]: Expr;
@@ -78,6 +77,7 @@ export type World = {
   dungeonIds: number[];
   entranceOverrides: Map<string, string>;
   preCompleted: Set<string>;
+  compiled: CompiledWorld | null;
 };
 
 export const DUNGEONS_REGIONS: { [k: string]: string } = {
@@ -126,9 +126,25 @@ function cloneChecks(checks: { [k: string]: WorldCheck }): { [k: string]: WorldC
   return result;
 }
 
+function cloneWorldArea(area: WorldArea): WorldArea {
+  return {
+    game: area.game,
+    boss: area.boss,
+    ageChange: area.ageChange,
+    dungeon: area.dungeon,
+    exits: { ...area.exits },
+    events: { ...area.events },
+    locations: { ...area.locations },
+    gossip: { ...area.gossip },
+    stay: area.stay ? [...area.stay] : null,
+    time: area.time,
+    region: area.region,
+  };
+}
+
 export function cloneWorld(world: World): World {
   return {
-    areas: cloneDeep(world.areas),
+    areas: Object.fromEntries(Object.entries(world.areas).map(([k, v]) => [k, cloneWorldArea(v)])),
     checks: cloneChecks(world.checks),
     dungeons: cloneDeep(world.dungeons),
     regions: cloneDeep(world.regions),
@@ -144,6 +160,7 @@ export function cloneWorld(world: World): World {
     bossIds: [...world.bossIds],
     dungeonIds: [...world.dungeonIds],
     entranceOverrides: new Map(world.entranceOverrides),
+    compiled: world.compiled,
   };
 }
 
@@ -180,8 +197,6 @@ export class LogicPassWorld {
         worlds.push(cloneWorld(world));
       }
     }
-
-    worldIR(worlds[0]);
 
     return { worlds, exprParsers: this.exprParsers };
   }
@@ -237,6 +252,7 @@ export class LogicPassWorld {
       bossIds: [],
       dungeonIds: [],
       entranceOverrides: new Map,
+      compiled: null,
     };
   }
 

@@ -28,7 +28,7 @@ type AreaToCompile = {
   ctx: IRPartialEvaluationContext;
 }
 
-type CompiledWorld = {
+export type CompiledWorld = {
   atoms: Atom[];
   locations: Map<string, number>;
   events: Map<string, number>;
@@ -463,6 +463,9 @@ class WorldCompiler {
 }
 
 export function compileWorld(world: World) {
+  console.log("World Compile...");
   const compiler = new WorldCompiler(world);
-  return compiler.run();
+  const data = compiler.run();
+  console.log("World Compile Done");
+  return data;
 }
