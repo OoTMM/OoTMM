@@ -28,10 +28,21 @@ type AreaToCompile = {
   ctx: IRPartialEvaluationContext;
 }
 
+const META_EVENTS = new Set([
+  'OOT_GANON',
+  'MM_MAJORA',
+  'OOT_GANON_PRE_BOSS',
+  'MM_MAJORA_PRE_BOSS',
+]);
+
 export type CompiledWorld = {
   atoms: Atom[];
   locations: Map<string, number>;
   events: Map<string, number>;
+  atomsToLocations: Map<number, string[]>;
+  atomsToEvents: Map<number, string[]>;
+  atomsToAtoms: Map<number, number[]>;
+  itemsToAtoms: Map<Item, number[]>;
 }
 
 class WorldCompiler {
@@ -294,7 +305,11 @@ class WorldCompiler {
     const node = this.or(nodes);
     const symName = `E(${event})`;
     this.symbols.set(symName, node);
-    this.events.set(event, this.symbol(symName));
+    const s = this.symbol(symName);
+
+    if (META_EVENTS.has(event)) {
+      this.events.set(event, s);
+    }
   }
 
   private compileArea(area: string, ctx: IRPartialEvaluationContext) {
@@ -421,9 +436,12 @@ class WorldCompiler {
     return id;
   }
 
-  private compile() {
+  private compile(): CompiledWorld {
     const locations = new Map<string, number>();
     const events = new Map<string, number>();
+
+    this.emitAtom(IR_FALSE);
+    this.emitAtom(IR_TRUE);
 
     for (const [loc, node] of this.locations.entries()) {
       locations.set(loc, this.emitAtom(node));
@@ -436,7 +454,42 @@ class WorldCompiler {
     const atoms = this.atoms;
     this.atoms = [];
 
-    return { atoms, locations, events };
+    /* Build the dependencies */
+    const atomsToLocations = new Map<number, string[]>();
+    const atomsToEvents = new Map<number, string[]>();
+    const atomsToAtoms = new Map<number, number[]>();
+    const itemsToAtoms = new Map<Item, number[]>();
+
+    for (const [loc, atomId] of locations.entries()) {
+      const a = atomsToLocations.get(atomId) || [];
+      a.push(loc);
+      atomsToLocations.set(atomId, a);
+    }
+
+    for (const [ev, atomId] of events.entries()) {
+      const a = atomsToEvents.get(atomId) || [];
+      a.push(ev);
+      atomsToEvents.set(atomId, a);
+    }
+
+    for (let atomId = 0; atomId < atoms.length; atomId++) {
+      const atom = atoms[atomId];
+      if (atom.type === 'item') {
+        const a = itemsToAtoms.get(atom.item) || [];
+        a.push(atomId);
+        itemsToAtoms.set(atom.item, a);
+      }
+
+      if (atom.type === 'and' || atom.type === 'or') {
+        for (const childId of atom.children) {
+          const a = atomsToAtoms.get(childId) || [];
+          a.push(atomId);
+          atomsToAtoms.set(childId, a);
+        }
+      }
+    }
+
+    return { atoms, locations, events, atomsToLocations, atomsToEvents, atomsToAtoms, itemsToAtoms };
   }
 
   run() {

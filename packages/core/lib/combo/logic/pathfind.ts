@@ -16,6 +16,8 @@ export type Age = typeof AGES[number];
 
 type PathfinderWorldState = {
   compiledWorld: CompiledWorld;
+  atomsQueue: number[];
+  atomsInQueue: Set<number>;
   atoms: Uint8Array;
   uncollectedLocations: Set<string>;
   items: ItemsCount;
@@ -52,6 +54,8 @@ function makeWorldState(startingItems: ItemsCount, world: World): PathfinderWorl
   return {
     compiledWorld: compiled,
     atoms,
+    atomsQueue: [1],
+    atomsInQueue: new Set([1]),
     uncollectedLocations: new Set(),
     items: new Map(startingItems),
     licenses: new Map(startingItems),
@@ -186,100 +190,42 @@ export class Pathfinder {
       if (isLocationRenewable(world, globalLoc)) {
         countMapAdd(otherWs.renewables, playerItem.item);
       }
-      if (isLocationLicenseGranting(world, globalLoc))
+      if (isLocationLicenseGranting(world, globalLoc)) {
         countMapAdd(otherWs.licenses, playerItem.item);
+      }
+      this.queueItem(playerItem.player, playerItem.item);
     } else {
       ws.uncollectedLocations.add(loc);
     }
   }
 
-  private hasAtom(index: number, atoms: Uint8Array) {
+  private hasAtom(ws: PathfinderWorldState, index: number) {
     const bytePos = index >> 3;
     const bitPos = index & 7;
     const mask = 1 << bitPos;
-    return !!(atoms[bytePos] & mask);
+    return !!(ws.atoms[bytePos] & mask);
+  }
+
+  private queueItem(worldId: number, item: Item) {
+    const ws = this.state.ws[worldId];
+    const compiled = ws.compiledWorld;
+    const atomsToCheck = compiled.itemsToAtoms.get(item) || [];
+    for (const atomId of atomsToCheck) {
+      if (ws.atomsInQueue.has(atomId) || this.hasAtom(ws, atomId)) {
+        continue;
+      }
+      ws.atomsQueue.push(atomId);
+      ws.atomsInQueue.add(atomId);
+    }
   }
 
   private pathfindStep() {
-    let anyChange = false;
-
-    /* Clear new locations */
+    let changed = false;
     this.state.newLocations.clear();
 
     for (let worldId = 0; worldId < this.worlds.length; ++worldId) {
-      const ws = this.state.ws[worldId];
-      const compiled = ws.compiledWorld;
-      const atomsState = ws.atoms;
-      const atoms = compiled.atoms;
-
-      if (this.opts.singleWorld !== undefined && this.opts.singleWorld !== worldId) {
-        continue;
-      }
-
-      /* Pathfind using atoms as much as we can */;
-      for (;;) {
-        let changed = false;
-        for (let i = 0; i < atoms.length; ++i) {
-          const bytePos = i >> 3;
-          const bitPos = i & 7;
-          const mask = 1 << bitPos;
-
-          if (atomsState[bytePos] & mask) {
-            continue;
-          }
-
-          /* Check if atom is true */
-          const atom = atoms[i];
-          let result: boolean;
-          switch (atom.type) {
-          case 'true': result = true; break;
-          case 'false': result = false; break;
-          case 'item': result = (ws.items.get(atom.item) || 0) >= atom.count; break;
-          case 'or': result = atom.children.some(x => this.hasAtom(x, atomsState)); break;
-          case 'and': result = atom.children.every(x => this.hasAtom(x, atomsState)); break;
-          }
-
-          if (result) {
-            atomsState[bytePos] |= mask;
-            changed = true;
-          }
-        }
-
-        if (!changed)
-          break;
-        else
-          anyChange = true;
-      }
-
-      /* Pathfind locations */
-      const loclist = ws.restrictedLocations ?? compiled.locations.keys();
-      for (const l of loclist) {
-        const ll = makeLocation(l, worldId);
-        if (this.state.locations.has(ll)) {
-          continue;
-        }
-        const atomId = compiled.locations.get(l)!;
-        const bitPos = atomId & 7;
-        const bytePos = atomId >> 3;
-        const mask = 1 << bitPos;
-        if (atomsState[bytePos] & mask) {
-          this.addLocationDelayed(worldId, l);
-          anyChange = true;
-        }
-      }
-
-      /* Pathfind events */
-      for (const [e, atomId] of compiled.events.entries()) {
-        if (ws.events.has(e)) {
-          continue;
-        }
-        const bitPos = atomId & 7;
-        const bytePos = atomId >> 3;
-        const mask = 1 << bitPos;
-        if (atomsState[bytePos] & mask) {
-          ws.events.add(e);
-          anyChange = true;
-        }
+      if (this.pathfindWorld(worldId)) {
+        changed = true;
       }
     }
 
@@ -287,9 +233,84 @@ export class Pathfinder {
     for (const globalLoc of this.state.newLocations) {
       const locD = locationData(globalLoc);
       this.addLocation(locD.world as number, locD.id);
+      changed = true;
     }
 
-    return anyChange;
+    return changed;
+  }
+
+  private pathfindWorld(worldId: number) {
+    let changed = false;
+    const ws = this.state.ws[worldId];
+    const compiled = ws.compiledWorld;
+
+    if (this.opts.singleWorld !== undefined && this.opts.singleWorld !== worldId) {
+      return;
+    }
+
+    /* Pathfind using atom dependencies */
+    const atoms = compiled.atoms;
+    const atomsState = ws.atoms;
+    const atomsQueue = ws.atomsQueue;
+    const atomsInQueue = ws.atomsInQueue;
+    while (atomsQueue.length) {
+      const atomId = atomsQueue.pop()!;
+
+      /* Check if the atom was already processed */
+      if (this.hasAtom(ws, atomId)) {
+        atomsInQueue.delete(atomId);
+        continue;
+      }
+
+      /* Evaluate the atom */
+      const atom = atoms[atomId];
+      let result: boolean;
+      switch (atom.type) {
+      case 'true': result = true; break;
+      case 'false': result = false; break;
+      case 'item': result = (ws.items.get(atom.item) || 0) >= atom.count; break;
+      case 'or': result = atom.children.some(x => this.hasAtom(ws, x)); break;
+      case 'and': result = atom.children.every(x => this.hasAtom(ws, x)); break;
+      }
+
+      /* If the atom is false, let's just stop there */
+      if (!result) {
+        atomsInQueue.delete(atomId);
+        continue;
+      }
+
+      /* Mark the atom as true */
+      atomsState[atomId >> 3] |= 1 << (atomId & 7);
+      atomsInQueue.delete(atomId);
+      changed = true;
+
+      /* Push atom dependencies */
+      const atomDeps = compiled.atomsToAtoms.get(atomId) || [];
+      for (const dep of atomDeps) {
+        if (atomsInQueue.has(dep) || this.hasAtom(ws, dep)) {
+          continue;
+        }
+        atomsQueue.push(dep);
+        atomsInQueue.add(dep);
+      }
+
+      /* Push new locations */
+      const newLocs = compiled.atomsToLocations.get(atomId) || [];
+      for (const loc of newLocs) {
+        this.addLocationDelayed(worldId, loc);
+      }
+
+      /* Push new events */
+      const newEvents = compiled.atomsToEvents.get(atomId) || [];
+      for (const e of newEvents) {
+        if (ws.events.has(e)) {
+          continue;
+        }
+        ws.events.add(e);
+      }
+    }
+
+    return changed;
   }
 
   private isGanonMajoraReached() {
@@ -335,6 +356,7 @@ export class Pathfinder {
   }
 
   private pathfind() {
+    /* Started */
     /* Assumed items */
     if (this.opts.assumedItems) {
       for (const [playerItem, amount] of this.opts.assumedItems.entries()) {
@@ -348,6 +370,8 @@ export class Pathfinder {
           countMapAdd(ws.renewables, playerItem.item, delta);
           countMapAdd(ws.licenses, playerItem.item, delta);
           this.state.previousAssumedItems.set(playerItem, amount);
+
+          this.queueItem(playerItem.player, playerItem.item);
         }
       }
     }
