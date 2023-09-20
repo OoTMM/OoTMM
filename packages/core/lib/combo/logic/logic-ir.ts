@@ -27,7 +27,9 @@ type AreaToCompile = {
 class LogicIR {
   private nameToNode = new Map<string, IRNode>();
   private symbols = new Map<string, IRNode>();
+  private nextSymbolNum = 0;
   private locations = new Map<string, IRNode>();
+  private events = new Map<string, IRNode>();
   private areasToCompile = new Map<string, AreaToCompile>();
 
   constructor(
@@ -83,7 +85,7 @@ class LogicIR {
     const oldSym = this.nameToNode.get(name);
     if (oldSym)
       return oldSym;
-    const id = this.symbols.size;
+    const id = this.nextSymbolNum++;
     const symName = `S(${id})`;
     const sym: IRNodeSymbolic = { type: 'symbolic', name: symName };
     this.symbols.set(symName, node);
@@ -93,6 +95,8 @@ class LogicIR {
 
   /* Resolves a symbol, inlining whenever possible */
   private symbol(name: string): IRNode {
+    return { type: 'symbolic', name };
+
     const names = new Set<string>(name);
     let node: IRNode | null = null;
 
@@ -154,7 +158,7 @@ class LogicIR {
     }
 
     if (children.length === 0) {
-      return IR_TRUE;
+      return IR_FALSE;
     } else if (children.length === 1) {
       return children[0];
     }
@@ -257,7 +261,6 @@ class LogicIR {
   }
 
   private exprAreaToIR(area: string, expr: Expr): IRNode {
-    /* Handle OoT Spawn */
     const variants: IRPartialEvaluationContext[] = [];
     const nodes: IRNode[] = [];
     const isVariantChild = this.exprContainsAge(expr, 'child');
@@ -302,6 +305,7 @@ class LogicIR {
     const node = this.or(nodes);
     const symName = `E(${event})`;
     this.symbols.set(symName, node);
+    this.events.set(event, this.symbol(symName));
   }
 
   private compileArea(area: string, ctx: IRPartialEvaluationContext) {
@@ -360,9 +364,9 @@ class LogicIR {
         }
         if (changed) {
           if (symNode.type === 'or')
-            map.set(sym, this.or(symNode.children));
+            map.set(sym, this.orRaw(symNode.children));
           else
-            map.set(sym, this.and(symNode.children));
+            map.set(sym, this.andRaw(symNode.children));
         }
       }
     }
@@ -372,6 +376,7 @@ class LogicIR {
     this.symbols.delete(name);
     this.replaceSymbolIn(name, node, this.symbols);
     this.replaceSymbolIn(name, node, this.locations);
+    this.replaceSymbolIn(name, node, this.events);
   }
 
   private inlineAll() {
@@ -409,6 +414,10 @@ class LogicIR {
 
     this.compileAreas();
     this.inlineAll();
+
+    for (const [loc, node] of this.events.entries()) {
+      console.log(`${loc}: ${this.nodeName(node)}`);
+    }
 
     for (const [loc, node] of this.locations.entries()) {
       console.log(`${loc}: ${this.nodeName(node)}`);
