@@ -1,12 +1,10 @@
 import { cloneDeep } from 'lodash';
 import { Settings } from '../settings';
-import { AreaData, ExprFunc, ExprResult, isDefaultRestrictions, MM_TIME_SLICES } from './expr';
-
-import { Location, locationData, makeLocation, makePlayerLocations } from './locations';
+import { Location, locationData, makeLocation } from './locations';
 import { World } from './world';
 import { isLocationLicenseGranting, isLocationRenewable } from './locations';
 import { ItemPlacement } from './solve';
-import { CountMap, countMapAdd } from '../util';
+import { CountMap, countMapAdd, countMapRemove } from '../util';
 import { Item, itemByID, Items, ItemsCount, PlayerItems } from '../items';
 import { CompiledWorld, compileWorld } from './world-compiler';
 
@@ -26,6 +24,7 @@ type PathfinderWorldState = {
   forbiddenReachableLocations: Set<string>;
   restrictedLocations?: Set<string>;
   forbiddenLocations?: Set<string>;
+  locations: Set<string>;
   events: Set<string>;
 }
 
@@ -62,6 +61,7 @@ function makeWorldState(startingItems: ItemsCount, world: World): PathfinderWorl
     renewables: new Map(),
     forbiddenReachableLocations: new Set(),
     events: new Set(),
+    locations: new Set(),
   };
 }
 
@@ -177,6 +177,29 @@ export class Pathfinder {
     }
   }
 
+  private removeLocation(worldId: number, loc: string) {
+    const ws = this.state.ws[worldId];
+    const world = this.worlds[worldId];
+    const globalLoc = makeLocation(loc, worldId);
+    this.state.locations.delete(globalLoc);
+    if (ws.uncollectedLocations.has(loc)) {
+      ws.uncollectedLocations.delete(loc);
+      return;
+    }
+    const playerItem = this.opts.items?.get(globalLoc);
+    if (playerItem) {
+      const otherWs = this.state.ws[playerItem.player];
+      countMapRemove(otherWs.items, playerItem.item);
+      if (isLocationRenewable(world, globalLoc)) {
+        countMapRemove(otherWs.renewables, playerItem.item);
+      }
+      if (isLocationLicenseGranting(world, globalLoc)) {
+        countMapRemove(otherWs.licenses, playerItem.item);
+      }
+      this.unqueueItem(playerItem.player, playerItem.item);
+    }
+  }
+
   private addLocation(worldId: number, loc: string) {
     const ws = this.state.ws[worldId];
     const world = this.worlds[worldId];
@@ -219,6 +242,58 @@ export class Pathfinder {
     }
   }
 
+  private unqueueAtom(worldId: number, atomId: number) {
+    const ws = this.state.ws[worldId];
+    const bitPos = atomId & 7;
+    const mask = ~(1 << bitPos);
+    const bytePos = atomId >> 3;
+
+    /* Clear the atom */
+    ws.atoms[bytePos] &= mask;
+
+    /* Requeue the atom */
+    if (!ws.atomsInQueue.has(atomId)) {
+      ws.atomsQueue.push(atomId);
+      ws.atomsInQueue.add(atomId);
+    }
+
+    /* If this atom locks locations, we need to remove them */
+    const locations = ws.compiledWorld.atomsToLocations.get(atomId) || [];
+    for (const loc of locations) {
+      this.removeLocation(worldId, loc);
+    }
+
+    /* If this atom locks events, we also need to remove them */
+    const events = ws.compiledWorld.atomsToEvents.get(atomId) || [];
+    for (const e of events) {
+      ws.events.delete(e);
+      this.state.goal = false;
+      this.state.ganonMajora = false;
+    }
+
+    /* We need to unqueue other atoms as well */
+    const atomsToUnqueue = ws.compiledWorld.atomsToAtoms.get(atomId) || [];
+    for (const atomId of atomsToUnqueue) {
+      if (this.hasAtom(ws, atomId)) {
+        this.unqueueAtom(worldId, atomId);
+      }
+    }
+  }
+
+  private unqueueItem(worldId: number, item: Item) {
+    const ws = this.state.ws[worldId];
+    const compiled = ws.compiledWorld;
+    const atomsToCheck = compiled.itemsToAtoms.get(item) || [];
+    for (const atomId of atomsToCheck) {
+      if (!this.hasAtom(ws, atomId)) {
+        continue;
+      }
+
+      /* The atom is no longer valid */
+      this.unqueueAtom(worldId, atomId);
+    }
+  }
+
   private pathfindStep() {
     let changed = false;
     this.state.newLocations.clear();
@@ -237,6 +312,17 @@ export class Pathfinder {
     }
 
     return changed;
+  }
+
+  private evalAtom(ws: PathfinderWorldState, atomId: number) {
+    const atom = ws.compiledWorld.atoms[atomId];
+    switch (atom.type) {
+    case 'true': return true;
+    case 'false': return false;
+    case 'item': return(ws.items.get(atom.item) || 0) >= atom.count;
+    case 'or': return atom.children.some(x => this.hasAtom(ws, x));
+    case 'and': return atom.children.every(x => this.hasAtom(ws, x));
+    }
   }
 
   private pathfindWorld(worldId: number) {
@@ -356,22 +442,37 @@ export class Pathfinder {
   }
 
   private pathfind() {
-    /* Started */
-    /* Assumed items */
     if (this.opts.assumedItems) {
-      for (const [playerItem, amount] of this.opts.assumedItems.entries()) {
+      /* Assumed items */
+      const assumedNowKeys = this.opts.assumedItems ? Array.from(this.opts.assumedItems.keys()) : [];
+      const assumedPreviousKeys = Array.from(this.state.previousAssumedItems.keys());
+      const assumedKeys = [...new Set([...assumedNowKeys, ...assumedPreviousKeys])];
+
+      for (const playerItem of assumedKeys) {
+        const amountNow = this.opts.assumedItems.get(playerItem) || 0;
         const amountPrev = this.state.previousAssumedItems.get(playerItem) || 0;
 
-        if (amount > amountPrev) {
+        if (amountNow > amountPrev) {
           const ws = this.state.ws[playerItem.player];
-          const delta = amount - amountPrev;
+          const delta = amountNow - amountPrev;
 
           countMapAdd(ws.items, playerItem.item, delta);
           countMapAdd(ws.renewables, playerItem.item, delta);
           countMapAdd(ws.licenses, playerItem.item, delta);
-          this.state.previousAssumedItems.set(playerItem, amount);
+          this.state.previousAssumedItems.set(playerItem, amountNow);
 
           this.queueItem(playerItem.player, playerItem.item);
+        } else if (amountNow < amountPrev) {
+          /* Negative pathfind */
+          const ws = this.state.ws[playerItem.player];
+          const delta = amountPrev - amountNow;
+
+          countMapRemove(ws.items, playerItem.item, delta);
+          countMapRemove(ws.renewables, playerItem.item, delta);
+          countMapRemove(ws.licenses, playerItem.item, delta);
+          this.state.previousAssumedItems.set(playerItem, amountNow);
+
+          this.unqueueItem(playerItem.player, playerItem.item);
         }
       }
     }

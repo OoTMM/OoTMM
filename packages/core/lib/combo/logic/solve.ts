@@ -253,6 +253,7 @@ export class LogicPassSolver {
   private locations!: Location[];
   private state: SolverState;
   private pathfinderState: PathfinderState;
+  private pathfinderStateNeg: PathfinderState;
   private modeValidate = false;
   private attempts = 0;
   private attemptsMax = 100;
@@ -280,6 +281,7 @@ export class LogicPassSolver {
     }
     this.pathfinder = new Pathfinder(this.input.worlds, this.input.settings, this.state.startingItems);
     this.pathfinderState = this.pathfinder.run(null);
+    this.pathfinderStateNeg = this.pathfinder.run(null);
     this.makeItemPools();
   }
 
@@ -358,6 +360,7 @@ export class LogicPassSolver {
     /* Place required items */
     this.retry(() => {
       this.pathfinderState = this.pathfinder.run(null);
+      this.pathfinderStateNeg = this.pathfinder.run(null);
 
       for (;;) {
         /* Pathfind */
@@ -1071,7 +1074,7 @@ export class LogicPassSolver {
     if (this.input.settings.logic !== 'beatable') {
       /* Get all assumed reachable locations */
       //const prevNow = microtime.nowDouble();
-      const result = this.pathfinder.run(null, { recursive: true, items: this.state.items, assumedItems: pool });
+      const result = this.pathfinder.run(this.pathfinderStateNeg, { inPlace: true, recursive: true, items: this.state.items, assumedItems: pool });
       //console.log("NEG: " + (microtime.nowDouble() - prevNow));
 
       /* Get all assumed reachable locations that have not been placed */
