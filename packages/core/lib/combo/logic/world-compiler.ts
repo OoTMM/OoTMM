@@ -1,11 +1,10 @@
-import { NumberLiteralType } from 'typescript';
-import { Item, ItemsCount } from '../items';
-import { Expr, ExprAnd, ExprFalse, ExprHas, ExprOr, ExprSpecial, ExprTrue } from './expr';
+import { Item, ItemGroups, ItemsCount } from '../items';
+import { Expr, ExprAnd, ExprFalse, ExprHas, ExprMasks, ExprOr, ExprSpecial, ExprTrue } from './expr';
 import { Age } from './pathfind';
 import { World } from './world';
 
 type IRNodeSymbolic = { type: 'symbolic', name: string };
-type Primitive = ExprTrue | ExprFalse | ExprHas | ExprSpecial;
+type Primitive = ExprTrue | ExprFalse | ExprHas | ExprSpecial | ExprMasks;
 type IRPrimitive = Primitive | IRNodeSymbolic;
 
 type NodeOr<T> = { type: 'or', children: T[] };
@@ -104,6 +103,7 @@ class WorldCompiler {
     case 'false': return 'f';
     case 'item': return `I(${node.item.id},${node.count})`;
     case 'special': return `SP(${[...node.items, ...node.itemsUnique, node.count.toString()].join(',')})`;
+    case 'masks': return `M(${node.count})`;
     case 'or': return `OR(${node.children.map(c => this.nodeName(c)).join(',')})`;
     case 'and': return `AND(${node.children.map(c => this.nodeName(c)).join(',')})`;
     case 'symbolic': return node.name;
@@ -245,7 +245,7 @@ class WorldCompiler {
     case 'mmTime': return IR_TRUE;
     case 'price': return IR_TRUE;
     case 'license': return IR_TRUE;
-    case 'masks': return IR_TRUE;
+    case 'masks':
     case 'item':
     case 'special':
       return expr;
@@ -420,6 +420,20 @@ class WorldCompiler {
     return { atom, deps: [], depsItems: [item] };
   }
 
+  private resolveAtomMasks(count: number): AtomEmit {
+    const depsItems = [...ItemGroups.MASKS_REGULAR];
+    const atom = (state: State) => {
+      let acc = 0;
+      for (const mask of ItemGroups.MASKS_REGULAR) {
+        if (state.items.get(mask))
+          acc++;
+      }
+      return acc >= count;
+    };
+
+    return { atom, deps: [], depsItems };
+  }
+
   private resolveAtomSpecial(items: Item[], itemsUnique: Item[], count: number): AtomEmit {
     const depsItems = [...items, ...itemsUnique];
     const atom = (state: State) => {
@@ -471,6 +485,7 @@ class WorldCompiler {
     case 'false': return this.resolveAtomConstant(false);
     case 'item': return this.resolveAtomItem(node.item, node.count);
     case 'special': return this.resolveAtomSpecial(node.items, node.itemsUnique, node.count);
+    case 'masks': return this.resolveAtomMasks(node.count);
     case 'or': return this.resolveAtomOr(node.children.map(c => this.emitAtom(c, atomsToAtoms, itemsToAtoms)));
     case 'and': return this.resolveAtomAnd(node.children.map(c => this.emitAtom(c, atomsToAtoms, itemsToAtoms)));
     }
