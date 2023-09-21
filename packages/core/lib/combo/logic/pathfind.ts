@@ -1,11 +1,10 @@
-import { cloneDeep } from 'lodash';
 import { Settings } from '../settings';
 import { Location, locationData, makeLocation } from './locations';
 import { World } from './world';
 import { isLocationLicenseGranting, isLocationRenewable } from './locations';
 import { ItemPlacement } from './solve';
-import { CountMap, countMapAdd, countMapRemove } from '../util';
-import { Item, itemByID, Items, ItemsCount, PlayerItems } from '../items';
+import { countMapAdd, countMapRemove } from '../util';
+import { Item, Items, ItemsCount, PlayerItems } from '../items';
 import { CompiledWorld, compileWorld } from './world-compiler';
 
 export const AGES = ['child', 'adult'] as const;
@@ -111,7 +110,6 @@ type PathfinderOptions = {
   forbiddenLocations?: Set<Location>;
   includeForbiddenReachable?: boolean;
   gossips?: boolean;
-  inPlace?: boolean;
   singleWorld?: number;
   ganonMajora?: boolean;
 };
@@ -158,29 +156,68 @@ export class Pathfinder {
   }
 
   run(state: PathfinderState | null, opts?: PathfinderOptions) {
-    const data = this.runImpl(state, opts);
-    const dataCheck = this.runImpl(null, opts);
+    const DEBUG = false;
 
-    if (this.diff(dataCheck, data)) {
-      throw new Error("Pathfinder is not deterministic");
+    if (DEBUG && opts?.recursive) {
+      const data = this.runImpl(state, opts);
+      const dataCheck = this.runImpl(null, opts);
+      if (this.diff(dataCheck, data)) {
+        throw new Error("Pathfinder is not deterministic");
+      }
+      return data;
     }
 
-    return data;
+    return this.runImpl(state, opts);
   }
 
   runImpl(state: PathfinderState | null, opts?: PathfinderOptions) {
     this.opts = opts || {};
-    this.state = state ? (this.opts.inPlace ? state : cloneDeep(state)) : defaultState(this.startingItems, this.worlds);
+    this.state = state ?? defaultState(this.startingItems, this.worlds);
 
     /* Restricted locations */
     if (this.opts.restrictedLocations) {
+      const previouslyRestricted = new Set<Location>();
+
+      /* Init the restricted location set */
       for (let world = 0; world < this.worlds.length; ++world) {
-        this.state.ws[world].restrictedLocations = new Set();
+        const ws = this.state.ws[world];
+        if (!ws.restrictedLocations) {
+          ws.restrictedLocations = new Set();
+        } else {
+          for (const loc of ws.restrictedLocations) {
+            previouslyRestricted.add(makeLocation(loc, world));
+          }
+        }
       }
 
       for (const loc of this.opts.restrictedLocations) {
+        if (previouslyRestricted.has(loc)) {
+          previouslyRestricted.delete(loc);
+          continue;
+        }
+
         const locD = locationData(loc);
-        this.state.ws[locD.world as number].restrictedLocations!.add(locD.id);
+        const ws = this.state.ws[locD.world as number];
+        ws.restrictedLocations!.add(locD.id);
+
+        /* Are we allowing a location that was banned? */
+        if (ws.forbiddenReachableLocations.has(locD.id)) {
+          ws.forbiddenReachableLocations.delete(locD.id);
+          this.addLocation(locD.world as number, locD.id);
+        }
+      }
+
+      /* We forbid new locations - need to handle that */
+      for (const loc of previouslyRestricted) {
+        const locD = locationData(loc);
+        const ws = this.state.ws[locD.world as number];
+        if (ws.uncollectedLocations.has(locD.id)) {
+          ws.uncollectedLocations.delete(locD.id);
+          ws.forbiddenReachableLocations.add(locD.id);
+        } else if (this.state.locations.has(loc)) {
+          this.removeLocation(locD.world as number, locD.id);
+          ws.forbiddenReachableLocations.add(locD.id);
+        }
       }
     } else {
       for (let world = 0; world < this.worlds.length; ++world) {
@@ -216,11 +253,9 @@ export class Pathfinder {
 
         /* Are we forbidding a location that was reached? */
         if (ws.uncollectedLocations.has(locD.id)) {
-          console.log("Forbidden uncollected");
           ws.uncollectedLocations.delete(locD.id);
           ws.forbiddenReachableLocations.add(locD.id);
         } else if (this.state.locations.has(loc)) {
-          console.log("Forbidden collected");
           this.removeLocation(locD.world as number, locD.id);
           ws.forbiddenReachableLocations.add(locD.id);
         }

@@ -15,6 +15,7 @@ type ZigZagState = {
 
 export class LogicPassAnalysisFoolish {
   private pathfinder: Pathfinder;
+  private pathfinderState: PathfinderState | null;
   private conditionallyRequiredLocations: Set<string>;
 
   constructor(
@@ -29,6 +30,7 @@ export class LogicPassAnalysisFoolish {
     }
   ) {
     this.pathfinder = new Pathfinder(this.state.worlds, this.state.settings, this.state.startingItems);
+    this.pathfinderState = null;
     this.conditionallyRequiredLocations = new Set();
   }
 
@@ -49,7 +51,6 @@ export class LogicPassAnalysisFoolish {
     let allowed = new Set(zz.allowed);
     const forbidden = new Set(zz.forbidden);
     let lastBanished: Location | null = null;
-    let pathfinderState: PathfinderState | null = null;
 
     for (;;) {
       const locs = Array.from(locations);
@@ -60,8 +61,8 @@ export class LogicPassAnalysisFoolish {
       allowed.delete(loc);
       locations.delete(loc);
       forbidden.add(loc);
-      pathfinderState = this.pathfinder.run(pathfinderState, { inPlace: true, recursive: true, items: this.state.items, forbiddenLocations: forbidden });
-      if (!pathfinderState.goal) {
+      this.pathfinderState = this.pathfinder.run(this.pathfinderState, { recursive: true, items: this.state.items, forbiddenLocations: forbidden });
+      if (!this.pathfinderState.goal) {
         if (!this.conditionallyRequiredLocations.has(loc)) {
           this.markAsSometimesRequired(loc);
           lastBanished = loc;
@@ -85,7 +86,6 @@ export class LogicPassAnalysisFoolish {
     let forbidden = new Set(zz.forbidden);
     const allowed = new Set(zz.allowed);
     let lastAdded: Location | null = null;
-    let pathfinderState: PathfinderState | null = null;
 
     for (;;) {
       const locs = Array.from(locations);
@@ -96,8 +96,8 @@ export class LogicPassAnalysisFoolish {
       locations.delete(loc);
       forbidden.delete(loc);
       allowed.add(loc);
-      pathfinderState = this.pathfinder.run(pathfinderState, { inPlace: true, recursive: true, items: this.state.items, forbiddenLocations: forbidden });
-      if (pathfinderState.goal) {
+      this.pathfinderState = this.pathfinder.run(this.pathfinderState, { recursive: true, items: this.state.items, forbiddenLocations: forbidden });
+      if (this.pathfinderState.goal) {
         if (!this.conditionallyRequiredLocations.has(loc)) {
           this.markAsSometimesRequired(loc);
           lastAdded = loc;
@@ -121,6 +121,7 @@ export class LogicPassAnalysisFoolish {
     const forbidden = new Set<Location>();
     let zz: ZigZagState = { allowed, forbidden };
 
+    this.pathfinderState = null;
     const step = this.monteCarloZigZagDown(zz);
     if (!step) return false;
     zz = step;

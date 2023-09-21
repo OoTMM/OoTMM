@@ -455,7 +455,7 @@ export class LogicPassAnalysis {
 
     do {
       this.progress(count++, 10);
-      pathfinderState = this.pathfinder.run(pathfinderState, { inPlace: true, items: this.state.items, stopAtGoal: true, restrictedLocations });
+      pathfinderState = this.pathfinder.run(pathfinderState, { items: this.state.items, stopAtGoal: true, restrictedLocations });
       const sphere = Array.from(pathfinderState.newLocations).filter(x => ItemHelpers.isItemImportant(this.state.items.get(x)!.item));
       if (sphere.length !== 0) {
         spheres.push(shuffle(this.state.random, sphere));
@@ -476,7 +476,7 @@ export class LogicPassAnalysis {
     for (const loc of locs) {
       this.state.monitor.setProgress(count++, locs.length);
       spheresLocs.delete(loc);
-      const pathfinderState = this.pathfinder.run(null, { items: this.state.items, restrictedLocations: spheresLocs, recursive: true, stopAtGoal: true });
+      const pathfinderState = this.pathfinder.run(null, { items: this.state.items, restrictedLocations: spheresLocs, recursive: true });
       if (!pathfinderState.goal) {
         spheresLocs.add(loc);
       }

@@ -364,7 +364,7 @@ export class LogicPassSolver {
 
       for (;;) {
         /* Pathfind */
-        this.pathfinderState = this.pathfinder.run(this.pathfinderState, { ganonMajora: this.input.settings.goal === 'triforce3', inPlace: true, recursive: true, items: this.state.items });
+        this.pathfinderState = this.pathfinder.run(this.pathfinderState, { ganonMajora: this.input.settings.goal === 'triforce3', recursive: true, items: this.state.items });
 
         /* Stop cond */
         if (this.input.settings.logic === 'beatable') {
@@ -547,42 +547,13 @@ export class LogicPassSolver {
     }
   }
 
-  private getWeightedLocationList(worldId: number) {
-    const worldLocs = this.locations.filter(x => locationData(x).world === worldId);
-    const locs = new Map<Location, number>();
-    const worldItems = countMapArray(this.state.pools.required).filter(x => x.player === worldId);
-    const items = shuffle(this.input.random, worldItems);
-    const assumed = countMapCombine(this.state.pools.required, this.state.pools.nice);
-    for (const item of items) {
-      const assumedWithoutItem = new Map(assumed);
-      countMapRemove(assumedWithoutItem, item, 1);
-      const state = this.pathfinder.run(null, { recursive: true, assumedItems: assumedWithoutItem, items: this.state.items });
-      for (const loc of worldLocs) {
-        if (!state.locations.has(loc) && !this.state.items.has(loc)) {
-          countMapAdd(locs, loc, 1);
-        }
-      }
-    }
-
-    const cutoff = Math.floor(Array.from(locs.values()).reduce((acc, x) => acc + x, 0) / locs.size);
-
-    /* Boost checks above the cutoff */
-    for (const [loc, count] of locs.entries()) {
-      if (count >= cutoff) {
-        locs.set(loc, count * 2);
-      }
-    }
-
-    return locs;
-  }
-
   private getSpheres() {
     let spheres = new Map<Location, number>;
     let sphereId = 1;
     let pathfinderState: PathfinderState | null = null;
 
     for (;;) {
-      pathfinderState = this.pathfinder.run(pathfinderState, { inPlace: true, items: this.state.items });
+      pathfinderState = this.pathfinder.run(pathfinderState, { items: this.state.items });
       if (!pathfinderState.changed) {
         break;
       }
@@ -875,6 +846,7 @@ export class LogicPassSolver {
     /* We need to reset the pathfinder as we changed the starting items */
     this.pathfinder = new Pathfinder(this.input.worlds, this.input.settings, this.state.startingItems);
     this.pathfinderState = this.pathfinder.run(null);
+    this.pathfinderStateNeg = this.pathfinder.run(null);
   }
 
   private placeSemiShuffled() {
@@ -1074,7 +1046,7 @@ export class LogicPassSolver {
     if (this.input.settings.logic !== 'beatable') {
       /* Get all assumed reachable locations */
       //const prevNow = microtime.nowDouble();
-      const result = this.pathfinder.run(this.pathfinderStateNeg, { inPlace: true, recursive: true, items: this.state.items, assumedItems: pool });
+      const result = this.pathfinder.run(this.pathfinderStateNeg, { recursive: true, items: this.state.items, assumedItems: pool });
       //console.log("NEG: " + (microtime.nowDouble() - prevNow));
 
       /* Get all assumed reachable locations that have not been placed */
