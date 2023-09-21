@@ -203,12 +203,12 @@ export type ExprFalse = { type: 'false' };
 export type ExprAnd = { type: 'and', exprs: Expr[] };
 export type ExprOr = { type: 'or', exprs: Expr[] };
 export type ExprAge = { type: 'age', age: Age };
-export type ExprHas = { type: 'has', item: Item, count: number };
+export type ExprHas = { type: 'item', item: Item, count: number };
 export type ExprRenewable = { type: 'renewable', item: Item };
 export type ExprLicense = { type: 'license', item: Item };
 export type ExprEvent = { type: 'event', event: string };
 export type ExprMasks = { type: 'masks', count: number };
-export type ExprSpecial = { type: 'special', special: string, settings: Settings };
+export type ExprSpecial = { type: 'special', items: Item[], itemsUnique: Item[], count: number };
 export type ExprOotTime = { type: 'ootTime', time: 'day' | 'night' };
 export type ExprMmTime = { type: 'mmTime', operator: 'before' | 'after' | 'at' | 'between', slices: number[] };
 export type ExprPrice = { type: 'price', range: string, id: number, max: number };
@@ -281,7 +281,7 @@ export const exprHas = (item: Item, count: number): Expr => {
     return exprTrue();
   }
 
-  return { type: 'has', item, count };
+  return { type: 'item', item, count };
 };
 
 export const exprRenewable = (item: Item): Expr => {
@@ -300,7 +300,44 @@ export const exprMasks = (count: number): Expr => {
   return { type: 'masks', count };
 };
 
-export const exprSpecial = (settings: Settings, special: string): Expr => ({ type: 'special', special, settings });
+export const exprSpecial = (settings: Settings, special: string): Expr => {
+  const { specialConds } = settings;
+  if (!specialConds.hasOwnProperty(special)) {
+    throw new Error(`Unknown special condition: ${special}`);
+  }
+
+  let items: Item[] = [];
+  let itemsUnique: Item[] = [];
+  const cond = specialConds[special as keyof typeof specialConds];
+  if (cond.count <= 0) {
+    return exprTrue();
+  }
+
+  if (cond.stones) itemsUnique = [...itemsUnique, ...ItemGroups.STONES];
+  if (cond.medallions) itemsUnique = [...itemsUnique, ...ItemGroups.MEDALLIONS];
+  if (cond.remains) itemsUnique = [...itemsUnique, ...ItemGroups.REMAINS];
+  if (cond.skullsGold) items.push(Items.OOT_GS_TOKEN);
+  if (cond.skullsSwamp) items.push(Items.MM_GS_TOKEN_SWAMP);
+  if (cond.skullsOcean) items.push(Items.MM_GS_TOKEN_OCEAN);
+  if (cond.fairiesWF) items.push(Items.MM_STRAY_FAIRY_WF);
+  if (cond.fairiesSH) items.push(Items.MM_STRAY_FAIRY_SH);
+  if (cond.fairiesGB) items.push(Items.MM_STRAY_FAIRY_GB);
+  if (cond.fairiesST) items.push(Items.MM_STRAY_FAIRY_ST);
+  if (cond.fairyTown) items.push(Items.MM_STRAY_FAIRY_TOWN);
+  if (cond.masksRegular) itemsUnique = [...itemsUnique, ...ItemGroups.MASKS_REGULAR];
+  if (cond.masksTransform) itemsUnique = [...itemsUnique, ...ItemGroups.MASKS_TRANSFORM];
+  if (cond.masksOot) itemsUnique = [...itemsUnique, ...ItemGroups.MASKS_OOT];
+  if (cond.triforce) items.push(Items.SHARED_TRIFORCE);
+  if (cond.coinsRed) items.push(Items.OOT_COIN_RED);
+  if (cond.coinsGreen) items.push(Items.OOT_COIN_GREEN);
+  if (cond.coinsBlue) items.push(Items.OOT_COIN_BLUE);
+  if (cond.coinsYellow) items.push(Items.OOT_COIN_YELLOW);
+
+  items = [...new Set(items)];
+  itemsUnique = [...new Set(itemsUnique)];
+
+  return { type: 'special', items, itemsUnique, count: cond.count };
+};
 
 export const exprSetting = (settings: Settings, setting: string, value: any): Expr => {
   const v = (settings as any)[setting];
@@ -355,82 +392,8 @@ export const exprPrice = (range: string, id: number, max: number): Expr => {
 const exprImplTrue = (_state: State) => ({ result: true, depItems: [], depEvents: [] });
 const exprImplFalse = (_state: State) => ({ result: false, depItems: [], depEvents: [] });
 
-export function exprFunc(e: Expr): ExprFunc {
-  switch (e.type) {
-  case 'true': return exprFuncTrue();
-  case 'false': return exprFuncFalse();
-  case 'and': return exprFuncAnd(e);
-  case 'or': return exprFuncOr(e);
-  case 'age': return exprFuncAge(e);
-  case 'has': return exprFuncHas(e);
-  case 'renewable': return exprFuncRenewable(e);
-  case 'license': return exprFuncLicense(e);
-  case 'event': return exprFuncEvent(e);
-  case 'masks': return exprFuncMasks(e);
-  case 'special': return exprFuncSpecial(e);
-  case 'ootTime': return exprFuncOotTime(e);
-  case 'mmTime': return exprFuncMmTime(e);
-  case 'price': return exprFuncPrice(e);
-  }
-}
-
 export function exprFuncTrue(): ExprFunc { return exprImplTrue; }
 export function exprFuncFalse(): ExprFunc { return exprImplFalse; }
-
-export function exprFuncAnd(expr: ExprAnd): ExprFunc {
-  const funcs = expr.exprs.map(exprFunc);
-
-  return state => {
-    const results: ExprResult[] = [];
-    for (const e of funcs) {
-      const r = e(state);
-      results.push(r);
-
-      /* Early exit */
-      if (!r.result) {
-        return { result: false, depItems: results.map(x => x.depItems), depEvents: results.map(x => x.depEvents) };
-      }
-    }
-
-    const restrictions = exprRestrictionsAnd(results);
-    if (isDefaultRestrictions(restrictions)) {
-      return { result: true, depItems: [], depEvents: [] };
-    } else {
-      return { result: true, depItems: results.map(x => x.depItems), depEvents: results.map(x => x.depEvents), restrictions };
-    }
-  }
-}
-
-export function exprFuncOr(expr: ExprOr): ExprFunc {
-  const funcs = expr.exprs.map(exprFunc);
-
-  return state => {
-    const results: ExprResult[] = [];
-    let result = false;
-
-    for (const e of funcs) {
-      const r = e(state);
-      results.push(r);
-      if (r.result) {
-        result = true;
-        if (!r.restrictions) {
-          return { result: true, depItems: [], depEvents: [] };
-        }
-      }
-    }
-
-    if (result) {
-      const restrictions = exprRestrictionsOr(results);
-      if (isDefaultRestrictions(restrictions)) {
-        return { result: true, depItems: [], depEvents: [] };
-      } else {
-        return { result: true, depItems: results.map(x => x.depItems), depEvents: results.map(x => x.depEvents), restrictions };
-      }
-    } else {
-      return { result: false, depItems: results.map(x => x.depItems), depEvents: results.map(x => x.depEvents) };
-    }
-  }
-}
 
 export function exprFuncAge(expr: ExprAge): ExprFunc {
   const age = expr.age;
@@ -484,11 +447,6 @@ export function exprFuncMasks(expr: ExprMasks): ExprFunc {
     const result = state.ignoreItems || (itemsCount(state, [...ItemGroups.MASKS_REGULAR]) >= count);
     return { result, depItems: [...ItemGroups.MASKS_REGULAR], depEvents: [] };
   }
-}
-
-export function exprFuncSpecial(expr: ExprSpecial): ExprFunc {
-  const { settings, special } = expr;
-  return state => resolveSpecialCond(settings, state, special);
 }
 
 export function exprFuncOotTime(expr: ExprOotTime): ExprFunc {

@@ -1,15 +1,11 @@
 import { NumberLiteralType } from 'typescript';
 import { Item, ItemsCount } from '../items';
-import { Expr, ExprAnd, ExprHas, ExprOr } from './expr';
+import { Expr, ExprAnd, ExprFalse, ExprHas, ExprOr, ExprSpecial, ExprTrue } from './expr';
 import { Age } from './pathfind';
 import { World } from './world';
 
-type NodeTrue = { type: 'true' };
-type NodeFalse = { type: 'false' };
-type NodeItem = { type: 'item', item: Item, count: number };
 type IRNodeSymbolic = { type: 'symbolic', name: string };
-
-type Primitive = NodeTrue | NodeFalse | NodeItem;
+type Primitive = ExprTrue | ExprFalse | ExprHas | ExprSpecial;
 type IRPrimitive = Primitive | IRNodeSymbolic;
 
 type NodeOr<T> = { type: 'or', children: T[] };
@@ -24,8 +20,8 @@ type State = {
 type Atom = (state: State) => boolean;
 type AtomEmit = { atom: Atom, deps: number[], depsItems: Item[] };
 
-const IR_FALSE: NodeFalse = { type: 'false' };
-const IR_TRUE: NodeTrue = { type: 'true' };
+const IR_FALSE: ExprFalse = { type: 'false' };
+const IR_TRUE: ExprTrue = { type: 'true' };
 
 type IRPartialEvaluationContext = {
   age?: Age;
@@ -107,6 +103,7 @@ class WorldCompiler {
     case 'true': return 't';
     case 'false': return 'f';
     case 'item': return `I(${node.item.id},${node.count})`;
+    case 'special': return `SP(${[...node.items, ...node.itemsUnique, node.count.toString()].join(',')})`;
     case 'or': return `OR(${node.children.map(c => this.nodeName(c)).join(',')})`;
     case 'and': return `AND(${node.children.map(c => this.nodeName(c)).join(',')})`;
     case 'symbolic': return node.name;
@@ -219,11 +216,6 @@ class WorldCompiler {
     return this.symbolify(this.andRaw(nodes));
   }
 
-  private exprHasToIR(expr: ExprHas): IRPrimitive {
-    const { item, count } = expr;
-    return { type: 'item', item, count };
-  }
-
   private exprOrToIR(expr: ExprOr, ctx: IRPartialEvaluationContext): IRPrimitive {
     const children: IRPrimitive[] = [];
     for (const e of expr.exprs) {
@@ -246,7 +238,6 @@ class WorldCompiler {
     case 'true': return IR_TRUE;
     case 'or': return this.exprOrToIR(expr, ctx);
     case 'and': return this.exprAndToIR(expr, ctx);
-    case 'has': return this.exprHasToIR(expr);
     case 'age': return expr.age === ctx.age ? IR_TRUE : IR_FALSE;
     case 'event': return this.symbol(`E(${expr.event})`);
     case 'renewable': return IR_TRUE;
@@ -255,7 +246,9 @@ class WorldCompiler {
     case 'price': return IR_TRUE;
     case 'license': return IR_TRUE;
     case 'masks': return IR_TRUE;
-    case 'special': return IR_TRUE;
+    case 'item':
+    case 'special':
+      return expr;
     }
   }
 
@@ -427,6 +420,23 @@ class WorldCompiler {
     return { atom, deps: [], depsItems: [item] };
   }
 
+  private resolveAtomSpecial(items: Item[], itemsUnique: Item[], count: number): AtomEmit {
+    const depsItems = [...items, ...itemsUnique];
+    const atom = (state: State) => {
+      let acc = 0;
+      for (const item of items) {
+        count += state.items.get(item) || 0;
+      }
+      for (const item of itemsUnique) {
+        if (state.items.get(item))
+          acc++;
+      }
+      return acc >= count;
+    };
+
+    return { atom, deps: [], depsItems };
+  }
+
   private resolveAtomOr(children: number[]): AtomEmit {
     const atom: Atom = (state) => {
       for (const c of children) {
@@ -460,6 +470,7 @@ class WorldCompiler {
     case 'true': return this.resolveAtomConstant(true);
     case 'false': return this.resolveAtomConstant(false);
     case 'item': return this.resolveAtomItem(node.item, node.count);
+    case 'special': return this.resolveAtomSpecial(node.items, node.itemsUnique, node.count);
     case 'or': return this.resolveAtomOr(node.children.map(c => this.emitAtom(c, atomsToAtoms, itemsToAtoms)));
     case 'and': return this.resolveAtomAnd(node.children.map(c => this.emitAtom(c, atomsToAtoms, itemsToAtoms)));
     }
