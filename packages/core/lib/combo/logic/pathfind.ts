@@ -434,17 +434,6 @@ export class Pathfinder {
     return changed;
   }
 
-  private evalAtom(ws: PathfinderWorldState, atomId: number) {
-    const atom = ws.compiledWorld.atoms[atomId];
-    switch (atom.type) {
-    case 'true': return true;
-    case 'false': return false;
-    case 'item': return(ws.items.get(atom.item) || 0) >= atom.count;
-    case 'or': return atom.children.some(x => this.hasAtom(ws, x));
-    case 'and': return atom.children.every(x => this.hasAtom(ws, x));
-    }
-  }
-
   private pathfindWorld(worldId: number) {
     let changed = false;
     const ws = this.state.ws[worldId];
@@ -470,17 +459,8 @@ export class Pathfinder {
 
       /* Evaluate the atom */
       const atom = atoms[atomId];
-      let result: boolean;
-      switch (atom.type) {
-      case 'true': result = true; break;
-      case 'false': result = false; break;
-      case 'item': result = (ws.items.get(atom.item) || 0) >= atom.count; break;
-      case 'or': result = atom.children.some(x => this.hasAtom(ws, x)); break;
-      case 'and': result = atom.children.every(x => this.hasAtom(ws, x)); break;
-      }
-
-      /* If the atom is false, let's just stop there */
-      if (!result) {
+      const state = { atoms: atomsState, items: ws.items };
+      if (!atom(state)) {
         atomsInQueue.delete(atomId);
         continue;
       }

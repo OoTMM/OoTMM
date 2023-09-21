@@ -1,4 +1,5 @@
-import { Item } from '../items';
+import { NumberLiteralType } from 'typescript';
+import { Item, ItemsCount } from '../items';
 import { Expr, ExprAnd, ExprHas, ExprOr } from './expr';
 import { Age } from './pathfind';
 import { World } from './world';
@@ -14,7 +15,14 @@ type IRPrimitive = Primitive | IRNodeSymbolic;
 type NodeOr<T> = { type: 'or', children: T[] };
 type NodeAnd<T> = { type: 'and', children: T[] };
 type IRNode = IRPrimitive | NodeOr<IRPrimitive> | NodeAnd<IRPrimitive>;
-type Atom = Primitive | NodeOr<number> | NodeAnd<number>;
+
+type State = {
+  atoms: Uint8Array;
+  items: ItemsCount;
+};
+
+type Atom = (state: State) => boolean;
+type AtomEmit = { atom: Atom, deps: number[], depsItems: Item[] };
 
 const IR_FALSE: NodeFalse = { type: 'false' };
 const IR_TRUE: NodeTrue = { type: 'true' };
@@ -410,15 +418,54 @@ class WorldCompiler {
     }
   }
 
-  private resolveAtom(node: Exclude<IRNode, IRNodeSymbolic>): Atom {
+  private resolveAtomConstant(c: boolean): AtomEmit {
+    return { atom: () => c, deps: [], depsItems: [] };
+  }
+
+  private resolveAtomItem(item: Item, count: number): AtomEmit {
+    const atom = (state: State) => (state.items.get(item) || 0) >= count;
+    return { atom, deps: [], depsItems: [item] };
+  }
+
+  private resolveAtomOr(children: number[]): AtomEmit {
+    const atom: Atom = (state) => {
+      for (const c of children) {
+        const bytePos = c >> 3;
+        const bitPos = c & 7;
+        if (state.atoms[bytePos] & (1 << bitPos))
+          return true;
+      }
+      return false;
+    };
+
+    return { atom, deps: children, depsItems: [] };
+  }
+
+  private resolveAtomAnd(children: number[]): AtomEmit {
+    const atom: Atom = (state) => {
+      for (const c of children) {
+        const bytePos = c >> 3;
+        const bitPos = c & 7;
+        if (!(state.atoms[bytePos] & (1 << bitPos)))
+          return false;
+      }
+      return true;
+    };
+
+    return { atom, deps: children, depsItems: [] };
+  }
+
+  private resolveAtom(node: Exclude<IRNode, IRNodeSymbolic>, atomsToAtoms: Map<number, number[]>, itemsToAtoms: Map<Item, number[]>): AtomEmit {
     switch (node.type) {
-    case 'or': return { type: 'or', children: node.children.map(c => this.emitAtom(c)) };
-    case 'and': return { type: 'and', children: node.children.map(c => this.emitAtom(c)) };
-    default: return node;
+    case 'true': return this.resolveAtomConstant(true);
+    case 'false': return this.resolveAtomConstant(false);
+    case 'item': return this.resolveAtomItem(node.item, node.count);
+    case 'or': return this.resolveAtomOr(node.children.map(c => this.emitAtom(c, atomsToAtoms, itemsToAtoms)));
+    case 'and': return this.resolveAtomAnd(node.children.map(c => this.emitAtom(c, atomsToAtoms, itemsToAtoms)));
     }
   }
 
-  private emitAtom(node: IRNode): number {
+  private emitAtom(node: IRNode, atomsToAtoms: Map<number, number[]>, itemsToAtoms: Map<Item, number[]>): number {
     /* Resolve */
     while (node.type === 'symbolic') {
       const n = this.symbols.get(node.name)!;
@@ -431,35 +478,44 @@ class WorldCompiler {
       return id;
     id = this.atomsCount++;
     this.atomNames.set(str, id);
-    const atom = this.resolveAtom(node);
-    this.atoms[id] = atom;
+    const res = this.resolveAtom(node, atomsToAtoms, itemsToAtoms);
+    this.atoms[id] = res.atom;
+    for (const c of res.deps) {
+      const a: number[] = atomsToAtoms.get(c) || [];
+      a.push(id);
+      atomsToAtoms.set(c, a);
+    }
+    for (const i of res.depsItems) {
+      const a: number[] = itemsToAtoms.get(i) || [];
+      a.push(id);
+      itemsToAtoms.set(i, a);
+    }
     return id;
   }
 
   private compile(): CompiledWorld {
     const locations = new Map<string, number>();
     const events = new Map<string, number>();
+    const atomsToLocations = new Map<number, string[]>();
+    const atomsToEvents = new Map<number, string[]>();
+    const atomsToAtoms = new Map<number, number[]>();
+    const itemsToAtoms = new Map<Item, number[]>();
 
-    this.emitAtom(IR_FALSE);
-    this.emitAtom(IR_TRUE);
+    this.emitAtom(IR_FALSE, atomsToAtoms, itemsToAtoms);
+    this.emitAtom(IR_TRUE, atomsToAtoms, itemsToAtoms);
 
     for (const [loc, node] of this.locations.entries()) {
-      locations.set(loc, this.emitAtom(node));
+      locations.set(loc, this.emitAtom(node, atomsToAtoms, itemsToAtoms));
     }
 
     for (const [loc, node] of this.events.entries()) {
-      events.set(loc, this.emitAtom(node));
+      events.set(loc, this.emitAtom(node, atomsToAtoms, itemsToAtoms));
     }
 
     const atoms = this.atoms;
     this.atoms = [];
 
     /* Build the dependencies */
-    const atomsToLocations = new Map<number, string[]>();
-    const atomsToEvents = new Map<number, string[]>();
-    const atomsToAtoms = new Map<number, number[]>();
-    const itemsToAtoms = new Map<Item, number[]>();
-
     for (const [loc, atomId] of locations.entries()) {
       const a = atomsToLocations.get(atomId) || [];
       a.push(loc);
@@ -470,23 +526,6 @@ class WorldCompiler {
       const a = atomsToEvents.get(atomId) || [];
       a.push(ev);
       atomsToEvents.set(atomId, a);
-    }
-
-    for (let atomId = 0; atomId < atoms.length; atomId++) {
-      const atom = atoms[atomId];
-      if (atom.type === 'item') {
-        const a = itemsToAtoms.get(atom.item) || [];
-        a.push(atomId);
-        itemsToAtoms.set(atom.item, a);
-      }
-
-      if (atom.type === 'and' || atom.type === 'or') {
-        for (const childId of atom.children) {
-          const a = atomsToAtoms.get(childId) || [];
-          a.push(atomId);
-          atomsToAtoms.set(childId, a);
-        }
-      }
     }
 
     return { atoms, locations, events, atomsToLocations, atomsToEvents, atomsToAtoms, itemsToAtoms };
