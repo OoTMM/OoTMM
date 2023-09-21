@@ -79,6 +79,28 @@ export class LogicPassAnalysisFoolish {
     return { allowed, forbidden };
   }
 
+  private diff(a: Set<Location>, b: Set<Location>) {
+    let changed = false;
+
+    for (const loc of a) {
+      if (!b.has(loc)) {
+        changed = true;
+        console.log('- ' + loc);
+      }
+    }
+
+    for (const loc of b) {
+      if (!a.has(loc)) {
+        changed = true;
+        console.log('+ ' + loc);
+      }
+    }
+
+    if (changed) {
+      process.exit(1);
+    }
+  }
+
   private monteCarloZigZagUp(zz: ZigZagState) {
     const locations = new Set(zz.forbidden);
     let forbidden = new Set(zz.forbidden);
@@ -95,7 +117,14 @@ export class LogicPassAnalysisFoolish {
       locations.delete(loc);
       forbidden.delete(loc);
       allowed.add(loc);
-      pathfinderState = this.pathfinder.run(pathfinderState, { inPlace: true, recursive: true, items: this.state.items, forbiddenLocations: forbidden, stopAtGoal: true, includeForbiddenReachable: true });
+
+      console.log(loc);
+      if (pathfinderState) {
+        console.log(pathfinderState.locations.has(loc));
+      }
+      pathfinderState = this.pathfinder.run(pathfinderState, { inPlace: true, recursive: true, items: this.state.items, forbiddenLocations: forbidden });
+      const pathfinderStateCheck = this.pathfinder.run(null, { recursive: true, items: this.state.items, forbiddenLocations: forbidden });
+      this.diff(pathfinderStateCheck.locations, pathfinderState.locations);
       if (pathfinderState.goal) {
         if (!this.conditionallyRequiredLocations.has(loc)) {
           this.markAsSometimesRequired(loc);
@@ -103,6 +132,7 @@ export class LogicPassAnalysisFoolish {
         }
         allowed.delete(loc);
         forbidden.add(loc);
+        console.log('ZZ UP');
         pathfinderState = null;
       }
     }

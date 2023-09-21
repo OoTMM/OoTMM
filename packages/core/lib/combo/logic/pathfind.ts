@@ -21,7 +21,6 @@ type PathfinderWorldState = {
   items: ItemsCount;
   licenses: ItemsCount;
   renewables: ItemsCount;
-  forbiddenReachableLocations: Set<string>;
   restrictedLocations?: Set<string>;
   forbiddenLocations?: Set<string>;
   locations: Set<string>;
@@ -59,7 +58,6 @@ function makeWorldState(startingItems: ItemsCount, world: World): PathfinderWorl
     items: new Map(startingItems),
     licenses: new Map(startingItems),
     renewables: new Map(),
-    forbiddenReachableLocations: new Set(),
     events: new Set(),
     locations: new Set(),
   };
@@ -149,13 +147,59 @@ export class Pathfinder {
 
     /* Forbidden locations */
     if (this.opts.forbiddenLocations) {
+      const previouslyForbidden = new Set<Location>();
+
+      /* Init the forbidden location set */
       for (let world = 0; world < this.worlds.length; ++world) {
-        this.state.ws[world].forbiddenLocations = new Set();
+        const ws = this.state.ws[world];
+        if (!ws.forbiddenLocations) {
+          ws.forbiddenLocations = new Set();
+        } else {
+          for (const loc of ws.forbiddenLocations) {
+            previouslyForbidden.add(makeLocation(loc, world));
+          }
+        }
       }
 
       for (const loc of this.opts.forbiddenLocations) {
+        if (previouslyForbidden.has(loc)) {
+          previouslyForbidden.delete(loc);
+          continue;
+        }
+
         const locD = locationData(loc);
-        this.state.ws[locD.world as number].forbiddenLocations!.add(locD.id);
+        const ws = this.state.ws[locD.world as number];
+        ws.forbiddenLocations!.add(locD.id);
+
+        /* Are we forbidding a location that was reached? */
+        if (ws.uncollectedLocations.has(locD.id)) {
+          console.log("REMOVE FORBIDDEN UNC");
+          ws.uncollectedLocations.delete(locD.id);
+        } else if (this.state.locations.has(loc)) {
+          console.log("REMOVE FORBIDDEN");
+          this.removeLocation(locD.world as number, locD.id);
+        }
+      }
+
+      /* We unforbid locations - need to queue that */
+      for (const loc of previouslyForbidden) {
+        console.log("PREV FORBIDDEN");
+        console.log(loc);
+        const locD = locationData(loc);
+        const ws = this.state.ws[locD.world as number];
+        ws.forbiddenLocations!.delete(locD.id);
+        const compiledWorld = ws.compiledWorld;
+        const atomId = compiledWorld.locations.get(locD.id);
+        if (atomId === undefined) {
+          continue;
+        }
+        console.log("ATOMID");
+        console.log(atomId);
+        if (!ws.atomsInQueue.has(atomId)) {
+          ws.atomsQueue.push(atomId);
+          ws.atomsInQueue.add(atomId);
+          console.log("YES WE UNFORBID");
+        }
       }
     } else {
       for (let world = 0; world < this.worlds.length; ++world) {
@@ -383,7 +427,13 @@ export class Pathfinder {
       /* Push new locations */
       const newLocs = compiled.atomsToLocations.get(atomId) || [];
       for (const loc of newLocs) {
-        this.addLocationDelayed(worldId, loc);
+        let isAllowed = true;
+        if (ws.restrictedLocations && !ws.restrictedLocations.has(loc))
+          isAllowed = false;
+        else if (ws.forbiddenLocations && ws.forbiddenLocations.has(loc))
+          isAllowed = false;
+        if (isAllowed)
+          this.addLocationDelayed(worldId, loc);
       }
 
       /* Push new events */
@@ -499,20 +549,6 @@ export class Pathfinder {
       /* Collect previous locations */
       for (const loc of ws.uncollectedLocations) {
         this.addLocation(worldId, loc);
-      }
-
-      /* Collect previously forbidden locations */
-      for (const loc of ws.forbiddenReachableLocations) {
-        let isAllowed = true;
-        if (ws.restrictedLocations && !ws.restrictedLocations.has(loc)) {
-          isAllowed = false;
-        } else if (ws.forbiddenLocations && ws.forbiddenLocations.has(loc)) {
-          isAllowed = false;
-        }
-        if (isAllowed) {
-          this.addLocation(worldId, loc);
-          ws.forbiddenReachableLocations.delete(loc);
-        }
       }
     }
 
