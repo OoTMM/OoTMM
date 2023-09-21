@@ -49,6 +49,7 @@ export class LogicPassAnalysisFoolish {
     let allowed = new Set(zz.allowed);
     const forbidden = new Set(zz.forbidden);
     let lastBanished: Location | null = null;
+    let pathfinderState: PathfinderState | null = null;
 
     for (;;) {
       const locs = Array.from(locations);
@@ -59,7 +60,10 @@ export class LogicPassAnalysisFoolish {
       allowed.delete(loc);
       locations.delete(loc);
       forbidden.add(loc);
-      const pathfinderState = this.pathfinder.run(null, { recursive: true, items: this.state.items, forbiddenLocations: forbidden, stopAtGoal: true });
+      console.log(`Adding forbidden loc ${loc}`);
+      pathfinderState = this.pathfinder.run(pathfinderState, { inPlace: true, recursive: true, items: this.state.items, forbiddenLocations: forbidden });
+      const pathfinderStateCheck = this.pathfinder.run(null, { inPlace: true, recursive: true, items: this.state.items, forbiddenLocations: forbidden });
+      this.diff(pathfinderStateCheck.locations, pathfinderState.locations);
       if (!pathfinderState.goal) {
         if (!this.conditionallyRequiredLocations.has(loc)) {
           this.markAsSometimesRequired(loc);
@@ -117,14 +121,7 @@ export class LogicPassAnalysisFoolish {
       locations.delete(loc);
       forbidden.delete(loc);
       allowed.add(loc);
-
-      console.log(loc);
-      if (pathfinderState) {
-        console.log(pathfinderState.locations.has(loc));
-      }
       pathfinderState = this.pathfinder.run(pathfinderState, { inPlace: true, recursive: true, items: this.state.items, forbiddenLocations: forbidden });
-      const pathfinderStateCheck = this.pathfinder.run(null, { recursive: true, items: this.state.items, forbiddenLocations: forbidden });
-      this.diff(pathfinderStateCheck.locations, pathfinderState.locations);
       if (pathfinderState.goal) {
         if (!this.conditionallyRequiredLocations.has(loc)) {
           this.markAsSometimesRequired(loc);
@@ -132,8 +129,6 @@ export class LogicPassAnalysisFoolish {
         }
         allowed.delete(loc);
         forbidden.add(loc);
-        console.log('ZZ UP');
-        pathfinderState = null;
       }
     }
 

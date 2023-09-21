@@ -18,6 +18,7 @@ type PathfinderWorldState = {
   atomsInQueue: Set<number>;
   atoms: Uint8Array;
   uncollectedLocations: Set<string>;
+  forbiddenReachableLocations: Set<string>;
   items: ItemsCount;
   licenses: ItemsCount;
   renewables: ItemsCount;
@@ -55,6 +56,7 @@ function makeWorldState(startingItems: ItemsCount, world: World): PathfinderWorl
     atomsQueue: [1],
     atomsInQueue: new Set([1]),
     uncollectedLocations: new Set(),
+    forbiddenReachableLocations: new Set(),
     items: new Map(startingItems),
     licenses: new Map(startingItems),
     renewables: new Map(),
@@ -125,6 +127,16 @@ export class Pathfinder {
   ) {
   }
 
+  private isLocationForbidden(worldId: number, loc: string) {
+    const ws = this.state.ws[worldId];
+    if (ws.forbiddenLocations && ws.forbiddenLocations.has(loc)) {
+      return true;
+    } else if (ws.restrictedLocations && !ws.restrictedLocations.has(loc)) {
+      return true;
+    }
+    return false;
+  }
+
   run(state: PathfinderState | null, opts?: PathfinderOptions) {
     this.opts = opts || {};
     this.state = state ? (this.opts.inPlace ? state : cloneDeep(state)) : defaultState(this.startingItems, this.worlds);
@@ -173,32 +185,24 @@ export class Pathfinder {
 
         /* Are we forbidding a location that was reached? */
         if (ws.uncollectedLocations.has(locD.id)) {
-          console.log("REMOVE FORBIDDEN UNC");
+          console.log("Forbidden uncollected");
           ws.uncollectedLocations.delete(locD.id);
+          ws.forbiddenReachableLocations.add(locD.id);
         } else if (this.state.locations.has(loc)) {
-          console.log("REMOVE FORBIDDEN");
+          console.log("Forbidden collected");
           this.removeLocation(locD.world as number, locD.id);
+          ws.forbiddenReachableLocations.add(locD.id);
         }
       }
 
       /* We unforbid locations - need to queue that */
       for (const loc of previouslyForbidden) {
-        console.log("PREV FORBIDDEN");
-        console.log(loc);
         const locD = locationData(loc);
         const ws = this.state.ws[locD.world as number];
         ws.forbiddenLocations!.delete(locD.id);
-        const compiledWorld = ws.compiledWorld;
-        const atomId = compiledWorld.locations.get(locD.id);
-        if (atomId === undefined) {
-          continue;
-        }
-        console.log("ATOMID");
-        console.log(atomId);
-        if (!ws.atomsInQueue.has(atomId)) {
-          ws.atomsQueue.push(atomId);
-          ws.atomsInQueue.add(atomId);
-          console.log("YES WE UNFORBID");
+        if (ws.forbiddenReachableLocations.has(locD.id)) {
+          ws.forbiddenReachableLocations.delete(locD.id);
+          this.addLocation(locD.world as number, locD.id);
         }
       }
     } else {
@@ -226,6 +230,10 @@ export class Pathfinder {
     const world = this.worlds[worldId];
     const globalLoc = makeLocation(loc, worldId);
     this.state.locations.delete(globalLoc);
+    if (ws.forbiddenReachableLocations.has(loc)) {
+      ws.forbiddenReachableLocations.delete(loc);
+      return;
+    }
     if (ws.uncollectedLocations.has(loc)) {
       ws.uncollectedLocations.delete(loc);
       return;
@@ -427,13 +435,11 @@ export class Pathfinder {
       /* Push new locations */
       const newLocs = compiled.atomsToLocations.get(atomId) || [];
       for (const loc of newLocs) {
-        let isAllowed = true;
-        if (ws.restrictedLocations && !ws.restrictedLocations.has(loc))
-          isAllowed = false;
-        else if (ws.forbiddenLocations && ws.forbiddenLocations.has(loc))
-          isAllowed = false;
-        if (isAllowed)
+        if (this.isLocationForbidden(worldId, loc)) {
+          ws.forbiddenReachableLocations.add(loc);
+        } else {
           this.addLocationDelayed(worldId, loc);
+        }
       }
 
       /* Push new events */
