@@ -137,7 +137,38 @@ export class Pathfinder {
     return false;
   }
 
+  private diff(a: PathfinderState, b: PathfinderState) {
+    let changed = false;
+
+    for (const loc of a.locations) {
+      if (!b.locations.has(loc)) {
+        console.log(`+ ${loc}`);
+        changed = true;
+      }
+    }
+
+    for (const loc of b.locations) {
+      if (!a.locations.has(loc)) {
+        console.log(`- ${loc}`);
+        changed = true;
+      }
+    }
+
+    return changed;
+  }
+
   run(state: PathfinderState | null, opts?: PathfinderOptions) {
+    const data = this.runImpl(state, opts);
+    const dataCheck = this.runImpl(null, opts);
+
+    if (this.diff(dataCheck, data)) {
+      throw new Error("Pathfinder is not deterministic");
+    }
+
+    return data;
+  }
+
+  runImpl(state: PathfinderState | null, opts?: PathfinderOptions) {
     this.opts = opts || {};
     this.state = state ? (this.opts.inPlace ? state : cloneDeep(state)) : defaultState(this.startingItems, this.worlds);
 
