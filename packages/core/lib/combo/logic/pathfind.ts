@@ -229,6 +229,7 @@ export class Pathfinder {
     const ws = this.state.ws[worldId];
     const world = this.worlds[worldId];
     const globalLoc = makeLocation(loc, worldId);
+    const hasLocation = this.state.locations.has(globalLoc);
     this.state.locations.delete(globalLoc);
     if (ws.forbiddenReachableLocations.has(loc)) {
       ws.forbiddenReachableLocations.delete(loc);
@@ -238,6 +239,7 @@ export class Pathfinder {
       ws.uncollectedLocations.delete(loc);
       return;
     }
+    if (!hasLocation) return;
     const playerItem = this.opts.items?.get(globalLoc);
     if (playerItem) {
       const otherWs = this.state.ws[playerItem.player];

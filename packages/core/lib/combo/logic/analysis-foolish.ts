@@ -60,7 +60,6 @@ export class LogicPassAnalysisFoolish {
       allowed.delete(loc);
       locations.delete(loc);
       forbidden.add(loc);
-      console.log(`Adding forbidden loc ${loc}`);
       pathfinderState = this.pathfinder.run(pathfinderState, { inPlace: true, recursive: true, items: this.state.items, forbiddenLocations: forbidden });
       const pathfinderStateCheck = this.pathfinder.run(null, { inPlace: true, recursive: true, items: this.state.items, forbiddenLocations: forbidden });
       this.diff(pathfinderStateCheck.locations, pathfinderState.locations);
