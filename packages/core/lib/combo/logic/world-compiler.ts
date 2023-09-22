@@ -1,6 +1,7 @@
 import { Item, ItemGroups, ItemsCount } from '../items';
 import { Expr, ExprAnd, ExprFalse, ExprHas, ExprLicense, ExprMasks, ExprOr, ExprRenewable, ExprSpecial, ExprTrue } from './expr';
 import { Age } from './pathfind';
+import { PRICE_RANGES } from './price';
 import { World } from './world';
 
 type IRNodeSymbolic = { type: 'symbolic', name: string };
@@ -236,6 +237,14 @@ class WorldCompiler {
     return this.and(children);
   }
 
+  private price(id: number, range: string, max: number) {
+    if (this.world.prices[id + PRICE_RANGES[range]] <= max) {
+      return IR_TRUE;
+    } else {
+      return IR_FALSE;
+    }
+  }
+
   private exprToIR(expr: Expr, ctx: IRPartialEvaluationContext): IRPrimitive {
     switch (expr.type) {
     case 'false': return IR_FALSE;
@@ -244,9 +253,9 @@ class WorldCompiler {
     case 'and': return this.exprAndToIR(expr, ctx);
     case 'age': return expr.age === ctx.age ? IR_TRUE : IR_FALSE;
     case 'event': return this.symbol(`E(${expr.event})`);
+    case 'price': return this.price(expr.id, expr.range, expr.max);
     case 'ootTime': return IR_TRUE;
     case 'mmTime': return IR_TRUE;
-    case 'price': return IR_TRUE;
     case 'renewable':
     case 'license':
     case 'masks':
