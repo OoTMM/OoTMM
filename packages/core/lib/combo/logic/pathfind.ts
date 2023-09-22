@@ -459,7 +459,7 @@ export class Pathfinder {
 
       /* Evaluate the atom */
       const atom = atoms[atomId];
-      const state = { atoms: atomsState, items: ws.items };
+      const state = { atoms: atomsState, items: ws.items, itemsLicense: ws.licenses, itemsRenewable: ws.renewables };
       if (!atom(state)) {
         atomsInQueue.delete(atomId);
         continue;

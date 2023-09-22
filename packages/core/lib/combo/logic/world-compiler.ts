@@ -1,10 +1,10 @@
 import { Item, ItemGroups, ItemsCount } from '../items';
-import { Expr, ExprAnd, ExprFalse, ExprHas, ExprMasks, ExprOr, ExprSpecial, ExprTrue } from './expr';
+import { Expr, ExprAnd, ExprFalse, ExprHas, ExprLicense, ExprMasks, ExprOr, ExprRenewable, ExprSpecial, ExprTrue } from './expr';
 import { Age } from './pathfind';
 import { World } from './world';
 
 type IRNodeSymbolic = { type: 'symbolic', name: string };
-type Primitive = ExprTrue | ExprFalse | ExprHas | ExprSpecial | ExprMasks;
+type Primitive = ExprTrue | ExprFalse | ExprHas | ExprSpecial | ExprMasks | ExprLicense | ExprRenewable;
 type IRPrimitive = Primitive | IRNodeSymbolic;
 
 type NodeOr<T> = { type: 'or', children: T[] };
@@ -14,6 +14,8 @@ type IRNode = IRPrimitive | NodeOr<IRPrimitive> | NodeAnd<IRPrimitive>;
 type State = {
   atoms: Uint8Array;
   items: ItemsCount;
+  itemsLicense: ItemsCount;
+  itemsRenewable: ItemsCount;
 };
 
 type Atom = (state: State) => boolean;
@@ -102,7 +104,9 @@ class WorldCompiler {
     case 'true': return 't';
     case 'false': return 'f';
     case 'item': return `I(${node.item.id},${node.count})`;
-    case 'special': return `SP(${[...node.items, ...node.itemsUnique, node.count.toString()].join(',')})`;
+    case 'license': return `IL(${node.item.id})`;
+    case 'renewable': return `IR(${node.item.id})`;
+    case 'special': return `SP(${[...(node.items.map(x => x.id)), ...(node.itemsUnique.map(x => x.id)), node.count.toString()].join(',')})`;
     case 'masks': return `M(${node.count})`;
     case 'or': return `OR(${node.children.map(c => this.nodeName(c)).join(',')})`;
     case 'and': return `AND(${node.children.map(c => this.nodeName(c)).join(',')})`;
@@ -240,11 +244,11 @@ class WorldCompiler {
     case 'and': return this.exprAndToIR(expr, ctx);
     case 'age': return expr.age === ctx.age ? IR_TRUE : IR_FALSE;
     case 'event': return this.symbol(`E(${expr.event})`);
-    case 'renewable': return IR_TRUE;
     case 'ootTime': return IR_TRUE;
     case 'mmTime': return IR_TRUE;
     case 'price': return IR_TRUE;
-    case 'license': return IR_TRUE;
+    case 'renewable':
+    case 'license':
     case 'masks':
     case 'item':
     case 'special':
@@ -415,6 +419,16 @@ class WorldCompiler {
     return { atom: () => c, deps: [], depsItems: [] };
   }
 
+  private resolveAtomItemLicense(item: Item): AtomEmit {
+    const atom = (state: State) => state.itemsLicense.has(item);
+    return { atom, deps: [], depsItems: [item] };
+  }
+
+  private resolveAtomItemRenewable(item: Item): AtomEmit {
+    const atom = (state: State) => state.itemsRenewable.has(item);
+    return { atom, deps: [], depsItems: [item] };
+  }
+
   private resolveAtomItem(item: Item, count: number): AtomEmit {
     const atom = (state: State) => (state.items.get(item) || 0) >= count;
     return { atom, deps: [], depsItems: [item] };
@@ -486,6 +500,8 @@ class WorldCompiler {
     case 'item': return this.resolveAtomItem(node.item, node.count);
     case 'special': return this.resolveAtomSpecial(node.items, node.itemsUnique, node.count);
     case 'masks': return this.resolveAtomMasks(node.count);
+    case 'license': return this.resolveAtomItemLicense(node.item);
+    case 'renewable': return this.resolveAtomItemRenewable(node.item);
     case 'or': return this.resolveAtomOr(node.children.map(c => this.emitAtom(c, atomsToAtoms, itemsToAtoms)));
     case 'and': return this.resolveAtomAnd(node.children.map(c => this.emitAtom(c, atomsToAtoms, itemsToAtoms)));
     }
@@ -526,6 +542,16 @@ class WorldCompiler {
     const atomsToEvents = new Map<number, string[]>();
     const atomsToAtoms = new Map<number, number[]>();
     const itemsToAtoms = new Map<Item, number[]>();
+
+    /* DEBUG */
+    /*
+    for (const [sym, node] of this.symbols.entries()) {
+      console.log(sym, this.nodeName(node));
+    }
+    for (const [loc, node] of this.locations.entries()) {
+      console.log(loc, this.nodeName(node));
+    }
+    */
 
     this.emitAtom(IR_FALSE, atomsToAtoms, itemsToAtoms);
     this.emitAtom(IR_TRUE, atomsToAtoms, itemsToAtoms);

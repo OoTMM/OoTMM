@@ -287,7 +287,6 @@ export class LogicPassSolver {
 
   private retry(cb: () => void) {
     const stateBackup = cloneState(this.state);
-
     for (;;) {
       try {
         cb();
@@ -298,6 +297,8 @@ export class LogicPassSolver {
           this.attempts++;
           this.state = cloneState(stateBackup);
           this.pathfinder = new Pathfinder(this.input.worlds, this.input.settings, this.state.startingItems);
+          this.pathfinderState = this.pathfinder.run(null);
+          this.pathfinderStateNeg = this.pathfinder.run(null);
           this.monitor.log(`Logic: Solver (attempt ${this.attempts + 1})`);
           continue;
         } else {
@@ -1064,6 +1065,7 @@ export class LogicPassSolver {
 
         /* If there is nowhere to place an item, raise an error */
         if (unplacedLocs.length === 0) {
+          console.log(result.locations);
           throw new LogicSeedError(`No reachable locations for item ${requiredItem.item.id}@${requiredItem.player}`);
         }
 
