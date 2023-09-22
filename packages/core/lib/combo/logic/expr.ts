@@ -198,6 +198,7 @@ function resolveSpecialCond(settings: Settings, state: State, special: string): 
   return { result, depEvents: [], depItems: [...items, ...itemsUnique] };
 }
 
+export type OotTime = 'day' | 'night' | 'dusk';
 export type ExprTrue = { type: 'true' };
 export type ExprFalse = { type: 'false' };
 export type ExprAnd = { type: 'and', exprs: Expr[] };
@@ -209,7 +210,7 @@ export type ExprLicense = { type: 'license', item: Item };
 export type ExprEvent = { type: 'event', event: string };
 export type ExprMasks = { type: 'masks', count: number };
 export type ExprSpecial = { type: 'special', items: Item[], itemsUnique: Item[], count: number };
-export type ExprOotTime = { type: 'ootTime', time: 'day' | 'night' };
+export type ExprOotTime = { type: 'ootTime', time: OotTime };
 export type ExprMmTime = { type: 'mmTime', operator: 'before' | 'after' | 'at' | 'between', slices: number[] };
 export type ExprPrice = { type: 'price', range: string, id: number, max: number };
 export type Expr = ExprTrue | ExprFalse | ExprAnd | ExprOr | ExprAge | ExprHas | ExprRenewable | ExprLicense | ExprEvent | ExprMasks | ExprSpecial | ExprOotTime | ExprMmTime | ExprPrice;
@@ -362,7 +363,7 @@ export const exprGlitch = (settings: Settings, glitch: string): Expr => {
 };
 
 export const exprOotTime = (time: string): Expr => {
-  if (time !== 'day' && time !== 'night') {
+  if (time !== 'day' && time !== 'night' && time !== 'dusk') {
     throw new Error(`Invalid OoT time: ${time}`);
   }
 

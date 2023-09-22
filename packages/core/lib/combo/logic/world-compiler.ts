@@ -1,5 +1,5 @@
 import { Item, ItemGroups, ItemsCount } from '../items';
-import { Expr, ExprAnd, ExprFalse, ExprHas, ExprLicense, ExprMasks, ExprOr, ExprRenewable, ExprSpecial, ExprTrue } from './expr';
+import { Expr, ExprAnd, ExprFalse, ExprHas, ExprLicense, ExprMasks, ExprOr, ExprRenewable, ExprSpecial, ExprTrue, OotTime } from './expr';
 import { Age } from './pathfind';
 import { PRICE_RANGES } from './price';
 import { World } from './world';
@@ -27,6 +27,7 @@ const IR_TRUE: ExprTrue = { type: 'true' };
 
 type IRPartialEvaluationContext = {
   age?: Age;
+  ootTime?: OotTime;
 }
 
 type AreaToCompile = {
@@ -84,10 +85,16 @@ class WorldCompiler {
     return this.exprContains(expr, x => x.type === 'age' && x.age === age);
   }
 
+  private exprContainsOotTime(expr: Expr, time: OotTime): boolean {
+    return this.exprContains(expr, x => x.type === 'ootTime' && x.time === time);
+  }
+
   private evaluationContextName(ctx: IRPartialEvaluationContext): string {
     const parts: string[] = [];
     if (ctx.age)
       parts.push(`age=${ctx.age}`);
+    if (ctx.ootTime)
+      parts.push(`to=${ctx.ootTime}`);
     return parts.join(',');
   }
 
@@ -136,6 +143,9 @@ class WorldCompiler {
 
   private area(area: string, ctx: IRPartialEvaluationContext): IRPrimitive {
     if (area === 'OOT SPAWN') {
+      if (ctx.ootTime) {
+        return IR_FALSE;
+      }
       return IR_TRUE;
     }
 
@@ -221,18 +231,18 @@ class WorldCompiler {
     return this.symbolify(this.andRaw(nodes));
   }
 
-  private exprOrToIR(expr: ExprOr, ctx: IRPartialEvaluationContext): IRPrimitive {
+  private exprOrToIR(area: string, expr: ExprOr, ctx: IRPartialEvaluationContext): IRPrimitive {
     const children: IRPrimitive[] = [];
     for (const e of expr.exprs) {
-      children.push(this.exprToIR(e, ctx));
+      children.push(this.exprToIR(area, e, ctx));
     }
     return this.or(children);
   }
 
-  private exprAndToIR(expr: ExprAnd, ctx: IRPartialEvaluationContext): IRPrimitive {
+  private exprAndToIR(area: string, expr: ExprAnd, ctx: IRPartialEvaluationContext): IRPrimitive {
     const children: IRPrimitive[] = [];
     for (const e of expr.exprs) {
-      children.push(this.exprToIR(e, ctx));
+      children.push(this.exprToIR(area, e, ctx));
     }
     return this.and(children);
   }
@@ -245,16 +255,17 @@ class WorldCompiler {
     }
   }
 
-  private exprToIR(expr: Expr, ctx: IRPartialEvaluationContext): IRPrimitive {
+  private exprToIR(area: string, expr: Expr, ctx: IRPartialEvaluationContext): IRPrimitive {
+    const areaData = this.world.areas[area];
     switch (expr.type) {
     case 'false': return IR_FALSE;
     case 'true': return IR_TRUE;
-    case 'or': return this.exprOrToIR(expr, ctx);
-    case 'and': return this.exprAndToIR(expr, ctx);
+    case 'or': return this.exprOrToIR(area, expr, ctx);
+    case 'and': return this.exprAndToIR(area, expr, ctx);
     case 'age': return expr.age === ctx.age ? IR_TRUE : IR_FALSE;
     case 'event': return this.symbol(`E(${expr.event})`);
     case 'price': return this.price(expr.id, expr.range, expr.max);
-    case 'ootTime': return IR_TRUE;
+    case 'ootTime': return (areaData.time === 'flow' || areaData.time === expr.time || ctx.ootTime === expr.time) ? IR_TRUE : IR_FALSE;
     case 'mmTime': return IR_TRUE;
     case 'renewable':
     case 'license':
@@ -266,7 +277,7 @@ class WorldCompiler {
   }
 
   private exprAreaVariantToIR(area: string, expr: Expr, ctx: IRPartialEvaluationContext) {
-    const exprNode = this.exprToIR(expr, ctx);
+    const exprNode = this.exprToIR(area, expr, ctx);
     if (exprNode.type === 'false') {
       return IR_FALSE;
     }
@@ -275,21 +286,42 @@ class WorldCompiler {
   }
 
   private exprAreaToIR(area: string, expr: Expr): IRPrimitive {
-    const variants: IRPartialEvaluationContext[] = [];
     const nodes: IRPrimitive[] = [];
+    const areaData = this.world.areas[area];
+
+    /* Age */
+    const ages: (Age | undefined)[] = [];
     const isVariantChild = this.exprContainsAge(expr, 'child');
     const isVariantAdult = this.exprContainsAge(expr, 'adult');
     if (isVariantChild) {
-      variants.push({ age: 'child' });
+      ages.push('child');
     }
     if (isVariantAdult) {
-      variants.push({ age: 'adult' });
+      ages.push('adult');
     }
     if (!(isVariantChild && isVariantAdult)) {
-      variants.push({});
+      ages.push(undefined);
     }
-    for (const v of variants) {
-      nodes.push(this.exprAreaVariantToIR(area, expr, v));
+
+    /* OoT Time */
+    const ootTimes: (OotTime | undefined)[] = [undefined];
+    if (areaData.time === 'still') {
+      if (this.exprContainsOotTime(expr, 'day')) {
+        ootTimes.push('day');
+      }
+      if (this.exprContainsOotTime(expr, 'night')) {
+        ootTimes.push('night');
+      }
+      if (this.exprContainsOotTime(expr, 'dusk')) {
+        ootTimes.push('dusk');
+      }
+    }
+
+    for (const age of ages) {
+      for (const ootTime of ootTimes) {
+        const ctx = { age, ootTime };
+        nodes.push(this.exprAreaVariantToIR(area, expr, ctx));
+      }
     }
     return this.or(nodes);
   }
@@ -330,6 +362,23 @@ class WorldCompiler {
     const name = this.areaContextName(area, ctx);
     if (this.symbols.has(name))
       return;
+
+    /* Special case: OoT Time */
+    const dstArea = this.world.areas[area];
+    if (ctx.ootTime) {
+      if (dstArea.time === ctx.ootTime || dstArea.time === 'flow') {
+        /* Time flow, ignore time */
+        this.symbols.set(name, this.area(area, { ...ctx, ootTime: undefined }));
+        return;
+      }
+
+      if (dstArea.time !== 'still') {
+        /* Time mismatch */
+        this.symbols.set(name, IR_FALSE);
+        return;
+      }
+    }
+
     const nodes: IRPrimitive[] = [];
     for (const a in this.world.areas) {
       const aData = this.world.areas[a];
