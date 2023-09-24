@@ -23,17 +23,163 @@ typedef struct
 }
 CsmcPotData;
 
-static const CsmcPotData kCsmcData[] = {
-    { 0, POT_TEX_NORMAL_SIDE, POT_TEX_NORMAL_TOP },
-    { 0, POT_TEX_NORMAL_DANGEON_SIDE, POT_TEX_NORMAL_DANGEON_TOP },
-    { 0, POT_TEX_MAGIC_SIDE, POT_TEX_MAGIC_TOP },
-    { 1, CUSTOM_POT_MAJOR_SIDE_ADDR, CUSTOM_POT_MAJOR_TOP_ADDR },
-    { 1, CUSTOM_POT_SPIDER_SIDE_ADDR, CUSTOM_POT_SPIDER_TOP_ADDR },
-    { 1, CUSTOM_POT_FAIRY_SIDE_ADDR, CUSTOM_POT_FAIRY_TOP_ADDR },
-    { 1, CUSTOM_POT_KEY_SIDE_ADDR, CUSTOM_POT_SPIDER_TOP_ADDR },
-    { 1, CUSTOM_POT_HEART_SIDE_ADDR, CUSTOM_POT_HEART_TOP_ADDR },
-    { 1, CUSTOM_POT_BOSSKEY_SIDE_ADDR, CUSTOM_POT_BOSSKEY_TOP_ADDR },
+static const Gfx kTexNormalSide[] = {
+    gsDPLoadTextureBlock(POT_TEX_NORMAL_SIDE, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 64, 0, G_TX_WRAP | G_TX_NOMIRROR, G_TX_WRAP | G_TX_NOMIRROR, 5, 6, 0, 0),
+    gsSPEndDisplayList(),
 };
+
+static const Gfx kTexNormalTop[] = {
+    gsDPLoadTextureBlock(POT_TEX_NORMAL_TOP, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0, G_TX_WRAP | G_TX_NOMIRROR, G_TX_WRAP | G_TX_NOMIRROR, 4, 4, 0, 0),
+    gsSPEndDisplayList(),
+};
+
+static const Gfx kTexNormalDangeonSide[] = {
+    gsDPLoadTextureBlock(POT_TEX_NORMAL_DANGEON_SIDE, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 64, 0, G_TX_WRAP | G_TX_NOMIRROR, G_TX_WRAP | G_TX_NOMIRROR, 5, 6, 0, 0),
+    gsSPEndDisplayList(),
+};
+
+static const Gfx kTexNormalDangeonTop[] = {
+    gsDPLoadTextureBlock(POT_TEX_NORMAL_DANGEON_TOP, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0, G_TX_WRAP | G_TX_NOMIRROR, G_TX_WRAP | G_TX_NOMIRROR, 4, 4, 0, 0),
+    gsSPEndDisplayList(),
+};
+
+static const Gfx kTexMagicSide[] = {
+#if defined(GAME_MM)
+    gsDPLoadTextureBlock(POT_TEX_MAGIC_SIDE, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 64, 0, G_TX_WRAP | G_TX_NOMIRROR, G_TX_WRAP | G_TX_NOMIRROR, 5, 6, 0, 0),
+    gsSPEndDisplayList(),
+#endif
+};
+
+static const Gfx kTexMagicTop[] = {
+#if defined(GAME_MM)
+    gsDPLoadTextureBlock(POT_TEX_MAGIC_TOP, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0, G_TX_WRAP | G_TX_NOMIRROR, G_TX_WRAP | G_TX_NOMIRROR, 4, 4, 0, 0),
+    gsSPEndDisplayList(),
+#endif
+};
+
+static Gfx kTexMajorSide[] = {
+    gsDPLoadTextureBlock(0, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 64, 0, G_TX_WRAP | G_TX_NOMIRROR, G_TX_WRAP | G_TX_NOMIRROR, 5, 6, 0, 0),
+    gsSPEndDisplayList(),
+};
+
+static Gfx kTexMajorTop[] = {
+    gsDPLoadTextureBlock(0, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0, G_TX_WRAP | G_TX_NOMIRROR, G_TX_WRAP | G_TX_NOMIRROR, 4, 4, 0, 0),
+    gsSPEndDisplayList(),
+};
+
+static Gfx kTexSpiderSide[] = {
+    gsDPLoadTextureBlock(0, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 64, 0, G_TX_WRAP | G_TX_NOMIRROR, G_TX_WRAP | G_TX_NOMIRROR, 5, 6, 0, 0),
+    gsSPEndDisplayList(),
+};
+
+static Gfx kTexSpiderTop[] = {
+    gsDPLoadTextureBlock(0, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0, G_TX_WRAP | G_TX_NOMIRROR, G_TX_WRAP | G_TX_NOMIRROR, 4, 4, 0, 0),
+    gsSPEndDisplayList(),
+};
+
+static Gfx kTexFairySide[] = {
+    gsDPLoadTextureBlock(0, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 64, 0, G_TX_WRAP | G_TX_NOMIRROR, G_TX_WRAP | G_TX_NOMIRROR, 5, 6, 0, 0),
+    gsSPEndDisplayList(),
+};
+
+static Gfx kTexFairyTop[] = {
+    gsDPLoadTextureBlock(0, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0, G_TX_WRAP | G_TX_NOMIRROR, G_TX_WRAP | G_TX_NOMIRROR, 4, 4, 0, 0),
+    gsSPEndDisplayList(),
+};
+
+static Gfx kTexKeySide[] = {
+    gsDPLoadTextureBlock(0, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 64, 0, G_TX_WRAP | G_TX_NOMIRROR, G_TX_WRAP | G_TX_NOMIRROR, 5, 6, 0, 0),
+    gsSPEndDisplayList(),
+};
+
+static Gfx kTexKeyTop[] = {
+    gsDPLoadTextureBlock(0, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0, G_TX_WRAP | G_TX_NOMIRROR, G_TX_WRAP | G_TX_NOMIRROR, 4, 4, 0, 0),
+    gsSPEndDisplayList(),
+};
+
+static Gfx kTexHeartSide[] = {
+    gsDPLoadTextureBlock(0, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 64, 0, G_TX_WRAP | G_TX_NOMIRROR, G_TX_WRAP | G_TX_NOMIRROR, 5, 6, 0, 0),
+    gsSPEndDisplayList(),
+};
+
+static Gfx kTexHeartTop[] = {
+    gsDPLoadTextureBlock(0, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0, G_TX_WRAP | G_TX_NOMIRROR, G_TX_WRAP | G_TX_NOMIRROR, 4, 4, 0, 0),
+    gsSPEndDisplayList(),
+};
+
+static Gfx kTexBossKeySide[] = {
+    gsDPLoadTextureBlock(0, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 64, 0, G_TX_WRAP | G_TX_NOMIRROR, G_TX_WRAP | G_TX_NOMIRROR, 5, 6, 0, 0),
+    gsSPEndDisplayList(),
+};
+
+static Gfx kTexBossKeyTop[] = {
+    gsDPLoadTextureBlock(0, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0, G_TX_WRAP | G_TX_NOMIRROR, G_TX_WRAP | G_TX_NOMIRROR, 4, 4, 0, 0),
+    gsSPEndDisplayList(),
+};
+
+static const Gfx* const kTexSide[] = {
+    kTexNormalSide,
+    kTexNormalDangeonSide,
+    kTexMagicSide,
+    kTexMajorSide,
+    kTexSpiderSide,
+    kTexFairySide,
+    kTexKeySide,
+    kTexHeartSide,
+    kTexBossKeySide,
+};
+
+static const Gfx* const kTexTop[] = {
+    kTexNormalTop,
+    kTexNormalDangeonTop,
+    kTexMagicTop,
+    kTexMajorTop,
+    kTexSpiderTop,
+    kTexFairyTop,
+    kTexKeyTop,
+    kTexHeartTop,
+    kTexBossKeyTop,
+};
+
+static void patchTextureList(Gfx* gfx, u32 vaddr)
+{
+    u32 addr;
+
+    addr = (u32)comboCacheGetFile(vaddr);
+    addr -= 0x80000000;
+    gfx->words.w1 = addr;
+}
+
+static void loadTexture(int csmcPotId)
+{
+    switch (csmcPotId)
+    {
+    case CSMC_POT_MAJOR:
+        patchTextureList(kTexMajorSide, CUSTOM_POT_MAJOR_SIDE_ADDR);
+        patchTextureList(kTexMajorTop, CUSTOM_POT_MAJOR_TOP_ADDR);
+        break;
+    case CSMC_POT_SPIDER:
+        patchTextureList(kTexSpiderSide, CUSTOM_POT_SPIDER_SIDE_ADDR);
+        patchTextureList(kTexSpiderTop, CUSTOM_POT_SPIDER_TOP_ADDR);
+        break;
+    case CSMC_POT_FAIRY:
+        patchTextureList(kTexFairySide, CUSTOM_POT_FAIRY_SIDE_ADDR);
+        patchTextureList(kTexFairyTop, CUSTOM_POT_FAIRY_TOP_ADDR);
+        break;
+    case CSMC_POT_KEY:
+        patchTextureList(kTexKeySide, CUSTOM_POT_KEY_SIDE_ADDR);
+        patchTextureList(kTexKeyTop, CUSTOM_POT_SPIDER_TOP_ADDR);
+        break;
+    case CSMC_POT_HEART:
+        patchTextureList(kTexHeartSide, CUSTOM_POT_HEART_SIDE_ADDR);
+        patchTextureList(kTexHeartTop, CUSTOM_POT_HEART_TOP_ADDR);
+        break;
+    case CSMC_POT_BOSSKEY:
+        patchTextureList(kTexBossKeySide, CUSTOM_POT_BOSSKEY_SIDE_ADDR);
+        patchTextureList(kTexBossKeyTop, CUSTOM_POT_BOSSKEY_TOP_ADDR);
+        break;
+    }
+}
 
 static int csmcPotId(s16 gi, int def)
 {
@@ -61,16 +207,13 @@ static int csmcPotId(s16 gi, int def)
 
 void csmcPotPreDraw(Actor* this, GameState_Play* play, s16 gi, int def)
 {
-    const void* listSide;
-    const void* listTop;
     int type;
 
     type = csmcPotId(gi, def);
-    listSide = csmcLoadTexture(kCsmcData[type].custom, kCsmcData[type].segSide, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 64, 0);
-    listTop = csmcLoadTexture(kCsmcData[type].custom, kCsmcData[type].segTop, G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 16, 0);
+    loadTexture(type);
 
     OPEN_DISPS(play->gs.gfx);
-    gSPSegment(POLY_OPA_DISP++, 0x0a, listSide);
-    gSPSegment(POLY_OPA_DISP++, 0x0b, listTop);
+    gSPSegment(POLY_OPA_DISP++, 0x0a, kTexSide[type]);
+    gSPSegment(POLY_OPA_DISP++, 0x0b, kTexTop[type]);
     CLOSE_DISPS();
 }
