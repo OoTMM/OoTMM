@@ -426,6 +426,8 @@
   region: ENTRANCE
   exits:
     "Clock Town West": "true"
+  stay:
+    NIGHT3_PM_11_00: "false"
   locations:
     "Swordsman School HP": "has(SWORD) && can_use_wallet(1) && before(NIGHT3_PM_11_00)"
     "Swordsman School Pot 1": "has(SWORD) && after(NIGHT3_AM_12_00)"
