@@ -129,6 +129,130 @@ const PRESET_BLITZ = makeSettings({
   ]
 });
 
+const PRESET_BLITZ_PRECOMPLETED = makeSettings({
+  hintImportance: true,
+  tingleShuffle: 'starting',
+  mapCompassShuffle: 'starting',
+  smallKeyShuffleMm: 'removed',
+  smallKeyShuffleHideout: 'vanilla',
+  strayFairyChestShuffle: 'starting',
+  shuffleMasterSword: false,
+  shuffleGerudoCard: false,
+  startingAge: 'random',
+  doorOfTime: 'open',
+  ageChange: 'always',
+  dekuTree: 'closed',
+  kakarikoGate: 'open',
+  gerudoFortress: 'single',
+  skipZelda: true,
+  bossWarpPads: 'remains',
+  freeScarecrowOot: true,
+  preCompletedDungeons: true,
+  preCompletedDungeonsMajor: 6,
+  preCompletedDungeonsStones: 2,
+  preCompletedDungeonsMedallions: 2,
+  preCompletedDungeonsRemains: 2,
+  crossWarpOot: true,
+  crossWarpMm: 'full',
+  progressiveGoronLullaby: 'single',
+  blueFireArrows: true,
+  shortHookshotMm: true,
+  lenientSpikes: false,
+  sharedBows: true,
+  sharedBombBags: true,
+  sharedMagic: true,
+  sharedMagicArrowFire: true,
+  sharedMagicArrowIce: true,
+  sharedMagicArrowLight: true,
+  sharedSongStorms: true,
+  sharedHookshot: true,
+  sharedLens: true,
+  sharedMaskGoron: true,
+  sharedMaskZora: true,
+  sharedMaskBunny: true,
+  sharedMaskKeaton: true,
+  sharedMaskTruth: true,
+  sharedWallets: true,
+  sharedHealth: true,
+  specialConds: {
+    BRIDGE: {
+      count: 9,
+      stones: true,
+      medallions: true
+    },
+    MOON: {
+      count: 7,
+      stones: true,
+      remains: true
+    }
+  },
+  tricks: [
+    'MM_LENS',
+    'MM_NO_SEAHORSE',
+    'MM_ONE_MASK_STONE_TOWER',
+    'MM_PALACE_BEAN_SKIP',
+    'OOT_DC_JUMP',
+    'OOT_DEAD_HAND_STICKS',
+    'OOT_FOREST_HOOK',
+    'OOT_HAMMER_WALLS',
+    'OOT_HIDDEN_GROTTOS',
+    'OOT_LENS',
+    'OOT_MAN_ON_ROOF',
+    'OOT_NIGHT_GS',
+    'OOT_TUNICS',
+    'OOT_VOLCANO_HOVERS',
+    'OOT_WINDMILL_HP_NOTHING'
+  ],
+  startingItems: {
+    OOT_NUTS_10: 2,
+    OOT_SHIELD_DEKU: 1,
+    OOT_STICK: 10,
+    MM_SONG_EPONA: 1,
+    MM_SHIELD_HERO: 1,
+    MM_OCARINA: 1,
+    OOT_OCARINA: 1,
+    MM_SWORD: 1,
+    MM_SONG_SOARING: 1
+  },
+  junkLocations: [
+    'MM Beneath The Graveyard Dampe Chest',
+    'MM Deku Playground Reward 2',
+    'MM Goron Race Reward',
+    'MM Great Bay Great Fairy',
+    'MM Honey & Darling Reward 2',
+    'MM Ikana Great Fairy',
+    'MM Laboratory Zora Song',
+    'MM Moon Fierce Deity Mask',
+    'MM Mountain Village Frog Choir HP',
+    'MM Ocean Spider House Wallet',
+    'MM Pinnacle Rock HP',
+    'MM Snowhead Great Fairy',
+    'MM Stock Pot Inn Couple\'s Mask',
+    'MM Swamp Spider House Mask of Truth',
+    'MM Town Archery Reward 2',
+    'MM Waterfall Rapids Beaver Race 2',
+    'MM Woodfall Great Fairy',
+    'OOT Skulltula House 40 Tokens',
+    'OOT Skulltula House 50 Tokens'
+  ],
+  plando: {
+    locations: {
+      'OOT Zora River Bean Seller': 'OOT_MAGIC_BEAN',
+      'OOT Zelda\'s Letter':        'OOT_OCARINA',
+      'OOT Zelda\'s Song':          'OOT_SONG_TP_LIGHT',
+      'MM Initial Song of Healing': 'MM_SONG_TIME'
+    }
+  },
+  hints: [
+    { type: 'foolish',      amount: 8,      extra: 1},
+    { type: 'always',       amount: 'max',  extra: 1},
+    { type: 'sometimes',    amount: 4,      extra: 1},
+    { type: 'playthrough',  amount: 4,      extra: 1},
+    { type: 'woth',         amount: 9,      extra: 1},
+    { type: 'sometimes',    amount: 'max',  extra: 1},
+  ]
+});
+
 const PRESET_ALLSANITY = makeSettings({
   goal: 'both',
   logic: 'beatable',
@@ -402,6 +526,7 @@ const PRESET_HELL = makeSettings({
 export const PRESETS: Presets = {
   'Default': PRESET_DEFAULT,
   'Blitz': PRESET_BLITZ,
+  'Blitz (with pre-completed dungeons)': PRESET_BLITZ_PRECOMPLETED,
   'Allsanity': PRESET_ALLSANITY,
   'Hell': PRESET_HELL,
 };
