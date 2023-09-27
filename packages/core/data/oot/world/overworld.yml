@@ -214,7 +214,7 @@
     "Hyrule Field Southeast Grotto": "has_explosives_or_hammer"
     "Hyrule Field Grotto Near Market": "has_explosives_or_hammer"
     "Hyrule Field Tektite Grotto": "hidden_grotto_bomb"
-    "Hyrule Field Grotto Near GV": "(is_child && hidden_grotto_bomb) || can_hammer"
+    "Hyrule Field Grotto Near GV": "(is_child && hidden_grotto_bomb) || (can_hammer && stone_of_agony)"
     "Hyrule Field Grotto Near Kak": "hidden_grotto_bomb"
     "Hyrule Field Fairy Grotto": "has_explosives_or_hammer"
   events:
@@ -1573,7 +1573,7 @@
   region: ZORA_FOUNTAIN
   exits:
     "Zora Domain Back": "true"
-    "Jabu-Jabu": "is_child && ((has_bottle && (has(FISH) || event(FISH))) || (trick(OOT_ENTER_JABU) && (climb_anywhere || hookshot_anywhere || has_weapon || can_use_sticks)) || time_travel_at_will)"
+    "Jabu-Jabu": "is_child && ((has_bottle && (has(FISH) || event(FISH))) || (trick(OOT_ENTER_JABU) && (climb_anywhere || hookshot_anywhere || has_weapon || can_use_sticks || time_travel_at_will)))"
     "Zora Fountain Frozen": "is_adult || climb_anywhere || longshot_anywhere"
     "Fairy Fountain Farore": "has_explosives"
   events:
