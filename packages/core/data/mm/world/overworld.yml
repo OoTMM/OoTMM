@@ -2672,12 +2672,12 @@
   locations:
     "Beneath The Graveyard HP": "soul_iron_knuckle && (has_explosives || trick_keg_explosives) && (can_use_lens || short_hook_anywhere)"
     "Beneath The Graveyard Pot Night 2 Early": "true"
-    "Beneath The Graveyard Pot Before Pit 1": "can_use_lens"
-    "Beneath The Graveyard Pot Before Pit 2": "can_use_lens"
-    "Beneath The Graveyard Pot After Pit 1": "can_use_lens || short_hook_anywhere"
-    "Beneath The Graveyard Pot After Pit 2": "can_use_lens || short_hook_anywhere"
-    "Beneath The Graveyard Pot After Pit 3": "can_use_lens || short_hook_anywhere"
-    "Beneath The Graveyard Pot After Pit 4": "can_use_lens || short_hook_anywhere"
+    "Beneath The Graveyard Pot Night 2 Before Pit 1": "can_use_lens"
+    "Beneath The Graveyard Pot Night 2 Before Pit 2": "can_use_lens"
+    "Beneath The Graveyard Pot Night 2 After Pit 1": "can_use_lens || short_hook_anywhere"
+    "Beneath The Graveyard Pot Night 2 After Pit 2": "can_use_lens || short_hook_anywhere"
+    "Beneath The Graveyard Pot Night 2 After Pit 3": "can_use_lens || short_hook_anywhere"
+    "Beneath The Graveyard Pot Night 2 After Pit 4": "can_use_lens || short_hook_anywhere"
 "Beneath The Graveyard Night 3":
   region: ENTRANCE
   events:
