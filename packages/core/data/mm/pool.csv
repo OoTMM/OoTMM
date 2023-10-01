@@ -1255,12 +1255,12 @@ Beneath The Graveyard Pot Night 2 Early,                pot,            NONE,   
 Beneath The Graveyard Pot Night 1 Bats 1,               pot,            NONE,                   BENEATH_THE_GRAVEYARD,        0x0104,                     ARROWS_10
 Beneath The Graveyard Pot Night 1 Bats 2,               pot,            NONE,                   BENEATH_THE_GRAVEYARD,        0x0105,                     RECOVERY_HEART
 Beneath The Graveyard Pot Night 1 Bats 3,               pot,            NONE,                   BENEATH_THE_GRAVEYARD,        0x0106,                     NOTHING
-Beneath The Graveyard Pot After Pit 1,                  pot,            NONE,                   BENEATH_THE_GRAVEYARD,        0x0307,                     NOTHING
-Beneath The Graveyard Pot After Pit 2,                  pot,            NONE,                   BENEATH_THE_GRAVEYARD,        0x0308,                     NOTHING
-Beneath The Graveyard Pot Before Pit 1,                 pot,            NONE,                   BENEATH_THE_GRAVEYARD,        0x0309,                     ARROWS_10
-Beneath The Graveyard Pot Before Pit 2,                 pot,            NONE,                   BENEATH_THE_GRAVEYARD,        0x030a,                     RECOVERY_HEART
-Beneath The Graveyard Pot After Pit 3,                  pot,            NONE,                   BENEATH_THE_GRAVEYARD,        0x030b,                     RECOVERY_HEART
-Beneath The Graveyard Pot After Pit 4,                  pot,            NONE,                   BENEATH_THE_GRAVEYARD,        0x030c,                     NOTHING
+Beneath The Graveyard Pot Night 2 After Pit 1,          pot,            NONE,                   BENEATH_THE_GRAVEYARD,        0x0307,                     NOTHING
+Beneath The Graveyard Pot Night 2 After Pit 2,          pot,            NONE,                   BENEATH_THE_GRAVEYARD,        0x0308,                     NOTHING
+Beneath The Graveyard Pot Night 2 Before Pit 1,         pot,            NONE,                   BENEATH_THE_GRAVEYARD,        0x0309,                     ARROWS_10
+Beneath The Graveyard Pot Night 2 Before Pit 2,         pot,            NONE,                   BENEATH_THE_GRAVEYARD,        0x030a,                     RECOVERY_HEART
+Beneath The Graveyard Pot Night 2 After Pit 3,          pot,            NONE,                   BENEATH_THE_GRAVEYARD,        0x030b,                     RECOVERY_HEART
+Beneath The Graveyard Pot Night 2 After Pit 4,          pot,            NONE,                   BENEATH_THE_GRAVEYARD,        0x030c,                     NOTHING
 Beneath The Graveyard Pot Dampe 01,                     pot,            NONE,                   DAMPE_HOUSE,                  0x0010,                     RUPEE_GREEN
 Beneath The Graveyard Pot Dampe 02,                     pot,            NONE,                   DAMPE_HOUSE,                  0x0011,                     RUPEE_GREEN
 Beneath The Graveyard Pot Dampe 03,                     pot,            NONE,                   DAMPE_HOUSE,                  0x0012,                     ARROWS_10
