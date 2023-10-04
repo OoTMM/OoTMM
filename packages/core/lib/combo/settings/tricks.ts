@@ -47,6 +47,7 @@ export const TRICKS = {
   OOT_ADULT_GALLERY_TT: "Enter Adult Shooting Gallery as Child with Time Travel",
   OOT_GTG_CHILD_TT: "Enter Gerudo Training Grounds as Child with Time Travel",
   OOT_REVERSE_DAMPE: "Navigate Dampe's Grave in Reverse",
+  OOT_GANON_FAIRY_TT: "Ganon's Great Fairy with Age Swap and without Gold Gauntlets",
   MM_LENS: "Fewer Lens Requirements (MM)",
   MM_PALACE_BEAN_SKIP: "Skip Planting Beans in Deku Palace",
   MM_DARMANI_WALL: "Climb Mountain Village Wall Blind",

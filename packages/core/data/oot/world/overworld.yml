@@ -654,7 +654,7 @@
   time: flow
   exits:
     "Market Castle Entry": "true"
-    "Near Fairy Fountain Din": "has_explosives"
+    "Near Fairy Fountain Din": "has_explosives_or_hammer"
     "Hyrule Castle Courtyard": "woke_talon_child || has_hover_boots || climb_anywhere"
     "Hyrule Castle Grotto": "hidden_grotto_storms"
   events:
@@ -692,7 +692,7 @@
   age_change: false
   exits:
     "Hyrule Castle": "is_child"
-    "Fairy Fountain Din": "is_child"
+    "Fairy Fountain Din": "is_child && has_explosives_or_hammer"
     "Near Fairy Fountain Defense": "is_adult"
 "Fairy Fountain Din":
   region: ENTRANCE
@@ -744,7 +744,7 @@
   age_change: false
   exits:
     "Ganon Castle Exterior": "is_adult"
-    "Fairy Fountain Defense": "is_adult"
+    "Fairy Fountain Defense": "is_adult && (can_lift_gold || trick(OOT_GANON_FAIRY_TT))"
     "Near Fairy Fountain Din": "is_child"
 "Fairy Fountain Defense":
   region: ENTRANCE
