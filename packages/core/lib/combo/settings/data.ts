@@ -1352,7 +1352,7 @@ export const SETTINGS = [{
   type: 'boolean',
   description: 'Shuffles the one-way entrances in Ikana Castle with the others. This is the keg-blocked entrance and the block moved by the switch.',
   default: false,
-  cond: (x: any) => s.erRegionWarps !== 'none'
+  cond: (x: any) => x.erRegionWarps !== 'none'
 }, {
   key: 'erIndoors',
   name: 'Shuffle Interiors',
