@@ -1332,7 +1332,7 @@ export const SETTINGS = [{
   default: false,
   cond: (x: any) => x.erRegions !== 'none'
 }, {
-  key: 'erRegionsWarps',
+  key: 'erRegionWarps',
   name: 'Shuffle One-Way Entrances',
   category: 'entrances',
   type: 'enum',
@@ -1346,7 +1346,7 @@ export const SETTINGS = [{
   description: 'Shuffles the Gerudo Valley to Lake Hylia and Ikana Canyon to Southern Swamp entrances.',
   default: false,
 }, {
-  key: 'erRegionsWarpsExtra',
+  key: 'erRegionWarpsExtra',
   name: 'Shuffle Ikana Castle One-Ways',
   category: 'entrances',
   type: 'boolean',

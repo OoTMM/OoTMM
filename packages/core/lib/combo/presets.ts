@@ -314,7 +314,7 @@ const PRESET_ALLSANITY = makeSettings({
   erIndoorsExtra: true,
   erWarps: 'full',
   erWarpsOwls: true,
-  erRegionWarps: true,
+  erRegionWarps: 'both',
   erRegionWarpsExtra: true,
 });
 
@@ -385,7 +385,7 @@ const PRESET_HELL = makeSettings({
   erIndoorsExtra: true,
   erWarps: 'full',
   erWarpsOwls: true,
-  erRegionWarps: true,
+  erRegionWarps: both,
   erRegionWarpsExtra: true,
   erGanonCastle: true,
   erGanonTower: true,

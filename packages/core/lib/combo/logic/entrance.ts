@@ -441,10 +441,10 @@ export class LogicPassEntrances {
 
   private placeRegions(worldId: number) {
     const pool = ['region'];
-    if (this.input.settings.erRegionExtra) {
+    if (this.input.settings.erRegionsExtra) {
       pool.push('region-extra');
     }
-    if (this.input.settings.erRegionShortcuts) {
+    if (this.input.settings.erRegionsShortcuts) {
       pool.push('region-shortcut');
     }
     if (this.input.settings.erRegionWarps === 'regions') {

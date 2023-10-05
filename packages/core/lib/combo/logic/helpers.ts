@@ -11,7 +11,7 @@ export function isEntranceShuffle(settings: Settings) {
     return true;
   if (settings.erWarps !== 'none')
     return true;
-  if (settings.erRegionWarps === true)
+  if (settings.erRegionWarps !== 'none)
     return true;
   return false;
 }
