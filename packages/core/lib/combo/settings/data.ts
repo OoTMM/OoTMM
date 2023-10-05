@@ -1332,6 +1332,28 @@ export const SETTINGS = [{
   default: false,
   cond: (x: any) => x.erRegions !== 'none'
 }, {
+  key: 'erRegionsWarps',
+  name: 'Shuffle One-Way Entrances',
+  category: 'entrances',
+  type: 'enum',
+  values: [
+    { value: 'none', name: 'None', description: 'One-Way entrances are not shuffled.' },
+    { value: 'self', name: 'Self', description: 'One-Way entrances are only shuffled among themselves.' },
+    { value: 'regions', name: 'Regions', description: 'One-Way entrances can be shuffled among the regions.' },
+    { value: 'warps', name: 'Warps', description: 'One-Way entrances can be shuffled among the warp points.' },
+    { value: 'both', name: 'Both', description: 'One-Way entrances can be shuffled among both regions and the warp points.' },
+  ],
+  description: 'Shuffles the Gerudo Valley to Lake Hylia and Ikana Canyon to Southern Swamp entrances.',
+  default: false,
+}, {
+  key: 'erRegionsWarpsExtra',
+  name: 'Shuffle Ikana Castle One-Ways',
+  category: 'entrances',
+  type: 'boolean',
+  description: 'Shuffles the one-way entrances in Ikana Castle with the others. This is the keg-blocked entrance and the block moved by the switch.',
+  default: false,
+  cond: (x: any) => s.erRegionWarps !== 'none'
+}, {
   key: 'erIndoors',
   name: 'Shuffle Interiors',
   category: 'entrances',

@@ -52,7 +52,7 @@ export type WorldGossip = {
 
 export type WorldEntrance = {
   id: string;
-  type: 'boss' | 'dungeon' | 'overworld' | 'region' | 'region-extra' | 'region-shortcut' | 'warp-song' | 'warp-owl' | 'owl-flight' | 'indoors' | 'indoors-extra' | 'indoors-exit' | 'indoors-special';
+  type: 'boss' | 'dungeon' | 'overworld' | 'region' | 'region-extra' | 'region-shortcut' | 'region-warp' | 'region-warp-extra' | 'warp-song' | 'warp-owl' | 'owl-flight' | 'indoors' | 'indoors-extra' | 'indoors-exit' | 'indoors-special';
   from: string;
   to: string;
   reverse: string | null;

@@ -441,11 +441,23 @@ export class LogicPassEntrances {
 
   private placeRegions(worldId: number) {
     const pool = ['region'];
-    if (this.input.settings.erRegionsExtra) {
+    if (this.input.settings.erRegionExtra) {
       pool.push('region-extra');
     }
-    if (this.input.settings.erRegionsShortcuts) {
+    if (this.input.settings.erRegionShortcuts) {
       pool.push('region-shortcut');
+    }
+    if (this.input.settings.erRegionWarps === 'regions') {
+      pool.push('region-warp');
+    }
+    if (this.input.settings.erRegionWarps === 'both') {
+      pool.push('region-warp');
+    }
+    if (this.input.settings.erRegionWarps === 'regions' && this.input.settings.erRegionWarpsExtra) {
+      pool.push('region-warp-extra');
+    }
+    if (this.input.settings.erRegionWarps === 'both' && this.input.settings.erRegionWarpsExtra) {
+      pool.push('region-warp-extra');
     }
     this.placePool(worldId, pool, { ownGame: this.input.settings.erRegions === 'ownGame' });
   }
@@ -470,8 +482,36 @@ export class LogicPassEntrances {
     if (this.input.settings.erWarpsOwls) {
       pool.add('owl-flight');
     }
+    if (this.input.settings.erRegionWarps === 'warps') {
+      pool.add('region-warp');
+    }
+    if (this.input.settings.erRegionWarps === 'both') {
+      pool.add('region-warp');
+    }
+    if (this.input.settings.erRegionWarps === 'warps' && this.input.settings.erRegionWarpsExtra) {
+      pool.add('region-warp-extra');
+    }
+    if (this.input.settings.erRegionWarps === 'both' && this.input.settings.erRegionWarpsExtra) {
+      pool.add('region-warp-extra');
+    }
 
     this.placePool(worldId, Array.from(pool), { ownGame: this.input.settings.erWarps === 'ownGame' });
+  }
+
+  private placeRegionWarps(worldId: number) {
+    const pool = new Set(['region-warp']);
+    if (this.input.settings.erRegionWarpsExtra) {
+      pool.push('region-warp-extra');
+    }
+    if (this.input.settings.erRegionWarps === 'regions') {
+      pool.delete('region-warp', 'region-warp-extra');
+    }
+    if (this.input.settings.erRegionWarps === 'warps') {
+      pool.delete('region-warp', 'region-warp-extra');
+    }
+    if (this.input.settings.erRegionWarps === 'both') {
+      pool.delete('region-warp', 'region-warp-extra');
+    }
   }
 
   private propagateRegionsStep(worldId: number) {

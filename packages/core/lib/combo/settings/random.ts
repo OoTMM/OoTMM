@@ -501,6 +501,7 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
       base.erRegions = 'full';
       base.erIndoors = 'full';
       base.erWarps = 'full';
+	  base.erRegionWarps = true;
       break;
     default:
       base.erDungeons = sampleWeighted(random, { none: 10, full: 10, ownGame: 10 });
@@ -508,6 +509,7 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
       base.erRegions = sampleWeighted(random, { none: 10, full: 10, ownGame: 10 });
       base.erIndoors = sampleWeighted(random, { none: 10, full: 10, ownGame: 10 });
       base.erWarps = sampleWeighted(random, { none: 10, full: 10, ownGame: 10 });
+      base.erRegionWarps = booleanWeighted(random, 0.5);
     }
 
     /* ER sub-settings - 25% all on, 25% all off, 50% individual */
@@ -527,6 +529,7 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
       base.erRegionsShortcuts = true;
       base.erIndoorsExtra = true;
       base.erWarpsOwls = true;
+	  base.erRegionWarpsExtra = true;
       break;
     default:
       base.erBeneathWell = booleanWeighted(random, 0.5);
@@ -541,6 +544,7 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
       base.erRegionsShortcuts = booleanWeighted(random, 0.5);
       base.erIndoorsExtra = booleanWeighted(random, 0.5);
       base.erWarpsOwls = booleanWeighted(random, 0.5);
+      base.erRegionWarpsExtra = booleanWeighted(random, 0.5);
     }
   }
 

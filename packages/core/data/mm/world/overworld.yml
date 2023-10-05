@@ -1176,7 +1176,6 @@
     "Swamp Back": "event(BOAT_RIDE) || event(CLEAN_SWAMP) || has_mask_zora || (has(MASK_DEKU) && (has_arrows || can_hookshot_short))"
     "Swamp Potion Shop": "true"
     "Woods of Mystery": "true"
-    "Ikana Valley": "false"
     "Owl Swamp": "true"
   events:
     FROG_3: "has(MASK_DON_GERO)"
