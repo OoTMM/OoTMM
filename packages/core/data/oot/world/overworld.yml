@@ -933,7 +933,7 @@
     "Kakariko GS Tree": "gs_night && is_child"
     "Kakariko GS House of Skulltula": "gs_night && is_child"
     "Kakariko GS Bazaar": "gs_night && is_child"
-    "Kakariko GS Ladder": "gs_night && is_child && (can_use_slingshot || has_bombchu || (climb_anywhere && (has_weapon || can_use_sticks) || can_use_din) || (time_travel_at_will && can_use_din))"
+    "Kakariko GS Ladder": "gs_night && is_child && (can_use_slingshot || has_bombchu || (climb_anywhere && ((has_weapon || can_use_sticks) || can_use_din)) || (time_travel_at_will && can_use_din))"
     "Kakariko Pot 01": "is_child"
     "Kakariko Pot 02": "is_child"
     "Kakariko Pot 03": "is_child"

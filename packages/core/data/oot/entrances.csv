@@ -40,6 +40,7 @@ LON_LON_RANCH_FROM_FIELD,                 region,           Lon Lon Ranch,      
 LAKE_HYLIA_FROM_FIELD,                    region,           Lake Hylia,                                 Hyrule Field,                                 FIELD_FROM_LAKE_HYLIA
 GERUDO_FORTRESS_FROM_VALLEY,              region,           Gerudo Fortress Exterior,                   Gerudo Valley After Bridge,                   VALLEY_FROM_GERUDO_FORTRESS
 DEATH_MOUNTAIN_FROM_KAKARIKO,             region,           Death Mountain,                             Kakariko Trail Start,                         KAKARIKO_FROM_DEATH_MOUNTAIN
+GERUDO_VALLEY_FROM_FIELD,                 region,           Gerudo Valley,                              Hyrule Field,                                 FIELD_FROM_GERUDO_VALLEY
 MARKET_ENTRANCE_FROM_FIELD,               region-extra,     Market Entryway,                            Hyrule Field,                                 FIELD_FROM_MARKET_ENTRANCE
 LAKE_HYLIA_FROM_VALLEY,                   region-shortcut,  Lake Hylia,                                 Gerudo Valley Falls,                          VALLEY_FROM_LAKE_HYLIA
 LAKE_HYLIA_FROM_ZORA_DOMAIN,              region-shortcut,  Lake Hylia,                                 Zora Domain,                                  ZORA_DOMAIN_FROM_LAKE_HYLIA
@@ -52,6 +53,7 @@ FIELD_FROM_LON_LON_RANCH,                 overworld,        Hyrule Field,       
 FIELD_FROM_LAKE_HYLIA,                    overworld,        Hyrule Field,                               Lake Hylia,                                   LAKE_HYLIA_FROM_FIELD
 VALLEY_FROM_GERUDO_FORTRESS,              overworld,        Gerudo Valley After Bridge,                 Gerudo Fortress Exterior,                     GERUDO_FORTRESS_FROM_VALLEY
 KAKARIKO_FROM_DEATH_MOUNTAIN,             overworld,        Kakariko Trail Start,                       Death Mountain,                               DEATH_MOUNTAIN_FROM_KAKARIKO
+FIELD_FROM_GERUDO_VALLEY                  overworld,        Hyrule Field,                               Gerudo Valley,                                GERUDO_VALLEY_FROM_FIELD
 FIELD_FROM_MARKET_ENTRANCE,               overworld,        Hyrule Field,                               Market Entryway,                              MARKET_ENTRANCE_FROM_FIELD
 VALLEY_FROM_LAKE_HYLIA,                   overworld,        Gerudo Valley Falls,                        Lake Hylia,                                   LAKE_HYLIA_FROM_VALLEY
 ZORA_DOMAIN_FROM_LAKE_HYLIA,              overworld,        Zora Domain,                                Lake Hylia,                                   LAKE_HYLIA_FROM_ZORA_DOMAIN

@@ -1314,7 +1314,7 @@ export const SETTINGS = [{
     { value: 'full', name: 'Full' },
   ],
   default: 'none',
-  description: '- Every entrance to Hyrule Field except Gerudo Valley and Market<br>- The entrance to Gerudo Fortress from Gerudo Valley<br>- The entrance to Death Mountain from Kakariko<br>- The entrances to the four main regions in MM<br>- The entrance to Romani Ranch',
+  description: '- Every entrance to Hyrule Field except Market<br>- The entrance to Gerudo Fortress from Gerudo Valley<br>- The entrance to Death Mountain from Kakariko<br>- The entrances to the four main regions in MM<br>- The entrance to Romani Ranch',
 }, {
   key: 'erRegionsExtra',
   name: 'Shuffle Market Entrance',
