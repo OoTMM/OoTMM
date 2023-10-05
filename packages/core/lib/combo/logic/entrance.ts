@@ -663,6 +663,11 @@ export class LogicPassEntrances {
         this.fixBosses(i);
       }
 
+      if (this.input.settings.erRegionWarps !== 'none') {
+        anyEr = true;
+        this.placeRegionWarps(i);
+      }
+
       if (anyEr) {
         this.validate();
       }
