@@ -308,3 +308,5 @@ X(ITEM_CUSTOM,              0x80,  DRAWGI_BUTTON_C_RIGHT,               0x5f, CU
 X(ITEM_CUSTOM,              0x80,  DRAWGI_BUTTON_C_LEFT,                0x5f, CUSTOM_OBJECT_ID_BTN_C_HORIZONTAL, "the " C1 "C-Left Button"),
 X(ITEM_CUSTOM,              0x80,  DRAWGI_BUTTON_C_UP,                  0x5f, CUSTOM_OBJECT_ID_BTN_C_VERTICAL, "the " C1 "C-Up Button"),
 X(ITEM_CUSTOM,              0x80,  DRAWGI_BUTTON_C_DOWN,                0x5f, CUSTOM_OBJECT_ID_BTN_C_VERTICAL, "the " C1 "C-Down Button"),
+X(ITEM_CUSTOM,              0x80,  DRAWGI_SMALL_KEY,                    0x60, 0x00aa, "a " C0 "Small Key (Chest Game)"),
+X(ITEM_CUSTOM,              0x80,  DRAWGI_SMALL_KEY,                    0x60, 0x00aa, "the " C0 "Key Ring (Chest Game)"),

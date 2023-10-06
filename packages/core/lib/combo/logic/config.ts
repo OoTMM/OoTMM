@@ -179,6 +179,7 @@ export class LogicPassConfig {
       OOT_AGE_CHANGE_NEEDS_OOT: settings.ageChange === 'oot',
       OOT_TRIALS: settings.ganonTrials !== 'none',
       MM_PROGRESSIVE_GFS: settings.progressiveGFS === 'progressive',
+      OOT_CHEST_GAME_SHUFFLE: settings.smallKeyShuffleChestGame !== 'vanilla',
     };
 
     for (const v in exprs) {

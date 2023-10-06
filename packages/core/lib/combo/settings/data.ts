@@ -226,6 +226,18 @@ export const SETTINGS = [{
   ],
   default: 'ownDungeon'
 }, {
+  key: 'smallKeyShuffleChestGame',
+  name: 'Chest Game Small Key Shuffle',
+  category: 'main.shuffle',
+  type: 'enum',
+  description: 'Controls where Chest Game Small Keys can be',
+  values: [
+    { value: 'vanilla', name: 'Vanilla', description: 'Chest Minigame will behave as in vanilla' },
+    { value: 'ownDungeon', name: 'Own Minigame', description: 'Chest Minigame Keys can be found inside the minigame' },
+    { value: 'anywhere', name: 'Anywhere', description: 'Chest Minigame Keys can be found anywhere' },
+  ],
+  default: 'vanilla'
+}, {
   key: 'bossKeyShuffleOot',
   name: 'Boss Key Shuffle (OoT)',
   category: 'main.shuffle',

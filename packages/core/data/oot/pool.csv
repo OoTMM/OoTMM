@@ -555,7 +555,18 @@ Market Grass 7,                                             grass,          NONE
 Market Grass 8,                                             grass,          NONE,                 MARKET_CHILD_DAY,               0x0001e,                    RANDOM
 Bombchu Bowling Reward 1,                                   npc,            NONE,                 BOMBCHU_BOWLING_ALLEY,          BOMBCHU_BOWLING_1,          BOMB_BAG
 Bombchu Bowling Reward 2,                                   npc,            NONE,                 BOMBCHU_BOWLING_ALLEY,          BOMBCHU_BOWLING_2,          HEART_PIECE
-Treasure Game HP,                                           chest,          TREASURE_GAME,        TREASURE_SHOP,                  0x0a,                       HEART_PIECE
+Treasure Chest Game Buy Key,                                npc,            NONE,                 TREASURE_SHOP,                  CHEST_GAME_KEY,             SMALL_KEY_TCG
+Treasure Chest Game Room 1 Chest Left,                      chest,          NONE,                 TREASURE_SHOP,                  0x00,                       SMALL_KEY_TCG
+Treasure Chest Game Room 1 Chest Right,                     chest,          NONE,                 TREASURE_SHOP,                  0x01,                       RUPEE_GREEN
+Treasure Chest Game Room 2 Chest Left,                      chest,          NONE,                 TREASURE_SHOP,                  0x02,                       SMALL_KEY_TCG
+Treasure Chest Game Room 2 Chest Right,                     chest,          NONE,                 TREASURE_SHOP,                  0x03,                       RUPEE_GREEN
+Treasure Chest Game Room 3 Chest Left,                      chest,          NONE,                 TREASURE_SHOP,                  0x04,                       SMALL_KEY_TCG
+Treasure Chest Game Room 3 Chest Right,                     chest,          NONE,                 TREASURE_SHOP,                  0x05,                       RUPEE_BLUE
+Treasure Chest Game Room 4 Chest Left,                      chest,          NONE,                 TREASURE_SHOP,                  0x06,                       SMALL_KEY_TCG
+Treasure Chest Game Room 4 Chest Right,                     chest,          NONE,                 TREASURE_SHOP,                  0x07,                       RUPEE_BLUE
+Treasure Chest Game Room 5 Chest Left,                      chest,          NONE,                 TREASURE_SHOP,                  0x08,                       SMALL_KEY_TCG
+Treasure Chest Game Room 5 Chest Right,                     chest,          NONE,                 TREASURE_SHOP,                  0x09,                       RUPEE_RED
+Treasure Chest Game HP,                                     chest,          TREASURE_GAME,        TREASURE_SHOP,                  0x0a,                       HEART_PIECE
 Shooting Gallery Child,                                     npc,            NONE,                 SHOOTING_GALLERY,               SHOOTING_GAME_CHILD,        SLINGSHOT
 Shooting Gallery Adult,                                     npc,            NONE,                 SHOOTING_GALLERY,               SHOOTING_GAME_ADULT,        BOW
 Hyrule Castle GS Tree,                                      gs,             NONE,                 HYRULE_CASTLE,                  0x7a,                       GS_TOKEN

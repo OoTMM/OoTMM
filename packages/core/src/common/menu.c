@@ -68,6 +68,7 @@ static DungeonDef gDungeonDefs[] = {
     { "Hideout",        SCE_OOT_THIEVES_HIDEOUT,        -1, DD_OOT },
     { "GTG",            SCE_OOT_GERUDO_TRAINING_GROUND, DUNGEONID_GERUDO_TRAINING_GROUNDS, DD_OOT },
     { "Ganon",          SCE_OOT_INSIDE_GANON_CASTLE,    DUNGEONID_GANON_CASTLE, DD_OOT | DD_BOSS_KEY },
+    { "Chest Game",     SCE_OOT_TREASURE_SHOP,          -1, DD_OOT },
     { "Woodfall",       0,                              DUNGEONID_TEMPLE_WOODFALL, DD_MM  | DD_MAP_COMPASS | DD_BOSS_KEY | DD_FAIRIES },
     { "Snowhead",       1,                              DUNGEONID_TEMPLE_SNOWHEAD, DD_MM  | DD_MAP_COMPASS | DD_BOSS_KEY | DD_FAIRIES },
     { "Great Bay",      2,                              DUNGEONID_TEMPLE_GREAT_BAY, DD_MM  | DD_MAP_COMPASS | DD_BOSS_KEY | DD_FAIRIES },
@@ -81,7 +82,7 @@ static DungeonDef gDungeonDefs[] = {
     {},
 };
 
-static int gDungeonDefCount = 19;
+static int gDungeonDefCount = 20;
 
 void menuInit()
 {

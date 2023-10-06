@@ -83,6 +83,10 @@ export class LogicPassFixer {
       return true;
     }
 
+    if (check.scene === 'OOT_TREASURE_SHOP' && item !== Items.OOT_HEART_PIECE && this.state.settings.smallKeyShuffleChestGame === 'vanilla') {
+      return true;
+    }
+
     if (ItemHelpers.isTownStrayFairy(item) && this.state.settings.townFairyShuffle === 'vanilla') {
       return true;
     }

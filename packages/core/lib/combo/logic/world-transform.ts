@@ -466,6 +466,10 @@ export class LogicPassWorldTransform {
       items = [...items, Items.OOT_SMALL_KEY_GF, Items.OOT_KEY_RING_GF];
     }
 
+    if (settings.smallKeyShuffleChestGame === 'anywhere') {
+      items = [...items, Items.OOT_SMALL_KEY_TCG, Items.OOT_KEY_RING_TCG];
+    }
+
     if (settings.mapCompassShuffle === 'anywhere') {
       items = [...items, ...ItemGroups.MAPS, ...ItemGroups.COMPASSES];
     }
@@ -1008,6 +1012,12 @@ export class LogicPassWorldTransform {
         if (settings.smallKeyShuffleHideout !== 'vanilla') {
           this.removePlayerItem(makePlayerItem(Items.OOT_SMALL_KEY_GF, worldId));
           this.addPlayerItem(makePlayerItem(Items.OOT_KEY_RING_GF, worldId));
+        }
+
+        /* TCG keys need special handling */
+        if (settings.smallKeyShuffleChestGame !== 'vanilla') {
+          this.removePlayerItem(makePlayerItem(Items.OOT_SMALL_KEY_TCG, worldId));
+          this.addPlayerItem(makePlayerItem(Items.OOT_KEY_RING_TCG, worldId));
         }
       }
     }

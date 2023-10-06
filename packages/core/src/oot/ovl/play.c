@@ -13,6 +13,7 @@ static void debugCheat(GameState_Play* play)
 
         gSave.inventory.quest.gerudoCard = 1;
         gSave.inventory.dungeonKeys[SCE_OOT_TEMPLE_FIRE] = 8;
+        gSave.inventory.dungeonKeys[SCE_OOT_TREASURE_SHOP] = 6;
         gSave.inventory.items[ITS_OOT_STICKS] = ITEM_OOT_STICK;
         gSave.inventory.items[ITS_OOT_NUTS] = ITEM_OOT_NUT;
         gSave.inventory.items[ITS_OOT_BOMBS] = ITEM_OOT_BOMB;

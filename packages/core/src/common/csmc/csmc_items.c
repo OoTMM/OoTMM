@@ -130,6 +130,7 @@ static int csmcFromItemOot(s16 gi)
     case GI_OOT_SMALL_KEY_BOTW:
     case GI_OOT_SMALL_KEY_GF:
     case GI_OOT_SMALL_KEY_GTG:
+    case GI_OOT_SMALL_KEY_TCG:
     case GI_OOT_KEY_RING:
     case GI_OOT_KEY_RING_FOREST:
     case GI_OOT_KEY_RING_FIRE:
@@ -140,6 +141,7 @@ static int csmcFromItemOot(s16 gi)
     case GI_OOT_KEY_RING_BOTW:
     case GI_OOT_KEY_RING_GF:
     case GI_OOT_KEY_RING_GTG:
+    case GI_OOT_KEY_RING_TCG:
     case GI_OOT_RUPEE_SILVER_DC:
     case GI_OOT_RUPEE_SILVER_BOTW:
     case GI_OOT_RUPEE_SILVER_SPIRIT_CHILD:

@@ -1,0 +1,30 @@
+#include <combo.h>
+
+/* Remove fire temple rocks as child */
+PATCH_GROUP PG_OOT_CHEST_GAME_SHUFFLE
+
+PATCH_VROM 0x033a6000 + 0x7e
+.short 0x2c0
+PATCH_END
+
+PATCH_VROM 0x033a6000 + 0x8e
+.short 0x2c1
+PATCH_END
+
+PATCH_VROM 0x033a6000 + 0x9e
+.short 0x2c2
+PATCH_END
+
+PATCH_VROM 0x033a6000 + 0xae
+.short 0x2c3
+PATCH_END
+
+PATCH_VROM 0x033a6000 + 0xbe
+.short 0x2c4
+PATCH_END
+
+PATCH_VROM 0x033a6000 + 0xce
+.short 0x2c5
+PATCH_END
+
+PATCH_GROUP_END

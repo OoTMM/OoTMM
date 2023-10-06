@@ -23,6 +23,7 @@ void comboInitData(void)
     g.maxKeysOot[SCE_OOT_THIEVES_HIDEOUT] = 4;
     g.maxKeysOot[SCE_OOT_GERUDO_TRAINING_GROUND] = 9;
     g.maxKeysOot[SCE_OOT_INSIDE_GANON_CASTLE] = 2;
+    g.maxKeysOot[SCE_OOT_TREASURE_SHOP] = 0;
 
     /* Normal keys MM */
     g.maxKeysMm[0] = 1;
@@ -111,4 +112,8 @@ void comboInitData(void)
         g.maxKeysMm[2] = 0;
         g.maxKeysMm[3] = 0;
     }
+
+    /* Chest game */
+    if (comboConfig(CFG_OOT_CHEST_GAME_SHUFFLE))
+        g.maxKeysOot[SCE_OOT_TREASURE_SHOP] = 6;
 }

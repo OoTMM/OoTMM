@@ -406,7 +406,7 @@
     "Market Castle Entry": "true"
     "Temple of Time Entryway": "true"
     "Bombchu Bowling": "is_child"
-    "Treasure Game": "is_night && is_child"
+    "Treasure Chest Game": "is_night && is_child"
     "Shooting Gallery Child": "is_day && is_child"
     "Market Bazaar": "is_day && is_child"
     "Market Potion Shop": "is_day && is_child"
@@ -571,13 +571,6 @@
     "Market": "true"
   locations:
     "Shooting Gallery Child": "is_child && can_use_wallet(1)"
-"Treasure Game":
-  region: ENTRANCE
-  age_change: false
-  exits:
-    "Market": "true"
-  locations:
-    "Treasure Game HP": "has_lens_strict && can_use_wallet(1)"
 "Temple of Time Entryway":
   region: MARKET
   age_change: false
