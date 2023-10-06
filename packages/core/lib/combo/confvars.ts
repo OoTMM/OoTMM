@@ -88,6 +88,7 @@ export const CONFVARS = [
   'OOT_AGE_CHANGE',
   'OOT_AGE_CHANGE_NEEDS_OOT',
   'OOT_TRIALS',
+  'MM_PROGRESSIVE_GFS',
 ] as const;
 
 export type Confvar = typeof CONFVARS[number];

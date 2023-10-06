@@ -1058,6 +1058,11 @@ export class LogicPassWorldTransform {
       this.replaceItem(Items.OOT_SWORD_BIGGORON,  Items.OOT_SWORD_GORON);
     }
 
+    /* Handle MM Swords */
+    if (settings.progressiveGFS === 'progressive') {
+      this.replaceItem(Items.MM_GREAT_FAIRY_SWORD, Items.MM_SWORD);
+    }
+
     /* Handle MM Lullaby */
     if (this.state.config.has('MM_PROGRESSIVE_LULLABY')) {
       this.replaceItem(Items.MM_SONG_GORON, Items.MM_SONG_GORON_HALF);

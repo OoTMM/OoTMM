@@ -854,6 +854,16 @@ export const SETTINGS = [{
   ],
   default: 'separate'
 }, {
+  key: 'progressiveGFS',
+  name: 'MM Great Fairy Sword',
+  category: 'items.progressive',
+  type: 'enum',
+  values: [
+    { value: 'separate', name: 'Separate' },
+    { value: 'progressive', name: 'Progressive' },
+  ],
+  default: 'separate'
+}, {
   key: 'progressiveGoronLullaby',
   name: 'MM Goron Lullaby',
   category: 'items.progressive',
