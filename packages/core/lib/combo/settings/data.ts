@@ -236,7 +236,7 @@ export const SETTINGS = [{
     { value: 'ownDungeon', name: 'Own Minigame', description: 'Chest Minigame Keys can be found inside the minigame' },
     { value: 'anywhere', name: 'Anywhere', description: 'Chest Minigame Keys can be found anywhere' },
   ],
-  default: 'vanillas'
+  default: 'vanilla'
 }, {
   key: 'bossKeyShuffleOot',
   name: 'Boss Key Shuffle (OoT)',
