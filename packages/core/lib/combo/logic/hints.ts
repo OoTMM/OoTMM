@@ -279,6 +279,11 @@ export class LogicPassHints {
       return false;
     }
 
+    /* Non-shuffled TCG keys */
+    if ((ItemHelpers.isSmallKeyTCG(item.item) || ItemHelpers.isKeyRingTCG(item.item)) && this.state.settings.smallKeyShuffleChestGame !== 'anywhere') {
+      return false;
+    }
+
     /* Non-shuffled regular keys */
     if ((ItemHelpers.isSmallKeyRegularOot(item.item) || ItemHelpers.isKeyRingRegularOot(item.item)) && this.state.settings.smallKeyShuffleOot !== 'anywhere') {
       return false;

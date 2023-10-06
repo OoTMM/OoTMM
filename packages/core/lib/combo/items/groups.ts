@@ -618,6 +618,8 @@ export const REQUIRED = new Set([
   Items.OOT_BOSS_KEY_GANON,
   Items.OOT_SMALL_KEY_GF,
   Items.OOT_KEY_RING_GF,
+  Items.OOT_SMALL_KEY_TCG,
+  Items.OOT_KEY_RING_TCG,
   Items.MM_STRAY_FAIRY_TOWN,
   Items.OOT_WEIRD_EGG,
   Items.OOT_POCKET_EGG,

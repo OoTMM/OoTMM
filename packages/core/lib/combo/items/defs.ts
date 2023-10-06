@@ -563,6 +563,8 @@ const ITEM_IDS = [
   'SHARED_BUTTON_C_LEFT',
   'SHARED_BUTTON_C_UP',
   'SHARED_BUTTON_C_DOWN',
+  'OOT_SMALL_KEY_TCG',
+  'OOT_KEY_RING_TCG',
 ] as const;
 
 export type ItemID = typeof ITEM_IDS[number];

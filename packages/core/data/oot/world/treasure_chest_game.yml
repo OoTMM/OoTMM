@@ -1,0 +1,46 @@
+"Treasure Chest Game":
+  dungeon: TCG
+  exits:
+    "Market": "true"
+    "Treasure Chest Game Room 1": "small_keys_tcg(1)"
+  locations:
+    "Treasure Chest Game Buy Key": "can_use_wallet(1)"
+"Treasure Chest Game Room 1":
+  dungeon: TCG
+  exits:
+    "Treasure Chest Game Room 2": "small_keys_tcg(2)"
+  locations:
+    "Treasure Chest Game Room 1 Chest Left": "true"
+    "Treasure Chest Game Room 1 Chest Right": "true"
+"Treasure Chest Game Room 2":
+  dungeon: TCG
+  exits:
+    "Treasure Chest Game Room 3": "small_keys_tcg(3)"
+  locations:
+    "Treasure Chest Game Room 2 Chest Left": "true"
+    "Treasure Chest Game Room 2 Chest Right": "true"
+"Treasure Chest Game Room 3":
+  dungeon: TCG
+  exits:
+    "Treasure Chest Game Room 4": "small_keys_tcg(4)"
+  locations:
+    "Treasure Chest Game Room 3 Chest Left": "true"
+    "Treasure Chest Game Room 3 Chest Right": "true"
+"Treasure Chest Game Room 4":
+  dungeon: TCG
+  exits:
+    "Treasure Chest Game Room 5": "small_keys_tcg(5)"
+  locations:
+    "Treasure Chest Game Room 4 Chest Left": "true"
+    "Treasure Chest Game Room 4 Chest Right": "true"
+"Treasure Chest Game Room 5":
+  dungeon: TCG
+  exits:
+    "Treasure Chest Game Room 6": "small_keys_tcg(6)"
+  locations:
+    "Treasure Chest Game Room 5 Chest Left": "true"
+    "Treasure Chest Game Room 5 Chest Right": "true"
+"Treasure Chest Game Room 6":
+  dungeon: TCG
+  locations:
+    "Treasure Chest Game HP": "true"

@@ -113,6 +113,10 @@ const DUNGEON_ITEMS = {
     Items.OOT_SMALL_KEY_GF,
     Items.OOT_KEY_RING_GF
   ],
+  TCG: [
+    Items.OOT_SMALL_KEY_TCG,
+    Items.OOT_KEY_RING_TCG
+  ],
   GTG: [
     Items.OOT_SMALL_KEY_GTG,
     Items.OOT_KEY_RING_GTG,
@@ -665,6 +669,8 @@ export class LogicPassSolver {
         const locations = new Set([...locationIds].map(x => makeLocation(x, player)));
 
         if ((ItemHelpers.isSmallKeyHideout(item) || ItemHelpers.isKeyRingHideout(item)) && settings.smallKeyShuffleHideout === 'anywhere') {
+          continue;
+        } else if ((ItemHelpers.isSmallKeyTCG(item) || ItemHelpers.isKeyRingTCG(item)) && settings.smallKeyShuffleChestGame === 'anywhere') {
           continue;
         } else if ((ItemHelpers.isSmallKeyRegularOot(item) || ItemHelpers.isKeyRingRegularOot(item)) && settings.smallKeyShuffleOot === 'anywhere') {
           continue;

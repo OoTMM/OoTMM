@@ -47,6 +47,7 @@ import worldOotGerudoFortress from '../../data/oot/world/gerudo_fortress.yml';
 import worldOotGerudoTrainingGrounds from '../../data/oot/world/gerudo_training_grounds.yml';
 import worldOotGanonCastle from '../../data/oot/world/ganon_castle.yml';
 import worldOotGanonTower from '../../data/oot/world/ganon_tower.yml';
+import worldOotTreasureChestGame from '../../data/oot/world/treasure_chest_game.yml';
 
 const worldOot = {
   overworld: worldOotOverworld,
@@ -65,6 +66,7 @@ const worldOot = {
   GTG: worldOotGerudoTrainingGrounds,
   Ganon: worldOotGanonCastle,
   Ganon2: worldOotGanonTower,
+  TCG: worldOotTreasureChestGame,
 };
 
 import worldMqDekuTree from '../../data/oot/world_mq/deku_tree_mq.yml';
