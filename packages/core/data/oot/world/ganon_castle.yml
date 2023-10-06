@@ -8,7 +8,7 @@
     "Ganon Castle Water": "true"
     "Ganon Castle Spirit": "true"
     "Ganon Castle Shadow": "true"
-    "Ganon Castle Stairs": "true"
+    "Ganon Castle Stairs": "ganon_barrier"
   locations:
     "Ganon Castle Leftmost Scrub": "has_lens && can_hit_scrub && scrub_price(0x21)"
     "Ganon Castle Left-Center Scrub": "has_lens && can_hit_scrub && scrub_price(0x22)"

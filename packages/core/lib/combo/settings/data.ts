@@ -487,6 +487,17 @@ export const SETTINGS = [{
 { ...SETTING_PRICE, key: 'priceMmShops', name: 'MM Shops Prices', description: 'Sets the price of items sold inside MM shops' },
 { ...SETTING_PRICE, key: 'priceMmTingle', name: 'MM Tingle Prices', description: 'Sets the price of items sold by Tingle' },
 {
+  key: 'ganonTrials',
+  name: 'Ganon Trials',
+  category: 'main.events',
+  type: 'enum',
+  description: 'Enables or disables the trials in Ganon\'s Castle',
+  values: [
+    { value: 'none', name: 'None', description: 'Trials are not required to enter the tower' },
+    { value: 'all', name: 'All', description: 'All trials are required to enter the tower' },
+  ],
+  default: 'none'
+}, {
   key: 'startingAge',
   name: 'Starting Age',
   category: 'main.events',

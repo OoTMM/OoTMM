@@ -87,6 +87,7 @@ export const CONFVARS = [
   'MM_OCARINA_BUTTONS',
   'OOT_AGE_CHANGE',
   'OOT_AGE_CHANGE_NEEDS_OOT',
+  'OOT_TRIALS',
 ] as const;
 
 export type Confvar = typeof CONFVARS[number];

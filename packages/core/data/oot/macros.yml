@@ -248,3 +248,6 @@
 "climb_anywhere": "setting(climbMostSurfacesOot)"
 "hookshot_anywhere": "can_hookshot && setting(hookshotAnywhereOot)"
 "longshot_anywhere": "can_longshot && setting(hookshotAnywhereOot)"
+
+# Events
+"ganon_barrier": "setting(ganonTrials, none) || (event(GANON_TRIAL_LIGHT) && event(GANON_TRIAL_FOREST) && event(GANON_TRIAL_FIRE) && event(GANON_TRIAL_WATER) && event(GANON_TRIAL_SHADOW) && event(GANON_TRIAL_SPIRIT))"

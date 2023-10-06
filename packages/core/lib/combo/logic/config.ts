@@ -177,6 +177,7 @@ export class LogicPassConfig {
       MM_OCARINA_BUTTONS: settings.ocarinaButtonsShuffleMm,
       OOT_AGE_CHANGE: settings.ageChange !== 'none',
       OOT_AGE_CHANGE_NEEDS_OOT: settings.ageChange === 'oot',
+      OOT_TRIALS: settings.ganonTrials !== 'none',
     };
 
     for (const v in exprs) {

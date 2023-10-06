@@ -181,6 +181,18 @@ static void applyStartingEvents(void)
         }
     }
 
+    /* Ganon trials */
+    if (!comboConfig(CFG_OOT_TRIALS))
+    {
+        SetEventChk(EV_OOT_CHK_TRIAL_LIGHT);
+        SetEventChk(EV_OOT_CHK_TRIAL_FIRE);
+        SetEventChk(EV_OOT_CHK_TRIAL_SHADOW);
+        SetEventChk(EV_OOT_CHK_TRIAL_WATER);
+        SetEventChk(EV_OOT_CHK_TRIAL_FOREST);
+        SetEventChk(EV_OOT_CHK_TRIAL_SPIRIT);
+        SetEventChk(EN_OOT_CHK_GANON_BARRIER);
+    }
+
     if (comboConfig(CFG_OOT_FREE_SCARECROW))
     {
         SetEventChk(EV_OOT_CHK_SONG_SCARECROW_ADULT);
