@@ -35,7 +35,7 @@ int comboAddSmallKeyOot(u16 dungeonId)
     s8 keyCount;
 
     /* Check for max keys */
-    if (dungeonId != SCE_OOT_TREASURE_SHOP && gOotSave.inventory.dungeonItems[dungeonId].maxKeys >= g.maxKeysOot[dungeonId])
+    if ((dungeonId != SCE_OOT_TREASURE_SHOP || comboConfig(CFG_OOT_CHEST_GAME_SHUFFLE)) && gOotSave.inventory.dungeonItems[dungeonId].maxKeys >= g.maxKeysOot[dungeonId])
         return 0;
 
     keyCount = gOotSave.inventory.dungeonKeys[dungeonId];
@@ -44,7 +44,7 @@ int comboAddSmallKeyOot(u16 dungeonId)
     else
         keyCount++;
     gOotSave.inventory.dungeonKeys[dungeonId] = keyCount;
-    if (dungeonId == SCE_OOT_TREASURE_SHOP)
+    if (dungeonId == SCE_OOT_TREASURE_SHOP && !comboConfig(CFG_OOT_CHEST_GAME_SHUFFLE))
         return 0;
     else
         return ++gOotSave.inventory.dungeonItems[dungeonId].maxKeys;
@@ -1340,6 +1340,9 @@ int comboAddItemOot(s16 gi, int noEffect)
     case GI_OOT_SMALL_KEY_GTG:
         count = comboAddSmallKeyOot(SCE_OOT_GERUDO_TRAINING_GROUND);
         break;
+    case GI_OOT_SMALL_KEY_TCG:
+        count = comboAddSmallKeyOot(SCE_OOT_TREASURE_SHOP);
+        break;
     case GI_OOT_KEY_RING_FOREST:
         comboAddKeyRingOot(SCE_OOT_TEMPLE_FOREST);
         break;
@@ -1366,6 +1369,9 @@ int comboAddItemOot(s16 gi, int noEffect)
         break;
     case GI_OOT_KEY_RING_GTG:
         comboAddKeyRingOot(SCE_OOT_GERUDO_TRAINING_GROUND);
+        break;
+    case GI_OOT_KEY_RING_TCG:
+        comboAddKeyRingOot(SCE_OOT_TREASURE_SHOP);
         break;
     case GI_OOT_SKELETON_KEY:
         comboAddSkeletonKeyOot();

@@ -306,6 +306,8 @@ OOT_BUTTON_C_RIGHT:                       0x133
 OOT_BUTTON_C_LEFT:                        0x134
 OOT_BUTTON_C_UP:                          0x135
 OOT_BUTTON_C_DOWN:                        0x136
+OOT_SMALL_KEY_TCG:                        0x137
+OOT_KEY_RING_TCG:                         0x138
 
 MM_RUPEE_GREEN:               0x01
 MM_RUPEE_BLUE:                0x02

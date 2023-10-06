@@ -89,6 +89,7 @@ export const CONFVARS = [
   'OOT_AGE_CHANGE_NEEDS_OOT',
   'OOT_TRIALS',
   'MM_PROGRESSIVE_GFS',
+  'OOT_CHEST_GAME_SHUFFLE',
 ] as const;
 
 export type Confvar = typeof CONFVARS[number];

@@ -68,7 +68,7 @@ static int csmcEnabledActor(Actor* this, GameState_Play* play)
         return 0;
 
 #if defined(GAME_OOT)
-    if (play->sceneId == SCE_OOT_TREASURE_SHOP && (this->variable & 0x1f) != 0x0a)
+    if (play->sceneId == SCE_OOT_TREASURE_SHOP && (this->variable & 0x1f) != 0x0a && !comboConfig(CFG_OOT_CHEST_GAME_SHUFFLE))
         return 0;
 #endif
 
