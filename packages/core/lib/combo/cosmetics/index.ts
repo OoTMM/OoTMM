@@ -207,6 +207,10 @@ class CosmeticsPass {
     const tex = Buffer.from(this.roms.mm.rom.subarray(paddr + texOff, paddr + texOff + 8 * 16 * 2));
     const newTex = recolorImage('rgba16', tex, null, 0x00b439, color);
     this.patch.addDataPatch('mm', paddr + texOff, newTex);
+    const texOff2 = 0xceb8;
+    const tex2 = Buffer.from(this.roms.mm.rom.subarray(paddr + texOff2, paddr + texOff2 + 8 * 16 * 2));
+    const newTex2 = recolorImage('rgba16', tex2, null, 0x00b439, color);
+    this.patch.addDataPatch('mm', paddr + texOff2, newTex2);
   }
 
   private patchMmTunicZora(color: number) {
