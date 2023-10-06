@@ -11,7 +11,7 @@ static void hintBeanSeller(GameState_Play* play)
 
     comboTextAppendHeader(&b);
     comboTextAppendStr(&b, TEXT_FAST "Chomp chomp chomp..." TEXT_NL "How about buying ");
-    comboTextAppendNpcReward(&b, NPC_OOT_BEAN_SELLER, GI_OOT_MAGIC_BEAN);
+    comboTextAppendNpcReward(&b, NPC_OOT_BEAN_SELLER, GI_OOT_MAGIC_BEAN, -1);
     comboTextAppendStr(&b, "?" TEXT_BB TEXT_FAST "It's only 60 rupees..." TEXT_NL TEXT_NL TEXT_COLOR_GREEN TEXT_CHOICE2 "Buy" TEXT_NL "Don't buy" TEXT_END);
     comboTextAutoLineBreaks(start);
 }

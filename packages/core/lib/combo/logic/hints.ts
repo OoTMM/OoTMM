@@ -33,7 +33,7 @@ const FIXED_HINTS_LOCATIONS = [
   'MM Ocean Spider House Wallet',
   'MM Clock Town Great Fairy',
   'MM Clock Town Great Fairy Alt',
-]
+];
 
 const HINTS_ITEMS_ALWAYS = [
   'OOT_FROGS_FINAL',
@@ -123,6 +123,7 @@ type WorldItemHints = {
   lightArrow: Region;
   oathToOrder: Region;
   ganonBossKey: Region;
+  staticHintsImportances: number[];
 };
 
 export type WorldHints = WorldItemHints & {
@@ -858,11 +859,15 @@ export class LogicPassHints {
         this.markLocation(l);
       }
 
+      /* Compute static hints importance */
+      const staticHintsImportances = FIXED_HINTS_LOCATIONS.map(x => this.locImportance(makeLocation(x, world)));
+
       worldItemHints.push({
         dungeonRewards: locDungeonRewards.map((x) => this.toRegion(world, x)),
         lightArrow: this.toRegion(world, locLightArrow),
         oathToOrder: this.toRegion(world, locOathToOrder),
         ganonBossKey: this.toRegion(world, locGanonBossKey),
+        staticHintsImportances,
       });
     }
 

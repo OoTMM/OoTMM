@@ -100,6 +100,14 @@ export const toU8Buffer = (data: number[]) => {
   return buf;
 };
 
+export const toI8Buffer = (data: number[]) => {
+  const buf = Buffer.alloc(data.length);
+  for (let i = 0; i < data.length; ++i) {
+    buf.writeInt8(data[i], i);
+  }
+  return buf;
+};
+
 export const toU16Buffer = (data: number[]) => {
   const buf = Buffer.alloc(data.length * 2);
   for (let i = 0; i < data.length; ++i) {

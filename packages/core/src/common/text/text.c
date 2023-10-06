@@ -601,6 +601,11 @@ void comboTextAppendOrd(char** b, int num)
 
 void comboTextAppendItemName(char** b, s16 gi, int flags)
 {
+    comboTextAppendItemNameEx(b, gi, flags, -1);
+}
+
+void comboTextAppendItemNameEx(char** b, s16 gi, int flags, int importance)
+{
     char* start;
     const char* itemName;
     int ambiguous;
@@ -713,6 +718,28 @@ void comboTextAppendItemName(char** b, s16 gi, int flags)
         comboTextAppendStr(b, ")");
     }
 
+    if (comboConfig(CFG_HINT_IMPORTANCE) && !isItemFastBuy(gi))
+    {
+        switch (importance)
+        {
+        case 0:
+            comboTextAppendStr(b, " (" TEXT_COLOR_PINK "not required");
+            comboTextAppendClearColor(b);
+            comboTextAppendStr(b, ")");
+            break;
+        case 1:
+            comboTextAppendStr(b, " (" TEXT_COLOR_TEAL "sometimes required");
+            comboTextAppendClearColor(b);
+            comboTextAppendStr(b, ")");
+            break;
+        case 2:
+            comboTextAppendStr(b, " (" TEXT_COLOR_YELLOW "required");
+            comboTextAppendClearColor(b);
+            comboTextAppendStr(b, ")");
+            break;
+        }
+    }
+
     if (flags & TF_CAPITALIZE)
     {
         start[0] = toupper(start[0]);
@@ -721,13 +748,23 @@ void comboTextAppendItemName(char** b, s16 gi, int flags)
 
 void comboTextAppendItemNameQuery(char** b, const ComboItemQuery* q, int flags)
 {
+    comboTextAppendItemNameQueryEx(b, q, flags, -1);
+}
+
+void comboTextAppendItemNameQueryEx(char** b, const ComboItemQuery* q, int flags, int importance)
+{
     ComboItemOverride o;
 
     comboItemOverride(&o, q);
-    comboTextAppendItemNameOverride(b, &o, flags);
+    comboTextAppendItemNameOverrideEx(b, &o, flags, importance);
 }
 
 void comboTextAppendItemNameOverride(char** b, const ComboItemOverride* o, int flags)
+{
+    comboTextAppendItemNameOverrideEx(b, o, flags, -1);
+}
+
+void comboTextAppendItemNameOverrideEx(char** b, const ComboItemOverride* o, int flags, int importance)
 {
     s16 gi;
 
@@ -735,7 +772,7 @@ void comboTextAppendItemNameOverride(char** b, const ComboItemOverride* o, int f
         gi = o->giRaw;
     else
         gi = o->gi;
-    comboTextAppendItemName(b, gi, flags);
+    comboTextAppendItemNameEx(b, gi, flags, importance);
     if (o->player != PLAYER_SELF && o->player != PLAYER_ALL && o->player != gComboData.playerId)
     {
         comboTextAppendStr(b, " for " TEXT_COLOR_YELLOW "Player ");
@@ -932,14 +969,14 @@ void comboTextHijackOathToOrder(GameState_Play* play)
 }
 #endif
 
-void comboTextAppendNpcReward(char** b, s16 npcId, s16 gi)
+void comboTextAppendNpcReward(char** b, s16 npcId, s16 gi, int importance)
 {
     ComboItemQuery q = ITEM_QUERY_INIT;
 
     q.ovType = OV_NPC;
     q.id = npcId;
     q.gi = gi;
-    comboTextAppendItemNameQuery(b, &q, TF_PREPOS | TF_PROGRESSIVE);
+    comboTextAppendItemNameQueryEx(b, &q, TF_PREPOS | TF_PROGRESSIVE, importance);
 }
 
 void comboTextMessageCantBuy(GameState_Play* play, int flags)

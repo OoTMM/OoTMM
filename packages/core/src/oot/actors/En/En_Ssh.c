@@ -34,7 +34,7 @@ static void EnSsh_Hint(GameState_Play* play, int index)
     comboTextAppendStr(&b,
         " Spiders of the Curse" TEXT_CZ " and I will give you "
     );
-    comboTextAppendItemNameQuery(&b, &q, TF_PREPOS | TF_PROGRESSIVE);
+    comboTextAppendItemNameQueryEx(&b, &q, TF_PREPOS | TF_PROGRESSIVE, gComboData.staticHintsImportance[index]);
     comboTextAppendStr(&b, TEXT_CZ "." TEXT_END);
     comboTextAutoLineBreaks(play->msgCtx.textBuffer);
 }

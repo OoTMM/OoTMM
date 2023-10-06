@@ -25,6 +25,12 @@ static void EnSsh_DisplayHint(Actor* this, GameState_Play* play)
     ComboItemQuery q;
     char* b;
     char* start;
+    int importanceIndex;
+
+    if (play->sceneId == SCE_MM_SPIDER_HOUSE_OCEAN)
+        importanceIndex = 17;
+    else
+        importanceIndex = 16;
 
     EnSsh_ItemQuery(&q, play, 0);
     PlayerDisplayTextBox(play, 0x915, this);
@@ -32,7 +38,7 @@ static void EnSsh_DisplayHint(Actor* this, GameState_Play* play)
     comboTextAppendHeader(&b);
     start = b;
     comboTextAppendStr(&b, "If you lift the curse... I'll give you... ");
-    comboTextAppendItemNameQuery(&b, &q, TF_PREPOS | TF_PROGRESSIVE);
+    comboTextAppendItemNameQueryEx(&b, &q, TF_PREPOS | TF_PROGRESSIVE, gComboData.staticHintsImportance[importanceIndex]);
     comboTextAppendStr(&b, "... Hurry... Please..." TEXT_SIGNAL TEXT_END);
     comboTextAutoLineBreaks(start);
 }

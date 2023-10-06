@@ -45,7 +45,7 @@ static void hintZoraEggs(GameState_Play* play)
     comboTextAppendStr(&b, "If you can bring all of the " TEXT_COLOR_BLUE "Zora Eggs ");
     comboTextAppendClearColor(&b);
     comboTextAppendStr(&b, "here, you will get ");
-    comboTextAppendItemNameQuery(&b, &q, TF_PREPOS | TF_PROGRESSIVE);
+    comboTextAppendItemNameQueryEx(&b, &q, TF_PREPOS | TF_PROGRESSIVE, gComboData.staticHintsImportance[7]);
     comboTextAppendStr(&b, "!" TEXT_SIGNAL TEXT_END);
     comboTextAutoLineBreaks(start);
 }
