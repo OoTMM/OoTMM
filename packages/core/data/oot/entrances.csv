@@ -94,7 +94,7 @@ FAIRY_DIN,                                indoors,          Fairy Fountain Din, 
 FAIRY_FARORE,                             indoors,          Fairy Fountain Farore,                      Zora Fountain,                                ZORA_FOUNTAIN_FROM_FAIRY
 FAIRY_NAYRU,                              indoors,          Fairy Fountain Nayru,                       Desert Colossus,                              DESERT_COLOSSUS_FROM_FAIRY
 BOMBCHU_BOWLING,                          indoors,          Bombchu Bowling,                            Market,                                       MARKET_FROM_BOWLING
-TREASURE_GAME,                            indoors,          Treasure Game,                              Market,                                       MARKET_FROM_TREASURE_GAME
+TREASURE_GAME,                            indoors,          Treasure Chest Game,                        Market,                                       MARKET_FROM_TREASURE_GAME
 BOMBCHU_SHOP,                             indoors,          Market Bombchu Shop,                        Back Alley,                                   MARKET_FROM_BOMBCHU_SHOP
 ALLEY_HOUSE,                              indoors,          Market Back Alley East Home,                Back Alley,                                   MARKET_FROM_ALLEY_HOUSE
 CHILD_ARCHERY,                            indoors,          Shooting Gallery Child,                     Market,                                       MARKET_FROM_ARCHERY
@@ -134,7 +134,7 @@ HYRULE_CASTLE_FROM_FAIRY,                 indoors-exit,     Near Fairy Fountain 
 ZORA_FOUNTAIN_FROM_FAIRY,                 indoors-exit,     Zora Fountain,                              Fairy Fountain Farore,                        FAIRY_FARORE
 DESERT_COLOSSUS_FROM_FAIRY,               indoors-exit,     Desert Colossus,                            Fairy Fountain Nayru,                         FAIRY_NAYRU
 MARKET_FROM_BOWLING,                      indoors-exit,     Market,                                     Bombchu Bowling,                              BOMBCHU_BOWLING
-MARKET_FROM_TREASURE_GAME,                indoors-exit,     Market,                                     Treasure Game,                                TREASURE_GAME
+MARKET_FROM_TREASURE_GAME,                indoors-exit,     Market,                                     Treasure Chest Game,                          TREASURE_GAME
 MARKET_FROM_BOMBCHU_SHOP,                 indoors-exit,     Back Alley,                                 Market Bombchu Shop,                          BOMBCHU_SHOP
 MARKET_FROM_ALLEY_HOUSE,                  indoors-exit,     Back Alley,                                 Market Back Alley East Home,                  ALLEY_HOUSE
 TEMPLE_OF_TIME_ENTRYWAY_FROM_TEMPLE,      indoors-exit,     Temple of Time Entryway,                    Temple of Time,                               TEMPLE_OF_TIME
