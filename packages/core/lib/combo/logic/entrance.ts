@@ -272,10 +272,7 @@ export class LogicPassEntrances {
   private fixDungeons(worldId: number) {
     const world = this.worlds[worldId];
     /* Set the dungeon list */
-    let shuffledDungeons = new Set(['']);
-    if (this.input.settings.erMajorDungeons) {
-      ['DT', 'DC', 'JJ', 'Forest', 'Fire', 'Water', 'Shadow', 'Spirit', 'WF', 'SH', 'GB', 'ST', 'IST'].forEach(d => shuffledDungeons.add(d));
-    }
+    let shuffledDungeons = new Set(['DT', 'DC', 'JJ', 'Forest', 'Fire', 'Water', 'Shadow', 'Spirit', 'WF', 'SH', 'GB', 'ST', 'IST']);
     if (this.input.settings.erMinorDungeons) {
       ['BotW', 'IC', 'GTG'].forEach(d => shuffledDungeons.add(d));
     }
@@ -454,10 +451,7 @@ export class LogicPassEntrances {
   }
 
   private placeIndoors(worldId: number) {
-    const pool = [''];
-    if (this.input.settings.erIndoorsMajor) {
-      pool.push('indoors');
-    }
+    const pool = ['indoors'];
     if (this.input.settings.erIndoorsExtra) {
       pool.push('indoors-extra');
     }
