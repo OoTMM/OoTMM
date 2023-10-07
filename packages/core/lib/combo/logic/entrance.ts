@@ -517,11 +517,11 @@ export class LogicPassEntrances {
     for (const w of newWorlds) {
       const a = w.areas['OOT SPAWN'];
       if (this.input.settings.startingAge === 'child') {
-        a.exits['OOT SPAWN ADULT'] = exprAge('child');
+        a.exits['OOT SPAWN ADULT'] = exprAge('adult');
         a.exits['OOT SPAWN CHILD'] = exprFalse();
       } else {
         a.exits['OOT SPAWN ADULT'] = exprFalse();
-        a.exits['OOT SPAWN CHILD'] = exprAge('adult');
+        a.exits['OOT SPAWN CHILD'] = exprAge('child');
       }
     }
 
