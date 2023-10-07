@@ -519,12 +519,14 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
       base.erGanonCastle = true;
       base.erGanonTower = true;
       base.erIkanaCastle = true;
+      base.erMajorDungeons = true;
       base.erMinorDungeons = true;
       base.erPirateFortress = true;
       base.erSecretShrine = true;
       base.erSpiderHouses = true;
       base.erRegionsExtra = true;
       base.erRegionsShortcuts = true;
+      base.erIndoorsMajor = true;
       base.erIndoorsExtra = true;
       base.erWarpsOwls = true;
       break;
@@ -533,12 +535,14 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
       base.erGanonCastle = booleanWeighted(random, 0.5);
       base.erGanonTower = booleanWeighted(random, 0.5);
       base.erIkanaCastle = booleanWeighted(random, 0.5);
+      base.erMajorDungeons = booleanWeighted(random, 0.5);
       base.erMinorDungeons = booleanWeighted(random, 0.5);
       base.erPirateFortress = booleanWeighted(random, 0.5);
       base.erSecretShrine = booleanWeighted(random, 0.5);
       base.erSpiderHouses = booleanWeighted(random, 0.5);
       base.erRegionsExtra = booleanWeighted(random, 0.5);
       base.erRegionsShortcuts = booleanWeighted(random, 0.5);
+      base.erIndoorsMajor = booleanWeighted(random, 0.5);
       base.erIndoorsExtra = booleanWeighted(random, 0.5);
       base.erWarpsOwls = booleanWeighted(random, 0.5);
     }
