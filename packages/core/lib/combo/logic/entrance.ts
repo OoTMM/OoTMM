@@ -461,7 +461,7 @@ export class LogicPassEntrances {
     if (this.input.settings.erIndoorsExtra) {
       pool.add('indoors-extra');
     }
-    this.placePool(worldId, pool, { ownGame: this.input.settings.erIndoors === 'ownGame' });
+    this.placePool(worldId, Array.from(pool), { ownGame: this.input.settings.erIndoors === 'ownGame' });
   }
 
   private placeWarps(worldId: number) {
