@@ -88,7 +88,7 @@ static void fairyHint(GameState_Play* play, int index)
     comboTextAppendStr(&b, "Young one, please help us! If you bring the " TEXT_COLOR_PINK "15 Stray Fairies");
     comboTextAppendClearColor(&b);
     comboTextAppendStr(&b, " here, we will give you ");
-    comboTextAppendItemNameQueryEx(&b, &q, TF_PREPOS | TF_PROGRESSIVE, gComboData.staticHintsImportance[9 + index]);
+    comboTextAppendItemNameQueryEx(&b, &q, TF_PREPOS | TF_PROGRESSIVE, gComboData.staticHintsImportance[9 + (index - 2)]);
     comboTextAppendStr(&b, "!" TEXT_END);
     comboTextAutoLineBreaks(start);
 }
