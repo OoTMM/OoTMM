@@ -606,10 +606,12 @@ void comboTextAppendItemName(char** b, s16 gi, int flags)
 
 void comboTextAppendItemNameEx(char** b, s16 gi, int flags, int importance)
 {
+    s16 rawGi;
     char* start;
     const char* itemName;
     int ambiguous;
 
+    rawGi = gi;
 #if defined(GAME_MM)
     gi ^= MASK_FOREIGN_GI;
 #endif
@@ -718,7 +720,7 @@ void comboTextAppendItemNameEx(char** b, s16 gi, int flags, int importance)
         comboTextAppendStr(b, ")");
     }
 
-    if (comboConfig(CFG_HINT_IMPORTANCE) && !isItemFastBuy(gi))
+    if (comboConfig(CFG_HINT_IMPORTANCE) && !isItemFastBuy(rawGi))
     {
         switch (importance)
         {
