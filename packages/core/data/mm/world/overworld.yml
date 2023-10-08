@@ -514,7 +514,7 @@
     "Stock Pot Inn Guest Room Chest": "has(ROOM_KEY)"
     "Stock Pot Inn Staff Room Chest": "is_night3"
     "Stock Pot Inn Room Key": "between(DAY1_PM_01_45, DAY1_PM_04_00)"
-    "Stock Pot Inn Letter to Kafei": "cond(setting(erIndoors, none), event(MEET_ANJU) && (has(ROOM_KEY) || has(MASK_DEKU)), event(MEET_ANJU))"
+    "Stock Pot Inn Letter to Kafei": "cond(setting(erIndoorsExtra), event(MEET_ANJU), event(MEET_ANJU) && (has(ROOM_KEY) || has(MASK_DEKU)))"
     "Stock Pot Inn Couple's Mask": "event(SUN_MASK) && event(DELIVER_PENDANT) && event(MEET_ANJU) && after(NIGHT3_AM_04_00)"
     "Stock Pot Inn Grandma HP 1": "has(MASK_ALL_NIGHT) && (is_day1 || is_day2)"
     "Stock Pot Inn Grandma HP 2": "has(MASK_ALL_NIGHT) && (is_day1 || is_day2)"
@@ -2477,7 +2477,7 @@
   exits:
     "Zora Hall": "true"
   locations:
-    "Zora Hall Evan HP": "can_play_evan && cond(!setting(erDungeons, none) && setting(bossWarpPads, Remains), has_mask_zora, true)" #This conditional is necessary since Evan is not in his room in clear state, so you need to guarantee Zora for the check to be accessible.
+    "Zora Hall Evan HP": "can_play_evan && cond(setting(erMajorDungeons) && (setting(bossWarpPads, Remains) || (trick(MM_GBT_CENTRAL_GEYSER) && (trick(MM_GBT_WATERWHEEL_GORON) || setting(hookshotAnywhereMm)))), has_mask_zora, true)" #This conditional is necessary since Evan is not in his room in clear state, so you need to guarantee Zora for the check to be accessible.
 "Lulu's Room":
   region: ENTRANCE
   exits:

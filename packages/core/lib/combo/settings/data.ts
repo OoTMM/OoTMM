@@ -1278,7 +1278,16 @@ export const SETTINGS = [{
     { value: 'ownGame', name: 'Own Game' },
     { value: 'full', name: 'Full' },
   ],
+  description: 'Enable the ability to shuffle dungeons within their own game or across both.',
   default: 'none'
+}, {
+  key: 'erMajorDungeons',
+  name: 'Shuffle Major Dungeons with Dungeons',
+  category: 'entrances',
+  type: 'boolean',
+  description: 'If turned on, it means the boss-containing dungeons and uninverted Stone Tower Temple will be shuffled.',
+  default: false,
+  cond: (x: any) => x.erDungeons !== 'none'
 }, {
   key: 'erMinorDungeons',
   name: 'Shuffle OoT Minor Dungeons with Dungeons',
@@ -1375,7 +1384,15 @@ export const SETTINGS = [{
     { value: 'full', name: 'Full' },
   ],
   default: 'none',
-  description: 'Shuffle most interiors with each other',
+  description: 'Enable the ability to shuffle interiors in their own game or across both games.',
+}, {
+  key: 'erIndoorsMajor',
+  name: 'Shuffle Most Interiors',
+  category: 'entrances',
+  type: 'boolean',
+  description: 'Shuffle most interiors with each other.',
+  default: false,
+  cond: (x: any) => x.erIndoors !== 'none'
 }, {
   key: 'erIndoorsExtra',
   name: 'Shuffle Extra Interiors',
