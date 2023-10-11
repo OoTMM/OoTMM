@@ -501,7 +501,7 @@ export class LogicPassEntrances {
   private placeRegionWarps(worldId: number) {
     const pool = new Set(['region-warp']);
     if (this.input.settings.erRegionWarpsExtra) {
-      pool.push('region-warp-extra');
+      pool.add('region-warp-extra');
     }
     if (this.input.settings.erRegionWarps === 'regions') {
       pool.delete('region-warp', 'region-warp-extra');
