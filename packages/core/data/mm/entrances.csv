@@ -33,8 +33,8 @@ GREAT_BAY_COAST_FROM_FIELD,                         region,           Great Bay 
 IKANA_VALLEY_FROM_ROAD,                             region,           Ikana Valley,                       Road to Ikana Top,                          IKANA_ROAD_FROM_VALLEY
 ROMANI_RANCH_FROM_MILK_ROAD,                        region,           Romani Ranch,                       Near Romani Ranch,                          MILK_ROAD_FROM_ROMANI_RANCH
 SWAMP_FROM_IKANA_CANYON,                            region-warp,      Swamp Front,                        Ikana Valley,                               NONE
-IKANA_CASTLE_INTERIOR_KEG,                          region-warp-extra,Ancient Castle of Ikana Roof Interior,         Ancient Castle of Ikana,                    NONE
-IKANA_CASTLE_INTERIOR_BLOCK,                        region-warp-extra,Ancient Castle of Ikana Roof Interior,         Ancient Castle of Ikana Interior South,     NONE   
+IKANA_CASTLE_INTERIOR_KEG,                          region-warp-extra,Ancient Castle of Ikana,            Ancient Castle of Ikana Roof Interior,      NONE
+IKANA_CASTLE_INTERIOR_BLOCK,                        region-warp-extra,Ancient Castle of Ikana Interior South,Ancient Castle of Ikana Roof Interior,   NONE   
 SWAMP_ROAD_FROM_SWAMP,                              overworld,        Road to Southern Swamp,             Swamp Front,                                SWAMP_FROM_ROAD
 PATH_FROM_MOUNTAIN_VILLAGE,                         overworld,        Mountain Village Path Upper,        Mountain Village,                           MOUNTAIN_VILLAGE_FROM_PATH
 FIELD_FROM_GREAT_BAY_COAST,                         overworld,        Great Bay Fence,                    Great Bay Coast,                            GREAT_BAY_COAST_FROM_FIELD
