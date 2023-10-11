@@ -440,26 +440,26 @@ export class LogicPassEntrances {
   }
 
   private placeRegions(worldId: number) {
-    const pool = ['region'];
+    const pool = new Set['region'];
     if (this.input.settings.erRegionsExtra) {
-      pool.push('region-extra');
+      pool.add('region-extra');
     }
     if (this.input.settings.erRegionsShortcuts) {
-      pool.push('region-shortcut');
+      pool.add('region-shortcut');
     }
     if (this.input.settings.erRegionWarps === 'regions') {
-      pool.push('region-warp');
+      pool.add('region-warp');
     }
     if (this.input.settings.erRegionWarps === 'both') {
-      pool.push('region-warp');
+      pool.add('region-warp');
     }
     if (this.input.settings.erRegionWarps === 'regions' && this.input.settings.erRegionWarpsExtra) {
-      pool.push('region-warp-extra');
+      pool.add('region-warp-extra');
     }
     if (this.input.settings.erRegionWarps === 'both' && this.input.settings.erRegionWarpsExtra) {
-      pool.push('region-warp-extra');
+      pool.add('region-warp-extra');
     }
-    this.placePool(worldId, pool, { ownGame: this.input.settings.erRegions === 'ownGame' });
+    this.placePool(worldId, Array.from(pool), { ownGame: this.input.settings.erRegions === 'ownGame' });
   }
 
   private placeIndoors(worldId: number) {
