@@ -148,7 +148,7 @@
 "adult_trade(x)": "is_adult && has(x)"
 "has_blue_fire": "has_blue_fire_arrows || (has_bottle && (event(BLUE_FIRE) || renewable(BLUE_FIRE)))"
 "can_ride_bean(x)": "is_adult && event(x)"
-"can_damage": "has_weapon || can_use_sticks || has_explosives || can_use_slingshot || can_use_din"
+"can_damage": "has_weapon || can_use_sticks || has_explosives || can_use_slingshot || can_use_bow || can_use_din"
 "can_damage_skull": "can_damage || can_collect_distance"
 "can_cut_grass_no_c_button": "has_weapon || has(STRENGTH)"
 "can_cut_grass": "can_cut_grass_no_c_button || can_boomerang || has_explosives || can_hammer"
