@@ -525,6 +525,7 @@ const PRESET_HELL = makeSettings({
     'MM_ESCAPE_CAGE',
     'MM_GBT_FAIRY2_HOOK',
     'MM_GBT_CENTRAL_GEYSER',
+    'MM_BANK_NO_WALLET',
   ]
 });
 

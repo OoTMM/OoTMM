@@ -283,8 +283,8 @@
     "Lottery": "is_day || (event(PLAY_LOTTERY) && (before(NIGHT1_PM_11_00) || between(NIGHT2_PM_06_00, NIGHT2_PM_11_00) || between(NIGHT3_PM_06_00, NIGHT3_PM_11_00)))"
   locations:
     "Clock Town Bank Reward 1": "can_use_wallet(1)"
-    "Clock Town Bank Reward 2": "can_use_wallet(2)"
-    "Clock Town Bank Reward 3": "can_use_wallet(3)"
+    "Clock Town Bank Reward 2": "can_use_wallet(2) || (can_use_wallet(1) && (trick(MM_BANK_ONE_WALLET) || trick(MM_BANK_NO_WALLET)))"
+    "Clock Town Bank Reward 3": "can_use_wallet(3) || (can_use_wallet(2) && trick(MM_BANK_ONE_WALLET)) || (can_use_wallet(1) && trick(MM_BANK_NO_WALLET))"
     "Clock Town Rosa Sisters HP": "has(MASK_KAMARO) && (is_night1 || is_night2)"
 "Clock Town East":
   region: CLOCK_TOWN_EAST

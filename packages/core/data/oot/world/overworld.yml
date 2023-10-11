@@ -1641,7 +1641,7 @@
   region: DEATH_MOUNTAIN_CRATER
   exits:
     "Darunia Chamber": "true"
-    "Death Mountain Crater Warp": "can_hookshot || (has_hover_boots && (is_adult || has_tunic_goron_strict))"
+    "Death Mountain Crater Warp": "(can_hookshot || has_hover_boots) && (is_adult || has_tunic_goron_strict || can_hammer || hookshot_anywhere || climb_anywhere)" #child cannot do anything at the warp from the top within 24 seconds
     "Death Mountain Crater Top": "is_adult || has_tunic_goron_strict"
     "Death Mountain Crater Scrub Grotto": "can_hammer"
     "Fairy Fountain Double Magic": "can_hammer || climb_anywhere || hookshot_anywhere"
