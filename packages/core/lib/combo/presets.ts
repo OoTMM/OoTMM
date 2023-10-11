@@ -385,7 +385,7 @@ const PRESET_HELL = makeSettings({
   erIndoorsExtra: true,
   erWarps: 'full',
   erWarpsOwls: true,
-  erRegionWarps: both,
+  erRegionWarps: 'both',
   erRegionWarpsExtra: true,
   erGanonCastle: true,
   erGanonTower: true,
