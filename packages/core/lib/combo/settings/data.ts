@@ -1344,7 +1344,7 @@ export const SETTINGS = [{
     { value: 'both', name: 'Both', description: 'One-Way entrances can be shuffled among both regions and the warp points.' },
   ],
   description: 'Shuffles the Gerudo Valley to Lake Hylia and Ikana Canyon to Southern Swamp entrances.',
-  default: false,
+  default: 'none',
 }, {
   key: 'erRegionWarpsExtra',
   name: 'Shuffle Ikana Castle One-Ways',

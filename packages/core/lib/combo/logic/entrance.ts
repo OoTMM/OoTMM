@@ -440,7 +440,7 @@ export class LogicPassEntrances {
   }
 
   private placeRegions(worldId: number) {
-    const pool = new Set['region'];
+    const pool = new Set(['region']);
     if (this.input.settings.erRegionsExtra) {
       pool.add('region-extra');
     }
@@ -504,13 +504,16 @@ export class LogicPassEntrances {
       pool.add('region-warp-extra');
     }
     if (this.input.settings.erRegionWarps === 'regions') {
-      pool.delete('region-warp', 'region-warp-extra');
+      pool.delete('region-warp');
+      pool.delete('region-warp-extra');
     }
     if (this.input.settings.erRegionWarps === 'warps') {
-      pool.delete('region-warp', 'region-warp-extra');
+      pool.delete('region-warp');
+      pool.delete('region-warp-extra');
     }
     if (this.input.settings.erRegionWarps === 'both') {
-      pool.delete('region-warp', 'region-warp-extra');
+      pool.delete('region-warp');
+      pool.delete('region-warp-extra');
     }
   }
 
