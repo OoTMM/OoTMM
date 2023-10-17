@@ -1,9 +1,12 @@
 #include <combo.h>
 
+void ArrowCycle_Handle(Actor_Player* link, GameState_Play* play);
+
 void Player_UpdateWrapper(Actor_Player* this, GameState_Play* play)
 {
     CustomTriggers_Spawn(play);
 
+    ArrowCycle_Handle(this, play);
     Player_Update(this, play);
     comboDpadUpdate(play);
     Ocarina_HandleWarp(this, play);

@@ -113,6 +113,7 @@
 # define AC_EN_BOX          0x006
 # define AC_EN_OKUTA        0x008
 # define AC_ITEM00          0x00e
+# define AC_EN_ARROW        0x00f
 # define AC_DOOR_SHUTTER    0x01e
 # define AC_ITEM_GIVER      0x01f
 # define AC_CUSTOM_WARP     0x023

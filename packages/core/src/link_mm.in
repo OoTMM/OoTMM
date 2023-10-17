@@ -4,6 +4,8 @@ Play_Init = 0x8016a2c8;
 gSaveContext = 0x801ef670;
 DMARomToRam = 0x80080790;
 
+ActorRemove = 0x800BB498;
+
 osCreateMesgQueue = 0x8008f240;
 osEPiStartDma = 0x8008ee30;
 osRecvMesg = 0x80087ed0;

@@ -46,6 +46,7 @@
 #endif
 
 typedef struct GameState_Play GameState_Play;
+typedef struct ActorContext ActorContext;
 typedef struct Actor Actor;
 
 int    LoadFile(void* dst, u32 vromAddr, u32 size);
@@ -202,6 +203,8 @@ void DeathWarp(GameState_Play* play);
 #if defined(GAME_MM)
 void DrawDungeonUnk2(void* unk);
 #endif
+
+void ActorRemove(ActorContext* ctx, Actor* actor, GameState_Play* play);
 
 void DrawSimpleOpa(GameState_Play* play, u32 segAddr);
 

@@ -267,7 +267,8 @@ ObjectContext; // size = 0x518
 
 _Static_assert(sizeof(ObjectContext) == 0x518, "ObjectContext size is wrong");
 
-typedef struct {
+typedef struct ActorContext
+{
     /* 0x000 */ char unk_000[0xb];
     /* 0x00c */ ActorList actors[12];
     /* 0x06c */ char unk_06c[0xd4];
