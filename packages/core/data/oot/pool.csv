@@ -1300,6 +1300,20 @@ MQ Jabu-Jabu Pot Like-Like Room 1,                          pot,            NONE
 MQ Jabu-Jabu Pot Like-Like Room 2,                          pot,            NONE,                 INSIDE_JABU_JABU,               0x0b1e,                     BOMBS_5
 MQ Jabu-Jabu Pot Boomerang Room 1,                          pot,            NONE,                 INSIDE_JABU_JABU,               0x0e0a,                     BOMB
 MQ Jabu-Jabu Pot Boomerang Room 2,                          pot,            NONE,                 INSIDE_JABU_JABU,               0x0e0e,                     ARROWS_5
+MQ Jabu-Jabu Grass Entrance 1,                              grass,          NONE,                 INSIDE_JABU_JABU,               0x00001,                    RECOVERY_HEART
+MQ Jabu-Jabu Grass Entrance 2,                              grass,          NONE,                 INSIDE_JABU_JABU,               0x00002,                    DEKU_SEEDS_5
+MQ Jabu-Jabu Grass Main Room Top 1,                         grass,          NONE,                 INSIDE_JABU_JABU,               0x00200,                    RECOVERY_HEART
+MQ Jabu-Jabu Grass Main Room Top 2,                         grass,          NONE,                 INSIDE_JABU_JABU,               0x00201,                    DEKU_SEEDS_5
+MQ Jabu-Jabu Grass Main Room Bottom 1,                      grass,          NONE,                 INSIDE_JABU_JABU,               0x00300,                    RECOVERY_HEART
+MQ Jabu-Jabu Grass Main Room Bottom 2,                      grass,          NONE,                 INSIDE_JABU_JABU,               0x00301,                    DEKU_SEEDS_5
+MQ Jabu-Jabu Grass Main Room Bottom 3,                      grass,          NONE,                 INSIDE_JABU_JABU,               0x00302,                    RECOVERY_HEART
+MQ Jabu-Jabu Grass Room After Big Octo,                     grass,          NONE,                 INSIDE_JABU_JABU,               0x00404,                    DEKU_SEEDS_5
+MQ Jabu-Jabu Grass Before Boss 1,                           grass,          NONE,                 INSIDE_JABU_JABU,               0x00502,                    RECOVERY_HEART
+MQ Jabu-Jabu Grass Before Boss 2,                           grass,          NONE,                 INSIDE_JABU_JABU,               0x00503,                    DEKU_SEEDS_5
+MQ Jabu-Jabu Grass Big Octo Top 1,                          grass,          NONE,                 INSIDE_JABU_JABU,               0x00604,                    RECOVERY_HEART
+MQ Jabu-Jabu Grass Big Octo Top 2,                          grass,          NONE,                 INSIDE_JABU_JABU,               0x00605,                    DEKU_SEEDS_5
+MQ Jabu-Jabu Grass Torch Room,                              grass,          NONE,                 INSIDE_JABU_JABU,               0x00b04,                    RECOVERY_HEART
+MQ Jabu-Jabu Grass Boomerang Room,                          grass,          NONE,                 INSIDE_JABU_JABU,               0x00e02,                    DEKU_SEEDS_5
 MQ Bottom of the Well Map Chest,                            chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x03,                       MAP_BOTW
 MQ Bottom of the Well Compass Chest,                        chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x02,                       COMPASS_BOTW
 MQ Bottom of the Well Lens Chest,                           chest,          NONE,                 BOTTOM_OF_THE_WELL,             0x01,                       LENS
