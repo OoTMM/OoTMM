@@ -1315,6 +1315,10 @@ MQ Bottom of the Well Pot Lobby Alcove,                     pot,            NONE
 MQ Bottom of the Well Pot Side Room 1,                      pot,            NONE,                 BOTTOM_OF_THE_WELL,             0x0506,                     RECOVERY_HEART
 MQ Bottom of the Well Pot Side Room 2,                      pot,            NONE,                 BOTTOM_OF_THE_WELL,             0x0507,                     RECOVERY_HEART
 MQ Bottom of the Well Pot Side Room 3,                      pot,            NONE,                 BOTTOM_OF_THE_WELL,             0x0508,                     RECOVERY_HEART
+MQ Bottom of the Well Grass Dead-Hand 1,                    grass,          NONE,                 BOTTOM_OF_THE_WELL,             0x00400,                    RECOVERY_HEART
+MQ Bottom of the Well Grass Dead-Hand 2,                    grass,          NONE,                 BOTTOM_OF_THE_WELL,             0x00401,                    DEKU_SEEDS_5
+MQ Bottom of the Well Grass Dead-Hand 3,                    grass,          NONE,                 BOTTOM_OF_THE_WELL,             0x00402,                    RECOVERY_HEART
+MQ Bottom of the Well Grass Dead-Hand 4,                    grass,          NONE,                 BOTTOM_OF_THE_WELL,             0x00403,                    DEKU_SEEDS_5
 MQ Ice Cavern Map Chest,                                    chest,          NONE,                 ICE_CAVERN,                     0x01,                       MAP_IC
 MQ Ice Cavern Compass Chest,                                chest,          NONE,                 ICE_CAVERN,                     0x00,                       COMPASS_IC
 MQ Ice Cavern Iron Boots,                                   chest,          ICE_CAVERN_CHEST,     ICE_CAVERN,                     0x02,                       BOOTS_IRON
