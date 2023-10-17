@@ -345,6 +345,8 @@ void PreDraw2(Actor* actor, GameState_Play* play, int unk);
 
 #if defined(GAME_OOT)
 Actor* ActorFind(void* actorCtx, s32 actorId, s32 actorCategory);
+void Play_InitEnvironment(GameState_Play *play, u16 skyboxId);
+extern u8 gFogState;
 #endif
 
 #if defined(GAME_MM)
