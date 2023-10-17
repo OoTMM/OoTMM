@@ -126,7 +126,18 @@ function makeRooms() {
           const objectListPos = headerData2 & 0xffffff;
           objectCount = headerData1;
           objectOffset = size;
-          const objectData = roomData.subarray(objectListPos, objectListPos + objectCount * 0x2);
+          let objectData = roomData.subarray(objectListPos, objectListPos + objectCount * 0x2);
+
+          /* MQ Fire - Like like */
+          if (dungeon === 'HIDAN' && roomId === 0x11) {
+            objectCount += 2;
+            const newObjectData = Buffer.alloc(objectCount * 0x2);
+            objectData.copy(newObjectData);
+            newObjectData.writeUInt16BE(0x00cb, (objectCount - 2) * 0x2);
+            newObjectData.writeUInt16BE(0x00dc, (objectCount - 1) * 0x2);
+            objectData = newObjectData;
+          }
+
           buffers.push(objectData);
           size += objectData.length;
         }

@@ -308,6 +308,7 @@ typedef struct GameState_Play
 GameState_Play;
 
 ASSERT_OFFSET(GameState_Play, sceneSegment,         0x000b0);
+ASSERT_OFFSET(GameState_Play, actorCtx,             0x01c24);
 ASSERT_OFFSET(GameState_Play, cutscene,             0x01d64);
 ASSERT_OFFSET(GameState_Play, roomCtx,              0x11cbc);
 ASSERT_OFFSET(GameState_Play, transition,           0x11d30);
