@@ -30,6 +30,11 @@ static s16 EnBox_Item(Actor* this, GameState_Play* play, s16 gi)
     return o.gi;
 }
 
+static s16 EnBox_GetGI(Actor* this)
+{
+    return -((this->variable >> 5) & 0x7f);
+}
+
 void EnBox_GiveItem(Actor* actor, GameState_Play* play, s16 gi)
 {
     ComboItemQuery q;
@@ -38,7 +43,7 @@ void EnBox_GiveItem(Actor* actor, GameState_Play* play, s16 gi)
     comboGiveItem(actor, play, &q, 50.f, 10.f);
 }
 
-PATCH_CALL(0x808696bc, &EnBox_GiveItem);
+PATCH_CALL(0x808696bc, EnBox_GiveItem);
 
 void EnBox_InitWrapper(Actor* this, GameState_Play* play)
 {
@@ -50,7 +55,7 @@ void EnBox_InitWrapper(Actor* this, GameState_Play* play)
     init(this, play);
 
     /* Resize chest */
-    gi = EnBox_Item(this, play, -1);
+    gi = EnBox_Item(this, play, EnBox_GetGI(this));
     csmcChestInit(this, play, gi);
 }
 
@@ -60,7 +65,7 @@ void EnBox_DrawWrapper(Actor* this, GameState_Play* play)
     s16 gi;
 
     /* Prepare the segments */
-    gi = EnBox_Item(this, play, -1);
+    gi = EnBox_Item(this, play, EnBox_GetGI(this));
     csmcChestPreDraw(this, play, gi);
 
     /* Draw */
