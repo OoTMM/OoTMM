@@ -2,6 +2,8 @@
 #include <combo/sr.h>
 #include <combo/dungeon.h>
 
+void ArrowCycle_Handle(Actor_Player* link, GameState_Play* play);
+
 void Player_UseItemWrapper(GameState_Play* play, Actor_Player* link, s16 itemId)
 {
     void (*Player_UseItem)(GameState_Play* play, Actor_Player* link, s16 itemId);
@@ -27,6 +29,7 @@ void Player_UpdateWrapper(Actor_Player* this, GameState_Play* play)
 {
     CustomTriggers_Spawn(play);
 
+    ArrowCycle_Handle(this, play);
     Player_Update(this, play);
     comboDpadUpdate(play);
     comboDpadUse(play, DPF_EQUIP);

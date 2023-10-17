@@ -19,6 +19,7 @@ static void debugCheat(GameState_Play* play)
         gSave.inventory.items[ITS_OOT_BOMBS] = ITEM_OOT_BOMB;
         gSave.inventory.items[ITS_OOT_BOW] = ITEM_OOT_BOW;
         gSave.inventory.items[ITS_OOT_ARROW_FIRE] = ITEM_OOT_ARROW_FIRE;
+        gSave.inventory.items[ITS_OOT_ARROW_ICE] = ITEM_OOT_ARROW_ICE;
         gSave.inventory.items[ITS_OOT_ARROW_LIGHT] = ITEM_OOT_ARROW_LIGHT;
         gSave.inventory.items[ITS_OOT_SLINGSHOT] = ITEM_OOT_SLINGSHOT;
         gSave.inventory.items[ITS_OOT_OCARINA] = ITEM_OOT_OCARINA_TIME;

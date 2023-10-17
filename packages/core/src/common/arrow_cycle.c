@@ -1,5 +1,55 @@
 #include <combo.h>
 
+#if defined(GAME_OOT)
+# define ITEM_BOW ITEM_OOT_BOW
+# define ITEM_ARROW_FIRE ITEM_OOT_ARROW_FIRE
+# define ITEM_ARROW_ICE ITEM_OOT_ARROW_ICE
+# define ITEM_ARROW_LIGHT ITEM_OOT_ARROW_LIGHT
+# define ITEM_BOW_ARROW_FIRE ITEM_OOT_BOW_ARROW_FIRE
+# define ITEM_BOW_ARROW_ICE ITEM_OOT_BOW_ARROW_ICE
+# define ITEM_BOW_ARROW_LIGHT ITEM_OOT_BOW_ARROW_LIGHT
+
+#define ITS_BOW ITS_OOT_BOW
+#define ITS_ARROW_FIRE ITS_OOT_ARROW_FIRE
+#define ITS_ARROW_ICE ITS_OOT_ARROW_ICE
+#define ITS_ARROW_LIGHT ITS_OOT_ARROW_LIGHT
+
+#define IA_BOW          0x08
+#define IA_ARROW_FIRE   0x09
+#define IA_ARROW_ICE    0x0a
+#define IA_ARROW_LIGHT  0x0b
+
+#define EN_ARROW_CTOR   0x8088441c
+#define EN_ARROW_DTOR   0x80884624
+
+#define BUTTON(x)   (gSave.equips.buttonItems[(x)])
+#endif
+
+#if defined(GAME_MM)
+# define ITEM_BOW ITEM_MM_BOW
+# define ITEM_ARROW_FIRE ITEM_MM_ARROW_FIRE
+# define ITEM_ARROW_ICE ITEM_MM_ARROW_ICE
+# define ITEM_ARROW_LIGHT ITEM_MM_ARROW_LIGHT
+# define ITEM_BOW_ARROW_FIRE ITEM_MM_BOW_ARROW_FIRE
+# define ITEM_BOW_ARROW_ICE ITEM_MM_BOW_ARROW_ICE
+# define ITEM_BOW_ARROW_LIGHT ITEM_MM_BOW_ARROW_LIGHT
+
+#define ITS_BOW ITS_MM_BOW
+#define ITS_ARROW_FIRE ITS_MM_ARROW_FIRE
+#define ITS_ARROW_ICE ITS_MM_ARROW_ICE
+#define ITS_ARROW_LIGHT ITS_MM_ARROW_LIGHT
+
+#define IA_BOW          0x09
+#define IA_ARROW_FIRE   0x0a
+#define IA_ARROW_ICE    0x0b
+#define IA_ARROW_LIGHT  0x0c
+
+#define EN_ARROW_CTOR   0x8088a240
+#define EN_ARROW_DTOR   0x8088a464
+
+#define BUTTON(x)   (gSave.itemEquips.buttonItems[0][(x)])
+#endif
+
 typedef struct
 {
     u16 frameDelay;
@@ -22,10 +72,10 @@ typedef struct
 ArrowInfo;
 
 static const ArrowInfo kArrowsInfo[] = {
-    { ITEM_MM_BOW,         ITS_MM_BOW,         ITEM_MM_BOW,             0x9, 0x2, 0 },
-    { ITEM_MM_ARROW_FIRE,  ITS_MM_ARROW_FIRE,  ITEM_MM_BOW_ARROW_FIRE,  0xA, 0x3, 4 },
-    { ITEM_MM_ARROW_ICE,   ITS_MM_ARROW_ICE,   ITEM_MM_BOW_ARROW_ICE,   0xB, 0x4, 4 },
-    { ITEM_MM_ARROW_LIGHT, ITS_MM_ARROW_LIGHT, ITEM_MM_BOW_ARROW_LIGHT, 0xC, 0x5, 8 },
+    { ITEM_BOW,         ITS_BOW,         ITEM_BOW,             IA_BOW,          0x2, 0 },
+    { ITEM_ARROW_FIRE,  ITS_ARROW_FIRE,  ITEM_BOW_ARROW_FIRE,  IA_ARROW_FIRE,   0x3, 4 },
+    { ITEM_ARROW_ICE,   ITS_ARROW_ICE,   ITEM_BOW_ARROW_ICE,   IA_ARROW_ICE,    0x4, 4 },
+    { ITEM_ARROW_LIGHT, ITS_ARROW_LIGHT, ITEM_BOW_ARROW_LIGHT, IA_ARROW_LIGHT,  0x5, 8 },
 };
 
 static const ArrowInfo* GetArrowInfo(u16 variable)
@@ -84,8 +134,8 @@ static void ReinitializeArrow(Actor* arrow, GameState_Play* play)
     ActorFunc init;
     ActorFunc destroy;
 
-    init = actorAddr(AC_EN_ARROW, 0x8088a240);
-    destroy = actorAddr(AC_EN_ARROW, 0x8088a464);
+    init = actorAddr(AC_EN_ARROW, EN_ARROW_CTOR);
+    destroy = actorAddr(AC_EN_ARROW, EN_ARROW_DTOR);
 
     destroy(arrow, play);
     init(arrow, play);
@@ -95,10 +145,10 @@ static int IsArrowItem(u8 item)
 {
     switch (item)
     {
-    case ITEM_MM_BOW:
-    case ITEM_MM_BOW_ARROW_FIRE:
-    case ITEM_MM_BOW_ARROW_ICE:
-    case ITEM_MM_BOW_ARROW_LIGHT:
+    case ITEM_BOW:
+    case ITEM_BOW_ARROW_FIRE:
+    case ITEM_BOW_ARROW_ICE:
+    case ITEM_BOW_ARROW_LIGHT:
         return 1;
     default:
         return 0;
@@ -108,7 +158,7 @@ static int IsArrowItem(u8 item)
 static void UpdateCButton(Actor_Player* link, GameState_Play* play, const ArrowInfo* info)
 {
     /* Update the icon */
-    gSave.itemEquips.buttonItems[0][link->heldItemButton] = info->icon;
+    BUTTON(link->heldItemButton) = info->icon;
     Interface_LoadItemIconImpl(play, link->heldItemButton);
 
     /* Update the action */
@@ -141,7 +191,12 @@ static void HandleFrameDelay(Actor_Player* link, GameState_Play* play, Actor* ar
         return;
     }
 
+#if defined(GAME_OOT)
+    (void)prevEffectState;
+#else
     prevEffectState = gSaveContext.magicState;
+#endif
+
     curInfo = GetArrowInfo(arrow->variable);
     if (arrow && curInfo)
     {
@@ -153,17 +208,37 @@ static void HandleFrameDelay(Actor_Player* link, GameState_Play* play, Actor* ar
         }
 
         /* Update the magic state */
-        if (curInfo->item != ITEM_MM_BOW)
+        if (curInfo->item != ITEM_BOW)
         {
+#if defined(GAME_OOT)
+            gSaveContext.magicState = 3;
+#else
             gSaveContext.magicState = 2;
+#endif
+        }
+        else
+        {
+#if defined(GAME_OOT)
+            gSaveContext.magicState = 0;
+#endif
         }
 
         /* Refund the previous arrow magic */
-        if (prevEffectState >= 2 && !MM_GET_EVENT_WEEK(EV_MM_WEEK_DRANK_CHATEAU_ROMANI))
-            gSave.playerData.magicAmount += sArrowCycleState.magicCost;
+#if defined(GAME_OOT)
+    gSave.playerData.magicAmount += sArrowCycleState.magicCost;
+#else
+        if (prevEffectState >= 2)
+        {
+            if (!MM_GET_EVENT_WEEK(EV_MM_WEEK_DRANK_CHATEAU_ROMANI))
+                gSave.playerData.magicAmount += sArrowCycleState.magicCost;
+        }
+#endif
 
-        /* Set the magic cost */
+#if defined(GAME_OOT)
+        gSave.playerData.magicAmount -= curInfo->magicCost;
+#else
         gSaveContext.magicToConsume = curInfo->magicCost;
+#endif
     }
 }
 
@@ -206,7 +281,7 @@ void ArrowCycle_Handle(Actor_Player* link, GameState_Play* play)
     if (!(2 <= arrow->variable && arrow->variable < 6))
         return;
 
-    selectedItem = gSave.itemEquips.buttonItems[0][link->heldItemButton];
+    selectedItem = BUTTON(link->heldItemButton);
     if (!IsArrowItem(selectedItem)) {
         return;
     }
@@ -223,17 +298,17 @@ void ArrowCycle_Handle(Actor_Player* link, GameState_Play* play)
     /* Handle not having anything to cycle */
     if (!curInfo || !nextInfo || curInfo->var == nextInfo->var)
     {
-        item = gSave.itemEquips.buttonItems[0][link->heldItemButton];
-        if (curInfo->var == 2 && item != ITEM_MM_BOW && gSave.inventory.items[ITS_MM_BOW] == ITEM_MM_BOW)
+        item = BUTTON(link->heldItemButton);
+        if (curInfo->var == 2 && item != ITEM_BOW && gSave.inventory.items[ITS_BOW] == ITEM_BOW)
         {
-            gSave.itemEquips.buttonItems[0][link->heldItemButton] = ITEM_MM_BOW;
+            BUTTON(link->heldItemButton) = ITEM_BOW;
             Interface_LoadItemIconImpl(play, link->heldItemButton);
         }
         PlaySound(0x4806);
         return;
     }
 
-    if (curInfo->item == ITEM_MM_BOW && gSaveContext.magicState != 0)
+    if (curInfo->item == ITEM_BOW && gSaveContext.magicState != 0)
     {
         PlaySound(0x4806);
         return;
@@ -255,7 +330,7 @@ void ArrowCycle_Handle(Actor_Player* link, GameState_Play* play)
     sArrowCycleState.frameDelay++;
     sArrowCycleState.magicCost = curInfo->magicCost;
 
-    if (curInfo->item == ITEM_MM_BOW) {
+    if (curInfo->item == ITEM_BOW) {
         gSaveContext.magicState = 3;
     }
 }
