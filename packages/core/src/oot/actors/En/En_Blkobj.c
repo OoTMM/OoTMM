@@ -1,6 +1,6 @@
 #include <combo.h>
 
-Actor* En_Blkobj_Actor_Find_Hook(void* actorCtx, s32 actorId, s32 actorCategory)
+static Actor* En_Blkobj_Actor_Find_Hook(void* actorCtx, s32 actorId, s32 actorCategory)
 {
     // Check for enemy soul shuffle
     if(comboConfig(CFG_OOT_SOULS))
@@ -12,3 +12,5 @@ Actor* En_Blkobj_Actor_Find_Hook(void* actorCtx, s32 actorId, s32 actorCategory)
     }
     return ActorFind(actorCtx, actorId, actorCategory);
 }
+
+PATCH_CALL(0x80a8ec2c, En_Blkobj_Actor_Find_Hook);
