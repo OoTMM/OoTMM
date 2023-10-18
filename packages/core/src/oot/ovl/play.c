@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/souls.h>
 
 extern void* gMmMag;
 GameState_Play* gPlay;
@@ -311,6 +312,10 @@ void hookPlay_Init(GameState_Play* play)
     else if (gSave.entrance == 0x006b)
     {
         endGame();
+    }
+    else if (gSave.entrance == 0x517 && !comboHasSoulOot(GI_OOT_SOUL_NPC_ZELDA))
+    {
+        gSave.entrance = ENTR_OOT_GANON_TOWER;
     }
 
     comboCacheClear();

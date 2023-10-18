@@ -3,7 +3,12 @@
 
 static void soulInfosOot(u8** bm, int* index, s16 gi)
 {
-    if (gi >= GI_OOT_SOUL_BOSS_QUEEN_GOHMA)
+    if (gi >= GI_OOT_SOUL_NPC_SARIA)
+    {
+        *index = gi - GI_OOT_SOUL_NPC_SARIA;
+        *bm = gSharedCustomSave.soulsNpcOot;
+    }
+    else if (gi >= GI_OOT_SOUL_BOSS_QUEEN_GOHMA)
     {
         *index = gi - GI_OOT_SOUL_BOSS_QUEEN_GOHMA;
         *bm = gSharedCustomSave.soulsBossOot;

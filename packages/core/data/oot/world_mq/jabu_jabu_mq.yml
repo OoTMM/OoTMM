@@ -4,7 +4,7 @@
     "Zora Fountain": "true"
     "Jabu-Jabu Main": "event(JABU_MQ_START)"
   events:
-    "JABU_MQ_START": "can_use_slingshot"
+    JABU_MQ_START: "can_use_slingshot"
   locations:
     "MQ Jabu-Jabu Map Chest": "has_explosives_or_hammer"
     "MQ Jabu-Jabu Entry Chest": "can_use_slingshot"
@@ -18,8 +18,8 @@
     "Jabu-Jabu Pre-Boss": "event(JABU_TENTACLE_RED) && (event(JABU_BIG_OCTO) || can_hookshot || has_hover_boots)"
     "Jabu-Jabu Basement Side Room": "event(JABU_TENTACLE_RED)"
   events:
-    "JABU_BIG_OCTO": "event(JABU_TENTACLE_GREEN) && soul_octorok && (can_use_sticks || has_weapon)"
-    "JABU_MQ_BACK": "can_use_slingshot && has_explosives" #This allows adult to get to the back of Jabu.
+    JABU_BIG_OCTO: "event(JABU_TENTACLE_GREEN) && soul_octorok && (can_use_sticks || has_weapon) && soul_npc(SOUL_NPC_RUTO)"
+    JABU_MQ_BACK: "can_use_slingshot && has_explosives" #This allows adult to get to the back of Jabu.
   locations:
     "MQ Jabu-Jabu Compass Chest": "can_use_slingshot && (is_child || (is_adult && can_dive_small))" #Future-proofing this for eventual ageless bow and slingshot. Adult cannot dive to the alcove without a scale.
     "MQ Jabu-Jabu Second Room B1 Chest": "true"

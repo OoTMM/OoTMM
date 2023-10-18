@@ -26,6 +26,7 @@ typedef struct ALIGNED(16)
     u8  soulsEnemyMm[8];
     u8  soulsBossOot[2];
     u8  soulsBossMm[1];
+    u8  soulsNpcOot[8];
 }
 SharedCustomSave;
 

@@ -1000,6 +1000,13 @@ export const SETTINGS = [{
   description: 'Add boss souls into the item pool. Enemies won\'t spawn unless their soul is obtained.',
   default: false
 }, {
+  key: 'soulsNpcOot',
+  name: 'NPC Souls (OoT) (EXPERIMENTAL)',
+  category: 'items.extensions',
+  type: 'boolean',
+  description: 'Add NPC souls into the item pool. Enemies won\'t spawn unless their soul is obtained.',
+  default: false
+}, {
   key: 'lenientSpikes',
   name: 'Lenient Goron Spikes',
   category: 'items.extensions',

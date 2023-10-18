@@ -223,3 +223,4 @@
 /* Common    C Left Button                     */ { Shader_Button,                 { 1, 1, CUSTOM_OBJECT_BTN_C_HORIZONTAL_0 } },
 /* Common    C Up Button                       */ { Shader_Button,                 { 1, 0, CUSTOM_OBJECT_BTN_C_VERTICAL_0 } },
 /* Common    C Down Button                     */ { Shader_Button,                 { 1, 1, CUSTOM_OBJECT_BTN_C_VERTICAL_0 } },
+/* Common    Souls (NPC)                       */ { Shader_CustomGS,               { 5 } },

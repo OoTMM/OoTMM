@@ -166,6 +166,7 @@ export class LogicPassConfig {
       MM_SOULS_ENEMY: settings.soulsEnemyMm,
       OOT_SOULS_BOSS: settings.soulsBossOot,
       MM_SOULS_BOSS: settings.soulsBossMm,
+      OOT_SOULS_NPC: settings.soulsNpcOot,
       MM_REMOVED_FAIRIES: settings.strayFairyOtherShuffle === 'removed',
       SHARED_SKELETON_KEY: settings.sharedSkeletonKey,
       OOT_SHUFFLE_POTS: settings.shufflePotsOot,

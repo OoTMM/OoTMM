@@ -4,7 +4,7 @@
     "Market": "true"
     "Treasure Chest Game Room 1": "small_keys_tcg(1)"
   locations:
-    "Treasure Chest Game Buy Key": "can_use_wallet(1)"
+    "Treasure Chest Game Buy Key": "can_use_wallet(1) && soul_npc(SOUL_NPC_TRASURE_CHEST_GAME_OWNER)"
 "Treasure Chest Game Room 1":
   dungeon: TCG
   exits:

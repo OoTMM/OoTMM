@@ -16,7 +16,7 @@
   age_change: false
   events:
     GANON_START: "!is_goal_triforce"
-    GANON: "event(GANON_START) && has_light_arrows"
+    GANON: "event(GANON_START) && has_light_arrows && soul_npc(SOUL_NPC_ZELDA)"
   locations:
     "Ganon Tower Pot 01": "true"
     "Ganon Tower Pot 02": "true"

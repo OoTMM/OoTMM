@@ -60,6 +60,6 @@
     "Ice Cavern Block Room": "(climb_anywhere || hookshot_anywhere || has_blue_fire) && soul_wolfos && (has_weapon || can_hit_triggers_distance || has_explosives_or_hammer || can_use_din || can_use_sticks)"
   locations:
     "Ice Cavern Iron Boots": "soul_wolfos && (has_weapon || can_hit_triggers_distance || has_explosives_or_hammer || can_use_din || can_use_sticks)"
-    "Ice Cavern Sheik Song": "soul_wolfos && (has_weapon || can_hit_triggers_distance || has_explosives_or_hammer || can_use_din || can_use_sticks)"
+    "Ice Cavern Sheik Song": "soul_wolfos && soul_npc(SOUL_NPC_SHEIK) && (has_weapon || can_hit_triggers_distance || has_explosives_or_hammer || can_use_din || can_use_sticks)"
     "Ice Cavern Pot Red Ice 1": "soul_wolfos && has_blue_fire && (has_weapon || can_hit_triggers_distance || has_explosives_or_hammer || can_use_din || can_use_sticks)"
     "Ice Cavern Pot Red Ice 2": "soul_wolfos && has_blue_fire && (has_weapon || can_hit_triggers_distance || has_explosives_or_hammer || can_use_din || can_use_sticks)"

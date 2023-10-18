@@ -130,7 +130,7 @@
   region: KOKIRI_FOREST
   exits:
     "Kokiri Forest": "mido_moved || is_adult || climb_anywhere || hookshot_anywhere"
-    "Deku Tree": "is_child || (is_adult && setting(dekuTreeAdult) && mido_moved)"
+    "Deku Tree": "is_child || (is_adult && setting(dekuTreeAdult) && mido_moved_soul)"
   events:
     STICKS: "is_child && soul_deku_baba && (can_boomerang || has_weapon)"
     MIDO_MOVED: "can_move_mido"
@@ -142,14 +142,14 @@
   exits:
     "Kokiri Forest": "true"
   locations:
-    "Kokiri Shop Item 1": "shop_price(0x00)"
-    "Kokiri Shop Item 2": "shop_price(0x01)"
-    "Kokiri Shop Item 3": "shop_price(0x02)"
-    "Kokiri Shop Item 4": "shop_price(0x03)"
-    "Kokiri Shop Item 5": "shop_price(0x04)"
-    "Kokiri Shop Item 6": "shop_price(0x05)"
-    "Kokiri Shop Item 7": "shop_price(0x06)"
-    "Kokiri Shop Item 8": "shop_price(0x07)"
+    "Kokiri Shop Item 1": "shop_price(0x00) && soul_npc(SOUL_NPC_KOKIRI_SHOPKEEPER)"
+    "Kokiri Shop Item 2": "shop_price(0x01) && soul_npc(SOUL_NPC_KOKIRI_SHOPKEEPER)"
+    "Kokiri Shop Item 3": "shop_price(0x02) && soul_npc(SOUL_NPC_KOKIRI_SHOPKEEPER)"
+    "Kokiri Shop Item 4": "shop_price(0x03) && soul_npc(SOUL_NPC_KOKIRI_SHOPKEEPER)"
+    "Kokiri Shop Item 5": "shop_price(0x04) && soul_npc(SOUL_NPC_KOKIRI_SHOPKEEPER)"
+    "Kokiri Shop Item 6": "shop_price(0x05) && soul_npc(SOUL_NPC_KOKIRI_SHOPKEEPER)"
+    "Kokiri Shop Item 7": "shop_price(0x06) && soul_npc(SOUL_NPC_KOKIRI_SHOPKEEPER)"
+    "Kokiri Shop Item 8": "shop_price(0x07) && soul_npc(SOUL_NPC_KOKIRI_SHOPKEEPER)"
 "Mido's House":
   region: ENTRANCE
   exits:
@@ -434,40 +434,40 @@
   exits:
     "Market": "true"
   locations:
-    "Market Bazaar Item 1": "shop_price(0x20)"
-    "Market Bazaar Item 2": "shop_price(0x21)"
-    "Market Bazaar Item 3": "shop_price(0x22)"
-    "Market Bazaar Item 4": "shop_price(0x23)"
-    "Market Bazaar Item 5": "shop_price(0x24)"
-    "Market Bazaar Item 6": "shop_price(0x25)"
-    "Market Bazaar Item 7": "shop_price(0x26)"
-    "Market Bazaar Item 8": "shop_price(0x27)"
+    "Market Bazaar Item 1": "shop_price(0x20) && soul_npc(SOUL_NPC_BAZAAR_SHOPKEEPER)"
+    "Market Bazaar Item 2": "shop_price(0x21) && soul_npc(SOUL_NPC_BAZAAR_SHOPKEEPER)"
+    "Market Bazaar Item 3": "shop_price(0x22) && soul_npc(SOUL_NPC_BAZAAR_SHOPKEEPER)"
+    "Market Bazaar Item 4": "shop_price(0x23) && soul_npc(SOUL_NPC_BAZAAR_SHOPKEEPER)"
+    "Market Bazaar Item 5": "shop_price(0x24) && soul_npc(SOUL_NPC_BAZAAR_SHOPKEEPER)"
+    "Market Bazaar Item 6": "shop_price(0x25) && soul_npc(SOUL_NPC_BAZAAR_SHOPKEEPER)"
+    "Market Bazaar Item 7": "shop_price(0x26) && soul_npc(SOUL_NPC_BAZAAR_SHOPKEEPER)"
+    "Market Bazaar Item 8": "shop_price(0x27) && soul_npc(SOUL_NPC_BAZAAR_SHOPKEEPER)"
 "Market Potion Shop":
   region: ENTRANCE
   exits:
     "Market": "true"
   locations:
-    "Market Potion Shop Item 1": "shop_price(0x28)"
-    "Market Potion Shop Item 2": "shop_price(0x29)"
-    "Market Potion Shop Item 3": "shop_price(0x2a)"
-    "Market Potion Shop Item 4": "shop_price(0x2b)"
-    "Market Potion Shop Item 5": "shop_price(0x2c)"
-    "Market Potion Shop Item 6": "shop_price(0x2d)"
-    "Market Potion Shop Item 7": "shop_price(0x2e)"
-    "Market Potion Shop Item 8": "shop_price(0x2f)"
+    "Market Potion Shop Item 1": "shop_price(0x28) && soul_npc(SOUL_NPC_POTION_SHOPKEEPER)"
+    "Market Potion Shop Item 2": "shop_price(0x29) && soul_npc(SOUL_NPC_POTION_SHOPKEEPER)"
+    "Market Potion Shop Item 3": "shop_price(0x2a) && soul_npc(SOUL_NPC_POTION_SHOPKEEPER)"
+    "Market Potion Shop Item 4": "shop_price(0x2b) && soul_npc(SOUL_NPC_POTION_SHOPKEEPER)"
+    "Market Potion Shop Item 5": "shop_price(0x2c) && soul_npc(SOUL_NPC_POTION_SHOPKEEPER)"
+    "Market Potion Shop Item 6": "shop_price(0x2d) && soul_npc(SOUL_NPC_POTION_SHOPKEEPER)"
+    "Market Potion Shop Item 7": "shop_price(0x2e) && soul_npc(SOUL_NPC_POTION_SHOPKEEPER)"
+    "Market Potion Shop Item 8": "shop_price(0x2f) && soul_npc(SOUL_NPC_POTION_SHOPKEEPER)"
 "Market Bombchu Shop":
   region: ENTRANCE
   exits:
     "Back Alley": "true"
   locations:
-    "Market Bombchu Shop Item 1": "shop_price(0x08)"
-    "Market Bombchu Shop Item 2": "shop_price(0x09)"
-    "Market Bombchu Shop Item 3": "shop_price(0x0a)"
-    "Market Bombchu Shop Item 4": "shop_price(0x0b)"
-    "Market Bombchu Shop Item 5": "shop_price(0x0c)"
-    "Market Bombchu Shop Item 6": "shop_price(0x0d)"
-    "Market Bombchu Shop Item 7": "shop_price(0x0e)"
-    "Market Bombchu Shop Item 8": "shop_price(0x0f)"
+    "Market Bombchu Shop Item 1": "shop_price(0x08) && soul_npc(SOUL_NPC_BOMBCHU_SHOPKEEPER)"
+    "Market Bombchu Shop Item 2": "shop_price(0x09) && soul_npc(SOUL_NPC_BOMBCHU_SHOPKEEPER)"
+    "Market Bombchu Shop Item 3": "shop_price(0x0a) && soul_npc(SOUL_NPC_BOMBCHU_SHOPKEEPER)"
+    "Market Bombchu Shop Item 4": "shop_price(0x0b) && soul_npc(SOUL_NPC_BOMBCHU_SHOPKEEPER)"
+    "Market Bombchu Shop Item 5": "shop_price(0x0c) && soul_npc(SOUL_NPC_BOMBCHU_SHOPKEEPER)"
+    "Market Bombchu Shop Item 6": "shop_price(0x0d) && soul_npc(SOUL_NPC_BOMBCHU_SHOPKEEPER)"
+    "Market Bombchu Shop Item 7": "shop_price(0x0e) && soul_npc(SOUL_NPC_BOMBCHU_SHOPKEEPER)"
+    "Market Bombchu Shop Item 8": "shop_price(0x0f) && soul_npc(SOUL_NPC_BOMBCHU_SHOPKEEPER)"
 "Market Pot House":
   region: ENTRANCE
   exits:
@@ -475,7 +475,7 @@
   events:
     RUPEES: "true"
   locations:
-    "Market Pot House Big Poes": "is_adult && event(BIG_POE)"
+    "Market Pot House Big Poes": "is_adult && event(BIG_POE) && soul_npc(SOUL_NPC_POE_COLLECTOR)"
     "Market Pot House GS": "is_child"
     "Market Pot House Child Pot Ground 1": "is_child"
     "Market Pot House Child Pot Ground 2": "is_child"
@@ -545,7 +545,7 @@
   exits:
     "Back Alley": "true"
   locations:
-    "Market Dog Lady HP": "event(RICHARD) && is_night"
+    "Market Dog Lady HP": "event(RICHARD) && is_night && soul_npc(SOUL_NPC_HYLIAN_CITIZEN)"
 "Market Back Alley East Home":
   region: ENTRANCE
   exits:
@@ -563,14 +563,14 @@
     BOMBS: "can_use_wallet(2)"
     BOMBCHUS: "can_use_wallet(1)"
   locations:
-    "Bombchu Bowling Reward 1": "has_bomb_bag && can_use_wallet(1)"
-    "Bombchu Bowling Reward 2": "has_bomb_bag && can_use_wallet(1)"
+    "Bombchu Bowling Reward 1": "has_bomb_bag && can_use_wallet(1) && soul_npc(SOUL_NPC_BOMBCHU_BOWLING_LADY)"
+    "Bombchu Bowling Reward 2": "has_bomb_bag && can_use_wallet(1) && soul_npc(SOUL_NPC_BOMBCHU_BOWLING_LADY)"
 "Shooting Gallery Child":
   region: ENTRANCE
   exits:
     "Market": "true"
   locations:
-    "Shooting Gallery Child": "is_child && can_use_wallet(1)"
+    "Shooting Gallery Child": "is_child && can_use_wallet(1) && soul_npc(SOUL_NPC_SHOOTING_GALLERY_OWNER)"
 "Temple of Time Entryway":
   region: MARKET
   age_change: false
@@ -593,7 +593,7 @@
   events:
     #EPONA: "is_adult && can_play_epona && can_use_wallet(1) && is_day"
     EPONA: "true" #If fast Epona becomes a setting, we need a check here... this is "Ingo deposed".
-    MALON_COW: "can_ride_epona && event(EPONA) && is_day"
+    MALON_COW: "can_ride_epona && event(EPONA) && is_day && soul_npc(SOUL_NPC_MALON)"
     RUPEES: "is_child"
   locations:
     "Lon Lon Ranch Malon Song": "is_child && has_ocarina && event(MALON) && is_day"
@@ -628,7 +628,7 @@
   exits:
     "Lon Lon Ranch": "true"
   locations:
-    "Lon Lon Ranch Talon Bottle": "is_child && woke_talon_child && can_use_wallet(1) && is_day"
+    "Lon Lon Ranch Talon Bottle": "is_child && woke_talon_child && can_use_wallet(1) && is_day && soul_npc(SOUL_NPC_TALON)"
     "Lon Lon Ranch Talon House Pot 1": "true"
     "Lon Lon Ranch Talon House Pot 2": "true"
     "Lon Lon Ranch Talon House Pot 3": "true"
@@ -651,7 +651,7 @@
     "Hyrule Castle Courtyard": "woke_talon_child || has_hover_boots || climb_anywhere"
     "Hyrule Castle Grotto": "hidden_grotto_storms"
   events:
-    MALON: "true"
+    MALON: "soul_npc(SOUL_NPC_MALON)"
     TALON_CHILD: "has(CHICKEN)"
     BOMBS: "true"
     RUPEES: "true"
@@ -676,7 +676,7 @@
   exits:
     "Hyrule Castle": "true"
   events:
-    MEET_ZELDA: "true"
+    MEET_ZELDA: "soul_npc(SOUL_NPC_ZELDA)"
   locations:
     "Zelda's Letter": "met_zelda"
     "Zelda's Song": "met_zelda"
@@ -811,7 +811,7 @@
   exits:
     "Lost Woods Bridge": "event(SARIA_GIFT)"
   events:
-    SARIA_GIFT: "true"
+    SARIA_GIFT: "soul_npc(SOUL_NPC_SARIA)"
 "Lost Woods Deep":
   region: LOST_WOODS
   exits:
@@ -876,8 +876,8 @@
     "Forest Temple": "can_hookshot || (has_hookshot(1) && time_travel_at_will) || climb_anywhere"
     "Sacred Meadow Storms Grotto": "hidden_grotto_storms"
   locations:
-    "Saria's Song": "met_zelda && is_child"
-    "Sacred Meadow Sheik Song": "is_adult"
+    "Saria's Song": "met_zelda && is_child && soul_npc(SOUL_NPC_SARIA)"
+    "Sacred Meadow Sheik Song": "is_adult && soul_npc(SOUL_NPC_SHEIK)"
     "Sacred Meadow GS Night Adult": "is_adult && gs_night && (can_collect_distance || (climb_anywhere && (has_ranged_weapon || has_explosives || can_use_din)))"
   gossip:
     "Sacred Meadow Gossip Near Forest Temple": "true"
@@ -894,7 +894,7 @@
 "Kakariko":
   region: KAKARIKO
   events:
-    KAKARIKO_GATE_OPEN: "is_child && has(ZELDA_LETTER)"
+    KAKARIKO_GATE_OPEN: "is_child && has(ZELDA_LETTER) && soul_npc(SOUL_NPC_HYLIAN_GUARD)"
     BUGS: "has_bottle"
     BOMBS: "can_cut_grass"
     RUPEES: "can_cut_grass"
@@ -917,11 +917,11 @@
     "Impa House Front": "true"
     "ReDead Grotto": "hidden_grotto_bomb"
   locations:
-    "Kakariko Anju Bottle": "is_child && is_day"
-    "Kakariko Anju Egg": "is_adult && is_day"
-    "Kakariko Anju Cojiro": "event(TALON_AWAKE) && is_day"
-    "Kakariko Song Shadow": "is_adult && has(MEDALLION_FOREST) && has(MEDALLION_FIRE) && has(MEDALLION_WATER)"
-    "Kakariko Man on Roof": "can_hookshot || trick(OOT_MAN_ON_ROOF) || climb_anywhere"
+    "Kakariko Anju Bottle": "is_child && is_day && soul_npc(SOUL_NPC_CUCCO_LADY)"
+    "Kakariko Anju Egg": "is_adult && is_day && soul_npc(SOUL_NPC_CUCCO_LADY)"
+    "Kakariko Anju Cojiro": "event(TALON_AWAKE) && is_day && soul_npc(SOUL_NPC_CUCCO_LADY)"
+    "Kakariko Song Shadow": "is_adult && soul_npc(SOUL_NPC_SHEIK) && has(MEDALLION_FOREST) && has(MEDALLION_FIRE) && has(MEDALLION_WATER)"
+    "Kakariko Man on Roof": "(can_hookshot || trick(OOT_MAN_ON_ROOF) || climb_anywhere) && soul_npc(SOUL_NPC_HYLIAN_CITIZEN)"
     "Kakariko GS Shooting Gallery": "gs_night && is_child"
     "Kakariko GS Tree": "gs_night && is_child"
     "Kakariko GS House of Skulltula": "gs_night && is_child"
@@ -970,28 +970,28 @@
   exits:
     "Kakariko": "true"
   locations:
-    "Kakariko Bazaar Item 1": "shop_price(0x30)"
-    "Kakariko Bazaar Item 2": "shop_price(0x31)"
-    "Kakariko Bazaar Item 3": "shop_price(0x32)"
-    "Kakariko Bazaar Item 4": "shop_price(0x33)"
-    "Kakariko Bazaar Item 5": "shop_price(0x34)"
-    "Kakariko Bazaar Item 6": "shop_price(0x35)"
-    "Kakariko Bazaar Item 7": "shop_price(0x36)"
-    "Kakariko Bazaar Item 8": "shop_price(0x37)"
+    "Kakariko Bazaar Item 1": "shop_price(0x30) && soul_npc(SOUL_NPC_BAZAAR_SHOPKEEPER)"
+    "Kakariko Bazaar Item 2": "shop_price(0x31) && soul_npc(SOUL_NPC_BAZAAR_SHOPKEEPER)"
+    "Kakariko Bazaar Item 3": "shop_price(0x32) && soul_npc(SOUL_NPC_BAZAAR_SHOPKEEPER)"
+    "Kakariko Bazaar Item 4": "shop_price(0x33) && soul_npc(SOUL_NPC_BAZAAR_SHOPKEEPER)"
+    "Kakariko Bazaar Item 5": "shop_price(0x34) && soul_npc(SOUL_NPC_BAZAAR_SHOPKEEPER)"
+    "Kakariko Bazaar Item 6": "shop_price(0x35) && soul_npc(SOUL_NPC_BAZAAR_SHOPKEEPER)"
+    "Kakariko Bazaar Item 7": "shop_price(0x36) && soul_npc(SOUL_NPC_BAZAAR_SHOPKEEPER)"
+    "Kakariko Bazaar Item 8": "shop_price(0x37) && soul_npc(SOUL_NPC_BAZAAR_SHOPKEEPER)"
 "Kakariko Potion Shop":
   region: ENTRANCE
   exits:
     "Kakariko": "true"
     "Kakariko Potion Shop Back": "is_adult || climb_anywhere"
   locations:
-    "Kakariko Potion Shop Item 1": "is_adult && shop_price(0x38)"
-    "Kakariko Potion Shop Item 2": "is_adult && shop_price(0x39)"
-    "Kakariko Potion Shop Item 3": "is_adult && shop_price(0x3a)"
-    "Kakariko Potion Shop Item 4": "is_adult && shop_price(0x3b)"
-    "Kakariko Potion Shop Item 5": "is_adult && shop_price(0x3c)"
-    "Kakariko Potion Shop Item 6": "is_adult && shop_price(0x3d)"
-    "Kakariko Potion Shop Item 7": "is_adult && shop_price(0x3e)"
-    "Kakariko Potion Shop Item 8": "is_adult && shop_price(0x3f)"
+    "Kakariko Potion Shop Item 1": "is_adult && shop_price(0x38) && soul_npc(SOUL_NPC_POTION_SHOPKEEPER)"
+    "Kakariko Potion Shop Item 2": "is_adult && shop_price(0x39) && soul_npc(SOUL_NPC_POTION_SHOPKEEPER)"
+    "Kakariko Potion Shop Item 3": "is_adult && shop_price(0x3a) && soul_npc(SOUL_NPC_POTION_SHOPKEEPER)"
+    "Kakariko Potion Shop Item 4": "is_adult && shop_price(0x3b) && soul_npc(SOUL_NPC_POTION_SHOPKEEPER)"
+    "Kakariko Potion Shop Item 5": "is_adult && shop_price(0x3c) && soul_npc(SOUL_NPC_POTION_SHOPKEEPER)"
+    "Kakariko Potion Shop Item 6": "is_adult && shop_price(0x3d) && soul_npc(SOUL_NPC_POTION_SHOPKEEPER)"
+    "Kakariko Potion Shop Item 7": "is_adult && shop_price(0x3e) && soul_npc(SOUL_NPC_POTION_SHOPKEEPER)"
+    "Kakariko Potion Shop Item 8": "is_adult && shop_price(0x3f) && soul_npc(SOUL_NPC_POTION_SHOPKEEPER)"
 "Kakariko Potion Shop Back":
   region: NONE
   exits:
@@ -1010,7 +1010,7 @@
   exits:
     "Kakariko": "true"
   locations:
-    "Shooting Gallery Adult": "is_adult && can_use_bow && can_use_wallet(1)"
+    "Shooting Gallery Adult": "is_adult && can_use_bow && can_use_wallet(1) && soul_npc(SOUL_NPC_SHOOTING_GALLERY_OWNER)"
 "Impa House Front":
   region: ENTRANCE
   exits:
@@ -1033,13 +1033,13 @@
     WELL_DRAIN: "is_child && can_play_storms"
   locations:
     "Windmill HP": "can_boomerang || event(WINDMILL_TOP) || (is_adult && trick(OOT_WINDMILL_HP_NOTHING)) || climb_anywhere || hookshot_anywhere"
-    "Windmill Song of Storms": "is_adult && has_ocarina"
+    "Windmill Song of Storms": "is_adult && has_ocarina && soul_npc(SOUL_NPC_GURU_GURU)"
 "Kakariko Carpenter House":
   region: ENTRANCE
   exits:
     "Kakariko": "true"
   events:
-    TALON_AWAKE: adult_trade(POCKET_CUCCO)
+    TALON_AWAKE: "adult_trade(POCKET_CUCCO) && soul_npc(SOUL_NPC_TALON)"
 "Skulltula House":
   region: ENTRANCE
   exits:
@@ -1097,7 +1097,7 @@
     ARROWS: "is_adult"
     MAGIC: "can_cut_grass"
   locations:
-    "Graveyard Dampe Game": "is_child && can_use_wallet(1) && is_dusk"
+    "Graveyard Dampe Game": "is_child && can_use_wallet(1) && is_dusk && soul_npc(SOUL_NPC_DAMPE)"
     "Graveyard Crate HP": "can_ride_bean(BEAN_GRAVEYARD) || can_longshot || climb_anywhere || hookshot_anywhere"
     "Graveyard GS Soil": "gs_soil && can_damage_skull"
     "Graveyard GS Wall": "is_child && gs_night && (can_collect_distance || (climb_anywhere && (has_ranged_weapon || has_explosives || can_use_din)))"
@@ -1143,7 +1143,7 @@
   region: GRAVEYARD
   exits:
     "Dampe Grave Entrance": "true"
-    "Windmill": "is_adult && can_play_time"
+    "Windmill": "is_adult && can_play_time && soul_npc(SOUL_NPC_DAMPE)"
   events:
     NUTS: "true"
     RUPEES: "true"
@@ -1153,8 +1153,8 @@
     ARROWS: "is_adult"
     WINDMILL_TOP: "is_adult && can_play_time"
   locations:
-    "Graveyard Dampe Tomb Reward 1": "true"
-    "Graveyard Dampe Tomb Reward 2": "is_adult" #It's very hard to finish this race sub-1 as kid.
+    "Graveyard Dampe Tomb Reward 1": "soul_npc(SOUL_NPC_DAMPE)"
+    "Graveyard Dampe Tomb Reward 2": "is_adult && soul_npc(SOUL_NPC_DAMPE)" #It's very hard to finish this race sub-1 as kid.
     "Graveyard Dampe Tomb Pot 1": "true"
     "Graveyard Dampe Tomb Pot 2": "true"
     "Graveyard Dampe Tomb Pot 3": "true"
@@ -1199,9 +1199,9 @@
     "Death Mountain Crater Top": "true"
     "Fairy Fountain Magic": "has_explosives_or_hammer"
   locations:
-    "Death Mountain Prescription": "adult_trade(BROKEN_GORON_SWORD)"
-    "Death Mountain Claim Check": "adult_trade(EYE_DROPS)"
-    "Death Mountain Biggoron Sword": "adult_trade(CLAIM_CHECK)"
+    "Death Mountain Prescription": "adult_trade(BROKEN_GORON_SWORD) && soul_npc(SOUL_NPC_BIGGORON)"
+    "Death Mountain Claim Check": "adult_trade(EYE_DROPS) && soul_npc(SOUL_NPC_BIGGORON)"
+    "Death Mountain Biggoron Sword": "adult_trade(CLAIM_CHECK) && soul_npc(SOUL_NPC_BIGGORON)"
     "Death Mountain GS Before Climb": "is_adult && gs_night && (can_hammer || trick(OOT_DMT_RED_ROCK_GS))"
   gossip:
     "Death Mountain Gossip on Climb": "true"
@@ -1257,7 +1257,7 @@
   exits:
     "Goron City Shortcut": "event(GORON_CITY_SHORTCUT) || climb_anywhere || hookshot_anywhere"
     "Death Mountain": "true"
-    "Darunia Chamber": "(is_adult && (has_explosives || can_use_bow || has(STRENGTH))) || (is_child && can_play_zelda)"
+    "Darunia Chamber": "(is_adult && (has_explosives || can_use_bow || has(STRENGTH)) && soul_npc(SOUL_NPC_GORON_CHILD)) || (is_child && can_play_zelda)"
     "Goron Shop": "has_bombflowers || (can_use_bow && (is_adult || time_travel_at_will)) || ((can_use_din || event(DARUNIA_TORCH)) && (is_child || time_travel_at_will))"
     "Goron City Grotto": "(is_adult && can_play_time) || (can_hookshot && (has_tunic_goron_strict || can_use_nayru)) || climb_anywhere"
   events:
@@ -1270,9 +1270,9 @@
     "Goron City Maze Center 2": "has_explosives_or_hammer || can_lift_silver || climb_anywhere || hookshot_anywhere"
     "Goron City Maze Left": "can_hammer || can_lift_silver || climb_anywhere || hookshot_anywhere"
     "Goron City Big Pot HP": "is_child && has_bombs && (event(DARUNIA_TORCH) || has_fire)"
-    "Goron City Tunic": "is_adult && (has_explosives || can_use_bow || has(STRENGTH))"
-    "Goron City Bomb Bag": "is_child && has_explosives"
-    "Goron City Medigoron Giant Knife": "is_adult && (has_bombflowers || can_hammer) && can_use_wallet(2)"
+    "Goron City Tunic": "is_adult && (has_explosives || can_use_bow || has(STRENGTH)) && soul_npc(SOUL_NPC_GORON_CHILD)"
+    "Goron City Bomb Bag": "is_child && has_explosives && soul_npc(SOUL_NPC_GORON)"
+    "Goron City Medigoron Giant Knife": "is_adult && (has_bombflowers || can_hammer) && can_use_wallet(2) && soul_npc(SOUL_NPC_MEDIGORON)"
     "Goron City GS Platform": "is_adult"
     "Goron City GS Maze": "is_child && (has_explosives_or_hammer || (climb_anywhere && can_damage_skull) || hookshot_anywhere)"
     "Goron City Pot Stairs 1": "true"
@@ -1294,7 +1294,7 @@
     STICKS: "is_child"
     RUPEES: "is_adult"
   locations:
-    "Darunia": "is_child && can_play_saria"
+    "Darunia": "is_child && can_play_saria && soul_npc(SOUL_NPC_DARUNIA)"
     "Goron City Pot Darunia Room 1": "true"
     "Goron City Pot Darunia Room 2": "true"
     "Goron City Pot Darunia Room 3": "true"
@@ -1303,14 +1303,14 @@
   exits:
     "Goron City": "true"
   locations:
-    "Goron Shop Item 1": "shop_price(0x18)"
-    "Goron Shop Item 2": "shop_price(0x19)"
-    "Goron Shop Item 3": "shop_price(0x1a)"
-    "Goron Shop Item 4": "shop_price(0x1b)"
-    "Goron Shop Item 5": "shop_price(0x1c)"
-    "Goron Shop Item 6": "shop_price(0x1d)"
-    "Goron Shop Item 7": "shop_price(0x1e)"
-    "Goron Shop Item 8": "shop_price(0x1f)"
+    "Goron Shop Item 1": "shop_price(0x18) && soul_npc(SOUL_NPC_GORON_SHOPKEEPER)"
+    "Goron Shop Item 2": "shop_price(0x19) && soul_npc(SOUL_NPC_GORON_SHOPKEEPER)"
+    "Goron Shop Item 3": "shop_price(0x1a) && soul_npc(SOUL_NPC_GORON_SHOPKEEPER)"
+    "Goron Shop Item 4": "shop_price(0x1b) && soul_npc(SOUL_NPC_GORON_SHOPKEEPER)"
+    "Goron Shop Item 5": "shop_price(0x1c) && soul_npc(SOUL_NPC_GORON_SHOPKEEPER)"
+    "Goron Shop Item 6": "shop_price(0x1d) && soul_npc(SOUL_NPC_GORON_SHOPKEEPER)"
+    "Goron Shop Item 7": "shop_price(0x1e) && soul_npc(SOUL_NPC_GORON_SHOPKEEPER)"
+    "Goron Shop Item 8": "shop_price(0x1f) && soul_npc(SOUL_NPC_GORON_SHOPKEEPER)"
 "Goron City Grotto":
   region: ENTRANCE
   age_change: false
@@ -1417,16 +1417,16 @@
     "Zora Shop": "is_child || has_blue_fire"
     "Zora Domain Grotto": "hidden_grotto_storms"
   events:
-    KING_ZORA_LETTER: "is_child && has(RUTO_LETTER)"
+    KING_ZORA_LETTER: "is_child && has(RUTO_LETTER) && soul_npc(SOUL_NPC_KING_ZORA)"
     STICKS: "is_child"
     NUTS: "true"
     RUPEES: "true"
     FISH: "is_child && has_bottle"
   locations:
     "Zora Domain Waterfall Chest": "is_child"
-    "Zora Domain Diving Game": "is_child && can_use_wallet(1)"
-    "Zora Domain Tunic": "is_adult && has_blue_fire"
-    "Zora Domain Eyeball Frog": "has_blue_fire && adult_trade(PRESCRIPTION)"
+    "Zora Domain Diving Game": "is_child && can_use_wallet(1) && soul_npc(SOUL_NPC_ZORA)"
+    "Zora Domain Tunic": "is_adult && has_blue_fire && soul_npc(SOUL_NPC_KING_ZORA)"
+    "Zora Domain Eyeball Frog": "has_blue_fire && adult_trade(PRESCRIPTION) && soul_npc(SOUL_NPC_KING_ZORA)"
     "Zora Domain GS Waterfall": "is_adult && gs_night && (has_ranged_weapon || has_magic || has_explosives)"
     "Zora Domain Pot 1": "true"
     "Zora Domain Pot 2": "true"
@@ -1445,14 +1445,14 @@
   exits:
     "Zora Domain": "true"
   locations:
-    "Zora Shop Item 1": "shop_price(0x10)"
-    "Zora Shop Item 2": "shop_price(0x11)"
-    "Zora Shop Item 3": "shop_price(0x12)"
-    "Zora Shop Item 4": "shop_price(0x13)"
-    "Zora Shop Item 5": "shop_price(0x14)"
-    "Zora Shop Item 6": "shop_price(0x15)"
-    "Zora Shop Item 7": "shop_price(0x16)"
-    "Zora Shop Item 8": "shop_price(0x17)"
+    "Zora Shop Item 1": "shop_price(0x10) && soul_npc(SOUL_NPC_ZORA_SHOPKEEPER)"
+    "Zora Shop Item 2": "shop_price(0x11) && soul_npc(SOUL_NPC_ZORA_SHOPKEEPER)"
+    "Zora Shop Item 3": "shop_price(0x12) && soul_npc(SOUL_NPC_ZORA_SHOPKEEPER)"
+    "Zora Shop Item 4": "shop_price(0x13) && soul_npc(SOUL_NPC_ZORA_SHOPKEEPER)"
+    "Zora Shop Item 5": "shop_price(0x14) && soul_npc(SOUL_NPC_ZORA_SHOPKEEPER)"
+    "Zora Shop Item 6": "shop_price(0x15) && soul_npc(SOUL_NPC_ZORA_SHOPKEEPER)"
+    "Zora Shop Item 7": "shop_price(0x16) && soul_npc(SOUL_NPC_ZORA_SHOPKEEPER)"
+    "Zora Shop Item 8": "shop_price(0x17) && soul_npc(SOUL_NPC_ZORA_SHOPKEEPER)"
 "Zora Domain Grotto":
   region: ENTRANCE
   age_change: false
@@ -1551,8 +1551,8 @@
   exits:
     "Lake Hylia": "true"
   locations:
-    "Fishing Pond Child": "is_child && can_use_wallet(1)"
-    "Fishing Pond Adult": "is_adult && can_use_wallet(1)"
+    "Fishing Pond Child": "is_child && can_use_wallet(1) && soul_npc(SOUL_NPC_FISHING_POND_OWNER)"
+    "Fishing Pond Adult": "is_adult && can_use_wallet(1) && soul_npc(SOUL_NPC_FISHING_POND_OWNER)"
 "Lake Hylia Grotto":
   region: ENTRANCE
   age_change: false
@@ -1611,8 +1611,8 @@
     TIME_TRAVEL_AT_WILL: "!setting(ageChange, none) && event(TIME_TRAVEL) && can_play_time && (!setting(ageChange, oot) || has_ocarina_of_time)"
   locations:
     "Temple of Time Master Sword": "is_child && event(DOOR_OF_TIME_OPEN)"
-    "Temple of Time Sheik Song": "is_adult && event(DOOR_OF_TIME_OPEN) && has(MEDALLION_FOREST)"
-    "Temple of Time Light Arrows": "is_adult && ((setting(lacs, vanilla) && has(MEDALLION_SPIRIT) && has(MEDALLION_SHADOW)) || (setting(lacs, custom) && special(LACS)))"
+    "Temple of Time Sheik Song": "is_adult && soul_npc(SOUL_NPC_SHEIK) && event(DOOR_OF_TIME_OPEN) && has(MEDALLION_FOREST)"
+    "Temple of Time Light Arrows": "is_adult && soul_npc(SOUL_NPC_SHEIK) && soul_npc(SOUL_NPC_ZELDA) && ((setting(lacs, vanilla) && has(MEDALLION_SPIRIT) && has(MEDALLION_SHADOW)) || (setting(lacs, custom) && special(LACS)))"
 "Sacred Realm":
   region: SACRED_REALM
   locations:
@@ -1662,7 +1662,7 @@
     BEAN_DEATH_MOUNTAIN_CRATER: "can_use_beans"
   locations:
     "Death Mountain Crater Volcano HP": "can_ride_bean(BEAN_DEATH_MOUNTAIN_CRATER) || climb_anywhere"
-    "Death Mountain Crater Sheik Song": "is_adult"
+    "Death Mountain Crater Sheik Song": "is_adult && soul_npc(SOUL_NPC_SHEIK)"
     "Death Mountain Crater GS Soil": "gs_soil && can_damage_skull"
 "Death Mountain Crater Near Temple":
   region: DEATH_MOUNTAIN_CRATER
@@ -1740,7 +1740,7 @@
     "Gerudo Valley Tent": "is_adult || trick(OOT_TENT_CHILD)"
   locations:
     "Gerudo Valley Chest": "(is_adult && (can_hammer || hookshot_anywhere || climb_anywhere)) || time_travel_at_will"
-    "Gerudo Valley Broken Goron Sword": "adult_trade(POACHER_SAW)"
+    "Gerudo Valley Broken Goron Sword": "adult_trade(POACHER_SAW) && soul_npc(SOUL_NPC_CARPENTERS)"
     "Gerudo Valley GS Tent": "is_adult && gs_night && (can_collect_distance || (climb_anywhere && (has_explosives || has(SWORD_BIGGORON) || has_ranged_weapon || can_use_din)))"
     "Gerudo Valley GS Pillar": "is_adult && can_collect_distance && gs_night"
     "Gerudo Valley Crate HP": "climb_anywhere"
@@ -1916,7 +1916,7 @@
   exits:
     "Desert Colossus": "true"
   locations:
-    "Desert Colossus Song Spirit": "true"
+    "Desert Colossus Song Spirit": "soul_npc(SOUL_NPC_SHEIK)"
 "Fairy Fountain Nayru":
   region: ENTRANCE
   exits:

@@ -36,7 +36,7 @@
   dungeon: IC
   locations:
     "MQ Ice Cavern Iron Boots": "soul_enemy(SOUL_ENEMY_STALFOS) && has_weapon && (is_adult || (can_play_time && has_hover_boots))"
-    "MQ Ice Cavern Sheik Song": "soul_enemy(SOUL_ENEMY_STALFOS) && has_weapon && (is_adult || (can_play_time && has_hover_boots))"
+    "MQ Ice Cavern Sheik Song": "soul_npc(SOUL_NPC_SHEIK) && soul_enemy(SOUL_ENEMY_STALFOS) && has_weapon && (is_adult || (can_play_time && has_hover_boots))"
     "MQ Ice Cavern GS Scarecrow": "scarecrow_hookshot || (has_hover_boots && (can_longshot || (is_adult && trick(OOT_MQ_ICE_SCARE_HOVER)))) || (is_adult && trick(OOT_MQ_ICE_SCARE_NOTHING))"
     "MQ Ice Cavern GS Clear Blocks": "has_ranged_weapon || has_explosives" #Again, I'm not making people carry pots through boulder hell. Biggoron Sword also works here.
     "MQ Ice Cavern Pot Final Corridor 1": "is_adult || (can_play_time && has_hover_boots)"

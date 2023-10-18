@@ -175,6 +175,7 @@ const ITEM_POOL_PLENTIFUL = new Set([
   ...ItemGroups.MM_SOULS_ENEMY,
   ...ItemGroups.OOT_SOULS_BOSS,
   ...ItemGroups.MM_SOULS_BOSS,
+  ...ItemGroups.OOT_SOULS_NPC,
   ...ItemGroups.SHARED_SOULS_ENEMY,
   Items.OOT_BUTTON_A,
   Items.OOT_BUTTON_C_RIGHT,
@@ -881,6 +882,7 @@ export class LogicPassWorldTransform {
     if (settings.soulsEnemyMm) this.addItems(ItemGroups.MM_SOULS_ENEMY);
     if (settings.soulsBossOot) this.addItems(ItemGroups.OOT_SOULS_BOSS);
     if (settings.soulsBossMm) this.addItems(ItemGroups.MM_SOULS_BOSS);
+    if (settings.soulsNpcOot) this.addItems(ItemGroups.OOT_SOULS_NPC);
 
     /* Add skeleton keys */
     if (settings.skeletonKeyOot) {

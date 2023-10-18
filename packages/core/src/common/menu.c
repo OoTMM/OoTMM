@@ -196,6 +196,42 @@ static const char* const kSoulsBossOot[] = {
     "Twinrova",
 };
 
+static const char* const kSoulsNpcOot[] = {
+    "Saria",
+    "Darunia",
+    "Ruto",
+    "King Zora",
+    "Zelda",
+    "Sheik",
+    "Cucco Lady",
+    "Carpenters",
+    "Guru-Guru",
+    "Mido",
+    "Kokiri",
+    "Kokiri Shopkeeper",
+    "Hylian Guard",
+    "Hylian Citizen",
+    "Malon",
+    "Talon",
+    "Fishing Pond Owner",
+    "Goron",
+    "Medigoron",
+    "Biggoron",
+    "Child Goron",
+    "Goron Shopkeeper",
+    "Zora",
+    "Zora Shopkeeper",
+    "Bazaar Shopkeeper",
+    "Bombchu Shopkeeper",
+    "Potion Shopkeeper",
+    "Bombchu Bowling Lady",
+    "Trasure Chest Game Owner",
+    "Shooting Gallery Owner",
+    "Dampe",
+    "Graveyard Kid",
+    "Poe Collector",
+};
+
 static const char* const kSoulsEnemyMm[] = {
     "Octoroks",
     "Wallmasters",
@@ -870,6 +906,9 @@ void comboMenuUpdate(GameState_Play* play)
     case MENU_SOULS_OOT_BOSS:
         g.menuCursorMax = ARRAY_SIZE(kSoulsBossOot);
         break;
+    case MENU_SOULS_OOT_NPC:
+        g.menuCursorMax = ARRAY_SIZE(kSoulsNpcOot);
+        break;
     case MENU_SOULS_MM_ENEMY:
         g.menuCursorMax = ARRAY_SIZE(kSoulsEnemyMm);
         break;
@@ -928,6 +967,9 @@ void comboMenuDraw(GameState_Play* play)
     case MENU_SOULS_OOT_BOSS:
         drawMenuSouls(play, "OoT Boss Souls", kSoulsBossOot, GI_OOT_SOUL_BOSS_QUEEN_GOHMA, 0);
         break;
+    case MENU_SOULS_OOT_NPC:
+        drawMenuSouls(play, "OoT NPC Souls", kSoulsNpcOot, GI_OOT_SOUL_NPC_SARIA, 0);
+        break;
     case MENU_SOULS_MM_ENEMY:
         drawMenuSouls(play, "MM Enemy Souls", kSoulsEnemyMm, GI_MM_SOUL_ENEMY_OCTOROK, 1);
         break;
@@ -951,6 +993,8 @@ void comboMenuNext(void)
     if (g.menuScreen == MENU_SOULS_OOT_ENEMY && !comboConfig(CFG_OOT_SOULS_ENEMY))
         g.menuScreen++;
     if (g.menuScreen == MENU_SOULS_OOT_BOSS && !comboConfig(CFG_OOT_SOULS_BOSS))
+        g.menuScreen++;
+    if (g.menuScreen == MENU_SOULS_OOT_NPC && !comboConfig(CFG_OOT_SOULS_NPC))
         g.menuScreen++;
     if (g.menuScreen == MENU_SOULS_MM_ENEMY && !comboConfig(CFG_MM_SOULS_ENEMY))
         g.menuScreen++;

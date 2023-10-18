@@ -157,7 +157,7 @@
 "can_kill_baba_sticks": "soul_deku_baba && (can_boomerang || (has_weapon && (is_child || has_nuts || can_hookshot || can_hammer)))"
 "can_kill_baba_nuts": "soul_deku_baba && (has_weapon || has_explosives || can_use_slingshot)"
 "can_hit_scrub": "has_nuts || can_hit_triggers_distance || has_shield_for_scrubs || can_collect_distance || can_hammer"
-"can_rescue_carpenter": "small_keys_hideout_all && (has_weapon || ((can_boomerang || has_nuts) && can_use_sticks))"
+"can_rescue_carpenter": "small_keys_hideout_all && (has_weapon || ((can_boomerang || has_nuts) && can_use_sticks)) && soul_npc(SOUL_NPC_CARPENTERS)"
 "carpenters_rescued": "setting(gerudoFortress, open) || (event(CARPENTER_1) && (setting(gerudoFortress, single) || (event(CARPENTER_2) || event(CARPENTER_3) || event(CARPENTER_4))))"
 
 #Trick Macros
@@ -177,6 +177,7 @@
 "king_zora_moved": "event(KING_ZORA_LETTER) || setting(zoraKing, open) || (setting(zoraKing, adult) && is_adult)"
 "can_move_mido": "is_child && has_sword_kokiri && renewable(SHIELD_DEKU)"
 "mido_moved": "setting(dekuTree, open) || event(MIDO_MOVED)"
+"mido_moved_soul": "setting(dekuTree, open) || (event(MIDO_MOVED) && soul_npc(SOUL_NPC_MIDO))"
 
 # Wallets
 "has_wallet(n)": "cond(setting(childWallets), has(WALLET, n) || has(SHARED_WALLET, n), has(WALLET, n - 1) || has(SHARED_WALLET, n - 1))"
@@ -196,7 +197,7 @@
 "small_keys_shadow(n)": "small_keys(SMALL_KEY_SHADOW, KEY_RING_SHADOW, n)"
 "small_keys_spirit(n)": "small_keys(SMALL_KEY_SPIRIT, KEY_RING_SPIRIT, n)"
 "small_keys_hideout(n)": "has_skeleton_key || has(KEY_RING_GF) || has(SMALL_KEY_GF, n)"
-"small_keys_tcg(n)": "cond(setting(smallKeyShuffleChestGame, vanilla), has_lens_strict && can_use_wallet(1), has_skeleton_key || has(KEY_RING_TCG) || has(SMALL_KEY_TCG, n))"
+"small_keys_tcg(n)": "cond(setting(smallKeyShuffleChestGame, vanilla), has_lens_strict && can_use_wallet(1) && soul_npc(SOUL_NPC_TRASURE_CHEST_GAME_OWNER), has_skeleton_key || has(KEY_RING_TCG) || has(SMALL_KEY_TCG, n))"
 "small_keys_hideout_all": "setting(gerudoFortress, open) || cond(setting(gerudoFortress, single), small_keys_hideout(1), small_keys_hideout(4))"
 "small_keys_botw(n)": "small_keys(SMALL_KEY_BOTW, KEY_RING_BOTW, n)"
 "small_keys_gtg(n)": "small_keys(SMALL_KEY_GTG, KEY_RING_GTG, n)"
@@ -247,6 +248,7 @@
 # Misc
 "soul_enemy(x)": "(!setting(soulsEnemyOot)) || has(x)"
 "soul_boss(x)": "(!setting(soulsBossOot)) || has(x)"
+"soul_npc(x)": "(!setting(soulsNpcOot)) || has(x)"
 "climb_anywhere": "setting(climbMostSurfacesOot)"
 "hookshot_anywhere": "can_hookshot && setting(hookshotAnywhereOot)"
 "longshot_anywhere": "can_longshot && setting(hookshotAnywhereOot)"
