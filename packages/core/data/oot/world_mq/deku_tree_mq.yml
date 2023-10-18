@@ -25,6 +25,10 @@
     "MQ Deku Tree Grass Entrance Lower 5": "can_cut_grass"
     "MQ Deku Tree Grass Entrance Upper 1": "can_cut_grass"
     "MQ Deku Tree Grass Entrance Upper 2": "can_cut_grass"
+    "MQ Deku Tree Grass Slingshot Room Front 1": "can_cut_grass"
+    "MQ Deku Tree Grass Slingshot Room Front 2": "can_cut_grass"
+    "MQ Deku Tree Grass Slingshot Room Back 1": "can_cut_grass"
+    "MQ Deku Tree Grass Slingshot Room Back 2": "can_cut_grass"
     "MQ Deku Tree Grass Room Before Compass 1": "can_cut_grass && (can_use_bow || can_use_sticks || can_use_din)"
     "MQ Deku Tree Grass Room Before Compass 2": "can_cut_grass && (can_use_bow || can_use_sticks || can_use_din)"
     "MQ Deku Tree Grass Room Before Compass 3": "can_cut_grass && (can_use_bow || can_use_sticks || can_use_din)"
@@ -80,6 +84,14 @@
   locations:
     "MQ Deku Tree GS Song of Time Blocks": "(can_play_time && can_collect_distance) || can_longshot"
     "MQ Deku Tree GS Back Room": "(can_use_sticks || has_fire) && can_collect_distance"
+    "MQ Deku Tree Grass Gravestone Room 1": "can_cut_grass"
+    "MQ Deku Tree Grass Gravestone Room 2": "can_cut_grass"
+    "MQ Deku Tree Grass Gravestone Room 3": "can_cut_grass"
+    "MQ Deku Tree Grass Gravestone Room 4": "can_cut_grass"
+    "MQ Deku Tree Grass Gravestone Room 5": "can_cut_grass"
+    "MQ Deku Tree Grass Back Room 1": "can_cut_grass && (can_use_sticks || has_fire)"
+    "MQ Deku Tree Grass Back Room 2": "can_cut_grass && (can_use_sticks || has_fire)"
+    "MQ Deku Tree Grass Back Room 3": "can_cut_grass && (can_use_sticks || has_fire)"
 "Deku Tree Basement Ledge":
   dungeon: DT
   exits:
@@ -92,10 +104,14 @@
     "MQ Deku Tree Grass Basement Upper 1": "can_cut_grass"
     "MQ Deku Tree Grass Basement Upper 2": "can_cut_grass"
     "MQ Deku Tree Grass Basement Upper 3": "can_cut_grass"
-    "MQ Deku Tree Grass Larvae Room 1": "is_child && can_cut_grass" #You can go backwards to get this grass with nothing else.
-    "MQ Deku Tree Grass Larvae Room 2": "is_child && can_cut_grass" #You can go backwards to get this grass with nothing else.
+    "MQ Deku Tree Grass Larvae Room 1": "is_child && can_cut_grass" #You can go backwards to get this specific grass with nothing else.
+    "MQ Deku Tree Grass Larvae Room 2": "is_child && can_cut_grass" #You can go backwards to get this specific grass with nothing else.
 "Deku Tree Before Boss":
   dungeon: DT
   exits:
     "Deku Tree Basement Ledge": "true"
     "Deku Tree Boss": "has_shield_for_scrubs && soul_deku_scrub"
+  locations:
+    "MQ Deku Tree Grass Room Before Boss 1": "can_cut_grass"
+    "MQ Deku Tree Grass Room Before Boss 2": "can_cut_grass"
+    "MQ Deku Tree Grass Room Before Boss 3": "can_cut_grass"
