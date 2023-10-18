@@ -10,6 +10,8 @@
     "MQ Jabu-Jabu Entry Chest": "can_use_slingshot"
     "MQ Jabu-Jabu Pot Entrance 1": "true"
     "MQ Jabu-Jabu Pot Entrance 2": "true"
+    "MQ Jabu-Jabu Grass Entrance 1": "can_cut_grass"
+    "MQ Jabu-Jabu Grass Entrance 2": "can_cut_grass"
 "Jabu-Jabu Main":
   dungeon: JJ
   exits:
@@ -34,6 +36,11 @@
     "MQ Jabu-Jabu Pot Underwater Alcove 2": "is_child || (is_adult && can_dive_small)" #Future-proofing this for eventual ageless bow and slingshot. Adult cannot dive to the alcove without a scale.
     "MQ Jabu-Jabu Pot Boomerang Room 1": "is_child || (is_adult && can_dive_small)" #Future-proofing this for eventual ageless bow and slingshot. Adult cannot dive to the alcove without a scale.
     "MQ Jabu-Jabu Pot Boomerang Room 2": "is_child || (is_adult && can_dive_small)" #Future-proofing this for eventual ageless bow and slingshot. Adult cannot dive to the alcove without a scale.
+    "MQ Jabu-Jabu Grass Main Room Top 1": "(is_child || (is_adult && can_dive_small)) && can_cut_grass && has_explosives_or_hammer"
+    "MQ Jabu-Jabu Grass Main Room Top 2": "(is_child || (is_adult && can_dive_small)) && can_cut_grass && has_explosives_or_hammer"
+    "MQ Jabu-Jabu Grass Main Room Bottom 1": "(is_child || (is_adult && can_dive_small)) && can_cut_grass"
+    "MQ Jabu-Jabu Grass Main Room Bottom 2": "(is_child || (is_adult && can_dive_small)) && can_cut_grass"
+    "MQ Jabu-Jabu Grass Main Room Bottom 3": "(is_child || (is_adult && can_dive_small)) && can_cut_grass"
 "Jabu-Jabu Back":
   dungeon: JJ
   exits:
