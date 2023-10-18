@@ -32,6 +32,14 @@
     "MQ Deku Tree Grass Room Before Compass 5": "can_cut_grass && (can_use_bow || can_use_sticks || can_use_din)"
     "MQ Deku Tree Grass Room Before Compass 6": "can_cut_grass && (can_use_bow || can_use_sticks || can_use_din)"
     "MQ Deku Tree Grass Room Before Compass 7": "can_cut_grass && (can_use_bow || can_use_sticks || can_use_din)"
+    "MQ Deku Tree Grass Basement Lower 1": "can_cut_grass && (can_use_sticks || has_fire)"
+    "MQ Deku Tree Grass Basement Lower 2": "can_cut_grass && (can_use_sticks || has_fire)"
+    "MQ Deku Tree Grass Basement Lower 3": "can_cut_grass && (can_use_sticks || has_fire)"
+    "MQ Deku Tree Grass Basement Lower 4": "can_cut_grass && (can_use_sticks || has_fire)"
+    "MQ Deku Tree Grass Room Before Spike 1": "can_cut_grass && (can_use_slingshot || can_use_bow) && (can_use_sticks || has_fire)"
+    "MQ Deku Tree Grass Room Before Spike 2": "can_cut_grass && (can_use_slingshot || can_use_bow) && (can_use_sticks || has_fire)"
+    "MQ Deku Tree Grass Room Before Spike 3": "can_cut_grass && (can_use_slingshot || can_use_bow) && (can_use_sticks || has_fire)"
+    "MQ Deku Tree Grass Room Before Spike 4": "can_cut_grass && (can_use_slingshot || can_use_bow) && (can_use_sticks || has_fire)"
 "Deku Tree Compass Room":
   dungeon: DT
   exits:
@@ -50,6 +58,9 @@
     "Deku Tree Water Room Back": "(is_child && has_shield) || can_longshot || (can_hookshot && has_iron_boots)"
   locations:
     "MQ Deku Tree Before Water Platform Chest": "true"
+    "MQ Deku Tree Grass Spike Room Front 1": "can_cut_grass"
+    "MQ Deku Tree Grass Spike Room Front 2": "can_cut_grass"
+    "MQ Deku Tree Grass Spike Room Front 3": "can_cut_grass"
 "Deku Tree Water Room Back":
   dungeon: DT
   exits:
@@ -57,6 +68,10 @@
   locations:
     "MQ Deku Tree After Water Platform Chest": "can_play_time"
     "MQ Deku Tree Before Water Platform Chest": "true"
+    "MQ Deku Tree Grass Spike Room Back 1": "can_cut_grass"
+    "MQ Deku Tree Grass Spike Room Back 2": "can_cut_grass"
+    "MQ Deku Tree Grass Larvae Room 1": "can_cut_grass" #This is placed here because you don't need the souls to get the grass like you do to reach the backrooms.
+    "MQ Deku Tree Grass Larvae Room 2": "can_cut_grass" #This is placed here because you don't need the souls to get the grass like you do to reach the backrooms.
 "Deku Tree Backrooms":
   dungeon: DT
   exits:
@@ -74,6 +89,11 @@
     DEKU_BLOCK: "true"
   locations:
     "MQ Deku Tree Scrub": "can_hit_scrub && scrub_price(0x1b)"
+    "MQ Deku Tree Grass Basement Upper 1": "can_cut_grass"
+    "MQ Deku Tree Grass Basement Upper 2": "can_cut_grass"
+    "MQ Deku Tree Grass Basement Upper 3": "can_cut_grass"
+    "MQ Deku Tree Grass Larvae Room 1": "is_child && can_cut_grass" #You can go backwards to get this grass with nothing else.
+    "MQ Deku Tree Grass Larvae Room 2": "is_child && can_cut_grass" #You can go backwards to get this grass with nothing else.
 "Deku Tree Before Boss":
   dungeon: DT
   exits:
