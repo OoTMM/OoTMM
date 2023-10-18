@@ -23,3 +23,7 @@
     "MQ Bottom of the Well Pot Side Room 2": "can_play_zelda || (has_explosives_or_hammer && has_hover_boots)"
     "MQ Bottom of the Well Pot Side Room 3": "can_play_zelda || (has_explosives_or_hammer && has_hover_boots)"
     "MQ Bottom of the Well Pot Lobby Alcove": "has_explosives_or_hammer && can_hit_triggers_distance"
+    "MQ Bottom of the Well Grass Dead-Hand 1": "can_cut_grass && (has_ranged_weapon_child || has_ranged_weapon_adult || has_explosives_or_hammer || can_use_sticks || can_use_sword)" #Many ways to lower the water.
+    "MQ Bottom of the Well Grass Dead-Hand 2": "can_cut_grass && (has_ranged_weapon_child || has_ranged_weapon_adult || has_explosives_or_hammer || can_use_sticks || can_use_sword)" #Many ways to lower the water.
+    "MQ Bottom of the Well Grass Dead-Hand 3": "can_cut_grass && (has_ranged_weapon_child || has_ranged_weapon_adult || has_explosives_or_hammer || can_use_sticks || can_use_sword)" #Many ways to lower the water.
+    "MQ Bottom of the Well Grass Dead-Hand 4": "can_cut_grass && (has_ranged_weapon_child || has_ranged_weapon_adult || has_explosives_or_hammer || can_use_sticks || can_use_sword)" #Many ways to lower the water.
