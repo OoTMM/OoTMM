@@ -770,7 +770,7 @@
     "Lost Woods Memory Game": "is_child && can_play_minigame"
     "Lost Woods Scrub Sticks Upgrade": "is_child && can_hit_scrub && scrub_price(0x00)"
     "Lost Woods Odd Mushroom": "adult_trade(COJIRO)"
-    "Lost Woods Poacher's Saw": "adult_trade(ODD_POTION)"
+    "Lost Woods Poacher's Saw": "adult_trade(ODD_POTION) && soul_npc(SOUL_NPC_KOKIRI)"
     "Lost Woods GS Soil Bridge": "gs_soil && can_damage_skull"
     "Lost Woods Grass 1": "can_cut_grass"
     "Lost Woods Grass 2": "can_cut_grass"
