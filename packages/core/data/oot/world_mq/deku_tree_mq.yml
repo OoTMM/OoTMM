@@ -76,6 +76,9 @@
     "MQ Deku Tree Grass Spike Room Back 2": "can_cut_grass"
     "MQ Deku Tree Grass Larvae Room 1": "can_cut_grass" #This is placed here because you don't need the souls to get the grass like you do to reach the backrooms.
     "MQ Deku Tree Grass Larvae Room 2": "can_cut_grass" #This is placed here because you don't need the souls to get the grass like you do to reach the backrooms.
+    "MQ Deku Tree Grass Spike Room Front 1": "can_cut_grass"
+    "MQ Deku Tree Grass Spike Room Front 2": "can_cut_grass"
+    "MQ Deku Tree Grass Spike Room Front 3": "can_cut_grass"
 "Deku Tree Backrooms":
   dungeon: DT
   exits:
@@ -106,6 +109,14 @@
     "MQ Deku Tree Grass Basement Upper 3": "can_cut_grass"
     "MQ Deku Tree Grass Larvae Room 1": "is_child && can_cut_grass" #You can go backwards to get this specific grass with nothing else.
     "MQ Deku Tree Grass Larvae Room 2": "is_child && can_cut_grass" #You can go backwards to get this specific grass with nothing else.
+    "MQ Deku Tree Grass Gravestone Room 1": "is_child && can_cut_grass"
+    "MQ Deku Tree Grass Gravestone Room 2": "is_child && can_cut_grass"
+    "MQ Deku Tree Grass Gravestone Room 3": "is_child && can_cut_grass"
+    "MQ Deku Tree Grass Gravestone Room 4": "is_child && can_cut_grass"
+    "MQ Deku Tree Grass Gravestone Room 5": "is_child && can_cut_grass"
+    "MQ Deku Tree Grass Back Room 1": "is_child && can_cut_grass && (can_use_sticks || has_fire)"
+    "MQ Deku Tree Grass Back Room 2": "is_child && can_cut_grass && (can_use_sticks || has_fire)"
+    "MQ Deku Tree Grass Back Room 3": "is_child && can_cut_grass && (can_use_sticks || has_fire)"
 "Deku Tree Before Boss":
   dungeon: DT
   exits:
