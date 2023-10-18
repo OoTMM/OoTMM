@@ -175,7 +175,7 @@
 "can_collect_ageless_raw": "(has_hookshot(1) && has(BOOMERANG)) || (age_boomerang_anyage && has(BOOMERANG)) || (age_hookshot_anyage && has_hookshot(1))"
 "can_collect_ageless": "(time_travel_at_will && can_collect_distance) || can_collect_ageless_raw"
 "king_zora_moved": "event(KING_ZORA_LETTER) || setting(zoraKing, open) || (setting(zoraKing, adult) && is_adult)"
-"can_move_mido": "is_child && has_sword_kokiri && renewable(SHIELD_DEKU)"
+"can_move_mido": "(is_child && has_sword_kokiri && renewable(SHIELD_DEKU)) || setting(dekuTree, open)"
 "mido_moved": "setting(dekuTree, open) || (event(MIDO_MOVED) && soul_npc(SOUL_NPC_MIDO))"
 
 # Wallets
