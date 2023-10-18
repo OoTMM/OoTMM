@@ -130,7 +130,7 @@
   region: KOKIRI_FOREST
   exits:
     "Kokiri Forest": "mido_moved || is_adult || climb_anywhere || hookshot_anywhere"
-    "Deku Tree": "is_child || (is_adult && setting(dekuTreeAdult) && mido_moved_soul)"
+    "Deku Tree": "is_child || (is_adult && setting(dekuTreeAdult) && mido_moved)"
   events:
     STICKS: "is_child && soul_deku_baba && (can_boomerang || has_weapon)"
     MIDO_MOVED: "can_move_mido"
