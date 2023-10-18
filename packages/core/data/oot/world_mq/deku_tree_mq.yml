@@ -18,6 +18,20 @@
     "MQ Deku Tree Slingshot Room Far Chest": "can_use_sticks || has_fire"
     "MQ Deku Tree Basement Chest": "can_use_sticks || has_fire"
     "MQ Deku Tree GS Lobby Crate": "can_damage_skull"
+    "MQ Deku Tree Grass Entrance Lower 1": "can_cut_grass"
+    "MQ Deku Tree Grass Entrance Lower 2": "can_cut_grass"
+    "MQ Deku Tree Grass Entrance Lower 3": "can_cut_grass"
+    "MQ Deku Tree Grass Entrance Lower 4": "can_cut_grass"
+    "MQ Deku Tree Grass Entrance Lower 5": "can_cut_grass"
+    "MQ Deku Tree Grass Entrance Upper 1": "can_cut_grass"
+    "MQ Deku Tree Grass Entrance Upper 2": "can_cut_grass"
+    "MQ Deku Tree Grass Room Before Compass 1": "can_cut_grass && (can_use_bow || can_use_sticks || can_use_din)"
+    "MQ Deku Tree Grass Room Before Compass 2": "can_cut_grass && (can_use_bow || can_use_sticks || can_use_din)"
+    "MQ Deku Tree Grass Room Before Compass 3": "can_cut_grass && (can_use_bow || can_use_sticks || can_use_din)"
+    "MQ Deku Tree Grass Room Before Compass 4": "can_cut_grass && (can_use_bow || can_use_sticks || can_use_din)"
+    "MQ Deku Tree Grass Room Before Compass 5": "can_cut_grass && (can_use_bow || can_use_sticks || can_use_din)"
+    "MQ Deku Tree Grass Room Before Compass 6": "can_cut_grass && (can_use_bow || can_use_sticks || can_use_din)"
+    "MQ Deku Tree Grass Room Before Compass 7": "can_cut_grass && (can_use_bow || can_use_sticks || can_use_din)"
 "Deku Tree Compass Room":
   dungeon: DT
   exits:
@@ -25,6 +39,10 @@
   locations:
     "MQ Deku Tree Compass Chest": "true"
     "MQ Deku Tree GS Compass Room": "(has_bombchu || (can_play_time && has_explosives_or_hammer)) && can_collect_distance"
+    "MQ Deku Tree Grass Compass Room 1": "can_cut_grass"
+    "MQ Deku Tree Grass Compass Room 2": "can_cut_grass"
+    "MQ Deku Tree Grass Compass Room 3": "can_cut_grass"
+    "MQ Deku Tree Grass Compass Room 4": "can_cut_grass"
 "Deku Tree Water Room":
   dungeon: DT
   exits:
