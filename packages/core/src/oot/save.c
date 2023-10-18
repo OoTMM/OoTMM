@@ -153,7 +153,7 @@ static void applyStartingEvents(void)
         BITMAP16_SET(gSave.eventsMisc, EV_OOT_INF_KAKARIKO_GATE_OPEN);
     }
 
-    if (comboConfig(CFG_OOT_ZK_OPEN))
+    if (comboConfig(CFG_OOT_KZ_OPEN))
     {
         SetEventChk(EV_OOT_CHK_KING_ZORA_MOVED);
     }
