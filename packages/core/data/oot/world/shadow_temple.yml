@@ -12,7 +12,7 @@
     MAGIC: "trick(OOT_LENS)"
   locations:
     "Shadow Temple Map": "soul_redead_gibdo && soul_keese && has_lens && (has_weapon || can_use_sticks || can_use_din || can_hammer)"
-    "Shadow Temple Hover Boots": "soul(SOUL_DEAD_HAND) && has_lens && (has_weapon || (can_use_sticks && trick(OOT_DEAD_HAND_STICKS)))"
+    "Shadow Temple Hover Boots": "soul_enemy(SOUL_ENEMY_DEAD_HAND) && has_lens && (has_weapon || (can_use_sticks && trick(OOT_DEAD_HAND_STICKS)))"
     "Shadow Temple Pot Early Maze 1": "has_lens"
     "Shadow Temple Pot Early Maze 2": "has_lens"
     "Shadow Temple Pot Early Maze 3": "has_lens"

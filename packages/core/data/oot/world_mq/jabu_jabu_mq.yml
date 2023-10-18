@@ -27,7 +27,7 @@
     "MQ Jabu-Jabu Third Room West Chest": "can_use_slingshot && (is_child || (is_adult && can_dive_small))" #Future-proofing this for eventual ageless bow and slingshot. Adult cannot dive to the alcove without a scale.
     "MQ Jabu-Jabu Third Room East Chest": "can_use_slingshot && (is_child || (is_adult && can_dive_small))" #Future-proofing this for eventual ageless bow and slingshot. Adult cannot dive to the alcove without a scale.
     "MQ Jabu-Jabu SoT Room Lower Chest": "is_child || (is_adult && can_dive_small)" #Future-proofing this for eventual ageless bow and slingshot. Adult cannot dive to the alcove without a scale.
-    "MQ Jabu-Jabu Boomerang Chest": "soul_lizalfos_dinalfos && soul_like_like && soul(SOUL_STINGER)" #You will always have an acceptable weapon for this.
+    "MQ Jabu-Jabu Boomerang Chest": "soul_lizalfos_dinalfos && soul_like_like && soul_enemy(SOUL_ENEMY_STINGER)" #You will always have an acceptable weapon for this.
     "MQ Jabu-Jabu GS SoT Block": "can_play_time && (is_child || (is_adult && can_dive_small))" #Future-proofing this for eventual ageless bow and slingshot. Adult cannot dive to the alcove without a scale.
     "MQ Jabu-Jabu Cow": "can_play_epona && event(JABU_BIG_OCTO) && can_use_slingshot"
     "MQ Jabu-Jabu Pot Underwater Alcove 1": "is_child || (is_adult && can_dive_small)" #Future-proofing this for eventual ageless bow and slingshot. Adult cannot dive to the alcove without a scale.
@@ -39,8 +39,8 @@
   exits:
     "Jabu-Jabu Main": "true"
   events:
-    "JABU_TENTACLE_BLUE": "((can_use_sticks && soul_like_like && can_use_slingshot) || has_fire) && can_boomerang && soul(SOUL_PARASITE)"
-    "JABU_TENTACLE_RED": "can_boomerang && soul(SOUL_PARASITE)"
+    "JABU_TENTACLE_BLUE": "((can_use_sticks && soul_like_like && can_use_slingshot) || has_fire) && can_boomerang && soul_enemy(SOUL_ENEMY_PARASITE)"
+    "JABU_TENTACLE_RED": "can_boomerang && soul_enemy(SOUL_ENEMY_PARASITE)"
     "JABU_TENTACLE_GREEN": "event(JABU_TENTACLE_BLUE)"
   locations:
     "MQ Jabu-Jabu Back Chest": "soul_like_like && can_use_slingshot"
@@ -52,7 +52,7 @@
   exits:
     "Jabu-Jabu Main": "true"
   locations:
-    "MQ Jabu-Jabu GS Basement Side Room": "(has_lens && soul_keese && soul(SOUL_STINGER)) || (has_hover_boots && can_collect_distance) || (has_fire_arrows && can_longshot)"
+    "MQ Jabu-Jabu GS Basement Side Room": "(has_lens && soul_keese && soul_enemy(SOUL_ENEMY_STINGER)) || (has_hover_boots && can_collect_distance) || (has_fire_arrows && can_longshot)"
 "Jabu-Jabu Pre-Boss":
   dungeon: JJ
   exits:

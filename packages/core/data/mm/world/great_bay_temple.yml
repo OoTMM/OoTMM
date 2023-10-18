@@ -69,7 +69,7 @@
   exits:
     "Great Bay Temple Compass Room": "true"
   locations:
-    "Great Bay Temple Baba Chest": "soul(SOUL_BIO_BABA) && (has_mask_zora || has_arrows || (has(MASK_BLAST) && short_hook_anywhere))"
+    "Great Bay Temple Baba Chest": "soul_enemy(SOUL_ENEMY_BIO_BABA) && (has_mask_zora || has_arrows || (has(MASK_BLAST) && short_hook_anywhere))"
 "Great Bay Temple Compass Room":
   dungeon: GB
   events:
@@ -80,7 +80,7 @@
     "Great Bay Temple Boss Key Room": "(can_use_ice_arrows && can_use_fire_arrows) || short_hook_anywhere"
     "Great Bay Temple Green Pipe 2": "event(GB_WATER_WHEEL)"
   locations:
-    "Great Bay Temple Compass": "soul(SOUL_BIO_BABA) || can_hookshot || can_use_ice_arrows || short_hook_anywhere" # The lilypads from the biobabas aren't here without their souls
+    "Great Bay Temple Compass": "soul_enemy(SOUL_ENEMY_BIO_BABA) || can_hookshot || can_use_ice_arrows || short_hook_anywhere" # The lilypads from the biobabas aren't here without their souls
     "Great Bay Temple Compass Room Underwater": "has_mask_zora"
     "Great Bay Temple Boss Key": "short_hook_anywhere"
     "Great Bay Temple SF Compass Room Pot": "has_mask_zora || short_hook_anywhere || (has(MASK_GREAT_FAIRY) && (has_weapon_range || has_bombchu))"
@@ -106,11 +106,11 @@
 "Great Bay Temple Ice Arrow Room":
   dungeon: GB
   events:
-    MAGIC: "soul(SOUL_CHUCHU) && (has_weapon || has_mask_zora || has(MASK_DEKU) || has_explosives)"
+    MAGIC: "soul_enemy(SOUL_ENEMY_CHUCHU) && (has_weapon || has_mask_zora || has(MASK_DEKU) || has_explosives)"
   exits:
     "Great Bay Temple Red Pipe 1": "true"
   locations:
-    "Great Bay Temple Ice Arrow": "soul(SOUL_WART)"
+    "Great Bay Temple Ice Arrow": "soul_enemy(SOUL_ENEMY_WART)"
     "Great Bay Temple Pot Wart 1": "true"
     "Great Bay Temple Pot Wart 2": "true"
     "Great Bay Temple Pot Wart 3": "true"
@@ -136,16 +136,16 @@
   exits:
     "Great Bay Temple Map Room": "true"
   events:
-    GB_PIPE_RED2: "(soul(SOUL_CHUCHU) && can_use_ice_arrows) || short_hook_anywhere"
+    GB_PIPE_RED2: "(soul_enemy(SOUL_ENEMY_CHUCHU) && can_use_ice_arrows) || short_hook_anywhere"
     MAGIC: "true"
 "Great Bay Temple Boss Key Room":
   dungeon: GB
   exits:
-    "Great Bay Temple Compass Room": "soul(SOUL_GEKKO) && can_use_ice_arrows"
+    "Great Bay Temple Compass Room": "soul_enemy(SOUL_ENEMY_GEKKO) && can_use_ice_arrows"
   events:
-    FROG_4: "has(MASK_DON_GERO) && soul(SOUL_GEKKO) && can_use_ice_arrows"
+    FROG_4: "has(MASK_DON_GERO) && soul_enemy(SOUL_ENEMY_GEKKO) && can_use_ice_arrows"
   locations:
-    "Great Bay Temple Boss Key": "soul(SOUL_GEKKO) && can_use_ice_arrows"
+    "Great Bay Temple Boss Key": "soul_enemy(SOUL_ENEMY_GEKKO) && can_use_ice_arrows"
 "Great Bay Temple Green Pipe 1":
   dungeon: GB
   exits:
@@ -209,7 +209,7 @@
   boss: true
   dungeon: GB
   exits:
-    "Great Bay Temple After Boss": "soul(SOUL_GYORG) && ((has_magic && ((has_mask_zora && has_arrows) || has(MASK_FIERCE_DEITY))))"
+    "Great Bay Temple After Boss": "soul_boss(SOUL_BOSS_GYORG) && ((has_magic && ((has_mask_zora && has_arrows) || has(MASK_FIERCE_DEITY))))"
   locations:
     "Great Bay Temple Boss Pot 1": "true"
     "Great Bay Temple Boss Pot 2": "true"

@@ -560,7 +560,7 @@
   events:
     STICKS: "can_kill_baba_both_sticks"
     NUTS: "soul_deku_baba"
-    MAGIC: "soul(SOUL_CHUCHU)"
+    MAGIC: "soul_enemy(SOUL_ENEMY_CHUCHU)"
     RUPEES: "true"
     BOMBS: "true"
     ARROWS: "true"
@@ -1677,7 +1677,7 @@
   events:
     PICTURE_TINGLE: "has(PICTOGRAPH_BOX)"
     MAGIC: "true"
-    RUPEES: "(can_use_light_arrows && (soul_tektite || soul_wolfos || ((can_break_boulders || can_use_fire_arrows) && soul(SOUL_SNAPPER)))) || event(BOSS_SNOWHEAD)"
+    RUPEES: "(can_use_light_arrows && (soul_tektite || soul_wolfos || ((can_break_boulders || can_use_fire_arrows) && soul_enemy(SOUL_ENEMY_SNAPPER)))) || event(BOSS_SNOWHEAD)"
   exits:
     "Mountain Village": "true"
     "Goron Village": "true"
@@ -2332,7 +2332,7 @@
   locations:
     "Pinnacle Rock Chest 1": "true"
     "Pinnacle Rock Chest 2": "true"
-    "Pinnacle Rock HP": "soul(SOUL_DEEP_PYTHON) && event(SEAHORSE)"
+    "Pinnacle Rock HP": "soul_enemy(SOUL_ENEMY_DEEP_PYTHON) && event(SEAHORSE)"
     "Pinnacle Rock Pot 01": "true"
     "Pinnacle Rock Pot 02": "true"
     "Pinnacle Rock Pot 03": "true"
@@ -2607,7 +2607,7 @@
     "Beneath The Graveyard Night 2": "soul_stalchild && has(MASK_CAPTAIN) && is_night2"
     "Beneath The Graveyard Night 3": "soul_stalchild && has(MASK_CAPTAIN) && is_night3"
   locations:
-    "Ikana Graveyard Captain Mask": "soul(SOUL_CAPTAIN_KEETA) && can_play_awakening && has_arrows && can_fight"
+    "Ikana Graveyard Captain Mask": "soul_enemy(SOUL_ENEMY_CAPTAIN_KEETA) && can_play_awakening && has_arrows && can_fight"
     "Ikana Graveyard Grass 1": "true"
     "Ikana Graveyard Grass 2": "true"
     "Ikana Graveyard Grass 3": "true"
@@ -2659,7 +2659,7 @@
     "Ikana Graveyard": "true"
     "Beneath The Graveyard Night 2": "short_hook_anywhere"
   locations:
-    "Beneath The Graveyard Chest": "soul(SOUL_BAD_BAT) && (can_fight || has_explosives || has_arrows || can_hookshot_short || has(MASK_DEKU))"
+    "Beneath The Graveyard Chest": "soul_enemy(SOUL_ENEMY_BAD_BAT) && (can_fight || has_explosives || has_arrows || can_hookshot_short || has(MASK_DEKU))"
     "Beneath The Graveyard Song of Storms": "soul_iron_knuckle && (has_weapon || has_mask_goron || has_explosives) && (has_sticks || can_use_fire_arrows)"
     "Beneath The Graveyard Pot Night 1 Early 1": "true"
     "Beneath The Graveyard Pot Night 1 Early 2": "true"

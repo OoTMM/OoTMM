@@ -23,21 +23,21 @@
 "Ganon Castle Light":
   dungeon: Ganon
   events:
-    GANON_TRIAL_LIGHT: "soul_lizalfos_dinalfos && soul(SOUL_TORCH_SLUG) && has_light_arrows && has_lens && can_hookshot && small_keys_ganon(3)"
+    GANON_TRIAL_LIGHT: "soul_lizalfos_dinalfos && soul_enemy(SOUL_ENEMY_TORCH_SLUG) && has_light_arrows && has_lens && can_hookshot && small_keys_ganon(3)"
   locations:
-    "MQ Ganon Castle Light Trial Chest": "soul_lizalfos_dinalfos && soul(SOUL_TORCH_SLUG) && can_play_zelda && has_weapon"
-    "MQ Ganon Pot Light End 1": "soul_lizalfos_dinalfos && soul(SOUL_TORCH_SLUG) && has_lens && can_hookshot && small_keys_ganon(3)"
-    "MQ Ganon Pot Light End 2": "soul_lizalfos_dinalfos && soul(SOUL_TORCH_SLUG) && has_lens && can_hookshot && small_keys_ganon(3)"
+    "MQ Ganon Castle Light Trial Chest": "soul_lizalfos_dinalfos && soul_enemy(SOUL_ENEMY_TORCH_SLUG) && can_play_zelda && has_weapon"
+    "MQ Ganon Pot Light End 1": "soul_lizalfos_dinalfos && soul_enemy(SOUL_ENEMY_TORCH_SLUG) && has_lens && can_hookshot && small_keys_ganon(3)"
+    "MQ Ganon Pot Light End 2": "soul_lizalfos_dinalfos && soul_enemy(SOUL_ENEMY_TORCH_SLUG) && has_lens && can_hookshot && small_keys_ganon(3)"
 "Ganon Castle Forest":
   dungeon: Ganon
   events:
-    GANON_TRIAL_FOREST: "soul(SOUL_STALFOS) && can_play_time && has_light_arrows"
+    GANON_TRIAL_FOREST: "soul_enemy(SOUL_ENEMY_STALFOS) && can_play_time && has_light_arrows"
   locations:
     "MQ Ganon Castle Forest Trial Key": "can_hookshot"
-    "MQ Ganon Castle Forest Trial First Chest": "soul(SOUL_STALFOS) && has_weapon && can_hit_triggers_distance"
-    "MQ Ganon Castle Forest Trial Second Chest": "soul(SOUL_STALFOS) && has_weapon && has_fire"
-    "MQ Ganon Pot Forest End 1": "soul(SOUL_STALFOS) && can_play_time"
-    "MQ Ganon Pot Forest End 2": "soul(SOUL_STALFOS) && can_play_time"
+    "MQ Ganon Castle Forest Trial First Chest": "soul_enemy(SOUL_ENEMY_STALFOS) && has_weapon && can_hit_triggers_distance"
+    "MQ Ganon Castle Forest Trial Second Chest": "soul_enemy(SOUL_ENEMY_STALFOS) && has_weapon && has_fire"
+    "MQ Ganon Pot Forest End 1": "soul_enemy(SOUL_ENEMY_STALFOS) && can_play_time"
+    "MQ Ganon Pot Forest End 2": "soul_enemy(SOUL_ENEMY_STALFOS) && can_play_time"
 "Ganon Castle Fire":
   dungeon: Ganon
   events:

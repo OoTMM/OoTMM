@@ -972,18 +972,32 @@ export const SETTINGS = [{
   description: 'Adds the Ocarina Buttons as items that are shuffled.',
   default: false,
 }, {
-  key: 'enemySoulsOot',
+  key: 'soulsEnemyOot',
   name: 'Enemy Souls (OoT)',
   category: 'items.extensions',
   type: 'boolean',
   description: 'Add enemy souls into the item pool. Enemies won\'t spawn unless their soul is obtained.',
   default: false
 }, {
-  key: 'enemySoulsMm',
+  key: 'soulsEnemyMm',
   name: 'Enemy Souls (MM)',
   category: 'items.extensions',
   type: 'boolean',
   description: 'Add enemy souls into the item pool. Enemies won\'t spawn unless their soul is obtained.',
+  default: false
+}, {
+  key: 'soulsBossOot',
+  name: 'Boss Souls (OoT)',
+  category: 'items.extensions',
+  type: 'boolean',
+  description: 'Add boss souls into the item pool. Enemies won\'t spawn unless their soul is obtained.',
+  default: false
+}, {
+  key: 'soulsBossMm',
+  name: 'Boss Souls (MM)',
+  category: 'items.extensions',
+  type: 'boolean',
+  description: 'Add boss souls into the item pool. Enemies won\'t spawn unless their soul is obtained.',
   default: false
 }, {
   key: 'lenientSpikes',
@@ -1174,12 +1188,12 @@ export const SETTINGS = [{
   type: 'boolean',
   default: false
 }, {
-  key: 'sharedSouls',
-  name: 'Shared Souls',
+  key: 'sharedSoulsEnemy',
+  name: 'Shared Enemy Souls',
   category: 'items.shared',
   type: 'boolean',
   default: false,
-  cond: (s: any) => s.enemySoulsOot && s.enemySoulsMm,
+  cond: (s: any) => s.soulsEnemyOot && s.soulsEnemyMm,
 }, {
   key: 'sharedOcarinaButtons',
   name: 'Shared Ocarina Buttons',

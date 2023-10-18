@@ -44,7 +44,7 @@
   exits:
     "Stone Tower Temple Inverted East": "true"
     "Stone Tower Temple Inverted East Bridge": "true"
-    "Stone Tower Temple Inverted Wizzrobe": "(soul(SOUL_CHUCHU) || (trick(MM_ISTT_CHUCHU_LESS) && (has_chateau || has_blue_potion || has_green_potion || has_double_magic))) && can_use_light_arrows && cond(trick(MM_ISTT_ENTRY_JUMP), small_keys_st(4), small_keys_st(3))"
+    "Stone Tower Temple Inverted Wizzrobe": "(soul_enemy(SOUL_ENEMY_CHUCHU) || (trick(MM_ISTT_CHUCHU_LESS) && (has_chateau || has_blue_potion || has_green_potion || has_double_magic))) && can_use_light_arrows && cond(trick(MM_ISTT_ENTRY_JUMP), small_keys_st(4), small_keys_st(3))"
   locations:
     "Stone Tower Temple Inverted Pot Updrafts Ledge 1": "true"
     "Stone Tower Temple Inverted Pot Updrafts Ledge 2": "true"
@@ -53,7 +53,7 @@
 "Stone Tower Temple Inverted Wizzrobe":
   dungeon: IST
   exits:
-    "Stone Tower Temple Inverted Wizzrobe Ledge": "(soul(SOUL_WIZZROBE) && can_hookshot_short && (can_fight || has_arrows)) || short_hook_anywhere"
+    "Stone Tower Temple Inverted Wizzrobe Ledge": "(soul_enemy(SOUL_ENEMY_WIZZROBE) && can_hookshot_short && (can_fight || has_arrows)) || short_hook_anywhere"
     "Stone Tower Temple Inverted East Ledge": "((can_use_light_arrows || short_hook_anywhere) && small_keys_st(3)) || (can_goron_bomb_jump && has_bombs && small_keys_st(4))"
   locations:
     "Stone Tower Temple Inverted Pot Wizzrobe 1": "can_hookshot || short_hook_anywhere"
@@ -69,7 +69,7 @@
   events:
     POE: "true"
   locations:
-    "Stone Tower Temple Inverted Wizzrobe Chest": "soul(SOUL_WIZZROBE) && (can_fight || has_arrows)"
+    "Stone Tower Temple Inverted Wizzrobe Chest": "soul_enemy(SOUL_ENEMY_WIZZROBE) && (can_fight || has_arrows)"
     "Stone Tower Temple Inverted Pot Poe Wizzrobe Side 1": "true"
     "Stone Tower Temple Inverted Pot Poe Wizzrobe Side 2": "true"
 "Stone Tower Temple Inverted Death Armos Maze":
@@ -102,7 +102,7 @@
     "Stone Tower Temple Inverted Center": "has(MASK_DEKU) || hookshot_anywhere"
     "Stone Tower Temple Inverted Center Bridge": "(trick(MM_ISTT_EYEGORE) && can_use_light_arrows && can_hookshot) || hookshot_anywhere"
   locations:
-    "Stone Tower Temple Inverted Boss Key": "soul(SOUL_GOMESS) && can_use_light_arrows && can_fight" # Mercy fight requirements so you dont need to rely on magic and arrow drops from bats if you only have Light Arrows
+    "Stone Tower Temple Inverted Boss Key": "soul_enemy(SOUL_ENEMY_GOMESS) && can_use_light_arrows && can_fight" # Mercy fight requirements so you dont need to rely on magic and arrow drops from bats if you only have Light Arrows
     "Stone Tower Temple Inverted Pot Gomess 1": "true"
     "Stone Tower Temple Inverted Pot Gomess 2": "true"
     "Stone Tower Temple Inverted Pot Gomess 3": "true"
@@ -122,12 +122,12 @@
 "Stone Tower Temple Inverted Center Bridge":
   dungeon: IST
   exits:
-    "Stone Tower Temple Inverted Pre-Boss": "soul(SOUL_EYEGORE) && (has_explosives || has_arrows || can_hookshot_short || has_mask_zora || has_mask_goron)"
+    "Stone Tower Temple Inverted Pre-Boss": "soul_enemy(SOUL_ENEMY_EYEGORE) && (has_explosives || has_arrows || can_hookshot_short || has_mask_zora || has_mask_goron)"
     "Stone Tower Temple Inverted Boss Key Room": "(trick(MM_ISTT_EYEGORE) && (has_mask_goron || has_explosives)) || short_hook_anywhere"
     "Stone Tower Temple Inverted Center": "(trick(MM_ISTT_EYEGORE) && (has_mask_goron || has_explosives)) || short_hook_anywhere"
     "Stone Tower Temple Inverted Entrance Top": "small_keys_st(4)"
   locations:
-    "Stone Tower Temple Inverted Giant Mask": "soul(SOUL_EYEGORE) && (has_explosives || has_arrows || can_hookshot_short || has_mask_zora || has_mask_goron)"
+    "Stone Tower Temple Inverted Giant Mask": "soul_enemy(SOUL_ENEMY_EYEGORE) && (has_explosives || has_arrows || can_hookshot_short || has_mask_zora || has_mask_goron)"
 "Stone Tower Temple Inverted Pre-Boss":
   dungeon: IST
   exits:
@@ -158,7 +158,7 @@
   boss: true
   dungeon: IST
   exits:
-    "Stone Tower After Boss": "soul(SOUL_TWINMOLD) && (has_magic && ((has(MASK_GIANT) && has(SWORD)) || has(MASK_FIERCE_DEITY)))"
+    "Stone Tower After Boss": "soul_boss(SOUL_BOSS_TWINMOLD) && (has_magic && ((has(MASK_GIANT) && has(SWORD)) || has(MASK_FIERCE_DEITY)))"
 "Stone Tower After Boss":
   boss: true
   dungeon: IST

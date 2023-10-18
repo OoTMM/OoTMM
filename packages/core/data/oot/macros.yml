@@ -245,7 +245,8 @@
 "glitch_megaflip": "glitch(OOT_MEGAFLIP) && has_bombs && has_one_hand_shield"
 
 # Misc
-"soul(x)": "(!setting(enemySoulsOot)) || has(x)"
+"soul_enemy(x)": "(!setting(soulsEnemyOot)) || has(x)"
+"soul_boss(x)": "(!setting(soulsBossOot)) || has(x)"
 "climb_anywhere": "setting(climbMostSurfacesOot)"
 "hookshot_anywhere": "can_hookshot && setting(hookshotAnywhereOot)"
 "longshot_anywhere": "can_longshot && setting(hookshotAnywhereOot)"

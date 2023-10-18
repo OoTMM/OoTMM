@@ -10,11 +10,11 @@
     "Jabu-Jabu Pre-Boss": "event(BIG_OCTO) || (has_hover_boots && trick(OOT_JABU_BOSS_HOVER)) || climb_anywhere || (glitch_megaflip && trick(OOT_JJB_BOXLESS) && can_jump_slash)"
   events:
     BIG_OCTO: "soul_octorok && event(PARASITE) && (has_weapon || can_use_sticks)"
-    PARASITE: "soul(SOUL_PARASITE) && can_boomerang"
+    PARASITE: "soul_enemy(SOUL_ENEMY_PARASITE) && can_boomerang"
   locations:
     "Jabu-Jabu Map Chest": "event(PARASITE)"
-    "Jabu-Jabu Compass Chest": "event(PARASITE) && soul(SOUL_SHABOM)"
-    "Jabu-Jabu Boomerang Chest": "soul(SOUL_STINGER)"
+    "Jabu-Jabu Compass Chest": "event(PARASITE) && soul_enemy(SOUL_ENEMY_SHABOM)"
+    "Jabu-Jabu Boomerang Chest": "soul_enemy(SOUL_ENEMY_STINGER)"
     "Jabu-Jabu GS Bottom Lower": "can_collect_distance || climb_anywhere"
     "Jabu-Jabu GS Bottom Upper": "can_collect_distance || climb_anywhere"
     "Jabu-Jabu GS Water Switch": "true"

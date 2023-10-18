@@ -20,7 +20,7 @@
   dungeon: DC
   exits:
     "Dodongo Cavern Main": "true"
-    "Dodongo Cavern Side Room": "(soul(SOUL_BABY_DODONGO) && (has_weapon || can_use_sticks)) || has_explosives_or_hammer || has_blue_fire_arrows_mudwall"
+    "Dodongo Cavern Side Room": "(soul_enemy(SOUL_ENEMY_BABY_DODONGO) && (has_weapon || can_use_sticks)) || has_explosives_or_hammer || has_blue_fire_arrows_mudwall"
     "Dodongo Cavern Miniboss 1": "true"
   locations:
     "Dodongo Cavern GS Scarecrow": "(is_adult && scarecrow_hookshot) || (climb_anywhere && can_damage_skull) || hookshot_anywhere"

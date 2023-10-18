@@ -16,7 +16,7 @@
   dungeon: Shadow
   locations:
     "MQ Shadow Temple Compass Chest": "soul_redead_gibdo && (has_weapon || can_use_sticks || can_use_din)"
-    "MQ Shadow Temple Hover Boots Chest": "can_play_time && can_hit_triggers_distance && soul(SOUL_DEAD_HAND) && (has_weapon || (can_use_sticks && trick(OOT_DEAD_HAND_STICKS)))"
+    "MQ Shadow Temple Hover Boots Chest": "can_play_time && can_hit_triggers_distance && soul_enemy(SOUL_ENEMY_DEAD_HAND) && (has_weapon || (can_use_sticks && trick(OOT_DEAD_HAND_STICKS)))"
     "MQ Shadow Temple Pot Entrance Maze 1": "true"
     "MQ Shadow Temple Pot Entrance Maze 2": "true"
     "MQ Shadow Temple Flying Pot Entrance Maze 1": "soul_flying_pot"
@@ -94,7 +94,7 @@
     "Shadow Temple Wind Tunnel": "small_keys_shadow(4) && can_hookshot"
   locations:
     "MQ Shadow Temple Invisible Spike Floor Chest": "soul_redead_gibdo && (has_weapon || can_use_sticks || can_use_din)"
-    "MQ Shadow Temple Stalfos Room Chest": "silver_rupees_shadow_spikes_mq && soul(SOUL_STALFOS) && has_weapon"
+    "MQ Shadow Temple Stalfos Room Chest": "silver_rupees_shadow_spikes_mq && soul_enemy(SOUL_ENEMY_STALFOS) && has_weapon"
     "MQ Shadow Temple SR Spikes Left Corner": "can_hookshot"
     "MQ Shadow Temple SR Spikes Left Wall": "can_hookshot"
     "MQ Shadow Temple SR Spikes Left Midair": "can_hookshot"
@@ -134,7 +134,7 @@
 "Shadow Temple Final Side Rooms":
   dungeon: Shadow
   locations:
-    "MQ Shadow Temple Hidden Dead Hand Chest": "has_bombflowers && soul(SOUL_DEAD_HAND)" #Not strictly necessary to check
+    "MQ Shadow Temple Hidden Dead Hand Chest": "has_bombflowers && soul_enemy(SOUL_ENEMY_DEAD_HAND)" #Not strictly necessary to check
     "MQ Shadow Temple Triple Pot Key": "has_bombflowers" #Not strictly necessary to check
     "MQ Shadow Temple Boss Key Chest": "small_keys_shadow(6) && can_use_din"
     "MQ Shadow Temple Crushing Wall Left Chest": "small_keys_shadow(6) && can_use_din"

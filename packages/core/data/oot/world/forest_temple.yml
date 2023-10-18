@@ -29,7 +29,7 @@
 "Forest Temple Mini-Boss":
   dungeon: Forest
   locations:
-    "Forest Temple Mini-Boss Key": "has_weapon && soul(SOUL_STALFOS)"
+    "Forest Temple Mini-Boss Key": "has_weapon && soul_enemy(SOUL_ENEMY_STALFOS)"
     "Forest Temple Pot Miniboss Lower 1": "true"
     "Forest Temple Pot Miniboss Lower 2": "true"
 "Forest Temple Garden West":
@@ -122,9 +122,9 @@
 "Forest Temple Mini-Boss 2":
   dungeon: Forest
   exits:
-    "Forest Temple Poe 2": "has_weapon && soul(SOUL_STALFOS)"
+    "Forest Temple Poe 2": "has_weapon && soul_enemy(SOUL_ENEMY_STALFOS)"
   locations:
-    "Forest Temple Bow": "has_weapon && soul(SOUL_STALFOS)"
+    "Forest Temple Bow": "has_weapon && soul_enemy(SOUL_ENEMY_STALFOS)"
     "Forest Temple Pot Miniboss Upper 1": "true"
     "Forest Temple Pot Miniboss Upper 2": "true"
     "Forest Temple Pot Miniboss Upper 3": "true"

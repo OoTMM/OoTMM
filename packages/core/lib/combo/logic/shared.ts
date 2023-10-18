@@ -6,32 +6,32 @@ export type ItemSharedDef = {
   mm: Item,
 };
 
-const SOULS: ItemSharedDef[] = [
-  { shared: Items.SHARED_SOUL_OCTOROK,             oot: Items.OOT_SOUL_OCTOROK,            mm: Items.MM_SOUL_OCTOROK },
-  { shared: Items.SHARED_SOUL_WALLMASTER,          oot: Items.OOT_SOUL_WALLMASTER,         mm: Items.MM_SOUL_WALLMASTER },
-  { shared: Items.SHARED_SOUL_DODONGO,             oot: Items.OOT_SOUL_DODONGO,            mm: Items.MM_SOUL_DODONGO },
-  { shared: Items.SHARED_SOUL_KEESE,               oot: Items.OOT_SOUL_KEESE,              mm: Items.MM_SOUL_KEESE },
-  { shared: Items.SHARED_SOUL_TEKTITE,             oot: Items.OOT_SOUL_TEKTITE,            mm: Items.MM_SOUL_TEKTITE },
-  { shared: Items.SHARED_SOUL_PEAHAT,              oot: Items.OOT_SOUL_PEAHAT,             mm: Items.MM_SOUL_PEAHAT },
-  { shared: Items.SHARED_SOUL_LIZALFOS_DINALFOS,   oot: Items.OOT_SOUL_LIZALFOS_DINALFOS,  mm: Items.MM_SOUL_LIZALFOS_DINALFOS },
-  { shared: Items.SHARED_SOUL_SKULLTULA,           oot: Items.OOT_SOUL_SKULLTULA,          mm: Items.MM_SOUL_SKULLTULA },
-  { shared: Items.SHARED_SOUL_ARMOS,               oot: Items.OOT_SOUL_ARMOS,              mm: Items.MM_SOUL_ARMOS },
-  { shared: Items.SHARED_SOUL_DEKU_BABA,           oot: Items.OOT_SOUL_DEKU_BABA,          mm: Items.MM_SOUL_DEKU_BABA },
-  { shared: Items.SHARED_SOUL_DEKU_SCRUB,          oot: Items.OOT_SOUL_DEKU_SCRUB,         mm: Items.MM_SOUL_DEKU_SCRUB },
-  { shared: Items.SHARED_SOUL_BUBBLE,              oot: Items.OOT_SOUL_BUBBLE,             mm: Items.MM_SOUL_BUBBLE },
-  { shared: Items.SHARED_SOUL_BEAMOS,              oot: Items.OOT_SOUL_BEAMOS,             mm: Items.MM_SOUL_BEAMOS },
-  { shared: Items.SHARED_SOUL_REDEAD_GIBDO,        oot: Items.OOT_SOUL_REDEAD_GIBDO,       mm: Items.MM_SOUL_REDEAD_GIBDO },
-  { shared: Items.SHARED_SOUL_SKULLWALLTULA,       oot: Items.OOT_SOUL_SKULLWALLTULA,      mm: Items.MM_SOUL_SKULLWALLTULA },
-  { shared: Items.SHARED_SOUL_SHELL_BLADE,         oot: Items.OOT_SOUL_SHELL_BLADE,        mm: Items.MM_SOUL_SHELL_BLADE },
-  { shared: Items.SHARED_SOUL_LIKE_LIKE,           oot: Items.OOT_SOUL_LIKE_LIKE,          mm: Items.MM_SOUL_LIKE_LIKE },
-  { shared: Items.SHARED_SOUL_IRON_KNUCKLE,        oot: Items.OOT_SOUL_IRON_KNUCKLE,       mm: Items.MM_SOUL_IRON_KNUCKLE },
-  { shared: Items.SHARED_SOUL_FREEZARD,            oot: Items.OOT_SOUL_FREEZARD,           mm: Items.MM_SOUL_FREEZARD },
-  { shared: Items.SHARED_SOUL_WOLFOS,              oot: Items.OOT_SOUL_WOLFOS,             mm: Items.MM_SOUL_WOLFOS },
-  { shared: Items.SHARED_SOUL_GUAY,                oot: Items.OOT_SOUL_GUAY,               mm: Items.MM_SOUL_GUAY },
-  { shared: Items.SHARED_SOUL_FLYING_POT,          oot: Items.OOT_SOUL_FLYING_POT,         mm: Items.MM_SOUL_FLYING_POT },
-  { shared: Items.SHARED_SOUL_FLOORMASTER,         oot: Items.OOT_SOUL_FLOORMASTER,        mm: Items.MM_SOUL_FLOORMASTER },
-  { shared: Items.SHARED_SOUL_LEEVER,              oot: Items.OOT_SOUL_LEEVER,             mm: Items.MM_SOUL_LEEVER },
-  { shared: Items.SHARED_SOUL_STALCHILD,           oot: Items.OOT_SOUL_STALCHILD,          mm: Items.MM_SOUL_STALCHILD },
+const SOULS_ENEMY: ItemSharedDef[] = [
+  { shared: Items.SHARED_SOUL_ENEMY_OCTOROK,             oot: Items.OOT_SOUL_ENEMY_OCTOROK,            mm: Items.MM_SOUL_ENEMY_OCTOROK },
+  { shared: Items.SHARED_SOUL_ENEMY_WALLMASTER,          oot: Items.OOT_SOUL_ENEMY_WALLMASTER,         mm: Items.MM_SOUL_ENEMY_WALLMASTER },
+  { shared: Items.SHARED_SOUL_ENEMY_DODONGO,             oot: Items.OOT_SOUL_ENEMY_DODONGO,            mm: Items.MM_SOUL_ENEMY_DODONGO },
+  { shared: Items.SHARED_SOUL_ENEMY_KEESE,               oot: Items.OOT_SOUL_ENEMY_KEESE,              mm: Items.MM_SOUL_ENEMY_KEESE },
+  { shared: Items.SHARED_SOUL_ENEMY_TEKTITE,             oot: Items.OOT_SOUL_ENEMY_TEKTITE,            mm: Items.MM_SOUL_ENEMY_TEKTITE },
+  { shared: Items.SHARED_SOUL_ENEMY_PEAHAT,              oot: Items.OOT_SOUL_ENEMY_PEAHAT,             mm: Items.MM_SOUL_ENEMY_PEAHAT },
+  { shared: Items.SHARED_SOUL_ENEMY_LIZALFOS_DINALFOS,   oot: Items.OOT_SOUL_ENEMY_LIZALFOS_DINALFOS,  mm: Items.MM_SOUL_ENEMY_LIZALFOS_DINALFOS },
+  { shared: Items.SHARED_SOUL_ENEMY_SKULLTULA,           oot: Items.OOT_SOUL_ENEMY_SKULLTULA,          mm: Items.MM_SOUL_ENEMY_SKULLTULA },
+  { shared: Items.SHARED_SOUL_ENEMY_ARMOS,               oot: Items.OOT_SOUL_ENEMY_ARMOS,              mm: Items.MM_SOUL_ENEMY_ARMOS },
+  { shared: Items.SHARED_SOUL_ENEMY_DEKU_BABA,           oot: Items.OOT_SOUL_ENEMY_DEKU_BABA,          mm: Items.MM_SOUL_ENEMY_DEKU_BABA },
+  { shared: Items.SHARED_SOUL_ENEMY_DEKU_SCRUB,          oot: Items.OOT_SOUL_ENEMY_DEKU_SCRUB,         mm: Items.MM_SOUL_ENEMY_DEKU_SCRUB },
+  { shared: Items.SHARED_SOUL_ENEMY_BUBBLE,              oot: Items.OOT_SOUL_ENEMY_BUBBLE,             mm: Items.MM_SOUL_ENEMY_BUBBLE },
+  { shared: Items.SHARED_SOUL_ENEMY_BEAMOS,              oot: Items.OOT_SOUL_ENEMY_BEAMOS,             mm: Items.MM_SOUL_ENEMY_BEAMOS },
+  { shared: Items.SHARED_SOUL_ENEMY_REDEAD_GIBDO,        oot: Items.OOT_SOUL_ENEMY_REDEAD_GIBDO,       mm: Items.MM_SOUL_ENEMY_REDEAD_GIBDO },
+  { shared: Items.SHARED_SOUL_ENEMY_SKULLWALLTULA,       oot: Items.OOT_SOUL_ENEMY_SKULLWALLTULA,      mm: Items.MM_SOUL_ENEMY_SKULLWALLTULA },
+  { shared: Items.SHARED_SOUL_ENEMY_SHELL_BLADE,         oot: Items.OOT_SOUL_ENEMY_SHELL_BLADE,        mm: Items.MM_SOUL_ENEMY_SHELL_BLADE },
+  { shared: Items.SHARED_SOUL_ENEMY_LIKE_LIKE,           oot: Items.OOT_SOUL_ENEMY_LIKE_LIKE,          mm: Items.MM_SOUL_ENEMY_LIKE_LIKE },
+  { shared: Items.SHARED_SOUL_ENEMY_IRON_KNUCKLE,        oot: Items.OOT_SOUL_ENEMY_IRON_KNUCKLE,       mm: Items.MM_SOUL_ENEMY_IRON_KNUCKLE },
+  { shared: Items.SHARED_SOUL_ENEMY_FREEZARD,            oot: Items.OOT_SOUL_ENEMY_FREEZARD,           mm: Items.MM_SOUL_ENEMY_FREEZARD },
+  { shared: Items.SHARED_SOUL_ENEMY_WOLFOS,              oot: Items.OOT_SOUL_ENEMY_WOLFOS,             mm: Items.MM_SOUL_ENEMY_WOLFOS },
+  { shared: Items.SHARED_SOUL_ENEMY_GUAY,                oot: Items.OOT_SOUL_ENEMY_GUAY,               mm: Items.MM_SOUL_ENEMY_GUAY },
+  { shared: Items.SHARED_SOUL_ENEMY_FLYING_POT,          oot: Items.OOT_SOUL_ENEMY_FLYING_POT,         mm: Items.MM_SOUL_ENEMY_FLYING_POT },
+  { shared: Items.SHARED_SOUL_ENEMY_FLOORMASTER,         oot: Items.OOT_SOUL_ENEMY_FLOORMASTER,        mm: Items.MM_SOUL_ENEMY_FLOORMASTER },
+  { shared: Items.SHARED_SOUL_ENEMY_LEEVER,              oot: Items.OOT_SOUL_ENEMY_LEEVER,             mm: Items.MM_SOUL_ENEMY_LEEVER },
+  { shared: Items.SHARED_SOUL_ENEMY_STALCHILD,           oot: Items.OOT_SOUL_ENEMY_STALCHILD,          mm: Items.MM_SOUL_ENEMY_STALCHILD },
 ];
 
 const SKELETON_KEY: ItemSharedDef[] = [
@@ -47,4 +47,4 @@ const OCARINA_BUTTONS: ItemSharedDef[] = [
 ];
 
 
-export const SharedItemGroups = { SOULS, SKELETON_KEY, OCARINA_BUTTONS };
+export const SharedItemGroups = { SOULS_ENEMY, SKELETON_KEY, OCARINA_BUTTONS };

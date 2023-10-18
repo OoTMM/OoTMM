@@ -205,12 +205,16 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
   case 0:
     break;
   case 1:
-    base.enemySoulsOot = true;
-    base.enemySoulsMm = true;
+    base.soulsEnemyOot = true;
+    base.soulsEnemyMm = true;
+    base.soulsBossOot = true;
+    base.soulsBossMm = true;
     break;
   default:
-    base.enemySoulsMm = booleanWeighted(random, 0.5);
-    base.enemySoulsOot = booleanWeighted(random, 0.5);
+    base.soulsEnemyOot = booleanWeighted(random, 0.5);;
+    base.soulsEnemyMm = booleanWeighted(random, 0.5);;
+    base.soulsBossOot = booleanWeighted(random, 0.5);;
+    base.soulsBossMm = booleanWeighted(random, 0.5);;
   }
 
   /* Dungeon age modifiers - 25% all true, 25% all false, 50% individual */
@@ -362,7 +366,7 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
     base.sharedMaskKeaton = true;
     base.sharedWallets = true;
     base.sharedHealth = true;
-    base.sharedSouls = true;
+    base.sharedSoulsEnemy = true;
     base.sharedSkeletonKey = true;
     break;
   default:
@@ -375,7 +379,7 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
     base.sharedOcarina = booleanWeighted(random, 0.5);
     base.sharedWallets = booleanWeighted(random, 0.5);
     base.sharedHealth = booleanWeighted(random, 0.5);
-    base.sharedSouls = booleanWeighted(random, 0.5);
+    base.sharedSoulsEnemy = booleanWeighted(random, 0.5);
     base.sharedSkeletonKey = booleanWeighted(random, 0.5);
 
     /* Masks - grouping */

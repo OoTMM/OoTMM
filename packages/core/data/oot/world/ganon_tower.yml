@@ -1,10 +1,10 @@
 "Ganon Castle Tower":
   dungeon: Tower
   locations:
-    "Ganon Castle Boss Key": "has_weapon && soul_lizalfos_dinalfos && soul(SOUL_STALFOS)"
+    "Ganon Castle Boss Key": "has_weapon && soul_lizalfos_dinalfos && soul_enemy(SOUL_ENEMY_STALFOS)"
   exits:
     "Ganon Castle Stairs": "true"
-    "Ganon Castle Tower Pre-Boss": "has_weapon && soul_lizalfos_dinalfos && soul(SOUL_STALFOS) && soul_iron_knuckle"
+    "Ganon Castle Tower Pre-Boss": "has_weapon && soul_lizalfos_dinalfos && soul_enemy(SOUL_ENEMY_STALFOS) && soul_iron_knuckle"
 "Ganon Castle Tower Pre-Boss":
   dungeon: Tower
   events:

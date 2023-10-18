@@ -171,9 +171,11 @@ const ITEM_POOL_PLENTIFUL = new Set([
   Items.SHARED_MASK_KEATON,
   Items.SHARED_WALLET,
   Items.SHARED_SKELETON_KEY,
-  ...ItemGroups.OOT_SOULS,
-  ...ItemGroups.MM_SOULS,
-  ...ItemGroups.SHARED_SOULS,
+  ...ItemGroups.OOT_SOULS_ENEMY,
+  ...ItemGroups.MM_SOULS_ENEMY,
+  ...ItemGroups.OOT_SOULS_BOSS,
+  ...ItemGroups.MM_SOULS_BOSS,
+  ...ItemGroups.SHARED_SOULS_ENEMY,
   Items.OOT_BUTTON_A,
   Items.OOT_BUTTON_C_RIGHT,
   Items.OOT_BUTTON_C_LEFT,
@@ -349,6 +351,12 @@ export class LogicPassWorldTransform {
   private addItem(item: Item, amount?: number) {
     for (let i = 0; i < this.state.worlds.length; ++i) {
       this.addPlayerItem(makePlayerItem(item, i), amount);
+    }
+  }
+
+  private addItems(items: Iterable<Item>, amount?: number) {
+    for (const item of items) {
+      this.addItem(item, amount);
     }
   }
 
@@ -716,8 +724,8 @@ export class LogicPassWorldTransform {
       this.replaceItem(Items.MM_RECOVERY_HEART,  Items.SHARED_RECOVERY_HEART);
     }
 
-    if (settings.sharedSouls) {
-      this.shareItems(SharedItemGroups.SOULS);
+    if (settings.sharedSoulsEnemy) {
+      this.shareItems(SharedItemGroups.SOULS_ENEMY);
     }
 
     if (settings.sharedSkeletonKey) {
@@ -869,17 +877,10 @@ export class LogicPassWorldTransform {
     }
 
     /* Add souls */
-    if (settings.enemySoulsOot) {
-      for (const item of ItemGroups.OOT_SOULS) {
-        this.addItem(item);
-      }
-    }
-
-    if (settings.enemySoulsMm) {
-      for (const item of ItemGroups.MM_SOULS) {
-        this.addItem(item);
-      }
-    }
+    if (settings.soulsEnemyOot) this.addItems(ItemGroups.OOT_SOULS_ENEMY);
+    if (settings.soulsEnemyMm) this.addItems(ItemGroups.MM_SOULS_ENEMY);
+    if (settings.soulsBossOot) this.addItems(ItemGroups.OOT_SOULS_BOSS);
+    if (settings.soulsBossMm) this.addItems(ItemGroups.MM_SOULS_BOSS);
 
     /* Add skeleton keys */
     if (settings.skeletonKeyOot) {

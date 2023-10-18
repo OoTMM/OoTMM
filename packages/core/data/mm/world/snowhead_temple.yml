@@ -196,7 +196,7 @@
     "Snowhead Temple Center Level 3 Snow": "can_hookshot"
     "Snowhead Temple Center Level 1": "true"
   locations:
-    "Snowhead Temple Fire Arrow": "soul(SOUL_WIZZROBE)"
+    "Snowhead Temple Fire Arrow": "soul_enemy(SOUL_ENEMY_WIZZROBE)"
     "Snowhead Temple Central Room Alcove": "(scarecrow_hookshot || (short_hook_anywhere && has_weapon)) && can_use_lens"
 "Snowhead Temple Center Level 3 Snow":
   dungeon: SH
@@ -248,7 +248,7 @@
     "Snowhead Temple Center Level 3 Snow": "event(SNOWHEAD_RAISE_PILLAR) || hookshot_anywhere"
     "Snowhead Temple Center Level 4": "(trick(MM_SHT_PILLARLESS) && (can_use_fire_arrows || has_bombs)) || (short_hook_anywhere && has_bombs) || hookshot_anywhere"
   locations:
-    "Snowhead Temple Boss Key": "soul(SOUL_WIZZROBE)"
+    "Snowhead Temple Boss Key": "soul_enemy(SOUL_ENEMY_WIZZROBE)"
     "Snowhead Temple Pot Central Room Near Boss Key 1": "true"
     "Snowhead Temple Pot Central Room Near Boss Key 2": "true"
     "Snowhead Temple Pot Wizzrobe 1": "true"
@@ -275,7 +275,7 @@
     MAGIC: "true"
     ARROWS: "true"
   exits:
-    "Snowhead Temple After Boss": "soul(SOUL_GOHT) && can_use_fire_arrows"
+    "Snowhead Temple After Boss": "soul_boss(SOUL_BOSS_GOHT) && can_use_fire_arrows"
   locations:
     "Snowhead Temple Boss Pot Early 1": "true"
     "Snowhead Temple Boss Pot Early 2": "true"

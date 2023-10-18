@@ -3,8 +3,8 @@
   age_change: false
   dungeon: DT
   locations:
-    "Deku Tree Boss Container": "soul(SOUL_QUEEN_GOHMA) && (has_nuts || can_use_slingshot) && (can_use_sticks || has_weapon)"
-    "Deku Tree Boss": "soul(SOUL_QUEEN_GOHMA) && (has_nuts || can_use_slingshot) && (can_use_sticks || has_weapon)"
+    "Deku Tree Boss Container": "soul_boss(SOUL_BOSS_QUEEN_GOHMA) && (has_nuts || can_use_slingshot) && (can_use_sticks || has_weapon)"
+    "Deku Tree Boss": "soul_boss(SOUL_BOSS_QUEEN_GOHMA) && (has_nuts || can_use_slingshot) && (can_use_sticks || has_weapon)"
     "Deku Tree Boss Grass 1": "can_cut_grass"
     "Deku Tree Boss Grass 2": "can_cut_grass"
     "Deku Tree Boss Grass 3": "can_cut_grass"
@@ -26,14 +26,14 @@
   age_change: false
   dungeon: DC
   locations:
-    "Dodongo Cavern Boss Container": "soul(SOUL_KING_DODONGO) && (has_bombs || has(STRENGTH)) && (can_use_sticks || has_weapon)"
-    "Dodongo Cavern Boss": "soul(SOUL_KING_DODONGO) && (has_bombs || has(STRENGTH)) && (can_use_sticks || has_weapon)"
+    "Dodongo Cavern Boss Container": "soul_boss(SOUL_BOSS_KING_DODONGO) && (has_bombs || has(STRENGTH)) && (can_use_sticks || has_weapon)"
+    "Dodongo Cavern Boss": "soul_boss(SOUL_BOSS_KING_DODONGO) && (has_bombs || has(STRENGTH)) && (can_use_sticks || has_weapon)"
 "Jabu-Jabu Boss":
   boss: true
   age_change: false
   dungeon: JJ
   exits:
-    "Jabu-Jabu After Boss": "soul(SOUL_BARINADE) && can_boomerang && (can_use_sticks || has_weapon)"
+    "Jabu-Jabu After Boss": "soul_boss(SOUL_BOSS_BARINADE) && can_boomerang && (can_use_sticks || has_weapon)"
   locations:
     "Jabu-Jabu Boss Pot 1": "true"
     "Jabu-Jabu Boss Pot 2": "true"
@@ -53,7 +53,7 @@
   age_change: false
   dungeon: Forest
   exits:
-    "Forest Temple After Boss": "soul(SOUL_PHANTOM_GANON) && (has_ranged_weapon_adult || can_use_slingshot) && has_weapon"
+    "Forest Temple After Boss": "soul_boss(SOUL_BOSS_PHANTOM_GANON) && (has_ranged_weapon_adult || can_use_slingshot) && has_weapon"
 "Forest Temple After Boss":
   boss: true
   age_change: false
@@ -66,7 +66,7 @@
   age_change: false
   dungeon: Fire
   exits:
-    "Fire Temple After Boss": "soul(SOUL_VOLVAGIA) && can_hammer && has_tunic_goron_strict"
+    "Fire Temple After Boss": "soul_boss(SOUL_BOSS_VOLVAGIA) && can_hammer && has_tunic_goron_strict"
 "Fire Temple After Boss":
   boss: true
   age_change: false
@@ -79,7 +79,7 @@
   age_change: false
   dungeon: Water
   exits:
-    "Water Temple After Boss": "soul(SOUL_MORPHA) && can_hookshot && has_weapon"
+    "Water Temple After Boss": "soul_boss(SOUL_BOSS_MORPHA) && can_hookshot && has_weapon"
 "Water Temple After Boss":
   boss: true
   age_change: false
@@ -94,7 +94,7 @@
   age_change: false
   dungeon: Spirit
   exits:
-    "Spirit Temple After Boss": "soul(SOUL_TWINROVA) && soul_iron_knuckle && has_mirror_shield && has_weapon"
+    "Spirit Temple After Boss": "soul_boss(SOUL_BOSS_TWINROVA) && soul_iron_knuckle && has_mirror_shield && has_weapon"
 "Spirit Temple After Boss":
   boss: true
   age_change: false
@@ -107,7 +107,7 @@
   age_change: false
   dungeon: Shadow
   exits:
-    "Shadow Temple After Boss": "soul(SOUL_BONGO_BONGO) && has_weapon && has_lens && (can_use_bow || can_use_slingshot)"
+    "Shadow Temple After Boss": "soul_boss(SOUL_BOSS_BONGO_BONGO) && has_weapon && has_lens && (can_use_bow || can_use_slingshot)"
 "Shadow Temple After Boss":
   boss: true
   age_change: false

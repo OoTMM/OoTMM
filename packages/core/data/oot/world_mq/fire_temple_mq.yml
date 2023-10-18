@@ -25,16 +25,16 @@
 "Fire Temple Vanilla Hammer Loop":
   dungeon: Fire
   locations:
-    "MQ Fire Temple Hammer Chest": "has_weapon && soul_keese && soul(SOUL_STALFOS) && soul_iron_knuckle && soul(SOUL_FLARE_DANCER) && (has_bombs || can_hammer || can_hookshot)"
-    "MQ Fire Temple Map Chest": "can_hammer && has_weapon && soul_keese && soul(SOUL_STALFOS) && soul_iron_knuckle && soul(SOUL_FLARE_DANCER)"
-    "MQ Fire Temple Pot Hammer Loop 1": "has_weapon && soul_keese && soul(SOUL_STALFOS)"
-    "MQ Fire Temple Pot Hammer Loop 2": "has_weapon && soul_keese && soul(SOUL_STALFOS)"
-    "MQ Fire Temple Pot Hammer Loop 3": "has_weapon && soul_keese && soul(SOUL_STALFOS)"
-    "MQ Fire Temple Pot Hammer Loop 4": "has_weapon && soul_keese && soul(SOUL_STALFOS)"
-    "MQ Fire Temple Pot Hammer Loop 5": "has_weapon && soul_keese && soul(SOUL_STALFOS)"
-    "MQ Fire Temple Pot Hammer Loop 6": "has_weapon && soul_keese && soul(SOUL_STALFOS)"
-    "MQ Fire Temple Pot Hammer Loop 7": "has_weapon && soul_keese && soul(SOUL_STALFOS)"
-    "MQ Fire Temple Pot Hammer Loop 8": "has_weapon && soul_keese && soul(SOUL_STALFOS)"
+    "MQ Fire Temple Hammer Chest": "has_weapon && soul_keese && soul_enemy(SOUL_ENEMY_STALFOS) && soul_iron_knuckle && soul_enemy(SOUL_ENEMY_FLARE_DANCER) && (has_bombs || can_hammer || can_hookshot)"
+    "MQ Fire Temple Map Chest": "can_hammer && has_weapon && soul_keese && soul_enemy(SOUL_ENEMY_STALFOS) && soul_iron_knuckle && soul_enemy(SOUL_ENEMY_FLARE_DANCER)"
+    "MQ Fire Temple Pot Hammer Loop 1": "has_weapon && soul_keese && soul_enemy(SOUL_ENEMY_STALFOS)"
+    "MQ Fire Temple Pot Hammer Loop 2": "has_weapon && soul_keese && soul_enemy(SOUL_ENEMY_STALFOS)"
+    "MQ Fire Temple Pot Hammer Loop 3": "has_weapon && soul_keese && soul_enemy(SOUL_ENEMY_STALFOS)"
+    "MQ Fire Temple Pot Hammer Loop 4": "has_weapon && soul_keese && soul_enemy(SOUL_ENEMY_STALFOS)"
+    "MQ Fire Temple Pot Hammer Loop 5": "has_weapon && soul_keese && soul_enemy(SOUL_ENEMY_STALFOS)"
+    "MQ Fire Temple Pot Hammer Loop 6": "has_weapon && soul_keese && soul_enemy(SOUL_ENEMY_STALFOS)"
+    "MQ Fire Temple Pot Hammer Loop 7": "has_weapon && soul_keese && soul_enemy(SOUL_ENEMY_STALFOS)"
+    "MQ Fire Temple Pot Hammer Loop 8": "has_weapon && soul_keese && soul_enemy(SOUL_ENEMY_STALFOS)"
 "Fire Temple 1f Lava Room":
   dungeon: Fire
   exits:
@@ -86,7 +86,7 @@
   events:
     FIRE_TEMPLE_PILLAR_HAMMER: "true"
   locations:
-    "MQ Fire Temple Flare Dancer Key": "soul(SOUL_FLARE_DANCER)"
+    "MQ Fire Temple Flare Dancer Key": "soul_enemy(SOUL_ENEMY_FLARE_DANCER)"
     "MQ Fire Temple GS Fire Walls Side Room": "has_hover_boots || can_play_time"
     "MQ Fire Temple GS Fire Walls Middle": "has_explosives"
     "MQ Fire Temple Pot Fire Maze Room Left 1": "true"

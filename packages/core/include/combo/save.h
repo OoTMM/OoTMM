@@ -22,6 +22,10 @@ typedef struct ALIGNED(16)
     u16 coins[4];
     u16 ocarinaButtonMaskOot;
     u16 ocarinaButtonMaskMm;
+    u8  soulsEnemyOot[8];
+    u8  soulsEnemyMm[8];
+    u8  soulsBossOot[2];
+    u8  soulsBossMm[1];
 }
 SharedCustomSave;
 
@@ -82,10 +86,6 @@ MiscFlags;
 #define gOotSilverRupeeCounts3      SAVE_EXTRA_RECORD(u32,              25)
 #define gOotSilverRupeeCounts4      SAVE_EXTRA_RECORD(u32,              26)
 #define gOotSilverRupeeCounts5      SAVE_EXTRA_RECORD(u32,              27)
-#define gOotSouls1                  SAVE_EXTRA_RECORD(u32,              28)
-#define gOotSouls2                  SAVE_EXTRA_RECORD(u32,              29)
-#define gMmSouls1                   SAVE_EXTRA_RECORD(u32,              30)
-#define gMmSouls2                   SAVE_EXTRA_RECORD(u32,              31)
-#define gTriforceCount              SAVE_EXTRA_RECORD(u32,              32)
+#define gTriforceCount              SAVE_EXTRA_RECORD(u32,              28)
 
 #endif

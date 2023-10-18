@@ -56,7 +56,7 @@
     "Dodongo Cavern Upper Ledges": "can_hookshot || has_hover_boots || (is_adult && trick(OOT_DC_JUMP))"
     "Dodongo Cavern Room Before Upper Lizalfos": "can_use_sticks || has_fire"
   locations:
-    "MQ Dodongo Cavern Larvae Room Chest": "soul(SOUL_GOHMA_LARVA) && (can_use_sticks || has_fire)"
+    "MQ Dodongo Cavern Larvae Room Chest": "soul_enemy(SOUL_ENEMY_GOHMA_LARVA) && (can_use_sticks || has_fire)"
     "MQ Dodongo Cavern GS Larve Room": "can_use_sticks || has_fire"
 "Dodongo Cavern Upper Lizalfos":
   dungeon: DC

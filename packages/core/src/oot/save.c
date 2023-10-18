@@ -229,17 +229,14 @@ void comboCreateSave(void* unk, void* buffer)
     }
 
     /* Apply enemy souls */
-    if (!comboConfig(CFG_OOT_SOULS))
-    {
-        gOotSouls1 = 0xffffffff;
-        gOotSouls2 = 0xffffffff;
-    }
-
-    if (!comboConfig(CFG_MM_SOULS))
-    {
-        gMmSouls1 = 0xffffffff;
-        gMmSouls2 = 0xffffffff;
-    }
+    if (!comboConfig(CFG_OOT_SOULS_ENEMY))
+        memset(gSharedCustomSave.soulsEnemyOot, 0xff, sizeof(gSharedCustomSave.soulsEnemyOot));
+    if (!comboConfig(CFG_MM_SOULS_ENEMY))
+        memset(gSharedCustomSave.soulsEnemyMm, 0xff, sizeof(gSharedCustomSave.soulsEnemyMm));
+    if (!comboConfig(CFG_OOT_SOULS_BOSS))
+        memset(gSharedCustomSave.soulsBossOot, 0xff, sizeof(gSharedCustomSave.soulsBossOot));
+    if (!comboConfig(CFG_MM_SOULS_BOSS))
+        memset(gSharedCustomSave.soulsBossMm, 0xff, sizeof(gSharedCustomSave.soulsBossMm));
 
     /* Apply ocarina buttons */
     if (!comboConfig(CFG_OOT_OCARINA_BUTTONS))

@@ -64,8 +64,8 @@
 "Ancient Castle of Ikana Wizzrobe":
   dungeon: ACoI
   exits:
-    "Ancient Castle of Ikana Interior South": "soul(SOUL_WIZZROBE) && (can_use_light_arrows || short_hook_anywhere) && (can_fight || has_arrows)"
-    "Ancient Castle of Ikana South Last": "soul(SOUL_WIZZROBE) && (can_fight || has_arrows)"
+    "Ancient Castle of Ikana Interior South": "soul_enemy(SOUL_ENEMY_WIZZROBE) && (can_use_light_arrows || short_hook_anywhere) && (can_fight || has_arrows)"
+    "Ancient Castle of Ikana South Last": "soul_enemy(SOUL_ENEMY_WIZZROBE) && (can_fight || has_arrows)"
 "Ancient Castle of Ikana South Last":
   dungeon: ACoI
   exits:
@@ -103,7 +103,7 @@
 "Ancient Castle of Ikana Throne Room":
   dungeon: ACoI
   exits:
-    "Ancient Castle of Ikana After Boss": "soul(SOUL_IGOS) && has_mirror_shield && can_use_fire_arrows && can_fight"
+    "Ancient Castle of Ikana After Boss": "soul_boss(SOUL_BOSS_IGOS) && has_mirror_shield && can_use_fire_arrows && can_fight"
   locations:
     "Ancient Castle of Ikana Boss Pot 5": "true"
     "Ancient Castle of Ikana Boss Pot 6": "true"
