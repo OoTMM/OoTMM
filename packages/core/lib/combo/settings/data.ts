@@ -1004,7 +1004,7 @@ export const SETTINGS = [{
   name: 'NPC Souls (OoT) (EXPERIMENTAL)',
   category: 'items.extensions',
   type: 'boolean',
-  description: 'Add NPC souls into the item pool. Enemies won\'t spawn unless their soul is obtained.',
+  description: 'Add NPC souls into the item pool. NPCs won\'t spawn unless their soul is obtained.',
   default: false
 }, {
   key: 'lenientSpikes',
