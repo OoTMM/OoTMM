@@ -737,18 +737,6 @@ export class LogicPassWorldTransform {
       this.shareItems(SharedItemGroups.OCARINA_BUTTONS);
     }
 
-    switch (settings.itemPool) {
-    case 'scarce':
-      this.scarcifyPool(1);
-      break;
-    case 'minimal':
-      this.scarcifyPool(2);
-      break;
-    case 'plentiful':
-      this.plentifulPool();
-      break;
-    }
-
     /* Triforce hunt */
     if (settings.goal === 'triforce') {
       for (let i = 0; i < this.state.worlds.length; ++i) {
@@ -1113,6 +1101,19 @@ export class LogicPassWorldTransform {
     /* Handle open gate */
     if (this.state.settings.kakarikoGate === 'open') {
       this.removeItem(Items.OOT_ZELDA_LETTER);
+    }
+
+    /* Alter the item pools */
+    switch (settings.itemPool) {
+    case 'scarce':
+      this.scarcifyPool(1);
+      break;
+    case 'minimal':
+      this.scarcifyPool(2);
+      break;
+    case 'plentiful':
+      this.plentifulPool();
+      break;
     }
 
     /* Handle fixed locations */
