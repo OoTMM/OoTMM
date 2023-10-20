@@ -329,9 +329,26 @@ static int canSpawnSoul(GameState_Play* play, s16 actorId, u16 variable)
     }
 }
 
+static int canSpawnActor(GameState_Play* play, s16 actorId, u16 variable)
+{
+    
+    switch (actorId)
+    {
+    case AC_EN_SYATEKI_OKUTA:
+        if (play->sceneId == SCE_MM_SHOOTING_GALLERY && gSave.day > 3)
+            return 0;
+        
+    default:
+        return 1;
+    }
+}
+
 Actor* comboSpawnActorEx(void* unk, GameState_Play *play, short actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable, int ex1, int ex2, int ex3)
 {
     int ret;
+
+    if (!canSpawnActor(play, actorId, variable))
+        return NULL;
 
     ret = canSpawnSoul(play, actorId, variable);
     if (ret <= 0)
