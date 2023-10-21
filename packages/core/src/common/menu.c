@@ -225,7 +225,7 @@ static const char* const kSoulsNpcOot[] = {
     "Bombchu Shopkeeper",
     "Potion Shopkeeper",
     "Bombchu Bowling Lady",
-    "Trasure Chest Game Owner",
+    "Treasure Chest Game Owner",
     "Shooting Gallery Owner",
     "Dampe",
     "Graveyard Kid",
