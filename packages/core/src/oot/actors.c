@@ -178,7 +178,7 @@ static int canSpawnSoul(GameState_Play* play, s16 actorId, u16 variable)
     case AC_EN_GO:
         return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_GORON));
     case AC_EN_GO2:
-        switch (variable)
+        switch (variable & 0x1f)
         {
         case 1: return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_GORON_CHILD));
         case 2: return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_BIGGORON));
