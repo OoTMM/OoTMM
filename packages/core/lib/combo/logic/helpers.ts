@@ -9,9 +9,7 @@ export function isEntranceShuffle(settings: Settings) {
     return true;
   if (settings.erIndoors !== 'none')
     return true;
-  if (settings.erWarps !== 'none')
-    return true;
-  if (settings.erRegionWarps !== 'none')
+  if (settings.erOneWays !== 'none')
     return true;
   return false;
 }

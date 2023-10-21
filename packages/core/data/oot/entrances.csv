@@ -42,7 +42,6 @@ GERUDO_FORTRESS_FROM_VALLEY,              region,           Gerudo Fortress Exte
 DEATH_MOUNTAIN_FROM_KAKARIKO,             region,           Death Mountain,                             Kakariko Trail Start,                         KAKARIKO_FROM_DEATH_MOUNTAIN
 GERUDO_VALLEY_FROM_FIELD,                 region,           Gerudo Valley,                              Hyrule Field,                                 FIELD_FROM_GERUDO_VALLEY
 MARKET_ENTRANCE_FROM_FIELD,               region-extra,     Market Entryway,                            Hyrule Field,                                 FIELD_FROM_MARKET_ENTRANCE
-LAKE_HYLIA_FROM_VALLEY,                   region-warp,      Lake Hylia,                                 Gerudo Valley Falls,                          NONE
 LAKE_HYLIA_FROM_ZORA_DOMAIN,              region-shortcut,  Lake Hylia,                                 Zora Domain,                                  ZORA_DOMAIN_FROM_LAKE_HYLIA
 ZORA_RIVER_FROM_LOST_WOODS,               region-shortcut,  Zora River,                                 Lost Woods,                                   LOST_WOODS_FROM_ZORA_RIVER
 GORON_CITY_FROM_LOST_WOODS,               region-shortcut,  Goron City Shortcut,                        Lost Woods,                                   LOST_WOODS_FROM_GORON_CITY
@@ -58,14 +57,15 @@ FIELD_FROM_MARKET_ENTRANCE,               overworld,        Hyrule Field,       
 ZORA_DOMAIN_FROM_LAKE_HYLIA,              overworld,        Zora Domain,                                Lake Hylia,                                   LAKE_HYLIA_FROM_ZORA_DOMAIN
 LOST_WOODS_FROM_ZORA_RIVER,               overworld,        Lost Woods,                                 Zora River,                                   ZORA_RIVER_FROM_LOST_WOODS
 LOST_WOODS_FROM_GORON_CITY,               overworld,        Lost Woods,                                 Goron City Shortcut,                          GORON_CITY_FROM_LOST_WOODS
-WARP_SONG_MEADOW,                         warp-song,        Sacred Meadow,                              SONG_TP_FOREST,                               NONE
-WARP_SONG_CRATER,                         warp-song,        Death Mountain Crater Warp,                 SONG_TP_FIRE,                                 NONE
-WARP_SONG_LAKE,                           warp-song,        Lake Hylia,                                 SONG_TP_WATER,                                NONE
-WARP_SONG_GRAVE,                          warp-song,        Graveyard Upper,                            SONG_TP_SHADOW,                               NONE
-WARP_SONG_DESERT,                         warp-song,        Desert Colossus,                            SONG_TP_SPIRIT,                               NONE
-WARP_SONG_TEMPLE,                         warp-song,        Temple of Time,                             SONG_TP_LIGHT,                                NONE
-VILLAGE_OWL,                              owl-flight,       Kakariko Rooftop,                           Death Mountain Summit,                        NONE
-FIELD_OWL,                                owl-flight,       Hyrule Field Drawbridge,                    Lake Hylia,                                   NONE
+LAKE_HYLIA_FROM_VALLEY,                   one-way,          Lake Hylia,                                 Gerudo Valley Falls,                          NONE
+WARP_SONG_MEADOW,                         one-way-song,     Sacred Meadow,                              SONG_TP_FOREST,                               NONE
+WARP_SONG_CRATER,                         one-way-song,     Death Mountain Crater Warp,                 SONG_TP_FIRE,                                 NONE
+WARP_SONG_LAKE,                           one-way-song,     Lake Hylia,                                 SONG_TP_WATER,                                NONE
+WARP_SONG_GRAVE,                          one-way-song,     Graveyard Upper,                            SONG_TP_SHADOW,                               NONE
+WARP_SONG_DESERT,                         one-way-song,     Desert Colossus,                            SONG_TP_SPIRIT,                               NONE
+WARP_SONG_TEMPLE,                         one-way-song,     Temple of Time,                             SONG_TP_LIGHT,                                NONE
+VILLAGE_OWL,                              one-way-owl,      Kakariko Rooftop,                           Death Mountain Summit,                        NONE
+FIELD_OWL,                                one-way-owl,      Hyrule Field Drawbridge,                    Lake Hylia,                                   NONE
 HOUSE_MIDO,                               indoors,          Mido's House,                               Kokiri Forest,                                KOKIRI_FOREST_FROM_MIDO
 HOUSE_SARIA,                              indoors,          Saria's House,                              Kokiri Forest,                                KOKIRI_FOREST_FROM_SARIA
 HOUSE_TWINS,                              indoors,          House of Twins,                             Kokiri Forest,                                KOKIRI_FOREST_FROM_TWINS

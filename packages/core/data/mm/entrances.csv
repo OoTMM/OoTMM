@@ -32,24 +32,24 @@ MOUNTAIN_VILLAGE_FROM_PATH,                         region,           Mountain V
 GREAT_BAY_COAST_FROM_FIELD,                         region,           Great Bay Coast,                    Great Bay Fence,                            FIELD_FROM_GREAT_BAY_COAST
 IKANA_VALLEY_FROM_ROAD,                             region,           Ikana Valley,                       Road to Ikana Top,                          IKANA_ROAD_FROM_VALLEY
 ROMANI_RANCH_FROM_MILK_ROAD,                        region,           Romani Ranch,                       Near Romani Ranch,                          MILK_ROAD_FROM_ROMANI_RANCH
-SWAMP_FROM_IKANA_CANYON,                            region-warp,      Swamp Front,                        Ikana Valley,                               NONE
-IKANA_CASTLE_INTERIOR_KEG,                          region-warp-extra,Ancient Castle of Ikana,            Ancient Castle of Ikana Roof Interior,      NONE
-IKANA_CASTLE_INTERIOR_BLOCK,                        region-warp-extra,Ancient Castle of Ikana Interior South,Ancient Castle of Ikana Roof Interior,   NONE   
 SWAMP_ROAD_FROM_SWAMP,                              overworld,        Road to Southern Swamp,             Swamp Front,                                SWAMP_FROM_ROAD
 PATH_FROM_MOUNTAIN_VILLAGE,                         overworld,        Mountain Village Path Upper,        Mountain Village,                           MOUNTAIN_VILLAGE_FROM_PATH
 FIELD_FROM_GREAT_BAY_COAST,                         overworld,        Great Bay Fence,                    Great Bay Coast,                            GREAT_BAY_COAST_FROM_FIELD
 IKANA_ROAD_FROM_VALLEY,                             overworld,        Road to Ikana Top,                  Ikana Valley,                               IKANA_VALLEY_FROM_ROAD
 MILK_ROAD_FROM_ROMANI_RANCH,                        overworld,        Near Romani Ranch,                  Romani Ranch,                               ROMANI_RANCH_FROM_MILK_ROAD
-WARP_OWL_GREAT_BAY,                                 warp-owl,         Owl Great Bay,                      SOARING,                                    NONE
-WARP_OWL_ZORA_CAPE,                                 warp-owl,         Owl Zora Cape,                      SOARING,                                    NONE
-WARP_OWL_SNOWHEAD,                                  warp-owl,         Owl Snowhead,                       SOARING,                                    NONE
-WARP_OWL_MOUNTAIN_VILLAGE,                          warp-owl,         Owl Mountain,                       SOARING,                                    NONE
-WARP_OWL_CLOCK_TOWN,                                warp-owl,         Owl Clock Town,                     SOARING,                                    NONE
-WARP_OWL_MILK_ROAD,                                 warp-owl,         Owl Milk Road,                      SOARING,                                    NONE
-WARP_OWL_WOODFALL,                                  warp-owl,         Owl Woodfall,                       SOARING,                                    NONE
-WARP_OWL_SOUTHERN_SWAMP,                            warp-owl,         Owl Swamp,                          SOARING,                                    NONE
-WARP_OWL_IKANA_CANYON,                              warp-owl,         Owl Ikana,                          SOARING,                                    NONE
-WARP_OWL_STONE_TOWER,                               warp-owl,         Owl Stone Tower,                    SOARING,                                    NONE
+SWAMP_FROM_IKANA_CANYON,                            one-way,          Swamp Front,                        Ikana Valley,                               NONE
+IKANA_CASTLE_INTERIOR_KEG,                          one-way-ikana,    Ancient Castle of Ikana,            Ancient Castle of Ikana Roof Interior,      NONE
+IKANA_CASTLE_INTERIOR_BLOCK,                        one-way-ikana,    Ancient Castle of Ikana Interior South,Ancient Castle of Ikana Roof Interior,   NONE   
+WARP_OWL_GREAT_BAY,                                 one-way-statue,   Owl Great Bay,                      SOARING,                                    NONE
+WARP_OWL_ZORA_CAPE,                                 one-way-statue,   Owl Zora Cape,                      SOARING,                                    NONE
+WARP_OWL_SNOWHEAD,                                  one-way-statue,   Owl Snowhead,                       SOARING,                                    NONE
+WARP_OWL_MOUNTAIN_VILLAGE,                          one-way-statue,   Owl Mountain,                       SOARING,                                    NONE
+WARP_OWL_CLOCK_TOWN,                                one-way-statue,   Owl Clock Town,                     SOARING,                                    NONE
+WARP_OWL_MILK_ROAD,                                 one-way-statue,   Owl Milk Road,                      SOARING,                                    NONE
+WARP_OWL_WOODFALL,                                  one-way-statue,   Owl Woodfall,                       SOARING,                                    NONE
+WARP_OWL_SOUTHERN_SWAMP,                            one-way-statue,   Owl Swamp,                          SOARING,                                    NONE
+WARP_OWL_IKANA_CANYON,                              one-way-statue,   Owl Ikana,                          SOARING,                                    NONE
+WARP_OWL_STONE_TOWER,                               one-way-statue,   Owl Stone Tower,                    SOARING,                                    NONE
 CHEST_GAME,                                         indoors,          Chest Game,                         Clock Town East,                            CLOCK_TOWN_EAST_FROM_CHEST_GAME
 HONEY_AND_DARLING_GAME,                             indoors,          Honey & Darling Game,               Clock Town East,                            CLOCK_TOWN_EAST_FROM_HONEY_AND_DARLING
 MAYORS_OFFICE,                                      indoors,          Mayor's Office,                     Clock Town East,                            CLOCK_TOWN_EAST_FROM_MAYORS_OFFICE

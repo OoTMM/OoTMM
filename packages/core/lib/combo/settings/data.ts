@@ -1332,28 +1332,6 @@ export const SETTINGS = [{
   default: false,
   cond: (x: any) => x.erRegions !== 'none'
 }, {
-  key: 'erRegionWarps',
-  name: 'Shuffle One-Way Entrances',
-  category: 'entrances',
-  type: 'enum',
-  values: [
-    { value: 'none', name: 'None', description: 'One-Way entrances are not shuffled.' },
-    { value: 'self', name: 'Self', description: 'One-Way entrances are only shuffled among themselves.' },
-    { value: 'regions', name: 'Regions', description: 'One-Way entrances can be shuffled among the regions.' },
-    { value: 'warps', name: 'Warps', description: 'One-Way entrances can be shuffled among the warp points.' },
-    { value: 'both', name: 'Both', description: 'One-Way entrances can be shuffled among both regions and the warp points.' },
-  ],
-  description: 'Shuffles the Gerudo Valley to Lake Hylia and Ikana Canyon to Southern Swamp entrances.',
-  default: 'none',
-}, {
-  key: 'erRegionWarpsExtra',
-  name: 'Shuffle Ikana Castle One-Ways',
-  category: 'entrances',
-  type: 'boolean',
-  description: 'Shuffles the one-way entrances in Ikana Castle with the others. This is the keg-blocked entrance and the block moved by the switch.',
-  default: false,
-  cond: (x: any) => x.erRegionWarps !== 'none'
-}, {
   key: 'erIndoors',
   name: 'Shuffle Interiors',
   category: 'entrances',
@@ -1374,25 +1352,55 @@ export const SETTINGS = [{
   default: false,
   cond: (x: any) => x.erIndoors !== 'none'
 }, {
-  key: 'erWarps',
-  name: 'Shuffle Warp Destinations',
+  key: 'erOneWays',
+  name: 'Shuffle One-Way Entrances',
   category: 'entrances',
   type: 'enum',
   values: [
-    { value: 'none', name: 'None', description: 'No Warps are shuffled.' },
-    { value: 'ootWarps', name: 'OOT Only', description: 'Only Warp Songs and Owl Flights can be shuffled between each other.' },
-    { value: 'mmWarps', name: 'MM Only', description: 'Only Owl Statues can be shuffled between each other.' },
-    { value: 'ownGame', name: 'Own Game', description: 'Warp Songs, Owl Flights, and Owl Statues are shuffled among each other within their own games.' },
-    { value: 'full', name: 'Full', description: 'Warp Songs, Owl Flights, and Owl Statues are shuffled among each other.' },
+    { value: 'none', name: 'None', description: 'One-Way entrances are not shuffled.' },
+    { value: 'ownGame', name: 'Own Game', description: 'One-Way entrances are only shuffled among their own game.' },
+    { value: 'full', name: 'Full', description: 'One-Way entrances can be shuffled among both games.' },
   ],
+  description: 'Enables the option of shuffling various one-way entrances.',
   default: 'none',
-  description: 'Shuffle the Warp Songs and Owl Statues among each other.',
 }, {
-  key: 'erWarpsOwls',
+  key: 'erOneWaysMajor',
+  name: 'Shuffle Standard One-Ways',
+  category: 'entrances',
+  type: 'boolean',
+  description: 'Shuffles the Gerudo Valley to Lake Hylia and Ikana Canyon to Southern Swamp entrances.',
+  default: false,
+  cond: (x: any) => x.erOneWays !== 'none'
+}, {
+  key: 'erOneWaysIkana',
+  name: 'Shuffle Ikana Castle One-Ways',
+  category: 'entrances',
+  type: 'boolean',
+  description: 'Shuffles the one-way entrances in Ikana Castle with the others. This is the keg-blocked entrance and the block moved by the switch.',
+  default: false,
+  cond: (x: any) => x.erOneWays !== 'none'
+}, {
+  key: 'erOneWaysSongs',
+  name: 'Shuffle One-Ways with Warp Songs',
+  category: 'entrances',
+  type: 'boolean',
+  description: 'Shuffles the the warp songs from OOT among one-way entrances.',
+  default: false,
+  cond: (x: any) => x.erOneWays !== 'none'
+}, {
+  key: 'erOneWaysStatues',
+  name: 'Shuffle One-Ways with Owl Statues',
+  category: 'entrances',
+  type: 'boolean',
+  description: 'Shuffles the owl statues from MM among one-way entrances.',
+  default: false,
+  cond: (x: any) => x.erOneWays !== 'none'
+}, {
+  key: 'erOneWaysOwls',
   name: 'Shuffle Child Owl Flights',
   category: 'entrances',
   type: 'boolean',
-  description: 'Shuffle the two owl flights among the other warps.',
+  description: 'Shuffle the two owl flights among one-way entrances.',
   default: false,
-  cond: (x: any) => x.erWarps !== 'none' && x.erWarps !== 'mmWarps'
+  cond: (x: any) => x.erOneWays !== 'none'
 }] as const;
