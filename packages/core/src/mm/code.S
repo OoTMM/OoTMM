@@ -10,3 +10,20 @@
 PATCH_START 0x800a5ac0 + 0x104df0
   nop
 PATCH_END
+
+// Debug screen on crash
+PATCH_START 0x800a5ac0 + 0xe034
+.word 0x00002725
+PATCH_END
+
+PATCH_START 0x800a5ac0 + 0xe08b
+.byte 0x1c
+PATCH_END
+
+PATCH_START 0x800a5ac0 + 0xe0b3
+.byte 0x1c
+PATCH_END
+
+PATCH_START 0x800a5ac0 + 0x19f00
+.word 0x00002725
+PATCH_END
