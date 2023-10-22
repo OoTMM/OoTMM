@@ -467,6 +467,7 @@ export class LogicPassEntrances {
     if (this.input.settings.erWarps === 'mmOnly') {
       pool.delete('one-way-song');
     }
+  }
 
   private placeOneWays(worldId: number) {
     const pool = new Set(['']);
