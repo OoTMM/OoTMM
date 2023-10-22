@@ -458,6 +458,16 @@ export class LogicPassEntrances {
     this.placePool(worldId, pool, { ownGame: this.input.settings.erIndoors === 'ownGame' });
   }
 
+  private placeWarps(worldId: number) {
+    const pool = new Set(['one-way-song', 'one-way-statue']);
+
+    if (this.input.settings.erWarps === 'ootOnly') {
+      pool.delete('one-way-statue');
+    }
+    if (this.input.settings.erWarps === 'mmOnly') {
+      pool.delete('one-way-song');
+    }
+
   private placeOneWays(worldId: number) {
     const pool = new Set(['']);
 
@@ -615,10 +625,16 @@ export class LogicPassEntrances {
         this.placeIndoors(i);
       }
 
+      if (this.input.settings.erWarps !== 'none') {
+        anyEr = true;
+        this.placeWarps(i);
+      }
+
       if (this.input.settings.erOneWays !== 'none') {
         anyEr = true;
         this.placeOneWays(i);
       }
+
       if (this.input.settings.erDungeons !== 'none') {
         anyEr = true;
         this.fixDungeons(i);

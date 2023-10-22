@@ -1352,6 +1352,20 @@ export const SETTINGS = [{
   default: false,
   cond: (x: any) => x.erIndoors !== 'none'
 }, {
+  key: 'erWarps',
+  name: 'Shuffle Warp Songs and Soaring',
+  category: 'entrances',
+  type: 'enum',
+  values: [
+    { value: 'none', name: 'None', description: 'Warp songs and soaring are not shuffled.' },
+    { value: 'ootOnly', name: 'OoT Only', description: 'Shuffles only OoT\'s warp songs among each other.' },
+    { value: 'mmOnly', name: 'MM Only', description: 'Shuffles only MM\'s soaring spots among each other.' },
+    { value: 'full', name: 'Full', description: 'Shuffles both warp songs and soaring spots together.' },
+  ],
+  description: 'Allows separate shuffling of the warp songs and soaring spots. This setting is disabled if both are selected in "Shuffle One-Way Entrances".',
+  default: 'none',
+  cond: (s: any) => s.erOneWaysSongs === false && s.erOneWaysStatues === false
+}, {
   key: 'erOneWays',
   name: 'Shuffle One-Way Entrances',
   category: 'entrances',
@@ -1384,17 +1398,17 @@ export const SETTINGS = [{
   name: 'Shuffle One-Ways with Warp Songs',
   category: 'entrances',
   type: 'boolean',
-  description: 'Shuffles the the warp songs from OOT among one-way entrances.',
+  description: 'Shuffles the the warp songs from OOT among one-way entrances. This setting is disabled if the warp songs are shuffled with "Shuffle Warp Songs and Soaring".',
   default: false,
-  cond: (x: any) => x.erOneWays !== 'none'
+  cond: (x: any) => x.erOneWays !== 'none' && x.erWarps !== 'ootOnly' && x.erWarps !== 'full'
 }, {
   key: 'erOneWaysStatues',
   name: 'Shuffle One-Ways with Owl Statues',
   category: 'entrances',
   type: 'boolean',
-  description: 'Shuffles the owl statues from MM among one-way entrances.',
+  description: 'Shuffles the owl statues from MM among one-way entrances. This setting is disabled if the soaring spots are shuffled with "Shuffle Warp Songs and Soaring".',
   default: false,
-  cond: (x: any) => x.erOneWays !== 'none'
+  cond: (x: any) => x.erOneWays !== 'none' && x.erWarps !== 'mmOnly' && x.erWarps !== 'full'
 }, {
   key: 'erOneWaysOwls',
   name: 'Shuffle Child Owl Flights',
