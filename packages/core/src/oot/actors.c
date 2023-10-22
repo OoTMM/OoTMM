@@ -191,6 +191,7 @@ static int canSpawnSoul(GameState_Play* play, s16 actorId, u16 variable)
     case AC_EN_DIVING_GAME:
         return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_ZORA));
     case AC_EN_BOM_BOWL_MAN:
+    case AC_BG_BOWL_WALL:
         return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_BOMBCHU_BOWLING_LADY));
     case AC_EN_TAKARA_MAN:
         return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_TRASURE_CHEST_GAME_OWNER));
