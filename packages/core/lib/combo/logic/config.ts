@@ -184,6 +184,7 @@ export class LogicPassConfig {
       OOT_TRIALS: settings.ganonTrials !== 'none',
       MM_PROGRESSIVE_GFS: settings.progressiveGFS === 'progressive',
       OOT_CHEST_GAME_SHUFFLE: settings.smallKeyShuffleChestGame !== 'vanilla',
+      MM_CLIMB_MOST_SURFACES: settings.climbMostSurfacesMm,
     };
 
     for (const v in exprs) {

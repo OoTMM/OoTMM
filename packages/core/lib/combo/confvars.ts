@@ -94,6 +94,7 @@ export const CONFVARS = [
   'OOT_TRIALS',
   'MM_PROGRESSIVE_GFS',
   'OOT_CHEST_GAME_SHUFFLE',
+  'MM_CLIMB_MOST_SURFACES',
 ] as const;
 
 export type Confvar = typeof CONFVARS[number];
