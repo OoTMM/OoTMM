@@ -35,3 +35,11 @@ PATCH_START 0x80b5c7d4
 .int 0x0
 PATCH_END
 
+/* Shorten talking time to Darunia's Offspring */
+PATCH_START 0x80b56910 + 0x1130
+  li t5, 0x3036
+PATCH_END
+
+PATCH_START 0x80b56910 + 0x1178
+  li t9, 0x3036
+PATCH_END
