@@ -36,7 +36,7 @@ static void CustomWarp_OnTrigger(Actor_CustomWarp* this, GameState_Play* play)
         break;
     case SWITCH_COAST_CLEAR:
         MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_GB);
-        play->nextEntrance = 0x6a70;
+        play->nextEntrance = ENTR_MM_GREAT_BAY_COAST_FROM_LABORATORY;
         break;
     }
 }
