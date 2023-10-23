@@ -21,7 +21,7 @@ bunny_hood:
     bne     t0, a3, return     //Branch if Link is not walking or running forward
     nop
 
-    lui     t0, 0x3fb0
+    lui     t0, 0x3fd0
     mtc1    t0, $f22           //f22 = 1.5
     nop
     mul.s   $f12, $f22         //f12 = 1.5 * horizontal velocity
