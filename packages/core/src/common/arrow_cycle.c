@@ -256,6 +256,14 @@ static Actor* ArrowCycle_FindArrow(Actor_Player* link, GameState_Play* play)
 
 void ArrowCycle_Handle(Actor_Player* link, GameState_Play* play)
 {
+    switch(play->sceneId) 
+    {
+        case SCE_MM_SHOOTING_GALLERY:
+        case SCE_MM_SHOOTING_GALLERY_SWAMP:
+        case SCE_OOT_SHOOTING_GALLERY:
+            return;
+    }
+
     Actor* arrow;
     Actor* special;
     u8 selectedItem;
