@@ -42,6 +42,7 @@
 #  include <combo/mm/actor_enfsn.h>
 #  include <combo/mm/actor_entrt.h>
 #  include <combo/mm/actor_enossan.h>
+#  include <combo/mm/actor_ensuttari.h>
 #  include <combo/mm/actor_arms_hook.h>
 #  include <combo/mm/actors/Obj_Tsubo.h>
 #  include <combo/mm/actors/Obj_Grass.h>
