@@ -109,11 +109,6 @@
     "MQ Deku Tree Grass Basement Upper 1": "can_cut_grass"
     "MQ Deku Tree Grass Basement Upper 2": "can_cut_grass"
     "MQ Deku Tree Grass Basement Upper 3": "can_cut_grass"
-    "MQ Deku Tree Grass Gravestone Room 1": "is_child && can_cut_grass"
-    "MQ Deku Tree Grass Gravestone Room 2": "is_child && can_cut_grass"
-    "MQ Deku Tree Grass Gravestone Room 3": "is_child && can_cut_grass"
-    "MQ Deku Tree Grass Gravestone Room 4": "is_child && can_cut_grass"
-    "MQ Deku Tree Grass Gravestone Room 5": "is_child && can_cut_grass"
 "Deku Tree Before Boss":
   dungeon: DT
   exits:
