@@ -40,10 +40,10 @@
     "MQ Deku Tree Grass Basement Lower 2": "can_cut_grass"
     "MQ Deku Tree Grass Basement Lower 3": "can_cut_grass"
     "MQ Deku Tree Grass Basement Lower 4": "can_cut_grass"
-    "MQ Deku Tree Grass Room Before Spike 1": "can_cut_grass && (can_use_bow || (can_use_slingshot && (can_use_sticks || has_fire))"
-    "MQ Deku Tree Grass Room Before Spike 2": "can_cut_grass && (can_use_bow || (can_use_slingshot && (can_use_sticks || has_fire))"
-    "MQ Deku Tree Grass Room Before Spike 3": "can_cut_grass && (can_use_bow || (can_use_slingshot && (can_use_sticks || has_fire))"
-    "MQ Deku Tree Grass Room Before Spike 4": "can_cut_grass && (can_use_bow || (can_use_slingshot && (can_use_sticks || has_fire))"
+    "MQ Deku Tree Grass Room Before Spike 1": "can_cut_grass && (can_use_bow || (can_use_slingshot && (can_use_sticks || has_fire)))"
+    "MQ Deku Tree Grass Room Before Spike 2": "can_cut_grass && (can_use_bow || (can_use_slingshot && (can_use_sticks || has_fire)))"
+    "MQ Deku Tree Grass Room Before Spike 3": "can_cut_grass && (can_use_bow || (can_use_slingshot && (can_use_sticks || has_fire)))"
+    "MQ Deku Tree Grass Room Before Spike 4": "can_cut_grass && (can_use_bow || (can_use_slingshot && (can_use_sticks || has_fire)))"
 "Deku Tree Compass Room":
   dungeon: DT
   exits:
