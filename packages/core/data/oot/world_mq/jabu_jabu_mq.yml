@@ -10,6 +10,8 @@
     "MQ Jabu-Jabu Entry Chest": "can_use_slingshot"
     "MQ Jabu-Jabu Pot Entrance 1": "true"
     "MQ Jabu-Jabu Pot Entrance 2": "true"
+    "MQ Jabu-Jabu Grass Entrance 1": "can_cut_grass"
+    "MQ Jabu-Jabu Grass Entrance 2": "can_cut_grass"
 "Jabu-Jabu Main":
   dungeon: JJ
   exits:
@@ -34,6 +36,15 @@
     "MQ Jabu-Jabu Pot Underwater Alcove 2": "is_child || (is_adult && can_dive_small)" #Future-proofing this for eventual ageless bow and slingshot. Adult cannot dive to the alcove without a scale.
     "MQ Jabu-Jabu Pot Boomerang Room 1": "is_child || (is_adult && can_dive_small)" #Future-proofing this for eventual ageless bow and slingshot. Adult cannot dive to the alcove without a scale.
     "MQ Jabu-Jabu Pot Boomerang Room 2": "is_child || (is_adult && can_dive_small)" #Future-proofing this for eventual ageless bow and slingshot. Adult cannot dive to the alcove without a scale.
+    "MQ Jabu-Jabu Grass Main Room Top 1": "(is_child || (is_adult && can_dive_small)) && can_cut_grass && has_explosives_or_hammer"
+    "MQ Jabu-Jabu Grass Main Room Top 2": "(is_child || (is_adult && can_dive_small)) && can_cut_grass && has_explosives_or_hammer"
+    "MQ Jabu-Jabu Grass Main Room Bottom 1": "(is_child || (is_adult && can_dive_small)) && can_cut_grass"
+    "MQ Jabu-Jabu Grass Main Room Bottom 2": "(is_child || (is_adult && can_dive_small)) && can_cut_grass"
+    "MQ Jabu-Jabu Grass Main Room Bottom 3": "(is_child || (is_adult && can_dive_small)) && can_cut_grass"
+    "MQ Jabu-Jabu Grass Boomerang Room": "(is_child || (is_adult && can_dive_small)) && can_cut_grass"
+    "MQ Jabu-Jabu Grass Big Octo Top 1": "event(JABU_BIG_OCTO) && can_cut_grass"
+    "MQ Jabu-Jabu Grass Big Octo Top 2": "event(JABU_BIG_OCTO) && can_cut_grass"
+    "MQ Jabu-Jabu Grass Room After Big Octo": "event(JABU_BIG_OCTO) && can_cut_grass && can_use_slingshot"
 "Jabu-Jabu Back":
   dungeon: JJ
   exits:
@@ -47,6 +58,7 @@
     "MQ Jabu-Jabu GS Back": "event(JABU_TENTACLE_BLUE)"
     "MQ Jabu-Jabu Pot Like-Like Room 1": "true"
     "MQ Jabu-Jabu Pot Like-Like Room 2": "true"
+    "MQ Jabu-Jabu Grass Torch Room": "can_cut_grass"
 "Jabu-Jabu Basement Side Room":
   dungeon: JJ
   exits:
@@ -64,3 +76,5 @@
     "MQ Jabu-Jabu Pre-Boss Chest": "can_use_slingshot"
     "MQ Jabu-Jabu GS Pre-Boss": "can_boomerang" #Adult probably has some solutions here, but it doesn't matter
     "MQ Jabu-Jabu Pot Before Boss": "true"
+    "MQ Jabu-Jabu Grass Before Boss 1": "can_cut_grass"
+    "MQ Jabu-Jabu Grass Before Boss 2": "can_cut_grass"

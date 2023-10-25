@@ -49,6 +49,10 @@
     "Dodongo Cavern Torch Room": "soul_dodongo"
   locations:
     "MQ Dodongo Cavern Compass Chest": "soul_dodongo"
+    "MQ Dodongo Cavern Grass Compass Room 1": "can_cut_grass"
+    "MQ Dodongo Cavern Grass Compass Room 2": "can_cut_grass"
+    "MQ Dodongo Cavern Grass Compass Room 3": "can_cut_grass"
+    "MQ Dodongo Cavern Grass Compass Room 4": "can_cut_grass"
 "Dodongo Cavern Torch Room":
   dungeon: DC
   exits:
@@ -105,6 +109,8 @@
     "MQ Dodongo Cavern Pot Green Room 2": "true"
     "MQ Dodongo Cavern Pot Green Room 3": "true"
     "MQ Dodongo Cavern Pot Green Room 4": "true"
+    "MQ Dodongo Cavern Grass Green Corridor Side Room 1": "(can_use_bow || has_bombflowers || can_use_din) && can_cut_grass"
+    "MQ Dodongo Cavern Grass Green Corridor Side Room 2": "(can_use_bow || has_bombflowers || can_use_din) && can_cut_grass"
 "Dodongo Cavern Bomb Bag Ledge":
   dungeon: DC
   exits:
@@ -127,6 +133,8 @@
     "MQ Dodongo Cavern Pot Before Boss Loop 4": "true"
     "MQ Dodongo Cavern Pot Before Boss Loop Side Room 1": "true"
     "MQ Dodongo Cavern Pot Before Boss Loop Side Room 2": "true"
+    "MQ Dodongo Cavern Grass Boss Loop": "can_cut_grass"
+    "MQ Dodongo Cavern Grass Boss Loop Side Room": "can_cut_grass"
 "Dodongo Cavern Room Before Upper Lizalfos":
   dungeon: DC
   exits:
