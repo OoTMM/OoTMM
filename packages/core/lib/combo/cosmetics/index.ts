@@ -207,6 +207,10 @@ class CosmeticsPass {
     const tex = Buffer.from(this.roms.mm.rom.subarray(paddr + texOff, paddr + texOff + 8 * 16 * 2));
     const newTex = recolorImage('rgba16', tex, null, 0x00b439, color);
     this.patch.addDataPatch('mm', paddr + texOff, newTex);
+    const texOff2 = 0xceb8;
+    const tex2 = Buffer.from(this.roms.mm.rom.subarray(paddr + texOff2, paddr + texOff2 + 8 * 16 * 2));
+    const newTex2 = recolorImage('rgba16', tex2, null, 0x00b439, color);
+    this.patch.addDataPatch('mm', paddr + texOff2, newTex2);
   }
 
   private patchMmTunicZora(color: number) {
@@ -223,12 +227,17 @@ class CosmeticsPass {
     const newLut2 = recolorImage('rgba16', lut2, null, 0x00b439, color);
     this.patch.addDataPatch('mm', paddr + lutOff2, newLut2);
 
+    const texOff = 0x10228 + 7 * 16 * 2;
+    const tex = Buffer.from(this.roms.mm.rom.subarray(paddr + texOff, paddr + texOff + (32 - 7) * 16 * 2));
+    const newTex = recolorImage('rgba16', tex, null, 0x00b439, color);
+    this.patch.addDataPatch('mm', paddr + texOff, newTex);
+
     /* Fin */
     const paddr2 = 0x0108b000;
-    const texOff = 0x700b0 + 7 * 16 * 2;
-    const tex = Buffer.from(this.roms.mm.rom.subarray(paddr2 + texOff, paddr2 + texOff + (32 - 7) * 16 * 2));
-    const newTex = recolorImage('rgba16', tex, null, 0x00b439, color);
-    this.patch.addDataPatch('mm', paddr2 + texOff, newTex);
+    const texOff2 = 0x700b0 + 7 * 16 * 2;
+    const tex2 = Buffer.from(this.roms.mm.rom.subarray(paddr2 + texOff2, paddr2 + texOff2 + (32 - 7) * 16 * 2));
+    const newTex2 = recolorImage('rgba16', tex2, null, 0x00b439, color);
+    this.patch.addDataPatch('mm', paddr2 + texOff2, newTex2);
   }
 
   private patchMmTunicFierceDeity(color: number) {

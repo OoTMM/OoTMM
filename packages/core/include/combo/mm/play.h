@@ -94,7 +94,7 @@ typedef struct
 }
 EnvironmentContext;
 
-typedef struct 
+typedef struct ActorContext
 {
     char        unk_000[0xf];
     ActorList   actors[12];
@@ -138,12 +138,12 @@ Font; // size = 0x11D90
 
 _Static_assert(sizeof(Font) == 0x11d90, "MM Font size is wrong");
 
-typedef struct MessageTableEntry 
+typedef struct MessageTableEntry
 {
     u16 textId;
     u8 typePos;
     const char* segment;
-} 
+}
 MessageTableEntry; // size = 0x8;
 
 _Static_assert(sizeof(MessageTableEntry) == 0x8, "MM MessageTableEntry size is wrong");
@@ -317,7 +317,7 @@ typedef struct Room
     char roomShape_pointer[0x4];
     void* segment;
     char unk_10[0x4];
-} 
+}
 Room;
 _Static_assert(sizeof(Room) == 0x14, "MM Room size is wrong");
 
@@ -331,7 +331,7 @@ typedef struct RoomContext
     char unk_32[0x2];
     void* activeRoomVram;
     char unk_38[0x48];
-} 
+}
 RoomContext;
 ASSERT_OFFSET(RoomContext, roomMemPages, 0x28);
 ASSERT_OFFSET(RoomContext, unk_32, 0x32);
@@ -345,7 +345,7 @@ typedef struct GameState_Play
     u16                 sceneId;
     char                unk_000a6[0x01bfa];
     ActorContext        actorCtx;
-    char                unk_01f24[0x02794]; 
+    char                unk_01f24[0x02794];
     SramContext         sramCtx;
     char                unk_046e0[0x228];
     MessageContext      msgCtx;

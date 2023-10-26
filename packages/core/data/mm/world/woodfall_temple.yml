@@ -63,7 +63,7 @@
   exits:
     "Woodfall Temple Water Room": "true"
   locations:
-    "Woodfall Temple Map": "soul(SOUL_SNAPPER) && (has(MASK_DEKU) || has_explosives || has_mask_goron)"
+    "Woodfall Temple Map": "soul_enemy(SOUL_ENEMY_SNAPPER) && (has(MASK_DEKU) || has_explosives || has_mask_goron)"
     "Woodfall Temple Grass Map Room 1": "true"
     "Woodfall Temple Grass Map Room 2": "true"
     "Woodfall Temple Grass Map Room 3": "true"
@@ -86,7 +86,7 @@
   exits:
     "Woodfall Temple Maze": "true"
   locations:
-    "Woodfall Temple Compass": "soul(SOUL_DRAGONFLY)"
+    "Woodfall Temple Compass": "soul_enemy(SOUL_ENEMY_DRAGONFLY)"
     "Woodfall Temple Grass Compass Room 1": "true"
     "Woodfall Temple Grass Compass Room 2": "true"
     "Woodfall Temple Grass Compass Room 3": "true"
@@ -96,7 +96,7 @@
     "Woodfall Temple Maze": "has_sticks || has_arrows"
     "Woodfall Temple Pits Room": "true"
   locations:
-    "Woodfall Temple Dark Chest": "soul(SOUL_BOE)"
+    "Woodfall Temple Dark Chest": "soul_enemy(SOUL_ENEMY_BOE)"
 "Woodfall Temple Pits Room":
   dungeon: WF
   events:
@@ -152,7 +152,7 @@
 "Woodfall Temple Boss Key Room":
   dungeon: WF
   exits:
-    "Woodfall Temple Boss Key Room Cage": "soul(SOUL_GEKKO) && has_arrows && (has(MASK_DEKU) || has_mask_goron || has_explosives)"
+    "Woodfall Temple Boss Key Room Cage": "soul_enemy(SOUL_ENEMY_GEKKO) && has_arrows && (has(MASK_DEKU) || has_mask_goron || has_explosives)"
 "Woodfall Temple Boss Key Room Cage":
   dungeon: WF
   events:
@@ -198,7 +198,7 @@
   boss: true
   dungeon: WF
   exits:
-    "Woodfall Temple After Boss": "soul(SOUL_ODOLWA) && ((has(MASK_FIERCE_DEITY) && has_magic) || (has_arrows && can_fight))"
+    "Woodfall Temple After Boss": "soul_boss(SOUL_BOSS_ODOLWA) && ((has(MASK_FIERCE_DEITY) && has_magic) || (has_arrows && can_fight))"
   locations:
     "Woodfall Temple Boss Grass 01": "true"
     "Woodfall Temple Boss Grass 02": "true"

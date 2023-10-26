@@ -93,8 +93,6 @@ void comboAddSticksOot(int count);
 void comboAddSticksMm(int count);
 void comboAddNutsOot(int count);
 void comboAddNutsMm(int count);
-void comboAddSoulOot(s16 gi);
-void comboAddSoulMm(s16 gi);
 
 void comboAddCommonItemOot(int sid, int noEffect);
 void comboAddCommonItemMm(int sid, int noEffect);

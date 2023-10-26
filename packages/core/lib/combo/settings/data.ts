@@ -226,6 +226,18 @@ export const SETTINGS = [{
   ],
   default: 'ownDungeon'
 }, {
+  key: 'smallKeyShuffleChestGame',
+  name: 'Chest Game Small Key Shuffle',
+  category: 'main.shuffle',
+  type: 'enum',
+  description: 'Controls where Chest Game Small Keys can be',
+  values: [
+    { value: 'vanilla', name: 'Vanilla', description: 'Chest Minigame will behave as in vanilla' },
+    { value: 'ownDungeon', name: 'Own Minigame', description: 'Chest Minigame Keys can be found inside the minigame' },
+    { value: 'anywhere', name: 'Anywhere', description: 'Chest Minigame Keys can be found anywhere' },
+  ],
+  default: 'vanilla'
+}, {
   key: 'bossKeyShuffleOot',
   name: 'Boss Key Shuffle (OoT)',
   category: 'main.shuffle',
@@ -423,7 +435,7 @@ export const SETTINGS = [{
   name: 'Pots Shuffle (OoT)',
   category: 'main.shuffle',
   type: 'boolean',
-  description: 'Controls whether or not the pots are shuffled (OoT). !!!!! MQ NOT INCLUDED YET !!!!!',
+  description: 'Controls whether or not the pots are shuffled (OoT).',
   default: false
 }, {
   key: 'shufflePotsMm',
@@ -487,6 +499,17 @@ export const SETTINGS = [{
 { ...SETTING_PRICE, key: 'priceMmShops', name: 'MM Shops Prices', description: 'Sets the price of items sold inside MM shops' },
 { ...SETTING_PRICE, key: 'priceMmTingle', name: 'MM Tingle Prices', description: 'Sets the price of items sold by Tingle' },
 {
+  key: 'ganonTrials',
+  name: 'Ganon Trials',
+  category: 'main.events',
+  type: 'enum',
+  description: 'Enables or disables the trials in Ganon\'s Castle',
+  values: [
+    { value: 'none', name: 'None', description: 'Trials are not required to enter the tower' },
+    { value: 'all', name: 'All', description: 'All trials are required to enter the tower' },
+  ],
+  default: 'none'
+}, {
   key: 'startingAge',
   name: 'Starting Age',
   category: 'main.events',
@@ -770,7 +793,7 @@ export const SETTINGS = [{
   default: false
 }, {
   key: 'hookshotAnywhereOot',
-  name: 'Hookshot Anywhere (OOT)',
+  name: 'Hookshot Anywhere (OoT)',
   category: 'main.misc',
   type: 'boolean',
   description: 'Modifies all surfaces to be hooked onto',
@@ -784,10 +807,17 @@ export const SETTINGS = [{
   default: false
 }, {
   key: 'climbMostSurfacesOot',
-  name: 'Climb Most Surfaces (OOT)',
+  name: 'Climb Most Surfaces (OoT)',
   category: 'main.misc',
   type: 'boolean',
-  description: 'Modifies most surface to be climbable in OOT',
+  description: 'Modifies most surface to be climbable',
+  default: false
+}, {
+  key: 'climbMostSurfacesMm',
+  name: 'Climb Most Surfaces (MM)',
+  category: 'main.misc',
+  type: 'boolean',
+  description: 'Modifies most surface to be climbable',
   default: false
 }, {
   key: 'fastBunnyHood',
@@ -835,6 +865,16 @@ export const SETTINGS = [{
 }, {
   key: 'progressiveShieldsMm',
   name: 'MM Shields',
+  category: 'items.progressive',
+  type: 'enum',
+  values: [
+    { value: 'separate', name: 'Separate' },
+    { value: 'progressive', name: 'Progressive' },
+  ],
+  default: 'separate'
+}, {
+  key: 'progressiveGFS',
+  name: 'MM Great Fairy Sword',
   category: 'items.progressive',
   type: 'enum',
   values: [
@@ -939,18 +979,39 @@ export const SETTINGS = [{
   description: 'Adds the Ocarina Buttons as items that are shuffled.',
   default: false,
 }, {
-  key: 'enemySoulsOot',
+  key: 'soulsEnemyOot',
   name: 'Enemy Souls (OoT)',
   category: 'items.extensions',
   type: 'boolean',
   description: 'Add enemy souls into the item pool. Enemies won\'t spawn unless their soul is obtained.',
   default: false
 }, {
-  key: 'enemySoulsMm',
+  key: 'soulsEnemyMm',
   name: 'Enemy Souls (MM)',
   category: 'items.extensions',
   type: 'boolean',
   description: 'Add enemy souls into the item pool. Enemies won\'t spawn unless their soul is obtained.',
+  default: false
+}, {
+  key: 'soulsBossOot',
+  name: 'Boss Souls (OoT)',
+  category: 'items.extensions',
+  type: 'boolean',
+  description: 'Add boss souls into the item pool. Enemies won\'t spawn unless their soul is obtained.',
+  default: false
+}, {
+  key: 'soulsBossMm',
+  name: 'Boss Souls (MM)',
+  category: 'items.extensions',
+  type: 'boolean',
+  description: 'Add boss souls into the item pool. Enemies won\'t spawn unless their soul is obtained.',
+  default: false
+}, {
+  key: 'soulsNpcOot',
+  name: 'NPC Souls (OoT) (EXPERIMENTAL)',
+  category: 'items.extensions',
+  type: 'boolean',
+  description: 'Add NPC souls into the item pool. NPCs won\'t spawn unless their soul is obtained.',
   default: false
 }, {
   key: 'lenientSpikes',
@@ -1141,12 +1202,12 @@ export const SETTINGS = [{
   type: 'boolean',
   default: false
 }, {
-  key: 'sharedSouls',
-  name: 'Shared Souls',
+  key: 'sharedSoulsEnemy',
+  name: 'Shared Enemy Souls',
   category: 'items.shared',
   type: 'boolean',
   default: false,
-  cond: (s: any) => s.enemySoulsOot && s.enemySoulsMm,
+  cond: (s: any) => s.soulsEnemyOot && s.soulsEnemyMm,
 }, {
   key: 'sharedOcarinaButtons',
   name: 'Shared Ocarina Buttons',
@@ -1245,7 +1306,16 @@ export const SETTINGS = [{
     { value: 'ownGame', name: 'Own Game' },
     { value: 'full', name: 'Full' },
   ],
+  description: 'Enable the ability to shuffle dungeons within their own game or across both.',
   default: 'none'
+}, {
+  key: 'erMajorDungeons',
+  name: 'Shuffle Major Dungeons with Dungeons',
+  category: 'entrances',
+  type: 'boolean',
+  description: 'If turned on, it means the boss-containing dungeons and uninverted Stone Tower Temple will be shuffled.',
+  default: false,
+  cond: (x: any) => x.erDungeons !== 'none'
 }, {
   key: 'erMinorDungeons',
   name: 'Shuffle OoT Minor Dungeons with Dungeons',
@@ -1342,7 +1412,15 @@ export const SETTINGS = [{
     { value: 'full', name: 'Full' },
   ],
   default: 'none',
-  description: 'Shuffle most interiors with each other',
+  description: 'Enable the ability to shuffle interiors in their own game or across both games.',
+}, {
+  key: 'erIndoorsMajor',
+  name: 'Shuffle Most Interiors',
+  category: 'entrances',
+  type: 'boolean',
+  description: 'Shuffle most interiors with each other.',
+  default: false,
+  cond: (x: any) => x.erIndoors !== 'none'
 }, {
   key: 'erIndoorsExtra',
   name: 'Shuffle Extra Interiors',

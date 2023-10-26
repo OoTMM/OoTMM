@@ -273,6 +273,9 @@ export class LogicPassEntrances {
     const world = this.worlds[worldId];
     /* Set the dungeon list */
     let shuffledDungeons = new Set(['DT', 'DC', 'JJ', 'Forest', 'Fire', 'Water', 'Shadow', 'Spirit', 'WF', 'SH', 'GB', 'ST', 'IST']);
+    if (!this.input.settings.erMajorDungeons) {
+      ['DT', 'DC', 'JJ', 'Forest', 'Fire', 'Water', 'Shadow', 'Spirit', 'WF', 'SH', 'GB', 'ST', 'IST'].forEach(d => shuffledDungeons.delete(d));
+    }
     if (this.input.settings.erMinorDungeons) {
       ['BotW', 'IC', 'GTG'].forEach(d => shuffledDungeons.add(d));
     }
@@ -451,11 +454,14 @@ export class LogicPassEntrances {
   }
 
   private placeIndoors(worldId: number) {
-    const pool = ['indoors'];
-    if (this.input.settings.erIndoorsExtra) {
-      pool.push('indoors-extra');
+    const pool = new Set(['indoors']);
+    if (!this.input.settings.erIndoorsMajor) {
+      pool.delete('indoors');
     }
-    this.placePool(worldId, pool, { ownGame: this.input.settings.erIndoors === 'ownGame' });
+    if (this.input.settings.erIndoorsExtra) {
+      pool.add('indoors-extra');
+    }
+    this.placePool(worldId, Array.from(pool), { ownGame: this.input.settings.erIndoors === 'ownGame' });
   }
 
   private placeWarps(worldId: number) {
@@ -534,11 +540,11 @@ export class LogicPassEntrances {
     for (const w of newWorlds) {
       const a = w.areas['OOT SPAWN'];
       if (this.input.settings.startingAge === 'child') {
-        a.exits['OOT SPAWN ADULT'] = exprAge('child');
+        a.exits['OOT SPAWN ADULT'] = exprAge('adult');
         a.exits['OOT SPAWN CHILD'] = exprFalse();
       } else {
         a.exits['OOT SPAWN ADULT'] = exprFalse();
-        a.exits['OOT SPAWN CHILD'] = exprAge('adult');
+        a.exits['OOT SPAWN CHILD'] = exprAge('child');
       }
     }
 

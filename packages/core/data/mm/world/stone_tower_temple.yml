@@ -64,10 +64,10 @@
   dungeon: ST
   exits:
     "Stone Tower Temple West Garden": "small_keys_st(4) || (small_keys_st(3) && has_mask_goron && (has_explosives || trick_keg_explosives) && can_play_emptiness)"
-    "Stone Tower Temple Center": "has_mask_zora || soul(SOUL_DEXIHAND)"
+    "Stone Tower Temple Center": "has_mask_zora || soul_enemy(SOUL_ENEMY_DEXIHAND)"
     "Stone Tower Temple Water Bridge": "(can_goron_bomb_jump && can_use_ice_arrows) || short_hook_anywhere"
   locations:
-    "Stone Tower Temple Center Sun Block Chest": "short_hook_anywhere || (can_goron_bomb_jump && can_use_ice_arrows && can_use_light_arrows) || (((has(MASK_DEKU) || has_explosives || (has_magic && (has_weapon && has(SPIN_UPGRADE))) || has(SWORD, 3) || has(GREAT_FAIRY_SWORD) || can_use_ice_arrows) && (has_mask_zora || soul(SOUL_DEXIHAND))) && can_use_light_arrows)"
+    "Stone Tower Temple Center Sun Block Chest": "short_hook_anywhere || (can_goron_bomb_jump && can_use_ice_arrows && can_use_light_arrows) || (((has(MASK_DEKU) || has_explosives || (has_magic && (has_weapon && has(SPIN_UPGRADE))) || has(SWORD, 3) || has(GREAT_FAIRY_SWORD) || can_use_ice_arrows) && (has_mask_zora || soul_enemy(SOUL_ENEMY_DEXIHAND))) && can_use_light_arrows)"
 "Stone Tower Temple Center":
   dungeon: ST
   exits:
@@ -80,7 +80,7 @@
 "Stone Tower Temple Water Room":
   dungeon: ST
   exits:
-    "Stone Tower Temple Center": "has_mask_zora || (short_hook_anywhere && soul(SOUL_DEXIHAND))"
+    "Stone Tower Temple Center": "has_mask_zora || (short_hook_anywhere && soul_enemy(SOUL_ENEMY_DEXIHAND))"
     "Stone Tower Temple Mirrors Room": "small_keys_st(4)"
     "Stone Tower Temple Entrance": "event(STONE_TOWER_EAST_ENTRY_BLOCK) || short_hook_anywhere"
   events:
@@ -120,9 +120,9 @@
 "Stone Tower Temple Light Arrow Room":
   dungeon: ST
   exits:
-    "Stone Tower Temple Before Water Bridge": "soul(SOUL_GARO) && (has_weapon || has_mask_goron || can_use_deku_bubble || has_arrows)"
+    "Stone Tower Temple Before Water Bridge": "soul_enemy(SOUL_ENEMY_GARO) && (has_weapon || has_mask_goron || can_use_deku_bubble || has_arrows)"
   locations:
-    "Stone Tower Temple Light Arrow": "soul(SOUL_GARO) && (has_weapon || has_mask_goron || can_use_deku_bubble || has_arrows)"
+    "Stone Tower Temple Light Arrow": "soul_enemy(SOUL_ENEMY_GARO) && (has_weapon || has_mask_goron || can_use_deku_bubble || has_arrows)"
 "Stone Tower Temple Before Water Bridge":
   dungeon: ST
   exits:
@@ -143,7 +143,7 @@
   dungeon: ST
   exits:
     "Stone Tower Temple Entrance": "true"
-    "Stone Tower Temple Center": "(can_goron_bomb_jump && (can_use_ice_arrows || soul(SOUL_DEXIHAND) || has_mask_zora)) || short_hook_anywhere"
+    "Stone Tower Temple Center": "(can_goron_bomb_jump && (can_use_ice_arrows || soul_enemy(SOUL_ENEMY_DEXIHAND) || has_mask_zora)) || short_hook_anywhere"
     "Stone Tower Temple Center Ledge": "(can_goron_bomb_jump && (can_use_ice_arrows || has_mask_zora)) || short_hook_anywhere"
   locations:
-    "Stone Tower Temple Water Bridge Chest": "soul(SOUL_EYEGORE) && (has_explosives || has_arrows || can_hookshot_short || has_mask_zora || has_mask_goron)"
+    "Stone Tower Temple Water Bridge Chest": "soul_enemy(SOUL_ENEMY_EYEGORE) && (has_explosives || has_arrows || can_hookshot_short || has_mask_zora || has_mask_goron)"

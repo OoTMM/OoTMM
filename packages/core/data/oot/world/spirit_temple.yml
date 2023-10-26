@@ -37,7 +37,7 @@
 "Spirit Temple Child Back Left":
   dungeon: Spirit
   exits:
-    "Spirit Temple Child Back Right": "soul(SOUL_ANUBIS)"
+    "Spirit Temple Child Back Right": "soul_enemy(SOUL_ENEMY_ANUBIS)"
   locations:
     "Spirit Temple Child First Chest": "true"
     "Spirit Temple Flying Pot Child After Bridge 1": "soul_flying_pot"
@@ -49,7 +49,7 @@
 "Spirit Temple Child Back Right":
   dungeon: Spirit
   exits:
-    "Spirit Temple Child Back Left": "soul(SOUL_ANUBIS)"
+    "Spirit Temple Child Back Left": "soul_enemy(SOUL_ENEMY_ANUBIS)"
   locations:
     "Spirit Temple Child Second Chest": "event(SPIRIT_CHEST_CHILD)"
     "Spirit Temple GS Child Fence": "(has_ranged_weapon || has_explosives || can_use_din || can_use_sticks || can_use_sword_master || (age_sword_adult && has(SWORD_BIGGORON))) && silver_rupees_spirit_child"
@@ -132,7 +132,7 @@
   locations:
     "Spirit Temple Statue Base": "(event(SPIRIT_CHILD_DOOR) && has_explosives && can_use_sticks) || has_fire_spirit || (has_fire_arrows && event(SPIRIT_ADULT_DOOR))"
     "Spirit Temple GS Statue": "(event(SPIRIT_ADULT_DOOR) && ((is_adult && scarecrow_hookshot) || has_hover_boots || can_longshot || climb_anywhere)) || (event(SPIRIT_CHILD_DOOR) && has_explosives && (has_hover_boots || can_hookshot || climb_anywhere)) || (climb_anywhere && can_damage_skull)"
-    "Spirit Temple Silver Gauntlets": "small_keys_spirit(3) && has_hookshot(2) && has_explosives && soul_iron_knuckle && soul(SOUL_ANUBIS) && soul_beamos"
+    "Spirit Temple Silver Gauntlets": "small_keys_spirit(3) && has_hookshot(2) && has_explosives && soul_iron_knuckle && soul_enemy(SOUL_ENEMY_ANUBIS) && soul_beamos"
     "Spirit Temple Pot Statue Room 1": "true"
     "Spirit Temple Pot Statue Room 2": "true"
     "Spirit Temple Pot Statue Room 3": "true"
@@ -154,11 +154,11 @@
 "Spirit Temple Adult Upper":
   dungeon: Spirit
   exits:
-    "Spirit Temple Adult Upper 2": "has_explosives && soul_beamos && soul(SOUL_ANUBIS)"
+    "Spirit Temple Adult Upper 2": "has_explosives && soul_beamos && soul_enemy(SOUL_ENEMY_ANUBIS)"
     "Spirit Temple Adult Climb 2": "small_keys_spirit(5)"
-    "Spirit Temple Statue Adult": "has_explosives && soul_beamos && soul(SOUL_ANUBIS) && ((small_keys_spirit(1) && has_mirror_shield) || small_keys_spirit(2))"
+    "Spirit Temple Statue Adult": "has_explosives && soul_beamos && soul_enemy(SOUL_ENEMY_ANUBIS) && ((small_keys_spirit(1) && has_mirror_shield) || small_keys_spirit(2))"
   locations:
-    "Spirit Temple Pot Adult Upper": "has_explosives && soul_beamos && soul(SOUL_ANUBIS)"
+    "Spirit Temple Pot Adult Upper": "has_explosives && soul_beamos && soul_enemy(SOUL_ENEMY_ANUBIS)"
 "Spirit Temple Adult Upper 2":
   dungeon: Spirit
   exits:

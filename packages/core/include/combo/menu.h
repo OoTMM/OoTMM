@@ -1,11 +1,14 @@
 #ifndef COMBO_MENU_H
 #define COMBO_MENU_H
 
-#define MENU_NONE       0
-#define MENU_INFO       1
-#define MENU_SOULS_OOT  2
-#define MENU_SOULS_MM   3
-#define MENU_MAX        4
+#define MENU_NONE               0
+#define MENU_INFO               1
+#define MENU_SOULS_OOT_ENEMY    2
+#define MENU_SOULS_OOT_BOSS     3
+#define MENU_SOULS_OOT_NPC      4
+#define MENU_SOULS_MM_ENEMY     5
+#define MENU_SOULS_MM_BOSS      6
+#define MENU_MAX                7
 
 typedef struct GameState_Play GameState_Play;
 

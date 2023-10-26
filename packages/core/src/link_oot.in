@@ -12,6 +12,11 @@ osWritebackDCacheAll = 0x800d5aa0;
 DMARomToRam = 0x8000085c;
 InitDom2Addr2 = 0x80091310;
 
+ActorRemove = 0x80025648;
+
+Play_InitEnvironment = 0x8009cda0;
+gFogState = 0x800f1640;
+
 __osPiTable = 0x800fc0b0;
 
 InitDmaManager = 0x80000e6c;

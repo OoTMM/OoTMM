@@ -301,6 +301,7 @@ const PRESET_ALLSANITY = makeSettings({
   fireChild: true,
   erBoss: 'full',
   erDungeons: 'full',
+  erMajorDungeons: true,
   erMinorDungeons: true,
   erSpiderHouses: true,
   erPirateFortress: true,
@@ -311,6 +312,7 @@ const PRESET_ALLSANITY = makeSettings({
   erRegionsExtra: true,
   erRegionsShortcuts: true,
   erIndoors: 'full',
+  erIndoorsMajor: true,
   erIndoorsExtra: true,
   erOneWays: 'full',
   erOneWaysMajor: true,
@@ -374,6 +376,7 @@ const PRESET_HELL = makeSettings({
   fireChild: true,
   erBoss: 'full',
   erDungeons: 'full',
+  erMajorDungeons: true,
   erMinorDungeons: true,
   erSpiderHouses: true,
   erPirateFortress: true,
@@ -384,6 +387,7 @@ const PRESET_HELL = makeSettings({
   erRegionsExtra: true,
   erRegionsShortcuts: true,
   erIndoors: 'full',
+  erIndoorsMajor: true,
   erIndoorsExtra: true,
   erOneWays: 'full',
   erOneWaysMajor: true,
@@ -529,6 +533,7 @@ const PRESET_HELL = makeSettings({
     'MM_ESCAPE_CAGE',
     'MM_GBT_FAIRY2_HOOK',
     'MM_GBT_CENTRAL_GEYSER',
+    'MM_BANK_NO_WALLET',
   ]
 });
 

@@ -41,7 +41,7 @@ static void powderKegHint(GameState_Play* play)
     comboTextAppendHeader(&b);
     start = b;
     comboTextAppendStr(&b, "If you pass my test, I will give you ");
-    comboTextAppendItemNameQuery(&b, &q, TF_PREPOS | TF_PROGRESSIVE);
+    comboTextAppendItemNameQueryEx(&b, &q, TF_PREPOS | TF_PROGRESSIVE, gComboData.staticHintsImportance[13]);
     comboTextAppendStr(&b, "!" TEXT_SIGNAL TEXT_END);
     comboTextAutoLineBreaks(start);
 }

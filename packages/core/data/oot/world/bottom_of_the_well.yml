@@ -22,7 +22,7 @@
     "Bottom of the Well Map": "has_explosives_or_hammer || (has_bombflowers && (small_keys_botw(3) || can_use_din)) || climb_anywhere || hookshot_anywhere"
     "Bottom of the Well Coffin": "true"
     "Bottom of the Well Pits": "(small_keys_botw(3) || climb_anywhere) && has_lens"
-    "Bottom of the Well Lens": "soul(SOUL_DEAD_HAND) && can_play_zelda && (has_weapon || (can_use_sticks && trick(OOT_DEAD_HAND_STICKS)))"
+    "Bottom of the Well Lens": "soul_enemy(SOUL_ENEMY_DEAD_HAND) && can_play_zelda && (has_weapon || (can_use_sticks && trick(OOT_DEAD_HAND_STICKS)))"
     "Bottom of the Well Lens Side Chest": "can_play_zelda && has_lens"
     "Bottom of the Well GS East Cage": "(small_keys_botw(3) || climb_anywhere) && has_lens && (can_collect_distance || (climb_anywhere && (can_use_sword_master || has_ranged_weapon || has_explosives || can_use_sticks || can_use_din || (age_sword_adult && has(SWORD_BIGGORON)))))"
     "Bottom of the Well GS Inner West": "small_keys_botw(3) && has_lens && (can_collect_distance || (climb_anywhere && (can_use_sword_master || has_ranged_weapon || has_explosives || can_use_sticks || can_use_din || (age_sword_adult && has(SWORD_BIGGORON)))))"

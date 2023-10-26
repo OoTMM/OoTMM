@@ -381,7 +381,7 @@ export class LogicPassAnalysis {
       delete this.dependencies['OOT_BOSS_KEY_SPIRIT'];
     }
 
-    if (this.state.settings.erBoss || this.state.settings.erDungeons) {
+    if (this.state.settings.erBoss || this.state.settings.erMajorDungeons) {
       delete this.dependencies['OOT_SMALL_KEY_FOREST'];
       delete this.dependencies['OOT_SMALL_KEY_SPIRIT'];
     }

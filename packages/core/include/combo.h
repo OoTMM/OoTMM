@@ -42,6 +42,7 @@
 #  include <combo/mm/actor_enfsn.h>
 #  include <combo/mm/actor_entrt.h>
 #  include <combo/mm/actor_enossan.h>
+#  include <combo/mm/actor_ensuttari.h>
 #  include <combo/mm/actor_arms_hook.h>
 #  include <combo/mm/actors/Obj_Tsubo.h>
 #  include <combo/mm/actors/Obj_Grass.h>
@@ -142,6 +143,7 @@ typedef struct
     u16             triforcePieces;
     u16             triforceGoal;
     ComboDataHints  hints;
+    s8              staticHintsImportance[20];
     u16             giZoraSapphire;
     u8              boss[12];
     u8              dungeons[25];
@@ -391,7 +393,7 @@ typedef struct
     u8                      menuScreen;
     u8                      menuCursor;
     u8                      menuCursorMax;
-    u8                      maxKeysOot[0x10];
+    u8                      maxKeysOot[0x11];
     u8                      maxKeysMm[4];
     u8                      actorIndex;
     u8                      sceneSetupId;

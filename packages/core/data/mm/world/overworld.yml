@@ -283,8 +283,8 @@
     "Lottery": "is_day || (event(PLAY_LOTTERY) && (before(NIGHT1_PM_11_00) || between(NIGHT2_PM_06_00, NIGHT2_PM_11_00) || between(NIGHT3_PM_06_00, NIGHT3_PM_11_00)))"
   locations:
     "Clock Town Bank Reward 1": "can_use_wallet(1)"
-    "Clock Town Bank Reward 2": "can_use_wallet(2)"
-    "Clock Town Bank Reward 3": "can_use_wallet(3)"
+    "Clock Town Bank Reward 2": "can_use_wallet(2) || (can_use_wallet(1) && (trick(MM_BANK_ONE_WALLET) || trick(MM_BANK_NO_WALLET)))"
+    "Clock Town Bank Reward 3": "can_use_wallet(3) || (can_use_wallet(2) && trick(MM_BANK_ONE_WALLET)) || (can_use_wallet(1) && trick(MM_BANK_NO_WALLET))"
     "Clock Town Rosa Sisters HP": "has(MASK_KAMARO) && (is_night1 || is_night2)"
 "Clock Town East":
   region: CLOCK_TOWN_EAST
@@ -514,7 +514,7 @@
     "Stock Pot Inn Guest Room Chest": "has(ROOM_KEY)"
     "Stock Pot Inn Staff Room Chest": "is_night3"
     "Stock Pot Inn Room Key": "between(DAY1_PM_01_45, DAY1_PM_04_00)"
-    "Stock Pot Inn Letter to Kafei": "cond(setting(erIndoors, none), event(MEET_ANJU) && (has(ROOM_KEY) || has(MASK_DEKU)), event(MEET_ANJU))"
+    "Stock Pot Inn Letter to Kafei": "cond(setting(erIndoorsExtra), event(MEET_ANJU), event(MEET_ANJU) && (has(ROOM_KEY) || has(MASK_DEKU)))"
     "Stock Pot Inn Couple's Mask": "event(SUN_MASK) && event(DELIVER_PENDANT) && event(MEET_ANJU) && after(NIGHT3_AM_04_00)"
     "Stock Pot Inn Grandma HP 1": "has(MASK_ALL_NIGHT) && (is_day1 || is_day2)"
     "Stock Pot Inn Grandma HP 2": "has(MASK_ALL_NIGHT) && (is_day1 || is_day2)"
@@ -560,7 +560,7 @@
   events:
     STICKS: "can_kill_baba_both_sticks"
     NUTS: "soul_deku_baba"
-    MAGIC: "soul(SOUL_CHUCHU)"
+    MAGIC: "soul_enemy(SOUL_ENEMY_CHUCHU)"
     RUPEES: "true"
     BOMBS: "true"
     ARROWS: "true"
@@ -1676,7 +1676,7 @@
   events:
     PICTURE_TINGLE: "has(PICTOGRAPH_BOX)"
     MAGIC: "true"
-    RUPEES: "(can_use_light_arrows && (soul_tektite || soul_wolfos || ((can_break_boulders || can_use_fire_arrows) && soul(SOUL_SNAPPER)))) || event(BOSS_SNOWHEAD)"
+    RUPEES: "(can_use_light_arrows && (soul_tektite || soul_wolfos || ((can_break_boulders || can_use_fire_arrows) && soul_enemy(SOUL_ENEMY_SNAPPER)))) || event(BOSS_SNOWHEAD)"
   exits:
     "Mountain Village": "true"
     "Goron Village": "true"
@@ -2331,7 +2331,7 @@
   locations:
     "Pinnacle Rock Chest 1": "true"
     "Pinnacle Rock Chest 2": "true"
-    "Pinnacle Rock HP": "soul(SOUL_DEEP_PYTHON) && event(SEAHORSE)"
+    "Pinnacle Rock HP": "soul_enemy(SOUL_ENEMY_DEEP_PYTHON) && event(SEAHORSE)"
     "Pinnacle Rock Pot 01": "true"
     "Pinnacle Rock Pot 02": "true"
     "Pinnacle Rock Pot 03": "true"
@@ -2362,7 +2362,7 @@
     "Zora Cape Near Hall": "has_mask_zora"
     "Zora Cape Peninsula": "has_mask_zora || trick(MM_ZORA_HALL_HUMAN)"
     "Waterfall Cliffs": "can_hookshot"
-    "Great Bay Near Fairy Fountain": "can_hookshot" #|| (can_use_ice_arrows && (has_mask_zora || can_hookshot_short))
+    "Great Bay Near Fairy Fountain": "can_hookshot && (has_explosives || trick_keg_explosives || short_hook_anywhere)" #|| (can_use_ice_arrows && (has_mask_zora || can_hookshot_short))
     "Zora Cape Grotto": "can_break_boulders"
   locations:
     "Zora Cape Underwater Chest": "has_mask_zora"
@@ -2410,8 +2410,8 @@
 "Great Bay Near Fairy Fountain":
   region: ZORA_CAPE
   exits:
-    "Zora Cape": "true"
-    "Great Bay Fairy Fountain": "has_explosives || trick_keg_explosives || short_hook_anywhere"
+    "Zora Cape": "cond(setting(erIndoorsMajor), has_explosives || trick_keg_explosives, true)"
+    "Great Bay Fairy Fountain": "true"
 "Great Bay Fairy Fountain":
   region: ENTRANCE
   exits:
@@ -2476,7 +2476,7 @@
   exits:
     "Zora Hall": "true"
   locations:
-    "Zora Hall Evan HP": "can_play_evan && cond(!setting(erDungeons, none) && setting(bossWarpPads, Remains), has_mask_zora, true)" #This conditional is necessary since Evan is not in his room in clear state, so you need to guarantee Zora for the check to be accessible.
+    "Zora Hall Evan HP": "can_play_evan && cond(setting(erMajorDungeons) && (setting(bossWarpPads, Remains) || (trick(MM_GBT_CENTRAL_GEYSER) && (trick(MM_GBT_WATERWHEEL_GORON) || setting(hookshotAnywhereMm)))), has_mask_zora, true)" #This conditional is necessary since Evan is not in his room in clear state, so you need to guarantee Zora for the check to be accessible.
 "Lulu's Room":
   region: ENTRANCE
   exits:
@@ -2606,7 +2606,7 @@
     "Beneath The Graveyard Night 2": "soul_stalchild && has(MASK_CAPTAIN) && is_night2"
     "Beneath The Graveyard Night 3": "soul_stalchild && has(MASK_CAPTAIN) && is_night3"
   locations:
-    "Ikana Graveyard Captain Mask": "soul(SOUL_CAPTAIN_KEETA) && can_play_awakening && has_arrows && can_fight"
+    "Ikana Graveyard Captain Mask": "soul_enemy(SOUL_ENEMY_CAPTAIN_KEETA) && can_play_awakening && has_arrows && can_fight"
     "Ikana Graveyard Grass 1": "true"
     "Ikana Graveyard Grass 2": "true"
     "Ikana Graveyard Grass 3": "true"
@@ -2658,7 +2658,7 @@
     "Ikana Graveyard": "true"
     "Beneath The Graveyard Night 2": "short_hook_anywhere"
   locations:
-    "Beneath The Graveyard Chest": "soul(SOUL_BAD_BAT) && (can_fight || has_explosives || has_arrows || can_hookshot_short || has(MASK_DEKU))"
+    "Beneath The Graveyard Chest": "soul_enemy(SOUL_ENEMY_BAD_BAT) && (can_fight || has_explosives || has_arrows || can_hookshot_short || has(MASK_DEKU))"
     "Beneath The Graveyard Song of Storms": "soul_iron_knuckle && (has_weapon || has_mask_goron || has_explosives) && (has_sticks || can_use_fire_arrows)"
     "Beneath The Graveyard Pot Night 1 Early 1": "true"
     "Beneath The Graveyard Pot Night 1 Early 2": "true"

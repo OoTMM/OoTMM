@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/item.h>
+#include <combo/souls.h>
 
 static const u16 kSwords[] = {
     ITEM_NONE,
@@ -345,17 +346,6 @@ static void refillMagic(int level)
 {
     gMmSave.playerData.magicLevel = level;
     gMmSave.playerData.magicAmount = level * 0x30;
-}
-
-void comboAddSoulMm(s16 gi)
-{
-    int index;
-
-    index = gi - GI_MM_SOUL_OCTOROK;
-    if (index >= 32)
-        gMmSouls2 |= (1 << (index - 32));
-    else
-        gMmSouls1 |= (1 << index);
 }
 
 void comboAddCommonItemMm(int sid, int noEffect)
@@ -713,84 +703,84 @@ void comboAddItemSharedMm(s16 gi, int noEffect)
         }
     }
 
-    if (comboConfig(CFG_SHARED_SOULS))
+    if (comboConfig(CFG_SHARED_SOULS_ENEMY))
     {
         switch (gi)
         {
-        case GI_MM_SOUL_OCTOROK:
-            comboAddSoulOot(GI_OOT_SOUL_OCTOROK);
+        case GI_MM_SOUL_ENEMY_OCTOROK:
+            comboAddSoulOot(GI_OOT_SOUL_ENEMY_OCTOROK);
             break;
-        case GI_MM_SOUL_WALLMASTER:
-            comboAddSoulOot(GI_OOT_SOUL_WALLMASTER);
+        case GI_MM_SOUL_ENEMY_WALLMASTER:
+            comboAddSoulOot(GI_OOT_SOUL_ENEMY_WALLMASTER);
             break;
-        case GI_MM_SOUL_DODONGO:
-            comboAddSoulOot(GI_OOT_SOUL_DODONGO);
+        case GI_MM_SOUL_ENEMY_DODONGO:
+            comboAddSoulOot(GI_OOT_SOUL_ENEMY_DODONGO);
             break;
-        case GI_MM_SOUL_KEESE:
-            comboAddSoulOot(GI_OOT_SOUL_KEESE);
+        case GI_MM_SOUL_ENEMY_KEESE:
+            comboAddSoulOot(GI_OOT_SOUL_ENEMY_KEESE);
             break;
-        case GI_MM_SOUL_TEKTITE:
-            comboAddSoulOot(GI_OOT_SOUL_TEKTITE);
+        case GI_MM_SOUL_ENEMY_TEKTITE:
+            comboAddSoulOot(GI_OOT_SOUL_ENEMY_TEKTITE);
             break;
-        case GI_MM_SOUL_PEAHAT:
-            comboAddSoulOot(GI_OOT_SOUL_PEAHAT);
+        case GI_MM_SOUL_ENEMY_PEAHAT:
+            comboAddSoulOot(GI_OOT_SOUL_ENEMY_PEAHAT);
             break;
-        case GI_MM_SOUL_LIZALFOS_DINALFOS:
-            comboAddSoulOot(GI_OOT_SOUL_LIZALFOS_DINALFOS);
+        case GI_MM_SOUL_ENEMY_LIZALFOS_DINALFOS:
+            comboAddSoulOot(GI_OOT_SOUL_ENEMY_LIZALFOS_DINALFOS);
             break;
-        case GI_MM_SOUL_SKULLTULA:
-            comboAddSoulOot(GI_OOT_SOUL_SKULLTULA);
+        case GI_MM_SOUL_ENEMY_SKULLTULA:
+            comboAddSoulOot(GI_OOT_SOUL_ENEMY_SKULLTULA);
             break;
-        case GI_MM_SOUL_ARMOS:
-            comboAddSoulOot(GI_OOT_SOUL_ARMOS);
+        case GI_MM_SOUL_ENEMY_ARMOS:
+            comboAddSoulOot(GI_OOT_SOUL_ENEMY_ARMOS);
             break;
-        case GI_MM_SOUL_DEKU_BABA:
-            comboAddSoulOot(GI_OOT_SOUL_DEKU_BABA);
+        case GI_MM_SOUL_ENEMY_DEKU_BABA:
+            comboAddSoulOot(GI_OOT_SOUL_ENEMY_DEKU_BABA);
             break;
-        case GI_MM_SOUL_DEKU_SCRUB:
-            comboAddSoulOot(GI_OOT_SOUL_DEKU_SCRUB);
+        case GI_MM_SOUL_ENEMY_DEKU_SCRUB:
+            comboAddSoulOot(GI_OOT_SOUL_ENEMY_DEKU_SCRUB);
             break;
-        case GI_MM_SOUL_BUBBLE:
-            comboAddSoulOot(GI_OOT_SOUL_BUBBLE);
+        case GI_MM_SOUL_ENEMY_BUBBLE:
+            comboAddSoulOot(GI_OOT_SOUL_ENEMY_BUBBLE);
             break;
-        case GI_MM_SOUL_BEAMOS:
-            comboAddSoulOot(GI_OOT_SOUL_BEAMOS);
+        case GI_MM_SOUL_ENEMY_BEAMOS:
+            comboAddSoulOot(GI_OOT_SOUL_ENEMY_BEAMOS);
             break;
-        case GI_MM_SOUL_REDEAD_GIBDO:
-            comboAddSoulOot(GI_OOT_SOUL_REDEAD_GIBDO);
+        case GI_MM_SOUL_ENEMY_REDEAD_GIBDO:
+            comboAddSoulOot(GI_OOT_SOUL_ENEMY_REDEAD_GIBDO);
             break;
-        case GI_MM_SOUL_SKULLWALLTULA:
-            comboAddSoulOot(GI_OOT_SOUL_SKULLWALLTULA);
+        case GI_MM_SOUL_ENEMY_SKULLWALLTULA:
+            comboAddSoulOot(GI_OOT_SOUL_ENEMY_SKULLWALLTULA);
             break;
-        case GI_MM_SOUL_SHELL_BLADE:
-            comboAddSoulOot(GI_OOT_SOUL_SHELL_BLADE);
+        case GI_MM_SOUL_ENEMY_SHELL_BLADE:
+            comboAddSoulOot(GI_OOT_SOUL_ENEMY_SHELL_BLADE);
             break;
-        case GI_MM_SOUL_LIKE_LIKE:
-            comboAddSoulOot(GI_OOT_SOUL_LIKE_LIKE);
+        case GI_MM_SOUL_ENEMY_LIKE_LIKE:
+            comboAddSoulOot(GI_OOT_SOUL_ENEMY_LIKE_LIKE);
             break;
-        case GI_MM_SOUL_IRON_KNUCKLE:
-            comboAddSoulOot(GI_OOT_SOUL_IRON_KNUCKLE);
+        case GI_MM_SOUL_ENEMY_IRON_KNUCKLE:
+            comboAddSoulOot(GI_OOT_SOUL_ENEMY_IRON_KNUCKLE);
             break;
-        case GI_MM_SOUL_FREEZARD:
-            comboAddSoulOot(GI_OOT_SOUL_FREEZARD);
+        case GI_MM_SOUL_ENEMY_FREEZARD:
+            comboAddSoulOot(GI_OOT_SOUL_ENEMY_FREEZARD);
             break;
-        case GI_MM_SOUL_WOLFOS:
-            comboAddSoulOot(GI_OOT_SOUL_WOLFOS);
+        case GI_MM_SOUL_ENEMY_WOLFOS:
+            comboAddSoulOot(GI_OOT_SOUL_ENEMY_WOLFOS);
             break;
-        case GI_MM_SOUL_GUAY:
-            comboAddSoulOot(GI_OOT_SOUL_GUAY);
+        case GI_MM_SOUL_ENEMY_GUAY:
+            comboAddSoulOot(GI_OOT_SOUL_ENEMY_GUAY);
             break;
-        case GI_MM_SOUL_FLYING_POT:
-            comboAddSoulOot(GI_OOT_SOUL_FLYING_POT);
+        case GI_MM_SOUL_ENEMY_FLYING_POT:
+            comboAddSoulOot(GI_OOT_SOUL_ENEMY_FLYING_POT);
             break;
-        case GI_MM_SOUL_FLOORMASTER:
-            comboAddSoulOot(GI_OOT_SOUL_FLOORMASTER);
+        case GI_MM_SOUL_ENEMY_FLOORMASTER:
+            comboAddSoulOot(GI_OOT_SOUL_ENEMY_FLOORMASTER);
             break;
-        case GI_MM_SOUL_LEEVER:
-            comboAddSoulOot(GI_OOT_SOUL_LEEVER);
+        case GI_MM_SOUL_ENEMY_LEEVER:
+            comboAddSoulOot(GI_OOT_SOUL_ENEMY_LEEVER);
             break;
-        case GI_MM_SOUL_STALCHILD:
-            comboAddSoulOot(GI_OOT_SOUL_STALCHILD);
+        case GI_MM_SOUL_ENEMY_STALCHILD:
+            comboAddSoulOot(GI_OOT_SOUL_ENEMY_STALCHILD);
             break;
         }
     }
@@ -1329,57 +1319,57 @@ int comboAddItemMm(s16 gi, int noEffect)
     case GI_MM_OWL_STONE_TOWER:
         gMmOwlFlags |= (1 << 9);
         break;
-    case GI_MM_SOUL_OCTOROK:
-    case GI_MM_SOUL_WALLMASTER:
-    case GI_MM_SOUL_DODONGO:
-    case GI_MM_SOUL_KEESE:
-    case GI_MM_SOUL_TEKTITE:
-    case GI_MM_SOUL_PEAHAT:
-    case GI_MM_SOUL_LIZALFOS_DINALFOS:
-    case GI_MM_SOUL_SKULLTULA:
-    case GI_MM_SOUL_ARMOS:
-    case GI_MM_SOUL_DEKU_BABA:
-    case GI_MM_SOUL_DEKU_SCRUB:
-    case GI_MM_SOUL_BUBBLE:
-    case GI_MM_SOUL_BEAMOS:
-    case GI_MM_SOUL_REDEAD_GIBDO:
-    case GI_MM_SOUL_SKULLWALLTULA:
-    case GI_MM_SOUL_SHELL_BLADE:
-    case GI_MM_SOUL_LIKE_LIKE:
-    case GI_MM_SOUL_IRON_KNUCKLE:
-    case GI_MM_SOUL_FREEZARD:
-    case GI_MM_SOUL_WOLFOS:
-    case GI_MM_SOUL_GUAY:
-    case GI_MM_SOUL_FLYING_POT:
-    case GI_MM_SOUL_FLOORMASTER:
-    case GI_MM_SOUL_CHUCHU:
-    case GI_MM_SOUL_DEEP_PYTHON:
-    case GI_MM_SOUL_SKULLFISH:
-    case GI_MM_SOUL_DEXIHAND:
-    case GI_MM_SOUL_DRAGONFLY:
-    case GI_MM_SOUL_EENO:
-    case GI_MM_SOUL_EYEGORE:
-    case GI_MM_SOUL_HIPLOOP:
-    case GI_MM_SOUL_REAL_BOMBCHU:
-    case GI_MM_SOUL_TAKKURI:
-    case GI_MM_SOUL_BOE:
-    case GI_MM_SOUL_NEJIRON:
-    case GI_MM_SOUL_BIO_BABA:
-    case GI_MM_SOUL_GARO:
-    case GI_MM_SOUL_WIZZROBE:
-    case GI_MM_SOUL_GOMESS:
-    case GI_MM_SOUL_GEKKO:
-    case GI_MM_SOUL_BAD_BAT:
-    case GI_MM_SOUL_SNAPPER:
-    case GI_MM_SOUL_WART:
-    case GI_MM_SOUL_CAPTAIN_KEETA:
-    case GI_MM_SOUL_IGOS:
-    case GI_MM_SOUL_ODOLWA:
-    case GI_MM_SOUL_GOHT:
-    case GI_MM_SOUL_GYORG:
-    case GI_MM_SOUL_TWINMOLD:
-    case GI_MM_SOUL_STALCHILD:
-    case GI_MM_SOUL_LEEVER:
+    case GI_MM_SOUL_ENEMY_OCTOROK:
+    case GI_MM_SOUL_ENEMY_WALLMASTER:
+    case GI_MM_SOUL_ENEMY_DODONGO:
+    case GI_MM_SOUL_ENEMY_KEESE:
+    case GI_MM_SOUL_ENEMY_TEKTITE:
+    case GI_MM_SOUL_ENEMY_PEAHAT:
+    case GI_MM_SOUL_ENEMY_LIZALFOS_DINALFOS:
+    case GI_MM_SOUL_ENEMY_SKULLTULA:
+    case GI_MM_SOUL_ENEMY_ARMOS:
+    case GI_MM_SOUL_ENEMY_DEKU_BABA:
+    case GI_MM_SOUL_ENEMY_DEKU_SCRUB:
+    case GI_MM_SOUL_ENEMY_BUBBLE:
+    case GI_MM_SOUL_ENEMY_BEAMOS:
+    case GI_MM_SOUL_ENEMY_REDEAD_GIBDO:
+    case GI_MM_SOUL_ENEMY_SKULLWALLTULA:
+    case GI_MM_SOUL_ENEMY_SHELL_BLADE:
+    case GI_MM_SOUL_ENEMY_LIKE_LIKE:
+    case GI_MM_SOUL_ENEMY_IRON_KNUCKLE:
+    case GI_MM_SOUL_ENEMY_FREEZARD:
+    case GI_MM_SOUL_ENEMY_WOLFOS:
+    case GI_MM_SOUL_ENEMY_GUAY:
+    case GI_MM_SOUL_ENEMY_FLYING_POT:
+    case GI_MM_SOUL_ENEMY_FLOORMASTER:
+    case GI_MM_SOUL_ENEMY_CHUCHU:
+    case GI_MM_SOUL_ENEMY_DEEP_PYTHON:
+    case GI_MM_SOUL_ENEMY_SKULLFISH:
+    case GI_MM_SOUL_ENEMY_DEXIHAND:
+    case GI_MM_SOUL_ENEMY_DRAGONFLY:
+    case GI_MM_SOUL_ENEMY_EENO:
+    case GI_MM_SOUL_ENEMY_EYEGORE:
+    case GI_MM_SOUL_ENEMY_HIPLOOP:
+    case GI_MM_SOUL_ENEMY_REAL_BOMBCHU:
+    case GI_MM_SOUL_ENEMY_TAKKURI:
+    case GI_MM_SOUL_ENEMY_BOE:
+    case GI_MM_SOUL_ENEMY_NEJIRON:
+    case GI_MM_SOUL_ENEMY_BIO_BABA:
+    case GI_MM_SOUL_ENEMY_GARO:
+    case GI_MM_SOUL_ENEMY_WIZZROBE:
+    case GI_MM_SOUL_ENEMY_GOMESS:
+    case GI_MM_SOUL_ENEMY_GEKKO:
+    case GI_MM_SOUL_ENEMY_BAD_BAT:
+    case GI_MM_SOUL_ENEMY_SNAPPER:
+    case GI_MM_SOUL_ENEMY_WART:
+    case GI_MM_SOUL_ENEMY_CAPTAIN_KEETA:
+    case GI_MM_SOUL_ENEMY_STALCHILD:
+    case GI_MM_SOUL_ENEMY_LEEVER:
+    case GI_MM_SOUL_BOSS_ODOLWA:
+    case GI_MM_SOUL_BOSS_GOHT:
+    case GI_MM_SOUL_BOSS_GYORG:
+    case GI_MM_SOUL_BOSS_TWINMOLD:
+    case GI_MM_SOUL_BOSS_IGOS:
         comboAddSoulMm(gi);
         break;
     case GI_MM_BUTTON_A:

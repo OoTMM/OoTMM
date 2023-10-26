@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/souls.h>
 
 #define TRIGGER_OOT_SHEIK_COLOSSUS          0x100
 #define TRIGGER_OOT_SHEIK_KAKARIKO          0x101
@@ -62,28 +63,28 @@ void CustomTriggers_HandleTriggerGame(Actor_CustomTriggers* this, GameState_Play
 void CustomTriggers_CheckTriggerGame(Actor_CustomTriggers* this, GameState_Play* play)
 {
     /* Sheik in colossus */
-    if (gSave.entrance == 0x1e1 && !GetEventChk(EV_OOT_CHK_SONG_TP_SPIRIT))
+    if (comboHasSoulOot(GI_OOT_SOUL_NPC_SHEIK) && gSave.entrance == 0x1e1 && !GetEventChk(EV_OOT_CHK_SONG_TP_SPIRIT))
     {
         gComboTriggersData.trigger = TRIGGER_OOT_SHEIK_COLOSSUS;
         return;
     }
 
     /* Sheik in Kakariko */
-    if (play->sceneId == SCE_OOT_KAKARIKO_VILLAGE && gSave.inventory.quest.medallionForest && gSave.inventory.quest.medallionFire && gSave.inventory.quest.medallionWater && gSave.age == AGE_ADULT && !GetEventChk(EV_OOT_CHK_SONG_TP_SHADOW))
+    if (comboHasSoulOot(GI_OOT_SOUL_NPC_SHEIK) && play->sceneId == SCE_OOT_KAKARIKO_VILLAGE && gSave.inventory.quest.medallionForest && gSave.inventory.quest.medallionFire && gSave.inventory.quest.medallionWater && gSave.age == AGE_ADULT && !GetEventChk(EV_OOT_CHK_SONG_TP_SHADOW))
     {
         gComboTriggersData.trigger = TRIGGER_OOT_SHEIK_KAKARIKO;
         return;
     }
 
     /* Saria's Ocarina */
-    if (gSave.entrance == 0x05e0 && !GetEventChk(EV_OOT_CHK_SARIA_OCARINA))
+    if (comboHasSoulOot(GI_OOT_SOUL_NPC_SARIA) && gSave.entrance == 0x05e0 && !GetEventChk(EV_OOT_CHK_SARIA_OCARINA))
     {
         gComboTriggersData.trigger = TRIGGER_OOT_SARIA_OCARINA;
         return;
     }
 
     /* Zelda Light Arrows */
-    if (play->sceneId == SCE_OOT_TEMPLE_OF_TIME && gSave.age == AGE_ADULT && !GetEventChk(EV_OOT_CHK_LIGHT_ARROW))
+    if (comboHasSoulOot(GI_OOT_SOUL_NPC_SHEIK) && comboHasSoulOot(GI_OOT_SOUL_NPC_ZELDA) && play->sceneId == SCE_OOT_TEMPLE_OF_TIME && gSave.age == AGE_ADULT && !GetEventChk(EV_OOT_CHK_LIGHT_ARROW))
     {
         int shouldTrigger;
         if (comboConfig(CFG_OOT_LACS_CUSTOM))

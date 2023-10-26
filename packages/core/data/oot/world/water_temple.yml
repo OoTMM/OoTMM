@@ -44,7 +44,7 @@
 "Water Temple Map Room":
   dungeon: Water
   locations:
-    "Water Temple Map": "soul(SOUL_SPIKE)"
+    "Water Temple Map": "soul_enemy(SOUL_ENEMY_SPIKE)"
 "Water Temple Shell Room":
   dungeon: Water
   locations:
@@ -65,7 +65,7 @@
 "Water Temple Under Center":
   dungeon: Water
   locations:
-    "Water Temple Under Center": "can_hookshot && soul(SOUL_SPIKE) && soul_shell_blade"
+    "Water Temple Under Center": "can_hookshot && soul_enemy(SOUL_ENEMY_SPIKE) && soul_shell_blade"
 "Water Temple Compass Room":
   dungeon: Water
   locations:
@@ -129,8 +129,8 @@
 "Water Temple Dark Link":
   dungeon: Water
   exits:
-    "Water Temple Longshot Room": "soul(SOUL_DARK_LINK) && has_weapon"
-    "Water Temple Before Dark Link": "soul(SOUL_DARK_LINK) && has_weapon"
+    "Water Temple Longshot Room": "soul_enemy(SOUL_ENEMY_DARK_LINK) && has_weapon"
+    "Water Temple Before Dark Link": "soul_enemy(SOUL_ENEMY_DARK_LINK) && has_weapon"
 "Water Temple Longshot Room":
   dungeon: Water
   exits:

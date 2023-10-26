@@ -1,5 +1,4 @@
 #include <combo.h>
-#include <stdbool.h>
 
 union ElegyLockParams 
 {
@@ -36,14 +35,14 @@ u16 Elegy_FadeSpeed(GameState_Play* play, Actor_Player* player)
 }
 
 
-bool Elegy_UpdateCamera(Actor* actor, GameState_Play* play)
+int Elegy_UpdateCamera(Actor* actor, GameState_Play* play)
 {
-    return false;
+    return 0;
 }
 
-bool Elegy_Darken(Actor* actor, GameState_Play* play)
+int Elegy_Darken(Actor* actor, GameState_Play* play)
 {
-    return false;
+    return 0;
 }
 
 void Elegy_Update(Actor* actor, GameState_Play* play)

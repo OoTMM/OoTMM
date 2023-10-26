@@ -6,7 +6,7 @@ import { Game } from "../config";
 import { World, WorldCheck } from '../logic/world';
 import { DUNGEONS, Settings, SPECIAL_CONDS, SPECIAL_CONDS_FIELDS } from '../settings';
 import { HINTS_PATHS, HintGossip, WorldHints } from '../logic/hints';
-import { countMapAdd, gameId, padBuffer16, toU16Buffer, toU32Buffer, toU8Buffer } from '../util';
+import { countMapAdd, gameId, padBuffer16, toI8Buffer, toU16Buffer, toU32Buffer, toU8Buffer } from '../util';
 import { Patchfile } from './patchfile';
 import { LOCATIONS_ZELDA, makeLocation, makePlayerLocations } from '../logic/locations';
 import { CONFVARS_VALUES, Confvar } from '../confvars';
@@ -151,6 +151,10 @@ const gi = (settings: Settings, game: Game, item: Item, generic: boolean) => {
     if (ItemHelpers.isSmallKeyHideout(item) && settings.smallKeyShuffleHideout !== 'anywhere') {
       itemId = gameId(game, 'SMALL_KEY', '_');
     } else if (ItemHelpers.isKeyRingHideout(item) && settings.smallKeyShuffleHideout !== 'anywhere') {
+      itemId = gameId(game, 'KEY_RING', '_');
+    } else if (ItemHelpers.isSmallKeyTCG(item) && settings.smallKeyShuffleChestGame !== 'anywhere') {
+      itemId = gameId(game, 'SMALL_KEY', '_');
+    } else if (ItemHelpers.isKeyRingTCG(item) && settings.smallKeyShuffleChestGame !== 'anywhere') {
       itemId = gameId(game, 'KEY_RING', '_');
     } else if (ItemHelpers.isSmallKeyRegularOot(item) && settings.smallKeyShuffleOot === 'ownDungeon' && settings.erBoss === 'none') {
       itemId = gameId(game, 'SMALL_KEY', '_');
@@ -681,6 +685,7 @@ export const randomizerData = (worldId: number, logic: LogicResult): Buffer => {
   buffers.push(prices(worldId, logic));
   buffers.push(randomizerTriforce(logic));
   buffers.push(randomizerHints(worldId, logic));
+  buffers.push(toI8Buffer(logic.hints[worldId].staticHintsImportances));
   buffers.push(zoraSapphireBuffer(worldId, logic));
   buffers.push(randomizerBoss(worldId, logic));
   buffers.push(randomizerDungeons(worldId, logic));

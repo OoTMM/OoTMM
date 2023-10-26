@@ -50,10 +50,10 @@ void EnZot_DisplayBeaverHint(Actor* this, GameState_Play* play)
     b = play->msgCtx.font.textBuffer.schar;
     comboTextAppendHeader(&b);
     start = b;
-    comboTextAppendStr(&b, "I've heared that the beavers are betting ");
-    comboTextAppendItemNameQuery(&b, &q1, TF_PREPOS | TF_PROGRESSIVE);
+    comboTextAppendStr(&b, "I've heard that the beavers are betting ");
+    comboTextAppendItemNameQueryEx(&b, &q1, TF_PREPOS | TF_PROGRESSIVE, gComboData.staticHintsImportance[14]);
     comboTextAppendStr(&b, " and ");
-    comboTextAppendItemNameQuery(&b, &q2, TF_PREPOS | TF_PROGRESSIVE);
+    comboTextAppendItemNameQueryEx(&b, &q2, TF_PREPOS | TF_PROGRESSIVE, gComboData.staticHintsImportance[15]);
     comboTextAppendStr(&b, "." TEXT_SIGNAL TEXT_END);
     comboTextAutoLineBreaks(start);
 }

@@ -2,13 +2,13 @@
   dungeon: GTG
   exits:
     "Gerudo Fortress Exterior": "true"
-    "Gerudo Training Grounds Slopes": "has_weapon && soul(SOUL_STALFOS)"
+    "Gerudo Training Grounds Slopes": "has_weapon && soul_enemy(SOUL_ENEMY_STALFOS)"
     "Gerudo Training Grounds Right Side": "has_explosives && has_weapon && soul_beamos && soul_lizalfos_dinalfos"
     "Gerudo Training Grounds Maze": "true"
   locations:
     "Gerudo Training Grounds Entrance 1": "can_hit_triggers_distance"
     "Gerudo Training Grounds Entrance 2": "can_hit_triggers_distance"
-    "Gerudo Training Grounds Stalfos": "has_weapon && soul(SOUL_STALFOS)"
+    "Gerudo Training Grounds Stalfos": "has_weapon && soul_enemy(SOUL_ENEMY_STALFOS)"
 "Gerudo Training Grounds Slopes":
   dungeon: GTG
   exits:
@@ -95,12 +95,12 @@
 "Gerudo Training Grounds Hammer":
   dungeon: GTG
   exits:
-    "Gerudo Training Grounds Lava": "soul(SOUL_TORCH_SLUG) && soul_keese && (has_weapon || can_use_sticks || can_hammer || can_use_bow)"
+    "Gerudo Training Grounds Lava": "soul_enemy(SOUL_ENEMY_TORCH_SLUG) && soul_keese && (has_weapon || can_use_sticks || can_hammer || can_use_bow)"
     "Gerudo Training Grounds Statue": "can_hammer && can_hit_triggers_distance"
   locations:
     "Gerudo Training Grounds Hammer Room Switch": "can_hammer"
-    "Gerudo Training Grounds Hammer Room": "soul_keese && soul(SOUL_TORCH_SLUG) && (has_weapon || can_use_sticks || can_hammer || can_use_bow)"
-    "Gerudo Training Grounds SR Lava Back Center": "soul_keese && soul(SOUL_TORCH_SLUG) && (has_weapon || can_use_sticks || can_hammer || can_use_bow) && can_hookshot"
+    "Gerudo Training Grounds Hammer Room": "soul_keese && soul_enemy(SOUL_ENEMY_TORCH_SLUG) && (has_weapon || can_use_sticks || can_hammer || can_use_bow)"
+    "Gerudo Training Grounds SR Lava Back Center": "soul_keese && soul_enemy(SOUL_ENEMY_TORCH_SLUG) && (has_weapon || can_use_sticks || can_hammer || can_use_bow) && can_hookshot"
     "Gerudo Training Grounds SR Lava Back Right": "true"
 "Gerudo Training Grounds Statue":
   dungeon: GTG

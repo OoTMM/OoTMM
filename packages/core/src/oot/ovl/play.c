@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/souls.h>
 
 extern void* gMmMag;
 GameState_Play* gPlay;
@@ -13,11 +14,13 @@ static void debugCheat(GameState_Play* play)
 
         gSave.inventory.quest.gerudoCard = 1;
         gSave.inventory.dungeonKeys[SCE_OOT_TEMPLE_FIRE] = 8;
+        gSave.inventory.dungeonKeys[SCE_OOT_TREASURE_SHOP] = 6;
         gSave.inventory.items[ITS_OOT_STICKS] = ITEM_OOT_STICK;
         gSave.inventory.items[ITS_OOT_NUTS] = ITEM_OOT_NUT;
         gSave.inventory.items[ITS_OOT_BOMBS] = ITEM_OOT_BOMB;
         gSave.inventory.items[ITS_OOT_BOW] = ITEM_OOT_BOW;
         gSave.inventory.items[ITS_OOT_ARROW_FIRE] = ITEM_OOT_ARROW_FIRE;
+        gSave.inventory.items[ITS_OOT_ARROW_ICE] = ITEM_OOT_ARROW_ICE;
         gSave.inventory.items[ITS_OOT_ARROW_LIGHT] = ITEM_OOT_ARROW_LIGHT;
         gSave.inventory.items[ITS_OOT_SLINGSHOT] = ITEM_OOT_SLINGSHOT;
         gSave.inventory.items[ITS_OOT_OCARINA] = ITEM_OOT_OCARINA_TIME;
@@ -150,18 +153,6 @@ static void eventFixes(GameState_Play* play)
     if (comboSpecialCond(SPECIAL_BRIDGE))
     {
         SetEventChk(EV_OOT_CHK_RAINBOW_BRIDGE);
-    }
-
-    /* Open Trials */
-    if (gSave.entrance == 0x0467)
-    {
-        SetEventChk(EV_OOT_CHK_TRIAL_LIGHT);
-        SetEventChk(EV_OOT_CHK_TRIAL_FIRE);
-        SetEventChk(EV_OOT_CHK_TRIAL_SHADOW);
-        SetEventChk(EV_OOT_CHK_TRIAL_WATER);
-        SetEventChk(EV_OOT_CHK_TRIAL_FOREST);
-        SetEventChk(EV_OOT_CHK_TRIAL_SPIRIT);
-        SetEventChk(EN_OOT_CHK_GANON_BARRIER);
     }
 }
 
@@ -321,6 +312,10 @@ void hookPlay_Init(GameState_Play* play)
     else if (gSave.entrance == 0x006b)
     {
         endGame();
+    }
+    else if (gSave.entrance == 0x517 && !comboHasSoulOot(GI_OOT_SOUL_NPC_ZELDA))
+    {
+        gSave.entrance = ENTR_OOT_GANON_TOWER;
     }
 
     comboCacheClear();

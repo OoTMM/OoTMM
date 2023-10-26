@@ -37,6 +37,7 @@
 .plando-select {
   flex: 1;
   display: inline-block;
+  min-width: 200px;
 }
 
 .plando-remove {

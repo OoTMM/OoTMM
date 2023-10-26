@@ -7,7 +7,13 @@
 typedef struct PACKED ALIGNED(4) Actor_Player
 {
     Actor           base;
-    char            unk_13c[0x48];
+    char            unk_13c[0x04];
+    u8              heldItemButton;
+    u8              itemAction;
+    u8              heldItemId;
+    u8              boots;
+    u8              heldItemAction;
+    char            unk_145[0x3f];
     OSMesgQueue     objMsgQueue;
     OSMesg          objMsg;
     void*           objBuffer;
@@ -25,5 +31,13 @@ typedef struct PACKED ALIGNED(4) Actor_Player
 Actor_Player;
 
 _Static_assert(sizeof(Actor_Player) == 0xa6c, "Actor_Player size is wrong");
+
+ASSERT_OFFSET(Actor_Player, unk_13c,        0x13c);
+ASSERT_OFFSET(Actor_Player, heldItemButton, 0x140);
+ASSERT_OFFSET(Actor_Player, itemAction,     0x141);
+ASSERT_OFFSET(Actor_Player, heldItemId,     0x142);
+ASSERT_OFFSET(Actor_Player, boots,          0x143);
+ASSERT_OFFSET(Actor_Player, heldItemAction, 0x144);
+ASSERT_OFFSET(Actor_Player, unk_145,        0x145);
 
 #endif

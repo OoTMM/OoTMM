@@ -205,12 +205,16 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
   case 0:
     break;
   case 1:
-    base.enemySoulsOot = true;
-    base.enemySoulsMm = true;
+    base.soulsEnemyOot = true;
+    base.soulsEnemyMm = true;
+    base.soulsBossOot = true;
+    base.soulsBossMm = true;
     break;
   default:
-    base.enemySoulsMm = booleanWeighted(random, 0.5);
-    base.enemySoulsOot = booleanWeighted(random, 0.5);
+    base.soulsEnemyOot = booleanWeighted(random, 0.5);;
+    base.soulsEnemyMm = booleanWeighted(random, 0.5);;
+    base.soulsBossOot = booleanWeighted(random, 0.5);;
+    base.soulsBossMm = booleanWeighted(random, 0.5);;
   }
 
   /* Dungeon age modifiers - 25% all true, 25% all false, 50% individual */
@@ -362,7 +366,7 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
     base.sharedMaskKeaton = true;
     base.sharedWallets = true;
     base.sharedHealth = true;
-    base.sharedSouls = true;
+    base.sharedSoulsEnemy = true;
     base.sharedSkeletonKey = true;
     break;
   default:
@@ -375,7 +379,7 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
     base.sharedOcarina = booleanWeighted(random, 0.5);
     base.sharedWallets = booleanWeighted(random, 0.5);
     base.sharedHealth = booleanWeighted(random, 0.5);
-    base.sharedSouls = booleanWeighted(random, 0.5);
+    base.sharedSoulsEnemy = booleanWeighted(random, 0.5);
     base.sharedSkeletonKey = booleanWeighted(random, 0.5);
 
     /* Masks - grouping */
@@ -521,12 +525,14 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
       base.erGanonCastle = true;
       base.erGanonTower = true;
       base.erIkanaCastle = true;
+      base.erMajorDungeons = true;
       base.erMinorDungeons = true;
       base.erPirateFortress = true;
       base.erSecretShrine = true;
       base.erSpiderHouses = true;
       base.erRegionsExtra = true;
       base.erRegionsShortcuts = true;
+      base.erIndoorsMajor = true;
       base.erIndoorsExtra = true;
       base.erOneWaysMajor = true;
       base.erOneWaysIkana = true;
@@ -539,12 +545,14 @@ export function applyRandomSettings(rnd: OptionRandomSettings, oldSettings: Sett
       base.erGanonCastle = booleanWeighted(random, 0.5);
       base.erGanonTower = booleanWeighted(random, 0.5);
       base.erIkanaCastle = booleanWeighted(random, 0.5);
+      base.erMajorDungeons = booleanWeighted(random, 0.5);
       base.erMinorDungeons = booleanWeighted(random, 0.5);
       base.erPirateFortress = booleanWeighted(random, 0.5);
       base.erSecretShrine = booleanWeighted(random, 0.5);
       base.erSpiderHouses = booleanWeighted(random, 0.5);
       base.erRegionsExtra = booleanWeighted(random, 0.5);
       base.erRegionsShortcuts = booleanWeighted(random, 0.5);
+      base.erIndoorsMajor = booleanWeighted(random, 0.5);
       base.erIndoorsExtra = booleanWeighted(random, 0.5);
       base.erOneWaysMajor = booleanWeighted(random, 0.5);
       base.erOneWaysIkana = booleanWeighted(random, 0.5);

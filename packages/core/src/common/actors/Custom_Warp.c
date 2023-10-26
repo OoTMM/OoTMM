@@ -36,7 +36,7 @@ static void CustomWarp_OnTrigger(Actor_CustomWarp* this, GameState_Play* play)
         break;
     case SWITCH_COAST_CLEAR:
         MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_GB);
-        play->nextEntrance = 0x6a70;
+        play->nextEntrance = ENTR_MM_GREAT_BAY_COAST_FROM_LABORATORY;
         break;
     }
 }
@@ -121,7 +121,7 @@ void comboSpawnCustomWarps(GameState_Play* play)
     variable = -1;
 
 #if defined(GAME_MM)
-    if ((comboConfig(CFG_ER_DUNGEONS) || gComboData.preCompleted & (1 << DUNGEONID_TEMPLE_SNOWHEAD)) && play->sceneId == SCE_MM_MOUNTAIN_VILLAGE_WINTER && gMiscFlags.erSpring)
+    if ((comboConfig(CFG_ER_MAJOR_DUNGEONS) || gComboData.preCompleted & (1 << DUNGEONID_TEMPLE_SNOWHEAD)) && play->sceneId == SCE_MM_MOUNTAIN_VILLAGE_WINTER && gMiscFlags.erSpring)
     {
         variable = SWITCH_SPRING;
         x = -1200.f;
@@ -129,7 +129,7 @@ void comboSpawnCustomWarps(GameState_Play* play)
         z = 600.f;
     }
 
-    if ((comboConfig(CFG_ER_DUNGEONS) || gComboData.preCompleted & (1 << DUNGEONID_TEMPLE_WOODFALL)) && play->sceneId == SCE_MM_SOUTHERN_SWAMP && !MM_GET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_WF) && gMiscFlags.erSwampClear)
+    if ((comboConfig(CFG_ER_MAJOR_DUNGEONS) || gComboData.preCompleted & (1 << DUNGEONID_TEMPLE_WOODFALL)) && play->sceneId == SCE_MM_SOUTHERN_SWAMP && !MM_GET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_WF) && gMiscFlags.erSwampClear)
     {
         variable = SWITCH_SWAMP_CLEAR;
         x = -910.f;
@@ -137,12 +137,12 @@ void comboSpawnCustomWarps(GameState_Play* play)
         z = -550.f;
     }
 
-    if ((comboConfig(CFG_ER_DUNGEONS) || gComboData.preCompleted & (1 << DUNGEONID_TEMPLE_GREAT_BAY)) && play->sceneId == SCE_MM_ZORA_CAPE && !MM_GET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_GB) && gMiscFlags.erCoastClear)
+    if ((comboConfig(CFG_ER_MAJOR_DUNGEONS) || gComboData.preCompleted & (1 << DUNGEONID_TEMPLE_GREAT_BAY)) && play->sceneId == SCE_MM_GREAT_BAY_COAST && !MM_GET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_GB) && gMiscFlags.erCoastClear)
     {
         variable = SWITCH_COAST_CLEAR;
-        x = -5500.f;
-        y = 43.f;
-        z = 1200.f;
+        x = -3020.f;
+        y = 240.f;
+        z = 3921.f;
     }
 #endif
 

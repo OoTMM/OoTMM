@@ -153,7 +153,7 @@ static void applyStartingEvents(void)
         BITMAP16_SET(gSave.eventsMisc, EV_OOT_INF_KAKARIKO_GATE_OPEN);
     }
 
-    if (comboConfig(CFG_OOT_ZK_OPEN))
+    if (comboConfig(CFG_OOT_KZ_OPEN))
     {
         SetEventChk(EV_OOT_CHK_KING_ZORA_MOVED);
     }
@@ -179,6 +179,18 @@ static void applyStartingEvents(void)
             SetEventChk(EV_OOT_CHK_CARPENTER_1);
             gSave.perm[SCE_OOT_THIEVES_HIDEOUT].switches |= (1 << 1);
         }
+    }
+
+    /* Ganon trials */
+    if (!comboConfig(CFG_OOT_TRIALS))
+    {
+        SetEventChk(EV_OOT_CHK_TRIAL_LIGHT);
+        SetEventChk(EV_OOT_CHK_TRIAL_FIRE);
+        SetEventChk(EV_OOT_CHK_TRIAL_SHADOW);
+        SetEventChk(EV_OOT_CHK_TRIAL_WATER);
+        SetEventChk(EV_OOT_CHK_TRIAL_FOREST);
+        SetEventChk(EV_OOT_CHK_TRIAL_SPIRIT);
+        SetEventChk(EN_OOT_CHK_GANON_BARRIER);
     }
 
     if (comboConfig(CFG_OOT_FREE_SCARECROW))
@@ -217,17 +229,16 @@ void comboCreateSave(void* unk, void* buffer)
     }
 
     /* Apply enemy souls */
-    if (!comboConfig(CFG_OOT_SOULS))
-    {
-        gOotSouls1 = 0xffffffff;
-        gOotSouls2 = 0xffffffff;
-    }
-
-    if (!comboConfig(CFG_MM_SOULS))
-    {
-        gMmSouls1 = 0xffffffff;
-        gMmSouls2 = 0xffffffff;
-    }
+    if (!comboConfig(CFG_OOT_SOULS_ENEMY))
+        memset(gSharedCustomSave.soulsEnemyOot, 0xff, sizeof(gSharedCustomSave.soulsEnemyOot));
+    if (!comboConfig(CFG_MM_SOULS_ENEMY))
+        memset(gSharedCustomSave.soulsEnemyMm, 0xff, sizeof(gSharedCustomSave.soulsEnemyMm));
+    if (!comboConfig(CFG_OOT_SOULS_BOSS))
+        memset(gSharedCustomSave.soulsBossOot, 0xff, sizeof(gSharedCustomSave.soulsBossOot));
+    if (!comboConfig(CFG_MM_SOULS_BOSS))
+        memset(gSharedCustomSave.soulsBossMm, 0xff, sizeof(gSharedCustomSave.soulsBossMm));
+    if (!comboConfig(CFG_OOT_SOULS_NPC))
+        memset(gSharedCustomSave.soulsNpcOot, 0xff, sizeof(gSharedCustomSave.soulsNpcOot));
 
     /* Apply ocarina buttons */
     if (!comboConfig(CFG_OOT_OCARINA_BUTTONS))

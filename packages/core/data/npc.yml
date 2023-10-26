@@ -84,6 +84,7 @@ OOT_FAIRY_SPELL_WIND:           0x52
 OOT_FAIRY_SPELL_LOVE:           0x53
 OOT_WEIRD_EGG:                  0x54
 OOT_POCKET_EGG:                 0x55
+OOT_CHEST_GAME_KEY:             0x56
 
 MM_KOTAKE_RED_POTION:         0x00
 MM_KOUME_PICTOGRAPH_BOX:      0x01

@@ -78,8 +78,8 @@
   events:
     BLUE_FIRE: "has_bottle"
   locations:
-    "MQ Gerudo Training Grounds Stalfos Room Chest": "soul(SOUL_STALFOS) && soul_skulltula"
-    "MQ Gerudo Training Grounds Silver Block Room Chest": "can_lift_silver && soul(SOUL_SPIKE) && soul_freezard"
+    "MQ Gerudo Training Grounds Stalfos Room Chest": "soul_enemy(SOUL_ENEMY_STALFOS) && soul_skulltula"
+    "MQ Gerudo Training Grounds Silver Block Room Chest": "can_lift_silver && soul_enemy(SOUL_ENEMY_SPIKE) && soul_freezard"
 "Gerudo Training Grounds Spinning Statue Room":
   dungeon: GTG
   exits:
@@ -90,7 +90,7 @@
     GTG_LAVA_TARGETS: "silver_rupees_gtg_lava_mq"
   locations:
     "MQ Gerudo Training Grounds Spinning Statue Chest": "can_use_bow"
-    "MQ Gerudo Training Grounds Torch Slug Room Clear Chest": "soul_iron_knuckle && soul(SOUL_TORCH_SLUG)"
+    "MQ Gerudo Training Grounds Torch Slug Room Clear Chest": "soul_iron_knuckle && soul_enemy(SOUL_ENEMY_TORCH_SLUG)"
     "MQ Gerudo Training Grounds Torch Slug Room Switch Chest": "has_ranged_weapon" #You are no longer guaranteed a hook due to silver rupee shuffle.
     "MQ Gerudo Training Grounds Maze Right Side Middle Chest": "event(GTG_LAVA_HAMMER) && (can_longshot || (can_hookshot && (has_fire_arrows || (has_hover_boots && event(GTG_LAVA_TARGETS)) || trick(OOT_MQ_GTG_FLAMES))))"
     "MQ Gerudo Training Grounds Maze Right Side Right Chest": "event(GTG_LAVA_HAMMER) && (can_longshot || (can_hookshot && (has_fire_arrows || (has_hover_boots && event(GTG_LAVA_TARGETS)) || trick(OOT_MQ_GTG_FLAMES))))"

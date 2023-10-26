@@ -60,6 +60,8 @@ function asmPatchGroups(settings: Settings) {
     OOT_SHUFFLE_GRASS: settings.shuffleGrassOot,
     MM_SHUFFLE_GRASS: settings.shuffleGrassMm,
     MM_LENIENT_SPIKES: settings.lenientSpikes,
+    OOT_CHEST_GAME_SHUFFLE: settings.smallKeyShuffleChestGame !== 'vanilla',
+    MM_CLIMB_MOST_SURFACES: settings.climbMostSurfacesMm,
   };
   const keys = Object.keys(groups) as PatchGroup[];
   return keys.filter((k) => groups[k]);

@@ -30,16 +30,16 @@
   events:
     SPIRIT_PARADOX: "can_hammer"
   locations:
-    "MQ Spirit Temple Map Chest": "soul(SOUL_TORCH_SLUG) && (can_use_sticks || has_weapon || (has_explosives && has_nuts))"
-    "MQ Spirit Temple Map Room Back Chest": "soul(SOUL_TORCH_SLUG) && soul_redead_gibdo && soul(SOUL_STALFOS) && soul_keese && soul(SOUL_ANUBIS) && has_weapon && has_bombchu && can_use_slingshot && can_use_din"
+    "MQ Spirit Temple Map Chest": "soul_enemy(SOUL_ENEMY_TORCH_SLUG) && (can_use_sticks || has_weapon || (has_explosives && has_nuts))"
+    "MQ Spirit Temple Map Room Back Chest": "soul_enemy(SOUL_ENEMY_TORCH_SLUG) && soul_redead_gibdo && soul_enemy(SOUL_ENEMY_STALFOS) && soul_keese && soul_enemy(SOUL_ENEMY_ANUBIS) && has_weapon && has_bombchu && can_use_slingshot && can_use_din"
     "MQ Spirit Temple Paradox Chest": "event(SPIRIT_PARADOX)"
     "MQ Spirit Temple Pot Child Entrance": "true"
-    "MQ Spirit Temple Pot Child Boulders 1": "soul(SOUL_TORCH_SLUG) && (can_use_sticks || has_weapon || (has_explosives && has_nuts)) && has_bombchu && can_use_slingshot"
-    "MQ Spirit Temple Pot Child Boulders 2": "soul(SOUL_TORCH_SLUG) && (can_use_sticks || has_weapon || (has_explosives && has_nuts)) && has_bombchu && can_use_slingshot"
-    "MQ Spirit Temple Pot Child Back 1": "soul(SOUL_TORCH_SLUG) && soul_redead_gibdo && soul(SOUL_STALFOS) && has_weapon && has_bombchu && can_use_slingshot"
-    "MQ Spirit Temple Pot Child Back 2": "soul(SOUL_TORCH_SLUG) && soul_redead_gibdo && soul(SOUL_STALFOS) && has_weapon && has_bombchu && can_use_slingshot"
-    "MQ Spirit Temple Pot Child Back 3": "soul(SOUL_TORCH_SLUG) && soul_redead_gibdo && soul(SOUL_STALFOS) && has_weapon && has_bombchu && can_use_slingshot"
-    "MQ Spirit Temple Pot Child Back 4": "soul(SOUL_TORCH_SLUG) && soul_redead_gibdo && soul(SOUL_STALFOS) && has_weapon && has_bombchu && can_use_slingshot"
+    "MQ Spirit Temple Pot Child Boulders 1": "soul_enemy(SOUL_ENEMY_TORCH_SLUG) && (can_use_sticks || has_weapon || (has_explosives && has_nuts)) && has_bombchu && can_use_slingshot"
+    "MQ Spirit Temple Pot Child Boulders 2": "soul_enemy(SOUL_ENEMY_TORCH_SLUG) && (can_use_sticks || has_weapon || (has_explosives && has_nuts)) && has_bombchu && can_use_slingshot"
+    "MQ Spirit Temple Pot Child Back 1": "soul_enemy(SOUL_ENEMY_TORCH_SLUG) && soul_redead_gibdo && soul_enemy(SOUL_ENEMY_STALFOS) && has_weapon && has_bombchu && can_use_slingshot"
+    "MQ Spirit Temple Pot Child Back 2": "soul_enemy(SOUL_ENEMY_TORCH_SLUG) && soul_redead_gibdo && soul_enemy(SOUL_ENEMY_STALFOS) && has_weapon && has_bombchu && can_use_slingshot"
+    "MQ Spirit Temple Pot Child Back 3": "soul_enemy(SOUL_ENEMY_TORCH_SLUG) && soul_redead_gibdo && soul_enemy(SOUL_ENEMY_STALFOS) && has_weapon && has_bombchu && can_use_slingshot"
+    "MQ Spirit Temple Pot Child Back 4": "soul_enemy(SOUL_ENEMY_TORCH_SLUG) && soul_redead_gibdo && soul_enemy(SOUL_ENEMY_STALFOS) && has_weapon && has_bombchu && can_use_slingshot"
 "Spirit Temple Child Upper":
 #All paths into this room guarantee explosives.
   dungeon: Spirit
@@ -48,7 +48,7 @@
   events:
     SPIRIT_PARADOX: "can_hammer && small_keys_spirit(7)" #Adult needs to use up a key just to reach the switch.
   locations:
-    "MQ Spirit Temple Child Upper Ground Chest": "soul_like_like && soul_beamos && soul(SOUL_BABY_DODONGO)" #Explosives are enough for every enemy in this room
+    "MQ Spirit Temple Child Upper Ground Chest": "soul_like_like && soul_beamos && soul_enemy(SOUL_ENEMY_BABY_DODONGO)" #Explosives are enough for every enemy in this room
     "MQ Spirit Temple Child Upper Ledge Chest": "can_hookshot"
     "MQ Spirit Temple Pot Child Climb": "true"
 "Spirit Temple Statue":
@@ -56,7 +56,7 @@
   exits:
     "Spirit Temple Child Upper": "small_keys_spirit(7)"
     "Spirit Temple Sun Block Room": "is_adult || can_play_time || has_hover_boots" #Adult's long legs make the jumps easy
-    "Spirit Temple Adult Lower": "has_fire_arrows && has_mirror_shield && soul(SOUL_STALFOS) && soul_wallmaster && has_weapon"
+    "Spirit Temple Adult Lower": "has_fire_arrows && has_mirror_shield && soul_enemy(SOUL_ENEMY_STALFOS) && soul_wallmaster && has_weapon"
     "Spirit Temple Adult Upper": "is_adult && small_keys_spirit(5)"
     "Spirit Temple Boss": "event(SPIRIT_TEMPLE_LIGHT) && has_mirror_shield && boss_key(BOSS_KEY_SPIRIT) && is_adult"
   events:

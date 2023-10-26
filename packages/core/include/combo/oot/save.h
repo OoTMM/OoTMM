@@ -314,7 +314,8 @@ typedef struct
     u32 triforceWin:1;
     u32 unused2:8;
     u32 bottomlessWallet:1;
-    u32 unused:7;
+    u32 chestGameKey:1;
+    u32 unused:6;
 }
 OotExtraFlags;
 

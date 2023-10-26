@@ -220,6 +220,9 @@
 #define ITEM_MM_MASK_BLAST                  0x47
 #define ITEM_MM_MASK_SCENTS                 0x48
 #define ITEM_MM_MASK_GIANT                  0x49
+#define ITEM_MM_BOW_ARROW_FIRE              0x4a
+#define ITEM_MM_BOW_ARROW_ICE               0x4b
+#define ITEM_MM_BOW_ARROW_LIGHT             0x4c
 #define ITEM_MM_SWORD_KOKIRI                0x4d
 #define ITEM_MM_SWORD_RAZOR                 0x4e
 #define ITEM_MM_SWORD_GILDED                0x4f

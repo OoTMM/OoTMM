@@ -22,7 +22,7 @@
   dungeon: Fire
   exits:
     "Fire Temple": "true"
-    "Fire Temple Boss Key Loop Floor Tiles": "soul_keese && soul(SOUL_TORCH_SLUG)"
+    "Fire Temple Boss Key Loop Floor Tiles": "soul_keese && soul_enemy(SOUL_ENEMY_TORCH_SLUG)"
 "Fire Temple Boss Key Loop Floor Tiles":
   dungeon: Fire
   exits:
@@ -33,10 +33,10 @@
 "Fire Temple Boss Key Loop Flare Dancer":
   dungeon: Fire
   exits:
-    "Fire Temple Boss Key Loop Floor Tiles": "soul(SOUL_FLARE_DANCER)"
-    "Fire Temple Boss Key Loop End": "soul(SOUL_FLARE_DANCER)"
+    "Fire Temple Boss Key Loop Floor Tiles": "soul_enemy(SOUL_ENEMY_FLARE_DANCER)"
+    "Fire Temple Boss Key Loop End": "soul_enemy(SOUL_ENEMY_FLARE_DANCER)"
   locations:
-    "Fire Temple Boss Key Side Chest": "soul(SOUL_FLARE_DANCER) && (is_adult || can_hookshot || climb_anywhere)"
+    "Fire Temple Boss Key Side Chest": "soul_enemy(SOUL_ENEMY_FLARE_DANCER) && (is_adult || can_hookshot || climb_anywhere)"
 "Fire Temple Boss Key Loop End":
   dungeon: Fire
   locations:
@@ -90,7 +90,7 @@
 "Fire Temple Before Miniboss":
   dungeon: Fire
   exits:
-    "Fire Temple After Miniboss": "soul(SOUL_FLARE_DANCER) && has_explosives && (has_bombs || can_hammer || can_hookshot) && (has_weapon || can_hammer || can_use_sticks)"
+    "Fire Temple After Miniboss": "soul_enemy(SOUL_ENEMY_FLARE_DANCER) && has_explosives && (has_bombs || can_hammer || can_hookshot) && (has_weapon || can_hammer || can_use_sticks)"
     "Fire Temple Pillar Ledge": "can_play_time || hookshot_anywhere || climb_anywhere"
   locations:
     "Fire Temple Ring Jail": "can_hammer && can_play_time"

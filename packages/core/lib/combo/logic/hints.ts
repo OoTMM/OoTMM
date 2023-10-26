@@ -33,7 +33,7 @@ const FIXED_HINTS_LOCATIONS = [
   'MM Ocean Spider House Wallet',
   'MM Clock Town Great Fairy',
   'MM Clock Town Great Fairy Alt',
-]
+];
 
 const HINTS_ITEMS_ALWAYS = [
   'OOT_FROGS_FINAL',
@@ -44,6 +44,7 @@ const HINTS_ITEMS_ALWAYS = [
   'MM_DON_GERO_CHOIR',
   'MM_GORON_RACE',
   'MM_GRAVEYARD_NIGHT3',
+  'MM_SONGS_GOSSIPS',
 ];
 
 const HINTS_ITEMS_SOMETIMES = [
@@ -123,6 +124,7 @@ type WorldItemHints = {
   lightArrow: Region;
   oathToOrder: Region;
   ganonBossKey: Region;
+  staticHintsImportances: number[];
 };
 
 export type WorldHints = WorldItemHints & {
@@ -275,6 +277,11 @@ export class LogicPassHints {
 
     /* Non-shuffled hideout keys */
     if ((ItemHelpers.isSmallKeyHideout(item.item) || ItemHelpers.isKeyRingHideout(item.item)) && this.state.settings.smallKeyShuffleHideout !== 'anywhere') {
+      return false;
+    }
+
+    /* Non-shuffled TCG keys */
+    if ((ItemHelpers.isSmallKeyTCG(item.item) || ItemHelpers.isKeyRingTCG(item.item)) && this.state.settings.smallKeyShuffleChestGame !== 'anywhere') {
       return false;
     }
 
@@ -858,11 +865,15 @@ export class LogicPassHints {
         this.markLocation(l);
       }
 
+      /* Compute static hints importance */
+      const staticHintsImportances = FIXED_HINTS_LOCATIONS.map(x => this.locImportance(makeLocation(x, world)));
+
       worldItemHints.push({
         dungeonRewards: locDungeonRewards.map((x) => this.toRegion(world, x)),
         lightArrow: this.toRegion(world, locLightArrow),
         oathToOrder: this.toRegion(world, locOathToOrder),
         ganonBossKey: this.toRegion(world, locGanonBossKey),
+        staticHintsImportances,
       });
     }
 

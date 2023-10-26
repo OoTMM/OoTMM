@@ -1,14 +1,10 @@
 #include <combo.h>
+#include <combo/dungeon.h>
+#include <combo/souls.h>
 
-static int hasSoul(s16 gi)
+static int opt(int x)
 {
-    int soulId;
-
-    soulId = gi - GI_OOT_SOUL_STALFOS;
-    if (soulId >= 32)
-        return !!(gOotSouls2 & (1 << (soulId - 32)));
-    else
-        return !!(gOotSouls1 & (1 << soulId));
+    return x > 0 ? 1 : -1;
 }
 
 static int canSpawnSoul(GameState_Play* play, s16 actorId, u16 variable)
@@ -16,122 +12,203 @@ static int canSpawnSoul(GameState_Play* play, s16 actorId, u16 variable)
     switch (actorId)
     {
     case AC_EN_TEST:
-        return hasSoul(GI_OOT_SOUL_STALFOS);
+        return comboHasSoulOot(GI_OOT_SOUL_ENEMY_STALFOS);
     case AC_BG_BDAN_OBJECTS:
         if (variable & 0xff)
             return 1;
         /* Fallthrough */
     case AC_EN_OKUTA:
     case AC_EN_BIGOKUTA:
-        return hasSoul(GI_OOT_SOUL_OCTOROK);
+        return comboHasSoulOot(GI_OOT_SOUL_ENEMY_OCTOROK);
     case AC_EN_WALLMAS:
-        return hasSoul(GI_OOT_SOUL_WALLMASTER);
+        return comboHasSoulOot(GI_OOT_SOUL_ENEMY_WALLMASTER);
     case AC_EN_DODONGO:
-        return hasSoul(GI_OOT_SOUL_DODONGO);
+        return comboHasSoulOot(GI_OOT_SOUL_ENEMY_DODONGO);
     case AC_EN_FIREFLY:
-        return hasSoul(GI_OOT_SOUL_KEESE);
+        return comboHasSoulOot(GI_OOT_SOUL_ENEMY_KEESE);
     case AC_EN_TITE:
-        return hasSoul(GI_OOT_SOUL_TEKTITE);
+        return comboHasSoulOot(GI_OOT_SOUL_ENEMY_TEKTITE);
     case AC_EN_PEEHAT:
-        return hasSoul(GI_OOT_SOUL_PEAHAT);
+        return comboHasSoulOot(GI_OOT_SOUL_ENEMY_PEAHAT);
     case AC_EN_ZF:
-        return hasSoul(GI_OOT_SOUL_LIZALFOS_DINALFOS);
+        return comboHasSoulOot(GI_OOT_SOUL_ENEMY_LIZALFOS_DINALFOS);
     case AC_EN_GOMA:
         if (play->sceneId == SCE_OOT_LAIR_GOHMA)
             return 1;
-        return hasSoul(GI_OOT_SOUL_GOHMA_LARVA);
+        return comboHasSoulOot(GI_OOT_SOUL_ENEMY_GOHMA_LARVA);
     case AC_EN_BUBBLE:
-        return hasSoul(GI_OOT_SOUL_SHABOM);
+        return comboHasSoulOot(GI_OOT_SOUL_ENEMY_SHABOM);
     case AC_EN_DODOJR:
-        return hasSoul(GI_OOT_SOUL_BABY_DODONGO);
+        return comboHasSoulOot(GI_OOT_SOUL_ENEMY_BABY_DODONGO);
     case AC_EN_TORCH2:
-        return hasSoul(GI_OOT_SOUL_DARK_LINK);
+        return comboHasSoulOot(GI_OOT_SOUL_ENEMY_DARK_LINK);
     case AC_EN_BILI:
     case AC_EN_VALI:
-        return hasSoul(GI_OOT_SOUL_BIRI_BARI);
+        return comboHasSoulOot(GI_OOT_SOUL_ENEMY_BIRI_BARI);
     case AC_EN_TP:
-        return hasSoul(GI_OOT_SOUL_TAILPASARN);
+        return comboHasSoulOot(GI_OOT_SOUL_ENEMY_TAILPASARN);
     case AC_EN_ST:
-        return hasSoul(GI_OOT_SOUL_SKULLTULA);
+        return comboHasSoulOot(GI_OOT_SOUL_ENEMY_SKULLTULA);
     case AC_EN_BW:
-        return hasSoul(GI_OOT_SOUL_TORCH_SLUG);
+        return comboHasSoulOot(GI_OOT_SOUL_ENEMY_TORCH_SLUG);
     case AC_EN_MB:
-        return hasSoul(GI_OOT_SOUL_MOBLIN);
+        return comboHasSoulOot(GI_OOT_SOUL_ENEMY_MOBLIN);
     case AC_EN_AM:
         if (variable == 0)
             return 1;
-        return hasSoul(GI_OOT_SOUL_ARMOS);
+        return comboHasSoulOot(GI_OOT_SOUL_ENEMY_ARMOS);
     case AC_EN_DEKUBABA:
     case AC_EN_KAREBABA:
-        return hasSoul(GI_OOT_SOUL_DEKU_BABA);
+        return comboHasSoulOot(GI_OOT_SOUL_ENEMY_DEKU_BABA);
     case AC_EN_DEKUNUTS:
     case AC_EN_HINTNUTS:
-        return hasSoul(GI_OOT_SOUL_DEKU_SCRUB);
+        return comboHasSoulOot(GI_OOT_SOUL_ENEMY_DEKU_SCRUB);
     case AC_EN_BB:
-        return hasSoul(GI_OOT_SOUL_BUBBLE);
+        return comboHasSoulOot(GI_OOT_SOUL_ENEMY_BUBBLE);
     case AC_EN_VM:
-        return hasSoul(GI_OOT_SOUL_BEAMOS);
+        return comboHasSoulOot(GI_OOT_SOUL_ENEMY_BEAMOS);
     case AC_EN_FLOORMAS:
-        return hasSoul(GI_OOT_SOUL_FLOORMASTER);
+        return comboHasSoulOot(GI_OOT_SOUL_ENEMY_FLOORMASTER);
     case AC_EN_RD:
-        return hasSoul(GI_OOT_SOUL_REDEAD_GIBDO);
+        return comboHasSoulOot(GI_OOT_SOUL_ENEMY_REDEAD_GIBDO);
     case AC_EN_SW:
         if (variable & 0xe000)
             return 1;
-        return hasSoul(GI_OOT_SOUL_SKULLWALLTULA);
+        return comboHasSoulOot(GI_OOT_SOUL_ENEMY_SKULLWALLTULA);
     case AC_EN_FD:
-        return hasSoul(GI_OOT_SOUL_FLARE_DANCER);
+        return comboHasSoulOot(GI_OOT_SOUL_ENEMY_FLARE_DANCER);
     case AC_EN_DH:
     case AC_EN_DHA:
-        return hasSoul(GI_OOT_SOUL_DEAD_HAND);
+        return comboHasSoulOot(GI_OOT_SOUL_ENEMY_DEAD_HAND);
     case AC_EN_SB:
-        return hasSoul(GI_OOT_SOUL_SHELL_BLADE);
+        return comboHasSoulOot(GI_OOT_SOUL_ENEMY_SHELL_BLADE);
     case AC_EN_RR:
-        return hasSoul(GI_OOT_SOUL_LIKE_LIKE);
+        return comboHasSoulOot(GI_OOT_SOUL_ENEMY_LIKE_LIKE);
     case AC_EN_NY:
-        return hasSoul(GI_OOT_SOUL_SPIKE);
+        return comboHasSoulOot(GI_OOT_SOUL_ENEMY_SPIKE);
     case AC_EN_ANUBICE_TAG:
     case AC_EN_ANUBICE:
-        return hasSoul(GI_OOT_SOUL_ANUBIS);
+        return comboHasSoulOot(GI_OOT_SOUL_ENEMY_ANUBIS);
     case AC_EN_IK:
-        return hasSoul(GI_OOT_SOUL_IRON_KNUCKLE);
+        return comboHasSoulOot(GI_OOT_SOUL_ENEMY_IRON_KNUCKLE);
     case AC_EN_SKJ:
         if (gSave.age == AGE_CHILD)
             return 1;
-        return hasSoul(GI_OOT_SOUL_SKULL_KID);
+        return comboHasSoulOot(GI_OOT_SOUL_ENEMY_SKULL_KID);
     case AC_EN_TUBO_TRAP:
-        return hasSoul(GI_OOT_SOUL_FLYING_POT) ? 1 : -1;
+        return opt(comboHasSoulOot(GI_OOT_SOUL_ENEMY_FLYING_POT));
     case AC_EN_FZ:
-        return hasSoul(GI_OOT_SOUL_FREEZARD);
+        return comboHasSoulOot(GI_OOT_SOUL_ENEMY_FREEZARD);
     case AC_EN_WEIYER:
     case AC_EN_EIYER:
-        return hasSoul(GI_OOT_SOUL_STINGER);
+        return comboHasSoulOot(GI_OOT_SOUL_ENEMY_STINGER);
     case AC_EN_WF:
-        return hasSoul(GI_OOT_SOUL_WOLFOS);
+        return comboHasSoulOot(GI_OOT_SOUL_ENEMY_WOLFOS);
     case AC_EN_CROW:
-        return hasSoul(GI_OOT_SOUL_GUAY);
+        return comboHasSoulOot(GI_OOT_SOUL_ENEMY_GUAY);
     case AC_BOSS_GOMA:
-        return hasSoul(GI_OOT_SOUL_QUEEN_GOHMA);
+        return comboHasSoulOot(GI_OOT_SOUL_BOSS_QUEEN_GOHMA);
     case AC_BOSS_DODONGO:
-        return hasSoul(GI_OOT_SOUL_KING_DODONGO);
+        return comboHasSoulOot(GI_OOT_SOUL_BOSS_KING_DODONGO);
     case AC_BOSS_VA:
-        return hasSoul(GI_OOT_SOUL_BARINADE);
+        return comboHasSoulOot(GI_OOT_SOUL_BOSS_BARINADE);
     case AC_BOSS_GANONDROF:
-        return hasSoul(GI_OOT_SOUL_PHANTOM_GANON);
+        return comboHasSoulOot(GI_OOT_SOUL_BOSS_PHANTOM_GANON);
     case AC_BOSS_FD:
-        return hasSoul(GI_OOT_SOUL_VOLVAGIA);
+        return comboHasSoulOot(GI_OOT_SOUL_BOSS_VOLVAGIA);
     case AC_BOSS_MO:
-        return hasSoul(GI_OOT_SOUL_MORPHA);
+        return comboHasSoulOot(GI_OOT_SOUL_BOSS_MORPHA);
     case AC_BOSS_SST:
-        return hasSoul(GI_OOT_SOUL_BONGO_BONGO);
+        return comboHasSoulOot(GI_OOT_SOUL_BOSS_BONGO_BONGO);
     case AC_BOSS_TW:
-        return hasSoul(GI_OOT_SOUL_TWINROVA);
+        return comboHasSoulOot(GI_OOT_SOUL_BOSS_TWINROVA);
     case AC_EN_BA:
-        return hasSoul(GI_OOT_SOUL_PARASITE);
+        return comboHasSoulOot(GI_OOT_SOUL_ENEMY_PARASITE);
     case AC_EN_REEBA:
-        return hasSoul(GI_OOT_SOUL_LEEVER);
+        return comboHasSoulOot(GI_OOT_SOUL_ENEMY_LEEVER);
     case AC_EN_SKB:
-        return hasSoul(GI_OOT_SOUL_STALCHILD);
+        return comboHasSoulOot(GI_OOT_SOUL_ENEMY_STALCHILD);
+    case AC_EN_SA:
+        return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_SARIA));
+    case AC_EN_DU:
+        return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_DARUNIA));
+    case AC_EN_RU1:
+        return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_RUTO));
+    case AC_EN_KZ:
+        return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_KING_ZORA));
+    case AC_EN_NIW_LADY:
+        return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_CUCCO_LADY));
+    case AC_EN_TORYO:
+    case AC_EN_DAIKU:
+        return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_CARPENTERS));
+    case AC_EN_FU:
+        return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_GURU_GURU));
+    case AC_EN_MD:
+        return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_MIDO));
+    case AC_EN_KO:
+        return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_KOKIRI));
+    case AC_EN_OSSAN:
+        switch (variable)
+        {
+        case 0: return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_KOKIRI_SHOPKEEPER));
+        case 1: return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_POTION_SHOPKEEPER));
+        case 2: return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_BOMBCHU_SHOPKEEPER));
+        case 3: return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_POTION_SHOPKEEPER));
+        case 4: return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_BAZAAR_SHOPKEEPER));
+        case 7: return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_ZORA_SHOPKEEPER));
+        case 8: return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_GORON_SHOPKEEPER));
+        default: return 1;
+        }
+        break;
+    case AC_EN_HEISHI2:
+    case AC_EN_HEISHI3:
+    case AC_EN_HEISHI4:
+        return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_HYLIAN_GUARD));
+    case AC_EN_HY:
+    case AC_EN_ANI:
+        return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_HYLIAN_CITIZEN));
+    case AC_EN_MA1:
+    case AC_EN_MA2:
+    case AC_EN_MA3:
+        return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_MALON));
+    case AC_EN_TA:
+        return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_TALON));
+    case AC_EN_FISHING:
+        return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_FISHING_POND_OWNER));
+    case AC_EN_GO:
+        return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_GORON));
+    case AC_EN_GO2:
+        switch (variable & 0x1f)
+        {
+        case 1: return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_GORON_CHILD));
+        case 2: return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_BIGGORON));
+        default: return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_GORON));
+        }
+        break;
+    case AC_EN_GM:
+        return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_MEDIGORON));
+    case AC_EN_ZO:
+    case AC_EN_DIVING_GAME:
+        return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_ZORA));
+    case AC_EN_BOM_BOWL_MAN:
+    case AC_BG_BOWL_WALL:
+        return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_BOMBCHU_BOWLING_LADY));
+    case AC_EN_TAKARA_MAN:
+        return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_TRASURE_CHEST_GAME_OWNER));
+    case AC_EN_SYATEKI_MAN:
+        return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_SHOOTING_GALLERY_OWNER));
+    case AC_EN_TK:
+    case AC_EN_PO_RELAY:
+        return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_DAMPE));
+    case AC_EN_CS:
+        return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_GRAVEYARD_KID));
+    case AC_EN_GB:
+        return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_POE_COLLECTOR));
+    case AC_EN_XC:
+        return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_SHEIK));
+    case AC_EN_ZL1:
+    case AC_EN_ZL3:
+        return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_ZELDA));
     default:
         return 1;
     }
@@ -162,6 +239,11 @@ Actor* comboSpawnActor(void* unk, GameState_Play *play, short actorId, float x, 
         return NULL;
 
     ret = canSpawnSoul(play, actorId, variable);
+
+    /* MQ Spirit has some fire keese that fails to load */
+    if (play->sceneId == SCE_OOT_TEMPLE_SPIRIT && (gComboData.mq & (1 << MQ_TEMPLE_SPIRIT)) && actorId == AC_EN_FIREFLY && play->roomCtx.curRoom.num == 0x01)
+        ret = -1;
+
     if (ret <= 0)
     {
         if (ret == 0)

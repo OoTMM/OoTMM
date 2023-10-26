@@ -171,9 +171,12 @@ const ITEM_POOL_PLENTIFUL = new Set([
   Items.SHARED_MASK_KEATON,
   Items.SHARED_WALLET,
   Items.SHARED_SKELETON_KEY,
-  ...ItemGroups.OOT_SOULS,
-  ...ItemGroups.MM_SOULS,
-  ...ItemGroups.SHARED_SOULS,
+  ...ItemGroups.OOT_SOULS_ENEMY,
+  ...ItemGroups.MM_SOULS_ENEMY,
+  ...ItemGroups.OOT_SOULS_BOSS,
+  ...ItemGroups.MM_SOULS_BOSS,
+  ...ItemGroups.OOT_SOULS_NPC,
+  ...ItemGroups.SHARED_SOULS_ENEMY,
   Items.OOT_BUTTON_A,
   Items.OOT_BUTTON_C_RIGHT,
   Items.OOT_BUTTON_C_LEFT,
@@ -352,6 +355,12 @@ export class LogicPassWorldTransform {
     }
   }
 
+  private addItems(items: Iterable<Item>, amount?: number) {
+    for (const item of items) {
+      this.addItem(item, amount);
+    }
+  }
+
   private scarcifyPool(delta: number) {
     const { settings } = this.state;
     const items = [...ITEM_POOL_SCARCE];
@@ -464,6 +473,10 @@ export class LogicPassWorldTransform {
 
     if (settings.smallKeyShuffleHideout === 'anywhere') {
       items = [...items, Items.OOT_SMALL_KEY_GF, Items.OOT_KEY_RING_GF];
+    }
+
+    if (settings.smallKeyShuffleChestGame === 'anywhere') {
+      items = [...items, Items.OOT_SMALL_KEY_TCG, Items.OOT_KEY_RING_TCG];
     }
 
     if (settings.mapCompassShuffle === 'anywhere') {
@@ -712,8 +725,8 @@ export class LogicPassWorldTransform {
       this.replaceItem(Items.MM_RECOVERY_HEART,  Items.SHARED_RECOVERY_HEART);
     }
 
-    if (settings.sharedSouls) {
-      this.shareItems(SharedItemGroups.SOULS);
+    if (settings.sharedSoulsEnemy) {
+      this.shareItems(SharedItemGroups.SOULS_ENEMY);
     }
 
     if (settings.sharedSkeletonKey) {
@@ -722,18 +735,6 @@ export class LogicPassWorldTransform {
 
     if (settings.sharedOcarinaButtons) {
       this.shareItems(SharedItemGroups.OCARINA_BUTTONS);
-    }
-
-    switch (settings.itemPool) {
-    case 'scarce':
-      this.scarcifyPool(1);
-      break;
-    case 'minimal':
-      this.scarcifyPool(2);
-      break;
-    case 'plentiful':
-      this.plentifulPool();
-      break;
     }
 
     /* Triforce hunt */
@@ -865,17 +866,11 @@ export class LogicPassWorldTransform {
     }
 
     /* Add souls */
-    if (settings.enemySoulsOot) {
-      for (const item of ItemGroups.OOT_SOULS) {
-        this.addItem(item);
-      }
-    }
-
-    if (settings.enemySoulsMm) {
-      for (const item of ItemGroups.MM_SOULS) {
-        this.addItem(item);
-      }
-    }
+    if (settings.soulsEnemyOot) this.addItems(ItemGroups.OOT_SOULS_ENEMY);
+    if (settings.soulsEnemyMm) this.addItems(ItemGroups.MM_SOULS_ENEMY);
+    if (settings.soulsBossOot) this.addItems(ItemGroups.OOT_SOULS_BOSS);
+    if (settings.soulsBossMm) this.addItems(ItemGroups.MM_SOULS_BOSS);
+    if (settings.soulsNpcOot) this.addItems(ItemGroups.OOT_SOULS_NPC);
 
     /* Add skeleton keys */
     if (settings.skeletonKeyOot) {
@@ -1009,6 +1004,12 @@ export class LogicPassWorldTransform {
           this.removePlayerItem(makePlayerItem(Items.OOT_SMALL_KEY_GF, worldId));
           this.addPlayerItem(makePlayerItem(Items.OOT_KEY_RING_GF, worldId));
         }
+
+        /* TCG keys need special handling */
+        if (settings.smallKeyShuffleChestGame !== 'vanilla') {
+          this.removePlayerItem(makePlayerItem(Items.OOT_SMALL_KEY_TCG, worldId));
+          this.addPlayerItem(makePlayerItem(Items.OOT_KEY_RING_TCG, worldId));
+        }
       }
     }
 
@@ -1058,6 +1059,11 @@ export class LogicPassWorldTransform {
       this.replaceItem(Items.OOT_SWORD_BIGGORON,  Items.OOT_SWORD_GORON);
     }
 
+    /* Handle MM Swords */
+    if (settings.progressiveGFS === 'progressive') {
+      this.replaceItem(Items.MM_GREAT_FAIRY_SWORD, Items.MM_SWORD);
+    }
+
     /* Handle MM Lullaby */
     if (this.state.config.has('MM_PROGRESSIVE_LULLABY')) {
       this.replaceItem(Items.MM_SONG_GORON, Items.MM_SONG_GORON_HALF);
@@ -1095,6 +1101,19 @@ export class LogicPassWorldTransform {
     /* Handle open gate */
     if (this.state.settings.kakarikoGate === 'open') {
       this.removeItem(Items.OOT_ZELDA_LETTER);
+    }
+
+    /* Alter the item pools */
+    switch (settings.itemPool) {
+    case 'scarce':
+      this.scarcifyPool(1);
+      break;
+    case 'minimal':
+      this.scarcifyPool(2);
+      break;
+    case 'plentiful':
+      this.plentifulPool();
+      break;
     }
 
     /* Handle fixed locations */

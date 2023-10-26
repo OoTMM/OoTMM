@@ -15,8 +15,10 @@ static s32 progressiveSword(void)
         return GI_MM_SWORD_KOKIRI;
     case 1:
         return GI_MM_SWORD_RAZOR;
-    default:
+    case 2:
         return GI_MM_SWORD_GILDED;
+    default:
+        return comboConfig(CFG_MM_PROGRESSIVE_GFS) ? GI_MM_GREAT_FAIRY_SWORD : GI_MM_SWORD_GILDED;
     }
 }
 
@@ -134,6 +136,10 @@ s32 comboProgressiveMm(s32 gi)
     case GI_MM_SWORD_RAZOR:
     case GI_MM_SWORD_GILDED:
         gi = progressiveSword();
+        break;
+    case GI_MM_GREAT_FAIRY_SWORD:
+        if (comboConfig(CFG_MM_PROGRESSIVE_GFS))
+            gi = progressiveSword();
         break;
     case GI_MM_PROGRESSIVE_SHIELD_HERO:
     case GI_MM_SHIELD_MIRROR:

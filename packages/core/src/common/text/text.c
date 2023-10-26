@@ -24,6 +24,13 @@ typedef struct
 }
 RegionName;
 
+typedef struct
+{
+    char* name;
+    int flags;
+}
+CheckName;
+
 const RegionName kRegionNamesOot[] = {
     { "in",         "the " TEXT_COLOR_YELLOW "Sacred Realm" },
     { "inside",     "the " TEXT_COLOR_GREEN "Deku Tree" },
@@ -110,46 +117,47 @@ const RegionName kRegionNamesMm[] = {
     { "from",       TEXT_COLOR_GREEN "Tingle" },
 };
 
-static const char* const kCheckNamesOot[] = {
-    "the " TEXT_COLOR_BLUE "Frogs Ocarina Game",
-    TEXT_COLOR_BLUE "Fishing",
-    "a " TEXT_COLOR_PINK "Ravaged Village",
-    TEXT_COLOR_BLUE "King Zora",
-    "the " TEXT_COLOR_RED "Great Fairy outside of Ganon's Castle",
-    "the " TEXT_COLOR_RED "Fire Temple Hammer Chest",
-    "the " TEXT_COLOR_RED "Fire Temple Scarecrow Chest",
-    "the " TEXT_COLOR_YELLOW "Gerudo Training Grounds Water Room",
-    "the " TEXT_COLOR_ORANGE "Haunted Wastelands Chest",
-    "the " TEXT_COLOR_YELLOW "Gerudo Archery",
-    "the " TEXT_COLOR_GREEN "Cow in Link's house",
-    TEXT_COLOR_RED "Biggoron",
-    "the " TEXT_COLOR_TEAL "Ice Cavern Final Chest",
-    "the " TEXT_COLOR_YELLOW "Market Treasure Game",
-    TEXT_COLOR_RED "Shooting at the Sun",
+static const CheckName kCheckNamesOot[] = {
+    { "the " TEXT_COLOR_BLUE "Frogs Ocarina Game", TF_NONE },
+    { TEXT_COLOR_BLUE "Fishing", TF_NONE },
+    { "a " TEXT_COLOR_PINK "Ravaged Village", TF_NONE },
+    { TEXT_COLOR_BLUE "King Zora", TF_NONE },
+    { "the " TEXT_COLOR_RED "Great Fairy outside of Ganon's Castle", TF_NONE },
+    { "the " TEXT_COLOR_RED "Fire Temple Hammer Chest", TF_NONE },
+    { "the " TEXT_COLOR_RED "Fire Temple Scarecrow Chest", TF_NONE },
+    { "the " TEXT_COLOR_YELLOW "Gerudo Training Grounds Water Room", TF_NONE },
+    { "the " TEXT_COLOR_ORANGE "Haunted Wastelands Chest", TF_NONE },
+    { "the " TEXT_COLOR_YELLOW "Gerudo Archery", TF_NONE },
+    { "the " TEXT_COLOR_GREEN "Cow in Link's house", TF_NONE },
+    { TEXT_COLOR_RED "Biggoron", TF_NONE },
+    { "the " TEXT_COLOR_TEAL "Ice Cavern Final Chest", TF_NONE },
+    { "the " TEXT_COLOR_YELLOW "Market Treasure Game", TF_NONE },
+    { TEXT_COLOR_RED "Shooting at the Sun", TF_NONE },
 };
 
-static const char* const kCheckNamesMm[] = {
-    "the " TEXT_COLOR_ORANGE "Ranch Defense",
-    "the " TEXT_COLOR_GREEN  "Butler Race",
-    TEXT_COLOR_PINK "Anju and Kafei",
-    TEXT_COLOR_BLUE "Don Gero's Choir",
-    "the " TEXT_COLOR_RED "Goron Race",
-    "the " TEXT_COLOR_PINK "Graveyard Big Poe",
-    "the " TEXT_COLOR_TEAL "Bank's Final Reward",
-    "the " TEXT_COLOR_TEAL "Milk Bar Performance",
-    "the " TEXT_COLOR_GREEN "Boat Archery",
-    "the " TEXT_COLOR_BLUE "Ocean Spider House Chest",
-    "the " TEXT_COLOR_BLUE "Pinnacle Rock Seahorses",
-    "the " TEXT_COLOR_BLUE "Fisherman's Game",
-    TEXT_COLOR_ORANGE "Igos du Ikana",
-    "the " TEXT_COLOR_YELLOW "Secret Shrine Wart and Final Chest",
-    "the " TEXT_COLOR_PINK "Cow Beneath The Well",
-    "the " TEXT_COLOR_RED "Blacksmith",
-    "the " TEXT_COLOR_PINK "Midnight Meeting",
-    TEXT_COLOR_BLUE "Madame Aroma in the Bar",
-    TEXT_COLOR_YELLOW "Marching for Cuccos",
-    TEXT_COLOR_PINK "Finding Kafei",
-    "an " TEXT_COLOR_PINK "Invisible Soldier",
+static const CheckName kCheckNamesMm[] = {
+    { "the " TEXT_COLOR_ORANGE "Ranch Defense", TF_NONE },
+    { "the " TEXT_COLOR_GREEN  "Butler Race", TF_NONE },
+    { TEXT_COLOR_PINK "Anju and Kafei", TF_NONE },
+    { TEXT_COLOR_BLUE "Don Gero's Choir", TF_NONE },
+    { "the " TEXT_COLOR_RED "Goron Race", TF_NONE },
+    { "the " TEXT_COLOR_PINK "Graveyard Big Poe", TF_NONE },
+    { "the " TEXT_COLOR_PINK "Termina Field Musical Stones", TF_PLURAL },
+    { "the " TEXT_COLOR_TEAL "Bank's Final Reward", TF_NONE },
+    { "the " TEXT_COLOR_TEAL "Milk Bar Performance", TF_NONE },
+    { "the " TEXT_COLOR_GREEN "Boat Archery", TF_NONE },
+    { "the " TEXT_COLOR_BLUE "Ocean Spider House Chest", TF_NONE },
+    { "the " TEXT_COLOR_BLUE "Pinnacle Rock Seahorses", TF_NONE },
+    { "the " TEXT_COLOR_BLUE "Fisherman's Game", TF_NONE },
+    { TEXT_COLOR_ORANGE "Igos du Ikana", TF_NONE },
+    { "the " TEXT_COLOR_YELLOW "Secret Shrine Wart and Final Chest", TF_NONE },
+    { "the " TEXT_COLOR_PINK "Cow Beneath The Well", TF_NONE },
+    { "the " TEXT_COLOR_RED "Blacksmith", TF_NONE },
+    { "the " TEXT_COLOR_PINK "Midnight Meeting", TF_NONE },
+    { TEXT_COLOR_BLUE "Madame Aroma in the Bar", TF_NONE },
+    { TEXT_COLOR_YELLOW "Marching for Cuccos", TF_NONE },
+    { TEXT_COLOR_PINK "Finding Kafei", TF_NONE },
+    { "an " TEXT_COLOR_PINK "Invisible Soldier", TF_NONE },
 };
 
 static int isItemAmbiguousOot(s16 gi)
@@ -231,32 +239,32 @@ static int isItemAmbiguousOot(s16 gi)
     case GI_OOT_RECOVERY_HEART:
     case GI_OOT_DEFENSE_UPGRADE:
         return !comboConfig(CFG_SHARED_HEALTH);
-    case GI_OOT_SOUL_OCTOROK:
-    case GI_OOT_SOUL_WALLMASTER:
-    case GI_OOT_SOUL_DODONGO:
-    case GI_OOT_SOUL_KEESE:
-    case GI_OOT_SOUL_TEKTITE:
-    case GI_OOT_SOUL_PEAHAT:
-    case GI_OOT_SOUL_LIZALFOS_DINALFOS:
-    case GI_OOT_SOUL_SKULLTULA:
-    case GI_OOT_SOUL_ARMOS:
-    case GI_OOT_SOUL_DEKU_BABA:
-    case GI_OOT_SOUL_DEKU_SCRUB:
-    case GI_OOT_SOUL_BUBBLE:
-    case GI_OOT_SOUL_BEAMOS:
-    case GI_OOT_SOUL_REDEAD_GIBDO:
-    case GI_OOT_SOUL_SKULLWALLTULA:
-    case GI_OOT_SOUL_SHELL_BLADE:
-    case GI_OOT_SOUL_LIKE_LIKE:
-    case GI_OOT_SOUL_IRON_KNUCKLE:
-    case GI_OOT_SOUL_FREEZARD:
-    case GI_OOT_SOUL_WOLFOS:
-    case GI_OOT_SOUL_GUAY:
-    case GI_OOT_SOUL_FLYING_POT:
-    case GI_OOT_SOUL_FLOORMASTER:
-    case GI_OOT_SOUL_LEEVER:
-    case GI_OOT_SOUL_STALCHILD:
-        return !comboConfig(CFG_SHARED_SOULS);
+    case GI_OOT_SOUL_ENEMY_OCTOROK:
+    case GI_OOT_SOUL_ENEMY_WALLMASTER:
+    case GI_OOT_SOUL_ENEMY_DODONGO:
+    case GI_OOT_SOUL_ENEMY_KEESE:
+    case GI_OOT_SOUL_ENEMY_TEKTITE:
+    case GI_OOT_SOUL_ENEMY_PEAHAT:
+    case GI_OOT_SOUL_ENEMY_LIZALFOS_DINALFOS:
+    case GI_OOT_SOUL_ENEMY_SKULLTULA:
+    case GI_OOT_SOUL_ENEMY_ARMOS:
+    case GI_OOT_SOUL_ENEMY_DEKU_BABA:
+    case GI_OOT_SOUL_ENEMY_DEKU_SCRUB:
+    case GI_OOT_SOUL_ENEMY_BUBBLE:
+    case GI_OOT_SOUL_ENEMY_BEAMOS:
+    case GI_OOT_SOUL_ENEMY_REDEAD_GIBDO:
+    case GI_OOT_SOUL_ENEMY_SKULLWALLTULA:
+    case GI_OOT_SOUL_ENEMY_SHELL_BLADE:
+    case GI_OOT_SOUL_ENEMY_LIKE_LIKE:
+    case GI_OOT_SOUL_ENEMY_IRON_KNUCKLE:
+    case GI_OOT_SOUL_ENEMY_FREEZARD:
+    case GI_OOT_SOUL_ENEMY_WOLFOS:
+    case GI_OOT_SOUL_ENEMY_GUAY:
+    case GI_OOT_SOUL_ENEMY_FLYING_POT:
+    case GI_OOT_SOUL_ENEMY_FLOORMASTER:
+    case GI_OOT_SOUL_ENEMY_LEEVER:
+    case GI_OOT_SOUL_ENEMY_STALCHILD:
+        return !comboConfig(CFG_SHARED_SOULS_ENEMY);
     case GI_OOT_SKELETON_KEY:
         return !comboConfig(CFG_SHARED_SKELETON_KEY);
     case GI_OOT_BUTTON_A:
@@ -364,32 +372,32 @@ static int isItemAmbiguousMm(s16 gi)
     case GI_MM_RECOVERY_HEART:
     case GI_MM_DEFENSE_UPGRADE:
         return !comboConfig(CFG_SHARED_HEALTH);
-    case GI_MM_SOUL_OCTOROK:
-    case GI_MM_SOUL_WALLMASTER:
-    case GI_MM_SOUL_DODONGO:
-    case GI_MM_SOUL_KEESE:
-    case GI_MM_SOUL_TEKTITE:
-    case GI_MM_SOUL_PEAHAT:
-    case GI_MM_SOUL_LIZALFOS_DINALFOS:
-    case GI_MM_SOUL_SKULLTULA:
-    case GI_MM_SOUL_ARMOS:
-    case GI_MM_SOUL_DEKU_BABA:
-    case GI_MM_SOUL_DEKU_SCRUB:
-    case GI_MM_SOUL_BUBBLE:
-    case GI_MM_SOUL_BEAMOS:
-    case GI_MM_SOUL_REDEAD_GIBDO:
-    case GI_MM_SOUL_SKULLWALLTULA:
-    case GI_MM_SOUL_SHELL_BLADE:
-    case GI_MM_SOUL_LIKE_LIKE:
-    case GI_MM_SOUL_IRON_KNUCKLE:
-    case GI_MM_SOUL_FREEZARD:
-    case GI_MM_SOUL_WOLFOS:
-    case GI_MM_SOUL_GUAY:
-    case GI_MM_SOUL_FLYING_POT:
-    case GI_MM_SOUL_FLOORMASTER:
-    case GI_MM_SOUL_LEEVER:
-    case GI_MM_SOUL_STALCHILD:
-        return !comboConfig(CFG_SHARED_SOULS);
+    case GI_MM_SOUL_ENEMY_OCTOROK:
+    case GI_MM_SOUL_ENEMY_WALLMASTER:
+    case GI_MM_SOUL_ENEMY_DODONGO:
+    case GI_MM_SOUL_ENEMY_KEESE:
+    case GI_MM_SOUL_ENEMY_TEKTITE:
+    case GI_MM_SOUL_ENEMY_PEAHAT:
+    case GI_MM_SOUL_ENEMY_LIZALFOS_DINALFOS:
+    case GI_MM_SOUL_ENEMY_SKULLTULA:
+    case GI_MM_SOUL_ENEMY_ARMOS:
+    case GI_MM_SOUL_ENEMY_DEKU_BABA:
+    case GI_MM_SOUL_ENEMY_DEKU_SCRUB:
+    case GI_MM_SOUL_ENEMY_BUBBLE:
+    case GI_MM_SOUL_ENEMY_BEAMOS:
+    case GI_MM_SOUL_ENEMY_REDEAD_GIBDO:
+    case GI_MM_SOUL_ENEMY_SKULLWALLTULA:
+    case GI_MM_SOUL_ENEMY_SHELL_BLADE:
+    case GI_MM_SOUL_ENEMY_LIKE_LIKE:
+    case GI_MM_SOUL_ENEMY_IRON_KNUCKLE:
+    case GI_MM_SOUL_ENEMY_FREEZARD:
+    case GI_MM_SOUL_ENEMY_WOLFOS:
+    case GI_MM_SOUL_ENEMY_GUAY:
+    case GI_MM_SOUL_ENEMY_FLYING_POT:
+    case GI_MM_SOUL_ENEMY_FLOORMASTER:
+    case GI_MM_SOUL_ENEMY_LEEVER:
+    case GI_MM_SOUL_ENEMY_STALCHILD:
+        return !comboConfig(CFG_SHARED_SOULS_ENEMY);
     case GI_MM_SKELETON_KEY:
         return !comboConfig(CFG_SHARED_SKELETON_KEY);
     case GI_MM_BUTTON_A:
@@ -601,10 +609,17 @@ void comboTextAppendOrd(char** b, int num)
 
 void comboTextAppendItemName(char** b, s16 gi, int flags)
 {
+    comboTextAppendItemNameEx(b, gi, flags, -1);
+}
+
+void comboTextAppendItemNameEx(char** b, s16 gi, int flags, int importance)
+{
+    s16 rawGi;
     char* start;
     const char* itemName;
     int ambiguous;
 
+    rawGi = gi;
 #if defined(GAME_MM)
     gi ^= MASK_FOREIGN_GI;
 #endif
@@ -713,6 +728,28 @@ void comboTextAppendItemName(char** b, s16 gi, int flags)
         comboTextAppendStr(b, ")");
     }
 
+    if (comboConfig(CFG_HINT_IMPORTANCE) && !isItemFastBuy(rawGi))
+    {
+        switch (importance)
+        {
+        case 0:
+            comboTextAppendStr(b, " (" TEXT_COLOR_PINK "not required");
+            comboTextAppendClearColor(b);
+            comboTextAppendStr(b, ")");
+            break;
+        case 1:
+            comboTextAppendStr(b, " (" TEXT_COLOR_TEAL "sometimes required");
+            comboTextAppendClearColor(b);
+            comboTextAppendStr(b, ")");
+            break;
+        case 2:
+            comboTextAppendStr(b, " (" TEXT_COLOR_YELLOW "required");
+            comboTextAppendClearColor(b);
+            comboTextAppendStr(b, ")");
+            break;
+        }
+    }
+
     if (flags & TF_CAPITALIZE)
     {
         start[0] = toupper(start[0]);
@@ -721,13 +758,23 @@ void comboTextAppendItemName(char** b, s16 gi, int flags)
 
 void comboTextAppendItemNameQuery(char** b, const ComboItemQuery* q, int flags)
 {
+    comboTextAppendItemNameQueryEx(b, q, flags, -1);
+}
+
+void comboTextAppendItemNameQueryEx(char** b, const ComboItemQuery* q, int flags, int importance)
+{
     ComboItemOverride o;
 
     comboItemOverride(&o, q);
-    comboTextAppendItemNameOverride(b, &o, flags);
+    comboTextAppendItemNameOverrideEx(b, &o, flags, importance);
 }
 
 void comboTextAppendItemNameOverride(char** b, const ComboItemOverride* o, int flags)
+{
+    comboTextAppendItemNameOverrideEx(b, o, flags, -1);
+}
+
+void comboTextAppendItemNameOverrideEx(char** b, const ComboItemOverride* o, int flags, int importance)
 {
     s16 gi;
 
@@ -735,7 +782,7 @@ void comboTextAppendItemNameOverride(char** b, const ComboItemOverride* o, int f
         gi = o->giRaw;
     else
         gi = o->gi;
-    comboTextAppendItemName(b, gi, flags);
+    comboTextAppendItemNameEx(b, gi, flags, importance);
     if (o->player != PLAYER_SELF && o->player != PLAYER_ALL && o->player != gComboData.playerId)
     {
         comboTextAppendStr(b, " for " TEXT_COLOR_YELLOW "Player ");
@@ -798,20 +845,20 @@ void comboTextAppendRegionName(char** b, u8 regionId, u8 world, int flags)
     }
 }
 
-void comboTextAppendCheckName(char** b, u8 checkId, u8 world)
+int comboTextAppendCheckName(char** b, u8 checkId, u8 world)
 {
-    const char* checkName;
+    const CheckName* cn;
 
     if (checkId & 0x80)
     {
-        checkName = kCheckNamesMm[(checkId & 0x7f) - 1];
+        cn = &kCheckNamesMm[(checkId & 0x7f) - 1];
     }
     else
     {
-        checkName = kCheckNamesOot[(checkId & 0x7f) - 1];
+        cn = &kCheckNamesOot[(checkId & 0x7f) - 1];
     }
 
-    comboTextAppendStr(b, checkName);
+    comboTextAppendStr(b, cn->name);
     comboTextAppendClearColor(b);
 
     if (world != 0 && world != 0xff && world != gComboData.playerId)
@@ -820,6 +867,8 @@ void comboTextAppendCheckName(char** b, u8 checkId, u8 world)
         comboTextAppendNum(b, world);
         comboTextAppendClearColor(b);
     }
+
+    return cn->flags;
 }
 
 static int isSoldOut(s16 gi)
@@ -932,14 +981,14 @@ void comboTextHijackOathToOrder(GameState_Play* play)
 }
 #endif
 
-void comboTextAppendNpcReward(char** b, s16 npcId, s16 gi)
+void comboTextAppendNpcReward(char** b, s16 npcId, s16 gi, int importance)
 {
     ComboItemQuery q = ITEM_QUERY_INIT;
 
     q.ovType = OV_NPC;
     q.id = npcId;
     q.gi = gi;
-    comboTextAppendItemNameQuery(b, &q, TF_PREPOS | TF_PROGRESSIVE);
+    comboTextAppendItemNameQueryEx(b, &q, TF_PREPOS | TF_PROGRESSIVE, importance);
 }
 
 void comboTextMessageCantBuy(GameState_Play* play, int flags)

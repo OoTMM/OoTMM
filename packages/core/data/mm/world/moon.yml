@@ -108,10 +108,10 @@
 "Moon Trial Link Garo Fight":
   region: MOON
   exits:
-    "Moon Trial Link Rest 1": "soul(SOUL_GARO) && (has_weapon || has_mask_goron || can_use_deku_bubble || has_arrows)"
-    "Moon Trial Link Rest 2": "soul(SOUL_GARO) && (has_weapon || has_mask_goron || can_use_deku_bubble || has_arrows) && can_hookshot_short"
+    "Moon Trial Link Rest 1": "soul_enemy(SOUL_ENEMY_GARO) && (has_weapon || has_mask_goron || can_use_deku_bubble || has_arrows)"
+    "Moon Trial Link Rest 2": "soul_enemy(SOUL_ENEMY_GARO) && (has_weapon || has_mask_goron || can_use_deku_bubble || has_arrows) && can_hookshot_short"
   locations:
-    "Moon Trial Link Garo Master Chest": "soul(SOUL_GARO) && (has_weapon || has_mask_goron || can_use_deku_bubble || has_arrows) && can_hookshot_short"
+    "Moon Trial Link Garo Master Chest": "soul_enemy(SOUL_ENEMY_GARO) && (has_weapon || has_mask_goron || can_use_deku_bubble || has_arrows) && can_hookshot_short"
 "Moon Trial Link Rest 2":
   region: MOON
   exits:

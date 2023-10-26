@@ -46,6 +46,7 @@
 #endif
 
 typedef struct GameState_Play GameState_Play;
+typedef struct ActorContext ActorContext;
 typedef struct Actor Actor;
 
 int    LoadFile(void* dst, u32 vromAddr, u32 size);
@@ -203,6 +204,8 @@ void DeathWarp(GameState_Play* play);
 void DrawDungeonUnk2(void* unk);
 #endif
 
+void ActorRemove(ActorContext* ctx, Actor* actor, GameState_Play* play);
+
 void DrawSimpleOpa(GameState_Play* play, u32 segAddr);
 
 void AddRupees(s16 delta);
@@ -345,6 +348,8 @@ void PreDraw2(Actor* actor, GameState_Play* play, int unk);
 
 #if defined(GAME_OOT)
 Actor* ActorFind(void* actorCtx, s32 actorId, s32 actorCategory);
+void Play_InitEnvironment(GameState_Play *play, u16 skyboxId);
+extern u8 gFogState;
 #endif
 
 #if defined(GAME_MM)

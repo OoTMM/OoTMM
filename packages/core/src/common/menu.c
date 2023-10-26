@@ -3,6 +3,7 @@
 #include <combo/dungeon.h>
 #include <combo/menu.h>
 #include <combo/sr.h>
+#include <combo/souls.h>
 
 #if defined(GAME_OOT)
 # define SEG1        0x0a
@@ -68,6 +69,7 @@ static DungeonDef gDungeonDefs[] = {
     { "Hideout",        SCE_OOT_THIEVES_HIDEOUT,        -1, DD_OOT },
     { "GTG",            SCE_OOT_GERUDO_TRAINING_GROUND, DUNGEONID_GERUDO_TRAINING_GROUNDS, DD_OOT },
     { "Ganon",          SCE_OOT_INSIDE_GANON_CASTLE,    DUNGEONID_GANON_CASTLE, DD_OOT | DD_BOSS_KEY },
+    { "Chest Game",     SCE_OOT_TREASURE_SHOP,          -1, DD_OOT },
     { "Woodfall",       0,                              DUNGEONID_TEMPLE_WOODFALL, DD_MM  | DD_MAP_COMPASS | DD_BOSS_KEY | DD_FAIRIES },
     { "Snowhead",       1,                              DUNGEONID_TEMPLE_SNOWHEAD, DD_MM  | DD_MAP_COMPASS | DD_BOSS_KEY | DD_FAIRIES },
     { "Great Bay",      2,                              DUNGEONID_TEMPLE_GREAT_BAY, DD_MM  | DD_MAP_COMPASS | DD_BOSS_KEY | DD_FAIRIES },
@@ -81,7 +83,7 @@ static DungeonDef gDungeonDefs[] = {
     {},
 };
 
-static int gDungeonDefCount = 19;
+static int gDungeonDefCount = 20;
 
 void menuInit()
 {
@@ -139,7 +141,7 @@ void menuInit()
     }
 }
 
-static const char* const kSoulsOot[] = {
+static const char* const kSoulsEnemyOot[] = {
     "Stalfos",
     "Octoroks",
     "Wallmasters",
@@ -181,6 +183,9 @@ static const char* const kSoulsOot[] = {
     "Wolfos",
     "Stalchildren",
     "Guays",
+};
+
+static const char* const kSoulsBossOot[] = {
     "Queen Gohma",
     "King Dodongo",
     "Barinade",
@@ -191,7 +196,43 @@ static const char* const kSoulsOot[] = {
     "Twinrova",
 };
 
-static const char* const kSoulsMm[] = {
+static const char* const kSoulsNpcOot[] = {
+    "Saria",
+    "Darunia",
+    "Ruto",
+    "King Zora",
+    "Zelda",
+    "Sheik",
+    "Cucco Lady",
+    "Carpenters",
+    "Guru-Guru",
+    "Mido",
+    "Kokiri",
+    "Kokiri Shopkeeper",
+    "Hylian Guard",
+    "Hylian Citizen",
+    "Malon",
+    "Talon",
+    "Fishing Pond Owner",
+    "Goron",
+    "Medigoron",
+    "Biggoron",
+    "Child Goron",
+    "Goron Shopkeeper",
+    "Zora",
+    "Zora Shopkeeper",
+    "Bazaar Shopkeeper",
+    "Bombchu Shopkeeper",
+    "Potion Shopkeeper",
+    "Bombchu Bowling Lady",
+    "Treasure Chest Game Owner",
+    "Shooting Gallery Owner",
+    "Dampe",
+    "Graveyard Kid",
+    "Poe Collector",
+};
+
+static const char* const kSoulsEnemyMm[] = {
     "Octoroks",
     "Wallmasters",
     "Dodongos",
@@ -238,11 +279,14 @@ static const char* const kSoulsMm[] = {
     "Snappers",
     "Warts",
     "Captain Keeta",
-    "Igos",
+};
+
+static const char* const kSoulsBossMm[] = {
     "Odolwa",
     "Goht",
     "Gyorg",
     "Twinmold",
+    "Igos",
 };
 
 static const Gfx kDlistQuadRGBA32_12x12[] = {
@@ -615,21 +659,7 @@ static void printDungeonSilverRupees(GameState_Play* play, float x, float y, int
     CLOSE_DISPS();
 }
 
-static int hasSoulOot(int id)
-{
-    if (id >= 32)
-        return gOotSouls2 & (1 << (id - 32));
-    return gOotSouls1 & (1 << id);
-}
-
-static int hasSoulMm(int id)
-{
-    if (id >= 32)
-        return gMmSouls2 & (1 << (id - 32));
-    return gMmSouls1 & (1 << id);
-}
-
-static void printSoul(GameState_Play* play, const char* const * names, int base, int index, int mm)
+static void printSoul(GameState_Play* play, const char* const* names, int soulBase, int base, int index, int mm)
 {
     const char* name;
     float x;
@@ -638,7 +668,7 @@ static void printSoul(GameState_Play* play, const char* const * names, int base,
     int hasSoul;
 
     id = base + index;
-    hasSoul = mm ? hasSoulMm(id) : hasSoulOot(id);
+    hasSoul = mm ? comboHasSoulMm(soulBase + id) : comboHasSoulOot(soulBase + id);
     name = names[id];
     x = -110.f;
     y = 42.f - 12 * index;
@@ -870,34 +900,38 @@ void comboMenuUpdate(GameState_Play* play)
     case MENU_INFO:
         g.menuCursorMax = gDungeonDefCount;
         break;
-    case MENU_SOULS_OOT:
-        g.menuCursorMax = ARRAY_SIZE(kSoulsOot);
+    case MENU_SOULS_OOT_ENEMY:
+        g.menuCursorMax = ARRAY_SIZE(kSoulsEnemyOot);
         break;
-    case MENU_SOULS_MM:
-        g.menuCursorMax = ARRAY_SIZE(kSoulsMm);
+    case MENU_SOULS_OOT_BOSS:
+        g.menuCursorMax = ARRAY_SIZE(kSoulsBossOot);
+        break;
+    case MENU_SOULS_OOT_NPC:
+        g.menuCursorMax = ARRAY_SIZE(kSoulsNpcOot);
+        break;
+    case MENU_SOULS_MM_ENEMY:
+        g.menuCursorMax = ARRAY_SIZE(kSoulsEnemyMm);
+        break;
+    case MENU_SOULS_MM_BOSS:
+        g.menuCursorMax = ARRAY_SIZE(kSoulsBossMm);
         break;
     }
 
     updateCursor(play);
 }
 
-static void drawMenuSoulsOot(GameState_Play* play)
+static int min(int a, int b)
 {
-    OPEN_DISPS(play->gs.gfx);
-    gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 255, 255, 0, 255);
-    printStr(play, "Souls - OoT", -110.f, 54.f);
-    for (int i = 0; i < LINES; ++i)
-        printSoul(play, kSoulsOot, g.menuCursor, i, 0);
-    CLOSE_DISPS();
+    return a < b ? a : b;
 }
 
-static void drawMenuSoulsMm(GameState_Play* play)
+static void drawMenuSouls(GameState_Play* play, const char* title, const char* const* names, int soulBase, int mm)
 {
     OPEN_DISPS(play->gs.gfx);
     gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 255, 255, 0, 255);
-    printStr(play, "Souls - MM", -110.f, 54.f);
-    for (int i = 0; i < LINES; ++i)
-        printSoul(play, kSoulsMm, g.menuCursor, i, 1);
+    printStr(play, title, -110.f, 54.f);
+    for (int i = 0; i < min(LINES, g.menuCursorMax); ++i)
+        printSoul(play, names, soulBase, g.menuCursor, i, mm);
     CLOSE_DISPS();
 }
 
@@ -906,7 +940,7 @@ static void drawMenuInfo(GameState_Play* play)
     OPEN_DISPS(play->gs.gfx);
     gDPSetPrimColor(POLY_OPA_DISP++, 0, 0, 255, 255, 0, 255);
     printStr(play, "Information", -110.f, 54.f);
-    for (int i = 0; i < LINES; ++i)
+    for (int i = 0; i < min(LINES, g.menuCursorMax); ++i)
         printDungeonData(play, g.menuCursor, i);
     CLOSE_DISPS();
 }
@@ -927,11 +961,20 @@ void comboMenuDraw(GameState_Play* play)
     case MENU_INFO:
         drawMenuInfo(play);
         break;
-    case MENU_SOULS_OOT:
-        drawMenuSoulsOot(play);
+    case MENU_SOULS_OOT_ENEMY:
+        drawMenuSouls(play, "OoT Enemy Souls", kSoulsEnemyOot, GI_OOT_SOUL_ENEMY_STALFOS, 0);
         break;
-    case MENU_SOULS_MM:
-        drawMenuSoulsMm(play);
+    case MENU_SOULS_OOT_BOSS:
+        drawMenuSouls(play, "OoT Boss Souls", kSoulsBossOot, GI_OOT_SOUL_BOSS_QUEEN_GOHMA, 0);
+        break;
+    case MENU_SOULS_OOT_NPC:
+        drawMenuSouls(play, "OoT NPC Souls", kSoulsNpcOot, GI_OOT_SOUL_NPC_SARIA, 0);
+        break;
+    case MENU_SOULS_MM_ENEMY:
+        drawMenuSouls(play, "MM Enemy Souls", kSoulsEnemyMm, GI_MM_SOUL_ENEMY_OCTOROK, 1);
+        break;
+    case MENU_SOULS_MM_BOSS:
+        drawMenuSouls(play, "MM Boss Souls", kSoulsBossMm, GI_MM_SOUL_BOSS_ODOLWA, 1);
         break;
     }
 }
@@ -947,10 +990,15 @@ void comboMenuNext(void)
     g.menuCursor = 0;
     g.menuCursorMax = 0;
 
-    if (g.menuScreen == MENU_SOULS_OOT && !comboConfig(CFG_OOT_SOULS))
+    if (g.menuScreen == MENU_SOULS_OOT_ENEMY && !comboConfig(CFG_OOT_SOULS_ENEMY))
         g.menuScreen++;
-
-    if (g.menuScreen == MENU_SOULS_MM && !comboConfig(CFG_MM_SOULS))
+    if (g.menuScreen == MENU_SOULS_OOT_BOSS && !comboConfig(CFG_OOT_SOULS_BOSS))
+        g.menuScreen++;
+    if (g.menuScreen == MENU_SOULS_OOT_NPC && !comboConfig(CFG_OOT_SOULS_NPC))
+        g.menuScreen++;
+    if (g.menuScreen == MENU_SOULS_MM_ENEMY && !comboConfig(CFG_MM_SOULS_ENEMY))
+        g.menuScreen++;
+    if (g.menuScreen == MENU_SOULS_MM_BOSS && !comboConfig(CFG_MM_SOULS_BOSS))
         g.menuScreen++;
 
     if (g.menuScreen >= MENU_MAX)
