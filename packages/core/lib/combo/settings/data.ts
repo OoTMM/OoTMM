@@ -1479,7 +1479,7 @@ export const SETTINGS = [{
   type: 'boolean',
   description: 'Shuffles the warp songs from OOT among one-way entrances. This setting is disabled if the warp songs are shuffled with "Shuffle Warp Songs and Soaring".',
   default: false,
-  cond: (x: any) => x.erOneWays !== 'none' && x.erWarps !== 'ootOnly' && x.erWarps !== 'full' && erWarps !== 'ownGame'
+  cond: (x: any) => x.erOneWays !== 'none' && x.erWarps !== 'ootOnly' && x.erWarps !== 'full' && x.erWarps !== 'ownGame'
 }, {
   key: 'erOneWaysStatues',
   name: 'Shuffle One-Ways with Owl Statues',
@@ -1487,7 +1487,7 @@ export const SETTINGS = [{
   type: 'boolean',
   description: 'Shuffles the owl statues from MM among one-way entrances. This setting is disabled if the soaring spots are shuffled with "Shuffle Warp Songs and Soaring".',
   default: false,
-  cond: (x: any) => x.erOneWays !== 'none' && x.erWarps !== 'mmOnly' && x.erWarps !== 'full' && erWarps !== 'ownGame'
+  cond: (x: any) => x.erOneWays !== 'none' && x.erWarps !== 'mmOnly' && x.erWarps !== 'full' && x.erWarps !== 'ownGame'
 }, {
   key: 'erOneWaysOwls',
   name: 'Shuffle Child Owl Flights',
