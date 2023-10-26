@@ -116,6 +116,7 @@ void comboHintGossip(u8 key, GameState_Play* play)
     char* start;
     const Hint* hint;
     int itemIndex;
+    int tmp;
 
 #if defined(GAME_OOT)
     b = play->msgCtx.textBuffer;
@@ -152,8 +153,8 @@ void comboHintGossip(u8 key, GameState_Play* play)
             comboTextAppendClearColor(&b);
             break;
         case HINT_TYPE_ITEM_EXACT:
-            comboTextAppendCheckName(&b, hint->region, hint->world);
-            comboTextAppendStr(&b, " gives ");
+            tmp = comboTextAppendCheckName(&b, hint->region, hint->world);
+            comboTextAppendStr(&b, (tmp & TF_PLURAL) ? " give " : " gives ");
             appendCorrectItemName(&b, hint->items[itemIndex], hint->players[itemIndex], hint->itemImportances[itemIndex]);
             if (hint->items[2] != -1)
             {

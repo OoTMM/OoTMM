@@ -24,6 +24,13 @@ typedef struct
 }
 RegionName;
 
+typedef struct
+{
+    char* name;
+    int flags;
+}
+CheckName;
+
 const RegionName kRegionNamesOot[] = {
     { "in",         "the " TEXT_COLOR_YELLOW "Sacred Realm" },
     { "inside",     "the " TEXT_COLOR_GREEN "Deku Tree" },
@@ -110,47 +117,47 @@ const RegionName kRegionNamesMm[] = {
     { "from",       TEXT_COLOR_GREEN "Tingle" },
 };
 
-static const char* const kCheckNamesOot[] = {
-    "the " TEXT_COLOR_BLUE "Frogs Ocarina Game",
-    TEXT_COLOR_BLUE "Fishing",
-    "a " TEXT_COLOR_PINK "Ravaged Village",
-    TEXT_COLOR_BLUE "King Zora",
-    "the " TEXT_COLOR_RED "Great Fairy outside of Ganon's Castle",
-    "the " TEXT_COLOR_RED "Fire Temple Hammer Chest",
-    "the " TEXT_COLOR_RED "Fire Temple Scarecrow Chest",
-    "the " TEXT_COLOR_YELLOW "Gerudo Training Grounds Water Room",
-    "the " TEXT_COLOR_ORANGE "Haunted Wastelands Chest",
-    "the " TEXT_COLOR_YELLOW "Gerudo Archery",
-    "the " TEXT_COLOR_GREEN "Cow in Link's house",
-    TEXT_COLOR_RED "Biggoron",
-    "the " TEXT_COLOR_TEAL "Ice Cavern Final Chest",
-    "the " TEXT_COLOR_YELLOW "Market Treasure Game",
-    TEXT_COLOR_RED "Shooting at the Sun",
+static const CheckName kCheckNamesOot[] = {
+    { "the " TEXT_COLOR_BLUE "Frogs Ocarina Game", TF_NONE },
+    { TEXT_COLOR_BLUE "Fishing", TF_NONE },
+    { "a " TEXT_COLOR_PINK "Ravaged Village", TF_NONE },
+    { TEXT_COLOR_BLUE "King Zora", TF_NONE },
+    { "the " TEXT_COLOR_RED "Great Fairy outside of Ganon's Castle", TF_NONE },
+    { "the " TEXT_COLOR_RED "Fire Temple Hammer Chest", TF_NONE },
+    { "the " TEXT_COLOR_RED "Fire Temple Scarecrow Chest", TF_NONE },
+    { "the " TEXT_COLOR_YELLOW "Gerudo Training Grounds Water Room", TF_NONE },
+    { "the " TEXT_COLOR_ORANGE "Haunted Wastelands Chest", TF_NONE },
+    { "the " TEXT_COLOR_YELLOW "Gerudo Archery", TF_NONE },
+    { "the " TEXT_COLOR_GREEN "Cow in Link's house", TF_NONE },
+    { TEXT_COLOR_RED "Biggoron", TF_NONE },
+    { "the " TEXT_COLOR_TEAL "Ice Cavern Final Chest", TF_NONE },
+    { "the " TEXT_COLOR_YELLOW "Market Treasure Game", TF_NONE },
+    { TEXT_COLOR_RED "Shooting at the Sun", TF_NONE },
 };
 
-static const char* const kCheckNamesMm[] = {
-    "the " TEXT_COLOR_ORANGE "Ranch Defense",
-    "the " TEXT_COLOR_GREEN  "Butler Race",
-    TEXT_COLOR_PINK "Anju and Kafei",
-    TEXT_COLOR_BLUE "Don Gero's Choir",
-    "the " TEXT_COLOR_RED "Goron Race",
-    "the " TEXT_COLOR_PINK "Graveyard Big Poe",
-    "the " TEXT_COLOR_PINK "Termina Field Musical Stones",
-    "the " TEXT_COLOR_TEAL "Bank's Final Reward",
-    "the " TEXT_COLOR_TEAL "Milk Bar Performance",
-    "the " TEXT_COLOR_GREEN "Boat Archery",
-    "the " TEXT_COLOR_BLUE "Ocean Spider House Chest",
-    "the " TEXT_COLOR_BLUE "Pinnacle Rock Seahorses",
-    "the " TEXT_COLOR_BLUE "Fisherman's Game",
-    TEXT_COLOR_ORANGE "Igos du Ikana",
-    "the " TEXT_COLOR_YELLOW "Secret Shrine Wart and Final Chest",
-    "the " TEXT_COLOR_PINK "Cow Beneath The Well",
-    "the " TEXT_COLOR_RED "Blacksmith",
-    "the " TEXT_COLOR_PINK "Midnight Meeting",
-    TEXT_COLOR_BLUE "Madame Aroma in the Bar",
-    TEXT_COLOR_YELLOW "Marching for Cuccos",
-    TEXT_COLOR_PINK "Finding Kafei",
-    "an " TEXT_COLOR_PINK "Invisible Soldier",
+static const CheckName kCheckNamesMm[] = {
+    { "the " TEXT_COLOR_ORANGE "Ranch Defense", TF_NONE },
+    { "the " TEXT_COLOR_GREEN  "Butler Race", TF_NONE },
+    { TEXT_COLOR_PINK "Anju and Kafei", TF_NONE },
+    { TEXT_COLOR_BLUE "Don Gero's Choir", TF_NONE },
+    { "the " TEXT_COLOR_RED "Goron Race", TF_NONE },
+    { "the " TEXT_COLOR_PINK "Graveyard Big Poe", TF_NONE },
+    { "the " TEXT_COLOR_PINK "Termina Field Musical Stones", TF_PLURAL },
+    { "the " TEXT_COLOR_TEAL "Bank's Final Reward", TF_NONE },
+    { "the " TEXT_COLOR_TEAL "Milk Bar Performance", TF_NONE },
+    { "the " TEXT_COLOR_GREEN "Boat Archery", TF_NONE },
+    { "the " TEXT_COLOR_BLUE "Ocean Spider House Chest", TF_NONE },
+    { "the " TEXT_COLOR_BLUE "Pinnacle Rock Seahorses", TF_NONE },
+    { "the " TEXT_COLOR_BLUE "Fisherman's Game", TF_NONE },
+    { TEXT_COLOR_ORANGE "Igos du Ikana", TF_NONE },
+    { "the " TEXT_COLOR_YELLOW "Secret Shrine Wart and Final Chest", TF_NONE },
+    { "the " TEXT_COLOR_PINK "Cow Beneath The Well", TF_NONE },
+    { "the " TEXT_COLOR_RED "Blacksmith", TF_NONE },
+    { "the " TEXT_COLOR_PINK "Midnight Meeting", TF_NONE },
+    { TEXT_COLOR_BLUE "Madame Aroma in the Bar", TF_NONE },
+    { TEXT_COLOR_YELLOW "Marching for Cuccos", TF_NONE },
+    { TEXT_COLOR_PINK "Finding Kafei", TF_NONE },
+    { "an " TEXT_COLOR_PINK "Invisible Soldier", TF_NONE },
 };
 
 static int isItemAmbiguousOot(s16 gi)
@@ -838,20 +845,20 @@ void comboTextAppendRegionName(char** b, u8 regionId, u8 world, int flags)
     }
 }
 
-void comboTextAppendCheckName(char** b, u8 checkId, u8 world)
+int comboTextAppendCheckName(char** b, u8 checkId, u8 world)
 {
-    const char* checkName;
+    const CheckName* cn;
 
     if (checkId & 0x80)
     {
-        checkName = kCheckNamesMm[(checkId & 0x7f) - 1];
+        cn = &kCheckNamesMm[(checkId & 0x7f) - 1];
     }
     else
     {
-        checkName = kCheckNamesOot[(checkId & 0x7f) - 1];
+        cn = &kCheckNamesOot[(checkId & 0x7f) - 1];
     }
 
-    comboTextAppendStr(b, checkName);
+    comboTextAppendStr(b, cn->name);
     comboTextAppendClearColor(b);
 
     if (world != 0 && world != 0xff && world != gComboData.playerId)
@@ -860,6 +867,8 @@ void comboTextAppendCheckName(char** b, u8 checkId, u8 world)
         comboTextAppendNum(b, world);
         comboTextAppendClearColor(b);
     }
+
+    return cn->flags;
 }
 
 static int isSoldOut(s16 gi)
