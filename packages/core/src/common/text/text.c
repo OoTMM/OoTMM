@@ -135,6 +135,7 @@ static const char* const kCheckNamesMm[] = {
     TEXT_COLOR_BLUE "Don Gero's Choir",
     "the " TEXT_COLOR_RED "Goron Race",
     "the " TEXT_COLOR_PINK "Graveyard Big Poe",
+    "the " TEXT_COLOR_PINK "Termina Field Musical Stones",
     "the " TEXT_COLOR_TEAL "Bank's Final Reward",
     "the " TEXT_COLOR_TEAL "Milk Bar Performance",
     "the " TEXT_COLOR_GREEN "Boat Archery",

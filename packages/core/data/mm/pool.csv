@@ -137,7 +137,7 @@ Termina Field Dodongo Grotto,                           chest,          NONE,   
 Termina Field Bio Baba Grotto,                          collectible,    NONE,                   GROTTOS,                      0x02,                       HEART_PIECE
 Termina Field Scrub,                                    npc,            NONE,                   GROTTOS,                      SCRUB_TELESCOPE,            HEART_PIECE
 Termina Field Scrub Pot,                                pot,            NONE,                   GROTTOS,                      0x0903,                     RECOVERY_HEART
-Termina Field Gossip Stones HP,                         npc,            NONE,                   GROTTOS,                      GOSSIP_HEART_PIECE,         HEART_PIECE
+Termina Field Gossip Stones HP,                         npc,            SONGS_GOSSIPS,          GROTTOS,                      GOSSIP_HEART_PIECE,         HEART_PIECE
 Termina Field Cow Front,                                cow,            NONE,                   GROTTOS,                      0x13,                       MILK
 Termina Field Cow Back,                                 cow,            NONE,                   GROTTOS,                      0x14,                       MILK
 Termina Field Pot,                                      pot,            NONE,                   TERMINA_FIELD,                0x0040,                     FAIRY
