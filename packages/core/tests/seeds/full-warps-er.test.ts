@@ -7,7 +7,7 @@ test("Can make a seed - Full ER: Separated Warps", () => {
     erBoss: 'full',
     erRegions: 'full',
     //erRegionsExtra: true,
-	erRegionsShortcuts: true,
+    erRegionsShortcuts: true,
     erIndoors: 'full',
     erIndoorsExtra: true,
     erWarps: 'full',
